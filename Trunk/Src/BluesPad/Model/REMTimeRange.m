@@ -1,0 +1,45 @@
+//
+//  REMTimeRange.m
+//  Blues
+//
+//  Created by TanTan on 7/11/13.
+//
+//
+
+#import "REMTimeRange.h"
+
+@implementation REMTimeRange
+
+- (NSDictionary *)toJsonDictionary
+{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:2];
+    [dic setObject:[NSString stringWithFormat:@"/Date(%llu)/",self.longStartTime] forKey:@"StartTime"];
+    [dic setObject:[NSString stringWithFormat:@"/Date(%llu)/",self.longEndTime] forKey:@"EndTime"];
+    
+    return dic;
+}
+
+- (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
+{
+    NSString *startTime=dictionary[@"StartTime"];
+    NSString *endTime=dictionary[@"EndTime"];
+    self.longStartTime=[REMTimeHelper longLongFromJSONString:startTime];
+    self.longEndTime=[REMTimeHelper longLongFromJSONString:endTime];
+    
+    self.startTime = [[NSDate alloc]initWithTimeIntervalSince1970:self.longStartTime/1000];
+    self.endTime=[[NSDate alloc]initWithTimeIntervalSince1970:self.longEndTime/1000];
+}
+
+- (id)initWithStartTime:(NSDate *)start EndTime:(NSDate *)end
+{
+    if((self = [super init])){
+        self.startTime=start;
+        self.endTime=end;
+        self.longStartTime= [start timeIntervalSince1970]*1000;
+        self.longEndTime = [end timeIntervalSince1970]*1000;
+    
+    }
+    return self;
+}
+
+@end

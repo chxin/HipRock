@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>BluesPad.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>BluesPhone.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>CommonTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>7A9B1E1B177B3A8B00C282A8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7A9B1E41177B3A8B00C282A8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7A9B1E77177B3B4100C282A8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7A9B1E98177B3B4100C282A8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B445AEB9177BFE66002D2A59</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

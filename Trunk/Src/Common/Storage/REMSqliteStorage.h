@@ -1,0 +1,42 @@
+//
+//  REMSqliteStorage.h
+//  Blues
+//
+//  Created by Xu Zilong on 7/1/13.
+//
+//
+
+#import <Foundation/Foundation.h>
+#import <sqlite3.h>
+
+#define DATA_FILE @"/localcache.sqlite3"
+#define STORAGE_NETWORK_SOURCE_NAME @"NETWORK_STORAGE"
+
+#define STORAGE_NETWORK_SOURCE_FIELDS_NAME_KEY @"KEY_SOURCE"
+#define STORAGE_NETWORK_SOURCE_FIELDS_NAME_PARAMS @"Params"
+#define STORAGE_NETWORK_SOURCE_FIELDS_NAME_DATA @"Data"
+#define STORAGE_NETWORK_SOURCE_FIELDS_NAME_EXPIREDTIME @"Expired"
+#define STORAGE_NETWORK_SOURCE_FIELDS_NAME_VERSION @"Version"
+#define STORAGE_NETWORK_SOURCE_SQL_CREATE_SOURCE @"CREATE TABLE %@(%@ TEXT, %@ TEXT, %@ TEXT, %@ INTEGER, %@ TEXT, CONSTRAINT pk_%@ PRIMARY KEY (%@, %@))"
+#define STORAGE_NETWORK_SOURCE_SQL_DROP_SOURCE @"DROP TABLE %@"
+#define STORAGE_NETWORK_SOURCE_SQL_SET @"INSERT OR REPLACE INTO %@ (%@, %@, %@, %@, %@) VALUES (?, ?, ?, ?, ?)"
+#define STORAGE_NETWORK_SOURCE_SQL_GET @"SELECT %@, %@, %@ FROM %@ WHERE %@ > ? AND %@ = ? AND %@ = ?"
+#define STORAGE_NETWORK_SOURCE_SQL_CLEAR_SESSION @"DELETE FROM %@ WHERE %@=%d"
+
+
+@interface REMSqliteStorage : NSObject {
+    sqlite3* db;		
+}
+
+@property (nonatomic) NSString* fileAddress;
+
+-(void)createSource: (NSString*)name;
+-(void)dropSource: (NSString*)name;
+-(void)set:(NSString*)sourceName key:(NSString*)key value:(NSString*)value expired:(int)expired;
+-(NSDictionary*)get:(NSString*)sourceName key:(NSString*)key minVersion:(NSString*)minVersion;
+-(BOOL)checkSourceName:(NSString*)sourceName;
+-(void)clearSessionStorage;
+
++(REMSqliteStorage*)getInstance;
+
+@end
