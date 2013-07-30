@@ -325,7 +325,6 @@
 		B497337917A768BA00D0519A /* REMEncryptHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4317A63E8B0050779D /* REMEncryptHelper.h */; };
 		B497337A17A768BA00D0519A /* REMEncryptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4417A63E8B0050779D /* REMEncryptHelper.m */; };
 		B497337B17A768BA00D0519A /* REMCommonHeaders.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3817A618140050779D /* REMCommonHeaders.h */; };
-		B49733CD17A7697100D0519A /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B49733CC17A7697100D0519A /* libCorePlot-CocoaTouch.a */; };
 		B49733CE17A7699E00D0519A /* CorePlot-CocoaTouch.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DD8177BE6210000C060 /* CorePlot-CocoaTouch.h */; };
 		B49733CF17A7699E00D0519A /* CPTAnimation.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DD9177BE6210000C060 /* CPTAnimation.h */; };
 		B49733D017A7699E00D0519A /* CPTAnimationOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DDA177BE6210000C060 /* CPTAnimationOperation.h */; };
@@ -740,7 +739,6 @@
 		B4942E421796685700A413FE /* REMWidgetMaxDiagramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetMaxDiagramViewController.m; path = Controller/REMWidgetMaxDiagramViewController.m; sourceTree = "<group>"; };
 		B496299E178D3D210078C44F /* REMDashboardLeftNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDashboardLeftNavigationController.h; path = Controller/REMDashboardLeftNavigationController.h; sourceTree = "<group>"; };
 		B496299F178D3D210078C44F /* REMDashboardLeftNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardLeftNavigationController.m; path = Controller/REMDashboardLeftNavigationController.m; sourceTree = "<group>"; };
-		B49733CC17A7697100D0519A /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libCorePlot-CocoaTouch.a"; path = "../Lib/libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		B4978D8E17977B4100F94698 /* REMWidgetMaxLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetMaxLineViewController.h; path = Controller/REMWidgetMaxLineViewController.h; sourceTree = "<group>"; };
 		B4978D8F17977B4100F94698 /* REMWidgetMaxLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetMaxLineViewController.m; path = Controller/REMWidgetMaxLineViewController.m; sourceTree = "<group>"; };
 		B4978D9117977B5A00F94698 /* REMWidgetMaxColumnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetMaxColumnViewController.h; path = Controller/REMWidgetMaxColumnViewController.h; sourceTree = "<group>"; };
@@ -798,7 +796,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B497341E17A769E400D0519A /* QuartzCore.framework in Frameworks */,
-				B49733CD17A7697100D0519A /* libCorePlot-CocoaTouch.a in Frameworks */,
 				B4978D9717979B3C00F94698 /* libsqlite3.dylib in Frameworks */,
 				7AB34E7F177D33AB003E235E /* MobileCoreServices.framework in Frameworks */,
 				7AB34E80177D33AB003E235E /* SystemConfiguration.framework in Frameworks */,
@@ -1115,7 +1112,6 @@
 		7A9B1E11177B3A6000C282A8 = {
 			isa = PBXGroup;
 			children = (
-				B49733CC17A7697100D0519A /* libCorePlot-CocoaTouch.a */,
 				7A5E2D45177B3CD3000F77F9 /* Common */,
 				7A9B1E25177B3A8B00C282A8 /* BluesPad */,
 				7A9B1E7C177B3B4100C282A8 /* BluesPhone */,
