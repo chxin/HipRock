@@ -29,6 +29,7 @@
 //Utility
 #import "REMAlertHelper.h"
 #import "REMColor.h"
+#import "REMEncryptHelper.h"
 #import "REMJSONHelper.h"
 #import "REMMaskManager.h"
 #import "REMNetworkHelper.h"
