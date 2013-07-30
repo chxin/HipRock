@@ -13,4 +13,5 @@
 +(void) initApplicationInfo;
 +(NSString*)formatVersion:(NSString*)versionString;
 +(const char*)getVersion;
++(NSString *)getApplicationCacheKey;
 @end

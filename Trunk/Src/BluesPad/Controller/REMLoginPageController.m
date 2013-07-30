@@ -92,7 +92,8 @@
         
         NSArray *customers = (NSArray *)([REMApplicationContext instance].currentUser.customers);
         
-        for (int i=0; i<customers.count; i++)
+        int i=0;
+        for (; i<customers.count; i++)
         {
             REMCustomerModel *customer = customers[i];
             if([customer.code isEqualToString:@"NancyCostCustomer2"])
@@ -102,11 +103,15 @@
             }
         }
         
+        [[REMApplicationContext instance].currentUser save];
+        [[REMApplicationContext instance].currentCustomer save];
+        
         [self.loginCarouselController.splashScreenController gotoMainView];
     }
     else //login fail
     {
-        [self.errorImage setHidden:NO];
+        //[self.errorImage setHidden:NO];
+        [REMAlertHelper alert:@"错误的用户名或密码"];
     }
 }
 

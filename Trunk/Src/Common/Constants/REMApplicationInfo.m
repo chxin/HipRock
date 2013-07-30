@@ -12,6 +12,7 @@
 
 static NSString *APPLICATION_VERSION;
 //static NSString *APPLICATION_BUILD;
+static NSString *APPLICATION_CACHE_KEY = @"ApplicationCache";
 
 +(void) initApplicationInfo
 {
@@ -46,4 +47,10 @@ static NSString *APPLICATION_VERSION;
     const char* s = [APPLICATION_VERSION UTF8String];
     return s;
 }
+
++(NSString *)getApplicationCacheKey
+{
+    return APPLICATION_CACHE_KEY;
+}
+
 @end

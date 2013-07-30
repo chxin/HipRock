@@ -23,4 +23,9 @@
 @property (nonatomic,strong) NSString *userTypeName;
 @property (nonatomic,strong) NSNumber *version;
 
+
+- (void)save;
+- (void)remove;
++ (REMUserModel *)getCached;
+
 @end

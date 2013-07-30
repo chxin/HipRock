@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "REMSplashScreenController.h"
 
 @interface REMBuildingViewController : UIViewController
+
+@property (nonatomic,strong) REMSplashScreenController *splashScreenController;
+
 - (IBAction)dashboardButtonPressed:(id)sender;
+- (IBAction)logoutButtonPressed:(id)sender;
 
 @end

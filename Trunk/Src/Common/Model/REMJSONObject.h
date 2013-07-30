@@ -17,5 +17,6 @@
 
 - (void) assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary;
 
+- (NSString *)serialize;
 
 @end

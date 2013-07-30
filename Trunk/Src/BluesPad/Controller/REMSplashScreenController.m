@@ -8,6 +8,8 @@
 
 #import "REMSplashScreenController.h"
 #import "REMLoginCarouselController.h"
+#import "REMCommonHeaders.h"
+#import "REMBuildingViewController.h"
 
 @interface REMSplashScreenController ()
 
@@ -29,12 +31,24 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(runTimer:) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(runTimer:) userInfo:nil repeats:NO];
+    
+    //decide where to go
 }
 
 - (void)runTimer:(id)timer
 {
-    [self gotoLoginView];
+    REMUserModel *storedUser = [REMUserModel getCached];
+    REMCustomerModel *storedCustomer = [REMCustomerModel getCached];
+    
+    if(storedUser!=nil && storedCustomer!=nil)
+    {
+        [self gotoMainView];
+    }
+    else
+    {
+        [self gotoLoginView];
+    }
 }
 
 - (void)gotoLoginView
@@ -53,6 +67,11 @@
     {
         REMLoginCarouselController *loginCarouselController = segue.destinationViewController;
         loginCarouselController.splashScreenController = self;
+    }
+    else if([segue.identifier isEqualToString:@"splashToBuildingSegue"] == YES)
+    {
+        REMBuildingViewController *buildingViewController = segue.destinationViewController;
+        buildingViewController.splashScreenController = self;
     }
 }
 

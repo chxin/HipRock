@@ -7,6 +7,7 @@
 //
 
 #import "REMBuildingViewController.h"
+#import "REMApplicationContext.h"
 
 @interface REMBuildingViewController ()
 
@@ -38,5 +39,18 @@
 - (IBAction)dashboardButtonPressed:(id)sender
 {
     [self performSegueWithIdentifier:@"buildingToDashboardSegue" sender:self];
+}
+
+- (IBAction)logoutButtonPressed:(id)sender {
+    REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
+    REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
+    
+    currentUser = nil;
+    [currentUser remove];
+    currentCustomer = nil;
+    [currentCustomer remove];
+    
+    [self.splashScreenController gotoLoginView];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end

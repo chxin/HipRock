@@ -23,5 +23,8 @@
 @property (nonatomic,strong) NSNumber *logoId;
 
 
+- (void)save;
+- (void)remove;
++ (REMCustomerModel *)getCached;
 
 @end

@@ -7,8 +7,13 @@
 //
 
 #import "REMCustomerModel.h"
+#import "REMStorage.h"
+#import "REMApplicationInfo.h"
+#import "REMJSONHelper.h"
 
 @implementation REMCustomerModel
+
+static NSString *kCurrentCustomerCacheKey = @"CurrentCustomer";
 
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
@@ -22,6 +27,22 @@
     self.comment=dictionary[@"Comment"];
     self.timezoneId=dictionary[@"TimezoneId"];
     self.logoId=dictionary[@"logoId"];
+}
+
+- (void)save
+{
+    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:kCurrentCustomerCacheKey value:[self serialize] expired:REMNeverExpired];
+}
+
+- (void)remove
+{
+    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:kCurrentCustomerCacheKey value:@"" expired:REMNeverExpired];
+}
+
++ (REMCustomerModel *)getCached
+{
+    NSDictionary *dictionary = [REMJSONHelper dictionaryByJSONString:[REMStorage get:[REMApplicationInfo getApplicationCacheKey] key:kCurrentCustomerCacheKey]];
+    return [[REMCustomerModel alloc] initWithDictionary:dictionary];
 }
 
 @end

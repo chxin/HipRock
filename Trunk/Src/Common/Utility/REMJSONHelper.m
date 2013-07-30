@@ -12,6 +12,11 @@
 
 + (NSDictionary *)dictionaryByJSONString:(NSString *)jsonString
 {
+    if(jsonString == nil || [jsonString isEqualToString:@""])
+    {
+        return nil;
+    }
+        
     NSData *data= [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error;
     NSDictionary* dic= [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
@@ -27,6 +32,11 @@
 
 + (NSString *)stringByDictionary:(NSDictionary *)dictionary
 {
+    if(dictionary == nil || [dictionary isEqual:[NSNull null]])
+    {
+        return nil;
+    }
+    
     NSError *error;
     NSData *data = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:&error];
     

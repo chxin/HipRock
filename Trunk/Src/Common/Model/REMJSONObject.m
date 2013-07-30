@@ -7,6 +7,7 @@
 //
 
 #import "REMJSONObject.h"
+#import "REMJSONHelper.h"
 
 @interface REMJSONObject()
 
@@ -30,8 +31,15 @@
     if ((self = [super init])) {
         
         self.innerDictionary=dictionary;
-                
-        [self assembleCustomizedObjectByDictionary:dictionary];
+        
+        if(dictionary == nil || [dictionary isEqual:[NSNull null]])
+        {
+            self = nil;
+        }
+        else
+        {
+            [self assembleCustomizedObjectByDictionary:dictionary];
+        }
     }
     
     return self;
@@ -52,6 +60,11 @@
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
     
+}
+
+- (NSString *)serialize
+{
+    return [REMJSONHelper stringByDictionary:self.innerDictionary];
 }
 
 @end
