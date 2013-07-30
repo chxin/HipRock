@@ -43,6 +43,9 @@
     
     if(storedUser!=nil && storedCustomer!=nil)
     {
+        [[REMApplicationContext instance] setCurrentUser:storedUser];
+        [[REMApplicationContext instance] setCurrentCustomer:storedCustomer];
+        
         [self gotoMainView];
     }
     else

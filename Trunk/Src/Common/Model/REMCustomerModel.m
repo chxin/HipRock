@@ -34,7 +34,7 @@ static NSString *kCurrentCustomerCacheKey = @"CurrentCustomer";
     [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:kCurrentCustomerCacheKey value:[self serialize] expired:REMNeverExpired];
 }
 
-- (void)remove
+- (void)kill
 {
     [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:kCurrentCustomerCacheKey value:@"" expired:REMNeverExpired];
 }

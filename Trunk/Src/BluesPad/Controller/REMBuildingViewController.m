@@ -45,10 +45,10 @@
     REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
     REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
     
+    [currentUser kill];
+    [currentCustomer kill];
     currentUser = nil;
-    [currentUser remove];
     currentCustomer = nil;
-    [currentCustomer remove];
     
     [self.splashScreenController gotoLoginView];
     //[self.navigationController popToRootViewControllerAnimated:YES];

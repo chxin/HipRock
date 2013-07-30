@@ -25,7 +25,7 @@
 
 
 - (void)save;
-- (void)remove;
+- (void)kill;
 + (REMUserModel *)getCached;
 
 @end

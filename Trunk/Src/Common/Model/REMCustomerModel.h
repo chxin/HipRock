@@ -24,7 +24,7 @@
 
 
 - (void)save;
-- (void)remove;
+- (void)kill;
 + (REMCustomerModel *)getCached;
 
 @end

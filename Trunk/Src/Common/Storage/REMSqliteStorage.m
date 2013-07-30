@@ -59,7 +59,10 @@
         sqlite3_bind_text(statement, 3, [sourceName UTF8String], -1, NULL);
         sqlStatus = sqlite3_step(statement);
         if (sqlStatus == SQLITE_ROW) {
-            NSString* data = [[NSString alloc]initWithUTF8String:(char*)sqlite3_column_text(statement, 0)];
+            NSString* data = nil;
+            if ((char*)sqlite3_column_text(statement, 0) != nil) {
+                data = [[NSString alloc]initWithUTF8String:(char*)sqlite3_column_text(statement, 0)];
+            }
             int expiredTime = sqlite3_column_int(statement, 1);
             int build = sqlite3_column_int(statement, 2);
             dictionary = [NSDictionary dictionaryWithObjectsAndKeys:data, STORAGE_NETWORK_SOURCE_FIELDS_NAME_DATA, [NSNumber numberWithInt:expiredTime], STORAGE_NETWORK_SOURCE_FIELDS_NAME_EXPIREDTIME, [NSNumber numberWithInt:build], STORAGE_NETWORK_SOURCE_FIELDS_NAME_VERSION, nil];
