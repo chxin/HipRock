@@ -1700,6 +1700,7 @@
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = "-ObjC";
+				VALID_ARCHS = "i386 x86_64 armv7s armv7";
 			};
 			name = Release;
 		};
