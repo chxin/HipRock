@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">  
+<plist version="1.0">  
+<dict>  
+  <key>Label</key>  
+  <string>cn.com.schneider-electric.blues</string>  
+  <key>ProgramArguments</key>  
+  <array>  
+    <string>/Users/buildserver/BuildFolder/SourceCode/Master/BluesGit/Build/dailybuild.sh</string>  
+  </array>  
+  <key>StartCalendarInterval</key>  
+  <dict> 
+	<key>Minute</key>
+	<integer>00</integer> 
+        <key>Hour</key>  
+        <integer>00</integer>  
+  </dict>  
+  <key>StandardOutPath</key>  
+<string>/Users/buildserver/BuildFolder/SourceCode/Master/BluesGit/Build/log/dailybuildlog.log</string>  
+<key>StandardErrorPath</key>  
+<string>/Users/buildserver/BuildFolder/SourceCode/Master/BluesGit/Build/log/dailybuilderror.log</string>  
+</dict>  
+</plist> 
