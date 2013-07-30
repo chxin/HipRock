@@ -51,10 +51,12 @@ static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    NSDictionary *customerForIndexPath = (NSDictionary *)[self.customers objectAtIndex:indexPath.row];
+    REMCustomerModel *customerForIndexPath = (REMCustomerModel *)[self.customers objectAtIndex:indexPath.row];
     
-    if([REMApplicationContext instance].currentCustomer.customerId == [customerForIndexPath valueForKey:@"Id"])
+    if([REMApplicationContext instance].currentCustomer.customerId == customerForIndexPath.customerId)
+    {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
     
     [cell.textLabel setText:[customerForIndexPath valueForKey:@"Name"]];
     
@@ -70,7 +72,7 @@ static NSString *CellIdentifier = @"Cell";
     [[tableView cellForRowAtIndexPath:indexPath]setAccessoryType:UITableViewCellAccessoryCheckmark];
     
     //set current customer
-    NSDictionary *selectedCustomer = (NSDictionary *)[self.customers objectAtIndex:indexPath.row];
+    REMCustomerModel *selectedCustomer = (REMCustomerModel *)[self.customers objectAtIndex:indexPath.row];
     //[[REMAppDelegate app] setCurrentCustomer:selectedCustomer];
     [[REMApplicationContext instance] setCurrentCustomer:selectedCustomer];
     
