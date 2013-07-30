@@ -152,15 +152,12 @@
 		B48ED3F3178EA65B0032CD72 /* REMApplicationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D161785111300219469 /* REMApplicationInfo.m */; };
 		B48ED3F5178EA6740032CD72 /* REMNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14281785178800CC2922 /* REMNetworkHelper.m */; };
 		B48ED3F6178EA6740032CD72 /* REMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142B1785211000CC2922 /* REMAlertHelper.m */; };
-		B48ED3FB178EA8370032CD72 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		B48ED3FC178EA8370032CD72 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		B48ED3FD178EA8370032CD72 /* REMSqliteStorage.h in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D181785113600219469 /* REMSqliteStorage.h */; };
 		B48ED3FE178EA8370032CD72 /* REMSqliteStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D191785113600219469 /* REMSqliteStorage.m */; };
 		B48ED3FF178EA8370032CD72 /* REMStorage.h in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D1B1785115700219469 /* REMStorage.h */; };
 		B48ED400178EA8370032CD72 /* REMStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D1C1785115700219469 /* REMStorage.m */; };
 		B48ED401178EA8540032CD72 /* REMLog.h in Sources */ = {isa = PBXBuildFile; fileRef = B445AEB0177BFAE8002D2A59 /* REMLog.h */; };
 		B48ED402178EA8540032CD72 /* REMLogManager.h in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAC178410D300B50475 /* REMLogManager.h */; };
-		B48ED403178EA8540032CD72 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		B48ED404178EA8540032CD72 /* REMApplicationInfo.h in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D151785111300219469 /* REMApplicationInfo.h */; };
 		B48ED405178EA8540032CD72 /* REMServiceUrl.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A11099E17812DFF0028EBEF /* REMServiceUrl.h */; };
 		B48ED406178EA8540032CD72 /* REMServiceUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A11099F17812DFF0028EBEF /* REMServiceUrl.m */; };
@@ -183,8 +180,6 @@
 		B48ED417178EA8D20032CD72 /* REMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142B1785211000CC2922 /* REMAlertHelper.m */; };
 		B48ED418178EA8D20032CD72 /* REMMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDC1786C195008A1033 /* REMMaskManager.m */; };
 		B48ED419178EA8D20032CD72 /* REMTimeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E9178EA1740032CD72 /* REMTimeHelper.m */; };
-		B48ED41A178EA9060032CD72 /* REMAppDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B1E85177B3B4100C282A8 /* REMAppDelegate.h */; };
-		B48ED41B178EA9060032CD72 /* REMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B1E86177B3B4100C282A8 /* REMAppDelegate.m */; };
 		B48ED420178EAE7D0032CD72 /* REMMaskManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDB1786C195008A1033 /* REMMaskManager.h */; };
 		B48ED421178EAE7D0032CD72 /* REMMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDC1786C195008A1033 /* REMMaskManager.m */; };
 		B48ED422178EAE7D0032CD72 /* Reachability.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142417850B2100CC2922 /* Reachability.h */; };
@@ -192,6 +187,228 @@
 		B4942E401796610B00A413FE /* REMWidgetMaxPieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4942E3F1796610B00A413FE /* REMWidgetMaxPieViewController.m */; };
 		B4942E431796685800A413FE /* REMWidgetMaxDiagramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4942E421796685700A413FE /* REMWidgetMaxDiagramViewController.m */; };
 		B49629A0178D3D210078C44F /* REMDashboardLeftNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B496299F178D3D210078C44F /* REMDashboardLeftNavigationController.m */; };
+		B49732F217A7687600D0519A /* REMJSONObject.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4017A637FD0050779D /* REMJSONObject.h */; };
+		B49732F317A7687600D0519A /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
+		B49732F417A7687600D0519A /* REMUserModel.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3A17A637510050779D /* REMUserModel.h */; };
+		B49732F517A7687600D0519A /* REMUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3B17A637510050779D /* REMUserModel.m */; };
+		B49732F617A7687600D0519A /* REMCustomerModel.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3D17A637630050779D /* REMCustomerModel.h */; };
+		B49732F717A7687600D0519A /* REMCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3E17A637630050779D /* REMCustomerModel.m */; };
+		B49732F817A7687600D0519A /* REMLog.h in Sources */ = {isa = PBXBuildFile; fileRef = B445AEB0177BFAE8002D2A59 /* REMLog.h */; };
+		B49732F917A7687600D0519A /* REMLogManager.h in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAC178410D300B50475 /* REMLogManager.h */; };
+		B49732FA17A7687600D0519A /* REMDataAccessor.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD2C178FDE62006C4EDE /* REMDataAccessor.h */; };
+		B49732FB17A7687600D0519A /* REMDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD27178FD014006C4EDE /* REMDataAccessor.m */; };
+		B49732FC17A7687600D0519A /* REMDataStore.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD29178FD034006C4EDE /* REMDataStore.h */; };
+		B49732FD17A7687600D0519A /* REMDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD2A178FD034006C4EDE /* REMDataStore.m */; };
+		B49732FE17A7687600D0519A /* REMApplicationInfo.h in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D151785111300219469 /* REMApplicationInfo.h */; };
+		B49732FF17A7687600D0519A /* REMServiceUrl.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A11099E17812DFF0028EBEF /* REMServiceUrl.h */; };
+		B497330017A7687700D0519A /* REMEnergyConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = B43BB10F1797B12D00617B1E /* REMEnergyConstants.h */; };
+		B497330117A7687700D0519A /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
+		B497330217A7687700D0519A /* REMApplicationContext.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3517A6155D0050779D /* REMApplicationContext.h */; };
+		B497330317A7687700D0519A /* REMApplicationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3617A6155D0050779D /* REMApplicationContext.m */; };
+		B497330417A7687700D0519A /* REMServiceRequestOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 7AB34E4F177D2CE1003E235E /* REMServiceRequestOperation.h */; };
+		B497330517A7687700D0519A /* REMServiceAgent.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCD81786C05B008A1033 /* REMServiceAgent.h */; };
+		B497330617A7687700D0519A /* REMWidgetAxisHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A095E71179571C80098DB16 /* REMWidgetAxisHelper.h */; };
+		B497330717A7687700D0519A /* REMWidgetAxisHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */; };
+		B497330817A7687700D0519A /* REMColor.h in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F4F1781491800BC130A /* REMColor.h */; };
+		B497330917A7687700D0519A /* REMJSONHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB01784220300B50475 /* REMJSONHelper.h */; };
+		B497330A17A7687700D0519A /* REMNetworkHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14271785178800CC2922 /* REMNetworkHelper.h */; };
+		B497330B17A7687700D0519A /* REMAlertHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142A1785211000CC2922 /* REMAlertHelper.h */; };
+		B497330C17A7687700D0519A /* REMMaskManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDB1786C195008A1033 /* REMMaskManager.h */; };
+		B497330D17A7687700D0519A /* REMTimeHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E8178EA1740032CD72 /* REMTimeHelper.h */; };
+		B497330E17A7687700D0519A /* REMEncryptHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4317A63E8B0050779D /* REMEncryptHelper.h */; };
+		B497330F17A7687700D0519A /* REMEncryptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4417A63E8B0050779D /* REMEncryptHelper.m */; };
+		B497331017A7687700D0519A /* REMCommonHeaders.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3817A618140050779D /* REMCommonHeaders.h */; };
+		B497331117A7687700D0519A /* REMWidgetCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F44178122A500BC130A /* REMWidgetCellView.m */; };
+		B497331217A7687700D0519A /* REMWidgetCellView.h in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F43178122A500BC130A /* REMWidgetCellView.h */; };
+		B497331317A7687700D0519A /* REMWidgetCell.h in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F4617812E6B00BC130A /* REMWidgetCell.h */; };
+		B497331417A7687700D0519A /* REMWidgetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F4717812E6B00BC130A /* REMWidgetCell.m */; };
+		B497331517A7687700D0519A /* REMWidgetStepToolbarView.h in Sources */ = {isa = PBXBuildFile; fileRef = B48CC98E1783297900AAD5D4 /* REMWidgetStepToolbarView.h */; };
+		B497331617A7687700D0519A /* REMWidgetStepToolbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC98F1783297900AAD5D4 /* REMWidgetStepToolbarView.m */; };
+		B497331717A7687700D0519A /* REMWidgetMaxView.h in Sources */ = {isa = PBXBuildFile; fileRef = B48CC99117832EAE00AAD5D4 /* REMWidgetMaxView.h */; };
+		B497331817A7687700D0519A /* REMWidgetMaxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC99217832EAE00AAD5D4 /* REMWidgetMaxView.m */; };
+		B497331917A7687700D0519A /* REMDashboardObj.h in Sources */ = {isa = PBXBuildFile; fileRef = B48AF9D31785445100C28F66 /* REMDashboardObj.h */; };
+		B497331A17A7687700D0519A /* REMDashboardObj.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AF9D41785445100C28F66 /* REMDashboardObj.m */; };
+		B497331B17A7687700D0519A /* REMFavoriteDashboardObj.h in Sources */ = {isa = PBXBuildFile; fileRef = B48AF9DF1785452800C28F66 /* REMFavoriteDashboardObj.h */; };
+		B497331C17A7687700D0519A /* REMFavoriteDashboardObj.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AF9E01785452800C28F66 /* REMFavoriteDashboardObj.m */; };
+		B497331D17A7687700D0519A /* REMWidgetContentSyntax.h in Sources */ = {isa = PBXBuildFile; fileRef = B48AF9D71785445100C28F66 /* REMWidgetContentSyntax.h */; };
+		B497331E17A7687700D0519A /* REMWidgetContentSyntax.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AF9D81785445100C28F66 /* REMWidgetContentSyntax.m */; };
+		B497331F17A7687700D0519A /* REMWidgetObject.h in Sources */ = {isa = PBXBuildFile; fileRef = B48AF9D91785445100C28F66 /* REMWidgetObject.h */; };
+		B497332017A7687700D0519A /* REMWidgetObject.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AF9DA1785445100C28F66 /* REMWidgetObject.m */; };
+		B497332117A7687700D0519A /* REMEnergyData.h in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F521781628500BC130A /* REMEnergyData.h */; };
+		B497332217A7687700D0519A /* REMEnergyData.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F531781628500BC130A /* REMEnergyData.m */; };
+		B497332317A7687700D0519A /* REMEnergyViewData.h in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3DB178E9E8A0032CD72 /* REMEnergyViewData.h */; };
+		B497332417A7687700D0519A /* REMEnergyViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3DC178E9E8A0032CD72 /* REMEnergyViewData.m */; };
+		B497332517A7687700D0519A /* REMEnergyTargetModel.h in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3DF178E9EEB0032CD72 /* REMEnergyTargetModel.h */; };
+		B497332617A7687700D0519A /* REMEnergyTargetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E0178E9EEB0032CD72 /* REMEnergyTargetModel.m */; };
+		B497332717A7687700D0519A /* REMEnergyCalendarData.h in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E2178E9F040032CD72 /* REMEnergyCalendarData.h */; };
+		B497332817A7687700D0519A /* REMEnergyCalendarData.m in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E3178E9F040032CD72 /* REMEnergyCalendarData.m */; };
+		B497332917A7687700D0519A /* REMTargetEnergyData.h in Sources */ = {isa = PBXBuildFile; fileRef = B470EBE4179535A0004F88FB /* REMTargetEnergyData.h */; };
+		B497332A17A7687700D0519A /* REMTargetEnergyData.m in Sources */ = {isa = PBXBuildFile; fileRef = B470EBE5179535A0004F88FB /* REMTargetEnergyData.m */; };
+		B497332B17A7687700D0519A /* REMEnergyError.h in Sources */ = {isa = PBXBuildFile; fileRef = B470EBE7179535FF004F88FB /* REMEnergyError.h */; };
+		B497332C17A7687700D0519A /* REMEnergyError.m in Sources */ = {isa = PBXBuildFile; fileRef = B470EBE8179535FF004F88FB /* REMEnergyError.m */; };
+		B497332D17A7687700D0519A /* REMTimeRange.h in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E5178E9F3C0032CD72 /* REMTimeRange.h */; };
+		B497332E17A7687700D0519A /* REMTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E6178E9F3C0032CD72 /* REMTimeRange.m */; };
+		B497332F17A7687700D0519A /* REMSplashScreenController.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A03977517A25A2F0082F6EE /* REMSplashScreenController.h */; };
+		B497333017A7687700D0519A /* REMSplashScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A03977617A25A2F0082F6EE /* REMSplashScreenController.m */; };
+		B497333117A7687700D0519A /* REMLoginCarouselController.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ADF91D917A10924008CF056 /* REMLoginCarouselController.h */; };
+		B497333217A7687700D0519A /* REMLoginCarouselController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADF91DA17A10924008CF056 /* REMLoginCarouselController.m */; };
+		B497333317A7687700D0519A /* REMLoginPageController.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A03977117A253F00082F6EE /* REMLoginPageController.h */; };
+		B497333417A7687700D0519A /* REMLoginPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A03977217A253F00082F6EE /* REMLoginPageController.m */; };
+		B497333517A7687700D0519A /* REMBuildingViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A03977917A276590082F6EE /* REMBuildingViewController.h */; };
+		B497333617A7687700D0519A /* REMBuildingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A03977A17A276590082F6EE /* REMBuildingViewController.m */; };
+		B497333717A7687700D0519A /* REMDashboardViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F3F1781221000BC130A /* REMDashboardViewController.h */; };
+		B497333817A7687700D0519A /* REMDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F401781221000BC130A /* REMDashboardViewController.m */; };
+		B497333917A7687700D0519A /* REMDashboardMainViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = B48BE1FE178AB16100A157CD /* REMDashboardMainViewController.h */; };
+		B497333A17A7687700D0519A /* REMDashboardMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48BE1FF178AB16100A157CD /* REMDashboardMainViewController.m */; };
+		B497333B17A7687700D0519A /* REMFavoriteTableViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = B48BE201178AB4A900A157CD /* REMFavoriteTableViewController.h */; };
+		B497333C17A7687700D0519A /* REMFavoriteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48BE202178AB4A900A157CD /* REMFavoriteTableViewController.m */; };
+		B497333D17A7687700D0519A /* REMDashboardLeftNavigationController.h in Sources */ = {isa = PBXBuildFile; fileRef = B496299E178D3D210078C44F /* REMDashboardLeftNavigationController.h */; };
+		B497333E17A7687700D0519A /* REMDashboardLeftNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B496299F178D3D210078C44F /* REMDashboardLeftNavigationController.m */; };
+		B497333F17A7687700D0519A /* REMDashboardRootViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = B48A483C178FDA7600E357CD /* REMDashboardRootViewController.h */; };
+		B497334017A7687700D0519A /* REMDashboardRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A483D178FDA7700E357CD /* REMDashboardRootViewController.m */; };
+		B497334117A7687700D0519A /* REMWidgetRelativeDateTableViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A578D311797CFB400DDC8F4 /* REMWidgetRelativeDateTableViewController.h */; };
+		B497334217A7687700D0519A /* REMWidgetRelativeDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A578D321797CFB400DDC8F4 /* REMWidgetRelativeDateTableViewController.m */; };
+		B497334317A7687700D0519A /* REMWidgetMaxViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F58178165E400BC130A /* REMWidgetMaxViewController.h */; };
+		B497334417A7687700D0519A /* REMWidgetMaxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F59178165E500BC130A /* REMWidgetMaxViewController.m */; };
+		B497334517A7687700D0519A /* REMWidgetMaxLineViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = B4978D8E17977B4100F94698 /* REMWidgetMaxLineViewController.h */; };
+		B497334617A7687700D0519A /* REMWidgetMaxLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4978D8F17977B4100F94698 /* REMWidgetMaxLineViewController.m */; };
+		B497334717A7687700D0519A /* REMWidgetMaxColumnViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = B4978D9117977B5A00F94698 /* REMWidgetMaxColumnViewController.h */; };
+		B497334817A7687700D0519A /* REMWidgetMaxColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4978D9217977B5A00F94698 /* REMWidgetMaxColumnViewController.m */; };
+		B497334917A7687700D0519A /* REMWidgetMaxPieViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = B4942E3E1796610B00A413FE /* REMWidgetMaxPieViewController.h */; };
+		B497334A17A7687700D0519A /* REMWidgetMaxPieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4942E3F1796610B00A413FE /* REMWidgetMaxPieViewController.m */; };
+		B497334B17A7687700D0519A /* REMWidgetMaxDiagramViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = B4942E411796685700A413FE /* REMWidgetMaxDiagramViewController.h */; };
+		B497334C17A7687700D0519A /* REMWidgetMaxDiagramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4942E421796685700A413FE /* REMWidgetMaxDiagramViewController.m */; };
+		B497334D17A7687700D0519A /* REMChartLegendTableViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ACE64381797B4D800687216 /* REMChartLegendTableViewController.h */; };
+		B497334E17A7687700D0519A /* REMChartLegendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACE64391797B4D900687216 /* REMChartLegendTableViewController.m */; };
+		B497334F17A7687700D0519A /* REMWidgetCellViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F49178136E700BC130A /* REMWidgetCellViewController.h */; };
+		B497335017A7687700D0519A /* REMWidgetCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F4A178136E700BC130A /* REMWidgetCellViewController.m */; };
+		B497335117A7687700D0519A /* REMWidgetCellLineViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A095E6E179571970098DB16 /* REMWidgetCellLineViewController.h */; };
+		B497335217A7687700D0519A /* REMWidgetCellLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A095E6F179571970098DB16 /* REMWidgetCellLineViewController.m */; };
+		B497335317A7687700D0519A /* REMWidgetCellPieViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F4C17813DCA00BC130A /* REMWidgetCellPieViewController.h */; };
+		B497335417A7687700D0519A /* REMWidgetCellPieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F4D17813DCA00BC130A /* REMWidgetCellPieViewController.m */; };
+		B497335517A7687700D0519A /* REMWidgetCellColumnViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A4424A8178E89E100908189 /* REMWidgetCellColumnViewController.h */; };
+		B497335617A7687700D0519A /* REMWidgetCellColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4424A9178E89E100908189 /* REMWidgetCellColumnViewController.m */; };
+		B497335717A7687700D0519A /* REMWidgetTimePickerViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1121797B67700617B1E /* REMWidgetTimePickerViewController.h */; };
+		B497335817A7687700D0519A /* REMWidgetTimePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1131797B67700617B1E /* REMWidgetTimePickerViewController.m */; };
+		B497335917A7687700D0519A /* REMLoginViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 7AB34E81177D3ACF003E235E /* REMLoginViewController.h */; };
+		B497335A17A7687700D0519A /* REMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB34E82177D3ACF003E235E /* REMLoginViewController.m */; };
+		B497335B17A7687700D0519A /* REMLoginPasswordViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A2101AF1782AEA500BD11BA /* REMLoginPasswordViewController.h */; };
+		B497335C17A7687700D0519A /* REMLoginPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2101B01782AEA500BD11BA /* REMLoginPasswordViewController.m */; };
+		B497335D17A7687700D0519A /* REMLoginCustomerViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A2101B21782AEC700BD11BA /* REMLoginCustomerViewController.h */; };
+		B497335E17A7687700D0519A /* REMLoginCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2101B31782AEC700BD11BA /* REMLoginCustomerViewController.m */; };
+		B497335F17A7687700D0519A /* REMLoginCustomerSelectViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A20D1E41783CB71001D6D6D /* REMLoginCustomerSelectViewController.h */; };
+		B497336017A7687700D0519A /* REMLoginCustomerSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A20D1E51783CB71001D6D6D /* REMLoginCustomerSelectViewController.m */; };
+		B497336117A7687700D0519A /* REMMainViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = B48BE1F9178AB0DB00A157CD /* REMMainViewController.h */; };
+		B497336217A7687700D0519A /* REMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48BE1FA178AB0DB00A157CD /* REMMainViewController.m */; };
+		B497336317A768BA00D0519A /* REMJSONObject.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4017A637FD0050779D /* REMJSONObject.h */; };
+		B497336417A768BA00D0519A /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
+		B497336517A768BA00D0519A /* REMUserModel.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3A17A637510050779D /* REMUserModel.h */; };
+		B497336617A768BA00D0519A /* REMUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3B17A637510050779D /* REMUserModel.m */; };
+		B497336717A768BA00D0519A /* REMCustomerModel.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3D17A637630050779D /* REMCustomerModel.h */; };
+		B497336817A768BA00D0519A /* REMCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3E17A637630050779D /* REMCustomerModel.m */; };
+		B497336917A768BA00D0519A /* REMDataAccessor.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD2C178FDE62006C4EDE /* REMDataAccessor.h */; };
+		B497336A17A768BA00D0519A /* REMDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD27178FD014006C4EDE /* REMDataAccessor.m */; };
+		B497336B17A768BA00D0519A /* REMDataStore.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD29178FD034006C4EDE /* REMDataStore.h */; };
+		B497336C17A768BA00D0519A /* REMDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD2A178FD034006C4EDE /* REMDataStore.m */; };
+		B497336D17A768BA00D0519A /* REMEnergyConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = B43BB10F1797B12D00617B1E /* REMEnergyConstants.h */; };
+		B497336E17A768BA00D0519A /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
+		B497336F17A768BA00D0519A /* REMApplicationContext.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3517A6155D0050779D /* REMApplicationContext.h */; };
+		B497337017A768BA00D0519A /* REMApplicationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3617A6155D0050779D /* REMApplicationContext.m */; };
+		B497337117A768BA00D0519A /* REMWidgetAxisHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A095E71179571C80098DB16 /* REMWidgetAxisHelper.h */; };
+		B497337217A768BA00D0519A /* REMWidgetAxisHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */; };
+		B497337317A768BA00D0519A /* REMColor.h in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F4F1781491800BC130A /* REMColor.h */; };
+		B497337417A768BA00D0519A /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
+		B497337517A768BA00D0519A /* REMJSONHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB01784220300B50475 /* REMJSONHelper.h */; };
+		B497337617A768BA00D0519A /* REMNetworkHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14271785178800CC2922 /* REMNetworkHelper.h */; };
+		B497337717A768BA00D0519A /* REMAlertHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142A1785211000CC2922 /* REMAlertHelper.h */; };
+		B497337817A768BA00D0519A /* REMTimeHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E8178EA1740032CD72 /* REMTimeHelper.h */; };
+		B497337917A768BA00D0519A /* REMEncryptHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4317A63E8B0050779D /* REMEncryptHelper.h */; };
+		B497337A17A768BA00D0519A /* REMEncryptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4417A63E8B0050779D /* REMEncryptHelper.m */; };
+		B497337B17A768BA00D0519A /* REMCommonHeaders.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3817A618140050779D /* REMCommonHeaders.h */; };
+		B49733CD17A7697100D0519A /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B49733CC17A7697100D0519A /* libCorePlot-CocoaTouch.a */; };
+		B49733CE17A7699E00D0519A /* CorePlot-CocoaTouch.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DD8177BE6210000C060 /* CorePlot-CocoaTouch.h */; };
+		B49733CF17A7699E00D0519A /* CPTAnimation.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DD9177BE6210000C060 /* CPTAnimation.h */; };
+		B49733D017A7699E00D0519A /* CPTAnimationOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DDA177BE6210000C060 /* CPTAnimationOperation.h */; };
+		B49733D117A7699E00D0519A /* CPTAnimationPeriod.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DDB177BE6210000C060 /* CPTAnimationPeriod.h */; };
+		B49733D217A7699E00D0519A /* CPTAnnotation.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DDC177BE6210000C060 /* CPTAnnotation.h */; };
+		B49733D317A7699E00D0519A /* CPTAnnotationHostLayer.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DDD177BE6210000C060 /* CPTAnnotationHostLayer.h */; };
+		B49733D417A7699E00D0519A /* CPTAxis.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DDE177BE6210000C060 /* CPTAxis.h */; };
+		B49733D517A7699E00D0519A /* CPTAxisLabel.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DDF177BE6210000C060 /* CPTAxisLabel.h */; };
+		B49733D617A7699E00D0519A /* CPTAxisLabelGroup.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DE0177BE6210000C060 /* CPTAxisLabelGroup.h */; };
+		B49733D717A7699E00D0519A /* CPTAxisSet.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DE1177BE6210000C060 /* CPTAxisSet.h */; };
+		B49733D817A7699E00D0519A /* CPTAxisTitle.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DE2177BE6210000C060 /* CPTAxisTitle.h */; };
+		B49733D917A7699E00D0519A /* CPTBarPlot.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DE3177BE6210000C060 /* CPTBarPlot.h */; };
+		B49733DA17A7699E00D0519A /* CPTBorderedLayer.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DE4177BE6210000C060 /* CPTBorderedLayer.h */; };
+		B49733DB17A7699E00D0519A /* CPTCalendarFormatter.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DE5177BE6210000C060 /* CPTCalendarFormatter.h */; };
+		B49733DC17A7699E00D0519A /* CPTColor.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DE6177BE6210000C060 /* CPTColor.h */; };
+		B49733DD17A7699E00D0519A /* CPTColorSpace.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DE7177BE6210000C060 /* CPTColorSpace.h */; };
+		B49733DE17A7699E00D0519A /* CPTConstraints.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DE8177BE6210000C060 /* CPTConstraints.h */; };
+		B49733DF17A7699E00D0519A /* CPTDataSourceTestCase.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DE9177BE6210000C060 /* CPTDataSourceTestCase.h */; };
+		B49733E017A7699E00D0519A /* CPTDefinitions.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DEA177BE6210000C060 /* CPTDefinitions.h */; };
+		B49733E117A7699E00D0519A /* CPTDerivedXYGraph.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DEB177BE6210000C060 /* CPTDerivedXYGraph.h */; };
+		B49733E217A7699E00D0519A /* CPTExceptions.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DEC177BE6210000C060 /* CPTExceptions.h */; };
+		B49733E317A7699E00D0519A /* CPTFill.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DED177BE6210000C060 /* CPTFill.h */; };
+		B49733E417A7699E00D0519A /* CPTGradient.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DEE177BE6210000C060 /* CPTGradient.h */; };
+		B49733E517A7699E00D0519A /* CPTGraph.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DEF177BE6210000C060 /* CPTGraph.h */; };
+		B49733E617A7699E00D0519A /* CPTGraphHostingView.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DF0177BE6210000C060 /* CPTGraphHostingView.h */; };
+		B49733E717A7699E00D0519A /* CPTGridLineGroup.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DF1177BE6210000C060 /* CPTGridLineGroup.h */; };
+		B49733E817A7699E00D0519A /* CPTGridLines.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DF2177BE6210000C060 /* CPTGridLines.h */; };
+		B49733E917A7699E00D0519A /* CPTImage.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DF3177BE6210000C060 /* CPTImage.h */; };
+		B49733EA17A7699E00D0519A /* CPTLayer.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DF4177BE6210000C060 /* CPTLayer.h */; };
+		B49733EB17A7699E00D0519A /* CPTLayerAnnotation.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DF5177BE6210000C060 /* CPTLayerAnnotation.h */; };
+		B49733EC17A7699E00D0519A /* CPTLegend.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DF6177BE6210000C060 /* CPTLegend.h */; };
+		B49733ED17A7699E00D0519A /* CPTLegendEntry.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DF7177BE6210000C060 /* CPTLegendEntry.h */; };
+		B49733EE17A7699E00D0519A /* CPTLimitBand.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DF8177BE6210000C060 /* CPTLimitBand.h */; };
+		B49733EF17A7699E00D0519A /* CPTLineCap.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DF9177BE6210000C060 /* CPTLineCap.h */; };
+		B49733F017A7699E00D0519A /* CPTLineStyle.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DFA177BE6210000C060 /* CPTLineStyle.h */; };
+		B49733F117A7699E00D0519A /* CPTMutableLineStyle.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DFB177BE6210000C060 /* CPTMutableLineStyle.h */; };
+		B49733F217A7699E00D0519A /* CPTMutableNumericData+TypeConversion.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DFC177BE6210000C060 /* CPTMutableNumericData+TypeConversion.h */; };
+		B49733F317A7699E00D0519A /* CPTMutableNumericData.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DFD177BE6210000C060 /* CPTMutableNumericData.h */; };
+		B49733F417A7699E00D0519A /* CPTMutablePlotRange.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DFE177BE6210000C060 /* CPTMutablePlotRange.h */; };
+		B49733F517A7699E00D0519A /* CPTMutableShadow.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2DFF177BE6210000C060 /* CPTMutableShadow.h */; };
+		B49733F617A7699E00D0519A /* CPTMutableTextStyle.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E00177BE6210000C060 /* CPTMutableTextStyle.h */; };
+		B49733F717A7699E00D0519A /* CPTNumericData+TypeConversion.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E01177BE6210000C060 /* CPTNumericData+TypeConversion.h */; };
+		B49733F817A7699E00D0519A /* CPTNumericData.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E02177BE6210000C060 /* CPTNumericData.h */; };
+		B49733F917A7699E00D0519A /* CPTNumericDataType.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E03177BE6210000C060 /* CPTNumericDataType.h */; };
+		B49733FA17A7699E00D0519A /* CPTPathExtensions.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E04177BE6210000C060 /* CPTPathExtensions.h */; };
+		B49733FB17A7699E00D0519A /* CPTPieChart.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E05177BE6210000C060 /* CPTPieChart.h */; };
+		B49733FC17A7699E00D0519A /* CPTPlatformSpecificCategories.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E06177BE6210000C060 /* CPTPlatformSpecificCategories.h */; };
+		B49733FD17A7699E00D0519A /* CPTPlatformSpecificDefines.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E07177BE6210000C060 /* CPTPlatformSpecificDefines.h */; };
+		B49733FE17A7699E00D0519A /* CPTPlatformSpecificFunctions.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E08177BE6210000C060 /* CPTPlatformSpecificFunctions.h */; };
+		B49733FF17A7699E00D0519A /* CPTPlot.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E09177BE6210000C060 /* CPTPlot.h */; };
+		B497340017A7699E00D0519A /* CPTPlotArea.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E0A177BE6210000C060 /* CPTPlotArea.h */; };
+		B497340117A7699E00D0519A /* CPTPlotAreaFrame.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E0B177BE6210000C060 /* CPTPlotAreaFrame.h */; };
+		B497340217A7699E00D0519A /* CPTPlotGroup.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E0C177BE6210000C060 /* CPTPlotGroup.h */; };
+		B497340317A7699E00D0519A /* CPTPlotRange.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E0D177BE6210000C060 /* CPTPlotRange.h */; };
+		B497340417A7699E00D0519A /* CPTPlotSpace.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E0E177BE6210000C060 /* CPTPlotSpace.h */; };
+		B497340517A7699E00D0519A /* CPTPlotSpaceAnnotation.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E0F177BE6210000C060 /* CPTPlotSpaceAnnotation.h */; };
+		B497340617A7699E00D0519A /* CPTPlotSymbol.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E10177BE6210000C060 /* CPTPlotSymbol.h */; };
+		B497340717A7699E00D0519A /* CPTRangePlot.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E11177BE6210000C060 /* CPTRangePlot.h */; };
+		B497340817A7699E00D0519A /* CPTResponder.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E12177BE6210000C060 /* CPTResponder.h */; };
+		B497340917A7699E00D0519A /* CPTScatterPlot.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E13177BE6210000C060 /* CPTScatterPlot.h */; };
+		B497340A17A7699E00D0519A /* CPTShadow.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E14177BE6210000C060 /* CPTShadow.h */; };
+		B497340B17A7699E00D0519A /* CPTTestCase.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E15177BE6210000C060 /* CPTTestCase.h */; };
+		B497340C17A7699E00D0519A /* CPTTextLayer.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E16177BE6210000C060 /* CPTTextLayer.h */; };
+		B497340D17A7699E00D0519A /* CPTTextStyle.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E17177BE6210000C060 /* CPTTextStyle.h */; };
+		B497340E17A7699E00D0519A /* CPTTextStylePlatformSpecific.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E18177BE6210000C060 /* CPTTextStylePlatformSpecific.h */; };
+		B497340F17A7699E00D0519A /* CPTTheme.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E19177BE6210000C060 /* CPTTheme.h */; };
+		B497341017A7699E00D0519A /* CPTTimeFormatter.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E1A177BE6210000C060 /* CPTTimeFormatter.h */; };
+		B497341117A7699E00D0519A /* CPTTradingRangePlot.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E1B177BE6210000C060 /* CPTTradingRangePlot.h */; };
+		B497341217A7699E00D0519A /* CPTUtilities.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E1C177BE6210000C060 /* CPTUtilities.h */; };
+		B497341317A7699E00D0519A /* CPTXYAxis.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E1D177BE6210000C060 /* CPTXYAxis.h */; };
+		B497341417A7699E00D0519A /* CPTXYAxisSet.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E1E177BE6210000C060 /* CPTXYAxisSet.h */; };
+		B497341517A7699E00D0519A /* CPTXYGraph.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E1F177BE6210000C060 /* CPTXYGraph.h */; };
+		B497341617A7699E00D0519A /* CPTXYPlotSpace.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E20177BE6210000C060 /* CPTXYPlotSpace.h */; };
+		B497341717A7699E00D0519A /* mainpage.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E21177BE6210000C060 /* mainpage.h */; };
+		B497341817A7699E00D0519A /* NSCoderExtensions.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E22177BE6210000C060 /* NSCoderExtensions.h */; };
+		B497341917A7699E00D0519A /* NSDecimalNumberExtensions.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E23177BE6210000C060 /* NSDecimalNumberExtensions.h */; };
+		B497341A17A7699E00D0519A /* NSNumberExtensions.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC2E24177BE6210000C060 /* NSNumberExtensions.h */; };
+		B497341B17A769D400D0519A /* GTMBase64.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E6D0B17A65CE500FBB264 /* GTMBase64.h */; };
+		B497341C17A769D400D0519A /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */; };
+		B497341D17A769D400D0519A /* GTMDefines.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E6D0D17A65CE500FBB264 /* GTMDefines.h */; };
+		B497341E17A769E400D0519A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */; };
+		B497341F17A76A0400D0519A /* REMTimeRange.h in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E5178E9F3C0032CD72 /* REMTimeRange.h */; };
+		B497342017A76A0400D0519A /* REMTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E6178E9F3C0032CD72 /* REMTimeRange.m */; };
 		B4978D9017977B4100F94698 /* REMWidgetMaxLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4978D8F17977B4100F94698 /* REMWidgetMaxLineViewController.m */; };
 		B4978D9317977B5A00F94698 /* REMWidgetMaxColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4978D9217977B5A00F94698 /* REMWidgetMaxColumnViewController.m */; };
 		B4978D9417979A9C00F94698 /* REMSqliteStorage.h in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D181785113600219469 /* REMSqliteStorage.h */; };
@@ -206,8 +423,6 @@
 		B49B6F511781491800BC130A /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
 		B49B6F541781628500BC130A /* REMEnergyData.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F531781628500BC130A /* REMEnergyData.m */; };
 		B49B6F5A178165E600BC130A /* REMWidgetMaxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F59178165E500BC130A /* REMWidgetMaxViewController.m */; };
-		B4FEE04E178FAC8A00AC5486 /* REMTimeRange.h in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E5178E9F3C0032CD72 /* REMTimeRange.h */; };
-		B4FEE04F178FAC8A00AC5486 /* REMTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E6178E9F3C0032CD72 /* REMTimeRange.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -525,6 +740,7 @@
 		B4942E421796685700A413FE /* REMWidgetMaxDiagramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetMaxDiagramViewController.m; path = Controller/REMWidgetMaxDiagramViewController.m; sourceTree = "<group>"; };
 		B496299E178D3D210078C44F /* REMDashboardLeftNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDashboardLeftNavigationController.h; path = Controller/REMDashboardLeftNavigationController.h; sourceTree = "<group>"; };
 		B496299F178D3D210078C44F /* REMDashboardLeftNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardLeftNavigationController.m; path = Controller/REMDashboardLeftNavigationController.m; sourceTree = "<group>"; };
+		B49733CC17A7697100D0519A /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libCorePlot-CocoaTouch.a"; path = "../Lib/libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		B4978D8E17977B4100F94698 /* REMWidgetMaxLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetMaxLineViewController.h; path = Controller/REMWidgetMaxLineViewController.h; sourceTree = "<group>"; };
 		B4978D8F17977B4100F94698 /* REMWidgetMaxLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetMaxLineViewController.m; path = Controller/REMWidgetMaxLineViewController.m; sourceTree = "<group>"; };
 		B4978D9117977B5A00F94698 /* REMWidgetMaxColumnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetMaxColumnViewController.h; path = Controller/REMWidgetMaxColumnViewController.h; sourceTree = "<group>"; };
@@ -581,6 +797,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B497341E17A769E400D0519A /* QuartzCore.framework in Frameworks */,
+				B49733CD17A7697100D0519A /* libCorePlot-CocoaTouch.a in Frameworks */,
 				B4978D9717979B3C00F94698 /* libsqlite3.dylib in Frameworks */,
 				7AB34E7F177D33AB003E235E /* MobileCoreServices.framework in Frameworks */,
 				7AB34E80177D33AB003E235E /* SystemConfiguration.framework in Frameworks */,
@@ -897,6 +1115,7 @@
 		7A9B1E11177B3A6000C282A8 = {
 			isa = PBXGroup;
 			children = (
+				B49733CC17A7697100D0519A /* libCorePlot-CocoaTouch.a */,
 				7A5E2D45177B3CD3000F77F9 /* Common */,
 				7A9B1E25177B3A8B00C282A8 /* BluesPad */,
 				7A9B1E7C177B3B4100C282A8 /* BluesPhone */,
@@ -1533,6 +1752,119 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B49732F217A7687600D0519A /* REMJSONObject.h in Sources */,
+				B49732F317A7687600D0519A /* REMJSONObject.m in Sources */,
+				B49732F417A7687600D0519A /* REMUserModel.h in Sources */,
+				B49732F517A7687600D0519A /* REMUserModel.m in Sources */,
+				B49732F617A7687600D0519A /* REMCustomerModel.h in Sources */,
+				B49732F717A7687600D0519A /* REMCustomerModel.m in Sources */,
+				B49732F817A7687600D0519A /* REMLog.h in Sources */,
+				B49732F917A7687600D0519A /* REMLogManager.h in Sources */,
+				B49732FA17A7687600D0519A /* REMDataAccessor.h in Sources */,
+				B49732FB17A7687600D0519A /* REMDataAccessor.m in Sources */,
+				B49732FC17A7687600D0519A /* REMDataStore.h in Sources */,
+				B49732FD17A7687600D0519A /* REMDataStore.m in Sources */,
+				B49732FE17A7687600D0519A /* REMApplicationInfo.h in Sources */,
+				B49732FF17A7687600D0519A /* REMServiceUrl.h in Sources */,
+				B497330017A7687700D0519A /* REMEnergyConstants.h in Sources */,
+				B497330117A7687700D0519A /* REMEnergyConstants.m in Sources */,
+				B497330217A7687700D0519A /* REMApplicationContext.h in Sources */,
+				B497330317A7687700D0519A /* REMApplicationContext.m in Sources */,
+				B497330417A7687700D0519A /* REMServiceRequestOperation.h in Sources */,
+				B497330517A7687700D0519A /* REMServiceAgent.h in Sources */,
+				B497330617A7687700D0519A /* REMWidgetAxisHelper.h in Sources */,
+				B497330717A7687700D0519A /* REMWidgetAxisHelper.m in Sources */,
+				B497330817A7687700D0519A /* REMColor.h in Sources */,
+				B497330917A7687700D0519A /* REMJSONHelper.h in Sources */,
+				B497330A17A7687700D0519A /* REMNetworkHelper.h in Sources */,
+				B497330B17A7687700D0519A /* REMAlertHelper.h in Sources */,
+				B497330C17A7687700D0519A /* REMMaskManager.h in Sources */,
+				B497330D17A7687700D0519A /* REMTimeHelper.h in Sources */,
+				B497330E17A7687700D0519A /* REMEncryptHelper.h in Sources */,
+				B497330F17A7687700D0519A /* REMEncryptHelper.m in Sources */,
+				B497331017A7687700D0519A /* REMCommonHeaders.h in Sources */,
+				B497331117A7687700D0519A /* REMWidgetCellView.m in Sources */,
+				B497331217A7687700D0519A /* REMWidgetCellView.h in Sources */,
+				B497331317A7687700D0519A /* REMWidgetCell.h in Sources */,
+				B497331417A7687700D0519A /* REMWidgetCell.m in Sources */,
+				B497331517A7687700D0519A /* REMWidgetStepToolbarView.h in Sources */,
+				B497331617A7687700D0519A /* REMWidgetStepToolbarView.m in Sources */,
+				B497331717A7687700D0519A /* REMWidgetMaxView.h in Sources */,
+				B497331817A7687700D0519A /* REMWidgetMaxView.m in Sources */,
+				B497331917A7687700D0519A /* REMDashboardObj.h in Sources */,
+				B497331A17A7687700D0519A /* REMDashboardObj.m in Sources */,
+				B497331B17A7687700D0519A /* REMFavoriteDashboardObj.h in Sources */,
+				B497331C17A7687700D0519A /* REMFavoriteDashboardObj.m in Sources */,
+				B497331D17A7687700D0519A /* REMWidgetContentSyntax.h in Sources */,
+				B497331E17A7687700D0519A /* REMWidgetContentSyntax.m in Sources */,
+				B497331F17A7687700D0519A /* REMWidgetObject.h in Sources */,
+				B497332017A7687700D0519A /* REMWidgetObject.m in Sources */,
+				B497332117A7687700D0519A /* REMEnergyData.h in Sources */,
+				B497332217A7687700D0519A /* REMEnergyData.m in Sources */,
+				B497332317A7687700D0519A /* REMEnergyViewData.h in Sources */,
+				B497332417A7687700D0519A /* REMEnergyViewData.m in Sources */,
+				B497332517A7687700D0519A /* REMEnergyTargetModel.h in Sources */,
+				B497332617A7687700D0519A /* REMEnergyTargetModel.m in Sources */,
+				B497332717A7687700D0519A /* REMEnergyCalendarData.h in Sources */,
+				B497332817A7687700D0519A /* REMEnergyCalendarData.m in Sources */,
+				B497332917A7687700D0519A /* REMTargetEnergyData.h in Sources */,
+				B497332A17A7687700D0519A /* REMTargetEnergyData.m in Sources */,
+				B497332B17A7687700D0519A /* REMEnergyError.h in Sources */,
+				B497332C17A7687700D0519A /* REMEnergyError.m in Sources */,
+				B497332D17A7687700D0519A /* REMTimeRange.h in Sources */,
+				B497332E17A7687700D0519A /* REMTimeRange.m in Sources */,
+				B497332F17A7687700D0519A /* REMSplashScreenController.h in Sources */,
+				B497333017A7687700D0519A /* REMSplashScreenController.m in Sources */,
+				B497333117A7687700D0519A /* REMLoginCarouselController.h in Sources */,
+				B497333217A7687700D0519A /* REMLoginCarouselController.m in Sources */,
+				B497333317A7687700D0519A /* REMLoginPageController.h in Sources */,
+				B497333417A7687700D0519A /* REMLoginPageController.m in Sources */,
+				B497333517A7687700D0519A /* REMBuildingViewController.h in Sources */,
+				B497333617A7687700D0519A /* REMBuildingViewController.m in Sources */,
+				B497333717A7687700D0519A /* REMDashboardViewController.h in Sources */,
+				B497333817A7687700D0519A /* REMDashboardViewController.m in Sources */,
+				B497333917A7687700D0519A /* REMDashboardMainViewController.h in Sources */,
+				B497333A17A7687700D0519A /* REMDashboardMainViewController.m in Sources */,
+				B497333B17A7687700D0519A /* REMFavoriteTableViewController.h in Sources */,
+				B497333C17A7687700D0519A /* REMFavoriteTableViewController.m in Sources */,
+				B497333D17A7687700D0519A /* REMDashboardLeftNavigationController.h in Sources */,
+				B497333E17A7687700D0519A /* REMDashboardLeftNavigationController.m in Sources */,
+				B497333F17A7687700D0519A /* REMDashboardRootViewController.h in Sources */,
+				B497334017A7687700D0519A /* REMDashboardRootViewController.m in Sources */,
+				B497334117A7687700D0519A /* REMWidgetRelativeDateTableViewController.h in Sources */,
+				B497334217A7687700D0519A /* REMWidgetRelativeDateTableViewController.m in Sources */,
+				B497334317A7687700D0519A /* REMWidgetMaxViewController.h in Sources */,
+				B497334417A7687700D0519A /* REMWidgetMaxViewController.m in Sources */,
+				B497334517A7687700D0519A /* REMWidgetMaxLineViewController.h in Sources */,
+				B497334617A7687700D0519A /* REMWidgetMaxLineViewController.m in Sources */,
+				B497334717A7687700D0519A /* REMWidgetMaxColumnViewController.h in Sources */,
+				B497334817A7687700D0519A /* REMWidgetMaxColumnViewController.m in Sources */,
+				B497334917A7687700D0519A /* REMWidgetMaxPieViewController.h in Sources */,
+				B497334A17A7687700D0519A /* REMWidgetMaxPieViewController.m in Sources */,
+				B497334B17A7687700D0519A /* REMWidgetMaxDiagramViewController.h in Sources */,
+				B497334C17A7687700D0519A /* REMWidgetMaxDiagramViewController.m in Sources */,
+				B497334D17A7687700D0519A /* REMChartLegendTableViewController.h in Sources */,
+				B497334E17A7687700D0519A /* REMChartLegendTableViewController.m in Sources */,
+				B497334F17A7687700D0519A /* REMWidgetCellViewController.h in Sources */,
+				B497335017A7687700D0519A /* REMWidgetCellViewController.m in Sources */,
+				B497335117A7687700D0519A /* REMWidgetCellLineViewController.h in Sources */,
+				B497335217A7687700D0519A /* REMWidgetCellLineViewController.m in Sources */,
+				B497335317A7687700D0519A /* REMWidgetCellPieViewController.h in Sources */,
+				B497335417A7687700D0519A /* REMWidgetCellPieViewController.m in Sources */,
+				B497335517A7687700D0519A /* REMWidgetCellColumnViewController.h in Sources */,
+				B497335617A7687700D0519A /* REMWidgetCellColumnViewController.m in Sources */,
+				B497335717A7687700D0519A /* REMWidgetTimePickerViewController.h in Sources */,
+				B497335817A7687700D0519A /* REMWidgetTimePickerViewController.m in Sources */,
+				B497335917A7687700D0519A /* REMLoginViewController.h in Sources */,
+				B497335A17A7687700D0519A /* REMLoginViewController.m in Sources */,
+				B497335B17A7687700D0519A /* REMLoginPasswordViewController.h in Sources */,
+				B497335C17A7687700D0519A /* REMLoginPasswordViewController.m in Sources */,
+				B497335D17A7687700D0519A /* REMLoginCustomerViewController.h in Sources */,
+				B497335E17A7687700D0519A /* REMLoginCustomerViewController.m in Sources */,
+				B497335F17A7687700D0519A /* REMLoginCustomerSelectViewController.h in Sources */,
+				B497336017A7687700D0519A /* REMLoginCustomerSelectViewController.m in Sources */,
+				B497336117A7687700D0519A /* REMMainViewController.h in Sources */,
+				B497336217A7687700D0519A /* REMMainViewController.m in Sources */,
 				B4978D9617979B1E00F94698 /* REMStorage.h in Sources */,
 				B4978D9417979A9C00F94698 /* REMSqliteStorage.h in Sources */,
 				B48ED414178EA8D20032CD72 /* REMColor.m in Sources */,
@@ -1566,24 +1898,124 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4FEE04E178FAC8A00AC5486 /* REMTimeRange.h in Sources */,
-				B4FEE04F178FAC8A00AC5486 /* REMTimeRange.m in Sources */,
+				B497341F17A76A0400D0519A /* REMTimeRange.h in Sources */,
+				B497342017A76A0400D0519A /* REMTimeRange.m in Sources */,
+				B497341B17A769D400D0519A /* GTMBase64.h in Sources */,
+				B497341C17A769D400D0519A /* GTMBase64.m in Sources */,
+				B497341D17A769D400D0519A /* GTMDefines.h in Sources */,
+				B49733CE17A7699E00D0519A /* CorePlot-CocoaTouch.h in Sources */,
+				B49733CF17A7699E00D0519A /* CPTAnimation.h in Sources */,
+				B49733D017A7699E00D0519A /* CPTAnimationOperation.h in Sources */,
+				B49733D117A7699E00D0519A /* CPTAnimationPeriod.h in Sources */,
+				B49733D217A7699E00D0519A /* CPTAnnotation.h in Sources */,
+				B49733D317A7699E00D0519A /* CPTAnnotationHostLayer.h in Sources */,
+				B49733D417A7699E00D0519A /* CPTAxis.h in Sources */,
+				B49733D517A7699E00D0519A /* CPTAxisLabel.h in Sources */,
+				B49733D617A7699E00D0519A /* CPTAxisLabelGroup.h in Sources */,
+				B49733D717A7699E00D0519A /* CPTAxisSet.h in Sources */,
+				B49733D817A7699E00D0519A /* CPTAxisTitle.h in Sources */,
+				B49733D917A7699E00D0519A /* CPTBarPlot.h in Sources */,
+				B49733DA17A7699E00D0519A /* CPTBorderedLayer.h in Sources */,
+				B49733DB17A7699E00D0519A /* CPTCalendarFormatter.h in Sources */,
+				B49733DC17A7699E00D0519A /* CPTColor.h in Sources */,
+				B49733DD17A7699E00D0519A /* CPTColorSpace.h in Sources */,
+				B49733DE17A7699E00D0519A /* CPTConstraints.h in Sources */,
+				B49733DF17A7699E00D0519A /* CPTDataSourceTestCase.h in Sources */,
+				B49733E017A7699E00D0519A /* CPTDefinitions.h in Sources */,
+				B49733E117A7699E00D0519A /* CPTDerivedXYGraph.h in Sources */,
+				B49733E217A7699E00D0519A /* CPTExceptions.h in Sources */,
+				B49733E317A7699E00D0519A /* CPTFill.h in Sources */,
+				B49733E417A7699E00D0519A /* CPTGradient.h in Sources */,
+				B49733E517A7699E00D0519A /* CPTGraph.h in Sources */,
+				B49733E617A7699E00D0519A /* CPTGraphHostingView.h in Sources */,
+				B49733E717A7699E00D0519A /* CPTGridLineGroup.h in Sources */,
+				B49733E817A7699E00D0519A /* CPTGridLines.h in Sources */,
+				B49733E917A7699E00D0519A /* CPTImage.h in Sources */,
+				B49733EA17A7699E00D0519A /* CPTLayer.h in Sources */,
+				B49733EB17A7699E00D0519A /* CPTLayerAnnotation.h in Sources */,
+				B49733EC17A7699E00D0519A /* CPTLegend.h in Sources */,
+				B49733ED17A7699E00D0519A /* CPTLegendEntry.h in Sources */,
+				B49733EE17A7699E00D0519A /* CPTLimitBand.h in Sources */,
+				B49733EF17A7699E00D0519A /* CPTLineCap.h in Sources */,
+				B49733F017A7699E00D0519A /* CPTLineStyle.h in Sources */,
+				B49733F117A7699E00D0519A /* CPTMutableLineStyle.h in Sources */,
+				B49733F217A7699E00D0519A /* CPTMutableNumericData+TypeConversion.h in Sources */,
+				B49733F317A7699E00D0519A /* CPTMutableNumericData.h in Sources */,
+				B49733F417A7699E00D0519A /* CPTMutablePlotRange.h in Sources */,
+				B49733F517A7699E00D0519A /* CPTMutableShadow.h in Sources */,
+				B49733F617A7699E00D0519A /* CPTMutableTextStyle.h in Sources */,
+				B49733F717A7699E00D0519A /* CPTNumericData+TypeConversion.h in Sources */,
+				B49733F817A7699E00D0519A /* CPTNumericData.h in Sources */,
+				B49733F917A7699E00D0519A /* CPTNumericDataType.h in Sources */,
+				B49733FA17A7699E00D0519A /* CPTPathExtensions.h in Sources */,
+				B49733FB17A7699E00D0519A /* CPTPieChart.h in Sources */,
+				B49733FC17A7699E00D0519A /* CPTPlatformSpecificCategories.h in Sources */,
+				B49733FD17A7699E00D0519A /* CPTPlatformSpecificDefines.h in Sources */,
+				B49733FE17A7699E00D0519A /* CPTPlatformSpecificFunctions.h in Sources */,
+				B49733FF17A7699E00D0519A /* CPTPlot.h in Sources */,
+				B497340017A7699E00D0519A /* CPTPlotArea.h in Sources */,
+				B497340117A7699E00D0519A /* CPTPlotAreaFrame.h in Sources */,
+				B497340217A7699E00D0519A /* CPTPlotGroup.h in Sources */,
+				B497340317A7699E00D0519A /* CPTPlotRange.h in Sources */,
+				B497340417A7699E00D0519A /* CPTPlotSpace.h in Sources */,
+				B497340517A7699E00D0519A /* CPTPlotSpaceAnnotation.h in Sources */,
+				B497340617A7699E00D0519A /* CPTPlotSymbol.h in Sources */,
+				B497340717A7699E00D0519A /* CPTRangePlot.h in Sources */,
+				B497340817A7699E00D0519A /* CPTResponder.h in Sources */,
+				B497340917A7699E00D0519A /* CPTScatterPlot.h in Sources */,
+				B497340A17A7699E00D0519A /* CPTShadow.h in Sources */,
+				B497340B17A7699E00D0519A /* CPTTestCase.h in Sources */,
+				B497340C17A7699E00D0519A /* CPTTextLayer.h in Sources */,
+				B497340D17A7699E00D0519A /* CPTTextStyle.h in Sources */,
+				B497340E17A7699E00D0519A /* CPTTextStylePlatformSpecific.h in Sources */,
+				B497340F17A7699E00D0519A /* CPTTheme.h in Sources */,
+				B497341017A7699E00D0519A /* CPTTimeFormatter.h in Sources */,
+				B497341117A7699E00D0519A /* CPTTradingRangePlot.h in Sources */,
+				B497341217A7699E00D0519A /* CPTUtilities.h in Sources */,
+				B497341317A7699E00D0519A /* CPTXYAxis.h in Sources */,
+				B497341417A7699E00D0519A /* CPTXYAxisSet.h in Sources */,
+				B497341517A7699E00D0519A /* CPTXYGraph.h in Sources */,
+				B497341617A7699E00D0519A /* CPTXYPlotSpace.h in Sources */,
+				B497341717A7699E00D0519A /* mainpage.h in Sources */,
+				B497341817A7699E00D0519A /* NSCoderExtensions.h in Sources */,
+				B497341917A7699E00D0519A /* NSDecimalNumberExtensions.h in Sources */,
+				B497341A17A7699E00D0519A /* NSNumberExtensions.h in Sources */,
+				B497336317A768BA00D0519A /* REMJSONObject.h in Sources */,
+				B497336417A768BA00D0519A /* REMJSONObject.m in Sources */,
+				B497336517A768BA00D0519A /* REMUserModel.h in Sources */,
+				B497336617A768BA00D0519A /* REMUserModel.m in Sources */,
+				B497336717A768BA00D0519A /* REMCustomerModel.h in Sources */,
+				B497336817A768BA00D0519A /* REMCustomerModel.m in Sources */,
+				B497336917A768BA00D0519A /* REMDataAccessor.h in Sources */,
+				B497336A17A768BA00D0519A /* REMDataAccessor.m in Sources */,
+				B497336B17A768BA00D0519A /* REMDataStore.h in Sources */,
+				B497336C17A768BA00D0519A /* REMDataStore.m in Sources */,
+				B497336D17A768BA00D0519A /* REMEnergyConstants.h in Sources */,
+				B497336E17A768BA00D0519A /* REMEnergyConstants.m in Sources */,
+				B497336F17A768BA00D0519A /* REMApplicationContext.h in Sources */,
+				B497337017A768BA00D0519A /* REMApplicationContext.m in Sources */,
+				B497337117A768BA00D0519A /* REMWidgetAxisHelper.h in Sources */,
+				B497337217A768BA00D0519A /* REMWidgetAxisHelper.m in Sources */,
+				B497337317A768BA00D0519A /* REMColor.h in Sources */,
+				B497337417A768BA00D0519A /* REMColor.m in Sources */,
+				B497337517A768BA00D0519A /* REMJSONHelper.h in Sources */,
+				B497337617A768BA00D0519A /* REMNetworkHelper.h in Sources */,
+				B497337717A768BA00D0519A /* REMAlertHelper.h in Sources */,
+				B497337817A768BA00D0519A /* REMTimeHelper.h in Sources */,
+				B497337917A768BA00D0519A /* REMEncryptHelper.h in Sources */,
+				B497337A17A768BA00D0519A /* REMEncryptHelper.m in Sources */,
+				B497337B17A768BA00D0519A /* REMCommonHeaders.h in Sources */,
 				B48ED420178EAE7D0032CD72 /* REMMaskManager.h in Sources */,
 				B48ED421178EAE7D0032CD72 /* REMMaskManager.m in Sources */,
 				B48ED422178EAE7D0032CD72 /* Reachability.h in Sources */,
 				B48ED423178EAE7D0032CD72 /* Reachability.m in Sources */,
-				B48ED41A178EA9060032CD72 /* REMAppDelegate.h in Sources */,
-				B48ED41B178EA9060032CD72 /* REMAppDelegate.m in Sources */,
 				B48ED401178EA8540032CD72 /* REMLog.h in Sources */,
 				B48ED402178EA8540032CD72 /* REMLogManager.h in Sources */,
-				B48ED403178EA8540032CD72 /* (null) in Sources */,
 				B48ED404178EA8540032CD72 /* REMApplicationInfo.h in Sources */,
 				B48ED405178EA8540032CD72 /* REMServiceUrl.h in Sources */,
 				B48ED406178EA8540032CD72 /* REMServiceUrl.m in Sources */,
 				B48ED407178EA8540032CD72 /* REMServiceRequestOperation.h in Sources */,
 				B48ED408178EA8540032CD72 /* REMServiceAgent.h in Sources */,
-				B48ED3FB178EA8370032CD72 /* (null) in Sources */,
-				B48ED3FC178EA8370032CD72 /* (null) in Sources */,
 				B48ED3FD178EA8370032CD72 /* REMSqliteStorage.h in Sources */,
 				B48ED3FE178EA8370032CD72 /* REMSqliteStorage.m in Sources */,
 				B48ED3FF178EA8370032CD72 /* REMStorage.h in Sources */,
@@ -1762,6 +2194,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
+				VALID_ARCHS = "armv7 armv7s i386 x86_64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1846,6 +2279,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALID_ARCHS = "armv7 armv7s x86_64 i386";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -1920,6 +2354,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "../test/CommonTests/CommonTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Lib\"",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1952,6 +2390,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "../test/CommonTests/CommonTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Lib\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
