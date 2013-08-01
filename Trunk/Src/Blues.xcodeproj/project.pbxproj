@@ -56,6 +56,7 @@
 		7A153CC717AA4B3400413D3C /* REMCommodityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CC617AA4B3400413D3C /* REMCommodityModel.m */; };
 		7A153CCA17AA4B5C00413D3C /* REMEnergyUsageDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CC917AA4B5C00413D3C /* REMEnergyUsageDataModel.m */; };
 		7A153CCD17AA4EDB00413D3C /* REMRankingDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CCC17AA4EDB00413D3C /* REMRankingDataModel.m */; };
+		7A153CCF17AA60BC00413D3C /* preface-s0.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A153CCE17AA60BC00413D3C /* preface-s0.png */; };
 		7A1786E3177B43050015635C /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1786E2177B43050015635C /* libCorePlot-CocoaTouch.a */; };
 		7A1D142617850B2100CC2922 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142517850B2100CC2922 /* Reachability.m */; };
 		7A1D14291785178800CC2922 /* REMNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14281785178800CC2922 /* REMNetworkHelper.m */; };
@@ -474,6 +475,7 @@
 		7A153CC917AA4B5C00413D3C /* REMEnergyUsageDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMEnergyUsageDataModel.m; sourceTree = "<group>"; };
 		7A153CCB17AA4EDB00413D3C /* REMRankingDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMRankingDataModel.h; sourceTree = "<group>"; };
 		7A153CCC17AA4EDB00413D3C /* REMRankingDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRankingDataModel.m; sourceTree = "<group>"; };
+		7A153CCE17AA60BC00413D3C /* preface-s0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preface-s0.png"; sourceTree = "<group>"; };
 		7A1786E2177B43050015635C /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libCorePlot-CocoaTouch.a"; path = "../lib/libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		7A1D142417850B2100CC2922 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		7A1D142517850B2100CC2922 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -1109,6 +1111,7 @@
 		7A5E2D86177B41B0000F77F9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7A153CCE17AA60BC00413D3C /* preface-s0.png */,
 				7A03977C17A2775E0082F6EE /* dashboard.png */,
 				7ADF91D717A0EFFE008CF056 /* preface-background.jpg */,
 				7ADF91D117A0CB0C008CF056 /* preface-s1.png */,
@@ -1563,6 +1566,7 @@
 				7ADF91D617A0CB0C008CF056 /* preface-s3.png in Resources */,
 				7ADF91D817A0EFFE008CF056 /* preface-background.jpg in Resources */,
 				7A03977D17A2775E0082F6EE /* dashboard.png in Resources */,
+				7A153CCF17AA60BC00413D3C /* preface-s0.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
