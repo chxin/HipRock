@@ -13,6 +13,7 @@
 #import "REMSplashScreenController.h"
 #import "REMUserValidationModel.h"
 #import "REMCommonHeaders.h"
+#import "REMColoredButton.h"
 
 @interface REMLoginPageController ()
 
@@ -34,7 +35,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    //[self.loginButton addTarget:self action:@selector(loginButtonPressed:) forControlEvents:UIControlEventTouchDown];
+    ((REMColoredButton *)self.loginButton).buttonColor = REMColoredButtonBlue;
+    
+    [self.userNameTextField setDelegate:self];
+    [self.passwordTextField setDelegate:self];
     
 }
 
@@ -96,9 +100,17 @@
 
 - (IBAction)textFieldChanged:(id)sender
 {
-    BOOL enabled = [[((UITextField *)sender).text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:@""];
-    //NSLog(@"%@, %@",textField.text, enabled?@"yes":@"no");
-    [self.loginButton setEnabled:!enabled];
+    NSString *userName = [self.userNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *password = [self.passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    if([userName isEqualToString:@""] || [password isEqualToString:@""])
+    {
+        [self.loginButton setEnabled:NO];
+    }
+    else
+    {
+        [self.loginButton setEnabled:YES];
+    }
 }
 
 -(void) dataCallSuccess: (id) data
@@ -130,19 +142,40 @@
             
             [self.loginCarouselController.splashScreenController gotoMainView];
         }
-        else if(validationResult.status == REMUserValidationWrongName)
-        {
-            [self.userNameErrorLabel setHidden:NO];
-            [self.userNameErrorLabel setText : @"该用户名不存在" ];
-        }
-        else if(validationResult.status == REMUserValidationWrongPassword)
-        {
-            [self.passwordErrorLabel setHidden:NO];
-            [self.passwordErrorLabel setText : @"登录密码错误" ];
-        }
         else
         {
-            //do nothing
+            UIActivityIndicatorView *indicatorView = nil;
+            for(UIView *view in self.loginButton.subviews)
+            {
+                if([view isMemberOfClass:[UIActivityIndicatorView class]])
+                {
+                    indicatorView = (UIActivityIndicatorView *)view;
+                    break;
+                }
+            }
+            
+            if(indicatorView != nil)
+            {
+                [indicatorView stopAnimating];
+                [indicatorView removeFromSuperview];
+            }
+            [self.loginButton setEnabled:YES];
+            [self.loginButton setTitle:@"登  录" forState:UIControlStateNormal];
+            [self.loginButton setTitle:@"登  录" forState:UIControlStateHighlighted];
+            
+            if(validationResult.status == REMUserValidationWrongName)
+            {
+                [self.userNameErrorLabel setHidden:NO];
+                [self.userNameErrorLabel setText : @"该用户名不存在" ];
+            }
+            else if (validationResult.status == REMUserValidationWrongPassword)
+            {
+                [self.passwordErrorLabel setHidden:NO];
+                [self.passwordErrorLabel setText : @"登录密码错误" ];
+            }
+            else
+            {
+            }
         }
     }
 }
@@ -150,5 +183,25 @@
 -(void) dataCallFail: (NSError *) error result:(NSObject *)response
 {
     [REMAlertHelper alert:error.description];
+}
+
+#pragma mark - uitextfield delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    BOOL retValue = NO;
+    // see if we're on the username or password fields
+    if ([textField isEqual:self.userNameTextField])
+    {
+        [self.passwordTextField becomeFirstResponder];
+    }
+    else if([textField isEqual:self.passwordTextField])
+    {
+        [self loginButtonPressed:nil];
+        retValue = YES;
+    }
+    else
+    {
+    }
+    return retValue;
 }
 @end

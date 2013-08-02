@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "REMLoginCarouselController.h"
 
-@interface REMLoginPageController : UIViewController
+@interface REMLoginPageController : UIViewController<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
