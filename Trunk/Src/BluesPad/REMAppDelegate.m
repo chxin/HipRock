@@ -30,7 +30,7 @@
     
     [REMApplicationInfo initApplicationInfo];
     
-    [REMStorage initialize];
+    //[REMStorage initialize];
     [REMStorage clearSessionStorage];
     
     return YES;

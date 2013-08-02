@@ -23,12 +23,17 @@
 #define STORAGE_NETWORK_SOURCE_SQL_GET @"SELECT %@, %@, %@ FROM %@ WHERE %@ > ? AND %@ = ? AND %@ = ?"
 #define STORAGE_NETWORK_SOURCE_SQL_CLEAR_SESSION @"DELETE FROM %@ WHERE %@=%d"
 
+#define STORAGE_NETWORK_SOURCE_FIELDS_NAME_ID @"ID"
+#define STORAGE_FILE_SOURCE_NAME @"FILE_STORAGE"
+#define STORAGE_FILE_SOURCE_SQL_CREATE_SOURCE @"CREATE TABLE %@(%@ integer PRIMARY KEY autoincrement, %@ TEXT, %@ TEXT, %@ INTEGER)"
+
 
 @interface REMSqliteStorage : NSObject {
-    sqlite3* db;		
+    sqlite3* db;
 }
 
 @property (nonatomic) NSString* fileAddress;
+@property (nonatomic) NSString* cacheAddress;
 
 -(void)createSource: (NSString*)name;
 -(void)dropSource: (NSString*)name;
@@ -39,4 +44,8 @@
 
 +(REMSqliteStorage*)getInstance;
 
+
+- (NSDictionary*)getFile:(NSString*)key key:(NSString*)params;
+-(void)createFileSource;
+-(void)setFile:(NSString *)key params:(NSString*)params version:(long)version imageData:(NSData*)imageData;
 @end
