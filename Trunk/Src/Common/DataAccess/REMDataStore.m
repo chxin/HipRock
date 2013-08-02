@@ -61,7 +61,7 @@ static NSDictionary *serviceMap = nil;
     {
         serviceMap =
         @{
-          [REMDataStore numberFromInt:REMDSUserValidate] : @"API/User.svc/ValidateUser",
+          [REMDataStore numberFromInt:REMDSUserValidate] : @"API/AccessControl.svc/ValidateUser",
           [REMDataStore numberFromInt:REMDSDashboardFavorite] : @"API/Dashboard.svc/GetFavoriteDashboards",
           [REMDataStore numberFromInt:REMDSEnergyTagsTrend] : @"API/Energy.svc/GetTagsData",
           [REMDataStore numberFromInt:REMDSEnergyTagsDistribute] : @"API/Energy.svc/AggregateTagsData",
