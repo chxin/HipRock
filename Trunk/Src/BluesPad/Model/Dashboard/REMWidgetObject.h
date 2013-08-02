@@ -9,7 +9,8 @@
 #import "REMJSONObject.h"
 #import "REMWidgetContentSyntax.h"
 
-typedef enum _REMDiagramType {
+typedef enum _REMDiagramType
+{
     REMDiagramTypePie,           
     REMDiagramTypeLine,
     REMDiagramTypeColumn,

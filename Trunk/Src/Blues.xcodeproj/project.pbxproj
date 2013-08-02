@@ -96,6 +96,8 @@
 		7A37AA5717AB4E0A00316902 /* whiteButtonHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A37AA3A17AB4E0A00316902 /* whiteButtonHighlight.png */; };
 		7A37AA5817AB4E0A00316902 /* whiteButtonHighlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A37AA3B17AB4E0A00316902 /* whiteButtonHighlight@2x.png */; };
 		7A37AA5C17AB56F100316902 /* REMUserValidationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA5B17AB56F100316902 /* REMUserValidationModel.m */; };
+		7A37AA6317AB944B00316902 /* REMNumberLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA6217AB944B00316902 /* REMNumberLabel.m */; };
+		7A37AA6617AB94B100316902 /* REMColoredButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA6517AB94B100316902 /* REMColoredButton.m */; };
 		7A399E96177D238F00F0EB9F /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E84177D238F00F0EB9F /* AFHTTPClient.m */; };
 		7A399E97177D238F00F0EB9F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E86177D238F00F0EB9F /* AFHTTPRequestOperation.m */; };
 		7A399E98177D238F00F0EB9F /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E88177D238F00F0EB9F /* AFImageRequestOperation.m */; };
@@ -557,6 +559,10 @@
 		7A37AA3B17AB4E0A00316902 /* whiteButtonHighlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteButtonHighlight@2x.png"; sourceTree = "<group>"; };
 		7A37AA5A17AB56F100316902 /* REMUserValidationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMUserValidationModel.h; path = Model/Login/REMUserValidationModel.h; sourceTree = "<group>"; };
 		7A37AA5B17AB56F100316902 /* REMUserValidationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMUserValidationModel.m; path = Model/Login/REMUserValidationModel.m; sourceTree = "<group>"; };
+		7A37AA6117AB944B00316902 /* REMNumberLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMNumberLabel.h; sourceTree = "<group>"; };
+		7A37AA6217AB944B00316902 /* REMNumberLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMNumberLabel.m; sourceTree = "<group>"; };
+		7A37AA6417AB94B100316902 /* REMColoredButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMColoredButton.h; sourceTree = "<group>"; };
+		7A37AA6517AB94B100316902 /* REMColoredButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMColoredButton.m; sourceTree = "<group>"; };
 		7A399E83177D238F00F0EB9F /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		7A399E84177D238F00F0EB9F /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		7A399E85177D238F00F0EB9F /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -1057,6 +1063,18 @@
 				7A37AA5B17AB56F100316902 /* REMUserValidationModel.m */,
 			);
 			name = Login;
+			sourceTree = "<group>";
+		};
+		7A37AA6017AB944B00316902 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				7A37AA6117AB944B00316902 /* REMNumberLabel.h */,
+				7A37AA6217AB944B00316902 /* REMNumberLabel.m */,
+				7A37AA6417AB94B100316902 /* REMColoredButton.h */,
+				7A37AA6517AB94B100316902 /* REMColoredButton.m */,
+			);
+			name = Controls;
+			path = View/Controls;
 			sourceTree = "<group>";
 		};
 		7A399E82177D238F00F0EB9F /* AFNetworking */ = {
@@ -1561,6 +1579,7 @@
 		B49B6F421781228200BC130A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7A37AA6017AB944B00316902 /* Controls */,
 				B49B6F44178122A500BC130A /* REMWidgetCellView.m */,
 				B49B6F43178122A500BC130A /* REMWidgetCellView.h */,
 				B49B6F4617812E6B00BC130A /* REMWidgetCell.h */,
@@ -1862,6 +1881,8 @@
 				7A153CCD17AA4EDB00413D3C /* REMRankingDataModel.m in Sources */,
 				7A37AA5C17AB56F100316902 /* REMUserValidationModel.m in Sources */,
 				EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */,
+				7A37AA6317AB944B00316902 /* REMNumberLabel.m in Sources */,
+				7A37AA6617AB94B100316902 /* REMColoredButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

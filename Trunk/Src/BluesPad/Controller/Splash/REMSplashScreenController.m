@@ -31,7 +31,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
-    [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(runTimer:) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runTimer:) userInfo:nil repeats:NO];
     
     //decide where to go
 }

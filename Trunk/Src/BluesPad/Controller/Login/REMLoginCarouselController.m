@@ -10,6 +10,7 @@
 #import "REMLoginCarouselController.h"
 #import "REMAlertHelper.h"
 #import "REMLoginPageController.h"
+#import "REMColoredButton.h"
 
 @interface REMLoginCarouselController ()
 
@@ -41,37 +42,7 @@ static NSInteger viewsDistance = 150;
     self.loginPageController = (REMLoginPageController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginPage"];
     self.loginPageController.loginCarouselController = self;
 
-    [self initializeStyle];
     [self initialize];
-}
-
-- (void)initializeStyle
-{
-    UIImage *buttonImage = [[UIImage imageNamed:@"greenButton.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
-    UIImage *buttonImageHighlight = [[UIImage imageNamed:@"greenButtonHighlight.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
-    
-    // Set the background for any states you plan to use
-    [self.gotoLoginButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
-    [self.gotoLoginButton setBackgroundImage:buttonImageHighlight forState:UIControlStateHighlighted];
-    
-    [self.gotoLoginButton setTitleColor:[UIColor colorWithWhite:1 alpha:1] forState:UIControlStateNormal];
-    [self.gotoLoginButton setTitleColor:[UIColor colorWithWhite:0 alpha:1] forState:UIControlStateHighlighted];
-}
-
-- (void)setGotoLoginButtonEnabled:(BOOL)enabled
-{
-    if(enabled==YES)
-    {
-        UIImage *buttonImage = [[UIImage imageNamed:@"greenButton.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
-        [self.gotoLoginButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
-        [self.gotoLoginButton setEnabled:enabled];
-    }
-    else
-    {
-        UIImage *buttonImage = [[UIImage imageNamed:@"greyButton.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
-        [self.gotoLoginButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
-        [self.gotoLoginButton setEnabled:enabled];
-    }
 }
 
 - (void) initialize
@@ -185,9 +156,9 @@ static NSInteger viewsDistance = 150;
 
     [self.pageControl setCurrentPage:page];
     if(page == self.pageControl.numberOfPages-1)
-       [self setGotoLoginButtonEnabled:NO];
+        [self.gotoLoginButton setEnabled:NO];
     if(page==0 || page == self.pageControl.numberOfPages-2)
-        [self setGotoLoginButtonEnabled:YES];
+        [self.gotoLoginButton setEnabled:YES];
 }
 
 @end
