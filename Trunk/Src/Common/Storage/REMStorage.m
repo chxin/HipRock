@@ -17,6 +17,16 @@
     {
         [db createSource:STORAGE_NETWORK_SOURCE_NAME];
     }
+    if ([db checkSourceName:STORAGE_FILE_SOURCE_NAME] == NO)
+    {
+        [db createFileSource];
+    }
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"preface-s0" ofType:@"png"];
+//    [self setFile:@"TEST" key:@"TEST_KEY" version:900 image:[NSData dataWithContentsOfFile:filePath]];
+//    
+//    NSDictionary* dic = [self getFile:@"TEST" key:@"TEST_KEY"];
+//    NSData* imageData = [dic objectForKey:STORAGE_NETWORK_SOURCE_FIELDS_NAME_DATA];
+//    NSNumber* imageVersion = [dic objectForKey:STORAGE_NETWORK_SOURCE_FIELDS_NAME_VERSION];
 }
 
 +(void)set:(NSString*)sourceName key:(NSString*)key value:(NSString*)value expired:(StorageExpirationType)expired
@@ -44,6 +54,18 @@
         return [dic objectForKey:STORAGE_NETWORK_SOURCE_FIELDS_NAME_DATA];
     }
 }
++(NSDictionary*)getFile:(NSString*)sourceName key:(NSString*)key
+{
+    NSDictionary* dic = [[REMSqliteStorage getInstance] getFile:sourceName key:key];
+    return dic;
+}
++(void)setFile:(NSString*)sourceName key:(NSString*)key version:(long)version image:(NSData*)image
+{
+   [[REMSqliteStorage getInstance] setFile:sourceName params:key version:version imageData:image];
+   
+}
+
+
 /*
 +(int)getExpiredTime:(StorageExpirationType)expired
 {
