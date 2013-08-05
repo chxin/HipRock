@@ -786,7 +786,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUq-24-AJr" customClass="REMColoredButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUq-24-AJr" customClass="REMIndicatorButton">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="nFQ-CA-Upl"/>
                                 </constraints>
@@ -870,7 +870,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="loginButton" destination="tUq-24-AJr" id="xaq-He-JBH"/>
+                        <outlet property="loginButton" destination="tUq-24-AJr" id="dw1-Oq-0gd"/>
                         <outlet property="passwordErrorLabel" destination="sbl-i2-6EW" id="6MX-nK-fSF"/>
                         <outlet property="passwordTextField" destination="uBf-T4-9u5" id="akT-k7-lI7"/>
                         <outlet property="userNameErrorLabel" destination="gA8-Hl-Rfa" id="M2c-3T-2oe"/>
@@ -1436,6 +1436,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="REMFavoriteTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/REMFavoriteTableViewController.h"/>
         </class>
+        <class className="REMIndicatorButton" superclassName="REMColoredButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMIndicatorButton.h"/>
+        </class>
         <class className="REMLoginCarouselController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/REMLoginCarouselController.h"/>
             <relationships>
@@ -1462,7 +1465,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="loginButtonPressed:"/>
                 <relationship kind="action" name="textFieldChanged:"/>
-                <relationship kind="outlet" name="loginButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="passwordErrorLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="userNameErrorLabel" candidateClass="UILabel"/>

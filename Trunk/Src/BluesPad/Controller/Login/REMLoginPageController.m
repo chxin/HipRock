@@ -36,6 +36,7 @@
 	// Do any additional setup after loading the view.
     
     ((REMColoredButton *)self.loginButton).buttonColor = REMColoredButtonBlue;
+    self.loginButton.loadingText = @"正在登录...";
     
     [self.userNameTextField setDelegate:self];
     [self.passwordTextField setDelegate:self];
@@ -73,14 +74,7 @@
     store.groupName = nil;
     
     //mask login button
-    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    CGFloat halfButtonHeight = self.loginButton.bounds.size.height / 2;
-    CGFloat buttonWidth = self.loginButton.bounds.size.width;
-    indicator.center = CGPointMake(buttonWidth - halfButtonHeight , halfButtonHeight);
-    [self.loginButton addSubview:indicator];
-    [indicator startAnimating];
-    [self.loginButton setEnabled:NO];
-    [self.loginButton setTitle:@"正在登录..." forState:UIControlStateNormal];
+    [self.loginButton startIndicator];
     
     void (^successHandler)(id data) = ^(id data)
     {
@@ -90,9 +84,6 @@
     void (^errorHandler)(NSError *error, id response) = ^(NSError *error, id response)
     {
         [self dataCallFail:error result:response];
-        
-        //unmask login button
-        [indicator stopAnimating];
     };
     
     [REMDataAccessor access:store success:successHandler error:errorHandler];
@@ -103,13 +94,16 @@
     NSString *userName = [self.userNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *password = [self.passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
-    if([userName isEqualToString:@""] || [password isEqualToString:@""])
+    if(self.loginButton.indicatorStatus == NO)
     {
-        [self.loginButton setEnabled:NO];
-    }
-    else
-    {
-        [self.loginButton setEnabled:YES];
+        if([userName isEqualToString:@""] || [password isEqualToString:@""])
+        {
+            [self.loginButton setEnabled:NO];
+        }
+        else
+        {
+            [self.loginButton setEnabled:YES];
+        }
     }
 }
 
@@ -144,16 +138,7 @@
         }
         else
         {
-            UIActivityIndicatorView *indicatorView = [self getIndicatorView];
-            
-            if(indicatorView != nil)
-            {
-                [indicatorView stopAnimating];
-                [indicatorView removeFromSuperview];
-            }
-            [self.loginButton setEnabled:YES];
-            [self.loginButton setTitle:@"登  录" forState:UIControlStateNormal];
-            [self.loginButton setTitle:@"登  录" forState:UIControlStateHighlighted];
+            [self.loginButton stopIndicator];
             
             if(validationResult.status == REMUserValidationWrongName)
             {
@@ -174,39 +159,9 @@
 
 -(void) dataCallFail: (NSError *) error result:(NSObject *)response
 {
-    UIActivityIndicatorView *indicatorView = [self getIndicatorView];
-    
-    if(indicatorView != nil)
-    {
-        [indicatorView stopAnimating];
-        [indicatorView removeFromSuperview];
-    }
+    [self.loginButton stopIndicator];
     
     [REMAlertHelper alert:error.description];
-    
-    [self.loginButton setEnabled:YES];
-    [self.loginButton setTitle:@"登  录" forState:UIControlStateNormal];
-    [self.loginButton setTitle:@"登  录" forState:UIControlStateHighlighted];
-}
-
--(UIActivityIndicatorView *)getIndicatorView
-{
-    UIActivityIndicatorView *indicatorView = nil;
-    for(UIView *view in self.loginButton.subviews)
-    {
-        if([view isMemberOfClass:[UIActivityIndicatorView class]])
-        {
-            indicatorView = (UIActivityIndicatorView *)view;
-            break;
-        }
-    }
-    
-    return indicatorView;
-}
-
--(void)enableLoginButtonLoding:(BOOL)isEnable
-{
-    
 }
 
 #pragma mark - uitextfield delegate
