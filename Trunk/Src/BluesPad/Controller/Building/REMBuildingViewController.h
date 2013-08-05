@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "REMSplashScreenController.h"
+#import "REMImageView.h"
 
 @interface REMBuildingViewController : UIViewController
+
+@property (nonatomic,strong) NSArray *buildingInfoArray;
 
 @property (nonatomic,strong) REMSplashScreenController *splashScreenController;
 
