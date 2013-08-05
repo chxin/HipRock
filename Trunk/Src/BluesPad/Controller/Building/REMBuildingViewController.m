@@ -153,12 +153,12 @@
             if(velocity.y<0)
             {
                 for (REMImageView *view in self.imageArray) {
-                    [view scrollUp:YES];
+                    [view scrollUp];
                 }
             }
             else{
                 for (REMImageView *view in self.imageArray) {
-                    [view scrollDown:YES];
+                    [view scrollDown];
                 }
             }
             
@@ -184,26 +184,7 @@
 - (void)panthis:(UIPanGestureRecognizer *)pan
 {
     
-    CGPoint trans= [pan translationInView:self.view];
     CGPoint velocity= [pan velocityInView:self.view];
-    NSLog(@"trans:%@",NSStringFromCGPoint(trans));
-    NSLog(@"velocity:%@",NSStringFromCGPoint(velocity));
-    NSLog(@"state:%d",pan.state);
-    //if(trans.x == 0 && trans.y==0) return;
-    //NSLog(@"tan:%f",tan(M_PI_4)*ABS(trans.x));
-    //    double r;
-    //    if(ABS(trans.x)==0)
-    //    {
-    //        r = 0;
-    //    }
-    //    else if(ABS(trans.y)==0)
-    //    {
-    //        r= 1;
-    //    }
-    //    else{
-    //        r =  ABS(trans.y/trans.x);
-    //    }
-    //    NSLog(@"r:%f",r);
     if(ABS(velocity.x)>ABS(velocity.y)){
         [self swipethis:pan];
     }
@@ -249,7 +230,7 @@
         NSNumber *num = [NSNumber numberWithFloat:view.center.x];
         [arr addObject:num];
     }
-    NSLog(@"start center:%@",arr);
+    //NSLog(@"start center:%@",arr);
     self.originCenterXArray=arr;
 }
 
@@ -257,32 +238,11 @@
 -(void)tapthis:(UITapGestureRecognizer *)tap
 {
     
-    
-    
-    REMImageView *view=  self.imageArray[self.currentIndex];
-    [view tapthis:YES];
-    
-    for(int i=0;i<self.imageArray.count;++i)
-    {
-        if(i!=self.currentIndex)
-        {
-            REMImageView *v = self.imageArray[i];
-            [v tapthis:NO];
-            dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-            dispatch_async(concurrentQueue, ^{
-                
-                
-                
-                UIImage *image = [v blurthis];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [v setBlurred:image];
-                    
-                    
-                });
-                
-            });
-        }
+    for (REMImageView *view in self.imageArray) {
+        [view tapthis];
     }
+    
+    
     
 }
 

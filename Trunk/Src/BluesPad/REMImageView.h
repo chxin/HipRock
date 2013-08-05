@@ -18,9 +18,9 @@
 
 - (id) initWithFrame:(CGRect)frame WithImageName:(NSString *)name;
 
-- (void)scrollUp:(BOOL)blur;
+- (void)scrollUp;
 
-- (void)scrollDown:(BOOL)blur;
+- (void)scrollDown;
 
 - (void)move:(CGFloat)y;
 
@@ -28,10 +28,6 @@
 
 - (void)moveEndByVelocity:(CGFloat)y;
 
-- (void)tapthis:(BOOL)blur;
-
-- (UIImage *)blurthis;
-
-- (void)setBlurred:(UIImage *)image;
+- (void)tapthis;
 
 @end

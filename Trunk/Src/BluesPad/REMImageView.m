@@ -19,179 +19,69 @@
 @property (nonatomic,strong) UIView *croppedTitleBg;
 @property (nonatomic,strong) CIImage *clearImage;
 @property (nonatomic,strong) NSData *origImageData;
+@property (nonatomic) NSUInteger lastBlurDeep;
+@property (nonatomic,strong) UIImageView *blurredImageView;
+@property (nonatomic,strong) UIView *glassView;
 @end
 
 @implementation REMImageView
+
+#pragma mark -
+#pragma mark init
 
 - (id)initWithFrame:(CGRect)frame WithImageName:(NSString *)name
 {
     self = [super initWithFrame:frame];
     if(self){
         self.contentMode=UIViewContentModeScaleToFill;
-        //NSLog(@"frame:%@",NSStringFromCGSize(frame.size));
-        self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-        self.imageView.contentMode=UIViewContentModeScaleToFill;
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:name ofType:@"jpg"];
-        // NSURL *fileNameAndPath = [NSURL fileURLWithPath:filePath];
-        NSData *image = [NSData dataWithContentsOfFile:filePath];
-        self.origImageData=image;
-        //CIImage *beginImage = [CIImage imageWithContentsOfURL:fileNameAndPath];
-        self.imageView.image=  [UIImage imageWithData:image];
-        //self.imageView.image = [UIImage imageWithCGImage:beginImage];
-        [self addSubview:self.imageView];
-               
-        self.clearImage = [CIImage imageWithCGImage:self.imageView.image.CGImage];
-        
-        self.dataView = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(0, 500, frame.size.width, 1000)];
-        
-        [self addSubview:self.dataView];
-        
-        [self addTitleBg];
-        
-        
-        self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, 80)];
-        self.titleLabel.text=@"银河SOHO";
-        self.titleLabel.shadowColor=[UIColor blackColor];
-        self.titleLabel.shadowOffset=CGSizeMake(1, 1);
-        
-        self.titleLabel.backgroundColor=[UIColor clearColor];
-        self.titleLabel.font = [UIFont fontWithName:@"Avenir" size:80];
-        //self.titleLabel.font=[UIFont boldSystemFontOfSize:20];
-        self.titleLabel.textColor=[UIColor whiteColor];
-        self.titleLabel.contentMode = UIViewContentModeTopLeft;
-        
-        
-        //self.titleLabel.b
-        
-        
-        [self addSubview:self.titleLabel];
-        
-        
         self.dataViewUp=NO;
         self.cumulateY=0;
+        
+        [self initImageView:frame withName:name];
+                
+        [self initBlurredImageView];
+        
+        [self initGlassView];
+        
+        [self initDataListView];
+        
+        [self initTitleView];
+        
+        
         
     }
     
     return self;
 }
 
-- (void)cropTitleBg
+- (void)initImageView:(CGRect)frame withName:(NSString *)name
 {
-    // crop the image using CICrop
-    CGRect rect = CGRectMake(0.0, 0.0, self.frame.size.width,80);
+    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+    self.imageView.contentMode=UIViewContentModeScaleToFill;
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:name ofType:@"jpg"];
+    // NSURL *fileNameAndPath = [NSURL fileURLWithPath:filePath];
+    NSData *image = [NSData dataWithContentsOfFile:filePath];
+    self.origImageData=image;
+    //CIImage *beginImage = [CIImage imageWithContentsOfURL:fileNameAndPath];
+    self.imageView.image=  [UIImage imageWithData:image];
+    //self.imageView.image = [UIImage imageWithCGImage:beginImage];
+    [self addSubview:self.imageView];
     
-    CIImage *theCIImage = [CIFilter filterWithName:@"CICrop" keysAndValues:kCIInputImageKey, theCIImage, @"inputRectangle", rect, nil].outputImage;
+    self.clearImage = [CIImage imageWithCGImage:self.imageView.image.CGImage];
+    
+    
 
 }
 
-- (void)addTitleBg
+- (void)initBlurredImageView
 {
-
-    CGRect frame = CGRectMake(0, 0, self.frame.size.width, 80);
+    self.blurredImageView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
+    self.blurredImageView.alpha=0;
+    self.blurredImageView.contentMode=UIViewContentModeScaleToFill;
+    self.backgroundColor=[UIColor clearColor];
     
-        CAGradientLayer *gradient = [CAGradientLayer layer];
-        gradient.opacity=0.2;
-    gradient.frame = frame;
-        gradient.colors = [NSArray arrayWithObjects:
-                           (id)[UIColor lightGrayColor].CGColor,
-                           (id)[UIColor lightGrayColor].CGColor,
-                           nil];
-    
-        UIGraphicsBeginImageContextWithOptions(frame.size, NO, 0.0);
-        CGContextRef c = UIGraphicsGetCurrentContext();
-        
-        //CGContextConcatCTM(c, CGAffineTransformMakeTranslation(-frame.origin.x, -frame.origin.y));
-        [gradient renderInContext:c];
-        
-        UIImage *screenshot = UIGraphicsGetImageFromCurrentImageContext();
-    
-    CIImage *ciImage = [CIImage imageWithCGImage:screenshot.CGImage];
-    
-        UIGraphicsEndImageContext();
-    
-    
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
-                                  keysAndValues: kCIInputImageKey,ciImage,@"inputRadius",[NSNumber numberWithInt:5],nil];
-
-    CIImage *outputImage = [filter1 outputImage];
-    // 2
-    CGImageRef cgimg =
-    [context createCGImage:outputImage fromRect:outputImage.extent];
-    
-    // 3
-    UIImage *newImage = [UIImage imageWithCGImage:cgimg ];
-    
-     CGImageRelease(cgimg);
-    
-    self.titleBg = [[UIImageView alloc] initWithFrame:frame];
-    self.titleBg.image=newImage;
-    
-    [self addSubview:self.titleBg];
-}
-
-
-
--(void)tapthis:(BOOL)blur
-{
-    if(self.dataViewUp==YES)
-    {
-        [self scrollDown:blur];
-    }
-    else
-    {
-        [self scrollUp:blur];
-    }
-}
-
-- (UIImage *)blurthis
-{
-    
-    EAGLContext *myEAGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-    
-    NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
-    [options setObject: [NSNull null] forKey: kCIContextWorkingColorSpace];
-    CIContext *myContext = [CIContext contextWithEAGLContext:myEAGLContext options:options];
-    
-    CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
-                                   keysAndValues: kCIInputImageKey,self.clearImage,@"inputRadius",@(5),nil];
-    
-    CIImage *outputImage = [filter1 outputImage];
-    
-    
-    
-    //NSLog(@"frame size:%@",NSStringFromCGRect(self.imageView.bounds));
-    //NSLog(@"frame extent:%@",NSStringFromCGRect(outputImage.extent));
-    //NSLog(@"image size:%@",NSStringFromCGSize(self.imageView.image.size));
-    // 2
-    CGImageRef cgimg =
-    [myContext createCGImage:outputImage fromRect:CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height)];
-    
-    
-    UIImage *view= [UIImage imageWithCGImage:cgimg];
-    CGImageRelease(cgimg);
-
-    return view;
-}
-
-- (void)setBlurred:(UIImage *)image
-{
-    self.imageView.image=image;
-}
-
-- (void)blurImage
-{
-    
-    [UIView animateWithDuration:0.2 animations:^(void){
-    
-   // dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-  //  dispatch_async(concurrentQueue, ^{
-       
-        //CIImage *ci = [CIImage imageWithCGImage:self.imageView.image.CGImage];
-        //NSLog(@"dd:%@",ci);
-        //CIContext *context = [CIContext contextWithOptions:nil];
-        
-        
+    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(concurrentQueue, ^{
         EAGLContext *myEAGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
         
         NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
@@ -204,28 +94,136 @@
         CIImage *outputImage = [filter1 outputImage];
         
         
-        
-        //NSLog(@"frame size:%@",NSStringFromCGRect(self.imageView.bounds));
-        //NSLog(@"frame extent:%@",NSStringFromCGRect(outputImage.extent));
-        //NSLog(@"image size:%@",NSStringFromCGSize(self.imageView.image.size));
-        // 2
         CGImageRef cgimg =
         [myContext createCGImage:outputImage fromRect:CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height)];
         
         
         UIImage *view= [UIImage imageWithCGImage:cgimg];
-         CGImageRelease(cgimg);
-        // Effect image using Core Image filter chain on a background thread
-        
-      //  dispatch_async(dispatch_get_main_queue(), ^{
-            self.imageView.image = view;
-           
-            //dismiss HUD and add fitered image to imageView in main thread
-            
-      //  });
-        
-    //});
+        CGImageRelease(cgimg);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.blurredImageView.image=view;
+        });
+    });
     
+    [self addSubview:self.blurredImageView];
+}
+
+- (void)initGlassView
+{
+    self.glassView = [[UIView alloc]initWithFrame:self.imageView.frame];
+    self.glassView.alpha=0;
+    self.glassView.contentMode=UIViewContentModeScaleToFill;
+    self.glassView.backgroundColor=[UIColor grayColor];
+    
+    [self addSubview:self.glassView];
+}
+
+- (void)initDataListView
+{
+    self.dataView = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(0, 500, self.frame.size.width, 1000)];
+    
+    [self addSubview:self.dataView];
+
+}
+
+- (void)initTitleView
+{
+    CGRect frame = CGRectMake(0, 0, self.frame.size.width, 80);
+    
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.opacity=0.2;
+    gradient.frame = frame;
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)[UIColor lightGrayColor].CGColor,
+                       (id)[UIColor lightGrayColor].CGColor,
+                       nil];
+    
+    UIGraphicsBeginImageContextWithOptions(frame.size, NO, 0.0);
+    CGContextRef c = UIGraphicsGetCurrentContext();
+    
+    //CGContextConcatCTM(c, CGAffineTransformMakeTranslation(-frame.origin.x, -frame.origin.y));
+    [gradient renderInContext:c];
+    
+    UIImage *screenshot = UIGraphicsGetImageFromCurrentImageContext();
+    
+    CIImage *ciImage = [CIImage imageWithCGImage:screenshot.CGImage];
+    
+    UIGraphicsEndImageContext();
+    
+    
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
+                                   keysAndValues: kCIInputImageKey,ciImage,@"inputRadius",[NSNumber numberWithInt:5],nil];
+    
+    CIImage *outputImage = [filter1 outputImage];
+    // 2
+    CGImageRef cgimg =
+    [context createCGImage:outputImage fromRect:outputImage.extent];
+    
+    // 3
+    UIImage *newImage = [UIImage imageWithCGImage:cgimg ];
+    
+    CGImageRelease(cgimg);
+    
+    self.titleBg = [[UIImageView alloc] initWithFrame:frame];
+    self.titleBg.image=newImage;
+    
+    [self addSubview:self.titleBg];
+    
+    
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 80)];
+    self.titleLabel.text=@"银河SOHO";
+    self.titleLabel.shadowColor=[UIColor blackColor];
+    self.titleLabel.shadowOffset=CGSizeMake(1, 1);
+    
+    self.titleLabel.backgroundColor=[UIColor clearColor];
+    self.titleLabel.font = [UIFont fontWithName:@"Avenir" size:80];
+    //self.titleLabel.font=[UIFont boldSystemFontOfSize:20];
+    self.titleLabel.textColor=[UIColor whiteColor];
+    self.titleLabel.contentMode = UIViewContentModeTopLeft;
+    
+    
+    //self.titleLabel.b
+    
+    
+    [self addSubview:self.titleLabel];
+}
+
+
+
+- (void)cropTitleBg
+{
+    // crop the image using CICrop
+    CGRect rect = CGRectMake(0.0, 0.0, self.frame.size.width,80);
+    
+    CIImage *theCIImage = [CIFilter filterWithName:@"CICrop" keysAndValues:kCIInputImageKey, theCIImage, @"inputRectangle", rect, nil].outputImage;
+
+}
+
+#pragma mark -
+#pragma mark event
+
+
+-(void)tapthis
+{
+    if(self.dataViewUp==YES)
+    {
+        [self scrollDown];
+    }
+    else
+    {
+        [self scrollUp];
+    }
+}
+
+
+- (void)blurImage
+{
+    
+    [UIView animateWithDuration:0.2 animations:^(void){
+        self.blurredImageView.alpha=0.7;
+        self.glassView.alpha=0.5;
+      
     }];
     
     
@@ -234,85 +232,34 @@
 
 -(void)resetImage
 {
-    self.imageView.image = [UIImage imageWithCIImage:self.clearImage];
+    self.blurredImageView.alpha=0;
+    self.glassView.alpha=0;
 
 }
 
-//- (void)gpuBlurImage
-//{
-//    
-//    
-//    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-//    dispatch_async(concurrentQueue, ^{
-//    //UIImage *inputImage = [UIImage imageNamed:@"Lambeau.jpg"];
-//    
-//    GPUImagePicture *stillImageSource = [[GPUImagePicture alloc] initWithImage:self.imageView.image smoothlyScaleOutput:YES];
-//    
-//    GPUImageFastBlurFilter *stillImageFilter = [[GPUImageFastBlurFilter alloc] init];
-//        stillImageFilter.blurPasses=5;
-//    [stillImageSource addTarget:stillImageFilter];
-//    [stillImageSource processImage];
-//        UIImage *image = [stillImageFilter imageFromCurrentlyProcessedOutputWithOrientation:UIImageOrientationUp];
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            self.imageView.image = image;
-//            //dismiss HUD and add fitered image to imageView in main thread
-//            
-//        });
-//        
-//    });
-//}
-
-- (void)oscarBlur
-{
-    
-    REMImageHelper *h = [[REMImageHelper alloc] init];
-    
-    
-    
-    [h frostedGlassImage:self.imageView image:self.origImageData gradientValue:20];
-    
-//    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-//    dispatch_async(concurrentQueue, ^{
-//        //UIImage *inputImage = [UIImage imageNamed:@"Lambeau.jpg"];
-//        
-//        REMImageHelper *h = [[REMImageHelper alloc] init];
-//        
-//        [h frostedGlassImage:self.imageView image:nil gradientValue:20]
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            self.imageView.image = image;
-//            //dismiss HUD and add fitered image to imageView in main thread
-//            
-//        });
-//        
-//    });
-}
-
-- (void)scrollUp:(BOOL)blur
+- (void)scrollUp
 {
     if(self.dataViewUp == NO){
-        if(blur==YES){
+        
     [self blurImage];
-        }
-        //[self gpuBlurImage];
-        //[self oscarBlur];
+        
         [self scrollTo:100];
         self.dataViewUp=YES;
-        
+        self.lastBlurDeep=5;
         
     }
     
 }
 
-- (void)scrollDown:(BOOL)blur
+- (void)scrollDown
 {
     if(self.dataViewUp==YES){
         [self scrollTo:500];
         self.dataViewUp=NO;
-        if(blur==YES){
+        
         [self resetImage];
-        }
+        
+        self.lastBlurDeep=0;
     }
 }
 
@@ -342,7 +289,7 @@
 - (void)moveEndByVelocity:(CGFloat)y
 {
     CGFloat end=self.dataView.frame.origin.y+y;
-    NSLog(@"end:%f",end);
+    //NSLog(@"end:%f",end);
     if(end>500)
     {
         end=550;
@@ -370,7 +317,7 @@
                                                     } completion:nil];
                             }
                             else{
-                                [self scrollDown:YES];
+                                [self scrollDown];
                             }
                         }];
 }
@@ -381,19 +328,32 @@
 {
     [self.dataView setCenter:CGPointMake(self.dataView.center.x,self.dataView.center.y+y)];
     self.cumulateY+=y;
+    __block NSUInteger deep;
+    //NSLog(@"cumulateY:%f",self.cumulateY);
+    //    NSLog(@"deep:%d",self.lastBlurDeep);
+    if(self.cumulateY>=400){
+        deep=5;
+    }
+    else{
+        deep = ABS(floor(self.cumulateY/1000));
+    }
+    if(self.lastBlurDeep != deep){
+        self.lastBlurDeep=deep;
+    
+    }
 }
 
 - (void)moveEnd
 {
-    
     if(ABS(self.cumulateY)<200){
-        [self scrollUp:YES];
+        [self scrollUp];
     }
     else{
-        [self scrollDown:YES];
+        [self scrollDown];
     }
     
     self.cumulateY=0;
+
 }
 
 /*
