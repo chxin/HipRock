@@ -10,4 +10,6 @@
 
 @interface REMNumberLabel : UILabel
 
+@property (nonatomic) NSNumber *fontSize;
+
 @end

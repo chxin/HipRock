@@ -144,15 +144,7 @@
         }
         else
         {
-            UIActivityIndicatorView *indicatorView = nil;
-            for(UIView *view in self.loginButton.subviews)
-            {
-                if([view isMemberOfClass:[UIActivityIndicatorView class]])
-                {
-                    indicatorView = (UIActivityIndicatorView *)view;
-                    break;
-                }
-            }
+            UIActivityIndicatorView *indicatorView = [self getIndicatorView];
             
             if(indicatorView != nil)
             {
@@ -182,7 +174,39 @@
 
 -(void) dataCallFail: (NSError *) error result:(NSObject *)response
 {
+    UIActivityIndicatorView *indicatorView = [self getIndicatorView];
+    
+    if(indicatorView != nil)
+    {
+        [indicatorView stopAnimating];
+        [indicatorView removeFromSuperview];
+    }
+    
     [REMAlertHelper alert:error.description];
+    
+    [self.loginButton setEnabled:YES];
+    [self.loginButton setTitle:@"登  录" forState:UIControlStateNormal];
+    [self.loginButton setTitle:@"登  录" forState:UIControlStateHighlighted];
+}
+
+-(UIActivityIndicatorView *)getIndicatorView
+{
+    UIActivityIndicatorView *indicatorView = nil;
+    for(UIView *view in self.loginButton.subviews)
+    {
+        if([view isMemberOfClass:[UIActivityIndicatorView class]])
+        {
+            indicatorView = (UIActivityIndicatorView *)view;
+            break;
+        }
+    }
+    
+    return indicatorView;
+}
+
+-(void)enableLoginButtonLoding:(BOOL)isEnable
+{
+    
 }
 
 #pragma mark - uitextfield delegate
