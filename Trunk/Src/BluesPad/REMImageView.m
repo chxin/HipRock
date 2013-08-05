@@ -19,7 +19,7 @@
 @property (nonatomic,strong) UIView *croppedTitleBg;
 @property (nonatomic,strong) CIImage *clearImage;
 @property (nonatomic,strong) NSData *origImageData;
-@property (nonatomic) NSUInteger lastBlurDeep;
+@property (nonatomic) CGFloat lastBlurDeep;
 @property (nonatomic,strong) UIImageView *blurredImageView;
 @property (nonatomic,strong) UIView *glassView;
 @end
@@ -268,14 +268,14 @@
  
         [UIView animateWithDuration:0.2 delay:0
                             options: UIViewAnimationOptionCurveEaseOut animations:^(void) {
-                                [self.dataView setFrame:CGRectMake(0, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
-                                if(y==500){
+                                [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
+                                /*if(y==500){
                                     [self.imageView setCenter:CGPointMake(self.center.x, self.center.y+10) ];
                                 }
                                 else
                                      {
                                          [self.imageView setCenter:CGPointMake(self.center.x, self.center.y-10) ];
-                                     }
+                                     }*/
                                 
                             } completion:^(BOOL ret){
                                 
@@ -328,17 +328,21 @@
 {
     [self.dataView setCenter:CGPointMake(self.dataView.center.x,self.dataView.center.y+y)];
     self.cumulateY+=y;
-    __block NSUInteger deep;
-    //NSLog(@"cumulateY:%f",self.cumulateY);
-    //    NSLog(@"deep:%d",self.lastBlurDeep);
+    CGFloat deep;
+    NSLog(@"cumulateY:%f",self.cumulateY);
+        
     if(self.cumulateY>=400){
-        deep=5;
+        deep=0.7;
     }
     else{
-        deep = ABS(floor(self.cumulateY/1000));
+        deep =  floorf(ABS(self.cumulateY/1000)*100)/100;
     }
+    if(deep>0.7) deep=0.7;
+    
     if(self.lastBlurDeep != deep){
         self.lastBlurDeep=deep;
+        self.glassView.alpha=self.lastBlurDeep;
+        self.blurredImageView.alpha=self.lastBlurDeep;
     
     }
 }

@@ -33,11 +33,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    // Do any additional setup after loading the view, typically from a nib.
+	
+    
+    
     self.currentIndex=0;
     self.cumulateX=0;
-    //NSLog(@"start pie:%f",M_PI_4);
+
     UIPanGestureRecognizer *rec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
     [self.view addGestureRecognizer:rec];
     
@@ -55,16 +56,16 @@
 
 - (void) swipethis:(UIPanGestureRecognizer *)pan
 {
-    NSLog(@"swipethis");
+    //NSLog(@"swipethis");
     CGPoint trans= [pan translationInView:self.view];
     
-    NSLog(@"state:%d",pan.state);
+   // NSLog(@"state:%d",pan.state);
     
     if(pan.state== UIGestureRecognizerStateChanged)
     {
         
         
-        for (UIImageView *view in self.imageArray)
+        for (REMImageView *view in self.imageArray)
         {
             [view setCenter:CGPointMake(view.center.x+trans.x, view.center.y)];
         }
@@ -78,7 +79,7 @@
     {
         
         __block CGPoint p= [pan velocityInView:self.view];
-        NSLog(@"cumulatex:%f",self.cumulateX);
+        //NSLog(@"cumulatex:%f",self.cumulateX);
         
         int sign= p.x>0?1:-1;
         
@@ -111,13 +112,14 @@
                                 {
                                     NSNumber *s = self.originCenterXArray[i];
                                     CGFloat x= [s floatValue];
-                                    UIImageView *image = self.imageArray[i];
+                                    REMImageView *image = self.imageArray[i];
                                     [image setCenter: CGPointMake( x,image.center.y)];
                                 }
                                 
                                 if(addIndex ==YES){
                                     self.currentIndex=self.currentIndex+sign*-1;
                                 }
+                                //NSLog(@"currentIndex:%d",self.currentIndex);
                                 self.cumulateX=0;
                                 
                             } completion:^(BOOL ret){
@@ -207,17 +209,17 @@
     REMImageView *imageView = [[REMImageView alloc]initWithFrame:
                                CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)
                                                    WithImageName:@"wangjingsoho"];
-    imageView.contentMode= UIViewContentModeScaleToFill;
+    //imageView.contentMode= UIViewContentModeScaleToFill;
     [self.view addSubview:imageView];
     
     
     REMImageView *imageView1 = [[REMImageView alloc]initWithFrame:
                                 CGRectMake(self.view.bounds.size.width+5, 0, self.view.bounds.size.width, self.view.bounds.size.height) WithImageName:@"yinhesoho"];
-    imageView1.contentMode= UIViewContentModeScaleToFill;
+    //imageView1.contentMode= UIViewContentModeScaleToFill;
     [self.view addSubview:imageView1];
     REMImageView *imageView2 = [[REMImageView alloc]initWithFrame:
                                 CGRectMake(self.view.bounds.size.width*2+5*2, 0, self.view.bounds.size.width, self.view.bounds.size.height) WithImageName:@"sanlitunsoho"];
-    imageView2.contentMode= UIViewContentModeScaleToFill;
+    //imageView2.contentMode= UIViewContentModeScaleToFill;
     [self.view addSubview:imageView2];
     
     self.imageArray=@[imageView,imageView1,imageView2];
