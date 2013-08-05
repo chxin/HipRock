@@ -25,12 +25,25 @@
 - (void)drawRect:(CGRect)rect
 {
     //Helvetica Neue UltraLight 60.0
-    self.textColor = [UIColor redColor];
-    if(self.font!=nil){
-        float fontSize = self.font.pointSize;
-        UIFont *customFont = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:fontSize];
-        self.font = customFont;
+    //self.textColor = [UIColor redColor];
+    
+    float fontSize = 0;
+    if(self.fontSize != nil)
+    {
+        fontSize = [self.fontSize floatValue];
     }
+    else
+    {
+        if(self.font!=nil){
+            fontSize = self.font.pointSize;
+        }
+        else{
+            fontSize = [UIFont systemFontSize];
+        }
+    }
+    
+    UIFont *customFont = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:fontSize];
+    self.font = customFont;
     
     [super drawRect:rect];
     
