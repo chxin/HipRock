@@ -34,7 +34,9 @@
 {
     [super viewDidLoad];
 	
+    self.view.backgroundColor=[UIColor blackColor];
     
+    [self initImageView];
     
     self.currentIndex=0;
     self.cumulateX=0;
@@ -56,6 +58,36 @@
 
 - (void)initImageView
 {
+    int width=1024,height=748;
+    
+    REMImageView *imageView = [[REMImageView alloc]initWithFrame:
+                               CGRectMake(0, 0, width, height)
+                                                   WithImageName:@"wangjingsoho"];
+    //imageView.contentMode= UIViewContentModeScaleToFill;
+    [self.view addSubview:imageView];
+    
+    
+    REMImageView *imageView1 = [[REMImageView alloc]initWithFrame:
+                                CGRectMake(width+5, 0, width, height) WithImageName:@"yinhesoho"];
+    //imageView1.contentMode= UIViewContentModeScaleToFill;
+    [self.view addSubview:imageView1];
+    REMImageView *imageView2 = [[REMImageView alloc]initWithFrame:
+                                CGRectMake(width*2+5*2, 0, width, height) WithImageName:@"sanlitunsoho"];
+    //imageView2.contentMode= UIViewContentModeScaleToFill;
+    [self.view addSubview:imageView2];
+    
+    self.imageArray=@[imageView,imageView1,imageView2];
+    self.currentIndex=0;
+    
+    NSMutableArray *arr = [[NSMutableArray alloc]initWithCapacity:self.imageArray.count];
+    
+    for (REMImageView *view in self.imageArray) {
+        
+        NSNumber *num = [NSNumber numberWithFloat:view.center.x];
+        [arr addObject:num];
+    }
+    //NSLog(@"start center:%@",arr);
+    self.originCenterXArray=arr;
     
 }
 
@@ -205,52 +237,12 @@
     
 }
 
-- (void)log {
-    NSLog(@"Bounds %@", NSStringFromCGRect(self.view.bounds));
-    NSLog(@"Frame %@", NSStringFromCGRect(self.view.frame));
-}
-
-
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    /*
-    
-    REMImageView *imageView = [[REMImageView alloc]initWithFrame:
-                               CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)
-                                                   WithImageName:@"wangjingsoho"];
-    //imageView.contentMode= UIViewContentModeScaleToFill;
-    [self.view addSubview:imageView];
-    
-    
-    REMImageView *imageView1 = [[REMImageView alloc]initWithFrame:
-                                CGRectMake(self.view.bounds.size.width+5, 0, self.view.bounds.size.width, self.view.bounds.size.height) WithImageName:@"yinhesoho"];
-    //imageView1.contentMode= UIViewContentModeScaleToFill;
-    [self.view addSubview:imageView1];
-    REMImageView *imageView2 = [[REMImageView alloc]initWithFrame:
-                                CGRectMake(self.view.bounds.size.width*2+5*2, 0, self.view.bounds.size.width, self.view.bounds.size.height) WithImageName:@"sanlitunsoho"];
-    //imageView2.contentMode= UIViewContentModeScaleToFill;
-    [self.view addSubview:imageView2];
-    
-    self.imageArray=@[imageView,imageView1,imageView2];
-    self.currentIndex=0;
-    
-    NSMutableArray *arr = [[NSMutableArray alloc]initWithCapacity:self.imageArray.count];
-    
-    for (REMImageView *view in self.imageArray) {
-        
-        NSNumber *num = [NSNumber numberWithFloat:view.center.x];
-        [arr addObject:num];
-    }
-    //NSLog(@"start center:%@",arr);
-    self.originCenterXArray=arr;
-     */
-}
 
 
 -(void)tapthis:(UITapGestureRecognizer *)tap
 {
-    
+    //NSLog(@"cumulatex:%f",self.cumulateX);
+    if(self.cumulateX!=0) return;
     for (REMImageView *view in self.imageArray) {
         [view tapthis];
     }
