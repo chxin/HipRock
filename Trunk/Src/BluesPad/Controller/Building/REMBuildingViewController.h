@@ -12,7 +12,7 @@
 
 @interface REMBuildingViewController : UIViewController
 
-@property (nonatomic,strong) NSArray *buildingInfoArray;
+@property (nonatomic,strong) NSArray *buildingOverallArray;
 
 @property (nonatomic,strong) REMSplashScreenController *splashScreenController;
 

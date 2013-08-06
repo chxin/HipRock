@@ -24,11 +24,18 @@
     if (self) {
         // Initialization code
         
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+        button.titleLabel.text=@"Elec";
+        
+        [self addSubview:button];
+        
+        
+        
         NSArray *array = @[@"123,2312",@"12312,123",@"435,34534",@"655,464",@"42,678",@"234,3453"];
         int gap=85;
         int i=0;
         for (NSString *str in array) {
-            REMNumberLabel *titleLabel = [[REMNumberLabel alloc]initWithFrame:CGRectMake(5, 5+gap*i, frame.size.width, 80)];
+            REMNumberLabel *titleLabel = [[REMNumberLabel alloc]initWithFrame:CGRectMake(5,30+5+gap*i, frame.size.width, 80)];
             titleLabel.text=str;
             titleLabel.shadowColor=[UIColor blackColor];
             titleLabel.shadowOffset=CGSizeMake(1, 1);

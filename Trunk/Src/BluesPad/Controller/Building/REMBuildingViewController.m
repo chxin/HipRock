@@ -38,6 +38,8 @@
     
     self.currentIndex=0;
     self.cumulateX=0;
+    
+    
 
     UIPanGestureRecognizer *rec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
     [self.view addGestureRecognizer:rec];
@@ -51,6 +53,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)initImageView
+{
+    
+}
+
+
 #pragma mark -
 #pragma mark buildingview
 
