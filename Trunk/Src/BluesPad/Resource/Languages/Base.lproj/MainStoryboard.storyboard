@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5WC-f7-YJK">
     <dependencies>
+        <development version="4600" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
@@ -12,56 +13,43 @@
                         <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="preface-background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="9Mr-EH-OgG">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="splashscreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Mr-EH-OgG">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="768" id="aJE-cd-aKs"/>
                                 </constraints>
                             </imageView>
-                            <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b0a-iQ-aur">
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LxY-lh-jAg">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="schneider-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Igx-ZG-8eI"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Schneider Electric Blues Project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAT-aj-FDp">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="XL5-0h-8qK"/>
+                                            <constraint firstAttribute="width" constant="480" id="irY-DA-bnk"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="32"/>
+                                        <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="ZAT-aj-FDp" firstAttribute="centerX" secondItem="LxY-lh-jAg" secondAttribute="centerX" type="default" id="aeS-Jf-HDd"/>
+                                    <constraint firstItem="Igx-ZG-8eI" firstAttribute="centerY" secondItem="LxY-lh-jAg" secondAttribute="centerY" type="default" id="bmx-C7-mFR"/>
+                                    <constraint firstItem="ZAT-aj-FDp" firstAttribute="centerX" secondItem="Igx-ZG-8eI" secondAttribute="centerX" type="default" id="eag-Rf-X2M"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZAT-aj-FDp" secondAttribute="bottom" constant="26" id="s1a-ZV-mgJ"/>
+                                </constraints>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="施耐德电气能源管理开放平台" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uiB-AF-Cla">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="6qp-Vr-qye"/>
-                                    <constraint firstAttribute="width" constant="468" id="Pn3-MI-YMq"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="请稍候，用力加载数据中 >_&lt; ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTq-j8-8yd">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="221" id="kpn-ho-3SF"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Welcome  23,104" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHO-Os-Z1f" customClass="REMNumberLabel">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="700" id="AGH-lb-tbe"/>
-                                    <constraint firstAttribute="height" constant="71" id="pFW-AL-2ev"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="70"/>
-                                <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="9Mr-EH-OgG" firstAttribute="leading" secondItem="XgD-ii-3PV" secondAttribute="leading" type="default" id="3Qh-cT-yX9"/>
-                            <constraint firstItem="FHO-Os-Z1f" firstAttribute="centerX" secondItem="uiB-AF-Cla" secondAttribute="centerX" type="default" id="5uI-t9-K8I"/>
+                            <constraint firstItem="LxY-lh-jAg" firstAttribute="centerX" secondItem="9Mr-EH-OgG" secondAttribute="centerX" type="default" id="3qN-jx-qRW"/>
                             <constraint firstItem="9Mr-EH-OgG" firstAttribute="trailing" secondItem="XgD-ii-3PV" secondAttribute="trailing" type="default" id="9i8-F0-uyt"/>
-                            <constraint firstItem="nTq-j8-8yd" firstAttribute="leading" secondItem="XgD-ii-3PV" secondAttribute="leading" constant="401" id="BMh-Fz-ZIb"/>
-                            <constraint firstItem="b0a-iQ-aur" firstAttribute="leading" secondItem="XgD-ii-3PV" secondAttribute="leading" constant="170" id="HVP-DN-8K6"/>
-                            <constraint firstItem="b0a-iQ-aur" firstAttribute="top" secondItem="XgD-ii-3PV" secondAttribute="top" constant="71" id="I9u-ZJ-cuQ"/>
-                            <constraint firstItem="FHO-Os-Z1f" firstAttribute="centerX" secondItem="9Mr-EH-OgG" secondAttribute="centerX" type="default" id="Jch-k6-Grt"/>
                             <constraint firstItem="9Mr-EH-OgG" firstAttribute="top" secondItem="XgD-ii-3PV" secondAttribute="top" type="default" id="fNC-M4-3Lw"/>
-                            <constraint firstAttribute="bottom" secondItem="b0a-iQ-aur" secondAttribute="bottom" constant="192" id="iH6-VL-xZG"/>
-                            <constraint firstItem="FHO-Os-Z1f" firstAttribute="centerX" secondItem="b0a-iQ-aur" secondAttribute="centerX" type="default" id="lah-OU-R0C"/>
-                            <constraint firstItem="uiB-AF-Cla" firstAttribute="top" secondItem="XgD-ii-3PV" secondAttribute="top" constant="153" id="tbe-FF-s3t"/>
-                            <constraint firstItem="FHO-Os-Z1f" firstAttribute="top" secondItem="XgD-ii-3PV" secondAttribute="top" constant="364" id="xfc-v7-VMp"/>
-                            <constraint firstAttribute="bottom" secondItem="nTq-j8-8yd" secondAttribute="bottom" constant="204" id="yCo-uj-Wcg"/>
+                            <constraint firstAttribute="bottom" secondItem="LxY-lh-jAg" secondAttribute="bottom" constant="287" id="if0-yJ-Imq"/>
+                            <constraint firstItem="LxY-lh-jAg" firstAttribute="leading" secondItem="XgD-ii-3PV" secondAttribute="leading" constant="256" id="q2R-hr-RBB"/>
+                            <constraint firstItem="LxY-lh-jAg" firstAttribute="top" secondItem="XgD-ii-3PV" secondAttribute="top" constant="87" id="t4f-5b-TH7"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
@@ -69,8 +57,8 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="logoView" destination="LxY-lh-jAg" id="k4L-pY-OOj"/>
                         <segue destination="jAV-Kb-caH" kind="push" identifier="splashToBuildingSegue" id="fTi-uC-B2P"/>
-                        <segue destination="dN9-ev-X3W" kind="push" identifier="splashToLoginSegue" id="E4I-Fo-egp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i7s-2X-RpE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -138,7 +126,7 @@
         <!--Login Carousel Controller-->
         <scene sceneID="MgP-x0-zlk">
             <objects>
-                <viewController id="dN9-ev-X3W" customClass="REMLoginCarouselController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginCarousel" id="dN9-ev-X3W" customClass="REMLoginCarouselController" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="8bJ-kL-p21">
                         <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -168,7 +156,7 @@
                             </button>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4k-aO-zDY"/>
                         </subviews>
-                        <color key="backgroundColor" red="0.85817920920000001" green="0.85817920920000001" blue="0.85817920920000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="y4k-aO-zDY" firstAttribute="top" secondItem="8bJ-kL-p21" secondAttribute="top" constant="50" id="Fi0-dH-VZR"/>
                             <constraint firstAttribute="bottom" secondItem="TiN-so-PeV" secondAttribute="bottom" constant="70" id="HfT-Ed-KbA"/>
@@ -192,7 +180,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mjp-Au-mwu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3767" y="790"/>
+            <point key="canvasLocation" x="-5195" y="1030"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="4">
@@ -361,7 +349,7 @@
             <objects>
                 <tableViewController id="EBB-A8-F1l" customClass="REMWidgetRelativeDateTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Y1Z-ae-bg8">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="1644"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -370,7 +358,7 @@
                                 <rect key="frame" x="0.0" y="22" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                    <rect key="frame" x="-1" y="0.0" width="770" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -393,7 +381,7 @@
             <objects>
                 <viewController id="3Qg-e2-YGS" customClass="REMWidgetTimePickerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tao-oo-h2d">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="1644"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" restorationIdentifier="startTimePicker" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" translatesAutoresizingMaskIntoConstraints="NO" id="bed-yF-FeZ">
@@ -430,7 +418,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <constraints>
                             <constraint firstItem="bed-yF-FeZ" firstAttribute="leading" secondItem="tao-oo-h2d" secondAttribute="leading" type="default" id="RUA-Yb-pTu"/>
                             <constraint firstItem="bed-yF-FeZ" firstAttribute="trailing" secondItem="tao-oo-h2d" secondAttribute="trailing" type="default" id="XU5-jr-Vt9"/>
-                            <constraint firstItem="bed-yF-FeZ" firstAttribute="top" secondItem="tao-oo-h2d" secondAttribute="top" type="default" id="l4v-Zn-qdN"/>
+                            <constraint firstItem="bed-yF-FeZ" firstAttribute="top" secondItem="tao-oo-h2d" secondAttribute="top" constant="808" id="nMn-1Q-NNf"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
@@ -448,7 +436,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <tableViewController id="e4C-0k-mvh" customClass="REMChartLegendTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gTS-yU-Xpe">
-                        <rect key="frame" x="0.0" y="20" width="200" height="300"/>
+                        <rect key="frame" x="0.0" y="20" width="200" height="940"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -457,7 +445,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <rect key="frame" x="0.0" y="22" width="200" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="43"/>
+                                    <rect key="frame" x="-1" y="0.0" width="202" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="334-D1-rg8">
@@ -680,7 +668,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="LKJ-Zx-VpM" customClass="REMWidgetTimePickerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bOU-qN-Xss">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="1644"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" restorationIdentifier="endTimePicker" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" translatesAutoresizingMaskIntoConstraints="NO" id="9gP-41-UzT">
@@ -717,7 +705,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <constraints>
                             <constraint firstItem="9gP-41-UzT" firstAttribute="leading" secondItem="bOU-qN-Xss" secondAttribute="leading" type="default" id="8ut-ni-qkh"/>
                             <constraint firstItem="9gP-41-UzT" firstAttribute="trailing" secondItem="bOU-qN-Xss" secondAttribute="trailing" type="default" id="9rr-1U-j2C"/>
-                            <constraint firstItem="9gP-41-UzT" firstAttribute="top" secondItem="bOU-qN-Xss" secondAttribute="top" type="default" id="e4l-9s-n6n"/>
+                            <constraint firstItem="9gP-41-UzT" firstAttribute="top" secondItem="bOU-qN-Xss" secondAttribute="top" constant="808" id="vYE-g6-dLJ"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
@@ -879,7 +867,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emS-ID-Yln" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2669" y="866"/>
+            <point key="canvasLocation" x="-4097" y="1106"/>
         </scene>
         <!--Login Password View Controller-->
         <scene sceneID="aoH-Iq-8Qx">
@@ -904,8 +892,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="PlatformAdmin" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tKD-ZL-rv5">
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7ai-sP-LaI"/>
                                     <constraint firstAttribute="width" constant="177" id="LZk-Li-enV"/>
-                                    <constraint firstAttribute="height" constant="30" id="hqh-gK-g98"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -964,8 +952,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <constraint firstAttribute="bottom" secondItem="xht-Vm-kah" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="glE-nO-Wfk"/>
                             <constraint firstItem="tKD-ZL-rv5" firstAttribute="top" secondItem="wYR-h2-3CZ" secondAttribute="top" constant="17" id="lco-BK-oOP"/>
                             <constraint firstItem="tKD-ZL-rv5" firstAttribute="leading" secondItem="wYR-h2-3CZ" secondAttribute="leading" constant="201" id="m6i-jB-7QN"/>
-                            <constraint firstItem="xht-Vm-kah" firstAttribute="trailing" secondItem="tKD-ZL-rv5" secondAttribute="trailing" type="default" id="mDt-Nv-Yea"/>
                             <constraint firstItem="xht-Vm-kah" firstAttribute="trailing" secondItem="VwG-o9-SW1" secondAttribute="trailing" type="default" id="nHR-XX-agl"/>
+                            <constraint firstItem="tKD-ZL-rv5" firstAttribute="trailing" secondItem="VwG-o9-SW1" secondAttribute="trailing" type="default" id="nfs-1Q-ymL"/>
                             <constraint firstAttribute="trailing" secondItem="2WZ-aU-Dpr" secondAttribute="trailing" constant="100" id="xRj-dO-mwI"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -1128,7 +1116,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <tableViewController id="mW1-0r-7Ty" customClass="REMLoginCustomerSelectViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="WSS-1W-Krf">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="1644"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -1137,7 +1125,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <rect key="frame" x="0.0" y="22" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                    <rect key="frame" x="-1" y="0.0" width="770" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LWk-P0-Mu8">
@@ -1397,7 +1385,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="dashboard.png" width="48" height="48"/>
         <image name="detail-arrow.png" width="32" height="32"/>
         <image name="login_error.png" width="32" height="32"/>
-        <image name="preface-background.jpg" width="1350" height="849"/>
+        <image name="schneider-logo.png" width="138" height="155"/>
+        <image name="splashscreen.png" width="2048" height="1536"/>
         <image name="user.png" width="32" height="32"/>
     </resources>
     <classes>
@@ -1465,6 +1454,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="loginButtonPressed:"/>
                 <relationship kind="action" name="textFieldChanged:"/>
+                <relationship kind="outlet" name="loginButton" candidateClass="REMIndicatorButton"/>
                 <relationship kind="outlet" name="passwordErrorLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="userNameErrorLabel" candidateClass="UILabel"/>
@@ -1496,11 +1486,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="dashboardContainer" candidateClass="UIView"/>
             </relationships>
         </class>
-        <class className="REMNumberLabel" superclassName="UILabel">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMNumberLabel.h"/>
-        </class>
         <class className="REMSplashScreenController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/REMSplashScreenController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="logoView" candidateClass="UIView"/>
+            </relationships>
         </class>
         <class className="REMWidgetCell" superclassName="UICollectionViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/REMWidgetCell.h"/>

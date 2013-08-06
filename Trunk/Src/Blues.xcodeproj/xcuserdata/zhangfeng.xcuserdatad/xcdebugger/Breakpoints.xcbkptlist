@@ -788,12 +788,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Splash/REMSplashScreenController.m"
-         timestampString = "397449429.03226"
+         timestampString = "397464189.867021"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "65"
-         endingLineNumber = "65"
-         landmarkName = "-gotoBuildingView"
+         startingLineNumber = "71"
+         endingLineNumber = "71"
+         landmarkName = "-runTimer:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -801,12 +801,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Splash/REMSplashScreenController.m"
-         timestampString = "397449429.819408"
+         timestampString = "397464189.867021"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
-         landmarkName = "-gotoBuildingView"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
+         landmarkName = "-runTimer:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -814,12 +814,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Splash/REMSplashScreenController.m"
-         timestampString = "397449682.238554"
+         timestampString = "397463814.813631"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "75"
-         endingLineNumber = "75"
-         landmarkName = "-gotoBuildingView"
+         startingLineNumber = "97"
+         endingLineNumber = "97"
+         landmarkName = "-showBuildingView"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -832,6 +832,71 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "19"
          endingLineNumber = "19"
+         landmarkName = "-assembleCustomizedObjectByDictionary:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BluesPad/Controller/Splash/REMSplashScreenController.m"
+         timestampString = "397465666.390771"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "105"
+         endingLineNumber = "105"
+         landmarkName = "-showBuildingView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BluesPad/Controller/Splash/REMSplashScreenController.m"
+         timestampString = "397465667.908214"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "96"
+         endingLineNumber = "96"
+         landmarkName = "-showBuildingView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BluesPad/Controller/Splash/REMSplashScreenController.m"
+         timestampString = "397465747.790426"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "118"
+         endingLineNumber = "118"
+         landmarkName = "-prepareForSegue:sender:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BluesPad/Model/Building/REMBuildingOverallModel.m"
+         timestampString = "397465826.035359"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "15"
+         endingLineNumber = "15"
+         landmarkName = "-assembleCustomizedObjectByDictionary:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BluesPad/Model/Building/REMBuildingOverallModel.m"
+         timestampString = "397465826.509373"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "16"
+         endingLineNumber = "16"
          landmarkName = "-assembleCustomizedObjectByDictionary:"
          landmarkType = "5">
       </FileBreakpoint>

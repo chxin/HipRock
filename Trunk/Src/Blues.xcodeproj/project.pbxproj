@@ -153,6 +153,8 @@
 		7AB34E80177D33AB003E235E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4B177D2975003E235E /* SystemConfiguration.framework */; };
 		7ABC2D88177BE5DD0000C060 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1786E2177B43050015635C /* libCorePlot-CocoaTouch.a */; };
 		7AC500911798274D00874467 /* detail-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC500901798274D00874467 /* detail-arrow.png */; };
+		7ADAD70A17B0A1BF003D7F61 /* schneider-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADAD70817B0A1BF003D7F61 /* schneider-logo.png */; };
+		7ADAD70B17B0A1BF003D7F61 /* splashscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADAD70917B0A1BF003D7F61 /* splashscreen.png */; };
 		7ADF91D417A0CB0C008CF056 /* preface-s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADF91D117A0CB0C008CF056 /* preface-s1.png */; };
 		7ADF91D517A0CB0C008CF056 /* preface-s2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADF91D217A0CB0C008CF056 /* preface-s2.png */; };
 		7ADF91D617A0CB0C008CF056 /* preface-s3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADF91D317A0CB0C008CF056 /* preface-s3.png */; };
@@ -746,6 +748,8 @@
 		7ABC2E23177BE6210000C060 /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDecimalNumberExtensions.h; sourceTree = "<group>"; };
 		7ABC2E24177BE6210000C060 /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
 		7AC500901798274D00874467 /* detail-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail-arrow.png"; sourceTree = "<group>"; };
+		7ADAD70817B0A1BF003D7F61 /* schneider-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "schneider-logo.png"; sourceTree = "<group>"; };
+		7ADAD70917B0A1BF003D7F61 /* splashscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splashscreen.png; sourceTree = "<group>"; };
 		7ADF91D117A0CB0C008CF056 /* preface-s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preface-s1.png"; sourceTree = "<group>"; };
 		7ADF91D217A0CB0C008CF056 /* preface-s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preface-s2.png"; sourceTree = "<group>"; };
 		7ADF91D317A0CB0C008CF056 /* preface-s3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preface-s3.png"; sourceTree = "<group>"; };
@@ -1279,6 +1283,7 @@
 		7A5E2D86177B41B0000F77F9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7ADAD70717B0A1BF003D7F61 /* login */,
 				B4426FF517AF2AC700762C68 /* building */,
 				7A37AA1E17AB4E0A00316902 /* buttons */,
 				7A153CCE17AA60BC00413D3C /* preface-s0.png */,
@@ -1556,6 +1561,15 @@
 			);
 			name = CorePlotHeaders;
 			path = ../lib/CorePlotHeaders;
+			sourceTree = "<group>";
+		};
+		7ADAD70717B0A1BF003D7F61 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				7ADAD70817B0A1BF003D7F61 /* schneider-logo.png */,
+				7ADAD70917B0A1BF003D7F61 /* splashscreen.png */,
+			);
+			path = login;
 			sourceTree = "<group>";
 		};
 		B4426FF517AF2AC700762C68 /* building */ = {
