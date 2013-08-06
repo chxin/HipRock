@@ -1820,6 +1820,8 @@
 				B4426FFB17AF2BC300762C68 /* yinhesoho.jpg in Resources */,
 				B4426FFC17AF2BC300762C68 /* sanlitunsoho.jpg in Resources */,
 				B4426FFD17AF2BC300762C68 /* shangdusoho.jpg in Resources */,
+                7ADAD70A17B0A1BF003D7F61 /* schneider-logo.png in Resources */,
+				7ADAD70B17B0A1BF003D7F61 /* splashscreen.png in Resources */,
 				B4626BFE17B0BD2C00A7759B /* elec.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
