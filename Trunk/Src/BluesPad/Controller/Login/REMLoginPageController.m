@@ -120,11 +120,10 @@
             
             NSArray *customers = (NSArray *)([REMApplicationContext instance].currentUser.customers);
             
-            int i=0;
-            for (; i<customers.count; i++)
+            for (int i=0; i<customers.count; i++)
             {
                 REMCustomerModel *customer = customers[i];
-                if([customer.code isEqualToString:@"NancyCostCustomer2"])
+                if([customer.customerId longLongValue] == 344)
                 {
                     [[REMApplicationContext instance] setCurrentCustomer:customer];
                     break;
