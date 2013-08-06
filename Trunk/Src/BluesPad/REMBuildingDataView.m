@@ -11,14 +11,14 @@
 @interface REMBuildingDataView()
 
 @property (nonatomic,strong) NSArray *buttonArray;
-@property (nonatomic,weak)  REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,strong)  REMBuildingOverallModel *buildingInfo;
 
 @property (nonatomic,strong) NSArray *commodityViewArray;
 
 @end
 @implementation REMBuildingDataView
 
-static int buttonDimention=64;
+static int buttonDimention=32;
 - (id)initWithFrame:(CGRect)frame withBuildingInfo:(REMBuildingOverallModel *)buildingInfo
 {
     self = [super initWithFrame:frame];
@@ -27,6 +27,7 @@ static int buttonDimention=64;
         self.buildingInfo=buildingInfo;
         
         [self initCommodityButton];
+        [self initCommodityView];
     }
     
     return self;
@@ -35,9 +36,10 @@ static int buttonDimention=64;
 - (void)initCommodityButton
 {
     NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:self.buildingInfo.commodityUsage.count];
-    int margin=5,i=0;
+    int i=0;
     for (REMCommodityUsageModel *model in self.buildingInfo.commodityUsage) {
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(15+i*(margin+buttonDimention), 0, buttonDimention, buttonDimention)];
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityItemMargin+kBuildingCommodityButtonDimension), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
+        [btn setImage:[UIImage imageNamed:@"elec.jpg"] forState:UIControlStateNormal];
         [self addSubview:btn];
         [array addObject:btn];
         ++i;
@@ -49,10 +51,11 @@ static int buttonDimention=64;
 - (void)initCommodityView
 {
     NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:self.buildingInfo.commodityUsage.count];
-    int margin=5,i=0;
+    int i=0;
     for (REMCommodityUsageModel *model in self.buildingInfo.commodityUsage) {
-        REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 1000) withCommodityInfo:model];
+        REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityItemGroupMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, 800) withCommodityInfo:model];
         ++i;
+        [self addSubview:view];
         [array addObject:view];
     }
     

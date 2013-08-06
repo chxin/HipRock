@@ -203,6 +203,7 @@
 		B445AEE1177C04AF002D2A59 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE99177BEEB7002D2A59 /* DDTTYLogger.m */; };
 		B445AEE2177C04E4002D2A59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AED0177C0052002D2A59 /* CoreGraphics.framework */; };
 		B4626BFC17B0A0D900A7759B /* REMBuildingCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */; };
+		B4626BFE17B0BD2C00A7759B /* elec.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4626BFD17B0BD2C00A7759B /* elec.jpg */; };
 		B48BE1FC178AB0DC00A157CD /* REMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48BE1FA178AB0DB00A157CD /* REMMainViewController.m */; };
 		B48CC9901783297900AAD5D4 /* REMWidgetStepToolbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC98F1783297900AAD5D4 /* REMWidgetStepToolbarView.m */; };
 		B48CC99317832EAE00AAD5D4 /* REMWidgetMaxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC99217832EAE00AAD5D4 /* REMWidgetMaxView.m */; };
@@ -245,6 +246,7 @@
 		B48ED421178EAE7D0032CD72 /* REMMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDC1786C195008A1033 /* REMMaskManager.m */; };
 		B48ED422178EAE7D0032CD72 /* Reachability.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142417850B2100CC2922 /* Reachability.h */; };
 		B48ED423178EAE7D0032CD72 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142517850B2100CC2922 /* Reachability.m */; };
+		B4911F4317B0D961007AEF7D /* REMBuildingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */; };
 		B49732F217A7687600D0519A /* REMJSONObject.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4017A637FD0050779D /* REMJSONObject.h */; };
 		B49732F317A7687600D0519A /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
 		B49732F417A7687600D0519A /* REMUserModel.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3A17A637510050779D /* REMUserModel.h */; };
@@ -789,6 +791,7 @@
 		B445AED0177C0052002D2A59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		B4626BFA17B0A0D900A7759B /* REMBuildingCommodityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingCommodityView.h; path = View/Building/REMBuildingCommodityView.h; sourceTree = "<group>"; };
 		B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingCommodityView.m; path = View/Building/REMBuildingCommodityView.m; sourceTree = "<group>"; };
+		B4626BFD17B0BD2C00A7759B /* elec.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = elec.jpg; sourceTree = "<group>"; };
 		B48BE1F9178AB0DB00A157CD /* REMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMainViewController.h; path = Controller/REMMainViewController.h; sourceTree = "<group>"; };
 		B48BE1FA178AB0DB00A157CD /* REMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMainViewController.m; path = Controller/REMMainViewController.m; sourceTree = "<group>"; };
 		B48CC98E1783297900AAD5D4 /* REMWidgetStepToolbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetStepToolbarView.h; path = View/REMWidgetStepToolbarView.h; sourceTree = "<group>"; };
@@ -799,6 +802,8 @@
 		B48ED3E9178EA1740032CD72 /* REMTimeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeHelper.m; path = Common/Utility/REMTimeHelper.m; sourceTree = "<group>"; };
 		B48ED3EC178EA4A00032CD72 /* REMTimeHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMTimeHelperTests.h; path = ../Test/CommonTests/REMTimeHelperTests.h; sourceTree = "<group>"; };
 		B48ED3ED178EA4A00032CD72 /* REMTimeHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeHelperTests.m; path = ../Test/CommonTests/REMTimeHelperTests.m; sourceTree = "<group>"; };
+		B4911F4117B0D961007AEF7D /* REMBuildingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingConstants.h; path = View/Building/REMBuildingConstants.h; sourceTree = "<group>"; };
+		B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingConstants.m; path = View/Building/REMBuildingConstants.m; sourceTree = "<group>"; };
 		B49B6F43178122A500BC130A /* REMWidgetCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetCellView.h; path = View/REMWidgetCellView.h; sourceTree = "<group>"; };
 		B49B6F44178122A500BC130A /* REMWidgetCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetCellView.m; path = View/REMWidgetCellView.m; sourceTree = "<group>"; };
 		B49B6F4617812E6B00BC130A /* REMWidgetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetCell.h; path = View/REMWidgetCell.h; sourceTree = "<group>"; };
@@ -1556,6 +1561,7 @@
 		B4426FF517AF2AC700762C68 /* building */ = {
 			isa = PBXGroup;
 			children = (
+				B4626BFD17B0BD2C00A7759B /* elec.jpg */,
 				B4426FF617AF2BC300762C68 /* wangjingsoho.jpg */,
 				B4426FF717AF2BC300762C68 /* yinhesoho.jpg */,
 				B4426FF817AF2BC300762C68 /* sanlitunsoho.jpg */,
@@ -1577,6 +1583,8 @@
 				B442700B17AF30FF00762C68 /* REMImageView.m */,
 				B4626BFA17B0A0D900A7759B /* REMBuildingCommodityView.h */,
 				B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */,
+				B4911F4117B0D961007AEF7D /* REMBuildingConstants.h */,
+				B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */,
 			);
 			name = Building;
 			sourceTree = "<group>";
@@ -1798,6 +1806,7 @@
 				B4426FFB17AF2BC300762C68 /* yinhesoho.jpg in Resources */,
 				B4426FFC17AF2BC300762C68 /* sanlitunsoho.jpg in Resources */,
 				B4426FFD17AF2BC300762C68 /* shangdusoho.jpg in Resources */,
+				B4626BFE17B0BD2C00A7759B /* elec.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1955,6 +1964,7 @@
 				B442701117AF30FF00762C68 /* REMImageView.m in Sources */,
 				7A5277F617AF4209007DA735 /* REMIndicatorButton.m in Sources */,
 				B4626BFC17B0A0D900A7759B /* REMBuildingCommodityView.m in Sources */,
+				B4911F4317B0D961007AEF7D /* REMBuildingConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,10 @@
 #import "REMBuildingTitleLabelView.h"
 #import "REMNumberLabel.h"
 #import "REMCommodityUsageModel.h"
+#import "REMBuildingConstants.h"
+
+
+
 
 @interface REMBuildingCommodityView : UIView
 

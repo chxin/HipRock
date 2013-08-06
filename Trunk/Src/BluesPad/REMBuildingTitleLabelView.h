@@ -9,9 +9,13 @@
 #import "REMBuildingTitleView.h"
 #import "REMEnergyUsageDataModel.h"
 #import "REMNumberLabel.h"
+#import "REMBuildingConstants.h"
 
 @interface REMBuildingTitleLabelView : REMBuildingTitleView
 
-- (id)initWithFrame:(CGRect)frame withData:(REMEnergyUsageDataModel *)data withTitle:(NSString *)title andTitleFontSize:(CGFloat)size;
+- (id)initWithFrame:(CGRect)frame
+           withData:(REMEnergyUsageDataModel *)data
+           withTitle:(NSString *)title andTitleFontSize:(CGFloat)size
+            withValueFontSize:(CGFloat)size withUomFontSize:(CGFloat) size;
 
 @end

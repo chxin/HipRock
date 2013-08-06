@@ -72,7 +72,8 @@
     buildingStore.maskContainer = nil;
     
     [REMDataAccessor access:buildingStore success:^(id data) {
-        NSLog(@"building loaded: %d",[data count]);
+        NSLog(@"building loaded: %d,%@",[data count],data);
+        
         self.buildingOveralls = [[NSMutableArray alloc] initWithCapacity:[data count]];
         for(NSDictionary *item in (NSArray *)data){
             [self.buildingOveralls addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
@@ -94,7 +95,7 @@
     else if([segue.identifier isEqualToString:@"splashToBuildingSegue"] == YES)
     {
         REMBuildingViewController *buildingViewController = segue.destinationViewController;
-        buildingViewController.buildingInfoArray = self.buildingOveralls;
+        buildingViewController.buildingOverallArray = self.buildingOveralls;
         buildingViewController.splashScreenController = self;
     }
 }

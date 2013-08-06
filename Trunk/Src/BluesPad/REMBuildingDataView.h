@@ -10,7 +10,7 @@
 #import "REMBuildingCommodityView.h"
 #import "REMNumberLabel.h"
 #import "REMBuildingOverallModel.h"
-#import "REMCommodityUsageModel.h"
+#import "REMBuildingConstants.h"
 
 @interface REMBuildingDataView : UIView
 

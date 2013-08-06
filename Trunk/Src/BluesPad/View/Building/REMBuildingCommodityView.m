@@ -22,7 +22,7 @@
 
 @implementation REMBuildingCommodityView
 
-- (id)initWithFrame:(CGRect)frame withBuildingInfo:(REMCommodityUsageModel *)commodityInfo
+- (id)initWithFrame:(CGRect)frame withCommodityInfo:(REMCommodityUsageModel *)commodityInfo
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -39,9 +39,8 @@
 
 - (void)initTotalValue
 {
-    int margin=5,groupMargin=10;
     
-    self.totalLabel=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(margin, groupMargin+64, 500, 80) withData:self.commodityInfo.commodityUsage withTitle:@"上月总量" andTitleFontSize:80];
+    self.totalLabel=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, 0, 1000, kBuildingCommodityTotalHeight) withData:self.commodityInfo.commodityUsage withTitle:@"上月总量" andTitleFontSize:20  withValueFontSize:kBuildingCommodityTotalValueFontSize withUomFontSize:kBuildingCommodityTotalUomFontSize];
     
     [self addSubview:self.totalLabel];
     
@@ -49,9 +48,8 @@
 
 - (void)initDetailValue
 {
-    int margin=5,groupMargin=10;
     
-    REMBuildingTitleLabelView *carbon=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(margin, groupMargin+64, 120, 80) withData:self.commodityInfo.carbonEquivalent withTitle:@"二氧化碳当量" andTitleFontSize:40];
+    REMBuildingTitleLabelView *carbon=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityItemGroupMargin+kBuildingCommodityTotalHeight, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.carbonEquivalent withTitle:@"二氧化碳当量" andTitleFontSize:20  withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityTotalUomFontSize];
     
     [self addSubview:carbon];
     
@@ -60,7 +58,7 @@
 //    [self addSubview:rank];
     
     
-    REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(margin, groupMargin+64, 120, 80) withData:self.commodityInfo.targetValue withTitle:@"目标值" andTitleFontSize:40];
+    REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth, kBuildingCommodityItemGroupMargin+kBuildingCommodityTotalHeight, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.targetValue withTitle:@"目标值"  andTitleFontSize:20  withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityTotalUomFontSize];
     
     [self addSubview:target];
 }

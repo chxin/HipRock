@@ -20,7 +20,8 @@
 
 - (void)initTitle:(NSString *)text withSize:(CGFloat)size
 {
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, self.frame.size.width-5, 80)];
+    
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, kBuildingCommodityDetailWidth, size)];
     self.titleLabel.text=text;
     self.titleLabel.shadowColor=[UIColor blackColor];
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);

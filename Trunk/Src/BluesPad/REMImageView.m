@@ -24,7 +24,7 @@
 @property (nonatomic,strong) UIView *glassView;
 
 
-@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,strong) REMBuildingOverallModel *buildingInfo;
 @end
 
 @implementation REMImageView
@@ -132,10 +132,10 @@
 {
     
    
-    REMBuildingDataView *view = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(0, 500, self.frame.size.width, 1000)];
+    REMBuildingDataView *view = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(kBuildingCommodityLeftMargin, kBuildingCommodityViewTop, self.frame.size.width, 1000) withBuildingInfo:self.buildingInfo];
     
     [self addSubview:view];
-    
+    self.dataView=view;
     
 
 }
@@ -186,7 +186,7 @@
     
     
     self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 80)];
-    self.titleLabel.text=@"银河SOHO";
+    self.titleLabel.text=self.buildingInfo.building.name;
     self.titleLabel.shadowColor=[UIColor blackColor];
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);
     
@@ -268,7 +268,7 @@
 - (void)scrollDown
 {
     if(self.dataViewUp==YES){
-        [self scrollTo:500];
+        [self scrollTo:kBuildingCommodityViewTop];
         self.dataViewUp=NO;
         
         [self resetImage];
@@ -280,6 +280,8 @@
 - (void)scrollTo:(CGFloat)y
 {
  
+    NSLog(@"dataview:%@",NSStringFromCGRect(self.dataView.frame));
+    
         [UIView animateWithDuration:0.2 delay:0
                             options: UIViewAnimationOptionCurveEaseOut animations:^(void) {
                                 [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
@@ -304,9 +306,9 @@
 {
     CGFloat end=self.dataView.frame.origin.y+y;
     //NSLog(@"end:%f",end);
-    if(end>500)
+    if(end>kBuildingCommodityViewTop)
     {
-        end=550;
+        end=kBuildingCommodityViewTop+50;
     }
     
     if(end<100)
