@@ -6,11 +6,11 @@
 //
 //
 
-#import "BuildingOverallModel.h"
+#import "REMBuildingOverallModel.h"
 #import "REMBuildingModel.h"
 #import "REMCommodityUsageModel.h"
 
-@implementation BuildingOverallModel
+@implementation REMBuildingOverallModel
 
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
