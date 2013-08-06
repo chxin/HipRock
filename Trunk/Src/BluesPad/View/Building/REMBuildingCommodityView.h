@@ -12,7 +12,7 @@
 #import "REMNumberLabel.h"
 #import "REMCommodityUsageModel.h"
 #import "REMBuildingConstants.h"
-
+#import "REMBuildingRankingView.h"
 
 
 

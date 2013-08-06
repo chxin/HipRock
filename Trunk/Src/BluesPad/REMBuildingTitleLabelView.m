@@ -49,8 +49,8 @@
     
     CGSize expectedLabelSize = [self.textLabel.text sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:valueSize]];
     
-    NSLog(@"valuesize:%f",valueSize);
-    self.uomLabel = [[UILabel alloc]initWithFrame:CGRectMake(expectedLabelSize.width, titleSize+expectedLabelSize.height-valueSize, 100, valueSize)];
+    //NSLog(@"valuesize:%f",valueSize);
+    self.uomLabel = [[UILabel alloc]initWithFrame:CGRectMake(expectedLabelSize.width, titleSize+expectedLabelSize.height-valueSize, 200, valueSize)];
     self.uomLabel.font=[UIFont fontWithName:@(kBuildingFont) size:uomSize];
     self.uomLabel.backgroundColor=[UIColor clearColor];
     //self.uomLabel.contentHorizontalAlignment = UIControlContentVerticalAlignmentBottom;

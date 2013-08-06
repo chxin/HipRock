@@ -17,14 +17,15 @@
 #define kBuildingCommodityItemGroupMargin 10
 #define kBuildingCommodityItemMargin 5
 #define kBuildingCommodityTotalValueFontSize 160
-#define kBuildingCommodityTotalUomFontSize 80
+#define kBuildingCommodityTotalUomFontSize 40
 #define kBuildingCommodityViewTop 530
 #define kBuildingCommodityDetailValueFontSize 80
-#define kBuildingCommodityDetailWidth 250
+#define kBuildingCommodityDetailUomFontSize 20
+#define kBuildingCommodityDetailWidth 300
 #define kBuildingCommodityDetailHeight 80
 #define kBuildingCommodityTotalHeight 160
 #define kBuildingCommodityTotalTitleHeight 20
-#define kBuildingFont ""
+#define kBuildingFont "HelveticaNeue-UltraLight"
 
 @interface REMBuildingConstants : NSObject
 

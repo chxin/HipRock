@@ -44,6 +44,8 @@
         
         [self initImageView:frame];
         
+        [self initBottomGradientLayer];
+        
         [self initBlurredImageView];
         
         [self initGlassView];
@@ -103,6 +105,11 @@
     
     
 
+}
+
+- (void)initBottomGradientLayer
+{
+    
 }
 
 - (void)initBlurredImageView

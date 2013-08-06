@@ -56,6 +56,10 @@
     if ([model.commodityId isEqualToNumber:@(1)] == YES) {
         return @"elec.jpg";
     }
+    else if([model.commodityId isEqualToNumber:@(2)] == YES)
+    {
+        return @"water.jpg";
+    }
     else if([model.commodityId isEqualToNumber:@(4)] == YES)
     {
         return @"water.jpg";
