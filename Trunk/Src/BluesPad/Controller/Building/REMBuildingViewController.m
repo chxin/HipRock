@@ -205,7 +205,6 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    /*
     
     REMImageView *imageView = [[REMImageView alloc]initWithFrame:
                                CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)
@@ -235,7 +234,6 @@
     }
     //NSLog(@"start center:%@",arr);
     self.originCenterXArray=arr;
-     */
 }
 
 

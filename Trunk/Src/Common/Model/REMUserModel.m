@@ -17,14 +17,14 @@ static NSString *kCurrentUserCacheKey = @"CurrentUser";
 
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
-    self.userId=(long long)dictionary[@"Id"];
+    self.userId=[dictionary[@"Id"] longLongValue];
     self.name=dictionary[@"Name"];
     self.comment=dictionary[@"Comment"];
     self.email=dictionary[@"Email"];
     self.password=dictionary[@"Password"];
     self.realname=dictionary[@"RealName"];
     self.telephone=dictionary[@"Telephone"];
-    self.title=(NSInteger)dictionary[@"Title"];
+    self.title=[dictionary[@"Title"] intValue];
     self.userTypeName=dictionary[@"UserTypeName"];
     self.version = dictionary[@"Version"];
     

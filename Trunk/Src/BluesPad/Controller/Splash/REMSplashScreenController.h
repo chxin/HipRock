@@ -10,7 +10,7 @@
 
 @interface REMSplashScreenController : UIViewController
 
-- (void)gotoMainView;
+- (void)gotoBuildingView;
 - (void)gotoLoginView;
 
 @end
