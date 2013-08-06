@@ -233,6 +233,7 @@ static int maxQueueLength = 5;
 {
     REMApplicationContext* context = [REMApplicationContext instance];
     NSString *original = [NSString stringWithFormat:@"%llu|%@",context.currentUser.userId,context.currentUser.name];
+    NSLog(@"%@",original);
     
     NSData *encryptedData = [REMEncryptHelper AES256EncryptData:[original dataUsingEncoding:NSUTF8StringEncoding] withKey:@"41758bd9d7294737"];
     

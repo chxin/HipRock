@@ -35,7 +35,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    ((REMColoredButton *)self.loginButton).buttonColor = REMColoredButtonBlue;
+    self.loginButton.buttonColor = REMColoredButtonBlue;
     self.loginButton.loadingText = @"正在登录...";
     
     [self.userNameTextField setDelegate:self];
@@ -134,7 +134,9 @@
             [[REMApplicationContext instance].currentUser save];
             [[REMApplicationContext instance].currentCustomer save];
             
-            [self.loginCarouselController.splashScreenController gotoMainView];
+            //load building overall info
+            
+            [self.loginCarouselController.splashScreenController gotoBuildingView];
         }
         else
         {

@@ -10,8 +10,11 @@
 #import "REMLoginCarouselController.h"
 #import "REMCommonHeaders.h"
 #import "REMBuildingViewController.h"
+#import "REMBuildingOverallModel.h"
 
 @interface REMSplashScreenController ()
+
+@property (nonatomic,strong) NSMutableArray *buildingOveralls;
 
 @end
 
@@ -46,7 +49,7 @@
         [[REMApplicationContext instance] setCurrentUser:storedUser];
         [[REMApplicationContext instance] setCurrentCustomer:storedCustomer];
         
-        [self gotoMainView];
+        [self gotoBuildingView];
     }
     else
     {
@@ -59,9 +62,26 @@
     [self performSegueWithIdentifier:@"splashToLoginSegue" sender:self];
 }
 
-- (void)gotoMainView
+- (void)gotoBuildingView
 {
-    [self performSegueWithIdentifier:@"splashToBuildingSegue" sender:self];
+    NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
+    REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSEnergyBuildingOverall parameter:parameter];
+    buildingStore.isStoreLocal = YES;
+    buildingStore.isAccessLocal = YES;
+    buildingStore.groupName = nil;
+    buildingStore.maskContainer = nil;
+    
+    [REMDataAccessor access:buildingStore success:^(id data) {
+        NSLog(@"building loaded: %d",[data count]);
+        self.buildingOveralls = [[NSMutableArray alloc] initWithCapacity:[data count]];
+        for(NSDictionary *item in (NSArray *)data){
+            [self.buildingOveralls addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
+        }
+        
+        [self performSegueWithIdentifier:@"splashToBuildingSegue" sender:self];
+    } error:^(NSError *error, id response) {
+        [REMAlertHelper alert:@"building数据加载错误"];
+    }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -74,6 +94,7 @@
     else if([segue.identifier isEqualToString:@"splashToBuildingSegue"] == YES)
     {
         REMBuildingViewController *buildingViewController = segue.destinationViewController;
+        buildingViewController.buildingInfoArray = self.buildingOveralls;
         buildingViewController.splashScreenController = self;
     }
 }

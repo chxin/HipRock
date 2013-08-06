@@ -71,6 +71,7 @@ static NSDictionary *serviceMap = nil;
           [REMDataStore numberFromInt:REMDSEnergyCarbonDistribute] : @"",
           [REMDataStore numberFromInt:REMDSEnergyCostTrend] : @"",
           [REMDataStore numberFromInt:REMDSEnergyCostDistribute] : @"",
+          [REMDataStore numberFromInt:REMDSEnergyBuildingOverall] : @"API/Energy.svc/GetBuildingOverallData",
           [REMDataStore numberFromInt:REMDSLogSend] : @"API/Log.svc/SendLog",
         };
     }
