@@ -50,7 +50,7 @@
         
         [self initDataListView];
         
-        [self initTitleView];
+        //[self initTitleView];
         
         
         
