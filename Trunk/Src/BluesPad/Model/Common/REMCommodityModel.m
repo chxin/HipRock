@@ -12,7 +12,7 @@
 
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
-    self.uomId = dictionary[@"Id"];
+    self.commodityId = dictionary[@"Id"];
     self.name = dictionary[@"Name"];
     self.code = dictionary[@"Code"];
     self.comment = dictionary[@"Comment"];

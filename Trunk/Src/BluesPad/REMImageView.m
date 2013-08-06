@@ -50,7 +50,7 @@
         
         [self initDataListView];
         
-        //[self initTitleView];
+        [self initTitleView];
         
         
         
@@ -59,6 +59,28 @@
     return self;
 }
 
+- (NSString *)retrieveBuildingImage:(NSString *)name
+{
+    if([name isEqualToString:@"B1"] == YES)
+    {
+        return @"shangdusoho";
+    }
+    else if([name isEqualToString:@"B2"] == YES)
+    {
+        return @"sanlitunsoho";
+    }
+    else if([name isEqualToString:@"B3"] == YES)
+    {
+        return @"wangjingsoho";
+    }
+    else if([name isEqualToString:@"B4"] == YES)
+    {
+        return @"yinhesoho";
+    }
+    else{
+        return @"yinhesoho";
+    }
+}
 
 - (void)initImageView:(CGRect)frame
 {
@@ -68,7 +90,7 @@
     
     
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"yinhesoho" ofType:@"jpg"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:[self retrieveBuildingImage:self.buildingInfo.building.code] ofType:@"jpg"];
     // NSURL *fileNameAndPath = [NSURL fileURLWithPath:filePath];
     NSData *image = [NSData dataWithContentsOfFile:filePath];
     self.origImageData=image;
@@ -123,7 +145,7 @@
     self.glassView = [[UIView alloc]initWithFrame:self.imageView.frame];
     self.glassView.alpha=0;
     self.glassView.contentMode=UIViewContentModeScaleToFill;
-    self.glassView.backgroundColor=[UIColor grayColor];
+    self.glassView.backgroundColor=[UIColor blackColor];
     
     [self addSubview:self.glassView];
 }
@@ -142,6 +164,7 @@
 
 - (void)initTitleView
 {
+    /*
     CGRect frame = CGRectMake(0, 0, self.frame.size.width, 80);
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -183,7 +206,7 @@
     self.titleBg.image=newImage;
     
     [self addSubview:self.titleBg];
-    
+    */
     
     self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 80)];
     self.titleLabel.text=self.buildingInfo.building.name;
@@ -236,7 +259,7 @@
     
     [UIView animateWithDuration:0.2 animations:^(void){
         self.blurredImageView.alpha=0.7;
-        self.glassView.alpha=0.5;
+        self.glassView.alpha=0.7;
       
     }];
     

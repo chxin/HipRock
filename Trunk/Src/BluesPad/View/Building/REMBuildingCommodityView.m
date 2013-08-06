@@ -53,9 +53,9 @@
     
     [self addSubview:carbon];
     
-//    REMBuildingTitleLabelView *rank=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(margin, groupMargin+64, 120, 80) withData:self.commodityInfo.rankingData withTitle:@"二氧化碳当量" andTitleFontSize:40];
-//    
-//    [self addSubview:rank];
+    REMBuildingTitleLabelView *ranking=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityItemGroupMargin+kBuildingCommodityTotalHeight, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.carbonEquivalent withTitle:@"集团排名" andTitleFontSize:20  withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityTotalUomFontSize];
+    
+    [self addSubview:carbon];
     
     
     REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth, kBuildingCommodityItemGroupMargin+kBuildingCommodityTotalHeight, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.targetValue withTitle:@"目标值"  andTitleFontSize:20  withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityTotalUomFontSize];

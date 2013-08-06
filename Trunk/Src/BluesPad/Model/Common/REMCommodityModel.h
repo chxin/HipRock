@@ -11,7 +11,7 @@
 
 @interface REMCommodityModel : REMJSONObject
 
-@property (nonatomic,strong) NSNumber *uomId;
+@property (nonatomic,strong) NSNumber *commodityId;
 @property (nonatomic,strong) NSString *name,*code,*comment;
 
 @end

@@ -14,17 +14,17 @@
 @property (nonatomic,strong)  REMBuildingOverallModel *buildingInfo;
 
 @property (nonatomic,strong) NSArray *commodityViewArray;
-
+@property (nonatomic) NSUInteger currentIndex;
 @end
 @implementation REMBuildingDataView
 
-static int buttonDimention=32;
 - (id)initWithFrame:(CGRect)frame withBuildingInfo:(REMBuildingOverallModel *)buildingInfo
 {
     self = [super initWithFrame:frame];
     if (self) {
         
         self.buildingInfo=buildingInfo;
+        self.currentIndex=0;
         
         [self initCommodityButton];
         [self initCommodityView];
@@ -39,8 +39,11 @@ static int buttonDimention=32;
     int i=0;
     for (REMCommodityUsageModel *model in self.buildingInfo.commodityUsage) {
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityItemMargin+kBuildingCommodityButtonDimension), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
-        [btn setImage:[UIImage imageNamed:@"elec.jpg"] forState:UIControlStateNormal];
+        btn.titleLabel.text=model.commodity.code;
+        
+        [btn setImage:[UIImage imageNamed:[self retrieveCommodityImageName:model.commodity]] forState:UIControlStateNormal];
         [self addSubview:btn];
+        [btn addTarget:self action:@selector(commodityChanged:) forControlEvents:UIControlEventTouchUpInside];
         [array addObject:btn];
         ++i;
     }
@@ -48,12 +51,36 @@ static int buttonDimention=32;
     self.buttonArray=array;
 }
 
+- (NSString *)retrieveCommodityImageName:(REMCommodityModel *)model
+{
+    if ([model.commodityId isEqualToNumber:@(1)] == YES) {
+        return @"elec.jpg";
+    }
+    else if([model.commodityId isEqualToNumber:@(4)] == YES)
+    {
+        return @"water.jpg";
+    }
+    else{
+        return @"elec.jpg";
+    }
+}
+
+- (void)commodityChanged:(UIButton *)button
+{
+    
+}
+
 - (void)initCommodityView
 {
     NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:self.buildingInfo.commodityUsage.count];
     int i=0;
-    for (REMCommodityUsageModel *model in self.buildingInfo.commodityUsage) {
+    for (;i<self.buildingInfo.commodityUsage.count;++i ) {
+        REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
         REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityItemGroupMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, 800) withCommodityInfo:model];
+        
+        if(i!=0){
+            view.alpha=0;
+        }
         ++i;
         [self addSubview:view];
         [array addObject:view];
@@ -62,44 +89,6 @@ static int buttonDimention=32;
     self.commodityViewArray=array;
 }
 
-
-//- (id)initWithFrame:(CGRect)frame
-//{
-//    self = [super initWithFrame:frame];
-//    if (self) {
-//        // Initialization code
-//        
-//        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-//        button.titleLabel.text=@"Elec";
-//        
-//        [self addSubview:button];
-//        
-//        
-//        
-//        NSArray *array = @[@"123,2312",@"12312,123",@"435,34534",@"655,464",@"42,678",@"234,3453"];
-//        int gap=85;
-//        int i=0;
-//        for (NSString *str in array) {
-//            REMNumberLabel *titleLabel = [[REMNumberLabel alloc]initWithFrame:CGRectMake(5,30+5+gap*i, frame.size.width, 80)];
-//            titleLabel.text=str;
-//            titleLabel.shadowColor=[UIColor blackColor];
-//            titleLabel.shadowOffset=CGSizeMake(1, 1);
-//            
-//            titleLabel.backgroundColor=[UIColor clearColor];
-//            titleLabel.font = [UIFont fontWithName:@"Avenir" size:80];
-//            //self.titleLabel.font=[UIFont boldSystemFontOfSize:20];
-//            titleLabel.textColor=[UIColor whiteColor];
-//            titleLabel.contentMode = UIViewContentModeTopLeft;
-//            [self addSubview:titleLabel];
-//            ++i;
-//        }
-//        
-//      
-//        
-//        
-//    }
-//    return self;
-//}
 
 
 

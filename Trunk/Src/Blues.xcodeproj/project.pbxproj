@@ -249,6 +249,8 @@
 		B48ED422178EAE7D0032CD72 /* Reachability.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142417850B2100CC2922 /* Reachability.h */; };
 		B48ED423178EAE7D0032CD72 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142517850B2100CC2922 /* Reachability.m */; };
 		B4911F4317B0D961007AEF7D /* REMBuildingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */; };
+		B4911F4517B0E9DE007AEF7D /* water.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4911F4417B0E9DE007AEF7D /* water.jpg */; };
+		B4911F4817B0EB8B007AEF7D /* REMBuildingRankingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */; };
 		B49732F217A7687600D0519A /* REMJSONObject.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4017A637FD0050779D /* REMJSONObject.h */; };
 		B49732F317A7687600D0519A /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
 		B49732F417A7687600D0519A /* REMUserModel.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3A17A637510050779D /* REMUserModel.h */; };
@@ -808,6 +810,9 @@
 		B48ED3ED178EA4A00032CD72 /* REMTimeHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeHelperTests.m; path = ../Test/CommonTests/REMTimeHelperTests.m; sourceTree = "<group>"; };
 		B4911F4117B0D961007AEF7D /* REMBuildingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingConstants.h; path = View/Building/REMBuildingConstants.h; sourceTree = "<group>"; };
 		B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingConstants.m; path = View/Building/REMBuildingConstants.m; sourceTree = "<group>"; };
+		B4911F4417B0E9DE007AEF7D /* water.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = water.jpg; sourceTree = "<group>"; };
+		B4911F4617B0EB8B007AEF7D /* REMBuildingRankingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingRankingView.h; path = View/Building/REMBuildingRankingView.h; sourceTree = "<group>"; };
+		B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingRankingView.m; path = View/Building/REMBuildingRankingView.m; sourceTree = "<group>"; };
 		B49B6F43178122A500BC130A /* REMWidgetCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetCellView.h; path = View/REMWidgetCellView.h; sourceTree = "<group>"; };
 		B49B6F44178122A500BC130A /* REMWidgetCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetCellView.m; path = View/REMWidgetCellView.m; sourceTree = "<group>"; };
 		B49B6F4617812E6B00BC130A /* REMWidgetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetCell.h; path = View/REMWidgetCell.h; sourceTree = "<group>"; };
@@ -1575,6 +1580,7 @@
 		B4426FF517AF2AC700762C68 /* building */ = {
 			isa = PBXGroup;
 			children = (
+				B4911F4417B0E9DE007AEF7D /* water.jpg */,
 				B4626BFD17B0BD2C00A7759B /* elec.jpg */,
 				B4426FF617AF2BC300762C68 /* wangjingsoho.jpg */,
 				B4426FF717AF2BC300762C68 /* yinhesoho.jpg */,
@@ -1599,6 +1605,8 @@
 				B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */,
 				B4911F4117B0D961007AEF7D /* REMBuildingConstants.h */,
 				B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */,
+				B4911F4617B0EB8B007AEF7D /* REMBuildingRankingView.h */,
+				B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */,
 			);
 			name = Building;
 			sourceTree = "<group>";
@@ -1820,9 +1828,10 @@
 				B4426FFB17AF2BC300762C68 /* yinhesoho.jpg in Resources */,
 				B4426FFC17AF2BC300762C68 /* sanlitunsoho.jpg in Resources */,
 				B4426FFD17AF2BC300762C68 /* shangdusoho.jpg in Resources */,
-                7ADAD70A17B0A1BF003D7F61 /* schneider-logo.png in Resources */,
+				7ADAD70A17B0A1BF003D7F61 /* schneider-logo.png in Resources */,
 				7ADAD70B17B0A1BF003D7F61 /* splashscreen.png in Resources */,
 				B4626BFE17B0BD2C00A7759B /* elec.jpg in Resources */,
+				B4911F4517B0E9DE007AEF7D /* water.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1981,6 +1990,7 @@
 				7A5277F617AF4209007DA735 /* REMIndicatorButton.m in Sources */,
 				B4626BFC17B0A0D900A7759B /* REMBuildingCommodityView.m in Sources */,
 				B4911F4317B0D961007AEF7D /* REMBuildingConstants.m in Sources */,
+				B4911F4817B0EB8B007AEF7D /* REMBuildingRankingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

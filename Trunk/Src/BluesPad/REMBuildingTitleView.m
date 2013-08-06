@@ -27,7 +27,7 @@
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);
     
     self.titleLabel.backgroundColor=[UIColor clearColor];
-    self.titleLabel.font = [UIFont fontWithName:@"Avenir" size:size];
+    self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:size];
     //self.titleLabel.font=[UIFont boldSystemFontOfSize:20];
     self.titleLabel.textColor=[UIColor whiteColor];
     self.titleLabel.contentMode = UIViewContentModeTopLeft;
