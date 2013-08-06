@@ -51,7 +51,7 @@
 		7A153CB617AA497C00413D3C /* REMWidgetTimePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C9D17AA497C00413D3C /* REMWidgetTimePickerViewController.m */; };
 		7A153CBB17AA49EA00413D3C /* REMTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CBA17AA49EA00413D3C /* REMTimeRange.m */; };
 		7A153CBE17AA49FE00413D3C /* REMUomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CBD17AA49FE00413D3C /* REMUomModel.m */; };
-		7A153CC117AA4A5100413D3C /* BuildingOverallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CC017AA4A5100413D3C /* BuildingOverallModel.m */; };
+		7A153CC117AA4A5100413D3C /* REMBuildingOverallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CC017AA4A5100413D3C /* REMBuildingOverallModel.m */; };
 		7A153CC417AA4B0D00413D3C /* REMCommodityUsageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CC317AA4B0D00413D3C /* REMCommodityUsageModel.m */; };
 		7A153CC717AA4B3400413D3C /* REMCommodityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CC617AA4B3400413D3C /* REMCommodityModel.m */; };
 		7A153CCA17AA4B5C00413D3C /* REMEnergyUsageDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CC917AA4B5C00413D3C /* REMEnergyUsageDataModel.m */; };
@@ -511,8 +511,8 @@
 		7A153CBA17AA49EA00413D3C /* REMTimeRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTimeRange.m; sourceTree = "<group>"; };
 		7A153CBC17AA49FE00413D3C /* REMUomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMUomModel.h; sourceTree = "<group>"; };
 		7A153CBD17AA49FE00413D3C /* REMUomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMUomModel.m; sourceTree = "<group>"; };
-		7A153CBF17AA4A5100413D3C /* BuildingOverallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingOverallModel.h; sourceTree = "<group>"; };
-		7A153CC017AA4A5100413D3C /* BuildingOverallModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingOverallModel.m; sourceTree = "<group>"; };
+		7A153CBF17AA4A5100413D3C /* REMBuildingOverallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingOverallModel.h; sourceTree = "<group>"; };
+		7A153CC017AA4A5100413D3C /* REMBuildingOverallModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingOverallModel.m; sourceTree = "<group>"; };
 		7A153CC217AA4B0D00413D3C /* REMCommodityUsageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMCommodityUsageModel.h; sourceTree = "<group>"; };
 		7A153CC317AA4B0D00413D3C /* REMCommodityUsageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMCommodityUsageModel.m; sourceTree = "<group>"; };
 		7A153CC517AA4B3400413D3C /* REMCommodityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMCommodityModel.h; sourceTree = "<group>"; };
@@ -868,8 +868,8 @@
 			children = (
 				7A153C4417AA489600413D3C /* REMBuildingModel.h */,
 				7A153C4517AA489600413D3C /* REMBuildingModel.m */,
-				7A153CBF17AA4A5100413D3C /* BuildingOverallModel.h */,
-				7A153CC017AA4A5100413D3C /* BuildingOverallModel.m */,
+				7A153CBF17AA4A5100413D3C /* REMBuildingOverallModel.h */,
+				7A153CC017AA4A5100413D3C /* REMBuildingOverallModel.m */,
 				7A153CC217AA4B0D00413D3C /* REMCommodityUsageModel.h */,
 				7A153CC317AA4B0D00413D3C /* REMCommodityUsageModel.m */,
 				7A153CC817AA4B5C00413D3C /* REMEnergyUsageDataModel.h */,
@@ -1945,7 +1945,7 @@
 				7A153CB617AA497C00413D3C /* REMWidgetTimePickerViewController.m in Sources */,
 				7A153CBB17AA49EA00413D3C /* REMTimeRange.m in Sources */,
 				7A153CBE17AA49FE00413D3C /* REMUomModel.m in Sources */,
-				7A153CC117AA4A5100413D3C /* BuildingOverallModel.m in Sources */,
+				7A153CC117AA4A5100413D3C /* REMBuildingOverallModel.m in Sources */,
 				7A153CC417AA4B0D00413D3C /* REMCommodityUsageModel.m in Sources */,
 				7A153CC717AA4B3400413D3C /* REMCommodityModel.m in Sources */,
 				7A153CCA17AA4B5C00413D3C /* REMEnergyUsageDataModel.m in Sources */,
