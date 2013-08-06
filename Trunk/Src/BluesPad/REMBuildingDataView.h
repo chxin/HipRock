@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "REMBuildingTitleView.h"
+#import "REMBuildingCommodityView.h"
 #import "REMNumberLabel.h"
+#import "REMBuildingOverallModel.h"
+#import "REMCommodityUsageModel.h"
 
 @interface REMBuildingDataView : UIView
+
+- (id)initWithFrame:(CGRect)frame withBuildingInfo:(REMBuildingOverallModel *)buildingInfo;
 
 @end

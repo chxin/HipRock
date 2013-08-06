@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "REMSplashScreenController.h"
 #import "REMImageView.h"
+#import "REMBuildingOverallModel.h"
 
 @interface REMBuildingViewController : UIViewController
 

@@ -22,6 +22,9 @@
 @property (nonatomic) CGFloat lastBlurDeep;
 @property (nonatomic,strong) UIImageView *blurredImageView;
 @property (nonatomic,strong) UIView *glassView;
+
+
+@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 @end
 
 @implementation REMImageView
@@ -29,16 +32,18 @@
 #pragma mark -
 #pragma mark init
 
-- (id)initWithFrame:(CGRect)frame WithImageName:(NSString *)name
+- (id)initWithFrame:(CGRect)frame withBuildingOveralInfo:(REMBuildingOverallModel *)buildingInfo
 {
     self = [super initWithFrame:frame];
     if(self){
+        self.buildingInfo=buildingInfo;
+        
         self.contentMode=UIViewContentModeScaleToFill;
         self.dataViewUp=NO;
         self.cumulateY=0;
         
-        [self initImageView:frame withName:name];
-                
+        [self initImageView:frame];
+        
         [self initBlurredImageView];
         
         [self initGlassView];
@@ -54,11 +59,16 @@
     return self;
 }
 
-- (void)initImageView:(CGRect)frame withName:(NSString *)name
+
+- (void)initImageView:(CGRect)frame
 {
     self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
     self.imageView.contentMode=UIViewContentModeScaleToFill;
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:name ofType:@"jpg"];
+    
+    
+    
+    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"yinhesoho" ofType:@"jpg"];
     // NSURL *fileNameAndPath = [NSURL fileURLWithPath:filePath];
     NSData *image = [NSData dataWithContentsOfFile:filePath];
     self.origImageData=image;
@@ -120,9 +130,13 @@
 
 - (void)initDataListView
 {
-    self.dataView = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(0, 500, self.frame.size.width, 1000)];
     
-    [self addSubview:self.dataView];
+   
+    REMBuildingDataView *view = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(0, 500, self.frame.size.width, 1000)];
+    
+    [self addSubview:view];
+    
+    
 
 }
 

@@ -58,8 +58,17 @@
 
 - (void)initImageView
 {
-    int width=1024,height=748;
-    
+    int width=1024,height=748,margin=5;
+    int i=0;
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:self.buildingOverallArray.count];
+    for (REMBuildingOverallModel *model in self.buildingOverallArray) {
+        REMImageView *imageView = [[REMImageView alloc]initWithFrame:CGRectMake((width+margin)*i, 0, width, height) withBuildingOveralInfo:model];
+        [self.view addSubview:imageView];
+        [array addObject:imageView];
+        i++;
+    }
+    self.imageArray=array;
+    /*
     REMImageView *imageView = [[REMImageView alloc]initWithFrame:
                                CGRectMake(0, 0, width, height)
                                                    WithImageName:@"wangjingsoho"];
@@ -78,7 +87,7 @@
     
     self.imageArray=@[imageView,imageView1,imageView2];
     self.currentIndex=0;
-    
+    */
     NSMutableArray *arr = [[NSMutableArray alloc]initWithCapacity:self.imageArray.count];
     
     for (REMImageView *view in self.imageArray) {

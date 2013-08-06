@@ -11,12 +11,14 @@
 #import "REMViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import <CoreImage/CoreImage.h>
-#import "REMImageHelper.h"
+#import "REMBuildingOverallModel.h"
+#import "REMCommodityUsageModel.h"
 
 
 @interface REMImageView : UIView <UIGestureRecognizerDelegate>
 
-- (id) initWithFrame:(CGRect)frame WithImageName:(NSString *)name;
+
+- (id) initWithFrame:(CGRect)frame withBuildingOveralInfo:(REMBuildingOverallModel *)buildingInfo;
 
 - (void)scrollUp;
 

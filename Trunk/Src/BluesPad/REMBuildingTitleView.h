@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "REMBuildingTitleViewData.h"
+
+
+
 @interface REMBuildingTitleView : UIView
 
-@property (nonatomic) CGFloat titleFontSize;
+@property (nonatomic,strong) UILabel *titleLabel;
 
-- (id)initWithFrame:(CGRect)frame ByData:(REMBuildingTitleViewData *)data;
+- (void)initTitle:(NSString *)text withSize:(CGFloat)size;
 
 @end
