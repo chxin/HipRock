@@ -136,7 +136,7 @@
             
             //load building overall info
             
-            [self.loginCarouselController.splashScreenController gotoBuildingView];
+            [self.loginCarouselController.splashScreenController showBuildingView];
         }
         else
         {

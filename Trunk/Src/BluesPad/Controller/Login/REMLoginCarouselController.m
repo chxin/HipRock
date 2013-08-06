@@ -98,7 +98,7 @@ static NSInteger viewsDistance = 150;
 - (void)initializationCarousel
 {
     CGRect rect = CGRectMake(0, 0, subViewWidth+viewsDistance, subViewHeight);
-    [UIView animateWithDuration:1.5 animations:^(void){
+    [UIView animateWithDuration:2 animations:^(void){
         [self.scrollView scrollRectToVisible:rect animated:NO];
     }];
 }

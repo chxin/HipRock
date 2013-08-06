@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface REMSplashScreenController : UIViewController
+@property (weak, nonatomic) IBOutlet UIView *logoView;
 
-- (void)gotoBuildingView;
-- (void)gotoLoginView;
+- (void)showBuildingView;
+- (void)showLoginView;
 
 @end

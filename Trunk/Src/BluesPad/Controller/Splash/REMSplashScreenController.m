@@ -34,9 +34,23 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runTimer:) userInfo:nil repeats:NO];
+    //[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runTimer:) userInfo:nil repeats:NO];
     
     //decide where to go
+    
+    
+    self.logoView.alpha = 0;
+    
+    
+    [UIView animateWithDuration:1 animations:^{
+        self.logoView.alpha = 1;
+    } completion:^(BOOL finished){
+        [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.logoView.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self runTimer:nil];
+        }];
+    }];
 }
 
 - (void)runTimer:(id)timer
@@ -49,20 +63,36 @@
         [[REMApplicationContext instance] setCurrentUser:storedUser];
         [[REMApplicationContext instance] setCurrentCustomer:storedCustomer];
         
-        [self gotoBuildingView];
+        [self showBuildingView];
     }
     else
     {
-        [self gotoLoginView];
+        [self showLoginView];
     }
 }
 
-- (void)gotoLoginView
+- (void)showLoginView
 {
-    [self performSegueWithIdentifier:@"splashToLoginSegue" sender:self];
+    //[self performSegueWithIdentifier:@"splashToLoginSegue" sender:self];
+    
+    REMLoginCarouselController *carouselController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginCarousel"];
+    UIView *carouselView = carouselController.view;
+    
+    [self addChildViewController:carouselController];
+    [self.view addSubview:carouselView];
+    
+    carouselView.frame = CGRectMake(self.view.bounds.origin.x-1024, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height); ;
+    //carouselView.alpha = 0;
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        //carouselView.alpha = 1;
+        carouselView.frame = self.view.bounds;
+    }];
+    
+    
 }
 
-- (void)gotoBuildingView
+- (void)showBuildingView
 {
     NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
     REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSEnergyBuildingOverall parameter:parameter];
