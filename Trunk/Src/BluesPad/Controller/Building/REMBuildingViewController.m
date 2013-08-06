@@ -34,10 +34,14 @@
 {
     [super viewDidLoad];
 	
+    self.view.backgroundColor=[UIColor blackColor];
     
+    [self initImageView];
     
     self.currentIndex=0;
     self.cumulateX=0;
+    
+    
 
     UIPanGestureRecognizer *rec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
     [self.view addGestureRecognizer:rec];
@@ -51,6 +55,33 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)initImageView
+{
+    int width=1024,height=748,margin=5;
+    int i=0;
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:self.buildingOverallArray.count];
+    for (REMBuildingOverallModel *model in self.buildingOverallArray) {
+        REMImageView *imageView = [[REMImageView alloc]initWithFrame:CGRectMake((width+margin)*i, 0, width, height) withBuildingOveralInfo:model];
+        [self.view addSubview:imageView];
+        [array addObject:imageView];
+        i++;
+    }
+    self.imageArray=array;
+  
+    NSMutableArray *arr = [[NSMutableArray alloc]initWithCapacity:self.imageArray.count];
+    
+    for (REMImageView *view in self.imageArray) {
+        
+        NSNumber *num = [NSNumber numberWithFloat:view.center.x];
+        [arr addObject:num];
+    }
+    
+    self.originCenterXArray=arr;
+    
+}
+
+
 #pragma mark -
 #pragma mark buildingview
 
@@ -137,12 +168,11 @@
 - (void) scrollInnerView:(UIPanGestureRecognizer *)pan
 {
     
-    NSLog(@"scrollthis");
-    
+        
     CGPoint trans= [pan translationInView:self.view];
     CGPoint velocity=[pan velocityInView:self.view];
     
-    if (pan.state  == UIGestureRecognizerStateChanged) {
+    if (pan.state  == UIGestureRecognizerStateChanged && ABS(velocity.y) <200) {
         for (REMImageView *view in self.imageArray) {
             [view move:trans.y];
         }
@@ -196,50 +226,12 @@
     
 }
 
-- (void)log {
-    NSLog(@"Bounds %@", NSStringFromCGRect(self.view.bounds));
-    NSLog(@"Frame %@", NSStringFromCGRect(self.view.frame));
-}
-
-
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    
-    REMImageView *imageView = [[REMImageView alloc]initWithFrame:
-                               CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)
-                                                   WithImageName:@"wangjingsoho"];
-    //imageView.contentMode= UIViewContentModeScaleToFill;
-    [self.view addSubview:imageView];
-    
-    
-    REMImageView *imageView1 = [[REMImageView alloc]initWithFrame:
-                                CGRectMake(self.view.bounds.size.width+5, 0, self.view.bounds.size.width, self.view.bounds.size.height) WithImageName:@"yinhesoho"];
-    //imageView1.contentMode= UIViewContentModeScaleToFill;
-    [self.view addSubview:imageView1];
-    REMImageView *imageView2 = [[REMImageView alloc]initWithFrame:
-                                CGRectMake(self.view.bounds.size.width*2+5*2, 0, self.view.bounds.size.width, self.view.bounds.size.height) WithImageName:@"sanlitunsoho"];
-    //imageView2.contentMode= UIViewContentModeScaleToFill;
-    [self.view addSubview:imageView2];
-    
-    self.imageArray=@[imageView,imageView1,imageView2];
-    self.currentIndex=0;
-    
-    NSMutableArray *arr = [[NSMutableArray alloc]initWithCapacity:self.imageArray.count];
-    
-    for (REMImageView *view in self.imageArray) {
-        
-        NSNumber *num = [NSNumber numberWithFloat:view.center.x];
-        [arr addObject:num];
-    }
-    //NSLog(@"start center:%@",arr);
-    self.originCenterXArray=arr;
-}
 
 
 -(void)tapthis:(UITapGestureRecognizer *)tap
 {
-    
+    //NSLog(@"cumulatex:%f",self.cumulateX);
+    if(self.cumulateX!=0) return;
     for (REMImageView *view in self.imageArray) {
         [view tapthis];
     }

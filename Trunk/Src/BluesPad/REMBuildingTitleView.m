@@ -10,7 +10,6 @@
 
 @interface REMBuildingTitleView()
 
-@property (nonatomic,strong) UILabel *titleLabel;
 
 @end
 
@@ -18,27 +17,17 @@
 
 
 
-- (id)initWithFrame:(CGRect)frame ByData:(REMBuildingTitleViewData *)data
-{
-    self = [super initWithFrame:frame];
-    
-    if(self)
-    {
-        [self initTitle:data.title];
-    }
-    
-    return self;
-}
 
-- (void)initTitle:(NSString *)title
+- (void)initTitle:(NSString *)text withSize:(CGFloat)size
 {
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, self.frame.size.width-5, 80)];
-    self.titleLabel.text=title;
+    
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, kBuildingCommodityDetailWidth, size)];
+    self.titleLabel.text=text;
     self.titleLabel.shadowColor=[UIColor blackColor];
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);
     
     self.titleLabel.backgroundColor=[UIColor clearColor];
-    self.titleLabel.font = [UIFont fontWithName:@"Avenir" size:80];
+    self.titleLabel.font = [UIFont fontWithName:@"Avenir" size:size];
     //self.titleLabel.font=[UIFont boldSystemFontOfSize:20];
     self.titleLabel.textColor=[UIColor whiteColor];
     self.titleLabel.contentMode = UIViewContentModeTopLeft;
