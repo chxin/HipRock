@@ -39,7 +39,7 @@
     int i=0;
     for (;i<self.buildingInfo.commodityUsage.count;++i) {
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+ i*( kBuildingCommodityItemMargin+kBuildingCommodityButtonDimension), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+ i*( /*kBuildingCommodityItemMargin+*/kBuildingCommodityButtonDimension), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
         btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
         
         NSString *str = [self retrieveCommodityImageName:model.commodity];
