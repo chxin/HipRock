@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-
+#define kBuildingLeftMargin 10
 #define kBuildingCommodityButtonDimension 46
 #define kBuildingCommodityTitleFontSize 25
 #define kBuildingTitleFontSize 60
@@ -18,7 +18,7 @@
 #define kBuildingCommodityItemMargin 5
 #define kBuildingCommodityTotalValueFontSize 160
 #define kBuildingCommodityTotalUomFontSize 30
-#define kBuildingCommodityViewTop 530
+#define kBuildingCommodityViewTop 520
 #define kBuildingCommodityDetailValueFontSize 80
 #define kBuildingCommodityDetailUomFontSize 20
 #define kBuildingCommodityDetailWidth 300

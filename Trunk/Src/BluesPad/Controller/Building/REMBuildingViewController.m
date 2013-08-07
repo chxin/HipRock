@@ -170,6 +170,7 @@
 - (void) scrollInnerView:(UIPanGestureRecognizer *)pan
 {
     self.inScrollY=YES;
+    if(ABS(self.cumulateX)>0)return;
     
     CGPoint trans= [pan translationInView:self.view];
     CGPoint velocity=[pan velocityInView:self.view];

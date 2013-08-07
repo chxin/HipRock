@@ -167,7 +167,7 @@
     dispatch_queue_t queue =  dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
     dispatch_async(queue, ^ {
-        CGFloat blur=0.9;
+        CGFloat blur=0.5;
         UIImage *image= self.imageView.image;
         
         if ((blur < 0.0f) || (blur > 1.0f)) {
@@ -231,7 +231,7 @@
         CGImageRelease(imageRef);
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            self.blurredImageView.alpha = 0.0;
+            //self.blurredImageView.alpha = 0.0;
             self.blurredImageView.image=returnImage;
         });
     });
@@ -289,7 +289,7 @@
 {
     
    
-    REMBuildingDataView *view = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(kBuildingCommodityLeftMargin, kBuildingCommodityViewTop, self.frame.size.width, 1000) withBuildingInfo:self.buildingInfo];
+    REMBuildingDataView *view = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingCommodityViewTop, self.frame.size.width, 1000) withBuildingInfo:self.buildingInfo];
     
     [self addSubview:view];
     self.dataView=view;
@@ -343,7 +343,7 @@
     [self addSubview:self.titleBg];
     */
     
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, kBuildingTitleHeight)];
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, 0, self.frame.size.width, kBuildingTitleHeight)];
     self.titleLabel.text=self.buildingInfo.building.name;
     self.titleLabel.shadowColor=[UIColor blackColor];
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);
@@ -393,8 +393,8 @@
 {
     
     [UIView animateWithDuration:0.2 animations:^(void){
-        self.blurredImageView.alpha=0.7;
-        self.glassView.alpha=0.7;
+        self.blurredImageView.alpha=1;
+        self.glassView.alpha=0.6;
       
     }];
     
