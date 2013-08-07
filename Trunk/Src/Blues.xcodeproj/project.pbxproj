@@ -151,6 +151,8 @@
 		7AB34E7E177D3374003E235E /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E95177D238F00F0EB9F /* UIImageView+AFNetworking.m */; };
 		7AB34E7F177D33AB003E235E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4A177D2975003E235E /* MobileCoreServices.framework */; };
 		7AB34E80177D33AB003E235E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4B177D2975003E235E /* SystemConfiguration.framework */; };
+		7AB7BE1F17B2486D0085AF86 /* AppLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB7BE1E17B2486D0085AF86 /* AppLogo.png */; };
+		7AB7BE2117B248710085AF86 /* AppLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB7BE2017B248710085AF86 /* AppLogo@2x.png */; };
 		7ABC2D88177BE5DD0000C060 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1786E2177B43050015635C /* libCorePlot-CocoaTouch.a */; };
 		7AC500911798274D00874467 /* detail-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC500901798274D00874467 /* detail-arrow.png */; };
 		7ADAD70A17B0A1BF003D7F61 /* splash-schneider-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADAD70817B0A1BF003D7F61 /* splash-schneider-logo.png */; };
@@ -160,8 +162,6 @@
 		7ADF91D617A0CB0C008CF056 /* preface-s3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADF91D317A0CB0C008CF056 /* preface-s3.png */; };
 		7ADF91D817A0EFFE008CF056 /* preface-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7ADF91D717A0EFFE008CF056 /* preface-background.jpg */; };
 		7AE1121717B23EDA006E0D39 /* Logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AE1121617B23EDA006E0D39 /* Logout.png */; };
-		7AE1121917B240CE006E0D39 /* AppLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AE1121817B240CE006E0D39 /* AppLogo.png */; };
-		7AE1121B17B240D4006E0D39 /* AppLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AE1121A17B240D3006E0D39 /* AppLogo@2x.png */; };
 		7AE1121E17B240E4006E0D39 /* AppLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AE1121C17B240E3006E0D39 /* AppLogo.png */; };
 		7AE1121F17B240E4006E0D39 /* AppLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AE1121D17B240E4006E0D39 /* AppLogo@2x.png */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
@@ -682,6 +682,8 @@
 		7AB34E5F177D31F1003E235E /* REMLogTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLogTests.m; path = ../test/CommonTests/REMLogTests.m; sourceTree = "<group>"; };
 		7AB34E63177D3203003E235E /* REMCommunicationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMCommunicationTests.h; path = ../test/CommonTests/REMCommunicationTests.h; sourceTree = "<group>"; };
 		7AB34E64177D3203003E235E /* REMCommunicationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMCommunicationTests.m; path = ../test/CommonTests/REMCommunicationTests.m; sourceTree = "<group>"; };
+		7AB7BE1E17B2486D0085AF86 /* AppLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AppLogo.png; path = ../../../AppLogo.png; sourceTree = "<group>"; };
+		7AB7BE2017B248710085AF86 /* AppLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AppLogo@2x.png"; path = "../../../AppLogo@2x.png"; sourceTree = "<group>"; };
 		7ABC2DD8177BE6210000C060 /* CorePlot-CocoaTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CorePlot-CocoaTouch.h"; sourceTree = "<group>"; };
 		7ABC2DD9177BE6210000C060 /* CPTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimation.h; sourceTree = "<group>"; };
 		7ABC2DDA177BE6210000C060 /* CPTAnimationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimationOperation.h; sourceTree = "<group>"; };
@@ -767,8 +769,6 @@
 		7ADF91D317A0CB0C008CF056 /* preface-s3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preface-s3.png"; sourceTree = "<group>"; };
 		7ADF91D717A0EFFE008CF056 /* preface-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "preface-background.jpg"; sourceTree = "<group>"; };
 		7AE1121617B23EDA006E0D39 /* Logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logout.png; sourceTree = "<group>"; };
-		7AE1121817B240CE006E0D39 /* AppLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppLogo.png; sourceTree = "<group>"; };
-		7AE1121A17B240D3006E0D39 /* AppLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppLogo@2x.png"; sourceTree = "<group>"; };
 		7AE1121C17B240E3006E0D39 /* AppLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppLogo.png; sourceTree = "<group>"; };
 		7AE1121D17B240E4006E0D39 /* AppLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppLogo@2x.png"; sourceTree = "<group>"; };
 		B4198EAC178410D300B50475 /* REMLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLogManager.h; path = Common/Log/REMLogManager.h; sourceTree = "<group>"; };
@@ -1312,8 +1312,8 @@
 				7ADAD70717B0A1BF003D7F61 /* login */,
 				B4426FF517AF2AC700762C68 /* building */,
 				7A37AA1E17AB4E0A00316902 /* buttons */,
-				7AE1121C17B240E3006E0D39 /* AppLogo.png */,
-				7AE1121D17B240E4006E0D39 /* AppLogo@2x.png */,
+				7AB7BE2017B248710085AF86 /* AppLogo@2x.png */,
+				7AB7BE1E17B2486D0085AF86 /* AppLogo.png */,
 				7A153CCE17AA60BC00413D3C /* preface-s0.png */,
 				7A03977C17A2775E0082F6EE /* dashboard.png */,
 				7ADF91D717A0EFFE008CF056 /* preface-background.jpg */,
@@ -1375,8 +1375,6 @@
 		7A9B1E11177B3A6000C282A8 = {
 			isa = PBXGroup;
 			children = (
-				7AE1121A17B240D3006E0D39 /* AppLogo@2x.png */,
-				7AE1121817B240CE006E0D39 /* AppLogo.png */,
 				7A5E2D45177B3CD3000F77F9 /* Common */,
 				7A9B1E25177B3A8B00C282A8 /* BluesPad */,
 				7A9B1E7C177B3B4100C282A8 /* BluesPhone */,
@@ -1868,10 +1866,10 @@
 				B4C1676A17B2226F002A8DD6 /* water-pressed.png in Resources */,
 				B4C1676B17B2226F002A8DD6 /* water.png in Resources */,
 				7AE1121717B23EDA006E0D39 /* Logout.png in Resources */,
-				7AE1121917B240CE006E0D39 /* AppLogo.png in Resources */,
-				7AE1121B17B240D4006E0D39 /* AppLogo@2x.png in Resources */,
 				7AE1121E17B240E4006E0D39 /* AppLogo.png in Resources */,
 				7AE1121F17B240E4006E0D39 /* AppLogo@2x.png in Resources */,
+				7AB7BE1F17B2486D0085AF86 /* AppLogo.png in Resources */,
+				7AB7BE2117B248710085AF86 /* AppLogo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
