@@ -32,4 +32,6 @@
 
 - (void)tapthis;
 
+- (void)moveCenter:(CGFloat)x;
+
 @end

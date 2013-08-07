@@ -110,7 +110,8 @@
         
         for (REMImageView *view in self.imageArray)
         {
-            [view setCenter:CGPointMake(view.center.x+trans.x, view.center.y)];
+//            [view setCenter:CGPointMake(view.center.x+trans.x, view.center.y)];
+            [view moveCenter:trans.x];
         }
         
         self.cumulateX+=trans.x;
