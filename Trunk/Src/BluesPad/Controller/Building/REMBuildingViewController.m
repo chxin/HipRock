@@ -258,7 +258,7 @@
     currentUser = nil;
     currentCustomer = nil;
     
-    [self.splashScreenController showLoginView];
-    //[self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    //[self.splashScreenController showLoginView];
 }
 @end

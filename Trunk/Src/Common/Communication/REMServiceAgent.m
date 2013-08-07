@@ -68,7 +68,7 @@ static int maxQueueLength = 5;
         
         if(isStore==YES)
         {
-            [REMStorage set:serviceUrl key:[NSString stringWithUTF8String:[postData bytes]] value:operation.responseString expired:REMSessionExpired];
+            [REMStorage set:serviceUrl key:[NSString stringWithUTF8String:[postData bytes]] value:operation.responseString expired:1000];
         }
         
         if(success)

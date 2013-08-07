@@ -20,7 +20,7 @@
                             </imageView>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LxY-lh-jAg">
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="schneider-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Igx-ZG-8eI"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="splash-schneider-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Igx-ZG-8eI"/>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Schneider Electric Blues Project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAT-aj-FDp">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="XL5-0h-8qK"/>
@@ -34,10 +34,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="ZAT-aj-FDp" firstAttribute="centerX" secondItem="LxY-lh-jAg" secondAttribute="centerX" type="default" id="aeS-Jf-HDd"/>
                                     <constraint firstItem="Igx-ZG-8eI" firstAttribute="centerY" secondItem="LxY-lh-jAg" secondAttribute="centerY" type="default" id="bmx-C7-mFR"/>
                                     <constraint firstItem="ZAT-aj-FDp" firstAttribute="centerX" secondItem="Igx-ZG-8eI" secondAttribute="centerX" type="default" id="eag-Rf-X2M"/>
                                     <constraint firstAttribute="bottom" secondItem="ZAT-aj-FDp" secondAttribute="bottom" constant="26" id="s1a-ZV-mgJ"/>
+                                    <constraint firstItem="Igx-ZG-8eI" firstAttribute="centerX" secondItem="LxY-lh-jAg" secondAttribute="centerX" type="default" id="vdL-9v-mcP"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1385,7 +1385,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="dashboard.png" width="48" height="48"/>
         <image name="detail-arrow.png" width="32" height="32"/>
         <image name="login_error.png" width="32" height="32"/>
-        <image name="schneider-logo.png" width="138" height="155"/>
+        <image name="splash-schneider-logo.png" width="138" height="155"/>
         <image name="splashscreen.png" width="2048" height="1536"/>
         <image name="user.png" width="32" height="32"/>
     </resources>
