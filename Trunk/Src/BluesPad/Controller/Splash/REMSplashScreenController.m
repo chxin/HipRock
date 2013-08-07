@@ -15,6 +15,7 @@
 @interface REMSplashScreenController ()
 
 @property (nonatomic,strong) NSMutableArray *buildingOveralls;
+@property (nonatomic,strong) REMLoginCarouselController *carouselController;
 
 @end
 
@@ -73,13 +74,16 @@
 
 - (void)showLoginView
 {
-    //[self performSegueWithIdentifier:@"splashToLoginSegue" sender:self];
+    if(self.carouselController == nil){
+        self.carouselController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginCarousel"];
+    }
     
-    REMLoginCarouselController *carouselController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginCarousel"];
-    UIView *carouselView = carouselController.view;
+    UIView *carouselView = self.carouselController.view;
     
-    [self addChildViewController:carouselController];
+    [self addChildViewController:self.carouselController];
     [self.view addSubview:carouselView];
+    
+    self.carouselController.splashScreenController = self;
     
     carouselView.frame = CGRectMake(self.view.bounds.origin.x-1024, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height); ;
     //carouselView.alpha = 0;
