@@ -113,6 +113,8 @@
     {
         REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
         
+        [self.loginButton stopIndicator];
+        
         if(validationResult.status == REMUserValidationSuccess)
         {
             REMUserModel *user = validationResult.user;
@@ -135,12 +137,11 @@
             
             //load building overall info
             
+            
             [self.loginCarouselController.splashScreenController showBuildingView];
         }
         else
         {
-            [self.loginButton stopIndicator];
-            
             if(validationResult.status == REMUserValidationWrongName)
             {
                 [self.userNameErrorLabel setHidden:NO];

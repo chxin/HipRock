@@ -60,8 +60,8 @@
 
 - (void) initButtons
 {
-    UIButton *logout=[[UIButton alloc]initWithFrame:CGRectMake(950, 20, 50, 40)];
-    [logout setImage:[UIImage imageNamed:@"dashboard.png"] forState:UIControlStateNormal];
+    UIButton *logout=[[UIButton alloc]initWithFrame:CGRectMake(950, 20, 48, 48)];
+    [logout setImage:[UIImage imageNamed:@"Logout.png"] forState:UIControlStateNormal];
     logout.titleLabel.text=@"注销";
     [logout addTarget:self action:@selector(logoutButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:logout];
@@ -270,6 +270,6 @@
     currentCustomer = nil;
     
     [self.navigationController popToRootViewControllerAnimated:YES];
-    //[self.splashScreenController showLoginView];
+    [self.splashScreenController showLoginView];
 }
 @end
