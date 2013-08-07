@@ -37,15 +37,22 @@
 {
     NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:self.buildingInfo.commodityUsage.count];
     int i=0;
-    for (REMCommodityUsageModel *model in self.buildingInfo.commodityUsage) {
+    for (;i<self.buildingInfo.commodityUsage.count;++i) {
+        REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityItemMargin+kBuildingCommodityButtonDimension), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
-        btn.titleLabel.text=model.commodity.code;
+        btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
         
-        [btn setImage:[UIImage imageNamed:[self retrieveCommodityImageName:model.commodity]] forState:UIControlStateNormal];
+        NSString *str = [self retrieveCommodityImageName:model.commodity];
+        
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.png",str]] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@-pressed.png",str]] forState:UIControlStateSelected];
+        if(i==0){
+            [btn setSelected:YES];
+        }
         [self addSubview:btn];
         [btn addTarget:self action:@selector(commodityChanged:) forControlEvents:UIControlEventTouchUpInside];
         [array addObject:btn];
-        ++i;
+       
     }
     
     self.buttonArray=array;
@@ -54,24 +61,53 @@
 - (NSString *)retrieveCommodityImageName:(REMCommodityModel *)model
 {
     if ([model.commodityId isEqualToNumber:@(1)] == YES) {
-        return @"elec.jpg";
+        return @"elec";
     }
     else if([model.commodityId isEqualToNumber:@(2)] == YES)
     {
-        return @"water.jpg";
+        return @"water";
     }
     else if([model.commodityId isEqualToNumber:@(4)] == YES)
     {
-        return @"water.jpg";
+        return @"water";
+    }
+    else if([model.commodityId isEqualToNumber:@(3)] == YES)
+    {
+        return @"oil";
+    }
+    else if([model.commodityId isEqualToNumber:@(5)] == YES)
+    {
+        return @"oil";
     }
     else{
-        return @"elec.jpg";
+        return @"elec";
     }
 }
 
 - (void)commodityChanged:(UIButton *)button
 {
-    
+    if(button.selected == YES) return;
+    int current ;
+    for (UIButton *btn in self.buttonArray) {
+        if(btn.selected==YES){
+            current=[btn.titleLabel.text intValue];
+        }
+        
+        if([btn isEqual:button] == NO){
+            [btn setSelected:NO];
+        }
+        else{
+            [btn setSelected:YES];
+        }
+    }
+    int to = [button.titleLabel.text intValue];
+    REMBuildingCommodityView *view=    self.commodityViewArray[to];
+    view.alpha=1;
+    [UIView transitionFromView:self.commodityViewArray[current] toView:self.commodityViewArray[to] duration:0.5 options:UIViewAnimationOptionTransitionFlipFromRight completion:^(BOOL finished) {
+        REMBuildingCommodityView *view1=    self.commodityViewArray[current];
+        view1.alpha=0;
+        
+    }];
 }
 
 - (void)initCommodityView
@@ -85,7 +121,6 @@
         if(i!=0){
             view.alpha=0;
         }
-        ++i;
         [self addSubview:view];
         [array addObject:view];
     }

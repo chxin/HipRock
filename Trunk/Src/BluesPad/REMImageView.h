@@ -13,7 +13,7 @@
 #import <CoreImage/CoreImage.h>
 #import "REMBuildingOverallModel.h"
 #import "REMCommodityUsageModel.h"
-
+#import <Accelerate/Accelerate.h>
 
 @interface REMImageView : UIView <UIGestureRecognizerDelegate>
 

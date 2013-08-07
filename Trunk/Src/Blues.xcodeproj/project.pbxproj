@@ -205,7 +205,6 @@
 		B445AEE1177C04AF002D2A59 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE99177BEEB7002D2A59 /* DDTTYLogger.m */; };
 		B445AEE2177C04E4002D2A59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AED0177C0052002D2A59 /* CoreGraphics.framework */; };
 		B4626BFC17B0A0D900A7759B /* REMBuildingCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */; };
-		B4626BFE17B0BD2C00A7759B /* elec.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4626BFD17B0BD2C00A7759B /* elec.jpg */; };
 		B48BE1FC178AB0DC00A157CD /* REMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48BE1FA178AB0DB00A157CD /* REMMainViewController.m */; };
 		B48CC9901783297900AAD5D4 /* REMWidgetStepToolbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC98F1783297900AAD5D4 /* REMWidgetStepToolbarView.m */; };
 		B48CC99317832EAE00AAD5D4 /* REMWidgetMaxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC99217832EAE00AAD5D4 /* REMWidgetMaxView.m */; };
@@ -249,7 +248,6 @@
 		B48ED422178EAE7D0032CD72 /* Reachability.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142417850B2100CC2922 /* Reachability.h */; };
 		B48ED423178EAE7D0032CD72 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142517850B2100CC2922 /* Reachability.m */; };
 		B4911F4317B0D961007AEF7D /* REMBuildingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */; };
-		B4911F4517B0E9DE007AEF7D /* water.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4911F4417B0E9DE007AEF7D /* water.jpg */; };
 		B4911F4817B0EB8B007AEF7D /* REMBuildingRankingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */; };
 		B49732F217A7687600D0519A /* REMJSONObject.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4017A637FD0050779D /* REMJSONObject.h */; };
 		B49732F317A7687600D0519A /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
@@ -405,6 +403,13 @@
 		B49B6F45178122A500BC130A /* REMWidgetCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F44178122A500BC130A /* REMWidgetCellView.m */; };
 		B49B6F4817812E6B00BC130A /* REMWidgetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F4717812E6B00BC130A /* REMWidgetCell.m */; };
 		B49B6F511781491800BC130A /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
+		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
+		B4C1676617B2226F002A8DD6 /* elec-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676017B2226F002A8DD6 /* elec-pressed.png */; };
+		B4C1676717B2226F002A8DD6 /* elec.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676117B2226F002A8DD6 /* elec.png */; };
+		B4C1676817B2226F002A8DD6 /* oil-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676217B2226F002A8DD6 /* oil-pressed.png */; };
+		B4C1676917B2226F002A8DD6 /* oil.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676317B2226F002A8DD6 /* oil.png */; };
+		B4C1676A17B2226F002A8DD6 /* water-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676417B2226F002A8DD6 /* water-pressed.png */; };
+		B4C1676B17B2226F002A8DD6 /* water.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676517B2226F002A8DD6 /* water.png */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 /* End PBXBuildFile section */
@@ -797,7 +802,6 @@
 		B445AED0177C0052002D2A59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		B4626BFA17B0A0D900A7759B /* REMBuildingCommodityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingCommodityView.h; path = View/Building/REMBuildingCommodityView.h; sourceTree = "<group>"; };
 		B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingCommodityView.m; path = View/Building/REMBuildingCommodityView.m; sourceTree = "<group>"; };
-		B4626BFD17B0BD2C00A7759B /* elec.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = elec.jpg; sourceTree = "<group>"; };
 		B48BE1F9178AB0DB00A157CD /* REMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMainViewController.h; path = Controller/REMMainViewController.h; sourceTree = "<group>"; };
 		B48BE1FA178AB0DB00A157CD /* REMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMainViewController.m; path = Controller/REMMainViewController.m; sourceTree = "<group>"; };
 		B48CC98E1783297900AAD5D4 /* REMWidgetStepToolbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetStepToolbarView.h; path = View/REMWidgetStepToolbarView.h; sourceTree = "<group>"; };
@@ -810,7 +814,6 @@
 		B48ED3ED178EA4A00032CD72 /* REMTimeHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeHelperTests.m; path = ../Test/CommonTests/REMTimeHelperTests.m; sourceTree = "<group>"; };
 		B4911F4117B0D961007AEF7D /* REMBuildingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingConstants.h; path = View/Building/REMBuildingConstants.h; sourceTree = "<group>"; };
 		B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingConstants.m; path = View/Building/REMBuildingConstants.m; sourceTree = "<group>"; };
-		B4911F4417B0E9DE007AEF7D /* water.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = water.jpg; sourceTree = "<group>"; };
 		B4911F4617B0EB8B007AEF7D /* REMBuildingRankingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingRankingView.h; path = View/Building/REMBuildingRankingView.h; sourceTree = "<group>"; };
 		B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingRankingView.m; path = View/Building/REMBuildingRankingView.m; sourceTree = "<group>"; };
 		B49B6F43178122A500BC130A /* REMWidgetCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetCellView.h; path = View/REMWidgetCellView.h; sourceTree = "<group>"; };
@@ -819,6 +822,13 @@
 		B49B6F4717812E6B00BC130A /* REMWidgetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetCell.m; path = View/REMWidgetCell.m; sourceTree = "<group>"; };
 		B49B6F4F1781491800BC130A /* REMColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMColor.h; path = Common/Utility/REMColor.h; sourceTree = "<group>"; };
 		B49B6F501781491800BC130A /* REMColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMColor.m; path = Common/Utility/REMColor.m; sourceTree = "<group>"; };
+		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		B4C1676017B2226F002A8DD6 /* elec-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "elec-pressed.png"; path = "building/elec-pressed.png"; sourceTree = "<group>"; };
+		B4C1676117B2226F002A8DD6 /* elec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = elec.png; path = building/elec.png; sourceTree = "<group>"; };
+		B4C1676217B2226F002A8DD6 /* oil-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "oil-pressed.png"; path = "building/oil-pressed.png"; sourceTree = "<group>"; };
+		B4C1676317B2226F002A8DD6 /* oil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = oil.png; path = building/oil.png; sourceTree = "<group>"; };
+		B4C1676417B2226F002A8DD6 /* water-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "water-pressed.png"; path = "building/water-pressed.png"; sourceTree = "<group>"; };
+		B4C1676517B2226F002A8DD6 /* water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = water.png; path = building/water.png; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
@@ -829,6 +839,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */,
 				B442701317AF316500762C68 /* OpenGLES.framework in Frameworks */,
 				EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */,
 				38ED7D1F1785140900219469 /* libsqlite3.dylib in Frameworks */,
@@ -1374,6 +1385,7 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */,
 				B442701217AF316500762C68 /* OpenGLES.framework */,
 				EF2D981817AB79AC00E968BF /* CoreImage.framework */,
 				B445AED0177C0052002D2A59 /* CoreGraphics.framework */,
@@ -1580,8 +1592,12 @@
 		B4426FF517AF2AC700762C68 /* building */ = {
 			isa = PBXGroup;
 			children = (
-				B4911F4417B0E9DE007AEF7D /* water.jpg */,
-				B4626BFD17B0BD2C00A7759B /* elec.jpg */,
+				B4C1676017B2226F002A8DD6 /* elec-pressed.png */,
+				B4C1676117B2226F002A8DD6 /* elec.png */,
+				B4C1676217B2226F002A8DD6 /* oil-pressed.png */,
+				B4C1676317B2226F002A8DD6 /* oil.png */,
+				B4C1676417B2226F002A8DD6 /* water-pressed.png */,
+				B4C1676517B2226F002A8DD6 /* water.png */,
 				B4426FF617AF2BC300762C68 /* wangjingsoho.jpg */,
 				B4426FF717AF2BC300762C68 /* yinhesoho.jpg */,
 				B4426FF817AF2BC300762C68 /* sanlitunsoho.jpg */,
@@ -1830,8 +1846,12 @@
 				B4426FFD17AF2BC300762C68 /* shangdusoho.jpg in Resources */,
 				7ADAD70A17B0A1BF003D7F61 /* schneider-logo.png in Resources */,
 				7ADAD70B17B0A1BF003D7F61 /* splashscreen.png in Resources */,
-				B4626BFE17B0BD2C00A7759B /* elec.jpg in Resources */,
-				B4911F4517B0E9DE007AEF7D /* water.jpg in Resources */,
+				B4C1676617B2226F002A8DD6 /* elec-pressed.png in Resources */,
+				B4C1676717B2226F002A8DD6 /* elec.png in Resources */,
+				B4C1676817B2226F002A8DD6 /* oil-pressed.png in Resources */,
+				B4C1676917B2226F002A8DD6 /* oil.png in Resources */,
+				B4C1676A17B2226F002A8DD6 /* water-pressed.png in Resources */,
+				B4C1676B17B2226F002A8DD6 /* water.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

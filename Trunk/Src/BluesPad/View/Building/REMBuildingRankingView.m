@@ -45,7 +45,7 @@
     CGSize expectedLabelSize = [self.rankingLabel.text sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:kBuildingCommodityDetailValueFontSize]];
     
     //NSLog(@"valuesize:%f",valueSize);
-    self.totalLabel = [[REMNumberLabel alloc]initWithFrame:CGRectMake(expectedLabelSize.width, titleSize+expectedLabelSize.height-kBuildingCommodityDetailValueFontSize, 200, kBuildingCommodityDetailValueFontSize)];
+    self.totalLabel = [[REMNumberLabel alloc]initWithFrame:CGRectMake(expectedLabelSize.width, titleSize+expectedLabelSize.height-kBuildingCommodityDetailValueFontSize+kBuildingCommodityItemMargin, 200, kBuildingCommodityDetailValueFontSize)];
     self.totalLabel.fontSize=@(kBuildingCommodityDetailUomFontSize);
     //self.totalLabel.font=[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:kBuildingCommodityTotalUomFontSize];
     self.totalLabel.backgroundColor=[UIColor clearColor];

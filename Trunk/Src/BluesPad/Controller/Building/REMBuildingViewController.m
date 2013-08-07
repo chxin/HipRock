@@ -14,6 +14,7 @@
 @property (nonatomic) NSUInteger currentIndex;
 @property (nonatomic,strong) NSArray *originCenterXArray;
 @property (nonatomic) CGFloat cumulateX;
+@property (nonatomic) BOOL inScrollY;
 
 @end
 
@@ -88,6 +89,7 @@
 - (void) swipethis:(UIPanGestureRecognizer *)pan
 {
     //NSLog(@"swipethis");
+    if(self.inScrollY == YES) return;
     CGPoint trans= [pan translationInView:self.view];
     
    // NSLog(@"state:%d",pan.state);
@@ -167,8 +169,8 @@
 
 - (void) scrollInnerView:(UIPanGestureRecognizer *)pan
 {
+    self.inScrollY=YES;
     
-        
     CGPoint trans= [pan translationInView:self.view];
     CGPoint velocity=[pan velocityInView:self.view];
     
@@ -207,7 +209,7 @@
             }
         }
         
-        
+            self.inScrollY=NO;
         
         [pan setTranslation:CGPointZero inView:self.view];
     }
