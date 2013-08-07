@@ -28,6 +28,10 @@
 #define kBuildingTitleHeight 80
 #define kBuildingFont "HelveticaNeue-UltraLight"
 
+#define kScrollVelocityMax 1000
+#define kScrollVelocityMedium 400
+#define kScrollVelocitySmall 50
+
 @interface REMBuildingConstants : NSObject
 
 @end
