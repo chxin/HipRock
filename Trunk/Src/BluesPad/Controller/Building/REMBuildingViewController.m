@@ -42,6 +42,7 @@
     self.currentIndex=0;
     self.cumulateX=0;
     
+    [self initButtons];
     
 
     UIPanGestureRecognizer *rec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
@@ -55,6 +56,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) initButtons
+{
+    UIButton *logout=[[UIButton alloc]initWithFrame:CGRectMake(950, 20, 50, 40)];
+    [logout setImage:[UIImage imageNamed:@"dashboard.png"] forState:UIControlStateNormal];
+    logout.titleLabel.text=@"注销";
+    [logout addTarget:self action:@selector(logoutButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:logout];
 }
 
 - (void)initImageView
