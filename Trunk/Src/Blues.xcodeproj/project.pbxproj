@@ -1428,7 +1428,6 @@
 		7A9B1E25177B3A8B00C282A8 /* BluesPad */ = {
 			isa = PBXGroup;
 			children = (
-				B4CD146017B3439600807B5F /* BluesPad.entitlements */,
 				B49B6F421781228200BC130A /* View */,
 				7A5E2D99177B41D3000F77F9 /* Model */,
 				7A5E2D9A177B41DA000F77F9 /* Controller */,
@@ -2589,6 +2588,7 @@
 					"\"$(SRCROOT)/../lib\"",
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
