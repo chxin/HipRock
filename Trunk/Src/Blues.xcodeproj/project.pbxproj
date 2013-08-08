@@ -812,6 +812,7 @@
 		B445AEB1177BFAE8002D2A59 /* REMLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLog.m; path = Common/Log/REMLog.m; sourceTree = "<group>"; };
 		B445AEBA177BFE66002D2A59 /* CommonTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B445AED0177C0052002D2A59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		B45A4F1217B3705600A82C0B /* BluesPad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluesPad.entitlements; sourceTree = "<group>"; };
 		B4626BFA17B0A0D900A7759B /* REMBuildingCommodityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingCommodityView.h; path = View/Building/REMBuildingCommodityView.h; sourceTree = "<group>"; };
 		B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingCommodityView.m; path = View/Building/REMBuildingCommodityView.m; sourceTree = "<group>"; };
 		B48BE1F9178AB0DB00A157CD /* REMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMainViewController.h; path = Controller/REMMainViewController.h; sourceTree = "<group>"; };
@@ -1428,6 +1429,7 @@
 		7A9B1E25177B3A8B00C282A8 /* BluesPad */ = {
 			isa = PBXGroup;
 			children = (
+				B45A4F1217B3705600A82C0B /* BluesPad.entitlements */,
 				B49B6F421781228200BC130A /* View */,
 				7A5E2D99177B41D3000F77F9 /* Model */,
 				7A5E2D9A177B41DA000F77F9 /* Controller */,
