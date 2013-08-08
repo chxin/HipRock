@@ -113,8 +113,6 @@
     {
         REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
         
-        [self.loginButton stopIndicator];
-        
         if(validationResult.status == REMUserValidationSuccess)
         {
             REMUserModel *user = validationResult.user;
@@ -156,6 +154,8 @@
             {
             }
         }
+        
+        [self.loginButton stopIndicator];
     }
 }
 
