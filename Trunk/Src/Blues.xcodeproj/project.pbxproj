@@ -419,6 +419,8 @@
 		B4C1676917B2226F002A8DD6 /* oil.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676317B2226F002A8DD6 /* oil.png */; };
 		B4C1676A17B2226F002A8DD6 /* water-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676417B2226F002A8DD6 /* water-pressed.png */; };
 		B4C1676B17B2226F002A8DD6 /* water.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676517B2226F002A8DD6 /* water.png */; };
+		EF0187B517B34464003A30DD /* REMBuildingTrendView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0187B417B34464003A30DD /* REMBuildingTrendView.m */; };
+		EF0187BB17B3693D003A30DD /* REMBuildingTrendChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0187BA17B3693D003A30DD /* REMBuildingTrendChartView.m */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 /* End PBXBuildFile section */
@@ -821,6 +823,7 @@
 		B445AEB1177BFAE8002D2A59 /* REMLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLog.m; path = Common/Log/REMLog.m; sourceTree = "<group>"; };
 		B445AEBA177BFE66002D2A59 /* CommonTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B445AED0177C0052002D2A59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		B45A4F1217B3705600A82C0B /* BluesPad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluesPad.entitlements; sourceTree = "<group>"; };
 		B4626BFA17B0A0D900A7759B /* REMBuildingCommodityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingCommodityView.h; path = View/Building/REMBuildingCommodityView.h; sourceTree = "<group>"; };
 		B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingCommodityView.m; path = View/Building/REMBuildingCommodityView.m; sourceTree = "<group>"; };
 		B48BE1F9178AB0DB00A157CD /* REMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMainViewController.h; path = Controller/REMMainViewController.h; sourceTree = "<group>"; };
@@ -850,6 +853,10 @@
 		B4C1676317B2226F002A8DD6 /* oil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = oil.png; path = building/oil.png; sourceTree = "<group>"; };
 		B4C1676417B2226F002A8DD6 /* water-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "water-pressed.png"; path = "building/water-pressed.png"; sourceTree = "<group>"; };
 		B4C1676517B2226F002A8DD6 /* water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = water.png; path = building/water.png; sourceTree = "<group>"; };
+		EF0187B317B34464003A30DD /* REMBuildingTrendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingTrendView.h; path = View/Building/REMBuildingTrendView.h; sourceTree = "<group>"; };
+		EF0187B417B34464003A30DD /* REMBuildingTrendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingTrendView.m; path = View/Building/REMBuildingTrendView.m; sourceTree = "<group>"; };
+		EF0187B917B3693D003A30DD /* REMBuildingTrendChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingTrendChartView.h; path = View/Building/REMBuildingTrendChartView.h; sourceTree = "<group>"; };
+		EF0187BA17B3693D003A30DD /* REMBuildingTrendChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingTrendChartView.m; path = View/Building/REMBuildingTrendChartView.m; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
@@ -1457,6 +1464,7 @@
 		7A9B1E25177B3A8B00C282A8 /* BluesPad */ = {
 			isa = PBXGroup;
 			children = (
+				B45A4F1217B3705600A82C0B /* BluesPad.entitlements */,
 				B49B6F421781228200BC130A /* View */,
 				7A5E2D99177B41D3000F77F9 /* Model */,
 				7A5E2D9A177B41DA000F77F9 /* Controller */,
@@ -1671,6 +1679,10 @@
 				B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */,
 				B4911F4617B0EB8B007AEF7D /* REMBuildingRankingView.h */,
 				B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */,
+				EF0187B317B34464003A30DD /* REMBuildingTrendView.h */,
+				EF0187B417B34464003A30DD /* REMBuildingTrendView.m */,
+				EF0187B917B3693D003A30DD /* REMBuildingTrendChartView.h */,
+				EF0187BA17B3693D003A30DD /* REMBuildingTrendChartView.m */,
 			);
 			name = Building;
 			sourceTree = "<group>";
@@ -1840,6 +1852,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B45A4F1317B3717C00A82C0B /* BluesPad.entitlements in Resources */,
 				7A5E2D91177B41B0000F77F9 /* Default-568h@2x.png in Resources */,
 				7A5E2D92177B41B0000F77F9 /* Default.png in Resources */,
 				7A5E2D93177B41B0000F77F9 /* Default@2x.png in Resources */,
@@ -2065,9 +2078,14 @@
 				B4626BFC17B0A0D900A7759B /* REMBuildingCommodityView.m in Sources */,
 				B4911F4317B0D961007AEF7D /* REMBuildingConstants.m in Sources */,
 				B4911F4817B0EB8B007AEF7D /* REMBuildingRankingView.m in Sources */,
+<<<<<<< HEAD
 				7A3ED59717B36B8400E934E0 /* REMBuildingHistoryChartHandler.m in Sources */,
 				7A3ED59C17B36C7800E934E0 /* REMChartHandler.m in Sources */,
 				7A3ED5A017B36CAA00E934E0 /* REMTempViewController.m in Sources */,
+=======
+				EF0187B517B34464003A30DD /* REMBuildingTrendView.m in Sources */,
+				EF0187BB17B3693D003A30DD /* REMBuildingTrendChartView.m in Sources */,
+>>>>>>> d7374740d3704e9e5f143211fb6ebc9a2620aa8f
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2388,6 +2406,8 @@
 		7A9B1E16177B3A6000C282A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = "-ObjC";
 			};
@@ -2396,6 +2416,8 @@
 		7A9B1E17177B3A6000C282A8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = "-ObjC";
 				VALID_ARCHS = "i386 x86_64 armv7s armv7";
@@ -2414,7 +2436,9 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2460,7 +2484,9 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2571,6 +2597,138 @@
 			};
 			name = Release;
 		};
+		B43544D117B36AC30057930E /* AdHocDistribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "";
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_LDFLAGS = "-ObjC";
+				VALID_ARCHS = "i386 x86_64 armv7s armv7";
+			};
+			name = AdHocDistribution;
+		};
+		B43544D217B36AC30057930E /* AdHocDistribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BluesPad/BluesPad-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "BluesPad/BluesPad-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../lib\"",
+				);
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--deep";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7s armv7";
+				WRAPPER_EXTENSION = app;
+			};
+			name = AdHocDistribution;
+		};
+		B43544D317B36AC30057930E /* AdHocDistribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BluesPad.app/BluesPad";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BluesPad/BluesPad-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "../test/BluesPadTests/BluesPadTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../lib\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = AdHocDistribution;
+		};
+		B43544D417B36AC30057930E /* AdHocDistribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "../test/CommonTests/CommonTests-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "../test/CommonTests/CommonTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Lib\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = AdHocDistribution;
+		};
 		B445AEC9177BFE66002D2A59 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2658,36 +2816,40 @@
 			buildConfigurations = (
 				7A9B1E16177B3A6000C282A8 /* Debug */,
 				7A9B1E17177B3A6000C282A8 /* Release */,
+				B43544D117B36AC30057930E /* AdHocDistribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = AdHocDistribution;
 		};
 		7A9B1E56177B3A8B00C282A8 /* Build configuration list for PBXNativeTarget "BluesPad" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A9B1E52177B3A8B00C282A8 /* Debug */,
 				7A9B1E53177B3A8B00C282A8 /* Release */,
+				B43544D217B36AC30057930E /* AdHocDistribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = AdHocDistribution;
 		};
 		7A9B1E57177B3A8B00C282A8 /* Build configuration list for PBXNativeTarget "BluesPadTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A9B1E54177B3A8B00C282A8 /* Debug */,
 				7A9B1E55177B3A8B00C282A8 /* Release */,
+				B43544D317B36AC30057930E /* AdHocDistribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = AdHocDistribution;
 		};
 		B445AEC8177BFE66002D2A59 /* Build configuration list for PBXNativeTarget "CommonTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B445AEC9177BFE66002D2A59 /* Debug */,
 				B445AECA177BFE66002D2A59 /* Release */,
+				B43544D417B36AC30057930E /* AdHocDistribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = AdHocDistribution;
 		};
 /* End XCConfigurationList section */
 	};
