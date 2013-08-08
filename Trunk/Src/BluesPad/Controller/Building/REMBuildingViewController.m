@@ -152,6 +152,7 @@
                                     
                                     //NSLog(@"array:%@",ar);
                                 }
+                                NSLog(@"array:%@",self.originCenterXArray);
                                 for(int i=0;i<self.imageArray.count;++i)
                                 {
                                     NSNumber *s = self.originCenterXArray[i];
@@ -180,7 +181,7 @@
 
 - (void) scrollInnerView:(UIPanGestureRecognizer *)pan
 {
-    
+    NSLog(@"cumulateX:%f",self.cumulateX);
     if(ABS(self.cumulateX)>0)return;
     self.inScrollY=YES;
     CGPoint trans= [pan translationInView:self.view];
@@ -231,7 +232,7 @@
 {
     
     CGPoint velocity= [pan velocityInView:self.view];
-    if(ABS(velocity.x)>ABS(velocity.y)){
+    if(self.inScrollY == NO && ( ABS(velocity.x)>ABS(velocity.y) || self.cumulateX!=0)){
         [self swipethis:pan];
     }
     else{

@@ -557,11 +557,13 @@
 
 - (void)moveCenter:(CGFloat)x
 {
-    CGFloat origx=self.center.x;
-    CGFloat imagex=self.imageView.center.x;
-   
-    [self setCenter:CGPointMake(origx+x, self.center.y)];
-        //[self.imageView setCenter:CGPointMake(imagex+x*0.8, self.center.y)];
+    [self setCenter:CGPointMake(self.center.x+x, self.center.y)];
+    
+    //CGFloat origx=self.center.x;
+    //CGFloat imagex=self.imageView.center.x;
+    //[self.dataView setCenter:CGPointMake(self.dataView.center.x+x, self.dataView.center.y)];
+    
+    //[self.imageView setCenter:CGPointMake(imagex+x*0.8, self.imageView.center.y)];
 }
 
 /*
