@@ -110,7 +110,8 @@
         
         for (REMImageView *view in self.imageArray)
         {
-            [view setCenter:CGPointMake(view.center.x+trans.x, view.center.y)];
+//            [view setCenter:CGPointMake(view.center.x+trans.x, view.center.y)];
+            [view moveCenter:trans.x];
         }
         
         self.cumulateX+=trans.x;
@@ -129,7 +130,7 @@
         
         __block BOOL addIndex=YES;
         
-        [UIView animateWithDuration:0.2 delay:0
+        [UIView animateWithDuration:0.5 delay:0
                             options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
                                 if((sign<0 && self.currentIndex==self.imageArray.count-1)
                                    || (sign>0 && self.currentIndex==0) ||
@@ -151,6 +152,7 @@
                                     
                                     //NSLog(@"array:%@",ar);
                                 }
+                                NSLog(@"array:%@",self.originCenterXArray);
                                 for(int i=0;i<self.imageArray.count;++i)
                                 {
                                     NSNumber *s = self.originCenterXArray[i];
@@ -179,13 +181,13 @@
 
 - (void) scrollInnerView:(UIPanGestureRecognizer *)pan
 {
-    self.inScrollY=YES;
+    NSLog(@"cumulateX:%f",self.cumulateX);
     if(ABS(self.cumulateX)>0)return;
-    
+    self.inScrollY=YES;
     CGPoint trans= [pan translationInView:self.view];
     CGPoint velocity=[pan velocityInView:self.view];
     
-    if (pan.state  == UIGestureRecognizerStateChanged && ABS(velocity.y) <200) {
+    if (pan.state  == UIGestureRecognizerStateChanged && ABS(velocity.y) <kScrollVelocityMedium) {
         for (REMImageView *view in self.imageArray) {
             [view move:trans.y];
         }
@@ -194,7 +196,7 @@
     
     if(pan.state == UIGestureRecognizerStateEnded)
     {
-        if(ABS(velocity.y)>50 && ABS(velocity.y)<1000){
+        if(ABS(velocity.y)>kScrollVelocitySmall && ABS(velocity.y)<kScrollVelocityMax){
             if(velocity.y<0)
             {
                 for (REMImageView *view in self.imageArray) {
@@ -208,7 +210,7 @@
             }
             
         }
-        else if(ABS(velocity.y)<50){
+        else if(ABS(velocity.y)<kScrollVelocitySmall){
             
             for (REMImageView *view in self.imageArray) {
                 [view moveEnd];
@@ -230,7 +232,7 @@
 {
     
     CGPoint velocity= [pan velocityInView:self.view];
-    if(ABS(velocity.x)>ABS(velocity.y)){
+    if(self.inScrollY == NO && ( ABS(velocity.x)>ABS(velocity.y) || self.cumulateX!=0)){
         [self swipethis:pan];
     }
     else{

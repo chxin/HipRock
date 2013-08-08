@@ -543,7 +543,7 @@
 - (void)moveEnd
 {
      CGFloat top = self.dataView.frame.origin.y;
-    NSLog(@"top:%f",top);
+   // NSLog(@"top:%f",top);
     if( top<300){
         [self scrollUp];
     }
@@ -553,6 +553,17 @@
     
     self.cumulateY=0;
 
+}
+
+- (void)moveCenter:(CGFloat)x
+{
+    [self setCenter:CGPointMake(self.center.x+x, self.center.y)];
+    
+    //CGFloat origx=self.center.x;
+    //CGFloat imagex=self.imageView.center.x;
+    //[self.dataView setCenter:CGPointMake(self.dataView.center.x+x, self.dataView.center.y)];
+    
+    //[self.imageView setCenter:CGPointMake(imagex+x*0.8, self.imageView.center.y)];
 }
 
 /*
