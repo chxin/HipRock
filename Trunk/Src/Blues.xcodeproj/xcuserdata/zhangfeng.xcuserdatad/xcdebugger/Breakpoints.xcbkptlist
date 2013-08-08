@@ -918,11 +918,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingViewController.m"
-         timestampString = "397554465.369668"
+         timestampString = "397637054.765373"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "253"
-         endingLineNumber = "253"
+         startingLineNumber = "261"
+         endingLineNumber = "261"
          landmarkName = "-tapthis:"
          landmarkType = "5">
       </FileBreakpoint>

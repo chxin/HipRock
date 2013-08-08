@@ -110,6 +110,10 @@
 		7A399EA4177D279900F0EB9F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A399EA2177D279900F0EB9F /* InfoPlist.strings */; };
 		7A3DDCDA1786C05B008A1033 /* REMServiceAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */; };
 		7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDC1786C195008A1033 /* REMMaskManager.m */; };
+		7A3ED59717B36B8400E934E0 /* REMBuildingHistoryChartHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3ED59617B36B8400E934E0 /* REMBuildingHistoryChartHandler.m */; };
+		7A3ED59C17B36C7800E934E0 /* REMChartHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3ED59B17B36C7800E934E0 /* REMChartHandler.m */; };
+		7A3ED5A017B36CAA00E934E0 /* REMTempViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3ED59F17B36CAA00E934E0 /* REMTempViewController.m */; };
+		7A3ED5A217B3785100E934E0 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3ED5A117B3785100E934E0 /* test.png */; };
 		7A44249F178E7B1A00908189 /* Schneider-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A44249E178E7B1A00908189 /* Schneider-Logo.png */; };
 		7A4424A3178E7D9800908189 /* dashboard-all.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A4424A0178E7D9800908189 /* dashboard-all.png */; };
 		7A4424A4178E7D9800908189 /* dashboard-favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A4424A1178E7D9800908189 /* dashboard-favorite.png */; };
@@ -615,6 +619,13 @@
 		7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceAgent.m; path = Common/Communication/REMServiceAgent.m; sourceTree = "<group>"; };
 		7A3DDCDB1786C195008A1033 /* REMMaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMaskManager.h; path = Common/Utility/REMMaskManager.h; sourceTree = "<group>"; };
 		7A3DDCDC1786C195008A1033 /* REMMaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMaskManager.m; path = Common/Utility/REMMaskManager.m; sourceTree = "<group>"; };
+		7A3ED59517B36B8400E934E0 /* REMBuildingHistoryChartHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingHistoryChartHandler.h; sourceTree = "<group>"; };
+		7A3ED59617B36B8400E934E0 /* REMBuildingHistoryChartHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingHistoryChartHandler.m; sourceTree = "<group>"; };
+		7A3ED59A17B36C7800E934E0 /* REMChartHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartHandler.h; sourceTree = "<group>"; };
+		7A3ED59B17B36C7800E934E0 /* REMChartHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartHandler.m; sourceTree = "<group>"; };
+		7A3ED59E17B36CAA00E934E0 /* REMTempViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMTempViewController.h; sourceTree = "<group>"; };
+		7A3ED59F17B36CAA00E934E0 /* REMTempViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTempViewController.m; sourceTree = "<group>"; };
+		7A3ED5A117B3785100E934E0 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		7A44249E178E7B1A00908189 /* Schneider-Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Schneider-Logo.png"; sourceTree = "<group>"; };
 		7A4424A0178E7D9800908189 /* dashboard-all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dashboard-all.png"; sourceTree = "<group>"; };
 		7A4424A1178E7D9800908189 /* dashboard-favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dashboard-favorite.png"; sourceTree = "<group>"; };
@@ -952,6 +963,7 @@
 		7A153C6717AA497B00413D3C /* Building */ = {
 			isa = PBXGroup;
 			children = (
+				7A3ED59D17B36C8300E934E0 /* Chart */,
 				7A153C6817AA497B00413D3C /* REMBuildingViewController.h */,
 				7A153C6917AA497B00413D3C /* REMBuildingViewController.m */,
 			);
@@ -1191,9 +1203,31 @@
 			name = DataAccess;
 			sourceTree = "<group>";
 		};
+		7A3ED59917B36BF900E934E0 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				7A3ED59A17B36C7800E934E0 /* REMChartHandler.h */,
+				7A3ED59B17B36C7800E934E0 /* REMChartHandler.m */,
+			);
+			name = Chart;
+			path = Common/Chart;
+			sourceTree = "<group>";
+		};
+		7A3ED59D17B36C8300E934E0 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				7A3ED59517B36B8400E934E0 /* REMBuildingHistoryChartHandler.h */,
+				7A3ED59617B36B8400E934E0 /* REMBuildingHistoryChartHandler.m */,
+				7A3ED59E17B36CAA00E934E0 /* REMTempViewController.h */,
+				7A3ED59F17B36CAA00E934E0 /* REMTempViewController.m */,
+			);
+			name = Chart;
+			sourceTree = "<group>";
+		};
 		7A5E2D45177B3CD3000F77F9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7A3ED59917B36BF900E934E0 /* Chart */,
 				7A1D7C3917A637110050779D /* Model */,
 				B445AE7E177BEC10002D2A59 /* Log */,
 				7A3DDCD717869A32008A1033 /* DataAccess */,
@@ -1314,6 +1348,7 @@
 				7A37AA1E17AB4E0A00316902 /* buttons */,
 				7AB7BE2017B248710085AF86 /* AppLogo@2x.png */,
 				7AB7BE1E17B2486D0085AF86 /* AppLogo.png */,
+				7A3ED5A117B3785100E934E0 /* test.png */,
 				7A153CCE17AA60BC00413D3C /* preface-s0.png */,
 				7A03977C17A2775E0082F6EE /* dashboard.png */,
 				7ADF91D717A0EFFE008CF056 /* preface-background.jpg */,
@@ -1870,6 +1905,7 @@
 				7AE1121F17B240E4006E0D39 /* AppLogo@2x.png in Resources */,
 				7AB7BE1F17B2486D0085AF86 /* AppLogo.png in Resources */,
 				7AB7BE2117B248710085AF86 /* AppLogo@2x.png in Resources */,
+				7A3ED5A217B3785100E934E0 /* test.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2029,6 +2065,9 @@
 				B4626BFC17B0A0D900A7759B /* REMBuildingCommodityView.m in Sources */,
 				B4911F4317B0D961007AEF7D /* REMBuildingConstants.m in Sources */,
 				B4911F4817B0EB8B007AEF7D /* REMBuildingRankingView.m in Sources */,
+				7A3ED59717B36B8400E934E0 /* REMBuildingHistoryChartHandler.m in Sources */,
+				7A3ED59C17B36C7800E934E0 /* REMChartHandler.m in Sources */,
+				7A3ED5A017B36CAA00E934E0 /* REMTempViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

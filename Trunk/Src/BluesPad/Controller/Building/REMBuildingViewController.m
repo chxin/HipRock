@@ -64,7 +64,15 @@
     [logout setImage:[UIImage imageNamed:@"Logout.png"] forState:UIControlStateNormal];
     logout.titleLabel.text=@"注销";
     [logout addTarget:self action:@selector(logoutButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    UIButton *chartTestButton= [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [chartTestButton setFrame:CGRectMake(950, 70, 48, 48)];
+    [chartTestButton setTitle:@"图测试" forState:UIControlStateNormal];
+    [chartTestButton addTarget:self action:@selector(chartTestButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self.view addSubview:logout];
+    [self.view addSubview:chartTestButton];
 }
 
 - (void)initImageView
@@ -274,4 +282,10 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
     [self.splashScreenController showLoginView];
 }
+
+- (IBAction)chartTestButtonPressed:(id)sender
+{
+    [self performSegueWithIdentifier:@"chartTestSeque" sender:self];
+}
+
 @end
