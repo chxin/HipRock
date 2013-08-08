@@ -415,6 +415,8 @@
 		B4C1676917B2226F002A8DD6 /* oil.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676317B2226F002A8DD6 /* oil.png */; };
 		B4C1676A17B2226F002A8DD6 /* water-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676417B2226F002A8DD6 /* water-pressed.png */; };
 		B4C1676B17B2226F002A8DD6 /* water.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676517B2226F002A8DD6 /* water.png */; };
+		EF0187B517B34464003A30DD /* REMBuildingTrendView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0187B417B34464003A30DD /* REMBuildingTrendView.m */; };
+		EF0187BB17B3693D003A30DD /* REMBuildingTrendChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0187BA17B3693D003A30DD /* REMBuildingTrendChartView.m */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 /* End PBXBuildFile section */
@@ -839,6 +841,10 @@
 		B4C1676317B2226F002A8DD6 /* oil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = oil.png; path = building/oil.png; sourceTree = "<group>"; };
 		B4C1676417B2226F002A8DD6 /* water-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "water-pressed.png"; path = "building/water-pressed.png"; sourceTree = "<group>"; };
 		B4C1676517B2226F002A8DD6 /* water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = water.png; path = building/water.png; sourceTree = "<group>"; };
+		EF0187B317B34464003A30DD /* REMBuildingTrendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingTrendView.h; path = View/Building/REMBuildingTrendView.h; sourceTree = "<group>"; };
+		EF0187B417B34464003A30DD /* REMBuildingTrendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingTrendView.m; path = View/Building/REMBuildingTrendView.m; sourceTree = "<group>"; };
+		EF0187B917B3693D003A30DD /* REMBuildingTrendChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingTrendChartView.h; path = View/Building/REMBuildingTrendChartView.h; sourceTree = "<group>"; };
+		EF0187BA17B3693D003A30DD /* REMBuildingTrendChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingTrendChartView.m; path = View/Building/REMBuildingTrendChartView.m; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
@@ -1636,6 +1642,10 @@
 				B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */,
 				B4911F4617B0EB8B007AEF7D /* REMBuildingRankingView.h */,
 				B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */,
+				EF0187B317B34464003A30DD /* REMBuildingTrendView.h */,
+				EF0187B417B34464003A30DD /* REMBuildingTrendView.m */,
+				EF0187B917B3693D003A30DD /* REMBuildingTrendChartView.h */,
+				EF0187BA17B3693D003A30DD /* REMBuildingTrendChartView.m */,
 			);
 			name = Building;
 			sourceTree = "<group>";
@@ -2029,6 +2039,8 @@
 				B4626BFC17B0A0D900A7759B /* REMBuildingCommodityView.m in Sources */,
 				B4911F4317B0D961007AEF7D /* REMBuildingConstants.m in Sources */,
 				B4911F4817B0EB8B007AEF7D /* REMBuildingRankingView.m in Sources */,
+				EF0187B517B34464003A30DD /* REMBuildingTrendView.m in Sources */,
+				EF0187BB17B3693D003A30DD /* REMBuildingTrendChartView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
