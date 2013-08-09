@@ -6,6 +6,7 @@
 //
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "REMBuildingAverageChartHandler.h"
 #import "REMBuildingAverageChart.h"
 #import "REMEnergyViewData.h"
@@ -33,6 +34,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.view.layer.borderColor = [UIColor redColor].CGColor;
+    self.view.layer.borderWidth = 1.0;
+    self.view.backgroundColor = [UIColor yellowColor];
 }
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMEnergyViewData *)buildingOverall :(void (^)(void))loadCompleted
