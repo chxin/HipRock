@@ -8,6 +8,15 @@
 
 #import "REMBuildingTrendView.h"
 
+#import <Foundation/Foundation.h>
+#import "REMWidgetCellViewController.h"
+#import "CPTBarPlot.h"
+#import "CPTPlotSpace.h"
+#import "CorePlot-CocoaTouch.h"
+#import "REMColor.h"
+#import "REMWidgetAxisHelper.h"
+#import "REMBuildingTrendChartController.h"
+
 @implementation REMBuildingTrendView
 
 
@@ -25,8 +34,11 @@
         self.thisYearButton = [self makeButton:@"今年" rect:CGRectMake((buttonMargin + buttonWidth)*4,0,buttonWidth,buttonHeight)];
         self.lastYearButton = [self makeButton:@"去年" rect:CGRectMake((buttonMargin + buttonWidth)*5,0,buttonWidth,buttonHeight)];
         
+        self.chartController = [[REMBuildingTrendChartController alloc]init];
+        self.chartController.view = self;
+        [self.chartController initLineChart:CGRectMake(0, buttonHeight, self.frame.size.width, self.frame.size.height - buttonHeight)];
         
-        
+        [self addSubview:self.chartController.hostView];
     }
     return self;
 }
@@ -43,7 +55,45 @@
 }
 
 - (void)intervalChanged:(UIButton *)button {
-    NSLog(@"bbbb");
+    RelativeTimeRangeType t = Today;
+    if (button == self.todayButton) {
+        t = Today;
+    } else if (button == self.yestodayButton) {
+        t = Yesterday;
+    } else if (button == self.thisMonthButton) {
+        t = ThisMonth;
+    } else if (button == self.lastMonthButton) {
+        t = LastMonth;
+    } else if (button == self.thisYearButton) {
+        t = ThisYear;
+    } else if (button == self.lastYearButton) {
+        t = LastYear;
+    }
+    [self retrieveEnergyData:t];
+}
+
+- (void) retrieveEnergyData:(RelativeTimeRangeType)type
+{
+    NSMutableDictionary *buildingCommodityInfo = [[NSMutableDictionary alloc] init];
+//    self.buildingInfo.building.buildingId
+    [buildingCommodityInfo setValue:self.buildingInfo.building.buildingId forKey:@"buildingId"];
+    [buildingCommodityInfo setValue:[NSNumber numberWithInt:2] forKey:@"commodityId"];
+    [buildingCommodityInfo setValue:[NSNumber numberWithInt:type] forKey:@"relativeType"];
+    REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSEnergyBuildingTimeRange parameter:buildingCommodityInfo];
+    store.isAccessLocal = YES;
+    store.isStoreLocal = YES;
+    store.maskContainer = self.chartController.hostView;
+    store.groupName = nil;
+    
+    void (^retrieveSuccess)(id data)=^(id data) {
+        [self.chartController changeData:[[REMEnergyViewData alloc] initWithDictionary:(NSDictionary *)data]];
+    };
+    void (^retrieveError)(NSError *error, id response) = ^(NSError *error, id response) {
+        //self.widgetTitle.text = [NSString stringWithFormat:@"Error: %@",error.description];
+    };
+    
+    
+    [REMDataAccessor access:store success:retrieveSuccess error:retrieveError];
 }
 /*
 // Only override drawRect: if you perform custom drawing.
