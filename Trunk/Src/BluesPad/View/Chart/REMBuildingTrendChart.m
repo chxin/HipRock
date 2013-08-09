@@ -13,6 +13,7 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
+    self.backgroundColor = [UIColor redColor];
     const int buttonHeight = 30;
     const int buttonWidth = 50;
     const int buttonMargin = 5;

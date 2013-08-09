@@ -10,6 +10,7 @@
 #import "REMTimeRange.h"
 #import "REMEnergyViewData.h"
 #import "REMBuildingTrendChartHandler.h"
+#import "REMBuildingOverallModel.h"
 
 @interface REMBuildingTrendChart : UIView
 @property (nonatomic,strong) UIButton *todayButton;

@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "REMBuildingChartHandler.h"
 #import "REMEnergyViewData.h"
+#import "CPTBarPlot.h"
+#import "CPTPlotSpace.h"
+#import "CorePlot-CocoaTouch.h"
+#import "REMColor.h"
+#import "REMWidgetAxisHelper.h"
 
 @interface REMBuildingTrendChartHandler : REMBuildingChartHandler<CPTScatterPlotDataSource,CPTScatterPlotDelegate,CPTPlotSpaceDelegate,UIGestureRecognizerDelegate,CPTAxisDelegate>
 
