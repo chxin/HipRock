@@ -32,6 +32,7 @@ typedef enum _REMDataStoreType
     REMDSEnergyCostTrend,
     REMDSEnergyCostDistribute,
     REMDSEnergyBuildingOverall,
+    REMDSEnergyBuildingTimeRange,
     //...
     
     /*

@@ -20,7 +20,12 @@
                             </imageView>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LxY-lh-jAg">
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="splash-schneider-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Igx-ZG-8eI"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="splash-schneider-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Igx-ZG-8eI">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="155" id="MeV-Gq-T97"/>
+                                            <constraint firstAttribute="width" constant="138" id="zMt-sI-Cp9"/>
+                                        </constraints>
+                                    </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Schneider Electric Blues Project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAT-aj-FDp">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="Xdi-ja-xav"/>
@@ -75,6 +80,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dxv-er-WZK">
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="9p9-e2-qOG"/>
                                     <constraint firstAttribute="width" constant="48" id="iHa-mR-3cg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -934,7 +940,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="forgotPasswordButtonTouchDown:" destination="28l-C5-Og2" eventType="touchDown" id="3Fy-IM-2NM"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="login_error.png" translatesAutoresizingMaskIntoConstraints="NO" id="2WZ-aU-Dpr"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="login_error.png" translatesAutoresizingMaskIntoConstraints="NO" id="2WZ-aU-Dpr">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="TM0-gl-Y5I"/>
+                                    <constraint firstAttribute="height" constant="32" id="iOh-gu-bRO"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.85817920920000001" green="0.85817920920000001" blue="0.85817920920000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1378,16 +1389,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
-        <image name="Schneider-Logo.png" width="100" height="30"/>
-        <image name="dashboard-all.png" width="32" height="32"/>
-        <image name="dashboard-favorite.png" width="32" height="32"/>
-        <image name="dashboard-recent.png" width="32" height="32"/>
-        <image name="dashboard.png" width="48" height="48"/>
-        <image name="detail-arrow.png" width="32" height="32"/>
-        <image name="login_error.png" width="32" height="32"/>
-        <image name="splash-schneider-logo.png" width="138" height="155"/>
-        <image name="splashscreen.png" width="2048" height="1536"/>
-        <image name="user.png" width="32" height="32"/>
+        <image name="Schneider-Logo.png" width="16" height="16"/>
+        <image name="dashboard-all.png" width="16" height="16"/>
+        <image name="dashboard-favorite.png" width="16" height="16"/>
+        <image name="dashboard-recent.png" width="16" height="16"/>
+        <image name="dashboard.png" width="16" height="16"/>
+        <image name="detail-arrow.png" width="16" height="16"/>
+        <image name="login_error.png" width="16" height="16"/>
+        <image name="splash-schneider-logo.png" width="16" height="16"/>
+        <image name="splashscreen.png" width="16" height="16"/>
+        <image name="user.png" width="16" height="16"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>

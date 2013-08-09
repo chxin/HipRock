@@ -16,6 +16,7 @@
 @property (nonatomic,strong) NSArray *chartViewArray;
 
 
+
 @property (nonatomic,strong) REMCommodityUsageModel *commodityInfo;
 
 @end
@@ -65,7 +66,23 @@
 
 - (void)initChartContainer
 {
+    REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityItemGroupMargin*2+kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight, 1024, kBuildingChartHeight) ];
     
+    [self addSubview:view];
+    
+    
+    REMBuildingChartContainerView *view1 = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityItemGroupMargin*2+kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingChartHeight, 1024, kBuildingChartHeight)];
+    
+    [self addSubview:view1];
+    
+    self.chartViewArray=@[view,view1];
+}
+
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId
+{
+    for (REMBuildingChartContainerView *chart in self.chartViewArray) {
+        [chart requireChartDataWithBuildingId:buildingId withCommodityId:commodityId];
+    }
 }
 
 /*

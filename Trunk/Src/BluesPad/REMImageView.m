@@ -24,7 +24,7 @@
 @property (nonatomic,strong) UIView *glassView;
 @property (nonatomic,strong) CAGradientLayer *bottomGradientLayer;
 
-
+@property (nonatomic) BOOL hasLoadedChartData;
 @property (nonatomic,strong) REMBuildingOverallModel *buildingInfo;
 @end
 
@@ -379,6 +379,16 @@
     CIImage *theCIImage = [CIFilter filterWithName:@"CICrop" keysAndValues:kCIInputImageKey, theCIImage, @"inputRectangle", rect, nil].outputImage;
 
 }
+
+#pragma mark -
+#pragma mark require data
+
+- (void)requireChartData
+{
+    [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId];
+    
+}
+
 
 #pragma mark -
 #pragma mark event

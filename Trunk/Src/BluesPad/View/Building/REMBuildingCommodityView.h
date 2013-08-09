@@ -13,11 +13,14 @@
 #import "REMCommodityUsageModel.h"
 #import "REMBuildingConstants.h"
 #import "REMBuildingRankingView.h"
-
+#import "REMBuildingChartContainerView.h"
 
 
 @interface REMBuildingCommodityView : UIView
 
 - (id)initWithFrame:(CGRect)frame withCommodityInfo:(REMCommodityUsageModel *)commodityInfo;
+
+
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId;
 
 @end

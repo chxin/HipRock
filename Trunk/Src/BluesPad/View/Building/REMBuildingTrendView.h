@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "REMBuildingTrendChartController.h"
+#import "REMBuildingOverallModel.h"
 
 @interface REMBuildingTrendView : UIView
 
@@ -16,5 +18,7 @@
 @property (nonatomic,strong) UIButton *lastMonthButton;
 @property (nonatomic,strong) UIButton *thisYearButton;
 @property (nonatomic,strong) UIButton *lastYearButton;
+@property (nonatomic,strong) REMBuildingTrendChartController *chartController;
+@property (nonatomic,strong) REMBuildingOverallModel *buildingInfo;
 
 @end

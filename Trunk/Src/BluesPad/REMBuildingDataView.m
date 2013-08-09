@@ -129,7 +129,14 @@
 }
 
 
-
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId
+{
+    for (int i=0; i<self.commodityViewArray.count; i++) {
+        REMBuildingCommodityView *view = self.commodityViewArray[i];
+        REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
+        [view requireChartDataWithBuildingId:buildingId withCommodityId:model.commodity.commodityId];
+    }
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

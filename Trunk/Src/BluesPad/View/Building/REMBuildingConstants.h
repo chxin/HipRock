@@ -32,6 +32,9 @@
 #define kScrollVelocityMedium 400
 #define kScrollVelocitySmall 50
 
+
+#define kBuildingChartHeight 200
+
 @interface REMBuildingConstants : NSObject
 
 @end
