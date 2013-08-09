@@ -419,6 +419,7 @@
 		B4C1676B17B2226F002A8DD6 /* water.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676517B2226F002A8DD6 /* water.png */; };
 		EF0187B517B34464003A30DD /* REMBuildingTrendView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0187B417B34464003A30DD /* REMBuildingTrendView.m */; };
 		EF0187BB17B3693D003A30DD /* REMBuildingTrendChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0187BA17B3693D003A30DD /* REMBuildingTrendChartView.m */; };
+		EF0187BE17B37075003A30DD /* REMBuildingTrendChartController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0187BD17B37075003A30DD /* REMBuildingTrendChartController.m */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 /* End PBXBuildFile section */
@@ -846,10 +847,13 @@
 		B4C1676317B2226F002A8DD6 /* oil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = oil.png; path = building/oil.png; sourceTree = "<group>"; };
 		B4C1676417B2226F002A8DD6 /* water-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "water-pressed.png"; path = "building/water-pressed.png"; sourceTree = "<group>"; };
 		B4C1676517B2226F002A8DD6 /* water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = water.png; path = building/water.png; sourceTree = "<group>"; };
+		B4CD146017B3439600807B5F /* BluesPad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluesPad.entitlements; sourceTree = "<group>"; };
 		EF0187B317B34464003A30DD /* REMBuildingTrendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingTrendView.h; path = View/Building/REMBuildingTrendView.h; sourceTree = "<group>"; };
 		EF0187B417B34464003A30DD /* REMBuildingTrendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingTrendView.m; path = View/Building/REMBuildingTrendView.m; sourceTree = "<group>"; };
 		EF0187B917B3693D003A30DD /* REMBuildingTrendChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingTrendChartView.h; path = View/Building/REMBuildingTrendChartView.h; sourceTree = "<group>"; };
 		EF0187BA17B3693D003A30DD /* REMBuildingTrendChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingTrendChartView.m; path = View/Building/REMBuildingTrendChartView.m; sourceTree = "<group>"; };
+		EF0187BC17B37075003A30DD /* REMBuildingTrendChartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingTrendChartController.h; sourceTree = "<group>"; };
+		EF0187BD17B37075003A30DD /* REMBuildingTrendChartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingTrendChartController.m; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
@@ -1149,6 +1153,8 @@
 				7A37AA6517AB94B100316902 /* REMColoredButton.m */,
 				7A5277F417AF4209007DA735 /* REMIndicatorButton.h */,
 				7A5277F517AF4209007DA735 /* REMIndicatorButton.m */,
+				EF0187BC17B37075003A30DD /* REMBuildingTrendChartController.h */,
+				EF0187BD17B37075003A30DD /* REMBuildingTrendChartController.m */,
 			);
 			name = Controls;
 			path = View/Controls;
