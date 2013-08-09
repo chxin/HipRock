@@ -10,10 +10,10 @@
 
 @interface REMBuildingChartContainerView()
 
-@property (nonatomic,strong) UIView *chartContainerView;
 @property (nonatomic) BOOL hasLoaded;
 @property (nonatomic,strong) NSNumber *buildingId;
 @property (nonatomic,strong) NSNumber *commodityId;
+@property (nonatomic,strong) REMBuildingChartHandler *chartController;
 @end
 
 @implementation REMBuildingChartContainerView
@@ -34,17 +34,18 @@
 
 - (void)initChartViewWithSize:(CGFloat)titleSize
 {
-    self.chartContainerView = [[UIView alloc]initWithFrame:CGRectMake(0, titleSize, 1024, kBuildingChartHeight-titleSize-kBuildingCommodityItemMargin)];
+    self.chartContainer = [[UIView alloc]initWithFrame:CGRectMake(0, titleSize, 1024, kBuildingChartHeight-titleSize-kBuildingCommodityItemMargin)];
     
-    [self addSubview:self.chartContainerView];
+    [self addSubview:self.chartContainer];
 }
 
-- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId withController:(REMBuildingChartHandler *)controller withEnergyData:(REMEnergyViewData *)averageData
 {
-    if (self.hasLoaded == NO) {
-        self.buildingId=buildingId;
-        self.commodityId=commodityId;
-        
+    if(self.hasLoaded == NO){
+        self.chartController = controller;
+        [self.chartController loadData:[buildingId longLongValue] :[commodityId longLongValue] :averageData :^(void){
+            self.hasLoaded=YES;
+        }];
     }
 }
 

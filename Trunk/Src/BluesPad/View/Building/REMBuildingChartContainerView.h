@@ -8,11 +8,17 @@
 
 #import "REMBuildingTitleView.h"
 #import "REMBuildingConstants.h"
+#import "REMBuildingChartHandler.h"
+#import "REMEnergyViewData.h"
+
+
 
 @interface REMBuildingChartContainerView : REMBuildingTitleView
 
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *)title andTitleFontSize:(CGFloat)size;
 
-- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId;
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId withController:(REMBuildingChartHandler *)controller withEnergyData:(REMEnergyViewData *)averageData;
+
+@property (nonatomic,strong) UIView *chartContainer;
 
 @end

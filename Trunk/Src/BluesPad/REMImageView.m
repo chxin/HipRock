@@ -7,7 +7,6 @@
 //
 
 #import "REMImageView.h"
-#import "REMBuildingAverageChartView.h"
 
 @interface REMImageView()
 
@@ -295,11 +294,11 @@
     [self addSubview:view];
     self.dataView=view;
     
-    
+    /*
     REMBuildingAverageChartView *averageChart = [[REMBuildingAverageChartView alloc] initWithFrame:CGRectMake(10, 1400, 1024, 60)];
     averageChart.backgroundColor = [UIColor yellowColor];
     
-    [self addSubview:averageChart];
+    [self addSubview:averageChart];*/
     
     
 
@@ -429,7 +428,7 @@
 
 - (void)scrollUp
 {
-    if(self.dataViewUp == NO){
+    //if(self.dataViewUp == NO){
         
     [self blurImage];
         
@@ -437,7 +436,7 @@
         self.dataViewUp=YES;
 
         
-    }
+    //}
     
 }
 
@@ -561,7 +560,7 @@
 - (void)moveEnd
 {
      CGFloat top = self.dataView.frame.origin.y;
-   // NSLog(@"top:%f",top);
+    NSLog(@"top:%f",top);
     if( top<300){
         [self scrollUp];
     }
