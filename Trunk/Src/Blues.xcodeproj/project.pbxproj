@@ -2057,6 +2057,7 @@
 				EF0187B517B34464003A30DD /* REMBuildingTrendView.m in Sources */,
 				EF0187BB17B3693D003A30DD /* REMBuildingTrendChartView.m in Sources */,
 				B480748117B47F02006D6AD4 /* REMBuildingChartContainerView.m in Sources */,
+				EF0187BE17B37075003A30DD /* REMBuildingTrendChartController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
