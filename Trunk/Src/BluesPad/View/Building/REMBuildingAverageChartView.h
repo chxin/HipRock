@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface REMBuildingTrendChartView : UIView
+@interface REMBuildingAverageChartView : UIView
 
 @end

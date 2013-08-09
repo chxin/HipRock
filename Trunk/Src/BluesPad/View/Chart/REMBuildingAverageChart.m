@@ -1,22 +1,28 @@
 //
-//  REMBuildingTrendChartView.m
+//  REMBuildingAverageChart.m
 //  Blues
 //
-//  Created by Zilong-Oscar.Xu on 8/8/13.
+//  Created by 张 锋 on 8/9/13.
 //
 //
 
-#import "REMBuildingTrendChartView.h"
+#import "REMBuildingAverageChart.h"
 
-@implementation REMBuildingTrendChartView
+@implementation REMBuildingAverageChart
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        [self initializeGraph];
     }
     return self;
+}
+
+-(void)initializeGraph
+{
+    
 }
 
 /*

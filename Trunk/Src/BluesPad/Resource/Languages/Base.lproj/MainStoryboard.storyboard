@@ -20,13 +20,18 @@
                             </imageView>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LxY-lh-jAg">
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="splash-schneider-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Igx-ZG-8eI"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="splash-schneider-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Igx-ZG-8eI">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="155" id="MeV-Gq-T97"/>
+                                            <constraint firstAttribute="width" constant="138" id="zMt-sI-Cp9"/>
+                                        </constraints>
+                                    </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Schneider Electric Blues Project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAT-aj-FDp">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="XL5-0h-8qK"/>
+                                            <constraint firstAttribute="height" constant="32" id="Xdi-ja-xav"/>
                                             <constraint firstAttribute="width" constant="480" id="irY-DA-bnk"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="32"/>
+                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="24"/>
                                         <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -34,10 +39,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Igx-ZG-8eI" firstAttribute="centerY" secondItem="LxY-lh-jAg" secondAttribute="centerY" type="default" id="bmx-C7-mFR"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZAT-aj-FDp" secondAttribute="bottom" constant="29" id="1dU-e6-vhq"/>
+                                    <constraint firstItem="Igx-ZG-8eI" firstAttribute="top" secondItem="LxY-lh-jAg" secondAttribute="top" constant="129" id="Ww8-tJ-zYC"/>
+                                    <constraint firstItem="Igx-ZG-8eI" firstAttribute="centerX" secondItem="LxY-lh-jAg" secondAttribute="centerX" type="default" id="XG0-87-Tlg"/>
                                     <constraint firstItem="ZAT-aj-FDp" firstAttribute="centerX" secondItem="Igx-ZG-8eI" secondAttribute="centerX" type="default" id="eag-Rf-X2M"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZAT-aj-FDp" secondAttribute="bottom" constant="26" id="s1a-ZV-mgJ"/>
-                                    <constraint firstItem="Igx-ZG-8eI" firstAttribute="centerX" secondItem="LxY-lh-jAg" secondAttribute="centerX" type="default" id="vdL-9v-mcP"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -63,7 +68,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i7s-2X-RpE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5200" y="93"/>
+            <point key="canvasLocation" x="-5128" y="-510"/>
         </scene>
         <!--Building View Controller-->
         <scene sceneID="XIG-df-ONL">
@@ -75,6 +80,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dxv-er-WZK">
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="9p9-e2-qOG"/>
                                     <constraint firstAttribute="width" constant="48" id="iHa-mR-3cg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -180,7 +186,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mjp-Au-mwu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5195" y="1030"/>
+            <point key="canvasLocation" x="-5123" y="518"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="4">
@@ -358,7 +364,7 @@
                                 <rect key="frame" x="0.0" y="22" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="-1" y="0.0" width="770" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -445,7 +451,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <rect key="frame" x="0.0" y="22" width="200" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="-1" y="0.0" width="202" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="334-D1-rg8">
@@ -867,7 +873,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emS-ID-Yln" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4097" y="1106"/>
+            <point key="canvasLocation" x="-4025" y="594"/>
         </scene>
         <!--Login Password View Controller-->
         <scene sceneID="aoH-Iq-8Qx">
@@ -934,19 +940,22 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="forgotPasswordButtonTouchDown:" destination="28l-C5-Og2" eventType="touchDown" id="3Fy-IM-2NM"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="login_error.png" translatesAutoresizingMaskIntoConstraints="NO" id="2WZ-aU-Dpr"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="login_error.png" translatesAutoresizingMaskIntoConstraints="NO" id="2WZ-aU-Dpr">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="TM0-gl-Y5I"/>
+                                    <constraint firstAttribute="height" constant="32" id="iOh-gu-bRO"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.85817920920000001" green="0.85817920920000001" blue="0.85817920920000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="NEm-9n-vHf" firstAttribute="baseline" secondItem="VwG-o9-SW1" secondAttribute="baseline" type="default" id="6RY-M5-8Ca"/>
                             <constraint firstItem="tKD-ZL-rv5" firstAttribute="baseline" secondItem="gRY-xj-jwt" secondAttribute="baseline" type="default" id="9NO-aG-ywU"/>
-                            <constraint firstItem="tub-LP-5MI" firstAttribute="leading" secondItem="gRY-xj-jwt" secondAttribute="leading" type="default" id="Idr-ru-Qy5"/>
                             <constraint firstItem="NEm-9n-vHf" firstAttribute="trailing" secondItem="gRY-xj-jwt" secondAttribute="trailing" type="default" id="IlV-CY-pe2"/>
                             <constraint firstItem="tub-LP-5MI" firstAttribute="leading" secondItem="NEm-9n-vHf" secondAttribute="leading" type="default" id="LwC-3i-b1u"/>
                             <constraint firstItem="2WZ-aU-Dpr" firstAttribute="centerY" secondItem="VwG-o9-SW1" secondAttribute="centerY" type="default" id="LxH-NA-IaX"/>
                             <constraint firstItem="gRY-xj-jwt" firstAttribute="leading" secondItem="wYR-h2-3CZ" secondAttribute="leading" constant="124" id="Njq-3e-Yvv"/>
                             <constraint firstItem="gRY-xj-jwt" firstAttribute="top" secondItem="wYR-h2-3CZ" secondAttribute="top" constant="21" id="OTh-RN-NfI"/>
-                            <constraint firstItem="2WZ-aU-Dpr" firstAttribute="top" secondItem="wYR-h2-3CZ" secondAttribute="top" constant="58" id="PQD-QX-T2A"/>
                             <constraint firstItem="VwG-o9-SW1" firstAttribute="leading" secondItem="tKD-ZL-rv5" secondAttribute="leading" type="default" id="SpP-bL-07n"/>
                             <constraint firstAttribute="bottom" secondItem="tub-LP-5MI" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="cc1-RM-39K"/>
                             <constraint firstAttribute="bottom" secondItem="xht-Vm-kah" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="glE-nO-Wfk"/>
@@ -954,6 +963,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <constraint firstItem="tKD-ZL-rv5" firstAttribute="leading" secondItem="wYR-h2-3CZ" secondAttribute="leading" constant="201" id="m6i-jB-7QN"/>
                             <constraint firstItem="xht-Vm-kah" firstAttribute="trailing" secondItem="VwG-o9-SW1" secondAttribute="trailing" type="default" id="nHR-XX-agl"/>
                             <constraint firstItem="tKD-ZL-rv5" firstAttribute="trailing" secondItem="VwG-o9-SW1" secondAttribute="trailing" type="default" id="nfs-1Q-ymL"/>
+                            <constraint firstItem="tub-LP-5MI" firstAttribute="top" secondItem="VwG-o9-SW1" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="rxF-Dj-k84"/>
+                            <constraint firstItem="NEm-9n-vHf" firstAttribute="leading" secondItem="gRY-xj-jwt" secondAttribute="leading" type="default" id="uMk-Cv-Byw"/>
                             <constraint firstAttribute="trailing" secondItem="2WZ-aU-Dpr" secondAttribute="trailing" constant="100" id="xRj-dO-mwI"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -1125,7 +1136,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <rect key="frame" x="0.0" y="22" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="-1" y="0.0" width="770" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LWk-P0-Mu8">
@@ -1374,20 +1385,20 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="byd-8r-pNi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6186" y="-23"/>
+            <point key="canvasLocation" x="-6282" y="-638"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Schneider-Logo.png" width="100" height="30"/>
-        <image name="dashboard-all.png" width="32" height="32"/>
-        <image name="dashboard-favorite.png" width="32" height="32"/>
-        <image name="dashboard-recent.png" width="32" height="32"/>
-        <image name="dashboard.png" width="48" height="48"/>
-        <image name="detail-arrow.png" width="32" height="32"/>
-        <image name="login_error.png" width="32" height="32"/>
-        <image name="splash-schneider-logo.png" width="138" height="155"/>
-        <image name="splashscreen.png" width="2048" height="1536"/>
-        <image name="user.png" width="32" height="32"/>
+        <image name="Schneider-Logo.png" width="16" height="16"/>
+        <image name="dashboard-all.png" width="16" height="16"/>
+        <image name="dashboard-favorite.png" width="16" height="16"/>
+        <image name="dashboard-recent.png" width="16" height="16"/>
+        <image name="dashboard.png" width="16" height="16"/>
+        <image name="detail-arrow.png" width="16" height="16"/>
+        <image name="login_error.png" width="16" height="16"/>
+        <image name="splash-schneider-logo.png" width="16" height="16"/>
+        <image name="splashscreen.png" width="16" height="16"/>
+        <image name="user.png" width="16" height="16"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>

@@ -64,6 +64,7 @@
     [logout setImage:[UIImage imageNamed:@"Logout.png"] forState:UIControlStateNormal];
     logout.titleLabel.text=@"注销";
     [logout addTarget:self action:@selector(logoutButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self.view addSubview:logout];
 }
 
@@ -277,4 +278,5 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
     [self.splashScreenController showLoginView];
 }
+
 @end
