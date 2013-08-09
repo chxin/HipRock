@@ -20,12 +20,7 @@
                             </imageView>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LxY-lh-jAg">
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="splash-schneider-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Igx-ZG-8eI">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="155" id="4d9-ca-Pkk"/>
-                                            <constraint firstAttribute="width" constant="138" id="hhS-w3-iF4"/>
-                                        </constraints>
-                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="splash-schneider-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Igx-ZG-8eI"/>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Schneider Electric Blues Project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAT-aj-FDp">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="Xdi-ja-xav"/>
@@ -80,7 +75,6 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dxv-er-WZK">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="OeB-LK-CkH"/>
                                     <constraint firstAttribute="width" constant="48" id="iHa-mR-3cg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -123,7 +117,6 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <segue destination="nX8-ih-mDs" kind="push" identifier="buildingToDashboardSegue" id="AYf-DZ-2t4"/>
-                        <segue destination="tPH-yl-umW" kind="push" identifier="chartTestSeque" id="0EL-id-ttm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujE-me-aPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -188,32 +181,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mjp-Au-mwu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-5123" y="518"/>
-        </scene>
-        <!--Temp View Controller-->
-        <scene sceneID="LnQ-R1-frd">
-            <objects>
-                <viewController id="tPH-yl-umW" customClass="REMTempViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Psw-xv-h7W">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="test.png" translatesAutoresizingMaskIntoConstraints="NO" id="VRF-2H-399"/>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="VRF-2H-399" firstAttribute="top" secondItem="Psw-xv-h7W" secondAttribute="top" type="default" id="3Wr-gk-X5m"/>
-                            <constraint firstItem="VRF-2H-399" firstAttribute="bottom" secondItem="Psw-xv-h7W" secondAttribute="bottom" type="default" id="HXc-C8-o2v"/>
-                            <constraint firstItem="VRF-2H-399" firstAttribute="trailing" secondItem="Psw-xv-h7W" secondAttribute="trailing" type="default" id="hGY-gX-s2l"/>
-                            <constraint firstItem="VRF-2H-399" firstAttribute="leading" secondItem="Psw-xv-h7W" secondAttribute="leading" type="default" id="vBx-I6-HDd"/>
-                        </constraints>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Xvt-qA-s6Y"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Uy-y1-89p" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2536" y="934"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="4">
@@ -967,12 +934,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="forgotPasswordButtonTouchDown:" destination="28l-C5-Og2" eventType="touchDown" id="3Fy-IM-2NM"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="login_error.png" translatesAutoresizingMaskIntoConstraints="NO" id="2WZ-aU-Dpr">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="EUA-dX-lW5"/>
-                                    <constraint firstAttribute="height" constant="32" id="HHr-dp-Up3"/>
-                                </constraints>
-                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="login_error.png" translatesAutoresizingMaskIntoConstraints="NO" id="2WZ-aU-Dpr"/>
                         </subviews>
                         <color key="backgroundColor" red="0.85817920920000001" green="0.85817920920000001" blue="0.85817920920000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1416,17 +1378,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
-        <image name="Schneider-Logo.png" width="16" height="16"/>
-        <image name="dashboard-all.png" width="16" height="16"/>
-        <image name="dashboard-favorite.png" width="16" height="16"/>
-        <image name="dashboard-recent.png" width="16" height="16"/>
-        <image name="dashboard.png" width="16" height="16"/>
-        <image name="detail-arrow.png" width="16" height="16"/>
-        <image name="login_error.png" width="16" height="16"/>
-        <image name="splash-schneider-logo.png" width="16" height="16"/>
-        <image name="splashscreen.png" width="16" height="16"/>
-        <image name="test.png" width="16" height="16"/>
-        <image name="user.png" width="16" height="16"/>
+        <image name="Schneider-Logo.png" width="100" height="30"/>
+        <image name="dashboard-all.png" width="32" height="32"/>
+        <image name="dashboard-favorite.png" width="32" height="32"/>
+        <image name="dashboard-recent.png" width="32" height="32"/>
+        <image name="dashboard.png" width="48" height="48"/>
+        <image name="detail-arrow.png" width="32" height="32"/>
+        <image name="login_error.png" width="32" height="32"/>
+        <image name="splash-schneider-logo.png" width="138" height="155"/>
+        <image name="splashscreen.png" width="2048" height="1536"/>
+        <image name="user.png" width="32" height="32"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
