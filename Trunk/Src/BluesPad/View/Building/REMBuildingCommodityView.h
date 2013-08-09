@@ -14,7 +14,8 @@
 #import "REMBuildingConstants.h"
 #import "REMBuildingRankingView.h"
 #import "REMBuildingChartContainerView.h"
-
+#import "REMBuildingAverageChartHandler.h"
+#import "REMBuildingTrendChartController.h"
 
 @interface REMBuildingCommodityView : UIView
 

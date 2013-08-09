@@ -80,9 +80,12 @@
 
 - (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId
 {
-    for (REMBuildingChartContainerView *chart in self.chartViewArray) {
-        [chart requireChartDataWithBuildingId:buildingId withCommodityId:commodityId];
-    }
+    REMBuildingChartContainerView *averageContainer = self.chartViewArray[0];
+    
+    REMBuildingAverageChartHandler *chart = [[REMBuildingAverageChartHandler alloc]initWithViewFrame:averageContainer.chartContainer.frame];
+    
+    [averageContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withController:chart withEnergyData:self.commodityInfo.averageUsageData];
+    
 }
 
 /*

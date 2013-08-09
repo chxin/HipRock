@@ -7,7 +7,6 @@
 //
 
 #import "REMImageView.h"
-#import "REMBuildingAverageChartView.h"
 
 @interface REMImageView()
 
@@ -295,11 +294,11 @@
     [self addSubview:view];
     self.dataView=view;
     
-    
+    /*
     REMBuildingAverageChartView *averageChart = [[REMBuildingAverageChartView alloc] initWithFrame:CGRectMake(10, 1400, 1024, 60)];
     averageChart.backgroundColor = [UIColor yellowColor];
     
-    [self addSubview:averageChart];
+    [self addSubview:averageChart];*/
     
     
 

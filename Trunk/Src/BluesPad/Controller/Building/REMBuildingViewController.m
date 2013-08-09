@@ -91,11 +91,18 @@
     
     self.originCenterXArray=arr;
     
+    [self loadImageData];
+    
 }
 
 
 #pragma mark -
 #pragma mark buildingview
+
+- (void)loadImageData{
+    REMImageView *image = self.imageArray[self.currentIndex];
+    [image requireChartData];
+}
 
 - (void) swipethis:(UIPanGestureRecognizer *)pan
 {
@@ -170,8 +177,7 @@
                                 
                             } completion:^(BOOL ret){
                                 
-                                    REMImageView *image = self.imageArray[self.currentIndex];
-                                    [image requireChartData];
+                                [self loadImageData];
                                 
                             }];
         

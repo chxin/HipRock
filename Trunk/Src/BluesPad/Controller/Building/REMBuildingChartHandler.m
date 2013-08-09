@@ -26,7 +26,7 @@
     return self;
 }
 
-- (void)loadData:(long long)buildingId :(long long)commodityID :(REMBuildingOverallModel *)buildingOverall :(void (^)(void))loadCompleted
+- (void)loadData:(long long)buildingId :(long long)commodityID :(REMEnergyViewData *)buildingOverall :(void (^)(void))loadCompleted
 {
     
 }
