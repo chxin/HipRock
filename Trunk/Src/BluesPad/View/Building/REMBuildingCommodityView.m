@@ -66,12 +66,12 @@
 
 - (void)initChartContainer
 {
-    REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityItemGroupMargin*2+kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight, 1024, kBuildingChartHeight) ];
+    REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityItemGroupMargin*3+kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight, 1024, kBuildingChartHeight) withTitle:@"上月平均" andTitleFontSize:kBuildingCommodityTitleFontSize ];
     
     [self addSubview:view];
     
     
-    REMBuildingChartContainerView *view1 = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityItemGroupMargin*2+kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingChartHeight, 1024, kBuildingChartHeight)];
+    REMBuildingChartContainerView *view1 = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityItemGroupMargin*4+kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingChartHeight, 1024, kBuildingChartHeight) withTitle:@"趋势图" andTitleFontSize:kBuildingCommodityTitleFontSize ];
     
     [self addSubview:view1];
     
