@@ -87,11 +87,11 @@
     [averageContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withController:chart withEnergyData:self.commodityInfo.averageUsageData];
     
     
-    REMBuildingChartContainerView *trendContainer = self.chartViewArray[0];
+    REMBuildingChartContainerView *trendContainer = self.chartViewArray[1];
     
-    chart = [[REMBuildingTrendChartHandler alloc]initWithViewFrame:trendContainer.chartContainer.frame];
+   REMBuildingTrendChartHandler  *chart1 = [[REMBuildingTrendChartHandler alloc]initWithViewFrame:trendContainer.chartContainer.frame];
     
-    [trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withController:chart withEnergyData:nil];
+    [trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withController:chart1 withEnergyData:nil];
 }
 
 /*

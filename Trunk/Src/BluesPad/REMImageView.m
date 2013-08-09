@@ -454,7 +454,7 @@
 - (void)scrollTo:(CGFloat)y
 {
  
-    NSLog(@"dataview:%@",NSStringFromCGRect(self.dataView.frame));
+    //NSLog(@"dataview:%@",NSStringFromCGRect(self.dataView.frame));
     
         [UIView animateWithDuration:0.2 delay:0
                             options: UIViewAnimationOptionCurveEaseOut animations:^(void) {
@@ -492,7 +492,7 @@
     
     if(end<100)
     {
-        end=50;
+        end=-250;
     }
     
     [UIView animateWithDuration:0.5 delay:0
@@ -519,7 +519,7 @@
                             {
                                 [UIView animateWithDuration:0.5 delay:0
                                                     options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
-                                                        CGFloat f=100;
+                                                        CGFloat f=-210;
                                                             [self.dataView setFrame:CGRectMake(0, f, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
                                                     } completion:nil];
                             }
@@ -561,7 +561,17 @@
 {
      CGFloat top = self.dataView.frame.origin.y;
     NSLog(@"top:%f",top);
-    if( top<300){
+    if(top<-210){
+        [UIView animateWithDuration:0.2 delay:0
+    options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
+        CGFloat f=-210;
+        [self.dataView setFrame:CGRectMake(0, f, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
+    } completion:nil];
+    }
+    else if(top>-210 && top<100){
+        
+    }
+    else if(top>100 && top<300){
         [self scrollUp];
     }
     else{
