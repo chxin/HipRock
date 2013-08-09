@@ -421,7 +421,7 @@
 
 - (void)scrollUp
 {
-    if(self.dataViewUp == NO){
+    //if(self.dataViewUp == NO){
         
     [self blurImage];
         
@@ -429,7 +429,7 @@
         self.dataViewUp=YES;
 
         
-    }
+    //}
     
 }
 
@@ -553,7 +553,7 @@
 - (void)moveEnd
 {
      CGFloat top = self.dataView.frame.origin.y;
-   // NSLog(@"top:%f",top);
+    NSLog(@"top:%f",top);
     if( top<300){
         [self scrollUp];
     }

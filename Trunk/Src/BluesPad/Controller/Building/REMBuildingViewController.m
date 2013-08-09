@@ -184,13 +184,13 @@
 
 - (void) scrollInnerView:(UIPanGestureRecognizer *)pan
 {
-    NSLog(@"cumulateX:%f",self.cumulateX);
+    //NSLog(@"cumulateX:%f",self.cumulateX);
     if(ABS(self.cumulateX)>0)return;
     self.inScrollY=YES;
     CGPoint trans= [pan translationInView:self.view];
     CGPoint velocity=[pan velocityInView:self.view];
-    
-    if (pan.state  == UIGestureRecognizerStateChanged && ABS(velocity.y) <kScrollVelocityMedium) {
+    NSLog(@"velocicty:%f",velocity.y);
+    if (pan.state  == UIGestureRecognizerStateChanged && ABS(velocity.y) < kScrollVelocityMax) {
         for (REMImageView *view in self.imageArray) {
             [view move:trans.y];
         }
