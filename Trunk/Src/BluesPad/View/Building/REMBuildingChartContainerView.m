@@ -43,6 +43,7 @@
 {
     if(self.hasLoaded == NO){
         self.chartController = controller;
+        [self.chartContainer addSubview:controller.view];
         [self.chartController loadData:[buildingId longLongValue] :[commodityId longLongValue] :averageData :^(void){
             self.hasLoaded=YES;
         }];

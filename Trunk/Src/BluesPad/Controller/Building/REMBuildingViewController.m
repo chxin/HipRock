@@ -196,7 +196,7 @@
     self.inScrollY=YES;
     CGPoint trans= [pan translationInView:self.view];
     CGPoint velocity=[pan velocityInView:self.view];
-    NSLog(@"velocicty:%f",velocity.y);
+    //NSLog(@"velocicty:%f",velocity.y);
     if (pan.state  == UIGestureRecognizerStateChanged && ABS(velocity.y) < kScrollVelocityMax) {
         for (REMImageView *view in self.imageArray) {
             [view move:trans.y];
