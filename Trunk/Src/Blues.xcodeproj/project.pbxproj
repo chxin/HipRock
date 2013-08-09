@@ -211,6 +211,7 @@
 		B445AEE2177C04E4002D2A59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AED0177C0052002D2A59 /* CoreGraphics.framework */; };
 		B45A4F1317B3717C00A82C0B /* BluesPad.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B45A4F1217B3705600A82C0B /* BluesPad.entitlements */; };
 		B4626BFC17B0A0D900A7759B /* REMBuildingCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */; };
+		B480748117B47F02006D6AD4 /* REMBuildingChartContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B480748017B47F02006D6AD4 /* REMBuildingChartContainerView.m */; };
 		B48BE1FC178AB0DC00A157CD /* REMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48BE1FA178AB0DB00A157CD /* REMMainViewController.m */; };
 		B48CC9901783297900AAD5D4 /* REMWidgetStepToolbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC98F1783297900AAD5D4 /* REMWidgetStepToolbarView.m */; };
 		B48CC99317832EAE00AAD5D4 /* REMWidgetMaxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC99217832EAE00AAD5D4 /* REMWidgetMaxView.m */; };
@@ -816,6 +817,8 @@
 		B45A4F1217B3705600A82C0B /* BluesPad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluesPad.entitlements; sourceTree = "<group>"; };
 		B4626BFA17B0A0D900A7759B /* REMBuildingCommodityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingCommodityView.h; path = View/Building/REMBuildingCommodityView.h; sourceTree = "<group>"; };
 		B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingCommodityView.m; path = View/Building/REMBuildingCommodityView.m; sourceTree = "<group>"; };
+		B480747F17B47F02006D6AD4 /* REMBuildingChartContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingChartContainerView.h; path = View/Building/REMBuildingChartContainerView.h; sourceTree = "<group>"; };
+		B480748017B47F02006D6AD4 /* REMBuildingChartContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingChartContainerView.m; path = View/Building/REMBuildingChartContainerView.m; sourceTree = "<group>"; };
 		B48BE1F9178AB0DB00A157CD /* REMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMainViewController.h; path = Controller/REMMainViewController.h; sourceTree = "<group>"; };
 		B48BE1FA178AB0DB00A157CD /* REMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMainViewController.m; path = Controller/REMMainViewController.m; sourceTree = "<group>"; };
 		B48CC98E1783297900AAD5D4 /* REMWidgetStepToolbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetStepToolbarView.h; path = View/REMWidgetStepToolbarView.h; sourceTree = "<group>"; };
@@ -1649,6 +1652,8 @@
 				EF0187B417B34464003A30DD /* REMBuildingTrendView.m */,
 				EF0187B917B3693D003A30DD /* REMBuildingTrendChartView.h */,
 				EF0187BA17B3693D003A30DD /* REMBuildingTrendChartView.m */,
+				B480747F17B47F02006D6AD4 /* REMBuildingChartContainerView.h */,
+				B480748017B47F02006D6AD4 /* REMBuildingChartContainerView.m */,
 			);
 			name = Building;
 			sourceTree = "<group>";
@@ -2045,6 +2050,7 @@
 				B4911F4817B0EB8B007AEF7D /* REMBuildingRankingView.m in Sources */,
 				EF0187B517B34464003A30DD /* REMBuildingTrendView.m in Sources */,
 				EF0187BB17B3693D003A30DD /* REMBuildingTrendChartView.m in Sources */,
+				B480748117B47F02006D6AD4 /* REMBuildingChartContainerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

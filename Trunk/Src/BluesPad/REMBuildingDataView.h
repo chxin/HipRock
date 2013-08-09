@@ -16,4 +16,8 @@
 
 - (id)initWithFrame:(CGRect)frame withBuildingInfo:(REMBuildingOverallModel *)buildingInfo;
 
+
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId;
+
+
 @end

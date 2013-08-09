@@ -152,7 +152,7 @@
                                     
                                     //NSLog(@"array:%@",ar);
                                 }
-                                NSLog(@"array:%@",self.originCenterXArray);
+                                //NSLog(@"array:%@",self.originCenterXArray);
                                 for(int i=0;i<self.imageArray.count;++i)
                                 {
                                     NSNumber *s = self.originCenterXArray[i];
@@ -168,6 +168,9 @@
                                 self.cumulateX=0;
                                 
                             } completion:^(BOOL ret){
+                                
+                                    REMImageView *image = self.imageArray[self.currentIndex];
+                                    [image requireChartData];
                                 
                             }];
         

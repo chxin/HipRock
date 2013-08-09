@@ -34,4 +34,6 @@
 
 - (void)moveCenter:(CGFloat)x;
 
+-(void)requireChartData;
+
 @end
