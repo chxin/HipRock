@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "REMEnergyViewData.h"
 #import "REMCommodityModel.h"
 #import "REMEnergyUsageDataModel.h"
 #import "REMRankingDataModel.h"
 #import "REMCommonHeaders.h"
+#import "REMAverageUsageDataModel.h"
 
 @interface REMCommodityUsageModel : REMJSONObject
 
@@ -26,6 +26,6 @@
 @property (nonatomic,strong) REMEnergyUsageDataModel *targetValue;
 @property (nonatomic) BOOL isTargetAchieved;
 
-@property (nonatomic,strong) REMEnergyViewData *averageUsageData;
+@property (nonatomic,strong) REMAverageUsageDataModel *averageUsageData;
 
 @end

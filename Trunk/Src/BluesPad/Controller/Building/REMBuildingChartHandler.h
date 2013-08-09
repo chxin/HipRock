@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "REMEnergyViewData.h"
+#import "REMAverageUsageDataModel.h"
 
 @interface REMBuildingChartHandler : UIViewController
 
 - (REMBuildingChartHandler *)initWithViewFrame:(CGRect)frame;
 
-- (void)loadData:(long long)buildingId :(long long)commodityID :(REMEnergyViewData *)buildingOverall :(void (^)(void))loadCompleted;
+- (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(void))loadCompleted;
 
 @end

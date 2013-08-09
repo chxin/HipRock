@@ -31,11 +31,7 @@
 		7A153CA217AA497C00413D3C /* REMDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C7217AA497B00413D3C /* REMDashboardViewController.m */; };
 		7A153CA317AA497C00413D3C /* REMFavoriteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C7417AA497B00413D3C /* REMFavoriteTableViewController.m */; };
 		7A153CA417AA497C00413D3C /* REMLoginCarouselController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C7717AA497B00413D3C /* REMLoginCarouselController.m */; };
-		7A153CA517AA497C00413D3C /* REMLoginCustomerSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C7917AA497B00413D3C /* REMLoginCustomerSelectViewController.m */; };
-		7A153CA617AA497C00413D3C /* REMLoginCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C7B17AA497B00413D3C /* REMLoginCustomerViewController.m */; };
 		7A153CA717AA497C00413D3C /* REMLoginPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C7D17AA497B00413D3C /* REMLoginPageController.m */; };
-		7A153CA817AA497C00413D3C /* REMLoginPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C7F17AA497C00413D3C /* REMLoginPasswordViewController.m */; };
-		7A153CA917AA497C00413D3C /* REMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C8117AA497C00413D3C /* REMLoginViewController.m */; };
 		7A153CAA17AA497C00413D3C /* REMSplashScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C8417AA497C00413D3C /* REMSplashScreenController.m */; };
 		7A153CAB17AA497C00413D3C /* REMChartLegendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C8717AA497C00413D3C /* REMChartLegendTableViewController.m */; };
 		7A153CAC17AA497C00413D3C /* REMWidgetCellColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C8917AA497C00413D3C /* REMWidgetCellColumnViewController.m */; };
@@ -60,11 +56,11 @@
 		7A1786E3177B43050015635C /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1786E2177B43050015635C /* libCorePlot-CocoaTouch.a */; };
 		7A1A854217B4B2E9004D7167 /* REMBuildingTrendChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854117B4B2E9004D7167 /* REMBuildingTrendChart.m */; };
 		7A1A854517B4B303004D7167 /* REMBuildingAverageChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854417B4B303004D7167 /* REMBuildingAverageChart.m */; };
-		7A1A854A17B4B7EC004D7167 /* REMBuildingAverageChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854717B4B7EC004D7167 /* REMBuildingAverageChartView.m */; };
 		7A1A854B17B4B7EC004D7167 /* REMBuildingChartContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854917B4B7EC004D7167 /* REMBuildingChartContainerView.m */; };
 		7A1A855217B4BB5D004D7167 /* REMBuildingAverageChartHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854D17B4BB5D004D7167 /* REMBuildingAverageChartHandler.m */; };
 		7A1A855317B4BB5D004D7167 /* REMBuildingChartHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854F17B4BB5D004D7167 /* REMBuildingChartHandler.m */; };
 		7A1A855417B4BB5D004D7167 /* REMBuildingTrendChartHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A855117B4BB5D004D7167 /* REMBuildingTrendChartHandler.m */; };
+		7A1A855717B4E278004D7167 /* REMAverageUsageDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A855617B4E278004D7167 /* REMAverageUsageDataModel.m */; };
 		7A1D142617850B2100CC2922 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142517850B2100CC2922 /* Reachability.m */; };
 		7A1D14291785178800CC2922 /* REMNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14281785178800CC2922 /* REMNetworkHelper.m */; };
 		7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142B1785211000CC2922 /* REMAlertHelper.m */; };
@@ -495,16 +491,8 @@
 		7A153C7417AA497B00413D3C /* REMFavoriteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMFavoriteTableViewController.m; sourceTree = "<group>"; };
 		7A153C7617AA497B00413D3C /* REMLoginCarouselController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginCarouselController.h; sourceTree = "<group>"; };
 		7A153C7717AA497B00413D3C /* REMLoginCarouselController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginCarouselController.m; sourceTree = "<group>"; };
-		7A153C7817AA497B00413D3C /* REMLoginCustomerSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginCustomerSelectViewController.h; sourceTree = "<group>"; };
-		7A153C7917AA497B00413D3C /* REMLoginCustomerSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginCustomerSelectViewController.m; sourceTree = "<group>"; };
-		7A153C7A17AA497B00413D3C /* REMLoginCustomerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginCustomerViewController.h; sourceTree = "<group>"; };
-		7A153C7B17AA497B00413D3C /* REMLoginCustomerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginCustomerViewController.m; sourceTree = "<group>"; };
 		7A153C7C17AA497B00413D3C /* REMLoginPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginPageController.h; sourceTree = "<group>"; };
 		7A153C7D17AA497B00413D3C /* REMLoginPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginPageController.m; sourceTree = "<group>"; };
-		7A153C7E17AA497C00413D3C /* REMLoginPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginPasswordViewController.h; sourceTree = "<group>"; };
-		7A153C7F17AA497C00413D3C /* REMLoginPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginPasswordViewController.m; sourceTree = "<group>"; };
-		7A153C8017AA497C00413D3C /* REMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginViewController.h; sourceTree = "<group>"; };
-		7A153C8117AA497C00413D3C /* REMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginViewController.m; sourceTree = "<group>"; };
 		7A153C8317AA497C00413D3C /* REMSplashScreenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSplashScreenController.h; sourceTree = "<group>"; };
 		7A153C8417AA497C00413D3C /* REMSplashScreenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSplashScreenController.m; sourceTree = "<group>"; };
 		7A153C8617AA497C00413D3C /* REMChartLegendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartLegendTableViewController.h; sourceTree = "<group>"; };
@@ -551,8 +539,6 @@
 		7A1A854117B4B2E9004D7167 /* REMBuildingTrendChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingTrendChart.m; sourceTree = "<group>"; };
 		7A1A854317B4B302004D7167 /* REMBuildingAverageChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAverageChart.h; sourceTree = "<group>"; };
 		7A1A854417B4B303004D7167 /* REMBuildingAverageChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingAverageChart.m; sourceTree = "<group>"; };
-		7A1A854617B4B7EC004D7167 /* REMBuildingAverageChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingAverageChartView.h; path = View/Building/REMBuildingAverageChartView.h; sourceTree = "<group>"; };
-		7A1A854717B4B7EC004D7167 /* REMBuildingAverageChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingAverageChartView.m; path = View/Building/REMBuildingAverageChartView.m; sourceTree = "<group>"; };
 		7A1A854817B4B7EC004D7167 /* REMBuildingChartContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingChartContainerView.h; path = View/Building/REMBuildingChartContainerView.h; sourceTree = "<group>"; };
 		7A1A854917B4B7EC004D7167 /* REMBuildingChartContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingChartContainerView.m; path = View/Building/REMBuildingChartContainerView.m; sourceTree = "<group>"; };
 		7A1A854C17B4BB5D004D7167 /* REMBuildingAverageChartHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAverageChartHandler.h; sourceTree = "<group>"; };
@@ -561,6 +547,8 @@
 		7A1A854F17B4BB5D004D7167 /* REMBuildingChartHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingChartHandler.m; sourceTree = "<group>"; };
 		7A1A855017B4BB5D004D7167 /* REMBuildingTrendChartHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingTrendChartHandler.h; sourceTree = "<group>"; };
 		7A1A855117B4BB5D004D7167 /* REMBuildingTrendChartHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingTrendChartHandler.m; sourceTree = "<group>"; };
+		7A1A855517B4E278004D7167 /* REMAverageUsageDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAverageUsageDataModel.h; sourceTree = "<group>"; };
+		7A1A855617B4E278004D7167 /* REMAverageUsageDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAverageUsageDataModel.m; sourceTree = "<group>"; };
 		7A1D142417850B2100CC2922 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		7A1D142517850B2100CC2922 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		7A1D14271785178800CC2922 /* REMNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMNetworkHelper.h; path = Common/Utility/REMNetworkHelper.h; sourceTree = "<group>"; };
@@ -936,6 +924,8 @@
 				7A153CC917AA4B5C00413D3C /* REMEnergyUsageDataModel.m */,
 				7A153CCB17AA4EDB00413D3C /* REMRankingDataModel.h */,
 				7A153CCC17AA4EDB00413D3C /* REMRankingDataModel.m */,
+				7A1A855517B4E278004D7167 /* REMAverageUsageDataModel.h */,
+				7A1A855617B4E278004D7167 /* REMAverageUsageDataModel.m */,
 			);
 			name = Building;
 			path = Model/Building;
@@ -1014,7 +1004,6 @@
 		7A153C7517AA497B00413D3C /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				7A153CB717AA498D00413D3C /* Old */,
 				7A153C7617AA497B00413D3C /* REMLoginCarouselController.h */,
 				7A153C7717AA497B00413D3C /* REMLoginCarouselController.m */,
 				7A153C7C17AA497B00413D3C /* REMLoginPageController.h */,
@@ -1064,21 +1053,6 @@
 			);
 			name = Widget;
 			path = Controller/Widget;
-			sourceTree = "<group>";
-		};
-		7A153CB717AA498D00413D3C /* Old */ = {
-			isa = PBXGroup;
-			children = (
-				7A153C7E17AA497C00413D3C /* REMLoginPasswordViewController.h */,
-				7A153C7F17AA497C00413D3C /* REMLoginPasswordViewController.m */,
-				7A153C8017AA497C00413D3C /* REMLoginViewController.h */,
-				7A153C8117AA497C00413D3C /* REMLoginViewController.m */,
-				7A153C7817AA497B00413D3C /* REMLoginCustomerSelectViewController.h */,
-				7A153C7917AA497B00413D3C /* REMLoginCustomerSelectViewController.m */,
-				7A153C7A17AA497B00413D3C /* REMLoginCustomerViewController.h */,
-				7A153C7B17AA497B00413D3C /* REMLoginCustomerViewController.m */,
-			);
-			name = Old;
 			sourceTree = "<group>";
 		};
 		7A153CB817AA49EA00413D3C /* Common */ = {
@@ -1671,8 +1645,6 @@
 		B4426FFE17AF305500762C68 /* Building */ = {
 			isa = PBXGroup;
 			children = (
-				7A1A854617B4B7EC004D7167 /* REMBuildingAverageChartView.h */,
-				7A1A854717B4B7EC004D7167 /* REMBuildingAverageChartView.m */,
 				7A1A854817B4B7EC004D7167 /* REMBuildingChartContainerView.h */,
 				7A1A854917B4B7EC004D7167 /* REMBuildingChartContainerView.m */,
 				B442700017AF30FF00762C68 /* REMBuildingDataView.h */,
@@ -2048,11 +2020,7 @@
 				7A153CA217AA497C00413D3C /* REMDashboardViewController.m in Sources */,
 				7A153CA317AA497C00413D3C /* REMFavoriteTableViewController.m in Sources */,
 				7A153CA417AA497C00413D3C /* REMLoginCarouselController.m in Sources */,
-				7A153CA517AA497C00413D3C /* REMLoginCustomerSelectViewController.m in Sources */,
-				7A153CA617AA497C00413D3C /* REMLoginCustomerViewController.m in Sources */,
 				7A153CA717AA497C00413D3C /* REMLoginPageController.m in Sources */,
-				7A153CA817AA497C00413D3C /* REMLoginPasswordViewController.m in Sources */,
-				7A153CA917AA497C00413D3C /* REMLoginViewController.m in Sources */,
 				7A153CAA17AA497C00413D3C /* REMSplashScreenController.m in Sources */,
 				7A153CAB17AA497C00413D3C /* REMChartLegendTableViewController.m in Sources */,
 				7A153CAC17AA497C00413D3C /* REMWidgetCellColumnViewController.m in Sources */,
@@ -2089,11 +2057,11 @@
 				7A1A854217B4B2E9004D7167 /* REMBuildingTrendChart.m in Sources */,
 				7A1A854517B4B303004D7167 /* REMBuildingAverageChart.m in Sources */,
 				EF0187BE17B37075003A30DD /* REMBuildingTrendChartController.m in Sources */,
-				7A1A854A17B4B7EC004D7167 /* REMBuildingAverageChartView.m in Sources */,
 				7A1A854B17B4B7EC004D7167 /* REMBuildingChartContainerView.m in Sources */,
 				7A1A855217B4BB5D004D7167 /* REMBuildingAverageChartHandler.m in Sources */,
 				7A1A855317B4BB5D004D7167 /* REMBuildingChartHandler.m in Sources */,
 				7A1A855417B4BB5D004D7167 /* REMBuildingTrendChartHandler.m in Sources */,
+				7A1A855717B4E278004D7167 /* REMAverageUsageDataModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

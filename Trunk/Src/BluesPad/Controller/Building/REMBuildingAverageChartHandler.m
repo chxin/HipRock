@@ -11,8 +11,16 @@
 #import "REMBuildingAverageChart.h"
 #import "REMEnergyViewData.h"
 #import "REMCommodityUsageModel.h"
+#import "CorePlot-CocoaTouch.h"
 
 @interface REMBuildingAverageChartHandler ()
+
+@property (nonatomic) CGRect viewFrame;
+@property (nonatomic,strong) REMBuildingAverageChart *chartView;
+@property (nonatomic,strong) NSArray *chartData;
+@property (nonatomic,strong) REMEnergyViewData *averageData;
+@property (nonatomic,strong) REMEnergyViewData *benchmarkData;
+
 
 @end
 
@@ -24,10 +32,18 @@
     self = [super init];
     if (self) {
         // Custom initialization
-        self.view = [[REMBuildingAverageChart alloc] initWithFrame:frame];
-        [self viewDidLoad];
+        self.viewFrame = frame;
     }
     return self;
+}
+
+- (void)loadView
+{
+    [super loadView];
+    
+    self.view = [[REMBuildingAverageChart alloc] initWithFrame:self.viewFrame];
+    
+    [self viewDidLoad];
 }
 
 - (void)viewDidLoad
@@ -40,21 +56,20 @@
     self.view.backgroundColor = [UIColor yellowColor];
 }
 
-- (void)loadData:(long long)buildingId :(long long)commodityID :(REMEnergyViewData *)buildingOverall :(void (^)(void))loadCompleted
+- (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageData :(void (^)(void))loadCompleted
 {
-   // REMCommodityUsageModel *commodityUsage = [self getAverageUsageData:commodityID :buildingOverall];
+    //convert data
+    //initialize plot space
+    //initialize axises
+    //initialize plots
     
 }
-- (REMCommodityUsageModel *)getAverageUsageData:(long long)commodityID :(REMEnergyViewData *)buildingOverall
+
+- (void)adaptData
 {
-//    for(REMCommodityUsageModel *commodityUsage in buildingOverall.commodityUsage){
-//        if(commodityUsage.commodity != nil && [commodityUsage.commodity.commodityId longLongValue] == commodityID){
-//            return commodityUsage;
-//        }
-//    }
     
-    return nil;
 }
+
 
 - (void)didReceiveMemoryWarning
 {

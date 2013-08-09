@@ -7,10 +7,10 @@
 //
 
 #import "REMCommodityUsageModel.h"
-#import "REMEnergyViewData.h"
 #import "REMCommodityModel.h"
 #import "REMEnergyUsageDataModel.h"
 #import "REMRankingDataModel.h"
+#import "REMAverageUsageDataModel.h"
 
 @implementation REMCommodityUsageModel
 
@@ -22,7 +22,7 @@
     self.rankingData = [[REMRankingDataModel alloc] initWithDictionary:dictionary[@"RankingData"]];
     self.targetValue = [[REMEnergyUsageDataModel alloc] initWithDictionary:dictionary[@"TargetValue"]];
     self.isTargetAchieved = [dictionary[@"IsTargetAchieved"] boolValue];
-    self.averageUsageData = [[REMEnergyViewData alloc] initWithDictionary:dictionary[@"AverageUsageData"]];
+    self.averageUsageData = [[REMAverageUsageDataModel alloc] initWithDictionary:dictionary[@"AverageUsageData"]];
 }
 
 @end
