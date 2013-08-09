@@ -31,7 +31,7 @@
 #define kScrollVelocityMax 1000
 #define kScrollVelocityMedium 400
 #define kScrollVelocitySmall 50
-
+#define kMoveLen 200
 
 #define kBuildingChartHeight 310
 
