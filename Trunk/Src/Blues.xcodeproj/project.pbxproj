@@ -9,9 +9,12 @@
 /* Begin PBXBuildFile section */
 		38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D161785111300219469 /* REMApplicationInfo.m */; };
 		38ED7D1F1785140900219469 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38ED7D1E1785140900219469 /* libsqlite3.dylib */; };
+		6A4BD94717B89F1F007C9FCF /* BluesPad.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B4CD146017B3439600807B5F /* BluesPad.entitlements */; };
+		6A4BD94817B89F1F007C9FCF /* BluesPad-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D96177B41C3000F77F9 /* BluesPad-Info.plist */; };
 		7A003E4E1782C2E600E31543 /* login_error.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A003E4D1782C2E600E31543 /* login_error.png */; };
 		7A03977D17A2775E0082F6EE /* dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A03977C17A2775E0082F6EE /* dashboard.png */; };
 		7A095E73179571C80098DB16 /* REMWidgetAxisHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */; };
+		7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */; };
 		7A1109A017812DFF0028EBEF /* REMServiceUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A11099F17812DFF0028EBEF /* REMServiceUrl.m */; };
 		7A153C5C17AA489600413D3C /* REMBuildingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C4517AA489600413D3C /* REMBuildingModel.m */; };
 		7A153C5D17AA489600413D3C /* REMDashboardObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C4817AA489600413D3C /* REMDashboardObj.m */; };
@@ -453,6 +456,8 @@
 		7A03977C17A2775E0082F6EE /* dashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboard.png; sourceTree = "<group>"; };
 		7A095E71179571C80098DB16 /* REMWidgetAxisHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetAxisHelper.h; path = Common/Utility/REMWidgetAxisHelper.h; sourceTree = "<group>"; };
 		7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetAxisHelper.m; path = Common/Utility/REMWidgetAxisHelper.m; sourceTree = "<group>"; };
+		7A09D59517B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingTimeRangeDataModel.h; sourceTree = "<group>"; };
+		7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingTimeRangeDataModel.m; sourceTree = "<group>"; };
 		7A11099E17812DFF0028EBEF /* REMServiceUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceUrl.h; path = Common/Constants/REMServiceUrl.h; sourceTree = "<group>"; };
 		7A11099F17812DFF0028EBEF /* REMServiceUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceUrl.m; path = Common/Constants/REMServiceUrl.m; sourceTree = "<group>"; };
 		7A153C4417AA489600413D3C /* REMBuildingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingModel.h; sourceTree = "<group>"; };
@@ -926,6 +931,8 @@
 				7A153CCC17AA4EDB00413D3C /* REMRankingDataModel.m */,
 				7A1A855517B4E278004D7167 /* REMAverageUsageDataModel.h */,
 				7A1A855617B4E278004D7167 /* REMAverageUsageDataModel.m */,
+				7A09D59517B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.h */,
+				7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */,
 			);
 			name = Building;
 			path = Model/Building;
@@ -1833,6 +1840,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A4BD94717B89F1F007C9FCF /* BluesPad.entitlements in Resources */,
+				6A4BD94817B89F1F007C9FCF /* BluesPad-Info.plist in Resources */,
 				7A5E2D91177B41B0000F77F9 /* Default-568h@2x.png in Resources */,
 				7A5E2D92177B41B0000F77F9 /* Default.png in Resources */,
 				7A5E2D93177B41B0000F77F9 /* Default@2x.png in Resources */,
@@ -2062,6 +2071,7 @@
 				7A1A855317B4BB5D004D7167 /* REMBuildingChartHandler.m in Sources */,
 				7A1A855417B4BB5D004D7167 /* REMBuildingTrendChartHandler.m in Sources */,
 				7A1A855717B4E278004D7167 /* REMAverageUsageDataModel.m in Sources */,
+				7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2408,7 +2418,9 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos6.1]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2435,6 +2447,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos6.1]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv7s i386 x86_64";
@@ -2454,7 +2468,9 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = BluesPad.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2474,6 +2490,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "84A84BF6-540F-47A0-A7C5-ABC51BD165DF";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -2586,8 +2603,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2608,7 +2625,6 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "84A84BF6-540F-47A0-A7C5-ABC51BD165DF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "84A84BF6-540F-47A0-A7C5-ABC51BD165DF";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;

@@ -59,13 +59,14 @@
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageData :(void (^)(void))loadCompleted
 {
     //convert data
+    self.chartData = [self convertData];
     //initialize plot space
     //initialize axises
     //initialize plots
     
 }
 
-- (void)adaptData
+- (NSArray *)convertData
 {
     
 }

@@ -55,7 +55,7 @@
 }
 
 - (void)intervalChanged:(UIButton *)button {
-    RelativeTimeRangeType t = Today;
+    REMRelativeTimeRangeType t = Today;
     if (button == self.todayButton) {
         t = Today;
     } else if (button == self.yestodayButton) {
@@ -72,7 +72,7 @@
     [self retrieveEnergyData:t];
 }
 
-- (void) retrieveEnergyData:(RelativeTimeRangeType)type
+- (void) retrieveEnergyData:(REMRelativeTimeRangeType)type
 {
     NSMutableDictionary *buildingCommodityInfo = [[NSMutableDictionary alloc] init];
 //    self.buildingInfo.building.buildingId
