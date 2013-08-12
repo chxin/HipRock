@@ -101,12 +101,12 @@
     NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
     REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSEnergyBuildingOverall parameter:parameter];
     buildingStore.isStoreLocal = YES;
-    buildingStore.isAccessLocal = YES;
+    buildingStore.isAccessLocal = NO;
     buildingStore.groupName = nil;
     buildingStore.maskContainer = nil;
     
     [REMDataAccessor access:buildingStore success:^(id data) {
-        NSLog(@"building loaded: %d,%@",[data count],data);
+        //NSLog(@"building loaded: %d,%@",[data count],data);
         
         self.buildingOveralls = [[NSMutableArray alloc] initWithCapacity:[data count]];
         for(NSDictionary *item in (NSArray *)data){

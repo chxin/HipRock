@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "REMBuildingChartHandler.h"
+#import "REMBuildingAverageChart.h"
 
 @interface REMBuildingAverageChartHandler : REMBuildingChartHandler
+
 
 @end

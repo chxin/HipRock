@@ -15,7 +15,8 @@
 @property (nonatomic,strong) NSArray *originCenterXArray;
 @property (nonatomic) CGFloat cumulateX;
 @property (nonatomic) BOOL inScrollY;
-
+@property (nonatomic,strong) NSMutableDictionary *imageViewStatus;
+@property (nonatomic,strong) UIButton *logoutButton;
 @end
 
 
@@ -50,12 +51,15 @@
     
     UITapGestureRecognizer *tap= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapthis:)];
     [self.view addGestureRecognizer:tap];
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    //self.buildingOverallArray=nil;
+    
 }
 
 - (void) initButtons
@@ -64,7 +68,7 @@
     [logout setImage:[UIImage imageNamed:@"Logout.png"] forState:UIControlStateNormal];
     logout.titleLabel.text=@"注销";
     [logout addTarget:self action:@selector(logoutButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
+    self.logoutButton=logout;
     [self.view addSubview:logout];
 }
 
@@ -72,19 +76,29 @@
 {
     int width=1024,height=748,margin=5;
     int i=0;
+    self.imageViewStatus = [[NSMutableDictionary alloc]initWithCapacity:self.buildingOverallArray.count];
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:self.buildingOverallArray.count];
-    for (REMBuildingOverallModel *model in self.buildingOverallArray) {
+    for (;i<self.buildingOverallArray.count;++i) {
+        REMBuildingOverallModel *model = self.buildingOverallArray[i];
         REMImageView *imageView = [[REMImageView alloc]initWithFrame:CGRectMake((width+margin)*i, 0, width, height) withBuildingOveralInfo:model];
-        [self.view addSubview:imageView];
+        //[self.view addSubview:imageView];
+        if(i==0 || i==1){
+            [self.view addSubview:imageView];
+            [self.imageViewStatus setObject:@(1) forKey:@(i)];
+        }
+        else{
+            [self.imageViewStatus setObject:@(0) forKey:@(i)];
+        }
         [array addObject:imageView];
-        i++;
     }
     self.imageArray=array;
   
+    
+    
     NSMutableArray *arr = [[NSMutableArray alloc]initWithCapacity:self.imageArray.count];
     
-    for (REMImageView *view in self.imageArray) {
-        
+    for (i=0;i<self.imageArray.count;++i) {
+        REMImageView *view = self.imageArray[i];
         NSNumber *num = [NSNumber numberWithFloat:view.center.x];
         [arr addObject:num];
     }
@@ -178,7 +192,13 @@
                             } completion:^(BOOL ret){
                                 
                                 [self loadImageData];
-                                
+                                if(self.currentIndex<self.imageArray.count){
+                                NSNumber *status = self.imageViewStatus[@(self.currentIndex+1)];
+                                if([status isEqualToNumber:@(0)] ==YES){
+                                    [self.view insertSubview:self.imageArray[self.currentIndex+1] belowSubview:self.logoutButton];
+                                    
+                                }
+                                }
                             }];
         
         [pan setTranslation:CGPointZero inView:self.view];
@@ -197,7 +217,8 @@
     CGPoint trans= [pan translationInView:self.view];
     CGPoint velocity=[pan velocityInView:self.view];
     //NSLog(@"velocicty:%f",velocity.y);
-    if (pan.state  == UIGestureRecognizerStateChanged && ABS(velocity.y) < kScrollVelocityMax) {
+    if (pan.state  == UIGestureRecognizerStateChanged &&
+                    (ABS(velocity.y) < kScrollVelocityMax || ABS(trans.y)>kMoveLen)) {
         for (REMImageView *view in self.imageArray) {
             [view move:trans.y];
         }
@@ -206,7 +227,9 @@
     
     if(pan.state == UIGestureRecognizerStateEnded)
     {
-        if(ABS(velocity.y)>kScrollVelocitySmall && ABS(velocity.y)<kScrollVelocityMax){
+        //NSLog(@"movelen:%f",trans.y);
+        //NSLog(@"velocicty:%f",velocity.y);
+        /*if(ABS(velocity.y)>kScrollVelocitySmall && ABS(velocity.y)<kScrollVelocityMax){
             if(velocity.y<0)
             {
                 for (REMImageView *view in self.imageArray) {
@@ -220,7 +243,8 @@
             }
             
         }
-        else if(ABS(velocity.y)<kScrollVelocitySmall){
+        else */
+        if(ABS(velocity.y)<kScrollVelocityMax){
             
             for (REMImageView *view in self.imageArray) {
                 [view moveEnd];

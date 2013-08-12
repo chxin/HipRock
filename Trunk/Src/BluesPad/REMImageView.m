@@ -550,9 +550,10 @@
     }
     if(deep>0.7) deep=0.7;
     
-    
-    self.glassView.alpha=deep;
-    self.blurredImageView.alpha=deep;
+    if(top>100 && top< kBuildingCommodityViewTop){
+        self.glassView.alpha=deep;
+        self.blurredImageView.alpha=deep;
+    }
     
     
 }
@@ -560,7 +561,7 @@
 - (void)moveEnd
 {
      CGFloat top = self.dataView.frame.origin.y;
-    NSLog(@"top:%f",top);
+    //NSLog(@"top:%f",top);
     if(top<-210){
         [UIView animateWithDuration:0.2 delay:0
     options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {

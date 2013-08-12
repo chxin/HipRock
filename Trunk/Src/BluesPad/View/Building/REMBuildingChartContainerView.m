@@ -7,6 +7,7 @@
 //
 
 #import "REMBuildingChartContainerView.h"
+#import "REMAverageUsageDataModel.h"
 
 @interface REMBuildingChartContainerView()
 
@@ -39,7 +40,7 @@
     [self addSubview:self.chartContainer];
 }
 
-- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId withController:(REMBuildingChartHandler *)controller withEnergyData:(REMEnergyViewData *)averageData
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId withController:(REMBuildingChartHandler *)controller withEnergyData:(REMAverageUsageDataModel *)averageData
 {
     if(self.hasLoaded == NO){
         self.chartController = controller;

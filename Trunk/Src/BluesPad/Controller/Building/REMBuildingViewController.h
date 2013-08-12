@@ -10,6 +10,7 @@
 #import "REMSplashScreenController.h"
 #import "REMImageView.h"
 #import "REMBuildingOverallModel.h"
+#import "REMBuildingConstants.h"
 
 @interface REMBuildingViewController : UIViewController
 

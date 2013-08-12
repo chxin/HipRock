@@ -99,7 +99,7 @@
 	// Do any additional setup after loading the view.
 }
 
-- (void)loadData:(long long)buildingId :(long long)commodityID :(REMEnergyViewData *)buildingOverall :(void (^)(void))loadCompleted
+- (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(void))loadCompleted
 {
     NSMutableDictionary *buildingCommodityInfo = [[NSMutableDictionary alloc] init];
     //    self.buildingInfo.building.buildingId

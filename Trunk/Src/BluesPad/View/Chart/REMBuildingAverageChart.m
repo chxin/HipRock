@@ -22,7 +22,14 @@
 
 -(void)initializeGraph
 {
+    self.graph=[[CPTXYGraph alloc]initWithFrame:self.bounds];
+    self.graph.plotAreaFrame.paddingTop=0.0f;
+    self.graph.plotAreaFrame.paddingRight=100.0f;
+    self.graph.plotAreaFrame.paddingBottom=40.0f;
+    self.graph.plotAreaFrame.paddingLeft=50.0f;
     
+    //Init host view
+    self.hostedGraph = self.graph;
 }
 
 /*
