@@ -8,6 +8,7 @@
 
 #import "REMBuildingTrendChartHandler.h"
 #import "REMBuildingTrendChart.h"
+#import "REMWidgetAxisHelper.h"
 
 @interface REMBuildingTrendChartHandler () {
     int currentSourceIndex; // Indicate that which button was pressed down.
@@ -86,10 +87,17 @@
     
     scatterPlot.dataLineStyle = scatterStyle;
     [scatterPlot addAnimation:[self columnAnimation] forKey:@"y"];
-    for (int i = 0; i < myView.hostView.hostedGraph.allPlotSpaces.count; i++) {
-        [myView.hostView.hostedGraph removePlot:myView.hostView.hostedGraph.allPlotSpaces[i]];
+    if (myView.hostView.hostedGraph.allPlots.count == 1) {
+        CPTPlot* p = [myView.hostView.hostedGraph plotAtIndex:0];
+        [myView.hostView.hostedGraph removePlot:p];
     }
+    scatterPlot.delegate = self;
+    scatterPlot.dataSource = self;
+    
+    [REMWidgetAxisHelper decorateBuildingTrendAxisSet:(CPTXYGraph*)myView.hostView.hostedGraph dataSource:self.datasource interval:t seriesIndex:currentSourceIndex];
     [myView.hostView.hostedGraph addPlot:scatterPlot];
+    [myView.hostView.hostedGraph reloadData];
+    [scatterPlot reloadData];
 }
 
 
@@ -107,20 +115,35 @@
     [buildingCommodityInfo setValue:[NSNumber numberWithLong:commodityID] forKey:@"commodityId"];
     [buildingCommodityInfo setValue:[NSNumber numberWithInt:1] forKey:@"relativeType"];
     REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSEnergyBuildingTimeRange parameter:buildingCommodityInfo];
-    store.isAccessLocal = YES;
-    store.isStoreLocal = YES;
+    store.isAccessLocal = NO;
+    store.isStoreLocal = NO;
     store.maskContainer = self.view;
     store.groupName = nil;
     
     void (^retrieveSuccess)(id data)=^(id data) {
         //  [self.chartController changeData:[[REMEnergyViewData alloc] initWithDictionary:(NSDictionary *)data]];
+        NSDictionary* de = (NSDictionary*)data;
+        NSArray* keys  = [de allKeys];
         NSDate* d = [[NSDate alloc]initWithTimeIntervalSince1970:0];
         for (int i = 0; i < 6; i++) {
             NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%u", i, 2, 3];
             NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:20];
-            
-            for (int j = 0; j < 20; j++) {
-                [data addObject:@{@"y": [[NSDecimalNumber alloc]initWithInt:rand()], @"x": [[NSDate alloc]initWithTimeInterval:i*360000 sinceDate:d]  }];
+            int pointAmount = 12;
+            int pointMul = 1;
+            if (i == 0 || i == 1) {
+                pointAmount = 24;
+                pointMul = 1;
+            }
+            if (i == 2 || i == 3) {
+                pointAmount = 30;
+                pointMul = 24;
+            }
+            if (i == 4 || i == 5) {
+                pointAmount = 12;
+                pointMul = 720;
+            }
+            for (int j = 0; j < pointAmount; j++) {
+                [data addObject:@{@"y": [[NSDecimalNumber alloc]initWithInt:rand()], @"x": [[NSDate alloc]initWithTimeInterval:j*pointMul*3600 sinceDate:d]  }];
             }
             NSDictionary* series = @{ @"identity":targetIdentity, @"color":[REMColor colorByIndex:i], @"data":data};
             [self.datasource addObject:series];
