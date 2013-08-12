@@ -21,5 +21,5 @@
 @property (nonatomic,strong) UIButton *lastYearButton;
 @property (nonatomic,strong) REMBuildingOverallModel *buildingInfo;
 @property (nonatomic,strong) CPTGraphHostingView *hostView;
-@property (nonatomic,strong) CPTScatterPlot *scatterPlot;
+//@property (nonatomic,strong) CPTScatterPlot *scatterPlot;
 @end
