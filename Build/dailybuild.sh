@@ -4,7 +4,6 @@ cd ${srcpath}
 git pull
 cd ${makefilepath}
 #make xctest
-make --makefile=Makefile --directory=${makefilepath} xcbuild
+make --makefile=Makefile --directory=${makefilepath} xcclean xcbuild
 
-source ${makefilepath}dailycheckin.sh
 
