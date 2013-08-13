@@ -31,6 +31,10 @@
     [super tearDown];
 }
 
+- (void)test_fail{
+    //STFail(@"failed");
+}
+
 - (void)test_console_log
 {
     REMLogError(@"REMLogConsole_Success");
