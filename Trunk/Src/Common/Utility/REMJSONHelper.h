@@ -13,7 +13,7 @@
 @interface REMJSONHelper : NSObject
 
 
-+ (NSDictionary *)dictionaryByJSONString:(NSString *)jsonString;
-+ (NSString *)stringByDictionary:(NSDictionary *)dictionary;
++ (id)objectByString:(NSString *)json;
++ (NSString *)stringByObject:(id)object;
 
 @end
