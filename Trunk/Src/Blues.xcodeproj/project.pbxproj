@@ -460,6 +460,7 @@
 		7AB7BE1F17B2486D0085AF86 /* AppLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB7BE1E17B2486D0085AF86 /* AppLogo.png */; };
 		7AB7BE2117B248710085AF86 /* AppLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB7BE2017B248710085AF86 /* AppLogo@2x.png */; };
 		7AC500911798274D00874467 /* detail-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC500901798274D00874467 /* detail-arrow.png */; };
+		7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
 		7ADAD70A17B0A1BF003D7F61 /* splash-schneider-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADAD70817B0A1BF003D7F61 /* splash-schneider-logo.png */; };
 		7ADAD70B17B0A1BF003D7F61 /* splashscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADAD70917B0A1BF003D7F61 /* splashscreen.png */; };
 		7ADF91D417A0CB0C008CF056 /* preface-s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADF91D117A0CB0C008CF056 /* preface-s1.png */; };
@@ -879,6 +880,8 @@
 		7ABC2E23177BE6210000C060 /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDecimalNumberExtensions.h; sourceTree = "<group>"; };
 		7ABC2E24177BE6210000C060 /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
 		7AC500901798274D00874467 /* detail-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail-arrow.png"; sourceTree = "<group>"; };
+		7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceMeta.h; path = Common/Communication/REMServiceMeta.h; sourceTree = "<group>"; };
+		7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceMeta.m; path = Common/Communication/REMServiceMeta.m; sourceTree = "<group>"; };
 		7ADAD70817B0A1BF003D7F61 /* splash-schneider-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash-schneider-logo.png"; sourceTree = "<group>"; };
 		7ADAD70917B0A1BF003D7F61 /* splashscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splashscreen.png; sourceTree = "<group>"; };
 		7ADF91D117A0CB0C008CF056 /* preface-s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preface-s1.png"; sourceTree = "<group>"; };
@@ -1387,6 +1390,8 @@
 				7AB34E50177D2CE1003E235E /* REMServiceRequestOperation.m */,
 				7A3DDCD81786C05B008A1033 /* REMServiceAgent.h */,
 				7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */,
+				7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */,
+				7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */,
 			);
 			name = Communication;
 			sourceTree = "<group>";
@@ -2182,6 +2187,7 @@
 				7A1A855717B4E278004D7167 /* REMAverageUsageDataModel.m in Sources */,
 				7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */,
 				7A09D59A17B8D62F001EBC30 /* REMDataRange.m in Sources */,
+				7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

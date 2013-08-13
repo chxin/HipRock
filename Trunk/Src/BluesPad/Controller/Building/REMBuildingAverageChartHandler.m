@@ -61,6 +61,7 @@
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageData :(void (^)(void))loadCompleted
 {
+    
     self.averageData = averageData;
     
     //convert data
