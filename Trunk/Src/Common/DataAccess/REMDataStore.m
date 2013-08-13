@@ -8,6 +8,8 @@
 
 #import "REMDataStore.h"
 #import "REMServiceUrl.h"
+#import "REMServiceMeta.h"
+
 
 @implementation REMDataStore
 
@@ -21,7 +23,7 @@ static NSDictionary *serviceMap = nil;
     store.name = name;
     store.parameter = parameter;
     
-    store.service = [REMServiceUrl absoluteUrl:[[REMDataStore serviceMap] objectForKey:[REMDataStore numberFromInt:name]]];
+    store.serviceMeta = [[REMDataStore serviceMap] objectForKey:[REMDataStore numberFromInt:name]];
     
     return store;
 }
@@ -35,7 +37,7 @@ static NSDictionary *serviceMap = nil;
     store.name = (REMDataStoreType)[[REMDataStore energyStoreMap] objectForKey:energyStore];
     store.parameter = parameter;
     
-    store.service = [REMServiceUrl absoluteUrl:[[REMDataStore serviceMap] objectForKey:[[REMDataStore energyStoreMap] objectForKey:energyStore]]];
+    store.serviceMeta = [[REMDataStore serviceMap] objectForKey:[[REMDataStore energyStoreMap] objectForKey:energyStore]];
     
     return store;
 }
@@ -81,9 +83,12 @@ static NSDictionary *serviceMap = nil;
     return serviceMap;
 }
 
+
 + (NSNumber *) numberFromInt: (int) intValue
 {
     return [[NSNumber alloc] initWithInt:intValue];
 }
+
+
 
 @end

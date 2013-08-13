@@ -27,7 +27,7 @@ static int maxQueueLength = 5;
 
 
 
-+ (void) call: (NSString *) serviceUrl withBody:(id)body mask:(UIView *) maskContainer group:(NSString *)groupName store:(BOOL) isStore success:(void (^)(id data))success error:(void (^)(NSError *error, id response))error progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
++ (void) call: (REMServiceMeta *) service withBody:(id)body mask:(UIView *) maskContainer group:(NSString *)groupName store:(BOOL) isStore success:(void (^)(id data))success error:(void (^)(NSError *error, id response))error progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
 {
     //check network status and notify if no connection or 3g or 2g
     if(![REMServiceAgent checkNetworkStatus])
@@ -54,21 +54,41 @@ static int maxQueueLength = 5;
         postData = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
     }
     
-    NSURLRequest *request = [REMServiceAgent buildRequestWith:serviceUrl andPostData:postData];
+    NSURLRequest *request = [REMServiceAgent buildRequestWith:service.url andPostData:postData];
     
     
     void (^onSuccess)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
     {
         NSLog(@"%@", operation.responseString);
-                
-        NSDictionary *result = [REMServiceAgent deserializeResult:operation.responseString ofService:serviceUrl];
-
+        
+        id result;
+        
+        if(service.responseType == REMServiceResponseImage)
+        {
+            result = operation.responseData;
+        }
+        else
+        {
+            result = [REMServiceAgent deserializeResult:operation.responseString ofService:service.url];
+        }
+        
         //NSDictionary *errorInfo = (NSDictionary *)[result valueForKey:@"error"];
         //TODO: process error message with different error types
         
         if(isStore==YES)
         {
-            [REMStorage set:serviceUrl key:[NSString stringWithUTF8String:[postData bytes]] value:operation.responseString expired:1000];
+            NSString *storageKey = [NSString stringWithUTF8String:[postData bytes]];
+            switch (service.responseType) {
+                case REMServiceResponseJson:
+                    [REMStorage set:service.url key:storageKey value:operation.responseString expired:REMSessionExpired];
+                    break;
+                case REMServiceResponseImage:
+                    [REMStorage setFile:service.url key:storageKey version:0 image:operation.responseData];
+                    break;
+                    
+                default:
+                    break;
+            }
         }
         
         if(success)
@@ -242,11 +262,95 @@ static int maxQueueLength = 5;
     return base64Encoded;
 }
 
-+(NSDictionary *)deserializeResult:(NSString *)resultJson ofService:(NSString *)service
++(id)deserializeResult:(NSString *)resultJson ofService:(NSString *)service
 {
     NSDictionary *result = [REMJSONHelper dictionaryByJSONString:resultJson];
     
-    return (NSDictionary *)[result valueForKey:[NSString stringWithFormat:@"%@Result",[service lastPathComponent]]];
+    return [result valueForKey:[NSString stringWithFormat:@"%@Result",[service lastPathComponent]]];
+}
+
++(id)convertByteArrayToImage:(NSArray *)bytes
+{
+    int height = 768, width = 1024;
+    
+    size_t bufferLength = width * height * 4;
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, (__bridge const void *)(bytes), bufferLength, NULL);
+    size_t bitsPerComponent = 8;
+    size_t bitsPerPixel = 32;
+    size_t bytesPerRow = 4 * width;
+    
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    if(colorSpaceRef == NULL) {
+        NSLog(@"Error allocating color space");
+        CGDataProviderRelease(provider);
+        return nil;
+    }
+    
+    CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedLast;
+    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
+    
+    CGImageRef iref = CGImageCreate(width,
+                                    height,
+                                    bitsPerComponent,
+                                    bitsPerPixel,
+                                    bytesPerRow,
+                                    colorSpaceRef,
+                                    bitmapInfo,
+                                    provider,   // data provider
+                                    NULL,       // decode
+                                    YES,            // should interpolate
+                                    renderingIntent);
+    
+    uint32_t* pixels = (uint32_t*)malloc(bufferLength);
+    
+    if(pixels == NULL) {
+        NSLog(@"Error: Memory not allocated for bitmap");
+        CGDataProviderRelease(provider);
+        CGColorSpaceRelease(colorSpaceRef);
+        CGImageRelease(iref);
+        return nil;
+    }
+    
+    CGContextRef context = CGBitmapContextCreate(pixels,
+                                                 width,
+                                                 height,
+                                                 bitsPerComponent,
+                                                 bytesPerRow,
+                                                 colorSpaceRef,
+                                                 bitmapInfo);
+    
+    if(context == NULL) {
+        NSLog(@"Error context not created");
+        free(pixels);
+    }
+    
+    UIImage *image = nil;
+    if(context) {
+        
+        CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, width, height), iref);
+        
+        CGImageRef imageRef = CGBitmapContextCreateImage(context);
+        
+        // Support both iPad 3.2 and iPhone 4 Retina displays with the correct scale
+        if([UIImage respondsToSelector:@selector(imageWithCGImage:scale:orientation:)]) {
+            float scale = [[UIScreen mainScreen] scale];
+            image = [UIImage imageWithCGImage:imageRef scale:scale orientation:UIImageOrientationUp];
+        } else {
+            image = [UIImage imageWithCGImage:imageRef];
+        }
+        
+        CGImageRelease(imageRef);   
+        CGContextRelease(context);  
+    }
+    
+    CGColorSpaceRelease(colorSpaceRef);
+    CGImageRelease(iref);
+    CGDataProviderRelease(provider);
+    
+    if(pixels) {
+        free(pixels);
+    }   
+    return image;
 }
 
 @end

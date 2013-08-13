@@ -10,7 +10,7 @@
 #import "REMBuildingChartHandler.h"
 #import "REMBuildingAverageChart.h"
 
-@interface REMBuildingAverageChartHandler : REMBuildingChartHandler
+@interface REMBuildingAverageChartHandler : REMBuildingChartHandler<CPTBarPlotDataSource,CPTBarPlotDelegate,CPTScatterPlotDataSource,CPTScatterPlotDelegate>
 
 
 @end
