@@ -41,7 +41,7 @@ static NSString *kCurrentCustomerCacheKey = @"CurrentCustomer";
 
 + (REMCustomerModel *)getCached
 {
-    NSDictionary *dictionary = [REMJSONHelper dictionaryByJSONString:[REMStorage get:[REMApplicationInfo getApplicationCacheKey] key:kCurrentCustomerCacheKey]];
+    NSDictionary *dictionary = [REMJSONHelper objectByString:[REMStorage get:[REMApplicationInfo getApplicationCacheKey] key:kCurrentCustomerCacheKey]];
     return [[REMCustomerModel alloc] initWithDictionary:dictionary];
 }
 

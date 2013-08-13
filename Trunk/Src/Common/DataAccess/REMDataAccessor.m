@@ -12,6 +12,7 @@
 #import "REMNetworkHelper.h"
 #import "REMApplicationInfo.h"
 #import "REMStorage.h"
+#import "REMJSONHelper.h"
 
 
 @implementation REMDataAccessor
@@ -76,7 +77,8 @@
     }
     else //just call data
     {
-        success(cachedResult);
+        id object = [REMJSONHelper objectByString:cachedResult];
+        success(object);
     }
 }
 

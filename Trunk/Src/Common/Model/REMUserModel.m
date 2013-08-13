@@ -50,7 +50,7 @@ static NSString *kCurrentUserCacheKey = @"CurrentUser";
 
 + (REMUserModel *)getCached
 {
-    NSDictionary *dictionary = [REMJSONHelper dictionaryByJSONString:[REMStorage get:[REMApplicationInfo getApplicationCacheKey] key:kCurrentUserCacheKey]];
+    NSDictionary *dictionary = [REMJSONHelper objectByString:[REMStorage get:[REMApplicationInfo getApplicationCacheKey] key:kCurrentUserCacheKey]];
     return [[REMUserModel alloc] initWithDictionary:dictionary];
 }
 

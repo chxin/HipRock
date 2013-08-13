@@ -77,10 +77,10 @@ static int maxQueueLength = 5;
         
         if(isStore==YES)
         {
-            NSString *storageKey = [NSString stringWithUTF8String:[postData bytes]];
+            NSString *storageKey = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
             switch (service.responseType) {
                 case REMServiceResponseJson:
-                    [REMStorage set:service.url key:storageKey value:result expired:REMSessionExpired];
+                    [REMStorage set:service.url key:storageKey value:[REMJSONHelper stringByObject:result] expired:REMSessionExpired];
                     break;
                 case REMServiceResponseImage:
                     [REMStorage setFile:service.url key:storageKey version:0 image:result];
@@ -212,7 +212,7 @@ static int maxQueueLength = 5;
         return nil;
     }
     
-    NSString *parameterString = [REMJSONHelper stringByDictionary:parameter];
+    NSString *parameterString = [REMJSONHelper stringByObject:parameter];
     
     return parameterString;
 }
@@ -253,104 +253,20 @@ static int maxQueueLength = 5;
 {
     REMApplicationContext* context = [REMApplicationContext instance];
     NSString *original = [NSString stringWithFormat:@"%llu|%@",context.currentUser.userId,context.currentUser.name];
-    NSLog(@"%@",original);
+    //NSLog(@"%@",original);
     
     NSData *encryptedData = [REMEncryptHelper AES256EncryptData:[original dataUsingEncoding:NSUTF8StringEncoding] withKey:@"41758bd9d7294737"];
     
     NSString *base64Encoded = [REMEncryptHelper encodeBase64Data:encryptedData];
-    NSLog(@"%@",base64Encoded);
+    //NSLog(@"%@",base64Encoded);
     return base64Encoded;
 }
 
 +(id)deserializeResult:(NSString *)resultJson ofService:(NSString *)service
 {
-    NSDictionary *result = [REMJSONHelper dictionaryByJSONString:resultJson];
+    NSDictionary *result = [REMJSONHelper objectByString:resultJson];
     
     return [result valueForKey:[NSString stringWithFormat:@"%@Result",[service lastPathComponent]]];
-}
-
-+(id)convertByteArrayToImage:(NSArray *)bytes
-{
-    int height = 768, width = 1024;
-    
-    size_t bufferLength = width * height * 4;
-    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, (__bridge const void *)(bytes), bufferLength, NULL);
-    size_t bitsPerComponent = 8;
-    size_t bitsPerPixel = 32;
-    size_t bytesPerRow = 4 * width;
-    
-    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-    if(colorSpaceRef == NULL) {
-        NSLog(@"Error allocating color space");
-        CGDataProviderRelease(provider);
-        return nil;
-    }
-    
-    CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedLast;
-    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
-    
-    CGImageRef iref = CGImageCreate(width,
-                                    height,
-                                    bitsPerComponent,
-                                    bitsPerPixel,
-                                    bytesPerRow,
-                                    colorSpaceRef,
-                                    bitmapInfo,
-                                    provider,   // data provider
-                                    NULL,       // decode
-                                    YES,            // should interpolate
-                                    renderingIntent);
-    
-    uint32_t* pixels = (uint32_t*)malloc(bufferLength);
-    
-    if(pixels == NULL) {
-        NSLog(@"Error: Memory not allocated for bitmap");
-        CGDataProviderRelease(provider);
-        CGColorSpaceRelease(colorSpaceRef);
-        CGImageRelease(iref);
-        return nil;
-    }
-    
-    CGContextRef context = CGBitmapContextCreate(pixels,
-                                                 width,
-                                                 height,
-                                                 bitsPerComponent,
-                                                 bytesPerRow,
-                                                 colorSpaceRef,
-                                                 bitmapInfo);
-    
-    if(context == NULL) {
-        NSLog(@"Error context not created");
-        free(pixels);
-    }
-    
-    UIImage *image = nil;
-    if(context) {
-        
-        CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, width, height), iref);
-        
-        CGImageRef imageRef = CGBitmapContextCreateImage(context);
-        
-        // Support both iPad 3.2 and iPhone 4 Retina displays with the correct scale
-        if([UIImage respondsToSelector:@selector(imageWithCGImage:scale:orientation:)]) {
-            float scale = [[UIScreen mainScreen] scale];
-            image = [UIImage imageWithCGImage:imageRef scale:scale orientation:UIImageOrientationUp];
-        } else {
-            image = [UIImage imageWithCGImage:imageRef];
-        }
-        
-        CGImageRelease(imageRef);   
-        CGContextRelease(context);  
-    }
-    
-    CGColorSpaceRelease(colorSpaceRef);
-    CGImageRelease(iref);
-    CGDataProviderRelease(provider);
-    
-    if(pixels) {
-        free(pixels);
-    }   
-    return image;
 }
 
 @end

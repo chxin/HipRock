@@ -20,7 +20,7 @@
 - (id)initWithJSONString:(NSString *)jsonString
 {
     
-    NSDictionary *dic=[REMJSONHelper dictionaryByJSONString:jsonString];
+    NSDictionary *dic=[REMJSONHelper objectByString:jsonString];
     
     return [self initWithDictionary:dic];
     
@@ -64,7 +64,7 @@
 
 - (NSString *)serialize
 {
-    return [REMJSONHelper stringByDictionary:self.innerDictionary];
+    return [REMJSONHelper stringByObject:self.innerDictionary];
 }
 
 @end
