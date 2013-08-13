@@ -80,10 +80,10 @@ static int maxQueueLength = 5;
             NSString *storageKey = [NSString stringWithUTF8String:[postData bytes]];
             switch (service.responseType) {
                 case REMServiceResponseJson:
-                    [REMStorage set:service.url key:storageKey value:operation.responseString expired:REMSessionExpired];
+                    [REMStorage set:service.url key:storageKey value:result expired:REMSessionExpired];
                     break;
                 case REMServiceResponseImage:
-                    [REMStorage setFile:service.url key:storageKey version:0 image:operation.responseData];
+                    [REMStorage setFile:service.url key:storageKey version:0 image:result];
                     break;
                     
                 default:

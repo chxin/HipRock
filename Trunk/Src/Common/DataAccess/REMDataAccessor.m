@@ -54,10 +54,20 @@
 
 + (void)accessLocal:(REMDataStore *)store success:(void (^)(id data))success error:(void (^)(NSError *error, id response))error
 {
-    NSString *data = [REMStorage get:store.serviceMeta.url key:[REMServiceAgent buildParameterString:store.parameter]];;
+    id cachedResult;
+    NSString *cacheKey = [REMServiceAgent buildParameterString:store.parameter];
+    
+    if(store.serviceMeta.responseType == REMServiceResponseJson)
+    {
+        cachedResult = [REMStorage get:store.serviceMeta.url key:cacheKey];
+    }
+    else if(store.serviceMeta.responseType == REMServiceResponseImage)
+    {
+        cachedResult = [REMStorage getFile:store.serviceMeta.url key:cacheKey];
+    }
     
     BOOL isAccessRomoteIfLocalNoData = store.isAccessLocal;
-    BOOL isLocalNoData = !(data != NULL && data!=nil && ![((NSString *)data) isEqualToString:@""]);
+    BOOL isLocalNoData = !(cachedResult != NULL && cachedResult!=nil);
     
     //if there is no data local and get from remote if there is no local data, get from remote
     if(isLocalNoData && isAccessRomoteIfLocalNoData)
@@ -66,9 +76,7 @@
     }
     else //just call data
     {
-        NSDictionary *result = [REMServiceAgent deserializeResult:data ofService:store.serviceMeta.url];
-
-        success(result);
+        success(cachedResult);
     }
 }
 
