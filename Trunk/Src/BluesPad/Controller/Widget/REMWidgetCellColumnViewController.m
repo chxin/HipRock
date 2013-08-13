@@ -300,7 +300,7 @@
 - (REMTimeRange *)globalTimeRange
 {
     if(self.data.targetEnergyData.count == 1)
-        return [(REMTargetEnergyData *)self.data.targetEnergyData[0] target].timeRange;
+        return [(REMTargetEnergyData *)self.data.targetEnergyData[0] target].visiableTimeRange;
     else
     {
         NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:self.data.targetEnergyData.count];
@@ -315,13 +315,13 @@
 - (REMTimeRange *)visableTimeRange
 {
     if(self.data.targetEnergyData.count == 1)
-        return [(REMTargetEnergyData *)self.data.targetEnergyData[0] target].timeRange;
+        return [(REMTargetEnergyData *)self.data.targetEnergyData[0] target].visiableTimeRange;
     else
     {
         NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:self.data.targetEnergyData.count];
         for(REMTargetEnergyData *targetData in self.data.targetEnergyData)
         {
-            [array addObject:targetData.target.timeRange];
+            [array addObject:targetData.target.visiableTimeRange];
         }
         return [REMTimeHelper maxTimeRangeOfTimeRanges:array];
     }
