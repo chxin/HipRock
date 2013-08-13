@@ -470,6 +470,7 @@
 		7AE1121F17B240E4006E0D39 /* AppLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AE1121D17B240E4006E0D39 /* AppLogo@2x.png */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
+		B43B7E8817B9D4E300AB2F52 /* default-building.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B43B7E8717B9D4E300AB2F52 /* default-building.jpg */; };
 		B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
 		B4426FFA17AF2BC300762C68 /* wangjingsoho.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4426FF617AF2BC300762C68 /* wangjingsoho.jpg */; };
 		B4426FFB17AF2BC300762C68 /* yinhesoho.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4426FF717AF2BC300762C68 /* yinhesoho.jpg */; };
@@ -889,6 +890,7 @@
 		B4198EAD178410D300B50475 /* REMLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLogManager.m; path = Common/Log/REMLogManager.m; sourceTree = "<group>"; };
 		B4198EB01784220300B50475 /* REMJSONHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMJSONHelper.h; path = Common/Utility/REMJSONHelper.h; sourceTree = "<group>"; };
 		B4198EB11784220300B50475 /* REMJSONHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMJSONHelper.m; path = Common/Utility/REMJSONHelper.m; sourceTree = "<group>"; };
+		B43B7E8717B9D4E300AB2F52 /* default-building.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default-building.jpg"; sourceTree = "<group>"; };
 		B43BB10F1797B12D00617B1E /* REMEnergyConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergyConstants.h; path = Common/Constants/REMEnergyConstants.h; sourceTree = "<group>"; };
 		B43BB1101797B12D00617B1E /* REMEnergyConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnergyConstants.m; path = Common/Constants/REMEnergyConstants.m; sourceTree = "<group>"; };
 		B4426FF617AF2BC300762C68 /* wangjingsoho.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wangjingsoho.jpg; sourceTree = "<group>"; };
@@ -1739,6 +1741,7 @@
 		B4426FF517AF2AC700762C68 /* building */ = {
 			isa = PBXGroup;
 			children = (
+				B43B7E8717B9D4E300AB2F52 /* default-building.jpg */,
 				B4C1676017B2226F002A8DD6 /* elec-pressed.png */,
 				B4C1676117B2226F002A8DD6 /* elec.png */,
 				B4C1676217B2226F002A8DD6 /* oil-pressed.png */,
@@ -2011,6 +2014,7 @@
 				7AE1121F17B240E4006E0D39 /* AppLogo@2x.png in Resources */,
 				7AB7BE1F17B2486D0085AF86 /* AppLogo.png in Resources */,
 				7AB7BE2117B248710085AF86 /* AppLogo@2x.png in Resources */,
+				B43B7E8817B9D4E300AB2F52 /* default-building.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

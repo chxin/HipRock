@@ -74,6 +74,7 @@ static NSDictionary *serviceMap = nil;
           [REMDataStore numberFromInt:REMDSEnergyBuildingOverall] : @"API/Energy.svc/GetBuildingOverallData",
           [REMDataStore numberFromInt:REMDSEnergyBuildingTimeRange] : @"API/Energy.svc/GetBuildingTimeRangeData",
           [REMDataStore numberFromInt:REMDSLogSend] : @"API/Log.svc/SendLog",
+          [REMDataStore numberFromInt:REMDSEnergyBuildingImage]:@"API/Energy.svc/GetBuildingImage"
         };
     }
     

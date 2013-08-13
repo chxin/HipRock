@@ -14,6 +14,8 @@
 #import "REMBuildingOverallModel.h"
 #import "REMCommodityUsageModel.h"
 #import <Accelerate/Accelerate.h>
+#import "REMDataAccessor.h"
+#import "REMDataStore.h"    
 
 @interface REMImageView : UIView <UIGestureRecognizerDelegate>
 

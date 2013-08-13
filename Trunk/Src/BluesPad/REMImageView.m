@@ -18,7 +18,7 @@
 @property (nonatomic,strong) UIImageView *titleBg;
 @property (nonatomic,strong) UIView *croppedTitleBg;
 @property (nonatomic,strong) CIImage *clearImage;
-@property (nonatomic,strong) NSData *origImageData;
+
 @property (nonatomic,strong) UIImageView *blurredImageView;
 @property (nonatomic,strong) UIView *glassView;
 @property (nonatomic,strong) CAGradientLayer *bottomGradientLayer;
@@ -48,7 +48,7 @@
         
         //[self initBlurredImageView];
         
-        [self initBlurredImageView2];
+        
         
         [self initGlassView];
         
@@ -65,6 +65,9 @@
 
 - (NSString *)retrieveBuildingImage:(NSString *)name
 {
+    return @"default-building";
+    
+    
     if([name isEqualToString:@"B1"] == YES)
     {
         return @"shangdusoho";
@@ -86,6 +89,213 @@
     }
 }
 
+- (UIImage *) convertBitmapRGBA8ToUIImage:(unsigned char *) buffer
+withWidth:(int) width
+withHeight:(int) height {
+    
+    
+    size_t bufferLength = width * height * 4;
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, buffer, bufferLength, NULL);
+    size_t bitsPerComponent = 8;
+    size_t bitsPerPixel = 32;
+    size_t bytesPerRow = 4 * width;
+    
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    if(colorSpaceRef == NULL) {
+        NSLog(@"Error allocating color space");
+        CGDataProviderRelease(provider);
+        return nil;
+    }
+    
+    CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedLast;
+    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
+    
+    CGImageRef iref = CGImageCreate(width,
+                                    height,
+                                    bitsPerComponent,
+                                    bitsPerPixel,
+                                    bytesPerRow,
+                                    colorSpaceRef,
+                                    bitmapInfo,
+                                    provider,   // data provider
+                                    NULL,       // decode
+                                    YES,            // should interpolate
+                                    renderingIntent);
+    
+    uint32_t* pixels = (uint32_t*)malloc(bufferLength);
+    
+    if(pixels == NULL) {
+        NSLog(@"Error: Memory not allocated for bitmap");
+        CGDataProviderRelease(provider);
+        CGColorSpaceRelease(colorSpaceRef);
+        CGImageRelease(iref);
+        return nil;
+    }
+    
+    CGContextRef context = CGBitmapContextCreate(pixels,
+                                                 width,
+                                                 height,
+                                                 bitsPerComponent,
+                                                 bytesPerRow,
+                                                 colorSpaceRef,
+                                                 bitmapInfo);
+    
+    if(context == NULL) {
+        NSLog(@"Error context not created");
+        free(pixels);
+    }
+    
+    UIImage *image = nil;
+    if(context) {
+        
+        CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, width, height), iref);
+        
+        CGImageRef imageRef = CGBitmapContextCreateImage(context);
+        
+        // Support both iPad 3.2 and iPhone 4 Retina displays with the correct scale
+        if([UIImage respondsToSelector:@selector(imageWithCGImage:scale:orientation:)]) {
+            float scale = [[UIScreen mainScreen] scale];
+            image = [UIImage imageWithCGImage:imageRef scale:scale orientation:UIImageOrientationUp];
+        } else {
+            image = [UIImage imageWithCGImage:imageRef];
+        }
+        
+        CGImageRelease(imageRef);   
+        CGContextRelease(context);  
+    }
+    
+    CGColorSpaceRelease(colorSpaceRef);
+    CGImageRelease(iref);
+    CGDataProviderRelease(provider);
+    
+    if(pixels) {
+        free(pixels);
+    }   
+    return image;
+}
+
+- (UIImage *) AFImageWithDataAtScale:(NSData *)data {
+    if ([UIImage instancesRespondToSelector:@selector(initWithData:scale:)]) {
+        return [[UIImage alloc] initWithData:data scale:1];
+    } else {
+        UIImage *image = [[UIImage alloc] initWithData:data];
+        return [[UIImage alloc] initWithCGImage:[image CGImage] scale:1 orientation:image.imageOrientation];
+    }
+}
+
+- (UIImage *) AFInflatedImageFromResponseWithDataAtScale:(NSData *)data {
+    if (!data || [data length] == 0) {
+        return nil;
+    }
+    
+    CGImageRef imageRef = nil;
+    
+    CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
+    
+    imageRef = CGImageCreateWithPNGDataProvider(dataProvider,  NULL, true, kCGRenderingIntentDefault);
+
+    if(!imageRef){
+        imageRef = CGImageCreateWithJPEGDataProvider(dataProvider, NULL, true, kCGRenderingIntentDefault);
+    }
+    
+    if (!imageRef) {
+        UIImage *image = [self AFImageWithDataAtScale:data];
+        if (image.images) {
+            CGDataProviderRelease(dataProvider);
+            
+            return image;
+        }
+        
+        imageRef = CGImageCreateCopy([image CGImage]);
+    }
+    
+    CGDataProviderRelease(dataProvider);
+    
+    if (!imageRef) {
+        return nil;
+    }
+    
+    size_t width = CGImageGetWidth(imageRef);
+    size_t height = CGImageGetHeight(imageRef);
+    size_t bitsPerComponent = CGImageGetBitsPerComponent(imageRef);
+    size_t bytesPerRow = 0; // CGImageGetBytesPerRow() calculates incorrectly in iOS 5.0, so defer to CGBitmapContextCreate()
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
+    
+    if (CGColorSpaceGetNumberOfComponents(colorSpace) == 3) {
+        int alpha = (bitmapInfo & kCGBitmapAlphaInfoMask);
+        if (alpha == kCGImageAlphaNone) {
+            bitmapInfo &= ~kCGBitmapAlphaInfoMask;
+            bitmapInfo |= kCGImageAlphaNoneSkipFirst;
+        } else if (!(alpha == kCGImageAlphaNoneSkipFirst || alpha == kCGImageAlphaNoneSkipLast)) {
+            bitmapInfo &= ~kCGBitmapAlphaInfoMask;
+            bitmapInfo |= kCGImageAlphaPremultipliedFirst;
+        }
+    }
+    
+    CGContextRef context = CGBitmapContextCreate(NULL, width, height, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo);
+    
+    CGColorSpaceRelease(colorSpace);
+    
+    if (!context) {
+        CGImageRelease(imageRef);
+        
+        return [[UIImage alloc] initWithData:data];
+    }
+    
+    CGRect rect = CGRectMake(0.0f, 0.0f, width, height);
+    CGContextDrawImage(context, rect, imageRef);
+    CGImageRef inflatedImageRef = CGBitmapContextCreateImage(context);
+    CGContextRelease(context);
+    
+    UIImage *inflatedImage = [[UIImage alloc] initWithCGImage:inflatedImageRef scale:1 orientation:UIImageOrientationUp];
+    CGImageRelease(inflatedImageRef);
+    CGImageRelease(imageRef);
+    
+    return inflatedImage;
+}
+
+- (void)didMoveToSuperview
+{
+    //NSLog(@"parent changed");
+    NSDictionary *param=@{@"imageId":@1};
+    REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSEnergyBuildingImage parameter:param];
+    
+    [REMDataAccessor access: store success:^(NSData *data){
+        /*
+        unsigned char *data = malloc(sizeof(unsigned char) * array.count);
+        NSNumber *num;
+        for (int i=0; i<array.count; ++i) {
+            num=array[i];
+            data[i]=[num charValue];
+        }
+        
+        
+        NSData *data1 = [NSData dataWithBytes:data length:array.count];*/
+        UIImageView *newView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
+        newView.contentMode=UIViewContentModeScaleToFill;
+        newView.alpha=0;
+        newView.image=[self AFInflatedImageFromResponseWithDataAtScale:data];
+        [self addSubview:newView];
+        UIImageView *newBlurred= [self blurredImageView2:newView];
+         //free(data);
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+            newView.alpha=1;
+        } completion:^(BOOL finished){
+            [self.imageView removeFromSuperview];
+            self.imageView = newView;
+            self.clearImage = [CIImage imageWithCGImage:self.imageView.image.CGImage];
+            self.blurredImageView=newBlurred;
+        }];
+        
+       
+        
+       
+                
+    }];
+}
+
+
 - (void)initImageView:(CGRect)frame
 {
     self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
@@ -97,7 +307,7 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:[self retrieveBuildingImage:self.buildingInfo.building.code] ofType:@"jpg"];
     // NSURL *fileNameAndPath = [NSURL fileURLWithPath:filePath];
     NSData *image = [NSData dataWithContentsOfFile:filePath];
-    self.origImageData=image;
+    
     //CIImage *beginImage = [CIImage imageWithContentsOfURL:fileNameAndPath];
     self.imageView.image=  [UIImage imageWithData:image];
     //self.imageView.image = [UIImage imageWithCGImage:beginImage];
@@ -105,8 +315,9 @@
     
     self.clearImage = [CIImage imageWithCGImage:self.imageView.image.CGImage];
     
-    
-
+    UIImageView *blurred= [self blurredImageView2:self.imageView];
+    self.blurredImageView=blurred;
+    [self addSubview:blurred];
 }
 
 - (void)initBottomGradientLayer
@@ -157,13 +368,14 @@
 
 }
 
-- (void)initBlurredImageView2{
+- (UIImageView *)blurredImageView2:(UIImageView *)origView{
+    UIImageView *blurred;
+        blurred = [[UIImageView alloc]initWithFrame:self.imageView.frame];
+        blurred.alpha=0;
+        blurred.contentMode=UIViewContentModeScaleToFill;
+        blurred.backgroundColor=[UIColor clearColor];
+        
     
-    self.blurredImageView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
-    self.blurredImageView.alpha=0;
-    self.blurredImageView.contentMode=UIViewContentModeScaleToFill;
-    self.backgroundColor=[UIColor clearColor];
-     [self addSubview:self.blurredImageView];
     dispatch_queue_t queue =  dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
     dispatch_async(queue, ^ {
@@ -232,11 +444,11 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             
             //self.blurredImageView.alpha = 0.0;
-            self.blurredImageView.image=returnImage;
+            blurred.image=returnImage;
         });
     });
 
-    
+    return blurred;
     
 }
 
