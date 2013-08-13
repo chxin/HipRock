@@ -47,7 +47,7 @@
 }
 
 - (void)intervalChanged:(UIButton *)button {
-    RelativeTimeRangeType t = Today;
+    REMRelativeTimeRangeType t = Today;
     REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
     if (button == myView.todayButton) {
         currentSourceIndex = 0;
@@ -122,8 +122,14 @@
     
     void (^retrieveSuccess)(id data)=^(id data) {
         //  [self.chartController changeData:[[REMEnergyViewData alloc] initWithDictionary:(NSDictionary *)data]];
-        NSDictionary* de = (NSDictionary*)data;
-        NSArray* keys  = [de allKeys];
+        NSArray* de = (NSArray*)data;
+        
+        NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:[data count]];
+        for(NSDictionary *item in (NSArray *)data){
+            [arr addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
+        }
+        
+       // NSArray* keys  = [de allKeys];
         NSDate* d = [[NSDate alloc]initWithTimeIntervalSince1970:0];
         for (int i = 0; i < 6; i++) {
             NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%u", i, 2, 3];

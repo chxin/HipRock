@@ -21,6 +21,6 @@
 
 +(void)decorateAxisSet:(CPTXYGraph*)graph dataSource:(NSMutableArray*)dataSource xStart:(double)xAxisStart xLength:(double)xAxisLength globalStart:(double)globalXAxisStart globalRange:(double)globalXAxisLength yStartZero:(BOOL)isYStartFromZero;
 
-+(void)decorateBuildingTrendAxisSet:(CPTXYGraph*)graph dataSource:(NSMutableArray*)dataSource interval:(RelativeTimeRangeType)t seriesIndex:(int)seriesIndex;
++(void)decorateBuildingTrendAxisSet:(CPTXYGraph*)graph dataSource:(NSMutableArray*)dataSource interval:(REMRelativeTimeRangeType)t seriesIndex:(int)seriesIndex;
 @end
 
