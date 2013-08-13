@@ -24,7 +24,7 @@
 @property (nonatomic,strong) CAGradientLayer *bottomGradientLayer;
 
 @property (nonatomic) BOOL hasLoadedChartData;
-@property (nonatomic,strong) REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 @end
 
 @implementation REMImageView
@@ -255,34 +255,36 @@ withHeight:(int) height {
     return inflatedImage;
 }
 
+
+
 - (void)didMoveToSuperview
 {
     //NSLog(@"parent changed");
-    NSDictionary *param=@{@"imageId":@1};
-    REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSEnergyBuildingImage parameter:param];
+    if(self.superview == nil){
+        
+        return;
+    }
+    else{
+        
+    }
+    NSDictionary *param=@{@"pictureId":@1};
+    REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingImage parameter:param];
     
     [REMDataAccessor access: store success:^(NSData *data){
-        /*
-        unsigned char *data = malloc(sizeof(unsigned char) * array.count);
-        NSNumber *num;
-        for (int i=0; i<array.count; ++i) {
-            num=array[i];
-            data[i]=[num charValue];
-        }
         
-        
-        NSData *data1 = [NSData dataWithBytes:data length:array.count];*/
         UIImageView *newView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
         newView.contentMode=UIViewContentModeScaleToFill;
         newView.alpha=0;
         newView.image=[self AFInflatedImageFromResponseWithDataAtScale:data];
-        [self addSubview:newView];
+        [self insertSubview:newView belowSubview:self.dataView];
         UIImageView *newBlurred= [self blurredImageView2:newView];
-         //free(data);
+        [self insertSubview:newBlurred aboveSubview:self.blurredImageView];
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
-            newView.alpha=1;
+            newView.alpha=self.imageView.alpha;
+            newBlurred.alpha=self.blurredImageView.alpha;
         } completion:^(BOOL finished){
             [self.imageView removeFromSuperview];
+            [self.blurredImageView removeFromSuperview];
             self.imageView = newView;
             self.clearImage = [CIImage imageWithCGImage:self.imageView.image.CGImage];
             self.blurredImageView=newBlurred;

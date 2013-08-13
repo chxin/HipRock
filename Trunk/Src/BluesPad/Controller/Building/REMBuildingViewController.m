@@ -193,12 +193,32 @@
                                 
                                 [self loadImageData];
                                 if(self.currentIndex<self.imageArray.count){
-                                NSNumber *status = self.imageViewStatus[@(self.currentIndex+1)];
-                                if([status isEqualToNumber:@(0)] ==YES){
-                                    [self.view insertSubview:self.imageArray[self.currentIndex+1] belowSubview:self.logoutButton];
-                                    
+                                    NSNumber *status = self.imageViewStatus[@(self.currentIndex+1)];
+                                    if([status isEqualToNumber:@(0)] ==YES){
+                                        [self.view insertSubview:self.imageArray[self.currentIndex+1] belowSubview:self.logoutButton];
+                                        
+                                    }
                                 }
+                                int idx = self.currentIndex;
+                                
+                                NSMutableArray *releaseArray=[[NSMutableArray alloc] initWithCapacity:self.imageArray.count];
+                                if((idx - 2) >=0){
+                                    int i=0;
+                                    while (i<=(idx-2)) {
+                                        [releaseArray addObject:@(i)];
+                                        i++;
+                                    }
+                                    //[self releaseOutOfWindowView:releaseArray];
                                 }
+                                else if((idx+2)<=self.imageArray.count){
+                                    int i=self.imageArray.count-1;
+                                    while (i>=(idx+2)) {
+                                        [releaseArray addObject:@(i)];
+                                        i--;
+                                    }
+                                    //[self releaseOutOfWindowView:releaseArray];
+                                }
+                                
                             }];
         
         [pan setTranslation:CGPointZero inView:self.view];
@@ -208,6 +228,15 @@
     
 }
 
+- (void)releaseOutOfWindowView:(NSArray *)releaseViews{
+    for (NSNumber *num in releaseViews) {
+        REMImageView *image= self.imageArray[[num intValue]];
+        if([self.imageViewStatus[num] isEqual:@(1)]== YES){
+            [image removeFromSuperview];
+            self.imageViewStatus[num]=@(0);
+        }
+    }
+}
 
 - (void) scrollInnerView:(UIPanGestureRecognizer *)pan
 {
