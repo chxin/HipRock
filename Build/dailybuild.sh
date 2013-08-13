@@ -1,9 +1,14 @@
 makefilepath=~/BuildFolder/SourceCode/Master/BluesGit/Build/
 srcpath=~/BuildFolder/SourceCode/Master/BluesGit
+nodepath=/usr/local/bin/
 cd ${srcpath}
 git pull
 cd ${makefilepath}
-#make xctest
-make --makefile=Makefile --directory=${makefilepath} xcclean xcbuild
+make --makefile=Makefile --directory=${makefilepath} xcclean
+make --makefile=Makefile --directory=${makefilepath} xcbuild
 
-
+if [ $? -eq 0 ]; then
+    echo "success"
+else
+    ${nodepath}node buildError.js
+fi
