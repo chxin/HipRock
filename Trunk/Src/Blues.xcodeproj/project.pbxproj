@@ -385,6 +385,8 @@
 		7A1D7C3F17A637630050779D /* REMCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3E17A637630050779D /* REMCustomerModel.m */; };
 		7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
 		7A1D7C4517A63E8B0050779D /* REMEncryptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4417A63E8B0050779D /* REMEncryptHelper.m */; };
+		7A209EDA17BB72100062FB92 /* REMServiceMeta.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */; };
+		7A209EDB17BB72100062FB92 /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
 		7A37AA3C17AB4E0A00316902 /* blackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A37AA1F17AB4E0A00316902 /* blackButton.png */; };
 		7A37AA3D17AB4E0A00316902 /* blackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A37AA2017AB4E0A00316902 /* blackButton@2x.png */; };
 		7A37AA3E17AB4E0A00316902 /* blackButtonHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A37AA2117AB4E0A00316902 /* blackButtonHighlight.png */; };
@@ -2420,6 +2422,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A209EDA17BB72100062FB92 /* REMServiceMeta.h in Sources */,
+				7A209EDB17BB72100062FB92 /* REMServiceMeta.m in Sources */,
 				6AB1F36017B8BA7F0065C1EB /* REMLogTests.h in Sources */,
 				6AB1F36117B8BA7F0065C1EB /* REMLogTests.m in Sources */,
 				6AB1F36217B8BA7F0065C1EB /* REMCommunicationTests.h in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "REMServiceMeta.h"
 
 @interface REMServiceAgent : NSObject
 

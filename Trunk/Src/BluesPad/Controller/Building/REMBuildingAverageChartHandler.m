@@ -45,6 +45,7 @@
     [super loadView];
     
     self.view = [[REMBuildingAverageChart alloc] initWithFrame:self.viewFrame];
+    self.chartView = (REMBuildingAverageChart *)self.view;
     
     [self viewDidLoad];
 }
@@ -54,13 +55,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    //self.view.layer.borderColor = [UIColor redColor].CGColor;
-    //self.view.layer.borderWidth = 1.0;
-    //self.view.backgroundColor = [UIColor yellowColor];
+    
+    //[self initializeGraph];
 }
+
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageData :(void (^)(void))loadCompleted
 {
+    
     
     self.averageData = averageData;
     
@@ -102,6 +104,10 @@
     gridLineStyle.lineWidth=1.0f;
     gridLineStyle.lineColor=[CPTColor lightGrayColor];
     
+    //text styles
+    CPTMutableTextStyle *axisTextStyle = [CPTMutableTextStyle textStyle];
+    axisTextStyle.color = [CPTColor whiteColor];
+    
     //x axis
     CPTXYAxis* x= [[CPTXYAxis alloc] init];
     x.coordinate = CPTCoordinateX;
@@ -110,7 +116,38 @@
     x.plotSpace = plotSpace;
     x.visibleRange = plotSpace.xRange;
     x.axisLineStyle = axisLineStyle;
+    x.majorTickLineStyle = axisLineStyle;
+    x.minorTickLineStyle = axisLineStyle;
+    x.majorIntervalLength = CPTDecimalFromFloat([self.visiableRange distance]/10);
+    x.labelTextStyle = axisTextStyle;
     x.anchorPoint=CGPointZero;
+    
+    [x setLabelingPolicy:CPTAxisLabelingPolicyNone];
+    
+    NSMutableArray *xlabels = [[NSMutableArray alloc] init];
+    NSMutableArray *xlocations = [[NSMutableArray alloc] init];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy年MM月"];
+    NSDate *tickDate = [NSDate dateWithTimeIntervalSince1970:self.globalRange.start];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setMonth:1];
+    while ([tickDate timeIntervalSince1970] <= self.globalRange.end) {
+        
+        tickDate = [calendar dateByAddingComponents:components toDate:tickDate options:0];
+        
+        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[formatter stringFromDate:tickDate] textStyle:axisTextStyle];
+        label.tickLocation = CPTDecimalFromDouble([tickDate timeIntervalSince1970]);
+        label.offset = 5;
+        //NSLog(@"date: %@",[formatter stringFromDate:tickDate]);
+        
+        [xlabels addObject:label];
+        [xlocations addObject:[NSNumber numberWithDouble:[tickDate timeIntervalSince1970]]];
+    }
+
+    x.axisLabels = [NSSet setWithArray: xlabels];
+    x.majorTickLocations = [NSSet setWithArray: xlocations];
     
     //y axis
     CPTXYAxis* y= [[CPTXYAxis alloc] init];
@@ -119,11 +156,15 @@
     y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
     y.plotSpace = plotSpace;
     y.visibleRange = plotSpace.yRange;
+    y.axisLineStyle = axisLineStyle;
+    y.majorTickLineStyle = axisLineStyle;
+    y.minorTickLineStyle = axisLineStyle;
     y.anchorPoint=CGPointZero;
     
     y.gridLinesRange = plotSpace.yRange;
     y.majorIntervalLength = CPTDecimalFromFloat(self.dataValueRange.end/4);
     y.majorGridLineStyle = gridLineStyle;
+    y.labelTextStyle = axisTextStyle;
     
     //add x and y axis into axis set
     self.chartView.graph.axisSet.axes = @[x,y];
@@ -132,28 +173,28 @@
 - (void)initializePlots
 {
     //unit - column
-    CPTBarPlot *column=[[CPTBarPlot alloc] initWithFrame:self.chartView.graph.bounds];
-    
-    column.identifier=[self.chartData[0] objectForKey:@"identity"];
-    
-    column.barBasesVary=NO;
-    column.barWidthsAreInViewCoordinates=YES;
-    column.barWidth=CPTDecimalFromFloat(10);
-    column.barOffset=CPTDecimalFromInt(5);
-    
-    column.fill= [CPTFill fillWithColor:[CPTColor whiteColor]];
-    
-    column.baseValue=CPTDecimalFromFloat(0);
-    
-    column.dataSource=self;
-    column.delegate=self;
-    
-    column.lineStyle=nil;
-    column.shadow=nil;
-    
-    column.anchorPoint=CGPointZero;
-    
-    [self.chartView.graph addPlot:column];
+//    CPTBarPlot *column=[[CPTBarPlot alloc] initWithFrame:self.chartView.graph.bounds];
+//    
+//    column.identifier=[self.chartData[0] objectForKey:@"identity"];
+//    
+//    column.barBasesVary=NO;
+//    column.barWidthsAreInViewCoordinates=YES;
+//    column.barWidth=CPTDecimalFromFloat(10);
+//    column.barOffset=CPTDecimalFromInt(5);
+//    
+//    column.fill= [CPTFill fillWithColor:[CPTColor whiteColor]];
+//    
+//    column.baseValue=CPTDecimalFromFloat(0);
+//    
+//    column.dataSource=self;
+//    column.delegate=self;
+//    
+//    column.lineStyle=nil;
+//    column.shadow=nil;
+//    
+//    column.anchorPoint=CGPointZero;
+//    
+//    [self.chartView.graph addPlot:column];
     
     //bench mark - line
     CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
@@ -189,8 +230,8 @@
         NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%llu", index, target.type, target.targetId];
         NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:energyData.count];
         
-        self.visiableRange.start = MIN(self.visiableRange.start, [target.visiableTimeRange.startTime timeIntervalSince1970]/1000);
-        self.visiableRange.end = MAX(self.visiableRange.end, [target.visiableTimeRange.endTime timeIntervalSince1970]/1000);
+        self.visiableRange.start = MIN(self.visiableRange.start, [target.visiableTimeRange.startTime timeIntervalSince1970]);
+        self.visiableRange.end = MAX(self.visiableRange.end, [target.visiableTimeRange.endTime timeIntervalSince1970]);
         
         for (int j = 0; j < energyData.count; j++)
         {
@@ -198,8 +239,8 @@
             NSDecimalNumber *value = [[NSDecimalNumber alloc] initWithDecimal:point.dataValue];
             [data addObject:@{@"y": value, @"x": point.localTime}];
             
-            self.globalRange.start = MIN(self.globalRange.start, [point.localTime timeIntervalSince1970]/1000);
-            self.globalRange.end = MAX(self.globalRange.end, [point.localTime timeIntervalSince1970]/1000);
+            self.globalRange.start = MIN(self.globalRange.start, [point.localTime timeIntervalSince1970]);
+            self.globalRange.end = MAX(self.globalRange.end, [point.localTime timeIntervalSince1970]);
             
             self.dataValueRange.start = MIN(self.dataValueRange.start, [value doubleValue]);
             self.dataValueRange.end = MAX(self.dataValueRange.end, [value doubleValue]);
