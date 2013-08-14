@@ -6,5 +6,5 @@ make --makefile=Makefile --directory=${makefilepath} xcpackage
 if [ $? -eq 0 ]; then
     rm -r -f ${makefilepath}BluesPad.app
     rm -r -f ${makefilepath}BluesPad.app.dSYM
-    ${nodepath}node updateHtml.js 
+    ${nodepath}node ${makefilepath}updateHtml.js 
 fi
