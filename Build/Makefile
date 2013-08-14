@@ -18,4 +18,4 @@ xctest:
 
 
 xcpackage:
-	xcrun -sdk iphoneos PackageApplication -v "BluesPad.app" -o "${webserverpath}BluesPad.ipa"
+	xcrun -sdk iphoneos PackageApplication  "BluesPad.app" -o "${webserverpath}BluesPad.ipa"
