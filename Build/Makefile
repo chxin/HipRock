@@ -16,6 +16,10 @@ xcbuild:
 xctest:
 	$(xctoolpath)xctool -sdk iphonesimulator  ONLY_ACTIVE_ARCH=NO  -configuration Debug  -project $(BluesPath)Blues.xcodeproj -scheme CommonTests  test -test-sdk iphonesimulator -freshInstall -freshSimulator -reporter json-stream:testlog.json  
 
+xctestcommand:
+	$(xctoolpath)xctool -sdk iphonesimulator  ONLY_ACTIVE_ARCH=NO  -configuration Debug  -project $(BluesPath)Blues.xcodeproj -scheme CommonTests  test -test-sdk iphonesimulator -freshInstall -freshSimulator
+
+
 
 xcpackage:
 	xcrun -sdk iphoneos PackageApplication  "BluesPad.app" -o "${webserverpath}BluesPad.ipa"
