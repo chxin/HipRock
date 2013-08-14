@@ -3,6 +3,7 @@
 var fs = require('fs');
 var util=require('util');
 var error=[];
+var logpath='/Users/BuildServer/BuildFolder/SourceCode/Master/BluesGit/Build/'
 var sendEmail=function(){
     var emailer = require('nodemailer');
     var transportOption={
@@ -24,7 +25,7 @@ var sendEmail=function(){
         else{ transporter.close(); }
     });
 };
-var filename='testlog.json';
+var filename=logpath+'testlog.json';
 if(!fs.existsSync(filename)) return;
 fs.readFile(filename,{encoding:'utf8'},function(err,data){
     if(err) throw err;
@@ -45,7 +46,7 @@ fs.readFile(filename,{encoding:'utf8'},function(err,data){
         //util.log(error.join('\n'));
     }
     
-    fs.unlinkSync('testlog.json');
+    fs.unlinkSync(filename);
     
 });
 })();
