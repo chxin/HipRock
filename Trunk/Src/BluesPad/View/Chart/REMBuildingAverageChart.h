@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CorePlot-CocoaTouch.h"
 
-@interface REMBuildingAverageChart : CPTGraphHostingView
+@interface REMBuildingAverageChart : UIView
 
+@property (nonatomic,strong) CPTGraphHostingView *hostView;
 @property (nonatomic,strong) CPTGraph *graph;
 
 @end

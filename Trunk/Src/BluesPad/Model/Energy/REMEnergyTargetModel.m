@@ -20,9 +20,9 @@
     self.uomName = dictionary[@"Uom"];
     self.type = (REMEnergyTargetType)[dictionary[@"Type"] intValue];
     
-    if((NSNull *)dictionary[@"VisiableTimeRange"] != [NSNull null] && dictionary[@"VisiableTimeRange"]!= nil)
+    if((NSNull *)dictionary[@"VisiableTimeSpan"] != [NSNull null] && dictionary[@"VisiableTimeSpan"]!= nil)
     {
-        self.visiableTimeRange = [[REMTimeRange alloc] initWithDictionary:(NSDictionary *)dictionary[@"VisiableTimeRange"]];
+        self.visiableTimeRange = [[REMTimeRange alloc] initWithDictionary:(NSDictionary *)dictionary[@"VisiableTimeSpan"]];
     }
     
     if((NSNull *)dictionary[@"GlobalTimeSpan"] != [NSNull null] && dictionary[@"GlobalTimeSpan"]!= nil)
