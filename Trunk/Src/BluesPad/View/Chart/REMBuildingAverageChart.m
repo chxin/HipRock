@@ -33,6 +33,13 @@
     //Init host view
     self.hostView.hostedGraph = self.graph;
     [self addSubview:self.hostView];
+    
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panning)];
+    [self addGestureRecognizer:pan];
+}
+
+-(void)panning
+{
 }
 
 /*

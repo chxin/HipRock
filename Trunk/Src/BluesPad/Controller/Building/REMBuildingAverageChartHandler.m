@@ -77,8 +77,6 @@
     
     //initialize plots
     [self initializePlots];
-    
-    [self.chartView.graph reloadData];
 }
 
 - (void)initializePlotSpace
@@ -126,30 +124,30 @@
     
     [x setLabelingPolicy:CPTAxisLabelingPolicyNone];
     
-    NSMutableSet *xlabels = [[NSMutableSet alloc] init];
-    NSMutableSet *xlocations = [[NSMutableSet alloc] init];
+    NSMutableArray *xlabels = [[NSMutableArray alloc] init];
+    NSMutableArray *xlocations = [[NSMutableArray alloc] init];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy年MM月"];
     NSDate *tickDate = [NSDate dateWithTimeIntervalSince1970:self.globalRange.start];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [[NSDateComponents alloc] init];
-    int tickCount = 0;
+    [components setMonth:1];
     while ([tickDate timeIntervalSince1970] <= self.globalRange.end) {
-        [components setMonth:tickCount];
+        
         tickDate = [calendar dateByAddingComponents:components toDate:tickDate options:0];
         
         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[formatter stringFromDate:tickDate] textStyle:axisTextStyle];
-        NSLog(@"date: %@",[formatter stringFromDate:tickDate]);
+        label.tickLocation = CPTDecimalFromDouble([tickDate timeIntervalSince1970]);
+        label.offset = 5;
+        //NSLog(@"date: %@",[formatter stringFromDate:tickDate]);
         
         [xlabels addObject:label];
         [xlocations addObject:[NSNumber numberWithDouble:[tickDate timeIntervalSince1970]]];
-        
-        tickCount++;
     }
 
-    x.axisLabels = xlabels;
-    x.majorTickLocations = xlocations;
+    x.axisLabels = [NSSet setWithArray: xlabels];
+    x.majorTickLocations = [NSSet setWithArray: xlocations];
     
     //y axis
     CPTXYAxis* y= [[CPTXYAxis alloc] init];
@@ -175,28 +173,28 @@
 - (void)initializePlots
 {
     //unit - column
-    CPTBarPlot *column=[[CPTBarPlot alloc] initWithFrame:self.chartView.graph.bounds];
-    
-    column.identifier=[self.chartData[0] objectForKey:@"identity"];
-    
-    column.barBasesVary=NO;
-    column.barWidthsAreInViewCoordinates=YES;
-    column.barWidth=CPTDecimalFromFloat(10);
-    column.barOffset=CPTDecimalFromInt(5);
-    
-    column.fill= [CPTFill fillWithColor:[CPTColor whiteColor]];
-    
-    column.baseValue=CPTDecimalFromFloat(0);
-    
-    column.dataSource=self;
-    column.delegate=self;
-    
-    column.lineStyle=nil;
-    column.shadow=nil;
-    
-    column.anchorPoint=CGPointZero;
-    
-    [self.chartView.graph addPlot:column];
+//    CPTBarPlot *column=[[CPTBarPlot alloc] initWithFrame:self.chartView.graph.bounds];
+//    
+//    column.identifier=[self.chartData[0] objectForKey:@"identity"];
+//    
+//    column.barBasesVary=NO;
+//    column.barWidthsAreInViewCoordinates=YES;
+//    column.barWidth=CPTDecimalFromFloat(10);
+//    column.barOffset=CPTDecimalFromInt(5);
+//    
+//    column.fill= [CPTFill fillWithColor:[CPTColor whiteColor]];
+//    
+//    column.baseValue=CPTDecimalFromFloat(0);
+//    
+//    column.dataSource=self;
+//    column.delegate=self;
+//    
+//    column.lineStyle=nil;
+//    column.shadow=nil;
+//    
+//    column.anchorPoint=CGPointZero;
+//    
+//    [self.chartView.graph addPlot:column];
     
     //bench mark - line
     CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
