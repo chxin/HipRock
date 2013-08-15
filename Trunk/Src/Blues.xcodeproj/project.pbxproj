@@ -10,7 +10,6 @@
 		38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D161785111300219469 /* REMApplicationInfo.m */; };
 		38ED7D1F1785140900219469 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38ED7D1E1785140900219469 /* libsqlite3.dylib */; };
 		6A4BD94717B89F1F007C9FCF /* BluesPad.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B4CD146017B3439600807B5F /* BluesPad.entitlements */; };
-		6A4BD94817B89F1F007C9FCF /* BluesPad-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D96177B41C3000F77F9 /* BluesPad-Info.plist */; };
 		6AB1F22817B8AC910065C1EB /* REMJSONObject.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4017A637FD0050779D /* REMJSONObject.h */; };
 		6AB1F22917B8AC910065C1EB /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
 		6AB1F22A17B8AC910065C1EB /* REMUserModel.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3A17A637510050779D /* REMUserModel.h */; };
@@ -1960,7 +1959,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A4BD94717B89F1F007C9FCF /* BluesPad.entitlements in Resources */,
-				6A4BD94817B89F1F007C9FCF /* BluesPad-Info.plist in Resources */,
 				7A5E2D91177B41B0000F77F9 /* Default-568h@2x.png in Resources */,
 				7A5E2D92177B41B0000F77F9 /* Default.png in Resources */,
 				7A5E2D93177B41B0000F77F9 /* Default@2x.png in Resources */,
@@ -2634,7 +2632,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos6.1]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -2684,7 +2682,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = BluesPad.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
 				COPY_PHASE_STRIP = YES;

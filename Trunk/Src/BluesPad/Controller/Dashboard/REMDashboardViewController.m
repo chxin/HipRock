@@ -45,9 +45,9 @@
 
 - (void) loadAllDashboard
 {
-    NSNumber *customerId=[REMApplicationContext instance].currentCustomer.customerId; //[REMAppDelegate app].currentCustomer[@"Id"];
-    REMLogVerbose(@"customerId:%@",customerId);
-    NSDictionary *param=@{@"customerId":customerId};
+    //NSNumber *customerId=[REMApplicationContext instance].currentCustomer.customerId; //[REMAppDelegate app].currentCustomer[@"Id"];
+    //REMLogVerbose(@"customerId:%@",customerId);
+    //NSDictionary *param=@{@"customerId":customerId};
     
     
     /*[REMDataAccessor access:SVC_DASHBORAD_FAVORITE withParameter:param mask:self.view store:NO success:^(id data){

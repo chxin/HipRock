@@ -98,7 +98,7 @@
         newView.alpha=0;
         newView.image=[self AFInflatedImageFromResponseWithDataAtScale:data];
         [self insertSubview:newView aboveSubview:self.blurredImageView];
-        UIImageView *newBlurred= [self blurredImageView2:newView];
+        UIImageView *newBlurred= [self blurredImageView:newView];
         [self insertSubview:newBlurred aboveSubview:newView];
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
             newView.alpha=self.imageView.alpha;
@@ -125,91 +125,6 @@
 - (NSString *)retrieveBuildingImage:(NSString *)name
 {
     return @"default-building";
-}
-
-- (UIImage *) convertBitmapRGBA8ToUIImage:(unsigned char *) buffer
-withWidth:(int) width
-withHeight:(int) height {
-    
-    
-    size_t bufferLength = width * height * 4;
-    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, buffer, bufferLength, NULL);
-    size_t bitsPerComponent = 8;
-    size_t bitsPerPixel = 32;
-    size_t bytesPerRow = 4 * width;
-    
-    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-    if(colorSpaceRef == NULL) {
-        NSLog(@"Error allocating color space");
-        CGDataProviderRelease(provider);
-        return nil;
-    }
-    
-    CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedLast;
-    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
-    
-    CGImageRef iref = CGImageCreate(width,
-                                    height,
-                                    bitsPerComponent,
-                                    bitsPerPixel,
-                                    bytesPerRow,
-                                    colorSpaceRef,
-                                    bitmapInfo,
-                                    provider,   // data provider
-                                    NULL,       // decode
-                                    YES,            // should interpolate
-                                    renderingIntent);
-    
-    uint32_t* pixels = (uint32_t*)malloc(bufferLength);
-    
-    if(pixels == NULL) {
-        NSLog(@"Error: Memory not allocated for bitmap");
-        CGDataProviderRelease(provider);
-        CGColorSpaceRelease(colorSpaceRef);
-        CGImageRelease(iref);
-        return nil;
-    }
-    
-    CGContextRef context = CGBitmapContextCreate(pixels,
-                                                 width,
-                                                 height,
-                                                 bitsPerComponent,
-                                                 bytesPerRow,
-                                                 colorSpaceRef,
-                                                 bitmapInfo);
-    
-    if(context == NULL) {
-        NSLog(@"Error context not created");
-        free(pixels);
-    }
-    
-    UIImage *image = nil;
-    if(context) {
-        
-        CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, width, height), iref);
-        
-        CGImageRef imageRef = CGBitmapContextCreateImage(context);
-        
-        // Support both iPad 3.2 and iPhone 4 Retina displays with the correct scale
-        if([UIImage respondsToSelector:@selector(imageWithCGImage:scale:orientation:)]) {
-            float scale = [[UIScreen mainScreen] scale];
-            image = [UIImage imageWithCGImage:imageRef scale:scale orientation:UIImageOrientationUp];
-        } else {
-            image = [UIImage imageWithCGImage:imageRef];
-        }
-        
-        CGImageRelease(imageRef);   
-        CGContextRelease(context);  
-    }
-    
-    CGColorSpaceRelease(colorSpaceRef);
-    CGImageRelease(iref);
-    CGDataProviderRelease(provider);
-    
-    if(pixels) {
-        free(pixels);
-    }   
-    return image;
 }
 
 - (UIImage *) AFImageWithDataAtScale:(NSData *)data {
@@ -317,7 +232,7 @@ withHeight:(int) height {
     
     self.clearImage = [CIImage imageWithCGImage:self.imageView.image.CGImage];
     
-    UIImageView *blurred= [self blurredImageView2:self.imageView];
+    UIImageView *blurred= [self blurredImageView:self.imageView];
     self.blurredImageView=blurred;
     [self addSubview:blurred];
 }
@@ -371,98 +286,14 @@ withHeight:(int) height {
 
 }
 
-- (UIImageView *)blurredImageView2:(UIImageView *)origView{
-    UIImageView *blurred;
-        blurred = [[UIImageView alloc]initWithFrame:self.imageView.frame];
-        blurred.alpha=0;
-        blurred.contentMode=UIViewContentModeScaleToFill;
-        blurred.backgroundColor=[UIColor clearColor];
-        
-    
-    dispatch_queue_t queue =  dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    UIImage *image= self.imageView.image;
-    dispatch_async(queue, ^ {
-        CGFloat blur=0.5;
-        
-        
-        if ((blur < 0.0f) || (blur > 1.0f)) {
-            blur = 0.5f;
-        }
-        
-        int boxSize = (int)(blur * 100);
-        boxSize -= (boxSize % 2) + 1;
-        
-        CGImageRef img = image.CGImage;
-        
-        if(img == nil) return; // maybe view has been released
-        
-        vImage_Buffer inBuffer, outBuffer;
-        vImage_Error error;
-        void *pixelBuffer;
-        
-        CGDataProviderRef inProvider = CGImageGetDataProvider(img);
-        CFDataRef inBitmapData = CGDataProviderCopyData(inProvider);
-        
-        inBuffer.width = CGImageGetWidth(img);
-        inBuffer.height = CGImageGetHeight(img);
-        inBuffer.rowBytes = CGImageGetBytesPerRow(img);
-        inBuffer.data = (void*)CFDataGetBytePtr(inBitmapData);
-        
-        pixelBuffer = malloc(CGImageGetBytesPerRow(img) * CGImageGetHeight(img));
-        
-        outBuffer.data = pixelBuffer;
-        outBuffer.width = CGImageGetWidth(img);
-        outBuffer.height = CGImageGetHeight(img);
-        outBuffer.rowBytes = CGImageGetBytesPerRow(img);
-        
-        error = vImageBoxConvolve_ARGB8888(&inBuffer, &outBuffer, NULL,
-                                           0, 0, boxSize, boxSize, NULL,
-                                           kvImageEdgeExtend);
-        
-        
-        if (error) {
-            NSLog(@"error from convolution %ld", error);
-        }
-        
-        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-        CGContextRef ctx = CGBitmapContextCreate(
-                                                 outBuffer.data,
-                                                 outBuffer.width,
-                                                 outBuffer.height,
-                                                 8,
-                                                 outBuffer.rowBytes,
-                                                 colorSpace,
-                                                 CGImageGetBitmapInfo(image.CGImage));
-        
-        CGImageRef imageRef = CGBitmapContextCreateImage (ctx);
-        UIImage *returnImage = [UIImage imageWithCGImage:imageRef];
-        
-        //clean up
-        CGContextRelease(ctx);
-        CGColorSpaceRelease(colorSpace);
-        
-        free(pixelBuffer);
-        CFRelease(inBitmapData);
-        
-        CGColorSpaceRelease(colorSpace);
-        CGImageRelease(imageRef);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            //self.blurredImageView.alpha = 0.0;
-            blurred.image=returnImage;
-        });
-    });
 
-    return blurred;
-    
-}
 
-- (void)initBlurredImageView
+- (UIImageView *)blurredImageView:(UIImageView *)imageView
 {
-    self.blurredImageView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
+    self.blurredImageView = [[UIImageView alloc]initWithFrame:imageView.frame];
     self.blurredImageView.alpha=0;
     self.blurredImageView.contentMode=UIViewContentModeScaleToFill;
-    self.backgroundColor=[UIColor clearColor];
+    self.blurredImageView.backgroundColor=[UIColor clearColor];
     
     dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(concurrentQueue, ^{
@@ -473,13 +304,13 @@ withHeight:(int) height {
         CIContext *myContext = [CIContext contextWithEAGLContext:myEAGLContext options:options];
         
         CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
-                                       keysAndValues: kCIInputImageKey,self.clearImage,@"inputRadius",@(5),nil];
+                                       keysAndValues: kCIInputImageKey,imageView.image.CIImage,@"inputRadius",@(5),nil];
         
         CIImage *outputImage = [filter1 outputImage];
         
         
         CGImageRef cgimg =
-        [myContext createCGImage:outputImage fromRect:CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height)];
+        [myContext createCGImage:outputImage fromRect:CGRectMake(0, 0, imageView.image.size.width, imageView.image.size.height)];
         
         
         UIImage *view= [UIImage imageWithCGImage:cgimg];
@@ -489,7 +320,7 @@ withHeight:(int) height {
         });
     });
     
-    [self addSubview:self.blurredImageView];
+    return self.blurredImageView;
 }
 
 - (void)initGlassView

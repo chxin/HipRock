@@ -90,7 +90,7 @@
 - (void)commodityChanged:(UIButton *)button
 {
     if(button.selected == YES) return;
-    int current ;
+    int current =0;
     for (UIButton *btn in self.buttonArray) {
         if(btn.selected==YES){
             current=[btn.titleLabel.text intValue];

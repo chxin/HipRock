@@ -296,7 +296,7 @@
 - (void)panthis:(UIPanGestureRecognizer *)pan
 {
     
-    CGPoint velocity= [pan velocityInView:self.view];
+    //CGPoint velocity= [pan velocityInView:self.view];
     //if(self.inScrollY == NO && ( ABS(velocity.x)>ABS(velocity.y) || self.cumulateX!=0)){
         [self swipethis:pan];
     //}
