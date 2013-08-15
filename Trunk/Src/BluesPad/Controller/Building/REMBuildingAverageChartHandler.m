@@ -55,15 +55,29 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    
-    //[self initializeGraph];
+    //UILongPressGestureRecognizer *longPressGuesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
+    //[self.view addGestureRecognizer:longPressGuesture];
+}
+
+-(void)longPressed:(UILongPressGestureRecognizer *)longPressGuesture
+{
+//    if(longPressGuesture.state == UIGestureRecognizerStateBegan){
+//        NSLog(@"%@",@"hey, long begin!");
+//    }
+//    else{
+//        NSLog(@"%@",@"hey, long end!");
+//    }
+    if(longPressGuesture.state == UIGestureRecognizerStateEnded){
+        CGPoint start = self.view.bounds.origin;
+        NSLog(@"start:%@",NSStringFromCGPoint(start));
+        CGPoint point = [[longPressGuesture valueForKey:@"_startPointScreen"] CGPointValue];
+        NSLog(@"point:%@",NSStringFromCGPoint(point));
+    }
 }
 
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageData :(void (^)(void))loadCompleted
 {
-    
-    
     self.averageData = averageData;
     
     //convert data
@@ -110,6 +124,8 @@
     
     //x axis
     CPTXYAxis* x= [[CPTXYAxis alloc] init];
+    [x setLabelingPolicy:CPTAxisLabelingPolicyNone];
+    
     x.coordinate = CPTCoordinateX;
     x.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
     x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
@@ -118,11 +134,10 @@
     x.axisLineStyle = axisLineStyle;
     x.majorTickLineStyle = axisLineStyle;
     x.minorTickLineStyle = axisLineStyle;
-    x.majorIntervalLength = CPTDecimalFromFloat([self.visiableRange distance]/10);
-    x.labelTextStyle = axisTextStyle;
+    //x.majorIntervalLength = CPTDecimalFromFloat([self.visiableRange distance]/10);
+    //x.labelTextStyle = axisTextStyle;
     x.anchorPoint=CGPointZero;
     
-    [x setLabelingPolicy:CPTAxisLabelingPolicyNone];
     
     NSMutableArray *xlabels = [[NSMutableArray alloc] init];
     NSMutableArray *xlocations = [[NSMutableArray alloc] init];
@@ -139,7 +154,7 @@
         
         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[formatter stringFromDate:tickDate] textStyle:axisTextStyle];
         label.tickLocation = CPTDecimalFromDouble([tickDate timeIntervalSince1970]);
-        label.offset = 5;
+        //label.offset = 5;
         //NSLog(@"date: %@",[formatter stringFromDate:tickDate]);
         
         [xlabels addObject:label];
@@ -173,33 +188,33 @@
 - (void)initializePlots
 {
     //unit - column
-//    CPTBarPlot *column=[[CPTBarPlot alloc] initWithFrame:self.chartView.graph.bounds];
-//    
-//    column.identifier=[self.chartData[0] objectForKey:@"identity"];
-//    
-//    column.barBasesVary=NO;
-//    column.barWidthsAreInViewCoordinates=YES;
-//    column.barWidth=CPTDecimalFromFloat(10);
-//    column.barOffset=CPTDecimalFromInt(5);
-//    
-//    column.fill= [CPTFill fillWithColor:[CPTColor whiteColor]];
-//    
-//    column.baseValue=CPTDecimalFromFloat(0);
-//    
-//    column.dataSource=self;
-//    column.delegate=self;
-//    
-//    column.lineStyle=nil;
-//    column.shadow=nil;
-//    
-//    column.anchorPoint=CGPointZero;
-//    
-//    [self.chartView.graph addPlot:column];
+    CPTBarPlot *column=[[CPTBarPlot alloc] initWithFrame:self.chartView.graph.bounds];
+    
+    column.identifier=[self.chartData[0] objectForKey:@"identity"];
+    
+    column.barBasesVary=NO;
+    column.barWidthsAreInViewCoordinates=YES;
+    column.barWidth=CPTDecimalFromFloat(10);
+    column.barOffset=CPTDecimalFromInt(5);
+    
+    column.fill= [CPTFill fillWithColor:[CPTColor whiteColor]];
+    
+    column.baseValue=CPTDecimalFromFloat(0);
+    
+    column.dataSource=self;
+    column.delegate=self;
+    
+    column.lineStyle=nil;
+    column.shadow=nil;
+    
+    column.anchorPoint=CGPointZero;
+    
+    [self.chartView.graph addPlot:column];
     
     //bench mark - line
     CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
-    lineStyle.lineColor = [CPTColor whiteColor];
-    lineStyle.lineWidth = 1;
+    lineStyle.lineColor = [CPTColor orangeColor];
+    lineStyle.lineWidth = 3;
     
     CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];
     labelStyle.color = [REMColor colorByIndex:1];
@@ -251,6 +266,8 @@
         index ++;
     }
 
+    self.globalRange.end = self.visiableRange.end;
+    
     self.chartData = convertedData;
 }
 
@@ -304,6 +321,12 @@
         }
     }
     return number;
+}
+
+#pragma mark - plot space delegate
+-(CPTPlotRange *)plotSpace:(CPTPlotSpace *)space willChangePlotRangeTo:(CPTPlotRange *)newRange forCoordinate:(CPTCoordinate)coordinate
+{
+    return newRange;
 }
 
 @end

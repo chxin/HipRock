@@ -51,4 +51,9 @@
     return newRange;
 }
 
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"{%f,%f}", self.start, self.end];
+}
+
 @end
