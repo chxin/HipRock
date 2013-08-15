@@ -29,6 +29,7 @@
     self.graph.plotAreaFrame.paddingRight=100.0f;
     self.graph.plotAreaFrame.paddingBottom=40.0f;
     self.graph.plotAreaFrame.paddingLeft=50.0f;
+    self.graph.plotAreaFrame.masksToBorder = NO;
     
     //Init host view
     self.hostView.hostedGraph = self.graph;

@@ -95,6 +95,8 @@
 
 - (void)initializePlotSpace
 {
+    //self.dataValueRange = [self.dataValueRange expandByFactor:1.1];
+    
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.graph.defaultPlotSpace;
     plotSpace.allowsUserInteraction = YES;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
@@ -114,33 +116,33 @@
     axisLineStyle.lineWidth = 1;
     axisLineStyle.lineColor = [CPTColor whiteColor];
     
-    CPTMutableLineStyle *gridLineStyle=[[CPTMutableLineStyle alloc]init];
-    gridLineStyle.lineWidth=1.0f;
-    gridLineStyle.lineColor=[CPTColor lightGrayColor];
+    CPTMutableLineStyle *gridLineStyle=[[CPTMutableLineStyle alloc] init];
+    gridLineStyle.lineWidth = 1.0f;
+    gridLineStyle.lineColor = [CPTColor lightGrayColor];
     
     //text styles
     CPTMutableTextStyle *axisTextStyle = [CPTMutableTextStyle textStyle];
     axisTextStyle.color = [CPTColor whiteColor];
     
     //x axis
-    CPTXYAxis* x= [[CPTXYAxis alloc] init];
+    CPTXYAxis* x = [[CPTXYAxis alloc] init];
     [x setLabelingPolicy:CPTAxisLabelingPolicyNone];
     
     x.coordinate = CPTCoordinateX;
-    x.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
+    x.orthogonalCoordinateDecimal = CPTDecimalFromInt(0);
     x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
     x.plotSpace = plotSpace;
-    x.visibleRange = plotSpace.xRange;
+    //x.visibleRange = plotSpace.xRange;
     x.axisLineStyle = axisLineStyle;
     x.majorTickLineStyle = axisLineStyle;
     x.minorTickLineStyle = axisLineStyle;
-    //x.majorIntervalLength = CPTDecimalFromFloat([self.visiableRange distance]/10);
-    //x.labelTextStyle = axisTextStyle;
+//    x.majorIntervalLength = CPTDecimalFromFloat([self.visiableRange distance]/100);
+//    x.labelTextStyle = axisTextStyle;
     x.anchorPoint=CGPointZero;
     
     
-    NSMutableArray *xlabels = [[NSMutableArray alloc] init];
-    NSMutableArray *xlocations = [[NSMutableArray alloc] init];
+    NSMutableSet *xlabels = [[NSMutableSet alloc] init];
+    NSMutableSet *xlocations = [[NSMutableSet alloc] init];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy年MM月"];
@@ -149,20 +151,18 @@
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setMonth:1];
     while ([tickDate timeIntervalSince1970] <= self.globalRange.end) {
-        
         tickDate = [calendar dateByAddingComponents:components toDate:tickDate options:0];
         
         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[formatter stringFromDate:tickDate] textStyle:axisTextStyle];
         label.tickLocation = CPTDecimalFromDouble([tickDate timeIntervalSince1970]);
-        //label.offset = 5;
         //NSLog(@"date: %@",[formatter stringFromDate:tickDate]);
         
         [xlabels addObject:label];
         [xlocations addObject:[NSNumber numberWithDouble:[tickDate timeIntervalSince1970]]];
     }
 
-    x.axisLabels = [NSSet setWithArray: xlabels];
-    x.majorTickLocations = [NSSet setWithArray: xlocations];
+    x.axisLabels = xlabels;
+    x.majorTickLocations = xlocations;
     
     //y axis
     CPTXYAxis* y= [[CPTXYAxis alloc] init];
@@ -194,8 +194,8 @@
     
     column.barBasesVary=NO;
     column.barWidthsAreInViewCoordinates=YES;
-    column.barWidth=CPTDecimalFromFloat(10);
-    column.barOffset=CPTDecimalFromInt(5);
+    column.barWidth=CPTDecimalFromFloat(30);
+    //column.barOffset=CPTDecimalFromInt(5);
     
     column.fill= [CPTFill fillWithColor:[CPTColor whiteColor]];
     
@@ -266,7 +266,7 @@
         index ++;
     }
 
-    self.globalRange.end = self.visiableRange.end;
+    //self.globalRange.end = self.visiableRange.end;
     
     self.chartData = convertedData;
 }
