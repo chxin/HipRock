@@ -33,14 +33,6 @@
     return self;
 }
 
-- (void)didMoveToSuperview
-{
-    if(self.superview == nil){
-        self.buildingId=nil;
-        self.commodityId=nil;
-        self.chartController=nil;
-    }
-}
 
 - (void)initChartViewWithSize:(CGFloat)titleSize
 {
