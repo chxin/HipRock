@@ -269,8 +269,29 @@
         NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
         NSString* myDocPath = myPaths[0];
         NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/"];
+        [self createDirectoryIfNotExist:fileName];
         _cacheAddress = fileName;
+        
+        //_cacheAddress = [myDocPath stringByAppendingString:@"/"];
     }
     return _cacheAddress;
+}
+
+- (void)createDirectoryIfNotExist:(NSString *)directoryFullPath
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    BOOL isDirectory = FALSE;
+    BOOL isDirectoryExist = [fileManager fileExistsAtPath:directoryFullPath isDirectory:&isDirectory];
+    
+    //if not exist, create it
+    if(!isDirectoryExist)
+    {
+        BOOL created = [fileManager createDirectoryAtPath:directoryFullPath withIntermediateDirectories:YES attributes:nil error:nil];
+        
+        if(!created){
+            NSLog(@"Create Audio Directory Failed.");
+        }
+    }
 }
 @end

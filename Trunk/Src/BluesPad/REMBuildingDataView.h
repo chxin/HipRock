@@ -12,7 +12,7 @@
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingConstants.h"
 
-@interface REMBuildingDataView : UIView
+@interface REMBuildingDataView : UIScrollView
 
 - (id)initWithFrame:(CGRect)frame withBuildingInfo:(REMBuildingOverallModel *)buildingInfo;
 

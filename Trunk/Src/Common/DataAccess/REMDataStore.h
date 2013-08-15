@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "REMServiceMeta.h"
 
 typedef enum _REMDataStoreType
 {
@@ -33,6 +34,9 @@ typedef enum _REMDataStoreType
     REMDSEnergyCostDistribute,
     REMDSEnergyBuildingOverall,
     REMDSEnergyBuildingTimeRange,
+    
+    //Hierarchy
+    REMDSBuildingImage,
     //...
     
     /*
@@ -42,10 +46,11 @@ typedef enum _REMDataStoreType
     
 } REMDataStoreType;
 
+
 @interface REMDataStore : NSObject
 
 @property (nonatomic) REMDataStoreType name;
-@property (nonatomic,strong) NSString* service;
+@property (nonatomic,strong) REMServiceMeta* serviceMeta;
 @property (nonatomic,strong) id parameter;
 @property (nonatomic,strong) UIView* maskContainer;
 @property (nonatomic) BOOL isStoreLocal;
@@ -55,5 +60,10 @@ typedef enum _REMDataStoreType
 - (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter;
 
 - (REMDataStore *)initWithEnergyStore:(NSString *)energyStore parameter:(id) parameter;
+
+@end
+
+@interface REMMobileService : NSObject
+
 
 @end

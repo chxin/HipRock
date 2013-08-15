@@ -18,7 +18,7 @@
 #define kBuildingCommodityItemMargin 5
 #define kBuildingCommodityTotalValueFontSize 160
 #define kBuildingCommodityTotalUomFontSize 30
-#define kBuildingCommodityViewTop 520
+#define kBuildingCommodityViewTop 430
 #define kBuildingCommodityDetailValueFontSize 80
 #define kBuildingCommodityDetailUomFontSize 20
 #define kBuildingCommodityDetailWidth 300

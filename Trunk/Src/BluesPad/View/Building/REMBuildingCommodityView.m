@@ -17,7 +17,7 @@
 
 
 
-@property (nonatomic,strong) REMCommodityUsageModel *commodityInfo;
+@property (nonatomic,weak) REMCommodityUsageModel *commodityInfo;
 
 @end
 
@@ -82,17 +82,39 @@
 {
     REMBuildingChartContainerView *averageContainer = self.chartViewArray[0];
     
-    REMBuildingAverageChartHandler *chart = [[REMBuildingAverageChartHandler alloc]initWithViewFrame:averageContainer.chartContainer.frame];
+    if(averageContainer.controller==nil){
+        REMBuildingAverageChartHandler *averageController = [[REMBuildingAverageChartHandler alloc]initWithViewFrame:averageContainer.chartContainer.frame];
+        averageContainer.controller=averageController;
+    }
     
-    [averageContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withController:chart withEnergyData:self.commodityInfo.averageUsageData];
+    
+    [averageContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:self.commodityInfo.averageUsageData];
     
     
     REMBuildingChartContainerView *trendContainer = self.chartViewArray[1];
     
-   REMBuildingTrendChartHandler  *chart1 = [[REMBuildingTrendChartHandler alloc]initWithViewFrame:trendContainer.chartContainer.frame];
+    if (trendContainer.controller==nil) {
+        REMBuildingTrendChartHandler  *trendController = [[REMBuildingTrendChartHandler alloc]initWithViewFrame:trendContainer.chartContainer.frame];
+        trendContainer.controller=trendController;
+        
+    }
     
-    [trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withController:chart1 withEnergyData:nil];
+   
+    [trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil];
 }
+/*
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *result = [super hitTest:point withEvent:event];
+    UIView *average = self.chartViewArray[0];
+    CGPoint p = [average convertPoint:point fromView:self];
+    if ([average pointInside:p withEvent:event]) {
+        
+        return average;
+    }
+    return result;
+}
+*/
 
 /*
 // Only override drawRect: if you perform custom drawing.

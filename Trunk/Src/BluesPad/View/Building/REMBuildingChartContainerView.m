@@ -14,7 +14,6 @@
 @property (nonatomic) BOOL hasLoaded;
 @property (nonatomic,strong) NSNumber *buildingId;
 @property (nonatomic,strong) NSNumber *commodityId;
-@property (nonatomic,strong) REMBuildingChartHandler *chartController;
 @end
 
 @implementation REMBuildingChartContainerView
@@ -33,6 +32,7 @@
     return self;
 }
 
+
 - (void)initChartViewWithSize:(CGFloat)titleSize
 {
     self.chartContainer = [[UIView alloc]initWithFrame:CGRectMake(0, titleSize, 1024, kBuildingChartHeight-titleSize-kBuildingCommodityItemMargin)];
@@ -40,16 +40,24 @@
     [self addSubview:self.chartContainer];
 }
 
-- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId withController:(REMBuildingChartHandler *)controller withEnergyData:(REMAverageUsageDataModel *)averageData
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId  withEnergyData:(REMAverageUsageDataModel *)averageData
 {
     if(self.hasLoaded == NO){
-        self.chartController = controller;
-        [self.chartContainer addSubview:controller.view];
-        [self.chartController loadData:[buildingId longLongValue] :[commodityId longLongValue] :averageData :^(void){
+        [self.chartContainer addSubview:self.controller.view];
+
+        [self.controller loadData:[buildingId longLongValue] :[commodityId longLongValue] :averageData :^(void){
             self.hasLoaded=YES;
         }];
-    }
+            }
 }
+/*
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+    BOOL inside=    [self pointInside:point withEvent:event];
+    if(inside){
+        return self;
+    }
+    return [super hitTest:point withEvent:event];
+}*/
 
 
 /*

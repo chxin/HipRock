@@ -18,6 +18,7 @@
 #import "REMStorage.h"
 #import "REMApplicationContext.h"
 #import "REMEncryptHelper.h"
+#import "REMApplicationInfo.h"
 
 
 @implementation REMServiceAgent
@@ -27,7 +28,7 @@ static int maxQueueLength = 5;
 
 
 
-+ (void) call: (NSString *) serviceUrl withBody:(id)body mask:(UIView *) maskContainer group:(NSString *)groupName store:(BOOL) isStore success:(void (^)(id data))success error:(void (^)(NSError *error, id response))error progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
++ (void) call: (REMServiceMeta *) service withBody:(id)body mask:(UIView *) maskContainer group:(NSString *)groupName store:(BOOL) isStore success:(void (^)(id data))success error:(void (^)(NSError *error, id response))error progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
 {
     //check network status and notify if no connection or 3g or 2g
     if(![REMServiceAgent checkNetworkStatus])
@@ -54,21 +55,41 @@ static int maxQueueLength = 5;
         postData = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
     }
     
-    NSURLRequest *request = [REMServiceAgent buildRequestWith:serviceUrl andPostData:postData];
+    NSURLRequest *request = [REMServiceAgent buildRequestWith:service.url andPostData:postData];
     
     
     void (^onSuccess)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
     {
         NSLog(@"%@", operation.responseString);
-                
-        NSDictionary *result = [REMServiceAgent deserializeResult:operation.responseString ofService:serviceUrl];
-
+        
+        id result;
+        
+        if(service.responseType == REMServiceResponseImage)
+        {
+            result = operation.responseData;
+        }
+        else
+        {
+            result = [REMServiceAgent deserializeResult:operation.responseString ofService:service.url];
+        }
+        
         //NSDictionary *errorInfo = (NSDictionary *)[result valueForKey:@"error"];
         //TODO: process error message with different error types
         
         if(isStore==YES)
         {
-            [REMStorage set:serviceUrl key:[NSString stringWithUTF8String:[postData bytes]] value:operation.responseString expired:1000];
+            NSString *storageKey = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
+            switch (service.responseType) {
+                case REMServiceResponseJson:
+                    [REMStorage set:service.url key:storageKey value:[REMJSONHelper stringByObject:result] expired:REMSessionExpired];
+                    break;
+                case REMServiceResponseImage:
+                    [REMStorage setFile:service.url key:storageKey version:0 image:result];
+                    break;
+                    
+                default:
+                    break;
+            }
         }
         
         if(success)
@@ -80,6 +101,9 @@ static int maxQueueLength = 5;
         {
             [maskManager hideMask];
         }
+        
+        //
+        operation = nil;
     };
     
     void (^onFailure)(AFHTTPRequestOperation *operation, NSError *errorInfo) = ^(AFHTTPRequestOperation *operation, NSError *errorInfo)
@@ -192,7 +216,7 @@ static int maxQueueLength = 5;
         return nil;
     }
     
-    NSString *parameterString = [REMJSONHelper stringByDictionary:parameter];
+    NSString *parameterString = [REMJSONHelper stringByObject:parameter];
     
     return parameterString;
 }
@@ -211,7 +235,7 @@ static int maxQueueLength = 5;
     [request setValue:[REMServiceAgent getUserAgent] forHTTPHeaderField:@"User-Agent"];
     
     //add client version string
-    [request setValue:@"0.0.0.1" forHTTPHeaderField:@"Blues-Version"];
+    [request setValue:[NSString stringWithUTF8String:[REMApplicationInfo getVersion]] forHTTPHeaderField:@"Blues-Version"];
     
     //add user info
     [request setValue:[REMServiceAgent getUserInfo] forHTTPHeaderField:@"Blues-User"];
@@ -226,27 +250,27 @@ static int maxQueueLength = 5;
 
 + (NSString *)getUserAgent
 {
-    return @"blues agent";
+    return @"Blues/0.2(PS;)";
 }
 
 + (NSString *)getUserInfo
 {
     REMApplicationContext* context = [REMApplicationContext instance];
     NSString *original = [NSString stringWithFormat:@"%llu|%@",context.currentUser.userId,context.currentUser.name];
-    NSLog(@"%@",original);
+    //NSLog(@"%@",original);
     
     NSData *encryptedData = [REMEncryptHelper AES256EncryptData:[original dataUsingEncoding:NSUTF8StringEncoding] withKey:@"41758bd9d7294737"];
     
     NSString *base64Encoded = [REMEncryptHelper encodeBase64Data:encryptedData];
-    NSLog(@"%@",base64Encoded);
+    //NSLog(@"%@",base64Encoded);
     return base64Encoded;
 }
 
-+(NSDictionary *)deserializeResult:(NSString *)resultJson ofService:(NSString *)service
++(id)deserializeResult:(NSString *)resultJson ofService:(NSString *)service
 {
-    NSDictionary *result = [REMJSONHelper dictionaryByJSONString:resultJson];
+    NSDictionary *result = [REMJSONHelper objectByString:resultJson];
     
-    return (NSDictionary *)[result valueForKey:[NSString stringWithFormat:@"%@Result",[service lastPathComponent]]];
+    return [result valueForKey:[NSString stringWithFormat:@"%@Result",[service lastPathComponent]]];
 }
 
 @end

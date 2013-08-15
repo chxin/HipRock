@@ -22,15 +22,28 @@
 
 -(void)initializeGraph
 {
-    self.graph=[[CPTXYGraph alloc]initWithFrame:self.bounds];
+    self.hostView = [[CPTGraphHostingView alloc]initWithFrame:self.bounds];
+    
+    self.graph=[[CPTXYGraph alloc]initWithFrame:self.hostView.bounds];
     self.graph.plotAreaFrame.paddingTop=0.0f;
     self.graph.plotAreaFrame.paddingRight=100.0f;
     self.graph.plotAreaFrame.paddingBottom=40.0f;
     self.graph.plotAreaFrame.paddingLeft=50.0f;
+    self.graph.plotAreaFrame.masksToBorder = NO;
     
     //Init host view
-    self.hostedGraph = self.graph;
+    self.hostView.hostedGraph = self.graph;
+    [self addSubview:self.hostView];
+    
+//    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panning)];
+//    [self addGestureRecognizer:pan];
+    
+    
 }
+
+-(void)panning
+{
+} 
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -40,5 +53,6 @@
     // Drawing code
 }
 */
+
 
 @end

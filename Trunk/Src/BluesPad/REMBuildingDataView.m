@@ -11,7 +11,7 @@
 @interface REMBuildingDataView()
 
 @property (nonatomic,strong) NSArray *buttonArray;
-@property (nonatomic,strong)  REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,weak)  REMBuildingOverallModel *buildingInfo;
 
 @property (nonatomic,strong) NSArray *commodityViewArray;
 @property (nonatomic) NSUInteger currentIndex;
@@ -20,9 +20,13 @@
 
 - (id)initWithFrame:(CGRect)frame withBuildingInfo:(REMBuildingOverallModel *)buildingInfo
 {
+    //NSLog(@"dataview:%@",NSStringFromCGRect(frame));
     self = [super initWithFrame:frame];
     if (self) {
+        self.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, 0, 0, 0);
+        [self setScrollEnabled:YES];
         
+        [self setContentSize:CGSizeMake(frame.size.width, 1000)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
         
@@ -39,7 +43,7 @@
     int i=0;
     for (;i<self.buildingInfo.commodityUsage.count;++i) {
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+ i*( /*kBuildingCommodityItemMargin+*/kBuildingCommodityButtonDimension), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*kBuildingCommodityButtonDimension, 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
         btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
         
         NSString *str = [self retrieveCommodityImageName:model.commodity];
@@ -87,7 +91,7 @@
 - (void)commodityChanged:(UIButton *)button
 {
     if(button.selected == YES) return;
-    int current ;
+    int current =0;
     for (UIButton *btn in self.buttonArray) {
         if(btn.selected==YES){
             current=[btn.titleLabel.text intValue];

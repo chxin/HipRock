@@ -48,10 +48,21 @@
 
     UIPanGestureRecognizer *rec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
     [self.view addGestureRecognizer:rec];
+    rec.delegate = self;
     
     UITapGestureRecognizer *tap= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapthis:)];
     [self.view addGestureRecognizer:tap];
     
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] ==YES ){
+        REMImageView *current = self.imageArray[self.currentIndex];
+        return [current shouldResponseSwipe:touch];
+            
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -147,7 +158,7 @@
         __block CGPoint p= [pan velocityInView:self.view];
         //NSLog(@"cumulatex:%f",self.cumulateX);
         
-        int sign= p.x>0?1:-1;
+       __block int sign= p.x>0?1:-1;
         
         
         __block BOOL addIndex=YES;
@@ -190,15 +201,39 @@
                                 self.cumulateX=0;
                                 
                             } completion:^(BOOL ret){
+                                if(addIndex == NO) return;
                                 
                                 [self loadImageData];
                                 if(self.currentIndex<self.imageArray.count){
-                                NSNumber *status = self.imageViewStatus[@(self.currentIndex+1)];
-                                if([status isEqualToNumber:@(0)] ==YES){
-                                    [self.view insertSubview:self.imageArray[self.currentIndex+1] belowSubview:self.logoutButton];
-                                    
+                                    NSNumber *willIndex= @(self.currentIndex-1*sign);
+                                    NSNumber *status = self.imageViewStatus[willIndex];
+                                    if([status isEqualToNumber:@(0)] ==YES){
+                                        [self.view insertSubview:self.imageArray[willIndex.intValue] belowSubview:self.logoutButton];
+                                        self.imageViewStatus[willIndex]=@(1);
+                                        
+                                    }
                                 }
+                                int idx = self.currentIndex;
+                                
+                                NSMutableArray *releaseArray=[[NSMutableArray alloc] initWithCapacity:self.imageArray.count];
+                                if((idx - 2) >=0){
+                                    int i=0;
+                                    while (i<=(idx-2)) {
+                                        [releaseArray addObject:@(i)];
+                                        i++;
+                                    }
+                                    [self releaseOutOfWindowView:releaseArray];
                                 }
+                                else if((idx+2)<=self.imageArray.count){
+                                    int i=self.imageArray.count-1;
+                                    while (i>=(idx+2)) {
+                                        [releaseArray addObject:@(i)];
+                                        i--;
+                                    }
+                                    [self releaseOutOfWindowView:releaseArray];
+                                }
+                                
+                                
                             }];
         
         [pan setTranslation:CGPointZero inView:self.view];
@@ -208,71 +243,24 @@
     
 }
 
-
-- (void) scrollInnerView:(UIPanGestureRecognizer *)pan
-{
-    //NSLog(@"cumulateX:%f",self.cumulateX);
-    if(ABS(self.cumulateX)>0)return;
-    self.inScrollY=YES;
-    CGPoint trans= [pan translationInView:self.view];
-    CGPoint velocity=[pan velocityInView:self.view];
-    //NSLog(@"velocicty:%f",velocity.y);
-    if (pan.state  == UIGestureRecognizerStateChanged &&
-                    (ABS(velocity.y) < kScrollVelocityMax || ABS(trans.y)>kMoveLen)) {
-        for (REMImageView *view in self.imageArray) {
-            [view move:trans.y];
+- (void)releaseOutOfWindowView:(NSArray *)releaseViews{
+    for (NSNumber *num in releaseViews) {
+        REMImageView *image= self.imageArray[[num intValue]];
+        if([self.imageViewStatus[num] isEqual:@(1)]== YES){
+            [image removeFromSuperview];
+            self.imageViewStatus[num]=@(0);
         }
-        [pan setTranslation:CGPointZero inView:self.view];
-    }
-    
-    if(pan.state == UIGestureRecognizerStateEnded)
-    {
-        //NSLog(@"movelen:%f",trans.y);
-        //NSLog(@"velocicty:%f",velocity.y);
-        /*if(ABS(velocity.y)>kScrollVelocitySmall && ABS(velocity.y)<kScrollVelocityMax){
-            if(velocity.y<0)
-            {
-                for (REMImageView *view in self.imageArray) {
-                    [view scrollUp];
-                }
-            }
-            else{
-                for (REMImageView *view in self.imageArray) {
-                    [view scrollDown];
-                }
-            }
-            
-        }
-        else */
-        if(ABS(velocity.y)<kScrollVelocityMax){
-            
-            for (REMImageView *view in self.imageArray) {
-                [view moveEnd];
-            }
-        }
-        else{
-            for (REMImageView *view in self.imageArray) {
-                [view moveEndByVelocity:velocity.y];
-            }
-        }
-        
-            self.inScrollY=NO;
-        
-        [pan setTranslation:CGPointZero inView:self.view];
     }
 }
+
+
 
 - (void)panthis:(UIPanGestureRecognizer *)pan
 {
     
-    CGPoint velocity= [pan velocityInView:self.view];
-    if(self.inScrollY == NO && ( ABS(velocity.x)>ABS(velocity.y) || self.cumulateX!=0)){
-        [self swipethis:pan];
-    }
-    else{
-        [self scrollInnerView:pan];
-    }
     
+        [self swipethis:pan];
+
 }
 
 

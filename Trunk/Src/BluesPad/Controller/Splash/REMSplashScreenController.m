@@ -43,10 +43,10 @@
     self.logoView.alpha = 0;
     
     
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         self.logoView.alpha = 1;
     } completion:^(BOOL finished){
-        [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.3 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.logoView.alpha = 0;
         } completion:^(BOOL finished) {
             [self runTimer:nil];
@@ -101,7 +101,7 @@
     NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
     REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSEnergyBuildingOverall parameter:parameter];
     buildingStore.isStoreLocal = YES;
-    buildingStore.isAccessLocal = NO;
+    buildingStore.isAccessLocal = YES;
     buildingStore.groupName = nil;
     buildingStore.maskContainer = nil;
     
