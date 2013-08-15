@@ -24,6 +24,4 @@
 @property (nonatomic) NSInteger maxDateIndex;
 @property  (nonatomic,strong) NSMutableArray *datasource;
 
-- (void)changeData:(REMEnergyViewData *)data;
-
 @end

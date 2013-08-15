@@ -9,6 +9,7 @@
 #import "REMBuildingTrendChartHandler.h"
 #import "REMBuildingTrendChart.h"
 #import "REMWidgetAxisHelper.h"
+#import "REMBuildingTimeRangeDataModel.h"
 
 @interface REMBuildingTrendChartHandler () {
     int currentSourceIndex; // Indicate that which button was pressed down.
@@ -38,43 +39,70 @@
         [myView.thisYearButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
         [myView.lastYearButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
         
+        myView.hostView.hostedGraph.backgroundColor = [UIColor blueColor].CGColor;
+        
+        myView.hostView.backgroundColor = [UIColor redColor];
         self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
         
         self.view = myView;
+        self.graph = (CPTXYGraph*)myView.hostView.hostedGraph;
         [self viewDidLoad];
     }
     return self;
+}
+
+- (CPTGraphHostingView*) getHostView {
+    return ((REMBuildingTrendChart*)self.view).hostView;
+}
+-(void)longPressedAt:(NSDate*)x {
+    NSLog(@"Long Pressed At %@", x);
+}
+
+
+- (int)getSourceIndex: (REMRelativeTimeRangeType)type {
+    int i = 0;
+    if (type == Today) {
+        i = 0;
+    } else if (type == Yesterday) {
+        i = 1;
+    } else if (type == ThisMonth) {
+        i = 2;
+    } else if (type == LastMonth) {
+        i = 3;
+    } else if (type == ThisYear) {
+        i = 4;
+    } else if (type == LastYear) {
+        i = 5;
+    }
+    return i;
 }
 
 - (void)intervalChanged:(UIButton *)button {
     REMRelativeTimeRangeType t = Today;
     REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
     if (button == myView.todayButton) {
-        currentSourceIndex = 0;
         t = Today;
     } else if (button == myView.yestodayButton) {
-        currentSourceIndex = 1;
         t = Yesterday;
     } else if (button == myView.thisMonthButton) {
-        currentSourceIndex = 2;
         t = ThisMonth;
     } else if (button == myView.lastMonthButton) {
-        currentSourceIndex = 3;
         t = LastMonth;
     } else if (button == myView.thisYearButton) {
-        currentSourceIndex = 4;
         t = ThisYear;
     } else if (button == myView.lastYearButton) {
-        currentSourceIndex = 5;
         t = LastYear;
     }
     
+    currentSourceIndex = [self getSourceIndex:t];
+    
     CPTScatterPlot* scatterPlot = [[CPTScatterPlot alloc] initWithFrame: myView.hostView.hostedGraph.bounds];
     CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];
-    labelStyle.color = [REMColor colorByIndex:0];
+    labelStyle.color = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
+
     
     CPTMutableLineStyle* scatterStyle = [CPTMutableLineStyle lineStyle];
-    scatterStyle.lineColor = [REMColor colorByIndex:0];
+    scatterStyle.lineColor = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
     scatterStyle.lineWidth = 1;
     scatterPlot.labelTextStyle = labelStyle;
     
@@ -94,12 +122,43 @@
     scatterPlot.delegate = self;
     scatterPlot.dataSource = self;
     
-    [REMWidgetAxisHelper decorateBuildingTrendAxisSet:(CPTXYGraph*)myView.hostView.hostedGraph dataSource:self.datasource interval:t seriesIndex:currentSourceIndex];
+    
     [myView.hostView.hostedGraph addPlot:scatterPlot];
-    [myView.hostView.hostedGraph reloadData];
+    
+    [REMWidgetAxisHelper decorateBuildingTrendAxisSet:(CPTXYGraph*)myView.hostView.hostedGraph dataSource:self.datasource interval:t seriesIndex:currentSourceIndex];
     [scatterPlot reloadData];
+    [myView.hostView.hostedGraph reloadData];
+    
+    [self drawToolTip:0];
+    //yAxis.majorGridLines
 }
 
+- (void)drawToolTip: (NSInteger)index {
+    [self.graph removeAllAnnotations];
+    
+    CPTLayerAnnotation *annot = [[CPTLayerAnnotation alloc]initWithAnchorLayer:self.graph];
+
+   // layer.sublayers
+    CPTTextLayer* textLayer = [[CPTTextLayer alloc]initWithText:@"FFFFF"];
+    textLayer.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1]];
+    textLayer.frame = CGRectMake(0, 0, 1000, 1000);
+    CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
+    textLayer.textStyle = textStyle;
+    textLayer.delegate = self;
+    
+    
+    annot.contentLayer = textLayer;
+   // annot.rectAnchor=CPTRectAnchorTopLeft;
+    annot.displacement = CGPointMake(100, 100);
+    [self.graph addAnnotation:annot];
+    
+    //annot.
+   // CPTXYAxis* yAxis = ((CPTXYAxisSet*)self.graph.axisSet).yAxis;
+}
+
+- (void)scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index
+{
+}
 
 - (void)viewDidLoad
 {
@@ -120,39 +179,27 @@
     store.maskContainer = self.view;
     store.groupName = nil;
     
-    void (^retrieveSuccess)(id data)=^(id data) {
-        //  [self.chartController changeData:[[REMEnergyViewData alloc] initWithDictionary:(NSDictionary *)data]];
-        NSArray* de = (NSArray*)data;
-        
-        NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:[data count]];
-        for(NSDictionary *item in (NSArray *)data){
-            [arr addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
-        }
-        
-       // NSArray* keys  = [de allKeys];
-        NSDate* d = [[NSDate alloc]initWithTimeIntervalSince1970:0];
+    if (self.datasource.count != 6) {
         for (int i = 0; i < 6; i++) {
-            NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%u", i, 2, 3];
-            NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:20];
-            int pointAmount = 12;
-            int pointMul = 1;
-            if (i == 0 || i == 1) {
-                pointAmount = 24;
-                pointMul = 1;
-            }
-            if (i == 2 || i == 3) {
-                pointAmount = 30;
-                pointMul = 24;
-            }
-            if (i == 4 || i == 5) {
-                pointAmount = 12;
-                pointMul = 720;
-            }
-            for (int j = 0; j < pointAmount; j++) {
-                [data addObject:@{@"y": [[NSDecimalNumber alloc]initWithInt:rand()], @"x": [[NSDate alloc]initWithTimeInterval:j*pointMul*3600 sinceDate:d]  }];
-            }
-            NSDictionary* series = @{ @"identity":targetIdentity, @"color":[REMColor colorByIndex:i], @"data":data};
+            NSMutableDictionary* series = [[NSMutableDictionary alloc] init];
+            [series setValue:[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1] forKey:@"color"];
             [self.datasource addObject:series];
+        }
+    }
+    void (^retrieveSuccess)(id data)=^(id data) {
+        for(NSDictionary *item in (NSArray *)data){
+            REMBuildingTimeRangeDataModel* dataItem = [[REMBuildingTimeRangeDataModel alloc] initWithDictionary:item];
+            int index = [self getSourceIndex:dataItem.timeRangeType];
+            NSMutableDictionary* series = (NSMutableDictionary*) [self.datasource objectAtIndex:index];
+            NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%llu", index, dataItem.timeRangeType, dataItem.timeRangeData.targetGlobalData.target.targetId];
+            [series setValue:targetIdentity forKey:@"identity"];
+            NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:dataItem.timeRangeData.targetEnergyData.count];
+            REMTargetEnergyData* targetEData = dataItem.timeRangeData.targetEnergyData[0];
+            for (int i = 0; i < targetEData.energyData.count; i++) {
+                REMEnergyData* pointData = targetEData.energyData[i];
+                [data addObject:@{@"y": [[NSDecimalNumber alloc]initWithDecimal: pointData.dataValue], @"x": pointData.localTime  }];
+            }
+            [series setValue:data forKey:@"data"];
         }
     };
     void (^retrieveError)(NSError *error, id response) = ^(NSError *error, id response) {
@@ -175,62 +222,6 @@
 
 
 //////////////////////////////////////////
-
-- (void)changeData:(REMEnergyViewData *)data
-{
-//    self.data = data;
-//    int amountOfSeries = [self.data.targetEnergyData count];
-//    int amountOfPoint = 0;
-//    
-//    self.datasource = [[NSMutableArray alloc]initWithCapacity:amountOfSeries];
-//    
-//    for (int i = 0; i < amountOfSeries; i++) {
-//        REMTargetEnergyData* seriesData = [self.data.targetEnergyData objectAtIndex:i];
-//        
-//        NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%llu", i, seriesData.target.type, seriesData.target.targetId];
-//        amountOfPoint = [seriesData.energyData count];
-//        NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:amountOfPoint];
-//        for (int j = 0; j < amountOfPoint; j++) {
-//            REMEnergyData* pointData = [seriesData.energyData objectAtIndex:j];
-//            [data addObject:@{@"y": [[NSDecimalNumber alloc]initWithDecimal:pointData.dataValue], @"x": pointData.localTime}];
-//        }
-//        NSDictionary* series = @{ @"identity":targetIdentity, @"color":[REMColor colorByIndex:i], @"data":data};
-//        [self.datasource addObject:series];
-//    }
-//    
-//    
-//    
-//    for (int i = 0; i < [self.datasource count]; i++) {
-//        CPTScatterPlot *scatterPlot = [[CPTScatterPlot alloc] initWithFrame:self.hostView.hostedGraph.bounds];
-//        CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];
-//        labelStyle.color = [REMColor colorByIndex:i];
-//        
-//        CPTMutableLineStyle* scatterStyle = [CPTMutableLineStyle lineStyle];
-//        scatterStyle.lineColor = [REMColor colorByIndex:i];
-//        scatterStyle.lineWidth = 1;
-//        scatterPlot.labelTextStyle = labelStyle;
-//        scatterPlot.dataSource = self;
-//        scatterPlot.identifier = [NSNumber numberWithInt:i];
-//        
-//        CPTPlotSymbol *symbol = [CPTPlotSymbol diamondPlotSymbol];
-//        symbol.lineStyle=scatterStyle;
-//        symbol.fill= [CPTFill fillWithColor:scatterStyle.lineColor];
-//        
-//        symbol.size=CGSizeMake(7.0, 7.0);
-//        scatterPlot.plotSymbol=symbol;
-//        
-//        
-//        scatterPlot.dataSource=self;
-//        scatterPlot.dataLineStyle = scatterStyle;
-//        [scatterPlot addAnimation:[self columnAnimation] forKey:@"y"];
-//        scatterPlot.delegate = self;
-//        [self.hostView.hostedGraph addPlot:scatterPlot];
-//    }
-//    
-//    [REMWidgetAxisHelper decorateAxisSet:self.hostView.hostedGraph dataSource:self.datasource startPointIndex:0 endPointIndex:0];
-}
-
-
 - (CABasicAnimation *) columnAnimation
 {
     //adding animation here
