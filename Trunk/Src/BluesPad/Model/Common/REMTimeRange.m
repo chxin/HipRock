@@ -42,4 +42,9 @@
     return self;
 }
 
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"{%f,%f}", [self.startTime timeIntervalSince1970], [self.endTime timeIntervalSince1970] ];
+}
+
 @end

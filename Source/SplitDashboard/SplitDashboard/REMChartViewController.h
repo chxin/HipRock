@@ -10,7 +10,7 @@
 #import "CorePlot-CocoaTouch.h"
 
 
-@interface REMChartViewController : UIViewController<CPTScatterPlotDataSource,CPTScatterPlotDelegate, CPTPlotSpaceDelegate>
+@interface REMChartViewController : UIViewController<CPTScatterPlotDataSource,CPTScatterPlotDelegate, CPTPlotSpaceDelegate,UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 
 @end

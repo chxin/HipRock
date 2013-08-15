@@ -374,7 +374,7 @@
 
 - (BOOL)shouldResponseSwipe:(UITouch *)touch
 {
-    if( [touch.view isKindOfClass:[REMBuildingAverageChart class]] == YES) return NO;
+    if( [touch.view isKindOfClass:[CPTGraphHostingView class]] == YES) return NO;
     
     return YES;
     

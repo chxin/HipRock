@@ -17,7 +17,7 @@
 #import "REMDataAccessor.h"
 #import "REMDataStore.h"    
 
-@interface REMImageView : UIView <UIGestureRecognizerDelegate>
+@interface REMImageView : UIView /*<UIGestureRecognizerDelegate>*/
 
 
 - (id) initWithFrame:(CGRect)frame withBuildingOveralInfo:(REMBuildingOverallModel *)buildingInfo;
