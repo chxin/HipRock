@@ -190,6 +190,7 @@
                                 self.cumulateX=0;
                                 
                             } completion:^(BOOL ret){
+                                if(addIndex == NO) return;
                                 
                                 [self loadImageData];
                                 if(self.currentIndex<self.imageArray.count){
@@ -220,6 +221,7 @@
                                     }
                                     [self releaseOutOfWindowView:releaseArray];
                                 }
+                                
                                 
                             }];
         

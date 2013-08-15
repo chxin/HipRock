@@ -82,16 +82,25 @@
 {
     REMBuildingChartContainerView *averageContainer = self.chartViewArray[0];
     
-    REMBuildingAverageChartHandler *chart = [[REMBuildingAverageChartHandler alloc]initWithViewFrame:averageContainer.chartContainer.frame];
+    if(averageContainer.controller==nil){
+        REMBuildingAverageChartHandler *averageController = [[REMBuildingAverageChartHandler alloc]initWithViewFrame:averageContainer.chartContainer.frame];
+        averageContainer.controller=averageController;
+    }
     
-    [averageContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withController:chart withEnergyData:self.commodityInfo.averageUsageData];
+    
+    [averageContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:self.commodityInfo.averageUsageData];
     
     
     REMBuildingChartContainerView *trendContainer = self.chartViewArray[1];
     
-   REMBuildingTrendChartHandler  *chart1 = [[REMBuildingTrendChartHandler alloc]initWithViewFrame:trendContainer.chartContainer.frame];
+    if (trendContainer.controller==nil) {
+        REMBuildingTrendChartHandler  *trendController = [[REMBuildingTrendChartHandler alloc]initWithViewFrame:trendContainer.chartContainer.frame];
+        trendContainer.controller=trendController;
+        
+    }
     
-    [trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withController:chart1 withEnergyData:nil];
+   
+    [trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil];
 }
 
 /*

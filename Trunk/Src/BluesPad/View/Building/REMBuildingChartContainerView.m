@@ -41,11 +41,10 @@
     [self addSubview:self.chartContainer];
 }
 
-- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId withController:(REMBuildingChartHandler *)controller withEnergyData:(REMAverageUsageDataModel *)averageData
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId  withEnergyData:(REMAverageUsageDataModel *)averageData
 {
     if(self.hasLoaded == NO){
-        self.chartController = controller;
-        [self.chartContainer addSubview:controller.view];
+        [self.chartContainer addSubview:self.controller.view];
         [self.chartController loadData:[buildingId longLongValue] :[commodityId longLongValue] :averageData :^(void){
             self.hasLoaded=YES;
         }];

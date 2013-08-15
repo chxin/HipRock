@@ -17,8 +17,10 @@
 
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *)title andTitleFontSize:(CGFloat)size;
 
-- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId withController:(REMBuildingChartHandler *)controller withEnergyData:(REMAverageUsageDataModel *)averageData;
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId withEnergyData:(REMAverageUsageDataModel *)averageData;
 
 @property (nonatomic,strong) UIView *chartContainer;
+
+@property (nonatomic,strong) REMBuildingChartHandler *controller;
 
 @end
