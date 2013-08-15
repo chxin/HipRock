@@ -97,13 +97,17 @@
     [REMDataAccessor access: store success:^(NSData *data){
         if(data == nil) return;
         self.loadingImage=NO;
+        
         UIImageView *newView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
         newView.contentMode=UIViewContentModeScaleToFill;
         newView.alpha=0;
         newView.image=[self AFInflatedImageFromResponseWithDataAtScale:data];
         [self insertSubview:newView aboveSubview:self.blurredImageView];
+        
+        
         UIImageView *newBlurred= [self blurredImageView:newView];
         [self insertSubview:newBlurred aboveSubview:newView];
+        
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
             newView.alpha=self.imageView.alpha;
             newBlurred.alpha=self.blurredImageView.alpha;
@@ -294,10 +298,10 @@
 
 - (UIImageView *)blurredImageView:(UIImageView *)imageView
 {
-    self.blurredImageView = [[UIImageView alloc]initWithFrame:imageView.frame];
-    self.blurredImageView.alpha=0;
-    self.blurredImageView.contentMode=UIViewContentModeScaleToFill;
-    self.blurredImageView.backgroundColor=[UIColor clearColor];
+    UIImageView *blurred = [[UIImageView alloc]initWithFrame:imageView.frame];
+    blurred.alpha=0;
+    blurred.contentMode=UIViewContentModeScaleToFill;
+    blurred.backgroundColor=[UIColor clearColor];
     
     dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(concurrentQueue, ^{
@@ -307,12 +311,14 @@
         [options setObject: [NSNull null] forKey: kCIContextWorkingColorSpace];
         CIContext *myContext = [CIContext contextWithEAGLContext:myEAGLContext options:options];
         
+        CIImage *ci = [[CIImage alloc]initWithCGImage:imageView.image.CGImage];
+        
         CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
-                                       keysAndValues: kCIInputImageKey,imageView.image.CIImage,@"inputRadius",@(5),nil];
+                                       keysAndValues: kCIInputImageKey,ci,@"inputRadius",@(5),nil];
         
         CIImage *outputImage = [filter1 outputImage];
         
-        
+        NSLog(@"image size:%@",NSStringFromCGSize(imageView.image.size));
         CGImageRef cgimg =
         [myContext createCGImage:outputImage fromRect:CGRectMake(0, 0, imageView.image.size.width, imageView.image.size.height)];
         
@@ -320,11 +326,11 @@
         UIImage *view= [UIImage imageWithCGImage:cgimg];
         CGImageRelease(cgimg);
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.blurredImageView.image=view;
+            blurred.image=view;
         });
     });
     
-    return self.blurredImageView;
+    return blurred;
 }
 
 - (void)initGlassView
@@ -358,11 +364,20 @@
 }
 
 - (void)setBlurLevel:(float)blurLevel {
-    NSLog(@"blurlevel:%f",blurLevel);
+    //NSLog(@"blurlevel:%f",blurLevel);
     self.blurredImageView.alpha = blurLevel;
     
   
-    self.glassView.alpha = blurLevel;
+    self.glassView.alpha = MAX(0,MIN(blurLevel,0.7));
+    
+}
+
+- (BOOL)shouldResponseSwipe:(UITouch *)touch
+{
+    if( [touch.view isKindOfClass:[REMBuildingAverageChart class]] == YES) return NO;
+    
+    return YES;
+    
     
 }
 

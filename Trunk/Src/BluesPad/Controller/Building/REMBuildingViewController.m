@@ -48,10 +48,21 @@
 
     UIPanGestureRecognizer *rec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
     [self.view addGestureRecognizer:rec];
+    rec.delegate = self;
     
     UITapGestureRecognizer *tap= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapthis:)];
     [self.view addGestureRecognizer:tap];
     
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] ==YES ){
+        REMImageView *current = self.imageArray[self.currentIndex];
+        return [current shouldResponseSwipe:touch];
+            
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning

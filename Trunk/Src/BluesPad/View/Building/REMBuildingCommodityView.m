@@ -102,6 +102,19 @@
    
     [trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil];
 }
+/*
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *result = [super hitTest:point withEvent:event];
+    UIView *average = self.chartViewArray[0];
+    CGPoint p = [average convertPoint:point fromView:self];
+    if ([average pointInside:p withEvent:event]) {
+        
+        return average;
+    }
+    return result;
+}
+*/
 
 /*
 // Only override drawRect: if you perform custom drawing.

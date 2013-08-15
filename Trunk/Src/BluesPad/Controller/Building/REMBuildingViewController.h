@@ -12,7 +12,7 @@
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingConstants.h"
 
-@interface REMBuildingViewController : UIViewController
+@interface REMBuildingViewController : UIViewController<UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) NSArray *buildingOverallArray;
 

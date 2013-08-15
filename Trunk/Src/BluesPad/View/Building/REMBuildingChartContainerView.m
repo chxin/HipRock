@@ -14,7 +14,6 @@
 @property (nonatomic) BOOL hasLoaded;
 @property (nonatomic,strong) NSNumber *buildingId;
 @property (nonatomic,strong) NSNumber *commodityId;
-@property (nonatomic,strong) REMBuildingChartHandler *chartController;
 @end
 
 @implementation REMBuildingChartContainerView
@@ -45,11 +44,20 @@
 {
     if(self.hasLoaded == NO){
         [self.chartContainer addSubview:self.controller.view];
-        [self.chartController loadData:[buildingId longLongValue] :[commodityId longLongValue] :averageData :^(void){
+
+        [self.controller loadData:[buildingId longLongValue] :[commodityId longLongValue] :averageData :^(void){
             self.hasLoaded=YES;
         }];
-    }
+            }
 }
+/*
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+    BOOL inside=    [self pointInside:point withEvent:event];
+    if(inside){
+        return self;
+    }
+    return [super hitTest:point withEvent:event];
+}*/
 
 
 /*

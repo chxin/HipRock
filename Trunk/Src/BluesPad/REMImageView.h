@@ -37,5 +37,6 @@
 - (void)moveCenter:(CGFloat)x;
 
 -(void)requireChartData;
+- (BOOL)shouldResponseSwipe:(UITouch *)touch;
 
 @end
