@@ -88,6 +88,8 @@
 - (void)loadingBuildingImage{
     NSDictionary *param=@{@"pictureId":self.buildingInfo.building.buildingId};
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingImage parameter:param];
+    store.isAccessLocal=YES;
+    store.isStoreLocal=YES;
     store.groupName=self.loadingImageKey;
     self.loadingImage=YES;
     [REMDataAccessor access: store success:^(NSData *data){
@@ -340,8 +342,28 @@
     self.dataView = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleHeight+kBuildingCommodityItemGroupMargin, self.frame.size.width, self.frame.size.height-kBuildingTitleHeight-kBuildingCommodityItemGroupMargin) withBuildingInfo:self.buildingInfo];
     
     [self addSubview:self.dataView];
+    
+    [self.dataView addObserver:self forKeyPath:@"contentOffset" options:0 context:nil];
+    
 
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+                        change:(NSDictionary *)change context:(void *)context {
+    
+    // closer to zero, less blur applied
+    [self setBlurLevel:(self.dataView.contentOffset.y + self.dataView.contentInset.top) / (2 * CGRectGetHeight(self.bounds) / 3)];
+}
+
+- (void)setBlurLevel:(float)blurLevel {
+    NSLog(@"blurlevel:%f",blurLevel);
+    self.blurredImageView.alpha = blurLevel;
+    
+  
+    self.glassView.alpha = blurLevel;
+    
+}
+
 
 - (void)initTitleView
 {
