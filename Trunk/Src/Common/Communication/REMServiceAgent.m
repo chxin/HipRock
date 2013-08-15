@@ -18,6 +18,7 @@
 #import "REMStorage.h"
 #import "REMApplicationContext.h"
 #import "REMEncryptHelper.h"
+#import "REMApplicationInfo.h"
 
 
 @implementation REMServiceAgent
@@ -231,7 +232,7 @@ static int maxQueueLength = 5;
     [request setValue:[REMServiceAgent getUserAgent] forHTTPHeaderField:@"User-Agent"];
     
     //add client version string
-    [request setValue:@"0.0.0.1" forHTTPHeaderField:@"Blues-Version"];
+    [request setValue:[NSString stringWithUTF8String:[REMApplicationInfo getVersion]] forHTTPHeaderField:@"Blues-Version"];
     
     //add user info
     [request setValue:[REMServiceAgent getUserInfo] forHTTPHeaderField:@"Blues-User"];
@@ -246,7 +247,7 @@ static int maxQueueLength = 5;
 
 + (NSString *)getUserAgent
 {
-    return @"blues agent";
+    return @"Blues/0.2(PS;)";
 }
 
 + (NSString *)getUserInfo
