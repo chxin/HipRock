@@ -11,17 +11,16 @@
 @interface REMImageView()
 
 @property (nonatomic,strong) UIImageView *imageView;
-@property (nonatomic,weak) UILabel *titleLabel;
-@property (nonatomic,weak) REMBuildingDataView *dataView;
+@property (nonatomic,strong) UILabel *titleLabel;
+@property (nonatomic,strong) REMBuildingDataView *dataView;
 @property (nonatomic) BOOL dataViewUp;
 @property (nonatomic) CGFloat cumulateY;
-@property (nonatomic,weak) UIImageView *titleBg;
-@property (nonatomic,weak) UIView *croppedTitleBg;
+@property (nonatomic,strong) UIImageView *titleBg;
 @property (nonatomic,strong) CIImage *clearImage;
 
-@property (nonatomic,weak) UIImageView *blurredImageView;
-@property (nonatomic,weak) UIView *glassView;
-@property (nonatomic,weak) CAGradientLayer *bottomGradientLayer;
+@property (nonatomic,strong) UIImageView *blurredImageView;
+@property (nonatomic,strong) UIView *glassView;
+@property (nonatomic,strong) CAGradientLayer *bottomGradientLayer;
 
 @property (nonatomic) BOOL hasLoadedChartData;
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
@@ -98,9 +97,9 @@
         newView.contentMode=UIViewContentModeScaleToFill;
         newView.alpha=0;
         newView.image=[self AFInflatedImageFromResponseWithDataAtScale:data];
-        [self insertSubview:newView belowSubview:self.dataView];
+        [self insertSubview:newView aboveSubview:self.blurredImageView];
         UIImageView *newBlurred= [self blurredImageView2:newView];
-        [self insertSubview:newBlurred aboveSubview:self.blurredImageView];
+        [self insertSubview:newBlurred aboveSubview:newView];
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
             newView.alpha=self.imageView.alpha;
             newBlurred.alpha=self.blurredImageView.alpha;
@@ -110,6 +109,7 @@
             self.imageView = newView;
             self.clearImage = [CIImage imageWithCGImage:self.imageView.image.CGImage];
             self.blurredImageView=newBlurred;
+
         }];
         
         
@@ -125,27 +125,6 @@
 - (NSString *)retrieveBuildingImage:(NSString *)name
 {
     return @"default-building";
-    
-    
-    if([name isEqualToString:@"B1"] == YES)
-    {
-        return @"shangdusoho";
-    }
-    else if([name isEqualToString:@"B2"] == YES)
-    {
-        return @"sanlitunsoho";
-    }
-    else if([name isEqualToString:@"B3"] == YES)
-    {
-        return @"wangjingsoho";
-    }
-    else if([name isEqualToString:@"B4"] == YES)
-    {
-        return @"yinhesoho";
-    }
-    else{
-        return @"yinhesoho";
-    }
 }
 
 - (UIImage *) convertBitmapRGBA8ToUIImage:(unsigned char *) buffer
@@ -345,7 +324,8 @@ withHeight:(int) height {
 
 - (void)initBottomGradientLayer
 {
-    CGRect frame = CGRectMake(0, kBuildingCommodityViewTop, 1024, kBuildingCommodityTotalHeight+kBuildingCommodityTotalTitleHeight+kBuildingCommodityButtonDimension+kBuildingCommodityItemGroupMargin*2);
+    CGFloat height=kBuildingCommodityTotalHeight+kBuildingCommodityTotalTitleHeight+kBuildingCommodityButtonDimension+kBuildingCommodityItemGroupMargin*2;
+    CGRect frame = CGRectMake(0, self.frame.size.height-height, 1024, height);
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     self.bottomGradientLayer=gradient;
@@ -387,7 +367,7 @@ withHeight:(int) height {
     //self.titleBg = [[UIImageView alloc] initWithFrame:frame];
     //self.titleBg.image=newImage;
     
-    [self.layer insertSublayer:self.bottomGradientLayer above:self.imageView.layer];
+    [self.layer insertSublayer:self.bottomGradientLayer above:self.blurredImageView.layer];
 
 }
 
@@ -526,18 +506,9 @@ withHeight:(int) height {
 {
     
    
-    REMBuildingDataView *view = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingCommodityViewTop, self.frame.size.width, 1000) withBuildingInfo:self.buildingInfo];
+    self.dataView = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleHeight+kBuildingCommodityItemGroupMargin, self.frame.size.width, self.frame.size.height-kBuildingTitleHeight-kBuildingCommodityItemGroupMargin) withBuildingInfo:self.buildingInfo];
     
-    [self addSubview:view];
-    self.dataView=view;
-    
-    /*
-    REMBuildingAverageChartView *averageChart = [[REMBuildingAverageChartView alloc] initWithFrame:CGRectMake(10, 1400, 1024, 60)];
-    averageChart.backgroundColor = [UIColor yellowColor];
-    
-    [self addSubview:averageChart];*/
-    
-    
+    [self addSubview:self.dataView];
 
 }
 
@@ -607,15 +578,6 @@ withHeight:(int) height {
 
 
 
-- (void)cropTitleBg
-{
-    // crop the image using CICrop
-    CGRect rect = CGRectMake(0.0, 0.0, self.frame.size.width,80);
-    
-    CIImage *theCIImage = [CIFilter filterWithName:@"CICrop" keysAndValues:kCIInputImageKey, theCIImage, @"inputRectangle", rect, nil].outputImage;
-
-}
-
 #pragma mark -
 #pragma mark require data
 
@@ -669,7 +631,7 @@ withHeight:(int) height {
         
     [self blurImage];
         
-        [self scrollTo:100];
+        [self scrollTo:0];
         self.dataViewUp=YES;
 
         
@@ -680,7 +642,7 @@ withHeight:(int) height {
 - (void)scrollDown
 {
     
-        [self scrollTo:kBuildingCommodityViewTop];
+        [self scrollTo:-kBuildingCommodityViewTop];
         self.dataViewUp=NO;
         
         [self resetImage];
@@ -692,21 +654,16 @@ withHeight:(int) height {
 {
  
     //NSLog(@"dataview:%@",NSStringFromCGRect(self.dataView.frame));
-    
-        [UIView animateWithDuration:0.2 delay:0
+    //[self.dataView scrollRectToVisible:CGRectMake(self.dataView.frame.origin.x, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height) animated:YES];
+    [self.dataView setContentOffset:CGPointMake(self.dataView.frame.origin.x, y) animated:YES];
+        /*[UIView animateWithDuration:0.2 delay:0
                             options: UIViewAnimationOptionCurveEaseOut animations:^(void) {
-                                [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
-                                /*if(y==500){
-                                    [self.imageView setCenter:CGPointMake(self.center.x, self.center.y+10) ];
-                                }
-                                else
-                                     {
-                                         [self.imageView setCenter:CGPointMake(self.center.x, self.center.y-10) ];
-                                     }*/
+                                //[self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
+                               
                                 
                             } completion:^(BOOL ret){
                                 
-                            }];
+                            }];*/
         
 
 

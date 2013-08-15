@@ -297,12 +297,12 @@
 {
     
     CGPoint velocity= [pan velocityInView:self.view];
-    if(self.inScrollY == NO && ( ABS(velocity.x)>ABS(velocity.y) || self.cumulateX!=0)){
+    //if(self.inScrollY == NO && ( ABS(velocity.x)>ABS(velocity.y) || self.cumulateX!=0)){
         [self swipethis:pan];
-    }
-    else{
-        [self scrollInnerView:pan];
-    }
+    //}
+    //else{
+        //[self scrollInnerView:pan];
+    //}
     
 }
 

@@ -20,9 +20,12 @@
 
 - (id)initWithFrame:(CGRect)frame withBuildingInfo:(REMBuildingOverallModel *)buildingInfo
 {
+    //NSLog(@"dataview:%@",NSStringFromCGRect(frame));
     self = [super initWithFrame:frame];
     if (self) {
-        
+        self.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, 0, 0, 0);
+        [self setScrollEnabled:YES];
+        [self setContentSize:CGSizeMake(frame.size.width, 1000)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
         
