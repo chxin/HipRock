@@ -11,7 +11,7 @@
 @interface REMBuildingDataView()
 
 @property (nonatomic,strong) NSArray *buttonArray;
-@property (nonatomic,strong)  REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,weak)  REMBuildingOverallModel *buildingInfo;
 
 @property (nonatomic,strong) NSArray *commodityViewArray;
 @property (nonatomic) NSUInteger currentIndex;

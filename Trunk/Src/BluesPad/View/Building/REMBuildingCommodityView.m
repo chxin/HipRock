@@ -17,7 +17,7 @@
 
 
 
-@property (nonatomic,strong) REMCommodityUsageModel *commodityInfo;
+@property (nonatomic,weak) REMCommodityUsageModel *commodityInfo;
 
 @end
 

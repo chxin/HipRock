@@ -10,7 +10,7 @@
 
 @interface REMBuildingTitleLabelView()
 
-@property (nonatomic,strong) REMEnergyUsageDataModel *data;
+@property (nonatomic,weak) REMEnergyUsageDataModel *data;
 @property (nonatomic,strong) REMNumberLabel *textLabel;
 @property (nonatomic,strong) UILabel *uomLabel;
 

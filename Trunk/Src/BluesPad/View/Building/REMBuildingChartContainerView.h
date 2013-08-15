@@ -19,6 +19,6 @@
 
 - (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId withController:(REMBuildingChartHandler *)controller withEnergyData:(REMAverageUsageDataModel *)averageData;
 
-@property (nonatomic,strong) UIView *chartContainer;
+@property (nonatomic,weak) UIView *chartContainer;
 
 @end

@@ -33,6 +33,15 @@
     return self;
 }
 
+- (void)didMoveToSuperview
+{
+    if(self.superview == nil){
+        self.buildingId=nil;
+        self.commodityId=nil;
+        self.chartController=nil;
+    }
+}
+
 - (void)initChartViewWithSize:(CGFloat)titleSize
 {
     self.chartContainer = [[UIView alloc]initWithFrame:CGRectMake(0, titleSize, 1024, kBuildingChartHeight-titleSize-kBuildingCommodityItemMargin)];
