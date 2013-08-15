@@ -101,6 +101,9 @@ static int maxQueueLength = 5;
         {
             [maskManager hideMask];
         }
+        
+        //
+        operation = nil;
     };
     
     void (^onFailure)(AFHTTPRequestOperation *operation, NSError *errorInfo) = ^(AFHTTPRequestOperation *operation, NSError *errorInfo)

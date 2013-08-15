@@ -89,6 +89,8 @@
     NSDictionary *param=@{@"pictureId":self.buildingInfo.building.buildingId};
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingImage parameter:param];
     store.groupName=self.loadingImageKey;
+    store.isStoreLocal = YES;
+    store.isAccessLocal = YES;
     self.loadingImage=YES;
     [REMDataAccessor access: store success:^(NSData *data){
         if(data == nil) return;

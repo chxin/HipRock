@@ -43,10 +43,10 @@
     self.logoView.alpha = 0;
     
     
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.logoView.alpha = 1;
     } completion:^(BOOL finished){
-        [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.5 delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.logoView.alpha = 0;
         } completion:^(BOOL finished) {
             [self runTimer:nil];
