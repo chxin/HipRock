@@ -268,8 +268,10 @@
     {
         NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
         NSString* myDocPath = myPaths[0];
-        NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/"];
-        _cacheAddress = fileName;
+        //NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/"];
+        //_cacheAddress = fileName;
+        
+        _cacheAddress = [myDocPath stringByAppendingString:@"/"];
     }
     return _cacheAddress;
 }

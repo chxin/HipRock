@@ -34,13 +34,13 @@
     self.hostView.hostedGraph = self.graph;
     [self addSubview:self.hostView];
     
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panning)];
-    [self addGestureRecognizer:pan];
+    //UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panning)];
+    //[self addGestureRecognizer:pan];
 }
 
 -(void)panning
 {
-}
+} 
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -50,5 +50,10 @@
     // Drawing code
 }
 */
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    return self;
+}
 
 @end

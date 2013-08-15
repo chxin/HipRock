@@ -54,10 +54,10 @@
         return [dic objectForKey:STORAGE_NETWORK_SOURCE_FIELDS_NAME_DATA];
     }
 }
-+(NSDictionary*)getFile:(NSString*)sourceName key:(NSString*)key
++(NSData *)getFile:(NSString*)sourceName key:(NSString*)key
 {
     NSDictionary* dic = [[REMSqliteStorage getInstance] getFile:sourceName key:key];
-    return dic;
+    return dic[STORAGE_NETWORK_SOURCE_FIELDS_NAME_DATA];
 }
 +(void)setFile:(NSString*)sourceName key:(NSString*)key version:(long)version image:(NSData*)image
 {

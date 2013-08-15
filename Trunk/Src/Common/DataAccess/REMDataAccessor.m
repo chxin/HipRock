@@ -77,8 +77,15 @@
     }
     else //just call data
     {
-        id object = [REMJSONHelper objectByString:cachedResult];
-        success(object);
+        if(store.serviceMeta.responseType == REMServiceResponseJson)
+        {
+            success([REMJSONHelper objectByString:cachedResult]);
+        }
+        else if(store.serviceMeta.responseType == REMServiceResponseImage)
+        {
+            success(cachedResult);
+        }
+        
     }
 }
 

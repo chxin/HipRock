@@ -91,6 +91,8 @@
     store.isAccessLocal=YES;
     store.isStoreLocal=YES;
     store.groupName=self.loadingImageKey;
+    store.isStoreLocal = YES;
+    store.isAccessLocal = YES;
     self.loadingImage=YES;
     [REMDataAccessor access: store success:^(NSData *data){
         if(data == nil) return;
