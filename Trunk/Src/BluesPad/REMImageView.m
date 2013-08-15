@@ -318,7 +318,7 @@
         
         CIImage *outputImage = [filter1 outputImage];
         
-        NSLog(@"image size:%@",NSStringFromCGSize(imageView.image.size));
+        //NSLog(@"image size:%@",NSStringFromCGSize(imageView.image.size));
         CGImageRef cgimg =
         [myContext createCGImage:outputImage fromRect:CGRectMake(0, 0, imageView.image.size.width, imageView.image.size.height)];
         
@@ -352,9 +352,35 @@
     [self addSubview:self.dataView];
     
     [self.dataView addObserver:self forKeyPath:@"contentOffset" options:0 context:nil];
+    self.dataView.delegate=self;
     
     
 }
+
+- (void)roundPositionWhenDrag:(UIScrollView *)scrollView{
+    //NSLog(@"dec end:%@",NSStringFromCGPoint(scrollView.contentOffset));
+    if(scrollView.contentOffset.y<0 && scrollView.contentOffset.y>-kBuildingCommodityViewTop){
+        if(ABS(scrollView.contentOffset.y) < kBuildingCommodityViewTop/2){
+            [self scrollUp];
+        }
+        else{
+            [self scrollDown];
+        }
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [self roundPositionWhenDrag:scrollView];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self roundPositionWhenDrag:scrollView];
+}
+
+
+
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
                         change:(NSDictionary *)change context:(void *)context {
@@ -374,12 +400,15 @@
 
 - (BOOL)shouldResponseSwipe:(UITouch *)touch
 {
+    NSLog(@"touch.view:%@",touch.view.class);
     if( [touch.view isKindOfClass:[CPTGraphHostingView class]] == YES) return NO;
     
     return YES;
     
     
 }
+
+
 
 
 - (void)initTitleView
@@ -498,22 +527,8 @@
 
 - (void)scrollTo:(CGFloat)y
 {
-    
-    //NSLog(@"dataview:%@",NSStringFromCGRect(self.dataView.frame));
-    //[self.dataView scrollRectToVisible:CGRectMake(self.dataView.frame.origin.x, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height) animated:YES];
-    [self.dataView setContentOffset:CGPointMake(0, y) animated:YES];
-    /*[UIView animateWithDuration:0.2 delay:0
-     options: UIViewAnimationOptionCurveEaseOut animations:^(void) {
-     //[self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
-     
-     
-     } completion:^(BOOL ret){
-     
-     }];*/
-    
-    
-    
-    
+
+    [self.dataView setContentOffset:CGPointMake(0, y) animated:YES]; 
 }
 
 
