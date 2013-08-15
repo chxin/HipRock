@@ -46,10 +46,10 @@
         self.cumulateY=0;
         self.loadingImage=NO;
         self.hasLoadedChartData=NO;
-       
+        
         
         self.loadingImageKey=[NSString stringWithFormat:@(kBuildingImageLoadingKeyPrefix),self.buildingInfo.building.buildingId];
-
+        
         
     }
     
@@ -60,7 +60,7 @@
 {
     //NSLog(@"parent changed");
     if(self.superview == nil){
-
+        
         [REMDataAccessor cancelAccess:self.loadingImageKey];
         self.clearImage=nil;
         self.imageView.image=nil;
@@ -117,7 +117,7 @@
             self.imageView = newView;
             self.clearImage = [CIImage imageWithCGImage:self.imageView.image.CGImage];
             self.blurredImageView=newBlurred;
-
+            
         }];
         
         
@@ -154,7 +154,7 @@
     CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
     
     imageRef = CGImageCreateWithPNGDataProvider(dataProvider,  NULL, true, kCGRenderingIntentDefault);
-
+    
     if(!imageRef){
         imageRef = CGImageCreateWithJPEGDataProvider(dataProvider, NULL, true, kCGRenderingIntentDefault);
     }
@@ -257,7 +257,7 @@
     gradient.colors = [NSArray arrayWithObjects:
                        (id)[UIColor clearColor].CGColor,
                        //(id)[UIColor lightGrayColor].CGColor,
-                        (id)[UIColor blackColor].CGColor,
+                       (id)[UIColor blackColor].CGColor,
                        nil];
     
     UIGraphicsBeginImageContextWithOptions(frame.size, NO, 0.0);
@@ -291,7 +291,7 @@
     //self.titleBg.image=newImage;
     
     [self.layer insertSublayer:self.bottomGradientLayer above:self.blurredImageView.layer];
-
+    
 }
 
 
@@ -346,14 +346,14 @@
 - (void)initDataListView
 {
     
-   
+    
     self.dataView = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleHeight+kBuildingCommodityItemGroupMargin, self.frame.size.width, self.frame.size.height-kBuildingTitleHeight-kBuildingCommodityItemGroupMargin) withBuildingInfo:self.buildingInfo];
     
     [self addSubview:self.dataView];
     
     [self.dataView addObserver:self forKeyPath:@"contentOffset" options:0 context:nil];
     
-
+    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
@@ -367,7 +367,7 @@
     //NSLog(@"blurlevel:%f",blurLevel);
     self.blurredImageView.alpha = blurLevel;
     
-  
+    
     self.glassView.alpha = MAX(0,MIN(blurLevel,0.7));
     
 }
@@ -385,48 +385,48 @@
 - (void)initTitleView
 {
     /*
-    CGRect frame = CGRectMake(0, 0, self.frame.size.width, 80);
-    
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.opacity=0.2;
-    gradient.frame = frame;
-    gradient.colors = [NSArray arrayWithObjects:
-                       (id)[UIColor lightGrayColor].CGColor,
-                       (id)[UIColor lightGrayColor].CGColor,
-                       nil];
-    
-    UIGraphicsBeginImageContextWithOptions(frame.size, NO, 0.0);
-    CGContextRef c = UIGraphicsGetCurrentContext();
-    
-    //CGContextConcatCTM(c, CGAffineTransformMakeTranslation(-frame.origin.x, -frame.origin.y));
-    [gradient renderInContext:c];
-    
-    UIImage *screenshot = UIGraphicsGetImageFromCurrentImageContext();
-    
-    CIImage *ciImage = [CIImage imageWithCGImage:screenshot.CGImage];
-    
-    UIGraphicsEndImageContext();
-    
-    
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
-                                   keysAndValues: kCIInputImageKey,ciImage,@"inputRadius",[NSNumber numberWithInt:5],nil];
-    
-    CIImage *outputImage = [filter1 outputImage];
-    // 2
-    CGImageRef cgimg =
-    [context createCGImage:outputImage fromRect:outputImage.extent];
-    
-    // 3
-    UIImage *newImage = [UIImage imageWithCGImage:cgimg ];
-    
-    CGImageRelease(cgimg);
-    
-    self.titleBg = [[UIImageView alloc] initWithFrame:frame];
-    self.titleBg.image=newImage;
-    
-    [self addSubview:self.titleBg];
-    */
+     CGRect frame = CGRectMake(0, 0, self.frame.size.width, 80);
+     
+     CAGradientLayer *gradient = [CAGradientLayer layer];
+     gradient.opacity=0.2;
+     gradient.frame = frame;
+     gradient.colors = [NSArray arrayWithObjects:
+     (id)[UIColor lightGrayColor].CGColor,
+     (id)[UIColor lightGrayColor].CGColor,
+     nil];
+     
+     UIGraphicsBeginImageContextWithOptions(frame.size, NO, 0.0);
+     CGContextRef c = UIGraphicsGetCurrentContext();
+     
+     //CGContextConcatCTM(c, CGAffineTransformMakeTranslation(-frame.origin.x, -frame.origin.y));
+     [gradient renderInContext:c];
+     
+     UIImage *screenshot = UIGraphicsGetImageFromCurrentImageContext();
+     
+     CIImage *ciImage = [CIImage imageWithCGImage:screenshot.CGImage];
+     
+     UIGraphicsEndImageContext();
+     
+     
+     CIContext *context = [CIContext contextWithOptions:nil];
+     CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
+     keysAndValues: kCIInputImageKey,ciImage,@"inputRadius",[NSNumber numberWithInt:5],nil];
+     
+     CIImage *outputImage = [filter1 outputImage];
+     // 2
+     CGImageRef cgimg =
+     [context createCGImage:outputImage fromRect:outputImage.extent];
+     
+     // 3
+     UIImage *newImage = [UIImage imageWithCGImage:cgimg ];
+     
+     CGImageRelease(cgimg);
+     
+     self.titleBg = [[UIImageView alloc] initWithFrame:frame];
+     self.titleBg.image=newImage;
+     
+     [self addSubview:self.titleBg];
+     */
     
     self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, 0, self.frame.size.width, kBuildingTitleHeight)];
     self.titleLabel.text=self.buildingInfo.building.name;
@@ -475,177 +475,49 @@
 }
 
 
-- (void)blurImage
-{
-    
-    [UIView animateWithDuration:0.2 animations:^(void){
-        self.blurredImageView.alpha=1;
-        self.glassView.alpha=0.6;
-      
-    }];
-    
-    
-
-}
-
--(void)resetImage
-{
-    self.blurredImageView.alpha=0;
-    self.glassView.alpha=0;
-
-}
 
 - (void)scrollUp
 {
-    //if(self.dataViewUp == NO){
-        
-    [self blurImage];
-        
-        [self scrollTo:0];
-        self.dataViewUp=YES;
-
-        
-    //}
+    
+    
+    [self scrollTo:0];
+    self.dataViewUp=YES;
+    
     
 }
 
 - (void)scrollDown
 {
     
-        [self scrollTo:-kBuildingCommodityViewTop];
-        self.dataViewUp=NO;
-        
-        [self resetImage];
-        
+    [self scrollTo:-kBuildingCommodityViewTop];
+    self.dataViewUp=NO;
+    
+    
     
 }
 
 - (void)scrollTo:(CGFloat)y
 {
- 
+    
     //NSLog(@"dataview:%@",NSStringFromCGRect(self.dataView.frame));
     //[self.dataView scrollRectToVisible:CGRectMake(self.dataView.frame.origin.x, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height) animated:YES];
-    [self.dataView setContentOffset:CGPointMake(self.dataView.frame.origin.x, y) animated:YES];
-        /*[UIView animateWithDuration:0.2 delay:0
-                            options: UIViewAnimationOptionCurveEaseOut animations:^(void) {
-                                //[self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
-                               
-                                
-                            } completion:^(BOOL ret){
-                                
-                            }];*/
-        
-
-
+    [self.dataView setContentOffset:CGPointMake(0, y) animated:YES];
+    /*[UIView animateWithDuration:0.2 delay:0
+     options: UIViewAnimationOptionCurveEaseOut animations:^(void) {
+     //[self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
+     
+     
+     } completion:^(BOOL ret){
+     
+     }];*/
     
-}
-
-- (void)moveEndByVelocity:(CGFloat)y
-{
-    CGFloat origEnd= self.dataView.frame.origin.y;
-    if(origEnd == kBuildingCommodityViewTop && y>0){
-        return;
-    }
-    CGFloat end=origEnd+y;
-    NSLog(@"end:%f",end);
     
-    if(end>kBuildingCommodityViewTop)
-    {
-        end=kBuildingCommodityViewTop+50;
-    }
-    
-    if(end<100)
-    {
-        end=-250;
-    }
-    
-    [UIView animateWithDuration:0.5 delay:0
-                        options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
-                            if(y<0){
-                                [self blurImage];
-                            }
-                            else{
-                                [self resetImage];
-                            }
-                            
-                        } completion:^(BOOL ret){
-                            
-                        }];
-    [UIView animateWithDuration:0.5 delay:0
-                        options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
-                            [self.dataView setFrame:CGRectMake(0, end, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
-                            
-                            
-                            
-                            
-                        } completion:^(BOOL ret){
-                            if(y<0)
-                            {
-                                [UIView animateWithDuration:0.5 delay:0
-                                                    options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
-                                                        CGFloat f=-210;
-                                                            [self.dataView setFrame:CGRectMake(0, f, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
-                                                    } completion:nil];
-                            }
-                            else{
-                                [self scrollDown];
-                            }
-                        }];
-}
-
-
-
-- (void)move:(CGFloat)y
-{
-    [self.dataView setCenter:CGPointMake(self.dataView.center.x,self.dataView.center.y+y)];
-    self.cumulateY+=y;
-    CGFloat deep;
-    //NSLog(@"cumulateY:%f",self.cumulateY);
-    CGFloat top = self.dataView.frame.origin.y;
-    //NSLog(@"top:%f",top);
-    if(top<=100){
-        deep=0.7;
-    }
-    else if(top >= kBuildingCommodityViewTop){
-        deep=0;
-    }
-    else{
-        deep =  floorf(ABS(self.cumulateY/1000)*100)/100;
-    }
-    if(deep>0.7) deep=0.7;
-    
-    if(top>100 && top< kBuildingCommodityViewTop){
-        self.glassView.alpha=deep;
-        self.blurredImageView.alpha=deep;
-    }
     
     
 }
 
-- (void)moveEnd
-{
-     CGFloat top = self.dataView.frame.origin.y;
-    //NSLog(@"top:%f",top);
-    if(top<-210){
-        [UIView animateWithDuration:0.2 delay:0
-    options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
-        CGFloat f=-210;
-        [self.dataView setFrame:CGRectMake(0, f, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
-    } completion:nil];
-    }
-    else if(top>-210 && top<100){
-        
-    }
-    else if(top>100 && top<300){
-        [self scrollUp];
-    }
-    else{
-        [self scrollDown];
-    }
-    
-    self.cumulateY=0;
 
-}
+
 
 - (void)moveCenter:(CGFloat)x
 {
