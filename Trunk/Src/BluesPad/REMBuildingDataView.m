@@ -11,7 +11,7 @@
 @interface REMBuildingDataView()
 
 @property (nonatomic,strong) NSArray *buttonArray;
-@property (nonatomic,strong)  REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,weak)  REMBuildingOverallModel *buildingInfo;
 
 @property (nonatomic,strong) NSArray *commodityViewArray;
 @property (nonatomic) NSUInteger currentIndex;
@@ -20,9 +20,12 @@
 
 - (id)initWithFrame:(CGRect)frame withBuildingInfo:(REMBuildingOverallModel *)buildingInfo
 {
+    //NSLog(@"dataview:%@",NSStringFromCGRect(frame));
     self = [super initWithFrame:frame];
     if (self) {
-        
+        self.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, 0, 0, 0);
+        [self setScrollEnabled:YES];
+        [self setContentSize:CGSizeMake(frame.size.width, 1000)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
         

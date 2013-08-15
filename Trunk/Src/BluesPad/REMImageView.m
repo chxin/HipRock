@@ -16,7 +16,6 @@
 @property (nonatomic) BOOL dataViewUp;
 @property (nonatomic) CGFloat cumulateY;
 @property (nonatomic,strong) UIImageView *titleBg;
-@property (nonatomic,strong) UIView *croppedTitleBg;
 @property (nonatomic,strong) CIImage *clearImage;
 
 @property (nonatomic,strong) UIImageView *blurredImageView;
@@ -25,6 +24,10 @@
 
 @property (nonatomic) BOOL hasLoadedChartData;
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+@property (nonatomic) BOOL loadingImage;
+@property (nonatomic,strong) NSString *loadingImageKey;
+#define kBuildingImageLoadingKeyPrefix "buildingimage-%@"
+
 @end
 
 @implementation REMImageView
@@ -41,14 +44,34 @@
         self.contentMode=UIViewContentModeScaleToFill;
         self.dataViewUp=NO;
         self.cumulateY=0;
+        self.loadingImage=NO;
+        self.hasLoadedChartData=NO;
+       
         
-        [self initImageView:frame];
+        self.loadingImageKey=[NSString stringWithFormat:@(kBuildingImageLoadingKeyPrefix),self.buildingInfo.building.buildingId];
+
+        
+    }
+    
+    return self;
+}
+
+- (void)didMoveToSuperview
+{
+    //NSLog(@"parent changed");
+    if(self.superview == nil){
+
+        [REMDataAccessor cancelAccess:self.loadingImageKey];
+        self.clearImage=nil;
+        self.imageView.image=nil;
+        self.imageView=nil;
+        return;
+    }
+    else{
+        
+        [self initImageView:self.frame];
         
         [self initBottomGradientLayer];
-        
-        //[self initBlurredImageView];
-        
-        
         
         [self initGlassView];
         
@@ -56,37 +79,52 @@
         
         [self initTitleView];
         
-        
-        
     }
     
-    return self;
+    [self loadingBuildingImage];
+    
 }
+
+- (void)loadingBuildingImage{
+    NSDictionary *param=@{@"pictureId":self.buildingInfo.building.buildingId};
+    REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingImage parameter:param];
+    store.groupName=self.loadingImageKey;
+    self.loadingImage=YES;
+    [REMDataAccessor access: store success:^(NSData *data){
+        if(data == nil) return;
+        self.loadingImage=NO;
+        UIImageView *newView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
+        newView.contentMode=UIViewContentModeScaleToFill;
+        newView.alpha=0;
+        newView.image=[self AFInflatedImageFromResponseWithDataAtScale:data];
+        [self insertSubview:newView aboveSubview:self.blurredImageView];
+        UIImageView *newBlurred= [self blurredImageView2:newView];
+        [self insertSubview:newBlurred aboveSubview:newView];
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+            newView.alpha=self.imageView.alpha;
+            newBlurred.alpha=self.blurredImageView.alpha;
+        } completion:^(BOOL finished){
+            [self.imageView removeFromSuperview];
+            [self.blurredImageView removeFromSuperview];
+            self.imageView = newView;
+            self.clearImage = [CIImage imageWithCGImage:self.imageView.image.CGImage];
+            self.blurredImageView=newBlurred;
+
+        }];
+        
+        
+        
+        
+        
+    }];
+    
+    return ;
+}
+
 
 - (NSString *)retrieveBuildingImage:(NSString *)name
 {
     return @"default-building";
-    
-    
-    if([name isEqualToString:@"B1"] == YES)
-    {
-        return @"shangdusoho";
-    }
-    else if([name isEqualToString:@"B2"] == YES)
-    {
-        return @"sanlitunsoho";
-    }
-    else if([name isEqualToString:@"B3"] == YES)
-    {
-        return @"wangjingsoho";
-    }
-    else if([name isEqualToString:@"B4"] == YES)
-    {
-        return @"yinhesoho";
-    }
-    else{
-        return @"yinhesoho";
-    }
 }
 
 - (UIImage *) convertBitmapRGBA8ToUIImage:(unsigned char *) buffer
@@ -257,45 +295,7 @@ withHeight:(int) height {
 
 
 
-- (void)didMoveToSuperview
-{
-    //NSLog(@"parent changed");
-    if(self.superview == nil){
-        
-        return;
-    }
-    else{
-        
-    }
-    NSDictionary *param=@{@"pictureId":@1};
-    REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingImage parameter:param];
-    
-    [REMDataAccessor access: store success:^(NSData *data){
-        
-        UIImageView *newView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
-        newView.contentMode=UIViewContentModeScaleToFill;
-        newView.alpha=0;
-        newView.image=[self AFInflatedImageFromResponseWithDataAtScale:data];
-        [self insertSubview:newView belowSubview:self.dataView];
-        UIImageView *newBlurred= [self blurredImageView2:newView];
-        [self insertSubview:newBlurred aboveSubview:self.blurredImageView];
-        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
-            newView.alpha=self.imageView.alpha;
-            newBlurred.alpha=self.blurredImageView.alpha;
-        } completion:^(BOOL finished){
-            [self.imageView removeFromSuperview];
-            [self.blurredImageView removeFromSuperview];
-            self.imageView = newView;
-            self.clearImage = [CIImage imageWithCGImage:self.imageView.image.CGImage];
-            self.blurredImageView=newBlurred;
-        }];
-        
-       
-        
-       
-                
-    }];
-}
+
 
 
 - (void)initImageView:(CGRect)frame
@@ -324,7 +324,8 @@ withHeight:(int) height {
 
 - (void)initBottomGradientLayer
 {
-    CGRect frame = CGRectMake(0, kBuildingCommodityViewTop, 1024, kBuildingCommodityTotalHeight+kBuildingCommodityTotalTitleHeight+kBuildingCommodityButtonDimension+kBuildingCommodityItemGroupMargin*2);
+    CGFloat height=kBuildingCommodityTotalHeight+kBuildingCommodityTotalTitleHeight+kBuildingCommodityButtonDimension+kBuildingCommodityItemGroupMargin*2;
+    CGRect frame = CGRectMake(0, self.frame.size.height-height, 1024, height);
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     self.bottomGradientLayer=gradient;
@@ -366,7 +367,7 @@ withHeight:(int) height {
     //self.titleBg = [[UIImageView alloc] initWithFrame:frame];
     //self.titleBg.image=newImage;
     
-    [self.layer insertSublayer:self.bottomGradientLayer above:self.imageView.layer];
+    [self.layer insertSublayer:self.bottomGradientLayer above:self.blurredImageView.layer];
 
 }
 
@@ -379,10 +380,10 @@ withHeight:(int) height {
         
     
     dispatch_queue_t queue =  dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    
+    UIImage *image= self.imageView.image;
     dispatch_async(queue, ^ {
         CGFloat blur=0.5;
-        UIImage *image= self.imageView.image;
+        
         
         if ((blur < 0.0f) || (blur > 1.0f)) {
             blur = 0.5f;
@@ -392,6 +393,8 @@ withHeight:(int) height {
         boxSize -= (boxSize % 2) + 1;
         
         CGImageRef img = image.CGImage;
+        
+        if(img == nil) return; // maybe view has been released
         
         vImage_Buffer inBuffer, outBuffer;
         vImage_Error error;
@@ -503,18 +506,9 @@ withHeight:(int) height {
 {
     
    
-    REMBuildingDataView *view = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingCommodityViewTop, self.frame.size.width, 1000) withBuildingInfo:self.buildingInfo];
+    self.dataView = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleHeight+kBuildingCommodityItemGroupMargin, self.frame.size.width, self.frame.size.height-kBuildingTitleHeight-kBuildingCommodityItemGroupMargin) withBuildingInfo:self.buildingInfo];
     
-    [self addSubview:view];
-    self.dataView=view;
-    
-    /*
-    REMBuildingAverageChartView *averageChart = [[REMBuildingAverageChartView alloc] initWithFrame:CGRectMake(10, 1400, 1024, 60)];
-    averageChart.backgroundColor = [UIColor yellowColor];
-    
-    [self addSubview:averageChart];*/
-    
-    
+    [self addSubview:self.dataView];
 
 }
 
@@ -584,15 +578,6 @@ withHeight:(int) height {
 
 
 
-- (void)cropTitleBg
-{
-    // crop the image using CICrop
-    CGRect rect = CGRectMake(0.0, 0.0, self.frame.size.width,80);
-    
-    CIImage *theCIImage = [CIFilter filterWithName:@"CICrop" keysAndValues:kCIInputImageKey, theCIImage, @"inputRectangle", rect, nil].outputImage;
-
-}
-
 #pragma mark -
 #pragma mark require data
 
@@ -646,7 +631,7 @@ withHeight:(int) height {
         
     [self blurImage];
         
-        [self scrollTo:100];
+        [self scrollTo:0];
         self.dataViewUp=YES;
 
         
@@ -657,7 +642,7 @@ withHeight:(int) height {
 - (void)scrollDown
 {
     
-        [self scrollTo:kBuildingCommodityViewTop];
+        [self scrollTo:-kBuildingCommodityViewTop];
         self.dataViewUp=NO;
         
         [self resetImage];
@@ -669,21 +654,16 @@ withHeight:(int) height {
 {
  
     //NSLog(@"dataview:%@",NSStringFromCGRect(self.dataView.frame));
-    
-        [UIView animateWithDuration:0.2 delay:0
+    //[self.dataView scrollRectToVisible:CGRectMake(self.dataView.frame.origin.x, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height) animated:YES];
+    [self.dataView setContentOffset:CGPointMake(self.dataView.frame.origin.x, y) animated:YES];
+        /*[UIView animateWithDuration:0.2 delay:0
                             options: UIViewAnimationOptionCurveEaseOut animations:^(void) {
-                                [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
-                                /*if(y==500){
-                                    [self.imageView setCenter:CGPointMake(self.center.x, self.center.y+10) ];
-                                }
-                                else
-                                     {
-                                         [self.imageView setCenter:CGPointMake(self.center.x, self.center.y-10) ];
-                                     }*/
+                                //[self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
+                               
                                 
                             } completion:^(BOOL ret){
                                 
-                            }];
+                            }];*/
         
 
 

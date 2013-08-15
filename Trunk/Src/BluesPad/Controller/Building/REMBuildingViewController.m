@@ -147,7 +147,7 @@
         __block CGPoint p= [pan velocityInView:self.view];
         //NSLog(@"cumulatex:%f",self.cumulateX);
         
-        int sign= p.x>0?1:-1;
+       __block int sign= p.x>0?1:-1;
         
         
         __block BOOL addIndex=YES;
@@ -193,9 +193,11 @@
                                 
                                 [self loadImageData];
                                 if(self.currentIndex<self.imageArray.count){
-                                    NSNumber *status = self.imageViewStatus[@(self.currentIndex+1)];
+                                    NSNumber *willIndex= @(self.currentIndex-1*sign);
+                                    NSNumber *status = self.imageViewStatus[willIndex];
                                     if([status isEqualToNumber:@(0)] ==YES){
-                                        [self.view insertSubview:self.imageArray[self.currentIndex+1] belowSubview:self.logoutButton];
+                                        [self.view insertSubview:self.imageArray[willIndex.intValue] belowSubview:self.logoutButton];
+                                        self.imageViewStatus[willIndex]=@(1);
                                         
                                     }
                                 }
@@ -208,7 +210,7 @@
                                         [releaseArray addObject:@(i)];
                                         i++;
                                     }
-                                    //[self releaseOutOfWindowView:releaseArray];
+                                    [self releaseOutOfWindowView:releaseArray];
                                 }
                                 else if((idx+2)<=self.imageArray.count){
                                     int i=self.imageArray.count-1;
@@ -216,7 +218,7 @@
                                         [releaseArray addObject:@(i)];
                                         i--;
                                     }
-                                    //[self releaseOutOfWindowView:releaseArray];
+                                    [self releaseOutOfWindowView:releaseArray];
                                 }
                                 
                             }];
@@ -295,12 +297,12 @@
 {
     
     CGPoint velocity= [pan velocityInView:self.view];
-    if(self.inScrollY == NO && ( ABS(velocity.x)>ABS(velocity.y) || self.cumulateX!=0)){
+    //if(self.inScrollY == NO && ( ABS(velocity.x)>ABS(velocity.y) || self.cumulateX!=0)){
         [self swipethis:pan];
-    }
-    else{
-        [self scrollInnerView:pan];
-    }
+    //}
+    //else{
+        //[self scrollInnerView:pan];
+    //}
     
 }
 

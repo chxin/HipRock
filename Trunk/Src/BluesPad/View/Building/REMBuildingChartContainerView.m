@@ -33,6 +33,7 @@
     return self;
 }
 
+
 - (void)initChartViewWithSize:(CGFloat)titleSize
 {
     self.chartContainer = [[UIView alloc]initWithFrame:CGRectMake(0, titleSize, 1024, kBuildingChartHeight-titleSize-kBuildingCommodityItemMargin)];
