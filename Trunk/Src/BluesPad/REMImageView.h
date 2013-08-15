@@ -17,7 +17,7 @@
 #import "REMDataAccessor.h"
 #import "REMDataStore.h"    
 
-@interface REMImageView : UIView <UIGestureRecognizerDelegate>
+@interface REMImageView : UIView <UIGestureRecognizerDelegate,UIScrollViewDelegate>
 
 
 - (id) initWithFrame:(CGRect)frame withBuildingOveralInfo:(REMBuildingOverallModel *)buildingInfo;
@@ -26,11 +26,6 @@
 
 - (void)scrollDown;
 
-- (void)move:(CGFloat)y;
-
-- (void)moveEnd;
-
-- (void)moveEndByVelocity:(CGFloat)y;
 
 - (void)tapthis;
 

@@ -318,7 +318,7 @@
         
         CIImage *outputImage = [filter1 outputImage];
         
-        NSLog(@"image size:%@",NSStringFromCGSize(imageView.image.size));
+        //NSLog(@"image size:%@",NSStringFromCGSize(imageView.image.size));
         CGImageRef cgimg =
         [myContext createCGImage:outputImage fromRect:CGRectMake(0, 0, imageView.image.size.width, imageView.image.size.height)];
         
@@ -352,8 +352,14 @@
     [self addSubview:self.dataView];
     
     [self.dataView addObserver:self forKeyPath:@"contentOffset" options:0 context:nil];
+    self.dataView.delegate=self;
     
-    
+}
+
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    //NSLog(@"dec end:%@",NSStringFromCGPoint(scrollView.contentOffset));
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
@@ -498,22 +504,8 @@
 
 - (void)scrollTo:(CGFloat)y
 {
-    
-    //NSLog(@"dataview:%@",NSStringFromCGRect(self.dataView.frame));
-    //[self.dataView scrollRectToVisible:CGRectMake(self.dataView.frame.origin.x, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height) animated:YES];
-    [self.dataView setContentOffset:CGPointMake(0, y) animated:YES];
-    /*[UIView animateWithDuration:0.2 delay:0
-     options: UIViewAnimationOptionCurveEaseOut animations:^(void) {
-     //[self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, y, self.dataView.bounds.size.width, self.dataView.bounds.size.height)];
-     
-     
-     } completion:^(BOOL ret){
-     
-     }];*/
-    
-    
-    
-    
+
+    [self.dataView setContentOffset:CGPointMake(0, y) animated:YES]; 
 }
 
 

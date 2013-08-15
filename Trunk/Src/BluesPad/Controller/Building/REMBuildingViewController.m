@@ -253,70 +253,14 @@
     }
 }
 
-- (void) scrollInnerView:(UIPanGestureRecognizer *)pan
-{
-    //NSLog(@"cumulateX:%f",self.cumulateX);
-    if(ABS(self.cumulateX)>0)return;
-    self.inScrollY=YES;
-    CGPoint trans= [pan translationInView:self.view];
-    CGPoint velocity=[pan velocityInView:self.view];
-    //NSLog(@"velocicty:%f",velocity.y);
-    if (pan.state  == UIGestureRecognizerStateChanged &&
-                    (ABS(velocity.y) < kScrollVelocityMax || ABS(trans.y)>kMoveLen)) {
-        for (REMImageView *view in self.imageArray) {
-            [view move:trans.y];
-        }
-        [pan setTranslation:CGPointZero inView:self.view];
-    }
-    
-    if(pan.state == UIGestureRecognizerStateEnded)
-    {
-        //NSLog(@"movelen:%f",trans.y);
-        //NSLog(@"velocicty:%f",velocity.y);
-        /*if(ABS(velocity.y)>kScrollVelocitySmall && ABS(velocity.y)<kScrollVelocityMax){
-            if(velocity.y<0)
-            {
-                for (REMImageView *view in self.imageArray) {
-                    [view scrollUp];
-                }
-            }
-            else{
-                for (REMImageView *view in self.imageArray) {
-                    [view scrollDown];
-                }
-            }
-            
-        }
-        else */
-        if(ABS(velocity.y)<kScrollVelocityMax){
-            
-            for (REMImageView *view in self.imageArray) {
-                [view moveEnd];
-            }
-        }
-        else{
-            for (REMImageView *view in self.imageArray) {
-                [view moveEndByVelocity:velocity.y];
-            }
-        }
-        
-            self.inScrollY=NO;
-        
-        [pan setTranslation:CGPointZero inView:self.view];
-    }
-}
+
 
 - (void)panthis:(UIPanGestureRecognizer *)pan
 {
     
-    //CGPoint velocity= [pan velocityInView:self.view];
-    //if(self.inScrollY == NO && ( ABS(velocity.x)>ABS(velocity.y) || self.cumulateX!=0)){
-        [self swipethis:pan];
-    //}
-    //else{
-        //[self scrollInnerView:pan];
-    //}
     
+        [self swipethis:pan];
+
 }
 
 
