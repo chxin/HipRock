@@ -25,6 +25,7 @@
 
 static NSOperationQueue *queue = nil;
 static int maxQueueLength = 5;
+static int requestTimeout = 1000; //(s)
 
 
 
@@ -144,6 +145,7 @@ static int maxQueueLength = 5;
         [REMServiceAgent initializeQueue];
     }
     
+    NSLog(@"request: %@",[request.URL description]);
     [queue addOperation:serviceOperation];
 }
 
@@ -228,8 +230,7 @@ static int maxQueueLength = 5;
     [request setHTTPMethod: @"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
-    //this is added by Aries at home
-    [request setTimeoutInterval:100.0];
+    [request setTimeoutInterval:requestTimeout];
     
     //add agent string
     [request setValue:[REMServiceAgent getUserAgent] forHTTPHeaderField:@"User-Agent"];
