@@ -10,7 +10,6 @@
 
 @interface REMIndicatorButton()
 @property (nonatomic) BOOL indicatorStatus;
-@property (nonatomic,strong) UIActivityIndicatorView *indicator;
 @property (nonatomic,strong) NSString *backupTitle;
 
 @end

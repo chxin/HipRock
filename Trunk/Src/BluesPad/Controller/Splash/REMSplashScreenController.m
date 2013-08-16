@@ -43,10 +43,10 @@
     self.logoView.alpha = 0;
     
     
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.logoView.alpha = 1;
     } completion:^(BOOL finished){
-        [UIView animateWithDuration:0.3 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.logoView.alpha = 0;
         } completion:^(BOOL finished) {
             [self runTimer:nil];
@@ -64,7 +64,7 @@
         [[REMApplicationContext instance] setCurrentUser:storedUser];
         [[REMApplicationContext instance] setCurrentCustomer:storedCustomer];
         
-        [self showBuildingView];
+        [self showBuildingView:^{}];
     }
     else
     {
@@ -96,7 +96,7 @@
     
 }
 
-- (void)showBuildingView
+- (void)showBuildingView:(void (^)(void))loadCompleted
 {
     NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
     REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSEnergyBuildingOverall parameter:parameter];
@@ -112,6 +112,8 @@
         for(NSDictionary *item in (NSArray *)data){
             [self.buildingOveralls addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
         }
+        
+        loadCompleted();
         
         [self performSegueWithIdentifier:@"splashToBuildingSegue" sender:self];
     } error:^(NSError *error, id response) {
