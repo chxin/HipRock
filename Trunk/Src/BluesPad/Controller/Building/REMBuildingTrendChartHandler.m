@@ -39,9 +39,6 @@
         [myView.thisYearButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
         [myView.lastYearButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
         
-        myView.hostView.hostedGraph.backgroundColor = [UIColor blueColor].CGColor;
-        
-        myView.hostView.backgroundColor = [UIColor redColor];
         self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
         
         self.view = myView;
@@ -55,7 +52,24 @@
     return ((REMBuildingTrendChart*)self.view).hostView;
 }
 -(void)longPressedAt:(NSDate*)x {
-    NSLog(@"Long Pressed At %@", x);
+    
+    NSMutableArray* data = [[self.datasource objectAtIndex:currentSourceIndex] objectForKey:@"data"];
+    uint nearByPoint1Interval = UINT32_MAX;
+    int nearByPointIndex = -1;
+    for (int i = 0; i < data.count; i++) {
+        NSDate* pointX = [[data objectAtIndex:i] objectForKey:@"x"];
+        uint pointIntervalWithTouchPoint =  abs([pointX timeIntervalSinceDate:x]);
+        if (pointIntervalWithTouchPoint <= nearByPoint1Interval) {
+            nearByPoint1Interval = pointIntervalWithTouchPoint;
+        } else {
+            nearByPointIndex = i - 1;
+            break;
+        }
+    }
+    NSLog(@"Long Pressed At %@, nearby point index is %d", x, nearByPointIndex);
+    
+    
+    [self drawToolTip: nearByPointIndex];
 }
 
 
@@ -129,35 +143,52 @@
     [scatterPlot reloadData];
     [myView.hostView.hostedGraph reloadData];
     
-    [self drawToolTip:0];
     //yAxis.majorGridLines
 }
 
 - (void)drawToolTip: (NSInteger)index {
     [self.graph removeAllAnnotations];
     
-    CPTLayerAnnotation *annot = [[CPTLayerAnnotation alloc]initWithAnchorLayer:self.graph];
-
-   // layer.sublayers
+//    CPTLayerAnnotation *annot = [[CPTLayerAnnotation alloc]initWithAnchorLayer:self.graph];
+//
+//   // layer.sublayers
+//    CPTTextLayer* textLayer = [[CPTTextLayer alloc]initWithText:@"FFFFF"];
+//    textLayer.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1]];
+//    textLayer.frame = CGRectMake(0, 0, 1000, 1000);
+//    CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
+//    textLayer.textStyle = textStyle;
+//    textLayer.delegate = self;
+//    
+//    
+//    annot.contentLayer = textLayer;
+//   // annot.rectAnchor=CPTRectAnchorTopLeft;
+//    annot.displacement = CGPointMake(100, 100);
+//    [self.graph addAnnotation:annot];
+    
+    CPTScatterPlot* plot = [[self getHostView].hostedGraph.allPlots objectAtIndex:0];
+    CPTPlotSpaceAnnotation* annotation = [[CPTPlotSpaceAnnotation alloc]initWithPlotSpace:plot.graph.defaultPlotSpace anchorPlotPoint:nil];
     CPTTextLayer* textLayer = [[CPTTextLayer alloc]initWithText:@"FFFFF"];
     textLayer.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1]];
-    textLayer.frame = CGRectMake(0, 0, 1000, 1000);
-    CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
-    textLayer.textStyle = textStyle;
-    textLayer.delegate = self;
+    annotation.contentLayer = textLayer;
+    [self.graph addAnnotation:annotation];
     
     
-    annot.contentLayer = textLayer;
-   // annot.rectAnchor=CPTRectAnchorTopLeft;
-    annot.displacement = CGPointMake(100, 100);
-    [self.graph addAnnotation:annot];
-    
+    NSNumber *xValue = [plot cachedNumberForField:CPTScatterPlotFieldX recordIndex:index];
+    NSNumber *yValue = [plot cachedNumberForField:CPTScatterPlotFieldY recordIndex:index];
+    BOOL positiveDirection = YES;
+    CPTPlotRange *yRange   = [plot.plotSpace plotRangeForCoordinate:CPTCoordinateY];
+    if ( CPTDecimalLessThan( yRange.length, CPTDecimalFromInteger(0) ) ) {
+        positiveDirection = !positiveDirection;
+    }
+    annotation.anchorPlotPoint     = [NSArray arrayWithObjects:xValue, yValue, nil];
+    if ( positiveDirection ) {
+        annotation.displacement = CPTPointMake(0.0, plot.labelOffset);
+    }
+    else {
+        annotation.displacement = CPTPointMake(0.0, -plot.labelOffset);
+    }
     //annot.
    // CPTXYAxis* yAxis = ((CPTXYAxisSet*)self.graph.axisSet).yAxis;
-}
-
-- (void)scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index
-{
 }
 
 - (void)viewDidLoad
