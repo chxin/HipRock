@@ -15,7 +15,7 @@
 {
     REMMaskManager *manager = [super init];
     
-    self.mask = [[UIActivityIndicatorView alloc] initWithFrame:container.frame];
+    self.mask = [[UIActivityIndicatorView alloc] initWithFrame:container.bounds];
     [self.mask setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [self.mask setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];
     
