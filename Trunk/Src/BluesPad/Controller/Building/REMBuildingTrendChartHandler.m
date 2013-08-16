@@ -149,46 +149,29 @@
 - (void)drawToolTip: (NSInteger)index {
     [self.graph removeAllAnnotations];
     
-//    CPTLayerAnnotation *annot = [[CPTLayerAnnotation alloc]initWithAnchorLayer:self.graph];
-//
-//   // layer.sublayers
-//    CPTTextLayer* textLayer = [[CPTTextLayer alloc]initWithText:@"FFFFF"];
-//    textLayer.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1]];
-//    textLayer.frame = CGRectMake(0, 0, 1000, 1000);
-//    CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
-//    textLayer.textStyle = textStyle;
-//    textLayer.delegate = self;
-//    
-//    
-//    annot.contentLayer = textLayer;
-//   // annot.rectAnchor=CPTRectAnchorTopLeft;
-//    annot.displacement = CGPointMake(100, 100);
-//    [self.graph addAnnotation:annot];
-    
     CPTScatterPlot* plot = [[self getHostView].hostedGraph.allPlots objectAtIndex:0];
-    CPTPlotSpaceAnnotation* annotation = [[CPTPlotSpaceAnnotation alloc]initWithPlotSpace:plot.graph.defaultPlotSpace anchorPlotPoint:nil];
-    CPTTextLayer* textLayer = [[CPTTextLayer alloc]initWithText:@"FFFFF"];
+    NSNumber *xValue = [plot cachedNumberForField:CPTScatterPlotFieldX recordIndex:index];
+    
+    CPTPlotRange *yRange   = [plot.plotSpace plotRangeForCoordinate:CPTCoordinateY];
+    CPTPlotSpaceAnnotation* annotation = [[CPTPlotSpaceAnnotation alloc]initWithPlotSpace:plot.graph.defaultPlotSpace anchorPlotPoint:[NSArray arrayWithObjects:xValue,[ NSNumber numberWithFloat:yRange.maxLimitDouble ], nil]];
+    annotation.displacement = CPTPointMake(0.0, plot.labelOffset);
+    NSDictionary *item=[[self.datasource objectAtIndex:currentSourceIndex] objectForKey:@"data"][index];
+    NSDate* xDate = [item objectForKey:@"x"];
+    NSNumber* yVal = [item objectForKey:@"y"];
+    CPTTextLayer* textLayer = [[CPTTextLayer alloc]initWithText: [NSString stringWithFormat: @"x:%@ \ry:%@", xDate, yVal ]];
     textLayer.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1]];
     annotation.contentLayer = textLayer;
+    
+    CPTPlotSpaceAnnotation* lineAnno = [[CPTPlotSpaceAnnotation alloc]initWithPlotSpace:plot.graph.defaultPlotSpace anchorPlotPoint:[NSArray arrayWithObjects:xValue,[ NSNumber numberWithFloat:yRange.maxLimitDouble / 2 ], nil]];
+    //lineAnno.displacement = CPTPointMake(0.0, plot.labelOffset);
+    
+    lineAnno.displacement = CGPointMake(0, (plot.graph.frame.size.height - plot.frame.size.height) / 2 - 15);
+  //  plot.frame.size.height
+    CPTLayer* lineLayer = [[CPTLayer alloc]initWithFrame:CGRectMake(0, 0, 1, plot.frame.size.height)];
+    lineLayer.backgroundColor = [UIColor whiteColor].CGColor;
+    lineAnno.contentLayer = lineLayer;
+    [self.graph addAnnotation:lineAnno];
     [self.graph addAnnotation:annotation];
-    
-    
-    NSNumber *xValue = [plot cachedNumberForField:CPTScatterPlotFieldX recordIndex:index];
-    NSNumber *yValue = [plot cachedNumberForField:CPTScatterPlotFieldY recordIndex:index];
-    BOOL positiveDirection = YES;
-    CPTPlotRange *yRange   = [plot.plotSpace plotRangeForCoordinate:CPTCoordinateY];
-    if ( CPTDecimalLessThan( yRange.length, CPTDecimalFromInteger(0) ) ) {
-        positiveDirection = !positiveDirection;
-    }
-    annotation.anchorPlotPoint     = [NSArray arrayWithObjects:xValue, yValue, nil];
-    if ( positiveDirection ) {
-        annotation.displacement = CPTPointMake(0.0, plot.labelOffset);
-    }
-    else {
-        annotation.displacement = CPTPointMake(0.0, -plot.labelOffset);
-    }
-    //annot.
-   // CPTXYAxis* yAxis = ((CPTXYAxisSet*)self.graph.axisSet).yAxis;
 }
 
 - (void)viewDidLoad
