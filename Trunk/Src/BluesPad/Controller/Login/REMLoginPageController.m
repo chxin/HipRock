@@ -136,7 +136,10 @@
             //load building overall info
             
             
-            [self.loginCarouselController.splashScreenController showBuildingView];
+            [self.loginButton setTitleForAllStatus:@"正在加载数据.."];
+            [self.loginCarouselController.splashScreenController showBuildingView:^{
+                [self.loginButton stopIndicator];
+            }];
         }
         else
         {
@@ -154,8 +157,6 @@
             {
             }
         }
-        
-        [self.loginButton stopIndicator];
     }
 }
 

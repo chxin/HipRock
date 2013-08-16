@@ -11,7 +11,7 @@
 @interface REMSplashScreenController : UIViewController
 @property (weak, nonatomic) IBOutlet UIView *logoView;
 
-- (void)showBuildingView;
+- (void)showBuildingView:(void (^)(void))loadCompleted;
 - (void)showLoginView;
 
 @end
