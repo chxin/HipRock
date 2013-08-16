@@ -15,6 +15,9 @@
 
 @property (nonatomic,strong) NSArray *commodityViewArray;
 @property (nonatomic) NSUInteger currentIndex;
+
+@property (nonatomic)BOOL freeze;
+
 @end
 @implementation REMBuildingDataView
 
@@ -29,12 +32,17 @@
         [self setContentSize:CGSizeMake(frame.size.width, 1000)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
-        
+        self.freeze=NO;
         [self initCommodityButton];
         [self initCommodityView];
     }
     
     return self;
+}
+
+- (void)setContentOffset:(CGPoint)contentOffset
+{
+    if(!self.freeze) [super setContentOffset:contentOffset];
 }
 
 - (void)initCommodityButton
@@ -139,6 +147,39 @@
         REMBuildingCommodityView *view = self.commodityViewArray[i];
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
         [view requireChartDataWithBuildingId:buildingId withCommodityId:model.commodity.commodityId];
+    }
+}
+
+
+
+
+- (BOOL)touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view
+{
+    if([view isKindOfClass:[CPTGraphHostingView class]] == YES){
+        
+        UITouch *touch = touches.allObjects[0];
+        CGPoint point= [touch locationInView:view];
+        CGPoint oldPoint = [touch previousLocationInView:view];
+      
+        NSLog(@"diff:%f",point.x-oldPoint.x);
+        if((point.x - oldPoint.x)!=0){
+            //self.freeze=YES;
+            //[self setScrollEnabled:NO];
+            //return YES;
+            
+            return NO;
+        }
+        else{
+             //[self setScrollEnabled:YES];
+            //self.freeze=NO;
+            return  YES;
+    
+        }
+    }
+    else{
+        //[self setScrollEnabled:YES];
+        //self.freeze=NO;
+        return YES;
     }
 }
 
