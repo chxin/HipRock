@@ -211,9 +211,11 @@
     
     [self.chartView.graph addPlot:column];
     
-    //bench mark - line
+    //bench mark - line (color:235,106,79)
+    CPTColor *lineColor = [[CPTColor alloc] initWithCGColor:[UIColor colorWithRed:(235.0/255.0) green:(106.0/255.0) blue:(79.0/255.0) alpha:1.0].CGColor];
+    
     CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
-    lineStyle.lineColor = [CPTColor orangeColor];
+    lineStyle.lineColor = lineColor;//[CPTColor orangeColor];
     lineStyle.lineWidth = 3;
     
     CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];
