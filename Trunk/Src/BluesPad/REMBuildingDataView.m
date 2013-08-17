@@ -28,7 +28,7 @@
     if (self) {
         self.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, 0, 0, 0);
         [self setScrollEnabled:YES];
-        
+        //[self setDelaysContentTouches:NO];
         [self setContentSize:CGSizeMake(frame.size.width, 1000)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
@@ -150,39 +150,66 @@
     }
 }
 
-
-
-
-- (BOOL)touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view
-{
-    if([view isKindOfClass:[CPTGraphHostingView class]] == YES){
-        
-        UITouch *touch = touches.allObjects[0];
-        CGPoint point= [touch locationInView:view];
-        CGPoint oldPoint = [touch previousLocationInView:view];
-      
-        NSLog(@"diff:%f",point.x-oldPoint.x);
-        if((point.x - oldPoint.x)!=0){
-            //self.freeze=YES;
-            //[self setScrollEnabled:NO];
-            //return YES;
-            
-            return NO;
-        }
-        else{
-             //[self setScrollEnabled:YES];
-            //self.freeze=NO;
-            return  YES;
-    
-        }
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = touches.allObjects[0];
+    if ([touch.view isKindOfClass:[CPTGraphHostingView class]] == YES) {
+        self.freeze=YES;
     }
     else{
-        //[self setScrollEnabled:YES];
-        //self.freeze=NO;
-        return YES;
+        self.freeze=NO;
+        [super touchesBegan:touches withEvent:event];
     }
 }
 
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = touches.allObjects[0];
+    if ([touch.view isKindOfClass:[CPTGraphHostingView class]] == YES) {
+        
+    }
+    else{
+        [super touchesBegan:touches withEvent:event];
+    }
+}
+/*
+- (BOOL)touchesShouldCancelInContentView:(UIView *)view
+{
+    NSLog(@"touchesShouldCancelInContentView");
+    if([view isKindOfClass:[CPTGraphHostingView class]] == YES){
+        self.freeze=YES;
+        return NO;
+    }
+    self.freeze=NO;
+    return YES;
+}
+*/
+/*
+- (BOOL)touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view
+{
+    //NSLog(@"touchesShouldBegin");
+    if([view isKindOfClass:[CPTGraphHostingView class]] == YES){
+        if(self.tracking) return YES;
+        //CGPoint p=[self.panGestureRecognizer locationInView:view];
+        //CGPoint p1=[self.panGestureRecognizer velocityInView:view];
+        //NSLog(@"pan p:%@,p1:%@",NSStringFromCGPoint(p),NSStringFromCGPoint(p1));
+        UITouch *touch = touches.allObjects[0];
+        CGPoint point= [touch locationInView:view];
+        CGPoint oldPoint = [touch previousLocationInView:view];
+        CGFloat diff=point.x-oldPoint.x;
+        if(diff!=0){
+            //self.freeze=YES;
+            return YES;
+        }
+        else{
+            //self.freeze=NO;
+            return  NO;
+        }
+    }
+    else{
+        self.freeze=NO;
+        return NO;
+    }
+}
+*/
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
