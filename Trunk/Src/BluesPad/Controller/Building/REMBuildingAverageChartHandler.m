@@ -112,13 +112,16 @@
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.graph.defaultPlotSpace;
     
     //line styles
+    CPTMutableLineStyle *hiddenLineStyle = [CPTMutableLineStyle lineStyle];
+    hiddenLineStyle.lineWidth = 0;
+    
     CPTMutableLineStyle *axisLineStyle = [CPTMutableLineStyle lineStyle];
     axisLineStyle.lineWidth = 1;
     axisLineStyle.lineColor = [CPTColor whiteColor];
     
     CPTMutableLineStyle *gridLineStyle=[[CPTMutableLineStyle alloc] init];
     gridLineStyle.lineWidth = 1.0f;
-    gridLineStyle.lineColor = [CPTColor lightGrayColor];
+    gridLineStyle.lineColor = [CPTColor whiteColor];
     
     //text styles
     CPTMutableTextStyle *axisTextStyle = [CPTMutableTextStyle textStyle];
@@ -132,12 +135,9 @@
     x.orthogonalCoordinateDecimal = CPTDecimalFromInt(0);
     x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
     x.plotSpace = plotSpace;
-    //x.visibleRange = plotSpace.xRange;
     x.axisLineStyle = axisLineStyle;
-    x.majorTickLineStyle = axisLineStyle;
-    x.minorTickLineStyle = axisLineStyle;
-//    x.majorIntervalLength = CPTDecimalFromFloat([self.visiableRange distance]/100);
-//    x.labelTextStyle = axisTextStyle;
+    x.majorTickLineStyle = hiddenLineStyle;
+    x.minorTickLineStyle = hiddenLineStyle;
     x.anchorPoint=CGPointZero;
     
     
@@ -170,11 +170,11 @@
     y.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
     y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
     y.plotSpace = plotSpace;
-    y.visibleRange = plotSpace.yRange;
     y.axisLineStyle = axisLineStyle;
-    y.majorTickLineStyle = axisLineStyle;
-    y.minorTickLineStyle = axisLineStyle;
+    y.majorTickLineStyle = hiddenLineStyle;
+    y.minorTickLineStyle = hiddenLineStyle;
     y.anchorPoint=CGPointZero;
+    
     
     y.gridLinesRange = plotSpace.yRange;
     y.majorIntervalLength = CPTDecimalFromFloat(self.dataValueRange.end/4);
@@ -211,9 +211,11 @@
     
     [self.chartView.graph addPlot:column];
     
-    //bench mark - line
+    //bench mark - line (color:235,106,79)
+    CPTColor *lineColor = [[CPTColor alloc] initWithCGColor:[UIColor colorWithRed:(235.0/255.0) green:(106.0/255.0) blue:(79.0/255.0) alpha:1.0].CGColor];
+    
     CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
-    lineStyle.lineColor = [CPTColor orangeColor];
+    lineStyle.lineColor = lineColor;//[CPTColor orangeColor];
     lineStyle.lineWidth = 3;
     
     CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];

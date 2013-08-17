@@ -68,7 +68,6 @@
 - (void)initLineChart:(CGRect)frame
 {
     CPTGraphHostingView *hostView = [[CPTGraphHostingView alloc]initWithFrame:frame];
-    hostView.backgroundColor = [UIColor redColor];
     
     CPTXYGraph *graph=[[CPTXYGraph alloc]initWithFrame:frame];
     hostView.hostedGraph=graph;
