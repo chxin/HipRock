@@ -16,7 +16,6 @@
 @property (nonatomic,strong) NSArray *commodityViewArray;
 @property (nonatomic) NSUInteger currentIndex;
 
-@property (nonatomic)BOOL freeze;
 
 @end
 @implementation REMBuildingDataView
@@ -28,11 +27,9 @@
     if (self) {
         self.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, 0, 0, 0);
         [self setScrollEnabled:YES];
-        //[self setDelaysContentTouches:NO];
         [self setContentSize:CGSizeMake(frame.size.width, 1000)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
-        self.freeze=NO;
         [self initCommodityButton];
         [self initCommodityView];
     }
@@ -40,10 +37,6 @@
     return self;
 }
 
-- (void)setContentOffset:(CGPoint)contentOffset
-{
-    if(!self.freeze) [super setContentOffset:contentOffset];
-}
 
 - (void)initCommodityButton
 {
