@@ -33,6 +33,11 @@
 #define kScrollVelocitySmall 50
 #define kMoveLen 200
 
+#define kImageWidth 1024
+#define kImageHeight 748
+
+#define kImageMargin 5
+
 #define kBuildingChartHeight 310
 
 @interface REMBuildingConstants : NSObject
