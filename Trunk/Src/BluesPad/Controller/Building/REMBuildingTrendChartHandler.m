@@ -39,9 +39,6 @@
         [myView.thisYearButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
         [myView.lastYearButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
         
-        myView.hostView.hostedGraph.backgroundColor = [UIColor blueColor].CGColor;
-        
-        myView.hostView.backgroundColor = [UIColor redColor];
         self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
         
         self.view = myView;
@@ -55,7 +52,24 @@
     return ((REMBuildingTrendChart*)self.view).hostView;
 }
 -(void)longPressedAt:(NSDate*)x {
-    NSLog(@"Long Pressed At %@", x);
+    
+    NSMutableArray* data = [[self.datasource objectAtIndex:currentSourceIndex] objectForKey:@"data"];
+    uint nearByPoint1Interval = UINT32_MAX;
+    int nearByPointIndex = -1;
+    for (int i = 0; i < data.count; i++) {
+        NSDate* pointX = [[data objectAtIndex:i] objectForKey:@"x"];
+        uint pointIntervalWithTouchPoint =  abs([pointX timeIntervalSinceDate:x]);
+        if (pointIntervalWithTouchPoint <= nearByPoint1Interval) {
+            nearByPoint1Interval = pointIntervalWithTouchPoint;
+        } else {
+            nearByPointIndex = i - 1;
+            break;
+        }
+    }
+    NSLog(@"Long Pressed At %@, nearby point index is %d", x, nearByPointIndex);
+    
+    
+    [self drawToolTip: nearByPointIndex];
 }
 
 
@@ -129,35 +143,35 @@
     [scatterPlot reloadData];
     [myView.hostView.hostedGraph reloadData];
     
-    [self drawToolTip:0];
     //yAxis.majorGridLines
 }
 
 - (void)drawToolTip: (NSInteger)index {
     [self.graph removeAllAnnotations];
     
-    CPTLayerAnnotation *annot = [[CPTLayerAnnotation alloc]initWithAnchorLayer:self.graph];
-
-   // layer.sublayers
-    CPTTextLayer* textLayer = [[CPTTextLayer alloc]initWithText:@"FFFFF"];
+    CPTScatterPlot* plot = [[self getHostView].hostedGraph.allPlots objectAtIndex:0];
+    NSNumber *xValue = [plot cachedNumberForField:CPTScatterPlotFieldX recordIndex:index];
+    
+    CPTPlotRange *yRange   = [plot.plotSpace plotRangeForCoordinate:CPTCoordinateY];
+    CPTPlotSpaceAnnotation* annotation = [[CPTPlotSpaceAnnotation alloc]initWithPlotSpace:plot.graph.defaultPlotSpace anchorPlotPoint:[NSArray arrayWithObjects:xValue,[ NSNumber numberWithFloat:yRange.maxLimitDouble ], nil]];
+    annotation.displacement = CPTPointMake(0.0, plot.labelOffset);
+    NSDictionary *item=[[self.datasource objectAtIndex:currentSourceIndex] objectForKey:@"data"][index];
+    NSDate* xDate = [item objectForKey:@"x"];
+    NSNumber* yVal = [item objectForKey:@"y"];
+    CPTTextLayer* textLayer = [[CPTTextLayer alloc]initWithText: [NSString stringWithFormat: @"x:%@ \ry:%@", xDate, yVal ]];
     textLayer.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1]];
-    textLayer.frame = CGRectMake(0, 0, 1000, 1000);
-    CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
-    textLayer.textStyle = textStyle;
-    textLayer.delegate = self;
+    annotation.contentLayer = textLayer;
     
+    CPTPlotSpaceAnnotation* lineAnno = [[CPTPlotSpaceAnnotation alloc]initWithPlotSpace:plot.graph.defaultPlotSpace anchorPlotPoint:[NSArray arrayWithObjects:xValue,[ NSNumber numberWithFloat:yRange.maxLimitDouble / 2 ], nil]];
+    //lineAnno.displacement = CPTPointMake(0.0, plot.labelOffset);
     
-    annot.contentLayer = textLayer;
-   // annot.rectAnchor=CPTRectAnchorTopLeft;
-    annot.displacement = CGPointMake(100, 100);
-    [self.graph addAnnotation:annot];
-    
-    //annot.
-   // CPTXYAxis* yAxis = ((CPTXYAxisSet*)self.graph.axisSet).yAxis;
-}
-
-- (void)scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index
-{
+    lineAnno.displacement = CGPointMake(0, (plot.graph.frame.size.height - plot.frame.size.height) / 2 - 15);
+  //  plot.frame.size.height
+    CPTLayer* lineLayer = [[CPTLayer alloc]initWithFrame:CGRectMake(0, 0, 1, plot.frame.size.height)];
+    lineLayer.backgroundColor = [UIColor whiteColor].CGColor;
+    lineAnno.contentLayer = lineLayer;
+    [self.graph addAnnotation:lineAnno];
+    [self.graph addAnnotation:annotation];
 }
 
 - (void)viewDidLoad
