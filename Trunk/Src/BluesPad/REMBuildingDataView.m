@@ -15,6 +15,8 @@
 
 @property (nonatomic,strong) NSArray *commodityViewArray;
 @property (nonatomic) NSUInteger currentIndex;
+
+
 @end
 @implementation REMBuildingDataView
 
@@ -25,17 +27,16 @@
     if (self) {
         self.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, 0, 0, 0);
         [self setScrollEnabled:YES];
-        
         [self setContentSize:CGSizeMake(frame.size.width, 1000)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
-        
         [self initCommodityButton];
         [self initCommodityView];
     }
     
     return self;
 }
+
 
 - (void)initCommodityButton
 {
@@ -140,6 +141,23 @@
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
         [view requireChartDataWithBuildingId:buildingId withCommodityId:model.commodity.commodityId];
     }
+}
+
+
+
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]==YES){
+        UIPanGestureRecognizer *p = (UIPanGestureRecognizer *)gestureRecognizer;
+        CGPoint movement=[p translationInView:self];
+      
+        if(movement.x!=0){
+            return NO;
+        }
+        
+    }
+    return [super gestureRecognizerShouldBegin:gestureRecognizer];
 }
 
 /*

@@ -63,6 +63,11 @@
             
         
     }
+    else if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]==YES){
+        return YES;
+    }
+    
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning
