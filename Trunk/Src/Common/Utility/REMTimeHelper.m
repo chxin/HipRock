@@ -56,6 +56,36 @@
     return previousDate;
 }
 
++ (NSDate *)add:(int)difference onPart:(REMDateTimePart)part ofDate:(NSDate *)date;
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    switch (part) {
+        case REMDateTimePartSecond:
+            [components setSecond:difference];
+            break;
+        case REMDateTimePartMinute:
+            [components setMinute:difference];
+            break;
+        case REMDateTimePartHour:
+            [components setHour:difference];
+            break;
+        case REMDateTimePartDay:
+            [components setDay:difference];
+            break;
+        case REMDateTimePartMonth:
+            [components setMonth:difference];
+            break;
+        case REMDateTimePartYear:
+            [components setYear:difference];
+            break;
+            
+        default:
+            break;
+    }
+    
+    return [calendar dateByAddingComponents:components toDate:date options:0];
+}
 
 
 + (REMTimeRange *)relativeDateFromString:(NSString *)relativeDateString

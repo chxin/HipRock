@@ -51,6 +51,11 @@
     return newRange;
 }
 
+- (BOOL)isValueInside:(double)value
+{
+    return self.start <= value && self.end >= value;
+}
+
 -(NSString *)description
 {
     return [NSString stringWithFormat:@"{%f,%f}", self.start, self.end];

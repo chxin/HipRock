@@ -13,5 +13,7 @@
 
 @property (nonatomic,strong) CPTGraphHostingView *hostView;
 @property (nonatomic,strong) CPTGraph *graph;
+@property (nonatomic,strong) CPTAnnotation *annotation;
+@property (nonatomic,strong) CPTLimitBand *annotationBand;
 
 @end
