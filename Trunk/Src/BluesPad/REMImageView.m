@@ -56,19 +56,36 @@
     return self;
 }
 
+- (void)reset{
+    [REMDataAccessor cancelAccess:self.loadingImageKey];
+    
+    for (UIView *v in self.subviews) {
+        [v removeFromSuperview];
+    }
+    
+    [self.bottomGradientLayer removeFromSuperlayer];
+    
+    self.clearImage=nil;
+    self.imageView.image=nil;
+    self.imageView=nil;
+    self.blurredImageView.image=nil;
+    self.blurredImageView=nil;
+    self.glassView=nil;
+    
+    self.titleLabel=nil;
+    self.bottomGradientLayer=nil;
+}
+
 - (void)didMoveToSuperview
 {
     //NSLog(@"parent changed");
     if(self.superview == nil){
         
-        [REMDataAccessor cancelAccess:self.loadingImageKey];
-        self.clearImage=nil;
-        self.imageView.image=nil;
-        self.imageView=nil;
+        [self reset];
         return;
     }
     else{
-        
+        NSLog(@"subview count:%d",self.subviews.count);
         [self initImageView:self.frame];
         
         [self initBottomGradientLayer];
@@ -79,9 +96,11 @@
         
         [self initTitleView];
         
+        [self loadingBuildingImage];
+        
     }
     
-    [self loadingBuildingImage];
+    
     
 }
 

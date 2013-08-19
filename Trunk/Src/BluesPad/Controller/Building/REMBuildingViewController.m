@@ -38,20 +38,24 @@
 	
     self.view.backgroundColor=[UIColor blackColor];
     
-    [self initImageView];
+    if(self.buildingOverallArray.count>0){
+    
+        [self initImageView];
+        
+        
+        UIPanGestureRecognizer *rec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
+        [self.view addGestureRecognizer:rec];
+        rec.delegate = self;
+        
+        UITapGestureRecognizer *tap= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapthis:)];
+        [self.view addGestureRecognizer:tap];
+    }
     
     self.currentIndex=0;
     self.cumulateX=0;
     
     [self initButtons];
     
-
-    UIPanGestureRecognizer *rec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
-    [self.view addGestureRecognizer:rec];
-    rec.delegate = self;
-    
-    UITapGestureRecognizer *tap= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapthis:)];
-    [self.view addGestureRecognizer:tap];
     
 }
 
@@ -90,13 +94,12 @@
 
 - (void)initImageView
 {
-    int width=1024,height=748,margin=5;
     int i=0;
     self.imageViewStatus = [[NSMutableDictionary alloc]initWithCapacity:self.buildingOverallArray.count];
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:self.buildingOverallArray.count];
     for (;i<self.buildingOverallArray.count;++i) {
         REMBuildingOverallModel *model = self.buildingOverallArray[i];
-        REMImageView *imageView = [[REMImageView alloc]initWithFrame:CGRectMake((width+margin)*i, 0, width, height) withBuildingOveralInfo:model];
+        REMImageView *imageView = [[REMImageView alloc]initWithFrame:CGRectMake((kImageWidth+kImageMargin)*i, 0, kImageWidth, kImageHeight) withBuildingOveralInfo:model];
         //[self.view addSubview:imageView];
         if(i==0 || i==1){
             [self.view addSubview:imageView];
@@ -168,7 +171,7 @@
         
         __block BOOL addIndex=YES;
         
-        [UIView animateWithDuration:0.5 delay:0
+        [UIView animateWithDuration:0.2 delay:0
                             options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
                                 if((sign<0 && self.currentIndex==self.imageArray.count-1)
                                    || (sign>0 && self.currentIndex==0) ||
