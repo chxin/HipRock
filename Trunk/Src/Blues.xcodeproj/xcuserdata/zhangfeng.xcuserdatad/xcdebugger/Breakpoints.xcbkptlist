@@ -1482,7 +1482,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "61"
          endingLineNumber = "61"
-         landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
+         landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1586,7 +1586,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "129"
          endingLineNumber = "129"
-         landmarkName = "-sendWeibo:withImage:"
+         landmarkName = "-shareButtonTouchDown:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
