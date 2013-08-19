@@ -342,6 +342,8 @@
 		7A0288FE17C20CC500709111 /* WeiboDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E417C20CC400709111 /* WeiboDialog.m */; };
 		7A0288FF17C20CC500709111 /* WeiboLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E617C20CC500709111 /* WeiboLoginDialog.m */; };
 		7A02890017C20CC500709111 /* Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E817C20CC500709111 /* Weibo.m */; };
+		7A02890317C20F5B00709111 /* weibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A02890117C20F5B00709111 /* weibo.png */; };
+		7A02890417C20F5B00709111 /* weibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A02890217C20F5B00709111 /* weibo@2x.png */; };
 		7A03977D17A2775E0082F6EE /* dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A03977C17A2775E0082F6EE /* dashboard.png */; };
 		7A095E73179571C80098DB16 /* REMWidgetAxisHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */; };
 		7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */; };
@@ -617,6 +619,8 @@
 		7A0288E817C20CC500709111 /* Weibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Weibo.m; sourceTree = "<group>"; };
 		7A0288E917C20CC500709111 /* WeiboConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboConfig.h; sourceTree = "<group>"; };
 		7A0288EA17C20CC500709111 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
+		7A02890117C20F5B00709111 /* weibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo.png; sourceTree = "<group>"; };
+		7A02890217C20F5B00709111 /* weibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo@2x.png"; sourceTree = "<group>"; };
 		7A03977C17A2775E0082F6EE /* dashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboard.png; sourceTree = "<group>"; };
 		7A095E71179571C80098DB16 /* REMWidgetAxisHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetAxisHelper.h; path = Common/Utility/REMWidgetAxisHelper.h; sourceTree = "<group>"; };
 		7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetAxisHelper.m; path = Common/Utility/REMWidgetAxisHelper.m; sourceTree = "<group>"; };
@@ -1628,6 +1632,8 @@
 				7A5E2D87177B41B0000F77F9 /* Default-568h@2x.png */,
 				7A5E2D88177B41B0000F77F9 /* Default.png */,
 				7A5E2D89177B41B0000F77F9 /* Default@2x.png */,
+				7A02890117C20F5B00709111 /* weibo.png */,
+				7A02890217C20F5B00709111 /* weibo@2x.png */,
 			);
 			name = Images;
 			path = Resource/Images;
@@ -2177,6 +2183,8 @@
 				B43B7E8817B9D4E300AB2F52 /* default-building.jpg in Resources */,
 				7A0288F617C20CC500709111 /* WeiboDialogClose.png in Resources */,
 				7A0288F717C20CC500709111 /* WeiboDialogClose@2x.png in Resources */,
+				7A02890317C20F5B00709111 /* weibo.png in Resources */,
+				7A02890417C20F5B00709111 /* weibo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

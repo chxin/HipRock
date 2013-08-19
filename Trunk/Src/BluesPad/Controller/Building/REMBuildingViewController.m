@@ -8,6 +8,8 @@
 
 #import "REMBuildingViewController.h"
 #import "REMApplicationContext.h"
+#import "WeiboSDK.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface REMBuildingViewController ()
 @property (nonatomic,strong) NSArray *imageArray;
@@ -86,6 +88,64 @@
     [logout addTarget:self action:@selector(logoutButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.logoutButton=logout;
     [self.view addSubview:logout];
+    
+    
+    UIButton *shareButton = [[UIButton alloc]initWithFrame:CGRectMake(950, 70, 48, 48)];
+    [shareButton setImage:[UIImage imageNamed:@"weibo.png"] forState:UIControlStateNormal];
+    [shareButton addTarget:self action:@selector(shareButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:shareButton];
+}
+
+-(void)shareButtonTouchDown:(UIButton *)button
+{
+    NSString *content = @"Hello kitty!";
+    NSData *image = nil;//[self cutImage]; //UIImagePNGRepresentation([UIImage imageNamed:@"Default"]);
+    
+    if (![Weibo.weibo isAuthenticated]) {
+        [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
+            NSString *message = nil;
+            if (!error) {
+                message = [NSString stringWithFormat:@"Sign in successful: %@", account.user.screenName ];
+                NSLog(@"%@", message);
+                [REMAlertHelper alert:message];
+                
+                [self sendWeibo:content withImage:image];
+            }
+            else {
+                message = [NSString stringWithFormat:@"Failed to sign in: %@", error];
+                NSLog(@"%@", message);
+                [REMAlertHelper alert:message];
+            }
+        }];
+    }
+    else {
+        NSLog(@"%@", Weibo.weibo.currentAccount.user.screenName);
+        
+        [self sendWeibo:content withImage:image];
+    }
+}
+
+-(void)sendWeibo:(NSString *)content withImage:(NSData *)imageData
+{
+    if(content.length > 135)
+        content = [content substringToIndex:135];
+    
+    [Weibo.weibo newStatus:content pic:imageData completed:^(Status *status, NSError *error) {
+        NSString *message = nil;
+        if (error) {
+            message = [NSString stringWithFormat:@"failed to post:%@", error];
+        }
+        else {
+            message = [NSString stringWithFormat:@"success: %lld.%@", status.statusId, status.text];
+        }
+        
+        NSLog(@"%@", message);
+        [REMAlertHelper alert:message];
+        //[Weibo.weibo signOut];
+        
+    }];
+    
+    
 }
 
 - (void)initImageView
