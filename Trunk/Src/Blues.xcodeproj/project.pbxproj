@@ -79,16 +79,12 @@
 		6AB1F26A17B8AC910065C1EB /* REMBuildingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */; };
 		6AB1F26B17B8AC910065C1EB /* REMBuildingRankingView.h in Sources */ = {isa = PBXBuildFile; fileRef = B4911F4617B0EB8B007AEF7D /* REMBuildingRankingView.h */; };
 		6AB1F26C17B8AC910065C1EB /* REMBuildingRankingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */; };
-		6AB1F26D17B8AC910065C1EB /* REMBuildingTrendView.h in Sources */ = {isa = PBXBuildFile; fileRef = EF0187B317B34464003A30DD /* REMBuildingTrendView.h */; };
-		6AB1F26E17B8AC910065C1EB /* REMBuildingTrendView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0187B417B34464003A30DD /* REMBuildingTrendView.m */; };
 		6AB1F26F17B8AC910065C1EB /* REMNumberLabel.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA6117AB944B00316902 /* REMNumberLabel.h */; };
 		6AB1F27017B8AC910065C1EB /* REMNumberLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA6217AB944B00316902 /* REMNumberLabel.m */; };
 		6AB1F27117B8AC910065C1EB /* REMColoredButton.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA6417AB94B100316902 /* REMColoredButton.h */; };
 		6AB1F27217B8AC910065C1EB /* REMColoredButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA6517AB94B100316902 /* REMColoredButton.m */; };
 		6AB1F27317B8AC910065C1EB /* REMIndicatorButton.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A5277F417AF4209007DA735 /* REMIndicatorButton.h */; };
 		6AB1F27417B8AC910065C1EB /* REMIndicatorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5277F517AF4209007DA735 /* REMIndicatorButton.m */; };
-		6AB1F27517B8AC910065C1EB /* REMBuildingTrendChartController.h in Sources */ = {isa = PBXBuildFile; fileRef = EF0187BC17B37075003A30DD /* REMBuildingTrendChartController.h */; };
-		6AB1F27617B8AC910065C1EB /* REMBuildingTrendChartController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0187BD17B37075003A30DD /* REMBuildingTrendChartController.m */; };
 		6AB1F27717B8AC910065C1EB /* REMWidgetCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F44178122A500BC130A /* REMWidgetCellView.m */; };
 		6AB1F27817B8AC910065C1EB /* REMWidgetCellView.h in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F43178122A500BC130A /* REMWidgetCellView.h */; };
 		6AB1F27917B8AC910065C1EB /* REMWidgetCell.h in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F4617812E6B00BC130A /* REMWidgetCell.h */; };
@@ -523,10 +519,9 @@
 		B4C1676917B2226F002A8DD6 /* oil.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676317B2226F002A8DD6 /* oil.png */; };
 		B4C1676A17B2226F002A8DD6 /* water-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676417B2226F002A8DD6 /* water-pressed.png */; };
 		B4C1676B17B2226F002A8DD6 /* water.png in Resources */ = {isa = PBXBuildFile; fileRef = B4C1676517B2226F002A8DD6 /* water.png */; };
-		EF0187B517B34464003A30DD /* REMBuildingTrendView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0187B417B34464003A30DD /* REMBuildingTrendView.m */; };
-		EF0187BE17B37075003A30DD /* REMBuildingTrendChartController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0187BD17B37075003A30DD /* REMBuildingTrendChartController.m */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
+		EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97DDDA17C20B5700A0374E /* REMToggleButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -963,13 +958,11 @@
 		B4C1676417B2226F002A8DD6 /* water-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "water-pressed.png"; path = "building/water-pressed.png"; sourceTree = "<group>"; };
 		B4C1676517B2226F002A8DD6 /* water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = water.png; path = building/water.png; sourceTree = "<group>"; };
 		B4CD146017B3439600807B5F /* BluesPad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluesPad.entitlements; sourceTree = "<group>"; };
-		EF0187B317B34464003A30DD /* REMBuildingTrendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingTrendView.h; path = View/Building/REMBuildingTrendView.h; sourceTree = "<group>"; };
-		EF0187B417B34464003A30DD /* REMBuildingTrendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingTrendView.m; path = View/Building/REMBuildingTrendView.m; sourceTree = "<group>"; };
-		EF0187BC17B37075003A30DD /* REMBuildingTrendChartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingTrendChartController.h; sourceTree = "<group>"; };
-		EF0187BD17B37075003A30DD /* REMBuildingTrendChartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingTrendChartController.m; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
+		EF97DDD917C20B5700A0374E /* REMToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButton.h; sourceTree = "<group>"; };
+		EF97DDDA17C20B5700A0374E /* REMToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1275,13 +1268,13 @@
 			isa = PBXGroup;
 			children = (
 				7A37AA6117AB944B00316902 /* REMNumberLabel.h */,
+				EF97DDD917C20B5700A0374E /* REMToggleButton.h */,
+				EF97DDDA17C20B5700A0374E /* REMToggleButton.m */,
 				7A37AA6217AB944B00316902 /* REMNumberLabel.m */,
 				7A37AA6417AB94B100316902 /* REMColoredButton.h */,
 				7A37AA6517AB94B100316902 /* REMColoredButton.m */,
 				7A5277F417AF4209007DA735 /* REMIndicatorButton.h */,
 				7A5277F517AF4209007DA735 /* REMIndicatorButton.m */,
-				EF0187BC17B37075003A30DD /* REMBuildingTrendChartController.h */,
-				EF0187BD17B37075003A30DD /* REMBuildingTrendChartController.m */,
 			);
 			name = Controls;
 			path = View/Controls;
@@ -1786,8 +1779,6 @@
 				B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */,
 				B4911F4617B0EB8B007AEF7D /* REMBuildingRankingView.h */,
 				B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */,
-				EF0187B317B34464003A30DD /* REMBuildingTrendView.h */,
-				EF0187B417B34464003A30DD /* REMBuildingTrendView.m */,
 			);
 			name = Building;
 			sourceTree = "<group>";
@@ -2180,10 +2171,8 @@
 				B4626BFC17B0A0D900A7759B /* REMBuildingCommodityView.m in Sources */,
 				B4911F4317B0D961007AEF7D /* REMBuildingConstants.m in Sources */,
 				B4911F4817B0EB8B007AEF7D /* REMBuildingRankingView.m in Sources */,
-				EF0187B517B34464003A30DD /* REMBuildingTrendView.m in Sources */,
 				7A1A854217B4B2E9004D7167 /* REMBuildingTrendChart.m in Sources */,
 				7A1A854517B4B303004D7167 /* REMBuildingAverageChart.m in Sources */,
-				EF0187BE17B37075003A30DD /* REMBuildingTrendChartController.m in Sources */,
 				7A1A854B17B4B7EC004D7167 /* REMBuildingChartContainerView.m in Sources */,
 				7A1A855217B4BB5D004D7167 /* REMBuildingAverageChartHandler.m in Sources */,
 				7A1A855317B4BB5D004D7167 /* REMBuildingChartHandler.m in Sources */,
@@ -2192,6 +2181,7 @@
 				7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */,
 				7A09D59A17B8D62F001EBC30 /* REMDataRange.m in Sources */,
 				7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */,
+				EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2302,16 +2292,12 @@
 				6AB1F26A17B8AC910065C1EB /* REMBuildingConstants.m in Sources */,
 				6AB1F26B17B8AC910065C1EB /* REMBuildingRankingView.h in Sources */,
 				6AB1F26C17B8AC910065C1EB /* REMBuildingRankingView.m in Sources */,
-				6AB1F26D17B8AC910065C1EB /* REMBuildingTrendView.h in Sources */,
-				6AB1F26E17B8AC910065C1EB /* REMBuildingTrendView.m in Sources */,
 				6AB1F26F17B8AC910065C1EB /* REMNumberLabel.h in Sources */,
 				6AB1F27017B8AC910065C1EB /* REMNumberLabel.m in Sources */,
 				6AB1F27117B8AC910065C1EB /* REMColoredButton.h in Sources */,
 				6AB1F27217B8AC910065C1EB /* REMColoredButton.m in Sources */,
 				6AB1F27317B8AC910065C1EB /* REMIndicatorButton.h in Sources */,
 				6AB1F27417B8AC910065C1EB /* REMIndicatorButton.m in Sources */,
-				6AB1F27517B8AC910065C1EB /* REMBuildingTrendChartController.h in Sources */,
-				6AB1F27617B8AC910065C1EB /* REMBuildingTrendChartController.m in Sources */,
 				6AB1F27717B8AC910065C1EB /* REMWidgetCellView.m in Sources */,
 				6AB1F27817B8AC910065C1EB /* REMWidgetCellView.h in Sources */,
 				6AB1F27917B8AC910065C1EB /* REMWidgetCell.h in Sources */,
