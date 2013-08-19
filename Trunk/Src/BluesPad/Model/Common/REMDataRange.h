@@ -18,5 +18,6 @@
 
 - (double)distance;
 - (REMDataRange *)expandByFactor:(float)factor;
+- (BOOL)isValueInside:(double)value;
 
 @end

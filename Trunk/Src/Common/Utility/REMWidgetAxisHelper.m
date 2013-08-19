@@ -168,11 +168,11 @@
     labelStyle.color = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
     
     graph.plotAreaFrame.masksToBorder=NO;
-    graph.plotAreaFrame.paddingTop=0.0f;
-    graph.plotAreaFrame.paddingRight=10.0f;
-    graph.plotAreaFrame.paddingBottom=30.0f;
-    graph.plotAreaFrame.paddingLeft=40.0f;
-    graph.paddingBottom=40;
+//    graph.plotAreaFrame.paddingTop=0.0f;
+//    graph.plotAreaFrame.paddingRight=10.0f;
+//    graph.plotAreaFrame.paddingBottom=30.0f;
+//    graph.plotAreaFrame.paddingLeft=40.0f;
+//    graph.paddingBottom=40;
     
     double maxX = INT64_MIN;    // Max x value in datasource
     double minX = INT64_MAX;    // Min x value in datasource
