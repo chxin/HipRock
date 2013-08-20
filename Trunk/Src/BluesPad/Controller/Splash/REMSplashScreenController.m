@@ -132,6 +132,7 @@
     {
         REMBuildingViewController *buildingViewController = segue.destinationViewController;
         buildingViewController.buildingOverallArray = self.buildingOveralls;
+        self.buildingOveralls=nil;
         buildingViewController.splashScreenController = self;
     }
 }
