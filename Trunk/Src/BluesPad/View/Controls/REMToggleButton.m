@@ -22,21 +22,17 @@
     }
     return self;
 }
-- (BOOL)toggle {
-    self.on = !self.on;
-    if (self.on) {
+
+-(void)setOn:(BOOL)onThis {
+    if (onThis == self.on) return;
+    
+    _on = onThis;
+    if (onThis) {
         self.layer.backgroundColor = [UIColor whiteColor].CGColor;
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     } else {
         self.layer.backgroundColor = [UIColor clearColor].CGColor;
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }
-    return self.on;
-}
--(void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
-    [super endTrackingWithTouch:touch withEvent:event];
-    if (self.touchInside) {
-        [self toggle];
     }
 }
 

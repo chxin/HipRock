@@ -7,8 +7,9 @@
 //
 
 #import "REMBuildingTrendChart.h"
+#import "REMToggleButtonGroup.h"
 
-@implementation REMBuildingTrendChart
+@implementation REMBuildingTrendChart 
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -17,6 +18,7 @@
     const int buttonWidth = 70;
     const int buttonMargin = 5;
     if (self) {
+        self.toggleGroup = [[REMToggleButtonGroup alloc]init];
         self.todayButton = [self makeButton:@"今天" rect:CGRectMake(0, 0, buttonWidth,buttonHeight)];
         self.yestodayButton = [self makeButton:@"昨天" rect:CGRectMake(buttonMargin + buttonWidth,0,buttonWidth,buttonHeight)];
         self.thisMonthButton = [self makeButton:@"本月" rect:CGRectMake((buttonMargin + buttonWidth)*2,0,buttonWidth,buttonHeight)];
@@ -40,6 +42,7 @@
     [btn setFrame:rect];
     [btn setTitle:buttonText forState:UIControlStateNormal];
     [self addSubview:btn];
+    [self.toggleGroup registerButton:btn];
     return btn;
 }
 

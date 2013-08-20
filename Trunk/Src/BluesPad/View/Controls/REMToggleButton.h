@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+//#import "REMToggleButtonGroup.h"
 
 @interface REMToggleButton : UIButton
 
 @property (nonatomic, getter=isOn) BOOL on;
-
-- (BOOL)toggle;
 
 @end

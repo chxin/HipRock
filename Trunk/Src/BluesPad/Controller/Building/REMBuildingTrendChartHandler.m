@@ -29,15 +29,7 @@
         
         currentSourceIndex = 0;
         myView.hostView.hostedGraph.defaultPlotSpace.delegate = self;
-       // myView.scatterPlot.dataSource = self;
-      //  myView.scatterPlot.delegate = self;
-        
-        [myView.todayButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
-        [myView.yestodayButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
-        [myView.thisMonthButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
-        [myView.lastMonthButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
-        [myView.thisYearButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
-        [myView.lastYearButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
+        [myView.toggleGroup bindToggleChangeCallback:self selector:@selector(intervalChanged:)];
         
         self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
         
@@ -188,8 +180,8 @@
     [buildingCommodityInfo setValue:[NSNumber numberWithLong:commodityID] forKey:@"commodityId"];
     [buildingCommodityInfo setValue:[NSNumber numberWithInt:1] forKey:@"relativeType"];
     REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSEnergyBuildingTimeRange parameter:buildingCommodityInfo];
-    store.isAccessLocal = NO;
-    store.isStoreLocal = NO;
+    store.isAccessLocal = YES;
+    store.isStoreLocal = YES;
     store.maskContainer = self.view;
     store.groupName = nil;
     

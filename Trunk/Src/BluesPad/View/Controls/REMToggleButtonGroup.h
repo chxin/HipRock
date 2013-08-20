@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "REMToggleButton.h"
 
-@interface REMToggleButtonGroup : NSArray
+@interface REMToggleButtonGroup : NSObject {
+    NSMutableArray* buttons;
+}
 
+-(NSArray*)getAllButtons;
+-(REMToggleButton*)getToggledButton;
+-(void)registerButton:(REMToggleButton*)button;
+
+-(void)bindToggleChangeCallback:(id)performer selector:(SEL)selector;
 @end
