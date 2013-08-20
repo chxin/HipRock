@@ -1,6 +1,7 @@
 
 //Communication
 #import "REMServiceAgent.h"
+#import "REMServiceMeta.h"
 #import "REMServiceRequestOperation.h"
 
 //Constants
@@ -30,6 +31,7 @@
 #import "REMAlertHelper.h"
 #import "REMColor.h"
 #import "REMEncryptHelper.h"
+#import "REMImageHelper.h"
 #import "REMJSONHelper.h"
 #import "REMMaskManager.h"
 #import "REMNetworkHelper.h"

@@ -12,6 +12,7 @@
 #import "REMBuildingTrendChartHandler.h"
 #import "REMBuildingOverallModel.h"
 #import "REMToggleButton.h"
+#import "REMToggleButtonGroup.h"
 
 @interface REMBuildingTrendChart : UIView
 @property (nonatomic,strong) REMToggleButton *todayButton;
@@ -22,5 +23,6 @@
 @property (nonatomic,strong) REMToggleButton *lastYearButton;
 @property (nonatomic,strong) REMBuildingOverallModel *buildingInfo;
 @property (nonatomic,strong) CPTGraphHostingView *hostView;
+@property (nonatomic,strong) REMToggleButtonGroup* toggleGroup;
 //@property (nonatomic,strong) CPTScatterPlot *scatterPlot;
 @end
