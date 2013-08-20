@@ -16,6 +16,7 @@ typedef enum _REMEnergyDataQuality:NSUInteger
 
 @interface REMEnergyData : REMJSONObject
 
+- (id)initWithArray:(NSArray *)array;
 
 @property (nonatomic,strong) NSDate *localTime;
 

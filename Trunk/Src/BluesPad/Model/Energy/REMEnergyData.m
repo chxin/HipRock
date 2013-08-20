@@ -11,6 +11,28 @@
 
 @implementation REMEnergyData
 
+- (id)initWithArray:(NSArray *)array
+{
+    self = [super init];
+    if(self){
+        long long time= [((NSNumber *)array[0]) longLongValue];
+        self.localTime = [[NSDate alloc]initWithTimeIntervalSince1970:time];
+        
+        
+        NSNumber *value = array[1];
+        NSNumber *quality=0;
+        if(array.count>=3){
+            quality=array[2];
+        }
+        
+        self.quality = (REMEnergyDataQuality)[quality intValue];
+        
+        self.dataValue = [value decimalValue];
+    }
+    
+    return self;
+}
+
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
     //NSNumber *num = dictionary[@"LocalTime"];

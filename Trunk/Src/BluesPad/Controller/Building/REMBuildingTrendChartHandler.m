@@ -29,15 +29,7 @@
         
         currentSourceIndex = 0;
         myView.hostView.hostedGraph.defaultPlotSpace.delegate = self;
-       // myView.scatterPlot.dataSource = self;
-      //  myView.scatterPlot.delegate = self;
-        
-        [myView.todayButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
-        [myView.yestodayButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
-        [myView.thisMonthButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
-        [myView.lastMonthButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
-        [myView.thisYearButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
-        [myView.lastYearButton addTarget:self action:@selector(intervalChanged:) forControlEvents:UIControlEventTouchUpInside];
+        [myView.toggleGroup bindToggleChangeCallback:self selector:@selector(intervalChanged:)];
         
         self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
         

@@ -26,6 +26,8 @@ typedef enum _REMRelativeTimeRangeType : NSInteger
 
 @interface REMTimeRange : REMJSONObject
 
+- (id)initWithArray:(NSArray *)array;
+
 @property (nonatomic,strong) NSDate *startTime;
 
 @property (nonatomic) long long longStartTime;

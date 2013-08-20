@@ -15,7 +15,7 @@
 
 @implementation REMServiceUrl
 
-const static NSString *SVC_BASE_HOST = @"10.177.206.79";
+const static NSString *SVC_BASE_HOST = @"10.177.206.34";
 const static NSString *SVC_BASE_SCHEMA = @"http";
 const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
 

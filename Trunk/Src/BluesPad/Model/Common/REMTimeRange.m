@@ -19,6 +19,22 @@
     return dic;
 }
 
+- (id)initWithArray:(NSArray *)array
+{
+    self = [super init];
+    if(self){
+        NSNumber *startTime=array[0];
+        NSNumber *endTime=array[1];
+        self.longStartTime=[startTime longLongValue];
+        self.longEndTime=[endTime longLongValue];
+        
+        self.startTime = [[NSDate alloc]initWithTimeIntervalSince1970:self.longStartTime];
+        self.endTime=[[NSDate alloc]initWithTimeIntervalSince1970:self.longEndTime];
+    }
+    
+    return self;
+}
+
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
     NSString *startTime=dictionary[@"StartTime"];

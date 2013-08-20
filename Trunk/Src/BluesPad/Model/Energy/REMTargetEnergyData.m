@@ -16,13 +16,16 @@
     
     self.target = [[REMEnergyTargetModel alloc]initWithDictionary:targetDic];
     
-    NSArray *dataArray=dictionary[@"EnergyData"];
+    NSArray *dataArray=dictionary[@"EnergyDataArray"];
     
     NSMutableArray *dataMArray=[[NSMutableArray alloc]initWithCapacity:dataArray.count];
     
-    for(NSDictionary *dataDic in dataArray)
+    for(NSArray *array in dataArray)
     {
-        [dataMArray addObject:[[REMEnergyData alloc]initWithDictionary:dataDic]];
+        REMEnergyData *d = [[REMEnergyData alloc]initWithArray:array];
+        
+        
+        [dataMArray addObject:d];
     }
     
     self.energyData = dataMArray;
