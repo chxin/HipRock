@@ -148,14 +148,16 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]==YES){
-        UIPanGestureRecognizer *p = (UIPanGestureRecognizer *)gestureRecognizer;
-        CGPoint movement=[p translationInView:self];
-      
-        if(movement.x!=0){
-            return NO;
+    if([gestureRecognizer.view isKindOfClass:[REMBuildingDataView class]]==YES){
+        if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]==YES){
+            UIPanGestureRecognizer *p = (UIPanGestureRecognizer *)gestureRecognizer;
+            CGPoint movement=[p translationInView:self];
+          
+            if(movement.x!=0){
+                return NO;
+            }
+            
         }
-        
     }
     return [super gestureRecognizerShouldBegin:gestureRecognizer];
 }

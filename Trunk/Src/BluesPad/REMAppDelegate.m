@@ -10,6 +10,7 @@
 #import "REMLog.h"
 #import "REMStorage.h"
 #import "REMApplicationInfo.h"
+#import "WeiboSDK.h"
 
 //comment
 
@@ -31,7 +32,11 @@
     [REMApplicationInfo initApplicationInfo];
     
     //[REMStorage initialize];
-    [REMStorage clearSessionStorage];
+    
+    //[REMStorage clearSessionStorage];
+    
+    Weibo *weibo = [[Weibo alloc] initWithAppKey:@"3307740263" withAppSecret:@"a934d069ddca64d9be8caed175948653"];
+    [Weibo setWeibo:weibo];
     
     return YES;
 }

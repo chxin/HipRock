@@ -12,6 +12,16 @@
 
 @class REMTimeRange;
 
+
+typedef enum _REMDateTimePart : NSUInteger{
+    REMDateTimePartSecond = 1,
+    REMDateTimePartMinute = 2,
+    REMDateTimePartHour = 3,
+    REMDateTimePartDay = 4,
+    REMDateTimePartMonth = 5,
+    REMDateTimePartYear = 6,
+} REMDateTimePart;
+
 @interface REMTimeHelper : NSObject
 
 + (long long) longLongFromJSONString:(NSString *)jsonDate;
@@ -23,5 +33,7 @@
 + (NSString *) formatTimeFullHour:(NSDate *)date;
 
 + (REMTimeRange *) maxTimeRangeOfTimeRanges:(NSArray *)timeRanges;
+
++ (NSDate *)add:(int)difference onPart:(REMDateTimePart)part ofDate:(NSDate *)date;
 
 @end

@@ -20,6 +20,20 @@
                ReferencedContainer = "container:Blues.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A9B1E41177B3A8B00C282A8"
+               BuildableName = "BluesPadTests.octest"
+               BlueprintName = "BluesPadTests"
+               ReferencedContainer = "container:Blues.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
