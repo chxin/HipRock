@@ -26,14 +26,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
     [REMLog bind];
     
     [REMApplicationInfo initApplicationInfo];
     
     //[REMStorage initialize];
     
-    //[REMStorage clearSessionStorage];
+    [REMStorage clearSessionStorage];
     
     Weibo *weibo = [[Weibo alloc] initWithAppKey:@"3307740263" withAppSecret:@"a934d069ddca64d9be8caed175948653"];
     [Weibo setWeibo:weibo];
