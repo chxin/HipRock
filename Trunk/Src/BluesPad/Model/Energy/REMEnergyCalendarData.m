@@ -14,13 +14,13 @@
 {
     self.calendarType = (REMCalendarType)[dictionary[@"CalendarType"] intValue];
     
-    NSArray *timeArray = dictionary[@"CalendarTimeRanges"];
+    NSArray *timeArray = dictionary[@"TimeRangeArray"];
     
     NSMutableArray *timeMArray = [[NSMutableArray alloc]initWithCapacity:timeArray.count];
     
-    for (NSDictionary *rangeDic in timeArray)
+    for (NSArray *rangeDic in timeArray)
     {
-        [timeMArray addObject:[[REMTimeRange alloc] initWithDictionary:rangeDic]];
+        [timeMArray addObject:[[REMTimeRange alloc] initWithArray:rangeDic]];
     }
     
     self.timeRanges = timeMArray;
