@@ -30,15 +30,13 @@
         hostView.hostedGraph=graph;
         self.hostView = hostView;
         
-
-        
         [self addSubview:self.hostView];
     }
     return self;
 }
 
-- (UIButton*) makeButton:(NSString*)buttonText rect:(CGRect)rect{
-    UIButton* btn = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+- (REMToggleButton*) makeButton:(NSString*)buttonText rect:(CGRect)rect{
+    REMToggleButton* btn = [REMToggleButton buttonWithType: UIButtonTypeCustom];
     [btn setFrame:rect];
     [btn setTitle:buttonText forState:UIControlStateNormal];
     [self addSubview:btn];

@@ -10,4 +10,8 @@
 
 @interface REMToggleButton : UIButton
 
+@property (nonatomic, getter=isOn) BOOL on;
+
+- (BOOL)toggle;
+
 @end
