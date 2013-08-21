@@ -26,6 +26,7 @@
 @property (nonatomic) BOOL loadingImage;
 @property (nonatomic) BOOL customImageLoaded;
 @property (nonatomic,strong) NSString *loadingImageKey;
+@property (nonatomic,strong) UIButton *settingButton;
 
 #define kBuildingImageLoadingKeyPrefix "buildingimage-%@"
 
@@ -76,7 +77,7 @@
     
     self.titleLabel=nil;
     self.bottomGradientLayer=nil;
-    
+    self.settingButton=nil;
     [self.dataView removeObserver:self forKeyPath:@"contentOffset" context:nil];
     self.dataView=nil;
 }
@@ -101,12 +102,25 @@
         
         [self initTitleView];
         
+        [self initSettingButton];
+        
         [self loadingBuildingImage];
         
     }
     
     
     
+}
+
+- (void)initSettingButton{
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleButtonTopMargin, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
+    [btn setImage:[UIImage imageNamed:@"Logout.png"] forState:UIControlStateNormal];
+    //[btn setImageEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
+    btn.titleLabel.text=@"设置";
+    [btn addTarget:self.controller action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.settingButton=btn;
+    [self addSubview:btn];
+
 }
 
 - (void)loadingBuildingImage{
@@ -493,7 +507,7 @@
      [self addSubview:self.titleBg];
      */
     
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, 0, self.frame.size.width, kBuildingTitleHeight)];
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kBuildingLeftMargin*2+kBuildingTitleButtonDimension, 0, self.frame.size.width, kBuildingTitleHeight)];
     self.titleLabel.text=self.buildingInfo.building.name;
     self.titleLabel.shadowColor=[UIColor blackColor];
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);

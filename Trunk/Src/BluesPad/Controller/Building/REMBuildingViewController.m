@@ -64,7 +64,7 @@
     self.currentIndex=0;
     self.cumulateX=0;
     
-    [self initButtons];
+    //[self initButtons];
     
     
 }
@@ -120,6 +120,10 @@
     [shareButton setImage:[UIImage imageNamed:@"weibo.png"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(shareButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:shareButton];
+}
+
+- (void)settingButtonPressed:(UIButton *)button{
+    NSLog(@"setting button pressed");
 }
 
 -(void)shareButtonTouchDown:(UIButton *)button
@@ -230,7 +234,7 @@
     
     
     
-    
+    [self initButtons];
     
 }
 

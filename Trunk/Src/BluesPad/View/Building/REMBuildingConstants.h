@@ -40,6 +40,9 @@
 
 #define kBuildingChartHeight 310
 
+#define kBuildingTitleButtonDimension 48
+#define kBuildingTitleButtonTopMargin 20
+
 @interface REMBuildingConstants : NSObject
 
 @end
