@@ -144,7 +144,13 @@
 }
 
 
+-(void)cancelAllRequest{
+    for (REMCommodityUsageModel *m in self.buildingInfo.commodityUsage) {
+        NSString *key = [NSString stringWithFormat:@"b-%@-%@",self.buildingInfo.building.buildingId,m.commodity.commodityId];
+        [REMDataAccessor cancelAccess:key];
 
+    }
+}
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {

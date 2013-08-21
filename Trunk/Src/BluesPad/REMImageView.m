@@ -28,6 +28,8 @@
 @property (nonatomic,strong) NSString *loadingImageKey;
 @property (nonatomic,strong) UIButton *settingButton;
 
+@property (nonatomic) BOOL isActive;
+
 #define kBuildingImageLoadingKeyPrefix "buildingimage-%@"
 
 
@@ -60,13 +62,19 @@
     return self;
 }
 
+- (void)moveOutOfWindow{
+    [REMDataAccessor cancelAccess:self.loadingImageKey];
+    [self.dataView cancelAllRequest];
+    self.isActive=NO;
+}
+
 - (void)reset{
     [REMDataAccessor cancelAccess:self.loadingImageKey];
     
     for (UIView *v in self.subviews) {
         [v removeFromSuperview];
     }
-    
+    self.isActive=NO;
     [self.bottomGradientLayer removeFromSuperlayer];
     
     self.imageView.image=nil;
@@ -159,7 +167,7 @@
             self.blurredImageView=nil;
             self.imageView = newView;
             self.blurredImageView=newBlurred;
-            
+            [self.controller notifyCustomImageLoaded];
         }];
         
         
@@ -261,13 +269,10 @@
 - (void)addImageDefer:(NSTimer *)timer{
     if(self.customImageLoaded == YES) return;
     
-    
-    
-    self.imageView.image=  self.defaultImage;
-    
-        
-   
-    self.blurredImageView.image=self.defaultBlurImage;
+    if(self.defaultImage!=nil){
+        self.imageView.image=  self.defaultImage;
+        self.blurredImageView.image=self.defaultBlurImage;
+    }
 }
 
 - (void)initImageView2:(CGRect)frame{
@@ -290,7 +295,7 @@
 
 }
 
-
+/*
 - (void)initImageView:(CGRect)frame
 {
     self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
@@ -311,7 +316,7 @@
     UIImageView *blurred= [self blurredImageView:self.imageView];
     self.blurredImageView=blurred;
     [self addSubview:blurred];
-}
+}*/
 
 - (void)initBottomGradientLayer
 {
@@ -406,6 +411,15 @@
     
 }
 
+-(void)checkIfRequestChartData:(UIScrollView *)scrollView{
+    if(scrollView.contentOffset.y>=0){
+        self.dataViewUp=YES;
+        if(self.isActive == YES){
+            [self requireChartData];
+        }
+    }
+}
+
 - (void)roundPositionWhenDrag:(UIScrollView *)scrollView{
     //NSLog(@"dec end:%@",NSStringFromCGPoint(scrollView.contentOffset));
     if(scrollView.contentOffset.y<0 && scrollView.contentOffset.y>-kBuildingCommodityViewTop){
@@ -416,6 +430,10 @@
             [self scrollDown];
         }
     }
+    else{
+        [self checkIfRequestChartData:scrollView];
+    }
+    
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
@@ -532,6 +550,7 @@
 
 - (void)requireChartData
 {
+    self.isActive=YES;
     if(self.dataViewUp==YES){
         [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId];
     }
@@ -558,6 +577,7 @@
 - (void)setScrollOffset:(CGFloat)offsetY
 {
    [self.dataView setContentOffset:CGPointMake(0, offsetY) animated:NO];
+    [self checkIfRequestChartData:self.dataView];
 }
 
 

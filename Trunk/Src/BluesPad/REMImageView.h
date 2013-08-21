@@ -27,7 +27,7 @@
 
 @property (nonatomic,weak) REMBuildingViewController *controller;
 
-
+- (void)moveOutOfWindow;
 
 - (id) initWithFrame:(CGRect)frame withBuildingOveralInfo:(REMBuildingOverallModel *)buildingInfo;
 

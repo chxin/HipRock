@@ -23,7 +23,7 @@
 @property (nonatomic,strong) UIImage *defaultImage;
 @property (nonatomic,strong) UIImage *defaultBlurImage;
 
-
+@property (nonatomic) NSUInteger customImageLoadedCount;
 @end
 
 
@@ -42,7 +42,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+	self.customImageLoadedCount=0;
     self.view.backgroundColor=[UIColor blackColor];
     self.currentScrollOffset=-kBuildingCommodityViewTop;
     
@@ -80,6 +80,15 @@
                 }
             }
         }
+    }
+}
+
+- (void)notifyCustomImageLoaded{
+    if(self.customImageLoadedCount==self.imageArray.count)return;
+    self.customImageLoadedCount++;
+    if(self.customImageLoadedCount == self.imageArray.count){
+        self.defaultImage=nil;
+        self.defaultBlurImage=nil;
     }
 }
 
@@ -279,7 +288,7 @@
         
         
         __block BOOL addIndex=YES;
-        
+        __block NSUInteger oldIndex=self.currentIndex;
         [UIView animateWithDuration:0.2 delay:0
                             options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
                                 if((sign<0 && self.currentIndex==self.imageArray.count-1)
@@ -319,7 +328,7 @@
                                 
                             } completion:^(BOOL ret){
                                 if(addIndex == NO) return;
-                                
+                                [self.imageArray[oldIndex] moveOutOfWindow];
                                 [self loadImageData];
                                 if(self.currentIndex<self.imageArray.count){
                                     NSNumber *willIndex= @(self.currentIndex-1*sign);
