@@ -73,9 +73,9 @@
     {
         return @"Water";
     }
-    else if([model.commodityId isEqualToNumber:@(4)] == YES)
+    else if([model.commodityId isEqualToNumber:@(12)] == YES)
     {
-        return @"water";
+        return @"PM2.5";
     }
     else if([model.commodityId isEqualToNumber:@(3)] == YES)
     {
