@@ -283,6 +283,7 @@
     [buildingCommodityInfo setValue:[NSNumber numberWithInt:1] forKey:@"relativeType"];
     REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSEnergyBuildingTimeRange parameter:buildingCommodityInfo];
     store.isAccessLocal = YES;
+    store.groupName = [NSString stringWithFormat:@"b-%lld-%lld", buildingId, commodityID];
     store.isStoreLocal = YES;
     store.maskContainer = self.view;
     store.groupName = nil;
