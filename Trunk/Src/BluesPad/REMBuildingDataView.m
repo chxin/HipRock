@@ -48,13 +48,14 @@
         btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
         
         NSString *str = [self retrieveCommodityImageName:model.commodity];
-        
-        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.png",str]] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@-pressed.png",str]] forState:UIControlStateSelected];
+        btn.imageView.contentMode=UIViewContentModeScaleToFill;
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal.png",str]] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed.png",str]] forState:UIControlStateSelected];
         if(i==0){
             [btn setSelected:YES];
         }
         [self addSubview:btn];
+        
         [btn addTarget:self action:@selector(commodityChanged:) forControlEvents:UIControlEventTouchUpInside];
         [array addObject:btn];
        
@@ -66,11 +67,11 @@
 - (NSString *)retrieveCommodityImageName:(REMCommodityModel *)model
 {
     if ([model.commodityId isEqualToNumber:@(1)] == YES) {
-        return @"elec";
+        return @"Electricity";
     }
     else if([model.commodityId isEqualToNumber:@(2)] == YES)
     {
-        return @"water";
+        return @"Water";
     }
     else if([model.commodityId isEqualToNumber:@(4)] == YES)
     {

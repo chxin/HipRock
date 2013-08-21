@@ -10,7 +10,7 @@
 
 
 #define kBuildingLeftMargin 10
-#define kBuildingCommodityButtonDimension 46
+#define kBuildingCommodityButtonDimension 52
 #define kBuildingCommodityTitleFontSize 25
 #define kBuildingTitleFontSize 60
 #define kBuildingCommodityLeftMargin 5
