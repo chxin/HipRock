@@ -21,7 +21,7 @@
 @property (nonatomic,strong) UIView *glassView;
 @property (nonatomic,strong) CAGradientLayer *bottomGradientLayer;
 
-@property (nonatomic) BOOL hasLoadedChartData;
+
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 @property (nonatomic) BOOL loadingImage;
 @property (nonatomic) BOOL customImageLoaded;
@@ -29,6 +29,8 @@
 @property (nonatomic,strong) UIButton *settingButton;
 
 @property (nonatomic) BOOL isActive;
+
+@property (nonatomic) BOOL hasLoadingChartData;
 
 #define kBuildingImageLoadingKeyPrefix "buildingimage-%@"
 
@@ -51,7 +53,6 @@
         self.dataViewUp=NO;
         self.cumulateY=0;
         self.loadingImage=NO;
-        self.hasLoadedChartData=NO;
         
         
         self.loadingImageKey=[NSString stringWithFormat:@(kBuildingImageLoadingKeyPrefix),self.buildingInfo.building.buildingId];
@@ -75,6 +76,7 @@
         [v removeFromSuperview];
     }
     self.isActive=NO;
+    self.hasLoadingChartData=NO;
     [self.bottomGradientLayer removeFromSuperlayer];
     
     self.imageView.image=nil;
@@ -416,8 +418,9 @@
 -(void)checkIfRequestChartData:(UIScrollView *)scrollView{
     if(scrollView.contentOffset.y>=0){
         self.dataViewUp=YES;
-        if(self.isActive == YES){
+        if(self.isActive == YES && self.hasLoadingChartData==NO){
             [self requireChartData];
+            self.hasLoadingChartData=YES;
         }
     }
 }
@@ -432,20 +435,30 @@
             [self scrollDown];
         }
     }
-    else{
-        [self checkIfRequestChartData:scrollView];
-    }
     
+    
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    [self checkIfRequestChartData:scrollView];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [self roundPositionWhenDrag:scrollView];
+    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
+    
     [self roundPositionWhenDrag:scrollView];
+    
+    if(scrollView.contentOffset.y>0){
+        [self checkIfRequestChartData:scrollView];
+    }
+    
 }
 
 
@@ -589,7 +602,7 @@
     
     [self scrollTo:0];
     self.dataViewUp=YES;
-    [self requireChartData];
+    
     
     
 }

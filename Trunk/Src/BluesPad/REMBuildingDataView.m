@@ -49,6 +49,8 @@
         
         NSString *str = [self retrieveCommodityImageName:model.commodity];
         btn.imageView.contentMode=UIViewContentModeScaleToFill;
+        btn.showsTouchWhenHighlighted=YES;
+        btn.adjustsImageWhenHighlighted=YES;
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal.png",str]] forState:UIControlStateNormal];
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed.png",str]] forState:UIControlStateSelected];
         if(i==0){
@@ -109,11 +111,14 @@
     int to = [button.titleLabel.text intValue];
     REMBuildingCommodityView *view=    self.commodityViewArray[to];
     view.alpha=1;
+    REMBuildingCommodityView *currentView= self.commodityViewArray[current];
+    currentView.alpha=0;
+    /*
     [UIView transitionFromView:self.commodityViewArray[current] toView:self.commodityViewArray[to] duration:0.5 options:UIViewAnimationOptionTransitionFlipFromRight completion:^(BOOL finished) {
         REMBuildingCommodityView *view1=    self.commodityViewArray[current];
         view1.alpha=0;
         
-    }];
+    }];*/
 }
 
 - (void)initCommodityView
