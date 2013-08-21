@@ -167,6 +167,8 @@
             self.blurredImageView=nil;
             self.imageView = newView;
             self.blurredImageView=newBlurred;
+            self.defaultImage=nil;
+            self.defaultBlurImage=nil;
             [self.controller notifyCustomImageLoaded];
         }];
         

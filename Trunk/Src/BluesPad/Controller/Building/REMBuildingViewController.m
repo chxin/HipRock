@@ -192,9 +192,9 @@
     self.defaultImage = [UIImage imageNamed:@"default-building.jpg"];
     
     dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    UIImage *image = self.defaultImage;
+    //UIImage *image = self.defaultImage;
     dispatch_async(concurrentQueue, ^{
-        UIImage *view = [REMImageHelper blurImage:image];
+        UIImage *view = [REMImageHelper blurImage:self.defaultImage];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.defaultBlurImage=view;
             [self initImageView];
