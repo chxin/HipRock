@@ -20,5 +20,5 @@
 
 - (IBAction)dashboardButtonPressed:(id)sender;
 - (IBAction)logoutButtonPressed:(id)sender;
-
+@property (nonatomic) CGFloat currentScrollOffset;
 @end

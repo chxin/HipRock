@@ -100,7 +100,7 @@
     }
     
    
-    [trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil];
+    //[trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil];
 }
 /*
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event

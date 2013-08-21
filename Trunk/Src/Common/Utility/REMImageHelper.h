@@ -11,4 +11,6 @@
 @interface REMImageHelper : NSObject
 
 - (void) frostedGlassImage:(UIImageView*)view image:(NSData*)imageData gradientValue:(int)gradientValue;
+
+ + (UIImage *)blurImage:(UIImage *)origImage;
 @end

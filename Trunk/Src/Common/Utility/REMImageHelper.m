@@ -17,6 +17,33 @@
     NSString* currentImagePath;
 }
 
+
++ (UIImage *)blurImage:(UIImage *)origImage
+{
+    EAGLContext *myEAGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    
+    NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
+    [options setObject: [NSNull null] forKey: kCIContextWorkingColorSpace];
+    CIContext *myContext = [CIContext contextWithEAGLContext:myEAGLContext options:options];
+    
+    CIImage *ci = [[CIImage alloc]initWithCGImage:origImage.CGImage];
+    
+    CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
+                                   keysAndValues: kCIInputImageKey,ci,@"inputRadius",@(5),nil];
+    
+    CIImage *outputImage = [filter1 outputImage];
+    
+    //NSLog(@"image size:%@",NSStringFromCGSize(imageView.image.size));
+    CGImageRef cgimg =
+    [myContext createCGImage:outputImage fromRect:CGRectMake(0, 0, origImage.size.width, origImage.size.height)];
+    
+    
+    UIImage *view= [UIImage imageWithCGImage:cgimg];
+    CGImageRelease(cgimg);
+    
+    return view;
+}
+
 - (void) frostedGlassImage:(UIImageView*)view image:(NSData*)imageData gradientValue:(int)gradientValue {
     const int maxGradient = 20;
     const int minGradient = 0;

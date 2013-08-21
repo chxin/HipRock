@@ -16,7 +16,6 @@
 @property (nonatomic) BOOL dataViewUp;
 @property (nonatomic) CGFloat cumulateY;
 @property (nonatomic,strong) UIImageView *titleBg;
-@property (nonatomic,strong) CIImage *clearImage;
 
 @property (nonatomic,strong) UIImageView *blurredImageView;
 @property (nonatomic,strong) UIView *glassView;
@@ -25,8 +24,12 @@
 @property (nonatomic) BOOL hasLoadedChartData;
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 @property (nonatomic) BOOL loadingImage;
+@property (nonatomic) BOOL customImageLoaded;
 @property (nonatomic,strong) NSString *loadingImageKey;
+
 #define kBuildingImageLoadingKeyPrefix "buildingimage-%@"
+
+
 
 @end
 
@@ -65,7 +68,6 @@
     
     [self.bottomGradientLayer removeFromSuperlayer];
     
-    self.clearImage=nil;
     self.imageView.image=nil;
     self.imageView=nil;
     self.blurredImageView.image=nil;
@@ -74,6 +76,9 @@
     
     self.titleLabel=nil;
     self.bottomGradientLayer=nil;
+    
+    [self.dataView removeObserver:self forKeyPath:@"contentOffset" context:nil];
+    self.dataView=nil;
 }
 
 - (void)didMoveToSuperview
@@ -85,8 +90,8 @@
         return;
     }
     else{
-        NSLog(@"subview count:%d",self.subviews.count);
-        [self initImageView:self.frame];
+        //NSLog(@"subview count:%d",self.subviews.count);
+        [self initImageView2:self.frame];
         
         [self initBottomGradientLayer];
         
@@ -115,6 +120,7 @@
     self.loadingImage=YES;
     [REMDataAccessor access: store success:^(NSData *data){
         if(data == nil) return;
+        self.customImageLoaded=YES;
         self.loadingImage=NO;
         
         UIImageView *newView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
@@ -133,8 +139,11 @@
         } completion:^(BOOL finished){
             [self.imageView removeFromSuperview];
             [self.blurredImageView removeFromSuperview];
+            self.imageView.image=nil;
+            self.imageView=nil;
+            self.blurredImageView.image=nil;
+            self.blurredImageView=nil;
             self.imageView = newView;
-            self.clearImage = [CIImage imageWithCGImage:self.imageView.image.CGImage];
             self.blurredImageView=newBlurred;
             
         }];
@@ -235,9 +244,37 @@
     return inflatedImage;
 }
 
+- (void)addImageDefer:(NSTimer *)timer{
+    if(self.customImageLoaded == YES) return;
+    
+    
+    
+    self.imageView.image=  self.defaultImage;
+    
+        
+   
+    self.blurredImageView.image=self.defaultBlurImage;
+}
+
+- (void)initImageView2:(CGRect)frame{
+    
+  
+    
+    NSTimer *timer = [ NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(addImageDefer:) userInfo:nil repeats:NO];
+    
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+   
+    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+    self.imageView.contentMode=UIViewContentModeScaleToFill;
+    [self addSubview:self.imageView];
+    
+    UIImageView *blurred= [[UIImageView alloc]initWithFrame:self.imageView.frame];
+    blurred.alpha=0;
+    self.blurredImageView=blurred;
+    [self addSubview:blurred];
 
 
-
+}
 
 
 - (void)initImageView:(CGRect)frame
@@ -249,15 +286,13 @@
     
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:[self retrieveBuildingImage:self.buildingInfo.building.code] ofType:@"jpg"];
-    // NSURL *fileNameAndPath = [NSURL fileURLWithPath:filePath];
+   
     NSData *image = [NSData dataWithContentsOfFile:filePath];
     
-    //CIImage *beginImage = [CIImage imageWithContentsOfURL:fileNameAndPath];
     self.imageView.image=  [UIImage imageWithData:image];
-    //self.imageView.image = [UIImage imageWithCGImage:beginImage];
+   
     [self addSubview:self.imageView];
     
-    self.clearImage = [CIImage imageWithCGImage:self.imageView.image.CGImage];
     
     UIImageView *blurred= [self blurredImageView:self.imageView];
     self.blurredImageView=blurred;
@@ -324,26 +359,7 @@
     
     dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(concurrentQueue, ^{
-        EAGLContext *myEAGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-        
-        NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
-        [options setObject: [NSNull null] forKey: kCIContextWorkingColorSpace];
-        CIContext *myContext = [CIContext contextWithEAGLContext:myEAGLContext options:options];
-        
-        CIImage *ci = [[CIImage alloc]initWithCGImage:imageView.image.CGImage];
-        
-        CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
-                                       keysAndValues: kCIInputImageKey,ci,@"inputRadius",@(5),nil];
-        
-        CIImage *outputImage = [filter1 outputImage];
-        
-        //NSLog(@"image size:%@",NSStringFromCGSize(imageView.image.size));
-        CGImageRef cgimg =
-        [myContext createCGImage:outputImage fromRect:CGRectMake(0, 0, imageView.image.size.width, imageView.image.size.height)];
-        
-        
-        UIImage *view= [UIImage imageWithCGImage:cgimg];
-        CGImageRelease(cgimg);
+        UIImage *view = [REMImageHelper blurImage:imageView.image];
         dispatch_async(dispatch_get_main_queue(), ^{
             blurred.image=view;
         });
@@ -404,6 +420,7 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
                         change:(NSDictionary *)change context:(void *)context {
     
+    self.controller.currentScrollOffset = self.dataView.contentOffset.y;
     // closer to zero, less blur applied
     [self setBlurLevel:(self.dataView.contentOffset.y + self.dataView.contentInset.top) / (2 * CGRectGetHeight(self.bounds) / 3)];
 }
@@ -501,7 +518,9 @@
 
 - (void)requireChartData
 {
-    [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId];
+    if(self.dataViewUp==YES){
+        [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId];
+    }
     
 }
 
@@ -522,6 +541,10 @@
     }
 }
 
+- (void)setScrollOffset:(CGFloat)offsetY
+{
+   [self.dataView setContentOffset:CGPointMake(0, offsetY) animated:NO];
+}
 
 
 - (void)scrollUp
@@ -530,6 +553,7 @@
     
     [self scrollTo:0];
     self.dataViewUp=YES;
+    [self requireChartData];
     
     
 }
