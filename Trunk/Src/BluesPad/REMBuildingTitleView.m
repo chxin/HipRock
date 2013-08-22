@@ -21,16 +21,20 @@
 - (void)initTitle:(NSString *)text withSize:(CGFloat)size
 {
     
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, kBuildingCommodityDetailWidth, size)];
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kBuildingCommodityDetailWidth, size)];
     self.titleLabel.text=text;
     self.titleLabel.shadowColor=[UIColor blackColor];
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);
     
     self.titleLabel.backgroundColor=[UIColor clearColor];
-    self.titleLabel.font = [UIFont fontWithName:@(kBuildingFont) size:size];
+    self.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:size];
     //self.titleLabel.font=[UIFont boldSystemFontOfSize:20];
     self.titleLabel.textColor=[UIColor whiteColor];
-    self.titleLabel.contentMode = UIViewContentModeTopLeft;
+    //NSLog(@"font:%@",[UIFont fontWithName:@(kBuildingFontSC) size:size]);
+    //CGSize expectedLabelSize = [text sizeWithFont:[UIFont fontWithName:@(kBuildingFontSC) size:size]];
+    
+    //NSLog(@"valuesize:%@",NSStringFromCGSize(expectedLabelSize));
+    //self.titleLabel.contentMode = UIViewContentModeTopLeft;
     [self addSubview:self.titleLabel];
 }
 

@@ -12,9 +12,18 @@
 typedef enum _REMDataStoreType
 {
     /*
-     * User stores
+     * AccessControl
      */
     REMDSUserValidate,
+    
+    /**
+     *	Building
+     */
+    REMDSBuildingOverallData,
+    REMDSBuildingAverageData,
+    REMDSBuildingTimeRangeData,
+    REMDSBuildingImage,
+    REMDSBuildingAirQuality,
     
     /*
      * Dashboard stores
@@ -26,18 +35,6 @@ typedef enum _REMDataStoreType
      */
     REMDSEnergyTagsTrend,
     REMDSEnergyTagsDistribute,
-    REMDSEnergyTimeSpansTrend,
-    REMDSEnergyTimeSpansDistribute,
-    REMDSEnergyCarbonTrend,
-    REMDSEnergyCarbonDistribute,
-    REMDSEnergyCostTrend,
-    REMDSEnergyCostDistribute,
-    REMDSEnergyBuildingOverall,
-    REMDSEnergyBuildingTimeRange,
-    
-    //Hierarchy
-    REMDSBuildingImage,
-    //...
     
     /*
      * Other

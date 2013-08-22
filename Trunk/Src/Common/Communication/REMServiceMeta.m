@@ -10,7 +10,7 @@
 
 @implementation REMServiceMeta
 
-const static NSString *SVC_BASE_HOST = @"10.177.122.137";
+const static NSString *SVC_BASE_HOST = @"10.177.206.79";
 const static NSString *SVC_BASE_SCHEMA = @"http";
 const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
 
@@ -27,6 +27,26 @@ const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
     if(self){
         self.url = [REMServiceMeta absoluteUrl:relativeUrl];
         self.responseType = responseType;
+    }
+    return self;
+}
+
+-(REMServiceMeta *)initWithJsonResultRelativeUrl:(NSString *)relativeUrl
+{
+    self = [super init];
+    if(self){
+        self.url = [REMServiceMeta absoluteUrl:relativeUrl];
+        self.responseType = REMServiceResponseJson;
+    }
+    return self;
+}
+
+-(REMServiceMeta *)initWithDataResultRelativeUrl:(NSString *)relativeUrl
+{
+    self = [super init];
+    if(self){
+        self.url = [REMServiceMeta absoluteUrl:relativeUrl];
+        self.responseType = REMServiceResponseImage;
     }
     return self;
 }

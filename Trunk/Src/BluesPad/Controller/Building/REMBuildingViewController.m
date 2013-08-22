@@ -169,6 +169,8 @@
         
         [self sendWeibo:@"FDFDF" withImage:image];
     }
+    
+//[Weibo.weibo signOut];
 }
 
 -(void)sendWeibo:(NSString *)content withImage:(NSData *)imageData

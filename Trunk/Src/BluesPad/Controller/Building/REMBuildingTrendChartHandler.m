@@ -281,7 +281,7 @@
     [buildingCommodityInfo setValue:[NSNumber numberWithLong: buildingId] forKey:@"buildingId"];
     [buildingCommodityInfo setValue:[NSNumber numberWithLong:commodityID] forKey:@"commodityId"];
     [buildingCommodityInfo setValue:[NSNumber numberWithInt:1] forKey:@"relativeType"];
-    REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSEnergyBuildingTimeRange parameter:buildingCommodityInfo];
+    REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSBuildingTimeRangeData parameter:buildingCommodityInfo];
     store.isAccessLocal = YES;
     store.groupName = [NSString stringWithFormat:@"b-%lld-%lld", buildingId, commodityID];
     store.isStoreLocal = YES;

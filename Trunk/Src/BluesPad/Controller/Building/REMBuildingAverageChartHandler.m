@@ -136,9 +136,27 @@
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageData :(void (^)(void))loadCompleted
 {
-    self.averageData = averageData;
-    loadCompleted();
+    NSDictionary *parameter = @{@"buildingId":[NSNumber numberWithLongLong:buildingId], @"commodityId":[NSNumber numberWithLongLong:commodityID]};
+    REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingAverageData parameter:parameter];
+    store.isAccessLocal = YES;
+    store.isStoreLocal = YES;
+    store.maskContainer = self.view;
     
+    [REMDataAccessor access:store success:^(id data) {
+        self.averageData = [[REMAverageUsageDataModel alloc] initWithDictionary:data];
+        
+        loadCompleted();
+        
+        if(self.averageData!=nil){
+            [self loadChart];
+        }
+    } error:^(NSError *error, id response) {
+        
+    }];
+}
+
+- (void)loadChart
+{
     //convert data
     [self convertData];
     

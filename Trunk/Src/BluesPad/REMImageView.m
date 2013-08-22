@@ -123,10 +123,11 @@
 }
 
 - (void)initSettingButton{
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleButtonTopMargin, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
     [btn setImage:[UIImage imageNamed:@"Logout.png"] forState:UIControlStateNormal];
     //[btn setImageEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
     btn.titleLabel.text=@"设置";
+    
     [btn addTarget:self.controller action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.settingButton=btn;
     [self addSubview:btn];
@@ -184,10 +185,6 @@
 }
 
 
-- (NSString *)retrieveBuildingImage:(NSString *)name
-{
-    return @"default-building";
-}
 
 - (UIImage *) AFImageWithDataAtScale:(NSData *)data {
     if ([UIImage instancesRespondToSelector:@selector(initWithData:scale:)]) {
@@ -324,7 +321,7 @@
 
 - (void)initBottomGradientLayer
 {
-    CGFloat height=kBuildingCommodityTotalHeight+kBuildingCommodityTotalTitleHeight+kBuildingCommodityButtonDimension+kBuildingCommodityItemGroupMargin*2;
+    CGFloat height=kBuildingCommodityTotalHeight+kBuildingCommodityTotalTitleHeight+kBuildingCommodityButtonDimension+ kBuildingCommodityBottomMargin +kBuildingCommodityTotalHeight;
     CGRect frame = CGRectMake(0, self.frame.size.height-height, 1024, height);
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -405,7 +402,7 @@
 {
     
     
-    self.dataView = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleHeight+kBuildingCommodityItemGroupMargin, self.frame.size.width, self.frame.size.height-kBuildingTitleHeight-kBuildingCommodityItemGroupMargin) withBuildingInfo:self.buildingInfo];
+    self.dataView = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleHeight, self.frame.size.width, self.frame.size.height-kBuildingTitleHeight) withBuildingInfo:self.buildingInfo];
     
     [self addSubview:self.dataView];
     
@@ -540,7 +537,7 @@
      [self addSubview:self.titleBg];
      */
     
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kBuildingLeftMargin*2+kBuildingTitleButtonDimension, 0, self.frame.size.width, kBuildingTitleHeight)];
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, kBuildingTitleTop, self.frame.size.width, kBuildingTitleFontSize)];
     self.titleLabel.text=self.buildingInfo.building.name;
     self.titleLabel.shadowColor=[UIColor blackColor];
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);
@@ -548,6 +545,7 @@
     self.titleLabel.backgroundColor=[UIColor clearColor];
     self.titleLabel.font = [UIFont fontWithName:@(kBuildingFont) size:kBuildingTitleFontSize];
     //self.titleLabel.font=[UIFont boldSystemFontOfSize:20];
+    
     self.titleLabel.textColor=[UIColor whiteColor];
     self.titleLabel.contentMode = UIViewContentModeTopLeft;
     

@@ -8,7 +8,6 @@
 
 #import "REMSqliteStorage.h"
 #import "REMApplicationInfo.h"
-#import "REMServiceUrl.h"
 #import "sqlite3.h"
 #import "REMStorage.h"
 

@@ -14,5 +14,4 @@
     #import <SystemConfiguration/SystemConfiguration.h>
     #import <MobileCoreServices/MobileCoreServices.h>
     #import "REMLog.h"
-#import "REMServiceUrl.h"
 #endif
