@@ -35,13 +35,53 @@
         
         self.view = myView;
         self.graph = (CPTXYGraph*)myView.hostView.hostedGraph;
+        
+        
+        self.graph.plotAreaFrame.masksToBorder = NO;
+        self.graph.defaultPlotSpace.allowsUserInteraction = NO;
+        
+        self.graph.plotAreaFrame.paddingTop=0.0f;
+        self.graph.plotAreaFrame.paddingRight=10.0f;
+        self.graph.plotAreaFrame.paddingBottom=10.0f;
+        self.graph.plotAreaFrame.paddingLeft=40.0f;
+        
+        CPTMutableLineStyle *hiddenLineStyle = [CPTMutableLineStyle lineStyle];
+        hiddenLineStyle.lineWidth = 0;
+        CPTMutableLineStyle *xTickStyle = [CPTMutableLineStyle lineStyle];
+        xTickStyle.lineWidth = 1;
+        xTickStyle.lineColor = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
+        
+        CPTMutableTextStyle* labelStyle = [[CPTMutableTextStyle alloc]init];
+        labelStyle.color = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
+        CPTXYAxisSet *axisSet = (CPTXYAxisSet*)self.graph.axisSet;
+        CPTXYAxis* x = axisSet.xAxis;
+        [x setLabelingPolicy:CPTAxisLabelingPolicyNone];
+        x.majorTickLineStyle = xTickStyle;
+        x.majorTickLength = 5;
+        x.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
+        x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0f];
+        x.axisLineStyle = xTickStyle;
+        CPTXYAxis* y = axisSet.yAxis;
+        y.majorTickLineStyle = hiddenLineStyle;
+        y.minorTickLineStyle = hiddenLineStyle;
+        y.axisLineStyle = xTickStyle;
+        y.labelAlignment = CPTAlignmentBottom;
+        y.labelTextStyle = labelStyle;
+        CPTMutableLineStyle *gridLineStyle=[[CPTMutableLineStyle alloc]init];
+        gridLineStyle.lineWidth=1.0f;
+        gridLineStyle.lineColor=[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];;
+        y.majorGridLineStyle = gridLineStyle;
+        x.plotSpace = self.graph.defaultPlotSpace;
+        y.plotSpace = self.graph.defaultPlotSpace;
+        
         [self viewDidLoad];
     }
     return self;
 }
 
 - (CPTGraphHostingView*) getHostView {
-    return ((REMBuildingTrendChart*)self.view).hostView;
+    return nil;
+   // return ((REMBuildingTrendChart*)self.view).hostView;
 }
 -(void)longPressedAt:(NSDate*)x {
     
@@ -83,6 +123,13 @@
     return i;
 }
 
+- (CPTAxisLabel*)makeXLabel:(NSString*)labelText  location:(int)location labelStyle:(CPTMutableTextStyle*)style {
+    CPTAxisLabel *label = [[CPTAxisLabel alloc]initWithText:labelText textStyle:style];
+    label.tickLocation= CPTDecimalFromInt(location);
+    label.offset=5;
+    return label;
+}
+
 - (void)intervalChanged:(UIButton *)button {
     REMRelativeTimeRangeType t = Today;
     REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
@@ -102,40 +149,96 @@
     
     currentSourceIndex = [self getSourceIndex:t];
     
-    CPTScatterPlot* scatterPlot = [[CPTScatterPlot alloc] initWithFrame: myView.hostView.hostedGraph.bounds];
-    CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];
+    
+    CPTMutableTextStyle* labelStyle = [[CPTMutableTextStyle alloc]init];
     labelStyle.color = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
-
     
-    CPTMutableLineStyle* scatterStyle = [CPTMutableLineStyle lineStyle];
-    scatterStyle.lineColor = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
-    scatterStyle.lineWidth = 1;
-    scatterPlot.labelTextStyle = labelStyle;
+    NSString* dateFormat = nil;
+    int countOfX = 0;    // Max x value in datasource
+    double maxY = INT64_MIN;    // Max y value of display points
+    double minY = INT64_MAX;    // Min y value of display points
     
-    CPTPlotSymbol *symbol = [CPTPlotSymbol diamondPlotSymbol];
-    symbol.lineStyle=scatterStyle;
-    symbol.fill= [CPTFill fillWithColor:scatterStyle.lineColor];
-    
-    symbol.size=CGSizeMake(7.0, 7.0);
-    scatterPlot.plotSymbol=symbol;
-    
-    scatterPlot.dataLineStyle = scatterStyle;
-    [scatterPlot addAnimation:[self columnAnimation] forKey:@"y"];
-    if (myView.hostView.hostedGraph.allPlots.count == 1) {
-        CPTPlot* p = [myView.hostView.hostedGraph plotAtIndex:0];
-        [myView.hostView.hostedGraph removePlot:p];
+    if (t == Today || t == Yesterday) {
+        dateFormat = @"%d点";
+        countOfX = 24;
+    } else if (t == ThisMonth || t == LastMonth) {
+        dateFormat = @"%d日";
+        NSDate *today = [[NSDate alloc] init];
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        if (t == LastMonth) {
+            NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+            [offsetComponents setMonth: -1];
+            today = [gregorian dateByAddingComponents:offsetComponents toDate:today options:0];
+        }
+        NSRange range = [gregorian rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:today];
+        countOfX = range.length;
+    } else {
+        dateFormat = @"%d月";
+        countOfX = 12;
     }
-    scatterPlot.delegate = self;
-    scatterPlot.dataSource = self;
+    NSMutableArray *locations = [[NSMutableArray alloc]initWithCapacity: countOfX - 1];
+    NSMutableArray *tickLocations = [[NSMutableArray alloc]initWithCapacity: countOfX - 1];
+    for (int i = 0; i < countOfX; i++) {
+        if (t == Today || t == Yesterday) {
+            [locations addObject:[self makeXLabel:[NSString stringWithFormat:dateFormat, i] location:i labelStyle:labelStyle]];
+        } else {
+            [locations addObject:[self makeXLabel:[NSString stringWithFormat:dateFormat, i + 1] location:i labelStyle:labelStyle]];
+        }
+        [tickLocations addObject:[NSNumber numberWithInt:i]];
+    }
     
+    NSMutableArray* data = [[self.datasource objectAtIndex:currentSourceIndex] objectForKey:@"data"];
+    for (int j = 0; j < data.count; j++) {
+        float y = [[data[j] objectForKey:@"y" ] floatValue];
+        maxY = MAX(maxY, y);
+        minY = MIN(minY, y);
+    }
     
-    [myView.hostView.hostedGraph addPlot:scatterPlot];
+    CPTXYAxisSet *axisSet = (CPTXYAxisSet*)self.graph.axisSet;
+    CPTXYAxis* x = axisSet.xAxis;
+    CPTXYAxis* y = axisSet.yAxis;
+    CPTXYPlotSpace * plotSpace = (CPTXYPlotSpace *)self.graph.defaultPlotSpace;
     
-    [REMWidgetAxisHelper decorateBuildingTrendAxisSet:(CPTXYGraph*)myView.hostView.hostedGraph dataSource:self.datasource interval:t seriesIndex:currentSourceIndex];
-    [scatterPlot reloadData];
-    [myView.hostView.hostedGraph reloadData];
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(countOfX - 1)];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(minY) length:CPTDecimalFromFloat(maxY - minY)];
+    x.axisLabels = [NSSet setWithArray:locations];
+    x.majorTickLocations=[NSSet setWithArray:tickLocations];
     
-    //yAxis.majorGridLines
+    y.majorIntervalLength = CPTDecimalFromFloat((maxY - minY) / 5);
+    
+    CPTScatterPlot* scatterPlot = nil;
+    if (self.graph.allPlots.count == 0) {
+        scatterPlot = [[CPTScatterPlot alloc] initWithFrame: myView.hostView.hostedGraph.bounds];
+        
+        CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];
+        labelStyle.color = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
+        CPTMutableLineStyle* scatterStyle = [CPTMutableLineStyle lineStyle];
+        scatterStyle.lineColor = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
+        scatterStyle.lineWidth = 1;
+        scatterPlot.labelTextStyle = labelStyle;
+        
+        CPTPlotSymbol *symbol = [CPTPlotSymbol diamondPlotSymbol];
+        symbol.lineStyle=scatterStyle;
+        symbol.fill= [CPTFill fillWithColor:scatterStyle.lineColor];
+        
+        symbol.size=CGSizeMake(7.0, 7.0);
+        scatterPlot.plotSymbol=symbol;
+        
+        scatterPlot.dataLineStyle = scatterStyle;
+        [scatterPlot addAnimation:[self columnAnimation] forKey:@"y"];
+        if (myView.hostView.hostedGraph.allPlots.count == 1) {
+            CPTPlot* p = [myView.hostView.hostedGraph plotAtIndex:0];
+            [myView.hostView.hostedGraph removePlot:p];
+        }
+        scatterPlot.delegate = self;
+        scatterPlot.dataSource = self;
+        
+        [myView.hostView.hostedGraph addPlot:scatterPlot];
+    } else {
+        scatterPlot = [self.graph.allPlots objectAtIndex:0];
+        [scatterPlot reloadData];
+        [myView.hostView.hostedGraph reloadData];
+    }
 }
 
 - (void)drawToolTip: (NSInteger)index {
@@ -158,7 +261,6 @@
     //lineAnno.displacement = CPTPointMake(0.0, plot.labelOffset);
     
     lineAnno.displacement = CGPointMake(0, (plot.graph.frame.size.height - plot.frame.size.height) / 2 - 15);
-  //  plot.frame.size.height
     CPTLayer* lineLayer = [[CPTLayer alloc]initWithFrame:CGRectMake(0, 0, 1, plot.frame.size.height)];
     lineLayer.backgroundColor = [UIColor whiteColor].CGColor;
     lineAnno.contentLayer = lineLayer;
@@ -181,6 +283,7 @@
     [buildingCommodityInfo setValue:[NSNumber numberWithInt:1] forKey:@"relativeType"];
     REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSEnergyBuildingTimeRange parameter:buildingCommodityInfo];
     store.isAccessLocal = YES;
+    store.groupName = [NSString stringWithFormat:@"b-%lld-%lld", buildingId, commodityID];
     store.isStoreLocal = YES;
     store.maskContainer = self.view;
     store.groupName = nil;
@@ -263,7 +366,8 @@
     NSDictionary *item=data[idx];
     if (fieldEnum == CPTPieChartFieldSliceWidth) {
         NSDate* date = [item objectForKey:@"x"];
-        return [NSNumber numberWithDouble:[date timeIntervalSince1970]];
+//        return [NSNumber numberWithDouble:[date timeIntervalSince1970]];
+        return [NSNumber numberWithInteger: idx];
     }
     else
     {

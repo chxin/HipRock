@@ -16,9 +16,18 @@
 #import <Accelerate/Accelerate.h>
 #import "REMDataAccessor.h"
 #import "REMDataStore.h"    
+#import "REMBuildingViewController.h"
+
+@class REMBuildingViewController;
 
 @interface REMImageView : UIView <UIGestureRecognizerDelegate,UIScrollViewDelegate>
 
+@property (nonatomic,weak) UIImage *defaultImage;
+@property (nonatomic,weak) UIImage *defaultBlurImage;
+
+@property (nonatomic,weak) REMBuildingViewController *controller;
+
+- (void)moveOutOfWindow;
 
 - (id) initWithFrame:(CGRect)frame withBuildingOveralInfo:(REMBuildingOverallModel *)buildingInfo;
 
@@ -26,6 +35,7 @@
 
 - (void)scrollDown;
 
+- (void)setScrollOffset:(CGFloat)offsetY;
 
 - (void)tapthis;
 

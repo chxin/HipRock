@@ -19,5 +19,7 @@
 
 - (void)requireChartDataWithBuildingId:(NSNumber *)buildingId;
 
+- (void)cancelAllRequest;
+
 
 @end

@@ -16,9 +16,14 @@
 @property (nonatomic) NSUInteger currentIndex;
 @property (nonatomic,strong) NSArray *originCenterXArray;
 @property (nonatomic) CGFloat cumulateX;
-@property (nonatomic) BOOL inScrollY;
+
 @property (nonatomic,strong) NSMutableDictionary *imageViewStatus;
 @property (nonatomic,strong) UIButton *logoutButton;
+
+@property (nonatomic,strong) UIImage *defaultImage;
+@property (nonatomic,strong) UIImage *defaultBlurImage;
+
+@property (nonatomic) NSUInteger customImageLoadedCount;
 @end
 
 
@@ -37,12 +42,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+	self.customImageLoadedCount=0;
     self.view.backgroundColor=[UIColor blackColor];
+    self.currentScrollOffset=-kBuildingCommodityViewTop;
+    
+    [self addObserver:self forKeyPath:@"currentScrollOffset" options:0 context:nil];
     
     if(self.buildingOverallArray.count>0){
     
-        [self initImageView];
+        [self blurredImageView];
         
         
         UIPanGestureRecognizer *rec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
@@ -56,9 +64,32 @@
     self.currentIndex=0;
     self.cumulateX=0;
     
-    [self initButtons];
+    //[self initButtons];
     
     
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"currentScrollOffset"] == YES){
+        for (int i=0; i<self.imageArray.count; ++i) {
+            if(i!= self.currentIndex){
+                if([[self.imageViewStatus objectForKey:@(i)] isEqualToNumber:@(1)] == YES){
+                    REMImageView *view=self.imageArray[i];
+                    [view setScrollOffset:self.currentScrollOffset];
+                }
+            }
+        }
+    }
+}
+
+- (void)notifyCustomImageLoaded{
+    if(self.customImageLoadedCount==self.imageArray.count)return;
+    self.customImageLoadedCount++;
+    if(self.customImageLoadedCount == self.imageArray.count){
+        self.defaultImage=nil;
+        self.defaultBlurImage=nil;
+    }
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
@@ -98,6 +129,10 @@
     [shareButton setImage:[UIImage imageNamed:@"weibo.png"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(shareButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:shareButton];
+}
+
+- (void)settingButtonPressed:(UIButton *)button{
+    NSLog(@"setting button pressed");
 }
 
 -(void)shareButtonTouchDown:(UIButton *)button
@@ -154,15 +189,35 @@
     
 }
 
+- (void)blurredImageView
+{
+    self.defaultImage = [UIImage imageNamed:@"default-building.jpg"];
+    
+    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //UIImage *image = self.defaultImage;
+    dispatch_async(concurrentQueue, ^{
+        UIImage *view = [REMImageHelper blurImage:self.defaultImage];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.defaultBlurImage=view;
+            [self initImageView];
+        });
+    });
+    
+}
+
 - (void)initImageView
 {
     int i=0;
     self.imageViewStatus = [[NSMutableDictionary alloc]initWithCapacity:self.buildingOverallArray.count];
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:self.buildingOverallArray.count];
+    
+    
     for (;i<self.buildingOverallArray.count;++i) {
         REMBuildingOverallModel *model = self.buildingOverallArray[i];
-        REMImageView *imageView = [[REMImageView alloc]initWithFrame:CGRectMake((kImageWidth+kImageMargin)*i, 0, kImageWidth, kImageHeight) withBuildingOveralInfo:model];
-        //[self.view addSubview:imageView];
+        REMImageView *imageView = [[REMImageView alloc]initWithFrame:CGRectMake((kImageWidth+kImageMargin)*i, 0, kImageWidth, kImageHeight) withBuildingOveralInfo:model ];
+        imageView.defaultImage=self.defaultImage;
+        imageView.defaultBlurImage=self.defaultBlurImage;
+        imageView.controller=self;
         if(i==0 || i==1){
             [self.view addSubview:imageView];
             [self.imageViewStatus setObject:@(1) forKey:@(i)];
@@ -188,6 +243,10 @@
     
     [self loadImageData];
     
+    
+    
+    [self initButtons];
+    
 }
 
 
@@ -201,8 +260,7 @@
 
 - (void) swipethis:(UIPanGestureRecognizer *)pan
 {
-    //NSLog(@"swipethis");
-    if(self.inScrollY == YES) return;
+
     CGPoint trans= [pan translationInView:self.view];
     
    // NSLog(@"state:%d",pan.state);
@@ -232,7 +290,7 @@
         
         
         __block BOOL addIndex=YES;
-        
+        __block NSUInteger oldIndex=self.currentIndex;
         [UIView animateWithDuration:0.2 delay:0
                             options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
                                 if((sign<0 && self.currentIndex==self.imageArray.count-1)
@@ -272,13 +330,15 @@
                                 
                             } completion:^(BOOL ret){
                                 if(addIndex == NO) return;
-                                
+                                [self.imageArray[oldIndex] moveOutOfWindow];
                                 [self loadImageData];
                                 if(self.currentIndex<self.imageArray.count){
                                     NSNumber *willIndex= @(self.currentIndex-1*sign);
                                     NSNumber *status = self.imageViewStatus[willIndex];
                                     if([status isEqualToNumber:@(0)] ==YES){
-                                        [self.view insertSubview:self.imageArray[willIndex.intValue] belowSubview:self.logoutButton];
+                                        REMImageView *nextView= self.imageArray[willIndex.intValue];
+                                        [self.view insertSubview: nextView belowSubview:self.logoutButton];
+                                        [nextView setScrollOffset:self.currentScrollOffset];
                                         self.imageViewStatus[willIndex]=@(1);
                                         
                                     }
@@ -327,10 +387,7 @@
 
 - (void)panthis:(UIPanGestureRecognizer *)pan
 {
-    
-    
-        [self swipethis:pan];
-
+    [self swipethis:pan];
 }
 
 

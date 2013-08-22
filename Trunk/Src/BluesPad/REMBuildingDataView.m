@@ -48,13 +48,16 @@
         btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
         
         NSString *str = [self retrieveCommodityImageName:model.commodity];
-        
-        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.png",str]] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@-pressed.png",str]] forState:UIControlStateSelected];
+        btn.imageView.contentMode=UIViewContentModeScaleToFill;
+        btn.showsTouchWhenHighlighted=YES;
+        btn.adjustsImageWhenHighlighted=YES;
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal.png",str]] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed.png",str]] forState:UIControlStateSelected];
         if(i==0){
             [btn setSelected:YES];
         }
         [self addSubview:btn];
+        
         [btn addTarget:self action:@selector(commodityChanged:) forControlEvents:UIControlEventTouchUpInside];
         [array addObject:btn];
        
@@ -66,15 +69,15 @@
 - (NSString *)retrieveCommodityImageName:(REMCommodityModel *)model
 {
     if ([model.commodityId isEqualToNumber:@(1)] == YES) {
-        return @"elec";
+        return @"Electricity";
     }
     else if([model.commodityId isEqualToNumber:@(2)] == YES)
     {
-        return @"water";
+        return @"Water";
     }
-    else if([model.commodityId isEqualToNumber:@(4)] == YES)
+    else if([model.commodityId isEqualToNumber:@(12)] == YES)
     {
-        return @"water";
+        return @"PM2.5";
     }
     else if([model.commodityId isEqualToNumber:@(3)] == YES)
     {
@@ -108,11 +111,14 @@
     int to = [button.titleLabel.text intValue];
     REMBuildingCommodityView *view=    self.commodityViewArray[to];
     view.alpha=1;
+    REMBuildingCommodityView *currentView= self.commodityViewArray[current];
+    currentView.alpha=0;
+    /*
     [UIView transitionFromView:self.commodityViewArray[current] toView:self.commodityViewArray[to] duration:0.5 options:UIViewAnimationOptionTransitionFlipFromRight completion:^(BOOL finished) {
         REMBuildingCommodityView *view1=    self.commodityViewArray[current];
         view1.alpha=0;
         
-    }];
+    }];*/
 }
 
 - (void)initCommodityView
@@ -144,7 +150,13 @@
 }
 
 
+-(void)cancelAllRequest{
+    for (REMCommodityUsageModel *m in self.buildingInfo.commodityUsage) {
+        NSString *key = [NSString stringWithFormat:@"b-%@-%@",self.buildingInfo.building.buildingId,m.commodity.commodityId];
+        [REMDataAccessor cancelAccess:key];
 
+    }
+}
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
