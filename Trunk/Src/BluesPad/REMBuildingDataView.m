@@ -127,7 +127,7 @@
     int i=0;
     for (;i<self.buildingInfo.commodityUsage.count;++i ) {
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
-        REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityItemGroupMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, 800) withCommodityInfo:model];
+        REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, 800) withCommodityInfo:model];
         
         if(i!=0){
             view.alpha=0;

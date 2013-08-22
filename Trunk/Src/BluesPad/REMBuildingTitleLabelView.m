@@ -19,7 +19,7 @@
 @implementation REMBuildingTitleLabelView
 
 - (id)initWithFrame:(CGRect)frame
-           withData:(REMEnergyUsageDataModel *)data withTitle:(NSString *)title andTitleFontSize:(CGFloat)size
+           withData:(REMEnergyUsageDataModel *)data withTitle:(NSString *)title andTitleFontSize:(CGFloat)size withTitleMargin:(CGFloat)margin
             withValueFontSize:(CGFloat)valueSize withUomFontSize:(CGFloat) uomSize;
 {
     self = [super initWithFrame:frame];
@@ -27,7 +27,7 @@
     {
         self.backgroundColor=[UIColor clearColor];
         [self initTitle:title withSize:size];
-        [self initTextLabel:data withTitleSize:size withValueFontSize:valueSize withUomFontSize:uomSize];
+        [self initTextLabel:data withTitleSize:size withTitleMargin:margin withValueFontSize:valueSize withUomFontSize:uomSize];
     }
     
     return self;
@@ -35,9 +35,10 @@
 
 
 
-- (void)initTextLabel:(REMEnergyUsageDataModel *)data withTitleSize:(CGFloat)titleSize withValueFontSize:(CGFloat)valueSize withUomFontSize:(CGFloat) uomSize
+- (void)initTextLabel:(REMEnergyUsageDataModel *)data withTitleSize:(CGFloat)titleSize withTitleMargin:(CGFloat)margin withValueFontSize:(CGFloat)valueSize withUomFontSize:(CGFloat) uomSize
 {
-    self.textLabel = [[REMNumberLabel alloc] initWithFrame:CGRectMake(0, titleSize, 1024, valueSize)];
+    int marginTop=titleSize+margin ;
+    self.textLabel = [[REMNumberLabel alloc] initWithFrame:CGRectMake(0, marginTop, 1024, valueSize)];
     self.textLabel.fontSize=@(valueSize);
     self.textLabel.textColor=[UIColor whiteColor];
     self.textLabel.backgroundColor=[UIColor clearColor];
@@ -47,10 +48,10 @@
 
     //NSLog(@"font:%@",[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:valueSize]);
     
-    CGSize expectedLabelSize = [self.textLabel.text sizeWithFont:[UIFont fontWithName:@(kBuildingFont) size:valueSize]];
+    CGSize expectedLabelSize = [self.textLabel.text sizeWithFont:[UIFont fontWithName:@(kBuildingFontLight) size:valueSize]];
     
     //NSLog(@"valuesize:%f",valueSize);
-    self.uomLabel = [[UILabel alloc]initWithFrame:CGRectMake(expectedLabelSize.width+5, titleSize+expectedLabelSize.height-valueSize, 200, valueSize)];
+    self.uomLabel = [[UILabel alloc]initWithFrame:CGRectMake(expectedLabelSize.width+5, marginTop+expectedLabelSize.height-valueSize, 200, valueSize)];
     self.uomLabel.font=[UIFont fontWithName:@(kBuildingFontLight) size:uomSize];
     self.uomLabel.backgroundColor=[UIColor clearColor];
     //self.uomLabel.contentHorizontalAlignment = UIControlContentVerticalAlignmentBottom;

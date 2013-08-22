@@ -30,7 +30,11 @@
     self.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:size];
     //self.titleLabel.font=[UIFont boldSystemFontOfSize:20];
     self.titleLabel.textColor=[UIColor whiteColor];
-    self.titleLabel.contentMode = UIViewContentModeTopLeft;
+    //NSLog(@"font:%@",[UIFont fontWithName:@(kBuildingFontSC) size:size]);
+    //CGSize expectedLabelSize = [text sizeWithFont:[UIFont fontWithName:@(kBuildingFontSC) size:size]];
+    
+    //NSLog(@"valuesize:%@",NSStringFromCGSize(expectedLabelSize));
+    //self.titleLabel.contentMode = UIViewContentModeTopLeft;
     [self addSubview:self.titleLabel];
 }
 

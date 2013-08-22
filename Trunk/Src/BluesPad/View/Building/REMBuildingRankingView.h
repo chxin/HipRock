@@ -16,6 +16,6 @@
 
 - (id)initWithFrame:(CGRect)frame
            withData:(REMRankingDataModel *)data
-          withTitle:(NSString *)title andTitleFontSize:(CGFloat)size;
+          withTitle:(NSString *)title andTitleFontSize:(CGFloat)size  withTitleMargin:(CGFloat)margin;
 
 @end
