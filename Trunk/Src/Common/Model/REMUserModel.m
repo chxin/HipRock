@@ -27,6 +27,7 @@ static NSString *kCurrentUserCacheKey = @"CurrentUser";
     self.title=[dictionary[@"Title"] intValue];
     self.userTypeName=dictionary[@"UserTypeName"];
     self.version = dictionary[@"Version"];
+    self.spId = [dictionary[@"SpId"] longLongValue];
     
     NSArray *array = (NSArray *)dictionary[@"Customers"];
     NSMutableArray *customers = [[NSMutableArray alloc] initWithCapacity:array.count];

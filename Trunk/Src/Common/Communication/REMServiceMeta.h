@@ -17,6 +17,8 @@ typedef enum _REMServiceResponseType
 @interface REMServiceMeta : NSObject
 
 -(REMServiceMeta *)initWithRelativeUrl:(NSString *)relativeUrl andResponseType:(REMServiceResponseType)responseType;
+-(REMServiceMeta *)initWithJsonResultRelativeUrl:(NSString *)relativeUrl;
+-(REMServiceMeta *)initWithDataResultRelativeUrl:(NSString *)relativeUrl;
 
 @property (nonatomic) REMServiceResponseType responseType;
 @property (nonatomic,strong) NSString* url;

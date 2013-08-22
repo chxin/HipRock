@@ -7,7 +7,6 @@
 //
 
 #import "REMDataStore.h"
-#import "REMServiceUrl.h"
 #import "REMServiceMeta.h"
 
 
@@ -23,7 +22,7 @@ static NSDictionary *serviceMap = nil;
     store.name = name;
     store.parameter = parameter;
     
-    store.serviceMeta = [[REMDataStore serviceMap] objectForKey:[REMDataStore numberFromInt:name]];
+    store.serviceMeta = [[REMDataStore serviceMap] objectForKey:[NSNumber numberWithInt:name]];
     
     return store;
 }
@@ -49,8 +48,8 @@ static NSDictionary *serviceMap = nil;
     {
         energyStoreMap =
         @{
-          @"energy.Energy": [[NSNumber alloc] initWithInt:REMDSEnergyTagsTrend],
-          @"energy.Distribution": [[NSNumber alloc] initWithInt:REMDSEnergyTagsDistribute],
+          @"energy.Energy": [NSNumber numberWithInt:REMDSEnergyTagsTrend],
+          @"energy.Distribution": [NSNumber numberWithInt:REMDSEnergyTagsDistribute],
         };
     }
     
@@ -63,31 +62,38 @@ static NSDictionary *serviceMap = nil;
     {
         serviceMap =
         @{
-          [REMDataStore numberFromInt:REMDSUserValidate] : [[REMServiceMeta alloc] initWithRelativeUrl:@"API/AccessControl.svc/ValidateUser" andResponseType:REMServiceResponseJson],
+          /**
+           *	AccessControl
+           */
+          [NSNumber numberWithInt:REMDSUserValidate] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl :@"API/AccessControl.svc/ValidateUser"],
           
-          [REMDataStore numberFromInt:REMDSDashboardFavorite] : [[REMServiceMeta alloc] initWithRelativeUrl:@"API/Dashboard.svc/GetFavoriteDashboards" andResponseType:REMServiceResponseJson],
+          /**
+           *	Energy
+           */
+          [NSNumber numberWithInt:REMDSEnergyTagsTrend] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetTagsData"],
+          [NSNumber numberWithInt:REMDSEnergyTagsDistribute] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/AggregateTagsData"],
           
-          [REMDataStore numberFromInt:REMDSEnergyTagsTrend] : [[REMServiceMeta alloc] initWithRelativeUrl:@"API/Energy.svc/GetTagsData" andResponseType:REMServiceResponseJson],
+          /**
+           *	Building
+           */
+          [NSNumber numberWithInt:REMDSEnergyBuildingOverall] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Building.svc/GetBuildingOverallData"],
+          [NSNumber numberWithInt:REMDSEnergyBuildingTimeRange] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Building.svc/GetBuildingTimeRangeData"],
+          [NSNumber numberWithInt:REMDSBuildingImage] : [[REMServiceMeta alloc] initWithDataResultRelativeUrl:@"API/Building.svc/GetBuildingPicture"],
           
-          [REMDataStore numberFromInt:REMDSEnergyTagsDistribute] : [[REMServiceMeta alloc] initWithRelativeUrl:@"API/Energy.svc/AggregateTagsData" andResponseType:REMServiceResponseJson],
           
-          [REMDataStore numberFromInt:REMDSEnergyBuildingOverall] : [[REMServiceMeta alloc] initWithRelativeUrl:@"API/Energy.svc/GetBuildingOverallData" andResponseType:REMServiceResponseJson],
+          /**
+           *	Dashboard
+           */
+          [NSNumber numberWithInt:REMDSDashboardFavorite] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Dashboard.svc/GetFavoriteDashboards"],
           
-          [REMDataStore numberFromInt:REMDSEnergyBuildingTimeRange] : [[REMServiceMeta alloc] initWithRelativeUrl:@"API/Energy.svc/GetBuildingTimeRangeData" andResponseType:REMServiceResponseJson],
-          
-          [REMDataStore numberFromInt:REMDSLogSend] : [[REMServiceMeta alloc] initWithRelativeUrl:@"API/Log.svc/SendLog" andResponseType:REMServiceResponseJson],
-          
-          [REMDataStore numberFromInt:REMDSBuildingImage] : [[REMServiceMeta alloc] initWithRelativeUrl:@"API/Hierarchy.svc/GetBuildingPicture" andResponseType:REMServiceResponseImage],
+          /**
+           *	Other
+           */
+          [NSNumber numberWithInt:REMDSLogSend] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Log.svc/SendLog"],
         };
     }
     
     return serviceMap;
-}
-
-
-+ (NSNumber *) numberFromInt: (int) intValue
-{
-    return [[NSNumber alloc] initWithInt:intValue];
 }
 
 

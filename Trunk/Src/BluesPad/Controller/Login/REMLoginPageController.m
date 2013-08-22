@@ -120,21 +120,19 @@
             
             NSArray *customers = (NSArray *)([REMApplicationContext instance].currentUser.customers);
             
-            for (int i=0; i<customers.count; i++)
-            {
-                REMCustomerModel *customer = customers[i];
-                if([customer.customerId longLongValue] == 344)
-                {
-                    [[REMApplicationContext instance] setCurrentCustomer:customer];
-                    break;
-                }
+            if(customers.count<=0){
+                [self.userNameErrorLabel setHidden:NO];
+                [self.userNameErrorLabel setText : @"登录失败，该用户未绑定客户" ];
+            }
+            if(customers.count == 1){
+                [[REMApplicationContext instance] setCurrentCustomer:customers[0]];
+            }
+            else{
+                [[REMApplicationContext instance] setCurrentCustomer:[self filterRequiredCustomer:customers]];
             }
             
             [[REMApplicationContext instance].currentUser save];
             [[REMApplicationContext instance].currentCustomer save];
-            
-            //load building overall info
-            
             
             [self.loginButton setTitleForAllStatus:@"正在加载数据.."];
             [self.loginCarouselController.splashScreenController showBuildingView:^{
@@ -165,6 +163,20 @@
     [self.loginButton stopIndicator];
     
     [REMAlertHelper alert:error.description];
+}
+
+-(REMCustomerModel *)filterRequiredCustomer:(NSArray *)customers
+{
+    for (int i=0; i<customers.count; i++)
+    {
+        if([((REMCustomerModel *)customers[i]).code isEqualToString:@"SOHOChina"])
+        {
+            return customers[i];
+            break;
+        }
+    }
+    
+    return nil;
 }
 
 #pragma mark - uitextfield delegate

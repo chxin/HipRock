@@ -31,4 +31,24 @@ const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
     return self;
 }
 
+-(REMServiceMeta *)initWithJsonResultRelativeUrl:(NSString *)relativeUrl
+{
+    self = [super init];
+    if(self){
+        self.url = [REMServiceMeta absoluteUrl:relativeUrl];
+        self.responseType = REMServiceResponseJson;
+    }
+    return self;
+}
+
+-(REMServiceMeta *)initWithDataResultRelativeUrl:(NSString *)relativeUrl
+{
+    self = [super init];
+    if(self){
+        self.url = [REMServiceMeta absoluteUrl:relativeUrl];
+        self.responseType = REMServiceResponseImage;
+    }
+    return self;
+}
+
 @end

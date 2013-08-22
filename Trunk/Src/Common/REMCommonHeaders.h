@@ -8,7 +8,6 @@
 #import "REMApplicationContext.h"
 #import "REMApplicationInfo.h"
 #import "REMEnergyConstants.h"
-#import "REMServiceUrl.h"
 
 //DataAccess
 #import "REMDataAccessor.h"
