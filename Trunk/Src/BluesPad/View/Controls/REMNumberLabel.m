@@ -42,7 +42,7 @@
         }
     }
     
-    UIFont *customFont = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:fontSize];
+    UIFont *customFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:fontSize];
     self.font = customFont;
     
     [super drawRect:rect];
