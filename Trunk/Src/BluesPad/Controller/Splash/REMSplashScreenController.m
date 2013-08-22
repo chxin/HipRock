@@ -99,7 +99,7 @@
 - (void)showBuildingView:(void (^)(void))loadCompleted
 {
     NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
-    REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSEnergyBuildingOverall parameter:parameter];
+    REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSBuildingOverallData parameter:parameter];
     buildingStore.isStoreLocal = YES;
     buildingStore.isAccessLocal = YES;
     buildingStore.groupName = nil;

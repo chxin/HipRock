@@ -2807,7 +2807,7 @@
 		7A9B1E16177B3A6000C282A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 			};
 			name = Debug;
@@ -2815,7 +2815,7 @@
 		7A9B1E17177B3A6000C282A8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				VALID_ARCHS = "i386 x86_64 armv7s armv7";
 			};
@@ -3000,7 +3000,7 @@
 		B41ECBA017B87D3A00758607 /* DailyBuild */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				VALID_ARCHS = "armv7s armv7";
 			};
