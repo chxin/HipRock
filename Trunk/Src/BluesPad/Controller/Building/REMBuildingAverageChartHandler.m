@@ -136,6 +136,9 @@
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageData :(void (^)(void))loadCompleted
 {
+    if(averageData == nil)
+        return;
+    
     self.averageData = averageData;
     loadCompleted();
     

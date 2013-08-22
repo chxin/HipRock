@@ -113,6 +113,8 @@
             [self.buildingOveralls addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
         }
         
+        //test air quality interface
+        
         loadCompleted();
         
         [self performSegueWithIdentifier:@"splashToBuildingSegue" sender:self];
@@ -142,5 +144,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 @end

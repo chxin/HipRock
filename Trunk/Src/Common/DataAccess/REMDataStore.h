@@ -22,6 +22,7 @@ typedef enum _REMDataStoreType
     REMDSEnergyBuildingOverall,
     REMDSEnergyBuildingTimeRange,
     REMDSBuildingImage,
+    REMDSBuildingAirQuality,
     
     /*
      * Dashboard stores
