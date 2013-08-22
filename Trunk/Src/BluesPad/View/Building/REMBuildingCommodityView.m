@@ -33,7 +33,7 @@ typedef void(^SuccessCallback)(BOOL success);
     if (self) {
         
         self.commodityInfo=commodityInfo;
-        self.successCounter=0;
+        //self.successCounter=0;
         [self initTotalValue];
         [self initDetailValue];
         [self initChartContainer];
@@ -86,7 +86,7 @@ typedef void(^SuccessCallback)(BOOL success);
 }
 
 - (void)sucessRequest{
-    self.successCounter++;
+    self.successCounter+=1;
     if(self.successCounter == self.chartViewArray.count){
         self.successBlock(YES);
         self.successBlock=nil;
