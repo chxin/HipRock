@@ -324,7 +324,7 @@
 
 - (void)initBottomGradientLayer
 {
-    CGFloat height=kBuildingCommodityTotalHeight+kBuildingCommodityTotalTitleHeight+kBuildingCommodityButtonDimension+kBuildingCommodityItemGroupMargin*2;
+    CGFloat height=kBuildingCommodityTotalHeight+kBuildingCommodityTotalTitleHeight+kBuildingCommodityButtonDimension+kBuildingCommodityItemGroupMargin+kBuildingCommodityTotalHeight;
     CGRect frame = CGRectMake(0, self.frame.size.height-height, 1024, height);
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -540,7 +540,7 @@
      [self addSubview:self.titleBg];
      */
     
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kBuildingLeftMargin*2+kBuildingTitleButtonDimension, 0, self.frame.size.width, kBuildingTitleHeight)];
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+kBuildingCommodityItemGroupMargin+kBuildingTitleButtonDimension, 0, self.frame.size.width, kBuildingTitleHeight)];
     self.titleLabel.text=self.buildingInfo.building.name;
     self.titleLabel.shadowColor=[UIColor blackColor];
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);

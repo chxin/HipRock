@@ -9,25 +9,27 @@
 #import <Foundation/Foundation.h>
 
 
-#define kBuildingLeftMargin 10
+#define kBuildingLeftMargin 28
 #define kBuildingCommodityButtonDimension 52
 #define kBuildingCommodityTitleFontSize 16
-#define kBuildingTitleFontSize 40
+#define kBuildingTitleFontSize 44
 #define kBuildingCommodityLeftMargin 5
 #define kBuildingCommodityItemGroupMargin 10
 #define kBuildingCommodityItemMargin 5
-#define kBuildingCommodityTotalValueFontSize 72
-#define kBuildingCommodityTotalUomFontSize 20
-#define kBuildingCommodityViewTop 470
-#define kBuildingCommodityDetailValueFontSize 32
-#define kBuildingCommodityDetailUomFontSize 16
+#define kBuildingCommodityTotalValueFontSize 88
+#define kBuildingCommodityTotalUomFontSize 25
+#define kBuildingCommodityViewTop 495
+#define kBuildingCommodityDetailValueFontSize 42
+#define kBuildingCommodityDetailUomFontSize 19
 #define kBuildingCommodityDetailWidth 300
-#define kBuildingCommodityDetailHeight 48
+#define kBuildingCommodityDetailHeight 65
 #define kBuildingCommodityTotalHeight 72
-#define kBuildingCommodityTotalTitleHeight 16
+#define kBuildingCommodityTotalTitleHeight 18
 #define kBuildingTitleHeight 80
 #define kBuildingFont "HelveticaNeue-UltraLight"
+#define kBuildingFontLight "HelveticaNeue-Light"
 #define kBuildingFontSC "Heiti SC"
+#define kBuildingTotalInnerMargin 5
 
 #define kScrollVelocityMax 1000
 #define kScrollVelocityMedium 400
