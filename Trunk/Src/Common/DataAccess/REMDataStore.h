@@ -19,9 +19,11 @@ typedef enum _REMDataStoreType
     /**
      *	Building
      */
-    REMDSEnergyBuildingOverall,
-    REMDSEnergyBuildingTimeRange,
+    REMDSBuildingOverallData,
+    REMDSBuildingAverageData,
+    REMDSBuildingTimeRangeData,
     REMDSBuildingImage,
+    REMDSBuildingAirQuality,
     
     /*
      * Dashboard stores

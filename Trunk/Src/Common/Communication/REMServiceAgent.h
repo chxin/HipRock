@@ -15,6 +15,7 @@ typedef void(^REMServiceCallProgressBlock)(NSUInteger bytesRead, long long total
 
 @interface REMServiceAgent : NSObject
 
+
 + (void) call: (REMServiceMeta *) service withBody:(id)body mask:(UIView *) maskContainer group:(NSString *)groupName store:(BOOL) isStore success:(REMServiceCallSuccessBlock)success error:(REMServiceCallErrorBlock)error progress:(REMServiceCallProgressBlock)progress;
 
 + (void) cancel;

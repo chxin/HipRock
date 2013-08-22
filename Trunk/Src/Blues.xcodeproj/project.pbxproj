@@ -548,6 +548,7 @@
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 		EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */; };
+		EF962FFB17C5D78800BBC7DA /* WeiboBana.png in Resources */ = {isa = PBXBuildFile; fileRef = EF962FFA17C5D78800BBC7DA /* WeiboBana.png */; };
 		EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97DDDA17C20B5700A0374E /* REMToggleButton.m */; };
 /* End PBXBuildFile section */
 
@@ -1040,6 +1041,7 @@
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
 		EF8F1D7717C2FE5400D3E29F /* REMToggleButtonGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButtonGroup.h; sourceTree = "<group>"; };
 		EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButtonGroup.m; sourceTree = "<group>"; };
+		EF962FFA17C5D78800BBC7DA /* WeiboBana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeiboBana.png; sourceTree = "<group>"; };
 		EF97DDD917C20B5700A0374E /* REMToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButton.h; sourceTree = "<group>"; };
 		EF97DDDA17C20B5700A0374E /* REMToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1621,6 +1623,7 @@
 		7A5E2D86177B41B0000F77F9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EF962FFA17C5D78800BBC7DA /* WeiboBana.png */,
 				7ADAD70717B0A1BF003D7F61 /* login */,
 				B4426FF517AF2AC700762C68 /* building */,
 				7A37AA1E17AB4E0A00316902 /* buttons */,
@@ -2198,23 +2201,22 @@
 				7A0288F717C20CC500709111 /* WeiboDialogClose@2x.png in Resources */,
 				7A02890317C20F5B00709111 /* weibo.png in Resources */,
 				7A02890417C20F5B00709111 /* weibo@2x.png in Resources */,
-				B4A0FCAF17C5A56E00C7AD56 /* default-building.jpg in Resources */,
-				B4A0FCC117C5A58400C7AD56 /* PM2.5_normal.png in Resources */,
-				B4A0FCC217C5A58400C7AD56 /* Water_pressed@2x.png in Resources */,
-				B4A0FCC317C5A58400C7AD56 /* Water_pressed.png in Resources */,
-				B4A0FCC417C5A58400C7AD56 /* Water_normal@2x.png in Resources */,
-				B4A0FCC517C5A58400C7AD56 /* Water_normal.png in Resources */,
-				B4A0FCC617C5A58400C7AD56 /* PM2.5_pressed@2x.png in Resources */,
-				B4A0FCC717C5A58400C7AD56 /* PM2.5_pressed.png in Resources */,
-				B4A0FCC817C5A58400C7AD56 /* PM2.5_normal@2x.png in Resources */,
-				B4A0FCC917C5A58400C7AD56 /* Natural Gas_pressed@2x.png in Resources */,
-				B4A0FCCA17C5A58400C7AD56 /* Natural Gas_pressed.png in Resources */,
-				B4A0FCCB17C5A58400C7AD56 /* Natural Gas_normal@2x.png in Resources */,
-				B4A0FCCC17C5A58400C7AD56 /* Natural Gas_normal.png in Resources */,
-				B4A0FCCD17C5A58400C7AD56 /* Electricity_pressed@2x.png in Resources */,
-				B4A0FCCE17C5A58400C7AD56 /* Electricity_pressed.png in Resources */,
-				B4A0FCCF17C5A58400C7AD56 /* Electricity_normal@2x.png in Resources */,
-				B4A0FCD017C5A58400C7AD56 /* Electricity_normal.png in Resources */,
+				B44CCC5817C3463A00A57264 /* default-building.jpg in Resources */,
+				B47422F217C4B3C70021B76C /* Natural Gas_normal.png in Resources */,
+				B47422F317C4B3C70021B76C /* Natural Gas_normal@2x.png in Resources */,
+				B47422F417C4B3C70021B76C /* Natural Gas_pressed.png in Resources */,
+				B47422F517C4B3C70021B76C /* Natural Gas_pressed@2x.png in Resources */,
+				B47422F617C4B3C70021B76C /* PM2.5_normal.png in Resources */,
+				B47422F717C4B3C70021B76C /* PM2.5_normal@2x.png in Resources */,
+				B47422F817C4B3C70021B76C /* PM2.5_pressed@2x.png in Resources */,
+				B47422F917C4B3C70021B76C /* Water_normal@2x.png in Resources */,
+				B47422FA17C4B3C70021B76C /* Water_pressed.png in Resources */,
+				B47422FB17C4B3C70021B76C /* Water_pressed@2x.png in Resources */,
+				B474230017C4B3DE0021B76C /* Electricity_normal.png in Resources */,
+				B474230117C4B3DE0021B76C /* Electricity_normal@2x.png in Resources */,
+				B474230217C4B3DE0021B76C /* Electricity_pressed.png in Resources */,
+				B474230317C4B3DE0021B76C /* Electricity_pressed@2x.png in Resources */,
+				EF962FFB17C5D78800BBC7DA /* WeiboBana.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2807,7 +2809,7 @@
 		7A9B1E16177B3A6000C282A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 			};
 			name = Debug;
@@ -2815,7 +2817,7 @@
 		7A9B1E17177B3A6000C282A8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				VALID_ARCHS = "i386 x86_64 armv7s armv7";
 			};
@@ -3000,7 +3002,7 @@
 		B41ECBA017B87D3A00758607 /* DailyBuild */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				VALID_ARCHS = "armv7s armv7";
 			};

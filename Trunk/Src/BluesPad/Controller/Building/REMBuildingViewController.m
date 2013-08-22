@@ -141,9 +141,16 @@
 
 -(void)shareButtonTouchDown:(UIButton *)button
 {
-    NSString *content = @"Hello kitty!";
-    NSData *image = nil;//[self cutImage]; //UIImagePNGRepresentation([UIImage imageNamed:@"Default"]);
+    NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString* myDocPath = myPaths[0];
+    NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
+
     
+//    NSString *content = @"Hello kitty!";
+    REMImageView* currentView = [self.imageArray objectAtIndex:self.currentIndex];
+    UIImage* screenShoot = [currentView generateWeiboImage];
+    [UIImagePNGRepresentation(screenShoot) writeToFile:fileName atomically:NO];
+    NSData *image = UIImagePNGRepresentation(screenShoot);
     if (![Weibo.weibo isAuthenticated]) {
         [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
             NSString *message = nil;
@@ -152,7 +159,7 @@
                 NSLog(@"%@", message);
                 [REMAlertHelper alert:message];
                 
-                [self sendWeibo:content withImage:image];
+                [self sendWeibo:@"FDFDF" withImage:image];
             }
             else {
                 message = [NSString stringWithFormat:@"Failed to sign in: %@", error];
@@ -164,7 +171,7 @@
     else {
         NSLog(@"%@", Weibo.weibo.currentAccount.user.screenName);
         
-        [self sendWeibo:content withImage:image];
+        [self sendWeibo:@"FDFDF" withImage:image];
     }
     
 //[Weibo.weibo signOut];
