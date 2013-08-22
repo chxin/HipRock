@@ -549,7 +549,6 @@
 		B4A0FCCE17C5A58400C7AD56 /* Electricity_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBE17C5A58300C7AD56 /* Electricity_pressed.png */; };
 		B4A0FCCF17C5A58400C7AD56 /* Electricity_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBF17C5A58300C7AD56 /* Electricity_normal@2x.png */; };
 		B4A0FCD017C5A58400C7AD56 /* Electricity_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCC017C5A58300C7AD56 /* Electricity_normal.png */; };
-		B4A0FCD217C5D81A00C7AD56 /* temple.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCD117C5D81A00C7AD56 /* temple.jpg */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
@@ -1041,7 +1040,6 @@
 		B4A0FCBE17C5A58300C7AD56 /* Electricity_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Electricity_pressed.png; path = building/commodity/Electricity_pressed.png; sourceTree = "<group>"; };
 		B4A0FCBF17C5A58300C7AD56 /* Electricity_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Electricity_normal@2x.png"; path = "building/commodity/Electricity_normal@2x.png"; sourceTree = "<group>"; };
 		B4A0FCC017C5A58300C7AD56 /* Electricity_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Electricity_normal.png; path = building/commodity/Electricity_normal.png; sourceTree = "<group>"; };
-		B4A0FCD117C5D81A00C7AD56 /* temple.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = temple.jpg; sourceTree = "<group>"; };
 		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		B4CD146017B3439600807B5F /* BluesPad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluesPad.entitlements; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
@@ -1931,7 +1929,6 @@
 		B4426FF517AF2AC700762C68 /* building */ = {
 			isa = PBXGroup;
 			children = (
-				B4A0FCD117C5D81A00C7AD56 /* temple.jpg */,
 				B4A0FCB017C5A57500C7AD56 /* commodity */,
 				B4A0FCAE17C5A56E00C7AD56 /* default-building.jpg */,
 			);
@@ -2227,7 +2224,6 @@
 				B4A0FCCE17C5A58400C7AD56 /* Electricity_pressed.png in Resources */,
 				B4A0FCCF17C5A58400C7AD56 /* Electricity_normal@2x.png in Resources */,
 				B4A0FCD017C5A58400C7AD56 /* Electricity_normal.png in Resources */,
-				B4A0FCD217C5D81A00C7AD56 /* temple.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
