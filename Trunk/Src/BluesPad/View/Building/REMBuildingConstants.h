@@ -11,22 +11,23 @@
 
 #define kBuildingLeftMargin 10
 #define kBuildingCommodityButtonDimension 52
-#define kBuildingCommodityTitleFontSize 25
-#define kBuildingTitleFontSize 60
+#define kBuildingCommodityTitleFontSize 16
+#define kBuildingTitleFontSize 40
 #define kBuildingCommodityLeftMargin 5
 #define kBuildingCommodityItemGroupMargin 10
 #define kBuildingCommodityItemMargin 5
-#define kBuildingCommodityTotalValueFontSize 160
-#define kBuildingCommodityTotalUomFontSize 30
-#define kBuildingCommodityViewTop 430
-#define kBuildingCommodityDetailValueFontSize 80
-#define kBuildingCommodityDetailUomFontSize 20
+#define kBuildingCommodityTotalValueFontSize 72
+#define kBuildingCommodityTotalUomFontSize 20
+#define kBuildingCommodityViewTop 470
+#define kBuildingCommodityDetailValueFontSize 32
+#define kBuildingCommodityDetailUomFontSize 16
 #define kBuildingCommodityDetailWidth 300
-#define kBuildingCommodityDetailHeight 80
-#define kBuildingCommodityTotalHeight 160
-#define kBuildingCommodityTotalTitleHeight 30
+#define kBuildingCommodityDetailHeight 48
+#define kBuildingCommodityTotalHeight 72
+#define kBuildingCommodityTotalTitleHeight 16
 #define kBuildingTitleHeight 80
 #define kBuildingFont "HelveticaNeue-UltraLight"
+#define kBuildingFontSC "Heiti SC"
 
 #define kScrollVelocityMax 1000
 #define kScrollVelocityMedium 400
@@ -39,6 +40,7 @@
 #define kImageMargin 5
 
 #define kBuildingChartHeight 310
+#define kBuildingChartWidth 794
 
 #define kBuildingTitleButtonDimension 48
 #define kBuildingTitleButtonTopMargin 20
