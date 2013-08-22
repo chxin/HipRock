@@ -33,7 +33,7 @@ typedef void(^SuccessCallback)(BOOL success);
     if (self) {
         
         self.commodityInfo=commodityInfo;
-        //self.successCounter=0;
+        self.successCounter=0;
         [self initTotalValue];
         [self initDetailValue];
         [self initChartContainer];

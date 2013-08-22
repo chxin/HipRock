@@ -126,14 +126,23 @@
 - (void)initCommodityView
 {
     NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:self.buildingInfo.commodityUsage.count];
-    int i=0;
+    int i=0,height=800;
     for (;i<self.buildingInfo.commodityUsage.count;++i ) {
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
-        REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, 800) withCommodityInfo:model];
+        REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withCommodityInfo:model];
         
         if(i!=0){
             view.alpha=0;
         }
+        [self addSubview:view];
+        [array addObject:view];
+    }
+    if(self.buildingInfo.airQuality!=nil){
+        
+        REMBuildingAirQualityView *view = [[REMBuildingAirQualityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withAirQualityInfo:self.buildingInfo.airQuality];
+        
+        view.alpha=0;
+        
         [self addSubview:view];
         [array addObject:view];
     }

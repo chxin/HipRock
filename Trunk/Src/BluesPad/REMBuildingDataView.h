@@ -11,6 +11,7 @@
 #import "REMNumberLabel.h"
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingConstants.h"
+#import "REMBuildingAirQualityView.h"
 
 @interface REMBuildingDataView : UIScrollView
 

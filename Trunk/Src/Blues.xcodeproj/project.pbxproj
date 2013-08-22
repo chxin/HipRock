@@ -527,23 +527,9 @@
 		B49B6F45178122A500BC130A /* REMWidgetCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F44178122A500BC130A /* REMWidgetCellView.m */; };
 		B49B6F4817812E6B00BC130A /* REMWidgetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F4717812E6B00BC130A /* REMWidgetCell.m */; };
 		B49B6F511781491800BC130A /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
-		B4A0FCAF17C5A56E00C7AD56 /* default-building.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCAE17C5A56E00C7AD56 /* default-building.jpg */; };
-		B4A0FCC117C5A58400C7AD56 /* PM2.5_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB117C5A58300C7AD56 /* PM2.5_normal.png */; };
-		B4A0FCC217C5A58400C7AD56 /* Water_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB217C5A58300C7AD56 /* Water_pressed@2x.png */; };
-		B4A0FCC317C5A58400C7AD56 /* Water_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB317C5A58300C7AD56 /* Water_pressed.png */; };
-		B4A0FCC417C5A58400C7AD56 /* Water_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB417C5A58300C7AD56 /* Water_normal@2x.png */; };
-		B4A0FCC517C5A58400C7AD56 /* Water_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB517C5A58300C7AD56 /* Water_normal.png */; };
-		B4A0FCC617C5A58400C7AD56 /* PM2.5_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB617C5A58300C7AD56 /* PM2.5_pressed@2x.png */; };
-		B4A0FCC717C5A58400C7AD56 /* PM2.5_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB717C5A58300C7AD56 /* PM2.5_pressed.png */; };
-		B4A0FCC817C5A58400C7AD56 /* PM2.5_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB817C5A58300C7AD56 /* PM2.5_normal@2x.png */; };
-		B4A0FCC917C5A58400C7AD56 /* Natural Gas_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB917C5A58300C7AD56 /* Natural Gas_pressed@2x.png */; };
-		B4A0FCCA17C5A58400C7AD56 /* Natural Gas_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBA17C5A58300C7AD56 /* Natural Gas_pressed.png */; };
-		B4A0FCCB17C5A58400C7AD56 /* Natural Gas_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBB17C5A58300C7AD56 /* Natural Gas_normal@2x.png */; };
-		B4A0FCCC17C5A58400C7AD56 /* Natural Gas_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBC17C5A58300C7AD56 /* Natural Gas_normal.png */; };
-		B4A0FCCD17C5A58400C7AD56 /* Electricity_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBD17C5A58300C7AD56 /* Electricity_pressed@2x.png */; };
-		B4A0FCCE17C5A58400C7AD56 /* Electricity_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBE17C5A58300C7AD56 /* Electricity_pressed.png */; };
-		B4A0FCCF17C5A58400C7AD56 /* Electricity_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBF17C5A58300C7AD56 /* Electricity_normal@2x.png */; };
-		B4A0FCD017C5A58400C7AD56 /* Electricity_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCC017C5A58300C7AD56 /* Electricity_normal.png */; };
+		B4A0FCD517C6023300C7AD56 /* REMBuildingAirQualityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCD417C6023300C7AD56 /* REMBuildingAirQualityView.m */; };
+		B4A0FCD817C6057E00C7AD56 /* REMAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCD717C6057E00C7AD56 /* REMAirQualityModel.m */; };
+		B4A0FCDB17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
@@ -1034,6 +1020,12 @@
 		B4A0FCBE17C5A58300C7AD56 /* Electricity_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Electricity_pressed.png; path = building/commodity/Electricity_pressed.png; sourceTree = "<group>"; };
 		B4A0FCBF17C5A58300C7AD56 /* Electricity_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Electricity_normal@2x.png"; path = "building/commodity/Electricity_normal@2x.png"; sourceTree = "<group>"; };
 		B4A0FCC017C5A58300C7AD56 /* Electricity_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Electricity_normal.png; path = building/commodity/Electricity_normal.png; sourceTree = "<group>"; };
+		B4A0FCD317C6023200C7AD56 /* REMBuildingAirQualityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingAirQualityView.h; path = View/Building/REMBuildingAirQualityView.h; sourceTree = "<group>"; };
+		B4A0FCD417C6023300C7AD56 /* REMBuildingAirQualityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingAirQualityView.m; path = View/Building/REMBuildingAirQualityView.m; sourceTree = "<group>"; };
+		B4A0FCD617C6057D00C7AD56 /* REMAirQualityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAirQualityModel.h; sourceTree = "<group>"; };
+		B4A0FCD717C6057E00C7AD56 /* REMAirQualityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAirQualityModel.m; sourceTree = "<group>"; };
+		B4A0FCD917C610B500C7AD56 /* REMBuildingAirQualityChartHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAirQualityChartHandler.h; sourceTree = "<group>"; };
+		B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingAirQualityChartHandler.m; sourceTree = "<group>"; };
 		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		B4CD146017B3439600807B5F /* BluesPad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluesPad.entitlements; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
@@ -1213,6 +1205,8 @@
 				7A1A855617B4E278004D7167 /* REMAverageUsageDataModel.m */,
 				7A09D59517B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.h */,
 				7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */,
+				B4A0FCD617C6057D00C7AD56 /* REMAirQualityModel.h */,
+				B4A0FCD717C6057E00C7AD56 /* REMAirQualityModel.m */,
 			);
 			name = Building;
 			path = Model/Building;
@@ -1265,6 +1259,8 @@
 				7A1A855117B4BB5D004D7167 /* REMBuildingTrendChartHandler.m */,
 				7A153C6817AA497B00413D3C /* REMBuildingViewController.h */,
 				7A153C6917AA497B00413D3C /* REMBuildingViewController.m */,
+				B4A0FCD917C610B500C7AD56 /* REMBuildingAirQualityChartHandler.h */,
+				B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m */,
 			);
 			name = Building;
 			path = Controller/Building;
@@ -1948,6 +1944,8 @@
 				B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */,
 				B4911F4617B0EB8B007AEF7D /* REMBuildingRankingView.h */,
 				B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */,
+				B4A0FCD317C6023200C7AD56 /* REMBuildingAirQualityView.h */,
+				B4A0FCD417C6023300C7AD56 /* REMBuildingAirQualityView.m */,
 			);
 			name = Building;
 			sourceTree = "<group>";
@@ -2201,21 +2199,6 @@
 				7A0288F717C20CC500709111 /* WeiboDialogClose@2x.png in Resources */,
 				7A02890317C20F5B00709111 /* weibo.png in Resources */,
 				7A02890417C20F5B00709111 /* weibo@2x.png in Resources */,
-				B44CCC5817C3463A00A57264 /* default-building.jpg in Resources */,
-				B47422F217C4B3C70021B76C /* Natural Gas_normal.png in Resources */,
-				B47422F317C4B3C70021B76C /* Natural Gas_normal@2x.png in Resources */,
-				B47422F417C4B3C70021B76C /* Natural Gas_pressed.png in Resources */,
-				B47422F517C4B3C70021B76C /* Natural Gas_pressed@2x.png in Resources */,
-				B47422F617C4B3C70021B76C /* PM2.5_normal.png in Resources */,
-				B47422F717C4B3C70021B76C /* PM2.5_normal@2x.png in Resources */,
-				B47422F817C4B3C70021B76C /* PM2.5_pressed@2x.png in Resources */,
-				B47422F917C4B3C70021B76C /* Water_normal@2x.png in Resources */,
-				B47422FA17C4B3C70021B76C /* Water_pressed.png in Resources */,
-				B47422FB17C4B3C70021B76C /* Water_pressed@2x.png in Resources */,
-				B474230017C4B3DE0021B76C /* Electricity_normal.png in Resources */,
-				B474230117C4B3DE0021B76C /* Electricity_normal@2x.png in Resources */,
-				B474230217C4B3DE0021B76C /* Electricity_pressed.png in Resources */,
-				B474230317C4B3DE0021B76C /* Electricity_pressed@2x.png in Resources */,
 				EF962FFB17C5D78800BBC7DA /* WeiboBana.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2403,6 +2386,9 @@
 				7A02890017C20CC500709111 /* Weibo.m in Sources */,
 				EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */,
 				EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */,
+				B4A0FCD517C6023300C7AD56 /* REMBuildingAirQualityView.m in Sources */,
+				B4A0FCD817C6057E00C7AD56 /* REMAirQualityModel.m in Sources */,
+				B4A0FCDB17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
