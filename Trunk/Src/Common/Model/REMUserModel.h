@@ -22,6 +22,7 @@
 @property (nonatomic) NSInteger title;
 @property (nonatomic,strong) NSString *userTypeName;
 @property (nonatomic,strong) NSNumber *version;
+@property (nonatomic) long long spId;
 
 
 - (void)save;

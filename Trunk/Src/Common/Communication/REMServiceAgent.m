@@ -9,7 +9,6 @@
 #import "REMServiceAgent.h"
 #import "AFHTTPRequestOperation.h"
 #import "REMServiceRequestOperation.h"
-#import "REMServiceUrl.h"
 #import "REMNetworkHelper.h"
 #import "REMAlertHelper.h"
 #import "REMLog.h"
@@ -262,7 +261,7 @@ static int requestTimeout = 1000; //(s)
 + (NSString *)getUserInfo
 {
     REMApplicationContext* context = [REMApplicationContext instance];
-    NSString *original = [NSString stringWithFormat:@"%llu|%@",context.currentUser.userId,context.currentUser.name];
+    NSString *original = [NSString stringWithFormat:@"%llu|%@|%llu",context.currentUser.userId,context.currentUser.name, context.currentUser.spId];
     //NSLog(@"%@",original);
     
     NSData *encryptedData = [REMEncryptHelper AES256EncryptData:[original dataUsingEncoding:NSUTF8StringEncoding] withKey:@"41758bd9d7294737"];
