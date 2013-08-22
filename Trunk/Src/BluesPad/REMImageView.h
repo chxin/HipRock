@@ -44,4 +44,6 @@
 -(void)requireChartData;
 - (BOOL)shouldResponseSwipe:(UITouch *)touch;
 
+-(UIImage*)generateWeiboImage;
+
 @end

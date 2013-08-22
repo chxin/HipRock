@@ -646,4 +646,32 @@
  }
  */
 
+-(UIImage*)getImageOfLayer:(CALayer*) layer{
+    UIGraphicsBeginImageContext(layer.frame.size);
+    [layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+-(UIImage*)generateWeiboImage {
+    CGFloat outputWidth = self.frame.size.width;
+    CGFloat outputHeightWithoutFooter = kScrollVelocityMax;
+    CGFloat footerHeight = 200;
+    UIImage *footerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WeiboBana" ofType:@"png"]];
+    UIGraphicsBeginImageContext(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight));
+    [[UIColor blackColor]set];
+    UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
+    [[self getImageOfLayer:self.imageView.layer]drawInRect:self.imageView.frame];
+    [[self getImageOfLayer:self.titleLabel.layer]drawInRect:self.titleLabel.frame];
+    [[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
+    [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
+    [[self getImageOfLayer:self.dataView.layer]drawInRect:CGRectMake(0, 300, outputWidth, self.dataView.frame.size.height)];
+    
+    [footerImage drawInRect:CGRectMake(0, outputHeightWithoutFooter, outputWidth, footerHeight)];
+    UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
+
 @end
