@@ -21,12 +21,16 @@
 @property (nonatomic,strong) UIView *glassView;
 @property (nonatomic,strong) CAGradientLayer *bottomGradientLayer;
 
-@property (nonatomic) BOOL hasLoadedChartData;
+
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 @property (nonatomic) BOOL loadingImage;
 @property (nonatomic) BOOL customImageLoaded;
 @property (nonatomic,strong) NSString *loadingImageKey;
 @property (nonatomic,strong) UIButton *settingButton;
+
+@property (nonatomic) BOOL isActive;
+
+@property (nonatomic) BOOL hasLoadingChartData;
 
 #define kBuildingImageLoadingKeyPrefix "buildingimage-%@"
 
@@ -49,7 +53,6 @@
         self.dataViewUp=NO;
         self.cumulateY=0;
         self.loadingImage=NO;
-        self.hasLoadedChartData=NO;
         
         
         self.loadingImageKey=[NSString stringWithFormat:@(kBuildingImageLoadingKeyPrefix),self.buildingInfo.building.buildingId];
@@ -60,13 +63,20 @@
     return self;
 }
 
+- (void)moveOutOfWindow{
+    [REMDataAccessor cancelAccess:self.loadingImageKey];
+    [self.dataView cancelAllRequest];
+    self.isActive=NO;
+}
+
 - (void)reset{
     [REMDataAccessor cancelAccess:self.loadingImageKey];
     
     for (UIView *v in self.subviews) {
         [v removeFromSuperview];
     }
-    
+    self.isActive=NO;
+    self.hasLoadingChartData=NO;
     [self.bottomGradientLayer removeFromSuperlayer];
     
     self.imageView.image=nil;
@@ -159,7 +169,9 @@
             self.blurredImageView=nil;
             self.imageView = newView;
             self.blurredImageView=newBlurred;
-            
+            self.defaultImage=nil;
+            self.defaultBlurImage=nil;
+            [self.controller notifyCustomImageLoaded];
         }];
         
         
@@ -261,13 +273,10 @@
 - (void)addImageDefer:(NSTimer *)timer{
     if(self.customImageLoaded == YES) return;
     
-    
-    
-    self.imageView.image=  self.defaultImage;
-    
-        
-   
-    self.blurredImageView.image=self.defaultBlurImage;
+    if(self.defaultImage!=nil){
+        self.imageView.image=  self.defaultImage;
+        self.blurredImageView.image=self.defaultBlurImage;
+    }
 }
 
 - (void)initImageView2:(CGRect)frame{
@@ -290,7 +299,7 @@
 
 }
 
-
+/*
 - (void)initImageView:(CGRect)frame
 {
     self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
@@ -311,7 +320,7 @@
     UIImageView *blurred= [self blurredImageView:self.imageView];
     self.blurredImageView=blurred;
     [self addSubview:blurred];
-}
+}*/
 
 - (void)initBottomGradientLayer
 {
@@ -406,6 +415,16 @@
     
 }
 
+-(void)checkIfRequestChartData:(UIScrollView *)scrollView{
+    if(scrollView.contentOffset.y>=0){
+        self.dataViewUp=YES;
+        if(self.isActive == YES && self.hasLoadingChartData==NO){
+            [self requireChartData];
+            self.hasLoadingChartData=YES;
+        }
+    }
+}
+
 - (void)roundPositionWhenDrag:(UIScrollView *)scrollView{
     //NSLog(@"dec end:%@",NSStringFromCGPoint(scrollView.contentOffset));
     if(scrollView.contentOffset.y<0 && scrollView.contentOffset.y>-kBuildingCommodityViewTop){
@@ -416,16 +435,30 @@
             [self scrollDown];
         }
     }
+    
+    
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    [self checkIfRequestChartData:scrollView];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [self roundPositionWhenDrag:scrollView];
+    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
+    
     [self roundPositionWhenDrag:scrollView];
+    
+    if(scrollView.contentOffset.y>0){
+        [self checkIfRequestChartData:scrollView];
+    }
+    
 }
 
 
@@ -532,6 +565,7 @@
 
 - (void)requireChartData
 {
+    self.isActive=YES;
     if(self.dataViewUp==YES){
         [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId];
     }
@@ -558,6 +592,7 @@
 - (void)setScrollOffset:(CGFloat)offsetY
 {
    [self.dataView setContentOffset:CGPointMake(0, offsetY) animated:NO];
+    [self checkIfRequestChartData:self.dataView];
 }
 
 
@@ -567,7 +602,7 @@
     
     [self scrollTo:0];
     self.dataViewUp=YES;
-    [self requireChartData];
+    
     
     
 }

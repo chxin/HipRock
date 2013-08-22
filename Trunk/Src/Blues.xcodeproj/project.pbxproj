@@ -523,6 +523,20 @@
 		B44CCC5817C3463A00A57264 /* default-building.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B44CCC5717C3463A00A57264 /* default-building.jpg */; };
 		B4626BFC17B0A0D900A7759B /* REMBuildingCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */; };
 		B47422E617C45BCF0021B76C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
+		B47422F217C4B3C70021B76C /* Natural Gas_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B47422E817C4B3C70021B76C /* Natural Gas_normal.png */; };
+		B47422F317C4B3C70021B76C /* Natural Gas_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47422E917C4B3C70021B76C /* Natural Gas_normal@2x.png */; };
+		B47422F417C4B3C70021B76C /* Natural Gas_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B47422EA17C4B3C70021B76C /* Natural Gas_pressed.png */; };
+		B47422F517C4B3C70021B76C /* Natural Gas_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47422EB17C4B3C70021B76C /* Natural Gas_pressed@2x.png */; };
+		B47422F617C4B3C70021B76C /* PM2.5_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B47422EC17C4B3C70021B76C /* PM2.5_normal.png */; };
+		B47422F717C4B3C70021B76C /* PM2.5_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47422ED17C4B3C70021B76C /* PM2.5_normal@2x.png */; };
+		B47422F817C4B3C70021B76C /* PM2.5_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47422EE17C4B3C70021B76C /* PM2.5_pressed@2x.png */; };
+		B47422F917C4B3C70021B76C /* Water_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47422EF17C4B3C70021B76C /* Water_normal@2x.png */; };
+		B47422FA17C4B3C70021B76C /* Water_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B47422F017C4B3C70021B76C /* Water_pressed.png */; };
+		B47422FB17C4B3C70021B76C /* Water_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47422F117C4B3C70021B76C /* Water_pressed@2x.png */; };
+		B474230017C4B3DE0021B76C /* Electricity_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B47422FC17C4B3DE0021B76C /* Electricity_normal.png */; };
+		B474230117C4B3DE0021B76C /* Electricity_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47422FD17C4B3DE0021B76C /* Electricity_normal@2x.png */; };
+		B474230217C4B3DE0021B76C /* Electricity_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B47422FE17C4B3DE0021B76C /* Electricity_pressed.png */; };
+		B474230317C4B3DE0021B76C /* Electricity_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47422FF17C4B3DE0021B76C /* Electricity_pressed@2x.png */; };
 		B48BE1FC178AB0DC00A157CD /* REMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48BE1FA178AB0DB00A157CD /* REMMainViewController.m */; };
 		B48CC9901783297900AAD5D4 /* REMWidgetStepToolbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC98F1783297900AAD5D4 /* REMWidgetStepToolbarView.m */; };
 		B48CC99317832EAE00AAD5D4 /* REMWidgetMaxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC99217832EAE00AAD5D4 /* REMWidgetMaxView.m */; };
@@ -1002,6 +1016,20 @@
 		B44CCC5717C3463A00A57264 /* default-building.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default-building.jpg"; sourceTree = "<group>"; };
 		B4626BFA17B0A0D900A7759B /* REMBuildingCommodityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingCommodityView.h; path = View/Building/REMBuildingCommodityView.h; sourceTree = "<group>"; };
 		B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingCommodityView.m; path = View/Building/REMBuildingCommodityView.m; sourceTree = "<group>"; };
+		B47422E817C4B3C70021B76C /* Natural Gas_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Natural Gas_normal.png"; sourceTree = "<group>"; };
+		B47422E917C4B3C70021B76C /* Natural Gas_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Natural Gas_normal@2x.png"; sourceTree = "<group>"; };
+		B47422EA17C4B3C70021B76C /* Natural Gas_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Natural Gas_pressed.png"; sourceTree = "<group>"; };
+		B47422EB17C4B3C70021B76C /* Natural Gas_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Natural Gas_pressed@2x.png"; sourceTree = "<group>"; };
+		B47422EC17C4B3C70021B76C /* PM2.5_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PM2.5_normal.png; sourceTree = "<group>"; };
+		B47422ED17C4B3C70021B76C /* PM2.5_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PM2.5_normal@2x.png"; sourceTree = "<group>"; };
+		B47422EE17C4B3C70021B76C /* PM2.5_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PM2.5_pressed@2x.png"; sourceTree = "<group>"; };
+		B47422EF17C4B3C70021B76C /* Water_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Water_normal@2x.png"; sourceTree = "<group>"; };
+		B47422F017C4B3C70021B76C /* Water_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Water_pressed.png; sourceTree = "<group>"; };
+		B47422F117C4B3C70021B76C /* Water_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Water_pressed@2x.png"; sourceTree = "<group>"; };
+		B47422FC17C4B3DE0021B76C /* Electricity_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Electricity_normal.png; sourceTree = "<group>"; };
+		B47422FD17C4B3DE0021B76C /* Electricity_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Electricity_normal@2x.png"; sourceTree = "<group>"; };
+		B47422FE17C4B3DE0021B76C /* Electricity_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Electricity_pressed.png; sourceTree = "<group>"; };
+		B47422FF17C4B3DE0021B76C /* Electricity_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Electricity_pressed@2x.png"; sourceTree = "<group>"; };
 		B48BE1F9178AB0DB00A157CD /* REMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMainViewController.h; path = Controller/REMMainViewController.h; sourceTree = "<group>"; };
 		B48BE1FA178AB0DB00A157CD /* REMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMainViewController.m; path = Controller/REMMainViewController.m; sourceTree = "<group>"; };
 		B48CC98E1783297900AAD5D4 /* REMWidgetStepToolbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetStepToolbarView.h; path = View/REMWidgetStepToolbarView.h; sourceTree = "<group>"; };
@@ -1917,6 +1945,7 @@
 		B4426FF517AF2AC700762C68 /* building */ = {
 			isa = PBXGroup;
 			children = (
+				B47422E717C4B3960021B76C /* commodity */,
 				B44CCC5717C3463A00A57264 /* default-building.jpg */,
 				B4C1676017B2226F002A8DD6 /* elec-pressed.png */,
 				B4C1676117B2226F002A8DD6 /* elec.png */,
@@ -2009,6 +2038,27 @@
 				B48ED3ED178EA4A00032CD72 /* REMTimeHelperTests.m */,
 			);
 			name = CommonTest;
+			sourceTree = "<group>";
+		};
+		B47422E717C4B3960021B76C /* commodity */ = {
+			isa = PBXGroup;
+			children = (
+				B47422FC17C4B3DE0021B76C /* Electricity_normal.png */,
+				B47422FD17C4B3DE0021B76C /* Electricity_normal@2x.png */,
+				B47422FE17C4B3DE0021B76C /* Electricity_pressed.png */,
+				B47422FF17C4B3DE0021B76C /* Electricity_pressed@2x.png */,
+				B47422E817C4B3C70021B76C /* Natural Gas_normal.png */,
+				B47422E917C4B3C70021B76C /* Natural Gas_normal@2x.png */,
+				B47422EA17C4B3C70021B76C /* Natural Gas_pressed.png */,
+				B47422EB17C4B3C70021B76C /* Natural Gas_pressed@2x.png */,
+				B47422EC17C4B3C70021B76C /* PM2.5_normal.png */,
+				B47422ED17C4B3C70021B76C /* PM2.5_normal@2x.png */,
+				B47422EE17C4B3C70021B76C /* PM2.5_pressed@2x.png */,
+				B47422EF17C4B3C70021B76C /* Water_normal@2x.png */,
+				B47422F017C4B3C70021B76C /* Water_pressed.png */,
+				B47422F117C4B3C70021B76C /* Water_pressed@2x.png */,
+			);
+			name = commodity;
 			sourceTree = "<group>";
 		};
 		B49B6F421781228200BC130A /* View */ = {
@@ -2192,6 +2242,20 @@
 				7A02890317C20F5B00709111 /* weibo.png in Resources */,
 				7A02890417C20F5B00709111 /* weibo@2x.png in Resources */,
 				B44CCC5817C3463A00A57264 /* default-building.jpg in Resources */,
+				B47422F217C4B3C70021B76C /* Natural Gas_normal.png in Resources */,
+				B47422F317C4B3C70021B76C /* Natural Gas_normal@2x.png in Resources */,
+				B47422F417C4B3C70021B76C /* Natural Gas_pressed.png in Resources */,
+				B47422F517C4B3C70021B76C /* Natural Gas_pressed@2x.png in Resources */,
+				B47422F617C4B3C70021B76C /* PM2.5_normal.png in Resources */,
+				B47422F717C4B3C70021B76C /* PM2.5_normal@2x.png in Resources */,
+				B47422F817C4B3C70021B76C /* PM2.5_pressed@2x.png in Resources */,
+				B47422F917C4B3C70021B76C /* Water_normal@2x.png in Resources */,
+				B47422FA17C4B3C70021B76C /* Water_pressed.png in Resources */,
+				B47422FB17C4B3C70021B76C /* Water_pressed@2x.png in Resources */,
+				B474230017C4B3DE0021B76C /* Electricity_normal.png in Resources */,
+				B474230117C4B3DE0021B76C /* Electricity_normal@2x.png in Resources */,
+				B474230217C4B3DE0021B76C /* Electricity_pressed.png in Resources */,
+				B474230317C4B3DE0021B76C /* Electricity_pressed@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
