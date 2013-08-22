@@ -16,6 +16,7 @@
 @property (nonatomic,strong) NSArray *commodityViewArray;
 @property (nonatomic) NSUInteger currentIndex;
 
+@property (nonatomic,strong) NSMutableDictionary *successDic;
 
 @end
 @implementation REMBuildingDataView
@@ -30,6 +31,7 @@
         [self setContentSize:CGSizeMake(frame.size.width, 1000)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
+        self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityUsage.count+1)];
         [self initCommodityButton];
         [self initCommodityView];
     }
@@ -140,12 +142,20 @@
 }
 
 
-- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId complete:(void (^)(BOOL))callback
 {
+    
     for (int i=0; i<self.commodityViewArray.count; i++) {
         REMBuildingCommodityView *view = self.commodityViewArray[i];
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
-        [view requireChartDataWithBuildingId:buildingId withCommodityId:model.commodity.commodityId];
+        NSNumber *status=[self.successDic objectForKey:model.commodity.commodityId];
+        if([status isEqualToNumber:@(1)] == YES) continue;
+        [view requireChartDataWithBuildingId:buildingId withCommodityId:model.commodity.commodityId complete:^(BOOL success){
+            [self.successDic setObject:@(1) forKey:model.commodity.commodityId];
+            if (callback != nil) {
+                callback(success);
+            }
+        }];
     }
 }
 
@@ -156,6 +166,23 @@
         [REMDataAccessor cancelAccess:key];
 
     }
+}
+
+- (void)exportDataView:(void (^)(UIImage *))callback
+{
+    NSNumber *ret = [self.successDic objectForKey:@(self.currentIndex)];
+    if([ret isEqualToNumber:@(1)] ==YES){
+        callback([self realExport]);
+    }
+    else{
+        [self requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:^(BOOL success){
+            callback([self realExport]);
+        }];
+    }
+}
+
+- (UIImage *)realExport{
+    return nil;
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer

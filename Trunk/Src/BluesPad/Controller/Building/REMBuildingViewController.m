@@ -133,6 +133,10 @@
 
 - (void)settingButtonPressed:(UIButton *)button{
     NSLog(@"setting button pressed");
+    REMImageView *view = self.imageArray[self.currentIndex];
+    [view exportImage:^(UIImage *image){
+        NSLog(@"chart load complete");
+    }];
 }
 
 -(void)shareButtonTouchDown:(UIButton *)button

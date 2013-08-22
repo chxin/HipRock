@@ -17,9 +17,10 @@
 - (id)initWithFrame:(CGRect)frame withBuildingInfo:(REMBuildingOverallModel *)buildingInfo;
 
 
-- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId;
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId complete:(void(^)(BOOL))callback;
 
 - (void)cancelAllRequest;
 
+- (void)exportDataView:(void(^)(UIImage *))success;
 
 @end

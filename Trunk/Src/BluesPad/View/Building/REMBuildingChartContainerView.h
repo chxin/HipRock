@@ -17,7 +17,7 @@
 
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *)title andTitleFontSize:(CGFloat)size;
 
-- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId withEnergyData:(REMAverageUsageDataModel *)averageData;
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId withEnergyData:(REMAverageUsageDataModel *)averageData complete:(void(^)(BOOL))callback;
 
 @property (nonatomic,strong) UIView *chartContainer;
 

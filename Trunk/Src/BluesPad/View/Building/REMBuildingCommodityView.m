@@ -10,12 +10,16 @@
 
 @interface REMBuildingCommodityView()
 
+typedef void(^SuccessCallback)(BOOL success);
+
 @property (nonatomic,strong) REMBuildingTitleLabelView *totalLabel;
 
 @property (nonatomic,strong) NSArray *detailLabelArray;
 @property (nonatomic,strong) NSArray *chartViewArray;
 
+@property (nonatomic,strong) SuccessCallback successBlock;
 
+@property (nonatomic) NSUInteger successCounter;
 
 @property (nonatomic,weak) REMCommodityUsageModel *commodityInfo;
 
@@ -29,7 +33,7 @@
     if (self) {
         
         self.commodityInfo=commodityInfo;
-        
+        self.successCounter=0;
         [self initTotalValue];
         [self initDetailValue];
         [self initChartContainer];
@@ -81,8 +85,18 @@
     self.chartViewArray=@[view,view1];
 }
 
-- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId
+- (void)sucessRequest{
+    self.successCounter++;
+    if(self.successCounter == self.chartViewArray.count){
+        self.successBlock(YES);
+        self.successBlock=nil;
+    }
+}
+
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId complete:(void(^)(BOOL))callback
 {
+    self.successBlock=callback;
+    
     REMBuildingChartContainerView *averageContainer = self.chartViewArray[0];
     
     if(averageContainer.controller==nil){
@@ -91,7 +105,9 @@
     }
     
     
-    [averageContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:self.commodityInfo.averageUsageData];
+    [averageContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil complete:^(BOOL success){
+        [self sucessRequest];
+    }];
     
     
     REMBuildingChartContainerView *trendContainer = self.chartViewArray[1];
@@ -103,7 +119,9 @@
     }
     
    
-    [trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil];
+    [trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil complete:^(BOOL success){
+        [self sucessRequest];    
+    }];
 }
 /*
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event

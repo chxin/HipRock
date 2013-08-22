@@ -44,4 +44,6 @@
 -(void)requireChartData;
 - (BOOL)shouldResponseSwipe:(UITouch *)touch;
 
+- (void)exportImage:(void(^)(UIImage *))callback;
+
 @end
