@@ -1264,6 +1264,8 @@
 				7A153C6917AA497B00413D3C /* REMBuildingViewController.m */,
 				B4A0FCD917C610B500C7AD56 /* REMBuildingAirQualityChartHandler.h */,
 				B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m */,
+				EF96300417C610A100BBC7DA /* REMBuildingSettingViewController.h */,
+				EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */,
 			);
 			name = Building;
 			path = Controller/Building;
@@ -2392,6 +2394,7 @@
 				B4A0FCD517C6023300C7AD56 /* REMBuildingAirQualityView.m in Sources */,
 				B4A0FCD817C6057E00C7AD56 /* REMAirQualityModel.m in Sources */,
 				B4A0FCDB17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m in Sources */,
+				EF96300617C610A200BBC7DA /* REMBuildingSettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
