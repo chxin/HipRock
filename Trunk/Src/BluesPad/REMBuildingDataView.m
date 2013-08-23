@@ -16,6 +16,7 @@
 @property (nonatomic,strong) NSArray *commodityViewArray;
 @property (nonatomic) NSUInteger currentIndex;
 
+@property (nonatomic,strong) NSMutableDictionary *successDic;
 
 @end
 @implementation REMBuildingDataView
@@ -30,6 +31,7 @@
         [self setContentSize:CGSizeMake(frame.size.width, 1000)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
+        self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityUsage.count+1)];
         [self initCommodityButton];
         [self initCommodityView];
     }
@@ -62,6 +64,27 @@
         [array addObject:btn];
        
     }
+    if(self.buildingInfo.airQuality!=nil){
+        
+        REMAirQualityModel *model = self.buildingInfo.airQuality;
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*kBuildingCommodityButtonDimension, 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
+        btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
+        
+        NSString *str = [self retrieveCommodityImageName:model.commodity];
+        btn.imageView.contentMode=UIViewContentModeScaleToFill;
+        btn.showsTouchWhenHighlighted=YES;
+        btn.adjustsImageWhenHighlighted=YES;
+        
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal.png",str]] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed.png",str]] forState:UIControlStateSelected];
+        if(i==0){
+            [btn setSelected:YES];
+        }
+        [self addSubview:btn];
+        
+        [btn addTarget:self action:@selector(commodityChanged:) forControlEvents:UIControlEventTouchUpInside];
+        [array addObject:btn];
+    }
     
     self.buttonArray=array;
 }
@@ -81,7 +104,7 @@
     }
     else if([model.commodityId isEqualToNumber:@(3)] == YES)
     {
-        return @"oil";
+        return @"Natural Gas";
     }
     else if([model.commodityId isEqualToNumber:@(5)] == YES)
     {
@@ -124,14 +147,23 @@
 - (void)initCommodityView
 {
     NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:self.buildingInfo.commodityUsage.count];
-    int i=0;
+    int i=0,height=800;
     for (;i<self.buildingInfo.commodityUsage.count;++i ) {
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
-        REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, 800) withCommodityInfo:model];
+        REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withCommodityInfo:model];
         
         if(i!=0){
             view.alpha=0;
         }
+        [self addSubview:view];
+        [array addObject:view];
+    }
+    if(self.buildingInfo.airQuality!=nil){
+        
+        REMBuildingAirQualityView *view = [[REMBuildingAirQualityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withAirQualityInfo:self.buildingInfo.airQuality];
+        
+        view.alpha=0;
+        
         [self addSubview:view];
         [array addObject:view];
     }
@@ -140,12 +172,33 @@
 }
 
 
-- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId complete:(void (^)(BOOL))callback
 {
-    for (int i=0; i<self.commodityViewArray.count; i++) {
+    int count = self.commodityViewArray.count;
+    if(self.buildingInfo.airQuality!=nil) count--;
+    for (int i=0; i<count; i++) {
         REMBuildingCommodityView *view = self.commodityViewArray[i];
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
-        [view requireChartDataWithBuildingId:buildingId withCommodityId:model.commodity.commodityId];
+        NSNumber *status=[self.successDic objectForKey:model.commodity.commodityId];
+        if([status isEqualToNumber:@(1)] == YES) continue;
+        [view requireChartDataWithBuildingId:buildingId withCommodityId:model.commodity.commodityId complete:^(BOOL success){
+            [self.successDic setObject:@(1) forKey:model.commodity.commodityId];
+            if (callback != nil) {
+                callback(success);
+            }
+        }];
+    }
+    if(self.buildingInfo.airQuality!=nil){
+        REMBuildingAirQualityView *view = self.commodityViewArray[self.commodityViewArray.count-1];
+        REMAirQualityModel *model = self.buildingInfo.airQuality;
+        NSNumber *status=[self.successDic objectForKey:model.commodity.commodityId];
+        if([status isEqualToNumber:@(1)] == YES) return;
+        [view requireChartDataWithBuildingId:buildingId withCommodityId:model.commodity.commodityId complete:^(BOOL success){
+            [self.successDic setObject:@(1) forKey:model.commodity.commodityId];
+            if (callback != nil) {
+                callback(success);
+            }
+        }];
     }
 }
 
@@ -156,6 +209,23 @@
         [REMDataAccessor cancelAccess:key];
 
     }
+}
+
+- (void)exportDataView:(void (^)(UIImage *))callback
+{
+    NSNumber *ret = [self.successDic objectForKey:@(self.currentIndex)];
+    if([ret isEqualToNumber:@(1)] ==YES){
+        callback([self realExport]);
+    }
+    else{
+        [self requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:^(BOOL success){
+            callback([self realExport]);
+        }];
+    }
+}
+
+- (UIImage *)realExport{
+    return nil;
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer

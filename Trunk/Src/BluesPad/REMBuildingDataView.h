@@ -11,15 +11,17 @@
 #import "REMNumberLabel.h"
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingConstants.h"
+#import "REMBuildingAirQualityView.h"
 
 @interface REMBuildingDataView : UIScrollView
 
 - (id)initWithFrame:(CGRect)frame withBuildingInfo:(REMBuildingOverallModel *)buildingInfo;
 
 
-- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId;
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId complete:(void(^)(BOOL))callback;
 
 - (void)cancelAllRequest;
 
+- (void)exportDataView:(void(^)(UIImage *))success;
 
 @end

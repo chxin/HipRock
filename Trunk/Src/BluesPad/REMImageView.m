@@ -144,7 +144,7 @@
     store.isAccessLocal = YES;
     self.loadingImage=YES;
     [REMDataAccessor access: store success:^(NSData *data){
-        if(data == nil) return;
+        if(data == nil || [data length] == 2) return;
         self.customImageLoaded=YES;
         self.loadingImage=NO;
         
@@ -565,7 +565,7 @@
 {
     self.isActive=YES;
     if(self.dataViewUp==YES){
-        [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId];
+        [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:nil];
     }
     
 }
@@ -633,6 +633,11 @@
     //[self.dataView setCenter:CGPointMake(self.dataView.center.x+x, self.dataView.center.y)];
     
     //[self.imageView setCenter:CGPointMake(imagex+x*0.8, self.imageView.center.y)];
+}
+
+- (void)exportImage:(void (^)(UIImage *))callback
+{
+    [self.dataView exportDataView:callback];
 }
 
 /*

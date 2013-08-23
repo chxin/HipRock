@@ -141,7 +141,7 @@
     store.isAccessLocal = YES;
     store.isStoreLocal = YES;
     store.maskContainer = self.view;
-    
+    store.groupName = [NSString stringWithFormat:@"b-%lld-%lld", buildingId, commodityID];
     [REMDataAccessor access:store success:^(id data) {
         self.averageData = [[REMAverageUsageDataModel alloc] initWithDictionary:data];
         

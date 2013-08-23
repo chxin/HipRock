@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "REMBuildingModel.h"
 #import "REMCommonHeaders.h"
+#import "REMAirQualityModel.h"
 
 @interface REMBuildingOverallModel : REMJSONObject
 
 @property (nonatomic,strong) REMBuildingModel *building;
 @property (nonatomic,strong) NSArray *commodityUsage;
+@property (nonatomic,strong) REMAirQualityModel *airQuality;
 
 @end
