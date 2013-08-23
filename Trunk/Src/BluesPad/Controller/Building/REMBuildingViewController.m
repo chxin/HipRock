@@ -132,6 +132,7 @@
 }
 
 - (void)settingButtonPressed:(UIButton *)button{
+    [self performSegueWithIdentifier:@"buildingSettingSegue" sender:self];
     NSLog(@"setting button pressed");
     REMImageView *view = self.imageArray[self.currentIndex];
     [view exportImage:^(UIImage *image){

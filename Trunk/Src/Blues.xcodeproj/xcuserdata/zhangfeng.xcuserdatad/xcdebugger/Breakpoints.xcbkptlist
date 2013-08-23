@@ -923,7 +923,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "316"
          endingLineNumber = "316"
-         landmarkName = "-releaseOutOfWindowView:"
+         landmarkName = "-swipethis:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1378,7 +1378,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "187"
          endingLineNumber = "187"
-         landmarkName = "-createFileSource"
+         landmarkName = "-setFile:params:version:imageData:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1404,7 +1404,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "96"
          endingLineNumber = "96"
-         landmarkName = "-loadingBuildingImage"
+         landmarkName = "-didMoveToSuperview"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1417,7 +1417,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "267"
          endingLineNumber = "267"
-         landmarkName = "-getFile:key:"
+         landmarkName = "-getFileCacheFolder"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1521,7 +1521,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "106"
          endingLineNumber = "106"
-         landmarkName = "-shareButtonTouchDown:"
+         landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1534,7 +1534,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "136"
          endingLineNumber = "136"
-         landmarkName = "-sendWeibo:withImage:"
+         landmarkName = "-settingButtonPressed:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1547,7 +1547,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "129"
          endingLineNumber = "129"
-         landmarkName = "-shareButtonTouchDown:"
+         landmarkName = "-initButtons"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1561,6 +1561,19 @@
          startingLineNumber = "262"
          endingLineNumber = "262"
          landmarkName = "+getUserInfo"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BluesPad/REMImageView.m"
+         timestampString = "398915642.909576"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "147"
+         endingLineNumber = "147"
+         landmarkName = "-loadingBuildingImage"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

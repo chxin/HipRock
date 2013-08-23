@@ -144,7 +144,7 @@
     store.isAccessLocal = YES;
     self.loadingImage=YES;
     [REMDataAccessor access: store success:^(NSData *data){
-        if(data == nil) return;
+        if(data == nil || [data length] == 2) return;
         self.customImageLoaded=YES;
         self.loadingImage=NO;
         
