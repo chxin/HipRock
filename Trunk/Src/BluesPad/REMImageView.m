@@ -402,7 +402,7 @@
 {
     
     
-    self.dataView = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleHeight, self.frame.size.width, self.frame.size.height-kBuildingTitleHeight) withBuildingInfo:self.buildingInfo];
+    self.dataView = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(0, kBuildingTitleHeight, self.frame.size.width, self.frame.size.height-kBuildingTitleHeight) withBuildingInfo:self.buildingInfo];
     
     [self addSubview:self.dataView];
     
@@ -589,7 +589,7 @@
 
 - (void)setScrollOffset:(CGFloat)offsetY
 {
-   [self.dataView setContentOffset:CGPointMake(0, offsetY) animated:NO];
+   [self.dataView setContentOffset:CGPointMake(-kBuildingLeftMargin, offsetY) animated:NO];
     [self checkIfRequestChartData:self.dataView];
 }
 
@@ -617,8 +617,8 @@
 
 - (void)scrollTo:(CGFloat)y
 {
-
-    [self.dataView setContentOffset:CGPointMake(0, y) animated:YES]; 
+    //NSLog(@"x:%f",self.dataView.frame.origin.x);
+    [self.dataView setContentOffset:CGPointMake(-kBuildingLeftMargin, y) animated:YES];
 }
 
 

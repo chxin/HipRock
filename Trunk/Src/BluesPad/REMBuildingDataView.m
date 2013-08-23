@@ -26,9 +26,11 @@
     //NSLog(@"dataview:%@",NSStringFromCGRect(frame));
     self = [super initWithFrame:frame];
     if (self) {
-        self.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, 0, 0, 0);
+        self.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, kBuildingLeftMargin, 0, 0);
         [self setScrollEnabled:YES];
-        [self setContentSize:CGSizeMake(frame.size.width, 1000)];
+        //self.clipsToBounds=NO;
+        
+        [self setContentSize:CGSizeMake(0, 1000)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
         self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityUsage.count+1)];
@@ -53,6 +55,7 @@
         btn.imageView.contentMode=UIViewContentModeScaleToFill;
         btn.showsTouchWhenHighlighted=YES;
         btn.adjustsImageWhenHighlighted=YES;
+        
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal.png",str]] forState:UIControlStateNormal];
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed.png",str]] forState:UIControlStateSelected];
         if(i==0){
@@ -69,7 +72,7 @@
         REMAirQualityModel *model = self.buildingInfo.airQuality;
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*kBuildingCommodityButtonDimension, 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
         btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
-        
+        btn.layer.masksToBounds=NO;
         NSString *str = [self retrieveCommodityImageName:model.commodity];
         btn.imageView.contentMode=UIViewContentModeScaleToFill;
         btn.showsTouchWhenHighlighted=YES;
