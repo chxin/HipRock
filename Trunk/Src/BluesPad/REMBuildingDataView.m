@@ -188,17 +188,18 @@
             }
         }];
     }
-    
-    REMBuildingAirQualityView *view = self.commodityViewArray[self.commodityViewArray.count-1];
-    REMAirQualityModel *model = self.buildingInfo.airQuality;
-    NSNumber *status=[self.successDic objectForKey:model.commodity.commodityId];
-    if([status isEqualToNumber:@(1)] == YES) return;
-    [view requireChartDataWithBuildingId:buildingId withCommodityId:model.commodity.commodityId complete:^(BOOL success){
-        [self.successDic setObject:@(1) forKey:model.commodity.commodityId];
-        if (callback != nil) {
-            callback(success);
-        }
-    }];
+    if(self.buildingInfo.airQuality!=nil){
+        REMBuildingAirQualityView *view = self.commodityViewArray[self.commodityViewArray.count-1];
+        REMAirQualityModel *model = self.buildingInfo.airQuality;
+        NSNumber *status=[self.successDic objectForKey:model.commodity.commodityId];
+        if([status isEqualToNumber:@(1)] == YES) return;
+        [view requireChartDataWithBuildingId:buildingId withCommodityId:model.commodity.commodityId complete:^(BOOL success){
+            [self.successDic setObject:@(1) forKey:model.commodity.commodityId];
+            if (callback != nil) {
+                callback(success);
+            }
+        }];
+    }
 }
 
 
