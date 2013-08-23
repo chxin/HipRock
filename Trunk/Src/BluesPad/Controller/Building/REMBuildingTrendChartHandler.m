@@ -309,6 +309,7 @@
                 [data addObject:@{@"y": [[NSDecimalNumber alloc]initWithDecimal: pointData.dataValue], @"x": pointData.localTime  }];
             }
             [series setValue:data forKey:@"data"];
+            loadCompleted();
         }
     };
     void (^retrieveError)(NSError *error, id response) = ^(NSError *error, id response) {

@@ -24,6 +24,12 @@
     }
     
     self.commodityUsage = commodities;
+    
+    NSDictionary *air = dictionary[@"AirQualitySummary"];
+    
+    if(air != nil){
+        self.airQuality=[[REMAirQualityModel alloc]initWithDictionary:air];
+    }
 }
 
 @end

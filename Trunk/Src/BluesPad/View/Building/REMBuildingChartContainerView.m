@@ -40,13 +40,14 @@
     [self addSubview:self.chartContainer];
 }
 
-- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId  withEnergyData:(REMAverageUsageDataModel *)averageData
+- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId  withEnergyData:(REMAverageUsageDataModel *)averageData complete:(void (^)(BOOL))callback
 {
     if(self.hasLoaded == NO){
         [self.chartContainer addSubview:self.controller.view];
 
         [self.controller loadData:[buildingId longLongValue] :[commodityId longLongValue] :averageData :^(void){
             self.hasLoaded=YES;
+            callback(YES);
         }];
             }
 }
