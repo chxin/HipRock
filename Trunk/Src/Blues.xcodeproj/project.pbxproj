@@ -530,6 +530,7 @@
 		B4A0FCD517C6023300C7AD56 /* REMBuildingAirQualityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCD417C6023300C7AD56 /* REMBuildingAirQualityView.m */; };
 		B4A0FCD817C6057E00C7AD56 /* REMAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCD717C6057E00C7AD56 /* REMAirQualityModel.m */; };
 		B4A0FCDB17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m */; };
+		B4B61D7617C742E000245F1E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B61D7517C742E000245F1E /* CoreText.framework */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
@@ -1028,6 +1029,7 @@
 		B4A0FCD717C6057E00C7AD56 /* REMAirQualityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAirQualityModel.m; sourceTree = "<group>"; };
 		B4A0FCD917C610B500C7AD56 /* REMBuildingAirQualityChartHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAirQualityChartHandler.h; sourceTree = "<group>"; };
 		B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingAirQualityChartHandler.m; sourceTree = "<group>"; };
+		B4B61D7517C742E000245F1E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		B4CD146017B3439600807B5F /* BluesPad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluesPad.entitlements; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
@@ -1049,6 +1051,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4B61D7617C742E000245F1E /* CoreText.framework in Frameworks */,
 				B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */,
 				B442701317AF316500762C68 /* OpenGLES.framework in Frameworks */,
 				EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */,
@@ -1720,6 +1723,7 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B4B61D7517C742E000245F1E /* CoreText.framework */,
 				6AB1F30817B8B3E40065C1EB /* libCorePlot-CocoaTouch.a */,
 				B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */,
 				B442701217AF316500762C68 /* OpenGLES.framework */,

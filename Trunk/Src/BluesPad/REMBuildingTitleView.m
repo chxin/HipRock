@@ -16,7 +16,18 @@
 @implementation REMBuildingTitleView
 
 
-
+- (NSString *)addThousandSeparator:(NSNumber *)number
+{
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setGroupingSeparator:@","];
+    [numberFormatter setGroupingSize:3];
+    [numberFormatter setUsesGroupingSeparator:YES];
+    [numberFormatter setDecimalSeparator:@"."];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSString *theString = [numberFormatter stringFromNumber:number];
+    
+    return theString;
+}
 
 - (void)initTitle:(NSString *)text withSize:(CGFloat)size
 {
