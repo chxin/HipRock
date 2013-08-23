@@ -527,23 +527,6 @@
 		B49B6F45178122A500BC130A /* REMWidgetCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F44178122A500BC130A /* REMWidgetCellView.m */; };
 		B49B6F4817812E6B00BC130A /* REMWidgetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F4717812E6B00BC130A /* REMWidgetCell.m */; };
 		B49B6F511781491800BC130A /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
-		B4A0FCAF17C5A56E00C7AD56 /* default-building.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCAE17C5A56E00C7AD56 /* default-building.jpg */; };
-		B4A0FCC117C5A58400C7AD56 /* PM2.5_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB117C5A58300C7AD56 /* PM2.5_normal.png */; };
-		B4A0FCC217C5A58400C7AD56 /* Water_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB217C5A58300C7AD56 /* Water_pressed@2x.png */; };
-		B4A0FCC317C5A58400C7AD56 /* Water_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB317C5A58300C7AD56 /* Water_pressed.png */; };
-		B4A0FCC417C5A58400C7AD56 /* Water_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB417C5A58300C7AD56 /* Water_normal@2x.png */; };
-		B4A0FCC517C5A58400C7AD56 /* Water_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB517C5A58300C7AD56 /* Water_normal.png */; };
-		B4A0FCC617C5A58400C7AD56 /* PM2.5_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB617C5A58300C7AD56 /* PM2.5_pressed@2x.png */; };
-		B4A0FCC717C5A58400C7AD56 /* PM2.5_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB717C5A58300C7AD56 /* PM2.5_pressed.png */; };
-		B4A0FCC817C5A58400C7AD56 /* PM2.5_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB817C5A58300C7AD56 /* PM2.5_normal@2x.png */; };
-		B4A0FCC917C5A58400C7AD56 /* Natural Gas_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB917C5A58300C7AD56 /* Natural Gas_pressed@2x.png */; };
-		B4A0FCCA17C5A58400C7AD56 /* Natural Gas_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBA17C5A58300C7AD56 /* Natural Gas_pressed.png */; };
-		B4A0FCCB17C5A58400C7AD56 /* Natural Gas_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBB17C5A58300C7AD56 /* Natural Gas_normal@2x.png */; };
-		B4A0FCCC17C5A58400C7AD56 /* Natural Gas_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBC17C5A58300C7AD56 /* Natural Gas_normal.png */; };
-		B4A0FCCD17C5A58400C7AD56 /* Electricity_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBD17C5A58300C7AD56 /* Electricity_pressed@2x.png */; };
-		B4A0FCCE17C5A58400C7AD56 /* Electricity_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBE17C5A58300C7AD56 /* Electricity_pressed.png */; };
-		B4A0FCCF17C5A58400C7AD56 /* Electricity_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBF17C5A58300C7AD56 /* Electricity_normal@2x.png */; };
-		B4A0FCD017C5A58400C7AD56 /* Electricity_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCC017C5A58300C7AD56 /* Electricity_normal.png */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
@@ -2201,21 +2184,6 @@
 				7A0288F717C20CC500709111 /* WeiboDialogClose@2x.png in Resources */,
 				7A02890317C20F5B00709111 /* weibo.png in Resources */,
 				7A02890417C20F5B00709111 /* weibo@2x.png in Resources */,
-				B44CCC5817C3463A00A57264 /* default-building.jpg in Resources */,
-				B47422F217C4B3C70021B76C /* Natural Gas_normal.png in Resources */,
-				B47422F317C4B3C70021B76C /* Natural Gas_normal@2x.png in Resources */,
-				B47422F417C4B3C70021B76C /* Natural Gas_pressed.png in Resources */,
-				B47422F517C4B3C70021B76C /* Natural Gas_pressed@2x.png in Resources */,
-				B47422F617C4B3C70021B76C /* PM2.5_normal.png in Resources */,
-				B47422F717C4B3C70021B76C /* PM2.5_normal@2x.png in Resources */,
-				B47422F817C4B3C70021B76C /* PM2.5_pressed@2x.png in Resources */,
-				B47422F917C4B3C70021B76C /* Water_normal@2x.png in Resources */,
-				B47422FA17C4B3C70021B76C /* Water_pressed.png in Resources */,
-				B47422FB17C4B3C70021B76C /* Water_pressed@2x.png in Resources */,
-				B474230017C4B3DE0021B76C /* Electricity_normal.png in Resources */,
-				B474230117C4B3DE0021B76C /* Electricity_normal@2x.png in Resources */,
-				B474230217C4B3DE0021B76C /* Electricity_pressed.png in Resources */,
-				B474230317C4B3DE0021B76C /* Electricity_pressed@2x.png in Resources */,
 				EF962FFB17C5D78800BBC7DA /* WeiboBana.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2857,7 +2825,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "BluesPad/BluesPad-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../lib\"",
@@ -2900,7 +2868,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "BluesPad/BluesPad-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../lib\"",
@@ -3034,7 +3002,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "BluesPad/BluesPad-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../lib\"",
