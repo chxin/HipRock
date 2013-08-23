@@ -527,28 +527,12 @@
 		B49B6F45178122A500BC130A /* REMWidgetCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F44178122A500BC130A /* REMWidgetCellView.m */; };
 		B49B6F4817812E6B00BC130A /* REMWidgetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F4717812E6B00BC130A /* REMWidgetCell.m */; };
 		B49B6F511781491800BC130A /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
-		B4A0FCAF17C5A56E00C7AD56 /* default-building.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCAE17C5A56E00C7AD56 /* default-building.jpg */; };
-		B4A0FCC117C5A58400C7AD56 /* PM2.5_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB117C5A58300C7AD56 /* PM2.5_normal.png */; };
-		B4A0FCC217C5A58400C7AD56 /* Water_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB217C5A58300C7AD56 /* Water_pressed@2x.png */; };
-		B4A0FCC317C5A58400C7AD56 /* Water_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB317C5A58300C7AD56 /* Water_pressed.png */; };
-		B4A0FCC417C5A58400C7AD56 /* Water_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB417C5A58300C7AD56 /* Water_normal@2x.png */; };
-		B4A0FCC517C5A58400C7AD56 /* Water_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB517C5A58300C7AD56 /* Water_normal.png */; };
-		B4A0FCC617C5A58400C7AD56 /* PM2.5_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB617C5A58300C7AD56 /* PM2.5_pressed@2x.png */; };
-		B4A0FCC717C5A58400C7AD56 /* PM2.5_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB717C5A58300C7AD56 /* PM2.5_pressed.png */; };
-		B4A0FCC817C5A58400C7AD56 /* PM2.5_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB817C5A58300C7AD56 /* PM2.5_normal@2x.png */; };
-		B4A0FCC917C5A58400C7AD56 /* Natural Gas_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB917C5A58300C7AD56 /* Natural Gas_pressed@2x.png */; };
-		B4A0FCCA17C5A58400C7AD56 /* Natural Gas_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBA17C5A58300C7AD56 /* Natural Gas_pressed.png */; };
-		B4A0FCCB17C5A58400C7AD56 /* Natural Gas_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBB17C5A58300C7AD56 /* Natural Gas_normal@2x.png */; };
-		B4A0FCCC17C5A58400C7AD56 /* Natural Gas_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBC17C5A58300C7AD56 /* Natural Gas_normal.png */; };
-		B4A0FCCD17C5A58400C7AD56 /* Electricity_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBD17C5A58300C7AD56 /* Electricity_pressed@2x.png */; };
-		B4A0FCCE17C5A58400C7AD56 /* Electricity_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBE17C5A58300C7AD56 /* Electricity_pressed.png */; };
-		B4A0FCCF17C5A58400C7AD56 /* Electricity_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBF17C5A58300C7AD56 /* Electricity_normal@2x.png */; };
-		B4A0FCD017C5A58400C7AD56 /* Electricity_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCC017C5A58300C7AD56 /* Electricity_normal.png */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 		EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */; };
 		EF962FFB17C5D78800BBC7DA /* WeiboBana.png in Resources */ = {isa = PBXBuildFile; fileRef = EF962FFA17C5D78800BBC7DA /* WeiboBana.png */; };
+		EF96300617C610A200BBC7DA /* REMBuildingSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */; };
 		EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97DDDA17C20B5700A0374E /* REMToggleButton.m */; };
 /* End PBXBuildFile section */
 
@@ -1042,6 +1026,8 @@
 		EF8F1D7717C2FE5400D3E29F /* REMToggleButtonGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButtonGroup.h; sourceTree = "<group>"; };
 		EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButtonGroup.m; sourceTree = "<group>"; };
 		EF962FFA17C5D78800BBC7DA /* WeiboBana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeiboBana.png; sourceTree = "<group>"; };
+		EF96300417C610A100BBC7DA /* REMBuildingSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingSettingViewController.h; sourceTree = "<group>"; };
+		EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingSettingViewController.m; sourceTree = "<group>"; };
 		EF97DDD917C20B5700A0374E /* REMToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButton.h; sourceTree = "<group>"; };
 		EF97DDDA17C20B5700A0374E /* REMToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1265,6 +1251,8 @@
 				7A1A855117B4BB5D004D7167 /* REMBuildingTrendChartHandler.m */,
 				7A153C6817AA497B00413D3C /* REMBuildingViewController.h */,
 				7A153C6917AA497B00413D3C /* REMBuildingViewController.m */,
+				EF96300417C610A100BBC7DA /* REMBuildingSettingViewController.h */,
+				EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */,
 			);
 			name = Building;
 			path = Controller/Building;
@@ -2201,21 +2189,6 @@
 				7A0288F717C20CC500709111 /* WeiboDialogClose@2x.png in Resources */,
 				7A02890317C20F5B00709111 /* weibo.png in Resources */,
 				7A02890417C20F5B00709111 /* weibo@2x.png in Resources */,
-				B44CCC5817C3463A00A57264 /* default-building.jpg in Resources */,
-				B47422F217C4B3C70021B76C /* Natural Gas_normal.png in Resources */,
-				B47422F317C4B3C70021B76C /* Natural Gas_normal@2x.png in Resources */,
-				B47422F417C4B3C70021B76C /* Natural Gas_pressed.png in Resources */,
-				B47422F517C4B3C70021B76C /* Natural Gas_pressed@2x.png in Resources */,
-				B47422F617C4B3C70021B76C /* PM2.5_normal.png in Resources */,
-				B47422F717C4B3C70021B76C /* PM2.5_normal@2x.png in Resources */,
-				B47422F817C4B3C70021B76C /* PM2.5_pressed@2x.png in Resources */,
-				B47422F917C4B3C70021B76C /* Water_normal@2x.png in Resources */,
-				B47422FA17C4B3C70021B76C /* Water_pressed.png in Resources */,
-				B47422FB17C4B3C70021B76C /* Water_pressed@2x.png in Resources */,
-				B474230017C4B3DE0021B76C /* Electricity_normal.png in Resources */,
-				B474230117C4B3DE0021B76C /* Electricity_normal@2x.png in Resources */,
-				B474230217C4B3DE0021B76C /* Electricity_pressed.png in Resources */,
-				B474230317C4B3DE0021B76C /* Electricity_pressed@2x.png in Resources */,
 				EF962FFB17C5D78800BBC7DA /* WeiboBana.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2403,6 +2376,7 @@
 				7A02890017C20CC500709111 /* Weibo.m in Sources */,
 				EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */,
 				EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */,
+				EF96300617C610A200BBC7DA /* REMBuildingSettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

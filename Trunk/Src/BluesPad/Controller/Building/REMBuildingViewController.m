@@ -132,6 +132,7 @@
 }
 
 - (void)settingButtonPressed:(UIButton *)button{
+    [self performSegueWithIdentifier:@"buildingSettingSegue" sender:self];
     NSLog(@"setting button pressed");
 }
 
