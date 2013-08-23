@@ -174,8 +174,9 @@
 
 - (void)requireChartDataWithBuildingId:(NSNumber *)buildingId complete:(void (^)(BOOL))callback
 {
-    
-    for (int i=0; i<self.commodityViewArray.count; i++) {
+    int count = self.commodityViewArray.count;
+    if(self.buildingInfo.airQuality!=nil) count--;
+    for (int i=0; i<count; i++) {
         REMBuildingCommodityView *view = self.commodityViewArray[i];
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
         NSNumber *status=[self.successDic objectForKey:model.commodity.commodityId];
@@ -187,6 +188,17 @@
             }
         }];
     }
+    
+    REMBuildingAirQualityView *view = self.commodityViewArray[self.commodityViewArray.count-1];
+    REMAirQualityModel *model = self.buildingInfo.airQuality;
+    NSNumber *status=[self.successDic objectForKey:model.commodity.commodityId];
+    if([status isEqualToNumber:@(1)] == YES) return;
+    [view requireChartDataWithBuildingId:buildingId withCommodityId:model.commodity.commodityId complete:^(BOOL success){
+        [self.successDic setObject:@(1) forKey:model.commodity.commodityId];
+        if (callback != nil) {
+            callback(success);
+        }
+    }];
 }
 
 

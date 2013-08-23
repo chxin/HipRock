@@ -29,10 +29,9 @@
 	// Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
+- (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(void))loadCompleted
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    loadCompleted();
 }
 
 @end

@@ -286,7 +286,6 @@
     store.groupName = [NSString stringWithFormat:@"b-%lld-%lld", buildingId, commodityID];
     store.isStoreLocal = YES;
     store.maskContainer = self.view;
-    store.groupName = nil;
     
     if (self.datasource.count != 6) {
         for (int i = 0; i < 6; i++) {
@@ -314,6 +313,7 @@
     };
     void (^retrieveError)(NSError *error, id response) = ^(NSError *error, id response) {
         //self.widgetTitle.text = [NSString stringWithFormat:@"Error: %@",error.description];
+        NSLog(@"error:%@",error);
     };
     
     [REMDataAccessor access:store success:retrieveSuccess error:retrieveError];
