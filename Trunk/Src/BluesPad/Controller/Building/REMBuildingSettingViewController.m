@@ -7,17 +7,24 @@
 //
 
 #import "REMBuildingSettingViewController.h"
+#import "Weibo.h"
+#import "WeiboAccounts.h"
+#import "REMAlertHelper.h"
 
 @interface REMBuildingSettingViewController ()
 
 @end
 
 @implementation REMBuildingSettingViewController
+- (IBAction)backButtonPressed:(UIBarButtonItem *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
+        
         // Custom initialization
     }
     return self;
@@ -28,6 +35,7 @@
     [super viewDidLoad];
     UITableView* myView = (UITableView*)self.view;
     [myView  registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -45,14 +53,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
     return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     if (section == 0) return 2;
     if (section == 1) return 1;
@@ -64,15 +69,36 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
-    if (indexPath.section == 1) {
-        
-    }
-    // Configure the cell...
     
+    // weibo account binding cell
+    if (indexPath.section == 1 && indexPath.item == 0) {
+        [[cell textLabel]setText:@"绑定新浪微博"];
+        UISwitch* s = [[UISwitch alloc]initWithFrame:CGRectMake(405, 12, 79, 27)];
+        s.on = [Weibo.weibo isAuthenticated];
+        [s addTarget:self action:@selector(weiboSwitcherChanged:) forControlEvents:UIControlEventValueChanged];
+        [cell addSubview:s];
+    }
     return cell;
 }
 
+- (void) weiboSwitcherChanged:(UISwitch*)sender {
+    BOOL isAuthed = [Weibo.weibo isAuthenticated];
+    if (sender.on == NO && isAuthed) {
+        [[WeiboAccounts shared]signOut];
+    } else if (!isAuthed && sender.on == YES){
+        [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
+            NSString *message = nil;
+            if (!error) {
+                message = @"微博账户绑定成功";
+            }
+            else {
+                message = [NSString stringWithFormat:@"微博账户绑定失败: %@", error];
+                sender.on = NO;
+            }
+            [REMAlertHelper alert:message];
+        }];
+    }
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

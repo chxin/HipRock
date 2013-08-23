@@ -132,42 +132,24 @@
 }
 
 - (void)settingButtonPressed:(UIButton *)button{
-    [self performSegueWithIdentifier:@"buildingSettingSegue" sender:self];
+    [self performSegueWithIdentifier:@"buildingSettingSegue2" sender:self];
     NSLog(@"setting button pressed");
 }
 
 -(void)shareButtonTouchDown:(UIButton *)button
 {
+    REMImageView* currentView = [self.imageArray objectAtIndex:self.currentIndex];
+    UIImage* screenShoot = [currentView generateWeiboImage];
+    
     NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString* myDocPath = myPaths[0];
     NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
-
-    
-//    NSString *content = @"Hello kitty!";
-    REMImageView* currentView = [self.imageArray objectAtIndex:self.currentIndex];
-    UIImage* screenShoot = [currentView generateWeiboImage];
     [UIImagePNGRepresentation(screenShoot) writeToFile:fileName atomically:NO];
+    
     NSData *image = UIImagePNGRepresentation(screenShoot);
     if (![Weibo.weibo isAuthenticated]) {
-        [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
-            NSString *message = nil;
-            if (!error) {
-                message = [NSString stringWithFormat:@"Sign in successful: %@", account.user.screenName ];
-                NSLog(@"%@", message);
-                [REMAlertHelper alert:message];
-                
-                [self sendWeibo:@"FDFDF" withImage:image];
-            }
-            else {
-                message = [NSString stringWithFormat:@"Failed to sign in: %@", error];
-                NSLog(@"%@", message);
-                [REMAlertHelper alert:message];
-            }
-        }];
-    }
-    else {
-        NSLog(@"%@", Weibo.weibo.currentAccount.user.screenName);
-        
+        [REMAlertHelper alert:@"未绑定微博账户。"];
+    } else {
         [self sendWeibo:@"FDFDF" withImage:image];
     }
     

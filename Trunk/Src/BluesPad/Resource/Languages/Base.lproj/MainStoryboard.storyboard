@@ -117,7 +117,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <segue destination="nX8-ih-mDs" kind="push" identifier="buildingToDashboardSegue" id="AYf-DZ-2t4"/>
-                        <segue destination="x1i-1Z-0Fm" kind="modal" identifier="buildingSettingSegue" id="pRp-gk-Q6i"/>
+                        <segue destination="vUT-Vk-hfp" kind="modal" identifier="buildingSettingSegue2" id="JWw-pn-ue8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujE-me-aPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1170,40 +1170,28 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1283" y="-2923"/>
         </scene>
-        <!--Building Setting View Controller-->
-        <scene sceneID="x0B-3Y-mZ6">
+        <!--Building Setting View Controller - 设置-->
+        <scene sceneID="MQr-Ii-7F7">
             <objects>
-                <tableViewController autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="formSheet" clearsSelectionOnViewWillAppear="NO" id="x1i-1Z-0Fm" customClass="REMBuildingSettingViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="u6N-h8-lf2">
-                        <rect key="frame" x="0.0" y="20" width="540" height="600"/>
+                <tableViewController autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="formSheet" id="wRO-Bn-ppJ" customClass="REMBuildingSettingViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="9BB-en-H3K">
+                        <rect key="frame" x="0.0" y="64" width="540" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <sections>
-                            <tableViewSection id="Se0-Uy-zap">
+                            <tableViewSection id="h7o-IX-gL8">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="displayName" textLabel="N2v-62-kwe" detailTextLabel="dk5-cg-Wur" style="IBUITableViewCellStyleValue1" id="3Es-M2-hLU">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="TVN-ib-sVy">
                                         <rect key="frame" x="0.0" y="30" width="540" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="31" y="1" width="478" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2v-62-kwe">
-                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk5-cg-Wur">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sect" id="5vM-vL-Sib">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="NIt-tD-L7M">
                                         <rect key="frame" x="0.0" y="75" width="540" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1214,9 +1202,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="Zkn-0d-8He">
+                            <tableViewSection id="6yL-Wi-jZ1">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="weiboSwitcher" id="tRe-bV-kRB">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ILa-nZ-lg1">
                                         <rect key="frame" x="0.0" y="140" width="540" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1227,11 +1215,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="rVa-fo-BPV">
+                            <tableViewSection id="UdI-5P-enz">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="quit" id="HWx-YD-hCh">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="l3s-R4-LXh">
                                         <rect key="frame" x="0.0" y="206" width="540" height="46"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="31" y="1" width="478" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1241,16 +1229,36 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </cells>
                             </tableViewSection>
                         </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="x1i-1Z-0Fm" id="EKJ-jU-6T3"/>
-                            <outlet property="delegate" destination="x1i-1Z-0Fm" id="hX9-we-sNB"/>
-                        </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="设置" id="mnH-gw-Zz4">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="reply" id="2dd-Hn-SRO">
+                            <connections>
+                                <action selector="backButtonPressed:" destination="wRO-Bn-ppJ" id="Ih8-u1-q9Y"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MQC-Le-glS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w7e-H1-kOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2293" y="-6"/>
+            <point key="canvasLocation" x="-1579" y="666"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xnY-m1-p1k">
+            <objects>
+                <navigationController autoresizesArchivedViewToFullSize="NO" definesPresentationContext="YES" modalPresentationStyle="formSheet" id="vUT-Vk-hfp" sceneMemberID="viewController">
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YL9-Xh-mkx">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="wRO-Bn-ppJ" kind="relationship" relationship="rootViewController" id="zg6-wN-df8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qs8-1K-3SC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2431" y="186"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="ste-vW-v6a">
@@ -1472,6 +1480,132 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="splashscreen.png" width="2048" height="1536"/>
         <image name="user.png" width="32" height="32"/>
     </resources>
+    <classes>
+        <class className="REMBuildingSettingViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMBuildingSettingViewController.h"/>
+        </class>
+        <class className="REMBuildingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMBuildingViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="dashboardButtonPressed:"/>
+                <relationship kind="action" name="logoutButtonPressed:"/>
+            </relationships>
+        </class>
+        <class className="REMChartLegendTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMChartLegendTableViewController.h"/>
+        </class>
+        <class className="REMColoredButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMColoredButton.h"/>
+        </class>
+        <class className="REMDashboardLeftNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMDashboardLeftNavigationController.h"/>
+        </class>
+        <class className="REMDashboardMainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMDashboardMainViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dashboardListContainer" candidateClass="UIView"/>
+                <relationship kind="outlet" name="widgetsContainer" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="REMDashboardRootViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMDashboardRootViewController.h"/>
+        </class>
+        <class className="REMDashboardViewController" superclassName="UICollectionViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMDashboardViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="collectionView" candidateClass="UICollectionView"/>
+            </relationships>
+        </class>
+        <class className="REMFavoriteTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMFavoriteTableViewController.h"/>
+        </class>
+        <class className="REMIndicatorButton" superclassName="REMColoredButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMIndicatorButton.h"/>
+        </class>
+        <class className="REMLoginCarouselController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMLoginCarouselController.h"/>
+            <relationships>
+                <relationship kind="action" name="gotoLoginButtonTouchDown:"/>
+                <relationship kind="action" name="pageChanged:"/>
+                <relationship kind="outlet" name="gotoLoginButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="REMLoginPageController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMLoginPageController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginButtonPressed:"/>
+                <relationship kind="action" name="textFieldChanged:"/>
+                <relationship kind="outlet" name="loginButton" candidateClass="REMIndicatorButton"/>
+                <relationship kind="outlet" name="passwordErrorLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="userNameErrorLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="userNameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="REMMainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMMainViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dashboardContainer" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="REMSplashScreenController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMSplashScreenController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="logoView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="REMWidgetCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMWidgetCell.h"/>
+            <relationships>
+                <relationship kind="action" name="detailButtonClick:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="chartView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="detailButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="REMWidgetCellView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMWidgetCellView.h"/>
+        </class>
+        <class className="REMWidgetMaxView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMWidgetMaxView.h"/>
+        </class>
+        <class className="REMWidgetMaxViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMWidgetMaxViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="legendTap:"/>
+                <relationship kind="action" name="searchClick:" candidateClass="UIButton"/>
+                <relationship kind="action" name="stepChanged:" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="chartView" candidateClass="REMWidgetMaxView"/>
+                <relationship kind="outlet" name="endDateButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="relativeDateButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="startDateButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="stepButton" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="stepToolbar" candidateClass="REMWidgetStepToolbarView"/>
+                <relationship kind="outlet" name="tooltipLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="REMWidgetRelativeDateTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMWidgetRelativeDateTableViewController.h"/>
+        </class>
+        <class className="REMWidgetStepToolbarView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMWidgetStepToolbarView.h"/>
+        </class>
+        <class className="REMWidgetTimePickerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMWidgetTimePickerViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="datePickerClick:" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+            </relationships>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
