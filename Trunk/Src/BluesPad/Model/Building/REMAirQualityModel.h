@@ -14,8 +14,8 @@
 
 @property (nonatomic,strong) REMCommodityModel *commodity;
 @property (nonatomic,strong) REMEnergyUsageDataModel *outdoor;
-@property (nonatomic,strong) REMEnergyUsageDataModel *huoni;
-@property (nonatomic,strong) REMEnergyUsageDataModel *meiai;
+@property (nonatomic,strong) REMEnergyUsageDataModel *honeywell;
+@property (nonatomic,strong) REMEnergyUsageDataModel *mayair;
 
 
 @end

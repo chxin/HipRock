@@ -64,6 +64,27 @@
         [array addObject:btn];
        
     }
+    if(self.buildingInfo.airQuality!=nil){
+        
+        REMAirQualityModel *model = self.buildingInfo.airQuality;
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*kBuildingCommodityButtonDimension, 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
+        btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
+        
+        NSString *str = [self retrieveCommodityImageName:model.commodity];
+        btn.imageView.contentMode=UIViewContentModeScaleToFill;
+        btn.showsTouchWhenHighlighted=YES;
+        btn.adjustsImageWhenHighlighted=YES;
+        
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal.png",str]] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed.png",str]] forState:UIControlStateSelected];
+        if(i==0){
+            [btn setSelected:YES];
+        }
+        [self addSubview:btn];
+        
+        [btn addTarget:self action:@selector(commodityChanged:) forControlEvents:UIControlEventTouchUpInside];
+        [array addObject:btn];
+    }
     
     self.buttonArray=array;
 }
@@ -83,7 +104,7 @@
     }
     else if([model.commodityId isEqualToNumber:@(3)] == YES)
     {
-        return @"oil";
+        return @"Natural Gas";
     }
     else if([model.commodityId isEqualToNumber:@(5)] == YES)
     {
