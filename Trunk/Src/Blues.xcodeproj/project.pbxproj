@@ -459,6 +459,8 @@
 		7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8B177B41B0000F77F9 /* MainStoryboard.storyboard */; };
 		7A5E2D95177B41B0000F77F9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8D177B41B0000F77F9 /* InfoPlist.strings */; };
 		7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */; };
+		7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */; };
+		7A9557C017C73AD200249CED /* REMBuildingAirQualityChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9557BF17C73AD200249CED /* REMBuildingAirQualityChart.m */; };
 		7A9B1E20177B3A8B00C282A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */; };
 		7A9B1E22177B3A8B00C282A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E21177B3A8B00C282A8 /* Foundation.framework */; };
 		7A9B1E24177B3A8B00C282A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E23177B3A8B00C282A8 /* CoreGraphics.framework */; };
@@ -827,6 +829,10 @@
 		7A6E6D0B17A65CE500FBB264 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		7A6E6D0D17A65CE500FBB264 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		7A9557BB17C7374700249CED /* REMAirQualityDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAirQualityDataModel.h; sourceTree = "<group>"; };
+		7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAirQualityDataModel.m; sourceTree = "<group>"; };
+		7A9557BE17C73AD200249CED /* REMBuildingAirQualityChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAirQualityChart.h; sourceTree = "<group>"; };
+		7A9557BF17C73AD200249CED /* REMBuildingAirQualityChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingAirQualityChart.m; sourceTree = "<group>"; };
 		7A9B1E1C177B3A8B00C282A8 /* BluesPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluesPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		7A9B1E21177B3A8B00C282A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -1213,6 +1219,8 @@
 				7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */,
 				B4A0FCD617C6057D00C7AD56 /* REMAirQualityModel.h */,
 				B4A0FCD717C6057E00C7AD56 /* REMAirQualityModel.m */,
+				7A9557BB17C7374700249CED /* REMAirQualityDataModel.h */,
+				7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */,
 			);
 			name = Building;
 			path = Model/Building;
@@ -1371,6 +1379,8 @@
 				7A1A854117B4B2E9004D7167 /* REMBuildingTrendChart.m */,
 				7A1A854317B4B302004D7167 /* REMBuildingAverageChart.h */,
 				7A1A854417B4B303004D7167 /* REMBuildingAverageChart.m */,
+				7A9557BE17C73AD200249CED /* REMBuildingAirQualityChart.h */,
+				7A9557BF17C73AD200249CED /* REMBuildingAirQualityChart.m */,
 			);
 			name = Chart;
 			path = View/Chart;
@@ -2401,6 +2411,8 @@
 				B4A0FCDB17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m in Sources */,
 				EF96300617C610A200BBC7DA /* REMBuildingSettingViewController.m in Sources */,
 				EF97879617C70B440062BE0E /* REMBuildingSettingNavigationController.m in Sources */,
+				7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */,
+				7A9557C017C73AD200249CED /* REMBuildingAirQualityChart.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -36,4 +36,10 @@ typedef enum _REMDateTimePart : NSUInteger{
 
 + (NSDate *)add:(int)difference onPart:(REMDateTimePart)part ofDate:(NSDate *)date;
 
++ (NSUInteger)getYear:(NSDate *)date;
++ (NSUInteger)getMonth:(NSDate *)date;
++ (NSUInteger)getDay:(NSDate *)date;
++ (int )getHour:(NSDate *)date;
++ (int)getMinute:(NSDate *)date;
+
 @end
