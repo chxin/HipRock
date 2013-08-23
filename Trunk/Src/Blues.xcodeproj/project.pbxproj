@@ -532,6 +532,7 @@
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 		EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */; };
 		EF962FFB17C5D78800BBC7DA /* WeiboBana.png in Resources */ = {isa = PBXBuildFile; fileRef = EF962FFA17C5D78800BBC7DA /* WeiboBana.png */; };
+		EF96300617C610A200BBC7DA /* REMBuildingSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */; };
 		EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97DDDA17C20B5700A0374E /* REMToggleButton.m */; };
 /* End PBXBuildFile section */
 
@@ -1025,6 +1026,8 @@
 		EF8F1D7717C2FE5400D3E29F /* REMToggleButtonGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButtonGroup.h; sourceTree = "<group>"; };
 		EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButtonGroup.m; sourceTree = "<group>"; };
 		EF962FFA17C5D78800BBC7DA /* WeiboBana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeiboBana.png; sourceTree = "<group>"; };
+		EF96300417C610A100BBC7DA /* REMBuildingSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingSettingViewController.h; sourceTree = "<group>"; };
+		EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingSettingViewController.m; sourceTree = "<group>"; };
 		EF97DDD917C20B5700A0374E /* REMToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButton.h; sourceTree = "<group>"; };
 		EF97DDDA17C20B5700A0374E /* REMToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1248,6 +1251,8 @@
 				7A1A855117B4BB5D004D7167 /* REMBuildingTrendChartHandler.m */,
 				7A153C6817AA497B00413D3C /* REMBuildingViewController.h */,
 				7A153C6917AA497B00413D3C /* REMBuildingViewController.m */,
+				EF96300417C610A100BBC7DA /* REMBuildingSettingViewController.h */,
+				EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */,
 			);
 			name = Building;
 			path = Controller/Building;
@@ -2371,6 +2376,7 @@
 				7A02890017C20CC500709111 /* Weibo.m in Sources */,
 				EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */,
 				EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */,
+				EF96300617C610A200BBC7DA /* REMBuildingSettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
