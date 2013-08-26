@@ -40,6 +40,7 @@
 #define kBuildingCommodityDetailUomFontSize 20
 #define kBuildingCommodityDetailWidth 288
 
+#define kBuildingCommodityDetailTextMargin 24
 
 
 #define kBuildingCommodityLeftMargin 5

@@ -14,7 +14,7 @@
 
 @property (nonatomic,strong) UILabel *titleLabel;
 
-- (void)initTitle:(NSString *)text withSize:(CGFloat)size;
+- (void)initTitle:(NSString *)text withSize:(CGFloat)size withLeftMargin:(CGFloat)leftMargin;
 
 - (NSString *)addThousandSeparator:(NSNumber *)number;
 

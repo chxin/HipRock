@@ -17,7 +17,8 @@
 - (id)initWithFrame:(CGRect)frame
            withData:(REMEnergyUsageDataModel *)data
            withTitle:(NSString *)title andTitleFontSize:(CGFloat)size
-            withTitleMargin:(CGFloat)margin 
+            withTitleMargin:(CGFloat)margin
+            withLeftMargin:(CGFloat)leftMargin
             withValueFontSize:(CGFloat)size withUomFontSize:(CGFloat) size;
 
 @end

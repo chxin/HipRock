@@ -27,14 +27,23 @@ typedef void(^SuccessCallback)(BOOL success);
 
 @implementation REMBuildingCommodityView
 
+- (id)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if(self){
+        
+        self.successCounter=0;
+        self.contentSize=CGSizeMake(0, 2000);
+    }
+    
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame withCommodityInfo:(REMCommodityUsageModel *)commodityInfo
 {
     self = [super initWithFrame:frame];
     if (self) {
         
         self.commodityInfo=commodityInfo;
-        self.successCounter=0;
-        self.contentSize=CGSizeMake(0, 1000);
         
         [self initTotalValue];
         [self initDetailValue];
@@ -82,7 +91,7 @@ typedef void(^SuccessCallback)(BOOL success);
 - (void)initTotalValue
 {
     
-    self.totalLabel=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, 0, 1000, kBuildingCommodityTotalHeight) withData:self.commodityInfo.commodityUsage withTitle:[NSString stringWithFormat:@"上月用%@总量",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingTotalInnerMargin   withValueFontSize:kBuildingCommodityTotalValueFontSize withUomFontSize:kBuildingCommodityTotalUomFontSize];
+    self.totalLabel=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, 0, 300, kBuildingCommodityTotalHeight) withData:self.commodityInfo.commodityUsage withTitle:[NSString stringWithFormat:@"上月用%@总量",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingTotalInnerMargin withLeftMargin:0   withValueFontSize:kBuildingCommodityTotalValueFontSize withUomFontSize:kBuildingCommodityTotalUomFontSize];
     
     [self addSubview:self.totalLabel];
     
@@ -92,18 +101,51 @@ typedef void(^SuccessCallback)(BOOL success);
 {
     int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityBottomMargin;
     
-    REMBuildingTitleLabelView *carbon=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.carbonEquivalent withTitle:@"二氧化碳当量" andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin   withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityDetailUomFontSize];
+    REMBuildingTitleLabelView *carbon=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.carbonEquivalent withTitle:@"二氧化碳当量" andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin withLeftMargin:0   withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityDetailUomFontSize];
     
     [self addSubview:carbon];
     
-    REMBuildingRankingView *ranking=[[REMBuildingRankingView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.rankingData withTitle:@"集团排名" andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin ];
+    REMBuildingRankingView *ranking=[[REMBuildingRankingView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.rankingData withTitle:@"集团排名" andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin withLeftMargin:kBuildingCommodityDetailTextMargin ];
+    
+    
     
     [self addSubview:ranking];
     
+    [self addSplitBar:ranking];
     
-    REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.targetValue withTitle:@"目标值"  andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin   withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityDetailUomFontSize];
+    
+    REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.targetValue withTitle:@"目标值"  andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin withLeftMargin:kBuildingCommodityDetailTextMargin  withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityDetailUomFontSize];
     
     [self addSubview:target];
+}
+
+- (void)addSplitBar:(UIView *)view
+{
+    CGRect frame=view.frame;
+    NSLog(@"splitbar:%@",NSStringFromCGRect(frame));
+    CGRect frame1 = CGRectMake(0, 0, 4, frame.size.height);
+    
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+   
+    [gradient setStartPoint:CGPointMake(0, 0.5)];
+    [gradient setEndPoint:CGPointMake(1, 0.5)];
+   
+    gradient.frame = frame1;
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.25].CGColor,
+                       (id)[UIColor colorWithRed:255 green:255 blue:255 alpha:0.11].CGColor,
+                       nil];
+    
+    UIGraphicsBeginImageContextWithOptions(frame1.size, NO, 0.0);
+    CGContextRef c = UIGraphicsGetCurrentContext();
+    
+    [gradient renderInContext:c];
+    
+    
+    UIGraphicsEndImageContext();
+    
+    
+    [view.layer insertSublayer:gradient above:view.layer];
 }
 
 - (void)initChartContainer
@@ -111,6 +153,9 @@ typedef void(^SuccessCallback)(BOOL success);
     int marginTop=kBuildingTotalInnerMargin+kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingDetailGroupMargin+kBuildingTotalGroupMargin;
 
     REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0,marginTop , kBuildingChartWidth, kBuildingChartHeight) withTitle: [NSString stringWithFormat:@"单位面积逐月用%@",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
+    
+    
+    
     
     [self addSubview:view];
     
