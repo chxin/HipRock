@@ -34,6 +34,8 @@ typedef void(^SuccessCallback)(BOOL success);
         
         self.commodityInfo=commodityInfo;
         self.successCounter=0;
+        self.contentSize=CGSizeMake(0, 1000);
+        
         [self initTotalValue];
         [self initDetailValue];
         [self initChartContainer];
@@ -41,6 +43,41 @@ typedef void(^SuccessCallback)(BOOL success);
     
     return self;
 }
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    if([gestureRecognizer.view isKindOfClass:[REMBuildingCommodityView class]] == YES){
+        if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] == YES){
+            UIScrollView *parent = (UIScrollView *)self.superview;
+            
+            UIPanGestureRecognizer *p = (UIPanGestureRecognizer *)gestureRecognizer;
+            CGPoint movement=[p translationInView:self];
+            NSLog(@"movement:%@",NSStringFromCGPoint(movement));
+            
+            if(movement.y>0){
+                self.bounces=NO;
+            }
+            else{
+                self.bounces=YES;
+            }
+            
+            if(parent.contentOffset.y>=-20){
+                if(movement.y>0 && self.contentOffset.y<=0){
+                    return NO;
+                }
+                
+                return YES;
+            }
+            else{
+                return NO;
+            }
+        }
+    }
+    
+    return [super gestureRecognizerShouldBegin:gestureRecognizer];
+}
+
+
 
 - (void)initTotalValue
 {
@@ -53,7 +90,8 @@ typedef void(^SuccessCallback)(BOOL success);
 
 - (void)initDetailValue
 {
-    int marginTop=kBuildingTotalGroupMargin+kBuildingCommodityTotalHeight+kBuildingCommodityTotalTitleHeight+kBuildingTotalInnerMargin;
+    int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityBottomMargin;
+    
     REMBuildingTitleLabelView *carbon=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.carbonEquivalent withTitle:@"二氧化碳当量" andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin   withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityDetailUomFontSize];
     
     [self addSubview:carbon];
