@@ -8,6 +8,11 @@
 
 #import "REMBuildingAirQualityChart.h"
 
+@interface REMBuildingAirQualityChart()
+
+
+@end
+
 @implementation REMBuildingAirQualityChart
 
 - (id)initWithFrame:(CGRect)frame
@@ -15,7 +20,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        [self initializeGraph];
+        //[self initializeGraph];
     }
     return self;
 }
@@ -23,13 +28,18 @@
 
 -(void)initializeGraph
 {
-    self.hostedGraph=[[CPTXYGraph alloc]initWithFrame:self.bounds];
-    self.hostedGraph.plotAreaFrame.paddingTop=0.0f;
-    self.hostedGraph.plotAreaFrame.paddingRight=0.0f;
-    self.hostedGraph.plotAreaFrame.paddingBottom=40.0f;
-    self.hostedGraph.plotAreaFrame.paddingLeft=50.0f;
-    self.hostedGraph.plotAreaFrame.masksToBorder = NO;
+    self.hostView = [[CPTGraphHostingView alloc] initWithFrame:self.bounds];
+    [self addSubview:self.hostView];
+    
+    
+    self.hostView.hostedGraph=[[CPTXYGraph alloc]initWithFrame:self.bounds];
+    self.hostView.hostedGraph.plotAreaFrame.paddingTop=0.0f;
+    self.hostView.hostedGraph.plotAreaFrame.paddingRight=0.0f;
+    self.hostView.hostedGraph.plotAreaFrame.paddingBottom=40.0f;
+    self.hostView.hostedGraph.plotAreaFrame.paddingLeft=50.0f;
+    self.hostView.hostedGraph.plotAreaFrame.masksToBorder = NO;
 }
+
 
 
 @end

@@ -1022,10 +1022,10 @@
 		B4A0FCB617C5A58300C7AD56 /* PM2.5_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PM2.5_pressed@2x.png"; path = "building/commodity/PM2.5_pressed@2x.png"; sourceTree = "<group>"; };
 		B4A0FCB717C5A58300C7AD56 /* PM2.5_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PM2.5_pressed.png; path = building/commodity/PM2.5_pressed.png; sourceTree = "<group>"; };
 		B4A0FCB817C5A58300C7AD56 /* PM2.5_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PM2.5_normal@2x.png"; path = "building/commodity/PM2.5_normal@2x.png"; sourceTree = "<group>"; };
-		B4A0FCB917C5A58300C7AD56 /* Natural Gas_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Natural Gas_pressed@2x.png"; path = "building/commodity/Natural Gas_pressed@2x.png"; sourceTree = "<group>"; };
-		B4A0FCBA17C5A58300C7AD56 /* Natural Gas_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Natural Gas_pressed.png"; path = "building/commodity/Natural Gas_pressed.png"; sourceTree = "<group>"; };
-		B4A0FCBB17C5A58300C7AD56 /* Natural Gas_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Natural Gas_normal@2x.png"; path = "building/commodity/Natural Gas_normal@2x.png"; sourceTree = "<group>"; };
-		B4A0FCBC17C5A58300C7AD56 /* Natural Gas_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Natural Gas_normal.png"; path = "building/commodity/Natural Gas_normal.png"; sourceTree = "<group>"; };
+		B4A0FCB917C5A58300C7AD56 /* NaturalGas_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NaturalGas_pressed@2x.png"; path = "building/commodity/NaturalGas_pressed@2x.png"; sourceTree = "<group>"; };
+		B4A0FCBA17C5A58300C7AD56 /* NaturalGas_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NaturalGas_pressed.png; path = building/commodity/NaturalGas_pressed.png; sourceTree = "<group>"; };
+		B4A0FCBB17C5A58300C7AD56 /* NaturalGas_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NaturalGas_normal@2x.png"; path = "building/commodity/NaturalGas_normal@2x.png"; sourceTree = "<group>"; };
+		B4A0FCBC17C5A58300C7AD56 /* NaturalGas_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NaturalGas_normal.png; path = building/commodity/NaturalGas_normal.png; sourceTree = "<group>"; };
 		B4A0FCBD17C5A58300C7AD56 /* Electricity_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Electricity_pressed@2x.png"; path = "building/commodity/Electricity_pressed@2x.png"; sourceTree = "<group>"; };
 		B4A0FCBE17C5A58300C7AD56 /* Electricity_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Electricity_pressed.png; path = building/commodity/Electricity_pressed.png; sourceTree = "<group>"; };
 		B4A0FCBF17C5A58300C7AD56 /* Electricity_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Electricity_normal@2x.png"; path = "building/commodity/Electricity_normal@2x.png"; sourceTree = "<group>"; };
@@ -2057,21 +2057,21 @@
 			isa = PBXGroup;
 			children = (
 				B4A0FCB117C5A58300C7AD56 /* PM2.5_normal.png */,
-				B4A0FCB217C5A58300C7AD56 /* Water_pressed@2x.png */,
-				B4A0FCB317C5A58300C7AD56 /* Water_pressed.png */,
-				B4A0FCB417C5A58300C7AD56 /* Water_normal@2x.png */,
-				B4A0FCB517C5A58300C7AD56 /* Water_normal.png */,
-				B4A0FCB617C5A58300C7AD56 /* PM2.5_pressed@2x.png */,
-				B4A0FCB717C5A58300C7AD56 /* PM2.5_pressed.png */,
 				B4A0FCB817C5A58300C7AD56 /* PM2.5_normal@2x.png */,
-				B4A0FCB917C5A58300C7AD56 /* Natural Gas_pressed@2x.png */,
-				B4A0FCBA17C5A58300C7AD56 /* Natural Gas_pressed.png */,
-				B4A0FCBB17C5A58300C7AD56 /* Natural Gas_normal@2x.png */,
-				B4A0FCBC17C5A58300C7AD56 /* Natural Gas_normal.png */,
-				B4A0FCBD17C5A58300C7AD56 /* Electricity_pressed@2x.png */,
+				B4A0FCB717C5A58300C7AD56 /* PM2.5_pressed.png */,
+				B4A0FCB617C5A58300C7AD56 /* PM2.5_pressed@2x.png */,
+				B4A0FCB317C5A58300C7AD56 /* Water_pressed.png */,
+				B4A0FCB217C5A58300C7AD56 /* Water_pressed@2x.png */,
+				B4A0FCB517C5A58300C7AD56 /* Water_normal.png */,
+				B4A0FCB417C5A58300C7AD56 /* Water_normal@2x.png */,
+				B4A0FCBA17C5A58300C7AD56 /* NaturalGas_pressed.png */,
+				B4A0FCB917C5A58300C7AD56 /* NaturalGas_pressed@2x.png */,
+				B4A0FCBC17C5A58300C7AD56 /* NaturalGas_normal.png */,
+				B4A0FCBB17C5A58300C7AD56 /* NaturalGas_normal@2x.png */,
 				B4A0FCBE17C5A58300C7AD56 /* Electricity_pressed.png */,
-				B4A0FCBF17C5A58300C7AD56 /* Electricity_normal@2x.png */,
+				B4A0FCBD17C5A58300C7AD56 /* Electricity_pressed@2x.png */,
 				B4A0FCC017C5A58300C7AD56 /* Electricity_normal.png */,
+				B4A0FCBF17C5A58300C7AD56 /* Electricity_normal@2x.png */,
 			);
 			name = commodity;
 			sourceTree = "<group>";
