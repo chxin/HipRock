@@ -2420,6 +2420,8 @@
 				B4A0FCDB17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m in Sources */,
 				EF96300617C610A200BBC7DA /* REMBuildingSettingViewController.m in Sources */,
 				EF97879617C70B440062BE0E /* REMBuildingSettingNavigationController.m in Sources */,
+				7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */,
+				7A9557C017C73AD200249CED /* REMBuildingAirQualityChart.m in Sources */,
 				EF3822EA17CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

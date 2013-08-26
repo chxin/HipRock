@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+#import "Weibo.h"
+#import "REMAlertHelper.h"
 
-@interface REMBuildingWeiboSendViewController : UIViewController
+@interface REMBuildingWeiboSendViewController : UIViewController<UITextViewDelegate>
 
 @end
