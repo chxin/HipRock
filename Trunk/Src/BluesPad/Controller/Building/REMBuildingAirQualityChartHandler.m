@@ -169,6 +169,10 @@
     //since y axis will never be able to drag, global space and visiable space for y axis are equal
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.dataValueRange.start) length:CPTDecimalFromDouble([self.dataValueRange distance])];
     plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([self.dataValueRange start]) length:CPTDecimalFromDouble([self.dataValueRange distance])];
+    
+    [plotSpace setElasticGlobalXRange:YES];
+    [plotSpace setAllowsMomentum:YES];
+    
 }
 
 -(void)initializeAxises
@@ -288,27 +292,27 @@
 {
     CPTXYAxis *verticalAxis = ((CPTXYAxisSet *)self.chartView.hostedGraph.axisSet).yAxis;
     
-//    REMAirQualityStandardModel *standChina, *standardAmerican;
-//    for(REMAirQualityStandardModel *standard in self.airQualityData.standards){
-//        if([standard.standardName isEqual: @"美国标准"]){
-//            standardAmerican = standard;
-//        }
-//        if([standard.standardName isEqual: @"中国标准"]){
-//            standChina = standard;
-//        }
-//    }
-//    
-//    CPTPlotRange *bandRangeChina=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([standChina.standardValue doubleValue])];
-//    CPTPlotRange *bandRangeAmerican=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([standardAmerican.standardValue doubleValue])];
-//    
-//    CPTColor *colorForChinaStandard = [CPTColor redColor];//[CPTColor colorWithComponentRed:100/255 green:100/255 blue:100/255 alpha:0.5];
-//    CPTColor *colorForAmericanStandard = [CPTColor blueColor];//[CPTColor colorWithComponentRed:200/255 green:200/255 blue:200/255 alpha:0.5];
-//    
-//    CPTLimitBand *standardBandChina= [CPTLimitBand limitBandWithRange:bandRangeChina fill:[CPTFill fillWithColor:colorForChinaStandard]];
-//    CPTLimitBand *standardBandAmerican= [CPTLimitBand limitBandWithRange:bandRangeAmerican fill:[CPTFill fillWithColor:colorForAmericanStandard]];
-//    
-//    [verticalAxis addBackgroundLimitBand:standardBandChina];
-//    [verticalAxis addBackgroundLimitBand:standardBandAmerican];
+    REMAirQualityStandardModel *standChina, *standardAmerican;
+    for(REMAirQualityStandardModel *standard in self.airQualityData.standards){
+        if([standard.standardName isEqual: @"美国标准"]){
+            standardAmerican = standard;
+        }
+        if([standard.standardName isEqual: @"中国标准"]){
+            standChina = standard;
+        }
+    }
+    
+    CPTPlotRange *bandRangeChina=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([standChina.standardValue doubleValue])];
+    CPTPlotRange *bandRangeAmerican=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([standardAmerican.standardValue doubleValue])];
+    
+    CPTColor *colorForChinaStandard = [CPTColor redColor];//[CPTColor colorWithComponentRed:100/255 green:100/255 blue:100/255 alpha:0.5];
+    CPTColor *colorForAmericanStandard = [CPTColor blueColor];//[CPTColor colorWithComponentRed:200/255 green:200/255 blue:200/255 alpha:0.5];
+    
+    CPTLimitBand *standardBandChina= [CPTLimitBand limitBandWithRange:bandRangeChina fill:[CPTFill fillWithColor:colorForChinaStandard]];
+    CPTLimitBand *standardBandAmerican= [CPTLimitBand limitBandWithRange:bandRangeAmerican fill:[CPTFill fillWithColor:colorForAmericanStandard]];
+    
+    [verticalAxis addBackgroundLimitBand:standardBandChina];
+    [verticalAxis addBackgroundLimitBand:standardBandAmerican];
     
     
 }
