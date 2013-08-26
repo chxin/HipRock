@@ -37,7 +37,8 @@
     self.rankingLabel.fontSize=@(kBuildingCommodityDetailValueFontSize);
     self.rankingLabel.textColor=[UIColor whiteColor];
     self.rankingLabel.backgroundColor=[UIColor clearColor];
-    
+    self.rankingLabel.shadowOffset=CGSizeMake(1, 1);
+    self.rankingLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     self.rankingLabel.text=[NSString stringWithFormat:@"%d", data.numerator];
     [self addSubview:self.rankingLabel];
     
@@ -54,6 +55,8 @@
     self.totalLabel.textColor=[UIColor whiteColor];
     self.totalLabel.userInteractionEnabled = NO;
     self.totalLabel.text=[NSString stringWithFormat:@"/%d", data.denominator];
+    self.totalLabel.shadowOffset=CGSizeMake(1, 1);
+    self.totalLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     [self addSubview:self.totalLabel];
 }
 

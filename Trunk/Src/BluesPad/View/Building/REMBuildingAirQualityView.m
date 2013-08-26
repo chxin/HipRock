@@ -47,7 +47,7 @@
 
 - (void)initDetailValue
 {
-    int marginTop=kBuildingTotalGroupMargin+kBuildingCommodityTotalHeight+kBuildingCommodityTotalTitleHeight+kBuildingTotalInnerMargin;
+    int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityBottomMargin;
     
     
     REMBuildingTitleLabelView *outdoor=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.airQuality.outdoor withTitle:@"室外PM2.5" andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin   withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityDetailUomFontSize];

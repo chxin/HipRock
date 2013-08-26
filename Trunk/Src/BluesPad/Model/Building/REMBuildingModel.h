@@ -15,5 +15,6 @@
 @property (nonatomic,strong) NSString *name,*code,*comment, *path;
 @property (nonatomic) NSInteger pathLevel;
 @property (nonatomic) BOOL hasDataPrivilege;
+@property (nonatomic,strong) NSArray *pictureIds;
 
 @end

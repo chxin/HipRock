@@ -10,6 +10,8 @@
 
 @interface REMBuildingDataView()
 
+typedef void(^SuccessCallback)(BOOL success);
+
 @property (nonatomic,strong) NSArray *buttonArray;
 @property (nonatomic,weak)  REMBuildingOverallModel *buildingInfo;
 
@@ -18,6 +20,8 @@
 
 @property (nonatomic,strong) NSMutableDictionary *successDic;
 
+@property (nonatomic,strong) SuccessCallback successBlock;
+@property (nonatomic) NSUInteger successCounter;
 @end
 @implementation REMBuildingDataView
 
@@ -29,8 +33,8 @@
         self.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, kBuildingLeftMargin, 0, 0);
         [self setScrollEnabled:YES];
         //self.clipsToBounds=NO;
-        
-        [self setContentSize:CGSizeMake(0, 1000)];
+        self.successCounter=0;
+        [self setContentSize:CGSizeMake(0, 748-kBuildingTitleHeight-20)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
         self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityUsage.count+1)];
@@ -41,14 +45,12 @@
     return self;
 }
 
-
-- (void)initCommodityButton
-{
+- (NSArray *)retrieveButtons{
     NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:self.buildingInfo.commodityUsage.count];
     int i=0;
     for (;i<self.buildingInfo.commodityUsage.count;++i) {
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*kBuildingCommodityButtonDimension, 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
         btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
         
         NSString *str = [self retrieveCommodityImageName:model.commodity];
@@ -61,16 +63,16 @@
         if(i==0){
             [btn setSelected:YES];
         }
-        [self addSubview:btn];
         
-        [btn addTarget:self action:@selector(commodityChanged:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [array addObject:btn];
-       
+        
     }
     if(self.buildingInfo.airQuality!=nil){
         
         REMAirQualityModel *model = self.buildingInfo.airQuality;
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*kBuildingCommodityButtonDimension, 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
         btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
         btn.layer.masksToBounds=NO;
         NSString *str = [self retrieveCommodityImageName:model.commodity];
@@ -80,17 +82,25 @@
         
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal.png",str]] forState:UIControlStateNormal];
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed.png",str]] forState:UIControlStateSelected];
-        if(i==0){
-            [btn setSelected:YES];
-        }
-        [self addSubview:btn];
         
-        [btn addTarget:self action:@selector(commodityChanged:) forControlEvents:UIControlEventTouchUpInside];
+        [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [array addObject:btn];
     }
     
-    self.buttonArray=array;
+    return array;
 }
+
+
+
+- (void)initCommodityButton
+{
+    self.buttonArray=[self retrieveButtons];
+    for (int i=0; i<self.buttonArray.count; ++i) {
+        UIButton *btn = self.buttonArray[i];
+        [self addSubview:btn];
+    }
+}
+
 
 - (NSString *)retrieveCommodityImageName:(REMCommodityModel *)model
 {
@@ -118,7 +128,7 @@
     }
 }
 
-- (void)commodityChanged:(UIButton *)button
+- (void)buttonPressed:(UIButton *)button
 {
     if(button.selected == YES) return;
     int current =0;
@@ -154,7 +164,7 @@
     for (;i<self.buildingInfo.commodityUsage.count;++i ) {
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
         REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withCommodityInfo:model];
-        
+        view.delegate=self;
         if(i!=0){
             view.alpha=0;
         }
@@ -164,7 +174,7 @@
     if(self.buildingInfo.airQuality!=nil){
         
         REMBuildingAirQualityView *view = [[REMBuildingAirQualityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withAirQualityInfo:self.buildingInfo.airQuality];
-        
+        view.delegate=self;
         view.alpha=0;
         
         [self addSubview:view];
@@ -174,33 +184,49 @@
     self.commodityViewArray=array;
 }
 
+- (void)sucessRequest{
+    self.successCounter+=1;
+    int total=self.buildingInfo.commodityUsage.count;
+    if(self.buildingInfo.airQuality!=nil) total++;
+    if(self.successCounter == total){
+        if(self.successBlock!=nil){
+            self.successBlock(YES);
+            self.successCounter=0;
+            self.successBlock=nil;
+        }
+    }
+}
 
 - (void)requireChartDataWithBuildingId:(NSNumber *)buildingId complete:(void (^)(BOOL))callback
 {
     int count = self.commodityViewArray.count;
     if(self.buildingInfo.airQuality!=nil) count--;
+    self.successBlock=callback;
+    self.successCounter=0;
     for (int i=0; i<count; i++) {
         REMBuildingCommodityView *view = self.commodityViewArray[i];
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
         NSNumber *status=[self.successDic objectForKey:model.commodity.commodityId];
-        if([status isEqualToNumber:@(1)] == YES) continue;
+        if([status isEqualToNumber:@(1)] == YES) {
+            [self sucessRequest];
+            continue;
+        }
         [view requireChartDataWithBuildingId:buildingId withCommodityId:model.commodity.commodityId complete:^(BOOL success){
             [self.successDic setObject:@(1) forKey:model.commodity.commodityId];
-            if (callback != nil) {
-                callback(success);
-            }
+            [self sucessRequest];
         }];
     }
     if(self.buildingInfo.airQuality!=nil){
         REMBuildingAirQualityView *view = self.commodityViewArray[self.commodityViewArray.count-1];
         REMAirQualityModel *model = self.buildingInfo.airQuality;
         NSNumber *status=[self.successDic objectForKey:model.commodity.commodityId];
-        if([status isEqualToNumber:@(1)] == YES) return;
+        if([status isEqualToNumber:@(1)] == YES) {
+            [self sucessRequest];
+            return ;
+        }
         [view requireChartDataWithBuildingId:buildingId withCommodityId:model.commodity.commodityId complete:^(BOOL success){
             [self.successDic setObject:@(1) forKey:model.commodity.commodityId];
-            if (callback != nil) {
-                callback(success);
-            }
+            [self sucessRequest];
         }];
     }
 }
@@ -237,10 +263,20 @@
         if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]==YES){
             UIPanGestureRecognizer *p = (UIPanGestureRecognizer *)gestureRecognizer;
             CGPoint movement=[p translationInView:self];
+            
+            if(movement.y<0){
+                [self setBounces:NO];
+            }
+            else{
+                [self setBounces:YES];
+            }
           
             if(movement.x!=0){
                 return NO;
             }
+            if(self.contentOffset.y>=-20 && movement.y<=0)return NO;
+            
+            
             
         }
     }

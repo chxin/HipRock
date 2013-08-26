@@ -34,7 +34,7 @@
     
     self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kBuildingCommodityDetailWidth, size)];
     self.titleLabel.text=text;
-    self.titleLabel.shadowColor=[UIColor blackColor];
+    self.titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);
     
     self.titleLabel.backgroundColor=[UIColor clearColor];
