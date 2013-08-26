@@ -22,7 +22,7 @@ typedef enum _REMDataStoreType
     REMDSBuildingOverallData,
     REMDSBuildingAverageData,
     REMDSBuildingTimeRangeData,
-    REMDSBuildingImage,
+    REMDSBuildingPicture,
     REMDSBuildingAirQuality,
     
     /*
