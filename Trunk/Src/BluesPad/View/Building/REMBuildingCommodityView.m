@@ -115,14 +115,14 @@ typedef void(^SuccessCallback)(BOOL success);
     
     
     REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.targetValue withTitle:@"目标值"  andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin withLeftMargin:kBuildingCommodityDetailTextMargin  withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityDetailUomFontSize];
-    
+    [self addSplitBar:target];
     [self addSubview:target];
 }
 
 - (void)addSplitBar:(UIView *)view
 {
     CGRect frame=view.frame;
-    NSLog(@"splitbar:%@",NSStringFromCGRect(frame));
+    //NSLog(@"splitbar:%@",NSStringFromCGRect(frame));
     CGRect frame1 = CGRectMake(0, 0, 4, frame.size.height);
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -132,9 +132,11 @@ typedef void(^SuccessCallback)(BOOL success);
    
     gradient.frame = frame1;
     gradient.colors = [NSArray arrayWithObjects:
-                       (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.25].CGColor,
-                       (id)[UIColor colorWithRed:255 green:255 blue:255 alpha:0.11].CGColor,
+                       (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5].CGColor,
+                       (id)[UIColor colorWithRed:255 green:255 blue:255 alpha:0.1].CGColor,
+                       (id)[UIColor clearColor].CGColor,
                        nil];
+    
     
     UIGraphicsBeginImageContextWithOptions(frame1.size, NO, 0.0);
     CGContextRef c = UIGraphicsGetCurrentContext();

@@ -335,11 +335,11 @@
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     self.bottomGradientLayer=gradient;
-    gradient.opacity=0.6;
+
     gradient.frame = frame;
     gradient.colors = [NSArray arrayWithObjects:
                        (id)[UIColor clearColor].CGColor,
-                       (id)[UIColor blackColor].CGColor,
+                       (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6].CGColor,
                        nil];
     
     UIGraphicsBeginImageContextWithOptions(frame.size, NO, 0.0);
