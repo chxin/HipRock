@@ -190,12 +190,14 @@ CPTPlotCachePrecision;
     @private
     __cpt_weak id<CPTPlotDataSource> dataSource;
     NSString *title;
+    NSAttributedString *attributedTitle;
     CPTPlotSpace *plotSpace;
     BOOL dataNeedsReloading;
     NSMutableDictionary *cachedData;
     NSUInteger cachedDataCount;
     CPTPlotCachePrecision cachePrecision;
     BOOL needsRelabel;
+    BOOL showLabels;
     CGFloat labelOffset;
     CGFloat labelRotation;
     NSUInteger labelField;
@@ -215,6 +217,7 @@ CPTPlotCachePrecision;
 /// @name Identification
 /// @{
 @property (nonatomic, readwrite, copy) NSString *title;
+@property (nonatomic, readwrite, copy) NSAttributedString *attributedTitle;
 /// @}
 
 /// @name Plot Space
@@ -244,6 +247,7 @@ CPTPlotCachePrecision;
 /// @name Data Labels
 /// @{
 @property (nonatomic, readonly, assign) BOOL needsRelabel;
+@property (nonatomic, readwrite, assign) BOOL showLabels;
 @property (nonatomic, readwrite, assign) CGFloat labelOffset;
 @property (nonatomic, readwrite, assign) CGFloat labelRotation;
 @property (nonatomic, readwrite, assign) NSUInteger labelField;
@@ -307,6 +311,7 @@ CPTPlotCachePrecision;
 /// @{
 -(NSUInteger)numberOfLegendEntries;
 -(NSString *)titleForLegendEntryAtIndex:(NSUInteger)idx;
+-(NSAttributedString *)attributedTitleForLegendEntryAtIndex:(NSUInteger)idx;
 -(void)drawSwatchForLegend:(CPTLegend *)legend atIndex:(NSUInteger)idx inRect:(CGRect)rect inContext:(CGContextRef)context;
 /// @}
 

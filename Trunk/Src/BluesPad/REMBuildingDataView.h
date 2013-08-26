@@ -22,7 +22,7 @@
 
 - (void)cancelAllRequest;
 
-- (void)exportDataView:(void(^)(UIImage *))success;
+- (void)exportDataView:(void(^)(NSDictionary *))success;
 
 
 @end
