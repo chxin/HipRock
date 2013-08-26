@@ -214,7 +214,7 @@
     }
 }
 
-- (void)exportDataView:(void (^)(UIImage *))callback
+- (void)exportDataView:(void (^)(NSDictionary *))callback
 {
     NSNumber *ret = [self.successDic objectForKey:@(self.currentIndex)];
     if([ret isEqualToNumber:@(1)] ==YES){
@@ -227,8 +227,40 @@
     }
 }
 
-- (UIImage *)realExport{
-    return nil;
+-(UIImage*)getImageOfLayer:(CALayer*) layer{
+    UIGraphicsBeginImageContext(layer.frame.size);
+    [layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+- (NSDictionary *)realExport{
+    CGFloat outWidth = self.frame.size.width;
+    UIView* chartView = (UIView*)[self.commodityViewArray objectAtIndex:self.currentIndex];
+    CGFloat chartHeight = chartView.frame.size.height;
+    
+    NSMutableArray* btnOutputImages = [[NSMutableArray alloc]initWithCapacity:self.buttonArray.count];
+    for (int i = 0; i < self.buttonArray.count; i++) {
+        UIButton* btn = [self.buttonArray objectAtIndex:i];
+        [btnOutputImages setObject:[self getImageOfLayer:btn.layer] atIndexedSubscript:i];
+    }
+    UIImage* chartImage = [self getImageOfLayer:chartView.layer];
+    UIGraphicsBeginImageContext(CGSizeMake(outWidth, kBuildingCommodityButtonDimension + chartHeight));
+    // Draw buttons
+    for (int i = 0; i < self.buttonArray.count; i++) {
+        UIButton* btn = [self.buttonArray objectAtIndex:i];
+        UIImage* btnImage = [btnOutputImages objectAtIndex:i];
+        [btnImage drawInRect:btn.frame];
+    }
+    // Draw charts
+    [chartImage drawInRect:CGRectMake(0, kBuildingCommodityButtonDimension, outWidth, chartHeight)];
+    UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    NSDictionary* dic = @{@"image": img, @"height": [NSNumber numberWithFloat:kBuildingCommodityButtonDimension + chartHeight] };
+    
+    return dic;
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer

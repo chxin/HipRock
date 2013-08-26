@@ -637,7 +637,16 @@
 
 - (void)exportImage:(void (^)(UIImage *))callback
 {
-    [self.dataView exportDataView:callback];
+    [self.dataView exportDataView:^(NSDictionary *outputDic){
+        UIImage* dataImage = [outputDic objectForKey:@"image"];
+        NSNumber* dataImageHeight = [outputDic objectForKey:@"height"];
+        NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        NSString* myDocPath = myPaths[0];
+        NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
+        [UIImagePNGRepresentation(dataImage) writeToFile:fileName atomically:NO];
+        callback(dataImage);
+        NSLog(@"chart load complete");
+    }];
 }
 
 /*

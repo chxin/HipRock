@@ -132,11 +132,16 @@
 }
 
 - (void)settingButtonPressed:(UIButton *)button{
-    [self performSegueWithIdentifier:@"buildingSettingSegue2" sender:self];
-    NSLog(@"setting button pressed");
+//    [self performSegueWithIdentifier:@"buildingSettingSegue2" sender:self];
+//    NSLog(@"setting button pressed");
     REMImageView *view = self.imageArray[self.currentIndex];
     [view exportImage:^(UIImage *image){
-        NSLog(@"chart load complete");
+//        NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+//        NSString* myDocPath = myPaths[0];
+//        NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
+//        [UIImagePNGRepresentation(image) writeToFile:fileName atomically:NO];
+//
+        NSLog(@"CALLBAKC");
     }];
 }
 
@@ -150,7 +155,7 @@
 //    NSString* myDocPath = myPaths[0];
 //    NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
 //    [UIImagePNGRepresentation(screenShoot) writeToFile:fileName atomically:NO];
-//    
+//
 //    NSData *image = UIImagePNGRepresentation(screenShoot);
 //    if (![Weibo.weibo isAuthenticated]) {
 //        [REMAlertHelper alert:@"未绑定微博账户。"];
