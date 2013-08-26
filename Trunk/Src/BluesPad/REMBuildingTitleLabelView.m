@@ -43,7 +43,7 @@
     self.textLabel.textColor=[UIColor whiteColor];
     self.textLabel.backgroundColor=[UIColor clearColor];
     
-    self.textLabel.text=[NSString stringWithFormat:@"%@", data.dataValue];
+    self.textLabel.text=[self addThousandSeparator:data.dataValue];
     [self addSubview:self.textLabel];
 
     //NSLog(@"font:%@",[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:valueSize]);
@@ -58,8 +58,31 @@
     self.uomLabel.textColor=[UIColor whiteColor];
     self.uomLabel.userInteractionEnabled =NO;
     self.uomLabel.text=data.uom.code;
+    
+    [self plainStringToAttributedUnits];
     [self addSubview:self.uomLabel];
 }
+
+- (void)plainStringToAttributedUnits
+{
+    NSString *string = self.uomLabel.text;
+    unichar c= [string characterAtIndex:string.length-1];
+    
+    if(c>=48 && c<=59){
+
+        NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:string];
+        
+        UIFont *smallFont = [UIFont systemFontOfSize:12];
+        
+        [attString beginEditing];
+        [attString addAttribute:NSFontAttributeName value:(smallFont) range:NSMakeRange(string.length - 1, 1)];
+        [attString addAttribute:(NSString*)kCTSuperscriptAttributeName value:@"1" range:NSMakeRange(string.length - 1, 1)];
+
+        [attString endEditing];
+        self.uomLabel.attributedText=attString;
+    }
+}
+
 
 
 /*

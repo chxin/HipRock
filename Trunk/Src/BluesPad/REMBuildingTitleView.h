@@ -16,4 +16,6 @@
 
 - (void)initTitle:(NSString *)text withSize:(CGFloat)size;
 
+- (NSString *)addThousandSeparator:(NSNumber *)number;
+
 @end

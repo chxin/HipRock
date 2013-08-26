@@ -10,6 +10,7 @@
 #import "REMEnergyUsageDataModel.h"
 #import "REMNumberLabel.h"
 #import "REMBuildingConstants.h"
+#import <CoreText/CoreText.h>
 
 @interface REMBuildingTitleLabelView : REMBuildingTitleView
 

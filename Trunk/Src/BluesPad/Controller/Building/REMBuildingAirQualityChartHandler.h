@@ -8,6 +8,6 @@
 
 #import "REMBuildingChartHandler.h"
 
-@interface REMBuildingAirQualityChartHandler : REMBuildingChartHandler
+@interface REMBuildingAirQualityChartHandler : REMBuildingChartHandler<CPTScatterPlotDataSource,CPTScatterPlotDelegate,CPTPlotSpaceDelegate>
 
 @end
