@@ -9,6 +9,23 @@
 /* Begin PBXBuildFile section */
 		38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D161785111300219469 /* REMApplicationInfo.m */; };
 		38ED7D1F1785140900219469 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38ED7D1E1785140900219469 /* libsqlite3.dylib */; };
+		6A2062A317CB534F00BF20EC /* PM2.5_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB117C5A58300C7AD56 /* PM2.5_normal.png */; };
+		6A2062A417CB534F00BF20EC /* Water_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB217C5A58300C7AD56 /* Water_pressed@2x.png */; };
+		6A2062A517CB534F00BF20EC /* Water_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB317C5A58300C7AD56 /* Water_pressed.png */; };
+		6A2062A617CB534F00BF20EC /* Water_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB417C5A58300C7AD56 /* Water_normal@2x.png */; };
+		6A2062A717CB534F00BF20EC /* Water_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB517C5A58300C7AD56 /* Water_normal.png */; };
+		6A2062A817CB534F00BF20EC /* PM2.5_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB617C5A58300C7AD56 /* PM2.5_pressed@2x.png */; };
+		6A2062A917CB534F00BF20EC /* PM2.5_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB717C5A58300C7AD56 /* PM2.5_pressed.png */; };
+		6A2062AA17CB534F00BF20EC /* PM2.5_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB817C5A58300C7AD56 /* PM2.5_normal@2x.png */; };
+		6A2062AB17CB534F00BF20EC /* Natural Gas_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCB917C5A58300C7AD56 /* Natural Gas_pressed@2x.png */; };
+		6A2062AC17CB534F00BF20EC /* Natural Gas_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBA17C5A58300C7AD56 /* Natural Gas_pressed.png */; };
+		6A2062AD17CB534F00BF20EC /* Natural Gas_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBB17C5A58300C7AD56 /* Natural Gas_normal@2x.png */; };
+		6A2062AE17CB534F00BF20EC /* Natural Gas_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBC17C5A58300C7AD56 /* Natural Gas_normal.png */; };
+		6A2062AF17CB534F00BF20EC /* Electricity_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBD17C5A58300C7AD56 /* Electricity_pressed@2x.png */; };
+		6A2062B017CB534F00BF20EC /* Electricity_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBE17C5A58300C7AD56 /* Electricity_pressed.png */; };
+		6A2062B117CB534F00BF20EC /* Electricity_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCBF17C5A58300C7AD56 /* Electricity_normal@2x.png */; };
+		6A2062B217CB534F00BF20EC /* Electricity_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCC017C5A58300C7AD56 /* Electricity_normal.png */; };
+		6A2062B317CB534F00BF20EC /* default-building.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4A0FCAE17C5A56E00C7AD56 /* default-building.jpg */; };
 		6A4BD94717B89F1F007C9FCF /* BluesPad.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B4CD146017B3439600807B5F /* BluesPad.entitlements */; };
 		6AB1F22817B8AC910065C1EB /* REMJSONObject.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4017A637FD0050779D /* REMJSONObject.h */; };
 		6AB1F22917B8AC910065C1EB /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
@@ -2168,6 +2185,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A2062A317CB534F00BF20EC /* PM2.5_normal.png in Resources */,
+				6A2062A417CB534F00BF20EC /* Water_pressed@2x.png in Resources */,
+				6A2062A517CB534F00BF20EC /* Water_pressed.png in Resources */,
+				6A2062A617CB534F00BF20EC /* Water_normal@2x.png in Resources */,
+				6A2062A717CB534F00BF20EC /* Water_normal.png in Resources */,
+				6A2062A817CB534F00BF20EC /* PM2.5_pressed@2x.png in Resources */,
+				6A2062A917CB534F00BF20EC /* PM2.5_pressed.png in Resources */,
+				6A2062AA17CB534F00BF20EC /* PM2.5_normal@2x.png in Resources */,
+				6A2062AB17CB534F00BF20EC /* Natural Gas_pressed@2x.png in Resources */,
+				6A2062AC17CB534F00BF20EC /* Natural Gas_pressed.png in Resources */,
+				6A2062AD17CB534F00BF20EC /* Natural Gas_normal@2x.png in Resources */,
+				6A2062AE17CB534F00BF20EC /* Natural Gas_normal.png in Resources */,
+				6A2062AF17CB534F00BF20EC /* Electricity_pressed@2x.png in Resources */,
+				6A2062B017CB534F00BF20EC /* Electricity_pressed.png in Resources */,
+				6A2062B117CB534F00BF20EC /* Electricity_normal@2x.png in Resources */,
+				6A2062B217CB534F00BF20EC /* Electricity_normal.png in Resources */,
+				6A2062B317CB534F00BF20EC /* default-building.jpg in Resources */,
 				6A4BD94717B89F1F007C9FCF /* BluesPad.entitlements in Resources */,
 				7A5E2D91177B41B0000F77F9 /* Default-568h@2x.png in Resources */,
 				7A5E2D92177B41B0000F77F9 /* Default.png in Resources */,

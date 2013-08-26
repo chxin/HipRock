@@ -32,7 +32,7 @@ typedef void(^SuccessCallback)(BOOL success);
     if(self){
         
         self.successCounter=0;
-        self.contentSize=CGSizeMake(0, 2000);
+        //self.contentSize=CGSizeMake(0, 2000);
     }
     
     return self;
@@ -52,7 +52,7 @@ typedef void(^SuccessCallback)(BOOL success);
     
     return self;
 }
-
+/*
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
     if([gestureRecognizer.view isKindOfClass:[REMBuildingCommodityView class]] == YES){
@@ -85,7 +85,7 @@ typedef void(^SuccessCallback)(BOOL success);
     
     return [super gestureRecognizerShouldBegin:gestureRecognizer];
 }
-
+*/
 
 
 - (void)initTotalValue
@@ -115,42 +115,49 @@ typedef void(^SuccessCallback)(BOOL success);
     
     
     REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.targetValue withTitle:@"目标值"  andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin withLeftMargin:kBuildingCommodityDetailTextMargin  withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityDetailUomFontSize];
-    
+    [self addSplitBar:target];
     [self addSubview:target];
 }
 
 - (void)addSplitBar:(UIView *)view
 {
     CGRect frame=view.frame;
-    NSLog(@"splitbar:%@",NSStringFromCGRect(frame));
-    CGRect frame1 = CGRectMake(0, 0, 4, frame.size.height);
+    //NSLog(@"splitbar:%@",NSStringFromCGRect(frame));
+    CGRect frame1 = CGRectMake(0, 0, 2, frame.size.height);
+    CGRect frame2 = CGRectMake(2, 0, 2, frame.size.height);
     
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-   
-    [gradient setStartPoint:CGPointMake(0, 0.5)];
-    [gradient setEndPoint:CGPointMake(1, 0.5)];
-   
-    gradient.frame = frame1;
-    gradient.colors = [NSArray arrayWithObjects:
-                       (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.25].CGColor,
-                       (id)[UIColor colorWithRed:255 green:255 blue:255 alpha:0.11].CGColor,
-                       nil];
+    CALayer *layer1 = [CALayer layer];
     
+    layer1.frame=frame1;
+    layer1.backgroundColor=[[UIColor blackColor]colorWithAlphaComponent:0.25].CGColor;
     UIGraphicsBeginImageContextWithOptions(frame1.size, NO, 0.0);
     CGContextRef c = UIGraphicsGetCurrentContext();
     
-    [gradient renderInContext:c];
+    [layer1 renderInContext:c];
+    
+    
+      
+    CAGradientLayer *layer2 = [CALayer layer];
+    
+    
+    layer2.frame = frame2;
+    layer2.backgroundColor=[[UIColor whiteColor]colorWithAlphaComponent:0.11].CGColor;
+    
+
+    
+    [layer2 renderInContext:c];
     
     
     UIGraphicsEndImageContext();
     
     
-    [view.layer insertSublayer:gradient above:view.layer];
+    [view.layer insertSublayer:layer1 above:view.layer];
+    [view.layer insertSublayer:layer2 above:view.layer];
 }
 
 - (void)initChartContainer
 {
-    int marginTop=kBuildingTotalInnerMargin+kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingDetailGroupMargin+kBuildingTotalGroupMargin;
+    int marginTop=kBuildingTotalInnerMargin+kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;
 
     REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0,marginTop , kBuildingChartWidth, kBuildingChartHeight) withTitle: [NSString stringWithFormat:@"单位面积逐月用%@",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
     

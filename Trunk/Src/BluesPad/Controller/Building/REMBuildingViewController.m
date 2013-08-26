@@ -266,7 +266,7 @@
         
         __block BOOL addIndex=YES;
         __block NSUInteger oldIndex=self.currentIndex;
-        [UIView animateWithDuration:0.2 delay:0
+        [UIView animateWithDuration:0.4 delay:0
                             options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
                                 if((sign<0 && self.currentIndex==self.imageArray.count-1)
                                    || (sign>0 && self.currentIndex==0) ||

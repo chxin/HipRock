@@ -27,7 +27,7 @@
 
 #define kBuildingCommodityTitleFontSize 17
 
-#define kBuildingTotalInnerMargin 20
+#define kBuildingTotalInnerMargin 14
 #define kBuildingDetailInnerMargin 20
 
 
