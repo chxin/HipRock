@@ -470,7 +470,7 @@
     self.blurredImageView.alpha = blurLevel;
     
     
-    self.glassView.alpha = MAX(0,MIN(blurLevel,0.7));
+    self.glassView.alpha = MAX(0,MIN(blurLevel,0.8));
     
 }
 
@@ -494,10 +494,9 @@
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
    
-    gradient.opacity=0.4;
     gradient.frame = frame;
     gradient.colors = [NSArray arrayWithObjects:
-                       (id)[UIColor blackColor].CGColor,
+                       (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4].CGColor,
                        (id)[UIColor clearColor].CGColor,
                        nil];
     
