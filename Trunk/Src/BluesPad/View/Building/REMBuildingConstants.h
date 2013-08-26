@@ -9,36 +9,63 @@
 #import <Foundation/Foundation.h>
 
 
-#define kBuildingLeftMargin 28
+#define kBuildingLeftMargin 25
+
+#define kBuildingTitleTop 23
+#define kBuildingTitleFontSize 43
+#define kBuildingTitleHeight 109
+#define kBuildingTitleButtonDimension 48
+#define kBuildingTitleButtonTopMargin 20
+#define kBuildingTitleIconMargin 10
+
+#define kBuildingBottomGradientLayerHeight 305
+
 #define kBuildingCommodityButtonDimension 52
-#define kBuildingTitleTop 18
+#define kBuildingCommodityButtonMargin 35
+
+
+
 #define kBuildingCommodityTitleFontSize 17
-#define kBuildingTitleFontSize 48
+
+#define kBuildingTotalInnerMargin 20
+#define kBuildingDetailInnerMargin 20
+
+
+#define kBuildingCommodityBottomMargin 40
+
+
+#define kBuildingCommodityTotalValueFontSize 133
+#define kBuildingCommodityDetailValueFontSize 47
+#define kBuildingCommodityTotalUomFontSize 35
+#define kBuildingCommodityDetailUomFontSize 20
+#define kBuildingCommodityDetailWidth 288
+
+
+
 #define kBuildingCommodityLeftMargin 5
 #define kBuildingTotalGroupMargin 52
 #define kBuildingDetailGroupMargin 48
-#define kBuildingCommodityTotalValueFontSize 100
-#define kBuildingCommodityTotalUomFontSize 25
-#define kBuildingCommodityViewTop 460
-#define kBuildingCommodityDetailValueFontSize 48
-#define kBuildingCommodityDetailUomFontSize 19
-#define kBuildingCommodityDetailWidth 190
-#define kBuildingCommodityDetailHeight 65
-#define kBuildingCommodityTotalHeight 72
-#define kBuildingCommodityTotalTitleHeight 18
-#define kBuildingTitleHeight 80
-#define kBuildingCommodityBottomMargin 42
-//#define kBuildingFont "HelveticaNeue-UltraLight"
-#define kBuildingFont "HelveticaNeue-Light"
+
+
+#define kBuildingCommodityViewTop 370
+
+
+#define kBuildingCommodityTotalHeight kBuildingCommodityTotalValueFontSize+kBuildingTotalInnerMargin+kBuildingCommodityTitleFontSize
+
+#define kBuildingCommodityDetailHeight 88
+
+
+#define kBuildingFontUltra "HelveticaNeue-Light"
 #define kBuildingFontLight "HelveticaNeue-Light"
 #define kBuildingFontSC "Heiti SC"
-#define kBuildingTotalInnerMargin 4
-#define kBuildingDetailInnerMargin 10
+
 
 #define kScrollVelocityMax 1000
 #define kScrollVelocityMedium 400
 #define kScrollVelocitySmall 50
 #define kMoveLen 200
+
+#define kCommodityScrollTop -20
 
 #define kImageWidth 1024
 #define kImageHeight 748
@@ -48,8 +75,7 @@
 #define kBuildingChartHeight 310
 #define kBuildingChartWidth 840
 
-#define kBuildingTitleButtonDimension 48
-#define kBuildingTitleButtonTopMargin 20
+
 
 @interface REMBuildingConstants : NSObject
 

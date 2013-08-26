@@ -22,6 +22,7 @@
     self.path = dictionary[@"Path"];
     self.pathLevel = [dictionary[@"PathLevel"] intValue];
     self.hasDataPrivilege = [dictionary[@"HasDataPrivilege"] boolValue];
+    self.pictureIds=dictionary[@"PictureIds"];
 }
 
 @end

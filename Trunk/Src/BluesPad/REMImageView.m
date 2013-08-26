@@ -20,6 +20,7 @@
 @property (nonatomic,strong) UIImageView *blurredImageView;
 @property (nonatomic,strong) UIView *glassView;
 @property (nonatomic,strong) CAGradientLayer *bottomGradientLayer;
+@property (nonatomic,strong) CAGradientLayer *titleGradientLayer;
 
 
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
@@ -32,9 +33,11 @@
 
 @property (nonatomic) BOOL hasLoadingChartData;
 
+@property (nonatomic,strong) UIView *commodityButtonsView;
+
 #define kBuildingImageLoadingKeyPrefix "buildingimage-%@"
 
-
+@property (nonatomic) BOOL isSwitchingCommodityButtonGroup;
 
 @end
 
@@ -135,7 +138,13 @@
 }
 
 - (void)loadingBuildingImage{
-    NSDictionary *param=@{@"pictureId":self.buildingInfo.building.buildingId};
+    if(self.buildingInfo.building.pictureIds==nil ||
+       [self.buildingInfo.building.pictureIds isEqual:[NSNull null]] ||
+       self.buildingInfo.building.pictureIds.count==0){
+        
+        return;
+    }
+    NSDictionary *param=@{@"pictureId":self.buildingInfo.building.pictureIds[0]};
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingImage parameter:param];
     store.isAccessLocal=YES;
     store.isStoreLocal=YES;
@@ -321,48 +330,26 @@
 
 - (void)initBottomGradientLayer
 {
-    CGFloat height=kBuildingCommodityTotalHeight+kBuildingCommodityTotalTitleHeight+kBuildingCommodityButtonDimension+ kBuildingCommodityBottomMargin +kBuildingCommodityTotalHeight;
+    CGFloat height=kBuildingBottomGradientLayerHeight;
     CGRect frame = CGRectMake(0, self.frame.size.height-height, 1024, height);
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     self.bottomGradientLayer=gradient;
-    //gradient.opacity=0.2;
+    gradient.opacity=0.6;
     gradient.frame = frame;
     gradient.colors = [NSArray arrayWithObjects:
                        (id)[UIColor clearColor].CGColor,
-                       //(id)[UIColor lightGrayColor].CGColor,
                        (id)[UIColor blackColor].CGColor,
                        nil];
     
     UIGraphicsBeginImageContextWithOptions(frame.size, NO, 0.0);
     CGContextRef c = UIGraphicsGetCurrentContext();
     
-    //CGContextConcatCTM(c, CGAffineTransformMakeTranslation(-frame.origin.x, -frame.origin.y));
     [gradient renderInContext:c];
     
-    //UIImage *screenshot = UIGraphicsGetImageFromCurrentImageContext();
-    
-    //CIImage *ciImage = [CIImage imageWithCGImage:screenshot.CGImage];
     
     UIGraphicsEndImageContext();
     
-    
-    //CIContext *context = [CIContext contextWithOptions:nil];
-    //CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
-    //                               keysAndValues: kCIInputImageKey,ciImage,@"inputRadius",[NSNumber numberWithInt:5],nil];
-    
-    //CIImage *outputImage = [filter1 outputImage];
-    // 2
-    //CGImageRef cgimg =
-    //[context createCGImage:outputImage fromRect:outputImage.extent];
-    
-    // 3
-    //UIImage *newImage = [UIImage imageWithCGImage:cgimg ];
-    
-    //CGImageRelease(cgimg);
-    
-    //self.titleBg = [[UIImageView alloc] initWithFrame:frame];
-    //self.titleBg.image=newImage;
     
     [self.layer insertSublayer:self.bottomGradientLayer above:self.blurredImageView.layer];
     
@@ -393,7 +380,7 @@
     self.glassView = [[UIView alloc]initWithFrame:self.imageView.frame];
     self.glassView.alpha=0;
     self.glassView.contentMode=UIViewContentModeScaleToFill;
-    self.glassView.backgroundColor=[UIColor blackColor];
+    self.glassView.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
     
     [self addSubview:self.glassView];
 }
@@ -410,6 +397,8 @@
     self.dataView.delegate=self;
     
     
+    
+    
 }
 
 -(void)checkIfRequestChartData:(UIScrollView *)scrollView{
@@ -424,8 +413,8 @@
 
 - (void)roundPositionWhenDrag:(UIScrollView *)scrollView{
     //NSLog(@"dec end:%@",NSStringFromCGPoint(scrollView.contentOffset));
-    if(scrollView.contentOffset.y<0 && scrollView.contentOffset.y>-kBuildingCommodityViewTop){
-        if(ABS(scrollView.contentOffset.y) < kBuildingCommodityViewTop/2){
+    if(scrollView.contentOffset.y<kCommodityScrollTop && scrollView.contentOffset.y>-kBuildingCommodityViewTop){
+        if(ABS(scrollView.contentOffset.y) < (kBuildingCommodityViewTop+kCommodityScrollTop)/2){
             [self scrollUp];
         }
         else{
@@ -436,14 +425,21 @@
     
 }
 
+
+
+
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
     [self checkIfRequestChartData:scrollView];
+    
+    
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    [self roundPositionWhenDrag:scrollView];
+    if(decelerate == NO){
+        [self roundPositionWhenDrag:scrollView];
+    }
     
 }
 
@@ -452,7 +448,7 @@
     
     [self roundPositionWhenDrag:scrollView];
     
-    if(scrollView.contentOffset.y>0){
+    if(scrollView.contentOffset.y>kCommodityScrollTop){
         [self checkIfRequestChartData:scrollView];
     }
     
@@ -493,64 +489,41 @@
 
 - (void)initTitleView
 {
-    /*
-     CGRect frame = CGRectMake(0, 0, self.frame.size.width, 80);
-     
-     CAGradientLayer *gradient = [CAGradientLayer layer];
-     gradient.opacity=0.2;
-     gradient.frame = frame;
-     gradient.colors = [NSArray arrayWithObjects:
-     (id)[UIColor lightGrayColor].CGColor,
-     (id)[UIColor lightGrayColor].CGColor,
-     nil];
-     
-     UIGraphicsBeginImageContextWithOptions(frame.size, NO, 0.0);
-     CGContextRef c = UIGraphicsGetCurrentContext();
-     
-     //CGContextConcatCTM(c, CGAffineTransformMakeTranslation(-frame.origin.x, -frame.origin.y));
-     [gradient renderInContext:c];
-     
-     UIImage *screenshot = UIGraphicsGetImageFromCurrentImageContext();
-     
-     CIImage *ciImage = [CIImage imageWithCGImage:screenshot.CGImage];
-     
-     UIGraphicsEndImageContext();
-     
-     
-     CIContext *context = [CIContext contextWithOptions:nil];
-     CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
-     keysAndValues: kCIInputImageKey,ciImage,@"inputRadius",[NSNumber numberWithInt:5],nil];
-     
-     CIImage *outputImage = [filter1 outputImage];
-     // 2
-     CGImageRef cgimg =
-     [context createCGImage:outputImage fromRect:outputImage.extent];
-     
-     // 3
-     UIImage *newImage = [UIImage imageWithCGImage:cgimg ];
-     
-     CGImageRelease(cgimg);
-     
-     self.titleBg = [[UIImageView alloc] initWithFrame:frame];
-     self.titleBg.image=newImage;
-     
-     [self addSubview:self.titleBg];
-     */
+    CGFloat height=kBuildingTitleHeight;
+    CGRect frame = CGRectMake(0, 0, 1024, height);
     
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, kBuildingTitleTop, self.frame.size.width, kBuildingTitleFontSize)];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+   
+    gradient.opacity=0.4;
+    gradient.frame = frame;
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)[UIColor blackColor].CGColor,
+                       (id)[UIColor clearColor].CGColor,
+                       nil];
+    
+    UIGraphicsBeginImageContextWithOptions(frame.size, NO, 0.0);
+    CGContextRef c = UIGraphicsGetCurrentContext();
+    
+    [gradient renderInContext:c];
+    
+    UIGraphicsEndImageContext();
+    
+    self.titleGradientLayer=gradient;
+    
+    [self.layer insertSublayer:self.titleGradientLayer above:self.blurredImageView.layer];
+
+    
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin, kBuildingTitleTop, self.frame.size.width, kBuildingTitleFontSize)];
     self.titleLabel.text=self.buildingInfo.building.name;
-    self.titleLabel.shadowColor=[UIColor blackColor];
+    self.titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);
     
     self.titleLabel.backgroundColor=[UIColor clearColor];
-    self.titleLabel.font = [UIFont fontWithName:@(kBuildingFont) size:kBuildingTitleFontSize];
-    //self.titleLabel.font=[UIFont boldSystemFontOfSize:20];
+    self.titleLabel.font = [UIFont fontWithName:@(kBuildingFontUltra) size:kBuildingTitleFontSize];
+
     
     self.titleLabel.textColor=[UIColor whiteColor];
     self.titleLabel.contentMode = UIViewContentModeTopLeft;
-    
-    
-    //self.titleLabel.b
     
     
     [self addSubview:self.titleLabel];
@@ -598,7 +571,7 @@
 {
     
     
-    [self scrollTo:0];
+    [self scrollTo:kCommodityScrollTop];
     self.dataViewUp=YES;
     
     
@@ -637,7 +610,35 @@
 
 - (void)exportImage:(void (^)(UIImage *))callback
 {
-    [self.dataView exportDataView:callback];
+    [self.dataView exportDataView:^(NSDictionary *outputDic){
+        UIImage* dataImage = [outputDic objectForKey:@"image"];
+        float dataImageHeight = ((NSNumber*)[outputDic objectForKey:@"height"]).floatValue;
+        
+        CGFloat outputWidth = self.frame.size.width;
+        CGFloat outputHeightWithoutFooter = kScrollVelocityMax;
+        CGFloat footerHeight = 200;
+        UIImage *footerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WeiboBana" ofType:@"png"]];
+        UIGraphicsBeginImageContext(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight));
+        [[UIColor blackColor]set];
+        UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
+        [[self getImageOfLayer:self.imageView.layer]drawInRect:self.imageView.frame];
+        [[self getImageOfLayer:self.titleLabel.layer]drawInRect:self.titleLabel.frame];
+        [[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
+        [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
+        [dataImage drawInRect:CGRectMake(0, 300, outputWidth, self.dataView.frame.size.height)];
+        
+        [footerImage drawInRect:CGRectMake(0, outputHeightWithoutFooter, outputWidth, footerHeight)];
+        UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        
+        NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        NSString* myDocPath = myPaths[0];
+        NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
+        [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
+        callback(dataImage);
+        NSLog(@"chart load complete");
+    }];
 }
 
 /*

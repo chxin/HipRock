@@ -42,7 +42,8 @@
     self.textLabel.fontSize=@(valueSize);
     self.textLabel.textColor=[UIColor whiteColor];
     self.textLabel.backgroundColor=[UIColor clearColor];
-    
+    self.textLabel.shadowOffset=CGSizeMake(1, 1);
+    self.textLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     self.textLabel.text=[self addThousandSeparator:data.dataValue];
     [self addSubview:self.textLabel];
 
@@ -56,6 +57,9 @@
     self.uomLabel.backgroundColor=[UIColor clearColor];
     //self.uomLabel.contentHorizontalAlignment = UIControlContentVerticalAlignmentBottom;
     self.uomLabel.textColor=[UIColor whiteColor];
+    self.uomLabel.shadowOffset=CGSizeMake(1, 1);
+    self.uomLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+
     self.uomLabel.userInteractionEnabled =NO;
     self.uomLabel.text=data.uom.code;
     
