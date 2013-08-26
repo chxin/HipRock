@@ -157,7 +157,7 @@ typedef void(^SuccessCallback)(BOOL success);
 
 - (void)initChartContainer
 {
-    int marginTop=kBuildingTotalInnerMargin+kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;
+    int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;
 
     REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0,marginTop , kBuildingChartWidth, kBuildingChartHeight) withTitle: [NSString stringWithFormat:@"单位面积逐月用%@",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
     

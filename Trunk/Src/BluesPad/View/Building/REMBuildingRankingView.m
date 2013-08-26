@@ -11,7 +11,7 @@
 @interface REMBuildingRankingView()
 
 @property (nonatomic,strong) REMNumberLabel *rankingLabel;
-@property (nonatomic,strong) REMNumberLabel *totalLabel;
+@property (nonatomic,strong) UILabel *totalLabel;
 
 @end
 
@@ -47,8 +47,9 @@
     CGSize expectedLabelSize = [self.rankingLabel.text sizeWithFont:[UIFont fontWithName:@(kBuildingFontLight) size:kBuildingCommodityDetailValueFontSize]];
     
     //NSLog(@"valuesize:%f",valueSize);
-    self.totalLabel = [[REMNumberLabel alloc]initWithFrame:CGRectMake(expectedLabelSize.width+leftMargin, marginTop+expectedLabelSize.height-kBuildingCommodityDetailValueFontSize, 200, kBuildingCommodityDetailValueFontSize)];
-    self.totalLabel.fontSize=@(kBuildingCommodityDetailUomFontSize);
+    self.totalLabel = [[UILabel alloc]initWithFrame:CGRectMake(expectedLabelSize.width+leftMargin, marginTop+expectedLabelSize.height-kBuildingCommodityDetailValueFontSize, 200, kBuildingCommodityDetailValueFontSize)];
+    //self.totalLabel.fontSize=@(kBuildingCommodityDetailUomFontSize);
+    self.totalLabel.font=[UIFont fontWithName:@(kBuildingFontLight) size:kBuildingCommodityDetailUomFontSize];
     //self.totalLabel.font=[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:kBuildingCommodityTotalUomFontSize];
     self.totalLabel.backgroundColor=[UIColor clearColor];
     //self.uomLabel.contentHorizontalAlignment = UIControlContentVerticalAlignmentBottom;
