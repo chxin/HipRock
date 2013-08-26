@@ -612,11 +612,30 @@
 {
     [self.dataView exportDataView:^(NSDictionary *outputDic){
         UIImage* dataImage = [outputDic objectForKey:@"image"];
-        NSNumber* dataImageHeight = [outputDic objectForKey:@"height"];
+        float dataImageHeight = ((NSNumber*)[outputDic objectForKey:@"height"]).floatValue;
+        
+        CGFloat outputWidth = self.frame.size.width;
+        CGFloat outputHeightWithoutFooter = kScrollVelocityMax;
+        CGFloat footerHeight = 200;
+        UIImage *footerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WeiboBana" ofType:@"png"]];
+        UIGraphicsBeginImageContext(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight));
+        [[UIColor blackColor]set];
+        UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
+        [[self getImageOfLayer:self.imageView.layer]drawInRect:self.imageView.frame];
+        [[self getImageOfLayer:self.titleLabel.layer]drawInRect:self.titleLabel.frame];
+        [[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
+        [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
+        [dataImage drawInRect:CGRectMake(0, 300, outputWidth, self.dataView.frame.size.height)];
+        
+        [footerImage drawInRect:CGRectMake(0, outputHeightWithoutFooter, outputWidth, footerHeight)];
+        UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        
         NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
         NSString* myDocPath = myPaths[0];
         NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
-        [UIImagePNGRepresentation(dataImage) writeToFile:fileName atomically:NO];
+        [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
         callback(dataImage);
         NSLog(@"chart load complete");
     }];
