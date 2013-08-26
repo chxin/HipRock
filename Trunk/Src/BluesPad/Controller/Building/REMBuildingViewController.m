@@ -142,45 +142,21 @@
 
 -(void)shareButtonTouchDown:(UIButton *)button
 {
-    REMImageView* currentView = [self.imageArray objectAtIndex:self.currentIndex];
-    UIImage* screenShoot = [currentView generateWeiboImage];
-    
-    NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString* myDocPath = myPaths[0];
-    NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
-    [UIImagePNGRepresentation(screenShoot) writeToFile:fileName atomically:NO];
-    
-    NSData *image = UIImagePNGRepresentation(screenShoot);
-    if (![Weibo.weibo isAuthenticated]) {
-        [REMAlertHelper alert:@"未绑定微博账户。"];
-    } else {
-        [self sendWeibo:@"FDFDF" withImage:image];
-    }
-    
-//[Weibo.weibo signOut];
-}
-
--(void)sendWeibo:(NSString *)content withImage:(NSData *)imageData
-{
-    if(content.length > 135)
-        content = [content substringToIndex:135];
-    
-    [Weibo.weibo newStatus:content pic:imageData completed:^(Status *status, NSError *error) {
-        NSString *message = nil;
-        if (error) {
-            message = [NSString stringWithFormat:@"failed to post:%@", error];
-        }
-        else {
-            message = [NSString stringWithFormat:@"success: %lld.%@", status.statusId, status.text];
-        }
-        
-        NSLog(@"%@", message);
-        [REMAlertHelper alert:message];
-        //[Weibo.weibo signOut];
-        
-    }];
-    
-    
+    [self performSegueWithIdentifier:@"sendWeiboSegue" sender:self];
+//    REMImageView* currentView = [self.imageArray objectAtIndex:self.currentIndex];
+//    UIImage* screenShoot = [currentView generateWeiboImage];
+//    
+//    NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+//    NSString* myDocPath = myPaths[0];
+//    NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
+//    [UIImagePNGRepresentation(screenShoot) writeToFile:fileName atomically:NO];
+//    
+//    NSData *image = UIImagePNGRepresentation(screenShoot);
+//    if (![Weibo.weibo isAuthenticated]) {
+//        [REMAlertHelper alert:@"未绑定微博账户。"];
+//    } else {
+//        [self sendWeibo:@"FDFDF" withImage:image];
+//    }
 }
 
 - (void)blurredImageView
