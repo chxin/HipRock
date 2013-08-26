@@ -17,7 +17,7 @@
 #import "REMBuildingAverageChartHandler.h"
 #import "REMBuildingTrendChartHandler.h"
 
-@interface REMBuildingCommodityView : UIScrollView
+@interface REMBuildingCommodityView : UIView//UIScrollView
 
 - (id)initWithFrame:(CGRect)frame withCommodityInfo:(REMCommodityUsageModel *)commodityInfo;
 

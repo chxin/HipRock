@@ -467,7 +467,7 @@
 
 - (void)setBlurLevel:(float)blurLevel {
     //NSLog(@"blurlevel:%f",blurLevel);
-    self.blurredImageView.alpha = blurLevel;
+    self.blurredImageView.alpha = blurLevel>0.7?1:blurLevel;
     
     
     self.glassView.alpha = MAX(0,MIN(blurLevel,0.8));

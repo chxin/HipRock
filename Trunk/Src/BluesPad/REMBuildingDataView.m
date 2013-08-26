@@ -34,7 +34,7 @@ typedef void(^SuccessCallback)(BOOL success);
         [self setScrollEnabled:YES];
         //self.clipsToBounds=NO;
         self.successCounter=0;
-        [self setContentSize:CGSizeMake(0, 748-kBuildingTitleHeight-20)];
+        [self setContentSize:CGSizeMake(0, 1100)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
         self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityUsage.count+1)];
@@ -164,7 +164,7 @@ typedef void(^SuccessCallback)(BOOL success);
     for (;i<self.buildingInfo.commodityUsage.count;++i ) {
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
         REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withCommodityInfo:model];
-        view.delegate=self;
+        //view.delegate=self;
         if(i!=0){
             view.alpha=0;
         }
@@ -174,7 +174,7 @@ typedef void(^SuccessCallback)(BOOL success);
     if(self.buildingInfo.airQuality!=nil){
         
         REMBuildingAirQualityView *view = [[REMBuildingAirQualityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withAirQualityInfo:self.buildingInfo.airQuality];
-        view.delegate=self;
+        //view.delegate=self;
         view.alpha=0;
         
         [self addSubview:view];
@@ -295,18 +295,18 @@ typedef void(^SuccessCallback)(BOOL success);
         if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]==YES){
             UIPanGestureRecognizer *p = (UIPanGestureRecognizer *)gestureRecognizer;
             CGPoint movement=[p translationInView:self];
-            
+            /*
             if(movement.y<0){
                 [self setBounces:NO];
             }
             else{
                 [self setBounces:YES];
-            }
+            }*/
           
             if(movement.x!=0){
                 return NO;
             }
-            if(self.contentOffset.y>=-20 && movement.y<=0)return NO;
+            //if(self.contentOffset.y>=-20 && movement.y<=0)return NO;
             
             
             
