@@ -29,6 +29,21 @@
     return theString;
 }
 
+- (void)setTitleIcon:(UIImage *)image
+{
+    UIImageView *view = [[UIImageView alloc]initWithImage:image];
+    
+    CGRect titleFrame = self.titleLabel.frame;
+    
+    
+    
+    CGSize expectedLabelSize = [self.titleLabel.text sizeWithFont:self.titleLabel.font];
+    
+    [view setFrame:CGRectMake(expectedLabelSize.width+5+kBuildingCommodityDetailTextMargin, titleFrame.origin.y, 18, 14)];
+    
+    [self insertSubview:view aboveSubview:self.titleLabel];
+}
+
 - (void)initTitle:(NSString *)text withSize:(CGFloat)size withLeftMargin:(CGFloat)leftMargin
 {
     

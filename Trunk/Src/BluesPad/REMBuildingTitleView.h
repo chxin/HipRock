@@ -18,4 +18,6 @@
 
 - (NSString *)addThousandSeparator:(NSNumber *)number;
 
+- (void) setTitleIcon:(UIImage *)image;
+
 @end

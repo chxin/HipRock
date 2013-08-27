@@ -58,7 +58,7 @@
 
 #define kBuildingFontUltra "HelveticaNeue-Light"
 #define kBuildingFontLight "HelveticaNeue-Light"
-#define kBuildingFontSC "Heiti SC"
+#define kBuildingFontSC "HeitiSC-Light"
 
 
 #define kScrollVelocityMax 1000
