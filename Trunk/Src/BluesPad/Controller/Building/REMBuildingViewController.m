@@ -19,7 +19,7 @@
 @property (nonatomic) CGFloat cumulateX;
 
 @property (nonatomic,strong) NSMutableDictionary *imageViewStatus;
-@property (nonatomic,strong) UIButton *logoutButton;
+@property (nonatomic,strong) UIButton *shareButton;
 
 @property (nonatomic,strong) UIImage *defaultImage;
 @property (nonatomic,strong) UIImage *defaultBlurImage;
@@ -118,18 +118,21 @@
 
 - (void) initButtons
 {
-    UIButton *logout=[[UIButton alloc]initWithFrame:CGRectMake(950, 20, 48, 48)];
-    [logout setImage:[UIImage imageNamed:@"Logout.png"] forState:UIControlStateNormal];
-    logout.titleLabel.text=@"注销";
-    [logout addTarget:self action:@selector(logoutButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.logoutButton=logout;
-    [self.view addSubview:logout];
-    
-    
-    UIButton *shareButton = [[UIButton alloc]initWithFrame:CGRectMake(950, 70, 48, 48)];
-    [shareButton setImage:[UIImage imageNamed:@"weibo.png"] forState:UIControlStateNormal];
-    [shareButton addTarget:self action:@selector(shareButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, 20, 48, 48)];
+    [shareButton setImage:[UIImage imageNamed:@"Share_normal.png"] forState:UIControlStateNormal];
+    [shareButton setImage:[UIImage imageNamed:@"Share_pressed.png"] forState:UIControlStateSelected];
+    shareButton.showsTouchWhenHighlighted=YES;
+    shareButton.adjustsImageWhenHighlighted=YES;
+    shareButton.titleLabel.text=@"注销";
+    [shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.shareButton=shareButton;
     [self.view addSubview:shareButton];
+    
+    /*
+    UIButton *shareButton1 = [[UIButton alloc]initWithFrame:CGRectMake(950, 70, 48, 48)];
+    [shareButton1 setImage:[UIImage imageNamed:@"weibo.png"] forState:UIControlStateNormal];
+    [shareButton1 addTarget:self action:@selector(shareButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:shareButton1];*/
 }
 
 - (void)settingButtonPressed:(UIButton *)button{
@@ -338,7 +341,7 @@
                                     NSNumber *status = self.imageViewStatus[willIndex];
                                     if([status isEqualToNumber:@(0)] ==YES){
                                         REMImageView *nextView= self.imageArray[willIndex.intValue];
-                                        [self.view insertSubview: nextView belowSubview:self.logoutButton];
+                                        [self.view insertSubview: nextView belowSubview:self.shareButton];
                                         [nextView setScrollOffset:self.currentScrollOffset];
                                         self.imageViewStatus[willIndex]=@(1);
                                         
@@ -412,7 +415,10 @@
     [self performSegueWithIdentifier:@"buildingToDashboardSegue" sender:self];
 }
 
-- (IBAction)logoutButtonPressed:(id)sender {
+- (IBAction)shareButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"sendWeiboSegue" sender:self];
+
+    /*
     REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
     REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
     
@@ -422,7 +428,7 @@
     currentCustomer = nil;
     
     [self.navigationController popToRootViewControllerAnimated:YES];
-    [self.splashScreenController showLoginView];
+    [self.splashScreenController showLoginView];*/
 }
 
 @end
