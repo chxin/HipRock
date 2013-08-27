@@ -525,7 +525,7 @@
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);
     
     self.titleLabel.backgroundColor=[UIColor clearColor];
-    self.titleLabel.font = [UIFont fontWithName:@(kBuildingFontUltra) size:kBuildingTitleFontSize];
+    self.titleLabel.font = [UIFont fontWithName:@(kBuildingFontLight) size:kBuildingTitleFontSize];
 
     
     self.titleLabel.textColor=[UIColor whiteColor];

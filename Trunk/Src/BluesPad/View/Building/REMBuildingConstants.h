@@ -56,9 +56,10 @@
 #define kBuildingCommodityDetailHeight 88
 
 
-#define kBuildingFontUltra "HelveticaNeue-Light"
+#define kBuildingFontUltra "HelveticaNeue-UltraLight"
 #define kBuildingFontLight "HelveticaNeue-Light"
-#define kBuildingFontSC "HeitiSC-Light"
+#define kBuildingFontSC "Heiti SC-Medium"
+#define kBuildingFontSCRegular "Heiti SC"
 
 
 #define kScrollVelocityMax 1000
