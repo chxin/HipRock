@@ -21,6 +21,7 @@
     if (self) {
         // Initialization code
         //[self initializeGraph];
+        self.backgroundColor = [UIColor greenColor];
     }
     return self;
 }
@@ -35,9 +36,9 @@
     self.hostView.hostedGraph=[[CPTXYGraph alloc]initWithFrame:self.bounds];
     self.hostView.hostedGraph.plotAreaFrame.paddingTop=0.0f;
     self.hostView.hostedGraph.plotAreaFrame.paddingRight=0.0f;
-    self.hostView.hostedGraph.plotAreaFrame.paddingBottom=40.0f;
-    self.hostView.hostedGraph.plotAreaFrame.paddingLeft=50.0f;
-    self.hostView.hostedGraph.plotAreaFrame.masksToBorder = NO;
+    self.hostView.hostedGraph.plotAreaFrame.paddingBottom=0.0f;
+    self.hostView.hostedGraph.plotAreaFrame.paddingLeft=0.0f;
+    self.hostView.hostedGraph.plotAreaFrame.masksToBorder = YES;
 }
 
 
