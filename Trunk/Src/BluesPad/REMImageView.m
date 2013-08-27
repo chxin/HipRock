@@ -619,7 +619,7 @@
         float dataImageHeight = ((NSNumber*)[outputDic objectForKey:@"height"]).floatValue;
         
         CGFloat outputWidth = self.frame.size.width;
-        CGFloat outputHeightWithoutFooter = kScrollVelocityMax;
+        CGFloat outputHeightWithoutFooter = 1300;
         CGFloat footerHeight = 200;
         UIImage *footerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WeiboBana" ofType:@"png"]];
         UIGraphicsBeginImageContext(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight));
@@ -630,7 +630,7 @@
         [[self getImageOfLayer:self.titleLabel.layer]drawInRect:CGRectMake(self.settingButton.frame.origin.x, self.settingButton.frame.origin.y, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height)];
         //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
         [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
-        [dataImage drawInRect:CGRectMake(0, 300, outputWidth, self.dataView.frame.size.height)];
+        [dataImage drawInRect:CGRectMake(0, 300, outputWidth, dataImageHeight)];
         
         [footerImage drawInRect:CGRectMake(0, outputHeightWithoutFooter, outputWidth, footerHeight)];
         UIImage* img = UIGraphicsGetImageFromCurrentImageContext();

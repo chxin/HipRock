@@ -164,11 +164,7 @@
         }];
     }
 }
--(NSString*)getWeiboPicAddress {
-    NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString* myDocPath = myPaths[0];
-    return [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
-}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"sendWeiboSegue"]) {
         NSDictionary* params = (NSDictionary*)sender;

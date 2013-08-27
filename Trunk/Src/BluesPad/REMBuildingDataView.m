@@ -269,26 +269,36 @@ typedef void(^SuccessCallback)(BOOL success);
     return image;
 }
 
-- (NSDictionary *)realExport{
-    CGFloat outWidth = self.frame.size.width;
-    UIView* chartView = (UIView*)[self.commodityViewArray objectAtIndex:self.currentIndex];
-    CGFloat chartHeight = chartView.frame.size.height;
+- (NSDictionary *)realExport{    
+    REMBuildingCommodityView* chartView = (REMBuildingCommodityView*)[self.commodityViewArray objectAtIndex:self.currentIndex];
+    CGFloat chartHeight = 1100;
     
     NSMutableArray* btnOutputImages = [[NSMutableArray alloc]initWithCapacity:self.buttonArray.count];
     for (int i = 0; i < self.buttonArray.count; i++) {
         UIButton* btn = [self.buttonArray objectAtIndex:i];
         [btnOutputImages setObject:[self getImageOfLayer:btn.layer] atIndexedSubscript:i];
     }
-    UIImage* chartImage = [self getImageOfLayer:chartView.layer];
-    UIGraphicsBeginImageContext(CGSizeMake(outWidth, kBuildingCommodityButtonDimension + chartHeight));
+    NSMutableArray* chartViewImages = [[NSMutableArray alloc]initWithCapacity:[chartView subviews].count];
+    for (int i = 0; i < [[chartView subviews]count]; i++) {
+        UIView* chartSubView = [[chartView subviews]objectAtIndex:i];
+        [chartViewImages setObject:[self getImageOfLayer:chartSubView.layer] atIndexedSubscript:i];
+    }
+    
+    UIGraphicsBeginImageContext(CGSizeMake(self.frame.size.width, kBuildingCommodityButtonDimension + kBuildingCommodityBottomMargin + chartHeight));
     // Draw buttons
+    
     for (int i = 0; i < self.buttonArray.count; i++) {
         UIButton* btn = [self.buttonArray objectAtIndex:i];
         UIImage* btnImage = [btnOutputImages objectAtIndex:i];
-        [btnImage drawInRect:btn.frame];
+        [btnImage drawInRect:CGRectMake(btn.frame.origin.x + kBuildingLeftMargin, 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
     }
     // Draw charts
-    [chartImage drawInRect:CGRectMake(0, kBuildingCommodityButtonDimension, outWidth, chartHeight)];
+    for (int i = 0; i < chartViewImages.count; i++) {
+        UIImage* chartImage = [chartViewImages objectAtIndex:i];
+        UIView* chartSubView = [[chartView subviews]objectAtIndex:i];
+        [chartImage drawInRect:CGRectMake(chartSubView.frame.origin.x + kBuildingLeftMargin, kBuildingCommodityButtonDimension + kBuildingCommodityBottomMargin + chartSubView.frame.origin.y, chartSubView.frame.size.width, chartSubView.frame.size.height)];
+    }
+//    [chartImage drawInRect:CGRectMake(kBuildingLeftMargin, kBuildingCommodityButtonDimension + kBuildingCommodityBottomMargin, chartView.frame.size.width, chartHeight)];
     UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -320,6 +330,10 @@ typedef void(^SuccessCallback)(BOOL success);
         stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairVal#" withString:mayairVal];
         stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairUomName#" withString:mayairUom];
     }
+//    NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+//    NSString* myDocPath = myPaths[0];
+//    NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo2.png"];
+//    [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
     return @{
              @"image": img,
              @"height": [NSNumber numberWithFloat:kBuildingCommodityButtonDimension + chartHeight],
