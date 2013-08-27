@@ -2297,6 +2297,7 @@
 				B42BD74117CC71C900797162 /* Electricity_normal@2x.png in Resources */,
 				B42BD74217CC71C900797162 /* Electricity_normal.png in Resources */,
 				B42BD74417CC89A400797162 /* NaturalGas_normal.png in Resources */,
+				EF83471117CC8894004C055A /* WeiboBana.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
