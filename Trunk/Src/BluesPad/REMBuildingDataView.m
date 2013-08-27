@@ -51,8 +51,8 @@ typedef void(^SuccessCallback)(BOOL success);
     for (;i<self.buildingInfo.commodityUsage.count;++i) {
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
-        btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
-        
+        //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
+        btn.tag=i;
         [btn setTitle:model.commodity.comment forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
@@ -62,7 +62,7 @@ typedef void(^SuccessCallback)(BOOL success);
         btn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentCenter;
         btn.showsTouchWhenHighlighted=YES;
         btn.adjustsImageWhenHighlighted=YES;
-       
+        
         btn.titleEdgeInsets=UIEdgeInsetsMake(41, 0, 0, 0);
         btn.titleLabel.textAlignment=NSTextAlignmentCenter;
         [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",str] ] forState:UIControlStateNormal];
@@ -81,6 +81,7 @@ typedef void(^SuccessCallback)(BOOL success);
         REMAirQualityModel *model = self.buildingInfo.airQuality;
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
         btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
+        btn.tag=i;
         btn.layer.masksToBounds=NO;
         NSString *str = [self retrieveCommodityImageName:model.commodity];
         btn.imageView.contentMode=UIViewContentModeScaleToFill;
@@ -124,7 +125,7 @@ typedef void(^SuccessCallback)(BOOL success);
     }
     else if([model.commodityId isEqualToNumber:@(3)] == YES)
     {
-        return @"Natural Gas";
+        return @"NaturalGas";
     }
     else if([model.commodityId isEqualToNumber:@(5)] == YES)
     {
@@ -141,7 +142,7 @@ typedef void(^SuccessCallback)(BOOL success);
     int current =0;
     for (UIButton *btn in self.buttonArray) {
         if(btn.selected==YES){
-            current=[btn.titleLabel.text intValue];
+            current=btn.tag;
         }
         
         if([btn isEqual:button] == NO){
@@ -151,7 +152,7 @@ typedef void(^SuccessCallback)(BOOL success);
             [btn setSelected:YES];
         }
     }
-    int to = [button.titleLabel.text intValue];
+    int to = button.tag;
     REMBuildingCommodityView *view=    self.commodityViewArray[to];
     view.alpha=1;
     REMBuildingCommodityView *currentView= self.commodityViewArray[current];

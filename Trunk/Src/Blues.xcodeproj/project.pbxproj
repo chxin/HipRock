@@ -505,6 +505,8 @@
 		7AE1121F17B240E4006E0D39 /* AppLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AE1121D17B240E4006E0D39 /* AppLogo@2x.png */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
+		B41DE4DD17CC454400EF5EB1 /* NaturalGas_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B41DE4DB17CC454400EF5EB1 /* NaturalGas_normal.png */; };
+		B41DE4DE17CC454400EF5EB1 /* NaturalGas_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B41DE4DC17CC454400EF5EB1 /* NaturalGas_pressed@2x.png */; };
 		B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
 		B442700C17AF30FF00762C68 /* REMBuildingDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = B442700117AF30FF00762C68 /* REMBuildingDataView.m */; };
 		B442700E17AF30FF00762C68 /* REMBuildingTitleLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = B442700517AF30FF00762C68 /* REMBuildingTitleLabelView.m */; };
@@ -977,6 +979,8 @@
 		B4198EAD178410D300B50475 /* REMLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLogManager.m; path = Common/Log/REMLogManager.m; sourceTree = "<group>"; };
 		B4198EB01784220300B50475 /* REMJSONHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMJSONHelper.h; path = Common/Utility/REMJSONHelper.h; sourceTree = "<group>"; };
 		B4198EB11784220300B50475 /* REMJSONHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMJSONHelper.m; path = Common/Utility/REMJSONHelper.m; sourceTree = "<group>"; };
+		B41DE4DB17CC454400EF5EB1 /* NaturalGas_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaturalGas_normal.png; sourceTree = "<group>"; };
+		B41DE4DC17CC454400EF5EB1 /* NaturalGas_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NaturalGas_pressed@2x.png"; sourceTree = "<group>"; };
 		B43BB10F1797B12D00617B1E /* REMEnergyConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergyConstants.h; path = Common/Constants/REMEnergyConstants.h; sourceTree = "<group>"; };
 		B43BB1101797B12D00617B1E /* REMEnergyConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnergyConstants.m; path = Common/Constants/REMEnergyConstants.m; sourceTree = "<group>"; };
 		B442700017AF30FF00762C68 /* REMBuildingDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingDataView.h; sourceTree = "<group>"; };
@@ -2069,8 +2073,10 @@
 		B4A0FCB017C5A57500C7AD56 /* commodity */ = {
 			isa = PBXGroup;
 			children = (
+				B41DE4DB17CC454400EF5EB1 /* NaturalGas_normal.png */,
 				7AD1359417CB558300852476 /* NaturalGas_normal@2x.png */,
 				7AD1359517CB558300852476 /* NaturalGas_pressed.png */,
+				B41DE4DC17CC454400EF5EB1 /* NaturalGas_pressed@2x.png */,
 				B4A0FCB117C5A58300C7AD56 /* PM2.5_normal.png */,
 				B4A0FCB817C5A58300C7AD56 /* PM2.5_normal@2x.png */,
 				B4A0FCB717C5A58300C7AD56 /* PM2.5_pressed.png */,
@@ -2255,6 +2261,8 @@
 				EF962FFB17C5D78800BBC7DA /* WeiboBana.png in Resources */,
 				7AD1359617CB558300852476 /* NaturalGas_normal@2x.png in Resources */,
 				7AD1359717CB558300852476 /* NaturalGas_pressed.png in Resources */,
+				B41DE4DD17CC454400EF5EB1 /* NaturalGas_normal.png in Resources */,
+				B41DE4DE17CC454400EF5EB1 /* NaturalGas_pressed@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
