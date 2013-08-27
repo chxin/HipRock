@@ -542,6 +542,7 @@
 		EF96300617C610A200BBC7DA /* REMBuildingSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */; };
 		EF97879617C70B440062BE0E /* REMBuildingSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */; };
 		EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97DDDA17C20B5700A0374E /* REMToggleButton.m */; };
+		EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9F28B017CB54DE00E775ED /* REMStatusBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1053,6 +1054,8 @@
 		EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingSettingNavigationController.m; sourceTree = "<group>"; };
 		EF97DDD917C20B5700A0374E /* REMToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButton.h; sourceTree = "<group>"; };
 		EF97DDDA17C20B5700A0374E /* REMToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButton.m; sourceTree = "<group>"; };
+		EF9F28AF17CB54DD00E775ED /* REMStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMStatusBar.h; sourceTree = "<group>"; };
+		EF9F28B017CB54DE00E775ED /* REMStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMStatusBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1475,6 +1478,8 @@
 				7A5277F517AF4209007DA735 /* REMIndicatorButton.m */,
 				EF8F1D7717C2FE5400D3E29F /* REMToggleButtonGroup.h */,
 				EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */,
+				EF9F28AF17CB54DD00E775ED /* REMStatusBar.h */,
+				EF9F28B017CB54DE00E775ED /* REMStatusBar.m */,
 			);
 			name = Controls;
 			path = View/Controls;
@@ -2423,6 +2428,7 @@
 				7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */,
 				7A9557C017C73AD200249CED /* REMBuildingAirQualityChart.m in Sources */,
 				EF3822EA17CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.m in Sources */,
+				EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

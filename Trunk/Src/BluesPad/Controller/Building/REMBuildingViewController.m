@@ -10,6 +10,8 @@
 #import "REMApplicationContext.h"
 #import "WeiboSDK.h"
 #import <QuartzCore/QuartzCore.h>
+#import "REMBuildingWeiboSendViewController.h"
+#import "REMStatusBar.h"
 
 @interface REMBuildingViewController ()
 @property (nonatomic,strong) NSArray *imageArray;
@@ -132,37 +134,52 @@
 }
 
 - (void)settingButtonPressed:(UIButton *)button{
-//    [self performSegueWithIdentifier:@"buildingSettingSegue2" sender:self];
-//    NSLog(@"setting button pressed");
-    REMImageView *view = self.imageArray[self.currentIndex];
-    [view exportImage:^(UIImage *image){
-//        NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-//        NSString* myDocPath = myPaths[0];
-//        NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
-//        [UIImagePNGRepresentation(image) writeToFile:fileName atomically:NO];
-//
-        NSLog(@"CALLBAKC");
-    }];
+    [self performSegueWithIdentifier:@"buildingSettingSegue2" sender:self];
 }
 
 -(void)shareButtonTouchDown:(UIButton *)button
 {
-    [self performSegueWithIdentifier:@"sendWeiboSegue" sender:self];
-//    REMImageView* currentView = [self.imageArray objectAtIndex:self.currentIndex];
-//    UIImage* screenShoot = [currentView generateWeiboImage];
-//    
-//    NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-//    NSString* myDocPath = myPaths[0];
-//    NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
-//    [UIImagePNGRepresentation(screenShoot) writeToFile:fileName atomically:NO];
-//
-//    NSData *image = UIImagePNGRepresentation(screenShoot);
+    [REMStatusBar showStatusMessage:@"FFF"];
+//    UIApplication *application  = [UIApplication sharedApplication];
+//    UIWindow* window = application.keyWindow;
+//    if (!window || window.windowLevel != UIWindowLevelNormal) {
+//        for(window in [UIApplication sharedApplication].windows) {
+//            if (window.windowLevel == UIWindowLevelNormal) {
+//                [window makeKeyAndVisible];
+//                break;
+//            }
+//        }
+//    }
+    
+//    [UIView animateWithDuration:0.4f animations:^{
+//        window.frame=CGRectMake(0,300,1024,20);
+//    }];
+    //[self performSegueWithIdentifier:@"sendWeiboSegue" sender:self];
 //    if (![Weibo.weibo isAuthenticated]) {
 //        [REMAlertHelper alert:@"未绑定微博账户。"];
 //    } else {
-//        [self sendWeibo:@"FDFDF" withImage:image];
+//        REMImageView *view = self.imageArray[self.currentIndex];
+//        [view exportImage:^(UIImage *image, NSString* text){
+//           // [UIImagePNGRepresentation(image) writeToFile:[self getWeiboPicAddress] atomically:NO];
+//            NSDictionary* sender = @{@"image": image, @"text": text};
+//            [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
+//        }];
 //    }
 }
+-(NSString*)getWeiboPicAddress {
+    NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString* myDocPath = myPaths[0];
+    return [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"sendWeiboSegue"]) {
+        NSDictionary* params = (NSDictionary*)sender;
+        REMBuildingWeiboSendViewController *vc = [segue destinationViewController];
+        [vc setWeiboText: [params objectForKey:@"text"]];
+        [vc setWeiboImage:[params objectForKey:@"image"]];
+    }
+}
+
 
 - (void)blurredImageView
 {

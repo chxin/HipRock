@@ -12,5 +12,7 @@
 #import "REMAlertHelper.h"
 
 @interface REMBuildingWeiboSendViewController : UIViewController<UITextViewDelegate>
-
+//@property (nonatomic) UIImage* image;
+@property (nonatomic) NSString* weiboText;
+@property (nonatomic) UIImage* weiboImage;
 @end

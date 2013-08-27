@@ -284,9 +284,39 @@ typedef void(^SuccessCallback)(BOOL success);
     UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    NSDictionary* dic = @{@"image": img, @"height": [NSNumber numberWithFloat:kBuildingCommodityButtonDimension + chartHeight] };
-    
-    return dic;
+    NSString* stringFormat = nil;
+    if (self.currentIndex < self.buildingInfo.commodityUsage.count) {
+        stringFormat = @"%@本月用#Commodity#趋势及单位平米用#Commodity#趋势，上月用#Commodity#总能耗为#Usage##UomName#，节能持续进行中。";
+        REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[self.currentIndex];
+        NSString* commodityName = model.commodity.comment;
+        NSString* uomName = model.commodityUsage.uom.comment;
+        NSString* val = model.commodityUsage.dataValue.stringValue;
+        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
+        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#UomName#" withString:uomName];
+        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Usage#" withString:val];
+    } else {
+        stringFormat = @"今天上午10:00，%@室外#Commodity#为#OutdoorVal##OutdoorUomName#；经霍尼韦尔净化后室内新风#Commodity#为#HoneywellVal##HoneywellUomName#，经美埃净化后室内新风#Commodity#为#MayairVal##MayairUomName#。";
+        REMAirQualityModel *model = self.buildingInfo.airQuality;
+        NSString* commodityName = model.commodity.comment;
+        NSString* outdoorVal = model.outdoor.dataValue.stringValue;
+        NSString* outdoorUom = model.outdoor.uom.comment;
+        NSString* honeywellVal = model.honeywell.dataValue.stringValue;
+        NSString* honeywellUom = model.honeywell.uom.comment;
+        NSString* mayairVal = model.mayair.dataValue.stringValue;
+        NSString* mayairUom = model.mayair.uom.comment;
+        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
+        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorVal#" withString:outdoorVal];
+        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorUomName#" withString:outdoorUom];
+        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellVal#" withString:honeywellVal];
+        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellUomName#" withString:honeywellUom];
+        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairVal#" withString:mayairVal];
+        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairUomName#" withString:mayairUom];
+    }
+    return @{
+             @"image": img,
+             @"height": [NSNumber numberWithFloat:kBuildingCommodityButtonDimension + chartHeight],
+             @"text": stringFormat
+             };
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
