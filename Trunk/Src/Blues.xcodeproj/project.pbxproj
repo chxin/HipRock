@@ -482,7 +482,6 @@
 		7AC3BB4417CC48750022E57E /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BB0017CC48750022E57E /* user.png */; };
 		7AC3BB4517CC48750022E57E /* weibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BB0117CC48750022E57E /* weibo.png */; };
 		7AC3BB4617CC48750022E57E /* weibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BB0217CC48750022E57E /* weibo@2x.png */; };
-		7AC3BB4717CC48750022E57E /* WeiboBana.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BB0317CC48750022E57E /* WeiboBana.png */; };
 		7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
@@ -561,6 +560,7 @@
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 		EF3822EA17CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3822E917CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.m */; };
+		EF83471117CC8894004C055A /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF83471017CC8894004C055A /* WeiboBana.jpg */; };
 		EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */; };
 		EF96300617C610A200BBC7DA /* REMBuildingSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */; };
 		EF97879617C70B440062BE0E /* REMBuildingSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */; };
@@ -975,7 +975,6 @@
 		7AC3BB0017CC48750022E57E /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
 		7AC3BB0117CC48750022E57E /* weibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo.png; sourceTree = "<group>"; };
 		7AC3BB0217CC48750022E57E /* weibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo@2x.png"; sourceTree = "<group>"; };
-		7AC3BB0317CC48750022E57E /* WeiboBana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeiboBana.png; sourceTree = "<group>"; };
 		7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceMeta.h; path = Common/Communication/REMServiceMeta.h; sourceTree = "<group>"; };
 		7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceMeta.m; path = Common/Communication/REMServiceMeta.m; sourceTree = "<group>"; };
 		B4198EAC178410D300B50475 /* REMLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLogManager.h; path = Common/Log/REMLogManager.h; sourceTree = "<group>"; };
@@ -1077,6 +1076,7 @@
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
 		EF3822E817CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingWeiboSendViewController.h; sourceTree = "<group>"; };
 		EF3822E917CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingWeiboSendViewController.m; sourceTree = "<group>"; };
+		EF83471017CC8894004C055A /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = WeiboBana.jpg; path = ../../../../../../../WeiboBana.jpg; sourceTree = "<group>"; };
 		EF8F1D7717C2FE5400D3E29F /* REMToggleButtonGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButtonGroup.h; sourceTree = "<group>"; };
 		EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButtonGroup.m; sourceTree = "<group>"; };
 		EF96300417C610A100BBC7DA /* REMBuildingSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingSettingViewController.h; sourceTree = "<group>"; };
@@ -1927,7 +1927,7 @@
 				7AC3BB0017CC48750022E57E /* user.png */,
 				7AC3BB0117CC48750022E57E /* weibo.png */,
 				7AC3BB0217CC48750022E57E /* weibo@2x.png */,
-				7AC3BB0317CC48750022E57E /* WeiboBana.png */,
+				EF83471017CC8894004C055A /* WeiboBana.jpg */,
 			);
 			name = Images;
 			path = Resource/Images;
@@ -2273,7 +2273,6 @@
 				7AC3BB4417CC48750022E57E /* user.png in Resources */,
 				7AC3BB4517CC48750022E57E /* weibo.png in Resources */,
 				7AC3BB4617CC48750022E57E /* weibo@2x.png in Resources */,
-				7AC3BB4717CC48750022E57E /* WeiboBana.png in Resources */,
 				B42BD71717CC70DA00797162 /* Share_pressed@2x.png in Resources */,
 				B42BD71817CC70DA00797162 /* Share_pressed.png in Resources */,
 				B42BD71917CC70DA00797162 /* Share_normal@2x.png in Resources */,
