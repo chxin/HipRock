@@ -141,31 +141,6 @@
 
 -(void)shareButtonTouchDown:(UIButton *)button
 {
-//    UIApplication *application  = [UIApplication sharedApplication];
-//    UIWindow* window = application.keyWindow;
-//    if (!window || window.windowLevel != UIWindowLevelNormal) {
-//        for(window in [UIApplication sharedApplication].windows) {
-//            if (window.windowLevel == UIWindowLevelNormal) {
-//                [window makeKeyAndVisible];
-//                break;
-//            }
-//        }
-//    }
-    
-//    [UIView animateWithDuration:0.4f animations:^{
-//        window.frame=CGRectMake(0,300,1024,20);
-//    }];
-    //[self performSegueWithIdentifier:@"sendWeiboSegue" sender:self];
-    if (![Weibo.weibo isAuthenticated]) {
-        [REMAlertHelper alert:@"未绑定微博账户。"];
-    } else {
-        REMImageView *view = self.imageArray[self.currentIndex];
-        [view exportImage:^(UIImage *image, NSString* text){
-           // [UIImagePNGRepresentation(image) writeToFile:[self getWeiboPicAddress] atomically:NO];
-            NSDictionary* sender = @{@"image": image, @"text": text};
-            [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
-        }];
-    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -412,7 +387,31 @@
 }
 
 - (IBAction)shareButtonPressed:(id)sender {
-    [self performSegueWithIdentifier:@"sendWeiboSegue" sender:self];
+    //    UIApplication *application  = [UIApplication sharedApplication];
+    //    UIWindow* window = application.keyWindow;
+    //    if (!window || window.windowLevel != UIWindowLevelNormal) {
+    //        for(window in [UIApplication sharedApplication].windows) {
+    //            if (window.windowLevel == UIWindowLevelNormal) {
+    //                [window makeKeyAndVisible];
+    //                break;
+    //            }
+    //        }
+    //    }
+    
+    //    [UIView animateWithDuration:0.4f animations:^{
+    //        window.frame=CGRectMake(0,300,1024,20);
+    //    }];
+    //[self performSegueWithIdentifier:@"sendWeiboSegue" sender:self];
+    if (![Weibo.weibo isAuthenticated]) {
+        [REMAlertHelper alert:@"未绑定微博账户。"];
+    } else {
+        REMImageView *view = self.imageArray[self.currentIndex];
+        [view exportImage:^(UIImage *image, NSString* text){
+            // [UIImagePNGRepresentation(image) writeToFile:[self getWeiboPicAddress] atomically:NO];
+            NSDictionary* sender = @{@"image": image, @"text": text};
+            [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
+        }];
+    }
 
     /*
     REMUserModel *currentUser = [REMApplicationContext instance].currentUser;

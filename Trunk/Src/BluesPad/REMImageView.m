@@ -621,27 +621,27 @@
         float dataImageHeight = ((NSNumber*)[outputDic objectForKey:@"height"]).floatValue;
         
         CGFloat outputWidth = self.frame.size.width;
-        CGFloat outputHeightWithoutFooter = 1300;
-        CGFloat footerHeight = 200;
-        UIImage *footerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WeiboBana" ofType:@"png"]];
+        CGFloat outputHeightWithoutFooter = 1470;
+        CGFloat footerHeight = 98;
+        UIImage *footerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WeiboBana" ofType:@"jpg"]];
         UIGraphicsBeginImageContext(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight));
+//        [[UIColor colorWithRed:0 green:0 blue:0 alpha:.6]set]
         [[UIColor blackColor]set];
         UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
         [[self getImageOfLayer:self.imageView.layer]drawInRect:self.imageView.frame];
         
         [[self getImageOfLayer:self.titleLabel.layer]drawInRect:CGRectMake(self.settingButton.frame.origin.x, self.settingButton.frame.origin.y, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height)];
         //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
+        [dataImage drawInRect:CGRectMake(0, 470, outputWidth, dataImageHeight)];
         [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
-        [dataImage drawInRect:CGRectMake(0, 300, outputWidth, dataImageHeight)];
-        
-        [footerImage drawInRect:CGRectMake(0, outputHeightWithoutFooter, outputWidth, footerHeight)];
+        [footerImage drawInRect:CGRectMake(0, outputHeightWithoutFooter, 800, footerHeight)];
         UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-//        NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-//        NSString* myDocPath = myPaths[0];
-//        NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
-        //        [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
+        NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        NSString* myDocPath = myPaths[0];
+        NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
+        [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
 
         
         //[NSString str]
