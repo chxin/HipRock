@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#define kFontUltra "HelveticaNeue-UltraLight"
+#define kFontLight "HelveticaNeue-Light"
+#define kFontSC "Heiti SC"
+
 
 @interface REMApplicationInfo : NSObject
 +(void) initApplicationInfo;
