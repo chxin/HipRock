@@ -20,9 +20,12 @@
 
 @implementation REMLoginCarouselController
 
-static NSInteger subViewWidth = 550;
-static NSInteger subViewHeight = 580;
-static NSInteger viewsDistance = 150;
+const NSInteger kSlideImageCount = 4;
+const NSInteger kScreenWidth = 1024;
+const NSInteger kSubViewWidth = 500;
+const NSInteger kSubViewHeight = 350;
+const NSInteger kSubViewDistance = kScreenWidth - kSubViewWidth;
+const NSInteger kImagePaddingTop = 84;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,87 +46,68 @@ static NSInteger viewsDistance = 150;
     self.loginPageController.loginCarouselController = self;
 
     [self initialize];
+    [self stylize];
 }
 
-- (void) initialize
+- (void)initialize
 {
     [self.scrollView setDelegate:self];
-    self.scrollView.frame = CGRectMake((1024-subViewWidth+viewsDistance)/2, 50, subViewWidth+viewsDistance, subViewHeight);
+    self.scrollView.frame = CGRectMake((kScreenWidth-kSubViewWidth+kSubViewDistance)/2, 50, kSubViewWidth+kSubViewDistance, kSubViewHeight);
     
-    NSInteger viewOffset = viewsDistance/2;
+    NSInteger viewOffset = kSubViewDistance/2;
     
-    for(int i=0;i<=3;i++)
+    for(int i=0;i<kSlideImageCount + 1;i++)
     {
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(viewOffset, 0, subViewWidth, subViewHeight)];
+        UIView *slideView = i<kSlideImageCount?[self makeImageView:i]:self.loginPageController.view;
         
-        CGRect frame = view.bounds;
+        [slideView setFrame:CGRectMake(viewOffset, kImagePaddingTop, kSubViewWidth, kSubViewHeight)];
         
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"preface-s%d.png", i]]];
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        imageView.frame = frame;
-        //make image view round bordered
-        imageView.layer.masksToBounds = YES;
-        imageView.layer.cornerRadius = 15;
+        [self.scrollView addSubview:slideView];
         
-        
-        [view addSubview:imageView];
-        
-        [self.scrollView addSubview:view];
-        
-        viewOffset += view.frame.size.width + viewsDistance;
+        viewOffset += kSubViewWidth + kSubViewDistance;
     }
-    
-    UIView *loginView = self.loginPageController.view;
-    loginView.frame = CGRectMake(viewOffset, 0, subViewWidth, subViewHeight);
-    
-    
-    [self.scrollView addSubview:loginView];
-    
-    [self setScrollPageViewStyle];
     
     self.pageControl.currentPage = 0;
     self.pageControl.numberOfPages = self.scrollView.subviews.count;
     
     int viewCount = self.scrollView.subviews.count;
-    int contentWidth = viewCount*(subViewWidth+viewsDistance);
-    
+    int contentWidth = viewCount*kScreenWidth;
     
     self.scrollView.contentSize = CGSizeMake(contentWidth, self.scrollView.bounds.size.height);
-    self.scrollView.contentOffset = CGPointMake(viewOffset-viewsDistance/2, 0);
-    
+    self.scrollView.contentOffset = CGPointMake(viewOffset-kSubViewDistance/2, 0);
     
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(initializationCarousel) userInfo:nil repeats:NO];
 }
 
+- (void)stylize
+{
+    [self styleJumpLoginButton];
+}
+
+-(UIView *)makeImageView:(int)index
+{
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"preface-s%d.png", index]]];
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    imageView.layer.masksToBounds = YES;
+    
+    return imageView;
+}
+
 - (void)initializationCarousel
 {
-    CGRect rect = CGRectMake(0, 0, subViewWidth+viewsDistance, subViewHeight);
+    CGRect rect = CGRectMake(0, 0, kSubViewWidth+kSubViewDistance, kSubViewHeight);
     [UIView animateWithDuration:2 animations:^(void){
         [self.scrollView scrollRectToVisible:rect animated:NO];
     }];
 }
 
-- (void) setScrollPageViewStyle
-{
-    for(UIView *view in self.scrollView.subviews)
-    {
-        //view.layer.borderColor = [[UIColor alloc] initWithWhite:0.5 alpha:1].CGColor;
-        //view.layer.borderWidth = 8;
-        
-        view.layer.cornerRadius = 15;
-        view.layer.shadowColor = [UIColor blackColor].CGColor;
-        view.layer.shadowOffset = CGSizeMake(0,0);
-        view.layer.shadowOpacity = 1;
-        view.layer.shadowRadius = 15;
-    }
-}
 
 - (IBAction)pageChanged:(id)sender {
     UIPageControl *pager = (UIPageControl *)sender;
     [self showPage:pager.currentPage];
 }
 
-- (IBAction)gotoLoginButtonTouchDown:(id)sender {
+- (IBAction)jumpLoginButtonTouchDown:(id)sender {
     [self showPage:self.scrollView.subviews.count-1];
 }
 
@@ -132,12 +116,21 @@ static NSInteger viewsDistance = 150;
     if(page<0 || page>=self.scrollView.subviews.count)
         return;
     
-    int offset = (subViewWidth + viewsDistance) * page;
+    int offset = (kSubViewWidth + kSubViewDistance) * page;
     
     CGRect visiableZone = self.scrollView.bounds;
     visiableZone.origin = CGPointMake(offset, self.scrollView.contentOffset.y);
     
     [self.scrollView scrollRectToVisible:visiableZone animated:YES];
+}
+
+- (void)styleJumpLoginButton
+{
+    UIImage *normalStateImage = [[UIImage imageNamed:@"jumplogin-normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5.0, 5.0, 5.0, 5.0)];
+    UIImage *pressedStateImage = [[UIImage imageNamed:@"jumplogin-pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5.0, 5.0, 5.0, 5.0)];
+    
+    [self.jumpLoginButton setBackgroundImage:normalStateImage forState:UIControlStateNormal];
+    [self.jumpLoginButton setBackgroundImage:pressedStateImage forState:UIControlStateHighlighted];
 }
 
 - (void)didReceiveMemoryWarning
@@ -156,9 +149,9 @@ static NSInteger viewsDistance = 150;
 
     [self.pageControl setCurrentPage:page];
     if(page == self.pageControl.numberOfPages-1)
-        [self.gotoLoginButton setEnabled:NO];
+        [self.jumpLoginButton setEnabled:NO];
     if(page==0 || page == self.pageControl.numberOfPages-2)
-        [self.gotoLoginButton setEnabled:YES];
+        [self.jumpLoginButton setEnabled:YES];
 }
 
 @end

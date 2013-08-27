@@ -335,6 +335,20 @@
 		7A0288FE17C20CC500709111 /* WeiboDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E417C20CC400709111 /* WeiboDialog.m */; };
 		7A0288FF17C20CC500709111 /* WeiboLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E617C20CC500709111 /* WeiboLoginDialog.m */; };
 		7A02890017C20CC500709111 /* Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E817C20CC500709111 /* Weibo.m */; };
+		7A09330D17CC8737007C6A4E /* REMBackgroundImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09330C17CC8737007C6A4E /* REMBackgroundImageButton.m */; };
+		7A09331017CC8874007C6A4E /* REMJumpLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09330F17CC8874007C6A4E /* REMJumpLoginButton.m */; };
+		7A09331317CC8882007C6A4E /* REMLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09331217CC8882007C6A4E /* REMLoginButton.m */; };
+		7A09331917CC893B007C6A4E /* jumplogin-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A09331417CC893B007C6A4E /* jumplogin-normal.png */; };
+		7A09331A17CC893B007C6A4E /* jumplogin-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A09331517CC893B007C6A4E /* jumplogin-pressed.png */; };
+		7A09331B17CC893B007C6A4E /* loginbutton-disable.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A09331617CC893B007C6A4E /* loginbutton-disable.png */; };
+		7A09331C17CC893B007C6A4E /* loginbutton-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A09331717CC893B007C6A4E /* loginbutton-normal.png */; };
+		7A09331D17CC893B007C6A4E /* loginbutton-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A09331817CC893B007C6A4E /* loginbutton-pressed.png */; };
+		7A09332217CC8E02007C6A4E /* splashscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A09332017CC8E02007C6A4E /* splashscreen.png */; };
+		7A09332717CC8E9C007C6A4E /* splashscreen-logo-common.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A09332317CC8E9C007C6A4E /* splashscreen-logo-common.png */; };
+		7A09332817CC8E9C007C6A4E /* splashscreen-logo-common@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A09332417CC8E9C007C6A4E /* splashscreen-logo-common@2x.png */; };
+		7A09332917CC8E9C007C6A4E /* splashscreen-logo-flash.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A09332517CC8E9C007C6A4E /* splashscreen-logo-flash.png */; };
+		7A09332A17CC8E9C007C6A4E /* splashscreen-logo-flash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A09332617CC8E9C007C6A4E /* splashscreen-logo-flash@2x.png */; };
+		7A09332C17CCA22A007C6A4E /* loginpage-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A09332B17CCA229007C6A4E /* loginpage-background.png */; };
 		7A095E73179571C80098DB16 /* REMWidgetAxisHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */; };
 		7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */; };
 		7A09D59A17B8D62F001EBC30 /* REMDataRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59917B8D62F001EBC30 /* REMDataRange.m */; };
@@ -470,8 +484,6 @@
 		7AC3BB3617CC48750022E57E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAF117CC48740022E57E /* Default@2x.png */; };
 		7AC3BB3717CC48750022E57E /* detail-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAF217CC48740022E57E /* detail-arrow.png */; };
 		7AC3BB3817CC48750022E57E /* Logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAF417CC48740022E57E /* Logout.png */; };
-		7AC3BB3917CC48750022E57E /* splash-schneider-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAF517CC48740022E57E /* splash-schneider-logo.png */; };
-		7AC3BB3A17CC48750022E57E /* splashscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAF617CC48740022E57E /* splashscreen.png */; };
 		7AC3BB3B17CC48750022E57E /* login_error.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAF717CC48750022E57E /* login_error.png */; };
 		7AC3BB3C17CC48750022E57E /* NaturalGas_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAF817CC48750022E57E /* NaturalGas_normal.png */; };
 		7AC3BB3D17CC48750022E57E /* NaturalGas_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAF917CC48750022E57E /* NaturalGas_pressed@2x.png */; };
@@ -640,6 +652,23 @@
 		7A0288E817C20CC500709111 /* Weibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Weibo.m; sourceTree = "<group>"; };
 		7A0288E917C20CC500709111 /* WeiboConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboConfig.h; sourceTree = "<group>"; };
 		7A0288EA17C20CC500709111 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
+		7A09330B17CC8736007C6A4E /* REMBackgroundImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBackgroundImageButton.h; sourceTree = "<group>"; };
+		7A09330C17CC8737007C6A4E /* REMBackgroundImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBackgroundImageButton.m; sourceTree = "<group>"; };
+		7A09330E17CC8874007C6A4E /* REMJumpLoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMJumpLoginButton.h; path = Login/REMJumpLoginButton.h; sourceTree = "<group>"; };
+		7A09330F17CC8874007C6A4E /* REMJumpLoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMJumpLoginButton.m; path = Login/REMJumpLoginButton.m; sourceTree = "<group>"; };
+		7A09331117CC8882007C6A4E /* REMLoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginButton.h; sourceTree = "<group>"; };
+		7A09331217CC8882007C6A4E /* REMLoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginButton.m; sourceTree = "<group>"; };
+		7A09331417CC893B007C6A4E /* jumplogin-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jumplogin-normal.png"; sourceTree = "<group>"; };
+		7A09331517CC893B007C6A4E /* jumplogin-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jumplogin-pressed.png"; sourceTree = "<group>"; };
+		7A09331617CC893B007C6A4E /* loginbutton-disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginbutton-disable.png"; sourceTree = "<group>"; };
+		7A09331717CC893B007C6A4E /* loginbutton-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginbutton-normal.png"; sourceTree = "<group>"; };
+		7A09331817CC893B007C6A4E /* loginbutton-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginbutton-pressed.png"; sourceTree = "<group>"; };
+		7A09332017CC8E02007C6A4E /* splashscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splashscreen.png; path = splashscreen/splashscreen.png; sourceTree = "<group>"; };
+		7A09332317CC8E9C007C6A4E /* splashscreen-logo-common.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "splashscreen-logo-common.png"; path = "splashscreen/splashscreen-logo-common.png"; sourceTree = "<group>"; };
+		7A09332417CC8E9C007C6A4E /* splashscreen-logo-common@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "splashscreen-logo-common@2x.png"; path = "splashscreen/splashscreen-logo-common@2x.png"; sourceTree = "<group>"; };
+		7A09332517CC8E9C007C6A4E /* splashscreen-logo-flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "splashscreen-logo-flash.png"; path = "splashscreen/splashscreen-logo-flash.png"; sourceTree = "<group>"; };
+		7A09332617CC8E9C007C6A4E /* splashscreen-logo-flash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "splashscreen-logo-flash@2x.png"; path = "splashscreen/splashscreen-logo-flash@2x.png"; sourceTree = "<group>"; };
+		7A09332B17CCA229007C6A4E /* loginpage-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginpage-background.png"; sourceTree = "<group>"; };
 		7A095E71179571C80098DB16 /* REMWidgetAxisHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetAxisHelper.h; path = Common/Utility/REMWidgetAxisHelper.h; sourceTree = "<group>"; };
 		7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetAxisHelper.m; path = Common/Utility/REMWidgetAxisHelper.m; sourceTree = "<group>"; };
 		7A09D59517B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingTimeRangeDataModel.h; sourceTree = "<group>"; };
@@ -965,8 +994,6 @@
 		7AC3BAF117CC48740022E57E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		7AC3BAF217CC48740022E57E /* detail-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail-arrow.png"; sourceTree = "<group>"; };
 		7AC3BAF417CC48740022E57E /* Logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logout.png; sourceTree = "<group>"; };
-		7AC3BAF517CC48740022E57E /* splash-schneider-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash-schneider-logo.png"; sourceTree = "<group>"; };
-		7AC3BAF617CC48740022E57E /* splashscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splashscreen.png; sourceTree = "<group>"; };
 		7AC3BAF717CC48750022E57E /* login_error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_error.png; sourceTree = "<group>"; };
 		7AC3BAF817CC48750022E57E /* NaturalGas_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaturalGas_normal.png; sourceTree = "<group>"; };
 		7AC3BAF917CC48750022E57E /* NaturalGas_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NaturalGas_pressed@2x.png"; sourceTree = "<group>"; };
@@ -1244,6 +1271,29 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		7A09330A17CC8719007C6A4E /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7A09330E17CC8874007C6A4E /* REMJumpLoginButton.h */,
+				7A09330F17CC8874007C6A4E /* REMJumpLoginButton.m */,
+				7A09331117CC8882007C6A4E /* REMLoginButton.h */,
+				7A09331217CC8882007C6A4E /* REMLoginButton.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		7A09331E17CC8DC3007C6A4E /* splashscreen */ = {
+			isa = PBXGroup;
+			children = (
+				7A09332317CC8E9C007C6A4E /* splashscreen-logo-common.png */,
+				7A09332417CC8E9C007C6A4E /* splashscreen-logo-common@2x.png */,
+				7A09332517CC8E9C007C6A4E /* splashscreen-logo-flash.png */,
+				7A09332617CC8E9C007C6A4E /* splashscreen-logo-flash@2x.png */,
+				7A09332017CC8E02007C6A4E /* splashscreen.png */,
+			);
+			name = splashscreen;
+			sourceTree = "<group>";
+		};
 		7A153C4317AA489600413D3C /* Building */ = {
 			isa = PBXGroup;
 			children = (
@@ -1467,10 +1517,11 @@
 		7A37AA6017AB944B00316902 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				7A09330A17CC8719007C6A4E /* Login */,
 				7A37AA6117AB944B00316902 /* REMNumberLabel.h */,
+				7A37AA6217AB944B00316902 /* REMNumberLabel.m */,
 				EF97DDD917C20B5700A0374E /* REMToggleButton.h */,
 				EF97DDDA17C20B5700A0374E /* REMToggleButton.m */,
-				7A37AA6217AB944B00316902 /* REMNumberLabel.m */,
 				7A37AA6417AB94B100316902 /* REMColoredButton.h */,
 				7A37AA6517AB94B100316902 /* REMColoredButton.m */,
 				7A5277F417AF4209007DA735 /* REMIndicatorButton.h */,
@@ -1479,6 +1530,8 @@
 				EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */,
 				EF9F28AF17CB54DD00E775ED /* REMStatusBar.h */,
 				EF9F28B017CB54DE00E775ED /* REMStatusBar.m */,
+				7A09330B17CC8736007C6A4E /* REMBackgroundImageButton.h */,
+				7A09330C17CC8737007C6A4E /* REMBackgroundImageButton.m */,
 			);
 			name = Controls;
 			path = View/Controls;
@@ -1910,6 +1963,7 @@
 		7AC3BABB17CC48740022E57E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7A09331E17CC8DC3007C6A4E /* splashscreen */,
 				7AC3BAF317CC48740022E57E /* login */,
 				7AC3BABC17CC48740022E57E /* building */,
 				7AC3BACD17CC48740022E57E /* buttons */,
@@ -2022,9 +2076,13 @@
 		7AC3BAF317CC48740022E57E /* login */ = {
 			isa = PBXGroup;
 			children = (
+				7A09332B17CCA229007C6A4E /* loginpage-background.png */,
+				7A09331417CC893B007C6A4E /* jumplogin-normal.png */,
+				7A09331517CC893B007C6A4E /* jumplogin-pressed.png */,
+				7A09331617CC893B007C6A4E /* loginbutton-disable.png */,
+				7A09331717CC893B007C6A4E /* loginbutton-normal.png */,
+				7A09331817CC893B007C6A4E /* loginbutton-pressed.png */,
 				7AC3BAF417CC48740022E57E /* Logout.png */,
-				7AC3BAF517CC48740022E57E /* splash-schneider-logo.png */,
-				7AC3BAF617CC48740022E57E /* splashscreen.png */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -2263,8 +2321,6 @@
 				7AC3BB3617CC48750022E57E /* Default@2x.png in Resources */,
 				7AC3BB3717CC48750022E57E /* detail-arrow.png in Resources */,
 				7AC3BB3817CC48750022E57E /* Logout.png in Resources */,
-				7AC3BB3917CC48750022E57E /* splash-schneider-logo.png in Resources */,
-				7AC3BB3A17CC48750022E57E /* splashscreen.png in Resources */,
 				7AC3BB3B17CC48750022E57E /* login_error.png in Resources */,
 				7AC3BB3C17CC48750022E57E /* NaturalGas_normal.png in Resources */,
 				7AC3BB3D17CC48750022E57E /* NaturalGas_pressed@2x.png in Resources */,
@@ -2306,6 +2362,17 @@
 				B42BD74017CC71C900797162 /* Electricity_pressed.png in Resources */,
 				B42BD74117CC71C900797162 /* Electricity_normal@2x.png in Resources */,
 				B42BD74217CC71C900797162 /* Electricity_normal.png in Resources */,
+				7A09331917CC893B007C6A4E /* jumplogin-normal.png in Resources */,
+				7A09331A17CC893B007C6A4E /* jumplogin-pressed.png in Resources */,
+				7A09331B17CC893B007C6A4E /* loginbutton-disable.png in Resources */,
+				7A09331C17CC893B007C6A4E /* loginbutton-normal.png in Resources */,
+				7A09331D17CC893B007C6A4E /* loginbutton-pressed.png in Resources */,
+				7A09332217CC8E02007C6A4E /* splashscreen.png in Resources */,
+				7A09332717CC8E9C007C6A4E /* splashscreen-logo-common.png in Resources */,
+				7A09332817CC8E9C007C6A4E /* splashscreen-logo-common@2x.png in Resources */,
+				7A09332917CC8E9C007C6A4E /* splashscreen-logo-flash.png in Resources */,
+				7A09332A17CC8E9C007C6A4E /* splashscreen-logo-flash@2x.png in Resources */,
+				7A09332C17CCA22A007C6A4E /* loginpage-background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2501,6 +2568,9 @@
 				7A9557C017C73AD200249CED /* REMBuildingAirQualityChart.m in Sources */,
 				EF3822EA17CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.m in Sources */,
 				EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */,
+				7A09330D17CC8737007C6A4E /* REMBackgroundImageButton.m in Sources */,
+				7A09331017CC8874007C6A4E /* REMJumpLoginButton.m in Sources */,
+				7A09331317CC8882007C6A4E /* REMLoginButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

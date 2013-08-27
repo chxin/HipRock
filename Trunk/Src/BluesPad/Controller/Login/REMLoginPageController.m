@@ -36,6 +36,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    UIImage *backgroundImage = [[UIImage imageNamed:@"loginpage-background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,0,0,0)];
+    
+    UIImageView *myView = (UIImageView *)self.view;
+    [myView setFrame:CGRectMake(0, 0, 500, 350)];
+    [myView setContentMode:UIViewContentModeScaleAspectFit];
+    [myView setImage:backgroundImage];
+    
+    
     self.loginButton.buttonColor = REMColoredButtonBlue;
     self.loginButton.loadingText = @"正在登录...";
     
