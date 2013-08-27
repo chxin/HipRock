@@ -24,5 +24,7 @@
 
 - (void)exportDataView:(void(^)(NSDictionary *))success;
 
+- (void)resetDefaultCommodity;
+
 
 @end

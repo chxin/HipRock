@@ -24,7 +24,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 #define REMLogWarn DDLogWarn
 #define REMLogVerbose DDLogVerbose
 
-
+#define NSLog DDLogInfo
 
 @interface REMLog : NSObject
 + (void) bind;

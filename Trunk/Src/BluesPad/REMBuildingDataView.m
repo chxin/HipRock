@@ -127,13 +127,13 @@ typedef void(^SuccessCallback)(BOOL success);
     {
         return @"NaturalGas";
     }
-    else if([model.commodityId isEqualToNumber:@(5)] == YES)
-    {
-        return @"oil";
-    }
     else{
-        return @"elec";
+        return @"Electricity";
     }
+}
+
+- (void)resetDefaultCommodity{
+    [self buttonPressed:self.buttonArray[0]];
 }
 
 - (void)buttonPressed:(UIButton *)button

@@ -69,6 +69,7 @@
 - (void)moveOutOfWindow{
     [REMDataAccessor cancelAccess:self.loadingImageKey];
     [self.dataView cancelAllRequest];
+    [self.dataView resetDefaultCommodity];
     self.isActive=NO;
 }
 
@@ -402,7 +403,7 @@
 }
 
 -(void)checkIfRequestChartData:(UIScrollView *)scrollView{
-    if(scrollView.contentOffset.y>=0){
+    if(scrollView.contentOffset.y>=kCommodityScrollTop){
         self.dataViewUp=YES;
         if(self.isActive == YES && self.hasLoadingChartData==NO){
             [self requireChartData];
