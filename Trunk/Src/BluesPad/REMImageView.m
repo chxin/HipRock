@@ -69,6 +69,7 @@
 - (void)moveOutOfWindow{
     [REMDataAccessor cancelAccess:self.loadingImageKey];
     [self.dataView cancelAllRequest];
+    [self.dataView resetDefaultCommodity];
     self.isActive=NO;
 }
 
@@ -145,7 +146,7 @@
         return;
     }
     NSDictionary *param=@{@"pictureId":self.buildingInfo.building.pictureIds[0]};
-    REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingImage parameter:param];
+    REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param];
     store.isAccessLocal=YES;
     store.isStoreLocal=YES;
     store.groupName=self.loadingImageKey;
@@ -335,11 +336,11 @@
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     self.bottomGradientLayer=gradient;
-    gradient.opacity=0.6;
+
     gradient.frame = frame;
     gradient.colors = [NSArray arrayWithObjects:
                        (id)[UIColor clearColor].CGColor,
-                       (id)[UIColor blackColor].CGColor,
+                       (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6].CGColor,
                        nil];
     
     UIGraphicsBeginImageContextWithOptions(frame.size, NO, 0.0);
@@ -402,7 +403,7 @@
 }
 
 -(void)checkIfRequestChartData:(UIScrollView *)scrollView{
-    if(scrollView.contentOffset.y>=0){
+    if(scrollView.contentOffset.y>=kCommodityScrollTop){
         self.dataViewUp=YES;
         if(self.isActive == YES && self.hasLoadingChartData==NO){
             [self requireChartData];
@@ -461,16 +462,20 @@
                         change:(NSDictionary *)change context:(void *)context {
     
     self.controller.currentScrollOffset = self.dataView.contentOffset.y;
-    // closer to zero, less blur applied
-    [self setBlurLevel:(self.dataView.contentOffset.y + self.dataView.contentInset.top) / (2 * CGRectGetHeight(self.bounds) / 3)];
+    
+    //NSLog(@"offset:%@",NSStringFromCGPoint(self.dataView.contentOffset));
+    //NSLog(@"contentInset:%@",NSStringFromUIEdgeInsets(self.dataView.contentInset));
+    
+    //[self setBlurLevel:(self.dataView.contentOffset.y + self.dataView.contentInset.top) / (2 * CGRectGetHeight(self.bounds) / 3)];
+    [self setBlurLevel:(self.dataView.contentOffset.y + self.dataView.contentInset.top) / (kBuildingCommodityViewTop+kCommodityScrollTop)];
 }
 
 - (void)setBlurLevel:(float)blurLevel {
     //NSLog(@"blurlevel:%f",blurLevel);
-    self.blurredImageView.alpha = blurLevel;
+    self.blurredImageView.alpha = MAX(blurLevel,0);
     
     
-    self.glassView.alpha = MAX(0,MIN(blurLevel,0.7));
+    self.glassView.alpha = MAX(0,MIN(blurLevel,0.8));
     
 }
 
@@ -494,10 +499,9 @@
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
    
-    gradient.opacity=0.4;
     gradient.frame = frame;
     gradient.colors = [NSArray arrayWithObjects:
-                       (id)[UIColor blackColor].CGColor,
+                       (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4].CGColor,
                        (id)[UIColor clearColor].CGColor,
                        nil];
     

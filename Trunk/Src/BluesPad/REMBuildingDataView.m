@@ -34,7 +34,7 @@ typedef void(^SuccessCallback)(BOOL success);
         [self setScrollEnabled:YES];
         //self.clipsToBounds=NO;
         self.successCounter=0;
-        [self setContentSize:CGSizeMake(0, 748-kBuildingTitleHeight-20)];
+        [self setContentSize:CGSizeMake(0, 1100)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
         self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityUsage.count+1)];
@@ -51,15 +51,22 @@ typedef void(^SuccessCallback)(BOOL success);
     for (;i<self.buildingInfo.commodityUsage.count;++i) {
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
-        btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
-        
+        //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
+        btn.tag=i;
+        [btn setTitle:model.commodity.comment forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+        btn.titleLabel.textColor=[UIColor whiteColor];
+        btn.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSC) size:11];
         NSString *str = [self retrieveCommodityImageName:model.commodity];
-        btn.imageView.contentMode=UIViewContentModeScaleToFill;
+        btn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentCenter;
         btn.showsTouchWhenHighlighted=YES;
         btn.adjustsImageWhenHighlighted=YES;
         
-        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal.png",str]] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed.png",str]] forState:UIControlStateSelected];
+        btn.titleEdgeInsets=UIEdgeInsetsMake(41, 0, 0, 0);
+        btn.titleLabel.textAlignment=NSTextAlignmentCenter;
+        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",str] ] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed",str]] forState:UIControlStateSelected];
         if(i==0){
             [btn setSelected:YES];
         }
@@ -74,14 +81,15 @@ typedef void(^SuccessCallback)(BOOL success);
         REMAirQualityModel *model = self.buildingInfo.airQuality;
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
         btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
+        btn.tag=i;
         btn.layer.masksToBounds=NO;
         NSString *str = [self retrieveCommodityImageName:model.commodity];
         btn.imageView.contentMode=UIViewContentModeScaleToFill;
         btn.showsTouchWhenHighlighted=YES;
         btn.adjustsImageWhenHighlighted=YES;
         
-        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal.png",str]] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed.png",str]] forState:UIControlStateSelected];
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",str]] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed",str]] forState:UIControlStateSelected];
         
         [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [array addObject:btn];
@@ -117,15 +125,15 @@ typedef void(^SuccessCallback)(BOOL success);
     }
     else if([model.commodityId isEqualToNumber:@(3)] == YES)
     {
-        return @"Natural Gas";
-    }
-    else if([model.commodityId isEqualToNumber:@(5)] == YES)
-    {
-        return @"oil";
+        return @"NaturalGas";
     }
     else{
-        return @"elec";
+        return @"Electricity";
     }
+}
+
+- (void)resetDefaultCommodity{
+    [self buttonPressed:self.buttonArray[0]];
 }
 
 - (void)buttonPressed:(UIButton *)button
@@ -134,7 +142,7 @@ typedef void(^SuccessCallback)(BOOL success);
     int current =0;
     for (UIButton *btn in self.buttonArray) {
         if(btn.selected==YES){
-            current=[btn.titleLabel.text intValue];
+            current=btn.tag;
         }
         
         if([btn isEqual:button] == NO){
@@ -144,7 +152,7 @@ typedef void(^SuccessCallback)(BOOL success);
             [btn setSelected:YES];
         }
     }
-    int to = [button.titleLabel.text intValue];
+    int to = button.tag;
     REMBuildingCommodityView *view=    self.commodityViewArray[to];
     view.alpha=1;
     REMBuildingCommodityView *currentView= self.commodityViewArray[current];
@@ -164,7 +172,7 @@ typedef void(^SuccessCallback)(BOOL success);
     for (;i<self.buildingInfo.commodityUsage.count;++i ) {
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
         REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withCommodityInfo:model];
-        view.delegate=self;
+        //view.delegate=self;
         if(i!=0){
             view.alpha=0;
         }
@@ -174,7 +182,7 @@ typedef void(^SuccessCallback)(BOOL success);
     if(self.buildingInfo.airQuality!=nil){
         
         REMBuildingAirQualityView *view = [[REMBuildingAirQualityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withAirQualityInfo:self.buildingInfo.airQuality];
-        view.delegate=self;
+        //view.delegate=self;
         view.alpha=0;
         
         [self addSubview:view];
@@ -325,18 +333,18 @@ typedef void(^SuccessCallback)(BOOL success);
         if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]==YES){
             UIPanGestureRecognizer *p = (UIPanGestureRecognizer *)gestureRecognizer;
             CGPoint movement=[p translationInView:self];
-            
+            /*
             if(movement.y<0){
                 [self setBounces:NO];
             }
             else{
                 [self setBounces:YES];
-            }
+            }*/
           
             if(movement.x!=0){
                 return NO;
             }
-            if(self.contentOffset.y>=-20 && movement.y<=0)return NO;
+            //if(self.contentOffset.y>=-20 && movement.y<=0)return NO;
             
             
             

@@ -261,10 +261,18 @@
     {
         
         
-        for (REMImageView *view in self.imageArray)
+        for (int i=0;i<self.imageArray.count;++i)
         {
-//            [view setCenter:CGPointMake(view.center.x+trans.x, view.center.y)];
-            [view moveCenter:trans.x];
+            REMImageView *view = self.imageArray[i];
+            if(self.currentIndex == 0 && self.cumulateX>0){
+                [view moveCenter:trans.x/2];
+            }
+            else if((self.currentIndex==(self.imageArray.count-1)) || self.cumulateX<0){
+                [view moveCenter:trans.x/2];
+            }
+            else{
+                [view moveCenter:trans.x];
+            }
         }
         
         self.cumulateX+=trans.x;
@@ -272,7 +280,7 @@
         [pan setTranslation:CGPointZero inView:self.view];
     }
     
-    if(pan.state == UIGestureRecognizerStateEnded)
+    if(pan.state == UIGestureRecognizerStateEnded||pan.state == UIGestureRecognizerStateCancelled)
     {
         
         __block CGPoint p= [pan velocityInView:self.view];
@@ -283,28 +291,31 @@
         
         __block BOOL addIndex=YES;
         __block NSUInteger oldIndex=self.currentIndex;
-        [UIView animateWithDuration:0.2 delay:0
+        
+        if((sign<0 && self.currentIndex==self.imageArray.count-1)
+           || (sign>0 && self.currentIndex==0) ||
+           (ABS(p.x)<100 && ABS(self.cumulateX)<512)){
+            addIndex=NO;
+        }
+        else{
+            NSMutableArray *ar = [[NSMutableArray alloc] initWithCapacity:self.imageArray.count];
+            for (int i=0; i<self.imageArray.count; ++i) {
+                NSNumber *num = self.originCenterXArray[i];
+                float f = [num floatValue];
+                f = f+sign*(1024+5);
+                NSNumber *num1 = [NSNumber numberWithFloat:f];
+                
+                [ar addObject:num1];
+            }
+            
+            self.originCenterXArray=ar;
+            
+            //NSLog(@"array:%@",ar);
+        }
+        
+        [UIView animateWithDuration:0.4 delay:0
                             options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
-                                if((sign<0 && self.currentIndex==self.imageArray.count-1)
-                                   || (sign>0 && self.currentIndex==0) ||
-                                   (ABS(p.x)<100 && ABS(self.cumulateX)<512)){
-                                    addIndex=NO;
-                                }
-                                else{
-                                    NSMutableArray *ar = [[NSMutableArray alloc] initWithCapacity:self.imageArray.count];
-                                    for (int i=0; i<self.imageArray.count; ++i) {
-                                        NSNumber *num = self.originCenterXArray[i];
-                                        float f = [num floatValue];
-                                        f = f+sign*(1024+5);
-                                        NSNumber *num1 = [NSNumber numberWithFloat:f];
-                                        
-                                        [ar addObject:num1];
-                                    }
-                                    
-                                    self.originCenterXArray=ar;
-                                    
-                                    //NSLog(@"array:%@",ar);
-                                }
+                                
                                 //NSLog(@"array:%@",self.originCenterXArray);
                                 for(int i=0;i<self.imageArray.count;++i)
                                 {

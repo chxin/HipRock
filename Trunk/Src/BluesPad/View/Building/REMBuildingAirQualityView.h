@@ -13,6 +13,7 @@
 #import "REMBuildingAirQualityChartHandler.h"
 
 
+
 @interface REMBuildingAirQualityView : REMBuildingCommodityView
 
 - (id)initWithFrame:(CGRect)frame withAirQualityInfo:(REMAirQualityModel *)airQualityInfo;

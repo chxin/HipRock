@@ -22,6 +22,8 @@
 @property (nonatomic,strong) REMDataRange *dataValueRange;
 @property (nonatomic,strong) REMDataRange *visiableRange;
 @property (nonatomic,strong) REMDataRange *globalRange;
+@property (nonatomic,strong) REMAirQualityStandardModel *standardChina, *standardAmerican;
+@property (nonatomic,strong) UIColor *colorForChinaStandard, *colorForAmericanStandard;
 
 @end
 
@@ -75,14 +77,16 @@
     } error:^(NSError *error, id response) {
         NSLog(@"air fail! %@",error);
     }];
-    
-    loadCompleted();
 }
 
 -(void)loadChart
 {
     //convert data
     [self convertData];
+    
+    //initialize graph
+    [self.chartView initializeGraph];
+    [self initializeLabels];
     
     //initialize plot space
     [self initializePlotSpace];
@@ -135,20 +139,14 @@
         [convertedData addObject:series];
     }
     
-//    if(convertedData.count>0){
-//        for(int j=0;j<self.airQualityData.standards.count;j++){
-//            REMAirQualityStandardModel *standard = self.airQualityData.standards[j];
-//            
-//            NSString* identity = [NSString stringWithFormat: @"sd-%d",j];
-//            NSMutableArray *standardData = [[NSMutableArray alloc] init];
-//            
-//            for(int i=0;i<[[convertedData[0] objectForKey:@"data"] count]; i++) {
-//                [standardData addObject:@{@"y": standard.standardValue, @"x": [[convertedData[0] objectForKey:@"data"][i] objectForKey:@"x"]}];
-//            }
-//            
-//            [convertedData addObject:@{@"title":standard.standardName,@"identity":identity, @"data":standardData}];
-//        }
-//    }
+    for(REMAirQualityStandardModel *standard in self.airQualityData.standards){
+        if([standard.standardName isEqual: @"美国标准"]){
+            self.standardAmerican = standard;
+        }
+        if([standard.standardName isEqual: @"中国标准"]){
+            self.standardChina = standard;
+        }
+    }
     
     //process visiable range
     NSDate *visiableEndDate = [NSDate dateWithTimeIntervalSince1970:self.visiableRange.end];
@@ -161,7 +159,7 @@
 
 -(void)initializePlotSpace
 {
-    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.hostedGraph.defaultPlotSpace;
+    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.hostView.hostedGraph.defaultPlotSpace;
     plotSpace.allowsUserInteraction = YES;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.globalRange.start) length:CPTDecimalFromDouble([self.globalRange distance])];
@@ -169,11 +167,14 @@
     //since y axis will never be able to drag, global space and visiable space for y axis are equal
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.dataValueRange.start) length:CPTDecimalFromDouble([self.dataValueRange distance])];
     plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([self.dataValueRange start]) length:CPTDecimalFromDouble([self.dataValueRange distance])];
+    
+    [plotSpace setElasticGlobalXRange:YES];
+    [plotSpace setAllowsMomentum:YES];
 }
 
 -(void)initializeAxises
 {
-    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.hostedGraph.defaultPlotSpace;
+    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.hostView.hostedGraph.defaultPlotSpace;
     
     //line styles
     CPTMutableLineStyle *hiddenLineStyle = [CPTMutableLineStyle lineStyle];
@@ -185,7 +186,7 @@
     
     CPTMutableLineStyle *gridLineStyle=[[CPTMutableLineStyle alloc] init];
     gridLineStyle.lineWidth = 1.0f;
-    gridLineStyle.lineColor = [CPTColor whiteColor];
+    gridLineStyle.lineColor = [CPTColor colorWithCGColor:[UIColor colorWithWhite:0.7 alpha:0.3].CGColor];
     
     //text styles
     CPTMutableTextStyle *axisTextStyle = [CPTMutableTextStyle textStyle];
@@ -203,6 +204,7 @@
     x.majorTickLineStyle = hiddenLineStyle;
     x.minorTickLineStyle = hiddenLineStyle;
     x.anchorPoint=CGPointZero;
+    x.majorGridLineStyle = gridLineStyle;
     
     
     NSMutableSet *xlabels = [[NSMutableSet alloc] init];
@@ -233,18 +235,13 @@
     y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
     y.plotSpace = plotSpace;
     y.axisLineStyle = axisLineStyle;
-    y.majorTickLineStyle = hiddenLineStyle;
-    y.minorTickLineStyle = hiddenLineStyle;
     y.anchorPoint=CGPointZero;
-    
-    
-    y.gridLinesRange = plotSpace.yRange;
     y.majorIntervalLength = CPTDecimalFromFloat(self.dataValueRange.end/4);
     y.majorGridLineStyle = gridLineStyle;
     y.labelTextStyle = axisTextStyle;
     
     //add x and y axis into axis set
-    self.chartView.hostedGraph.axisSet.axes = @[x,y];
+    self.chartView.hostView.hostedGraph.axisSet.axes = @[x,y];
 }
 
 -(NSString *)formatDateLabel:(NSDate *)date
@@ -273,60 +270,139 @@
         lineStyle.lineColor = lineColor;
         lineStyle.lineWidth = 2;
         
-        CPTScatterPlot *line = [[CPTScatterPlot alloc] initWithFrame:self.chartView.hostedGraph.bounds];
+        CPTScatterPlot *line = [[CPTScatterPlot alloc] initWithFrame:self.chartView.hostView.hostedGraph.bounds];
         line.dataSource = self;
         line.identifier = [series objectForKey:@"identity"];
         
         line.dataLineStyle = lineStyle;
         line.plotSymbol = symbol;
         line.delegate = self;
-        [self.chartView.hostedGraph addPlot:line];
+        [self.chartView.hostView.hostedGraph addPlot:line];
     }
 }
 
 -(void)drawStandards
 {
-    CPTXYAxis *verticalAxis = ((CPTXYAxisSet *)self.chartView.hostedGraph.axisSet).yAxis;
-    
-//    REMAirQualityStandardModel *standChina, *standardAmerican;
-//    for(REMAirQualityStandardModel *standard in self.airQualityData.standards){
-//        if([standard.standardName isEqual: @"美国标准"]){
-//            standardAmerican = standard;
-//        }
-//        if([standard.standardName isEqual: @"中国标准"]){
-//            standChina = standard;
-//        }
-//    }
-//    
-//    CPTPlotRange *bandRangeChina=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([standChina.standardValue doubleValue])];
-//    CPTPlotRange *bandRangeAmerican=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([standardAmerican.standardValue doubleValue])];
-//    
-//    CPTColor *colorForChinaStandard = [CPTColor redColor];//[CPTColor colorWithComponentRed:100/255 green:100/255 blue:100/255 alpha:0.5];
-//    CPTColor *colorForAmericanStandard = [CPTColor blueColor];//[CPTColor colorWithComponentRed:200/255 green:200/255 blue:200/255 alpha:0.5];
-//    
-//    CPTLimitBand *standardBandChina= [CPTLimitBand limitBandWithRange:bandRangeChina fill:[CPTFill fillWithColor:colorForChinaStandard]];
-//    CPTLimitBand *standardBandAmerican= [CPTLimitBand limitBandWithRange:bandRangeAmerican fill:[CPTFill fillWithColor:colorForAmericanStandard]];
-//    
-//    [verticalAxis addBackgroundLimitBand:standardBandChina];
-//    [verticalAxis addBackgroundLimitBand:standardBandAmerican];
+    CPTXYAxis *verticalAxis = ((CPTXYAxisSet *)self.chartView.hostView.hostedGraph.axisSet).yAxis;
     
     
+    CPTPlotRange *bandRangeChina=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([self.standardChina.standardValue doubleValue])];
+    CPTPlotRange *bandRangeAmerican=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([self.standardAmerican.standardValue doubleValue])];
+    
+    CPTColor *chinaColor = [CPTColor colorWithCGColor:[self getChinaStandardColor].CGColor];
+    CPTColor *americanColor = [CPTColor colorWithCGColor:[self getAmericanStandardColor].CGColor];
+    
+    
+    CPTLimitBand *standardBandChina= [CPTLimitBand limitBandWithRange:bandRangeChina fill:[CPTFill fillWithColor:chinaColor]];
+    CPTLimitBand *standardBandAmerican= [CPTLimitBand limitBandWithRange:bandRangeAmerican fill:[CPTFill fillWithColor:americanColor]];
+    
+    [verticalAxis addBackgroundLimitBand:standardBandChina];
+    [verticalAxis addBackgroundLimitBand:standardBandAmerican];
+}
+
+-(void)initializeLabels
+{
+    //standard labels
+    if(self.chartView.chinaStandardLabel == nil){
+        UILabel *chinaStandardLabel = [[UILabel alloc] init];
+        chinaStandardLabel.text = [NSString stringWithFormat: @"%d %@(PM2.5中国标准)",[self.standardChina.standardValue intValue],self.standardChina.uom];
+        chinaStandardLabel.font = [UIFont fontWithName:@"Arial" size:14];
+        chinaStandardLabel.frame = CGRectMake(self.view.bounds.size.width-15, 150,300, 14);
+        chinaStandardLabel.textColor = [self getChinaStandardColor];
+        chinaStandardLabel.backgroundColor = [UIColor clearColor];
+        
+        self.chartView.chinaStandardLabel = chinaStandardLabel;
+        
+        [self.view addSubview:self.chartView.chinaStandardLabel];
+    }
+    
+    if(self.chartView.americanStandardLabel == nil){
+        UILabel *americanStandardLabel = [[UILabel alloc] init];
+        americanStandardLabel.text = [NSString stringWithFormat: @"%d %@(PM2.5美国标准)",[self.standardAmerican.standardValue intValue],self.standardAmerican.uom];
+        americanStandardLabel.font = [UIFont fontWithName:@"Arial" size:14];
+        americanStandardLabel.frame = CGRectMake(self.view.bounds.size.width-15, 193,300, 14);
+        americanStandardLabel.textColor = [self getAmericanStandardColor];
+        americanStandardLabel.backgroundColor = [UIColor clearColor];
+        
+        self.chartView.americanStandardLabel = americanStandardLabel;
+        
+        [self.view addSubview:self.chartView.americanStandardLabel];
+    }
+    
+    //line dots and labels
+    
+    if(self.chartView.outdoorDotView == nil || self.chartView.outdoorLineLabel == nil){
+        UILabel *label = [[UILabel alloc] init];
+        UIView *view = [[UIView alloc] init];
+        
+        self.chartView.outdoorDotView = view;
+        self.chartView.outdoorLineLabel = label;
+        
+        [self.view addSubview:self.chartView.outdoorDotView];
+        [self.view addSubview:self.chartView.outdoorLineLabel];
+    }
+    
+    if (self.chartView.honeywellDotView == nil || self.chartView.honeywellLineLabel == nil) {
+        UILabel *label = [[UILabel alloc] init];
+        
+        UIView *view = [[UIView alloc] init];
+        view.frame = CGRectMake(0,self.chartView.hostView.bounds.size.height + 86,15,15);
+        view.layer.cornerRadius = 7.5;
+        view.backgroundColor = [self getLineColorWithTagCode:@"Honeywell"].uiColor;
+        
+        
+        self.chartView.honeywellDotView = view;
+        self.chartView.honeywellLineLabel = label;
+        
+        [self.view addSubview:self.chartView.honeywellDotView];
+        [self.view addSubview:self.chartView.honeywellLineLabel];
+    }
+    
+    if(self.chartView.mayairDotView == nil || self.chartView.mayairLineLabel == nil){
+        UILabel *label = [[UILabel alloc] init];
+        UIView *view = [[UIView alloc] init];
+        
+        self.chartView.mayairDotView = view;
+        self.chartView.mayairLineLabel = label;
+        
+        
+        [self.view addSubview:self.chartView.mayairDotView];
+        [self.view addSubview:self.chartView.mayairLineLabel];
+    }
 }
 
 -(CPTColor *)getLineColorWithTagCode:(NSString *)code
 {
     if([code isEqualToString:@"MayAir"]){
-        return [CPTColor orangeColor];// [[CPTColor alloc] initWithComponentRed:0.0 green:0.0 blue:0.0 alpha:1];
+        return [[CPTColor alloc] initWithComponentRed:0.0/255.0 green:163.0/255.0 blue:179.0/255.0 alpha:1];
     }
     else if([code isEqualToString:@"Honeywell"]){
-        return [CPTColor greenColor];// [[CPTColor alloc] initWithComponentRed:0.0 green:0.0 blue:0.0 alpha:1];
+        return [[CPTColor alloc] initWithComponentRed:97.0/255.0 green:184.0/255.0 blue:2.0/255.0 alpha:1];
     }
     else if([code isEqualToString:@"Outdoor"]){
-        return [CPTColor whiteColor];// [[CPTColor alloc] initWithComponentRed:0.0 green:0.0 blue:0.0 alpha:1];
+        return [[CPTColor alloc] initWithComponentRed:106.0/255.0 green:99.0/255.0 blue:74.0/255.0 alpha:1];
     }
     else{
         return [[CPTColor alloc] initWithComponentRed:0.0 green:0.0 blue:0.0 alpha:1];
     }
+}
+
+-(UIColor *)getChinaStandardColor
+{
+    if(self.colorForChinaStandard==nil){
+        self.colorForChinaStandard = [UIColor colorWithRed:99.0/255.0 green:0.0/255.0 blue:5.0/255.0 alpha:1];
+    }
+    
+    return self.colorForChinaStandard;
+}
+
+-(UIColor *)getAmericanStandardColor
+{
+    if(self.colorForAmericanStandard == nil){
+        self.colorForAmericanStandard = [UIColor colorWithRed:26.0/255.0 green:64.0/255.0 blue:110.0/255.0 alpha:1];
+    }
+    
+    return self.colorForAmericanStandard;
 }
 
 #pragma mark - data source delegate

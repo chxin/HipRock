@@ -13,7 +13,7 @@
 #import "REMBuildingConstants.h"
 #import "REMBuildingAirQualityView.h"
 
-@interface REMBuildingDataView : UIScrollView<UIScrollViewDelegate>
+@interface REMBuildingDataView : UIScrollView//<UIScrollViewDelegate>
 
 - (id)initWithFrame:(CGRect)frame withBuildingInfo:(REMBuildingOverallModel *)buildingInfo;
 
@@ -23,6 +23,8 @@
 - (void)cancelAllRequest;
 
 - (void)exportDataView:(void(^)(NSDictionary *))success;
+
+- (void)resetDefaultCommodity;
 
 
 @end

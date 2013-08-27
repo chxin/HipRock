@@ -25,7 +25,7 @@
     {
         self.hasLoaded=NO;
         self.backgroundColor=[UIColor clearColor];
-        [self initTitle:title withSize:size];
+        [self initTitle:title withSize:size withLeftMargin:0];
         [self initChartViewWithSize:size];
     }
     
