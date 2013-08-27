@@ -20,4 +20,6 @@
 
 - (void) setTitleIcon:(UIImage *)image;
 
+- (void)setEmptyText:(NSString *)emptyText withSize:(CGFloat)size;
+
 @end

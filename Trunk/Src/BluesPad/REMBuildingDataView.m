@@ -110,10 +110,23 @@ typedef void(^SuccessCallback)(BOOL success);
 - (void)initCommodityButton
 {
     self.buttonArray=[self retrieveButtons];
+    
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.buttonArray.count*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), kBuildingCommodityButtonDimension)];
+    
     for (int i=0; i<self.buttonArray.count; ++i) {
         UIButton *btn = self.buttonArray[i];
-        [self addSubview:btn];
+        [view addSubview:btn];
     }
+    
+    //view.layer.borderWidth=1;
+    //view.layer.borderColor=[UIColor whiteColor].CGColor;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]init];
+    
+    [view addGestureRecognizer:tap];
+    
+    [self addSubview:view];
+
 }
 
 

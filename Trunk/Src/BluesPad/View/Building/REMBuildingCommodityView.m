@@ -92,7 +92,7 @@ typedef void(^SuccessCallback)(BOOL success);
 {
     
     self.totalLabel=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, 0, 900, kBuildingCommodityTotalHeight) withData:self.commodityInfo.commodityUsage withTitle:[NSString stringWithFormat:@"上月用%@总量",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingTotalInnerMargin withLeftMargin:0   withValueFontSize:kBuildingCommodityTotalValueFontSize withUomFontSize:kBuildingCommodityTotalUomFontSize];
-    
+    [self.totalLabel setEmptyText:@"请持续关注能耗变化" withSize:36];
     [self addSubview:self.totalLabel];
     
 }
@@ -113,19 +113,22 @@ typedef void(^SuccessCallback)(BOOL success);
     
     [self addSplitBar:ranking];
     
+    if(self.commodityInfo.targetValue!=nil &&self.commodityInfo.targetValue.dataValue!=nil)
+    {
     
-    REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.targetValue withTitle:@"目标值"  andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin withLeftMargin:kBuildingCommodityDetailTextMargin  withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityDetailUomFontSize];
-    [self addSplitBar:target];
-    
-    if(self.commodityInfo.isTargetAchieved==YES){
-        [target setTitleIcon:[UIImage imageNamed:@"OverTarget"]];
+        REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.targetValue withTitle:@"目标值"  andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin withLeftMargin:kBuildingCommodityDetailTextMargin  withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityDetailUomFontSize];
+        [self addSplitBar:target];
+        
+        if(self.commodityInfo.isTargetAchieved==YES){
+            [target setTitleIcon:[UIImage imageNamed:@"OverTarget"]];
+        }
+        else{
+            [target setTitleIcon:[UIImage imageNamed:@"NotOverTarget"]];
+        }
+        
+        
+        [self addSubview:target];
     }
-    else{
-        [target setTitleIcon:[UIImage imageNamed:@"NotOverTarget"]];
-    }
-    
-    
-    [self addSubview:target];
 }
 
 - (void)addSplitBar:(UIView *)view
