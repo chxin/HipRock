@@ -46,6 +46,9 @@ void uncaughtExceptionHandler(NSException *exception)
 #else
     REMLogManager *manager = [[REMLogManager alloc]init];
     DDFileLogger *fileLogger=[[DDFileLogger alloc]initWithLogFileManager:manager];
+    [fileLogger setRollingFrequency:60 * 60 * 24];   // roll every day
+    [fileLogger setMaximumFileSize:1024 * 1024 * 2]; // max 2mb file size
+    [fileLogger.logFileManager setMaximumNumberOfLogFiles:7];
     [DDLog addLogger:fileLogger];
 #endif
     
