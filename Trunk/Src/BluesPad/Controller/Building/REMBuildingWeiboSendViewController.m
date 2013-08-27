@@ -7,6 +7,7 @@
 //
 
 #import "REMBuildingWeiboSendViewController.h"
+#import "REMStatusBar.h"
 
 const CGFloat kWeiboWindowHeight = 200;
 const CGFloat kToolbarHeight = 20;
@@ -84,14 +85,16 @@ const CGFloat kWeiboImgOverviewHeight = 200;
 }
 
 -(void)sendClicked:(id)sender {
+    [REMStatusBar showStatusMessage:@"微博发送中" autoHide:NO];
     [Weibo.weibo newStatus:textView.text pic:UIImagePNGRepresentation(self.weiboImage) completed:^(Status *status, NSError *error) {
         NSString *message = nil;
         if (error) {
             message = [NSString stringWithFormat:@"failed to post:%@", error];
             NSLog(@"%@", message);
-            [REMAlertHelper alert:message];
+            [REMStatusBar showStatusMessage:@"微博发送失败"];
         }
         else {
+            [REMStatusBar showStatusMessage:@"微博发送成功"];
         }
     }];
     [self dismissViewControllerAnimated:YES completion:nil];

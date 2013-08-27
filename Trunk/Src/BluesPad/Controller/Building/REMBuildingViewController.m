@@ -11,7 +11,6 @@
 #import "WeiboSDK.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingWeiboSendViewController.h"
-#import "REMStatusBar.h"
 
 @interface REMBuildingViewController ()
 @property (nonatomic,strong) NSArray *imageArray;
@@ -139,8 +138,6 @@
 
 -(void)shareButtonTouchDown:(UIButton *)button
 {
-    NSDate* d = [[NSDate alloc]init];
-    [REMStatusBar showStatusMessage:[NSString stringWithFormat:@"%@", d]];
 //    UIApplication *application  = [UIApplication sharedApplication];
 //    UIWindow* window = application.keyWindow;
 //    if (!window || window.windowLevel != UIWindowLevelNormal) {
@@ -156,16 +153,16 @@
 //        window.frame=CGRectMake(0,300,1024,20);
 //    }];
     //[self performSegueWithIdentifier:@"sendWeiboSegue" sender:self];
-//    if (![Weibo.weibo isAuthenticated]) {
-//        [REMAlertHelper alert:@"未绑定微博账户。"];
-//    } else {
-//        REMImageView *view = self.imageArray[self.currentIndex];
-//        [view exportImage:^(UIImage *image, NSString* text){
-//           // [UIImagePNGRepresentation(image) writeToFile:[self getWeiboPicAddress] atomically:NO];
-//            NSDictionary* sender = @{@"image": image, @"text": text};
-//            [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
-//        }];
-//    }
+    if (![Weibo.weibo isAuthenticated]) {
+        [REMAlertHelper alert:@"未绑定微博账户。"];
+    } else {
+        REMImageView *view = self.imageArray[self.currentIndex];
+        [view exportImage:^(UIImage *image, NSString* text){
+           // [UIImagePNGRepresentation(image) writeToFile:[self getWeiboPicAddress] atomically:NO];
+            NSDictionary* sender = @{@"image": image, @"text": text};
+            [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
+        }];
+    }
 }
 -(NSString*)getWeiboPicAddress {
     NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);

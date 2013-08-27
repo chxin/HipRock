@@ -15,4 +15,5 @@
     NSInteger currentIndex;
 }
 + (void)showStatusMessage:(NSString *)message;
++ (void)showStatusMessage:(NSString *)message autoHide:(BOOL)autoHide;
 @end

@@ -65,10 +65,13 @@
     return self;
 }
 + (void)showStatusMessage:(NSString *)message{
+    [REMStatusBar showStatusMessage:message autoHide:YES];
+}
++ (void)showStatusMessage:(NSString *)message autoHide:(BOOL)autoHide{
     REMStatusBar* instance = [REMStatusBar getInstance];
-
+    
     instance.hidden = NO;
-    [instance changeMessge:message];
+    [instance changeMessge:message autoHide:autoHide];
 }
 
 - (void)resetOrientation {
@@ -87,7 +90,7 @@
     bottomRect = tempRect;
 }
 
-- (void)changeMessge:(NSString *)message{
+- (void)changeMessge:(NSString *)message autoHide:(BOOL)autoHide{
     if (appOrientation != [UIApplication sharedApplication].statusBarOrientation) {
         appOrientation = [UIApplication sharedApplication].statusBarOrientation;
         [self resetOrientation];
@@ -111,9 +114,11 @@
         [willShow setFrame:middleRect];
     } completion:^(BOOL finished){
         if (finished) {
-            self.hidden = YES;
-            [willHide setText:@""];
-            [willShow setText:@""];
+            if (autoHide) {
+                self.hidden = YES;
+                [willHide setText:@""];
+                [willShow setText:@""];
+            }
         }
     }];
 }
