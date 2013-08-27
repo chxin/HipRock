@@ -614,7 +614,7 @@
     //[self.imageView setCenter:CGPointMake(imagex+x*0.8, self.imageView.center.y)];
 }
 
-- (void)exportImage:(void (^)(UIImage *))callback
+- (void)exportImage:(void (^)(UIImage *, NSString*))callback
 {
     [self.dataView exportDataView:^(NSDictionary *outputDic){
         UIImage* dataImage = [outputDic objectForKey:@"image"];
@@ -628,8 +628,9 @@
         [[UIColor blackColor]set];
         UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
         [[self getImageOfLayer:self.imageView.layer]drawInRect:self.imageView.frame];
-        [[self getImageOfLayer:self.titleLabel.layer]drawInRect:self.titleLabel.frame];
-        [[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
+        
+        [[self getImageOfLayer:self.titleLabel.layer]drawInRect:CGRectMake(self.settingButton.frame.origin.x, self.settingButton.frame.origin.y, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height)];
+        //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
         [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
         [dataImage drawInRect:CGRectMake(0, 300, outputWidth, self.dataView.frame.size.height)];
         
@@ -637,15 +638,20 @@
         UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
+//        NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+//        NSString* myDocPath = myPaths[0];
+//        NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
+        //        [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
+
         
-        NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-        NSString* myDocPath = myPaths[0];
-        NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
-        [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
-        callback(dataImage);
-        NSLog(@"chart load complete");
+        //[NSString str]
+        NSString* buildingName = self.buildingInfo.building.name;
+        NSString* text = [NSString stringWithFormat:[outputDic objectForKey:@"text"], buildingName];
+        callback(img, text);
     }];
 }
+
+
 
 /*
  // Only override drawRect: if you perform custom drawing.
@@ -662,26 +668,6 @@
     UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
-}
-
--(UIImage*)generateWeiboImage {
-    CGFloat outputWidth = self.frame.size.width;
-    CGFloat outputHeightWithoutFooter = kScrollVelocityMax;
-    CGFloat footerHeight = 200;
-    UIImage *footerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WeiboBana" ofType:@"png"]];
-    UIGraphicsBeginImageContext(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight));
-    [[UIColor blackColor]set];
-    UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
-    [[self getImageOfLayer:self.imageView.layer]drawInRect:self.imageView.frame];
-    [[self getImageOfLayer:self.titleLabel.layer]drawInRect:self.titleLabel.frame];
-    [[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
-    [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
-    [[self getImageOfLayer:self.dataView.layer]drawInRect:CGRectMake(0, 300, outputWidth, self.dataView.frame.size.height)];
-    
-    [footerImage drawInRect:CGRectMake(0, outputHeightWithoutFooter, outputWidth, footerHeight)];
-    UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return img;
 }
 
 @end
