@@ -2312,7 +2312,6 @@
 				B42BD74017CC71C900797162 /* Electricity_pressed.png in Resources */,
 				B42BD74117CC71C900797162 /* Electricity_normal@2x.png in Resources */,
 				B42BD74217CC71C900797162 /* Electricity_normal.png in Resources */,
->>>>>>> c5bcb4dbf1c2028f250b0cf9393482fdeca8d3a0
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
