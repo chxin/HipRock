@@ -461,13 +461,17 @@
                         change:(NSDictionary *)change context:(void *)context {
     
     self.controller.currentScrollOffset = self.dataView.contentOffset.y;
-    // closer to zero, less blur applied
-    [self setBlurLevel:(self.dataView.contentOffset.y + self.dataView.contentInset.top) / (2 * CGRectGetHeight(self.bounds) / 3)];
+    
+    //NSLog(@"offset:%@",NSStringFromCGPoint(self.dataView.contentOffset));
+    //NSLog(@"contentInset:%@",NSStringFromUIEdgeInsets(self.dataView.contentInset));
+    
+    //[self setBlurLevel:(self.dataView.contentOffset.y + self.dataView.contentInset.top) / (2 * CGRectGetHeight(self.bounds) / 3)];
+    [self setBlurLevel:(self.dataView.contentOffset.y + self.dataView.contentInset.top) / (kBuildingCommodityViewTop+kCommodityScrollTop)];
 }
 
 - (void)setBlurLevel:(float)blurLevel {
     //NSLog(@"blurlevel:%f",blurLevel);
-    self.blurredImageView.alpha = blurLevel>0.7?1:blurLevel;
+    self.blurredImageView.alpha = MAX(blurLevel,0);
     
     
     self.glassView.alpha = MAX(0,MIN(blurLevel,0.8));

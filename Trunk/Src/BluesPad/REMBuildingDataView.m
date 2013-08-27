@@ -53,13 +53,20 @@ typedef void(^SuccessCallback)(BOOL success);
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
         btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
         
+        [btn setTitle:model.commodity.comment forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+        btn.titleLabel.textColor=[UIColor whiteColor];
+        btn.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSC) size:11];
         NSString *str = [self retrieveCommodityImageName:model.commodity];
-        btn.imageView.contentMode=UIViewContentModeScaleToFill;
+        btn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentCenter;
         btn.showsTouchWhenHighlighted=YES;
         btn.adjustsImageWhenHighlighted=YES;
-        
-        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",str] ] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed",str]] forState:UIControlStateSelected];
+       
+        btn.titleEdgeInsets=UIEdgeInsetsMake(41, 0, 0, 0);
+        btn.titleLabel.textAlignment=NSTextAlignmentCenter;
+        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",str] ] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed",str]] forState:UIControlStateSelected];
         if(i==0){
             [btn setSelected:YES];
         }

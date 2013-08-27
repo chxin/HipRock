@@ -64,11 +64,11 @@
     self.uomLabel.userInteractionEnabled =NO;
     self.uomLabel.text=data.uom.code;
     
-    [self plainStringToAttributedUnits];
+    [self plainStringToAttributedUnits:(uomSize-8)];
     [self addSubview:self.uomLabel];
 }
 
-- (void)plainStringToAttributedUnits
+- (void)plainStringToAttributedUnits:(CGFloat)size
 {
     NSString *string = self.uomLabel.text;
     unichar c= [string characterAtIndex:string.length-1];
@@ -77,7 +77,9 @@
 
         NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:string];
         
-        UIFont *smallFont = [UIFont systemFontOfSize:12];
+        
+        
+        UIFont *smallFont = [UIFont systemFontOfSize:size];
         
         [attString beginEditing];
         [attString addAttribute:NSFontAttributeName value:(smallFont) range:NSMakeRange(string.length - 1, 1)];
