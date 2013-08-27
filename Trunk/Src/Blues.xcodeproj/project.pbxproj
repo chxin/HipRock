@@ -499,6 +499,8 @@
 		7AC3BB4517CC48750022E57E /* weibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BB0117CC48750022E57E /* weibo.png */; };
 		7AC3BB4617CC48750022E57E /* weibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BB0217CC48750022E57E /* weibo@2x.png */; };
 		7AC3BB4717CC48750022E57E /* WeiboBana.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BB0317CC48750022E57E /* WeiboBana.png */; };
+		7AC3BB4A17CC4F3C0022E57E /* NaturalGas_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BB4817CC4F3C0022E57E /* NaturalGas_normal.png */; };
+		7AC3BB4B17CC4F3C0022E57E /* NaturalGas_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BB4917CC4F3C0022E57E /* NaturalGas_pressed@2x.png */; };
 		7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
@@ -979,6 +981,8 @@
 		7AC3BB0117CC48750022E57E /* weibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo.png; sourceTree = "<group>"; };
 		7AC3BB0217CC48750022E57E /* weibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo@2x.png"; sourceTree = "<group>"; };
 		7AC3BB0317CC48750022E57E /* WeiboBana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeiboBana.png; sourceTree = "<group>"; };
+		7AC3BB4817CC4F3C0022E57E /* NaturalGas_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaturalGas_normal.png; sourceTree = "<group>"; };
+		7AC3BB4917CC4F3C0022E57E /* NaturalGas_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NaturalGas_pressed@2x.png"; sourceTree = "<group>"; };
 		7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceMeta.h; path = Common/Communication/REMServiceMeta.h; sourceTree = "<group>"; };
 		7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceMeta.m; path = Common/Communication/REMServiceMeta.m; sourceTree = "<group>"; };
 		B4198EAC178410D300B50475 /* REMLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLogManager.h; path = Common/Log/REMLogManager.h; sourceTree = "<group>"; };
@@ -1877,6 +1881,7 @@
 		7AC3BABB17CC48740022E57E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7AC3BAF317CC48740022E57E /* login */,
 				7AC3BABC17CC48740022E57E /* building */,
 				7AC3BACD17CC48740022E57E /* buttons */,
 				7AC3BAEB17CC48740022E57E /* dashboard-all.png */,
@@ -1887,7 +1892,6 @@
 				7AC3BAF017CC48740022E57E /* Default.png */,
 				7AC3BAF117CC48740022E57E /* Default@2x.png */,
 				7AC3BAF217CC48740022E57E /* detail-arrow.png */,
-				7AC3BAF317CC48740022E57E /* login */,
 				7AC3BAF717CC48750022E57E /* login_error.png */,
 				7AC3BAF817CC48750022E57E /* NaturalGas_normal.png */,
 				7AC3BAF917CC48750022E57E /* NaturalGas_pressed@2x.png */,
@@ -1918,12 +1922,14 @@
 		7AC3BABD17CC48740022E57E /* commodity */ = {
 			isa = PBXGroup;
 			children = (
+				7AC3BB4817CC4F3C0022E57E /* NaturalGas_normal.png */,
+				7AC3BAC217CC48740022E57E /* NaturalGas_normal@2x.png */,
+				7AC3BAC317CC48740022E57E /* NaturalGas_pressed.png */,
+				7AC3BB4917CC4F3C0022E57E /* NaturalGas_pressed@2x.png */,
 				7AC3BABE17CC48740022E57E /* Electricity_normal.png */,
 				7AC3BABF17CC48740022E57E /* Electricity_normal@2x.png */,
 				7AC3BAC017CC48740022E57E /* Electricity_pressed.png */,
 				7AC3BAC117CC48740022E57E /* Electricity_pressed@2x.png */,
-				7AC3BAC217CC48740022E57E /* NaturalGas_normal@2x.png */,
-				7AC3BAC317CC48740022E57E /* NaturalGas_pressed.png */,
 				7AC3BAC417CC48740022E57E /* PM2.5_normal.png */,
 				7AC3BAC517CC48740022E57E /* PM2.5_normal@2x.png */,
 				7AC3BAC617CC48740022E57E /* PM2.5_pressed.png */,
@@ -2245,6 +2251,8 @@
 				7AC3BB4517CC48750022E57E /* weibo.png in Resources */,
 				7AC3BB4617CC48750022E57E /* weibo@2x.png in Resources */,
 				7AC3BB4717CC48750022E57E /* WeiboBana.png in Resources */,
+				7AC3BB4A17CC4F3C0022E57E /* NaturalGas_normal.png in Resources */,
+				7AC3BB4B17CC4F3C0022E57E /* NaturalGas_pressed@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
