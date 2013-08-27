@@ -15,7 +15,4 @@
     NSInteger currentIndex;
 }
 + (void)showStatusMessage:(NSString *)message;
-//- (void)hide;
-//- (void)changeMessge:(NSString *)message;
-//+(REMStatusBar*)getInstance;
 @end

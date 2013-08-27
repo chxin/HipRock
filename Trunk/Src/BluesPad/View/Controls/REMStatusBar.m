@@ -7,6 +7,7 @@
 //
 
 #import "REMStatusBar.h"
+#import "REMApplicationInfo.h"
 
 @implementation REMStatusBar {
     CGRect topRect;
@@ -37,16 +38,22 @@
         self.backgroundColor = [UIColor blackColor];
         self.clipsToBounds = YES;
         
+        UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;
         topRect = CGRectMake(barHeight, 0, barHeight, barWidth);
         middleRect = CGRectMake(0, 0, barHeight, barWidth);
         bottomRect = CGRectMake(-1 * barHeight, 0, barHeight, barWidth);
+        if (currentOrientation == UIInterfaceOrientationLandscapeLeft) {
+            CGRect tempRect = topRect;
+            topRect = bottomRect;
+            bottomRect = tempRect;
+        }
         
         labels = [[NSMutableArray alloc]init];
         [labels addObject:[[UILabel alloc]initWithFrame:middleRect]];
         [labels addObject:[[UILabel alloc]initWithFrame:bottomRect]];
         for (int i = 0; i < 2; i++) {
             UILabel* l = labels[i];
-//            l.font = 
+            l.font = [UIFont fontWithName:@(kFontSC) size:15];
             [l setTextColor:[UIColor whiteColor]];
             [l setBackgroundColor:[UIColor clearColor]];
             l.textAlignment = NSTextAlignmentCenter;
@@ -75,6 +82,9 @@
     for (int i = 0; i < 2; i++) {
         [labels[i] setTransform:CGAffineTransformMakeRotation(M_PI * (rotate) / 180.0)];
     }
+    CGRect tempRect = topRect;
+    topRect = bottomRect;
+    bottomRect = tempRect;
 }
 
 - (void)changeMessge:(NSString *)message{
@@ -96,11 +106,15 @@
     [willShow setText:message];
     [willShow setFrame:bottomRect];
     
-    [UIView animateWithDuration:0.4f animations:^{
+    [UIView animateWithDuration:0.6f animations:^{
         [willHide setFrame:topRect];
         [willShow setFrame:middleRect];
     } completion:^(BOOL finished){
-        self.hidden = YES;
+        if (finished) {
+            self.hidden = YES;
+            [willHide setText:@""];
+            [willShow setText:@""];
+        }
     }];
 }
 @end

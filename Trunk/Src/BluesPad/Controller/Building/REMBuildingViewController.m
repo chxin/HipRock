@@ -139,7 +139,8 @@
 
 -(void)shareButtonTouchDown:(UIButton *)button
 {
-    [REMStatusBar showStatusMessage:@"FFF"];
+    NSDate* d = [[NSDate alloc]init];
+    [REMStatusBar showStatusMessage:[NSString stringWithFormat:@"%@", d]];
 //    UIApplication *application  = [UIApplication sharedApplication];
 //    UIWindow* window = application.keyWindow;
 //    if (!window || window.windowLevel != UIWindowLevelNormal) {
