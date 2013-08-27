@@ -346,7 +346,7 @@
         UILabel *label = [[UILabel alloc] init];
         
         UIView *view = [[UIView alloc] init];
-        view.frame = CGRectMake(0,self.chartView.hostView.bounds.size.height + 86,15,15);
+        view.frame = CGRectMake(0,self.chartView.bounds.size.height,15,15);
         view.layer.cornerRadius = 7.5;
         view.backgroundColor = [self getLineColorWithTagCode:@"Honeywell"].uiColor;
         

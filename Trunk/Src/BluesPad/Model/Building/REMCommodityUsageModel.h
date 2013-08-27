@@ -24,6 +24,7 @@
 @property (nonatomic,strong) REMRankingDataModel *rankingData;
 
 @property (nonatomic,strong) REMEnergyUsageDataModel *targetValue;
+
 @property (nonatomic) BOOL isTargetAchieved;
 
 @property (nonatomic,strong) REMAverageUsageDataModel *averageUsageData;

@@ -16,7 +16,7 @@
 #ifdef DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #else
-static const int ddLogLevel = LOG_LEVEL_WARN;
+static const int ddLogLevel = LOG_LEVEL_ERROR;
 #endif
 
 #define REMLogError DDLogError
@@ -24,7 +24,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 #define REMLogWarn DDLogWarn
 #define REMLogVerbose DDLogVerbose
 
-#define NSLog DDLogInfo
+#define NSLog REMLogInfo
 
 @interface REMLog : NSObject
 + (void) bind;
