@@ -17,4 +17,6 @@
 
 @property (nonatomic,strong) REMSplashScreenController *splashScreenController;
 
+@property (nonatomic,strong) UINavigationController *navigationController;
+
 @end

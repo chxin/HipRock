@@ -136,9 +136,14 @@
         [currentCustomer kill];
         currentUser = nil;
         currentCustomer = nil;
+        UINavigationController *nav=(UINavigationController *)self.parentViewController;
+        [nav dismissViewControllerAnimated:YES completion:^(void){
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            [self.splashScreenController showLoginView];
+        }];
         
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        [self.splashScreenController showLoginView];
+        
+        
     }
 }
 
