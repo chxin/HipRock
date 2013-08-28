@@ -150,6 +150,11 @@
         [vc setWeiboText: [params objectForKey:@"text"]];
         [vc setWeiboImage:[params objectForKey:@"image"]];
     }
+    else if([segue.identifier isEqualToString:@"buildingSettingSegue2"]==YES){
+        UINavigationController *c=  segue.destinationViewController;
+        REMBuildingSettingViewController *vc= [c.childViewControllers lastObject];
+        vc.splashScreenController=self.splashScreenController;
+    }
 }
 
 
@@ -385,6 +390,8 @@
 {
     [self performSegueWithIdentifier:@"buildingToDashboardSegue" sender:self];
 }
+
+
 
 - (IBAction)shareButtonPressed:(id)sender {
     //    UIApplication *application  = [UIApplication sharedApplication];

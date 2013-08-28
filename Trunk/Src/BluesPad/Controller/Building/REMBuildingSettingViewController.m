@@ -33,9 +33,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UITableView* myView = (UITableView*)self.view;
-    [myView  registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
-    
+    //UITableView* myView = (UITableView*)self.view;
+    //[myView  registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    //[myView  registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell1"];
+    //myView registerClass forCellReuseIdentifier:<#(NSString *)#>
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -65,10 +66,12 @@
     return 0;
 }
 
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     
     // weibo account binding cell
     if (indexPath.section == 1 && indexPath.item == 0) {
@@ -78,14 +81,75 @@
         [s addTarget:self action:@selector(weiboSwitcherChanged:) forControlEvents:UIControlEventValueChanged];
         [cell addSubview:s];
     }
-    else if(indexPath.section==2){
+    else if(indexPath.section==0){
+        
+       
+        if(indexPath.row==0){
+            [[cell textLabel]setText:@"显示名称"];
+            NSString *name=[REMApplicationContext instance].currentUser.realname;
+            [cell.detailTextLabel setText:name];
+        }
+        else{
+            [[cell textLabel]setText:@"能源管理开发平台ID"];
+            NSString *name1=[REMApplicationContext instance].currentUser.name;
+            [cell.detailTextLabel setText:name1];
+        }
+    }
+    else if(indexPath.section==2 && indexPath.row==0 ){
+        UITableViewCell *cell1 = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell1"];
         //[[cell textLabel]setText:@"退出登录"];
-        UIButton *logout = [[UIButton alloc]initWithFrame:cell.frame];
+        cell1.textLabel.text=@"退出登录";
+        cell1.textLabel.textColor=[UIColor redColor];
+        cell1.textLabel.textAlignment=NSTextAlignmentCenter;
+        return cell1;
+        //NSLog(@"frame:%@",NSStringFromCGRect(cell.contentView.frame));
+        //NSLog(@"bounds:%@",NSStringFromCGRect(cell.contentView.frame));
+        
+        
+        /*
+        UIButton *logout= [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [logout setFrame: CGRectMake(0, 0, 480, cell.contentView.frame.size.height)];
+        
+        logout.layer.borderWidth=0;
+        
+        
+        [logout setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         [logout setTitle:@"退出登录" forState:UIControlStateNormal];
-        logout.contentMode=UIViewContentModeScaleToFill;
-        [cell addSubview:logout];
+        logout.contentMode=UIViewContentModeScaleAspectFit;
+        [logout addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.contentView addSubview:logout];*/
     }
     return cell;
+}
+
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    if(buttonIndex==0){
+        REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
+        REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
+        
+        [currentUser kill];
+        [currentCustomer kill];
+        currentUser = nil;
+        currentCustomer = nil;
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.splashScreenController showLoginView];
+    }
+}
+
+- (void)logout{
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"您要退出当前账号登录吗?" delegate:self cancelButtonTitle:nil otherButtonTitles:@"退出",@"放弃", nil];
+    alert.cancelButtonIndex=1;
+    
+    [alert show];
+    
+    
+    
 }
 
 - (void) weiboSwitcherChanged:(UISwitch*)sender {
@@ -156,6 +220,14 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    if(indexPath.section == 2 && indexPath.row==0){
+        UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+        [cell setSelected:NO];
+        
+        [self logout];
+        
+    }
+    
 }
 
 @end

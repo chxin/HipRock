@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface REMBuildingSettingViewController : UITableViewController
+#import "REMSplashScreenController.h"
+#import "REMUserModel.h"
+#import "REMCustomerModel.h"
+#import "REMCommonHeaders.h"
+
+@interface REMBuildingSettingViewController : UITableViewController<UIAlertViewDelegate>
+
+@property (nonatomic,strong) REMSplashScreenController *splashScreenController;
 
 @end
