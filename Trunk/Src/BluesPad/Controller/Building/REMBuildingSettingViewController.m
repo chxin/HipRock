@@ -78,6 +78,13 @@
         [s addTarget:self action:@selector(weiboSwitcherChanged:) forControlEvents:UIControlEventValueChanged];
         [cell addSubview:s];
     }
+    else if(indexPath.section==2){
+        //[[cell textLabel]setText:@"退出登录"];
+        UIButton *logout = [[UIButton alloc]initWithFrame:cell.frame];
+        [logout setTitle:@"退出登录" forState:UIControlStateNormal];
+        logout.contentMode=UIViewContentModeScaleToFill;
+        [cell addSubview:logout];
+    }
     return cell;
 }
 
