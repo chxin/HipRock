@@ -106,7 +106,7 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 
 -(UIView *)makeBackgroundView:(CGFloat)offset
 {
-    UIImage *backgroundImage = [[UIImage imageNamed:@"loginpage-background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(53,58,53,58)];
+    UIImage *backgroundImage = [[UIImage imageNamed:@"SlidePageBackground.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(53,58,53,58)];
     
     
     CGRect backgroundFrame = CGRectMake(offset-kBackgroundLeftContentOffset, kImagePaddingTop+kBackgroundTopContentOffset, kSubViewWidth+kBackgroundLeftContentOffset + kBackgroundRightContentOffset, kSubViewHeight+kBackgroundTopContentOffset + kBackgroundBottomContentOffset);
