@@ -144,6 +144,8 @@
             else
             {
             }
+            
+            [self.loginButton stopIndicator];
         }
     }
 }
