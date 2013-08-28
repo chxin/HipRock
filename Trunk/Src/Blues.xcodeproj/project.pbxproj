@@ -508,8 +508,8 @@
 		B454BC0C17CDECD500D69A7B /* NotOverTarget.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC0A17CDECD500D69A7B /* NotOverTarget.png */; };
 		B454BC0D17CDECD500D69A7B /* NotOverTarget@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC0B17CDECD500D69A7B /* NotOverTarget@2x.png */; };
 		B454BC1C17CDED7900D69A7B /* Water_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC0E17CDED7900D69A7B /* Water_normal@2x.png */; };
-		B454BC1D17CDED7900D69A7B /* Natural Gas_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC0F17CDED7900D69A7B /* Natural Gas_normal@2x.png */; };
-		B454BC1E17CDED7900D69A7B /* Natural Gas_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC1017CDED7900D69A7B /* Natural Gas_pressed@2x.png */; };
+		B454BC1D17CDED7900D69A7B /* NaturalGas_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC0F17CDED7900D69A7B /* NaturalGas_normal@2x.png */; };
+		B454BC1E17CDED7900D69A7B /* NaturalGas_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC1017CDED7900D69A7B /* NaturalGas_pressed@2x.png */; };
 		B454BC1F17CDED7900D69A7B /* Water_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC1117CDED7900D69A7B /* Water_pressed@2x.png */; };
 		B454BC2017CDED7900D69A7B /* PM2.5_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC1217CDED7900D69A7B /* PM2.5_pressed.png */; };
 		B454BC2117CDED7900D69A7B /* PM2.5_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC1317CDED7900D69A7B /* PM2.5_normal.png */; };
@@ -999,8 +999,8 @@
 		B454BC0A17CDECD500D69A7B /* NotOverTarget.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotOverTarget.png; sourceTree = "<group>"; };
 		B454BC0B17CDECD500D69A7B /* NotOverTarget@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotOverTarget@2x.png"; sourceTree = "<group>"; };
 		B454BC0E17CDED7900D69A7B /* Water_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Water_normal@2x.png"; sourceTree = "<group>"; };
-		B454BC0F17CDED7900D69A7B /* Natural Gas_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Natural Gas_normal@2x.png"; sourceTree = "<group>"; };
-		B454BC1017CDED7900D69A7B /* Natural Gas_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Natural Gas_pressed@2x.png"; sourceTree = "<group>"; };
+		B454BC0F17CDED7900D69A7B /* NaturalGas_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NaturalGas_normal@2x.png"; sourceTree = "<group>"; };
+		B454BC1017CDED7900D69A7B /* NaturalGas_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NaturalGas_pressed@2x.png"; sourceTree = "<group>"; };
 		B454BC1117CDED7900D69A7B /* Water_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Water_pressed@2x.png"; sourceTree = "<group>"; };
 		B454BC1217CDED7900D69A7B /* PM2.5_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PM2.5_pressed.png; sourceTree = "<group>"; };
 		B454BC1317CDED7900D69A7B /* PM2.5_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PM2.5_normal.png; sourceTree = "<group>"; };
@@ -1915,8 +1915,8 @@
 			isa = PBXGroup;
 			children = (
 				B454BC0E17CDED7900D69A7B /* Water_normal@2x.png */,
-				B454BC0F17CDED7900D69A7B /* Natural Gas_normal@2x.png */,
-				B454BC1017CDED7900D69A7B /* Natural Gas_pressed@2x.png */,
+				B454BC0F17CDED7900D69A7B /* NaturalGas_normal@2x.png */,
+				B454BC1017CDED7900D69A7B /* NaturalGas_pressed@2x.png */,
 				B454BC1117CDED7900D69A7B /* Water_pressed@2x.png */,
 				B454BC1217CDED7900D69A7B /* PM2.5_pressed.png */,
 				B454BC1317CDED7900D69A7B /* PM2.5_normal.png */,
@@ -2236,8 +2236,8 @@
 				B454BC0C17CDECD500D69A7B /* NotOverTarget.png in Resources */,
 				B454BC0D17CDECD500D69A7B /* NotOverTarget@2x.png in Resources */,
 				B454BC1C17CDED7900D69A7B /* Water_normal@2x.png in Resources */,
-				B454BC1D17CDED7900D69A7B /* Natural Gas_normal@2x.png in Resources */,
-				B454BC1E17CDED7900D69A7B /* Natural Gas_pressed@2x.png in Resources */,
+				B454BC1D17CDED7900D69A7B /* NaturalGas_normal@2x.png in Resources */,
+				B454BC1E17CDED7900D69A7B /* NaturalGas_pressed@2x.png in Resources */,
 				B454BC1F17CDED7900D69A7B /* Water_pressed@2x.png in Resources */,
 				B454BC2017CDED7900D69A7B /* PM2.5_pressed.png in Resources */,
 				B454BC2117CDED7900D69A7B /* PM2.5_normal.png in Resources */,
