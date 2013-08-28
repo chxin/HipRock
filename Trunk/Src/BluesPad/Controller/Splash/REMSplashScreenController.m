@@ -40,11 +40,9 @@
     [self recoverAppContext];
     
     if([self isLogin]){
-        NSLog(@"%@",@"breath");
         [self breathAnimation:nil];
         __block NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(breathAnimation:) userInfo:nil repeats:YES];
         
-        NSLog(@"%@",@"load data");
         [self showBuildingView:^(void){
             [timer invalidate];
             timer = nil;

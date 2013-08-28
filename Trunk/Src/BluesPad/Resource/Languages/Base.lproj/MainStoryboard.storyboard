@@ -20,11 +20,7 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LxY-lh-jAg">
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="splashscreen-logo-common.png" translatesAutoresizingMaskIntoConstraints="NO" id="Igx-ZG-8eI">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="153" id="zrF-pA-nEf"/>
-                                        </constraints>
-                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="splashscreen-logo-common.png" translatesAutoresizingMaskIntoConstraints="NO" id="Igx-ZG-8eI"/>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Schneider Electric Blues Project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAT-aj-FDp">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="Xdi-ja-xav"/>
@@ -35,21 +31,15 @@
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="splashscreen-logo-flash.png" translatesAutoresizingMaskIntoConstraints="NO" id="KpV-VC-3uG">
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="140" id="Fnx-lm-USQ"/>
-                                        </constraints>
-                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="splashscreen-logo-flash.png" translatesAutoresizingMaskIntoConstraints="NO" id="KpV-VC-3uG"/>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Igx-ZG-8eI" firstAttribute="top" secondItem="LxY-lh-jAg" secondAttribute="top" type="default" id="0hs-jz-wCQ"/>
                                     <constraint firstItem="KpV-VC-3uG" firstAttribute="leading" secondItem="Igx-ZG-8eI" secondAttribute="leading" type="default" id="7pY-8I-Thl"/>
-                                    <constraint firstItem="KpV-VC-3uG" firstAttribute="bottom" secondItem="Igx-ZG-8eI" secondAttribute="bottom" type="default" id="8SY-gN-hfy"/>
                                     <constraint firstItem="KpV-VC-3uG" firstAttribute="centerX" secondItem="LxY-lh-jAg" secondAttribute="centerX" type="default" id="DJM-Tt-DlS"/>
                                     <constraint firstItem="ZAT-aj-FDp" firstAttribute="top" secondItem="LxY-lh-jAg" secondAttribute="top" constant="184" id="WBy-gW-Jna"/>
                                     <constraint firstItem="KpV-VC-3uG" firstAttribute="top" secondItem="LxY-lh-jAg" secondAttribute="top" type="default" id="WVg-h4-gMW"/>
-                                    <constraint firstItem="KpV-VC-3uG" firstAttribute="trailing" secondItem="Igx-ZG-8eI" secondAttribute="trailing" type="default" id="cZq-FX-t47"/>
                                     <constraint firstItem="Igx-ZG-8eI" firstAttribute="centerX" secondItem="ZAT-aj-FDp" secondAttribute="centerX" type="default" id="idg-yw-ZIy"/>
                                 </constraints>
                             </view>
@@ -90,7 +80,6 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dxv-er-WZK">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="UEo-KN-3DG"/>
                                     <constraint firstAttribute="width" constant="48" id="iHa-mR-3cg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -759,13 +748,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="vIG-zr-SVA">
             <objects>
                 <viewController storyboardIdentifier="loginPage" autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="pageSheet" id="Ixx-0E-X0F" customClass="REMLoginPageController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VwN-cH-7Cf" customClass="UIImageView">
+                    <view key="view" contentMode="scaleToFill" id="VwN-cH-7Cf">
                         <rect key="frame" x="0.0" y="0.0" width="500" height="350"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVb-yV-WoR">
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clt-Ft-azk">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="4cj-Os-E0X"/>
@@ -834,30 +820,26 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="sbl-i2-6EW" firstAttribute="top" secondItem="VwN-cH-7Cf" secondAttribute="top" constant="131" id="0Ay-aA-6Qh"/>
                             <constraint firstItem="NVN-lx-PiI" firstAttribute="leading" secondItem="VwN-cH-7Cf" secondAttribute="leading" constant="95" id="4GC-2l-42v"/>
-                            <constraint firstItem="tUq-24-AJr" firstAttribute="top" secondItem="VwN-cH-7Cf" secondAttribute="top" constant="154" id="7yy-Gw-2aE"/>
+                            <constraint firstItem="sbl-i2-6EW" firstAttribute="top" secondItem="VwN-cH-7Cf" secondAttribute="top" constant="132" id="6fN-zo-nyV"/>
                             <constraint firstItem="tUq-24-AJr" firstAttribute="trailing" secondItem="sbl-i2-6EW" secondAttribute="trailing" type="default" id="9lb-sA-6UT"/>
                             <constraint firstItem="cTW-Ho-FbO" firstAttribute="trailing" secondItem="gA8-Hl-Rfa" secondAttribute="trailing" type="default" id="AXD-Zd-nYp"/>
-                            <constraint firstItem="NVN-lx-PiI" firstAttribute="top" secondItem="VwN-cH-7Cf" secondAttribute="top" constant="50" id="DvY-t3-34U"/>
-                            <constraint firstItem="kVb-yV-WoR" firstAttribute="centerX" secondItem="cTW-Ho-FbO" secondAttribute="centerX" type="default" id="HqZ-SI-vQ4"/>
+                            <constraint firstItem="clt-Ft-azk" firstAttribute="top" secondItem="VwN-cH-7Cf" secondAttribute="top" constant="9" id="Dw4-J1-TCu"/>
+                            <constraint firstItem="tUq-24-AJr" firstAttribute="top" secondItem="VwN-cH-7Cf" secondAttribute="top" constant="155" id="H6F-N0-w9k"/>
                             <constraint firstItem="gA8-Hl-Rfa" firstAttribute="leading" secondItem="uBf-T4-9u5" secondAttribute="leading" type="default" id="IbH-tv-aPO"/>
                             <constraint firstItem="sbl-i2-6EW" firstAttribute="leading" secondItem="tUq-24-AJr" secondAttribute="leading" type="default" id="MXY-qk-UjO"/>
-                            <constraint firstItem="uBf-T4-9u5" firstAttribute="top" secondItem="VwN-cH-7Cf" secondAttribute="top" constant="114" id="RXF-aT-MlM"/>
                             <constraint firstItem="uBf-T4-9u5" firstAttribute="trailing" secondItem="sbl-i2-6EW" secondAttribute="trailing" type="default" id="RY2-pe-qCf"/>
-                            <constraint firstItem="clt-Ft-azk" firstAttribute="top" secondItem="VwN-cH-7Cf" secondAttribute="top" constant="9" id="T3e-bt-T5z"/>
+                            <constraint firstItem="uBf-T4-9u5" firstAttribute="top" secondItem="VwN-cH-7Cf" secondAttribute="top" constant="114" id="Tm2-HO-tuP"/>
+                            <constraint firstItem="gA8-Hl-Rfa" firstAttribute="top" secondItem="VwN-cH-7Cf" secondAttribute="top" constant="100" id="Uw1-3v-wh6"/>
                             <constraint firstItem="sbl-i2-6EW" firstAttribute="leading" secondItem="uBf-T4-9u5" secondAttribute="leading" type="default" id="YS1-e8-WX5"/>
-                            <constraint firstItem="cTW-Ho-FbO" firstAttribute="top" secondItem="VwN-cH-7Cf" secondAttribute="top" constant="82" id="kWp-eE-3vd"/>
-                            <constraint firstItem="kVb-yV-WoR" firstAttribute="top" secondItem="VwN-cH-7Cf" secondAttribute="top" constant="27" id="kaN-5q-X25"/>
-                            <constraint firstItem="gA8-Hl-Rfa" firstAttribute="top" secondItem="VwN-cH-7Cf" secondAttribute="top" constant="99" id="lmK-SU-VZG"/>
+                            <constraint firstItem="NVN-lx-PiI" firstAttribute="top" secondItem="VwN-cH-7Cf" secondAttribute="top" constant="50" id="dRm-uF-VZ8"/>
                             <constraint firstItem="gA8-Hl-Rfa" firstAttribute="trailing" secondItem="uBf-T4-9u5" secondAttribute="trailing" type="default" id="o51-0d-5eS"/>
+                            <constraint firstItem="cTW-Ho-FbO" firstAttribute="top" secondItem="VwN-cH-7Cf" secondAttribute="top" constant="82" id="p1d-v6-4n4"/>
                             <constraint firstItem="gA8-Hl-Rfa" firstAttribute="leading" secondItem="cTW-Ho-FbO" secondAttribute="leading" type="default" id="pPS-21-RXo"/>
-                            <constraint firstAttribute="bottom" secondItem="kVb-yV-WoR" secondAttribute="bottom" constant="322" id="q9h-oY-gPO"/>
                             <constraint firstItem="NVN-lx-PiI" firstAttribute="leading" secondItem="cTW-Ho-FbO" secondAttribute="leading" type="default" id="t0w-kj-IQU"/>
-                            <constraint firstItem="kVb-yV-WoR" firstAttribute="leading" secondItem="VwN-cH-7Cf" secondAttribute="leading" type="default" id="tYg-jc-VVp"/>
-                            <constraint firstItem="kVb-yV-WoR" firstAttribute="centerX" secondItem="clt-Ft-azk" secondAttribute="centerX" type="default" id="zot-nO-OnH"/>
+                            <constraint firstItem="clt-Ft-azk" firstAttribute="centerX" secondItem="cTW-Ho-FbO" secondAttribute="centerX" type="default" id="wRf-7N-WE1"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
@@ -941,12 +923,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="forgotPasswordButtonTouchDown:" destination="28l-C5-Og2" eventType="touchDown" id="3Fy-IM-2NM"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="login_error.png" translatesAutoresizingMaskIntoConstraints="NO" id="2WZ-aU-Dpr">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="DiR-9P-QDA"/>
-                                    <constraint firstAttribute="width" constant="32" id="dex-fd-jJN"/>
-                                </constraints>
-                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="login_error.png" translatesAutoresizingMaskIntoConstraints="NO" id="2WZ-aU-Dpr"/>
                         </subviews>
                         <color key="backgroundColor" red="0.85817920920000001" green="0.85817920920000001" blue="0.85817920920000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1496,18 +1473,143 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
-        <image name="Schneider-Logo.png" width="16" height="16"/>
-        <image name="dashboard-all.png" width="16" height="16"/>
-        <image name="dashboard-favorite.png" width="16" height="16"/>
-        <image name="dashboard-recent.png" width="16" height="16"/>
-        <image name="dashboard.png" width="16" height="16"/>
-        <image name="detail-arrow.png" width="16" height="16"/>
-        <image name="login_error.png" width="16" height="16"/>
-        <image name="splashscreen-logo-common.png" width="16" height="16"/>
-        <image name="splashscreen-logo-flash.png" width="16" height="16"/>
-        <image name="splashscreen.png" width="16" height="16"/>
-        <image name="user.png" width="16" height="16"/>
+        <image name="Schneider-Logo.png" width="100" height="30"/>
+        <image name="dashboard-all.png" width="32" height="32"/>
+        <image name="dashboard-favorite.png" width="32" height="32"/>
+        <image name="dashboard-recent.png" width="32" height="32"/>
+        <image name="dashboard.png" width="48" height="48"/>
+        <image name="detail-arrow.png" width="32" height="32"/>
+        <image name="login_error.png" width="32" height="32"/>
+        <image name="splashscreen-logo-common.png" width="140" height="153"/>
+        <image name="splashscreen-logo-flash.png" width="140" height="153"/>
+        <image name="splashscreen.png" width="2027" height="1498"/>
+        <image name="user.png" width="32" height="32"/>
     </resources>
+    <classes>
+        <class className="REMBuildingSettingViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMBuildingSettingViewController.h"/>
+        </class>
+        <class className="REMBuildingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMBuildingViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="dashboardButtonPressed:"/>
+                <relationship kind="action" name="logoutButtonPressed:"/>
+            </relationships>
+        </class>
+        <class className="REMBuildingWeiboSendViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMBuildingWeiboSendViewController.h"/>
+        </class>
+        <class className="REMChartLegendTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMChartLegendTableViewController.h"/>
+        </class>
+        <class className="REMColoredButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMColoredButton.h"/>
+        </class>
+        <class className="REMDashboardLeftNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMDashboardLeftNavigationController.h"/>
+        </class>
+        <class className="REMDashboardMainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMDashboardMainViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dashboardListContainer" candidateClass="UIView"/>
+                <relationship kind="outlet" name="widgetsContainer" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="REMDashboardRootViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMDashboardRootViewController.h"/>
+        </class>
+        <class className="REMDashboardViewController" superclassName="UICollectionViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMDashboardViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="collectionView" candidateClass="UICollectionView"/>
+            </relationships>
+        </class>
+        <class className="REMFavoriteTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMFavoriteTableViewController.h"/>
+        </class>
+        <class className="REMIndicatorButton" superclassName="REMColoredButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMIndicatorButton.h"/>
+        </class>
+        <class className="REMLoginCarouselController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMLoginCarouselController.h"/>
+            <relationships>
+                <relationship kind="action" name="jumpLoginButtonTouchDown:"/>
+                <relationship kind="action" name="pageChanged:"/>
+                <relationship kind="outlet" name="jumpLoginButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="REMLoginPageController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMLoginPageController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginButtonPressed:"/>
+                <relationship kind="action" name="textFieldChanged:"/>
+                <relationship kind="outlet" name="loginButton" candidateClass="REMIndicatorButton"/>
+                <relationship kind="outlet" name="passwordErrorLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="userNameErrorLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="userNameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="REMMainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMMainViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dashboardContainer" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="REMSplashScreenController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMSplashScreenController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="flashLogo" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="logoView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="normalLogo" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="REMWidgetCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMWidgetCell.h"/>
+            <relationships>
+                <relationship kind="action" name="detailButtonClick:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="chartView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="detailButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="REMWidgetCellView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMWidgetCellView.h"/>
+        </class>
+        <class className="REMWidgetMaxView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMWidgetMaxView.h"/>
+        </class>
+        <class className="REMWidgetMaxViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMWidgetMaxViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="legendTap:"/>
+                <relationship kind="action" name="searchClick:" candidateClass="UIButton"/>
+                <relationship kind="action" name="stepChanged:" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="chartView" candidateClass="REMWidgetMaxView"/>
+                <relationship kind="outlet" name="endDateButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="relativeDateButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="startDateButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="stepButton" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="stepToolbar" candidateClass="REMWidgetStepToolbarView"/>
+                <relationship kind="outlet" name="tooltipLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="REMWidgetRelativeDateTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMWidgetRelativeDateTableViewController.h"/>
+        </class>
+        <class className="REMWidgetStepToolbarView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMWidgetStepToolbarView.h"/>
+        </class>
+        <class className="REMWidgetTimePickerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMWidgetTimePickerViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="datePickerClick:" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
