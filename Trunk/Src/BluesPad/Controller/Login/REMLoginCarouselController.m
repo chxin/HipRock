@@ -79,6 +79,7 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
         [slideView setFrame:viewFrame];
         
         [backgroundView addSubview:slideView];
+        backgroundView.userInteractionEnabled = YES;
         
         [self.scrollView addSubview:backgroundView];
         
