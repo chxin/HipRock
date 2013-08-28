@@ -120,7 +120,7 @@
 {
     UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, 20, 48, 48)];
     [shareButton setImage:[UIImage imageNamed:@"Share_normal.png"] forState:UIControlStateNormal];
-    [shareButton setImage:[UIImage imageNamed:@"Share_pressed.png"] forState:UIControlStateSelected];
+    
     shareButton.showsTouchWhenHighlighted=YES;
     shareButton.adjustsImageWhenHighlighted=YES;
     shareButton.titleLabel.text=@"注销";
