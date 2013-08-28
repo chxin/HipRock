@@ -10,7 +10,6 @@
 #import "REMLoginCarouselController.h"
 #import "REMAlertHelper.h"
 #import "REMLoginPageController.h"
-#import "REMColoredButton.h"
 
 @interface REMLoginCarouselController ()
 
@@ -75,12 +74,15 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
         
         UIView *slideView = i<kSlideImageCount?[self makeImageView:i]:self.loginPageController.view;
         
-        CGRect viewFrame = CGRectMake(0, 0, kSubViewWidth, kSubViewHeight);
+        CGRect viewFrame = CGRectMake(kBackgroundLeftContentOffset, kBackgroundTopContentOffset, kSubViewWidth, kSubViewHeight);
         [slideView setFrame:viewFrame];
         
         [backgroundView addSubview:slideView];
+        backgroundView.userInteractionEnabled = YES;
         
         [self.scrollView addSubview:backgroundView];
+        
+        
         
         viewOffset += kSubViewWidth + kSubViewDistance;
     }
@@ -107,7 +109,7 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
     UIImage *backgroundImage = [[UIImage imageNamed:@"loginpage-background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(53,58,53,58)];
     
     
-    CGRect backgroundFrame = CGRectMake(offset-kBackgroundLeftContentOffset, kImagePaddingTop+kBackgroundTopContentOffset, kSubViewWidth+kBackgroundLeftContentOffset + kBackgroundRightContentOffset, kSubViewHeight+kBackgroundTopContentOffset + kBackgroundBottomShadowOffset);
+    CGRect backgroundFrame = CGRectMake(offset-kBackgroundLeftContentOffset, kImagePaddingTop+kBackgroundTopContentOffset, kSubViewWidth+kBackgroundLeftContentOffset + kBackgroundRightContentOffset, kSubViewHeight+kBackgroundTopContentOffset + kBackgroundBottomContentOffset);
     
     UIImageView *backgroundView = [[UIImageView alloc] initWithFrame:backgroundFrame];
     [backgroundView setImage:backgroundImage];
@@ -119,7 +121,7 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 {
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"preface-s%d.png", index]]];
     imageView.contentMode = UIViewContentModeScaleToFill;
-    imageView.layer.masksToBounds = YES;
+    
     
     return imageView;
 }
@@ -157,11 +159,20 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 
 - (void)styleJumpLoginButton
 {
-    UIImage *normalStateImage = [[UIImage imageNamed:@"jumplogin-normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5.0, 5.0, 5.0, 5.0)];
-    UIImage *pressedStateImage = [[UIImage imageNamed:@"jumplogin-pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5.0, 5.0, 5.0, 5.0)];
+    //UIEdgeInsetsMake(top, left, bottom, right);
+    UIEdgeInsets imageInsets = UIEdgeInsetsMake(0, 12.0, 0, 12.0);
+    
+    UIImage *normalStateImage = [[UIImage imageNamed:@"JumpLogin-Normal.png"] resizableImageWithCapInsets:imageInsets];
+    UIImage *pressedStateImage = [[UIImage imageNamed:@"JumpLogin-Pressed.png"] resizableImageWithCapInsets:imageInsets];
     
     [self.jumpLoginButton setBackgroundImage:normalStateImage forState:UIControlStateNormal];
     [self.jumpLoginButton setBackgroundImage:pressedStateImage forState:UIControlStateHighlighted];
+    
+    
+    
+    //[self.jumpLoginButton setBackgroundColor:[UIColor redColor]];
+    
+//    self.jumpLoginButton set
 }
 
 - (void)didReceiveMemoryWarning

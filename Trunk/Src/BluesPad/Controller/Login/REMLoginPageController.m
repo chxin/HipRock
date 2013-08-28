@@ -13,7 +13,6 @@
 #import "REMSplashScreenController.h"
 #import "REMUserValidationModel.h"
 #import "REMCommonHeaders.h"
-#import "REMColoredButton.h"
 
 @interface REMLoginPageController ()
 
@@ -22,30 +21,14 @@
 @implementation REMLoginPageController
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-//    UIImage *backgroundImage = [[UIImage imageNamed:@"loginpage-background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(53,58,53,58)];
-//    
-//    UIImageView *myView = (UIImageView *)self.view;
-//    [myView setFrame:CGRectMake(-4, 0, 389, 540)];
-//    [myView setContentMode:UIViewContentModeScaleToFill];
-//    [myView setImage:backgroundImage];
-    
-    
-    self.loginButton.buttonColor = REMColoredButtonBlue;
     self.loginButton.loadingText = @"正在登录...";
+    
+    [self stylize];
     
     [self.userNameTextField setDelegate:self];
     [self.passwordTextField setDelegate:self];
@@ -142,7 +125,6 @@
             [[REMApplicationContext instance].currentUser save];
             [[REMApplicationContext instance].currentCustomer save];
             
-            [self.loginButton setTitleForAllStatus:@"正在加载数据.."];
             [self.loginCarouselController.splashScreenController showBuildingView:^{
                 [self.loginButton stopIndicator];
             }];
@@ -206,4 +188,52 @@
     }
     return retValue;
 }
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self styleTextFieldFocusStatus:textField];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [self styleTextFieldNormalStatus:textField];
+}
+
+#pragma mark - style
+-(void)stylize
+{
+    [self styleLoginButton];
+    [self styleTextFieldNormalStatus:self.userNameTextField];
+    [self styleTextFieldNormalStatus:self.passwordTextField];
+}
+
+-(void)styleLoginButton
+{
+    UIEdgeInsets imageInsets = UIEdgeInsetsMake(0, 6.0, 0, 6.0);
+    UIImage *normalImage = [[UIImage imageNamed:@"Login-Normal.png"] resizableImageWithCapInsets:imageInsets];
+    UIImage *pressedImage = [[UIImage imageNamed:@"Login-Pressed.png"] resizableImageWithCapInsets:imageInsets];
+    UIImage *disabledImage = [[UIImage imageNamed:@"Login-Disable.png"] resizableImageWithCapInsets:imageInsets];
+    
+    [self.loginButton setBackgroundImage:normalImage forState:UIControlStateNormal];
+    [self.loginButton setBackgroundImage:pressedImage forState:UIControlStateHighlighted];
+    [self.loginButton setBackgroundImage:disabledImage forState:UIControlStateDisabled];
+}
+
+-(void)styleTextFieldNormalStatus:(UITextField *)textField
+{
+    [self setTextField:textField backgroundImage:@"LoginTextField.png"];
+}
+-(void)styleTextFieldFocusStatus:(UITextField *)textField
+{
+    [self setTextField:textField backgroundImage:@"LoginTextField-Focus.png"];
+}
+-(void)setTextField:(UITextField *)textField backgroundImage:(NSString *)imageName
+{
+    UIEdgeInsets imageInsets = UIEdgeInsetsMake(0,8.0, 0, 8.0);
+    UIImage *normalImage = [[UIImage imageNamed:imageName] resizableImageWithCapInsets:imageInsets];
+    
+    [textField setBackground:normalImage];
+}
+
+
 @end

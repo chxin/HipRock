@@ -710,51 +710,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Login/REMLoginCarouselController.m"
-         timestampString = "399278419.666963"
+         timestampString = "399370085.119355"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "40"
-         endingLineNumber = "40"
+         startingLineNumber = "52"
+         endingLineNumber = "52"
          landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BluesPad/Controller/Login/REMLoginPageController.m"
-         timestampString = "399347379.789634"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "122"
-         endingLineNumber = "122"
-         landmarkName = "-dataCallSuccess:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BluesPad/Controller/Login/REMLoginPageController.m"
-         timestampString = "399347379.789634"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "193"
-         endingLineNumber = "193"
-         landmarkName = "-textFieldShouldReturn:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BluesPad/Controller/Login/REMLoginPageController.m"
-         timestampString = "399347379.789634"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "158"
-         endingLineNumber = "158"
-         landmarkName = "-dataCallSuccess:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -885,19 +846,6 @@
          startingLineNumber = "316"
          endingLineNumber = "316"
          landmarkName = "-swipethis:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BluesPad/Controller/Login/REMLoginPageController.m"
-         timestampString = "399347379.789634"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "142"
-         endingLineNumber = "142"
-         landmarkName = "-dataCallSuccess:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1275,19 +1223,6 @@
          startingLineNumber = "362"
          endingLineNumber = "362"
          landmarkName = "-numberOfRecordsForPlot:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BluesPad/Controller/Login/REMLoginPageController.m"
-         timestampString = "399347379.789634"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "119"
-         endingLineNumber = "119"
-         landmarkName = "-dataCallSuccess:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1750,11 +1685,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Login/REMLoginCarouselController.m"
-         timestampString = "399281517.549899"
+         timestampString = "399370085.119355"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "53"
-         endingLineNumber = "53"
+         startingLineNumber = "65"
+         endingLineNumber = "65"
          landmarkName = "-initialize"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1763,11 +1698,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Login/REMLoginPageController.m"
-         timestampString = "399287073.741424"
+         timestampString = "399370085.119355"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "35"
-         endingLineNumber = "35"
+         startingLineNumber = "25"
+         endingLineNumber = "25"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1798,19 +1733,6 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BluesPad/Controller/Login/REMLoginPageController.m"
-         timestampString = "399347379.789634"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "62"
-         endingLineNumber = "62"
-         landmarkName = "-loginButtonPressed:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
@@ -1821,6 +1743,19 @@
          startingLineNumber = "47"
          endingLineNumber = "47"
          landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BluesPad/Controller/Login/REMLoginCarouselController.m"
+         timestampString = "399370085.119355"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "161"
+         endingLineNumber = "161"
+         landmarkName = "-styleJumpLoginButton"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
