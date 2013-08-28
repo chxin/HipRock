@@ -625,15 +625,15 @@
         CGFloat footerHeight = 98;
         UIImage *footerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WeiboBana" ofType:@"jpg"]];
         UIGraphicsBeginImageContext(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight));
-//        [[UIColor colorWithRed:0 green:0 blue:0 alpha:.6]set]
         [[UIColor blackColor]set];
         UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
         [[self getImageOfLayer:self.imageView.layer]drawInRect:self.imageView.frame];
         
         [[self getImageOfLayer:self.titleLabel.layer]drawInRect:CGRectMake(self.settingButton.frame.origin.x, self.settingButton.frame.origin.y, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height)];
         //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
-        [dataImage drawInRect:CGRectMake(0, 470, outputWidth, dataImageHeight)];
         [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
+        [dataImage drawInRect:CGRectMake(0, 470, outputWidth, dataImageHeight)];
+        
         [footerImage drawInRect:CGRectMake(0, outputHeightWithoutFooter, 800, footerHeight)];
         UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
