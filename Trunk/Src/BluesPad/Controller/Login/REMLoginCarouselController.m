@@ -33,7 +33,12 @@ const CGFloat kBackgroundBottomShadowOffset = 35;
 const CGFloat kBackgroundBorderThickness = 12;
 const CGFloat kBackgroundHorizontalShadownWidth = kBackgroundLeftShadowOffset + kBackgroundRightShadownOffset;
 const CGFloat kBackgroundVerticalShadowWidth = kBackgroundTopShadowOffset + kBackgroundBottomShadowOffset;
-const CGFloat 
+const CGFloat kBackgroundLeftContentOffset = kBackgroundLeftShadowOffset + kBackgroundBorderThickness;
+const CGFloat kBackgroundRightContentOffset = kBackgroundRightShadownOffset + kBackgroundBorderThickness;
+const CGFloat kBackgroundTopContentOffset = kBackgroundTopShadowOffset + kBackgroundBorderThickness;
+const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + kBackgroundBorderThickness;
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -102,7 +107,7 @@ const CGFloat
     UIImage *backgroundImage = [[UIImage imageNamed:@"loginpage-background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(53,58,53,58)];
     
     
-    CGRect backgroundFrame = CGRectMake(offset-horizontalShadownOffset-borderThickness, kImagePaddingTop+topShadowOffset+borderThickness, kSubViewWidth+(2*(horizontalShadownOffset+borderThickness)), kSubViewHeight+topShadowOffset+bottomShadownOffset+2*borderThickness);
+    CGRect backgroundFrame = CGRectMake(offset-kBackgroundLeftContentOffset, kImagePaddingTop+kBackgroundTopContentOffset, kSubViewWidth+kBackgroundLeftContentOffset + kBackgroundRightContentOffset, kSubViewHeight+kBackgroundTopContentOffset + kBackgroundBottomShadowOffset);
     
     UIImageView *backgroundView = [[UIImageView alloc] initWithFrame:backgroundFrame];
     [backgroundView setImage:backgroundImage];
