@@ -70,6 +70,12 @@
     
 }
 
+
+
+-(void)dealloc{
+    [self removeObserver:self forKeyPath:@"currentScrollOffset"];
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if([keyPath isEqualToString:@"currentScrollOffset"] == YES){
@@ -154,6 +160,7 @@
         UINavigationController *c=  segue.destinationViewController;
         REMBuildingSettingViewController *vc= [c.childViewControllers lastObject];
         vc.splashScreenController=self.splashScreenController;
+        vc.navigationController=self.navigationController;
     }
 }
 
