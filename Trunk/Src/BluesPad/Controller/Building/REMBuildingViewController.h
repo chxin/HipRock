@@ -11,6 +11,7 @@
 #import "REMImageView.h"
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingConstants.h"
+#import "REMBuildingSettingViewController.h"
 
 @interface REMBuildingViewController : UIViewController<UIGestureRecognizerDelegate>
 

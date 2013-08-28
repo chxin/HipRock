@@ -120,7 +120,7 @@
 {
     UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, 20, 48, 48)];
     [shareButton setImage:[UIImage imageNamed:@"Share_normal.png"] forState:UIControlStateNormal];
-    [shareButton setImage:[UIImage imageNamed:@"Share_pressed.png"] forState:UIControlStateSelected];
+    
     shareButton.showsTouchWhenHighlighted=YES;
     shareButton.adjustsImageWhenHighlighted=YES;
     shareButton.titleLabel.text=@"注销";
@@ -149,6 +149,11 @@
         REMBuildingWeiboSendViewController *vc = [segue destinationViewController];
         [vc setWeiboText: [params objectForKey:@"text"]];
         [vc setWeiboImage:[params objectForKey:@"image"]];
+    }
+    else if([segue.identifier isEqualToString:@"buildingSettingSegue2"]==YES){
+        UINavigationController *c=  segue.destinationViewController;
+        REMBuildingSettingViewController *vc= [c.childViewControllers lastObject];
+        vc.splashScreenController=self.splashScreenController;
     }
 }
 
@@ -385,6 +390,8 @@
 {
     [self performSegueWithIdentifier:@"buildingToDashboardSegue" sender:self];
 }
+
+
 
 - (IBAction)shareButtonPressed:(id)sender {
     //    UIApplication *application  = [UIApplication sharedApplication];
