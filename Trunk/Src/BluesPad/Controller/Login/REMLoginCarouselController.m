@@ -119,7 +119,7 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 
 -(UIView *)makeImageView:(int)index
 {
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"preface-s%d.png", index]]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Propaganda_%d.jpg", index+1]]];
     imageView.contentMode = UIViewContentModeScaleToFill;
     
     
