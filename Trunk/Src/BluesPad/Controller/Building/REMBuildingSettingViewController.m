@@ -78,6 +78,9 @@
         [s addTarget:self action:@selector(weiboSwitcherChanged:) forControlEvents:UIControlEventValueChanged];
         [cell addSubview:s];
     }
+    //logout cell
+    if(indexPath.section == 3 && indexPath.item == 0){
+    }
     return cell;
 }
 
