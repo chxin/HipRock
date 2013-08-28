@@ -20,12 +20,20 @@
 
 @implementation REMLoginCarouselController
 
-const NSInteger kSlideImageCount = 4;
+const NSInteger kSlideImageCount = 3;
 const NSInteger kScreenWidth = 1024;
 const NSInteger kSubViewWidth = 500;
 const NSInteger kSubViewHeight = 350;
 const NSInteger kSubViewDistance = kScreenWidth - kSubViewWidth;
 const NSInteger kImagePaddingTop = 84;
+const CGFloat kBackgroundLeftShadowOffset = 20;
+const CGFloat kBackgroundRightShadownOffset = kBackgroundLeftShadowOffset;
+const CGFloat kBackgroundTopShadowOffset = 4;
+const CGFloat kBackgroundBottomShadowOffset = 35;
+const CGFloat kBackgroundBorderThickness = 12;
+const CGFloat kBackgroundHorizontalShadownWidth = kBackgroundLeftShadowOffset + kBackgroundRightShadownOffset;
+const CGFloat kBackgroundVerticalShadowWidth = kBackgroundTopShadowOffset + kBackgroundBottomShadowOffset;
+const CGFloat 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,11 +66,16 @@ const NSInteger kImagePaddingTop = 84;
     
     for(int i=0;i<kSlideImageCount + 1;i++)
     {
+        UIView *backgroundView = [self makeBackgroundView:viewOffset];
+        
         UIView *slideView = i<kSlideImageCount?[self makeImageView:i]:self.loginPageController.view;
         
-        [slideView setFrame:CGRectMake(viewOffset, kImagePaddingTop, kSubViewWidth, kSubViewHeight)];
+        CGRect viewFrame = CGRectMake(0, 0, kSubViewWidth, kSubViewHeight);
+        [slideView setFrame:viewFrame];
         
-        [self.scrollView addSubview:slideView];
+        [backgroundView addSubview:slideView];
+        
+        [self.scrollView addSubview:backgroundView];
         
         viewOffset += kSubViewWidth + kSubViewDistance;
     }
@@ -82,6 +95,19 @@ const NSInteger kImagePaddingTop = 84;
 - (void)stylize
 {
     [self styleJumpLoginButton];
+}
+
+-(UIView *)makeBackgroundView:(CGFloat)offset
+{
+    UIImage *backgroundImage = [[UIImage imageNamed:@"loginpage-background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(53,58,53,58)];
+    
+    
+    CGRect backgroundFrame = CGRectMake(offset-horizontalShadownOffset-borderThickness, kImagePaddingTop+topShadowOffset+borderThickness, kSubViewWidth+(2*(horizontalShadownOffset+borderThickness)), kSubViewHeight+topShadowOffset+bottomShadownOffset+2*borderThickness);
+    
+    UIImageView *backgroundView = [[UIImageView alloc] initWithFrame:backgroundFrame];
+    [backgroundView setImage:backgroundImage];
+    
+    return backgroundView;
 }
 
 -(UIView *)makeImageView:(int)index

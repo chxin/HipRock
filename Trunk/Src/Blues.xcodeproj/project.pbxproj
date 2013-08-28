@@ -485,11 +485,9 @@
 		7AC3BB3717CC48750022E57E /* detail-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAF217CC48740022E57E /* detail-arrow.png */; };
 		7AC3BB3817CC48750022E57E /* Logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAF417CC48740022E57E /* Logout.png */; };
 		7AC3BB3B17CC48750022E57E /* login_error.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAF717CC48750022E57E /* login_error.png */; };
-		7AC3BB3E17CC48750022E57E /* preface-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAFA17CC48750022E57E /* preface-background.jpg */; };
 		7AC3BB3F17CC48750022E57E /* preface-s0.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAFB17CC48750022E57E /* preface-s0.png */; };
 		7AC3BB4017CC48750022E57E /* preface-s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAFC17CC48750022E57E /* preface-s1.png */; };
 		7AC3BB4117CC48750022E57E /* preface-s2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAFD17CC48750022E57E /* preface-s2.png */; };
-		7AC3BB4217CC48750022E57E /* preface-s3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAFE17CC48750022E57E /* preface-s3.png */; };
 		7AC3BB4317CC48750022E57E /* Schneider-Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAFF17CC48750022E57E /* Schneider-Logo.png */; };
 		7AC3BB4417CC48750022E57E /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BB0017CC48750022E57E /* user.png */; };
 		7AC3BB4517CC48750022E57E /* weibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BB0117CC48750022E57E /* weibo.png */; };
@@ -992,11 +990,9 @@
 		7AC3BAF217CC48740022E57E /* detail-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail-arrow.png"; sourceTree = "<group>"; };
 		7AC3BAF417CC48740022E57E /* Logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logout.png; sourceTree = "<group>"; };
 		7AC3BAF717CC48750022E57E /* login_error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_error.png; sourceTree = "<group>"; };
-		7AC3BAFA17CC48750022E57E /* preface-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "preface-background.jpg"; sourceTree = "<group>"; };
-		7AC3BAFB17CC48750022E57E /* preface-s0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preface-s0.png"; sourceTree = "<group>"; };
-		7AC3BAFC17CC48750022E57E /* preface-s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preface-s1.png"; sourceTree = "<group>"; };
-		7AC3BAFD17CC48750022E57E /* preface-s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preface-s2.png"; sourceTree = "<group>"; };
-		7AC3BAFE17CC48750022E57E /* preface-s3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preface-s3.png"; sourceTree = "<group>"; };
+		7AC3BAFB17CC48750022E57E /* preface-s0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "preface-s0.png"; path = "../preface-s0.png"; sourceTree = "<group>"; };
+		7AC3BAFC17CC48750022E57E /* preface-s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "preface-s1.png"; path = "../preface-s1.png"; sourceTree = "<group>"; };
+		7AC3BAFD17CC48750022E57E /* preface-s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "preface-s2.png"; path = "../preface-s2.png"; sourceTree = "<group>"; };
 		7AC3BAFF17CC48750022E57E /* Schneider-Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Schneider-Logo.png"; sourceTree = "<group>"; };
 		7AC3BB0017CC48750022E57E /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
 		7AC3BB0117CC48750022E57E /* weibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo.png; sourceTree = "<group>"; };
@@ -1970,11 +1966,6 @@
 				7AC3BAF117CC48740022E57E /* Default@2x.png */,
 				7AC3BAF217CC48740022E57E /* detail-arrow.png */,
 				7AC3BAF717CC48750022E57E /* login_error.png */,
-				7AC3BAFA17CC48750022E57E /* preface-background.jpg */,
-				7AC3BAFB17CC48750022E57E /* preface-s0.png */,
-				7AC3BAFC17CC48750022E57E /* preface-s1.png */,
-				7AC3BAFD17CC48750022E57E /* preface-s2.png */,
-				7AC3BAFE17CC48750022E57E /* preface-s3.png */,
 				7AC3BAFF17CC48750022E57E /* Schneider-Logo.png */,
 				7AC3BB0017CC48750022E57E /* user.png */,
 				7AC3BB0117CC48750022E57E /* weibo.png */,
@@ -2067,6 +2058,9 @@
 		7AC3BAF317CC48740022E57E /* login */ = {
 			isa = PBXGroup;
 			children = (
+				7AC3BAFB17CC48750022E57E /* preface-s0.png */,
+				7AC3BAFC17CC48750022E57E /* preface-s1.png */,
+				7AC3BAFD17CC48750022E57E /* preface-s2.png */,
 				7A09332B17CCA229007C6A4E /* loginpage-background.png */,
 				7A09331417CC893B007C6A4E /* jumplogin-normal.png */,
 				7A09331517CC893B007C6A4E /* jumplogin-pressed.png */,
@@ -2317,11 +2311,9 @@
 				7AC3BB3717CC48750022E57E /* detail-arrow.png in Resources */,
 				7AC3BB3817CC48750022E57E /* Logout.png in Resources */,
 				7AC3BB3B17CC48750022E57E /* login_error.png in Resources */,
-				7AC3BB3E17CC48750022E57E /* preface-background.jpg in Resources */,
 				7AC3BB3F17CC48750022E57E /* preface-s0.png in Resources */,
 				7AC3BB4017CC48750022E57E /* preface-s1.png in Resources */,
 				7AC3BB4117CC48750022E57E /* preface-s2.png in Resources */,
-				7AC3BB4217CC48750022E57E /* preface-s3.png in Resources */,
 				7AC3BB4317CC48750022E57E /* Schneider-Logo.png in Resources */,
 				7AC3BB4417CC48750022E57E /* user.png in Resources */,
 				7AC3BB4517CC48750022E57E /* weibo.png in Resources */,

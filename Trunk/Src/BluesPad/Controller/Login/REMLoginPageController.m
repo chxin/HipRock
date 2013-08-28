@@ -36,12 +36,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    UIImage *backgroundImage = [[UIImage imageNamed:@"loginpage-background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,0,0,0)];
-    
-    UIImageView *myView = (UIImageView *)self.view;
-    [myView setFrame:CGRectMake(0, 0, 500, 350)];
-    [myView setContentMode:UIViewContentModeScaleAspectFit];
-    [myView setImage:backgroundImage];
+//    UIImage *backgroundImage = [[UIImage imageNamed:@"loginpage-background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(53,58,53,58)];
+//    
+//    UIImageView *myView = (UIImageView *)self.view;
+//    [myView setFrame:CGRectMake(-4, 0, 389, 540)];
+//    [myView setContentMode:UIViewContentModeScaleToFill];
+//    [myView setImage:backgroundImage];
     
     
     self.loginButton.buttonColor = REMColoredButtonBlue;
@@ -49,7 +49,6 @@
     
     [self.userNameTextField setDelegate:self];
     [self.passwordTextField setDelegate:self];
-    
 }
 
 - (void)didReceiveMemoryWarning
