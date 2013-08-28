@@ -79,8 +79,6 @@
 		6AB1F26C17B8AC910065C1EB /* REMBuildingRankingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */; };
 		6AB1F26F17B8AC910065C1EB /* REMNumberLabel.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA6117AB944B00316902 /* REMNumberLabel.h */; };
 		6AB1F27017B8AC910065C1EB /* REMNumberLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA6217AB944B00316902 /* REMNumberLabel.m */; };
-		6AB1F27117B8AC910065C1EB /* REMColoredButton.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA6417AB94B100316902 /* REMColoredButton.h */; };
-		6AB1F27217B8AC910065C1EB /* REMColoredButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA6517AB94B100316902 /* REMColoredButton.m */; };
 		6AB1F27317B8AC910065C1EB /* REMIndicatorButton.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A5277F417AF4209007DA735 /* REMIndicatorButton.h */; };
 		6AB1F27417B8AC910065C1EB /* REMIndicatorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5277F517AF4209007DA735 /* REMIndicatorButton.m */; };
 		6AB1F27717B8AC910065C1EB /* REMWidgetCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F44178122A500BC130A /* REMWidgetCellView.m */; };
@@ -336,8 +334,6 @@
 		7A0288FF17C20CC500709111 /* WeiboLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E617C20CC500709111 /* WeiboLoginDialog.m */; };
 		7A02890017C20CC500709111 /* Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E817C20CC500709111 /* Weibo.m */; };
 		7A09330D17CC8737007C6A4E /* REMBackgroundImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09330C17CC8737007C6A4E /* REMBackgroundImageButton.m */; };
-		7A09331017CC8874007C6A4E /* REMJumpLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09330F17CC8874007C6A4E /* REMJumpLoginButton.m */; };
-		7A09331317CC8882007C6A4E /* REMLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09331217CC8882007C6A4E /* REMLoginButton.m */; };
 		7A095E73179571C80098DB16 /* REMWidgetAxisHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */; };
 		7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */; };
 		7A09D59A17B8D62F001EBC30 /* REMDataRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59917B8D62F001EBC30 /* REMDataRange.m */; };
@@ -399,7 +395,6 @@
 		7A209EDB17BB72100062FB92 /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
 		7A37AA5C17AB56F100316902 /* REMUserValidationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA5B17AB56F100316902 /* REMUserValidationModel.m */; };
 		7A37AA6317AB944B00316902 /* REMNumberLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA6217AB944B00316902 /* REMNumberLabel.m */; };
-		7A37AA6617AB94B100316902 /* REMColoredButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA6517AB94B100316902 /* REMColoredButton.m */; };
 		7A399E96177D238F00F0EB9F /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E84177D238F00F0EB9F /* AFHTTPClient.m */; };
 		7A399E97177D238F00F0EB9F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E86177D238F00F0EB9F /* AFHTTPRequestOperation.m */; };
 		7A399E98177D238F00F0EB9F /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E88177D238F00F0EB9F /* AFImageRequestOperation.m */; };
@@ -416,6 +411,7 @@
 		7A48B47917CDDD03002DA386 /* LoginTextField-Focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B47517CDDD03002DA386 /* LoginTextField-Focus@2x.png */; };
 		7A48B47A17CDDD03002DA386 /* LoginTextField.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B47617CDDD03002DA386 /* LoginTextField.png */; };
 		7A48B47B17CDDD03002DA386 /* LoginTextField@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B47717CDDD03002DA386 /* LoginTextField@2x.png */; };
+		7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A48B47D17CDE321002DA386 /* REMInsetsTextField.m */; };
 		7A5277F617AF4209007DA735 /* REMIndicatorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5277F517AF4209007DA735 /* REMIndicatorButton.m */; };
 		7A5DBD28178FD014006C4EDE /* REMDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD27178FD014006C4EDE /* REMDataAccessor.m */; };
 		7A5DBD2B178FD034006C4EDE /* REMDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD2A178FD034006C4EDE /* REMDataStore.m */; };
@@ -628,10 +624,6 @@
 		7A0288EA17C20CC500709111 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
 		7A09330B17CC8736007C6A4E /* REMBackgroundImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBackgroundImageButton.h; sourceTree = "<group>"; };
 		7A09330C17CC8737007C6A4E /* REMBackgroundImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBackgroundImageButton.m; sourceTree = "<group>"; };
-		7A09330E17CC8874007C6A4E /* REMJumpLoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMJumpLoginButton.h; path = Login/REMJumpLoginButton.h; sourceTree = "<group>"; };
-		7A09330F17CC8874007C6A4E /* REMJumpLoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMJumpLoginButton.m; path = Login/REMJumpLoginButton.m; sourceTree = "<group>"; };
-		7A09331117CC8882007C6A4E /* REMLoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginButton.h; sourceTree = "<group>"; };
-		7A09331217CC8882007C6A4E /* REMLoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginButton.m; sourceTree = "<group>"; };
 		7A095E71179571C80098DB16 /* REMWidgetAxisHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetAxisHelper.h; path = Common/Utility/REMWidgetAxisHelper.h; sourceTree = "<group>"; };
 		7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetAxisHelper.m; path = Common/Utility/REMWidgetAxisHelper.m; sourceTree = "<group>"; };
 		7A09D59517B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingTimeRangeDataModel.h; sourceTree = "<group>"; };
@@ -751,8 +743,6 @@
 		7A37AA5B17AB56F100316902 /* REMUserValidationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMUserValidationModel.m; path = Model/Login/REMUserValidationModel.m; sourceTree = "<group>"; };
 		7A37AA6117AB944B00316902 /* REMNumberLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMNumberLabel.h; sourceTree = "<group>"; };
 		7A37AA6217AB944B00316902 /* REMNumberLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMNumberLabel.m; sourceTree = "<group>"; };
-		7A37AA6417AB94B100316902 /* REMColoredButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMColoredButton.h; sourceTree = "<group>"; };
-		7A37AA6517AB94B100316902 /* REMColoredButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMColoredButton.m; sourceTree = "<group>"; };
 		7A399E83177D238F00F0EB9F /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		7A399E84177D238F00F0EB9F /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		7A399E85177D238F00F0EB9F /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -782,6 +772,8 @@
 		7A48B47517CDDD03002DA386 /* LoginTextField-Focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginTextField-Focus@2x.png"; sourceTree = "<group>"; };
 		7A48B47617CDDD03002DA386 /* LoginTextField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginTextField.png; sourceTree = "<group>"; };
 		7A48B47717CDDD03002DA386 /* LoginTextField@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginTextField@2x.png"; sourceTree = "<group>"; };
+		7A48B47C17CDE321002DA386 /* REMInsetsTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMInsetsTextField.h; sourceTree = "<group>"; };
+		7A48B47D17CDE321002DA386 /* REMInsetsTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMInsetsTextField.m; sourceTree = "<group>"; };
 		7A5277F417AF4209007DA735 /* REMIndicatorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMIndicatorButton.h; sourceTree = "<group>"; };
 		7A5277F517AF4209007DA735 /* REMIndicatorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMIndicatorButton.m; sourceTree = "<group>"; };
 		7A5DBD27178FD014006C4EDE /* REMDataAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataAccessor.m; path = Common/DataAccess/REMDataAccessor.m; sourceTree = "<group>"; };
@@ -1219,17 +1211,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		7A09330A17CC8719007C6A4E /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				7A09330E17CC8874007C6A4E /* REMJumpLoginButton.h */,
-				7A09330F17CC8874007C6A4E /* REMJumpLoginButton.m */,
-				7A09331117CC8882007C6A4E /* REMLoginButton.h */,
-				7A09331217CC8882007C6A4E /* REMLoginButton.m */,
-			);
-			name = Login;
-			sourceTree = "<group>";
-		};
 		7A153C4317AA489600413D3C /* Building */ = {
 			isa = PBXGroup;
 			children = (
@@ -1453,13 +1434,10 @@
 		7A37AA6017AB944B00316902 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				7A09330A17CC8719007C6A4E /* Login */,
 				7A37AA6117AB944B00316902 /* REMNumberLabel.h */,
 				7A37AA6217AB944B00316902 /* REMNumberLabel.m */,
 				EF97DDD917C20B5700A0374E /* REMToggleButton.h */,
 				EF97DDDA17C20B5700A0374E /* REMToggleButton.m */,
-				7A37AA6417AB94B100316902 /* REMColoredButton.h */,
-				7A37AA6517AB94B100316902 /* REMColoredButton.m */,
 				7A5277F417AF4209007DA735 /* REMIndicatorButton.h */,
 				7A5277F517AF4209007DA735 /* REMIndicatorButton.m */,
 				EF8F1D7717C2FE5400D3E29F /* REMToggleButtonGroup.h */,
@@ -1468,6 +1446,8 @@
 				EF9F28B017CB54DE00E775ED /* REMStatusBar.m */,
 				7A09330B17CC8736007C6A4E /* REMBackgroundImageButton.h */,
 				7A09330C17CC8737007C6A4E /* REMBackgroundImageButton.m */,
+				7A48B47C17CDE321002DA386 /* REMInsetsTextField.h */,
+				7A48B47D17CDE321002DA386 /* REMInsetsTextField.m */,
 			);
 			name = Controls;
 			path = View/Controls;
@@ -2414,7 +2394,6 @@
 				7A37AA5C17AB56F100316902 /* REMUserValidationModel.m in Sources */,
 				EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */,
 				7A37AA6317AB944B00316902 /* REMNumberLabel.m in Sources */,
-				7A37AA6617AB94B100316902 /* REMColoredButton.m in Sources */,
 				B442700C17AF30FF00762C68 /* REMBuildingDataView.m in Sources */,
 				B442700E17AF30FF00762C68 /* REMBuildingTitleLabelView.m in Sources */,
 				B442700F17AF30FF00762C68 /* REMBuildingTitleView.m in Sources */,
@@ -2465,8 +2444,7 @@
 				EF3822EA17CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.m in Sources */,
 				EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */,
 				7A09330D17CC8737007C6A4E /* REMBackgroundImageButton.m in Sources */,
-				7A09331017CC8874007C6A4E /* REMJumpLoginButton.m in Sources */,
-				7A09331317CC8882007C6A4E /* REMLoginButton.m in Sources */,
+				7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2577,8 +2555,6 @@
 				6AB1F26C17B8AC910065C1EB /* REMBuildingRankingView.m in Sources */,
 				6AB1F26F17B8AC910065C1EB /* REMNumberLabel.h in Sources */,
 				6AB1F27017B8AC910065C1EB /* REMNumberLabel.m in Sources */,
-				6AB1F27117B8AC910065C1EB /* REMColoredButton.h in Sources */,
-				6AB1F27217B8AC910065C1EB /* REMColoredButton.m in Sources */,
 				6AB1F27317B8AC910065C1EB /* REMIndicatorButton.h in Sources */,
 				6AB1F27417B8AC910065C1EB /* REMIndicatorButton.m in Sources */,
 				6AB1F27717B8AC910065C1EB /* REMWidgetCellView.m in Sources */,

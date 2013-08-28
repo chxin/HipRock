@@ -6,9 +6,8 @@
 //
 //
 
-#import "REMColoredButton.h"
 
-@interface REMIndicatorButton : REMColoredButton
+@interface REMIndicatorButton : UIButton
 
 //true for loading, false for not loading
 @property (nonatomic,readonly) BOOL indicatorStatus;

@@ -21,10 +21,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LxY-lh-jAg">
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SplashScreenLogo-common.png" translatesAutoresizingMaskIntoConstraints="NO" id="Igx-ZG-8eI"/>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Schneider Electric Blues Project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAT-aj-FDp">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="能源管理开放平台" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAT-aj-FDp">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="Xdi-ja-xav"/>
-                                            <constraint firstAttribute="width" constant="480" id="irY-DA-bnk"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="32"/>
+                                        <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="施耐德电气" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uoj-p9-JG9">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="izA-kg-ktd"/>
+                                            <constraint firstAttribute="width" constant="480" id="vyl-wd-koT"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="24"/>
                                         <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -52,17 +61,20 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Igx-ZG-8eI" firstAttribute="top" secondItem="LxY-lh-jAg" secondAttribute="top" type="default" id="0hs-jz-wCQ"/>
+                                    <constraint firstItem="ZAT-aj-FDp" firstAttribute="top" secondItem="uoj-p9-JG9" secondAttribute="bottom" constant="15" type="user" id="1h5-E3-jCC"/>
                                     <constraint firstItem="KpV-VC-3uG" firstAttribute="leading" secondItem="Igx-ZG-8eI" secondAttribute="leading" type="default" id="7pY-8I-Thl"/>
                                     <constraint firstItem="3Lm-3p-kzn" firstAttribute="top" secondItem="BLf-zL-VFO" secondAttribute="bottom" constant="12" type="user" id="DUc-Jl-tCS"/>
                                     <constraint firstAttribute="bottom" secondItem="3Lm-3p-kzn" secondAttribute="bottom" constant="28" type="user" id="HiT-EL-FNQ"/>
+                                    <constraint firstItem="uoj-p9-JG9" firstAttribute="leading" secondItem="ZAT-aj-FDp" secondAttribute="leading" type="default" id="KgH-p5-WBB"/>
                                     <constraint firstItem="BLf-zL-VFO" firstAttribute="leading" secondItem="LxY-lh-jAg" secondAttribute="leading" type="default" id="R94-1Z-C31"/>
-                                    <constraint firstItem="ZAT-aj-FDp" firstAttribute="top" secondItem="LxY-lh-jAg" secondAttribute="top" constant="184" id="WBy-gW-Jna"/>
                                     <constraint firstItem="KpV-VC-3uG" firstAttribute="top" secondItem="LxY-lh-jAg" secondAttribute="top" type="default" id="WVg-h4-gMW"/>
-                                    <constraint firstItem="ZAT-aj-FDp" firstAttribute="centerX" secondItem="Igx-ZG-8eI" secondAttribute="centerX" type="default" id="btG-AY-5o0"/>
+                                    <constraint firstItem="uoj-p9-JG9" firstAttribute="centerX" secondItem="KpV-VC-3uG" secondAttribute="centerX" type="default" id="Ylj-mf-9tM"/>
+                                    <constraint firstItem="uoj-p9-JG9" firstAttribute="trailing" secondItem="ZAT-aj-FDp" secondAttribute="trailing" type="default" id="dbU-mn-K9F"/>
                                     <constraint firstItem="BLf-zL-VFO" firstAttribute="centerX" secondItem="ZAT-aj-FDp" secondAttribute="centerX" type="default" id="ftk-Ln-br4"/>
                                     <constraint firstItem="BLf-zL-VFO" firstAttribute="trailing" secondItem="LxY-lh-jAg" secondAttribute="trailing" type="default" id="ipk-FU-Wh6"/>
                                     <constraint firstItem="3Lm-3p-kzn" firstAttribute="leading" secondItem="LxY-lh-jAg" secondAttribute="leading" type="default" id="jIb-Lb-k57"/>
                                     <constraint firstItem="3Lm-3p-kzn" firstAttribute="trailing" secondItem="LxY-lh-jAg" secondAttribute="trailing" type="default" id="vu5-oO-sh1"/>
+                                    <constraint firstItem="uoj-p9-JG9" firstAttribute="top" secondItem="KpV-VC-3uG" secondAttribute="bottom" constant="27" type="user" id="xBo-Mz-oHm"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -70,7 +82,7 @@
                         <constraints>
                             <constraint firstItem="9Mr-EH-OgG" firstAttribute="leading" secondItem="XgD-ii-3PV" secondAttribute="leading" type="default" id="3Qh-cT-yX9"/>
                             <constraint firstItem="LxY-lh-jAg" firstAttribute="centerX" secondItem="9Mr-EH-OgG" secondAttribute="centerX" type="default" id="3qN-jx-qRW"/>
-                            <constraint firstItem="LxY-lh-jAg" firstAttribute="top" secondItem="XgD-ii-3PV" secondAttribute="top" constant="158" id="c3r-2e-LXZ"/>
+                            <constraint firstItem="LxY-lh-jAg" firstAttribute="top" secondItem="XgD-ii-3PV" secondAttribute="top" constant="143" type="user" id="c3r-2e-LXZ"/>
                             <constraint firstItem="9Mr-EH-OgG" firstAttribute="top" secondItem="XgD-ii-3PV" secondAttribute="top" type="default" id="fNC-M4-3Lw"/>
                             <constraint firstItem="LxY-lh-jAg" firstAttribute="bottom" secondItem="XgD-ii-3PV" secondAttribute="bottom" type="default" id="hE6-wo-bXH"/>
                             <constraint firstItem="LxY-lh-jAg" firstAttribute="leading" secondItem="XgD-ii-3PV" secondAttribute="leading" constant="256" id="q2R-hr-RBB"/>
@@ -181,24 +193,28 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HOs-72-HuV">
                                 <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BluesAdmin" placeholder="用户名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NEh-h3-tnd">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BluesAdmin" placeholder="用户名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NEh-h3-tnd" customClass="REMInsetsTextField">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <rect key="contentStretch" x="0.0" y="1" width="1" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="epJ-iL-MzN"/>
                                     <constraint firstAttribute="width" constant="330" id="wVF-ho-hNM"/>
                                 </constraints>
+                                <color key="textColor" red="0.35686274509999999" green="0.35686274509999999" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                 <connections>
                                     <action selector="textFieldChanged:" destination="AVi-ee-Lx7" eventType="editingChanged" id="2ee-rh-Bcd"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="P@ssw0rd" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TI6-QH-ZIu">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="P@ssw0rd" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TI6-QH-ZIu" customClass="REMInsetsTextField">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="d3V-JV-FP5"/>
                                 </constraints>
+                                <color key="textColor" red="0.35686274509999999" green="0.35686274509999999" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="textFieldChanged:" destination="AVi-ee-Lx7" eventType="editingChanged" id="CGx-zH-n7P"/>
                                 </connections>
@@ -220,7 +236,7 @@
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Inb-Mi-MaB">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Inb-Mi-MaB" customClass="REMIndicatorButton">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="oFq-eO-Xgk"/>
                                 </constraints>
@@ -1571,6 +1587,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="REMFavoriteTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/REMFavoriteTableViewController.h"/>
         </class>
+        <class className="REMIndicatorButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMIndicatorButton.h"/>
+        </class>
+        <class className="REMInsetsTextField" superclassName="UITextField">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/REMInsetsTextField.h"/>
+        </class>
         <class className="REMLoginCarouselController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/REMLoginCarouselController.h"/>
             <relationships>
@@ -1586,7 +1608,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="loginButtonPressed:"/>
                 <relationship kind="action" name="textFieldChanged:"/>
-                <relationship kind="outlet" name="loginButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="loginButton" candidateClass="REMIndicatorButton"/>
                 <relationship kind="outlet" name="passwordErrorLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="userNameErrorLabel" candidateClass="UILabel"/>

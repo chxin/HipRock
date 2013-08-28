@@ -62,11 +62,11 @@
 -(void)breathAnimation:(void (^)(void))completed
 {
     self.flashLogo.alpha = 0;
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:1.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.flashLogo.alpha = 0.8;
     } completion:^(BOOL finished) {
         self.flashLogo.alpha = 0.8;
-        [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:1.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             self.flashLogo.alpha = 0;
         } completion:^(BOOL finished){
             if(completed!=nil)

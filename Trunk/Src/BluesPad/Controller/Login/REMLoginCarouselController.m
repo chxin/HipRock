@@ -10,7 +10,6 @@
 #import "REMLoginCarouselController.h"
 #import "REMAlertHelper.h"
 #import "REMLoginPageController.h"
-#import "REMColoredButton.h"
 
 @interface REMLoginCarouselController ()
 
