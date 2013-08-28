@@ -197,7 +197,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <rect key="contentStretch" x="0.0" y="1" width="1" height="1"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="epJ-iL-MzN"/>
+                                    <constraint firstAttribute="height" constant="52" id="Tmx-HG-71B"/>
                                     <constraint firstAttribute="width" constant="330" id="wVF-ho-hNM"/>
                                 </constraints>
                                 <color key="textColor" red="0.35686274509999999" green="0.35686274509999999" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -220,20 +220,21 @@
                                 </connections>
                             </textField>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F05-SM-93U">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="JZb-eX-cnn"/>
                                     <constraint firstAttribute="width" constant="42" id="zTN-Ha-B3U"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="0.14117647058823529" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhF-ie-yww">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="Uwv-w3-uTr"/>
+                                    <constraint firstAttribute="height" constant="21" id="tGW-ev-a5S"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="0.14117647059999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Inb-Mi-MaB" customClass="REMIndicatorButton">
@@ -254,6 +255,7 @@
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="正在登录施耐德电气能源管理开放平台" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1x-Zk-rej">
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="6Tf-Ud-ahl"/>
                                     <constraint firstAttribute="width" constant="289" id="Die-Gu-HWR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -263,30 +265,29 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="NEh-h3-tnd" firstAttribute="top" secondItem="O1x-Zk-rej" secondAttribute="bottom" constant="13" type="user" id="2cZ-mb-tTl"/>
-                            <constraint firstAttribute="bottom" secondItem="HOs-72-HuV" secondAttribute="bottom" constant="292" id="3Mz-zq-qzP"/>
-                            <constraint firstAttribute="bottom" secondItem="VhF-ie-yww" secondAttribute="bottom" constant="114" id="40T-oJ-8zh"/>
+                            <constraint firstItem="VhF-ie-yww" firstAttribute="top" secondItem="TI6-QH-ZIu" secondAttribute="bottom" constant="4" type="user" id="3aN-mG-ZY6"/>
+                            <constraint firstItem="TI6-QH-ZIu" firstAttribute="top" secondItem="F05-SM-93U" secondAttribute="bottom" constant="6" type="user" id="7BF-9T-GDG"/>
                             <constraint firstItem="NEh-h3-tnd" firstAttribute="centerX" secondItem="HOs-72-HuV" secondAttribute="centerX" type="default" id="7PO-sH-ozv"/>
                             <constraint firstItem="kLc-UC-bzf" firstAttribute="trailing" secondItem="9Ht-DR-dlm" secondAttribute="trailing" type="default" id="9mh-Ye-Pox"/>
+                            <constraint firstItem="F05-SM-93U" firstAttribute="top" secondItem="NEh-h3-tnd" secondAttribute="bottom" constant="4" type="user" id="AEv-fc-DTP"/>
                             <constraint firstItem="HOs-72-HuV" firstAttribute="leading" secondItem="9Ht-DR-dlm" secondAttribute="leading" type="default" id="AeF-mB-vTO"/>
                             <constraint firstItem="F05-SM-93U" firstAttribute="leading" secondItem="NEh-h3-tnd" secondAttribute="leading" type="default" id="BBJ-9P-4Gi"/>
-                            <constraint firstItem="O1x-Zk-rej" firstAttribute="top" secondItem="9Ht-DR-dlm" secondAttribute="top" constant="80" type="user" id="Dlg-VQ-5P5"/>
-                            <constraint firstItem="TI6-QH-ZIu" firstAttribute="trailing" secondItem="NEh-h3-tnd" secondAttribute="trailing" type="default" id="Fbc-tj-IVA"/>
+                            <constraint firstItem="Inb-Mi-MaB" firstAttribute="top" secondItem="VhF-ie-yww" secondAttribute="bottom" constant="6" type="user" id="HiW-B6-RXT"/>
+                            <constraint firstItem="TI6-QH-ZIu" firstAttribute="trailing" secondItem="Inb-Mi-MaB" secondAttribute="trailing" type="default" id="I8e-iB-COD"/>
                             <constraint firstItem="HOs-72-HuV" firstAttribute="top" secondItem="9Ht-DR-dlm" secondAttribute="top" constant="56" id="Igu-LD-wZV"/>
-                            <constraint firstItem="VhF-ie-yww" firstAttribute="leading" secondItem="TI6-QH-ZIu" secondAttribute="leading" type="default" id="PNB-N4-bSM"/>
-                            <constraint firstAttribute="bottom" secondItem="Inb-Mi-MaB" secondAttribute="bottom" constant="61" id="S5v-TW-8Aj"/>
+                            <constraint firstItem="NEh-h3-tnd" firstAttribute="leading" secondItem="O1x-Zk-rej" secondAttribute="leading" type="default" id="Iok-Ak-QzA"/>
+                            <constraint firstItem="NEh-h3-tnd" firstAttribute="top" secondItem="O1x-Zk-rej" secondAttribute="bottom" constant="13" type="user" id="LJK-VU-SUT"/>
+                            <constraint firstItem="HOs-72-HuV" firstAttribute="bottom" secondItem="kLc-UC-bzf" secondAttribute="bottom" type="default" id="OW1-uf-w1F"/>
+                            <constraint firstItem="TI6-QH-ZIu" firstAttribute="trailing" secondItem="NEh-h3-tnd" secondAttribute="trailing" type="default" id="ThB-EG-10l"/>
                             <constraint firstItem="VhF-ie-yww" firstAttribute="trailing" secondItem="F05-SM-93U" secondAttribute="trailing" type="default" id="Web-lL-skT"/>
-                            <constraint firstItem="TI6-QH-ZIu" firstAttribute="trailing" secondItem="Inb-Mi-MaB" secondAttribute="trailing" type="default" id="bMF-qk-eOd"/>
+                            <constraint firstItem="O1x-Zk-rej" firstAttribute="top" secondItem="9Ht-DR-dlm" secondAttribute="top" constant="78" id="Y9F-0A-9XV"/>
                             <constraint firstItem="VhF-ie-yww" firstAttribute="leading" secondItem="Inb-Mi-MaB" secondAttribute="leading" type="default" id="dDc-Kn-z5v"/>
-                            <constraint firstItem="NEh-h3-tnd" firstAttribute="top" secondItem="9Ht-DR-dlm" secondAttribute="top" constant="114" id="eC4-Ul-03m"/>
-                            <constraint firstItem="NEh-h3-tnd" firstAttribute="leading" secondItem="O1x-Zk-rej" secondAttribute="leading" type="default" id="eD4-YS-YBj"/>
-                            <constraint firstItem="F05-SM-93U" firstAttribute="top" secondItem="9Ht-DR-dlm" secondAttribute="top" constant="152" id="if1-xP-DJ8"/>
+                            <constraint firstItem="TI6-QH-ZIu" firstAttribute="leading" secondItem="VhF-ie-yww" secondAttribute="leading" type="default" id="kdZ-Jv-cVG"/>
                             <constraint firstItem="kLc-UC-bzf" firstAttribute="top" secondItem="9Ht-DR-dlm" secondAttribute="top" type="default" id="lly-hv-z1F"/>
-                            <constraint firstAttribute="bottom" secondItem="TI6-QH-ZIu" secondAttribute="bottom" constant="121" id="qi2-eI-wm8"/>
-                            <constraint firstItem="F05-SM-93U" firstAttribute="leading" secondItem="TI6-QH-ZIu" secondAttribute="leading" type="default" id="ru5-aj-pVd"/>
                             <constraint firstItem="HOs-72-HuV" firstAttribute="trailing" secondItem="9Ht-DR-dlm" secondAttribute="trailing" type="default" id="u3B-aA-pDh"/>
-                            <constraint firstAttribute="bottom" secondItem="kLc-UC-bzf" secondAttribute="bottom" constant="294" id="uFO-2x-veI"/>
                             <constraint firstItem="kLc-UC-bzf" firstAttribute="leading" secondItem="9Ht-DR-dlm" secondAttribute="leading" type="default" id="xyO-fl-oeH"/>
+                            <constraint firstItem="O1x-Zk-rej" firstAttribute="top" secondItem="HOs-72-HuV" secondAttribute="bottom" constant="22" type="user" id="yRv-Yh-hVO"/>
+                            <constraint firstItem="TI6-QH-ZIu" firstAttribute="leading" secondItem="F05-SM-93U" secondAttribute="leading" type="default" id="yiV-n5-fPG"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
