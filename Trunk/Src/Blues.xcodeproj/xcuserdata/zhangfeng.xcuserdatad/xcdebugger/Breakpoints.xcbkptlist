@@ -1758,5 +1758,16 @@
          landmarkName = "-styleJumpLoginButton"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BluesPad/main.m"
+         timestampString = "399373098.127449"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "21"
+         endingLineNumber = "21">
+      </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

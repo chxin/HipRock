@@ -16,6 +16,8 @@
 			<array>
 				<string>AppLogo.png</string>
 				<string>AppLogo@2x.png</string>
+				<string>AppLogo.png</string>
+				<string>AppLogo@2x.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<true/>
