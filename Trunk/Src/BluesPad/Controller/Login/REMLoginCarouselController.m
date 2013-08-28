@@ -88,7 +88,6 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
         viewOffset += kSubViewWidth + kSubViewDistance;
     }
     
-    self.scrollView.backgroundColor = [UIColor redColor];
     self.pageControl.currentPage = 0;
     self.pageControl.numberOfPages = self.scrollView.subviews.count;
     
@@ -115,7 +114,6 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
     
     UIImageView *backgroundView = [[UIImageView alloc] initWithFrame:backgroundFrame];
     [backgroundView setImage:backgroundImage];
-    [backgroundView setBackgroundColor:[UIColor blueColor]];
     
     return backgroundView;
 }
