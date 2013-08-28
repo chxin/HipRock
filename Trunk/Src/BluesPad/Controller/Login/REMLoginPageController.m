@@ -22,30 +22,12 @@
 @implementation REMLoginPageController
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-//    UIImage *backgroundImage = [[UIImage imageNamed:@"loginpage-background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(53,58,53,58)];
-//    
-//    UIImageView *myView = (UIImageView *)self.view;
-//    [myView setFrame:CGRectMake(-4, 0, 389, 540)];
-//    [myView setContentMode:UIViewContentModeScaleToFill];
-//    [myView setImage:backgroundImage];
-    
-    
-    self.loginButton.buttonColor = REMColoredButtonBlue;
-    self.loginButton.loadingText = @"正在登录...";
+    //self.loginButton.loadingText = @"正在登录...";
     
     [self.userNameTextField setDelegate:self];
     [self.passwordTextField setDelegate:self];
@@ -82,7 +64,7 @@
     store.groupName = nil;
     
     //mask login button
-    [self.loginButton startIndicator];
+    //[self.loginButton startIndicator];
     
     void (^successHandler)(id data) = ^(id data)
     {
@@ -102,17 +84,17 @@
     NSString *userName = [self.userNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *password = [self.passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
-    if(self.loginButton.indicatorStatus == NO)
-    {
-        if([userName isEqualToString:@""] || [password isEqualToString:@""])
-        {
-            [self.loginButton setEnabled:NO];
-        }
-        else
-        {
-            [self.loginButton setEnabled:YES];
-        }
-    }
+//    if(self.loginButton.indicatorStatus == NO)
+//    {
+//        if([userName isEqualToString:@""] || [password isEqualToString:@""])
+//        {
+//            [self.loginButton setEnabled:NO];
+//        }
+//        else
+//        {
+//            [self.loginButton setEnabled:YES];
+//        }
+//    }
 }
 
 -(void) dataCallSuccess: (id) data
@@ -142,9 +124,9 @@
             [[REMApplicationContext instance].currentUser save];
             [[REMApplicationContext instance].currentCustomer save];
             
-            [self.loginButton setTitleForAllStatus:@"正在加载数据.."];
+            //[self.loginButton setTitleForAllStatus:@"正在加载数据.."];
             [self.loginCarouselController.splashScreenController showBuildingView:^{
-                [self.loginButton stopIndicator];
+                //[self.loginButton stopIndicator];
             }];
         }
         else
@@ -168,7 +150,7 @@
 
 -(void) dataCallFail: (NSError *) error result:(NSObject *)response
 {
-    [self.loginButton stopIndicator];
+    //[self.loginButton stopIndicator];
     
     [REMAlertHelper alert:error.description];
 }
