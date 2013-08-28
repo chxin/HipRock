@@ -13,11 +13,11 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
-@property (weak, nonatomic) IBOutlet UIButton *gotoLoginButton;
+@property (weak, nonatomic) IBOutlet UIButton *jumpLoginButton;
 
 @property (nonatomic,strong) REMSplashScreenController *splashScreenController;
 
 - (IBAction)pageChanged:(id)sender;
-- (IBAction)gotoLoginButtonTouchDown:(id)sender;
+- (IBAction)jumpLoginButtonTouchDown:(id)sender;
 
 @end

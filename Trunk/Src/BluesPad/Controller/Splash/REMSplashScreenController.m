@@ -35,41 +35,60 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
-    //[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runTimer:) userInfo:nil repeats:NO];
     
     //decide where to go
+    [self recoverAppContext];
     
-    
-    self.logoView.alpha = 0;
-    
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        self.logoView.alpha = 1;
-    } completion:^(BOOL finished){
-        [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.logoView.alpha = 0;
-        } completion:^(BOOL finished) {
-            [self runTimer:nil];
+    if([self isLogin]){
+        [self breathAnimation:nil];
+        __block NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(breathAnimation:) userInfo:nil repeats:YES];
+        
+        [self showBuildingView:^(void){
+            [timer invalidate];
+            timer = nil;
+            
+            [self.logoView setHidden:YES];
+        }];
+    }
+    else{
+        [self breathAnimation:^(void){
+            [self.logoView setHidden:YES];
+            [self showLoginView];
+        }];
+    }
+}
+
+
+-(void)breathAnimation:(void (^)(void))completed
+{
+    self.flashLogo.alpha = 0;
+    [UIView animateWithDuration:1.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.flashLogo.alpha = 0.8;
+    } completion:^(BOOL finished) {
+        self.flashLogo.alpha = 0.8;
+        [UIView animateWithDuration:1.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.flashLogo.alpha = 0;
+        } completion:^(BOOL finished){
+            if(completed!=nil)
+                completed();
         }];
     }];
 }
 
-- (void)runTimer:(id)timer
+-(BOOL)isLogin
+{
+    REMApplicationContext *context = [REMApplicationContext instance];
+    
+    return context.currentUser!=nil && context.currentCustomer!=nil;
+}
+
+-(void)recoverAppContext
 {
     REMUserModel *storedUser = [REMUserModel getCached];
     REMCustomerModel *storedCustomer = [REMCustomerModel getCached];
     
-    if(storedUser!=nil && storedCustomer!=nil)
-    {
-        [[REMApplicationContext instance] setCurrentUser:storedUser];
-        [[REMApplicationContext instance] setCurrentCustomer:storedCustomer];
-        
-        [self showBuildingView:^{}];
-    }
-    else
-    {
-        [self showLoginView];
-    }
+    [[REMApplicationContext instance] setCurrentUser:storedUser];
+    [[REMApplicationContext instance] setCurrentCustomer:storedCustomer];
 }
 
 - (void)showLoginView
@@ -85,15 +104,11 @@
     
     self.carouselController.splashScreenController = self;
     
-    carouselView.frame = CGRectMake(self.view.bounds.origin.x-1024, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height); ;
-    //carouselView.alpha = 0;
+    carouselView.frame = CGRectMake(self.view.bounds.origin.x-1024, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
     
     [UIView animateWithDuration:0.4 animations:^{
-        //carouselView.alpha = 1;
         carouselView.frame = self.view.bounds;
     }];
-    
-    
 }
 
 - (void)showBuildingView:(void (^)(void))loadCompleted
@@ -106,16 +121,14 @@
     buildingStore.maskContainer = nil;
     
     [REMDataAccessor access:buildingStore success:^(id data) {
-        //NSLog(@"building loaded: %d,%@",[data count],data);
-        
         self.buildingOveralls = [[NSMutableArray alloc] initWithCapacity:[data count]];
         for(NSDictionary *item in (NSArray *)data){
             [self.buildingOveralls addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
         }
         
         //test air quality interface
-        
-        loadCompleted();
+        if(loadCompleted!=nil)
+            loadCompleted();
         
         [self performSegueWithIdentifier:@"splashToBuildingSegue" sender:self];
     } error:^(NSError *error, id response) {

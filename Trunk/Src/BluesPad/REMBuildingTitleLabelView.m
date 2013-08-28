@@ -13,6 +13,7 @@
 @property (nonatomic,weak) REMEnergyUsageDataModel *data;
 @property (nonatomic,strong) REMNumberLabel *textLabel;
 @property (nonatomic,strong) UILabel *uomLabel;
+@property (nonatomic,strong) UILabel *emptyLabel;
 
 @end
 
@@ -34,10 +35,37 @@
     return self;
 }
 
+- (void)setEmptyText:(NSString *)emptyText withSize:(CGFloat)size
+{
+    if(self.emptyLabel!=nil){
+        self.emptyLabel.text=emptyText;
+        self.emptyLabel.font=[UIFont fontWithName:@(kBuildingFontSC) size:size];
+    }
+}
 
+- (void)initEmptyTextLabelWithTitleSize:(CGFloat)titleSize withTitleMargin:(CGFloat)margin withLeftMargin:(CGFloat)leftMargin{
+    int marginTop=titleSize+margin ;
+    int fontsize=24;
+    self.emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftMargin, marginTop, 1000, fontsize)];
+    self.emptyLabel.font=[UIFont fontWithName:@(kBuildingFontSC) size:fontsize];
+    self.emptyLabel.textColor=[UIColor lightGrayColor];
+    self.emptyLabel.text=@"无数据";
+    self.emptyLabel.backgroundColor=[UIColor clearColor];
+    self.emptyLabel.shadowOffset=CGSizeMake(1, 1);
+    self.emptyLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+   
+    [self addSubview:self.emptyLabel];
+}
 
 - (void)initTextLabel:(REMEnergyUsageDataModel *)data withTitleSize:(CGFloat)titleSize withTitleMargin:(CGFloat)margin withLeftMargin:(CGFloat)leftMargin withValueFontSize:(CGFloat)valueSize withUomFontSize:(CGFloat) uomSize
 {
+    
+    if(data==nil || data.dataValue==nil){
+        [self initEmptyTextLabelWithTitleSize:titleSize withTitleMargin:margin withLeftMargin:leftMargin];
+        return;
+    }
+    
+    
     int marginTop=titleSize+margin ;
     self.textLabel = [[REMNumberLabel alloc] initWithFrame:CGRectMake(leftMargin, marginTop, 1000, valueSize)];
     self.textLabel.fontSize=@(valueSize);

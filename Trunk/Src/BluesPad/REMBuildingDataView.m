@@ -57,7 +57,8 @@ typedef void(^SuccessCallback)(BOOL success);
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
         btn.titleLabel.textColor=[UIColor whiteColor];
-        btn.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSC) size:11];
+        
+        [btn.titleLabel setFont:[UIFont fontWithName:@(kBuildingFontSCRegular) size:12]];
         NSString *str = [self retrieveCommodityImageName:model.commodity];
         btn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentCenter;
         btn.showsTouchWhenHighlighted=YES;
@@ -65,12 +66,13 @@ typedef void(^SuccessCallback)(BOOL success);
         
         btn.titleEdgeInsets=UIEdgeInsetsMake(41, 0, 0, 0);
         btn.titleLabel.textAlignment=NSTextAlignmentCenter;
-        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",str] ] forState:UIControlStateNormal];
-        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed",str]] forState:UIControlStateSelected];
+        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal.png",str] ] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed.png",str]] forState:UIControlStateSelected];
         if(i==0){
             [btn setSelected:YES];
         }
-        
+        //btn.layer.borderColor=[UIColor whiteColor].CGColor;
+        //btn.layer.borderWidth=1;
         
         [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [array addObject:btn];
@@ -80,18 +82,23 @@ typedef void(^SuccessCallback)(BOOL success);
         
         REMAirQualityModel *model = self.buildingInfo.airQuality;
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
-        btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
+        
         btn.tag=i;
-        btn.layer.masksToBounds=NO;
         NSString *str = [self retrieveCommodityImageName:model.commodity];
         btn.imageView.contentMode=UIViewContentModeScaleToFill;
         btn.showsTouchWhenHighlighted=YES;
         btn.adjustsImageWhenHighlighted=YES;
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
-        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",str]] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed",str]] forState:UIControlStateSelected];
+        
+        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal.png",str]]forState:UIControlStateNormal];
+       [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed.png",str]] forState:UIControlStateSelected];
+        
         
         [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        //btn.layer.borderColor=[UIColor whiteColor].CGColor;
+        //btn.layer.borderWidth=1;
         [array addObject:btn];
     }
     
@@ -103,10 +110,23 @@ typedef void(^SuccessCallback)(BOOL success);
 - (void)initCommodityButton
 {
     self.buttonArray=[self retrieveButtons];
+    
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.buttonArray.count*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), kBuildingCommodityButtonDimension)];
+    
     for (int i=0; i<self.buttonArray.count; ++i) {
         UIButton *btn = self.buttonArray[i];
-        [self addSubview:btn];
+        [view addSubview:btn];
     }
+    
+    //view.layer.borderWidth=1;
+    //view.layer.borderColor=[UIColor whiteColor].CGColor;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]init];
+    
+    [view addGestureRecognizer:tap];
+    
+    [self addSubview:view];
+
 }
 
 
@@ -153,6 +173,7 @@ typedef void(^SuccessCallback)(BOOL success);
         }
     }
     int to = button.tag;
+    self.currentIndex=to;
     REMBuildingCommodityView *view=    self.commodityViewArray[to];
     view.alpha=1;
     REMBuildingCommodityView *currentView= self.commodityViewArray[current];

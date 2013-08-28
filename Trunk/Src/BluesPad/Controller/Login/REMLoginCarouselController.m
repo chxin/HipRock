@@ -20,9 +20,25 @@
 
 @implementation REMLoginCarouselController
 
-static NSInteger subViewWidth = 550;
-static NSInteger subViewHeight = 580;
-static NSInteger viewsDistance = 150;
+const NSInteger kSlideImageCount = 3;
+const NSInteger kScreenWidth = 1024;
+const NSInteger kSubViewWidth = 500;
+const NSInteger kSubViewHeight = 350;
+const NSInteger kSubViewDistance = kScreenWidth - kSubViewWidth;
+const NSInteger kImagePaddingTop = 84;
+const CGFloat kBackgroundLeftShadowOffset = 20;
+const CGFloat kBackgroundRightShadownOffset = kBackgroundLeftShadowOffset;
+const CGFloat kBackgroundTopShadowOffset = 4;
+const CGFloat kBackgroundBottomShadowOffset = 35;
+const CGFloat kBackgroundBorderThickness = 12;
+const CGFloat kBackgroundHorizontalShadownWidth = kBackgroundLeftShadowOffset + kBackgroundRightShadownOffset;
+const CGFloat kBackgroundVerticalShadowWidth = kBackgroundTopShadowOffset + kBackgroundBottomShadowOffset;
+const CGFloat kBackgroundLeftContentOffset = kBackgroundLeftShadowOffset + kBackgroundBorderThickness;
+const CGFloat kBackgroundRightContentOffset = kBackgroundRightShadownOffset + kBackgroundBorderThickness;
+const CGFloat kBackgroundTopContentOffset = kBackgroundTopShadowOffset + kBackgroundBorderThickness;
+const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + kBackgroundBorderThickness;
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,87 +59,90 @@ static NSInteger viewsDistance = 150;
     self.loginPageController.loginCarouselController = self;
 
     [self initialize];
+    [self stylize];
 }
 
-- (void) initialize
+- (void)initialize
 {
     [self.scrollView setDelegate:self];
-    self.scrollView.frame = CGRectMake((1024-subViewWidth+viewsDistance)/2, 50, subViewWidth+viewsDistance, subViewHeight);
+    self.scrollView.frame = CGRectMake((kScreenWidth-kSubViewWidth+kSubViewDistance)/2, 50, kSubViewWidth+kSubViewDistance, kSubViewHeight);
     
-    NSInteger viewOffset = viewsDistance/2;
+    NSInteger viewOffset = kSubViewDistance/2;
     
-    for(int i=0;i<=3;i++)
+    for(int i=0;i<kSlideImageCount + 1;i++)
     {
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(viewOffset, 0, subViewWidth, subViewHeight)];
+        UIView *backgroundView = [self makeBackgroundView:viewOffset];
         
-        CGRect frame = view.bounds;
+        UIView *slideView = i<kSlideImageCount?[self makeImageView:i]:self.loginPageController.view;
         
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"preface-s%d.png", i]]];
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        imageView.frame = frame;
-        //make image view round bordered
-        imageView.layer.masksToBounds = YES;
-        imageView.layer.cornerRadius = 15;
+        CGRect viewFrame = CGRectMake(kBackgroundLeftContentOffset, kBackgroundTopContentOffset, kSubViewWidth, kSubViewHeight);
+        [slideView setFrame:viewFrame];
+        
+        [backgroundView addSubview:slideView];
+        
+        [self.scrollView addSubview:backgroundView];
         
         
-        [view addSubview:imageView];
         
-        [self.scrollView addSubview:view];
-        
-        viewOffset += view.frame.size.width + viewsDistance;
+        viewOffset += kSubViewWidth + kSubViewDistance;
     }
     
-    UIView *loginView = self.loginPageController.view;
-    loginView.frame = CGRectMake(viewOffset, 0, subViewWidth, subViewHeight);
-    
-    
-    [self.scrollView addSubview:loginView];
-    
-    [self setScrollPageViewStyle];
-    
+    self.scrollView.backgroundColor = [UIColor redColor];
     self.pageControl.currentPage = 0;
     self.pageControl.numberOfPages = self.scrollView.subviews.count;
     
     int viewCount = self.scrollView.subviews.count;
-    int contentWidth = viewCount*(subViewWidth+viewsDistance);
-    
+    int contentWidth = viewCount*kScreenWidth;
     
     self.scrollView.contentSize = CGSizeMake(contentWidth, self.scrollView.bounds.size.height);
-    self.scrollView.contentOffset = CGPointMake(viewOffset-viewsDistance/2, 0);
-    
+    self.scrollView.contentOffset = CGPointMake(viewOffset-kSubViewDistance/2, 0);
     
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(initializationCarousel) userInfo:nil repeats:NO];
 }
 
+- (void)stylize
+{
+    [self styleJumpLoginButton];
+}
+
+-(UIView *)makeBackgroundView:(CGFloat)offset
+{
+    UIImage *backgroundImage = [[UIImage imageNamed:@"loginpage-background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(53,58,53,58)];
+    
+    
+    CGRect backgroundFrame = CGRectMake(offset-kBackgroundLeftContentOffset, kImagePaddingTop+kBackgroundTopContentOffset, kSubViewWidth+kBackgroundLeftContentOffset + kBackgroundRightContentOffset, kSubViewHeight+kBackgroundTopContentOffset + kBackgroundBottomContentOffset);
+    
+    UIImageView *backgroundView = [[UIImageView alloc] initWithFrame:backgroundFrame];
+    [backgroundView setImage:backgroundImage];
+    [backgroundView setBackgroundColor:[UIColor blueColor]];
+    
+    return backgroundView;
+}
+
+-(UIView *)makeImageView:(int)index
+{
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"preface-s%d.png", index]]];
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    
+    
+    return imageView;
+}
+
 - (void)initializationCarousel
 {
-    CGRect rect = CGRectMake(0, 0, subViewWidth+viewsDistance, subViewHeight);
+    CGRect rect = CGRectMake(0, 0, kSubViewWidth+kSubViewDistance, kSubViewHeight);
     [UIView animateWithDuration:2 animations:^(void){
         [self.scrollView scrollRectToVisible:rect animated:NO];
     }];
 }
 
-- (void) setScrollPageViewStyle
-{
-    for(UIView *view in self.scrollView.subviews)
-    {
-        //view.layer.borderColor = [[UIColor alloc] initWithWhite:0.5 alpha:1].CGColor;
-        //view.layer.borderWidth = 8;
-        
-        view.layer.cornerRadius = 15;
-        view.layer.shadowColor = [UIColor blackColor].CGColor;
-        view.layer.shadowOffset = CGSizeMake(0,0);
-        view.layer.shadowOpacity = 1;
-        view.layer.shadowRadius = 15;
-    }
-}
 
 - (IBAction)pageChanged:(id)sender {
     UIPageControl *pager = (UIPageControl *)sender;
     [self showPage:pager.currentPage];
 }
 
-- (IBAction)gotoLoginButtonTouchDown:(id)sender {
+- (IBAction)jumpLoginButtonTouchDown:(id)sender {
     [self showPage:self.scrollView.subviews.count-1];
 }
 
@@ -132,12 +151,26 @@ static NSInteger viewsDistance = 150;
     if(page<0 || page>=self.scrollView.subviews.count)
         return;
     
-    int offset = (subViewWidth + viewsDistance) * page;
+    int offset = (kSubViewWidth + kSubViewDistance) * page;
     
     CGRect visiableZone = self.scrollView.bounds;
     visiableZone.origin = CGPointMake(offset, self.scrollView.contentOffset.y);
     
     [self.scrollView scrollRectToVisible:visiableZone animated:YES];
+}
+
+- (void)styleJumpLoginButton
+{
+    UIImage *normalStateImage = [[UIImage imageNamed:@"jumplogin-normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(12, 18, 24, 18)];
+    UIImage *pressedStateImage = [[UIImage imageNamed:@"jumplogin-pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(12, 18, 24, 18)];
+    
+    [self.jumpLoginButton setBackgroundImage:normalStateImage forState:UIControlStateNormal];
+    [self.jumpLoginButton setBackgroundImage:pressedStateImage forState:UIControlStateHighlighted];
+    
+    
+    //[self.jumpLoginButton setBackgroundColor:[UIColor redColor]];
+    
+//    self.jumpLoginButton set
 }
 
 - (void)didReceiveMemoryWarning
@@ -156,9 +189,9 @@ static NSInteger viewsDistance = 150;
 
     [self.pageControl setCurrentPage:page];
     if(page == self.pageControl.numberOfPages-1)
-        [self.gotoLoginButton setEnabled:NO];
+        [self.jumpLoginButton setEnabled:NO];
     if(page==0 || page == self.pageControl.numberOfPages-2)
-        [self.gotoLoginButton setEnabled:YES];
+        [self.jumpLoginButton setEnabled:YES];
 }
 
 @end
