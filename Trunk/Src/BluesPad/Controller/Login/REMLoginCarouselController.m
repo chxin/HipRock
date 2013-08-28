@@ -25,11 +25,11 @@ const NSInteger kSubViewWidth = 500;
 const NSInteger kSubViewHeight = 350;
 const NSInteger kSubViewDistance = kScreenWidth - kSubViewWidth;
 const NSInteger kImagePaddingTop = 84;
-const CGFloat kBackgroundLeftShadowOffset = 20;
+const CGFloat kBackgroundLeftShadowOffset = 10;
 const CGFloat kBackgroundRightShadownOffset = kBackgroundLeftShadowOffset;
-const CGFloat kBackgroundTopShadowOffset = 4;
-const CGFloat kBackgroundBottomShadowOffset = 35;
-const CGFloat kBackgroundBorderThickness = 12;
+const CGFloat kBackgroundTopShadowOffset = 2;
+const CGFloat kBackgroundBottomShadowOffset = 18;
+const CGFloat kBackgroundBorderThickness = 6;
 const CGFloat kBackgroundHorizontalShadownWidth = kBackgroundLeftShadowOffset + kBackgroundRightShadownOffset;
 const CGFloat kBackgroundVerticalShadowWidth = kBackgroundTopShadowOffset + kBackgroundBottomShadowOffset;
 const CGFloat kBackgroundLeftContentOffset = kBackgroundLeftShadowOffset + kBackgroundBorderThickness;
@@ -106,7 +106,7 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 
 -(UIView *)makeBackgroundView:(CGFloat)offset
 {
-    UIImage *backgroundImage = [[UIImage imageNamed:@"SlidePageBackground.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(53,58,53,58)];
+    UIImage *backgroundImage = [[UIImage imageNamed:@"SlidePageBackground.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(9,21,26,21)];
     
     
     CGRect backgroundFrame = CGRectMake(offset-kBackgroundLeftContentOffset, kImagePaddingTop+kBackgroundTopContentOffset, kSubViewWidth+kBackgroundLeftContentOffset + kBackgroundRightContentOffset, kSubViewHeight+kBackgroundTopContentOffset + kBackgroundBottomContentOffset);
