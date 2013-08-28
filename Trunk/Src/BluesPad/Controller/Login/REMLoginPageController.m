@@ -29,6 +29,8 @@
     
     //self.loginButton.loadingText = @"正在登录...";
     
+    [self stylize];
+    
     [self.userNameTextField setDelegate:self];
     [self.passwordTextField setDelegate:self];
 }
@@ -188,4 +190,35 @@
     }
     return retValue;
 }
+
+#pragma mark - style
+-(void)stylize
+{
+    [self styleLoginButton];
+    [self styleTextField];
+}
+
+-(void)styleLoginButton
+{
+    UIEdgeInsets imageInsets = UIEdgeInsetsMake(0, 6.0, 0, 6.0);
+    UIImage *normalImage = [[UIImage imageNamed:@"Login-Normal.png"] resizableImageWithCapInsets:imageInsets];
+    UIImage *pressedImage = [[UIImage imageNamed:@"Login-Pressed.png"] resizableImageWithCapInsets:imageInsets];
+    UIImage *disabledImage = [[UIImage imageNamed:@"Login-Disable.png"] resizableImageWithCapInsets:imageInsets];
+    
+    [self.loginButton setBackgroundImage:normalImage forState:UIControlStateNormal];
+    [self.loginButton setBackgroundImage:pressedImage forState:UIControlStateHighlighted];
+    [self.loginButton setBackgroundImage:disabledImage forState:UIControlStateDisabled];
+}
+
+-(void)styleTextField
+{
+    UIEdgeInsets imageInsets = UIEdgeInsetsMake(0,8.0, 0, 8.0);
+    UIImage *normalImage = [[UIImage imageNamed:@"LoginTextField.png"] resizableImageWithCapInsets:imageInsets];
+    UIImage *focusedImage = [[UIImage imageNamed:@"LoginTextField-Focus.png"] resizableImageWithCapInsets:imageInsets];
+    
+    [self.userNameTextField setBackgroundColor:[UIColor clearColor]];
+    [self.userNameTextField setBackground:normalImage];
+    [self.passwordTextField setBackground:normalImage];
+}
+
 @end

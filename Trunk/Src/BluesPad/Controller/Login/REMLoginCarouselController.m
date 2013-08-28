@@ -160,11 +160,15 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 
 - (void)styleJumpLoginButton
 {
-    UIImage *normalStateImage = [[UIImage imageNamed:@"jumplogin-normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(12, 18, 24, 18)];
-    UIImage *pressedStateImage = [[UIImage imageNamed:@"jumplogin-pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(12, 18, 24, 18)];
+    //UIEdgeInsetsMake(top, left, bottom, right);
+    UIEdgeInsets imageInsets = UIEdgeInsetsMake(0, 12.0, 0, 12.0);
+    
+    UIImage *normalStateImage = [[UIImage imageNamed:@"JumpLogin-Normal.png"] resizableImageWithCapInsets:imageInsets];
+    UIImage *pressedStateImage = [[UIImage imageNamed:@"JumpLogin-Pressed.png"] resizableImageWithCapInsets:imageInsets];
     
     [self.jumpLoginButton setBackgroundImage:normalStateImage forState:UIControlStateNormal];
     [self.jumpLoginButton setBackgroundImage:pressedStateImage forState:UIControlStateHighlighted];
+    
     
     
     //[self.jumpLoginButton setBackgroundColor:[UIColor redColor]];

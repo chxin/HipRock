@@ -412,6 +412,10 @@
 		7A399EA4177D279900F0EB9F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A399EA2177D279900F0EB9F /* InfoPlist.strings */; };
 		7A3DDCDA1786C05B008A1033 /* REMServiceAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */; };
 		7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDC1786C195008A1033 /* REMMaskManager.m */; };
+		7A48B47817CDDD03002DA386 /* LoginTextField-Focus.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B47417CDDD03002DA386 /* LoginTextField-Focus.png */; };
+		7A48B47917CDDD03002DA386 /* LoginTextField-Focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B47517CDDD03002DA386 /* LoginTextField-Focus@2x.png */; };
+		7A48B47A17CDDD03002DA386 /* LoginTextField.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B47617CDDD03002DA386 /* LoginTextField.png */; };
+		7A48B47B17CDDD03002DA386 /* LoginTextField@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B47717CDDD03002DA386 /* LoginTextField@2x.png */; };
 		7A5277F617AF4209007DA735 /* REMIndicatorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5277F517AF4209007DA735 /* REMIndicatorButton.m */; };
 		7A5DBD28178FD014006C4EDE /* REMDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD27178FD014006C4EDE /* REMDataAccessor.m */; };
 		7A5DBD2B178FD034006C4EDE /* REMDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD2A178FD034006C4EDE /* REMDataStore.m */; };
@@ -774,6 +778,10 @@
 		7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceAgent.m; path = Common/Communication/REMServiceAgent.m; sourceTree = "<group>"; };
 		7A3DDCDB1786C195008A1033 /* REMMaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMaskManager.h; path = Common/Utility/REMMaskManager.h; sourceTree = "<group>"; };
 		7A3DDCDC1786C195008A1033 /* REMMaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMaskManager.m; path = Common/Utility/REMMaskManager.m; sourceTree = "<group>"; };
+		7A48B47417CDDD03002DA386 /* LoginTextField-Focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginTextField-Focus.png"; sourceTree = "<group>"; };
+		7A48B47517CDDD03002DA386 /* LoginTextField-Focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginTextField-Focus@2x.png"; sourceTree = "<group>"; };
+		7A48B47617CDDD03002DA386 /* LoginTextField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginTextField.png; sourceTree = "<group>"; };
+		7A48B47717CDDD03002DA386 /* LoginTextField@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginTextField@2x.png"; sourceTree = "<group>"; };
 		7A5277F417AF4209007DA735 /* REMIndicatorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMIndicatorButton.h; sourceTree = "<group>"; };
 		7A5277F517AF4209007DA735 /* REMIndicatorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMIndicatorButton.m; sourceTree = "<group>"; };
 		7A5DBD27178FD014006C4EDE /* REMDataAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataAccessor.m; path = Common/DataAccess/REMDataAccessor.m; sourceTree = "<group>"; };
@@ -1965,6 +1973,10 @@
 		7ACFCBCA17CDA62E00811976 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				7A48B47417CDDD03002DA386 /* LoginTextField-Focus.png */,
+				7A48B47517CDDD03002DA386 /* LoginTextField-Focus@2x.png */,
+				7A48B47617CDDD03002DA386 /* LoginTextField.png */,
+				7A48B47717CDDD03002DA386 /* LoginTextField@2x.png */,
 				7ACFCBCB17CDA62E00811976 /* JumpLogin-Normal.png */,
 				7ACFCBCC17CDA62E00811976 /* JumpLogin-Normal@2x.png */,
 				7ACFCBCD17CDA62E00811976 /* JumpLogin-Pressed.png */,
@@ -2253,6 +2265,10 @@
 				7ACFCC1817CDA62E00811976 /* SplashScreenBackgroud.jpg in Resources */,
 				7ACFCC1917CDA62E00811976 /* SplashScreenBackgroud@2x.jpg in Resources */,
 				7ACFCC1A17CDA62E00811976 /* SplashScreenLogo-common.png in Resources */,
+				7A48B47817CDDD03002DA386 /* LoginTextField-Focus.png in Resources */,
+				7A48B47917CDDD03002DA386 /* LoginTextField-Focus@2x.png in Resources */,
+				7A48B47A17CDDD03002DA386 /* LoginTextField.png in Resources */,
+				7A48B47B17CDDD03002DA386 /* LoginTextField@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
