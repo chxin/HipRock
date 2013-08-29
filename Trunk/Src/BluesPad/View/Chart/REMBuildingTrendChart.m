@@ -14,7 +14,7 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    const int buttonHeight = 30;
+    const int buttonHeight = 15;
     const int buttonWidth = 70;
     const int buttonMargin = 5;
     if (self) {
@@ -27,9 +27,10 @@
         self.lastYearButton = [self makeButton:@"去年" rect:CGRectMake((buttonMargin + buttonWidth)*5,0,buttonWidth,buttonHeight)];
         
         CPTGraphHostingView *hostView = [[CPTGraphHostingView alloc]initWithFrame:CGRectMake(0, buttonHeight, self.frame.size.width, self.frame.size.height - buttonHeight)];
-        
+//        hostView.backgroundColor = [UIColor redColor];
         CPTXYGraph *graph=[[CPTXYGraph alloc]initWithFrame:frame];
         hostView.hostedGraph=graph;
+//        graph.backgroundColor = [UIColor greenColor].CGColor;
         self.hostView = hostView;
         
         [self addSubview:self.hostView];
