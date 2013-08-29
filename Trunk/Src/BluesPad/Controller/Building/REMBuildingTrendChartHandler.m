@@ -41,9 +41,9 @@
         self.graph.defaultPlotSpace.allowsUserInteraction = NO;
         
         self.graph.plotAreaFrame.paddingTop=0.0f;
-        self.graph.plotAreaFrame.paddingRight=10.0f;
-        self.graph.plotAreaFrame.paddingBottom=10.0f;
-        self.graph.plotAreaFrame.paddingLeft=40.0f;
+        self.graph.plotAreaFrame.paddingRight=0.0f;
+        self.graph.plotAreaFrame.paddingBottom=0.0f;
+        self.graph.plotAreaFrame.paddingLeft=0.0f;
         
         CPTMutableLineStyle *hiddenLineStyle = [CPTMutableLineStyle lineStyle];
         hiddenLineStyle.lineWidth = 0;
@@ -65,11 +65,12 @@
         y.majorTickLineStyle = hiddenLineStyle;
         y.minorTickLineStyle = hiddenLineStyle;
         y.axisLineStyle = xTickStyle;
-        y.labelAlignment = CPTAlignmentBottom;
+        y.labelAlignment = CPTAlignmentMiddle;
         y.labelTextStyle = labelStyle;
         CPTMutableLineStyle *gridLineStyle=[[CPTMutableLineStyle alloc]init];
-        gridLineStyle.lineWidth=1.0f;
-        gridLineStyle.lineColor=[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];;
+        gridLineStyle.dashPattern=[NSArray arrayWithObjects:[NSDecimalNumber numberWithInt:1],[NSDecimalNumber numberWithInt:1],nil];
+        gridLineStyle.lineColor=[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
+        x.majorGridLineStyle = gridLineStyle;
         y.majorGridLineStyle = gridLineStyle;
         x.plotSpace = self.graph.defaultPlotSpace;
         y.plotSpace = self.graph.defaultPlotSpace;
@@ -154,39 +155,9 @@
     labelStyle.color = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
     
     NSString* dateFormat = nil;
-    int countOfX = 0;    // Max x value in datasource
+//    int countOfX = 0;    // Max x value in datasource
     double maxY = INT64_MIN;    // Max y value of display points
     double minY = INT64_MAX;    // Min y value of display points
-    
-    if (t == Today || t == Yesterday) {
-        dateFormat = @"%d点";
-        countOfX = 24;
-    } else if (t == ThisMonth || t == LastMonth) {
-        dateFormat = @"%d日";
-        NSDate *today = [[NSDate alloc] init];
-        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        if (t == LastMonth) {
-            NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
-            [offsetComponents setMonth: -1];
-            today = [gregorian dateByAddingComponents:offsetComponents toDate:today options:0];
-        }
-        NSRange range = [gregorian rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:today];
-        countOfX = range.length;
-    } else {
-        dateFormat = @"%d月";
-        countOfX = 12;
-    }
-    NSMutableArray *locations = [[NSMutableArray alloc]initWithCapacity: countOfX - 1];
-    NSMutableArray *tickLocations = [[NSMutableArray alloc]initWithCapacity: countOfX - 1];
-    for (int i = 0; i < countOfX; i++) {
-        if (t == Today || t == Yesterday) {
-            [locations addObject:[self makeXLabel:[NSString stringWithFormat:dateFormat, i] location:i labelStyle:labelStyle]];
-        } else {
-            [locations addObject:[self makeXLabel:[NSString stringWithFormat:dateFormat, i + 1] location:i labelStyle:labelStyle]];
-        }
-        [tickLocations addObject:[NSNumber numberWithInt:i]];
-    }
-    
     NSMutableArray* data = [[self.datasource objectAtIndex:currentSourceIndex] objectForKey:@"data"];
     for (int j = 0; j < data.count; j++) {
         float y = [[data[j] objectForKey:@"y" ] floatValue];
@@ -194,16 +165,68 @@
         minY = MIN(minY, y);
     }
     
+    if (t == Today || t == Yesterday) {
+        dateFormat = @"%d点";
+//        countOfX = 24;
+    } else if (t == ThisMonth || t == LastMonth) {
+        dateFormat = @"%d日";
+//        NSDate *today = [[NSDate alloc] init];
+//        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+//        if (t == LastMonth) {
+//            NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+//            [offsetComponents setMonth: -1];
+//            today = [gregorian dateByAddingComponents:offsetComponents toDate:today options:0];
+//        }
+//        NSRange range = [gregorian rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:today];
+//        countOfX = range.length;
+    } else {
+        dateFormat = @"%d月";
+//        countOfX = 12;
+    }
+    
+    int xStep = 0;
+    if (data.count < 20) {
+        xStep = 1;
+    } else {
+        xStep = 2;
+    }
+    NSMutableArray *xlocations = [[NSMutableArray alloc]init];
+    NSMutableArray *xtickLocations = [[NSMutableArray alloc]init];
+    for (int i = 0; i < data.count; i = i + xStep) {
+        if (t == Today || t == Yesterday) {
+            [xlocations addObject:[self makeXLabel:[NSString stringWithFormat:dateFormat, i] location:i labelStyle:labelStyle]];
+        } else {
+            [xlocations addObject:[self makeXLabel:[NSString stringWithFormat:dateFormat, i + 1] location:i labelStyle:labelStyle]];
+        }
+        [xtickLocations addObject:[NSNumber numberWithInt:i]];
+    }
+    NSMutableArray *ylocations = [[NSMutableArray alloc]init];
+    NSMutableArray *ytickLocations = [[NSMutableArray alloc]init];
+    
+    for (int i = minY; i < maxY; i = i + 5) {
+        
+        CPTAxisLabel *label = [[CPTAxisLabel alloc]initWithText:[NSString stringWithFormat:@"%d", i] textStyle:labelStyle];
+        label.tickLocation= CPTDecimalFromInt(i);
+        
+        [ylocations addObject:label];
+        [ytickLocations addObject:[NSNumber numberWithInt:i]];
+    }
+    
+    
+    
     CPTXYAxisSet *axisSet = (CPTXYAxisSet*)self.graph.axisSet;
     CPTXYAxis* x = axisSet.xAxis;
     CPTXYAxis* y = axisSet.yAxis;
     CPTXYPlotSpace * plotSpace = (CPTXYPlotSpace *)self.graph.defaultPlotSpace;
     
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(countOfX - 1)];
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(data.count - 1)];
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(minY) length:CPTDecimalFromFloat(maxY - minY)];
-    x.axisLabels = [NSSet setWithArray:locations];
-    x.majorTickLocations=[NSSet setWithArray:tickLocations];
+    x.axisLabels = [NSSet setWithArray:xlocations];
+    x.majorTickLocations=[NSSet setWithArray:xtickLocations];
+    x.majorIntervalLength = CPTDecimalFromInt(xStep);
     
+    y.axisLabels = [NSSet setWithArray:ylocations];
+    y.majorTickLocations=[NSSet setWithArray:ytickLocations];
     y.majorIntervalLength = CPTDecimalFromFloat((maxY - minY) / 5);
     
     CPTScatterPlot* scatterPlot = nil;
@@ -213,15 +236,14 @@
         CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];
         labelStyle.color = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
         CPTMutableLineStyle* scatterStyle = [CPTMutableLineStyle lineStyle];
-        scatterStyle.lineColor = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
+        scatterStyle.lineColor = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:.7];
         scatterStyle.lineWidth = 1;
         scatterPlot.labelTextStyle = labelStyle;
         
-        CPTPlotSymbol *symbol = [CPTPlotSymbol diamondPlotSymbol];
+        CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
         symbol.lineStyle=scatterStyle;
+        symbol.size = CGSizeMake(8.0, 8.0);
         symbol.fill= [CPTFill fillWithColor:scatterStyle.lineColor];
-        
-        symbol.size=CGSizeMake(7.0, 7.0);
         scatterPlot.plotSymbol=symbol;
         
         scatterPlot.dataLineStyle = scatterStyle;
@@ -233,10 +255,12 @@
         scatterPlot.delegate = self;
         scatterPlot.dataSource = self;
         
+        //self.graph.plotAreaFrame.paddingLeft=100.0f;
         [myView.hostView.hostedGraph addPlot:scatterPlot];
     } else {
         scatterPlot = [self.graph.allPlots objectAtIndex:0];
         [scatterPlot reloadData];
+        //self.graph.plotAreaFrame.paddingLeft=100.0f;
         [myView.hostView.hostedGraph reloadData];
     }
 }
@@ -308,6 +332,9 @@
                 [data addObject:@{@"y": [[NSDecimalNumber alloc]initWithDecimal: pointData.dataValue], @"x": pointData.localTime  }];
             }
             [series setValue:data forKey:@"data"];
+            REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
+            [myView.todayButton setOn:YES];
+            [self intervalChanged:myView.todayButton];
             loadCompleted();
         }
     };
@@ -366,7 +393,7 @@
     
     NSDictionary *item=data[idx];
     if (fieldEnum == CPTPieChartFieldSliceWidth) {
-        NSDate* date = [item objectForKey:@"x"];
+//        NSDate* date = [item objectForKey:@"x"];
 //        return [NSNumber numberWithDouble:[date timeIntervalSince1970]];
         return [NSNumber numberWithInteger: idx];
     }
