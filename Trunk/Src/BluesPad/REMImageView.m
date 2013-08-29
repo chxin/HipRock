@@ -129,7 +129,6 @@
 - (void)initSettingButton{
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
     [btn setImage:[UIImage imageNamed:@"Menu_normal.png"] forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:@"Menu_pressed.png"] forState:UIControlStateSelected];
     btn.adjustsImageWhenHighlighted=YES;
     btn.showsTouchWhenHighlighted=YES;
     btn.titleLabel.text=@"设置";

@@ -10,7 +10,6 @@
 #import "REMLoginCarouselController.h"
 #import "REMAlertHelper.h"
 #import "REMLoginPageController.h"
-#import "REMColoredButton.h"
 
 @interface REMLoginCarouselController ()
 
@@ -26,11 +25,11 @@ const NSInteger kSubViewWidth = 500;
 const NSInteger kSubViewHeight = 350;
 const NSInteger kSubViewDistance = kScreenWidth - kSubViewWidth;
 const NSInteger kImagePaddingTop = 84;
-const CGFloat kBackgroundLeftShadowOffset = 20;
+const CGFloat kBackgroundLeftShadowOffset = 10;
 const CGFloat kBackgroundRightShadownOffset = kBackgroundLeftShadowOffset;
-const CGFloat kBackgroundTopShadowOffset = 4;
-const CGFloat kBackgroundBottomShadowOffset = 35;
-const CGFloat kBackgroundBorderThickness = 12;
+const CGFloat kBackgroundTopShadowOffset = 2;
+const CGFloat kBackgroundBottomShadowOffset = 18;
+const CGFloat kBackgroundBorderThickness = 6;
 const CGFloat kBackgroundHorizontalShadownWidth = kBackgroundLeftShadowOffset + kBackgroundRightShadownOffset;
 const CGFloat kBackgroundVerticalShadowWidth = kBackgroundTopShadowOffset + kBackgroundBottomShadowOffset;
 const CGFloat kBackgroundLeftContentOffset = kBackgroundLeftShadowOffset + kBackgroundBorderThickness;
@@ -107,7 +106,7 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 
 -(UIView *)makeBackgroundView:(CGFloat)offset
 {
-    UIImage *backgroundImage = [[UIImage imageNamed:@"loginpage-background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(53,58,53,58)];
+    UIImage *backgroundImage = [[UIImage imageNamed:@"SlidePageBackground.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(9,21,26,21)];
     
     
     CGRect backgroundFrame = CGRectMake(offset-kBackgroundLeftContentOffset, kImagePaddingTop+kBackgroundTopContentOffset, kSubViewWidth+kBackgroundLeftContentOffset + kBackgroundRightContentOffset, kSubViewHeight+kBackgroundTopContentOffset + kBackgroundBottomContentOffset);
@@ -120,7 +119,7 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 
 -(UIView *)makeImageView:(int)index
 {
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"preface-s%d.png", index]]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Propaganda_%d.jpg", index+1]]];
     imageView.contentMode = UIViewContentModeScaleToFill;
     
     
@@ -160,11 +159,15 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 
 - (void)styleJumpLoginButton
 {
-    UIImage *normalStateImage = [[UIImage imageNamed:@"jumplogin-normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(12, 18, 24, 18)];
-    UIImage *pressedStateImage = [[UIImage imageNamed:@"jumplogin-pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(12, 18, 24, 18)];
+    //UIEdgeInsetsMake(top, left, bottom, right);
+    UIEdgeInsets imageInsets = UIEdgeInsetsMake(0, 12.0, 0, 12.0);
+    
+    UIImage *normalStateImage = [[UIImage imageNamed:@"JumpLogin-Normal.png"] resizableImageWithCapInsets:imageInsets];
+    UIImage *pressedStateImage = [[UIImage imageNamed:@"JumpLogin-Pressed.png"] resizableImageWithCapInsets:imageInsets];
     
     [self.jumpLoginButton setBackgroundImage:normalStateImage forState:UIControlStateNormal];
     [self.jumpLoginButton setBackgroundImage:pressedStateImage forState:UIControlStateHighlighted];
+    
     
     
     //[self.jumpLoginButton setBackgroundColor:[UIColor redColor]];
