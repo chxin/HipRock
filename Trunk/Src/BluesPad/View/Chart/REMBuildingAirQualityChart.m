@@ -37,7 +37,7 @@
     self.hostView.hostedGraph.plotAreaFrame.paddingTop=0.0f;
     self.hostView.hostedGraph.plotAreaFrame.paddingRight=0.0f;
     self.hostView.hostedGraph.plotAreaFrame.paddingBottom=0.0f;
-    self.hostView.hostedGraph.plotAreaFrame.paddingLeft=0.0f;
+    self.hostView.hostedGraph.plotAreaFrame.paddingLeft=38.0f;
     self.hostView.hostedGraph.plotAreaFrame.masksToBorder = YES;
 }
 

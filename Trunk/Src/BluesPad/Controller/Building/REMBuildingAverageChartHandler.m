@@ -65,8 +65,7 @@
 }
 
 -(void)longPressedAt:(NSDate*)x {
-    NSLog(@"%@",[x description]);
-    
+        
     //determin x date
     NSTimeInterval pressingPoint = [x timeIntervalSince1970];
     NSArray *unitData = [self.chartData[0] objectForKey:@"data"];

@@ -65,7 +65,7 @@
     store.maskContainer = self.view;
     
     [REMDataAccessor access:store success:^(id data) {
-        NSLog(@"air success!");
+        //NSLog(@"air success!");
         
         self.airQualityData = [[REMAirQualityDataModel alloc] initWithDictionary:data];
         
@@ -75,7 +75,7 @@
             [self loadChart];
         }
     } error:^(NSError *error, id response) {
-        NSLog(@"air fail! %@",error);
+        //NSLog(@"air fail! %@",error);
     }];
 }
 
