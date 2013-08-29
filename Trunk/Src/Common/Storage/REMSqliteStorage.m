@@ -22,7 +22,7 @@
     
     [self openDatabase];
     int sqlStatus = sqlite3_prepare_v2(db, [sqlCmd UTF8String], -1, &statement, NULL);
-    NSLog(@"INSERT SQL STATEMENT PREPARATION CODE - %d", sqlStatus);
+    //NSLog(@"INSERT SQL STATEMENT PREPARATION CODE - %d", sqlStatus);
     if (sqlStatus == SQLITE_OK)
     {
         sqlite3_bind_text(statement, 1, [sourceName UTF8String], -1, NULL);
@@ -33,7 +33,7 @@
         sqlStatus = sqlite3_step(statement);
         if (sqlStatus != SQLITE_DONE) {
             NSAssert(NO, @"INSERT ERROR");
-            NSLog(@"INSERT SQL STATEMENT RUN ERROR. DB CODE - %d", sqlStatus);
+            //NSLog(@"INSERT SQL STATEMENT RUN ERROR. DB CODE - %d", sqlStatus);
         }
     }
     sqlite3_finalize(statement);
@@ -48,7 +48,7 @@
     
     [self openDatabase];
     int sqlStatus = sqlite3_prepare_v2(db, [sqlCmd UTF8String], -1, &statement, NULL);
-    NSLog(@"QUERY SQL STATEMENT PREPARATION CODE - %d", sqlStatus);
+    //NSLog(@"QUERY SQL STATEMENT PREPARATION CODE - %d", sqlStatus);
     NSDictionary *dictionary = nil;
     if (sqlStatus == SQLITE_OK)
     {
@@ -91,7 +91,7 @@
     }
     else
     {
-        NSLog(@"%@",[[NSString alloc]initWithUTF8String:sqlite3_errmsg(db)]);
+        //NSLog(@"%@",[[NSString alloc]initWithUTF8String:sqlite3_errmsg(db)]);
     }
     sqlite3_finalize(statement);
     [self closeDatabase];
@@ -240,7 +240,7 @@
     
     [self openDatabase];
     int sqlStatus = sqlite3_prepare_v2(db, [sqlCmd UTF8String], -1, &statement, NULL);
-    NSLog(@"QUERY SQL STATEMENT PREPARATION CODE - %d", sqlStatus);
+    //NSLog(@"QUERY SQL STATEMENT PREPARATION CODE - %d", sqlStatus);
     NSDictionary *dictionary = nil;
     if (sqlStatus == SQLITE_OK)
     {

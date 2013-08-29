@@ -60,7 +60,7 @@
 - (void)initTextLabel:(REMEnergyUsageDataModel *)data withTitleSize:(CGFloat)titleSize withTitleMargin:(CGFloat)margin withLeftMargin:(CGFloat)leftMargin withValueFontSize:(CGFloat)valueSize withUomFontSize:(CGFloat) uomSize
 {
     
-    if(data==nil || data.dataValue==nil){
+    if(data==nil || data.dataValue==nil||[data.dataValue isEqual:[NSNull null]]==YES){
         [self initEmptyTextLabelWithTitleSize:titleSize withTitleMargin:margin withLeftMargin:leftMargin];
         return;
     }
