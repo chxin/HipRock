@@ -43,7 +43,7 @@
         self.graph.plotAreaFrame.paddingTop=0.0f;
         self.graph.plotAreaFrame.paddingRight=0.0f;
         self.graph.plotAreaFrame.paddingBottom=0.0f;
-        self.graph.plotAreaFrame.paddingLeft=0.0f;
+        self.graph.plotAreaFrame.paddingLeft=38.0f;
         
         CPTMutableLineStyle *hiddenLineStyle = [CPTMutableLineStyle lineStyle];
         hiddenLineStyle.lineWidth = 0;
@@ -53,26 +53,36 @@
         
         CPTMutableTextStyle* labelStyle = [[CPTMutableTextStyle alloc]init];
         labelStyle.color = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
+        CPTMutableLineStyle *gridLineStyle=[[CPTMutableLineStyle alloc]init];
+        gridLineStyle.dashPattern=[NSArray arrayWithObjects:[NSDecimalNumber numberWithInt:1],[NSDecimalNumber numberWithInt:1],nil];
+        gridLineStyle.lineColor=[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
+        
         CPTXYAxisSet *axisSet = (CPTXYAxisSet*)self.graph.axisSet;
         CPTXYAxis* x = axisSet.xAxis;
         [x setLabelingPolicy:CPTAxisLabelingPolicyNone];
         x.majorTickLineStyle = xTickStyle;
-        x.majorTickLength = 5;
+        x.majorTickLength = 0;
         x.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
         x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0f];
         x.axisLineStyle = xTickStyle;
-        CPTXYAxis* y = axisSet.yAxis;
-        y.majorTickLineStyle = hiddenLineStyle;
-        y.minorTickLineStyle = hiddenLineStyle;
-        y.axisLineStyle = xTickStyle;
-        y.labelAlignment = CPTAlignmentMiddle;
-        y.labelTextStyle = labelStyle;
-        CPTMutableLineStyle *gridLineStyle=[[CPTMutableLineStyle alloc]init];
-        gridLineStyle.dashPattern=[NSArray arrayWithObjects:[NSDecimalNumber numberWithInt:1],[NSDecimalNumber numberWithInt:1],nil];
-        gridLineStyle.lineColor=[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
         x.majorGridLineStyle = gridLineStyle;
-        y.majorGridLineStyle = gridLineStyle;
         x.plotSpace = self.graph.defaultPlotSpace;
+        
+        CPTXYAxis* y = axisSet.yAxis;
+//        y.majorTickLineStyle = hiddenLineStyle;
+//        y.minorTickLineStyle = hiddenLineStyle;
+//        y.axisLineStyle = xTickStyle;
+//        y.labelAlignment = CPTAlignmentMiddle;
+//        y.labelTextStyle = labelStyle;
+//        y.majorGridLineStyle = gridLineStyle;
+//        y.plotSpace = self.graph.defaultPlotSpace;
+        [y setLabelingPolicy:CPTAxisLabelingPolicyNone];
+        y.majorTickLineStyle = xTickStyle;
+        y.majorTickLength = 0;
+        y.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
+        y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0f];
+        y.axisLineStyle = xTickStyle;
+        y.majorGridLineStyle = gridLineStyle;
         y.plotSpace = self.graph.defaultPlotSpace;
         
         [self viewDidLoad];
@@ -131,6 +141,8 @@
     return label;
 }
 
+
+
 - (void)intervalChanged:(UIButton *)button {
     REMRelativeTimeRangeType t = Today;
     REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
@@ -155,14 +167,15 @@
     labelStyle.color = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
     
     NSString* dateFormat = nil;
+    int amountOfY = 5;
 //    int countOfX = 0;    // Max x value in datasource
     double maxY = INT64_MIN;    // Max y value of display points
-    double minY = INT64_MAX;    // Min y value of display points
+    double minY = 0;    // Min y value of display points
     NSMutableArray* data = [[self.datasource objectAtIndex:currentSourceIndex] objectForKey:@"data"];
     for (int j = 0; j < data.count; j++) {
         float y = [[data[j] objectForKey:@"y" ] floatValue];
         maxY = MAX(maxY, y);
-        minY = MIN(minY, y);
+//        minY = MIN(minY, y);
     }
     
     if (t == Today || t == Yesterday) {
@@ -203,13 +216,42 @@
     NSMutableArray *ylocations = [[NSMutableArray alloc]init];
     NSMutableArray *ytickLocations = [[NSMutableArray alloc]init];
     
-    for (int i = minY; i < maxY; i = i + 5) {
-        
-        CPTAxisLabel *label = [[CPTAxisLabel alloc]initWithText:[NSString stringWithFormat:@"%d", i] textStyle:labelStyle];
+    double yLength = maxY - minY;
+    double yInterval = 0;
+    if (yLength > 0) {
+        double mag = 1;
+        double yIntervalMag = yLength / amountOfY;
+        while (yIntervalMag > 10) {
+            yIntervalMag /= 10;
+            mag *= 10;
+        }
+        while (yIntervalMag < 1) {
+            yIntervalMag *= 10;
+            mag /= 10;
+        }
+        yInterval = ceil(yIntervalMag * 2) * mag / 2;
+    } else {
+        yInterval = 1;
+    }
+    float yRangeLength = yInterval * (amountOfY + 0.2);
+    int yLocationStart = minY / yInterval;
+    yLocationStart *= yInterval;
+    NSNumberFormatter* yFormatter = [[NSNumberFormatter alloc]init];
+    yFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    for (float i = yLocationStart; i < minY + yRangeLength; i = i + yInterval) {
+        NSString* ylabelText = nil;
+        if (i > 1000000) {
+            ylabelText = [NSString stringWithFormat:@"%@M", [yFormatter stringFromNumber:[NSNumber numberWithInt:i / 1000000]]];
+        } else if (i > 1000) {
+            ylabelText = [NSString stringWithFormat:@"%@K", [yFormatter stringFromNumber:[NSNumber numberWithInt:i / 1000]]];
+        } else {
+            ylabelText = [NSString stringWithFormat:@"%@", [yFormatter stringFromNumber:[NSNumber numberWithInt:i]]];
+        }
+        CPTAxisLabel *label = [[CPTAxisLabel alloc]initWithText:ylabelText textStyle:labelStyle];
+        label.offset = 5;
         label.tickLocation= CPTDecimalFromInt(i);
-        
         [ylocations addObject:label];
-        [ytickLocations addObject:[NSNumber numberWithInt:i]];
+        if (i != 0) [ytickLocations addObject:[NSNumber numberWithInt:i]];
     }
     
     
@@ -219,26 +261,26 @@
     CPTXYAxis* y = axisSet.yAxis;
     CPTXYPlotSpace * plotSpace = (CPTXYPlotSpace *)self.graph.defaultPlotSpace;
     
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(data.count - 1)];
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(minY) length:CPTDecimalFromFloat(maxY - minY)];
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(-0.3) length:CPTDecimalFromDouble(data.count - 0.4)];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(minY) length:CPTDecimalFromFloat(yRangeLength)];
     x.axisLabels = [NSSet setWithArray:xlocations];
     x.majorTickLocations=[NSSet setWithArray:xtickLocations];
-    x.majorIntervalLength = CPTDecimalFromInt(xStep);
+//    x.majorIntervalLength = CPTDecimalFromInt(xStep);
     
     y.axisLabels = [NSSet setWithArray:ylocations];
     y.majorTickLocations=[NSSet setWithArray:ytickLocations];
-    y.majorIntervalLength = CPTDecimalFromFloat((maxY - minY) / 5);
+//    y.majorIntervalLength = CPTDecimalFromFloat((maxY - minY) / 5);
     
     CPTScatterPlot* scatterPlot = nil;
     if (self.graph.allPlots.count == 0) {
         scatterPlot = [[CPTScatterPlot alloc] initWithFrame: myView.hostView.hostedGraph.bounds];
         
-        CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];
-        labelStyle.color = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
+//        CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];
+//        labelStyle.color = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
         CPTMutableLineStyle* scatterStyle = [CPTMutableLineStyle lineStyle];
         scatterStyle.lineColor = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:.7];
         scatterStyle.lineWidth = 1;
-        scatterPlot.labelTextStyle = labelStyle;
+//        scatterPlot.labelTextStyle = labelStyle;
         
         CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
         symbol.lineStyle=scatterStyle;
