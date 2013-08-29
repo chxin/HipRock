@@ -10,7 +10,7 @@
 
 #define kFontUltra "HelveticaNeue-UltraLight"
 #define kFontLight "HelveticaNeue-Light"
-#define kFontSC "Heiti SC"
+#define kFontSC "STHeitiSC-Medium"
 
 
 @interface REMApplicationInfo : NSObject

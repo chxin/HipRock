@@ -32,6 +32,11 @@
 
 - (void)initTextLabel:(REMRankingDataModel *)data withSize:(CGFloat)titleSize withTitleMargin:(CGFloat)margin withLeftMargin:(CGFloat)leftMargin
 {
+    if(data==nil ||[data isEqual:[NSNull null]]==YES){
+        [self initEmptyTextLabelWithTitleSize:titleSize withTitleMargin:margin withLeftMargin:leftMargin withOrigFontSize:kBuildingCommodityDetailValueFontSize];
+        return;
+    }
+    
     int marginTop=titleSize+margin;
     self.rankingLabel = [[REMNumberLabel alloc] initWithFrame:CGRectMake(leftMargin, marginTop, 1024, kBuildingCommodityDetailValueFontSize)];
     self.rankingLabel.fontSize=@(kBuildingCommodityDetailValueFontSize);

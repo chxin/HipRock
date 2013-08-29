@@ -41,11 +41,11 @@
     
     if([self isLogin]){
         [self breathAnimation:nil];
-        __block NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(breathAnimation:) userInfo:nil repeats:YES];
+        //__block NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(breathAnimation:) userInfo:nil repeats:YES];
         
         [self showBuildingView:^(void){
-            [timer invalidate];
-            timer = nil;
+            //[timer invalidate];
+            //timer = nil;
             
             [self.logoView setHidden:YES];
         }];

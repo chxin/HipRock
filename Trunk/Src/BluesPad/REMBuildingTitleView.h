@@ -14,6 +14,8 @@
 
 @property (nonatomic,strong) UILabel *titleLabel;
 
+@property (nonatomic,strong) UILabel *emptyLabel;
+
 - (void)initTitle:(NSString *)text withSize:(CGFloat)size withLeftMargin:(CGFloat)leftMargin;
 
 - (NSString *)addThousandSeparator:(NSNumber *)number;
@@ -22,4 +24,5 @@
 
 - (void)setEmptyText:(NSString *)emptyText withSize:(CGFloat)size;
 
+- (void)initEmptyTextLabelWithTitleSize:(CGFloat)titleSize withTitleMargin:(CGFloat)margin withLeftMargin:(CGFloat)leftMargin withOrigFontSize:(CGFloat)fontSize;
 @end
