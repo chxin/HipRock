@@ -363,7 +363,6 @@ typedef void(^SuccessCallback)(BOOL success);
 //    [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
     return @{
              @"image": img,
-             @"height": [NSNumber numberWithFloat:kBuildingCommodityButtonDimension + chartHeight],
              @"text": stringFormat
              };
 }
