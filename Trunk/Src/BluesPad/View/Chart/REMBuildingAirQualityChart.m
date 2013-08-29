@@ -21,7 +21,9 @@
     if (self) {
         // Initialization code
         //[self initializeGraph];
-        self.backgroundColor = [UIColor greenColor];
+        //self.backgroundColor = [UIColor greenColor];
+        self.layer.borderColor = [UIColor greenColor].CGColor;
+        self.layer.borderWidth = 1.0;
     }
     return self;
 }
