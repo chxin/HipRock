@@ -65,7 +65,6 @@
     self.currentIndex=0;
     self.cumulateX=0;
     
-    //[self initButtons];
     
     
 }
@@ -117,8 +116,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-    //self.buildingOverallArray=nil;
     
 }
 
@@ -133,12 +130,6 @@
     [shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.shareButton=shareButton;
     [self.view addSubview:shareButton];
-    
-    /*
-    UIButton *shareButton1 = [[UIButton alloc]initWithFrame:CGRectMake(950, 70, 48, 48)];
-    [shareButton1 setImage:[UIImage imageNamed:@"weibo.png"] forState:UIControlStateNormal];
-    [shareButton1 addTarget:self action:@selector(shareButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:shareButton1];*/
 }
 
 - (void)settingButtonPressed:(UIButton *)button{
@@ -416,28 +407,20 @@
     //        window.frame=CGRectMake(0,300,1024,20);
     //    }];
     //[self performSegueWithIdentifier:@"sendWeiboSegue" sender:self];
+
     if (![Weibo.weibo isAuthenticated]) {
         [REMAlertHelper alert:@"未绑定微博账户。"];
     } else {
+        REMMaskManager  *masker = [[REMMaskManager alloc]initWithContainer:self.view];
         REMImageView *view = self.imageArray[self.currentIndex];
+        [masker showMask];
         [view exportImage:^(UIImage *image, NSString* text){
             // [UIImagePNGRepresentation(image) writeToFile:[self getWeiboPicAddress] atomically:NO];
+            [masker hideMask];
             NSDictionary* sender = @{@"image": image, @"text": text};
             [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
         }];
     }
-
-    /*
-    REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
-    REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
-    
-    [currentUser kill];
-    [currentCustomer kill];
-    currentUser = nil;
-    currentCustomer = nil;
-    
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    [self.splashScreenController showLoginView];*/
 }
 
 @end
