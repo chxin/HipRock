@@ -226,13 +226,13 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+    [cell setSelected:NO];
     if(indexPath.section == 2 && indexPath.row==0){
-        UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
-        [cell setSelected:NO];
-        
         [self logout];
         
     }
+    
     
 }
 

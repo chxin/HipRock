@@ -341,7 +341,7 @@
     gradient.frame = frame;
     gradient.colors = [NSArray arrayWithObjects:
                        (id)[UIColor clearColor].CGColor,
-                       (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6].CGColor,
+                       (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8].CGColor,
                        nil];
     
     UIGraphicsBeginImageContextWithOptions(frame.size, NO, 0.0);
@@ -555,6 +555,8 @@
 
 -(void)tapthis
 {
+    if(self.dataView.contentOffset.y>kCommodityScrollTop) return;
+    
     if(self.dataViewUp==YES)
     {
         [self scrollDown];

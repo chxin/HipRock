@@ -29,7 +29,7 @@
     CIImage *ci = [[CIImage alloc]initWithCGImage:origImage.CGImage];
     
     CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
-                                   keysAndValues: kCIInputImageKey,ci,@"inputRadius",@(20),nil];
+                                   keysAndValues: kCIInputImageKey,ci,@"inputRadius",@(15),nil];
     
     CIImage *outputImage = [filter1 outputImage];
     

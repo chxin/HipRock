@@ -73,7 +73,12 @@ typedef void(^SuccessCallback)(BOOL success);
         }
         //btn.layer.borderColor=[UIColor whiteColor].CGColor;
         //btn.layer.borderWidth=1;
-        
+        /*
+        btn.layer.shadowColor = [UIColor blackColor].CGColor;
+        btn.layer.shadowOpacity = 1;
+        btn.layer.shadowRadius = 2;
+        btn.layer.shadowOffset = CGSizeMake(3.0f,3.0f);
+        */
         [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [array addObject:btn];
         
@@ -89,6 +94,7 @@ typedef void(^SuccessCallback)(BOOL success);
         btn.showsTouchWhenHighlighted=YES;
         btn.adjustsImageWhenHighlighted=YES;
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
         
         
         [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal.png",str]]forState:UIControlStateNormal];

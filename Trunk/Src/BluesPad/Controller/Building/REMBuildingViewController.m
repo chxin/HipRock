@@ -65,7 +65,6 @@
     self.currentIndex=0;
     self.cumulateX=0;
     
-    //[self initButtons];
     
     
 }
@@ -117,8 +116,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-    //self.buildingOverallArray=nil;
     
 }
 
@@ -133,12 +130,6 @@
     [shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.shareButton=shareButton;
     [self.view addSubview:shareButton];
-    
-    /*
-    UIButton *shareButton1 = [[UIButton alloc]initWithFrame:CGRectMake(950, 70, 48, 48)];
-    [shareButton1 setImage:[UIImage imageNamed:@"weibo.png"] forState:UIControlStateNormal];
-    [shareButton1 addTarget:self action:@selector(shareButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:shareButton1];*/
 }
 
 - (void)settingButtonPressed:(UIButton *)button{
@@ -251,7 +242,7 @@
             if(self.currentIndex == 0 && self.cumulateX>0){
                 [view moveCenter:trans.x/2];
             }
-            else if((self.currentIndex==(self.imageArray.count-1)) || self.cumulateX<0){
+            else if((self.currentIndex==(self.imageArray.count-1)) && self.cumulateX<0){
                 [view moveCenter:trans.x/2];
             }
             else{
@@ -383,6 +374,8 @@
 {
     //NSLog(@"cumulatex:%f",self.cumulateX);
     if(self.cumulateX!=0) return;
+    
+    
     for (REMImageView *view in self.imageArray) {
         [view tapthis];
     }
@@ -416,28 +409,43 @@
     //        window.frame=CGRectMake(0,300,1024,20);
     //    }];
     //[self performSegueWithIdentifier:@"sendWeiboSegue" sender:self];
+
     if (![Weibo.weibo isAuthenticated]) {
         [REMAlertHelper alert:@"未绑定微博账户。"];
     } else {
+        /*
         REMImageView *view = self.imageArray[self.currentIndex];
+        
+        
+
+        
         [view exportImage:^(UIImage *image, NSString* text){
             // [UIImagePNGRepresentation(image) writeToFile:[self getWeiboPicAddress] atomically:NO];
+            
             NSDictionary* sender = @{@"image": image, @"text": text};
             [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
-        }];
+        }];*/
+        
+        REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:self.view];
+        
+        [masker showMask];
+        
+        [self performSelector:@selector(executeExport:) withObject:masker afterDelay:0.1];
     }
+}
 
-    /*
-    REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
-    REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
+-(void)executeExport:(REMMaskManager *)masker{
+    REMImageView *view = self.imageArray[self.currentIndex];
     
-    [currentUser kill];
-    [currentCustomer kill];
-    currentUser = nil;
-    currentCustomer = nil;
+    [masker hideMask];
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    [self.splashScreenController showLoginView];*/
+    
+    [view exportImage:^(UIImage *image, NSString* text){
+        // [UIImagePNGRepresentation(image) writeToFile:[self getWeiboPicAddress] atomically:NO];
+        
+        NSDictionary* sender = @{@"image": image, @"text": text};
+        [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
+    }];
 }
 
 @end
