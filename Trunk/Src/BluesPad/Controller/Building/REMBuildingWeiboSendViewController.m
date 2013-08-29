@@ -157,6 +157,23 @@ const NSInteger kWeiboMaxLength = 140;
 }
 
 -(void)sendClicked:(id)sender {
+    if (![Weibo.weibo isAuthenticated]) {
+//        [REMAlertHelper alert:@"未绑定微博账户。"];
+        [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
+            NSString *message = nil;
+            if (!error) {
+                [self sendWeibo];
+            }
+            else {
+                message = [NSString stringWithFormat:@"微博账户绑定失败: %@", error];
+                [REMAlertHelper alert:message];
+            }
+        }];
+    } else {
+        [self sendWeibo];
+    }
+}
+-(void)sendWeibo {
     [REMStatusBar showStatusMessage:@"微博发送中" autoHide:NO];
     [Weibo.weibo newStatus:textView.text pic:UIImagePNGRepresentation(self.weiboImage) completed:^(Status *status, NSError *error) {
         NSString *message = nil;

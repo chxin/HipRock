@@ -619,10 +619,10 @@
 {
     [self.dataView exportDataView:^(NSDictionary *outputDic){
         UIImage* dataImage = [outputDic objectForKey:@"image"];
-        float dataImageHeight = ((NSNumber*)[outputDic objectForKey:@"height"]).floatValue;
+        float dataImageHeight = dataImage.size.height;
         
         CGFloat outputWidth = self.frame.size.width;
-        CGFloat outputHeightWithoutFooter = 1470;
+        CGFloat outputHeightWithoutFooter = 1532;
         CGFloat footerHeight = 98;
         UIImage *footerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WeiboBana" ofType:@"jpg"]];
         UIGraphicsBeginImageContext(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight));
@@ -639,10 +639,10 @@
         UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-        NSString* myDocPath = myPaths[0];
-        NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
-        [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
+//        NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+//        NSString* myDocPath = myPaths[0];
+//        NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
+//        [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
 
         
         //[NSString str]

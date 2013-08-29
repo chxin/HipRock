@@ -410,28 +410,26 @@
     //    }];
     //[self performSegueWithIdentifier:@"sendWeiboSegue" sender:self];
 
-    if (![Weibo.weibo isAuthenticated]) {
-        [REMAlertHelper alert:@"未绑定微博账户。"];
-    } else {
-        /*
-        REMImageView *view = self.imageArray[self.currentIndex];
-        
-        
 
+    /*
+    REMImageView *view = self.imageArray[self.currentIndex];
+    
+    
+
+    
+    [view exportImage:^(UIImage *image, NSString* text){
+        // [UIImagePNGRepresentation(image) writeToFile:[self getWeiboPicAddress] atomically:NO];
         
-        [view exportImage:^(UIImage *image, NSString* text){
-            // [UIImagePNGRepresentation(image) writeToFile:[self getWeiboPicAddress] atomically:NO];
-            
-            NSDictionary* sender = @{@"image": image, @"text": text};
-            [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
-        }];*/
-        
-        REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:self.view];
-        
-        [masker showMask];
-        
-        [self performSelector:@selector(executeExport:) withObject:masker afterDelay:0.1];
-    }
+        NSDictionary* sender = @{@"image": image, @"text": text};
+        [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
+    }];*/
+    
+    REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:self.view];
+    
+    [masker showMask];
+    
+    [self performSelector:@selector(executeExport:) withObject:masker afterDelay:0.1];
+    
 }
 
 -(void)executeExport:(REMMaskManager *)masker{
