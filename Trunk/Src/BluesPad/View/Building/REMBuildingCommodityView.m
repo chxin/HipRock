@@ -135,8 +135,8 @@ typedef void(^SuccessCallback)(BOOL success);
 {
     CGRect frame=view.frame;
     //NSLog(@"splitbar:%@",NSStringFromCGRect(frame));
-    CGRect frame1 = CGRectMake(0, 0, 2, frame.size.height);
-    CGRect frame2 = CGRectMake(2, 0, 2, frame.size.height);
+    CGRect frame1 = CGRectMake(0, 0, 1, frame.size.height);
+    CGRect frame2 = CGRectMake(1, 0, 1, frame.size.height);
     
     CALayer *layer1 = [CALayer layer];
     

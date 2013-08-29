@@ -242,7 +242,7 @@
             if(self.currentIndex == 0 && self.cumulateX>0){
                 [view moveCenter:trans.x/2];
             }
-            else if((self.currentIndex==(self.imageArray.count-1)) || self.cumulateX<0){
+            else if((self.currentIndex==(self.imageArray.count-1)) && self.cumulateX<0){
                 [view moveCenter:trans.x/2];
             }
             else{
@@ -374,6 +374,8 @@
 {
     //NSLog(@"cumulatex:%f",self.cumulateX);
     if(self.cumulateX!=0) return;
+    
+    
     for (REMImageView *view in self.imageArray) {
         [view tapthis];
     }
