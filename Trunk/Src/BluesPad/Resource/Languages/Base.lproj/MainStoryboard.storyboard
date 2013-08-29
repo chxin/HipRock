@@ -1313,7 +1313,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </sections>
                     </tableView>
                     <navigationItem key="navigationItem" title="设置" id="mnH-gw-Zz4">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="reply" id="2dd-Hn-SRO">
+                        <barButtonItem key="rightBarButtonItem" title="完成" style="plain" id="2dd-Hn-SRO">
                             <connections>
                                 <action selector="backButtonPressed:" destination="wRO-Bn-ppJ" id="Ih8-u1-q9Y"/>
                             </connections>
@@ -1587,7 +1587,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/REMBuildingViewController.h"/>
             <relationships>
                 <relationship kind="action" name="dashboardButtonPressed:"/>
-                <relationship kind="action" name="logoutButtonPressed:"/>
+                <relationship kind="action" name="shareButtonPressed:"/>
             </relationships>
         </class>
         <class className="REMBuildingWeiboSendViewController" superclassName="UIViewController">
@@ -1702,9 +1702,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="action" name="datePickerClick:" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
             </relationships>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
