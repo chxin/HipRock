@@ -1391,7 +1391,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "262"
          endingLineNumber = "262"
-         landmarkName = "-initializePlotSpace"
+         landmarkName = "-convertData"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1404,8 +1404,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "34"
          endingLineNumber = "34"
-         landmarkName = "-initializeGraph"
-         landmarkType = "5">
+         landmarkName = "@implementation REMBuildingAirQualityChart"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1431,45 +1431,6 @@
          startingLineNumber = "72"
          endingLineNumber = "72"
          landmarkName = "-initChartContainer"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BluesPad/Controller/Building/REMBuildingAirQualityChartHandler.m"
-         timestampString = "399542932.442705"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "34"
-         endingLineNumber = "34"
-         landmarkName = "lastDraggedPoint"
-         landmarkType = "19">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BluesPad/Controller/Building/REMBuildingAirQualityChartHandler.m"
-         timestampString = "399544984.561327"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "62"
-         endingLineNumber = "62"
-         landmarkName = "-plotSpace:shouldHandlePointingDeviceDraggedEvent:atPoint:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BluesPad/Controller/Building/REMBuildingAirQualityChartHandler.m"
-         timestampString = "399545453.873886"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "63"
-         endingLineNumber = "63"
-         landmarkName = "-plotSpace:shouldHandlePointingDeviceDraggedEvent:atPoint:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

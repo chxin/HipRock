@@ -69,7 +69,7 @@
     return YES;
 }
 
-
+/*
 - (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
 {
     //    NSLog(@"point:%@",NSStringFromCGPoint(point));
@@ -125,7 +125,7 @@
     
     
     return YES;
-}
+}*/
 
 
 const static NSString *kOutdoorCode = @"Outdoor";
@@ -559,7 +559,36 @@ static NSDictionary *codeNameMap;
 //    return [self.view convertPoint:dataPoint fromView:self.chartView.hostView];
 }
 
-
+#pragma mark -
+#pragma mark plotspace delegate for event
+- (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
+{
+    //left bound
+    NSDecimal currentLeftLocation = space.xRange.location;
+    NSDecimal currentRightLocation = CPTDecimalAdd(space.xRange.location,space.xRange.length);
+    
+    NSDecimal minLeftLocation = CPTDecimalFromDouble(self.globalRange.start);
+    NSDecimal maxRightLocation = CPTDecimalFromDouble(self.globalRange.end);
+    
+    BOOL isCurrentLeftLessThanMinLeft = CPTDecimalLessThan(currentLeftLocation,minLeftLocation);
+    BOOL isCurrentRightGreaterThanMaxRight = CPTDecimalGreaterThan(currentRightLocation, maxRightLocation);
+    
+    //if current left location is smaller than global range start, go back with animation
+    //if current right location is greater than global range end, go back with animation too
+    if(isCurrentLeftLessThanMinLeft == YES || isCurrentRightGreaterThanMaxRight == YES){
+        CPTPlotRange *correctRange;
+        if(isCurrentLeftLessThanMinLeft)
+            correctRange = [[CPTPlotRange alloc] initWithLocation:minLeftLocation length:space.xRange.length];
+        else
+            correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance]) ];
+        
+        [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:correctRange duration:0.15 withDelay:0 animationCurve:CPTAnimationCurveCubicInOut delegate:nil];
+        
+        return NO;
+    }
+    
+    return  YES;
+}
 
 #pragma mark - data source delegate
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
