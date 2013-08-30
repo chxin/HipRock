@@ -18,4 +18,13 @@
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(void))loadCompleted;
 - (CPTGraphHostingView*) getHostView;
 -(void)longPressedAt:(NSDate*)x;
+
+
+-(CPTLineStyle *)axisLineStyle;
+-(CPTLineStyle *)gridLineStyle;
+-(CPTLineStyle *)hiddenLineStyle;
+-(CPTTextStyle *)xAxisLabelStyle;
+-(CPTTextStyle *)yAxisLabelStyle;
+
+
 @end

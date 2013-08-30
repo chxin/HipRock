@@ -15,7 +15,7 @@
 
 @implementation REMBuildingAirQualityChart
 
-static CGFloat leftAxisOffset = 22.0;
+static CGFloat leftAxisOffset = 57.0;
 static CGFloat bottomAxisOffset = 16.0;
 static CGFloat topAxisOffset = 6.0;
 static CGFloat rightAxisOffset = 11.0;
@@ -26,8 +26,8 @@ static CGFloat rightAxisOffset = 11.0;
     if (self) {
         // Initialization code
         
-        self.layer.borderColor = [UIColor greenColor].CGColor;
-        self.layer.borderWidth = 1.0;
+//        self.layer.borderColor = [UIColor greenColor].CGColor;
+//        self.layer.borderWidth = 1.0;
     }
     return self;
 }
@@ -35,12 +35,13 @@ static CGFloat rightAxisOffset = 11.0;
 
 -(void)initializeGraph
 {
+    //NSLog(@"bounds:%@",NSStringFromCGRect(self.bounds));
     
-    CGRect hostViewFrame = CGRectMake(1, 1, self.bounds.size.width-2, 403);
+    CGRect hostViewFrame = CGRectMake(0, 0, self.bounds.size.width-0, 405 + topAxisOffset + bottomAxisOffset);
     
     self.hostView = [[CPTGraphHostingView alloc] initWithFrame:hostViewFrame];
-    self.hostView.layer.borderColor = [UIColor blueColor].CGColor;
-    self.hostView.layer.borderWidth = 1.0;
+//    self.hostView.layer.borderColor = [UIColor blueColor].CGColor;
+//    self.hostView.layer.borderWidth = 1.0;
     
     self.hostView.hostedGraph=[[CPTXYGraph alloc] init];
     
@@ -48,6 +49,11 @@ static CGFloat rightAxisOffset = 11.0;
     self.hostView.hostedGraph.paddingBottom = bottomAxisOffset;
     self.hostView.hostedGraph.paddingLeft = leftAxisOffset;
     self.hostView.hostedGraph.paddingRight = rightAxisOffset;
+    
+    self.hostView.hostedGraph.plotAreaFrame.paddingTop=0.0;
+    self.hostView.hostedGraph.plotAreaFrame.paddingRight=0.0;
+    self.hostView.hostedGraph.plotAreaFrame.paddingBottom=1.0;
+    self.hostView.hostedGraph.plotAreaFrame.paddingLeft=1.0;
     
     self.hostView.hostedGraph.plotAreaFrame.masksToBorder = NO;
     

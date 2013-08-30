@@ -10,12 +10,19 @@
 
 @implementation REMBuildingAverageChart
 
+static CGFloat leftAxisOffset = 57.0;
+static CGFloat rightAxisOffset = 0;
+static CGFloat topAxisOffset = 0;
+static CGFloat bottomAxisOffset = 56.0;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         [self initializeGraph];
+        self.layer.borderColor = [UIColor greenColor].CGColor;
+        self.layer.borderWidth = 1.0;
     }
     return self;
 }
@@ -24,26 +31,28 @@
 {
     self.hostView = [[CPTGraphHostingView alloc]initWithFrame:self.bounds];
     
-    self.graph=[[CPTXYGraph alloc]initWithFrame:self.hostView.bounds];
-    self.graph.plotAreaFrame.paddingTop=0.0f;
-    self.graph.plotAreaFrame.paddingRight=100.0f;
-    self.graph.plotAreaFrame.paddingBottom=40.0f;
-    self.graph.plotAreaFrame.paddingLeft=50.0f;
+    self.hostView.layer.borderColor = [UIColor blueColor].CGColor;
+    self.hostView.layer.borderWidth = 1.0;
+    
+    self.graph=[[CPTXYGraph alloc] init];
+    
+    self.graph.paddingTop = topAxisOffset;
+    self.graph.paddingBottom = bottomAxisOffset;
+    self.graph.paddingLeft = leftAxisOffset;
+    self.graph.paddingRight = rightAxisOffset;
+    
+    self.graph.plotAreaFrame.paddingTop=0.0;
+    self.graph.plotAreaFrame.paddingRight=0.0;
+    self.graph.plotAreaFrame.paddingBottom=1.0f;
+    self.graph.plotAreaFrame.paddingLeft=1.0f;
+    
     self.graph.plotAreaFrame.masksToBorder = NO;
     
     //Init host view
     self.hostView.hostedGraph = self.graph;
+    
     [self addSubview:self.hostView];
-    
-//    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panning)];
-//    [self addGestureRecognizer:pan];
-    
-    
 }
-
--(void)panning
-{
-} 
 
 /*
 // Only override drawRect: if you perform custom drawing.

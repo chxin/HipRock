@@ -8,12 +8,6 @@
 
 #import "REMTimeHelper.h"
 
-#define TIMEINTERVAL_SECOND 1000;
-#define TIMEINTERVAL_MINUTE 1000 * 60;
-#define TIMEINTERVAL_HOUR = 1000 * 60 * 60;
-#define TIMEINTERVAL_DAY = 1000 * 60 * 60 * 24;
-#define TIMEINTERVAL_WEEK = 1000 * 60 * 60 *24 * 7;
-
 @implementation REMTimeHelper
 
 
@@ -324,6 +318,36 @@
     
     return [[REMTimeRange alloc] initWithStartTime:[NSDate dateWithTimeIntervalSince1970:startInterval] EndTime:[NSDate dateWithTimeIntervalSince1970:endInterval]];
 
+}
+
+
+
++(NSNumber *)getMonthTicksFromDate:(NSDate *)date
+{
+    NSInteger monthTicks = [REMTimeHelper getYear:date] * 12 + [REMTimeHelper getMonth:date];
+    
+    return [NSNumber numberWithInt:monthTicks];
+}
+
++(NSDate *)getDateFromMonthTicks:(NSNumber *)monthTicks
+{
+    int year = [monthTicks intValue] / 12;
+    int month = [monthTicks intValue] % 12;
+    
+    NSDateComponents *component = [[NSDateComponents alloc] init];
+    [component setYear:year];
+    [component setMonth:month];
+    [component setDay:1];
+    [component setHour:0];
+    [component setMinute:0];
+    [component setSecond:0];
+    
+    return [component date];
+}
+
++(NSCalendar *)gregorianCalendar
+{
+    return [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 }
 
 

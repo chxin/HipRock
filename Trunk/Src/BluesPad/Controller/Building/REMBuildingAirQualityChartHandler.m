@@ -27,6 +27,9 @@
 @property (nonatomic,strong) REMAirQualityStandardModel *standardChina, *standardAmerican;
 @property (nonatomic,strong) UIColor *colorForChinaStandard, *colorForAmericanStandard;
 
+
+@property (nonatomic,strong) CPTPlotRange *origRightRange;
+
 @end
 
 @implementation REMBuildingAirQualityChartHandler
@@ -185,36 +188,25 @@ static NSDictionary *codeNameMap;
 {
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.hostView.hostedGraph.defaultPlotSpace;
     plotSpace.allowsUserInteraction = YES;
+    plotSpace.delegate=self;
+    
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
-    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.globalRange.start) length:CPTDecimalFromDouble([self.globalRange distance])];
+    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.globalRange.start -60*60*24*3) length:CPTDecimalFromDouble(self.globalRange.distance+60*60*24*10)];
     
     //since y axis will never be able to drag, global space and visiable space for y axis are equal
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.dataValueRange.start) length:CPTDecimalFromDouble([self.dataValueRange distance])];
     plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([self.dataValueRange start]) length:CPTDecimalFromDouble([self.dataValueRange distance])];
     
-    [plotSpace setElasticGlobalXRange:YES];
-    [plotSpace setAllowsMomentum:YES];
+   // [plotSpace setElasticGlobalXRange:YES];
+   // [plotSpace setAllowsMomentum:YES];
+    
+    self.origRightRange=[plotSpace.xRange mutableCopy];
 }
 
 -(void)initializeAxises
 {
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.hostView.hostedGraph.defaultPlotSpace;
     
-    //line styles
-    CPTMutableLineStyle *hiddenLineStyle = [CPTMutableLineStyle lineStyle];
-    hiddenLineStyle.lineWidth = 0;
-    
-    CPTMutableLineStyle *axisLineStyle = [CPTMutableLineStyle lineStyle];
-    axisLineStyle.lineWidth = 1;
-    axisLineStyle.lineColor = [CPTColor whiteColor];
-    
-    CPTMutableLineStyle *gridLineStyle=[[CPTMutableLineStyle alloc] init];
-    gridLineStyle.lineWidth = 1.0f;
-    gridLineStyle.lineColor = [CPTColor colorWithCGColor:[UIColor colorWithWhite:0.7 alpha:0.3].CGColor];
-    
-    //text styles
-    CPTMutableTextStyle *axisTextStyle = [CPTMutableTextStyle textStyle];
-    axisTextStyle.color = [CPTColor whiteColor];
     
     //x axis
     CPTXYAxis* x = [[CPTXYAxis alloc] init];
@@ -224,11 +216,11 @@ static NSDictionary *codeNameMap;
     x.orthogonalCoordinateDecimal = CPTDecimalFromInt(0);
     x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
     x.plotSpace = plotSpace;
-    x.axisLineStyle = axisLineStyle;
-    x.majorTickLineStyle = hiddenLineStyle;
-    x.minorTickLineStyle = hiddenLineStyle;
+    x.axisLineStyle = [self axisLineStyle];
+    x.majorTickLineStyle = [self hiddenLineStyle];
+    x.minorTickLineStyle = [self hiddenLineStyle];
     x.anchorPoint=CGPointZero;
-    x.majorGridLineStyle = gridLineStyle;
+    x.majorGridLineStyle = [self gridLineStyle];
     
     
     NSMutableSet *xlabels = [[NSMutableSet alloc] init];
@@ -241,8 +233,8 @@ static NSDictionary *codeNameMap;
     while ([tickDate timeIntervalSince1970] <= self.globalRange.end) {
         tickDate = [calendar dateByAddingComponents:components toDate:tickDate options:0];
         
-        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDateLabel:tickDate] textStyle:axisTextStyle];
-        label.tickLocation = CPTDecimalFromDouble([tickDate timeIntervalSince1970]);
+        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDateLabel:tickDate] textStyle:[self xAxisLabelStyle]];
+        label.tickLocation = CPTDecimalFromDouble([tickDate timeIntervalSince1970] + 12*60*60);
         label.offset = 5;
         
         [xlabels addObject:label];
@@ -258,11 +250,11 @@ static NSDictionary *codeNameMap;
     y.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
     y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
     y.plotSpace = plotSpace;
-    y.axisLineStyle = axisLineStyle;
+    y.axisLineStyle = [self axisLineStyle];
     y.anchorPoint=CGPointZero;
     y.majorIntervalLength = CPTDecimalFromFloat(self.dataValueRange.end/4);
-    y.majorGridLineStyle = gridLineStyle;
-    y.labelTextStyle = axisTextStyle;
+    y.majorGridLineStyle = [self gridLineStyle];
+    y.labelTextStyle = [self yAxisLabelStyle];
     
     //add x and y axis into axis set
     self.chartView.hostView.hostedGraph.axisSet.axes = @[x,y];
@@ -309,7 +301,7 @@ static NSDictionary *codeNameMap;
 {
     CPTXYAxis *verticalAxis = ((CPTXYAxisSet *)self.chartView.hostView.hostedGraph.axisSet).yAxis;
     
-    CPTPlotRange *bandRangeChina=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([self.standardChina.standardValue doubleValue])];
+    CPTPlotRange *bandRangeChina=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([self.standardAmerican.standardValue doubleValue]) length:CPTDecimalFromDouble([self.standardChina.standardValue doubleValue])];
     CPTPlotRange *bandRangeAmerican=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([self.standardAmerican.standardValue doubleValue])];
     
     CPTColor *chinaColor = [self getColorWithCode:(NSString *)kChinaStandardCode];
@@ -343,24 +335,33 @@ static NSDictionary *codeNameMap;
 
 -(UILabel *)getStandardLabelWithCode:(NSString *)standardCode
 {
+    CGFloat fontSize = 11;
+    CGFloat labelOffset = 11;
+    
     NSString *labelTextFormat = codeNameMap[standardCode];
     REMAirQualityStandardModel *standard;
-    UIColor *standardColor = [self getColorWithCode:standardCode].uiColor;
+    UIColor *standardColor;// = [self getColorWithCode:standardCode].uiColor;
     
     if(standardCode == (NSString *)kChinaStandardCode){
         standard = self.standardChina;
+        standardColor = [UIColor colorWithRed:255.0/255.0 green:97.0/255.0 blue:106.0/255.0 alpha:1];
     }
     else{
         standard = self.standardAmerican;
+        standardColor = [UIColor colorWithRed:119.0/255.0 green:196.0/255.0 blue:255.0/255.0 alpha:1];
     }
     
-    CGPoint point = [self getViewPointFromChartPoint:self.globalRange.end :[standard.standardValue doubleValue]];
-    CGRect labelFrame = CGRectMake(self.chartView.bounds.size.width-15, self.chartView.hostView.bounds.size.height - point.y+10,300, 14);
+    NSString *labelText = [NSString stringWithFormat: labelTextFormat,[standard.standardValue intValue],standard.uom];
+    
+    UIFont *labelFont = [UIFont systemFontOfSize:fontSize];
+    CGFloat labelTopOffset = self.chartView.hostView.bounds.size.height-[self getViewPointFromChartPoint: self.globalRange.end :[standard.standardValue doubleValue]].y;
+    CGFloat labelWidth = [labelText sizeWithFont:labelFont].width;
+    CGRect labelFrame = CGRectMake(self.chartView.bounds.size.width+labelOffset,  labelTopOffset,labelWidth, fontSize);
     
     UILabel *label = [[UILabel alloc] init];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"Arial" size:14];
-    label.text = [NSString stringWithFormat: labelTextFormat,[standard.standardValue intValue],standard.uom];
+    label.font = labelFont;
+    label.text = labelText;
     label.textColor = standardColor;
     label.frame = labelFrame;
     
@@ -369,7 +370,7 @@ static NSDictionary *codeNameMap;
 
 -(REMChartSeriesIndicator *)getSeriesIndicatorWithCode:(NSString *)seriesCode
 {
-    CGFloat fontSize = 14.0, y = self.chartView.hostView.bounds.size.height + 43, x = 44.0, width=0.0, height=fontSize, indicatorSpace = 59,dotWidth=15, dotSpace=11;
+    CGFloat fontSize = 14.0, y = self.chartView.hostView.bounds.size.height + 43, x = self.chartView.hostView.hostedGraph.plotAreaFrame.frame.origin.x, width=0.0, height=fontSize, indicatorSpace = 59,dotWidth=15, dotSpace=11;
     
     for(NSString *code in @[kOutdoorCode,kHoneywellCode,kMayAirCode]){
         NSString *name = codeNameMap[code];
@@ -384,8 +385,6 @@ static NSDictionary *codeNameMap;
     }
     
     CGRect indicatorFrame = CGRectMake(x,y,width,height);
-    
-    NSLog(@"%@:%@",seriesCode,NSStringFromCGRect(indicatorFrame));
     
     NSString *indicatorName = codeNameMap[seriesCode];
     UIColor *indicatorColor = [self getColorWithCode:seriesCode].uiColor;
@@ -407,10 +406,10 @@ static NSDictionary *codeNameMap;
         return [[CPTColor alloc] initWithComponentRed:106.0/255.0 green:99.0/255.0 blue:74.0/255.0 alpha:1];
     }
     else if([code isEqualToString:(NSString *)kChinaStandardCode]){
-        return [[CPTColor alloc] initWithComponentRed:99.0/255.0 green:0.0/255.0 blue:5.0/255.0 alpha:1];
+        return [[CPTColor alloc] initWithComponentRed:255.0/255.0 green:0.0/255.0 blue:14.0/255.0 alpha:0.39];
     }
     else if([code isEqualToString:(NSString *)kAmericanStandardCode]){
-        return [[CPTColor alloc] initWithComponentRed:26.0/255.0 green:64.0/255.0 blue:110.0/255.0 alpha:1];
+        return [[CPTColor alloc] initWithComponentRed:58.0/255.0 green:148.0/255.0 blue:255.0/255.0 alpha:0.43];
     }
     else{
         return [[CPTColor alloc] initWithComponentRed:0.0 green:0.0 blue:0.0 alpha:1];
@@ -440,6 +439,51 @@ static NSDictionary *codeNameMap;
 //    return [self.view convertPoint:dataPoint fromView:self.chartView.hostView];
 }
 
+#pragma mark -
+#pragma mark plotspace delegate for event
+- (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
+{
+//    NSLog(@"point:%@",NSStringFromCGPoint(point));
+//    NSLog(@"xrange:%@",space.xRange);
+//        NSLog(@"global xrange:%@",space.globalXRange);
+    NSDecimal d = [[NSDecimalNumber numberWithDouble:60*60*24*3] decimalValue];
+    NSDecimal d1 = [[NSDecimalNumber numberWithDouble:60*60*24*10] decimalValue];
+
+    NSDecimal oldLength=  CPTDecimalSubtract(space.globalXRange.length, d1);
+    NSDecimal oldLocation=  CPTDecimalAdd(space.globalXRange.location, d);
+    NSDecimal oldTotal=CPTDecimalAdd(oldLocation, oldLength);
+    NSDecimal nowTotal=CPTDecimalAdd(space.xRange.location, space.xRange.length);
+    if(CPTDecimalGreaterThan(nowTotal, oldTotal)==YES){
+        
+        [CPTAnimation animate:space
+                     property:@"xRange"
+                fromPlotRange:space.xRange
+                  toPlotRange:self.origRightRange
+                     duration:0.1
+                    withDelay:0
+               animationCurve:CPTAnimationCurveCubicInOut
+                     delegate:nil];
+        
+        return NO;
+    }
+    
+    if(CPTDecimalLessThan(space.xRange.location, oldLocation)){
+        CPTPlotRange *startRange=[CPTPlotRange plotRangeWithLocation:oldLocation length:self.origRightRange.length];
+        [CPTAnimation animate:space
+                     property:@"xRange"
+                fromPlotRange:space.xRange
+                  toPlotRange:startRange
+                     duration:0.2
+                    withDelay:0
+               animationCurve:CPTAnimationCurveCubicInOut
+                     delegate:nil];
+        
+        return NO;
+    }
+    
+    
+    return YES;
+}
 
 #pragma mark - data source delegate
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot

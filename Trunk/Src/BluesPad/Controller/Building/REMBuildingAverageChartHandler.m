@@ -14,6 +14,9 @@
 #import "CorePlot-CocoaTouch.h"
 #import "REMDataRange.h"
 
+
+
+
 @interface REMBuildingAverageChartHandler ()
 
 @property (nonatomic) CGRect viewFrame;
@@ -24,6 +27,8 @@
 @property (nonatomic,strong) REMDataRange *dataValueRange;
 @property (nonatomic,strong) REMDataRange *visiableRange;
 @property (nonatomic,strong) REMDataRange *globalRange;
+
+@property (nonatomic,strong) CPTPlotRange *origRightRange;
 
 @end
 
@@ -64,72 +69,6 @@
     return self.chartView.hostView;
 }
 
--(void)longPressedAt:(NSDate*)x {
-        
-    //determin x date
-    NSTimeInterval pressingPoint = [x timeIntervalSince1970];
-    NSArray *unitData = [self.chartData[0] objectForKey:@"data"];
-    
-    int index = 0;
-    NSDate *pointDate = nil;
-    REMDataRange *pointRange = nil;
-    NSDictionary *point = nil;
-    for(;index<unitData.count;index++){
-        point = unitData[index];
-        
-        //15 day
-        pointDate = [NSDate dateWithTimeIntervalSince1970: [((NSDate *)[point valueForKey:@"x"]) timeIntervalSince1970]];
-        
-        NSDate *upperBoundDate = [REMTimeHelper add:15 onPart:REMDateTimePartDay ofDate:pointDate];
-        NSDate *lowerBoundDate = [REMTimeHelper add:-15 onPart:REMDateTimePartDay ofDate:pointDate];
-        pointRange = [[REMDataRange alloc] initWithStart:[lowerBoundDate timeIntervalSince1970] andEnd:[upperBoundDate timeIntervalSince1970]];
-        
-        if([pointRange isValueInside:pressingPoint]){
-            break;
-        }
-    }
-    
-    if(pointDate != nil){
-        CPTXYAxis *horizontalAxis = ((CPTXYAxisSet *)self.chartView.graph.axisSet).xAxis;
-        
-        //clear the previous one tool tip
-        if(self.chartView.annotationBand != nil){
-            self.chartView.annotationBand = nil;
-            [horizontalAxis removeBackgroundLimitBand:self.chartView.annotationBand];
-        }
-        
-        if(self.chartView.annotation != nil)
-        {
-            [self.chartView.graph.plotAreaFrame.plotArea removeAllAnnotations];
-            self.chartView.annotation = nil;
-        }
-        
-        //draw lower part of the tool tip
-        NSDate *bandStartDate = [REMTimeHelper add:-10 onPart:REMDateTimePartDay ofDate: pointDate];
-        NSDate *bandEndDate = [REMTimeHelper add:10 onPart:REMDateTimePartDay ofDate: pointDate];
-        CPTPlotRange *bandRange=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([bandStartDate timeIntervalSince1970]) length:CPTDecimalFromDouble([bandEndDate timeIntervalSince1970] - [bandStartDate timeIntervalSince1970])];
-        CPTLimitBand *band= [CPTLimitBand limitBandWithRange:bandRange fill:[CPTFill fillWithColor:[CPTColor lightGrayColor]]];
-        [horizontalAxis addBackgroundLimitBand:band];
-        
-        //draw upper part of the tool tip
-        CPTMutableTextStyle *tooltipTextStyle = [[CPTMutableTextStyle alloc] init];
-        tooltipTextStyle.textAlignment = CPTTextAlignmentCenter;
-        tooltipTextStyle.fontSize = 14.0;
-         
-        CPTTextLayer *layer = [[CPTTextLayer alloc] initWithText:[[point valueForKey:@"y"] stringValue]];
-        layer.textStyle = tooltipTextStyle;
-        layer.backgroundColor = [UIColor lightGrayColor].CGColor;
-        layer.bounds = CGRectMake(0, 0, 160, 40);
-        layer.cornerRadius = 5;
-        layer.borderColor = [UIColor redColor].CGColor;
-        
-        NSArray *anchorPoint = [NSArray arrayWithObjects:[NSNumber numberWithDouble:[x timeIntervalSince1970] ],@100 , nil];
-        
-        self.chartView.annotation = [[CPTPlotSpaceAnnotation alloc] initWithPlotSpace:self.chartView.graph.defaultPlotSpace anchorPlotPoint:anchorPoint];
-        self.chartView.annotation.contentLayer = layer;
-        [self.chartView.graph.plotAreaFrame.plotArea addAnnotation:self.chartView.annotation];
-    }
-}
 
 
 
@@ -171,37 +110,24 @@
 
 - (void)initializePlotSpace
 {
-    //self.dataValueRange = [self.dataValueRange expandByFactor:1.1];
-    
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.graph.defaultPlotSpace;
     plotSpace.allowsUserInteraction = YES;
+    plotSpace.delegate=self;
+    
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.globalRange.start) length:CPTDecimalFromDouble([self.globalRange distance])];
     
     //since y axis will never be able to drag, global space and visiable space for y axis are equal
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.dataValueRange.start) length:CPTDecimalFromDouble([self.dataValueRange distance])];
     plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([self.dataValueRange start]) length:CPTDecimalFromDouble([self.dataValueRange distance])];
+    
+    
+    self.origRightRange=[plotSpace.xRange mutableCopy];
 }
 
 - (void)initializeAxises
 {
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.graph.defaultPlotSpace;
-    
-    //line styles
-    CPTMutableLineStyle *hiddenLineStyle = [CPTMutableLineStyle lineStyle];
-    hiddenLineStyle.lineWidth = 0;
-    
-    CPTMutableLineStyle *axisLineStyle = [CPTMutableLineStyle lineStyle];
-    axisLineStyle.lineWidth = 1;
-    axisLineStyle.lineColor = [CPTColor whiteColor];
-    
-    CPTMutableLineStyle *gridLineStyle=[[CPTMutableLineStyle alloc] init];
-    gridLineStyle.lineWidth = 1.0f;
-    gridLineStyle.lineColor = [CPTColor whiteColor];
-    
-    //text styles
-    CPTMutableTextStyle *axisTextStyle = [CPTMutableTextStyle textStyle];
-    axisTextStyle.color = [CPTColor whiteColor];
     
     //x axis
     CPTXYAxis* x = [[CPTXYAxis alloc] init];
@@ -211,30 +137,30 @@
     x.orthogonalCoordinateDecimal = CPTDecimalFromInt(0);
     x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
     x.plotSpace = plotSpace;
-    x.axisLineStyle = axisLineStyle;
-    x.majorTickLineStyle = hiddenLineStyle;
-    x.minorTickLineStyle = hiddenLineStyle;
+    x.axisLineStyle = [self axisLineStyle];
+    x.majorTickLineStyle = [self hiddenLineStyle];
+    x.minorTickLineStyle = [self hiddenLineStyle];
+    x.majorGridLineStyle = [self hiddenLineStyle];
+    x.minorGridLineStyle = [self gridLineStyle];
     x.anchorPoint=CGPointZero;
     
     
     NSMutableSet *xlabels = [[NSMutableSet alloc] init];
     NSMutableSet *xlocations = [[NSMutableSet alloc] init];
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy年MM月"];
-    NSDate *tickDate = [NSDate dateWithTimeIntervalSince1970:self.globalRange.start];
+    NSDate *tickDate = [REMTimeHelper getDateFromMonthTicks: [NSNumber numberWithDouble: self.globalRange.start ]];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setMonth:1];
-    while ([tickDate timeIntervalSince1970] <= self.globalRange.end) {
+    while ([[REMTimeHelper getMonthTicksFromDate:tickDate] doubleValue] <= self.globalRange.end) {
         tickDate = [calendar dateByAddingComponents:components toDate:tickDate options:0];
         
-        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[formatter stringFromDate:tickDate] textStyle:axisTextStyle];
-        label.tickLocation = CPTDecimalFromDouble([tickDate timeIntervalSince1970]);
-        //NSLog(@"date: %@",[formatter stringFromDate:tickDate]);
+        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDateLabel:tickDate] textStyle:[self xAxisLabelStyle]];
+        label.tickLocation = CPTDecimalFromDouble([[REMTimeHelper getMonthTicksFromDate:tickDate] doubleValue]);
+        label.offset = 5;
         
         [xlabels addObject:label];
-        [xlocations addObject:[NSNumber numberWithDouble:[tickDate timeIntervalSince1970]]];
+        [xlocations addObject:[REMTimeHelper getMonthTicksFromDate:tickDate]];
     }
 
     x.axisLabels = xlabels;
@@ -246,19 +172,30 @@
     y.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
     y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
     y.plotSpace = plotSpace;
-    y.axisLineStyle = axisLineStyle;
-    y.majorTickLineStyle = hiddenLineStyle;
-    y.minorTickLineStyle = hiddenLineStyle;
+    y.axisLineStyle = [self axisLineStyle];
+    y.majorTickLineStyle = [self hiddenLineStyle];
+    y.minorTickLineStyle = [self hiddenLineStyle];
     y.anchorPoint=CGPointZero;
     
-    
-    y.gridLinesRange = plotSpace.yRange;
     y.majorIntervalLength = CPTDecimalFromFloat(self.dataValueRange.end/4);
-    y.majorGridLineStyle = gridLineStyle;
-    y.labelTextStyle = axisTextStyle;
+    y.majorGridLineStyle = [self gridLineStyle];
+    y.labelTextStyle = [self yAxisLabelStyle];
     
     //add x and y axis into axis set
     self.chartView.graph.axisSet.axes = @[x,y];
+}
+
+-(NSString *)formatDateLabel:(NSDate *)date
+{
+    NSDateFormatter *yearFormatter = [[NSDateFormatter alloc] init];
+    [yearFormatter setDateFormat:@"yyyy年MM月"];
+    
+    NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
+    [monthFormatter setDateFormat:@"MM月"];
+    
+    int month = [REMTimeHelper getMonth:date];
+    
+    return month == 1? [yearFormatter stringFromDate:date]: [monthFormatter stringFromDate:date];
 }
 
 - (void)initializePlots
@@ -270,10 +207,10 @@
     
     column.barBasesVary=NO;
     column.barWidthsAreInViewCoordinates=YES;
-    column.barWidth=CPTDecimalFromFloat(30);
-    //column.barOffset=CPTDecimalFromInt(5);
+    column.barWidth=CPTDecimalFromFloat(44);
+    column.barOffset=CPTDecimalFromInt(0);
     
-    column.fill= [CPTFill fillWithColor:[CPTColor whiteColor]];
+    column.fill= [CPTFill fillWithColor:[CPTColor colorWithComponentRed:1.0 green:1.0 blue:1.0 alpha:0.7]];
     
     column.baseValue=CPTDecimalFromFloat(0);
     
@@ -288,11 +225,15 @@
     [self.chartView.graph addPlot:column];
     
     //bench mark - line (color:235,106,79)
-    CPTColor *lineColor = [[CPTColor alloc] initWithCGColor:[UIColor colorWithRed:(235.0/255.0) green:(106.0/255.0) blue:(79.0/255.0) alpha:1.0].CGColor];
+    CPTColor *lineColor = [[CPTColor alloc] initWithCGColor:[UIColor colorWithRed:(241.0/255.0) green:(94.0/255.0) blue:(49.0/255.0) alpha:1.0].CGColor];
     
     CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
     lineStyle.lineColor = lineColor;//[CPTColor orangeColor];
-    lineStyle.lineWidth = 3;
+    lineStyle.lineWidth = 2;
+    
+    CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
+    symbol.fill= [CPTFill fillWithColor:lineColor];
+    symbol.size=CGSizeMake(8.0, 8.0);
     
     CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];
     labelStyle.color = [REMColor colorByIndex:1];
@@ -300,6 +241,7 @@
     CPTScatterPlot *line = [[CPTScatterPlot alloc] initWithFrame:self.chartView.graph.bounds];
     line.dataSource = self;
     line.identifier = [self.chartData[1] objectForKey:@"identity"];
+    line.plotSymbol = symbol;
     
     line.dataLineStyle = lineStyle;
     line.delegate = self;
@@ -323,17 +265,20 @@
         NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%llu", index, target.type, target.targetId];
         NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:energyData.count];
         
-        self.visiableRange.start = MIN(self.visiableRange.start, [target.visiableTimeRange.startTime timeIntervalSince1970]);
-        self.visiableRange.end = MAX(self.visiableRange.end, [target.visiableTimeRange.endTime timeIntervalSince1970]);
+        self.visiableRange.start = MIN(self.visiableRange.start, [[REMTimeHelper getMonthTicksFromDate:target.visiableTimeRange.startTime] doubleValue]);
+        self.visiableRange.end = MAX(self.visiableRange.end, [[REMTimeHelper getMonthTicksFromDate:target.visiableTimeRange.endTime] doubleValue]);
         
         for (int j = 0; j < energyData.count; j++)
         {
             REMEnergyData *point = (REMEnergyData *)energyData[j];
-            NSDecimalNumber *value = [[NSDecimalNumber alloc] initWithDecimal:point.dataValue];
-            [data addObject:@{@"y": value, @"x": point.localTime}];
             
-            self.globalRange.start = MIN(self.globalRange.start, [point.localTime timeIntervalSince1970]);
-            self.globalRange.end = MAX(self.globalRange.end, [point.localTime timeIntervalSince1970]);
+            NSNumber *monthTicks = [REMTimeHelper getMonthTicksFromDate:point.localTime];
+            
+            NSDecimalNumber *value = [[NSDecimalNumber alloc] initWithDecimal:point.dataValue];
+            [data addObject:@{@"y": value, @"x": monthTicks}];
+            
+            self.globalRange.start = MIN(self.globalRange.start, [[REMTimeHelper getMonthTicksFromDate:point.localTime] doubleValue]);
+            self.globalRange.end = MAX(self.globalRange.end, [[REMTimeHelper getMonthTicksFromDate:point.localTime] doubleValue]);
             
             self.dataValueRange.start = MIN(self.dataValueRange.start, [value doubleValue]);
             self.dataValueRange.end = MAX(self.dataValueRange.end, [value doubleValue]);
@@ -354,6 +299,37 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark -
+#pragma mark plotspace delegate for event
+- (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
+{
+    //    NSLog(@"point:%@",NSStringFromCGPoint(point));
+    //    NSLog(@"xrange:%@",space.xRange);
+    //        NSLog(@"global xrange:%@",space.globalXRange);
+    NSDecimal d = [[NSDecimalNumber numberWithDouble:60*60*24*3] decimalValue];
+    NSDecimal d1 = [[NSDecimalNumber numberWithDouble:60*60*24*10] decimalValue];
+    
+    NSDecimal oldLength=  CPTDecimalSubtract(space.globalXRange.length, d1);
+    NSDecimal oldLocation=  CPTDecimalAdd(space.globalXRange.location, d);
+    NSDecimal oldTotal=CPTDecimalAdd(oldLocation, oldLength);
+    NSDecimal nowTotal=CPTDecimalAdd(space.xRange.location, space.xRange.length);
+    if(CPTDecimalGreaterThan(nowTotal, oldTotal)==YES){
+        [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:self.origRightRange duration:0.1 withDelay:0 animationCurve:CPTAnimationCurveCubicInOut delegate:nil];
+        
+        return NO;
+    }
+    
+    if(CPTDecimalLessThan(space.xRange.location, oldLocation)){
+        CPTPlotRange *startRange=[CPTPlotRange plotRangeWithLocation:oldLocation length:self.origRightRange.length];
+        [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:startRange duration:0.1 withDelay:0 animationCurve:CPTAnimationCurveCubicInOut delegate:nil];
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
 
 #pragma mark - data source delegate
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
@@ -387,8 +363,7 @@
             
             if(fieldEnum == CPTBarPlotFieldBarLocation)
             {
-                //number = [NSNumber numberWithInt: idx];//[point objectForKey:@"x"];
-                number = [NSNumber numberWithDouble:[((NSDate *)[point objectForKey:@"x"]) timeIntervalSince1970]];
+                number = [point objectForKey:@"x"];
             }
             else
             {
@@ -407,4 +382,74 @@
     return newRange;
 }
 
+
+/*
+ 
+ -(void)longPressedAt:(NSDate*)x {
+ 
+ //determin x date
+ NSTimeInterval pressingPoint = [x timeIntervalSince1970];
+ NSArray *unitData = [self.chartData[0] objectForKey:@"data"];
+ 
+ int index = 0;
+ NSDate *pointDate = nil;
+ REMDataRange *pointRange = nil;
+ NSDictionary *point = nil;
+ for(;index<unitData.count;index++){
+ point = unitData[index];
+ 
+ //15 day
+ pointDate = [NSDate dateWithTimeIntervalSince1970: [((NSDate *)[point valueForKey:@"x"]) timeIntervalSince1970]];
+ 
+ NSDate *upperBoundDate = [REMTimeHelper add:15 onPart:REMDateTimePartDay ofDate:pointDate];
+ NSDate *lowerBoundDate = [REMTimeHelper add:-15 onPart:REMDateTimePartDay ofDate:pointDate];
+ pointRange = [[REMDataRange alloc] initWithStart:[lowerBoundDate timeIntervalSince1970] andEnd:[upperBoundDate timeIntervalSince1970]];
+ 
+ if([pointRange isValueInside:pressingPoint]){
+ break;
+ }
+ }
+ 
+ if(pointDate != nil){
+ CPTXYAxis *horizontalAxis = ((CPTXYAxisSet *)self.chartView.graph.axisSet).xAxis;
+ 
+ //clear the previous one tool tip
+ if(self.chartView.annotationBand != nil){
+ self.chartView.annotationBand = nil;
+ [horizontalAxis removeBackgroundLimitBand:self.chartView.annotationBand];
+ }
+ 
+ if(self.chartView.annotation != nil)
+ {
+ [self.chartView.graph.plotAreaFrame.plotArea removeAllAnnotations];
+ self.chartView.annotation = nil;
+ }
+ 
+ //draw lower part of the tool tip
+ NSDate *bandStartDate = [REMTimeHelper add:-10 onPart:REMDateTimePartDay ofDate: pointDate];
+ NSDate *bandEndDate = [REMTimeHelper add:10 onPart:REMDateTimePartDay ofDate: pointDate];
+ CPTPlotRange *bandRange=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([bandStartDate timeIntervalSince1970]) length:CPTDecimalFromDouble([bandEndDate timeIntervalSince1970] - [bandStartDate timeIntervalSince1970])];
+ CPTLimitBand *band= [CPTLimitBand limitBandWithRange:bandRange fill:[CPTFill fillWithColor:[CPTColor lightGrayColor]]];
+ [horizontalAxis addBackgroundLimitBand:band];
+ 
+ //draw upper part of the tool tip
+ CPTMutableTextStyle *tooltipTextStyle = [[CPTMutableTextStyle alloc] init];
+ tooltipTextStyle.textAlignment = CPTTextAlignmentCenter;
+ tooltipTextStyle.fontSize = 14.0;
+ 
+ CPTTextLayer *layer = [[CPTTextLayer alloc] initWithText:[[point valueForKey:@"y"] stringValue]];
+ layer.textStyle = tooltipTextStyle;
+ layer.backgroundColor = [UIColor lightGrayColor].CGColor;
+ layer.bounds = CGRectMake(0, 0, 160, 40);
+ layer.cornerRadius = 5;
+ layer.borderColor = [UIColor redColor].CGColor;
+ 
+ NSArray *anchorPoint = [NSArray arrayWithObjects:[NSNumber numberWithDouble:[x timeIntervalSince1970] ],@100 , nil];
+ 
+ self.chartView.annotation = [[CPTPlotSpaceAnnotation alloc] initWithPlotSpace:self.chartView.graph.defaultPlotSpace anchorPlotPoint:anchorPoint];
+ self.chartView.annotation.contentLayer = layer;
+ [self.chartView.graph.plotAreaFrame.plotArea addAnnotation:self.chartView.annotation];
+ }
+ }
+ */
 @end
