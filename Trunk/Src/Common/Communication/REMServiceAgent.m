@@ -55,7 +55,7 @@ static int requestTimeout = 1000; //(s)
         postData = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
     }
     
-    NSURLRequest *request = [REMServiceAgent buildRequestWith:service.url andPostData:postData];
+    NSURLRequest *request = [REMServiceAgent buildRequestWithUrl:service.url andPostData:postData];
     
     
     void (^onSuccess)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
@@ -222,7 +222,7 @@ static int requestTimeout = 1000; //(s)
     return parameterString;
 }
 
-+ (NSURLRequest *)buildRequestWith: (NSString *)absoluteUrl andPostData:(NSData *)data
++ (NSURLRequest *)buildRequestWithUrl: (NSString *)absoluteUrl andPostData:(NSData *)data
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:absoluteUrl]];
     [request setTimeoutInterval:60*10];
@@ -262,12 +262,12 @@ static int requestTimeout = 1000; //(s)
 {
     REMApplicationContext* context = [REMApplicationContext instance];
     NSString *original = [NSString stringWithFormat:@"%llu|%@|%llu",context.currentUser.userId,context.currentUser.name, context.currentUser.spId];
-    //NSLog(@"%@",original);
+    NSLog(@"%@",original);
     
     NSData *encryptedData = [REMEncryptHelper AES256EncryptData:[original dataUsingEncoding:NSUTF8StringEncoding] withKey:@"41758bd9d7294737"];
     
     NSString *base64Encoded = [REMEncryptHelper encodeBase64Data:encryptedData];
-    //NSLog(@"%@",base64Encoded);
+    NSLog(@"%@",base64Encoded);
     return base64Encoded;
 }
 

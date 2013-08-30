@@ -11,6 +11,8 @@
 #import "REMCommonHeaders.h"
 #import "REMDataRange.h"
 #import "REMBuildingAirQualityChart.h"
+#import "REMChartSeriesIndicator.h"
+#import "REMBuildingConstants.h"
 
 @interface REMBuildingAirQualityChartHandler ()
 
@@ -29,6 +31,22 @@
 
 @implementation REMBuildingAirQualityChartHandler
 
+const static NSString *kOutdoorCode = @"Outdoor";
+const static NSString *kMayAirCode = @"MayAir";
+const static NSString *kHoneywellCode = @"Honeywell";
+const static NSString *kAmericanStandardCode = @"美国标准";
+const static NSString *kChinaStandardCode = @"中国标准";
+
+
+const static NSString *kOutdoorLabelName = @"室外PM2.5";
+const static NSString *kHoneywellLabelName = @"室内新风PM2.5(霍尼)";
+const static NSString *kMayAirLabelName = @"室内新风PM2.5(美埃)";
+const static NSString *kAmericanStandardLabelFormat = @"%d %@(PM2.5美国标准)";
+const static NSString *kChinaStandardLabelFormat = @"%d %@(PM2.5中国标准)";
+
+static NSDictionary *codeNameMap;
+
+
 
 - (REMBuildingAirQualityChartHandler *)initWithViewFrame:(CGRect)frame
 {
@@ -36,6 +54,9 @@
     if (self) {
         // Custom initialization
         self.viewFrame = frame;
+        
+        codeNameMap = [[NSDictionary alloc] initWithObjects:@[kOutdoorLabelName,kMayAirLabelName,kHoneywellLabelName,kAmericanStandardLabelFormat,kChinaStandardLabelFormat] forKeys:@[kOutdoorCode,kMayAirCode,kHoneywellCode,kAmericanStandardCode,kChinaStandardCode]];
+        
     }
     return self;
 }
@@ -84,7 +105,6 @@
     
     //initialize graph
     [self.chartView initializeGraph];
-    [self initializeLabels];
     
     //initialize plot space
     [self initializePlotSpace];
@@ -97,6 +117,7 @@
     
     //
     [self drawStandards];
+    [self initializeLabels];
     
 }
 
@@ -138,11 +159,15 @@
         [convertedData addObject:series];
     }
     
+    if(self.dataValueRange.end<100){
+        self.dataValueRange.end = 100;
+    }
+    
     for(REMAirQualityStandardModel *standard in self.airQualityData.standards){
-        if([standard.standardName isEqual: @"美国标准"]){
+        if([standard.standardName isEqual: kAmericanStandardCode]){
             self.standardAmerican = standard;
         }
-        if([standard.standardName isEqual: @"中国标准"]){
+        if([standard.standardName isEqual: kChinaStandardCode]){
             self.standardChina = standard;
         }
     }
@@ -218,7 +243,7 @@
         
         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDateLabel:tickDate] textStyle:axisTextStyle];
         label.tickLocation = CPTDecimalFromDouble([tickDate timeIntervalSince1970]);
-        //NSLog(@"date: %@",[formatter stringFromDate:tickDate]);
+        label.offset = 5;
         
         [xlabels addObject:label];
         [xlocations addObject:[NSNumber numberWithDouble:[tickDate timeIntervalSince1970]]];
@@ -259,7 +284,7 @@
 -(void)initializePlots
 {
     for(NSDictionary *series in self.chartData){
-        CPTColor *lineColor = [self getLineColorWithTagCode:[series objectForKey:@"code"]];
+        CPTColor *lineColor = [self getColorWithCode:[series objectForKey:@"code"]];
         
         CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
         symbol.fill= [CPTFill fillWithColor:lineColor];
@@ -284,12 +309,11 @@
 {
     CPTXYAxis *verticalAxis = ((CPTXYAxisSet *)self.chartView.hostView.hostedGraph.axisSet).yAxis;
     
-    
     CPTPlotRange *bandRangeChina=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([self.standardChina.standardValue doubleValue])];
     CPTPlotRange *bandRangeAmerican=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([self.standardAmerican.standardValue doubleValue])];
     
-    CPTColor *chinaColor = [CPTColor colorWithCGColor:[self getChinaStandardColor].CGColor];
-    CPTColor *americanColor = [CPTColor colorWithCGColor:[self getAmericanStandardColor].CGColor];
+    CPTColor *chinaColor = [self getColorWithCode:(NSString *)kChinaStandardCode];
+    CPTColor *americanColor = [self getColorWithCode:(NSString *)kAmericanStandardCode];
     
     
     CPTLimitBand *standardBandChina= [CPTLimitBand limitBandWithRange:bandRangeChina fill:[CPTFill fillWithColor:chinaColor]];
@@ -302,107 +326,120 @@
 -(void)initializeLabels
 {
     //standard labels
-    if(self.chartView.chinaStandardLabel == nil){
-        UILabel *chinaStandardLabel = [[UILabel alloc] init];
-        chinaStandardLabel.text = [NSString stringWithFormat: @"%d %@(PM2.5中国标准)",[self.standardChina.standardValue intValue],self.standardChina.uom];
-        chinaStandardLabel.font = [UIFont fontWithName:@"Arial" size:14];
-        chinaStandardLabel.frame = CGRectMake(self.view.bounds.size.width-15, 150,300, 14);
-        chinaStandardLabel.textColor = [self getChinaStandardColor];
-        chinaStandardLabel.backgroundColor = [UIColor clearColor];
+    for(NSString *standardCode in @[(NSString *)kChinaStandardCode, (NSString *)kAmericanStandardCode]){
+        UILabel *standardLabel = [self getStandardLabelWithCode:standardCode];
         
-        self.chartView.chinaStandardLabel = chinaStandardLabel;
-        
-        [self.view addSubview:self.chartView.chinaStandardLabel];
-    }
-    
-    if(self.chartView.americanStandardLabel == nil){
-        UILabel *americanStandardLabel = [[UILabel alloc] init];
-        americanStandardLabel.text = [NSString stringWithFormat: @"%d %@(PM2.5美国标准)",[self.standardAmerican.standardValue intValue],self.standardAmerican.uom];
-        americanStandardLabel.font = [UIFont fontWithName:@"Arial" size:14];
-        americanStandardLabel.frame = CGRectMake(self.view.bounds.size.width-15, 193,300, 14);
-        americanStandardLabel.textColor = [self getAmericanStandardColor];
-        americanStandardLabel.backgroundColor = [UIColor clearColor];
-        
-        self.chartView.americanStandardLabel = americanStandardLabel;
-        
-        [self.view addSubview:self.chartView.americanStandardLabel];
+        [self.view addSubview:standardLabel];
     }
     
     //line dots and labels
-    
-    if(self.chartView.outdoorDotView == nil || self.chartView.outdoorLineLabel == nil){
-        UILabel *label = [[UILabel alloc] init];
-        UIView *view = [[UIView alloc] init];
+    for(NSDictionary *series in self.chartData){
+        NSString *seriesCode = [series objectForKey:@"code"];
         
-        self.chartView.outdoorDotView = view;
-        self.chartView.outdoorLineLabel = label;
-        
-        [self.view addSubview:self.chartView.outdoorDotView];
-        [self.view addSubview:self.chartView.outdoorLineLabel];
-    }
-    
-    if (self.chartView.honeywellDotView == nil || self.chartView.honeywellLineLabel == nil) {
-        UILabel *label = [[UILabel alloc] init];
-        
-        UIView *view = [[UIView alloc] init];
-        view.frame = CGRectMake(0,self.chartView.bounds.size.height,15,15);
-        view.layer.cornerRadius = 7.5;
-        view.backgroundColor = [self getLineColorWithTagCode:@"Honeywell"].uiColor;
-        
-        
-        self.chartView.honeywellDotView = view;
-        self.chartView.honeywellLineLabel = label;
-        
-        [self.view addSubview:self.chartView.honeywellDotView];
-        [self.view addSubview:self.chartView.honeywellLineLabel];
-    }
-    
-    if(self.chartView.mayairDotView == nil || self.chartView.mayairLineLabel == nil){
-        UILabel *label = [[UILabel alloc] init];
-        UIView *view = [[UIView alloc] init];
-        
-        self.chartView.mayairDotView = view;
-        self.chartView.mayairLineLabel = label;
-        
-        
-        [self.view addSubview:self.chartView.mayairDotView];
-        [self.view addSubview:self.chartView.mayairLineLabel];
+        REMChartSeriesIndicator *indicator = [self getSeriesIndicatorWithCode:seriesCode];
+        [self.view addSubview:indicator];
     }
 }
 
--(CPTColor *)getLineColorWithTagCode:(NSString *)code
+-(UILabel *)getStandardLabelWithCode:(NSString *)standardCode
 {
-    if([code isEqualToString:@"MayAir"]){
+    NSString *labelTextFormat = codeNameMap[standardCode];
+    REMAirQualityStandardModel *standard;
+    UIColor *standardColor = [self getColorWithCode:standardCode].uiColor;
+    
+    if(standardCode == (NSString *)kChinaStandardCode){
+        standard = self.standardChina;
+    }
+    else{
+        standard = self.standardAmerican;
+    }
+    
+    CGPoint point = [self getViewPointFromChartPoint:self.globalRange.end :[standard.standardValue doubleValue]];
+    CGRect labelFrame = CGRectMake(self.chartView.bounds.size.width-15, self.chartView.hostView.bounds.size.height - point.y+10,300, 14);
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"Arial" size:14];
+    label.text = [NSString stringWithFormat: labelTextFormat,[standard.standardValue intValue],standard.uom];
+    label.textColor = standardColor;
+    label.frame = labelFrame;
+    
+    return label;
+}
+
+-(REMChartSeriesIndicator *)getSeriesIndicatorWithCode:(NSString *)seriesCode
+{
+    CGFloat fontSize = 14.0, y = self.chartView.hostView.bounds.size.height + 43, x = 44.0, width=0.0, height=fontSize, indicatorSpace = 59,dotWidth=15, dotSpace=11;
+    
+    for(NSString *code in @[kOutdoorCode,kHoneywellCode,kMayAirCode]){
+        NSString *name = codeNameMap[code];
+        UIFont *font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:fontSize];
+        CGSize size = [name sizeWithFont:font];
+        
+        x += width == 0 ? width : width + indicatorSpace;
+        width = size.width +dotWidth+ dotSpace;
+        
+        if([seriesCode isEqualToString:(NSString *)code])
+            break;
+    }
+    
+    CGRect indicatorFrame = CGRectMake(x,y,width,height);
+    
+    NSLog(@"%@:%@",seriesCode,NSStringFromCGRect(indicatorFrame));
+    
+    NSString *indicatorName = codeNameMap[seriesCode];
+    UIColor *indicatorColor = [self getColorWithCode:seriesCode].uiColor;
+    
+    REMChartSeriesIndicator *indicator = [[REMChartSeriesIndicator alloc] initWithFrame:indicatorFrame title:indicatorName andColor:indicatorColor];
+    
+    return indicator;
+}
+
+-(CPTColor *)getColorWithCode:(NSString *)code
+{
+    if([code isEqualToString:(NSString *)kMayAirCode]){
         return [[CPTColor alloc] initWithComponentRed:0.0/255.0 green:163.0/255.0 blue:179.0/255.0 alpha:1];
     }
-    else if([code isEqualToString:@"Honeywell"]){
+    else if([code isEqualToString:(NSString *)kHoneywellCode]){
         return [[CPTColor alloc] initWithComponentRed:97.0/255.0 green:184.0/255.0 blue:2.0/255.0 alpha:1];
     }
-    else if([code isEqualToString:@"Outdoor"]){
+    else if([code isEqualToString:(NSString *)kOutdoorCode]){
         return [[CPTColor alloc] initWithComponentRed:106.0/255.0 green:99.0/255.0 blue:74.0/255.0 alpha:1];
+    }
+    else if([code isEqualToString:(NSString *)kChinaStandardCode]){
+        return [[CPTColor alloc] initWithComponentRed:99.0/255.0 green:0.0/255.0 blue:5.0/255.0 alpha:1];
+    }
+    else if([code isEqualToString:(NSString *)kAmericanStandardCode]){
+        return [[CPTColor alloc] initWithComponentRed:26.0/255.0 green:64.0/255.0 blue:110.0/255.0 alpha:1];
     }
     else{
         return [[CPTColor alloc] initWithComponentRed:0.0 green:0.0 blue:0.0 alpha:1];
     }
 }
 
--(UIColor *)getChinaStandardColor
+-(CGPoint)getViewPointFromChartPoint:(double)x :(double)y
 {
-    if(self.colorForChinaStandard==nil){
-        self.colorForChinaStandard = [UIColor colorWithRed:99.0/255.0 green:0.0/255.0 blue:5.0/255.0 alpha:1];
-    }
+    //CGPoint dataPoint;
+    NSDecimal plotPoint[2];
+    plotPoint[CPTCoordinateX] = CPTDecimalFromDouble(x);
+    plotPoint[CPTCoordinateY] = CPTDecimalFromDouble(y);
+        
+    CPTGraph *graph = self.chartView.hostView.hostedGraph;
+    [graph layoutIfNeeded];
     
-    return self.colorForChinaStandard;
+    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
+     
+    // Convert the plot point to plot area space coordinates (I guess ;))
+    CGPoint viewPoint = [plotSpace plotAreaViewPointForPlotPoint:plotPoint];
+    
+    return  viewPoint;
+    
+//    // Convert the view point to the button container layer coordinate system
+//    dataPoint = [graph convertPoint:viewPoint fromLayer:graph.plotAreaFrame.plotArea];
+//    
+//    return [self.view convertPoint:dataPoint fromView:self.chartView.hostView];
 }
 
--(UIColor *)getAmericanStandardColor
-{
-    if(self.colorForAmericanStandard == nil){
-        self.colorForAmericanStandard = [UIColor colorWithRed:26.0/255.0 green:64.0/255.0 blue:110.0/255.0 alpha:1];
-    }
-    
-    return self.colorForAmericanStandard;
-}
 
 #pragma mark - data source delegate
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
