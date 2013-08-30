@@ -30,9 +30,101 @@
 
 @property (nonatomic,strong) CPTPlotRange *origRightRange;
 
+
+@property (nonatomic) CGPoint lastDraggedPoint;
+@property (nonatomic) NSTimeInterval lastDraggedTime;
+@property (nonatomic) NSTimeInterval deltaTime;
+
+
+
 @end
 
 @implementation REMBuildingAirQualityChartHandler
+
+
+
+
+
+#pragma mark -
+#pragma mark plotspace delegate for event
+
+- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDownEvent:(UIEvent *)event atPoint:(CGPoint)point
+{
+    self.lastDraggedPoint=point;
+    self.lastDraggedTime=event.timestamp;
+    
+
+
+    return YES;
+}
+
+- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDraggedEvent:(UIEvent *)event atPoint:(CGPoint)point
+{
+    self.lastDraggedPoint=point;
+    NSTimeInterval current=event.timestamp;
+    self.deltaTime=current-self.lastDraggedTime;
+    self.lastDraggedTime=current;
+    return YES;
+}
+
+
+- (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
+{
+    //    NSLog(@"point:%@",NSStringFromCGPoint(point));
+    //    NSLog(@"xrange:%@",space.xRange);
+    //        NSLog(@"global xrange:%@",space.globalXRange);
+    CGFloat delta=point.x-self.lastDraggedPoint.x;
+    CGFloat absDelta=ABS(delta);
+    NSTimeInterval current=event.timestamp;
+    NSTimeInterval deltaTime=current-self.lastDraggedTime;
+    
+    NSLog(@"diff:%f",point.x-self.lastDraggedPoint.x);
+    NSLog(@"delta time:%f",self.deltaTime);
+    
+    NSDecimal d = [[NSDecimalNumber numberWithDouble:60*60*24*3] decimalValue];
+    NSDecimal d1 = [[NSDecimalNumber numberWithDouble:60*60*24*10] decimalValue];
+    
+    NSDecimal oldLength=  CPTDecimalSubtract(space.globalXRange.length, d1);
+    NSDecimal oldLocation=  CPTDecimalAdd(space.globalXRange.location, d);
+    NSDecimal oldTotal=CPTDecimalAdd(oldLocation, oldLength);
+    NSDecimal nowTotal=CPTDecimalAdd(space.xRange.location, space.xRange.length);
+    if(CPTDecimalGreaterThan(nowTotal, oldTotal)==YES){
+        
+        [CPTAnimation animate:space
+                     property:@"xRange"
+                fromPlotRange:space.xRange
+                  toPlotRange:self.origRightRange
+                     duration:0.1
+                    withDelay:0
+               animationCurve:CPTAnimationCurveCubicInOut
+                     delegate:nil];
+        
+        return NO;
+    }
+    
+    if(CPTDecimalLessThan(space.xRange.location, oldLocation)){
+        CPTPlotRange *startRange=[CPTPlotRange plotRangeWithLocation:oldLocation length:self.origRightRange.length];
+        [CPTAnimation animate:space
+                     property:@"xRange"
+                fromPlotRange:space.xRange
+                  toPlotRange:startRange
+                     duration:0.2
+                    withDelay:0
+               animationCurve:CPTAnimationCurveCubicInOut
+                     delegate:nil];
+        
+        return NO;
+    }
+    
+    
+    
+    //UITouch *touch= [event.allTouches anyObject];
+    
+    
+    
+    return YES;
+}
+
 
 const static NSString *kOutdoorCode = @"Outdoor";
 const static NSString *kMayAirCode = @"MayAir";
@@ -439,51 +531,7 @@ static NSDictionary *codeNameMap;
 //    return [self.view convertPoint:dataPoint fromView:self.chartView.hostView];
 }
 
-#pragma mark -
-#pragma mark plotspace delegate for event
-- (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
-{
-//    NSLog(@"point:%@",NSStringFromCGPoint(point));
-//    NSLog(@"xrange:%@",space.xRange);
-//        NSLog(@"global xrange:%@",space.globalXRange);
-    NSDecimal d = [[NSDecimalNumber numberWithDouble:60*60*24*3] decimalValue];
-    NSDecimal d1 = [[NSDecimalNumber numberWithDouble:60*60*24*10] decimalValue];
 
-    NSDecimal oldLength=  CPTDecimalSubtract(space.globalXRange.length, d1);
-    NSDecimal oldLocation=  CPTDecimalAdd(space.globalXRange.location, d);
-    NSDecimal oldTotal=CPTDecimalAdd(oldLocation, oldLength);
-    NSDecimal nowTotal=CPTDecimalAdd(space.xRange.location, space.xRange.length);
-    if(CPTDecimalGreaterThan(nowTotal, oldTotal)==YES){
-        
-        [CPTAnimation animate:space
-                     property:@"xRange"
-                fromPlotRange:space.xRange
-                  toPlotRange:self.origRightRange
-                     duration:0.1
-                    withDelay:0
-               animationCurve:CPTAnimationCurveCubicInOut
-                     delegate:nil];
-        
-        return NO;
-    }
-    
-    if(CPTDecimalLessThan(space.xRange.location, oldLocation)){
-        CPTPlotRange *startRange=[CPTPlotRange plotRangeWithLocation:oldLocation length:self.origRightRange.length];
-        [CPTAnimation animate:space
-                     property:@"xRange"
-                fromPlotRange:space.xRange
-                  toPlotRange:startRange
-                     duration:0.2
-                    withDelay:0
-               animationCurve:CPTAnimationCurveCubicInOut
-                     delegate:nil];
-        
-        return NO;
-    }
-    
-    
-    return YES;
-}
 
 #pragma mark - data source delegate
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
