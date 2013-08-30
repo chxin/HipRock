@@ -819,7 +819,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "279"
          endingLineNumber = "279"
-         landmarkName = "-loadData::::"
+         landmarkName = "-intervalChanged:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -845,7 +845,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "298"
          endingLineNumber = "298"
-         landmarkName = "-loadData::::"
+         landmarkName = "-intervalChanged:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -858,7 +858,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "315"
          endingLineNumber = "315"
-         landmarkName = "-loadData::::"
+         landmarkName = "-drawToolTip:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -871,7 +871,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "290"
          endingLineNumber = "290"
-         landmarkName = "-loadData::::"
+         landmarkName = "-intervalChanged:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -884,7 +884,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "297"
          endingLineNumber = "297"
-         landmarkName = "-loadData::::"
+         landmarkName = "-intervalChanged:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1391,7 +1391,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "170"
          endingLineNumber = "170"
-         landmarkName = "-initializePlotSpace"
+         landmarkName = "-convertData"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1404,7 +1404,33 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "34"
          endingLineNumber = "34"
-         landmarkName = "-initializeGraph"
+         landmarkName = "@implementation REMBuildingAirQualityChart"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BluesPad/View/Building/REMBuildingChartContainerView.m"
+         timestampString = "399531527.826964"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "38"
+         endingLineNumber = "38"
+         landmarkName = "-initChartViewWithSize:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BluesPad/View/Building/REMBuildingAirQualityView.m"
+         timestampString = "399531542.789224"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
+         landmarkName = "-initChartContainer"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

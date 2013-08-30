@@ -69,7 +69,7 @@
 {
     int marginTop=kBuildingTotalInnerMargin+kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingDetailGroupMargin+kBuildingTotalGroupMargin;
     
-    REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0,marginTop , kBuildingChartWidth, kBuildingChartHeight*2+kBuildingCommodityBottomMargin) withTitle:@"室内外PM2.5逐日含量" andTitleFontSize:kBuildingCommodityTitleFontSize ];
+    REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0,marginTop , kBuildingChartWidth, kBuildingChartHeight*2+kBuildingCommodityBottomMargin+kBuildingDetailInnerMargin*2) withTitle:@"室内外PM2.5逐日含量" andTitleFontSize:kBuildingCommodityTitleFontSize ];
     
     [self addSubview:view];
     
@@ -85,6 +85,7 @@
     REMBuildingChartContainerView *pmContainer = self.chartViewArray[0];
     
     if(pmContainer.controller==nil){
+        NSLog(@"pm2.5container:%@",NSStringFromCGRect(pmContainer.chartContainer.frame));
         REMBuildingAirQualityChartHandler *pmController = [[REMBuildingAirQualityChartHandler alloc]initWithViewFrame:pmContainer.chartContainer.frame];
         pmContainer.controller=pmController;
     }
