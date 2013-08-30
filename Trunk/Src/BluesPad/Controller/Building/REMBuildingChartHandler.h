@@ -26,5 +26,7 @@
 -(CPTTextStyle *)xAxisLabelStyle;
 -(CPTTextStyle *)yAxisLabelStyle;
 
+-(NSString *)formatDataValue:(NSNumber *)number;
+
 
 @end

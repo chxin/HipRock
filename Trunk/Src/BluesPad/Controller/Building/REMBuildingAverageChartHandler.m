@@ -27,8 +27,7 @@
 @property (nonatomic,strong) REMDataRange *dataValueRange;
 @property (nonatomic,strong) REMDataRange *visiableRange;
 @property (nonatomic,strong) REMDataRange *globalRange;
-
-@property (nonatomic,strong) CPTPlotRange *origRightRange;
+@property (nonatomic,strong) REMDataRange *draggableRange;
 
 @end
 
@@ -114,15 +113,14 @@
     plotSpace.allowsUserInteraction = YES;
     plotSpace.delegate=self;
     
+    self.draggableRange = [self.globalRange expandByFactor:0.1];
+    
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
-    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.globalRange.start) length:CPTDecimalFromDouble([self.globalRange distance])];
+    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.draggableRange.start) length:CPTDecimalFromDouble([self.draggableRange distance])];
     
     //since y axis will never be able to drag, global space and visiable space for y axis are equal
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.dataValueRange.start) length:CPTDecimalFromDouble([self.dataValueRange distance])];
-    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([self.dataValueRange start]) length:CPTDecimalFromDouble([self.dataValueRange distance])];
-    
-    
-    self.origRightRange=[plotSpace.xRange mutableCopy];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end)];
+    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end)];
 }
 
 - (void)initializeAxises
@@ -169,6 +167,8 @@
     
     //y axis
     CPTXYAxis* y= [[CPTXYAxis alloc] init];
+    [y setLabelingPolicy:CPTAxisLabelingPolicyNone];
+    
     y.coordinate = CPTCoordinateY;
     y.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
     y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
@@ -178,6 +178,24 @@
     y.minorTickLineStyle = [self hiddenLineStyle];
     y.anchorPoint=CGPointZero;
     
+    NSMutableSet *ylabels = [[NSMutableSet alloc] init];
+    NSMutableSet *yMajorLocations = [[NSMutableSet alloc] init];
+    double dataValue = 0;
+    while(dataValue<=self.dataValueRange.end){
+        NSNumber *number = [NSNumber numberWithDouble:dataValue];
+        
+        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDataValue:number] textStyle:[self yAxisLabelStyle]];
+        label.tickLocation = CPTDecimalFromDouble(dataValue);
+        label.offset = 5;
+        
+        [ylabels addObject:label];
+        [yMajorLocations addObject:[NSNumber numberWithDouble:dataValue]];
+        
+        dataValue+=self.dataValueRange.end / 4;
+    }
+
+    y.axisLabels = ylabels;
+    y.majorTickLocations = yMajorLocations;
     y.majorIntervalLength = CPTDecimalFromFloat(self.dataValueRange.end/4);
     y.majorGridLineStyle = [self gridLineStyle];
     y.labelTextStyle = [self yAxisLabelStyle];
@@ -352,33 +370,31 @@
 #pragma mark - plot space delegate
 - (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
 {
-    //    NSLog(@"point:%@",NSStringFromCGPoint(point));
-    //    NSLog(@"xrange:%@",space.xRange);
-    //        NSLog(@"global xrange:%@",space.globalXRange);
+    //left bound
+    NSDecimal currentLeftLocation = space.xRange.location;
+    NSDecimal currentRightLocation = CPTDecimalAdd(space.xRange.location,space.xRange.length);
     
-    NSDecimal d = [[NSDecimalNumber numberWithDouble:60*60*24*3] decimalValue];
-    NSDecimal d1 = [[NSDecimalNumber numberWithDouble:60*60*24*10] decimalValue];
+    NSDecimal minLeftLocation = CPTDecimalFromDouble(self.globalRange.start);
+    NSDecimal maxRightLocation = CPTDecimalFromDouble(self.globalRange.end);
     
-    NSDecimal oldLength=  CPTDecimalSubtract(space.globalXRange.length, d1);
-    NSDecimal oldLocation=  CPTDecimalAdd(space.globalXRange.location, d);
-    NSDecimal oldTotal=CPTDecimalAdd(oldLocation, oldLength);
+    BOOL isCurrentLeftLessThanMinLeft = CPTDecimalLessThan(currentLeftLocation,minLeftLocation);
+    BOOL isCurrentRightGreaterThanMaxRight = CPTDecimalGreaterThan(currentRightLocation, maxRightLocation);
     
-    NSDecimal nowTotal=CPTDecimalAdd(space.xRange.location, space.xRange.length);
-    
-    if(CPTDecimalGreaterThan(nowTotal, oldTotal)==YES){
-        [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:self.origRightRange duration:0.1 withDelay:0 animationCurve:CPTAnimationCurveCubicInOut delegate:nil];
+    //if current left location is smaller than global range start, go back with animation
+    //if current right location is greater than global range end, go back with animation too
+    if(isCurrentLeftLessThanMinLeft == YES || isCurrentRightGreaterThanMaxRight == YES){
+        CPTPlotRange *correctRange;
+        if(isCurrentLeftLessThanMinLeft)
+            correctRange = [[CPTPlotRange alloc] initWithLocation:minLeftLocation length:space.xRange.length];
+        else
+            correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalSubtract(maxRightLocation, space.xRange.length) length:space.xRange.length];
+
+        [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:correctRange duration:0.15 withDelay:0 animationCurve:CPTAnimationCurveCubicInOut delegate:nil];
         
         return NO;
     }
     
-    if(CPTDecimalLessThan(space.xRange.location, oldLocation)){
-        CPTPlotRange *startRange=[CPTPlotRange plotRangeWithLocation:oldLocation length:self.origRightRange.length];
-        [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:startRange duration:0.1 withDelay:0 animationCurve:CPTAnimationCurveCubicInOut delegate:nil];
-        
-        return NO;
-    }
-    
-    return YES;
+    return  YES;
 }
 
 

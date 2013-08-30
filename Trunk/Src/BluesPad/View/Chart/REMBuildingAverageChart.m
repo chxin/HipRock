@@ -21,8 +21,6 @@ static CGFloat bottomAxisOffset = 56.0;
     if (self) {
         // Initialization code
         [self initializeGraph];
-        self.layer.borderColor = [UIColor greenColor].CGColor;
-        self.layer.borderWidth = 1.0;
     }
     return self;
 }
@@ -31,8 +29,6 @@ static CGFloat bottomAxisOffset = 56.0;
 {
     self.hostView = [[CPTGraphHostingView alloc]initWithFrame:self.bounds];
     
-    self.hostView.layer.borderColor = [UIColor blueColor].CGColor;
-    self.hostView.layer.borderWidth = 1.0;
     
     self.graph=[[CPTXYGraph alloc] init];
     
