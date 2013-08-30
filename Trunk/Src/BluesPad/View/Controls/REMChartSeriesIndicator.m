@@ -35,6 +35,8 @@ static CGFloat fontSize = 14;
         // Initialization code
         self.color = color;
         self.title = text;
+        
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }

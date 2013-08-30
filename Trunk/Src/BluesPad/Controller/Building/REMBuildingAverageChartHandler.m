@@ -146,25 +146,26 @@
     
     
     NSMutableSet *xlabels = [[NSMutableSet alloc] init];
-    NSMutableSet *xlocations = [[NSMutableSet alloc] init];
+    NSMutableSet *xMajorLocations = [[NSMutableSet alloc] init];
+    NSMutableSet *xMinorLocations = [[NSMutableSet alloc] init];
     
-    NSDate *tickDate = [REMTimeHelper getDateFromMonthTicks: [NSNumber numberWithDouble: self.globalRange.start ]];
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    [components setMonth:1];
-    while ([[REMTimeHelper getMonthTicksFromDate:tickDate] doubleValue] <= self.globalRange.end) {
-        tickDate = [calendar dateByAddingComponents:components toDate:tickDate options:0];
-        
-        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDateLabel:tickDate] textStyle:[self xAxisLabelStyle]];
-        label.tickLocation = CPTDecimalFromDouble([[REMTimeHelper getMonthTicksFromDate:tickDate] doubleValue]);
+    double tickMonth = self.globalRange.start;
+    
+    while (tickMonth <= self.globalRange.end) {
+        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDateLabel:tickMonth] textStyle:[self xAxisLabelStyle]];
+        label.tickLocation = CPTDecimalFromDouble(tickMonth);
         label.offset = 5;
         
         [xlabels addObject:label];
-        [xlocations addObject:[REMTimeHelper getMonthTicksFromDate:tickDate]];
+        [xMajorLocations addObject:[NSNumber numberWithDouble:tickMonth]];
+        [xMinorLocations addObject:[NSNumber numberWithDouble:tickMonth + 0.5]];
+        
+        tickMonth += 1;
     }
 
     x.axisLabels = xlabels;
-    x.majorTickLocations = xlocations;
+    x.majorTickLocations = xMajorLocations;
+    x.minorTickLocations = xMinorLocations;
     
     //y axis
     CPTXYAxis* y= [[CPTXYAxis alloc] init];
@@ -185,8 +186,10 @@
     self.chartView.graph.axisSet.axes = @[x,y];
 }
 
--(NSString *)formatDateLabel:(NSDate *)date
+-(NSString *)formatDateLabel:(int)monthTick
 {
+    NSDate *date = [REMTimeHelper getDateFromMonthTicks:[NSNumber numberWithInt: monthTick]];
+    
     NSDateFormatter *yearFormatter = [[NSDateFormatter alloc] init];
     [yearFormatter setDateFormat:@"yyyy年MM月"];
     
@@ -300,36 +303,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark -
-#pragma mark plotspace delegate for event
-- (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
-{
-    //    NSLog(@"point:%@",NSStringFromCGPoint(point));
-    //    NSLog(@"xrange:%@",space.xRange);
-    //        NSLog(@"global xrange:%@",space.globalXRange);
-    NSDecimal d = [[NSDecimalNumber numberWithDouble:60*60*24*3] decimalValue];
-    NSDecimal d1 = [[NSDecimalNumber numberWithDouble:60*60*24*10] decimalValue];
-    
-    NSDecimal oldLength=  CPTDecimalSubtract(space.globalXRange.length, d1);
-    NSDecimal oldLocation=  CPTDecimalAdd(space.globalXRange.location, d);
-    NSDecimal oldTotal=CPTDecimalAdd(oldLocation, oldLength);
-    NSDecimal nowTotal=CPTDecimalAdd(space.xRange.location, space.xRange.length);
-    if(CPTDecimalGreaterThan(nowTotal, oldTotal)==YES){
-        [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:self.origRightRange duration:0.1 withDelay:0 animationCurve:CPTAnimationCurveCubicInOut delegate:nil];
-        
-        return NO;
-    }
-    
-    if(CPTDecimalLessThan(space.xRange.location, oldLocation)){
-        CPTPlotRange *startRange=[CPTPlotRange plotRangeWithLocation:oldLocation length:self.origRightRange.length];
-        [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:startRange duration:0.1 withDelay:0 animationCurve:CPTAnimationCurveCubicInOut delegate:nil];
-        
-        return NO;
-    }
-    
-    return YES;
-}
-
 
 #pragma mark - data source delegate
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
@@ -377,10 +350,37 @@
 }
 
 #pragma mark - plot space delegate
--(CPTPlotRange *)plotSpace:(CPTPlotSpace *)space willChangePlotRangeTo:(CPTPlotRange *)newRange forCoordinate:(CPTCoordinate)coordinate
+- (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
 {
-    return newRange;
+    //    NSLog(@"point:%@",NSStringFromCGPoint(point));
+    //    NSLog(@"xrange:%@",space.xRange);
+    //        NSLog(@"global xrange:%@",space.globalXRange);
+    
+    NSDecimal d = [[NSDecimalNumber numberWithDouble:60*60*24*3] decimalValue];
+    NSDecimal d1 = [[NSDecimalNumber numberWithDouble:60*60*24*10] decimalValue];
+    
+    NSDecimal oldLength=  CPTDecimalSubtract(space.globalXRange.length, d1);
+    NSDecimal oldLocation=  CPTDecimalAdd(space.globalXRange.location, d);
+    NSDecimal oldTotal=CPTDecimalAdd(oldLocation, oldLength);
+    
+    NSDecimal nowTotal=CPTDecimalAdd(space.xRange.location, space.xRange.length);
+    
+    if(CPTDecimalGreaterThan(nowTotal, oldTotal)==YES){
+        [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:self.origRightRange duration:0.1 withDelay:0 animationCurve:CPTAnimationCurveCubicInOut delegate:nil];
+        
+        return NO;
+    }
+    
+    if(CPTDecimalLessThan(space.xRange.location, oldLocation)){
+        CPTPlotRange *startRange=[CPTPlotRange plotRangeWithLocation:oldLocation length:self.origRightRange.length];
+        [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:startRange duration:0.1 withDelay:0 animationCurve:CPTAnimationCurveCubicInOut delegate:nil];
+        
+        return NO;
+    }
+    
+    return YES;
 }
+
 
 
 /*
