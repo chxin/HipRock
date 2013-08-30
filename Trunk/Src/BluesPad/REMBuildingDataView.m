@@ -32,9 +32,9 @@ typedef void(^SuccessCallback)(BOOL success);
     if (self) {
         self.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, kBuildingLeftMargin, 0, 0);
         [self setScrollEnabled:YES];
-        //self.clipsToBounds=NO;
+        self.clipsToBounds=YES;
         self.successCounter=0;
-        [self setContentSize:CGSizeMake(0, 1100)];
+        [self setContentSize:CGSizeMake(0, 1200)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
         self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityUsage.count+1)];

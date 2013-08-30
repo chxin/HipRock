@@ -35,6 +35,8 @@
     [self addSubview:self.hostView];
     
     NSLog(@"bounds:%@",NSStringFromCGRect(self.bounds));
+    NSLog(@"hostbounds:%@",NSStringFromCGRect(self.hostView.bounds));
+    NSLog(@"hostframe:%@",NSStringFromCGRect(self.hostView.frame));
     
     
     self.hostView.hostedGraph=[[CPTXYGraph alloc]initWithFrame:self.bounds];

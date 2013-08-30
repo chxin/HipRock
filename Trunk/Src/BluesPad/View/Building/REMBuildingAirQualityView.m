@@ -85,6 +85,7 @@
     REMBuildingChartContainerView *pmContainer = self.chartViewArray[0];
     
     if(pmContainer.controller==nil){
+        NSLog(@"pm2.5container:%@",NSStringFromCGRect(pmContainer.chartContainer.frame));
         REMBuildingAirQualityChartHandler *pmController = [[REMBuildingAirQualityChartHandler alloc]initWithViewFrame:pmContainer.chartContainer.frame];
         pmContainer.controller=pmController;
     }
