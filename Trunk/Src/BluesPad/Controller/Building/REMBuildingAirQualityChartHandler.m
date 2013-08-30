@@ -25,6 +25,9 @@
 @property (nonatomic,strong) REMAirQualityStandardModel *standardChina, *standardAmerican;
 @property (nonatomic,strong) UIColor *colorForChinaStandard, *colorForAmericanStandard;
 
+
+@property (nonatomic,strong) CPTPlotRange *origRightRange;
+
 @end
 
 @implementation REMBuildingAirQualityChartHandler
@@ -161,19 +164,23 @@
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.hostView.hostedGraph.defaultPlotSpace;
     plotSpace.allowsUserInteraction = YES;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
-    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.globalRange.start) length:CPTDecimalFromDouble([self.globalRange distance])];
+    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.globalRange.start -60*60*24*3) length:CPTDecimalFromDouble(self.globalRange.distance+60*60*24*10)];
     
     //since y axis will never be able to drag, global space and visiable space for y axis are equal
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.dataValueRange.start) length:CPTDecimalFromDouble([self.dataValueRange distance])];
     plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([self.dataValueRange start]) length:CPTDecimalFromDouble([self.dataValueRange distance])];
     
-    [plotSpace setElasticGlobalXRange:YES];
-    [plotSpace setAllowsMomentum:YES];
+   // [plotSpace setElasticGlobalXRange:YES];
+   // [plotSpace setAllowsMomentum:YES];
+    
+    self.origRightRange=[plotSpace.xRange mutableCopy];
 }
 
 -(void)initializeAxises
 {
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.hostView.hostedGraph.defaultPlotSpace;
+    
+    plotSpace.delegate=self;
     
     //line styles
     CPTMutableLineStyle *hiddenLineStyle = [CPTMutableLineStyle lineStyle];
@@ -403,6 +410,53 @@
     
     return self.colorForAmericanStandard;
 }
+
+#pragma mark -
+#pragma mark plotspace delegate for event
+- (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
+{
+    NSLog(@"point:%@",NSStringFromCGPoint(point));
+    NSLog(@"xrange:%@",space.xRange);
+        NSLog(@"global xrange:%@",space.globalXRange);
+    NSDecimal d = [[NSDecimalNumber numberWithDouble:60*60*24*3] decimalValue];
+    NSDecimal d1 = [[NSDecimalNumber numberWithDouble:60*60*24*10] decimalValue];
+
+    NSDecimal oldLength=  CPTDecimalSubtract(space.globalXRange.length, d1);
+    NSDecimal oldLocation=  CPTDecimalAdd(space.globalXRange.location, d);
+    NSDecimal oldTotal=CPTDecimalAdd(oldLocation, oldLength);
+    NSDecimal nowTotal=CPTDecimalAdd(space.xRange.location, space.xRange.length);
+    if(CPTDecimalGreaterThan(nowTotal, oldTotal)==YES){
+        
+        [CPTAnimation animate:space
+                     property:@"xRange"
+                fromPlotRange:space.xRange
+                  toPlotRange:self.origRightRange
+                     duration:0.2
+                    withDelay:0
+               animationCurve:CPTAnimationCurveCubicInOut
+                     delegate:nil];
+        
+        return NO;
+    }
+    
+    if(CPTDecimalLessThan(space.xRange.location, oldLocation)){
+        CPTPlotRange *startRange=[CPTPlotRange plotRangeWithLocation:oldLocation length:self.origRightRange.length];
+        [CPTAnimation animate:space
+                     property:@"xRange"
+                fromPlotRange:space.xRange
+                  toPlotRange:startRange
+                     duration:0.2
+                    withDelay:0
+               animationCurve:CPTAnimationCurveCubicInOut
+                     delegate:nil];
+        
+        return NO;
+    }
+    
+    
+    return YES;
+}
+
 
 #pragma mark - data source delegate
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot

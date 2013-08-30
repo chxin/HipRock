@@ -34,12 +34,15 @@
     self.hostView = [[CPTGraphHostingView alloc] initWithFrame:self.bounds];
     [self addSubview:self.hostView];
     
+    NSLog(@"bounds:%@",NSStringFromCGRect(self.bounds));
+    
     
     self.hostView.hostedGraph=[[CPTXYGraph alloc]initWithFrame:self.bounds];
     self.hostView.hostedGraph.plotAreaFrame.paddingTop=0.0f;
     self.hostView.hostedGraph.plotAreaFrame.paddingRight=0.0f;
     self.hostView.hostedGraph.plotAreaFrame.paddingBottom=0.0f;
     self.hostView.hostedGraph.plotAreaFrame.paddingLeft=38.0f;
+    
     self.hostView.hostedGraph.plotAreaFrame.masksToBorder = YES;
 }
 
