@@ -45,27 +45,15 @@
         self.graph.plotAreaFrame.paddingBottom=0.0f;
         self.graph.plotAreaFrame.paddingLeft=38.0f;
         
-        CPTMutableLineStyle *hiddenLineStyle = [CPTMutableLineStyle lineStyle];
-        hiddenLineStyle.lineWidth = 0;
-        CPTMutableLineStyle *xTickStyle = [CPTMutableLineStyle lineStyle];
-        xTickStyle.lineWidth = 1;
-        xTickStyle.lineColor = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
-        
-        CPTMutableTextStyle* labelStyle = [[CPTMutableTextStyle alloc]init];
-        labelStyle.color = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
-        CPTMutableLineStyle *gridLineStyle=[[CPTMutableLineStyle alloc]init];
-        gridLineStyle.dashPattern=[NSArray arrayWithObjects:[NSDecimalNumber numberWithInt:1],[NSDecimalNumber numberWithInt:1],nil];
-        gridLineStyle.lineColor=[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
-        
         CPTXYAxisSet *axisSet = (CPTXYAxisSet*)self.graph.axisSet;
         CPTXYAxis* x = axisSet.xAxis;
         [x setLabelingPolicy:CPTAxisLabelingPolicyNone];
-        x.majorTickLineStyle = xTickStyle;
+        x.majorTickLineStyle = [self hiddenLineStyle];
         x.majorTickLength = 0;
         x.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
         x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0f];
-        x.axisLineStyle = xTickStyle;
-        x.majorGridLineStyle = gridLineStyle;
+        x.axisLineStyle = [self axisLineStyle];
+        x.majorGridLineStyle = [self gridLineStyle];
         x.plotSpace = self.graph.defaultPlotSpace;
         
         CPTXYAxis* y = axisSet.yAxis;
@@ -77,12 +65,12 @@
 //        y.majorGridLineStyle = gridLineStyle;
 //        y.plotSpace = self.graph.defaultPlotSpace;
         [y setLabelingPolicy:CPTAxisLabelingPolicyNone];
-        y.majorTickLineStyle = xTickStyle;
+        y.majorTickLineStyle = [self hiddenLineStyle];
         y.majorTickLength = 0;
         y.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
         y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0f];
-        y.axisLineStyle = xTickStyle;
-        y.majorGridLineStyle = gridLineStyle;
+        y.axisLineStyle = [self axisLineStyle];
+        y.majorGridLineStyle = [self gridLineStyle];
         y.plotSpace = self.graph.defaultPlotSpace;
         
         [self viewDidLoad];
@@ -134,7 +122,7 @@
     return i;
 }
 
-- (CPTAxisLabel*)makeXLabel:(NSString*)labelText  location:(int)location labelStyle:(CPTMutableTextStyle*)style {
+- (CPTAxisLabel*)makeXLabel:(NSString*)labelText  location:(int)location labelStyle:(CPTTextStyle*)style {
     CPTAxisLabel *label = [[CPTAxisLabel alloc]initWithText:labelText textStyle:style];
     label.tickLocation= CPTDecimalFromInt(location);
     label.offset=5;
@@ -161,10 +149,6 @@
     }
     
     currentSourceIndex = [self getSourceIndex:t];
-    
-    
-    CPTMutableTextStyle* labelStyle = [[CPTMutableTextStyle alloc]init];
-    labelStyle.color = [CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1];
     
     NSString* dateFormat = nil;
     int amountOfY = 5;
@@ -207,9 +191,9 @@
     NSMutableArray *xtickLocations = [[NSMutableArray alloc]init];
     for (int i = 0; i < data.count; i = i + xStep) {
         if (t == Today || t == Yesterday) {
-            [xlocations addObject:[self makeXLabel:[NSString stringWithFormat:dateFormat, i] location:i labelStyle:labelStyle]];
+            [xlocations addObject:[self makeXLabel:[NSString stringWithFormat:dateFormat, i] location:i labelStyle:[self xAxisLabelStyle]]];
         } else {
-            [xlocations addObject:[self makeXLabel:[NSString stringWithFormat:dateFormat, i + 1] location:i labelStyle:labelStyle]];
+            [xlocations addObject:[self makeXLabel:[NSString stringWithFormat:dateFormat, i + 1] location:i labelStyle:[self xAxisLabelStyle]]];
         }
         [xtickLocations addObject:[NSNumber numberWithInt:i]];
     }
@@ -247,7 +231,7 @@
         } else {
             ylabelText = [NSString stringWithFormat:@"%@", [yFormatter stringFromNumber:[NSNumber numberWithInt:i]]];
         }
-        CPTAxisLabel *label = [[CPTAxisLabel alloc]initWithText:ylabelText textStyle:labelStyle];
+        CPTAxisLabel *label = [[CPTAxisLabel alloc]initWithText:ylabelText textStyle:[self yAxisLabelStyle]];
         label.offset = 5;
         label.tickLocation= CPTDecimalFromInt(i);
         [ylocations addObject:label];

@@ -41,12 +41,13 @@
 
 - (REMDataRange *)expandByFactor:(float)factor
 {
-    REMDataRange *newRange = [self copy];
+    REMDataRange *newRange = [[REMDataRange alloc] init];
+    
     
     double distance = [self distance];
     
-    newRange.start = newRange.start - (distance*factor);
-    newRange.end = newRange.end + (distance*factor);
+    newRange.start = self.start - (distance*factor);
+    newRange.end = self.end + (distance*factor);
     
     return newRange;
 }

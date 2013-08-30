@@ -24,6 +24,8 @@
 @property (nonatomic,strong) REMDataRange *dataValueRange;
 @property (nonatomic,strong) REMDataRange *visiableRange;
 @property (nonatomic,strong) REMDataRange *globalRange;
+@property (nonatomic,strong) REMDataRange *draggableRange;
+
 @property (nonatomic,strong) REMAirQualityStandardModel *standardChina, *standardAmerican;
 @property (nonatomic,strong) UIColor *colorForChinaStandard, *colorForAmericanStandard;
 
@@ -282,12 +284,14 @@ static NSDictionary *codeNameMap;
     plotSpace.allowsUserInteraction = YES;
     plotSpace.delegate=self;
     
+    self.draggableRange = [self.globalRange expandByFactor:0.1];
+    
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
-    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.globalRange.start -60*60*24*3) length:CPTDecimalFromDouble(self.globalRange.distance+60*60*24*10)];
+    plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.draggableRange.start) length:CPTDecimalFromDouble([self.draggableRange distance])];
     
     //since y axis will never be able to drag, global space and visiable space for y axis are equal
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.dataValueRange.start) length:CPTDecimalFromDouble([self.dataValueRange distance])];
-    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([self.dataValueRange start]) length:CPTDecimalFromDouble([self.dataValueRange distance])];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end)];
+    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end)];
     
    // [plotSpace setElasticGlobalXRange:YES];
    // [plotSpace setAllowsMomentum:YES];
@@ -338,12 +342,36 @@ static NSDictionary *codeNameMap;
     
     //y axis
     CPTXYAxis* y= [[CPTXYAxis alloc] init];
+    [y setLabelingPolicy:CPTAxisLabelingPolicyNone];
+    
     y.coordinate = CPTCoordinateY;
     y.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
     y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
     y.plotSpace = plotSpace;
     y.axisLineStyle = [self axisLineStyle];
     y.anchorPoint=CGPointZero;
+    
+    
+    NSMutableSet *ylabels = [[NSMutableSet alloc] init];
+    NSMutableSet *yMajorLocations = [[NSMutableSet alloc] init];
+    double dataValue = 0;
+    while(dataValue<=self.dataValueRange.end){
+        NSNumber *number = [NSNumber numberWithDouble:dataValue];
+        
+        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDataValue:number] textStyle:[self yAxisLabelStyle]];
+        label.tickLocation = CPTDecimalFromDouble(dataValue);
+        label.offset = 5;
+        
+        [ylabels addObject:label];
+        [yMajorLocations addObject:[NSNumber numberWithDouble:dataValue]];
+        
+        dataValue+=self.dataValueRange.end / 4;
+    }
+    
+    y.axisLabels = ylabels;
+    y.majorTickLocations = yMajorLocations;
+    
+    
     y.majorIntervalLength = CPTDecimalFromFloat(self.dataValueRange.end/4);
     y.majorGridLineStyle = [self gridLineStyle];
     y.labelTextStyle = [self yAxisLabelStyle];

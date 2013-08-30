@@ -334,15 +334,15 @@
     int year = [monthTicks intValue] / 12;
     int month = [monthTicks intValue] % 12;
     
-    NSDateComponents *component = [[NSDateComponents alloc] init];
-    [component setYear:year];
-    [component setMonth:month];
-    [component setDay:1];
-    [component setHour:0];
-    [component setMinute:0];
-    [component setSecond:0];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setYear:year];
+    [components setMonth:month];
+    [components setDay:1];
+    [components setHour:0];
+    [components setMinute:0];
+    [components setSecond:0];
     
-    return [component date];
+    return [[REMTimeHelper gregorianCalendar] dateFromComponents:components];
 }
 
 +(NSCalendar *)gregorianCalendar

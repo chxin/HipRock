@@ -15,6 +15,7 @@
 @implementation REMBuildingChartHandler
 
 
+
 static CPTLineStyle *axisLineStyle;
 static CPTLineStyle *gridLineStyle;
 static CPTLineStyle *hiddenLineStyle;
@@ -144,6 +145,26 @@ static CPTTextStyle *yAxisLabelStyle;
     }
     
     return yAxisLabelStyle;
+}
+
+-(NSString *)formatDataValue:(NSNumber *)number
+{
+    NSNumberFormatter* formatter = [[NSNumberFormatter alloc]init];
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    
+    double numberValue = [number doubleValue];
+    
+    
+        NSString* text = nil;
+        if (numberValue > 1000000) {
+            text = [NSString stringWithFormat:@"%@M", [formatter stringFromNumber:[NSNumber numberWithInt:numberValue / 1000000]]];
+        } else if (numberValue > 1000) {
+            text = [NSString stringWithFormat:@"%@K", [formatter stringFromNumber:[NSNumber numberWithInt:numberValue / 1000]]];
+        } else {
+            text = [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithInt:numberValue]]];
+        }
+    
+    return text;
 }
 
 - (void)didReceiveMemoryWarning
