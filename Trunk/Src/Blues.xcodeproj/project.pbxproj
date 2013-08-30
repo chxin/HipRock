@@ -479,6 +479,7 @@
 		7ACFCC1817CDA62E00811976 /* SplashScreenBackgroud.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFCBDE17CDA62E00811976 /* SplashScreenBackgroud.jpg */; };
 		7ACFCC1917CDA62E00811976 /* SplashScreenBackgroud@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFCBDF17CDA62E00811976 /* SplashScreenBackgroud@2x.jpg */; };
 		7ACFCC1A17CDA62E00811976 /* SplashScreenLogo-Common.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFCBE017CDA62E00811976 /* SplashScreenLogo-Common.png */; };
+		7AF3667817CF2D7400447650 /* REMChartSeriesIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3667717CF2D7400447650 /* REMChartSeriesIndicator.m */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
 		B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
@@ -965,6 +966,8 @@
 		7ACFCBDE17CDA62E00811976 /* SplashScreenBackgroud.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SplashScreenBackgroud.jpg; sourceTree = "<group>"; };
 		7ACFCBDF17CDA62E00811976 /* SplashScreenBackgroud@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "SplashScreenBackgroud@2x.jpg"; sourceTree = "<group>"; };
 		7ACFCBE017CDA62E00811976 /* SplashScreenLogo-Common.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenLogo-Common.png"; sourceTree = "<group>"; };
+		7AF3667617CF2D7400447650 /* REMChartSeriesIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartSeriesIndicator.h; sourceTree = "<group>"; };
+		7AF3667717CF2D7400447650 /* REMChartSeriesIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartSeriesIndicator.m; sourceTree = "<group>"; };
 		B4198EAC178410D300B50475 /* REMLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLogManager.h; path = Common/Log/REMLogManager.h; sourceTree = "<group>"; };
 		B4198EAD178410D300B50475 /* REMLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLogManager.m; path = Common/Log/REMLogManager.m; sourceTree = "<group>"; };
 		B4198EB01784220300B50475 /* REMJSONHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMJSONHelper.h; path = Common/Utility/REMJSONHelper.h; sourceTree = "<group>"; };
@@ -1458,6 +1461,8 @@
 				7A09330C17CC8737007C6A4E /* REMBackgroundImageButton.m */,
 				7A48B47C17CDE321002DA386 /* REMInsetsTextField.h */,
 				7A48B47D17CDE321002DA386 /* REMInsetsTextField.m */,
+				7AF3667617CF2D7400447650 /* REMChartSeriesIndicator.h */,
+				7AF3667717CF2D7400447650 /* REMChartSeriesIndicator.m */,
 			);
 			name = Controls;
 			path = View/Controls;
@@ -2465,6 +2470,7 @@
 				EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */,
 				7A09330D17CC8737007C6A4E /* REMBackgroundImageButton.m in Sources */,
 				7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */,
+				7AF3667817CF2D7400447650 /* REMChartSeriesIndicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

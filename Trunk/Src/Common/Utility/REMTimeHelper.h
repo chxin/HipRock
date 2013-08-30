@@ -22,6 +22,13 @@ typedef enum _REMDateTimePart : NSUInteger{
     REMDateTimePartYear = 6,
 } REMDateTimePart;
 
+
+#define TIMEINTERVAL_SECOND 1000;
+#define TIMEINTERVAL_MINUTE 1000 * 60;
+#define TIMEINTERVAL_HOUR = 1000 * 60 * 60;
+#define TIMEINTERVAL_DAY = 1000 * 60 * 60 * 24;
+#define TIMEINTERVAL_WEEK = 1000 * 60 * 60 *24 * 7;
+
 @interface REMTimeHelper : NSObject
 
 + (long long) longLongFromJSONString:(NSString *)jsonDate;
@@ -41,5 +48,7 @@ typedef enum _REMDateTimePart : NSUInteger{
 + (NSUInteger)getDay:(NSDate *)date;
 + (int )getHour:(NSDate *)date;
 + (int)getMinute:(NSDate *)date;
++(NSNumber *)getMonthTicksFromDate:(NSDate *)date;
++(NSDate *)getDateFromMonthTicks:(NSNumber *)monthTicks;
 
 @end

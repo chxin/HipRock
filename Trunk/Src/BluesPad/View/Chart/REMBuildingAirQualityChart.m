@@ -15,15 +15,19 @@
 
 @implementation REMBuildingAirQualityChart
 
+static CGFloat leftAxisOffset = 57.0;
+static CGFloat bottomAxisOffset = 16.0;
+static CGFloat topAxisOffset = 6.0;
+static CGFloat rightAxisOffset = 11.0;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        //[self initializeGraph];
-        //self.backgroundColor = [UIColor greenColor];
-        self.layer.borderColor = [UIColor greenColor].CGColor;
-        self.layer.borderWidth = 1.0;
+        
+//        self.layer.borderColor = [UIColor greenColor].CGColor;
+//        self.layer.borderWidth = 1.0;
     }
     return self;
 }
@@ -31,21 +35,29 @@
 
 -(void)initializeGraph
 {
-    self.hostView = [[CPTGraphHostingView alloc] initWithFrame:self.bounds];
-    [self addSubview:self.hostView];
+    //NSLog(@"bounds:%@",NSStringFromCGRect(self.bounds));
+    
+    CGRect hostViewFrame = CGRectMake(0, 0, self.bounds.size.width-0, 405 + topAxisOffset + bottomAxisOffset);
     
     NSLog(@"bounds:%@",NSStringFromCGRect(self.bounds));
     NSLog(@"hostbounds:%@",NSStringFromCGRect(self.hostView.bounds));
     NSLog(@"hostframe:%@",NSStringFromCGRect(self.hostView.frame));
     
+    self.hostView.hostedGraph=[[CPTXYGraph alloc] init];
     
-    self.hostView.hostedGraph=[[CPTXYGraph alloc]initWithFrame:self.bounds];
-    self.hostView.hostedGraph.plotAreaFrame.paddingTop=0.0f;
-    self.hostView.hostedGraph.plotAreaFrame.paddingRight=0.0f;
-    self.hostView.hostedGraph.plotAreaFrame.paddingBottom=0.0f;
-    self.hostView.hostedGraph.plotAreaFrame.paddingLeft=38.0f;
+    self.hostView.hostedGraph.paddingTop = topAxisOffset;
+    self.hostView.hostedGraph.paddingBottom = bottomAxisOffset;
+    self.hostView.hostedGraph.paddingLeft = leftAxisOffset;
+    self.hostView.hostedGraph.paddingRight = rightAxisOffset;
     
-    self.hostView.hostedGraph.plotAreaFrame.masksToBorder = YES;
+    self.hostView.hostedGraph.plotAreaFrame.paddingTop=0.0;
+    self.hostView.hostedGraph.plotAreaFrame.paddingRight=0.0;
+    self.hostView.hostedGraph.plotAreaFrame.paddingBottom=1.0;
+    self.hostView.hostedGraph.plotAreaFrame.paddingLeft=1.0;
+    
+    self.hostView.hostedGraph.plotAreaFrame.masksToBorder = NO;
+    
+    [self addSubview:self.hostView];
 }
 
 

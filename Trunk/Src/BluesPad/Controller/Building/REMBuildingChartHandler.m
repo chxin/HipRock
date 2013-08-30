@@ -15,6 +15,13 @@
 @implementation REMBuildingChartHandler
 
 
+static CPTLineStyle *axisLineStyle;
+static CPTLineStyle *gridLineStyle;
+static CPTLineStyle *hiddenLineStyle;
+static CPTTextStyle *xAxisLabelStyle;
+static CPTTextStyle *yAxisLabelStyle;
+
+
 - (REMBuildingChartHandler *)initWithViewFrame:(CGRect)frame
 {
     self = [super init];
@@ -36,10 +43,10 @@
     [super viewDidLoad];
     CPTGraphHostingView* hostView = [self getHostView];
     if (hostView != nil) {
-        // Do any additional setup after loading the view.
-        UILongPressGestureRecognizer* gest = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
-        //[gest setNumberOfTouchesRequired:100];
-        [hostView addGestureRecognizer: gest];
+//        // Do any additional setup after loading the view.
+//        UILongPressGestureRecognizer* gest = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
+//        //[gest setNumberOfTouchesRequired:100];
+//        [hostView addGestureRecognizer: gest];
     }
 }
 
@@ -67,6 +74,76 @@
     CGPoint pointInPlotArea = [plot convertPoint:touchPoint fromLayer:hostingView.hostedGraph];
     [plotSpace plotPoint:plotPoint forPlotAreaViewPoint:pointInPlotArea];
     return [NSDate dateWithTimeIntervalSince1970:[NSDecimalNumber decimalNumberWithDecimal:plotPoint[0]].floatValue];
+}
+
+
+-(CPTLineStyle *)axisLineStyle
+{
+    if(axisLineStyle == nil){
+        axisLineStyle = [[CPTMutableLineStyle alloc] init];
+        
+        CPTMutableLineStyle *style = [CPTMutableLineStyle lineStyle];
+        style.lineWidth = 1;
+        style.lineColor = [CPTColor colorWithCGColor:[UIColor colorWithWhite:1 alpha:0.8].CGColor];
+        
+        axisLineStyle = style;
+    }
+    
+    return axisLineStyle;
+}
+
+-(CPTLineStyle *)gridLineStyle
+{
+    if(gridLineStyle==nil){
+        CPTMutableLineStyle *style=[[CPTMutableLineStyle alloc] init];
+        style.lineWidth = 2.0f;
+        style.lineColor = [CPTColor colorWithCGColor:[UIColor colorWithWhite:1 alpha:0.4].CGColor];
+        style.dashPattern = [NSArray arrayWithObjects:[NSDecimalNumber numberWithInt:4],[NSDecimalNumber numberWithInt:4],nil];
+        
+        gridLineStyle = style;
+    }
+    
+    return gridLineStyle;
+}
+
+-(CPTLineStyle *)hiddenLineStyle
+{
+    if(hiddenLineStyle == nil){
+        CPTMutableLineStyle *style = [CPTMutableLineStyle lineStyle];
+        style.lineWidth = 0;
+        
+        hiddenLineStyle = style;
+    }
+    
+    return hiddenLineStyle;
+}
+
+-(CPTTextStyle *)xAxisLabelStyle
+{
+    //text styles
+    if(xAxisLabelStyle == nil){
+        CPTMutableTextStyle *style = [CPTMutableTextStyle textStyle];
+        style.fontSize = 11.0;
+        style.color = [CPTColor whiteColor];
+        
+        xAxisLabelStyle = style;
+    }
+    
+    return xAxisLabelStyle;
+}
+
+-(CPTTextStyle *)yAxisLabelStyle
+{
+    //text styles
+    if(yAxisLabelStyle == nil){
+        CPTMutableTextStyle *style = [CPTMutableTextStyle textStyle];
+        style.fontSize = 12.0;
+        style.color = [CPTColor whiteColor];
+        
+        yAxisLabelStyle = style;
+    }
+    
+    return yAxisLabelStyle;
 }
 
 - (void)didReceiveMemoryWarning
