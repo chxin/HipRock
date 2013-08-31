@@ -18,7 +18,7 @@
 static CGFloat leftAxisOffset = 57.0;
 static CGFloat bottomAxisOffset = 16.0;
 static CGFloat topAxisOffset = 6.0;
-static CGFloat rightAxisOffset = 11.0;
+static CGFloat rightAxisOffset = 0.0;
 
 - (id)initWithFrame:(CGRect)frame
 {

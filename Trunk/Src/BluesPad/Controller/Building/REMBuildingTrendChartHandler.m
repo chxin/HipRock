@@ -10,70 +10,90 @@
 #import "REMBuildingTrendChart.h"
 #import "REMWidgetAxisHelper.h"
 #import "REMBuildingTimeRangeDataModel.h"
+#import "REMChartSeriesIndicator.h"
 
 @interface REMBuildingTrendChartHandler () {
     int currentSourceIndex; // Indicate that which button was pressed down.
 }
- 
+
+@property (nonatomic) CGRect viewFrame;
 
 @end
 
 @implementation REMBuildingTrendChartHandler
 
+
+- (void)loadView
+{
+    [super loadView];
+    
+    // Custom initialization
+    REMBuildingTrendChart* myView = [[REMBuildingTrendChart alloc] initWithFrame:self.viewFrame];
+    
+    currentSourceIndex = 0;
+    myView.hostView.hostedGraph.defaultPlotSpace.delegate = self;
+    [myView.toggleGroup bindToggleChangeCallback:self selector:@selector(intervalChanged:)];
+    
+    self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
+    
+    self.view = myView;
+    self.graph = (CPTXYGraph*)myView.hostView.hostedGraph;
+    
+    
+    self.graph.plotAreaFrame.masksToBorder = NO;
+    self.graph.defaultPlotSpace.allowsUserInteraction = NO;
+    
+    self.graph.paddingTop = 18.0;
+    self.graph.paddingLeft = 56.0;
+    self.graph.paddingBottom = 0.0;
+    self.graph.paddingRight = 0.0;
+    
+    self.graph.plotAreaFrame.paddingTop=0.0f;
+    self.graph.plotAreaFrame.paddingRight=0.0f;
+    self.graph.plotAreaFrame.paddingBottom=1.0f;
+    self.graph.plotAreaFrame.paddingLeft=1.0f;
+    
+    CPTXYAxisSet *axisSet = (CPTXYAxisSet*)self.graph.axisSet;
+    CPTXYAxis* x = axisSet.xAxis;
+    [x setLabelingPolicy:CPTAxisLabelingPolicyNone];
+    x.majorTickLineStyle = [self hiddenLineStyle];
+    x.majorTickLength = 0;
+    x.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
+    x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0f];
+    x.axisLineStyle = [self axisLineStyle];
+    x.majorGridLineStyle = [self gridLineStyle];
+    x.plotSpace = self.graph.defaultPlotSpace;
+    
+    CPTXYAxis* y = axisSet.yAxis;
+    //        y.majorTickLineStyle = hiddenLineStyle;
+    //        y.minorTickLineStyle = hiddenLineStyle;
+    //        y.axisLineStyle = xTickStyle;
+    //        y.labelAlignment = CPTAlignmentMiddle;
+    //        y.labelTextStyle = labelStyle;
+    //        y.majorGridLineStyle = gridLineStyle;
+    //        y.plotSpace = self.graph.defaultPlotSpace;
+    [y setLabelingPolicy:CPTAxisLabelingPolicyNone];
+    y.majorTickLineStyle = [self hiddenLineStyle];
+    y.majorTickLength = 0;
+    y.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
+    y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0f];
+    y.axisLineStyle = [self axisLineStyle];
+    y.majorGridLineStyle = [self gridLineStyle];
+    y.plotSpace = self.graph.defaultPlotSpace;
+    
+    
+    
+    [self viewDidLoad];
+    
+    [self drawAverageChartLabels];
+}
+
+
 - (REMBuildingChartHandler *)initWithViewFrame:(CGRect)frame
 {
     self = [super init];
     if (self) {
-        // Custom initialization
-        REMBuildingTrendChart* myView = [[REMBuildingTrendChart alloc] initWithFrame:frame];
-        
-        currentSourceIndex = 0;
-        myView.hostView.hostedGraph.defaultPlotSpace.delegate = self;
-        [myView.toggleGroup bindToggleChangeCallback:self selector:@selector(intervalChanged:)];
-        
-        self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
-        
-        self.view = myView;
-        self.graph = (CPTXYGraph*)myView.hostView.hostedGraph;
-        
-        
-        self.graph.plotAreaFrame.masksToBorder = NO;
-        self.graph.defaultPlotSpace.allowsUserInteraction = NO;
-        
-        self.graph.plotAreaFrame.paddingTop=0.0f;
-        self.graph.plotAreaFrame.paddingRight=0.0f;
-        self.graph.plotAreaFrame.paddingBottom=0.0f;
-        self.graph.plotAreaFrame.paddingLeft=38.0f;
-        
-        CPTXYAxisSet *axisSet = (CPTXYAxisSet*)self.graph.axisSet;
-        CPTXYAxis* x = axisSet.xAxis;
-        [x setLabelingPolicy:CPTAxisLabelingPolicyNone];
-        x.majorTickLineStyle = [self hiddenLineStyle];
-        x.majorTickLength = 0;
-        x.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
-        x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0f];
-        x.axisLineStyle = [self axisLineStyle];
-        x.majorGridLineStyle = [self gridLineStyle];
-        x.plotSpace = self.graph.defaultPlotSpace;
-        
-        CPTXYAxis* y = axisSet.yAxis;
-//        y.majorTickLineStyle = hiddenLineStyle;
-//        y.minorTickLineStyle = hiddenLineStyle;
-//        y.axisLineStyle = xTickStyle;
-//        y.labelAlignment = CPTAlignmentMiddle;
-//        y.labelTextStyle = labelStyle;
-//        y.majorGridLineStyle = gridLineStyle;
-//        y.plotSpace = self.graph.defaultPlotSpace;
-        [y setLabelingPolicy:CPTAxisLabelingPolicyNone];
-        y.majorTickLineStyle = [self hiddenLineStyle];
-        y.majorTickLength = 0;
-        y.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
-        y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0f];
-        y.axisLineStyle = [self axisLineStyle];
-        y.majorGridLineStyle = [self gridLineStyle];
-        y.plotSpace = self.graph.defaultPlotSpace;
-        
-        [self viewDidLoad];
+        self.viewFrame = frame;
     }
     return self;
 }
@@ -398,6 +418,30 @@
     animation.fillMode = kCAFillModeForwards;
     
     return animation;
+}
+
+-(void)drawAverageChartLabels
+{
+    CGFloat labelTopOffset = self.view.bounds.size.height+43;
+    CGFloat labelLeftOffset = 56;
+    CGFloat fontSize = 14;
+    CGFloat labelDistance = 54;
+    
+    UIColor *benchmarkColor = [UIColor colorWithRed:241.0/255.0 green:94.0/255.0 blue:49.0/255.0 alpha:1];
+    NSString *benchmarkTitle = @"单位用电";
+    CGFloat benchmarkWidth = [benchmarkTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
+    CGRect benchmarkFrame = CGRectMake(labelLeftOffset, labelTopOffset, benchmarkWidth, fontSize);
+    REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:benchmarkTitle andColor:benchmarkColor];
+    
+    UIColor *averageDataColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1];
+    NSString *averageDataTitle = @"指数";
+    CGFloat averageDataWidth = [averageDataTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
+    CGRect averageDataFrame = CGRectMake(labelLeftOffset+benchmarkWidth+labelDistance, labelTopOffset, averageDataWidth, fontSize);
+    REMChartSeriesIndicator *averageDataIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:averageDataFrame title:averageDataTitle andColor:averageDataColor];
+    
+    
+    [self.view addSubview:benchmarkIndicator];
+    [self.view addSubview:averageDataIndicator];
 }
 
 

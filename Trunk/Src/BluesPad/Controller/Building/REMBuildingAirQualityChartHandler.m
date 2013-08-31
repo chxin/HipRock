@@ -214,6 +214,7 @@ static NSDictionary *codeNameMap;
     
     //
     [self drawStandards];
+    
     [self initializeLabels];
     
 }
@@ -421,7 +422,7 @@ static NSDictionary *codeNameMap;
 {
     CPTXYAxis *verticalAxis = ((CPTXYAxisSet *)self.chartView.hostView.hostedGraph.axisSet).yAxis;
     
-    CPTPlotRange *bandRangeChina=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([self.standardAmerican.standardValue doubleValue]) length:CPTDecimalFromDouble([self.standardChina.standardValue doubleValue])];
+    CPTPlotRange *bandRangeChina=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([self.standardAmerican.standardValue doubleValue]) length:CPTDecimalFromDouble([self.standardChina.standardValue doubleValue] - [self.standardAmerican.standardValue doubleValue])];
     CPTPlotRange *bandRangeAmerican=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([self.standardAmerican.standardValue doubleValue])];
     
     CPTColor *chinaColor = [self getColorWithCode:(NSString *)kChinaStandardCode];
@@ -476,7 +477,7 @@ static NSDictionary *codeNameMap;
     UIFont *labelFont = [UIFont systemFontOfSize:fontSize];
     CGFloat labelTopOffset = self.chartView.hostView.bounds.size.height-[self getViewPointFromChartPoint: self.globalRange.end :[standard.standardValue doubleValue]].y;
     CGFloat labelWidth = [labelText sizeWithFont:labelFont].width;
-    CGRect labelFrame = CGRectMake(self.chartView.bounds.size.width+labelOffset,  labelTopOffset,labelWidth, fontSize);
+    CGRect labelFrame = CGRectMake(self.chartView.hostView.bounds.size.width+labelOffset,  labelTopOffset,labelWidth, fontSize);
     
     UILabel *label = [[UILabel alloc] init];
     label.backgroundColor = [UIColor clearColor];
@@ -538,7 +539,7 @@ static NSDictionary *codeNameMap;
 
 -(CGPoint)getViewPointFromChartPoint:(double)x :(double)y
 {
-    //CGPoint dataPoint;
+    CGPoint dataPoint;
     NSDecimal plotPoint[2];
     plotPoint[CPTCoordinateX] = CPTDecimalFromDouble(x);
     plotPoint[CPTCoordinateY] = CPTDecimalFromDouble(y);
@@ -551,10 +552,12 @@ static NSDictionary *codeNameMap;
     // Convert the plot point to plot area space coordinates (I guess ;))
     CGPoint viewPoint = [plotSpace plotAreaViewPointForPlotPoint:plotPoint];
     
-    return  viewPoint;
+    //viewPoint;
     
 //    // Convert the view point to the button container layer coordinate system
-//    dataPoint = [graph convertPoint:viewPoint fromLayer:graph.plotAreaFrame.plotArea];
+    dataPoint = [graph convertPoint:viewPoint fromLayer:graph.plotAreaFrame.plotArea];
+    
+    return dataPoint;
 //    
 //    return [self.view convertPoint:dataPoint fromView:self.chartView.hostView];
 }

@@ -68,7 +68,7 @@ static CGFloat fontSize = 14;
     self.label = [[UILabel alloc] initWithFrame:CGRectMake(labelOffset, 0, labelWidth, labelHeight)];
     self.label.text = self.title;
     self.label.textColor = [UIColor whiteColor];
-    self.label.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:fontSize];
+    self.label.font = [UIFont systemFontOfSize:fontSize];
     self.label.backgroundColor = [UIColor clearColor];
     
     [self addSubview:self.pointView];
