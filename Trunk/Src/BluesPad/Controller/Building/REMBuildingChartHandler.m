@@ -99,7 +99,7 @@ static CPTTextStyle *yAxisLabelStyle;
         CPTMutableLineStyle *style=[[CPTMutableLineStyle alloc] init];
         style.lineWidth = 1.0f;
         style.lineColor = [CPTColor colorWithCGColor:[UIColor colorWithWhite:1 alpha:0.4].CGColor];
-        style.dashPattern = [NSArray arrayWithObjects:[NSDecimalNumber numberWithInt:4],[NSDecimalNumber numberWithInt:4],nil];
+        style.dashPattern = [NSArray arrayWithObjects:[NSDecimalNumber numberWithInt:2],[NSDecimalNumber numberWithInt:2],nil];
         
         gridLineStyle = style;
     }
