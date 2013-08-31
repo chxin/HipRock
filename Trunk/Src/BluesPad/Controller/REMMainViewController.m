@@ -73,7 +73,7 @@
     __weak REMMainViewController *weakSelf=self;
     CGPoint center = self.dashboardContainer.center;
     CGPoint newCenter = CGPointMake(563, center.y);
-    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 weakSelf.dashboardContainer.center=newCenter;
         
     } completion:^(BOOL finished){
@@ -87,7 +87,7 @@
 - (void)minDashboardContent;
 {
     __weak REMMainViewController *weakSelf=self;
-    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 
         weakSelf.dashboardContainer.center=CGPointMake(733, self.dashboardContainer.center.y);
         
