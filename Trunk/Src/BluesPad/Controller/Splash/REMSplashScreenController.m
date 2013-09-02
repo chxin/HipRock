@@ -38,8 +38,20 @@
         [invocation setTarget:self];
         [invocation setSelector:selector];
         
-        [self breathAnimation:nil];
         self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
+        
+        [self showBuildingView:^(void){
+            if(self.timer != nil){
+                if([self.timer isValid])
+                    [self.timer invalidate];
+                
+                self.timer = nil;
+            }
+            
+            [self.logoView setHidden:YES];
+        }];
+        
+        [self breathAnimation:nil];
     }
     else{
         [self breathAnimation:^(void){
@@ -52,16 +64,6 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     if([self isAlreadyLogin]){
-        [self showBuildingView:^(void){
-            if(self.timer != nil){
-                if([self.timer isValid])
-                    [self.timer invalidate];
-                
-                self.timer = nil;
-            }
-            
-            [self.logoView setHidden:YES];
-        }];
     }
 }
 

@@ -20,7 +20,7 @@ static CGFloat bottomAxisOffset = 16.0;
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        [self initializeGraph];
+        //[self initializeGraph];
         
     }
     return self;

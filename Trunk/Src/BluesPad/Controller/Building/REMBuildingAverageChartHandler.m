@@ -101,7 +101,8 @@
     //convert data
     [self convertData];
     
-    NSLog(@"visiable range: %@",[self.visiableRange description]);
+    //initialize graph
+    [self.chartView initializeGraph];
     
     //initialize plot space
     [self initializePlotSpace];
@@ -128,8 +129,9 @@
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.draggableRange.start) length:CPTDecimalFromDouble([self.draggableRange distance])];
     
     //since y axis will never be able to drag, global space and visiable space for y axis are equal
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end)];
-    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end)];
+    CPTPlotRange *dataValuePlotRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end + [self.dataValueRange distance] * 0.05)];
+    plotSpace.yRange = dataValuePlotRange;
+    plotSpace.globalYRange = dataValuePlotRange;
 }
 
 - (void)initializeAxises
@@ -321,6 +323,7 @@
     }
 
     //self.globalRange.end = self.visiableRange.end;
+    
     
     self.chartData = convertedData;
 }

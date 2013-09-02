@@ -99,9 +99,12 @@
     else if(indexPath.section==2 && indexPath.row==0 ){
         UITableViewCell *cell1 = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell1"];
         //[[cell textLabel]setText:@"退出登录"];
+        
+        
         cell1.textLabel.text=@"退出登录";
         cell1.textLabel.textColor=[UIColor redColor];
         cell1.textLabel.textAlignment=NSTextAlignmentCenter;
+        
         return cell1;
         //NSLog(@"frame:%@",NSStringFromCGRect(cell.contentView.frame));
         //NSLog(@"bounds:%@",NSStringFromCGRect(cell.contentView.frame));
@@ -139,7 +142,7 @@
         UINavigationController *nav=(UINavigationController *)self.parentViewController;
         [nav dismissViewControllerAnimated:YES completion:^(void){
             [self.navigationController popToRootViewControllerAnimated:YES];
-            [self.splashScreenController showLoginView];
+            //[self.splashScreenController showLoginView];
         }];
         
         
