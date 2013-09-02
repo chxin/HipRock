@@ -101,6 +101,8 @@
     //convert data
     [self convertData];
     
+    NSLog(@"visiable range: %@",[self.visiableRange description]);
+    
     //initialize plot space
     [self initializePlotSpace];
     
@@ -466,10 +468,11 @@
         //if current right location is greater than global range end, go back with animation too
         CPTPlotRange  *correctRange;
         if(isCurrentLeftLessThanMinLeft == YES ){
-            correctRange = [[CPTPlotRange alloc] initWithLocation:minLeftLocation length:space.xRange.length];
+            correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalFromDouble(self.globalRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
         }
         else if(isCurrentRightGreaterThanMaxRight == YES){
-            correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalSubtract(maxRightLocation, space.xRange.length) length:space.xRange.length];
+            correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
+            
         }
         if(correctRange!=nil){
             constTime= ABS(CPTDecimalFloatValue(CPTDecimalSubtract(newRange.location, space.xRange.location))/speed);
@@ -510,10 +513,13 @@
         //if current right location is greater than global range end, go back with animation too
         if(isCurrentLeftLessThanMinLeft == YES || isCurrentRightGreaterThanMaxRight == YES){
             CPTPlotRange *correctRange;
-            if(isCurrentLeftLessThanMinLeft)
-                correctRange = [[CPTPlotRange alloc] initWithLocation:minLeftLocation length:space.xRange.length];
-            else
-                correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalSubtract(maxRightLocation, space.xRange.length) length:space.xRange.length];
+            if(isCurrentLeftLessThanMinLeft == YES ){
+                correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalFromDouble(self.globalRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
+            }
+            else if(isCurrentRightGreaterThanMaxRight == YES){
+                correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
+                
+            }
 
             [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:correctRange duration:0.3 withDelay:0 animationCurve:CPTAnimationCurveSinusoidalOut delegate:nil];
             
