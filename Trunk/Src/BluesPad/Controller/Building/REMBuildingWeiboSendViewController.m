@@ -66,6 +66,8 @@ const NSInteger kWeiboMaxLength = 140;
     //toolbarLabel.font.
     [topToolbar addSubview:toolbarLabel];
     
+    
+    
     cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [cancelBtn setFrame:CGRectMake(kWeiboButtonMargin, 0, kWeiboButtonWidth, kWeiboToolbarHeight)];
@@ -82,7 +84,21 @@ const NSInteger kWeiboMaxLength = 140;
     [sendBtn addTarget:self action:@selector(sendClicked:) forControlEvents:UIControlEventTouchUpInside];
     [topToolbar addSubview:cancelBtn];
     [topToolbar addSubview:sendBtn];
+    
+    topToolbar.layer.borderColor = [UIColor redColor].CGColor;
+    topToolbar.layer.borderWidth = 1;
+    toolbarLabel.layer.borderColor = [UIColor grayColor].CGColor;
+    toolbarLabel.layer.borderWidth = 1;
+    cancelBtn.layer.borderColor = [UIColor greenColor].CGColor;
+    cancelBtn.layer.borderWidth = 1;
+    sendBtn.layer.borderColor = [UIColor greenColor].CGColor;
+    sendBtn.layer.borderWidth = 1;
+    
     [self.view addSubview:topToolbar];
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(didKeyboardShow) name:UIKeyboardDidShowNotification object:nil];
+    [center addObserver:self selector:@selector(didKeyboardHide) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)initTextAndImage {
@@ -125,6 +141,7 @@ const NSInteger kWeiboMaxLength = 140;
     
     [secondView addSubview:imageView];
     [self.view addSubview:secondView];
+    [textView becomeFirstResponder];
 }
 
 - (void)viewDidLoad
@@ -174,16 +191,23 @@ const NSInteger kWeiboMaxLength = 140;
     }
 }
 -(void)sendWeibo {
-    [REMStatusBar showStatusMessage:@"微博发送中" autoHide:NO];
+//    [UIView beginAnimations:@"move" context:nil];
+//    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//    [UIView setAnimationDuration:0.4f];
+//    self.view.superview.bounds = CGRectMake(0, -100, kWeiboWindowWidth, kWeiboWindowHeight);
+//    [self.view.superview.layer setShadowOffset:CGSizeMake(0, 100)];
+//    [UIView commitAnimations];
+
+    [REMStatusBar showStatusMessage:@"新浪微博发送中…" autoHide:NO];
     [Weibo.weibo newStatus:textView.text pic:UIImagePNGRepresentation(self.weiboImage) completed:^(Status *status, NSError *error) {
         NSString *message = nil;
         if (error) {
             message = [NSString stringWithFormat:@"failed to post:%@", error];
             NSLog(@"%@", message);
-            [REMStatusBar showStatusMessage:@"微博发送失败"];
+            [REMStatusBar showStatusMessage:@"新浪微博发送失败"];
         }
         else {
-            [REMStatusBar showStatusMessage:@"微博发送成功"];
+            [REMStatusBar showStatusMessage:@"新浪微博发送成功"];
         }
     }];
     [self dismissViewControllerAnimated:YES completion:nil];
