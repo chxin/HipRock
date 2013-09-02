@@ -19,6 +19,8 @@
 
 @interface REMBuildingCommodityView : UIView//UIScrollView
 
+@property (nonatomic,strong) NSArray *chartViewArray;
+
 - (id)initWithFrame:(CGRect)frame withCommodityInfo:(REMCommodityUsageModel *)commodityInfo;
 
 - (void)addSplitBar:(UIView *)view;

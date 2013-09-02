@@ -15,7 +15,6 @@ typedef void(^SuccessCallback)(BOOL success);
 @property (nonatomic,strong) REMBuildingTitleLabelView *totalLabel;
 
 @property (nonatomic,strong) NSArray *detailLabelArray;
-@property (nonatomic,strong) NSArray *chartViewArray;
 
 @property (nonatomic,strong) SuccessCallback successBlock;
 

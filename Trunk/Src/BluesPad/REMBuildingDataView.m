@@ -234,8 +234,15 @@ typedef void(^SuccessCallback)(BOOL success);
 
 - (void)replaceImagesShowReal:(BOOL)showReal{
     REMBuildingCommodityView *view=   self.commodityViewArray[self.currentIndex];
-    REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[self.currentIndex];
-    if([self.successDic[model.commodity.commodityId] isEqualToNumber:@(1)] == YES){
+    NSNumber *key;
+    if(self.currentIndex>=self.buildingInfo.commodityUsage.count){
+        key=self.buildingInfo.airQuality.commodity.commodityId;
+    }
+    else{
+        REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[self.currentIndex];
+        key=model.commodity.commodityId;
+    }
+    if( self.successDic !=nil && [self.successDic[key] isEqualToNumber:@(1)] == YES){
         [view replaceChart:showReal];
     }
 }
