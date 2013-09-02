@@ -13,6 +13,7 @@ typedef enum _REMUserValidationStatus : NSInteger{
     REMUserValidationSuccess = 1,
     REMUserValidationWrongName = 2,
     REMUserValidationWrongPassword = 3,
+    REMUserValidationInvalidSp = 4,
 } REMUserValidationStatus;
 
 @interface REMUserValidationModel : REMJSONObject

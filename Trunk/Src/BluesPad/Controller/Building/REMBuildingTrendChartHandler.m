@@ -10,7 +10,6 @@
 #import "REMBuildingTrendChart.h"
 #import "REMWidgetAxisHelper.h"
 #import "REMBuildingTimeRangeDataModel.h"
-#import "REMChartSeriesIndicator.h"
 
 @interface REMBuildingTrendChartHandler () {
     int currentSourceIndex; // Indicate that which button was pressed down.
@@ -84,8 +83,6 @@
     
     
     [self viewDidLoad];
-    
-    [self drawAverageChartLabels];
 }
 
 
@@ -418,30 +415,6 @@
     animation.fillMode = kCAFillModeForwards;
     
     return animation;
-}
-
--(void)drawAverageChartLabels
-{
-    CGFloat labelTopOffset = self.view.bounds.size.height+43;
-    CGFloat labelLeftOffset = 56;
-    CGFloat fontSize = 14;
-    CGFloat labelDistance = 54;
-    
-    UIColor *benchmarkColor = [UIColor colorWithRed:241.0/255.0 green:94.0/255.0 blue:49.0/255.0 alpha:1];
-    NSString *benchmarkTitle = @"单位用电";
-    CGFloat benchmarkWidth = [benchmarkTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
-    CGRect benchmarkFrame = CGRectMake(labelLeftOffset, labelTopOffset, benchmarkWidth, fontSize);
-    REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:benchmarkTitle andColor:benchmarkColor];
-    
-    UIColor *averageDataColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1];
-    NSString *averageDataTitle = @"指数";
-    CGFloat averageDataWidth = [averageDataTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
-    CGRect averageDataFrame = CGRectMake(labelLeftOffset+benchmarkWidth+labelDistance, labelTopOffset, averageDataWidth, fontSize);
-    REMChartSeriesIndicator *averageDataIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:averageDataFrame title:averageDataTitle andColor:averageDataColor];
-    
-    
-    [self.view addSubview:benchmarkIndicator];
-    [self.view addSubview:averageDataIndicator];
 }
 
 

@@ -427,6 +427,14 @@
     
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if(scrollView.contentOffset.y > kCommodityScrollTop){
+        [self.dataView replaceImagesShowReal:NO];
+    }
+    
+    
+}
+
 
 
 
@@ -441,6 +449,7 @@
 {
     if(decelerate == NO){
         [self roundPositionWhenDrag:scrollView];
+        [self.dataView replaceImagesShowReal:YES];
     }
     
 }
@@ -452,6 +461,8 @@
     
     if(scrollView.contentOffset.y>kCommodityScrollTop){
         [self checkIfRequestChartData:scrollView];
+        [self.dataView replaceImagesShowReal:YES];
+        
     }
     
 }

@@ -13,7 +13,7 @@
 static CGFloat leftAxisOffset = 57.0;
 static CGFloat rightAxisOffset = 0;
 static CGFloat topAxisOffset = 0;
-static CGFloat bottomAxisOffset = 56.0;
+static CGFloat bottomAxisOffset = 16.0;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -21,14 +21,19 @@ static CGFloat bottomAxisOffset = 56.0;
     if (self) {
         // Initialization code
         [self initializeGraph];
+        
     }
     return self;
 }
 
 -(void)initializeGraph
 {
-    self.hostView = [[CPTGraphHostingView alloc]initWithFrame:self.bounds];
+    CGRect hostViewFrame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height-40);
     
+    self.hostView = [[CPTGraphHostingView alloc]initWithFrame:hostViewFrame];
+    
+//    self.hostView.layer.borderColor = [UIColor redColor].CGColor;
+//    self.hostView.layer.borderWidth = 1.0;
     
     self.graph=[[CPTXYGraph alloc] init];
     

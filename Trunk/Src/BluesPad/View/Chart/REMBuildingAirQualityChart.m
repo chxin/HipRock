@@ -37,7 +37,8 @@ static CGFloat rightAxisOffset = 0.0;
 {
     //NSLog(@"bounds:%@",NSStringFromCGRect(self.bounds));
     
-    CGRect hostViewFrame = CGRectMake(0, 0, self.bounds.size.width-0, 405 + topAxisOffset + bottomAxisOffset);
+    CGRect hostViewFrame = CGRectMake(0, 0, 710, 405 + topAxisOffset + bottomAxisOffset);
+    
     NSLog(@"bounds:%@",NSStringFromCGRect(self.bounds));
     NSLog(@"hostbounds:%@",NSStringFromCGRect(self.hostView.bounds));
     NSLog(@"hostframe:%@",NSStringFromCGRect(self.hostView.frame));
