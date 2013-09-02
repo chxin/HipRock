@@ -376,8 +376,8 @@
             }
             [series setValue:data forKey:@"data"];
             REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
-            [myView.todayButton setOn:YES];
-            [self intervalChanged:myView.todayButton];
+            [myView.thisMonthButton setOn:YES];
+            [self intervalChanged:myView.thisMonthButton];
             loadCompleted();
         }
     };
