@@ -23,6 +23,8 @@ typedef void(^SuccessCallback)(BOOL success);
 
 @property (nonatomic,weak) REMCommodityUsageModel *commodityInfo;
 
+@property (nonatomic,strong) NSArray *chartViewSnapshotArray;
+
 @end
 
 @implementation REMBuildingCommodityView
@@ -165,6 +167,54 @@ typedef void(^SuccessCallback)(BOOL success);
     
     [view.layer insertSublayer:layer1 above:view.layer];
     [view.layer insertSublayer:layer2 above:view.layer];
+}
+
+- (void)replaceChart:(BOOL)showReal{
+    if(self.chartViewSnapshotArray==nil && showReal==NO){
+        NSMutableArray  *snapshots = [[NSMutableArray alloc]initWithCapacity:self.chartViewArray.count];
+        for (int i=0; i<self.chartViewArray.count; ++i) {
+            UIView *view = self.chartViewArray[i];
+            CALayer *layer = view.layer;
+            UIGraphicsBeginImageContext(layer.frame.size);
+            [layer renderInContext:UIGraphicsGetCurrentContext()];
+            UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            UIImageView *v = [[UIImageView alloc]initWithImage:image];
+            [v setFrame:view.frame];
+            [snapshots addObject:v];
+            [self addSubview:v];
+        }
+        
+        self.chartViewSnapshotArray = snapshots;
+        
+    }
+    if(showReal==NO){
+        for (int i=0; i<self.chartViewArray.count; ++i) {
+            UIView *view = self.chartViewArray[i];
+            UIView *view1 = self.chartViewSnapshotArray[i];
+            if(showReal == NO){
+                [view setHidden:YES];
+                [view1 setHidden:NO];
+            }
+            else{
+                [view setHidden:NO];
+                [view1 setHidden:YES];
+            }
+            
+        }
+    }
+    else{
+        if(self.chartViewSnapshotArray!=nil){
+            for (UIView *v in self.chartViewSnapshotArray) {
+                [v removeFromSuperview];
+            }
+            for (UIView *v in self.chartViewArray) {
+                [v setHidden:NO];
+            }
+            self.chartViewSnapshotArray=nil;
+        }
+    }
+    
 }
 
 - (void)initChartContainer

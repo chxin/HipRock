@@ -34,7 +34,7 @@ typedef void(^SuccessCallback)(BOOL success);
         [self setScrollEnabled:YES];
         self.clipsToBounds=YES;
         self.successCounter=0;
-        [self setContentSize:CGSizeMake(0, 1300)];
+        [self setContentSize:CGSizeMake(0, 1250)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
         self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityUsage.count+1)];
@@ -229,6 +229,14 @@ typedef void(^SuccessCallback)(BOOL success);
             self.successCounter=0;
             self.successBlock=nil;
         }
+    }
+}
+
+- (void)replaceImagesShowReal:(BOOL)showReal{
+    REMBuildingCommodityView *view=   self.commodityViewArray[self.currentIndex];
+    REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[self.currentIndex];
+    if([self.successDic[model.commodity.commodityId] isEqualToNumber:@(1)] == YES){
+        [view replaceChart:showReal];
     }
 }
 
