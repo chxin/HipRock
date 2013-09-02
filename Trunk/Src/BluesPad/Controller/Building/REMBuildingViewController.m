@@ -19,7 +19,7 @@
 @property (nonatomic) CGFloat cumulateX;
 
 @property (nonatomic,strong) NSMutableDictionary *imageViewStatus;
-@property (nonatomic,strong) UIButton *shareButton;
+
 
 @property (nonatomic,strong) UIImage *defaultImage;
 @property (nonatomic,strong) UIImage *defaultBlurImage;
@@ -119,26 +119,11 @@
     
 }
 
-- (void) initButtons
-{
-    UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, 20, 48, 48)];
-    [shareButton setImage:[UIImage imageNamed:@"Share_normal.png"] forState:UIControlStateNormal];
-    
-    shareButton.showsTouchWhenHighlighted=YES;
-    shareButton.adjustsImageWhenHighlighted=YES;
-    shareButton.titleLabel.text=@"注销";
-    [shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.shareButton=shareButton;
-    [self.view addSubview:shareButton];
-}
 
 - (void)settingButtonPressed:(UIButton *)button{
     [self performSegueWithIdentifier:@"buildingSettingSegue2" sender:self];
 }
 
--(void)shareButtonTouchDown:(UIButton *)button
-{
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"sendWeiboSegue"]) {
@@ -210,9 +195,7 @@
     
     [self loadImageData];
     
-    
-    
-    [self initButtons];
+
     
 }
 
@@ -315,7 +298,7 @@
                                     NSNumber *status = self.imageViewStatus[willIndex];
                                     if([status isEqualToNumber:@(0)] ==YES){
                                         REMImageView *nextView= self.imageArray[willIndex.intValue];
-                                        [self.view insertSubview: nextView belowSubview:self.shareButton];
+                                        [self.view addSubview: nextView];
                                         [nextView setScrollOffset:self.currentScrollOffset];
                                         self.imageViewStatus[willIndex]=@(1);
                                         
