@@ -141,9 +141,16 @@
                 [self.passwordErrorLabel setHidden:NO];
                 [self.passwordErrorLabel setText : @"登录密码错误" ];
             }
+            else if(validationResult.status == REMUserValidationInvalidSp)
+            {
+                [self.userNameErrorLabel setHidden:NO];
+                [self.userNameErrorLabel setText : @"登录失败，您的用户名暂时无法使用" ];
+            }
             else
             {
             }
+            
+            [self.loginCarouselController showLoginPage];
             
             [self.loginButton stopIndicator];
         }

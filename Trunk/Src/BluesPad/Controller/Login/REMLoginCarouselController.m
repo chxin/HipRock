@@ -141,6 +141,11 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 }
 
 - (IBAction)jumpLoginButtonTouchDown:(id)sender {
+    [self showLoginPage];
+}
+
+-(void)showLoginPage
+{
     [self showPage:self.scrollView.subviews.count-1];
 }
 

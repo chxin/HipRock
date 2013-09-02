@@ -306,7 +306,7 @@ typedef void(^SuccessCallback)(BOOL success);
 
 - (NSDictionary *)realExport{    
     REMBuildingCommodityView* chartView = (REMBuildingCommodityView*)[self.commodityViewArray objectAtIndex:self.currentIndex];
-    CGFloat chartHeight = 1100;
+    CGFloat chartHeight = self.contentSize.height;
     
     NSMutableArray* btnOutputImages = [[NSMutableArray alloc]initWithCapacity:self.buttonArray.count];
     for (int i = 0; i < self.buttonArray.count; i++) {
@@ -344,9 +344,13 @@ typedef void(^SuccessCallback)(BOOL success);
         NSString* commodityName = model.commodity.comment;
         NSString* uomName = model.commodityUsage.uom.comment;
         NSString* val = model.commodityUsage.dataValue.stringValue;
-        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
-        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#UomName#" withString:uomName];
-        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Usage#" withString:val];
+        if (val == nil || commodityName == nil || uomName == nil) {
+            stringFormat = @"暂无数据。";
+        } else {
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#UomName#" withString:uomName];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Usage#" withString:val];
+        }
     } else {
         stringFormat = @"今天上午10:00，%@室外#Commodity#为#OutdoorVal##OutdoorUomName#；经霍尼韦尔净化后室内新风#Commodity#为#HoneywellVal##HoneywellUomName#，经美埃净化后室内新风#Commodity#为#MayairVal##MayairUomName#。";
         REMAirQualityModel *model = self.buildingInfo.airQuality;
@@ -357,18 +361,22 @@ typedef void(^SuccessCallback)(BOOL success);
         NSString* honeywellUom = model.honeywell.uom.comment;
         NSString* mayairVal = model.mayair.dataValue.stringValue;
         NSString* mayairUom = model.mayair.uom.comment;
-        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
-        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorVal#" withString:outdoorVal];
-        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorUomName#" withString:outdoorUom];
-        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellVal#" withString:honeywellVal];
-        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellUomName#" withString:honeywellUom];
-        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairVal#" withString:mayairVal];
-        stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairUomName#" withString:mayairUom];
+        if (commodityName == nil || outdoorUom == nil || outdoorVal == nil || honeywellUom == nil || honeywellVal == nil || mayairUom == nil || mayairVal == nil) {
+            stringFormat = @"暂无数据。";
+        } else {
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorVal#" withString:outdoorVal];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorUomName#" withString:outdoorUom];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellVal#" withString:honeywellVal];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellUomName#" withString:honeywellUom];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairVal#" withString:mayairVal];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairUomName#" withString:mayairUom];
+        }
     }
-//    NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-//    NSString* myDocPath = myPaths[0];
-//    NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo2.png"];
-//    [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
+    NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString* myDocPath = myPaths[0];
+    NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo2.png"];
+    [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
     return @{
              @"image": img,
              @"text": stringFormat
