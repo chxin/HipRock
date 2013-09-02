@@ -263,7 +263,8 @@
     
     CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
     symbol.fill= [CPTFill fillWithColor:lineColor];
-    symbol.size=CGSizeMake(8.0, 8.0);
+    symbol.size=CGSizeMake(12.0, 12.0);
+    symbol.lineStyle = [self hiddenLineStyle];
     
     CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];
     labelStyle.color = [REMColor colorByIndex:1];
@@ -332,7 +333,7 @@
 
 -(void)drawChartLabels
 {
-    CGFloat labelTopOffset = self.chartView.hostView.bounds.size.height+43-14;
+    CGFloat labelTopOffset = self.chartView.hostView.bounds.size.height+43-16;
     CGFloat labelLeftOffset = 56;
     CGFloat fontSize = 14;
     CGFloat labelDistance = 54;
