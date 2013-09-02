@@ -435,10 +435,10 @@
 -(void)executeExport:(REMMaskManager *)masker{
     REMImageView *view = self.imageArray[self.currentIndex];
     
-    [masker hideMask];
     
     
     [view exportImage:^(UIImage *image, NSString* text){
+        [masker hideMask];
         // [UIImagePNGRepresentation(image) writeToFile:[self getWeiboPicAddress] atomically:NO];
         
         NSDictionary* sender = @{@"image": image, @"text": text};
