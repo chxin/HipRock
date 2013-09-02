@@ -16,19 +16,11 @@
 
 @property (nonatomic,strong) NSMutableArray *buildingOveralls;
 @property (nonatomic,strong) REMLoginCarouselController *carouselController;
+@property (nonatomic,strong) NSTimer *timer;
 
 @end
 
 @implementation REMSplashScreenController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -39,16 +31,15 @@
     //decide where to go
     [self recoverAppContext];
     
-    if([self isLogin]){
-        [self breathAnimation:nil];
-        //__block NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(breathAnimation:) userInfo:nil repeats:YES];
+    if([self isAlreadyLogin]){
+        SEL selector = @selector(breathAnimation:);
+         
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:selector]];
+        [invocation setTarget:self];
+        [invocation setSelector:selector];
         
-        [self showBuildingView:^(void){
-            //[timer invalidate];
-            //timer = nil;
-            
-            [self.logoView setHidden:YES];
-        }];
+        [self breathAnimation:nil];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
     }
     else{
         [self breathAnimation:^(void){
@@ -58,8 +49,24 @@
     }
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    if([self isAlreadyLogin]){
+        [self showBuildingView:^(void){
+            if(self.timer != nil){
+                if([self.timer isValid])
+                    [self.timer invalidate];
+                
+                self.timer = nil;
+            }
+            
+            [self.logoView setHidden:YES];
+        }];
+    }
+}
 
--(void)breathAnimation:(void (^)(void))completed
+
+-(void)breathAnimation:(id)completed
 {
     self.flashLogo.alpha = 0;
     [UIView animateWithDuration:1.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
@@ -70,12 +77,12 @@
             self.flashLogo.alpha = 0;
         } completion:^(BOOL finished){
             if(completed!=nil)
-                completed();
+                ((void (^)(void))completed)();
         }];
     }];
 }
 
--(BOOL)isLogin
+-(BOOL)isAlreadyLogin
 {
     REMApplicationContext *context = [REMApplicationContext instance];
     
