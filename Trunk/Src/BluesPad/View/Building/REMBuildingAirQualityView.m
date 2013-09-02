@@ -13,7 +13,7 @@
 @property (nonatomic,strong) REMBuildingTitleLabelView *totalLabel;
 
 @property (nonatomic,strong) NSArray *detailLabelArray;
-@property (nonatomic,strong) NSArray *chartViewArray;
+
 
 
 @property (nonatomic,weak) REMAirQualityModel *airQuality;
@@ -69,7 +69,7 @@
 {
     int marginTop=kBuildingTotalInnerMargin+kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingDetailGroupMargin+kBuildingTotalGroupMargin;
     
-    REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0,marginTop , kBuildingChartWidth, kBuildingChartHeight*2+kBuildingCommodityBottomMargin+kBuildingDetailInnerMargin*2) withTitle:@"室内外PM2.5逐日含量" andTitleFontSize:kBuildingCommodityTitleFontSize ];
+    REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0,marginTop , kImageWidth-kBuildingCommodityLeftMargin, kBuildingChartHeight*2+kBuildingCommodityBottomMargin+kBuildingDetailInnerMargin*2) withTitle:@"室内外PM2.5逐日含量" andTitleFontSize:kBuildingCommodityTitleFontSize ];
     
     [self addSubview:view];
     

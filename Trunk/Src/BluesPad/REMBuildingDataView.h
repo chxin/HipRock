@@ -26,5 +26,6 @@
 
 - (void)resetDefaultCommodity;
 
+-(void)replaceImagesShowReal:(BOOL)showReal;
 
 @end
