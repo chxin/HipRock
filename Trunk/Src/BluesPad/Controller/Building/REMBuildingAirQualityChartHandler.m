@@ -401,7 +401,8 @@ static NSDictionary *codeNameMap;
         
         CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
         symbol.fill= [CPTFill fillWithColor:lineColor];
-        symbol.size=CGSizeMake(8.0, 8.0);
+        symbol.size=CGSizeMake(12.0, 12.0);
+        symbol.lineStyle = [self hiddenLineStyle];
         
         CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
         lineStyle.lineColor = lineColor;
