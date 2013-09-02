@@ -68,13 +68,24 @@
 
 -(void)breathAnimation:(id)completed
 {
-    self.flashLogo.alpha = 0;
-    [UIView animateWithDuration:1.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.flashLogo.alpha = 0.8;
+    CGFloat animationTime = 1.5;
+    
+    CGFloat flashOriginalAlpha = 0;
+    CGFloat flashFinalAlpha = 0.8;
+    CGFloat normalOriginalAlpha = 1;
+    CGFloat normalFinalAlpha = 1;
+    
+    self.flashLogo.alpha = flashOriginalAlpha;
+    self.normalLogo.alpha = normalOriginalAlpha;
+    [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.flashLogo.alpha = flashFinalAlpha;
+        self.normalLogo.alpha = normalFinalAlpha;
     } completion:^(BOOL finished) {
-        self.flashLogo.alpha = 0.8;
-        [UIView animateWithDuration:1.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            self.flashLogo.alpha = 0;
+        self.flashLogo.alpha = flashFinalAlpha;
+        self.normalLogo.alpha = normalFinalAlpha;
+        [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.flashLogo.alpha = flashOriginalAlpha;
+            self.normalLogo.alpha = normalOriginalAlpha;
         } completion:^(BOOL finished){
             if(completed!=nil)
                 ((void (^)(void))completed)();
