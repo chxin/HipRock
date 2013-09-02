@@ -29,6 +29,10 @@
 @property (nonatomic,strong) REMDataRange *globalRange;
 @property (nonatomic,strong) REMDataRange *draggableRange;
 
+@property (nonatomic) CGPoint lastPoint;
+@property (nonatomic) NSTimeInterval lastTime;
+@property (nonatomic) BOOL isDragging;
+
 @end
 
 @implementation REMBuildingAverageChartHandler
@@ -395,30 +399,126 @@
 }
 
 #pragma mark - plot space delegate
+
+- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDownEvent:(UIEvent *)event atPoint:(CGPoint)point
+{
+    self.lastPoint=point;
+    self.lastTime=event.timestamp;
+    
+    return YES;
+}
+
+- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDraggedEvent:(UIEvent *)event atPoint:(CGPoint)point
+{
+    //NSLog(@"dragged");
+    
+    //self.isDragging=YES;
+     CGFloat deltaX=point.x-self.lastPoint.x;
+    NSTimeInterval diffTime= event.timestamp-self.lastTime;
+    //NSLog(@"diff time:%f",diffTime);
+    //NSLog(@"delta x:%f",deltaX);
+    if(diffTime<0.1)return NO;
+    self.lastPoint=point;
+    return YES;
+}
+
+
+
 - (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
 {
-    //left bound
-    NSDecimal currentLeftLocation = space.xRange.location;
-    NSDecimal currentRightLocation = CPTDecimalAdd(space.xRange.location,space.xRange.length);
     
-    NSDecimal minLeftLocation = CPTDecimalFromDouble(self.globalRange.start);
-    NSDecimal maxRightLocation = CPTDecimalFromDouble(self.globalRange.end);
+    CGFloat deltaX=point.x-self.lastPoint.x;
     
-    BOOL isCurrentLeftLessThanMinLeft = CPTDecimalLessThan(currentLeftLocation,minLeftLocation);
-    BOOL isCurrentRightGreaterThanMaxRight = CPTDecimalGreaterThan(currentRightLocation, maxRightLocation);
-    
-    //if current left location is smaller than global range start, go back with animation
-    //if current right location is greater than global range end, go back with animation too
-    if(isCurrentLeftLessThanMinLeft == YES || isCurrentRightGreaterThanMaxRight == YES){
-        CPTPlotRange *correctRange;
-        if(isCurrentLeftLessThanMinLeft)
-            correctRange = [[CPTPlotRange alloc] initWithLocation:minLeftLocation length:space.xRange.length];
-        else
-            correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalSubtract(maxRightLocation, space.xRange.length) length:space.xRange.length];
-
-        [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:correctRange duration:0.15 withDelay:0 animationCurve:CPTAnimationCurveCubicInOut delegate:nil];
+    if(ABS(deltaX)>8){
+        NSTimeInterval diffTime= event.timestamp-self.lastTime;
+        //NSLog(@"diff time:%f",diffTime);
+        //NSLog(@"delta x:%f",deltaX);
+        diffTime=MAX(0.05, diffTime);
+        CGFloat speed = deltaX/diffTime;
+        CGFloat constTime=0.2;
+        CGFloat accelerate=speed/constTime;
+        CGFloat distance = speed*constTime-0.5*accelerate*constTime*constTime;
+        NSDecimal lastPoint[2], newPoint[2];
+         CPTPlotArea *plotArea = self.getHostView.hostedGraph.plotAreaFrame.plotArea;
+         CGPoint pointInPlotArea = [self.getHostView.hostedGraph convertPoint:point toLayer:plotArea];
+        [space plotPoint:lastPoint forPlotAreaViewPoint:pointInPlotArea];
+        [space plotPoint:newPoint forPlotAreaViewPoint:CGPointMake(pointInPlotArea.x + distance,pointInPlotArea.y)];
         
-        return NO;
+        NSDecimal shiftX = CPTDecimalSubtract(lastPoint[CPTCoordinateX], newPoint[CPTCoordinateX]);
+        
+        //NSLog(@"shiftx:%f",CPTDecimalFloatValue(shiftX));
+        CPTMutablePlotRange *newRange= [space.xRange mutableCopy];
+        
+        newRange.location = CPTDecimalAdd(newRange.location, shiftX);
+        
+        
+        //left bound
+        NSDecimal currentLeftLocation = newRange.location;
+        NSDecimal currentRightLocation = CPTDecimalAdd(newRange.location,newRange.length);
+        
+        NSDecimal minLeftLocation = CPTDecimalFromDouble(self.globalRange.start);
+        NSDecimal maxRightLocation = CPTDecimalFromDouble(self.globalRange.end);
+        
+        BOOL isCurrentLeftLessThanMinLeft = CPTDecimalLessThan(currentLeftLocation,minLeftLocation);
+        BOOL isCurrentRightGreaterThanMaxRight = CPTDecimalGreaterThan(currentRightLocation, maxRightLocation);
+        
+        //if current left location is smaller than global range start, go back with animation
+        //if current right location is greater than global range end, go back with animation too
+        CPTPlotRange  *correctRange;
+        if(isCurrentLeftLessThanMinLeft == YES ){
+            correctRange = [[CPTPlotRange alloc] initWithLocation:minLeftLocation length:space.xRange.length];
+        }
+        else if(isCurrentRightGreaterThanMaxRight == YES){
+            correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalSubtract(maxRightLocation, space.xRange.length) length:space.xRange.length];
+        }
+        if(correctRange!=nil){
+            constTime= ABS(CPTDecimalFloatValue(CPTDecimalSubtract(newRange.location, space.xRange.location))/speed);
+           
+
+        }
+
+        
+         [CPTAnimation animate:space
+                          property:@"xRange"
+                     fromPlotRange:space.xRange
+                       toPlotRange:newRange
+                          duration:constTime
+                    animationCurve:CPTAnimationCurveSinusoidalOut
+                          delegate:nil];
+        
+        if(correctRange!=nil){
+            //newRange = [correctRange mutableCopy];
+            [CPTAnimation animate:space property:@"xRange" fromPlotRange:newRange toPlotRange:correctRange duration:0.3 withDelay:constTime animationCurve:CPTAnimationCurveSinusoidalOut delegate:nil];
+            
+        }
+        
+        return  NO;
+        
+    }
+    else{
+        //left bound
+        NSDecimal currentLeftLocation = space.xRange.location;
+        NSDecimal currentRightLocation = CPTDecimalAdd(space.xRange.location,space.xRange.length);
+        
+        NSDecimal minLeftLocation = CPTDecimalFromDouble(self.globalRange.start);
+        NSDecimal maxRightLocation = CPTDecimalFromDouble(self.globalRange.end);
+        
+        BOOL isCurrentLeftLessThanMinLeft = CPTDecimalLessThan(currentLeftLocation,minLeftLocation);
+        BOOL isCurrentRightGreaterThanMaxRight = CPTDecimalGreaterThan(currentRightLocation, maxRightLocation);
+        
+        //if current left location is smaller than global range start, go back with animation
+        //if current right location is greater than global range end, go back with animation too
+        if(isCurrentLeftLessThanMinLeft == YES || isCurrentRightGreaterThanMaxRight == YES){
+            CPTPlotRange *correctRange;
+            if(isCurrentLeftLessThanMinLeft)
+                correctRange = [[CPTPlotRange alloc] initWithLocation:minLeftLocation length:space.xRange.length];
+            else
+                correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalSubtract(maxRightLocation, space.xRange.length) length:space.xRange.length];
+
+            [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:correctRange duration:0.3 withDelay:0 animationCurve:CPTAnimationCurveSinusoidalOut delegate:nil];
+            
+            return NO;
+        }
     }
     
     return  YES;
