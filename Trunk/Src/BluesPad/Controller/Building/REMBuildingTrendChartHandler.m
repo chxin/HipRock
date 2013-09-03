@@ -120,6 +120,28 @@
     [self drawToolTip: nearByPointIndex];
 }
 
+-(void)prepareShare {
+    if (currentSourceIndex != 2) {
+        REMToggleButton* activeBtn = nil;
+        REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
+        if (currentSourceIndex == Today) {
+            activeBtn = myView.todayButton;
+        } else if (currentSourceIndex == Yesterday) {
+            activeBtn = myView.yestodayButton;
+        } else if (currentSourceIndex == ThisMonth) {
+            activeBtn = myView.thisMonthButton;
+        } else if (currentSourceIndex == LastMonth) {
+            activeBtn = myView.lastMonthButton;
+        } else if (currentSourceIndex == ThisYear) {
+            activeBtn = myView.thisYearButton;
+        } else if (currentSourceIndex == LastYear) {
+            activeBtn = myView.lastYearButton;
+        }
+        [myView.thisMonthButton setOn:YES];
+        [activeBtn setOn:NO];
+        [self intervalChanged:myView.thisMonthButton];
+    }
+}
 
 - (int)getSourceIndex: (REMRelativeTimeRangeType)type {
     int i = 0;
