@@ -96,7 +96,7 @@ const NSInteger kWeiboMaxLength = 140;
     
     [self.view addSubview:topToolbar];
     
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+//    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 //    [center addObserver:self selector:@selector(didKeyboardShow) name:UIKeyboardDidShowNotification object:nil];
 //    [center addObserver:self selector:@selector(didKeyboardHide) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -243,8 +243,8 @@ const NSInteger kWeiboMaxLength = 140;
     //    CGFloat offsetX = (appRect.size.height - kWeiboWindowWidth) / 2 - curretnRect.origin.x;
     
     //    [self.view.superview.layer setShadowOffset:CGSizeMake(0, 0)];
-    if (editing == NO)
-    self.view.superview.bounds = CGRectMake(0, 0, kWeiboWindowWidth, kWeiboWindowHeight);
+//    if (editing == NO)
+//    self.view.superview.bounds = CGRectMake(0, 0, kWeiboWindowWidth, kWeiboWindowHeight);
 }
 
 @end
