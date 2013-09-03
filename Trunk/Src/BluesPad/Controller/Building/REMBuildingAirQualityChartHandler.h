@@ -7,6 +7,7 @@
 //
 
 #import "REMBuildingChartHandler.h"
+#import "REMChartHorizonalScrollDelegator.h"
 
 @interface REMBuildingAirQualityChartHandler : REMBuildingChartHandler<CPTScatterPlotDataSource,CPTScatterPlotDelegate,CPTPlotSpaceDelegate>
 
