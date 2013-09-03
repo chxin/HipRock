@@ -37,6 +37,11 @@
 
 @implementation REMBuildingAverageChartHandler
 
+static NSString *kNoDataText = @"暂无数据";
+
+static NSString *kBenchmarkTitle = @"单位用电";
+static NSString *kAverageDataTitle = @"指数";
+
 
 - (REMBuildingChartHandler *)initWithViewFrame:(CGRect)frame
 {
@@ -99,22 +104,29 @@
 - (void)loadChart
 {
     //convert data
-    [self convertData];
+    BOOL hasData = [self convertData];
     
-    //initialize graph
-    [self.chartView initializeGraph];
-    
-    //initialize plot space
-    [self initializePlotSpace];
-    
-    //initialize axises
-    [self initializeAxises];
-    
-    //initialize plots
-    [self initializePlots];
-    
-    //draw labels
-    [self drawChartLabels];
+    if(hasData == NO || self.chartData==nil || self.chartData.count<=0)
+    {
+        [self drawNoDataLabel];
+    }
+    else
+    {
+        //initialize graph
+        [self.chartView initializeGraph];
+        
+        //initialize plot space
+        [self initializePlotSpace];
+        
+        //initialize axises
+        [self initializeAxises];
+        
+        //initialize plots
+        [self initializePlots];
+        
+        //draw labels
+        [self drawChartLabels];
+    }
 }
 
 - (void)initializePlotSpace
@@ -279,8 +291,13 @@
     [self.chartView.graph addPlot:line];
 }
 
-- (void)convertData
+- (BOOL)convertData
 {
+    if(self.averageData.unitData.targetEnergyData.count<1 && self.averageData.benchmarkData.targetEnergyData.count<1)
+    {
+        return NO;
+    }
+    
     NSArray *energySeries = @[self.averageData.unitData.targetEnergyData[0],self.averageData.benchmarkData.targetEnergyData[0]];
     NSMutableArray *convertedData = [[NSMutableArray alloc] initWithCapacity:2];
     
@@ -326,6 +343,8 @@
     self.draggableRange = [[REMDataRange alloc] initWithStart:(self.globalRange.start - enlargeDistance) andEnd:(self.globalRange.end + enlargeDistance)];
     
     self.chartData = convertedData;
+    
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -342,20 +361,33 @@
     CGFloat labelDistance = 54;
     
     UIColor *benchmarkColor = [UIColor colorWithRed:241.0/255.0 green:94.0/255.0 blue:49.0/255.0 alpha:1];
-    NSString *benchmarkTitle = @"单位用电";
-    CGFloat benchmarkWidth = [benchmarkTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
+
+    CGFloat benchmarkWidth = [kBenchmarkTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
     CGRect benchmarkFrame = CGRectMake(labelLeftOffset, labelTopOffset, benchmarkWidth, fontSize);
-    REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:benchmarkTitle andColor:benchmarkColor];
+    REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:(NSString *)kBenchmarkTitle andColor:benchmarkColor];
     
     UIColor *averageDataColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1];
-    NSString *averageDataTitle = @"指数";
-    CGFloat averageDataWidth = [averageDataTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
+
+    CGFloat averageDataWidth = [kAverageDataTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
     CGRect averageDataFrame = CGRectMake(labelLeftOffset+benchmarkWidth+labelDistance, labelTopOffset, averageDataWidth, fontSize);
-    REMChartSeriesIndicator *averageDataIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:averageDataFrame title:averageDataTitle andColor:averageDataColor];
+    REMChartSeriesIndicator *averageDataIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:averageDataFrame title:(NSString *)kAverageDataTitle andColor:averageDataColor];
     
     
     [self.view addSubview:benchmarkIndicator];
     [self.view addSubview:averageDataIndicator];
+}
+
+-(void)drawNoDataLabel
+{
+    CGFloat fontSize = 36;
+    CGSize labelSize = [kNoDataText sizeWithFont:[UIFont systemFontOfSize:fontSize]];
+    UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];
+    noDataLabel.text = (NSString *)kNoDataText;
+    noDataLabel.textColor = [UIColor whiteColor];
+    noDataLabel.textAlignment = NSTextAlignmentLeft;
+    noDataLabel.backgroundColor = [UIColor clearColor];
+    
+    [self.view addSubview:noDataLabel];
 }
 
 
