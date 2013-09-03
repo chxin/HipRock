@@ -381,10 +381,10 @@ typedef void(^SuccessCallback)(BOOL success);
             stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairUomName#" withString:mayairUom];
         }
     }
-    NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString* myDocPath = myPaths[0];
-    NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo2.png"];
-    [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
+//    NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+//    NSString* myDocPath = myPaths[0];
+//    NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo2.png"];
+//    [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
     return @{
              @"image": img,
              @"text": stringFormat

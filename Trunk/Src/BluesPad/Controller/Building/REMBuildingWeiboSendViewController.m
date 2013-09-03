@@ -85,14 +85,14 @@ const NSInteger kWeiboMaxLength = 140;
     [topToolbar addSubview:cancelBtn];
     [topToolbar addSubview:sendBtn];
     
-    topToolbar.layer.borderColor = [UIColor redColor].CGColor;
-    topToolbar.layer.borderWidth = 1;
-    toolbarLabel.layer.borderColor = [UIColor grayColor].CGColor;
-    toolbarLabel.layer.borderWidth = 1;
-    cancelBtn.layer.borderColor = [UIColor greenColor].CGColor;
-    cancelBtn.layer.borderWidth = 1;
-    sendBtn.layer.borderColor = [UIColor greenColor].CGColor;
-    sendBtn.layer.borderWidth = 1;
+//    topToolbar.layer.borderColor = [UIColor redColor].CGColor;
+//    topToolbar.layer.borderWidth = 1;
+//    toolbarLabel.layer.borderColor = [UIColor grayColor].CGColor;
+//    toolbarLabel.layer.borderWidth = 1;
+//    cancelBtn.layer.borderColor = [UIColor greenColor].CGColor;
+//    cancelBtn.layer.borderWidth = 1;
+//    sendBtn.layer.borderColor = [UIColor greenColor].CGColor;
+//    sendBtn.layer.borderWidth = 1;
     
     [self.view addSubview:topToolbar];
     
@@ -141,7 +141,7 @@ const NSInteger kWeiboMaxLength = 140;
     
     [secondView addSubview:imageView];
     [self.view addSubview:secondView];
-    [textView becomeFirstResponder];
+//    [textView becomeFirstResponder];
 }
 
 - (void)viewDidLoad
@@ -243,8 +243,8 @@ const NSInteger kWeiboMaxLength = 140;
     //    CGFloat offsetX = (appRect.size.height - kWeiboWindowWidth) / 2 - curretnRect.origin.x;
     
     //    [self.view.superview.layer setShadowOffset:CGSizeMake(0, 0)];
-//    if (editing == NO)
-//    self.view.superview.bounds = CGRectMake(0, 0, kWeiboWindowWidth, kWeiboWindowHeight);
+    if (editing == NO)
+        self.view.superview.bounds = CGRectMake(0, 0, kWeiboWindowWidth, kWeiboWindowHeight);
 }
 
 @end
