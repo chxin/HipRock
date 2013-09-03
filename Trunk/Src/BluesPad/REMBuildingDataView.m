@@ -352,7 +352,7 @@ typedef void(^SuccessCallback)(BOOL success);
         NSString* uomName = model.commodityUsage.uom.comment;
         NSString* val = model.commodityUsage.dataValue.stringValue;
         if (val == nil || commodityName == nil || uomName == nil) {
-            stringFormat = @"暂无数据。";
+            stringFormat = @"暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。暂无数据。";
         } else {
             stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
             stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#UomName#" withString:uomName];

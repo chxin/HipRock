@@ -39,7 +39,7 @@
     //myView registerClass forCellReuseIdentifier:<#(NSString *)#>
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -84,7 +84,7 @@
     //logout cell
     else if(indexPath.section==0){
         
-       
+        
         if(indexPath.row==0){
             [[cell textLabel]setText:@"显示名称"];
             NSString *name=[REMApplicationContext instance].currentUser.realname;
@@ -111,17 +111,17 @@
         
         
         /*
-        UIButton *logout= [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [logout setFrame: CGRectMake(0, 0, 480, cell.contentView.frame.size.height)];
-        
-        logout.layer.borderWidth=0;
-        
-        
-        [logout setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        [logout setTitle:@"退出登录" forState:UIControlStateNormal];
-        logout.contentMode=UIViewContentModeScaleAspectFit;
-        [logout addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.contentView addSubview:logout];*/
+         UIButton *logout= [UIButton buttonWithType:UIButtonTypeRoundedRect];
+         [logout setFrame: CGRectMake(0, 0, 480, cell.contentView.frame.size.height)];
+         
+         logout.layer.borderWidth=0;
+         
+         
+         [logout setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+         [logout setTitle:@"退出登录" forState:UIControlStateNormal];
+         logout.contentMode=UIViewContentModeScaleAspectFit;
+         [logout addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
+         [cell.contentView addSubview:logout];*/
     }
     return cell;
 }
@@ -180,43 +180,43 @@
     }
 }
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ }
+ else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 #pragma mark - Table view delegate
 

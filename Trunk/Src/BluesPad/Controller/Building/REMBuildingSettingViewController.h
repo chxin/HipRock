@@ -18,5 +18,6 @@
 @property (nonatomic,strong) REMSplashScreenController *splashScreenController;
 
 @property (nonatomic,strong) UINavigationController *navigationController;
+@property (nonatomic,strong) UISwitch *weiboAccoutSwitcher;
 
 @end
