@@ -422,16 +422,30 @@
     
     [view exportImage:^(UIImage *image, NSString* text){
         [masker hideMask];
+        
         // [UIImagePNGRepresentation(image) writeToFile:[self getWeiboPicAddress] atomically:NO];
         REMBuildingWeiboSendViewController* vc = [[REMBuildingWeiboSendViewController alloc]init];
         
         [vc setWeiboText: text];
         [vc setWeiboImage:image];
         NSDictionary* sender = @{@"image": image, @"text": text};
-//        UIView* www = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
-//        www.backgroundColor = [UIColor whiteColor];
-        [self presentViewController:vc animated:NO completion:Nil];
-//        [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
+        
+//        [self presentViewController:vc animated:NO completion:Nil];
+        [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
+        
+        
+//        UINavigationController *modalViewNavController =
+//        [[UINavigationController alloc]
+//         initWithRootViewController:vc];
+//        modalViewNavController.toolbarHidden = YES;
+//        modalViewNavController.navigationBarHidden = YES;
+//        modalViewNavController.view.backgroundColor = [UIColor clearColor];
+//        modalViewNavController.view.superview.alpha = 0.1;
+//        self.modalPresentationStyle = UIModalPresentationCurrentContext;
+//        self presentViewController:vc animated:<#(BOOL)#> completion:<#^(void)completion#>
+////        modalViewNavController.view.alpha = 0.1;
+//        [self.navigationController presentViewController:modalViewNavController animated:YES completion:Nil];
+        
     }];
 }
 
