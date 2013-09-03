@@ -26,11 +26,13 @@ typedef enum _REMEnergyTargetType : NSUInteger
     REMEnergyTargetOrigValue=12,
     REMEnergyTargetTargetValue=13,
     REMEnergyTargetBaseValue = 14,
+    
+    REMEnergyTargetBenchmarkValue = 15,
 } REMEnergyTargetType;
 
 @interface REMEnergyTargetModel : REMJSONObject
 
-@property (nonatomic) long long targetId;
+@property (nonatomic,strong) NSNumber *targetId;
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,strong) NSString *code;
 @property (nonatomic) REMEnergyTargetType type;
