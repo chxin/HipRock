@@ -174,7 +174,8 @@ typedef void(^SuccessCallback)(BOOL success);
         for (int i=0; i<self.chartViewArray.count; ++i) {
             UIView *view = self.chartViewArray[i];
             CALayer *layer = view.layer;
-            UIGraphicsBeginImageContext(layer.frame.size);
+            
+            UIGraphicsBeginImageContextWithOptions(layer.frame.size, NO, 0.0);
             [layer renderInContext:UIGraphicsGetCurrentContext()];
             UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
@@ -229,7 +230,7 @@ typedef void(^SuccessCallback)(BOOL success);
     
     int marginTop1=marginTop+chartContainerHeight+kBuildingCommodityBottomMargin;
     
-    REMBuildingChartContainerView *view1 = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingChartWidth, chartContainerHeight) withTitle:[NSString stringWithFormat:@"用%@趋势图",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
+    REMBuildingChartContainerView *view1 = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingChartWidth, chartContainerHeight+33) withTitle:[NSString stringWithFormat:@"用%@趋势图",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
     
     [self addSubview:view1];
     

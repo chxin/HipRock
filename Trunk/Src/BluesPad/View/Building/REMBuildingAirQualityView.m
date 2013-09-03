@@ -67,9 +67,9 @@
 
 - (void)initChartContainer
 {
-    int marginTop=kBuildingTotalInnerMargin+kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingDetailGroupMargin+kBuildingTotalGroupMargin;
-    
-    REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0,marginTop , kImageWidth-kBuildingCommodityLeftMargin, kBuildingChartHeight*2+kBuildingCommodityBottomMargin+kBuildingDetailInnerMargin*2) withTitle:@"室内外PM2.5逐日含量" andTitleFontSize:kBuildingCommodityTitleFontSize ];
+    int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;
+    int chartContainerHeight= kBuildingChartHeight*2+kBuildingCommodityBottomMargin+kBuildingDetailInnerMargin*2;
+    REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0,marginTop , kImageWidth-kBuildingCommodityLeftMargin,chartContainerHeight) withTitle:@"室内外PM2.5逐日含量" andTitleFontSize:kBuildingCommodityTitleFontSize ];
     
     [self addSubview:view];
     
