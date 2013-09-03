@@ -30,7 +30,7 @@ static CGFloat bottomAxisOffset = 16.0;
 
 -(void)initializeGraph
 {
-    CGRect hostViewFrame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height-40);
+    CGRect hostViewFrame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height-33);
     
     self.hostView = [[CPTGraphHostingView alloc]initWithFrame:hostViewFrame];
     
@@ -53,6 +53,7 @@ static CGFloat bottomAxisOffset = 16.0;
     
     //Init host view
     self.hostView.hostedGraph = self.graph;
+    [self.hostView setAllowPinchScaling:NO];
     
     [self addSubview:self.hostView];
 }

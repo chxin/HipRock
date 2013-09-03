@@ -37,7 +37,7 @@ static CGFloat rightAxisOffset = 0.0;
 {
     //NSLog(@"bounds:%@",NSStringFromCGRect(self.bounds));
     
-    CGRect hostViewFrame = CGRectMake(0, 0, 710, 405 + topAxisOffset + bottomAxisOffset);
+    CGRect hostViewFrame = CGRectMake(0, 0, 710, self.bounds.size.height - topAxisOffset - 45);
     
 //    NSLog(@"bounds:%@",NSStringFromCGRect(self.bounds));
 //    NSLog(@"hostbounds:%@",NSStringFromCGRect(self.hostView.bounds));
@@ -48,6 +48,7 @@ static CGFloat rightAxisOffset = 0.0;
 //    self.hostView.layer.borderWidth = 1.0;
     
     self.hostView.hostedGraph=[[CPTXYGraph alloc] init];
+    [self.hostView setAllowPinchScaling:NO];
     
     self.hostView.hostedGraph.paddingTop = topAxisOffset;
     self.hostView.hostedGraph.paddingBottom = bottomAxisOffset;

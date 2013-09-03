@@ -40,8 +40,8 @@
 
 static NSString *kNoDataText = @"暂无数据";
 
-static NSString *kBenchmarkTitle = @"单位用%@";
-static NSString *kAverageDataTitle = @"指数";
+static NSString *kBenchmarkTitle = @"指数";
+static NSString *kAverageDataTitle = @"单位用%@";
 
 
 - (REMBuildingChartHandler *)initWithViewFrame:(CGRect)frame
@@ -368,25 +368,26 @@ static NSString *kAverageDataTitle = @"指数";
 
 -(void)drawChartLabels
 {
-    CGFloat labelTopOffset = self.chartView.hostView.bounds.size.height+43-16;
-    CGFloat labelLeftOffset = 56;
     CGFloat fontSize = 14;
-    CGFloat labelDistance = 54;
+    CGFloat labelTopOffset = self.chartView.hostView.bounds.size.height+18;
+    CGFloat labelLeftOffset = 57;
+    CGFloat labelDistance = 18;
     
     UIColor *benchmarkColor = [UIColor colorWithRed:241.0/255.0 green:94.0/255.0 blue:49.0/255.0 alpha:1];
     
     REMCommodityModel *commodity = [[REMCommodityModel systemCommodities] objectForKey:[NSNumber numberWithLongLong:self.commodityId]];
-    NSString *benchmarkTitle = [NSString stringWithFormat:kBenchmarkTitle,commodity.comment];
 
-    CGFloat benchmarkWidth = [benchmarkTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
+    CGFloat benchmarkWidth = [kBenchmarkTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
     CGRect benchmarkFrame = CGRectMake(labelLeftOffset, labelTopOffset, benchmarkWidth, fontSize);
-    REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:(NSString *)benchmarkTitle andColor:benchmarkColor];
+    REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:(NSString *)kBenchmarkTitle andColor:benchmarkColor];
     
     UIColor *averageDataColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1];
+    
+    NSString *averageDataTitle = [NSString stringWithFormat:kAverageDataTitle,commodity.comment];
 
-    CGFloat averageDataWidth = [kAverageDataTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
+    CGFloat averageDataWidth = [averageDataTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
     CGRect averageDataFrame = CGRectMake(labelLeftOffset+benchmarkWidth+labelDistance, labelTopOffset, averageDataWidth, fontSize);
-    REMChartSeriesIndicator *averageDataIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:averageDataFrame title:(NSString *)kAverageDataTitle andColor:averageDataColor];
+    REMChartSeriesIndicator *averageDataIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:averageDataFrame title:(NSString *)averageDataTitle andColor:averageDataColor];
     
     
     [self.view addSubview:benchmarkIndicator];
