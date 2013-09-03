@@ -440,9 +440,15 @@
     [view exportImage:^(UIImage *image, NSString* text){
         [masker hideMask];
         // [UIImagePNGRepresentation(image) writeToFile:[self getWeiboPicAddress] atomically:NO];
+        REMBuildingWeiboSendViewController* vc = [[REMBuildingWeiboSendViewController alloc]init];
         
+        [vc setWeiboText: text];
+        [vc setWeiboImage:image];
         NSDictionary* sender = @{@"image": image, @"text": text};
-        [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
+//        UIView* www = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+//        www.backgroundColor = [UIColor whiteColor];
+        [self presentViewController:vc animated:NO completion:Nil];
+//        [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
     }];
 }
 

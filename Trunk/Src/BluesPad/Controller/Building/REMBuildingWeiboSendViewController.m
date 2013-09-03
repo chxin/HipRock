@@ -97,8 +97,8 @@ const NSInteger kWeiboMaxLength = 140;
     [self.view addSubview:topToolbar];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(didKeyboardShow) name:UIKeyboardDidShowNotification object:nil];
-    [center addObserver:self selector:@selector(didKeyboardHide) name:UIKeyboardWillHideNotification object:nil];
+//    [center addObserver:self selector:@selector(didKeyboardShow) name:UIKeyboardDidShowNotification object:nil];
+//    [center addObserver:self selector:@selector(didKeyboardHide) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)initTextAndImage {
