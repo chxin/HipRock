@@ -46,10 +46,12 @@ const NSInteger kWeiboMaxLength = 140;
 - (void)textViewDidChange:(UITextView *)theTextView {
     if (textView.text.length > kWeiboMaxLength) {
         sendBtn.enabled = NO;
-        sendBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontUltra) size:16];
+        sendBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:16];
+        [sendBtn setTitleColor:[UIColor colorWithRed:0 green:122/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
     } else {
         sendBtn.enabled = YES;
-        sendBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontLight) size:16];
+        sendBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:16];
+        [sendBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     }
     [charactorLabel setText: [NSString stringWithFormat:@"%i", (kWeiboMaxLength - [NSNumber numberWithUnsignedInteger:textView.text.length].intValue)]];
 }
@@ -71,13 +73,13 @@ const NSInteger kWeiboMaxLength = 140;
     cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [cancelBtn setFrame:CGRectMake(kWeiboButtonMargin, 0, kWeiboButtonWidth, kWeiboToolbarHeight)];
-    cancelBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontUltra) size:16];
+    cancelBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:16];
     cancelBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
     [cancelBtn setTitleColor:[UIColor colorWithRed:0 green:122/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
     [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(cancelClicked:) forControlEvents:UIControlEventTouchUpInside];
     [sendBtn setFrame:CGRectMake(kWeiboWindowWidth - kWeiboButtonWidth - kWeiboButtonMargin, 0, kWeiboButtonWidth, kWeiboToolbarHeight)];
-    sendBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontLight) size:16];
+    sendBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:16];
     sendBtn.titleLabel.textAlignment = NSTextAlignmentRight;
     [sendBtn setTitleColor:[UIColor colorWithRed:0 green:122/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
     [sendBtn setTitle:@"发布" forState:UIControlStateNormal];
@@ -109,14 +111,15 @@ const NSInteger kWeiboMaxLength = 140;
     secondView.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1];
     
     textView = [[UITextView alloc]initWithFrame:CGRectMake(kWeiboTextViewMargin, kWeiboTextViewMargin, leftViewWidth - kWeiboTextViewMargin, secondViewHeight - kWeiboTextViewMargin - kWeiboCharactorLabelHeight - kWeiboCharactorLabelMarginBottom)];
-    [textView setFont:[UIFont fontWithName:@(kBuildingFontLight) size:16]];
+    [textView setFont:[UIFont fontWithName:@(kBuildingFontSCRegular) size:16]];
     textView.backgroundColor = [UIColor clearColor];
     textView.scrollEnabled = YES;
+    textView.editable = NO;
     [secondView addSubview:textView];
     
     charactorLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, secondViewHeight - kWeiboCharactorLabelHeight - kWeiboCharactorLabelMarginBottom, 100, kWeiboCharactorLabelHeight)];
     charactorLabel.backgroundColor = [UIColor clearColor];
-    [charactorLabel setFont:[UIFont fontWithName:@(kBuildingFontLight) size:9]];
+    [charactorLabel setFont:[UIFont fontWithName:@(kBuildingFontSCRegular) size:9]];
     [charactorLabel setTextColor:[UIColor grayColor]];
     [secondView addSubview:charactorLabel];
     

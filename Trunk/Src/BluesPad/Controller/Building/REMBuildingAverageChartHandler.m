@@ -55,6 +55,10 @@ static NSString *kAverageDataTitle = @"单位用%@";
     return self;
 }
 
+-(void)prepareShare {
+    
+}
+
 - (void)loadView
 {
     [super loadView];
