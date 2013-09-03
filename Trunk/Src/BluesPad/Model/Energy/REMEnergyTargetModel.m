@@ -13,7 +13,7 @@
 
 -(void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
-    self.targetId = [dictionary[@"TargetId"] longLongValue];
+    self.targetId = dictionary[@"TargetId"];
     self.name = dictionary[@"Name"];
     self.code = dictionary[@"Code"];
     self.commodityId = [dictionary[@"CommodityId"] longLongValue];

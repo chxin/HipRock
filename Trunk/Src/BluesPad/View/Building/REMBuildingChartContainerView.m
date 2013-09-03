@@ -26,8 +26,8 @@
         self.hasLoaded=NO;
         //NSLog(@"chart frame:%@",NSStringFromCGRect(frame));
         self.backgroundColor=[UIColor clearColor];
-        self.layer.borderColor=[UIColor redColor].CGColor;
-        self.layer.borderWidth=1;
+//        self.layer.borderColor=[UIColor redColor].CGColor;
+//        self.layer.borderWidth=1;
         [self initTitle:title withSize:size withLeftMargin:0];
         [self initChartViewWithSize:size];
     }
@@ -40,8 +40,8 @@
 {
     self.chartContainer = [[UIView alloc]initWithFrame:CGRectMake(0, titleSize+kBuildingDetailInnerMargin, self.frame.size.width, self.frame.size.height-titleSize-kBuildingDetailInnerMargin)];
     self.chartContainer.clipsToBounds=YES;
-    self.chartContainer.layer.borderColor=[UIColor greenColor].CGColor;
-    self.chartContainer.layer.borderWidth=1;
+//    self.chartContainer.layer.borderColor=[UIColor greenColor].CGColor;
+//    self.chartContainer.layer.borderWidth=1;
     
     [self addSubview:self.chartContainer];
 }

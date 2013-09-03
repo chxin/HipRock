@@ -44,7 +44,7 @@
     self.deltaTime=diffTime;
     self.lastTime=event.timestamp;
     //if(diffTime<0.1)return NO;
-    self.lastPoint=point;
+    //self.lastPoint=point;
     return YES;
 }
 
@@ -59,11 +59,12 @@
     
     NSLog(@"up diff time:%f",diffTime);
     NSLog(@"up delta x:%f",deltaX);
-    if(diffTime!=0){
+    if(self.deltaTime!=0 && diffTime==0){
     //if(ABS(deltaX)>8){
        
         //NSLog(@"diff time:%f",diffTime);
         //NSLog(@"delta x:%f",deltaX);
+        NSLog(@"enter ");
         diffTime=self.deltaTime;
         diffTime=MAX(0.05, diffTime);
         CGFloat speed = deltaX/diffTime;
