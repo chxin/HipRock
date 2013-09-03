@@ -28,6 +28,7 @@
 @property (nonatomic) BOOL customImageLoaded;
 @property (nonatomic,strong) NSString *loadingImageKey;
 @property (nonatomic,strong) UIButton *settingButton;
+@property (nonatomic,strong) UIButton *shareButton;
 
 @property (nonatomic) BOOL isActive;
 
@@ -136,6 +137,16 @@
     [btn addTarget:self.controller action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.settingButton=btn;
     [self addSubview:btn];
+    
+    UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
+    [shareButton setImage:[UIImage imageNamed:@"Share_normal.png"] forState:UIControlStateNormal];
+    
+    shareButton.showsTouchWhenHighlighted=YES;
+    shareButton.adjustsImageWhenHighlighted=YES;
+    shareButton.titleLabel.text=@"分享";
+    [shareButton addTarget:self.controller action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.shareButton=shareButton;
+    [self addSubview:shareButton];
 
 }
 

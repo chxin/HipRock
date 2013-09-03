@@ -271,10 +271,14 @@ static NSDictionary *codeNameMap;
     }
     
     //process visiable range
-    NSDate *visiableEndDate = [NSDate dateWithTimeIntervalSince1970:self.visiableRange.end];
+    NSDate *visiableEndDate = [NSDate dateWithTimeIntervalSince1970:self.globalRange.end];
     NSDate *visiableStartDate = [REMTimeHelper add:-14 onPart:REMDateTimePartDay ofDate:visiableEndDate];
     
     self.visiableRange.start = [visiableStartDate timeIntervalSince1970];
+    self.visiableRange.end = [visiableEndDate timeIntervalSince1970];
+    
+    double enlargeDistance = [self.visiableRange distance] * 0.3;
+    self.draggableRange = [[REMDataRange alloc] initWithStart:(self.globalRange.start - enlargeDistance) andEnd:(self.globalRange.end + enlargeDistance)];
     
     self.chartData = convertedData;
 }
@@ -285,19 +289,16 @@ static NSDictionary *codeNameMap;
     plotSpace.allowsUserInteraction = YES;
     plotSpace.delegate=self;
     
-    self.draggableRange = [self.globalRange expandByFactor:0.1];
-    
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.draggableRange.start) length:CPTDecimalFromDouble([self.draggableRange distance])];
     
     //since y axis will never be able to drag, global space and visiable space for y axis are equal
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end)];
-    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end)];
+    CPTPlotRange *dataValuePlotRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end + [self.dataValueRange distance] * 0.05)];
+    plotSpace.yRange = dataValuePlotRange;
+    plotSpace.globalYRange = dataValuePlotRange;
     
    // [plotSpace setElasticGlobalXRange:YES];
    // [plotSpace setAllowsMomentum:YES];
-    
-    self.origRightRange=[plotSpace.xRange mutableCopy];
 }
 
 -(void)initializeAxises
@@ -401,7 +402,8 @@ static NSDictionary *codeNameMap;
         
         CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
         symbol.fill= [CPTFill fillWithColor:lineColor];
-        symbol.size=CGSizeMake(8.0, 8.0);
+        symbol.size=CGSizeMake(10.0, 10.0);
+        symbol.lineStyle = [self hiddenLineStyle];
         
         CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
         lineStyle.lineColor = lineColor;

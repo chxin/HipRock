@@ -29,6 +29,10 @@
 @property (nonatomic,strong) REMDataRange *globalRange;
 @property (nonatomic,strong) REMDataRange *draggableRange;
 
+@property (nonatomic) CGPoint lastPoint;
+@property (nonatomic) NSTimeInterval lastTime;
+@property (nonatomic) BOOL isDragging;
+
 @end
 
 @implementation REMBuildingAverageChartHandler
@@ -97,6 +101,9 @@
     //convert data
     [self convertData];
     
+    //initialize graph
+    [self.chartView initializeGraph];
+    
     //initialize plot space
     [self initializePlotSpace];
     
@@ -116,14 +123,13 @@
     plotSpace.allowsUserInteraction = YES;
     plotSpace.delegate=self;
     
-    self.draggableRange = [self.globalRange expandByFactor:0.1];
-    
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.draggableRange.start) length:CPTDecimalFromDouble([self.draggableRange distance])];
     
     //since y axis will never be able to drag, global space and visiable space for y axis are equal
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end)];
-    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end)];
+    CPTPlotRange *dataValuePlotRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end + [self.dataValueRange distance] * 0.05)];
+    plotSpace.yRange = dataValuePlotRange;
+    plotSpace.globalYRange = dataValuePlotRange;
 }
 
 - (void)initializeAxises
@@ -257,7 +263,8 @@
     
     CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
     symbol.fill= [CPTFill fillWithColor:lineColor];
-    symbol.size=CGSizeMake(8.0, 8.0);
+    symbol.size=CGSizeMake(10.0, 10.0);
+    symbol.lineStyle = [self hiddenLineStyle];
     
     CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];
     labelStyle.color = [REMColor colorByIndex:1];
@@ -313,7 +320,10 @@
         index ++;
     }
 
-    //self.globalRange.end = self.visiableRange.end;
+    self.visiableRange.end = self.globalRange.end;
+    
+    double enlargeDistance = [self.visiableRange distance] * 0.3;
+    self.draggableRange = [[REMDataRange alloc] initWithStart:(self.globalRange.start - enlargeDistance) andEnd:(self.globalRange.end + enlargeDistance)];
     
     self.chartData = convertedData;
 }
@@ -326,7 +336,7 @@
 
 -(void)drawChartLabels
 {
-    CGFloat labelTopOffset = self.chartView.hostView.bounds.size.height+43-14;
+    CGFloat labelTopOffset = self.chartView.hostView.bounds.size.height+43-16;
     CGFloat labelLeftOffset = 56;
     CGFloat fontSize = 14;
     CGFloat labelDistance = 54;
@@ -395,30 +405,130 @@
 }
 
 #pragma mark - plot space delegate
+
+- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDownEvent:(UIEvent *)event atPoint:(CGPoint)point
+{
+    self.lastPoint=point;
+    self.lastTime=event.timestamp;
+    
+    return YES;
+}
+
+- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDraggedEvent:(UIEvent *)event atPoint:(CGPoint)point
+{
+    //NSLog(@"dragged");
+    
+    //self.isDragging=YES;
+     CGFloat deltaX=point.x-self.lastPoint.x;
+    NSTimeInterval diffTime= event.timestamp-self.lastTime;
+    //NSLog(@"diff time:%f",diffTime);
+    //NSLog(@"delta x:%f",deltaX);
+    if(diffTime<0.1)return NO;
+    self.lastPoint=point;
+    return YES;
+}
+
+
+
 - (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
 {
-    //left bound
-    NSDecimal currentLeftLocation = space.xRange.location;
-    NSDecimal currentRightLocation = CPTDecimalAdd(space.xRange.location,space.xRange.length);
     
-    NSDecimal minLeftLocation = CPTDecimalFromDouble(self.globalRange.start);
-    NSDecimal maxRightLocation = CPTDecimalFromDouble(self.globalRange.end);
+    CGFloat deltaX=point.x-self.lastPoint.x;
     
-    BOOL isCurrentLeftLessThanMinLeft = CPTDecimalLessThan(currentLeftLocation,minLeftLocation);
-    BOOL isCurrentRightGreaterThanMaxRight = CPTDecimalGreaterThan(currentRightLocation, maxRightLocation);
-    
-    //if current left location is smaller than global range start, go back with animation
-    //if current right location is greater than global range end, go back with animation too
-    if(isCurrentLeftLessThanMinLeft == YES || isCurrentRightGreaterThanMaxRight == YES){
-        CPTPlotRange *correctRange;
-        if(isCurrentLeftLessThanMinLeft)
-            correctRange = [[CPTPlotRange alloc] initWithLocation:minLeftLocation length:space.xRange.length];
-        else
-            correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalSubtract(maxRightLocation, space.xRange.length) length:space.xRange.length];
-
-        [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:correctRange duration:0.15 withDelay:0 animationCurve:CPTAnimationCurveCubicInOut delegate:nil];
+    if(ABS(deltaX)>8){
+        NSTimeInterval diffTime= event.timestamp-self.lastTime;
+        //NSLog(@"diff time:%f",diffTime);
+        //NSLog(@"delta x:%f",deltaX);
+        diffTime=MAX(0.05, diffTime);
+        CGFloat speed = deltaX/diffTime;
+        CGFloat constTime=0.2;
+        CGFloat accelerate=speed/constTime;
+        CGFloat distance = speed*constTime-0.5*accelerate*constTime*constTime;
+        NSDecimal lastPoint[2], newPoint[2];
+         CPTPlotArea *plotArea = self.getHostView.hostedGraph.plotAreaFrame.plotArea;
+         CGPoint pointInPlotArea = [self.getHostView.hostedGraph convertPoint:point toLayer:plotArea];
+        [space plotPoint:lastPoint forPlotAreaViewPoint:pointInPlotArea];
+        [space plotPoint:newPoint forPlotAreaViewPoint:CGPointMake(pointInPlotArea.x + distance,pointInPlotArea.y)];
         
-        return NO;
+        NSDecimal shiftX = CPTDecimalSubtract(lastPoint[CPTCoordinateX], newPoint[CPTCoordinateX]);
+        
+        //NSLog(@"shiftx:%f",CPTDecimalFloatValue(shiftX));
+        CPTMutablePlotRange *newRange= [space.xRange mutableCopy];
+        
+        newRange.location = CPTDecimalAdd(newRange.location, shiftX);
+        
+        
+        //left bound
+        NSDecimal currentLeftLocation = newRange.location;
+        NSDecimal currentRightLocation = CPTDecimalAdd(newRange.location,newRange.length);
+        
+        NSDecimal minLeftLocation = CPTDecimalFromDouble(self.globalRange.start);
+        NSDecimal maxRightLocation = CPTDecimalFromDouble(self.globalRange.end);
+        
+        BOOL isCurrentLeftLessThanMinLeft = CPTDecimalLessThan(currentLeftLocation,minLeftLocation);
+        BOOL isCurrentRightGreaterThanMaxRight = CPTDecimalGreaterThan(currentRightLocation, maxRightLocation);
+        
+        //if current left location is smaller than global range start, go back with animation
+        //if current right location is greater than global range end, go back with animation too
+        CPTPlotRange  *correctRange;
+        if(isCurrentLeftLessThanMinLeft == YES ){
+            correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalFromDouble(self.globalRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
+        }
+        else if(isCurrentRightGreaterThanMaxRight == YES){
+            correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
+            
+        }
+        if(correctRange!=nil){
+            constTime= ABS(CPTDecimalFloatValue(CPTDecimalSubtract(newRange.location, space.xRange.location))/speed);
+           
+
+        }
+
+        
+         [CPTAnimation animate:space
+                          property:@"xRange"
+                     fromPlotRange:space.xRange
+                       toPlotRange:newRange
+                          duration:constTime
+                    animationCurve:CPTAnimationCurveSinusoidalOut
+                          delegate:nil];
+        
+        if(correctRange!=nil){
+            //newRange = [correctRange mutableCopy];
+            [CPTAnimation animate:space property:@"xRange" fromPlotRange:newRange toPlotRange:correctRange duration:0.3 withDelay:constTime animationCurve:CPTAnimationCurveSinusoidalOut delegate:nil];
+            
+        }
+        
+        return  NO;
+        
+    }
+    else{
+        //left bound
+        NSDecimal currentLeftLocation = space.xRange.location;
+        NSDecimal currentRightLocation = CPTDecimalAdd(space.xRange.location,space.xRange.length);
+        
+        NSDecimal minLeftLocation = CPTDecimalFromDouble(self.globalRange.start);
+        NSDecimal maxRightLocation = CPTDecimalFromDouble(self.globalRange.end);
+        
+        BOOL isCurrentLeftLessThanMinLeft = CPTDecimalLessThan(currentLeftLocation,minLeftLocation);
+        BOOL isCurrentRightGreaterThanMaxRight = CPTDecimalGreaterThan(currentRightLocation, maxRightLocation);
+        
+        //if current left location is smaller than global range start, go back with animation
+        //if current right location is greater than global range end, go back with animation too
+        if(isCurrentLeftLessThanMinLeft == YES || isCurrentRightGreaterThanMaxRight == YES){
+            CPTPlotRange *correctRange;
+            if(isCurrentLeftLessThanMinLeft == YES ){
+                correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalFromDouble(self.globalRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
+            }
+            else if(isCurrentRightGreaterThanMaxRight == YES){
+                correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
+                
+            }
+
+            [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:correctRange duration:0.3 withDelay:0 animationCurve:CPTAnimationCurveSinusoidalOut delegate:nil];
+            
+            return NO;
+        }
     }
     
     return  YES;

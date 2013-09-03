@@ -16,19 +16,11 @@
 
 @property (nonatomic,strong) NSMutableArray *buildingOveralls;
 @property (nonatomic,strong) REMLoginCarouselController *carouselController;
+@property (nonatomic,strong) NSTimer *timer;
 
 @end
 
 @implementation REMSplashScreenController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -39,16 +31,27 @@
     //decide where to go
     [self recoverAppContext];
     
-    if([self isLogin]){
-        [self breathAnimation:nil];
-        //__block NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(breathAnimation:) userInfo:nil repeats:YES];
+    if([self isAlreadyLogin]){
+        SEL selector = @selector(breathAnimation:);
+         
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:selector]];
+        [invocation setTarget:self];
+        [invocation setSelector:selector];
+        
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
         
         [self showBuildingView:^(void){
-            //[timer invalidate];
-            //timer = nil;
+            if(self.timer != nil){
+                if([self.timer isValid])
+                    [self.timer invalidate];
+                
+                self.timer = nil;
+            }
             
             [self.logoView setHidden:YES];
         }];
+        
+        [self breathAnimation:nil];
     }
     else{
         [self breathAnimation:^(void){
@@ -58,24 +61,41 @@
     }
 }
 
-
--(void)breathAnimation:(void (^)(void))completed
+-(void)viewDidAppear:(BOOL)animated
 {
-    self.flashLogo.alpha = 0;
-    [UIView animateWithDuration:1.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.flashLogo.alpha = 0.8;
+    if([self isAlreadyLogin]){
+    }
+}
+
+
+-(void)breathAnimation:(id)completed
+{
+    CGFloat animationTime = 1.5;
+    
+    CGFloat flashOriginalAlpha = 0;
+    CGFloat flashFinalAlpha = 0.8;
+    CGFloat normalOriginalAlpha = 1;
+    CGFloat normalFinalAlpha = 1;
+    
+    self.flashLogo.alpha = flashOriginalAlpha;
+    self.normalLogo.alpha = normalOriginalAlpha;
+    [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.flashLogo.alpha = flashFinalAlpha;
+        self.normalLogo.alpha = normalFinalAlpha;
     } completion:^(BOOL finished) {
-        self.flashLogo.alpha = 0.8;
-        [UIView animateWithDuration:1.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            self.flashLogo.alpha = 0;
+        self.flashLogo.alpha = flashFinalAlpha;
+        self.normalLogo.alpha = normalFinalAlpha;
+        [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.flashLogo.alpha = flashOriginalAlpha;
+            self.normalLogo.alpha = normalOriginalAlpha;
         } completion:^(BOOL finished){
             if(completed!=nil)
-                completed();
+                ((void (^)(void))completed)();
         }];
     }];
 }
 
--(BOOL)isLogin
+-(BOOL)isAlreadyLogin
 {
     REMApplicationContext *context = [REMApplicationContext instance];
     

@@ -27,10 +27,10 @@
 
 - (void)initEmptyTextLabelWithTitleSize:(CGFloat)titleSize withTitleMargin:(CGFloat)margin withLeftMargin:(CGFloat)leftMargin withOrigFontSize:(CGFloat)fontSize{
     int marginTop=titleSize+margin+fontSize/4 ;
-    int fs=ceil(fontSize/3+10);
+    int fs=ceil(fontSize/4+10);
     self.emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftMargin, marginTop, 1000, fs)];
     self.emptyLabel.font=[UIFont fontWithName:@(kBuildingFontSC) size:fs];
-    self.emptyLabel.textColor=[UIColor lightGrayColor];
+    self.emptyLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.6];
     
     self.emptyLabel.text=@"无数据";
     self.emptyLabel.backgroundColor=[UIColor clearColor];

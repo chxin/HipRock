@@ -39,9 +39,9 @@ static CGFloat rightAxisOffset = 0.0;
     
     CGRect hostViewFrame = CGRectMake(0, 0, 710, 405 + topAxisOffset + bottomAxisOffset);
     
-    NSLog(@"bounds:%@",NSStringFromCGRect(self.bounds));
-    NSLog(@"hostbounds:%@",NSStringFromCGRect(self.hostView.bounds));
-    NSLog(@"hostframe:%@",NSStringFromCGRect(self.hostView.frame));
+//    NSLog(@"bounds:%@",NSStringFromCGRect(self.bounds));
+//    NSLog(@"hostbounds:%@",NSStringFromCGRect(self.hostView.bounds));
+//    NSLog(@"hostframe:%@",NSStringFromCGRect(self.hostView.frame));
     
     self.hostView = [[CPTGraphHostingView alloc] initWithFrame:hostViewFrame];
 //    self.hostView.layer.borderColor = [UIColor blueColor].CGColor;

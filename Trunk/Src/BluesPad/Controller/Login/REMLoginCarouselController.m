@@ -129,9 +129,10 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 - (void)initializationCarousel
 {
     CGRect rect = CGRectMake(0, 0, kSubViewWidth+kSubViewDistance, kSubViewHeight);
-    [UIView animateWithDuration:2 animations:^(void){
+    
+    [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         [self.scrollView scrollRectToVisible:rect animated:NO];
-    }];
+    } completion:nil];
 }
 
 

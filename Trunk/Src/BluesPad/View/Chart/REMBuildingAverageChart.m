@@ -20,8 +20,10 @@ static CGFloat bottomAxisOffset = 16.0;
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        [self initializeGraph];
+        //[self initializeGraph];
         
+//        self.layer.borderColor = [UIColor blueColor].CGColor;
+//        self.layer.borderWidth = 1.0;
     }
     return self;
 }
