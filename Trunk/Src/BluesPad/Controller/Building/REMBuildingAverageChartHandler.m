@@ -31,9 +31,8 @@
 @property (nonatomic,strong) REMDataRange *globalRange;
 @property (nonatomic,strong) REMDataRange *draggableRange;
 
-@property (nonatomic) CGPoint lastPoint;
-@property (nonatomic) NSTimeInterval lastTime;
-@property (nonatomic) BOOL isDragging;
+
+@property (nonatomic,strong) REMChartHorizonalScrollDelegator *scrollManager;
 
 @end
 
@@ -41,8 +40,8 @@
 
 static NSString *kNoDataText = @"暂无数据";
 
-static NSString *kBenchmarkTitle = @"单位用%@";
-static NSString *kAverageDataTitle = @"指数";
+static NSString *kBenchmarkTitle = @"指数";
+static NSString *kAverageDataTitle = @"单位用%@";
 
 
 - (REMBuildingChartHandler *)initWithViewFrame:(CGRect)frame
@@ -51,6 +50,7 @@ static NSString *kAverageDataTitle = @"指数";
     if (self) {
         // Custom initialization
         self.viewFrame = frame;
+        self.scrollManager = [[REMChartHorizonalScrollDelegator alloc]init];
     }
     return self;
 }
@@ -142,7 +142,7 @@ static NSString *kAverageDataTitle = @"指数";
 {
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.graph.defaultPlotSpace;
     plotSpace.allowsUserInteraction = YES;
-    plotSpace.delegate=self;
+    plotSpace.delegate=self.scrollManager;
     
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.draggableRange.start) length:CPTDecimalFromDouble([self.draggableRange distance])];
@@ -151,6 +151,10 @@ static NSString *kAverageDataTitle = @"指数";
     CPTPlotRange *dataValuePlotRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end + [self.dataValueRange distance] * 0.05)];
     plotSpace.yRange = dataValuePlotRange;
     plotSpace.globalYRange = dataValuePlotRange;
+    
+    
+    self.scrollManager.globalRange=self.globalRange;
+    self.scrollManager.visiableRange=self.visiableRange;
 }
 
 - (void)initializeAxises
@@ -364,25 +368,26 @@ static NSString *kAverageDataTitle = @"指数";
 
 -(void)drawChartLabels
 {
-    CGFloat labelTopOffset = self.chartView.hostView.bounds.size.height+43-16;
-    CGFloat labelLeftOffset = 56;
     CGFloat fontSize = 14;
-    CGFloat labelDistance = 54;
+    CGFloat labelTopOffset = self.chartView.hostView.bounds.size.height+18;
+    CGFloat labelLeftOffset = 57;
+    CGFloat labelDistance = 18;
     
     UIColor *benchmarkColor = [UIColor colorWithRed:241.0/255.0 green:94.0/255.0 blue:49.0/255.0 alpha:1];
     
     REMCommodityModel *commodity = [[REMCommodityModel systemCommodities] objectForKey:[NSNumber numberWithLongLong:self.commodityId]];
-    NSString *benchmarkTitle = [NSString stringWithFormat:kBenchmarkTitle,commodity.comment];
 
-    CGFloat benchmarkWidth = [benchmarkTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
+    CGFloat benchmarkWidth = [kBenchmarkTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
     CGRect benchmarkFrame = CGRectMake(labelLeftOffset, labelTopOffset, benchmarkWidth, fontSize);
-    REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:(NSString *)benchmarkTitle andColor:benchmarkColor];
+    REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:(NSString *)kBenchmarkTitle andColor:benchmarkColor];
     
     UIColor *averageDataColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1];
+    
+    NSString *averageDataTitle = [NSString stringWithFormat:kAverageDataTitle,commodity.comment];
 
-    CGFloat averageDataWidth = [kAverageDataTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
+    CGFloat averageDataWidth = [averageDataTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
     CGRect averageDataFrame = CGRectMake(labelLeftOffset+benchmarkWidth+labelDistance, labelTopOffset, averageDataWidth, fontSize);
-    REMChartSeriesIndicator *averageDataIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:averageDataFrame title:(NSString *)kAverageDataTitle andColor:averageDataColor];
+    REMChartSeriesIndicator *averageDataIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:averageDataFrame title:(NSString *)averageDataTitle andColor:averageDataColor];
     
     
     [self.view addSubview:benchmarkIndicator];
@@ -448,135 +453,6 @@ static NSString *kAverageDataTitle = @"指数";
     return number;
 }
 
-#pragma mark - plot space delegate
-
-- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDownEvent:(UIEvent *)event atPoint:(CGPoint)point
-{
-    self.lastPoint=point;
-    self.lastTime=event.timestamp;
-    
-    return YES;
-}
-
-- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDraggedEvent:(UIEvent *)event atPoint:(CGPoint)point
-{
-    //NSLog(@"dragged");
-    
-    //self.isDragging=YES;
-     CGFloat deltaX=point.x-self.lastPoint.x;
-    NSTimeInterval diffTime= event.timestamp-self.lastTime;
-    //NSLog(@"diff time:%f",diffTime);
-    //NSLog(@"delta x:%f",deltaX);
-    if(diffTime<0.1)return NO;
-    self.lastPoint=point;
-    return YES;
-}
-
-
-
-- (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
-{
-    
-    CGFloat deltaX=point.x-self.lastPoint.x;
-    
-    if(ABS(deltaX)>8){
-        NSTimeInterval diffTime= event.timestamp-self.lastTime;
-        //NSLog(@"diff time:%f",diffTime);
-        //NSLog(@"delta x:%f",deltaX);
-        diffTime=MAX(0.05, diffTime);
-        CGFloat speed = deltaX/diffTime;
-        CGFloat constTime=0.2;
-        CGFloat accelerate=speed/constTime;
-        CGFloat distance = speed*constTime-0.5*accelerate*constTime*constTime;
-        NSDecimal lastPoint[2], newPoint[2];
-         CPTPlotArea *plotArea = self.getHostView.hostedGraph.plotAreaFrame.plotArea;
-         CGPoint pointInPlotArea = [self.getHostView.hostedGraph convertPoint:point toLayer:plotArea];
-        [space plotPoint:lastPoint forPlotAreaViewPoint:pointInPlotArea];
-        [space plotPoint:newPoint forPlotAreaViewPoint:CGPointMake(pointInPlotArea.x + distance,pointInPlotArea.y)];
-        
-        NSDecimal shiftX = CPTDecimalSubtract(lastPoint[CPTCoordinateX], newPoint[CPTCoordinateX]);
-        
-        //NSLog(@"shiftx:%f",CPTDecimalFloatValue(shiftX));
-        CPTMutablePlotRange *newRange= [space.xRange mutableCopy];
-        
-        newRange.location = CPTDecimalAdd(newRange.location, shiftX);
-        
-        
-        //left bound
-        NSDecimal currentLeftLocation = newRange.location;
-        NSDecimal currentRightLocation = CPTDecimalAdd(newRange.location,newRange.length);
-        
-        NSDecimal minLeftLocation = CPTDecimalFromDouble(self.globalRange.start);
-        NSDecimal maxRightLocation = CPTDecimalFromDouble(self.globalRange.end);
-        
-        BOOL isCurrentLeftLessThanMinLeft = CPTDecimalLessThan(currentLeftLocation,minLeftLocation);
-        BOOL isCurrentRightGreaterThanMaxRight = CPTDecimalGreaterThan(currentRightLocation, maxRightLocation);
-        
-        //if current left location is smaller than global range start, go back with animation
-        //if current right location is greater than global range end, go back with animation too
-        CPTPlotRange  *correctRange;
-        if(isCurrentLeftLessThanMinLeft == YES ){
-            correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalFromDouble(self.globalRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
-        }
-        else if(isCurrentRightGreaterThanMaxRight == YES){
-            correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
-            
-        }
-        if(correctRange!=nil){
-            constTime= ABS(CPTDecimalFloatValue(CPTDecimalSubtract(newRange.location, space.xRange.location))/speed);
-           
-
-        }
-
-        
-         [CPTAnimation animate:space
-                          property:@"xRange"
-                     fromPlotRange:space.xRange
-                       toPlotRange:newRange
-                          duration:constTime
-                    animationCurve:CPTAnimationCurveSinusoidalOut
-                          delegate:nil];
-        
-        if(correctRange!=nil){
-            //newRange = [correctRange mutableCopy];
-            [CPTAnimation animate:space property:@"xRange" fromPlotRange:newRange toPlotRange:correctRange duration:0.3 withDelay:constTime animationCurve:CPTAnimationCurveSinusoidalOut delegate:nil];
-            
-        }
-        
-        return  NO;
-        
-    }
-    else{
-        //left bound
-        NSDecimal currentLeftLocation = space.xRange.location;
-        NSDecimal currentRightLocation = CPTDecimalAdd(space.xRange.location,space.xRange.length);
-        
-        NSDecimal minLeftLocation = CPTDecimalFromDouble(self.globalRange.start);
-        NSDecimal maxRightLocation = CPTDecimalFromDouble(self.globalRange.end);
-        
-        BOOL isCurrentLeftLessThanMinLeft = CPTDecimalLessThan(currentLeftLocation,minLeftLocation);
-        BOOL isCurrentRightGreaterThanMaxRight = CPTDecimalGreaterThan(currentRightLocation, maxRightLocation);
-        
-        //if current left location is smaller than global range start, go back with animation
-        //if current right location is greater than global range end, go back with animation too
-        if(isCurrentLeftLessThanMinLeft == YES || isCurrentRightGreaterThanMaxRight == YES){
-            CPTPlotRange *correctRange;
-            if(isCurrentLeftLessThanMinLeft == YES ){
-                correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalFromDouble(self.globalRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
-            }
-            else if(isCurrentRightGreaterThanMaxRight == YES){
-                correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
-                
-            }
-
-            [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:correctRange duration:0.3 withDelay:0 animationCurve:CPTAnimationCurveSinusoidalOut delegate:nil];
-            
-            return NO;
-        }
-    }
-    
-    return  YES;
-}
 
 
 

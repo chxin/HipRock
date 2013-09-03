@@ -29,6 +29,8 @@
 
 - (void)moveOutOfWindow;
 
+-(void)prepareShare;
+
 - (id) initWithFrame:(CGRect)frame withBuildingOveralInfo:(REMBuildingOverallModel *)buildingInfo;
 
 - (void)scrollUp;

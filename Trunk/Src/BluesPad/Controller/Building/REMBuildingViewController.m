@@ -411,6 +411,9 @@
     
     [masker showMask];
     
+    REMImageView *v= self.imageArray[self.currentIndex];
+    [v prepareShare];
+    
     [self performSelector:@selector(executeExport:) withObject:masker afterDelay:0.1];
     
 }

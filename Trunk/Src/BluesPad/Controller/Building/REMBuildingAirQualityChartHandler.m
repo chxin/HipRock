@@ -525,7 +525,7 @@ static NSDictionary *codeNameMap;
 
 -(REMChartSeriesIndicator *)getSeriesIndicatorWithCode:(NSString *)seriesCode
 {
-    CGFloat fontSize = 14.0, y = self.chartView.hostView.bounds.size.height + 43, x = self.chartView.hostView.hostedGraph.plotAreaFrame.frame.origin.x, width=0.0, height=fontSize, indicatorSpace = 59,dotWidth=15, dotSpace=11;
+    CGFloat fontSize = 14.0, y = self.chartView.hostView.bounds.size.height + 30, x = self.chartView.hostView.hostedGraph.plotAreaFrame.frame.origin.x, width=0.0, height=15.0, indicatorSpace = 18,dotWidth=15, dotSpace=11;
     
     for(NSString *code in @[kOutdoorCode,kHoneywellCode,kMayAirCode]){
         NSString *name = codeNameMap[code];

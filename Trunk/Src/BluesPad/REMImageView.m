@@ -74,6 +74,11 @@
     self.isActive=NO;
 }
 
+-(void)prepareShare
+{
+    [self.dataView prepareShare];
+}
+
 - (void)reset{
     [REMDataAccessor cancelAccess:self.loadingImageKey];
     

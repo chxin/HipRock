@@ -38,8 +38,10 @@
 
 - (void)initChartViewWithSize:(CGFloat)titleSize
 {
-    self.chartContainer = [[UIView alloc]initWithFrame:CGRectMake(0, titleSize, self.frame.size.width, self.frame.size.height-titleSize-kBuildingDetailInnerMargin)];
+    self.chartContainer = [[UIView alloc]initWithFrame:CGRectMake(0, titleSize+kBuildingDetailInnerMargin, self.frame.size.width, self.frame.size.height-titleSize-kBuildingDetailInnerMargin)];
     self.chartContainer.clipsToBounds=YES;
+    self.chartContainer.layer.borderColor=[UIColor greenColor].CGColor;
+    self.chartContainer.layer.borderWidth=1;
     
     [self addSubview:self.chartContainer];
 }
