@@ -10,6 +10,8 @@
 
 @interface REMBuildingChartHandler ()
 
+@property (nonatomic,strong) UIActivityIndicatorView *activityIndicatorView;
+
 @end
 
 @implementation REMBuildingChartHandler
@@ -154,17 +156,40 @@ static CPTTextStyle *yAxisLabelStyle;
     
     double numberValue = [number doubleValue];
     
-    
-        NSString* text = nil;
-        if (numberValue > 1000000) {
-            text = [NSString stringWithFormat:@"%@M", [formatter stringFromNumber:[NSNumber numberWithInt:numberValue / 1000000]]];
-        } else if (numberValue > 1000) {
-            text = [NSString stringWithFormat:@"%@K", [formatter stringFromNumber:[NSNumber numberWithInt:numberValue / 1000]]];
-        } else {
-            text = [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithInt:numberValue]]];
-        }
+    NSString* text = nil;
+    if (numberValue > 1000000) {
+        text = [NSString stringWithFormat:@"%@M", [formatter stringFromNumber:[NSNumber numberWithInt:numberValue / 1000000]]];
+    } else if (numberValue > 1000) {
+        text = [NSString stringWithFormat:@"%@K", [formatter stringFromNumber:[NSNumber numberWithInt:numberValue / 1000]]];
+    } else {
+        text = [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithInt:numberValue]]];
+    }
     
     return text;
+}
+
+
+
+-(void)startLoadingActivity
+{
+    if(self.activityIndicatorView == nil){
+        self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        //self.activityIndicatorView.backgroundColor = [UIColor clearColor];
+        self.activityIndicatorView.frame = self.view.bounds;
+        
+        [self.view addSubview:self.activityIndicatorView];
+    }
+    
+    [self.activityIndicatorView startAnimating];
+}
+
+-(void)stopLoadingActivity
+{
+    if(self.activityIndicatorView != nil){
+        [self.activityIndicatorView stopAnimating];
+        [self.activityIndicatorView removeFromSuperview];
+        self.activityIndicatorView = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -181,7 +181,9 @@ static NSDictionary *codeNameMap;
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingAirQuality parameter:parameter];
     store.isAccessLocal = YES;
     store.isStoreLocal = YES;
-    store.maskContainer = self.view;
+    store.maskContainer = nil;
+    
+    [self startLoadingActivity];
     
     [REMDataAccessor access:store success:^(id data) {
         self.airQualityData = [[REMAirQualityDataModel alloc] initWithDictionary:data];
@@ -191,8 +193,11 @@ static NSDictionary *codeNameMap;
         if(self.airQualityData!=nil){
             [self loadChart];
         }
+        
+        [self stopLoadingActivity];
     } error:^(NSError *error, id response) {
         //NSLog(@"air fail! %@",error);
+        [self stopLoadingActivity];
     }];
 }
 

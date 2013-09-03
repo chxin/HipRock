@@ -14,12 +14,14 @@
 #import "CorePlot-CocoaTouch.h"
 #import "REMDataRange.h"
 #import "REMChartSeriesIndicator.h"
+#import "REMCommodityModel.h"
 
 
 
 @interface REMBuildingAverageChartHandler ()
 
 @property (nonatomic) CGRect viewFrame;
+@property (nonatomic) long long commodityId;
 @property (nonatomic,strong) REMBuildingAverageChart *chartView;
 @property (nonatomic,strong) NSArray *chartData;
 @property (nonatomic,strong) REMAverageUsageDataModel *averageData;
@@ -39,7 +41,7 @@
 
 static NSString *kNoDataText = @"暂无数据";
 
-static NSString *kBenchmarkTitle = @"单位用电";
+static NSString *kBenchmarkTitle = @"单位用%@";
 static NSString *kAverageDataTitle = @"指数";
 
 
@@ -82,12 +84,17 @@ static NSString *kAverageDataTitle = @"指数";
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageData :(void (^)(void))loadCompleted
 {
+    self.commodityId = commodityID;
+    
     NSDictionary *parameter = @{@"buildingId":[NSNumber numberWithLongLong:buildingId], @"commodityId":[NSNumber numberWithLongLong:commodityID]};
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingAverageData parameter:parameter];
     store.isAccessLocal = YES;
     store.isStoreLocal = YES;
-    store.maskContainer = self.view;
+    store.maskContainer = nil;
     store.groupName = [NSString stringWithFormat:@"b-%lld-%lld", buildingId, commodityID];
+    
+    
+    [self startLoadingActivity];
     [REMDataAccessor access:store success:^(id data) {
         self.averageData = [[REMAverageUsageDataModel alloc] initWithDictionary:data];
         
@@ -96,8 +103,10 @@ static NSString *kAverageDataTitle = @"指数";
         if(self.averageData!=nil){
             [self loadChart];
         }
-    } error:^(NSError *error, id response) {
         
+        [self stopLoadingActivity];
+    } error:^(NSError *error, id response) {
+        [self stopLoadingActivity];
     }];
 }
 
@@ -361,10 +370,13 @@ static NSString *kAverageDataTitle = @"指数";
     CGFloat labelDistance = 54;
     
     UIColor *benchmarkColor = [UIColor colorWithRed:241.0/255.0 green:94.0/255.0 blue:49.0/255.0 alpha:1];
+    
+    REMCommodityModel *commodity = [[REMCommodityModel systemCommodities] objectForKey:[NSNumber numberWithLongLong:self.commodityId]];
+    NSString *benchmarkTitle = [NSString stringWithFormat:kBenchmarkTitle,commodity.comment];
 
-    CGFloat benchmarkWidth = [kBenchmarkTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
+    CGFloat benchmarkWidth = [benchmarkTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
     CGRect benchmarkFrame = CGRectMake(labelLeftOffset, labelTopOffset, benchmarkWidth, fontSize);
-    REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:(NSString *)kBenchmarkTitle andColor:benchmarkColor];
+    REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:(NSString *)benchmarkTitle andColor:benchmarkColor];
     
     UIColor *averageDataColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1];
 
