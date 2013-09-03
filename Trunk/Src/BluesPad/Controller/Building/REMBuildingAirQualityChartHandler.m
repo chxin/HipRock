@@ -128,18 +128,19 @@
 }*/
 
 
-const static NSString *kOutdoorCode = @"Outdoor";
-const static NSString *kMayAirCode = @"MayAir";
-const static NSString *kHoneywellCode = @"Honeywell";
-const static NSString *kAmericanStandardCode = @"美国标准";
-const static NSString *kChinaStandardCode = @"中国标准";
+static NSString *kOutdoorCode = @"Outdoor";
+static NSString *kMayAirCode = @"MayAir";
+static NSString *kHoneywellCode = @"Honeywell";
+static NSString *kAmericanStandardCode = @"美国标准";
+static NSString *kChinaStandardCode = @"中国标准";
 
+static NSString *kOutdoorLabelName = @"室外PM2.5";
+static NSString *kHoneywellLabelName = @"室内新风PM2.5(霍尼)";
+static NSString *kMayAirLabelName = @"室内新风PM2.5(美埃)";
+static NSString *kAmericanStandardLabelFormat = @"%d %@(PM2.5美国标准)";
+static NSString *kChinaStandardLabelFormat = @"%d %@(PM2.5中国标准)";
 
-const static NSString *kOutdoorLabelName = @"室外PM2.5";
-const static NSString *kHoneywellLabelName = @"室内新风PM2.5(霍尼)";
-const static NSString *kMayAirLabelName = @"室内新风PM2.5(美埃)";
-const static NSString *kAmericanStandardLabelFormat = @"%d %@(PM2.5美国标准)";
-const static NSString *kChinaStandardLabelFormat = @"%d %@(PM2.5中国标准)";
+static NSString *kNoDataText = @"暂无数据";
 
 static NSDictionary *codeNameMap;
 
@@ -198,34 +199,45 @@ static NSDictionary *codeNameMap;
 -(void)loadChart
 {
     //convert data
-    [self convertData];
+    BOOL hasData = [self convertData];
     
-    //initialize graph
-    [self.chartView initializeGraph];
-    
-    //initialize plot space
-    [self initializePlotSpace];
-    
-    //initialize axises
-    [self initializeAxises];
-    
-    //initialize plots
-    [self initializePlots];
-    
-    //
-    [self drawStandards];
-    
-    [self initializeLabels];
-    
+    if(hasData == NO || self.chartData == nil || self.chartData.count<=0)
+    {
+        [self drawNoDataLabel];
+    }
+    else
+    {
+        //initialize graph
+        [self.chartView initializeGraph];
+        
+        //initialize plot space
+        [self initializePlotSpace];
+        
+        //initialize axises
+        [self initializeAxises];
+        
+        //initialize plots
+        [self initializePlots];
+        
+        //
+        [self drawStandards];
+        
+        [self drawLabels];
+    }
 }
 
--(void)convertData
+-(BOOL)convertData
 {
     NSMutableArray *convertedData = [[NSMutableArray alloc] init];
+    
+    if(self.airQualityData.airQualityData.targetEnergyData.count<=0){
+        return NO;
+    }
     
     self.globalRange = [[REMDataRange alloc] initWithConstants];
     self.visiableRange = [[REMDataRange alloc] initWithConstants];
     self.dataValueRange= [[REMDataRange alloc] initWithConstants];
+    
     
     for (int i=0;i<self.airQualityData.airQualityData.targetEnergyData.count;i++) {
         REMTargetEnergyData *targetEnergyData = (REMTargetEnergyData *)self.airQualityData.airQualityData.targetEnergyData[i];
@@ -281,6 +293,8 @@ static NSDictionary *codeNameMap;
     self.draggableRange = [[REMDataRange alloc] initWithStart:(self.globalRange.start - enlargeDistance) andEnd:(self.globalRange.end + enlargeDistance)];
     
     self.chartData = convertedData;
+    
+    return YES;
 }
 
 -(void)initializePlotSpace
@@ -438,7 +452,7 @@ static NSDictionary *codeNameMap;
     [verticalAxis addBackgroundLimitBand:standardBandAmerican];
 }
 
--(void)initializeLabels
+-(void)drawLabels
 {
     //standard labels
     for(NSString *standardCode in @[(NSString *)kChinaStandardCode, (NSString *)kAmericanStandardCode]){
@@ -454,6 +468,19 @@ static NSDictionary *codeNameMap;
         REMChartSeriesIndicator *indicator = [self getSeriesIndicatorWithCode:seriesCode];
         [self.view addSubview:indicator];
     }
+}
+
+-(void)drawNoDataLabel
+{
+    CGFloat fontSize = 36;
+    CGSize labelSize = [kNoDataText sizeWithFont:[UIFont systemFontOfSize:fontSize]];
+    UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];
+    noDataLabel.text = (NSString *)kNoDataText;
+    noDataLabel.textColor = [UIColor whiteColor];
+    noDataLabel.textAlignment = NSTextAlignmentLeft;
+    noDataLabel.backgroundColor = [UIColor clearColor];
+    
+    [self.view addSubview:noDataLabel];
 }
 
 -(UILabel *)getStandardLabelWithCode:(NSString *)standardCode
