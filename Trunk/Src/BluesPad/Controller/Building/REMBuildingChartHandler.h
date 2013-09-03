@@ -27,6 +27,8 @@
 -(CPTTextStyle *)yAxisLabelStyle;
 
 -(NSString *)formatDataValue:(NSNumber *)number;
+-(void)startLoadingActivity;
+-(void)stopLoadingActivity;
 
 
 @end

@@ -174,7 +174,8 @@ typedef void(^SuccessCallback)(BOOL success);
         for (int i=0; i<self.chartViewArray.count; ++i) {
             UIView *view = self.chartViewArray[i];
             CALayer *layer = view.layer;
-            UIGraphicsBeginImageContext(layer.frame.size);
+            
+            UIGraphicsBeginImageContextWithOptions(layer.frame.size, NO, 0.0);
             [layer renderInContext:UIGraphicsGetCurrentContext()];
             UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
@@ -219,7 +220,7 @@ typedef void(^SuccessCallback)(BOOL success);
 - (void)initChartContainer
 {
     int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;
-    int chartContainerHeight=kBuildingChartHeight+kBuildingDetailInnerMargin+kBuildingCommodityTitleFontSize;
+    int chartContainerHeight=kBuildingChartHeight;
     REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0,marginTop , kBuildingChartWidth, chartContainerHeight) withTitle: [NSString stringWithFormat:@"单位面积逐月用%@",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
     
     

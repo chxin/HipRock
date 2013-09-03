@@ -353,7 +353,7 @@
     store.isAccessLocal = YES;
     store.groupName = [NSString stringWithFormat:@"b-%lld-%lld", buildingId, commodityID];
     store.isStoreLocal = YES;
-    store.maskContainer = self.view;
+    store.maskContainer = nil;
     
     if (self.datasource.count != 6) {
         for (int i = 0; i < 6; i++) {
@@ -381,10 +381,13 @@
             [self intervalChanged:myView.thisMonthButton];
             loadCompleted();
         }
+        
+        [self stopLoadingActivity];
     };
     void (^retrieveError)(NSError *error, id response) = ^(NSError *error, id response) {
         //self.widgetTitle.text = [NSString stringWithFormat:@"Error: %@",error.description];
         NSLog(@"error:%@",error);
+        [self stopLoadingActivity];
     };
     
     [REMDataAccessor access:store success:retrieveSuccess error:retrieveError];

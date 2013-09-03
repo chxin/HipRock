@@ -14,4 +14,6 @@
 @property (nonatomic,strong) NSNumber *commodityId;
 @property (nonatomic,strong) NSString *name,*code,*comment;
 
++(NSDictionary *)systemCommodities;
+
 @end
