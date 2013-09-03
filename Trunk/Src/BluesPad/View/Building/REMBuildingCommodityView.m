@@ -220,7 +220,7 @@ typedef void(^SuccessCallback)(BOOL success);
 - (void)initChartContainer
 {
     int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;
-    int chartContainerHeight=kBuildingChartHeight+kBuildingDetailInnerMargin+kBuildingCommodityTitleFontSize;
+    int chartContainerHeight=kBuildingChartHeight;
     REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0,marginTop , kBuildingChartWidth, chartContainerHeight) withTitle: [NSString stringWithFormat:@"单位面积逐月用%@",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
     
     
@@ -230,7 +230,7 @@ typedef void(^SuccessCallback)(BOOL success);
     
     int marginTop1=marginTop+chartContainerHeight+kBuildingCommodityBottomMargin;
     
-    REMBuildingChartContainerView *view1 = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingChartWidth, chartContainerHeight+33) withTitle:[NSString stringWithFormat:@"用%@趋势图",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
+    REMBuildingChartContainerView *view1 = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingChartWidth, chartContainerHeight) withTitle:[NSString stringWithFormat:@"用%@趋势图",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
     
     [self addSubview:view1];
     

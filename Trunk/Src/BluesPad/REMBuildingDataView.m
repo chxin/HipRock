@@ -35,7 +35,7 @@ typedef void(^SuccessCallback)(BOOL success);
         self.clipsToBounds=YES;
         self.showsVerticalScrollIndicator=NO;
         self.successCounter=0;
-        [self setContentSize:CGSizeMake(0, 1300)];
+        [self setContentSize:CGSizeMake(0, 1000)];
         self.buildingInfo=buildingInfo;
         self.currentIndex=0;
         self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityUsage.count+1)];
