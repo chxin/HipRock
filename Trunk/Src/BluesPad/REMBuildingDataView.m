@@ -112,7 +112,10 @@ typedef void(^SuccessCallback)(BOOL success);
     return array;
 }
 
-
+-(void)prepareShare{
+    REMBuildingCommodityView *v = self.commodityViewArray[self.currentIndex];
+    [v prepareShare];
+}
 
 - (void)initCommodityButton
 {

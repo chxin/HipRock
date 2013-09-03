@@ -29,6 +29,6 @@
 -(NSString *)formatDataValue:(NSNumber *)number;
 -(void)startLoadingActivity;
 -(void)stopLoadingActivity;
-
+-(void)prepareShare;
 
 @end

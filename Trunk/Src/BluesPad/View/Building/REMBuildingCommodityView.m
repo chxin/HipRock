@@ -217,6 +217,12 @@ typedef void(^SuccessCallback)(BOOL success);
     
 }
 
+-(void)prepareShare{
+    for (REMBuildingChartContainerView *v in self.chartViewArray) {
+        [v.controller prepareShare];
+    }
+}
+
 - (void)initChartContainer
 {
     int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;

@@ -27,6 +27,8 @@
 
 - (void)replaceChart:(BOOL)showReal;
 
+-(void)prepareShare;
+
 - (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId complete:(void(^)(BOOL))callback;
 
 @end

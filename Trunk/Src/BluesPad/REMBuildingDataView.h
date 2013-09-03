@@ -22,6 +22,8 @@
 
 - (void)cancelAllRequest;
 
+-(void)prepareShare;
+
 - (void)exportDataView:(void(^)(NSDictionary *))success;
 
 - (void)resetDefaultCommodity;
