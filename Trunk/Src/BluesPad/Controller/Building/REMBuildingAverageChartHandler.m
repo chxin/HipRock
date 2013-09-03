@@ -320,8 +320,10 @@
         index ++;
     }
 
-    //self.globalRange.end = self.visiableRange.end;
+    self.visiableRange.end = self.globalRange.end;
     
+    double enlargeDistance = [self.visiableRange distance] * 0.3;
+    self.draggableRange = [[REMDataRange alloc] initWithStart:(self.globalRange.start - enlargeDistance) andEnd:(self.globalRange.end + enlargeDistance)];
     
     self.chartData = convertedData;
 }

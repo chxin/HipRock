@@ -271,15 +271,14 @@ static NSDictionary *codeNameMap;
     }
     
     //process visiable range
-    NSDate *visiableEndDate = [NSDate dateWithTimeIntervalSince1970:self.visiableRange.end];
+    NSDate *visiableEndDate = [NSDate dateWithTimeIntervalSince1970:self.globalRange.end];
     NSDate *visiableStartDate = [REMTimeHelper add:-14 onPart:REMDateTimePartDay ofDate:visiableEndDate];
     
     self.visiableRange.start = [visiableStartDate timeIntervalSince1970];
+    self.visiableRange.end = [visiableEndDate timeIntervalSince1970];
     
     double enlargeDistance = [self.visiableRange distance] * 0.3;
     self.draggableRange = [[REMDataRange alloc] initWithStart:(self.globalRange.start - enlargeDistance) andEnd:(self.globalRange.end + enlargeDistance)];
-    
-    self.draggableRange = [self.globalRange expandByFactor:0.1];
     
     self.chartData = convertedData;
 }
