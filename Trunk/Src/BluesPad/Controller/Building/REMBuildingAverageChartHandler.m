@@ -407,12 +407,45 @@ static NSString *kAverageDataTitle = @"单位用%@";
     [self.view addSubview:noDataLabel];
 }
 
+- (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
+{
+    //left bound
+    NSDecimal currentLeftLocation = space.xRange.location;
+    NSDecimal currentRightLocation = CPTDecimalAdd(space.xRange.location,space.xRange.length);
+    
+    NSDecimal minLeftLocation = CPTDecimalFromDouble(self.globalRange.start);
+    NSDecimal maxRightLocation = CPTDecimalFromDouble(self.globalRange.end);
+    
+    BOOL isCurrentLeftLessThanMinLeft = CPTDecimalLessThan(currentLeftLocation,minLeftLocation);
+    BOOL isCurrentRightGreaterThanMaxRight = CPTDecimalGreaterThan(currentRightLocation, maxRightLocation);
+    
+    //if current left location is smaller than global range start, go back with animation
+    //if current right location is greater than global range end, go back with animation too
+    if(isCurrentLeftLessThanMinLeft == YES || isCurrentRightGreaterThanMaxRight == YES){
+        CPTPlotRange *correctRange;
+        if(isCurrentLeftLessThanMinLeft)
+            correctRange = [[CPTPlotRange alloc] initWithLocation:minLeftLocation length:space.xRange.length];
+        else
+            correctRange = [[CPTPlotRange alloc] initWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance]) ];
+        
+        [CPTAnimation animate:space property:@"xRange" fromPlotRange:space.xRange toPlotRange:correctRange duration:0.15 withDelay:0 animationCurve:CPTAnimationCurveCubicInOut delegate:nil];
+        
+        return NO;
+    }
+    
+    return  YES;
+}
+
 
 #pragma mark - data source delegate
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
     NSUInteger records;
     
+//    int index = [[((NSString *)plot.identifier) componentsSeparatedByString:@"-"][0] intValue];
+//    
+//    return [[self.chartData[index] objectForKey:@"data"] count];
+//
     CPTBarPlot *line = (CPTBarPlot *)plot;
     for (NSDictionary *series in self.chartData)
     {
@@ -422,7 +455,7 @@ static NSString *kAverageDataTitle = @"单位用%@";
             break;
         }
     }
-    
+//
     //NSLog(@"line %@ has %d records.",line.identifier, records);
     
     return records;
@@ -430,6 +463,19 @@ static NSString *kAverageDataTitle = @"单位用%@";
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
 {
+//    int index = [[((NSString *)plot.identifier) componentsSeparatedByString:@"-"][0] intValue];
+//    
+//    NSDictionary *point = [self.chartData[index] objectForKey:@"data"][idx];
+//    
+//    if(fieldEnum == CPTBarPlotFieldBarLocation || fieldEnum == CPTScatterPlotFieldX)
+//    {
+//        return [point objectForKey:@"x"];
+//    }
+//    else
+//    {
+//        return [point objectForKey:@"y"];
+//    }
+    
     NSNumber *number;
     CPTBarPlot *line = (CPTBarPlot *)plot;
     for (NSDictionary *series in self.chartData)

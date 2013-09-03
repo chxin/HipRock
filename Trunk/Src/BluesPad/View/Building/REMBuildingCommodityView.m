@@ -258,7 +258,7 @@ typedef void(^SuccessCallback)(BOOL success);
     REMBuildingChartContainerView *averageContainer = self.chartViewArray[0];
     
     if(averageContainer.controller==nil){
-        REMBuildingAverageChartHandler *averageController = [[REMBuildingAverageChartHandler alloc]initWithViewFrame:CGRectMake(0, 0, averageContainer.frame.size.width, averageContainer.frame.size.height)];
+        REMBuildingAverageChartHandler *averageController = [[REMBuildingAverageChartHandler alloc]initWithViewFrame:CGRectMake(0, 0, averageContainer.frame.size.width, averageContainer.chartContainer.frame.size.height)];
         averageContainer.controller=averageController;
     }
     

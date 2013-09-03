@@ -437,7 +437,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Common/Communication/REMServiceAgent.m"
-         timestampString = "398839982.10059"
+         timestampString = "399889834.011761"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "67"
@@ -910,8 +910,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "36"
          endingLineNumber = "36"
-         landmarkName = "isDragging"
-         landmarkType = "19">
+         landmarkName = "@interface REMBuildingAverageChartHandler()"
+         landmarkType = "2">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -922,9 +922,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "38"
-         endingLineNumber = "38"
-         landmarkName = "@interface REMBuildingAverageChartHandler()"
-         landmarkType = "2">
+         endingLineNumber = "38">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -950,19 +948,6 @@
          startingLineNumber = "391"
          endingLineNumber = "391"
          landmarkName = "-drawChartLabels"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "399886734.180938"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "423"
-         endingLineNumber = "423"
-         landmarkName = "-numberOfRecordsForPlot:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1009,7 +994,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Common/Communication/REMServiceAgent.m"
-         timestampString = "398839982.10059"
+         timestampString = "399889834.011761"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "226"
@@ -1035,7 +1020,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Common/Communication/REMServiceAgent.m"
-         timestampString = "398839982.10059"
+         timestampString = "399889834.011761"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "68"
@@ -1048,7 +1033,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Common/Communication/REMServiceAgent.m"
-         timestampString = "398839982.10059"
+         timestampString = "399889834.011761"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "110"
@@ -1061,7 +1046,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Common/Communication/REMServiceAgent.m"
-         timestampString = "398839982.10059"
+         timestampString = "399889834.011761"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "69"
@@ -1074,7 +1059,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Common/Communication/REMServiceAgent.m"
-         timestampString = "398839982.10059"
+         timestampString = "399889834.011761"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "81"
@@ -1113,7 +1098,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Common/Communication/REMServiceAgent.m"
-         timestampString = "398839982.10059"
+         timestampString = "399889834.011761"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "275"
@@ -1126,7 +1111,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Common/Communication/REMServiceAgent.m"
-         timestampString = "398839982.10059"
+         timestampString = "399889834.011761"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "72"
@@ -1139,7 +1124,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Common/Communication/REMServiceAgent.m"
-         timestampString = "398839982.10059"
+         timestampString = "399889834.011761"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "220"
@@ -1209,8 +1194,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "405"
          endingLineNumber = "405"
-         landmarkName = "@implementation REMBuildingAverageChartHandler"
-         landmarkType = "3">
+         landmarkName = "-drawNoDataLabel"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1230,7 +1215,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Common/Communication/REMServiceAgent.m"
-         timestampString = "398839982.10059"
+         timestampString = "399889834.011761"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "80"
@@ -1301,19 +1286,6 @@
          startingLineNumber = "267"
          endingLineNumber = "267"
          landmarkName = "-getFileCacheFolder"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "399886734.180938"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "449"
-         endingLineNumber = "449"
-         landmarkName = "-numberForPlot:field:recordIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1425,7 +1397,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Common/Communication/REMServiceAgent.m"
-         timestampString = "398839982.10059"
+         timestampString = "399889834.011761"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "262"
@@ -1496,19 +1468,6 @@
          startingLineNumber = "179"
          endingLineNumber = "179"
          landmarkName = "-buttonPressed:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Common/Communication/REMServiceAgent.m"
-         timestampString = "398929253.913081"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "63"
-         endingLineNumber = "63"
-         landmarkName = "+call:withBody:mask:group:store:success:error:progress:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1761,19 +1720,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "399886734.180938"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "452"
-         endingLineNumber = "452"
-         landmarkName = "@implementation REMBuildingAverageChartHandler"
-         landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
          timestampString = "399877290.8601"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
@@ -1826,7 +1772,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Common/Communication/REMServiceAgent.m"
-         timestampString = "399797701.95623"
+         timestampString = "399889834.011761"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "125"
@@ -1839,26 +1785,26 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "399886734.180938"
+         timestampString = "399888001.451093"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "525"
-         endingLineNumber = "525"
-         landmarkName = "-plotSpace:shouldHandlePointingDeviceUpEvent:atPoint:"
-         landmarkType = "5">
+         startingLineNumber = "571"
+         endingLineNumber = "571"
+         landmarkName = "@implementation REMBuildingAverageChartHandler"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "399886734.180938"
+         timestampString = "399888001.451093"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "486"
-         endingLineNumber = "486"
-         landmarkName = "-plotSpace:shouldHandlePointingDeviceUpEvent:atPoint:"
-         landmarkType = "5">
+         startingLineNumber = "532"
+         endingLineNumber = "532"
+         landmarkName = "@implementation REMBuildingAverageChartHandler"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
