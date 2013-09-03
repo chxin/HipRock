@@ -128,18 +128,19 @@
 }*/
 
 
-const static NSString *kOutdoorCode = @"Outdoor";
-const static NSString *kMayAirCode = @"MayAir";
-const static NSString *kHoneywellCode = @"Honeywell";
-const static NSString *kAmericanStandardCode = @"美国标准";
-const static NSString *kChinaStandardCode = @"中国标准";
+static NSString *kOutdoorCode = @"Outdoor";
+static NSString *kMayAirCode = @"MayAir";
+static NSString *kHoneywellCode = @"Honeywell";
+static NSString *kAmericanStandardCode = @"美国标准";
+static NSString *kChinaStandardCode = @"中国标准";
 
+static NSString *kOutdoorLabelName = @"室外PM2.5";
+static NSString *kHoneywellLabelName = @"室内新风PM2.5(霍尼)";
+static NSString *kMayAirLabelName = @"室内新风PM2.5(美埃)";
+static NSString *kAmericanStandardLabelFormat = @"%d %@(PM2.5美国标准)";
+static NSString *kChinaStandardLabelFormat = @"%d %@(PM2.5中国标准)";
 
-const static NSString *kOutdoorLabelName = @"室外PM2.5";
-const static NSString *kHoneywellLabelName = @"室内新风PM2.5(霍尼)";
-const static NSString *kMayAirLabelName = @"室内新风PM2.5(美埃)";
-const static NSString *kAmericanStandardLabelFormat = @"%d %@(PM2.5美国标准)";
-const static NSString *kChinaStandardLabelFormat = @"%d %@(PM2.5中国标准)";
+static NSString *kNoDataText = @"暂无数据";
 
 static NSDictionary *codeNameMap;
 
@@ -180,7 +181,9 @@ static NSDictionary *codeNameMap;
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingAirQuality parameter:parameter];
     store.isAccessLocal = YES;
     store.isStoreLocal = YES;
-    store.maskContainer = self.view;
+    store.maskContainer = nil;
+    
+    [self startLoadingActivity];
     
     [REMDataAccessor access:store success:^(id data) {
         self.airQualityData = [[REMAirQualityDataModel alloc] initWithDictionary:data];
@@ -190,42 +193,56 @@ static NSDictionary *codeNameMap;
         if(self.airQualityData!=nil){
             [self loadChart];
         }
+        
+        [self stopLoadingActivity];
     } error:^(NSError *error, id response) {
         //NSLog(@"air fail! %@",error);
+        [self stopLoadingActivity];
     }];
 }
 
 -(void)loadChart
 {
     //convert data
-    [self convertData];
+    BOOL hasData = [self convertData];
     
-    //initialize graph
-    [self.chartView initializeGraph];
-    
-    //initialize plot space
-    [self initializePlotSpace];
-    
-    //initialize axises
-    [self initializeAxises];
-    
-    //initialize plots
-    [self initializePlots];
-    
-    //
-    [self drawStandards];
-    
-    [self initializeLabels];
-    
+    if(hasData == NO || self.chartData == nil || self.chartData.count<=0)
+    {
+        [self drawNoDataLabel];
+    }
+    else
+    {
+        //initialize graph
+        [self.chartView initializeGraph];
+        
+        //initialize plot space
+        [self initializePlotSpace];
+        
+        //initialize axises
+        [self initializeAxises];
+        
+        //initialize plots
+        [self initializePlots];
+        
+        //
+        [self drawStandards];
+        
+        [self drawLabels];
+    }
 }
 
--(void)convertData
+-(BOOL)convertData
 {
     NSMutableArray *convertedData = [[NSMutableArray alloc] init];
+    
+    if(self.airQualityData.airQualityData.targetEnergyData.count<=0){
+        return NO;
+    }
     
     self.globalRange = [[REMDataRange alloc] initWithConstants];
     self.visiableRange = [[REMDataRange alloc] initWithConstants];
     self.dataValueRange= [[REMDataRange alloc] initWithConstants];
+    
     
     for (int i=0;i<self.airQualityData.airQualityData.targetEnergyData.count;i++) {
         REMTargetEnergyData *targetEnergyData = (REMTargetEnergyData *)self.airQualityData.airQualityData.targetEnergyData[i];
@@ -271,12 +288,18 @@ static NSDictionary *codeNameMap;
     }
     
     //process visiable range
-    NSDate *visiableEndDate = [NSDate dateWithTimeIntervalSince1970:self.visiableRange.end];
+    NSDate *visiableEndDate = [NSDate dateWithTimeIntervalSince1970:self.globalRange.end];
     NSDate *visiableStartDate = [REMTimeHelper add:-14 onPart:REMDateTimePartDay ofDate:visiableEndDate];
     
     self.visiableRange.start = [visiableStartDate timeIntervalSince1970];
+    self.visiableRange.end = [visiableEndDate timeIntervalSince1970];
+    
+    double enlargeDistance = [self.visiableRange distance] * 0.3;
+    self.draggableRange = [[REMDataRange alloc] initWithStart:(self.globalRange.start - enlargeDistance) andEnd:(self.globalRange.end + enlargeDistance)];
     
     self.chartData = convertedData;
+    
+    return YES;
 }
 
 -(void)initializePlotSpace
@@ -285,19 +308,16 @@ static NSDictionary *codeNameMap;
     plotSpace.allowsUserInteraction = YES;
     plotSpace.delegate=self;
     
-    self.draggableRange = [self.globalRange expandByFactor:0.1];
-    
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.draggableRange.start) length:CPTDecimalFromDouble([self.draggableRange distance])];
     
     //since y axis will never be able to drag, global space and visiable space for y axis are equal
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end)];
-    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end)];
+    CPTPlotRange *dataValuePlotRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end + [self.dataValueRange distance] * 0.05)];
+    plotSpace.yRange = dataValuePlotRange;
+    plotSpace.globalYRange = dataValuePlotRange;
     
    // [plotSpace setElasticGlobalXRange:YES];
    // [plotSpace setAllowsMomentum:YES];
-    
-    self.origRightRange=[plotSpace.xRange mutableCopy];
 }
 
 -(void)initializeAxises
@@ -401,7 +421,7 @@ static NSDictionary *codeNameMap;
         
         CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
         symbol.fill= [CPTFill fillWithColor:lineColor];
-        symbol.size=CGSizeMake(12.0, 12.0);
+        symbol.size=CGSizeMake(10.0, 10.0);
         symbol.lineStyle = [self hiddenLineStyle];
         
         CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
@@ -437,7 +457,7 @@ static NSDictionary *codeNameMap;
     [verticalAxis addBackgroundLimitBand:standardBandAmerican];
 }
 
--(void)initializeLabels
+-(void)drawLabels
 {
     //standard labels
     for(NSString *standardCode in @[(NSString *)kChinaStandardCode, (NSString *)kAmericanStandardCode]){
@@ -453,6 +473,19 @@ static NSDictionary *codeNameMap;
         REMChartSeriesIndicator *indicator = [self getSeriesIndicatorWithCode:seriesCode];
         [self.view addSubview:indicator];
     }
+}
+
+-(void)drawNoDataLabel
+{
+    CGFloat fontSize = 36;
+    CGSize labelSize = [kNoDataText sizeWithFont:[UIFont systemFontOfSize:fontSize]];
+    UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];
+    noDataLabel.text = (NSString *)kNoDataText;
+    noDataLabel.textColor = [UIColor whiteColor];
+    noDataLabel.textAlignment = NSTextAlignmentLeft;
+    noDataLabel.backgroundColor = [UIColor clearColor];
+    
+    [self.view addSubview:noDataLabel];
 }
 
 -(UILabel *)getStandardLabelWithCode:(NSString *)standardCode

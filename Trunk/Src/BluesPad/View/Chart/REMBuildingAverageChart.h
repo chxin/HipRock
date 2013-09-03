@@ -16,4 +16,6 @@
 @property (nonatomic,strong) CPTAnnotation *annotation;
 @property (nonatomic,strong) CPTLimitBand *annotationBand;
 
+-(void)initializeGraph;
+
 @end

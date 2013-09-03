@@ -31,9 +31,7 @@ static  NSDictionary *_sharedRelativeDate;
           @"LastYear":@"去年"};
     }
     return _sharedRelativeDate;
-    
-    
-    
 }
+
 
 @end

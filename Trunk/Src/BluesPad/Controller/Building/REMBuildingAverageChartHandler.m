@@ -14,12 +14,14 @@
 #import "CorePlot-CocoaTouch.h"
 #import "REMDataRange.h"
 #import "REMChartSeriesIndicator.h"
+#import "REMCommodityModel.h"
 
 
 
 @interface REMBuildingAverageChartHandler ()
 
 @property (nonatomic) CGRect viewFrame;
+@property (nonatomic) long long commodityId;
 @property (nonatomic,strong) REMBuildingAverageChart *chartView;
 @property (nonatomic,strong) NSArray *chartData;
 @property (nonatomic,strong) REMAverageUsageDataModel *averageData;
@@ -36,6 +38,11 @@
 @end
 
 @implementation REMBuildingAverageChartHandler
+
+static NSString *kNoDataText = @"暂无数据";
+
+static NSString *kBenchmarkTitle = @"单位用%@";
+static NSString *kAverageDataTitle = @"指数";
 
 
 - (REMBuildingChartHandler *)initWithViewFrame:(CGRect)frame
@@ -77,12 +84,17 @@
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageData :(void (^)(void))loadCompleted
 {
+    self.commodityId = commodityID;
+    
     NSDictionary *parameter = @{@"buildingId":[NSNumber numberWithLongLong:buildingId], @"commodityId":[NSNumber numberWithLongLong:commodityID]};
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingAverageData parameter:parameter];
     store.isAccessLocal = YES;
     store.isStoreLocal = YES;
-    store.maskContainer = self.view;
+    store.maskContainer = nil;
     store.groupName = [NSString stringWithFormat:@"b-%lld-%lld", buildingId, commodityID];
+    
+    
+    [self startLoadingActivity];
     [REMDataAccessor access:store success:^(id data) {
         self.averageData = [[REMAverageUsageDataModel alloc] initWithDictionary:data];
         
@@ -91,29 +103,39 @@
         if(self.averageData!=nil){
             [self loadChart];
         }
-    } error:^(NSError *error, id response) {
         
+        [self stopLoadingActivity];
+    } error:^(NSError *error, id response) {
+        [self stopLoadingActivity];
     }];
 }
 
 - (void)loadChart
 {
     //convert data
-    [self convertData];
+    BOOL hasData = [self convertData];
     
-    NSLog(@"visiable range: %@",[self.visiableRange description]);
-    
-    //initialize plot space
-    [self initializePlotSpace];
-    
-    //initialize axises
-    [self initializeAxises];
-    
-    //initialize plots
-    [self initializePlots];
-    
-    //draw labels
-    [self drawChartLabels];
+    if(hasData == NO || self.chartData==nil || self.chartData.count<=0)
+    {
+        [self drawNoDataLabel];
+    }
+    else
+    {
+        //initialize graph
+        [self.chartView initializeGraph];
+        
+        //initialize plot space
+        [self initializePlotSpace];
+        
+        //initialize axises
+        [self initializeAxises];
+        
+        //initialize plots
+        [self initializePlots];
+        
+        //draw labels
+        [self drawChartLabels];
+    }
 }
 
 - (void)initializePlotSpace
@@ -122,14 +144,13 @@
     plotSpace.allowsUserInteraction = YES;
     plotSpace.delegate=self;
     
-    self.draggableRange = [self.globalRange expandByFactor:0.1];
-    
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.draggableRange.start) length:CPTDecimalFromDouble([self.draggableRange distance])];
     
     //since y axis will never be able to drag, global space and visiable space for y axis are equal
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end)];
-    plotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end)];
+    CPTPlotRange *dataValuePlotRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end + [self.dataValueRange distance] * 0.05)];
+    plotSpace.yRange = dataValuePlotRange;
+    plotSpace.globalYRange = dataValuePlotRange;
 }
 
 - (void)initializeAxises
@@ -263,7 +284,7 @@
     
     CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
     symbol.fill= [CPTFill fillWithColor:lineColor];
-    symbol.size=CGSizeMake(12.0, 12.0);
+    symbol.size=CGSizeMake(10.0, 10.0);
     symbol.lineStyle = [self hiddenLineStyle];
     
     CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];
@@ -279,8 +300,13 @@
     [self.chartView.graph addPlot:line];
 }
 
-- (void)convertData
+- (BOOL)convertData
 {
+    if(self.averageData.unitData.targetEnergyData.count<1 && self.averageData.benchmarkData.targetEnergyData.count<1)
+    {
+        return NO;
+    }
+    
     NSArray *energySeries = @[self.averageData.unitData.targetEnergyData[0],self.averageData.benchmarkData.targetEnergyData[0]];
     NSMutableArray *convertedData = [[NSMutableArray alloc] initWithCapacity:2];
     
@@ -320,9 +346,14 @@
         index ++;
     }
 
-    //self.globalRange.end = self.visiableRange.end;
+    self.visiableRange.end = self.globalRange.end;
+    
+    double enlargeDistance = [self.visiableRange distance] * 0.3;
+    self.draggableRange = [[REMDataRange alloc] initWithStart:(self.globalRange.start - enlargeDistance) andEnd:(self.globalRange.end + enlargeDistance)];
     
     self.chartData = convertedData;
+    
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -339,20 +370,36 @@
     CGFloat labelDistance = 54;
     
     UIColor *benchmarkColor = [UIColor colorWithRed:241.0/255.0 green:94.0/255.0 blue:49.0/255.0 alpha:1];
-    NSString *benchmarkTitle = @"单位用电";
+    
+    REMCommodityModel *commodity = [[REMCommodityModel systemCommodities] objectForKey:[NSNumber numberWithLongLong:self.commodityId]];
+    NSString *benchmarkTitle = [NSString stringWithFormat:kBenchmarkTitle,commodity.comment];
+
     CGFloat benchmarkWidth = [benchmarkTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
     CGRect benchmarkFrame = CGRectMake(labelLeftOffset, labelTopOffset, benchmarkWidth, fontSize);
-    REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:benchmarkTitle andColor:benchmarkColor];
+    REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:(NSString *)benchmarkTitle andColor:benchmarkColor];
     
     UIColor *averageDataColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1];
-    NSString *averageDataTitle = @"指数";
-    CGFloat averageDataWidth = [averageDataTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
+
+    CGFloat averageDataWidth = [kAverageDataTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
     CGRect averageDataFrame = CGRectMake(labelLeftOffset+benchmarkWidth+labelDistance, labelTopOffset, averageDataWidth, fontSize);
-    REMChartSeriesIndicator *averageDataIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:averageDataFrame title:averageDataTitle andColor:averageDataColor];
+    REMChartSeriesIndicator *averageDataIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:averageDataFrame title:(NSString *)kAverageDataTitle andColor:averageDataColor];
     
     
     [self.view addSubview:benchmarkIndicator];
     [self.view addSubview:averageDataIndicator];
+}
+
+-(void)drawNoDataLabel
+{
+    CGFloat fontSize = 36;
+    CGSize labelSize = [kNoDataText sizeWithFont:[UIFont systemFontOfSize:fontSize]];
+    UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];
+    noDataLabel.text = (NSString *)kNoDataText;
+    noDataLabel.textColor = [UIColor whiteColor];
+    noDataLabel.textAlignment = NSTextAlignmentLeft;
+    noDataLabel.backgroundColor = [UIColor clearColor];
+    
+    [self.view addSubview:noDataLabel];
 }
 
 
