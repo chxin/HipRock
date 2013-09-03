@@ -271,7 +271,7 @@ typedef void(^SuccessCallback)(BOOL success);
     REMBuildingChartContainerView *trendContainer = self.chartViewArray[1];
     
     if (trendContainer.controller==nil) {
-        REMBuildingTrendChartHandler  *trendController = [[REMBuildingTrendChartHandler alloc]initWithViewFrame:CGRectMake(0, 0, trendContainer.frame.size.width, trendContainer.frame.size.height)];
+        REMBuildingTrendChartHandler  *trendController = [[REMBuildingTrendChartHandler alloc]initWithViewFrame:CGRectMake(0, 0, trendContainer.frame.size.width, trendContainer.chartContainer.frame.size.height)];
         trendContainer.controller=trendController;
         
     }
