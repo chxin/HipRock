@@ -123,8 +123,6 @@
     plotSpace.allowsUserInteraction = YES;
     plotSpace.delegate=self;
     
-    self.draggableRange = [self.globalRange expandByFactor:0.1];
-    
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.draggableRange.start) length:CPTDecimalFromDouble([self.draggableRange distance])];
     
@@ -265,7 +263,7 @@
     
     CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
     symbol.fill= [CPTFill fillWithColor:lineColor];
-    symbol.size=CGSizeMake(12.0, 12.0);
+    symbol.size=CGSizeMake(10.0, 10.0);
     symbol.lineStyle = [self hiddenLineStyle];
     
     CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];

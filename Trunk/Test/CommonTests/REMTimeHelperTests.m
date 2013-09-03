@@ -50,7 +50,7 @@
 {
     int monthTicks = 2010*12+1;
     
-    NSDate *date = [REMTimeHelper getDateFromMonthTicks:monthTicks];
+    NSDate *date = [REMTimeHelper getDateFromMonthTicks:[NSNumber numberWithInt: monthTicks]];
     
     NSAssert([REMTimeHelper getYear:date] == 2010, @"go");
 }

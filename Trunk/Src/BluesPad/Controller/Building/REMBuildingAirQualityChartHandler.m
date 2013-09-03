@@ -276,6 +276,11 @@ static NSDictionary *codeNameMap;
     
     self.visiableRange.start = [visiableStartDate timeIntervalSince1970];
     
+    double enlargeDistance = [self.visiableRange distance] * 0.3;
+    self.draggableRange = [[REMDataRange alloc] initWithStart:(self.globalRange.start - enlargeDistance) andEnd:(self.globalRange.end + enlargeDistance)];
+    
+    self.draggableRange = [self.globalRange expandByFactor:0.1];
+    
     self.chartData = convertedData;
 }
 
@@ -284,8 +289,6 @@ static NSDictionary *codeNameMap;
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.hostView.hostedGraph.defaultPlotSpace;
     plotSpace.allowsUserInteraction = YES;
     plotSpace.delegate=self;
-    
-    self.draggableRange = [self.globalRange expandByFactor:0.1];
     
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.draggableRange.start) length:CPTDecimalFromDouble([self.draggableRange distance])];
@@ -297,8 +300,6 @@ static NSDictionary *codeNameMap;
     
    // [plotSpace setElasticGlobalXRange:YES];
    // [plotSpace setAllowsMomentum:YES];
-    
-    self.origRightRange=[plotSpace.xRange mutableCopy];
 }
 
 -(void)initializeAxises
@@ -402,7 +403,7 @@ static NSDictionary *codeNameMap;
         
         CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
         symbol.fill= [CPTFill fillWithColor:lineColor];
-        symbol.size=CGSizeMake(12.0, 12.0);
+        symbol.size=CGSizeMake(10.0, 10.0);
         symbol.lineStyle = [self hiddenLineStyle];
         
         CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
