@@ -258,7 +258,7 @@ typedef void(^SuccessCallback)(BOOL success);
     REMBuildingChartContainerView *averageContainer = self.chartViewArray[0];
     
     if(averageContainer.controller==nil){
-        REMBuildingAverageChartHandler *averageController = [[REMBuildingAverageChartHandler alloc]initWithViewFrame:averageContainer.chartContainer.frame];
+        REMBuildingAverageChartHandler *averageController = [[REMBuildingAverageChartHandler alloc]initWithViewFrame:CGRectMake(0, 0, averageContainer.frame.size.width, averageContainer.frame.size.height)];
         averageContainer.controller=averageController;
     }
     
@@ -271,7 +271,7 @@ typedef void(^SuccessCallback)(BOOL success);
     REMBuildingChartContainerView *trendContainer = self.chartViewArray[1];
     
     if (trendContainer.controller==nil) {
-        REMBuildingTrendChartHandler  *trendController = [[REMBuildingTrendChartHandler alloc]initWithViewFrame:trendContainer.chartContainer.frame];
+        REMBuildingTrendChartHandler  *trendController = [[REMBuildingTrendChartHandler alloc]initWithViewFrame:CGRectMake(0, 0, trendContainer.frame.size.width, trendContainer.frame.size.height)];
         trendContainer.controller=trendController;
         
     }
