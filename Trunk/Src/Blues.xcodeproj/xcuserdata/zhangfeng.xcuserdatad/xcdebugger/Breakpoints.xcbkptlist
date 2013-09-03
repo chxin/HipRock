@@ -944,11 +944,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "399877290.8601"
+         timestampString = "399886734.180938"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "390"
-         endingLineNumber = "390"
+         startingLineNumber = "391"
+         endingLineNumber = "391"
          landmarkName = "-drawChartLabels"
          landmarkType = "5">
       </FileBreakpoint>
@@ -957,11 +957,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "399877290.8601"
+         timestampString = "399886734.180938"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "422"
-         endingLineNumber = "422"
+         startingLineNumber = "423"
+         endingLineNumber = "423"
          landmarkName = "-numberOfRecordsForPlot:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1204,11 +1204,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "399877290.8601"
+         timestampString = "399886734.180938"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "404"
-         endingLineNumber = "404"
+         startingLineNumber = "405"
+         endingLineNumber = "405"
          landmarkName = "@implementation REMBuildingAverageChartHandler"
          landmarkType = "3">
       </FileBreakpoint>
@@ -1308,11 +1308,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "399877290.8601"
+         timestampString = "399886734.180938"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "448"
-         endingLineNumber = "448"
+         startingLineNumber = "449"
+         endingLineNumber = "449"
          landmarkName = "-numberForPlot:field:recordIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1542,11 +1542,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAirQualityChartHandler.m"
-         timestampString = "399869575.876186"
+         timestampString = "399879001.975717"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "341"
-         endingLineNumber = "341"
+         startingLineNumber = "346"
+         endingLineNumber = "346"
          landmarkName = "-initializeAxises"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1657,11 +1657,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAirQualityChartHandler.m"
-         timestampString = "399869575.876186"
+         timestampString = "399879001.975717"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "438"
-         endingLineNumber = "438"
+         startingLineNumber = "443"
+         endingLineNumber = "443"
          landmarkName = "-drawStandards"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1670,11 +1670,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAirQualityChartHandler.m"
-         timestampString = "399869575.876186"
+         timestampString = "399879001.975717"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "461"
-         endingLineNumber = "461"
+         startingLineNumber = "466"
+         endingLineNumber = "466"
          landmarkName = "-drawLabels"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1683,11 +1683,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAirQualityChartHandler.m"
-         timestampString = "399869575.876186"
+         timestampString = "399879001.975717"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "462"
-         endingLineNumber = "462"
+         startingLineNumber = "467"
+         endingLineNumber = "467"
          landmarkName = "-drawLabels"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1696,11 +1696,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAirQualityChartHandler.m"
-         timestampString = "399869575.876186"
+         timestampString = "399879001.975717"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "411"
-         endingLineNumber = "411"
+         startingLineNumber = "416"
+         endingLineNumber = "416"
          landmarkName = "@implementation REMBuildingAirQualityChartHandler"
          landmarkType = "3">
       </FileBreakpoint>
@@ -1761,11 +1761,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "399877290.8601"
+         timestampString = "399886734.180938"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "451"
-         endingLineNumber = "451"
+         startingLineNumber = "452"
+         endingLineNumber = "452"
          landmarkName = "@implementation REMBuildingAverageChartHandler"
          landmarkType = "3">
       </FileBreakpoint>
@@ -1800,11 +1800,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAirQualityChartHandler.m"
-         timestampString = "399869575.876186"
+         timestampString = "399879001.975717"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "572"
-         endingLineNumber = "572"
+         startingLineNumber = "577"
+         endingLineNumber = "577"
          landmarkName = "-getViewPointFromChartPoint::"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1813,11 +1813,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAirQualityChartHandler.m"
-         timestampString = "399869575.876186"
+         timestampString = "399879001.975717"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "440"
-         endingLineNumber = "440"
+         startingLineNumber = "445"
+         endingLineNumber = "445"
          landmarkName = "-drawStandards"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1839,11 +1839,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "399877290.8601"
+         timestampString = "399886734.180938"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "524"
-         endingLineNumber = "524"
+         startingLineNumber = "525"
+         endingLineNumber = "525"
          landmarkName = "-plotSpace:shouldHandlePointingDeviceUpEvent:atPoint:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1852,11 +1852,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "399877290.8601"
+         timestampString = "399886734.180938"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "485"
-         endingLineNumber = "485"
+         startingLineNumber = "486"
+         endingLineNumber = "486"
          landmarkName = "-plotSpace:shouldHandlePointingDeviceUpEvent:atPoint:"
          landmarkType = "5">
       </FileBreakpoint>
