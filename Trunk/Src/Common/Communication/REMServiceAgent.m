@@ -62,7 +62,7 @@ static int requestTimeout = 1000; //(s)
     
     void (^onSuccess)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        NSLog(@"%@", operation.responseString);
+        //NSLog(@"%@", operation.responseString);
         
         id result;
         
@@ -264,7 +264,7 @@ static int requestTimeout = 1000; //(s)
 {
     REMApplicationContext* context = [REMApplicationContext instance];
     NSString *original = [NSString stringWithFormat:@"%llu|%@|%llu",context.currentUser.userId,context.currentUser.name, context.currentUser.spId];
-    NSLog(@"%@",original);
+    //NSLog(@"%@",original);
     
     NSData *encryptedData = [REMEncryptHelper AES256EncryptData:[original dataUsingEncoding:NSUTF8StringEncoding] withKey:@"41758bd9d7294737"];
     
