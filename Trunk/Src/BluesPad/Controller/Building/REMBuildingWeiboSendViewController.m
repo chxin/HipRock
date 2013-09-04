@@ -47,11 +47,11 @@ const NSInteger kWeiboMaxLength = 140;
     if (textView.text.length > kWeiboMaxLength) {
         sendBtn.enabled = NO;
         sendBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:16];
-        [sendBtn setTitleColor:[UIColor colorWithRed:0 green:122/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
+        [sendBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     } else {
         sendBtn.enabled = YES;
         sendBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:16];
-        [sendBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [sendBtn setTitleColor:[UIColor colorWithRed:0 green:122/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
     }
     [charactorLabel setText: [NSString stringWithFormat:@"%i", (kWeiboMaxLength - [NSNumber numberWithUnsignedInteger:textView.text.length].intValue)]];
 }
