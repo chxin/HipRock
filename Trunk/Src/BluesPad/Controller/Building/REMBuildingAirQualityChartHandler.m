@@ -30,102 +30,12 @@
 @property (nonatomic,strong) UIColor *colorForChinaStandard, *colorForAmericanStandard;
 
 
-@property (nonatomic,strong) CPTPlotRange *origRightRange;
-
-
-@property (nonatomic) CGPoint lastDraggedPoint;
-@property (nonatomic) NSTimeInterval lastDraggedTime;
-@property (nonatomic) NSTimeInterval deltaTime;
-
+@property (nonatomic,strong) REMChartHorizonalScrollDelegator *scrollManager;
 
 
 @end
 
 @implementation REMBuildingAirQualityChartHandler
-
-
-
-
-
-#pragma mark -
-#pragma mark plotspace delegate for event
-
-- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDownEvent:(UIEvent *)event atPoint:(CGPoint)point
-{
-    self.lastDraggedPoint=point;
-    self.lastDraggedTime=event.timestamp;
-    
-
-
-    return YES;
-}
-
-- (BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDraggedEvent:(UIEvent *)event atPoint:(CGPoint)point
-{
-    self.lastDraggedPoint=point;
-    NSTimeInterval current=event.timestamp;
-    self.deltaTime=current-self.lastDraggedTime;
-    self.lastDraggedTime=current;
-    return YES;
-}
-
-/*
-- (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
-{
-    //    NSLog(@"point:%@",NSStringFromCGPoint(point));
-    //    NSLog(@"xrange:%@",space.xRange);
-    //        NSLog(@"global xrange:%@",space.globalXRange);
-    CGFloat delta=point.x-self.lastDraggedPoint.x;
-    CGFloat absDelta=ABS(delta);
-    NSTimeInterval current=event.timestamp;
-    NSTimeInterval deltaTime=current-self.lastDraggedTime;
-    
-    NSLog(@"diff:%f",point.x-self.lastDraggedPoint.x);
-    NSLog(@"delta time:%f",self.deltaTime);
-    
-    NSDecimal d = [[NSDecimalNumber numberWithDouble:60*60*24*3] decimalValue];
-    NSDecimal d1 = [[NSDecimalNumber numberWithDouble:60*60*24*10] decimalValue];
-    
-    NSDecimal oldLength=  CPTDecimalSubtract(space.globalXRange.length, d1);
-    NSDecimal oldLocation=  CPTDecimalAdd(space.globalXRange.location, d);
-    NSDecimal oldTotal=CPTDecimalAdd(oldLocation, oldLength);
-    NSDecimal nowTotal=CPTDecimalAdd(space.xRange.location, space.xRange.length);
-    if(CPTDecimalGreaterThan(nowTotal, oldTotal)==YES){
-        
-        [CPTAnimation animate:space
-                     property:@"xRange"
-                fromPlotRange:space.xRange
-                  toPlotRange:self.origRightRange
-                     duration:0.1
-                    withDelay:0
-               animationCurve:CPTAnimationCurveCubicInOut
-                     delegate:nil];
-        
-        return NO;
-    }
-    
-    if(CPTDecimalLessThan(space.xRange.location, oldLocation)){
-        CPTPlotRange *startRange=[CPTPlotRange plotRangeWithLocation:oldLocation length:self.origRightRange.length];
-        [CPTAnimation animate:space
-                     property:@"xRange"
-                fromPlotRange:space.xRange
-                  toPlotRange:startRange
-                     duration:0.2
-                    withDelay:0
-               animationCurve:CPTAnimationCurveCubicInOut
-                     delegate:nil];
-        
-        return NO;
-    }
-    
-    
-    
-    //UITouch *touch= [event.allTouches anyObject];
-    
-    
-    
-    return YES;
-}*/
 
 
 static NSString *kOutdoorCode = @"Outdoor";
@@ -152,7 +62,7 @@ static NSDictionary *codeNameMap;
     if (self) {
         // Custom initialization
         self.viewFrame = frame;
-        
+        self.scrollManager = [[REMChartHorizonalScrollDelegator alloc]init];
         codeNameMap = [[NSDictionary alloc] initWithObjects:@[kOutdoorLabelName,kMayAirLabelName,kHoneywellLabelName,kAmericanStandardLabelFormat,kChinaStandardLabelFormat] forKeys:@[kOutdoorCode,kMayAirCode,kHoneywellCode,kAmericanStandardCode,kChinaStandardCode]];
         
     }
@@ -306,7 +216,7 @@ static NSDictionary *codeNameMap;
 {
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.hostView.hostedGraph.defaultPlotSpace;
     plotSpace.allowsUserInteraction = YES;
-    plotSpace.delegate=self;
+    plotSpace.delegate=self.scrollManager;
     
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.draggableRange.start) length:CPTDecimalFromDouble([self.draggableRange distance])];
@@ -316,8 +226,8 @@ static NSDictionary *codeNameMap;
     plotSpace.yRange = dataValuePlotRange;
     plotSpace.globalYRange = dataValuePlotRange;
     
-   // [plotSpace setElasticGlobalXRange:YES];
-   // [plotSpace setAllowsMomentum:YES];
+    self.scrollManager.globalRange=self.globalRange;
+    self.scrollManager.visiableRange=self.visiableRange;
 }
 
 -(void)initializeAxises
