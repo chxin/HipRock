@@ -145,7 +145,7 @@
             UINavigationController *nav=(UINavigationController *)self.parentViewController;
             [nav dismissViewControllerAnimated:YES completion:^(void){
                 [self.navigationController popToRootViewControllerAnimated:YES];
-                //[self.splashScreenController showLoginView];
+                [self.splashScreenController showLoginView:NO];
             }];
             
             

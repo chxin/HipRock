@@ -163,6 +163,10 @@ typedef void(^SuccessCallback)(BOOL success);
 }
 
 - (void)resetDefaultCommodity{
+    if(self.buttonArray==nil || self.buttonArray.count <= 0)
+    {
+        return;
+    }
     [self buttonPressed:self.buttonArray[0]];
 }
 
@@ -287,6 +291,8 @@ typedef void(^SuccessCallback)(BOOL success);
 
 
 -(void)cancelAllRequest{
+    if(self.buildingInfo.commodityUsage==nil || [self.buildingInfo.commodityUsage isEqual:[NSNull null]] || self.buildingInfo.commodityUsage.count<=0)
+        return;
     for (REMCommodityUsageModel *m in self.buildingInfo.commodityUsage) {
         NSString *key = [NSString stringWithFormat:@"b-%@-%@",self.buildingInfo.building.buildingId,m.commodity.commodityId];
         [REMDataAccessor cancelAccess:key];

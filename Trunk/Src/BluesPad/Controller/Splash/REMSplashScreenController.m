@@ -56,14 +56,8 @@
     else{
         [self breathAnimation:^(void){
             [self.logoView setHidden:YES];
-            [self showLoginView];
+            [self showLoginView:YES];
         }];
-    }
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    if([self isAlreadyLogin]){
     }
 }
 
@@ -111,12 +105,10 @@
     [[REMApplicationContext instance] setCurrentCustomer:storedCustomer];
 }
 
-- (void)showLoginView
+- (void)showLoginView:(BOOL)isAnimated
 {
-    if(self.carouselController == nil){
-        self.carouselController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginCarousel"];
-    }
-    
+    self.carouselController = nil;
+    self.carouselController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginCarousel"];    
     UIView *carouselView = self.carouselController.view;
     
     [self addChildViewController:self.carouselController];
@@ -126,9 +118,12 @@
     
     carouselView.frame = CGRectMake(self.view.bounds.origin.x-1024, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
     
-    [UIView animateWithDuration:0.4 animations:^{
-        carouselView.frame = self.view.bounds;
-    }];
+    if(isAnimated)
+    {
+        [UIView animateWithDuration:0.4 animations:^{
+            carouselView.frame = self.view.bounds;
+        }];
+    }
 }
 
 - (void)showBuildingView:(void (^)(void))loadCompleted
