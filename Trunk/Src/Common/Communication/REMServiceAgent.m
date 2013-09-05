@@ -18,6 +18,8 @@
 #import "REMApplicationContext.h"
 #import "REMEncryptHelper.h"
 #import "REMApplicationInfo.h"
+#import "REMBusinessErrorInfo.h"
+#import "REMError.h"
 
 
 @implementation REMServiceAgent
@@ -62,7 +64,19 @@ static int requestTimeout = 1000; //(s)
     
     void (^onSuccess)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        //NSLog(@"%@", operation.responseString);
+        NSLog(@"%@", operation.responseString);
+        
+        //if there is error message
+        if([operation.responseString hasPrefix:@"{\"error\":"] == YES){
+            //TODO: process error message with different error types
+            REMBusinessErrorInfo *remErrorInfo = [[REMBusinessErrorInfo alloc] initWithJSONString:operation.responseString];
+            
+            REMError *remError = [[REMError alloc] initWithErrorInfo:remErrorInfo];
+            
+            error(remError,remErrorInfo);
+            
+            return;
+        }
         
         id result;
         
@@ -74,9 +88,6 @@ static int requestTimeout = 1000; //(s)
         {
             result = [REMServiceAgent deserializeResult:operation.responseString ofService:service.url];
         }
-        
-        //NSDictionary *errorInfo = (NSDictionary *)[result valueForKey:@"error"];
-        //TODO: process error message with different error types
         
         if(isStore==YES)
         {

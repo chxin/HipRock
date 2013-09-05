@@ -130,7 +130,7 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 {
     CGRect rect = CGRectMake(0, 0, kSubViewWidth+kSubViewDistance, kSubViewHeight);
     
-    [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:1.5 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.scrollView scrollRectToVisible:rect animated:NO];
     } completion:nil];
 }
