@@ -14,6 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *normalLogo;
 
 - (void)showBuildingView:(void (^)(void))loadCompleted;
-- (void)showLoginView;
+- (void)showLoginView:(BOOL)isAnimated;
 
 @end

@@ -53,6 +53,8 @@ static int requestTimeout = 1000; //(s)
     {
         NSString *parameterString = [REMServiceAgent buildParameterString:(NSDictionary *)body];
         postData = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
+        
+        //NSLog(@"%@",parameterString);
     }
     
     NSURLRequest *request = [REMServiceAgent buildRequestWithUrl:service.url andPostData:postData];
