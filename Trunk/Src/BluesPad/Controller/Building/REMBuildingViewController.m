@@ -371,7 +371,7 @@
 
 
 - (IBAction)shareButtonPressed:(id)sender {
-    REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:self.view];
+    REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:[UIApplication sharedApplication].keyWindow];
     
     [masker showMask];
     
