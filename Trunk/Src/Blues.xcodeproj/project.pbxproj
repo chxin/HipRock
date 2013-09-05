@@ -387,7 +387,6 @@
 		7AF6AC8D17D1BA5600D62A9A /* REMBuildingAirQualityChartHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m */; };
 		7AF6AC8E17D1BA5600D62A9A /* REMBuildingSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */; };
 		7AF6AC8F17D1BA5600D62A9A /* REMBuildingSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */; };
-		7AF6AC9017D1BA5600D62A9A /* REMBuildingWeiboSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3822E917CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.m */; };
 		7AF6AC9117D1BB1200D62A9A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B61D7517C742E000245F1E /* CoreText.framework */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
@@ -470,7 +469,8 @@
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
-		EF3822EA17CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3822E917CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.m */; };
+		EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */; };
+		EF60822F17D818430093427C /* REMModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF60822E17D818430093427C /* REMModalView.m */; };
 		EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */; };
 		EF96300617C610A200BBC7DA /* REMBuildingSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */; };
 		EF97879617C70B440062BE0E /* REMBuildingSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */; };
@@ -989,8 +989,10 @@
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
-		EF3822E817CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingWeiboSendViewController.h; sourceTree = "<group>"; };
-		EF3822E917CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingWeiboSendViewController.m; sourceTree = "<group>"; };
+		EF48011E17D7098D002A2EF6 /* REMBuildingWeiboView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingWeiboView.h; path = View/Building/REMBuildingWeiboView.h; sourceTree = "<group>"; };
+		EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingWeiboView.m; path = View/Building/REMBuildingWeiboView.m; sourceTree = "<group>"; };
+		EF60822D17D818420093427C /* REMModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMModalView.h; sourceTree = "<group>"; };
+		EF60822E17D818430093427C /* REMModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMModalView.m; sourceTree = "<group>"; };
 		EF8F1D7717C2FE5400D3E29F /* REMToggleButtonGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButtonGroup.h; sourceTree = "<group>"; };
 		EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButtonGroup.m; sourceTree = "<group>"; };
 		EF96300417C610A100BBC7DA /* REMBuildingSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingSettingViewController.h; sourceTree = "<group>"; };
@@ -1234,8 +1236,6 @@
 				EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */,
 				EF97879417C70B440062BE0E /* REMBuildingSettingNavigationController.h */,
 				EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */,
-				EF3822E817CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.h */,
-				EF3822E917CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.m */,
 				B493ADA717D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.h */,
 				B493ADA817D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m */,
 			);
@@ -1408,6 +1408,8 @@
 				7A48B47D17CDE321002DA386 /* REMInsetsTextField.m */,
 				7AF3667617CF2D7400447650 /* REMChartSeriesIndicator.h */,
 				7AF3667717CF2D7400447650 /* REMChartSeriesIndicator.m */,
+				EF60822D17D818420093427C /* REMModalView.h */,
+				EF60822E17D818430093427C /* REMModalView.m */,
 			);
 			name = Controls;
 			path = View/Controls;
@@ -1980,6 +1982,8 @@
 				B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */,
 				B4A0FCD317C6023200C7AD56 /* REMBuildingAirQualityView.h */,
 				B4A0FCD417C6023300C7AD56 /* REMBuildingAirQualityView.m */,
+				EF48011E17D7098D002A2EF6 /* REMBuildingWeiboView.h */,
+				EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */,
 			);
 			name = Building;
 			sourceTree = "<group>";
@@ -2420,7 +2424,6 @@
 				EF97879617C70B440062BE0E /* REMBuildingSettingNavigationController.m in Sources */,
 				7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */,
 				7A9557C017C73AD200249CED /* REMBuildingAirQualityChart.m in Sources */,
-				EF3822EA17CAF71A0048FEB2 /* REMBuildingWeiboSendViewController.m in Sources */,
 				EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */,
 				7A09330D17CC8737007C6A4E /* REMBackgroundImageButton.m in Sources */,
 				7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */,
@@ -2428,6 +2431,8 @@
 				B493ADA917D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m in Sources */,
 				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
+				EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */,
+				EF60822F17D818430093427C /* REMModalView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2449,7 +2454,6 @@
 				7AF6AC8D17D1BA5600D62A9A /* REMBuildingAirQualityChartHandler.m in Sources */,
 				7AF6AC8E17D1BA5600D62A9A /* REMBuildingSettingViewController.m in Sources */,
 				7AF6AC8F17D1BA5600D62A9A /* REMBuildingSettingNavigationController.m in Sources */,
-				7AF6AC9017D1BA5600D62A9A /* REMBuildingWeiboSendViewController.m in Sources */,
 				7AF6AC8117D1BA0D00D62A9A /* REMServiceMeta.m in Sources */,
 				6AB1F2E117B8AD5E0065C1EB /* GTMBase64.m in Sources */,
 				6AB1F2E417B8AD5E0065C1EB /* Reachability.m in Sources */,

@@ -124,17 +124,17 @@
     if (currentSourceIndex != 2) {
         REMToggleButton* activeBtn = nil;
         REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
-        if (currentSourceIndex == Today) {
+        if (currentSourceIndex == 0) {
             activeBtn = myView.todayButton;
-        } else if (currentSourceIndex == Yesterday) {
+        } else if (currentSourceIndex == 1) {
             activeBtn = myView.yestodayButton;
-        } else if (currentSourceIndex == ThisMonth) {
+        } else if (currentSourceIndex == 2) {
             activeBtn = myView.thisMonthButton;
-        } else if (currentSourceIndex == LastMonth) {
+        } else if (currentSourceIndex == 3) {
             activeBtn = myView.lastMonthButton;
-        } else if (currentSourceIndex == ThisYear) {
+        } else if (currentSourceIndex == 4) {
             activeBtn = myView.thisYearButton;
-        } else if (currentSourceIndex == LastYear) {
+        } else if (currentSourceIndex == 5) {
             activeBtn = myView.lastYearButton;
         }
         [myView.thisMonthButton setOn:YES];
@@ -188,12 +188,20 @@
     }
     currentSourceIndex = [self getSourceIndex:timeRange];
     
+    NSMutableArray* data = [[self.datasource objectAtIndex:currentSourceIndex] objectForKey:@"data"];
+    if (data.count == 0) {
+        myView.hostView.hidden = YES;
+        myView.noDataLabel.hidden = NO;
+        return;
+    }
+    
+    myView.hostView.hidden = NO;
+    myView.noDataLabel.hidden = YES;
     NSString* dateFormat = nil;
     int amountOfY = 5;
 //    int countOfX = 0;    // Max x value in datasource
     double maxY = INT64_MIN;    // Max y value of display points
     double minY = 0;    // Min y value of display points
-    NSMutableArray* data = [[self.datasource objectAtIndex:currentSourceIndex] objectForKey:@"data"];
     for (int j = 0; j < data.count; j++) {
         float y = [[data[j] objectForKey:@"y" ] floatValue];
         maxY = MAX(maxY, y);
@@ -398,11 +406,11 @@
                 [data addObject:@{@"y": [[NSDecimalNumber alloc]initWithDecimal: pointData.dataValue], @"x": pointData.localTime  }];
             }
             [series setValue:data forKey:@"data"];
-            REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
-            [myView.thisMonthButton setOn:YES];
-            [self intervalChanged:myView.thisMonthButton];
             loadCompleted();
         }
+        REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
+        [myView.thisMonthButton setOn:YES];
+        [self intervalChanged:myView.thisMonthButton];
         
         [self stopLoadingActivity];
     };
