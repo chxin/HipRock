@@ -10,7 +10,7 @@
 #import "REMApplicationContext.h"
 #import "WeiboSDK.h"
 #import <QuartzCore/QuartzCore.h>
-#import "REMBuildingWeiboSendViewController.h"
+#import "REMBuildingWeiboView.h"
 
 @interface REMBuildingViewController ()
 @property (nonatomic,strong) NSArray *imageArray;
@@ -126,13 +126,7 @@
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"sendWeiboSegue"]) {
-        NSDictionary* params = (NSDictionary*)sender;
-        REMBuildingWeiboSendViewController *vc = [segue destinationViewController];
-        [vc setWeiboText: [params objectForKey:@"text"]];
-        [vc setWeiboImage:[params objectForKey:@"image"]];
-    }
-    else if([segue.identifier isEqualToString:@"buildingSettingSegue2"]==YES){
+    if([segue.identifier isEqualToString:@"buildingSettingSegue2"]==YES){
         UINavigationController *c=  segue.destinationViewController;
         REMBuildingSettingViewController *vc= [c.childViewControllers lastObject];
         vc.splashScreenController=self.splashScreenController;
@@ -377,36 +371,6 @@
 
 
 - (IBAction)shareButtonPressed:(id)sender {
-    //    UIApplication *application  = [UIApplication sharedApplication];
-    //    UIWindow* window = application.keyWindow;
-    //    if (!window || window.windowLevel != UIWindowLevelNormal) {
-    //        for(window in [UIApplication sharedApplication].windows) {
-    //            if (window.windowLevel == UIWindowLevelNormal) {
-    //                [window makeKeyAndVisible];
-    //                break;
-    //            }
-    //        }
-    //    }
-    
-    //    [UIView animateWithDuration:0.4f animations:^{
-    //        window.frame=CGRectMake(0,300,1024,20);
-    //    }];
-    //[self performSegueWithIdentifier:@"sendWeiboSegue" sender:self];
-
-
-    /*
-    REMImageView *view = self.imageArray[self.currentIndex];
-    
-    
-
-    
-    [view exportImage:^(UIImage *image, NSString* text){
-        // [UIImagePNGRepresentation(image) writeToFile:[self getWeiboPicAddress] atomically:NO];
-        
-        NSDictionary* sender = @{@"image": image, @"text": text};
-        [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
-    }];*/
-    
     REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:self.view];
     
     [masker showMask];
@@ -415,7 +379,6 @@
     [v prepareShare];
     
     [self performSelector:@selector(executeExport:) withObject:masker afterDelay:0.1];
-    
 }
 
 -(void)executeExport:(REMMaskManager *)masker{
@@ -426,15 +389,15 @@
     [view exportImage:^(UIImage *image, NSString* text){
         [masker hideMask];
         
-        // [UIImagePNGRepresentation(image) writeToFile:[self getWeiboPicAddress] atomically:NO];
-        REMBuildingWeiboSendViewController* vc = [[REMBuildingWeiboSendViewController alloc]init];
-        
-        [vc setWeiboText: text];
-        [vc setWeiboImage:image];
-        NSDictionary* sender = @{@"image": image, @"text": text};
-        
-//        [self presentViewController:vc animated:NO completion:Nil];
-        [self performSegueWithIdentifier:@"sendWeiboSegue" sender: sender];
+        REMBuildingWeiboView* weiboView = [[REMBuildingWeiboView alloc]initWithSuperView:self.view text:text image:image];
+//        [weiboView setWeiboText: text];
+//        [weiboView setWeiboImage:image];
+        [weiboView show:YES];
+//        
+//        REMBuildingWeiboSendViewController* vc = [[REMBuildingWeiboSendViewController alloc]init];
+//        [vc setWeiboText: text];
+//        [vc setWeiboImage:image];
+//        [self performSegueWithIdentifier:@"sendWeiboSegue" sender: @{@"image": image, @"text": text}];
         
         
 //        UINavigationController *modalViewNavController =
