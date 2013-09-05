@@ -289,6 +289,8 @@
 		7A1D7C4517A63E8B0050779D /* REMEncryptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4417A63E8B0050779D /* REMEncryptHelper.m */; };
 		7A209EDA17BB72100062FB92 /* REMServiceMeta.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */; };
 		7A209EDB17BB72100062FB92 /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
+		7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */; };
+		7A2BA42217D877C3003B18E1 /* REMError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42117D877C3003B18E1 /* REMError.m */; };
 		7A37AA5C17AB56F100316902 /* REMUserValidationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA5B17AB56F100316902 /* REMUserValidationModel.m */; };
 		7A37AA6317AB944B00316902 /* REMNumberLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA6217AB944B00316902 /* REMNumberLabel.m */; };
 		7A399E96177D238F00F0EB9F /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E84177D238F00F0EB9F /* AFHTTPClient.m */; };
@@ -663,6 +665,10 @@
 		7A1D7C4117A637FD0050779D /* REMJSONObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMJSONObject.m; path = Common/Model/REMJSONObject.m; sourceTree = "<group>"; };
 		7A1D7C4317A63E8B0050779D /* REMEncryptHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEncryptHelper.h; path = Common/Utility/REMEncryptHelper.h; sourceTree = "<group>"; };
 		7A1D7C4417A63E8B0050779D /* REMEncryptHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEncryptHelper.m; path = Common/Utility/REMEncryptHelper.m; sourceTree = "<group>"; };
+		7A2BA41C17D874C3003B18E1 /* REMBusinessErrorInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBusinessErrorInfo.h; path = Common/Model/REMBusinessErrorInfo.h; sourceTree = "<group>"; };
+		7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBusinessErrorInfo.m; path = Common/Model/REMBusinessErrorInfo.m; sourceTree = "<group>"; };
+		7A2BA42017D877C3003B18E1 /* REMError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMError.h; sourceTree = "<group>"; };
+		7A2BA42117D877C3003B18E1 /* REMError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMError.m; sourceTree = "<group>"; };
 		7A37AA5A17AB56F100316902 /* REMUserValidationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMUserValidationModel.h; path = Model/Login/REMUserValidationModel.h; sourceTree = "<group>"; };
 		7A37AA5B17AB56F100316902 /* REMUserValidationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMUserValidationModel.m; path = Model/Login/REMUserValidationModel.m; sourceTree = "<group>"; };
 		7A37AA6117AB944B00316902 /* REMNumberLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMNumberLabel.h; sourceTree = "<group>"; };
@@ -1358,8 +1364,20 @@
 				7A1D7C3B17A637510050779D /* REMUserModel.m */,
 				7A1D7C3D17A637630050779D /* REMCustomerModel.h */,
 				7A1D7C3E17A637630050779D /* REMCustomerModel.m */,
+				7A2BA41C17D874C3003B18E1 /* REMBusinessErrorInfo.h */,
+				7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		7A2BA41F17D877B1003B18E1 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				7A2BA42017D877C3003B18E1 /* REMError.h */,
+				7A2BA42117D877C3003B18E1 /* REMError.m */,
+			);
+			name = Error;
+			path = Common/Error;
 			sourceTree = "<group>";
 		};
 		7A37AA5917AB56B100316902 /* Login */ = {
@@ -1448,6 +1466,7 @@
 		7A5E2D45177B3CD3000F77F9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7A2BA41F17D877B1003B18E1 /* Error */,
 				7A1D7C3917A637110050779D /* Model */,
 				B445AE7E177BEC10002D2A59 /* Log */,
 				7A3DDCD717869A32008A1033 /* DataAccess */,
@@ -2410,6 +2429,8 @@
 				7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */,
 				7AF3667817CF2D7400447650 /* REMChartSeriesIndicator.m in Sources */,
 				B493ADA917D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m in Sources */,
+				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,
+				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
 				EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */,
 				EF60822F17D818430093427C /* REMModalView.m in Sources */,
 			);
