@@ -360,7 +360,7 @@ typedef void(^SuccessCallback)(BOOL success);
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[self.currentIndex];
         NSString* commodityName = model.commodity.comment;
         NSString* uomName = model.commodityUsage.uom.comment;
-        NSString* val = model.commodityUsage.dataValue.stringValue;
+        NSString* val = [model.commodityUsage.dataValue isEqual:[NSNull null]] ? nil : model.commodityUsage.dataValue.stringValue;
         if (val == nil || commodityName == nil || uomName == nil) {
             stringFormat = @"暂无数据。";
         } else {
@@ -372,11 +372,11 @@ typedef void(^SuccessCallback)(BOOL success);
         stringFormat = @"今天上午10:00，%@室外#Commodity#为#OutdoorVal##OutdoorUomName#；经霍尼韦尔净化后室内新风#Commodity#为#HoneywellVal##HoneywellUomName#，经美埃净化后室内新风#Commodity#为#MayairVal##MayairUomName#。";
         REMAirQualityModel *model = self.buildingInfo.airQuality;
         NSString* commodityName = model.commodity.comment;
-        NSString* outdoorVal = model.outdoor.dataValue.stringValue;
+        NSString* outdoorVal = [model.outdoor.dataValue isEqual:[NSNull null]] ? nil : model.outdoor.dataValue.stringValue;
         NSString* outdoorUom = model.outdoor.uom.comment;
-        NSString* honeywellVal = model.honeywell.dataValue.stringValue;
+        NSString* honeywellVal = [model.honeywell.dataValue isEqual:[NSNull null]] ? nil : model.honeywell.dataValue.stringValue;
         NSString* honeywellUom = model.honeywell.uom.comment;
-        NSString* mayairVal = model.mayair.dataValue.stringValue;
+        NSString* mayairVal = [model.mayair.dataValue isEqual:[NSNull null]] ? nil : model.mayair.dataValue.stringValue;
         NSString* mayairUom = model.mayair.uom.comment;
         if (commodityName == nil || outdoorUom == nil || outdoorVal == nil || honeywellUom == nil || honeywellVal == nil || mayairUom == nil || mayairVal == nil) {
             stringFormat = @"暂无数据。";

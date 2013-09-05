@@ -108,7 +108,9 @@ const NSInteger kWeiboMaxLength = 140;
     [textView setFont:[UIFont fontWithName:@(kBuildingFontSCRegular) size:inputTextSize]];
     textView.backgroundColor = [UIColor clearColor];
     textView.scrollEnabled = YES;
+    textView.editable = NO;
     [textImageView addSubview:textView];
+    textView.text = self.weiboText;
     
     charactorLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, textImageViewHeight - kWeiboCharactorLabelHeight - kWeiboCharactorLabelMarginBottom, 100, kWeiboCharactorLabelHeight)];
     charactorLabel.backgroundColor = [UIColor clearColor];
@@ -184,20 +186,43 @@ const NSInteger kWeiboMaxLength = 140;
 }
 
 -(void)sendClicked:(id)sender {
-//    if (![Weibo.weibo isAuthenticated]) {
-//        //        [REMAlertHelper alert:@"未绑定微博账户。"];
-//        [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
-//            NSString *message = nil;
-//            if (!error) {
-//                [self sendWeibo];
-//            }
-//            else {
-//                message = [NSString stringWithFormat:@"微博账户绑定失败: %@", error];
-//                [REMAlertHelper alert:message];
-//            }
-//        }];
-//    } else {
-//        [self sendWeibo];
-//    }
+    if (![Weibo.weibo isAuthenticated]) {
+        //        [REMAlertHelper alert:@"未绑定微博账户。"];
+        [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
+            NSString *message = nil;
+            if (!error) {
+                [self sendWeibo];
+            }
+            else {
+                message = [NSString stringWithFormat:@"微博账户绑定失败: %@", error];
+                [REMAlertHelper alert:message];
+            }
+        }];
+    } else {
+        [self sendWeibo];
+    }
+}
+
+-(void)sendWeibo {
+//    [UIView beginAnimations:@"move" context:nil];
+//    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//    [UIView setAnimationDuration:0.4f];
+//    self.view.superview.bounds = CGRectMake(0, -100, kWeiboWindowWidth, kWeiboWindowHeight);
+//    [self.view.superview.layer setShadowOffset:CGSizeMake(0, 100)];
+//    [UIView commitAnimations];
+
+    [REMStatusBar showStatusMessage:@"新浪微博发送中…" autoHide:NO];
+    [Weibo.weibo newStatus:textView.text pic:UIImagePNGRepresentation(self.weiboImage) completed:^(Status *status, NSError *error) {
+        NSString *message = nil;
+        if (error) {
+            message = [NSString stringWithFormat:@"failed to post:%@", error];
+            NSLog(@"%@", message);
+            [REMStatusBar showStatusMessage:@"新浪微博发送失败"];
+        }
+        else {
+            [REMStatusBar showStatusMessage:@"新浪微博发送成功"];
+        }
+    }];
+    [self close:YES];
 }
 @end

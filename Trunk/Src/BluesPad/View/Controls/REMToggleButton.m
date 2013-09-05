@@ -17,10 +17,10 @@
     if (self) {
         self.layer.backgroundColor = [UIColor clearColor].CGColor;
         self.titleLabel.font = [UIFont fontWithName:@(kBuildingFontUltra) size:15];
-        self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [self.layer setMasksToBounds:YES];
-        [self.layer setCornerRadius:3.0];
-        [self.layer setBorderWidth:0];
+//        self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//        [self.layer setMasksToBounds:YES];
+//        [self.layer setCornerRadius:3.0];
+//        [self.layer setBorderWidth:0];
     }
     return self;
 }

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "REMStatusBar.h"
+#import "Weibo.h"
+#import "REMAlertHelper.h"
 #import "REMBuildingConstants.h"
 #import "REMModalView.h"
 #import <QuartzCore/QuartzCore.h>
