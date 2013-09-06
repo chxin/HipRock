@@ -101,6 +101,7 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] ==YES ){
+        if(self.imageArray.count<1)return YES;
         REMImageView *current = self.imageArray[self.currentIndex];
         return [current shouldResponseSwipe:touch];
             
