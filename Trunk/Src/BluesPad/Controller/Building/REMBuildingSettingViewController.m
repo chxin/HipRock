@@ -162,7 +162,7 @@
         [self.navigationController popToRootViewControllerAnimated:YES];
         [self.splashScreenController showLoginView:NO];
         
-        //[REMStorage clearSessionStorage];
+        [REMStorage clearSessionStorage];
     }];
 }
 
