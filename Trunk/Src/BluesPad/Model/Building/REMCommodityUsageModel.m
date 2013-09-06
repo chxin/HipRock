@@ -17,8 +17,8 @@
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
     self.commodity = [[REMCommodityModel alloc] initWithDictionary:dictionary[@"Commodity"]];
-    self.commodityUsage = [[REMEnergyUsageDataModel alloc] initWithDictionary:dictionary[@"CommodityUsage"]];
-    self.carbonEquivalent = [[REMEnergyUsageDataModel alloc] initWithDictionary:dictionary[@"CO2Equivalent"]];
+    self.commodityUsage = [[REMEnergyUsageDataModel alloc] initWithDictionary:dictionary[@"EnergyUsage"]];
+    self.carbonEquivalent = [[REMEnergyUsageDataModel alloc] initWithDictionary:dictionary[@"CarbonEmission"]];
     self.rankingData = [[REMRankingDataModel alloc] initWithDictionary:dictionary[@"RankingData"]];
     self.targetValue = [[REMEnergyUsageDataModel alloc] initWithDictionary:dictionary[@"TargetValue"]];
     self.isTargetAchieved = [dictionary[@"IsTargetAchieved"] boolValue];
