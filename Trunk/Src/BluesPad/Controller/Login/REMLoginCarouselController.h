@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UIButton *jumpLoginButton;
+@property (nonatomic) BOOL showAnimation;
 
 @property (nonatomic,strong) REMSplashScreenController *splashScreenController;
 

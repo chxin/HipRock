@@ -107,8 +107,13 @@
 
 - (void)showLoginView:(BOOL)isAnimated
 {
-    self.carouselController = nil;
-    self.carouselController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginCarousel"];    
+    if(self.carouselController!=nil){
+        [self.carouselController.view removeFromSuperview];
+        self.carouselController = nil;
+    }
+    
+    self.carouselController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginCarousel"];
+    self.carouselController.showAnimation = isAnimated;
     UIView *carouselView = self.carouselController.view;
     
     [self addChildViewController:self.carouselController];
@@ -118,11 +123,14 @@
     
     carouselView.frame = CGRectMake(self.view.bounds.origin.x-1024, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
     
-    if(isAnimated)
+    if(isAnimated==YES)
     {
         [UIView animateWithDuration:0.4 animations:^{
             carouselView.frame = self.view.bounds;
         }];
+    }
+    else{
+        carouselView.frame = self.view.bounds;
     }
 }
 
