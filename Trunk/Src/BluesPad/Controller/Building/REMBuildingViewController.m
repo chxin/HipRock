@@ -101,6 +101,7 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] ==YES ){
+        if(self.imageArray.count<1)return YES;
         REMImageView *current = self.imageArray[self.currentIndex];
         return [current shouldResponseSwipe:touch];
             
@@ -137,7 +138,7 @@
 
 - (void)blurredImageView
 {
-    self.defaultImage = [UIImage imageNamed:@"default-building.jpg"];
+    self.defaultImage = [UIImage imageNamed:@"DefaultBuilding.jpg"];
     
     dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     //UIImage *image = self.defaultImage;
@@ -371,7 +372,7 @@
 
 
 - (IBAction)shareButtonPressed:(id)sender {
-    REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:self.view];
+    REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:[UIApplication sharedApplication].keyWindow];
     
     [masker showMask];
     
