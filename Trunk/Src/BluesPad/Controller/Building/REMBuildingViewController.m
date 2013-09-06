@@ -137,7 +137,7 @@
 
 - (void)blurredImageView
 {
-    self.defaultImage = [UIImage imageNamed:@"default-building.jpg"];
+    self.defaultImage = [UIImage imageNamed:@"DefaultBuilding.jpg"];
     
     dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     //UIImage *image = self.defaultImage;
