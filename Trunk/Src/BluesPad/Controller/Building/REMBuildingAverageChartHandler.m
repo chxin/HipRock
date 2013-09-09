@@ -51,6 +51,7 @@ static NSString *kAverageDataTitle = @"单位用%@";
         // Custom initialization
         self.viewFrame = frame;
         self.scrollManager = [[REMChartHorizonalScrollDelegator alloc]init];
+        self.requestUrl=REMDSBuildingAverageData;
     }
     return self;
 }
@@ -85,7 +86,7 @@ static NSString *kAverageDataTitle = @"单位用%@";
 
 
 
-
+/*
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageData :(void (^)(void))loadCompleted
 {
     self.commodityId = commodityID;
@@ -112,6 +113,25 @@ static NSString *kAverageDataTitle = @"单位用%@";
     } error:^(NSError *error, id response) {
         [self stopLoadingActivity];
     }];
+}*/
+
+- (NSDictionary *)assembleRequestParametersWithBuildingId:(long long)buildingId WithCommodityId:(long long)commodityID WithMetadata:(REMAverageUsageDataModel *)averageData
+{
+    self.commodityId = commodityID;
+    
+    NSDictionary *parameter = @{@"buildingId":[NSNumber numberWithLongLong:buildingId], @"commodityId":[NSNumber numberWithLongLong:commodityID]};
+    
+    return parameter;
+}
+
+
+- (void)loadDataSuccessWithData:(id)data
+{
+    self.averageData = [[REMAverageUsageDataModel alloc] initWithDictionary:data];
+    
+    if(self.averageData!=nil){
+        [self loadChart];
+    }
 }
 
 - (void)loadChart
