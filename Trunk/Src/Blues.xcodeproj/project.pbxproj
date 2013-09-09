@@ -10,6 +10,10 @@
 		38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D161785111300219469 /* REMApplicationInfo.m */; };
 		38ED7D1F1785140900219469 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38ED7D1E1785140900219469 /* libsqlite3.dylib */; };
 		6A4BD94717B89F1F007C9FCF /* BluesPad.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B4CD146017B3439600807B5F /* BluesPad.entitlements */; };
+		6A83C8D917DD9B3600BD8164 /* REMError.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42017D877C3003B18E1 /* REMError.h */; };
+		6A83C8DA17DD9B3600BD8164 /* REMError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42117D877C3003B18E1 /* REMError.m */; };
+		6A83C8DB17DD9B3600BD8164 /* REMBusinessErrorInfo.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41C17D874C3003B18E1 /* REMBusinessErrorInfo.h */; };
+		6A83C8DC17DD9B3600BD8164 /* REMBusinessErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */; };
 		6AB1F22917B8AC910065C1EB /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
 		6AB1F22B17B8AC910065C1EB /* REMUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3B17A637510050779D /* REMUserModel.m */; };
 		6AB1F22D17B8AC910065C1EB /* REMCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3E17A637630050779D /* REMCustomerModel.m */; };
@@ -2568,6 +2572,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A83C8D917DD9B3600BD8164 /* REMError.h in Sources */,
+				6A83C8DA17DD9B3600BD8164 /* REMError.m in Sources */,
+				6A83C8DB17DD9B3600BD8164 /* REMBusinessErrorInfo.h in Sources */,
+				6A83C8DC17DD9B3600BD8164 /* REMBusinessErrorInfo.m in Sources */,
 				7A209EDA17BB72100062FB92 /* REMServiceMeta.h in Sources */,
 				7A209EDB17BB72100062FB92 /* REMServiceMeta.m in Sources */,
 				6AB1F36017B8BA7F0065C1EB /* REMLogTests.h in Sources */,
