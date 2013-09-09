@@ -40,8 +40,8 @@
 
 static NSString *kNoDataText = @"暂无数据";
 
-static NSString *kBenchmarkTitle = @"指数";
-static NSString *kAverageDataTitle = @"单位用%@";
+static NSString *kBenchmarkTitle = @"目标值";
+static NSString *kAverageDataTitle = @"单位面积用%@";
 
 
 - (REMBuildingChartHandler *)initWithViewFrame:(CGRect)frame
@@ -397,21 +397,25 @@ static NSString *kAverageDataTitle = @"单位用%@";
     CGFloat labelLeftOffset = 57;
     CGFloat labelDistance = 18;
     
-    UIColor *benchmarkColor = [UIColor colorWithRed:241.0/255.0 green:94.0/255.0 blue:49.0/255.0 alpha:1];
-    
     REMCommodityModel *commodity = [[REMCommodityModel systemCommodities] objectForKey:[NSNumber numberWithLongLong:self.commodityId]];
-
-    CGFloat benchmarkWidth = [kBenchmarkTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
-    CGRect benchmarkFrame = CGRectMake(labelLeftOffset, labelTopOffset, benchmarkWidth, fontSize);
-    REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:(NSString *)kBenchmarkTitle andColor:benchmarkColor];
     
+    //average data
     UIColor *averageDataColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1];
     
     NSString *averageDataTitle = [NSString stringWithFormat:kAverageDataTitle,commodity.comment];
-
+    
     CGFloat averageDataWidth = [averageDataTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
-    CGRect averageDataFrame = CGRectMake(labelLeftOffset+benchmarkWidth+labelDistance, labelTopOffset, averageDataWidth, fontSize);
+    CGRect averageDataFrame = CGRectMake(labelLeftOffset, labelTopOffset, averageDataWidth, fontSize);
     REMChartSeriesIndicator *averageDataIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:averageDataFrame title:(NSString *)averageDataTitle andColor:averageDataColor];
+
+    
+    //benchmark
+    UIColor *benchmarkColor = [UIColor colorWithRed:241.0/255.0 green:94.0/255.0 blue:49.0/255.0 alpha:1];
+    
+    CGFloat benchmarkWidth = [kBenchmarkTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
+    CGRect benchmarkFrame = CGRectMake(labelLeftOffset+averageDataWidth+labelDistance, labelTopOffset, benchmarkWidth, fontSize);
+    REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:(NSString *)kBenchmarkTitle andColor:benchmarkColor];
+    
     
     
     [self.view addSubview:benchmarkIndicator];
@@ -464,63 +468,63 @@ static NSString *kAverageDataTitle = @"单位用%@";
 #pragma mark - data source delegate
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
-    NSUInteger records;
     
-//    int index = [[((NSString *)plot.identifier) componentsSeparatedByString:@"-"][0] intValue];
+    int index = [[((NSString *)plot.identifier) componentsSeparatedByString:@"-"][0] intValue];
+    
+    return [[self.chartData[index] objectForKey:@"data"] count];
+    //
+//    NSUInteger records;
+//    CPTBarPlot *line = (CPTBarPlot *)plot;
+//    for (NSDictionary *series in self.chartData)
+//    {
+//        if([line.identifier isEqual:[series objectForKey:@"identity" ]] == YES)
+//        {
+//            records = [[series objectForKey:@"data"] count];
+//            break;
+//        }
+//    }
+////
+//    //NSLog(@"line %@ has %d records.",line.identifier, records);
 //    
-//    return [[self.chartData[index] objectForKey:@"data"] count];
-//
-    CPTBarPlot *line = (CPTBarPlot *)plot;
-    for (NSDictionary *series in self.chartData)
-    {
-        if([line.identifier isEqual:[series objectForKey:@"identity" ]] == YES)
-        {
-            records = [[series objectForKey:@"data"] count];
-            break;
-        }
-    }
-//
-    //NSLog(@"line %@ has %d records.",line.identifier, records);
-    
-    return records;
+//    return records;
 }
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
 {
-//    int index = [[((NSString *)plot.identifier) componentsSeparatedByString:@"-"][0] intValue];
-//    
-//    NSDictionary *point = [self.chartData[index] objectForKey:@"data"][idx];
-//    
-//    if(fieldEnum == CPTBarPlotFieldBarLocation || fieldEnum == CPTScatterPlotFieldX)
-//    {
-//        return [point objectForKey:@"x"];
-//    }
-//    else
-//    {
-//        return [point objectForKey:@"y"];
-//    }
+    int index = [[((NSString *)plot.identifier) componentsSeparatedByString:@"-"][0] intValue];
     
-    NSNumber *number;
-    CPTBarPlot *line = (CPTBarPlot *)plot;
-    for (NSDictionary *series in self.chartData)
+    NSDictionary *point = [self.chartData[index] objectForKey:@"data"][idx];
+    
+    if(fieldEnum == CPTBarPlotFieldBarLocation || fieldEnum == CPTScatterPlotFieldX)
     {
-        if([line.identifier isEqual:[series objectForKey:@"identity" ]] == YES)
-        {
-            NSDictionary *point = [series objectForKey:@"data"][idx];
-            
-            if(fieldEnum == CPTBarPlotFieldBarLocation)
-            {
-                number = [point objectForKey:@"x"];
-            }
-            else
-            {
-                number = [point objectForKey:@"y"];
-            }
-            
-            break;
-        }
+        return [point objectForKey:@"x"];
     }
-    return number;
+    else
+    {
+        return [point objectForKey:@"y"];
+    }
+    
+//    NSNumber *number;
+//    CPTBarPlot *line = (CPTBarPlot *)plot;
+//    for (NSDictionary *series in self.chartData)
+//    {
+//        if([line.identifier isEqual:[series objectForKey:@"identity" ]] == YES)
+//        {
+//            NSDictionary *point = [series objectForKey:@"data"][idx];
+//            
+//            if(fieldEnum == CPTBarPlotFieldBarLocation)
+//            {
+//                number = [point objectForKey:@"x"];
+//            }
+//            else
+//            {
+//                number = [point objectForKey:@"y"];
+//            }
+//            
+//            break;
+//        }
+//    }
+//    return number;
 }
 
 
