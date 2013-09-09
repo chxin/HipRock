@@ -38,9 +38,9 @@
 @implementation REMBuildingAirQualityChartHandler
 
 
-static NSString *kOutdoorCode = @"Outdoor";
-static NSString *kMayAirCode = @"MayAir";
-static NSString *kHoneywellCode = @"Honeywell";
+static NSString *kOutdoorCode = @"GalaxySoho_Outdoor";
+static NSString *kMayAirCode = @"GalaxySoho_MayAir";
+static NSString *kHoneywellCode = @"GalaxySoho_Honeywell";
 static NSString *kAmericanStandardCode = @"美国标准";
 static NSString *kChinaStandardCode = @"中国标准";
 

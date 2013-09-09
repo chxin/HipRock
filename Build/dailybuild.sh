@@ -5,7 +5,7 @@ cd ${srcpath}
 git pull
 cd ${makefilepath}
 make --makefile=Makefile --directory=${makefilepath} xcclean
-make --makefile=Makefile --directory=${makefilepath} xcbuild
+make --makefile=Makefile --directory=${makefilepath} xcbuild BUILDTYPE=DailyBuild
 
 if [ $? -eq 0 ]; then
     echo "success"

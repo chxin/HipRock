@@ -1,7 +1,7 @@
 makefilepath=/Users/BuildServer/BuildFolder/SourceCode/Master/BluesGit/Build/
 nodepath=/usr/local/bin/
 
-make --makefile=Makefile --directory=${makefilepath} xcpackage
+make --makefile=Makefile --directory=${makefilepath} xcpackage FOLDER=
 
 if [ $? -eq 0 ]; then
     rm -r -f ${makefilepath}BluesPad.app

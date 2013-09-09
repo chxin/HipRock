@@ -10,7 +10,7 @@ xcclean:
 	$(xctoolpath)xctool -sdk iphonesimulator CODE_SIGN_IDENTITY="${identity}"  CONFIGURATION_BUILD_DIR=$(BluesBuild)  ONLY_ACTIVE_ARCH=NO -configuration AdHocDistribution -project $(BluesPath)Blues.xcodeproj -scheme BluesPad clean
 
 xcbuild:
-	$(xctoolpath)xctool  SDKROOT=iphoneos6.1 CONFIGURATION_BUILD_DIR=$(BluesBuild) ONLY_ACTIVE_ARCH=NO -configuration DailyBuild -project $(BluesPath)Blues.xcodeproj -scheme BluesPad build 
+	$(xctoolpath)xctool  SDKROOT=iphoneos6.1 CONFIGURATION_BUILD_DIR=$(BluesBuild) ONLY_ACTIVE_ARCH=NO -configuration ${BUILDTYPE} -project $(BluesPath)Blues.xcodeproj -scheme BluesPad build 
 
 
 xctest:
@@ -22,4 +22,4 @@ xctestcommand:
 
 
 xcpackage:
-	xcrun -sdk iphoneos PackageApplication  "BluesPad.app" -o "${webserverpath}BluesPad.ipa"
+	xcrun -sdk iphoneos PackageApplication  "BluesPad.app" -o "${webserverpath}${FOLDER}BluesPad.ipa"
