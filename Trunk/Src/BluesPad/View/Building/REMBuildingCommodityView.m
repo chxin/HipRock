@@ -114,7 +114,9 @@ typedef void(^SuccessCallback)(BOOL success);
     
     [self addSplitBar:ranking];
     
-    if(self.commodityInfo.targetValue!=nil &&self.commodityInfo.targetValue.dataValue!=nil)
+    if(self.commodityInfo.targetValue!=nil &&
+       self.commodityInfo.targetValue.dataValue!=nil &&
+       ![self.commodityInfo.targetValue.dataValue isEqual:[NSNull null]])
     {
     
         REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.targetValue withTitle:@"目标值"  andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin withLeftMargin:kBuildingCommodityDetailTextMargin  withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityDetailUomFontSize];
