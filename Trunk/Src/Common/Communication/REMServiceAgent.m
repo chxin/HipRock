@@ -64,7 +64,7 @@ static int requestTimeout = 1000; //(s)
     
     void (^onSuccess)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        NSLog(@"%@", operation.responseString);
+        //NSLog(@"%@", operation.responseString);
         
         //if there is error message
         if([operation.responseString hasPrefix:@"{\"error\":"] == YES){
@@ -157,7 +157,7 @@ static int requestTimeout = 1000; //(s)
         [REMServiceAgent initializeQueue];
     }
     
-    NSLog(@"request: %@",[request.URL description]);
+    //NSLog(@"request: %@",[request.URL description]);
     [queue addOperation:serviceOperation];
 }
 
