@@ -1350,8 +1350,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "76"
          endingLineNumber = "76"
-         landmarkName = "@implementation REMBuildingAverageChartHandler"
-         landmarkType = "3">
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1454,7 +1454,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "317"
          endingLineNumber = "317"
-         landmarkName = "-drawToolTip:"
+         landmarkName = "-intervalChanged:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1506,7 +1506,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "346"
          endingLineNumber = "346"
-         landmarkName = "-initializeAxises"
+         landmarkName = "-initializePlots"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1621,7 +1621,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "443"
          endingLineNumber = "443"
-         landmarkName = "-drawStandards"
+         landmarkName = "-getSeriesIndicatorWithCode:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1634,7 +1634,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "466"
          endingLineNumber = "466"
-         landmarkName = "-drawLabels"
+         landmarkName = "-getColorWithCode:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1647,7 +1647,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "467"
          endingLineNumber = "467"
-         landmarkName = "-drawLabels"
+         landmarkName = "-getColorWithCode:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1660,8 +1660,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "416"
          endingLineNumber = "416"
-         landmarkName = "@implementation REMBuildingAirQualityChartHandler"
-         landmarkType = "3">
+         landmarkName = "-getStandardLabelWithCode:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1751,7 +1751,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "577"
          endingLineNumber = "577"
-         landmarkName = "-getViewPointFromChartPoint::"
+         landmarkName = "-numberForPlot:field:recordIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1764,7 +1764,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "445"
          endingLineNumber = "445"
-         landmarkName = "-drawStandards"
+         landmarkName = "-getSeriesIndicatorWithCode:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
