@@ -238,7 +238,7 @@
     NSMutableArray *xLabelLocations = [[NSMutableArray alloc]init];
     NSMutableArray *xtickLocations = [[NSMutableArray alloc]init];
     
-    for (int i = 0; i < data.count; i++) {
+    for (int i = 0; i < data.count + 1; i++) {
         if (i % xStep == 0) [xLabelLocations addObject:[self makeXLabel:[NSString stringWithFormat:dateFormat, i + xLabelValOffset] location:i+xLabelOffset labelStyle:[self xAxisLabelStyle]]];
         [xtickLocations addObject:[NSNumber numberWithFloat:i+xGridlineOffset]];
     }

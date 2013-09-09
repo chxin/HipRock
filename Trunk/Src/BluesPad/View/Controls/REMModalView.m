@@ -59,6 +59,36 @@
         self.alpha = fadeIn ? 0 : 1;
         [rootView addSubview:self];
         
+//        CGContextRef context = UIGraphicsGetCurrentContext();
+//        [UIView beginAnimations:nil context:context];
+//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//        [UIView setAnimationDuration:1.0];
+//        
+//        [UIView setAnimationTransition: UIViewAnimationTransitionFlipFromRight forView:rootView cache:YES];
+//        
+//        rootView.frame = CGRectMake(0, 0, 76, 102);
+//        
+//        
+//        
+//        
+////        NSInteger purple = [[rootView subviews] indexOfObject:[parentView viewWithTag:1002]];
+////        
+////        NSInteger maroon = [[parentView subviews] indexOfObject:[parentView viewWithTag:1001]];
+////        
+////        [parentView exchangeSubviewAtIndex:purple withSubviewAtIndex:maroon];
+////        
+////        
+////        
+////        
+////        
+////        [UIView setAnimationDelegate:self];
+////        
+////        [UIView setAnimationDidStopSelector:@selector(animationFinished:)];
+//        
+//        
+//        
+//        [UIView commitAnimations];
+        
         if (fadeIn) {
             [UIView animateWithDuration:0.4f animations:^() {
                 self.alpha = 1;
