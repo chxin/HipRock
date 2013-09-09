@@ -114,6 +114,7 @@ typedef void(^SuccessCallback)(BOOL success);
 }
 
 -(void)prepareShare{
+    if (self.commodityViewArray == nil || self.commodityViewArray == NULL || self.commodityViewArray.count == 0) return;
     REMBuildingCommodityView *v = self.commodityViewArray[self.currentIndex];
     [v prepareShare];
 }
