@@ -545,7 +545,7 @@
     [self.layer insertSublayer:self.titleGradientLayer above:self.blurredImageView.layer];
 
     
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin, kBuildingTitleTop, self.frame.size.width, kBuildingTitleFontSize)];
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin, kBuildingTitleTop, self.frame.size.width, kBuildingTitleFontSize+5)];
     self.titleLabel.text=self.buildingInfo.building.name;
     self.titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);

@@ -47,6 +47,7 @@ typedef void(^SuccessCallback)(BOOL success);
 }
 
 - (NSArray *)retrieveButtons{
+    if(self.buildingInfo.commodityUsage==nil)return @[];
     NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:self.buildingInfo.commodityUsage.count];
     int i=0;
     for (;i<self.buildingInfo.commodityUsage.count;++i) {
@@ -146,13 +147,37 @@ typedef void(^SuccessCallback)(BOOL success);
     if ([model.commodityId isEqualToNumber:@(1)] == YES) {
         return @"Electricity";
     }
-    else if([model.commodityId isEqualToNumber:@(2)] == YES)
+    else if([model.commodityId isEqualToNumber:@(2)] == YES)//自来水
     {
         return @"Water";
     }
     else if([model.commodityId isEqualToNumber:@(12)] == YES)
     {
         return @"PM2.5";
+    }
+    else if([model.commodityId isEqualToNumber:@(4)] == YES){ //软水
+        return @"Water";
+    }
+    else if([model.commodityId isEqualToNumber:@(5)]==YES){//汽油
+        return @"Oil";
+    }
+    else if([model.commodityId isEqualToNumber:@(6)]==YES){ //低压蒸汽
+        return @"NaturalGas";
+    }
+    else if([model.commodityId isEqualToNumber:@(7)]==YES){ //柴油
+        return @"Oil";
+    }
+    else if([model.commodityId isEqualToNumber:@(8)]==YES){ //热量
+        return @"Electricity";
+    }
+    else if([model.commodityId isEqualToNumber:@(9)]==YES){ //冷量
+        return @"Oil";
+    }
+    else if([model.commodityId isEqualToNumber:@(10)]==YES){ //煤
+        return @"Coal";
+    }
+    else if([model.commodityId isEqualToNumber:@(11)]==YES){ //煤油
+        return @"Oil";
     }
     else if([model.commodityId isEqualToNumber:@(3)] == YES)
     {
@@ -203,7 +228,11 @@ typedef void(^SuccessCallback)(BOOL success);
 
 - (void)initCommodityView
 {
-    NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:self.buildingInfo.commodityUsage.count];
+    int count=0;
+    if (self.buildingInfo.commodityUsage!=nil) {
+        count=self.buildingInfo.commodityUsage.count;
+    }
+    NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:count];
     int i=0,height=800;
     for (;i<self.buildingInfo.commodityUsage.count;++i ) {
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
@@ -242,6 +271,7 @@ typedef void(^SuccessCallback)(BOOL success);
 }
 
 - (void)replaceImagesShowReal:(BOOL)showReal{
+    if(self.commodityViewArray.count<1)return ;
     REMBuildingCommodityView *view=   self.commodityViewArray[self.currentIndex];
     NSNumber *key;
     if(self.currentIndex>=self.buildingInfo.commodityUsage.count){
@@ -258,6 +288,7 @@ typedef void(^SuccessCallback)(BOOL success);
 
 - (void)requireChartDataWithBuildingId:(NSNumber *)buildingId complete:(void (^)(BOOL))callback
 {
+    if(self.commodityViewArray.count<1)return;
     int count = self.commodityViewArray.count;
     if(self.buildingInfo.airQuality!=nil) count--;
     self.successBlock=callback;

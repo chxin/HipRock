@@ -65,7 +65,7 @@
     
     CGSize expectedLabelSize = [self.titleLabel.text sizeWithFont:self.titleLabel.font];
     
-    [view setFrame:CGRectMake(expectedLabelSize.width+5+kBuildingCommodityDetailTextMargin, titleFrame.origin.y, 18, 14)];
+    [view setFrame:CGRectMake(expectedLabelSize.width+5+kBuildingCommodityDetailTextMargin, titleFrame.origin.y, 16, 16)];
     
     [self insertSubview:view aboveSubview:self.titleLabel];
 }

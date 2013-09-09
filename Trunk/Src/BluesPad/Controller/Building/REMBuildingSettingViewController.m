@@ -135,20 +135,7 @@
         }
     } else {
         if(buttonIndex==0){
-            REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
-            REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
-            
-            [currentUser kill];
-            [currentCustomer kill];
-            currentUser = nil;
-            currentCustomer = nil;
-            UINavigationController *nav=(UINavigationController *)self.parentViewController;
-            [nav dismissViewControllerAnimated:YES completion:^(void){
-                [self.navigationController popToRootViewControllerAnimated:YES];
-                [self.splashScreenController showLoginView:NO];
-            }];
-            
-            
+            [self logoutAndClearCache];
         }
     }
 }
@@ -159,9 +146,24 @@
     alert.cancelButtonIndex=1;
     
     [alert show];
+}
+
+-(void)logoutAndClearCache
+{
+    REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
+    REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
     
-    
-    
+    [currentUser kill];
+    [currentCustomer kill];
+    currentUser = nil;
+    currentCustomer = nil;
+    UINavigationController *nav=(UINavigationController *)self.parentViewController;
+    [nav dismissViewControllerAnimated:YES completion:^(void){
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.splashScreenController showLoginView:NO];
+        
+        [REMStorage clearSessionStorage];
+    }];
 }
 
 - (void) weiboSwitcherChanged:(UISwitch*)sender {

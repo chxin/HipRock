@@ -96,7 +96,9 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
     self.scrollView.contentSize = CGSizeMake(contentWidth, self.scrollView.bounds.size.height);
     self.scrollView.contentOffset = CGPointMake(viewOffset-kSubViewDistance/2, 0);
     
-    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(initializationCarousel) userInfo:nil repeats:NO];
+    if(self.showAnimation == YES){
+        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(initializationCarousel) userInfo:nil repeats:NO];
+    }
 }
 
 - (void)stylize

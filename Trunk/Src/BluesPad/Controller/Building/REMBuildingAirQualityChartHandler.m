@@ -85,6 +85,22 @@ static NSDictionary *codeNameMap;
 	// Do any additional setup after loading the view.
 }
 
+-(NSDictionary *)assembleRequestParametersWithBuildingId:(long long)buildingId WithCommodityId:(long long)commodityID WithMetadata:(REMAverageUsageDataModel *)averageData
+{
+    NSDictionary *parameter = @{@"buildingId":[NSNumber numberWithLongLong: buildingId]};
+    
+    return parameter;
+}
+
+- (void)loadDataSuccessWithData:(id)data
+{
+    self.airQualityData = [[REMAirQualityDataModel alloc] initWithDictionary:data];
+    
+    if(self.airQualityData!=nil){
+        [self loadChart];
+    }
+}
+/*
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(void))loadCompleted
 {
     NSDictionary *parameter = @{@"buildingId":[NSNumber numberWithLongLong: buildingId]};
@@ -110,7 +126,7 @@ static NSDictionary *codeNameMap;
         [self stopLoadingActivity];
     }];
 }
-
+*/
 -(void)loadChart
 {
     //convert data
