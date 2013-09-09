@@ -11,7 +11,8 @@ make --makefile=Makefile --directory=${makefilepath} xcbuild BUILDTYPE=InternalR
 
 if [ $? -eq 0 ]; then
    if [ -d "${webserverpath}IR/$1" ]; then
-      echo "yes";
+      echo "the same version folder exists"
+      exit
     else
       mkdir "${webserverpath}IR/$1"
     fi
@@ -21,9 +22,10 @@ if [ $? -eq 0 ]; then
     if [ $? -eq 0 ]; then
         rm -r -f ${makefilepath}BluesPad.app
         rm -r -f ${makefilepath}BluesPad.app.dSYM
-        cp ${webserverpath}BluesPad.plist ${webserverpath}IR/$1
+        cp ${webserverpath}BluesPad-t.plist ${webserverpath}IR/$1/BluesPad.plist
         cp ${webserverpath}AppLogo.png ${webserverpath}IR/$1
         cp ${webserverpath}AppLogo@2x.png ${webserverpath}IR/$1
+        ${nodepath}node ${makefilepath}updatePlist.js IR $1
         ${nodepath}node ${makefilepath}updateHtml.js IR $1
     fi
 else

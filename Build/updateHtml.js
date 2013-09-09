@@ -21,7 +21,7 @@
            var temple='<li class="li2">{0}:<a href="itms-services://?action=download-manifest&amp;url=http://10.177.206.47/{1}/{2}/BluesPad.plist"><span class="s1">BluesPad</span></a> Build time-{3}-</li>';
 	   var newStr=temple.replace('{0}',releaseVersion).replace('{2}',releaseVersion).replace('{1}',releaseType).replace('{3}',str);
            
-           newData=data.replace(ul,ul+newStr);
+           newData=data.replace(ul,ul+'\n'+newStr);
        }
        else{
            newData = data.replace(/Last\sUpdated\sDateTime\:\s-(.)*-/,'Last Updated DateTime: -'+str+'-');
