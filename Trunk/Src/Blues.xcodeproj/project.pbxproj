@@ -2764,6 +2764,8 @@
 					normal,
 					DEBUG,
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "DEBUG=1";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 			};
@@ -2961,6 +2963,8 @@
 					normal,
 					InternalRelease,
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = "InternalRelease=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				VALID_ARCHS = "armv7s armv7";
