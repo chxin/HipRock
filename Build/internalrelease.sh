@@ -1,0 +1,31 @@
+makefilepath=~/BuildFolder/SourceCode/Master/BluesGit/Build/
+srcpath=~/BuildFolder/SourceCode/Master/BluesGit
+nodepath=/usr/local/bin/
+webserverpath=~/WebServer/
+cd ${srcpath}
+git pull
+cd ${makefilepath}
+make --makefile=Makefile --directory=${makefilepath} xcclean
+make --makefile=Makefile --directory=${makefilepath} xcbuild BUILDTYPE=InternalRelease
+
+
+if [ $? -eq 0 ]; then
+   if [ -d "${webserverpath}IR/$1" ]; then
+      echo "yes";
+    else
+      mkdir "${webserverpath}IR/$1"
+    fi
+
+    make --makefile=Makefile --directory=${makefilepath} xcpackage FOLDER=IR/$1/
+
+    if [ $? -eq 0 ]; then
+        rm -r -f ${makefilepath}BluesPad.app
+        rm -r -f ${makefilepath}BluesPad.app.dSYM
+        cp ${webserverpath}BluesPad.plist ${webserverpath}IR/$1
+        cp ${webserverpath}AppLogo.png ${webserverpath}IR/$1
+        cp ${webserverpath}AppLogo@2x.png ${webserverpath}IR/$1
+        ${nodepath}node ${makefilepath}updateHtml.js IR $1
+    fi
+else
+    ${nodepath}node buildError.js
+fi
