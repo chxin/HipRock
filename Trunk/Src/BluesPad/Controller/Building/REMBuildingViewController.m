@@ -353,13 +353,9 @@
     //NSLog(@"cumulatex:%f",self.cumulateX);
     if(self.cumulateX!=0) return;
     
-    
     for (REMImageView *view in self.imageArray) {
         [view tapthis];
     }
-    
-    
-    
 }
 
 #pragma mark -
@@ -368,8 +364,6 @@
 {
     [self performSegueWithIdentifier:@"buildingToDashboardSegue" sender:self];
 }
-
-
 
 - (IBAction)shareButtonPressed:(id)sender {
     REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:[UIApplication sharedApplication].keyWindow];
@@ -384,8 +378,6 @@
 
 -(void)executeExport:(REMMaskManager *)masker{
     REMImageView *view = self.imageArray[self.currentIndex];
-    
-    
     
     [view exportImage:^(UIImage *image, NSString* text){
         [masker hideMask];

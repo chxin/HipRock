@@ -94,9 +94,6 @@
     [pmContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil complete:^(BOOL success){
         callback(success);
     }];
-    
-    
-    
 }
 
 
