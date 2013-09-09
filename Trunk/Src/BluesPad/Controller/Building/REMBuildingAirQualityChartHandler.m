@@ -64,6 +64,7 @@ static NSDictionary *codeNameMap;
         self.viewFrame = frame;
         self.scrollManager = [[REMChartHorizonalScrollDelegator alloc]init];
         codeNameMap = [[NSDictionary alloc] initWithObjects:@[kOutdoorLabelName,kMayAirLabelName,kHoneywellLabelName,kAmericanStandardLabelFormat,kChinaStandardLabelFormat] forKeys:@[kOutdoorCode,kMayAirCode,kHoneywellCode,kAmericanStandardCode,kChinaStandardCode]];
+        self.requestUrl=REMDSBuildingAirQuality;
         
     }
     return self;

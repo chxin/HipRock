@@ -43,7 +43,7 @@
     NSLog(@"delta x:%f",deltaX);
     self.deltaTime=diffTime;
     self.lastTime=event.timestamp;
-    //if(diffTime<0.1)return NO;
+    //if(diffTime<0.1&&deltaX<50)return NO;
     //self.lastPoint=point;
     return YES;
 }

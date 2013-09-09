@@ -13,9 +13,15 @@
 //const static NSString *SVC_BASE_HOST = @"223.4.20.20";
 //const static NSString *SVC_BASE_SCHEMA = @"http";
 //const static NSString *SVC_BASE_SUFFIX = @"/v1.3/MobileApiHost/";
+#ifdef DEBUG
 const static NSString *SVC_BASE_HOST = @"10.177.206.79";
 const static NSString *SVC_BASE_SCHEMA = @"http";
 const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
+#elif InternalRelease
+const static NSString *SVC_BASE_HOST = @"223.4.20.20";
+const static NSString *SVC_BASE_SCHEMA = @"http";
+const static NSString *SVC_BASE_SUFFIX = @"/v1.3/MobileApiHost/";
+#endif
 
 + (NSString *)absoluteUrl:(NSString *)relativeUrl
 {
