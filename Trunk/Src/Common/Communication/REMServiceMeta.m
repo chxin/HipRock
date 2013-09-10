@@ -18,7 +18,13 @@
 //const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
 //const static NSString *SVC_BASE_SUFFIX = @"/v1.3/MobileApiHost/";
 #ifdef DEBUG
-const static NSString *SVC_BASE_HOST = @"10.177.206.79";
+const static NSString *SVC_BASE_HOST = @"10.177.206.34";
+const static NSString *SVC_BASE_SCHEMA = @"http";
+const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
+#endif
+
+#ifdef DailyBuild
+const static NSString *SVC_BASE_HOST = @"10.177.206.34";
 const static NSString *SVC_BASE_SCHEMA = @"http";
 const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
 #endif

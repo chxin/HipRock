@@ -3087,6 +3087,7 @@
 		B41ECBA017B87D3A00758607 /* DailyBuild */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = DailyBuild;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				VALID_ARCHS = "armv7s armv7";
