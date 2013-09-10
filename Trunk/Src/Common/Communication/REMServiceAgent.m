@@ -26,7 +26,7 @@
 
 static NSOperationQueue *queue = nil;
 static int maxQueueLength = 5;
-static int requestTimeout = 1000; //(s)
+static int requestTimeout = 45; //(s)
 
 
 
