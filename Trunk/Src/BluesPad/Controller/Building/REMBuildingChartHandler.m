@@ -75,6 +75,10 @@ static CPTTextStyle *yAxisLabelStyle;
     
 }
 
+- (void)prepareShare{
+    
+}
+
 -(void)drawNoDataLabel
 {
     CGFloat fontSize = 36;
