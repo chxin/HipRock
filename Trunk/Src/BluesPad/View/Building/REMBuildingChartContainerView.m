@@ -51,12 +51,28 @@
     if(self.hasLoaded == NO){
         [self.chartContainer addSubview:self.controller.view];
 
+        //NSArray *array=@[buildingId,commodityId,averageData,callback];
+        //[self performSelector:@selector(loadChartData:) withObject:array afterDelay:0.1];
+        //[self performSelector:@selector(loadChartData:) withObject:array afterDelay:0.1];
+        
         [self.controller loadData:[buildingId longLongValue] :[commodityId longLongValue] :averageData :^(REMError *error){
             self.hasLoaded=YES;
             callback(YES);
         }];
             }
 }
+
+- (void)loadChartData:(NSArray *)array{
+    NSNumber *buildingId=array[0];
+    NSNumber *commodityId=array[1];
+    REMAverageUsageDataModel *averageData=array[2];
+    void(^callback)(BOOL)=array[3];
+    [self.controller loadData:[buildingId longLongValue] :[commodityId longLongValue] :averageData :^(REMError *error){
+        self.hasLoaded=YES;
+        callback(YES);
+    }];
+}
+
 /*
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
     BOOL inside=    [self pointInside:point withEvent:event];

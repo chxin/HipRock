@@ -192,7 +192,8 @@
     NSMutableArray* data = [[self.datasource objectAtIndex:currentSourceIndex] objectForKey:@"data"];
     if (data.count == 0) {
         myView.hostView.hidden = YES;
-        myView.noDataLabel.hidden = NO;
+        //myView.noDataLabel.hidden = NO;
+        [self drawNoDataLabel];
         return;
     }
     
