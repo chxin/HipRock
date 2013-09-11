@@ -123,6 +123,19 @@ typedef void(^SuccessCallback)(BOOL success);
 {
     self.buttonArray=[self retrieveButtons];
     
+    if (self.buttonArray.count==0) {
+        UILabel *label =[[ UILabel alloc]initWithFrame:CGRectMake(0, 225, 600, 25)];
+        label.text=NSLocalizedString(@"BuildingChart_DataError", @"");
+        label.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+        label.shadowOffset=CGSizeMake(1, 1);
+         
+        label.backgroundColor=[UIColor clearColor];
+        label.font = [UIFont fontWithName:@(kBuildingFontSC) size:25];
+        label.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.6];
+
+        [self addSubview:label];
+    }
+    
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.buttonArray.count*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), kBuildingCommodityButtonDimension)];
     
     for (int i=0; i<self.buttonArray.count; ++i) {
