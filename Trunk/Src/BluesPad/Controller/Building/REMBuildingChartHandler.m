@@ -60,7 +60,10 @@ static CPTTextStyle *yAxisLabelStyle;
     } error:^(NSError *error, id response) {
         [self stopLoadingActivity];
         loadCompleted(nil);
-        [self loadDataFailureWithError:nil withResponse:response];
+        REMError *remerror=(REMError *)error;
+        if(remerror!=nil){
+            [self loadDataFailureWithError:remerror withResponse:response];
+        }
     }];
 
 }
