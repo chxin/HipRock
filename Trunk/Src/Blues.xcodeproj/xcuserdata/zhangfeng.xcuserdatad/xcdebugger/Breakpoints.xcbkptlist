@@ -1488,11 +1488,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Common/Communication/REMServiceMeta.m"
-         timestampString = "400485724.034149"
+         timestampString = "400555123.33418"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "30"
-         endingLineNumber = "30"
+         startingLineNumber = "25"
+         endingLineNumber = "25"
          landmarkName = "@implementation REMServiceMeta"
          landmarkType = "3">
       </FileBreakpoint>
@@ -2125,6 +2125,19 @@
          startingLineNumber = "480"
          endingLineNumber = "480"
          landmarkName = "-getColorWithCode:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Common/Model/REMBusinessErrorInfo.m"
+         timestampString = "400556678.418957"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "15"
+         endingLineNumber = "15"
+         landmarkName = "-assembleCustomizedObjectByDictionary:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
