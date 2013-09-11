@@ -101,33 +101,7 @@ static NSDictionary *codeNameMap;
         [self loadChart];
     }
 }
-/*
-- (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(void))loadCompleted
-{
-    NSDictionary *parameter = @{@"buildingId":[NSNumber numberWithLongLong: buildingId]};
-    REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingAirQuality parameter:parameter];
-    store.isAccessLocal = YES;
-    store.isStoreLocal = YES;
-    store.maskContainer = nil;
-    
-    [self startLoadingActivity];
-    
-    [REMDataAccessor access:store success:^(id data) {
-        self.airQualityData = [[REMAirQualityDataModel alloc] initWithDictionary:data];
-        
-        loadCompleted();
-        
-        if(self.airQualityData!=nil){
-            [self loadChart];
-        }
-        
-        [self stopLoadingActivity];
-    } error:^(NSError *error, id response) {
-        //NSLog(@"air fail! %@",error);
-        [self stopLoadingActivity];
-    }];
-}
-*/
+
 -(void)loadChart
 {
     //convert data
@@ -214,12 +188,14 @@ static NSDictionary *codeNameMap;
         }
     }
     
+    //process global range
+    NSDate *tomorrow = [REMTimeHelper add:-4 onPart:REMDateTimePartHour ofDate: [REMTimeHelper tomorrow]];
+    self.globalRange.end = [tomorrow timeIntervalSince1970];
     //process visiable range
-    NSDate *visiableEndDate = [NSDate dateWithTimeIntervalSince1970:self.globalRange.end];
-    NSDate *visiableStartDate = [REMTimeHelper add:-14 onPart:REMDateTimePartDay ofDate:visiableEndDate];
+    NSDate *visiableStartDate = [REMTimeHelper add:-14 onPart:REMDateTimePartDay ofDate:tomorrow];
     
     self.visiableRange.start = [visiableStartDate timeIntervalSince1970];
-    self.visiableRange.end = [visiableEndDate timeIntervalSince1970];
+    self.visiableRange.end = self.globalRange.end;
     
     double enlargeDistance = [self.visiableRange distance] * 0.3;
     self.draggableRange = [[REMDataRange alloc] initWithStart:(self.globalRange.start - enlargeDistance) andEnd:(self.globalRange.end + enlargeDistance)];
@@ -234,6 +210,8 @@ static NSDictionary *codeNameMap;
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.hostView.hostedGraph.defaultPlotSpace;
     plotSpace.allowsUserInteraction = YES;
     plotSpace.delegate=self.scrollManager;
+    
+    long dayTicks = [[REMTimeHelper tomorrow] timeIntervalSince1970] - [[REMTimeHelper today] timeIntervalSince1970];
     
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.draggableRange.start) length:CPTDecimalFromDouble([self.draggableRange distance])];
@@ -264,7 +242,7 @@ static NSDictionary *codeNameMap;
     x.majorTickLineStyle = [self hiddenLineStyle];
     x.minorTickLineStyle = [self hiddenLineStyle];
     x.anchorPoint=CGPointZero;
-    x.majorGridLineStyle = [self gridLineStyle];
+    x.minorGridLineStyle = [self gridLineStyle];
     
     
     NSMutableSet *xlabels = [[NSMutableSet alloc] init];
@@ -274,19 +252,19 @@ static NSDictionary *codeNameMap;
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setDay:1];
-    while ([tickDate timeIntervalSince1970] <= self.globalRange.end) {
+    while ([tickDate timeIntervalSince1970] < self.globalRange.end) {
         tickDate = [calendar dateByAddingComponents:components toDate:tickDate options:0];
         
         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDateLabel:tickDate] textStyle:[self xAxisLabelStyle]];
-        label.tickLocation = CPTDecimalFromDouble([tickDate timeIntervalSince1970] + 12*60*60);
+        label.tickLocation = CPTDecimalFromDouble([tickDate timeIntervalSince1970]);
         label.offset = 5;
         
         [xlabels addObject:label];
-        [xlocations addObject:[NSNumber numberWithDouble:[tickDate timeIntervalSince1970]]];
+        [xlocations addObject:[NSNumber numberWithDouble:[tickDate timeIntervalSince1970] + 12*60*60]];
     }
     
     x.axisLabels = xlabels;
-    x.majorTickLocations = xlocations;
+    x.minorTickLocations = xlocations;
     
     //y axis
     CPTXYAxis* y= [[CPTXYAxis alloc] init];

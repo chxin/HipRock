@@ -365,6 +365,26 @@
     return [[REMTimeHelper gregorianCalendar] dateFromComponents:components];
 }
 
++(NSDate *)today
+{
+    NSDate *now = [NSDate date];
+    
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setYear:[REMTimeHelper getYear:now]];
+    [components setMonth:[REMTimeHelper getMonth:now]];
+    [components setDay:[REMTimeHelper getDay:now]];
+    [components setHour:0];
+    [components setMinute:0];
+    [components setSecond:0];
+    
+    return [[REMTimeHelper gregorianCalendar] dateFromComponents:components];
+}
+
++(NSDate *)tomorrow
+{
+    return [REMTimeHelper add:1 onPart:REMDateTimePartDay ofDate:[REMTimeHelper today]];
+}
+
 +(NSCalendar *)gregorianCalendar
 {
     return [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];

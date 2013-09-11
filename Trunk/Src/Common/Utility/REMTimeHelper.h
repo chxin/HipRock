@@ -23,11 +23,11 @@ typedef enum _REMDateTimePart : NSUInteger{
 } REMDateTimePart;
 
 
-#define TIMEINTERVAL_SECOND 1000;
-#define TIMEINTERVAL_MINUTE 1000 * 60;
-#define TIMEINTERVAL_HOUR = 1000 * 60 * 60;
-#define TIMEINTERVAL_DAY = 1000 * 60 * 60 * 24;
-#define TIMEINTERVAL_WEEK = 1000 * 60 * 60 *24 * 7;
+#define REMTIMEINTERVAL_SECOND 1000;
+#define REMTIMEINTERVAL_MINUTE 1000 * 60;
+#define REMTIMEINTERVAL_HOUR = 1000 * 60 * 60;
+#define REMTIMEINTERVAL_DAY = 1000 * 60 * 60 * 24;
+#define REMTIMEINTERVAL_WEEK = 1000 * 60 * 60 *24 * 7;
 
 @interface REMTimeHelper : NSObject
 
@@ -55,4 +55,6 @@ typedef enum _REMDateTimePart : NSUInteger{
 
 +(NSDate*)addMonthToDate:(NSDate*)date month:(NSInteger)month;
 +(NSDate*)dateFromYear:(int)year Month:(int)month Day:(int)day;
++(NSDate *)today;
++(NSDate *)tomorrow;
 @end
