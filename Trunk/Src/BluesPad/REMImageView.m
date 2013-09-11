@@ -145,7 +145,9 @@
     
     UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
     [shareButton setImage:[UIImage imageNamed:@"Share_normal.png"] forState:UIControlStateNormal];
-    
+    if (self.buildingInfo.commodityUsage.count == 0) {
+        shareButton.enabled = NO;
+    }
     shareButton.showsTouchWhenHighlighted=YES;
     shareButton.adjustsImageWhenHighlighted=YES;
     shareButton.titleLabel.text=@"分享";
