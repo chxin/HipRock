@@ -27,7 +27,7 @@
         
         self.quality = (REMEnergyDataQuality)[quality intValue];
         
-        self.dataValue = [value decimalValue];
+        self.dataValue = value;
     }
     
     return self;
@@ -43,7 +43,7 @@
     
     NSNumber *value = dictionary[@"DataValue"];
     
-    self.dataValue = [value decimalValue];
+    self.dataValue = value;
 }
 
 

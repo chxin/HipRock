@@ -39,7 +39,7 @@
         NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:amountOfPoint];
         for (int j = 0; j < amountOfPoint; j++) {
             REMEnergyData* pointData = [seriesData.energyData objectAtIndex:j];
-            [data addObject:@{@"y": [[NSDecimalNumber alloc]initWithDecimal:pointData.dataValue], @"x": pointData.localTime}];
+            [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime}];
         }
         NSDictionary* series = @{ @"identity":targetIdentity, @"color":[REMColor colorByIndex:0], @"data":data};
         [self.datasource addObject:series];
@@ -54,7 +54,7 @@
             NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:amountOfPoint];
             for (int j = 0; j < amountOfPoint; j++) {
                 REMEnergyData* pointData = [seriesData.energyData objectAtIndex:j];
-                [data addObject:@{@"y": [[NSDecimalNumber alloc]initWithDecimal:pointData.dataValue], @"x": pointData.localTime}];
+                [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime}];
             }
             NSDictionary* series = @{ @"identity":targetIdentity, @"color":[REMColor colorByIndex:i], @"data":data};
             [self.datasource addObject:series];

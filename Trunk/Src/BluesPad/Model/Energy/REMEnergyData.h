@@ -20,7 +20,7 @@ typedef enum _REMEnergyDataQuality:NSUInteger
 
 @property (nonatomic,strong) NSDate *localTime;
 
-@property (nonatomic) NSDecimal dataValue;
+@property (nonatomic,strong) NSNumber *dataValue;
 
 @property (nonatomic) REMEnergyDataQuality quality;
 

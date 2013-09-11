@@ -180,12 +180,12 @@ static NSDictionary *codeNameMap;
         self.visiableRange.start = MIN(self.visiableRange.start, [target.visiableTimeRange.startTime timeIntervalSince1970]);
         self.visiableRange.end = MAX(self.visiableRange.end, [target.visiableTimeRange.endTime timeIntervalSince1970]);
         
-        NSString* targetIdentity = [NSString stringWithFormat:@"air-%d-%d-%llu", i, target.type, target.targetId];
+        NSString* targetIdentity = [NSString stringWithFormat:@"air-%d-%d-%@", i, target.type, target.targetId];
         NSMutableArray *data = [[NSMutableArray alloc] init];
         
         for (int j=0;j<energyData.count;j++) {
             REMEnergyData *point = (REMEnergyData *)energyData[j];
-            NSDecimalNumber *value = [NSDecimalNumber decimalNumberWithDecimal: point.dataValue];
+            NSDecimalNumber *value = (NSDecimalNumber *)point.dataValue;
             
             [data addObject:@{@"y": value, @"x": point.localTime}];
             

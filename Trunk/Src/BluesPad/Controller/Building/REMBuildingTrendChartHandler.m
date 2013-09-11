@@ -405,7 +405,7 @@
         REMTargetEnergyData* targetEData = dataItem.timeRangeData.targetEnergyData[0];
         for (int i = 0; i < targetEData.energyData.count; i++) {
             REMEnergyData* pointData = targetEData.energyData[i];
-            [data addObject:@{@"y": [[NSDecimalNumber alloc]initWithDecimal: pointData.dataValue], @"x": pointData.localTime  }];
+            [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime  }];
         }
         [series setValue:data forKey:@"data"];
     }
