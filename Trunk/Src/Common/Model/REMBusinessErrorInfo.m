@@ -12,6 +12,8 @@
 
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
+    dictionary = dictionary[@"error"];
+    
     self.code = dictionary[@"Code"];
     
     NSMutableArray *messages = [[NSMutableArray alloc] init];
