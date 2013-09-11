@@ -155,7 +155,12 @@
         
         [self performSegueWithIdentifier:@"splashToBuildingSegue" sender:self];
     } error:^(NSError *error, id response) {
-        [REMAlertHelper alert:@"building数据加载错误"];
+        if(error.code == -1001){
+            [REMAlertHelper alert:@"数据加载超时"];
+        }
+        else{
+            [REMAlertHelper alert:@"数据加载错误"];
+        }
     }];
 }
 

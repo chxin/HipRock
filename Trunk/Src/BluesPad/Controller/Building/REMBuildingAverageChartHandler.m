@@ -24,7 +24,7 @@
 @property (nonatomic) long long commodityId;
 @property (nonatomic,strong) REMBuildingAverageChart *chartView;
 @property (nonatomic,strong) NSArray *chartData;
-@property (nonatomic,strong) REMAverageUsageDataModel *averageData;
+@property (nonatomic,strong) REMEnergyViewData *averageData;
 
 @property (nonatomic,strong) REMDataRange *dataValueRange;
 @property (nonatomic,strong) REMDataRange *visiableRange;
@@ -127,7 +127,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 
 - (void)loadDataSuccessWithData:(id)data
 {
-    self.averageData = [[REMAverageUsageDataModel alloc] initWithDictionary:data];
+    self.averageData = [[REMEnergyViewData alloc] initWithDictionary:data];
     
     if(self.averageData!=nil){
         [self loadChart];
@@ -279,10 +279,25 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 
 - (void)initializePlots
 {
+    NSString *columnIdentity, *lineIdentity;
+    for(NSDictionary *series in self.chartData){
+        NSString *identity = series[@"identity"];
+        REMEnergyTargetType targetType = [[identity componentsSeparatedByString:@"-"][1] intValue];
+        
+        if(targetType == REMEnergyTargetCalcValue){
+            columnIdentity = identity;
+            continue;
+        }
+        else{
+            lineIdentity = identity;
+            continue;
+        }
+    }
+    
     //unit - column
     CPTBarPlot *column=[[CPTBarPlot alloc] initWithFrame:self.chartView.graph.bounds];
     
-    column.identifier=[self.chartData[0] objectForKey:@"identity"];
+    column.identifier=columnIdentity;
     
     column.barBasesVary=NO;
     column.barWidthsAreInViewCoordinates=YES;
@@ -320,7 +335,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     
     CPTScatterPlot *line = [[CPTScatterPlot alloc] initWithFrame:self.chartView.graph.bounds];
     line.dataSource = self;
-    line.identifier = [self.chartData[1] objectForKey:@"identity"];
+    line.identifier = lineIdentity;
     line.plotSymbol = symbol;
     
     line.dataLineStyle = lineStyle;
@@ -330,12 +345,12 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 
 - (BOOL)convertData
 {
-    if(self.averageData.unitData.targetEnergyData.count<1 && self.averageData.benchmarkData.targetEnergyData.count<1)
+    if(self.averageData.targetEnergyData.count<=0)
     {
         return NO;
     }
     
-    NSArray *energySeries = @[self.averageData.unitData.targetEnergyData[0],self.averageData.benchmarkData.targetEnergyData[0]];
+    NSArray *energySeries = self.averageData.targetEnergyData;
     NSMutableArray *convertedData = [[NSMutableArray alloc] initWithCapacity:2];
     
     self.globalRange = [[REMDataRange alloc] initWithConstants];

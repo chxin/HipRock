@@ -26,7 +26,18 @@
 
 static NSOperationQueue *queue = nil;
 static int maxQueueLength = 5;
+
+#ifdef DEBUG
+static int requestTimeout = 1000; //(s)
+#endif
+
+#ifdef DailyBuild
 static int requestTimeout = 45; //(s)
+#endif
+
+#ifdef InternalRelease
+static int requestTimeout = 45; //(s)
+#endif
 
 
 
