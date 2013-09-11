@@ -10,6 +10,7 @@
 #import "REMBuildingTrendChart.h"
 #import "REMWidgetAxisHelper.h"
 #import "REMBuildingTimeRangeDataModel.h"
+#import "REMTimeHelper.h"
 
 @interface REMBuildingTrendChartHandler () {
     int currentSourceIndex; // Indicate that which button was pressed down.
@@ -240,7 +241,21 @@
     NSMutableArray *xLabelLocations = [[NSMutableArray alloc]init];
     NSMutableArray *xtickLocations = [[NSMutableArray alloc]init];
     
-    for (int i = 0; i < data.count + 1; i++) {
+    int xCount = 0;
+    if (currentSourceIndex == 0) {
+        xCount = [REMTimeHelper getHour:[NSDate date]];
+    } else if (currentSourceIndex == 1) {
+        xCount = 24;
+    } else if (currentSourceIndex == 2) {
+        xCount = [REMTimeHelper getDay:[NSDate date]];
+    } else if (currentSourceIndex == 3) {
+        xCount = [REMTimeHelper getDaysOfDate:[REMTimeHelper addMonthToDate:[NSDate date] month:-1]];
+    } else if (currentSourceIndex == 4) {
+        xCount = [REMTimeHelper getMonth:[NSDate date]];
+    } else {
+        xCount = 12;
+    }
+    for (int i = 0; i < xCount + 1; i++) {
         if (i % xStep == 0) [xLabelLocations addObject:[self makeXLabel:[NSString stringWithFormat:dateFormat, i + xLabelValOffset] location:i+xLabelOffset labelStyle:[self xAxisLabelStyle]]];
         [xtickLocations addObject:[NSNumber numberWithFloat:i+xGridlineOffset]];
     }
@@ -292,7 +307,7 @@
     CPTXYAxis* y = axisSet.yAxis;
     CPTXYPlotSpace * plotSpace = (CPTXYPlotSpace *)self.graph.defaultPlotSpace;
     
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(-0.5) length:CPTDecimalFromDouble(data.count)];
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(-0.5) length:CPTDecimalFromInt(xCount)];
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(minY) length:CPTDecimalFromFloat(yRangeLength)];
     x.axisLabels = [NSSet setWithArray:xLabelLocations];
     x.majorTickLocations=[NSSet setWithArray:xtickLocations];
@@ -516,10 +531,16 @@
     NSMutableArray* data = [datasource objectForKey:@"data"];
     
     NSDictionary *item=data[idx];
+    
     if (fieldEnum == CPTPieChartFieldSliceWidth) {
-//        NSDate* date = [item objectForKey:@"x"];
+        NSDate* date = [item objectForKey:@"x"];
+        
+        NSInteger i = 0;
+        if (currentSourceIndex < 2) i = [REMTimeHelper getHour:date];
+        else if (currentSourceIndex < 4) i = [REMTimeHelper getDay:date];
+        else if (currentSourceIndex < 6) i = [REMTimeHelper getMonth:date];
 //        return [NSNumber numberWithDouble:[date timeIntervalSince1970]];
-        return [NSNumber numberWithInteger: idx];
+        return [NSNumber numberWithInteger: i - 1];
     }
     else
     {

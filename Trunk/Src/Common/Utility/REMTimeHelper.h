@@ -51,4 +51,8 @@ typedef enum _REMDateTimePart : NSUInteger{
 +(NSNumber *)getMonthTicksFromDate:(NSDate *)date;
 +(NSDate *)getDateFromMonthTicks:(NSNumber *)monthTicks;
 
++(NSUInteger)getDaysOfDate: (NSDate*)date;
+
++(NSDate*)addMonthToDate:(NSDate*)date month:(NSInteger)month;
++(NSDate*)dateFromYear:(int)year Month:(int)month Day:(int)day;
 @end

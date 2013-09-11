@@ -293,6 +293,26 @@
     return [[REMTimeRange alloc]initWithStartTime:start EndTime:end];
 }
 
++(NSDate*)dateFromYear:(int)year Month:(int)month Day:(int)day
+{
+    NSString *date = [NSString stringWithFormat:@"%4d-%02d-%02d", year, month, day];
+    NSDateFormatter *formater = [[NSDateFormatter alloc] init];
+    [formater setDateFormat:@"yyyy-MM-dd"];
+    return [formater dateFromString:date];
+}
+
+// returns days amount of a date object
++(NSUInteger)getDaysOfDate: (NSDate*)date {
+    return [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date].length;
+}
+
++(NSDate*)addMonthToDate:(NSDate*)date month:(NSInteger)month {
+    NSDateComponents* dateComponents = [[NSDateComponents alloc]init];
+    [dateComponents setMonth:month];
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    return [calendar dateByAddingComponents:dateComponents toDate:[NSDate date] options:0];
+}
+
 + (NSString *)formatTimeFullHour:(NSDate *)date
 {
     NSDateFormatter *f = [[NSDateFormatter alloc]init];
