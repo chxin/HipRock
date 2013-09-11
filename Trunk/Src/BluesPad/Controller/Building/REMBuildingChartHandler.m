@@ -8,6 +8,7 @@
 
 #import "REMBuildingChartHandler.h"
 
+
 @interface REMBuildingChartHandler ()
 
 @property (nonatomic,strong) UIActivityIndicatorView *activityIndicatorView;
@@ -16,7 +17,6 @@
 
 @implementation REMBuildingChartHandler
 
-static NSString *kNoDataText = @"暂无数据";
 
 static CPTLineStyle *axisLineStyle;
 static CPTLineStyle *gridLineStyle;
@@ -84,10 +84,12 @@ static CPTTextStyle *yAxisLabelStyle;
 
 -(void)drawNoDataLabel
 {
+    NSString *text = NSLocalizedString(@"BuildingChart_NoData", @"");
+    
     CGFloat fontSize = 36;
-    CGSize labelSize = [kNoDataText sizeWithFont:[UIFont systemFontOfSize:fontSize]];
+    CGSize labelSize = [text sizeWithFont:[UIFont systemFontOfSize:fontSize]];
     UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];
-    noDataLabel.text = (NSString *)kNoDataText;
+    noDataLabel.text = text;
     noDataLabel.textColor = [UIColor whiteColor];
     noDataLabel.textAlignment = NSTextAlignmentLeft;
     noDataLabel.backgroundColor = [UIColor clearColor];
