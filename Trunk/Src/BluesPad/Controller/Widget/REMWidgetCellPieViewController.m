@@ -225,7 +225,7 @@
         if(item.energyData!=nil && item.energyData.count==1)
         {
             REMEnergyData *dataItem= item.energyData[0];
-            return [NSDecimalNumber decimalNumberWithDecimal: dataItem.dataValue];
+            return dataItem.dataValue;
         }
         else
         {

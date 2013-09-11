@@ -29,12 +29,12 @@
     for (int i = 0; i < amountOfSeries; i++) {
         REMTargetEnergyData* seriesData = [self.data.targetEnergyData objectAtIndex:i];
         
-        NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%llu", i, seriesData.target.type, seriesData.target.targetId];
+        NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%@", i, seriesData.target.type, seriesData.target.targetId];
         amountOfPoint = [seriesData.energyData count];
         NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:amountOfPoint];
         for (int j = 0; j < amountOfPoint; j++) {
             REMEnergyData* pointData = [seriesData.energyData objectAtIndex:j];
-            [data addObject:@{@"y": [[NSDecimalNumber alloc]initWithDecimal:pointData.dataValue], @"x": pointData.localTime}];
+            [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime}];
         }
         NSDictionary* series = @{ @"identity":targetIdentity, @"color":[REMColor colorByIndex:i], @"data":data};
         [self.datasource addObject:series];

@@ -206,7 +206,9 @@
     double maxY = INT64_MIN;    // Max y value of display points
     double minY = 0;    // Min y value of display points
     for (int j = 0; j < data.count; j++) {
-        float y = [[data[j] objectForKey:@"y" ] floatValue];
+        NSNumber* yValObj = [data[j] objectForKey:@"y" ];
+        if ([yValObj isEqual:[NSNull null]]) continue;
+        float y = [yValObj floatValue];
         maxY = MAX(maxY, y);
 //        minY = MIN(minY, y);
     }
@@ -420,7 +422,7 @@
         REMTargetEnergyData* targetEData = dataItem.timeRangeData.targetEnergyData[0];
         for (int i = 0; i < targetEData.energyData.count; i++) {
             REMEnergyData* pointData = targetEData.energyData[i];
-            [data addObject:@{@"y": [[NSDecimalNumber alloc]initWithDecimal: pointData.dataValue], @"x": pointData.localTime  }];
+            [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime  }];
         }
         [series setValue:data forKey:@"data"];
     }
@@ -432,6 +434,16 @@
 
 - (void)loadDataFailureWithError:(REMError *)error withResponse:(id)response{
     
+    if (self.datasource.count != 6) {
+        for (int i = 0; i < 6; i++) {
+            NSMutableDictionary* series = [[NSMutableDictionary alloc] init];
+            [series setValue:[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1] forKey:@"color"];
+            [self.datasource addObject:series];
+        }
+    }
+    REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
+    [myView.thisMonthButton setOn:YES];
+    [self intervalChanged:myView.thisMonthButton];
 }
 /*
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(void))loadCompleted

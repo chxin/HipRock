@@ -44,6 +44,13 @@ const NSInteger kWeiboMaxLength = 140;
     UILabel* charactorLabel;
 }
 
+- (void)close:(BOOL)fadeOut {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [center removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [super close:fadeOut];
+}
+
 - (REMModalView*)initWithSuperView:(UIView*)superView text:(NSString*)text image:(UIImage*)image {
     self = [super initWithSuperView:superView];
     self.weiboText = text;
@@ -174,9 +181,6 @@ const NSInteger kWeiboMaxLength = 140;
 }
 
 -(void)cancelClicked:(id)sender {
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [center removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [self close:YES];
 }
 

@@ -337,7 +337,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
         REMEnergyTargetModel *target = targetEnergyData.target;
         NSArray *energyData = targetEnergyData.energyData;
         
-        NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%llu", index, target.type, target.targetId];
+        NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%@", index, target.type, target.targetId];
         NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:energyData.count];
         
         self.visiableRange.start = MIN(self.visiableRange.start, [[REMTimeHelper getMonthTicksFromDate:target.visiableTimeRange.startTime] doubleValue]);
@@ -349,7 +349,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
             
             NSNumber *monthTicks = [REMTimeHelper getMonthTicksFromDate:point.localTime];
             
-            NSDecimalNumber *value = [[NSDecimalNumber alloc] initWithDecimal:point.dataValue];
+            NSDecimalNumber *value = (NSDecimalNumber *)point.dataValue;
             [data addObject:@{@"y": value, @"x": monthTicks}];
             
             self.globalRange.start = MIN(self.globalRange.start, [[REMTimeHelper getMonthTicksFromDate:point.localTime] doubleValue]);

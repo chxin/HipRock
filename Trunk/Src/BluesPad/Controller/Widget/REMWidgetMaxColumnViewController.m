@@ -43,19 +43,19 @@
         REMEnergyTargetModel *target = targetEnergyData.target;
         NSArray *energyData = targetEnergyData.energyData;
         
-        NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%llu", i, target.type, target.targetId];
+        NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%@", i, target.type, target.targetId];
         
         NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:energyData.count];
         for (int j = 0; j < energyData.count; j++)
         {
             REMEnergyData *point = (REMEnergyData *)energyData[j];
-            [data addObject:@{@"y": [[NSDecimalNumber alloc] initWithDecimal:point.dataValue], @"x": point.localTime}];
+            [data addObject:@{@"y": point.dataValue, @"x": point.localTime}];
             
             if(j>self.maxDateIndex)
                 self.maxDateIndex = j;
             
-            if([[[NSDecimalNumber alloc] initWithDecimal:point.dataValue] doubleValue] > self.maxEnergyValue)
-                self.maxEnergyValue = [[[NSDecimalNumber alloc] initWithDecimal:point.dataValue] doubleValue];
+            if([point.dataValue doubleValue] > self.maxEnergyValue)
+                self.maxEnergyValue = [point.dataValue doubleValue];
         }
         NSDictionary* series = @{ @"identity":targetIdentity, @"color":[REMColor colorByIndex:i], @"data":data};
         

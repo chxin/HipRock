@@ -229,7 +229,7 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MM-dd HH:mm"];
     //NSString* xLabelOfPoint = [formatter stringFromDate: dataItem.localTime] ;
-    NSDecimalNumber* yVal = [[NSDecimalNumber alloc]initWithDecimal:dataItem.dataValue];
+    NSDecimalNumber* yVal = (NSDecimalNumber*)dataItem.dataValue;
     REMWidgetMaxViewController* m = self.maxViewController;
     [m.tooltipLabel setText:[NSString stringWithFormat:@"Value:%@", yVal]];
 }
@@ -263,7 +263,7 @@
     if (fieldEnum == CPTPieChartFieldSliceWidth) {
         REMTargetEnergyData *item=self.data.targetEnergyData[idx];
         REMEnergyData *dataItem= item.energyData[0];
-        return [NSDecimalNumber decimalNumberWithDecimal: dataItem.dataValue];
+        return dataItem.dataValue;
         //NSNumber *value= [item objectForKey:@"value"];
         
         //return value;
