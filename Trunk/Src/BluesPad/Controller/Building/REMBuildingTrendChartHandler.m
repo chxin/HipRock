@@ -193,6 +193,7 @@
     if (data.count == 0) {
         myView.hostView.hidden = YES;
         myView.noDataLabel.hidden = NO;
+        //[self drawNoDataLabel];
         return;
     }
     

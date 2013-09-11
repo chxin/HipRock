@@ -121,14 +121,15 @@ typedef void(^SuccessCallback)(BOOL success);
     
         REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.targetValue withTitle:@"目标值"  andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin withLeftMargin:kBuildingCommodityDetailTextMargin  withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityDetailUomFontSize];
         [self addSplitBar:target];
-        
-        if(self.commodityInfo.isTargetAchieved==YES){
-            [target setTitleIcon:[UIImage imageNamed:@"OverTarget"]];
+        if (self.commodityInfo.commodityUsage!=nil && self.commodityInfo.commodityUsage.dataValue!=nil &&
+            ![self.commodityInfo.commodityUsage.dataValue isEqual:[NSNull null]]) {
+            if(self.commodityInfo.isTargetAchieved==YES){
+                [target setTitleIcon:[UIImage imageNamed:@"OverTarget"]];
+            }
+            else{
+                [target setTitleIcon:[UIImage imageNamed:@"NotOverTarget"]];
+            }
         }
-        else{
-            [target setTitleIcon:[UIImage imageNamed:@"NotOverTarget"]];
-        }
-        
         
         [self addSubview:target];
     }
