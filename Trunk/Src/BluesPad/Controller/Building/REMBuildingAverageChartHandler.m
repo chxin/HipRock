@@ -349,14 +349,16 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
             
             NSNumber *monthTicks = [REMTimeHelper getMonthTicksFromDate:point.localTime];
             
-            NSDecimalNumber *value = (NSDecimalNumber *)point.dataValue;
-            [data addObject:@{@"y": value, @"x": monthTicks}];
+            if([point.dataValue isEqual:[NSNull null]]) //if point value is null, do not add into series
+                continue;
+            
+            [data addObject:@{@"y": point.dataValue, @"x": monthTicks}];
             
             self.globalRange.start = MIN(self.globalRange.start, [[REMTimeHelper getMonthTicksFromDate:point.localTime] doubleValue]);
             self.globalRange.end = MAX(self.globalRange.end, [[REMTimeHelper getMonthTicksFromDate:point.localTime] doubleValue]);
             
-            self.dataValueRange.start = MIN(self.dataValueRange.start, [value doubleValue]);
-            self.dataValueRange.end = MAX(self.dataValueRange.end, [value doubleValue]);
+            self.dataValueRange.start = MIN(self.dataValueRange.start, [point.dataValue doubleValue]);
+            self.dataValueRange.end = MAX(self.dataValueRange.end, [point.dataValue doubleValue]);
         }
         NSDictionary* series = @{ @"identity":targetIdentity, @"data":data};
         

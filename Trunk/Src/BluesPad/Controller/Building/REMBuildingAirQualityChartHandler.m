@@ -159,15 +159,17 @@ static NSDictionary *codeNameMap;
         
         for (int j=0;j<energyData.count;j++) {
             REMEnergyData *point = (REMEnergyData *)energyData[j];
-            NSDecimalNumber *value = (NSDecimalNumber *)point.dataValue;
             
-            [data addObject:@{@"y": value, @"x": point.localTime}];
+            if([point.dataValue isEqual:[NSNull null]])
+                continue;
+            
+            [data addObject:@{@"y": point.dataValue, @"x": point.localTime}];
             
             self.globalRange.start = MIN(self.globalRange.start, [point.localTime timeIntervalSince1970]);
             self.globalRange.end = MAX(self.globalRange.end, [point.localTime timeIntervalSince1970]);
             
-            self.dataValueRange.start = MIN(self.dataValueRange.start, [value doubleValue]);
-            self.dataValueRange.end = MAX(self.dataValueRange.end, [value doubleValue]);
+            self.dataValueRange.start = MIN(self.dataValueRange.start, [point.dataValue doubleValue]);
+            self.dataValueRange.end = MAX(self.dataValueRange.end, [point.dataValue doubleValue]);
         }
         
         NSDictionary* series = @{@"code":target.code,@"title":target.name, @"identity":targetIdentity, @"data":data};

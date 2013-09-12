@@ -280,9 +280,9 @@ typedef void(^SuccessCallback)(BOOL success);
     }
     
    
-    [trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil complete:^(BOOL success){
-        [self sucessRequest];    
-    }];
+//    [trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil complete:^(BOOL success){
+//        [self sucessRequest];    
+//    }];
 }
 /*
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
