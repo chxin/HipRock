@@ -338,6 +338,9 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
         REMEnergyTargetModel *target = targetEnergyData.target;
         NSArray *energyData = targetEnergyData.energyData;
         
+        if(energyData == nil || [energyData isEqual:[NSNull null]] || energyData.count<=0)
+            continue;
+        
         NSMutableArray* data = [[NSMutableArray alloc]init];
         
         for(REMEnergyData *point in energyData){
