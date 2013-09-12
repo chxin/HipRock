@@ -96,9 +96,9 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
     self.scrollView.contentSize = CGSizeMake(contentWidth, self.scrollView.bounds.size.height);
     self.scrollView.contentOffset = CGPointMake(viewOffset-kSubViewDistance/2, 0);
     
-    if(self.showAnimation == YES){
-        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(initializationCarousel) userInfo:nil repeats:NO];
-    }
+//    if(self.showAnimation == YES){
+//        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(initializationCarousel) userInfo:nil repeats:NO];
+//    }
 }
 
 - (void)stylize
@@ -132,7 +132,7 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 {
     CGRect rect = CGRectMake(0, 0, kSubViewWidth+kSubViewDistance, kSubViewHeight);
     
-    [UIView animateWithDuration:1.5 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         [self.scrollView scrollRectToVisible:rect animated:NO];
     } completion:nil];
 }

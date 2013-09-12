@@ -21,5 +21,6 @@
 - (IBAction)pageChanged:(id)sender;
 - (IBAction)jumpLoginButtonTouchDown:(id)sender;
 -(void)showLoginPage;
+- (void)initializationCarousel;
 
 @end
