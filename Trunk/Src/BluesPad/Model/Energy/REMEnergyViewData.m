@@ -18,15 +18,17 @@
         self.targetGlobalData = [[REMTargetEnergyData alloc]initWithDictionary:globalDataDict];
     }
     
-    NSArray *targetArray= dictionary[@"TargetEnergyData"];
-    
-    NSMutableArray *targetMArray = [[NSMutableArray alloc]initWithCapacity:targetArray.count];
-    
-    for(NSDictionary *targetDic in targetArray)
-    {
-        [targetMArray addObject:[[REMTargetEnergyData alloc]initWithDictionary:targetDic]];
+    if([dictionary[@"TargetEnergyData"] isEqual:[NSNull null]] == NO){
+        NSArray *targetArray= dictionary[@"TargetEnergyData"];
+        
+        NSMutableArray *targetMArray = [[NSMutableArray alloc]initWithCapacity:targetArray.count];
+        
+        for(NSDictionary *targetDic in targetArray)
+        {
+            [targetMArray addObject:[[REMTargetEnergyData alloc]initWithDictionary:targetDic]];
+        }
+        self.targetEnergyData=targetMArray;
     }
-    self.targetEnergyData=targetMArray;
     
     
     NSArray *calendarArray= dictionary[@"Calendars"];
