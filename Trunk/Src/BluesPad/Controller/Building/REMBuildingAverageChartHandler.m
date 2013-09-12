@@ -180,9 +180,9 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     NSMutableSet *xMajorLocations = [[NSMutableSet alloc] init];
     NSMutableSet *xMinorLocations = [[NSMutableSet alloc] init];
     
-    double tickMonth = self.globalRange.start;
+    double tickMonth = self.globalRange.start+0.5;
     
-    while (tickMonth <= self.globalRange.end) {
+    while (tickMonth <= self.globalRange.end-0.5) {
         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDateLabel:tickMonth] textStyle:[self xAxisLabelStyle]];
         label.tickLocation = CPTDecimalFromDouble(tickMonth);
         label.offset = 5;
@@ -365,7 +365,9 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
         [convertedData addObject:series];
         index ++;
     }
-
+    
+    self.globalRange.start -= 0.5;
+    self.globalRange.end += 0.5;
     self.visiableRange.end = self.globalRange.end;
     
     double enlargeDistance = [self.visiableRange distance] * 0.3;
