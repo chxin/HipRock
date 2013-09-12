@@ -11,8 +11,6 @@
 
 @implementation REMBuildingTrendChart
 
-static NSString *kNoDataText = @"暂无数据";
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -39,11 +37,11 @@ static NSString *kNoDataText = @"暂无数据";
         
         [self addSubview:self.hostView];
         
-        
+        NSString *noDataText = NSLocalizedString(@"BuildingChart_NoData", @"");
         CGFloat fontSize = 36;
-        CGSize labelSize = [kNoDataText sizeWithFont:[UIFont systemFontOfSize:fontSize]];
+        CGSize labelSize = [noDataText sizeWithFont:[UIFont systemFontOfSize:fontSize]];
         self.noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];
-        self.noDataLabel.text = (NSString *)kNoDataText;
+        self.noDataLabel.text = (NSString *)noDataText;
         self.noDataLabel.textColor = [UIColor whiteColor];
         self.noDataLabel.textAlignment = NSTextAlignmentLeft;
         self.noDataLabel.backgroundColor = [UIColor clearColor];

@@ -416,18 +416,6 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     [self.view addSubview:averageDataIndicator];
 }
 
--(void)drawLabelWithText:(NSString *)text
-{
-    CGFloat fontSize = 36;
-    CGSize labelSize = [text sizeWithFont:[UIFont systemFontOfSize:fontSize]];
-    UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];
-    noDataLabel.text = text;
-    noDataLabel.textColor = [UIColor whiteColor];
-    noDataLabel.textAlignment = NSTextAlignmentLeft;
-    noDataLabel.backgroundColor = [UIColor clearColor];
-    
-    [self.view addSubview:noDataLabel];
-}
 
 - (BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(UIEvent *)event atPoint:(CGPoint)point
 {

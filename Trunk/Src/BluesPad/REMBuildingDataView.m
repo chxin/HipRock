@@ -407,7 +407,7 @@ typedef void(^SuccessCallback)(BOOL success);
         NSString* uomName = model.commodityUsage.uom.comment;
         NSString* val = [model.commodityUsage.dataValue isEqual:[NSNull null]] ? nil : model.commodityUsage.dataValue.stringValue;
         if (val == nil || commodityName == nil || uomName == nil) {
-            stringFormat = @"暂无数据。";
+            stringFormat = NSLocalizedString(@"BuildingChart_NoData", @"");
         } else {
             stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
             stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#UomName#" withString:uomName];
@@ -424,7 +424,7 @@ typedef void(^SuccessCallback)(BOOL success);
         NSString* mayairVal = [model.mayair.dataValue isEqual:[NSNull null]] ? nil : model.mayair.dataValue.stringValue;
         NSString* mayairUom = model.mayair.uom.comment;
         if (commodityName == nil || outdoorUom == nil || outdoorVal == nil || honeywellUom == nil || honeywellVal == nil || mayairUom == nil || mayairVal == nil) {
-            stringFormat = @"暂无数据。";
+            stringFormat = NSLocalizedString(@"BuildingChart_NoData", @"");
         } else {
             stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
             stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorVal#" withString:outdoorVal];

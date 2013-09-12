@@ -82,10 +82,9 @@ static CPTTextStyle *yAxisLabelStyle;
     
 }
 
--(void)drawNoDataLabel
+
+-(void)drawLabelWithText:(NSString *)text
 {
-    NSString *text = NSLocalizedString(@"BuildingChart_NoData", @"");
-    
     CGFloat fontSize = 36;
     CGSize labelSize = [text sizeWithFont:[UIFont systemFontOfSize:fontSize]];
     UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];

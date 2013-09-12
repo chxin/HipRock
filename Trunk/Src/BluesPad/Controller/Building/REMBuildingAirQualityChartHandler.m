@@ -50,7 +50,6 @@ static NSString *kMayAirLabelName = @"室内新风PM2.5(美埃)";
 static NSString *kAmericanStandardLabelFormat = @"%d %@(PM2.5美国标准)";
 static NSString *kChinaStandardLabelFormat = @"%d %@(PM2.5中国标准)";
 
-static NSString *kNoDataText = @"暂无数据";
 
 static NSDictionary *codeNameMap;
 
@@ -109,7 +108,7 @@ static NSDictionary *codeNameMap;
     
     if(hasData == NO || self.chartData == nil || self.chartData.count<=0)
     {
-        [self drawNoDataLabel];
+        [self drawLabelWithText:NSLocalizedString(@"BuildingChart_NoData", @"")];
     }
     else
     {
@@ -380,19 +379,6 @@ static NSDictionary *codeNameMap;
         REMChartSeriesIndicator *indicator = [self getSeriesIndicatorWithCode:seriesCode];
         [self.view addSubview:indicator];
     }
-}
-
--(void)drawNoDataLabel
-{
-    CGFloat fontSize = 36;
-    CGSize labelSize = [kNoDataText sizeWithFont:[UIFont systemFontOfSize:fontSize]];
-    UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];
-    noDataLabel.text = (NSString *)kNoDataText;
-    noDataLabel.textColor = [UIColor whiteColor];
-    noDataLabel.textAlignment = NSTextAlignmentLeft;
-    noDataLabel.backgroundColor = [UIColor clearColor];
-    
-    [self.view addSubview:noDataLabel];
 }
 
 -(UILabel *)getStandardLabelWithCode:(NSString *)standardCode
