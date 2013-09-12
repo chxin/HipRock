@@ -125,7 +125,7 @@
     
     if(isAnimated==YES)
     {
-        [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
             carouselView.frame = self.view.bounds;
         } completion:^(BOOL finished) {
             [self.carouselController initializationCarousel];

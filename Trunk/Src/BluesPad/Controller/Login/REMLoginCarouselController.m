@@ -132,7 +132,7 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 {
     CGRect rect = CGRectMake(0, 0, kSubViewWidth+kSubViewDistance, kSubViewHeight);
     
-    [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:1.5 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         [self.scrollView scrollRectToVisible:rect animated:NO];
     } completion:nil];
 }
@@ -140,7 +140,7 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 
 - (IBAction)pageChanged:(id)sender {
     UIPageControl *pager = (UIPageControl *)sender;
-    [self showPage:pager.currentPage];
+    [self showPage:pager.currentPage withEaseAnimation:NO];
 }
 
 - (IBAction)jumpLoginButtonTouchDown:(id)sender {
@@ -149,10 +149,10 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 
 -(void)showLoginPage
 {
-    [self showPage:self.scrollView.subviews.count-1];
+    [self showPage:self.scrollView.subviews.count-1 withEaseAnimation:YES];
 }
 
-- (void)showPage:(int) page
+- (void)showPage:(int) page withEaseAnimation:(BOOL)ease
 {
     if(page<0 || page>=self.scrollView.subviews.count)
         return;
@@ -162,7 +162,14 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
     CGRect visiableZone = self.scrollView.bounds;
     visiableZone.origin = CGPointMake(offset, self.scrollView.contentOffset.y);
     
-    [self.scrollView scrollRectToVisible:visiableZone animated:YES];
+    if(ease == YES){
+        [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self.scrollView scrollRectToVisible:visiableZone animated:NO];
+        } completion:nil];
+    }
+    else{
+        [self.scrollView scrollRectToVisible:visiableZone animated:YES];
+    }
 }
 
 - (void)styleJumpLoginButton

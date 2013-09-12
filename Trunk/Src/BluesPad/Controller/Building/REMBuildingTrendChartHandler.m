@@ -433,7 +433,6 @@
 }
 
 - (void)loadDataFailureWithError:(REMError *)error withResponse:(id)response{
-    
     if (self.datasource.count != 6) {
         for (int i = 0; i < 6; i++) {
             NSMutableDictionary* series = [[NSMutableDictionary alloc] init];
@@ -441,9 +440,12 @@
             [self.datasource addObject:series];
         }
     }
+    
     REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
     [myView.thisMonthButton setOn:YES];
     [self intervalChanged:myView.thisMonthButton];
+    
+    [self drawLabelWithText:NSLocalizedString(@"BuildingChart_DataError",@"")];
 }
 /*
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(void))loadCompleted

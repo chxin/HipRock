@@ -40,6 +40,6 @@
 - (void)loadDataFailureWithError:(REMError *)error withResponse:(id)response;
 
 
--(void)drawNoDataLabel;
+-(void)drawLabelWithText:(NSString *)text;
 
 @end
