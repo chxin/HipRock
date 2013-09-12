@@ -212,7 +212,7 @@ static NSDictionary *codeNameMap;
     plotSpace.allowsUserInteraction = YES;
     plotSpace.delegate=self.scrollManager;
     
-    long dayTicks = [[REMTimeHelper tomorrow] timeIntervalSince1970] - [[REMTimeHelper today] timeIntervalSince1970];
+    //long dayTicks = [[REMTimeHelper tomorrow] timeIntervalSince1970] - [[REMTimeHelper today] timeIntervalSince1970];
     
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.visiableRange.start) length:CPTDecimalFromDouble([self.visiableRange distance])];
     plotSpace.globalXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(self.draggableRange.start) length:CPTDecimalFromDouble([self.draggableRange distance])];

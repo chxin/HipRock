@@ -390,5 +390,14 @@
     return [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 }
 
++(NSDate *)convertLocalDateToGMT:(NSDate *)localDate
+{
+    NSTimeInterval timeZoneOffset = [[NSTimeZone timeZoneWithName:@"Asia/Shanghai"] secondsFromGMT];
+    NSTimeInterval gmtTimeInterval = [localDate timeIntervalSinceReferenceDate] - timeZoneOffset;
+    NSDate *gmtDate = [NSDate dateWithTimeIntervalSinceReferenceDate:gmtTimeInterval];
+    
+    return gmtDate;
+}
+
 
 @end

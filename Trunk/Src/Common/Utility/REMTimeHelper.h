@@ -57,4 +57,5 @@ typedef enum _REMDateTimePart : NSUInteger{
 +(NSDate*)dateFromYear:(int)year Month:(int)month Day:(int)day;
 +(NSDate *)today;
 +(NSDate *)tomorrow;
++(NSDate *)convertLocalDateToGMT:(NSDate *)localDate;
 @end
