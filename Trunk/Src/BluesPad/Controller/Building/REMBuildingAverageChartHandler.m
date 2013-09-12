@@ -320,51 +320,57 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 
 - (BOOL)convertData
 {
-    if(self.averageData.targetEnergyData.count<=0)
+    NSArray *targetDatas = self.averageData.targetEnergyData;
+    if(targetDatas == nil || [targetDatas isEqual:[NSNull null]] || targetDatas.count<=0)
     {
         return NO;
     }
     
-    NSArray *energySeries = self.averageData.targetEnergyData;
-    NSMutableArray *convertedData = [[NSMutableArray alloc] initWithCapacity:2];
-    
-    self.globalRange = [[REMDataRange alloc] initWithConstants];
-    self.visiableRange = [[REMDataRange alloc] initWithConstants];
     self.dataValueRange= [[REMDataRange alloc] initWithConstants];
     
+    NSMutableArray *convertedData = [[NSMutableArray alloc] init];
     int index = 0;
-    for(REMTargetEnergyData *targetEnergyData in energySeries){
+    for(REMTargetEnergyData *targetEnergyData in targetDatas)
+    {
+        if(targetEnergyData == nil || [targetEnergyData isEqual:[NSNull null]])
+            continue;
+        
         REMEnergyTargetModel *target = targetEnergyData.target;
         NSArray *energyData = targetEnergyData.energyData;
         
-        NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%@", index, target.type, target.targetId];
-        NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:energyData.count];
+        NSMutableArray* data = [[NSMutableArray alloc]init];
         
-        self.visiableRange.start = MIN(self.visiableRange.start, [[REMTimeHelper getMonthTicksFromDate:target.visiableTimeRange.startTime] doubleValue]);
-        self.visiableRange.end = MAX(self.visiableRange.end, [[REMTimeHelper getMonthTicksFromDate:target.visiableTimeRange.endTime] doubleValue]);
-        
-        for (int j = 0; j < energyData.count; j++)
-        {
-            REMEnergyData *point = (REMEnergyData *)energyData[j];
+        for(REMEnergyData *point in energyData){
+            //if point value is null, do not add into series
+            if([point.dataValue isEqual:[NSNull null]])
+                continue;
             
             NSNumber *monthTicks = [REMTimeHelper getMonthTicksFromDate:point.localTime];
             
-            if([point.dataValue isEqual:[NSNull null]]) //if point value is null, do not add into series
-                continue;
-            
             [data addObject:@{@"y": point.dataValue, @"x": monthTicks}];
-            
-            self.globalRange.start = MIN(self.globalRange.start, [[REMTimeHelper getMonthTicksFromDate:point.localTime] doubleValue]);
-            self.globalRange.end = MAX(self.globalRange.end, [[REMTimeHelper getMonthTicksFromDate:point.localTime] doubleValue]);
             
             self.dataValueRange.start = MIN(self.dataValueRange.start, [point.dataValue doubleValue]);
             self.dataValueRange.end = MAX(self.dataValueRange.end, [point.dataValue doubleValue]);
         }
+        
+        NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%@", index, target.type, target.targetId];
         NSDictionary* series = @{ @"identity":targetIdentity, @"data":data};
         
         [convertedData addObject:series];
-        index ++;
+        
+        index++;
     }
+    
+    //process data ranges
+    NSDate *today = [REMTimeHelper today];
+    
+    NSNumber *globalStart = [REMTimeHelper getMonthTicksFromDate:[REMTimeHelper add:-3 onPart:REMDateTimePartYear ofDate:today]] ;
+    NSNumber *globalEnd = [REMTimeHelper getMonthTicksFromDate:today];
+    
+    self.globalRange = [[REMDataRange alloc] initWithStart:[globalStart doubleValue] andEnd:[globalEnd doubleValue]];
+    self.visiableRange = [[REMDataRange alloc] initWithStart:0 andEnd:[globalEnd doubleValue]];
+    
+    self.visiableRange.start = [[REMTimeHelper getMonthTicksFromDate:[REMTimeHelper add:-1 onPart:REMDateTimePartYear ofDate:today]] doubleValue];
     
     self.globalRange.start -= 0.5;
     self.globalRange.end += 0.5;

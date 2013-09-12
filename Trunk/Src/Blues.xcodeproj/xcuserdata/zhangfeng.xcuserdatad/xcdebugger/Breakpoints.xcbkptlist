@@ -942,25 +942,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "400646211.431349"
+         timestampString = "400665232.336504"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "392"
-         endingLineNumber = "392"
+         startingLineNumber = "398"
+         endingLineNumber = "398"
          landmarkName = "-drawChartLabels"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "400577603.672393"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "336"
-         endingLineNumber = "336"
-         landmarkName = "-convertData"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1189,11 +1176,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "400646211.431349"
+         timestampString = "400665232.336504"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "403"
-         endingLineNumber = "403"
+         startingLineNumber = "409"
+         endingLineNumber = "409"
          landmarkName = "-drawChartLabels"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1299,19 +1286,6 @@
          startingLineNumber = "61"
          endingLineNumber = "61"
          landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "400577603.672393"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "334"
-         endingLineNumber = "334"
-         landmarkName = "-convertData"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1759,11 +1733,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "400656628.522034"
+         timestampString = "400665232.336504"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "557"
-         endingLineNumber = "557"
+         startingLineNumber = "563"
+         endingLineNumber = "563"
          landmarkName = "@implementation REMBuildingAverageChartHandler"
          landmarkType = "3">
       </FileBreakpoint>
@@ -1772,11 +1746,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "400656628.522034"
+         timestampString = "400665232.336504"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "518"
-         endingLineNumber = "518"
+         startingLineNumber = "524"
+         endingLineNumber = "524"
          landmarkName = "@implementation REMBuildingAverageChartHandler"
          landmarkType = "3">
       </FileBreakpoint>
@@ -2145,11 +2119,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingAverageChartHandler.m"
-         timestampString = "400583760.252189"
+         timestampString = "400665232.336504"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "322"
-         endingLineNumber = "322"
+         startingLineNumber = "323"
+         endingLineNumber = "323"
          landmarkName = "-convertData"
          landmarkType = "5">
       </FileBreakpoint>

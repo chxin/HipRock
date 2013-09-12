@@ -30,7 +30,7 @@
     
     [REMApplicationInfo initApplicationInfo];
     
-    [REMStorage clearSessionStorage];
+//    [REMStorage clearSessionStorage];
     
     Weibo *weibo = [[Weibo alloc] initWithAppKey:@"3326691039" withAppSecret:@"75dd27596a081b28651d214e246c1b15"];
     [Weibo setWeibo:weibo];
