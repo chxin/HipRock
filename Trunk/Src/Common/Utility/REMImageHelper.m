@@ -35,7 +35,7 @@
     
     //NSLog(@"image size:%@",NSStringFromCGSize(imageView.image.size));
     CGImageRef cgimg =
-    [myContext createCGImage:outputImage fromRect:CGRectMake(0, 0, origImage.size.width, origImage.size.height)];
+    [myContext createCGImage:outputImage fromRect:CGRectMake(0, 0, origImage.size.width*origImage.scale, origImage.size.height*origImage.scale)];
     
     
     UIImage *view= [UIImage imageWithCGImage:cgimg];
