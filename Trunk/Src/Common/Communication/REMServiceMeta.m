@@ -10,6 +10,7 @@
 
 @implementation REMServiceMeta
 
+//v0.4dev branch checkin
 
 #ifdef DEBUG
 //const static NSString *SVC_BASE_HOST = @"10.177.206.79";
