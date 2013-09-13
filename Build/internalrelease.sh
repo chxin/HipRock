@@ -27,6 +27,8 @@ if [ $? -eq 0 ]; then
         cp ${webserverpath}AppLogo@2x.png ${webserverpath}IR/$1
         ${nodepath}node ${makefilepath}updatePlist.js IR $1
         ${nodepath}node ${makefilepath}updateHtml.js IR $1
+        git tag -a $1 -m "Internal Release $1"
+        git push origin --tags
     fi
 else
     ${nodepath}node buildError.js
