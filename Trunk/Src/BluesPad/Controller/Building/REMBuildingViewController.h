@@ -20,5 +20,5 @@
 @property (nonatomic,strong) REMSplashScreenController *splashScreenController;
 
 @property (nonatomic) CGFloat currentScrollOffset;
-- (void)notifyCustomImageLoaded;
+- (void)notifyCustomImageLoaded:(NSNumber *)buildingId;
 @end
