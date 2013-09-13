@@ -13,6 +13,9 @@
 #import "REMDataAccessor.h"
 #import "REMDataStore.h"
 
+//Error
+#import "REMError.h"
+
 //Log
 #import "REMLog.h"
 #import "REMLogManager.h"
