@@ -367,10 +367,9 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     //process data ranges
     NSDate *today = [REMTimeHelper today];
     
-    NSNumber *globalStart = [REMTimeHelper getMonthTicksFromDate:[REMTimeHelper add:-3 onPart:REMDateTimePartYear ofDate:today]] ;
     NSNumber *globalEnd = [REMTimeHelper getMonthTicksFromDate:today];
     
-    self.globalRange = [[REMDataRange alloc] initWithStart:[globalStart doubleValue] andEnd:[globalEnd doubleValue]];
+    self.globalRange = [[REMDataRange alloc] initWithStart:[globalEnd doubleValue] - 35 andEnd:[globalEnd doubleValue]];
     self.visiableRange = [[REMDataRange alloc] initWithStart:0 andEnd:[globalEnd doubleValue]];
     
     self.visiableRange.start = [[REMTimeHelper getMonthTicksFromDate:[REMTimeHelper add:-1 onPart:REMDateTimePartYear ofDate:today]] doubleValue];
