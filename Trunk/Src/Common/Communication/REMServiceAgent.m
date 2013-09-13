@@ -215,7 +215,7 @@ static int requestTimeout = 45; //(s)
     switch (currentNetworkStatus)
     {
         case NotReachable:
-            [REMAlertHelper alert:@"亲，网络不给力 :(" withTitle:@""];
+            [REMAlertHelper alert:@"无法获取最新能源数据" withTitle:@"无可用网络"];
             maxQueueLength = 0;
             return NO;
         case ReachableViaWiFi:
