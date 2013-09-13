@@ -201,7 +201,7 @@
             self.blurredImageView=newBlurred;
             self.defaultImage=nil;
             self.defaultBlurImage=nil;
-            [self.controller notifyCustomImageLoaded];
+            [self.controller notifyCustomImageLoaded:self.buildingInfo.building.buildingId];
         }];
         
         

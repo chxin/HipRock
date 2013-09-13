@@ -24,7 +24,8 @@
 @property (nonatomic,strong) UIImage *defaultImage;
 @property (nonatomic,strong) UIImage *defaultBlurImage;
 
-@property (nonatomic) NSUInteger customImageLoadedCount;
+
+@property (nonatomic,strong) NSMutableDictionary *customImageLoadedDictionary;
 @end
 
 
@@ -43,7 +44,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.customImageLoadedCount=0;
+	self.customImageLoadedDictionary = [[NSMutableDictionary alloc]initWithCapacity:self.buildingOverallArray.count];
     self.view.backgroundColor=[UIColor blackColor];
     self.currentScrollOffset=-kBuildingCommodityViewTop;
     
@@ -89,12 +90,17 @@
     }
 }
 
-- (void)notifyCustomImageLoaded{
-    if(self.customImageLoadedCount==self.imageArray.count)return;
-    self.customImageLoadedCount++;
-    if(self.customImageLoadedCount == self.imageArray.count){
-        self.defaultImage=nil;
-        self.defaultBlurImage=nil;
+- (void)notifyCustomImageLoaded:(NSNumber *)buildingId{
+    if(self.customImageLoadedDictionary.count==self.imageArray.count)return;
+    if ([self.customImageLoadedDictionary objectForKey:buildingId]!=nil) {
+        return;
+    }
+    else{
+        [self.customImageLoadedDictionary setObject:@(1) forKey:buildingId];
+        if(self.customImageLoadedDictionary.count==self.imageArray.count){
+            self.defaultImage=nil;
+            self.defaultBlurImage=nil;
+        }
     }
 }
 
