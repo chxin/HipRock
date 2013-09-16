@@ -156,7 +156,7 @@ static int requestTimeout = 45; //(s)
     [serviceOperation setCompletionBlockWithSuccess:onSuccess failure:onFailure];
     [serviceOperation setDownloadProgressBlock:onProgress];
     
-    if(groupName!=nil && [groupName isEqual:[NSNull null]] && [groupName isEqualToString:@""] == NO)
+    if(groupName!=nil && [groupName isEqual:[NSNull null]]==NO && [groupName isEqualToString:@""] == NO)
     {
         serviceOperation.groupName = groupName;
     }
