@@ -239,17 +239,21 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 
 -(NSString *)formatDateLabel:(int)monthTick
 {
-    NSDate *date = [REMTimeHelper getDateFromMonthTicks:[NSNumber numberWithInt: monthTick]];
+//    NSDate *date = [REMTimeHelper getDateFromMonthTicks:[NSNumber numberWithInt: monthTick]];
+//    
+//    NSDateFormatter *yearFormatter = [[NSDateFormatter alloc] init];
+//    [yearFormatter setDateFormat:@"yyyy年MM月"];
+//    
+//    NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
+//    [monthFormatter setDateFormat:@"MM月"];
+//    
+//    int month = [REMTimeHelper getMonth:date];
+//    
+//    return month == 1? [yearFormatter stringFromDate:date]: [monthFormatter stringFromDate:date];
+    int year = monthTick / 12;
+    int month = monthTick % 12;
     
-    NSDateFormatter *yearFormatter = [[NSDateFormatter alloc] init];
-    [yearFormatter setDateFormat:@"yyyy年MM月"];
-    
-    NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
-    [monthFormatter setDateFormat:@"MM月"];
-    
-    int month = [REMTimeHelper getMonth:date];
-    
-    return month == 1? [yearFormatter stringFromDate:date]: [monthFormatter stringFromDate:date];
+    return month== 0 ? [NSString stringWithFormat:@"%dddd年%dd月",year,month]:[NSString stringWithFormat:@"%dd月",month];
 }
 
 - (void)initializePlots
@@ -349,7 +353,6 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
                 continue;
             
             NSNumber *monthTicks = [REMTimeHelper getMonthTicksFromDate:point.localTime];
-            
             [data addObject:@{@"y": point.dataValue, @"x": monthTicks}];
             
             self.dataValueRange.start = MIN(self.dataValueRange.start, [point.dataValue doubleValue]);

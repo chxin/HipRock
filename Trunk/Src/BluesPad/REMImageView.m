@@ -511,7 +511,7 @@
 
 - (BOOL)shouldResponseSwipe:(UITouch *)touch
 {
-    NSLog(@"touch.view:%@",touch.view.class);
+    //NSLog(@"touch.view:%@",touch.view.class);
     if( [touch.view isKindOfClass:[CPTGraphHostingView class]] == YES) return NO;
     
     return YES;

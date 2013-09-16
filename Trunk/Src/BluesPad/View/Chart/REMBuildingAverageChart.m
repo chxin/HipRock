@@ -31,8 +31,8 @@ static CGFloat bottomAxisOffset = 16.0;
 -(void)initializeGraph
 {
     CGRect hostViewFrame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height-33-16);
-    NSLog(@"view:%@",NSStringFromCGRect(self.bounds));
-    NSLog(@"host:%@",NSStringFromCGRect(hostViewFrame));
+    //NSLog(@"view:%@",NSStringFromCGRect(self.bounds));
+    //NSLog(@"host:%@",NSStringFromCGRect(hostViewFrame));
     
     self.hostView = [[CPTGraphHostingView alloc]initWithFrame:hostViewFrame];
     

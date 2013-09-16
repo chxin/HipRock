@@ -132,9 +132,10 @@ static int requestTimeout = 45; //(s)
     
     void (^onFailure)(AFHTTPRequestOperation *operation, NSError *errorInfo) = ^(AFHTTPRequestOperation *operation, NSError *errorInfo)
     {
-        REMLogError(@"Communication error: %@\nServer response: %@", [error description], operation.responseString);
-        
-        if(error)
+        //REMLogError(@"Communication error: %@\nServer response: %@", [errorInfo description], operation.responseString);
+        REMLogError(@"Communication error:\nDomain-Code: %@,%d\nServer response: %@\nDescription: %@\nDebug Desc: %@",errorInfo.domain,errorInfo.code,operation.responseString,errorInfo.description,errorInfo.debugDescription);
+
+        if(error && errorInfo.code != -999)
         {
             error(errorInfo,operation.responseString);
         }
@@ -156,9 +157,11 @@ static int requestTimeout = 45; //(s)
     [serviceOperation setCompletionBlockWithSuccess:onSuccess failure:onFailure];
     [serviceOperation setDownloadProgressBlock:onProgress];
     
-    if(groupName != NULL && groupName!=nil && [groupName isEqualToString:@""])
+    //NSLog(@"added with group:'%@'",groupName);
+    if(groupName != NULL && groupName!=nil && [groupName isEqualToString:@""]==NO)
     {
         serviceOperation.groupName = groupName;
+        //NSLog(@"added group:'%@'", serviceOperation.groupName);
     }
         
     //[serviceOperation start];
@@ -168,7 +171,7 @@ static int requestTimeout = 45; //(s)
         [REMServiceAgent initializeQueue];
     }
     
-    NSLog(@"request: %@",[request.URL description]);
+    //NSLog(@"request: %@",[request.URL description]);
     [queue addOperation:serviceOperation];
 }
 
@@ -185,16 +188,25 @@ static int requestTimeout = 45; //(s)
 {
     if(queue!=NULL && queue != nil && queue.operationCount > 0)
     {
+        NSMutableArray *cancelList = [[NSMutableArray alloc] init];
+        
+        //NSLog(@"%d op in que, they are:",queue.operationCount);
         [queue setSuspended:YES];
         for(int i=0;i<[queue operationCount];i++)
         {
-            REMServiceRequestOperation *operation = (REMServiceRequestOperation *)[queue.operations objectAtIndex:i];
-            if(operation.groupName == group)
+            id operation = [queue.operations objectAtIndex:i];
+            //NSLog(@"%@, %@",operation.groupName, [operation.groupName isEqualToString:group] ? @"YES":@"NO");
+            if(operation!=nil && [operation isEqual:[NSNull null]] == NO && [((REMServiceRequestOperation *)operation).groupName isEqualToString:group])
             {
-                [operation cancel];
+                [cancelList addObject:operation];
             }
         }
         [queue setSuspended:NO];
+        
+        //NSLog(@"canceled '%@', %d requests", group, cancelList.count);
+        for(id operation in cancelList){
+            [operation cancel];
+        }
     }
 }
 

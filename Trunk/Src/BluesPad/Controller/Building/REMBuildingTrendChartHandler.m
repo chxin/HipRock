@@ -116,7 +116,7 @@
             break;
         }
     }
-    NSLog(@"Long Pressed At %@, nearby point index is %d", x, nearByPointIndex);
+    //NSLog(@"Long Pressed At %@, nearby point index is %d", x, nearByPointIndex);
     
     
     [self drawToolTip: nearByPointIndex];
