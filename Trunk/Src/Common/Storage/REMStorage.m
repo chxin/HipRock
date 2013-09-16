@@ -40,6 +40,11 @@
     [[REMSqliteStorage getInstance] clearSessionStorage];
 }
 
++(void)clearOnApplicationActive
+{
+    NSLog(@"CLEAR after Application Window activated");
+}
+
 
 
 +(NSString*)get:(NSString*)sourceName key:(NSString*)key
