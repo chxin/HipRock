@@ -658,13 +658,13 @@
         [[UIColor blackColor]set];
         UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
         [[self getImageOfLayer:self.imageView.layer]drawInRect:self.imageView.frame];
-        
         [[self getImageOfLayer:self.titleLabel.layer]drawInRect:CGRectMake(self.settingButton.frame.origin.x, self.settingButton.frame.origin.y, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height)];
         //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
         [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
         [dataImage drawInRect:CGRectMake(0, kBuildingCommodityViewTop + kBuildingTitleHeight, outputWidth, dataImageHeight)];
         
         [footerImage drawInRect:CGRectMake(0, outputHeightWithoutFooter, 800, footerHeight)];
+        [[self getImageOfLayer:self.titleGradientLayer]drawInRect:self.titleGradientLayer.frame];
         UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
