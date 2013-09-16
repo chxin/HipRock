@@ -116,7 +116,8 @@ typedef void(^SuccessCallback)(BOOL success);
     
     if(self.commodityInfo.targetValue!=nil &&
        self.commodityInfo.targetValue.dataValue!=nil &&
-       ![self.commodityInfo.targetValue.dataValue isEqual:[NSNull null]])
+       ![self.commodityInfo.targetValue.dataValue isEqual:[NSNull null]] &&
+       [self.commodityInfo.targetValue.dataValue isGreaterThan:@(0)])
     {
     
         REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.targetValue withTitle:@"目标值"  andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin withLeftMargin:kBuildingCommodityDetailTextMargin  withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityDetailUomFontSize];

@@ -20,12 +20,12 @@
 
 + (UIImage *)blurImage:(UIImage *)origImage
 {
-    EAGLContext *myEAGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    //EAGLContext *myEAGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
-    NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
-    [options setObject: [NSNull null] forKey: kCIContextWorkingColorSpace];
-    CIContext *myContext = [CIContext contextWithEAGLContext:myEAGLContext options:options];
-    
+    //NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
+    //[options setObject: [NSNull null] forKey: kCIContextWorkingColorSpace];
+    //CIContext *myContext = [CIContext contextWithEAGLContext:myEAGLContext options:options];
+     CIContext *myContext = [CIContext contextWithOptions:nil];
     CIImage *ci = [[CIImage alloc]initWithCGImage:origImage.CGImage];
     
     CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"

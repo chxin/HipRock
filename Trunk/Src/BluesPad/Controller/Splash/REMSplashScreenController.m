@@ -67,7 +67,7 @@
     CGFloat animationTime = 1.5;
     
     CGFloat flashOriginalAlpha = 0;
-    CGFloat flashFinalAlpha = 0.8;
+    CGFloat flashFinalAlpha = 0.9;
     CGFloat normalOriginalAlpha = 1;
     CGFloat normalFinalAlpha = 1;
     
