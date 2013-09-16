@@ -42,7 +42,7 @@
 
 +(void)clearOnApplicationActive
 {
-    NSLog(@"CLEAR after Application Window activated");
+    [[REMSqliteStorage getInstance] clearWindowActivateStorage];
 }
 
 

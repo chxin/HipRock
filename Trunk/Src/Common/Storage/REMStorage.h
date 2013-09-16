@@ -10,7 +10,8 @@
 
 typedef enum StorageExpirationType : NSUInteger {
     REMNeverExpired = 0,
-    REMSessionExpired = 1
+    REMSessionExpired = 1,
+    REMWindowActiated = 2
 } StorageExpirationType;
 
 @interface REMStorage : NSObject

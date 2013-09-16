@@ -105,7 +105,7 @@ static int requestTimeout = 45; //(s)
             NSString *storageKey = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
             switch (service.responseType) {
                 case REMServiceResponseJson:
-                    [REMStorage set:service.url key:storageKey value:[REMJSONHelper stringByObject:result] expired:REMSessionExpired];
+                    [REMStorage set:service.url key:storageKey value:[REMJSONHelper stringByObject:result] expired:REMWindowActiated];
                     break;
                 case REMServiceResponseImage:
                     [REMStorage setFile:service.url key:storageKey version:0 image:result];
