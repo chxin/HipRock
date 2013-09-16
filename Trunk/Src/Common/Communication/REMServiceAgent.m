@@ -190,7 +190,14 @@ static int requestTimeout = 45; //(s)
         [queue setSuspended:YES];
         for(int i=0;i<[queue operationCount];i++)
         {
-            id operation = queue.operations[i];
+            id operation = nil;
+            @try {
+                operation = queue.operations[i];
+            }
+            @catch (NSException *exception) {
+                continue;
+            }
+            
             if(operation!=nil && [operation isEqual:[NSNull null]] == NO && [((REMServiceRequestOperation *)operation).groupName isEqualToString:group] == YES)
             {
                 [cancelList addObject:operation];
