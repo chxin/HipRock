@@ -309,11 +309,17 @@
                                 int idx = self.currentIndex;
                                 
                                 NSMutableArray *releaseArray=[[NSMutableArray alloc] initWithCapacity:self.imageArray.count];
+                                /*
                                 if((idx - 2) >=0){
                                     int i=0;
                                     while (i<=(idx-2)) {
                                         [releaseArray addObject:@(i)];
                                         i++;
+                                    }
+                                    i=idx+1;
+                                    while(i<self.imageArray.count){
+                                        [releaseArray addObject:@(i)];
+                                        ++i;
                                     }
                                     [self releaseOutOfWindowView:releaseArray];
                                 }
@@ -324,7 +330,15 @@
                                         i--;
                                     }
                                     [self releaseOutOfWindowView:releaseArray];
+                                }*/
+                                for (int i=0; i<self.imageArray.count; i++) {
+                                    if(i!=idx && i!=(idx+1) && i!=(idx-1)){
+                                        [releaseArray addObject:@(i)];
+                                    }
+                                
                                 }
+                                [self releaseOutOfWindowView:releaseArray];
+                                
                                 
                                 
                             }];
@@ -337,6 +351,7 @@
 }
 
 - (void)releaseOutOfWindowView:(NSArray *)releaseViews{
+    //NSLog(@"release views:%@",releaseViews);
     for (NSNumber *num in releaseViews) {
         REMImageView *image= self.imageArray[[num intValue]];
         if([self.imageViewStatus[num] isEqual:@(1)]== YES){
