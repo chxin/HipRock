@@ -258,7 +258,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 
 - (void)initializePlots
 {
-    NSString *columnIdentity, *lineIdentity;
+    NSString *columnIdentity = @"", *lineIdentity = @"";
     for(NSDictionary *series in self.chartData){
         NSString *identity = series[@"identity"];
         REMEnergyTargetType targetType = [[identity componentsSeparatedByString:@"-"][1] intValue];
@@ -274,52 +274,56 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     }
     
     //unit - column
-    CPTBarPlot *column=[[CPTBarPlot alloc] initWithFrame:self.chartView.graph.bounds];
-    
-    column.identifier=columnIdentity;
-    
-    column.barBasesVary=NO;
-    column.barWidthsAreInViewCoordinates=YES;
-    column.barWidth=CPTDecimalFromFloat(44);
-    column.barOffset=CPTDecimalFromInt(0);
-    
-    column.fill= [CPTFill fillWithColor:[CPTColor colorWithComponentRed:1.0 green:1.0 blue:1.0 alpha:0.7]];
-    
-    column.baseValue=CPTDecimalFromFloat(0);
-    
-    column.dataSource=self;
-    column.delegate=self;
-    
-    column.lineStyle=nil;
-    column.shadow=nil;
-    
-    column.anchorPoint=CGPointZero;
-    
-    [self.chartView.graph addPlot:column];
+    if([columnIdentity isEqualToString:@""] == NO){
+        CPTBarPlot *column=[[CPTBarPlot alloc] initWithFrame:self.chartView.graph.bounds];
+        
+        column.identifier=columnIdentity;
+        
+        column.barBasesVary=NO;
+        column.barWidthsAreInViewCoordinates=YES;
+        column.barWidth=CPTDecimalFromFloat(44);
+        column.barOffset=CPTDecimalFromInt(0);
+        
+        column.fill= [CPTFill fillWithColor:[CPTColor colorWithComponentRed:1.0 green:1.0 blue:1.0 alpha:0.7]];
+        
+        column.baseValue=CPTDecimalFromFloat(0);
+        
+        column.dataSource=self;
+        column.delegate=self;
+        
+        column.lineStyle=nil;
+        column.shadow=nil;
+        
+        column.anchorPoint=CGPointZero;
+        
+        [self.chartView.graph addPlot:column];
+    }
     
     //bench mark - line (color:235,106,79)
-    CPTColor *lineColor = [[CPTColor alloc] initWithCGColor:[UIColor colorWithRed:(241.0/255.0) green:(94.0/255.0) blue:(49.0/255.0) alpha:1.0].CGColor];
-    
-    CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
-    lineStyle.lineColor = lineColor;//[CPTColor orangeColor];
-    lineStyle.lineWidth = 2;
-    
-    CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
-    symbol.fill= [CPTFill fillWithColor:lineColor];
-    symbol.size=CGSizeMake(10.0, 10.0);
-    symbol.lineStyle = [self hiddenLineStyle];
-    
-    CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];
-    labelStyle.color = [REMColor colorByIndex:1];
-    
-    CPTScatterPlot *line = [[CPTScatterPlot alloc] initWithFrame:self.chartView.graph.bounds];
-    line.dataSource = self;
-    line.identifier = lineIdentity;
-    line.plotSymbol = symbol;
-    
-    line.dataLineStyle = lineStyle;
-    line.delegate = self;
-    [self.chartView.graph addPlot:line];
+    if([lineIdentity isEqualToString:@""] == NO){
+        CPTColor *lineColor = [[CPTColor alloc] initWithCGColor:[UIColor colorWithRed:(241.0/255.0) green:(94.0/255.0) blue:(49.0/255.0) alpha:1.0].CGColor];
+        
+        CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
+        lineStyle.lineColor = lineColor;//[CPTColor orangeColor];
+        lineStyle.lineWidth = 2;
+        
+        CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
+        symbol.fill= [CPTFill fillWithColor:lineColor];
+        symbol.size=CGSizeMake(10.0, 10.0);
+        symbol.lineStyle = [self hiddenLineStyle];
+        
+        CPTMutableTextStyle* labelStyle = [CPTMutableTextStyle alloc];
+        labelStyle.color = [REMColor colorByIndex:1];
+        
+        CPTScatterPlot *line = [[CPTScatterPlot alloc] initWithFrame:self.chartView.graph.bounds];
+        line.dataSource = self;
+        line.identifier = lineIdentity;
+        line.plotSymbol = symbol;
+        
+        line.dataLineStyle = lineStyle;
+        line.delegate = self;
+        [self.chartView.graph addPlot:line];
+    }
 }
 
 - (BOOL)convertData
@@ -349,7 +353,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
         
         for(REMEnergyData *point in energyData){
             //if point value is null, do not add into series
-            if([point.dataValue isEqual:[NSNull null]])
+            if([point.dataValue isEqual:[NSNull null]] || [point.dataValue doubleValue] < 0)
                 continue;
             
             NSNumber *monthTicks = [REMTimeHelper getMonthTicksFromDate:point.localTime];
@@ -360,10 +364,12 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
             self.dataValueRange.end = MAX(self.dataValueRange.end, [point.dataValue doubleValue]);
         }
         
-        NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%@", index, target.type, target.targetId];
-        NSDictionary* series = @{ @"identity":targetIdentity, @"data":data};
-        
-        [convertedData addObject:series];
+        if(data.count>0){
+            NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%@", index, target.type, target.targetId];
+            NSDictionary* series = @{ @"identity":targetIdentity, @"data":data};
+            
+            [convertedData addObject:series];
+        }
         
         index++;
     }
