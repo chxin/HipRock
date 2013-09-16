@@ -1322,8 +1322,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "106"
          endingLineNumber = "106"
-         landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
-         landmarkType = "5">
+         landmarkName = "@implementation REMBuildingViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1348,8 +1348,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "129"
          endingLineNumber = "129"
-         landmarkName = "-prepareForSegue:sender:"
-         landmarkType = "5">
+         landmarkName = "@implementation REMBuildingViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1865,10 +1865,12 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "414"
-         endingLineNumber = "414">
+         endingLineNumber = "414"
+         landmarkName = "-executeExport:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BluesPad/Controller/Building/REMBuildingViewController.m"
@@ -1876,7 +1878,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "419"
-         endingLineNumber = "419">
+         endingLineNumber = "419"
+         landmarkName = "-executeExport:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1992,7 +1996,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "369"
          endingLineNumber = "369"
-         landmarkName = "-shareButtonPressed:"
+         landmarkName = "-panthis:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2005,7 +2009,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "380"
          endingLineNumber = "380"
-         landmarkName = "-executeExport:"
+         landmarkName = "-tapthis:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2018,8 +2022,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "370"
          endingLineNumber = "370"
-         landmarkName = "-shareButtonPressed:"
-         landmarkType = "5">
+         landmarkName = "@implementation REMBuildingViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
