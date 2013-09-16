@@ -43,7 +43,7 @@
 {
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     dateComponents.day = days;
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendar *calendar = [REMTimeHelper currentCalendar];
     NSDate *previousDate = [calendar dateByAddingComponents:dateComponents
                                                      toDate:fromDate
                                                     options:0];
@@ -83,7 +83,7 @@
 
 
 + (NSUInteger)getYear:(NSDate *)date {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendar *calendar = [REMTimeHelper currentCalendar];
     NSDateComponents *dayComponents = [calendar components:(NSYearCalendarUnit) fromDate:date];
     
     return [dayComponents year];
@@ -91,7 +91,7 @@
 
 
 + (NSUInteger)getMonth:(NSDate *)date{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendar *calendar = [REMTimeHelper currentCalendar];
     NSDateComponents *dayComponents = [calendar components:(NSMonthCalendarUnit) fromDate:date];
     
     return [dayComponents month];
@@ -99,14 +99,14 @@
 
 
 + (NSUInteger)getDay:(NSDate *)date {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendar *calendar = [REMTimeHelper currentCalendar];
     NSDateComponents *dayComponents = [calendar components:(NSDayCalendarUnit) fromDate:date];
     
     return [dayComponents day];
 }
 
 + (int )getHour:(NSDate *)date  {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendar *calendar = [REMTimeHelper currentCalendar];
     NSUInteger unitFlags =NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit |NSHourCalendarUnit |NSMinuteCalendarUnit;
     NSDateComponents *components = [calendar components:unitFlags fromDate:date];
     NSInteger hour = [components hour];
@@ -116,7 +116,7 @@
 
 
 + (int)getMinute:(NSDate *)date {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendar *calendar = [REMTimeHelper currentCalendar];
     NSUInteger unitFlags =NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit |NSHourCalendarUnit |NSMinuteCalendarUnit;
     NSDateComponents *components = [calendar components:unitFlags fromDate:date];
     NSInteger minute = [components minute];
@@ -303,13 +303,13 @@
 
 // returns days amount of a date object
 +(NSUInteger)getDaysOfDate: (NSDate*)date {
-    return [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date].length;
+    return [[REMTimeHelper currentCalendar] rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date].length;
 }
 
 +(NSDate*)addMonthToDate:(NSDate*)date month:(NSInteger)month {
     NSDateComponents* dateComponents = [[NSDateComponents alloc]init];
     [dateComponents setMonth:month];
-    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSCalendar* calendar = [REMTimeHelper currentCalendar];
     return [calendar dateByAddingComponents:dateComponents toDate:[NSDate date] options:0];
 }
 
@@ -385,9 +385,22 @@
     return [REMTimeHelper add:1 onPart:REMDateTimePartDay ofDate:[REMTimeHelper today]];
 }
 
+static NSCalendar *_gregorianCalendar;
 +(NSCalendar *)gregorianCalendar
 {
-    return [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    if(_gregorianCalendar == nil)
+        _gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    return _gregorianCalendar;
+}
+
+static NSCalendar *_currentCalendar;
++(NSCalendar *)currentCalendar
+{
+    if(_currentCalendar == nil)
+        _currentCalendar = [NSCalendar currentCalendar];
+    
+    return _currentCalendar;
 }
 
 +(NSDate *)convertLocalDateToGMT:(NSDate *)localDate
