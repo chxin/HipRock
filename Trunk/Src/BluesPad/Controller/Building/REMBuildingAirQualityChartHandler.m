@@ -31,6 +31,7 @@
 
 
 @property (nonatomic,strong) REMChartHorizonalScrollDelegator *scrollManager;
+@property (nonatomic,strong) NSDateFormatter *formatter;
 
 
 @end
@@ -65,6 +66,7 @@ static NSDictionary *codeNameMap;
         codeNameMap = [[NSDictionary alloc] initWithObjects:@[kOutdoorLabelName,kMayAirLabelName,kHoneywellLabelName,kAmericanStandardLabelFormat,kChinaStandardLabelFormat] forKeys:@[kOutdoorCode,kMayAirCode,kHoneywellCode,kAmericanStandardCode,kChinaStandardCode]];
         self.requestUrl=REMDSBuildingAirQuality;
         
+        self.formatter = [[NSDateFormatter alloc] init];
     }
     return self;
 }
@@ -250,11 +252,11 @@ static NSDictionary *codeNameMap;
     NSMutableSet *xlocations = [[NSMutableSet alloc] init];
     
     NSDate *tickDate = [NSDate dateWithTimeIntervalSince1970:self.globalRange.start];
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setDay:1];
     while ([tickDate timeIntervalSince1970] < self.globalRange.end) {
-        tickDate = [calendar dateByAddingComponents:components toDate:tickDate options:0];
+        tickDate = [[REMTimeHelper gregorianCalendar] dateByAddingComponents:components toDate:tickDate options:0];
         
         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDateLabel:tickDate] textStyle:[self xAxisLabelStyle]];
         label.tickLocation = CPTDecimalFromDouble([tickDate timeIntervalSince1970]);
@@ -307,17 +309,19 @@ static NSDictionary *codeNameMap;
     self.chartView.hostView.hostedGraph.axisSet.axes = @[x,y];
 }
 
+
+
 -(NSString *)formatDateLabel:(NSDate *)date
 {
-    NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
-    [monthFormatter setDateFormat:@"MM月dd日"];
-    
-    NSDateFormatter *dayFormatter = [[NSDateFormatter alloc] init];
-    [dayFormatter setDateFormat:@"dd日"];
-    
     int day = [REMTimeHelper getDay:date];
+    if(day == 1){
+        [self.formatter setDateFormat:@"MM月dd日"];
+    }
+    else{
+        [self.formatter setDateFormat:@"dd日"];
+    }
     
-    return day == 1? [monthFormatter stringFromDate:date]: [dayFormatter stringFromDate:date];
+    return [self.formatter stringFromDate:date];
 }
 
 -(void)initializePlots
