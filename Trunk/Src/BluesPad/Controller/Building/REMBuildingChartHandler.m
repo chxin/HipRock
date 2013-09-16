@@ -213,11 +213,11 @@ static CPTTextStyle *yAxisLabelStyle;
     
     NSString* text = nil;
     if (numberValue > 1000000) {
-        text = [NSString stringWithFormat:@"%@M", [formatter stringFromNumber:[NSNumber numberWithInt:numberValue / 1000000]]];
+        text = [NSString stringWithFormat:@"%@M", [formatter stringFromNumber:[NSNumber numberWithDouble:numberValue / 1000000]]];
     } else if (numberValue > 1000) {
-        text = [NSString stringWithFormat:@"%@K", [formatter stringFromNumber:[NSNumber numberWithInt:numberValue / 1000]]];
+        text = [NSString stringWithFormat:@"%@K", [formatter stringFromNumber:[NSNumber numberWithDouble:numberValue / 1000]]];
     } else {
-        text = [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithInt:numberValue]]];
+        text = [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithDouble:numberValue]]];
     }
     
     return text;
