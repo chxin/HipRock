@@ -274,6 +274,19 @@
         }
     }
     
+    UIScreen *screen = [UIScreen mainScreen];
+    
+    CGRect frame=  CGRectMake(0, 0, screen.bounds.size.height*screen.scale, screen.bounds.size.width*screen.scale);
+    
+    if(width>frame.size.width) {
+        width=frame.size.width;
+    }
+    
+    if(height>frame.size.height){
+        height=frame.size.height;
+    }
+    
+    
     CGContextRef context = CGBitmapContextCreate(NULL, width, height, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo);
     
     CGColorSpaceRelease(colorSpace);

@@ -34,8 +34,19 @@
     CIImage *outputImage = [filter1 outputImage];
     
     //NSLog(@"image size:%@",NSStringFromCGSize(imageView.image.size));
+    
+    UIScreen *screen = [UIScreen mainScreen];
+    
+    CGRect frame = CGRectMake(0, 0, screen.bounds.size.height*screen.scale,screen.bounds.size.width*screen.scale);
+    
+    NSLog(@"blur frame:%@",NSStringFromCGRect(frame));
+    
+    CGRect retFrame=CGRectMake(0, 0, origImage.size.width*origImage.scale, origImage.size.height*origImage.scale);
+    
+    NSLog(@"retframe:%@",NSStringFromCGRect(retFrame));
+    
     CGImageRef cgimg =
-    [myContext createCGImage:outputImage fromRect:CGRectMake(0, 0, origImage.size.width*origImage.scale, origImage.size.height*origImage.scale)];
+    [myContext createCGImage:outputImage fromRect:retFrame];
     
     
     UIImage *view= [UIImage imageWithCGImage:cgimg];
