@@ -134,7 +134,7 @@ static int requestTimeout = 45; //(s)
     {
         REMLogError(@"Communication error: %@\nServer response: %@", [error description], operation.responseString);
         
-        if(error)
+        if(error && errorInfo.code != -999)
         {
             error(errorInfo,operation.responseString);
         }
@@ -156,7 +156,7 @@ static int requestTimeout = 45; //(s)
     [serviceOperation setCompletionBlockWithSuccess:onSuccess failure:onFailure];
     [serviceOperation setDownloadProgressBlock:onProgress];
     
-    if(groupName != NULL && groupName!=nil && [groupName isEqualToString:@""])
+    if(groupName!=nil && [groupName isEqual:[NSNull null]] && [groupName isEqualToString:@""] == NO)
     {
         serviceOperation.groupName = groupName;
     }
@@ -168,7 +168,7 @@ static int requestTimeout = 45; //(s)
         [REMServiceAgent initializeQueue];
     }
     
-    NSLog(@"request: %@",[request.URL description]);
+    //NSLog(@"request: %@",[request.URL description]);
     [queue addOperation:serviceOperation];
 }
 
@@ -185,16 +185,22 @@ static int requestTimeout = 45; //(s)
 {
     if(queue!=NULL && queue != nil && queue.operationCount > 0)
     {
+        NSMutableArray *cancelList = [[NSMutableArray alloc] init];
+        
         [queue setSuspended:YES];
         for(int i=0;i<[queue operationCount];i++)
         {
-            REMServiceRequestOperation *operation = (REMServiceRequestOperation *)[queue.operations objectAtIndex:i];
-            if(operation.groupName == group)
+            id operation = queue.operations[i];
+            if(operation!=nil && [operation isEqual:[NSNull null]] == NO && [((REMServiceRequestOperation *)operation).groupName isEqualToString:group] == YES)
             {
-                [operation cancel];
+                [cancelList addObject:operation];
             }
         }
         [queue setSuspended:NO];
+        
+        for(REMServiceRequestOperation *operation in cancelList){
+            [operation cancel];
+        }
     }
 }
 
@@ -215,7 +221,7 @@ static int requestTimeout = 45; //(s)
     switch (currentNetworkStatus)
     {
         case NotReachable:
-            [REMAlertHelper alert:@"亲，网络不给力 :(" withTitle:@""];
+            [REMAlertHelper alert:@"无法获取最新能源数据" withTitle:@"无可用网络"];
             maxQueueLength = 0;
             return NO;
         case ReachableViaWiFi:
