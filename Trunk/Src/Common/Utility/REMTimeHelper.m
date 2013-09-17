@@ -344,7 +344,7 @@
 
 +(NSNumber *)getMonthTicksFromDate:(NSDate *)date
 {
-    NSInteger monthTicks = [REMTimeHelper getYear:date] * 12 + [REMTimeHelper getMonth:date];
+    NSInteger monthTicks = [REMTimeHelper getYear:date] * 12 + [REMTimeHelper getMonth:date] - 1;
     
     return [NSNumber numberWithInt:monthTicks];
 }
