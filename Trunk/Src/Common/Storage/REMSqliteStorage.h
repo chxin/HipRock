@@ -41,6 +41,7 @@
 -(NSDictionary*)get:(NSString*)sourceName key:(NSString*)key minVersion:(NSString*)minVersion;
 -(BOOL)checkSourceName:(NSString*)sourceName;
 -(void)clearSessionStorage;
+-(void)clearWindowActivateStorage;
 
 +(REMSqliteStorage*)getInstance;
 

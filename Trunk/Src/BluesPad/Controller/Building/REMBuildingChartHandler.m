@@ -208,15 +208,45 @@ static CPTTextStyle *yAxisLabelStyle;
 {
     NSNumberFormatter* formatter = [[NSNumberFormatter alloc]init];
     formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    [formatter setRoundingMode:NSNumberFormatterRoundHalfUp];
     
     double numberValue = [number doubleValue];
     
     NSString* text = nil;
     if (numberValue > 1000000) {
+        [formatter setMaximumFractionDigits:0];
+        [formatter setMinimumFractionDigits:0];
+        
         text = [NSString stringWithFormat:@"%@M", [formatter stringFromNumber:[NSNumber numberWithDouble:numberValue / 1000000]]];
-    } else if (numberValue > 1000) {
+    }
+    else if (numberValue > 1000) {
+        [formatter setMaximumFractionDigits:0];
+        [formatter setMinimumFractionDigits:0];
+        
         text = [NSString stringWithFormat:@"%@K", [formatter stringFromNumber:[NSNumber numberWithDouble:numberValue / 1000]]];
-    } else {
+    }
+    else if(numberValue > 10){
+        [formatter setMaximumFractionDigits:0];
+        [formatter setMinimumFractionDigits:0];
+        
+        text = [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithDouble:numberValue]]];
+    }
+    else if (numberValue > 1) {
+        [formatter setMaximumFractionDigits:1];
+        [formatter setMinimumFractionDigits:1];
+        
+        text = [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithDouble:numberValue]]];
+    }
+    else if (numberValue == 0){
+        [formatter setMaximumFractionDigits:0];
+        [formatter setMinimumFractionDigits:0];
+        
+        text = [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithDouble:numberValue]]];
+    }
+    else{
+        [formatter setMaximumFractionDigits:2];
+        [formatter setMinimumFractionDigits:2];
+        
         text = [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithDouble:numberValue]]];
     }
     
