@@ -478,6 +478,14 @@
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 		EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */; };
 		EF60822F17D818430093427C /* REMModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF60822E17D818430093427C /* REMModalView.m */; };
+		EF87DA8317E3003100E51262 /* REMTrendChartAxisConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EF87DA7C17E3003100E51262 /* REMTrendChartAxisConfig.m */; };
+		EF87DA8417E3003100E51262 /* REMTrendChartColumnSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EF87DA7D17E3003100E51262 /* REMTrendChartColumnSeries.m */; };
+		EF87DA8517E3003100E51262 /* REMTrendChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EF87DA7E17E3003100E51262 /* REMTrendChartDataProcessor.m */; };
+		EF87DA8617E3003100E51262 /* REMTrendChartLineSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EF87DA7F17E3003100E51262 /* REMTrendChartLineSeries.m */; };
+		EF87DA8717E3003100E51262 /* REMTrendChartPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = EF87DA8017E3003100E51262 /* REMTrendChartPoint.m */; };
+		EF87DA8817E3003100E51262 /* REMTrendChartSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EF87DA8117E3003100E51262 /* REMTrendChartSeries.m */; };
+		EF87DA8917E3003100E51262 /* REMTrendChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF87DA8217E3003100E51262 /* REMTrendChartView.m */; };
+		EF87DA8C17E30F8F00E51262 /* REMTrendChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EF87DA8B17E30F8F00E51262 /* REMTrendChartConfig.m */; };
 		EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */; };
 		EF96300617C610A200BBC7DA /* REMBuildingSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */; };
 		EF97879617C70B440062BE0E /* REMBuildingSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */; };
@@ -1003,6 +1011,15 @@
 		EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingWeiboView.m; path = View/Building/REMBuildingWeiboView.m; sourceTree = "<group>"; };
 		EF60822D17D818420093427C /* REMModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMModalView.h; sourceTree = "<group>"; };
 		EF60822E17D818430093427C /* REMModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMModalView.m; sourceTree = "<group>"; };
+		EF87DA7B17E3003100E51262 /* REMTrendChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMTrendChart.h; sourceTree = "<group>"; };
+		EF87DA7C17E3003100E51262 /* REMTrendChartAxisConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartAxisConfig.m; sourceTree = "<group>"; };
+		EF87DA7D17E3003100E51262 /* REMTrendChartColumnSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartColumnSeries.m; sourceTree = "<group>"; };
+		EF87DA7E17E3003100E51262 /* REMTrendChartDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartDataProcessor.m; sourceTree = "<group>"; };
+		EF87DA7F17E3003100E51262 /* REMTrendChartLineSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartLineSeries.m; sourceTree = "<group>"; };
+		EF87DA8017E3003100E51262 /* REMTrendChartPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartPoint.m; sourceTree = "<group>"; };
+		EF87DA8117E3003100E51262 /* REMTrendChartSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartSeries.m; sourceTree = "<group>"; };
+		EF87DA8217E3003100E51262 /* REMTrendChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartView.m; sourceTree = "<group>"; };
+		EF87DA8B17E30F8F00E51262 /* REMTrendChartConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartConfig.m; sourceTree = "<group>"; };
 		EF8F1D7717C2FE5400D3E29F /* REMToggleButtonGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButtonGroup.h; sourceTree = "<group>"; };
 		EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButtonGroup.m; sourceTree = "<group>"; };
 		EF96300417C610A100BBC7DA /* REMBuildingSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingSettingViewController.h; sourceTree = "<group>"; };
@@ -1492,6 +1509,7 @@
 		7A5E2D47177B3CE2000F77F9 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				EF87DA7A17E3003100E51262 /* Chart */,
 				7A095E71179571C80098DB16 /* REMWidgetAxisHelper.h */,
 				7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */,
 				B49B6F4F1781491800BC130A /* REMColor.h */,
@@ -2074,6 +2092,22 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		EF87DA7A17E3003100E51262 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				EF87DA7B17E3003100E51262 /* REMTrendChart.h */,
+				EF87DA7C17E3003100E51262 /* REMTrendChartAxisConfig.m */,
+				EF87DA7D17E3003100E51262 /* REMTrendChartColumnSeries.m */,
+				EF87DA7E17E3003100E51262 /* REMTrendChartDataProcessor.m */,
+				EF87DA7F17E3003100E51262 /* REMTrendChartLineSeries.m */,
+				EF87DA8017E3003100E51262 /* REMTrendChartPoint.m */,
+				EF87DA8117E3003100E51262 /* REMTrendChartSeries.m */,
+				EF87DA8217E3003100E51262 /* REMTrendChartView.m */,
+				EF87DA8B17E30F8F00E51262 /* REMTrendChartConfig.m */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2448,6 +2482,14 @@
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
 				EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */,
 				EF60822F17D818430093427C /* REMModalView.m in Sources */,
+				EF87DA8317E3003100E51262 /* REMTrendChartAxisConfig.m in Sources */,
+				EF87DA8417E3003100E51262 /* REMTrendChartColumnSeries.m in Sources */,
+				EF87DA8517E3003100E51262 /* REMTrendChartDataProcessor.m in Sources */,
+				EF87DA8617E3003100E51262 /* REMTrendChartLineSeries.m in Sources */,
+				EF87DA8717E3003100E51262 /* REMTrendChartPoint.m in Sources */,
+				EF87DA8817E3003100E51262 /* REMTrendChartSeries.m in Sources */,
+				EF87DA8917E3003100E51262 /* REMTrendChartView.m in Sources */,
+				EF87DA8C17E30F8F00E51262 /* REMTrendChartConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
