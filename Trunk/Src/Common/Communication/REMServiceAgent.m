@@ -134,7 +134,16 @@ static int requestTimeout = 45; //(s)
     {
         REMLogError(@"Communication error: %@\nServer response: %@", [error description], operation.responseString);
         
-        if(error && errorInfo.code != -999)
+        if(errorInfo.code == -1001){
+            [REMAlertHelper alert:@"数据加载超时"];
+            return;
+        }
+        if(errorInfo.code == -999){
+            REMLogInfo(@"Request canceled");
+            return;
+        }
+        
+        if(error)
         {
             error(errorInfo,operation.responseString);
         }
