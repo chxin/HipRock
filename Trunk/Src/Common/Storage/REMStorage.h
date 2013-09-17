@@ -21,6 +21,6 @@ typedef enum StorageExpirationType : NSUInteger {
 +(void)clearSessionStorage;
 +(void)clearOnApplicationActive;
 
-+(NSDictionary*)getFile:(NSString*)sourceName key:(NSString*)key;
++(NSData*)getFile:(NSString*)sourceName key:(NSString*)key;
 +(void)setFile:(NSString*)sourceName key:(NSString*)key version:(long)version image:(NSData*)image;
 @end

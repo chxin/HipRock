@@ -17,6 +17,8 @@
 #import "REMDataAccessor.h"
 #import "REMDataStore.h"    
 #import "REMBuildingViewController.h"
+#import "REMStorage.h"
+#import "REMError.h"
 
 @class REMBuildingViewController;
 

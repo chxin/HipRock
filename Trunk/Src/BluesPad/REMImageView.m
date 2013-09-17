@@ -204,9 +204,12 @@
         dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         //UIImage *image = self.defaultImage;
         dispatch_async(concurrentQueue, ^{
-            UIImage *view = [self AFInflatedImageFromResponseWithDataAtScale:data];
-            newView.image=view;
-             UIImageView *newBlurred= [self blurredImageView:newView];
+            @autoreleasepool {
+                UIImage *view = [self AFInflatedImageFromResponseWithDataAtScale:data];
+                newView.image=view;
+                UIImageView *newBlurred= [self blurredImageView:newView];
+            
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [self insertSubview:newView aboveSubview:self.blurredImageView];
@@ -235,6 +238,7 @@
                 }];
 
             });
+            }
         });
 
         
@@ -265,6 +269,9 @@
     if (!data || [data length] == 0) {
         return nil;
     }
+    
+   
+    
     
     CGImageRef imageRef = nil;
     
@@ -335,7 +342,7 @@
     }
     
     CGRect rect = CGRectMake(0.0f, 0.0f, width, height);
-    NSLog(@"image size:%@",NSStringFromCGRect(rect));
+    //NSLog(@"image size:%@",NSStringFromCGRect(rect));
     CGContextDrawImage(context, rect, imageRef);
     CGImageRef inflatedImageRef = CGBitmapContextCreateImage(context);
     CGContextRelease(context);
@@ -343,6 +350,8 @@
     UIImage *inflatedImage = [[UIImage alloc] initWithCGImage:inflatedImageRef scale:1 orientation:UIImageOrientationUp];
     CGImageRelease(inflatedImageRef);
     CGImageRelease(imageRef);
+    
+
     
     return inflatedImage;
 }
@@ -435,12 +444,22 @@
     blurred.contentMode=UIViewContentModeScaleToFill;
     blurred.backgroundColor=[UIColor clearColor];
     
+    
+    NSData *cachedData=[REMStorage getFile:@"building-blur" key:[NSString stringWithFormat:@"blur-%@",self.buildingInfo.building.buildingId]];
+    
+    if(cachedData!=nil){
+        UIImage *image = [UIImage imageWithData:cachedData];
+        blurred.image=image;
+        return blurred;
+    }
+    
     //dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     //dispatch_async(concurrentQueue, ^{
         UIImage *view = [REMImageHelper blurImage:imageView.image];
    //     dispatch_async(dispatch_get_main_queue(), ^{
     if(view!=nil){
             blurred.image=view;
+        [REMStorage setFile:@"building-blur" key:[NSString stringWithFormat:@"blur-%@",self.buildingInfo.building.buildingId] version:1000 image:UIImagePNGRepresentation(view)];
     }
    //     });
   //  });

@@ -102,13 +102,13 @@
 
 + (UIImage *)blurImage:(UIImage *)origImage
 {
-    //EAGLContext *myEAGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    EAGLContext *myEAGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
-    //NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
-    //[options setObject: [NSNull null] forKey: kCIContextWorkingColorSpace];
-    //CIContext *myContext = [CIContext contextWithEAGLContext:myEAGLContext options:options];
+    NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
+    [options setObject: [NSNull null] forKey: kCIContextWorkingColorSpace];
+    CIContext *myContext = [CIContext contextWithEAGLContext:myEAGLContext options:options];
     
-    //UIImage *small = [UIImage imageWithCGImage:origImage.CGImage scale:0.5 orientation:origImage.imageOrientation];
+ 
     UIImage *image=origImage;
     if(origImage.size.width>1024){
         CGSize newSize=CGSizeMake(origImage.size.width/2, origImage.size.height/2);
@@ -123,7 +123,7 @@
     
     
     
-     CIContext *myContext = [CIContext contextWithOptions:nil];
+    // CIContext *myContext = [CIContext contextWithOptions:nil];
     CIImage *ci = [[CIImage alloc]initWithCGImage:image.CGImage];
     
     CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"

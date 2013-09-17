@@ -243,6 +243,8 @@
     sqlite3_stmt* statement;
     
     [self openDatabase];
+    
+    
     int sqlStatus = sqlite3_prepare_v2(db, [sqlCmd UTF8String], -1, &statement, NULL);
     //NSLog(@"QUERY SQL STATEMENT PREPARATION CODE - %d", sqlStatus);
     NSDictionary *dictionary = nil;
