@@ -1361,8 +1361,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "311"
          endingLineNumber = "311"
-         landmarkName = "+deserializeResult:ofService:"
-         landmarkType = "5">
+         landmarkName = "@implementation REMServiceAgent"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

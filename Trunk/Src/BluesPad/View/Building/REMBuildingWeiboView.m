@@ -220,7 +220,7 @@ const NSInteger kWeiboMaxLength = 140;
         NSString *message = nil;
         if (error) {
             message = [NSString stringWithFormat:@"failed to post:%@", error];
-            //NSLog(@"%@", message);
+            NSLog(@"%@", message);
             [REMStatusBar showStatusMessage:@"新浪微博发送失败"];
         }
         else {

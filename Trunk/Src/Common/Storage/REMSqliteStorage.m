@@ -133,7 +133,7 @@
         NSString* myDocPath = myPaths[0];
         NSString* fileName = [myDocPath stringByAppendingFormat:DATA_FILE];
         _fileAddress = fileName;
-        //NSLog(@"%@", _fileAddress);
+        NSLog(@"%@", _fileAddress);
     }
     return _fileAddress;
 }

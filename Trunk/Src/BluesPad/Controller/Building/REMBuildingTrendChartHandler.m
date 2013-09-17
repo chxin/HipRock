@@ -116,7 +116,7 @@
             break;
         }
     }
-    //NSLog(@"Long Pressed At %@, nearby point index is %d", x, nearByPointIndex);
+    NSLog(@"Long Pressed At %@, nearby point index is %d", x, nearByPointIndex);
     
     
     [self drawToolTip: nearByPointIndex];
@@ -422,7 +422,11 @@
         REMTargetEnergyData* targetEData = dataItem.timeRangeData.targetEnergyData[0];
         for (int i = 0; i < targetEData.energyData.count; i++) {
             REMEnergyData* pointData = targetEData.energyData[i];
-            [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime  }];
+            if ([pointData.dataValue isEqual:[NSNull null]] || pointData.dataValue.floatValue < 0) {
+                [data addObject:@{@"y": [NSNull null], @"x": pointData.localTime  }];
+            } else {
+                [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime  }];
+            }
         }
         [series setValue:data forKey:@"data"];
     }

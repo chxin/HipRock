@@ -11,6 +11,7 @@
 #import "WeiboSDK.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingWeiboView.h"
+#import "REMTrendChart.h"
 
 @interface REMBuildingViewController ()
 @property (nonatomic,strong) NSArray *imageArray;
@@ -161,6 +162,17 @@
 
 - (void)initImageView
 {
+    REMTrendChartConfig* chartConfig = [[REMTrendChartConfig alloc]init];
+    //    chartConfig.xAxisConfig = [[REMTrendChartAxisConfig alloc]init];
+    chartConfig.xAxisConfig = [REMTrendChartAxisConfig getWidgetXConfig];
+    chartConfig.yAxisConfig = [NSArray arrayWithObjects:[REMTrendChartAxisConfig getWidgetYConfig],nil];
+    chartConfig.verticalGridLine = NO;
+    chartConfig.horizentalGridLineAmount = 4;
+    chartConfig.horizentalReservedSpace = 20;
+    
+    REMTrendChartView* testV = [[REMTrendChartView alloc]initWithFrame:CGRectMake(0, 0, 500, 400) chartConfig:chartConfig];
+    [self.view addSubview:testV];
+    
     int i=0;
     self.imageViewStatus = [[NSMutableDictionary alloc]initWithCapacity:self.buildingOverallArray.count];
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:self.buildingOverallArray.count];

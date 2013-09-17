@@ -156,7 +156,7 @@
 {
     
     
-    //NSLog(@"touchdown x:%f,y:%f",point.x,point.y);
+    NSLog(@"touchdown x:%f,y:%f",point.x,point.y);
     
     return YES;
 }
