@@ -91,6 +91,7 @@
 }
 
 - (void)notifyCustomImageLoaded:(NSNumber *)buildingId{
+    return;
     if(self.customImageLoadedDictionary.count==self.imageArray.count)return;
     if ([self.customImageLoadedDictionary objectForKey:buildingId]!=nil) {
         return;
@@ -300,6 +301,8 @@
                                     NSNumber *status = self.imageViewStatus[willIndex];
                                     if([status isEqualToNumber:@(0)] ==YES){
                                         REMImageView *nextView= self.imageArray[willIndex.intValue];
+                                        nextView.defaultImage=self.defaultImage;
+                                        nextView.defaultBlurImage=self.defaultBlurImage;
                                         [self.view addSubview: nextView];
                                         [nextView setScrollOffset:self.currentScrollOffset];
                                         self.imageViewStatus[willIndex]=@(1);
@@ -352,13 +355,16 @@
 
 - (void)releaseOutOfWindowView:(NSArray *)releaseViews{
     //NSLog(@"release views:%@",releaseViews);
-    for (NSNumber *num in releaseViews) {
-        REMImageView *image= self.imageArray[[num intValue]];
-        if([self.imageViewStatus[num] isEqual:@(1)]== YES){
-            [image removeFromSuperview];
-            self.imageViewStatus[num]=@(0);
+    @autoreleasepool {
+        for (NSNumber *num in releaseViews) {
+            REMImageView *image= self.imageArray[[num intValue]];
+            if([self.imageViewStatus[num] isEqual:@(1)]== YES){
+                [image removeFromSuperview];
+                self.imageViewStatus[num]=@(0);
+            }
         }
     }
+    
 }
 
 

@@ -227,6 +227,20 @@ typedef void(^SuccessCallback)(BOOL success);
     }
 }
 
+- (void)didMoveToSuperview{
+    if(self.superview==nil){
+        for (UIView *view in self.chartViewArray) {
+            [view removeFromSuperview];
+        }
+        for (UIView *view in self.chartViewSnapshotArray) {
+            [view removeFromSuperview];
+        }
+        self.chartViewSnapshotArray=nil;
+        self.chartViewArray=nil;
+        
+    }
+}
+
 - (void)initChartContainer
 {
     int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;

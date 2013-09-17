@@ -334,6 +334,16 @@ typedef void(^SuccessCallback)(BOOL success);
     }
 }
 
+- (void)didMoveToSuperview{
+    if(self.superview==nil){
+        for (UIView *view in self.commodityViewArray) {
+            [view removeFromSuperview];
+        }
+        self.commodityViewArray=nil;
+        
+    }
+}
+
 
 -(void)cancelAllRequest{
     if(self.buildingInfo.commodityUsage==nil || [self.buildingInfo.commodityUsage isEqual:[NSNull null]] || self.buildingInfo.commodityUsage.count<=0)

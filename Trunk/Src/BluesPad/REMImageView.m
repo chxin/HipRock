@@ -53,7 +53,7 @@
     if(self){
         self.buildingInfo=buildingInfo;
         
-        self.contentMode=UIViewContentModeScaleToFill;
+        self.contentMode=UIViewContentModeScaleAspectFit;
         self.dataViewUp=NO;
         self.cumulateY=0;
         self.loadingImage=NO;
@@ -68,10 +68,22 @@
 }
 
 - (void)moveOutOfWindow{
+    @autoreleasepool {
+
     [REMDataAccessor cancelAccess:self.loadingImageKey];
     [self.dataView cancelAllRequest];
     [self.dataView resetDefaultCommodity];
+    
+    //[self.imageView removeFromSuperview];
+    //[self.blurredImageView removeFromSuperview];
+    
+    self.imageView.image=self.defaultImage;
+    //self.imageView=nil;
+    self.blurredImageView.image=self.defaultBlurImage;
+    //self.blurredImageView=nil;
+        self.customImageLoaded=NO;
     self.isActive=NO;
+    }
 }
 
 -(void)prepareShare
@@ -88,7 +100,7 @@
     self.isActive=NO;
     self.hasLoadingChartData=NO;
     [self.bottomGradientLayer removeFromSuperlayer];
-    
+    self.customImageLoaded=NO;
     self.imageView.image=nil;
     self.imageView=nil;
     self.blurredImageView.image=nil;
@@ -124,7 +136,7 @@
         
         [self initSettingButton];
         
-        [self loadingBuildingImage];
+        //[self loadingBuildingImage];
         
     }
     
@@ -164,6 +176,7 @@
         
         return;
     }
+    if(self.customImageLoaded==YES)return;
     NSDictionary *param=@{@"pictureId":self.buildingInfo.building.pictureIds[0]};
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param];
     store.isAccessLocal=YES;
@@ -172,37 +185,61 @@
     store.isStoreLocal = YES;
     store.isAccessLocal = YES;
     self.loadingImage=YES;
+    if(self.isActive==NO)return;
     [REMDataAccessor access: store success:^(NSData *data){
         if(data == nil || [data length] == 2) return;
+        if(self.isActive==NO)return;
         self.customImageLoaded=YES;
         self.loadingImage=NO;
         
         UIImageView *newView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
         newView.contentMode=UIViewContentModeScaleToFill;
         newView.alpha=0;
-        newView.image=[self AFInflatedImageFromResponseWithDataAtScale:data];
-        [self insertSubview:newView aboveSubview:self.blurredImageView];
         
         
-        UIImageView *newBlurred= [self blurredImageView:newView];
-        [self insertSubview:newBlurred aboveSubview:newView];
         
-        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
-            newView.alpha=self.imageView.alpha;
-            newBlurred.alpha=self.blurredImageView.alpha;
-        } completion:^(BOOL finished){
-            [self.imageView removeFromSuperview];
-            [self.blurredImageView removeFromSuperview];
-            self.imageView.image=nil;
-            self.imageView=nil;
-            self.blurredImageView.image=nil;
-            self.blurredImageView=nil;
-            self.imageView = newView;
-            self.blurredImageView=newBlurred;
-            self.defaultImage=nil;
-            self.defaultBlurImage=nil;
-            [self.controller notifyCustomImageLoaded:self.buildingInfo.building.buildingId];
-        }];
+        //UIImageView *newBlurred= [self blurredImageView:newView];
+                
+        
+        dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        //UIImage *image = self.defaultImage;
+        dispatch_async(concurrentQueue, ^{
+            UIImage *view = [self AFInflatedImageFromResponseWithDataAtScale:data];
+            newView.image=view;
+             UIImageView *newBlurred= [self blurredImageView:newView];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self insertSubview:newView aboveSubview:self.blurredImageView];
+                [self insertSubview:newBlurred aboveSubview:newView];
+                
+                
+                
+                [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+                    newView.alpha=self.imageView.alpha;
+                    newBlurred.alpha=self.blurredImageView.alpha;
+                } completion:^(BOOL finished){
+                    [self.imageView removeFromSuperview];
+                    [self.blurredImageView removeFromSuperview];
+                    self.imageView.image=nil;
+                    self.imageView=nil;
+                    self.blurredImageView.image=nil;
+                    self.blurredImageView=nil;
+                    self.imageView = newView;
+                    self.blurredImageView=newBlurred;
+                    if(self.isActive == NO){
+                        [self moveOutOfWindow];
+                    }
+                    //self.defaultImage=nil;
+                    //self.defaultBlurImage=nil;
+                    //[self.controller notifyCustomImageLoaded:self.buildingInfo.building.buildingId];
+                }];
+
+            });
+        });
+
+        
+        
+        
         
         
         
@@ -298,6 +335,7 @@
     }
     
     CGRect rect = CGRectMake(0.0f, 0.0f, width, height);
+    NSLog(@"image size:%@",NSStringFromCGRect(rect));
     CGContextDrawImage(context, rect, imageRef);
     CGImageRef inflatedImageRef = CGBitmapContextCreateImage(context);
     CGContextRelease(context);
@@ -397,13 +435,15 @@
     blurred.contentMode=UIViewContentModeScaleToFill;
     blurred.backgroundColor=[UIColor clearColor];
     
-    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(concurrentQueue, ^{
-        UIImage *view = [REMImageHelper blurImage:imageView.image];
-        dispatch_async(dispatch_get_main_queue(), ^{
+    //dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //dispatch_async(concurrentQueue, ^{
+        UIImage *view = [REMImageHelper blurImage2:imageView.image];
+   //     dispatch_async(dispatch_get_main_queue(), ^{
+    if(view!=nil){
             blurred.image=view;
-        });
-    });
+    }
+   //     });
+  //  });
     
     return blurred;
 }
@@ -583,7 +623,10 @@
 
 - (void)requireChartData
 {
+    
     self.isActive=YES;
+    [self loadingBuildingImage];
+    
     if(self.dataViewUp==YES){
         [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:nil];
     }
