@@ -437,7 +437,7 @@
     
     //dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     //dispatch_async(concurrentQueue, ^{
-        UIImage *view = [REMImageHelper blurImage2:imageView.image];
+        UIImage *view = [REMImageHelper blurImage:imageView.image];
    //     dispatch_async(dispatch_get_main_queue(), ^{
     if(view!=nil){
             blurred.image=view;

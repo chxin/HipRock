@@ -23,7 +23,16 @@
     int boxSize = (int)(blur * 100);
     boxSize -= (boxSize % 2) + 1;
     
-    CGImageRef img = origImage.CGImage;
+    //UIImage *small = [UIImage imageWithCGImage:origImage.CGImage scale:0.5 orientation:origImage.imageOrientation];
+    CGSize newSize=CGSizeMake(1024, 768);
+    UIGraphicsBeginImageContext(newSize);
+    [origImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    
+    
+    CGImageRef img = newImage.CGImage;
     
     vImage_Buffer inBuffer, outBuffer;
     vImage_Error error;
@@ -36,8 +45,11 @@
     inBuffer.height = CGImageGetHeight(img);
     inBuffer.rowBytes = CGImageGetBytesPerRow(img);
     inBuffer.data = (void*)CFDataGetBytePtr(inBitmapData);
-    size_t height=CGImageGetHeight(img);
-    pixelBuffer = malloc(CGImageGetBytesPerRow(img) * height);
+    
+    
+    
+    
+    pixelBuffer = malloc(inBuffer.rowBytes * inBuffer.height);
     
     if(pixelBuffer==NULL){
         return nil;
@@ -47,6 +59,9 @@
     outBuffer.width = CGImageGetWidth(img);
     outBuffer.height = CGImageGetHeight(img);
     outBuffer.rowBytes = CGImageGetBytesPerRow(img);
+    
+    
+    
     
     error = vImageBoxConvolve_ARGB8888(&inBuffer, &outBuffer, NULL,
                                        0, 0, boxSize, boxSize, NULL,
@@ -92,8 +107,24 @@
     //NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
     //[options setObject: [NSNull null] forKey: kCIContextWorkingColorSpace];
     //CIContext *myContext = [CIContext contextWithEAGLContext:myEAGLContext options:options];
+    
+    //UIImage *small = [UIImage imageWithCGImage:origImage.CGImage scale:0.5 orientation:origImage.imageOrientation];
+    UIImage *image=origImage;
+    if(origImage.size.width>1024){
+        CGSize newSize=CGSizeMake(origImage.size.width/2, origImage.size.height/2);
+        UIGraphicsBeginImageContext(newSize);
+        [origImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        image=newImage;
+    }
+
+    
+    
+    
+    
      CIContext *myContext = [CIContext contextWithOptions:nil];
-    CIImage *ci = [[CIImage alloc]initWithCGImage:origImage.CGImage];
+    CIImage *ci = [[CIImage alloc]initWithCGImage:image.CGImage];
     
     CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
                                    keysAndValues: kCIInputImageKey,ci,@"inputRadius",@(15),nil];
@@ -102,15 +133,15 @@
     
     //NSLog(@"image size:%@",NSStringFromCGSize(imageView.image.size));
     
-    UIScreen *screen = [UIScreen mainScreen];
+    //UIScreen *screen = [UIScreen mainScreen];
     
-    CGRect frame = CGRectMake(0, 0, screen.bounds.size.height*screen.scale,screen.bounds.size.width*screen.scale);
+    //CGRect frame = CGRectMake(0, 0, screen.bounds.size.height*screen.scale,screen.bounds.size.width*screen.scale);
     
-    NSLog(@"blur frame:%@",NSStringFromCGRect(frame));
+    //NSLog(@"blur frame:%@",NSStringFromCGRect(frame));
     
-    CGRect retFrame=CGRectMake(0, 0, origImage.size.width*origImage.scale, origImage.size.height*origImage.scale);
+    CGRect retFrame=CGRectMake(0, 0, image.size.width*image.scale, image.size.height*image.scale);
     
-    NSLog(@"retframe:%@",NSStringFromCGRect(retFrame));
+    //NSLog(@"retframe:%@",NSStringFromCGRect(retFrame));
     
     CGImageRef cgimg =
     [myContext createCGImage:outputImage fromRect:retFrame];
