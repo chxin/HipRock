@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <Accelerate/Accelerate.h>
 @interface REMImageHelper : NSObject
 
 - (void) frostedGlassImage:(UIImageView*)view image:(NSData*)imageData gradientValue:(int)gradientValue;
 
  + (UIImage *)blurImage:(UIImage *)origImage;
+
++ (UIImage *)blurImage2:(UIImage *)origImage;
+
 @end

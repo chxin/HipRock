@@ -166,8 +166,12 @@
 -(void)clearSessionStorage
 {
     [self runSQL:[NSString stringWithFormat:STORAGE_NETWORK_SOURCE_SQL_CLEAR_SESSION, STORAGE_NETWORK_SOURCE_NAME, STORAGE_NETWORK_SOURCE_FIELDS_NAME_EXPIREDTIME, REMSessionExpired]];
-
+    
     //[self runSQL:[NSString stringWithFormat:STORAGE_NETWORK_SOURCE_SQL_CLEAR_SESSION, STORAGE_NETWORK_SOURCE_NAME, STORAGE_NETWORK_SOURCE_FIELDS_NAME_EXPIREDTIME, REMNeverExpired]];
+}
+-(void)clearWindowActivateStorage
+{
+    [self runSQL:[NSString stringWithFormat:STORAGE_NETWORK_SOURCE_SQL_CLEAR_SESSION, STORAGE_NETWORK_SOURCE_NAME, STORAGE_NETWORK_SOURCE_FIELDS_NAME_EXPIREDTIME, REMWindowActiated]];
 }
 /*
  -(void) initURLCategory {
@@ -239,6 +243,8 @@
     sqlite3_stmt* statement;
     
     [self openDatabase];
+    
+    
     int sqlStatus = sqlite3_prepare_v2(db, [sqlCmd UTF8String], -1, &statement, NULL);
     //NSLog(@"QUERY SQL STATEMENT PREPARATION CODE - %d", sqlStatus);
     NSDictionary *dictionary = nil;

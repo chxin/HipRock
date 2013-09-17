@@ -15,8 +15,9 @@ typedef void(^SuccessCallback)(BOOL success);
 @property (nonatomic,strong) NSArray *buttonArray;
 @property (nonatomic,weak)  REMBuildingOverallModel *buildingInfo;
 
-@property (nonatomic,strong) NSArray *commodityViewArray;
-@property (nonatomic) NSUInteger currentIndex;
+@property (nonatomic) NSNumber *currentCommodityId;
+
+@property (nonatomic,strong) NSMutableDictionary *commodityViewDictionary;
 
 @property (nonatomic,strong) NSMutableDictionary *successDic;
 
@@ -37,7 +38,8 @@ typedef void(^SuccessCallback)(BOOL success);
         self.successCounter=0;
         [self setContentSize:CGSizeMake(0, 1000)];
         self.buildingInfo=buildingInfo;
-        self.currentIndex=0;
+        self.currentCommodityId=@(0);
+        self.commodityViewDictionary=[[NSMutableDictionary alloc]initWithCapacity:self.buildingInfo.commodityUsage.count+1];
         self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityUsage.count+1)];
         [self initCommodityButton];
         [self initCommodityView];
@@ -54,7 +56,7 @@ typedef void(^SuccessCallback)(BOOL success);
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
         //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
-        btn.tag=i;
+        btn.tag=[model.commodity.commodityId integerValue];
         [btn setTitle:model.commodity.comment forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
@@ -90,7 +92,7 @@ typedef void(^SuccessCallback)(BOOL success);
         REMAirQualityModel *model = self.buildingInfo.airQuality;
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
         
-        btn.tag=i;
+        btn.tag=[model.commodity.commodityId integerValue];
         NSString *str = [self retrieveCommodityImageName:model.commodity];
         btn.imageView.contentMode=UIViewContentModeScaleToFill;
         btn.showsTouchWhenHighlighted=YES;
@@ -114,8 +116,8 @@ typedef void(^SuccessCallback)(BOOL success);
 }
 
 -(void)prepareShare{
-    if (self.commodityViewArray == nil || self.commodityViewArray == NULL || self.commodityViewArray.count == 0) return;
-    REMBuildingCommodityView *v = self.commodityViewArray[self.currentIndex];
+    if (self.commodityViewDictionary == nil || self.commodityViewDictionary == NULL || self.commodityViewDictionary.count == 0) return;
+    REMBuildingCommodityView *v = self.commodityViewDictionary[self.currentCommodityId];
     [v prepareShare];
 }
 
@@ -212,8 +214,10 @@ typedef void(^SuccessCallback)(BOOL success);
 - (void)buttonPressed:(UIButton *)button
 {
     if(button.selected == YES) return;
-    int current =0;
-    for (UIButton *btn in self.buttonArray) {
+    int current = 0;
+    NSUInteger commodityId=button.tag;
+    for (int i=0;i<self.buttonArray.count;++i) {
+        UIButton *btn = self.buttonArray[i];
         if(btn.selected==YES){
             current=btn.tag;
         }
@@ -225,18 +229,35 @@ typedef void(^SuccessCallback)(BOOL success);
             [btn setSelected:YES];
         }
     }
-    int to = button.tag;
-    self.currentIndex=to;
-    REMBuildingCommodityView *view=    self.commodityViewArray[to];
+    self.currentCommodityId=@(button.tag);
+    if([self.commodityViewDictionary objectForKey:@(commodityId)]==nil){
+        [self initCommodityById:@(commodityId)];
+    }
+    REMBuildingCommodityView *view=    self.commodityViewDictionary[@(commodityId)];
     view.alpha=1;
-    REMBuildingCommodityView *currentView= self.commodityViewArray[current];
+    REMBuildingCommodityView *currentView= self.commodityViewDictionary[@(current)];
     currentView.alpha=0;
-    /*
-    [UIView transitionFromView:self.commodityViewArray[current] toView:self.commodityViewArray[to] duration:0.5 options:UIViewAnimationOptionTransitionFlipFromRight completion:^(BOOL finished) {
-        REMBuildingCommodityView *view1=    self.commodityViewArray[current];
-        view1.alpha=0;
+    [self requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:nil];
+}
+
+- (void)initCommodityById:(NSNumber *)commodityId{
+    int height=800;
+    for (int i=0;i<self.buildingInfo.commodityUsage.count;++i ) {
+        REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
+        if([model.commodity.commodityId isEqualToNumber:commodityId]==YES){
+            REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withCommodityInfo:model];
+           
+            [self addSubview:view];
+            [self.commodityViewDictionary setObject:view forKey:model.commodity.commodityId];
+        }
+    }
+    
+    if([commodityId isEqualToNumber:@(12)]==YES){
+        REMBuildingAirQualityView *view = [[REMBuildingAirQualityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withAirQualityInfo:self.buildingInfo.airQuality];
+        [self addSubview:view];
+        [self.commodityViewDictionary setObject:view forKey:commodityId];
         
-    }];*/
+    }
 }
 
 - (void)initCommodityView
@@ -245,29 +266,20 @@ typedef void(^SuccessCallback)(BOOL success);
     if (self.buildingInfo.commodityUsage!=nil) {
         count=self.buildingInfo.commodityUsage.count;
     }
-    NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:count];
-    int i=0,height=800;
-    for (;i<self.buildingInfo.commodityUsage.count;++i ) {
-        REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
-        REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withCommodityInfo:model];
-        //view.delegate=self;
-        if(i!=0){
-            view.alpha=0;
-        }
-        [self addSubview:view];
-        [array addObject:view];
+    
+    if(count>0){
+        REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[0];
+        [self initCommodityById:model.commodity.commodityId];
+        self.currentCommodityId=model.commodity.commodityId;
     }
-    if(self.buildingInfo.airQuality!=nil){
-        
-        REMBuildingAirQualityView *view = [[REMBuildingAirQualityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withAirQualityInfo:self.buildingInfo.airQuality];
-        //view.delegate=self;
-        view.alpha=0;
-        
-        [self addSubview:view];
-        [array addObject:view];
+    else{
+        if(self.buildingInfo.airQuality!=nil){
+            [self initCommodityById:self.buildingInfo.airQuality.commodity.commodityId];
+            
+            self.currentCommodityId=self.buildingInfo.airQuality.commodity.commodityId;
+        }
     }
     
-    self.commodityViewArray=array;
 }
 
 - (void)sucessRequest{
@@ -284,16 +296,9 @@ typedef void(^SuccessCallback)(BOOL success);
 }
 
 - (void)replaceImagesShowReal:(BOOL)showReal{
-    if(self.commodityViewArray.count<1)return ;
-    REMBuildingCommodityView *view=   self.commodityViewArray[self.currentIndex];
-    NSNumber *key;
-    if(self.currentIndex>=self.buildingInfo.commodityUsage.count){
-        key=self.buildingInfo.airQuality.commodity.commodityId;
-    }
-    else{
-        REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[self.currentIndex];
-        key=model.commodity.commodityId;
-    }
+    if(self.commodityViewDictionary.count<1)return ;
+    REMBuildingCommodityView *view=   self.commodityViewDictionary[self.currentCommodityId];
+    NSNumber *key=self.currentCommodityId;
     if( self.successDic !=nil && [self.successDic[key] isEqualToNumber:@(1)] == YES){
         [view replaceChart:showReal];
     }
@@ -301,11 +306,12 @@ typedef void(^SuccessCallback)(BOOL success);
 
 - (void)requireChartDataWithBuildingId:(NSNumber *)buildingId complete:(void (^)(BOOL))callback
 {
-    if(self.commodityViewArray.count<1)return;
-    int count = self.commodityViewArray.count;
+    if(self.commodityViewDictionary.count<1)return;
+    int count = self.commodityViewDictionary.count;
     if(self.buildingInfo.airQuality!=nil) count--;
-    self.successBlock=callback;
+    //self.successBlock=callback;
     self.successCounter=0;
+    /*
     for (int i=0; i<count; i++) {
         REMBuildingCommodityView *view = self.commodityViewArray[i];
         REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
@@ -319,6 +325,27 @@ typedef void(^SuccessCallback)(BOOL success);
             [self sucessRequest];
         }];
     }
+    */
+    NSNumber *status=[self.successDic objectForKey:self.currentCommodityId];
+    if([status isEqualToNumber:@(1)] == YES) {
+        //[self sucessRequest];
+        if(callback!=nil){
+            callback(YES);
+        }
+    }
+    else{
+        REMBuildingCommodityView *view = self.commodityViewDictionary[self.currentCommodityId];
+        [view requireChartDataWithBuildingId:buildingId withCommodityId:self.currentCommodityId complete:^(BOOL success){
+            [self.successDic setObject:@(1) forKey:self.currentCommodityId];
+            //[self sucessRequest];
+            if(callback != nil){
+                callback(YES);
+            }
+        }];
+    }
+
+    
+    /*
     if(self.buildingInfo.airQuality!=nil){
         REMBuildingAirQualityView *view = self.commodityViewArray[self.commodityViewArray.count-1];
         REMAirQualityModel *model = self.buildingInfo.airQuality;
@@ -331,6 +358,16 @@ typedef void(^SuccessCallback)(BOOL success);
             [self.successDic setObject:@(1) forKey:model.commodity.commodityId];
             [self sucessRequest];
         }];
+    }*/
+}
+
+- (void)didMoveToSuperview{
+    if(self.superview==nil){
+        for (UIView *view in self.commodityViewDictionary.objectEnumerator) {
+            [view removeFromSuperview];
+        }
+        //self.commodityViewArray=nil;
+        
     }
 }
 
@@ -347,12 +384,14 @@ typedef void(^SuccessCallback)(BOOL success);
 
 - (void)exportDataView:(void (^)(NSDictionary *))callback
 {
-    NSNumber *ret = [self.successDic objectForKey:@(self.currentIndex)];
+    NSNumber *ret = [self.successDic objectForKey:self.currentCommodityId];
     if([ret isEqualToNumber:@(1)] ==YES){
+        [self prepareShare];
         callback([self realExport]);
     }
     else{
         [self requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:^(BOOL success){
+            [self prepareShare];
             callback([self realExport]);
         }];
     }
@@ -367,7 +406,7 @@ typedef void(^SuccessCallback)(BOOL success);
 }
 
 - (NSDictionary *)realExport{    
-    REMBuildingCommodityView* chartView = (REMBuildingCommodityView*)[self.commodityViewArray objectAtIndex:self.currentIndex];
+    REMBuildingCommodityView* chartView = self.commodityViewDictionary[self.currentCommodityId];
     CGFloat chartHeight = self.contentSize.height;
     
     NSMutableArray* btnOutputImages = [[NSMutableArray alloc]initWithCapacity:self.buttonArray.count];
@@ -400,9 +439,15 @@ typedef void(^SuccessCallback)(BOOL success);
     UIGraphicsEndImageContext();
     
     NSString* stringFormat = nil;
-    if (self.currentIndex < self.buildingInfo.commodityUsage.count) {
+    if ([self.currentCommodityId isEqualToNumber:@(12)]==NO) {
         stringFormat = @"%@本月用#Commodity#趋势及单位平米用#Commodity#趋势，上月用#Commodity#总能耗为#Usage##UomName#，节能持续进行中。";
-        REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[self.currentIndex];
+        REMCommodityUsageModel *model ;
+        for (REMCommodityUsageModel *m in self.buildingInfo.commodityUsage) {
+            if([m.commodity.commodityId isEqualToNumber:self.currentCommodityId]==YES){
+                model=m;
+                break;
+            }
+        }
         NSString* commodityName = model.commodity.comment;
         NSString* uomName = model.commodityUsage.uom.comment;
         NSString* val = [model.commodityUsage.dataValue isEqual:[NSNull null]] ? nil : model.commodityUsage.dataValue.stringValue;

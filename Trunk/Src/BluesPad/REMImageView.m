@@ -53,7 +53,7 @@
     if(self){
         self.buildingInfo=buildingInfo;
         
-        self.contentMode=UIViewContentModeScaleToFill;
+        self.contentMode=UIViewContentModeScaleAspectFit;
         self.dataViewUp=NO;
         self.cumulateY=0;
         self.loadingImage=NO;
@@ -68,10 +68,22 @@
 }
 
 - (void)moveOutOfWindow{
+    @autoreleasepool {
+
     [REMDataAccessor cancelAccess:self.loadingImageKey];
     [self.dataView cancelAllRequest];
     [self.dataView resetDefaultCommodity];
+    
+    //[self.imageView removeFromSuperview];
+    //[self.blurredImageView removeFromSuperview];
+    
+    self.imageView.image=self.defaultImage;
+    //self.imageView=nil;
+    self.blurredImageView.image=self.defaultBlurImage;
+    //self.blurredImageView=nil;
+        self.customImageLoaded=NO;
     self.isActive=NO;
+    }
 }
 
 -(void)prepareShare
@@ -88,7 +100,7 @@
     self.isActive=NO;
     self.hasLoadingChartData=NO;
     [self.bottomGradientLayer removeFromSuperlayer];
-    
+    self.customImageLoaded=NO;
     self.imageView.image=nil;
     self.imageView=nil;
     self.blurredImageView.image=nil;
@@ -124,7 +136,7 @@
         
         [self initSettingButton];
         
-        [self loadingBuildingImage];
+        //[self loadingBuildingImage];
         
     }
     
@@ -164,6 +176,7 @@
         
         return;
     }
+    if(self.customImageLoaded==YES)return;
     NSDictionary *param=@{@"pictureId":self.buildingInfo.building.pictureIds[0]};
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param];
     store.isAccessLocal=YES;
@@ -172,37 +185,65 @@
     store.isStoreLocal = YES;
     store.isAccessLocal = YES;
     self.loadingImage=YES;
+    if(self.isActive==NO)return;
     [REMDataAccessor access: store success:^(NSData *data){
         if(data == nil || [data length] == 2) return;
+        if(self.isActive==NO)return;
         self.customImageLoaded=YES;
         self.loadingImage=NO;
         
         UIImageView *newView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
         newView.contentMode=UIViewContentModeScaleToFill;
         newView.alpha=0;
-        newView.image=[self AFInflatedImageFromResponseWithDataAtScale:data];
-        [self insertSubview:newView aboveSubview:self.blurredImageView];
         
         
-        UIImageView *newBlurred= [self blurredImageView:newView];
-        [self insertSubview:newBlurred aboveSubview:newView];
         
-        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
-            newView.alpha=self.imageView.alpha;
-            newBlurred.alpha=self.blurredImageView.alpha;
-        } completion:^(BOOL finished){
-            [self.imageView removeFromSuperview];
-            [self.blurredImageView removeFromSuperview];
-            self.imageView.image=nil;
-            self.imageView=nil;
-            self.blurredImageView.image=nil;
-            self.blurredImageView=nil;
-            self.imageView = newView;
-            self.blurredImageView=newBlurred;
-            self.defaultImage=nil;
-            self.defaultBlurImage=nil;
-            [self.controller notifyCustomImageLoaded:self.buildingInfo.building.buildingId];
-        }];
+        //UIImageView *newBlurred= [self blurredImageView:newView];
+                
+        
+        dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        //UIImage *image = self.defaultImage;
+        dispatch_async(concurrentQueue, ^{
+            @autoreleasepool {
+                UIImage *view = [self AFInflatedImageFromResponseWithDataAtScale:data];
+                newView.image=view;
+                UIImageView *newBlurred= [self blurredImageView:newView];
+            
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self insertSubview:newView aboveSubview:self.blurredImageView];
+                [self insertSubview:newBlurred aboveSubview:newView];
+                
+                
+                
+                [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+                    newView.alpha=self.imageView.alpha;
+                    newBlurred.alpha=self.blurredImageView.alpha;
+                } completion:^(BOOL finished){
+                    [self.imageView removeFromSuperview];
+                    [self.blurredImageView removeFromSuperview];
+                    self.imageView.image=nil;
+                    self.imageView=nil;
+                    self.blurredImageView.image=nil;
+                    self.blurredImageView=nil;
+                    self.imageView = newView;
+                    self.blurredImageView=newBlurred;
+                    if(self.isActive == NO){
+                        [self moveOutOfWindow];
+                    }
+                    //self.defaultImage=nil;
+                    //self.defaultBlurImage=nil;
+                    //[self.controller notifyCustomImageLoaded:self.buildingInfo.building.buildingId];
+                }];
+
+            });
+            }
+        });
+
+        
+        
+        
         
         
         
@@ -228,6 +269,9 @@
     if (!data || [data length] == 0) {
         return nil;
     }
+    
+   
+    
     
     CGImageRef imageRef = nil;
     
@@ -274,6 +318,19 @@
         }
     }
     
+    UIScreen *screen = [UIScreen mainScreen];
+    
+    CGRect frame=  CGRectMake(0, 0, screen.bounds.size.height*screen.scale, screen.bounds.size.width*screen.scale);
+    
+    if(width>frame.size.width) {
+        width=frame.size.width;
+    }
+    
+    if(height>frame.size.height){
+        height=frame.size.height;
+    }
+    
+    
     CGContextRef context = CGBitmapContextCreate(NULL, width, height, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo);
     
     CGColorSpaceRelease(colorSpace);
@@ -285,6 +342,7 @@
     }
     
     CGRect rect = CGRectMake(0.0f, 0.0f, width, height);
+    //NSLog(@"image size:%@",NSStringFromCGRect(rect));
     CGContextDrawImage(context, rect, imageRef);
     CGImageRef inflatedImageRef = CGBitmapContextCreateImage(context);
     CGContextRelease(context);
@@ -292,6 +350,8 @@
     UIImage *inflatedImage = [[UIImage alloc] initWithCGImage:inflatedImageRef scale:1 orientation:UIImageOrientationUp];
     CGImageRelease(inflatedImageRef);
     CGImageRelease(imageRef);
+    
+
     
     return inflatedImage;
 }
@@ -384,13 +444,25 @@
     blurred.contentMode=UIViewContentModeScaleToFill;
     blurred.backgroundColor=[UIColor clearColor];
     
-    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(concurrentQueue, ^{
+    
+    NSData *cachedData=[REMStorage getFile:@"building-blur" key:[NSString stringWithFormat:@"blur-%@",self.buildingInfo.building.buildingId]];
+    
+    if(cachedData!=nil){
+        UIImage *image = [UIImage imageWithData:cachedData];
+        blurred.image=image;
+        return blurred;
+    }
+    
+    //dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //dispatch_async(concurrentQueue, ^{
         UIImage *view = [REMImageHelper blurImage:imageView.image];
-        dispatch_async(dispatch_get_main_queue(), ^{
+   //     dispatch_async(dispatch_get_main_queue(), ^{
+    if(view!=nil){
             blurred.image=view;
-        });
-    });
+        [REMStorage setFile:@"building-blur" key:[NSString stringWithFormat:@"blur-%@",self.buildingInfo.building.buildingId] version:1000 image:UIImagePNGRepresentation(view)];
+    }
+   //     });
+  //  });
     
     return blurred;
 }
@@ -570,7 +642,10 @@
 
 - (void)requireChartData
 {
+    
     self.isActive=YES;
+    [self loadingBuildingImage];
+    
     if(self.dataViewUp==YES){
         [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:nil];
     }
@@ -658,13 +733,13 @@
         [[UIColor blackColor]set];
         UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
         [[self getImageOfLayer:self.imageView.layer]drawInRect:self.imageView.frame];
-        
         [[self getImageOfLayer:self.titleLabel.layer]drawInRect:CGRectMake(self.settingButton.frame.origin.x, self.settingButton.frame.origin.y, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height)];
         //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
         [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
         [dataImage drawInRect:CGRectMake(0, kBuildingCommodityViewTop + kBuildingTitleHeight, outputWidth, dataImageHeight)];
         
         [footerImage drawInRect:CGRectMake(0, outputHeightWithoutFooter, 800, footerHeight)];
+        [[self getImageOfLayer:self.titleGradientLayer]drawInRect:self.titleGradientLayer.frame];
         UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         

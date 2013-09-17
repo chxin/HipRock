@@ -35,6 +35,13 @@
     return self;
 }
 
+- (void)didMoveToSuperview{
+    if(self.superview==nil){
+        [self.chartContainer removeFromSuperview];
+        self.controller=nil;
+        self.chartContainer=nil;
+    }
+}
 
 - (void)initChartViewWithSize:(CGFloat)titleSize
 {

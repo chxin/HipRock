@@ -44,6 +44,12 @@
         [self initEmptyTextLabelWithTitleSize:titleSize withTitleMargin:margin withLeftMargin:leftMargin withOrigFontSize:valueSize];
         return;
     }
+    else{
+        if([data.dataValue isLessThan:@(0)] ==YES){
+            [self initEmptyTextLabelWithTitleSize:titleSize withTitleMargin:margin withLeftMargin:leftMargin withOrigFontSize:valueSize];
+            return;
+        }
+    }
     
     
     int marginTop=titleSize+margin ;
