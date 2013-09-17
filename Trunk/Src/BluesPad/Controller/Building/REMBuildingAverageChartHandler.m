@@ -251,7 +251,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 //    
 //    return month == 1? [yearFormatter stringFromDate:date]: [monthFormatter stringFromDate:date];
     int year = monthTick / 12;
-    int month = (monthTick % 12) + 1;
+    int month = (monthTick % 12);
     
     return month == 1 ? [NSString stringWithFormat:@"%d年%d月", year, month]:[NSString stringWithFormat:@"%d月", month];
 }
