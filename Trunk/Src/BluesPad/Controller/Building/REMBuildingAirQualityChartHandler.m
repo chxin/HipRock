@@ -194,6 +194,9 @@ static NSDictionary *codeNameMap;
     //process global range
     NSDate *tomorrow = [REMTimeHelper add:-4 onPart:REMDateTimePartHour ofDate: [REMTimeHelper tomorrow]];
     self.globalRange.end = [tomorrow timeIntervalSince1970];
+    NSDate *before366tomorrow = [REMTimeHelper add:-366 onPart:REMDateTimePartDay ofDate:tomorrow];
+    if(self.globalRange.start<[before366tomorrow timeIntervalSince1970])
+        self.globalRange.start = [before366tomorrow timeIntervalSince1970];
     //process visiable range
     NSDate *visiableStartDate = [REMTimeHelper add:-14 onPart:REMDateTimePartDay ofDate:tomorrow];
     
@@ -212,7 +215,7 @@ static NSDictionary *codeNameMap;
 {
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.hostView.hostedGraph.defaultPlotSpace;
     plotSpace.allowsUserInteraction = YES;
-    plotSpace.delegate=self.scrollManager;
+    plotSpace.delegate=self;//.scrollManager;
     
     //long dayTicks = [[REMTimeHelper tomorrow] timeIntervalSince1970] - [[REMTimeHelper today] timeIntervalSince1970];
     
