@@ -27,7 +27,12 @@
     self.lastPoint=point;
     self.lastTime=event.timestamp;
     
-    
+    if (self.snapshotArray!=nil) {
+        for (UIView *view in self.snapshotArray) {
+            [view removeFromSuperview];
+        }
+        self.snapshotArray=nil;
+    }
     
     return YES;
 }
@@ -111,7 +116,7 @@
             
         }
         
-        
+        /*
         [CPTAnimation animate:space
                      property:@"xRange"
                 fromPlotRange:space.xRange
@@ -119,7 +124,7 @@
                      duration:constTime
                animationCurve:CPTAnimationCurveSinusoidalOut
                      delegate:nil];
-        
+        */
         if(correctRange!=nil){
             //newRange = [correctRange mutableCopy];
             [CPTAnimation animate:space property:@"xRange" fromPlotRange:newRange toPlotRange:correctRange duration:0.3 withDelay:constTime animationCurve:CPTAnimationCurveSinusoidalOut delegate:nil];

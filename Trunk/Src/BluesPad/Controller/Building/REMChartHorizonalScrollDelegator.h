@@ -19,5 +19,7 @@
 
 @property (nonatomic,strong) CPTGraphHostingView *hostView;
 
+@property (nonatomic,strong) NSArray *snapshotArray;
+
 
 @end
