@@ -1179,7 +1179,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "58"
          endingLineNumber = "58"
-         landmarkName = "+getFile:key:"
+         landmarkName = "+get:key:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1205,7 +1205,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "63"
          endingLineNumber = "63"
-         landmarkName = "+setFile:key:version:image:"
+         landmarkName = "+getFile:key:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1218,7 +1218,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "187"
          endingLineNumber = "187"
-         landmarkName = "-setFile:params:version:imageData:"
+         landmarkName = "-createFileSource"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1257,7 +1257,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "267"
          endingLineNumber = "267"
-         landmarkName = "-getFileCacheFolder"
+         landmarkName = "-getFile:key:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2270,6 +2270,19 @@
          startingLineNumber = "240"
          endingLineNumber = "240"
          landmarkName = "-formatDateLabel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Common/Storage/REMSqliteStorage.m"
+         timestampString = "401096129.404613"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "173"
+         endingLineNumber = "173"
+         landmarkName = "-clearWindowActivateStorage"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
