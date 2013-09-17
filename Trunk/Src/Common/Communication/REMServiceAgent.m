@@ -188,11 +188,12 @@ static int requestTimeout = 45; //(s)
         NSMutableArray *cancelList = [[NSMutableArray alloc] init];
         
         [queue setSuspended:YES];
-        for(int i=0;i<[queue operationCount];i++)
+        for(int i=0;i<queue.operations.count;i++)
         {
             id operation = nil;
             @try {
-                operation = queue.operations[i];
+                if(i<=queue.operations.count-1)
+                    operation = queue.operations[i];
             }
             @catch (NSException *exception) {
                 REMLogError(@"Cancel request error: %@", [exception description]);
