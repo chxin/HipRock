@@ -108,6 +108,21 @@ static CPTTextStyle *yAxisLabelStyle;
     }
 }
 
+- (CABasicAnimation *) plotAnimation
+{
+    //adding animation here
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale.y"];
+    [animation setDuration:0.5f];
+    animation.toValue = [NSNumber numberWithFloat:1.0f];
+    
+    animation.fromValue = [NSNumber numberWithFloat:0.0f];
+    animation.removedOnCompletion = NO;
+    animation.delegate = self;
+    animation.fillMode = kCAFillModeForwards;
+    
+    return animation;
+}
+
 - (CPTGraphHostingView*) getHostView  {
     return nil;
 }

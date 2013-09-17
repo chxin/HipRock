@@ -345,6 +345,7 @@ static NSDictionary *codeNameMap;
         line.dataLineStyle = lineStyle;
         line.plotSymbol = symbol;
         line.delegate = self;
+        [line addAnimation:[self plotAnimation] forKey:@"grow"];
         [self.chartView.hostView.hostedGraph addPlot:line];
     }
 }

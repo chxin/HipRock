@@ -32,26 +32,26 @@
     [self recoverAppContext];
     
     if([self isAlreadyLogin]){
-        SEL selector = @selector(breathAnimation:);
-         
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:selector]];
-        [invocation setTarget:self];
-        [invocation setSelector:selector];
-        
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
-        
-        [self showBuildingView:^(void){
-            if(self.timer != nil){
-                if([self.timer isValid])
-                    [self.timer invalidate];
-                
-                self.timer = nil;
-            }
+        [self breathAnimation:^(void){
+            SEL selector = @selector(breathAnimation:);
             
-            [self.logoView setHidden:YES];
+            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:selector]];
+            [invocation setTarget:self];
+            [invocation setSelector:selector];
+            
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
+            
+            [self showBuildingView:^(void){
+                if(self.timer != nil){
+                    if([self.timer isValid])
+                        [self.timer invalidate];
+                    
+                    self.timer = nil;
+                }
+                
+                [self.logoView setHidden:YES];
+            }];
         }];
-        
-        [self breathAnimation:nil];
     }
     else{
         [self breathAnimation:^(void){

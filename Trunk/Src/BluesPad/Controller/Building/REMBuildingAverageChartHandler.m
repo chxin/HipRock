@@ -251,7 +251,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 //    
 //    return month == 1? [yearFormatter stringFromDate:date]: [monthFormatter stringFromDate:date];
     int year = monthTick / 12;
-    int month = (monthTick % 12) + 1;
+    int month = (monthTick % 12)+1;
     
     return month == 1 ? [NSString stringWithFormat:@"%d年%d月", year, month]:[NSString stringWithFormat:@"%d月", month];
 }
@@ -296,6 +296,8 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
         
         column.anchorPoint=CGPointZero;
         
+        [column addAnimation:[self plotAnimation] forKey:@"grow"];
+        
         [self.chartView.graph addPlot:column];
     }
     
@@ -322,6 +324,9 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
         
         line.dataLineStyle = lineStyle;
         line.delegate = self;
+        
+        [line addAnimation:[self plotAnimation] forKey:@"grow"];
+        
         [self.chartView.graph addPlot:line];
     }
 }
@@ -366,7 +371,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
         
         if(data.count>0){
             NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%@", index, target.type, target.targetId];
-            NSDictionary* series = @{ @"identity":targetIdentity, @"data":data};
+            NSDictionary* series = @{ @"identity":targetIdentity, @"data":data };
             
             [convertedData addObject:series];
         }
@@ -463,7 +468,6 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     
     return  YES;
 }
-
 
 #pragma mark - data source delegate
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
