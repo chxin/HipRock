@@ -41,5 +41,6 @@
 
 
 -(void)drawLabelWithText:(NSString *)text;
+- (CABasicAnimation *) plotAnimation;
 
 @end

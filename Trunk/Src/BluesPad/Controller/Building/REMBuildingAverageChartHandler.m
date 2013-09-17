@@ -296,6 +296,8 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
         
         column.anchorPoint=CGPointZero;
         
+        [column addAnimation:[self plotAnimation] forKey:@"grow"];
+        
         [self.chartView.graph addPlot:column];
     }
     
@@ -322,6 +324,9 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
         
         line.dataLineStyle = lineStyle;
         line.delegate = self;
+        
+        [line addAnimation:[self plotAnimation] forKey:@"grow"];
+        
         [self.chartView.graph addPlot:line];
     }
 }
@@ -463,7 +468,6 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     
     return  YES;
 }
-
 
 #pragma mark - data source delegate
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
