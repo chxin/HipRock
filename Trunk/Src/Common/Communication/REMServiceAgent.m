@@ -195,6 +195,7 @@ static int requestTimeout = 45; //(s)
                 operation = queue.operations[i];
             }
             @catch (NSException *exception) {
+                REMLogError(@"Cancel request error: %@", [exception description]);
                 continue;
             }
             
