@@ -17,6 +17,8 @@
 
 @property (nonatomic) REMDataStoreType requestUrl;
 
+@property (nonatomic,strong) NSArray *snapshotArray;
+
 - (REMBuildingChartHandler *)initWithViewFrame:(CGRect)frame;
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(REMError *error))loadCompleted;
