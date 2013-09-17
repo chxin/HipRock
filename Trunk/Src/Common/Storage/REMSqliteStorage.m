@@ -173,6 +173,17 @@
 {
     [self runSQL:[NSString stringWithFormat:STORAGE_NETWORK_SOURCE_SQL_CLEAR_SESSION, STORAGE_NETWORK_SOURCE_NAME, STORAGE_NETWORK_SOURCE_FIELDS_NAME_EXPIREDTIME, REMWindowActiated]];
 }
+-(void)clearFileCache
+{
+    [self runSQL:[NSString stringWithFormat:@"DELETE FROM %@", STORAGE_FILE_SOURCE_NAME]];
+  
+    NSString *pointDir = [self getFileCacheFolder];
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSArray *arr = [manager contentsOfDirectoryAtPath:pointDir error:nil];
+    for(NSString* f in arr) {
+        [manager removeItemAtPath:f error:nil];
+    }
+}
 /*
  -(void) initURLCategory {
  NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"APIList" ofType:@"plist"];
