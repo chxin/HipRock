@@ -23,6 +23,7 @@ typedef void(^SuccessCallback)(BOOL success);
 
 @property (nonatomic,strong) SuccessCallback successBlock;
 @property (nonatomic) NSUInteger successCounter;
+@property (nonatomic) BOOL isLoadingChart;
 @end
 @implementation REMBuildingDataView
 
@@ -36,6 +37,7 @@ typedef void(^SuccessCallback)(BOOL success);
         self.clipsToBounds=YES;
         self.showsVerticalScrollIndicator=NO;
         self.successCounter=0;
+        self.isLoadingChart=NO;
         [self setContentSize:CGSizeMake(0, 1000)];
         self.buildingInfo=buildingInfo;
         self.currentCommodityId=@(0);
@@ -334,10 +336,13 @@ typedef void(^SuccessCallback)(BOOL success);
         }
     }
     else{
+        if(self.isLoadingChart==YES)return;
         REMBuildingCommodityView *view = self.commodityViewDictionary[self.currentCommodityId];
+        self.isLoadingChart=YES;
         [view requireChartDataWithBuildingId:buildingId withCommodityId:self.currentCommodityId complete:^(BOOL success){
             [self.successDic setObject:@(1) forKey:self.currentCommodityId];
             //[self sucessRequest];
+            self.isLoadingChart=NO;
             if(callback != nil){
                 callback(YES);
             }
