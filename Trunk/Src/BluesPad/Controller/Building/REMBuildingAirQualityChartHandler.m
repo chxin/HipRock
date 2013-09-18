@@ -14,6 +14,8 @@
 #import "REMChartSeriesIndicator.h"
 #import "REMBuildingConstants.h"
 
+#define REMHalfDaySeconds 12*60*60
+
 @interface REMBuildingAirQualityChartHandler ()
 
 @property (nonatomic) CGRect viewFrame;
@@ -145,15 +147,15 @@ static NSDictionary *codeNameMap;
     self.visiableRange = [[REMDataRange alloc] initWithConstants];
     self.dataValueRange= [[REMDataRange alloc] initWithConstants];
     
+    NSDate *tomorrow = [REMTimeHelper convertGMTDateToLocal:[REMTimeHelper tomorrow]];
+    NSDate *_14DaysBefore = [REMTimeHelper add:-14 onPart:REMDateTimePartDay ofDate:[REMTimeHelper tomorrow]];
+    NSDate *_366DaysBefore = [REMTimeHelper add:-366 onPart:REMDateTimePartDay ofDate:[REMTimeHelper tomorrow]];
     
     for (int i=0;i<self.airQualityData.airQualityData.targetEnergyData.count;i++) {
         REMTargetEnergyData *targetEnergyData = (REMTargetEnergyData *)self.airQualityData.airQualityData.targetEnergyData[i];
         
         REMEnergyTargetModel *target = targetEnergyData.target;
         NSArray *energyData = targetEnergyData.energyData;
-        
-        self.visiableRange.start = MIN(self.visiableRange.start, [target.visiableTimeRange.startTime timeIntervalSince1970]);
-        self.visiableRange.end = MAX(self.visiableRange.end, [target.visiableTimeRange.endTime timeIntervalSince1970]);
         
         NSString* targetIdentity = [NSString stringWithFormat:@"air-%d-%d-%@", i, target.type, target.targetId];
         NSMutableArray *data = [[NSMutableArray alloc] init];
@@ -163,11 +165,12 @@ static NSDictionary *codeNameMap;
             
             if([point.dataValue isEqual:[NSNull null]])
                 continue;
+            if([point.localTime timeIntervalSince1970] <= [_366DaysBefore timeIntervalSince1970])
+                continue;
             
             [data addObject:@{@"y": point.dataValue, @"x": point.localTime}];
             
             self.globalRange.start = MIN(self.globalRange.start, [point.localTime timeIntervalSince1970]);
-            self.globalRange.end = MAX(self.globalRange.end, [point.localTime timeIntervalSince1970]);
             
             self.dataValueRange.start = MIN(self.dataValueRange.start, [point.dataValue doubleValue]);
             self.dataValueRange.end = MAX(self.dataValueRange.end, [point.dataValue doubleValue]);
@@ -192,15 +195,13 @@ static NSDictionary *codeNameMap;
     }
     
     //process global range
-    NSDate *tomorrow = [REMTimeHelper add:-4 onPart:REMDateTimePartHour ofDate: [REMTimeHelper tomorrow]];
     self.globalRange.end = [tomorrow timeIntervalSince1970];
-    NSDate *before366tomorrow = [REMTimeHelper add:-366 onPart:REMDateTimePartDay ofDate:tomorrow];
-    if(self.globalRange.start<[before366tomorrow timeIntervalSince1970])
-        self.globalRange.start = [before366tomorrow timeIntervalSince1970];
-    //process visiable range
-    NSDate *visiableStartDate = [REMTimeHelper add:-14 onPart:REMDateTimePartDay ofDate:tomorrow];
+    if(self.globalRange.start<[_366DaysBefore timeIntervalSince1970])
+        self.globalRange.start = [_366DaysBefore timeIntervalSince1970];
+    self.globalRange.start += REMHalfDaySeconds;
     
-    self.visiableRange.start = [visiableStartDate timeIntervalSince1970];
+    //process visiable range
+    self.visiableRange.start = [_14DaysBefore timeIntervalSince1970];
     self.visiableRange.end = self.globalRange.end;
     
     double enlargeDistance = [self.visiableRange distance] * 0.3;
@@ -256,17 +257,15 @@ static NSDictionary *codeNameMap;
     
     NSDate *tickDate = [NSDate dateWithTimeIntervalSince1970:self.globalRange.start];
 
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    [components setDay:1];
     while ([tickDate timeIntervalSince1970] < self.globalRange.end) {
-        tickDate = [[REMTimeHelper gregorianCalendar] dateByAddingComponents:components toDate:tickDate options:0];
-        
         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDateLabel:tickDate] textStyle:[self xAxisLabelStyle]];
         label.tickLocation = CPTDecimalFromDouble([tickDate timeIntervalSince1970]);
         label.offset = 5;
         
         [xlabels addObject:label];
-        [xlocations addObject:[NSNumber numberWithDouble:[tickDate timeIntervalSince1970] + 12*60*60]];
+        [xlocations addObject:[NSNumber numberWithDouble:[tickDate timeIntervalSince1970] + REMHalfDaySeconds]];
+        
+        tickDate = [REMTimeHelper add:1 onPart:REMDateTimePartDay ofDate:tickDate];
     }
     
     x.axisLabels = xlabels;
