@@ -147,9 +147,9 @@ static NSDictionary *codeNameMap;
     self.visiableRange = [[REMDataRange alloc] initWithConstants];
     self.dataValueRange= [[REMDataRange alloc] initWithConstants];
     
-    NSDate *tomorrow = [REMTimeHelper convertGMTDateToLocal:[REMTimeHelper tomorrow]];
+    NSDate *today = [REMTimeHelper convertGMTDateToLocal:[REMTimeHelper today]];
     NSDate *_14DaysBefore = [REMTimeHelper add:-14 onPart:REMDateTimePartDay ofDate:[REMTimeHelper tomorrow]];
-    NSDate *_366DaysBefore = [REMTimeHelper add:-366 onPart:REMDateTimePartDay ofDate:[REMTimeHelper tomorrow]];
+    NSDate *_366DaysBefore = [REMTimeHelper add:-365 onPart:REMDateTimePartDay ofDate:[REMTimeHelper tomorrow]];
     
     for (int i=0;i<self.airQualityData.airQualityData.targetEnergyData.count;i++) {
         REMTargetEnergyData *targetEnergyData = (REMTargetEnergyData *)self.airQualityData.airQualityData.targetEnergyData[i];
@@ -195,10 +195,11 @@ static NSDictionary *codeNameMap;
     }
     
     //process global range
-    self.globalRange.end = [tomorrow timeIntervalSince1970];
+    self.globalRange.end = [today timeIntervalSince1970];
     if(self.globalRange.start<[_366DaysBefore timeIntervalSince1970])
         self.globalRange.start = [_366DaysBefore timeIntervalSince1970];
-    self.globalRange.start += REMHalfDaySeconds;
+    self.globalRange.start -= REMHalfDaySeconds;
+    self.globalRange.end += REMHalfDaySeconds;
     
     //process visiable range
     self.visiableRange.start = [_14DaysBefore timeIntervalSince1970];
@@ -255,7 +256,7 @@ static NSDictionary *codeNameMap;
     NSMutableSet *xlabels = [[NSMutableSet alloc] init];
     NSMutableSet *xlocations = [[NSMutableSet alloc] init];
     
-    NSDate *tickDate = [NSDate dateWithTimeIntervalSince1970:self.globalRange.start];
+    NSDate *tickDate = [NSDate dateWithTimeIntervalSince1970:self.globalRange.start + REMHalfDaySeconds];
 
     while ([tickDate timeIntervalSince1970] < self.globalRange.end) {
         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDateLabel:tickDate] textStyle:[self xAxisLabelStyle]];

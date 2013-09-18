@@ -287,14 +287,7 @@
     NSNumberFormatter* yFormatter = [[NSNumberFormatter alloc]init];
     yFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     for (float i = yLocationStart; i < minY + yRangeLength; i = i + yInterval) {
-        NSString* ylabelText = nil;
-        if (i > 1000000) {
-            ylabelText = [NSString stringWithFormat:@"%@M", [yFormatter stringFromNumber:[NSNumber numberWithDouble:i / 1000000]]];
-        } else if (i > 1000) {
-            ylabelText = [NSString stringWithFormat:@"%@K", [yFormatter stringFromNumber:[NSNumber numberWithDouble:i / 1000]]];
-        } else {
-            ylabelText = [NSString stringWithFormat:@"%@", [yFormatter stringFromNumber:[NSNumber numberWithDouble:i]]];
-        }
+        NSString* ylabelText = [self formatDataValue:[NSNumber numberWithDouble:i]];
         CPTAxisLabel *label = [[CPTAxisLabel alloc]initWithText:ylabelText textStyle:[self yAxisLabelStyle]];
         label.offset = 5;
         label.tickLocation= CPTDecimalFromInt(i);
