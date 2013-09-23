@@ -105,6 +105,11 @@ static NSDictionary *codeNameMap;
     }
 }
 
+- (void)loadDataFailureWithError:(REMError *)error withResponse:(id)response{
+    NSString *text = NSLocalizedString(@"BuildingChart_DataError", @"");
+    [self drawLabelWithText:text];
+}
+
 -(void)loadChart
 {
     //convert data
