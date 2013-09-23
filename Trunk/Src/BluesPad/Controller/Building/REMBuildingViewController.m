@@ -172,7 +172,6 @@
     chartConfig.horizentalReservedSpace = 20;
     
     REMTrendChartView* testV = [[REMTrendChartView alloc]initWithFrame:CGRectMake(0, 0, 500, 400) chartConfig:chartConfig];
-    [self.view addSubview:testV];
     
     int i=0;
     self.imageViewStatus = [[NSMutableDictionary alloc]initWithCapacity:self.buildingOverallArray.count];
@@ -212,6 +211,7 @@
     
 
     
+    [self.view addSubview:testV]; 
 }
 
 
