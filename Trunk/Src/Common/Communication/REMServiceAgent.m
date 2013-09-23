@@ -177,7 +177,7 @@ static int requestTimeout = 45; //(s)
         [REMServiceAgent initializeQueue];
     }
     
-    //NSLog(@"request: %@",[request.URL description]);
+    NSLog(@"request: %@",[request.URL description]);
     [queue addOperation:serviceOperation];
 }
 
