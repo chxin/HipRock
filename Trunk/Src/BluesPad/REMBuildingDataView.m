@@ -23,7 +23,7 @@ typedef void(^SuccessCallback)(BOOL success);
 
 @property (nonatomic,strong) SuccessCallback successBlock;
 @property (nonatomic) NSUInteger successCounter;
-@property (nonatomic) BOOL isLoadingChart;
+@property (nonatomic) NSMutableDictionary *isLoadingChart;
 @end
 @implementation REMBuildingDataView
 
@@ -37,11 +37,11 @@ typedef void(^SuccessCallback)(BOOL success);
         self.clipsToBounds=YES;
         self.showsVerticalScrollIndicator=NO;
         self.successCounter=0;
-        self.isLoadingChart=NO;
         [self setContentSize:CGSizeMake(0, 1000)];
         self.buildingInfo=buildingInfo;
         self.currentCommodityId=@(0);
         self.commodityViewDictionary=[[NSMutableDictionary alloc]initWithCapacity:self.buildingInfo.commodityUsage.count+1];
+        self.isLoadingChart=[[NSMutableDictionary alloc]initWithCapacity:self.buildingInfo.commodityUsage.count+1];
         self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityUsage.count+1)];
         [self initCommodityButton];
         [self initCommodityView];
@@ -239,6 +239,7 @@ typedef void(^SuccessCallback)(BOOL success);
     view.alpha=1;
     REMBuildingCommodityView *currentView= self.commodityViewDictionary[@(current)];
     currentView.alpha=0;
+    
     [self requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:nil];
 }
 
@@ -336,13 +337,13 @@ typedef void(^SuccessCallback)(BOOL success);
         }
     }
     else{
-        if(self.isLoadingChart==YES)return;
+        if([self.isLoadingChart[self.currentCommodityId] isEqualToNumber:@(1)]==YES)return;
         REMBuildingCommodityView *view = self.commodityViewDictionary[self.currentCommodityId];
-        self.isLoadingChart=YES;
+        [self.isLoadingChart setObject:@(1) forKey:self.currentCommodityId];
         [view requireChartDataWithBuildingId:buildingId withCommodityId:self.currentCommodityId complete:^(BOOL success){
             [self.successDic setObject:@(1) forKey:self.currentCommodityId];
             //[self sucessRequest];
-            self.isLoadingChart=NO;
+            [self.isLoadingChart setObject:@(0) forKey:self.currentCommodityId];
             if(callback != nil){
                 callback(YES);
             }

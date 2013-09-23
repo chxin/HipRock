@@ -288,6 +288,32 @@ static NSNumberFormatter* formatter;
     }
 }
 
+-(void)purgeMemory{
+    axisLineStyle=nil;
+    gridLineStyle=nil;
+    hiddenLineStyle=nil;
+    xAxisLabelStyle=nil;
+    yAxisLabelStyle=nil;
+    CPTGraphHostingView *hostView=[self getHostView];
+    [hostView.hostedGraph removeAllAnimations];
+    [hostView.hostedGraph removeAllAnnotations];
+    for (CPTAxis *axis in hostView.hostedGraph.axisSet.axes) {
+        axis.majorTickLocations=nil;
+        axis.minorTickAxisLabels=nil;
+        [axis removeFromSuperlayer];
+    }
+    [hostView.hostedGraph.axisSet removeFromSuperlayer];
+    hostView.hostedGraph.axisSet.axes=nil;
+    
+    [hostView.hostedGraph.plotAreaFrame removeFromSuperlayer];
+    [hostView.hostedGraph removeFromSuperlayer];
+    hostView.hostedGraph=nil;
+    [hostView removeFromSuperview];
+    [self.view removeFromSuperview];
+}
+
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

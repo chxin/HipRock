@@ -42,6 +42,18 @@
 static NSString *kBenchmarkTitle = @"目标值";
 static NSString *kAverageDataTitle = @"单位面积用%@";
 
+- (void)purgeMemory{
+    [super purgeMemory];
+    self.averageData=nil;
+    self.chartData=nil;
+    self.chartView=nil;
+    self.dataValueRange=nil;
+    self.visiableRange=nil;
+    self.scrollManager=nil;
+    self.globalRange=nil;
+        self.draggableRange=nil;
+}
+
 
 - (REMBuildingChartHandler *)initWithViewFrame:(CGRect)frame
 {

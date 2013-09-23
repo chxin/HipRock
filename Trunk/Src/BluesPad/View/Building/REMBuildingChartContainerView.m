@@ -38,6 +38,7 @@
 - (void)didMoveToSuperview{
     if(self.superview==nil){
         [self.chartContainer removeFromSuperview];
+        [self.controller purgeMemory];
         self.controller=nil;
         self.chartContainer=nil;
     }

@@ -22,6 +22,14 @@
 
 @implementation REMBuildingTrendChartHandler
 
+- (void)purgeMemory{
+    [super purgeMemory];
+    self.data=nil;
+    self.chartData=nil;
+    self.graph=nil;
+    self.datasource=nil;
+}
+
 
 - (void)loadView
 {

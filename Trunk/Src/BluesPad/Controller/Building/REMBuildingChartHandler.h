@@ -37,6 +37,8 @@
 -(void)stopLoadingActivity;
 -(void)prepareShare;
 
+-(void)purgeMemory;
+
 - (NSDictionary *)assembleRequestParametersWithBuildingId:(long long)buildingId WithCommodityId:(long long)commodityID WithMetadata:(REMAverageUsageDataModel *)averageData;
 - (void)loadDataSuccessWithData:(id)data;
 - (void)loadDataFailureWithError:(REMError *)error withResponse:(id)response;
