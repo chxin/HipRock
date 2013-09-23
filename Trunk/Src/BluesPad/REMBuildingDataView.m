@@ -340,10 +340,11 @@ typedef void(^SuccessCallback)(BOOL success);
         if([self.isLoadingChart[self.currentCommodityId] isEqualToNumber:@(1)]==YES)return;
         REMBuildingCommodityView *view = self.commodityViewDictionary[self.currentCommodityId];
         [self.isLoadingChart setObject:@(1) forKey:self.currentCommodityId];
+        NSUInteger commodityId= [self.currentCommodityId integerValue];
         [view requireChartDataWithBuildingId:buildingId withCommodityId:self.currentCommodityId complete:^(BOOL success){
-            [self.successDic setObject:@(1) forKey:self.currentCommodityId];
+            [self.successDic setObject:@(1) forKey:@(commodityId)];
             //[self sucessRequest];
-            [self.isLoadingChart setObject:@(0) forKey:self.currentCommodityId];
+            [self.isLoadingChart setObject:@(0) forKey:@(commodityId)];
             if(callback != nil){
                 callback(YES);
             }

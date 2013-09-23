@@ -201,16 +201,16 @@
         //UIImageView *newBlurred= [self blurredImageView:newView];
                 
         
-        dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        //dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         //UIImage *image = self.defaultImage;
-        dispatch_async(concurrentQueue, ^{
+        //dispatch_async(concurrentQueue, ^{
             @autoreleasepool {
                 UIImage *view = [self AFInflatedImageFromResponseWithDataAtScale:data];
                 newView.image=view;
                 UIImageView *newBlurred= [self blurredImageView:newView];
             
             
-            dispatch_async(dispatch_get_main_queue(), ^{
+            //dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [self insertSubview:newView aboveSubview:self.blurredImageView];
                 [self insertSubview:newBlurred aboveSubview:newView];
@@ -237,9 +237,9 @@
                     //[self.controller notifyCustomImageLoaded:self.buildingInfo.building.buildingId];
                 }];
 
-            });
+            //});
             }
-        });
+        //});
 
         
         
