@@ -297,9 +297,9 @@
         }
         CPTAxisLabel *label = [[CPTAxisLabel alloc]initWithText:ylabelText textStyle:[self yAxisLabelStyle]];
         label.offset = 5;
-        label.tickLocation= CPTDecimalFromInt(i);
+        label.tickLocation= CPTDecimalFromFloat(i);
         [ylocations addObject:label];
-        if (i != 0) [ytickLocations addObject:[NSNumber numberWithInt:i]];
+        if (i != 0) [ytickLocations addObject:[NSNumber numberWithFloat:i]];
     }
     
     
