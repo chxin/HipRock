@@ -476,6 +476,9 @@
 		B4A0FCDB17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m */; };
 		B4B61D7617C742E000245F1E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B61D7517C742E000245F1E /* CoreText.framework */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
+		B4F4B99E17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
+		B4F4B99F17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
+		B4F4B9A017F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 		EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */; };
@@ -1007,6 +1010,8 @@
 		B4B61D7517C742E000245F1E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		B4CD146017B3439600807B5F /* BluesPad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluesPad.entitlements; sourceTree = "<group>"; };
+		B4F4B99C17F16F590096034D /* REMShareInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMShareInfo.h; sourceTree = "<group>"; };
+		B4F4B99D17F16F590096034D /* REMShareInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMShareInfo.m; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
@@ -1225,6 +1230,8 @@
 				7A153C4C17AA489600413D3C /* REMWidgetContentSyntax.m */,
 				7A153C4D17AA489600413D3C /* REMWidgetObject.h */,
 				7A153C4E17AA489600413D3C /* REMWidgetObject.m */,
+				B4F4B99C17F16F590096034D /* REMShareInfo.h */,
+				B4F4B99D17F16F590096034D /* REMShareInfo.m */,
 			);
 			name = Dashboard;
 			path = Model/Dashboard;
@@ -2395,6 +2402,7 @@
 				7A153C5E17AA489600413D3C /* REMFavoriteDashboardObj.m in Sources */,
 				7A153C5F17AA489600413D3C /* REMWidgetContentSyntax.m in Sources */,
 				7A153C6017AA489600413D3C /* REMWidgetObject.m in Sources */,
+				B4F4B99E17F16F590096034D /* REMShareInfo.m in Sources */,
 				7A153C6117AA489600413D3C /* REMEnergyCalendarData.m in Sources */,
 				7A153C6217AA489600413D3C /* REMEnergyData.m in Sources */,
 				7A153C6317AA489600413D3C /* REMEnergyError.m in Sources */,
@@ -2581,6 +2589,7 @@
 				6AB1F28A17B8AC910065C1EB /* REMBuildingOverallModel.m in Sources */,
 				6AB1F28C17B8AC910065C1EB /* REMCommodityUsageModel.m in Sources */,
 				6AB1F28E17B8AC910065C1EB /* REMEnergyUsageDataModel.m in Sources */,
+				B4F4B99F17F16F590096034D /* REMShareInfo.m in Sources */,
 				6AB1F29017B8AC910065C1EB /* REMRankingDataModel.m in Sources */,
 				6AB1F29217B8AC910065C1EB /* REMAverageUsageDataModel.m in Sources */,
 				6AB1F29417B8AC910065C1EB /* REMDashboardObj.m in Sources */,
@@ -2639,6 +2648,7 @@
 				6AB1F36317B8BA7F0065C1EB /* REMCommunicationTests.m in Sources */,
 				6AB1F36417B8BA7F0065C1EB /* REMTimeHelperTests.h in Sources */,
 				6AB1F36517B8BA7F0065C1EB /* REMTimeHelperTests.m in Sources */,
+				B4F4B9A017F16F590096034D /* REMShareInfo.m in Sources */,
 				6AB1F35B17B8B4960065C1EB /* GTMBase64.h in Sources */,
 				6AB1F35C17B8B4960065C1EB /* GTMBase64.m in Sources */,
 				6AB1F35D17B8B4960065C1EB /* GTMDefines.h in Sources */,
