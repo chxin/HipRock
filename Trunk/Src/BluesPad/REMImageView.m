@@ -157,15 +157,17 @@
     
     UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
     [shareButton setImage:[UIImage imageNamed:@"Share_normal.png"] forState:UIControlStateNormal];
-    if (self.buildingInfo.commodityUsage.count == 0) {
+    //if (self.buildingInfo.commodityUsage.count == 0) {
         shareButton.enabled = NO;
-    }
+    //}
     shareButton.showsTouchWhenHighlighted=YES;
     shareButton.adjustsImageWhenHighlighted=YES;
     shareButton.titleLabel.text=@"分享";
     [shareButton addTarget:self.controller action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.shareButton=shareButton;
     [self addSubview:shareButton];
+    
+    self.dataView.shareButton=self.shareButton;
 
 }
 
@@ -490,7 +492,6 @@
     
     
     
-    
 }
 
 -(void)checkIfRequestChartData:(UIScrollView *)scrollView{
@@ -647,7 +648,11 @@
     [self loadingBuildingImage];
     
     if(self.dataViewUp==YES){
-        [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:nil];
+        [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:^(BOOL success){
+            if(success==YES){
+                [self.shareButton setEnabled:YES];
+            }
+        }];
     }
     
 }

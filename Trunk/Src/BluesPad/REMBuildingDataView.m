@@ -233,6 +233,7 @@ typedef void(^SuccessCallback)(BOOL success);
     }
     self.currentCommodityId=@(button.tag);
     if([self.commodityViewDictionary objectForKey:@(commodityId)]==nil){
+        [self.shareButton setEnabled:NO];
         [self initCommodityById:@(commodityId)];
     }
     REMBuildingCommodityView *view=    self.commodityViewDictionary[@(commodityId)];
@@ -240,7 +241,11 @@ typedef void(^SuccessCallback)(BOOL success);
     REMBuildingCommodityView *currentView= self.commodityViewDictionary[@(current)];
     currentView.alpha=0;
     
-    [self requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:nil];
+    [self requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:^(BOOL success){
+        if(success==YES){
+            [self.shareButton setEnabled:YES];
+        }
+    }];
 }
 
 - (void)initCommodityById:(NSNumber *)commodityId{
