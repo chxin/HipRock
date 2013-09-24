@@ -14,6 +14,11 @@
 
 + (long long)longLongFromJSONString:(NSString *)jsonDate
 {
+    if([jsonDate isEqual:[NSNull null]]==YES){
+        return 0;
+    }
+    
+    
     NSError *error;
     NSRegularExpression *regex= [NSRegularExpression regularExpressionWithPattern:@"\\d+" options:0 error:&error];
     

@@ -16,7 +16,12 @@
     self.userTelephone=dictionary[@"UserTelephone"];
     NSString *time = dictionary[@"ShareTime"];
     long long longTime=[REMTimeHelper longLongFromJSONString:time];
-    self.shareTime=[NSDate dateWithTimeIntervalSince1970:longTime];
+    if (longTime==0) {
+        self.shareTime=nil;
+    }
+    else{
+        self.shareTime=[NSDate dateWithTimeIntervalSince1970:longTime];
+    }
     NSNumber *userTitle=dictionary[@"UserTitle"];
     self.userTitle = (REMUserTitleType)[userTitle integerValue];
 }

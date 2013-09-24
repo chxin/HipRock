@@ -8,7 +8,7 @@
 
 #import "REMJSONObject.h"
 #import "REMWidgetContentSyntax.h"
-
+#import "REMShareInfo.h"
 typedef enum _REMDiagramType
 {
     REMDiagramTypePie,           
@@ -37,6 +37,6 @@ typedef enum _REMEnergyStep:NSUInteger
 @property (nonatomic,strong) NSString *layoutSyntax;
 @property (nonatomic,strong) REMWidgetContentSyntax *contentSyntax;
 @property (nonatomic) REMDiagramType diagramType;
-
+@property (nonatomic,strong) REMShareInfo *shareInfo;
 
 @end

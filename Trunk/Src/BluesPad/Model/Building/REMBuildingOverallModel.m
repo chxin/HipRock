@@ -18,7 +18,7 @@
     self.building = [[REMBuildingModel alloc] initWithDictionary:dictionary[@"Building"]];
     
     NSArray *usageArray = dictionary[@"CommodityUsage"];
-    if(usageArray!=nil){
+    if(usageArray!=nil && [usageArray isEqual:[NSNull null]]==NO){
         NSMutableArray *commodities = [[NSMutableArray alloc] initWithCapacity:usageArray.count];
         for(NSDictionary *usage in usageArray)
         {
