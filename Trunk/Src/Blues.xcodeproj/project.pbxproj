@@ -1882,7 +1882,6 @@
 		7AC3BABB17CC48740022E57E /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				B48BB8B817EFEE43004DBE5D /* WeiboBana.jpg */,
 				7ACFCBA217CDA62E00811976 /* Building */,
 				7ACFCBC417CDA62E00811976 /* Dashboard */,
 				7ACFCBCA17CDA62E00811976 /* Login */,
@@ -1892,6 +1891,7 @@
 				7AC3BAF117CC48740022E57E /* Default@2x.png */,
 				7A48B48517CDF2EF002DA386 /* AppLogo.png */,
 				7A48B48717CDF2F6002DA386 /* AppLogo@2x.png */,
+				B48BB8B817EFEE43004DBE5D /* WeiboBana.jpg */,
 			);
 			name = Images;
 			path = Resource/Images;
