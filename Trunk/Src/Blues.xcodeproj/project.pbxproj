@@ -2177,7 +2177,7 @@
 		7A9B1E12177B3A6000C282A8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = 7A9B1E15177B3A6000C282A8 /* Build configuration list for PBXProject "Blues" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2831,6 +2831,7 @@
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 			};
 			name = Debug;
