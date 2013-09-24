@@ -339,6 +339,9 @@ typedef void(^SuccessCallback)(BOOL success);
     else{
         if([self.isLoadingChart[self.currentCommodityId] isEqualToNumber:@(1)]==YES){
             NSLog(@"isloadingchart:%@,buildingName:%@",self.currentCommodityId,self.buildingInfo.building.name);
+            if(callback!=nil){
+                self.successBlock=callback;
+            }
             return;
         }
         REMBuildingCommodityView *view = self.commodityViewDictionary[self.currentCommodityId];
@@ -353,6 +356,10 @@ typedef void(^SuccessCallback)(BOOL success);
             [self.isLoadingChart setObject:@(0) forKey:@(commodityId)];
             if(callback != nil){
                 callback(YES);
+            }
+            if(self.successBlock!=nil){
+                self.successBlock(YES);
+                self.successBlock=nil;
             }
         }];
     }
@@ -379,6 +386,7 @@ typedef void(^SuccessCallback)(BOOL success);
         for (UIView *view in self.commodityViewDictionary.objectEnumerator) {
             [view removeFromSuperview];
         }
+        self.successBlock=nil;
         self.isLoadingChart=nil;
         self.isLoadingChart=[[NSMutableDictionary alloc]initWithCapacity:self.buildingInfo.commodityUsage.count+1];
         self.successDic=nil;
@@ -390,6 +398,7 @@ typedef void(^SuccessCallback)(BOOL success);
 
 
 -(void)cancelAllRequest{
+    self.successBlock=nil;
     self.isLoadingChart=nil;
     self.isLoadingChart=[[NSMutableDictionary alloc]initWithCapacity:self.buildingInfo.commodityUsage.count+1];
     self.successDic=nil;
