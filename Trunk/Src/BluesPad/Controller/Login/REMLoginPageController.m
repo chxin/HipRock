@@ -168,7 +168,7 @@
 {
     for (int i=0; i<customers.count; i++)
     {
-        if([((REMCustomerModel *)customers[i]).code isEqualToString:@"SOHOChina"])
+        if([((REMCustomerModel *)customers[i]).code isEqualToString:@"SOHO-GALAXY"])
         {
             return customers[i];
             break;

@@ -20,13 +20,13 @@
 //const static NSString *SVC_BASE_SCHEMA = @"http";
 //const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
 
-const static NSString *SVC_BASE_HOST = @"223.4.20.20";
-const static NSString *SVC_BASE_SCHEMA = @"http";
-const static NSString *SVC_BASE_SUFFIX = @"/v1.3.0.17/MobileApiHost/";
-
-//const static NSString *SVC_BASE_HOST = @"admin.energy-here.com";
+//const static NSString *SVC_BASE_HOST = @"223.4.20.20";
 //const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/MobileApiHost/";
+//const static NSString *SVC_BASE_SUFFIX = @"/v1.3.0.17/MobileApiHost/";
+
+const static NSString *SVC_BASE_HOST = @"admin.energy-here.com";
+const static NSString *SVC_BASE_SCHEMA = @"http";
+const static NSString *SVC_BASE_SUFFIX = @"/MobileApiHost/";
 #endif
 
 #ifdef DailyBuild
