@@ -164,7 +164,7 @@ static int requestTimeout = 45; //(s)
     
     [serviceOperation setCompletionBlockWithSuccess:onSuccess failure:onFailure];
     [serviceOperation setDownloadProgressBlock:onProgress];
-    
+    serviceOperation.maskManager=maskManager;
     if(groupName!=nil && [groupName isEqual:[NSNull null]]==NO && [groupName isEqualToString:@""] == NO)
     {
         serviceOperation.groupName = groupName;
@@ -217,6 +217,9 @@ static int requestTimeout = 45; //(s)
         [queue setSuspended:NO];
         
         for(REMServiceRequestOperation *operation in cancelList){
+            if(operation.maskManager!=nil){
+                [operation.maskManager hideMask];
+            }
             [operation cancel];
         }
     }

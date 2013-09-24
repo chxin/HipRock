@@ -337,16 +337,29 @@ typedef void(^SuccessCallback)(BOOL success);
         }
     }
     else{
-        if([self.isLoadingChart[self.currentCommodityId] isEqualToNumber:@(1)]==YES)return;
+        if([self.isLoadingChart[self.currentCommodityId] isEqualToNumber:@(1)]==YES){
+            NSLog(@"isloadingchart:%@,buildingName:%@",self.currentCommodityId,self.buildingInfo.building.name);
+            if(callback!=nil){
+                self.successBlock=callback;
+            }
+            return;
+        }
         REMBuildingCommodityView *view = self.commodityViewDictionary[self.currentCommodityId];
         [self.isLoadingChart setObject:@(1) forKey:self.currentCommodityId];
         NSUInteger commodityId= [self.currentCommodityId integerValue];
-        [view requireChartDataWithBuildingId:buildingId withCommodityId:self.currentCommodityId complete:^(BOOL success){
+        [view requireChartDataWithBuildingId:buildingId withCommodityId:@(commodityId) complete:^(BOOL success){
+            if (self.superview==nil) {
+                return ;
+            }
             [self.successDic setObject:@(1) forKey:@(commodityId)];
             //[self sucessRequest];
             [self.isLoadingChart setObject:@(0) forKey:@(commodityId)];
             if(callback != nil){
                 callback(YES);
+            }
+            if(self.successBlock!=nil){
+                self.successBlock(YES);
+                self.successBlock=nil;
             }
         }];
     }
@@ -373,6 +386,11 @@ typedef void(^SuccessCallback)(BOOL success);
         for (UIView *view in self.commodityViewDictionary.objectEnumerator) {
             [view removeFromSuperview];
         }
+        self.successBlock=nil;
+        self.isLoadingChart=nil;
+        self.isLoadingChart=[[NSMutableDictionary alloc]initWithCapacity:self.buildingInfo.commodityUsage.count+1];
+        self.successDic=nil;
+        self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityUsage.count+1)];
         //self.commodityViewArray=nil;
         
     }
@@ -380,6 +398,11 @@ typedef void(^SuccessCallback)(BOOL success);
 
 
 -(void)cancelAllRequest{
+    self.successBlock=nil;
+    self.isLoadingChart=nil;
+    self.isLoadingChart=[[NSMutableDictionary alloc]initWithCapacity:self.buildingInfo.commodityUsage.count+1];
+    self.successDic=nil;
+    self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityUsage.count+1)];
     if(self.buildingInfo.commodityUsage==nil || [self.buildingInfo.commodityUsage isEqual:[NSNull null]] || self.buildingInfo.commodityUsage.count<=0)
         return;
     for (REMCommodityUsageModel *m in self.buildingInfo.commodityUsage) {

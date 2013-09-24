@@ -41,6 +41,7 @@
         [self.controller purgeMemory];
         self.controller=nil;
         self.chartContainer=nil;
+        self.hasLoaded=NO;
     }
 }
 
