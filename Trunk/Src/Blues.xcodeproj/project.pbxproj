@@ -453,7 +453,9 @@
 		B45F8A7917D5B04B0079C74D /* Water_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B45F8A6D17D5B04B0079C74D /* Water_normal@2x.png */; };
 		B45F8A7A17D5B04B0079C74D /* Water_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B45F8A6E17D5B04B0079C74D /* Water_pressed@2x.png */; };
 		B4626BFC17B0A0D900A7759B /* REMBuildingCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */; };
+		B469537817E96DCF003D5A98 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		B47422E617C45BCF0021B76C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
+		B48BB8B917EFEE43004DBE5D /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B48BB8B817EFEE43004DBE5D /* WeiboBana.jpg */; };
 		B48BE1FC178AB0DC00A157CD /* REMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48BE1FA178AB0DB00A157CD /* REMMainViewController.m */; };
 		B48CC9901783297900AAD5D4 /* REMWidgetStepToolbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC98F1783297900AAD5D4 /* REMWidgetStepToolbarView.m */; };
 		B48CC99317832EAE00AAD5D4 /* REMWidgetMaxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC99217832EAE00AAD5D4 /* REMWidgetMaxView.m */; };
@@ -973,6 +975,7 @@
 		B45F8A6E17D5B04B0079C74D /* Water_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Water_pressed@2x.png"; sourceTree = "<group>"; };
 		B4626BFA17B0A0D900A7759B /* REMBuildingCommodityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingCommodityView.h; path = View/Building/REMBuildingCommodityView.h; sourceTree = "<group>"; };
 		B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingCommodityView.m; path = View/Building/REMBuildingCommodityView.m; sourceTree = "<group>"; };
+		B48BB8B817EFEE43004DBE5D /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
 		B48BE1F9178AB0DB00A157CD /* REMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMainViewController.h; path = Controller/REMMainViewController.h; sourceTree = "<group>"; };
 		B48BE1FA178AB0DB00A157CD /* REMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMainViewController.m; path = Controller/REMMainViewController.m; sourceTree = "<group>"; };
 		B48CC98E1783297900AAD5D4 /* REMWidgetStepToolbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetStepToolbarView.h; path = View/REMWidgetStepToolbarView.h; sourceTree = "<group>"; };
@@ -1075,6 +1078,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B469537817E96DCF003D5A98 /* Accelerate.framework in Frameworks */,
 				B47422E617C45BCF0021B76C /* OpenGLES.framework in Frameworks */,
 				6AB1F30317B8B34A0065C1EB /* CoreImage.framework in Frameworks */,
 				B497341E17A769E400D0519A /* QuartzCore.framework in Frameworks */,
@@ -1871,6 +1875,7 @@
 		7AC3BABB17CC48740022E57E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B48BB8B817EFEE43004DBE5D /* WeiboBana.jpg */,
 				7ACFCBA217CDA62E00811976 /* Building */,
 				7ACFCBC417CDA62E00811976 /* Dashboard */,
 				7ACFCBCA17CDA62E00811976 /* Login */,
@@ -2280,6 +2285,7 @@
 				7A20761417E055E800CD137C /* Localizable.strings in Resources */,
 				B42C338917E18E63008289D2 /* DefaultBuilding@2x.png in Resources */,
 				B42C338B17E19064008289D2 /* DefaultBuilding.png in Resources */,
+				B48BB8B917EFEE43004DBE5D /* WeiboBana.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

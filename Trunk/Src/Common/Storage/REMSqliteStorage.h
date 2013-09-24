@@ -42,7 +42,7 @@
 -(BOOL)checkSourceName:(NSString*)sourceName;
 -(void)clearSessionStorage;
 -(void)clearWindowActivateStorage;
-
+-(void)clearFileCache;
 +(REMSqliteStorage*)getInstance;
 
 

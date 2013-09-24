@@ -412,5 +412,13 @@ static NSCalendar *_currentCalendar;
     return gmtDate;
 }
 
++(NSDate *)convertGMTDateToLocal:(NSDate *)GMTDate
+{
+    NSTimeInterval timeZoneOffset = [[NSTimeZone timeZoneWithName:@"Asia/Shanghai"] secondsFromGMT];
+    NSTimeInterval localTimeInterval = [GMTDate timeIntervalSinceReferenceDate] + timeZoneOffset;
+    NSDate *localDate = [NSDate dateWithTimeIntervalSinceReferenceDate:localTimeInterval];
+    
+    return localDate;
+}
 
 @end

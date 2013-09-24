@@ -191,6 +191,10 @@ typedef void(^SuccessCallback)(BOOL success);
         
         self.chartViewSnapshotArray = snapshots;
         
+        for (REMBuildingChartContainerView *chartView in self.chartViewArray) {
+            chartView.controller.snapshotArray=snapshots;
+        }
+        
     }
     if(showReal==NO){
         for (int i=0; i<self.chartViewArray.count; ++i) {

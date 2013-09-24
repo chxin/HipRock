@@ -37,8 +37,10 @@
 
 - (void) hideMask
 {
-    [self.mask stopAnimating];
-    [self.mask removeFromSuperview];
+    if(self.mask!=nil && self.mask.superview!=nil){
+        [self.mask stopAnimating];
+        [self.mask removeFromSuperview];
+    }
 }
 
 @end

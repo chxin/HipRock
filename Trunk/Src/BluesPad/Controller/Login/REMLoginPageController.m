@@ -161,7 +161,7 @@
 {
     [self.loginButton stopIndicator];
     
-    [REMAlertHelper alert:error.description];
+    [REMAlertHelper alert:@"服务器错误"];
 }
 
 -(REMCustomerModel *)filterRequiredCustomer:(NSArray *)customers

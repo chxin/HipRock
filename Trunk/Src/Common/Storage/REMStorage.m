@@ -43,6 +43,7 @@
 +(void)clearOnApplicationActive
 {
     [[REMSqliteStorage getInstance] clearWindowActivateStorage];
+    [[REMSqliteStorage getInstance] clearFileCache];
 }
 
 
