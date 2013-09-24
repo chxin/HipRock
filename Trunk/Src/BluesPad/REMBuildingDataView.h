@@ -15,6 +15,8 @@
 
 @interface REMBuildingDataView : UIScrollView//<UIScrollViewDelegate>
 
+@property (nonatomic,weak) UIButton *shareButton;
+
 - (id)initWithFrame:(CGRect)frame withBuildingInfo:(REMBuildingOverallModel *)buildingInfo;
 
 
