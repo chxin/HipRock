@@ -406,8 +406,7 @@ typedef void(^SuccessCallback)(BOOL success);
     self.successBlock=nil;
     self.isLoadingChart=nil;
     self.isLoadingChart=[[NSMutableDictionary alloc]initWithCapacity:self.buildingInfo.commodityUsage.count+1];
-    self.successDic=nil;
-    self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityUsage.count+1)];
+    
     if(self.buildingInfo.commodityUsage==nil || [self.buildingInfo.commodityUsage isEqual:[NSNull null]] || self.buildingInfo.commodityUsage.count<=0)
         return;
     for (REMCommodityUsageModel *m in self.buildingInfo.commodityUsage) {
