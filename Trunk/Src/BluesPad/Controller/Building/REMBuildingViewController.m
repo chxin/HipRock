@@ -163,6 +163,7 @@
 
 - (void)initImageView
 {
+    /*
     REMTrendChartConfig* chartConfig = [[REMTrendChartConfig alloc]init];
     //    chartConfig.xAxisConfig = [[REMTrendChartAxisConfig alloc]init];
     chartConfig.xAxisConfig = [REMTrendChartAxisConfig getWidgetXConfig];
@@ -172,7 +173,7 @@
     chartConfig.horizentalReservedSpace = 20;
     
     REMTrendChartView* testV = [[REMTrendChartView alloc]initWithFrame:CGRectMake(0, 0, 500, 400) chartConfig:chartConfig];
-    
+    */
     int i=0;
     self.imageViewStatus = [[NSMutableDictionary alloc]initWithCapacity:self.buildingOverallArray.count];
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:self.buildingOverallArray.count];
@@ -211,7 +212,7 @@
     
 
     
-    [self.view addSubview:testV]; 
+    //[self.view addSubview:testV];
 }
 
 

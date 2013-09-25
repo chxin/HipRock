@@ -32,6 +32,10 @@ typedef void(^SuccessCallback)(BOOL success);
     //NSLog(@"dataview:%@",NSStringFromCGRect(frame));
     self = [super initWithFrame:frame];
     if (self) {
+        self.layer.borderColor=[UIColor redColor].CGColor;
+        self.layer.borderWidth=1;
+        
+        
         self.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, kBuildingLeftMargin, 0, 0);
         [self setScrollEnabled:YES];
         self.clipsToBounds=YES;
@@ -288,6 +292,21 @@ typedef void(^SuccessCallback)(BOOL success);
         }
     }
     
+    [self initDragLabel];
+    
+}
+
+- (void)initDragLabel
+{
+    CGRect frame = CGRectMake(0, 980, 500, 20);
+    
+    UILabel *label =[[UILabel alloc]initWithFrame:frame];
+    
+    label.text=@"asfasdfasdf";
+    
+    label.textColor=[UIColor whiteColor];
+    
+    [self addSubview:label];
 }
 
 - (void)sucessRequest{
