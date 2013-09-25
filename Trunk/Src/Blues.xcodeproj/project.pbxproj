@@ -2898,7 +2898,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos6.1]" = "";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv7s i386 x86_64";
 				WRAPPER_EXTENSION = app;
@@ -2940,7 +2940,7 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "84A84BF6-540F-47A0-A7C5-ABC51BD165DF";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -2986,7 +2986,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				VALID_ARCHS = "armv7 armv7s x86_64 i386";
 				WRAPPER_EXTENSION = octest;
@@ -3024,7 +3024,7 @@
 					"\"$(SRCROOT)/../lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = octest;
@@ -3079,7 +3079,7 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "84A84BF6-540F-47A0-A7C5-ABC51BD165DF";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -3117,7 +3117,7 @@
 					"\"$(SRCROOT)/../lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = octest;
@@ -3154,7 +3154,7 @@
 					"\"$(SRCROOT)/../Lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = octest;
 			};
@@ -3204,7 +3204,7 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "84A84BF6-540F-47A0-A7C5-ABC51BD165DF";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -3242,7 +3242,7 @@
 					"\"$(SRCROOT)/../lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = octest;
@@ -3279,7 +3279,7 @@
 					"\"$(SRCROOT)/../Lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = octest;
 			};
@@ -3323,7 +3323,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -3358,7 +3358,7 @@
 					"\"$(SRCROOT)/../Lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = octest;
 			};
