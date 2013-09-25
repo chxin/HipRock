@@ -51,8 +51,6 @@ typedef enum _REMDataStoreType
 @property (nonatomic,strong) REMServiceMeta* serviceMeta;
 @property (nonatomic,strong) id parameter;
 @property (nonatomic,strong) UIView* maskContainer;
-@property (nonatomic) BOOL isStoreLocal;
-@property (nonatomic) BOOL isAccessLocal;
 @property (nonatomic,strong) NSString * groupName;
 
 - (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter;

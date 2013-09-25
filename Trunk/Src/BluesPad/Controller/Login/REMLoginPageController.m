@@ -61,8 +61,6 @@
     
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserValidate parameter:loginInfo];
     store.maskContainer = nil;
-    store.isAccessLocal = NO;
-    store.isStoreLocal = YES;
     store.groupName = nil;
     
     //mask login button

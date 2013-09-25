@@ -44,7 +44,7 @@ static int requestTimeout = 45; //(s)
 + (void) call: (REMServiceMeta *) service withBody:(id)body mask:(UIView *) maskContainer group:(NSString *)groupName store:(BOOL) isStore success:(void (^)(id data))success error:(void (^)(NSError *error, id response))error progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
 {
     //check network status and notify if no connection or 3g or 2g
-    if(![REMServiceAgent checkNetworkStatus])
+    if([REMServiceAgent checkNetworkStatus] == NO)
     {
         return;
     }
@@ -126,7 +126,6 @@ static int requestTimeout = 45; //(s)
             [maskManager hideMask];
         }
         
-        //
         operation = nil;
     };
     

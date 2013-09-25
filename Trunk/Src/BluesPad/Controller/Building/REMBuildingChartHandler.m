@@ -41,8 +41,6 @@ static CPTTextStyle *yAxisLabelStyle;
     NSDictionary *param = [self assembleRequestParametersWithBuildingId:buildingId WithCommodityId:commodityID WithMetadata:averageUsageData];
     
     REMDataStore *store = [[REMDataStore alloc] initWithName:self.requestUrl parameter:param];
-    store.isAccessLocal = YES;
-    store.isStoreLocal = YES;
     store.maskContainer = nil;
     store.groupName = [NSString stringWithFormat:@"b-%lld-%lld", buildingId, commodityID];
     
