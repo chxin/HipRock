@@ -296,7 +296,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="请选择客户" id="qAd-kb-FAB">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="dCQ-hr-UPF"/>
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="dCQ-hr-UPF">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="CHr-fQ-ik4" id="a2p-wg-22v"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </tableViewController>

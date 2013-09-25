@@ -39,6 +39,8 @@ static NSString *CellIdentifier = @"loginCustomerCell";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.customers = (NSArray *)([REMApplicationContext instance].currentUser.customers);
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,4 +111,9 @@ static NSString *CellIdentifier = @"loginCustomerCell";
 
  */
 
+- (IBAction)cancelButtonPressed:(id)sender {
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        [self.loginPageController.loginButton stopIndicator];
+    }];
+}
 @end
