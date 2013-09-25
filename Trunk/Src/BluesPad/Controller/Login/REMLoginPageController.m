@@ -13,6 +13,7 @@
 #import "REMSplashScreenController.h"
 #import "REMUserValidationModel.h"
 #import "REMCommonHeaders.h"
+#import "REMLoginCustomerViewController.h"
 
 @interface REMLoginPageController ()
 
@@ -115,19 +116,9 @@
                 [self.userNameErrorLabel setHidden:NO];
                 [self.userNameErrorLabel setText : @"登录失败，该用户未绑定客户" ];
             }
-            if(customers.count == 1){
-                [[REMApplicationContext instance] setCurrentCustomer:customers[0]];
-            }
-            else{
-                [[REMApplicationContext instance] setCurrentCustomer:[self filterRequiredCustomer:customers]];
-            }
             
-            [[REMApplicationContext instance].currentUser save];
-            [[REMApplicationContext instance].currentCustomer save];
+            [self performSegueWithIdentifier:@"loginCustomerSegue" sender:self];
             
-            [self.loginCarouselController.splashScreenController showBuildingView:^{
-                [self.loginButton stopIndicator];
-            }];
         }
         else
         {
@@ -164,18 +155,24 @@
     [REMAlertHelper alert:@"服务器错误"];
 }
 
--(REMCustomerModel *)filterRequiredCustomer:(NSArray *)customers
+-(void)loginSuccess
 {
-    for (int i=0; i<customers.count; i++)
+    [[REMApplicationContext instance].currentUser save];
+    [[REMApplicationContext instance].currentCustomer save];
+
+    [self.loginCarouselController.splashScreenController showBuildingView:^{
+        [self.loginButton stopIndicator];
+    }];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"loginCustomerSegue"] == YES)
     {
-        if([((REMCustomerModel *)customers[i]).code isEqualToString:@"SOHOChina"])
-        {
-            return customers[i];
-            break;
-        }
+        UINavigationController *navigationController = segue.destinationViewController;
+        REMLoginCustomerViewController *customerController = navigationController.childViewControllers[0];
+        customerController.loginPageController = self;
     }
-    
-    return nil;
 }
 
 #pragma mark - uitextfield delegate

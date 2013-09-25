@@ -255,11 +255,54 @@
                         <outlet property="passwordTextField" destination="TI6-QH-ZIu" id="LFA-rz-CPx"/>
                         <outlet property="userNameErrorLabel" destination="F05-SM-93U" id="2Q4-jG-kQZ"/>
                         <outlet property="userNameTextField" destination="NEh-h3-tnd" id="J73-vr-6gc"/>
+                        <segue destination="aGJ-if-abd" kind="modal" identifier="loginCustomerSegue" id="fhf-x2-3OY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZN-hP-sdL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3860" y="696"/>
+        </scene>
+        <!--Login Customer View Controller - 请选择客户-->
+        <scene sceneID="cWq-0w-6Ae">
+            <objects>
+                <tableViewController autoresizesArchivedViewToFullSize="NO" id="CHr-fQ-ik4" customClass="REMLoginCustomerViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LRA-X0-FCk">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loginCustomerCell" textLabel="ebq-25-up5" style="IBUITableViewCellStyleDefault" id="16D-3f-5O4">
+                                <rect key="frame" x="0.0" y="86" width="400" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="16D-3f-5O4" id="54Q-Zy-Bdo">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ebq-25-up5">
+                                            <rect key="frame" x="15" y="0.0" width="370" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="CHr-fQ-ik4" id="ape-uW-bGl"/>
+                            <outlet property="delegate" destination="CHr-fQ-ik4" id="e7o-DZ-2NI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="请选择客户" id="qAd-kb-FAB">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="dCQ-hr-UPF"/>
+                    </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RSN-tn-dnu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2238" y="1326"/>
         </scene>
         <!--Login Carousel Controller-->
         <scene sceneID="MgP-x0-zlk">
@@ -481,7 +524,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PFK-c1-urU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1074" y="534"/>
+            <point key="canvasLocation" x="2048" y="534"/>
         </scene>
         <!--Widget Time Picker View Controller-->
         <scene sceneID="6oi-fU-teU">
@@ -541,7 +584,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gSi-Yx-MmO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2312" y="974"/>
+            <point key="canvasLocation" x="3286" y="974"/>
         </scene>
         <!--Chart Legend Table View Controller-->
         <scene sceneID="lYL-Ma-AU2">
@@ -973,7 +1016,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w7e-H1-kOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1579" y="962"/>
+            <point key="canvasLocation" x="-893" y="1402"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xnY-m1-p1k">
@@ -990,7 +1033,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qs8-1K-3SC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2515" y="962"/>
+            <point key="canvasLocation" x="-1541" y="962"/>
         </scene>
         <!--Building Weibo Send View Controller-->
         <scene sceneID="bSI-Y3-KEb">
@@ -1228,6 +1271,26 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="byd-8r-pNi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-6282" y="-638"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Di9-cL-lUr">
+            <objects>
+                <navigationController autoresizesArchivedViewToFullSize="NO" definesPresentationContext="YES" modalPresentationStyle="formSheet" id="aGJ-if-abd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xVn-S4-tNw">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CHr-fQ-ik4" kind="relationship" relationship="rootViewController" id="ypd-eT-xKr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sU8-el-sNE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3092" y="1234"/>
         </scene>
     </scenes>
     <resources>

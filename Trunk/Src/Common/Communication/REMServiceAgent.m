@@ -75,7 +75,7 @@ static int requestTimeout = 45; //(s)
     
     void (^onSuccess)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        //NSLog(@"%@", operation.responseString);
+        NSLog(@"%@", operation.responseString);
         
         //if there is error message
         if([operation.responseString hasPrefix:@"{\"error\":"] == YES){
