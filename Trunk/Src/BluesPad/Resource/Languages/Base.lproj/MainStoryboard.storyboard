@@ -171,24 +171,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="500" height="350"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kLc-UC-bzf">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kLc-UC-bzf">
                                 <rect key="frame" x="0.0" y="0.0" width="500" height="57"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P45-62-dLN">
-                                        <rect key="frame" x="221" y="17.5" width="59" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P45-62-dLN">
+                                        <rect key="frame" x="221" y="18" width="59" height="21"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="59" id="9T6-jM-ypN"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" red="0.35686274509999999" green="0.35686274509999999" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="P45-62-dLN" firstAttribute="top" secondItem="kLc-UC-bzf" secondAttribute="top" constant="18" id="HLO-31-zXF"/>
+                                    <constraint firstItem="P45-62-dLN" firstAttribute="centerX" secondItem="kLc-UC-bzf" secondAttribute="centerX" id="Pgv-ar-BeO"/>
+                                    <constraint firstItem="P45-62-dLN" firstAttribute="centerY" secondItem="kLc-UC-bzf" secondAttribute="centerY" id="Pif-8o-YxM"/>
+                                </constraints>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOs-72-HuV">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HOs-72-HuV">
                                 <rect key="frame" x="0.0" y="57" width="500" height="0.0"/>
                                 <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="SchneiderElectricChina" placeholder="用户名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NEh-h3-tnd" customClass="REMInsetsTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="SchneiderElectricChina" placeholder="用户名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NEh-h3-tnd" customClass="REMInsetsTextField">
                                 <rect key="frame" x="85" y="113" width="330" height="52"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <rect key="contentStretch" x="0.0" y="1" width="1" height="1"/>
@@ -199,9 +207,12 @@
                                     <action selector="textFieldChanged:" destination="AVi-ee-Lx7" eventType="editingChanged" id="2ee-rh-Bcd"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="P@ssw0rd" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TI6-QH-ZIu" customClass="REMInsetsTextField">
-                                <rect key="frame" x="85" y="195.5" width="330" height="52"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="P@ssw0rd" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TI6-QH-ZIu" customClass="REMInsetsTextField">
+                                <rect key="frame" x="85" y="196" width="330" height="52"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="pwb-kN-Bgg"/>
+                                </constraints>
                                 <color key="textColor" red="0.35686274509999999" green="0.35686274509999999" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
@@ -209,21 +220,27 @@
                                     <action selector="textFieldChanged:" destination="AVi-ee-Lx7" eventType="editingChanged" id="CGx-zH-n7P"/>
                                 </connections>
                             </textField>
-                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F05-SM-93U">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F05-SM-93U">
                                 <rect key="frame" x="85" y="163" width="330" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="fUn-8Y-HAX"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="1" green="0.14117647058823529" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhF-ie-yww">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhF-ie-yww">
                                 <rect key="frame" x="85" y="245" width="330" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="1" green="0.14117647059999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Inb-Mi-MaB" customClass="REMIndicatorButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Inb-Mi-MaB" customClass="REMIndicatorButton">
                                 <rect key="frame" x="85" y="279" width="330" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="UIv-hC-IJu"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <state key="normal" title="登录">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -239,14 +256,46 @@
                                     <action selector="loginButtonPressed:" destination="AVi-ee-Lx7" eventType="touchDown" id="vVk-F9-p5W"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="正在登录施耐德电气能源管理开放平台" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1x-Zk-rej">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="正在登录施耐德电气能源管理开放平台" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1x-Zk-rej">
                                 <rect key="frame" x="85" y="79" width="289" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="5uj-UD-m8N"/>
+                                    <constraint firstAttribute="width" constant="289" id="mUv-0T-il8"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.35686274509999999" green="0.35686274509999999" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="O1x-Zk-rej" firstAttribute="leading" secondItem="F05-SM-93U" secondAttribute="leading" id="1pn-pp-dfv"/>
+                            <constraint firstItem="TI6-QH-ZIu" firstAttribute="trailing" secondItem="VhF-ie-yww" secondAttribute="trailing" id="36e-j3-FMY"/>
+                            <constraint firstItem="kLc-UC-bzf" firstAttribute="bottom" secondItem="HOs-72-HuV" secondAttribute="bottom" id="9Vp-Rs-vrh"/>
+                            <constraint firstItem="kLc-UC-bzf" firstAttribute="trailing" secondItem="HOs-72-HuV" secondAttribute="trailing" id="B0w-xE-kCx"/>
+                            <constraint firstItem="Inb-Mi-MaB" firstAttribute="top" secondItem="VhF-ie-yww" secondAttribute="bottom" constant="13" id="CYd-ba-su3"/>
+                            <constraint firstItem="kLc-UC-bzf" firstAttribute="centerX" secondItem="F05-SM-93U" secondAttribute="centerX" id="HMU-w2-dNR"/>
+                            <constraint firstItem="Inb-Mi-MaB" firstAttribute="trailing" secondItem="VhF-ie-yww" secondAttribute="trailing" id="HV6-th-H3e"/>
+                            <constraint firstAttribute="bottom" secondItem="kLc-UC-bzf" secondAttribute="bottom" constant="293" id="INP-oA-LsO"/>
+                            <constraint firstItem="Inb-Mi-MaB" firstAttribute="leading" secondItem="VhF-ie-yww" secondAttribute="leading" id="Ilw-7D-ASk"/>
+                            <constraint firstItem="NEh-h3-tnd" firstAttribute="trailing" secondItem="F05-SM-93U" secondAttribute="trailing" id="J5g-SX-H7T"/>
+                            <constraint firstItem="O1x-Zk-rej" firstAttribute="top" secondItem="HOs-72-HuV" secondAttribute="bottom" constant="22" id="JhB-U5-CPS"/>
+                            <constraint firstItem="NEh-h3-tnd" firstAttribute="leading" secondItem="F05-SM-93U" secondAttribute="leading" id="LJo-jx-RjN"/>
+                            <constraint firstItem="kLc-UC-bzf" firstAttribute="leading" secondItem="9Ht-DR-dlm" secondAttribute="leading" id="MvL-rK-mQH"/>
+                            <constraint firstItem="NEh-h3-tnd" firstAttribute="top" secondItem="O1x-Zk-rej" secondAttribute="bottom" constant="13" id="ZRk-aV-Rzh"/>
+                            <constraint firstAttribute="trailing" secondItem="kLc-UC-bzf" secondAttribute="trailing" id="Zim-Xj-VKI"/>
+                            <constraint firstItem="G3C-Rj-0hX" firstAttribute="top" secondItem="Inb-Mi-MaB" secondAttribute="bottom" constant="22" id="a2y-K7-F0C"/>
+                            <constraint firstItem="F05-SM-93U" firstAttribute="top" secondItem="O1x-Zk-rej" secondAttribute="bottom" constant="63" id="aor-HC-yjw"/>
+                            <constraint firstItem="HOs-72-HuV" firstAttribute="top" secondItem="kLc-UC-bzf" secondAttribute="bottom" id="dQD-bV-2vE"/>
+                            <constraint firstItem="O1x-Zk-rej" firstAttribute="leading" secondItem="VhF-ie-yww" secondAttribute="leading" id="kNn-gI-MMT"/>
+                            <constraint firstItem="kLc-UC-bzf" firstAttribute="centerX" secondItem="VhF-ie-yww" secondAttribute="centerX" id="nDJ-4e-H9b"/>
+                            <constraint firstItem="TI6-QH-ZIu" firstAttribute="leading" secondItem="VhF-ie-yww" secondAttribute="leading" id="ovN-mN-jwj"/>
+                            <constraint firstItem="TI6-QH-ZIu" firstAttribute="top" secondItem="NEh-h3-tnd" secondAttribute="bottom" constant="31" id="pxv-Aq-OGI"/>
+                            <constraint firstItem="TI6-QH-ZIu" firstAttribute="top" secondItem="F05-SM-93U" secondAttribute="bottom" constant="12" id="qL2-Oc-MHN"/>
+                            <constraint firstItem="O1x-Zk-rej" firstAttribute="leading" secondItem="9Ht-DR-dlm" secondAttribute="leading" constant="85" id="unV-5E-WTR"/>
+                            <constraint firstItem="kLc-UC-bzf" firstAttribute="top" secondItem="9Ht-DR-dlm" secondAttribute="top" id="vqX-rt-0oI"/>
+                            <constraint firstItem="kLc-UC-bzf" firstAttribute="leading" secondItem="HOs-72-HuV" secondAttribute="leading" id="yTN-lc-YxY"/>
+                        </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
