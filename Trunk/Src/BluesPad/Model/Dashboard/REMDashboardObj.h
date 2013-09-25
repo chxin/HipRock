@@ -8,6 +8,7 @@
 
 #import "REMJSONObject.h"
 #import "REMWidgetObject.h"
+#import "REMShareInfo.h"
 
 @interface REMDashboardObj : REMJSONObject
 
@@ -18,5 +19,6 @@
 @property  (nonatomic) BOOL isRead;
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,strong) NSArray *widgets;
+@property (nonatomic,strong) REMShareInfo *shareInfo;
 
 @end
