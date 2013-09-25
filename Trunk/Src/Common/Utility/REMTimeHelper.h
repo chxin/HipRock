@@ -60,6 +60,5 @@ typedef enum _REMDateTimePart : NSUInteger{
 +(NSDate *)convertLocalDateToGMT:(NSDate *)localDate;
 
 +(NSCalendar *)gregorianCalendar;
-+(NSDate *)convertLocalDateToGMT:(NSDate *)localDate;
 +(NSDate *)convertGMTDateToLocal:(NSDate *)GMTDate;
 @end
