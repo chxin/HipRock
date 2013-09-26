@@ -17,5 +17,6 @@
 @property (nonatomic,strong) NSArray *commodityUsage;
 @property (nonatomic,strong) REMAirQualityModel *airQuality;
 @property (nonatomic,strong) NSArray *dashboardArray;
+@property (nonatomic,strong) NSArray *commodityArray;
 
 @end

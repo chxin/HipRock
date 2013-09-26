@@ -43,6 +43,17 @@
         }
         self.dashboardArray=dashboardList;
     }
+    
+    NSArray *commodityArray=dictionary[@"CommodityArray"];
+    
+    if(commodityArray!=nil){
+        NSMutableArray *commodityList=[[NSMutableArray alloc]initWithCapacity:commodityArray.count];
+        for (NSDictionary *commodity in commodityArray) {
+            REMCommodityModel *obj = [[REMCommodityModel alloc]initWithDictionary:commodity];
+            [commodityList addObject:obj];
+        }
+        self.commodityArray=commodityList;
+    }
 }
 
 @end

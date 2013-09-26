@@ -32,4 +32,6 @@
 
 -(void)replaceImagesShowReal:(BOOL)showReal;
 
+- (void)showDashboardLabel:(BOOL)overThreshold;
+
 @end

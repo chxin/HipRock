@@ -24,6 +24,10 @@ typedef void(^SuccessCallback)(BOOL success);
 @property (nonatomic,strong) SuccessCallback successBlock;
 @property (nonatomic) NSUInteger successCounter;
 @property (nonatomic) NSMutableDictionary *isLoadingChart;
+
+
+@property (nonatomic,weak) UILabel *dashboardLabel;
+
 @end
 @implementation REMBuildingDataView
 
@@ -32,8 +36,8 @@ typedef void(^SuccessCallback)(BOOL success);
     //NSLog(@"dataview:%@",NSStringFromCGRect(frame));
     self = [super initWithFrame:frame];
     if (self) {
-        self.layer.borderColor=[UIColor redColor].CGColor;
-        self.layer.borderWidth=1;
+        //self.layer.borderColor=[UIColor redColor].CGColor;
+        //self.layer.borderWidth=1;
         
         
         self.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, kBuildingLeftMargin, 0, 0);
@@ -296,17 +300,31 @@ typedef void(^SuccessCallback)(BOOL success);
     
 }
 
+
 - (void)initDragLabel
 {
-    CGRect frame = CGRectMake(0, 980, 500, 20);
+    CGRect frame = CGRectMake(0, 960, 500, 20);
     
     UILabel *label =[[UILabel alloc]initWithFrame:frame];
     
-    label.text=@"asfasdfasdf";
+    label.text=@"￼上拉查看更多能耗信息";
+    
+    
     
     label.textColor=[UIColor whiteColor];
-    
+    label.backgroundColor=[UIColor clearColor];
     [self addSubview:label];
+    
+    self.dashboardLabel=label;
+}
+
+- (void)showDashboardLabel:(BOOL)overThreshold{
+    if(overThreshold==YES){
+        self.dashboardLabel.text=@"松开以显示";
+    }
+    else{
+        self.dashboardLabel.text=@"￼上拉查看更多能耗信息";
+    }
 }
 
 - (void)sucessRequest{
