@@ -10,6 +10,7 @@
 #import "REMDashboardViewController.h"
 #import "REMWidgetMaxViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "REMMainDashboardViewController.h"
 
 
 @interface REMDashboardViewController ()

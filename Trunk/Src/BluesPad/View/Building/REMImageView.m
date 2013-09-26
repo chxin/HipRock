@@ -175,7 +175,8 @@
 
 -(void)initBackButton
 {
-    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+100, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    backButton.frame = CGRectMake(kBuildingLeftMargin+100, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension);
     backButton.adjustsImageWhenHighlighted=YES;
     backButton.showsTouchWhenHighlighted=YES;
     backButton.titleLabel.text=@"地图";

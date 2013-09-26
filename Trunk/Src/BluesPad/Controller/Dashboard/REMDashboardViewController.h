@@ -12,8 +12,8 @@
 #import "REMDataAccessor.h"
 #import "REMFavoriteDashboardObj.h"
 #import "REMEnergyViewData.h"
-#import "REMMainViewController.h"
 
+@class REMMainDashboardViewController;
 @class REMWidgetCell;
 @class REMMainViewController;
 
@@ -26,6 +26,6 @@
 
 - (void) showMaxWidgetByCell:(REMWidgetObject *)widget WithData:(REMEnergyViewData *)data;
 
-@property (nonatomic,weak) REMMainViewController *mainController;
+@property (nonatomic,weak) REMMainDashboardViewController *mainController;
 
 @end

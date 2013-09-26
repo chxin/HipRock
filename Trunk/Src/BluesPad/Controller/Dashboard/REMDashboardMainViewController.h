@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "REMMainViewController.h"
 #import "REMDashboardObj.h"
 #import "REMFavoriteTableViewController.h"
 #import "REMDashboardRootViewController.h"
@@ -21,5 +20,5 @@
 @property (weak, nonatomic) IBOutlet UIView *widgetsContainer;
 @property (weak, nonatomic) IBOutlet UIView *dashboardListContainer;
 @property  (weak,nonatomic) NSArray *favoriteDashboard;
-@property   (weak,nonatomic) REMMainViewController  *mainController;
+@property   (weak,nonatomic) REMMainDashboardViewController  *mainController;
 @end

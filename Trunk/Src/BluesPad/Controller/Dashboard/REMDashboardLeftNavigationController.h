@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "REMMainViewController.h"
+#import "REMMainDashboardViewController.h"
 
 @interface REMDashboardLeftNavigationController : UINavigationController<UIGestureRecognizerDelegate>
 

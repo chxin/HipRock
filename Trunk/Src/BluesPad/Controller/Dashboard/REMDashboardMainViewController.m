@@ -7,6 +7,7 @@
 //
 
 #import "REMDashboardMainViewController.h"
+#import "REMMainDashboardViewController.h"
 
 @interface REMDashboardMainViewController ()
 @property (weak,nonatomic) UINavigationController *rightNavigationController;
@@ -62,7 +63,7 @@
     
     
         
-        REMMainViewController *main=(REMMainViewController *)self.parentViewController;
+        REMMainDashboardViewController *main=(REMMainDashboardViewController *)self.parentViewController;
         [main maxDashboardContent:^(BOOL finished){
             
             if(self.isDashboardLoaded == NO){
