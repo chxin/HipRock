@@ -20,6 +20,7 @@ typedef enum _REMDataStoreType
      *	Building
      */
     REMDSBuildingInfo,
+    REMDSBuildingCommodityTotalUsage,
     REMDSBuildingOverallData,
     REMDSBuildingAverageData,
     REMDSBuildingTimeRangeData,

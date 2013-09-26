@@ -141,7 +141,7 @@
     NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
     REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSBuildingInfo parameter:parameter];
     buildingStore.isStoreLocal = YES;
-    buildingStore.isAccessLocal = YES;
+    //buildingStore.isAccessLocal = YES;
     buildingStore.groupName = nil;
     buildingStore.maskContainer = nil;
     

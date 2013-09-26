@@ -38,15 +38,16 @@
 
 - (void)initTotalValue
 {
-    
+    /*
     self.totalLabel=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, 0, 1000, kBuildingCommodityTotalHeight) withData:self.airQuality.honeywell withTitle:@"室内PM2.5" andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingTotalInnerMargin withLeftMargin:0   withValueFontSize:kBuildingCommodityTotalValueFontSize withUomFontSize:kBuildingCommodityTotalUomFontSize];
     
-    [self addSubview:self.totalLabel];
+    [self addSubview:self.totalLabel];*/
     
 }
 
 - (void)initDetailValue
 {
+    /*
     int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityBottomMargin;
     
     
@@ -63,6 +64,7 @@
     REMBuildingTitleLabelView *meiai=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.airQuality.mayair withTitle:@"室内新风PM2.5(美埃)"  andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin withLeftMargin:kBuildingCommodityDetailTextMargin  withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityDetailUomFontSize];
         [self addSplitBar:meiai];
     [self addSubview:meiai];
+     */
 }
 
 - (void)initChartContainer

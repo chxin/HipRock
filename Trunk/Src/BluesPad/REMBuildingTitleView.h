@@ -12,6 +12,17 @@
 
 @interface REMBuildingTitleView : UIView
 
+
+@property (nonatomic,strong) NSString *title;
+@property (nonatomic) CGFloat titleFontSize;
+@property (nonatomic) CGFloat titleMargin;
+@property (nonatomic) CGFloat leftMargin;
+@property (nonatomic) CGFloat valueFontSize;
+@property (nonatomic) CGFloat uomFontSize;
+
+@property (nonatomic,strong) NSString *emptyText;
+@property (nonatomic) CGFloat emptyTextFontSize;
+
 @property (nonatomic,strong) UILabel *titleLabel;
 
 @property (nonatomic,strong) UILabel *emptyLabel;
@@ -21,6 +32,14 @@
 - (NSString *)addThousandSeparator:(NSNumber *)number;
 
 - (void) setTitleIcon:(UIImage *)image;
+
+- (void)showLoading;
+
+-(void)hideLoading;
+
+- (void)showTitle;
+
+@property (nonatomic,strong) UILabel *textLabel;
 
 - (void)setEmptyText:(NSString *)emptyText withSize:(CGFloat)size;
 

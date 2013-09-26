@@ -741,7 +741,7 @@
     
     [self scrollTo:kCommodityScrollTop];
     self.dataViewUp=YES;
-    
+    self.dataView.isUpScroll=YES;
     
     
 }
@@ -751,7 +751,7 @@
     
     [self scrollTo:-kBuildingCommodityViewTop];
     self.dataViewUp=NO;
-    
+    self.dataView.isUpScroll=NO;
     
     
 }

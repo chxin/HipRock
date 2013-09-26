@@ -16,11 +16,17 @@ typedef void(^SuccessCallback)(BOOL success);
 
 @property (nonatomic,strong) NSArray *detailLabelArray;
 
+@property (nonatomic,strong) REMBuildingTitleLabelView *carbonLabel;
+@property (nonatomic,strong) REMBuildingTitleLabelView *targetLabel;
+@property (nonatomic,strong) REMBuildingRankingView *rankingLabel;
+
 @property (nonatomic,strong) SuccessCallback successBlock;
 
 @property (nonatomic) NSUInteger successCounter;
 
-@property (nonatomic,weak) REMCommodityUsageModel *commodityInfo;
+@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+
+@property (nonatomic,weak) REMCommodityModel *commodity;
 
 @property (nonatomic,strong) NSArray *chartViewSnapshotArray;
 
@@ -39,12 +45,12 @@ typedef void(^SuccessCallback)(BOOL success);
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame withCommodityInfo:(REMCommodityUsageModel *)commodityInfo
+- (id)initWithFrame:(CGRect)frame withCommodity:(REMCommodityModel *)commodity withBuildingInfo:(REMBuildingOverallModel *)buildingInfo
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
-        self.commodityInfo=commodityInfo;
+        self.commodity=commodity;
+        self.buildingInfo=buildingInfo;
         
         [self initTotalValue];
         [self initDetailValue];
@@ -53,47 +59,22 @@ typedef void(^SuccessCallback)(BOOL success);
     
     return self;
 }
-/*
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
-{
-    if([gestureRecognizer.view isKindOfClass:[REMBuildingCommodityView class]] == YES){
-        if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] == YES){
-            UIScrollView *parent = (UIScrollView *)self.superview;
-            
-            UIPanGestureRecognizer *p = (UIPanGestureRecognizer *)gestureRecognizer;
-            CGPoint movement=[p translationInView:self];
-            NSLog(@"movement:%@",NSStringFromCGPoint(movement));
-            
-            if(movement.y>0){
-                self.bounces=NO;
-            }
-            else{
-                self.bounces=YES;
-            }
-            
-            if(parent.contentOffset.y>=-20){
-                if(movement.y>0 && self.contentOffset.y<=0){
-                    return NO;
-                }
-                
-                return YES;
-            }
-            else{
-                return NO;
-            }
-        }
-    }
-    
-    return [super gestureRecognizerShouldBegin:gestureRecognizer];
-}
-*/
+
 
 
 - (void)initTotalValue
 {
     
-    self.totalLabel=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, 0, 900, kBuildingCommodityTotalHeight) withData:self.commodityInfo.commodityUsage withTitle:[NSString stringWithFormat:@"上月用%@总量",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingTotalInnerMargin withLeftMargin:0   withValueFontSize:kBuildingCommodityTotalValueFontSize withUomFontSize:kBuildingCommodityTotalUomFontSize];
-    [self.totalLabel setEmptyText:@"请持续关注能耗变化" withSize:60];
+    self.totalLabel=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, 0, 900, kBuildingCommodityTotalHeight)];
+    self.totalLabel.title=[NSString stringWithFormat:@"上月用%@总量",self.commodity.comment];
+    self.totalLabel.titleFontSize=kBuildingCommodityTitleFontSize;
+    self.totalLabel.titleMargin=kBuildingTotalInnerMargin;
+    self.totalLabel.leftMargin=0;
+    self.totalLabel.valueFontSize=kBuildingCommodityTotalValueFontSize;
+    self.totalLabel.uomFontSize=kBuildingCommodityTotalUomFontSize;
+    self.totalLabel.emptyText=@"请持续关注能耗变化";
+    self.totalLabel.emptyTextFontSize=60;
+    [self.totalLabel showTitle];
     [self addSubview:self.totalLabel];
     
 }
@@ -102,18 +83,30 @@ typedef void(^SuccessCallback)(BOOL success);
 {
     int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityBottomMargin;
     
-    REMBuildingTitleLabelView *carbon=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.carbonEquivalent withTitle:@"二氧化碳当量" andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin withLeftMargin:0   withValueFontSize:kBuildingCommodityDetailValueFontSize withUomFontSize:kBuildingCommodityDetailUomFontSize];
+    REMBuildingTitleLabelView *carbon=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
+    
+    carbon.title=@"二氧化碳当量";
+    carbon.titleFontSize=kBuildingCommodityTitleFontSize;
+    carbon.titleMargin=kBuildingDetailInnerMargin;
+    carbon.leftMargin=0;
+    carbon.valueFontSize=kBuildingCommodityDetailValueFontSize;
+    carbon.uomFontSize=kBuildingCommodityDetailUomFontSize;
+    [carbon showTitle];
     
     [self addSubview:carbon];
+    self.carbonLabel=carbon;
     
-    REMBuildingRankingView *ranking=[[REMBuildingRankingView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight) withData:self.commodityInfo.rankingData withTitle:@"集团排名" andTitleFontSize:kBuildingCommodityTitleFontSize withTitleMargin:kBuildingDetailInnerMargin withLeftMargin:kBuildingCommodityDetailTextMargin ];
-    
-    
-    
+    REMBuildingRankingView *ranking=[[REMBuildingRankingView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
+    ranking.title=@"集团排名";
+    ranking.titleFontSize=kBuildingCommodityTitleFontSize;
+    ranking.titleMargin=kBuildingDetailInnerMargin;
+    ranking.leftMargin=kBuildingCommodityDetailTextMargin;
+    [ranking showTitle];
     [self addSubview:ranking];
-    
+    self.rankingLabel=ranking;
     [self addSplitBar:ranking];
     
+    /*
     if(self.commodityInfo.targetValue!=nil &&
        self.commodityInfo.targetValue.dataValue!=nil &&
        ![self.commodityInfo.targetValue.dataValue isEqual:[NSNull null]] &&
@@ -133,7 +126,7 @@ typedef void(^SuccessCallback)(BOOL success);
         }
         
         [self addSubview:target];
-    }
+    }*/
 }
 
 - (void)addSplitBar:(UIView *)view
@@ -249,7 +242,7 @@ typedef void(^SuccessCallback)(BOOL success);
 {
     int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;
     int chartContainerHeight=kBuildingChartHeight;
-    REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0,marginTop , kBuildingChartWidth, chartContainerHeight) withTitle: [NSString stringWithFormat:@"单位面积逐月用%@",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
+    REMBuildingChartContainerView *view = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0,marginTop , kBuildingChartWidth, chartContainerHeight) withTitle: [NSString stringWithFormat:@"单位面积逐月用%@",self.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
     
     
     
@@ -258,7 +251,7 @@ typedef void(^SuccessCallback)(BOOL success);
     
     int marginTop1=marginTop+chartContainerHeight+kBuildingCommodityBottomMargin;
     
-    REMBuildingChartContainerView *view1 = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingChartWidth, chartContainerHeight) withTitle:[NSString stringWithFormat:@"用%@趋势图",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
+    REMBuildingChartContainerView *view1 = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingChartWidth, chartContainerHeight) withTitle:[NSString stringWithFormat:@"用%@趋势图",self.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
     
     [self addSubview:view1];
     
@@ -271,6 +264,37 @@ typedef void(^SuccessCallback)(BOOL success);
         self.successBlock(YES);
         self.successBlock=nil;
     }
+}
+
+- (void)loadTotalUsageByBuildingId:(NSNumber *)buildingId ByCommodityId:(NSNumber *)commodityId
+{
+    NSDictionary *param = @{@"commodityId":commodityId,@"buildingId":buildingId};
+    REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSBuildingCommodityTotalUsage parameter:param];
+    store.maskContainer = nil;
+    store.groupName = [NSString stringWithFormat:@"b-%@-%@", buildingId, commodityId];
+    [self.totalLabel showLoading];
+    [self.carbonLabel showLoading];
+    [self.rankingLabel showLoading];
+    [REMDataAccessor access:store success:^(NSDictionary *data) {
+        REMCommodityUsageModel *model=[[REMCommodityUsageModel alloc]initWithDictionary:data];
+        if(self.buildingInfo.commodityUsage==nil){
+            self.buildingInfo.commodityUsage=@[model];
+        }
+        else{
+            NSMutableArray *newArray=[self.buildingInfo.commodityUsage mutableCopy];
+            [newArray addObject:model];
+            self.buildingInfo.commodityUsage=newArray;
+        }
+        [self.totalLabel hideLoading];
+        [self.carbonLabel hideLoading];
+        [self.rankingLabel hideLoading];
+        self.totalLabel.data=model.commodityUsage;
+        self.carbonLabel.data=model.carbonEquivalent;
+        self.rankingLabel.data=model.rankingData;
+        
+    } error:^(NSError *error, id response) {
+        
+    }];
 }
 
 - (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId complete:(void(^)(BOOL))callback
