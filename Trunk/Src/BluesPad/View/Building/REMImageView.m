@@ -134,6 +134,8 @@
         
         [self initTitleView];
         
+        [self initBackButton];
+        
         [self initSettingButton];
         
         //[self loadingBuildingImage];
@@ -169,6 +171,18 @@
     
     self.dataView.shareButton=self.shareButton;
 
+}
+
+-(void)initBackButton
+{
+    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+100, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
+    backButton.adjustsImageWhenHighlighted=YES;
+    backButton.showsTouchWhenHighlighted=YES;
+    backButton.titleLabel.text=@"地图";
+    
+    [backButton addTarget:self.controller action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.settingButton=backButton;
+    [self addSubview:backButton];
 }
 
 - (void)loadingBuildingImage{

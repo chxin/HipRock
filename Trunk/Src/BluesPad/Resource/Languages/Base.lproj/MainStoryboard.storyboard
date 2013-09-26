@@ -137,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ncs-SR-xwT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3871" y="-1647"/>
+            <point key="canvasLocation" x="-2619" y="-510"/>
         </scene>
         <!--Building View Controller-->
         <scene sceneID="XIG-df-ONL">
@@ -175,6 +175,7 @@
                         <segue destination="nX8-ih-mDs" kind="push" identifier="buildingToDashboardSegue" id="AYf-DZ-2t4"/>
                         <segue destination="vUT-Vk-hfp" kind="modal" identifier="buildingSettingSegue2" id="JWw-pn-ue8"/>
                         <segue destination="R8X-Id-ksc" kind="modal" identifier="sendWeiboSegue" modalPresentationStyle="formSheet" id="gyV-e6-1Kn"/>
+                        <segue destination="8sm-Rk-4h3" kind="push" identifier="buildingToMapSegue" id="oZI-ME-FMX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujE-me-aPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1091,7 +1092,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w7e-H1-kOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1693" y="1802"/>
+            <point key="canvasLocation" x="-1677" y="2906"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xnY-m1-p1k">
@@ -1108,7 +1109,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qs8-1K-3SC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2635" y="1802"/>
+            <point key="canvasLocation" x="-2619" y="2906"/>
         </scene>
         <!--Building Weibo Send View Controller-->
         <scene sceneID="bSI-Y3-KEb">
@@ -1128,7 +1129,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TOj-5Z-r5Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2627" y="-527"/>
+            <point key="canvasLocation" x="-2461" y="556"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="ste-vW-v6a">
@@ -1261,7 +1262,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lil-QZ-dI1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1877" y="482"/>
+            <point key="canvasLocation" x="-2461" y="1470"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ab7-k5-9xI">
@@ -1384,4 +1385,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="oZI-ME-FMX"/>
+    </inferredMetricsTieBreakers>
 </document>
