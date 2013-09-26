@@ -3,7 +3,7 @@ srcpath=~/BuildFolder/SourceCode/Master/BluesGit
 nodepath=/usr/local/bin/
 webserverpath=~/WebServer/
 cd ${srcpath}
-git pull
+git pull origin master
 cd ${makefilepath}
 make --makefile=Makefile --directory=${makefilepath} xcclean
 make --makefile=Makefile --directory=${makefilepath} xcbuild BUILDTYPE=InternalRelease
