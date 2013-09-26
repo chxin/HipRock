@@ -6,13 +6,13 @@
 //
 //
 
-#import "REMMainViewController.h"
+#import "REMMainDashboardViewController.h"
 
-@interface REMMainViewController ()
+@interface REMMainDashboardViewController ()
 @property (nonatomic) BOOL isDashboardMax;
 @end
 
-@implementation REMMainViewController
+@implementation REMMainDashboardViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,7 +70,7 @@
         }
     }
     
-    __weak REMMainViewController *weakSelf=self;
+    __weak REMMainDashboardViewController *weakSelf=self;
     CGPoint center = self.dashboardContainer.center;
     CGPoint newCenter = CGPointMake(563, center.y);
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -86,7 +86,7 @@
 
 - (void)minDashboardContent;
 {
-    __weak REMMainViewController *weakSelf=self;
+    __weak REMMainDashboardViewController *weakSelf=self;
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 
         weakSelf.dashboardContainer.center=CGPointMake(733, self.dashboardContainer.center.y);

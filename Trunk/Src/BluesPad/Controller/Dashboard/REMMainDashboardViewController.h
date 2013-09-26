@@ -12,7 +12,7 @@
 #import "REMWidgetObject.h"
 #import "REMWidgetMaxViewController.h"
 
-@interface REMMainViewController : UIViewController
+@interface REMMainDashboardViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIView *dashboardContainer;
 
 - (void)maxDashboardContent:(void(^)(BOOL finished))complete;

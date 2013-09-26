@@ -7,6 +7,7 @@
 //
 
 #import "REMDashboardLeftNavigationController.h"
+#import "REMMainDashboardViewController.h"
 
 @interface REMDashboardLeftNavigationController ()
 @property (nonatomic) CGFloat x;
@@ -51,7 +52,7 @@
         
         self.x+=translation.x;
         
-        REMMainViewController *mainController = (REMMainViewController *)self.parentViewController.parentViewController;
+        REMMainDashboardViewController *mainController = (REMMainDashboardViewController *)self.parentViewController.parentViewController;
         
         [mainController moveDashboardContent:translation.x];
         
@@ -65,7 +66,7 @@
     if(pan.state == UIGestureRecognizerStateEnded)
     {
         //CGPoint translation= [pan translationInView:self.view];
-        REMMainViewController *mainController = (REMMainViewController *)self.parentViewController.parentViewController;
+        REMMainDashboardViewController *mainController = (REMMainDashboardViewController *)self.parentViewController.parentViewController;
         //NSLog(@"translation.x:%f",self.view.center.x);
         if(self.x<= 170 )
         {

@@ -319,8 +319,6 @@
 - (void) searchData:(NSDictionary *)param
 {
     REMDataStore *store = [[REMDataStore alloc] initWithEnergyStore:self.widgetObj.contentSyntax.storeType parameter:param];
-    store.isAccessLocal = NO;
-    store.isStoreLocal = YES;
     store.maskContainer = self.view;
     store.groupName = nil;
     

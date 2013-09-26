@@ -417,6 +417,13 @@
     [self performSelector:@selector(executeExport:) withObject:masker afterDelay:0.1];
 }
 
+-(IBAction)backButtonPressed:(id)sender
+{
+    static NSString *segueName = @"buildingToMapSegue";
+    
+    [self performSegueWithIdentifier:segueName sender:self];
+}
+
 -(void)executeExport:(REMMaskManager *)masker{
     REMImageView *view = self.imageArray[self.currentIndex];
     

@@ -140,6 +140,8 @@
         
         [self initTitleView];
         
+        [self initBackButton];
+        
         [self initSettingButton];
         
         //[self loadingBuildingImage];
@@ -177,6 +179,19 @@
 
 }
 
+-(void)initBackButton
+{
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    backButton.frame = CGRectMake(kBuildingLeftMargin+100, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension);
+    backButton.adjustsImageWhenHighlighted=YES;
+    backButton.showsTouchWhenHighlighted=YES;
+    backButton.titleLabel.text=@"地图";
+    
+    [backButton addTarget:self.controller action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.settingButton=backButton;
+    [self addSubview:backButton];
+}
+
 - (void)loadingBuildingImage{
     if(self.buildingInfo.building.pictureIds==nil ||
        [self.buildingInfo.building.pictureIds isEqual:[NSNull null]] ||
@@ -187,11 +202,7 @@
     if(self.customImageLoaded==YES)return;
     NSDictionary *param=@{@"pictureId":self.buildingInfo.building.pictureIds[0]};
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param];
-    store.isAccessLocal=YES;
-    store.isStoreLocal=YES;
     store.groupName=self.loadingImageKey;
-    store.isStoreLocal = YES;
-    store.isAccessLocal = YES;
     self.loadingImage=YES;
     if(self.isActive==NO)return;
     [REMDataAccessor access: store success:^(NSData *data){
