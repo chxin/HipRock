@@ -37,12 +37,12 @@
 
 +(void)clearSessionStorage
 {
-    [[REMSqliteStorage getInstance] clearSessionStorage];
+//    [[REMSqliteStorage getInstance] clearSessionStorage];
 }
 
 +(void)clearOnApplicationActive
 {
-    [[REMSqliteStorage getInstance] clearWindowActivateStorage];
+//    [[REMSqliteStorage getInstance] clearWindowActivateStorage];
 }
 
 

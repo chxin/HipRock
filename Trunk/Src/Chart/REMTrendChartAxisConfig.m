@@ -25,12 +25,12 @@
     CPTMutableLineStyle* lineStyle = [[CPTMutableLineStyle alloc]init];
     CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
     
-    lineStyle.lineColor = [CPTColor blackColor];
+    lineStyle.lineColor = [CPTColor whiteColor];
     lineStyle.lineWidth = 1.0;
     
     textStyle.fontName = @kBuildingFontSCRegular;
     textStyle.fontSize = 16.0;
-    textStyle.color = [CPTColor blackColor];
+    textStyle.color = [CPTColor whiteColor];
     textStyle.textAlignment = CPTTextAlignmentCenter;
     
     REMTrendChartAxisConfig* config = [[REMTrendChartAxisConfig alloc]initWithCoordinate:CPTCoordinateX lineStyle:lineStyle textStyle:textStyle];
