@@ -12,8 +12,8 @@
 
 //v0.4dev branch checkin
 
-//#ifdef DEBUG
-const static NSString *SVC_BASE_HOST = @"10.177.122.127";
+#ifdef DEBUG
+const static NSString *SVC_BASE_HOST = @"10.177.206.79";
 const static NSString *SVC_BASE_SCHEMA = @"http";
 const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
 
@@ -24,19 +24,19 @@ const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
 //const static NSString *SVC_BASE_HOST = @"223.4.20.20";
 //const static NSString *SVC_BASE_SCHEMA = @"http";
 //const static NSString *SVC_BASE_SUFFIX = @"/v1.3.0.13/MobileApiHost/";
-//#endif
+#endif
 
-//#ifdef DailyBuild
-//const static NSString *SVC_BASE_HOST = @"223.4.20.20";
-//const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/v1.3.0.13/MobileApiHost/";
-//#endif
-//
-//#ifdef InternalRelease
-//const static NSString *SVC_BASE_HOST = @"223.4.20.20";
-//const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/v1.3.0.13/MobileApiHost/";
-//#endif
+#ifdef DailyBuild
+const static NSString *SVC_BASE_HOST = @"223.4.20.20";
+const static NSString *SVC_BASE_SCHEMA = @"http";
+const static NSString *SVC_BASE_SUFFIX = @"/v1.3.0.13/MobileApiHost/";
+#endif
+
+#ifdef InternalRelease
+const static NSString *SVC_BASE_HOST = @"223.4.20.20";
+const static NSString *SVC_BASE_SCHEMA = @"http";
+const static NSString *SVC_BASE_SUFFIX = @"/v1.3.0.13/MobileApiHost/";
+#endif
 
 
 + (NSString *)absoluteUrl:(NSString *)relativeUrl
