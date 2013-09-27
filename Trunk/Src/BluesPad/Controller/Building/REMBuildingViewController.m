@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingWeiboView.h"
 #import "REMTrendChart.h"
+#import "REMMapViewController.h"
 
 @interface REMBuildingViewController ()
 @property (nonatomic,strong) NSArray *imageArray;
@@ -140,6 +141,10 @@
         REMBuildingSettingViewController *vc= [c.childViewControllers lastObject];
         vc.splashScreenController=self.splashScreenController;
         vc.navigationController=self.navigationController;
+    }
+    if([segue.identifier isEqualToString:@"buildingToMapSegue"]==YES){
+        REMMapViewController *mapController = segue.destinationViewController;
+        mapController.buildingInfoArray = self.buildingOverallArray;
     }
 }
 

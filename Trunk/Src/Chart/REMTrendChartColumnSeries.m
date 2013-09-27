@@ -10,18 +10,6 @@
 
 @implementation REMTrendChartColumnSeries
 
--(REMTrendChartColumnSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMTrendChartDataProcessor*)processor dataStep:(REMEnergyStep)step startDate:(NSDate*)startDate {
-    self = [super initWithData:energyData dataProcessor:processor dataStep:step startDate:startDate];
-    seriesType = REMTrendChartSeriesTypeColumn;
-    return self;
-}
-
--(CPTPlot*)makePlot {
-    CPTBarPlot* plot ;
-    
-    return plot;
-}
-
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
 {
     REMTrendChartPoint* point = [self.points objectAtIndex:idx];

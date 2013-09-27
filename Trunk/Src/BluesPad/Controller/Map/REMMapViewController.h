@@ -10,4 +10,6 @@
 
 @interface REMMapViewController : UIViewController
 
+@property (nonatomic,strong) NSArray *buildingInfoArray;
+
 @end

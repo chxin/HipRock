@@ -23,8 +23,6 @@
 
 @implementation REMWidgetCell
 
-
-
 - (void)initCellByWidget:(REMWidgetObject *)widget
 {
     switch (widget.diagramType) {

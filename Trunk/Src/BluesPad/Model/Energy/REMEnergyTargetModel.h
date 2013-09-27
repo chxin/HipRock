@@ -28,6 +28,8 @@ typedef enum _REMEnergyTargetType : NSUInteger
     REMEnergyTargetBaseValue = 14,
     
     REMEnergyTargetBenchmarkValue = 15,
+    
+    REMEnergyTargetAreaConsumption = 16,
 } REMEnergyTargetType;
 
 @interface REMEnergyTargetModel : REMJSONObject

@@ -23,6 +23,8 @@
     self.pathLevel = [dictionary[@"PathLevel"] intValue];
     self.hasDataPrivilege = [dictionary[@"HasDataPrivilege"] boolValue];
     self.pictureIds=dictionary[@"PictureIds"];
+    self.latitude = [dictionary[@"Latitude"] doubleValue];
+    self.longitude = [dictionary[@"Longitude"] doubleValue];
 }
 
 @end
