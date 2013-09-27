@@ -14,12 +14,24 @@
 
 @end
 
-@implementation REMTrendChartSeries 
-
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMTrendChartDataProcessor*)processor dataStep:(REMEnergyStep)step startDate:(NSDate*)startDate {
+@implementation REMTrendChartSeries
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step {
+    REMTrendChartDataProcessor* processor = [[REMTrendChartDataProcessor alloc]init];
+    return [self initWithData:energyData dataStep:step dataProcessor:processor];
+}
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step dataProcessor:(REMTrendChartDataProcessor*)processor {
+    return [self initWithData:energyData dataStep:step dataProcessor:processor yAxisIndex:0];
+}
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step dataProcessor:(REMTrendChartDataProcessor*)processor yAxisIndex:(int)yAxisIndex {
+    return [self initWithData:energyData dataStep:step dataProcessor:processor yAxisIndex:yAxisIndex startDate:((REMEnergyData*)[energyData objectAtIndex:0]).localTime];
+}
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step dataProcessor:(REMTrendChartDataProcessor*)processor yAxisIndex:(int)yAxisIndex startDate:(NSDate*)startDate {
     self = [super init];
     if (self) {
-        self.yAxisIndex = 0;
+        _yAxisIndex = 0;
+        seriesType = [self getSeriesType];
+        _startDate = startDate;
+        _plot = [self makePlot];
         NSMutableArray* data = [[NSMutableArray alloc]init];
         for (REMEnergyData *p in energyData) {
             [data addObject:[processor processEnergyData:p startDate:startDate step:step]];
@@ -28,7 +40,12 @@
     }
     return self;
 }
-
+-(CPTPlot*)makePlot {
+    return nil;
+}
+-(REMTrendChartSeriesType)getSeriesType {
+    return 0;
+}
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {

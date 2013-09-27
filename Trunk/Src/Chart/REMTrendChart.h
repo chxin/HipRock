@@ -51,15 +51,26 @@ typedef enum  {
     @protected REMTrendChartSeriesType seriesType;
 //    @protected CPTGraph* graph;
 }
-//@property (nonatomic, readonly) CPTPlot* plot;
+@property (nonatomic, readonly) CPTPlot* plot;
 @property (nonatomic, readonly) NSArray* points;
-@property (nonatomic) NSUInteger* yAxisIndex;
-//@property (nonatomic, readonly) CPTAxis* yAxis;
 
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMTrendChartDataProcessor*)processor dataStep:(REMEnergyStep)step startDate:(NSDate*)startDate;
+/*
+ * 对应的Y轴的index，从0开始
+ */
+@property (nonatomic, readonly) NSUInteger yAxisIndex;
+
+/*
+ * x数据处理的起点时间
+ */
+@property (nonatomic, readonly) NSDate* startDate;
+
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step;
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step dataProcessor:(REMTrendChartDataProcessor*)processor;
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step dataProcessor:(REMTrendChartDataProcessor*)processor yAxisIndex:(int)yAxisIndex;
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step dataProcessor:(REMTrendChartDataProcessor*)processor yAxisIndex:(int)yAxisIndex startDate:(NSDate*)startDate;
+
 //-(void)hide;
 //-(void)show;
-//-(CPTPlot*)makePlot;
 @end
 
 
@@ -101,25 +112,46 @@ typedef enum  {
 
 @interface REMTrendChartConfig : NSObject
 
+@property (nonatomic) REMEnergyStep step;
+/*
+ * 是否绘制纵向Gridline。默认不绘制。
+ */
 @property (nonatomic) BOOL verticalGridLine;
+
 @property (nonatomic) REMTrendChartAxisConfig* xAxisConfig;
+
 @property (nonatomic) NSArray* yAxisConfig;
 
+/*
+ * 水平等高线的数量（包括x轴）。
+ */
 @property (nonatomic) NSInteger horizentalGridLineAmount;
-@property (nonatomic) NSInteger horizentalReservedSpace;
 
+@property (nonatomic) NSArray* series;
+
+/*
+ * X轴文本的起点时间。如果没有指定，则会使用Series配置中最小的StartDate作为默认起点时间。
+ */
+@property (nonatomic) NSDate* xStartDate;
 @end
 
 
-@interface REMTrendChartView : CPTGraphHostingView
+
+
+
+
+@interface REMTrendChartView : CPTGraphHostingView<CPTPlotSpaceDelegate>
 
 @property (nonatomic, readonly) BOOL verticalGridLine;
-
 @property (nonatomic, readonly) REMTrendChartAxisConfig* xAxisConfig;
 @property (nonatomic, readonly) NSArray* yAxisConfig;
-
 @property (nonatomic, readonly) NSInteger horizentalGridLineAmount;
-@property (nonatomic, readonly) NSInteger horizentalReservedSpace;
+@property (nonatomic, readonly) NSArray* series;
+@property (nonatomic, readonly) REMEnergyStep step;
+/*
+ * X轴文本的起点时间。
+ */
+@property (nonatomic, readonly) NSDate* xStartDate;
 
 -(REMTrendChartView*)initWithFrame:(CGRect)frame chartConfig:(REMTrendChartConfig*)config;
 
