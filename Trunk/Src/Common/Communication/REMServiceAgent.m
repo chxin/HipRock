@@ -44,7 +44,7 @@ static int requestTimeout = 45; //(s)
 + (void) call: (REMServiceMeta *) service withBody:(id)body mask:(UIView *) maskContainer group:(NSString *)groupName store:(BOOL) isStore success:(void (^)(id data))success error:(void (^)(NSError *error, id response))error progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
 {
     //check network status and notify if no connection or 3g or 2g
-    if(![REMServiceAgent checkNetworkStatus])
+    if([REMServiceAgent checkNetworkStatus] == NO)
     {
         return;
     }
@@ -75,7 +75,7 @@ static int requestTimeout = 45; //(s)
     
     void (^onSuccess)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        //NSLog(@"%@", operation.responseString);
+        NSLog(@"%@", operation.responseString);
         
         //if there is error message
         if([operation.responseString hasPrefix:@"{\"error\":"] == YES){
@@ -126,7 +126,6 @@ static int requestTimeout = 45; //(s)
             [maskManager hideMask];
         }
         
-        //
         operation = nil;
     };
     
@@ -134,7 +133,16 @@ static int requestTimeout = 45; //(s)
     {
         REMLogError(@"Communication error: %@\nServer response: %@", [error description], operation.responseString);
         
-        if(error && errorInfo.code != -999)
+        if(errorInfo.code == -1001){
+            [REMAlertHelper alert:@"数据加载超时"];
+            return;
+        }
+        if(errorInfo.code == -999){
+            REMLogInfo(@"Request canceled");
+            return;
+        }
+        
+        if(error)
         {
             error(errorInfo,operation.responseString);
         }
@@ -155,7 +163,7 @@ static int requestTimeout = 45; //(s)
     
     [serviceOperation setCompletionBlockWithSuccess:onSuccess failure:onFailure];
     [serviceOperation setDownloadProgressBlock:onProgress];
-    
+    serviceOperation.maskManager=maskManager;
     if(groupName!=nil && [groupName isEqual:[NSNull null]]==NO && [groupName isEqualToString:@""] == NO)
     {
         serviceOperation.groupName = groupName;
@@ -168,7 +176,7 @@ static int requestTimeout = 45; //(s)
         [REMServiceAgent initializeQueue];
     }
     
-    //NSLog(@"request: %@",[request.URL description]);
+    NSLog(@"request: %@",[request.URL description]);
     [queue addOperation:serviceOperation];
 }
 
@@ -208,6 +216,9 @@ static int requestTimeout = 45; //(s)
         [queue setSuspended:NO];
         
         for(REMServiceRequestOperation *operation in cancelList){
+            if(operation.maskManager!=nil){
+                [operation.maskManager hideMask];
+            }
             [operation cancel];
         }
     }

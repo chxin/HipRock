@@ -134,6 +134,8 @@
         
         [self initTitleView];
         
+        [self initBackButton];
+        
         [self initSettingButton];
         
         //[self loadingBuildingImage];
@@ -157,16 +159,31 @@
     
     UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
     [shareButton setImage:[UIImage imageNamed:@"Share_normal.png"] forState:UIControlStateNormal];
-    if (self.buildingInfo.commodityUsage.count == 0) {
+    //if (self.buildingInfo.commodityUsage.count == 0) {
         shareButton.enabled = NO;
-    }
+    //}
     shareButton.showsTouchWhenHighlighted=YES;
     shareButton.adjustsImageWhenHighlighted=YES;
     shareButton.titleLabel.text=@"分享";
     [shareButton addTarget:self.controller action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.shareButton=shareButton;
     [self addSubview:shareButton];
+    
+    self.dataView.shareButton=self.shareButton;
 
+}
+
+-(void)initBackButton
+{
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    backButton.frame = CGRectMake(kBuildingLeftMargin+100, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension);
+    backButton.adjustsImageWhenHighlighted=YES;
+    backButton.showsTouchWhenHighlighted=YES;
+    backButton.titleLabel.text=@"地图";
+    
+    [backButton addTarget:self.controller action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.settingButton=backButton;
+    [self addSubview:backButton];
 }
 
 - (void)loadingBuildingImage{
@@ -179,11 +196,7 @@
     if(self.customImageLoaded==YES)return;
     NSDictionary *param=@{@"pictureId":self.buildingInfo.building.pictureIds[0]};
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param];
-    store.isAccessLocal=YES;
-    store.isStoreLocal=YES;
     store.groupName=self.loadingImageKey;
-    store.isStoreLocal = YES;
-    store.isAccessLocal = YES;
     self.loadingImage=YES;
     if(self.isActive==NO)return;
     [REMDataAccessor access: store success:^(NSData *data){
@@ -201,16 +214,16 @@
         //UIImageView *newBlurred= [self blurredImageView:newView];
                 
         
-        dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        //dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         //UIImage *image = self.defaultImage;
-        dispatch_async(concurrentQueue, ^{
+        //dispatch_async(concurrentQueue, ^{
             @autoreleasepool {
                 UIImage *view = [self AFInflatedImageFromResponseWithDataAtScale:data];
                 newView.image=view;
                 UIImageView *newBlurred= [self blurredImageView:newView];
             
             
-            dispatch_async(dispatch_get_main_queue(), ^{
+            //dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [self insertSubview:newView aboveSubview:self.blurredImageView];
                 [self insertSubview:newBlurred aboveSubview:newView];
@@ -237,9 +250,9 @@
                     //[self.controller notifyCustomImageLoaded:self.buildingInfo.building.buildingId];
                 }];
 
-            });
+            //});
             }
-        });
+        //});
 
         
         
@@ -490,7 +503,6 @@
     
     
     
-    
 }
 
 -(void)checkIfRequestChartData:(UIScrollView *)scrollView{
@@ -647,7 +659,11 @@
     [self loadingBuildingImage];
     
     if(self.dataViewUp==YES){
-        [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:nil];
+        [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:^(BOOL success){
+            if(success==YES){
+                [self.shareButton setEnabled:YES];
+            }
+        }];
     }
     
 }

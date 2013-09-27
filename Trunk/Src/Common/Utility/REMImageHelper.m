@@ -102,8 +102,13 @@
 
 + (UIImage *)blurImage:(UIImage *)origImage
 {
-    EAGLContext *myEAGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
+    [EAGLContext setCurrentContext:nil];
+    
+    EAGLContext *myEAGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    if([EAGLContext setCurrentContext:myEAGLContext] == NO){
+        return nil;
+    }
     NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
     [options setObject: [NSNull null] forKey: kCIContextWorkingColorSpace];
     CIContext *myContext = [CIContext contextWithEAGLContext:myEAGLContext options:options];
@@ -149,6 +154,10 @@
     
     UIImage *view= [UIImage imageWithCGImage:cgimg];
     CGImageRelease(cgimg);
+    
+    [EAGLContext setCurrentContext:nil];
+    
+    
     
     return view;
 }

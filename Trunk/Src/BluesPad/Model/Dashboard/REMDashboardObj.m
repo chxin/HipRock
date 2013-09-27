@@ -28,6 +28,13 @@
     }
     
     self.widgets=widgets;
+    
+    NSDictionary *shareInfo = dictionary[@"SimpleShareInfo"];
+    
+    if(shareInfo!=nil){
+        self.shareInfo=[[REMShareInfo alloc]initWithDictionary:shareInfo];
+    }
+    
 }
 
 @end

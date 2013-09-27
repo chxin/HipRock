@@ -41,8 +41,6 @@ static CPTTextStyle *yAxisLabelStyle;
     NSDictionary *param = [self assembleRequestParametersWithBuildingId:buildingId WithCommodityId:commodityID WithMetadata:averageUsageData];
     
     REMDataStore *store = [[REMDataStore alloc] initWithName:self.requestUrl parameter:param];
-    store.isAccessLocal = YES;
-    store.isStoreLocal = YES;
     store.maskContainer = nil;
     store.groupName = [NSString stringWithFormat:@"b-%lld-%lld", buildingId, commodityID];
     
@@ -221,54 +219,50 @@ static CPTTextStyle *yAxisLabelStyle;
 
 -(NSString *)formatDataValue:(NSNumber *)number
 {
-    NSNumberFormatter* formatter = [[NSNumberFormatter alloc]init];
-    formatter.numberStyle = NSNumberFormatterDecimalStyle;
-    [formatter setRoundingMode:NSNumberFormatterRoundHalfUp];
-    
     double numberValue = [number doubleValue];
     
-    NSString* text = nil;
-    if (numberValue > 1000000) {
-        [formatter setMaximumFractionDigits:0];
-        [formatter setMinimumFractionDigits:0];
-        
-        text = [NSString stringWithFormat:@"%@M", [formatter stringFromNumber:[NSNumber numberWithDouble:numberValue / 1000000]]];
+    if(numberValue == 0){
+        return @"0";
     }
-    else if (numberValue > 1000) {
-        [formatter setMaximumFractionDigits:0];
-        [formatter setMinimumFractionDigits:0];
-        
-        text = [NSString stringWithFormat:@"%@K", [formatter stringFromNumber:[NSNumber numberWithDouble:numberValue / 1000]]];
+    if(numberValue < 1000){
+        return [self formatNumber:number withMinDigits:2 andMaxDigits:2];
     }
-    else if(numberValue > 10){
-        [formatter setMaximumFractionDigits:0];
-        [formatter setMinimumFractionDigits:0];
-        
-        text = [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithDouble:numberValue]]];
+    if(numberValue < 1000000){
+        return [self formatNumber:number withMinDigits:0 andMaxDigits:0];
     }
-    else if (numberValue > 1) {
-        [formatter setMaximumFractionDigits:1];
-        [formatter setMinimumFractionDigits:1];
-        
-        text = [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithDouble:numberValue]]];
+    if(numberValue < 100000000){
+        NSString *text = [self formatNumber:[NSNumber numberWithDouble:numberValue/1000] withMinDigits:0 andMaxDigits:0];
+        return [NSString stringWithFormat:@"%@k", text];
     }
-    else if (numberValue == 0){
-        [formatter setMaximumFractionDigits:0];
-        [formatter setMinimumFractionDigits:0];
-        
-        text = [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithDouble:numberValue]]];
+    if(numberValue < 100000000000){
+        NSString *text = [self formatNumber:[NSNumber numberWithDouble:numberValue/1000000] withMinDigits:0 andMaxDigits:0];
+        return [NSString stringWithFormat:@"%@M", text];
     }
-    else{
-        [formatter setMaximumFractionDigits:2];
-        [formatter setMinimumFractionDigits:2];
-        
-        text = [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithDouble:numberValue]]];
+    if(numberValue < 100000000000000){
+        NSString *text = [self formatNumber:[NSNumber numberWithDouble:numberValue/1000000000] withMinDigits:0 andMaxDigits:0];
+        return [NSString stringWithFormat:@"%@G", text];
     }
-    
-    return text;
+    if(numberValue < 100000000000000000){
+        NSString *text = [self formatNumber:[NSNumber numberWithDouble:numberValue/1000000000000] withMinDigits:0 andMaxDigits:0];
+        return [NSString stringWithFormat:@"%@T", text];
+    }
+        
+    return [self formatNumber:number withMinDigits:0 andMaxDigits:0];
 }
 
-
+static NSNumberFormatter* formatter;
+-(NSString *)formatNumber:(NSNumber *)number withMinDigits:(int) minDigits andMaxDigits:(int)maxDigits
+{
+    if(formatter == nil){
+        formatter = [[NSNumberFormatter alloc] init];
+    }
+    
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    [formatter setMinimumFractionDigits:minDigits];
+    [formatter setMaximumFractionDigits:maxDigits];
+    
+    return [formatter stringFromNumber:number];
+}
 
 -(void)startLoadingActivity
 {
@@ -291,6 +285,32 @@ static CPTTextStyle *yAxisLabelStyle;
         self.activityIndicatorView = nil;
     }
 }
+
+-(void)purgeMemory{
+    axisLineStyle=nil;
+    gridLineStyle=nil;
+    hiddenLineStyle=nil;
+    xAxisLabelStyle=nil;
+    yAxisLabelStyle=nil;
+    CPTGraphHostingView *hostView=[self getHostView];
+    [hostView.hostedGraph removeAllAnimations];
+    [hostView.hostedGraph removeAllAnnotations];
+    for (CPTAxis *axis in hostView.hostedGraph.axisSet.axes) {
+        axis.majorTickLocations=nil;
+        axis.minorTickAxisLabels=nil;
+        [axis removeFromSuperlayer];
+    }
+    [hostView.hostedGraph.axisSet removeFromSuperlayer];
+    hostView.hostedGraph.axisSet.axes=nil;
+    
+    [hostView.hostedGraph.plotAreaFrame removeFromSuperlayer];
+    [hostView.hostedGraph removeFromSuperlayer];
+    hostView.hostedGraph=nil;
+    [hostView removeFromSuperview];
+    [self.view removeFromSuperview];
+}
+
+
 
 - (void)didReceiveMemoryWarning
 {

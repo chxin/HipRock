@@ -14,6 +14,11 @@
 
 + (long long)longLongFromJSONString:(NSString *)jsonDate
 {
+    if([jsonDate isEqual:[NSNull null]]==YES){
+        return 0;
+    }
+    
+    
     NSError *error;
     NSRegularExpression *regex= [NSRegularExpression regularExpressionWithPattern:@"\\d+" options:0 error:&error];
     
@@ -412,5 +417,13 @@ static NSCalendar *_currentCalendar;
     return gmtDate;
 }
 
++(NSDate *)convertGMTDateToLocal:(NSDate *)GMTDate
+{
+    NSTimeInterval timeZoneOffset = [[NSTimeZone timeZoneWithName:@"Asia/Shanghai"] secondsFromGMT];
+    NSTimeInterval localTimeInterval = [GMTDate timeIntervalSinceReferenceDate] + timeZoneOffset;
+    NSDate *localDate = [NSDate dateWithTimeIntervalSinceReferenceDate:localTimeInterval];
+    
+    return localDate;
+}
 
 @end

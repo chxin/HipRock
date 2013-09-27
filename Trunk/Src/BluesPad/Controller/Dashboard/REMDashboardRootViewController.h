@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "REMDashboardObj.h"
 #import "REMDashboardViewController.h"
-#import "REMMainViewController.h"
+@class REMMainDashboardViewController;
 
 @class  REMMainViewController;
 
 @interface REMDashboardRootViewController : UIViewController
 
-@property (nonatomic,weak) REMMainViewController *mainController;
+@property (nonatomic,weak) REMMainDashboardViewController *mainController;
 
 - (void) goDashboard:(REMDashboardObj *)dashboard;
 

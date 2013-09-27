@@ -29,13 +29,14 @@
 
 + (void) access: (REMDataStore *) store success:(void (^)(id data))success error:(void (^)(NSError *error, id response))error progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
 {
-    //if access local or there is no network, get from local
-    if(store.isAccessLocal || [REMNetworkHelper checkIsNoConnect])
-    {
+    NetworkStatus netStaus = [REMNetworkHelper checkCurrentNetworkStatus];
+    
+    //if network is not ok, get from cache
+    if(netStaus == NotReachable){
         [REMDataAccessor accessLocal:store success:success error:error];
     }
-    else
-    {
+    //if network is ok, get from network and always update cache data
+    else{
         [REMDataAccessor accessRemote:store success:success error:error progress:progress];
     }
 }
@@ -55,7 +56,7 @@
 
 + (void)accessLocal:(REMDataStore *)store success:(void (^)(id data))success error:(void (^)(NSError *error, id response))error
 {
-    id cachedResult;
+    id cachedResult = nil;
     NSString *cacheKey = [REMServiceAgent buildParameterString:store.parameter];
     
     if(store.serviceMeta.responseType == REMServiceResponseJson)
@@ -67,31 +68,19 @@
         cachedResult = [REMStorage getFile:store.serviceMeta.url key:cacheKey];
     }
     
-    BOOL isAccessRomoteIfLocalNoData = store.isAccessLocal;
-    BOOL isLocalNoData = !(cachedResult != NULL && cachedResult!=nil);
-    
-    //if there is no data local and get from remote if there is no local data, get from remote
-    if(isLocalNoData && isAccessRomoteIfLocalNoData)
+    if(store.serviceMeta.responseType == REMServiceResponseJson)
     {
-        [REMDataAccessor accessRemote:store success:success error:error progress:nil];
+        success([REMJSONHelper objectByString:cachedResult]);
     }
-    else //just call data
+    else if(store.serviceMeta.responseType == REMServiceResponseImage)
     {
-        if(store.serviceMeta.responseType == REMServiceResponseJson)
-        {
-            success([REMJSONHelper objectByString:cachedResult]);
-        }
-        else if(store.serviceMeta.responseType == REMServiceResponseImage)
-        {
-            success(cachedResult);
-        }
-        
+        success(cachedResult);
     }
 }
 
 +(void)accessRemote:(REMDataStore *)store success:(void (^)(id data))success error:(void (^)(NSError *error, id response))error progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
 {
-    [REMServiceAgent call:store.serviceMeta withBody: store.parameter mask:store.maskContainer group:store.groupName store:store.isStoreLocal success:success error:error progress:progress];
+    [REMServiceAgent call:store.serviceMeta withBody: store.parameter mask:store.maskContainer group:store.groupName store:YES success:success error:error progress:progress];
 }
 
 @end

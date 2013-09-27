@@ -21,8 +21,6 @@
 - (void) retrieveEnergyData
 {
     REMDataStore *store = [[REMDataStore alloc] initWithEnergyStore:self.widgetObject.contentSyntax.storeType parameter:self.widgetObject.contentSyntax.params];
-    store.isAccessLocal = YES;
-    store.isStoreLocal = YES;
     store.maskContainer = self.chartView;
     store.groupName = nil;
     

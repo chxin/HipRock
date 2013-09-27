@@ -83,7 +83,8 @@
     else if (currentOrientation == UIInterfaceOrientationLandscapeRight)
         rotate = 90;
     for (int i = 0; i < 2; i++) {
-        [labels[i] setTransform:CGAffineTransformMakeRotation(M_PI * (rotate) / 180.0)];
+        UILabel *label=labels[i];
+        [label setTransform:CGAffineTransformMakeRotation(M_PI * (rotate) / 180.0)];
     }
     CGRect tempRect = topRect;
     topRect = bottomRect;

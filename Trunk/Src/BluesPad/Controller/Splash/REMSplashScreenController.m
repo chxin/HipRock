@@ -139,9 +139,7 @@
 - (void)showBuildingView:(void (^)(void))loadCompleted
 {
     NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
-    REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSBuildingOverallData parameter:parameter];
-    buildingStore.isStoreLocal = YES;
-    buildingStore.isAccessLocal = YES;
+    REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSBuildingInfo parameter:parameter];
     buildingStore.groupName = nil;
     buildingStore.maskContainer = nil;
     
@@ -157,10 +155,7 @@
         
         [self performSegueWithIdentifier:@"splashToBuildingSegue" sender:self];
     } error:^(NSError *error, id response) {
-        if(error.code == -1001){
-            [REMAlertHelper alert:@"数据加载超时"];
-        }
-        else{
+        if(error.code != 1001) {
             [REMAlertHelper alert:@"数据加载错误"];
         }
     }];

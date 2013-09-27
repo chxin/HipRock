@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "REMServiceMeta.h"
+#import "REMMaskManager.h"
 
 typedef void(^REMServiceCallSuccessBlock)(id data);
 typedef void(^REMServiceCallErrorBlock)(NSError *error, id response);

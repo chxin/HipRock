@@ -26,4 +26,6 @@
 - (IBAction)textFieldChanged:(id)sender;
 //- (IBAction)passwordTextChanged:(id)sender;
 
+-(void)loginSuccess;
+
 @end
