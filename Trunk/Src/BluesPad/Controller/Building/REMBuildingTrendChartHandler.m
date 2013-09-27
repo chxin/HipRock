@@ -155,6 +155,7 @@
 
 - (int)getSourceIndex: (REMRelativeTimeRangeType)type {
     int i = 0;
+    /*
     if (type == Today) {
         i = 0;
     } else if (type == Yesterday) {
@@ -168,6 +169,7 @@
     } else if (type == LastYear) {
         i = 5;
     }
+     */
     return i;
 }
 
@@ -181,20 +183,20 @@
 
 
 - (void)intervalChanged:(UIButton *)button {
-    REMRelativeTimeRangeType timeRange = Today;
+    REMRelativeTimeRangeType timeRange = REMRelativeTimeRangeTypeToday;
     REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
     if (button == myView.todayButton) {
-        timeRange = Today;
+        timeRange = REMRelativeTimeRangeTypeToday;
     } else if (button == myView.yestodayButton) {
-        timeRange = Yesterday;
+        timeRange = REMRelativeTimeRangeTypeYesterday;
     } else if (button == myView.thisMonthButton) {
-        timeRange = ThisMonth;
+        timeRange = REMRelativeTimeRangeTypeThisMonth;
     } else if (button == myView.lastMonthButton) {
-        timeRange = LastMonth;
+        timeRange = REMRelativeTimeRangeTypeLastMonth;
     } else if (button == myView.thisYearButton) {
-        timeRange = ThisYear;
+        timeRange = REMRelativeTimeRangeTypeThisYear;
     } else if (button == myView.lastYearButton) {
-        timeRange = LastYear;
+        timeRange = REMRelativeTimeRangeTypeLastYear;
     }
     currentSourceIndex = [self getSourceIndex:timeRange];
     
