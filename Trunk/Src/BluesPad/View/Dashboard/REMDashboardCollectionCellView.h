@@ -10,5 +10,13 @@
 #import "REMWidgetObject.h"
 @interface REMDashboardCollectionCellView : UICollectionViewCell
 
+@property (nonatomic,weak) UILabel *titleLabel;
+
+@property (nonatomic,weak) UILabel *shareLabel;
+
+@property (nonatomic,weak) UILabel *timeLabel;
+
+- (void)initWidgetCell:(REMWidgetObject *)widgetInfo;
+
 
 @end

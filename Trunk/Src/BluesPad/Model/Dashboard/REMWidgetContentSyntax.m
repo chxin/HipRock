@@ -20,11 +20,68 @@
     self.storeType=self.config[@"storeType"];
     self.type=self.config[@"type"];
     
+    if([self.calendar isEqualToString:@"hc"]==YES){
+        self.calendarType=REMCalendarTypeHCSeason;
+    }
+    else if([self.calendar isEqualToString:@"work"]==YES){
+        self.calendarType=REMCalenderTypeWorkDay;
+    }
+    else{
+        self.calendarType=REMCalendarTypeNone;
+    }
+    
+    if([self.relativeDate isEqualToString:@"Last7Day"]==YES){
+        self.relativeDateType = REMRelativeTimeRangeTypeLast7Days;
+    }
+    else if([self.relativeDate isEqualToString:@"Today"]==YES){
+        self.relativeDateType=REMRelativeTimeRangeTypeToday;
+    }
+    else if([self.relativeDate isEqualToString:@"Yesterday"]==YES){
+        self.relativeDateType=REMRelativeTimeRangeTypeYesterday;
+    }
+    else if([self.relativeDate isEqualToString:@"ThisMonth"]==YES){
+        self.relativeDateType=REMRelativeTimeRangeTypeThisMonth;
+    }
+    else if([self.relativeDate isEqualToString:@"LastMonth"]==YES){
+        self.relativeDateType=REMRelativeTimeRangeTypeLastMonth;
+    }
+    else if([self.relativeDate isEqualToString:@"ThisWeek"]==YES){
+        self.relativeDateType=REMRelativeTimeRangeTypeThisWeek;
+    }
+    else if([self.relativeDate isEqualToString:@"LastWeek"]==YES){
+        self.relativeDateType=REMRelativeTimeRangeTypeLastWeek;
+    }
+    else if([self.relativeDate isEqualToString:@"ThisYear"]==YES){
+        self.relativeDateType=REMRelativeTimeRangeTypeThisYear;
+    }
+    else if([self.relativeDate isEqualToString:@"LastYear"]==YES){
+        self.relativeDateType=REMRelativeTimeRangeTypeLastYear;
+    }
+    else{
+        self.relativeDateType=REMRelativeTimeRangeTypeNone;
+    }
+    
     
     
     NSDictionary *viewOption=self.params[@"viewOption"];
     
     self.step = viewOption[@"Step"];
+    
+    if ([self.step isEqualToNumber:@(1)]==YES) {
+        self.stepType = REMEnergyStepHour;
+    }
+    else if([self.step isEqualToNumber:@(2)]==YES){
+        self.stepType = REMEnergyStepDay;
+    }
+    else if([self.step isEqualToNumber:@(3)]==YES){
+        self.stepType = REMEnergyStepMonth;
+    }
+    else if([self.step isEqualToNumber:@(4)]==YES){
+        self.stepType = REMEnergyStepYear;
+    }
+    else if([self.step isEqualToNumber:@(5)]==YES){
+        self.stepType = REMEnergyStepWeek;
+    }
     
     
     NSArray *origTimeRanges = viewOption[@"TimeRanges"];

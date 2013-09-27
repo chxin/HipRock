@@ -10,11 +10,7 @@
 
 @interface REMWidgetCollectionViewController ()
 
-@property (nonatomic,weak) UILabel *widgetTitleLabel;
 
-@property (nonatomic,weak) UILabel *widgetShareLabel;
-
-@property (nonatomic,weak) UILabel *widgetTimeLabel;
 
 @end
 
@@ -65,11 +61,9 @@ static NSString *cellId=@"widgetcell";
     
     REMWidgetObject *widget=self.widgetArray[indexPath.row];
     
-    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, cell.contentView.frame.size.width, 20)];
     
-    [cell.contentView addSubview:title];
     
-    self.widgetTitleLabel=title;
+    [cell initWidgetCell:widget];
     
     
     
