@@ -251,9 +251,6 @@
                     if(self.isActive == NO){
                         [self moveOutOfWindow];
                     }
-                    //self.defaultImage=nil;
-                    //self.defaultBlurImage=nil;
-                    //[self.controller notifyCustomImageLoaded:self.buildingInfo.building.buildingId];
                 }];
 
             //});

@@ -20,7 +20,11 @@
     self.storeType=self.config[@"storeType"];
     self.type=self.config[@"type"];
     
-    if([self.calendar isEqualToString:@"hc"]==YES){
+    
+    if([self.calendar isEqual:[NSNull null]]==YES){
+        self.calendarType=REMCalendarTypeNone;
+    }
+    else if([self.calendar isEqualToString:@"hc"]==YES){
         self.calendarType=REMCalendarTypeHCSeason;
     }
     else if([self.calendar isEqualToString:@"work"]==YES){
@@ -30,7 +34,10 @@
         self.calendarType=REMCalendarTypeNone;
     }
     
-    if([self.relativeDate isEqualToString:@"Last7Day"]==YES){
+    if([self.relativeDate isEqual:[NSNull null]]==YES){
+        self.relativeDateType = REMRelativeTimeRangeTypeNone;
+    }
+    else if([self.relativeDate isEqualToString:@"Last7Day"]==YES){
         self.relativeDateType = REMRelativeTimeRangeTypeLast7Days;
     }
     else if([self.relativeDate isEqualToString:@"Today"]==YES){

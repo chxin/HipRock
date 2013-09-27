@@ -92,20 +92,7 @@
     }
 }
 
-- (void)notifyCustomImageLoaded:(NSNumber *)buildingId{
-    return;
-    if(self.customImageLoadedDictionary.count==self.imageArray.count)return;
-    if ([self.customImageLoadedDictionary objectForKey:buildingId]!=nil) {
-        return;
-    }
-    else{
-        [self.customImageLoadedDictionary setObject:@(1) forKey:buildingId];
-        if(self.customImageLoadedDictionary.count==self.imageArray.count){
-            self.defaultImage=nil;
-            self.defaultBlurImage=nil;
-        }
-    }
-}
+
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
