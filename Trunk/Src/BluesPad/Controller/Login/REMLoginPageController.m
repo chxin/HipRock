@@ -107,20 +107,29 @@
         if(validationResult.status == REMUserValidationSuccess)
         {
             REMUserModel *user = validationResult.user;
-            [[REMApplicationContext instance] setCurrentUser:user];
             
-            NSArray *customers = (NSArray *)([REMApplicationContext instance].currentUser.customers);
+            NSArray *customers = (NSArray *)user.customers;
             
             if(customers.count<=0){
                 [self.userNameErrorLabel setHidden:NO];
                 [self.userNameErrorLabel setText : @"登录失败，该用户未绑定客户" ];
+                [self.loginButton stopIndicator];
+                
+                return;
             }
-            if(customers.count == 1){
-                [[REMApplicationContext instance] setCurrentCustomer:customers[0]];
+            
+            REMCustomerModel *customer = customers.count == 1 ? customers[0]:[self filterRequiredCustomer:customers];
+            
+            if(customer == nil){ //can not find soho customer
+                [self.userNameErrorLabel setHidden:NO];
+                [self.userNameErrorLabel setText : @"登录失败，该用户未指定默认客户" ];
+                [self.loginButton stopIndicator];
+                
+                return;
             }
-            else{
-                [[REMApplicationContext instance] setCurrentCustomer:[self filterRequiredCustomer:customers]];
-            }
+            
+            [[REMApplicationContext instance] setCurrentUser:user];
+            [[REMApplicationContext instance] setCurrentCustomer:customer];
             
             [[REMApplicationContext instance].currentUser save];
             [[REMApplicationContext instance].currentCustomer save];
