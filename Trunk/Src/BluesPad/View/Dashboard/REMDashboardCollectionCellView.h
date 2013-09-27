@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "REMWidgetObject.h"
 @interface REMDashboardCollectionCellView : UICollectionViewCell
+
 
 @end

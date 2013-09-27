@@ -55,7 +55,6 @@ static NSString *cellId=@"dashboardcell";
 {
     [super viewDidLoad];
     
-	// Do any additional setup after loading the view.
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
@@ -82,22 +81,28 @@ static NSString *cellId=@"dashboardcell";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return self.dashboardArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+    REMDashboardObj *obj= self.dashboardArray[indexPath.section];
+    CGFloat titleHeight=60;
+    if(obj.shareInfo!=nil){
+        titleHeight+=20;
+    }
+    CGFloat cellMargin=10;
+    CGFloat cellHeight=180;
+    return titleHeight+(obj.widgets.count/4+1)*cellHeight+cellMargin*(obj.widgets.count/4);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     REMDashboardCellViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
-    
     if(cell==nil){
         cell = [[REMDashboardCellViewCell alloc]initWithStyle: UITableViewCellStyleDefault reuseIdentifier:cellId];
         
     }
     
-    [cell initWidgetCollection];
+    [cell initWidgetCollection:self.dashboardArray[indexPath.section]];
     
     return cell;
 }

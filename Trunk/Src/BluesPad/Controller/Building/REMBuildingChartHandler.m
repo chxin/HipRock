@@ -42,7 +42,6 @@ static CPTTextStyle *yAxisLabelStyle;
     
     REMDataStore *store = [[REMDataStore alloc] initWithName:self.requestUrl parameter:param];
     //store.isAccessLocal = YES;
-    store.isStoreLocal = YES;
     store.maskContainer = nil;
     store.groupName = [NSString stringWithFormat:@"b-%lld-%lld", buildingId, commodityID];
     

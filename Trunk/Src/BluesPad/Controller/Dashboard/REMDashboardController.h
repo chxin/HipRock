@@ -20,4 +20,5 @@
 @property (nonatomic) CGRect viewFrame;
 @property (nonatomic,weak) REMImageView *imageView;
 
+
 @end

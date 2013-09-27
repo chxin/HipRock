@@ -19,6 +19,9 @@
         self.backgroundColor=[UIColor clearColor];
         self.backgroundView=nil;
         [self setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        self.contentInset=UIEdgeInsetsZero;
+        self.contentMode=UIViewContentModeScaleToFill;
+        
         
     }
     return self;

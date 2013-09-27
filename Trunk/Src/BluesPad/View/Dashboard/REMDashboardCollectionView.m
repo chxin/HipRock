@@ -7,17 +7,21 @@
 //
 
 #import "REMDashboardCollectionView.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation REMDashboardCollectionView
 
-- (id)initWithFrame:(CGRect)frame
+
+- (id)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:frame collectionViewLayout:layout];
     if (self) {
         // Initialization code
     }
     return self;
 }
+
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

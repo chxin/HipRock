@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "REMDashboardObj.h"
+#import "REMWidgetCollectionViewController.h"
 
 @interface REMDashboardCellViewCell : UITableViewCell
 
-- (void)initWidgetCollection;
+- (void)initWidgetCollection:(REMDashboardObj *)dashboardInfo;
 
 @end
