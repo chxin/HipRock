@@ -66,7 +66,7 @@ typedef void(^SuccessCallback)(BOOL success);
 {
     
     self.totalLabel=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, 0, 900, kBuildingCommodityTotalHeight)];
-    self.totalLabel.title=[NSString stringWithFormat:@"上月用%@总量",self.commodity.comment];
+    self.totalLabel.title=[NSString stringWithFormat:@"本月用%@总量",self.commodity.comment];
     self.totalLabel.titleFontSize=kBuildingCommodityTitleFontSize;
     self.totalLabel.titleMargin=kBuildingTotalInnerMargin;
     self.totalLabel.leftMargin=0;
