@@ -163,24 +163,24 @@
 
 - (void)initImageView
 {
-    REMTrendChartConfig* chartConfig = [[REMTrendChartConfig alloc]init];
-    //    chartConfig.xAxisConfig = [[REMTrendChartAxisConfig alloc]init];
-    chartConfig.xAxisConfig = [REMTrendChartAxisConfig getWidgetXConfig];
-    chartConfig.yAxisConfig = [NSArray arrayWithObjects:[REMTrendChartAxisConfig getWidgetYConfig],nil];
-    chartConfig.step = REMEnergyStepHour;
-    chartConfig.horizentalGridLineAmount = 5;
-    NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
-    for (int i = 0; i < 100; i++) {
-        REMEnergyData* data = [[REMEnergyData alloc]init];
-        data.quality = REMEnergyDataQualityGood;
-        data.dataValue = [NSNumber numberWithInt:i*10];
-        data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
-        [energyDataArray addObject:data];
-    }
-    REMTrendChartLineSeries* line = [[REMTrendChartLineSeries alloc]initWithData:energyDataArray dataStep:REMEnergyStepHour];
-    chartConfig.series = [NSArray arrayWithObjects:line, nil];
-    
-    REMTrendChartView* testV = [[REMTrendChartView alloc]initWithFrame:CGRectMake(0, 0, 800, 400) chartConfig:chartConfig];
+//    REMTrendChartConfig* chartConfig = [[REMTrendChartConfig alloc]init];
+//    //    chartConfig.xAxisConfig = [[REMTrendChartAxisConfig alloc]init];
+//    chartConfig.xAxisConfig = [REMTrendChartAxisConfig getWidgetXConfig];
+//    chartConfig.yAxisConfig = [NSArray arrayWithObjects:[REMTrendChartAxisConfig getWidgetYConfig],nil];
+//    chartConfig.step = REMEnergyStepHour;
+//    chartConfig.horizentalGridLineAmount = 5;
+//    NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
+//    for (int i = 0; i < 100; i++) {
+//        REMEnergyData* data = [[REMEnergyData alloc]init];
+//        data.quality = REMEnergyDataQualityGood;
+//        data.dataValue = [NSNumber numberWithInt:i*10];
+//        data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
+//        [energyDataArray addObject:data];
+//    }
+//    REMTrendChartLineSeries* line = [[REMTrendChartLineSeries alloc]initWithData:energyDataArray dataStep:REMEnergyStepHour];
+//    chartConfig.series = [NSArray arrayWithObjects:line, nil];
+//    
+//    REMTrendChartView* testV = [[REMTrendChartView alloc]initWithFrame:CGRectMake(0, 0, 800, 400) chartConfig:chartConfig];
     
     int i=0;
     self.imageViewStatus = [[NSMutableDictionary alloc]initWithCapacity:self.buildingOverallArray.count];
@@ -220,7 +220,7 @@
     
 
     
-    [self.view addSubview:testV]; 
+//    [self.view addSubview:testV]; 
 }
 
 
