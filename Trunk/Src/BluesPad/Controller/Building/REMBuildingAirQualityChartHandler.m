@@ -31,7 +31,6 @@
 @property (nonatomic,strong) REMAirQualityStandardModel *standardChina, *standardAmerican;
 @property (nonatomic,strong) UIColor *colorForChinaStandard, *colorForAmericanStandard;
 
-
 @property (nonatomic,strong) REMChartHorizonalScrollDelegator *scrollManager;
 @property (nonatomic,strong) NSDateFormatter *formatter;
 

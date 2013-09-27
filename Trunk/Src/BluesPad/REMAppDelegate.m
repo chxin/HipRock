@@ -11,8 +11,13 @@
 #import "REMStorage.h"
 #import "REMApplicationInfo.h"
 #import "WeiboSDK.h"
+#import <GoogleMaps/GoogleMaps.h>
 
 //comment
+
+#define kWeiboAppKey "216981675"
+#define kWeiboAppSecret "6e25a0619b4431091ce0b663f4c479c8"
+#define kGoogleMapsKey "AIzaSyAQRlAzROZjk_Z_J50nDGeytcnDUp57czw"
 
 @implementation REMAppDelegate
 
@@ -26,14 +31,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    // Log init
     [REMLog bind];
     
+    // App info init
     [REMApplicationInfo initApplicationInfo];
     
-    [REMStorage clearSessionStorage];
+    //[REMStorage clearSessionStorage];
     
-    Weibo *weibo = [[Weibo alloc] initWithAppKey:@"216981675" withAppSecret:@"6e25a0619b4431091ce0b663f4c479c8"];
+    // Weibo app key init
+    Weibo *weibo = [[Weibo alloc] initWithAppKey:@kWeiboAppKey withAppSecret:@kWeiboAppSecret];
     [Weibo setWeibo:weibo];
+    
+    // Google key init
+    [GMSServices provideAPIKey:@kGoogleMapsKey];
     
     return YES;
 }

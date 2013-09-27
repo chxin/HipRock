@@ -16,5 +16,6 @@
 @property (nonatomic) NSInteger pathLevel;
 @property (nonatomic) BOOL hasDataPrivilege;
 @property (nonatomic,strong) NSArray *pictureIds;
+@property (nonatomic) double latitude, longitude;
 
 @end
