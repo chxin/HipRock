@@ -2815,8 +2815,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos6.1]" = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 坦 谭 (YVYZ59KNE2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos6.1]" = "iPhone Developer: 坦 谭 (YVYZ59KNE2)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2843,8 +2843,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "598719AF-8D02-42FE-904A-92EE1A1CB24B";
-				"PROVISIONING_PROFILE[sdk=iphoneos6.1]" = "598719AF-8D02-42FE-904A-92EE1A1CB24B";
+				PROVISIONING_PROFILE = "3F0E2D63-0EE0-43AA-9CC3-488015BED70F";
+				"PROVISIONING_PROFILE[sdk=iphoneos6.1]" = "3F0E2D63-0EE0-43AA-9CC3-488015BED70F";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv7s i386 x86_64";

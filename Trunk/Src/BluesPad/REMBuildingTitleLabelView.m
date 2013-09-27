@@ -90,14 +90,19 @@
     if(c>=48 && c<=59){
 
         NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:string];
-        
-        
+        NSString *scriptType;
+        if([string rangeOfString:@"CO2"].location==NSNotFound){
+            scriptType=@"1";
+        }
+        else{
+            scriptType=@"-1";
+        }
         
         UIFont *smallFont = [UIFont systemFontOfSize:size];
         
         [attString beginEditing];
         [attString addAttribute:NSFontAttributeName value:(smallFont) range:NSMakeRange(string.length - 1, 1)];
-        [attString addAttribute:(NSString*)kCTSuperscriptAttributeName value:@"1" range:NSMakeRange(string.length - 1, 1)];
+        [attString addAttribute:(NSString*)kCTSuperscriptAttributeName value:scriptType range:NSMakeRange(string.length - 1, 1)];
 
         [attString endEditing];
         self.uomLabel.attributedText=attString;
