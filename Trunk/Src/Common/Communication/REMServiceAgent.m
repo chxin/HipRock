@@ -163,7 +163,10 @@ static int requestTimeout = 45; //(s)
     REMServiceRequestOperation *serviceOperation = [REMServiceRequestOperation operationWithRequest:request];
     
     [serviceOperation setCompletionBlockWithSuccess:onSuccess failure:onFailure];
-    [serviceOperation setDownloadProgressBlock:onProgress];
+    
+    if(progress)
+        [serviceOperation setDownloadProgressBlock:onProgress];
+    
     serviceOperation.maskManager=maskManager;
     if(groupName!=nil && [groupName isEqual:[NSNull null]]==NO && [groupName isEqualToString:@""] == NO)
     {
