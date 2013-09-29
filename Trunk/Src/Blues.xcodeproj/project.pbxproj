@@ -405,7 +405,6 @@
 		7AF6AC9117D1BB1200D62A9A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B61D7517C742E000245F1E /* CoreText.framework */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
-		B42A51FC17F57C2A00F890B2 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B42A51FA17F57BB800F890B2 /* GoogleMaps.framework */; };
 		B42C338917E18E63008289D2 /* DefaultBuilding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B42C338817E18E63008289D2 /* DefaultBuilding@2x.png */; };
 		B42C338B17E19064008289D2 /* DefaultBuilding.png in Resources */ = {isa = PBXBuildFile; fileRef = B42C338A17E19064008289D2 /* DefaultBuilding.png */; };
 		B42FBF6117F519F5004F2F3A /* REMWidgetCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6017F519F5004F2F3A /* REMWidgetCollectionViewController.m */; };
@@ -515,6 +514,7 @@
 		EFD6041E17F5778D0080CE89 /* REMColumnWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD6041D17F5778D0080CE89 /* REMColumnWidget.m */; };
 		EFD6042117F57A4F0080CE89 /* REMTrendWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD6042017F57A4F0080CE89 /* REMTrendWidget.m */; };
 		EFD6042417F57B800080CE89 /* REMLineWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD6042317F57B800080CE89 /* REMLineWidget.m */; };
+		EFD93A7817F82288007E5675 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFD93A7717F82288007E5675 /* GoogleMaps.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -954,7 +954,6 @@
 		B4198EAD178410D300B50475 /* REMLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLogManager.m; path = Common/Log/REMLogManager.m; sourceTree = "<group>"; };
 		B4198EB01784220300B50475 /* REMJSONHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMJSONHelper.h; path = Common/Utility/REMJSONHelper.h; sourceTree = "<group>"; };
 		B4198EB11784220300B50475 /* REMJSONHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMJSONHelper.m; path = Common/Utility/REMJSONHelper.m; sourceTree = "<group>"; };
-		B42A51FA17F57BB800F890B2 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = ../Lib/GoogleMaps.framework; sourceTree = "<group>"; };
 		B42C338817E18E63008289D2 /* DefaultBuilding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuilding@2x.png"; sourceTree = "<group>"; };
 		B42C338A17E19064008289D2 /* DefaultBuilding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultBuilding.png; sourceTree = "<group>"; };
 		B42FBF5F17F519F5004F2F3A /* REMWidgetCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetCollectionViewController.h; sourceTree = "<group>"; };
@@ -1094,6 +1093,7 @@
 		EFD6042017F57A4F0080CE89 /* REMTrendWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTrendWidget.m; path = View/Widget/REMTrendWidget.m; sourceTree = "<group>"; };
 		EFD6042217F57B800080CE89 /* REMLineWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLineWidget.h; path = View/Widget/REMLineWidget.h; sourceTree = "<group>"; };
 		EFD6042317F57B800080CE89 /* REMLineWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLineWidget.m; path = View/Widget/REMLineWidget.m; sourceTree = "<group>"; };
+		EFD93A7717F82288007E5675 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1101,7 +1101,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B42A51FC17F57C2A00F890B2 /* GoogleMaps.framework in Frameworks */,
 				B4B61D7617C742E000245F1E /* CoreText.framework in Frameworks */,
 				7AB34E4D177D2975003E235E /* SystemConfiguration.framework in Frameworks */,
 				B445AE7D177BE8B5002D2A59 /* QuartzCore.framework in Frameworks */,
@@ -1117,6 +1116,7 @@
 				B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */,
 				EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */,
 				38ED7D1F1785140900219469 /* libsqlite3.dylib in Frameworks */,
+				EFD93A7817F82288007E5675 /* GoogleMaps.framework in Frameworks */,
 				7AB34E4C177D2975003E235E /* MobileCoreServices.framework in Frameworks */,
 				7A9B1E20177B3A8B00C282A8 /* UIKit.framework in Frameworks */,
 				7A9B1E22177B3A8B00C282A8 /* Foundation.framework in Frameworks */,
@@ -1766,7 +1766,7 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B42A51FA17F57BB800F890B2 /* GoogleMaps.framework */,
+				EFD93A7717F82288007E5675 /* GoogleMaps.framework */,
 				7A13C1AA17F40D99007E6AA9 /* libz.dylib */,
 				7A13C1A817F40D90007E6AA9 /* libicucore.dylib */,
 				7A13C1A617F40D83007E6AA9 /* libc++.dylib */,
@@ -3009,10 +3009,11 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\"",
 					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
+					/Users/zilong/Documents/Blues/Blues/Trunk/Src,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3062,10 +3063,11 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\"",
 					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
+					/Users/zilong/Documents/Blues/Blues/Trunk/Src,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3204,10 +3206,11 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\"",
 					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
+					/Users/zilong/Documents/Blues/Blues/Trunk/Src,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3332,10 +3335,11 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\"",
 					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
+					/Users/zilong/Documents/Blues/Blues/Trunk/Src,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
