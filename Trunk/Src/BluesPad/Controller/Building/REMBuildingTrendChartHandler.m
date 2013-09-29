@@ -11,6 +11,8 @@
 #import "REMWidgetAxisHelper.h"
 #import "REMBuildingTimeRangeDataModel.h"
 #import "REMTimeHelper.h"
+#import "REMBuildingConstants.h"
+#import "REMChartSeriesIndicator.h"
 
 @interface REMBuildingTrendChartHandler () {
     int currentSourceIndex; // Indicate that which button was pressed down.
@@ -317,6 +319,12 @@
         CPTPlot* p = [myView.hostView.hostedGraph plotAtIndex:0];
         [myView.hostView.hostedGraph removePlot:p];
     }
+    for (UIView* legend in myView.legendView.subviews) {
+        [legend removeFromSuperview];
+    }
+    CGFloat legendLeft = 57;
+    CGFloat labelDistance = 18;
+    CGFloat legendTop = 0;
     for (NSDictionary* series in seriesArray) {
         scatterPlot = [[CPTScatterPlot alloc] initWithFrame: myView.hostView.hostedGraph.bounds];
         CPTMutableLineStyle* scatterStyle = [CPTMutableLineStyle lineStyle];
@@ -338,6 +346,20 @@
         scatterPlot.dataSource = self;
         scatterPlot.identifier = [series objectForKey:@"identity"];
         [myView.hostView.hostedGraph addPlot:scatterPlot];
+        
+        CGFloat fontSize = 14;
+        CPTColor* color = [series objectForKey:@"color"];
+        // Draw legend
+        NSString* legendText = [series objectForKey:@"name"];
+        CGFloat benchmarkWidth = [legendText sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
+        CGRect benchmarkFrame = CGRectMake(legendLeft, legendTop, benchmarkWidth, fontSize);
+        legendLeft = legendLeft + benchmarkWidth + labelDistance;
+        if (legendLeft > myView.legendView.bounds.size.width) {
+            legendLeft = 57;
+            legendTop += 14;
+        }
+        REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:legendText andColor:color.uiColor];
+        [myView.legendView addSubview:benchmarkIndicator];
     }
     [myView.hostView.hostedGraph reloadData];
 }
@@ -386,6 +408,76 @@
     return buildingCommodityInfo;
 }
 
+-(CPTColor*)getSeriesColorByIndex:(int)index {
+    int r = 0;
+    int g = 0;
+    int b = 0;
+    float alpha = 0;
+    switch (index) {
+        case 0: //#FFFFFF
+            r = g = b = 255;
+            alpha = 0.9;
+            break;
+        case 1: // #FF5600
+            r = 255;
+            g = 86;
+            b = 0;
+            alpha = 0.9;
+            break;
+        case 2: // #FF3000
+            r = 255;
+            g = 48;
+            b = 0;
+            alpha = 0.9;
+            break;
+        case 3: // #FF9900
+            r = 255;
+            g = 153;
+            b = 0;
+            alpha = 0.9;
+            break;
+        case 4: // #A9FF00
+            r = 169;
+            g = 255;
+            b = 0;
+            alpha = 0.8;
+            break;
+        case 5: // #00FFA2
+            r = 0;
+            g = 255;
+            b = 162;
+            alpha = 0.7;
+            break;
+        case 6: // #00CAFF
+            r = 0;
+            g = 202;
+            b = 255;
+            alpha = 0.8;
+            break;
+        case 7: // #00CAFF
+            r = 0;
+            g = 99;
+            b = 255;
+            alpha = 0.9;
+            break;
+        case 8: // #00CAFF
+            r = 24;
+            g = 0;
+            b = 255;
+            alpha = 0.95;
+            break;
+        case 9: // #00CAFF
+            r = 138;
+            g = 0;
+            b = 255;
+            alpha = 0.8;
+            break;
+        default:
+            break;
+    }
+    return [CPTColor colorWithComponentRed:r green:g blue:b alpha:alpha];
+}
+
 - (void)loadDataSuccessWithData:(id)data
 {
     if (self.datasource.count != 6) {
@@ -403,7 +495,7 @@
         NSMutableArray* seriesArray = [[NSMutableArray alloc]init];
         for (int sIndex = 0; sIndex < dataItem.timeRangeData.targetEnergyData.count; sIndex++) {
             NSMutableDictionary* series = [[NSMutableDictionary alloc]init];
-            [series setValue:[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1] forKey:@"color"];
+            [series setValue:[self getSeriesColorByIndex:sIndex] forKey:@"color"];
             NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:dataItem.timeRangeData.targetEnergyData.count];
             REMTargetEnergyData* targetEData = dataItem.timeRangeData.targetEnergyData[sIndex];
             [series setValue:targetEData.target.name forKey:@"name"];
@@ -412,7 +504,8 @@
                 if ([pointData.dataValue isEqual:[NSNull null]] || pointData.dataValue.floatValue < 0) {
                     [data addObject:@{@"y": [NSNull null], @"x": pointData.localTime  }];
                 } else {
-                    [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime  }];
+//                    [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime  }];
+                    [data addObject:@{@"y": [NSNumber numberWithFloat: pointData.dataValue.floatValue / (sIndex+1) ], @"x": pointData.localTime  }];
                 }
             }
             
