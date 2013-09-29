@@ -45,7 +45,7 @@ typedef void(^SuccessCallback)(BOOL success);
         self.clipsToBounds=YES;
         self.showsVerticalScrollIndicator=NO;
         self.successCounter=0;
-        [self setContentSize:CGSizeMake(0, 1000)];
+        [self setContentSize:CGSizeMake(0, 1115)];
         self.buildingInfo=buildingInfo;
         self.currentCommodityId=@(0);
         self.commodityViewDictionary=[[NSMutableDictionary alloc]initWithCapacity:self.buildingInfo.commodityArray.count+1];
