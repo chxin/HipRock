@@ -8,6 +8,7 @@
 
 #import "REMBuildingTrendChart.h"
 #import "REMToggleButtonGroup.h"
+#import "REMBuildingConstants.h"
 
 @implementation REMBuildingTrendChart
 
@@ -27,7 +28,7 @@
         self.thisYearButton = [self makeButton:@"今年" rect:CGRectMake((buttonMargin + buttonWidth)*4+buttonFirstMargin,0,buttonWidth,buttonHeight)];
         self.lastYearButton = [self makeButton:@"去年" rect:CGRectMake((buttonMargin + buttonWidth)*5+buttonFirstMargin,0,buttonWidth,buttonHeight)];
         
-        CPTGraphHostingView *hostView = [[CPTGraphHostingView alloc]initWithFrame:CGRectMake(0, buttonHeight, self.frame.size.width, self.frame.size.height - buttonHeight - 20)];
+        CPTGraphHostingView *hostView = [[CPTGraphHostingView alloc]initWithFrame:CGRectMake(0, buttonHeight, self.frame.size.width, self.frame.size.height - buttonHeight - 20 - kBuildingTrendChartLegendHeight)];
 //        hostView.backgroundColor = [UIColor redColor];
         CPTXYGraph *graph=[[CPTXYGraph alloc]initWithFrame:frame];
         hostView.hostedGraph=graph;
@@ -48,6 +49,9 @@
         self.noDataLabel.hidden = YES;
         [self addSubview:self.noDataLabel];
     }
+    
+    _legendView = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height - kBuildingTrendChartLegendHeight + 23, frame.size.width, kBuildingTrendChartLegendHeight)];
+    [self addSubview: _legendView];
     return self;
 }
 
