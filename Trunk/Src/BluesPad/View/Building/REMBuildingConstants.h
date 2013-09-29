@@ -74,8 +74,8 @@
 
 #define kImageMargin 5
 
-#define kBuildingChartHeight 472/2
 #define kBuildingTrendChartLegendHeight 43
+#define kBuildingChartHeight 266
 #define kBuildingChartWidth 840
 
 
