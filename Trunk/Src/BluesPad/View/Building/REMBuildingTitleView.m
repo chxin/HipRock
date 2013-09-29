@@ -7,10 +7,10 @@
 //
 
 #import "REMBuildingTitleView.h"
-
+#import "REMMaskManager.h"
 @interface REMBuildingTitleView()
 
-
+@property (nonatomic,strong) REMMaskManager *masker;
 @end
 
 @implementation REMBuildingTitleView
@@ -23,6 +23,25 @@
         
         //[self.emptyLabel setFont:[UIFont fontWithName:@(kBuildingFontSC) size:size]];
     }
+}
+
+- (void)showTitle
+{
+    [self initTitle:self.title withSize:self.titleFontSize withLeftMargin:self.leftMargin];
+}
+
+- (void)showLoading{
+    if(self.masker==nil){
+        self.masker =[[REMMaskManager alloc]initWithContainer:self];
+        [self.masker.mask setBackgroundColor:[UIColor clearColor]];
+        [self.masker.mask setFrame:CGRectMake(45, self.masker.mask.frame.origin.y+50, 50, 50)];
+        
+    }
+    [self.masker showMask];
+}
+
+- (void)hideLoading{
+    [self.masker hideMask];
 }
 
 - (void)initEmptyTextLabelWithTitleSize:(CGFloat)titleSize withTitleMargin:(CGFloat)margin withLeftMargin:(CGFloat)leftMargin withOrigFontSize:(CGFloat)fontSize{

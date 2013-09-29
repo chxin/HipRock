@@ -8,20 +8,9 @@
 
 #import "REMJSONObject.h"
 #import "REMTimeHelper.h"
+#import "REMEnum.h"
 
 
-typedef enum _REMRelativeTimeRangeType : NSInteger
-{
-    Last7Days = 1,
-    Today = 2,
-    Yesterday = 3,
-    ThisWeek = 4,
-    LastWeek = 5,
-    ThisMonth = 6,
-    LastMonth = 7,
-    ThisYear = 8,
-    LastYear = 9,
-} REMRelativeTimeRangeType;
 
 
 @interface REMTimeRange : REMJSONObject

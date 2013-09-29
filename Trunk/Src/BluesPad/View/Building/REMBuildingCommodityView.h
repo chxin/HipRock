@@ -16,18 +16,21 @@
 #import "REMBuildingChartContainerView.h"
 #import "REMBuildingAverageChartHandler.h"
 #import "REMBuildingTrendChartHandler.h"
+#import "REMBuildingOverallModel.h"
 
 @interface REMBuildingCommodityView : UIView//UIScrollView
 
 @property (nonatomic,strong) NSArray *chartViewArray;
 
-- (id)initWithFrame:(CGRect)frame withCommodityInfo:(REMCommodityUsageModel *)commodityInfo;
+- (id)initWithFrame:(CGRect)frame withCommodity:(REMCommodityModel *)commodity withBuildingInfo:(REMBuildingOverallModel *)buildingInfo;
 
 - (void)addSplitBar:(UIView *)view;
 
 - (void)replaceChart:(BOOL)showReal;
 
 -(void)prepareShare;
+
+-(void)loadTotalUsageByBuildingId:(NSNumber *)buildingId ByCommodityId:(NSNumber *)commodityId;
 
 - (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId complete:(void(^)(BOOL))callback;
 

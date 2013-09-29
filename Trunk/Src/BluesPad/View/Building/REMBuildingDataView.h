@@ -17,7 +17,10 @@
 
 @property (nonatomic,weak) UIButton *shareButton;
 
+@property (nonatomic) BOOL isUpScroll;
+
 - (id)initWithFrame:(CGRect)frame withBuildingInfo:(REMBuildingOverallModel *)buildingInfo;
+
 
 
 - (void)requireChartDataWithBuildingId:(NSNumber *)buildingId complete:(void(^)(BOOL))callback;
@@ -31,5 +34,7 @@
 - (void)resetDefaultCommodity;
 
 -(void)replaceImagesShowReal:(BOOL)showReal;
+
+- (void)showDashboardLabel:(BOOL)overThreshold;
 
 @end

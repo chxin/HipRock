@@ -14,13 +14,9 @@
 
 @interface REMBuildingTitleLabelView : REMBuildingTitleView
 
-- (id)initWithFrame:(CGRect)frame
-           withData:(REMEnergyUsageDataModel *)data
-           withTitle:(NSString *)title andTitleFontSize:(CGFloat)size
-            withTitleMargin:(CGFloat)margin
-            withLeftMargin:(CGFloat)leftMargin
-            withValueFontSize:(CGFloat)size withUomFontSize:(CGFloat) size;
 
 
+
+@property (nonatomic,weak) REMEnergyUsageDataModel *data;
 
 @end

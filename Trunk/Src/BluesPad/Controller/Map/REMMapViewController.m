@@ -7,32 +7,98 @@
 //
 
 #import "REMMapViewController.h"
+#import <GoogleMaps/GoogleMaps.h>
+#import "REMBuildingModel.h"
+#import "REMBuildingOverallModel.h"
 
 @interface REMMapViewController ()
 
 @end
 
-@implementation REMMapViewController
+@implementation REMMapViewController{
+    GMSMapView *mapView;
+}
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+- (void)loadView {
+    double defaultLatitude =38, defaultLongitude=104.0;
+    CGFloat defaultZoomLevel = 4;
+    
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:defaultLatitude longitude:defaultLongitude zoom:defaultZoomLevel];
+    
+    mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    mapView.myLocationEnabled = NO;
+    self.view = mapView;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    NSLog(@"%d",self.buildingInfoArray.count);
+    [self initializeMapView];
+}
+
+-(void)initializeMapView
+{
+    double maxLongtitude = INT64_MIN, minLongtitude=INT64_MAX, maxLatitude=INT64_MIN, minLatitude=INT64_MAX;
+    
+    if(self.buildingInfoArray.count < 1){ // no building
+    }
+    
+    if(self.buildingInfoArray.count == 1){ // one building
+        REMBuildingModel *building = [self.buildingInfoArray[0] building];
+        CLLocationCoordinate2D target = CLLocationCoordinate2DMake(building.latitude, building.longitude);
+        GMSCameraUpdate *update = [GMSCameraUpdate setTarget:target zoom:12];
+        [mapView animateWithCameraUpdate:update];
+    }
+    
+    if(self.buildingInfoArray.count > 1){ // two and more buildings
+        
+    }
+        
+    
+    
+    for(REMBuildingOverallModel *buildingInfo in self.buildingInfoArray){
+        if(buildingInfo == nil || buildingInfo.building== nil)
+            continue;
+        
+        REMBuildingModel *building = buildingInfo.building;
+        
+        maxLongtitude = MAX(maxLongtitude, building.longitude);
+        minLongtitude = MIN(minLongtitude, building.longitude);
+        maxLatitude = MAX(maxLatitude, building.latitude);
+        minLatitude = MIN(minLatitude,  building.latitude);
+        
+        GMSMarker *marker = [[GMSMarker alloc] init];
+        marker.position = CLLocationCoordinate2DMake(building.latitude, building.longitude);
+        marker.title = building.name;
+        marker.snippet = building.code;
+        marker.map = mapView;
+    }
+    
+    NSLog(@"%f,%f,%f,%f", maxLatitude, minLongtitude, minLatitude, maxLongtitude);
+    
+    if(maxLongtitude != INT64_MIN && minLongtitude!=INT64_MAX && maxLatitude!=INT64_MIN && minLatitude!=INT64_MAX){
+        //northEast and southWest
+        CLLocationCoordinate2D northEast = CLLocationCoordinate2DMake(maxLatitude,maxLongtitude);
+        CLLocationCoordinate2D southWest = CLLocationCoordinate2DMake(minLatitude, minLongtitude);
+        
+        GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:northEast coordinate:southWest];
+        
+        NSLog(@"%d",bounds.isValid);
+        
+        GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds withPadding:10.0f];
+        
+        [mapView animateWithCameraUpdate:update];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    mapView = nil;
 }
 
 @end

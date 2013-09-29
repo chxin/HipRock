@@ -8,7 +8,8 @@
 
 #import "REMJSONObject.h"
 #import "REMTimeRange.h"
-
+#import "REMEnum.h"
+/*
 typedef enum _REMCalendarType:NSUInteger {
     WorkDay = 0,
     Holiday = 1,
@@ -18,7 +19,7 @@ typedef enum _REMCalendarType:NSUInteger {
     CoolingSeason=5,
     Day=6,
     Night=7
-} REMCalendarType;
+} REMCalendarType;*/
 
 
 

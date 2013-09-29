@@ -8,6 +8,10 @@
 
 #import "REMImageView.h"
 
+#define kDashboardThreshold 361+65
+
+#define kBuildingImageLoadingKeyPrefix "buildingimage-%@"
+
 @interface REMImageView()
 
 @property (nonatomic,strong) UIImageView *imageView;
@@ -36,9 +40,11 @@
 
 @property (nonatomic,strong) UIView *commodityButtonsView;
 
-#define kBuildingImageLoadingKeyPrefix "buildingimage-%@"
+
 
 @property (nonatomic) BOOL isSwitchingCommodityButtonGroup;
+
+@property (nonatomic,strong) REMDashboardController *dashboardController;
 
 @end
 
@@ -175,11 +181,11 @@
 
 -(void)initBackButton
 {
+    static NSString * const backButtonTitle = @"地图";
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    backButton.frame = CGRectMake(kBuildingLeftMargin+100, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension);
-    backButton.adjustsImageWhenHighlighted=YES;
-    backButton.showsTouchWhenHighlighted=YES;
-    backButton.titleLabel.text=@"地图";
+    backButton.frame = CGRectMake(kBuildingLeftMargin-30, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension);
+    [backButton setTitle:backButtonTitle forState:UIControlStateNormal];
+    [backButton setTitle:backButtonTitle forState:UIControlStateHighlighted];
     
     [backButton addTarget:self.controller action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.settingButton=backButton;
@@ -245,9 +251,6 @@
                     if(self.isActive == NO){
                         [self moveOutOfWindow];
                     }
-                    //self.defaultImage=nil;
-                    //self.defaultBlurImage=nil;
-                    //[self.controller notifyCustomImageLoaded:self.buildingInfo.building.buildingId];
                 }];
 
             //});
@@ -552,8 +555,55 @@
     if(decelerate == NO){
         [self roundPositionWhenDrag:scrollView];
         [self.dataView replaceImagesShowReal:YES];
+        
     }
-    
+    else{
+        if(scrollView.contentOffset.y>kDashboardThreshold){
+            if(self.dashboardController==nil){
+                self.dashboardController = [[REMDashboardController alloc]initWithStyle:UITableViewStyleGrouped];
+                self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
+                CGRect newFrame = CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height, kBuildingChartWidth, self.dataView.frame.size.height);
+                self.dashboardController.viewFrame=newFrame;
+                self.dashboardController.imageView=self;
+                self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
+                [self addSubview:self.dashboardController.tableView];
+            }
+            
+            
+            
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
+                [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y, kBuildingChartWidth, self.dataView.frame.size.height)];
+                [self.dataView setHidden:YES];
+            
+            } completion:^(BOOL finished){}];
+            
+            
+           
+        }
+    }
+}
+
+- (void)showBuildingInfo{
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
+        [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height, kBuildingChartWidth, self.dataView.frame.size.height)];
+        [self.dataView setHidden:NO];
+        
+    } completion:^(BOOL finished){
+        [self.dashboardController.view removeFromSuperview];
+        self.dashboardController=nil;
+    }];
+}
+
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if(scrollView.contentOffset.y>kDashboardThreshold){
+        [self.dataView showDashboardLabel:YES];
+    }
+    else{
+        [self.dataView showDashboardLabel:NO];
+    }
+    //NSLog(@"scrollheight:%@",NSStringFromCGPoint(scrollView.contentOffset));
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -700,7 +750,7 @@
     
     [self scrollTo:kCommodityScrollTop];
     self.dataViewUp=YES;
-    
+    self.dataView.isUpScroll=YES;
     
     
 }
@@ -710,7 +760,7 @@
     
     [self scrollTo:-kBuildingCommodityViewTop];
     self.dataViewUp=NO;
-    
+    self.dataView.isUpScroll=NO;
     
     
 }
