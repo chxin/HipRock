@@ -8,12 +8,6 @@
 
 #import "REMTrendChart.h"
 
-@interface REMTrendChartView()
-    
-@property (nonatomic, readonly) REMTrendChartView* view;
-
-@end
-
 @implementation REMTrendChartSeries
 -(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step {
     REMTrendChartDataProcessor* processor = [[REMTrendChartDataProcessor alloc]init];
@@ -46,7 +40,21 @@
 -(REMTrendChartSeriesType)getSeriesType {
     return 0;
 }
+-(int)getXAxisField {
+    return 0;
+}
 
+
+
+- (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
+{
+    REMTrendChartPoint* point = [self.points objectAtIndex:idx];
+    if (fieldEnum == [self getXAxisField]) {
+        return [NSNumber numberWithFloat:point.x];
+    } else {
+        return point.y;
+    }
+}
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
     return self.points.count;
