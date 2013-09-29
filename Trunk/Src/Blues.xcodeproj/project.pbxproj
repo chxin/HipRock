@@ -339,6 +339,10 @@
 		7A48B49317CDFA38002DA386 /* Propaganda_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B48D17CDFA38002DA386 /* Propaganda_3.jpg */; };
 		7A48B49417CDFA38002DA386 /* Propaganda_3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B48E17CDFA38002DA386 /* Propaganda_3@2x.jpg */; };
 		7A5277F617AF4209007DA735 /* REMIndicatorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5277F517AF4209007DA735 /* REMIndicatorButton.m */; };
+		7A53160117F817370022491F /* Gallary.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5315FD17F817370022491F /* Gallary.png */; };
+		7A53160217F817370022491F /* Gallary@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5315FE17F817370022491F /* Gallary@2x.png */; };
+		7A53160317F817370022491F /* LandMarker.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5315FF17F817370022491F /* LandMarker.png */; };
+		7A53160417F817370022491F /* LandMarker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A53160017F817370022491F /* LandMarker@2x.png */; };
 		7A5DBD28178FD014006C4EDE /* REMDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD27178FD014006C4EDE /* REMDataAccessor.m */; };
 		7A5DBD2B178FD034006C4EDE /* REMDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD2A178FD034006C4EDE /* REMDataStore.m */; };
 		7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8B177B41B0000F77F9 /* MainStoryboard.storyboard */; };
@@ -778,6 +782,10 @@
 		7A5277F417AF4209007DA735 /* REMIndicatorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMIndicatorButton.h; sourceTree = "<group>"; };
 		7A5277F517AF4209007DA735 /* REMIndicatorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMIndicatorButton.m; sourceTree = "<group>"; };
 		7A5315FA17F7CD8C0022491F /* REMSegues.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMSegues.h; path = Common/Constants/REMSegues.h; sourceTree = "<group>"; };
+		7A5315FD17F817370022491F /* Gallary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gallary.png; sourceTree = "<group>"; };
+		7A5315FE17F817370022491F /* Gallary@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Gallary@2x.png"; sourceTree = "<group>"; };
+		7A5315FF17F817370022491F /* LandMarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LandMarker.png; sourceTree = "<group>"; };
+		7A53160017F817370022491F /* LandMarker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LandMarker@2x.png"; sourceTree = "<group>"; };
 		7A5DBD27178FD014006C4EDE /* REMDataAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataAccessor.m; path = Common/DataAccess/REMDataAccessor.m; sourceTree = "<group>"; };
 		7A5DBD29178FD034006C4EDE /* REMDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDataStore.h; path = Common/DataAccess/REMDataStore.h; sourceTree = "<group>"; };
 		7A5DBD2A178FD034006C4EDE /* REMDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataStore.m; path = Common/DataAccess/REMDataStore.m; sourceTree = "<group>"; };
@@ -1571,6 +1579,17 @@
 			name = DataAccess;
 			sourceTree = "<group>";
 		};
+		7A5315FC17F817370022491F /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				7A5315FD17F817370022491F /* Gallary.png */,
+				7A5315FE17F817370022491F /* Gallary@2x.png */,
+				7A5315FF17F817370022491F /* LandMarker.png */,
+				7A53160017F817370022491F /* LandMarker@2x.png */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 		7A5E2D45177B3CD3000F77F9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -1964,6 +1983,7 @@
 		7AC3BABB17CC48740022E57E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7A5315FC17F817370022491F /* Map */,
 				7ACFCBA217CDA62E00811976 /* Building */,
 				7ACFCBC417CDA62E00811976 /* Dashboard */,
 				7ACFCBCA17CDA62E00811976 /* Login */,
@@ -2313,6 +2333,7 @@
 				6A4BD94717B89F1F007C9FCF /* BluesPad.entitlements in Resources */,
 				7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */,
 				7A5E2D95177B41B0000F77F9 /* InfoPlist.strings in Resources */,
+				7A53160217F817370022491F /* Gallary@2x.png in Resources */,
 				B445AEAE177BEEB8002D2A59 /* README.txt in Resources */,
 				7AC3BB3417CC48750022E57E /* Default-568h@2x.png in Resources */,
 				7AC3BB3517CC48750022E57E /* Default.png in Resources */,
@@ -2345,6 +2366,7 @@
 				7A48B47A17CDDD03002DA386 /* LoginTextField.png in Resources */,
 				7A48B47B17CDDD03002DA386 /* LoginTextField@2x.png in Resources */,
 				B454BC0417CDEC4D00D69A7B /* Share_normal@2x.png in Resources */,
+				7A53160317F817370022491F /* LandMarker.png in Resources */,
 				B454BC0517CDEC4D00D69A7B /* Menu_normal@2x.png in Resources */,
 				B454BC0617CDEC4D00D69A7B /* OverTarget.png in Resources */,
 				B454BC0717CDEC4D00D69A7B /* Menu_normal.png in Resources */,
@@ -2369,12 +2391,14 @@
 				B45F8A5A17D5B0340079C74D /* Coal_normal.png in Resources */,
 				B45F8A5B17D5B0340079C74D /* PM2.5_pressed.png in Resources */,
 				B45F8A5C17D5B0340079C74D /* PM2.5_normal.png in Resources */,
+				7A53160417F817370022491F /* LandMarker@2x.png in Resources */,
 				B45F8A5D17D5B0340079C74D /* NaturalGas_pressed.png in Resources */,
 				B45F8A5E17D5B0340079C74D /* NaturalGas_normal.png in Resources */,
 				B45F8A5F17D5B0340079C74D /* Water_pressed.png in Resources */,
 				B45F8A6017D5B0340079C74D /* Water_normal.png in Resources */,
 				7A13C19B17F40D31007E6AA9 /* GoogleMaps.bundle in Resources */,
 				B45F8A6117D5B0340079C74D /* Electricity_pressed.png in Resources */,
+				7A53160117F817370022491F /* Gallary.png in Resources */,
 				B45F8A6217D5B0340079C74D /* Electricity_normal.png in Resources */,
 				B45F8A6F17D5B04B0079C74D /* Coal_normal@2x.png in Resources */,
 				B45F8A7017D5B04B0079C74D /* Coal_pressed@2x.png in Resources */,
