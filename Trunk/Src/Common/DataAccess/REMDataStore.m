@@ -74,6 +74,11 @@ static NSDictionary *serviceMap = nil;
           [NSNumber numberWithInt:REMDSEnergyTagsDistribute] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/AggregateTagsData"],
           
           /**
+           * Customer
+           */
+          [NSNumber numberWithInt:REMDSCustomerLogo] : [[REMServiceMeta alloc] initWithDataResultRelativeUrl:@"API/Hierarchy.svc/GetCustomerLogo"],
+          
+          /**
            *	Building
            */
           [NSNumber numberWithInt:REMDSBuildingOverallData] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Building.svc/GetBuildingOverallData"],

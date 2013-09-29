@@ -18,6 +18,9 @@
 @property (nonatomic,strong) REMLoginCarouselController *carouselController;
 @property (nonatomic,strong) NSTimer *timer;
 
+@property (nonatomic,strong) UIButton *logoButton;
+@property (nonatomic,strong) UIImage *logoImage;
+
 @end
 
 @implementation REMSplashScreenController
@@ -150,11 +153,30 @@
             [self.buildingOveralls addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
         }
         
-        //test air quality interface
-        if(loadCompleted!=nil)
-            loadCompleted();
+        NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
+        REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter];
+        //buildingStore.isAccessLocal = YES;
+        logoStore.groupName = nil;
+        logoStore.maskContainer = nil;
         
-        [self performSegueWithIdentifier:@"splashToBuildingSegue" sender:self];
+        [REMDataAccessor access:logoStore success:^(id data) {
+            if(data == nil || [data length] == 2) return;
+            //UIImage *view = [REMImageHelper parseImageFromNSData:data];
+            UIImage *view = [UIImage imageNamed:@"Schneider-Logo"];
+            self.logoImage=view;
+            self.logoButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 140, 30)];
+
+            [self.logoButton setBackgroundImage:view forState:UIControlStateNormal];
+            
+            
+            //test air quality interface
+            if(loadCompleted!=nil)
+                loadCompleted();
+            
+            [self performSegueWithIdentifier:@"splashToBuildingSegue" sender:self];
+        }];
+        
+        
     } error:^(NSError *error, id response) {
         if(error.code != 1001) {
             [REMAlertHelper alert:@"数据加载错误"];
@@ -174,6 +196,7 @@
         REMBuildingViewController *buildingViewController = segue.destinationViewController;
         buildingViewController.buildingOverallArray = self.buildingOveralls;
         self.buildingOveralls=nil;
+        buildingViewController.logoButton=self.logoButton;
         buildingViewController.splashScreenController = self;
     }
 }

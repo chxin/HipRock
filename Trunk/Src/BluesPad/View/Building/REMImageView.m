@@ -224,7 +224,7 @@
         //UIImage *image = self.defaultImage;
         //dispatch_async(concurrentQueue, ^{
             @autoreleasepool {
-                UIImage *view = [self AFInflatedImageFromResponseWithDataAtScale:data];
+                UIImage *view = [REMImageHelper parseImageFromNSData:data];
                 newView.image=view;
                 UIImageView *newBlurred= [self blurredImageView:newView];
             
@@ -257,14 +257,6 @@
             }
         //});
 
-        
-        
-        
-        
-        
-        
-        
-        
     }];
     
     return ;
@@ -272,105 +264,6 @@
 
 
 
-- (UIImage *) AFImageWithDataAtScale:(NSData *)data {
-    if ([UIImage instancesRespondToSelector:@selector(initWithData:scale:)]) {
-        return [[UIImage alloc] initWithData:data scale:1];
-    } else {
-        UIImage *image = [[UIImage alloc] initWithData:data];
-        return [[UIImage alloc] initWithCGImage:[image CGImage] scale:1 orientation:image.imageOrientation];
-    }
-}
-
-- (UIImage *) AFInflatedImageFromResponseWithDataAtScale:(NSData *)data {
-    if (!data || [data length] == 0) {
-        return nil;
-    }
-    
-   
-    
-    
-    CGImageRef imageRef = nil;
-    
-    CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
-    
-    imageRef = CGImageCreateWithPNGDataProvider(dataProvider,  NULL, true, kCGRenderingIntentDefault);
-    
-    if(!imageRef){
-        imageRef = CGImageCreateWithJPEGDataProvider(dataProvider, NULL, true, kCGRenderingIntentDefault);
-    }
-    
-    if (!imageRef) {
-        UIImage *image = [self AFImageWithDataAtScale:data];
-        if (image.images) {
-            CGDataProviderRelease(dataProvider);
-            
-            return image;
-        }
-        
-        imageRef = CGImageCreateCopy([image CGImage]);
-    }
-    
-    CGDataProviderRelease(dataProvider);
-    
-    if (!imageRef) {
-        return nil;
-    }
-    
-    size_t width = CGImageGetWidth(imageRef);
-    size_t height = CGImageGetHeight(imageRef);
-    size_t bitsPerComponent = CGImageGetBitsPerComponent(imageRef);
-    size_t bytesPerRow = 0; // CGImageGetBytesPerRow() calculates incorrectly in iOS 5.0, so defer to CGBitmapContextCreate()
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
-    
-    if (CGColorSpaceGetNumberOfComponents(colorSpace) == 3) {
-        int alpha = (bitmapInfo & kCGBitmapAlphaInfoMask);
-        if (alpha == kCGImageAlphaNone) {
-            bitmapInfo &= ~kCGBitmapAlphaInfoMask;
-            bitmapInfo |= kCGImageAlphaNoneSkipFirst;
-        } else if (!(alpha == kCGImageAlphaNoneSkipFirst || alpha == kCGImageAlphaNoneSkipLast)) {
-            bitmapInfo &= ~kCGBitmapAlphaInfoMask;
-            bitmapInfo |= kCGImageAlphaPremultipliedFirst;
-        }
-    }
-    
-    UIScreen *screen = [UIScreen mainScreen];
-    
-    CGRect frame=  CGRectMake(0, 0, screen.bounds.size.height*screen.scale, screen.bounds.size.width*screen.scale);
-    
-    if(width>frame.size.width) {
-        width=frame.size.width;
-    }
-    
-    if(height>frame.size.height){
-        height=frame.size.height;
-    }
-    
-    
-    CGContextRef context = CGBitmapContextCreate(NULL, width, height, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo);
-    
-    CGColorSpaceRelease(colorSpace);
-    
-    if (!context) {
-        CGImageRelease(imageRef);
-        
-        return [[UIImage alloc] initWithData:data];
-    }
-    
-    CGRect rect = CGRectMake(0.0f, 0.0f, width, height);
-    //NSLog(@"image size:%@",NSStringFromCGRect(rect));
-    CGContextDrawImage(context, rect, imageRef);
-    CGImageRef inflatedImageRef = CGBitmapContextCreateImage(context);
-    CGContextRelease(context);
-    
-    UIImage *inflatedImage = [[UIImage alloc] initWithCGImage:inflatedImageRef scale:1 orientation:UIImageOrientationUp];
-    CGImageRelease(inflatedImageRef);
-    CGImageRelease(imageRef);
-    
-
-    
-    return inflatedImage;
-}
 
 - (void)addImageDefer:(NSTimer *)timer{
     if(self.customImageLoaded == YES) return;
@@ -680,8 +573,8 @@
     
     [self.layer insertSublayer:self.titleGradientLayer above:self.blurredImageView.layer];
 
-    
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin, kBuildingTitleTop, self.frame.size.width, kBuildingTitleFontSize+5)];
+    CGFloat leftMargin=kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin;
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(leftMargin, kBuildingTitleTop, self.frame.size.width-leftMargin, kBuildingTitleFontSize+5)];
     self.titleLabel.text=self.buildingInfo.building.name;
     self.titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);
@@ -689,12 +582,20 @@
     self.titleLabel.backgroundColor=[UIColor clearColor];
     self.titleLabel.font = [UIFont fontWithName:@(kBuildingFontLight) size:kBuildingTitleFontSize];
 
-    
+    self.titleLabel.textAlignment=NSTextAlignmentCenter;
     self.titleLabel.textColor=[UIColor whiteColor];
-    self.titleLabel.contentMode = UIViewContentModeTopLeft;
     
     
+
+    UIButton *logoButton=self.controller.logoButton;
+    [logoButton setFrame:CGRectMake(self.titleLabel.frame.origin.x, kBuildingTitleTop, logoButton.frame.size.width, logoButton.frame.size.height)];
+    logoButton.titleLabel.text=@"logo";
+    
+    logoButton.layer.borderColor=[UIColor redColor].CGColor;
+    logoButton.layer.borderWidth=1;
     [self addSubview:self.titleLabel];
+    
+    [self addSubview:logoButton];
 }
 
 

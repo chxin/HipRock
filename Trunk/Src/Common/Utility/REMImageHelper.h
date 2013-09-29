@@ -16,4 +16,6 @@
 
 + (UIImage *)blurImage2:(UIImage *)origImage;
 
++ (UIImage *)parseImageFromNSData:(NSData *)data;
+
 @end
