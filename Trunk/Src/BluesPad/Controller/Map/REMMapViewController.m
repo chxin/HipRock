@@ -26,22 +26,30 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    [self loadMapView];
+}
+
+-(void)loadMapView
+{
+    CGRect viewBounds = self.view.bounds;
+    CGRect mapViewFrame = CGRectMake(viewBounds.origin.x, viewBounds.origin.y, viewBounds.size.height, viewBounds.size.width);
+    
     double defaultLatitude =38, defaultLongitude=104.0;
     CGFloat defaultZoomLevel = 4;
     
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:defaultLatitude longitude:defaultLongitude zoom:defaultZoomLevel];
     
-    mapView = [GMSMapView mapWithFrame:self.view.frame camera:camera];
+    mapView = [GMSMapView mapWithFrame:mapViewFrame camera:camera];
+    [mapView setCamera:camera];
     mapView.myLocationEnabled = NO;
+    
     [self.view addSubview: mapView];
+    [self.view sendSubviewToBack:mapView];
     
-    NSLog(@"%d",self.buildingInfoArray.count);
-    [self initializeMapView];
-    
-    //[self initializeButtons];
+    [self mapViewLoaded];
 }
 
--(void)initializeMapView
+-(void)mapViewLoaded
 {
     double maxLongtitude = INT64_MIN, minLongtitude=INT64_MAX, maxLatitude=INT64_MIN, minLatitude=INT64_MAX;
     
@@ -90,7 +98,7 @@
         
         NSLog(@"%d",bounds.isValid);
         
-        GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds withPadding:10.0f];
+        GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds withPadding:50.0f];
         
         [mapView animateWithCameraUpdate:update];
     }
@@ -104,6 +112,8 @@
 }
 
 - (IBAction)jumpToBuildingViewButtonPressed:(id)sender {
+    
+    NSLog(@"new view bounds: %@",NSStringFromCGRect(self.view.bounds));
     [self performSegueWithIdentifier:kMapToBuildingSegue sender:self];
 }
 

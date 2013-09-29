@@ -466,10 +466,10 @@ static NSDictionary *codeNameMap;
         return [[CPTColor alloc] initWithComponentRed:106.0/255.0 green:99.0/255.0 blue:74.0/255.0 alpha:1];
     }
     else if([code isEqualToString:(NSString *)kChinaStandardCode]){
-        return [[CPTColor alloc] initWithComponentRed:255.0/255.0 green:0.0/255.0 blue:14.0/255.0 alpha:0.39];
+        return [[CPTColor alloc] initWithComponentRed:58.0/255.0 green:255.0/255.0 blue:168.0/255.0 alpha:0.43];
     }
     else if([code isEqualToString:(NSString *)kAmericanStandardCode]){
-        return [[CPTColor alloc] initWithComponentRed:58.0/255.0 green:148.0/255.0 blue:255.0/255.0 alpha:0.43];
+        return [[CPTColor alloc] initWithComponentRed:0.0/255.0 green:226.0/255.0 blue:255.0/255.0 alpha:0.39];
     }
     else{
         return [[CPTColor alloc] initWithComponentRed:0.0 green:0.0 blue:0.0 alpha:1];
