@@ -21,7 +21,7 @@
 
 - (void)loadView {
     double defaultLatitude =38, defaultLongitude=104.0;
-    CGFloat defaultZoomLevel = 4.5;
+    CGFloat defaultZoomLevel = 4;
     
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:defaultLatitude longitude:defaultLongitude zoom:defaultZoomLevel];
     
@@ -42,6 +42,23 @@
 -(void)initializeMapView
 {
     double maxLongtitude = INT64_MIN, minLongtitude=INT64_MAX, maxLatitude=INT64_MIN, minLatitude=INT64_MAX;
+    
+    if(self.buildingInfoArray.count < 1){ // no building
+    }
+    
+    if(self.buildingInfoArray.count == 1){ // one building
+        REMBuildingModel *building = [self.buildingInfoArray[0] building];
+        CLLocationCoordinate2D target = CLLocationCoordinate2DMake(building.latitude, building.longitude);
+        GMSCameraUpdate *update = [GMSCameraUpdate setTarget:target zoom:12];
+        [mapView animateWithCameraUpdate:update];
+    }
+    
+    if(self.buildingInfoArray.count > 1){ // two and more buildings
+        
+    }
+        
+    
+    
     for(REMBuildingOverallModel *buildingInfo in self.buildingInfoArray){
         if(buildingInfo == nil || buildingInfo.building== nil)
             continue;
@@ -60,11 +77,18 @@
         marker.map = mapView;
     }
     
-    NSLog(@"%f,%f,%f,%f",maxLongtitude,minLongtitude,maxLatitude,minLatitude);
+    NSLog(@"%f,%f,%f,%f", maxLatitude, minLongtitude, minLatitude, maxLongtitude);
     
     if(maxLongtitude != INT64_MIN && minLongtitude!=INT64_MAX && maxLatitude!=INT64_MIN && minLatitude!=INT64_MAX){
-        GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:CLLocationCoordinate2DMake(maxLatitude,maxLongtitude) coordinate:CLLocationCoordinate2DMake(minLatitude, minLongtitude)];
-        GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds];
+        //northEast and southWest
+        CLLocationCoordinate2D northEast = CLLocationCoordinate2DMake(maxLatitude,maxLongtitude);
+        CLLocationCoordinate2D southWest = CLLocationCoordinate2DMake(minLatitude, minLongtitude);
+        
+        GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:northEast coordinate:southWest];
+        
+        NSLog(@"%d",bounds.isValid);
+        
+        GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds withPadding:10.0f];
         
         [mapView animateWithCameraUpdate:update];
     }
