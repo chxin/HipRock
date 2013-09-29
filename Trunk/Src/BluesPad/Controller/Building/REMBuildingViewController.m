@@ -13,6 +13,7 @@
 #import "REMBuildingWeiboView.h"
 #import "REMTrendChart.h"
 #import "REMLineWidget.h"
+#import "REMMapViewController.h"
 
 @interface REMBuildingViewController ()
 @property (nonatomic,strong) NSArray *imageArray;

@@ -2196,6 +2196,7 @@
 		B49B6F421781228200BC130A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B46C8EB717F27BA0006DC4CB /* Dashboard */,
 				EFD6041817F557E60080CE89 /* Widget */,
 				7A1A853617B4B257004D7167 /* Chart */,
 				B4426FFE17AF305500762C68 /* Building */,
