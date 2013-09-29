@@ -10,6 +10,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "REMBuildingModel.h"
 #import "REMBuildingOverallModel.h"
+#import "REMBuildingViewController.h"
 
 @interface REMMapViewController ()
 
@@ -19,24 +20,25 @@
     GMSMapView *mapView;
 }
 
-- (void)loadView {
-    double defaultLatitude =38, defaultLongitude=104.0;
-    CGFloat defaultZoomLevel = 4;
-    
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:defaultLatitude longitude:defaultLongitude zoom:defaultZoomLevel];
-    
-    mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
-    mapView.myLocationEnabled = NO;
-    self.view = mapView;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    double defaultLatitude =38, defaultLongitude=104.0;
+    CGFloat defaultZoomLevel = 4;
+    
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:defaultLatitude longitude:defaultLongitude zoom:defaultZoomLevel];
+    
+    mapView = [GMSMapView mapWithFrame:self.view.frame camera:camera];
+    mapView.myLocationEnabled = NO;
+    [self.view addSubview: mapView];
+    
     NSLog(@"%d",self.buildingInfoArray.count);
     [self initializeMapView];
+    
+    //[self initializeButtons];
 }
 
 -(void)initializeMapView
@@ -100,5 +102,20 @@
     // Dispose of any resources that can be recreated.
     mapView = nil;
 }
+
+- (IBAction)jumpToBuildingViewButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:kMapToBuildingSegue sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:kMapToBuildingSegue] == YES)
+    {
+        REMBuildingViewController *buildingViewController = segue.destinationViewController;
+        buildingViewController.buildingOverallArray = self.buildingInfoArray;
+        buildingViewController.splashScreenController = self.splashScreenController;
+    }
+}
+
 
 @end

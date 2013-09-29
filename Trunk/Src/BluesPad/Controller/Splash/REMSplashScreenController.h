@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface REMSplashScreenController : UIViewController
+
 @property (weak, nonatomic) IBOutlet UIView *logoView;
 @property (weak, nonatomic) IBOutlet UIImageView *flashLogo;
 @property (weak, nonatomic) IBOutlet UIImageView *normalLogo;
 
-- (void)showBuildingView:(void (^)(void))loadCompleted;
+- (void)showMapView:(void (^)(void))loadCompleted;
 - (void)showLoginView:(BOOL)isAnimated;
 
 @end

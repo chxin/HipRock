@@ -11,10 +11,11 @@
 #import "REMCommonHeaders.h"
 #import "REMBuildingViewController.h"
 #import "REMBuildingOverallModel.h"
+#import "REMMapViewController.h"
 
 @interface REMSplashScreenController ()
 
-@property (nonatomic,strong) NSMutableArray *buildingOveralls;
+@property (nonatomic,strong) NSMutableArray *buildingInfoArray;
 @property (nonatomic,strong) REMLoginCarouselController *carouselController;
 @property (nonatomic,strong) NSTimer *timer;
 
@@ -41,7 +42,7 @@
             
             self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
             
-            [self showBuildingView:^(void){
+            [self showMapView:^(void){
                 if(self.timer != nil){
                     if([self.timer isValid])
                         [self.timer invalidate];
@@ -136,7 +137,7 @@
     }
 }
 
-- (void)showBuildingView:(void (^)(void))loadCompleted
+- (void)showMapView:(void (^)(void))loadCompleted
 {
     NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
     REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSBuildingInfo parameter:parameter];
@@ -145,16 +146,16 @@
     buildingStore.maskContainer = nil;
     
     [REMDataAccessor access:buildingStore success:^(id data) {
-        self.buildingOveralls = [[NSMutableArray alloc] initWithCapacity:[data count]];
+        self.buildingInfoArray = [[NSMutableArray alloc] initWithCapacity:[data count]];
         for(NSDictionary *item in (NSArray *)data){
-            [self.buildingOveralls addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
+            [self.buildingInfoArray addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
         }
         
         //test air quality interface
         if(loadCompleted!=nil)
             loadCompleted();
         
-        [self performSegueWithIdentifier:@"splashToBuildingSegue" sender:self];
+        [self performSegueWithIdentifier:kSplashToMapSegue sender:self];
     } error:^(NSError *error, id response) {
         if(error.code != 1001) {
             [REMAlertHelper alert:@"数据加载错误"];
@@ -164,17 +165,17 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"splashToLoginSegue"] == YES)
+    if ([segue.identifier isEqualToString:kSplashToLoginSegue] == YES)
     {
         REMLoginCarouselController *loginCarouselController = segue.destinationViewController;
         loginCarouselController.splashScreenController = self;
     }
-    else if([segue.identifier isEqualToString:@"splashToBuildingSegue"] == YES)
+    else if([segue.identifier isEqualToString:kSplashToMapSegue] == YES)
     {
-        REMBuildingViewController *buildingViewController = segue.destinationViewController;
-        buildingViewController.buildingOverallArray = self.buildingOveralls;
-        self.buildingOveralls=nil;
-        buildingViewController.splashScreenController = self;
+        REMMapViewController *mapViewController = segue.destinationViewController;
+        mapViewController.buildingInfoArray = self.buildingInfoArray;
+        self.buildingInfoArray=nil;
+        mapViewController.splashScreenController = self;
     }
 }
 
