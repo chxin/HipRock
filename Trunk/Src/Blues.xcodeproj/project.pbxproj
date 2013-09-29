@@ -471,6 +471,7 @@
 		B46C8EC317F27CDF006DC4CB /* REMDashboardCollectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EC217F27CDF006DC4CB /* REMDashboardCollectionCellView.m */; };
 		B46C8EC617F27D56006DC4CB /* REMDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EC517F27D56006DC4CB /* REMDashboardController.m */; };
 		B47422E617C45BCF0021B76C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
+		B47ACC2617F8010A00989B2C /* leftarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = B47ACC2517F8010A00989B2C /* leftarrow.png */; };
 		B48BB8B917EFEE43004DBE5D /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B48BB8B817EFEE43004DBE5D /* WeiboBana.jpg */; };
 		B48CC9901783297900AAD5D4 /* REMWidgetStepToolbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC98F1783297900AAD5D4 /* REMWidgetStepToolbarView.m */; };
 		B48CC99317832EAE00AAD5D4 /* REMWidgetMaxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC99217832EAE00AAD5D4 /* REMWidgetMaxView.m */; };
@@ -1023,6 +1024,7 @@
 		B46C8EC217F27CDF006DC4CB /* REMDashboardCollectionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardCollectionCellView.m; path = View/Dashboard/REMDashboardCollectionCellView.m; sourceTree = "<group>"; };
 		B46C8EC417F27D56006DC4CB /* REMDashboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMDashboardController.h; sourceTree = "<group>"; };
 		B46C8EC517F27D56006DC4CB /* REMDashboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMDashboardController.m; sourceTree = "<group>"; };
+		B47ACC2517F8010A00989B2C /* leftarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftarrow.png; sourceTree = "<group>"; };
 		B48BB8B817EFEE43004DBE5D /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
 		B48CC98E1783297900AAD5D4 /* REMWidgetStepToolbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetStepToolbarView.h; path = View/REMWidgetStepToolbarView.h; sourceTree = "<group>"; };
 		B48CC98F1783297900AAD5D4 /* REMWidgetStepToolbarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetStepToolbarView.m; path = View/REMWidgetStepToolbarView.m; sourceTree = "<group>"; };
@@ -1980,6 +1982,7 @@
 		7ACFCBA217CDA62E00811976 /* Building */ = {
 			isa = PBXGroup;
 			children = (
+				B47ACC2517F8010A00989B2C /* leftarrow.png */,
 				B42C338A17E19064008289D2 /* DefaultBuilding.png */,
 				B42C338817E18E63008289D2 /* DefaultBuilding@2x.png */,
 				7ACFCBA317CDA62E00811976 /* commodity */,
@@ -2359,6 +2362,7 @@
 				7A48B49017CDFA38002DA386 /* Propaganda_1@2x.jpg in Resources */,
 				7A48B49117CDFA38002DA386 /* Propaganda_2.jpg in Resources */,
 				7A48B49217CDFA38002DA386 /* Propaganda_2@2x.jpg in Resources */,
+				B47ACC2617F8010A00989B2C /* leftarrow.png in Resources */,
 				7A48B49317CDFA38002DA386 /* Propaganda_3.jpg in Resources */,
 				7A48B49417CDFA38002DA386 /* Propaganda_3@2x.jpg in Resources */,
 				B45F8A5717D5B0340079C74D /* Oil_pressed.png in Resources */,

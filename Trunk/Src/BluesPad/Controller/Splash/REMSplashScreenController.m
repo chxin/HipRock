@@ -18,7 +18,6 @@
 @property (nonatomic,strong) REMLoginCarouselController *carouselController;
 @property (nonatomic,strong) NSTimer *timer;
 
-@property (nonatomic,strong) UIButton *logoButton;
 @property (nonatomic,strong) UIImage *logoImage;
 
 @end
@@ -161,12 +160,9 @@
         
         [REMDataAccessor access:logoStore success:^(id data) {
             if(data == nil || [data length] == 2) return;
-            //UIImage *view = [REMImageHelper parseImageFromNSData:data];
-            UIImage *view = [UIImage imageNamed:@"Schneider-Logo"];
+            UIImage *view = [REMImageHelper parseImageFromNSData:data];
             self.logoImage=view;
-            self.logoButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 140, 30)];
-
-            [self.logoButton setBackgroundImage:view forState:UIControlStateNormal];
+            
             
             
             //test air quality interface
@@ -196,7 +192,7 @@
         REMBuildingViewController *buildingViewController = segue.destinationViewController;
         buildingViewController.buildingOverallArray = self.buildingOveralls;
         self.buildingOveralls=nil;
-        buildingViewController.logoButton=self.logoButton;
+        buildingViewController.logoImage=self.logoImage;
         buildingViewController.splashScreenController = self;
     }
 }

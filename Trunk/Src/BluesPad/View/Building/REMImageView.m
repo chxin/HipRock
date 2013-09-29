@@ -31,8 +31,9 @@
 @property (nonatomic) BOOL loadingImage;
 @property (nonatomic) BOOL customImageLoaded;
 @property (nonatomic,strong) NSString *loadingImageKey;
-@property (nonatomic,strong) UIButton *settingButton;
+@property (nonatomic,strong) UIButton *backButton;
 @property (nonatomic,strong) UIButton *shareButton;
+@property (nonatomic,strong) UIButton *logoButton;
 
 @property (nonatomic) BOOL isActive;
 
@@ -115,7 +116,9 @@
     
     self.titleLabel=nil;
     self.bottomGradientLayer=nil;
-    self.settingButton=nil;
+    self.backButton=nil;
+    self.shareButton=nil;
+    self.logoButton=nil;
     [self.dataView removeObserver:self forKeyPath:@"contentOffset" context:nil];
     self.dataView=nil;
 }
@@ -140,9 +143,8 @@
         
         [self initTitleView];
         
-        [self initBackButton];
         
-        [self initSettingButton];
+        [self initButtons];
         
         //[self loadingBuildingImage];
         
@@ -152,16 +154,8 @@
     
 }
 
-- (void)initSettingButton{
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
-    [btn setImage:[UIImage imageNamed:@"Menu_normal.png"] forState:UIControlStateNormal];
-    btn.adjustsImageWhenHighlighted=YES;
-    btn.showsTouchWhenHighlighted=YES;
-    btn.titleLabel.text=@"设置";
+- (void)initButtons{
     
-    [btn addTarget:self.controller action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.settingButton=btn;
-    [self addSubview:btn];
     
     UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
     [shareButton setImage:[UIImage imageNamed:@"Share_normal.png"] forState:UIControlStateNormal];
@@ -176,21 +170,20 @@
     [self addSubview:shareButton];
     
     self.dataView.shareButton=self.shareButton;
-
-}
-
--(void)initBackButton
-{
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    backButton.frame = CGRectMake(kBuildingLeftMargin+100, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension);
+    
+    
+    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
+    
     backButton.adjustsImageWhenHighlighted=YES;
     backButton.showsTouchWhenHighlighted=YES;
     backButton.titleLabel.text=@"地图";
-    
+    [backButton setBackgroundImage:[UIImage imageNamed:@"leftarrow"] forState:UIControlStateNormal];
     [backButton addTarget:self.controller action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.settingButton=backButton;
+    self.backButton=backButton;
     [self addSubview:backButton];
+
 }
+
 
 - (void)loadingBuildingImage{
     if(self.buildingInfo.building.pictureIds==nil ||
@@ -586,16 +579,19 @@
     self.titleLabel.textColor=[UIColor whiteColor];
     
     
-
-    UIButton *logoButton=self.controller.logoButton;
-    [logoButton setFrame:CGRectMake(self.titleLabel.frame.origin.x, kBuildingTitleTop, logoButton.frame.size.width, logoButton.frame.size.height)];
-    logoButton.titleLabel.text=@"logo";
+    self.logoButton=[[UIButton alloc]initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, kBuildingTitleTop, 140, 30)];
     
-    logoButton.layer.borderColor=[UIColor redColor].CGColor;
-    logoButton.layer.borderWidth=1;
+    [self.logoButton setBackgroundImage:self.controller.logoImage forState:UIControlStateNormal];
+    
+    self.logoButton.titleLabel.text=@"logo";
+    
+    [self.logoButton addTarget:self.controller action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //self.logoButton.layer.borderColor=[UIColor redColor].CGColor;
+    //self.logoButton.layer.borderWidth=1;
     [self addSubview:self.titleLabel];
     
-    [self addSubview:logoButton];
+    [self addSubview:self.logoButton];
 }
 
 
@@ -700,7 +696,7 @@
         [[UIColor blackColor]set];
         UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
         [[self getImageOfLayer:self.imageView.layer]drawInRect:self.imageView.frame];
-        [[self getImageOfLayer:self.titleLabel.layer]drawInRect:CGRectMake(self.settingButton.frame.origin.x, self.settingButton.frame.origin.y, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height)];
+        [[self getImageOfLayer:self.titleLabel.layer]drawInRect:CGRectMake(self.backButton.frame.origin.x, self.backButton.frame.origin.y, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height)];
         //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
         [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
         [dataImage drawInRect:CGRectMake(0, kBuildingCommodityViewTop + kBuildingTitleHeight, outputWidth, dataImageHeight)];

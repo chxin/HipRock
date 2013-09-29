@@ -30,6 +30,6 @@ typedef enum _BuildingSourceType{
 
 @property (nonatomic,copy) NSNumber *currentBuildingId;
 
-@property (nonatomic,strong) UIButton *logoButton;
+@property (nonatomic,strong) UIImage *logoImage;
 
 @end
