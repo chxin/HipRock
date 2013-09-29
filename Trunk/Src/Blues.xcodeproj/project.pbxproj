@@ -472,6 +472,10 @@
 		B46C8EC617F27D56006DC4CB /* REMDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EC517F27D56006DC4CB /* REMDashboardController.m */; };
 		B47422E617C45BCF0021B76C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
 		B47ACC2617F8010A00989B2C /* leftarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = B47ACC2517F8010A00989B2C /* leftarrow.png */; };
+		B47ACC2A17F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC2917F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m */; };
+		B47ACC2D17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC2C17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m */; };
+		B47ACC3017F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC2F17F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m */; };
+		B47ACC3317F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC3217F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m */; };
 		B48BB8B917EFEE43004DBE5D /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B48BB8B817EFEE43004DBE5D /* WeiboBana.jpg */; };
 		B48CC9901783297900AAD5D4 /* REMWidgetStepToolbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC98F1783297900AAD5D4 /* REMWidgetStepToolbarView.m */; };
 		B48CC99317832EAE00AAD5D4 /* REMWidgetMaxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC99217832EAE00AAD5D4 /* REMWidgetMaxView.m */; };
@@ -1026,6 +1030,14 @@
 		B46C8EC417F27D56006DC4CB /* REMDashboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMDashboardController.h; sourceTree = "<group>"; };
 		B46C8EC517F27D56006DC4CB /* REMDashboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMDashboardController.m; sourceTree = "<group>"; };
 		B47ACC2517F8010A00989B2C /* leftarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftarrow.png; sourceTree = "<group>"; };
+		B47ACC2817F80AAA00989B2C /* REMSettingCustomerSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerSelectionViewController.h; path = Controller/Setting/REMSettingCustomerSelectionViewController.h; sourceTree = "<group>"; };
+		B47ACC2917F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSettingCustomerSelectionViewController.m; path = Controller/Setting/REMSettingCustomerSelectionViewController.m; sourceTree = "<group>"; };
+		B47ACC2B17F80ACE00989B2C /* REMSettingCustomerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerDetailViewController.h; path = Controller/Setting/REMSettingCustomerDetailViewController.h; sourceTree = "<group>"; };
+		B47ACC2C17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSettingCustomerDetailViewController.m; path = Controller/Setting/REMSettingCustomerDetailViewController.m; sourceTree = "<group>"; };
+		B47ACC2E17F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerDetailLogoViewController.h; path = Controller/Setting/REMSettingCustomerDetailLogoViewController.h; sourceTree = "<group>"; };
+		B47ACC2F17F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSettingCustomerDetailLogoViewController.m; path = Controller/Setting/REMSettingCustomerDetailLogoViewController.m; sourceTree = "<group>"; };
+		B47ACC3117F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerDetailAdminViewController.h; path = Controller/Setting/REMSettingCustomerDetailAdminViewController.h; sourceTree = "<group>"; };
+		B47ACC3217F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSettingCustomerDetailAdminViewController.m; path = Controller/Setting/REMSettingCustomerDetailAdminViewController.m; sourceTree = "<group>"; };
 		B48BB8B817EFEE43004DBE5D /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
 		B48CC98E1783297900AAD5D4 /* REMWidgetStepToolbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetStepToolbarView.h; path = View/REMWidgetStepToolbarView.h; sourceTree = "<group>"; };
 		B48CC98F1783297900AAD5D4 /* REMWidgetStepToolbarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetStepToolbarView.m; path = View/REMWidgetStepToolbarView.m; sourceTree = "<group>"; };
@@ -1708,6 +1720,7 @@
 		7A5E2D9A177B41DA000F77F9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B47ACC2717F80A4700989B2C /* Setting */,
 				7A2E7EBE17F2DC7F000EB506 /* Map */,
 				7A153C8217AA497C00413D3C /* Splash */,
 				7A153C7517AA497B00413D3C /* Login */,
@@ -2186,6 +2199,21 @@
 			name = Dashboard;
 			sourceTree = "<group>";
 		};
+		B47ACC2717F80A4700989B2C /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				B47ACC2817F80AAA00989B2C /* REMSettingCustomerSelectionViewController.h */,
+				B47ACC2917F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m */,
+				B47ACC2B17F80ACE00989B2C /* REMSettingCustomerDetailViewController.h */,
+				B47ACC2C17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m */,
+				B47ACC2E17F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.h */,
+				B47ACC2F17F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m */,
+				B47ACC3117F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.h */,
+				B47ACC3217F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
 		B49B6F421781228200BC130A /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2480,6 +2508,7 @@
 				B49B6F4817812E6B00BC130A /* REMWidgetCell.m in Sources */,
 				B49B6F511781491800BC130A /* REMColor.m in Sources */,
 				B48CC9901783297900AAD5D4 /* REMWidgetStepToolbarView.m in Sources */,
+				B47ACC2D17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m in Sources */,
 				B48CC99317832EAE00AAD5D4 /* REMWidgetMaxView.m in Sources */,
 				B4198EAE178410D300B50475 /* REMLogManager.m in Sources */,
 				B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */,
@@ -2488,6 +2517,7 @@
 				38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */,
 				7A1D14291785178800CC2922 /* REMNetworkHelper.m in Sources */,
 				7A2E7ECD17F2DD41000EB506 /* REMImageView.m in Sources */,
+				B47ACC2A17F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m in Sources */,
 				7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */,
 				7A3DDCDA1786C05B008A1033 /* REMServiceAgent.m in Sources */,
 				7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */,
@@ -2497,6 +2527,7 @@
 				7A095E73179571C80098DB16 /* REMWidgetAxisHelper.m in Sources */,
 				B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */,
 				7A1D7C3717A6155D0050779D /* REMApplicationContext.m in Sources */,
+				B47ACC3017F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m in Sources */,
 				7A1D7C3C17A637510050779D /* REMUserModel.m in Sources */,
 				7A1D7C3F17A637630050779D /* REMCustomerModel.m in Sources */,
 				7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */,
@@ -2516,6 +2547,7 @@
 				7A153C6517AA489600413D3C /* REMEnergyViewData.m in Sources */,
 				7A153C6617AA489600413D3C /* REMTargetEnergyData.m in Sources */,
 				7A153C9E17AA497C00413D3C /* REMBuildingViewController.m in Sources */,
+				B47ACC3317F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m in Sources */,
 				B46C8EC617F27D56006DC4CB /* REMDashboardController.m in Sources */,
 				7A153C9F17AA497C00413D3C /* REMDashboardLeftNavigationController.m in Sources */,
 				7A13C19517F40809007E6AA9 /* REMMainNavigationController.m in Sources */,

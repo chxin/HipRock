@@ -19,7 +19,7 @@
 @property (nonatomic,strong) REMLoginCarouselController *carouselController;
 @property (nonatomic,strong) NSTimer *timer;
 
-@property (nonatomic,strong) UIImage *logoImage;
+
 
 @end
 
@@ -162,7 +162,7 @@
         [REMDataAccessor access:logoStore success:^(id data) {
             if(data == nil || [data length] == 2) return;
             UIImage *view = [REMImageHelper parseImageFromNSData:data];
-            self.logoImage=view;
+            self.customerLogoImage=view;
             
             
             
@@ -170,7 +170,7 @@
             if(loadCompleted!=nil)
                 loadCompleted();
             
-            [self performSegueWithIdentifier:@"splashToBuildingSegue" sender:self];
+            [self performSegueWithIdentifier:kSplashToMapSegue sender:self];
         }];
         
         
@@ -190,11 +190,10 @@
     }
     else if([segue.identifier isEqualToString:kSplashToMapSegue] == YES)
     {
-        REMBuildingViewController *buildingViewController = segue.destinationViewController;
-        buildingViewController.buildingOverallArray = self.buildingOveralls;
-        self.buildingOveralls=nil;
-        buildingViewController.logoImage=self.logoImage;
-        buildingViewController.splashScreenController = self;
+        REMMapViewController *mapViewController = segue.destinationViewController;
+        mapViewController.buildingInfoArray = self.buildingInfoArray;
+        self.buildingInfoArray=nil;
+        mapViewController.splashScreenController = self;
     }
 }
 
