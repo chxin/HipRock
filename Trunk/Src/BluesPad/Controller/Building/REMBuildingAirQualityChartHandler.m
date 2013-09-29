@@ -44,8 +44,8 @@
 static NSString *kOutdoorCode = @"GalaxySoho_Outdoor";
 static NSString *kMayAirCode = @"GalaxySoho_MayAir";
 static NSString *kHoneywellCode = @"GalaxySoho_Honeywell";
-static NSString *kAmericanStandardCode = @"美国标准";
-static NSString *kChinaStandardCode = @"中国标准";
+static NSString * const kAmericanStandardCode = @"美国标准";
+static NSString * const kChinaStandardCode = @"中国标准";
 
 static NSString *kOutdoorLabelName = @"室外PM2.5";
 static NSString *kHoneywellLabelName = @"室内新风PM2.5(霍尼)";
@@ -365,8 +365,8 @@ static NSDictionary *codeNameMap;
     CPTPlotRange *bandRangeChina=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([self.standardAmerican.standardValue doubleValue]) length:CPTDecimalFromDouble([self.standardChina.standardValue doubleValue] - [self.standardAmerican.standardValue doubleValue])];
     CPTPlotRange *bandRangeAmerican=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([self.standardAmerican.standardValue doubleValue])];
     
-    CPTColor *chinaColor = [self getColorWithCode:(NSString *)kChinaStandardCode];
-    CPTColor *americanColor = [self getColorWithCode:(NSString *)kAmericanStandardCode];
+    CPTColor *chinaColor = [self getColorWithCode:kChinaStandardCode];
+    CPTColor *americanColor = [self getColorWithCode:kAmericanStandardCode];
     
     
     CPTLimitBand *standardBandChina= [CPTLimitBand limitBandWithRange:bandRangeChina fill:[CPTFill fillWithColor:chinaColor]];
@@ -401,15 +401,15 @@ static NSDictionary *codeNameMap;
     
     NSString *labelTextFormat = codeNameMap[standardCode];
     REMAirQualityStandardModel *standard;
-    UIColor *standardColor;// = [self getColorWithCode:standardCode].uiColor;
+    UIColor *standardColor = [self getColorWithCode:standardCode].uiColor;
     
     if(standardCode == (NSString *)kChinaStandardCode){
         standard = self.standardChina;
-        standardColor = [UIColor colorWithRed:255.0/255.0 green:97.0/255.0 blue:106.0/255.0 alpha:1];
+        //standardColor = [UIColor colorWithRed:255.0/255.0 green:97.0/255.0 blue:106.0/255.0 alpha:1];
     }
     else{
         standard = self.standardAmerican;
-        standardColor = [UIColor colorWithRed:119.0/255.0 green:196.0/255.0 blue:255.0/255.0 alpha:1];
+        //standardColor = [UIColor colorWithRed:119.0/255.0 green:196.0/255.0 blue:255.0/255.0 alpha:1];
     }
     
     NSString *labelText = [NSString stringWithFormat: labelTextFormat,[standard.standardValue intValue],standard.uom];
@@ -467,10 +467,10 @@ static NSDictionary *codeNameMap;
         return [[CPTColor alloc] initWithComponentRed:106.0/255.0 green:99.0/255.0 blue:74.0/255.0 alpha:1];
     }
     else if([code isEqualToString:(NSString *)kChinaStandardCode]){
-        return [[CPTColor alloc] initWithComponentRed:255.0/255.0 green:0.0/255.0 blue:14.0/255.0 alpha:0.39];
+        return [[CPTColor alloc] initWithComponentRed:58.0/255.0 green:255.0/255.0 blue:168.0/255.0 alpha:0.43];
     }
     else if([code isEqualToString:(NSString *)kAmericanStandardCode]){
-        return [[CPTColor alloc] initWithComponentRed:58.0/255.0 green:148.0/255.0 blue:255.0/255.0 alpha:0.43];
+        return [[CPTColor alloc] initWithComponentRed:0.0/255.0 green:226.0/255.0 blue:255.0/255.0 alpha:0.39];
     }
     else{
         return [[CPTColor alloc] initWithComponentRed:0.0 green:0.0 blue:0.0 alpha:1];
