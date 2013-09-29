@@ -492,6 +492,10 @@
 		EF97879617C70B440062BE0E /* REMBuildingSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */; };
 		EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97DDDA17C20B5700A0374E /* REMToggleButton.m */; };
 		EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9F28B017CB54DE00E775ED /* REMStatusBar.m */; };
+		EFD6041B17F558A10080CE89 /* REMAbstractWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD6041A17F558A10080CE89 /* REMAbstractWidget.m */; };
+		EFD6041E17F5778D0080CE89 /* REMColumnWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD6041D17F5778D0080CE89 /* REMColumnWidget.m */; };
+		EFD6042117F57A4F0080CE89 /* REMTrendWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD6042017F57A4F0080CE89 /* REMTrendWidget.m */; };
+		EFD6042417F57B800080CE89 /* REMLineWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD6042317F57B800080CE89 /* REMLineWidget.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1038,6 +1042,14 @@
 		EF97DDDA17C20B5700A0374E /* REMToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButton.m; sourceTree = "<group>"; };
 		EF9F28AF17CB54DD00E775ED /* REMStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMStatusBar.h; sourceTree = "<group>"; };
 		EF9F28B017CB54DE00E775ED /* REMStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMStatusBar.m; sourceTree = "<group>"; };
+		EFD6041917F558A10080CE89 /* REMAbstractWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAbstractWidget.h; path = View/Widget/REMAbstractWidget.h; sourceTree = "<group>"; };
+		EFD6041A17F558A10080CE89 /* REMAbstractWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAbstractWidget.m; path = View/Widget/REMAbstractWidget.m; sourceTree = "<group>"; };
+		EFD6041C17F5778D0080CE89 /* REMColumnWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMColumnWidget.h; path = View/Widget/REMColumnWidget.h; sourceTree = "<group>"; };
+		EFD6041D17F5778D0080CE89 /* REMColumnWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMColumnWidget.m; path = View/Widget/REMColumnWidget.m; sourceTree = "<group>"; };
+		EFD6041F17F57A4F0080CE89 /* REMTrendWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMTrendWidget.h; path = View/Widget/REMTrendWidget.h; sourceTree = "<group>"; };
+		EFD6042017F57A4F0080CE89 /* REMTrendWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTrendWidget.m; path = View/Widget/REMTrendWidget.m; sourceTree = "<group>"; };
+		EFD6042217F57B800080CE89 /* REMLineWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLineWidget.h; path = View/Widget/REMLineWidget.h; sourceTree = "<group>"; };
+		EFD6042317F57B800080CE89 /* REMLineWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLineWidget.m; path = View/Widget/REMLineWidget.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2101,6 +2113,7 @@
 		B49B6F421781228200BC130A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EFD6041817F557E60080CE89 /* Widget */,
 				7A1A853617B4B257004D7167 /* Chart */,
 				B4426FFE17AF305500762C68 /* Building */,
 				7A37AA6017AB944B00316902 /* Controls */,
@@ -2130,6 +2143,21 @@
 				EF87DA8B17E30F8F00E51262 /* REMTrendChartConfig.m */,
 			);
 			path = Chart;
+			sourceTree = "<group>";
+		};
+		EFD6041817F557E60080CE89 /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				EFD6041917F558A10080CE89 /* REMAbstractWidget.h */,
+				EFD6041A17F558A10080CE89 /* REMAbstractWidget.m */,
+				EFD6041F17F57A4F0080CE89 /* REMTrendWidget.h */,
+				EFD6042017F57A4F0080CE89 /* REMTrendWidget.m */,
+				EFD6041C17F5778D0080CE89 /* REMColumnWidget.h */,
+				EFD6041D17F5778D0080CE89 /* REMColumnWidget.m */,
+				EFD6042217F57B800080CE89 /* REMLineWidget.h */,
+				EFD6042317F57B800080CE89 /* REMLineWidget.m */,
+			);
+			name = Widget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2366,6 +2394,7 @@
 				B48ED40A178EA8970032CD72 /* REMStorage.m in Sources */,
 				7A9B1E2C177B3A8B00C282A8 /* main.m in Sources */,
 				7A9B1E30177B3A8B00C282A8 /* REMAppDelegate.m in Sources */,
+				EFD6042117F57A4F0080CE89 /* REMTrendWidget.m in Sources */,
 				B445AEA0177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m in Sources */,
 				B445AEA2177BEEB8002D2A59 /* DDASLLogger.m in Sources */,
 				B445AEA4177BEEB8002D2A59 /* DDFileLogger.m in Sources */,
@@ -2416,6 +2445,7 @@
 				7A153C5F17AA489600413D3C /* REMWidgetContentSyntax.m in Sources */,
 				7A153C6017AA489600413D3C /* REMWidgetObject.m in Sources */,
 				B4F4B99E17F16F590096034D /* REMShareInfo.m in Sources */,
+				EFD6041B17F558A10080CE89 /* REMAbstractWidget.m in Sources */,
 				7A153C6117AA489600413D3C /* REMEnergyCalendarData.m in Sources */,
 				7A153C6217AA489600413D3C /* REMEnergyData.m in Sources */,
 				7A153C6317AA489600413D3C /* REMEnergyError.m in Sources */,
@@ -2482,6 +2512,7 @@
 				7A0288F317C20CC500709111 /* User.m in Sources */,
 				7A0288F417C20CC500709111 /* WeiboAccount.m in Sources */,
 				7A0288F517C20CC500709111 /* WeiboAuthentication.m in Sources */,
+				EFD6042417F57B800080CE89 /* REMLineWidget.m in Sources */,
 				7A0288F817C20CC500709111 /* ImageResourceLoader.m in Sources */,
 				7A0288F917C20CC500709111 /* NSDictionary+Json.m in Sources */,
 				7A2E7ECA17F2DD41000EB506 /* REMBuildingDataView.m in Sources */,
@@ -2505,6 +2536,7 @@
 				7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */,
 				7AF3667817CF2D7400447650 /* REMChartSeriesIndicator.m in Sources */,
 				B493ADA917D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m in Sources */,
+				EFD6041E17F5778D0080CE89 /* REMColumnWidget.m in Sources */,
 				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
 				EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */,
