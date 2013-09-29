@@ -158,7 +158,7 @@
     [[REMApplicationContext instance].currentUser save];
     [[REMApplicationContext instance].currentCustomer save];
 
-    [self.loginCarouselController.splashScreenController showBuildingView:^{
+    [self.loginCarouselController.splashScreenController showMapView:^{
         [self.loginButton stopIndicator];
     }];
 }

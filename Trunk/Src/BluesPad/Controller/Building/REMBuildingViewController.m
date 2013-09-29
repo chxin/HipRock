@@ -411,9 +411,7 @@
 
 -(IBAction)backButtonPressed:(id)sender
 {
-    static NSString *segueName = @"buildingToMapSegue";
-    
-    [self performSegueWithIdentifier:segueName sender:self];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)executeExport:(REMMaskManager *)masker{

@@ -778,6 +778,7 @@
 		7A48B48E17CDFA38002DA386 /* Propaganda_3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Propaganda_3@2x.jpg"; sourceTree = "<group>"; };
 		7A5277F417AF4209007DA735 /* REMIndicatorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMIndicatorButton.h; sourceTree = "<group>"; };
 		7A5277F517AF4209007DA735 /* REMIndicatorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMIndicatorButton.m; sourceTree = "<group>"; };
+		7A5315FA17F7CD8C0022491F /* REMSegues.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMSegues.h; path = Common/Constants/REMSegues.h; sourceTree = "<group>"; };
 		7A5DBD27178FD014006C4EDE /* REMDataAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataAccessor.m; path = Common/DataAccess/REMDataAccessor.m; sourceTree = "<group>"; };
 		7A5DBD29178FD034006C4EDE /* REMDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDataStore.h; path = Common/DataAccess/REMDataStore.h; sourceTree = "<group>"; };
 		7A5DBD2A178FD034006C4EDE /* REMDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataStore.m; path = Common/DataAccess/REMDataStore.m; sourceTree = "<group>"; };
@@ -1647,6 +1648,7 @@
 				B43BB1101797B12D00617B1E /* REMEnergyConstants.m */,
 				7A1D7C3517A6155D0050779D /* REMApplicationContext.h */,
 				7A1D7C3617A6155D0050779D /* REMApplicationContext.m */,
+				7A5315FA17F7CD8C0022491F /* REMSegues.h */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -3005,8 +3007,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos6.1]" = "";
+				PROVISIONING_PROFILE = "3F0E2D63-0EE0-43AA-9CC3-488015BED70F";
+				"PROVISIONING_PROFILE[sdk=iphoneos6.1]" = "3F0E2D63-0EE0-43AA-9CC3-488015BED70F";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv7s i386 x86_64";

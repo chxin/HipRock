@@ -8,6 +8,7 @@
 #import "REMApplicationContext.h"
 #import "REMApplicationInfo.h"
 #import "REMEnergyConstants.h"
+#import "REMSegues.h"
 
 //DataAccess
 #import "REMDataAccessor.h"
@@ -23,6 +24,7 @@
 //Model
 #import "REMBusinessErrorInfo.h"
 #import "REMCustomerModel.h"
+#import "REMEnum.h"
 #import "REMJSONObject.h"
 #import "REMUserModel.h"
 
