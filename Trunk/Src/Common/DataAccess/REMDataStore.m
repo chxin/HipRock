@@ -77,6 +77,7 @@ static NSDictionary *serviceMap = nil;
            *	Building
            */
           [NSNumber numberWithInt:REMDSBuildingOverallData] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Building.svc/GetBuildingOverallData"],
+          [NSNumber numberWithInt:REMDSBuildingCommodityTotalUsage] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Building.svc/GetBuildingCommodityUsage"],
           [NSNumber numberWithInt:REMDSBuildingInfo] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Building.svc/GetBuildingInfo"],
           [NSNumber numberWithInt:REMDSBuildingAverageData] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Building.svc/GetBuildingAverageUsageData"],
           [NSNumber numberWithInt:REMDSBuildingTimeRangeData] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Building.svc/GetBuildingTimeRangeData"],

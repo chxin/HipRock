@@ -19,6 +19,7 @@
 #import "REMBuildingViewController.h"
 #import "REMStorage.h"
 #import "REMError.h"
+#import "REMDashboardController.h"
 
 @class REMBuildingViewController;
 
@@ -42,6 +43,8 @@
 - (void)setScrollOffset:(CGFloat)offsetY;
 
 - (void)tapthis;
+
+- (void)showBuildingInfo;
 
 - (void)moveCenter:(CGFloat)x;
 

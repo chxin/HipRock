@@ -10,8 +10,6 @@
 
 @interface REMBuildingTitleLabelView()
 
-@property (nonatomic,weak) REMEnergyUsageDataModel *data;
-@property (nonatomic,strong) REMNumberLabel *textLabel;
 @property (nonatomic,strong) UILabel *uomLabel;
 
 
@@ -20,19 +18,21 @@
 @implementation REMBuildingTitleLabelView
 
 - (id)initWithFrame:(CGRect)frame
-           withData:(REMEnergyUsageDataModel *)data withTitle:(NSString *)title andTitleFontSize:(CGFloat)size withTitleMargin:(CGFloat)margin withLeftMargin:(CGFloat)leftMargin
-            withValueFontSize:(CGFloat)valueSize withUomFontSize:(CGFloat) uomSize;
 {
     self = [super initWithFrame:frame];
     if(self)
     {
         self.backgroundColor=[UIColor clearColor];
-        
-        [self initTitle:title withSize:size withLeftMargin:leftMargin];
-        [self initTextLabel:data withTitleSize:size withTitleMargin:margin withLeftMargin:leftMargin withValueFontSize:valueSize withUomFontSize:uomSize];
     }
     
     return self;
+
+}
+
+
+- (void)setData:(REMEnergyUsageDataModel *)data{
+    
+    [self initTextLabel:data withTitleSize:self.titleFontSize withTitleMargin:self.titleMargin withLeftMargin:self.leftMargin withValueFontSize:self.valueFontSize withUomFontSize:self.uomFontSize];
 }
 
 
@@ -53,15 +53,15 @@
     
     
     int marginTop=titleSize+margin ;
-    self.textLabel = [[REMNumberLabel alloc] initWithFrame:CGRectMake(leftMargin, marginTop, 1000, valueSize)];
-    self.textLabel.fontSize=@(valueSize);
-    self.textLabel.textColor=[UIColor whiteColor];
-    self.textLabel.backgroundColor=[UIColor clearColor];
-    self.textLabel.shadowOffset=CGSizeMake(1, 1);
-    self.textLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-    self.textLabel.text=[self addThousandSeparator:data.dataValue];
-    [self addSubview:self.textLabel];
-
+    REMNumberLabel *textLabel = [[REMNumberLabel alloc] initWithFrame:CGRectMake(leftMargin, marginTop, 1000, valueSize)];
+    textLabel.fontSize=@(valueSize);
+    textLabel.textColor=[UIColor whiteColor];
+    textLabel.backgroundColor=[UIColor clearColor];
+    textLabel.shadowOffset=CGSizeMake(1, 1);
+    textLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    textLabel.text=[self addThousandSeparator:data.dataValue];
+    [self addSubview:textLabel];
+    self.textLabel=textLabel;
     //NSLog(@"font:%@",[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:valueSize]);
     
     CGSize expectedLabelSize = [self.textLabel.text sizeWithFont:[UIFont fontWithName:@(kBuildingFontLight) size:valueSize]];
@@ -91,13 +91,19 @@
 
         NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:string];
         
-        
+        NSString *scriptType;
+        if([string rangeOfString:@"CO2"].location==NSNotFound){
+            scriptType=@"1";
+        }
+        else{
+            scriptType=@"-1";
+        }
         
         UIFont *smallFont = [UIFont systemFontOfSize:size];
         
         [attString beginEditing];
         [attString addAttribute:NSFontAttributeName value:(smallFont) range:NSMakeRange(string.length - 1, 1)];
-        [attString addAttribute:(NSString*)kCTSuperscriptAttributeName value:@"1" range:NSMakeRange(string.length - 1, 1)];
+        [attString addAttribute:(NSString*)kCTSuperscriptAttributeName value:scriptType range:NSMakeRange(string.length - 1, 1)];
 
         [attString endEditing];
         self.uomLabel.attributedText=attString;

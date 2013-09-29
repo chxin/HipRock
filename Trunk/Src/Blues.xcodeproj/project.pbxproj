@@ -233,7 +233,6 @@
 		7A09D59A17B8D62F001EBC30 /* REMDataRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59917B8D62F001EBC30 /* REMDataRange.m */; };
 		7A13C18F17F407B6007E6AA9 /* REMMainDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A13C18E17F407B6007E6AA9 /* REMMainDashboardViewController.m */; };
 		7A13C19517F40809007E6AA9 /* REMMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A13C19417F40809007E6AA9 /* REMMainNavigationController.m */; };
-		7A13C19917F40D08007E6AA9 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C19817F40D08007E6AA9 /* GoogleMaps.framework */; };
 		7A13C19B17F40D31007E6AA9 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7A13C19A17F40D31007E6AA9 /* GoogleMaps.bundle */; };
 		7A13C19D17F40D4F007E6AA9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C19C17F40D4E007E6AA9 /* AVFoundation.framework */; };
 		7A13C19F17F40D59007E6AA9 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C19E17F40D59007E6AA9 /* CoreData.framework */; };
@@ -406,8 +405,13 @@
 		7AF6AC9117D1BB1200D62A9A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B61D7517C742E000245F1E /* CoreText.framework */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
+		B42A51FC17F57C2A00F890B2 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B42A51FA17F57BB800F890B2 /* GoogleMaps.framework */; };
 		B42C338917E18E63008289D2 /* DefaultBuilding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B42C338817E18E63008289D2 /* DefaultBuilding@2x.png */; };
 		B42C338B17E19064008289D2 /* DefaultBuilding.png in Resources */ = {isa = PBXBuildFile; fileRef = B42C338A17E19064008289D2 /* DefaultBuilding.png */; };
+		B42FBF6117F519F5004F2F3A /* REMWidgetCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6017F519F5004F2F3A /* REMWidgetCollectionViewController.m */; };
+		B42FBF6417F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
+		B42FBF6517F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
+		B42FBF6617F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
 		B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
 		B442701317AF316500762C68 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
 		B445AE7D177BE8B5002D2A59 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */; };
@@ -461,6 +465,11 @@
 		B45F8A7A17D5B04B0079C74D /* Water_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B45F8A6E17D5B04B0079C74D /* Water_pressed@2x.png */; };
 		B4626BFC17B0A0D900A7759B /* REMBuildingCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */; };
 		B469537817E96DCF003D5A98 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
+		B46C8EBA17F27C25006DC4CB /* REMDashboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EB917F27C25006DC4CB /* REMDashboardView.m */; };
+		B46C8EBD17F27C84006DC4CB /* REMDashboardCellViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EBC17F27C84006DC4CB /* REMDashboardCellViewCell.m */; };
+		B46C8EC017F27CB9006DC4CB /* REMDashboardCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EBF17F27CB9006DC4CB /* REMDashboardCollectionView.m */; };
+		B46C8EC317F27CDF006DC4CB /* REMDashboardCollectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EC217F27CDF006DC4CB /* REMDashboardCollectionCellView.m */; };
+		B46C8EC617F27D56006DC4CB /* REMDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EC517F27D56006DC4CB /* REMDashboardController.m */; };
 		B47422E617C45BCF0021B76C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
 		B48BB8B917EFEE43004DBE5D /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B48BB8B817EFEE43004DBE5D /* WeiboBana.jpg */; };
 		B48CC9901783297900AAD5D4 /* REMWidgetStepToolbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC98F1783297900AAD5D4 /* REMWidgetStepToolbarView.m */; };
@@ -584,7 +593,6 @@
 		7A13C18E17F407B6007E6AA9 /* REMMainDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMMainDashboardViewController.m; sourceTree = "<group>"; };
 		7A13C19317F40809007E6AA9 /* REMMainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMainNavigationController.h; path = Controller/REMMainNavigationController.h; sourceTree = "<group>"; };
 		7A13C19417F40809007E6AA9 /* REMMainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMainNavigationController.m; path = Controller/REMMainNavigationController.m; sourceTree = "<group>"; };
-		7A13C19817F40D08007E6AA9 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = ../Lib/GoogleMaps.framework; sourceTree = "<group>"; };
 		7A13C19A17F40D31007E6AA9 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = ../Lib/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		7A13C19C17F40D4E007E6AA9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		7A13C19E17F40D59007E6AA9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
@@ -941,8 +949,13 @@
 		B4198EAD178410D300B50475 /* REMLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLogManager.m; path = Common/Log/REMLogManager.m; sourceTree = "<group>"; };
 		B4198EB01784220300B50475 /* REMJSONHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMJSONHelper.h; path = Common/Utility/REMJSONHelper.h; sourceTree = "<group>"; };
 		B4198EB11784220300B50475 /* REMJSONHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMJSONHelper.m; path = Common/Utility/REMJSONHelper.m; sourceTree = "<group>"; };
+		B42A51FA17F57BB800F890B2 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = ../Lib/GoogleMaps.framework; sourceTree = "<group>"; };
 		B42C338817E18E63008289D2 /* DefaultBuilding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuilding@2x.png"; sourceTree = "<group>"; };
 		B42C338A17E19064008289D2 /* DefaultBuilding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultBuilding.png; sourceTree = "<group>"; };
+		B42FBF5F17F519F5004F2F3A /* REMWidgetCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetCollectionViewController.h; sourceTree = "<group>"; };
+		B42FBF6017F519F5004F2F3A /* REMWidgetCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetCollectionViewController.m; sourceTree = "<group>"; };
+		B42FBF6217F574B5004F2F3A /* REMEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnum.h; path = Common/Model/REMEnum.h; sourceTree = "<group>"; };
+		B42FBF6317F574B5004F2F3A /* REMEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnum.m; path = Common/Model/REMEnum.m; sourceTree = "<group>"; };
 		B43BB10F1797B12D00617B1E /* REMEnergyConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergyConstants.h; path = Common/Constants/REMEnergyConstants.h; sourceTree = "<group>"; };
 		B43BB1101797B12D00617B1E /* REMEnergyConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnergyConstants.m; path = Common/Constants/REMEnergyConstants.m; sourceTree = "<group>"; };
 		B442701217AF316500762C68 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
@@ -1000,6 +1013,16 @@
 		B45F8A6E17D5B04B0079C74D /* Water_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Water_pressed@2x.png"; sourceTree = "<group>"; };
 		B4626BFA17B0A0D900A7759B /* REMBuildingCommodityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingCommodityView.h; path = View/Building/REMBuildingCommodityView.h; sourceTree = "<group>"; };
 		B4626BFB17B0A0D900A7759B /* REMBuildingCommodityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingCommodityView.m; path = View/Building/REMBuildingCommodityView.m; sourceTree = "<group>"; };
+		B46C8EB817F27C25006DC4CB /* REMDashboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDashboardView.h; path = View/Dashboard/REMDashboardView.h; sourceTree = "<group>"; };
+		B46C8EB917F27C25006DC4CB /* REMDashboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardView.m; path = View/Dashboard/REMDashboardView.m; sourceTree = "<group>"; };
+		B46C8EBB17F27C84006DC4CB /* REMDashboardCellViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDashboardCellViewCell.h; path = View/Dashboard/REMDashboardCellViewCell.h; sourceTree = "<group>"; };
+		B46C8EBC17F27C84006DC4CB /* REMDashboardCellViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardCellViewCell.m; path = View/Dashboard/REMDashboardCellViewCell.m; sourceTree = "<group>"; };
+		B46C8EBE17F27CB9006DC4CB /* REMDashboardCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDashboardCollectionView.h; path = View/Dashboard/REMDashboardCollectionView.h; sourceTree = "<group>"; };
+		B46C8EBF17F27CB9006DC4CB /* REMDashboardCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardCollectionView.m; path = View/Dashboard/REMDashboardCollectionView.m; sourceTree = "<group>"; };
+		B46C8EC117F27CDF006DC4CB /* REMDashboardCollectionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDashboardCollectionCellView.h; path = View/Dashboard/REMDashboardCollectionCellView.h; sourceTree = "<group>"; };
+		B46C8EC217F27CDF006DC4CB /* REMDashboardCollectionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardCollectionCellView.m; path = View/Dashboard/REMDashboardCollectionCellView.m; sourceTree = "<group>"; };
+		B46C8EC417F27D56006DC4CB /* REMDashboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMDashboardController.h; sourceTree = "<group>"; };
+		B46C8EC517F27D56006DC4CB /* REMDashboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMDashboardController.m; sourceTree = "<group>"; };
 		B48BB8B817EFEE43004DBE5D /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
 		B48CC98E1783297900AAD5D4 /* REMWidgetStepToolbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetStepToolbarView.h; path = View/REMWidgetStepToolbarView.h; sourceTree = "<group>"; };
 		B48CC98F1783297900AAD5D4 /* REMWidgetStepToolbarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetStepToolbarView.m; path = View/REMWidgetStepToolbarView.m; sourceTree = "<group>"; };
@@ -1065,6 +1088,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B42A51FC17F57C2A00F890B2 /* GoogleMaps.framework in Frameworks */,
 				B4B61D7617C742E000245F1E /* CoreText.framework in Frameworks */,
 				7AB34E4D177D2975003E235E /* SystemConfiguration.framework in Frameworks */,
 				B445AE7D177BE8B5002D2A59 /* QuartzCore.framework in Frameworks */,
@@ -1077,7 +1101,6 @@
 				7A13C1A117F40D61007E6AA9 /* CoreLocation.framework in Frameworks */,
 				7A13C19F17F40D59007E6AA9 /* CoreData.framework in Frameworks */,
 				7A13C19D17F40D4F007E6AA9 /* AVFoundation.framework in Frameworks */,
-				7A13C19917F40D08007E6AA9 /* GoogleMaps.framework in Frameworks */,
 				B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */,
 				EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */,
 				38ED7D1F1785140900219469 /* libsqlite3.dylib in Frameworks */,
@@ -1325,6 +1348,10 @@
 				7A153C7217AA497B00413D3C /* REMDashboardViewController.m */,
 				7A153C7317AA497B00413D3C /* REMFavoriteTableViewController.h */,
 				7A153C7417AA497B00413D3C /* REMFavoriteTableViewController.m */,
+				B46C8EC417F27D56006DC4CB /* REMDashboardController.h */,
+				B46C8EC517F27D56006DC4CB /* REMDashboardController.m */,
+				B42FBF5F17F519F5004F2F3A /* REMWidgetCollectionViewController.h */,
+				B42FBF6017F519F5004F2F3A /* REMWidgetCollectionViewController.m */,
 			);
 			name = Dashboard;
 			path = Controller/Dashboard;
@@ -1437,6 +1464,8 @@
 				7A1D7C3E17A637630050779D /* REMCustomerModel.m */,
 				7A2BA41C17D874C3003B18E1 /* REMBusinessErrorInfo.h */,
 				7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */,
+				B42FBF6217F574B5004F2F3A /* REMEnum.h */,
+				B42FBF6317F574B5004F2F3A /* REMEnum.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1723,6 +1752,7 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B42A51FA17F57BB800F890B2 /* GoogleMaps.framework */,
 				7A13C1AA17F40D99007E6AA9 /* libz.dylib */,
 				7A13C1A817F40D90007E6AA9 /* libicucore.dylib */,
 				7A13C1A617F40D83007E6AA9 /* libc++.dylib */,
@@ -1732,7 +1762,6 @@
 				7A13C19E17F40D59007E6AA9 /* CoreData.framework */,
 				7A13C19C17F40D4E007E6AA9 /* AVFoundation.framework */,
 				7A13C19A17F40D31007E6AA9 /* GoogleMaps.bundle */,
-				7A13C19817F40D08007E6AA9 /* GoogleMaps.framework */,
 				B4B61D7517C742E000245F1E /* CoreText.framework */,
 				6AB1F30817B8B3E40065C1EB /* libCorePlot-CocoaTouch.a */,
 				B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */,
@@ -2137,9 +2166,25 @@
 			name = CommonTest;
 			sourceTree = "<group>";
 		};
+		B46C8EB717F27BA0006DC4CB /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				B46C8EB817F27C25006DC4CB /* REMDashboardView.h */,
+				B46C8EB917F27C25006DC4CB /* REMDashboardView.m */,
+				B46C8EBB17F27C84006DC4CB /* REMDashboardCellViewCell.h */,
+				B46C8EBC17F27C84006DC4CB /* REMDashboardCellViewCell.m */,
+				B46C8EBE17F27CB9006DC4CB /* REMDashboardCollectionView.h */,
+				B46C8EBF17F27CB9006DC4CB /* REMDashboardCollectionView.m */,
+				B46C8EC117F27CDF006DC4CB /* REMDashboardCollectionCellView.h */,
+				B46C8EC217F27CDF006DC4CB /* REMDashboardCollectionCellView.m */,
+			);
+			name = Dashboard;
+			sourceTree = "<group>";
+		};
 		B49B6F421781228200BC130A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B46C8EB717F27BA0006DC4CB /* Dashboard */,
 				7A1A853617B4B257004D7167 /* Chart */,
 				B4426FFE17AF305500762C68 /* Building */,
 				7A37AA6017AB944B00316902 /* Controls */,
@@ -2425,6 +2470,7 @@
 				7A399E9D177D238F00F0EB9F /* AFXMLRequestOperation.m in Sources */,
 				7AB34E51177D2CE1003E235E /* REMServiceRequestOperation.m in Sources */,
 				B49B6F45178122A500BC130A /* REMWidgetCellView.m in Sources */,
+				B42FBF6417F574B5004F2F3A /* REMEnum.m in Sources */,
 				B49B6F4817812E6B00BC130A /* REMWidgetCell.m in Sources */,
 				B49B6F511781491800BC130A /* REMColor.m in Sources */,
 				B48CC9901783297900AAD5D4 /* REMWidgetStepToolbarView.m in Sources */,
@@ -2457,12 +2503,14 @@
 				7A153C6017AA489600413D3C /* REMWidgetObject.m in Sources */,
 				B4F4B99E17F16F590096034D /* REMShareInfo.m in Sources */,
 				7A153C6117AA489600413D3C /* REMEnergyCalendarData.m in Sources */,
+				B42FBF6117F519F5004F2F3A /* REMWidgetCollectionViewController.m in Sources */,
 				7A153C6217AA489600413D3C /* REMEnergyData.m in Sources */,
 				7A153C6317AA489600413D3C /* REMEnergyError.m in Sources */,
 				7A153C6417AA489600413D3C /* REMEnergyTargetModel.m in Sources */,
 				7A153C6517AA489600413D3C /* REMEnergyViewData.m in Sources */,
 				7A153C6617AA489600413D3C /* REMTargetEnergyData.m in Sources */,
 				7A153C9E17AA497C00413D3C /* REMBuildingViewController.m in Sources */,
+				B46C8EC617F27D56006DC4CB /* REMDashboardController.m in Sources */,
 				7A153C9F17AA497C00413D3C /* REMDashboardLeftNavigationController.m in Sources */,
 				7A13C19517F40809007E6AA9 /* REMMainNavigationController.m in Sources */,
 				7A153CA017AA497C00413D3C /* REMDashboardMainViewController.m in Sources */,
@@ -2489,6 +2537,7 @@
 				7A153CC117AA4A5100413D3C /* REMBuildingOverallModel.m in Sources */,
 				7A2E7ECC17F2DD41000EB506 /* REMBuildingTitleView.m in Sources */,
 				7A153CC417AA4B0D00413D3C /* REMCommodityUsageModel.m in Sources */,
+				B46C8EBD17F27C84006DC4CB /* REMDashboardCellViewCell.m in Sources */,
 				7A153CC717AA4B3400413D3C /* REMCommodityModel.m in Sources */,
 				7A153CCA17AA4B5C00413D3C /* REMEnergyUsageDataModel.m in Sources */,
 				7A153CCD17AA4EDB00413D3C /* REMRankingDataModel.m in Sources */,
@@ -2528,6 +2577,7 @@
 				7A0288FA17C20CC500709111 /* PathHelper.m in Sources */,
 				7A0288FB17C20CC500709111 /* Resources.m in Sources */,
 				7A0288FC17C20CC500709111 /* URLRequestHelper.m in Sources */,
+				B46C8EBA17F27C25006DC4CB /* REMDashboardView.m in Sources */,
 				7A0288FD17C20CC500709111 /* WeiboDialogClosePNG.m in Sources */,
 				7A0288FE17C20CC500709111 /* WeiboDialog.m in Sources */,
 				7A0288FF17C20CC500709111 /* WeiboLoginDialog.m in Sources */,
@@ -2549,10 +2599,12 @@
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
 				EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */,
 				EF60822F17D818430093427C /* REMModalView.m in Sources */,
+				B46C8EC317F27CDF006DC4CB /* REMDashboardCollectionCellView.m in Sources */,
 				EF87DA8317E3003100E51262 /* REMTrendChartAxisConfig.m in Sources */,
 				EF87DA8417E3003100E51262 /* REMTrendChartColumnSeries.m in Sources */,
 				7A13C18F17F407B6007E6AA9 /* REMMainDashboardViewController.m in Sources */,
 				EF87DA8517E3003100E51262 /* REMTrendChartDataProcessor.m in Sources */,
+				B46C8EC017F27CB9006DC4CB /* REMDashboardCollectionView.m in Sources */,
 				EF87DA8617E3003100E51262 /* REMTrendChartLineSeries.m in Sources */,
 				EF87DA8717E3003100E51262 /* REMTrendChartPoint.m in Sources */,
 				EF87DA8817E3003100E51262 /* REMTrendChartSeries.m in Sources */,
@@ -2645,6 +2697,7 @@
 				6AB1F29617B8AC910065C1EB /* REMFavoriteDashboardObj.m in Sources */,
 				6AB1F29817B8AC910065C1EB /* REMWidgetContentSyntax.m in Sources */,
 				6AB1F29A17B8AC910065C1EB /* REMWidgetObject.m in Sources */,
+				B42FBF6517F574B5004F2F3A /* REMEnum.m in Sources */,
 				6AB1F29C17B8AC910065C1EB /* REMEnergyCalendarData.m in Sources */,
 				6AB1F29E17B8AC910065C1EB /* REMEnergyData.m in Sources */,
 				6AB1F2A017B8AC910065C1EB /* REMEnergyError.m in Sources */,
@@ -2751,6 +2804,7 @@
 				6AB1F31A17B8B40C0065C1EB /* REMApplicationInfo.m in Sources */,
 				6AB1F31D17B8B40C0065C1EB /* REMEnergyConstants.h in Sources */,
 				6AB1F31E17B8B40C0065C1EB /* REMEnergyConstants.m in Sources */,
+				B42FBF6617F574B5004F2F3A /* REMEnum.m in Sources */,
 				6AB1F31F17B8B40C0065C1EB /* REMApplicationContext.h in Sources */,
 				6AB1F32017B8B40C0065C1EB /* REMApplicationContext.m in Sources */,
 				6AB1F32117B8B40C0065C1EB /* REMServiceRequestOperation.h in Sources */,
@@ -2921,8 +2975,10 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\"",
+					"\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\"",
 					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
+					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
+					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2972,8 +3028,10 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\"",
+					"\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\"",
 					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
+					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
+					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3112,8 +3170,10 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\"",
+					"\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\"",
 					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
+					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
+					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3238,8 +3298,10 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\"",
+					"\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\"",
 					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
+					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
+					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

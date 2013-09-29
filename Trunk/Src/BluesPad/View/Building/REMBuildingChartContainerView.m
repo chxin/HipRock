@@ -26,8 +26,8 @@
         self.hasLoaded=NO;
         //NSLog(@"chart frame:%@",NSStringFromCGRect(frame));
         self.backgroundColor=[UIColor clearColor];
-//        self.layer.borderColor=[UIColor redColor].CGColor;
-//        self.layer.borderWidth=1;
+        self.layer.borderColor=[UIColor redColor].CGColor;
+        self.layer.borderWidth=1;
         [self initTitle:title withSize:size withLeftMargin:0];
         [self initChartViewWithSize:size];
     }

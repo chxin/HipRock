@@ -8,6 +8,8 @@
 
 #import "REMJSONObject.h"
 #import "REMTimeRange.h"
+#import "REMEnum.h"
+
 
 @interface REMWidgetContentSyntax : REMJSONObject
 
@@ -15,6 +17,9 @@
 @property (nonatomic,strong) NSDictionary *config;
 @property (nonatomic,strong) NSString *calendar;
 @property (nonatomic,strong) NSString *relativeDate;
+@property (nonatomic) REMRelativeTimeRangeType relativeDateType;
+@property (nonatomic) REMCalendarType  calendarType;
+@property (nonatomic) REMEnergyStep stepType;
 @property (nonatomic,strong) NSString *storeType;
 @property (nonatomic,strong) NSString *type;
 @property (nonatomic,strong) NSArray *timeRanges;

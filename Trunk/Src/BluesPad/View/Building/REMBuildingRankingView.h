@@ -13,9 +13,8 @@
 
 @interface REMBuildingRankingView : REMBuildingTitleView
 
+@property (nonatomic,weak) REMRankingDataModel *data;
 
-- (id)initWithFrame:(CGRect)frame
-           withData:(REMRankingDataModel *)data
-withTitle:(NSString *)title andTitleFontSize:(CGFloat)size  withTitleMargin:(CGFloat)margin withLeftMargin:(CGFloat)leftMargin;
+- (id)initWithFrame:(CGRect)frame;
 
 @end

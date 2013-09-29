@@ -9,23 +9,7 @@
 #import "REMJSONObject.h"
 #import "REMWidgetContentSyntax.h"
 #import "REMShareInfo.h"
-typedef enum _REMDiagramType
-{
-    REMDiagramTypePie,           
-    REMDiagramTypeLine,
-    REMDiagramTypeColumn,
-    REMDiagramTypeGrid
-}
-REMDiagramType;
-
-typedef enum _REMEnergyStep:NSUInteger
-{
-    REMEnergyStepHour=1,
-    REMEnergyStepDay=2,
-    REMEnergyStepWeek=5,
-    REMEnergyStepMonth=3,
-    REMEnergyStepYear=4
-} REMEnergyStep;
+#import "REMEnum.h"
 
 
 @interface REMWidgetObject : REMJSONObject

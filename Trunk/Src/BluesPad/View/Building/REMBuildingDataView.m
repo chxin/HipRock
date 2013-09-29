@@ -24,6 +24,10 @@ typedef void(^SuccessCallback)(BOOL success);
 @property (nonatomic,strong) SuccessCallback successBlock;
 @property (nonatomic) NSUInteger successCounter;
 @property (nonatomic) NSMutableDictionary *isLoadingChart;
+
+
+@property (nonatomic,weak) UILabel *dashboardLabel;
+
 @end
 @implementation REMBuildingDataView
 
@@ -32,6 +36,10 @@ typedef void(^SuccessCallback)(BOOL success);
     //NSLog(@"dataview:%@",NSStringFromCGRect(frame));
     self = [super initWithFrame:frame];
     if (self) {
+        //self.layer.borderColor=[UIColor redColor].CGColor;
+        //self.layer.borderWidth=1;
+        
+        
         self.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, kBuildingLeftMargin, 0, 0);
         [self setScrollEnabled:YES];
         self.clipsToBounds=YES;
@@ -40,9 +48,9 @@ typedef void(^SuccessCallback)(BOOL success);
         [self setContentSize:CGSizeMake(0, 1000)];
         self.buildingInfo=buildingInfo;
         self.currentCommodityId=@(0);
-        self.commodityViewDictionary=[[NSMutableDictionary alloc]initWithCapacity:self.buildingInfo.commodityUsage.count+1];
-        self.isLoadingChart=[[NSMutableDictionary alloc]initWithCapacity:self.buildingInfo.commodityUsage.count+1];
-        self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityUsage.count+1)];
+        self.commodityViewDictionary=[[NSMutableDictionary alloc]initWithCapacity:self.buildingInfo.commodityArray.count+1];
+        self.isLoadingChart=[[NSMutableDictionary alloc]initWithCapacity:self.buildingInfo.commodityArray.count+1];
+        self.successDic = [[NSMutableDictionary alloc]initWithCapacity:(self.buildingInfo.commodityArray.count+1)];
         [self initCommodityButton];
         [self initCommodityView];
     }
@@ -51,21 +59,21 @@ typedef void(^SuccessCallback)(BOOL success);
 }
 
 - (NSArray *)retrieveButtons{
-    if(self.buildingInfo.commodityUsage==nil)return @[];
-    NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:self.buildingInfo.commodityUsage.count];
+    if(self.buildingInfo.commodityArray==nil)return @[];
+    NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:self.buildingInfo.commodityArray.count];
     int i=0;
-    for (;i<self.buildingInfo.commodityUsage.count;++i) {
-        REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
+    for (;i<self.buildingInfo.commodityArray.count;++i) {
+        REMCommodityModel *model = self.buildingInfo.commodityArray[i];
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
         //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
-        btn.tag=[model.commodity.commodityId integerValue];
-        [btn setTitle:model.commodity.comment forState:UIControlStateNormal];
+        btn.tag=[model.commodityId integerValue];
+        [btn setTitle:model.comment forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
         btn.titleLabel.textColor=[UIColor whiteColor];
         
         [btn.titleLabel setFont:[UIFont fontWithName:@(kBuildingFontSCRegular) size:12]];
-        NSString *str = [self retrieveCommodityImageName:model.commodity];
+        NSString *str = [self retrieveCommodityImageName:model];
         btn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentCenter;
         btn.showsTouchWhenHighlighted=YES;
         btn.adjustsImageWhenHighlighted=YES;
@@ -77,14 +85,7 @@ typedef void(^SuccessCallback)(BOOL success);
         if(i==0){
             [btn setSelected:YES];
         }
-        //btn.layer.borderColor=[UIColor whiteColor].CGColor;
-        //btn.layer.borderWidth=1;
-        /*
-        btn.layer.shadowColor = [UIColor blackColor].CGColor;
-        btn.layer.shadowOpacity = 1;
-        btn.layer.shadowRadius = 2;
-        btn.layer.shadowOffset = CGSizeMake(3.0f,3.0f);
-        */
+        
         [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [array addObject:btn];
         
@@ -157,6 +158,8 @@ typedef void(^SuccessCallback)(BOOL success);
     [self addSubview:view];
 
 }
+
+
 
 
 - (NSString *)retrieveCommodityImageName:(REMCommodityModel *)model
@@ -240,23 +243,25 @@ typedef void(^SuccessCallback)(BOOL success);
     view.alpha=1;
     REMBuildingCommodityView *currentView= self.commodityViewDictionary[@(current)];
     currentView.alpha=0;
-    
-    [self requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:^(BOOL success){
-        if(success==YES){
-            [self.shareButton setEnabled:YES];
-        }
-    }];
+    if(self.isUpScroll==YES){
+        [self requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:^(BOOL success){
+            if(success==YES){
+                [self.shareButton setEnabled:YES];
+            }
+        }];
+    }
 }
 
 - (void)initCommodityById:(NSNumber *)commodityId{
     int height=800;
-    for (int i=0;i<self.buildingInfo.commodityUsage.count;++i ) {
-        REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
-        if([model.commodity.commodityId isEqualToNumber:commodityId]==YES){
-            REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withCommodityInfo:model];
+    for (int i=0;i<self.buildingInfo.commodityArray.count;++i ) {
+        REMCommodityModel *model = self.buildingInfo.commodityArray[i];
+        if([model.commodityId isEqualToNumber:commodityId]==YES){
+            REMBuildingCommodityView *view = [[REMBuildingCommodityView alloc]initWithFrame:CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.frame.size.width, height) withCommodity:model withBuildingInfo:self.buildingInfo];
            
             [self addSubview:view];
-            [self.commodityViewDictionary setObject:view forKey:model.commodity.commodityId];
+            [self.commodityViewDictionary setObject:view forKey:model.commodityId];
+            [view loadTotalUsageByBuildingId:self.buildingInfo.building.buildingId ByCommodityId:model.commodityId];
         }
     }
     
@@ -271,14 +276,14 @@ typedef void(^SuccessCallback)(BOOL success);
 - (void)initCommodityView
 {
     int count=0;
-    if (self.buildingInfo.commodityUsage!=nil) {
-        count=self.buildingInfo.commodityUsage.count;
+    if (self.buildingInfo.commodityArray!=nil) {
+        count=self.buildingInfo.commodityArray.count;
     }
     
     if(count>0){
-        REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[0];
-        [self initCommodityById:model.commodity.commodityId];
-        self.currentCommodityId=model.commodity.commodityId;
+        REMCommodityModel *model = self.buildingInfo.commodityArray[0];
+        [self initCommodityById:model.commodityId];
+        self.currentCommodityId=model.commodityId;
     }
     else{
         if(self.buildingInfo.airQuality!=nil){
@@ -288,6 +293,35 @@ typedef void(^SuccessCallback)(BOOL success);
         }
     }
     
+    [self initDragLabel];
+    
+}
+
+
+- (void)initDragLabel
+{
+    CGRect frame = CGRectMake(0, 960, 500, 20);
+    
+    UILabel *label =[[UILabel alloc]initWithFrame:frame];
+    
+    label.text=@"￼上拉查看更多能耗信息";
+    
+    
+    
+    label.textColor=[UIColor whiteColor];
+    label.backgroundColor=[UIColor clearColor];
+    [self addSubview:label];
+    
+    self.dashboardLabel=label;
+}
+
+- (void)showDashboardLabel:(BOOL)overThreshold{
+    if(overThreshold==YES){
+        self.dashboardLabel.text=@"松开以显示";
+    }
+    else{
+        self.dashboardLabel.text=@"￼上拉查看更多能耗信息";
+    }
 }
 
 - (void)sucessRequest{
