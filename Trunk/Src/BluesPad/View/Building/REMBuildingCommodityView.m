@@ -257,8 +257,8 @@ typedef void(^SuccessCallback)(BOOL success);
     [self addSubview:view];
     
     int marginTop1=marginTop+chartContainerHeight+kBuildingCommodityBottomMargin;
-    
-    REMBuildingChartContainerView *view1 = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingChartWidth, chartContainerHeight) withTitle:[NSString stringWithFormat:@"用%@趋势图",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
+    CGFloat secondChartHeight=chartContainerHeight+43;
+    REMBuildingChartContainerView *view1 = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingChartWidth, secondChartHeight) withTitle:[NSString stringWithFormat:@"用%@趋势图",self.commodityInfo.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
     
     [self addSubview:view1];
     
