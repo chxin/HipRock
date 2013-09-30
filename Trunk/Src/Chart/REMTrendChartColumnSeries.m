@@ -10,13 +10,7 @@
 
 @implementation REMTrendChartColumnSeries
 
-- (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
-{
-    REMTrendChartPoint* point = [self.points objectAtIndex:idx];
-    if (fieldEnum == CPTBarPlotFieldBarLocation) {
-        return [NSNumber numberWithFloat:point.x];
-    } else {
-        return point.y;
-    }
+-(int)getXAxisField {
+    return CPTBarPlotFieldBarLocation;
 }
 @end
