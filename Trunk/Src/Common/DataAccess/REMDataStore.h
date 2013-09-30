@@ -17,8 +17,14 @@ typedef enum _REMDataStoreType
     REMDSUserValidate,
     
     /**
+     * Customer
+     */
+    REMDSCustomerLogo,
+    
+    /**
      *	Building
      */
+    
     REMDSBuildingInfo,
     REMDSBuildingCommodityTotalUsage,
     REMDSBuildingOverallData,

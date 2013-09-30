@@ -16,4 +16,10 @@
 
 + (UIImage *)blurImage2:(UIImage *)origImage;
 
++ (UIImage *)parseImageFromNSData:(NSData *)data;
+
++ (void)writeImageFile:(UIImage *)image withFileName:(NSString *)fileName;
+
++ (UIImage *)readImageFile:(NSString *)fileName;
+
 @end

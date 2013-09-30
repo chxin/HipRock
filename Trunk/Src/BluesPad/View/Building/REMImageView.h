@@ -30,6 +30,7 @@
 
 @property (nonatomic,weak) REMBuildingViewController *controller;
 
+
 - (void)moveOutOfWindow;
 
 -(void)prepareShare;

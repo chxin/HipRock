@@ -125,10 +125,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"buildingSettingSegue2"]==YES){
-        UINavigationController *c=  segue.destinationViewController;
-        REMBuildingSettingViewController *vc= [c.childViewControllers lastObject];
-        vc.splashScreenController=self.splashScreenController;
-        vc.navigationController=self.navigationController;
+        //UINavigationController *c=  segue.destinationViewController;
+        //REMBuildingSettingViewController *vc= [c.childViewControllers lastObject];
+        //vc.splashScreenController=self.splashScreenController;
+        //vc.navigationController=self.navigationController;
     }
     if([segue.identifier isEqualToString:@"buildingToMapSegue"]==YES){
         REMMapViewController *mapController = segue.destinationViewController;
@@ -206,7 +206,7 @@
         data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
         [energyDataArray addObject:data];
     }
-    REMLineWidget* lineWidget = [[REMLineWidget alloc]initWithFrame:CGRectMake(0, 0, 800, 400) data:energyViewData widgetContext:syntax];
+//    REMLineWidget* lineWidget = [[REMLineWidget alloc]initWithFrame:CGRectMake(0, 0, 800, 400) data:energyViewData widgetContext:syntax];
     
     
     
@@ -223,7 +223,7 @@
 //    
 //    REMTrendChartView* testV = [[REMTrendChartView alloc]initWithFrame:CGRectMake(0, 0, 800, 400) chartConfig:chartConfig];
 //    [self.view addSubview:lineWidget.view];
-    [lineWidget destroyView];
+//    [lineWidget destroyView];
 }
 
 

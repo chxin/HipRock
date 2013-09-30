@@ -477,6 +477,11 @@
 		B46C8EC317F27CDF006DC4CB /* REMDashboardCollectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EC217F27CDF006DC4CB /* REMDashboardCollectionCellView.m */; };
 		B46C8EC617F27D56006DC4CB /* REMDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EC517F27D56006DC4CB /* REMDashboardController.m */; };
 		B47422E617C45BCF0021B76C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
+		B47ACC2617F8010A00989B2C /* leftarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = B47ACC2517F8010A00989B2C /* leftarrow.png */; };
+		B47ACC2A17F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC2917F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m */; };
+		B47ACC2D17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC2C17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m */; };
+		B47ACC3017F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC2F17F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m */; };
+		B47ACC3317F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC3217F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m */; };
 		B48BB8B917EFEE43004DBE5D /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B48BB8B817EFEE43004DBE5D /* WeiboBana.jpg */; };
 		B48CC9901783297900AAD5D4 /* REMWidgetStepToolbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC98F1783297900AAD5D4 /* REMWidgetStepToolbarView.m */; };
 		B48CC99317832EAE00AAD5D4 /* REMWidgetMaxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48CC99217832EAE00AAD5D4 /* REMWidgetMaxView.m */; };
@@ -497,6 +502,7 @@
 		B4A0FCDB17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m */; };
 		B4B61D7617C742E000245F1E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B61D7517C742E000245F1E /* CoreText.framework */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
+		B4DC084017F90E2C005658C1 /* REMAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */; };
 		B4F4B99E17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
 		B4F4B99F17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
 		B4F4B9A017F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
@@ -512,6 +518,7 @@
 		EF87DA8817E3003100E51262 /* REMTrendChartSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EF87DA8117E3003100E51262 /* REMTrendChartSeries.m */; };
 		EF87DA8917E3003100E51262 /* REMTrendChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF87DA8217E3003100E51262 /* REMTrendChartView.m */; };
 		EF87DA8C17E30F8F00E51262 /* REMTrendChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EF87DA8B17E30F8F00E51262 /* REMTrendChartConfig.m */; };
+		EF8A47DC17F909F0009B5C33 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8A47DB17F909F0009B5C33 /* GoogleMaps.framework */; };
 		EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */; };
 		EF96300617C610A200BBC7DA /* REMBuildingSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */; };
 		EF97879617C70B440062BE0E /* REMBuildingSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */; };
@@ -521,7 +528,6 @@
 		EFD6041E17F5778D0080CE89 /* REMColumnWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD6041D17F5778D0080CE89 /* REMColumnWidget.m */; };
 		EFD6042117F57A4F0080CE89 /* REMTrendWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD6042017F57A4F0080CE89 /* REMTrendWidget.m */; };
 		EFD6042417F57B800080CE89 /* REMLineWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD6042317F57B800080CE89 /* REMLineWidget.m */; };
-		EFD93A7C17F82AC7007E5675 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFD93A7B17F82AC7007E5675 /* GoogleMaps.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1044,6 +1050,15 @@
 		B46C8EC217F27CDF006DC4CB /* REMDashboardCollectionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardCollectionCellView.m; path = View/Dashboard/REMDashboardCollectionCellView.m; sourceTree = "<group>"; };
 		B46C8EC417F27D56006DC4CB /* REMDashboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMDashboardController.h; sourceTree = "<group>"; };
 		B46C8EC517F27D56006DC4CB /* REMDashboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMDashboardController.m; sourceTree = "<group>"; };
+		B47ACC2517F8010A00989B2C /* leftarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftarrow.png; sourceTree = "<group>"; };
+		B47ACC2817F80AAA00989B2C /* REMSettingCustomerSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerSelectionViewController.h; path = Controller/Setting/REMSettingCustomerSelectionViewController.h; sourceTree = "<group>"; };
+		B47ACC2917F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSettingCustomerSelectionViewController.m; path = Controller/Setting/REMSettingCustomerSelectionViewController.m; sourceTree = "<group>"; };
+		B47ACC2B17F80ACE00989B2C /* REMSettingCustomerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerDetailViewController.h; path = Controller/Setting/REMSettingCustomerDetailViewController.h; sourceTree = "<group>"; };
+		B47ACC2C17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSettingCustomerDetailViewController.m; path = Controller/Setting/REMSettingCustomerDetailViewController.m; sourceTree = "<group>"; };
+		B47ACC2E17F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerDetailLogoViewController.h; path = Controller/Setting/REMSettingCustomerDetailLogoViewController.h; sourceTree = "<group>"; };
+		B47ACC2F17F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSettingCustomerDetailLogoViewController.m; path = Controller/Setting/REMSettingCustomerDetailLogoViewController.m; sourceTree = "<group>"; };
+		B47ACC3117F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerDetailAdminViewController.h; path = Controller/Setting/REMSettingCustomerDetailAdminViewController.h; sourceTree = "<group>"; };
+		B47ACC3217F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSettingCustomerDetailAdminViewController.m; path = Controller/Setting/REMSettingCustomerDetailAdminViewController.m; sourceTree = "<group>"; };
 		B48BB8B817EFEE43004DBE5D /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
 		B48CC98E1783297900AAD5D4 /* REMWidgetStepToolbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetStepToolbarView.h; path = View/REMWidgetStepToolbarView.h; sourceTree = "<group>"; };
 		B48CC98F1783297900AAD5D4 /* REMWidgetStepToolbarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetStepToolbarView.m; path = View/REMWidgetStepToolbarView.m; sourceTree = "<group>"; };
@@ -1074,6 +1089,8 @@
 		B4B61D7517C742E000245F1E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		B4CD146017B3439600807B5F /* BluesPad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluesPad.entitlements; sourceTree = "<group>"; };
+		B4DC083E17F90E2C005658C1 /* REMAdministratorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAdministratorModel.h; path = Common/Model/REMAdministratorModel.h; sourceTree = "<group>"; };
+		B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAdministratorModel.m; path = Common/Model/REMAdministratorModel.m; sourceTree = "<group>"; };
 		B4F4B99C17F16F590096034D /* REMShareInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMShareInfo.h; sourceTree = "<group>"; };
 		B4F4B99D17F16F590096034D /* REMShareInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMShareInfo.m; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
@@ -1092,6 +1109,7 @@
 		EF87DA8117E3003100E51262 /* REMTrendChartSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartSeries.m; sourceTree = "<group>"; };
 		EF87DA8217E3003100E51262 /* REMTrendChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartView.m; sourceTree = "<group>"; };
 		EF87DA8B17E30F8F00E51262 /* REMTrendChartConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartConfig.m; sourceTree = "<group>"; };
+		EF8A47DB17F909F0009B5C33 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = ../Lib/GoogleMaps.framework; sourceTree = "<group>"; };
 		EF8F1D7717C2FE5400D3E29F /* REMToggleButtonGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButtonGroup.h; sourceTree = "<group>"; };
 		EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButtonGroup.m; sourceTree = "<group>"; };
 		EF96300417C610A100BBC7DA /* REMBuildingSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingSettingViewController.h; sourceTree = "<group>"; };
@@ -1110,7 +1128,6 @@
 		EFD6042017F57A4F0080CE89 /* REMTrendWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTrendWidget.m; path = View/Widget/REMTrendWidget.m; sourceTree = "<group>"; };
 		EFD6042217F57B800080CE89 /* REMLineWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLineWidget.h; path = View/Widget/REMLineWidget.h; sourceTree = "<group>"; };
 		EFD6042317F57B800080CE89 /* REMLineWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLineWidget.m; path = View/Widget/REMLineWidget.m; sourceTree = "<group>"; };
-		EFD93A7B17F82AC7007E5675 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = ../Lib/GoogleMaps.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1133,7 +1150,7 @@
 				B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */,
 				EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */,
 				38ED7D1F1785140900219469 /* libsqlite3.dylib in Frameworks */,
-				EFD93A7C17F82AC7007E5675 /* GoogleMaps.framework in Frameworks */,
+				EF8A47DC17F909F0009B5C33 /* GoogleMaps.framework in Frameworks */,
 				7AB34E4C177D2975003E235E /* MobileCoreServices.framework in Frameworks */,
 				7A9B1E20177B3A8B00C282A8 /* UIKit.framework in Frameworks */,
 				7A9B1E22177B3A8B00C282A8 /* Foundation.framework in Frameworks */,
@@ -1496,6 +1513,8 @@
 				7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */,
 				B42FBF6217F574B5004F2F3A /* REMEnum.h */,
 				B42FBF6317F574B5004F2F3A /* REMEnum.m */,
+				B4DC083E17F90E2C005658C1 /* REMAdministratorModel.h */,
+				B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1748,6 +1767,7 @@
 		7A5E2D9A177B41DA000F77F9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B47ACC2717F80A4700989B2C /* Setting */,
 				7A2E7EBE17F2DC7F000EB506 /* Map */,
 				7A153C8217AA497C00413D3C /* Splash */,
 				7A153C7517AA497B00413D3C /* Login */,
@@ -1796,7 +1816,7 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EFD93A7B17F82AC7007E5675 /* GoogleMaps.framework */,
+				EF8A47DB17F909F0009B5C33 /* GoogleMaps.framework */,
 				7A13C1AA17F40D99007E6AA9 /* libz.dylib */,
 				7A13C1A817F40D90007E6AA9 /* libicucore.dylib */,
 				7A13C1A617F40D83007E6AA9 /* libc++.dylib */,
@@ -2037,6 +2057,7 @@
 		7ACFCBA217CDA62E00811976 /* Building */ = {
 			isa = PBXGroup;
 			children = (
+				B47ACC2517F8010A00989B2C /* leftarrow.png */,
 				B42C338A17E19064008289D2 /* DefaultBuilding.png */,
 				B42C338817E18E63008289D2 /* DefaultBuilding@2x.png */,
 				7ACFCBA317CDA62E00811976 /* commodity */,
@@ -2238,6 +2259,21 @@
 			name = Dashboard;
 			sourceTree = "<group>";
 		};
+		B47ACC2717F80A4700989B2C /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				B47ACC2817F80AAA00989B2C /* REMSettingCustomerSelectionViewController.h */,
+				B47ACC2917F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m */,
+				B47ACC2B17F80ACE00989B2C /* REMSettingCustomerDetailViewController.h */,
+				B47ACC2C17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m */,
+				B47ACC2E17F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.h */,
+				B47ACC2F17F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m */,
+				B47ACC3117F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.h */,
+				B47ACC3217F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
 		B49B6F421781228200BC130A /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2435,6 +2471,7 @@
 				7A48B49017CDFA38002DA386 /* Propaganda_1@2x.jpg in Resources */,
 				7A48B49117CDFA38002DA386 /* Propaganda_2.jpg in Resources */,
 				7A48B49217CDFA38002DA386 /* Propaganda_2@2x.jpg in Resources */,
+				B47ACC2617F8010A00989B2C /* leftarrow.png in Resources */,
 				7A48B49317CDFA38002DA386 /* Propaganda_3.jpg in Resources */,
 				7A48B49417CDFA38002DA386 /* Propaganda_3@2x.jpg in Resources */,
 				B45F8A5717D5B0340079C74D /* Oil_pressed.png in Resources */,
@@ -2555,6 +2592,7 @@
 				B49B6F4817812E6B00BC130A /* REMWidgetCell.m in Sources */,
 				B49B6F511781491800BC130A /* REMColor.m in Sources */,
 				B48CC9901783297900AAD5D4 /* REMWidgetStepToolbarView.m in Sources */,
+				B47ACC2D17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m in Sources */,
 				B48CC99317832EAE00AAD5D4 /* REMWidgetMaxView.m in Sources */,
 				B4198EAE178410D300B50475 /* REMLogManager.m in Sources */,
 				B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */,
@@ -2563,6 +2601,7 @@
 				38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */,
 				7A1D14291785178800CC2922 /* REMNetworkHelper.m in Sources */,
 				7A2E7ECD17F2DD41000EB506 /* REMImageView.m in Sources */,
+				B47ACC2A17F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m in Sources */,
 				7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */,
 				7A3DDCDA1786C05B008A1033 /* REMServiceAgent.m in Sources */,
 				7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */,
@@ -2572,6 +2611,7 @@
 				7A095E73179571C80098DB16 /* REMWidgetAxisHelper.m in Sources */,
 				B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */,
 				7A1D7C3717A6155D0050779D /* REMApplicationContext.m in Sources */,
+				B47ACC3017F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m in Sources */,
 				7A1D7C3C17A637510050779D /* REMUserModel.m in Sources */,
 				7A1D7C3F17A637630050779D /* REMCustomerModel.m in Sources */,
 				7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */,
@@ -2592,6 +2632,7 @@
 				7A153C6517AA489600413D3C /* REMEnergyViewData.m in Sources */,
 				7A153C6617AA489600413D3C /* REMTargetEnergyData.m in Sources */,
 				7A153C9E17AA497C00413D3C /* REMBuildingViewController.m in Sources */,
+				B47ACC3317F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m in Sources */,
 				B46C8EC617F27D56006DC4CB /* REMDashboardController.m in Sources */,
 				7A153C9F17AA497C00413D3C /* REMDashboardLeftNavigationController.m in Sources */,
 				7A13C19517F40809007E6AA9 /* REMMainNavigationController.m in Sources */,
@@ -2606,6 +2647,7 @@
 				7A153CAB17AA497C00413D3C /* REMChartLegendTableViewController.m in Sources */,
 				7A153CAC17AA497C00413D3C /* REMWidgetCellColumnViewController.m in Sources */,
 				7A153CAD17AA497C00413D3C /* REMWidgetCellLineViewController.m in Sources */,
+				B4DC084017F90E2C005658C1 /* REMAdministratorModel.m in Sources */,
 				7A153CAE17AA497C00413D3C /* REMWidgetCellPieViewController.m in Sources */,
 				7A153CAF17AA497C00413D3C /* REMWidgetCellViewController.m in Sources */,
 				7A153CB017AA497C00413D3C /* REMWidgetMaxColumnViewController.m in Sources */,
@@ -3060,12 +3102,13 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
 					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
 					/Users/zilong/Documents/Blues/Blues/Trunk/Src,
 					/Users/zilong/Documents/Blues/Blues/Trunk/Lib,
+					/Users/zilong/Documents/Blues/Blues/Blues/Trunk/Lib,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3115,12 +3158,13 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
 					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
 					/Users/zilong/Documents/Blues/Blues/Trunk/Src,
 					/Users/zilong/Documents/Blues/Blues/Trunk/Lib,
+					/Users/zilong/Documents/Blues/Blues/Blues/Trunk/Lib,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3259,12 +3303,13 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
 					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
 					/Users/zilong/Documents/Blues/Blues/Trunk/Src,
 					/Users/zilong/Documents/Blues/Blues/Trunk/Lib,
+					/Users/zilong/Documents/Blues/Blues/Blues/Trunk/Lib,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3389,12 +3434,13 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
 					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
 					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
 					/Users/zilong/Documents/Blues/Blues/Trunk/Src,
 					/Users/zilong/Documents/Blues/Blues/Trunk/Lib,
+					/Users/zilong/Documents/Blues/Blues/Blues/Trunk/Lib,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
