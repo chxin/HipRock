@@ -162,7 +162,10 @@
         [REMDataAccessor access:logoStore success:^(id data) {
             if(data == nil || [data length] == 2) return;
             UIImage *view = [REMImageHelper parseImageFromNSData:data];
-            self.customerLogoImage=view;
+            
+            [REMApplicationContext instance].currentCustomerLogo=view;
+            
+      
             
             
             

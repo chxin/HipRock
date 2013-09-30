@@ -18,6 +18,5 @@
 - (void)showLoginView:(BOOL)isAnimated;
 
 
-@property (nonatomic,strong) UIImage *customerLogoImage;
 
 @end

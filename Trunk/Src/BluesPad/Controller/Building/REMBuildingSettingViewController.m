@@ -33,6 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController=(UINavigationController *)self.parentViewController;
     //UITableView* myView = (UITableView*)self.view;
     //[myView  registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
     //[myView  registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell1"];
@@ -265,6 +266,9 @@
     if(indexPath.section == 3 && indexPath.row==0){
         [self logout];
         
+    }
+    else if(indexPath.section==1 && indexPath.row==1){
+        [self performSegueWithIdentifier:@"settingCustomerDetailSegue" sender:self];
     }
     
     

@@ -113,7 +113,6 @@
     {
         REMBuildingViewController *buildingViewController = segue.destinationViewController;
         buildingViewController.buildingOverallArray = self.buildingInfoArray;
-        buildingViewController.logoImage=self.splashScreenController.customerLogoImage;
         buildingViewController.splashScreenController = self.splashScreenController;
     }
 }

@@ -7,7 +7,7 @@
 //
 
 #import "REMSettingCustomerDetailLogoViewController.h"
-
+#import "REMApplicationContext.h"
 @interface REMSettingCustomerDetailLogoViewController ()
 
 @end
@@ -27,7 +27,34 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.logoImageVIew.image=[REMApplicationContext instance].currentCustomerLogo;
+    
 }
+/*
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString* cellId=@"logoCell";
+    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellId];
+    if(cell==nil){
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+    }
+    
+    
+    
+    return cell;
+    
+}
+*/
+
 
 - (void)didReceiveMemoryWarning
 {

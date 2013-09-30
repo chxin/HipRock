@@ -10,4 +10,6 @@
 
 @interface REMSettingCustomerDetailAdminViewController : UITableViewController
 
+@property (nonatomic,weak) NSArray *administratorArray;
+
 @end

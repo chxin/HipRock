@@ -7,6 +7,9 @@
 //
 
 #import "REMSettingCustomerDetailAdminViewController.h"
+#import "REMApplicationContext.h"
+#import "REMAdministratorModel.h"
+#import "REMCustomerModel.h"
 
 @interface REMSettingCustomerDetailAdminViewController ()
 
@@ -44,16 +47,15 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [REMApplicationContext instance].currentCustomer.administratorArray.count;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -61,8 +63,11 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
-    
+    if(cell==nil){
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    REMAdministratorModel *model=[REMApplicationContext instance].currentCustomer.administratorArray[indexPath.row];
+    cell.textLabel.text=model.realName;
     return cell;
 }
 

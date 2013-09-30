@@ -581,7 +581,7 @@
     
     self.logoButton=[[UIButton alloc]initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, kBuildingTitleTop, 140, 30)];
     
-    [self.logoButton setBackgroundImage:self.controller.logoImage forState:UIControlStateNormal];
+    [self.logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
     
     self.logoButton.titleLabel.text=@"logo";
     

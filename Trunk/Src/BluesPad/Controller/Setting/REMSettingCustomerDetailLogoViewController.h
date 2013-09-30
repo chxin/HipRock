@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface REMSettingCustomerDetailLogoViewController : UITableViewController
+@interface REMSettingCustomerDetailLogoViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageVIew;
 
 @end

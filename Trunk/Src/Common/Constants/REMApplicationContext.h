@@ -14,6 +14,7 @@
 
 @property (nonatomic,strong) REMUserModel *currentUser;
 @property (nonatomic,strong) REMCustomerModel *currentCustomer;
+@property (nonatomic,strong) UIImage *currentCustomerLogo;
 
 + (REMApplicationContext *)instance;
 

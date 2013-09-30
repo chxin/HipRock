@@ -309,4 +309,17 @@
     return inflatedImage;
 }
 
++ (void)writeImageFile:(UIImage *)image withFileName:(NSString *)fileName{
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    
+    NSData * binaryImageData = UIImagePNGRepresentation(image);
+    
+    [binaryImageData writeToFile:[basePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]] atomically:YES];
+}
+
++ (UIImage *)readImageFile:(NSString *)fileName{
+    return  nil;
+}
+
 @end
