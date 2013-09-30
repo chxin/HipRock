@@ -192,15 +192,19 @@
     currentSourceIndex = [self getSourceIndex:timeRange];
     
     NSArray* seriesArray = [[self.datasource objectAtIndex:currentSourceIndex] objectForKey:@"seriesArray"];
-    if (seriesArray.count == 0) {
+    int pointCount = 0;
+    for (int i = 0; i < seriesArray.count; i++) pointCount+=((NSArray*)[[seriesArray objectAtIndex:i] objectForKey:@"data"]).count;
+    if (pointCount == 0) {
         myView.hostView.hidden = YES;
         myView.noDataLabel.hidden = NO;
+        myView.legendView.hidden = YES;
         //[self drawNoDataLabel];
         return;
     }
     
     myView.hostView.hidden = NO;
     myView.noDataLabel.hidden = YES;
+    myView.legendView.hidden = NO;
     NSString* dateFormat = nil;
     int amountOfY = 5;
     double maxY = INT64_MIN;    // Max y value of display points
