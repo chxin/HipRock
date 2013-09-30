@@ -356,7 +356,7 @@
         legendLeft = legendLeft + benchmarkWidth + labelDistance;
         if (legendLeft > myView.legendView.bounds.size.width) {
             legendLeft = 57;
-            legendTop += 14;
+            legendTop += 14*2;
         }
         REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:legendText andColor:color.uiColor];
         [myView.legendView addSubview:benchmarkIndicator];
@@ -493,7 +493,8 @@
         NSMutableDictionary* timeIntervalData = (NSMutableDictionary*) [self.datasource objectAtIndex:index];
         
         NSMutableArray* seriesArray = [[NSMutableArray alloc]init];
-        for (int sIndex = 0; sIndex < dataItem.timeRangeData.targetEnergyData.count; sIndex++) {
+        int seriesCount = MIN(10, dataItem.timeRangeData.targetEnergyData.count);
+        for (int sIndex = 0; sIndex < seriesCount; sIndex++) {
             NSMutableDictionary* series = [[NSMutableDictionary alloc]init];
             [series setValue:[self getSeriesColorByIndex:sIndex] forKey:@"color"];
             NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:dataItem.timeRangeData.targetEnergyData.count];
