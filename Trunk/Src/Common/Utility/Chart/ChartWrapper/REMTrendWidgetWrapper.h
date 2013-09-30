@@ -6,8 +6,8 @@
 //
 //
 
-#import "REMAbstractWidget.h"
+#import "REMAbstractChartWrapper.h"
 
-@interface REMTrendWidget : REMAbstractWidget
+@interface REMTrendWidget : REMAbstractChartWrapper
 
 @end

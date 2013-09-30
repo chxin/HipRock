@@ -6,7 +6,7 @@
 //
 //
 
-#import "REMColumnWidget.h"
+#import "REMColumnWidgetWrapper.h"
 
 @implementation REMColumnWidget
 -(REMTrendChartSeries*) getSeriesConfigByData:(NSArray*)energyData step:(REMEnergyStep)step seriesIndex:(int)seriesIndex {

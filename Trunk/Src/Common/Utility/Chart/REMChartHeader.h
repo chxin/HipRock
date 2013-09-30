@@ -1,5 +1,5 @@
 //
-//  REMTrendChart.h
+//  REMChartHeader.h
 //  Blues
 //
 //  Created by Zilong-Oscar.Xu on 9/12/13.

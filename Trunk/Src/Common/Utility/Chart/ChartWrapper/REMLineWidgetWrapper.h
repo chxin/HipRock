@@ -6,7 +6,7 @@
 //
 //
 
-#import "REMTrendWidget.h"
+#import "REMTrendWidgetWrapper.h"
 
 @interface REMLineWidget : REMTrendWidget
 

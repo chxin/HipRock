@@ -7,9 +7,9 @@
 //
 
 #import "REMDashboardCellViewCell.h"
-#import "REMTrendChart.h"
+#import "REMChartHeader.h"
 #import "REMEnergyViewData.h"
-#import "REMLineWidget.h"
+#import "REMLineWidgetWrapper.h"
 
 @interface REMDashboardCellViewCell()
 

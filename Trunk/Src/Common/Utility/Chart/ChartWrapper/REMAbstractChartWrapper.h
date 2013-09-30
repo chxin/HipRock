@@ -1,5 +1,5 @@
 //
-//  REMWidgetAbstractView.h
+//  REMAbstractChartWrapper.h
 //  Blues
 //
 //  Created by Zilong-Oscar.Xu on 9/27/13.
@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "REMTrendChart.h"
+#import "REMChartHeader.h"
 #import "REMEnergyViewData.h"
 #import "REMWidgetContentSyntax.h"
 
-@interface REMAbstractWidget : NSObject
+@interface REMAbstractChartWrapper : NSObject
 
--(REMAbstractWidget*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax;
+-(REMAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax;
 -(void)destroyView;
 
 @property (nonatomic, readonly) UIView* view;

@@ -8,8 +8,7 @@
 
 #import "REMBuildingTrendChart.h"
 #import "REMToggleButtonGroup.h"
-#import "REMTrendChart.h"
-#import "REMLineWidget.h"
+#import "REMChartHeader.h"
 
 @implementation REMBuildingTrendChart
 

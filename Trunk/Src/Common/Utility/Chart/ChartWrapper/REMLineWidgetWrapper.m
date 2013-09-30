@@ -6,7 +6,7 @@
 //
 //
 
-#import "REMLineWidget.h"
+#import "REMLineWidgetWrapper.h"
 
 @implementation REMLineWidget
 

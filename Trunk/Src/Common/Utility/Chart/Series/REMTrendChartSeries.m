@@ -6,7 +6,7 @@
 //
 //
 
-#import "REMTrendChart.h"
+#import "REMChartHeader.h"
 
 @implementation REMTrendChartSeries
 -(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step {

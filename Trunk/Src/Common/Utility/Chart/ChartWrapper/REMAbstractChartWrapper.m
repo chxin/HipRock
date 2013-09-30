@@ -1,15 +1,15 @@
 //
-//  REMWidgetAbstractView.m
+//  REMAbstractChartWrapper.m
 //  Blues
 //
 //  Created by Zilong-Oscar.Xu on 9/27/13.
 //
 //
 
-#import "REMAbstractWidget.h"
+#import "REMAbstractChartWrapper.h"
 
-@implementation REMAbstractWidget
--(REMAbstractWidget*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {
+@implementation REMAbstractChartWrapper
+-(REMAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {
     self = [super init];
     if (self) {
         _energyViewData = energyViewData;

@@ -6,7 +6,7 @@
 //
 //
 
-#import "REMTrendChart.h"
+#import "REMChartHeader.h"
 
 @interface REMXFormatter : NSFormatter
 -(REMXFormatter*)initWithStartDate:(NSDate*)startDate dataStep:(REMEnergyStep)step interval:(int)interval;
