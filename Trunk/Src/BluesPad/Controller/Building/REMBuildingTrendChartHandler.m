@@ -409,73 +409,42 @@
 }
 
 -(CPTColor*)getSeriesColorByIndex:(int)index {
-    int r = 0;
-    int g = 0;
-    int b = 0;
-    float alpha = 0;
+    NSString *color= @"#ffffff";
     switch (index) {
-        case 0: //#FFFFFF
-            r = g = b = 255;
-            alpha = 0.9;
+        case 0:
+            color = @"#ffffff";
             break;
-        case 1: // #FF5600
-            r = 255;
-            g = 86;
-            b = 0;
-            alpha = 0.9;
+        case 1:
+            color = @"#30a0d4";
             break;
-        case 2: // #FF3000
-            r = 255;
-            g = 48;
-            b = 0;
-            alpha = 0.9;
+        case 2:
+            color = @"#9ac350";
             break;
-        case 3: // #FF9900
-            r = 255;
-            g = 153;
-            b = 0;
-            alpha = 0.9;
+        case 3:
+            color = @"#9d6ba4";
             break;
-        case 4: // #A9FF00
-            r = 169;
-            g = 255;
-            b = 0;
-            alpha = 0.8;
+        case 4:
+            color = @"#aa9465";
             break;
-        case 5: // #00FFA2
-            r = 0;
-            g = 255;
-            b = 162;
-            alpha = 0.7;
+        case 5:
+            color = @"#74939b";
             break;
-        case 6: // #00CAFF
-            r = 0;
-            g = 202;
-            b = 255;
-            alpha = 0.8;
+        case 6:
+            color = @"#b9686e";
             break;
-        case 7: // #00CAFF
-            r = 0;
-            g = 99;
-            b = 255;
-            alpha = 0.9;
+        case 7:
+            color = @"#6887c5";
             break;
-        case 8: // #00CAFF
-            r = 24;
-            g = 0;
-            b = 255;
-            alpha = 0.95;
+        case 8:
+            color = @"#8aa386";
             break;
-        case 9: // #00CAFF
-            r = 138;
-            g = 0;
-            b = 255;
-            alpha = 0.8;
+        case 9:
+            color = @"#b93d95";
             break;
         default:
             break;
     }
-    return [CPTColor colorWithComponentRed:r green:g blue:b alpha:alpha];
+    return [CPTColor colorWithCGColor:[REMColor colorByHexString:color alpha:0.8].CGColor];
 }
 
 - (void)loadDataSuccessWithData:(id)data

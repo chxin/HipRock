@@ -64,11 +64,14 @@ static CGFloat fontSize = 14;
         self.label = nil;
     }
     
-    CGFloat labelOffset = pointWidth+pointLabelSpace, labelWidth = self.bounds.size.width-labelOffset, labelHeight=self.bounds.size.height;
-    self.label = [[UILabel alloc] initWithFrame:CGRectMake(labelOffset, 0, labelWidth, labelHeight)];
+    CGFloat labelOffset = pointWidth+pointLabelSpace;
+    UIFont* font = [UIFont systemFontOfSize:fontSize];
+    CGSize labelSize = [self.title sizeWithFont:font];
+    
+    self.label = [[UILabel alloc] initWithFrame:CGRectMake(labelOffset, 0, labelSize.width, labelSize.height)];
     self.label.text = self.title;
     self.label.textColor = [UIColor whiteColor];
-    self.label.font = [UIFont systemFontOfSize:fontSize];
+    self.label.font = font;
     self.label.backgroundColor = [UIColor clearColor];
     
     [self addSubview:self.pointView];
