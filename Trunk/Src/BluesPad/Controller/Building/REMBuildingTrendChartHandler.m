@@ -331,6 +331,7 @@
     CGFloat legendTop = 0;
     for (NSDictionary* series in seriesArray) {
         scatterPlot = [[CPTScatterPlot alloc] initWithFrame: myView.hostView.hostedGraph.bounds];
+        scatterPlot.plotSpace = myView.hostView.hostedGraph.defaultPlotSpace;
         CPTMutableLineStyle* scatterStyle = [CPTMutableLineStyle lineStyle];
         scatterStyle.lineColor = [series objectForKey:@"color"];
         scatterStyle.lineWidth = 2;
@@ -484,8 +485,7 @@
                 if ([pointData.dataValue isEqual:[NSNull null]] || pointData.dataValue.floatValue < 0) {
                     [data addObject:@{@"y": [NSNull null], @"x": pointData.localTime  }];
                 } else {
-//                    [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime  }];
-                    [data addObject:@{@"y": [NSNumber numberWithFloat: pointData.dataValue.floatValue / (sIndex+1) ], @"x": pointData.localTime  }];
+                    [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime  }];
                 }
             }
             if (t == REMEnergyTargetTag) {
