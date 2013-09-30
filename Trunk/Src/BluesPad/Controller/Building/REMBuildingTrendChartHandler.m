@@ -331,6 +331,7 @@
     CGFloat legendTop = 0;
     for (NSDictionary* series in seriesArray) {
         scatterPlot = [[CPTScatterPlot alloc] initWithFrame: myView.hostView.hostedGraph.bounds];
+        scatterPlot.plotSpace = myView.hostView.hostedGraph.defaultPlotSpace;
         CPTMutableLineStyle* scatterStyle = [CPTMutableLineStyle lineStyle];
         scatterStyle.lineColor = [series objectForKey:@"color"];
         scatterStyle.lineWidth = 2;
@@ -465,32 +466,34 @@
         int index = [self getSourceIndex:dataItem.timeRangeType];
         NSMutableDictionary* timeIntervalData = (NSMutableDictionary*) [self.datasource objectAtIndex:index];
         
+        const int maxSeries = 10;
         NSMutableArray* seriesArray = [[NSMutableArray alloc]init];
-        int seriesCount = MIN(10, dataItem.timeRangeData.targetEnergyData.count);
+        int seriesCount = MIN(maxSeries, dataItem.timeRangeData.targetEnergyData.count);
+        bool hasQueriedBuildingColor = NO;
         for (int sIndex = 0; sIndex < seriesCount; sIndex++) {
-            NSMutableDictionary* series = [[NSMutableDictionary alloc]init];
-            [series setValue:[self getSeriesColorByIndex:sIndex] forKey:@"color"];
             NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:dataItem.timeRangeData.targetEnergyData.count];
             REMTargetEnergyData* targetEData = dataItem.timeRangeData.targetEnergyData[sIndex];
+            REMEnergyTargetType t = targetEData.target.type;
+            
+            // 对于第10个序列，如果前9个序列中没有楼宇，而且这个序列也不是楼宇，不绘制。
+            if (sIndex == maxSeries - 1 && !hasQueriedBuildingColor && t != REMEnergyTargetTag) break;
+            
+            NSMutableDictionary* series = [[NSMutableDictionary alloc]init];
             [series setValue:targetEData.target.name forKey:@"name"];
             for (int i = 0; i < targetEData.energyData.count; i++) {
                 REMEnergyData* pointData = targetEData.energyData[i];
                 if ([pointData.dataValue isEqual:[NSNull null]] || pointData.dataValue.floatValue < 0) {
                     [data addObject:@{@"y": [NSNull null], @"x": pointData.localTime  }];
                 } else {
-//                    [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime  }];
-                    [data addObject:@{@"y": [NSNumber numberWithFloat: pointData.dataValue.floatValue / (sIndex+1) ], @"x": pointData.localTime  }];
+                    [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime  }];
                 }
             }
-            
-//            if (targetEData.energyData.count == 0) {
-//                REMEnergyData* pointData = targetEData.energyData[i];
-//                if ([pointData.dataValue isEqual:[NSNull null]] || pointData.dataValue.floatValue < 0) {
-//                    [data addObject:@{@"y": [NSNull null], @"x": pointData.localTime  }];
-//                } else {
-//                    [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime  }];
-//                }
-//            }
+            if (t == REMEnergyTargetTag) {
+                [series setValue:[self getSeriesColorByIndex:0] forKey:@"color"];
+                hasQueriedBuildingColor = YES;
+            } else {
+                [series setValue:[self getSeriesColorByIndex:hasQueriedBuildingColor ? sIndex : (sIndex+1)] forKey:@"color"];
+            }
             [series setValue:data forKey:@"data"];
             NSString* targetIdentity = [NSString stringWithFormat:@"%d", sIndex];
             [series setValue:targetIdentity forKey:@"identity"];
