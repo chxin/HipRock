@@ -96,5 +96,11 @@
     }];
 }
 
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
+    if(point.y>self.frame.origin.y)return YES;
+    
+    return [super pointInside:point withEvent:event];
+    
+}
 
 @end
