@@ -75,6 +75,7 @@
     
     BOOL needRerenderXInterval;
 }
+
 -(REMTrendChartView*)initWithFrame:(CGRect)frame chartConfig:(REMTrendChartConfig*)config  {
     self = [super initWithFrame:frame];
     if (self) {
@@ -101,7 +102,6 @@
         }
         
         CPTXYGraph *graph=[[CPTXYGraph alloc]initWithFrame:self.bounds];
-        graph.backgroundColor = [UIColor redColor].CGColor;
         self.hostedGraph=graph;
         
         [self initAxisSet];
@@ -236,7 +236,7 @@
     [axisArray addObject:xAxis];
     xAxis.plotSpace = graph.defaultPlotSpace;
     if (self.verticalGridLine == YES) {
-        xAxis.majorGridLineStyle = self.xAxisConfig.lineStyle;
+        xAxis.majorGridLineStyle = self.xAxisConfig.gridlineStyle;
     }
     CPTPlotRange* globalYRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(INT32_MAX)];
     for (int i = 0; i < self.yAxisConfig.count; i++) {
@@ -249,7 +249,7 @@
         yAxis.axisLineStyle = yAxisConfig.lineStyle;
         yAxis.labelAlignment = CPTAlignmentMiddle;
         if (i == 0) {
-            yAxis.majorGridLineStyle = yAxisConfig.lineStyle;
+            yAxis.majorGridLineStyle = yAxisConfig.gridlineStyle;
             graph.plotAreaFrame.paddingTop = yAxisConfig.reservedSpace.height / 2;
             graph.plotAreaFrame.paddingLeft = yAxisConfig.reservedSpace.width + yAxisConfig.lineStyle.lineWidth;
             yAxis.plotSpace = graph.defaultPlotSpace;

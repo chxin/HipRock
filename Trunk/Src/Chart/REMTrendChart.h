@@ -52,6 +52,7 @@ typedef enum  {
 //    @protected CPTGraph* graph;
 }
 @property (nonatomic, readonly) CPTPlot* plot;
+@property (nonatomic, readonly) CPTColor* plotColor;
 @property (nonatomic, readonly) NSArray* points;
 
 /*
@@ -95,6 +96,7 @@ typedef enum  {
 
 @interface REMTrendChartAxisConfig : NSObject
 @property (nonatomic, readonly) CPTLineStyle *lineStyle;
+@property (nonatomic, readonly) CPTLineStyle *gridlineStyle;
 @property (nonatomic) NSString* title;
 @property (nonatomic, readonly) CPTCoordinate coordinate;
 @property (nonatomic, readonly) CPTTextStyle* textStyle;
@@ -133,6 +135,8 @@ typedef enum  {
  * X轴文本的起点时间。如果没有指定，则会使用Series配置中最小的StartDate作为默认起点时间。
  */
 @property (nonatomic) NSDate* xStartDate;
+
++(REMTrendChartConfig*)getMinimunWidgetDefaultSetting;
 @end
 
 
