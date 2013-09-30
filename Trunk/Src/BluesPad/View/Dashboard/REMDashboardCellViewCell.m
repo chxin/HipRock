@@ -7,6 +7,9 @@
 //
 
 #import "REMDashboardCellViewCell.h"
+#import "REMTrendChart.h"
+#import "REMEnergyViewData.h"
+#import "REMLineWidget.h"
 
 @interface REMDashboardCellViewCell()
 
@@ -36,6 +39,31 @@
         
         
         
+        REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
+        syntax.type = @"line";
+        syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
+        
+        REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
+        NSMutableArray* sereis = [[NSMutableArray alloc]init];
+        for (int sIndex = 0; sIndex < 3; sIndex++) {
+            NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
+            for (int i = 0; i < 100; i++) {
+                REMEnergyData* data = [[REMEnergyData alloc]init];
+                data.quality = REMEnergyDataQualityGood;
+                data.dataValue = [NSNumber numberWithInt:i*10*sIndex];
+                data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
+                [energyDataArray addObject:data];
+            }
+            REMTargetEnergyData* sData = [[REMTargetEnergyData alloc]init];
+            sData.energyData = energyDataArray;
+            [sereis addObject:sData];
+        }
+        energyViewData.targetEnergyData = sereis;
+        
+        REMLineWidget* lineWidget = [[REMLineWidget alloc]initWithFrame:self.contentView.bounds data:energyViewData widgetContext:syntax];
+        
+        [self.contentView addSubview:lineWidget.view];
+        [lineWidget destroyView];
     }
     return self;
 }

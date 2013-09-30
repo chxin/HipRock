@@ -11,8 +11,6 @@
 #import "WeiboSDK.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingWeiboView.h"
-#import "REMTrendChart.h"
-#import "REMLineWidget.h"
 #import "REMMapViewController.h"
 
 @interface REMBuildingViewController ()
@@ -191,39 +189,6 @@
     self.originCenterXArray=arr;
     
     [self loadImageData];
-    
-    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
-    syntax.type = @"line";
-    syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
-    REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
-    
-    
-    NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
-    for (int i = 0; i < 100; i++) {
-        REMEnergyData* data = [[REMEnergyData alloc]init];
-        data.quality = REMEnergyDataQualityGood;
-        data.dataValue = [NSNumber numberWithInt:i*10];
-        data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
-        [energyDataArray addObject:data];
-    }
-//    REMLineWidget* lineWidget = [[REMLineWidget alloc]initWithFrame:CGRectMake(0, 0, 800, 400) data:energyViewData widgetContext:syntax];
-    
-    
-    
-//    NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
-//    for (int i = 0; i < 100; i++) {
-//        REMEnergyData* data = [[REMEnergyData alloc]init];
-//        data.quality = REMEnergyDataQualityGood;
-//        data.dataValue = [NSNumber numberWithInt:i*10];
-//        data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
-//        [energyDataArray addObject:data];
-//    }
-//    REMTrendChartLineSeries* line = [[REMTrendChartLineSeries alloc]initWithData:energyDataArray dataStep:REMEnergyStepHour];
-//    chartConfig.series = [NSArray arrayWithObjects:line, nil];
-//    
-//    REMTrendChartView* testV = [[REMTrendChartView alloc]initWithFrame:CGRectMake(0, 0, 800, 400) chartConfig:chartConfig];
-//    [self.view addSubview:lineWidget.view];
-//    [lineWidget destroyView];
 }
 
 
