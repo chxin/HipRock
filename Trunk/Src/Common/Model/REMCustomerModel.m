@@ -10,6 +10,8 @@
 #import "REMStorage.h"
 #import "REMApplicationInfo.h"
 #import "REMJSONHelper.h"
+#import "REMTimeHelper.h"
+#import "REMAdministratorModel.h"
 
 @implementation REMCustomerModel
 
@@ -27,6 +29,21 @@ static NSString *kCurrentCustomerCacheKey = @"CurrentCustomer";
     self.comment=dictionary[@"Comment"];
     self.timezoneId=dictionary[@"TimezoneId"];
     self.logoId=dictionary[@"logoId"];
+    long long time=[REMTimeHelper longLongFromJSONString:dictionary[@"StartTime"]];
+    self.startTime= [NSDate dateWithTimeIntervalSince1970:time/1000 ];
+    
+    NSArray *administrators=dictionary[@"Administrators"];
+    
+    
+    NSMutableArray *administratorArray=[[NSMutableArray alloc]initWithCapacity:administrators.count];
+    
+    for (NSDictionary *admin in administrators) {
+        REMAdministratorModel *model = [[REMAdministratorModel alloc]initWithDictionary:admin];
+        [administratorArray addObject:model];
+    }
+    
+    self.administratorArray=administratorArray;
+    
 }
 
 - (void)save

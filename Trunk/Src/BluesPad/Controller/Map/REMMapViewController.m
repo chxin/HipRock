@@ -11,6 +11,7 @@
 #import "REMBuildingModel.h"
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingViewController.h"
+#import "REMGallaryViewController.h"
 
 @interface REMMapViewController ()
 
@@ -115,6 +116,18 @@
     
     NSLog(@"new view bounds: %@",NSStringFromCGRect(self.view.bounds));
     [self performSegueWithIdentifier:kMapToBuildingSegue sender:self];
+}
+
+- (IBAction)gallarySwitchButtonPressed:(id)sender {
+    if(self.gallaryViewController == nil){
+        self.gallaryViewController = [[REMGallaryViewController alloc] init];
+    }
+    
+    self.gallaryViewController.startFrame = self.gallarySwitchButton.frame;
+    self.gallaryViewController.stopFrame = self.view.bounds;
+    
+    [self addChildViewController:self.gallaryViewController];
+    [self.view addSubview:self.gallaryViewController.view];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

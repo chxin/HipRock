@@ -31,8 +31,9 @@
 @property (nonatomic) BOOL loadingImage;
 @property (nonatomic) BOOL customImageLoaded;
 @property (nonatomic,strong) NSString *loadingImageKey;
-@property (nonatomic,strong) UIButton *settingButton;
+@property (nonatomic,strong) UIButton *backButton;
 @property (nonatomic,strong) UIButton *shareButton;
+@property (nonatomic,strong) UIButton *logoButton;
 
 @property (nonatomic) BOOL isActive;
 
@@ -115,7 +116,9 @@
     
     self.titleLabel=nil;
     self.bottomGradientLayer=nil;
-    self.settingButton=nil;
+    self.backButton=nil;
+    self.shareButton=nil;
+    self.logoButton=nil;
     [self.dataView removeObserver:self forKeyPath:@"contentOffset" context:nil];
     self.dataView=nil;
 }
@@ -140,9 +143,8 @@
         
         [self initTitleView];
         
-        [self initBackButton];
         
-        [self initSettingButton];
+        [self initButtons];
         
         //[self loadingBuildingImage];
         
@@ -152,16 +154,8 @@
     
 }
 
-- (void)initSettingButton{
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
-    [btn setImage:[UIImage imageNamed:@"Menu_normal.png"] forState:UIControlStateNormal];
-    btn.adjustsImageWhenHighlighted=YES;
-    btn.showsTouchWhenHighlighted=YES;
-    btn.titleLabel.text=@"设置";
+- (void)initButtons{
     
-    [btn addTarget:self.controller action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.settingButton=btn;
-    [self addSubview:btn];
     
     UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
     [shareButton setImage:[UIImage imageNamed:@"Share_normal.png"] forState:UIControlStateNormal];
@@ -176,21 +170,20 @@
     [self addSubview:shareButton];
     
     self.dataView.shareButton=self.shareButton;
-
-}
-
--(void)initBackButton
-{
-    static NSString * const backButtonTitle = @"地图";
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    backButton.frame = CGRectMake(kBuildingLeftMargin-30, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension);
-    [backButton setTitle:backButtonTitle forState:UIControlStateNormal];
-    [backButton setTitle:backButtonTitle forState:UIControlStateHighlighted];
     
+    
+    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
+    
+    backButton.adjustsImageWhenHighlighted=YES;
+    backButton.showsTouchWhenHighlighted=YES;
+    backButton.titleLabel.text=@"地图";
+    [backButton setBackgroundImage:[UIImage imageNamed:@"leftarrow"] forState:UIControlStateNormal];
     [backButton addTarget:self.controller action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.settingButton=backButton;
+    self.backButton=backButton;
     [self addSubview:backButton];
+
 }
+
 
 - (void)loadingBuildingImage{
     if(self.buildingInfo.building.pictureIds==nil ||
@@ -224,7 +217,7 @@
         //UIImage *image = self.defaultImage;
         //dispatch_async(concurrentQueue, ^{
             @autoreleasepool {
-                UIImage *view = [self AFInflatedImageFromResponseWithDataAtScale:data];
+                UIImage *view = [REMImageHelper parseImageFromNSData:data];
                 newView.image=view;
                 UIImageView *newBlurred= [self blurredImageView:newView];
             
@@ -257,14 +250,6 @@
             }
         //});
 
-        
-        
-        
-        
-        
-        
-        
-        
     }];
     
     return ;
@@ -272,105 +257,6 @@
 
 
 
-- (UIImage *) AFImageWithDataAtScale:(NSData *)data {
-    if ([UIImage instancesRespondToSelector:@selector(initWithData:scale:)]) {
-        return [[UIImage alloc] initWithData:data scale:1];
-    } else {
-        UIImage *image = [[UIImage alloc] initWithData:data];
-        return [[UIImage alloc] initWithCGImage:[image CGImage] scale:1 orientation:image.imageOrientation];
-    }
-}
-
-- (UIImage *) AFInflatedImageFromResponseWithDataAtScale:(NSData *)data {
-    if (!data || [data length] == 0) {
-        return nil;
-    }
-    
-   
-    
-    
-    CGImageRef imageRef = nil;
-    
-    CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
-    
-    imageRef = CGImageCreateWithPNGDataProvider(dataProvider,  NULL, true, kCGRenderingIntentDefault);
-    
-    if(!imageRef){
-        imageRef = CGImageCreateWithJPEGDataProvider(dataProvider, NULL, true, kCGRenderingIntentDefault);
-    }
-    
-    if (!imageRef) {
-        UIImage *image = [self AFImageWithDataAtScale:data];
-        if (image.images) {
-            CGDataProviderRelease(dataProvider);
-            
-            return image;
-        }
-        
-        imageRef = CGImageCreateCopy([image CGImage]);
-    }
-    
-    CGDataProviderRelease(dataProvider);
-    
-    if (!imageRef) {
-        return nil;
-    }
-    
-    size_t width = CGImageGetWidth(imageRef);
-    size_t height = CGImageGetHeight(imageRef);
-    size_t bitsPerComponent = CGImageGetBitsPerComponent(imageRef);
-    size_t bytesPerRow = 0; // CGImageGetBytesPerRow() calculates incorrectly in iOS 5.0, so defer to CGBitmapContextCreate()
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
-    
-    if (CGColorSpaceGetNumberOfComponents(colorSpace) == 3) {
-        int alpha = (bitmapInfo & kCGBitmapAlphaInfoMask);
-        if (alpha == kCGImageAlphaNone) {
-            bitmapInfo &= ~kCGBitmapAlphaInfoMask;
-            bitmapInfo |= kCGImageAlphaNoneSkipFirst;
-        } else if (!(alpha == kCGImageAlphaNoneSkipFirst || alpha == kCGImageAlphaNoneSkipLast)) {
-            bitmapInfo &= ~kCGBitmapAlphaInfoMask;
-            bitmapInfo |= kCGImageAlphaPremultipliedFirst;
-        }
-    }
-    
-    UIScreen *screen = [UIScreen mainScreen];
-    
-    CGRect frame=  CGRectMake(0, 0, screen.bounds.size.height*screen.scale, screen.bounds.size.width*screen.scale);
-    
-    if(width>frame.size.width) {
-        width=frame.size.width;
-    }
-    
-    if(height>frame.size.height){
-        height=frame.size.height;
-    }
-    
-    
-    CGContextRef context = CGBitmapContextCreate(NULL, width, height, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo);
-    
-    CGColorSpaceRelease(colorSpace);
-    
-    if (!context) {
-        CGImageRelease(imageRef);
-        
-        return [[UIImage alloc] initWithData:data];
-    }
-    
-    CGRect rect = CGRectMake(0.0f, 0.0f, width, height);
-    //NSLog(@"image size:%@",NSStringFromCGRect(rect));
-    CGContextDrawImage(context, rect, imageRef);
-    CGImageRef inflatedImageRef = CGBitmapContextCreateImage(context);
-    CGContextRelease(context);
-    
-    UIImage *inflatedImage = [[UIImage alloc] initWithCGImage:inflatedImageRef scale:1 orientation:UIImageOrientationUp];
-    CGImageRelease(inflatedImageRef);
-    CGImageRelease(imageRef);
-    
-
-    
-    return inflatedImage;
-}
 
 - (void)addImageDefer:(NSTimer *)timer{
     if(self.customImageLoaded == YES) return;
@@ -680,8 +566,8 @@
     
     [self.layer insertSublayer:self.titleGradientLayer above:self.blurredImageView.layer];
 
-    
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin, kBuildingTitleTop, self.frame.size.width, kBuildingTitleFontSize+5)];
+    CGFloat leftMargin=kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin;
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(leftMargin, kBuildingTitleTop, self.frame.size.width-leftMargin, kBuildingTitleFontSize+5)];
     self.titleLabel.text=self.buildingInfo.building.name;
     self.titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);
@@ -689,12 +575,23 @@
     self.titleLabel.backgroundColor=[UIColor clearColor];
     self.titleLabel.font = [UIFont fontWithName:@(kBuildingFontLight) size:kBuildingTitleFontSize];
 
-    
+    self.titleLabel.textAlignment=NSTextAlignmentCenter;
     self.titleLabel.textColor=[UIColor whiteColor];
-    self.titleLabel.contentMode = UIViewContentModeTopLeft;
     
     
+    self.logoButton=[[UIButton alloc]initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, kBuildingTitleTop, 140, 30)];
+    
+    [self.logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
+    
+    self.logoButton.titleLabel.text=@"logo";
+    
+    [self.logoButton addTarget:self.controller action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //self.logoButton.layer.borderColor=[UIColor redColor].CGColor;
+    //self.logoButton.layer.borderWidth=1;
     [self addSubview:self.titleLabel];
+    
+    [self addSubview:self.logoButton];
 }
 
 
@@ -799,7 +696,7 @@
         [[UIColor blackColor]set];
         UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
         [[self getImageOfLayer:self.imageView.layer]drawInRect:self.imageView.frame];
-        [[self getImageOfLayer:self.titleLabel.layer]drawInRect:CGRectMake(self.settingButton.frame.origin.x, self.settingButton.frame.origin.y, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height)];
+        [[self getImageOfLayer:self.titleLabel.layer]drawInRect:CGRectMake(self.backButton.frame.origin.x, self.backButton.frame.origin.y, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height)];
         //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
         [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
         [dataImage drawInRect:CGRectMake(0, kBuildingCommodityViewTop + kBuildingTitleHeight, outputWidth, dataImageHeight)];

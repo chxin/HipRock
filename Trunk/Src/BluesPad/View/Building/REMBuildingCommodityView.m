@@ -250,8 +250,8 @@ typedef void(^SuccessCallback)(BOOL success);
     [self addSubview:view];
     
     int marginTop1=marginTop+chartContainerHeight+kBuildingCommodityBottomMargin;
-    
-    REMBuildingChartContainerView *view1 = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingChartWidth, chartContainerHeight) withTitle:[NSString stringWithFormat:@"用%@趋势图",self.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
+    CGFloat secondChartHeight=chartContainerHeight+85;//85 is delta value for second chart in commodity view
+    REMBuildingChartContainerView *view1 = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingChartWidth, secondChartHeight) withTitle:[NSString stringWithFormat:@"用%@趋势图",self.commodity.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
     
     [self addSubview:view1];
     
@@ -291,6 +291,36 @@ typedef void(^SuccessCallback)(BOOL success);
         self.totalLabel.data=model.commodityUsage;
         self.carbonLabel.data=model.carbonEquivalent;
         self.rankingLabel.data=model.rankingData;
+        
+        if(model.targetValue!=nil &&
+           model.targetValue!=nil &&
+           ![model.targetValue.dataValue isEqual:[NSNull null]] &&
+           [model.targetValue.dataValue isGreaterThan:@(0)])
+        {
+            REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, self.rankingLabel.frame.origin.y, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
+            target.title=@"目标值";
+            target.titleFontSize=kBuildingCommodityTitleFontSize;
+            target.titleMargin=kBuildingDetailInnerMargin;
+            target.leftMargin=kBuildingCommodityDetailTextMargin;
+            target.valueFontSize=kBuildingCommodityDetailValueFontSize;
+            target.uomFontSize=kBuildingCommodityDetailUomFontSize;
+            [target showTitle];
+            [self addSplitBar:target];
+            if (model.commodityUsage!=nil && model.commodityUsage.dataValue!=nil &&
+                ![model.commodityUsage.dataValue isEqual:[NSNull null]]) {
+                if(model.isTargetAchieved==YES){
+                    [target setTitleIcon:[UIImage imageNamed:@"OverTarget"]];
+                }
+                else{
+                    [target setTitleIcon:[UIImage imageNamed:@"NotOverTarget"]];
+                }
+            }
+            
+            [self addSubview:target];
+            self.targetLabel=target;
+            self.targetLabel.data=model.targetValue;
+
+        }
         
     } error:^(NSError *error, id response) {
         

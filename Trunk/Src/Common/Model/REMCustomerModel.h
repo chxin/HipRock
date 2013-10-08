@@ -21,6 +21,8 @@
 @property (nonatomic,strong) NSString *comment;
 @property (nonatomic,strong) NSNumber *timezoneId;
 @property (nonatomic,strong) NSNumber *logoId;
+@property (nonatomic,strong) NSDate *startTime;
+@property (nonatomic,strong) NSArray *administratorArray;
 
 
 - (void)save;

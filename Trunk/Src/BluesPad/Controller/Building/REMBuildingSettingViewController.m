@@ -33,6 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController=(UINavigationController *)self.parentViewController;
     //UITableView* myView = (UITableView*)self.view;
     //[myView  registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
     //[myView  registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell1"];
@@ -54,15 +55,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     if (section == 0) return 2;
-    if (section == 1) return 1;
+    if (section == 1) return 2;
     if (section == 2) return 1;
+    if (section == 3) return 1;
     return 0;
 }
 
@@ -74,7 +76,7 @@
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     
     // weibo account binding cell
-    if (indexPath.section == 1 && indexPath.item == 0) {
+    if (indexPath.section == 2 && indexPath.item == 0) {
         [[cell textLabel]setText:@"绑定新浪微博"];
         self.weiboAccoutSwitcher = [[UISwitch alloc]initWithFrame:CGRectMake(405, 12, 79, 27)];
         self.weiboAccoutSwitcher.on = [Weibo.weibo isAuthenticated];
@@ -96,7 +98,21 @@
             [cell.detailTextLabel setText:name1];
         }
     }
-    else if(indexPath.section==2 && indexPath.row==0 ){
+    else if(indexPath.section==1){
+        
+        
+        if(indexPath.row==0){
+            [[cell textLabel]setText:@"当前客户"];
+            NSString *name=[REMApplicationContext instance].currentCustomer.name;
+            [cell.detailTextLabel setText:name];
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        }
+        else{
+            [[cell textLabel]setText:@"客户信息"];
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        }
+    }
+    else if(indexPath.section==3 && indexPath.row==0 ){
         UITableViewCell *cell1 = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell1"];
         //[[cell textLabel]setText:@"退出登录"];
         cell1.textLabel.text=@"退出登录";
@@ -123,6 +139,14 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.section==1 && indexPath.row==0){
+        [self performSegueWithIdentifier:@"settingCustomerDetailSegue" sender:self];
+    }
+    else if(indexPath.section==1 && indexPath.row==1){
+        
+    }
+}
 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -239,10 +263,14 @@
      */
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO];
-    if(indexPath.section == 2 && indexPath.row==0){
+    if(indexPath.section == 3 && indexPath.row==0){
         [self logout];
         
     }
+    else if(indexPath.section==1 && indexPath.row==1){
+        [self performSegueWithIdentifier:@"settingCustomerDetailSegue" sender:self];
+    }
+    
     
     
 }

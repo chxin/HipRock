@@ -19,6 +19,8 @@
 @property (nonatomic,strong) REMLoginCarouselController *carouselController;
 @property (nonatomic,strong) NSTimer *timer;
 
+
+
 @end
 
 @implementation REMSplashScreenController
@@ -151,11 +153,30 @@
             [self.buildingInfoArray addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
         }
         
-        //test air quality interface
-        if(loadCompleted!=nil)
-            loadCompleted();
+        NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
+        REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter];
+        //buildingStore.isAccessLocal = YES;
+        logoStore.groupName = nil;
+        logoStore.maskContainer = nil;
         
-        [self performSegueWithIdentifier:kSplashToMapSegue sender:self];
+        [REMDataAccessor access:logoStore success:^(id data) {
+            if(data == nil || [data length] == 2) return;
+            UIImage *view = [REMImageHelper parseImageFromNSData:data];
+            
+            [REMApplicationContext instance].currentCustomerLogo=view;
+            
+      
+            
+            
+            
+            //test air quality interface
+            if(loadCompleted!=nil)
+                loadCompleted();
+            
+            [self performSegueWithIdentifier:kSplashToMapSegue sender:self];
+        }];
+        
+        
     } error:^(NSError *error, id response) {
         if(error.code != 1001) {
             [REMAlertHelper alert:@"数据加载错误"];
