@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface REMSettingCustomerSelectionViewController : UITableViewController
+@interface REMSettingCustomerSelectionViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end
