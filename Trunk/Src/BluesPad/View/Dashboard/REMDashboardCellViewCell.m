@@ -9,7 +9,7 @@
 #import "REMDashboardCellViewCell.h"
 #import "REMChartHeader.h"
 #import "REMEnergyViewData.h"
-#import "REMLineWidgetWrapper.h"
+#import "REMColumnWidgetWrapper.h"
 
 @interface REMDashboardCellViewCell()
 
@@ -45,12 +45,12 @@
         
         REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
         NSMutableArray* sereis = [[NSMutableArray alloc]init];
-        for (int sIndex = 0; sIndex < 3; sIndex++) {
+        for (int sIndex = 0; sIndex < 1; sIndex++) {
             NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
             for (int i = 0; i < 100; i++) {
                 REMEnergyData* data = [[REMEnergyData alloc]init];
                 data.quality = REMEnergyDataQualityGood;
-                data.dataValue = [NSNumber numberWithInt:i*10*sIndex];
+                data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
                 data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
                 [energyDataArray addObject:data];
             }
@@ -60,7 +60,7 @@
         }
         energyViewData.targetEnergyData = sereis;
         
-        REMLineWidget* lineWidget = [[REMLineWidget alloc]initWithFrame:self.contentView.bounds data:energyViewData widgetContext:syntax];
+        REMColumnWidgetWrapper* lineWidget = [[REMColumnWidgetWrapper alloc]initWithFrame:CGRectMake(0, 0, 500, 300) data:energyViewData widgetContext:syntax];
         
         [self.contentView addSubview:lineWidget.view];
         [lineWidget destroyView];

@@ -9,20 +9,23 @@
 #import "REMChartHeader.h"
 
 @implementation REMTrendChartSeries
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step {
-    REMTrendChartDataProcessor* processor = [[REMTrendChartDataProcessor alloc]init];
-    return [self initWithData:energyData dataStep:step dataProcessor:processor];
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle {
+    return [self initWithData:energyData dataStep:step plotStyle:plotStyle yAxisIndex:0];
 }
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step dataProcessor:(REMTrendChartDataProcessor*)processor {
-    return [self initWithData:energyData dataStep:step dataProcessor:processor yAxisIndex:0];
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex {
+    return [self initWithData:energyData dataStep:step plotStyle:plotStyle yAxisIndex:yAxisIndex dataProcessor:
+            [[REMTrendChartDataProcessor alloc]init]];
 }
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step dataProcessor:(REMTrendChartDataProcessor*)processor yAxisIndex:(int)yAxisIndex {
-    return [self initWithData:energyData dataStep:step dataProcessor:processor yAxisIndex:yAxisIndex startDate:((REMEnergyData*)[energyData objectAtIndex:0]).localTime];
+
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataProcessor:(REMTrendChartDataProcessor*)processor {
+    return [self initWithData:energyData dataStep:step plotStyle:plotStyle yAxisIndex:yAxisIndex dataProcessor:processor startDate:((REMEnergyData*)[energyData objectAtIndex:0]).localTime];
 }
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step dataProcessor:(REMTrendChartDataProcessor*)processor yAxisIndex:(int)yAxisIndex startDate:(NSDate*)startDate {
+
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataProcessor:(REMTrendChartDataProcessor*)processor startDate:(NSDate*)startDate {
     self = [super init];
     if (self) {
         _yAxisIndex = 0;
+        _plotStyle = plotStyle;
         seriesType = [self getSeriesType];
         _startDate = startDate;
         _plot = [self makePlot];
@@ -37,23 +40,13 @@
 -(CPTPlot*)makePlot {
     return nil;
 }
+-(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex {
+    self.plot.frame = graph.bounds;
+    CPTXYAxis* yAxis = (CPTXYAxis*)[graph.axisSet.axes objectAtIndex:self.yAxisIndex + 1];
+    self.plot.plotSpace = yAxis.plotSpace;
+}
 -(REMTrendChartSeriesType)getSeriesType {
     return 0;
-}
--(int)getXAxisField {
-    return 0;
-}
-
-
-
-- (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
-{
-    REMTrendChartPoint* point = [self.points objectAtIndex:idx];
-    if (fieldEnum == [self getXAxisField]) {
-        return [NSNumber numberWithFloat:point.x];
-    } else {
-        return point.y;
-    }
 }
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {

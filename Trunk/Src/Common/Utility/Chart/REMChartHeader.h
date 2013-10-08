@@ -11,6 +11,7 @@
 #import "REMEnergyData.h"
 #import "CorePlot-CocoaTouch.h"
 #import "REMBuildingConstants.h"
+#import "REMColor.h"
 
 
 typedef enum  {
@@ -52,7 +53,7 @@ typedef enum  {
 //    @protected CPTGraph* graph;
 }
 @property (nonatomic, readonly) CPTPlot* plot;
-@property (nonatomic, readonly) CPTColor* plotColor;
+@property (nonatomic, readonly) NSDictionary* plotStyle;
 @property (nonatomic, readonly) NSArray* points;
 
 /*
@@ -65,11 +66,11 @@ typedef enum  {
  */
 @property (nonatomic, readonly) NSDate* startDate;
 
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step;
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step dataProcessor:(REMTrendChartDataProcessor*)processor;
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step dataProcessor:(REMTrendChartDataProcessor*)processor yAxisIndex:(int)yAxisIndex;
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step dataProcessor:(REMTrendChartDataProcessor*)processor yAxisIndex:(int)yAxisIndex startDate:(NSDate*)startDate;
-
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle;
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex;
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataProcessor:(REMTrendChartDataProcessor*)processor;
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataProcessor:(REMTrendChartDataProcessor*)processor startDate:(NSDate*)startDate;
+-(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex;
 //-(void)hide;
 //-(void)show;
 @end

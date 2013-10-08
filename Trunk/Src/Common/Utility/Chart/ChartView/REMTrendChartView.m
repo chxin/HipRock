@@ -103,6 +103,7 @@
         
         CPTXYGraph *graph=[[CPTXYGraph alloc]initWithFrame:self.bounds];
         self.hostedGraph=graph;
+        graph.backgroundColor = [UIColor greenColor].CGColor;
         
         [self initAxisSet];
         [self renderSeries];
@@ -275,11 +276,9 @@
 - (void)renderSeries {
     for (int i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = [self.series objectAtIndex:i];
-        CPTXYAxis* yAxis = (CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:s.yAxisIndex + 1];
-        s.plot.plotSpace = yAxis.plotSpace;
         REMTrendChartPoint* point = [s.points objectAtIndex:s.points.count - 1];
         maxXValOfSeries = MAX(maxXValOfSeries, point.x);
-        s.plot.frame = self.hostedGraph.bounds;
+//        s.plot.frame = self.hostedGraph.bounds;
         [self.hostedGraph addPlot:s.plot];
     }
     // set global X range
