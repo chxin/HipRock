@@ -14,7 +14,7 @@
 
 + (long long)longLongFromJSONString:(NSString *)jsonDate
 {
-    if([jsonDate isEqual:[NSNull null]]==YES){
+    if(jsonDate == nil || [jsonDate isEqual:[NSNull null]]==YES){
         return 0;
     }
     

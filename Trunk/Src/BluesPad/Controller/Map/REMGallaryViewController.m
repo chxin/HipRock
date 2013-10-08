@@ -26,11 +26,17 @@
         
         //CGRect viewFrame = self.mapViewController.view == nil?CGRectZero:self.mapViewController.view.bounds;
         
-        gallaryView = [[REMGallaryView alloc] initWithFrame:self.startFrame collectionViewLayout:layout];
+        gallaryView = [[REMGallaryView alloc] initWithFrame:self.stopFrame collectionViewLayout:layout];
         gallaryView.dataSource = self;
         gallaryView.delegate = self;
         [gallaryView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gallaryCellIdentifier"];
         [gallaryView setBackgroundColor:[UIColor redColor]];
+        
+        CGFloat widthRatio = self.stopFrame.size.width/self.startFrame.size.width;
+        CGFloat heightRatio = self.stopFrame.size.height/self.startFrame.size.height;
+        CGAffineTransform tr = CGAffineTransformConcat(CGAffineTransformMakeScale(1/widthRatio, 1/heightRatio), CGAffineTransformMakeTranslation(self.startFrame.origin.x-self.stopFrame.origin.x, self.startFrame.origin.y-self.stopFrame.origin.y));
+        
+        gallaryView.transform = tr;
         
         self.view = gallaryView;
     }
@@ -45,7 +51,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self addSwitchButton];
+    //[self addSwitchButton];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -55,10 +61,12 @@
     CGFloat heightRatio = self.stopFrame.size.height/self.startFrame.size.height;
     CGAffineTransform tr = CGAffineTransformScale(self.view.transform, widthRatio, heightRatio);
 
-    [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         self.view.transform = tr;
         self.view.center = CGPointMake(self.stopFrame.size.width/2,self.stopFrame.size.height/2);
-    } completion:^(BOOL finished) {}];
+    } completion:^(BOOL finished) {
+        [self addSwitchButton];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,7 +77,8 @@
 
 -(void)addSwitchButton
 {
-    UIButton *switchButton = [[UIButton alloc] initWithFrame:CGRectMake(25, 20, 32, 32)];
+    UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];// [[UIButton alloc] initWithFrame:];
+    [switchButton setFrame:CGRectMake(25, 20, 32, 32)];
     [switchButton setImage:[UIImage imageNamed:@"LandMarker.png"] forState:UIControlStateNormal];
     
     [self.view addSubview:switchButton];
