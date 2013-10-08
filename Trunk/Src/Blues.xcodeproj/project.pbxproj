@@ -300,6 +300,7 @@
 		7A20761817E055FD00CD137C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8D177B41B0000F77F9 /* InfoPlist.strings */; };
 		7A209EDA17BB72100062FB92 /* REMServiceMeta.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */; };
 		7A209EDB17BB72100062FB92 /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
+		7A25725717F911AD0007438F /* REMGallaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A25725617F911AD0007438F /* REMGallaryViewController.m */; };
 		7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */; };
 		7A2BA42217D877C3003B18E1 /* REMError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42117D877C3003B18E1 /* REMError.m */; };
 		7A2E7EBD17F28E8A000EB506 /* REMLoginCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2E7EBC17F28E8A000EB506 /* REMLoginCustomerViewController.m */; };
@@ -339,6 +340,10 @@
 		7A48B49317CDFA38002DA386 /* Propaganda_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B48D17CDFA38002DA386 /* Propaganda_3.jpg */; };
 		7A48B49417CDFA38002DA386 /* Propaganda_3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B48E17CDFA38002DA386 /* Propaganda_3@2x.jpg */; };
 		7A5277F617AF4209007DA735 /* REMIndicatorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5277F517AF4209007DA735 /* REMIndicatorButton.m */; };
+		7A53160117F817370022491F /* Gallary.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5315FD17F817370022491F /* Gallary.png */; };
+		7A53160217F817370022491F /* Gallary@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5315FE17F817370022491F /* Gallary@2x.png */; };
+		7A53160317F817370022491F /* LandMarker.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5315FF17F817370022491F /* LandMarker.png */; };
+		7A53160417F817370022491F /* LandMarker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A53160017F817370022491F /* LandMarker@2x.png */; };
 		7A5DBD28178FD014006C4EDE /* REMDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD27178FD014006C4EDE /* REMDataAccessor.m */; };
 		7A5DBD2B178FD034006C4EDE /* REMDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD2A178FD034006C4EDE /* REMDataStore.m */; };
 		7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8B177B41B0000F77F9 /* MainStoryboard.storyboard */; };
@@ -355,6 +360,8 @@
 		7A9B1E45177B3A8B00C282A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */; };
 		7A9B1E46177B3A8B00C282A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E21177B3A8B00C282A8 /* Foundation.framework */; };
 		7A9B1E6F177B3AFA00C282A8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A9B1E6D177B3AFA00C282A8 /* InfoPlist.strings */; };
+		7AA8838117F92286004D50BC /* REMGallaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA8837E17F92286004D50BC /* REMGallaryCell.m */; };
+		7AA8838217F92286004D50BC /* REMGallaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA8838017F92286004D50BC /* REMGallaryView.m */; };
 		7AB34E4C177D2975003E235E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4A177D2975003E235E /* MobileCoreServices.framework */; };
 		7AB34E4D177D2975003E235E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4B177D2975003E235E /* SystemConfiguration.framework */; };
 		7AB34E51177D2CE1003E235E /* REMServiceRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB34E50177D2CE1003E235E /* REMServiceRequestOperation.m */; };
@@ -723,6 +730,13 @@
 		7A1D7C4417A63E8B0050779D /* REMEncryptHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEncryptHelper.m; path = Common/Utility/REMEncryptHelper.m; sourceTree = "<group>"; };
 		7A20761517E055E800CD137C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7A20761717E055ED00CD137C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		7A25725517F911AD0007438F /* REMGallaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMGallaryViewController.h; path = Controller/Map/REMGallaryViewController.h; sourceTree = "<group>"; };
+		7A25725617F911AD0007438F /* REMGallaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMGallaryViewController.m; path = Controller/Map/REMGallaryViewController.m; sourceTree = "<group>"; };
+		7A28495918039A3000DC481B /* REMDimensionForLogin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMDimensionForLogin.h; path = Resource/Dimensions/REMDimensionForLogin.h; sourceTree = "<group>"; };
+		7A28495A18039A9D00DC481B /* REMDimensionForMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMDimensionForMap.h; path = Resource/Dimensions/REMDimensionForMap.h; sourceTree = "<group>"; };
+		7A28495B18039AAF00DC481B /* REMDimensionForBuilding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMDimensionForBuilding.h; path = Resource/Dimensions/REMDimensionForBuilding.h; sourceTree = "<group>"; };
+		7A28495C18039ACB00DC481B /* REMDimensionForChart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMDimensionForChart.h; path = Resource/Dimensions/REMDimensionForChart.h; sourceTree = "<group>"; };
+		7A28495D18039B0300DC481B /* REMSegues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSegues.h; path = Resource/Definitions/REMSegues.h; sourceTree = "<group>"; };
 		7A2BA41C17D874C3003B18E1 /* REMBusinessErrorInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBusinessErrorInfo.h; path = Common/Model/REMBusinessErrorInfo.h; sourceTree = "<group>"; };
 		7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBusinessErrorInfo.m; path = Common/Model/REMBusinessErrorInfo.m; sourceTree = "<group>"; };
 		7A2BA42017D877C3003B18E1 /* REMError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMError.h; sourceTree = "<group>"; };
@@ -787,7 +801,10 @@
 		7A48B48E17CDFA38002DA386 /* Propaganda_3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Propaganda_3@2x.jpg"; sourceTree = "<group>"; };
 		7A5277F417AF4209007DA735 /* REMIndicatorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMIndicatorButton.h; sourceTree = "<group>"; };
 		7A5277F517AF4209007DA735 /* REMIndicatorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMIndicatorButton.m; sourceTree = "<group>"; };
-		7A5315FA17F7CD8C0022491F /* REMSegues.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMSegues.h; path = Common/Constants/REMSegues.h; sourceTree = "<group>"; };
+		7A5315FD17F817370022491F /* Gallary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gallary.png; sourceTree = "<group>"; };
+		7A5315FE17F817370022491F /* Gallary@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Gallary@2x.png"; sourceTree = "<group>"; };
+		7A5315FF17F817370022491F /* LandMarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LandMarker.png; sourceTree = "<group>"; };
+		7A53160017F817370022491F /* LandMarker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LandMarker@2x.png"; sourceTree = "<group>"; };
 		7A5DBD27178FD014006C4EDE /* REMDataAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataAccessor.m; path = Common/DataAccess/REMDataAccessor.m; sourceTree = "<group>"; };
 		7A5DBD29178FD034006C4EDE /* REMDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDataStore.h; path = Common/DataAccess/REMDataStore.h; sourceTree = "<group>"; };
 		7A5DBD2A178FD034006C4EDE /* REMDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataStore.m; path = Common/DataAccess/REMDataStore.m; sourceTree = "<group>"; };
@@ -840,6 +857,10 @@
 		7A9B1EB1177B3B7E00C282A8 /* BluesPhoneTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "BluesPhoneTests-Info.plist"; path = "../test/BluesPhoneTests/BluesPhoneTests-Info.plist"; sourceTree = "<group>"; };
 		7A9B1EB6177B3B9300C282A8 /* BluesPhoneTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BluesPhoneTests.h; path = ../test/BluesPhoneTests/BluesPhoneTests.h; sourceTree = "<group>"; };
 		7A9B1EB7177B3B9300C282A8 /* BluesPhoneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BluesPhoneTests.m; path = ../test/BluesPhoneTests/BluesPhoneTests.m; sourceTree = "<group>"; };
+		7AA8837D17F92286004D50BC /* REMGallaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMGallaryCell.h; sourceTree = "<group>"; };
+		7AA8837E17F92286004D50BC /* REMGallaryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGallaryCell.m; sourceTree = "<group>"; };
+		7AA8837F17F92286004D50BC /* REMGallaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMGallaryView.h; sourceTree = "<group>"; };
+		7AA8838017F92286004D50BC /* REMGallaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGallaryView.m; sourceTree = "<group>"; };
 		7AB34E46177D2828003E235E /* CommonTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CommonTests-Prefix.pch"; path = "../test/CommonTests/CommonTests-Prefix.pch"; sourceTree = "<group>"; };
 		7AB34E4A177D2975003E235E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		7AB34E4B177D2975003E235E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
@@ -1502,6 +1523,25 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		7A284954180398B600DC481B /* Definitions */ = {
+			isa = PBXGroup;
+			children = (
+				7A28495D18039B0300DC481B /* REMSegues.h */,
+			);
+			name = Definitions;
+			sourceTree = "<group>";
+		};
+		7A2849581803998900DC481B /* Dimensions */ = {
+			isa = PBXGroup;
+			children = (
+				7A28495918039A3000DC481B /* REMDimensionForLogin.h */,
+				7A28495A18039A9D00DC481B /* REMDimensionForMap.h */,
+				7A28495B18039AAF00DC481B /* REMDimensionForBuilding.h */,
+				7A28495C18039ACB00DC481B /* REMDimensionForChart.h */,
+			);
+			name = Dimensions;
+			sourceTree = "<group>";
+		};
 		7A2BA41F17D877B1003B18E1 /* Error */ = {
 			isa = PBXGroup;
 			children = (
@@ -1517,6 +1557,8 @@
 			children = (
 				7A2E7EBF17F2DCB3000EB506 /* REMMapViewController.h */,
 				7A2E7EC017F2DCB3000EB506 /* REMMapViewController.m */,
+				7A25725517F911AD0007438F /* REMGallaryViewController.h */,
+				7A25725617F911AD0007438F /* REMGallaryViewController.m */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -1602,6 +1644,17 @@
 			name = DataAccess;
 			sourceTree = "<group>";
 		};
+		7A5315FC17F817370022491F /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				7A5315FD17F817370022491F /* Gallary.png */,
+				7A5315FE17F817370022491F /* Gallary@2x.png */,
+				7A5315FF17F817370022491F /* LandMarker.png */,
+				7A53160017F817370022491F /* LandMarker@2x.png */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 		7A5E2D45177B3CD3000F77F9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -1677,7 +1730,6 @@
 				B43BB1101797B12D00617B1E /* REMEnergyConstants.m */,
 				7A1D7C3517A6155D0050779D /* REMApplicationContext.h */,
 				7A1D7C3617A6155D0050779D /* REMApplicationContext.m */,
-				7A5315FA17F7CD8C0022491F /* REMSegues.h */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -1712,6 +1764,8 @@
 		7A5E2D85177B41A4000F77F9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				7A2849581803998900DC481B /* Dimensions */,
+				7A284954180398B600DC481B /* Definitions */,
 				7AC3BABB17CC48740022E57E /* Images */,
 				7A5E2D8D177B41B0000F77F9 /* InfoPlist.strings */,
 				B4CD146017B3439600807B5F /* BluesPad.entitlements */,
@@ -1908,6 +1962,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		7AA8837C17F92286004D50BC /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				7AA8837D17F92286004D50BC /* REMGallaryCell.h */,
+				7AA8837E17F92286004D50BC /* REMGallaryCell.m */,
+				7AA8837F17F92286004D50BC /* REMGallaryView.h */,
+				7AA8838017F92286004D50BC /* REMGallaryView.m */,
+			);
+			name = Map;
+			path = View/Map;
+			sourceTree = "<group>";
+		};
 		7ABC2DD7177BE6210000C060 /* CorePlotHeaders */ = {
 			isa = PBXGroup;
 			children = (
@@ -1996,6 +2062,7 @@
 		7AC3BABB17CC48740022E57E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7A5315FC17F817370022491F /* Map */,
 				7ACFCBA217CDA62E00811976 /* Building */,
 				7ACFCBC417CDA62E00811976 /* Dashboard */,
 				7ACFCBCA17CDA62E00811976 /* Login */,
@@ -2234,6 +2301,7 @@
 		B49B6F421781228200BC130A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7AA8837C17F92286004D50BC /* Map */,
 				B46C8EB717F27BA0006DC4CB /* Dashboard */,
 				EFD6041817F557E60080CE89 /* Widget */,
 				7A1A853617B4B257004D7167 /* Chart */,
@@ -2377,6 +2445,7 @@
 				6A4BD94717B89F1F007C9FCF /* BluesPad.entitlements in Resources */,
 				7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */,
 				7A5E2D95177B41B0000F77F9 /* InfoPlist.strings in Resources */,
+				7A53160217F817370022491F /* Gallary@2x.png in Resources */,
 				B445AEAE177BEEB8002D2A59 /* README.txt in Resources */,
 				7AC3BB3417CC48750022E57E /* Default-568h@2x.png in Resources */,
 				7AC3BB3517CC48750022E57E /* Default.png in Resources */,
@@ -2409,6 +2478,7 @@
 				7A48B47A17CDDD03002DA386 /* LoginTextField.png in Resources */,
 				7A48B47B17CDDD03002DA386 /* LoginTextField@2x.png in Resources */,
 				B454BC0417CDEC4D00D69A7B /* Share_normal@2x.png in Resources */,
+				7A53160317F817370022491F /* LandMarker.png in Resources */,
 				B454BC0517CDEC4D00D69A7B /* Menu_normal@2x.png in Resources */,
 				B454BC0617CDEC4D00D69A7B /* OverTarget.png in Resources */,
 				B454BC0717CDEC4D00D69A7B /* Menu_normal.png in Resources */,
@@ -2434,12 +2504,14 @@
 				B45F8A5A17D5B0340079C74D /* Coal_normal.png in Resources */,
 				B45F8A5B17D5B0340079C74D /* PM2.5_pressed.png in Resources */,
 				B45F8A5C17D5B0340079C74D /* PM2.5_normal.png in Resources */,
+				7A53160417F817370022491F /* LandMarker@2x.png in Resources */,
 				B45F8A5D17D5B0340079C74D /* NaturalGas_pressed.png in Resources */,
 				B45F8A5E17D5B0340079C74D /* NaturalGas_normal.png in Resources */,
 				B45F8A5F17D5B0340079C74D /* Water_pressed.png in Resources */,
 				B45F8A6017D5B0340079C74D /* Water_normal.png in Resources */,
 				7A13C19B17F40D31007E6AA9 /* GoogleMaps.bundle in Resources */,
 				B45F8A6117D5B0340079C74D /* Electricity_pressed.png in Resources */,
+				7A53160117F817370022491F /* Gallary.png in Resources */,
 				B45F8A6217D5B0340079C74D /* Electricity_normal.png in Resources */,
 				B45F8A6F17D5B04B0079C74D /* Coal_normal@2x.png in Resources */,
 				B45F8A7017D5B04B0079C74D /* Coal_pressed@2x.png in Resources */,
@@ -2533,7 +2605,9 @@
 				7A399E99177D238F00F0EB9F /* AFJSONRequestOperation.m in Sources */,
 				7A399E9A177D238F00F0EB9F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				7A399E9E177D238F00F0EB9F /* UIImageView+AFNetworking.m in Sources */,
+				7AA8838117F92286004D50BC /* REMGallaryCell.m in Sources */,
 				7A399E9B177D238F00F0EB9F /* AFPropertyListRequestOperation.m in Sources */,
+				7A25725717F911AD0007438F /* REMGallaryViewController.m in Sources */,
 				7A399E9C177D238F00F0EB9F /* AFURLConnectionOperation.m in Sources */,
 				7A399E9D177D238F00F0EB9F /* AFXMLRequestOperation.m in Sources */,
 				7AB34E51177D2CE1003E235E /* REMServiceRequestOperation.m in Sources */,
@@ -2586,6 +2660,7 @@
 				B46C8EC617F27D56006DC4CB /* REMDashboardController.m in Sources */,
 				7A153C9F17AA497C00413D3C /* REMDashboardLeftNavigationController.m in Sources */,
 				7A13C19517F40809007E6AA9 /* REMMainNavigationController.m in Sources */,
+				7AA8838217F92286004D50BC /* REMGallaryView.m in Sources */,
 				7A153CA017AA497C00413D3C /* REMDashboardMainViewController.m in Sources */,
 				7A153CA117AA497C00413D3C /* REMDashboardRootViewController.m in Sources */,
 				7A153CA217AA497C00413D3C /* REMDashboardViewController.m in Sources */,

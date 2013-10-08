@@ -139,6 +139,14 @@
                                     <action selector="jumpToBuildingViewButtonPressed:" destination="8sm-Rk-4h3" eventType="touchUpInside" id="0qN-Pq-U3t"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSF-rh-OLl">
+                                <rect key="frame" x="25" y="20" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Gallary.png"/>
+                                <connections>
+                                    <action selector="gallarySwitchButtonPressed:" destination="8sm-Rk-4h3" eventType="touchDown" id="aFD-lL-z10"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -146,6 +154,7 @@
                     <navigationItem key="navigationItem" id="nIx-Ku-1Tf"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="gallarySwitchButton" destination="hSF-rh-OLl" id="S3h-uT-hX3"/>
                         <segue destination="jAV-Kb-caH" kind="push" identifier="mapToBuildingSegue" id="RbE-hG-htp"/>
                     </connections>
                 </viewController>
@@ -1692,6 +1701,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
+        <image name="Gallary.png" width="32" height="32"/>
         <image name="Schneider-Logo.png" width="100" height="30"/>
         <image name="SplashScreenBackgroud.jpg" width="1024" height="748"/>
         <image name="SplashScreenLogo-Common.png" width="140" height="153"/>
