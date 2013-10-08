@@ -7,9 +7,7 @@
 //
 
 #import "REMDashboardCellViewCell.h"
-#import "REMChartHeader.h"
 #import "REMEnergyViewData.h"
-#import "REMColumnWidgetWrapper.h"
 
 @interface REMDashboardCellViewCell()
 
@@ -35,35 +33,6 @@
         self.contentView.backgroundColor=[UIColor whiteColor];
         //self.contentView.layer.borderWidth=1;
         //self.contentView.layer.borderColor=[UIColor redColor].CGColor;
-       
-        
-        
-        
-        REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
-        syntax.type = @"line";
-        syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
-        
-        REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
-        NSMutableArray* sereis = [[NSMutableArray alloc]init];
-        for (int sIndex = 0; sIndex < 1; sIndex++) {
-            NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
-            for (int i = 0; i < 100; i++) {
-                REMEnergyData* data = [[REMEnergyData alloc]init];
-                data.quality = REMEnergyDataQualityGood;
-                data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
-                data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
-                [energyDataArray addObject:data];
-            }
-            REMTargetEnergyData* sData = [[REMTargetEnergyData alloc]init];
-            sData.energyData = energyDataArray;
-            [sereis addObject:sData];
-        }
-        energyViewData.targetEnergyData = sereis;
-        
-        REMColumnWidgetWrapper* lineWidget = [[REMColumnWidgetWrapper alloc]initWithFrame:CGRectMake(0, 0, 500, 300) data:energyViewData widgetContext:syntax];
-        
-        [self.contentView addSubview:lineWidget.view];
-        [lineWidget destroyView];
     }
     return self;
 }

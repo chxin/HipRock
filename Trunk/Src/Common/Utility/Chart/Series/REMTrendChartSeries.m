@@ -26,9 +26,7 @@
     if (self) {
         _yAxisIndex = 0;
         _plotStyle = plotStyle;
-        seriesType = [self getSeriesType];
         _startDate = startDate;
-        _plot = [self makePlot];
         NSMutableArray* data = [[NSMutableArray alloc]init];
         for (REMEnergyData *p in energyData) {
             [data addObject:[processor processEnergyData:p startDate:startDate step:step]];
@@ -37,20 +35,22 @@
     }
     return self;
 }
--(CPTPlot*)makePlot {
-    return nil;
-}
 -(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex {
-    self.plot.frame = graph.bounds;
+    plot.frame = graph.bounds;
+    plot.dataSource = self;
+    plot.delegate = self;
     CPTXYAxis* yAxis = (CPTXYAxis*)[graph.axisSet.axes objectAtIndex:self.yAxisIndex + 1];
-    self.plot.plotSpace = yAxis.plotSpace;
-}
--(REMTrendChartSeriesType)getSeriesType {
-    return 0;
+    plot.plotSpace = yAxis.plotSpace;
 }
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
     return self.points.count;
+}
+-(CPTPlot*)getPlot {
+    return plot;
+}
+-(BOOL)isOccupy {
+    return occupy;
 }
 
 @end

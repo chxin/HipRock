@@ -9,19 +9,17 @@
 #import "REMChartHeader.h"
 
 @implementation REMTrendChartLineSeries
--(CPTPlot*)makePlot {
-    CPTScatterPlot* plot = [[CPTScatterPlot alloc]init];
-    plot.dataSource = self;
-    plot.delegate = self;
-    return plot;
-}
--(REMTrendChartSeriesType)getSeriesType {
-    return REMTrendChartSeriesTypeLine;
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataProcessor:(REMTrendChartDataProcessor*)processor startDate:(NSDate*)startDate {
+    self = [super initWithData:energyData dataStep:step plotStyle:plotStyle yAxisIndex:yAxisIndex dataProcessor:processor startDate:startDate];
+    occupy = NO;
+    plot = [[CPTScatterPlot alloc]init];
+    seriesType = REMTrendChartSeriesTypeLine;
+    return self;
 }
 
 -(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex {
     [super beforePlotAddToGraph:graph seriesList:seriesList selfIndex:selfIndex];
-    CPTScatterPlot* plot = (CPTScatterPlot*)self.plot;
+    CPTScatterPlot* myPlot = (CPTScatterPlot*)plot;
     
     CPTLineStyle* lineStyle = (self.plotStyle == nil ? nil : [self.plotStyle objectForKey:@"lineStyle"]);
     CPTPlotSymbol* plotSymbol = (self.plotStyle == nil ? nil : [self.plotStyle objectForKey:@"symbol"]);
@@ -30,6 +28,7 @@
         CPTMutableLineStyle* mutStyle = [[CPTMutableLineStyle alloc]init];
         mutStyle.lineWidth = 2;
         mutStyle.lineColor = [REMColor colorByIndex:selfIndex];
+        lineStyle = mutStyle;
     }
     if (plotSymbol == nil) {
         plotSymbol = [self getSymbol:selfIndex];
@@ -37,8 +36,8 @@
         plotSymbol.size = CGSizeMake(12.0, 12.0);
         plotSymbol.lineStyle = nil;
     }
-    plot.dataLineStyle = lineStyle;
-    plot.plotSymbol = plotSymbol;
+    myPlot.dataLineStyle = lineStyle;
+    myPlot.plotSymbol = plotSymbol;
 }
 
 - (CPTPlotSymbol*) getSymbol:(uint)index {
