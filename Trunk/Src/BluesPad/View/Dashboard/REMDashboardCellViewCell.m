@@ -7,6 +7,7 @@
 //
 
 #import "REMDashboardCellViewCell.h"
+#import "REMEnergyViewData.h"
 
 @interface REMDashboardCellViewCell()
 
@@ -32,10 +33,6 @@
         self.contentView.backgroundColor=[UIColor whiteColor];
         //self.contentView.layer.borderWidth=1;
         //self.contentView.layer.borderColor=[UIColor redColor].CGColor;
-       
-        
-        
-        
     }
     return self;
 }
