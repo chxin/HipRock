@@ -304,6 +304,7 @@
                                         nextView.defaultImage=self.defaultImage;
                                         nextView.defaultBlurImage=self.defaultBlurImage;
                                         [self.view addSubview: nextView];
+                                        [nextView requireChartData];
                                         [nextView setScrollOffset:self.currentScrollOffset];
                                         self.imageViewStatus[willIndex]=@(1);
                                         

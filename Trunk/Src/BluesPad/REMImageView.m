@@ -213,7 +213,7 @@
     if(self.customImageLoaded==YES)return;
     
     
-    
+    if(self.loadingImage==YES)return;
     
     NSDictionary *param=@{@"pictureId":self.buildingInfo.building.pictureIds[0]};
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param];
@@ -722,7 +722,9 @@
     [self loadingBuildingImage];
     
     if(self.dataViewUp==YES){
+        self.hasLoadingChartData=YES;
         [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:^(BOOL success){
+            self.hasLoadingChartData=NO;
             if(success==YES){
                 [self.shareButton setEnabled:YES];
             }
