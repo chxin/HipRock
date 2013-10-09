@@ -183,11 +183,15 @@
     currentCustomer = nil;
     UINavigationController *nav=(UINavigationController *)self.parentViewController;
     [nav dismissViewControllerAnimated:YES completion:^(void){
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.parentNavigationController popToRootViewControllerAnimated:YES];
         [self.splashScreenController showLoginView:NO];
         
         [REMStorage clearSessionStorage];
     }];
+}
+
+- (void)needReload{
+    [self.tableView reloadData];
 }
 
 - (void) weiboSwitcherChanged:(UISwitch*)sender {
@@ -247,6 +251,7 @@
         REMSettingCustomerSelectionViewController *selectionVc= segue.destinationViewController;
         selectionVc.splashController=self.splashScreenController;
         selectionVc.parentNavigationController=self.parentNavigationController;
+        selectionVc.settingController=self;
     }
 }
 

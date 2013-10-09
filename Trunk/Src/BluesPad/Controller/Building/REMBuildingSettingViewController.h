@@ -22,4 +22,6 @@
 
 -(void)logoutAndClearCache;
 
+- (void) needReload;
+
 @end

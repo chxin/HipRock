@@ -82,6 +82,7 @@
             [alert show];
             
             [REMApplicationContext instance].currentUser.customers=customerArray;
+            self.currentRow=NSNotFound;
             [self.tableView reloadData];
         }
         else if(status == REMCustomerSwitchStatusBothDeleted){
@@ -94,7 +95,7 @@
         else{
             //UINavigationController *nav=self.parentNavigationController;
             [REMApplicationContext instance].currentCustomer=[REMApplicationContext instance].currentUser.customers[self.currentRow];
-            
+            [self.settingController needReload];
             [self.splashController showMapView:^(void){
                 //[nav popToRootViewControllerAnimated:YES];
                 [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];

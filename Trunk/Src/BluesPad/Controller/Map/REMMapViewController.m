@@ -31,7 +31,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self loadMapView];
+    //[self loadMapView];
 }
 
 -(void)loadMapView
@@ -153,6 +153,7 @@
     
     NSLog(@"new view bounds: %@",NSStringFromCGRect(self.view.bounds));
     [self performSegueWithIdentifier:kMapToBuildingSegue sender:self];
+    //[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)gallarySwitchButtonPressed:(id)sender {
