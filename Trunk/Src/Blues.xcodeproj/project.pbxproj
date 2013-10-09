@@ -411,6 +411,7 @@
 		7AF6AC8E17D1BA5600D62A9A /* REMBuildingSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */; };
 		7AF6AC8F17D1BA5600D62A9A /* REMBuildingSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */; };
 		7AF6AC9117D1BB1200D62A9A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B61D7517C742E000245F1E /* CoreText.framework */; };
+		B41249F01803ECF0009022C5 /* REMCustomerSwitchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
 		B42C338917E18E63008289D2 /* DefaultBuilding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B42C338817E18E63008289D2 /* DefaultBuilding@2x.png */; };
@@ -980,6 +981,8 @@
 		7ACFCBE017CDA62E00811976 /* SplashScreenLogo-Common.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenLogo-Common.png"; sourceTree = "<group>"; };
 		7AF3667617CF2D7400447650 /* REMChartSeriesIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartSeriesIndicator.h; sourceTree = "<group>"; };
 		7AF3667717CF2D7400447650 /* REMChartSeriesIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartSeriesIndicator.m; sourceTree = "<group>"; };
+		B41249EE1803ECF0009022C5 /* REMCustomerSwitchHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMCustomerSwitchHelper.h; path = Biz/REMCustomerSwitchHelper.h; sourceTree = "<group>"; };
+		B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMCustomerSwitchHelper.m; path = Biz/REMCustomerSwitchHelper.m; sourceTree = "<group>"; };
 		B4198EAC178410D300B50475 /* REMLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLogManager.h; path = Common/Log/REMLogManager.h; sourceTree = "<group>"; };
 		B4198EAD178410D300B50475 /* REMLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLogManager.m; path = Common/Log/REMLogManager.m; sourceTree = "<group>"; };
 		B4198EB01784220300B50475 /* REMJSONHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMJSONHelper.h; path = Common/Utility/REMJSONHelper.h; sourceTree = "<group>"; };
@@ -1882,6 +1885,7 @@
 		7A9B1E25177B3A8B00C282A8 /* BluesPad */ = {
 			isa = PBXGroup;
 			children = (
+				B41249ED1803ECAE009022C5 /* Biz */,
 				B49B6F421781228200BC130A /* View */,
 				7A5E2D99177B41D3000F77F9 /* Model */,
 				7A5E2D9A177B41DA000F77F9 /* Controller */,
@@ -2188,6 +2192,15 @@
 				7ACFCBDF17CDA62E00811976 /* SplashScreenBackgroud@2x.jpg */,
 			);
 			path = SplashScreen;
+			sourceTree = "<group>";
+		};
+		B41249ED1803ECAE009022C5 /* Biz */ = {
+			isa = PBXGroup;
+			children = (
+				B41249EE1803ECF0009022C5 /* REMCustomerSwitchHelper.h */,
+				B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */,
+			);
+			name = Biz;
 			sourceTree = "<group>";
 		};
 		B4426FFE17AF305500762C68 /* Building */ = {
@@ -2771,6 +2784,7 @@
 				EF8A47FE17F959B5009B5C33 /* REMTrendChartLineSeries.m in Sources */,
 				7A0288FA17C20CC500709111 /* PathHelper.m in Sources */,
 				7A0288FB17C20CC500709111 /* Resources.m in Sources */,
+				B41249F01803ECF0009022C5 /* REMCustomerSwitchHelper.m in Sources */,
 				7A0288FC17C20CC500709111 /* URLRequestHelper.m in Sources */,
 				B46C8EBA17F27C25006DC4CB /* REMDashboardView.m in Sources */,
 				7A0288FD17C20CC500709111 /* WeiboDialogClosePNG.m in Sources */,

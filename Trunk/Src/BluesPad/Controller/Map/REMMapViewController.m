@@ -170,6 +170,7 @@
     
     NSLog(@"new view bounds: %@",NSStringFromCGRect(self.view.bounds));
     [self performSegueWithIdentifier:kMapToBuildingSegue sender:self];
+    //[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)gallarySwitchButtonPressed:(id)sender {

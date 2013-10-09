@@ -10,6 +10,8 @@
 #import "Weibo.h"
 #import "WeiboAccounts.h"
 #import "REMAlertHelper.h"
+#import "REMSettingCustomerSelectionViewController.h"
+
 
 @interface REMBuildingSettingViewController ()
 
@@ -30,19 +32,17 @@
     return self;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    self.navigationController.navigationBar.topItem.backBarButtonItem=nil;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController=(UINavigationController *)self.parentViewController;
-    //UITableView* myView = (UITableView*)self.view;
-    //[myView  registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
-    //[myView  registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell1"];
-    //myView registerClass forCellReuseIdentifier:<#(NSString *)#>
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    //self.navigationController=(UINavigationController *)self.parentViewController;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -183,11 +183,15 @@
     currentCustomer = nil;
     UINavigationController *nav=(UINavigationController *)self.parentViewController;
     [nav dismissViewControllerAnimated:YES completion:^(void){
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.parentNavigationController popToRootViewControllerAnimated:YES];
         [self.splashScreenController showLoginView:NO];
         
         [REMStorage clearSessionStorage];
     }];
+}
+
+- (void)needReload{
+    [self.tableView reloadData];
 }
 
 - (void) weiboSwitcherChanged:(UISwitch*)sender {
@@ -211,44 +215,7 @@
         }];
     }
 }
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 #pragma mark - Table view delegate
 
@@ -270,9 +237,23 @@
     else if(indexPath.section==1 && indexPath.row==1){
         [self performSegueWithIdentifier:@"settingCustomerDetailSegue" sender:self];
     }
+    else if(indexPath.section == 1 && indexPath.row==0){
+        [self performSegueWithIdentifier:@"settingCustomerSelectionSegue" sender:self];
+    }
     
     
     
 }
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"settingCustomerSelectionSegue"]==YES){
+        REMSettingCustomerSelectionViewController *selectionVc= segue.destinationViewController;
+        selectionVc.splashController=self.splashScreenController;
+        selectionVc.parentNavigationController=self.parentNavigationController;
+        selectionVc.settingController=self;
+    }
+}
+
 
 @end

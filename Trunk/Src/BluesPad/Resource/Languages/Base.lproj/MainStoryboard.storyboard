@@ -1186,22 +1186,31 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="2236" y="132"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Setting Customer Selection View Controller - 当前客户-->
         <scene sceneID="pOc-6K-uE8">
             <objects>
-                <tableViewController id="STT-2G-WvG" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ucc-oz-2t7">
+                <tableViewController id="STT-2G-WvG" customClass="REMSettingCustomerSelectionViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ucc-oz-2t7">
                         <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="U53-EK-FId">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="customerCell" textLabel="10j-MQ-AlI" style="IBUITableViewCellStyleDefault" id="U53-EK-FId">
                                 <rect key="frame" x="0.0" y="66" width="540" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U53-EK-FId" id="cn7-mM-rpB">
                                     <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="10j-MQ-AlI">
+                                            <rect key="frame" x="15" y="0.0" width="510" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -1210,7 +1219,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="STT-2G-WvG" id="3Ho-BZ-DgH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="01v-T0-k3w"/>
+                    <navigationItem key="navigationItem" title="当前客户" id="WYF-lo-uez">
+                        <barButtonItem key="rightBarButtonItem" title="完成" id="97H-FA-fBE">
+                            <connections>
+                                <action selector="switchCustomer:" destination="STT-2G-WvG" id="GXW-aA-tVE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yfe-N8-S8t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1377,7 +1392,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="3984" y="207"/>
         </scene>
-        <!--Setting Customer Detail Admin View Controller - 客户管理员-->
+        <!--Setting Customer Detail Admin View Controller - Title-->
         <scene sceneID="fpM-KK-Sce">
             <objects>
                 <tableViewController id="3SI-B8-pFI" customClass="REMSettingCustomerDetailAdminViewController" sceneMemberID="viewController">
@@ -1409,7 +1424,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="3SI-B8-pFI" id="qLU-ar-hBu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="客户管理员" id="Olt-h6-ub2"/>
+                    <navigationItem key="navigationItem" title="Title" id="Gvo-eK-rFC"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tj7-yR-Vc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

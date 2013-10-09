@@ -124,10 +124,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"buildingSettingSegue2"]==YES){
-        //UINavigationController *c=  segue.destinationViewController;
-        //REMBuildingSettingViewController *vc= [c.childViewControllers lastObject];
-        //vc.splashScreenController=self.splashScreenController;
-        //vc.navigationController=self.navigationController;
+        UINavigationController *c=  segue.destinationViewController;
+        REMBuildingSettingViewController *vc= [c.childViewControllers lastObject];
+        vc.splashScreenController=self.splashScreenController;
+        vc.parentNavigationController=self.navigationController;
     }
     if([segue.identifier isEqualToString:@"buildingToMapSegue"]==YES){
         REMMapViewController *mapController = segue.destinationViewController;
