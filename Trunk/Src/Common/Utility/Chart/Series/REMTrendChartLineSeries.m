@@ -9,8 +9,8 @@
 #import "REMChartHeader.h"
 
 @implementation REMTrendChartLineSeries
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataProcessor:(REMTrendChartDataProcessor*)processor startDate:(NSDate*)startDate {
-    self = [super initWithData:energyData dataStep:step plotStyle:plotStyle yAxisIndex:yAxisIndex dataProcessor:processor startDate:startDate];
+-(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataStep:(REMEnergyStep)step startDate:(NSDate*)startDate {
+    self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle yAxisIndex:yAxisIndex dataStep:step startDate:startDate];
     occupy = NO;
     plot = [[CPTScatterPlot alloc]init];
     seriesType = REMTrendChartSeriesTypeLine;
@@ -82,11 +82,11 @@
 
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
 {
-    REMTrendChartPoint* point = [self.points objectAtIndex:idx];
+    REMEnergyData* point = [self.energyData objectAtIndex:idx];
     if (fieldEnum == CPTScatterPlotFieldX) {
-        return [NSNumber numberWithFloat:point.x];
+        return [self.dataProcessor processX:point startDate:self.startDate step:self.step];
     } else if (fieldEnum == CPTScatterPlotFieldY) {
-        return point.y;
+        return [self.dataProcessor processY:point startDate:self.startDate step:self.step];
     } else {
         return nil;
     }

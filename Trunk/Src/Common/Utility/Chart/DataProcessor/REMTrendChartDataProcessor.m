@@ -11,23 +11,27 @@
 
 @implementation REMTrendChartDataProcessor
 
--(REMTrendChartPoint*)processEnergyData:(REMEnergyData*)point startDate:(NSDate*)startDate step:(REMEnergyStep)step {
-    return [[REMTrendChartPoint alloc]
-            initWithX:[self processX:point.localTime startDate:startDate step:step]
-            y:point.dataValue
-            point:point];
-}
-
--(float)processX:(NSDate*)localTime startDate:(NSDate*)startDate step:(REMEnergyStep)step  {
+-(NSNumber*)processX:(REMEnergyData*)point startDate:(NSDate*)startDate step:(REMEnergyStep)step  {
     float x = 0;
     if (step == REMEnergyStepHour || step == REMEnergyStepDay || step == REMEnergyStepWeek) {
-        x = [localTime timeIntervalSinceDate:startDate] / (step == REMEnergyStepHour ? 3600 : (step == REMEnergyStepDay ? 86400 : 604800));
+        x = [point.localTime timeIntervalSinceDate:startDate] / (step == REMEnergyStepHour ? 3600 : (step == REMEnergyStepDay ? 86400 : 604800));
     } else if (step == REMEnergyStepYear) {
-        x = [REMTimeHelper getYear:localTime] - [REMTimeHelper getYear:startDate];
+        x = [REMTimeHelper getYear:point.localTime] - [REMTimeHelper getYear:startDate];
     } else {
-        x = ([REMTimeHelper getYear:localTime] - [REMTimeHelper getYear:startDate]) * 12 + [REMTimeHelper getMonth:localTime] - [REMTimeHelper getMonth:startDate];
+        x = ([REMTimeHelper getYear:point.localTime] - [REMTimeHelper getYear:startDate]) * 12 + [REMTimeHelper getMonth:point.localTime] - [REMTimeHelper getMonth:startDate];
     }
-    return x;
+    return [NSNumber numberWithFloat:x];
 }
-
+-(NSDate*)deprocessX:(float)x startDate:(NSDate*)startDate step:(REMEnergyStep)step {
+    if (step == REMEnergyStepHour || step == REMEnergyStepDay || step == REMEnergyStepWeek) {
+        float i = (step == REMEnergyStepHour ? 3600 : (step == REMEnergyStepDay ? 86400 : 604800));
+        return[NSDate dateWithTimeInterval:i*x sinceDate:startDate];
+    } else if (step == REMEnergyStepYear) {
+        int monthToAdd = 12*x;
+        return [REMTimeHelper addMonthToDate:startDate month:monthToAdd];
+    } else {
+        int monthToAdd = x;
+        return [REMTimeHelper addMonthToDate:startDate month:monthToAdd];
+    }
+}
 @end

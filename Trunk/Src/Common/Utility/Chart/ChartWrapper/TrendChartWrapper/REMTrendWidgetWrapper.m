@@ -12,7 +12,7 @@
 
 -(REMTrendChartView*)renderContentView:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {
     
-    REMTrendChartConfig* chartConfig = [REMTrendChartConfig getMinimunWidgetDefaultSetting];
+    REMTrendChartConfig* chartConfig = (REMTrendChartConfig*)[REMTrendChartConfig getMinimunWidgetDefaultSetting];
     chartConfig.step = widgetSyntax.step.intValue;
     NSMutableArray* seriesArray = [[NSMutableArray alloc]init];
     int seriesCount = 0;
@@ -33,11 +33,21 @@
         }
         [seriesArray addObject: [self getSeriesConfigByData:seriesData step:widgetSyntax.step.intValue yAxisIndex:uomIndex seriesIndex:seriesIndex]];
     }
+    if (uomIdArray.count > 1) {
+        NSMutableArray* yAxisConfig = [NSMutableArray arrayWithArray: chartConfig.yAxisConfig];
+        for (int i = 1; i < uomIdArray.count; i++) {
+            [yAxisConfig addObject:[REMTrendChartAxisConfig getWidgetYConfig]];
+        }
+        chartConfig.yAxisConfig = yAxisConfig;
+    }
     chartConfig.series = seriesArray;
     return  [[REMTrendChartView alloc]initWithFrame:frame chartConfig:chartConfig];
 }
 
 -(REMTrendChartSeries*) getSeriesConfigByData:(REMTargetEnergyData*)energyData step:(REMEnergyStep)step yAxisIndex:(uint)yAxisIndex seriesIndex:(uint)seriesIndex {
     return nil;
+}
+-(REMChartDataProcessor*)initializeProcessor {
+    return [[REMTrendChartDataProcessor alloc]init];
 }
 @end

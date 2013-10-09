@@ -150,7 +150,11 @@
 -(void)rerenderXLabel {
     CPTXYAxis* xAxis = [self.hostedGraph.axisSet.axes objectAtIndex:0];
     CPTPlotRange* xRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(currentXLocation) length:CPTDecimalFromFloat(currentXLength)];
-    ((CPTXYPlotSpace*)(xAxis.plotSpace)).xRange = xRange;
+//    ((CPTXYPlotSpace*)(xAxis.plotSpace)).xRange = xRange;
+    for (int i = 1; i < self.hostedGraph.axisSet.axes.count; i++) {
+        CPTXYPlotSpace* pSpace = (CPTXYPlotSpace*)((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:i]).plotSpace;
+        pSpace.xRange = xRange;
+    }
     ((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:1]).orthogonalCoordinateDecimal = [NSNumber numberWithFloat:currentXLocation].decimalValue;
     int xLabelInterval = [self getXInterval];
     REMXFormatter* formatter = [[REMXFormatter alloc]initWithStartDate:self.xStartDate dataStep:self.step interval:xLabelInterval];
@@ -169,16 +173,17 @@
     for (int i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = [self.series objectAtIndex:i];
         NSNumber* maxY = [NSNumber numberWithInt:0];
-        REMTrendChartPoint* point = [s.points objectAtIndex:0];
-        int j = 0;
+        NSDate* xStartDate = [s.dataProcessor deprocessX:startX startDate:s.startDate step:s.step];
+        NSDate* xEndDate = [s.dataProcessor deprocessX:endX startDate:s.startDate step:s.step];
         /*效率还可以改善*/
-        for (j = 0; j < s.points.count; j++) {
-            point = [s.points objectAtIndex:j];
-            if (point.x < startX) continue;
-            if (point.x > endX) break;
-            if (point.y == nil || point.y == NULL || [point.y isLessThan:([NSNumber numberWithInt:0])]) continue;
-            if (maxY.floatValue < point.y.floatValue) {
-                maxY = point.y;
+        for (int j = 0; j < s.energyData.count; j++) {
+            REMEnergyData* point = [s.energyData objectAtIndex:j];
+            if ([point.localTime timeIntervalSinceDate:xStartDate] < 0) continue;
+            if ([point.localTime timeIntervalSinceDate:xEndDate] > 0) break;
+            NSNumber* yVal = [s.dataProcessor processY:point startDate:s.startDate step:s.step];
+            if (yVal == nil || yVal == NULL || [yVal isLessThan:([NSNumber numberWithInt:0])]) continue;
+            if (maxY.floatValue < yVal.floatValue) {
+                maxY = yVal;
             }
         }
         
@@ -194,7 +199,7 @@
     float majorYMax = ((NSNumber*)[yAxisMaxValues objectAtIndex:0]).floatValue;
     
     
-    double yInterval = 0;
+    double yMajorInterval = 0;
     if (majorYMax > 0) {
         double yIntervalMag = majorYMax / self.horizentalGridLineAmount;
         double mag = 1;
@@ -207,12 +212,31 @@
                 mag /= 10;
             }
         }
-        yInterval = ceil(yIntervalMag / mag * (self.horizentalGridLineAmount + 1)) * mag / (self.horizentalGridLineAmount + 1);
+        yMajorInterval = ceil(yIntervalMag / mag * (self.horizentalGridLineAmount + 1)) * mag / (self.horizentalGridLineAmount + 1);
     } else {
-        yInterval = 1;
+        yMajorInterval = 1;
     }
-    majorYAxis.majorIntervalLength = CPTDecimalFromFloat(yInterval);
-    ((CPTXYPlotSpace*)(majorYAxis.plotSpace)).yRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(majorYMax + yInterval * 0.2)];
+    majorYAxis.majorIntervalLength = CPTDecimalFromFloat(yMajorInterval);
+    float yMajorLength = majorYMax + yMajorInterval * 0.2;
+    ((CPTXYPlotSpace*)(majorYAxis.plotSpace)).yRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(yMajorLength)];
+    
+    // 绘制其他Y轴
+    for (uint i = 2; i < self.hostedGraph.axisSet.axes.count; i++) {
+        CPTXYAxis* yAxis =[self.hostedGraph.axisSet.axes objectAtIndex:i];
+        CPTXYPlotSpace* thePlotspace = (CPTXYPlotSpace*)yAxis.plotSpace;
+        
+        float yMax = ((NSNumber*)[yAxisMaxValues objectAtIndex:i-1]).floatValue;
+        if (yMax == majorYMax) {
+            yAxis.majorIntervalLength = majorYAxis.majorIntervalLength;
+            thePlotspace.yRange = ((CPTXYPlotSpace*)(majorYAxis.plotSpace)).yRange;
+        } else if (yMax > majorYMax) {
+            yAxis.majorIntervalLength = CPTDecimalFromFloat(yMajorInterval * ceil(yMax / majorYMax));
+            thePlotspace.yRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(yMajorLength * ceil(yMax / majorYMax))];
+        } else {
+            yAxis.majorIntervalLength = CPTDecimalFromFloat(yMajorInterval * ceil(majorYMax / yMax));
+            thePlotspace.yRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(yMajorLength * ceil(majorYMax / yMax))];
+        }
+    }
 }
 
 -(void)initAxisSet {
@@ -240,6 +264,7 @@
         xAxis.majorGridLineStyle = self.xAxisConfig.gridlineStyle;
     }
     CPTPlotRange* globalYRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(INT32_MAX)];
+    float reserveredRightSpace = 0;
     for (int i = 0; i < self.yAxisConfig.count; i++) {
         REMTrendChartAxisConfig* yAxisConfig = [self.yAxisConfig objectAtIndex:i];
         CPTXYAxis *yAxis = [[CPTXYAxis alloc]init];
@@ -256,13 +281,17 @@
             yAxis.plotSpace = graph.defaultPlotSpace;
             yAxis.plotSpace.delegate = self;
             yAxis.plotSpace.allowsUserInteraction = YES;
+            yAxis.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
             ((CPTXYPlotSpace*)yAxis.plotSpace).globalYRange = globalYRange;
         } else {
             graph.plotAreaFrame.paddingRight = yAxisConfig.reservedSpace.width + yAxisConfig.lineStyle.lineWidth + graph.plotAreaFrame.paddingRight;
             CPTXYPlotSpace* plotSpace = [[CPTXYPlotSpace alloc]init];
             yAxis.plotSpace = plotSpace;
+            yAxis.tickDirection = CPTSignPositive;
+            yAxis.axisConstraints = [CPTConstraints constraintWithUpperOffset:reserveredRightSpace];
+            reserveredRightSpace-=yAxisConfig.reservedSpace.width;
             yAxis.plotSpace.allowsUserInteraction = NO;
-            plotSpace.globalYRange = globalYRange;
+            [self.hostedGraph addPlotSpace:plotSpace];
         }
         yAxis.labelingPolicy = CPTAxisLabelingPolicyFixedInterval;
         [axisArray addObject:yAxis];
@@ -276,11 +305,11 @@
 - (void)renderSeries {
     for (int i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = [self.series objectAtIndex:i];
-        REMTrendChartPoint* point = [s.points objectAtIndex:s.points.count - 1];
-        maxXValOfSeries = MAX(maxXValOfSeries, point.x);
+        CPTPlotSpace* plotSpace = ((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:s.yAxisIndex + 1]).plotSpace;
+//        REMTrendChartPoint* point = [s.points objectAtIndex:s.points.count - 1];
+        maxXValOfSeries = MAX(maxXValOfSeries, s.maxX);
         [s beforePlotAddToGraph:self.hostedGraph seriesList:self.series selfIndex:i];
-//        s.plot.frame = self.hostedGraph.bounds;
-        [self.hostedGraph addPlot:[s getPlot]];
+        [self.hostedGraph addPlot:[s getPlot] toPlotSpace:plotSpace];
     }
     // set global X range
     CPTPlotRange* xGlobalRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(-0.5) length:CPTDecimalFromFloat(maxXValOfSeries+1)];
@@ -292,10 +321,15 @@
 
 -(CPTPlotRange*)plotSpace:(CPTXYPlotSpace *)space willChangePlotRangeTo:(CPTPlotRange *)newRange forCoordinate:(CPTCoordinate)coordinate {
     if (coordinate == CPTCoordinateX) {
-        CPTXYAxisSet *axisSet = (CPTXYAxisSet*)self.hostedGraph.axisSet;
-        CPTXYAxis* yAxis = [axisSet.axes objectAtIndex:1];
+        // Move other plotspace with the default plotspace
+        for (int i = 2; i < self.hostedGraph.axisSet.axes.count; i++) {
+            CPTXYPlotSpace* pSpace = (CPTXYPlotSpace*)((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:i]).plotSpace;
+            pSpace.xRange = newRange;
+        }
+//        CPTXYAxisSet *axisSet = (CPTXYAxisSet*)self.hostedGraph.axisSet;
+//        CPTXYAxis* yAxis = [axisSet.axes objectAtIndex:1];
 //        NSLog(@"SHOW RANGE AT:%@-%@", [NSDecimalNumber decimalNumberWithDecimal:newRange.location].stringValue,[NSDecimalNumber decimalNumberWithDecimal:yAxis.orthogonalCoordinateDecimal].stringValue);
-        yAxis.orthogonalCoordinateDecimal = newRange.location;
+//        yAxis.orthogonalCoordinateDecimal = newRange.location;
         [self renderRange:[NSDecimalNumber decimalNumberWithDecimal: newRange.location].floatValue length:[NSDecimalNumber decimalNumberWithDecimal: newRange.length].floatValue];
     } else if (coordinate == CPTCoordinateY) {
         return space.yRange; // disable y scrolling here.
