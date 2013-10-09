@@ -22,4 +22,6 @@
 
 + (UIImage *)readImageFile:(NSString *)fileName;
 
++ (UIImage *) imageWithView:(UIView *)view;
+
 @end

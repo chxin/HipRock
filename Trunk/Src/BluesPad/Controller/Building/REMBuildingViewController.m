@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingWeiboView.h"
 #import "REMMapViewController.h"
+#import "REMMapBuildingSegue.h"
 
 @interface REMBuildingViewController ()
 @property (nonatomic,strong) NSArray *imageArray;
@@ -395,7 +396,7 @@
 
 -(IBAction)backButtonPressed:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self performSegueWithIdentifier:kBuildingToMapSegue sender:self];
 }
 
 -(void)executeExport:(REMMaskManager *)masker{
