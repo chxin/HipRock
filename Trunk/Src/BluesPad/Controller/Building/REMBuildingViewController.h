@@ -12,6 +12,7 @@
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingConstants.h"
 #import "REMBuildingSettingViewController.h"
+#import "REMMapViewController.h"
 
 typedef enum _BuildingSourceType{
     BuildingSourceTypeFromMap,
@@ -31,5 +32,7 @@ typedef enum _BuildingSourceType{
 @property (nonatomic,copy) NSNumber *currentBuildingId;
 
 @property (nonatomic,strong) UIImage *logoImage;
+
+@property (nonatomic,strong) REMMapViewController *mapViewController;
 
 @end

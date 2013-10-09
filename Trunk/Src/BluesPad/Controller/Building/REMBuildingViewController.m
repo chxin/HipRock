@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingWeiboView.h"
 #import "REMMapViewController.h"
+#import "REMMapBuildingSegue.h"
 
 @interface REMBuildingViewController ()
 @property (nonatomic,strong) NSArray *imageArray;
@@ -123,10 +124,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"buildingSettingSegue2"]==YES){
-        //UINavigationController *c=  segue.destinationViewController;
-        //REMBuildingSettingViewController *vc= [c.childViewControllers lastObject];
-        //vc.splashScreenController=self.splashScreenController;
-        //vc.navigationController=self.navigationController;
+        UINavigationController *c=  segue.destinationViewController;
+        REMBuildingSettingViewController *vc= [c.childViewControllers lastObject];
+        vc.splashScreenController=self.splashScreenController;
+        vc.parentNavigationController=self.navigationController;
     }
     if([segue.identifier isEqualToString:@"buildingToMapSegue"]==YES){
         REMMapViewController *mapController = segue.destinationViewController;
@@ -395,7 +396,7 @@
 
 -(IBAction)backButtonPressed:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self performSegueWithIdentifier:kBuildingToMapSegue sender:self];
 }
 
 -(void)executeExport:(REMMaskManager *)masker{

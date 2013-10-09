@@ -45,7 +45,7 @@ typedef void(^SuccessCallback)(BOOL success);
         self.clipsToBounds=YES;
         self.showsVerticalScrollIndicator=NO;
         self.successCounter=0;
-        [self setContentSize:CGSizeMake(0, 1115)];
+        [self setContentSize:CGSizeMake(0, 1160)];
         self.buildingInfo=buildingInfo;
         self.currentCommodityId=@(0);
         self.commodityViewDictionary=[[NSMutableDictionary alloc]initWithCapacity:self.buildingInfo.commodityArray.count+1];
@@ -300,7 +300,7 @@ typedef void(^SuccessCallback)(BOOL success);
 
 - (void)initDragLabel
 {
-    CGRect frame = CGRectMake(0, 960, 500, 20);
+    CGRect frame = CGRectMake(0, self.contentSize.height-40, 500, 20);
     
     UILabel *label =[[UILabel alloc]initWithFrame:frame];
     

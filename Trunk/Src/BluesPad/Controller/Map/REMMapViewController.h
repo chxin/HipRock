@@ -8,17 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import "REMSplashScreenController.h"
+#import <GoogleMaps/GoogleMaps.h>
 @class REMGallaryViewController;
+@class REMBuildingViewController;
 
-@interface REMMapViewController : UIViewController
+@interface REMMapViewController : UIViewController<GMSMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *gallarySwitchButton;
 
 @property (nonatomic,strong) NSArray *buildingInfoArray;
 @property (nonatomic,strong) REMSplashScreenController *splashScreenController;
 @property (nonatomic,strong) REMGallaryViewController *gallaryViewController;
+@property (nonatomic,strong) REMBuildingViewController *buildingViewController;
 
-- (IBAction)jumpToBuildingViewButtonPressed:(id)sender;
+@property (nonatomic,strong) UIImageView *snapshot;
+@property (nonatomic) CGPoint originalPoint;
+
 - (IBAction)gallarySwitchButtonPressed:(id)sender;
 
 

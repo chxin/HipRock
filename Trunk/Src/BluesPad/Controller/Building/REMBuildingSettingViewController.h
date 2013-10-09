@@ -15,9 +15,13 @@
 
 @interface REMBuildingSettingViewController : UITableViewController<UIAlertViewDelegate>
 
-@property (nonatomic,strong) REMSplashScreenController *splashScreenController;
+@property (nonatomic,weak) REMSplashScreenController *splashScreenController;
 
-@property (nonatomic,strong) UINavigationController *navigationController;
+@property (nonatomic,weak) UINavigationController *parentNavigationController;
 @property (nonatomic,strong) UISwitch *weiboAccoutSwitcher;
+
+-(void)logoutAndClearCache;
+
+- (void) needReload;
 
 @end
