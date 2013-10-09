@@ -11,6 +11,6 @@
 @implementation REMLineWidgetWrapper
 
 -(REMTrendChartSeries*) getSeriesConfigByData:(REMTargetEnergyData*)energyData step:(REMEnergyStep)step yAxisIndex:(uint)yAxisIndex seriesIndex:(uint)seriesIndex {
-    return [[REMTrendChartLineSeries alloc]initWithData:energyData.energyData dataStep:step plotStyle:nil yAxisIndex:yAxisIndex dataProcessor:self.dataProcessor];
+    return [[REMTrendChartLineSeries alloc]initWithData:energyData.energyData dataProcessor:self.dataProcessor plotStyle:Nil yAxisIndex:yAxisIndex dataStep:step];
 }
 @end

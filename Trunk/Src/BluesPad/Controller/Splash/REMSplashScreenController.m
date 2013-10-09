@@ -13,6 +13,11 @@
 #import "REMBuildingOverallModel.h"
 #import "REMMapViewController.h"
 
+
+#import "REMColumnWidgetWrapper.h"
+#import "REMLineWidgetWrapper.h"
+#import "REMPieChartWrapper.h"
+#import "REMChartHeader.h"
 @interface REMSplashScreenController ()
 
 @property (nonatomic,strong) NSMutableArray *buildingInfoArray;
@@ -141,6 +146,40 @@
 
 - (void)showMapView:(void (^)(void))loadCompleted
 {
+    
+    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
+    syntax.type = @"line";
+    syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
+    
+    REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
+    NSMutableArray* sereis = [[NSMutableArray alloc]init];
+    for (int sIndex = 0; sIndex < 3; sIndex++) {
+        NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
+        for (int i = 0; i < 100; i++) {
+            REMEnergyData* data = [[REMEnergyData alloc]init];
+            data.quality = REMEnergyDataQualityGood;
+            data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
+            data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
+            [energyDataArray addObject:data];
+        }
+        REMTargetEnergyData* sData = [[REMTargetEnergyData alloc]init];
+        sData.energyData = energyDataArray;
+        sData.target = [[REMEnergyTargetModel alloc]init];
+        sData.target.uomId = sIndex;
+        [sereis addObject:sData];
+    }
+    energyViewData.targetEnergyData = sereis;
+    
+    REMColumnWidgetWrapper* columnWidget = [[REMColumnWidgetWrapper alloc]initWithFrame:CGRectMake(0, 0, 500, 300) data:energyViewData widgetContext:syntax];
+    [self.view addSubview:columnWidget.view];
+    [columnWidget destroyView];
+    REMLineWidgetWrapper* lineWidget = [[REMLineWidgetWrapper alloc]initWithFrame:CGRectMake(524, 0, 500, 300) data:energyViewData widgetContext:syntax];
+    [self.view addSubview:lineWidget.view];
+    [lineWidget destroyView];
+    REMPieChartWrapper* pieWidget = [[REMPieChartWrapper alloc]initWithFrame:CGRectMake(0, 350, 500, 300) data:energyViewData widgetContext:syntax];
+    [self.view addSubview:pieWidget.view];
+    [pieWidget destroyView];
+    
     NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
     REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSBuildingInfo parameter:parameter];
     //buildingStore.isAccessLocal = YES;
