@@ -1219,7 +1219,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="当前客户" id="WYF-lo-uez">
-                        <barButtonItem key="rightBarButtonItem" title="完成" id="97H-FA-fBE"/>
+                        <barButtonItem key="rightBarButtonItem" title="完成" id="97H-FA-fBE">
+                            <connections>
+                                <action selector="switchCustomer:" destination="STT-2G-WvG" id="GXW-aA-tVE"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yfe-N8-S8t" userLabel="First Responder" sceneMemberID="firstResponder"/>

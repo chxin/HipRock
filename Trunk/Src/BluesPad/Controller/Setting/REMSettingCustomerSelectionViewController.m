@@ -10,9 +10,12 @@
 #import "REMApplicationContext.h"
 #import "REMUserModel.h"
 #import "REMCustomerModel.h"
+#import "REMCustomerSwitchHelper.h"
 
 @interface REMSettingCustomerSelectionViewController ()
 @property (nonatomic) NSUInteger currentRow;
+@property (nonatomic,weak) UIAlertView *currentAlert;
+
 @end
 
 @implementation REMSettingCustomerSelectionViewController
@@ -35,6 +38,72 @@
     self.navigationController.navigationBar.topItem.backBarButtonItem = backButton;
 }
 
+- (void)switchCustomer:(UIBarButtonItem *)sender
+{
+    REMCustomerModel *customer= [REMApplicationContext instance].currentUser.customers[self.currentRow];
+    if([customer.name isEqualToString:[REMApplicationContext instance].currentCustomer.name]==YES){
+        
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"正在获取新客户的能源信息,请稍候..." delegate:self cancelButtonTitle:@"放弃" otherButtonTitles:nil, nil];
+        alert.tag=1;
+        [alert show];
+        self.currentAlert=alert;
+        [self realSwitchCustomer:customer.customerId];
+    }
+    
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(alertView.tag==1){
+        [REMCustomerSwitchHelper cancelSwitch];
+    }
+    else if(alertView.tag==3){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"当前客户已被解除关联,请退出系统后重新登录。" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+        alert.tag=4;
+        [alert show];
+    }
+    else if(alertView.tag==4){
+        [self.settingController logoutAndClearCache];
+    }
+    
+}
+
+
+- (void)realSwitchCustomer:(NSNumber *)customerId{
+    [REMCustomerSwitchHelper switchCustomerById:customerId masker:nil action:^(REMCustomerSwitchStatus status,NSArray *customerArray){
+        
+        if (status == REMCustomerSwitchStatusSelectedCustomerDeleted) {
+            [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"该客户已被解除关联,请重新选择客户。" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            alert.tag=2;
+            [alert show];
+            
+            [REMApplicationContext instance].currentUser.customers=customerArray;
+            [self.tableView reloadData];
+        }
+        else if(status == REMCustomerSwitchStatusBothDeleted){
+            [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"该客户已被解除关联,请重新选择客户。" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            alert.tag=3;
+            [alert show];
+
+        }
+        else{
+            //UINavigationController *nav=self.parentNavigationController;
+            [REMApplicationContext instance].currentCustomer=[REMApplicationContext instance].currentUser.customers[self.currentRow];
+            
+            [self.splashController showMapView:^(void){
+                //[nav popToRootViewControllerAnimated:YES];
+                [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];
+                
+            }];
+        }
+        
+    }];
+}
 
 
 - (void)didReceiveMemoryWarning
@@ -47,19 +116,7 @@
     return 1;
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    
-}
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
-    
-}
-
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
-{
-    
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [REMApplicationContext instance].currentUser.customers.count;
@@ -124,5 +181,6 @@
     
     
 }
+
 
 @end

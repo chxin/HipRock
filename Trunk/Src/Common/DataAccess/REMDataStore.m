@@ -77,7 +77,7 @@ static NSDictionary *serviceMap = nil;
            * Customer
            */
           [NSNumber numberWithInt:REMDSCustomerLogo] : [[REMServiceMeta alloc] initWithDataResultRelativeUrl:@"API/Hierarchy.svc/GetCustomerLogo"],
-          
+          [NSNumber numberWithInt:REMDSCustomerSwitch] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Customer.svc/SwitchCustomer"],
           /**
            *	Building
            */
