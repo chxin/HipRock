@@ -1,5 +1,5 @@
 //
-//  REMTrendChart.h
+//  REMChartHeader.h
 //  Blues
 //
 //  Created by Zilong-Oscar.Xu on 9/12/13.
@@ -11,6 +11,7 @@
 #import "REMEnergyData.h"
 #import "CorePlot-CocoaTouch.h"
 #import "REMBuildingConstants.h"
+#import "REMColor.h"
 
 
 typedef enum  {
@@ -48,11 +49,11 @@ typedef enum  {
 
 
 @interface REMTrendChartSeries : NSObject<CPTPlotDataSource> {
-    @protected REMTrendChartSeriesType seriesType;
-//    @protected CPTGraph* graph;
+@protected REMTrendChartSeriesType seriesType;
+@protected BOOL occupy;   // 所有为YES的序列，在同一个X轴位置的数据点的位置互斥。线图设为false，Bar、Column和StackColumn设为true
+@protected CPTPlot* plot;
 }
-@property (nonatomic, readonly) CPTPlot* plot;
-@property (nonatomic, readonly) CPTColor* plotColor;
+@property (nonatomic, readonly) NSDictionary* plotStyle;
 @property (nonatomic, readonly) NSArray* points;
 
 /*
@@ -65,11 +66,13 @@ typedef enum  {
  */
 @property (nonatomic, readonly) NSDate* startDate;
 
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step;
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step dataProcessor:(REMTrendChartDataProcessor*)processor;
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step dataProcessor:(REMTrendChartDataProcessor*)processor yAxisIndex:(int)yAxisIndex;
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step dataProcessor:(REMTrendChartDataProcessor*)processor yAxisIndex:(int)yAxisIndex startDate:(NSDate*)startDate;
-
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle;
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex;
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataProcessor:(REMTrendChartDataProcessor*)processor;
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataProcessor:(REMTrendChartDataProcessor*)processor startDate:(NSDate*)startDate;
+-(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex;
+-(CPTPlot*)getPlot;
+-(BOOL)isOccupy;
 //-(void)hide;
 //-(void)show;
 @end

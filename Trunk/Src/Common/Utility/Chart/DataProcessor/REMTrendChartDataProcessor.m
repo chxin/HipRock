@@ -6,7 +6,7 @@
 //
 //
 
-#import "REMTrendChart.h"
+#import "REMChartHeader.h"
 #import "REMTimeHelper.h"
 
 @implementation REMTrendChartDataProcessor

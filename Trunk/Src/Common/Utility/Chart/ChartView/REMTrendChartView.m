@@ -6,7 +6,7 @@
 //
 //
 
-#import "REMTrendChart.h"
+#import "REMChartHeader.h"
 
 @interface REMXFormatter : NSFormatter
 -(REMXFormatter*)initWithStartDate:(NSDate*)startDate dataStep:(REMEnergyStep)step interval:(int)interval;
@@ -106,7 +106,7 @@
         
         [self initAxisSet];
         [self renderSeries];
-        [self renderRange:5 length:12];
+        [self renderRange:0 length:12];
     }
     return self;
 }
@@ -132,6 +132,7 @@
 
 -(void)renderRange:(float)location length:(float)length {
     if (length <= 0) return;
+    location -= 0.5;
     if (length == currentXLength && location == currentXLocation) return;
     CPTXYPlotSpace* majorPlotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
     if (location < [NSDecimalNumber decimalNumberWithDecimal: majorPlotSpace.globalXRange.location].floatValue) return;
@@ -275,12 +276,11 @@
 - (void)renderSeries {
     for (int i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = [self.series objectAtIndex:i];
-        CPTXYAxis* yAxis = (CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:s.yAxisIndex + 1];
-        s.plot.plotSpace = yAxis.plotSpace;
         REMTrendChartPoint* point = [s.points objectAtIndex:s.points.count - 1];
         maxXValOfSeries = MAX(maxXValOfSeries, point.x);
-        s.plot.frame = self.hostedGraph.bounds;
-        [self.hostedGraph addPlot:s.plot];
+        [s beforePlotAddToGraph:self.hostedGraph seriesList:self.series selfIndex:i];
+//        s.plot.frame = self.hostedGraph.bounds;
+        [self.hostedGraph addPlot:[s getPlot]];
     }
     // set global X range
     CPTPlotRange* xGlobalRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(-0.5) length:CPTDecimalFromFloat(maxXValOfSeries+1)];
@@ -294,7 +294,7 @@
     if (coordinate == CPTCoordinateX) {
         CPTXYAxisSet *axisSet = (CPTXYAxisSet*)self.hostedGraph.axisSet;
         CPTXYAxis* yAxis = [axisSet.axes objectAtIndex:1];
-        NSLog(@"SHOW RANGE AT:%@-%@", [NSDecimalNumber decimalNumberWithDecimal:newRange.location].stringValue,[NSDecimalNumber decimalNumberWithDecimal:yAxis.orthogonalCoordinateDecimal].stringValue);
+//        NSLog(@"SHOW RANGE AT:%@-%@", [NSDecimalNumber decimalNumberWithDecimal:newRange.location].stringValue,[NSDecimalNumber decimalNumberWithDecimal:yAxis.orthogonalCoordinateDecimal].stringValue);
         yAxis.orthogonalCoordinateDecimal = newRange.location;
         [self renderRange:[NSDecimalNumber decimalNumberWithDecimal: newRange.location].floatValue length:[NSDecimalNumber decimalNumberWithDecimal: newRange.length].floatValue];
     } else if (coordinate == CPTCoordinateY) {
