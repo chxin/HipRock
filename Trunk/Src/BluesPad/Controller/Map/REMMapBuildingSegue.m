@@ -37,13 +37,15 @@
         //add building view as subview into map view
         __block UIImageView *transitionView = [[UIImageView alloc] initWithImage: [self imageWithView:buildingView]];
         
+        CGRect initialFrame = CGRectMake(self.originalPoint.x, self.originalPoint.y, 0, 0);
+        CGRect finalFrame = CGRectMake(0, 0, mapView.bounds.size.width, mapView.bounds.size.height);
+        
+        transitionView.frame = initialFrame;
+        
         [mapView addSubview:transitionView];
-        [transitionView setTransform:CGAffineTransformMakeScale(0.1,0.1)];
-        [transitionView setCenter:self.originalPoint];
         
         [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-            [transitionView setTransform:CGAffineTransformMakeScale(1.0,1.0)];
-            [transitionView setCenter:CGPointMake(mapView.bounds.size.width/2, mapView.bounds.size.height/2)];
+            transitionView.frame = finalFrame;
         } completion:^(BOOL finished){
             [transitionView removeFromSuperview];
             transitionView = nil;
