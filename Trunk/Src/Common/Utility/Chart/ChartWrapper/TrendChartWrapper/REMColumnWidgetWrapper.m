@@ -10,6 +10,6 @@
 
 @implementation REMColumnWidgetWrapper
 -(REMTrendChartSeries*) getSeriesConfigByData:(REMTargetEnergyData*)energyData step:(REMEnergyStep)step yAxisIndex:(uint)yAxisIndex seriesIndex:(uint)seriesIndex {
-    return [[REMTrendChartColumnSeries alloc]initWithData:energyData.energyData dataStep:step plotStyle:nil yAxisIndex:yAxisIndex];
+    return [[REMTrendChartColumnSeries alloc]initWithData:energyData.energyData dataStep:step plotStyle:nil yAxisIndex:yAxisIndex dataProcessor:self.dataProcessor];
 }
 @end

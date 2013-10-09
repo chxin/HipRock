@@ -73,6 +73,8 @@
         }
         REMTargetEnergyData* sData = [[REMTargetEnergyData alloc]init];
         sData.energyData = energyDataArray;
+        sData.target = [[REMEnergyTargetModel alloc]init];
+        sData.target.uomId = sIndex;
         [sereis addObject:sData];
     }
     energyViewData.targetEnergyData = sereis;
@@ -80,7 +82,7 @@
     REMColumnWidgetWrapper* columnWidget = [[REMColumnWidgetWrapper alloc]initWithFrame:CGRectMake(0, 0, 500, 300) data:energyViewData widgetContext:syntax];
     [self.view addSubview:columnWidget.view];
     [columnWidget destroyView];
-    REMLineWidgetWrapper* lineWidget = [[REMLineWidgetWrapper alloc]initWithFrame:CGRectMake(600, 0, 500, 300) data:energyViewData widgetContext:syntax];
+    REMLineWidgetWrapper* lineWidget = [[REMLineWidgetWrapper alloc]initWithFrame:CGRectMake(524, 0, 500, 300) data:energyViewData widgetContext:syntax];
     [self.view addSubview:lineWidget.view];
     [lineWidget destroyView];
     

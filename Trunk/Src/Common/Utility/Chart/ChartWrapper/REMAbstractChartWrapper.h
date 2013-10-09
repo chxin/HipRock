@@ -19,4 +19,7 @@
 @property (nonatomic, readonly) UIView* view;
 @property (nonatomic, readonly, weak) REMWidgetContentSyntax* widgetSyntax;
 @property (nonatomic, readonly, weak) REMEnergyViewData* energyViewData;
+
+@property (nonatomic, readonly) REMChartDataProcessor* dataProcessor;
+
 @end

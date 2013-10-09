@@ -528,6 +528,8 @@
 		EF97879617C70B440062BE0E /* REMBuildingSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */; };
 		EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97DDDA17C20B5700A0374E /* REMToggleButton.m */; };
 		EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9F28B017CB54DE00E775ED /* REMStatusBar.m */; };
+		EFDAACB91803F27F008BC9AF /* REMPieChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACB81803F27F008BC9AF /* REMPieChartWrapper.m */; };
+		EFDAACBC1803F6C2008BC9AF /* REMChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1132,6 +1134,9 @@
 		EF97DDDA17C20B5700A0374E /* REMToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButton.m; sourceTree = "<group>"; };
 		EF9F28AF17CB54DD00E775ED /* REMStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMStatusBar.h; sourceTree = "<group>"; };
 		EF9F28B017CB54DE00E775ED /* REMStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMStatusBar.m; sourceTree = "<group>"; };
+		EFDAACB71803F27F008BC9AF /* REMPieChartWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPieChartWrapper.h; sourceTree = "<group>"; };
+		EFDAACB81803F27F008BC9AF /* REMPieChartWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartWrapper.m; sourceTree = "<group>"; };
+		EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartDataProcessor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2347,6 +2352,8 @@
 				EF8A480217F95FA1009B5C33 /* TrendChartWrapper */,
 				EF8A47E617F959B5009B5C33 /* REMAbstractChartWrapper.h */,
 				EF8A47E717F959B5009B5C33 /* REMAbstractChartWrapper.m */,
+				EFDAACB71803F27F008BC9AF /* REMPieChartWrapper.h */,
+				EFDAACB81803F27F008BC9AF /* REMPieChartWrapper.m */,
 			);
 			path = ChartWrapper;
 			sourceTree = "<group>";
@@ -2355,6 +2362,7 @@
 			isa = PBXGroup;
 			children = (
 				EF8A47EF17F959B5009B5C33 /* REMTrendChartDataProcessor.m */,
+				EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */,
 			);
 			path = DataProcessor;
 			sourceTree = "<group>";
@@ -2637,6 +2645,7 @@
 				7A399E97177D238F00F0EB9F /* AFHTTPRequestOperation.m in Sources */,
 				7A399E98177D238F00F0EB9F /* AFImageRequestOperation.m in Sources */,
 				7A399E99177D238F00F0EB9F /* AFJSONRequestOperation.m in Sources */,
+				EFDAACBC1803F6C2008BC9AF /* REMChartDataProcessor.m in Sources */,
 				7A399E9A177D238F00F0EB9F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				7A399E9E177D238F00F0EB9F /* UIImageView+AFNetworking.m in Sources */,
 				7AA8838117F92286004D50BC /* REMGallaryCell.m in Sources */,
@@ -2655,6 +2664,7 @@
 				B48CC99317832EAE00AAD5D4 /* REMWidgetMaxView.m in Sources */,
 				B4198EAE178410D300B50475 /* REMLogManager.m in Sources */,
 				B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */,
+				EFDAACB91803F27F008BC9AF /* REMPieChartWrapper.m in Sources */,
 				7A1D142617850B2100CC2922 /* Reachability.m in Sources */,
 				7A2E7ECB17F2DD41000EB506 /* REMBuildingTitleLabelView.m in Sources */,
 				38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */,

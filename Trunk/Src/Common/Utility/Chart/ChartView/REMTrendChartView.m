@@ -103,6 +103,7 @@
         
         CPTXYGraph *graph=[[CPTXYGraph alloc]initWithFrame:self.bounds];
         self.hostedGraph=graph;
+        graph.backgroundColor = [UIColor greenColor].CGColor;
         
         [self initAxisSet];
         [self renderSeries];
@@ -169,16 +170,17 @@
     for (int i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = [self.series objectAtIndex:i];
         NSNumber* maxY = [NSNumber numberWithInt:0];
-        REMTrendChartPoint* point = [s.points objectAtIndex:0];
-        int j = 0;
+        NSDate* xStartDate = [s.dataProcessor deprocessX:startX startDate:s.startDate step:s.step];
+        NSDate* xEndDate = [s.dataProcessor deprocessX:endX startDate:s.startDate step:s.step];
         /*效率还可以改善*/
-        for (j = 0; j < s.points.count; j++) {
-            point = [s.points objectAtIndex:j];
-            if (point.x < startX) continue;
-            if (point.x > endX) break;
-            if (point.y == nil || point.y == NULL || [point.y isLessThan:([NSNumber numberWithInt:0])]) continue;
-            if (maxY.floatValue < point.y.floatValue) {
-                maxY = point.y;
+        for (int j = 0; j < s.energyData.count; j++) {
+            REMEnergyData* point = [s.energyData objectAtIndex:j];
+            if ([point.localTime timeIntervalSinceDate:xStartDate] < 0) continue;
+            if ([point.localTime timeIntervalSinceDate:xEndDate] > 0) break;
+            NSNumber* yVal = [s.dataProcessor processY:point startDate:s.startDate step:s.step];
+            if (yVal == nil || yVal == NULL || [yVal isLessThan:([NSNumber numberWithInt:0])]) continue;
+            if (maxY.floatValue < yVal.floatValue) {
+                maxY = yVal;
             }
         }
         
@@ -276,10 +278,9 @@
 - (void)renderSeries {
     for (int i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = [self.series objectAtIndex:i];
-        REMTrendChartPoint* point = [s.points objectAtIndex:s.points.count - 1];
-        maxXValOfSeries = MAX(maxXValOfSeries, point.x);
+//        REMTrendChartPoint* point = [s.points objectAtIndex:s.points.count - 1];
+        maxXValOfSeries = MAX(maxXValOfSeries, s.maxX);
         [s beforePlotAddToGraph:self.hostedGraph seriesList:self.series selfIndex:i];
-//        s.plot.frame = self.hostedGraph.bounds;
         [self.hostedGraph addPlot:[s getPlot]];
     }
     // set global X range

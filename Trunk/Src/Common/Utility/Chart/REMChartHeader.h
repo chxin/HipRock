@@ -40,10 +40,15 @@ typedef enum  {
 
 
 
+@interface REMChartDataProcessor : NSObject
+-(NSNumber*)processX:(REMEnergyData*)point startDate:(NSDate*)startDate step:(REMEnergyStep)step;
+-(NSNumber*)processY:(REMEnergyData*)point startDate:(NSDate*)startDate step:(REMEnergyStep)step;
+-(NSDate*)deprocessX:(float)x startDate:(NSDate*)startDate step:(REMEnergyStep)step;
+@end
 
-@interface REMTrendChartDataProcessor : NSObject
+@interface REMTrendChartDataProcessor : REMChartDataProcessor
 
--(REMTrendChartPoint*)processEnergyData:(REMEnergyData*)point startDate:(NSDate*)startDate step:(REMEnergyStep)step;
+//-(REMTrendChartPoint*)processEnergyData:(REMEnergyData*)point startDate:(NSDate*)startDate step:(REMEnergyStep)step;
 
 @end
 
@@ -54,7 +59,10 @@ typedef enum  {
 @protected CPTPlot* plot;
 }
 @property (nonatomic, readonly) NSDictionary* plotStyle;
-@property (nonatomic, readonly) NSArray* points;
+@property (nonatomic, readonly) NSArray* energyData;
+@property (nonatomic, readonly) REMEnergyStep step;
+@property (nonatomic, readonly) REMChartDataProcessor* dataProcessor;
+//@property (nonatomic, readonly) NSArray* points;
 
 /*
  * 对应的Y轴的index，从0开始
@@ -65,12 +73,21 @@ typedef enum  {
  * x数据处理的起点时间
  */
 @property (nonatomic, readonly) NSDate* startDate;
+/*
+ * 第一个点用processor处理后的x值，作为本序列在x方向上最小值
+ */
+@property (nonatomic, readonly) float minX;
+/*
+ * 最后一个点用processor处理后的x值，作为本序列在x方向上最大值
+ */
+@property (nonatomic, readonly) float maxX;
 
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle;
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex;
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataProcessor:(REMTrendChartDataProcessor*)processor;
--(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataProcessor:(REMTrendChartDataProcessor*)processor startDate:(NSDate*)startDate;
+//-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle ;
+//-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex;
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataProcessor:(REMChartDataProcessor*)processor;
+-(REMTrendChartSeries*)initWithData:(NSArray*)energyData dataStep:(REMEnergyStep)step plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataProcessor:(REMChartDataProcessor*)processor startDate:(NSDate*)startDate;
 -(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex;
+
 -(CPTPlot*)getPlot;
 -(BOOL)isOccupy;
 //-(void)hide;

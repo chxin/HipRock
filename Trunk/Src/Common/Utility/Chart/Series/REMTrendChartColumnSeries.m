@@ -54,11 +54,11 @@
 
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
 {
-    REMTrendChartPoint* point = [self.points objectAtIndex:idx];
+    REMEnergyData* point = [self.energyData objectAtIndex:idx];
     if (fieldEnum == CPTBarPlotFieldBarLocation) {
-        return [NSNumber numberWithFloat:point.x];
+        return [self.dataProcessor processX:point startDate:self.startDate step:self.step];
     } else if (fieldEnum == CPTBarPlotFieldBarTip) {
-        return point.y;
+        return [self.dataProcessor processY:point startDate:self.startDate step:self.step];
     } else {
         return nil;
     }
