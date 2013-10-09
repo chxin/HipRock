@@ -103,7 +103,6 @@
         
         CPTXYGraph *graph=[[CPTXYGraph alloc]initWithFrame:self.bounds];
         self.hostedGraph=graph;
-        graph.backgroundColor = [UIColor redColor].CGColor;
         
         [self initAxisSet];
         [self renderSeries];

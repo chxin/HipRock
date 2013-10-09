@@ -16,8 +16,9 @@
 
 typedef enum  {
     REMTrendChartSeriesTypeColumn,
-    REMTrendChartSeriesTypeLine
-} REMTrendChartSeriesType;
+    REMTrendChartSeriesTypeLine,
+    REMChartSeriesPie
+} REMChartSeriesType;
 
 
 
@@ -53,7 +54,7 @@ typedef enum  {
 @end
 
 @interface REMChartSeries : NSObject<CPTPlotDataSource> {
-@protected REMTrendChartSeriesType seriesType;
+@protected REMChartSeriesType seriesType;
 @protected CPTPlot* plot;
 }
 
@@ -66,6 +67,11 @@ typedef enum  {
 
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle;
 -(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex;
+
+@end
+
+
+@interface REMPieChartSeries : REMChartSeries<CPTPieChartDataSource>
 
 @end
 
@@ -98,13 +104,11 @@ typedef enum  {
 -(BOOL)isOccupy;
 @end
 
-
-
 @interface REMTrendChartColumnSeries : REMTrendChartSeries<CPTBarPlotDataSource>
 
 @end
 
-@interface REMTrendChartLineSeries : REMTrendChartSeries
+@interface REMTrendChartLineSeries : REMTrendChartSeries<CPTScatterPlotDataSource>
 
 @end
 

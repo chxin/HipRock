@@ -532,7 +532,7 @@
 		EFDAACBC1803F6C2008BC9AF /* REMChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */; };
 		EFDAACBF18052E0C008BC9AF /* REMPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */; };
 		EFDAACC218053911008BC9AF /* REMChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC118053911008BC9AF /* REMChartConfig.m */; };
-		EFDAACC518053A41008BC9AF /* REMPieWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC418053A41008BC9AF /* REMPieWidgetWrapper.m */; };
+		EFDAACC818054EBA008BC9AF /* REMPieChartSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1142,8 +1142,7 @@
 		EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartDataProcessor.m; sourceTree = "<group>"; };
 		EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartView.m; sourceTree = "<group>"; };
 		EFDAACC118053911008BC9AF /* REMChartConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartConfig.m; sourceTree = "<group>"; };
-		EFDAACC318053A41008BC9AF /* REMPieWidgetWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPieWidgetWrapper.h; sourceTree = "<group>"; };
-		EFDAACC418053A41008BC9AF /* REMPieWidgetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieWidgetWrapper.m; sourceTree = "<group>"; };
+		EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartSeries.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2346,11 +2345,11 @@
 		EF8A47DF17F959B5009B5C33 /* ChartView */ = {
 			isa = PBXGroup;
 			children = (
-				EF8A47E117F959B5009B5C33 /* REMTrendChartAxisConfig.m */,
+				EFDAACC118053911008BC9AF /* REMChartConfig.m */,
 				EF8A47E217F959B5009B5C33 /* REMTrendChartConfig.m */,
+				EF8A47E117F959B5009B5C33 /* REMTrendChartAxisConfig.m */,
 				EF8A47E417F959B5009B5C33 /* REMTrendChartView.m */,
 				EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */,
-				EFDAACC118053911008BC9AF /* REMChartConfig.m */,
 			);
 			path = ChartView;
 			sourceTree = "<group>";
@@ -2383,6 +2382,7 @@
 				EF8A47F117F959B5009B5C33 /* REMTrendChartColumnSeries.m */,
 				EF8A47F217F959B5009B5C33 /* REMTrendChartLineSeries.m */,
 				EF8A47F417F959B5009B5C33 /* REMTrendChartSeries.m */,
+				EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */,
 			);
 			path = Series;
 			sourceTree = "<group>";
@@ -2396,8 +2396,6 @@
 				EF8A480617F95FA1009B5C33 /* REMLineWidgetWrapper.m */,
 				EF8A480717F95FA1009B5C33 /* REMTrendWidgetWrapper.h */,
 				EF8A480817F95FA1009B5C33 /* REMTrendWidgetWrapper.m */,
-				EFDAACC318053A41008BC9AF /* REMPieWidgetWrapper.h */,
-				EFDAACC418053A41008BC9AF /* REMPieWidgetWrapper.m */,
 			);
 			path = TrendChartWrapper;
 			sourceTree = "<group>";
@@ -2657,7 +2655,6 @@
 				7A399E97177D238F00F0EB9F /* AFHTTPRequestOperation.m in Sources */,
 				7A399E98177D238F00F0EB9F /* AFImageRequestOperation.m in Sources */,
 				7A399E99177D238F00F0EB9F /* AFJSONRequestOperation.m in Sources */,
-				EFDAACC518053A41008BC9AF /* REMPieWidgetWrapper.m in Sources */,
 				EFDAACBC1803F6C2008BC9AF /* REMChartDataProcessor.m in Sources */,
 				7A399E9A177D238F00F0EB9F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				7A399E9E177D238F00F0EB9F /* UIImageView+AFNetworking.m in Sources */,
@@ -2716,6 +2713,7 @@
 				7A153C9E17AA497C00413D3C /* REMBuildingViewController.m in Sources */,
 				B47ACC3317F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m in Sources */,
 				B46C8EC617F27D56006DC4CB /* REMDashboardController.m in Sources */,
+				EFDAACC818054EBA008BC9AF /* REMPieChartSeries.m in Sources */,
 				7A153C9F17AA497C00413D3C /* REMDashboardLeftNavigationController.m in Sources */,
 				7A13C19517F40809007E6AA9 /* REMMainNavigationController.m in Sources */,
 				7AA8838217F92286004D50BC /* REMGallaryView.m in Sources */,
