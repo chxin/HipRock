@@ -20,9 +20,10 @@
 @property (nonatomic,strong) REMSplashScreenController *splashScreenController;
 @property (nonatomic,strong) REMGallaryViewController *gallaryViewController;
 @property (nonatomic,strong) REMBuildingViewController *buildingViewController;
-@property (nonatomic,strong) GMSMarker *pressedMarker;
 
-- (IBAction)jumpToBuildingViewButtonPressed:(id)sender;
+@property (nonatomic,strong) UIImageView *snapshot;
+@property (nonatomic) CGPoint originalPoint;
+
 - (IBAction)gallarySwitchButtonPressed:(id)sender;
 
 

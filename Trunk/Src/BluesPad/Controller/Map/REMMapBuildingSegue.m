@@ -11,6 +11,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingViewController.h"
 #import "REMMapViewController.h"
+#import "REMCommonHeaders.h"
+
+
 
 @implementation REMMapBuildingSegue
 
@@ -32,12 +35,14 @@
     
     UIView *mapView = mapViewController.view, *buildingView = buildingViewController.view;
     
+    CGPoint originalPoint = buildingViewController.mapViewController.originalPoint;
+    
     
     if(self.isUnWinding == NO){
         //add building view as subview into map view
-        __block UIImageView *transitionView = [[UIImageView alloc] initWithImage: [self imageWithView:buildingView]];
+        __block UIImageView *transitionView = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:buildingView]];
         
-        CGRect initialFrame = CGRectMake(self.originalPoint.x, self.originalPoint.y, 0, 0);
+        CGRect initialFrame = CGRectMake(originalPoint.x, originalPoint.y, 0, 0);
         CGRect finalFrame = CGRectMake(0, 0, mapView.bounds.size.width, mapView.bounds.size.height);
         
         transitionView.frame = initialFrame;
@@ -53,59 +58,26 @@
         }];
     }
     else{
+        __block UIImageView *transitionView = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:buildingView]];
         
-        NSLog(@"map view subview count segue1: %d", mapView.subviews.count);
-        //buildingView
+        CGRect initialFrame = CGRectMake(0, 0, buildingView.bounds.size.width, buildingView.bounds.size.height);
+        CGRect finalFrame = CGRectMake(originalPoint.x, originalPoint.y, 0, 0);
         
-        [buildingViewController.navigationController popViewControllerAnimated:NO];
-        NSLog(@"map view subview count segue2: %d", mapView.subviews.count);
-        //[destinationViewController.view addSubview:tempView];
+        transitionView.frame = initialFrame;
+        buildingViewController.mapViewController.snapshot.frame = initialFrame;
         
-//        [destinationViewController.view addSubview:sourceViewController.view];
-//        [sourceViewController.view setFrame:destinationViewController.view.bounds];
-//        [sourceViewController.view setTransform:CGAffineTransformMakeScale(1.0,1.0)];
-//        [sourceViewController.view setCenter:CGPointMake(destinationViewController.view.bounds.size.width/2, destinationViewController.view.bounds.size.height/2)];
+        [buildingView addSubview:buildingViewController.mapViewController.snapshot];
+        [buildingView addSubview:transitionView];
         
         
-//        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-//            [sourceViewController.view setTransform:CGAffineTransformMakeScale(0.1,0.1)];
-//            [sourceViewController.view setCenter:self.originalPoint];
-//        } completion:^(BOOL finished){
-//            [sourceViewController.view removeFromSuperview];
-//        }];
+        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+            transitionView.frame = finalFrame;
+        } completion:^(BOOL finished){
+            [transitionView removeFromSuperview];
+            transitionView = nil;
+            [buildingViewController.navigationController popViewControllerAnimated:NO];
+        }];
     }
-    
-//    [src presentViewController:dst animated:NO completion:nil];
-//    [src.navigationController pushViewController:dst animated:NO];
-//    [src.navigationController presentViewController:dst animated:NO completion:nil];
-    
-//    if(self.isUnWinding)
-//        [src.navigationController popViewControllerAnimated:NO];
-//    else
-//        [src.navigationController pushViewController:dst animated:NO];
-//    [src presentViewController:dst animated:NO completion:nil];
-    
-    
-}
-
-
-- (CGAffineTransform)translatedAndScaledTransformUsingViewRect:(CGRect)viewRect fromRect:(CGRect)fromRect {
-    CGSize scales = CGSizeMake(viewRect.size.width/fromRect.size.width, viewRect.size.height/fromRect.size.height);
-    CGPoint offset = CGPointMake(CGRectGetMidX(viewRect) - CGRectGetMidX(fromRect), CGRectGetMidY(viewRect) - CGRectGetMidY(fromRect));
-    
-    return CGAffineTransformMake(scales.width, 0, 0, scales.height, offset.x, offset.y);
-}
-
-- (UIImage *) imageWithView:(UIView *)view
-{
-    UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
-    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    
-    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    return img;
 }
 
 @end

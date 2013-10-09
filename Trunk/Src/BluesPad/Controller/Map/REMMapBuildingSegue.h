@@ -10,7 +10,6 @@
 
 @interface REMMapBuildingSegue : UIStoryboardSegue
 
-@property (nonatomic) CGPoint originalPoint;
 @property (nonatomic) BOOL isUnWinding;
 
 @end
