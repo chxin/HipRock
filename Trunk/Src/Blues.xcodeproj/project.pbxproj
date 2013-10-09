@@ -333,6 +333,7 @@
 		7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8B177B41B0000F77F9 /* MainStoryboard.storyboard */; };
 		7A5E2D95177B41B0000F77F9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8D177B41B0000F77F9 /* InfoPlist.strings */; };
 		7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */; };
+		7A7EA6E418054C2400A3BB56 /* REMNetworkStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7EA6E318054C2400A3BB56 /* REMNetworkStatusIndicator.m */; };
 		7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */; };
 		7A9557C017C73AD200249CED /* REMBuildingAirQualityChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9557BF17C73AD200249CED /* REMBuildingAirQualityChart.m */; };
 		7A9B1E20177B3A8B00C282A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */; };
@@ -755,6 +756,8 @@
 		7A6E6D0B17A65CE500FBB264 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		7A6E6D0D17A65CE500FBB264 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		7A7EA6E218054C2400A3BB56 /* REMNetworkStatusIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMNetworkStatusIndicator.h; path = Common/Communication/REMNetworkStatusIndicator.h; sourceTree = "<group>"; };
+		7A7EA6E318054C2400A3BB56 /* REMNetworkStatusIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMNetworkStatusIndicator.m; path = Common/Communication/REMNetworkStatusIndicator.m; sourceTree = "<group>"; };
 		7A9557BB17C7374700249CED /* REMAirQualityDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAirQualityDataModel.h; sourceTree = "<group>"; };
 		7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAirQualityDataModel.m; sourceTree = "<group>"; };
 		7A9557BE17C73AD200249CED /* REMBuildingAirQualityChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAirQualityChart.h; sourceTree = "<group>"; };
@@ -1538,6 +1541,8 @@
 				7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */,
 				7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */,
 				7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */,
+				7A7EA6E218054C2400A3BB56 /* REMNetworkStatusIndicator.h */,
+				7A7EA6E318054C2400A3BB56 /* REMNetworkStatusIndicator.m */,
 			);
 			name = Communication;
 			sourceTree = "<group>";
@@ -2431,6 +2436,7 @@
 				7A0288F217C20CC500709111 /* StatusVisible.m in Sources */,
 				7A0288F317C20CC500709111 /* User.m in Sources */,
 				7A0288F417C20CC500709111 /* WeiboAccount.m in Sources */,
+				7A7EA6E418054C2400A3BB56 /* REMNetworkStatusIndicator.m in Sources */,
 				7A0288F517C20CC500709111 /* WeiboAuthentication.m in Sources */,
 				7A0288F817C20CC500709111 /* ImageResourceLoader.m in Sources */,
 				7A0288F917C20CC500709111 /* NSDictionary+Json.m in Sources */,

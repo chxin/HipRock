@@ -20,6 +20,7 @@
 #import "REMApplicationInfo.h"
 #import "REMBusinessErrorInfo.h"
 #import "REMError.h"
+#import "REMNetworkStatusIndicator.h"
 
 
 @implementation REMServiceAgent
@@ -39,7 +40,9 @@ static int requestTimeout = 45; //(s)
 static int requestTimeout = 45; //(s)
 #endif
 
-
+#define NetworkIncreaseActivity() [[REMNetworkStatusIndicator sharedManager] increaseActivity];
+#define NetworkDecreaseActivity() [[REMNetworkStatusIndicator sharedManager] decreaseActivity];
+#define NetworkClearActivity() [[REMNetworkStatusIndicator sharedManager] noActivity];
 
 + (void) call: (REMServiceMeta *) service withBody:(id)body mask:(UIView *) maskContainer group:(NSString *)groupName store:(BOOL) isStore success:(void (^)(id data))success error:(void (^)(NSError *error, id response))error progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
 {
@@ -128,6 +131,7 @@ static int requestTimeout = 45; //(s)
         
         //
         operation = nil;
+        NetworkDecreaseActivity();
     };
     
     void (^onFailure)(AFHTTPRequestOperation *operation, NSError *errorInfo) = ^(AFHTTPRequestOperation *operation, NSError *errorInfo)
@@ -152,6 +156,7 @@ static int requestTimeout = 45; //(s)
         {
             [maskManager hideMask];
         }
+        NetworkDecreaseActivity();
     };
     
     void (^onProgress)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) = ^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead)
@@ -182,6 +187,7 @@ static int requestTimeout = 45; //(s)
     
     NSLog(@"request: %@",[request.URL description]);
     [queue addOperation:serviceOperation];
+    NetworkIncreaseActivity();
 }
 
 
@@ -190,6 +196,7 @@ static int requestTimeout = 45; //(s)
     if(queue!=NULL && queue != nil && queue.operationCount > 0)
     {
         [queue cancelAllOperations];
+        NetworkClearActivity();
     }
 }
 
@@ -224,6 +231,7 @@ static int requestTimeout = 45; //(s)
                 [operation.maskManager hideMask];
             }
             [operation cancel];
+            NetworkDecreaseActivity();
         }
     }
 }

@@ -474,7 +474,7 @@ typedef void(^SuccessCallback)(BOOL success);
     
     NSString* stringFormat = nil;
     if ([self.currentCommodityId isEqualToNumber:@(12)]==NO) {
-        stringFormat = @"%@本月用#Commodity#趋势及单位平米用#Commodity#趋势，上月用#Commodity#总能耗为#Usage##UomName#，节能持续进行中。";
+        stringFormat = @"%@本月用#Commodity#趋势及单位平米用#Commodity#趋势，本月用#Commodity#总能耗为#Usage##UomName#，节能持续进行中。";
         REMCommodityUsageModel *model ;
         for (REMCommodityUsageModel *m in self.buildingInfo.commodityUsage) {
             if([m.commodity.commodityId isEqualToNumber:self.currentCommodityId]==YES){
