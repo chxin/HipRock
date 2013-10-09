@@ -115,7 +115,7 @@ const NSInteger kWeiboMaxLength = 140;
     [textView setFont:[UIFont fontWithName:@(kBuildingFontSCRegular) size:inputTextSize]];
     textView.backgroundColor = [UIColor clearColor];
     textView.scrollEnabled = YES;
-    textView.editable = NO;
+    textView.editable = YES;
     [textImageView addSubview:textView];
     textView.text = self.weiboText;
     

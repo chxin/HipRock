@@ -40,6 +40,7 @@
 
 @property (nonatomic) BOOL isSwitchingCommodityButtonGroup;
 
+
 @end
 
 @implementation REMImageView
@@ -77,11 +78,11 @@
     //[self.imageView removeFromSuperview];
     //[self.blurredImageView removeFromSuperview];
     
-    self.imageView.image=self.defaultImage;
+    //self.imageView.image=self.defaultImage;
     //self.imageView=nil;
-    self.blurredImageView.image=self.defaultBlurImage;
+    //self.blurredImageView.image=self.defaultBlurImage;
     //self.blurredImageView=nil;
-        self.customImageLoaded=NO;
+    //    self.customImageLoaded=NO;
     self.isActive=NO;
     }
 }
@@ -171,6 +172,37 @@
 
 }
 
+- (NSString *)buildingPictureFileName{
+    
+    if(self.buildingInfo.building.pictureIds==nil ||
+       [self.buildingInfo.building.pictureIds isEqual:[NSNull null]] ||
+       self.buildingInfo.building.pictureIds.count==0){
+        
+        return nil;
+    }
+    
+    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+	NSString *pngFilePath = [NSString stringWithFormat:@"%@/building-%@-%@.png",docDir,[REMApplicationContext instance].currentUser.name,self.buildingInfo.building.pictureIds[0]];
+    
+    return pngFilePath;
+}
+
+- (UIImage *)getCachedImage:(NSData *)data{
+   
+    NSString *pngFilePath=[self buildingPictureFileName];
+    if(pngFilePath==nil)return nil;
+    BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:pngFilePath];
+    if(hasExist ==YES){
+        
+        return [[UIImage alloc] initWithContentsOfFile:pngFilePath];
+    }
+    else{
+        if(data==nil)return nil;
+        return [self AFInflatedImageFromResponseWithDataAtScale:data];
+    }
+}
+
 - (void)loadingBuildingImage{
     if(self.buildingInfo.building.pictureIds==nil ||
        [self.buildingInfo.building.pictureIds isEqual:[NSNull null]] ||
@@ -179,6 +211,10 @@
         return;
     }
     if(self.customImageLoaded==YES)return;
+    
+    
+    
+    
     NSDictionary *param=@{@"pictureId":self.buildingInfo.building.pictureIds[0]};
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param];
     store.isAccessLocal=YES;
@@ -207,7 +243,8 @@
         //UIImage *image = self.defaultImage;
         //dispatch_async(concurrentQueue, ^{
             @autoreleasepool {
-                UIImage *view = [self AFInflatedImageFromResponseWithDataAtScale:data];
+                
+                UIImage *view = [self getCachedImage:data];
                 newView.image=view;
                 UIImageView *newBlurred= [self blurredImageView:newView];
             
@@ -234,14 +271,9 @@
                     if(self.isActive == NO){
                         [self moveOutOfWindow];
                     }
-                    //self.defaultImage=nil;
-                    //self.defaultBlurImage=nil;
-                    //[self.controller notifyCustomImageLoaded:self.buildingInfo.building.buildingId];
                 }];
 
-            //});
             }
-        //});
 
         
         
@@ -268,6 +300,8 @@
 }
 
 - (UIImage *) AFInflatedImageFromResponseWithDataAtScale:(NSData *)data {
+    
+    
     if (!data || [data length] == 0) {
         return nil;
     }
@@ -352,14 +386,50 @@
     UIImage *inflatedImage = [[UIImage alloc] initWithCGImage:inflatedImageRef scale:1 orientation:UIImageOrientationUp];
     CGImageRelease(inflatedImageRef);
     CGImageRelease(imageRef);
+   
     
+	
+	NSString *pngFilePath = [self buildingPictureFileName];
+	NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(inflatedImage)];
+	[data1 writeToFile:pngFilePath atomically:YES];
 
     
     return inflatedImage;
 }
 
-- (void)addImageDefer:(NSTimer *)timer{
+- (void)addImageDefer{
     if(self.customImageLoaded == YES) return;
+    
+    UIImage *image = [self getCachedImage:nil];
+    
+    if(image != nil){
+        self.customImageLoaded=YES;
+        UIImageView *newView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
+        newView.contentMode=UIViewContentModeScaleToFill;
+        newView.alpha=0;
+        newView.image=image;
+        UIImageView *newBlurred= [self blurredImageView:newView];
+        
+        [self insertSubview:newView aboveSubview:self.blurredImageView];
+        [self insertSubview:newBlurred aboveSubview:newView];
+        
+        
+        
+        newView.alpha=self.imageView.alpha;
+        newBlurred.alpha=self.blurredImageView.alpha;
+    
+        [self.imageView removeFromSuperview];
+        [self.blurredImageView removeFromSuperview];
+        self.imageView.image=nil;
+        self.imageView=nil;
+        self.blurredImageView.image=nil;
+        self.blurredImageView=nil;
+        self.imageView = newView;
+        self.blurredImageView=newBlurred;
+        
+        return;
+        
+    }
     
     if(self.defaultImage!=nil){
         self.imageView.image=  self.defaultImage;
@@ -371,9 +441,11 @@
     
   
     
-    NSTimer *timer = [ NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(addImageDefer:) userInfo:nil repeats:NO];
+    //NSTimer *timer = [ NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(addImageDefer:) userInfo:nil repeats:NO];
     
-    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    //[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    
+    //self.timer=timer;
    
     self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
     self.imageView.contentMode=UIViewContentModeScaleToFill;
@@ -383,6 +455,8 @@
     blurred.alpha=0;
     self.blurredImageView=blurred;
     [self addSubview:blurred];
+    
+    [self addImageDefer];
 
 
 }
