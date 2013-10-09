@@ -114,8 +114,6 @@
         
         GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:northEast coordinate:southWest];
         
-        NSLog(@"%d",bounds.isValid);
-        
         GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds withPadding:50.0f];
         
         [mapView animateWithCameraUpdate:update];
@@ -124,7 +122,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"test");
 }
 
 - (void)didReceiveMemoryWarning
@@ -155,7 +152,7 @@
         REMMapBuildingSegue *customeSegue = (REMMapBuildingSegue *)segue;
         
         CGPoint markerPoint = [mapView.projection pointForCoordinate:self.pressedMarker.position];
-        self.originalPoint = markerPoint;
+        self.originalPoint = CGPointMake(markerPoint.x,markerPoint.y-40);
         self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
         
         REMBuildingViewController *buildingViewController = customeSegue.destinationViewController;
@@ -197,9 +194,11 @@
 }
 
 #pragma mark GSMapView delegate
-- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker
+
+- (BOOL)mapView:(GMSMapView *)view didTapMarker:(GMSMarker *)marker
 {
-    return NO;
+    mapView.selectedMarker = marker;
+    return YES;
 }
 
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker

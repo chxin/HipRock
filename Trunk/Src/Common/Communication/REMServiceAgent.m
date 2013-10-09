@@ -316,7 +316,7 @@ static int requestTimeout = 45; //(s)
 
 + (NSString *)getUserAgent
 {
-    NSString *userAgentFormat = @"Blues/0.2(PS;%@;%@;%@;%@;%@;)";
+    NSString *userAgentFormat = @"Blues/0.4(PS;%@;%@;%@;%@;%@;)";
     UIDevice *device = [UIDevice currentDevice];
     
     NSString *content=[NSString stringWithFormat:userAgentFormat,[[device identifierForVendor] UUIDString],[device localizedModel],[device systemName],[device systemVersion],[device model]];
