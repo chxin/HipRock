@@ -20,6 +20,7 @@
 #import "REMApplicationInfo.h"
 #import "REMBusinessErrorInfo.h"
 #import "REMError.h"
+#import "REMNetworkStatusIndicator.h"
 
 
 @implementation REMServiceAgent
@@ -38,6 +39,11 @@ static int requestTimeout = 45; //(s)
 #ifdef InternalRelease
 static int requestTimeout = 45; //(s)
 #endif
+
+
+#define NetworkIncreaseActivity() [[REMNetworkStatusIndicator sharedManager] increaseActivity];
+#define NetworkDecreaseActivity() [[REMNetworkStatusIndicator sharedManager] decreaseActivity];
+#define NetworkClearActivity() [[REMNetworkStatusIndicator sharedManager] noActivity];
 
 
 
@@ -127,6 +133,7 @@ static int requestTimeout = 45; //(s)
             [maskManager hideMask];
         }
         
+        NetworkDecreaseActivity();
         operation = nil;
     };
     
@@ -152,6 +159,8 @@ static int requestTimeout = 45; //(s)
         {
             [maskManager hideMask];
         }
+        
+        NetworkDecreaseActivity();
     };
     
     void (^onProgress)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) = ^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead)
@@ -179,6 +188,8 @@ static int requestTimeout = 45; //(s)
     
     NSLog(@"request: %@",[request.URL description]);
     [queue addOperation:serviceOperation];
+    
+    NetworkIncreaseActivity();
 }
 
 
@@ -187,6 +198,8 @@ static int requestTimeout = 45; //(s)
     if(queue!=NULL && queue != nil && queue.operationCount > 0)
     {
         [queue cancelAllOperations];
+        
+        NetworkClearActivity();
     }
 }
 
@@ -220,7 +233,9 @@ static int requestTimeout = 45; //(s)
             if(operation.maskManager!=nil){
                 [operation.maskManager hideMask];
             }
+            
             [operation cancel];
+            NetworkDecreaseActivity();
         }
     }
 }
@@ -330,3 +345,4 @@ static int requestTimeout = 45; //(s)
 }
 
 @end
+
