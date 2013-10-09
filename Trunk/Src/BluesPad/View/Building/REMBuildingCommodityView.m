@@ -276,14 +276,20 @@ typedef void(^SuccessCallback)(BOOL success);
     [self.carbonLabel showLoading];
     [self.rankingLabel showLoading];
     [REMDataAccessor access:store success:^(NSDictionary *data) {
-        REMCommodityUsageModel *model=[[REMCommodityUsageModel alloc]initWithDictionary:data];
-        if(self.buildingInfo.commodityUsage==nil){
-            self.buildingInfo.commodityUsage=@[model];
+        REMCommodityUsageModel *model=nil;
+        if([data isEqual:[NSNull null]]==YES){
+            model=nil;
         }
         else{
-            NSMutableArray *newArray=[self.buildingInfo.commodityUsage mutableCopy];
-            [newArray addObject:model];
-            self.buildingInfo.commodityUsage=newArray;
+            model=[[REMCommodityUsageModel alloc]initWithDictionary:data];
+            if(self.buildingInfo.commodityUsage==nil){
+                self.buildingInfo.commodityUsage=@[model];
+            }
+            else{
+                NSMutableArray *newArray=[self.buildingInfo.commodityUsage mutableCopy];
+                [newArray addObject:model];
+                self.buildingInfo.commodityUsage=newArray;
+        }
         }
         [self.totalLabel hideLoading];
         [self.carbonLabel hideLoading];
