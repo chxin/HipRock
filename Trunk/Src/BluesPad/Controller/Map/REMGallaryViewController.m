@@ -26,16 +26,13 @@
         
         //CGRect viewFrame = self.mapViewController.view == nil?CGRectZero:self.mapViewController.view.bounds;
         
-        gallaryView = [[REMGallaryView alloc] initWithFrame:self.stopFrame collectionViewLayout:layout];
+        gallaryView = [[REMGallaryView alloc] initWithFrame:self.viewFrame collectionViewLayout:layout];
         gallaryView.dataSource = self;
         gallaryView.delegate = self;
         [gallaryView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gallaryCellIdentifier"];
         [gallaryView setBackgroundColor:[UIColor redColor]];
         
-        CGFloat widthRatio = self.stopFrame.size.width/self.startFrame.size.width;
-        CGFloat heightRatio = self.stopFrame.size.height/self.startFrame.size.height;
-        CGAffineTransform tr = CGAffineTransformConcat(CGAffineTransformMakeScale(1/widthRatio, 1/heightRatio), CGAffineTransformMakeTranslation(self.startFrame.origin.x-self.stopFrame.origin.x, self.startFrame.origin.y-self.stopFrame.origin.y));
-        
+        CGAffineTransform tr = [self translatedAndScaledTransformUsingViewRect:self.originalFrame fromRect:self.viewFrame];
         gallaryView.transform = tr;
         
         self.view = gallaryView;
@@ -51,21 +48,21 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    //[self addSwitchButton];
+    [self addSwitchButton];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     //zoom out to full screen
-    CGFloat widthRatio = self.stopFrame.size.width/self.startFrame.size.width;
-    CGFloat heightRatio = self.stopFrame.size.height/self.startFrame.size.height;
-    CGAffineTransform tr = CGAffineTransformScale(self.view.transform, widthRatio, heightRatio);
+//    CGFloat widthRatio = self.stopFrame.size.width/self.startFrame.size.width;
+//    CGFloat heightRatio = self.stopFrame.size.height/self.startFrame.size.height;
+//    CGAffineTransform tr = CGAffineTransformScale(self.view.transform, widthRatio, heightRatio);
 
-    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-        self.view.transform = tr;
-        self.view.center = CGPointMake(self.stopFrame.size.width/2,self.stopFrame.size.height/2);
+    [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionCurveLinear animations:^{
+        self.view.transform = [self translatedAndScaledTransformUsingViewRect:self.viewFrame fromRect:self.originalFrame];
     } completion:^(BOOL finished) {
-        [self addSwitchButton];
+        //[self addSwitchButton];
+        NSLog(@"%@",NSStringFromCGRect(self.view.bounds));
     }];
 }
 
@@ -82,6 +79,13 @@
     [switchButton setImage:[UIImage imageNamed:@"LandMarker.png"] forState:UIControlStateNormal];
     
     [self.view addSubview:switchButton];
+}
+
+- (CGAffineTransform)translatedAndScaledTransformUsingViewRect:(CGRect)viewRect fromRect:(CGRect)fromRect {
+    CGSize scales = CGSizeMake(viewRect.size.width/fromRect.size.width, viewRect.size.height/fromRect.size.height);
+    CGPoint offset = CGPointMake(CGRectGetMidX(viewRect) - CGRectGetMidX(fromRect), CGRectGetMidY(viewRect) - CGRectGetMidY(fromRect));
+    
+    return CGAffineTransformMake(scales.width, 0, 0, scales.height, offset.x, offset.y);
 }
 
 

@@ -13,5 +13,6 @@
 #define kSplashToLoginSegue @"splashToLoginSegue"
 #define kSplashToMapSegue @"splashToMapSegue"
 #define kMapToBuildingSegue @"mapToBuildingSegue"
+#define kBuildingToMapSegue @"buildingToMapSegue"
 
 #endif

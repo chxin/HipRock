@@ -12,6 +12,8 @@
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingViewController.h"
 #import "REMGallaryViewController.h"
+#import "REMMapBuildingSegue.h"
+#import "REMBuildingViewController.h"
 
 @interface REMMapViewController ()
 
@@ -28,6 +30,9 @@
 	// Do any additional setup after loading the view.
     
     [self loadMapView];
+    
+    
+    NSLog(@"map view subview count: %d", self.view.subviews.count);
 }
 
 -(void)loadMapView
@@ -35,17 +40,18 @@
     CGRect viewBounds = self.view.bounds;
     CGRect mapViewFrame = CGRectMake(viewBounds.origin.x, viewBounds.origin.y, viewBounds.size.height, viewBounds.size.width);
     
-    double defaultLatitude =38, defaultLongitude=104.0;
-    CGFloat defaultZoomLevel = 4;
+    double defaultLatitude =38.0, defaultLongitude=104.0;
+    CGFloat defaultZoomLevel = 4.0;
     
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:defaultLatitude longitude:defaultLongitude zoom:defaultZoomLevel];
     
     mapView = [GMSMapView mapWithFrame:mapViewFrame camera:camera];
     [mapView setCamera:camera];
     mapView.myLocationEnabled = NO;
+    mapView.delegate = self;
     
     [self.view addSubview: mapView];
-    [self.view sendSubviewToBack:mapView];
+    [self.view sendSubviewToBack: mapView];
     
     [self mapViewLoaded];
 }
@@ -83,6 +89,7 @@
         
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.position = CLLocationCoordinate2DMake(building.latitude, building.longitude);
+        marker.userData = building;
         marker.title = building.name;
         marker.snippet = building.code;
         marker.map = mapView;
@@ -112,6 +119,16 @@
     mapView = nil;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"map view subview count will: %d", self.view.subviews.count);
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"map view subview count did: %d", self.view.subviews.count);
+}
+
 - (IBAction)jumpToBuildingViewButtonPressed:(id)sender {
     
     NSLog(@"new view bounds: %@",NSStringFromCGRect(self.view.bounds));
@@ -123,8 +140,8 @@
         self.gallaryViewController = [[REMGallaryViewController alloc] init];
     }
     
-    self.gallaryViewController.startFrame = self.gallarySwitchButton.frame;
-    self.gallaryViewController.stopFrame = self.view.bounds;
+    self.gallaryViewController.originalFrame = self.gallarySwitchButton.frame;
+    self.gallaryViewController.viewFrame = self.view.bounds;
     
     [self addChildViewController:self.gallaryViewController];
     [self.view addSubview:self.gallaryViewController.view];
@@ -134,10 +151,27 @@
 {
     if([segue.identifier isEqualToString:kMapToBuildingSegue] == YES)
     {
-        REMBuildingViewController *buildingViewController = segue.destinationViewController;
+        REMMapBuildingSegue *customeSegue = (REMMapBuildingSegue *)segue;
+        
+        customeSegue.originalPoint = [mapView.projection pointForCoordinate:self.pressedMarker.position];
+        
+        REMBuildingViewController *buildingViewController = customeSegue.destinationViewController;
         buildingViewController.buildingOverallArray = self.buildingInfoArray;
         buildingViewController.splashScreenController = self.splashScreenController;
     }
+}
+
+#pragma mark GSMapView delegate
+- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker
+{
+    return NO;
+}
+
+- (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
+{
+    self.pressedMarker = marker;
+    [self performSegueWithIdentifier:kMapToBuildingSegue sender:self];
+
 }
 
 
