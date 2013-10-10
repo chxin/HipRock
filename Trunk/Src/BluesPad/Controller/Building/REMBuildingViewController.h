@@ -19,7 +19,7 @@ typedef enum _BuildingSourceType{
     BuildingSourceTypeFromGallery
 } BuildingSourceType;
 
-@interface REMBuildingViewController : UIViewController<UIGestureRecognizerDelegate>
+@interface REMBuildingViewController : REMControllerBase<UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) NSArray *buildingOverallArray;
 

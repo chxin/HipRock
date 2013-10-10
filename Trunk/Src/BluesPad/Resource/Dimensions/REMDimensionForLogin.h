@@ -9,6 +9,7 @@
 #ifndef Blues_REMDimensionLogin_h
 #define Blues_REMDimensionLogin_h
 
+//prefix: kDMLogin
 
 
 #endif

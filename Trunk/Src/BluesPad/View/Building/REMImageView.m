@@ -33,7 +33,7 @@
 @property (nonatomic,strong) NSString *loadingImageKey;
 @property (nonatomic,strong) UIButton *backButton;
 @property (nonatomic,strong) UIButton *shareButton;
-@property (nonatomic,strong) UIButton *logoButton;
+//@property (nonatomic,strong) UIButton *logoButton;
 
 @property (nonatomic) BOOL isActive;
 
@@ -118,7 +118,7 @@
     self.bottomGradientLayer=nil;
     self.backButton=nil;
     self.shareButton=nil;
-    self.logoButton=nil;
+//    self.logoButton=nil;
     [self.dataView removeObserver:self forKeyPath:@"contentOffset" context:nil];
     self.dataView=nil;
 }
@@ -654,19 +654,19 @@
     self.titleLabel.textColor=[UIColor whiteColor];
     
     
-    self.logoButton=[[UIButton alloc]initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, kBuildingTitleTop, 140, 30)];
-    
-    [self.logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
-    
-    self.logoButton.titleLabel.text=@"logo";
-    
-    [self.logoButton addTarget:self.controller action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+//    self.logoButton=[[UIButton alloc]initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, kBuildingTitleTop, 140, 30)];
+//
+//    [self.logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
+//    
+//    self.logoButton.titleLabel.text=@"logo";
+//    
+//    [self.logoButton addTarget:self.controller action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     //self.logoButton.layer.borderColor=[UIColor redColor].CGColor;
     //self.logoButton.layer.borderWidth=1;
     [self addSubview:self.titleLabel];
     
-    [self addSubview:self.logoButton];
+    [self addSubview:self.controller.customerLogoButton];
 }
 
 
