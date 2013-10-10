@@ -32,11 +32,6 @@
         [gallaryView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gallaryCellIdentifier"];
         [gallaryView setBackgroundColor:[UIColor redColor]];
         
-        CGAffineTransform tr = [self translatedAndScaledTransformUsingViewRect:self.originalFrame fromRect:self.viewFrame];
-        gallaryView.transform = tr;
-        
-        
-        
         self.view = gallaryView;
     }
     
@@ -59,9 +54,11 @@
 //    CGFloat widthRatio = self.stopFrame.size.width/self.startFrame.size.width;
 //    CGFloat heightRatio = self.stopFrame.size.height/self.startFrame.size.height;
 //    CGAffineTransform tr = CGAffineTransformScale(self.view.transform, widthRatio, heightRatio);
+    
+    self.view.frame = self.originalFrame;
 
     [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionCurveLinear animations:^{
-        self.view.transform = [self translatedAndScaledTransformUsingViewRect:self.viewFrame fromRect:self.originalFrame];
+        self.view.frame = self.viewFrame;
     } completion:^(BOOL finished) {
         //[self addSwitchButton];
         NSLog(@"%@",NSStringFromCGRect(self.view.bounds));
@@ -79,15 +76,21 @@
     UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];// [[UIButton alloc] initWithFrame:];
     [switchButton setFrame:CGRectMake(25, 20, 32, 32)];
     [switchButton setImage:[UIImage imageNamed:@"LandMarker.png"] forState:UIControlStateNormal];
+    [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchDown];
+    
     
     [self.view addSubview:switchButton];
 }
 
-- (CGAffineTransform)translatedAndScaledTransformUsingViewRect:(CGRect)viewRect fromRect:(CGRect)fromRect {
-    CGSize scales = CGSizeMake(viewRect.size.width/fromRect.size.width, viewRect.size.height/fromRect.size.height);
-    CGPoint offset = CGPointMake(CGRectGetMidX(viewRect) - CGRectGetMidX(fromRect), CGRectGetMidY(viewRect) - CGRectGetMidY(fromRect));
-    
-    return CGAffineTransformMake(scales.width, 0, 0, scales.height, offset.x, offset.y);
+-(void)switchButtonPressed
+{
+    self.view.frame = self.viewFrame;
+    [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionCurveLinear animations:^{
+        self.view.frame = self.originalFrame;
+    } completion:^(BOOL finished) {
+        //[self addSwitchButton];
+        NSLog(@"%@",NSStringFromCGRect(self.view.bounds));
+    }];
 }
 
 
