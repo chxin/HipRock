@@ -9,6 +9,7 @@
 #ifndef Blues_REMDimensionForBuilding_h
 #define Blues_REMDimensionForBuilding_h
 
+//prefix: kDMBuilding, kDMDashboard
 
 
 #endif

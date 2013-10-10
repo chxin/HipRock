@@ -7,6 +7,7 @@
 //
 
 #import "REMImageView.h"
+#import "REMCommonHeaders.h"
 
 #define kDashboardThreshold 361+65+85+45
 
@@ -684,6 +685,7 @@
     [self addSubview:self.titleLabel];
     
     [self addSubview:self.logoButton];
+    
 }
 
 

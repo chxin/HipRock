@@ -14,10 +14,22 @@ static REMApplicationContext *context = nil;
 
 + (REMApplicationContext *)instance
 {
-    if(context == nil)
-        context = [[REMApplicationContext alloc] init];
+    if(context == nil){
+        @synchronized(self){
+            context = [[REMApplicationContext alloc] init];
+        }
+    }
     
     return context;
+}
+
+-(void)login
+{
+    
+}
+
+-(void)logout
+{
 }
 
 

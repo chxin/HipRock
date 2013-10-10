@@ -15,4 +15,6 @@
 #define kMapToBuildingSegue @"mapToBuildingSegue"
 #define kBuildingToMapSegue @"buildingToMapSegue"
 
+#define kSegueToSettings @"settingsSegue"
+
 #endif

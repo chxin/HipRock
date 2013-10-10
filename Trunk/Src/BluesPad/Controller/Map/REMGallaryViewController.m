@@ -35,6 +35,8 @@
         CGAffineTransform tr = [self translatedAndScaledTransformUsingViewRect:self.originalFrame fromRect:self.viewFrame];
         gallaryView.transform = tr;
         
+        
+        
         self.view = gallaryView;
     }
     

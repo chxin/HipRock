@@ -34,7 +34,7 @@
 {
     [super loadView];
     
-    NSLog(@"%@", NSStringFromCGRect(self.view.frame));
+    NSLog(@"map view frame:%@", NSStringFromCGRect(self.view.frame));
 }
 
 
@@ -44,7 +44,10 @@
 	// Do any additional setup after loading the view.
     
     [self loadMapView];
+    [self.view addSubview:self.customerLogoButton];
+    [self.view.layer insertSublayer:self.titleGradientLayer above:mapView.layer];
 }
+
 
 -(void)loadMapView
 {
@@ -159,6 +162,7 @@
         buildingViewController.buildingOverallArray = self.buildingInfoArray;
         buildingViewController.splashScreenController = self.splashScreenController;
         buildingViewController.mapViewController = self;
+        buildingViewController.currentBuildingId = ((REMBuildingModel *)self.pressedMarker.userData).buildingId;
     }
 }
 
