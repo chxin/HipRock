@@ -440,11 +440,9 @@
 		B445AECF177C0046002D2A59 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */; };
 		B445AED1177C0052002D2A59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AED0177C0052002D2A59 /* CoreGraphics.framework */; };
 		B445AEE2177C04E4002D2A59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AED0177C0052002D2A59 /* CoreGraphics.framework */; };
-		B454BC0417CDEC4D00D69A7B /* Share_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BBFE17CDEC4D00D69A7B /* Share_normal@2x.png */; };
 		B454BC0517CDEC4D00D69A7B /* Menu_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BBFF17CDEC4D00D69A7B /* Menu_normal@2x.png */; };
 		B454BC0617CDEC4D00D69A7B /* OverTarget.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC0017CDEC4D00D69A7B /* OverTarget.png */; };
 		B454BC0717CDEC4D00D69A7B /* Menu_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC0117CDEC4D00D69A7B /* Menu_normal.png */; };
-		B454BC0817CDEC4D00D69A7B /* Share_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC0217CDEC4D00D69A7B /* Share_normal.png */; };
 		B454BC0917CDEC4D00D69A7B /* OverTarget@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC0317CDEC4D00D69A7B /* OverTarget@2x.png */; };
 		B454BC0C17CDECD500D69A7B /* NotOverTarget.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC0A17CDECD500D69A7B /* NotOverTarget.png */; };
 		B454BC0D17CDECD500D69A7B /* NotOverTarget@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B454BC0B17CDECD500D69A7B /* NotOverTarget@2x.png */; };
@@ -1025,11 +1023,9 @@
 		B445AEB1177BFAE8002D2A59 /* REMLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLog.m; path = Common/Log/REMLog.m; sourceTree = "<group>"; };
 		B445AEBA177BFE66002D2A59 /* CommonTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B445AED0177C0052002D2A59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		B454BBFE17CDEC4D00D69A7B /* Share_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_normal@2x.png"; sourceTree = "<group>"; };
 		B454BBFF17CDEC4D00D69A7B /* Menu_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu_normal@2x.png"; sourceTree = "<group>"; };
 		B454BC0017CDEC4D00D69A7B /* OverTarget.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OverTarget.png; sourceTree = "<group>"; };
 		B454BC0117CDEC4D00D69A7B /* Menu_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu_normal.png; sourceTree = "<group>"; };
-		B454BC0217CDEC4D00D69A7B /* Share_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_normal.png; sourceTree = "<group>"; };
 		B454BC0317CDEC4D00D69A7B /* OverTarget@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OverTarget@2x.png"; sourceTree = "<group>"; };
 		B454BC0A17CDECD500D69A7B /* NotOverTarget.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotOverTarget.png; sourceTree = "<group>"; };
 		B454BC0B17CDECD500D69A7B /* NotOverTarget@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotOverTarget@2x.png"; sourceTree = "<group>"; };
@@ -2115,8 +2111,6 @@
 				7ACFCBA317CDA62E00811976 /* commodity */,
 				B454BC0A17CDECD500D69A7B /* NotOverTarget.png */,
 				B454BC0B17CDECD500D69A7B /* NotOverTarget@2x.png */,
-				B454BC0217CDEC4D00D69A7B /* Share_normal.png */,
-				B454BBFE17CDEC4D00D69A7B /* Share_normal@2x.png */,
 				B454BC0117CDEC4D00D69A7B /* Menu_normal.png */,
 				B454BBFF17CDEC4D00D69A7B /* Menu_normal@2x.png */,
 				B454BC0017CDEC4D00D69A7B /* OverTarget.png */,
@@ -2571,12 +2565,10 @@
 				7A48B47917CDDD03002DA386 /* LoginTextField-Focus@2x.png in Resources */,
 				7A48B47A17CDDD03002DA386 /* LoginTextField.png in Resources */,
 				7A48B47B17CDDD03002DA386 /* LoginTextField@2x.png in Resources */,
-				B454BC0417CDEC4D00D69A7B /* Share_normal@2x.png in Resources */,
 				7A53160317F817370022491F /* LandMarker.png in Resources */,
 				B454BC0517CDEC4D00D69A7B /* Menu_normal@2x.png in Resources */,
 				B454BC0617CDEC4D00D69A7B /* OverTarget.png in Resources */,
 				B454BC0717CDEC4D00D69A7B /* Menu_normal.png in Resources */,
-				B454BC0817CDEC4D00D69A7B /* Share_normal.png in Resources */,
 				B454BC0917CDEC4D00D69A7B /* OverTarget@2x.png in Resources */,
 				B454BC0C17CDECD500D69A7B /* NotOverTarget.png in Resources */,
 				B454BC0D17CDECD500D69A7B /* NotOverTarget@2x.png in Resources */,
