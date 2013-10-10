@@ -52,6 +52,20 @@
     
     [self addObserver:self forKeyPath:@"currentScrollOffset" options:0 context:nil];
     
+    if (self.currentBuildingId!=nil) {
+        for (int i=0; i<self.buildingOverallArray.count; ++i) {
+            REMBuildingOverallModel *model = self.buildingOverallArray[i];
+            if([model.building.buildingId isEqualToNumber:self.currentBuildingId]==YES){
+                self.currentIndex=i;
+                break;
+            }
+        }
+    }
+    else{
+        self.currentIndex=0;
+    }
+    
+    
     if(self.buildingOverallArray.count>0){
     
         [self blurredImageView];
@@ -65,7 +79,7 @@
         [self.view addGestureRecognizer:tap];
     }
     
-    self.currentIndex=0;
+    
     self.cumulateX=0;
     
     
@@ -166,7 +180,7 @@
         imageView.defaultImage=self.defaultImage;
         imageView.defaultBlurImage=self.defaultBlurImage;
         imageView.controller=self;
-        if(i==0 || i==1){
+        if(i==self.currentIndex || i==(self.currentIndex+1) || i == (self.currentIndex-1)){
             [self.view addSubview:imageView];
             [self.imageViewStatus setObject:@(1) forKey:@(i)];
         }

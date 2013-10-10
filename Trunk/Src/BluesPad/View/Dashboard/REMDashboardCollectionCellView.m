@@ -8,9 +8,11 @@
 
 #import "REMDashboardCollectionCellView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "REMEnergySeacherBase.h"
 
 @interface REMDashboardCollectionCellView ()
 
+@property (nonatomic,weak) UIView *chartContainer;
 
 @end
 
@@ -50,6 +52,23 @@
     if(widgetInfo.shareInfo!=nil||[widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
         
     }
+    
+    UIView *chartContainer = [[UIView alloc]initWithFrame:CGRectMake(0, 30, self.contentView.frame.size.width, self.contentView.frame.size.height-30)];
+    
+    [self.contentView addSubview:chartContainer];
+    
+    self.chartContainer=chartContainer;
+    
+    [self queryEnergyData:widgetInfo.contentSyntax];
+}
+
+- (void)queryEnergyData:(REMWidgetContentSyntax *)syntax{
+    
+    REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType];
+    [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:syntax.params withMaserContainer:self.chartContainer callback:^(id data){
+        
+        
+    }];
 }
 
 

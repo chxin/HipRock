@@ -508,6 +508,7 @@
 		B4EDFB1018064F2900873FA1 /* Share_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4EDFB0C18064F2900873FA1 /* Share_disable@2x.png */; };
 		B4EDFB1118064F2900873FA1 /* Share_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4EDFB0D18064F2900873FA1 /* Share_normal.png */; };
 		B4EDFB1218064F2900873FA1 /* Share_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4EDFB0E18064F2900873FA1 /* Share_normal@2x.png */; };
+		B4EDFB181806653400873FA1 /* REMEnergyMultiTimeSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EDFB171806653400873FA1 /* REMEnergyMultiTimeSearcher.m */; };
 		B4F4B99E17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
 		B4F4B99F17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
 		B4F4B9A017F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
@@ -1114,6 +1115,8 @@
 		B4EDFB0C18064F2900873FA1 /* Share_disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_disable@2x.png"; sourceTree = "<group>"; };
 		B4EDFB0D18064F2900873FA1 /* Share_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_normal.png; sourceTree = "<group>"; };
 		B4EDFB0E18064F2900873FA1 /* Share_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_normal@2x.png"; sourceTree = "<group>"; };
+		B4EDFB161806653400873FA1 /* REMEnergyMultiTimeSearcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergyMultiTimeSearcher.h; path = Biz/Energy/Searcher/REMEnergyMultiTimeSearcher.h; sourceTree = "<group>"; };
+		B4EDFB171806653400873FA1 /* REMEnergyMultiTimeSearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnergyMultiTimeSearcher.m; path = Biz/Energy/Searcher/REMEnergyMultiTimeSearcher.m; sourceTree = "<group>"; };
 		B4F4B99C17F16F590096034D /* REMShareInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMShareInfo.h; sourceTree = "<group>"; };
 		B4F4B99D17F16F590096034D /* REMShareInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMShareInfo.m; sourceTree = "<group>"; };
 		B4FED1521804FEF400E0CE58 /* REMEnergySeacherBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergySeacherBase.h; path = Biz/Energy/Searcher/REMEnergySeacherBase.h; sourceTree = "<group>"; };
@@ -2375,6 +2378,8 @@
 			children = (
 				B4FED1521804FEF400E0CE58 /* REMEnergySeacherBase.h */,
 				B4FED1531804FEF400E0CE58 /* REMEnergySeacherBase.m */,
+				B4EDFB161806653400873FA1 /* REMEnergyMultiTimeSearcher.h */,
+				B4EDFB171806653400873FA1 /* REMEnergyMultiTimeSearcher.m */,
 			);
 			name = Searcher;
 			sourceTree = "<group>";
@@ -2757,6 +2762,7 @@
 				7A153C6017AA489600413D3C /* REMWidgetObject.m in Sources */,
 				B4F4B99E17F16F590096034D /* REMShareInfo.m in Sources */,
 				7A153C6117AA489600413D3C /* REMEnergyCalendarData.m in Sources */,
+				B4EDFB181806653400873FA1 /* REMEnergyMultiTimeSearcher.m in Sources */,
 				B42FBF6117F519F5004F2F3A /* REMWidgetCollectionViewController.m in Sources */,
 				7A153C6217AA489600413D3C /* REMEnergyData.m in Sources */,
 				7A153C6317AA489600413D3C /* REMEnergyError.m in Sources */,

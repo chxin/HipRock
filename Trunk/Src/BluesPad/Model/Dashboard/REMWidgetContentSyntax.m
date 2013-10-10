@@ -101,9 +101,38 @@
     self.timeRanges = newTimeRanges;
     
     
-    
-    
-    
+    if([self.storeType isEqualToString:@"energy.Energy"] == YES){
+        if(self.timeRanges.count>1){
+            self.dataStoreType =  REMDSEnergyMultiTimeTrend;
+        }
+        else{
+            self.dataStoreType=REMDSEnergyTagsTrend;
+        }
+    }
+    else if([self.storeType isEqualToString:@"energy.Distribution"]==YES){
+        self.dataStoreType = REMDSEnergyTagsDistribute;
+    }
+    else if([self.storeType isEqualToString:@"energy.MultiIntervalDistribution"]==YES){
+        self.dataStoreType = REMDSEnergyMultiTimeDistribute;
+    }
+    else if([self.storeType isEqualToString:@"energy.CarbonUage"]==YES){
+        self.dataStoreType = REMDSEnergyCarbon;
+    }
+    else if([self.storeType isEqualToString:@"energy.CarbonDistribution"]==YES){
+        self.dataStoreType = REMDSEnergyCarbonDistribute;
+    }
+    else if([self.storeType isEqualToString:@"energy.CostUsage"]==YES){
+        self.dataStoreType = REMDSEnergyCost;
+    }
+    else if([self.storeType isEqualToString:@"energy.CostUsageDistribution"]==YES){
+        self.dataStoreType = REMDSEnergyCostDistribute;
+    }
+    else if([self.storeType isEqualToString:@"energy.CostElectricityUsage"]==YES){
+        self.dataStoreType = REMDSEnergyCostElectricity;
+    }
+    else if([self.storeType isEqualToString:@"energy.RankUsage"]==YES){
+        self.dataStoreType = REMDSEnergyRanking;
+    }
 
 }
 
