@@ -13,7 +13,7 @@
 //v0.4dev branch checkin
 
 #ifdef DEBUG
-const static NSString *SVC_BASE_HOST = @"10.177.207.63";
+const static NSString *SVC_BASE_HOST = @"10.177.206.34";
 const static NSString *SVC_BASE_SCHEMA = @"http";
 const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
 

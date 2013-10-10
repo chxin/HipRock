@@ -99,6 +99,11 @@
     }
     
     self.timeRanges = newTimeRanges;
+    
+    
+    
+    
+    
 
 }
 

@@ -52,6 +52,15 @@ typedef enum _REMRelativeTimeRangeType : NSInteger
     REMRelativeTimeRangeTypeLastYear = 9,
 } REMRelativeTimeRangeType;
 
+typedef enum _REMEnergyBizType:NSUInteger
+{
+    REMEnergyBizTypeTag=1,
+    REMEnergyBizTypeMultiTime=2,
+    REMEnergyBizTypeCarbon=3,
+    REMEnergyBizTypeCost=4,
+    REMEnergyBizTypeCostElectricity=5,
+    REMEnergyBizTYpeRanking=6
+} REMEnergyBizType;
 
 @interface REMEnum : NSObject
 

@@ -34,7 +34,7 @@
 {
     UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 20)];
     title.backgroundColor=[UIColor clearColor];
-    title.textColor=[UIColor grayColor];
+    title.textColor=[UIColor whiteColor];
     title.text=widgetInfo.name;
     [self.contentView addSubview:title];
     
@@ -43,7 +43,7 @@
     
     UILabel *time=[[UILabel alloc]initWithFrame:CGRectMake(0, 25, self.contentView.frame.size.width, 20)];
     time.backgroundColor=[UIColor clearColor];
-    time.textColor=[UIColor grayColor];
+    time.textColor=[UIColor whiteColor];
     [self.contentView addSubview:time];
     self.timeLabel=time;
     

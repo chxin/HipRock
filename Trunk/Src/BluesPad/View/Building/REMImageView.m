@@ -533,10 +533,12 @@
             
             
             [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
-                [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y, kBuildingChartWidth, self.dataView.frame.size.height)];
-                [self.dataView setHidden:YES];
+                [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y-20, kBuildingChartWidth, self.dataView.frame.size.height)];
+                [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, -1000, self.dataView.frame.size.width, self.dataView.frame.size.height)];
             
-            } completion:^(BOOL finished){}];
+            } completion:^(BOOL finished){
+                [self.dataView setHidden:YES];
+            }];
             
             
            
@@ -548,6 +550,7 @@
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
         [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height, kBuildingChartWidth, self.dataView.frame.size.height)];
         [self.dataView setHidden:NO];
+        [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, kDashboardThreshold, self.dataView.frame.size.width, self.dataView.frame.size.height)];
         
     } completion:^(BOOL finished){
         [self.dashboardController.view removeFromSuperview];
@@ -641,9 +644,22 @@
     
     [self.layer insertSublayer:self.titleGradientLayer above:self.blurredImageView.layer];
 
-    CGFloat leftMargin=kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin;
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(leftMargin, kBuildingTitleTop, self.frame.size.width-leftMargin, kBuildingTitleFontSize+5)];
-    self.titleLabel.text=self.buildingInfo.building.name;
+    //CGFloat leftMargin=kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin;
+    UILabel *buildingType=[[UILabel alloc]initWithFrame:CGRectMake(0, 10, self.frame.size.width, 25)];
+    buildingType.backgroundColor=[UIColor clearColor];
+    buildingType.text=@"楼宇";
+    buildingType.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    buildingType.shadowOffset=CGSizeMake(1, 1);
+    buildingType.font = [UIFont fontWithName:@(kBuildingFontLight) size:25];
+    
+    buildingType.textAlignment=NSTextAlignmentCenter;
+    buildingType.textColor=[UIColor whiteColor];
+    
+    [self addSubview:buildingType];
+
+    
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, kBuildingTitleTop, self.frame.size.width, kBuildingTitleFontSize+5)];
+    self.titleLabel.text=self.buildingInfo.building.name ;
     self.titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);
     
@@ -654,7 +670,7 @@
     self.titleLabel.textColor=[UIColor whiteColor];
     
     
-    self.logoButton=[[UIButton alloc]initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, kBuildingTitleTop, 140, 30)];
+    self.logoButton=[[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, kBuildingTitleTop, 140, 30)];
     
     [self.logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
     

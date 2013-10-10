@@ -10,6 +10,7 @@
 
 @interface REMEnergySeacherBase : NSObject
 
++ (REMEnergySeacherBase *)querySearcherByType:
 
 
 @end
