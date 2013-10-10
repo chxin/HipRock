@@ -516,6 +516,7 @@
 		B4EDFB1118064F2900873FA1 /* Share_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4EDFB0D18064F2900873FA1 /* Share_normal.png */; };
 		B4EDFB1218064F2900873FA1 /* Share_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4EDFB0E18064F2900873FA1 /* Share_normal@2x.png */; };
 		B4EDFB181806653400873FA1 /* REMEnergyMultiTimeSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EDFB171806653400873FA1 /* REMEnergyMultiTimeSearcher.m */; };
+		B4EDFB1B180697F300873FA1 /* REMControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EDFB1A180697F300873FA1 /* REMControllerBase.m */; };
 		B4F4B99E17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
 		B4F4B99F17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
 		B4F4B9A017F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
@@ -1124,6 +1125,10 @@
 		B4EDFB0E18064F2900873FA1 /* Share_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_normal@2x.png"; sourceTree = "<group>"; };
 		B4EDFB161806653400873FA1 /* REMEnergyMultiTimeSearcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergyMultiTimeSearcher.h; path = Biz/Energy/Searcher/REMEnergyMultiTimeSearcher.h; sourceTree = "<group>"; };
 		B4EDFB171806653400873FA1 /* REMEnergyMultiTimeSearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnergyMultiTimeSearcher.m; path = Biz/Energy/Searcher/REMEnergyMultiTimeSearcher.m; sourceTree = "<group>"; };
+		B4EDFB19180697F300873FA1 /* REMControllerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMControllerBase.h; path = Controller/REMControllerBase.h; sourceTree = "<group>"; };
+		B4EDFB1A180697F300873FA1 /* REMControllerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMControllerBase.m; path = Controller/REMControllerBase.m; sourceTree = "<group>"; };
+		B4EDFB1C1806983600873FA1 /* REMDimensionForSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensionForSplashScreen.h; path = Resource/Dimensions/REMDimensionForSplashScreen.h; sourceTree = "<group>"; };
+		B4EDFB1D1806983600873FA1 /* REMDimensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensions.h; path = Resource/Dimensions/REMDimensions.h; sourceTree = "<group>"; };
 		B4F4B99C17F16F590096034D /* REMShareInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMShareInfo.h; sourceTree = "<group>"; };
 		B4F4B99D17F16F590096034D /* REMShareInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMShareInfo.m; sourceTree = "<group>"; };
 		B4FED1521804FEF400E0CE58 /* REMEnergySeacherBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergySeacherBase.h; path = Biz/Energy/Searcher/REMEnergySeacherBase.h; sourceTree = "<group>"; };
@@ -1571,6 +1576,8 @@
 		7A2849581803998900DC481B /* Dimensions */ = {
 			isa = PBXGroup;
 			children = (
+				B4EDFB1C1806983600873FA1 /* REMDimensionForSplashScreen.h */,
+				B4EDFB1D1806983600873FA1 /* REMDimensions.h */,
 				7A28495918039A3000DC481B /* REMDimensionForLogin.h */,
 				7A28495A18039A9D00DC481B /* REMDimensionForMap.h */,
 				7A28495B18039AAF00DC481B /* REMDimensionForBuilding.h */,
@@ -1841,6 +1848,8 @@
 				7A153C8517AA497C00413D3C /* Widget */,
 				7A13C19317F40809007E6AA9 /* REMMainNavigationController.h */,
 				7A13C19417F40809007E6AA9 /* REMMainNavigationController.m */,
+				B4EDFB19180697F300873FA1 /* REMControllerBase.h */,
+				B4EDFB1A180697F300873FA1 /* REMControllerBase.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2885,6 +2894,7 @@
 				7A13C18F17F407B6007E6AA9 /* REMMainDashboardViewController.m in Sources */,
 				EF8A47FD17F959B5009B5C33 /* REMTrendChartColumnSeries.m in Sources */,
 				B46C8EC017F27CB9006DC4CB /* REMDashboardCollectionView.m in Sources */,
+				B4EDFB1B180697F300873FA1 /* REMControllerBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
