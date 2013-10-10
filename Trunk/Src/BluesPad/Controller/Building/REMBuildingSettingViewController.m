@@ -28,6 +28,8 @@
     if (self) {
         
         // Custom initialization
+        self.modalInPopover = YES;
+        self.modalPresentationStyle = UIModalPresentationFormSheet;
     }
     return self;
 }

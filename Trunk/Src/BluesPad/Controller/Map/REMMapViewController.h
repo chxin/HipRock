@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "REMSplashScreenController.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import "REMControllerBase.h"
 @class REMGallaryViewController;
 @class REMBuildingViewController;
 
-@interface REMMapViewController : UIViewController<GMSMapViewDelegate>
+@interface REMMapViewController : REMControllerBase<GMSMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *gallarySwitchButton;
 

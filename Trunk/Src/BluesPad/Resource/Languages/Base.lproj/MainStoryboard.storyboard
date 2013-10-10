@@ -130,7 +130,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSF-rh-OLl">
-                                <rect key="frame" x="25" y="20" width="32" height="32"/>
+                                <rect key="frame" x="25" y="23" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Gallary.png"/>
                                 <connections>
@@ -1678,7 +1678,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <!--Navigation Controller-->
         <scene sceneID="YZd-Lj-m7L">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="qwH-vw-d6n" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="settingController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="qwH-vw-d6n" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qst-by-nTH">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>

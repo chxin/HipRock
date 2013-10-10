@@ -9,10 +9,15 @@
 #ifndef Blues_REMDimensionForMap_h
 #define Blues_REMDimensionForMap_h
 
-#define kDimensionMarker_SwitchButtonTop 20
-#define kDimensionMarker_SwitchButtonLeft 20
-#define kDimensionMarker_SwitchButtonWidth 20
-#define kDimensionMarker_SwitchButtonHeight 20
+//prefix: kDMMap, kDMGallary
+
+
+#define kDMMap_SwitchButtonTop 23
+#define kDMMap_SwitchButtonLeft 25
+#define kDMMap_SwitchButtonWidth 32
+#define kDMMap_SwitchButtonHeight 32
+
+
 
 
 #endif
