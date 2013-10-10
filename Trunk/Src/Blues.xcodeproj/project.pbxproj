@@ -322,6 +322,13 @@
 		7A399E9D177D238F00F0EB9F /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E93177D238F00F0EB9F /* AFXMLRequestOperation.m */; };
 		7A399E9E177D238F00F0EB9F /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E95177D238F00F0EB9F /* UIImageView+AFNetworking.m */; };
 		7A399EA4177D279900F0EB9F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A399EA2177D279900F0EB9F /* InfoPlist.strings */; };
+		7A3CB75E1806385300B94DEE /* REMError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42117D877C3003B18E1 /* REMError.m */; };
+		7A3CB75F1806385300B94DEE /* REMBusinessErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */; };
+		7A3CB7601806385300B94DEE /* REMAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */; };
+		7A3CB7611806385300B94DEE /* REMNetworkStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */; };
+		7A3CB7621806385300B94DEE /* REMCustomerSwitchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */; };
+		7A3CB763180638A700B94DEE /* REMAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */; };
+		7A3CB764180638A700B94DEE /* REMNetworkStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */; };
 		7A3DDCDA1786C05B008A1033 /* REMServiceAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */; };
 		7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDC1786C195008A1033 /* REMMaskManager.m */; };
 		7A48B47817CDDD03002DA386 /* LoginTextField-Focus.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B47417CDDD03002DA386 /* LoginTextField-Focus.png */; };
@@ -2871,6 +2878,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A3CB75E1806385300B94DEE /* REMError.m in Sources */,
+				7A3CB75F1806385300B94DEE /* REMBusinessErrorInfo.m in Sources */,
+				7A3CB7601806385300B94DEE /* REMAdministratorModel.m in Sources */,
+				7A3CB7611806385300B94DEE /* REMNetworkStatusIndicator.m in Sources */,
+				7A3CB7621806385300B94DEE /* REMCustomerSwitchHelper.m in Sources */,
 				7AF6AC8217D1BA5600D62A9A /* REMBuildingAirQualityChart.m in Sources */,
 				7AF6AC8317D1BA5600D62A9A /* REMBuildingAirQualityView.m in Sources */,
 				7AF6AC8417D1BA5600D62A9A /* REMToggleButtonGroup.m in Sources */,
@@ -2991,6 +3003,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A3CB763180638A700B94DEE /* REMAdministratorModel.m in Sources */,
+				7A3CB764180638A700B94DEE /* REMNetworkStatusIndicator.m in Sources */,
 				6A83C8D917DD9B3600BD8164 /* REMError.h in Sources */,
 				6A83C8DA17DD9B3600BD8164 /* REMError.m in Sources */,
 				6A83C8DB17DD9B3600BD8164 /* REMBusinessErrorInfo.h in Sources */,
