@@ -67,4 +67,10 @@
     return object;
 }
 
++ (id)duplicateObject:(id)object
+{
+    NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject: object];
+    return [NSKeyedUnarchiver unarchiveObjectWithData: archivedData];
+}
+
 @end

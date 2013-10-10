@@ -13,6 +13,7 @@
 @interface REMGallaryViewController : UICollectionViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic,strong) REMMapViewController *mapViewController;
+
 @property (nonatomic) CGRect viewFrame;
 @property (nonatomic) CGRect originalFrame;
 

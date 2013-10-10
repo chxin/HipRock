@@ -17,6 +17,9 @@
     self = [super initWithFrame:frame collectionViewLayout:layout];
     if (self) {
         // Initialization code
+        //self.backgroundColor=[UIColor clearColor];
+        //self.layer.borderColor=[UIColor redColor].CGColor;
+        //self.layer.borderWidth=1;
     }
     return self;
 }

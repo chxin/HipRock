@@ -20,6 +20,7 @@
 @property (nonatomic) REMRelativeTimeRangeType relativeDateType;
 @property (nonatomic) REMCalendarType  calendarType;
 @property (nonatomic) REMEnergyStep stepType;
+@property (nonatomic) REMDataStoreType dataStoreType;
 @property (nonatomic,strong) NSString *storeType;
 @property (nonatomic,strong) NSString *type;
 @property (nonatomic,strong) NSArray *timeRanges;

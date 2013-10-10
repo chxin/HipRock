@@ -52,6 +52,20 @@
     
     [self addObserver:self forKeyPath:@"currentScrollOffset" options:0 context:nil];
     
+    if (self.currentBuildingId!=nil) {
+        for (int i=0; i<self.buildingOverallArray.count; ++i) {
+            REMBuildingOverallModel *model = self.buildingOverallArray[i];
+            if([model.building.buildingId isEqualToNumber:self.currentBuildingId]==YES){
+                self.currentIndex=i;
+                break;
+            }
+        }
+    }
+    else{
+        self.currentIndex=0;
+    }
+    
+    
     if(self.buildingOverallArray.count>0){
     
         [self blurredImageView];
@@ -65,7 +79,7 @@
         [self.view addGestureRecognizer:tap];
     }
     
-    self.currentIndex=0;
+    
     self.cumulateX=0;
     
     
@@ -167,7 +181,7 @@
         imageView.defaultImage=self.defaultImage;
         imageView.defaultBlurImage=self.defaultBlurImage;
         imageView.controller=self;
-        if(i==0 || i==1){
+        if(i==self.currentIndex || i==(self.currentIndex+1) || i == (self.currentIndex-1)){
             [self.view addSubview:imageView];
             [self.imageViewStatus setObject:@(1) forKey:@(i)];
         }
@@ -279,6 +293,7 @@
                                 
                                 if(addIndex ==YES){
                                     self.currentIndex=self.currentIndex+sign*-1;
+                                    self.currentBuildingId=((REMBuildingOverallModel *)self.buildingOverallArray[self.currentIndex]).building.buildingId;
                                 }
                                 //NSLog(@"currentIndex:%d",self.currentIndex);
                                 self.cumulateX=0;
@@ -303,28 +318,7 @@
                                 int idx = self.currentIndex;
                                 
                                 NSMutableArray *releaseArray=[[NSMutableArray alloc] initWithCapacity:self.imageArray.count];
-                                /*
-                                if((idx - 2) >=0){
-                                    int i=0;
-                                    while (i<=(idx-2)) {
-                                        [releaseArray addObject:@(i)];
-                                        i++;
-                                    }
-                                    i=idx+1;
-                                    while(i<self.imageArray.count){
-                                        [releaseArray addObject:@(i)];
-                                        ++i;
-                                    }
-                                    [self releaseOutOfWindowView:releaseArray];
-                                }
-                                else if((idx+2)<=self.imageArray.count){
-                                    int i=self.imageArray.count-1;
-                                    while (i>=(idx+2)) {
-                                        [releaseArray addObject:@(i)];
-                                        i--;
-                                    }
-                                    [self releaseOutOfWindowView:releaseArray];
-                                }*/
+                                
                                 for (int i=0; i<self.imageArray.count; i++) {
                                     if(i!=idx && i!=(idx+1) && i!=(idx-1)){
                                         [releaseArray addObject:@(i)];

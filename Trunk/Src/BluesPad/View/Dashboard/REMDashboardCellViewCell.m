@@ -24,13 +24,15 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.backgroundColor=[UIColor whiteColor];
+        self.backgroundColor=[[UIColor blackColor] colorWithAlphaComponent:0.2];
         //self.backgroundView=[[UIView alloc]initWithFrame:CGRectZero];
         //self.layer.cornerRadius=0;
         //self.layer.borderColor=[UIColor yellowColor].CGColor;
         //self.layer.borderWidth=1;
         self.contentMode=UIViewContentModeScaleToFill;
-        self.contentView.backgroundColor=[UIColor whiteColor];
+        self.contentView.backgroundColor=self.backgroundColor;
+        self.backgroundView=[[UIView alloc]initWithFrame:self.contentView.frame];
+        self.accessoryView=nil;
         //self.contentView.layer.borderWidth=1;
         //self.contentView.layer.borderColor=[UIColor redColor].CGColor;
     }
@@ -58,20 +60,20 @@
     
     
     CGRect frame=self.contentView.frame;
-    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, frame.size.width, 50)];
+    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, frame.size.width, 35)];
     title.text=dashboardInfo.name;
     title.backgroundColor=[UIColor clearColor];
-    title.textColor=[UIColor blackColor];
+    title.textColor=[UIColor whiteColor];
     [self.contentView addSubview:title];
     
     
     //NSLog(@"splitbar:%@",NSStringFromCGRect(frame));
-    CGRect frame1 = CGRectMake(10, 55, frame.size.width-10*2, 2);
+    CGRect frame1 = CGRectMake(10, title.frame.size.height+5, frame.size.width-10*2, 2);
     
     CALayer *layer1 = [CALayer layer];
     
     layer1.frame=frame1;
-    layer1.backgroundColor=[[UIColor blackColor]colorWithAlphaComponent:0.25].CGColor;
+    layer1.backgroundColor=[[UIColor whiteColor]colorWithAlphaComponent:0.25].CGColor;
     UIGraphicsBeginImageContextWithOptions(frame1.size, NO, 0.0);
     CGContextRef c = UIGraphicsGetCurrentContext();
     
@@ -89,7 +91,7 @@
     REMWidgetCollectionViewController *controller = [[REMWidgetCollectionViewController alloc]initWithCollectionViewLayout:flowlayout];
     self.collectionController=controller;
     self.collectionController.widgetArray=dashboardInfo.widgets;
-    self.collectionController.viewFrame=CGRectMake(10, 70, self.contentView.frame.size.width-10*2, self.contentView.frame.size.height-70);
+    self.collectionController.viewFrame=CGRectMake(10, frame1.origin.y+5, self.contentView.frame.size.width-10*2, self.contentView.frame.size.height-45);
     [self.contentView addSubview: self.collectionController.collectionView];
 
     
