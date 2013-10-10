@@ -293,6 +293,7 @@
                                 
                                 if(addIndex ==YES){
                                     self.currentIndex=self.currentIndex+sign*-1;
+                                    self.currentBuildingId=((REMBuildingOverallModel *)self.buildingOverallArray[self.currentIndex]).building.buildingId;
                                 }
                                 //NSLog(@"currentIndex:%d",self.currentIndex);
                                 self.cumulateX=0;
@@ -317,28 +318,7 @@
                                 int idx = self.currentIndex;
                                 
                                 NSMutableArray *releaseArray=[[NSMutableArray alloc] initWithCapacity:self.imageArray.count];
-                                /*
-                                if((idx - 2) >=0){
-                                    int i=0;
-                                    while (i<=(idx-2)) {
-                                        [releaseArray addObject:@(i)];
-                                        i++;
-                                    }
-                                    i=idx+1;
-                                    while(i<self.imageArray.count){
-                                        [releaseArray addObject:@(i)];
-                                        ++i;
-                                    }
-                                    [self releaseOutOfWindowView:releaseArray];
-                                }
-                                else if((idx+2)<=self.imageArray.count){
-                                    int i=self.imageArray.count-1;
-                                    while (i>=(idx+2)) {
-                                        [releaseArray addObject:@(i)];
-                                        i--;
-                                    }
-                                    [self releaseOutOfWindowView:releaseArray];
-                                }*/
+                                
                                 for (int i=0; i<self.imageArray.count; i++) {
                                     if(i!=idx && i!=(idx+1) && i!=(idx-1)){
                                         [releaseArray addObject:@(i)];

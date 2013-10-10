@@ -8,6 +8,8 @@
 
 #import "REMEnergySeacherBase.h"
 #import "REMEnergyMultiTimeSearcher.h"
+#import "REMEnergyViewData.h"
+
 @implementation REMEnergySeacherBase
 
 + (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType)storeType
@@ -26,9 +28,10 @@
     store.maskContainer=maskerContainer;
     
     [REMDataAccessor access:store success:^(NSDictionary *data){
-        
+        if([data isEqual:[NSNull null]]==YES)return ;
+        REMEnergyViewData *viewData=[[REMEnergyViewData alloc]initWithDictionary:data];
         if(callback!=nil){
-            callback(data);
+            callback(viewData);
         }
     
     } error:^(NSError *error,id response){

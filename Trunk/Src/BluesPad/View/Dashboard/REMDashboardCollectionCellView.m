@@ -9,6 +9,8 @@
 #import "REMDashboardCollectionCellView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMEnergySeacherBase.h"
+#import "REMEnergyViewData.h"
+#import "REMLineWidgetWrapper.h"
 
 @interface REMDashboardCollectionCellView ()
 
@@ -53,7 +55,7 @@
         
     }
     
-    UIView *chartContainer = [[UIView alloc]initWithFrame:CGRectMake(0, 30, self.contentView.frame.size.width, self.contentView.frame.size.height-30)];
+    UIView *chartContainer = [[UIView alloc]initWithFrame:CGRectMake(0, 30, self.contentView.frame.size.width, self.contentView.frame.size.height-40)];
     
     [self.contentView addSubview:chartContainer];
     
@@ -65,10 +67,28 @@
 - (void)queryEnergyData:(REMWidgetContentSyntax *)syntax{
     
     REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType];
-    [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:syntax.params withMaserContainer:self.chartContainer callback:^(id data){
+    [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:syntax.params withMaserContainer:self.chartContainer callback:^(REMEnergyViewData *data){
         
-        
+        REMLineWidgetWrapper* lineWidget = [[REMLineWidgetWrapper alloc]initWithFrame:self.chartContainer.frame data:data widgetContext:syntax];
+        [self.chartContainer addSubview:lineWidget.view];
+        [lineWidget destroyView];
+        //[self snapshotChartView];
     }];
+}
+
+- (void)snapshotChartView{
+    UIGraphicsBeginImageContextWithOptions(self.chartContainer.frame.size, NO, 0.0);
+    [self.chartContainer.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    //UIImageView *v = [[UIImageView alloc]initWithImage:image];
+    
+    UIButton *button =[UIButton buttonWithType:UIButtonTypeCustom];
+    [button setFrame:self.chartContainer.frame];
+    [button setBackgroundImage:image forState:UIControlStateNormal];
+    UIView *chartView=self.chartContainer.subviews[0];
+    [chartView removeFromSuperview];
+    [self.chartContainer addSubview:button];
 }
 
 
