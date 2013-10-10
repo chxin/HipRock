@@ -399,10 +399,6 @@
 		B42C338917E18E63008289D2 /* DefaultBuilding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B42C338817E18E63008289D2 /* DefaultBuilding@2x.png */; };
 		B42C338B17E19064008289D2 /* DefaultBuilding.png in Resources */ = {isa = PBXBuildFile; fileRef = B42C338A17E19064008289D2 /* DefaultBuilding.png */; };
 		B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
-		B441501C180648B80009FDBC /* Share_disable.png in Resources */ = {isa = PBXBuildFile; fileRef = B4415018180648B80009FDBC /* Share_disable.png */; };
-		B441501D180648B80009FDBC /* Share_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4415019180648B80009FDBC /* Share_disable@2x.png */; };
-		B441501E180648B80009FDBC /* Share_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B441501A180648B80009FDBC /* Share_normal.png */; };
-		B441501F180648B80009FDBC /* Share_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B441501B180648B80009FDBC /* Share_normal@2x.png */; };
 		B442700C17AF30FF00762C68 /* REMBuildingDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = B442700117AF30FF00762C68 /* REMBuildingDataView.m */; };
 		B442700E17AF30FF00762C68 /* REMBuildingTitleLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = B442700517AF30FF00762C68 /* REMBuildingTitleLabelView.m */; };
 		B442700F17AF30FF00762C68 /* REMBuildingTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B442700717AF30FF00762C68 /* REMBuildingTitleView.m */; };
@@ -909,10 +905,6 @@
 		B42C338A17E19064008289D2 /* DefaultBuilding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultBuilding.png; sourceTree = "<group>"; };
 		B43BB10F1797B12D00617B1E /* REMEnergyConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergyConstants.h; path = Common/Constants/REMEnergyConstants.h; sourceTree = "<group>"; };
 		B43BB1101797B12D00617B1E /* REMEnergyConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnergyConstants.m; path = Common/Constants/REMEnergyConstants.m; sourceTree = "<group>"; };
-		B4415018180648B80009FDBC /* Share_disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_disable.png; sourceTree = "<group>"; };
-		B4415019180648B80009FDBC /* Share_disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_disable@2x.png"; sourceTree = "<group>"; };
-		B441501A180648B80009FDBC /* Share_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_normal.png; sourceTree = "<group>"; };
-		B441501B180648B80009FDBC /* Share_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_normal@2x.png"; sourceTree = "<group>"; };
 		B442700017AF30FF00762C68 /* REMBuildingDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingDataView.h; sourceTree = "<group>"; };
 		B442700117AF30FF00762C68 /* REMBuildingDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingDataView.m; sourceTree = "<group>"; };
 		B442700417AF30FF00762C68 /* REMBuildingTitleLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingTitleLabelView.h; sourceTree = "<group>"; };
@@ -1884,10 +1876,6 @@
 		7ACFCBA217CDA62E00811976 /* Building */ = {
 			isa = PBXGroup;
 			children = (
-				B4415018180648B80009FDBC /* Share_disable.png */,
-				B4415019180648B80009FDBC /* Share_disable@2x.png */,
-				B441501A180648B80009FDBC /* Share_normal.png */,
-				B441501B180648B80009FDBC /* Share_normal@2x.png */,
 				B42C338A17E19064008289D2 /* DefaultBuilding.png */,
 				B42C338817E18E63008289D2 /* DefaultBuilding@2x.png */,
 				7ACFCBA317CDA62E00811976 /* commodity */,
@@ -2234,7 +2222,6 @@
 				7A48B48817CDF2F6002DA386 /* AppLogo@2x.png in Resources */,
 				7A48B48F17CDFA38002DA386 /* Propaganda_1.jpg in Resources */,
 				7A48B49017CDFA38002DA386 /* Propaganda_1@2x.jpg in Resources */,
-				B441501F180648B80009FDBC /* Share_normal@2x.png in Resources */,
 				7A48B49117CDFA38002DA386 /* Propaganda_2.jpg in Resources */,
 				7A48B49217CDFA38002DA386 /* Propaganda_2@2x.jpg in Resources */,
 				7A48B49317CDFA38002DA386 /* Propaganda_3.jpg in Resources */,
@@ -2246,11 +2233,8 @@
 				B45F8A5B17D5B0340079C74D /* PM2.5_pressed.png in Resources */,
 				B45F8A5C17D5B0340079C74D /* PM2.5_normal.png in Resources */,
 				B45F8A5D17D5B0340079C74D /* NaturalGas_pressed.png in Resources */,
-				B441501C180648B80009FDBC /* Share_disable.png in Resources */,
 				B45F8A5E17D5B0340079C74D /* NaturalGas_normal.png in Resources */,
-				B441501D180648B80009FDBC /* Share_disable@2x.png in Resources */,
 				B45F8A5F17D5B0340079C74D /* Water_pressed.png in Resources */,
-				B441501E180648B80009FDBC /* Share_normal.png in Resources */,
 				B45F8A6017D5B0340079C74D /* Water_normal.png in Resources */,
 				B45F8A6117D5B0340079C74D /* Electricity_pressed.png in Resources */,
 				B45F8A6217D5B0340079C74D /* Electricity_normal.png in Resources */,
