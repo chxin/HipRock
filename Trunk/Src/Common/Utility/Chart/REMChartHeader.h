@@ -177,9 +177,13 @@ typedef enum  {
  */
 @property (nonatomic) NSInteger horizentalGridLineAmount;
 /*
- * X轴文本的起点时间。如果没有指定，则会使用Series配置中最小的StartDate作为默认起点时间。
+ * X轴的起点时间。如果没有指定，则会使用Series配置中最小的StartDate作为默认起点时间。
  */
 @property (nonatomic) NSDate* xStartDate;
+/*
+ * X轴的最大区间长度，也就是Navigation的长度。如果没有指定，则采用配置的Series的最大的X。
+ */
+@property (nonatomic) NSNumber* xGlobalLength;
 @end
 
 @protocol REMChartView <NSObject>
@@ -199,7 +203,10 @@ typedef enum  {
  * X轴文本的起点时间。
  */
 @property (nonatomic, readonly) NSDate* xStartDate;
-
+/*
+ * X轴的最大区间长度，也就是Navigation的长度。如果没有指定，则采用配置的Series的最大的X。
+ */
+@property (nonatomic, readonly) NSNumber* xGlobalLength;
 @end
 
 @interface REMPieChartView : CPTGraphHostingView<CPTPlotSpaceDelegate,REMChartView>

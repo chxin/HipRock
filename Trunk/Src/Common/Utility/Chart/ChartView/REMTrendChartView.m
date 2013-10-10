@@ -29,6 +29,7 @@
         _yAxisConfig = config.yAxisConfig;
         _horizentalGridLineAmount = config.horizentalGridLineAmount;
         _series = config.series;
+        _xGlobalLength = config.xGlobalLength;
         if (config.xStartDate == nil) {
             _xStartDate = ((REMTrendChartSeries*)[self.series objectAtIndex:0]).startDate;
             for (int i = 1; i < self.series.count; i++) {
@@ -247,13 +248,13 @@
     for (int i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = [self.series objectAtIndex:i];
         CPTPlotSpace* plotSpace = ((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:s.yAxisIndex + 1]).plotSpace;
-//        REMTrendChartPoint* point = [s.points objectAtIndex:s.points.count - 1];
         maxXValOfSeries = MAX(maxXValOfSeries, s.maxX);
         [s beforePlotAddToGraph:self.hostedGraph seriesList:self.series selfIndex:i];
         [self.hostedGraph addPlot:[s getPlot] toPlotSpace:plotSpace];
     }
+    float xLength = (self.xGlobalLength == nil) ? maxXValOfSeries : self.xGlobalLength.floatValue;
     // set global X range
-    CPTPlotRange* xGlobalRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(-0.5) length:CPTDecimalFromFloat(maxXValOfSeries+1)];
+    CPTPlotRange* xGlobalRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(-0.5) length:CPTDecimalFromFloat(xLength+1)];
     
     CPTXYPlotSpace* majorPlotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
     majorPlotSpace.globalXRange = xGlobalRange;
