@@ -504,6 +504,10 @@
 		B4B61D7617C742E000245F1E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B61D7517C742E000245F1E /* CoreText.framework */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		B4DC084017F90E2C005658C1 /* REMAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */; };
+		B4EDFB0F18064F2900873FA1 /* Share_disable.png in Resources */ = {isa = PBXBuildFile; fileRef = B4EDFB0B18064F2900873FA1 /* Share_disable.png */; };
+		B4EDFB1018064F2900873FA1 /* Share_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4EDFB0C18064F2900873FA1 /* Share_disable@2x.png */; };
+		B4EDFB1118064F2900873FA1 /* Share_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4EDFB0D18064F2900873FA1 /* Share_normal.png */; };
+		B4EDFB1218064F2900873FA1 /* Share_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4EDFB0E18064F2900873FA1 /* Share_normal@2x.png */; };
 		B4F4B99E17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
 		B4F4B99F17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
 		B4F4B9A017F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
@@ -1106,6 +1110,10 @@
 		B4CD146017B3439600807B5F /* BluesPad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluesPad.entitlements; sourceTree = "<group>"; };
 		B4DC083E17F90E2C005658C1 /* REMAdministratorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAdministratorModel.h; path = Common/Model/REMAdministratorModel.h; sourceTree = "<group>"; };
 		B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAdministratorModel.m; path = Common/Model/REMAdministratorModel.m; sourceTree = "<group>"; };
+		B4EDFB0B18064F2900873FA1 /* Share_disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_disable.png; sourceTree = "<group>"; };
+		B4EDFB0C18064F2900873FA1 /* Share_disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_disable@2x.png"; sourceTree = "<group>"; };
+		B4EDFB0D18064F2900873FA1 /* Share_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_normal.png; sourceTree = "<group>"; };
+		B4EDFB0E18064F2900873FA1 /* Share_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_normal@2x.png"; sourceTree = "<group>"; };
 		B4F4B99C17F16F590096034D /* REMShareInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMShareInfo.h; sourceTree = "<group>"; };
 		B4F4B99D17F16F590096034D /* REMShareInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMShareInfo.m; sourceTree = "<group>"; };
 		B4FED1521804FEF400E0CE58 /* REMEnergySeacherBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergySeacherBase.h; path = Biz/Energy/Searcher/REMEnergySeacherBase.h; sourceTree = "<group>"; };
@@ -2105,6 +2113,10 @@
 		7ACFCBA217CDA62E00811976 /* Building */ = {
 			isa = PBXGroup;
 			children = (
+				B4EDFB0B18064F2900873FA1 /* Share_disable.png */,
+				B4EDFB0C18064F2900873FA1 /* Share_disable@2x.png */,
+				B4EDFB0D18064F2900873FA1 /* Share_normal.png */,
+				B4EDFB0E18064F2900873FA1 /* Share_normal@2x.png */,
 				B47ACC2517F8010A00989B2C /* leftarrow.png */,
 				B42C338A17E19064008289D2 /* DefaultBuilding.png */,
 				B42C338817E18E63008289D2 /* DefaultBuilding@2x.png */,
@@ -2536,6 +2548,7 @@
 				7A53160217F817370022491F /* Gallary@2x.png in Resources */,
 				B445AEAE177BEEB8002D2A59 /* README.txt in Resources */,
 				7AC3BB3417CC48750022E57E /* Default-568h@2x.png in Resources */,
+				B4EDFB1118064F2900873FA1 /* Share_normal.png in Resources */,
 				7AC3BB3517CC48750022E57E /* Default.png in Resources */,
 				7AC3BB3617CC48750022E57E /* Default@2x.png in Resources */,
 				7ACFCBF117CDA62E00811976 /* dashboard.png in Resources */,
@@ -2558,16 +2571,19 @@
 				7ACFCC0F17CDA62E00811976 /* Login-Pressed@2x.png in Resources */,
 				7ACFCC1317CDA62E00811976 /* SlidePageBackground.png in Resources */,
 				7ACFCC1417CDA62E00811976 /* SlidePageBackground@2x.png in Resources */,
+				B4EDFB1218064F2900873FA1 /* Share_normal@2x.png in Resources */,
 				7ACFCC1817CDA62E00811976 /* SplashScreenBackgroud.jpg in Resources */,
 				7ACFCC1917CDA62E00811976 /* SplashScreenBackgroud@2x.jpg in Resources */,
 				7ACFCC1A17CDA62E00811976 /* SplashScreenLogo-Common.png in Resources */,
 				7A48B47817CDDD03002DA386 /* LoginTextField-Focus.png in Resources */,
+				B4EDFB0F18064F2900873FA1 /* Share_disable.png in Resources */,
 				7A48B47917CDDD03002DA386 /* LoginTextField-Focus@2x.png in Resources */,
 				7A48B47A17CDDD03002DA386 /* LoginTextField.png in Resources */,
 				7A48B47B17CDDD03002DA386 /* LoginTextField@2x.png in Resources */,
 				7A53160317F817370022491F /* LandMarker.png in Resources */,
 				B454BC0517CDEC4D00D69A7B /* Menu_normal@2x.png in Resources */,
 				B454BC0617CDEC4D00D69A7B /* OverTarget.png in Resources */,
+				B4EDFB1018064F2900873FA1 /* Share_disable@2x.png in Resources */,
 				B454BC0717CDEC4D00D69A7B /* Menu_normal.png in Resources */,
 				B454BC0917CDEC4D00D69A7B /* OverTarget@2x.png in Resources */,
 				B454BC0C17CDECD500D69A7B /* NotOverTarget.png in Resources */,
