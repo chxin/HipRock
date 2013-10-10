@@ -624,25 +624,7 @@
 
 - (void)initTitleView
 {
-    CGFloat height=kBuildingTitleHeight;
-    CGRect frame = CGRectMake(0, 0, 1024, height);
-    
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-   
-    gradient.frame = frame;
-    gradient.colors = [NSArray arrayWithObjects:
-                       (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4].CGColor,
-                       (id)[UIColor clearColor].CGColor,
-                       nil];
-    
-    UIGraphicsBeginImageContextWithOptions(frame.size, NO, 0.0);
-    CGContextRef c = UIGraphicsGetCurrentContext();
-    
-    [gradient renderInContext:c];
-    
-    UIGraphicsEndImageContext();
-    
-    self.titleGradientLayer=gradient;
+    self.titleGradientLayer=[self.controller getTitleGradientLayer];
     
     [self.layer insertSublayer:self.titleGradientLayer above:self.blurredImageView.layer];
 
@@ -671,7 +653,7 @@
     self.titleLabel.textAlignment=NSTextAlignmentCenter;
     self.titleLabel.textColor=[UIColor whiteColor];
     
-    self.logoButton = [self.controller getCustomerLogoButton];//[[UIButton alloc]initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, kBuildingTitleTop, 140, 30)];
+    self.logoButton = [self.controller getCustomerLogoButton];
     [self.logoButton setCenter:CGPointMake(self.titleLabel.frame.origin.x + self.logoButton.bounds.size.width/2, self.logoButton.center.y)];
 //    
 //    [self.logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
