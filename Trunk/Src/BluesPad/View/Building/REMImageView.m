@@ -671,6 +671,14 @@
     self.titleLabel.textAlignment=NSTextAlignmentCenter;
     self.titleLabel.textColor=[UIColor whiteColor];
     
+    self.logoButton = [self.controller getCustomerLogoButton];//[[UIButton alloc]initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, kBuildingTitleTop, 140, 30)];
+    [self.logoButton setCenter:CGPointMake(self.titleLabel.frame.origin.x + self.logoButton.bounds.size.width/2, self.logoButton.center.y)];
+//    
+//    [self.logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
+//    
+//    self.logoButton.titleLabel.text=@"logo";
+//    
+//    [self.logoButton addTarget:self.controller action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     self.logoButton=[[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, kBuildingTitleTop, 140, 30)];
     
