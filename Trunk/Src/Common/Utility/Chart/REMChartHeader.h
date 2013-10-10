@@ -112,7 +112,15 @@ typedef enum  {
 
 @end
 
+@interface REMXFormatter : NSFormatter
+-(REMXFormatter*)initWithStartDate:(NSDate*)startDate dataStep:(REMEnergyStep)step interval:(int)interval;
+@property (nonatomic, readonly) NSDate* startDate;
+@property (nonatomic, readonly) REMEnergyStep step;
+@property (nonatomic, readonly) int interval;
+@end
 
+@interface REMYFormatter : NSFormatter
+@end
 
 typedef enum  {
     REMTrendChartXAxisLabelAlignToPoint,

@@ -538,6 +538,8 @@
 		EF96300617C610A200BBC7DA /* REMBuildingSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */; };
 		EF97879617C70B440062BE0E /* REMBuildingSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */; };
 		EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97DDDA17C20B5700A0374E /* REMToggleButton.m */; };
+		EF9ACF6118067CCB00097661 /* REMXFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9ACF6018067CCB00097661 /* REMXFormatter.m */; };
+		EF9ACF641806821500097661 /* REMYFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9ACF631806821500097661 /* REMYFormatter.m */; };
 		EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9F28B017CB54DE00E775ED /* REMStatusBar.m */; };
 		EFDAACB91803F27F008BC9AF /* REMPieChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACB81803F27F008BC9AF /* REMPieChartWrapper.m */; };
 		EFDAACBC1803F6C2008BC9AF /* REMChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */; };
@@ -1154,6 +1156,8 @@
 		EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingSettingNavigationController.m; sourceTree = "<group>"; };
 		EF97DDD917C20B5700A0374E /* REMToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButton.h; sourceTree = "<group>"; };
 		EF97DDDA17C20B5700A0374E /* REMToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButton.m; sourceTree = "<group>"; };
+		EF9ACF6018067CCB00097661 /* REMXFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMXFormatter.m; path = LabelFormatter/REMXFormatter.m; sourceTree = "<group>"; };
+		EF9ACF631806821500097661 /* REMYFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMYFormatter.m; path = LabelFormatter/REMYFormatter.m; sourceTree = "<group>"; };
 		EF9F28AF17CB54DD00E775ED /* REMStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMStatusBar.h; sourceTree = "<group>"; };
 		EF9F28B017CB54DE00E775ED /* REMStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMStatusBar.m; sourceTree = "<group>"; };
 		EFDAACB71803F27F008BC9AF /* REMPieChartWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPieChartWrapper.h; sourceTree = "<group>"; };
@@ -2384,6 +2388,7 @@
 			isa = PBXGroup;
 			children = (
 				EF8A480117F95A1D009B5C33 /* REMChartHeader.h */,
+				EF9ACF5E18067C6800097661 /* LabelFormatter */,
 				EF8A47DF17F959B5009B5C33 /* ChartView */,
 				EF8A47E517F959B5009B5C33 /* ChartWrapper */,
 				EF8A47EE17F959B5009B5C33 /* DataProcessor */,
@@ -2449,6 +2454,15 @@
 				EF8A480817F95FA1009B5C33 /* REMTrendWidgetWrapper.m */,
 			);
 			path = TrendChartWrapper;
+			sourceTree = "<group>";
+		};
+		EF9ACF5E18067C6800097661 /* LabelFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				EF9ACF6018067CCB00097661 /* REMXFormatter.m */,
+				EF9ACF631806821500097661 /* REMYFormatter.m */,
+			);
+			name = LabelFormatter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2696,7 +2710,9 @@
 				B445AEA0177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m in Sources */,
 				B445AEA2177BEEB8002D2A59 /* DDASLLogger.m in Sources */,
 				EF8A47F517F959B5009B5C33 /* REMTrendChartAxisConfig.m in Sources */,
+				EF9ACF6118067CCB00097661 /* REMXFormatter.m in Sources */,
 				B445AEA4177BEEB8002D2A59 /* DDFileLogger.m in Sources */,
+				EF9ACF641806821500097661 /* REMYFormatter.m in Sources */,
 				B445AEA6177BEEB8002D2A59 /* DDLog.m in Sources */,
 				B445AEA8177BEEB8002D2A59 /* DDTTYLogger.m in Sources */,
 				B445AEAA177BEEB8002D2A59 /* ContextFilterLogFormatter.m in Sources */,
@@ -3272,8 +3288,6 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D92FC541-4559-4615-A702-FE600BA626AB";
-				"PROVISIONING_PROFILE[sdk=iphoneos6.1]" = "D92FC541-4559-4615-A702-FE600BA626AB";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv7s i386 x86_64";
@@ -3321,7 +3335,6 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "23A5B469-EE27-40F5-B2AA-0DE5F495FEFB";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -3466,7 +3479,6 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "23A5B469-EE27-40F5-B2AA-0DE5F495FEFB";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -3597,7 +3609,6 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "23A5B469-EE27-40F5-B2AA-0DE5F495FEFB";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
