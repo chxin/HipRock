@@ -9,7 +9,7 @@
 #import "REMToggleButton.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingConstants.h"
-
+#import "REMColor.h"
 @implementation REMToggleButton 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -30,7 +30,8 @@
     
     _on = onThis;
     if (onThis) {
-        [self setTitleColor:[UIColor colorWithRed:83/255.0 green:237/255.0 blue:86/255.0 alpha:1.0] forState:UIControlStateNormal];
+        //[self setTitleColor:[UIColor colorWithRed:83/255.0 green:237/255.0 blue:86/255.0 alpha:1.0] forState:UIControlStateNormal];
+        [self setTitleColor:[REMColor colorByHexString:@"#00ff48"] forState:UIControlStateNormal];
     } else {
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }

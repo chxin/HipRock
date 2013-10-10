@@ -159,6 +159,7 @@
     
     UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
     [shareButton setImage:[UIImage imageNamed:@"Share_normal.png"] forState:UIControlStateNormal];
+    [shareButton setImage:[UIImage imageNamed:@"Share_disable.png"] forState:UIControlStateDisabled];
     //if (self.buildingInfo.commodityUsage.count == 0) {
         shareButton.enabled = NO;
     //}

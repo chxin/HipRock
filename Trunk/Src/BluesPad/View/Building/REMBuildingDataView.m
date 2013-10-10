@@ -69,7 +69,7 @@ typedef void(^SuccessCallback)(BOOL success);
         btn.tag=[model.commodityId integerValue];
         [btn setTitle:model.comment forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+        [btn setTitleColor:[REMColor colorByHexString:@"#00ff48"] forState:UIControlStateSelected];
         btn.titleLabel.textColor=[UIColor whiteColor];
         
         [btn.titleLabel setFont:[UIFont fontWithName:@(kBuildingFontSCRegular) size:12]];
