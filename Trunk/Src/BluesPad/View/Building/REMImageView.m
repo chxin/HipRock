@@ -7,6 +7,7 @@
 //
 
 #import "REMImageView.h"
+#import "REMCommonHeaders.h"
 
 #define kDashboardThreshold 361+65+85+45
 
@@ -33,7 +34,7 @@
 @property (nonatomic,strong) NSString *loadingImageKey;
 @property (nonatomic,strong) UIButton *backButton;
 @property (nonatomic,strong) UIButton *shareButton;
-//@property (nonatomic,strong) UIButton *logoButton;
+@property (nonatomic,strong) UIButton *logoButton;
 
 @property (nonatomic) BOOL isActive;
 
@@ -118,7 +119,7 @@
     self.bottomGradientLayer=nil;
     self.backButton=nil;
     self.shareButton=nil;
-//    self.logoButton=nil;
+    self.logoButton=nil;
     [self.dataView removeObserver:self forKeyPath:@"contentOffset" context:nil];
     self.dataView=nil;
 }
@@ -653,9 +654,9 @@
     self.titleLabel.textAlignment=NSTextAlignmentCenter;
     self.titleLabel.textColor=[UIColor whiteColor];
     
-    
-//    self.logoButton=[[UIButton alloc]initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, kBuildingTitleTop, 140, 30)];
-//
+    self.logoButton = [self.controller getCustomerLogoButton];//[[UIButton alloc]initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, kBuildingTitleTop, 140, 30)];
+    [self.logoButton setCenter:CGPointMake(self.titleLabel.frame.origin.x + self.logoButton.bounds.size.width/2, self.logoButton.center.y)];
+//    
 //    [self.logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
 //    
 //    self.logoButton.titleLabel.text=@"logo";
@@ -666,7 +667,8 @@
     //self.logoButton.layer.borderWidth=1;
     [self addSubview:self.titleLabel];
     
-    [self addSubview:self.controller.customerLogoButton];
+    [self addSubview:self.logoButton];
+    
 }
 
 

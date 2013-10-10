@@ -47,17 +47,13 @@ static CAGradientLayer *gradient;
     return gradient;
 }
 
-
-static UIButton *customerLogoButton;
 - (UIButton *)getCustomerLogoButton
 {
-    if(customerLogoButton == nil){
-        customerLogoButton = [[UIButton alloc]initWithFrame:CGRectMake(kDMCommon_CustomerLogoLeft, kDMCommon_CustomerLogoTop, kDMCommon_CustomerLogoWidth, kDMCommon_CustomerLogoHeight)];
-        
-        [customerLogoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
-        
-        [customerLogoButton addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    }
+    UIButton *customerLogoButton = [[UIButton alloc]initWithFrame:CGRectMake(kDMCommon_CustomerLogoLeft, kDMCommon_CustomerLogoTop, kDMCommon_CustomerLogoWidth, kDMCommon_CustomerLogoHeight)];
+    
+    [customerLogoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
+    
+    [customerLogoButton addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     return customerLogoButton;
 }

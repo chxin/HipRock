@@ -16,4 +16,6 @@
 + (id)objectByString:(NSString *)json;
 + (NSString *)stringByObject:(id)object;
 
++ (id)duplicateObject:(id)object;
+
 @end
