@@ -162,7 +162,7 @@
         buildingViewController.buildingOverallArray = self.buildingInfoArray;
         buildingViewController.splashScreenController = self.splashScreenController;
         buildingViewController.mapViewController = self;
-        
+        buildingViewController.currentBuildingId = ((REMBuildingModel *)self.pressedMarker.userData).buildingId;
     }
 }
 
