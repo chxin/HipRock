@@ -16,8 +16,9 @@
 
 @property (nonatomic,weak) UIView *chartContainer;
 
+@property (nonatomic,weak) REMWidgetObject *widgetInfo;
 
-
+@property (nonatomic) BOOL chartLoaded;
 
 
 @end
@@ -35,45 +36,50 @@
         self.backgroundColor=[UIColor clearColor];
         self.contentView.backgroundColor=[UIColor clearColor];
         
+        self.chartLoaded=NO;
+        
     }
     return self;
 }
 
 - (void)initWidgetCell:(REMWidgetObject *)widgetInfo withGroupName:(NSString *)groupName
 {
-    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 20)];
-    title.backgroundColor=[UIColor clearColor];
-    title.textColor=[UIColor whiteColor];
-    title.text=widgetInfo.name;
-    [self.contentView addSubview:title];
     
-    self.titleLabel=title;
-    
-    
-    UILabel *time=[[UILabel alloc]initWithFrame:CGRectMake(0, 25, self.contentView.frame.size.width, 20)];
-    time.backgroundColor=[UIColor clearColor];
-    time.textColor=[UIColor whiteColor];
-    [self.contentView addSubview:time];
-    self.timeLabel=time;
-    
-    if(widgetInfo.shareInfo!=nil||[widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
+    if(self.chartContainer==nil){
+        self.widgetInfo=widgetInfo;
+        UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 20)];
+        title.backgroundColor=[UIColor clearColor];
+        title.textColor=[UIColor whiteColor];
+        title.text=widgetInfo.name;
+        [self.contentView addSubview:title];
         
+        self.titleLabel=title;
+        
+        
+        UILabel *time=[[UILabel alloc]initWithFrame:CGRectMake(0, 25, self.contentView.frame.size.width, 20)];
+        time.backgroundColor=[UIColor clearColor];
+        time.textColor=[UIColor whiteColor];
+        [self.contentView addSubview:time];
+        self.timeLabel=time;
+        
+        if(widgetInfo.shareInfo!=nil||[widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
+            
+        }
+        
+        UIView *chartContainer = [[UIView alloc]initWithFrame:CGRectMake(0, 30, self.contentView.frame.size.width, self.contentView.frame.size.height-40)];
+        
+        [self.contentView addSubview:chartContainer];
+        
+        self.chartContainer=chartContainer;
     }
-    
-    UIView *chartContainer = [[UIView alloc]initWithFrame:CGRectMake(0, 30, self.contentView.frame.size.width, self.contentView.frame.size.height-40)];
-    
-    [self.contentView addSubview:chartContainer];
-    
-    self.chartContainer=chartContainer;
-    
     [self queryEnergyData:widgetInfo.contentSyntax withGroupName:groupName];
 }
 
 - (void)queryEnergyData:(REMWidgetContentSyntax *)syntax withGroupName:(NSString *)groupName{
-    
+    if(self.chartLoaded==YES)return;
     REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType];
     [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:syntax.params withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data){
-        
+        self.chartLoaded=YES;
         REMLineWidgetWrapper* lineWidget = [[REMLineWidgetWrapper alloc]initWithFrame:self.chartContainer.bounds data:data widgetContext:syntax];
         [self.chartContainer addSubview:lineWidget.view];
         [lineWidget destroyView];
@@ -91,9 +97,16 @@
     UIButton *button =[UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:self.chartContainer.frame];
     [button setBackgroundImage:image forState:UIControlStateNormal];
+    button.tag=[self.widgetInfo.widgetId integerValue];
+    [button addTarget:self action:@selector(widgetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
     UIView *chartView=self.chartContainer.subviews[0];
     [chartView removeFromSuperview];
     [self.chartContainer addSubview:button];
+}
+
+- (void)widgetButtonPressed:(UIButton *)button{
+    NSLog(@"click widget:%d",button.tag);
 }
 
 

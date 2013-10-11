@@ -36,6 +36,7 @@
     
     } error:^(NSError *error,id response){
     
+        NSLog(@"error:%@",error);
     }];
 }
 

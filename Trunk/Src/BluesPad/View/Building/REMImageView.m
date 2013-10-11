@@ -528,6 +528,7 @@
                 CGRect newFrame = CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height, kBuildingChartWidth, self.dataView.frame.size.height);
                 self.dashboardController.viewFrame=newFrame;
                 self.dashboardController.imageView=self;
+                self.dashboardController.buildingInfo=self.buildingInfo;
                 self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
                 [self addSubview:self.dashboardController.tableView];
             }
