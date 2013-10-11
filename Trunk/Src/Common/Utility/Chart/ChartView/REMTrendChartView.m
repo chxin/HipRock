@@ -8,66 +8,6 @@
 
 #import "REMChartHeader.h"
 
-@interface REMXFormatter : NSFormatter
--(REMXFormatter*)initWithStartDate:(NSDate*)startDate dataStep:(REMEnergyStep)step interval:(int)interval;
-@property (nonatomic, readonly) NSDate* startDate;
-@property (nonatomic, readonly) REMEnergyStep step;
-@property (nonatomic, readonly) int interval;
-@end
-
-@implementation REMXFormatter {
-    NSDateFormatter *dateFormatter;
-}
--(REMXFormatter*)initWithStartDate:(NSDate*)startDate dataStep:(REMEnergyStep)step interval:(int)interval {
-    self = [super init];
-    if (self) {
-        _startDate = startDate;
-        _interval = interval;
-        _step = step;
-        dateFormatter = [[NSDateFormatter alloc] init];
-    }
-    return self;
-}
-- (NSString *)stringForObjectValue:(id)obj {
-//    return ((NSNumber*)obj).stringValue;
-    int xVal = ((NSNumber*)obj).integerValue;
-    if (xVal % self.interval == 0) {
-        NSDate* date = nil;
-        if (self.step == REMEnergyStepHour) {
-            date = [self.startDate dateByAddingTimeInterval:xVal*3600];
-            if ([REMTimeHelper getHour:date] < self.interval) {
-                [dateFormatter setDateFormat:@"dd日hh点"];
-            } else {
-                [dateFormatter setDateFormat:@"hh点"];
-            }
-        } else if (self.step == REMEnergyStepDay) {
-            date = [self.startDate dateByAddingTimeInterval:xVal*86400];
-            if ([REMTimeHelper getDay:date] <= self.interval) {
-                [dateFormatter setDateFormat:@"MM月-dd日"];
-            } else {
-                [dateFormatter setDateFormat:@"dd日"];
-            }
-        } else if (self.step == REMEnergyStepWeek) {
-            date = [self.startDate dateByAddingTimeInterval:xVal*604800];
-            [dateFormatter setDateFormat:@"MM月-dd日"];
-        } else if (self.step == REMEnergyStepMonth) {
-            date = [REMTimeHelper addMonthToDate:self.startDate month:xVal];
-            if ([REMTimeHelper getMonth:date] <= self.interval) {
-                [dateFormatter setDateFormat:@"yyyy年-MM月"];
-            } else {
-                [dateFormatter setDateFormat:@"MM月"];
-            }
-        } else if (self.step == REMEnergyStepYear) {
-            date = [REMTimeHelper addMonthToDate:self.startDate month:xVal*12];
-            [dateFormatter setDateFormat:@"yyyy年"];
-        }
-        return [dateFormatter stringFromDate:date];
-    } else {
-        return @"";
-    }
-}
-@end
-
 @implementation REMTrendChartView {
     float maxXValOfSeries;
     float currentXLocation;
@@ -89,6 +29,7 @@
         _yAxisConfig = config.yAxisConfig;
         _horizentalGridLineAmount = config.horizentalGridLineAmount;
         _series = config.series;
+        _xGlobalLength = config.xGlobalLength;
         if (config.xStartDate == nil) {
             _xStartDate = ((REMTrendChartSeries*)[self.series objectAtIndex:0]).startDate;
             for (int i = 1; i < self.series.count; i++) {
@@ -168,8 +109,8 @@
 
 -(void)rerenderYLabel {
     NSMutableArray* yAxisMaxValues = [[NSMutableArray alloc]initWithCapacity:self.hostedGraph.axisSet.axes.count - 1];
-    int startX = ceil(currentXLocation);
-    int endX = floor(currentXLocation + currentXLength);
+    int startX = floor(currentXLocation);
+    int endX = ceil(currentXLocation + currentXLength);
     for (int i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = [self.series objectAtIndex:i];
         NSNumber* maxY = [NSNumber numberWithInt:0];
@@ -293,6 +234,7 @@
             yAxis.plotSpace.allowsUserInteraction = NO;
             [self.hostedGraph addPlotSpace:plotSpace];
         }
+        yAxis.labelFormatter = [[REMYFormatter alloc]init];
         yAxis.labelingPolicy = CPTAxisLabelingPolicyFixedInterval;
         [axisArray addObject:yAxis];
     }
@@ -306,13 +248,13 @@
     for (int i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = [self.series objectAtIndex:i];
         CPTPlotSpace* plotSpace = ((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:s.yAxisIndex + 1]).plotSpace;
-//        REMTrendChartPoint* point = [s.points objectAtIndex:s.points.count - 1];
         maxXValOfSeries = MAX(maxXValOfSeries, s.maxX);
         [s beforePlotAddToGraph:self.hostedGraph seriesList:self.series selfIndex:i];
         [self.hostedGraph addPlot:[s getPlot] toPlotSpace:plotSpace];
     }
+    float xLength = (self.xGlobalLength == nil) ? maxXValOfSeries : self.xGlobalLength.floatValue;
     // set global X range
-    CPTPlotRange* xGlobalRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(-0.5) length:CPTDecimalFromFloat(maxXValOfSeries+1)];
+    CPTPlotRange* xGlobalRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(-0.5) length:CPTDecimalFromFloat(xLength+1)];
     
     CPTXYPlotSpace* majorPlotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
     majorPlotSpace.globalXRange = xGlobalRange;

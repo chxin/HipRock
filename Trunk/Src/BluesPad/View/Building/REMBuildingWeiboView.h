@@ -14,7 +14,7 @@
 #import "REMModalView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface REMBuildingWeiboView : REMModalView
+@interface REMBuildingWeiboView : REMModalView<UITextViewDelegate>
 
 - (REMModalView*)initWithSuperView:(UIView*)superView text:(NSString*)text image:(UIImage*)image;
 @property (nonatomic) NSString* weiboText;

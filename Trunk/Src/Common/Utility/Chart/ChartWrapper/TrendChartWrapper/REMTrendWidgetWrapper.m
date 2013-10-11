@@ -41,6 +41,14 @@
         chartConfig.yAxisConfig = yAxisConfig;
     }
     chartConfig.series = seriesArray;
+    
+    if (energyViewData.targetGlobalData != nil && energyViewData.targetGlobalData.energyData != nil && energyViewData.targetGlobalData.energyData.count > 0) {
+        REMEnergyData* globalEndPoint = [energyViewData.targetGlobalData.energyData objectAtIndex:energyViewData.targetGlobalData.energyData.count-1];
+        REMEnergyData* globalStartPoint = [energyViewData.targetGlobalData.energyData objectAtIndex:0];
+        
+        chartConfig.xGlobalLength = [self.dataProcessor processX:globalEndPoint startDate:globalStartPoint.localTime step:widgetSyntax.step.intValue];
+    }
+    
     return  [[REMTrendChartView alloc]initWithFrame:frame chartConfig:chartConfig];
 }
 
