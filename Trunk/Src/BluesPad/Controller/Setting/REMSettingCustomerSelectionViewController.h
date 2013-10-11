@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "REMSplashScreenController.h"
-#import "REMBuildingSettingViewController.h"
+#import "REMSettingViewController.h"
 @interface REMSettingCustomerSelectionViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 
 - (IBAction)switchCustomer:(UIBarButtonItem *)sender;
 
 @property (nonatomic,weak) REMSplashScreenController *splashController;
 @property (nonatomic,weak) UINavigationController *parentNavigationController;
-@property (nonatomic,weak) REMBuildingSettingViewController *settingController;
+@property (nonatomic,weak) REMSettingViewController *settingController;
 
 @end

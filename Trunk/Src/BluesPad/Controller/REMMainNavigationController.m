@@ -12,7 +12,9 @@
 
 @end
 
-@implementation REMMainNavigationController
+@implementation REMMainNavigationController{
+    NSDictionary *controllerInstances;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,6 +35,19 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(id)getChildControllerInstanceOfClass:(Class)cls
+{
+    if(self.childViewControllers == nil || self.childViewControllers.count <= 0)
+        return nil;
+    
+    for(UIViewController *controller in self.childViewControllers){
+        if(controller.class == cls)
+            return controller;
+    }
+    
+    return nil;
 }
 
 @end

@@ -6,18 +6,19 @@
 //
 //
 
-#import "REMBuildingSettingViewController.h"
+#import "REMSettingViewController.h"
 #import "Weibo.h"
 #import "WeiboAccounts.h"
 #import "REMAlertHelper.h"
 #import "REMSettingCustomerSelectionViewController.h"
 
 
-@interface REMBuildingSettingViewController ()
+@interface REMSettingViewController ()
 
 @end
 
-@implementation REMBuildingSettingViewController
+@implementation REMSettingViewController
+
 - (IBAction)backButtonPressed:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -185,8 +186,8 @@
     currentCustomer = nil;
     UINavigationController *nav=(UINavigationController *)self.parentViewController;
     [nav dismissViewControllerAnimated:YES completion:^(void){
-        [self.parentNavigationController popToRootViewControllerAnimated:YES];
-        [self.splashScreenController showLoginView:NO];
+        [self.mainNavigationController popToRootViewControllerAnimated:YES];
+        //[self.splashScreenController showLoginView:NO];
         
         [REMStorage clearSessionStorage];
     }];
@@ -251,8 +252,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"settingCustomerSelectionSegue"]==YES){
         REMSettingCustomerSelectionViewController *selectionVc= segue.destinationViewController;
-        selectionVc.splashController=self.splashScreenController;
-        selectionVc.parentNavigationController=self.parentNavigationController;
+        //selectionVc.splashController=self.splashScreenController;
+        selectionVc.parentNavigationController=self.mainNavigationController;
         selectionVc.settingController=self;
     }
 }
