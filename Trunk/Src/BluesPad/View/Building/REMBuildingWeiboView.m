@@ -115,12 +115,12 @@ const NSInteger kWeiboMaxLength = 140;
     [textView setFont:[UIFont fontWithName:@(kBuildingFontSCRegular) size:inputTextSize]];
     textView.backgroundColor = [UIColor clearColor];
     textView.scrollEnabled = YES;
-    textView.editable = NO;
+    textView.editable = YES;
     [textImageView addSubview:textView];
     textView.text = self.weiboText;
     
     charactorLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, textImageViewHeight - kWeiboCharactorLabelHeight - kWeiboCharactorLabelMarginBottom, 100, kWeiboCharactorLabelHeight)];
-    charactorLabel.backgroundColor = [UIColor clearColor];
+    charactorLabel.backgroundColor = [UIColor ·];
     [charactorLabel setFont:[UIFont fontWithName:@(kBuildingFontSCRegular) size:9]];
     [charactorLabel setTextColor:[UIColor grayColor]];
     [textImageView addSubview:charactorLabel];
