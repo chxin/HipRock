@@ -109,6 +109,15 @@
             self.dataStoreType=REMDSEnergyTagsTrend;
         }
     }
+    else if([self.storeType isEqualToString:@"energy.UnitEnergyUsage"]==YES){
+        self.dataStoreType = REMDSEnergyTagsTrendUnit;
+    }
+    else if([self.storeType isEqualToString:@"energy.UnitCarbonUsage"]==YES){
+        self.dataStoreType = REMDSEnergyCarbonUnit;
+    }
+    else if([self.storeType isEqualToString:@"energy.UnitCostUsage"]==YES){
+        self.dataStoreType = REMDSEnergyCostUnit;
+    }
     else if([self.storeType isEqualToString:@"energy.Distribution"]==YES){
         self.dataStoreType = REMDSEnergyTagsDistribute;
     }
@@ -130,8 +139,20 @@
     else if([self.storeType isEqualToString:@"energy.CostElectricityUsage"]==YES){
         self.dataStoreType = REMDSEnergyCostElectricity;
     }
+    else if([self.storeType isEqualToString:@"energy.RatioUsage"]==YES){
+        self.dataStoreType = REMDSEnergyRatio;
+    }
     else if([self.storeType isEqualToString:@"energy.RankUsage"]==YES){
-        self.dataStoreType = REMDSEnergyRanking;
+        NSString *api=[self.params objectForKey:@"api"];
+        if([api isEqualToString:@"RankingEnergyUsageData"]==YES){
+            self.dataStoreType = REMDSEnergyRankingEnergy;
+        }
+        else if([api isEqualToString:@"RankingCarbonData"]==YES){
+            self.dataStoreType = REMDSEnergyRankingCarbon;
+        }
+        else{
+            self.dataStoreType = REMDSEnergyRankingCost;
+        }
     }
 
 }

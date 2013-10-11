@@ -21,6 +21,7 @@
         [self setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         self.contentInset=UIEdgeInsetsZero;
         self.contentMode=UIViewContentModeScaleToFill;
+        self.showsVerticalScrollIndicator=NO;
         
         
     }

@@ -8,17 +8,20 @@
 
 #import "REMDashboardCollectionCellView.h"
 #import <QuartzCore/QuartzCore.h>
-#import "REMEnergySeacherBase.h"
-#import "REMEnergyViewData.h"
-#import "REMLineWidgetWrapper.h"
+
 
 @interface REMDashboardCollectionCellView ()
 
-@property (nonatomic,weak) UIView *chartContainer;
+
+@property (nonatomic,weak) REMWidgetObject *widgetInfo;
+
+@property (nonatomic) BOOL chartLoaded;
+
 
 @end
 
 @implementation REMDashboardCollectionCellView
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -30,66 +33,46 @@
         self.backgroundColor=[UIColor clearColor];
         self.contentView.backgroundColor=[UIColor clearColor];
         
+        self.chartLoaded=NO;
+        
     }
     return self;
 }
 
 - (void)initWidgetCell:(REMWidgetObject *)widgetInfo
 {
-    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 20)];
-    title.backgroundColor=[UIColor clearColor];
-    title.textColor=[UIColor whiteColor];
-    title.text=widgetInfo.name;
-    [self.contentView addSubview:title];
     
-    self.titleLabel=title;
-    
-    
-    UILabel *time=[[UILabel alloc]initWithFrame:CGRectMake(0, 25, self.contentView.frame.size.width, 20)];
-    time.backgroundColor=[UIColor clearColor];
-    time.textColor=[UIColor whiteColor];
-    [self.contentView addSubview:time];
-    self.timeLabel=time;
-    
-    if(widgetInfo.shareInfo!=nil||[widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
+    if(self.chartContainer==nil){
+        self.widgetInfo=widgetInfo;
+        UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 20)];
+        title.backgroundColor=[UIColor clearColor];
+        title.textColor=[UIColor whiteColor];
+        title.text=widgetInfo.name;
+        [self.contentView addSubview:title];
         
+        self.titleLabel=title;
+        
+        
+        UILabel *time=[[UILabel alloc]initWithFrame:CGRectMake(0, 25, self.contentView.frame.size.width, 20)];
+        time.backgroundColor=[UIColor clearColor];
+        time.textColor=[UIColor whiteColor];
+        [self.contentView addSubview:time];
+        self.timeLabel=time;
+        
+        if(widgetInfo.shareInfo!=nil||[widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
+            
+        }
+        
+        UIView *chartContainer = [[UIView alloc]initWithFrame:CGRectMake(0, 30, self.contentView.frame.size.width, self.contentView.frame.size.height-40)];
+        
+        [self.contentView addSubview:chartContainer];
+        
+        self.chartContainer=chartContainer;
     }
     
-    UIView *chartContainer = [[UIView alloc]initWithFrame:CGRectMake(0, 30, self.contentView.frame.size.width, self.contentView.frame.size.height-40)];
-    
-    [self.contentView addSubview:chartContainer];
-    
-    self.chartContainer=chartContainer;
-    
-    [self queryEnergyData:widgetInfo.contentSyntax];
 }
 
-- (void)queryEnergyData:(REMWidgetContentSyntax *)syntax{
-    
-    REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType];
-    [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:syntax.params withMaserContainer:self.chartContainer callback:^(REMEnergyViewData *data){
-        
-        REMLineWidgetWrapper* lineWidget = [[REMLineWidgetWrapper alloc]initWithFrame:self.chartContainer.frame data:data widgetContext:syntax];
-        [self.chartContainer addSubview:lineWidget.view];
-        [lineWidget destroyView];
-        //[self snapshotChartView];
-    }];
-}
 
-- (void)snapshotChartView{
-    UIGraphicsBeginImageContextWithOptions(self.chartContainer.frame.size, NO, 0.0);
-    [self.chartContainer.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    //UIImageView *v = [[UIImageView alloc]initWithImage:image];
-    
-    UIButton *button =[UIButton buttonWithType:UIButtonTypeCustom];
-    [button setFrame:self.chartContainer.frame];
-    [button setBackgroundImage:image forState:UIControlStateNormal];
-    UIView *chartView=self.chartContainer.subviews[0];
-    [chartView removeFromSuperview];
-    [self.chartContainer addSubview:button];
-}
 
 
 /*

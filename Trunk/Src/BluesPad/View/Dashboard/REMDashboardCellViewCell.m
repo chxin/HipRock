@@ -51,7 +51,7 @@
 }
 
 
-- (void)initWidgetCollection:(REMDashboardObj *)dashboardInfo
+- (void)initWidgetCollection:(REMDashboardObj *)dashboardInfo withGroupName:(NSString *)groupName
 {
     
     //NSLog(@"contentview:%@",NSStringFromCGRect(self.contentView.frame));
@@ -89,6 +89,7 @@
     
     UICollectionViewFlowLayout *flowlayout =[[UICollectionViewFlowLayout alloc]init];
     REMWidgetCollectionViewController *controller = [[REMWidgetCollectionViewController alloc]initWithCollectionViewLayout:flowlayout];
+    controller.groupName=groupName;
     self.collectionController=controller;
     self.collectionController.widgetArray=dashboardInfo.widgets;
     self.collectionController.viewFrame=CGRectMake(10, frame1.origin.y+5, self.contentView.frame.size.width-10*2, self.contentView.frame.size.height-45);

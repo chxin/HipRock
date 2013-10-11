@@ -528,18 +528,21 @@
                 CGRect newFrame = CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height, kBuildingChartWidth, self.dataView.frame.size.height);
                 self.dashboardController.viewFrame=newFrame;
                 self.dashboardController.imageView=self;
+                self.dashboardController.buildingInfo=self.buildingInfo;
                 self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
                 [self addSubview:self.dashboardController.tableView];
             }
             
             
-            
+            //NSLog(@"data view old frame:%@",NSStringFromCGRect(self.dataView.frame));
             [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
                 [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y-20, kBuildingChartWidth, self.dataView.frame.size.height)];
-                [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, -1000, self.dataView.frame.size.width, self.dataView.frame.size.height)];
+                
+                [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, self.dataView.frame.origin.y-self.dataView.frame.size.height, self.dataView.frame.size.width, self.dataView.frame.size.height)];
             
             } completion:^(BOOL finished){
                 [self.dataView setHidden:YES];
+                //NSLog(@"data view now frame:%@",NSStringFromCGRect(self.dataView.frame));
             }];
             
             
@@ -550,13 +553,13 @@
 
 - (void)showBuildingInfo{
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
-        [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height, kBuildingChartWidth, self.dataView.frame.size.height)];
+        [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height*2, kBuildingChartWidth, self.dataView.frame.size.height)];
         [self.dataView setHidden:NO];
-        [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, kDashboardThreshold, self.dataView.frame.size.width, self.dataView.frame.size.height)];
+        [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, self.dataView.frame.origin.y+self.dataView.frame.size.height, self.dataView.frame.size.width, self.dataView.frame.size.height)];
         
     } completion:^(BOOL finished){
-        [self.dashboardController.view removeFromSuperview];
-        self.dashboardController=nil;
+        //[self.dashboardController.view removeFromSuperview];
+        //self.dashboardController=nil;
     }];
 }
 

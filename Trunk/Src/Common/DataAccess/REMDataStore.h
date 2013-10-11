@@ -42,15 +42,21 @@ typedef enum _REMDataStoreType
      * Energy stores
      */
     REMDSEnergyTagsTrend,
+    REMDSEnergyTagsTrendUnit,
     REMDSEnergyTagsDistribute,
     REMDSEnergyMultiTimeTrend,
     REMDSEnergyMultiTimeDistribute,
     REMDSEnergyCarbon,
+    REMDSEnergyCarbonUnit,
     REMDSEnergyCarbonDistribute,
     REMDSEnergyCost,
+    REMDSEnergyCostUnit,
     REMDSEnergyCostDistribute,
     REMDSEnergyCostElectricity,
-    REMDSEnergyRanking,
+    REMDSEnergyRatio,
+    REMDSEnergyRankingEnergy,
+    REMDSEnergyRankingCost,
+    REMDSEnergyRankingCarbon,
     REMDSEnergyLabeling,
     /*
      * Other
