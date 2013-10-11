@@ -14,6 +14,12 @@
     float currentXLength;
     
     BOOL needRerenderXInterval;
+    float xStableStartPoint; // 弹性稳定区域的x轴起点
+    float xStableEndPoint;   // 弹性稳定区域的x轴终点
+    float xUnstableStartPoint; // 弹性区域不稳定的x轴起点
+    float xUnstableEndPoint; // 弹性区域不稳定的x轴起点
+    
+    CPTAnimationOperation* elasticAnimation;
 }
 
 -(REMTrendChartView*)initWithFrame:(CGRect)frame chartConfig:(REMTrendChartConfig*)config  {
@@ -75,8 +81,8 @@
     if (length <= 0) return;
     location -= 0.5;
     if (length == currentXLength && location == currentXLocation) return;
-    CPTXYPlotSpace* majorPlotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
-    if (location < [NSDecimalNumber decimalNumberWithDecimal: majorPlotSpace.globalXRange.location].floatValue) return;
+//    CPTXYPlotSpace* majorPlotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
+    if (location < [NSDecimalNumber numberWithFloat: xStableStartPoint].floatValue) return;
     currentXLocation = location;
     currentXLength = length;
     
@@ -253,11 +259,14 @@
         [self.hostedGraph addPlot:[s getPlot] toPlotSpace:plotSpace];
     }
     float xLength = (self.xGlobalLength == nil) ? maxXValOfSeries : self.xGlobalLength.floatValue;
-    // set global X range
-    CPTPlotRange* xGlobalRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(-0.5) length:CPTDecimalFromFloat(xLength+1)];
+    
+    xStableStartPoint = -0.5;
+    xStableEndPoint = xLength + 1;
+    xUnstableStartPoint = -100;
+    xUnstableEndPoint = xLength + 200;
     
     CPTXYPlotSpace* majorPlotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
-    majorPlotSpace.globalXRange = xGlobalRange;
+    majorPlotSpace.globalXRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(xUnstableStartPoint) length:CPTDecimalFromFloat(xUnstableEndPoint)];
 }
 
 
@@ -268,10 +277,7 @@
             CPTXYPlotSpace* pSpace = (CPTXYPlotSpace*)((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:i]).plotSpace;
             pSpace.xRange = newRange;
         }
-//        CPTXYAxisSet *axisSet = (CPTXYAxisSet*)self.hostedGraph.axisSet;
-//        CPTXYAxis* yAxis = [axisSet.axes objectAtIndex:1];
-//        NSLog(@"SHOW RANGE AT:%@-%@", [NSDecimalNumber decimalNumberWithDecimal:newRange.location].stringValue,[NSDecimalNumber decimalNumberWithDecimal:yAxis.orthogonalCoordinateDecimal].stringValue);
-//        yAxis.orthogonalCoordinateDecimal = newRange.location;
+        
         [self renderRange:[NSDecimalNumber decimalNumberWithDecimal: newRange.location].floatValue length:[NSDecimalNumber decimalNumberWithDecimal: newRange.length].floatValue];
     } else if (coordinate == CPTCoordinateY) {
         return space.yRange; // disable y scrolling here.
@@ -279,4 +285,38 @@
     
     return newRange;
 }
+
+//-(BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDownEvent:(UIEvent *)event atPoint:(CGPoint)point {
+//    if (elasticAnimation != nil) return NO;
+//    else return YES;
+//}
+
+-(BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(CPTNativeEvent *)event atPoint:(CGPoint)point {
+    CPTPlotRange* newRange = space.xRange;
+    
+    float newRangeLocation = [NSDecimalNumber decimalNumberWithDecimal:newRange.location].floatValue;
+    float newRangeLength = [NSDecimalNumber decimalNumberWithDecimal:newRange.length].floatValue;
+    CPTPlotRange* animateRange = nil;
+    if (newRangeLocation < xStableStartPoint) {
+        animateRange = [[CPTPlotRange alloc]initWithLocation:[NSDecimalNumber numberWithFloat:xStableStartPoint].decimalValue length:newRange.length];
+    } else if (newRangeLocation + newRangeLength > xStableEndPoint) {
+        animateRange = [[CPTPlotRange alloc]initWithLocation:[NSDecimalNumber numberWithFloat:(xStableEndPoint-newRangeLength+xStableStartPoint)].decimalValue length:newRange.length];
+    }
+//    if (elasticAnimation != nil) {
+//        [[CPTAnimation sharedInstance] removeAnimationOperation:elasticAnimation];
+//    }
+    if (animateRange != nil) {
+//        elasticAnimation
+        elasticAnimation = [CPTAnimation animate:space property:@"xRange" fromPlotRange:newRange toPlotRange:animateRange duration:0.2 withDelay:0 animationCurve:CPTAnimationCurveSinusoidalOut delegate:self];
+    }
+    return YES;
+}
+
+-(void)animationDidFinish:(CPTAnimationOperation *)operation {
+    if (operation == elasticAnimation) {
+        elasticAnimation = nil;
+    }
+}
+
+
 @end

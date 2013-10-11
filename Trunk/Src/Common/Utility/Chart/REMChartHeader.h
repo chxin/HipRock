@@ -191,7 +191,7 @@ typedef enum  {
 @end
 
 
-@interface REMTrendChartView : CPTGraphHostingView<CPTPlotSpaceDelegate,REMChartView>
+@interface REMTrendChartView : CPTGraphHostingView<CPTPlotSpaceDelegate,REMChartView,CPTAnimationDelegate>
 
 @property (nonatomic, readonly) NSArray* series;
 @property (nonatomic, readonly) BOOL verticalGridLine;

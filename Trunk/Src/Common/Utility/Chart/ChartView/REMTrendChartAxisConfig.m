@@ -28,7 +28,7 @@
     lineStyle.lineWidth = 1.0;
     
     textStyle.fontName = @kBuildingFontSCRegular;
-    textStyle.fontSize = 16.0;
+    textStyle.fontSize = 10.0;
     textStyle.color = [CPTColor whiteColor];
     textStyle.textAlignment = CPTTextAlignmentCenter;
     
@@ -44,7 +44,7 @@
     gridlineStyle.lineWidth = 1.0;
     
     textStyle.fontName = @kBuildingFontSCRegular;
-    textStyle.fontSize = 16.0;
+    textStyle.fontSize = 10.0;
     textStyle.color = [CPTColor whiteColor];
     textStyle.textAlignment = CPTTextAlignmentCenter;
     
