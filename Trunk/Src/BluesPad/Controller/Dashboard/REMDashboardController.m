@@ -7,11 +7,13 @@
 //
 
 #import "REMDashboardController.h"
+#import "REMDataAccessor.h"
 
 @interface REMDashboardController ()
 
 @property (nonatomic,weak) UILabel *buildingLabel;
 @property  (nonatomic) BOOL isHiding;
+
 
 @end
 
@@ -57,10 +59,18 @@ static NSString *cellId=@"dashboardcell";
     
 }
 
+static NSString *dashboardGroupName=@"building-dashboard-%@";
+
+- (NSString *)groupName{
+    return [NSString stringWithFormat:dashboardGroupName,self.buildingInfo.building.buildingId];
+}
+
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if(decelerate==YES && scrollView.contentOffset.y<-65){
+    if(decelerate==YES && scrollView.contentOffset.y<-80){
         self.isHiding=YES;
+        
+        [REMDataAccessor cancelAccess:[self groupName]];
         [self.imageView showBuildingInfo];
     }
 }
@@ -68,7 +78,7 @@ static NSString *cellId=@"dashboardcell";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     //NSLog(@"table scroll:%@",NSStringFromCGPoint(scrollView.contentOffset));
     if(self.isHiding==YES)return;
-    if(scrollView.contentOffset.y<-65){
+    if(scrollView.contentOffset.y<-80){
         self.buildingLabel.text=@"松开以显示";
     }
     else {
@@ -102,7 +112,7 @@ static NSString *cellId=@"dashboardcell";
         
     }
     
-    [cell initWidgetCollection:self.dashboardArray[indexPath.section]];
+    [cell initWidgetCollection:self.dashboardArray[indexPath.section] withGroupName:[self groupName]];
     
     return cell;
 }

@@ -71,7 +71,21 @@ static NSDictionary *serviceMap = nil;
            *	Energy
            */
           [NSNumber numberWithInt:REMDSEnergyTagsTrend] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetTagsData"],
+          [NSNumber numberWithInt:REMDSEnergyTagsTrendUnit] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetEnergyUsageUnitData"],
           [NSNumber numberWithInt:REMDSEnergyTagsDistribute] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/AggregateTagsData"],
+          [NSNumber numberWithInt:REMDSEnergyMultiTimeTrend] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetTagsData"],
+          [NSNumber numberWithInt:REMDSEnergyMultiTimeDistribute] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/AggregateTimeSpanData"],
+          [NSNumber numberWithInt:REMDSEnergyCarbon] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetCarbonUsageData"],
+          [NSNumber numberWithInt:REMDSEnergyCarbonUnit] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetCarbonUsageUnitData"],
+          [NSNumber numberWithInt:REMDSEnergyCarbonDistribute] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/AggregateCarbonUsageData"],
+          [NSNumber numberWithInt:REMDSEnergyCost] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetCostData"],
+          [NSNumber numberWithInt:REMDSEnergyCostUnit] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetCostUnitData"],
+          [NSNumber numberWithInt:REMDSEnergyCostDistribute] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/AggregateCostData"],
+          [NSNumber numberWithInt:REMDSEnergyCostElectricity] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetElectricityCostData"],
+          [NSNumber numberWithInt:REMDSEnergyRatio] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/RatioGetTagsData"],
+          [NSNumber numberWithInt:REMDSEnergyRankingEnergy] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/RankingEnergyUsageData"],
+          [NSNumber numberWithInt:REMDSEnergyRankingCost] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/RankingCostData"],
+          [NSNumber numberWithInt:REMDSEnergyRankingCarbon] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/RankingCarbonData"],
           
           /**
            * Customer

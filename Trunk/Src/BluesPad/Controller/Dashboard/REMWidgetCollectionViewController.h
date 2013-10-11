@@ -17,4 +17,6 @@
 
 @property (nonatomic,weak) NSArray *widgetArray;
 
+@property (nonatomic,strong) NSString *groupName;
+
 @end

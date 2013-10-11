@@ -63,7 +63,7 @@ static NSString *cellId=@"widgetcell";
     
     
     
-    [cell initWidgetCell:widget];
+    [cell initWidgetCell:widget withGroupName:self.groupName];
     
     
     

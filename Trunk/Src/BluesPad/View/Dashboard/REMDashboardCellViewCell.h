@@ -13,6 +13,6 @@
 
 @interface REMDashboardCellViewCell : UITableViewCell
 
-- (void)initWidgetCollection:(REMDashboardObj *)dashboardInfo;
+- (void)initWidgetCollection:(REMDashboardObj *)dashboardInfo withGroupName:(NSString *)groupName;
 
 @end

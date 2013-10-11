@@ -16,9 +16,14 @@
 
 @property (nonatomic,weak) UIView *chartContainer;
 
+
+
+
+
 @end
 
 @implementation REMDashboardCollectionCellView
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -34,7 +39,7 @@
     return self;
 }
 
-- (void)initWidgetCell:(REMWidgetObject *)widgetInfo
+- (void)initWidgetCell:(REMWidgetObject *)widgetInfo withGroupName:(NSString *)groupName
 {
     UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 20)];
     title.backgroundColor=[UIColor clearColor];
@@ -61,15 +66,15 @@
     
     self.chartContainer=chartContainer;
     
-    [self queryEnergyData:widgetInfo.contentSyntax];
+    [self queryEnergyData:widgetInfo.contentSyntax withGroupName:groupName];
 }
 
-- (void)queryEnergyData:(REMWidgetContentSyntax *)syntax{
+- (void)queryEnergyData:(REMWidgetContentSyntax *)syntax withGroupName:(NSString *)groupName{
     
     REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType];
-    [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:syntax.params withMaserContainer:self.chartContainer callback:^(REMEnergyViewData *data){
+    [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:syntax.params withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data){
         
-        REMLineWidgetWrapper* lineWidget = [[REMLineWidgetWrapper alloc]initWithFrame:self.chartContainer.frame data:data widgetContext:syntax];
+        REMLineWidgetWrapper* lineWidget = [[REMLineWidgetWrapper alloc]initWithFrame:self.chartContainer.bounds data:data widgetContext:syntax];
         [self.chartContainer addSubview:lineWidget.view];
         [lineWidget destroyView];
         //[self snapshotChartView];

@@ -22,11 +22,11 @@
     }
 }
 
-- (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(NSDictionary *)params withMaserContainer:(UIView *)maskerContainer callback:(void (^)(id))callback
+- (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(NSDictionary *)params withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void (^)(id))callback
 {
     REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:params];
     store.maskContainer=maskerContainer;
-    
+    store.groupName=groupName;
     [REMDataAccessor access:store success:^(NSDictionary *data){
         if([data isEqual:[NSNull null]]==YES)return ;
         REMEnergyViewData *viewData=[[REMEnergyViewData alloc]initWithDictionary:data];

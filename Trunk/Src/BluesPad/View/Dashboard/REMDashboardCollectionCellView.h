@@ -16,7 +16,7 @@
 
 @property (nonatomic,weak) UILabel *timeLabel;
 
-- (void)initWidgetCell:(REMWidgetObject *)widgetInfo;
+- (void)initWidgetCell:(REMWidgetObject *)widgetInfo withGroupName:(NSString *)groupName;
 
 
 @end
