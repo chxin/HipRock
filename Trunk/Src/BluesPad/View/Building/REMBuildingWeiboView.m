@@ -7,6 +7,7 @@
 //
 
 #import "REMBuildingWeiboView.h"
+#import "REMColor.h"
 
 const CGFloat kWeiboWindowHeight = 165;
 const CGFloat kWeiboWindowWidth = 390;
@@ -34,6 +35,7 @@ const NSInteger kWeiboMaxLength = 140;
     UIColor *toolbarBottomLineColor;
     UIColor *mainBackgroundColor;
     UIColor *buttonEnableTextColor;
+    UIColor *buttonDisableTextColor;
     NSInteger buttonTextSize;
     NSInteger titleTextSize;
     NSInteger inputTextSize;
@@ -42,6 +44,7 @@ const NSInteger kWeiboMaxLength = 140;
     
     UITextView* textView;
     UILabel* charactorLabel;
+    UIButton* sendBtn;
 }
 
 - (void)close:(BOOL)fadeOut {
@@ -63,10 +66,11 @@ const NSInteger kWeiboMaxLength = 140;
     toolbarBottomLineColor  = [UIColor colorWithRed:172/255.0 green:172/255.0 blue:172/255.0 alpha:1];
     mainBackgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1];
     buttonEnableTextColor = [UIColor colorWithRed:0 green:122/255.0 blue:1 alpha:1];
+    buttonDisableTextColor = [REMColor colorByHexString:@"#95959a"];
     buttonTextSize = 16;
     titleTextSize = 16;
     inputTextSize = 16;
-        
+    
     weiboContentView = [[UIView alloc]initWithFrame:CGRectMake((self.frame.size.width - kWeiboWindowWidth) / 2, (self.frame.size.height - kWeiboWindowHeight) / 2, kWeiboWindowWidth, kWeiboWindowHeight)];
     weiboContentView.layer.cornerRadius = 5;
     weiboContentView.layer.masksToBounds = YES;
@@ -83,7 +87,7 @@ const NSInteger kWeiboMaxLength = 140;
     [topToolbar addSubview:toolbarLabel];
     
     UIButton* cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIButton* sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [cancelBtn setFrame:CGRectMake(kWeiboButtonMargin, 0, kWeiboButtonWidth, kWeiboToolbarHeight)];
     cancelBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:buttonTextSize];
     cancelBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
@@ -118,12 +122,14 @@ const NSInteger kWeiboMaxLength = 140;
     textView.editable = YES;
     [textImageView addSubview:textView];
     textView.text = self.weiboText;
+    textView.delegate = self;
     
     charactorLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, textImageViewHeight - kWeiboCharactorLabelHeight - kWeiboCharactorLabelMarginBottom, 100, kWeiboCharactorLabelHeight)];
     charactorLabel.backgroundColor = [UIColor clearColor];
     [charactorLabel setFont:[UIFont fontWithName:@(kBuildingFontSCRegular) size:9]];
     [charactorLabel setTextColor:[UIColor grayColor]];
     [textImageView addSubview:charactorLabel];
+    [charactorLabel setText:[NSString stringWithFormat:@"%i", (kWeiboMaxLength-self.weiboText.length)]];
     
     UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(kWeiboWindowWidth - kWeiboImgOverviewMargin - kWeiboImgOverviewWidth, kWeiboImgOverviewMargin, kWeiboImgOverviewWidth, kWeiboImgOverviewHeight)];
     CGFloat resizeWidth = 0;
@@ -208,13 +214,13 @@ const NSInteger kWeiboMaxLength = 140;
 }
 
 -(void)sendWeibo {
-//    [UIView beginAnimations:@"move" context:nil];
-//    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//    [UIView setAnimationDuration:0.4f];
-//    self.view.superview.bounds = CGRectMake(0, -100, kWeiboWindowWidth, kWeiboWindowHeight);
-//    [self.view.superview.layer setShadowOffset:CGSizeMake(0, 100)];
-//    [UIView commitAnimations];
-
+    //    [UIView beginAnimations:@"move" context:nil];
+    //    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    //    [UIView setAnimationDuration:0.4f];
+    //    self.view.superview.bounds = CGRectMake(0, -100, kWeiboWindowWidth, kWeiboWindowHeight);
+    //    [self.view.superview.layer setShadowOffset:CGSizeMake(0, 100)];
+    //    [UIView commitAnimations];
+    
     [REMStatusBar showStatusMessage:@"新浪微博发送中…" autoHide:NO];
     [Weibo.weibo newStatus:textView.text pic:UIImagePNGRepresentation(self.weiboImage) completed:^(Status *status, NSError *error) {
         NSString *message = nil;
@@ -228,5 +234,15 @@ const NSInteger kWeiboMaxLength = 140;
         }
     }];
     [self close:YES];
+}
+
+
+- (void)textViewDidChange:(UITextView *)theTextView {
+    NSUInteger textLength = textView.text.length;
+    [charactorLabel setText:[NSString stringWithFormat:@"%i", (kWeiboMaxLength-textLength)]];
+    if (sendBtn.enabled == (textLength >= kWeiboMaxLength)) {
+        sendBtn.enabled = !sendBtn.enabled;
+        [sendBtn setTitleColor:sendBtn.enabled ? buttonEnableTextColor : buttonDisableTextColor forState:UIControlStateNormal];
+    }
 }
 @end
