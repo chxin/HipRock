@@ -19,6 +19,7 @@
 #import "REMLineWidgetWrapper.h"
 #import "REMChartHeader.h"
 #import "REMCommonHeaders.h"
+#import "REMStoryboardDefinitions.h"
 
 @interface REMMapViewController ()
 
@@ -150,7 +151,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.identifier isEqualToString:kMapToBuildingSegue] == YES)
+    if([segue.identifier isEqualToString:kSegue_MapToBuilding] == YES)
     {
         REMMapBuildingSegue *customeSegue = (REMMapBuildingSegue *)segue;
         
@@ -208,7 +209,7 @@
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
 {
     self.pressedMarker = marker;
-    [self performSegueWithIdentifier:kMapToBuildingSegue sender:self];
+    [self performSegueWithIdentifier:kSegue_MapToBuilding sender:self];
 }
 
 

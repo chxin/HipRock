@@ -7,11 +7,11 @@
 //
 
 #import "REMMapBuildingSegue.h"
-#import "REMSegues.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingViewController.h"
 #import "REMMapViewController.h"
 #import "REMCommonHeaders.h"
+#import "REMStoryboardDefinitions.h"
 
 
 
@@ -21,7 +21,7 @@
 {
 	self = [super initWithIdentifier:identifier source:source destination:destination];
 	if (self) {
-		self.isUnWinding = [identifier isEqualToString:kBuildingToMapSegue];
+		self.isUnWinding = [identifier isEqualToString:kSegue_BuildingToMap];
 	}
     
 	return self;

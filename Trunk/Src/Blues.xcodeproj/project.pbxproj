@@ -758,7 +758,7 @@
 		7A28495A18039A9D00DC481B /* REMDimensionForMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMDimensionForMap.h; path = Resource/Dimensions/REMDimensionForMap.h; sourceTree = "<group>"; };
 		7A28495B18039AAF00DC481B /* REMDimensionForBuilding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMDimensionForBuilding.h; path = Resource/Dimensions/REMDimensionForBuilding.h; sourceTree = "<group>"; };
 		7A28495C18039ACB00DC481B /* REMDimensionForChart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMDimensionForChart.h; path = Resource/Dimensions/REMDimensionForChart.h; sourceTree = "<group>"; };
-		7A28495D18039B0300DC481B /* REMSegues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSegues.h; path = Resource/Definitions/REMSegues.h; sourceTree = "<group>"; };
+		7A28495D18039B0300DC481B /* REMStoryboardDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMStoryboardDefinitions.h; path = Resource/Definitions/REMStoryboardDefinitions.h; sourceTree = "<group>"; };
 		7A28495E1803A5C600DC481B /* REMMapBuildingSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMapBuildingSegue.h; path = Controller/Map/REMMapBuildingSegue.h; sourceTree = "<group>"; };
 		7A28495F1803A5C600DC481B /* REMMapBuildingSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMapBuildingSegue.m; path = Controller/Map/REMMapBuildingSegue.m; sourceTree = "<group>"; };
 		7A2BA41C17D874C3003B18E1 /* REMBusinessErrorInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBusinessErrorInfo.h; path = Common/Model/REMBusinessErrorInfo.h; sourceTree = "<group>"; };
@@ -1572,7 +1572,7 @@
 		7A284954180398B600DC481B /* Definitions */ = {
 			isa = PBXGroup;
 			children = (
-				7A28495D18039B0300DC481B /* REMSegues.h */,
+				7A28495D18039B0300DC481B /* REMStoryboardDefinitions.h */,
 			);
 			name = Definitions;
 			sourceTree = "<group>";

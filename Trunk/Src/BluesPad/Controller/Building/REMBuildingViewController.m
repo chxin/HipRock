@@ -13,6 +13,7 @@
 #import "REMBuildingWeiboView.h"
 #import "REMMapViewController.h"
 #import "REMMapBuildingSegue.h"
+#import "REMStoryboardDefinitions.h"
 
 @interface REMBuildingViewController ()
 @property (nonatomic,strong) NSArray *imageArray;
@@ -391,7 +392,7 @@
 
 -(IBAction)backButtonPressed:(id)sender
 {
-    [self performSegueWithIdentifier:kBuildingToMapSegue sender:self];
+    [self performSegueWithIdentifier:kSegue_BuildingToMap sender:self];
 }
 
 -(void)executeExport:(REMMaskManager *)masker{
