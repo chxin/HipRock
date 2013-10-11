@@ -42,7 +42,7 @@
 
 @property (nonatomic,strong) UIView *commodityButtonsView;
 
-
+@property (nonatomic) BOOL isInDashboard;
 
 @property (nonatomic) BOOL isSwitchingCommodityButtonGroup;
 
@@ -65,7 +65,7 @@
         self.dataViewUp=NO;
         self.cumulateY=0;
         self.loadingImage=NO;
-        
+        self.isInDashboard=NO;
         
         self.loadingImageKey=[NSString stringWithFormat:@(kBuildingImageLoadingKeyPrefix),self.buildingInfo.building.buildingId];
         
@@ -522,36 +522,45 @@
     }
     else{
         if(scrollView.contentOffset.y>kDashboardThreshold){
-            if(self.dashboardController==nil){
-                self.dashboardController = [[REMDashboardController alloc]initWithStyle:UITableViewStyleGrouped];
-                self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
-                CGRect newFrame = CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height, kBuildingChartWidth, self.dataView.frame.size.height);
-                self.dashboardController.viewFrame=newFrame;
-                self.dashboardController.imageView=self;
-                self.dashboardController.buildingInfo=self.buildingInfo;
-                self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
-                [self addSubview:self.dashboardController.tableView];
-            }
-            
-            
-            //NSLog(@"data view old frame:%@",NSStringFromCGRect(self.dataView.frame));
-            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
-                [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y-20, kBuildingChartWidth, self.dataView.frame.size.height)];
-                
-                [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, self.dataView.frame.origin.y-self.dataView.frame.size.height, self.dataView.frame.size.width, self.dataView.frame.size.height)];
-            
-            } completion:^(BOOL finished){
-                [self.dataView setHidden:YES];
-                //NSLog(@"data view now frame:%@",NSStringFromCGRect(self.dataView.frame));
-            }];
-            
-            
-           
+            [self.controller switchToDashboard];
         }
     }
 }
 
+
+
+- (void) showDashboard{
+    self.isInDashboard=YES;
+    if(self.isActive==NO)return;
+    
+    if(self.dashboardController==nil){
+        self.dashboardController = [[REMDashboardController alloc]initWithStyle:UITableViewStyleGrouped];
+        self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
+        CGRect newFrame = CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height, kBuildingChartWidth, self.dataView.frame.size.height);
+        self.dashboardController.viewFrame=newFrame;
+        self.dashboardController.imageView=self;
+        self.dashboardController.buildingInfo=self.buildingInfo;
+        self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
+        [self addSubview:self.dashboardController.tableView];
+    }
+    if(self.dataView.frame.origin.y<0)return;
+    
+    //NSLog(@"data view old frame:%@",NSStringFromCGRect(self.dataView.frame));
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
+        [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y-20, kBuildingChartWidth, self.dataView.frame.size.height)];
+        
+        [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, self.dataView.frame.origin.y-self.dataView.frame.size.height, self.dataView.frame.size.width, self.dataView.frame.size.height)];
+        
+    } completion:^(BOOL finished){
+        [self.dataView setHidden:YES];
+        //NSLog(@"data view now frame:%@",NSStringFromCGRect(self.dataView.frame));
+    }];
+}
+
 - (void)showBuildingInfo{
+    self.isInDashboard=NO;
+    if(self.isActive==NO)return;
+    if(self.dataView.frame.origin.y>0)return;
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
         [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height*2, kBuildingChartWidth, self.dataView.frame.size.height)];
         [self.dataView setHidden:NO];
@@ -561,6 +570,11 @@
         //[self.dashboardController.view removeFromSuperview];
         //self.dashboardController=nil;
     }];
+}
+
+- (void)gotoBuildingInfo{
+    [self.controller switchToBuildingInfo];
+    
 }
 
 
@@ -691,13 +705,17 @@
     
     self.isActive=YES;
     [self loadingBuildingImage];
-    
-    if(self.dataViewUp==YES){
-        [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:^(BOOL success){
-            if(success==YES){
-                [self.shareButton setEnabled:YES];
-            }
-        }];
+    if(self.isInDashboard==YES){
+        [self showDashboard];
+    }
+    else{
+        if(self.dataViewUp==YES){
+            [self.dataView requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:^(BOOL success){
+                if(success==YES){
+                    [self.shareButton setEnabled:YES];
+                }
+            }];
+        }
     }
     
 }
@@ -723,6 +741,7 @@
 
 - (void)setScrollOffset:(CGFloat)offsetY
 {
+    
    [self.dataView setContentOffset:CGPointMake(-kBuildingLeftMargin, offsetY) animated:NO];
     [self checkIfRequestChartData:self.dataView];
 }

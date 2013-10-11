@@ -71,7 +71,7 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
         self.isHiding=YES;
         
         [REMDataAccessor cancelAccess:[self groupName]];
-        [self.imageView showBuildingInfo];
+        [self.imageView gotoBuildingInfo];
     }
 }
 

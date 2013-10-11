@@ -203,7 +203,29 @@
         [arr addObject:num];
     }
     
-    self.originCenterXArray=arr;
+    
+    
+    int moveCount=self.currentIndex;
+    
+    NSMutableArray *ar = [[NSMutableArray alloc] initWithCapacity:self.imageArray.count];
+    for (int i=0; i<arr.count; ++i) {
+        NSNumber *num = arr[i];
+        float f = [num floatValue];
+        f = f+(1024+5)*moveCount*-1;
+        NSNumber *num1 = [NSNumber numberWithFloat:f];
+         [ar addObject:num1];
+    }
+            
+    self.originCenterXArray=ar;
+    
+    for(int i=0;i<self.imageArray.count;++i)
+    {
+        NSNumber *s = self.originCenterXArray[i];
+        CGFloat x= [s floatValue];
+        REMImageView *image = self.imageArray[i];
+        [image setCenter: CGPointMake( x,image.center.y)];
+    }
+    
     
     [self loadImageData];
 }
@@ -353,6 +375,18 @@
     
 }
 
+- (void)switchToDashboard
+{
+    for (REMImageView *view in self.imageArray) {
+        [view showDashboard];
+    }
+}
+
+- (void)switchToBuildingInfo{
+    for (REMImageView *view in self.imageArray) {
+        [view showBuildingInfo];
+    }
+}
 
 
 - (void)panthis:(UIPanGestureRecognizer *)pan

@@ -35,4 +35,8 @@ typedef enum _BuildingSourceType{
 
 @property (nonatomic,strong) REMMapViewController *mapViewController;
 
+- (void)switchToDashboard;
+
+- (void)switchToBuildingInfo;
+
 @end
