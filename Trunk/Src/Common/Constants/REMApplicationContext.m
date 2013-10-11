@@ -23,14 +23,5 @@ static REMApplicationContext *context = nil;
     return context;
 }
 
--(void)login
-{
-    
-}
-
--(void)logout
-{
-}
-
 
 @end

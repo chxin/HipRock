@@ -14,7 +14,7 @@
 
 + (REMAppDelegate *) app;
 
-//@property (strong, nonatomic) NSDictionary *currentUser;
-//@property (strong, nonatomic) NSDictionary *currentCustomer;
+- (void)logout;
+
 
 @end

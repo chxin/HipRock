@@ -1022,10 +1022,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="-4867" y="5219"/>
         </scene>
-        <!--Building Setting View Controller - 设置-->
+        <!--Setting View Controller - 设置-->
         <scene sceneID="MQr-Ii-7F7">
             <objects>
-                <tableViewController autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="formSheet" id="wRO-Bn-ppJ" customClass="REMBuildingSettingViewController" sceneMemberID="viewController">
+                <tableViewController autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="formSheet" id="wRO-Bn-ppJ" customClass="REMSettingViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="9BB-en-H3K">
                         <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1632,10 +1632,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="-3518" y="4155"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Main Navigation Controller-->
         <scene sceneID="KV1-Ck-0FS">
             <objects>
-                <navigationController id="5WC-f7-YJK" sceneMemberID="viewController">
+                <navigationController id="5WC-f7-YJK" customClass="REMMainNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fny-OY-ylB">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
@@ -1686,7 +1686,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YWz-8E-Fzy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3976" y="-3442"/>
+            <point key="canvasLocation" x="-3976" y="-3490"/>
         </scene>
     </scenes>
     <resources>

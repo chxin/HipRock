@@ -18,8 +18,5 @@
 
 + (REMApplicationContext *)instance;
 
--(void)login;
-
--(void)logout;
 
 @end

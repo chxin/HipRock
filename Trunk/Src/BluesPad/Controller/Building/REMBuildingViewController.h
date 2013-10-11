@@ -11,7 +11,7 @@
 #import "REMImageView.h"
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingConstants.h"
-#import "REMBuildingSettingViewController.h"
+#import "REMSettingViewController.h"
 #import "REMMapViewController.h"
 
 typedef enum _BuildingSourceType{

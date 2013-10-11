@@ -416,8 +416,7 @@
 		7AF6AC8B17D1BA5600D62A9A /* REMAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCD717C6057E00C7AD56 /* REMAirQualityModel.m */; };
 		7AF6AC8C17D1BA5600D62A9A /* REMAirQualityDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */; };
 		7AF6AC8D17D1BA5600D62A9A /* REMBuildingAirQualityChartHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m */; };
-		7AF6AC8E17D1BA5600D62A9A /* REMBuildingSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */; };
-		7AF6AC8F17D1BA5600D62A9A /* REMBuildingSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */; };
+		7AF6AC8E17D1BA5600D62A9A /* REMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMSettingViewController.m */; };
 		7AF6AC9117D1BB1200D62A9A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B61D7517C742E000245F1E /* CoreText.framework */; };
 		B41249F01803ECF0009022C5 /* REMCustomerSwitchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
@@ -540,8 +539,7 @@
 		EF8A480A17F95FA1009B5C33 /* REMLineWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8A480617F95FA1009B5C33 /* REMLineWidgetWrapper.m */; };
 		EF8A480B17F95FA1009B5C33 /* REMTrendWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8A480817F95FA1009B5C33 /* REMTrendWidgetWrapper.m */; };
 		EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */; };
-		EF96300617C610A200BBC7DA /* REMBuildingSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */; };
-		EF97879617C70B440062BE0E /* REMBuildingSettingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */; };
+		EF96300617C610A200BBC7DA /* REMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMSettingViewController.m */; };
 		EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97DDDA17C20B5700A0374E /* REMToggleButton.m */; };
 		EF9ACF6118067CCB00097661 /* REMXFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9ACF6018067CCB00097661 /* REMXFormatter.m */; };
 		EF9ACF641806821500097661 /* REMYFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9ACF631806821500097661 /* REMYFormatter.m */; };
@@ -1164,10 +1162,8 @@
 		EF8A480817F95FA1009B5C33 /* REMTrendWidgetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendWidgetWrapper.m; sourceTree = "<group>"; };
 		EF8F1D7717C2FE5400D3E29F /* REMToggleButtonGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButtonGroup.h; sourceTree = "<group>"; };
 		EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButtonGroup.m; sourceTree = "<group>"; };
-		EF96300417C610A100BBC7DA /* REMBuildingSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingSettingViewController.h; sourceTree = "<group>"; };
-		EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingSettingViewController.m; sourceTree = "<group>"; };
-		EF97879417C70B440062BE0E /* REMBuildingSettingNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingSettingNavigationController.h; sourceTree = "<group>"; };
-		EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingSettingNavigationController.m; sourceTree = "<group>"; };
+		EF96300417C610A100BBC7DA /* REMSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingViewController.h; path = Controller/Building/REMSettingViewController.h; sourceTree = "<group>"; };
+		EF96300517C610A200BBC7DA /* REMSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSettingViewController.m; path = Controller/Building/REMSettingViewController.m; sourceTree = "<group>"; };
 		EF97DDD917C20B5700A0374E /* REMToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButton.h; sourceTree = "<group>"; };
 		EF97DDDA17C20B5700A0374E /* REMToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButton.m; sourceTree = "<group>"; };
 		EF9ACF6018067CCB00097661 /* REMXFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMXFormatter.m; path = LabelFormatter/REMXFormatter.m; sourceTree = "<group>"; };
@@ -1421,10 +1417,6 @@
 				7A153C6917AA497B00413D3C /* REMBuildingViewController.m */,
 				B4A0FCD917C610B500C7AD56 /* REMBuildingAirQualityChartHandler.h */,
 				B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m */,
-				EF96300417C610A100BBC7DA /* REMBuildingSettingViewController.h */,
-				EF96300517C610A200BBC7DA /* REMBuildingSettingViewController.m */,
-				EF97879417C70B440062BE0E /* REMBuildingSettingNavigationController.h */,
-				EF97879517C70B440062BE0E /* REMBuildingSettingNavigationController.m */,
 				B493ADA717D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.h */,
 				B493ADA817D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m */,
 			);
@@ -2356,6 +2348,8 @@
 		B47ACC2717F80A4700989B2C /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				EF96300417C610A100BBC7DA /* REMSettingViewController.h */,
+				EF96300517C610A200BBC7DA /* REMSettingViewController.m */,
 				B47ACC2817F80AAA00989B2C /* REMSettingCustomerSelectionViewController.h */,
 				B47ACC2917F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m */,
 				B47ACC2B17F80ACE00989B2C /* REMSettingCustomerDetailViewController.h */,
@@ -2898,8 +2892,7 @@
 				B4A0FCD517C6023300C7AD56 /* REMBuildingAirQualityView.m in Sources */,
 				B4A0FCD817C6057E00C7AD56 /* REMAirQualityModel.m in Sources */,
 				B4A0FCDB17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m in Sources */,
-				EF96300617C610A200BBC7DA /* REMBuildingSettingViewController.m in Sources */,
-				EF97879617C70B440062BE0E /* REMBuildingSettingNavigationController.m in Sources */,
+				EF96300617C610A200BBC7DA /* REMSettingViewController.m in Sources */,
 				7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */,
 				7A9557C017C73AD200249CED /* REMBuildingAirQualityChart.m in Sources */,
 				EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */,
@@ -2938,8 +2931,7 @@
 				7AF6AC8B17D1BA5600D62A9A /* REMAirQualityModel.m in Sources */,
 				7AF6AC8C17D1BA5600D62A9A /* REMAirQualityDataModel.m in Sources */,
 				7AF6AC8D17D1BA5600D62A9A /* REMBuildingAirQualityChartHandler.m in Sources */,
-				7AF6AC8E17D1BA5600D62A9A /* REMBuildingSettingViewController.m in Sources */,
-				7AF6AC8F17D1BA5600D62A9A /* REMBuildingSettingNavigationController.m in Sources */,
+				7AF6AC8E17D1BA5600D62A9A /* REMSettingViewController.m in Sources */,
 				7AF6AC8117D1BA0D00D62A9A /* REMServiceMeta.m in Sources */,
 				6AB1F2E117B8AD5E0065C1EB /* GTMBase64.m in Sources */,
 				6AB1F2E417B8AD5E0065C1EB /* Reachability.m in Sources */,
