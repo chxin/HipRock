@@ -22,5 +22,7 @@
 
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 
+-(void)cancelAllRequest;
+
 
 @end

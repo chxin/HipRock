@@ -34,6 +34,8 @@
 @property (nonatomic,strong) NSString *loadingImageKey;
 @property (nonatomic,strong) UIButton *backButton;
 @property (nonatomic,strong) UIButton *shareButton;
+@property (nonatomic,strong) UIButton *shareDashboardButton;
+
 @property (nonatomic,strong) UIButton *logoButton;
 
 @property (nonatomic) BOOL isActive;
@@ -81,7 +83,7 @@
         [REMDataAccessor cancelAccess:self.loadingImageKey];
         [self.dataView cancelAllRequest];
         [self.dataView resetDefaultCommodity];
-        
+        [self.dashboardController cancelAllRequest];
         //[self.imageView removeFromSuperview];
         //[self.blurredImageView removeFromSuperview];
         
@@ -122,6 +124,7 @@
     self.logoButton=nil;
     [self.dataView removeObserver:self forKeyPath:@"contentOffset" context:nil];
     self.dataView=nil;
+    self.dashboardController=nil;
 }
 
 - (void)didMoveToSuperview
@@ -171,7 +174,21 @@
     self.shareButton=shareButton;
     [self addSubview:shareButton];
     
+    
     self.dataView.shareButton=self.shareButton;
+    
+    
+    UIButton *shareDashboard=[[UIButton alloc]initWithFrame:shareButton.frame];
+    [shareDashboard setImage:[UIImage imageNamed:@"mail"] forState:UIControlStateNormal];
+    //[shareDashboard setImage:[UIImage imageNamed:@"Share_disable.png"] forState:UIControlStateDisabled];
+    
+    shareDashboard.showsTouchWhenHighlighted=YES;
+    shareDashboard.adjustsImageWhenHighlighted=YES;
+    shareDashboard.titleLabel.text=@"查看分享记录";
+    [shareDashboard addTarget:self.controller action:@selector(shareDashboardButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.shareDashboardButton=shareDashboard;
+    [self.shareDashboardButton setHidden:YES];
+    [self addSubview:shareDashboard];
     
     
     UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
@@ -184,6 +201,10 @@
     self.backButton=backButton;
     [self addSubview:backButton];
 
+}
+
+- (void)shareDashboardButtonPressed:(UIButton *)button{
+    
 }
 
 
@@ -219,7 +240,7 @@
         //UIImage *image = self.defaultImage;
         //dispatch_async(concurrentQueue, ^{
             @autoreleasepool {
-                UIImage *view = [REMImageHelper parseImageFromNSData:data];
+                UIImage *view = [self getCachedImage:data];
                 newView.image=view;
                 UIImageView *newBlurred= [self blurredImageView:newView];
             
@@ -472,6 +493,9 @@
 }
 
 -(void)checkIfRequestChartData:(UIScrollView *)scrollView{
+    if(self.isInDashboard){
+        [self showDashboard];
+    }
     if(scrollView.contentOffset.y>=kCommodityScrollTop){
         self.dataViewUp=YES;
         if(self.isActive == YES && self.hasLoadingChartData==NO){
@@ -531,7 +555,7 @@
 
 - (void) showDashboard{
     self.isInDashboard=YES;
-    if(self.isActive==NO)return;
+    if(self.superview==nil)return;
     
     if(self.dashboardController==nil){
         self.dashboardController = [[REMDashboardController alloc]initWithStyle:UITableViewStyleGrouped];
@@ -552,14 +576,26 @@
         [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, self.dataView.frame.origin.y-self.dataView.frame.size.height, self.dataView.frame.size.width, self.dataView.frame.size.height)];
         
     } completion:^(BOOL finished){
+        [self changeShareButton:NO];
         [self.dataView setHidden:YES];
         //NSLog(@"data view now frame:%@",NSStringFromCGRect(self.dataView.frame));
     }];
 }
 
+- (void)changeShareButton:(BOOL)weibo{
+    if(weibo){
+        [self.shareButton setHidden:NO];
+        [self.shareDashboardButton setHidden:YES];
+    }
+    else{
+        [self.shareButton setHidden:YES];
+        [self.shareDashboardButton setHidden:NO];
+    }
+}
+
 - (void)showBuildingInfo{
     self.isInDashboard=NO;
-    if(self.isActive==NO)return;
+    if(self.superview==nil)return;
     if(self.dataView.frame.origin.y>0)return;
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
         [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height*2, kBuildingChartWidth, self.dataView.frame.size.height)];
@@ -569,6 +605,9 @@
     } completion:^(BOOL finished){
         //[self.dashboardController.view removeFromSuperview];
         //self.dashboardController=nil;
+        [self changeShareButton:YES];
+        [self requireChartData];
+        
     }];
 }
 

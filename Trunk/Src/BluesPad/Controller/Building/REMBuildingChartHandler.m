@@ -48,7 +48,7 @@ static CPTTextStyle *yAxisLabelStyle;
     
     [self startLoadingActivity];
     [REMDataAccessor access:store success:^(id data) {
-        
+        if(self.view==nil)return ;
         [self loadDataSuccessWithData:data];
         
         loadCompleted(nil);

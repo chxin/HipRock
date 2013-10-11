@@ -32,6 +32,10 @@ static NSString *cellId=@"dashboardcell";
     return self;  
 }
 
+- (void)cancelAllRequest{
+    [REMDataAccessor cancelAccess:[self groupName]];
+}
+
 - (void)loadView{
     self.tableView= [[REMDashboardView alloc]initWithFrame:self.viewFrame style:UITableViewStyleGrouped];
     self.view=self.tableView;
