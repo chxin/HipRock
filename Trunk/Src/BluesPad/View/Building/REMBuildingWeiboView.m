@@ -120,7 +120,7 @@ const NSInteger kWeiboMaxLength = 140;
     textView.text = self.weiboText;
     
     charactorLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, textImageViewHeight - kWeiboCharactorLabelHeight - kWeiboCharactorLabelMarginBottom, 100, kWeiboCharactorLabelHeight)];
-    charactorLabel.backgroundColor = [UIColor ·];
+    charactorLabel.backgroundColor = [UIColor clearColor];
     [charactorLabel setFont:[UIFont fontWithName:@(kBuildingFontSCRegular) size:9]];
     [charactorLabel setTextColor:[UIColor grayColor]];
     [textImageView addSubview:charactorLabel];
