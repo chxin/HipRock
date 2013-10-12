@@ -36,6 +36,7 @@
 
 - (void)initWidgetCell:(REMWidgetObject *)widgetInfo
 {
+    _widgetObj = widgetInfo;
     UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 20)];
     title.backgroundColor=[UIColor clearColor];
     title.textColor=[UIColor whiteColor];
@@ -64,12 +65,14 @@
     [self queryEnergyData:widgetInfo.contentSyntax];
 }
 
+
+
 - (void)queryEnergyData:(REMWidgetContentSyntax *)syntax{
     
     REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType];
     [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:syntax.params withMaserContainer:self.chartContainer callback:^(REMEnergyViewData *data){
         
-        REMLineWidgetWrapper* lineWidget = [[REMLineWidgetWrapper alloc]initWithFrame:self.chartContainer.frame data:data widgetContext:syntax];
+        REMLineWidgetWrapper* lineWidget = [[REMLineWidgetWrapper alloc]initWithFrame:self.chartContainer.bounds data:data widgetContext:syntax];
         [self.chartContainer addSubview:lineWidget.view];
         [lineWidget destroyView];
         //[self snapshotChartView];

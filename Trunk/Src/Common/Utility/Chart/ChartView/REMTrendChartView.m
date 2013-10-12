@@ -26,6 +26,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.allowPinchScaling = NO;
+        self.userInteractionEnabled = config.userInteraction;
         maxXValOfSeries = INT32_MIN;
         needRerenderXInterval = YES;
         
@@ -227,7 +228,7 @@
             graph.plotAreaFrame.paddingLeft = yAxisConfig.reservedSpace.width + yAxisConfig.lineStyle.lineWidth;
             yAxis.plotSpace = graph.defaultPlotSpace;
             yAxis.plotSpace.delegate = self;
-            yAxis.plotSpace.allowsUserInteraction = YES;
+            yAxis.plotSpace.allowsUserInteraction = self.userInteractionEnabled;
             yAxis.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
             ((CPTXYPlotSpace*)yAxis.plotSpace).globalYRange = globalYRange;
         } else {

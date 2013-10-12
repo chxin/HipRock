@@ -10,7 +10,7 @@
 
 @implementation REMPieChartWrapper
 
--(REMPieChartView*)renderContentView:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {
+-(REMPieChartView*)renderContentView:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax  status:(REMWidgetStatus)status {
     REMChartConfig* chartConfig = [REMChartConfig getMinimunWidgetDefaultSetting];
     NSMutableArray* seriesArray = [[NSMutableArray alloc]init];
     int seriesCount = 0;

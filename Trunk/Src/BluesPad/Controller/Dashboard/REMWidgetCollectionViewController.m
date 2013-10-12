@@ -7,7 +7,7 @@
 //
 
 #import "REMWidgetCollectionViewController.h"
-
+#import "REMWidgetMaxView.h"
 @interface REMWidgetCollectionViewController ()
 
 
@@ -65,11 +65,17 @@ static NSString *cellId=@"widgetcell";
     
     [cell initWidgetCell:widget];
     
-    
-    
+    UITapGestureRecognizer *tap= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onWidgetTap:)];
+    [cell addGestureRecognizer:tap];
     
     return cell;
     
+}
+-(void)onWidgetTap:(UITapGestureRecognizer *)sender {
+    REMDashboardCollectionCellView *cell = (REMDashboardCollectionCellView*)sender.view;
+    REMWidgetMaxView* maxView = [[REMWidgetMaxView alloc]initWithSuperView:self.view widgetCell:cell];
+    
+    [maxView show:YES];
 }
 
 - (void)viewDidLoad

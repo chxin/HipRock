@@ -11,8 +11,13 @@
 @implementation REMTrendWidgetWrapper
 
 -(REMTrendChartView*)renderContentView:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {
+    REMTrendChartConfig* chartConfig = nil;
+    if (self.status == REMWidgetStatusMinimized) {
+        chartConfig = (REMTrendChartConfig*)[REMTrendChartConfig getMinimunWidgetDefaultSetting];
+    } else {
+        chartConfig = (REMTrendChartConfig*)[REMTrendChartConfig getMaximunWidgetDefaultSetting];
+    }
     
-    REMTrendChartConfig* chartConfig = (REMTrendChartConfig*)[REMTrendChartConfig getMinimunWidgetDefaultSetting];
     chartConfig.step = widgetSyntax.step.intValue;
     NSMutableArray* seriesArray = [[NSMutableArray alloc]init];
     int seriesCount = 0;
@@ -36,7 +41,7 @@
     if (uomIdArray.count > 1) {
         NSMutableArray* yAxisConfig = [NSMutableArray arrayWithArray: chartConfig.yAxisConfig];
         for (int i = 1; i < uomIdArray.count; i++) {
-            [yAxisConfig addObject:[REMTrendChartAxisConfig getWidgetYConfig]];
+            [yAxisConfig addObject:[REMTrendChartAxisConfig getMinWidgetYConfig]];
         }
         chartConfig.yAxisConfig = yAxisConfig;
     }
