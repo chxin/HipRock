@@ -12,6 +12,7 @@
 #import "REMBuildingViewController.h"
 #import "REMBuildingOverallModel.h"
 #import "REMMapViewController.h"
+#import "REMStoryboardDefinitions.h"
 
 @interface REMSplashScreenController ()
 
@@ -178,7 +179,7 @@
             if(loadCompleted!=nil)
                 loadCompleted();
             
-            [self performSegueWithIdentifier:kSplashToMapSegue sender:self];
+            [self performSegueWithIdentifier:kSegue_SplashToMap sender:self];
         }];
         
         
@@ -191,12 +192,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:kSplashToLoginSegue] == YES)
+    if ([segue.identifier isEqualToString:kSegue_SplashToLogin] == YES)
     {
         REMLoginCarouselController *loginCarouselController = segue.destinationViewController;
         loginCarouselController.splashScreenController = self;
     }
-    else if([segue.identifier isEqualToString:kSplashToMapSegue] == YES)
+    else if([segue.identifier isEqualToString:kSegue_SplashToMap] == YES)
     {
         REMMapViewController *mapViewController = segue.destinationViewController;
         mapViewController.buildingInfoArray = self.buildingInfoArray;

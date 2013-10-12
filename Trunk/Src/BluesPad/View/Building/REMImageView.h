@@ -47,6 +47,10 @@
 
 - (void)showBuildingInfo;
 
+- (void) showDashboard;
+
+- (void)gotoBuildingInfo;
+
 - (void)moveCenter:(CGFloat)x;
 
 -(void)requireChartData;

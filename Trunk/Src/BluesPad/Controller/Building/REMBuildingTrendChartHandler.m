@@ -422,16 +422,18 @@
         NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%@", index, dataItem.timeRangeType, dataItem.timeRangeData.targetGlobalData.target.targetId];
         [series setValue:targetIdentity forKey:@"identity"];
         NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:dataItem.timeRangeData.targetEnergyData.count];
-        REMTargetEnergyData* targetEData = dataItem.timeRangeData.targetEnergyData[0];
-        for (int i = 0; i < targetEData.energyData.count; i++) {
-            REMEnergyData* pointData = targetEData.energyData[i];
-            if ([pointData.dataValue isEqual:[NSNull null]] || pointData.dataValue.floatValue < 0) {
-                [data addObject:@{@"y": [NSNull null], @"x": pointData.localTime  }];
-            } else {
-                [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime  }];
+        if(dataItem.timeRangeData.targetEnergyData.count>0){
+            REMTargetEnergyData* targetEData = dataItem.timeRangeData.targetEnergyData[0];
+            for (int i = 0; i < targetEData.energyData.count; i++) {
+                REMEnergyData* pointData = targetEData.energyData[i];
+                if ([pointData.dataValue isEqual:[NSNull null]] || pointData.dataValue.floatValue < 0) {
+                    [data addObject:@{@"y": [NSNull null], @"x": pointData.localTime  }];
+                } else {
+                    [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime  }];
+                }
             }
+            [series setValue:data forKey:@"data"];
         }
-        [series setValue:data forKey:@"data"];
     }
     REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
     [myView.thisMonthButton setOn:YES];

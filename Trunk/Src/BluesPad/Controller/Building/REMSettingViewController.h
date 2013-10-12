@@ -12,12 +12,11 @@
 #import "REMUserModel.h"
 #import "REMCustomerModel.h"
 #import "REMCommonHeaders.h"
+#import "REMMainNavigationController.h"
 
-@interface REMBuildingSettingViewController : UITableViewController<UIAlertViewDelegate>
+@interface REMSettingViewController : UITableViewController<UIAlertViewDelegate>
 
-@property (nonatomic,weak) REMSplashScreenController *splashScreenController;
-
-@property (nonatomic,weak) UINavigationController *parentNavigationController;
+@property (nonatomic,strong) REMMainNavigationController *mainNavigationController;
 @property (nonatomic,strong) UISwitch *weiboAccoutSwitcher;
 
 -(void)logoutAndClearCache;

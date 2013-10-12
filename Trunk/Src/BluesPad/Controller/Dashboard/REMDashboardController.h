@@ -20,5 +20,9 @@
 @property (nonatomic) CGRect viewFrame;
 @property (nonatomic,weak) REMImageView *imageView;
 
+@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+
+-(void)cancelAllRequest;
+
 
 @end

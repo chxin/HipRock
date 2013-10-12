@@ -13,6 +13,7 @@
 #import "REMBuildingWeiboView.h"
 #import "REMMapViewController.h"
 #import "REMMapBuildingSegue.h"
+#import "REMStoryboardDefinitions.h"
 
 @interface REMBuildingViewController ()
 @property (nonatomic,strong) NSArray *imageArray;
@@ -131,19 +132,7 @@
 }
 
 
-//- (void)settingButtonPressed:(UIButton *)button{
-//    [self performSegueWithIdentifier:@"buildingSettingSegue2" sender:self];
-//}
-
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-//    if([segue.identifier isEqualToString:@"buildingSettingSegue2"]==YES){
-//        UINavigationController *c=  segue.destinationViewController;
-//        REMBuildingSettingViewController *vc= [c.childViewControllers lastObject];
-//        vc.splashScreenController=self.splashScreenController;
-//        vc.parentNavigationController=self.navigationController;
-//    }
     if([segue.identifier isEqualToString:@"buildingToMapSegue"]==YES){
         REMMapViewController *mapController = segue.destinationViewController;
         mapController.buildingInfoArray = self.buildingOverallArray;
@@ -202,7 +191,29 @@
         [arr addObject:num];
     }
     
-    self.originCenterXArray=arr;
+    
+    
+    int moveCount=self.currentIndex;
+    
+    NSMutableArray *ar = [[NSMutableArray alloc] initWithCapacity:self.imageArray.count];
+    for (int i=0; i<arr.count; ++i) {
+        NSNumber *num = arr[i];
+        float f = [num floatValue];
+        f = f+(1024+5)*moveCount*-1;
+        NSNumber *num1 = [NSNumber numberWithFloat:f];
+         [ar addObject:num1];
+    }
+            
+    self.originCenterXArray=ar;
+    
+    for(int i=0;i<self.imageArray.count;++i)
+    {
+        NSNumber *s = self.originCenterXArray[i];
+        CGFloat x= [s floatValue];
+        REMImageView *image = self.imageArray[i];
+        [image setCenter: CGPointMake( x,image.center.y)];
+    }
+    
     
     [self loadImageData];
 }
@@ -352,6 +363,18 @@
     
 }
 
+- (void)switchToDashboard
+{
+    for (REMImageView *view in self.imageArray) {
+        [view showDashboard];
+    }
+}
+
+- (void)switchToBuildingInfo{
+    for (REMImageView *view in self.imageArray) {
+        [view showBuildingInfo];
+    }
+}
 
 
 - (void)panthis:(UIPanGestureRecognizer *)pan
@@ -391,7 +414,7 @@
 
 -(IBAction)backButtonPressed:(id)sender
 {
-    [self performSegueWithIdentifier:kBuildingToMapSegue sender:self];
+    [self performSegueWithIdentifier:kSegue_BuildingToMap sender:self];
 }
 
 -(void)executeExport:(REMMaskManager *)masker{

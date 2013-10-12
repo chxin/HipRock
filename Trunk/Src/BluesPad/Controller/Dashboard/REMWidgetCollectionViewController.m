@@ -10,7 +10,7 @@
 #import "REMWidgetMaxView.h"
 @interface REMWidgetCollectionViewController ()
 
-
+@property (nonatomic,strong) NSMutableDictionary *widgetLoadedStatus;
 
 @end
 
@@ -61,9 +61,12 @@ static NSString *cellId=@"widgetcell";
     
     REMWidgetObject *widget=self.widgetArray[indexPath.row];
     
+    if(self.widgetLoadedStatus==nil){
+        self.widgetLoadedStatus = [[NSMutableDictionary alloc]initWithCapacity:self.widgetArray.count];
+    }
     
+    [cell initWidgetCell:widget ];
     
-    [cell initWidgetCell:widget];
     
     UITapGestureRecognizer *tap= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onWidgetTap:)];
     [cell addGestureRecognizer:tap];
@@ -77,6 +80,39 @@ static NSString *cellId=@"widgetcell";
     
     [maxView show:YES];
 }
+
+
+- (void)snapshotChartView:(NSTimer *)timer{
+    NSIndexPath *indexPath=timer.userInfo;
+    REMDashboardCollectionCellView *cell=(REMDashboardCollectionCellView *)[self collectionView:self.collectionView cellForItemAtIndexPath:indexPath];
+    //REMDashboardCollectionCellView *cell=timer.userInfo;
+    UIGraphicsBeginImageContextWithOptions(cell.chartContainer.frame.size, NO, 0.0);
+    [cell.chartContainer.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    //UIImageView *v = [[UIImageView alloc]initWithImage:image];
+    
+    UIButton *button =[UIButton buttonWithType:UIButtonTypeCustom];
+    [button setFrame:CGRectMake(0, 0, cell.chartContainer.frame.size.width, cell.chartContainer.frame.size.height)];
+    [button setBackgroundImage:image forState:UIControlStateNormal];
+    button.tag= indexPath.row;
+    [button addTarget:self action:@selector(widgetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    if(cell.chartContainer.subviews.count>0){
+        UIView *chartView=cell.chartContainer.subviews[0];
+        [chartView removeFromSuperview];
+        [cell.chartContainer addSubview:button];
+    }
+    
+}
+
+- (void)widgetButtonPressed:(UIButton *)button{
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:button.tag inSection:0];
+    REMWidgetObject *widget=self.widgetArray[indexPath.row];
+    NSLog(@"click widget:%@",widget.name);
+}
+
+
+
 
 - (void)viewDidLoad
 {

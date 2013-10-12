@@ -14,7 +14,7 @@
 
 + (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType) storeType;
 
-- (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(NSDictionary *)params withMaserContainer:(UIView *)maskerContainer callback:(void(^)(id))callback;
+- (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(NSDictionary *)params withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void(^)(id))callback;
 
 
 @end

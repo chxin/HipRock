@@ -9,7 +9,8 @@
 #import "REMControllerBase.h"
 #import "REMDimensions.h"
 #import "REMCommonHeaders.h"
-#import "REMBuildingSettingViewController.h"
+#import "REMSettingViewController.h"
+#import "REMStoryboardDefinitions.h"
 
 @interface REMControllerBase ()
 
@@ -55,13 +56,17 @@
     return customerLogoButton;
 }
 
-static REMBuildingSettingViewController *settingsController;
+static UINavigationController *settingNavigationController;
 
 - (void)settingButtonPressed:(UIButton *)button{
-    if(settingsController == nil)
-        settingsController = (REMBuildingSettingViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"settingController"];
+    if(settingNavigationController == nil){
+        settingNavigationController = (UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:kStoryboard_SettingsPage];
+        
+        REMSettingViewController *settingController = (REMSettingViewController *)[settingNavigationController.childViewControllers lastObject];
+        settingController.mainNavigationController = (REMMainNavigationController *)self.navigationController;
+    }
     
-    [self presentViewController:settingsController animated:YES completion:nil];
+    [self presentViewController:settingNavigationController animated:YES completion:nil];
 }
 
 @end
