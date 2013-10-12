@@ -93,16 +93,19 @@
 
         }
         else{
-            //UINavigationController *nav=self.parentNavigationController;
+            UINavigationController *nav=self.parentNavigationController;
+            
             [REMApplicationContext instance].currentCustomer=[REMApplicationContext instance].currentUser.customers[self.currentRow];
+            [[REMApplicationContext instance].currentCustomer save];
             [self.settingController needReload];
-            [self.splashController showMapView:^(void){
-                //[nav popToRootViewControllerAnimated:YES];
-                [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];
-                
+            
+            [nav dismissViewControllerAnimated:YES completion:^{
+                [self.settingController.mainNavigationController showInitialView:^(void){
+                    [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];
+                    [self.settingController.mainNavigationController popToRootViewControllerAnimated:YES];
+                }];
             }];
         }
-        
     }];
 }
 

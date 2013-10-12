@@ -7,6 +7,7 @@
 //
 
 #import "REMMainNavigationController.h"
+#import "REMSplashScreenController.h"
 
 @interface REMMainNavigationController ()
 
@@ -35,6 +36,24 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)presentLoginView:(void (^)(void))completed
+{
+    REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
+    
+    [self popToRootViewControllerAnimated:YES];
+    [splashController showLoginView:NO];
+    if(completed!=nil)
+        completed();
+}
+
+-(void)presentInitialView:(void (^)(void))completed
+{
+    //load data, when load finised, show map view
+    REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
+    
+    [splashController showMapView:completed];
 }
 
 -(id)getChildControllerInstanceOfClass:(Class)cls

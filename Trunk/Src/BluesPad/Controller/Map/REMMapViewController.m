@@ -34,8 +34,10 @@
 - (void)loadView
 {
     [super loadView];
-    
-    NSLog(@"map view frame:%@", NSStringFromCGRect(self.view.frame));
+
+    [self loadMapView];
+    [self.view addSubview: mapView];
+    [self.view sendSubviewToBack: mapView];
 }
 
 
@@ -44,10 +46,34 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self loadMapView];
+    [self mapViewLoaded];
+    
+    [self showMarkers];
+    
     [self.view addSubview:self.customerLogoButton];
     [self.view.layer insertSublayer:self.titleGradientLayer above:mapView.layer];
 }
+
+-(void)showMarkers
+{
+    for(REMBuildingOverallModel *buildingInfo in self.buildingInfoArray){
+        if(buildingInfo == nil || buildingInfo.building== nil)
+            continue;
+        
+        REMBuildingModel *building = buildingInfo.building;
+        
+        UIColor *markerColor = [UIColor redColor];
+        
+        GMSMarker *marker = [[GMSMarker alloc] init];
+        marker.position = CLLocationCoordinate2DMake(building.latitude, building.longitude);
+        marker.userData = building;
+        marker.title = building.name;
+        marker.snippet = building.code;
+        marker.map = mapView;
+        marker.icon = [GMSMarker markerImageWithColor:markerColor];
+    }
+}
+
 
 
 -(void)loadMapView
@@ -64,14 +90,6 @@
     [mapView setCamera:camera];
     mapView.myLocationEnabled = NO;
     mapView.delegate = self;
-    
-    [self.view addSubview: mapView];
-    [self.view sendSubviewToBack: mapView];
-    
-    [self mapViewLoaded];
-    
-    //TODO: remove when test finishes
-    //[self oscarChartTest];
 }
 
 -(void)mapViewLoaded
@@ -103,12 +121,6 @@
         maxLatitude = MAX(maxLatitude, building.latitude);
         minLatitude = MIN(minLatitude,  building.latitude);
         
-        GMSMarker *marker = [[GMSMarker alloc] init];
-        marker.position = CLLocationCoordinate2DMake(building.latitude, building.longitude);
-        marker.userData = building;
-        marker.title = building.name;
-        marker.snippet = building.code;
-        marker.map = mapView;
     }
     
     if(maxLongtitude != INT64_MIN && minLongtitude!=INT64_MAX && maxLatitude!=INT64_MIN && minLatitude!=INT64_MAX){

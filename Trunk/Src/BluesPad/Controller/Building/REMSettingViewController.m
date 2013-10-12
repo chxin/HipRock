@@ -186,8 +186,7 @@
     currentCustomer = nil;
     UINavigationController *nav=(UINavigationController *)self.parentViewController;
     [nav dismissViewControllerAnimated:YES completion:^(void){
-        [self.mainNavigationController popToRootViewControllerAnimated:YES];
-        //[self.splashScreenController showLoginView:NO];
+        [self.mainNavigationController showLoginView:nil];
         
         [REMStorage clearSessionStorage];
     }];

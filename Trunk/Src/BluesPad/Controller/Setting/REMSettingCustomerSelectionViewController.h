@@ -13,7 +13,6 @@
 
 - (IBAction)switchCustomer:(UIBarButtonItem *)sender;
 
-@property (nonatomic,weak) REMSplashScreenController *splashController;
 @property (nonatomic,weak) UINavigationController *parentNavigationController;
 @property (nonatomic,weak) REMSettingViewController *settingController;
 
