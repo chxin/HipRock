@@ -58,8 +58,17 @@
     contentView = [[UIView alloc]initWithFrame:self.startFrame];
     contentView.backgroundColor = [UIColor whiteColor];
     [self addSubview:contentView];
+    UIButton* backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 24)];
+    backBtn.backgroundColor = [UIColor grayColor];
+    [backBtn setTitle:@"Back" forState:UIControlStateNormal];
+    [contentView addSubview:backBtn];
+    
+    [backBtn addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)backButtonPressed:(UIButton *)button {
+    [self close:YES];
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
