@@ -237,10 +237,25 @@ const NSInteger kWeiboMaxLength = 140;
 }
 
 
+- (int)convertToInt:(NSString*)strtemp {
+    int strlength = 0;
+    char* p = (char*)[strtemp cStringUsingEncoding:NSUnicodeStringEncoding];
+    for (int i=0 ; i<[strtemp lengthOfBytesUsingEncoding:NSUnicodeStringEncoding] ;i++) {
+        if (*p) {
+            p++;
+            strlength++;
+        }
+        else {
+            p++;
+        }
+    }
+    return (strlength+1)/2;
+}
+
 - (void)textViewDidChange:(UITextView *)theTextView {
-    NSUInteger textLength = textView.text.length;
+    NSUInteger textLength = [self convertToInt:textView.text];
     [charactorLabel setText:[NSString stringWithFormat:@"%i", (kWeiboMaxLength-textLength)]];
-    if (((textLength >= kWeiboMaxLength) || textLength == 0)) {
+    if (((textLength > kWeiboMaxLength) || textLength == 0)) {
         if (sendBtn.enabled) {
             sendBtn.enabled = NO;
             [sendBtn setTitleColor:buttonDisableTextColor forState:UIControlStateNormal];
