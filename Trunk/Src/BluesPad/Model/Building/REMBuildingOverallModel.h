@@ -18,5 +18,6 @@
 @property (nonatomic,strong) REMAirQualityModel *airQuality;
 @property (nonatomic,strong) NSArray *dashboardArray;
 @property (nonatomic,strong) NSArray *commodityArray;
+@property (nonatomic,strong) NSNumber *isQualified;
 
 @end

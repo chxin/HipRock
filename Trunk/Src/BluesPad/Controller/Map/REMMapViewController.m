@@ -46,8 +46,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self mapViewLoaded];
-    
     [self showMarkers];
     
     [self.view addSubview:self.customerLogoButton];
@@ -62,7 +60,13 @@
         
         REMBuildingModel *building = buildingInfo.building;
         
-        UIColor *markerColor = [UIColor redColor];
+        UIColor *markerColor = [UIColor orangeColor];
+        if(buildingInfo.isQualified != nil && [buildingInfo.isQualified isEqual:[NSNull null]] == NO){
+            if([buildingInfo.isQualified intValue] == 1)
+                markerColor = [UIColor greenColor];
+            else
+                markerColor = [UIColor redColor];
+        }
         
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.position = CLLocationCoordinate2DMake(building.latitude, building.longitude);
@@ -90,26 +94,26 @@
     [mapView setCamera:camera];
     mapView.myLocationEnabled = NO;
     mapView.delegate = self;
+    
+    GMSCameraUpdate *update = [self getCameraUpdate];
+    
+    [mapView moveCamera:update];
 }
 
--(void)mapViewLoaded
+-(GMSCameraUpdate *)getCameraUpdate
 {
-    double maxLongtitude = INT64_MIN, minLongtitude=INT64_MAX, maxLatitude=INT64_MIN, minLatitude=INT64_MAX;
-    
-    if(self.buildingInfoArray.count < 1){ // no building
-    }
-    
-    if(self.buildingInfoArray.count == 1){ // one building
+    // one building, return the building's location
+    if(self.buildingInfoArray.count == 1){
         REMBuildingModel *building = [self.buildingInfoArray[0] building];
         CLLocationCoordinate2D target = CLLocationCoordinate2DMake(building.latitude, building.longitude);
-        GMSCameraUpdate *update = [GMSCameraUpdate setTarget:target zoom:12];
-        [mapView animateWithCameraUpdate:update];
-    }
-    
-    if(self.buildingInfoArray.count > 1){ // two and more buildings
         
+        return [GMSCameraUpdate setTarget:target zoom:12];
     }
     
+    // multiple buildings, return the rect
+    GMSCameraUpdate *update = nil;
+    
+    double maxLongtitude = INT64_MIN, minLongtitude=INT64_MAX, maxLatitude=INT64_MIN, minLatitude=INT64_MAX;
     for(REMBuildingOverallModel *buildingInfo in self.buildingInfoArray){
         if(buildingInfo == nil || buildingInfo.building== nil)
             continue;
@@ -120,7 +124,6 @@
         minLongtitude = MIN(minLongtitude, building.longitude);
         maxLatitude = MAX(maxLatitude, building.latitude);
         minLatitude = MIN(minLatitude,  building.latitude);
-        
     }
     
     if(maxLongtitude != INT64_MIN && minLongtitude!=INT64_MAX && maxLatitude!=INT64_MIN && minLatitude!=INT64_MAX){
@@ -132,8 +135,10 @@
         
         GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds withPadding:50.0f];
         
-        [mapView animateWithCameraUpdate:update];
+        [mapView moveCamera:update];
     }
+    
+    return update;
 }
 
 - (void)viewWillAppear:(BOOL)animated

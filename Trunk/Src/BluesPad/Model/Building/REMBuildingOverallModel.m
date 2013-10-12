@@ -54,6 +54,8 @@
         }
         self.commodityArray=commodityList;
     }
+    
+    self.isQualified = dictionary[@"IsQualified"];
 }
 
 @end
