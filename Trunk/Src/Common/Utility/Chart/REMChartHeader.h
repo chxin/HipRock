@@ -134,25 +134,26 @@ typedef enum  {
 @property (nonatomic, readonly) CPTLineStyle *lineStyle;
 @property (nonatomic, readonly) CPTLineStyle *gridlineStyle;
 @property (nonatomic) NSString* title;
-@property (nonatomic, readonly) CPTCoordinate coordinate;
 @property (nonatomic, readonly) CPTTextStyle* textStyle;
 @property (nonatomic, readonly) CGSize reservedSpace;
 @property (nonatomic, readonly) REMTrendChartXAxisLabelAlignment labelAlignment;
 
-+(REMTrendChartAxisConfig*)getWidgetXConfig;
-+(REMTrendChartAxisConfig*)getWidgetYConfig;
++(REMTrendChartAxisConfig*)getMinWidgetXConfig;
++(REMTrendChartAxisConfig*)getMinWidgetYConfig;
 +(REMTrendChartAxisConfig*)getMaxWidgetXConfig;
 +(REMTrendChartAxisConfig*)getMaxWidgetYConfig;
 
 @end
 
 @interface REMChartConfig : NSObject
+@property (nonatomic) BOOL userInteraction;
 /*
  * IList<REMChartSeries>
  */
 @property (nonatomic) NSArray* series;
 
 +(REMChartConfig*)getMinimunWidgetDefaultSetting;
++(REMChartConfig*)getMaximunWidgetDefaultSetting;
 @end
 
 
@@ -191,7 +192,7 @@ typedef enum  {
 @end
 
 
-@interface REMTrendChartView : CPTGraphHostingView<CPTPlotSpaceDelegate,REMChartView>
+@interface REMTrendChartView : CPTGraphHostingView<CPTPlotSpaceDelegate,REMChartView,CPTAnimationDelegate>
 
 @property (nonatomic, readonly) NSArray* series;
 @property (nonatomic, readonly) BOOL verticalGridLine;

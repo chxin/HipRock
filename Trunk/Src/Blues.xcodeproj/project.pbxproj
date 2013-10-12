@@ -549,6 +549,7 @@
 		EFDAACBF18052E0C008BC9AF /* REMPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */; };
 		EFDAACC218053911008BC9AF /* REMChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC118053911008BC9AF /* REMChartConfig.m */; };
 		EFDAACC818054EBA008BC9AF /* REMPieChartSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */; };
+		EFEA1CBE1807D33000CA3C07 /* REMWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEA1CBD1807D33000CA3C07 /* REMWidgetWrapper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1176,6 +1177,8 @@
 		EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartView.m; sourceTree = "<group>"; };
 		EFDAACC118053911008BC9AF /* REMChartConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartConfig.m; sourceTree = "<group>"; };
 		EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartSeries.m; sourceTree = "<group>"; };
+		EFEA1CBC1807D33000CA3C07 /* REMWidgetWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetWrapper.h; sourceTree = "<group>"; };
+		EFEA1CBD1807D33000CA3C07 /* REMWidgetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetWrapper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2435,6 +2438,8 @@
 				EF8A47E717F959B5009B5C33 /* REMAbstractChartWrapper.m */,
 				EFDAACB71803F27F008BC9AF /* REMPieChartWrapper.h */,
 				EFDAACB81803F27F008BC9AF /* REMPieChartWrapper.m */,
+				EFEA1CBC1807D33000CA3C07 /* REMWidgetWrapper.h */,
+				EFEA1CBD1807D33000CA3C07 /* REMWidgetWrapper.m */,
 			);
 			path = ChartWrapper;
 			sourceTree = "<group>";
@@ -2908,6 +2913,7 @@
 				EF8A47FD17F959B5009B5C33 /* REMTrendChartColumnSeries.m in Sources */,
 				B46C8EC017F27CB9006DC4CB /* REMDashboardCollectionView.m in Sources */,
 				B4EDFB1B180697F300873FA1 /* REMControllerBase.m in Sources */,
+				EFEA1CBE1807D33000CA3C07 /* REMWidgetWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

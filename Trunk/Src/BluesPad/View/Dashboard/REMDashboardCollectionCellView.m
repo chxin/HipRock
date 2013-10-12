@@ -8,10 +8,13 @@
 
 #import "REMDashboardCollectionCellView.h"
 #import <QuartzCore/QuartzCore.h>
-
+#import "REMEnergySeacherBase.h"
+#import "REMEnergyViewData.h"
+#import "REMLineWidgetWrapper.h"
 
 @interface REMDashboardCollectionCellView ()
 
+@property (nonatomic,weak) UIView *chartContainer;
 
 @property (nonatomic,weak) REMWidgetObject *widgetInfo;
 
@@ -39,7 +42,7 @@
     return self;
 }
 
-- (void)initWidgetCell:(REMWidgetObject *)widgetInfo
+- (void)initWidgetCell:(REMWidgetObject *)widgetInfo withGroupName:(NSString *)groupName
 {
     
     if(self.chartContainer==nil){
@@ -69,19 +72,51 @@
         
         self.chartContainer=chartContainer;
     }
-    
+    [self queryEnergyData:widgetInfo.contentSyntax withGroupName:groupName];
 }
 
+- (void)queryEnergyData:(REMWidgetContentSyntax *)syntax withGroupName:(NSString *)groupName{
+    if(self.chartLoaded==YES)return;
+    REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType];
+    [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:syntax.params withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data){
+        self.chartLoaded=YES;
+        REMLineWidgetWrapper* lineWidget = [[REMLineWidgetWrapper alloc]initWithFrame:self.chartContainer.bounds data:data widgetContext:syntax];
+        [self.chartContainer addSubview:lineWidget.view];
+        [lineWidget destroyView];
+        //[self snapshotChartView];
+    }];
+}
 
+- (void)snapshotChartView{
+    UIGraphicsBeginImageContextWithOptions(self.chartContainer.frame.size, NO, 0.0);
+    [self.chartContainer.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    //UIImageView *v = [[UIImageView alloc]initWithImage:image];
+    
+    UIButton *button =[UIButton buttonWithType:UIButtonTypeCustom];
+    [button setFrame:self.chartContainer.frame];
+    [button setBackgroundImage:image forState:UIControlStateNormal];
+    button.tag=[self.widgetInfo.widgetId integerValue];
+    [button addTarget:self action:@selector(widgetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIView *chartView=self.chartContainer.subviews[0];
+    [chartView removeFromSuperview];
+    [self.chartContainer addSubview:button];
+}
+
+- (void)widgetButtonPressed:(UIButton *)button{
+    NSLog(@"click widget:%d",button.tag);
+}
 
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
 
 @end

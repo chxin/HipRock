@@ -10,6 +10,13 @@
 
 @implementation REMChartConfig
 +(REMChartConfig*)getMinimunWidgetDefaultSetting {
-    return [[self alloc]init];
+    REMChartConfig* config = [[self alloc]init];
+    config.userInteraction = NO;
+    return config;
+}
++(REMChartConfig*)getMaximunWidgetDefaultSetting {
+    REMChartConfig* config = [[self alloc]init];
+    config.userInteraction = YES;
+    return config;
 }
 @end

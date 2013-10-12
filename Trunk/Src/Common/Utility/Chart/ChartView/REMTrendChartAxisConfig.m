@@ -10,9 +10,8 @@
 
 @implementation REMTrendChartAxisConfig
 
--(id)initWithCoordinate:(CPTCoordinate)coordinate lineStyle:(CPTLineStyle*)lineStyle gridlineStyle:(CPTLineStyle*)gridlineStyle textStyle:(CPTTextStyle*)textStyle {
+-(id)initWithLineStyle:(CPTLineStyle*)lineStyle gridlineStyle:(CPTLineStyle*)gridlineStyle textStyle:(CPTTextStyle*)textStyle {
     self = [super init];
-    _coordinate = coordinate;
     _lineStyle = lineStyle;
     _textStyle = textStyle;
     _gridlineStyle = gridlineStyle;
@@ -21,23 +20,39 @@
     return self;
 }
 
-+(REMTrendChartAxisConfig*)getWidgetXConfig {
++(REMTrendChartAxisConfig*)getMinWidgetXConfig {
     CPTMutableLineStyle* lineStyle = [[CPTMutableLineStyle alloc]init];
     CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
     lineStyle.lineColor = [CPTColor whiteColor];
     lineStyle.lineWidth = 1.0;
     
     textStyle.fontName = @kBuildingFontSCRegular;
-    textStyle.fontSize = 16.0;
+    textStyle.fontSize = 10.0;
     textStyle.color = [CPTColor whiteColor];
     textStyle.textAlignment = CPTTextAlignmentCenter;
     
-    REMTrendChartAxisConfig* config = [[REMTrendChartAxisConfig alloc]initWithCoordinate:CPTCoordinateX lineStyle:lineStyle gridlineStyle:nil textStyle:textStyle];
+    REMTrendChartAxisConfig* config = [[REMTrendChartAxisConfig alloc]initWithLineStyle:lineStyle gridlineStyle:nil textStyle:textStyle];
     
     return config;
 }
 
-+(REMTrendChartAxisConfig*)getWidgetYConfig {
++(REMTrendChartAxisConfig*)getMinWidgetYConfig {
+    CPTMutableLineStyle* gridlineStyle = [[CPTMutableLineStyle alloc]init];
+    CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
+    gridlineStyle.lineColor = [CPTColor whiteColor];
+    gridlineStyle.lineWidth = 1.0;
+    
+    textStyle.fontName = @kBuildingFontSCRegular;
+    textStyle.fontSize = 10.0;
+    textStyle.color = [CPTColor whiteColor];
+    textStyle.textAlignment = CPTTextAlignmentCenter;
+    
+    REMTrendChartAxisConfig* config = [[REMTrendChartAxisConfig alloc]initWithLineStyle:nil gridlineStyle:gridlineStyle textStyle:textStyle];
+    
+    return config;
+}
+
++(REMTrendChartAxisConfig*)getMaxWidgetXConfig {
     CPTMutableLineStyle* gridlineStyle = [[CPTMutableLineStyle alloc]init];
     CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
     gridlineStyle.lineColor = [CPTColor whiteColor];
@@ -48,16 +63,24 @@
     textStyle.color = [CPTColor whiteColor];
     textStyle.textAlignment = CPTTextAlignmentCenter;
     
-    REMTrendChartAxisConfig* config = [[REMTrendChartAxisConfig alloc]initWithCoordinate:CPTCoordinateX lineStyle:nil gridlineStyle:gridlineStyle textStyle:textStyle];
+    REMTrendChartAxisConfig* config = [[REMTrendChartAxisConfig alloc]initWithLineStyle:nil gridlineStyle:gridlineStyle textStyle:textStyle];
     
     return config;
 }
 
-+(REMTrendChartAxisConfig*)getMaxWidgetXConfig {
-    return [REMTrendChartAxisConfig getWidgetXConfig];
-}
-
 +(REMTrendChartAxisConfig*)getMaxWidgetYConfig {
-    return [REMTrendChartAxisConfig getWidgetXConfig];
+    CPTMutableLineStyle* gridlineStyle = [[CPTMutableLineStyle alloc]init];
+    CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
+    gridlineStyle.lineColor = [CPTColor whiteColor];
+    gridlineStyle.lineWidth = 1.0;
+    
+    textStyle.fontName = @kBuildingFontSCRegular;
+    textStyle.fontSize = 16.0;
+    textStyle.color = [CPTColor whiteColor];
+    textStyle.textAlignment = CPTTextAlignmentCenter;
+    
+    REMTrendChartAxisConfig* config = [[REMTrendChartAxisConfig alloc]initWithLineStyle:nil gridlineStyle:gridlineStyle textStyle:textStyle];
+    
+    return config;
 }
 @end

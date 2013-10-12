@@ -16,10 +16,7 @@
 
 @property (nonatomic,weak) UILabel *timeLabel;
 
-@property (nonatomic,weak) UIView *chartContainer;
-
-
-- (void)initWidgetCell:(REMWidgetObject *)widgetInfo;
+- (void)initWidgetCell:(REMWidgetObject *)widgetInfo withGroupName:(NSString *)groupName;
 
 
 @end

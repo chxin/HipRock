@@ -7,13 +7,11 @@
 //
 
 #import "REMWidgetCollectionViewController.h"
-#import "REMEnergySeacherBase.h"
-#import "REMEnergyViewData.h"
-#import "REMLineWidgetWrapper.h"
+#import "REMWidgetMaxView.h"
 
 @interface REMWidgetCollectionViewController ()
 
-@property (nonatomic,strong) NSMutableDictionary *widgetLoadedStatus;
+
 
 @end
 
@@ -64,63 +62,23 @@ static NSString *cellId=@"widgetcell";
     
     REMWidgetObject *widget=self.widgetArray[indexPath.row];
     
-    if(self.widgetLoadedStatus==nil){
-        self.widgetLoadedStatus = [[NSMutableDictionary alloc]initWithCapacity:self.widgetArray.count];
-    }
-    
-    [cell initWidgetCell:widget ];
     
     
-    if(self.widgetLoadedStatus[widget.name] !=nil) return self.widgetLoadedStatus[widget.name];
+    [cell initWidgetCell:widget withGroupName:self.groupName];
+    UITapGestureRecognizer *tap= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onWidgetTap:)];
+    [cell addGestureRecognizer:tap];
     
-    REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:widget.contentSyntax.dataStoreType];
-    [searcher queryEnergyDataByStoreType:widget.contentSyntax.dataStoreType andParameters:widget.contentSyntax.params withMaserContainer:cell.chartContainer  andGroupName:self.groupName callback:^(REMEnergyViewData *data){
-        REMLineWidgetWrapper* lineWidget = [[REMLineWidgetWrapper alloc]initWithFrame:cell.chartContainer.bounds data:data widgetContext:widget.contentSyntax];
-        [cell.chartContainer addSubview:lineWidget.view];
-        [lineWidget destroyView];
-        self.widgetLoadedStatus[widget.name]=cell;
-        NSTimer *timer = [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(snapshotChartView:) userInfo:indexPath repeats:NO];
-        NSRunLoop *runner=[NSRunLoop currentRunLoop];
-        [runner addTimer:timer forMode:NSDefaultRunLoopMode];
-    }];
     
     
     return cell;
     
 }
-
-
-- (void)snapshotChartView:(NSTimer *)timer{
-    NSIndexPath *indexPath=timer.userInfo;
-    REMDashboardCollectionCellView *cell=(REMDashboardCollectionCellView *)[self collectionView:self.collectionView cellForItemAtIndexPath:indexPath];
-    //REMDashboardCollectionCellView *cell=timer.userInfo;
-    UIGraphicsBeginImageContextWithOptions(cell.chartContainer.frame.size, NO, 0.0);
-    [cell.chartContainer.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    //UIImageView *v = [[UIImageView alloc]initWithImage:image];
+-(void)onWidgetTap:(UITapGestureRecognizer *)sender {
+    REMDashboardCollectionCellView *cell = (REMDashboardCollectionCellView*)sender.view;
+    REMWidgetMaxView* maxView = [[REMWidgetMaxView alloc]initWithSuperView:self.view widgetCell:cell];
     
-    UIButton *button =[UIButton buttonWithType:UIButtonTypeCustom];
-    [button setFrame:CGRectMake(0, 0, cell.chartContainer.frame.size.width, cell.chartContainer.frame.size.height)];
-    [button setBackgroundImage:image forState:UIControlStateNormal];
-    button.tag= indexPath.row;
-    [button addTarget:self action:@selector(widgetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    if(cell.chartContainer.subviews.count>0){
-        UIView *chartView=cell.chartContainer.subviews[0];
-        [chartView removeFromSuperview];
-        [cell.chartContainer addSubview:button];
-    }
-    
+    [maxView show:YES];
 }
-
-- (void)widgetButtonPressed:(UIButton *)button{
-    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:button.tag inSection:0];
-    REMWidgetObject *widget=self.widgetArray[indexPath.row];
-    NSLog(@"click widget:%@",widget.name);
-}
-
-
-
 
 - (void)viewDidLoad
 {
