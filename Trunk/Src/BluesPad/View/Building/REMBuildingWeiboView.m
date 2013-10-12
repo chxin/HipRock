@@ -240,9 +240,16 @@ const NSInteger kWeiboMaxLength = 140;
 - (void)textViewDidChange:(UITextView *)theTextView {
     NSUInteger textLength = textView.text.length;
     [charactorLabel setText:[NSString stringWithFormat:@"%i", (kWeiboMaxLength-textLength)]];
-    if (sendBtn.enabled == (textLength >= kWeiboMaxLength)) {
-        sendBtn.enabled = !sendBtn.enabled;
-        [sendBtn setTitleColor:sendBtn.enabled ? buttonEnableTextColor : buttonDisableTextColor forState:UIControlStateNormal];
+    if (((textLength >= kWeiboMaxLength) || textLength == 0)) {
+        if (sendBtn.enabled) {
+            sendBtn.enabled = NO;
+            [sendBtn setTitleColor:buttonDisableTextColor forState:UIControlStateNormal];
+        }
+    } else {
+        if (!sendBtn.enabled) {
+            sendBtn.enabled = YES;
+            [sendBtn setTitleColor:buttonEnableTextColor forState:UIControlStateNormal];
+        }
     }
 }
 @end
