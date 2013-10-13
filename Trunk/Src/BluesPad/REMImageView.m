@@ -71,9 +71,12 @@
 - (void)moveOutOfWindow{
     @autoreleasepool {
 
-    [REMDataAccessor cancelAccess:self.loadingImageKey];
-    [self.dataView cancelAllRequest];
-    [self.dataView resetDefaultCommodity];
+        [REMDataAccessor cancelAccess:self.loadingImageKey];
+        self.loadingImage = NO;
+        NSLog(@"building %@ pic loading canceled", self.buildingInfo.building.name);
+        
+        [self.dataView cancelAllRequest];
+        [self.dataView resetDefaultCommodity];
     
     //[self.imageView removeFromSuperview];
     //[self.blurredImageView removeFromSuperview];
@@ -102,6 +105,7 @@
     self.hasLoadingChartData=NO;
     [self.bottomGradientLayer removeFromSuperlayer];
     self.customImageLoaded=NO;
+    self.loadingImage = NO;
     self.imageView.image=nil;
     self.imageView=nil;
     self.blurredImageView.image=nil;
@@ -205,16 +209,22 @@
 }
 
 - (void)loadingBuildingImage{
-    if(self.buildingInfo.building.pictureIds==nil ||
-       [self.buildingInfo.building.pictureIds isEqual:[NSNull null]] ||
-       self.buildingInfo.building.pictureIds.count==0){
-        
+    NSString *buildingName = self.buildingInfo.building.name;
+    NSLog(@"loading building '%@' image", buildingName);
+    NSArray *picIds = self.buildingInfo.building.pictureIds;
+    if(picIds==nil || [picIds isEqual:[NSNull null]] || picIds.count==0){
+        NSLog(@"building %@ no pic", buildingName);
         return;
     }
-    if(self.customImageLoaded==YES)return;
+    if(self.customImageLoaded==YES){
+        NSLog(@"building %@ pic loaded, return", buildingName);
+        return;
+    }
     
-    
-    if(self.loadingImage==YES)return;
+    if(self.loadingImage==YES){
+        NSLog(@"building %@ pic loading, return", buildingName);
+        return;
+    }
     
     NSDictionary *param=@{@"pictureId":self.buildingInfo.building.pictureIds[0]};
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param];
@@ -227,6 +237,9 @@
     if(self.isActive==NO)return;
     [REMDataAccessor access: store success:^(NSData *data){
         if(data == nil || [data length] == 2) return;
+        
+        NSLog(@"building %@ pic load sucess!", buildingName);
+        
         if(self.isActive==NO)return;
         self.customImageLoaded=YES;
         self.loadingImage=NO;
@@ -275,15 +288,6 @@
                 }];
 
             }
-
-        
-        
-        
-        
-        
-        
-        
-        
     }];
     
     return ;
