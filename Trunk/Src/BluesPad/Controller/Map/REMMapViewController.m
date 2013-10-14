@@ -36,8 +36,11 @@
     [super loadView];
 
     [self loadMapView];
-    [self.view addSubview: mapView];
-    [self.view sendSubviewToBack: mapView];
+    
+    if(mapView != nil){
+        [self.view addSubview: mapView];
+        [self.view sendSubviewToBack: mapView];
+    }
 }
 
 
@@ -50,6 +53,8 @@
     
     [self.view addSubview:self.customerLogoButton];
     [self.view.layer insertSublayer:self.titleGradientLayer above:mapView.layer];
+    
+    
 }
 
 -(void)showMarkers
@@ -184,36 +189,15 @@
     }
 }
 
--(void)oscarChartTest
+-(void)presentBuildingView:(BOOL)isInitial
 {
-    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
-    syntax.type = @"line";
-    syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
-
-    REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
-    NSMutableArray* sereis = [[NSMutableArray alloc]init];
-    for (int sIndex = 0; sIndex < 3; sIndex++) {
-        NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
-        for (int i = 0; i < 100; i++) {
-            REMEnergyData* data = [[REMEnergyData alloc]init];
-            data.quality = REMEnergyDataQualityGood;
-            data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
-            data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
-            [energyDataArray addObject:data];
-        }
-        REMTargetEnergyData* sData = [[REMTargetEnergyData alloc]init];
-        sData.energyData = energyDataArray;
-        [sereis addObject:sData];
-    }
-    energyViewData.targetEnergyData = sereis;
-
-    REMColumnWidgetWrapper* columnWidget = [[REMColumnWidgetWrapper alloc]initWithFrame:CGRectMake(0, 0, 500, 300) data:energyViewData widgetContext:syntax];
-    [self.view addSubview:columnWidget.view];
-    [columnWidget destroyView];
-    REMLineWidgetWrapper* lineWidget = [[REMLineWidgetWrapper alloc]initWithFrame:CGRectMake(600, 0, 500, 300) data:energyViewData widgetContext:syntax];
-    [self.view addSubview:lineWidget.view];
-    [lineWidget destroyView];
+    //if is initial
 }
+
+-(void)presentGallaryView
+{
+}
+
 
 #pragma mark GSMapView delegate
 

@@ -10,6 +10,9 @@
 
 @interface REMMapBuildingSegue : UIStoryboardSegue
 
+//This property demostrates whether building view is presenting for the first time after map view loaded
+@property (nonatomic) BOOL isInitialPresenting;
+
 @property (nonatomic) BOOL isUnWinding;
 
 @end

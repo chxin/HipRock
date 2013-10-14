@@ -30,7 +30,7 @@
         gallaryView.dataSource = self;
         gallaryView.delegate = self;
         [gallaryView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gallaryCellIdentifier"];
-        [gallaryView setBackgroundColor:[UIColor redColor]];
+        [gallaryView setBackgroundColor:[UIColor clearColor]];
         
         self.view = gallaryView;
     }
@@ -84,11 +84,13 @@
 
 -(void)switchButtonPressed
 {
-    self.view.frame = self.viewFrame;
+    //self.view.frame = self.viewFrame;
     [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionCurveLinear animations:^{
         self.view.frame = self.originalFrame;
     } completion:^(BOOL finished) {
         //[self addSwitchButton];
+        [self.view removeFromSuperview];
+        [self removeFromParentViewController];
         NSLog(@"%@",NSStringFromCGRect(self.view.bounds));
     }];
 }
@@ -112,7 +114,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(50, 50);
+    return CGSizeMake(200, 150);
 }
 
 @end
