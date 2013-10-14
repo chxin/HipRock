@@ -90,6 +90,12 @@
     [backBtn setTitle:@"Back" forState:UIControlStateNormal];
     [contentView addSubview:backBtn];
     [backBtn addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel* widgetTitle = [[UILabel alloc]initWithFrame:CGRectMake(90, 0, 300, 24)];
+    widgetTitle.text = self.widgetInfo.name;
+    [widgetTitle setTextColor:[UIColor whiteColor]];
+    widgetTitle.backgroundColor = [UIColor clearColor];
+    [contentView addSubview:widgetTitle];
 }
 
 - (void)backButtonPressed:(UIButton *)button {
