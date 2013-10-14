@@ -75,9 +75,11 @@ static NSString *cellId=@"widgetcell";
 }
 -(void)onWidgetTap:(UITapGestureRecognizer *)sender {
     REMDashboardCollectionCellView *cell = (REMDashboardCollectionCellView*)sender.view;
-    REMWidgetMaxView* maxView = [[REMWidgetMaxView alloc]initWithSuperView:self.view widgetCell:cell];
-    
-    [maxView show:YES];
+    if (cell.chartLoaded) {
+        REMWidgetMaxView* maxView = [[REMWidgetMaxView alloc]initWithSuperView:self.view widgetCell:cell];
+        
+        [maxView show:YES];
+    }
 }
 
 - (void)viewDidLoad

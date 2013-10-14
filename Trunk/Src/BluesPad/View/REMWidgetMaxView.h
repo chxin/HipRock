@@ -9,8 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "REMModalView.h"
 #import "REMDashboardCollectionCellView.h"
+#import "REMLineWidgetWrapper.h"
+#import "REMColumnWidgetWrapper.h"
+#import "REMPieChartWrapper.h"
 
 @interface REMWidgetMaxView : REMModalView
+
 @property (nonatomic, readonly) CGRect startFrame; // 最大化最小化动画的起止
+
+@property (nonatomic, readonly) REMWidgetObject *widgetInfo;
+
 -(REMModalView*)initWithSuperView:(UIView*)superView widgetCell:(REMDashboardCollectionCellView*)widgetCell;
+
 @end
