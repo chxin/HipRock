@@ -163,7 +163,9 @@
         yMajorInterval = ceil(yIntervalMag / mag * (self.horizentalGridLineAmount + 1)) * mag / (self.horizentalGridLineAmount + 1);
     } else {
         yMajorInterval = 1;
+        majorYMax = yMajorInterval * self.horizentalGridLineAmount;
     }
+    
     majorYAxis.majorIntervalLength = CPTDecimalFromFloat(yMajorInterval);
     float yMajorLength = majorYMax + yMajorInterval * 0.2;
     ((CPTXYPlotSpace*)(majorYAxis.plotSpace)).yRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(yMajorLength)];
