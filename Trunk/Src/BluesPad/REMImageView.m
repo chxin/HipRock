@@ -73,7 +73,7 @@
 
         [REMDataAccessor cancelAccess:self.loadingImageKey];
         self.loadingImage = NO;
-        NSLog(@"building %@ pic loading canceled", self.buildingInfo.building.name);
+        //NSLog(@"building %@ pic loading canceled", self.buildingInfo.building.name);
         
         [self.dataView cancelAllRequest];
         [self.dataView resetDefaultCommodity];
@@ -209,20 +209,20 @@
 }
 
 - (void)loadingBuildingImage{
-    NSString *buildingName = self.buildingInfo.building.name;
-    NSLog(@"loading building '%@' image", buildingName);
+    //NSString *buildingName = self.buildingInfo.building.name;
+    //NSLog(@"loading building '%@' image", buildingName);
     NSArray *picIds = self.buildingInfo.building.pictureIds;
     if(picIds==nil || [picIds isEqual:[NSNull null]] || picIds.count==0){
-        NSLog(@"building %@ no pic", buildingName);
+        //NSLog(@"building %@ no pic", buildingName);
         return;
     }
     if(self.customImageLoaded==YES){
-        NSLog(@"building %@ pic loaded, return", buildingName);
+        //NSLog(@"building %@ pic loaded, return", buildingName);
         return;
     }
     
     if(self.loadingImage==YES){
-        NSLog(@"building %@ pic loading, return", buildingName);
+        //NSLog(@"building %@ pic loading, return", buildingName);
         return;
     }
     
@@ -238,7 +238,7 @@
     [REMDataAccessor access: store success:^(NSData *data){
         if(data == nil || [data length] == 2) return;
         
-        NSLog(@"building %@ pic load sucess!", buildingName);
+        //NSLog(@"building %@ pic load sucess!", buildingName);
         
         if(self.isActive==NO)return;
         self.customImageLoaded=YES;
@@ -256,11 +256,11 @@
         //dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         //UIImage *image = self.defaultImage;
         //dispatch_async(concurrentQueue, ^{
-            @autoreleasepool {
-                
-                UIImage *view = [self getCachedImage:data];
-                newView.image=view;
-                UIImageView *newBlurred= [self blurredImageView:newView];
+        @autoreleasepool {
+            
+            UIImage *image = [self getCachedImage:data];
+            newView.image=image;
+            UIImageView *newBlurred= [self blurredImageView:newView];
             
             
             //dispatch_async(dispatch_get_main_queue(), ^{
@@ -536,7 +536,8 @@
     
     //dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     //dispatch_async(concurrentQueue, ^{
-        UIImage *view = [REMImageHelper blurImage:imageView.image];
+    //UIImage *view = [REMImageHelper blurImage:imageView.image];
+    UIImage *view = [REMImageHelper blurImage:imageView.image];
    //     dispatch_async(dispatch_get_main_queue(), ^{
     if(view!=nil){
             blurred.image=view;
