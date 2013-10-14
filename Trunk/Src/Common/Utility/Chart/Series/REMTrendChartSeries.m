@@ -19,8 +19,8 @@
         _startDate = startDate;
         _step = step;
         _yAxisIndex = yAxisIndex;
-        _minX = [processor processX:[energyData objectAtIndex:0] startDate:startDate step:step].floatValue;
-        _maxX = [processor processX:[energyData objectAtIndex:(energyData.count-1)] startDate:startDate step:step].floatValue;
+        _minX = [processor processX:[[energyData objectAtIndex:0] localTime] startDate:startDate step:step].floatValue;
+        _maxX = [processor processX:[[energyData objectAtIndex:(energyData.count-1)] localTime] startDate:startDate step:step].floatValue;
     }
     return self;
 }

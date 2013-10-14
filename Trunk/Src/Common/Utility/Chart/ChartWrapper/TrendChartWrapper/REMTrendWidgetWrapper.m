@@ -47,14 +47,26 @@
     }
     chartConfig.series = seriesArray;
     
-    if (energyViewData.targetGlobalData != nil && energyViewData.targetGlobalData.energyData != nil && energyViewData.targetGlobalData.energyData.count > 0) {
-        REMEnergyData* globalEndPoint = [energyViewData.targetGlobalData.energyData objectAtIndex:energyViewData.targetGlobalData.energyData.count-1];
-        REMEnergyData* globalStartPoint = [energyViewData.targetGlobalData.energyData objectAtIndex:0];
-        
-        chartConfig.xGlobalLength = [self.dataProcessor processX:globalEndPoint startDate:globalStartPoint.localTime step:widgetSyntax.step.intValue];
-    }
-    
-    return  [[REMTrendChartView alloc]initWithFrame:frame chartConfig:chartConfig];
+    REMTrendChartView* myView = [[REMTrendChartView alloc]initWithFrame:frame chartConfig:chartConfig];
+    NSDate* globalEnd, *globalStart;
+//    if (energyViewData.targetGlobalData != nil && energyViewData.targetGlobalData.energyData != nil && energyViewData.targetGlobalData.energyData.count > 0) {
+//        globalEnd = [[energyViewData.targetGlobalData.energyData objectAtIndex:energyViewData.targetGlobalData.energyData.count-1] localTime];
+//        globalStart = [[energyViewData.targetGlobalData.energyData objectAtIndex:0] localTime];
+//    } else {
+//        REMTargetEnergyData* theFirstSeries =(REMTargetEnergyData*)[energyViewData.targetEnergyData objectAtIndex:0];
+//        globalEnd = [theFirstSeries.energyData objectAtIndex:theFirstSeries.energyData.count-1];
+//        globalStart = [theFirstSeries.energyData objectAtIndex:0];
+//    }
+    REMTimeRange* theFirstTimeRange = [widgetSyntax.timeRanges objectAtIndex:0];
+    globalStart = theFirstTimeRange.startTime;
+    globalEnd = theFirstTimeRange.endTime;
+    NSDate* syntaxStartDate = theFirstTimeRange.startTime;
+    NSDate* syntaxEndDate = theFirstTimeRange.endTime;
+    chartConfig.xGlobalLength = [self.dataProcessor processX:globalEnd startDate:globalStart step:widgetSyntax.step.intValue];
+    float rangeStart =[self.dataProcessor processX:syntaxStartDate startDate:globalStart step:widgetSyntax.step.intValue].floatValue;
+    float rangeEnd = [self.dataProcessor processX:syntaxEndDate startDate:globalStart step:widgetSyntax.step.intValue].floatValue;
+    [myView renderRange: rangeStart length:rangeEnd-rangeStart];
+    return  myView;
 }
 
 -(REMTrendChartSeries*) getSeriesConfigByData:(REMTargetEnergyData*)energyData step:(REMEnergyStep)step yAxisIndex:(uint)yAxisIndex seriesIndex:(uint)seriesIndex {

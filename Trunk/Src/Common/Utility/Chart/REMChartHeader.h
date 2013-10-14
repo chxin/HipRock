@@ -42,8 +42,8 @@ typedef enum  {
 
 
 @interface REMChartDataProcessor : NSObject
--(NSNumber*)processX:(REMEnergyData*)point startDate:(NSDate*)startDate step:(REMEnergyStep)step;
--(NSNumber*)processY:(REMEnergyData*)point startDate:(NSDate*)startDate step:(REMEnergyStep)step;
+-(NSNumber*)processX:(NSDate*)xLocalTime startDate:(NSDate*)startDate step:(REMEnergyStep)step;
+-(NSNumber*)processY:(NSNumber*)yVal startDate:(NSDate*)startDate step:(REMEnergyStep)step;
 -(NSDate*)deprocessX:(float)x startDate:(NSDate*)startDate step:(REMEnergyStep)step;
 @end
 
@@ -113,7 +113,7 @@ typedef enum  {
 @end
 
 @interface REMXFormatter : NSFormatter
--(REMXFormatter*)initWithStartDate:(NSDate*)startDate dataStep:(REMEnergyStep)step interval:(int)interval;
+-(REMXFormatter*)initWithStartDate:(NSDate*)startDate dataStep:(REMEnergyStep)step interval:(int)interval length:(float)length;
 @property (nonatomic, readonly) NSDate* startDate;
 @property (nonatomic, readonly) REMEnergyStep step;
 @property (nonatomic, readonly) int interval;
@@ -208,6 +208,9 @@ typedef enum  {
  * X轴的最大区间长度，也就是Navigation的长度。如果没有指定，则采用配置的Series的最大的X。
  */
 @property (nonatomic, readonly) NSNumber* xGlobalLength;
+
+-(void)renderRange:(float)location length:(float)length;
+
 @end
 
 @interface REMPieChartView : CPTGraphHostingView<CPTPlotSpaceDelegate,REMChartView>

@@ -84,9 +84,9 @@
 {
     REMEnergyData* point = [self.energyData objectAtIndex:idx];
     if (fieldEnum == CPTScatterPlotFieldX) {
-        return [self.dataProcessor processX:point startDate:self.startDate step:self.step];
+        return [self.dataProcessor processX:point.localTime startDate:self.startDate step:self.step];
     } else if (fieldEnum == CPTScatterPlotFieldY) {
-        return [self.dataProcessor processY:point startDate:self.startDate step:self.step];
+        return [self.dataProcessor processY:point.dataValue startDate:self.startDate step:self.step];
     } else {
         return nil;
     }
