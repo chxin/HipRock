@@ -9,17 +9,13 @@
 #import "REMDashboardCollectionCellView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMEnergySeacherBase.h"
-#import "REMEnergyViewData.h"
 #import "REMLineWidgetWrapper.h"
+#import "REMColumnWidgetWrapper.h"
+#import "REMPieChartWrapper.h"
 
 @interface REMDashboardCollectionCellView ()
 
 @property (nonatomic,weak) UIView *chartContainer;
-
-@property (nonatomic,weak) REMWidgetObject *widgetInfo;
-
-@property (nonatomic) BOOL chartLoaded;
-
 
 @end
 
@@ -46,7 +42,7 @@
 {
     
     if(self.chartContainer==nil){
-        self.widgetInfo=widgetInfo;
+        _widgetInfo=widgetInfo;
         UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 20)];
         title.backgroundColor=[UIColor clearColor];
         title.textColor=[UIColor whiteColor];
@@ -79,10 +75,20 @@
     if(self.chartLoaded==YES)return;
     REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType];
     [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:syntax.params withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data){
+        self.chartData = data;
         self.chartLoaded=YES;
-        REMLineWidgetWrapper* lineWidget = [[REMLineWidgetWrapper alloc]initWithFrame:self.chartContainer.bounds data:data widgetContext:syntax];
-        [self.chartContainer addSubview:lineWidget.view];
-        [lineWidget destroyView];
+        REMWidgetWrapper* widget = nil;
+        if ([syntax.type isEqualToString:@"line"]) {
+            widget = [[REMLineWidgetWrapper alloc]initWithFrame:self.chartContainer.bounds data:data widgetContext:syntax];
+        } else if ([syntax.type isEqualToString:@"column"]) {
+            widget = [[REMColumnWidgetWrapper alloc]initWithFrame:self.chartContainer.bounds data:data widgetContext:syntax];
+        } else if ([syntax.type isEqualToString:@"pie"]) {
+            widget = [[REMPieChartWrapper alloc]initWithFrame:self.chartContainer.bounds data:data widgetContext:syntax];
+        }
+        if (widget != nil) {
+            [self.chartContainer addSubview:widget.view];
+            [widget destroyView];
+        }
         //[self snapshotChartView];
     }];
 }
