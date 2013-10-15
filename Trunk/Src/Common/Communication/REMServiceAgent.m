@@ -78,7 +78,12 @@ static int requestTimeout = 45; //(s)
     
     void (^onSuccess)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        NSLog(@"%@", operation.responseString);
+#ifdef DEBUG
+//        if(service.responseType == REMServiceResponseJson)
+//            NSLog(@"url:%@\nresponse string:%@", [operation.request.URL description], operation.responseString);
+//        else
+//            NSLog(@"url:%@\nresponse data:%d bytes", [operation.request.URL description], [operation.responseData length]);
+#endif
         
         //if there is error message
         if([operation.responseString hasPrefix:@"{\"error\":"] == YES){
@@ -185,7 +190,10 @@ static int requestTimeout = 45; //(s)
         [REMServiceAgent initializeQueue];
     }
     
-    NSLog(@"request: %@",[request.URL description]);
+#ifdef DEBUG
+//    NSLog(@"request: %@",[request.URL description]);
+#endif
+    
     [queue addOperation:serviceOperation];
     NetworkIncreaseActivity();
 }
