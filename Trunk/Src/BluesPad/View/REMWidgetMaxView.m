@@ -32,18 +32,17 @@
 }
 
 - (void)close:(BOOL)fadeOut {
+    [widgetWrapper destroyView];
     if (fadeOut) {
         [UIView animateWithDuration:0.4f animations:^() {
             self.alpha = 0;
             contentView.frame = self.startFrame;
         } completion:^(BOOL finished) {
             if (finished) {
-                [widgetWrapper destroyView];
                 [self removeFromSuperview];
             }
         }];
     } else {
-        [widgetWrapper destroyView];
         [super close:fadeOut];
     }
 }

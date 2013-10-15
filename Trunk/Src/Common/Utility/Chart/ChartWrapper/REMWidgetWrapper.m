@@ -18,4 +18,23 @@
     self = [super initWithFrame:frame data:energyViewData widgetContext:widgetSyntax];
     return self;
 }
+-(void)destroyView {
+    CPTGraphHostingView *hostView=(CPTGraphHostingView*)self.view;
+    [hostView.hostedGraph removeAllAnimations];
+    [hostView.hostedGraph removeAllAnnotations];
+    for (CPTAxis *axis in hostView.hostedGraph.axisSet.axes) {
+        axis.majorTickLocations=nil;
+        axis.minorTickAxisLabels=nil;
+        [axis removeFromSuperlayer];
+    }
+    [hostView.hostedGraph.axisSet removeFromSuperlayer];
+    hostView.hostedGraph.axisSet.axes=nil;
+    
+    [hostView.hostedGraph.plotAreaFrame removeFromSuperlayer];
+    [hostView.hostedGraph removeFromSuperlayer];
+    hostView.hostedGraph=nil;
+    [hostView removeFromSuperview];
+    hostView = nil;
+    [super destroyView];
+}
 @end

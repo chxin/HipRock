@@ -288,11 +288,11 @@ static NSNumberFormatter* formatter;
 }
 
 -(void)purgeMemory{
-    axisLineStyle=nil;
-    gridLineStyle=nil;
-    hiddenLineStyle=nil;
-    xAxisLabelStyle=nil;
-    yAxisLabelStyle=nil;
+//    axisLineStyle=nil;
+//    gridLineStyle=nil;
+//    hiddenLineStyle=nil;
+//    xAxisLabelStyle=nil;
+//    yAxisLabelStyle=nil;
     CPTGraphHostingView *hostView=[self getHostView];
     [hostView.hostedGraph removeAllAnimations];
     [hostView.hostedGraph removeAllAnnotations];
@@ -308,7 +308,9 @@ static NSNumberFormatter* formatter;
     [hostView.hostedGraph removeFromSuperlayer];
     hostView.hostedGraph=nil;
     [hostView removeFromSuperview];
+    hostView = nil;
     [self.view removeFromSuperview];
+    self.view = nil;
 }
 
 
