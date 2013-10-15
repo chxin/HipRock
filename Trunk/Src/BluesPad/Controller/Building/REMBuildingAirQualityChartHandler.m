@@ -536,21 +536,17 @@ static NSDictionary *codeNameMap;
 #pragma mark - data source delegate
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
-    NSUInteger records;
-    
     CPTBarPlot *line = (CPTBarPlot *)plot;
     for (NSDictionary *series in self.chartData)
     {
         if([line.identifier isEqual:[series objectForKey:@"identity" ]] == YES)
         {
-            records = [[series objectForKey:@"data"] count];
-            break;
+            return [[series objectForKey:@"data"] count];
         }
     }
     
     //NSLog(@"line %@ has %d records.",line.identifier, records);
-    
-    return records;
+    return 0;
 }
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
