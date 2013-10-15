@@ -312,19 +312,17 @@
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(minY) length:CPTDecimalFromFloat(yRangeLength)];
     x.axisLabels = [NSSet setWithArray:xLabelLocations];
     x.majorTickLocations=[NSSet setWithArray:xtickLocations];
-//    x.majorIntervalLength = CPTDecimalFromInt(xStep);
     
     y.axisLabels = [NSSet setWithArray:ylocations];
     y.majorTickLocations=[NSSet setWithArray:ytickLocations];
-//    y.majorIntervalLength = CPTDecimalFromFloat((maxY - minY) / 5);
     
     CPTScatterPlot* scatterPlot = nil;
     while (self.graph.allPlots.count > 0) {
         CPTPlot* p = [myView.hostView.hostedGraph plotAtIndex:0];
         [myView.hostView.hostedGraph removePlot:p];
     }
-    for (UIView* legend in myView.legendView.subviews) {
-        [legend removeFromSuperview];
+    while (myView.legendView.subviews.count != 0) {
+        [((UIView*)[myView.legendView.subviews objectAtIndex:0]) removeFromSuperview];
     }
     CGFloat legendLeft = 57;
     CGFloat labelDistance = 18;
