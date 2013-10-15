@@ -11,6 +11,7 @@
 @implementation REMWidgetMaxView {
     UIView* contentView;
     REMEnergyViewData *chartData;
+    REMWidgetWrapper* widgetWrapper;
 }
 
 - (REMModalView*)initWithSuperView:(UIView*)superView widgetCell:(REMDashboardCollectionCellView*)widgetCell
@@ -37,13 +38,16 @@
             contentView.frame = self.startFrame;
         } completion:^(BOOL finished) {
             if (finished) {
+                [widgetWrapper destroyView];
                 [self removeFromSuperview];
             }
         }];
     } else {
+        [widgetWrapper destroyView];
         [super close:fadeOut];
     }
 }
+
 - (void)show:(BOOL)fadeIn {
     [super show:NO];
     if (fadeIn) {
@@ -65,18 +69,17 @@
     
     CGRect widgetRect = CGRectMake(0, 24, 1024, 724);
     NSString* widgetType = self.widgetInfo.contentSyntax.type;
-    REMWidgetWrapper* widget = nil;
     
     if ([widgetType isEqualToString:@"line"]) {
-        widget = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
+        widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
     } else if ([widgetType isEqualToString:@"column"]) {
-        widget = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
+        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
     } else if ([widgetType isEqualToString:@"pie"]) {
-        widget = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
+        widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
     }
-    if (widget != nil) {
-        [contentView addSubview:widget.view];
-        [widget destroyView];
+    if (widgetWrapper != nil) {
+        [contentView addSubview:widgetWrapper.view];
+//        [widget destroyView];
     }
 }
 

@@ -87,7 +87,7 @@
         }
         if (widget != nil) {
             [self.chartContainer addSubview:widget.view];
-            [widget destroyView];
+//            [widget destroyView];
         }
         //[self snapshotChartView];
     }];
