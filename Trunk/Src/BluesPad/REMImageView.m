@@ -621,6 +621,7 @@
     if(decelerate == NO){
         [self roundPositionWhenDrag:scrollView];
         [self.dataView replaceImagesShowReal:YES];
+        [self checkIfRequestChartData:scrollView];
     }
     
 }
