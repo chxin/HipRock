@@ -10,7 +10,15 @@
 
 @implementation REMPieChartWrapper
 -(REMPieChartView*)renderContentView:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {
-    REMChartConfig* chartConfig = [REMChartConfig getMinimunWidgetDefaultSetting];
+    REMChartConfig* chartConfig = nil;
+    float animationDuration = 0;
+    if (self.status == REMWidgetStatusMinimized) {
+        chartConfig = [REMChartConfig getMinimunWidgetDefaultSetting];
+        animationDuration = 0.3;
+    } else {
+        chartConfig = [REMChartConfig getMaximunWidgetDefaultSetting];
+        animationDuration = 0.05;
+    }
     NSMutableArray* seriesArray = [[NSMutableArray alloc]init];
     
     NSMutableArray* series0Data = [[NSMutableArray alloc]init];
@@ -22,7 +30,9 @@
             [series0Data addObjectsFromArray:seriesData.energyData];
         }
     }
-    [seriesArray addObject: [[REMPieChartSeries alloc]initWithData:series0Data dataProcessor:self.dataProcessor plotStyle:nil]];
+    REMPieChartSeries* s =[[REMPieChartSeries alloc]initWithData:series0Data dataProcessor:self.dataProcessor plotStyle:nil];
+    s.animationDuration = animationDuration;
+    [seriesArray addObject: s];
     
     chartConfig.series = seriesArray;
     return  [[REMPieChartView alloc]initWithFrame:frame chartConfig:chartConfig];
