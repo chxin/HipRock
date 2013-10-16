@@ -27,6 +27,7 @@
 
 static NSOperationQueue *queue = nil;
 static int maxQueueLength = 5;
+#define kREMLogResquest 1 //0:no log, 1:log partial, 2: log full
 
 #ifdef DEBUG
 static int requestTimeout = 1000; //(s)
@@ -81,8 +82,14 @@ static int requestTimeout = 45; //(s)
     
     void (^onSuccess)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        if(service.responseType == REMServiceResponseJson)
-            NSLog(@"%@", operation.responseString);
+#ifdef DEBUG
+        if(kREMLogResquest !=0 ){
+            if(service.responseType == REMServiceResponseJson)
+                NSLog(@"REM-RESPONSE json: %@", kREMLogResquest == 2 ? operation.responseString : [NSString stringWithFormat:@"%@..",[operation.responseString substringToIndex:48]]);
+            else
+                NSLog(@"REM-RESPONSE data: %d bytes", [operation.responseData length]);
+        }
+#endif
         
         //if there is error message
         if([operation.responseString hasPrefix:@"{\"error\":"] == YES){
@@ -173,7 +180,7 @@ static int requestTimeout = 45; //(s)
     
     [serviceOperation setCompletionBlockWithSuccess:onSuccess failure:onFailure];
     [serviceOperation setDownloadProgressBlock:onProgress];
-    serviceOperation.maskManager=maskManager;
+    [serviceOperation setMaskManager:maskManager];
     if(groupName!=nil && [groupName isEqual:[NSNull null]]==NO && [groupName isEqualToString:@""] == NO)
     {
         serviceOperation.groupName = groupName;
@@ -184,7 +191,13 @@ static int requestTimeout = 45; //(s)
         [REMServiceAgent initializeQueue];
     }
     
-    NSLog(@"request: %@",[request.URL description]);
+//log the request
+#ifdef DEBUG
+    if(kREMLogResquest != 0){
+        NSLog(@"REM-REQUEST: %@", service.url);
+    }
+#endif
+    
     [queue addOperation:serviceOperation];
     
     NetworkIncreaseActivity();
@@ -329,12 +342,12 @@ static int requestTimeout = 45; //(s)
 {
     REMApplicationContext* context = [REMApplicationContext instance];
     NSString *original = [NSString stringWithFormat:@"%lld|%@|%lld",context.currentUser.userId,context.currentUser.name, context.currentUser.spId];
-    NSLog(@"%@",original);
+    //NSLog(@"%@",original);
     
     NSData *encryptedData = [REMEncryptHelper AES256EncryptData:[original dataUsingEncoding:NSUTF8StringEncoding] withKey:@"41758bd9d7294737"];
     
     NSString *base64Encoded = [REMEncryptHelper encodeBase64Data:encryptedData];
-    NSLog(@"%@",base64Encoded);
+    //NSLog(@"%@",base64Encoded);
     return base64Encoded;
 }
 
