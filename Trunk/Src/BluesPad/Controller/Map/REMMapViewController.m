@@ -51,17 +51,17 @@ static BOOL isFirstPresenting = YES;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    if(isFirstPresenting == YES){
-        [self presentBuildingView];
-        
-        isFirstPresenting = NO;
-    }
-    else{
+//    if(isFirstPresenting == YES){
+//        [self presentBuildingView];
+//        
+//        isFirstPresenting = NO;
+//    }
+//    else{
         [self showMarkers];
         
         [self.view addSubview:self.customerLogoButton];
         [self.view.layer insertSublayer:self.titleGradientLayer above:mapView.layer];
-    }
+//    }
     
     
 }
@@ -169,15 +169,7 @@ static BOOL isFirstPresenting = YES;
 
 - (IBAction)gallarySwitchButtonPressed:(id)sender
 {
-    if(self.gallaryViewController == nil){
-        self.gallaryViewController = [[REMGallaryViewController alloc] init];
-    }
-    
-    self.gallaryViewController.originalFrame = self.gallarySwitchButton.frame;
-    self.gallaryViewController.viewFrame = self.view.bounds;
-    
-    [self addChildViewController:self.gallaryViewController];
-    [self.view addSubview:self.gallaryViewController.view];
+    [self presentGallaryView];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -188,7 +180,7 @@ static BOOL isFirstPresenting = YES;
         customeSegue.isInitialPresenting = isFirstPresenting;
         
         CGPoint markerPoint = [mapView.projection pointForCoordinate:self.pressedMarker.position];
-        self.originalPoint = CGPointMake(markerPoint.x,markerPoint.y-40);
+        self.originalPoint = CGPointMake(markerPoint.x, markerPoint.y-40);
         self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
         
         REMBuildingViewController *buildingViewController = customeSegue.destinationViewController;
@@ -202,12 +194,20 @@ static BOOL isFirstPresenting = YES;
 -(void)presentBuildingView
 {
     //if is initial
-    
     [self performSegueWithIdentifier:kSegue_MapToBuilding sender:self];
 }
 
 -(void)presentGallaryView
 {
+    if(self.gallaryViewController == nil){
+        self.gallaryViewController = [[REMGallaryViewController alloc] init];
+    }
+    
+    self.gallaryViewController.originalFrame = self.gallarySwitchButton.frame;
+    self.gallaryViewController.viewFrame = self.view.bounds;
+    
+    [self addChildViewController:self.gallaryViewController];
+    [self.view addSubview:self.gallaryViewController.view];
 }
 
 

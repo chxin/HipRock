@@ -30,6 +30,7 @@
 
 - (void)perform
 {
+    NSLog(@"is first presenting: %d",self.isInitialPresenting);
     REMMapViewController *mapViewController = self.isUnWinding == YES ? self.destinationViewController : self.sourceViewController;
     REMBuildingViewController *buildingViewController = self.isUnWinding == YES ? self.sourceViewController : self.destinationViewController;
     
