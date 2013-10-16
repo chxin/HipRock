@@ -11,7 +11,8 @@
 @implementation REMTrendChartSeries
 
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataStep:(REMEnergyStep)step {
-    return [self initWithData:energyData dataProcessor:processor plotStyle:plotStyle yAxisIndex:yAxisIndex dataStep:step startDate:((REMEnergyData*)[energyData objectAtIndex:0]).localTime];
+    NSDate* startDate = energyData.count > 0 ? ((REMEnergyData*)[energyData objectAtIndex:0]).localTime : [NSDate date];
+    return [self initWithData:energyData dataProcessor:processor plotStyle:plotStyle yAxisIndex:yAxisIndex dataStep:step startDate:startDate];
 }
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataStep:(REMEnergyStep)step startDate:(NSDate*)startDate {
     self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle];
@@ -19,8 +20,13 @@
         _startDate = startDate;
         _step = step;
         _yAxisIndex = yAxisIndex;
-        _minX = [processor processX:[[energyData objectAtIndex:0] localTime] startDate:startDate step:step].floatValue;
-        _maxX = [processor processX:[[energyData objectAtIndex:(energyData.count-1)] localTime] startDate:startDate step:step].floatValue;
+        if (energyData.count == 0) {
+            _maxX = 0;
+            _minX = 0;
+        } else {
+            _minX = [processor processX:[[energyData objectAtIndex:0] localTime] startDate:startDate step:step].floatValue;
+            _maxX = [processor processX:[[energyData objectAtIndex:(energyData.count-1)] localTime] startDate:startDate step:step].floatValue;
+        }
     }
     return self;
 }
