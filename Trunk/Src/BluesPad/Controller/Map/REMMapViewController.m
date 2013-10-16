@@ -51,19 +51,20 @@ static BOOL isFirstPresenting = YES;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-//    if(isFirstPresenting == YES){
-//        [self presentBuildingView];
-//        
-//        isFirstPresenting = NO;
-//    }
-//    else{
-        [self showMarkers];
-        
-        [self.view addSubview:self.customerLogoButton];
-        [self.view.layer insertSublayer:self.titleGradientLayer above:mapView.layer];
-//    }
+    [self showMarkers];
     
     
+    [self.view addSubview:self.customerLogoButton];
+    [self.view.layer insertSublayer:self.titleGradientLayer above:mapView.layer];
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"map:%@",NSStringFromCGPoint(self.originalPoint));
+    if(isFirstPresenting == YES){
+        [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
+    }
 }
 
 -(void)showMarkers
@@ -179,8 +180,14 @@ static BOOL isFirstPresenting = YES;
         REMMapBuildingSegue *customeSegue = (REMMapBuildingSegue *)segue;
         customeSegue.isInitialPresenting = isFirstPresenting;
         
-        CGPoint markerPoint = [mapView.projection pointForCoordinate:self.pressedMarker.position];
-        self.originalPoint = CGPointMake(markerPoint.x, markerPoint.y-40);
+        if(self.pressedMarker != nil){
+            CGPoint markerPoint = [mapView.projection pointForCoordinate:self.pressedMarker.position];
+            self.originalPoint = CGPointMake(markerPoint.x, markerPoint.y-40);
+        }
+        else{
+            self.originalPoint = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2);
+        }
+        
         self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
         
         REMBuildingViewController *buildingViewController = customeSegue.destinationViewController;
@@ -193,8 +200,11 @@ static BOOL isFirstPresenting = YES;
 
 -(void)presentBuildingView
 {
-    //if is initial
     [self performSegueWithIdentifier:kSegue_MapToBuilding sender:self];
+    
+    //if is initial, shut off
+    if(isFirstPresenting == YES)
+        isFirstPresenting = NO;
 }
 
 -(void)presentGallaryView
