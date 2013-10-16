@@ -10,14 +10,14 @@
 
 @implementation REMChartDataProcessor
 
--(NSNumber*)processX:(REMEnergyData*)point startDate:(NSDate*)startDate step:(REMEnergyStep)step {
-    return [NSNumber numberWithInt: [point.localTime timeIntervalSince1970]];
+-(NSNumber*)processX:(NSDate*)xLocalTime startDate:(NSDate*)startDate step:(REMEnergyStep)step {
+    return [NSNumber numberWithInt: [xLocalTime timeIntervalSince1970]];
 }
 -(NSDate*)deprocessX:(float)x startDate:(NSDate*)startDate step:(REMEnergyStep)step {
     return [NSDate dateWithTimeIntervalSince1970:x];
 }
--(NSNumber*)processY:(REMEnergyData*)point startDate:(NSDate*)startDate step:(REMEnergyStep)step {
-    return point.dataValue;
+-(NSNumber*)processY:(NSNumber*)yVal startDate:(NSDate*)startDate step:(REMEnergyStep)step {
+    return yVal;
 }
 
 

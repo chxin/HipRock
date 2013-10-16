@@ -10,10 +10,12 @@
 
 @implementation REMXFormatter {
     NSDateFormatter *dateFormatter;
+    float xLength;
 }
--(REMXFormatter*)initWithStartDate:(NSDate*)startDate dataStep:(REMEnergyStep)step interval:(int)interval {
+-(REMXFormatter*)initWithStartDate:(NSDate*)startDate dataStep:(REMEnergyStep)step interval:(int)interval length:(float)length {
     self = [super init];
     if (self) {
+        xLength = length;
         _startDate = startDate;
         _interval = interval;
         _step = step;
@@ -24,7 +26,7 @@
 - (NSString *)stringForObjectValue:(id)obj {
     //    return ((NSNumber*)obj).stringValue;
     int xVal = ((NSNumber*)obj).integerValue;
-    if (xVal % self.interval == 0) {
+    if (xVal % self.interval == 0 && xVal >= 0 && xVal <= xLength) {
         NSDate* date = nil;
         if (self.step == REMEnergyStepHour) {
             date = [self.startDate dateByAddingTimeInterval:xVal*3600];

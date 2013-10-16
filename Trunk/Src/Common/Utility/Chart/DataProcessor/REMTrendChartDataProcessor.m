@@ -11,14 +11,14 @@
 
 @implementation REMTrendChartDataProcessor
 
--(NSNumber*)processX:(REMEnergyData*)point startDate:(NSDate*)startDate step:(REMEnergyStep)step  {
+-(NSNumber*)processX:(NSDate*)xLocalTime startDate:(NSDate*)startDate step:(REMEnergyStep)step  {
     float x = 0;
     if (step == REMEnergyStepHour || step == REMEnergyStepDay || step == REMEnergyStepWeek) {
-        x = [point.localTime timeIntervalSinceDate:startDate] / (step == REMEnergyStepHour ? 3600 : (step == REMEnergyStepDay ? 86400 : 604800));
+        x = [xLocalTime timeIntervalSinceDate:startDate] / (step == REMEnergyStepHour ? 3600 : (step == REMEnergyStepDay ? 86400 : 604800));
     } else if (step == REMEnergyStepYear) {
-        x = [REMTimeHelper getYear:point.localTime] - [REMTimeHelper getYear:startDate];
+        x = [REMTimeHelper getYear:xLocalTime] - [REMTimeHelper getYear:startDate];
     } else {
-        x = ([REMTimeHelper getYear:point.localTime] - [REMTimeHelper getYear:startDate]) * 12 + [REMTimeHelper getMonth:point.localTime] - [REMTimeHelper getMonth:startDate];
+        x = ([REMTimeHelper getYear:xLocalTime] - [REMTimeHelper getYear:startDate]) * 12 + [REMTimeHelper getMonth:xLocalTime] - [REMTimeHelper getMonth:startDate];
     }
     return [NSNumber numberWithFloat:x];
 }

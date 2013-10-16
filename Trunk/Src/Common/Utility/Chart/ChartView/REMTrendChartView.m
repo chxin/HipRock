@@ -13,7 +13,7 @@
     float currentXLocation;
     float currentXLength;
     
-    BOOL needRerenderXInterval;
+    BOOL isTheFirstRender;
     float xStableStartPoint; // 弹性稳定区域的x轴起点
     float xStableEndPoint;   // 弹性稳定区域的x轴终点
     float xUnstableStartPoint; // 弹性区域不稳定的x轴起点
@@ -28,7 +28,7 @@
         self.allowPinchScaling = NO;
         self.userInteractionEnabled = config.userInteraction;
         maxXValOfSeries = INT32_MIN;
-        needRerenderXInterval = YES;
+        isTheFirstRender = YES;
         
         _step = config.step;
         _verticalGridLine = config.verticalGridLine;
@@ -54,7 +54,6 @@
         
         [self initAxisSet];
         [self renderSeries];
-        [self renderRange:0 length:12];
     }
     return self;
 }
@@ -89,9 +88,9 @@
     
     [self rerenderYLabel];
     
-    if (needRerenderXInterval == YES) {
+    if (isTheFirstRender == YES) {
         [self rerenderXLabel];
-        needRerenderXInterval = NO;
+        isTheFirstRender = NO;
     }
 }
 
@@ -105,7 +104,7 @@
     }
     ((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:1]).orthogonalCoordinateDecimal = [NSNumber numberWithFloat:currentXLocation].decimalValue;
     int xLabelInterval = [self getXInterval];
-    REMXFormatter* formatter = [[REMXFormatter alloc]initWithStartDate:self.xStartDate dataStep:self.step interval:xLabelInterval];
+    REMXFormatter* formatter = [[REMXFormatter alloc]initWithStartDate:self.xStartDate dataStep:self.step interval:xLabelInterval length:[NSDecimalNumber decimalNumberWithDecimal:((CPTXYPlotSpace*)xAxis.plotSpace).globalXRange.length].floatValue];
     xAxis.labelFormatter = formatter;
     if (self.verticalGridLine) {
         xAxis.majorIntervalLength = [[NSNumber numberWithInt:1] decimalValue];
@@ -128,7 +127,7 @@
             REMEnergyData* point = [s.energyData objectAtIndex:j];
             if ([point.localTime timeIntervalSinceDate:xStartDate] < 0) continue;
             if ([point.localTime timeIntervalSinceDate:xEndDate] > 0) break;
-            NSNumber* yVal = [s.dataProcessor processY:point startDate:s.startDate step:s.step];
+            NSNumber* yVal = [s.dataProcessor processY:point.dataValue startDate:s.startDate step:s.step];
             if (yVal == nil || yVal == NULL || [yVal isLessThan:([NSNumber numberWithInt:0])]) continue;
             if (maxY.floatValue < yVal.floatValue) {
                 maxY = yVal;
@@ -143,9 +142,7 @@
     }
     
     
-    CPTXYAxis* majorYAxis = (CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:1];
     float majorYMax = ((NSNumber*)[yAxisMaxValues objectAtIndex:0]).floatValue;
-    
     
     double yMajorInterval = 0;
     if (majorYMax > 0) {
@@ -161,11 +158,19 @@
             }
         }
         yMajorInterval = ceil(yIntervalMag / mag * (self.horizentalGridLineAmount + 1)) * mag / (self.horizentalGridLineAmount + 1);
-    } else {
+        [self updateYInterval:yMajorInterval majorYMax:majorYMax yAxisMaxValues:yAxisMaxValues];
+    } else if (isTheFirstRender) {
         yMajorInterval = 1;
         majorYMax = yMajorInterval * self.horizentalGridLineAmount;
+        [self updateYInterval:yMajorInterval majorYMax:majorYMax yAxisMaxValues:yAxisMaxValues];
+        isTheFirstRender = NO;
     }
-    
+}
+
+
+
+-(void)updateYInterval:(float)yMajorInterval majorYMax:(float)majorYMax yAxisMaxValues:(NSArray*)yAxisMaxValues {
+    CPTXYAxis* majorYAxis = (CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:1];
     majorYAxis.majorIntervalLength = CPTDecimalFromFloat(yMajorInterval);
     float yMajorLength = majorYMax + yMajorInterval * 0.2;
     ((CPTXYPlotSpace*)(majorYAxis.plotSpace)).yRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(yMajorLength)];
