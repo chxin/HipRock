@@ -40,6 +40,10 @@ static int requestTimeout = 45; //(s)
 static int requestTimeout = 45; //(s)
 #endif
 
+#ifdef Release
+static int requestTimeout = 45; //(s)
+#endif
+
 #define NetworkIncreaseActivity() [[REMNetworkStatusIndicator sharedManager] increaseActivity];
 #define NetworkDecreaseActivity() [[REMNetworkStatusIndicator sharedManager] decreaseActivity];
 #define NetworkClearActivity() [[REMNetworkStatusIndicator sharedManager] noActivity];
