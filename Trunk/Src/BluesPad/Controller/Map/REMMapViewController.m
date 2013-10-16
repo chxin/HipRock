@@ -31,6 +31,8 @@
     GMSMapView *mapView;
 }
 
+static BOOL isFirstPresenting = YES;
+
 - (void)loadView
 {
     [super loadView];
@@ -49,10 +51,17 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self showMarkers];
-    
-    [self.view addSubview:self.customerLogoButton];
-    [self.view.layer insertSublayer:self.titleGradientLayer above:mapView.layer];
+    if(isFirstPresenting == YES){
+        [self presentBuildingView];
+        
+        isFirstPresenting = NO;
+    }
+    else{
+        [self showMarkers];
+        
+        [self.view addSubview:self.customerLogoButton];
+        [self.view.layer insertSublayer:self.titleGradientLayer above:mapView.layer];
+    }
     
     
 }
@@ -176,6 +185,7 @@
     if([segue.identifier isEqualToString:kSegue_MapToBuilding] == YES)
     {
         REMMapBuildingSegue *customeSegue = (REMMapBuildingSegue *)segue;
+        customeSegue.isInitialPresenting = isFirstPresenting;
         
         CGPoint markerPoint = [mapView.projection pointForCoordinate:self.pressedMarker.position];
         self.originalPoint = CGPointMake(markerPoint.x,markerPoint.y-40);
@@ -189,9 +199,11 @@
     }
 }
 
--(void)presentBuildingView:(BOOL)isInitial
+-(void)presentBuildingView
 {
     //if is initial
+    
+    [self performSegueWithIdentifier:kSegue_MapToBuilding sender:self];
 }
 
 -(void)presentGallaryView
@@ -210,7 +222,7 @@
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
 {
     self.pressedMarker = marker;
-    [self performSegueWithIdentifier:kSegue_MapToBuilding sender:self];
+    [self presentBuildingView];
 }
 
 

@@ -10,7 +10,7 @@
 
 @interface REMMainNavigationController : UINavigationController
 
--(void)showLoginView:(void (^)(void))completed;
--(void)showInitialView:(void (^)(void))completed;
+-(void)presentLoginView:(void (^)(void))completed;
+-(void)presentInitialView:(void (^)(void))completed;
 
 @end

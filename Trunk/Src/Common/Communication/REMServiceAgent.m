@@ -178,8 +178,6 @@ static int requestTimeout = 45; //(s)
     {
         serviceOperation.groupName = groupName;
     }
-        
-    //[serviceOperation start];
     
     if(queue == nil)
     {
@@ -305,6 +303,9 @@ static int requestTimeout = 45; //(s)
     
     //add user info
     [request setValue:[REMServiceAgent getUserInfo] forHTTPHeaderField:@"Blues-User"];
+    
+    //enable gzip
+    [request setValue:@"gzip,deflate,sdch" forHTTPHeaderField:@"accept-encoding"];
     
     if(data!=NULL && data != nil && data.length > 0)
     {

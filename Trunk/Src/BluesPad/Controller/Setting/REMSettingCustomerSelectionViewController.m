@@ -100,7 +100,7 @@
             [self.settingController needReload];
             
             [nav dismissViewControllerAnimated:YES completion:^{
-                [self.settingController.mainNavigationController showInitialView:^(void){
+                [self.settingController.mainNavigationController presentInitialView:^(void){
                     [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];
                     [self.settingController.mainNavigationController popToRootViewControllerAnimated:YES];
                 }];

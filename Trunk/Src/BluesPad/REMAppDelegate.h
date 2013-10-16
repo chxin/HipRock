@@ -14,7 +14,5 @@
 
 + (REMAppDelegate *) app;
 
-- (void)logout;
-
 
 @end

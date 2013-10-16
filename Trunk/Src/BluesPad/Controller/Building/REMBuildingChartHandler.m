@@ -308,7 +308,9 @@ static NSNumberFormatter* formatter;
     [hostView.hostedGraph removeFromSuperlayer];
     hostView.hostedGraph=nil;
     [hostView removeFromSuperview];
+    hostView = nil;
     [self.view removeFromSuperview];
+    self.view = nil;
 }
 
 
