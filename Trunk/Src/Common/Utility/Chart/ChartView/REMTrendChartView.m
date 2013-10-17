@@ -285,8 +285,11 @@
             CPTXYPlotSpace* pSpace = (CPTXYPlotSpace*)((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:i]).plotSpace;
             pSpace.xRange = newRange;
         }
-        
-        [self renderRange:[NSDecimalNumber decimalNumberWithDecimal: newRange.location].floatValue length:[NSDecimalNumber decimalNumberWithDecimal: newRange.length].floatValue];
+        float newRangeStart = [NSDecimalNumber decimalNumberWithDecimal:newRange.location].floatValue;
+        float newRangeLength = [NSDecimalNumber decimalNumberWithDecimal:newRange.length].floatValue;
+        if (newRangeStart >= xStableStartPoint && newRangeStart + newRangeLength <= xStableEndPoint) {
+            [self renderRange:newRangeStart length:newRangeLength];
+        }
     } else if (coordinate == CPTCoordinateY) {
         return space.yRange; // disable y scrolling here.
     }

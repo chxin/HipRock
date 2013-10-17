@@ -71,8 +71,8 @@ typedef enum  {
 @end
 
 
-@interface REMPieChartSeries : REMChartSeries<CPTPieChartDataSource>
-
+@interface REMPieChartSeries : REMChartSeries<CPTPieChartDataSource,CPTAnimationDelegate>
+@property (nonatomic) float animationDuration;
 @end
 
 @interface REMTrendChartSeries : REMChartSeries {

@@ -2,6 +2,7 @@ makefilepath=~/BuildFolder/SourceCode/Master/BluesGit/Build/
 srcpath=~/BuildFolder/SourceCode/Master/BluesGit
 nodepath=/usr/local/bin/
 cd ${srcpath}
+git checkout v0.4dev
 git pull
 cd ${makefilepath}
 make --makefile=Makefile --directory=${makefilepath} xcclean

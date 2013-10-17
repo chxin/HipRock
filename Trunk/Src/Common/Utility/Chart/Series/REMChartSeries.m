@@ -23,14 +23,6 @@
     plot.frame = graph.bounds;
     plot.dataSource = self;
     plot.delegate = self;
-    [CPTAnimation animate:plot
-                 property:@"pieRadius"
-                     from: 0
-                       to: MIN(graph.bounds.size.height, graph.bounds.size.width) / 2
-                 duration:0.5
-                withDelay:0
-           animationCurve:CPTAnimationCurveBounceOut
-                 delegate:nil];
 }
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
