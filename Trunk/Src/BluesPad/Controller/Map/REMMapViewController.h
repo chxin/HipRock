@@ -26,6 +26,8 @@
 @property (nonatomic) CGPoint originalPoint;
 
 - (IBAction)gallarySwitchButtonPressed:(id)sender;
+-(void)setIsInitialPresenting:(BOOL)isInitial;
+
 
 
 @end

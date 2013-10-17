@@ -38,6 +38,9 @@
     } completion:^(BOOL finished) {
         [splashTransitionView removeFromSuperview];
         [mapTransitionView removeFromSuperview];
+        
+        [mapController setIsInitialPresenting:YES];
+        
         [splashController.navigationController pushViewController:mapController animated:NO];
     }];
 }

@@ -13,9 +13,7 @@
 
 @end
 
-@implementation REMMainNavigationController{
-    NSDictionary *controllerInstances;
-}
+@implementation REMMainNavigationController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

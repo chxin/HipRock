@@ -32,13 +32,13 @@
     NetworkStatus netStaus = [REMNetworkHelper checkCurrentNetworkStatus];
     
     //if network is not ok, get from cache
-//    if(netStaus == NotReachable){
+    if(netStaus == NotReachable){
         [REMDataAccessor accessLocal:store success:success error:error];
-//    }
-//    //if network is ok, get from network and always update cache data
-//    else{
-//        [REMDataAccessor accessRemote:store success:success error:error progress:progress];
-//    }
+    }
+    //if network is ok, get from network and always update cache data
+    else{
+        [REMDataAccessor accessRemote:store success:success error:error progress:progress];
+    }
 }
 
 + (void) cancelAccess

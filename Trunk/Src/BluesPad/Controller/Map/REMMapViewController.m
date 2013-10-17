@@ -32,7 +32,11 @@
     GMSMapView *mapView;
 }
 
-static BOOL isFirstPresenting = YES;
+static BOOL isInitialPresenting = YES;
+-(void)setIsInitialPresenting:(BOOL)isInitial
+{
+    isInitialPresenting = isInitial;
+}
 
 - (void)loadView
 {
@@ -63,7 +67,7 @@ static BOOL isFirstPresenting = YES;
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    if(isFirstPresenting == YES){
+    if(isInitialPresenting == YES){
         [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
     }
 }
@@ -181,7 +185,7 @@ static BOOL isFirstPresenting = YES;
     if([segue.identifier isEqualToString:kSegue_MapToBuilding] == YES)
     {
         REMMapBuildingSegue *customeSegue = (REMMapBuildingSegue *)segue;
-        customeSegue.isInitialPresenting = isFirstPresenting;
+        customeSegue.isInitialPresenting = isInitialPresenting;
         
         if(self.pressedMarker != nil){
             CGPoint markerPoint = [mapView.projection pointForCoordinate:self.pressedMarker.position];
@@ -206,8 +210,8 @@ static BOOL isFirstPresenting = YES;
     [self performSegueWithIdentifier:kSegue_MapToBuilding sender:self];
     
     //if is initial, shut off
-    if(isFirstPresenting == YES)
-        isFirstPresenting = NO;
+    if(isInitialPresenting == YES)
+        isInitialPresenting = NO;
 }
 
 -(void)presentGallaryView
