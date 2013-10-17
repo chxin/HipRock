@@ -7,7 +7,7 @@
 //
 
 #import "REMWidgetMaxView.h"
-
+#import "REMScreenEdgetGestureRecognizer.h"
 @implementation REMWidgetMaxView {
     UIView* contentView;
     REMEnergyViewData *chartData;
@@ -27,6 +27,11 @@
         y = location.origin.x;
         if (orientation == UIInterfaceOrientationLandscapeRight) y = 748 - y - widgetCell.frame.size.height;
         _startFrame = CGRectMake(x, y, widgetCell.frame.size.width, widgetCell.frame.size.height);
+        
+        
+        REMScreenEdgetGestureRecognizer *rec = [[REMScreenEdgetGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
+        [self addGestureRecognizer:rec];
+        rec.delegate = self;
     }
     return self;
 }
@@ -103,13 +108,17 @@
 - (void)backButtonPressed:(UIButton *)button {
     [self close:YES];
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+
+-(void)panthis:(REMScreenEdgetGestureRecognizer*)pan {
+    if (pan.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"PAN Edget");
+    }
+//    [pan setTranslation:CGPointZero inView:widgetWrapper.view];
 }
-*/
+
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+//    float locationX = [touch locationInView:self].x;
+//    return (locationX >= 1000 || locationX <= 24);
+//}
 
 @end

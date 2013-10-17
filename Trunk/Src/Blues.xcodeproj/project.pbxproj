@@ -551,6 +551,7 @@
 		EFDAACC218053911008BC9AF /* REMChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC118053911008BC9AF /* REMChartConfig.m */; };
 		EFDAACC818054EBA008BC9AF /* REMPieChartSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */; };
 		EFEA1CBE1807D33000CA3C07 /* REMWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEA1CBD1807D33000CA3C07 /* REMWidgetWrapper.m */; };
+		EFF43463180FD5A7006A2650 /* REMScreenEdgetGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF43462180FD5A7006A2650 /* REMScreenEdgetGestureRecognizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1182,6 +1183,8 @@
 		EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartSeries.m; sourceTree = "<group>"; };
 		EFEA1CBC1807D33000CA3C07 /* REMWidgetWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetWrapper.h; sourceTree = "<group>"; };
 		EFEA1CBD1807D33000CA3C07 /* REMWidgetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetWrapper.m; sourceTree = "<group>"; };
+		EFF43461180FD5A7006A2650 /* REMScreenEdgetGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMScreenEdgetGestureRecognizer.h; sourceTree = "<group>"; };
+		EFF43462180FD5A7006A2650 /* REMScreenEdgetGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMScreenEdgetGestureRecognizer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1639,6 +1642,8 @@
 				7AF3667717CF2D7400447650 /* REMChartSeriesIndicator.m */,
 				EF60822D17D818420093427C /* REMModalView.h */,
 				EF60822E17D818430093427C /* REMModalView.m */,
+				EFF43461180FD5A7006A2650 /* REMScreenEdgetGestureRecognizer.h */,
+				EFF43462180FD5A7006A2650 /* REMScreenEdgetGestureRecognizer.m */,
 			);
 			name = Controls;
 			path = View/Controls;
@@ -2799,6 +2804,7 @@
 				B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */,
 				7A1D7C3717A6155D0050779D /* REMApplicationContext.m in Sources */,
 				B47ACC3017F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m in Sources */,
+				EFF43463180FD5A7006A2650 /* REMScreenEdgetGestureRecognizer.m in Sources */,
 				7A1D7C3C17A637510050779D /* REMUserModel.m in Sources */,
 				7A1D7C3F17A637630050779D /* REMCustomerModel.m in Sources */,
 				7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */,
