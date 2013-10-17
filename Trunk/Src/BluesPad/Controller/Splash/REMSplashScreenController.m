@@ -166,16 +166,20 @@
         logoStore.maskContainer = nil;
         
         [REMDataAccessor access:logoStore success:^(id data) {
+            //TODO: what if customer logo is null?
             if(data == nil || [data length] == 2) return;
+            
             UIImage *view = [REMImageHelper parseImageFromNSData:data];
             
             [REMApplicationContext instance].currentCustomerLogo=view;
             
-      
+            if(loadCompleted!=nil)
+                loadCompleted();
             
+            [self performSegueWithIdentifier:kSegue_SplashToMap sender:self];
+        } error:^(NSError *error, id response) {
+            //
             
-            
-            //test air quality interface
             if(loadCompleted!=nil)
                 loadCompleted();
             
