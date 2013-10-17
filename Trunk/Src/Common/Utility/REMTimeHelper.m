@@ -315,7 +315,7 @@
     NSDateComponents* dateComponents = [[NSDateComponents alloc]init];
     [dateComponents setMonth:month];
     NSCalendar* calendar = [REMTimeHelper currentCalendar];
-    return [calendar dateByAddingComponents:dateComponents toDate:[NSDate date] options:0];
+    return [calendar dateByAddingComponents:dateComponents toDate:date options:0];
 }
 
 + (NSString *)formatTimeFullHour:(NSDate *)date
