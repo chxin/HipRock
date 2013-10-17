@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5WC-f7-YJK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5WC-f7-YJK">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -110,7 +110,7 @@
                         <outlet property="flashLogo" destination="KpV-VC-3uG" id="XfR-t6-NdL"/>
                         <outlet property="logoView" destination="LxY-lh-jAg" id="k4L-pY-OOj"/>
                         <outlet property="normalLogo" destination="Igx-ZG-8eI" id="DzI-Uu-lrm"/>
-                        <segue destination="8sm-Rk-4h3" kind="push" identifier="splashToMapSegue" id="9ca-ql-9sS"/>
+                        <segue destination="8sm-Rk-4h3" kind="custom" identifier="splashToMapSegue" customClass="REMSplashMapSegue" id="9ca-ql-9sS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i7s-2X-RpE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1707,6 +1707,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="jm0-Y9-YEv"/>
+        <segue reference="9ca-ql-9sS"/>
     </inferredMetricsTieBreakers>
 </document>

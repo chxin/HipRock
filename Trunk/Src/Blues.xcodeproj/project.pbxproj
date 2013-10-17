@@ -301,7 +301,6 @@
 		7A209EDA17BB72100062FB92 /* REMServiceMeta.h in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */; };
 		7A209EDB17BB72100062FB92 /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
 		7A25725717F911AD0007438F /* REMGallaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A25725617F911AD0007438F /* REMGallaryViewController.m */; };
-		7A2849601803A5C600DC481B /* REMMapBuildingSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A28495F1803A5C600DC481B /* REMMapBuildingSegue.m */; };
 		7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */; };
 		7A2BA42217D877C3003B18E1 /* REMError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42117D877C3003B18E1 /* REMError.m */; };
 		7A2E7EBD17F28E8A000EB506 /* REMLoginCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2E7EBC17F28E8A000EB506 /* REMLoginCustomerViewController.m */; };
@@ -356,6 +355,8 @@
 		7A5DBD2B178FD034006C4EDE /* REMDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD2A178FD034006C4EDE /* REMDataStore.m */; };
 		7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8B177B41B0000F77F9 /* MainStoryboard.storyboard */; };
 		7A5E2D95177B41B0000F77F9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8D177B41B0000F77F9 /* InfoPlist.strings */; };
+		7A634BB9180E7F350076C84D /* REMMapBuildingSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A634BB8180E7F350076C84D /* REMMapBuildingSegue.m */; };
+		7A634BBC180E80140076C84D /* REMSplashMapSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A634BBB180E80140076C84D /* REMSplashMapSegue.m */; };
 		7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */; };
 		7A7EA6E1180548CB00A3BB56 /* REMNetworkStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */; };
 		7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */; };
@@ -759,8 +760,6 @@
 		7A28495B18039AAF00DC481B /* REMDimensionForBuilding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMDimensionForBuilding.h; path = Resource/Dimensions/REMDimensionForBuilding.h; sourceTree = "<group>"; };
 		7A28495C18039ACB00DC481B /* REMDimensionForChart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMDimensionForChart.h; path = Resource/Dimensions/REMDimensionForChart.h; sourceTree = "<group>"; };
 		7A28495D18039B0300DC481B /* REMStoryboardDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMStoryboardDefinitions.h; path = Resource/Definitions/REMStoryboardDefinitions.h; sourceTree = "<group>"; };
-		7A28495E1803A5C600DC481B /* REMMapBuildingSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMapBuildingSegue.h; path = Controller/Map/REMMapBuildingSegue.h; sourceTree = "<group>"; };
-		7A28495F1803A5C600DC481B /* REMMapBuildingSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMapBuildingSegue.m; path = Controller/Map/REMMapBuildingSegue.m; sourceTree = "<group>"; };
 		7A2BA41C17D874C3003B18E1 /* REMBusinessErrorInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBusinessErrorInfo.h; path = Common/Model/REMBusinessErrorInfo.h; sourceTree = "<group>"; };
 		7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBusinessErrorInfo.m; path = Common/Model/REMBusinessErrorInfo.m; sourceTree = "<group>"; };
 		7A2BA42017D877C3003B18E1 /* REMError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMError.h; sourceTree = "<group>"; };
@@ -853,6 +852,10 @@
 		7A5E2DA3177B424C000F77F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		7A5E2DA6177B4272000F77F9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainStoryboard.strings"; sourceTree = "<group>"; };
 		7A5E2DA7177B4274000F77F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		7A634BB7180E7F350076C84D /* REMMapBuildingSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMapBuildingSegue.h; path = Resource/Segue/REMMapBuildingSegue.h; sourceTree = "<group>"; };
+		7A634BB8180E7F350076C84D /* REMMapBuildingSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMapBuildingSegue.m; path = Resource/Segue/REMMapBuildingSegue.m; sourceTree = "<group>"; };
+		7A634BBA180E80140076C84D /* REMSplashMapSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSplashMapSegue.h; path = Resource/Segue/REMSplashMapSegue.h; sourceTree = "<group>"; };
+		7A634BBB180E80140076C84D /* REMSplashMapSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSplashMapSegue.m; path = Resource/Segue/REMSplashMapSegue.m; sourceTree = "<group>"; };
 		7A6E6D0B17A65CE500FBB264 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		7A6E6D0D17A65CE500FBB264 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -1604,8 +1607,6 @@
 				7A2E7EC017F2DCB3000EB506 /* REMMapViewController.m */,
 				7A25725517F911AD0007438F /* REMGallaryViewController.h */,
 				7A25725617F911AD0007438F /* REMGallaryViewController.m */,
-				7A28495E1803A5C600DC481B /* REMMapBuildingSegue.h */,
-				7A28495F1803A5C600DC481B /* REMMapBuildingSegue.m */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -1813,6 +1814,7 @@
 		7A5E2D85177B41A4000F77F9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				7A634BB6180E7EE10076C84D /* Segue */,
 				7A2849581803998900DC481B /* Dimensions */,
 				7A284954180398B600DC481B /* Definitions */,
 				7AC3BABB17CC48740022E57E /* Images */,
@@ -1853,6 +1855,17 @@
 				B4EDFB1A180697F300873FA1 /* REMControllerBase.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		7A634BB6180E7EE10076C84D /* Segue */ = {
+			isa = PBXGroup;
+			children = (
+				7A634BB7180E7F350076C84D /* REMMapBuildingSegue.h */,
+				7A634BB8180E7F350076C84D /* REMMapBuildingSegue.m */,
+				7A634BBA180E80140076C84D /* REMSplashMapSegue.h */,
+				7A634BBB180E80140076C84D /* REMSplashMapSegue.m */,
+			);
+			name = Segue;
 			sourceTree = "<group>";
 		};
 		7A6E6D0A17A65CE500FBB264 /* GMT */ = {
@@ -2743,6 +2756,7 @@
 				B445AEAA177BEEB8002D2A59 /* ContextFilterLogFormatter.m in Sources */,
 				B445AEAC177BEEB8002D2A59 /* DispatchQueueLogFormatter.m in Sources */,
 				B445AEB2177BFAE8002D2A59 /* REMLog.m in Sources */,
+				7A634BB9180E7F350076C84D /* REMMapBuildingSegue.m in Sources */,
 				7A399E96177D238F00F0EB9F /* AFHTTPClient.m in Sources */,
 				7A399E97177D238F00F0EB9F /* AFHTTPRequestOperation.m in Sources */,
 				7A399E98177D238F00F0EB9F /* AFImageRequestOperation.m in Sources */,
@@ -2846,10 +2860,10 @@
 				7A2E7EBD17F28E8A000EB506 /* REMLoginCustomerViewController.m in Sources */,
 				EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */,
 				7A37AA6317AB944B00316902 /* REMNumberLabel.m in Sources */,
+				7A634BBC180E80140076C84D /* REMSplashMapSegue.m in Sources */,
 				7A5277F617AF4209007DA735 /* REMIndicatorButton.m in Sources */,
 				EF8A480017F959B5009B5C33 /* REMTrendChartSeries.m in Sources */,
 				B4626BFC17B0A0D900A7759B /* REMBuildingCommodityView.m in Sources */,
-				7A2849601803A5C600DC481B /* REMMapBuildingSegue.m in Sources */,
 				B4911F4317B0D961007AEF7D /* REMBuildingConstants.m in Sources */,
 				B4911F4817B0EB8B007AEF7D /* REMBuildingRankingView.m in Sources */,
 				EF8A480917F95FA1009B5C33 /* REMColumnWidgetWrapper.m in Sources */,

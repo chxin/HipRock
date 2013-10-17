@@ -83,12 +83,7 @@ static int requestTimeout = 45; //(s)
     void (^onSuccess)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
     {
 #ifdef DEBUG
-        if(kREMLogResquest !=0 ){
-            if(service.responseType == REMServiceResponseJson)
-                NSLog(@"REM-RESPONSE json: %@", kREMLogResquest == 2 ? operation.responseString : [NSString stringWithFormat:@"%@..",[operation.responseString substringToIndex:48]]);
-            else
-                NSLog(@"REM-RESPONSE data: %d bytes", [operation.responseData length]);
-        }
+        [REMServiceAgent logResponse:service :operation];
 #endif
         
         //if there is error message
@@ -193,9 +188,7 @@ static int requestTimeout = 45; //(s)
     
 //log the request
 #ifdef DEBUG
-    if(kREMLogResquest != 0){
-        NSLog(@"REM-REQUEST: %@", service.url);
-    }
+    [REMServiceAgent logRequest:request];
 #endif
     
     [queue addOperation:serviceOperation];
@@ -358,5 +351,27 @@ static int requestTimeout = 45; //(s)
     return [result valueForKey:[NSString stringWithFormat:@"%@Result",[service lastPathComponent]]];
 }
 
++(void)logRequest:(NSURLRequest *)request
+{
+    if(kREMLogResquest != 0){
+        NSLog(@"REM-REQUEST: %@", [request.URL description]);
+    }
+}
+
++(void)logResponse:(REMServiceMeta *)service :(AFHTTPRequestOperation *)operation
+{
+    if(kREMLogResquest !=0 ){
+        int shortJsonStringLength = 48;
+        if(service.responseType == REMServiceResponseJson){
+            NSString *jsonString = operation.responseString;
+            if(kREMLogResquest == 1 && jsonString.length > shortJsonStringLength){
+                jsonString = [NSString stringWithFormat:@"%@..",[jsonString substringToIndex:shortJsonStringLength]];
+            }
+            NSLog(@"REM-RESPONSE json: %@", jsonString);
+        }
+        else
+            NSLog(@"REM-RESPONSE data: %d bytes", [operation.responseData length]);
+    }
+}
 @end
 

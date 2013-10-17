@@ -53,7 +53,7 @@
                     self.timer = nil;
                 }
                 
-                [self.logoView setHidden:YES];
+                //[self.logoView setHidden:YES];
             }];
         }];
     }

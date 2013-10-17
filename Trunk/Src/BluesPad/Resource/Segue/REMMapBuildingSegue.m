@@ -12,6 +12,7 @@
 #import "REMMapViewController.h"
 #import "REMCommonHeaders.h"
 #import "REMStoryboardDefinitions.h"
+#import "REMDimensions.h"
 
 
 
@@ -36,7 +37,7 @@
     
     
     if(self.isInitialPresenting){
-        [self pushBuildingController:buildingViewController withNavigationController:mapViewController.navigationController];
+        [self pushBuildingController:buildingViewController intoMapController:mapViewController];
         return;
     }
     
@@ -53,9 +54,22 @@
 }
 
 
--(void)pushBuildingController:(REMBuildingViewController *)buildingController withNavigationController:(UINavigationController *)navigationController
+-(void)pushBuildingController:(REMBuildingViewController *)buildingController intoMapController:(REMMapViewController *)mapController
 {
-    [navigationController pushViewController:buildingController animated:YES];
+    //push building view into map view
+    UIImageView *transitionView = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:buildingController.view]];
+    
+    transitionView.frame = CGRectMake(kDMScreenWidth, 0, mapController.view.bounds.size.width, mapController.view.bounds.size.height);
+    
+    [mapController.view addSubview:transitionView];
+    
+    
+    [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        transitionView.frame = CGRectMake(0, 0, mapController.view.bounds.size.width, mapController.view.bounds.size.height);;
+    } completion:^(BOOL finished) {
+        [transitionView removeFromSuperview];
+        [mapController.navigationController pushViewController:buildingController animated:NO];
+    }];
 }
 
 -(void)zoomInBuildingController:(REMBuildingViewController *)buildingController fromMapController:(REMMapViewController *)mapController
@@ -73,7 +87,7 @@
     
     [mapView addSubview:transitionView];
     
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         transitionView.frame = finalFrame;
     } completion:^(BOOL finished){
         [transitionView removeFromSuperview];
@@ -99,7 +113,7 @@
     [buildingView addSubview:transitionView];
     
     
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         transitionView.frame = finalFrame;
     } completion:^(BOOL finished){
         [transitionView removeFromSuperview];

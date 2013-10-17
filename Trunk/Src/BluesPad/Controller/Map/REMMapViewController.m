@@ -20,6 +20,7 @@
 #import "REMChartHeader.h"
 #import "REMCommonHeaders.h"
 #import "REMStoryboardDefinitions.h"
+#import "REMDimensions.h"
 
 @interface REMMapViewController ()
 
@@ -37,6 +38,7 @@ static BOOL isFirstPresenting = YES;
 {
     [super loadView];
 
+    [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight)];
     [self loadMapView];
     
     if(mapView != nil){
@@ -61,7 +63,6 @@ static BOOL isFirstPresenting = YES;
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    NSLog(@"map:%@",NSStringFromCGPoint(self.originalPoint));
     if(isFirstPresenting == YES){
         [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
     }
@@ -98,7 +99,7 @@ static BOOL isFirstPresenting = YES;
 -(void)loadMapView
 {
     CGRect viewBounds = self.view.bounds;
-    CGRect mapViewFrame = CGRectMake(viewBounds.origin.x, viewBounds.origin.y, viewBounds.size.height, viewBounds.size.width);
+    CGRect mapViewFrame = CGRectMake(viewBounds.origin.x, viewBounds.origin.y, viewBounds.size.width, viewBounds.size.height);
     
     double defaultLatitude =38.0, defaultLongitude=104.0;
     CGFloat defaultZoomLevel = 4.0;
@@ -113,6 +114,8 @@ static BOOL isFirstPresenting = YES;
     GMSCameraUpdate *update = [self getCameraUpdate];
     
     [mapView moveCamera:update];
+    
+    sleep(1);
 }
 
 -(GMSCameraUpdate *)getCameraUpdate
