@@ -14,21 +14,36 @@
     CGPoint eventEndPoint;
 }
 
+-(int)getXMovement {
+    if (self.state == UIGestureRecognizerStateEnded) {
+        return abs(eventEndPoint.y - eventStartPoint.y);
+    } else {
+        return 0;
+    }
+}
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    eventStartPoint = [self locationInView:self.view];
-    float touchX = eventStartPoint.x;
+    eventStartPoint = [self locationInView:[UIApplication sharedApplication].keyWindow];
+    float touchX = eventStartPoint.y;
     if (touchX > 974 || touchX < 50) {
         self.state = UIGestureRecognizerStateBegan;
     } else {
         self.state = UIGestureRecognizerStateCancelled;
     }
 }
+-(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesCancelled:touches withEvent:event];
+}
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesMoved:touches withEvent:event];
+}
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
-    if (self.state == UIGestureRecognizerStateBegan) {
-        eventEndPoint = [self locationInView:self.view];
-        if (abs(eventEndPoint.x - eventStartPoint.x) > 100) {
+    UIGestureRecognizerState s = self.state;
+    if (s == UIGestureRecognizerStateBegan || s == UIGestureRecognizerStatePossible || s == UIGestureRecognizerStateChanged || s==UIGestureRecognizerStateRecognized) {
+        eventEndPoint = [self locationInView:[UIApplication sharedApplication].keyWindow];
+        if (abs(eventEndPoint.y - eventStartPoint.y) > 100) {
             self.state = UIGestureRecognizerStateEnded;
         } else {
             self.state = UIGestureRecognizerStateCancelled;

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface REMScreenEdgetGestureRecognizer : UIGestureRecognizer
-
+-(int)getXMovement;
 @end
