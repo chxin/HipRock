@@ -13,6 +13,7 @@
     UIView* contentView;
     REMEnergyViewData *chartData;
     REMWidgetWrapper* widgetWrapper;
+    UIButton* backBtn;
 }
 
 - (REMModalView*)initWithSuperView:(UIView*)superView widgetCell:(REMDashboardCollectionCellView*)widgetCell
@@ -93,7 +94,7 @@
     contentView.backgroundColor = [UIColor grayColor];
     [self addSubview:contentView];
     
-    UIButton* backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 24)];
+    backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 24)];
     backBtn.backgroundColor = [UIColor grayColor];
     [backBtn setTitle:@"Back" forState:UIControlStateNormal];
     [contentView addSubview:backBtn];
@@ -114,12 +115,10 @@
     if (pan.state == UIGestureRecognizerStateEnded) {
         NSLog(@"PAN Edget");
     }
-//    [pan setTranslation:CGPointZero inView:widgetWrapper.view];
 }
 
-//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-//    float locationX = [touch locationInView:self].x;
-//    return (locationX >= 1000 || locationX <= 24);
-//}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return !CGRectContainsPoint(backBtn.frame, [touch locationInView:contentView]);
+}
 
 @end
