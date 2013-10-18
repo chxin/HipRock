@@ -167,12 +167,12 @@
 }
 
 -(float)roundYInterval:(float)yInterval {
-    for (float i = 1.0; i < 10; i=i+0.1) {
+    for (float i = 1.0; i <= 10; i=i+0.1) {
         if (yInterval <= i) {
             return i;
         }
     }
-    return 1;
+    return 10;
 }
 
 -(float)getYInterval:(float)yMax intervalCount:(uint)intervalCount {
