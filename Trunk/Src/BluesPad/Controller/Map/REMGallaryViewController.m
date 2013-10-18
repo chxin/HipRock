@@ -135,7 +135,7 @@
 //    CGRect bounds = cell.bounds;
 //    NSLog(@"frame: %@",NSStringFromCGRect(frame));
 //    NSLog(@"bounds: %@",NSStringFromCGRect(bounds));
-    self.mapViewController.initialRect = cell.frame;
+    self.mapViewController.initialZoomRect = cell.frame;
     self.mapViewController.selectedBuilding = cell.building;
     [self.mapViewController presentBuildingView];
 }

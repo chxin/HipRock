@@ -267,11 +267,8 @@ static int requestTimeout = 45; //(s)
         case ReachableViaWiFi:
             maxQueueLength = 5;
             break;
-        case ReachableViaWWAN3G:
-            maxQueueLength = 2;
-            break;
-        case ReachableViaWWAN2G:
-            maxQueueLength = 1;
+        case ReachableViaWWAN:
+            maxQueueLength = 3;
             break;
             
         default:

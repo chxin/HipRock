@@ -81,8 +81,8 @@
 //    CGRect finalFrame = CGRectMake(0, 0, mapView.bounds.size.width, mapView.bounds.size.height);
 //    
     transitionView.frame = mapView.bounds;
-    transitionView.transform = [self getTransformFromOriginalFrame:mapController.initialRect andFinalFrame:mapView.frame];
-    transitionView.center = [self getCenterOfRect:mapController.initialRect];
+    transitionView.transform = [self getTransformFromOriginalFrame:mapController.initialZoomRect andFinalFrame:mapView.frame];
+    transitionView.center = [self getCenterOfRect:mapController.initialZoomRect];
     
     [mapView addSubview:transitionView];
     
@@ -116,8 +116,8 @@
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
 //        transitionView.frame = finalFrame;
         
-        transitionView.transform = [self getTransformFromOriginalFrame:buildingController.mapViewController.initialRect andFinalFrame:buildingView.frame];;
-        transitionView.center = [self getCenterOfRect:buildingController.mapViewController.initialRect];
+        transitionView.transform = [self getTransformFromOriginalFrame:buildingController.mapViewController.initialZoomRect andFinalFrame:buildingView.frame];;
+        transitionView.center = [self getCenterOfRect:buildingController.mapViewController.initialZoomRect];
         
     } completion:^(BOOL finished){
         [transitionView removeFromSuperview];
