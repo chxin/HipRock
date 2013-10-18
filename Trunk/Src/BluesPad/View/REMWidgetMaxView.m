@@ -8,6 +8,7 @@
 
 #import "REMWidgetMaxView.h"
 #import "REMScreenEdgetGestureRecognizer.h"
+
 @implementation REMWidgetMaxView {
     UIView* contentView;
     REMEnergyViewData *chartData;
