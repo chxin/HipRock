@@ -13,7 +13,7 @@
 #import "REMColumnWidgetWrapper.h"
 #import "REMPieChartWrapper.h"
 
-@interface REMWidgetMaxView : REMModalView
+@interface REMWidgetMaxView : REMModalView<UIGestureRecognizerDelegate>
 
 @property (nonatomic, readonly) CGRect startFrame; // 最大化最小化动画的起止
 
