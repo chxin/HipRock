@@ -18,8 +18,6 @@
     float xStableEndPoint;   // 弹性稳定区域的x轴终点
     float xUnstableStartPoint; // 弹性区域不稳定的x轴起点
     float xUnstableEndPoint; // 弹性区域不稳定的x轴起点
-    
-    CPTAnimationOperation* elasticAnimation;
 }
 
 -(REMTrendChartView*)initWithFrame:(CGRect)frame chartConfig:(REMTrendChartConfig*)config  {
@@ -137,7 +135,7 @@
         if (s.yAxisIndex >= yAxisMaxValues.count) {
             [yAxisMaxValues addObject:maxY];
         } else {
-            [yAxisMaxValues setObject:maxY atIndexedSubscript:s.yAxisIndex];
+            if ([maxY isGreaterThan:[yAxisMaxValues objectAtIndex:s.yAxisIndex]])[yAxisMaxValues setObject:maxY atIndexedSubscript:s.yAxisIndex];
         }
     }
     
@@ -146,18 +144,19 @@
     
     double yMajorInterval = 0;
     if (majorYMax > 0) {
-        double yIntervalMag = majorYMax / self.horizentalGridLineAmount;
-        double mag = 1;
-        if (yIntervalMag > 10) {
-            int yIntervalFLOOR = floor(yIntervalMag);
-            NSUInteger digitalOfYInterval = ((NSString*)[NSString stringWithFormat:@"%i", yIntervalFLOOR]).length;
-            mag = pow(10, digitalOfYInterval);
-        } else if (yIntervalMag < 1) {
-            while (yIntervalMag < 1) {
-                mag /= 10;
-            }
-        }
-        yMajorInterval = ceil(yIntervalMag / mag * (self.horizentalGridLineAmount + 1)) * mag / (self.horizentalGridLineAmount + 1);
+//        double yIntervalMag = majorYMax / self.horizentalGridLineAmount;
+//        double mag = 1;
+//        if (yIntervalMag > 10) {
+//            int yIntervalFLOOR = floor(yIntervalMag);
+//            NSUInteger digitalOfYInterval = ((NSString*)[NSString stringWithFormat:@"%i", yIntervalFLOOR]).length;
+//            mag = pow(10, digitalOfYInterval-1);
+//        } else if (yIntervalMag < 1) {
+//            while (yIntervalMag < 1) {
+//                mag /= 10;
+//            }
+//        }
+//        yMajorInterval = [self roundYInterval:(majorYMax / self.horizentalGridLineAmount / mag)] * mag;
+        yMajorInterval = [self getYInterval:majorYMax intervalCount:self.horizentalGridLineAmount];
         [self updateYInterval:yMajorInterval majorYMax:majorYMax yAxisMaxValues:yAxisMaxValues];
     } else if (isTheFirstRender) {
         yMajorInterval = 1;
@@ -167,12 +166,37 @@
     }
 }
 
+-(float)roundYInterval:(float)yInterval {
+    for (float i = 1.0; i < 10; i=i+0.1) {
+        if (yInterval <= i) {
+            return i;
+        }
+    }
+    return 1;
+}
+
+-(float)getYInterval:(float)yMax intervalCount:(uint)intervalCount {
+    if (yMax <= 0) return 1;
+    
+    double yIntervalMag = yMax / intervalCount;
+    double mag = 1;
+    if (yIntervalMag > 10) {
+        int yIntervalFLOOR = floor(yIntervalMag);
+        NSUInteger digitalOfYInterval = ((NSString*)[NSString stringWithFormat:@"%i", yIntervalFLOOR]).length;
+        mag = pow(10, digitalOfYInterval-1);
+    } else if (yIntervalMag < 1) {
+        while (yIntervalMag < 1) {
+            mag /= 10;
+        }
+    }
+    return [self roundYInterval:(yMax / intervalCount / mag)] * mag;
+}
 
 
 -(void)updateYInterval:(float)yMajorInterval majorYMax:(float)majorYMax yAxisMaxValues:(NSArray*)yAxisMaxValues {
     CPTXYAxis* majorYAxis = (CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:1];
     majorYAxis.majorIntervalLength = CPTDecimalFromFloat(yMajorInterval);
-    float yMajorLength = majorYMax + yMajorInterval * 0.2;
+    float yMajorLength = yMajorInterval * (self.horizentalGridLineAmount + 0.2);
     ((CPTXYPlotSpace*)(majorYAxis.plotSpace)).yRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(yMajorLength)];
     
     // 绘制其他Y轴
@@ -184,12 +208,11 @@
         if (yMax == majorYMax) {
             yAxis.majorIntervalLength = majorYAxis.majorIntervalLength;
             thePlotspace.yRange = ((CPTXYPlotSpace*)(majorYAxis.plotSpace)).yRange;
-        } else if (yMax > majorYMax) {
-            yAxis.majorIntervalLength = CPTDecimalFromFloat(yMajorInterval * ceil(yMax / majorYMax));
-            thePlotspace.yRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(yMajorLength * ceil(yMax / majorYMax))];
         } else {
-            yAxis.majorIntervalLength = CPTDecimalFromFloat(yMajorInterval * ceil(majorYMax / yMax));
-            thePlotspace.yRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(yMajorLength * ceil(majorYMax / yMax))];
+            float interval = [self getYInterval:yMax intervalCount:self.horizentalGridLineAmount];
+            yAxis.majorIntervalLength = CPTDecimalFromFloat(interval);
+            thePlotspace.yRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(interval * (self.horizentalGridLineAmount + 0.2))];
+            
         }
     }
 }
@@ -297,11 +320,6 @@
     return newRange;
 }
 
-//-(BOOL)plotSpace:(CPTPlotSpace *)space shouldHandlePointingDeviceDownEvent:(UIEvent *)event atPoint:(CGPoint)point {
-//    if (elasticAnimation != nil) return NO;
-//    else return YES;
-//}
-
 -(BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(CPTNativeEvent *)event atPoint:(CGPoint)point {
     CPTPlotRange* newRange = space.xRange;
     
@@ -313,20 +331,12 @@
     } else if (newRangeLocation + newRangeLength > xStableEndPoint) {
         animateRange = [[CPTPlotRange alloc]initWithLocation:[NSDecimalNumber numberWithFloat:(xStableEndPoint-newRangeLength+xStableStartPoint)].decimalValue length:newRange.length];
     }
-//    if (elasticAnimation != nil) {
-//        [[CPTAnimation sharedInstance] removeAnimationOperation:elasticAnimation];
-//    }
     if (animateRange != nil) {
-//        elasticAnimation
-        elasticAnimation = [CPTAnimation animate:space property:@"xRange" fromPlotRange:newRange toPlotRange:animateRange duration:0.2 withDelay:0 animationCurve:CPTAnimationCurveSinusoidalOut delegate:self];
+        for (CPTPlotSpace* s in self.hostedGraph.allPlotSpaces) {
+            [CPTAnimation animate:s property:@"xRange" fromPlotRange:newRange toPlotRange:animateRange duration:0.2 withDelay:0 animationCurve:CPTAnimationCurveSinusoidalOut delegate:self];
+        }
     }
     return YES;
-}
-
--(void)animationDidFinish:(CPTAnimationOperation *)operation {
-    if (operation == elasticAnimation) {
-        elasticAnimation = nil;
-    }
 }
 
 

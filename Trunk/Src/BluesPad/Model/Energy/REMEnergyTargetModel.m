@@ -19,7 +19,8 @@
     self.commodityId = [dictionary[@"CommodityId"] longLongValue];
     self.uomName = dictionary[@"Uom"];
     self.type = (REMEnergyTargetType)[dictionary[@"Type"] intValue];
-    
+    self.uomId = [dictionary[@"UomId"] longLongValue];
+
     if((NSNull *)dictionary[@"VisiableTimeSpan"] != [NSNull null] && dictionary[@"VisiableTimeSpan"]!= nil)
     {
         self.visiableTimeRange = [[REMTimeRange alloc] initWithDictionary:(NSDictionary *)dictionary[@"VisiableTimeSpan"]];
