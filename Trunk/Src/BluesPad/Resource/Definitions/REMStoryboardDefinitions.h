@@ -26,4 +26,10 @@
 
 #define kStoryboard_SettingsPage @"settingsPage"
 
+
+#pragma mark - cell identifiers
+//Prefix: kCellIdentifier_
+
+#define kCellIdentifier_GallaryCell @"gallaryCellIdentifier"
+
 #endif

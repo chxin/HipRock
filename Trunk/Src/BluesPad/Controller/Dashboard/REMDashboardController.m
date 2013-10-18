@@ -113,7 +113,6 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     REMDashboardCellViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
     if(cell==nil){
         cell = [[REMDashboardCellViewCell alloc]initWithStyle: UITableViewCellStyleDefault reuseIdentifier:cellId];
-        
     }
     
     [cell initWidgetCollection:self.dashboardArray[indexPath.section] withGroupName:[self groupName]];

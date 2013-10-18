@@ -24,8 +24,6 @@
 
 @interface REMMapViewController ()
 
-@property (nonatomic,strong) GMSMarker *pressedMarker;
-
 @end
 
 @implementation REMMapViewController{
@@ -67,7 +65,7 @@ static BOOL isInitialPresenting = YES;
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    if(isInitialPresenting == YES){
+    if(self.buildingInfoArray.count>0 && isInitialPresenting == YES){
         [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
     }
 }
@@ -118,8 +116,6 @@ static BOOL isInitialPresenting = YES;
     GMSCameraUpdate *update = [self getCameraUpdate];
     
     [mapView moveCamera:update];
-    
-    sleep(1);
 }
 
 -(GMSCameraUpdate *)getCameraUpdate
@@ -187,12 +183,8 @@ static BOOL isInitialPresenting = YES;
         REMMapBuildingSegue *customeSegue = (REMMapBuildingSegue *)segue;
         customeSegue.isInitialPresenting = isInitialPresenting;
         
-        if(self.pressedMarker != nil){
-            CGPoint markerPoint = [mapView.projection pointForCoordinate:self.pressedMarker.position];
-            self.originalPoint = CGPointMake(markerPoint.x, markerPoint.y-40);
-        }
-        else{
-            self.originalPoint = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2);
+        if(self.selectedBuilding == nil){
+            self.initialRect = CGRectMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2, 5.12, 3.84);
         }
         
         self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
@@ -201,7 +193,7 @@ static BOOL isInitialPresenting = YES;
         buildingViewController.buildingOverallArray = self.buildingInfoArray;
         buildingViewController.splashScreenController = self.splashScreenController;
         buildingViewController.mapViewController = self;
-        buildingViewController.currentBuildingId = ((REMBuildingModel *)self.pressedMarker.userData).buildingId;
+        buildingViewController.currentBuildingId = self.selectedBuilding.buildingId;
     }
 }
 
@@ -220,8 +212,10 @@ static BOOL isInitialPresenting = YES;
         self.gallaryViewController = [[REMGallaryViewController alloc] init];
     }
     
+    self.gallaryViewController.mapViewController = self;
     self.gallaryViewController.originalFrame = self.gallarySwitchButton.frame;
     self.gallaryViewController.viewFrame = self.view.bounds;
+    self.gallaryViewController.buildingInfoArray = self.buildingInfoArray;
     
     [self addChildViewController:self.gallaryViewController];
     [self.view addSubview:self.gallaryViewController.view];
@@ -236,9 +230,12 @@ static BOOL isInitialPresenting = YES;
     return YES;
 }
 
-- (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
+- (void)mapView:(GMSMapView *)view didTapInfoWindowOfMarker:(GMSMarker *)marker
 {
-    self.pressedMarker = marker;
+    CGPoint markerPoint = [mapView.projection pointForCoordinate:marker.position];
+    self.initialRect = CGRectMake(markerPoint.x, markerPoint.y-40, 5.12, 3.84);
+
+    self.selectedBuilding = marker.userData;
     [self presentBuildingView];
 }
 

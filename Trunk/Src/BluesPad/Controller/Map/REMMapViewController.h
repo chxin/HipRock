@@ -10,6 +10,7 @@
 #import "REMSplashScreenController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import "REMControllerBase.h"
+#import "REMBuildingModel.h"
 @class REMGallaryViewController;
 @class REMBuildingViewController;
 
@@ -23,11 +24,14 @@
 @property (nonatomic,strong) REMBuildingViewController *buildingViewController;
 
 @property (nonatomic,strong) UIImageView *snapshot;
-@property (nonatomic) CGPoint originalPoint;
+@property (nonatomic) CGRect initialRect;
+
+@property (nonatomic,strong) REMBuildingModel *selectedBuilding;
+
 
 - (IBAction)gallarySwitchButtonPressed:(id)sender;
 -(void)setIsInitialPresenting:(BOOL)isInitial;
 
-
+-(void)presentBuildingView;
 
 @end

@@ -31,7 +31,6 @@
 
 - (void)perform
 {
-    NSLog(@"is first presenting: %d",self.isInitialPresenting);
     REMMapViewController *mapViewController = self.isUnWinding == YES ? self.destinationViewController : self.sourceViewController;
     REMBuildingViewController *buildingViewController = self.isUnWinding == YES ? self.sourceViewController : self.destinationViewController;
     
@@ -42,12 +41,10 @@
     }
     
     if(self.isUnWinding == NO){
-        NSLog(@"mb:%@",NSStringFromCGPoint(mapViewController.originalPoint));
         [self zoomInBuildingController:buildingViewController fromMapController:mapViewController];
         return;
     }
     else{
-        NSLog(@"bm:%@",NSStringFromCGPoint(buildingViewController.mapViewController.originalPoint));
         [self zoomOutMapController:mapViewController fromBuildingController:buildingViewController];
         return;
     }
@@ -74,52 +71,73 @@
 
 -(void)zoomInBuildingController:(REMBuildingViewController *)buildingController fromMapController:(REMMapViewController *)mapController
 {
-    CGPoint originalPoint = buildingController.mapViewController.originalPoint;
+//    CGPoint originalPoint = buildingController.mapViewController.originalPoint;
     UIView *mapView = mapController.view, *buildingView = buildingController.view;
     
     //add building view as subview into map view
-    __block UIImageView *transitionView = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:buildingView]];
+    UIImageView *transitionView = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:buildingView]];
     
-    CGRect initialFrame = CGRectMake(originalPoint.x, originalPoint.y, 0, 0);
-    CGRect finalFrame = CGRectMake(0, 0, mapView.bounds.size.width, mapView.bounds.size.height);
-    
-    transitionView.frame = initialFrame;
+//    CGRect initialFrame = CGRectMake(originalPoint.x, originalPoint.y, 0, 0);
+//    CGRect finalFrame = CGRectMake(0, 0, mapView.bounds.size.width, mapView.bounds.size.height);
+//    
+    transitionView.frame = mapView.bounds;
+    transitionView.transform = [self getTransformFromOriginalFrame:mapController.initialRect andFinalFrame:mapView.frame];
+    transitionView.center = [self getCenterOfRect:mapController.initialRect];
     
     [mapView addSubview:transitionView];
     
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        transitionView.frame = finalFrame;
+    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//        transitionView.frame = finalFrame;
+        transitionView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        transitionView.center = [self getCenterOfRect:mapView.frame];
     } completion:^(BOOL finished){
         [transitionView removeFromSuperview];
-        transitionView = nil;
         [mapController.navigationController pushViewController:buildingController animated:NO];
     }];
 }
 
 -(void)zoomOutMapController:(REMMapViewController *)mapController fromBuildingController:(REMBuildingViewController *)buildingController
 {
-    CGPoint originalPoint = buildingController.mapViewController.originalPoint;
+//    CGPoint originalPoint = buildingController.mapViewController.originalPoint;
     UIView *buildingView = buildingController.view;
     
-    __block UIImageView *transitionView = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:buildingView]];
+    UIImageView *transitionView = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:buildingView]];
     
-    CGRect initialFrame = CGRectMake(0, 0, buildingView.bounds.size.width, buildingView.bounds.size.height);
-    CGRect finalFrame = CGRectMake(originalPoint.x, originalPoint.y, 0, 0);
+//    CGRect initialFrame = CGRectMake(0, 0, buildingView.bounds.size.width, buildingView.bounds.size.height);
+//    CGRect finalFrame = CGRectMake(originalPoint.x, originalPoint.y, 0, 0);
     
-    transitionView.frame = initialFrame;
-    buildingController.mapViewController.snapshot.frame = initialFrame;
+    transitionView.frame = buildingView.bounds;
+    buildingController.mapViewController.snapshot.frame = buildingView.bounds;
     
     [buildingView addSubview:buildingController.mapViewController.snapshot];
     [buildingView addSubview:transitionView];
     
     
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        transitionView.frame = finalFrame;
+    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//        transitionView.frame = finalFrame;
+        
+        transitionView.transform = [self getTransformFromOriginalFrame:buildingController.mapViewController.initialRect andFinalFrame:buildingView.frame];;
+        transitionView.center = [self getCenterOfRect:buildingController.mapViewController.initialRect];
+        
     } completion:^(BOOL finished){
         [transitionView removeFromSuperview];
-        transitionView = nil;
         [buildingController.navigationController popViewControllerAnimated:NO];
     }];
+}
+
+
+-(CGAffineTransform)getTransformFromOriginalFrame:(CGRect)originalFrame andFinalFrame:(CGRect)finalFrame
+{
+    CGFloat ratio = originalFrame.size.width/finalFrame.size.width;
+    
+    return CGAffineTransformMakeScale(ratio, ratio);
+}
+
+-(CGPoint)getCenterOfRect:(CGRect)rect
+{
+    CGFloat x = rect.origin.x + rect.size.width/2;
+    CGFloat y = rect.origin.y + rect.size.height/2;
+    return CGPointMake(x, y);
 }
 
 @end
