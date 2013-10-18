@@ -311,6 +311,8 @@
 		7A2E7ECC17F2DD41000EB506 /* REMBuildingTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2E7EC717F2DD41000EB506 /* REMBuildingTitleView.m */; };
 		7A2E7ECD17F2DD41000EB506 /* REMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2E7EC917F2DD41000EB506 /* REMImageView.m */; };
 		7A2F76151810C6C8006C19D8 /* REMScreenEdgetGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2F76141810C6C8006C19D8 /* REMScreenEdgetGestureRecognizer.m */; };
+		7A2F76181810C82E006C19D8 /* DefaultBuilding-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A2F76161810C82E006C19D8 /* DefaultBuilding-Small.png */; };
+		7A2F76191810C82E006C19D8 /* DefaultBuilding-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A2F76171810C82E006C19D8 /* DefaultBuilding-Small@2x.png */; };
 		7A37AA5C17AB56F100316902 /* REMUserValidationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA5B17AB56F100316902 /* REMUserValidationModel.m */; };
 		7A37AA6317AB944B00316902 /* REMNumberLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA6217AB944B00316902 /* REMNumberLabel.m */; };
 		7A399E96177D238F00F0EB9F /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E84177D238F00F0EB9F /* AFHTTPClient.m */; };
@@ -780,6 +782,8 @@
 		7A2E7EC917F2DD41000EB506 /* REMImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageView.m; path = View/Building/REMImageView.m; sourceTree = "<group>"; };
 		7A2F76131810C6C8006C19D8 /* REMScreenEdgetGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMScreenEdgetGestureRecognizer.h; sourceTree = "<group>"; };
 		7A2F76141810C6C8006C19D8 /* REMScreenEdgetGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMScreenEdgetGestureRecognizer.m; sourceTree = "<group>"; };
+		7A2F76161810C82E006C19D8 /* DefaultBuilding-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuilding-Small.png"; sourceTree = "<group>"; };
+		7A2F76171810C82E006C19D8 /* DefaultBuilding-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuilding-Small@2x.png"; sourceTree = "<group>"; };
 		7A37AA5A17AB56F100316902 /* REMUserValidationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMUserValidationModel.h; path = Model/Login/REMUserValidationModel.h; sourceTree = "<group>"; };
 		7A37AA5B17AB56F100316902 /* REMUserValidationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMUserValidationModel.m; path = Model/Login/REMUserValidationModel.m; sourceTree = "<group>"; };
 		7A37AA6117AB944B00316902 /* REMNumberLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMNumberLabel.h; sourceTree = "<group>"; };
@@ -2151,6 +2155,9 @@
 		7ACFCBA217CDA62E00811976 /* Building */ = {
 			isa = PBXGroup;
 			children = (
+				7ACFCBA317CDA62E00811976 /* commodity */,
+				7A2F76161810C82E006C19D8 /* DefaultBuilding-Small.png */,
+				7A2F76171810C82E006C19D8 /* DefaultBuilding-Small@2x.png */,
 				B4AB0B391807F9CD0053108B /* mail.jpg */,
 				B4EDFB0B18064F2900873FA1 /* Share_disable.png */,
 				B4EDFB0C18064F2900873FA1 /* Share_disable@2x.png */,
@@ -2159,7 +2166,6 @@
 				B47ACC2517F8010A00989B2C /* leftarrow.png */,
 				B42C338A17E19064008289D2 /* DefaultBuilding.png */,
 				B42C338817E18E63008289D2 /* DefaultBuilding@2x.png */,
-				7ACFCBA317CDA62E00811976 /* commodity */,
 				B454BC0A17CDECD500D69A7B /* NotOverTarget.png */,
 				B454BC0B17CDECD500D69A7B /* NotOverTarget@2x.png */,
 				B454BC0117CDEC4D00D69A7B /* Menu_normal.png */,
@@ -2639,6 +2645,7 @@
 				B454BC0517CDEC4D00D69A7B /* Menu_normal@2x.png in Resources */,
 				B454BC0617CDEC4D00D69A7B /* OverTarget.png in Resources */,
 				B4EDFB1018064F2900873FA1 /* Share_disable@2x.png in Resources */,
+				7A2F76191810C82E006C19D8 /* DefaultBuilding-Small@2x.png in Resources */,
 				B454BC0717CDEC4D00D69A7B /* Menu_normal.png in Resources */,
 				B454BC0917CDEC4D00D69A7B /* OverTarget@2x.png in Resources */,
 				B454BC0C17CDECD500D69A7B /* NotOverTarget.png in Resources */,
@@ -2665,6 +2672,7 @@
 				B45F8A5D17D5B0340079C74D /* NaturalGas_pressed.png in Resources */,
 				B45F8A5E17D5B0340079C74D /* NaturalGas_normal.png in Resources */,
 				B45F8A5F17D5B0340079C74D /* Water_pressed.png in Resources */,
+				7A2F76181810C82E006C19D8 /* DefaultBuilding-Small.png in Resources */,
 				B45F8A6017D5B0340079C74D /* Water_normal.png in Resources */,
 				7A13C19B17F40D31007E6AA9 /* GoogleMaps.bundle in Resources */,
 				B45F8A6117D5B0340079C74D /* Electricity_pressed.png in Resources */,
