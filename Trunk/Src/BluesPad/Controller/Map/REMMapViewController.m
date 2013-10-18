@@ -184,7 +184,7 @@ static BOOL isInitialPresenting = YES;
         customeSegue.isInitialPresenting = isInitialPresenting;
         
         if(self.selectedBuilding == nil){
-            self.initialRect = CGRectMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2, 5.12, 3.84);
+            self.initialZoomRect = CGRectMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2, 5.12, 3.84);
         }
         
         self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
@@ -233,7 +233,7 @@ static BOOL isInitialPresenting = YES;
 - (void)mapView:(GMSMapView *)view didTapInfoWindowOfMarker:(GMSMarker *)marker
 {
     CGPoint markerPoint = [mapView.projection pointForCoordinate:marker.position];
-    self.initialRect = CGRectMake(markerPoint.x, markerPoint.y-40, 5.12, 3.84);
+    self.initialZoomRect = CGRectMake(markerPoint.x, markerPoint.y-40, 5.12, 3.84);
 
     self.selectedBuilding = marker.userData;
     [self presentBuildingView];

@@ -78,6 +78,9 @@
         
         UITapGestureRecognizer *tap= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapthis:)];
         [self.view addGestureRecognizer:tap];
+        
+        UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchThis:)];
+        [self.view addGestureRecognizer:pinch];
     }
     
     
@@ -391,6 +394,21 @@
     
     for (REMImageView *view in self.imageArray) {
         [view tapthis];
+    }
+}
+
+-(void)pinchThis:(UIPinchGestureRecognizer *)pinch
+{
+//    UIGestureRecognizerStateBegan,      // the recognizer has received touches recognized as the gesture. the action method will be called at the next turn of the run loop
+//    UIGestureRecognizerStateChanged,    // the recognizer has received touches recognized as a change to the gesture. the action method will be called at the next turn of the run loop
+//    UIGestureRecognizerStateEnded,
+    if(pinch.state == UIGestureRecognizerStateBegan){
+    }
+    
+    if(pinch.state == UIGestureRecognizerStateChanged){
+    }
+    
+    if(pinch.state == UIGestureRecognizerStateEnded){
     }
 }
 

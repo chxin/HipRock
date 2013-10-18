@@ -24,7 +24,7 @@
 @property (nonatomic,strong) REMBuildingViewController *buildingViewController;
 
 @property (nonatomic,strong) UIImageView *snapshot;
-@property (nonatomic) CGRect initialRect;
+@property (nonatomic) CGRect initialZoomRect;
 
 @property (nonatomic,strong) REMBuildingModel *selectedBuilding;
 

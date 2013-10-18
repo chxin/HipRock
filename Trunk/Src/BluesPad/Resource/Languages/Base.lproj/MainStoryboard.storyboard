@@ -17,99 +17,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SplashScreenBackgroud.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="9Mr-EH-OgG">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="SplashScreenBackgroud.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="yte-p9-fg9">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="768" id="aJE-cd-aKs"/>
-                                </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LxY-lh-jAg">
-                                <rect key="frame" x="256" y="143" width="512" height="625"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n0f-lw-iE2">
+                                <rect key="frame" x="256" y="158" width="512" height="610"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SplashScreenLogo-Common.png" translatesAutoresizingMaskIntoConstraints="NO" id="Igx-ZG-8eI">
-                                        <rect key="frame" x="186" y="0.0" width="140" height="153"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="SplashScreenLogo-Common.png" translatesAutoresizingMaskIntoConstraints="NO" id="EwQ-sM-g4j">
+                                        <rect key="frame" x="82.5" y="0.0" width="347" height="161"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="能源管理开放平台" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAT-aj-FDp">
-                                        <rect key="frame" x="16" y="227" width="480" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="Xdi-ja-xav"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="32"/>
-                                        <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="施耐德电气" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uoj-p9-JG9">
-                                        <rect key="frame" x="16" y="180" width="480" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="izA-kg-ktd"/>
-                                            <constraint firstAttribute="width" constant="480" id="vyl-wd-koT"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="24"/>
-                                        <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SplashScreenLogo-Flash.png" translatesAutoresizingMaskIntoConstraints="NO" id="KpV-VC-3uG">
-                                        <rect key="frame" x="186" y="0.0" width="140" height="153"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="SplashScreenLogo-Flash.png" translatesAutoresizingMaskIntoConstraints="NO" id="hrS-r0-aDO">
+                                        <rect key="frame" x="82.5" y="0.0" width="347" height="161"/>
                                     </imageView>
-                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="施耐德电气版权所有" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLf-zL-VFO">
-                                        <rect key="frame" x="0.0" y="543" width="512" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="cmG-P8-5SS"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="能源管理开放平台" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6iF-YV-ve2">
+                                        <rect key="frame" x="0.0" y="161" width="512" height="32"/>
+                                        <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="28"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="© 2012-2013 施耐德电气（中国）有限公司版权所有" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Lm-3p-kzn">
-                                        <rect key="frame" x="0.0" y="576" width="512" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="FwE-44-wP1"/>
-                                        </constraints>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="© 2012-2013 施耐德电气（中国）有限公司版权所有" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JqP-yM-LYS">
+                                        <rect key="frame" x="0.0" y="556" width="512" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="Igx-ZG-8eI" firstAttribute="top" secondItem="LxY-lh-jAg" secondAttribute="top" id="0hs-jz-wCQ"/>
-                                    <constraint firstItem="ZAT-aj-FDp" firstAttribute="top" secondItem="uoj-p9-JG9" secondAttribute="bottom" constant="15" id="1h5-E3-jCC"/>
-                                    <constraint firstItem="KpV-VC-3uG" firstAttribute="leading" secondItem="Igx-ZG-8eI" secondAttribute="leading" id="7pY-8I-Thl"/>
-                                    <constraint firstItem="3Lm-3p-kzn" firstAttribute="top" secondItem="BLf-zL-VFO" secondAttribute="bottom" constant="12" id="DUc-Jl-tCS"/>
-                                    <constraint firstAttribute="bottom" secondItem="3Lm-3p-kzn" secondAttribute="bottom" constant="28" id="HiT-EL-FNQ"/>
-                                    <constraint firstItem="uoj-p9-JG9" firstAttribute="leading" secondItem="ZAT-aj-FDp" secondAttribute="leading" id="KgH-p5-WBB"/>
-                                    <constraint firstItem="BLf-zL-VFO" firstAttribute="leading" secondItem="LxY-lh-jAg" secondAttribute="leading" id="R94-1Z-C31"/>
-                                    <constraint firstItem="KpV-VC-3uG" firstAttribute="top" secondItem="LxY-lh-jAg" secondAttribute="top" id="WVg-h4-gMW"/>
-                                    <constraint firstItem="uoj-p9-JG9" firstAttribute="centerX" secondItem="KpV-VC-3uG" secondAttribute="centerX" id="Ylj-mf-9tM"/>
-                                    <constraint firstItem="uoj-p9-JG9" firstAttribute="trailing" secondItem="ZAT-aj-FDp" secondAttribute="trailing" id="dbU-mn-K9F"/>
-                                    <constraint firstItem="BLf-zL-VFO" firstAttribute="centerX" secondItem="ZAT-aj-FDp" secondAttribute="centerX" id="ftk-Ln-br4"/>
-                                    <constraint firstItem="BLf-zL-VFO" firstAttribute="trailing" secondItem="LxY-lh-jAg" secondAttribute="trailing" id="ipk-FU-Wh6"/>
-                                    <constraint firstItem="3Lm-3p-kzn" firstAttribute="leading" secondItem="LxY-lh-jAg" secondAttribute="leading" id="jIb-Lb-k57"/>
-                                    <constraint firstItem="3Lm-3p-kzn" firstAttribute="trailing" secondItem="LxY-lh-jAg" secondAttribute="trailing" id="vu5-oO-sh1"/>
-                                    <constraint firstItem="uoj-p9-JG9" firstAttribute="top" secondItem="KpV-VC-3uG" secondAttribute="bottom" constant="27" id="xBo-Mz-oHm"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="9Mr-EH-OgG" firstAttribute="leading" secondItem="XgD-ii-3PV" secondAttribute="leading" id="3Qh-cT-yX9"/>
-                            <constraint firstItem="LxY-lh-jAg" firstAttribute="centerX" secondItem="9Mr-EH-OgG" secondAttribute="centerX" id="3qN-jx-qRW"/>
-                            <constraint firstItem="LxY-lh-jAg" firstAttribute="top" secondItem="XgD-ii-3PV" secondAttribute="top" constant="143" id="c3r-2e-LXZ"/>
-                            <constraint firstItem="9Mr-EH-OgG" firstAttribute="top" secondItem="XgD-ii-3PV" secondAttribute="top" id="fNC-M4-3Lw"/>
-                            <constraint firstItem="LxY-lh-jAg" firstAttribute="bottom" secondItem="XgD-ii-3PV" secondAttribute="bottom" id="hE6-wo-bXH"/>
-                            <constraint firstItem="LxY-lh-jAg" firstAttribute="leading" secondItem="XgD-ii-3PV" secondAttribute="leading" constant="256" id="q2R-hr-RBB"/>
-                        </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="VnJ-Zp-20y"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <outlet property="flashLogo" destination="KpV-VC-3uG" id="XfR-t6-NdL"/>
-                        <outlet property="logoView" destination="LxY-lh-jAg" id="k4L-pY-OOj"/>
-                        <outlet property="normalLogo" destination="Igx-ZG-8eI" id="DzI-Uu-lrm"/>
+                        <outlet property="flashLogo" destination="hrS-r0-aDO" id="ID7-WT-p47"/>
+                        <outlet property="logoView" destination="n0f-lw-iE2" id="QSR-aa-obr"/>
+                        <outlet property="normalLogo" destination="EwQ-sM-g4j" id="sUM-63-Oaw"/>
                         <segue destination="8sm-Rk-4h3" kind="custom" identifier="splashToMapSegue" customClass="REMSplashMapSegue" id="9ca-ql-9sS"/>
                     </connections>
                 </viewController>
@@ -1692,9 +1637,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     <resources>
         <image name="Gallary.png" width="32" height="32"/>
         <image name="Schneider-Logo.png" width="100" height="30"/>
-        <image name="SplashScreenBackgroud.jpg" width="1024" height="748"/>
-        <image name="SplashScreenLogo-Common.png" width="140" height="153"/>
-        <image name="SplashScreenLogo-Flash.png" width="140" height="153"/>
+        <image name="SplashScreenBackgroud.jpg" width="1024" height="768"/>
+        <image name="SplashScreenLogo-Common.png" width="347" height="161"/>
+        <image name="SplashScreenLogo-Flash.png" width="347" height="161"/>
         <image name="dashboard-all.png" width="32" height="32"/>
         <image name="dashboard-favorite.png" width="32" height="32"/>
         <image name="dashboard-recent.png" width="32" height="32"/>

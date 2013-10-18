@@ -17,8 +17,6 @@
 
 + (BOOL) checkIs3G;
 
-+ (BOOL) checkIs2G;
-
 + (BOOL) checkIsNoConnect;
 
 @end

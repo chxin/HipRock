@@ -26,12 +26,7 @@
 
 + (BOOL) checkIs3G
 {
-    return [REMNetworkHelper checkCurrentNetworkStatus] == ReachableViaWWAN3G;
-}
-
-+ (BOOL) checkIs2G
-{
-    return [REMNetworkHelper checkCurrentNetworkStatus] == ReachableViaWWAN2G;
+    return [REMNetworkHelper checkCurrentNetworkStatus] == ReachableViaWWAN;
 }
 
 + (BOOL) checkIsNoConnect
