@@ -15,7 +15,7 @@
 
 @interface REMWidgetMaxView : REMModalView<UIGestureRecognizerDelegate>
 
-@property (nonatomic, readonly) CGRect startFrame; // 最大化最小化动画的起止
+@property (nonatomic) REMDashboardCollectionCellView* currentWidgetCell;
 
 @property (nonatomic, readonly) REMWidgetObject *widgetInfo;
 
