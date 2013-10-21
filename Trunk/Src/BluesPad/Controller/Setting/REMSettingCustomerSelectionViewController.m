@@ -40,6 +40,10 @@
 
 - (void)switchCustomer:(UIBarButtonItem *)sender
 {
+    if(self.currentRow==NSNotFound){
+        [self.settingController.navigationController popToRootViewControllerAnimated:YES];
+        return;
+    }
     REMCustomerModel *customer= [REMApplicationContext instance].currentUser.customers[self.currentRow];
     if([customer.name isEqualToString:[REMApplicationContext instance].currentCustomer.name]==YES){
         
@@ -82,6 +86,9 @@
             [alert show];
             
             [REMApplicationContext instance].currentUser.customers=customerArray;
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:self.currentRow inSection:0];
+            UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:indexPath];
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
             self.currentRow=NSNotFound;
             [self.tableView reloadData];
         }
