@@ -21,22 +21,22 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n0f-lw-iE2">
-                                <rect key="frame" x="256" y="158" width="512" height="610"/>
+                                <rect key="frame" x="256" y="190" width="512" height="610"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="SplashScreenLogo-Common.png" translatesAutoresizingMaskIntoConstraints="NO" id="EwQ-sM-g4j">
-                                        <rect key="frame" x="82.5" y="0.0" width="347" height="161"/>
+                                        <rect key="frame" x="122" y="0.0" width="269" height="100"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="SplashScreenLogo-Flash.png" translatesAutoresizingMaskIntoConstraints="NO" id="hrS-r0-aDO">
-                                        <rect key="frame" x="82.5" y="0.0" width="347" height="161"/>
+                                        <rect key="frame" x="122" y="0.0" width="269" height="100"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="能源管理开放平台" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6iF-YV-ve2">
-                                        <rect key="frame" x="0.0" y="161" width="512" height="32"/>
-                                        <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="28"/>
+                                        <rect key="frame" x="0.0" y="114" width="512" height="32"/>
+                                        <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="24"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="© 2012-2013 施耐德电气（中国）有限公司版权所有" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JqP-yM-LYS">
-                                        <rect key="frame" x="0.0" y="556" width="512" height="21"/>
+                                        <rect key="frame" x="0.0" y="524" width="512" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1638,8 +1638,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="Gallary.png" width="32" height="32"/>
         <image name="Schneider-Logo.png" width="100" height="30"/>
         <image name="SplashScreenBackgroud.jpg" width="1024" height="768"/>
-        <image name="SplashScreenLogo-Common.png" width="347" height="161"/>
-        <image name="SplashScreenLogo-Flash.png" width="347" height="161"/>
+        <image name="SplashScreenLogo-Common.png" width="269" height="100"/>
+        <image name="SplashScreenLogo-Flash.png" width="269" height="100"/>
         <image name="dashboard-all.png" width="32" height="32"/>
         <image name="dashboard-favorite.png" width="32" height="32"/>
         <image name="dashboard-recent.png" width="32" height="32"/>

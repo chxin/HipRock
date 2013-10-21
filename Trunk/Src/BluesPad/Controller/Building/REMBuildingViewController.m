@@ -13,6 +13,7 @@
 #import "REMBuildingWeiboView.h"
 #import "REMMapViewController.h"
 #import "REMMapBuildingSegue.h"
+#import "REMCommonHeaders.h"
 #import "REMStoryboardDefinitions.h"
 
 @interface REMBuildingViewController ()
@@ -29,11 +30,17 @@
 
 
 @property (nonatomic,strong) NSMutableDictionary *customImageLoadedDictionary;
+
+@property (nonatomic,strong) UIImageView *snapshot;
 @end
 
 
 
-@implementation REMBuildingViewController
+@implementation REMBuildingViewController{
+    CGFloat     pinchLastScale;
+    CGPoint     pinchLastPoint;
+    UIImageView *mapSnapshot;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -136,9 +143,15 @@
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"buildingToMapSegue"]==YES){
-        REMMapViewController *mapController = segue.destinationViewController;
-        mapController.buildingInfoArray = self.buildingOverallArray;
+//    if([segue.identifier isEqualToString:@"buildingToMapSegue"]==YES){
+//        REMMapViewController *mapController = segue.destinationViewController;
+//        mapController.buildingInfoArray = self.buildingOverallArray;
+//    }
+    if([segue.identifier isEqualToString:kSegue_BuildingToMap] == YES){
+        REMMapBuildingSegue *customSegue = (REMMapBuildingSegue *)segue;
+        
+        customSegue.initialZoomRect = self.mapViewController.initialZoomRect;
+        customSegue.finalZoomRect = self.view.frame;
     }
 }
 
@@ -397,18 +410,68 @@
     }
 }
 
+
+
 -(void)pinchThis:(UIPinchGestureRecognizer *)pinch
 {
-//    UIGestureRecognizerStateBegan,      // the recognizer has received touches recognized as the gesture. the action method will be called at the next turn of the run loop
-//    UIGestureRecognizerStateChanged,    // the recognizer has received touches recognized as a change to the gesture. the action method will be called at the next turn of the run loop
-//    UIGestureRecognizerStateEnded,
-    if(pinch.state == UIGestureRecognizerStateBegan){
+    if(pinch.state  == UIGestureRecognizerStateBegan){
+        NSLog(@"pinch: Began");
+        if(mapSnapshot == nil)
+            mapSnapshot = self.mapViewController.snapshot;
+        
+        pinchLastScale = 1.0;
+        pinchLastPoint = [pinch locationInView:self.snapshot];
+        
+        self.snapshot = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:self.view]];
+        [self.view addSubview:mapSnapshot];
+        [self.view addSubview:self.snapshot];
     }
     
-    if(pinch.state == UIGestureRecognizerStateChanged){
+    if(pinch.state  == UIGestureRecognizerStateChanged){
+        CGFloat scale = pinch.scale > 1 ? 1 : pinch.scale;
+        CGAffineTransform scaleTransform = CGAffineTransformMakeScale(scale, scale);
+        self.snapshot.layer.affineTransform = scaleTransform;
+        
+        CGPoint point = [pinch locationInView:self.view];
+        self.snapshot.center = point;
+        
+        NSLog(@"pinch: Changed, scale: %f, point: %@", pinch.scale, NSStringFromCGPoint(point));
+        
+        pinchLastScale = pinch.scale;
+        pinchLastPoint = point;
     }
     
-    if(pinch.state == UIGestureRecognizerStateEnded){
+    if(pinch.state  == UIGestureRecognizerStateEnded || pinch.state  == UIGestureRecognizerStateCancelled || pinch.state  == UIGestureRecognizerStateFailed){
+        NSLog(@"pinch: Ended, state: %d, touch numbers: %d", pinch.state, pinch.numberOfTouches);
+        
+        if(pinchLastScale >= 1){ //scale did not change,
+            if(pinchLastPoint.x != self.view.center.x || pinchLastPoint.y != self.view.center.y){ //but position changed
+                [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    self.snapshot.center = self.view.center;
+                } completion:^(BOOL finished) {
+                    [mapSnapshot removeFromSuperview];
+                    mapSnapshot = nil;
+                    
+                    [self.snapshot removeFromSuperview];
+                    self.snapshot = nil;
+                }];
+            }
+        }
+        else{ //scale smaller
+            [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                //from self.snapshot.frame to self.mapViewController.initialZoomRect;
+                self.snapshot.transform = [REMViewHelper getScaleTransformFromOriginalFrame:self.mapViewController.initialZoomRect andFinalFrame:self.view.frame];
+                self.snapshot.center = [REMViewHelper getCenterOfRect:self.mapViewController.initialZoomRect];
+            } completion:^(BOOL finished) {
+                [mapSnapshot removeFromSuperview];
+                mapSnapshot = nil;
+                
+                [self.snapshot removeFromSuperview];
+                self.snapshot = nil;
+                [self.navigationController popViewControllerAnimated:NO];
+            }];
+        }
+        
     }
 }
 
