@@ -41,8 +41,8 @@
         [gallaryView registerClass:[REMGallaryCell class] forCellWithReuseIdentifier:kCellIdentifier_GallaryCell];
         [gallaryView setBackgroundColor:[UIColor grayColor]];
         
-        gallaryView.transform = [self getOriginalTransform];
-        gallaryView.center = [self getOriginalCenter];
+        gallaryView.transform = [REMViewHelper getScaleTransformFromOriginalFrame:self.originalFrame andFinalFrame:self.viewFrame];
+        gallaryView.center = [REMViewHelper getCenterOfRect:self.originalFrame];
         
         self.view = gallaryView;
     }
@@ -101,8 +101,8 @@
     }
     else{
         [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            gallaryView.transform = [self getOriginalTransform];
-            gallaryView.center = [self getOriginalCenter];
+            gallaryView.transform = [REMViewHelper getScaleTransformFromOriginalFrame:self.originalFrame andFinalFrame:self.viewFrame];
+            gallaryView.center = [REMViewHelper getCenterOfRect:self.originalFrame];
         } completion:^(BOOL finished) {
             [self.view removeFromSuperview];
             [self removeFromParentViewController];
@@ -110,19 +110,6 @@
     }
 }
 
--(CGAffineTransform)getOriginalTransform
-{
-    CGFloat ratio = self.originalFrame.size.width/self.viewFrame.size.width;
-    
-    return CGAffineTransformMakeScale(ratio, ratio);
-}
-
--(CGPoint)getOriginalCenter
-{
-    CGFloat x = self.originalFrame.origin.x + self.originalFrame.size.width/2;
-    CGFloat y = self.originalFrame.origin.y + self.originalFrame.size.height/2;
-    return CGPointMake(x, y);
-}
 
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {

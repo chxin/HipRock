@@ -182,6 +182,8 @@ static BOOL isInitialPresenting = YES;
     {
         REMMapBuildingSegue *customeSegue = (REMMapBuildingSegue *)segue;
         customeSegue.isInitialPresenting = isInitialPresenting;
+        customeSegue.initialZoomRect = self.initialZoomRect;
+        customeSegue.finalZoomRect = self.view.frame;
         
         if(self.selectedBuilding == nil){
             self.initialZoomRect = CGRectMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2, 5.12, 3.84);

@@ -68,6 +68,8 @@
         cachedResult = [REMStorage getFile:store.serviceMeta.url key:cacheKey];
     }
     
+    
+    
     if(store.serviceMeta.responseType == REMServiceResponseJson)
     {
         success([REMJSONHelper objectByString:cachedResult]);
