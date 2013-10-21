@@ -115,6 +115,10 @@
                 [self.userNameErrorLabel setText : @"登录失败，该用户未绑定客户" ];
             }
             
+            if(customers.count == 1){
+                [self.loginCarouselController.splashScreenController showMapView:nil];
+            }
+            
             [self performSegueWithIdentifier:@"loginCustomerSegue" sender:self];
             
         }

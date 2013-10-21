@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface REMScreenEdgetGestureRecognizer : UIGestureRecognizer
+@property (nonatomic) CGPoint eventStartPoint;
+@property (nonatomic) CGPoint eventEndPoint;
 -(int)getXMovement;
 @end

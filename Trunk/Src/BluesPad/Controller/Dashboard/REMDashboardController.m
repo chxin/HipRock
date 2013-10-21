@@ -72,7 +72,7 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if(decelerate==YES && scrollView.contentOffset.y<-80){
-        self.isHiding=YES;
+        //self.isHiding=YES;
         
         [REMDataAccessor cancelAccess:[self groupName]];
         [self.imageView gotoBuildingInfo];
@@ -80,8 +80,9 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    //NSLog(@"table scroll:%@",NSStringFromCGPoint(scrollView.contentOffset));
-    if(self.isHiding==YES)return;
+    NSLog(@"table scroll:%@",NSStringFromCGPoint(scrollView.contentOffset));
+    //if(self.isHiding==YES)return;
+
     if(scrollView.contentOffset.y<-80){
         self.buildingLabel.text=@"松开以显示";
     }
