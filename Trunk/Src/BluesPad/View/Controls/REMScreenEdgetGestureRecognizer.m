@@ -9,22 +9,15 @@
 #import "REMScreenEdgetGestureRecognizer.h"
 #import <UIKit/UIGestureRecognizerSubclass.h>
 
-@implementation REMScreenEdgetGestureRecognizer {
-    CGPoint eventStartPoint;
-    CGPoint eventEndPoint;
-}
+@implementation REMScreenEdgetGestureRecognizer
 
 -(int)getXMovement {
-    if (self.state == UIGestureRecognizerStateEnded) {
-        return abs(eventEndPoint.y - eventStartPoint.y);
-    } else {
-        return 0;
-    }
+    return [self locationInView:[UIApplication sharedApplication].keyWindow].y - self.eventStartPoint.y;
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    eventStartPoint = [self locationInView:[UIApplication sharedApplication].keyWindow];
-    float touchX = eventStartPoint.y;
+    self.eventStartPoint = [self locationInView:[UIApplication sharedApplication].keyWindow];
+    float touchX = self.eventStartPoint.y;
     if (touchX > 974 || touchX < 50) {
         self.state = UIGestureRecognizerStateBegan;
     } else {
@@ -42,8 +35,8 @@
     [super touchesEnded:touches withEvent:event];
     UIGestureRecognizerState s = self.state;
     if (s == UIGestureRecognizerStateBegan || s == UIGestureRecognizerStatePossible || s == UIGestureRecognizerStateChanged || s==UIGestureRecognizerStateRecognized) {
-        eventEndPoint = [self locationInView:[UIApplication sharedApplication].keyWindow];
-        if (abs(eventEndPoint.y - eventStartPoint.y) > 100) {
+        self.eventEndPoint = [self locationInView:[UIApplication sharedApplication].keyWindow];
+        if (abs(self.eventEndPoint.y - self.eventStartPoint.y) > 100) {
             self.state = UIGestureRecognizerStateEnded;
         } else {
             self.state = UIGestureRecognizerStateCancelled;

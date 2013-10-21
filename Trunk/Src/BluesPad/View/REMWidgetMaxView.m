@@ -14,7 +14,13 @@
     REMEnergyViewData *chartData;
     REMWidgetWrapper* widgetWrapper;
     UIButton* backBtn;
+    UIView* slideView;
+    UIView* overImageView;
+    UIImageView*  basicImageView;
 }
+
+const int kSlideWidth = 100;
+const int kSlideMovementWith = 300;
 
 - (REMModalView*)initWithSuperView:(UIView*)superView widgetCell:(REMDashboardCollectionCellView*)widgetCell
 {
@@ -105,6 +111,8 @@
     [widgetTitle setTextColor:[UIColor whiteColor]];
     widgetTitle.backgroundColor = [UIColor clearColor];
     [contentView addSubview:widgetTitle];
+    
+//    slideView = [[UIView alloc]init];
 }
 
 - (void)backButtonPressed:(UIButton *)button {
@@ -112,8 +120,43 @@
 }
 
 -(void)panthis:(REMScreenEdgetGestureRecognizer*)pan {
-    if (pan.state == UIGestureRecognizerStateEnded) {
-        NSLog(@"PAN Edget");
+    UIGestureRecognizerState gstate = pan.state;
+    CGPoint currentPoint = [pan locationInView:self];
+    CGPoint startPoint = [self convertPoint:pan.eventStartPoint fromView:[UIApplication sharedApplication].keyWindow];
+    CGFloat movementX = currentPoint.x - startPoint.x;
+    if (gstate == UIGestureRecognizerStateEnded) {
+        contentView.frame = CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height);
+        if (slideView) [slideView removeFromSuperview];
+        if (abs(movementX) >= kSlideMovementWith) {
+            [self close:YES];
+        }
+    } else if (gstate == UIGestureRecognizerStatePossible || gstate == UIGestureRecognizerStateBegan || gstate == UIGestureRecognizerStateChanged) {
+        if (slideView == nil) {
+            slideView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, self.frame.size.height)];
+            slideView.backgroundColor = [UIColor whiteColor];
+            slideView.clipsToBounds = YES;
+            NSBundle* mb = [NSBundle mainBundle];
+            basicImageView = [[UIImageView alloc]initWithImage:[[UIImage alloc]initWithContentsOfFile:[mb pathForResource:@"Oil_normal" ofType:@"png"]]];
+            overImageView = [[UIView alloc]initWithFrame:CGRectMake(27, 351, 0, 45)];
+            overImageView.clipsToBounds = YES;
+            UIImageView* overImage = [[UIImageView alloc]initWithImage:[[UIImage alloc]initWithContentsOfFile:[mb pathForResource:@"Oil_pressed" ofType:@"png"]]];
+            basicImageView.frame = CGRectMake(27, 351, 45, 45);
+            overImage.frame = CGRectMake(0, 0, 45, 45);
+            [overImageView addSubview:overImage];
+            [slideView addSubview:basicImageView];
+            [slideView addSubview:overImageView];
+        }
+        if (slideView.superview == nil) [self addSubview:slideView];
+        if (abs(movementX) <= kSlideMovementWith) {
+            CGFloat movementOfSlide = movementX / kSlideMovementWith * kSlideWidth;
+            slideView.frame = CGRectMake((movementOfSlide < 0) ? (1024 + movementOfSlide) : 0, 0, abs(movementOfSlide), contentView.frame.size.height);
+            basicImageView.frame = CGRectMake((slideView.frame.size.width-basicImageView.frame.size.width)/2, basicImageView.frame.origin.y, basicImageView.frame.size.width, basicImageView.frame.size.height);
+            contentView.frame = CGRectMake(movementOfSlide, 0, contentView.frame.size.width, contentView.frame.size.height);
+            overImageView.frame = CGRectMake(basicImageView.frame.origin.x, basicImageView.frame.origin.y, basicImageView.frame.size.width / kSlideMovementWith * abs(movementX), basicImageView.frame.size.height);
+        }
+    } else {
+        contentView.frame = CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height);
+        if (slideView) [slideView removeFromSuperview];
     }
 }
 
