@@ -24,7 +24,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.backgroundColor=[[UIColor blackColor] colorWithAlphaComponent:0.2];
+        self.backgroundColor=[[UIColor blackColor] colorWithAlphaComponent:0.54];
         //self.backgroundView=[[UIView alloc]initWithFrame:CGRectZero];
         //self.layer.cornerRadius=0;
         //self.layer.borderColor=[UIColor yellowColor].CGColor;
@@ -56,11 +56,23 @@
     
     //NSLog(@"contentview:%@",NSStringFromCGRect(self.contentView.frame));
     //NSLog(@"cellview:%@",NSStringFromCGRect(self.frame));
-    
-    
-    
     CGRect frame=self.contentView.frame;
-    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, frame.size.width, 35)];
+    CGRect shareFrame;
+    if(dashboardInfo.shareInfo!=nil && [dashboardInfo.shareInfo isEqual:[NSNull null]]== NO && [dashboardInfo.shareInfo.userRealName isEqual:[NSNull null]]==NO){
+        shareFrame = CGRectMake(10, 11, frame.size.width, 11-4);
+        UILabel *shareName=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x, 11, frame.size.width, 11)];
+        shareName.textColor=[UIColor whiteColor];
+        shareName.text=dashboardInfo.shareInfo.userRealName;
+        [self.contentView addSubview:shareName];
+    }
+    else{
+       shareFrame = CGRectMake(10, 0, frame.size.width, 0);
+    }
+    
+    
+    
+    
+    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x,shareFrame.origin.y+shareFrame.size.height+11, frame.size.width, 16)];
     title.text=dashboardInfo.name;
     title.backgroundColor=[UIColor clearColor];
     title.textColor=[UIColor whiteColor];
@@ -68,16 +80,28 @@
     
     
     //NSLog(@"splitbar:%@",NSStringFromCGRect(frame));
-    CGRect frame1 = CGRectMake(10, title.frame.size.height+5, frame.size.width-10*2, 2);
+    CGRect frame1 = CGRectMake(0, title.frame.origin.y+title.frame.size.height+11, frame.size.width, 1);
+    CGRect frame2 = CGRectMake(0, frame1.origin.y+1, frame1.size.width, frame1.size.height);
+    
+    CGContextRef c = UIGraphicsGetCurrentContext();
     
     CALayer *layer1 = [CALayer layer];
     
     layer1.frame=frame1;
-    layer1.backgroundColor=[[UIColor whiteColor]colorWithAlphaComponent:0.25].CGColor;
+    layer1.backgroundColor=[[UIColor blackColor]colorWithAlphaComponent:0.38].CGColor;
     UIGraphicsBeginImageContextWithOptions(frame1.size, NO, 0.0);
-    CGContextRef c = UIGraphicsGetCurrentContext();
+   
     
     [layer1 renderInContext:c];
+    
+    CALayer *layer2=[CALayer layer];
+    
+    layer2.frame=frame2;
+    layer2.backgroundColor=[[UIColor whiteColor]colorWithAlphaComponent:0.1].CGColor;
+    UIGraphicsBeginImageContextWithOptions(frame2.size, NO, 0.0);
+    
+    
+    [layer2 renderInContext:c];
     
     
     
@@ -85,6 +109,7 @@
     
     
     [self.contentView.layer insertSublayer:layer1 above:self.contentView.layer];
+    [self.contentView.layer insertSublayer:layer2 above:self.contentView.layer];
     
     
     UICollectionViewFlowLayout *flowlayout =[[UICollectionViewFlowLayout alloc]init];
@@ -92,7 +117,7 @@
     controller.groupName=groupName;
     self.collectionController=controller;
     self.collectionController.widgetArray=dashboardInfo.widgets;
-    self.collectionController.viewFrame=CGRectMake(10, frame1.origin.y+5, self.contentView.frame.size.width-10*2, self.contentView.frame.size.height-45);
+    self.collectionController.viewFrame=CGRectMake(10, frame2.origin.y+11, frame1.size.width-20, self.contentView.frame.size.height-(frame2.origin.y+11));
     [self.contentView addSubview: self.collectionController.collectionView];
 
     

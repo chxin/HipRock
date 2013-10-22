@@ -101,13 +101,13 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     REMDashboardObj *obj= self.dashboardArray[indexPath.section];
-    CGFloat titleHeight=60;
+    CGFloat titleHeight=49;
     if(obj.shareInfo!=nil){
         titleHeight+=20;
     }
-    CGFloat cellMargin=10;
-    CGFloat cellHeight=180;
-    return titleHeight+(obj.widgets.count/4+1)*cellHeight+cellMargin*(obj.widgets.count/4);
+    CGFloat cellMargin=8;
+    CGFloat cellHeight=121;
+    return titleHeight+(obj.widgets.count/4)*cellHeight+cellMargin*(obj.widgets.count/4-1);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

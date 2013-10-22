@@ -30,9 +30,11 @@ static NSString *cellId=@"widgetcell";
 
 - (void)loadView{
     UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc]init];
+    [flowlayout setMinimumInteritemSpacing:8];
+    [flowlayout setSectionInset:UIEdgeInsetsZero];
     
     //[flowlayout setItemSize: CGSizeMake(100, 100)];
-    [flowlayout setItemSize:CGSizeMake(250, 160)];
+    [flowlayout setItemSize:CGSizeMake(182, 121)];
     
     self.collectionView=[[REMDashboardCollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:flowlayout];
     [self.collectionView setFrame:self.viewFrame];
