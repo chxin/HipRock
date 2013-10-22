@@ -309,7 +309,6 @@
         if(data==nil)return nil;
         UIImage *image= [REMImageHelper parseImageFromNSData:data];
         
-        
         NSString *pngFilePath = [self buildingPictureFileName];
         NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
         [data1 writeToFile:pngFilePath atomically:YES];

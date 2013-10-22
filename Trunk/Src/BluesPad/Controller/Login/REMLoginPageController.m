@@ -117,8 +117,9 @@
             NSArray *customers = (NSArray *)([REMApplicationContext instance].currentUser.customers);
             
             if(customers.count<=0){
-                [self.userNameErrorLabel setHidden:NO];
-                [self.userNameErrorLabel setText : @"登录失败，该用户未绑定客户" ];
+//                [self.userNameErrorLabel setHidden:NO];
+//                [self.userNameErrorLabel setText : @"登录失败，该用户未绑定客户" ];
+                [REMAlertHelper alert:@"未配置客户及数据权限，请联系您的管理员。"];
                 
                 return;
             }
