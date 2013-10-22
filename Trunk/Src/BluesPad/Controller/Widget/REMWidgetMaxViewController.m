@@ -267,14 +267,14 @@
 
 - (void)setStartDate:(NSDate *)date
 {
-    [self.startDateButton setTitle:[REMTimeHelper formatTimeFullHour:date] forState:UIControlStateNormal];
+    [self.startDateButton setTitle:[REMTimeHelper formatTimeFullHour:date isChangeTo24Hour:NO] forState:UIControlStateNormal];
     self.viewTimeRange.startTime=date;
     [self setRelativeDate:@"Customize" WithText:nil];
 }
 
 - (void)setEndDate:(NSDate *)date
 {
-    [self.endDateButton setTitle:[REMTimeHelper formatTimeFullHour:date] forState:UIControlStateNormal];
+    [self.endDateButton setTitle:[REMTimeHelper formatTimeFullHour:date isChangeTo24Hour:YES] forState:UIControlStateNormal];
     self.viewTimeRange.endTime=date;
         [self setRelativeDate:@"Customize" WithText:nil];
 }
@@ -295,8 +295,8 @@
         REMTimeRange *range=    [REMTimeHelper relativeDateFromString:relativeDateString];
         //NSString *startTime = [REMTimeHelper formatTimeFullHour:range.startTime];
         
-        [self.startDateButton setTitle:[REMTimeHelper formatTimeFullHour:range.startTime] forState:UIControlStateNormal];
-        [self.endDateButton setTitle:[REMTimeHelper formatTimeFullHour:range.endTime] forState:UIControlStateNormal];
+        [self.startDateButton setTitle:[REMTimeHelper formatTimeFullHour:range.startTime isChangeTo24Hour:NO] forState:UIControlStateNormal];
+        [self.endDateButton setTitle:[REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES] forState:UIControlStateNormal];
         
         self.viewTimeRange = range;
     }

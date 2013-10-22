@@ -27,10 +27,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.contentView.layer.borderColor=[UIColor grayColor].CGColor;
-        self.contentView.layer.borderWidth=1;
-        self.backgroundColor=[UIColor clearColor];
-        self.contentView.backgroundColor=[UIColor clearColor];
+        //self.contentView.layer.borderColor=[UIColor grayColor].CGColor;
+        //self.contentView.layer.borderWidth=1;
+        self.backgroundColor=[UIColor whiteColor];
+        self.contentView.backgroundColor=[UIColor whiteColor];
         
         self.chartLoaded=NO;
         
@@ -43,18 +43,29 @@
     
     if(self.chartContainer==nil){
         _widgetInfo=widgetInfo;
-        UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 20)];
+        UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(5, 6, self.contentView.frame.size.width, 8)];
         title.backgroundColor=[UIColor clearColor];
-        title.textColor=[UIColor whiteColor];
+        title.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:8];
+        title.textColor=[REMColor colorByHexString:@"#4c4c4c"];
         title.text=widgetInfo.name;
         [self.contentView addSubview:title];
         
         self.titleLabel=title;
         
         
-        UILabel *time=[[UILabel alloc]initWithFrame:CGRectMake(0, 25, self.contentView.frame.size.width, 20)];
+        UILabel *time=[[UILabel alloc]initWithFrame:CGRectMake(title.frame.origin.x, title.frame.origin.y+title.frame.size.height+6, self.contentView.frame.size.width, 7)];
         time.backgroundColor=[UIColor clearColor];
-        time.textColor=[UIColor whiteColor];
+        time.textColor=title.textColor;
+        time.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:7];
+        if([widgetInfo.contentSyntax.relativeDate isEqual:[NSNull null]]==NO){
+            time.text=widgetInfo.contentSyntax.relativeDateComponent;
+        }
+        else{
+            REMTimeRange *range = widgetInfo.contentSyntax.timeRanges[0];
+            NSString *start= [REMTimeHelper formatTimeFullHour:range.startTime isChangeTo24Hour:NO];
+            NSString *end= [REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];
+            time.text=[NSString stringWithFormat:@"%@ 到 %@",start,end];
+        }
         [self.contentView addSubview:time];
         self.timeLabel=time;
         
@@ -62,7 +73,10 @@
             
         }
         
-        UIView *chartContainer = [[UIView alloc]initWithFrame:CGRectMake(0, 30, self.contentView.frame.size.width, self.contentView.frame.size.height-40)];
+        UIView *chartContainer = [[UIView alloc]initWithFrame:CGRectMake(5, time.frame.origin.y+time.frame.size.height+6, 172, 85)];
+        chartContainer.layer.borderColor=[UIColor redColor].CGColor;
+        chartContainer.layer.borderWidth=1;
+        
         
         [self.contentView addSubview:chartContainer];
         

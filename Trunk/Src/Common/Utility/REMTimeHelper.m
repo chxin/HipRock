@@ -318,10 +318,23 @@
     return [calendar dateByAddingComponents:dateComponents toDate:date options:0];
 }
 
-+ (NSString *)formatTimeFullHour:(NSDate *)date
+
+static NSDateFormatter *_formatter;
++(NSDateFormatter *)currentFormatter
 {
-    NSDateFormatter *f = [[NSDateFormatter alloc]init];
+    if(_formatter == nil)
+        _formatter = [[NSDateFormatter alloc]init];
+    
+    return _formatter;
+}
+
++ (NSString *)formatTimeFullHour:(NSDate *)date isChangeTo24Hour:(BOOL)change24Hour
+{
+    NSDateFormatter *f = [REMTimeHelper currentFormatter];
     [f setDateFormat:@"yyyy-MM-dd HH:mm"];
+    if(change24Hour==YES && [REMTimeHelper getHour:date]==0){
+        date = [date dateByAddingTimeInterval:-24*60*60];
+    }
     return [f stringFromDate:date];
 }
 
@@ -398,6 +411,8 @@ static NSCalendar *_gregorianCalendar;
     
     return _gregorianCalendar;
 }
+
+
 
 static NSCalendar *_currentCalendar;
 +(NSCalendar *)currentCalendar
