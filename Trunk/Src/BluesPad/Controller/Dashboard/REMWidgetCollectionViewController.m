@@ -53,6 +53,7 @@ static NSString *cellId=@"widgetcell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     //return 3;
+    return 1;
     return self.widgetArray.count;
 }
 
