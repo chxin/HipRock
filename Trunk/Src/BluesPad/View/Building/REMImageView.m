@@ -360,7 +360,12 @@
         }
         else{
             self.imageView.image=array[0];
-            self.blurredImageView.image=array[1];
+            if(array.count>1){
+                self.blurredImageView.image=array[1];
+            }
+            else{
+                self.blurredImageView.image=array[0];
+            }
         }
     }
 }
@@ -381,15 +386,20 @@
     if([self hasExistBuildingPic]==NO) return nil;
     
     NSString *smallPicPath= [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageSmall];
-    
+    NSString *smallBlurPicPath= [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageSmallBlured];
     BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallPicPath];
     if (hasExist==NO) {
         return nil;
     }
     
-     UIImage *image= [[UIImage alloc] initWithContentsOfFile:smallPicPath];
-
-    return @[image];
+    UIImage *image= [[UIImage alloc] initWithContentsOfFile:smallPicPath];
+    
+    hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallBlurPicPath];
+    if (hasExist==NO) {
+        return @[image];
+    }
+    UIImage *blurImage= [[UIImage alloc] initWithContentsOfFile:smallBlurPicPath];
+    return @[image,blurImage];
 }
 
 - (void)initImageView2:(CGRect)frame{
@@ -446,7 +456,7 @@
     blurred.contentMode=UIViewContentModeScaleToFill;
     blurred.backgroundColor=[UIColor clearColor];
     
-    NSString *blurImagePath= [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageBlured];
+    NSString *blurImagePath= [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageNormalBlured];
     
     BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:blurImagePath];
     if(hasExist ==YES){
