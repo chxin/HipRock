@@ -54,8 +54,9 @@ typedef enum _REMRelativeTimeRangeType : NSInteger
 
 typedef enum _REMBuildingImageType {
     REMBuildingImageSmall,
+    REMBuildingImageSmallBlured,
     REMBuildingImageNormal,
-    REMBuildingImageBlured,
+    REMBuildingImageNormalBlured,
 } REMBuildingImageType;
 
 
