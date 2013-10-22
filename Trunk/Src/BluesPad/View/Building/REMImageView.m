@@ -709,15 +709,21 @@
     buildingType.textColor=[UIColor whiteColor];
     
     [self addSubview:buildingType];
+    
+    CGFloat titleSize=kBuildingTitleFontSize;
+    
+    if(self.buildingInfo.building.name.length>20){
+        titleSize=kBuildingTitleSmallFontSize;
+    }
 
     
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, kBuildingTitleTop, self.frame.size.width, kBuildingTitleFontSize+5)];
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, kBuildingTitleTop, self.frame.size.width, titleSize+5)];
     self.titleLabel.text=self.buildingInfo.building.name ;
     self.titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     self.titleLabel.shadowOffset=CGSizeMake(1, 1);
     
     self.titleLabel.backgroundColor=[UIColor clearColor];
-    self.titleLabel.font = [UIFont fontWithName:@(kBuildingFontLight) size:kBuildingTitleFontSize];
+    self.titleLabel.font = [UIFont fontWithName:@(kBuildingFontLight) size:titleSize];
 
     self.titleLabel.textAlignment=NSTextAlignmentCenter;
     self.titleLabel.textColor=[UIColor whiteColor];
