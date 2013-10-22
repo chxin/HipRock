@@ -58,7 +58,7 @@
         time.textColor=title.textColor;
         time.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:7];
         if([widgetInfo.contentSyntax.relativeDate isEqual:[NSNull null]]==NO){
-            time.text=widgetInfo.contentSyntax.relativeDate;
+            time.text=widgetInfo.contentSyntax.relativeDateComponent;
         }
         else{
             REMTimeRange *range = widgetInfo.contentSyntax.timeRanges[0];
@@ -74,6 +74,9 @@
         }
         
         UIView *chartContainer = [[UIView alloc]initWithFrame:CGRectMake(5, time.frame.origin.y+time.frame.size.height+6, 172, 85)];
+        chartContainer.layer.borderColor=[UIColor redColor].CGColor;
+        chartContainer.layer.borderWidth=1;
+        
         
         [self.contentView addSubview:chartContainer];
         

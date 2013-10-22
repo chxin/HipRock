@@ -107,7 +107,10 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     }
     CGFloat cellMargin=8;
     CGFloat cellHeight=121;
-    return titleHeight+(obj.widgets.count/4)*cellHeight+cellMargin*(obj.widgets.count/4-1);
+    double n=obj.widgets.count/4.0f;
+    float row= ceil(n);
+    int margin=row>0?row-1:0;
+    return titleHeight+row*cellHeight+cellMargin*margin;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

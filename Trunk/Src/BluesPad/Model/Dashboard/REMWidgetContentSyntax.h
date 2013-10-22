@@ -17,6 +17,7 @@
 @property (nonatomic,strong) NSDictionary *config;
 @property (nonatomic,strong) NSString *calendar;
 @property (nonatomic,strong) NSString *relativeDate;
+@property (nonatomic,strong) NSString *relativeDateComponent;
 @property (nonatomic) REMRelativeTimeRangeType relativeDateType;
 @property (nonatomic) REMCalendarType  calendarType;
 @property (nonatomic) REMEnergyStep stepType;
