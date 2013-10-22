@@ -24,7 +24,9 @@
     for(NSDictionary *dic in array)
     {
         REMWidgetObject *w = [[REMWidgetObject alloc]initWithDictionary:dic];
-        [widgets addObject:w];
+        if([w.contentSyntax.type isEqualToString:@"grid"]==NO){
+            [widgets addObject:w];
+        }
     }
     
     self.widgets=widgets;

@@ -55,6 +55,12 @@
     
     [self.view endEditing:YES];
     
+    //network
+//    if([REMNetworkHelper checkIsNoConnect] == YES){
+//        [REMAlertHelper alert:@"无可用网络,无法获取最新的能源数据"];
+//        return;
+//    }
+    
     NSMutableDictionary *loginInfo = [[NSMutableDictionary alloc] init];
     [loginInfo setValue:self.userNameTextField.text forKey:@"userName"];
     [loginInfo setValue:self.passwordTextField.text forKey:@"password"];
@@ -111,12 +117,18 @@
             NSArray *customers = (NSArray *)([REMApplicationContext instance].currentUser.customers);
             
             if(customers.count<=0){
-                [self.userNameErrorLabel setHidden:NO];
-                [self.userNameErrorLabel setText : @"登录失败，该用户未绑定客户" ];
+//                [self.userNameErrorLabel setHidden:NO];
+//                [self.userNameErrorLabel setText : @"登录失败，该用户未绑定客户" ];
+                [REMAlertHelper alert:@"未配置客户及数据权限，请联系您的管理员。"];
+                
+                return;
             }
             
             if(customers.count == 1){
+                [[REMApplicationContext instance] setCurrentCustomer:customers[0]];
                 [self.loginCarouselController.splashScreenController showMapView:nil];
+                
+                return;
             }
             
             [self performSegueWithIdentifier:@"loginCustomerSegue" sender:self];
