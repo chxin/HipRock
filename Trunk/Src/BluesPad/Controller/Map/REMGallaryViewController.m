@@ -31,7 +31,7 @@
     
     if(gallaryView == nil){
         UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
-        [layout setSectionInset:UIEdgeInsetsMake(90, 20, 20, 20)];
+        [layout setSectionInset:UIEdgeInsetsMake(109, 25, 0, 25)];
         
         //CGRect viewFrame = self.mapViewController.view == nil?CGRectZero:self.mapViewController.view.bounds;
         
@@ -39,7 +39,7 @@
         gallaryView.dataSource = self;
         gallaryView.delegate = self;
         [gallaryView registerClass:[REMGallaryCell class] forCellWithReuseIdentifier:kCellIdentifier_GallaryCell];
-        [gallaryView setBackgroundColor:[UIColor grayColor]];
+        [gallaryView setBackgroundColor:[UIColor blackColor]];
         
         gallaryView.transform = [REMViewHelper getScaleTransformFromOriginalFrame:self.originalFrame andFinalFrame:self.viewFrame];
         gallaryView.center = [REMViewHelper getCenterOfRect:self.originalFrame];
@@ -78,7 +78,6 @@
     [switchButton setFrame:CGRectMake(25, 20, 32, 32)];
     [switchButton setImage:[UIImage imageNamed:@"LandMarker.png"] forState:UIControlStateNormal];
     [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchDown];
-    
     
     [self.view addSubview:switchButton];
 }
@@ -148,7 +147,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(210, 150);
+    return CGSizeMake(147, 110);
 }
 
 @end
