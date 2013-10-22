@@ -8,6 +8,9 @@
 
 #import "REMImageHelper.h"
 #import <QuartzCore/QuartzCore.h>
+#import "REMEnum.h"
+#import "REMApplicationContext.h"
+
 
 @implementation REMImageHelper {
     CIImage* beginImage;
@@ -323,7 +326,6 @@
     return  nil;
 }
 
-
 + (UIImage *) imageWithView:(UIView *)view
 {
     UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
@@ -335,5 +337,30 @@
     
     return img;
 }
+
++ (NSString *)buildingImagePathWithId:(NSNumber *)imageId andType:(REMBuildingImageType)type
+{
+    if([REMApplicationContext instance].currentUser == nil){
+        return nil;
+    }
+    
+    NSString *currentUserName = [REMApplicationContext instance].currentUser.name;
+    
+    NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+	return [NSString stringWithFormat:@"%@/building-%@-%d-%d.png",documents,currentUserName,[imageId intValue],type];
+}
+
++ (void)writeImageFile:(UIImage *)image withFullPath:(NSString *)fullPath;
+{
+    if([fullPath isEqual:[NSNull null]])
+        return;
+    
+    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
+    [imageData writeToFile:fullPath atomically:YES];
+    
+    imageData = nil;
+}
+
 
 @end

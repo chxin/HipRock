@@ -16,9 +16,12 @@
 #import "REMBuildingOverallModel.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define kGallaryBuildingImageGroupName @"GALLARY"
+
 @interface REMGallaryViewController ()
 
 @end
+
 
 @implementation REMGallaryViewController{
     REMGallaryView *gallaryView;
@@ -126,6 +129,32 @@
     [self.mapViewController presentBuildingView];
 }
 
+-(void)loadBuildingSmallImage:(NSArray *)imageIds :(void (^)(UIImage *))completed
+{
+    if(imageIds != nil && imageIds.count > 0){
+        NSString *smallImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageSmall];
+        
+        if([[NSFileManager defaultManager] fileExistsAtPath:smallImagePath] == YES){
+            completed([UIImage imageWithContentsOfFile:smallImagePath]);
+        }
+        else{
+            NSDictionary *parameter = @{@"pictureId":imageIds[0], @"isSmall":@1};
+            REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingPicture parameter:parameter];
+            store.groupName = kGallaryBuildingImageGroupName;
+            [REMDataAccessor access:store success:^(id data) {
+                if(data == nil || [data length] <= 2)
+                    return;
+                
+                UIImage *smallImage = [REMImageHelper parseImageFromNSData:data];
+                [REMImageHelper writeImageFile:smallImage withFullPath:smallImagePath];
+                
+                completed([UIImage imageWithContentsOfFile:smallImagePath]);
+            } error:^(NSError *error, id response) {
+            }];
+        }
+    }
+}
+
 
 #pragma mark collection view delegate
 
@@ -138,10 +167,16 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     REMGallaryCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier_GallaryCell forIndexPath:indexPath];
-    cell.building = ((REMBuildingOverallModel *)self.buildingInfoArray[indexPath.row]).building;
+    
+    REMBuildingModel *building = ((REMBuildingOverallModel *)self.buildingInfoArray[indexPath.row]).building;
+    
+    cell.building = building;
     cell.controller = self;
     
-    //cell.backgroundColor=[UIColor greenColor];
+    [self loadBuildingSmallImage:building.pictureIds :^(UIImage *image) {
+        cell.backgroundImage = image;
+    }];
+    
     return cell;
 }
 

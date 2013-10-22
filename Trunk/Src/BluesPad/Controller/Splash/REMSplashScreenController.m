@@ -153,6 +153,10 @@
     buildingStore.maskContainer = nil;
     
     [REMDataAccessor access:buildingStore success:^(id data) {
+        if([data count]<=0){
+            [REMAlertHelper alert:@"未配置客户及数据权限，请联系您的管理员。"];
+        }
+        
         self.buildingInfoArray = [[NSMutableArray alloc] initWithCapacity:[data count]];
         for(NSDictionary *item in (NSArray *)data){
             [self.buildingInfoArray addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
