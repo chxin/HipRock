@@ -61,6 +61,10 @@ static BOOL isInitialPresenting = YES;
     [self.view addSubview:self.customerLogoButton];
     [self.view.layer insertSublayer:self.titleGradientLayer above:mapView.layer];
     
+    if(self.buildingInfoArray.count <= 0){
+        [self.gallarySwitchButton setEnabled:NO];
+    }
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated

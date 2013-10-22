@@ -155,21 +155,21 @@
 
 - (int)getSourceIndex: (REMRelativeTimeRangeType)type {
     int i = 0;
-    /*
-    if (type == Today) {
+    
+    if (type == REMRelativeTimeRangeTypeToday) {
         i = 0;
-    } else if (type == Yesterday) {
+    } else if (type == REMRelativeTimeRangeTypeYesterday) {
         i = 1;
-    } else if (type == ThisMonth) {
+    } else if (type == REMRelativeTimeRangeTypeThisMonth) {
         i = 2;
-    } else if (type == LastMonth) {
+    } else if (type == REMRelativeTimeRangeTypeLastMonth) {
         i = 3;
-    } else if (type == ThisYear) {
+    } else if (type == REMRelativeTimeRangeTypeThisYear) {
         i = 4;
-    } else if (type == LastYear) {
+    } else if (type == REMRelativeTimeRangeTypeLastYear) {
         i = 5;
     }
-     */
+     
     return i;
 }
 

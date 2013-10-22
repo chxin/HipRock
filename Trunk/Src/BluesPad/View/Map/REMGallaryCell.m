@@ -29,27 +29,28 @@
     if (self) {
         // Initialization code
         self.backgroundColor = [UIColor whiteColor];
-        self.layer.borderColor = [UIColor blackColor].CGColor;
-        self.layer.borderWidth = 1.0;
+//        self.layer.borderColor = [UIColor blackColor].CGColor;
+//        self.layer.borderWidth = 1.0;
         
         self.clipsToBounds = YES;
         
         
         if(self.button == nil){
             self.button = [UIButton buttonWithType:UIButtonTypeCustom];
-            self.button.frame = CGRectMake(0, 0, 220, 150);
+            self.button.frame = CGRectMake(0, 0, 147, 110);
             UIImage *defaultImage = [UIImage imageNamed:@"DefaultBuilding-Small.png"];
             [self.button setImage:defaultImage forState:UIControlStateNormal];
             [self.button setImage:defaultImage forState:UIControlStateHighlighted];
-            [self.button addTarget:self action:@selector(tapped) forControlEvents:UIControlEventTouchDown];
+            [self.button addTarget:self action:@selector(tapped) forControlEvents:UIControlEventTouchUpInside];
             
             [self addSubview:self.button];
         }
         
         if(self.titleLabel == nil){
-            self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 210, 16)];
-            self.titleLabel.textColor = [UIColor blackColor];
+            self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(9, 9, 129, 10)];
+            self.titleLabel.textColor = [UIColor whiteColor];
             self.titleLabel.backgroundColor = [UIColor clearColor];
+            self.titleLabel.font = [UIFont systemFontOfSize:10];
             
             [self addSubview:self.titleLabel];
         }

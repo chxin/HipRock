@@ -109,8 +109,7 @@
             [nav dismissViewControllerAnimated:YES completion:^{
                 [self.settingController.mainNavigationController presentInitialView:^(void){
                     [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];
-                    [self.settingController.navigationController popToRootViewControllerAnimated:NO];
-                    [self.settingController.mainNavigationController popToRootViewControllerAnimated:YES];
+                    [self.settingController.mainNavigationController popViewControllerAnimated:YES];
                 }];
             }];
         }
