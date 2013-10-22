@@ -867,6 +867,7 @@
 		7A634BB8180E7F350076C84D /* REMMapBuildingSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMapBuildingSegue.m; path = Resource/Segue/REMMapBuildingSegue.m; sourceTree = "<group>"; };
 		7A634BBA180E80140076C84D /* REMSplashMapSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSplashMapSegue.h; path = Resource/Segue/REMSplashMapSegue.h; sourceTree = "<group>"; };
 		7A634BBB180E80140076C84D /* REMSplashMapSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSplashMapSegue.m; path = Resource/Segue/REMSplashMapSegue.m; sourceTree = "<group>"; };
+		7A6CB4EA18165AE1007515FB /* REMLocalizeKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMLocalizeKeys.h; path = Resource/Definitions/REMLocalizeKeys.h; sourceTree = "<group>"; };
 		7A6E6D0B17A65CE500FBB264 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		7A6E6D0D17A65CE500FBB264 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -1583,6 +1584,7 @@
 			isa = PBXGroup;
 			children = (
 				7A28495D18039B0300DC481B /* REMStoryboardDefinitions.h */,
+				7A6CB4EA18165AE1007515FB /* REMLocalizeKeys.h */,
 			);
 			name = Definitions;
 			sourceTree = "<group>";
@@ -3349,7 +3351,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2765BAB8-D6DE-4FEE-99C4-536905C33420";
+				PROVISIONING_PROFILE = "E091EBF0-22D4-481A-B269-F6F5DB729895";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv7s i386 x86_64";
@@ -3398,7 +3400,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "400C47F5-4309-49A8-9DE9-7B77B470B71B";
+				PROVISIONING_PROFILE = "02BC422A-77F0-468B-BCD7-099982293332";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -3544,7 +3546,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "400C47F5-4309-49A8-9DE9-7B77B470B71B";
+				PROVISIONING_PROFILE = "23A5B469-EE27-40F5-B2AA-0DE5F495FEFB";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -3676,7 +3678,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "400C47F5-4309-49A8-9DE9-7B77B470B71B";
+				PROVISIONING_PROFILE = "23A5B469-EE27-40F5-B2AA-0DE5F495FEFB";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;

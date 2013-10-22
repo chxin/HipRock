@@ -9,6 +9,7 @@
 #import "REMBuildingTrendChart.h"
 #import "REMToggleButtonGroup.h"
 #import "REMChartHeader.h"
+#import "REMLocalizeKeys.h"
 
 @implementation REMBuildingTrendChart
 
@@ -38,7 +39,7 @@
         
         [self addSubview:self.hostView];
         
-        NSString *noDataText = NSLocalizedString(@"BuildingChart_NoData", @"");
+        NSString *noDataText = REMLocalizedString(kLNBuildingChart_NoData);
         CGFloat fontSize = 36;
         CGSize labelSize = [noDataText sizeWithFont:[UIFont systemFontOfSize:fontSize]];
         self.noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];
