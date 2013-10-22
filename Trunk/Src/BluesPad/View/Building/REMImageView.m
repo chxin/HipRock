@@ -209,12 +209,8 @@
 
 
 - (void)loadingBuildingImage{
-    if(self.buildingInfo.building.pictureIds==nil ||
-       [self.buildingInfo.building.pictureIds isEqual:[NSNull null]] ||
-       self.buildingInfo.building.pictureIds.count==0){
-        
-        return;
-    }
+    
+    if([self hasExistBuildingPic]==NO)return;
     if(self.customImageLoaded==YES)return;
     NSDictionary *param=@{@"pictureId":self.buildingInfo.building.pictureIds[0]};
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param];
@@ -232,20 +228,13 @@
         newView.alpha=0;
         
         
-        
-        //UIImageView *newBlurred= [self blurredImageView:newView];
-                
-        
-        //dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        //UIImage *image = self.defaultImage;
-        //dispatch_async(concurrentQueue, ^{
+    
             @autoreleasepool {
                 UIImage *view = [self getCachedImage:data];
                 newView.image=view;
                 UIImageView *newBlurred= [self blurredImageView:newView];
             
             
-            //dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [self insertSubview:newView aboveSubview:self.blurredImageView];
                 [self insertSubview:newBlurred aboveSubview:newView];
@@ -269,9 +258,7 @@
                     }
                 }];
 
-            //});
             }
-        //});
 
     }];
     
@@ -282,18 +269,11 @@
 
 - (NSString *)buildingPictureFileName{
     
-    if(self.buildingInfo.building.pictureIds==nil ||
-       [self.buildingInfo.building.pictureIds isEqual:[NSNull null]] ||
-       self.buildingInfo.building.pictureIds.count==0){
-        
-        return nil;
-    }
     
-    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
-	NSString *pngFilePath = [NSString stringWithFormat:@"%@/building-%@-%@.png",docDir,[REMApplicationContext instance].currentUser.name,self.buildingInfo.building.pictureIds[0]];
+    if([self hasExistBuildingPic]==NO)return nil;
     
-    return pngFilePath;
+    return [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageNormal];
 }
 
 - (UIImage *)getCachedImage:(NSData *)data{
@@ -312,6 +292,22 @@
         NSString *pngFilePath = [self buildingPictureFileName];
         NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
         [data1 writeToFile:pngFilePath atomically:YES];
+        
+        CGSize newSize=CGSizeMake(174, 110);
+        
+        UIGraphicsBeginImageContext(newSize);
+        [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        NSString *smallPicPath= [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageSmall];
+        
+        BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallPicPath];
+        if (hasExist==NO) {
+            data1 = [NSData dataWithData:UIImagePNGRepresentation(newImage)];
+            [data1 writeToFile:smallPicPath atomically:YES];
+        }
+        
         
         return image;
 
@@ -355,20 +351,49 @@
     }
     
     if(self.defaultImage!=nil){
-        self.imageView.image=  self.defaultImage;
-        self.blurredImageView.image=self.defaultBlurImage;
+        
+        NSArray *array=[self loadSmallImage];
+        
+        if(array==nil){
+            self.imageView.image = self.defaultImage;
+            self.blurredImageView.image = self.defaultBlurImage;
+        }
+        else{
+            self.imageView.image=array[0];
+            self.blurredImageView.image=array[1];
+        }
     }
+}
+
+- (BOOL)hasExistBuildingPic{
+    if(self.buildingInfo.building.pictureIds==nil ||
+       [self.buildingInfo.building.pictureIds isEqual:[NSNull null]] ||
+       self.buildingInfo.building.pictureIds.count==0){
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (NSArray *)loadSmallImage{
+    
+    if([self hasExistBuildingPic]==NO) return nil;
+    
+    NSString *smallPicPath= [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageSmall];
+    
+    BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallPicPath];
+    if (hasExist==NO) {
+        return nil;
+    }
+    
+     UIImage *image= [[UIImage alloc] initWithContentsOfFile:smallPicPath];
+
+    return @[image];
 }
 
 - (void)initImageView2:(CGRect)frame{
     
-    
-    
-    //NSTimer *timer = [ NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(addImageDefer:) userInfo:nil repeats:NO];
-    
-    //[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-    
-    //self.timer=timer;
     
     self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
     self.imageView.contentMode=UIViewContentModeScaleToFill;
@@ -384,28 +409,6 @@
     
 }
 
-/*
-- (void)initImageView:(CGRect)frame
-{
-    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-    self.imageView.contentMode=UIViewContentModeScaleToFill;
-    
-    
-    
-    
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:[self retrieveBuildingImage:self.buildingInfo.building.code] ofType:@"jpg"];
-   
-    NSData *image = [NSData dataWithContentsOfFile:filePath];
-    
-    self.imageView.image=  [UIImage imageWithData:image];
-   
-    [self addSubview:self.imageView];
-    
-    
-    UIImageView *blurred= [self blurredImageView:self.imageView];
-    self.blurredImageView=blurred;
-    [self addSubview:blurred];
-}*/
 
 - (void)initBottomGradientLayer
 {
@@ -443,27 +446,28 @@
     blurred.contentMode=UIViewContentModeScaleToFill;
     blurred.backgroundColor=[UIColor clearColor];
     
+    NSString *blurImagePath= [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageBlured];
     
-    NSData *cachedData=[REMStorage getFile:@"building-blur" key:[NSString stringWithFormat:@"blur-%@",self.buildingInfo.building.buildingId]];
-    
-    if(cachedData!=nil){
-        UIImage *image = [UIImage imageWithData:cachedData];
+    BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:blurImagePath];
+    if(hasExist ==YES){
+        
+        UIImage *image= [[UIImage alloc] initWithContentsOfFile:blurImagePath];
         blurred.image=image;
         return blurred;
     }
-    
-    //dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    //dispatch_async(concurrentQueue, ^{
+    else{
+        
         UIImage *view = [REMImageHelper blurImage:imageView.image];
-   //     dispatch_async(dispatch_get_main_queue(), ^{
-    if(view!=nil){
+        if(view!=nil){
             blurred.image=view;
-        [REMStorage setFile:@"building-blur" key:[NSString stringWithFormat:@"blur-%@",self.buildingInfo.building.buildingId] version:1000 image:UIImagePNGRepresentation(view)];
+            NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(view)];
+            [data1 writeToFile:blurImagePath atomically:YES];
+        }
+        
+        return blurred;
     }
-   //     });
-  //  });
     
-    return blurred;
+    
 }
 
 - (void)initGlassView
