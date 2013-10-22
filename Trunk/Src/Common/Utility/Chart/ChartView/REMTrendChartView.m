@@ -126,7 +126,7 @@
             if ([point.localTime timeIntervalSinceDate:xStartDate] < 0) continue;
             if ([point.localTime timeIntervalSinceDate:xEndDate] > 0) break;
             NSNumber* yVal = [s.dataProcessor processY:point.dataValue startDate:s.startDate step:s.step];
-            if (yVal == nil || yVal == NULL || [yVal isLessThan:([NSNumber numberWithInt:0])]) continue;
+            if (yVal == nil || yVal == NULL || [yVal isEqual:[NSNull null]] || [yVal isLessThan:([NSNumber numberWithInt:0])]) continue;
             if (maxY.floatValue < yVal.floatValue) {
                 maxY = yVal;
             }
