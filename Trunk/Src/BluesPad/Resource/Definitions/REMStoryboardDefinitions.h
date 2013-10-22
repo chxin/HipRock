@@ -13,6 +13,8 @@
 #pragma mark - Segue names
 //Prefix: kSegue
 
+#define kSegue_LoginToCustomer @"loginCustomerSegue"
+
 #define kSegue_SplashToLogin @"splashToLoginSegue"
 #define kSegue_SplashToMap @"splashToMapSegue"
 #define kSegue_MapToBuilding @"mapToBuildingSegue"
