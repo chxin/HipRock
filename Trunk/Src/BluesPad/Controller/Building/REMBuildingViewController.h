@@ -33,7 +33,7 @@ typedef enum _BuildingSourceType{
 
 @property (nonatomic,strong) UIImage *logoImage;
 
-@property (nonatomic,strong) REMMapViewController *mapViewController;
+@property (nonatomic,strong) UIViewController *fromViewController;
 
 - (void)switchToDashboard;
 

@@ -198,7 +198,7 @@ static BOOL isInitialPresenting = YES;
         REMBuildingViewController *buildingViewController = customeSegue.destinationViewController;
         buildingViewController.buildingOverallArray = self.buildingInfoArray;
         buildingViewController.splashScreenController = self.splashScreenController;
-        buildingViewController.mapViewController = self;
+        buildingViewController.fromViewController = self;
         buildingViewController.currentBuildingId = self.selectedBuilding.buildingId;
     }
 }
@@ -219,12 +219,11 @@ static BOOL isInitialPresenting = YES;
     }
     
     self.gallaryViewController.mapViewController = self;
-//    self.gallaryViewController.originalFrame = self.gallarySwitchButton.frame;
-//    self.gallaryViewController.viewFrame = self.view.bounds;
     self.gallaryViewController.buildingInfoArray = self.buildingInfoArray;
     
-    [self addChildViewController:self.gallaryViewController];
-    [self.view addSubview:self.gallaryViewController.view];
+    [UIView transitionFromView:self.view toView:self.gallaryViewController.view duration:1 options:UIViewAnimationOptionTransitionFlipFromLeft completion:^(BOOL finished) {
+        [self.navigationController pushViewController:self.gallaryViewController animated:NO];
+    }];
 }
 
 

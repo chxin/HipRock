@@ -86,6 +86,9 @@
 
 -(void)switchButtonPressed
 {
+    [UIView transitionFromView:self.view toView:self.mapViewController.view duration:1 options:UIViewAnimationOptionTransitionFlipFromLeft completion:^(BOOL finished) {
+        [self.navigationController popViewControllerAnimated:NO];
+    }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -93,6 +96,7 @@
     if([segue.identifier isEqualToString:kSegue_MapToBuilding] == YES)
     {
         REMMapBuildingSegue *customeSegue = (REMMapBuildingSegue *)segue;
+        customeSegue.sourceViewController = self;
         customeSegue.isInitialPresenting = NO;
         customeSegue.initialZoomRect = self.initialZoomRect;
         customeSegue.finalZoomRect = self.view.frame;
@@ -107,7 +111,7 @@
         REMBuildingViewController *buildingViewController = customeSegue.destinationViewController;
         buildingViewController.buildingOverallArray = self.buildingInfoArray;
         buildingViewController.splashScreenController = self.splashScreenController;
-        buildingViewController.mapViewController = self;
+        buildingViewController.fromViewController = self;
         buildingViewController.currentBuildingId = self.selectedBuilding.buildingId;
     }
 }
