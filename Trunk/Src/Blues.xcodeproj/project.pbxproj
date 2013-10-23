@@ -554,7 +554,9 @@
 		EFDAACBF18052E0C008BC9AF /* REMPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */; };
 		EFDAACC218053911008BC9AF /* REMChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC118053911008BC9AF /* REMChartConfig.m */; };
 		EFDAACC818054EBA008BC9AF /* REMPieChartSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */; };
+		EFDEC2A5181768540008972E /* REMTrendChartRankingSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDEC2A4181768540008972E /* REMTrendChartRankingSeries.m */; };
 		EFEA1CBE1807D33000CA3C07 /* REMWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEA1CBD1807D33000CA3C07 /* REMWidgetWrapper.m */; };
+		EFF3BA0718167BA500DD92CF /* REMRankingWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF3BA0618167BA500DD92CF /* REMRankingWidgetWrapper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1190,8 +1192,12 @@
 		EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartView.m; sourceTree = "<group>"; };
 		EFDAACC118053911008BC9AF /* REMChartConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartConfig.m; sourceTree = "<group>"; };
 		EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartSeries.m; sourceTree = "<group>"; };
+		EFDEC2A3181768540008972E /* REMTrendChartRankingSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMTrendChartRankingSeries.h; sourceTree = "<group>"; };
+		EFDEC2A4181768540008972E /* REMTrendChartRankingSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartRankingSeries.m; sourceTree = "<group>"; };
 		EFEA1CBC1807D33000CA3C07 /* REMWidgetWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetWrapper.h; sourceTree = "<group>"; };
 		EFEA1CBD1807D33000CA3C07 /* REMWidgetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetWrapper.m; sourceTree = "<group>"; };
+		EFF3BA0518167BA500DD92CF /* REMRankingWidgetWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMRankingWidgetWrapper.h; sourceTree = "<group>"; };
+		EFF3BA0618167BA500DD92CF /* REMRankingWidgetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRankingWidgetWrapper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2490,6 +2496,8 @@
 				EF8A47F217F959B5009B5C33 /* REMTrendChartLineSeries.m */,
 				EF8A47F417F959B5009B5C33 /* REMTrendChartSeries.m */,
 				EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */,
+				EFDEC2A3181768540008972E /* REMTrendChartRankingSeries.h */,
+				EFDEC2A4181768540008972E /* REMTrendChartRankingSeries.m */,
 			);
 			path = Series;
 			sourceTree = "<group>";
@@ -2503,6 +2511,8 @@
 				EF8A480617F95FA1009B5C33 /* REMLineWidgetWrapper.m */,
 				EF8A480717F95FA1009B5C33 /* REMTrendWidgetWrapper.h */,
 				EF8A480817F95FA1009B5C33 /* REMTrendWidgetWrapper.m */,
+				EFF3BA0518167BA500DD92CF /* REMRankingWidgetWrapper.h */,
+				EFF3BA0618167BA500DD92CF /* REMRankingWidgetWrapper.m */,
 			);
 			path = TrendChartWrapper;
 			sourceTree = "<group>";
@@ -2796,6 +2806,7 @@
 				EF8A47F717F959B5009B5C33 /* REMTrendChartView.m in Sources */,
 				B48CC9901783297900AAD5D4 /* REMWidgetStepToolbarView.m in Sources */,
 				B47ACC2D17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m in Sources */,
+				EFF3BA0718167BA500DD92CF /* REMRankingWidgetWrapper.m in Sources */,
 				B48CC99317832EAE00AAD5D4 /* REMWidgetMaxView.m in Sources */,
 				B4198EAE178410D300B50475 /* REMLogManager.m in Sources */,
 				B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */,
@@ -2938,6 +2949,7 @@
 				7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */,
 				7AF3667817CF2D7400447650 /* REMChartSeriesIndicator.m in Sources */,
 				B493ADA917D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m in Sources */,
+				EFDEC2A5181768540008972E /* REMTrendChartRankingSeries.m in Sources */,
 				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
 				EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */,

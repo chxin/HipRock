@@ -12,14 +12,14 @@
 +(REMTrendChartConfig*) getMinimunWidgetDefaultSetting {
     REMTrendChartConfig* config = [[REMTrendChartConfig alloc]init];
     config.xAxisConfig = [REMTrendChartAxisConfig getMinWidgetXConfig];
-    config.yAxisConfig = [NSArray arrayWithObjects:[REMTrendChartAxisConfig getMinWidgetYConfig],nil];
+//    config.yAxisConfig = [NSArray arrayWithObjects:[REMTrendChartAxisConfig getMinWidgetYConfig],nil];
     config.horizentalGridLineAmount = 4;
     return config;
 }
 +(REMTrendChartConfig*) getMaximunWidgetDefaultSetting {
     REMTrendChartConfig* config = [[REMTrendChartConfig alloc]init];
     config.xAxisConfig = [REMTrendChartAxisConfig getMaxWidgetXConfig];
-    config.yAxisConfig = [NSArray arrayWithObjects:[REMTrendChartAxisConfig getMaxWidgetYConfig],nil];
+//    config.yAxisConfig = [NSArray arrayWithObjects:[REMTrendChartAxisConfig getMaxWidgetYConfig],nil];
     config.horizentalGridLineAmount = 6;
     config.userInteraction = YES;
     return config;
