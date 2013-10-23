@@ -7,7 +7,7 @@
 //
 
 #import "REMWidgetMaxViewController.h"
-#import "REMChartLegendTableViewController.h"
+//#import "REMChartLegendTableViewController.h"
 
 @interface REMWidgetMaxViewController()
 {

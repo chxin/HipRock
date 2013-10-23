@@ -2478,6 +2478,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
+				TargetAttributes = {
+					7A9B1E1B177B3A8B00C282A8 = {
+						DevelopmentTeam = 46REERL7A3;
+					};
+				};
 			};
 			buildConfigurationList = 7A9B1E15177B3A6000C282A8 /* Build configuration list for PBXProject "Blues" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -3174,6 +3179,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos6.1]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3208,7 +3214,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4E7A376A-DFA9-4039-8705-35E85BAF8B85";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv7s i386 x86_64";
@@ -3229,8 +3235,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3257,7 +3263,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "02BC422A-77F0-468B-BCD7-099982293332";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -3376,7 +3382,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3403,7 +3410,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4E7A376A-DFA9-4039-8705-35E85BAF8B85";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -3508,7 +3515,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3535,7 +3543,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "292E3F6A-DF27-4372-96ED-7A13531EEEAD";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
