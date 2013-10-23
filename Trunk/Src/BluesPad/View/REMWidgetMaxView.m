@@ -81,14 +81,16 @@ const int kStatusBarHeight = 20;
 
 -(void)renderChart {
     CGRect widgetRect = CGRectMake(0, 24, 1024, 724);
-    NSString* widgetType = self.widgetInfo.contentSyntax.type;
+    REMDiagramType widgetType = self.widgetInfo.diagramType;
     
-    if ([widgetType isEqualToString:@"line"]) {
+    if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
-    } else if ([widgetType isEqualToString:@"column"]) {
+    } else if (widgetType == REMDiagramTypeColumn) {
         widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
-    } else if ([widgetType isEqualToString:@"pie"]) {
+    } else if (widgetType == REMDiagramTypePie) {
         widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
+    } else if (widgetType == REMDiagramTypeRanking) {
+        widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
     }
     if (widgetWrapper != nil) {
         [contentView addSubview:widgetWrapper.view];

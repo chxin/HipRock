@@ -18,7 +18,7 @@
     self.calendar=p[@"calendar"];
     self.config = p[@"config"];
     self.storeType=self.config[@"storeType"];
-    self.type=self.config[@"type"];
+    self.xtype=self.config[@"xtype"];
     
     
     if([self.calendar isEqual:[NSNull null]]==YES){

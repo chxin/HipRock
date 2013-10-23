@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D161785111300219469 /* REMApplicationInfo.m */; };
 		38ED7D1F1785140900219469 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38ED7D1E1785140900219469 /* libsqlite3.dylib */; };
-		6A4BD94717B89F1F007C9FCF /* BluesPad.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B4CD146017B3439600807B5F /* BluesPad.entitlements */; };
 		6A83C8D917DD9B3600BD8164 /* REMError.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42017D877C3003B18E1 /* REMError.h */; };
 		6A83C8DA17DD9B3600BD8164 /* REMError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42117D877C3003B18E1 /* REMError.m */; };
 		6A83C8DB17DD9B3600BD8164 /* REMBusinessErrorInfo.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41C17D874C3003B18E1 /* REMBusinessErrorInfo.h */; };
@@ -307,8 +306,6 @@
 		7A48B48217CDF0FD002DA386 /* SplashScreenLogo-Common@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B47F17CDF0FD002DA386 /* SplashScreenLogo-Common@2x.png */; };
 		7A48B48317CDF0FD002DA386 /* SplashScreenLogo-Flash.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B48017CDF0FD002DA386 /* SplashScreenLogo-Flash.png */; };
 		7A48B48417CDF0FD002DA386 /* SplashScreenLogo-Flash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B48117CDF0FD002DA386 /* SplashScreenLogo-Flash@2x.png */; };
-		7A48B48617CDF2F0002DA386 /* AppLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B48517CDF2EF002DA386 /* AppLogo.png */; };
-		7A48B48817CDF2F6002DA386 /* AppLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B48717CDF2F6002DA386 /* AppLogo@2x.png */; };
 		7A48B48F17CDFA38002DA386 /* Propaganda_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B48917CDFA38002DA386 /* Propaganda_1.jpg */; };
 		7A48B49017CDFA38002DA386 /* Propaganda_1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B48A17CDFA38002DA386 /* Propaganda_1@2x.jpg */; };
 		7A48B49117CDFA38002DA386 /* Propaganda_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B48B17CDFA38002DA386 /* Propaganda_2.jpg */; };
@@ -320,6 +317,16 @@
 		7A53160217F817370022491F /* Gallary@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5315FE17F817370022491F /* Gallary@2x.png */; };
 		7A53160317F817370022491F /* LandMarker.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5315FF17F817370022491F /* LandMarker.png */; };
 		7A53160417F817370022491F /* LandMarker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A53160017F817370022491F /* LandMarker@2x.png */; };
+		7A5AC7731817C4BD006C7CB1 /* EMOP_App_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5AC7691817C4BD006C7CB1 /* EMOP_App_6.png */; };
+		7A5AC7741817C4BD006C7CB1 /* EMOP_App_6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5AC76A1817C4BD006C7CB1 /* EMOP_App_6@2x.png */; };
+		7A5AC7751817C4BD006C7CB1 /* EMOP_APP_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5AC76B1817C4BD006C7CB1 /* EMOP_APP_7.png */; };
+		7A5AC7761817C4BD006C7CB1 /* EMOP_App_7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5AC76C1817C4BD006C7CB1 /* EMOP_App_7@2x.png */; };
+		7A5AC7771817C4BD006C7CB1 /* EMOP_Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5AC76D1817C4BD006C7CB1 /* EMOP_Setting.png */; };
+		7A5AC7781817C4BD006C7CB1 /* EMOP_Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5AC76E1817C4BD006C7CB1 /* EMOP_Setting@2x.png */; };
+		7A5AC7791817C4BD006C7CB1 /* EMOP_Spotlight_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5AC76F1817C4BD006C7CB1 /* EMOP_Spotlight_6.png */; };
+		7A5AC77A1817C4BD006C7CB1 /* EMOP_Spotlight_6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5AC7701817C4BD006C7CB1 /* EMOP_Spotlight_6@2x.png */; };
+		7A5AC77B1817C4BD006C7CB1 /* EMOP_Spotlight_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5AC7711817C4BD006C7CB1 /* EMOP_Spotlight_7.png */; };
+		7A5AC77C1817C4BD006C7CB1 /* EMOP_Spotlight_7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5AC7721817C4BD006C7CB1 /* EMOP_Spotlight_7@2x.png */; };
 		7A5DBD28178FD014006C4EDE /* REMDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD27178FD014006C4EDE /* REMDataAccessor.m */; };
 		7A5DBD2B178FD034006C4EDE /* REMDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD2A178FD034006C4EDE /* REMDataStore.m */; };
 		7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8B177B41B0000F77F9 /* MainStoryboard.storyboard */; };
@@ -516,7 +523,10 @@
 		EFDAACBF18052E0C008BC9AF /* REMPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */; };
 		EFDAACC218053911008BC9AF /* REMChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC118053911008BC9AF /* REMChartConfig.m */; };
 		EFDAACC818054EBA008BC9AF /* REMPieChartSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */; };
+		EFDEC2A5181768540008972E /* REMTrendChartRankingSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDEC2A4181768540008972E /* REMTrendChartRankingSeries.m */; };
+		EFDEC2A81817C6B70008972E /* REMStackColumnWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDEC2A71817C6B70008972E /* REMStackColumnWidgetWrapper.m */; };
 		EFEA1CBE1807D33000CA3C07 /* REMWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEA1CBD1807D33000CA3C07 /* REMWidgetWrapper.m */; };
+		EFF3BA0718167BA500DD92CF /* REMRankingWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF3BA0618167BA500DD92CF /* REMRankingWidgetWrapper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -753,8 +763,6 @@
 		7A48B47F17CDF0FD002DA386 /* SplashScreenLogo-Common@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenLogo-Common@2x.png"; sourceTree = "<group>"; };
 		7A48B48017CDF0FD002DA386 /* SplashScreenLogo-Flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenLogo-Flash.png"; sourceTree = "<group>"; };
 		7A48B48117CDF0FD002DA386 /* SplashScreenLogo-Flash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenLogo-Flash@2x.png"; sourceTree = "<group>"; };
-		7A48B48517CDF2EF002DA386 /* AppLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AppLogo.png; path = ../../../AppLogo.png; sourceTree = "<group>"; };
-		7A48B48717CDF2F6002DA386 /* AppLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AppLogo@2x.png"; path = "../../../AppLogo@2x.png"; sourceTree = "<group>"; };
 		7A48B48917CDFA38002DA386 /* Propaganda_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Propaganda_1.jpg; sourceTree = "<group>"; };
 		7A48B48A17CDFA38002DA386 /* Propaganda_1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Propaganda_1@2x.jpg"; sourceTree = "<group>"; };
 		7A48B48B17CDFA38002DA386 /* Propaganda_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Propaganda_2.jpg; sourceTree = "<group>"; };
@@ -767,6 +775,16 @@
 		7A5315FE17F817370022491F /* Gallary@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Gallary@2x.png"; sourceTree = "<group>"; };
 		7A5315FF17F817370022491F /* LandMarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LandMarker.png; sourceTree = "<group>"; };
 		7A53160017F817370022491F /* LandMarker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LandMarker@2x.png"; sourceTree = "<group>"; };
+		7A5AC7691817C4BD006C7CB1 /* EMOP_App_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMOP_App_6.png; sourceTree = "<group>"; };
+		7A5AC76A1817C4BD006C7CB1 /* EMOP_App_6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EMOP_App_6@2x.png"; sourceTree = "<group>"; };
+		7A5AC76B1817C4BD006C7CB1 /* EMOP_APP_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMOP_APP_7.png; sourceTree = "<group>"; };
+		7A5AC76C1817C4BD006C7CB1 /* EMOP_App_7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EMOP_App_7@2x.png"; sourceTree = "<group>"; };
+		7A5AC76D1817C4BD006C7CB1 /* EMOP_Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMOP_Setting.png; sourceTree = "<group>"; };
+		7A5AC76E1817C4BD006C7CB1 /* EMOP_Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EMOP_Setting@2x.png"; sourceTree = "<group>"; };
+		7A5AC76F1817C4BD006C7CB1 /* EMOP_Spotlight_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMOP_Spotlight_6.png; sourceTree = "<group>"; };
+		7A5AC7701817C4BD006C7CB1 /* EMOP_Spotlight_6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EMOP_Spotlight_6@2x.png"; sourceTree = "<group>"; };
+		7A5AC7711817C4BD006C7CB1 /* EMOP_Spotlight_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMOP_Spotlight_7.png; sourceTree = "<group>"; };
+		7A5AC7721817C4BD006C7CB1 /* EMOP_Spotlight_7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EMOP_Spotlight_7@2x.png"; sourceTree = "<group>"; };
 		7A5DBD27178FD014006C4EDE /* REMDataAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataAccessor.m; path = Common/DataAccess/REMDataAccessor.m; sourceTree = "<group>"; };
 		7A5DBD29178FD034006C4EDE /* REMDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDataStore.h; path = Common/DataAccess/REMDataStore.h; sourceTree = "<group>"; };
 		7A5DBD2A178FD034006C4EDE /* REMDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataStore.m; path = Common/DataAccess/REMDataStore.m; sourceTree = "<group>"; };
@@ -1058,7 +1076,6 @@
 		B4AB0B391807F9CD0053108B /* mail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mail.jpg; sourceTree = "<group>"; };
 		B4B61D7517C742E000245F1E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
-		B4CD146017B3439600807B5F /* BluesPad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluesPad.entitlements; sourceTree = "<group>"; };
 		B4DC083E17F90E2C005658C1 /* REMAdministratorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAdministratorModel.h; path = Common/Model/REMAdministratorModel.h; sourceTree = "<group>"; };
 		B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAdministratorModel.m; path = Common/Model/REMAdministratorModel.m; sourceTree = "<group>"; };
 		B4EDFB0B18064F2900873FA1 /* Share_disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_disable.png; sourceTree = "<group>"; };
@@ -1115,8 +1132,13 @@
 		EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartView.m; sourceTree = "<group>"; };
 		EFDAACC118053911008BC9AF /* REMChartConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartConfig.m; sourceTree = "<group>"; };
 		EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartSeries.m; sourceTree = "<group>"; };
+		EFDEC2A4181768540008972E /* REMTrendChartRankingSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartRankingSeries.m; sourceTree = "<group>"; };
+		EFDEC2A61817C6B70008972E /* REMStackColumnWidgetWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMStackColumnWidgetWrapper.h; sourceTree = "<group>"; };
+		EFDEC2A71817C6B70008972E /* REMStackColumnWidgetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMStackColumnWidgetWrapper.m; sourceTree = "<group>"; };
 		EFEA1CBC1807D33000CA3C07 /* REMWidgetWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetWrapper.h; sourceTree = "<group>"; };
 		EFEA1CBD1807D33000CA3C07 /* REMWidgetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetWrapper.m; sourceTree = "<group>"; };
+		EFF3BA0518167BA500DD92CF /* REMRankingWidgetWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMRankingWidgetWrapper.h; sourceTree = "<group>"; };
+		EFF3BA0618167BA500DD92CF /* REMRankingWidgetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRankingWidgetWrapper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1725,7 +1747,6 @@
 				7A284954180398B600DC481B /* Definitions */,
 				7AC3BABB17CC48740022E57E /* Images */,
 				7A5E2D8D177B41B0000F77F9 /* InfoPlist.strings */,
-				B4CD146017B3439600807B5F /* BluesPad.entitlements */,
 				7A5E2D96177B41C3000F77F9 /* BluesPad-Info.plist */,
 				7A5E2D97177B41C3000F77F9 /* BluesPad-Prefix.pch */,
 				7A20761617E055E800CD137C /* Localizable.strings */,
@@ -2051,9 +2072,17 @@
 				7AC3BAEF17CC48740022E57E /* Default-568h@2x.png */,
 				7AC3BAF017CC48740022E57E /* Default.png */,
 				7AC3BAF117CC48740022E57E /* Default@2x.png */,
-				7A48B48517CDF2EF002DA386 /* AppLogo.png */,
-				7A48B48717CDF2F6002DA386 /* AppLogo@2x.png */,
 				B48BB8B817EFEE43004DBE5D /* WeiboBana.jpg */,
+				7A5AC7691817C4BD006C7CB1 /* EMOP_App_6.png */,
+				7A5AC76A1817C4BD006C7CB1 /* EMOP_App_6@2x.png */,
+				7A5AC76B1817C4BD006C7CB1 /* EMOP_APP_7.png */,
+				7A5AC76C1817C4BD006C7CB1 /* EMOP_App_7@2x.png */,
+				7A5AC76D1817C4BD006C7CB1 /* EMOP_Setting.png */,
+				7A5AC76E1817C4BD006C7CB1 /* EMOP_Setting@2x.png */,
+				7A5AC76F1817C4BD006C7CB1 /* EMOP_Spotlight_6.png */,
+				7A5AC7701817C4BD006C7CB1 /* EMOP_Spotlight_6@2x.png */,
+				7A5AC7711817C4BD006C7CB1 /* EMOP_Spotlight_7.png */,
+				7A5AC7721817C4BD006C7CB1 /* EMOP_Spotlight_7@2x.png */,
 			);
 			name = Images;
 			path = Resource/Images;
@@ -2387,6 +2416,7 @@
 				EF8A47F217F959B5009B5C33 /* REMTrendChartLineSeries.m */,
 				EF8A47F417F959B5009B5C33 /* REMTrendChartSeries.m */,
 				EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */,
+				EFDEC2A4181768540008972E /* REMTrendChartRankingSeries.m */,
 			);
 			path = Series;
 			sourceTree = "<group>";
@@ -2400,6 +2430,10 @@
 				EF8A480617F95FA1009B5C33 /* REMLineWidgetWrapper.m */,
 				EF8A480717F95FA1009B5C33 /* REMTrendWidgetWrapper.h */,
 				EF8A480817F95FA1009B5C33 /* REMTrendWidgetWrapper.m */,
+				EFF3BA0518167BA500DD92CF /* REMRankingWidgetWrapper.h */,
+				EFF3BA0618167BA500DD92CF /* REMRankingWidgetWrapper.m */,
+				EFDEC2A61817C6B70008972E /* REMStackColumnWidgetWrapper.h */,
+				EFDEC2A71817C6B70008972E /* REMStackColumnWidgetWrapper.m */,
 			);
 			path = TrendChartWrapper;
 			sourceTree = "<group>";
@@ -2510,9 +2544,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A4BD94717B89F1F007C9FCF /* BluesPad.entitlements in Resources */,
+				7A5AC77C1817C4BD006C7CB1 /* EMOP_Spotlight_7@2x.png in Resources */,
+				7A5AC77A1817C4BD006C7CB1 /* EMOP_Spotlight_6@2x.png in Resources */,
 				7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */,
 				7A5E2D95177B41B0000F77F9 /* InfoPlist.strings in Resources */,
+				7A5AC7761817C4BD006C7CB1 /* EMOP_App_7@2x.png in Resources */,
 				7A53160217F817370022491F /* Gallary@2x.png in Resources */,
 				B445AEAE177BEEB8002D2A59 /* README.txt in Resources */,
 				7AC3BB3417CC48750022E57E /* Default-568h@2x.png in Resources */,
@@ -2521,6 +2557,7 @@
 				7AC3BB3617CC48750022E57E /* Default@2x.png in Resources */,
 				7ACFCBF117CDA62E00811976 /* dashboard.png in Resources */,
 				7ACFCBFF17CDA62E00811976 /* weibo.png in Resources */,
+				7A5AC77B1817C4BD006C7CB1 /* EMOP_Spotlight_7.png in Resources */,
 				7ACFCC0017CDA62E00811976 /* weibo@2x.png in Resources */,
 				7ACFCC0117CDA62E00811976 /* dashboard-all.png in Resources */,
 				7ACFCC0217CDA62E00811976 /* dashboard-favorite.png in Resources */,
@@ -2529,6 +2566,7 @@
 				7ACFCC0517CDA62E00811976 /* user.png in Resources */,
 				7ACFCC0617CDA62E00811976 /* JumpLogin-Normal.png in Resources */,
 				7ACFCC0717CDA62E00811976 /* JumpLogin-Normal@2x.png in Resources */,
+				7A5AC7771817C4BD006C7CB1 /* EMOP_Setting.png in Resources */,
 				7ACFCC0817CDA62E00811976 /* JumpLogin-Pressed.png in Resources */,
 				7ACFCC0917CDA62E00811976 /* JumpLogin-Pressed@2x.png in Resources */,
 				7ACFCC0A17CDA62E00811976 /* Login-Disable.png in Resources */,
@@ -2538,10 +2576,12 @@
 				7ACFCC0E17CDA62E00811976 /* Login-Pressed.png in Resources */,
 				7ACFCC0F17CDA62E00811976 /* Login-Pressed@2x.png in Resources */,
 				7ACFCC1317CDA62E00811976 /* SlidePageBackground.png in Resources */,
+				7A5AC7781817C4BD006C7CB1 /* EMOP_Setting@2x.png in Resources */,
 				7ACFCC1417CDA62E00811976 /* SlidePageBackground@2x.png in Resources */,
 				B4EDFB1218064F2900873FA1 /* Share_normal@2x.png in Resources */,
 				7ACFCC1817CDA62E00811976 /* SplashScreenBackgroud.jpg in Resources */,
 				7ACFCC1917CDA62E00811976 /* SplashScreenBackgroud@2x.jpg in Resources */,
+				7A5AC7731817C4BD006C7CB1 /* EMOP_App_6.png in Resources */,
 				7ACFCC1A17CDA62E00811976 /* SplashScreenLogo-Common.png in Resources */,
 				7A48B47817CDDD03002DA386 /* LoginTextField-Focus.png in Resources */,
 				B4EDFB0F18064F2900873FA1 /* Share_disable.png in Resources */,
@@ -2553,6 +2593,7 @@
 				B454BC0617CDEC4D00D69A7B /* OverTarget.png in Resources */,
 				B4EDFB1018064F2900873FA1 /* Share_disable@2x.png in Resources */,
 				7A2F76191810C82E006C19D8 /* DefaultBuilding-Small@2x.png in Resources */,
+				7A5AC7741817C4BD006C7CB1 /* EMOP_App_6@2x.png in Resources */,
 				B454BC0717CDEC4D00D69A7B /* Menu_normal.png in Resources */,
 				B454BC0917CDEC4D00D69A7B /* OverTarget@2x.png in Resources */,
 				B454BC0C17CDECD500D69A7B /* NotOverTarget.png in Resources */,
@@ -2560,8 +2601,6 @@
 				7A48B48217CDF0FD002DA386 /* SplashScreenLogo-Common@2x.png in Resources */,
 				7A48B48317CDF0FD002DA386 /* SplashScreenLogo-Flash.png in Resources */,
 				7A48B48417CDF0FD002DA386 /* SplashScreenLogo-Flash@2x.png in Resources */,
-				7A48B48617CDF2F0002DA386 /* AppLogo.png in Resources */,
-				7A48B48817CDF2F6002DA386 /* AppLogo@2x.png in Resources */,
 				7A48B48F17CDFA38002DA386 /* Propaganda_1.jpg in Resources */,
 				7A48B49017CDFA38002DA386 /* Propaganda_1@2x.jpg in Resources */,
 				7A48B49117CDFA38002DA386 /* Propaganda_2.jpg in Resources */,
@@ -2586,6 +2625,7 @@
 				7A53160117F817370022491F /* Gallary.png in Resources */,
 				B45F8A6217D5B0340079C74D /* Electricity_normal.png in Resources */,
 				B45F8A6F17D5B04B0079C74D /* Coal_normal@2x.png in Resources */,
+				7A5AC7751817C4BD006C7CB1 /* EMOP_APP_7.png in Resources */,
 				B45F8A7017D5B04B0079C74D /* Coal_pressed@2x.png in Resources */,
 				B45F8A7117D5B04B0079C74D /* Electricity_normal@2x.png in Resources */,
 				B4AB0B3A1807F9CD0053108B /* mail.jpg in Resources */,
@@ -2597,6 +2637,7 @@
 				B45F8A7717D5B04B0079C74D /* PM2.5_normal@2x.png in Resources */,
 				B45F8A7817D5B04B0079C74D /* PM2.5_pressed@2x.png in Resources */,
 				B45F8A7917D5B04B0079C74D /* Water_normal@2x.png in Resources */,
+				7A5AC7791817C4BD006C7CB1 /* EMOP_Spotlight_6.png in Resources */,
 				B45F8A7A17D5B04B0079C74D /* Water_pressed@2x.png in Resources */,
 				7A20761417E055E800CD137C /* Localizable.strings in Resources */,
 				B42C338917E18E63008289D2 /* DefaultBuilding@2x.png in Resources */,
@@ -2695,6 +2736,7 @@
 				B4FED1541804FEF400E0CE58 /* REMEnergySeacherBase.m in Sources */,
 				EF8A47F717F959B5009B5C33 /* REMTrendChartView.m in Sources */,
 				B47ACC2D17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m in Sources */,
+				EFF3BA0718167BA500DD92CF /* REMRankingWidgetWrapper.m in Sources */,
 				B48CC99317832EAE00AAD5D4 /* REMWidgetMaxView.m in Sources */,
 				B4198EAE178410D300B50475 /* REMLogManager.m in Sources */,
 				B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */,
@@ -2822,7 +2864,9 @@
 				7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */,
 				7AF3667817CF2D7400447650 /* REMChartSeriesIndicator.m in Sources */,
 				B493ADA917D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m in Sources */,
+				EFDEC2A5181768540008972E /* REMTrendChartRankingSeries.m in Sources */,
 				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,
+				EFDEC2A81817C6B70008972E /* REMStackColumnWidgetWrapper.m in Sources */,
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
 				EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */,
 				EF60822F17D818430093427C /* REMModalView.m in Sources */,
@@ -3177,7 +3221,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos6.1]" = "iPhone Developer";
@@ -3234,7 +3278,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -3381,7 +3425,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -3514,7 +3558,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;

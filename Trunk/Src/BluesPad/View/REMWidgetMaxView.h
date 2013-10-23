@@ -12,6 +12,7 @@
 #import "REMLineWidgetWrapper.h"
 #import "REMColumnWidgetWrapper.h"
 #import "REMPieChartWrapper.h"
+#import "REMRankingWidgetWrapper.h"
 
 @interface REMWidgetMaxView : REMModalView<UIGestureRecognizerDelegate>
 

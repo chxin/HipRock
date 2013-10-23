@@ -19,21 +19,25 @@
     self.layoutSyntax=dictionary[@"LayoutSyntax"];
     
     self.contentSyntax = [[REMWidgetContentSyntax alloc]initWithJSONString:dictionary[@"ContentSyntax"]];
-    if([self.contentSyntax.type isEqualToString:@"line"] ==YES)
+    if([self.contentSyntax.xtype isEqualToString:@"linechartcomponent"] ==YES)
     {
         self.diagramType =REMDiagramTypeLine;
     }
-    else if([self.contentSyntax.type isEqualToString:@"column"]== YES)
+    else if([self.contentSyntax.xtype isEqualToString:@"columnchartcomponent"]== YES)
     {
         self.diagramType =REMDiagramTypeColumn;
     }
-    else if([self.contentSyntax.type isEqualToString:@"grid"]== YES)
+    else if([self.contentSyntax.xtype isEqualToString:@"unitenergygridcomponent"]== YES)
     {
         self.diagramType =REMDiagramTypeGrid;
     }
-    else if([self.contentSyntax.type isEqualToString:@"pie"]== YES)
+    else if([self.contentSyntax.xtype isEqualToString:@"piechartcomponent"]== YES)
     {
         self.diagramType =REMDiagramTypePie;
+    }
+    else if([self.contentSyntax.xtype isEqualToString:@"rankcolumnchartcomponent"]== YES)
+    {
+        self.diagramType =REMDiagramTypeRanking;
     }
     
     NSDictionary *shareInfo = dictionary[@"SimpleShareInfo"];

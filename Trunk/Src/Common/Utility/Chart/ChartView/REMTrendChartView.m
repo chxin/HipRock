@@ -79,13 +79,17 @@
     if (length <= 0) return;
     location -= 0.5;
     if (length == currentXLength && location == currentXLocation) return;
-//    CPTXYPlotSpace* majorPlotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
+    
     if (location < [NSDecimalNumber numberWithFloat: xStableStartPoint].floatValue) return;
     currentXLocation = location;
     currentXLength = length;
     
     [self rerenderYLabel];
     
+    CPTPlotRange* xRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(currentXLocation) length:CPTDecimalFromFloat(currentXLength)];
+    for (CPTXYPlotSpace* pSpace in self.hostedGraph.allPlotSpaces) {
+        pSpace.xRange = xRange;
+    }
     if (isTheFirstRender == YES) {
         [self rerenderXLabel];
         isTheFirstRender = NO;
@@ -94,12 +98,6 @@
 
 -(void)rerenderXLabel {
     CPTXYAxis* xAxis = [self.hostedGraph.axisSet.axes objectAtIndex:0];
-    CPTPlotRange* xRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(currentXLocation) length:CPTDecimalFromFloat(currentXLength)];
-//    ((CPTXYPlotSpace*)(xAxis.plotSpace)).xRange = xRange;
-    for (int i = 1; i < self.hostedGraph.axisSet.axes.count; i++) {
-        CPTXYPlotSpace* pSpace = (CPTXYPlotSpace*)((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:i]).plotSpace;
-        pSpace.xRange = xRange;
-    }
     ((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:1]).orthogonalCoordinateDecimal = [NSNumber numberWithFloat:currentXLocation].decimalValue;
     int xLabelInterval = [self getXInterval];
     REMXFormatter* formatter = [[REMXFormatter alloc]initWithStartDate:self.xStartDate dataStep:self.step interval:xLabelInterval length:[NSDecimalNumber decimalNumberWithDecimal:((CPTXYPlotSpace*)xAxis.plotSpace).globalXRange.length].floatValue];
@@ -117,21 +115,7 @@
     int endX = ceil(currentXLocation + currentXLength);
     for (int i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = [self.series objectAtIndex:i];
-        NSNumber* maxY = [NSNumber numberWithInt:0];
-        NSDate* xStartDate = [s.dataProcessor deprocessX:startX startDate:s.startDate step:s.step];
-        NSDate* xEndDate = [s.dataProcessor deprocessX:endX startDate:s.startDate step:s.step];
-        /*效率还可以改善*/
-        for (int j = 0; j < s.energyData.count; j++) {
-            REMEnergyData* point = [s.energyData objectAtIndex:j];
-            if ([point.localTime timeIntervalSinceDate:xStartDate] < 0) continue;
-            if ([point.localTime timeIntervalSinceDate:xEndDate] > 0) break;
-            NSNumber* yVal = [s.dataProcessor processY:point.dataValue startDate:s.startDate step:s.step];
-            if (yVal == nil || yVal == NULL || [yVal isEqual:[NSNull null]] || [yVal isLessThan:([NSNumber numberWithInt:0])]) continue;
-            if (maxY.floatValue < yVal.floatValue) {
-                maxY = yVal;
-            }
-        }
-        
+        NSNumber* maxY = [s maxYValBetween:startX and:endX];
         if (s.yAxisIndex >= yAxisMaxValues.count) {
             [yAxisMaxValues addObject:maxY];
         } else {
