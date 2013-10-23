@@ -113,6 +113,10 @@ typedef enum  {
 
 @end
 
+@interface REMTrendChartRankingSeries : REMTrendChartColumnSeries
+@property (nonatomic) NSComparisonResult sortOrder;
+@end
+
 @interface REMXFormatter : NSFormatter
 -(REMXFormatter*)initWithStartDate:(NSDate*)startDate dataStep:(REMEnergyStep)step interval:(int)interval length:(float)length;
 @property (nonatomic, readonly) NSDate* startDate;

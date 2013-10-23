@@ -7,7 +7,6 @@
 //
 
 #import "REMRankingWidgetWrapper.h"
-#import "REMTrendChartRankingSeries.h"
 
 @implementation REMRankingWidgetWrapper
 -(NSDictionary*)getSeriesAndAxisConfig:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {

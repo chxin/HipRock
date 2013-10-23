@@ -6,8 +6,9 @@
 //
 //
 
-#import "REMTrendChartRankingSeries.h"
+#import "REMChartHeader.h"
 #import "REMTargetEnergyData.h"
+
 @interface REMTrendChartRankingSeries()
 /****  ****/
 @property (nonatomic) NSMutableDictionary* dataTargetIdDic; // { key: targetID, value: REMEnergyData }
