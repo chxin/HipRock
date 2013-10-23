@@ -13,12 +13,14 @@
 {
     NSArray *_hiddenSeries;
 }
+/*
 @property (nonatomic,strong) REMWidgetMaxDiagramViewController *chartController;
 @property (nonatomic,strong) NSArray *currentStepList;
-
+*/
 @end
 
 @implementation REMWidgetMaxViewController
+/*
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -68,8 +70,8 @@
     
     [self setStepButtonWithRange:self.viewTimeRange Step:((REMEnergyStep)[self.widgetObj.contentSyntax.step integerValue])];
     
-    [self.stepToolbar setNeedsDisplay];
-    [self.stepToolbar setNeedsLayout];
+//    [self.stepToolbar setNeedsDisplay];
+//    [self.stepToolbar setNeedsLayout];
 }
 
 - (void)viewDidLoad
@@ -359,4 +361,5 @@
 {}
 - (IBAction) favoriteTap:(UIButton *)sender
 {}
+*/
 @end
