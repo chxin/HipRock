@@ -12,6 +12,7 @@
 #import "REMLineWidgetWrapper.h"
 #import "REMColumnWidgetWrapper.h"
 #import "REMPieChartWrapper.h"
+#import "REMRankingWidgetWrapper.h"
 
 @interface REMDashboardCollectionCellView ()
 
@@ -91,16 +92,20 @@
     [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:syntax.params withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data){
         self.chartData = data;
         self.chartLoaded=YES;
-        REMWidgetWrapper* widget = nil;
-        if ([syntax.type isEqualToString:@"line"]) {
-            widget = [[REMLineWidgetWrapper alloc]initWithFrame:self.chartContainer.bounds data:data widgetContext:syntax];
-        } else if ([syntax.type isEqualToString:@"column"]) {
-            widget = [[REMColumnWidgetWrapper alloc]initWithFrame:self.chartContainer.bounds data:data widgetContext:syntax];
-        } else if ([syntax.type isEqualToString:@"pie"]) {
-            widget = [[REMPieChartWrapper alloc]initWithFrame:self.chartContainer.bounds data:data widgetContext:syntax];
+        REMWidgetWrapper* widgetWrapper = nil;
+        REMDiagramType widgetType = self.widgetInfo.diagramType;
+        CGRect widgetRect = self.chartContainer.bounds;
+        if (widgetType == REMDiagramTypeLine) {
+            widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax];
+        } else if (widgetType == REMDiagramTypeColumn) {
+            widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax];
+        } else if (widgetType == REMDiagramTypePie) {
+            widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax];
+        } else if (widgetType == REMDiagramTypeRanking) {
+            widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax];
         }
-        if (widget != nil) {
-            [self.chartContainer addSubview:widget.view];
+        if (widgetWrapper != nil) {
+            [self.chartContainer addSubview:widgetWrapper.view];
 //            [widget destroyView];
         }
         //[self snapshotChartView];

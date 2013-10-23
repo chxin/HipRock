@@ -12,8 +12,10 @@
 @implementation REMRankingWidgetWrapper
 -(NSDictionary*)getSeriesAndAxisConfig:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
-    
-    [dic setObject:@[[[REMTrendChartRankingSeries alloc]initWithData:energyViewData.targetEnergyData dataProcessor:self.dataProcessor plotStyle:nil yAxisIndex:0 dataStep:REMEnergyStepHour]] forKey:@"series"];
+    REMTrendChartRankingSeries* series =[[REMTrendChartRankingSeries alloc]initWithData:energyViewData.targetEnergyData dataProcessor:self.dataProcessor plotStyle:nil yAxisIndex:0 dataStep:REMEnergyStepHour];
+//    if (widgetSyntax)
+//    _sortOrder = NSOrderedDescending;
+    [dic setObject:@[series] forKey:@"series"];
     
     REMTrendChartAxisConfig* yAxis = nil;
     if (self.status == REMWidgetStatusMinimized) {
@@ -35,7 +37,6 @@
     rankingSeries.sortOrder = theSortOrder;
     _sortOrder = theSortOrder;
 }
-
 -(void)reloadData {
     [((REMTrendChartView*)self.view) renderRange:self.location length:self.length];
 //    REMTrendChartRankingSeries* rankingSeries = [((REMTrendChartView*)self.view).series objectAtIndex:0];
