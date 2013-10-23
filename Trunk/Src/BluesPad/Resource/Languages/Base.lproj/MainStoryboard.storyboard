@@ -145,7 +145,7 @@
                                 <rect key="frame" x="0.0" y="56" width="500" height="1"/>
                                 <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="SchneiderElectricChina" placeholder="用户名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NEh-h3-tnd" customClass="REMInsetsTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="" placeholder="用户名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NEh-h3-tnd" customClass="REMInsetsTextField">
                                 <rect key="frame" x="85" y="114" width="330" height="52"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <rect key="contentStretch" x="0.0" y="1" width="1" height="1"/>
@@ -159,7 +159,7 @@
                                     <action selector="textFieldChanged:" destination="AVi-ee-Lx7" eventType="editingChanged" id="2ee-rh-Bcd"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="P@ssw0rd" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TI6-QH-ZIu" customClass="REMInsetsTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TI6-QH-ZIu" customClass="REMInsetsTextField">
                                 <rect key="frame" x="85" y="197" width="330" height="52"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
