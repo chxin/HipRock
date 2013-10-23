@@ -219,8 +219,8 @@ static BOOL isInitialPresenting = YES;
     }
     
     self.gallaryViewController.mapViewController = self;
-    self.gallaryViewController.originalFrame = self.gallarySwitchButton.frame;
-    self.gallaryViewController.viewFrame = self.view.bounds;
+//    self.gallaryViewController.originalFrame = self.gallarySwitchButton.frame;
+//    self.gallaryViewController.viewFrame = self.view.bounds;
     self.gallaryViewController.buildingInfoArray = self.buildingInfoArray;
     
     [self addChildViewController:self.gallaryViewController];
