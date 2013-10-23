@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D161785111300219469 /* REMApplicationInfo.m */; };
 		38ED7D1F1785140900219469 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38ED7D1E1785140900219469 /* libsqlite3.dylib */; };
-		6A4BD94717B89F1F007C9FCF /* BluesPad.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B4CD146017B3439600807B5F /* BluesPad.entitlements */; };
 		6A83C8D917DD9B3600BD8164 /* REMError.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42017D877C3003B18E1 /* REMError.h */; };
 		6A83C8DA17DD9B3600BD8164 /* REMError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42117D877C3003B18E1 /* REMError.m */; };
 		6A83C8DB17DD9B3600BD8164 /* REMBusinessErrorInfo.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41C17D874C3003B18E1 /* REMBusinessErrorInfo.h */; };
@@ -1074,7 +1073,6 @@
 		B4AB0B391807F9CD0053108B /* mail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mail.jpg; sourceTree = "<group>"; };
 		B4B61D7517C742E000245F1E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
-		B4CD146017B3439600807B5F /* BluesPad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluesPad.entitlements; sourceTree = "<group>"; };
 		B4DC083E17F90E2C005658C1 /* REMAdministratorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAdministratorModel.h; path = Common/Model/REMAdministratorModel.h; sourceTree = "<group>"; };
 		B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAdministratorModel.m; path = Common/Model/REMAdministratorModel.m; sourceTree = "<group>"; };
 		B4EDFB0B18064F2900873FA1 /* Share_disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_disable.png; sourceTree = "<group>"; };
@@ -1741,7 +1739,6 @@
 				7A284954180398B600DC481B /* Definitions */,
 				7AC3BABB17CC48740022E57E /* Images */,
 				7A5E2D8D177B41B0000F77F9 /* InfoPlist.strings */,
-				B4CD146017B3439600807B5F /* BluesPad.entitlements */,
 				7A5E2D96177B41C3000F77F9 /* BluesPad-Info.plist */,
 				7A5E2D97177B41C3000F77F9 /* BluesPad-Prefix.pch */,
 				7A20761617E055E800CD137C /* Localizable.strings */,
@@ -2535,7 +2532,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A5AC77C1817C4BD006C7CB1 /* EMOP_Spotlight_7@2x.png in Resources */,
-				6A4BD94717B89F1F007C9FCF /* BluesPad.entitlements in Resources */,
 				7A5AC77A1817C4BD006C7CB1 /* EMOP_Spotlight_6@2x.png in Resources */,
 				7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */,
 				7A5E2D95177B41B0000F77F9 /* InfoPlist.strings in Resources */,
@@ -3209,7 +3205,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos6.1]" = "iPhone Developer";
@@ -3266,7 +3262,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -3413,7 +3409,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -3546,7 +3542,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
