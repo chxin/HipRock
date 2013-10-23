@@ -120,10 +120,6 @@
 
 - (void)gallaryCellTapped:(REMGallaryCell *)cell
 {
-//    CGRect frame = cell.frame;
-//    CGRect bounds = cell.bounds;
-//    NSLog(@"frame: %@",NSStringFromCGRect(frame));
-//    NSLog(@"bounds: %@",NSStringFromCGRect(bounds));
     self.mapViewController.initialZoomRect = cell.frame;
     self.mapViewController.selectedBuilding = cell.building;
     [self.mapViewController presentBuildingView];
@@ -133,6 +129,7 @@
 {
     if(imageIds != nil && imageIds.count > 0){
         NSString *smallImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageSmall];
+        NSString *smallBlurImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageSmallBlured];
         
         if([[NSFileManager defaultManager] fileExistsAtPath:smallImagePath] == YES){
             completed([UIImage imageWithContentsOfFile:smallImagePath]);
@@ -147,6 +144,9 @@
                 
                 UIImage *smallImage = [REMImageHelper parseImageFromNSData:data];
                 [REMImageHelper writeImageFile:smallImage withFullPath:smallImagePath];
+                
+                UIImage *smallBlurImage = [REMImageHelper blurImage:smallImage];
+                [REMImageHelper writeImageFile:smallBlurImage withFileName:smallBlurImagePath];
                 
                 completed([UIImage imageWithContentsOfFile:smallImagePath]);
             } error:^(NSError *error, id response) {

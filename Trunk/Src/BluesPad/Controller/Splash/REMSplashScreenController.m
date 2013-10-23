@@ -142,9 +142,9 @@
 
 - (void)showMapView:(void (^)(void))loadCompleted
 {
-    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
-    syntax.type = @"line";
-    syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
+//    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
+//    syntax.type = @"line";
+//    syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
     
     NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
     REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSBuildingInfo parameter:parameter];
