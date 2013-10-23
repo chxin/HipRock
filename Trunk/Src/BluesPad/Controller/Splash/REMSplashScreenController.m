@@ -142,9 +142,9 @@
 
 - (void)showMapView:(void (^)(void))loadCompleted
 {
-    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
-    syntax.type = @"line";
-    syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
+//    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
+//    syntax.type = @"line";
+//    syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
     
     NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
     REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSBuildingInfo parameter:parameter];
@@ -153,6 +153,10 @@
     buildingStore.maskContainer = nil;
     
     [REMDataAccessor access:buildingStore success:^(id data) {
+        if([data count]<=0){
+            [REMAlertHelper alert:@"未配置客户及数据权限，请联系您的管理员。"];
+        }
+        
         self.buildingInfoArray = [[NSMutableArray alloc] initWithCapacity:[data count]];
         for(NSDictionary *item in (NSArray *)data){
             [self.buildingInfoArray addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];

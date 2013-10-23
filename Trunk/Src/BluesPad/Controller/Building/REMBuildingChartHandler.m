@@ -81,6 +81,11 @@ static CPTTextStyle *yAxisLabelStyle;
     
 }
 
+- (NSDictionary *)assembleRequestParametersWithBuildingId:(long long)buildingId WithCommodityId:(long long)commodityID WithMetadata:(REMAverageUsageDataModel *)averageData
+{
+    return nil;
+}
+
 
 -(void)drawLabelWithText:(NSString *)text
 {

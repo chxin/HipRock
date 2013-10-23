@@ -52,6 +52,12 @@ typedef enum _REMRelativeTimeRangeType : NSInteger
     REMRelativeTimeRangeTypeLastYear = 9,
 } REMRelativeTimeRangeType;
 
+typedef enum _REMBuildingImageType {
+    REMBuildingImageSmall,
+    REMBuildingImageSmallBlured,
+    REMBuildingImageNormal,
+    REMBuildingImageNormalBlured,
+} REMBuildingImageType;
 
 
 @interface REMEnum : NSObject

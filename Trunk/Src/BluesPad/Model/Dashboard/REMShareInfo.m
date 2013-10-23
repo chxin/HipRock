@@ -13,6 +13,7 @@
 
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary{
     self.userRealName=dictionary[@"UserRealName"];
+    
     self.userTelephone=dictionary[@"UserTelephone"];
     NSString *time = dictionary[@"ShareTime"];
     long long longTime=[REMTimeHelper longLongFromJSONString:time];

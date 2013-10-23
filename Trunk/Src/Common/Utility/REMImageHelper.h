@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <Accelerate/Accelerate.h>
+#import "REMEnum.h"
+
 @interface REMImageHelper : NSObject
 
 - (void) frostedGlassImage:(UIImageView*)view image:(NSData*)imageData gradientValue:(int)gradientValue;
@@ -23,5 +25,9 @@
 + (UIImage *)readImageFile:(NSString *)fileName;
 
 + (UIImage *) imageWithView:(UIView *)view;
+
++ (NSString *)buildingImagePathWithId:(NSNumber *)imageId andType:(REMBuildingImageType)type;
+
++ (void)writeImageFile:(UIImage *)image withFullPath:(NSString *)fullPath;
 
 @end

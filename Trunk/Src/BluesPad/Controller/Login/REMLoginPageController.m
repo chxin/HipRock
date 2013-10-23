@@ -14,6 +14,8 @@
 #import "REMUserValidationModel.h"
 #import "REMCommonHeaders.h"
 #import "REMLoginCustomerViewController.h"
+#import "REMLocalizeKeys.h"
+#import "REMStoryboardDefinitions.h"
 
 @interface REMLoginPageController ()
 
@@ -56,10 +58,10 @@
     [self.view endEditing:YES];
     
     //network
-//    if([REMNetworkHelper checkIsNoConnect] == YES){
-//        [REMAlertHelper alert:@"无可用网络,无法获取最新的能源数据"];
-//        return;
-//    }
+    if([REMNetworkHelper checkIsNoConnect] == YES){
+        [REMAlertHelper alert:REMLocalizedString(kLNLogin_NoNetwork)];
+        return;
+    }
     
     NSMutableDictionary *loginInfo = [[NSMutableDictionary alloc] init];
     [loginInfo setValue:self.userNameTextField.text forKey:@"userName"];
@@ -117,8 +119,9 @@
             NSArray *customers = (NSArray *)([REMApplicationContext instance].currentUser.customers);
             
             if(customers.count<=0){
-                [self.userNameErrorLabel setHidden:NO];
-                [self.userNameErrorLabel setText : @"登录失败，该用户未绑定客户" ];
+//                [self.userNameErrorLabel setHidden:NO];
+//                [self.userNameErrorLabel setText : @"登录失败，该用户未绑定客户" ];
+                [REMAlertHelper alert:REMLocalizedString(kLNLogin_NotAuthorized)];
                 
                 return;
             }
@@ -130,7 +133,7 @@
                 return;
             }
             
-            [self performSegueWithIdentifier:@"loginCustomerSegue" sender:self];
+            [self performSegueWithIdentifier:kSegue_LoginToCustomer sender:self];
             
         }
         else
@@ -138,17 +141,17 @@
             if(validationResult.status == REMUserValidationWrongName)
             {
                 [self.userNameErrorLabel setHidden:NO];
-                [self.userNameErrorLabel setText : @"该用户名不存在" ];
+                [self.userNameErrorLabel setText : REMLocalizedString(kLNLogin_UserNotExist) ];
             }
             else if (validationResult.status == REMUserValidationWrongPassword)
             {
                 [self.passwordErrorLabel setHidden:NO];
-                [self.passwordErrorLabel setText : @"登录密码错误" ];
+                [self.passwordErrorLabel setText : REMLocalizedString(kLNLogin_WrongPassword) ];
             }
             else if(validationResult.status == REMUserValidationInvalidSp)
             {
                 [self.userNameErrorLabel setHidden:NO];
-                [self.userNameErrorLabel setText : @"登录失败，您的用户名暂时无法使用" ];
+                [self.userNameErrorLabel setText :  REMLocalizedString(kLNLogin_AccountLocked)];
             }
             else
             {
@@ -165,7 +168,7 @@
 {
     [self.loginButton stopIndicator];
     
-    [REMAlertHelper alert:@"服务器错误"];
+    [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
 }
 
 -(void)loginSuccess
@@ -180,7 +183,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"loginCustomerSegue"] == YES)
+    if ([segue.identifier isEqualToString:kSegue_LoginToCustomer] == YES)
     {
         UINavigationController *navigationController = segue.destinationViewController;
         REMLoginCustomerViewController *customerController = navigationController.childViewControllers[0];

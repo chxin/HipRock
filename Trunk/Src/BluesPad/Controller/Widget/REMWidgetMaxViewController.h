@@ -7,19 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "REMEnergyViewData.h"
-#import "REMWidgetObject.h"
-#import "REMWidgetMaxView.h"
-#import "REMColor.h"
-#import "REMWidgetMaxDiagramViewController.h"
-#import "REMWidgetMaxPieViewController.h"
-#import "REMWidgetRelativeDateTableViewController.h"
-#import "REMWidgetMaxLineViewController.h"
-#import "REMWidgetMaxColumnViewController.h"
-#import "REMWidgetTimePickerViewController.h"
-#import "REMWidgetStepToolbarView.h"
+//#import "REMEnergyViewData.h"
+//#import "REMWidgetObject.h"
+//#import "REMWidgetMaxView.h"
+//#import "REMColor.h"
+//#import "REMWidgetMaxDiagramViewController.h"
+//#import "REMWidgetMaxPieViewController.h"
+//#import "REMWidgetRelativeDateTableViewController.h"
+//#import "REMWidgetMaxLineViewController.h"
+//#import "REMWidgetMaxColumnViewController.h"
+//#import "REMWidgetTimePickerViewController.h"
+//#import "REMWidgetStepToolbarView.h"
 
 @interface REMWidgetMaxViewController : UIViewController
+/*
+
 - (IBAction)searchClick:(UIButton *)sender;
 
 @property   (nonatomic,strong) REMEnergyViewData  *data;
@@ -35,12 +37,12 @@
 - (IBAction)stepChanged:(UISegmentedControl *)sender;
 
 
-@property (weak, nonatomic) IBOutlet REMWidgetStepToolbarView *stepToolbar;
+//@property (weak, nonatomic) IBOutlet REMWidgetStepToolbarView *stepToolbar;
 
 
 - (IBAction)legendTap:(id)sender;
 - (void)setRelativeDate:(NSString *)relativeDateString WithText:(NSString *)text;
 - (void)setStartDate:(NSDate *)date;
 - (void)setEndDate:(NSDate *)date;
-
+*/
 @end

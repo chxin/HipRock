@@ -14,10 +14,13 @@
 @interface REMGallaryViewController : UICollectionViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
 
 @property (nonatomic,strong) NSArray *buildingInfoArray;
-@property (nonatomic,strong) REMMapViewController *mapViewController;
+@property (nonatomic,weak) REMMapViewController *mapViewController;
+@property (nonatomic,weak) REMSplashScreenController *splashScreenController;
 
-@property (nonatomic) CGRect viewFrame;
-@property (nonatomic) CGRect originalFrame;
+@property (nonatomic,strong) UIImageView *snapshot;
+@property (nonatomic) CGRect initialZoomRect;
+
+@property (nonatomic,strong) REMBuildingModel *selectedBuilding;
 
 - (void)gallaryCellTapped:(REMGallaryCell *)cell;
 

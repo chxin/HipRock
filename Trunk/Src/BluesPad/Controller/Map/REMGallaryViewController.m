@@ -15,10 +15,15 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMBuildingOverallModel.h"
 #import <QuartzCore/QuartzCore.h>
+#import "REMMapBuildingSegue.h"
+#import "REMBuildingViewController.h"
+
+#define kGallaryBuildingImageGroupName @"GALLARY"
 
 @interface REMGallaryViewController ()
 
 @end
+
 
 @implementation REMGallaryViewController{
     REMGallaryView *gallaryView;
@@ -35,14 +40,11 @@
         
         //CGRect viewFrame = self.mapViewController.view == nil?CGRectZero:self.mapViewController.view.bounds;
         
-        gallaryView = [[REMGallaryView alloc] initWithFrame:self.viewFrame collectionViewLayout:layout];
+        gallaryView = [[REMGallaryView alloc] initWithFrame:self.mapViewController.view.frame collectionViewLayout:layout];
         gallaryView.dataSource = self;
         gallaryView.delegate = self;
         [gallaryView registerClass:[REMGallaryCell class] forCellWithReuseIdentifier:kCellIdentifier_GallaryCell];
         [gallaryView setBackgroundColor:[UIColor blackColor]];
-        
-        gallaryView.transform = [REMViewHelper getScaleTransformFromOriginalFrame:self.originalFrame andFinalFrame:self.viewFrame];
-        gallaryView.center = [REMViewHelper getCenterOfRect:self.originalFrame];
         
         self.view = gallaryView;
     }
@@ -63,7 +65,7 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self playZoomAnimation:YES];
+    //[self playZoomAnimation:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,29 +86,35 @@
 
 -(void)switchButtonPressed
 {
-    [self playZoomAnimation:NO];
 }
 
--(void)playZoomAnimation:(BOOL)isZoomIn
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSTimeInterval duration = 0.5;
-    if(isZoomIn == YES){
-        [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            CGAffineTransform transform = CGAffineTransformMakeScale(1.0, 1.0);
-            self.view.transform = transform;
-            self.view.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
-        } completion:^(BOOL finished) {
-        }];
+    if([segue.identifier isEqualToString:kSegue_MapToBuilding] == YES)
+    {
+        REMMapBuildingSegue *customeSegue = (REMMapBuildingSegue *)segue;
+        customeSegue.isInitialPresenting = NO;
+        customeSegue.initialZoomRect = self.initialZoomRect;
+        customeSegue.finalZoomRect = self.view.frame;
+        
+        if(self.selectedBuilding == nil){
+            UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+            self.initialZoomRect = cell.frame;
+        }
+        
+        self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
+        
+        REMBuildingViewController *buildingViewController = customeSegue.destinationViewController;
+        buildingViewController.buildingOverallArray = self.buildingInfoArray;
+        buildingViewController.splashScreenController = self.splashScreenController;
+        buildingViewController.mapViewController = self;
+        buildingViewController.currentBuildingId = self.selectedBuilding.buildingId;
     }
-    else{
-        [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            gallaryView.transform = [REMViewHelper getScaleTransformFromOriginalFrame:self.originalFrame andFinalFrame:self.viewFrame];
-            gallaryView.center = [REMViewHelper getCenterOfRect:self.originalFrame];
-        } completion:^(BOOL finished) {
-            [self.view removeFromSuperview];
-            [self removeFromParentViewController];
-        }];
-    }
+}
+
+-(void)presentBuildingView
+{
+    [self performSegueWithIdentifier:kSegue_MapToBuilding sender:self];
 }
 
 
@@ -117,13 +125,41 @@
 
 - (void)gallaryCellTapped:(REMGallaryCell *)cell
 {
-//    CGRect frame = cell.frame;
-//    CGRect bounds = cell.bounds;
-//    NSLog(@"frame: %@",NSStringFromCGRect(frame));
-//    NSLog(@"bounds: %@",NSStringFromCGRect(bounds));
-    self.mapViewController.initialZoomRect = cell.frame;
-    self.mapViewController.selectedBuilding = cell.building;
+    self.snapshot = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:self.view]];
+    self.initialZoomRect = cell.frame;
+    self.selectedBuilding = cell.building;
+    
     [self.mapViewController presentBuildingView];
+}
+
+-(void)loadBuildingSmallImage:(NSArray *)imageIds :(void (^)(UIImage *))completed
+{
+    if(imageIds != nil && imageIds.count > 0){
+        NSString *smallImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageSmall];
+        NSString *smallBlurImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageSmallBlured];
+        
+        if([[NSFileManager defaultManager] fileExistsAtPath:smallImagePath] == YES){
+            completed([UIImage imageWithContentsOfFile:smallImagePath]);
+        }
+        else{
+            NSDictionary *parameter = @{@"pictureId":imageIds[0], @"isSmall":@1};
+            REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingPicture parameter:parameter];
+            store.groupName = kGallaryBuildingImageGroupName;
+            [REMDataAccessor access:store success:^(id data) {
+                if(data == nil || [data length] <= 2)
+                    return;
+                
+                UIImage *smallImage = [REMImageHelper parseImageFromNSData:data];
+                [REMImageHelper writeImageFile:smallImage withFullPath:smallImagePath];
+                
+                UIImage *smallBlurImage = [REMImageHelper blurImage:smallImage];
+                [REMImageHelper writeImageFile:smallBlurImage withFileName:smallBlurImagePath];
+                
+                completed([UIImage imageWithContentsOfFile:smallImagePath]);
+            } error:^(NSError *error, id response) {
+            }];
+        }
+    }
 }
 
 
@@ -138,10 +174,16 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     REMGallaryCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier_GallaryCell forIndexPath:indexPath];
-    cell.building = ((REMBuildingOverallModel *)self.buildingInfoArray[indexPath.row]).building;
+    
+    REMBuildingModel *building = ((REMBuildingOverallModel *)self.buildingInfoArray[indexPath.row]).building;
+    
+    cell.building = building;
     cell.controller = self;
     
-    //cell.backgroundColor=[UIColor greenColor];
+    [self loadBuildingSmallImage:building.pictureIds :^(UIImage *image) {
+        cell.backgroundImage = image;
+    }];
+    
     return cell;
 }
 
