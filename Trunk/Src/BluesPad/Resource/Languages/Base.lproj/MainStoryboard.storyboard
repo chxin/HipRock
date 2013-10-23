@@ -90,12 +90,36 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="gallarySwitchButton" destination="hSF-rh-OLl" id="S3h-uT-hX3"/>
-                        <segue destination="jAV-Kb-caH" kind="custom" identifier="mapToBuildingSegue" customClass="REMMapBuildingSegue" id="RbE-hG-htp"/>
+                        <segue destination="jAV-Kb-caH" kind="custom" identifier="mapToBuildingSegue" customClass="REMBuildingEntranceSegue" id="RbE-hG-htp"/>
+                        <segue destination="RQY-MK-YUM" kind="custom" identifier="mapToGallerySegue" customClass="REMMapGallerySegue" id="53Y-s3-omU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ncs-SR-xwT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2494" y="-1166"/>
+        </scene>
+        <!--Gallary View Controller-->
+        <scene sceneID="cCc-Oc-ASk">
+            <objects>
+                <viewController id="RQY-MK-YUM" customClass="REMGallaryViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="R0i-uo-Utb"/>
+                        <viewControllerLayoutGuide type="bottom" id="TUf-MX-kkJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mNS-g3-Abw">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <segue destination="jAV-Kb-caH" kind="custom" identifier="galleryToBuildingSegue" customClass="REMBuildingEntranceSegue" id="jmn-Ww-5Fz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ofr-OL-vUG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2494" y="-193"/>
         </scene>
         <!--Building View Controller-->
         <scene sceneID="XIG-df-ONL">
@@ -132,12 +156,11 @@
                     <connections>
                         <segue destination="R8X-Id-ksc" kind="modal" identifier="sendWeiboSegue" modalPresentationStyle="formSheet" id="gyV-e6-1Kn"/>
                         <segue destination="T2C-Tf-bPc" kind="push" id="VF8-aY-jAm"/>
-                        <segue destination="8sm-Rk-4h3" kind="custom" identifier="buildingToMapSegue" customClass="REMMapBuildingSegue" id="jm0-Y9-YEv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujE-me-aPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-439" y="-1166"/>
+            <point key="canvasLocation" x="-447" y="-762"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="kih-fe-Pxz">
@@ -158,7 +181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ndb-ap-11w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1737" y="-1166"/>
+            <point key="canvasLocation" x="800" y="-1434"/>
         </scene>
         <!--Login Page Controller-->
         <scene sceneID="Ym7-Sd-tBw">
@@ -907,6 +930,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="9ca-ql-9sS"/>
+        <segue reference="jmn-Ww-5Fz"/>
     </inferredMetricsTieBreakers>
 </document>

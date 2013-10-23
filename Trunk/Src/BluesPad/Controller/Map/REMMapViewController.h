@@ -20,7 +20,6 @@
 
 @property (nonatomic,strong) NSArray *buildingInfoArray;
 @property (nonatomic,strong) REMSplashScreenController *splashScreenController;
-@property (nonatomic,strong) REMGallaryViewController *gallaryViewController;
 @property (nonatomic,strong) REMBuildingViewController *buildingViewController;
 
 @property (nonatomic,strong) UIImageView *snapshot;
@@ -33,5 +32,7 @@
 -(void)setIsInitialPresenting:(BOOL)isInitial;
 
 -(void)presentBuildingView;
+
+-(CGRect)getCurrentZoomRect:(NSNumber *)currentBuildingId;
 
 @end
