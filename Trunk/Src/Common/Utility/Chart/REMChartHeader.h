@@ -102,6 +102,7 @@ typedef enum  {
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataStep:(REMEnergyStep)step startDate:(NSDate*)startDate;
 
 -(BOOL)isOccupy;
+-(NSNumber*)maxYValBetween:(int)minX and:(int)maxX;
 @end
 
 @interface REMTrendChartColumnSeries : REMTrendChartSeries<CPTBarPlotDataSource>
@@ -110,6 +111,10 @@ typedef enum  {
 
 @interface REMTrendChartLineSeries : REMTrendChartSeries<CPTScatterPlotDataSource>
 
+@end
+
+@interface REMTrendChartRankingSeries : REMTrendChartColumnSeries
+@property (nonatomic) NSComparisonResult sortOrder;
 @end
 
 @interface REMXFormatter : NSFormatter

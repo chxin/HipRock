@@ -23,7 +23,7 @@
 @property (nonatomic) REMEnergyStep stepType;
 @property (nonatomic) REMDataStoreType dataStoreType;
 @property (nonatomic,strong) NSString *storeType;
-@property (nonatomic,strong) NSString *type;
+@property (nonatomic,strong) NSString *xtype;
 @property (nonatomic,strong) NSArray *timeRanges;
 @property (nonatomic,strong) NSNumber *step;
 @end
