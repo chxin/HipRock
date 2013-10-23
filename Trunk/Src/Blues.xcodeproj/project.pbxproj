@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D161785111300219469 /* REMApplicationInfo.m */; };
 		38ED7D1F1785140900219469 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38ED7D1E1785140900219469 /* libsqlite3.dylib */; };
-		6A4BD94717B89F1F007C9FCF /* BluesPad.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B4CD146017B3439600807B5F /* BluesPad.entitlements */; };
 		6A83C8D917DD9B3600BD8164 /* REMError.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42017D877C3003B18E1 /* REMError.h */; };
 		6A83C8DA17DD9B3600BD8164 /* REMError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42117D877C3003B18E1 /* REMError.m */; };
 		6A83C8DB17DD9B3600BD8164 /* REMBusinessErrorInfo.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41C17D874C3003B18E1 /* REMBusinessErrorInfo.h */; };
@@ -1025,7 +1024,6 @@
 		B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingAirQualityChartHandler.m; sourceTree = "<group>"; };
 		B4B61D7517C742E000245F1E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
-		B4CD146017B3439600807B5F /* BluesPad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluesPad.entitlements; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
@@ -1616,7 +1614,6 @@
 			children = (
 				7AC3BABB17CC48740022E57E /* Images */,
 				7A5E2D8D177B41B0000F77F9 /* InfoPlist.strings */,
-				B4CD146017B3439600807B5F /* BluesPad.entitlements */,
 				7A5E2D96177B41C3000F77F9 /* BluesPad-Info.plist */,
 				7A5E2D97177B41C3000F77F9 /* BluesPad-Prefix.pch */,
 				7A20761617E055E800CD137C /* Localizable.strings */,
@@ -2218,7 +2215,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A5AC7611817A3C6006C7CB1 /* EMOP_APP_7.png in Resources */,
-				6A4BD94717B89F1F007C9FCF /* BluesPad.entitlements in Resources */,
 				7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */,
 				7A5E2D95177B41B0000F77F9 /* InfoPlist.strings in Resources */,
 				B445AEAE177BEEB8002D2A59 /* README.txt in Resources */,
@@ -2873,7 +2869,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos6.1]" = "iPhone Developer";
@@ -2924,7 +2920,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3064,7 +3060,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3189,7 +3185,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = BluesPad/BluesPad.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
