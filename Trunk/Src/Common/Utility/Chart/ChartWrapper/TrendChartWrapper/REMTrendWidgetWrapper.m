@@ -10,15 +10,8 @@
 
 @implementation REMTrendWidgetWrapper
 
--(REMTrendChartView*)renderContentView:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {
-    REMTrendChartConfig* chartConfig = nil;
-    if (self.status == REMWidgetStatusMinimized) {
-        chartConfig = (REMTrendChartConfig*)[REMTrendChartConfig getMinimunWidgetDefaultSetting];
-    } else {
-        chartConfig = (REMTrendChartConfig*)[REMTrendChartConfig getMaximunWidgetDefaultSetting];
-    }
-    
-    chartConfig.step = widgetSyntax.step.intValue;
+-(NSDictionary*)getSeriesAndAxisConfig:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
     NSMutableArray* seriesArray = [[NSMutableArray alloc]init];
     int seriesCount = 0;
     if (energyViewData.targetEnergyData != nil && energyViewData.targetEnergyData != NULL) seriesCount =energyViewData.targetEnergyData.count;
@@ -38,33 +31,49 @@
         }
         [seriesArray addObject: [self getSeriesConfigByData:seriesData step:widgetSyntax.step.intValue yAxisIndex:uomIndex seriesIndex:seriesIndex]];
     }
-    if (uomIdArray.count > 1) {
-        NSMutableArray* yAxisConfig = [NSMutableArray arrayWithArray: chartConfig.yAxisConfig];
-        for (int i = 1; i < uomIdArray.count; i++) {
-            [yAxisConfig addObject:[REMTrendChartAxisConfig getMinWidgetYConfig]];
-        }
-        chartConfig.yAxisConfig = yAxisConfig;
-    }
-    chartConfig.series = seriesArray;
+    [dic setObject:seriesArray forKey:@"series"];
     
-    REMTrendChartView* myView = [[REMTrendChartView alloc]initWithFrame:frame chartConfig:chartConfig];
+    NSMutableArray* yAxisConfig = [[NSMutableArray alloc]init];
+    for (int i = 0; i < uomIdArray.count; i++) {
+        if (self.status == REMWidgetStatusMinimized) {
+            [yAxisConfig addObject:[REMTrendChartAxisConfig getMinWidgetYConfig]];
+        } else {
+            [yAxisConfig addObject:[REMTrendChartAxisConfig getMaxWidgetYConfig]];
+        }
+    }
+    [dic setObject:yAxisConfig forKey:@"yAxis"];
+    
     NSDate* globalEnd, *globalStart;
-//    if (energyViewData.targetGlobalData != nil && energyViewData.targetGlobalData.energyData != nil && energyViewData.targetGlobalData.energyData.count > 0) {
-//        globalEnd = [[energyViewData.targetGlobalData.energyData objectAtIndex:energyViewData.targetGlobalData.energyData.count-1] localTime];
-//        globalStart = [[energyViewData.targetGlobalData.energyData objectAtIndex:0] localTime];
-//    } else {
-//        REMTargetEnergyData* theFirstSeries =(REMTargetEnergyData*)[energyViewData.targetEnergyData objectAtIndex:0];
-//        globalEnd = [theFirstSeries.energyData objectAtIndex:theFirstSeries.energyData.count-1];
-//        globalStart = [theFirstSeries.energyData objectAtIndex:0];
-//    }
     REMTimeRange* theFirstTimeRange = [widgetSyntax.timeRanges objectAtIndex:0];
     globalStart = theFirstTimeRange.startTime;
     globalEnd = theFirstTimeRange.endTime;
     NSDate* syntaxStartDate = theFirstTimeRange.startTime;
     NSDate* syntaxEndDate = theFirstTimeRange.endTime;
-    chartConfig.xGlobalLength = [self.dataProcessor processX:globalEnd startDate:globalStart step:widgetSyntax.step.intValue];
-    float rangeStart =[self.dataProcessor processX:syntaxStartDate startDate:globalStart step:widgetSyntax.step.intValue].floatValue;
-    float rangeEnd = [self.dataProcessor processX:syntaxEndDate startDate:globalStart step:widgetSyntax.step.intValue].floatValue;
+    [dic setObject:[self.dataProcessor processX:globalEnd startDate:globalStart step:widgetSyntax.step.intValue] forKey:@"xGlobalLength"];
+    [dic setObject:[self.dataProcessor processX:syntaxStartDate startDate:globalStart step:widgetSyntax.step.intValue] forKey:@"xStartLocation"];
+    [dic setObject:[self.dataProcessor processX:syntaxEndDate startDate:globalStart step:widgetSyntax.step.intValue] forKey:@"xEndLocation"];
+    
+    return dic;
+}
+
+
+-(REMTrendChartView*)renderContentView:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {
+    REMTrendChartConfig* chartConfig = nil;
+    if (self.status == REMWidgetStatusMinimized) {
+        chartConfig = (REMTrendChartConfig*)[REMTrendChartConfig getMinimunWidgetDefaultSetting];
+    } else {
+        chartConfig = (REMTrendChartConfig*)[REMTrendChartConfig getMaximunWidgetDefaultSetting];
+    }
+    
+    chartConfig.step = widgetSyntax.step.intValue;
+    NSDictionary* dic = [self getSeriesAndAxisConfig:energyViewData widgetContext:widgetSyntax];
+    chartConfig.series = [dic objectForKey:@"series"];
+    chartConfig.yAxisConfig = [dic objectForKey:@"yAxis"];
+    chartConfig.xGlobalLength = [dic objectForKey:@"xGlobalLength"];
+    float rangeStart = ((NSNumber*)[dic objectForKey:@"xStartLocation"]).floatValue;
+    float rangeEnd = ((NSNumber*)[dic objectForKey:@"xEndLocation"]).floatValue;
+
+    REMTrendChartView* myView = [[REMTrendChartView alloc]initWithFrame:frame chartConfig:chartConfig];
     [myView renderRange: rangeStart length:rangeEnd-rangeStart];
     return  myView;
 }

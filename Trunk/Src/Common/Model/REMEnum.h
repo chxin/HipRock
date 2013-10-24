@@ -23,6 +23,7 @@ typedef enum _REMCalenderType{
 typedef enum _REMDiagramType
 {
     REMDiagramTypePie,
+    REMDiagramTypeRanking,
     REMDiagramTypeLine,
     REMDiagramTypeColumn,
     REMDiagramTypeGrid

@@ -40,4 +40,21 @@
     return occupy;
 }
 
+-(NSNumber*)maxYValBetween:(int)minX and:(int)maxX {
+    NSNumber* maxY = [NSNumber numberWithInt:0];
+    NSDate* xStartDate = [self.dataProcessor deprocessX:minX startDate:self.startDate step:self.step];
+    NSDate* xEndDate = [self.dataProcessor deprocessX:maxX startDate:self.startDate step:self.step];
+    /*效率还可以改善*/
+    for (int j = 0; j < self.energyData.count; j++) {
+        REMEnergyData* point = [self.energyData objectAtIndex:j];
+        if ([point.localTime timeIntervalSinceDate:xStartDate] < 0) continue;
+        if ([point.localTime timeIntervalSinceDate:xEndDate] > 0) break;
+        NSNumber* yVal = [self.dataProcessor processY:point.dataValue startDate:self.startDate step:self.step];
+        if (yVal == nil || yVal == NULL || [yVal isEqual:[NSNull null]] || [yVal isLessThan:([NSNumber numberWithInt:0])]) continue;
+        if (maxY.floatValue < yVal.floatValue) {
+            maxY = yVal;
+        }
+    }
+    return maxY;
+}
 @end

@@ -12,7 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingWeiboView.h"
 #import "REMMapViewController.h"
-#import "REMMapBuildingSegue.h"
+#import "REMBuildingEntranceSegue.h"
 #import "REMCommonHeaders.h"
 #import "REMStoryboardDefinitions.h"
 
@@ -159,9 +159,9 @@
 //        mapController.buildingInfoArray = self.buildingOverallArray;
 //    }
     if([segue.identifier isEqualToString:kSegue_BuildingToMap] == YES){
-        REMMapBuildingSegue *customSegue = (REMMapBuildingSegue *)segue;
+        REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
         
-        customSegue.initialZoomRect = self.mapViewController.initialZoomRect;
+        customSegue.initialZoomRect = [((id)self.fromController) initialZoomRect];
         customSegue.finalZoomRect = self.view.frame;
     }
 }
@@ -562,7 +562,7 @@
     if(pinch.state  == UIGestureRecognizerStateBegan){
         NSLog(@"pinch: Began");
         if(mapSnapshot == nil)
-            mapSnapshot = self.mapViewController.snapshot;
+            mapSnapshot = [((id)self.fromController) snapshot];
         
         pinchLastScale = 1.0;
         pinchLastPoint = [pinch locationInView:self.snapshot];
@@ -603,10 +603,11 @@
             }
         }
         else{ //scale smaller
+            CGRect initialiZoomRect = [((id)self.fromController) initialZoomRect];
             [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 //from self.snapshot.frame to self.mapViewController.initialZoomRect;
-                self.snapshot.transform = [REMViewHelper getScaleTransformFromOriginalFrame:self.mapViewController.initialZoomRect andFinalFrame:self.view.frame];
-                self.snapshot.center = [REMViewHelper getCenterOfRect:self.mapViewController.initialZoomRect];
+                self.snapshot.transform = [REMViewHelper getScaleTransformFromOriginalFrame:initialiZoomRect andFinalFrame:self.view.frame];
+                self.snapshot.center = [REMViewHelper getCenterOfRect:initialiZoomRect];
             } completion:^(BOOL finished) {
                 [mapSnapshot removeFromSuperview];
                 mapSnapshot = nil;
@@ -640,7 +641,10 @@
 
 -(IBAction)backButtonPressed:(id)sender
 {
-    [self performSegueWithIdentifier:kSegue_BuildingToMap sender:self];
+    REMBuildingEntranceSegue *segue = [[REMBuildingEntranceSegue alloc] initWithIdentifier:kSegue_BuildingToMap source:self destination:self.fromController];
+    
+    [self prepareForSegue:segue sender:self];
+    [segue perform];
 }
 
 -(void)executeExport:(REMMaskManager *)masker{
