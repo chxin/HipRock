@@ -41,6 +41,7 @@
 
 
 -(void)layoutSubviews{
+    
     [super layoutSubviews];
     self.contentView.frame = CGRectMake(
                                         0,
@@ -53,6 +54,7 @@
 
 - (void)initWidgetCollection:(REMDashboardObj *)dashboardInfo withGroupName:(NSString *)groupName
 {
+    if(self.collectionController!=nil) return;
     
     //NSLog(@"contentview:%@",NSStringFromCGRect(self.contentView.frame));
     //NSLog(@"cellview:%@",NSStringFromCGRect(self.frame));
