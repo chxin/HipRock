@@ -229,6 +229,7 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" title="选择日期" id="mKa-gH-Dqr"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                     <connections>
                         <segue destination="4Gb-I0-S90" kind="push" identifier="relativeDateSegue" id="7tZ-E6-tPX"/>
                     </connections>
