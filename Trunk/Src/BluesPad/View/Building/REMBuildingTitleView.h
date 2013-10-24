@@ -23,9 +23,9 @@
 @property (nonatomic,strong) NSString *emptyText;
 @property (nonatomic) CGFloat emptyTextFontSize;
 
-@property (nonatomic,strong) UILabel *titleLabel;
+@property (nonatomic,weak) UILabel *titleLabel;
 
-@property (nonatomic,strong) UILabel *emptyLabel;
+@property (nonatomic,weak) UILabel *emptyLabel;
 
 - (void)initTitle:(NSString *)text withSize:(CGFloat)size withLeftMargin:(CGFloat)leftMargin;
 

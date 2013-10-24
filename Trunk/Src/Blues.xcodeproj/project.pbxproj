@@ -360,7 +360,6 @@
 		7AC3BB3617CC48750022E57E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC3BAF117CC48740022E57E /* Default@2x.png */; };
 		7AC54999181776910037F180 /* REMDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC54998181776910037F180 /* REMDashboardController.m */; };
 		7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
-		7ACFCBF117CDA62E00811976 /* dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFCBB417CDA62E00811976 /* dashboard.png */; };
 		7ACFCBFF17CDA62E00811976 /* weibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFCBC217CDA62E00811976 /* weibo.png */; };
 		7ACFCC0017CDA62E00811976 /* weibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFCBC317CDA62E00811976 /* weibo@2x.png */; };
 		7ACFCC0617CDA62E00811976 /* JumpLogin-Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFCBCB17CDA62E00811976 /* JumpLogin-Normal.png */; };
@@ -466,7 +465,6 @@
 		B46C8EC017F27CB9006DC4CB /* REMDashboardCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EBF17F27CB9006DC4CB /* REMDashboardCollectionView.m */; };
 		B46C8EC317F27CDF006DC4CB /* REMDashboardCollectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EC217F27CDF006DC4CB /* REMDashboardCollectionCellView.m */; };
 		B47422E617C45BCF0021B76C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
-		B47ACC2617F8010A00989B2C /* leftarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = B47ACC2517F8010A00989B2C /* leftarrow.png */; };
 		B47ACC2A17F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC2917F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m */; };
 		B47ACC2D17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC2C17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m */; };
 		B47ACC3017F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC2F17F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m */; };
@@ -949,7 +947,6 @@
 		7AC54998181776910037F180 /* REMDashboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMDashboardController.m; sourceTree = "<group>"; };
 		7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceMeta.h; path = Common/Communication/REMServiceMeta.h; sourceTree = "<group>"; };
 		7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceMeta.m; path = Common/Communication/REMServiceMeta.m; sourceTree = "<group>"; };
-		7ACFCBB417CDA62E00811976 /* dashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboard.png; sourceTree = "<group>"; };
 		7ACFCBC217CDA62E00811976 /* weibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo.png; sourceTree = "<group>"; };
 		7ACFCBC317CDA62E00811976 /* weibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo@2x.png"; sourceTree = "<group>"; };
 		7ACFCBCB17CDA62E00811976 /* JumpLogin-Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Normal.png"; sourceTree = "<group>"; };
@@ -973,8 +970,8 @@
 		B404427B18175EF700A499FB /* Back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Back@2x.png"; sourceTree = "<group>"; };
 		B404427C18175EF700A499FB /* Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Down.png; sourceTree = "<group>"; };
 		B404427D18175EF700A499FB /* Down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Down@2x.png"; sourceTree = "<group>"; };
-		B404427E18175EF700A499FB /* Nodata.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Nodata.png; sourceTree = "<group>"; };
-		B404427F18175EF700A499FB /* Nodata@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nodata@2x.png"; sourceTree = "<group>"; };
+		B404427E18175EF700A499FB /* Nodata.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Nodata.png; path = ../Dashboard/Nodata.png; sourceTree = "<group>"; };
+		B404427F18175EF700A499FB /* Nodata@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Nodata@2x.png"; path = "../Dashboard/Nodata@2x.png"; sourceTree = "<group>"; };
 		B404428018175EF700A499FB /* Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Up.png; sourceTree = "<group>"; };
 		B404428118175EF700A499FB /* Up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Up@2x.png"; sourceTree = "<group>"; };
 		B41249EE1803ECF0009022C5 /* REMCustomerSwitchHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMCustomerSwitchHelper.h; path = Biz/REMCustomerSwitchHelper.h; sourceTree = "<group>"; };
@@ -1052,7 +1049,6 @@
 		B46C8EBF17F27CB9006DC4CB /* REMDashboardCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardCollectionView.m; path = View/Dashboard/REMDashboardCollectionView.m; sourceTree = "<group>"; };
 		B46C8EC117F27CDF006DC4CB /* REMDashboardCollectionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDashboardCollectionCellView.h; path = View/Dashboard/REMDashboardCollectionCellView.h; sourceTree = "<group>"; };
 		B46C8EC217F27CDF006DC4CB /* REMDashboardCollectionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardCollectionCellView.m; path = View/Dashboard/REMDashboardCollectionCellView.m; sourceTree = "<group>"; };
-		B47ACC2517F8010A00989B2C /* leftarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftarrow.png; sourceTree = "<group>"; };
 		B47ACC2817F80AAA00989B2C /* REMSettingCustomerSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerSelectionViewController.h; path = Controller/Setting/REMSettingCustomerSelectionViewController.h; sourceTree = "<group>"; };
 		B47ACC2917F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSettingCustomerSelectionViewController.m; path = Controller/Setting/REMSettingCustomerSelectionViewController.m; sourceTree = "<group>"; };
 		B47ACC2B17F80ACE00989B2C /* REMSettingCustomerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerDetailViewController.h; path = Controller/Setting/REMSettingCustomerDetailViewController.h; sourceTree = "<group>"; };
@@ -2110,7 +2106,6 @@
 				B4EDFB0C18064F2900873FA1 /* Share_disable@2x.png */,
 				B4EDFB0D18064F2900873FA1 /* Share_normal.png */,
 				B4EDFB0E18064F2900873FA1 /* Share_normal@2x.png */,
-				B47ACC2517F8010A00989B2C /* leftarrow.png */,
 				B42C338A17E19064008289D2 /* DefaultBuilding.png */,
 				B42C338817E18E63008289D2 /* DefaultBuilding@2x.png */,
 				B454BC0A17CDECD500D69A7B /* NotOverTarget.png */,
@@ -2119,9 +2114,10 @@
 				B454BBFF17CDEC4D00D69A7B /* Menu_normal@2x.png */,
 				B454BC0017CDEC4D00D69A7B /* OverTarget.png */,
 				B454BC0317CDEC4D00D69A7B /* OverTarget@2x.png */,
-				7ACFCBB417CDA62E00811976 /* dashboard.png */,
 				7ACFCBC217CDA62E00811976 /* weibo.png */,
 				7ACFCBC317CDA62E00811976 /* weibo@2x.png */,
+				B404427E18175EF700A499FB /* Nodata.png */,
+				B404427F18175EF700A499FB /* Nodata@2x.png */,
 			);
 			path = Building;
 			sourceTree = "<group>";
@@ -2164,8 +2160,6 @@
 				B404427B18175EF700A499FB /* Back@2x.png */,
 				B404427C18175EF700A499FB /* Down.png */,
 				B404427D18175EF700A499FB /* Down@2x.png */,
-				B404427E18175EF700A499FB /* Nodata.png */,
-				B404427F18175EF700A499FB /* Nodata@2x.png */,
 				B404428018175EF700A499FB /* Up.png */,
 				B404428118175EF700A499FB /* Up@2x.png */,
 			);
@@ -2569,7 +2563,6 @@
 				B4EDFB1118064F2900873FA1 /* Share_normal.png in Resources */,
 				7AC3BB3517CC48750022E57E /* Default.png in Resources */,
 				7AC3BB3617CC48750022E57E /* Default@2x.png in Resources */,
-				7ACFCBF117CDA62E00811976 /* dashboard.png in Resources */,
 				7ACFCBFF17CDA62E00811976 /* weibo.png in Resources */,
 				7A5AC77B1817C4BD006C7CB1 /* EMOP_Spotlight_7.png in Resources */,
 				7ACFCC0017CDA62E00811976 /* weibo@2x.png in Resources */,
@@ -2617,7 +2610,6 @@
 				7A48B49017CDFA38002DA386 /* Propaganda_1@2x.jpg in Resources */,
 				7A48B49117CDFA38002DA386 /* Propaganda_2.jpg in Resources */,
 				7A48B49217CDFA38002DA386 /* Propaganda_2@2x.jpg in Resources */,
-				B47ACC2617F8010A00989B2C /* leftarrow.png in Resources */,
 				7A48B49317CDFA38002DA386 /* Propaganda_3.jpg in Resources */,
 				7A48B49417CDFA38002DA386 /* Propaganda_3@2x.jpg in Resources */,
 				B45F8A5717D5B0340079C74D /* Oil_pressed.png in Resources */,
