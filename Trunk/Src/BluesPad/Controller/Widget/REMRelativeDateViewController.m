@@ -10,6 +10,8 @@
 
 @interface REMRelativeDateViewController ()
 
+@property (nonatomic) NSUInteger currentRow;
+
 @end
 
 @implementation REMRelativeDateViewController
@@ -26,7 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    self.currentRow=NSNotFound;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -44,26 +46,94 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return 9;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"relativeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    NSString *name;
+    NSUInteger num=(NSUInteger)self.relativeDate;
+    if(indexPath.row == (num-1) && self.currentRow == NSNotFound){
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    }
+    else{
+        if(self.currentRow!=NSNotFound && self.currentRow!=indexPath.row){
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
+        }
+        else{
+            if(self.currentRow==indexPath.row){
+                [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+                
+            }
+        }
+    }
+    if(indexPath.row == 0){
+        name=@"之前七天";
+    }
+    else if (indexPath.row ==1)
+    {
+        name=@"今天";
+    }
+    else if (indexPath.row ==2)
+    {
+        name=@"昨天";
+    }
+    else if (indexPath.row ==3)
+    {
+        name=@"本周";
+    }
+    else if (indexPath.row ==4)
+    {
+        name=@"上周";
+    }
+    else if (indexPath.row ==5)
+    {
+        name=@"本月";
+    }
+    else if (indexPath.row ==6)
+    {
+        name=@"上月";
+    }
+    else if (indexPath.row ==7)
+    {
+        name=@"今年";
+    }
+    else if (indexPath.row ==8)
+    {
+        name=@"去年";
+    }
     
+    
+    cell.textLabel.text=name;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+    
+    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    [cell setSelected:NO];
+    [cell setHighlighted:NO];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if(self.currentRow!=indexPath.row && self.currentRow!=NSNotFound){
+        NSIndexPath *old=[NSIndexPath indexPathForRow:self.currentRow inSection:0];
+        cell=[tableView cellForRowAtIndexPath:old];
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+        
+    }
+    
+    
+    self.currentRow=indexPath.row;
+
 }
 
 /*

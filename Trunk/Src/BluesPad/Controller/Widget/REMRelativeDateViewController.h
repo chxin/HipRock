@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "REMEnum.h"
 @interface REMRelativeDateViewController : UITableViewController
+
+@property (nonatomic) REMRelativeTimeRangeType relativeDate;
+
 
 @end
