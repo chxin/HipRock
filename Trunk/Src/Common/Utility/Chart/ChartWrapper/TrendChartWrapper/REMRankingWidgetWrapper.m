@@ -12,8 +12,26 @@
 -(NSDictionary*)getSeriesAndAxisConfig:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
     REMTrendChartRankingSeries* series =[[REMTrendChartRankingSeries alloc]initWithData:energyViewData.targetEnergyData dataProcessor:self.dataProcessor plotStyle:nil yAxisIndex:0 dataStep:REMEnergyStepHour];
-//    if (widgetSyntax)
-//    _sortOrder = NSOrderedDescending;
+    if (widgetSyntax.rankingSortOrder != NSOrderedSame) {
+        _sortOrder = widgetSyntax.rankingSortOrder;
+        series.sortOrder = widgetSyntax.rankingSortOrder;
+    }
+    NSNumber* minPosition = widgetSyntax.rankingMinPosition;
+    if (minPosition == nil || minPosition == NULL || [minPosition isEqual:[NSNull null]] || [minPosition isLessThanOrEqualTo:[NSNumber numberWithInt:0]]) {
+        self.location = 0;
+    } else {
+        self.location = minPosition.unsignedIntValue;
+    }
+    if (widgetSyntax.rankingRangeCode != REMRankingRangeAll) {
+        self.length = widgetSyntax.rankingRangeCode;
+    } else {
+        self.length = UINT32_MAX;
+    }
+    if (self.length > energyViewData.targetEnergyData.count) {
+        self.length = energyViewData.targetEnergyData.count;
+    }
+    
+    
     [dic setObject:@[series] forKey:@"series"];
     
     REMTrendChartAxisConfig* yAxis = nil;
@@ -24,9 +42,9 @@
     }
     [dic setObject:@[yAxis] forKey:@"yAxis"];
     
-    [dic setObject:[NSNumber numberWithUnsignedInt:energyViewData.targetEnergyData.count] forKey:@"xGlobalLength"];
-    [dic setObject:[NSNumber numberWithUnsignedInt:0] forKey:@"xStartLocation"];
-    [dic setObject:[NSNumber numberWithUnsignedInt:energyViewData.targetEnergyData.count] forKey:@"xEndLocation"];
+    [dic setObject:[NSNumber numberWithUnsignedInt:energyViewData.targetEnergyData.count-1] forKey:@"xGlobalLength"];
+    [dic setObject:[NSNumber numberWithUnsignedInt:self.location] forKey:@"xStartLocation"];
+    [dic setObject:[NSNumber numberWithUnsignedInt:self.location+self.length] forKey:@"xEndLocation"];
     return dic;
 }
 

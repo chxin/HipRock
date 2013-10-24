@@ -68,8 +68,9 @@
     int loopStart = MAX(0, minX);
     int loopEnd = MIN(self.energyData.count, maxX);
     if (self.sortOrder == NSOrderedDescending) {
-        loopStart = MAX(0, self.energyData.count - maxX);
-        loopEnd = MIN(self.energyData.count, self.energyData.count-minX);
+        loopStart = self.energyData.count-maxX;
+        loopStart = MAX(0,loopStart);
+        loopEnd = MIN(self.energyData.count, (self.energyData.count-minX));
     }
     for (int j = loopStart; j < loopEnd; j++) {
         NSNumber* yVal = [self numberForPlot:[self getPlot] field:CPTBarPlotFieldBarTip recordIndex:j];
@@ -84,7 +85,7 @@
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
 {
     if (fieldEnum == CPTBarPlotFieldBarLocation) {
-        return [NSNumber numberWithUnsignedInteger:((self.sortOrder == NSOrderedDescending) ? (self.energyData.count-idx) :idx)];
+        return [NSNumber numberWithUnsignedInteger:((self.sortOrder == NSOrderedDescending) ? (self.energyData.count-idx-1) :idx)];
     } else if (fieldEnum == CPTBarPlotFieldBarTip) {
         REMEnergyData* point = [self.energyData objectAtIndex:idx];
         return [self.dataProcessor processY:point.dataValue startDate:self.startDate step:self.step];

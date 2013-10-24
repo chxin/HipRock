@@ -26,4 +26,7 @@
 @property (nonatomic,strong) NSString *xtype;
 @property (nonatomic,strong) NSArray *timeRanges;
 @property (nonatomic,strong) NSNumber *step;
+@property (nonatomic, assign) NSComparisonResult rankingSortOrder;
+@property (nonatomic) NSNumber* rankingMinPosition;
+@property (nonatomic, assign) REMRankingRange rankingRangeCode;
 @end

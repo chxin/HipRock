@@ -53,6 +53,14 @@ typedef enum _REMRelativeTimeRangeType : NSInteger
     REMRelativeTimeRangeTypeLastYear = 9,
 } REMRelativeTimeRangeType;
 
+typedef enum _REMRankingRange : NSInteger
+{
+    REMRankingRangeAll=0,
+    REMRankingRange10 = 10,
+    REMRankingRange20 = 20,
+    REMRankingRange50 = 50
+} REMRankingRange;
+
 typedef enum _REMBuildingImageType {
     REMBuildingImageSmall,
     REMBuildingImageSmallBlured,
