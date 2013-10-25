@@ -12,7 +12,7 @@
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingViewController.h"
 #import "REMGallaryViewController.h"
-#import "REMMapBuildingSegue.h"
+#import "REMBuildingEntranceSegue.h"
 #import "REMBuildingViewController.h"
 
 #import "REMColumnWidgetWrapper.h"
@@ -184,22 +184,30 @@ static BOOL isInitialPresenting = YES;
 {
     if([segue.identifier isEqualToString:kSegue_MapToBuilding] == YES)
     {
-        REMMapBuildingSegue *customeSegue = (REMMapBuildingSegue *)segue;
-        customeSegue.isInitialPresenting = isInitialPresenting;
-        customeSegue.initialZoomRect = self.initialZoomRect;
-        customeSegue.finalZoomRect = self.view.frame;
+        REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
+        customSegue.isInitialPresenting = isInitialPresenting;
+        customSegue.initialZoomRect = self.initialZoomRect;
+        customSegue.finalZoomRect = self.view.frame;
+        customSegue.currentBuilding = self.selectedBuilding == nil?[self.buildingInfoArray[0] building]:self.selectedBuilding;
         
         if(self.selectedBuilding == nil){
-            self.initialZoomRect = CGRectMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2, 5.12, 3.84);
+            self.initialZoomRect = [self getCurrentZoomRect:nil];
         }
         
         self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
         
-        REMBuildingViewController *buildingViewController = customeSegue.destinationViewController;
-        buildingViewController.buildingOverallArray = self.buildingInfoArray;
+        REMBuildingViewController *buildingViewController = customSegue.destinationViewController;
         buildingViewController.splashScreenController = self.splashScreenController;
-        buildingViewController.fromViewController = self;
+        buildingViewController.fromController = self;
         buildingViewController.currentBuildingId = self.selectedBuilding.buildingId;
+        buildingViewController.buildingOverallArray = self.buildingInfoArray;
+    }
+    
+    if([segue.identifier isEqualToString:kSegue_MapToGallery] == YES){
+        REMGallaryViewController *gallaryViewController = segue.destinationViewController;
+        
+        gallaryViewController.mapViewController = self;
+        gallaryViewController.buildingInfoArray = self.buildingInfoArray;
     }
 }
 
@@ -214,16 +222,29 @@ static BOOL isInitialPresenting = YES;
 
 -(void)presentGallaryView
 {
-    if(self.gallaryViewController == nil){
-        self.gallaryViewController = [[REMGallaryViewController alloc] init];
+    [self performSegueWithIdentifier:kSegue_MapToGallery sender:self];
+}
+
+-(CGRect)getZoomFrameFromMarker:(GMSMarker *)marker
+{
+    CGPoint markerPoint = [mapView.projection pointForCoordinate:marker.position];
+    return CGRectMake(markerPoint.x, markerPoint.y-40, 5.12, 3.84);
+}
+
+-(CGRect)getCurrentZoomRect:(NSNumber *)currentBuildingId
+{
+    if(currentBuildingId == nil){
+        currentBuildingId =[self.buildingInfoArray[0] building].buildingId;
     }
     
-    self.gallaryViewController.mapViewController = self;
-    self.gallaryViewController.buildingInfoArray = self.buildingInfoArray;
+    for (GMSMarker *marker in mapView.markers) {
+        if ([((REMBuildingModel *)marker.userData).buildingId longLongValue] == [currentBuildingId longLongValue]) {
+            mapView.selectedMarker = marker;
+            return [self getZoomFrameFromMarker: marker];
+        }
+    }
     
-    [UIView transitionFromView:self.view toView:self.gallaryViewController.view duration:1 options:UIViewAnimationOptionTransitionFlipFromLeft completion:^(BOOL finished) {
-        [self.navigationController pushViewController:self.gallaryViewController animated:NO];
-    }];
+    return CGRectZero;
 }
 
 
@@ -237,8 +258,7 @@ static BOOL isInitialPresenting = YES;
 
 - (void)mapView:(GMSMapView *)view didTapInfoWindowOfMarker:(GMSMarker *)marker
 {
-    CGPoint markerPoint = [mapView.projection pointForCoordinate:marker.position];
-    self.initialZoomRect = CGRectMake(markerPoint.x, markerPoint.y-40, 5.12, 3.84);
+    self.initialZoomRect = [self getZoomFrameFromMarker:marker];
 
     self.selectedBuilding = marker.userData;
     [self presentBuildingView];

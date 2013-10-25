@@ -30,7 +30,7 @@
 
 @property (nonatomic,weak) REMBuildingViewController *controller;
 
-
+- (void)initWholeViewUseThumbnail:(BOOL)useThumbnail;
 - (void)moveOutOfWindow;
 
 -(void)prepareShare;

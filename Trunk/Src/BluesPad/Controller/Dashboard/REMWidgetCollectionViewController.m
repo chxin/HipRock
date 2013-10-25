@@ -43,7 +43,7 @@ static NSString *cellId=@"widgetcell";
     self.collectionView.dataSource=self;
     self.collectionView.delegate=self;
     [self.collectionView setBackgroundColor:[UIColor clearColor]];
-    
+    [self.collectionView setScrollEnabled:NO];
 }
 
 

@@ -17,8 +17,15 @@
 
 #define kSegue_SplashToLogin @"splashToLoginSegue"
 #define kSegue_SplashToMap @"splashToMapSegue"
+
 #define kSegue_MapToBuilding @"mapToBuildingSegue"
 #define kSegue_BuildingToMap @"buildingToMapSegue"
+
+#define kSegue_MapToGallery @"mapToGallerySegue"
+#define kSegue_GalleryToMap @"galleryToMapSegue"
+
+#define kSegue_GalleryToBuilding @"galleryToBuildingSegue"
+#define kSegue_BuildingToGallery @"buildingToGallerySegue"
 
 #define kSegue_ToSettings @"settingsSegue"
 

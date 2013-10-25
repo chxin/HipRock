@@ -72,7 +72,7 @@ typedef void(^SuccessCallback)(BOOL success);
     self.totalLabel.leftMargin=0;
     self.totalLabel.valueFontSize=kBuildingCommodityTotalValueFontSize;
     self.totalLabel.uomFontSize=kBuildingCommodityTotalUomFontSize;
-    self.totalLabel.emptyText=@"请持续关注能耗变化";
+    self.totalLabel.emptyText=NSLocalizedString(@"BuildingChart_NoData", @"");//@"请持续关注能耗变化";
     self.totalLabel.emptyTextFontSize=60;
     [self.totalLabel showTitle];
     [self addSubview:self.totalLabel];

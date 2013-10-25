@@ -15,8 +15,9 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMBuildingOverallModel.h"
 #import <QuartzCore/QuartzCore.h>
-#import "REMMapBuildingSegue.h"
+#import "REMBuildingEntranceSegue.h"
 #import "REMBuildingViewController.h"
+#import "REMMapGallerySegue.h"
 
 #define kGallaryBuildingImageGroupName @"GALLARY"
 
@@ -86,41 +87,36 @@
 
 -(void)switchButtonPressed
 {
-    [UIView transitionFromView:self.view toView:self.mapViewController.view duration:1 options:UIViewAnimationOptionTransitionFlipFromLeft completion:^(BOOL finished) {
-        [self.navigationController popViewControllerAnimated:NO];
-    }];
+    REMMapGallerySegue *segue = [[REMMapGallerySegue alloc] initWithIdentifier:kSegue_GalleryToMap source:self destination:self.mapViewController];
+    
+    [self prepareForSegue:segue sender:self];
+    [segue perform];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.identifier isEqualToString:kSegue_MapToBuilding] == YES)
+    if([segue.identifier isEqualToString:kSegue_GalleryToBuilding] == YES)
     {
-        REMMapBuildingSegue *customeSegue = (REMMapBuildingSegue *)segue;
-        customeSegue.sourceViewController = self;
-        customeSegue.isInitialPresenting = NO;
-        customeSegue.initialZoomRect = self.initialZoomRect;
-        customeSegue.finalZoomRect = self.view.frame;
+        REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
+        customSegue.isInitialPresenting = NO;
+        customSegue.initialZoomRect = self.initialZoomRect;
+        customSegue.finalZoomRect = self.view.frame;
+        customSegue.currentBuilding = self.selectedBuilding == nil?[self.buildingInfoArray[0] building]:self.selectedBuilding;
         
         if(self.selectedBuilding == nil){
-            UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+            UICollectionViewCell *cell = [gallaryView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
             self.initialZoomRect = cell.frame;
         }
         
         self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
         
-        REMBuildingViewController *buildingViewController = customeSegue.destinationViewController;
+        REMBuildingViewController *buildingViewController = customSegue.destinationViewController;
         buildingViewController.buildingOverallArray = self.buildingInfoArray;
         buildingViewController.splashScreenController = self.splashScreenController;
-        buildingViewController.fromViewController = self;
+        buildingViewController.fromController = self;
         buildingViewController.currentBuildingId = self.selectedBuilding.buildingId;
     }
 }
-
--(void)presentBuildingView
-{
-    [self performSegueWithIdentifier:kSegue_MapToBuilding sender:self];
-}
-
 
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -129,11 +125,10 @@
 
 - (void)gallaryCellTapped:(REMGallaryCell *)cell
 {
-    self.snapshot = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:self.view]];
     self.initialZoomRect = cell.frame;
     self.selectedBuilding = cell.building;
     
-    [self.mapViewController presentBuildingView];
+    [self performSegueWithIdentifier:kSegue_GalleryToBuilding sender:self];
 }
 
 -(void)loadBuildingSmallImage:(NSArray *)imageIds :(void (^)(UIImage *))completed
@@ -164,6 +159,18 @@
             }];
         }
     }
+}
+
+-(CGRect)getCurrentZoomRect:(NSNumber *)currentBuildingId
+{
+    for (REMGallaryCell *cell in gallaryView.visibleCells){
+        //NSLog(@"%@",NSStringFromCGRect(cell.frame));
+        
+        if(cell.building.buildingId == currentBuildingId)
+            return cell.frame;
+    }
+    
+    return CGRectZero;
 }
 
 
