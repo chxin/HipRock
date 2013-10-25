@@ -518,6 +518,7 @@
 		EFDAACC818054EBA008BC9AF /* REMPieChartSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */; };
 		EFDEC2A5181768540008972E /* REMTrendChartRankingSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDEC2A4181768540008972E /* REMTrendChartRankingSeries.m */; };
 		EFDEC2A81817C6B70008972E /* REMStackColumnWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDEC2A71817C6B70008972E /* REMStackColumnWidgetWrapper.m */; };
+		EFDEC2AB1817C8A80008972E /* REMTrendChartStackColumnSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDEC2AA1817C8A80008972E /* REMTrendChartStackColumnSeries.m */; };
 		EFEA1CBE1807D33000CA3C07 /* REMWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEA1CBD1807D33000CA3C07 /* REMWidgetWrapper.m */; };
 		EFF3BA0718167BA500DD92CF /* REMRankingWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF3BA0618167BA500DD92CF /* REMRankingWidgetWrapper.m */; };
 /* End PBXBuildFile section */
@@ -1121,6 +1122,7 @@
 		EFDEC2A4181768540008972E /* REMTrendChartRankingSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartRankingSeries.m; sourceTree = "<group>"; };
 		EFDEC2A61817C6B70008972E /* REMStackColumnWidgetWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMStackColumnWidgetWrapper.h; sourceTree = "<group>"; };
 		EFDEC2A71817C6B70008972E /* REMStackColumnWidgetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMStackColumnWidgetWrapper.m; sourceTree = "<group>"; };
+		EFDEC2AA1817C8A80008972E /* REMTrendChartStackColumnSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartStackColumnSeries.m; sourceTree = "<group>"; };
 		EFEA1CBC1807D33000CA3C07 /* REMWidgetWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetWrapper.h; sourceTree = "<group>"; };
 		EFEA1CBD1807D33000CA3C07 /* REMWidgetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetWrapper.m; sourceTree = "<group>"; };
 		EFF3BA0518167BA500DD92CF /* REMRankingWidgetWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMRankingWidgetWrapper.h; sourceTree = "<group>"; };
@@ -2396,6 +2398,7 @@
 				EF8A47F417F959B5009B5C33 /* REMTrendChartSeries.m */,
 				EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */,
 				EFDEC2A4181768540008972E /* REMTrendChartRankingSeries.m */,
+				EFDEC2AA1817C8A80008972E /* REMTrendChartStackColumnSeries.m */,
 			);
 			path = Series;
 			sourceTree = "<group>";
@@ -2714,6 +2717,7 @@
 				B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */,
 				EFDAACB91803F27F008BC9AF /* REMPieChartWrapper.m in Sources */,
 				7A1D142617850B2100CC2922 /* Reachability.m in Sources */,
+				EFDEC2AB1817C8A80008972E /* REMTrendChartStackColumnSeries.m in Sources */,
 				7A2E7ECB17F2DD41000EB506 /* REMBuildingTitleLabelView.m in Sources */,
 				38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */,
 				7A1D14291785178800CC2922 /* REMNetworkHelper.m in Sources */,
