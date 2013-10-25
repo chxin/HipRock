@@ -113,6 +113,10 @@ typedef enum  {
 
 @end
 
+@interface REMTrendChartStackColumnSeries : REMTrendChartColumnSeries
+@property (nonatomic, weak) REMTrendChartStackColumnSeries* previousStackSeries;
+@end
+
 @interface REMTrendChartRankingSeries : REMTrendChartColumnSeries
 @property (nonatomic) NSComparisonResult sortOrder;
 @end

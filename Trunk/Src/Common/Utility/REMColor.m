@@ -49,14 +49,38 @@ static NSArray *chartColor;
 
 + (CPTColor *)colorByIndex:(uint)index
 {
-    NSString *color= [REMColor sharedChartColor][index];
+    uint colorIndex = index % [REMColor sharedChartColor].count;
+    uint colorDarken = floor(index / [REMColor sharedChartColor].count);
 
+    NSString *color= [REMColor sharedChartColor][colorIndex];
     UIColor *uiColor= [REMColor colorByHexString:color];
     
-   return [CPTColor colorWithCGColor:uiColor.CGColor];
+    for (uint i = 0; i < colorDarken; i++) {
+        uiColor = [self darkerColorForColor:uiColor];
+    }
     
-    
+    return [CPTColor colorWithCGColor:uiColor.CGColor];
+}
++ (UIColor *)lighterColorForColor:(UIColor *)c
+{
+    CGFloat r, g, b, a;
+    if ([c getRed:&r green:&g blue:&b alpha:&a])
+        return [UIColor colorWithRed:MIN(r + 0.2, 1.0)
+                               green:MIN(g + 0.2, 1.0)
+                                blue:MIN(b + 0.2, 1.0)
+                               alpha:a];
+    return nil;
 }
 
++ (UIColor *)darkerColorForColor:(UIColor *)c
+{
+    CGFloat r, g, b, a;
+    if ([c getRed:&r green:&g blue:&b alpha:&a])
+        return [UIColor colorWithRed:MAX(r - 0.2, 0.0)
+                               green:MAX(g - 0.2, 0.0)
+                                blue:MAX(b - 0.2, 0.0)
+                               alpha:a];
+    return nil;
+}
 
 @end

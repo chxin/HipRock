@@ -13,6 +13,7 @@
 #import "REMColumnWidgetWrapper.h"
 #import "REMPieChartWrapper.h"
 #import "REMRankingWidgetWrapper.h"
+#import "REMStackColumnWidgetWrapper.h"
 
 @interface REMDashboardCollectionCellView ()
 
@@ -30,8 +31,8 @@
         // Initialization code
         //self.contentView.layer.borderColor=[UIColor grayColor].CGColor;
         //self.contentView.layer.borderWidth=1;
-        self.backgroundColor=[UIColor whiteColor];
-        self.contentView.backgroundColor=[UIColor whiteColor];
+//        self.backgroundColor=[UIColor whiteColor];
+//        self.contentView.backgroundColor=[UIColor whiteColor];
         
         self.chartLoaded=NO;
         
@@ -103,6 +104,8 @@
             widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax];
         } else if (widgetType == REMDiagramTypeRanking) {
             widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax];
+        } else if (widgetType == REMDiagramTypeStackColumn) {
+            widgetWrapper = [[REMStackColumnWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax];
         }
         if (widgetWrapper != nil) {
             [self.chartContainer addSubview:widgetWrapper.view];
