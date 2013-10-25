@@ -60,6 +60,12 @@
     return self;
 }
 
+- (void)loadView{
+    [super loadView];
+    
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
