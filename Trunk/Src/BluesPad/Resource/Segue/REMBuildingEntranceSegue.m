@@ -23,6 +23,12 @@
         return;
     }
     
+    if(self.isNoAnimation == YES){
+        [[self.sourceViewController navigationController] pushViewController:self.destinationViewController animated:NO];
+        
+        return;
+    }
+    
     if([self.sourceViewController class] == [REMBuildingViewController class]){
         [self exit];
     }
@@ -36,6 +42,8 @@
     REMBuildingViewController *buildingController = self.destinationViewController;
     REMMapViewController *mapController = self.sourceViewController;
     
+    [mapController.view setUserInteractionEnabled:NO];
+    
     //push building view into map view
     UIImageView *transitionView = [self getBuildingTransitionView];
     
@@ -48,6 +56,7 @@
         transitionView.frame = CGRectMake(0, 0, mapController.view.bounds.size.width, mapController.view.bounds.size.height);;
     } completion:^(BOOL finished) {
         [transitionView removeFromSuperview];
+        [mapController.view setUserInteractionEnabled:YES];
         [mapController.navigationController pushViewController:buildingController animated:NO];
     }];
 }
@@ -55,9 +64,11 @@
 //building enter
 -(void)enter
 {
+    NSLog(@"begin %@", [NSDate date]);
     REMBuildingViewController *buildingController = self.destinationViewController;
     
-    UIView *sourceView = [self.sourceViewController view], *buildingView = buildingController.view;
+    UIView *sourceView = [self.sourceViewController view];//, *buildingView = buildingController.view;
+    [sourceView setUserInteractionEnabled:NO];
     
     //add building view as subview into map view
     UIImageView *transitionView = [self getBuildingTransitionView];
@@ -68,11 +79,14 @@
     
     [sourceView addSubview:transitionView];
     
+    NSLog(@"animation %@", [NSDate date]);
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         transitionView.transform = CGAffineTransformMakeScale(1.0, 1.0);
         transitionView.center = [REMViewHelper getCenterOfRect:self.finalZoomRect];
     } completion:^(BOOL finished){
+        NSLog(@"end %@", [NSDate date]);
         [transitionView removeFromSuperview];
+        [sourceView setUserInteractionEnabled:YES];
         [[self.sourceViewController navigationController] pushViewController:buildingController animated:NO];
     }];
 }
@@ -83,6 +97,7 @@
     REMBuildingViewController *buildingController = self.sourceViewController;
     
     UIView *buildingView = buildingController.view;
+    [buildingView setUserInteractionEnabled:NO];
     UIImageView *snapshot = [((id)buildingController.fromController) snapshot];
     
     UIImageView *transitionView = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:buildingController.view]];
@@ -100,6 +115,7 @@
         transitionView.center = [REMViewHelper getCenterOfRect:initialZoomRect];
     } completion:^(BOOL finished){
         [transitionView removeFromSuperview];
+        [buildingView setUserInteractionEnabled:YES];
         [buildingController.navigationController popViewControllerAnimated:NO];
     }];
 }

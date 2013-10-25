@@ -119,8 +119,6 @@
             NSArray *customers = (NSArray *)([REMApplicationContext instance].currentUser.customers);
             
             if(customers.count<=0){
-//                [self.userNameErrorLabel setHidden:NO];
-//                [self.userNameErrorLabel setText : @"登录失败，该用户未绑定客户" ];
                 [REMAlertHelper alert:REMLocalizedString(kLNLogin_NotAuthorized)];
                 
                 return;
@@ -138,28 +136,30 @@
         }
         else
         {
+            [self.loginButton stopIndicator];
+            
             if(validationResult.status == REMUserValidationWrongName)
             {
                 [self.userNameErrorLabel setHidden:NO];
                 [self.userNameErrorLabel setText : REMLocalizedString(kLNLogin_UserNotExist) ];
+                [self.loginButton setEnabled:NO];
             }
             else if (validationResult.status == REMUserValidationWrongPassword)
             {
                 [self.passwordErrorLabel setHidden:NO];
                 [self.passwordErrorLabel setText : REMLocalizedString(kLNLogin_WrongPassword) ];
+                [self.loginButton setEnabled:NO];
             }
             else if(validationResult.status == REMUserValidationInvalidSp)
             {
                 [self.userNameErrorLabel setHidden:NO];
                 [self.userNameErrorLabel setText :  REMLocalizedString(kLNLogin_AccountLocked)];
+                [self.loginButton setEnabled:NO];
             }
             else
             {
+                [self.loginCarouselController showLoginPage];
             }
-            
-            [self.loginCarouselController showLoginPage];
-            
-            [self.loginButton stopIndicator];
         }
     }
 }

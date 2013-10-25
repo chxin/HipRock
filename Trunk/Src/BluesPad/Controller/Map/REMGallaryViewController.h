@@ -23,6 +23,6 @@
 @property (nonatomic,strong) REMBuildingModel *selectedBuilding;
 
 - (void)gallaryCellTapped:(REMGallaryCell *)cell;
--(CGRect)getCurrentZoomRect:(NSNumber *)currentBuildingId;
+-(void)gallaryCellPinched:(REMGallaryCell *)cell :(UIPinchGestureRecognizer *)pinch;
 
 @end
