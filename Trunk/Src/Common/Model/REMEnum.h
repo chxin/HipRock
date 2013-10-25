@@ -24,6 +24,7 @@ typedef enum _REMDiagramType
 {
     REMDiagramTypePie,
     REMDiagramTypeRanking,
+    REMDiagramTypeStackColumn,
     REMDiagramTypeLine,
     REMDiagramTypeColumn,
     REMDiagramTypeGrid

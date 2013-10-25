@@ -32,6 +32,15 @@
 @property (nonatomic,strong) NSMutableDictionary *customImageLoadedDictionary;
 
 @property (nonatomic,strong) UIImageView *snapshot;
+
+@property (nonatomic) CGFloat speed;
+@property (nonatomic,weak) NSTimer *timer;
+@property (nonatomic,weak) NSTimer *stopTimer;
+
+@property (nonatomic) CGFloat delta;
+
+@property (nonatomic) CGFloat speedBase;
+
 @end
 
 
@@ -51,12 +60,20 @@
     return self;
 }
 
+- (void)loadView{
+    [super loadView];
+    
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.speedBase=1280;
 	self.customImageLoadedDictionary = [[NSMutableDictionary alloc]initWithCapacity:self.buildingOverallArray.count];
     self.view.backgroundColor=[UIColor blackColor];
     self.currentScrollOffset=-kBuildingCommodityViewTop;
+    
     
     [self addObserver:self forKeyPath:@"currentScrollOffset" options:0 context:nil];
     
@@ -186,18 +203,25 @@
         imageView.defaultImage=self.defaultImage;
         imageView.defaultBlurImage=self.defaultBlurImage;
         imageView.controller=self;
+        //if(i==self.currentIndex || i==(self.currentIndex+1) || i == (self.currentIndex-1)){
+        
+        [self.view addSubview:imageView];
         if(i==self.currentIndex || i==(self.currentIndex+1) || i == (self.currentIndex-1)){
-            [self.view addSubview:imageView];
-            [self.imageViewStatus setObject:@(1) forKey:@(i)];
+            [imageView initWholeViewUseThumbnail:NO];
         }
         else{
-            [self.imageViewStatus setObject:@(0) forKey:@(i)];
+            [imageView initWholeViewUseThumbnail:YES];
         }
+        //    [self.imageViewStatus setObject:@(1) forKey:@(i)];
+        //}
+        //else{
+        //    [self.imageViewStatus setObject:@(0) forKey:@(i)];
+        //}
         [array addObject:imageView];
     }
     self.imageArray=array;
   
-    
+    //[self loadOtherImageView];
     
     NSMutableArray *arr = [[NSMutableArray alloc]initWithCapacity:self.imageArray.count];
     
@@ -232,6 +256,24 @@
     
     
     [self loadImageData];
+    
+    
+}
+
+- (void)loadOtherImageView{
+    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //UIImage *image = self.defaultImage;
+    dispatch_async(concurrentQueue, ^{
+        for (int i=0; i<self.imageArray.count; ++i) {
+            if(i!=self.currentIndex && i!=(self.currentIndex+1) && i != (self.currentIndex-1)){
+                REMImageView *imageView=self.imageArray[i];
+                [imageView initWholeViewUseThumbnail:NO];
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+        });
+    });
+
 }
 
 
@@ -246,6 +288,11 @@
 - (void) swipethis:(UIPanGestureRecognizer *)pan
 {
 
+    if(self.timer!=nil){
+        [self.timer invalidate];
+        [self readyToComplete];
+    }
+    
     CGPoint trans= [pan translationInView:self.view];
     
    // NSLog(@"state:%d",pan.state);
@@ -276,14 +323,13 @@
     if(pan.state == UIGestureRecognizerStateEnded||pan.state == UIGestureRecognizerStateCancelled)
     {
         
-        __block CGPoint p= [pan velocityInView:self.view];
+         CGPoint p= [pan velocityInView:self.view];
         //NSLog(@"cumulatex:%f",self.cumulateX);
         
-       __block int sign= p.x>0?1:-1;
+        int sign= p.x>0?1:-1;
         
         
-        __block BOOL addIndex=YES;
-        __block NSUInteger oldIndex=self.currentIndex;
+         BOOL addIndex=YES;
         
         if((sign<0 && self.currentIndex==self.imageArray.count-1)
            || (sign>0 && self.currentIndex==0) ||
@@ -291,6 +337,7 @@
             addIndex=NO;
         }
         else{
+            [self.stopTimer invalidate];
             NSMutableArray *ar = [[NSMutableArray alloc] initWithCapacity:self.imageArray.count];
             for (int i=0; i<self.imageArray.count; ++i) {
                 NSNumber *num = self.originCenterXArray[i];
@@ -305,7 +352,42 @@
             
             //NSLog(@"array:%@",ar);
         }
+        self.cumulateX=0;
+        if(addIndex == NO){
+            [UIView animateWithDuration:0.4 delay:0
+                                options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
+                                    
+                                    //NSLog(@"array:%@",self.originCenterXArray);
+                                    for(int i=0;i<self.imageArray.count;++i)
+                                    {
+                                        NSNumber *s = self.originCenterXArray[i];
+                                        CGFloat x= [s floatValue];
+                                        REMImageView *image = self.imageArray[i];
+                                        [image setCenter: CGPointMake( x,image.center.y)];
+                                    }
+                                } completion:^(BOOL finished){}];
+            
+        }
+        else{
+            
+            
+            
+            self.currentIndex=self.currentIndex+sign*-1;
+            self.currentBuildingId=((REMBuildingOverallModel *)self.buildingOverallArray[self.currentIndex]).building.buildingId;
+
+            
+            self.delta=M_PI_4/128.0f;
+            self.speed=self.speedBase*sign*self.delta;
+            
+            NSTimer *timer = [NSTimer timerWithTimeInterval:0.01 target:self selector:@selector(switchCoverPage:) userInfo:nil repeats:YES];
+            self.timer=timer;
+            [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+            
+            
+        }
+        [pan setTranslation:CGPointZero inView:self.view];
         
+        /*
         [UIView animateWithDuration:0.4 delay:0
                             options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
                                 
@@ -323,7 +405,7 @@
                                     self.currentBuildingId=((REMBuildingOverallModel *)self.buildingOverallArray[self.currentIndex]).building.buildingId;
                                 }
                                 //NSLog(@"currentIndex:%d",self.currentIndex);
-                                self.cumulateX=0;
+                                
                                 
                             } completion:^(BOOL ret){
                                 if(addIndex == NO) return;
@@ -359,9 +441,78 @@
                             }];
         
         [pan setTranslation:CGPointZero inView:self.view];
-        
+        */
         
     }
+    
+}
+
+- (void) readyToComplete{
+    NSTimer *timer = [NSTimer timerWithTimeInterval:0.2 target:self selector:@selector(stopCoverPage:) userInfo:nil repeats:NO];
+    
+    NSRunLoop *current=[NSRunLoop currentRunLoop];
+    [current addTimer:timer forMode:NSDefaultRunLoopMode];
+    self.stopTimer = timer;
+}
+
+- (void)stopCoverPage:(NSTimer *)timer{
+    //NSLog(@"currentIndex:%d",self.currentIndex);
+    REMImageView *imageView=self.imageArray[self.currentIndex];
+    [imageView initWholeViewUseThumbnail:NO];
+    [imageView setScrollOffset:self.currentScrollOffset];
+
+    [imageView requireChartData];
+    if(self.currentIndex<self.imageArray.count){
+        CGFloat sign=self.speed<0?-1:1;
+        NSNumber *willIndex= @(self.currentIndex-1*sign);
+        if(willIndex.intValue>=self.imageArray.count || willIndex.intValue<0){
+            return;
+        }
+        REMImageView *nextView= self.imageArray[willIndex.intValue];
+        nextView.defaultImage=self.defaultImage;
+        nextView.defaultBlurImage=self.defaultBlurImage;
+        [nextView initWholeViewUseThumbnail:NO];
+        [nextView setScrollOffset:self.currentScrollOffset];
+        
+    }
+
+}
+
+
+
+- (void)switchCoverPage:(NSTimer *)timer{
+    
+    if (ABS(self.speed)<0.1) {
+        [timer invalidate];
+        [self readyToComplete];
+        return;
+    }
+    
+    CGFloat sign=self.speed<0?-1:1;
+    CGFloat distance=self.speed;
+    
+    self.delta+=M_PI_4/128.0f;
+    if(self.delta>M_PI)self.delta=M_PI;
+    
+    self.speed=self.speedBase*sin(self.delta)*sign;
+    
+    for(int i=0;i<self.imageArray.count;++i)
+    {
+        NSNumber *s = self.originCenterXArray[i];
+        CGFloat x= [s floatValue];
+        REMImageView *image = self.imageArray[i];
+        //NSLog(@"image:%@",NSStringFromCGRect(image.frame));
+        CGFloat readyDis=image.center.x+distance;
+        
+        if((distance < 0 &&readyDis<x) || (distance>0 && readyDis>x)){
+            self.speed=sign*0.01;
+            readyDis=x;
+        }
+        
+        [image setCenter: CGPointMake( readyDis,image.center.y)];
+    }
+    
+    
     
 }
 

@@ -47,18 +47,29 @@
 - (void)initEmptyTextLabelWithTitleSize:(CGFloat)titleSize withTitleMargin:(CGFloat)margin withLeftMargin:(CGFloat)leftMargin withOrigFontSize:(CGFloat)fontSize{
     int marginTop=titleSize+margin+fontSize/4 ;
     int fs=ceil(fontSize/4+10);
-    self.emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftMargin, marginTop, 1000, fs)];
-    self.emptyLabel.font=[UIFont fontWithName:@(kBuildingFontSC) size:fs];
-    self.emptyLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.6];
     
-    self.emptyLabel.text=@"无数据";
-    self.emptyLabel.backgroundColor=[UIColor clearColor];
-    self.emptyLabel.shadowOffset=CGSizeMake(1, 1);
-    self.emptyLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    UIImage *image=[UIImage imageNamed:@"Nodata"];
     
+    UIImageView *icon=[[UIImageView alloc]initWithImage:image];
     
+    [icon setFrame:CGRectMake(leftMargin, marginTop, 32, 32)];
     
-    [self addSubview:self.emptyLabel];
+    [self addSubview:icon];
+    
+    UILabel *emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftMargin+32, marginTop, 1000, fs)];
+    emptyLabel.font=[UIFont fontWithName:@(kBuildingFontSC) size:fs];
+    emptyLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.6];
+    if(self.emptyText ==nil){
+        self.emptyText=NSLocalizedString(@"Building_LabelNoData", @"");
+    }
+    emptyLabel.text=self.emptyText;
+    emptyLabel.backgroundColor=[UIColor clearColor];
+    emptyLabel.shadowOffset=CGSizeMake(1, 1);
+    emptyLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    
+    [self addSubview:emptyLabel];
+    
+    self.emptyLabel=emptyLabel;
 }
 
 - (NSString *)addThousandSeparator:(NSNumber *)number
@@ -92,21 +103,22 @@
 - (void)initTitle:(NSString *)text withSize:(CGFloat)size withLeftMargin:(CGFloat)leftMargin
 {
     
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(leftMargin, 0, kBuildingCommodityDetailWidth, size)];
-    self.titleLabel.text=text;
-    self.titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-    self.titleLabel.shadowOffset=CGSizeMake(1, 1);
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(leftMargin, 0, kBuildingCommodityDetailWidth, size)];
+    titleLabel.text=text;
+    titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    titleLabel.shadowOffset=CGSizeMake(1, 1);
     
-    self.titleLabel.backgroundColor=[UIColor clearColor];
-    self.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:size];
+    titleLabel.backgroundColor=[UIColor clearColor];
+    titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:size];
     //self.titleLabel.font=[UIFont boldSystemFontOfSize:20];
-    self.titleLabel.textColor=[UIColor whiteColor];
+    titleLabel.textColor=[UIColor whiteColor];
     //NSLog(@"font:%@",[UIFont fontWithName:@(kBuildingFontSC) size:size]);
     //CGSize expectedLabelSize = [text sizeWithFont:[UIFont fontWithName:@(kBuildingFontSC) size:size]];
     
     //NSLog(@"valuesize:%@",NSStringFromCGSize(expectedLabelSize));
     //self.titleLabel.contentMode = UIViewContentModeTopLeft;
-    [self addSubview:self.titleLabel];
+    [self addSubview:titleLabel];
+    self.titleLabel=titleLabel;
 }
 
 /*

@@ -20,7 +20,24 @@
     self.storeType=self.config[@"storeType"];
     self.xtype=self.config[@"xtype"];
     
-    
+    NSDictionary* diagramConfig = p[@"diagramConfig"];
+    if (diagramConfig != NULL && diagramConfig != Nil && diagramConfig != nil && ![diagramConfig isEqual:[NSNull null]]) {
+        NSNumber* order = diagramConfig[@"orderCode"];
+        if (order == nil || order == NULL || [order isEqual:[NSNull null]]) {
+            self.rankingSortOrder = NSOrderedSame;
+        } else if (order.intValue == 2) {
+            self.rankingSortOrder = NSOrderedDescending;
+        } else {
+            self.rankingSortOrder = NSOrderedAscending;
+        }
+        NSNumber* rangeCode = diagramConfig[@"rangeCode"];
+        if (rangeCode == nil || rangeCode == NULL || [rangeCode isEqual:[NSNull null]]) {
+            self.rankingRangeCode = REMRankingRangeAll;
+        } else {
+            self.rankingRangeCode = rangeCode.intValue;
+        }
+        self.rankingMinPosition = diagramConfig[@"minPosition"];
+    }
     if([self.calendar isEqual:[NSNull null]]==YES){
         self.calendarType=REMCalendarTypeNone;
     }
