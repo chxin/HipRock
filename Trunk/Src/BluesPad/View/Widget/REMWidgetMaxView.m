@@ -91,6 +91,8 @@ const int kStatusBarHeight = 20;
         widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
     } else if (widgetType == REMDiagramTypeRanking) {
         widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
+    } else if (widgetType == REMDiagramTypeStackColumn) {
+        widgetWrapper = [[REMStackColumnWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax];
     }
     if (widgetWrapper != nil) {
         [contentView addSubview:widgetWrapper.view];

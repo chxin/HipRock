@@ -48,19 +48,27 @@
 }
 
 -(int)sortUnit:(NSMutableArray*)energyList left:(int)left right:(int)right {
-    REMEnergyData* key = [energyList objectAtIndex:left];
+    REMEnergyData* keyPoint = [energyList objectAtIndex:left];
+    NSNumber* key = [self getYValueOfEnergyData:keyPoint];
+    
     while (left < right) {
-        while ([((REMEnergyData*)[energyList objectAtIndex:right]).dataValue isGreaterThanOrEqualTo:key.dataValue] && right > left)
+        while ([[self getYValueOfEnergyData:[energyList objectAtIndex:right]] isGreaterThanOrEqualTo:key] && right > left)
             --right;
         
         energyList[left] = energyList[right];
-        while ([((REMEnergyData*)[energyList objectAtIndex:left]).dataValue isLessThanOrEqualTo:key.dataValue] && right > left)
+        while ([[self getYValueOfEnergyData:[energyList objectAtIndex:left]] isLessThanOrEqualTo:key] && right > left)
             ++left;
         
         energyList[right] = energyList[left];
     }
-    energyList[left] = key;
+    energyList[left] = keyPoint;
     return right;
+}
+
+-(NSNumber*)getYValueOfEnergyData:(REMEnergyData*)energyPoint {
+    NSNumber* yValue = energyPoint.dataValue;
+    if (yValue == nil || yValue == NULL|| [yValue isEqual:[NSNull null]]) return @(-1);
+    else return yValue;
 }
 
 -(NSNumber*)maxYValBetween:(int)minX and:(int)maxX {
