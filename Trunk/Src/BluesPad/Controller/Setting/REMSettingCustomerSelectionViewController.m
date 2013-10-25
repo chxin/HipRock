@@ -86,6 +86,7 @@
             [alert show];
             
             [REMApplicationContext instance].currentUser.customers=customerArray;
+            [[REMApplicationContext instance].currentUser save];
             NSIndexPath *indexPath=[NSIndexPath indexPathForRow:self.currentRow inSection:0];
             UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:indexPath];
             [cell setAccessoryType:UITableViewCellAccessoryNone];
@@ -101,7 +102,19 @@
         }
         else{
             UINavigationController *nav=self.parentNavigationController;
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            REMCustomerModel *customer= [REMApplicationContext instance].currentUser.customers[self.currentRow];
             
+            for (int i=0; i<customerArray.count; ++i) {
+                REMCustomerModel *c=customerArray[i];
+                if([c.customerId isEqualToNumber:customer.customerId]==YES){
+                    self.currentRow=i;
+                    break;
+                }
+            }
+            
+            [REMApplicationContext instance].currentUser.customers=customerArray;
+            [[REMApplicationContext instance].currentUser save];
             [REMApplicationContext instance].currentCustomer=[REMApplicationContext instance].currentUser.customers[self.currentRow];
             [[REMApplicationContext instance].currentCustomer save];
             [self.settingController needReload];
@@ -109,7 +122,6 @@
             [nav dismissViewControllerAnimated:YES completion:^{
                 [self.settingController.mainNavigationController presentInitialView:^(void){
                     [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];
-                    [self.settingController.mainNavigationController popViewControllerAnimated:YES];
                 }];
             }];
         }
