@@ -14,10 +14,14 @@
 }
 -(NSDictionary*)getSeriesAndAxisConfig:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {
     NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
-    REMTrendChartStackColumnSeries* series =[[REMTrendChartStackColumnSeries alloc]initWithData:energyViewData.targetEnergyData dataProcessor:self.dataProcessor plotStyle:nil yAxisIndex:0 dataStep:REMEnergyStepHour];
-    //    if (widgetSyntax)
-    //    _sortOrder = NSOrderedDescending;
-    [dic setObject:@[series] forKey:@"series"];
+    NSMutableArray* seriesArray = [[NSMutableArray alloc]init];
+    int seriesCount = 0;
+    if (energyViewData.targetEnergyData != nil && energyViewData.targetEnergyData != NULL) seriesCount =energyViewData.targetEnergyData.count;
+    for (int seriesIndex = 0; seriesIndex < seriesCount; seriesIndex++) {
+        REMTargetEnergyData* seriesData = [energyViewData.targetEnergyData objectAtIndex:seriesIndex];
+        [seriesArray addObject: [self getSeriesConfigByData:seriesData step:self.widgetSyntax.step.intValue yAxisIndex:0 seriesIndex:seriesIndex]];
+    }
+    [dic setObject:seriesArray forKey:@"series"];
     
     REMTrendChartAxisConfig* yAxis = nil;
     if (self.status == REMWidgetStatusMinimized) {

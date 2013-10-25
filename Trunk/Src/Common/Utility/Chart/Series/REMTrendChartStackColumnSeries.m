@@ -19,7 +19,7 @@
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataStep:(REMEnergyStep)step startDate:(NSDate*)startDate {
     self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle yAxisIndex:yAxisIndex dataStep:step startDate:startDate];
     occupy = NO;
-    self.convertedValues = [[NSMutableArray alloc]init];
+    self.convertedValues = [[NSMutableArray alloc]initWithCapacity:self.energyData.count];
     return self;
 }
 -(NSDictionary*)getPointDicAtX:(NSNumber*)xLocation {
@@ -37,11 +37,29 @@
 }
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
 {
-    REMEnergyData* point = [self.energyData objectAtIndex:idx];
-    NSNumber* pointX = [self.dataProcessor processX:point.localTime startDate:self.startDate step:self.step];
-    
-    NSDictionary* pointDic = [self getPointDicAtX:pointX];
-    if (pointDic == nil) {
+    NSDictionary* pointDic = self.convertedValues[idx];
+    if (fieldEnum == CPTBarPlotFieldBarLocation) {
+        return [pointDic objectForKey:@"x"];
+    } else if (fieldEnum == CPTBarPlotFieldBarTip) {
+        return [pointDic objectForKey:@"y"];
+    } else {
+        return [pointDic objectForKey:@"base"];
+    }
+}
+
+-(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex {
+    ((CPTBarPlot*)plot).barBasesVary = YES;
+    for (int i=selfIndex-1; i >= 0; i--) {
+        REMChartSeries* thePreviousSeries = seriesList[i];
+        if ([thePreviousSeries isMemberOfClass:[REMTrendChartStackColumnSeries class]]) {
+            self.previousStackSeries = (REMTrendChartStackColumnSeries*)thePreviousSeries;
+            break;
+        }
+    }
+    for (int i = 0; i < self.energyData.count; i++) {
+        REMEnergyData* point = self.energyData[i];
+        NSNumber* pointX = [self.dataProcessor processX:point.localTime startDate:self.startDate step:self.step];
+        NSNumber* pointY = [self.dataProcessor processY:point.dataValue startDate:self.startDate step:self.step];
         REMTrendChartStackColumnSeries* previousSeries = self.previousStackSeries;
         NSDecimalNumber* baseVal = [NSDecimalNumber decimalNumberWithString:@"0"];
         
@@ -53,30 +71,7 @@
             previousSeries = previousSeries.previousStackSeries;
         }
         
-        pointDic = @{
-                     @"x": pointX,
-                     @"y":[self.dataProcessor processY:point.dataValue startDate:self.startDate step:self.step],
-                     @"base":baseVal
-                     };
-        [self.convertedValues addObject:pointDic];
-    }
-    
-    if (fieldEnum == CPTBarPlotFieldBarLocation) {
-        return [pointDic objectForKey:@"x"];
-    } else if (fieldEnum == CPTBarPlotFieldBarTip) {
-        return [pointDic objectForKey:@"y"];
-    } else {
-        return [pointDic objectForKey:@"base"];
-    }
-}
-
--(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex {
-    for (int i=selfIndex-1; i >= 0; i--) {
-        REMChartSeries* thePreviousSeries = seriesList[i];
-        if ([thePreviousSeries isMemberOfClass:[REMTrendChartStackColumnSeries class]]) {
-            self.previousStackSeries = (REMTrendChartStackColumnSeries*)thePreviousSeries;
-            break;
-        }
+        [self.convertedValues setObject:@{ @"x": pointX, @"y":pointY, @"base":baseVal } atIndexedSubscript:i];
     }
     [super beforePlotAddToGraph:graph seriesList:seriesList selfIndex:selfIndex];
 }

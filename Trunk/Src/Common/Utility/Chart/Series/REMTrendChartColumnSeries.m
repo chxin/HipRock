@@ -13,6 +13,7 @@
     self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle yAxisIndex:yAxisIndex dataStep:step startDate:startDate];
     occupy = YES;
     plot = [[CPTBarPlot alloc]init];
+    ((CPTBarPlot*)plot).barBasesVary = NO;
     seriesType = REMTrendChartSeriesTypeColumn;
     return self;
 }
@@ -42,6 +43,7 @@
             occupySeriesCount++;
         }
     }
+    if (occupySeriesCount == 0) occupySeriesCount = 1;
     barWidth = 1 / (occupySeriesCount + pointMargin*2 + barMargin*(occupySeriesCount-1));
     barOffSet = ((pointMargin + 0.5 + myIndexOfOccupy + (myIndexOfOccupy * barMargin)) * barWidth) - 0.5;
     myPlot.barOffset = CPTDecimalFromFloat(barOffSet);
