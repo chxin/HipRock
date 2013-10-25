@@ -276,7 +276,7 @@
     float xLength = (self.xGlobalLength == nil) ? maxXValOfSeries : self.xGlobalLength.floatValue;
     
     xStableStartPoint = -0.5;
-    xStableEndPoint = xLength + 1;
+    xStableEndPoint = xLength;
     xUnstableStartPoint = -100;
     xUnstableEndPoint = xLength + 200;
     

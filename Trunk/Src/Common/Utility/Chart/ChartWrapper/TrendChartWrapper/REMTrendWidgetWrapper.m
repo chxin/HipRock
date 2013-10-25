@@ -43,17 +43,32 @@
     }
     [dic setObject:yAxisConfig forKey:@"yAxis"];
     
-    NSDate* globalEnd, *globalStart;
     REMTimeRange* theFirstTimeRange = [widgetSyntax.timeRanges objectAtIndex:0];
-    globalStart = theFirstTimeRange.startTime;
-    globalEnd = theFirstTimeRange.endTime;
-    NSDate* syntaxStartDate = theFirstTimeRange.startTime;
-    NSDate* syntaxEndDate = theFirstTimeRange.endTime;
-    [dic setObject:[self.dataProcessor processX:globalEnd startDate:globalStart step:widgetSyntax.step.intValue] forKey:@"xGlobalLength"];
-    [dic setObject:[self.dataProcessor processX:syntaxStartDate startDate:globalStart step:widgetSyntax.step.intValue] forKey:@"xStartLocation"];
-    [dic setObject:[self.dataProcessor processX:syntaxEndDate startDate:globalStart step:widgetSyntax.step.intValue] forKey:@"xEndLocation"];
+    NSDate *globalStart = theFirstTimeRange.startTime;
+    int step = widgetSyntax.step.intValue;
+    NSNumber* globalLength = [self roundDate:theFirstTimeRange.endTime startDate:globalStart step:step roundToFloor:NO]; //以后需要换成GlobalRange的ENDTime
+    NSNumber* xLocation = [self roundDate:theFirstTimeRange.startTime startDate:globalStart step:step roundToFloor:YES];
+    NSNumber* xEndLocation = [self roundDate:theFirstTimeRange.endTime startDate:globalStart step:step roundToFloor:NO];
+
+    [dic setObject:globalLength forKey:@"xGlobalLength"];
+    [dic setObject:xLocation forKey:@"xStartLocation"];
+    [dic setObject:xEndLocation forKey:@"xEndLocation"];
     
     return dic;
+}
+
+-(NSNumber*)roundDate:(NSDate*)lengthDate startDate:(NSDate*)startDate step:(REMEnergyStep)step roundToFloor:(BOOL)roundToFloor {
+    NSNumber* length = [self.dataProcessor processX:lengthDate startDate:startDate step:step];
+    NSDate* edgeOfGlobalEnd = [self.dataProcessor deprocessX:length.intValue startDate:startDate step:step];
+    NSComparisonResult end = [edgeOfGlobalEnd compare:lengthDate];
+    if (end == NSOrderedSame || end == NSOrderedDescending) {
+        return length;
+    } else if (roundToFloor) {
+        length = @(length.intValue);
+    } else {
+        length = @(length.intValue+1);
+    }
+    return length;
 }
 
 
