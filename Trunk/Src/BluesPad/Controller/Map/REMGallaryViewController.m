@@ -135,6 +135,8 @@
 
 - (void)gallaryCellTapped:(REMGallaryCell *)cell
 {
+    [self.view setUserInteractionEnabled:NO];
+    
     self.initialZoomRect = cell.frame;
     self.selectedBuilding = cell.building;
     self.isPinching = NO;
@@ -221,7 +223,7 @@
             completed([UIImage imageWithContentsOfFile:smallImagePath]);
         }
         else{
-            NSDictionary *parameter = @{@"pictureId":imageIds[0], @"isSmall":@1};
+            NSDictionary *parameter = @{@"pictureId":imageIds[0], @"isSmall":@"true"};
             REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingPicture parameter:parameter];
             store.groupName = kGallaryBuildingImageGroupName;
             [REMDataAccessor access:store success:^(id data) {
