@@ -615,7 +615,7 @@
     if(self.dashboardController==nil){
         self.dashboardController = [[REMDashboardController alloc]initWithStyle:UITableViewStyleGrouped];
         self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
-        CGRect newFrame = CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height, kBuildingChartWidth, self.dataView.frame.size.height);
+        CGRect newFrame = CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height, self.frame.size.width-kBuildingLeftMargin*2, self.dataView.frame.size.height);
         self.dashboardController.viewFrame=newFrame;
         self.dashboardController.imageView=self;
         self.dashboardController.buildingInfo=self.buildingInfo;
@@ -626,7 +626,7 @@
     
     //NSLog(@"data view old frame:%@",NSStringFromCGRect(self.dataView.frame));
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
-        [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y-20, kBuildingChartWidth, self.dataView.frame.size.height)];
+        [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y-20, self.frame.size.width-kBuildingLeftMargin*2, self.dataView.frame.size.height)];
         
         [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, self.dataView.frame.origin.y-self.dataView.frame.size.height, self.dataView.frame.size.width, self.dataView.frame.size.height)];
         
@@ -653,7 +653,7 @@
     if(self.superview==nil)return;
     if(self.dataView.frame.origin.y>0)return;
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
-        [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height*2, kBuildingChartWidth, self.dataView.frame.size.height)];
+        [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height*2, self.frame.size.width-kBuildingLeftMargin*2, self.dataView.frame.size.height)];
         [self.dataView setHidden:NO];
         [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, self.dataView.frame.origin.y+self.dataView.frame.size.height, self.dataView.frame.size.width, self.dataView.frame.size.height)];
         
@@ -732,12 +732,12 @@
 - (void)initTitleView
 {
         //CGFloat leftMargin=kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin;
-    UILabel *buildingType=[[UILabel alloc]initWithFrame:CGRectMake(0, 10, self.frame.size.width, 25)];
+    UILabel *buildingType=[[UILabel alloc]initWithFrame:CGRectMake(0, 13, self.frame.size.width, kBuildingTypeTitleFontSize)];
     buildingType.backgroundColor=[UIColor clearColor];
     buildingType.text=@"楼宇";
     buildingType.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     buildingType.shadowOffset=CGSizeMake(1, 1);
-    buildingType.font = [UIFont fontWithName:@(kBuildingFontLight) size:25];
+    buildingType.font = [UIFont fontWithName:@(kBuildingFontLight) size:kBuildingTypeTitleFontSize];
     
     buildingType.textAlignment=NSTextAlignmentCenter;
     buildingType.textColor=[UIColor whiteColor];
@@ -745,13 +745,9 @@
     [self addSubview:buildingType];
     
     CGFloat titleSize=kBuildingTitleFontSize;
-    
-    if(self.buildingInfo.building.name.length>20){
-        titleSize=kBuildingTitleSmallFontSize;
-    }
 
     
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, kBuildingTitleTop, self.frame.size.width, titleSize+5)];
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, buildingType.frame.origin.y+buildingType.frame.size.height+7, self.frame.size.width, titleSize+5)];
     titleLabel.text=self.buildingInfo.building.name ;
     titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     titleLabel.shadowOffset=CGSizeMake(1, 1);
@@ -768,7 +764,7 @@
     
     UIButton *logoButton = [self.controller getCustomerLogoButton];
     //[logoButton setCenter:CGPointMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, kBuildingTitleTop)];
-    [logoButton setFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, kBuildingTitleTop, logoButton.frame.size.width, logoButton.frame.size.height)];
+    [logoButton setFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, titleLabel.frame.origin.y, logoButton.frame.size.width, logoButton.frame.size.height)];
     //self.logoButton=[[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, kBuildingTitleTop, 140, 30)];
     
     [logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];

@@ -118,6 +118,9 @@
 
 -(void)dealloc{
     [self removeObserver:self forKeyPath:@"currentScrollOffset"];
+    for (REMImageView *view in self.imageArray) {
+        [view removeFromSuperview];
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

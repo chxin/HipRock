@@ -38,12 +38,13 @@ static NSString *cellId=@"dashboardcell";
 
 - (void)loadView{
     self.tableView= [[REMDashboardView alloc]initWithFrame:self.viewFrame style:UITableViewStyleGrouped];
+     
     self.view=self.tableView;
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
     
     [self.tableView registerClass:[REMDashboardCellViewCell class] forCellReuseIdentifier:cellId];
-    
+    self.tableView.sectionFooterHeight=34;
     
     //NSLog(@"frame:%@",NSStringFromCGRect(self.view.frame));
     
@@ -106,12 +107,14 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
         titleHeight+=20;
     }
     CGFloat cellMargin=8;
-    CGFloat cellHeight=121;
+    CGFloat cellHeight=157; //cell height
     double n=obj.widgets.count/4.0f;
     float row= ceil(n);
     int margin=row>0?row-1:0;
     return titleHeight+row*cellHeight+cellMargin*margin;
 }
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     REMDashboardCellViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
