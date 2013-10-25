@@ -16,7 +16,7 @@
 @interface REMImageView()
 
 @property (nonatomic,strong) UIImageView *imageView;
-@property (nonatomic,strong) UILabel *titleLabel;
+@property (nonatomic,weak) UILabel *titleLabel;
 @property (nonatomic,strong) REMBuildingDataView *dataView;
 @property (nonatomic) BOOL dataViewUp;
 @property (nonatomic) CGFloat cumulateY;
@@ -24,19 +24,19 @@
 
 @property (nonatomic,strong) UIImageView *blurredImageView;
 @property (nonatomic,strong) UIView *glassView;
-@property (nonatomic,strong) CAGradientLayer *bottomGradientLayer;
-@property (nonatomic,strong) CAGradientLayer *titleGradientLayer;
+@property (nonatomic,weak) CAGradientLayer *bottomGradientLayer;
+@property (nonatomic,weak) CAGradientLayer *titleGradientLayer;
 
 
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 @property (nonatomic) BOOL loadingImage;
 @property (nonatomic) BOOL customImageLoaded;
 @property (nonatomic,strong) NSString *loadingImageKey;
-@property (nonatomic,strong) UIButton *backButton;
-@property (nonatomic,strong) UIButton *shareButton;
-@property (nonatomic,strong) UIButton *shareDashboardButton;
+@property (nonatomic,weak) UIButton *backButton;
+@property (nonatomic,weak) UIButton *shareButton;
+@property (nonatomic,weak) UIButton *shareDashboardButton;
 
-@property (nonatomic,strong) UIButton *logoButton;
+@property (nonatomic,weak) UIButton *logoButton;
 
 @property (nonatomic) BOOL isActive;
 
@@ -49,6 +49,8 @@
 @property (nonatomic) BOOL isSwitchingCommodityButtonGroup;
 
 @property (nonatomic,strong) REMDashboardController *dashboardController;
+
+@property (nonatomic) BOOL hasLoadedWholeView;
 
 @end
 
@@ -127,6 +129,35 @@
     self.dashboardController=nil;
 }
 
+- (void)initWholeViewUseThumbnail:(BOOL)useThumbnail{
+    
+    [self initImageView2:self.frame useThumbnail:useThumbnail];
+    if(useThumbnail==NO && self.hasLoadedWholeView==NO){
+        
+    
+        
+            
+            [self initGlassView];
+        
+            [self initBottomGradientLayer];
+        
+            [self initDataListView];
+            
+            [self initTitleView];
+            
+            [self initButtons];
+
+            self.hasLoadedWholeView=YES;
+        
+    }
+    
+    
+    
+    
+}
+
+
+/*
 - (void)didMoveToSuperview
 {
     //NSLog(@"parent changed");
@@ -143,7 +174,7 @@
         
         [self initGlassView];
         
-        [self initDataListView];
+        //[self initDataListView];
         
         [self initTitleView];
         
@@ -157,6 +188,7 @@
     
     
 }
+ */
 
 - (void)initButtons{
     
@@ -171,9 +203,9 @@
     shareButton.adjustsImageWhenHighlighted=YES;
     shareButton.titleLabel.text=@"分享";
     [shareButton addTarget:self.controller action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.shareButton=shareButton;
-    [self addSubview:shareButton];
     
+    [self addSubview:shareButton];
+    self.shareButton=shareButton;
     
     self.dataView.shareButton=self.shareButton;
     
@@ -186,21 +218,21 @@
     shareDashboard.adjustsImageWhenHighlighted=YES;
     shareDashboard.titleLabel.text=@"查看分享记录";
     [shareDashboard addTarget:self.controller action:@selector(shareDashboardButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self addSubview:shareDashboard];
     self.shareDashboardButton=shareDashboard;
     [self.shareDashboardButton setHidden:YES];
-    [self addSubview:shareDashboard];
-    
     
     UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
     
     backButton.adjustsImageWhenHighlighted=YES;
     backButton.showsTouchWhenHighlighted=YES;
     backButton.titleLabel.text=@"地图";
-    [backButton setBackgroundImage:[UIImage imageNamed:@"leftarrow"] forState:UIControlStateNormal];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"Back"] forState:UIControlStateNormal];
     [backButton addTarget:self.controller action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.backButton=backButton;
+   
     [self addSubview:backButton];
-
+    self.backButton=backButton;
 }
 
 - (void)shareDashboardButtonPressed:(UIButton *)button{
@@ -238,7 +270,6 @@
                 
                 [self insertSubview:newView aboveSubview:self.blurredImageView];
                 [self insertSubview:newBlurred aboveSubview:newView];
-                
                 
                 
                 [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
@@ -316,59 +347,6 @@
 
 
 
-- (void)addImageDefer{
-    if(self.customImageLoaded == YES) return;
-    
-    UIImage *image = [self getCachedImage:nil];
-    
-    if(image != nil){
-        self.customImageLoaded=YES;
-        UIImageView *newView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
-        newView.contentMode=UIViewContentModeScaleToFill;
-        newView.alpha=0;
-        newView.image=image;
-        UIImageView *newBlurred= [self blurredImageView:newView];
-        
-        [self insertSubview:newView aboveSubview:self.blurredImageView];
-        [self insertSubview:newBlurred aboveSubview:newView];
-        
-        
-        
-        newView.alpha=self.imageView.alpha;
-        newBlurred.alpha=self.blurredImageView.alpha;
-        
-        [self.imageView removeFromSuperview];
-        [self.blurredImageView removeFromSuperview];
-        self.imageView.image=nil;
-        self.imageView=nil;
-        self.blurredImageView.image=nil;
-        self.blurredImageView=nil;
-        self.imageView = newView;
-        self.blurredImageView=newBlurred;
-        
-        return;
-        
-    }
-    
-    if(self.defaultImage!=nil){
-        
-        NSArray *array=[self loadSmallImage];
-        
-        if(array==nil){
-            self.imageView.image = self.defaultImage;
-            self.blurredImageView.image = self.defaultBlurImage;
-        }
-        else{
-            self.imageView.image=array[0];
-            if(array.count>1){
-                self.blurredImageView.image=array[1];
-            }
-            else{
-                self.blurredImageView.image=array[0];
-            }
-        }
-    }
-}
 
 - (BOOL)hasExistBuildingPic{
     if(self.buildingInfo.building.pictureIds==nil ||
@@ -402,19 +380,74 @@
     return @[image,blurImage];
 }
 
-- (void)initImageView2:(CGRect)frame{
+
+- (void)initImageView2:(CGRect)frame useThumbnail:(BOOL)thumbnail{
+    
+    if(self.imageView==nil){
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        imageView.contentMode=UIViewContentModeScaleToFill;
+        [self addSubview:imageView];
+        self.imageView=imageView;
+        
+        UIImageView *blurred= [[UIImageView alloc]initWithFrame:self.imageView.frame];
+        blurred.alpha=0;
+        [self addSubview:blurred];
+        self.blurredImageView=blurred;
+    }
+    if(self.customImageLoaded == YES) return;
+    
+    if(thumbnail == NO){
+        UIImage *image = [self getCachedImage:nil];
+        
+        if(image != nil){
+            self.customImageLoaded=YES;
+            UIImageView *newView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
+            newView.contentMode=UIViewContentModeScaleToFill;
+            newView.alpha=0;
+            newView.image=image;
+            UIImageView *newBlurred= [self blurredImageView:newView];
+            
+            [self insertSubview:newView aboveSubview:self.blurredImageView];
+            [self insertSubview:newBlurred aboveSubview:newView];
+
+            
+            newView.alpha=self.imageView.alpha;
+            newBlurred.alpha=self.blurredImageView.alpha;
+            self.imageView.image=nil;
+            self.blurredImageView.image=nil;
+            [self.imageView removeFromSuperview];
+            [self.blurredImageView removeFromSuperview];
+            self.imageView = newView;
+            self.blurredImageView=newBlurred;
+            
+            
+            return;
+            
+        }
+
+    }
     
     
-    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-    self.imageView.contentMode=UIViewContentModeScaleToFill;
-    [self addSubview:self.imageView];
-    
-    UIImageView *blurred= [[UIImageView alloc]initWithFrame:self.imageView.frame];
-    blurred.alpha=0;
-    self.blurredImageView=blurred;
-    [self addSubview:blurred];
-    
-    [self addImageDefer];
+        
+    if(self.defaultImage!=nil){
+        
+        NSArray *array=[self loadSmallImage];
+        
+        if(array==nil){
+            self.imageView.image = self.defaultImage;
+            self.blurredImageView.image = self.defaultBlurImage;
+        }
+        else{
+            self.imageView.image=array[0];
+            if(array.count>1){
+                self.blurredImageView.image=array[1];
+            }
+            else{
+                self.blurredImageView.image=array[0];
+            }
+        }
+    }
+
     
     
 }
@@ -426,7 +459,7 @@
     CGRect frame = CGRectMake(0, self.frame.size.height-height, 1024, height);
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
-    self.bottomGradientLayer=gradient;
+    
 
     gradient.frame = frame;
     gradient.colors = [NSArray arrayWithObjects:
@@ -443,7 +476,16 @@
     UIGraphicsEndImageContext();
     
     
-    [self.layer insertSublayer:self.bottomGradientLayer above:self.blurredImageView.layer];
+    [self.layer insertSublayer:gradient above:self.glassView.layer];
+    
+    self.bottomGradientLayer=gradient;
+    
+    
+    CAGradientLayer *layer=[self.controller getTitleGradientLayer];
+    [self.layer insertSublayer:layer above:self.glassView.layer];
+    
+    self.titleGradientLayer=layer;
+
     
 }
 
@@ -666,11 +708,14 @@
     //NSLog(@"contentInset:%@",NSStringFromUIEdgeInsets(self.dataView.contentInset));
     
     //[self setBlurLevel:(self.dataView.contentOffset.y + self.dataView.contentInset.top) / (2 * CGRectGetHeight(self.bounds) / 3)];
-    [self setBlurLevel:(self.dataView.contentOffset.y + self.dataView.contentInset.top) / (kBuildingCommodityViewTop+kCommodityScrollTop)];
+    [self setBlurLevel];
 }
 
-- (void)setBlurLevel:(float)blurLevel {
-    //NSLog(@"blurlevel:%f",blurLevel);
+
+- (void)setBlurLevel {
+    float blurLevel=(self.dataView.contentOffset.y + self.dataView.contentInset.top) / (kBuildingCommodityViewTop+kCommodityScrollTop);
+    NSLog(@"blurlevel:%f",blurLevel);
+    if(self.blurredImageView.alpha == blurLevel) return;
     self.blurredImageView.alpha = MAX(blurLevel,0);
     
     
@@ -678,26 +723,15 @@
     
 }
 
-- (BOOL)shouldResponseSwipe:(UITouch *)touch
-{
-    //NSLog(@"touch.view:%@",touch.view.class);
-    if( [touch.view isKindOfClass:[CPTGraphHostingView class]] == YES) return NO;
-    
-    return YES;
-    
-    
-}
+
+
 
 
 
 
 - (void)initTitleView
 {
-    self.titleGradientLayer=[self.controller getTitleGradientLayer];
-    
-    [self.layer insertSublayer:self.titleGradientLayer above:self.blurredImageView.layer];
-
-    //CGFloat leftMargin=kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin;
+        //CGFloat leftMargin=kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin;
     UILabel *buildingType=[[UILabel alloc]initWithFrame:CGRectMake(0, 10, self.frame.size.width, 25)];
     buildingType.backgroundColor=[UIColor clearColor];
     buildingType.text=@"楼宇";
@@ -717,39 +751,57 @@
     }
 
     
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, kBuildingTitleTop, self.frame.size.width, titleSize+5)];
-    self.titleLabel.text=self.buildingInfo.building.name ;
-    self.titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-    self.titleLabel.shadowOffset=CGSizeMake(1, 1);
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, kBuildingTitleTop, self.frame.size.width, titleSize+5)];
+    titleLabel.text=self.buildingInfo.building.name ;
+    titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    titleLabel.shadowOffset=CGSizeMake(1, 1);
     
-    self.titleLabel.backgroundColor=[UIColor clearColor];
-    self.titleLabel.font = [UIFont fontWithName:@(kBuildingFontLight) size:titleSize];
+    titleLabel.backgroundColor=[UIColor clearColor];
+    titleLabel.font = [UIFont fontWithName:@(kBuildingFontLight) size:titleSize];
 
-    self.titleLabel.textAlignment=NSTextAlignmentCenter;
-    self.titleLabel.textColor=[UIColor whiteColor];
+    titleLabel.textAlignment=NSTextAlignmentCenter;
+    titleLabel.textColor=[UIColor whiteColor];
     
-    self.logoButton = [self.controller getCustomerLogoButton];
-    [self.logoButton setCenter:CGPointMake(self.titleLabel.frame.origin.x + self.logoButton.bounds.size.width/2, self.logoButton.center.y)];
-//    
-//    [self.logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
-//    
-//    self.logoButton.titleLabel.text=@"logo";
-//    
-//    [self.logoButton addTarget:self.controller action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:titleLabel];
     
-    self.logoButton=[[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, kBuildingTitleTop, 140, 30)];
+    self.titleLabel=titleLabel;
     
-    [self.logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
+    UIButton *logoButton = [self.controller getCustomerLogoButton];
+    //[logoButton setCenter:CGPointMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, kBuildingTitleTop)];
+    [logoButton setFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, kBuildingTitleTop, logoButton.frame.size.width, logoButton.frame.size.height)];
+    //self.logoButton=[[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, kBuildingTitleTop, 140, 30)];
     
-    self.logoButton.titleLabel.text=@"logo";
+    [logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
     
-    [self.logoButton addTarget:self.controller action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    logoButton.titleLabel.text=@"logo";
     
-    //self.logoButton.layer.borderColor=[UIColor redColor].CGColor;
-    //self.logoButton.layer.borderWidth=1;
-    [self addSubview:self.titleLabel];
+    [logoButton addTarget:self.controller action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self addSubview:self.logoButton];
+    
+    [self addSubview:logoButton];
+    
+    self.logoButton=logoButton;
+    
+}
+
+- (void)setScrollOffset:(CGFloat)offsetY
+{
+    
+    [self.dataView setContentOffset:CGPointMake(-kBuildingLeftMargin, offsetY) animated:NO];
+    [self checkIfRequestChartData:self.dataView];
+}
+
+
+#pragma mark -
+#pragma mark should respose swipe
+
+- (BOOL)shouldResponseSwipe:(UITouch *)touch
+{
+    //NSLog(@"touch.view:%@",touch.view.class);
+    if( [touch.view isKindOfClass:[CPTGraphHostingView class]] == YES) return NO;
+    
+    return YES;
+    
     
 }
 
@@ -797,12 +849,6 @@
     }
 }
 
-- (void)setScrollOffset:(CGFloat)offsetY
-{
-    
-   [self.dataView setContentOffset:CGPointMake(-kBuildingLeftMargin, offsetY) animated:NO];
-    [self checkIfRequestChartData:self.dataView];
-}
 
 
 - (void)scrollUp
@@ -845,6 +891,9 @@
     
     //[self.imageView setCenter:CGPointMake(imagex+x*0.8, self.imageView.center.y)];
 }
+
+#pragma mark -
+#pragma mark export
 
 - (void)exportImage:(void (^)(UIImage *, NSString*))callback
 {

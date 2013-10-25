@@ -23,6 +23,27 @@
 			<true/>
 		</dict>
 	</dict>
+	<key>CFBundleIcons~ipad</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>EMOP_Setting</string>
+				<string>EMOP_Spotlight_7</string>
+				<string>EMOP_Spotlight_6</string>
+				<string>EMOP_App_6</string>
+				<string>EMOP_App_7</string>
+				<string>EMOP_APP_7</string>
+				<string>AppLogo.png</string>
+				<string>AppLogo@2x.png</string>
+				<string>AppLogo.png</string>
+				<string>AppLogo@2x.png</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<true/>
+		</dict>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>cn.com.schneider-electric.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
