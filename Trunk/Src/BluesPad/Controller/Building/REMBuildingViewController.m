@@ -91,10 +91,10 @@
     }
     
     
-    if(self.buildingOverallArray.count>0){
     
-        [self blurredImageView];
+    if(self.buildingOverallArray.count>0){
         
+         [self blurredImageView];
         
         UIPanGestureRecognizer *rec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
         [self.view addGestureRecognizer:rec];
@@ -106,6 +106,8 @@
         UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchThis:)];
         [self.view addGestureRecognizer:pinch];
     }
+    
+    
     
     
     self.cumulateX=0;
@@ -121,6 +123,7 @@
     for (REMImageView *view in self.imageArray) {
         [view removeFromSuperview];
     }
+    self.imageArray=nil;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -181,15 +184,15 @@
     NSString* defaultBuildingName = [[NSBundle mainBundle]pathForResource:@"DefaultBuilding" ofType:@"png"];
     self.defaultImage = [UIImage imageWithContentsOfFile:defaultBuildingName];
     //self.defaultImage = [UIImage imageWithContentsOfFile:@"DefaultBuilding"];
-    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     //UIImage *image = self.defaultImage;
-    dispatch_async(concurrentQueue, ^{
+    //dispatch_async(concurrentQueue, ^{
         UIImage *view = [REMImageHelper blurImage:self.defaultImage];
-        dispatch_async(dispatch_get_main_queue(), ^{
+     //   dispatch_async(dispatch_get_main_queue(), ^{
             self.defaultBlurImage=view;
             [self initImageView];
-        });
-    });
+     //   });
+   // });
     
 }
 

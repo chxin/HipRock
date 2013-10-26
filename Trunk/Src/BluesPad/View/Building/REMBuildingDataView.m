@@ -28,6 +28,8 @@ typedef void(^SuccessCallback)(BOOL success);
 
 @property (nonatomic,weak) UILabel *dashboardLabel;
 
+@property (nonatomic,weak) UIImageView *arrow;
+
 @end
 @implementation REMBuildingDataView
 
@@ -45,7 +47,7 @@ typedef void(^SuccessCallback)(BOOL success);
         self.clipsToBounds=YES;
         self.showsVerticalScrollIndicator=NO;
         self.successCounter=0;
-        [self setContentSize:CGSizeMake(0, 1160)];
+        [self setContentSize:CGSizeMake(0, 1150)];
         self.buildingInfo=buildingInfo;
         self.currentCommodityId=@(0);
         self.commodityViewDictionary=[[NSMutableDictionary alloc]initWithCapacity:self.buildingInfo.commodityArray.count+1];
@@ -300,11 +302,13 @@ typedef void(^SuccessCallback)(BOOL success);
 
 - (void)initDragLabel
 {
-    CGRect frame = CGRectMake(0, self.contentSize.height-40, 500, 20);
+    CGRect frame = CGRectMake(0, self.contentSize.height-17-16, 500, 17);
     
     UILabel *label =[[UILabel alloc]initWithFrame:frame];
     
-    label.text=@"￼上拉查看更多能耗信息";
+    label.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:frame.size.height];
+    
+    label.text=NSLocalizedString(@"Building_PullUpMoreInfo", @"");//  @"￼上拉查看更多能耗信息";
     
     
     
@@ -313,29 +317,35 @@ typedef void(^SuccessCallback)(BOOL success);
     [self addSubview:label];
     
     self.dashboardLabel=label;
+    
+    
+    CGRect imgFrame=CGRectMake(168, self.contentSize.height-25-16, 30, 30);
+    UIImage *image=[UIImage imageNamed:@"Up"];
+    UIImageView *arrow=[[UIImageView alloc]initWithImage:image];
+    [arrow setFrame:imgFrame];
+    [self addSubview:arrow];
+    self.arrow=arrow;
 }
 
 - (void)showDashboardLabel:(BOOL)overThreshold{
     if(overThreshold==YES){
-        self.dashboardLabel.text=@"松开以显示";
+        self.dashboardLabel.text=NSLocalizedString(@"Building_ReleaseSwitchView", @"");//  @"松开以显示";
+        
+        [UIView animateWithDuration:0.2 animations:^(void){
+            //self.arrow.layer.transform=CATransform3DMakeRotation((M_PI / 180.0) * 180.0f, 0.0f, 0.0f, 1.0f);
+            self.arrow.transform=CGAffineTransformMakeRotation(M_PI);
+        }];
     }
     else{
-        self.dashboardLabel.text=@"￼上拉查看更多能耗信息";
+        self.dashboardLabel.text=NSLocalizedString(@"Building_PullUpMoreInfo", @"");//@"￼上拉查看更多能耗信息";
+        [UIView animateWithDuration:0.2 animations:^(void){
+            //self.arrow.layer.transform=CATransform3DMakeRotation((M_PI / 180.0) * 180.0f, 0.0f, 0.0f, 1.0f);
+            self.arrow.transform=CGAffineTransformMakeRotation(M_PI*2);
+        }];
     }
 }
 
-- (void)sucessRequest{
-    self.successCounter+=1;
-    int total=self.buildingInfo.commodityUsage.count;
-    if(self.buildingInfo.airQuality!=nil) total++;
-    if(self.successCounter == total){
-        if(self.successBlock!=nil){
-            self.successBlock(YES);
-            self.successCounter=0;
-            self.successBlock=nil;
-        }
-    }
-}
+
 
 - (void)replaceImagesShowReal:(BOOL)showReal{
     if(self.commodityViewDictionary.count<1)return ;
@@ -353,31 +363,16 @@ typedef void(^SuccessCallback)(BOOL success);
     if(self.buildingInfo.airQuality!=nil) count--;
     //self.successBlock=callback;
     self.successCounter=0;
-    /*
-    for (int i=0; i<count; i++) {
-        REMBuildingCommodityView *view = self.commodityViewArray[i];
-        REMCommodityUsageModel *model = self.buildingInfo.commodityUsage[i];
-        NSNumber *status=[self.successDic objectForKey:model.commodity.commodityId];
-        if([status isEqualToNumber:@(1)] == YES) {
-            [self sucessRequest];
-            continue;
-        }
-        [view requireChartDataWithBuildingId:buildingId withCommodityId:model.commodity.commodityId complete:^(BOOL success){
-            [self.successDic setObject:@(1) forKey:model.commodity.commodityId];
-            [self sucessRequest];
-        }];
-    }
-    */
+    
     NSNumber *status=[self.successDic objectForKey:self.currentCommodityId];
     if([status isEqualToNumber:@(1)] == YES) {
-        //[self sucessRequest];
         if(callback!=nil){
             callback(YES);
         }
     }
     else{
         if([self.isLoadingChart[self.currentCommodityId] isEqualToNumber:@(1)]==YES){
-            NSLog(@"isloadingchart:%@,buildingName:%@",self.currentCommodityId,self.buildingInfo.building.name);
+            //NSLog(@"isloadingchart:%@,buildingName:%@",self.currentCommodityId,self.buildingInfo.building.name);
             if(callback!=nil){
                 self.successBlock=callback;
             }
@@ -391,7 +386,6 @@ typedef void(^SuccessCallback)(BOOL success);
                 return ;
             }
             [self.successDic setObject:@(1) forKey:@(commodityId)];
-            //[self sucessRequest];
             [self.isLoadingChart setObject:@(0) forKey:@(commodityId)];
             if(callback != nil){
                 callback(YES);
@@ -404,20 +398,6 @@ typedef void(^SuccessCallback)(BOOL success);
     }
 
     
-    /*
-    if(self.buildingInfo.airQuality!=nil){
-        REMBuildingAirQualityView *view = self.commodityViewArray[self.commodityViewArray.count-1];
-        REMAirQualityModel *model = self.buildingInfo.airQuality;
-        NSNumber *status=[self.successDic objectForKey:model.commodity.commodityId];
-        if([status isEqualToNumber:@(1)] == YES) {
-            [self sucessRequest];
-            return ;
-        }
-        [view requireChartDataWithBuildingId:buildingId withCommodityId:model.commodity.commodityId complete:^(BOOL success){
-            [self.successDic setObject:@(1) forKey:model.commodity.commodityId];
-            [self sucessRequest];
-        }];
-    }*/
 }
 
 - (void)didMoveToSuperview{

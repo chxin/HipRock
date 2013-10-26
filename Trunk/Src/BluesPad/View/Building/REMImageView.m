@@ -133,21 +133,18 @@
     
     [self initImageView2:self.frame useThumbnail:useThumbnail];
     if(useThumbnail==NO && self.hasLoadedWholeView==NO){
-        
+            
+        [self initGlassView];
     
+        [self initBottomGradientLayer];
+    
+        [self initDataListView];
         
-            
-            [self initGlassView];
+        [self initTitleView];
         
-            [self initBottomGradientLayer];
-        
-            [self initDataListView];
-            
-            [self initTitleView];
-            
-            [self initButtons];
+        [self initButtons];
 
-            self.hasLoadedWholeView=YES;
+        self.hasLoadedWholeView=YES;
         
     }
     
@@ -714,7 +711,7 @@
 
 - (void)setBlurLevel {
     float blurLevel=(self.dataView.contentOffset.y + self.dataView.contentInset.top) / (kBuildingCommodityViewTop+kCommodityScrollTop);
-    NSLog(@"blurlevel:%f",blurLevel);
+    //NSLog(@"blurlevel:%f",blurLevel);
     if(self.blurredImageView.alpha == blurLevel) return;
     self.blurredImageView.alpha = MAX(blurLevel,0);
     
@@ -734,7 +731,7 @@
         //CGFloat leftMargin=kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin;
     UILabel *buildingType=[[UILabel alloc]initWithFrame:CGRectMake(0, 13, self.frame.size.width, kBuildingTypeTitleFontSize)];
     buildingType.backgroundColor=[UIColor clearColor];
-    buildingType.text=@"楼宇";
+    buildingType.text=NSLocalizedString(@"Common_Building", @"");//  @"楼宇";
     buildingType.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     buildingType.shadowOffset=CGSizeMake(1, 1);
     buildingType.font = [UIFont fontWithName:@(kBuildingFontLight) size:kBuildingTypeTitleFontSize];
@@ -763,9 +760,8 @@
     self.titleLabel=titleLabel;
     
     UIButton *logoButton = [self.controller getCustomerLogoButton];
-    //[logoButton setCenter:CGPointMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, kBuildingTitleTop)];
+   
     [logoButton setFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, titleLabel.frame.origin.y, logoButton.frame.size.width, logoButton.frame.size.height)];
-    //self.logoButton=[[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, kBuildingTitleTop, 140, 30)];
     
     [logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
     
