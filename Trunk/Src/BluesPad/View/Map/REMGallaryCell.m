@@ -27,21 +27,8 @@
     if (self) {
         // Initialization code
         self.backgroundColor = [UIColor whiteColor];
-//        self.layer.borderColor = [UIColor blackColor].CGColor;
-//        self.layer.borderWidth = 1.0;
         
-        self.clipsToBounds = YES;
-//        
-//        if(self.backgroundView == nil){
-//            UIImageView *defaultImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"DefaultBuilding-Small.png"]];
-//            defaultImageView.contentMode = UIViewContentModeScaleToFill;
-//            
-//            UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 147, 110)];
-//            backgroundView.contentMode = UIViewContentModeScaleToFill;
-//            self.backgroundView = backgroundView;
-//            
-//            [self.backgroundView addSubview:defaultImageView];
-//        }
+        //self.clipsToBounds = YES;
         
         if(self.button == nil){
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -66,7 +53,10 @@
             [self addSubview:self.titleLabel];
         }
         
+        UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchThis:)];
+        [self addGestureRecognizer:pinch];
     }
+    
     return self;
 }
 
@@ -120,7 +110,13 @@ static UIImageView *defaultImageView;
 
 -(void)tapped
 {
+    NSLog(@"cell tapped: %@", [NSDate date]);
     [self.controller gallaryCellTapped:self];
+}
+
+-(void)pinchThis:(UIPinchGestureRecognizer *)pinch
+{
+    [self.controller gallaryCellPinched:self :pinch];
 }
 
 @end

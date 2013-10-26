@@ -64,7 +64,7 @@
 
 - (NSString *)serialize
 {
-    return [REMJSONHelper stringByObject:self.innerDictionary];
+    return [REMJSONHelper stringByObject:[self innerDictionary]];
 }
 
 @end

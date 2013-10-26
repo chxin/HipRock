@@ -23,6 +23,8 @@
 
 @interface REMGallaryViewController ()
 
+@property (nonatomic) BOOL isPinching;
+
 @end
 
 
@@ -95,9 +97,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSDate *d0 = [NSDate date];
+    NSLog(@"prepareForSegue begin");
     if([segue.identifier isEqualToString:kSegue_GalleryToBuilding] == YES)
     {
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
+        customSegue.isNoAnimation = self.isPinching;
         customSegue.isInitialPresenting = NO;
         customSegue.initialZoomRect = self.initialZoomRect;
         customSegue.finalZoomRect = self.view.frame;
@@ -108,27 +113,104 @@
             self.initialZoomRect = cell.frame;
         }
         
+        NSDate *d1 = [NSDate date];
+        NSLog(@"t1 : %f", [d1 timeIntervalSinceDate:d0]);
+        
         self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
+        
+        NSDate *d2 = [NSDate date];
+        NSLog(@"t2 : %f", [d2 timeIntervalSinceDate:d1]);
         
         REMBuildingViewController *buildingViewController = customSegue.destinationViewController;
         buildingViewController.buildingOverallArray = self.buildingInfoArray;
         buildingViewController.splashScreenController = self.splashScreenController;
         buildingViewController.fromController = self;
         buildingViewController.currentBuildingId = self.selectedBuilding.buildingId;
+        
+        NSDate *d3 = [NSDate date];
+        NSLog(@"t3 : %f", [d3 timeIntervalSinceDate:d2]);
     }
-}
-
--(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
+    NSLog(@"prepareForSegue end");
 }
 
 - (void)gallaryCellTapped:(REMGallaryCell *)cell
 {
+    [self.view setUserInteractionEnabled:NO];
+    
     self.initialZoomRect = cell.frame;
     self.selectedBuilding = cell.building;
+    self.isPinching = NO;
     
     [self performSegueWithIdentifier:kSegue_GalleryToBuilding sender:self];
+}
+
+
+-(void)gallaryCellPinched:(REMGallaryCell *)cell :(UIPinchGestureRecognizer *)pinch
+{
+    if(pinch.state  == UIGestureRecognizerStateBegan){
+        UIImageView *snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:cell]];
+        cell.snapshot = snapshot;
+        
+        
+        UIView *cover = [[UIView alloc] initWithFrame:cell.frame];
+        [cover setBackgroundColor:[UIColor blackColor]];
+        cell.blackCover = cover;
+        
+        [self.view addSubview:cell.blackCover];
+        [self.view addSubview:cell.snapshot];
+    }
+    
+    if(pinch.state  == UIGestureRecognizerStateChanged){
+        CGFloat scale = pinch.scale < 1 ? 1 : pinch.scale;
+        CGAffineTransform scaleTransform = CGAffineTransformMakeScale(scale, scale);
+        cell.snapshot.layer.affineTransform = scaleTransform;
+
+        CGPoint point = [pinch locationInView:self.view];
+        cell.snapshot.center = point;
+
+        NSLog(@"pinch: Changed, scale: %f, point: %@", pinch.scale, NSStringFromCGPoint(point));
+    }
+    
+    if(pinch.state  == UIGestureRecognizerStateEnded || pinch.state  == UIGestureRecognizerStateCancelled || pinch.state  == UIGestureRecognizerStateFailed){
+        
+        if(pinch.scale <= 1){ //scale did not change,
+            CGPoint pinchPoint = [pinch locationInView:self.view];
+            CGPoint cellCenter = [REMViewHelper getCenterOfRect:cell.frame];
+            
+            if(pinchPoint.x != cellCenter.x || pinchPoint.y != cellCenter.y){ //but position changed
+                [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    self.snapshot.center = self.view.center;
+                } completion:^(BOOL finished) {
+                    [cell.blackCover removeFromSuperview];
+                    cell.blackCover = nil;
+                    
+                    [cell.snapshot removeFromSuperview];
+                    cell.snapshot = nil;
+                }];
+            }
+        }
+        else{ //scale larger
+            CGRect initialiZoomRect = cell.snapshot.frame;
+            [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                //from self.snapshot.frame to self.mapViewController.initialZoomRect;
+                self.snapshot.transform = [REMViewHelper getScaleTransformFromOriginalFrame:initialiZoomRect andFinalFrame:self.view.frame];
+                self.snapshot.center = [REMViewHelper getCenterOfRect:self.view.frame];
+            } completion:^(BOOL finished) {
+                [cell.blackCover removeFromSuperview];
+                cell.blackCover = nil;
+                
+                [cell.snapshot removeFromSuperview];
+                cell.snapshot = nil;
+                
+                self.initialZoomRect = cell.frame;
+                self.selectedBuilding = cell.building;
+                self.isPinching = YES;
+                
+                [self performSegueWithIdentifier:kSegue_GalleryToBuilding sender:self];
+            }];
+        }
+
+    }
 }
 
 -(void)loadBuildingSmallImage:(NSArray *)imageIds :(void (^)(UIImage *))completed
@@ -141,7 +223,7 @@
             completed([UIImage imageWithContentsOfFile:smallImagePath]);
         }
         else{
-            NSDictionary *parameter = @{@"pictureId":imageIds[0], @"isSmall":@1};
+            NSDictionary *parameter = @{@"pictureId":imageIds[0], @"isSmall":@"true"};
             REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingPicture parameter:parameter];
             store.groupName = kGallaryBuildingImageGroupName;
             [REMDataAccessor access:store success:^(id data) {

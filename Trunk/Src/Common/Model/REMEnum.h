@@ -62,11 +62,11 @@ typedef enum _REMRankingRange : NSInteger
     REMRankingRange50 = 50
 } REMRankingRange;
 
-typedef enum _REMBuildingImageType {
-    REMBuildingImageSmall,
-    REMBuildingImageSmallBlured,
-    REMBuildingImageNormal,
-    REMBuildingImageNormalBlured,
+typedef enum _REMBuildingImageType :NSInteger {
+    REMBuildingImageSmall = 0,
+    REMBuildingImageSmallBlured = 1,
+    REMBuildingImageNormal = 2,
+    REMBuildingImageNormalBlured = 3,
 } REMBuildingImageType;
 
 

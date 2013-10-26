@@ -87,6 +87,8 @@ static NSDictionary *serviceMap = nil;
           [NSNumber numberWithInt:REMDSEnergyRankingCost] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/RankingCostData"],
           [NSNumber numberWithInt:REMDSEnergyRankingCarbon] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/RankingCarbonData"],
           
+          @(REMDSUserGetCurrent) : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/User.svc/GetCurrentUser"],
+          
           /**
            * Customer
            */
