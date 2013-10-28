@@ -6,8 +6,9 @@
 //
 //
 
-#import "REMWidgetWrapper.h"
+#import "REMAbstractChartWrapper.h"
 
-@interface REMTrendWidgetWrapper : REMWidgetWrapper
-
+@interface REMTrendWidgetWrapper : REMAbstractChartWrapper
+-(NSArray*)extraSeriesConfig;
+@property (nonatomic, weak) NSDate* baseDateOfX;
 @end

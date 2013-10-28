@@ -9,8 +9,11 @@
 #import "REMLineWidgetWrapper.h"
 
 @implementation REMLineWidgetWrapper
-
--(REMTrendChartSeries*) getSeriesConfigByData:(REMTargetEnergyData*)energyData step:(REMEnergyStep)step yAxisIndex:(uint)yAxisIndex seriesIndex:(uint)seriesIndex {
-    return [[REMTrendChartLineSeries alloc]initWithData:energyData.energyData dataProcessor:self.dataProcessor plotStyle:Nil yAxisIndex:yAxisIndex dataStep:step];
+-(REMTrendChartSeries*)createSeriesConfigOfIndex:(uint)seriesIndex {
+    REMTargetEnergyData* targetEnergyData = (REMTargetEnergyData*)self.energyViewData.targetEnergyData[seriesIndex];
+    REMTrendChartLineSeries* s =[[REMTrendChartLineSeries alloc]initWithData:targetEnergyData.energyData dataProcessor:sharedProcessor plotStyle:nil startDate:self.baseDateOfX];
+    s.uomId = targetEnergyData.target.uomId;
+    s.uomName = targetEnergyData.target.uomName;
+    return s;
 }
 @end

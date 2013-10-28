@@ -9,25 +9,43 @@
 #import "REMAbstractChartWrapper.h"
 
 @implementation REMAbstractChartWrapper
--(REMAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {
+-(REMAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax  styleDictionary:(NSDictionary*)style{
     self = [super init];
     if (self) {
-        _dataProcessor = [self initializeProcessor];
         _energyViewData = energyViewData;
         _widgetSyntax = widgetSyntax;
-        _view = [self renderContentView:frame data:energyViewData widgetContext:widgetSyntax];
+        _view = [self renderContentView:frame chartConfig:[self getChartConfig:style]];
     }
     return self;
 }
 
 -(void)destroyView {
+    if ([self.view isKindOfClass:[CPTGraphHostingView class]]) {
+        CPTGraphHostingView *hostView=(CPTGraphHostingView*)self.view;
+        [hostView.hostedGraph removeAllAnimations];
+        [hostView.hostedGraph removeAllAnnotations];
+        for (CPTAxis *axis in hostView.hostedGraph.axisSet.axes) {
+            axis.majorTickLocations=nil;
+            axis.minorTickAxisLabels=nil;
+            [axis removeFromSuperlayer];
+        }
+        [hostView.hostedGraph.axisSet removeFromSuperlayer];
+        hostView.hostedGraph.axisSet.axes=nil;
+        
+        [hostView.hostedGraph.plotAreaFrame removeFromSuperlayer];
+        [hostView.hostedGraph removeFromSuperlayer];
+        hostView.hostedGraph=nil;
+        [hostView removeFromSuperview];
+        hostView = nil;
+    }
     _view = nil;
 }
 
--(UIView*)renderContentView:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {
+-(REMChartConfig*)getChartConfig:(NSDictionary*)style {
     return nil;
 }
--(REMChartDataProcessor*)initializeProcessor {
+
+-(UIView*)renderContentView:(CGRect)frame chartConfig:(REMChartConfig*)chartConfig {
     return nil;
 }
 @end

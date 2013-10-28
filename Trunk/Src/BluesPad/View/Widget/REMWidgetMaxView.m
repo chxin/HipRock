@@ -12,7 +12,7 @@
 @implementation REMWidgetMaxView {
     UIView* contentView;
     REMEnergyViewData *chartData;
-    REMWidgetWrapper* widgetWrapper;
+    REMAbstractChartWrapper* widgetWrapper;
     UIButton* backBtn;
     UIView* slideView;
     UIView* overImageView;
@@ -83,14 +83,38 @@ const int kStatusBarHeight = 20;
     CGRect widgetRect = CGRectMake(0, 24, 1024, 724);
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     
+    NSMutableDictionary* style = [[NSMutableDictionary alloc]init];
+//    self.userInteraction = ([dictionary[@"userInteraction"] isEqualToString:@"YES"]) ? YES : NO;
+    //    self.series = dictionary[@"series"];
+    CPTMutableLineStyle* gridlineStyle = [[CPTMutableLineStyle alloc]init];
+    CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
+    gridlineStyle.lineColor = [CPTColor whiteColor];
+    gridlineStyle.lineWidth = 1.0;
+    textStyle.fontName = @kBuildingFontSCRegular;
+    textStyle.fontSize = 16.0;
+    textStyle.color = [CPTColor whiteColor];
+    textStyle.textAlignment = CPTTextAlignmentCenter;
+    
+    [style setObject:@"YES" forKey:@"userInteraction"];
+    [style setObject:@(0.05) forKey:@"animationDuration"];
+    [style setObject:gridlineStyle forKey:@"xLineStyle"];
+    [style setObject:textStyle forKey:@"xTextStyle"];
+//    [style setObject:nil forKey:@"xGridlineStyle"];
+//    [style setObject:nil forKey:@"yLineStyle"];
+    [style setObject:textStyle forKey:@"yTextStyle"];
+    [style setObject:gridlineStyle forKey:@"yGridlineStyle"];
+    [style setObject:@(6) forKey:@"horizentalGridLineAmount"];
+    
     if (widgetType == REMDiagramTypeLine) {
-        widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
+        widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
     } else if (widgetType == REMDiagramTypeColumn) {
-        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
+        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
     } else if (widgetType == REMDiagramTypePie) {
-        widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
+        widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
     } else if (widgetType == REMDiagramTypeRanking) {
-        widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax status:REMWidgetStatusMaximized];
+        widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
+    } else if (widgetType == REMDiagramTypeStackColumn) {
+        widgetWrapper = [[REMStackColumnWidgetWrapper alloc]initWithFrame:widgetRect data:chartData widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
     }
     if (widgetWrapper != nil) {
         [contentView addSubview:widgetWrapper.view];
