@@ -31,8 +31,8 @@
         // Initialization code
         self.contentView.layer.borderColor=[UIColor redColor].CGColor;
         self.contentView.layer.borderWidth=1;
-//        self.backgroundColor=[UIColor whiteColor];
-//        self.contentView.backgroundColor=[UIColor whiteColor];
+        self.backgroundColor=[UIColor whiteColor];
+        self.contentView.backgroundColor=[UIColor whiteColor];
         
         self.chartLoaded=NO;
         
