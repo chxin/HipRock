@@ -152,7 +152,15 @@
     
     
 }
-
+- (void)didMoveToSuperview
+{
+    //NSLog(@"parent changed");
+    if(self.superview == nil){
+        
+        [self reset];
+        return;
+    }
+}
 
 /*
 - (void)didMoveToSuperview

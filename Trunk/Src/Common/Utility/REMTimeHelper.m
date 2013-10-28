@@ -37,6 +37,11 @@
     return 0;
 }
 
++ (NSString *)jsonStringFromDate:(NSDate *)date
+{
+    return [NSString stringWithFormat:@"\"/Date(%f)/\"",[date timeIntervalSince1970]];
+}
+
 + (NSNumber *)numberFromJSONString:(NSString *)jsonDate
 {
     long long ret= [REMTimeHelper longLongFromJSONString:jsonDate];

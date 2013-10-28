@@ -11,8 +11,6 @@
 
 @interface REMJSONObject()
 
-@property (nonatomic,strong) NSDictionary *innerDictionary;
-
 @end
 
 @implementation REMJSONObject
