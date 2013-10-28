@@ -39,7 +39,7 @@ static NSString *kCurrentUserCacheKey = @"CurrentUser";
     self.customers = customers;
 }
 
-- (void)updateInnerDictionary{
+- (NSDictionary *)updateInnerDictionary{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:12];
     dic[@"Id"]=[NSNumber numberWithLongLong: self.userId];
     dic[@"Name"]=self.name;
@@ -52,12 +52,20 @@ static NSString *kCurrentUserCacheKey = @"CurrentUser";
     dic[@"UserTypeName"]=self.userTypeName;
     dic[@"Version"]=self.version;
     dic[@"SpId"]=@(self.spId);
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:self.customers.count];
     for (int i=0; i<self.customers.count;i++) {
         REMCustomerModel *model = self.customers[i];
+        NSDictionary *d= [model updateInnerDictionary];
+        [array addObject:d];
     }
+    dic[@"Customers"]=array;
     
+    self.innerDictionary=dic;
     
+    return self.innerDictionary;
 }
+
+
 
 
 - (void)save
