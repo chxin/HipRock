@@ -62,20 +62,34 @@ static NSString *kCurrentCustomerCacheKey = @"CurrentCustomer";
     return [[REMCustomerModel alloc] initWithDictionary:dictionary];
 }
 
--(void)updateInnerDictionary
+-(NSDictionary *)updateInnerDictionary
 {
-    [self.innerDictionary setValue:self.customerId forKey:@"Id"];
-    [self.innerDictionary setValue:self.name forKey:@"Name"];
-    [self.innerDictionary setValue:self.code forKey:@"Code"];
-    [self.innerDictionary setValue:self.address forKey:@"Address"];
-    [self.innerDictionary setValue:self.email forKey:@"Email"];
-    [self.innerDictionary setValue:self.manager forKey:@"Manager"];
-    [self.innerDictionary setValue:self.telephone forKey:@"Telephone"];
-    [self.innerDictionary setValue:self.comment forKey:@"Comment"];
-    [self.innerDictionary setValue:self.timezoneId forKey:@"TimezoneId"];
-    [self.innerDictionary setValue:self.logoId forKey:@"logoId"];
-    [self.innerDictionary setValue:[REMTimeHelper jsonStringFromDate:self.startTime] forKey:@"StartTime"];
-    [self.innerDictionary setValue:self.administratorArray forKey:@"Administrators"];
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]initWithCapacity:12];
+    
+    dic[@"Id"]=self.customerId;
+    dic[@"Name"]=self.name;
+    dic[@"Code"]=self.code;
+    dic[@"Address"]=self.address;
+    dic[@"Email"]=self.email;
+    dic[@"Manager"]=self.manager;
+    dic[@"Telephone"]=self.telephone;
+    dic[@"Comment"]=self.comment;
+    dic[@"TimezoneId"]=self.timezoneId;
+    if(self.logoId!=nil){
+        dic[@"logoId"]=self.logoId;
+    }
+    dic[@"StartTime"]=[REMTimeHelper jsonStringFromDate:self.startTime];
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:self.administratorArray.count];
+    for (int i=0; i<self.administratorArray.count; ++i) {
+        REMAdministratorModel *m = self.administratorArray[i];
+        NSDictionary *d= [m updateInnerDictionary];
+        [array addObject:d];
+    }
+    dic[@"Administrators"]=array;
+
+    self.innerDictionary=dic;
+    
+    return self.innerDictionary;
 }
 
 

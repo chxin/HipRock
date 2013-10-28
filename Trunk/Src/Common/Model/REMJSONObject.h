@@ -21,4 +21,6 @@
 
 - (NSString *)serialize;
 
+-(NSDictionary *)updateInnerDictionary;
+
 @end

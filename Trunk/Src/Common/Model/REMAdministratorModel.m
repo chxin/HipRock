@@ -16,4 +16,15 @@
     self.realName=dictionary[@"RealName"];
 }
 
+- (NSDictionary *)updateInnerDictionary{
+    NSMutableDictionary *dic= [[NSMutableDictionary alloc]initWithCapacity:2];
+    
+    dic[@"UserId"]=self.userId;
+    dic[@"RealName"]=self.realName;
+    
+    self.innerDictionary=dic;
+    
+    return self.innerDictionary;
+}
+
 @end

@@ -18,7 +18,7 @@
 @interface REMDashboardCollectionCellView ()
 
 @property (nonatomic,weak) UIView *chartContainer;
-
+@property (nonatomic,strong) REMLineWidgetWrapper *wrapper;
 @end
 
 @implementation REMDashboardCollectionCellView
@@ -129,33 +129,44 @@
             widgetWrapper = [[REMStackColumnWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
         }
         if (widgetWrapper != nil) {
+            self.wrapper=widgetWrapper;
             [self.chartContainer addSubview:widgetWrapper.view];
-//            [widget destroyView];
+            //[widgetWrapper destroyView];
+            
+            
+            NSRunLoop *loop=[NSRunLoop currentRunLoop];
+            NSTimer *timer= [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(snapshotChartView) userInfo:nil repeats:NO];
+            [loop addTimer:timer forMode:NSDefaultRunLoopMode];
         }
-        //[self snapshotChartView];
+        
     }];
 }
 
 - (void)snapshotChartView{
-    UIGraphicsBeginImageContextWithOptions(self.chartContainer.frame.size, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(self.chartContainer.bounds.size, NO, 0.0);
     [self.chartContainer.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     //UIImageView *v = [[UIImageView alloc]initWithImage:image];
     
     UIButton *button =[UIButton buttonWithType:UIButtonTypeCustom];
-    [button setFrame:self.chartContainer.frame];
+    [button setFrame:CGRectMake(0, 0, self.chartContainer.frame.size.width, self.chartContainer.frame.size.height)];
+    //[button setBounds:self.chartContainer.bounds];
     [button setBackgroundImage:image forState:UIControlStateNormal];
     button.tag=[self.widgetInfo.widgetId integerValue];
     [button addTarget:self action:@selector(widgetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIView *chartView=self.chartContainer.subviews[0];
-    [chartView removeFromSuperview];
+    //[self.wrapper destroyView];
+    [self.wrapper.view removeFromSuperview];
     [self.chartContainer addSubview:button];
+    self.imageButton=button;
+    //self.wrapper=nil;
 }
 
 - (void)widgetButtonPressed:(UIButton *)button{
-    NSLog(@"click widget:%d",button.tag);
+    //NSLog(@"click widget:%d",button.tag);
+    [self.controller maxWidget:self];
+    
 }
 
 

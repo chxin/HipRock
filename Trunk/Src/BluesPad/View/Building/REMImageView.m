@@ -8,6 +8,7 @@
 
 #import "REMImageView.h"
 #import "REMCommonHeaders.h"
+#import "REMDimensions.h"
 
 #define kDashboardThreshold 361+65+85+45
 
@@ -17,7 +18,7 @@
 
 @property (nonatomic,strong) UIImageView *imageView;
 @property (nonatomic,weak) UILabel *titleLabel;
-@property (nonatomic,strong) REMBuildingDataView *dataView;
+@property (nonatomic,weak) REMBuildingDataView *dataView;
 @property (nonatomic) BOOL dataViewUp;
 @property (nonatomic) CGFloat cumulateY;
 @property (nonatomic,strong) UIImageView *titleBg;
@@ -41,8 +42,6 @@
 @property (nonatomic) BOOL isActive;
 
 @property (nonatomic) BOOL hasLoadingChartData;
-
-@property (nonatomic,strong) UIView *commodityButtonsView;
 
 @property (nonatomic) BOOL isInDashboard;
 
@@ -228,7 +227,7 @@
     self.shareDashboardButton=shareDashboard;
     [self.shareDashboardButton setHidden:YES];
     
-    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
+    UIButton *backButton = [[UIButton alloc]initWithFrame:kDMCommon_TopLeftButtonFrame];
     
     backButton.adjustsImageWhenHighlighted=YES;
     backButton.showsTouchWhenHighlighted=YES;
@@ -541,10 +540,10 @@
 {
     
     
-    self.dataView = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(0, kBuildingTitleHeight, self.frame.size.width, self.frame.size.height-kBuildingTitleHeight) withBuildingInfo:self.buildingInfo];
+    REMBuildingDataView *dataView = [[REMBuildingDataView alloc]initWithFrame:CGRectMake(0, kBuildingTitleHeight, self.frame.size.width, self.frame.size.height-kBuildingTitleHeight) withBuildingInfo:self.buildingInfo];
     
-    [self addSubview:self.dataView];
-    
+    [self addSubview:dataView];
+    self.dataView=dataView;
     [self.dataView addObserver:self forKeyPath:@"contentOffset" options:0 context:nil];
     self.dataView.delegate=self;
     
@@ -623,6 +622,7 @@
         CGRect newFrame = CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height, self.frame.size.width-kBuildingLeftMargin*2, self.dataView.frame.size.height);
         self.dashboardController.viewFrame=newFrame;
         self.dashboardController.imageView=self;
+        self.dashboardController.buildingController=self.controller;
         self.dashboardController.buildingInfo=self.buildingInfo;
         self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
         [self addSubview:self.dashboardController.tableView];
@@ -768,8 +768,9 @@
     self.titleLabel=titleLabel;
     
     UIButton *logoButton = [self.controller getCustomerLogoButton];
+    
    
-    [logoButton setFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, titleLabel.frame.origin.y, logoButton.frame.size.width, logoButton.frame.size.height)];
+    //[logoButton setFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, titleLabel.frame.origin.y, logoButton.frame.size.width, logoButton.frame.size.height)];
     
     [logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
     
