@@ -80,7 +80,7 @@
 -(void)addSwitchButton
 {
     UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];// [[UIButton alloc] initWithFrame:];
-    [switchButton setFrame:CGRectMake(25, 20, 32, 32)];
+    [switchButton setFrame:kDMCommon_TopLeftButtonFrame];
     [switchButton setImage:[UIImage imageNamed:@"Map.png"] forState:UIControlStateNormal];
     [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchDown];
     
@@ -97,8 +97,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSDate *d0 = [NSDate date];
-    NSLog(@"prepareForSegue begin");
     if([segue.identifier isEqualToString:kSegue_GalleryToBuilding] == YES)
     {
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
@@ -113,24 +111,14 @@
             self.initialZoomRect = cell.frame;
         }
         
-        NSDate *d1 = [NSDate date];
-        NSLog(@"t1 : %f", [d1 timeIntervalSinceDate:d0]);
-        
         self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
-        
-        NSDate *d2 = [NSDate date];
-        NSLog(@"t2 : %f", [d2 timeIntervalSinceDate:d1]);
         
         REMBuildingViewController *buildingViewController = customSegue.destinationViewController;
         buildingViewController.buildingOverallArray = self.buildingInfoArray;
         buildingViewController.splashScreenController = self.splashScreenController;
         buildingViewController.fromController = self;
         buildingViewController.currentBuildingId = self.selectedBuilding.buildingId;
-        
-        NSDate *d3 = [NSDate date];
-        NSLog(@"t3 : %f", [d3 timeIntervalSinceDate:d2]);
     }
-    NSLog(@"prepareForSegue end");
 }
 
 - (void)gallaryCellTapped:(REMGallaryCell *)cell
@@ -167,8 +155,6 @@
 
         CGPoint point = [pinch locationInView:self.view];
         cell.snapshot.center = point;
-
-        NSLog(@"pinch: Changed, scale: %f, point: %@", pinch.scale, NSStringFromCGPoint(point));
     }
     
     if(pinch.state  == UIGestureRecognizerStateEnded || pinch.state  == UIGestureRecognizerStateCancelled || pinch.state  == UIGestureRecognizerStateFailed){

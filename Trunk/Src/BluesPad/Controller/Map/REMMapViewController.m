@@ -57,7 +57,7 @@ static BOOL isInitialPresenting = YES;
     
     [self showMarkers];
     
-    
+    self.gallarySwitchButton.frame = kDMCommon_TopLeftButtonFrame;
     [self.view addSubview:self.customerLogoButton];
     [self.view.layer insertSublayer:self.titleGradientLayer above:mapView.layer];
     

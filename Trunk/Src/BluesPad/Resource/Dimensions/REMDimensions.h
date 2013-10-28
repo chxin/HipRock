@@ -25,12 +25,20 @@
 #pragma mark Common dimensions
 //prefix: kDMCommon_
 
-#define kDMCommon_CustomerLogoTop 23
-#define kDMCommon_CustomerLogoLeft 25+32+10
-#define kDMCommon_CustomerLogoWidth 140
-#define kDMCommon_CustomerLogoHeight 30
+#define kDMCommon_TopLeftButtonLeft 20
+#define kDMCommon_TopLeftButtonTop 23
+#define kDMCommon_TopLeftButtonWidth 32
+#define kDMCommon_TopLeftButtonHeight 32
+#define kDMCommon_TopLeftButtonFrame CGRectMake(kDMCommon_TopLeftButtonLeft, kDMCommon_TopLeftButtonTop,kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)
+
+#define kDMCommon_CustomerLogoLeft kDMCommon_TopLeftButtonLeft + kDMCommon_TopLeftButtonWidth + 8
+#define kDMCommon_CustomerLogoTop 12
+#define kDMCommon_CustomerLogoWidth 280
+#define kDMCommon_CustomerLogoHeight 60
+#define kDMCommon_CustomerLogoFrame CGRectMake(kDMCommon_CustomerLogoLeft,kDMCommon_CustomerLogoTop,kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)
 
 #define kDMCommon_TitleGradientLayerHeight 109
+#define kDMCommon_TitleGradientLayerFrame CGRectMake(0,0,kDMScreenWidth,kDMCommon_TitleGradientLayerHeight)
 
 
 

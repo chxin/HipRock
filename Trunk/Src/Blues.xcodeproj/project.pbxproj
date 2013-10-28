@@ -1549,8 +1549,8 @@
 		7A2849581803998900DC481B /* Dimensions */ = {
 			isa = PBXGroup;
 			children = (
-				B4EDFB1C1806983600873FA1 /* REMDimensionForSplashScreen.h */,
 				B4EDFB1D1806983600873FA1 /* REMDimensions.h */,
+				B4EDFB1C1806983600873FA1 /* REMDimensionForSplashScreen.h */,
 				7A28495918039A3000DC481B /* REMDimensionForLogin.h */,
 				7A28495A18039A9D00DC481B /* REMDimensionForMap.h */,
 				7A28495B18039AAF00DC481B /* REMDimensionForBuilding.h */,
