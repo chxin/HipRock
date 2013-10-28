@@ -31,10 +31,11 @@ static NSString *cellId=@"widgetcell";
 - (void)loadView{
     UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc]init];
     [flowlayout setMinimumInteritemSpacing:8];
+    
     [flowlayout setSectionInset:UIEdgeInsetsZero];
     
     //[flowlayout setItemSize: CGSizeMake(100, 100)];
-    [flowlayout setItemSize:CGSizeMake(182, 121)];
+    [flowlayout setItemSize:CGSizeMake(233, 157)];
     
     self.collectionView=[[REMDashboardCollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:flowlayout];
     [self.collectionView setFrame:self.viewFrame];
@@ -44,7 +45,12 @@ static NSString *cellId=@"widgetcell";
     self.collectionView.delegate=self;
     [self.collectionView setBackgroundColor:[UIColor clearColor]];
     [self.collectionView setScrollEnabled:NO];
+    [self.collectionView setContentInset:UIEdgeInsetsZero];
+    self.collectionView.layer.borderColor=[UIColor yellowColor].CGColor;
+    self.collectionView.layer.borderWidth=1;
 }
+
+
 
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -55,6 +61,10 @@ static NSString *cellId=@"widgetcell";
     return self.widgetArray.count;
 }
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0, 0, 14, 0);
+}
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

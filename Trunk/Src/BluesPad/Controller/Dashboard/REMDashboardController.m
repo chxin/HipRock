@@ -14,6 +14,8 @@
 @property (nonatomic,weak) UILabel *buildingLabel;
 @property  (nonatomic) BOOL isHiding;
 
+@property (nonatomic,weak) UIImageView *arrow;
+
 
 @end
 
@@ -38,22 +40,30 @@ static NSString *cellId=@"dashboardcell";
 
 - (void)loadView{
     self.tableView= [[REMDashboardView alloc]initWithFrame:self.viewFrame style:UITableViewStyleGrouped];
+     
     self.view=self.tableView;
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
     
     [self.tableView registerClass:[REMDashboardCellViewCell class] forCellReuseIdentifier:cellId];
-    
+    self.tableView.sectionFooterHeight=34;
     
     //NSLog(@"frame:%@",NSStringFromCGRect(self.view.frame));
     
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, -40, 300, 60)];
-    label.text=@"下拉返回概览能耗信息";
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, -40, 300, 17)];
+    label.text=NSLocalizedString(@"Dashboard_PullDownShowGeneral", @"");//@"下拉返回概览能耗信息";
+    label.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:label.frame.size.height];
     label.textColor=[UIColor whiteColor];
     label.backgroundColor=[UIColor clearColor];
     [self.tableView addSubview:label];
     self.buildingLabel=label;
     
+    CGRect imgFrame=CGRectMake(168, -40-8, 30, 30);
+    UIImage *image=[UIImage imageNamed:@"Down"];
+    UIImageView *arrow=[[UIImageView alloc]initWithImage:image];
+    [arrow setFrame:imgFrame];
+    [self.tableView addSubview:arrow];
+    self.arrow=arrow;
 }
 
 
@@ -65,13 +75,15 @@ static NSString *cellId=@"dashboardcell";
 
 static NSString *dashboardGroupName=@"building-dashboard-%@";
 
+#define kDashboardSwitchLabelTop -65
+
 - (NSString *)groupName{
     return [NSString stringWithFormat:dashboardGroupName,self.buildingInfo.building.buildingId];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if(decelerate==YES && scrollView.contentOffset.y<-80){
+    if(decelerate==YES && scrollView.contentOffset.y<kDashboardSwitchLabelTop){
         //self.isHiding=YES;
         
         [REMDataAccessor cancelAccess:[self groupName]];
@@ -80,14 +92,22 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSLog(@"table scroll:%@",NSStringFromCGPoint(scrollView.contentOffset));
+   // NSLog(@"table scroll:%@",NSStringFromCGPoint(scrollView.contentOffset));
     //if(self.isHiding==YES)return;
 
-    if(scrollView.contentOffset.y<-80){
-        self.buildingLabel.text=@"松开以显示";
+    if(scrollView.contentOffset.y<kDashboardSwitchLabelTop){
+        self.buildingLabel.text=NSLocalizedString(@"Building_ReleaseSwitchView", @"");//@"松开以显示";
+        [UIView animateWithDuration:0.2 animations:^(void){
+            //self.arrow.layer.transform=CATransform3DMakeRotation((M_PI / 180.0) * 180.0f, 0.0f, 0.0f, 1.0f);
+            self.arrow.transform=CGAffineTransformMakeRotation(M_PI);
+        }];
     }
     else {
-        self.buildingLabel.text=@"下拉返回概览能耗信息";
+        self.buildingLabel.text=NSLocalizedString(@"Dashboard_PullDownShowGeneral", @"");// @"下拉返回概览能耗信息";
+        [UIView animateWithDuration:0.2 animations:^(void){
+            //self.arrow.layer.transform=CATransform3DMakeRotation((M_PI / 180.0) * 180.0f, 0.0f, 0.0f, 1.0f);
+            self.arrow.transform=CGAffineTransformMakeRotation(M_PI*2);
+        }];
     }
 }
 
@@ -106,12 +126,14 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
         titleHeight+=20;
     }
     CGFloat cellMargin=8;
-    CGFloat cellHeight=121;
+    CGFloat cellHeight=157; //cell height
     double n=obj.widgets.count/4.0f;
     float row= ceil(n);
     int margin=row>0?row-1:0;
     return titleHeight+row*cellHeight+cellMargin*margin;
 }
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     REMDashboardCellViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];

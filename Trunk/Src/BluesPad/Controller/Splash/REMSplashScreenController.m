@@ -37,6 +37,8 @@
     
     if([self isAlreadyLogin]){
         [self breathAnimation:^(void){
+            [self breathAnimation:nil];
+            
             SEL selector = @selector(breathAnimation:);
             
             NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:selector]];
@@ -45,15 +47,15 @@
             
             self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
             
+            NSLog(@"%f", [((NSDate *)[NSDate date]) timeIntervalSince1970]);
             [self showMapView:^(void){
+                NSLog(@"%f", [((NSDate *)[NSDate date]) timeIntervalSince1970]);
                 if(self.timer != nil){
                     if([self.timer isValid])
                         [self.timer invalidate];
                     
                     self.timer = nil;
                 }
-                
-                //[self.logoView setHidden:YES];
             }];
         }];
     }

@@ -13,6 +13,7 @@
 @interface REMBuildingEntranceSegue : UIStoryboardSegue
 
 @property (nonatomic) BOOL isInitialPresenting;
+@property (nonatomic) BOOL isNoAnimation;
 @property (nonatomic) CGRect initialZoomRect;
 @property (nonatomic) CGRect finalZoomRect;
 @property (nonatomic,weak) REMBuildingModel *currentBuilding;
