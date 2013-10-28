@@ -11,6 +11,8 @@
 
 @interface REMJSONObject : NSObject
 
+@property (nonatomic,strong) NSDictionary *innerDictionary;
+
 - (id) initWithJSONString:(NSString *)jsonString;
 
 - (id) initWithDictionary:(NSDictionary *)dictionary;

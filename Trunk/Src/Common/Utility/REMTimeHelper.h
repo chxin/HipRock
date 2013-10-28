@@ -33,6 +33,8 @@ typedef enum _REMDateTimePart : NSUInteger{
 
 + (long long) longLongFromJSONString:(NSString *)jsonDate;
 
++ (NSString *)jsonStringFromDate:(NSDate *)date;
+
 +(NSNumber *) numberFromJSONString:(NSString *)jsonDate;
 
 + (REMTimeRange *) relativeDateFromString:(NSString *)relativeDateString;

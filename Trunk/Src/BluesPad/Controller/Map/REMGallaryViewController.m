@@ -81,7 +81,7 @@
 {
     UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];// [[UIButton alloc] initWithFrame:];
     [switchButton setFrame:CGRectMake(25, 20, 32, 32)];
-    [switchButton setImage:[UIImage imageNamed:@"LandMarker.png"] forState:UIControlStateNormal];
+    [switchButton setImage:[UIImage imageNamed:@"Map.png"] forState:UIControlStateNormal];
     [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchDown];
     
     [self.view addSubview:switchButton];
