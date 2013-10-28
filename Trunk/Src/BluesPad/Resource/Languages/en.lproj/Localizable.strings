@@ -7,6 +7,7 @@
 */
 //Common, prefix: Common_
 "Common_ServerError" = "抱歉!服务器错误,无法获取最新的能源数据。请稍候再试。";
+"Common_Building"="楼宇";
 
 
 //Login, prefix: Login_
@@ -30,9 +31,11 @@
 "BuildingChart_NoData"="暂无数据，请持续关注能耗变化";
 "BuildingChart_DataError"="数据错误，请联系管理员。";
 "Building_LabelNoData"="无数据";
+"Building_PullUpMoreInfo"="￼上拉查看更多能耗信息";
+"Building_ReleaseSwitchView"="松开以显示";
 
 //Dashboard, prefix: Dashboard_
-
+"Dashboard_PullDownShowGeneral"="下拉返回概览能耗信息";
 
 
 //Chart, prefix: Chart_

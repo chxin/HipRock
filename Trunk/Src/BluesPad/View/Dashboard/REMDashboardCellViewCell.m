@@ -8,6 +8,8 @@
 
 #import "REMDashboardCellViewCell.h"
 #import "REMEnergyViewData.h"
+#import "REMBuildingConstants.h"
+
 
 @interface REMDashboardCellViewCell()
 
@@ -24,7 +26,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.backgroundColor=[[UIColor blackColor] colorWithAlphaComponent:0.54];
+        self.backgroundColor=[UIColor clearColor];
         //self.backgroundView=[[UIView alloc]initWithFrame:CGRectZero];
         //self.layer.cornerRadius=0;
         //self.layer.borderColor=[UIColor yellowColor].CGColor;
@@ -33,8 +35,8 @@
         self.contentView.backgroundColor=self.backgroundColor;
         self.backgroundView=[[UIView alloc]initWithFrame:self.contentView.frame];
         self.accessoryView=nil;
-        //self.contentView.layer.borderWidth=1;
-        //self.contentView.layer.borderColor=[UIColor redColor].CGColor;
+        self.contentView.layer.borderWidth=1;
+        self.contentView.layer.borderColor=[UIColor redColor].CGColor;
     }
     return self;
 }
@@ -61,28 +63,30 @@
     CGRect frame=self.contentView.frame;
     CGRect shareFrame;
     if(dashboardInfo.shareInfo!=nil && [dashboardInfo.shareInfo isEqual:[NSNull null]]== NO && [dashboardInfo.shareInfo.userRealName isEqual:[NSNull null]]==NO){
-        shareFrame = CGRectMake(10, 11, frame.size.width, 11-4);
+        shareFrame = CGRectMake(0, 11, frame.size.width, 11-4);
         UILabel *shareName=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x, 11, frame.size.width, 11)];
         shareName.textColor=[UIColor whiteColor];
         shareName.text=dashboardInfo.shareInfo.userRealName;
         [self.contentView addSubview:shareName];
     }
     else{
-       shareFrame = CGRectMake(10, 0, frame.size.width, 0);
+       shareFrame = CGRectMake(0, 0, frame.size.width, 0);
     }
     
     
     
     
-    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x,shareFrame.origin.y+shareFrame.size.height+11, frame.size.width, 16)];
+    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x,shareFrame.origin.y+shareFrame.size.height, frame.size.width, 16)];
     title.text=dashboardInfo.name;
     title.backgroundColor=[UIColor clearColor];
     title.textColor=[UIColor whiteColor];
+    title.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:14];
     [self.contentView addSubview:title];
     
     
     //NSLog(@"splitbar:%@",NSStringFromCGRect(frame));
-    CGRect frame1 = CGRectMake(0, title.frame.origin.y+title.frame.size.height+11, frame.size.width, 1);
+    /*
+    CGRect frame1 = CGRectMake(0, title.frame.origin.y+title.frame.size.height+7, frame.size.width, 1);
     CGRect frame2 = CGRectMake(0, frame1.origin.y+1, frame1.size.width, frame1.size.height);
     
     CGContextRef c = UIGraphicsGetCurrentContext();
@@ -112,14 +116,14 @@
     
     [self.contentView.layer insertSublayer:layer1 above:self.contentView.layer];
     [self.contentView.layer insertSublayer:layer2 above:self.contentView.layer];
-    
+    */
     
     UICollectionViewFlowLayout *flowlayout =[[UICollectionViewFlowLayout alloc]init];
     REMWidgetCollectionViewController *controller = [[REMWidgetCollectionViewController alloc]initWithCollectionViewLayout:flowlayout];
     controller.groupName=groupName;
     self.collectionController=controller;
     self.collectionController.widgetArray=dashboardInfo.widgets;
-    self.collectionController.viewFrame=CGRectMake(10, frame2.origin.y+11, frame1.size.width-20, self.contentView.frame.size.height-(frame2.origin.y+11));
+    self.collectionController.viewFrame=CGRectMake(0, title.frame.origin.y+title.frame.size.height+14, frame.size.width, self.contentView.frame.size.height-(title.frame.origin.y+title.frame.size.height+14));
     [self.contentView addSubview: self.collectionController.collectionView];
 
     
