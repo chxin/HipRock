@@ -33,8 +33,8 @@
 
 #define kDMCommon_CustomerLogoLeft kDMCommon_TopLeftButtonLeft + kDMCommon_TopLeftButtonWidth + 8
 #define kDMCommon_CustomerLogoTop 12
-#define kDMCommon_CustomerLogoWidth 280
-#define kDMCommon_CustomerLogoHeight 60
+#define kDMCommon_CustomerLogoWidth 210
+#define kDMCommon_CustomerLogoHeight 50
 #define kDMCommon_CustomerLogoFrame CGRectMake(kDMCommon_CustomerLogoLeft,kDMCommon_CustomerLogoTop,kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)
 
 #define kDMCommon_TitleGradientLayerHeight 109

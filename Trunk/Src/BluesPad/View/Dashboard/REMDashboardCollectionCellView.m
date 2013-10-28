@@ -18,7 +18,7 @@
 @interface REMDashboardCollectionCellView ()
 
 @property (nonatomic,weak) UIView *chartContainer;
-@property (nonatomic,strong) REMWidgetWrapper *wrapper;
+@property (nonatomic,strong) REMLineWidgetWrapper *wrapper;
 @end
 
 @implementation REMDashboardCollectionCellView
