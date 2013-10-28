@@ -42,7 +42,6 @@
 //ChartWrapper
 #import "REMAbstractChartWrapper.h"
 #import "REMPieChartWrapper.h"
-#import "REMWidgetWrapper.h"
 
 //TrendChartWrapper
 #import "REMColumnWidgetWrapper.h"

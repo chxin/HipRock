@@ -9,7 +9,15 @@
 #import "REMColumnWidgetWrapper.h"
 
 @implementation REMColumnWidgetWrapper
--(REMTrendChartSeries*) getSeriesConfigByData:(REMTargetEnergyData*)energyData step:(REMEnergyStep)step yAxisIndex:(uint)yAxisIndex seriesIndex:(uint)seriesIndex {
-    return [[REMTrendChartColumnSeries alloc]initWithData:energyData.energyData dataProcessor:self.dataProcessor plotStyle:nil yAxisIndex:yAxisIndex dataStep:step];
+-(REMTrendChartSeries*)createSeriesConfigOfIndex:(uint)seriesIndex {
+//    if (sharedProcessor == nil) {
+//        sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
+//        sharedProcessor.baseDate = self.baseDateOfX;
+//    }
+    REMTargetEnergyData* targetEnergyData = (REMTargetEnergyData*)self.energyViewData.targetEnergyData[seriesIndex];
+    REMTrendChartColumnSeries* s =[[REMTrendChartColumnSeries alloc]initWithData:targetEnergyData.energyData dataProcessor:sharedProcessor plotStyle:nil startDate:self.baseDateOfX];
+    s.uomId = targetEnergyData.target.uomId;
+    s.uomName = targetEnergyData.target.uomName;
+    return s;
 }
 @end

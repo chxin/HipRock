@@ -35,17 +35,17 @@
         _horizentalGridLineAmount = config.horizentalGridLineAmount;
         _series = config.series;
         _xGlobalLength = config.xGlobalLength;
-        if (config.xStartDate == nil) {
-            _xStartDate = ((REMTrendChartSeries*)[self.series objectAtIndex:0]).startDate;
-            for (int i = 1; i < self.series.count; i++) {
-                REMTrendChartSeries* s = [self.series objectAtIndex:i];
-                if (s.startDate < _xStartDate) {
-                    _xStartDate = s.startDate;
-                }
-            }
-        } else {
-            _xStartDate = config.xStartDate;
-        }
+//        if (config.xStartDate == nil) {
+//            _xStartDate = ((REMTrendChartSeries*)[self.series objectAtIndex:0]).startDate;
+//            for (int i = 1; i < self.series.count; i++) {
+//                REMTrendChartSeries* s = [self.series objectAtIndex:i];
+//                if (s.startDate < _xStartDate) {
+//                    _xStartDate = s.startDate;
+//                }
+//            }
+//        } else {
+//            _xStartDate = config.xStartDate;
+//        }
         
         CPTXYGraph *graph=[[CPTXYGraph alloc]initWithFrame:self.bounds];
         self.hostedGraph=graph;
@@ -100,8 +100,11 @@
     CPTXYAxis* xAxis = [self.hostedGraph.axisSet.axes objectAtIndex:0];
     ((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:1]).orthogonalCoordinateDecimal = [NSNumber numberWithFloat:currentXLocation].decimalValue;
     int xLabelInterval = [self getXInterval];
-    REMXFormatter* formatter = [[REMXFormatter alloc]initWithStartDate:self.xStartDate dataStep:self.step interval:xLabelInterval length:[NSDecimalNumber decimalNumberWithDecimal:((CPTXYPlotSpace*)xAxis.plotSpace).globalXRange.length].floatValue];
-    xAxis.labelFormatter = formatter;
+//    REMXFormatter* formatter = [[REMXFormatter alloc]initWithStartDate:self.xStartDate dataStep:self.step interval:xLabelInterval length:[NSDecimalNumber decimalNumberWithDecimal:((CPTXYPlotSpace*)xAxis.plotSpace).globalXRange.length].floatValue];
+//    xAxis.labelFormatter = formatter;
+    if ([xAxis.labelFormatter isKindOfClass:([REMXFormatter class])]) {
+        ((REMXFormatter*)xAxis.labelFormatter).interval = xLabelInterval;
+    }
     if (self.verticalGridLine) {
         xAxis.majorIntervalLength = [[NSNumber numberWithInt:1] decimalValue];
     } else {
@@ -219,6 +222,7 @@
     xAxis.minorTickLength = 0;
     xAxis.labelTextStyle = self.xAxisConfig.textStyle;
     xAxis.axisLineStyle = self.xAxisConfig.lineStyle;
+    xAxis.labelFormatter = self.xAxisConfig.labelFormatter;
     xAxis.labelAlignment = CPTAlignmentCenter;
     [axisArray addObject:xAxis];
     xAxis.plotSpace = graph.defaultPlotSpace;
@@ -235,6 +239,7 @@
         yAxis.minorTickLength = 0;
         yAxis.labelTextStyle = yAxisConfig.textStyle;
         yAxis.axisLineStyle = yAxisConfig.lineStyle;
+        yAxis.labelFormatter = yAxisConfig.labelFormatter;
         yAxis.labelAlignment = CPTAlignmentMiddle;
         if (i == 0) {
             yAxis.majorGridLineStyle = yAxisConfig.gridlineStyle;
@@ -255,7 +260,6 @@
             yAxis.plotSpace.allowsUserInteraction = NO;
             [self.hostedGraph addPlotSpace:plotSpace];
         }
-        yAxis.labelFormatter = [[REMYFormatter alloc]init];
         yAxis.labelingPolicy = CPTAxisLabelingPolicyFixedInterval;
         [axisArray addObject:yAxis];
     }

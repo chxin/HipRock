@@ -11,18 +11,22 @@
 
 @implementation REMTrendChartDataProcessor
 
--(NSNumber*)processX:(NSDate*)xLocalTime startDate:(NSDate*)startDate step:(REMEnergyStep)step  {
+-(NSNumber*)processX:(NSDate*)xLocalTime {
     float x = 0;
+    REMEnergyStep step = self.step;
+    NSDate* startDate = self.baseDate;
     if (step == REMEnergyStepHour || step == REMEnergyStepDay || step == REMEnergyStepWeek) {
         x = [xLocalTime timeIntervalSinceDate:startDate] / (step == REMEnergyStepHour ? 3600 : (step == REMEnergyStepDay ? 86400 : 604800));
     } else if (step == REMEnergyStepYear) {
-        x = [REMTimeHelper getYear:xLocalTime] - [REMTimeHelper getYear:startDate];
+        x = (int)[REMTimeHelper getYear:xLocalTime] - (int)[REMTimeHelper getYear:startDate];
     } else {
-        x = ([REMTimeHelper getYear:xLocalTime] - [REMTimeHelper getYear:startDate]) * 12 + [REMTimeHelper getMonth:xLocalTime] - [REMTimeHelper getMonth:startDate];
+        x = ((int)[REMTimeHelper getYear:xLocalTime] - (int)[REMTimeHelper getYear:startDate]) * 12 + (int)[REMTimeHelper getMonth:xLocalTime] - (int)[REMTimeHelper getMonth:startDate];
     }
     return [NSNumber numberWithFloat:x];
 }
--(NSDate*)deprocessX:(float)x startDate:(NSDate*)startDate step:(REMEnergyStep)step {
+-(NSDate*)deprocessX:(float)x {
+    REMEnergyStep step = self.step;
+    NSDate* startDate = self.baseDate;
     if (step == REMEnergyStepHour || step == REMEnergyStepDay || step == REMEnergyStepWeek) {
         float i = (step == REMEnergyStepHour ? 3600 : (step == REMEnergyStepDay ? 86400 : 604800));
         return[NSDate dateWithTimeInterval:i*x sinceDate:startDate];

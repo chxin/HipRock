@@ -86,6 +86,7 @@
             [alert show];
             
             [REMApplicationContext instance].currentUser.customers=customerArray;
+            [[REMApplicationContext instance].currentUser updateInnerDictionary];
             [[REMApplicationContext instance].currentUser save];
             NSIndexPath *indexPath=[NSIndexPath indexPathForRow:self.currentRow inSection:0];
             UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:indexPath];
@@ -114,8 +115,10 @@
             }
             
             [REMApplicationContext instance].currentUser.customers=customerArray;
+            [[REMApplicationContext instance].currentUser updateInnerDictionary];
             [[REMApplicationContext instance].currentUser save];
             [REMApplicationContext instance].currentCustomer=[REMApplicationContext instance].currentUser.customers[self.currentRow];
+            [[REMApplicationContext instance].currentCustomer updateInnerDictionary];
             [[REMApplicationContext instance].currentCustomer save];
             [self.settingController needReload];
             

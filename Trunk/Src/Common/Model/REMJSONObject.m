@@ -60,6 +60,10 @@
     
 }
 
+- (NSDictionary *)updateInnerDictionary{
+    return self.innerDictionary;
+}
+
 - (NSString *)serialize
 {
     return [REMJSONHelper stringByObject:[self innerDictionary]];

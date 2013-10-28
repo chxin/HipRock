@@ -9,11 +9,10 @@
 #import "REMChartHeader.h"
 
 @implementation REMTrendChartLineSeries
--(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataStep:(REMEnergyStep)step startDate:(NSDate*)startDate {
-    self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle yAxisIndex:yAxisIndex dataStep:step startDate:startDate];
+-(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
+    self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle startDate:startDate];
     occupy = NO;
     plot = [[CPTScatterPlot alloc]init];
-    seriesType = REMTrendChartSeriesTypeLine;
     return self;
 }
 
@@ -84,9 +83,9 @@
 {
     REMEnergyData* point = [self.energyData objectAtIndex:idx];
     if (fieldEnum == CPTScatterPlotFieldX) {
-        return [self.dataProcessor processX:point.localTime startDate:self.startDate step:self.step];
+        return [self.dataProcessor processX:point.localTime];
     } else if (fieldEnum == CPTScatterPlotFieldY) {
-        return [self.dataProcessor processY:point.dataValue startDate:self.startDate step:self.step];
+        return [self.dataProcessor processY:point.dataValue];
     } else {
         return nil;
     }
