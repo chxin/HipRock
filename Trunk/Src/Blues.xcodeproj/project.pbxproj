@@ -1670,10 +1670,6 @@
 				7AD9D739181A626400D9E8EC /* CommonPin_Focus@2x.png */,
 				7AD9D73A181A626400D9E8EC /* CommonPin_Normal.png */,
 				7AD9D73B181A626400D9E8EC /* CommonPin_Normal@2x.png */,
-				7AD9D73C181A626400D9E8EC /* Gallery.png */,
-				7AD9D73D181A626400D9E8EC /* Gallery@2x.png */,
-				7AD9D73E181A626400D9E8EC /* Map.png */,
-				7AD9D73F181A626400D9E8EC /* Map@2x.png */,
 				7AD9D740181A626400D9E8EC /* QualifiedPin_Focus.png */,
 				7AD9D741181A626400D9E8EC /* QualifiedPin_Focus@2x.png */,
 				7AD9D742181A626400D9E8EC /* QualifiedPin_Normal.png */,
@@ -1682,6 +1678,10 @@
 				7AD9D745181A626400D9E8EC /* UnqualifiedPin_Focus@2x.png */,
 				7AD9D746181A626400D9E8EC /* UnqualifiedPin_Normal.png */,
 				7AD9D747181A626400D9E8EC /* UnqualifiedPin_Normal@2x.png */,
+				7AD9D73C181A626400D9E8EC /* Gallery.png */,
+				7AD9D73D181A626400D9E8EC /* Gallery@2x.png */,
+				7AD9D73E181A626400D9E8EC /* Map.png */,
+				7AD9D73F181A626400D9E8EC /* Map@2x.png */,
 			);
 			path = Map;
 			sourceTree = "<group>";
