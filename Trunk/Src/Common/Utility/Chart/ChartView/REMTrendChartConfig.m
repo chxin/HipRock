@@ -9,19 +9,12 @@
 #import "REMChartHeader.h"
 
 @implementation REMTrendChartConfig
-+(REMTrendChartConfig*) getMinimunWidgetDefaultSetting {
-    REMTrendChartConfig* config = [[REMTrendChartConfig alloc]init];
-    config.xAxisConfig = [REMTrendChartAxisConfig getMinWidgetXConfig];
-//    config.yAxisConfig = [NSArray arrayWithObjects:[REMTrendChartAxisConfig getMinWidgetYConfig],nil];
-    config.horizentalGridLineAmount = 4;
-    return config;
-}
-+(REMTrendChartConfig*) getMaximunWidgetDefaultSetting {
-    REMTrendChartConfig* config = [[REMTrendChartConfig alloc]init];
-    config.xAxisConfig = [REMTrendChartAxisConfig getMaxWidgetXConfig];
-//    config.yAxisConfig = [NSArray arrayWithObjects:[REMTrendChartAxisConfig getMaxWidgetYConfig],nil];
-    config.horizentalGridLineAmount = 6;
-    config.userInteraction = YES;
-    return config;
+-(REMTrendChartConfig*)initWithDictionary:(NSDictionary*)dictionary {
+    self = [super initWithDictionary:dictionary];
+    if (self) {
+        self.xAxisConfig = [[REMTrendChartAxisConfig alloc]initWithLineStyle:dictionary[@"xLineStyle"] gridlineStyle:dictionary[@"xGridlineStyle"] textStyle:dictionary[@"xTextStyle"]];
+        self.horizentalGridLineAmount = ((NSNumber*)dictionary[@"horizentalGridLineAmount"]).intValue;
+    }
+    return self;
 }
 @end

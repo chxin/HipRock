@@ -11,15 +11,17 @@
 #import "REMEnergyViewData.h"
 #import "REMWidgetContentSyntax.h"
 
-@interface REMAbstractChartWrapper : NSObject
+@interface REMAbstractChartWrapper : NSObject {
+@protected REMTrendChartDataProcessor* sharedProcessor;
+}
 
--(REMAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax;
+-(REMAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax styleDictionary:(NSDictionary*)style;
 -(void)destroyView;
 
 @property (nonatomic, readonly) UIView* view;
 @property (nonatomic, readonly, weak) REMWidgetContentSyntax* widgetSyntax;
 @property (nonatomic, readonly, weak) REMEnergyViewData* energyViewData;
 
-@property (nonatomic, readonly) REMChartDataProcessor* dataProcessor;
+//@property (nonatomic, readonly) REMChartDataProcessor* dataProcessor;
 
 @end

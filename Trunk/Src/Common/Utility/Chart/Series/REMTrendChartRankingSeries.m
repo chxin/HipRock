@@ -17,26 +17,30 @@
 
 @implementation REMTrendChartRankingSeries
 
--(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataStep:(REMEnergyStep)step {
-    return [self initWithData:energyData dataProcessor:processor plotStyle:plotStyle yAxisIndex:yAxisIndex dataStep:step startDate:[NSDate dateWithTimeIntervalSince1970:0]];
+-(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle {
+    return [self initWithData:energyData dataProcessor:processor plotStyle:plotStyle startDate:[NSDate dateWithTimeIntervalSince1970:0]];
 }
--(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataStep:(REMEnergyStep)step startDate:(NSDate*)startDate {
-    
-    self.dataTargetIdDic = [[NSMutableDictionary alloc]init];
-    self.targetIdDic = [[NSMutableDictionary alloc]init];
+-(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
+    NSMutableDictionary* dataTargetIdDic = [[NSMutableDictionary alloc]init];
+    NSMutableDictionary* targetIdDic = [[NSMutableDictionary alloc]init];
+
     NSMutableArray* series0Data = [[NSMutableArray alloc]init];
     for (int i = 0; i < energyData.count; i++) {
         REMTargetEnergyData* seriesData = [energyData objectAtIndex:i];
         if (seriesData.energyData != nil && seriesData.energyData.count > 0) {
             REMEnergyData* dataPoint = [seriesData.energyData objectAtIndex:0];
             [series0Data addObject:dataPoint];
-            [self.dataTargetIdDic setObject:dataPoint forKey:seriesData.target.targetId];
-            [self.targetIdDic setObject:seriesData.target forKey:seriesData.target.targetId];
+            [dataTargetIdDic setObject:dataPoint forKey:seriesData.target.targetId];
+            [targetIdDic setObject:seriesData.target forKey:seriesData.target.targetId];
         }
     }
-    [self quickSort:series0Data left:0 right:series0Data.count-1];
-    self.sortOrder = NSOrderedAscending;
-    self = [super initWithData:series0Data dataProcessor:processor plotStyle:plotStyle yAxisIndex:yAxisIndex dataStep:step startDate:startDate];
+    self = [super initWithData:series0Data dataProcessor:processor plotStyle:plotStyle startDate:startDate];
+    if (self) {
+        self.dataTargetIdDic = dataTargetIdDic;
+        self.targetIdDic = targetIdDic;
+        self.sortOrder = NSOrderedAscending;
+        [self quickSort:series0Data left:0 right:series0Data.count-1];
+    }
     return self;
 }
 
@@ -96,7 +100,7 @@
         return [NSNumber numberWithUnsignedInteger:((self.sortOrder == NSOrderedDescending) ? (self.energyData.count-idx-1) :idx)];
     } else if (fieldEnum == CPTBarPlotFieldBarTip) {
         REMEnergyData* point = [self.energyData objectAtIndex:idx];
-        return [self.dataProcessor processY:point.dataValue startDate:self.startDate step:self.step];
+        return point.dataValue;
     } else {
         return nil;
     }

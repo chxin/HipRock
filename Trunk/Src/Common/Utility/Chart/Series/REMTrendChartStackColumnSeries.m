@@ -16,8 +16,8 @@
 //const NSString* baseKey = @"b";
 
 @implementation REMTrendChartStackColumnSeries
--(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataStep:(REMEnergyStep)step startDate:(NSDate*)startDate {
-    self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle yAxisIndex:yAxisIndex dataStep:step startDate:startDate];
+-(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
+    self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle startDate:startDate];
     occupy = NO;
     self.convertedValues = [[NSMutableArray alloc]initWithCapacity:self.energyData.count];
     return self;
@@ -58,8 +58,8 @@
     }
     for (int i = 0; i < self.energyData.count; i++) {
         REMEnergyData* point = self.energyData[i];
-        NSNumber* pointX = [self.dataProcessor processX:point.localTime startDate:self.startDate step:self.step];
-        NSNumber* pointY = [self.dataProcessor processY:point.dataValue startDate:self.startDate step:self.step];
+        NSNumber* pointX = [self.dataProcessor processX:point.localTime];
+        NSNumber* pointY = [self.dataProcessor processY:point.dataValue];
         REMTrendChartStackColumnSeries* previousSeries = self.previousStackSeries;
         NSDecimalNumber* baseVal = [NSDecimalNumber decimalNumberWithString:@"0"];
         

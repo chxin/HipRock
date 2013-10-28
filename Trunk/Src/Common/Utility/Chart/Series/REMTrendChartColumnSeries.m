@@ -9,19 +9,18 @@
 #import "REMChartHeader.h"
 
 @implementation REMTrendChartColumnSeries
--(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle yAxisIndex:(int)yAxisIndex dataStep:(REMEnergyStep)step startDate:(NSDate*)startDate {
-    self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle yAxisIndex:yAxisIndex dataStep:step startDate:startDate];
+-(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
+    self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle startDate:startDate];
     occupy = YES;
     plot = [[CPTBarPlot alloc]init];
     ((CPTBarPlot*)plot).barBasesVary = NO;
-    seriesType = REMTrendChartSeriesTypeColumn;
     return self;
 }
 
 -(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex {
     [super beforePlotAddToGraph:graph seriesList:seriesList selfIndex:selfIndex];
     
-    const float pointMargin = 0.2;  // 左右柱子离minorTick的距离，单位为柱子宽度，即20%*barWidth
+    const float pointMargin = 0.3;  // 左右柱子离minorTick的距离，单位为柱子宽度，即30%*barWidth
     const float barMargin = 0.08; // 同x轴点柱子间的距离，单位为柱子宽度，即8%*barWidth
     
     CPTBarPlot* myPlot = (CPTBarPlot*)plot;
@@ -54,9 +53,9 @@
 {
     REMEnergyData* point = [self.energyData objectAtIndex:idx];
     if (fieldEnum == CPTBarPlotFieldBarLocation) {
-        return [self.dataProcessor processX:point.localTime startDate:self.startDate step:self.step];
+        return [self.dataProcessor processX:point.localTime];
     } else if (fieldEnum == CPTBarPlotFieldBarTip) {
-        return [self.dataProcessor processY:point.dataValue startDate:self.startDate step:self.step];
+        return [self.dataProcessor processY:point.dataValue];
     } else {
         return nil;
     }

@@ -24,7 +24,6 @@
     borderStyle.lineWidth = 1.0f;
     thePlot.borderLineStyle = borderStyle;
     
-    seriesType = REMChartSeriesPie;
     plot = thePlot;
     return self;
 }
@@ -59,7 +58,7 @@
 {
     REMEnergyData* point = [self.energyData objectAtIndex:idx];
     if (fieldEnum == CPTPieChartFieldSliceWidth) {
-        return [self.dataProcessor processY:point.dataValue startDate:nil step:0];
+        return [self.dataProcessor processY:point.dataValue];
     } else {
         return [NSNumber numberWithInteger:idx];
     }
