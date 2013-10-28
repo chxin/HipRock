@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface REMDatePickerViewController : UIViewController
+@interface REMDatePickerViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end
