@@ -13,6 +13,7 @@
 #import "REMImageView.h"
 
 @class REMImageView;
+@class REMBuildingViewController;
 
 @interface REMDashboardController : UITableViewController<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
@@ -23,6 +24,8 @@
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 
 -(void)cancelAllRequest;
+
+@property (nonatomic,weak) REMBuildingViewController *buildingController;
 
 
 @end

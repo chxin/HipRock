@@ -504,6 +504,7 @@
 		B4EDFB1218064F2900873FA1 /* Share_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4EDFB0E18064F2900873FA1 /* Share_normal@2x.png */; };
 		B4EDFB181806653400873FA1 /* REMEnergyMultiTimeSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EDFB171806653400873FA1 /* REMEnergyMultiTimeSearcher.m */; };
 		B4EDFB1B180697F300873FA1 /* REMControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EDFB1A180697F300873FA1 /* REMControllerBase.m */; };
+		B4F3F601181E081800C8DF7F /* REMMaxWidgetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F3F600181E081800C8DF7F /* REMMaxWidgetSegue.m */; };
 		B4F4B99E17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
 		B4F4B99F17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
 		B4F4B9A017F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
@@ -1118,6 +1119,8 @@
 		B4EDFB1A180697F300873FA1 /* REMControllerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMControllerBase.m; path = Controller/REMControllerBase.m; sourceTree = "<group>"; };
 		B4EDFB1C1806983600873FA1 /* REMDimensionForSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensionForSplashScreen.h; path = Resource/Dimensions/REMDimensionForSplashScreen.h; sourceTree = "<group>"; };
 		B4EDFB1D1806983600873FA1 /* REMDimensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensions.h; path = Resource/Dimensions/REMDimensions.h; sourceTree = "<group>"; };
+		B4F3F5FF181E081800C8DF7F /* REMMaxWidgetSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMaxWidgetSegue.h; path = Resource/Segue/REMMaxWidgetSegue.h; sourceTree = "<group>"; };
+		B4F3F600181E081800C8DF7F /* REMMaxWidgetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMaxWidgetSegue.m; path = Resource/Segue/REMMaxWidgetSegue.m; sourceTree = "<group>"; };
 		B4F4B99C17F16F590096034D /* REMShareInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMShareInfo.h; sourceTree = "<group>"; };
 		B4F4B99D17F16F590096034D /* REMShareInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMShareInfo.m; sourceTree = "<group>"; };
 		B4FED1521804FEF400E0CE58 /* REMEnergySeacherBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergySeacherBase.h; path = Biz/Energy/Searcher/REMEnergySeacherBase.h; sourceTree = "<group>"; };
@@ -1850,6 +1853,8 @@
 				7A5AC77E1817CBEF006C7CB1 /* REMBuildingEntranceSegue.m */,
 				7A5AC7801817CC34006C7CB1 /* REMMapGallerySegue.h */,
 				7A5AC7811817CC34006C7CB1 /* REMMapGallerySegue.m */,
+				B4F3F5FF181E081800C8DF7F /* REMMaxWidgetSegue.h */,
+				B4F3F600181E081800C8DF7F /* REMMaxWidgetSegue.m */,
 			);
 			name = Segue;
 			sourceTree = "<group>";
@@ -2872,6 +2877,7 @@
 				7A153CA717AA497C00413D3C /* REMLoginPageController.m in Sources */,
 				7A153CAA17AA497C00413D3C /* REMSplashScreenController.m in Sources */,
 				B4DC084017F90E2C005658C1 /* REMAdministratorModel.m in Sources */,
+				B4F3F601181E081800C8DF7F /* REMMaxWidgetSegue.m in Sources */,
 				7A7EA6E1180548CB00A3BB56 /* REMNetworkStatusIndicator.m in Sources */,
 				7A153CB417AA497C00413D3C /* REMWidgetMaxViewController.m in Sources */,
 				7A153CBB17AA49EA00413D3C /* REMTimeRange.m in Sources */,

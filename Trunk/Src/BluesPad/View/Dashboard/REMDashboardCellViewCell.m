@@ -122,6 +122,7 @@
     REMWidgetCollectionViewController *controller = [[REMWidgetCollectionViewController alloc]initWithCollectionViewLayout:flowlayout];
     controller.groupName=groupName;
     self.collectionController=controller;
+    self.collectionController.buildingController=self.buildingController;
     self.collectionController.widgetArray=dashboardInfo.widgets;
     self.collectionController.viewFrame=CGRectMake(0, title.frame.origin.y+title.frame.size.height+14, frame.size.width, self.contentView.frame.size.height-(title.frame.origin.y+title.frame.size.height+14));
     [self.contentView addSubview: self.collectionController.collectionView];

@@ -155,7 +155,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <segue destination="R8X-Id-ksc" kind="modal" identifier="sendWeiboSegue" modalPresentationStyle="formSheet" id="gyV-e6-1Kn"/>
-                        <segue destination="T2C-Tf-bPc" kind="push" identifier="maxWidgetSegue" id="VF8-aY-jAm"/>
+                        <segue destination="T2C-Tf-bPc" kind="custom" identifier="maxWidgetSegue" customClass="REMMaxWidgetSegue" id="VF8-aY-jAm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujE-me-aPK" userLabel="First Responder" sceneMemberID="firstResponder"/>

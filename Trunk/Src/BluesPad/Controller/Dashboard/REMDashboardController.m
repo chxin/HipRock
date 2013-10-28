@@ -140,7 +140,7 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     if(cell==nil){
         cell = [[REMDashboardCellViewCell alloc]initWithStyle: UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    
+    cell.buildingController=self.buildingController;
     [cell initWidgetCollection:self.dashboardArray[indexPath.section] withGroupName:[self groupName]];
     
     return cell;

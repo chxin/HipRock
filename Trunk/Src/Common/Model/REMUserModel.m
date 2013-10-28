@@ -39,6 +39,27 @@ static NSString *kCurrentUserCacheKey = @"CurrentUser";
     self.customers = customers;
 }
 
+- (void)updateInnerDictionary{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:12];
+    dic[@"Id"]=[NSNumber numberWithLongLong: self.userId];
+    dic[@"Name"]=self.name;
+    dic[@"Comment"]=self.comment;
+    dic[@"Email"]=self.email;
+    dic[@"Password"]=self.password;
+    dic[@"RealName"]=self.realname;
+    dic[@"Telephone"]=self.telephone;
+    dic[@"Title"]= @(self.title);
+    dic[@"UserTypeName"]=self.userTypeName;
+    dic[@"Version"]=self.version;
+    dic[@"SpId"]=@(self.spId);
+    for (int i=0; i<self.customers.count;i++) {
+        REMCustomerModel *model = self.customers[i];
+    }
+    
+    
+}
+
+
 - (void)save
 {
     [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:kCurrentUserCacheKey value:[self serialize] expired:REMNeverExpired];

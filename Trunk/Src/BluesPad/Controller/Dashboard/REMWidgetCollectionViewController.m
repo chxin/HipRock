@@ -9,6 +9,8 @@
 #import "REMWidgetCollectionViewController.h"
 #import "REMWidgetMaxView.h"
 
+#import "REMMaxWidgetSegue.h"
+
 @interface REMWidgetCollectionViewController ()
 
 
@@ -73,11 +75,11 @@ static NSString *cellId=@"widgetcell";
     
     REMWidgetObject *widget=self.widgetArray[indexPath.row];
     
-    
+    cell.controller=self;
     
     [cell initWidgetCell:widget withGroupName:self.groupName];
-    UITapGestureRecognizer *tap= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onWidgetTap:)];
-    [cell addGestureRecognizer:tap];
+    //UITapGestureRecognizer *tap= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onWidgetTap:)];
+    //[cell addGestureRecognizer:tap];
     
     
     
@@ -90,6 +92,19 @@ static NSString *cellId=@"widgetcell";
         REMWidgetMaxView* maxView = [[REMWidgetMaxView alloc]initWithSuperView:self.view widgetCell:cell];
         
         [maxView show:YES];
+    }
+}
+
+- (void)maxWidget:(REMDashboardCollectionCellView *)cell{
+    self.readyToMaxCell=cell;
+    [self.buildingController performSegueWithIdentifier:@"maxWidgetSegue" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue isKindOfClass:[REMMaxWidgetSegue class]]==YES){
+        REMMaxWidgetSegue *s = (REMMaxWidgetSegue *)segue;
+        s.origSmallCell=self.readyToMaxCell.imageButton;
+        
     }
 }
 
