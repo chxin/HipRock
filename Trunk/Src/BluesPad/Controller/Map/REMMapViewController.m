@@ -21,6 +21,7 @@
 #import "REMCommonHeaders.h"
 #import "REMStoryboardDefinitions.h"
 #import "REMDimensions.h"
+#import "REMMarkerBubbleView.h"
 
 @interface REMMapViewController ()
 
@@ -263,6 +264,15 @@ static BOOL isInitialPresenting = YES;
     self.selectedBuilding = marker.userData;
     [self presentBuildingView];
 }
+
+
+//-(UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker
+//{
+//    REMMarkerBubbleView *bubble = [[REMMarkerBubbleView alloc] initWithMarker:marker];
+//    
+//    return bubble;
+//}
+
 
 
 @end

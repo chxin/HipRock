@@ -330,6 +330,11 @@
 		7A5E2D95177B41B0000F77F9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8D177B41B0000F77F9 /* InfoPlist.strings */; };
 		7A634BBC180E80140076C84D /* REMSplashMapSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A634BBB180E80140076C84D /* REMSplashMapSegue.m */; };
 		7A66A28C1817794F000A6AB8 /* LoginBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A66A28B1817794F000A6AB8 /* LoginBusiness.m */; };
+		7A6A14F1181E52F4007D06B8 /* REMMarkerBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6A14F0181E52F4007D06B8 /* REMMarkerBubbleView.m */; };
+		7A6A14F6181E583F007D06B8 /* MarkerBubble_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6A14F2181E583F007D06B8 /* MarkerBubble_Pressed.png */; };
+		7A6A14F7181E583F007D06B8 /* MarkerBubble_Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6A14F3181E583F007D06B8 /* MarkerBubble_Pressed@2x.png */; };
+		7A6A14F8181E583F007D06B8 /* MarkerBubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6A14F4181E583F007D06B8 /* MarkerBubble.png */; };
+		7A6A14F9181E583F007D06B8 /* MarkerBubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6A14F5181E583F007D06B8 /* MarkerBubble@2x.png */; };
 		7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */; };
 		7A7EA6E1180548CB00A3BB56 /* REMNetworkStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */; };
 		7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */; };
@@ -830,6 +835,12 @@
 		7A634BBB180E80140076C84D /* REMSplashMapSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSplashMapSegue.m; path = Resource/Segue/REMSplashMapSegue.m; sourceTree = "<group>"; };
 		7A66A28A1817794F000A6AB8 /* LoginBusiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginBusiness.h; sourceTree = "<group>"; };
 		7A66A28B1817794F000A6AB8 /* LoginBusiness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginBusiness.m; sourceTree = "<group>"; };
+		7A6A14EF181E52F4007D06B8 /* REMMarkerBubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMMarkerBubbleView.h; sourceTree = "<group>"; };
+		7A6A14F0181E52F4007D06B8 /* REMMarkerBubbleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMMarkerBubbleView.m; sourceTree = "<group>"; };
+		7A6A14F2181E583F007D06B8 /* MarkerBubble_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MarkerBubble_Pressed.png; sourceTree = "<group>"; };
+		7A6A14F3181E583F007D06B8 /* MarkerBubble_Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MarkerBubble_Pressed@2x.png"; sourceTree = "<group>"; };
+		7A6A14F4181E583F007D06B8 /* MarkerBubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MarkerBubble.png; sourceTree = "<group>"; };
+		7A6A14F5181E583F007D06B8 /* MarkerBubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MarkerBubble@2x.png"; sourceTree = "<group>"; };
 		7A6CB4EA18165AE1007515FB /* REMLocalizeKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMLocalizeKeys.h; path = Resource/Definitions/REMLocalizeKeys.h; sourceTree = "<group>"; };
 		7A6E6D0B17A65CE500FBB264 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
@@ -1666,6 +1677,10 @@
 		7A5315FC17F817370022491F /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				7A6A14F2181E583F007D06B8 /* MarkerBubble_Pressed.png */,
+				7A6A14F3181E583F007D06B8 /* MarkerBubble_Pressed@2x.png */,
+				7A6A14F4181E583F007D06B8 /* MarkerBubble.png */,
+				7A6A14F5181E583F007D06B8 /* MarkerBubble@2x.png */,
 				7AD9D738181A626400D9E8EC /* CommonPin_Focus.png */,
 				7AD9D739181A626400D9E8EC /* CommonPin_Focus@2x.png */,
 				7AD9D73A181A626400D9E8EC /* CommonPin_Normal.png */,
@@ -2032,6 +2047,8 @@
 				7AA8837E17F92286004D50BC /* REMGallaryCell.m */,
 				7AA8837F17F92286004D50BC /* REMGallaryView.h */,
 				7AA8838017F92286004D50BC /* REMGallaryView.m */,
+				7A6A14EF181E52F4007D06B8 /* REMMarkerBubbleView.h */,
+				7A6A14F0181E52F4007D06B8 /* REMMarkerBubbleView.m */,
 			);
 			name = Map;
 			path = View/Map;
@@ -2650,6 +2667,7 @@
 				7ACFCC1417CDA62E00811976 /* SlidePageBackground@2x.png in Resources */,
 				B4EDFB1218064F2900873FA1 /* Share_normal@2x.png in Resources */,
 				B404428518175EF700A499FB /* Down@2x.png in Resources */,
+				7A6A14F7181E583F007D06B8 /* MarkerBubble_Pressed@2x.png in Resources */,
 				7A5AC7731817C4BD006C7CB1 /* EMOP_App_6.png in Resources */,
 				7ACFCC1A17CDA62E00811976 /* SplashScreenLogo-Common.png in Resources */,
 				B404428218175EF700A499FB /* Back.png in Resources */,
@@ -2672,6 +2690,7 @@
 				7A48B48317CDF0FD002DA386 /* SplashScreenLogo-Flash.png in Resources */,
 				7A48B48417CDF0FD002DA386 /* SplashScreenLogo-Flash@2x.png in Resources */,
 				7A48B48F17CDFA38002DA386 /* Propaganda_1.jpg in Resources */,
+				7A6A14F8181E583F007D06B8 /* MarkerBubble.png in Resources */,
 				7A48B49017CDFA38002DA386 /* Propaganda_1@2x.jpg in Resources */,
 				7A48B49117CDFA38002DA386 /* Propaganda_2.jpg in Resources */,
 				7A48B49217CDFA38002DA386 /* Propaganda_2@2x.jpg in Resources */,
@@ -2697,6 +2716,7 @@
 				B45F8A6017D5B0340079C74D /* Water_normal.png in Resources */,
 				7A13C19B17F40D31007E6AA9 /* GoogleMaps.bundle in Resources */,
 				B45F8A6117D5B0340079C74D /* Electricity_pressed.png in Resources */,
+				7A6A14F9181E583F007D06B8 /* MarkerBubble@2x.png in Resources */,
 				B45F8A6217D5B0340079C74D /* Electricity_normal.png in Resources */,
 				B45F8A6F17D5B04B0079C74D /* Coal_normal@2x.png in Resources */,
 				7A5AC7751817C4BD006C7CB1 /* EMOP_APP_7.png in Resources */,
@@ -2705,6 +2725,7 @@
 				7AD9D751181A626400D9E8EC /* QualifiedPin_Focus@2x.png in Resources */,
 				7AD9D753181A626400D9E8EC /* QualifiedPin_Normal@2x.png in Resources */,
 				7AD9D74A181A626400D9E8EC /* CommonPin_Normal.png in Resources */,
+				7A6A14F6181E583F007D06B8 /* MarkerBubble_Pressed.png in Resources */,
 				B4AB0B3A1807F9CD0053108B /* mail.jpg in Resources */,
 				B45F8A7217D5B04B0079C74D /* Electricity_pressed@2x.png in Resources */,
 				B45F8A7317D5B04B0079C74D /* NaturalGas_normal@2x.png in Resources */,
@@ -2801,6 +2822,7 @@
 				B445AEAC177BEEB8002D2A59 /* DispatchQueueLogFormatter.m in Sources */,
 				B445AEB2177BFAE8002D2A59 /* REMLog.m in Sources */,
 				7A399E96177D238F00F0EB9F /* AFHTTPClient.m in Sources */,
+				7A6A14F1181E52F4007D06B8 /* REMMarkerBubbleView.m in Sources */,
 				7A399E97177D238F00F0EB9F /* AFHTTPRequestOperation.m in Sources */,
 				7A399E98177D238F00F0EB9F /* AFImageRequestOperation.m in Sources */,
 				7A399E99177D238F00F0EB9F /* AFJSONRequestOperation.m in Sources */,
