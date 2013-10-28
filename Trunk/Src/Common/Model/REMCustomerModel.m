@@ -62,4 +62,21 @@ static NSString *kCurrentCustomerCacheKey = @"CurrentCustomer";
     return [[REMCustomerModel alloc] initWithDictionary:dictionary];
 }
 
+-(void)updateInnerDictionary
+{
+    [self.innerDictionary setValue:self.customerId forKey:@"Id"];
+    [self.innerDictionary setValue:self.name forKey:@"Name"];
+    [self.innerDictionary setValue:self.code forKey:@"Code"];
+    [self.innerDictionary setValue:self.address forKey:@"Address"];
+    [self.innerDictionary setValue:self.email forKey:@"Email"];
+    [self.innerDictionary setValue:self.manager forKey:@"Manager"];
+    [self.innerDictionary setValue:self.telephone forKey:@"Telephone"];
+    [self.innerDictionary setValue:self.comment forKey:@"Comment"];
+    [self.innerDictionary setValue:self.timezoneId forKey:@"TimezoneId"];
+    [self.innerDictionary setValue:self.logoId forKey:@"logoId"];
+    [self.innerDictionary setValue:[REMTimeHelper jsonStringFromDate:self.startTime] forKey:@"StartTime"];
+    [self.innerDictionary setValue:self.administratorArray forKey:@"Administrators"];
+}
+
+
 @end
