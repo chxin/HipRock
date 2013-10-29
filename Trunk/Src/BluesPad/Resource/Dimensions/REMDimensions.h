@@ -25,7 +25,7 @@
 #pragma mark Common dimensions
 //prefix: kDMCommon_
 
-#define kDMCommon_TopLeftButtonLeft 20
+#define kDMCommon_TopLeftButtonLeft 25
 #define kDMCommon_TopLeftButtonTop 23
 #define kDMCommon_TopLeftButtonWidth 32
 #define kDMCommon_TopLeftButtonHeight 32

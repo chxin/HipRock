@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
+#import "REMMapViewController.h"
 
-@interface REMMarkerBubbleView : UIControl
+@interface REMMarkerBubbleView : UIView
+
+@property (nonatomic,weak) REMMapViewController *controller;
+@property (nonatomic,weak) GMSMarker *marker;
 
 - (id)initWithMarker:(GMSMarker *)marker;
 - (void)highlight;

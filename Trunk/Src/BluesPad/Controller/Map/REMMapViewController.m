@@ -83,13 +83,6 @@ static BOOL isInitialPresenting = YES;
         
         REMBuildingModel *building = buildingInfo.building;
         
-        UIColor *markerColor = [UIColor orangeColor];
-        if(buildingInfo.isQualified != nil && [buildingInfo.isQualified isEqual:[NSNull null]] == NO){
-            if([buildingInfo.isQualified intValue] == 1)
-                markerColor = [UIColor greenColor];
-            else
-                markerColor = [UIColor redColor];
-        }
         
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.position = CLLocationCoordinate2DMake(building.latitude, building.longitude);
@@ -97,7 +90,17 @@ static BOOL isInitialPresenting = YES;
         marker.title = building.name;
         marker.snippet = building.code;
         marker.map = mapView;
-        marker.icon = [GMSMarker markerImageWithColor:markerColor];
+        marker.flat = NO;
+        marker.zIndex = [building.buildingId integerValue];
+        
+        UIImage *markerIcon = [UIImage imageNamed:@"CommonPin_Normal.png"];
+        if(buildingInfo.isQualified != nil && [buildingInfo.isQualified isEqual:[NSNull null]] == NO){
+            if([buildingInfo.isQualified intValue] == 1)
+                markerIcon = [UIImage imageNamed:@"QualifiedPin_Normal.png"];
+            else
+                markerIcon = [UIImage imageNamed:@"UnqualifiedPin_Normal.png"];
+        }
+        marker.icon = markerIcon;
     }
 }
 
@@ -117,25 +120,34 @@ static BOOL isInitialPresenting = YES;
     [mapView setCamera:camera];
     mapView.myLocationEnabled = NO;
     mapView.delegate = self;
+    mapView.settings.consumesGesturesInView = NO;
+    mapView.settings.rotateGestures = NO;
     
-    GMSCameraUpdate *update = [self getCameraUpdate];
-    
-    [mapView moveCamera:update];
+    [self updateCamera];
 }
 
--(GMSCameraUpdate *)getCameraUpdate
+-(void)updateCamera
 {
-    // one building, return the building's location
+    // one building, set the building's location
     if(self.buildingInfoArray.count == 1){
         REMBuildingModel *building = [self.buildingInfoArray[0] building];
-        CLLocationCoordinate2D target = CLLocationCoordinate2DMake(building.latitude, building.longitude);
         
-        return [GMSCameraUpdate setTarget:target zoom:12];
+        [mapView setCamera:[GMSCameraPosition cameraWithLatitude:building.latitude longitude:building.longitude zoom:12]];
     }
-    
-    // multiple buildings, return the rect
-    GMSCameraUpdate *update = nil;
-    
+    else{// multiple buildings, set the rect
+        //northEast and southWest
+        UIEdgeInsets visiableBounds = [self getVisiableBounds];
+        GMSCoordinateBounds *bounds = [self coordinateBoundsFromEdgeInsets:visiableBounds];
+        
+        GMSCameraPosition *camera = [mapView cameraForBounds:bounds insets:kDMMap_MapEdgeInsets];
+        
+        [mapView setCamera:camera];
+    }
+}
+
+-(UIEdgeInsets)getVisiableBounds
+{
+    //get the max long,lant and min long,lant
     double maxLongtitude = INT64_MIN, minLongtitude=INT64_MAX, maxLatitude=INT64_MIN, minLatitude=INT64_MAX;
     for(REMBuildingOverallModel *buildingInfo in self.buildingInfoArray){
         if(buildingInfo == nil || buildingInfo.building== nil)
@@ -149,19 +161,17 @@ static BOOL isInitialPresenting = YES;
         minLatitude = MIN(minLatitude,  building.latitude);
     }
     
-    if(maxLongtitude != INT64_MIN && minLongtitude!=INT64_MAX && maxLatitude!=INT64_MIN && minLatitude!=INT64_MAX){
-        //northEast and southWest
-        CLLocationCoordinate2D northEast = CLLocationCoordinate2DMake(maxLatitude,maxLongtitude);
-        CLLocationCoordinate2D southWest = CLLocationCoordinate2DMake(minLatitude, minLongtitude);
-        
-        GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:northEast coordinate:southWest];
-        
-        GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds withPadding:50.0f];
-        
-        [mapView moveCamera:update];
-    }
+    BOOL good = maxLongtitude != INT64_MIN && minLongtitude!=INT64_MAX && maxLatitude!=INT64_MIN && minLatitude!=INT64_MAX;
     
-    return update;
+    return good ? UIEdgeInsetsMake(maxLatitude, minLongtitude, minLatitude, maxLongtitude) : UIEdgeInsetsZero;
+}
+
+-(GMSCoordinateBounds *)coordinateBoundsFromEdgeInsets:(UIEdgeInsets)insets
+{
+    CLLocationCoordinate2D northEast = CLLocationCoordinate2DMake(insets.top,insets.right);
+    CLLocationCoordinate2D southWest = CLLocationCoordinate2DMake(insets.bottom, insets.left);
+    
+    return [[GMSCoordinateBounds alloc] initWithCoordinate:northEast coordinate:southWest];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -173,6 +183,8 @@ static BOOL isInitialPresenting = YES;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
+    [mapView stopRendering];
+    [mapView clear];
     mapView = nil;
 }
 
@@ -257,22 +269,28 @@ static BOOL isInitialPresenting = YES;
     return YES;
 }
 
-- (void)mapView:(GMSMapView *)view didTapInfoWindowOfMarker:(GMSMarker *)marker
-{
-    self.initialZoomRect = [self getZoomFrameFromMarker:marker];
-
-    self.selectedBuilding = marker.userData;
-    [self presentBuildingView];
-}
-
-
-//-(UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker
+//- (void)mapView:(GMSMapView *)view didTapInfoWindowOfMarker:(GMSMarker *)marker
 //{
-//    REMMarkerBubbleView *bubble = [[REMMarkerBubbleView alloc] initWithMarker:marker];
-//    
-//    return bubble;
+//    self.initialZoomRect = [self getZoomFrameFromMarker:marker];
+//
+//    self.selectedBuilding = marker.userData;
+//    [self presentBuildingView];
 //}
 
 
+-(UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker
+{
+    REMMarkerBubbleView *bubble = [[REMMarkerBubbleView alloc] initWithMarker:marker];
+    
+    return bubble;
+}
+
+-(void)bubbleTapped:(REMMarkerBubbleView *)bubble
+{
+    self.initialZoomRect = [self getZoomFrameFromMarker:bubble.marker];
+
+    self.selectedBuilding = bubble.marker.userData;
+    [self presentBuildingView];
+}
 
 @end

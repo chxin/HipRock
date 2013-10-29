@@ -9,13 +9,11 @@
 #ifndef Blues_REMDimensionForMap_h
 #define Blues_REMDimensionForMap_h
 
+#import "REMDimensions.h"
+
 //prefix: kDMMap, kDMGallary
-
-
-#define kDMMap_SwitchButtonTop 23
-#define kDMMap_SwitchButtonLeft 25
-#define kDMMap_SwitchButtonWidth 32
-#define kDMMap_SwitchButtonHeight 32
+#define kDMMap_MapEdgeInsetsLeft 80.0f
+#define kDMMap_MapEdgeInsets UIEdgeInsetsMake(kDMCommon_TitleGradientLayerHeight, kDMMap_MapEdgeInsetsLeft, kDMMap_MapEdgeInsetsLeft, kDMMap_MapEdgeInsetsLeft)
 
 
 

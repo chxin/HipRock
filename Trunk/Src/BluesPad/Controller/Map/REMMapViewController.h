@@ -13,6 +13,7 @@
 #import "REMBuildingModel.h"
 @class REMGallaryViewController;
 @class REMBuildingViewController;
+@class REMMarkerBubbleView;
 
 @interface REMMapViewController : REMControllerBase<GMSMapViewDelegate>
 
@@ -34,5 +35,6 @@
 -(void)presentBuildingView;
 
 -(CGRect)getCurrentZoomRect:(NSNumber *)currentBuildingId;
+-(void)bubbleTapped:(REMMarkerBubbleView *)bubble;
 
 @end
