@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "REMGallaryViewController.h"
+#import "REMGalleryViewController.h"
 #import "REMMapViewController.h"
 
 @interface REMBuildingEntranceSegue : UIStoryboardSegue

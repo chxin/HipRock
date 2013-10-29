@@ -79,7 +79,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Gallery.png"/>
                                 <connections>
-                                    <action selector="gallarySwitchButtonPressed:" destination="8sm-Rk-4h3" eventType="touchDown" id="aFD-lL-z10"/>
+                                    <action selector="gallerySwitchButtonPressed:" destination="8sm-Rk-4h3" eventType="touchUpInside" id="Icv-lx-9SH"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -89,7 +89,7 @@
                     <navigationItem key="navigationItem" id="nIx-Ku-1Tf"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <outlet property="gallarySwitchButton" destination="hSF-rh-OLl" id="S3h-uT-hX3"/>
+                        <outlet property="gallerySwitchButton" destination="hSF-rh-OLl" id="Epc-q2-X9d"/>
                         <segue destination="jAV-Kb-caH" kind="custom" identifier="mapToBuildingSegue" customClass="REMBuildingEntranceSegue" id="RbE-hG-htp"/>
                         <segue destination="RQY-MK-YUM" kind="custom" identifier="mapToGallerySegue" customClass="REMMapGallerySegue" id="53Y-s3-omU"/>
                     </connections>

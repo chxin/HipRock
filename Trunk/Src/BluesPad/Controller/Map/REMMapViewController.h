@@ -11,13 +11,13 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "REMControllerBase.h"
 #import "REMBuildingModel.h"
-@class REMGallaryViewController;
+@class REMGalleryViewController;
 @class REMBuildingViewController;
 @class REMMarkerBubbleView;
 
 @interface REMMapViewController : REMControllerBase<GMSMapViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIButton *gallarySwitchButton;
+@property (weak, nonatomic) IBOutlet UIButton *gallerySwitchButton;
 
 @property (nonatomic,strong) NSArray *buildingInfoArray;
 @property (nonatomic,strong) REMSplashScreenController *splashScreenController;
@@ -29,7 +29,7 @@
 @property (nonatomic,strong) REMBuildingModel *selectedBuilding;
 
 
-- (IBAction)gallarySwitchButtonPressed:(id)sender;
+- (IBAction)gallerySwitchButtonPressed:(id)sender;
 -(void)setIsInitialPresenting:(BOOL)isInitial;
 
 -(void)presentBuildingView;

@@ -1,22 +1,22 @@
 //
-//  REMGallaryCell.m
+//  REMGalleryCollectionCell.m
 //  Blues
 //
 //  Created by 张 锋 on 9/30/13.
 //
 //
 
-#import "REMGallaryCell.h"
+#import "REMGalleryCollectionCell.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface REMGallaryCell()
+@interface REMGalleryCollectionCell()
 
 @property (nonatomic,weak) UIButton *button;
 @property (nonatomic,weak) UILabel *titleLabel;
 
 @end
 
-@implementation REMGallaryCell{
+@implementation REMGalleryCollectionCell{
     REMBuildingModel *_buildingModel;
     UIImage *_backgroundImage;
 }
@@ -111,12 +111,12 @@ static UIImageView *defaultImageView;
 -(void)tapped
 {
     NSLog(@"cell tapped: %@", [NSDate date]);
-    [self.controller gallaryCellTapped:self];
+    [self.controller galleryCellTapped:self];
 }
 
 -(void)pinchThis:(UIPinchGestureRecognizer *)pinch
 {
-    [self.controller gallaryCellPinched:self :pinch];
+    [self.controller galleryCellPinched:self :pinch];
 }
 
 @end

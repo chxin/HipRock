@@ -1,5 +1,5 @@
 //
-//  REMGallaryCell.h
+//  REMGalleryCollectionCell.h
 //  Blues
 //
 //  Created by 张 锋 on 9/30/13.
@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "REMBuildingModel.h"
-#import "REMGallaryViewController.h"
+#import "REMGalleryViewController.h"
 
-@interface REMGallaryCell : UICollectionViewCell
+@interface REMGalleryCollectionCell : UICollectionViewCell
 
-@property (nonatomic,weak) REMGallaryViewController *controller;
+@property (nonatomic,weak) REMGalleryViewController *controller;
 @property (nonatomic,weak, setter = setBuildingModel:, getter = getBuildingModel) REMBuildingModel *building;
 @property (nonatomic,strong, setter = setBackgroundImage:) UIImage *backgroundImage;
 

@@ -8,7 +8,7 @@
 
 #import "REMBuildingEntranceSegue.h"
 #import "REMMapViewController.h"
-#import "REMGallaryViewController.h"
+#import "REMGalleryViewController.h"
 #import "REMBuildingViewController.h"
 #import "REMDimensions.h"
 #import "REMCommonHeaders.h"

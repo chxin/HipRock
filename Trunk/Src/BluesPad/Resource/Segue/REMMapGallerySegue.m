@@ -8,7 +8,7 @@
 
 #import "REMMapGallerySegue.h"
 #import "REMMapViewController.h"
-#import "REMGallaryViewController.h"
+#import "REMGalleryViewController.h"
 
 @implementation REMMapGallerySegue
 

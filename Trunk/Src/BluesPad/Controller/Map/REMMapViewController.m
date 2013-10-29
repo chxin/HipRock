@@ -11,7 +11,7 @@
 #import "REMBuildingModel.h"
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingViewController.h"
-#import "REMGallaryViewController.h"
+#import "REMGalleryViewController.h"
 #import "REMBuildingEntranceSegue.h"
 #import "REMBuildingViewController.h"
 
@@ -58,12 +58,12 @@ static BOOL isInitialPresenting = YES;
     
     [self showMarkers];
     
-    self.gallarySwitchButton.frame = kDMCommon_TopLeftButtonFrame;
+    self.gallerySwitchButton.frame = kDMCommon_TopLeftButtonFrame;
     [self.view addSubview:self.customerLogoButton];
     [self.view.layer insertSublayer:self.titleGradientLayer above:mapView.layer];
     
     if(self.buildingInfoArray.count <= 0){
-        [self.gallarySwitchButton setEnabled:NO];
+        [self.gallerySwitchButton setEnabled:NO];
     }
     
 }
@@ -188,9 +188,9 @@ static BOOL isInitialPresenting = YES;
     mapView = nil;
 }
 
-- (IBAction)gallarySwitchButtonPressed:(id)sender
+- (IBAction)gallerySwitchButtonPressed:(id)sender
 {
-    [self presentGallaryView];
+    [self presentGalleryView];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -217,10 +217,10 @@ static BOOL isInitialPresenting = YES;
     }
     
     if([segue.identifier isEqualToString:kSegue_MapToGallery] == YES){
-        REMGallaryViewController *gallaryViewController = segue.destinationViewController;
+        REMGalleryViewController *galleryViewController = segue.destinationViewController;
         
-        gallaryViewController.mapViewController = self;
-        gallaryViewController.buildingInfoArray = self.buildingInfoArray;
+        galleryViewController.mapViewController = self;
+        galleryViewController.buildingInfoArray = self.buildingInfoArray;
     }
 }
 
@@ -233,7 +233,7 @@ static BOOL isInitialPresenting = YES;
         isInitialPresenting = NO;
 }
 
--(void)presentGallaryView
+-(void)presentGalleryView
 {
     [self performSegueWithIdentifier:kSegue_MapToGallery sender:self];
 }

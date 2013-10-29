@@ -1,5 +1,5 @@
 //
-//  REMGallaryViewController.h
+//  REMGalleryViewController.h
 //  Blues
 //
 //  Created by 张 锋 on 9/30/13.
@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "REMGallaryView.h"
+#import "REMGalleryCollectionView.h"
 #import "REMMapViewController.h"
-@class REMGallaryCell;
+@class REMGalleryCollectionCell;
 
-@interface REMGallaryViewController : UICollectionViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
+@interface REMGalleryViewController : UICollectionViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
 
 @property (nonatomic,strong) NSArray *buildingInfoArray;
 @property (nonatomic,weak) REMMapViewController *mapViewController;
@@ -22,7 +22,7 @@
 
 @property (nonatomic,strong) REMBuildingModel *selectedBuilding;
 
-- (void)gallaryCellTapped:(REMGallaryCell *)cell;
--(void)gallaryCellPinched:(REMGallaryCell *)cell :(UIPinchGestureRecognizer *)pinch;
+- (void)galleryCellTapped:(REMGalleryCollectionCell *)cell;
+-(void)galleryCellPinched:(REMGalleryCollectionCell *)cell :(UIPinchGestureRecognizer *)pinch;
 
 @end

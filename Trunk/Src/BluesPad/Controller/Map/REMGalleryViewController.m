@@ -1,15 +1,15 @@
 //
-//  REMGallaryViewController.m
+//  REMGalleryViewController.m
 //  Blues
 //
 //  Created by 张 锋 on 9/30/13.
 //
 //
 
-#import "REMGallaryViewController.h"
-#import "REMGallaryView.h"
+#import "REMGalleryViewController.h"
+#import "REMGalleryCollectionView.h"
 #import "REMMapViewController.h"
-#import "REMGallaryCell.h"
+#import "REMGalleryCollectionCell.h"
 #import "REMCommonHeaders.h"
 #import "REMDimensions.h"
 #import "REMStoryboardDefinitions.h"
@@ -19,17 +19,17 @@
 #import "REMBuildingViewController.h"
 #import "REMMapGallerySegue.h"
 
-#define kGallaryBuildingImageGroupName @"GALLARY"
+#define kGalleryBuildingImageGroupName @"GALLERY"
 
-@interface REMGallaryViewController ()
+@interface REMGalleryViewController ()
 
 @property (nonatomic) BOOL isPinching;
 
 @end
 
 
-@implementation REMGallaryViewController{
-    REMGallaryView *gallaryView;
+@implementation REMGalleryViewController{
+    REMGalleryCollectionView *galleryView;
 }
 
 - (void)loadView
@@ -37,19 +37,19 @@
     //[super loadView];
     //initialize UICollectionView
     
-    if(gallaryView == nil){
+    if(galleryView == nil){
         UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
         [layout setSectionInset:UIEdgeInsetsMake(109, 25, 0, 25)];
         
         //CGRect viewFrame = self.mapViewController.view == nil?CGRectZero:self.mapViewController.view.bounds;
         
-        gallaryView = [[REMGallaryView alloc] initWithFrame:self.mapViewController.view.frame collectionViewLayout:layout];
-        gallaryView.dataSource = self;
-        gallaryView.delegate = self;
-        [gallaryView registerClass:[REMGallaryCell class] forCellWithReuseIdentifier:kCellIdentifier_GallaryCell];
-        [gallaryView setBackgroundColor:[UIColor blackColor]];
+        galleryView = [[REMGalleryCollectionView alloc] initWithFrame:self.mapViewController.view.frame collectionViewLayout:layout];
+        galleryView.dataSource = self;
+        galleryView.delegate = self;
+        [galleryView registerClass:[REMGalleryCollectionCell class] forCellWithReuseIdentifier:kCellIdentifier_GalleryCell];
+        [galleryView setBackgroundColor:[UIColor blackColor]];
         
-        self.view = gallaryView;
+        self.view = galleryView;
     }
     
     [self viewDidLoad];
@@ -107,7 +107,7 @@
         customSegue.currentBuilding = self.selectedBuilding == nil?[self.buildingInfoArray[0] building]:self.selectedBuilding;
         
         if(self.selectedBuilding == nil){
-            UICollectionViewCell *cell = [gallaryView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+            UICollectionViewCell *cell = [galleryView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
             self.initialZoomRect = cell.frame;
         }
         
@@ -121,7 +121,7 @@
     }
 }
 
-- (void)gallaryCellTapped:(REMGallaryCell *)cell
+- (void)galleryCellTapped:(REMGalleryCollectionCell *)cell
 {
     [self.view setUserInteractionEnabled:NO];
     
@@ -133,7 +133,7 @@
 }
 
 
--(void)gallaryCellPinched:(REMGallaryCell *)cell :(UIPinchGestureRecognizer *)pinch
+-(void)galleryCellPinched:(REMGalleryCollectionCell *)cell :(UIPinchGestureRecognizer *)pinch
 {
     if(pinch.state  == UIGestureRecognizerStateBegan){
         UIImageView *snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:cell]];
@@ -211,7 +211,7 @@
         else{
             NSDictionary *parameter = @{@"pictureId":imageIds[0], @"isSmall":@"true"};
             REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingPicture parameter:parameter];
-            store.groupName = kGallaryBuildingImageGroupName;
+            store.groupName = kGalleryBuildingImageGroupName;
             [REMDataAccessor access:store success:^(id data) {
                 if(data == nil || [data length] <= 2)
                     return;
@@ -231,7 +231,7 @@
 
 -(CGRect)getCurrentZoomRect:(NSNumber *)currentBuildingId
 {
-    for (REMGallaryCell *cell in gallaryView.visibleCells){
+    for (REMGalleryCollectionCell *cell in galleryView.visibleCells){
         //NSLog(@"%@",NSStringFromCGRect(cell.frame));
         
         if(cell.building.buildingId == currentBuildingId)
@@ -252,7 +252,7 @@
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    REMGallaryCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier_GallaryCell forIndexPath:indexPath];
+    REMGalleryCollectionCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier_GalleryCell forIndexPath:indexPath];
     
     REMBuildingModel *building = ((REMBuildingOverallModel *)self.buildingInfoArray[indexPath.row]).building;
     

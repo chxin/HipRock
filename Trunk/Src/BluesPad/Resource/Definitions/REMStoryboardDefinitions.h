@@ -39,6 +39,6 @@
 #pragma mark - cell identifiers
 //Prefix: kCellIdentifier_
 
-#define kCellIdentifier_GallaryCell @"gallaryCellIdentifier"
+#define kCellIdentifier_GalleryCell @"galleryCellIdentifier"
 
 #endif
