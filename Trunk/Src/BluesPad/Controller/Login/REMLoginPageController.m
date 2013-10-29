@@ -184,7 +184,7 @@
         }
     }
     
-    return nil;
+    return customers[0];
 }
 
 #pragma mark - uitextfield delegate
