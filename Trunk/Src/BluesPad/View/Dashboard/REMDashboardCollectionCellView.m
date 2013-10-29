@@ -125,8 +125,8 @@
             widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
         } else if (widgetType == REMDiagramTypeRanking) {
             widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
-//        } else if (widgetType == REMDiagramTypeStackColumn) {
-//            widgetWrapper = [[REMStackColumnWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
+        } else if (widgetType == REMDiagramTypeStackColumn) {
+            widgetWrapper = [[REMStackColumnWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
         }
         if (widgetWrapper != nil) {
             self.wrapper=widgetWrapper;

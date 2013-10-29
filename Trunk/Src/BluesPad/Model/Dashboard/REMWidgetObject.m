@@ -39,6 +39,10 @@
     {
         self.diagramType =REMDiagramTypeRanking;
     }
+    else if([self.contentSyntax.xtype isEqualToString:@"stackchartcomponent"]== YES)
+    {
+        self.diagramType =REMDiagramTypeStackColumn;
+    }
     
     NSDictionary *shareInfo = dictionary[@"SimpleShareInfo"];
     
