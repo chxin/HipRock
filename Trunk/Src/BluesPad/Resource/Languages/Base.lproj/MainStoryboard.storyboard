@@ -98,10 +98,10 @@
             </objects>
             <point key="canvasLocation" x="-2494" y="-1166"/>
         </scene>
-        <!--Gallary View Controller-->
+        <!--Gallery View Controller-->
         <scene sceneID="cCc-Oc-ASk">
             <objects>
-                <viewController id="RQY-MK-YUM" customClass="REMGallaryViewController" sceneMemberID="viewController">
+                <viewController id="RQY-MK-YUM" customClass="REMGalleryViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="R0i-uo-Utb"/>
                         <viewControllerLayoutGuide type="bottom" id="TUf-MX-kkJ"/>

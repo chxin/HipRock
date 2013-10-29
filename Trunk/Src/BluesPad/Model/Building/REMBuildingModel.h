@@ -12,7 +12,7 @@
 @interface REMBuildingModel : REMJSONObject
 
 @property (nonatomic,strong) NSNumber *buildingId, *parentId, *timezoneId, *customerId;
-@property (nonatomic,strong) NSString *name,*code,*comment, *path;
+@property (nonatomic,strong) NSString *name,*code,*comment, *path, *province;
 @property (nonatomic) NSInteger pathLevel;
 @property (nonatomic) BOOL hasDataPrivilege;
 @property (nonatomic,strong) NSArray *pictureIds;

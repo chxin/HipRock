@@ -7,22 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "REMGalleryCollectionView.h"
 #import "REMMapViewController.h"
-@class REMGalleryCollectionCell;
+#import "REMControllerBase.h"
 
-@interface REMGalleryViewController : UICollectionViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
+@interface REMGalleryViewController : REMControllerBase<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic,strong) NSArray *buildingInfoArray;
 @property (nonatomic,weak) REMMapViewController *mapViewController;
-@property (nonatomic,weak) REMSplashScreenController *splashScreenController;
-
-@property (nonatomic,strong) UIImageView *snapshot;
-@property (nonatomic) CGRect initialZoomRect;
-
-@property (nonatomic,strong) REMBuildingModel *selectedBuilding;
-
-- (void)galleryCellTapped:(REMGalleryCollectionCell *)cell;
--(void)galleryCellPinched:(REMGalleryCollectionCell *)cell :(UIPinchGestureRecognizer *)pinch;
 
 @end

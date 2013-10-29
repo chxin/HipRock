@@ -20,12 +20,16 @@
 
 #define kDMScreenWidth 1024
 #define kDMScreenHeight 768
+#define kDMStatusBarHeight 20
+#define kDMDefaultViewFrame CGRectMake(0,0,kDMScreenWidth,kDMScreenHeight-kDMStatusBarHeight)
 
 
 #pragma mark Common dimensions
 //prefix: kDMCommon_
 
-#define kDMCommon_TopLeftButtonLeft 25
+#define kDMCommon_ContentLeftMargin 25
+
+#define kDMCommon_TopLeftButtonLeft kDMCommon_ContentLeftMargin
 #define kDMCommon_TopLeftButtonTop 23
 #define kDMCommon_TopLeftButtonWidth 32
 #define kDMCommon_TopLeftButtonHeight 32

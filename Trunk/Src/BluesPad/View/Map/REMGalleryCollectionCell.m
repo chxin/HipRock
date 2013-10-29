@@ -21,12 +21,15 @@
     UIImage *_backgroundImage;
 }
 
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor whiteColor];
+        //self.layer.borderWidth = 1.0f;
+        //self.layer.borderColor = [UIColor greenColor].CGColor;
+        //self.backgroundColor = [UIColor whiteColor];
         
         //self.clipsToBounds = YES;
         
@@ -111,12 +114,12 @@ static UIImageView *defaultImageView;
 -(void)tapped
 {
     NSLog(@"cell tapped: %@", [NSDate date]);
-    [self.controller galleryCellTapped:self];
+    //[self.controller galleryCellTapped:self];
 }
 
 -(void)pinchThis:(UIPinchGestureRecognizer *)pinch
 {
-    [self.controller galleryCellPinched:self :pinch];
+    //[self.controller galleryCellPinched:self :pinch];
 }
 
 @end

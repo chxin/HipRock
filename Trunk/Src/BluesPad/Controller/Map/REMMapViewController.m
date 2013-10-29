@@ -41,7 +41,7 @@ static BOOL isInitialPresenting = YES;
 {
     [super loadView];
 
-    [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight)];
+    [self.view setFrame:kDMDefaultViewFrame];
     [self loadMapView];
     
     if(mapView != nil){

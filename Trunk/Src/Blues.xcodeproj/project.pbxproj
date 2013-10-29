@@ -337,8 +337,8 @@
 		7A6A14F9181E583F007D06B8 /* MarkerBubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6A14F5181E583F007D06B8 /* MarkerBubble@2x.png */; };
 		7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */; };
 		7A7EA6E1180548CB00A3BB56 /* REMNetworkStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */; };
-		7A7F7B15181F7DB000A3C5AB /* REMGalleryGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F7B14181F7DB000A3C5AB /* REMGalleryGroupView.m */; };
-		7A7F7B18181F7E3400A3C5AB /* REMGalleryGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F7B17181F7E3400A3C5AB /* REMGalleryGroupCell.m */; };
+		7A7F7B18181F7E3400A3C5AB /* REMGalleryGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F7B17181F7E3400A3C5AB /* REMGalleryGroupView.m */; };
+		7A7F7B1C181F85A100A3C5AB /* REMGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F7B1B181F85A100A3C5AB /* REMGalleryCollectionViewController.m */; };
 		7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */; };
 		7A9557C017C73AD200249CED /* REMBuildingAirQualityChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9557BF17C73AD200249CED /* REMBuildingAirQualityChart.m */; };
 		7A9B1E20177B3A8B00C282A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */; };
@@ -351,7 +351,6 @@
 		7A9B1E46177B3A8B00C282A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E21177B3A8B00C282A8 /* Foundation.framework */; };
 		7A9B1E6F177B3AFA00C282A8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A9B1E6D177B3AFA00C282A8 /* InfoPlist.strings */; };
 		7AA8838117F92286004D50BC /* REMGalleryCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA8837E17F92286004D50BC /* REMGalleryCollectionCell.m */; };
-		7AA8838217F92286004D50BC /* REMGalleryCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA8838017F92286004D50BC /* REMGalleryCollectionView.m */; };
 		7AB34E4C177D2975003E235E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4A177D2975003E235E /* MobileCoreServices.framework */; };
 		7AB34E4D177D2975003E235E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4B177D2975003E235E /* SystemConfiguration.framework */; };
 		7AB34E51177D2CE1003E235E /* REMServiceRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB34E50177D2CE1003E235E /* REMServiceRequestOperation.m */; };
@@ -849,10 +848,10 @@
 		7A6E6D0D17A65CE500FBB264 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		7A7EA6DF180548CB00A3BB56 /* REMNetworkStatusIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMNetworkStatusIndicator.h; path = Common/Communication/REMNetworkStatusIndicator.h; sourceTree = "<group>"; };
 		7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMNetworkStatusIndicator.m; path = Common/Communication/REMNetworkStatusIndicator.m; sourceTree = "<group>"; };
-		7A7F7B13181F7DB000A3C5AB /* REMGalleryGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMGalleryGroupView.h; sourceTree = "<group>"; };
-		7A7F7B14181F7DB000A3C5AB /* REMGalleryGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGalleryGroupView.m; sourceTree = "<group>"; };
-		7A7F7B16181F7E3400A3C5AB /* REMGalleryGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMGalleryGroupCell.h; sourceTree = "<group>"; };
-		7A7F7B17181F7E3400A3C5AB /* REMGalleryGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGalleryGroupCell.m; sourceTree = "<group>"; };
+		7A7F7B16181F7E3400A3C5AB /* REMGalleryGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMGalleryGroupView.h; sourceTree = "<group>"; };
+		7A7F7B17181F7E3400A3C5AB /* REMGalleryGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGalleryGroupView.m; sourceTree = "<group>"; };
+		7A7F7B1A181F85A100A3C5AB /* REMGalleryCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMGalleryCollectionViewController.h; path = Controller/Map/REMGalleryCollectionViewController.h; sourceTree = "<group>"; };
+		7A7F7B1B181F85A100A3C5AB /* REMGalleryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMGalleryCollectionViewController.m; path = Controller/Map/REMGalleryCollectionViewController.m; sourceTree = "<group>"; };
 		7A9557BB17C7374700249CED /* REMAirQualityDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAirQualityDataModel.h; sourceTree = "<group>"; };
 		7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAirQualityDataModel.m; sourceTree = "<group>"; };
 		7A9557BE17C73AD200249CED /* REMBuildingAirQualityChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAirQualityChart.h; sourceTree = "<group>"; };
@@ -880,8 +879,6 @@
 		7A9B1EB7177B3B9300C282A8 /* BluesPhoneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BluesPhoneTests.m; path = ../test/BluesPhoneTests/BluesPhoneTests.m; sourceTree = "<group>"; };
 		7AA8837D17F92286004D50BC /* REMGalleryCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMGalleryCollectionCell.h; sourceTree = "<group>"; };
 		7AA8837E17F92286004D50BC /* REMGalleryCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGalleryCollectionCell.m; sourceTree = "<group>"; };
-		7AA8837F17F92286004D50BC /* REMGalleryCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMGalleryCollectionView.h; sourceTree = "<group>"; };
-		7AA8838017F92286004D50BC /* REMGalleryCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGalleryCollectionView.m; sourceTree = "<group>"; };
 		7AB34E46177D2828003E235E /* CommonTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CommonTests-Prefix.pch"; path = "../test/CommonTests/CommonTests-Prefix.pch"; sourceTree = "<group>"; };
 		7AB34E4A177D2975003E235E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		7AB34E4B177D2975003E235E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
@@ -1593,6 +1590,8 @@
 				7A2E7EC017F2DCB3000EB506 /* REMMapViewController.m */,
 				7A25725517F911AD0007438F /* REMGalleryViewController.h */,
 				7A25725617F911AD0007438F /* REMGalleryViewController.m */,
+				7A7F7B1A181F85A100A3C5AB /* REMGalleryCollectionViewController.h */,
+				7A7F7B1B181F85A100A3C5AB /* REMGalleryCollectionViewController.m */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -2049,14 +2048,10 @@
 		7AA8837C17F92286004D50BC /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				7A7F7B13181F7DB000A3C5AB /* REMGalleryGroupView.h */,
-				7A7F7B14181F7DB000A3C5AB /* REMGalleryGroupView.m */,
-				7A7F7B16181F7E3400A3C5AB /* REMGalleryGroupCell.h */,
-				7A7F7B17181F7E3400A3C5AB /* REMGalleryGroupCell.m */,
+				7A7F7B16181F7E3400A3C5AB /* REMGalleryGroupView.h */,
+				7A7F7B17181F7E3400A3C5AB /* REMGalleryGroupView.m */,
 				7AA8837D17F92286004D50BC /* REMGalleryCollectionCell.h */,
 				7AA8837E17F92286004D50BC /* REMGalleryCollectionCell.m */,
-				7AA8837F17F92286004D50BC /* REMGalleryCollectionView.h */,
-				7AA8838017F92286004D50BC /* REMGalleryCollectionView.m */,
 				7A6A14EF181E52F4007D06B8 /* REMMarkerBubbleView.h */,
 				7A6A14F0181E52F4007D06B8 /* REMMarkerBubbleView.m */,
 			);
@@ -2898,7 +2893,6 @@
 				7A5AC7821817CC34006C7CB1 /* REMMapGallerySegue.m in Sources */,
 				EFDAACC818054EBA008BC9AF /* REMPieChartSeries.m in Sources */,
 				7A13C19517F40809007E6AA9 /* REMMainNavigationController.m in Sources */,
-				7AA8838217F92286004D50BC /* REMGalleryCollectionView.m in Sources */,
 				EF8A47FC17F959B5009B5C33 /* REMTrendChartDataProcessor.m in Sources */,
 				7A153CA417AA497C00413D3C /* REMLoginCarouselController.m in Sources */,
 				7A153CA717AA497C00413D3C /* REMLoginPageController.m in Sources */,
@@ -2963,6 +2957,7 @@
 				7A0288FA17C20CC500709111 /* PathHelper.m in Sources */,
 				7A0288FB17C20CC500709111 /* Resources.m in Sources */,
 				B41249F01803ECF0009022C5 /* REMCustomerSwitchHelper.m in Sources */,
+				7A7F7B1C181F85A100A3C5AB /* REMGalleryCollectionViewController.m in Sources */,
 				7A0288FC17C20CC500709111 /* URLRequestHelper.m in Sources */,
 				B46C8EBA17F27C25006DC4CB /* REMDashboardView.m in Sources */,
 				7A0288FD17C20CC500709111 /* WeiboDialogClosePNG.m in Sources */,
@@ -2983,7 +2978,7 @@
 				EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */,
 				7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */,
 				7AF3667817CF2D7400447650 /* REMChartSeriesIndicator.m in Sources */,
-				7A7F7B18181F7E3400A3C5AB /* REMGalleryGroupCell.m in Sources */,
+				7A7F7B18181F7E3400A3C5AB /* REMGalleryGroupView.m in Sources */,
 				B493ADA917D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m in Sources */,
 				EFDEC2A5181768540008972E /* REMTrendChartRankingSeries.m in Sources */,
 				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,
@@ -2992,7 +2987,6 @@
 				EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */,
 				EF60822F17D818430093427C /* REMModalView.m in Sources */,
 				B46C8EC317F27CDF006DC4CB /* REMDashboardCollectionCellView.m in Sources */,
-				7A7F7B15181F7DB000A3C5AB /* REMGalleryGroupView.m in Sources */,
 				EF8A47FD17F959B5009B5C33 /* REMTrendChartColumnSeries.m in Sources */,
 				B46C8EC017F27CB9006DC4CB /* REMDashboardCollectionView.m in Sources */,
 				B4EDFB1B180697F300873FA1 /* REMControllerBase.m in Sources */,
