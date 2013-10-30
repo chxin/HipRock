@@ -14,21 +14,19 @@
 
 @interface REMGalleryCollectionViewController : UICollectionViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
 
+@property (nonatomic,strong) NSString *collectionKey;
 @property (nonatomic,strong) NSArray *buildingInfoArray;
-//@property (nonatomic,weak) REMMapViewController *mapViewController;
-//@property (nonatomic,weak) REMSplashScreenController *splashScreenController;
-//
-//@property (nonatomic,strong) UIImageView *snapshot;
-//@property (nonatomic) CGRect initialZoomRect;
-//
-//@property (nonatomic,strong) REMBuildingModel *selectedBuilding;
-//
-//- (void)galleryCellTapped:(REMGalleryCollectionCell *)cell;
-//-(void)galleryCellPinched:(REMGalleryCollectionCell *)cell :(UIPinchGestureRecognizer *)pinch;
+@property (nonatomic,weak) REMMapViewController *mapViewController;
+
+
+- (void)galleryCellTapped:(REMGalleryCollectionCell *)cell;
+-(void)galleryCellPinched:(REMGalleryCollectionCell *)cell :(UIPinchGestureRecognizer *)pinch;
 
 
 
--(id)initWithBuildingInfoArray:(NSArray *)buildingInfoArray;
+-(id)initWithKey:(NSString *)key andBuildingInfoArray:(NSArray *)buildingInfoArray;
+
+-(CGRect)cellFrameForBuilding:(NSNumber *)buildingId;
 
 @end
 

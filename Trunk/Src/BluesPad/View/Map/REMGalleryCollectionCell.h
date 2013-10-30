@@ -13,15 +13,12 @@
 @interface REMGalleryCollectionCell : UICollectionViewCell
 
 @property (nonatomic,weak) REMGalleryCollectionViewController *controller;
-@property (nonatomic,weak, setter = setBuildingModel:, getter = getBuildingModel) REMBuildingModel *building;
-@property (nonatomic,strong, setter = setBackgroundImage:) UIImage *backgroundImage;
+@property (nonatomic,weak) REMBuildingModel *building;
+
+@property (nonatomic,weak) UILabel *titleLabel;
 
 @property (nonatomic,weak) UIImageView *snapshot;
 @property (nonatomic,weak) UIView *blackCover;
 
--(void)setBuildingModel:(REMBuildingModel *)model;
--(REMBuildingModel *)getBuildingModel;
-
--(void)setBackgroundImage:(UIImage *)image;
 
 @end

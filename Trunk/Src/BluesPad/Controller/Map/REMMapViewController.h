@@ -11,30 +11,28 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "REMControllerBase.h"
 #import "REMBuildingModel.h"
+#import "REMBuildingOverallModel.h"
 @class REMGalleryViewController;
 @class REMBuildingViewController;
 @class REMMarkerBubbleView;
 
 @interface REMMapViewController : REMControllerBase<GMSMapViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIButton *gallerySwitchButton;
-
-@property (nonatomic,strong) NSArray *buildingInfoArray;
-@property (nonatomic,strong) REMSplashScreenController *splashScreenController;
-@property (nonatomic,strong) REMBuildingViewController *buildingViewController;
+@property (nonatomic,weak) NSArray *buildingInfoArray;
+@property (nonatomic,weak) REMBuildingViewController *buildingViewController;
 
 @property (nonatomic,strong) UIImageView *snapshot;
 @property (nonatomic) CGRect initialZoomRect;
 
-@property (nonatomic,strong) REMBuildingModel *selectedBuilding;
+@property (nonatomic) int currentBuildingIndex;
 
 
-- (IBAction)gallerySwitchButtonPressed:(id)sender;
 -(void)setIsInitialPresenting:(BOOL)isInitial;
 
 -(void)presentBuildingView;
 
--(CGRect)getCurrentZoomRect:(NSNumber *)currentBuildingId;
 -(void)bubbleTapped:(REMMarkerBubbleView *)bubble;
+
+-(CGRect)getDestinationZoomRect: (int)currentBuildingIndex;
 
 @end

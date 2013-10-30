@@ -21,19 +21,18 @@ typedef enum _BuildingSourceType{
 
 @interface REMBuildingViewController : REMControllerBase<UIGestureRecognizerDelegate>
 
-@property (nonatomic,strong) NSArray *buildingOverallArray;
-
-@property (nonatomic,strong) REMSplashScreenController *splashScreenController;
+@property (nonatomic,strong) NSArray *buildingInfoArray;
 
 @property (nonatomic) CGFloat currentScrollOffset;
 
 @property (nonatomic) BuildingSourceType buildingSourceType;
 
-@property (nonatomic,copy) NSNumber *currentBuildingId;
+@property (nonatomic) int currentBuildingIndex;
 
 @property (nonatomic,strong) UIImage *logoImage;
 
 @property (nonatomic,weak) UIViewController *fromController;
+
 
 - (void)switchToDashboard;
 

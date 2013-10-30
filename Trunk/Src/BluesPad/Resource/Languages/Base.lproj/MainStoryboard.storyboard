@@ -73,23 +73,12 @@
                     <view key="view" contentMode="scaleToFill" id="HzA-IB-YfW">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSF-rh-OLl">
-                                <rect key="frame" x="25" y="23" width="32" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Gallery.png"/>
-                                <connections>
-                                    <action selector="gallerySwitchButtonPressed:" destination="8sm-Rk-4h3" eventType="touchUpInside" id="Icv-lx-9SH"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="nIx-Ku-1Tf"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <outlet property="gallerySwitchButton" destination="hSF-rh-OLl" id="Epc-q2-X9d"/>
                         <segue destination="jAV-Kb-caH" kind="custom" identifier="mapToBuildingSegue" customClass="REMBuildingEntranceSegue" id="RbE-hG-htp"/>
                         <segue destination="RQY-MK-YUM" kind="custom" identifier="mapToGallerySegue" customClass="REMMapGallerySegue" id="53Y-s3-omU"/>
                     </connections>
@@ -475,14 +464,14 @@
         <scene sceneID="cWq-0w-6Ae">
             <objects>
                 <tableViewController autoresizesArchivedViewToFullSize="NO" id="CHr-fQ-ik4" customClass="REMLoginCustomerViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LRA-X0-FCk">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="LRA-X0-FCk">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loginCustomerCell" textLabel="ebq-25-up5" style="IBUITableViewCellStyleDefault" id="16D-3f-5O4">
-                                <rect key="frame" x="0.0" y="86" width="400" height="44"/>
+                                <rect key="frame" x="0.0" y="119" width="400" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="16D-3f-5O4" id="54Q-Zy-Bdo">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="43"/>
@@ -1073,7 +1062,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Gallery.png" width="32" height="32"/>
         <image name="SplashScreenBackgroud.jpg" width="1024" height="768"/>
         <image name="SplashScreenLogo-Common.png" width="269" height="100"/>
         <image name="SplashScreenLogo-Flash.png" width="269" height="100"/>
@@ -1084,6 +1072,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="RbE-hG-htp"/>
+        <segue reference="jmn-Ww-5Fz"/>
     </inferredMetricsTieBreakers>
 </document>

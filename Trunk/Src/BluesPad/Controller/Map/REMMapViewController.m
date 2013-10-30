@@ -56,22 +56,34 @@ static BOOL isInitialPresenting = YES;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self showMarkers];
+    [self addButtons];
     
-    self.gallerySwitchButton.frame = kDMCommon_TopLeftButtonFrame;
-    [self.view addSubview:self.customerLogoButton];
     [self.view.layer insertSublayer:self.titleGradientLayer above:mapView.layer];
     
+    [self showMarkers];
+}
+
+-(void)addButtons
+{
+    //add switch button
+    UIButton *switchButton = [[UIButton alloc]initWithFrame:kDMCommon_TopLeftButtonFrame];
+    [switchButton setBackgroundImage:[UIImage imageNamed:@"Gallery.png"] forState:UIControlStateNormal];
+    [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:switchButton];
+    
     if(self.buildingInfoArray.count <= 0){
-        [self.gallerySwitchButton setEnabled:NO];
+        [switchButton setEnabled:NO];
     }
     
+    //add customer logo button
+    [self.view addSubview:self.customerLogoButton];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     if(self.buildingInfoArray.count>0 && isInitialPresenting == YES){
-        [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
     }
 }
 
@@ -86,7 +98,7 @@ static BOOL isInitialPresenting = YES;
         
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.position = CLLocationCoordinate2DMake(building.latitude, building.longitude);
-        marker.userData = building;
+        marker.userData = buildingInfo;
         marker.title = building.name;
         marker.snippet = building.code;
         marker.map = mapView;
@@ -188,7 +200,7 @@ static BOOL isInitialPresenting = YES;
     mapView = nil;
 }
 
-- (IBAction)gallerySwitchButtonPressed:(id)sender
+- (void)switchButtonPressed
 {
     [self presentGalleryView];
 }
@@ -197,23 +209,16 @@ static BOOL isInitialPresenting = YES;
 {
     if([segue.identifier isEqualToString:kSegue_MapToBuilding] == YES)
     {
+        REMBuildingSegueZoomParamter segueParameter = REMBuildingSegueZoomParamterMake(isInitialPresenting, self.currentBuildingIndex, [self getDestinationZoomRect:self.currentBuildingIndex], self.view.frame);
+        
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
-        customSegue.isInitialPresenting = isInitialPresenting;
-        customSegue.initialZoomRect = self.initialZoomRect;
-        customSegue.finalZoomRect = self.view.frame;
-        customSegue.currentBuilding = self.selectedBuilding == nil?[self.buildingInfoArray[0] building]:self.selectedBuilding;
+        [customSegue prepareSegueWithParameter:segueParameter];
         
-        if(self.selectedBuilding == nil){
-            self.initialZoomRect = [self getCurrentZoomRect:nil];
-        }
-        
-        self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
         
         REMBuildingViewController *buildingViewController = customSegue.destinationViewController;
-        buildingViewController.splashScreenController = self.splashScreenController;
         buildingViewController.fromController = self;
-        buildingViewController.currentBuildingId = self.selectedBuilding.buildingId;
-        buildingViewController.buildingOverallArray = self.buildingInfoArray;
+        buildingViewController.buildingInfoArray = self.buildingInfoArray;
+        buildingViewController.currentBuildingIndex = self.currentBuildingIndex;
     }
     
     if([segue.identifier isEqualToString:kSegue_MapToGallery] == YES){
@@ -244,14 +249,15 @@ static BOOL isInitialPresenting = YES;
     return CGRectMake(markerPoint.x, markerPoint.y-40, 5.12, 3.84);
 }
 
--(CGRect)getCurrentZoomRect:(NSNumber *)currentBuildingId
+-(CGRect)getDestinationZoomRect:(int)currentBuildingIndex
 {
-    if(currentBuildingId == nil){
-        currentBuildingId =[self.buildingInfoArray[0] building].buildingId;
-    }
+//    if(currentBuilding == nil){
+//        currentBuilding = self.buildingInfoArray[0];
+//    }
     
     for (GMSMarker *marker in mapView.markers) {
-        if ([((REMBuildingModel *)marker.userData).buildingId longLongValue] == [currentBuildingId longLongValue]) {
+        if([[marker.userData building].buildingId isEqualToNumber:[self.buildingInfoArray[currentBuildingIndex] building].buildingId]){
+            self.currentBuildingIndex = currentBuildingIndex;
             mapView.selectedMarker = marker;
             return [self getZoomFrameFromMarker: marker];
         }
@@ -261,6 +267,17 @@ static BOOL isInitialPresenting = YES;
 }
 
 
+-(int)buildingIndexFromBuilding:(REMBuildingModel *)building
+{
+    for(int i=0;i<self.buildingInfoArray.count;i++){
+        REMBuildingOverallModel *buildingInfo = self.buildingInfoArray[i];
+        if([buildingInfo.building.buildingId isEqualToNumber:building.buildingId])
+            return i;
+    }
+    
+    return 0;
+}
+
 #pragma mark GSMapView delegate
 
 - (BOOL)mapView:(GMSMapView *)view didTapMarker:(GMSMarker *)marker
@@ -269,13 +286,16 @@ static BOOL isInitialPresenting = YES;
     return YES;
 }
 
-//- (void)mapView:(GMSMapView *)view didTapInfoWindowOfMarker:(GMSMarker *)marker
-//{
-//    self.initialZoomRect = [self getZoomFrameFromMarker:marker];
-//
-//    self.selectedBuilding = marker.userData;
-//    [self presentBuildingView];
-//}
+- (void)mapView:(GMSMapView *)view didTapInfoWindowOfMarker:(GMSMarker *)marker
+{
+    [self.view setUserInteractionEnabled:NO];
+    
+    self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
+    self.initialZoomRect = [self getZoomFrameFromMarker:marker];
+    self.currentBuildingIndex = [self buildingIndexFromBuilding:[marker.userData building]];
+    
+    [self presentBuildingView];
+}
 
 
 -(UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker
@@ -289,7 +309,7 @@ static BOOL isInitialPresenting = YES;
 {
     self.initialZoomRect = [self getZoomFrameFromMarker:bubble.marker];
 
-    self.selectedBuilding = bubble.marker.userData;
+    self.currentBuildingIndex = [self buildingIndexFromBuilding:[bubble.marker.userData building]];
     [self presentBuildingView];
 }
 

@@ -30,11 +30,17 @@
 #define kDMGallery_GalleryCellHeight 110
 #define kDMGallery_GalleryCellHorizontalSpace 10
 #define kDMGallery_GalleryCellVerticleSpace 16
+#define kDMGallery_GalleryCellTitleTopOffset 9
+#define kDMGallery_GalleryCellTitleLeftOffset 9
+#define kDMGallery_GalleryCellTitleRightOffset 9
+#define kDMGallery_GalleryCellTitleFontSize 10
+#define kDMGallery_GalleryCellTitleHeight kDMGallery_GalleryCellTitleFontSize
 
 
 #define kDMGallery_GalleryTableViewFrame CGRectMake(kDMCommon_ContentLeftMargin, kDMGallery_GalleryGroupViewTopOffset, kDMGallery_GalleryGroupViewWidth, kDMGallery_GalleryGroupViewHeight)
 #define kDMGallery_GalleryCollectionViewInsets UIEdgeInsetsMake(kDMGallery_GalleryCollectionViewTopMargin, 0, kDMGallery_GalleryCollectionViewBottomMargin, 0)
-
+#define kDMGallery_GalleryCellFrame CGRectMake(0,0,kDMGallery_GalleryCellWidth,kDMGallery_GalleryCellHeight)
+#define kDMGallery_GalleryCellTitleFrame CGRectMake(kDMGallery_GalleryCellTitleLeftOffset, kDMGallery_GalleryCellTitleTopOffset, kDMGallery_GalleryCellWidth - kDMGallery_GalleryCellTitleLeftOffset - kDMGallery_GalleryCellTitleRightOffset, kDMGallery_GalleryCellTitleHeight)
 
 
 #endif

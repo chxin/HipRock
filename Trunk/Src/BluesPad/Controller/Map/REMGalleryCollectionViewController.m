@@ -31,10 +31,11 @@
 
 #define kGalleryBuildingImageGroupName @"GALLERY"
 
--(id)initWithBuildingInfoArray:(NSArray *)buildingInfoArray
+-(id)initWithKey:(NSString *)key andBuildingInfoArray:(NSArray *)buildingInfoArray
 {
     self = [super init];
     if(self != nil){
+        self.collectionKey = key;
         self.buildingInfoArray = buildingInfoArray;
     }
     
@@ -72,67 +73,32 @@
     
     return CGRectMake(0, 0, kDMGallery_GalleryGroupViewWidth, height);
 }
-//
-//
-//- (void)viewDidLoad
-//{
-//	// Do any additional setup after loading the view.
-//    
-//    
-//}
-//
-//-(void)viewDidAppear:(BOOL)animated
-//{
-//    //[self playZoomAnimation:YES];
-//}
-//
-//- (void)didReceiveMemoryWarning
-//{
-//    [super didReceiveMemoryWarning];
-//    // Dispose of any resources that can be recreated.
-//}
-//
-//
-//
-//
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if([segue.identifier isEqualToString:kSegue_GalleryToBuilding] == YES)
-//    {
-//        REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
-//        customSegue.isNoAnimation = self.isPinching;
-//        customSegue.isInitialPresenting = NO;
-//        customSegue.initialZoomRect = self.initialZoomRect;
-//        customSegue.finalZoomRect = self.view.frame;
-//        customSegue.currentBuilding = self.selectedBuilding == nil?[self.buildingInfoArray[0] building]:self.selectedBuilding;
-//        
-//        if(self.selectedBuilding == nil){
-//            UICollectionViewCell *cell = [galleryView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
-//            self.initialZoomRect = cell.frame;
-//        }
-//        
-//        self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
-//        
-//        REMBuildingViewController *buildingViewController = customSegue.destinationViewController;
-//        buildingViewController.buildingOverallArray = self.buildingInfoArray;
-//        buildingViewController.splashScreenController = self.splashScreenController;
-//        buildingViewController.fromController = self;
-//        buildingViewController.currentBuildingId = self.selectedBuilding.buildingId;
-//    }
-//}
-//
-//- (void)galleryCellTapped:(REMGalleryCollectionCell *)cell
-//{
-//    [self.view setUserInteractionEnabled:NO];
-//    
-//    self.initialZoomRect = cell.frame;
-//    self.selectedBuilding = cell.building;
-//    self.isPinching = NO;
-//    
-//    [self performSegueWithIdentifier:kSegue_GalleryToBuilding sender:self];
-//}
-//
-//
+
+
+- (void)viewDidLoad
+{
+	// Do any additional setup after loading the view.
+    
+    
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+
+
+- (void)galleryCellTapped:(REMGalleryCollectionCell *)cell
+{
+    CGRect cellFrameInTableCell = [self.collectionView convertRect:cell.frame toView: self.collectionView.superview];
+    
+    [((REMGalleryViewController *)self.parentViewController) presentBuildingViewForBuilding:cell.building fromFrame:cellFrameInTableCell];
+}
+
+
 //-(void)galleryCellPinched:(REMGalleryCollectionCell *)cell :(UIPinchGestureRecognizer *)pinch
 //{
 //    if(pinch.state  == UIGestureRecognizerStateBegan){
@@ -228,20 +194,18 @@
         }
     }
 }
-//
-//-(CGRect)getCurrentZoomRect:(NSNumber *)currentBuildingId
-//{
-//    for (REMGalleryCollectionCell *cell in galleryView.visibleCells){
-//        //NSLog(@"%@",NSStringFromCGRect(cell.frame));
-//        
-//        if(cell.building.buildingId == currentBuildingId)
-//            return cell.frame;
-//    }
-//    
-//    return CGRectZero;
-//}
-//
-//
+
+-(CGRect)cellFrameForBuilding:(NSNumber *)buildingId
+{
+    for(REMGalleryCollectionCell *cell in self.collectionView.visibleCells){
+        if([cell.building.buildingId isEqualToNumber:buildingId])
+            return [self.collectionView convertRect:cell.frame toView: self.collectionView.superview];
+    }
+    
+    return CGRectZero;
+}
+
+
 #pragma mark collection view delegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -254,13 +218,12 @@
 {
     REMGalleryCollectionCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier_GalleryCollectionCell forIndexPath:indexPath];
     
-    REMBuildingModel *building = ((REMBuildingOverallModel *)self.buildingInfoArray[indexPath.row]).building;
-    
-    cell.building = building;
+    cell.building = [self.buildingInfoArray[indexPath.row] building];
+    cell.titleLabel.text = cell.building.name;
     cell.controller = self;
     
-    [self loadBuildingSmallImage:building.pictureIds :^(UIImage *image) {
-        cell.backgroundImage = image;
+    [self loadBuildingSmallImage:cell.building.pictureIds :^(UIImage *image) {
+        ((UIImageView *)cell.backgroundView).image = image;
     }];
     
     return cell;

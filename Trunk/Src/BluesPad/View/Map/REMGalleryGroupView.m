@@ -40,6 +40,10 @@
 
 -(void)setGroupTitle:(NSString *)title
 {
+    if(title==nil || [title isEqual:[NSNull null]]){
+        title = @" ";
+    }
+    
     CGSize titleSize = [title sizeWithFont:[UIFont systemFontOfSize:kDMGallery_GalleryGroupTitleFontSize]];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, titleSize.width, titleSize.height)];
     label.text = title;
@@ -49,6 +53,7 @@
     label.textColor = kDMGallery_GalleryGroupTitleFontColor;
     
     [self.contentView addSubview:label];
+    
 }
 
 

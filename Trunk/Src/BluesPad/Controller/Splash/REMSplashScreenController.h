@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *flashLogo;
 @property (weak, nonatomic) IBOutlet UIImageView *normalLogo;
 
+@property (nonatomic,strong) NSMutableArray *buildingInfoArray;
+
 - (void)showMapView:(void (^)(void))loadCompleted;
 - (void)showLoginView:(BOOL)isAnimated;
 
