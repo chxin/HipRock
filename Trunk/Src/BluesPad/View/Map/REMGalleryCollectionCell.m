@@ -1,32 +1,35 @@
 //
-//  REMGallaryCell.m
+//  REMGalleryCollectionCell.m
 //  Blues
-//
+//  ©2013 施耐德电气（中国）有限公司版权所有
 //  Created by 张 锋 on 9/30/13.
 //
 //
 
-#import "REMGallaryCell.h"
+#import "REMGalleryCollectionCell.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface REMGallaryCell()
+@interface REMGalleryCollectionCell()
 
 @property (nonatomic,weak) UIButton *button;
 @property (nonatomic,weak) UILabel *titleLabel;
 
 @end
 
-@implementation REMGallaryCell{
+@implementation REMGalleryCollectionCell{
     REMBuildingModel *_buildingModel;
     UIImage *_backgroundImage;
 }
+
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor whiteColor];
+        //self.layer.borderWidth = 1.0f;
+        //self.layer.borderColor = [UIColor greenColor].CGColor;
+        //self.backgroundColor = [UIColor whiteColor];
         
         //self.clipsToBounds = YES;
         
@@ -111,12 +114,12 @@ static UIImageView *defaultImageView;
 -(void)tapped
 {
     NSLog(@"cell tapped: %@", [NSDate date]);
-    [self.controller gallaryCellTapped:self];
+    //[self.controller galleryCellTapped:self];
 }
 
 -(void)pinchThis:(UIPinchGestureRecognizer *)pinch
 {
-    [self.controller gallaryCellPinched:self :pinch];
+    //[self.controller galleryCellPinched:self :pinch];
 }
 
 @end

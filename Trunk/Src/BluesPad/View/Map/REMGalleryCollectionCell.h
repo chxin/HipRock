@@ -1,18 +1,18 @@
 //
-//  REMGallaryCell.h
+//  REMGalleryCollectionCell.h
 //  Blues
-//
+//  ©2013 施耐德电气（中国）有限公司版权所有
 //  Created by 张 锋 on 9/30/13.
 //
 //
 
 #import <UIKit/UIKit.h>
 #import "REMBuildingModel.h"
-#import "REMGallaryViewController.h"
+#import "REMGalleryCollectionViewController.h"
 
-@interface REMGallaryCell : UICollectionViewCell
+@interface REMGalleryCollectionCell : UICollectionViewCell
 
-@property (nonatomic,weak) REMGallaryViewController *controller;
+@property (nonatomic,weak) REMGalleryCollectionViewController *controller;
 @property (nonatomic,weak, setter = setBuildingModel:, getter = getBuildingModel) REMBuildingModel *building;
 @property (nonatomic,strong, setter = setBackgroundImage:) UIImage *backgroundImage;
 
