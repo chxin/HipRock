@@ -15,6 +15,11 @@
 #import "REMBuildingEntranceSegue.h"
 #import "REMCommonHeaders.h"
 #import "REMStoryboardDefinitions.h"
+#import "REMMaxWidgetSegue.h"
+#import "REMDashboardController.h"
+#import "REMWidgetDetailViewController.h"
+#import "REMWidgetMaxViewController.h"
+#import "REMWidgetCellViewController.h"
 
 @interface REMBuildingViewController ()
 @property (nonatomic,strong) NSArray *imageArray;
@@ -57,11 +62,6 @@
     return self;
 }
 
-- (void)loadView{
-    [super loadView];
-    
-    
-}
 
 - (void)viewDidLoad
 {
@@ -116,7 +116,9 @@
 
 
 -(void)dealloc{
+    
     [self removeObserver:self forKeyPath:@"currentScrollOffset"];
+    return;
     for (REMImageView *view in self.imageArray) {
         [view removeFromSuperview];
     }
@@ -172,7 +174,28 @@
         
         [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, [((id)self.fromController) initialZoomRect], self.view.frame)];
     }
+    if([segue.identifier isEqualToString:@"maxWidgetSegue"]==YES){
+        REMImageView *view = self.imageArray[self.currentIndex];
+        
+        REMDashboardController *dashboard=view.dashboardController;
+        
+        REMWidgetCollectionViewController *collection= dashboard.childViewControllers[dashboard.currentMaxDashboardIndex];
+        
+        
+        REMWidgetMaxViewController *maxController = segue.destinationViewController;
+        self.maxDashbaordController=dashboard;
+        maxController.widgetCollectionController=collection;
+        maxController.dashboardInfo=dashboard.dashboardArray[dashboard.currentMaxDashboardIndex];
+        
+    }
 }
+
+- (IBAction)exitMaxWidget:(UIStoryboardSegue *)sender
+{
+    
+}
+
+
 
 
 - (void)blurredImageView

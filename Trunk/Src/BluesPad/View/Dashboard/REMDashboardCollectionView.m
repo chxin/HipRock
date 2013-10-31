@@ -20,6 +20,7 @@
         //self.backgroundColor=[UIColor clearColor];
         //self.layer.borderColor=[UIColor redColor].CGColor;
         //self.layer.borderWidth=1;
+        
     }
     return self;
 }

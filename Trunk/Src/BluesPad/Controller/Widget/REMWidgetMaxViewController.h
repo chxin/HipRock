@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "REMWidgetCollectionViewController.h"
 //#import "REMEnergyViewData.h"
 //#import "REMWidgetObject.h"
 //#import "REMWidgetMaxView.h"
@@ -20,6 +21,15 @@
 //#import "REMWidgetStepToolbarView.h"
 
 @interface REMWidgetMaxViewController : UIViewController
+
+@property (nonatomic,weak) REMDashboardObj *dashboardInfo;
+
+@property (nonatomic,weak) REMWidgetCollectionViewController *widgetCollectionController;
+
+- (void)popToBuildingCover;
+
+
+
 /*
 
 - (IBAction)searchClick:(UIButton *)sender;

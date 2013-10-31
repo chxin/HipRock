@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5WC-f7-YJK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5WC-f7-YJK">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
         <!--Splash Screen Controller-->
@@ -85,7 +85,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ncs-SR-xwT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2494" y="-1166"/>
+            <point key="canvasLocation" x="-3246" y="-1486"/>
         </scene>
         <!--Gallery View Controller-->
         <scene sceneID="cCc-Oc-ASk">
@@ -108,7 +108,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ofr-OL-vUG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2494" y="-193"/>
+            <point key="canvasLocation" x="-1730" y="-329"/>
         </scene>
         <!--Building View Controller-->
         <scene sceneID="XIG-df-ONL">
@@ -149,7 +149,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujE-me-aPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-447" y="-762"/>
+            <point key="canvasLocation" x="-111" y="-898"/>
         </scene>
         <!--Widget Max View Controller-->
         <scene sceneID="kih-fe-Pxz">
@@ -162,46 +162,22 @@
                     <view key="view" contentMode="scaleToFill" id="Lbs-fC-Du7">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J3j-9P-vZO">
-                                <rect key="frame" x="0.0" y="138" width="1024" height="630"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iss-GC-sl9">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="51"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="80Z-Pn-NbZ">
-                                <rect key="frame" x="0.0" y="71" width="1024" height="67"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWj-EN-zGh">
-                                        <rect key="frame" x="28" y="19" width="451" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="Fzj-ui-CY3" kind="popover" identifier="datePickerSegue" popoverAnchorView="lWj-EN-zGh" id="fcU-CN-8QL">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES"/>
-                                            </segue>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="jlr-Hs-a1y"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <segue destination="Fzj-ui-CY3" kind="popover" identifier="datePickerSegue" id="CMb-4Q-MIx">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES"/>
+                        </segue>
+                        <segue destination="sO2-LG-KMS" kind="unwind" identifier="exitWidgetSegue" unwindAction="exitMaxWidget:" id="moD-S9-c5g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ndb-ap-11w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="sO2-LG-KMS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="800" y="-1434"/>
+            <point key="canvasLocation" x="1404" y="-1522"/>
         </scene>
         <!--Date Picker View Controller - 选择日期-->
         <scene sceneID="IK4-ou-HLv">
@@ -984,7 +960,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TOj-5Z-r5Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="800" y="-60"/>
+            <point key="canvasLocation" x="1296" y="-96"/>
         </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="KV1-Ck-0FS">
@@ -1058,7 +1034,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ai5-vc-Ijo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2324" y="-1434"/>
+            <point key="canvasLocation" x="2764" y="-1574"/>
         </scene>
     </scenes>
     <resources>

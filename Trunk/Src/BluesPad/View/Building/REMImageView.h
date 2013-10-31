@@ -22,6 +22,7 @@
 #import "REMDashboardController.h"
 
 @class REMBuildingViewController;
+@class REMDashboardController;
 
 @interface REMImageView : UIView <UIGestureRecognizerDelegate,UIScrollViewDelegate>
 
@@ -29,6 +30,8 @@
 @property (nonatomic,weak) UIImage *defaultBlurImage;
 
 @property (nonatomic,weak) REMBuildingViewController *controller;
+
+@property (nonatomic,strong) REMDashboardController *dashboardController;
 
 - (void)initWholeViewUseThumbnail:(BOOL)useThumbnail;
 - (void)moveOutOfWindow;

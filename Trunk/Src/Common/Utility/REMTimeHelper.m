@@ -343,6 +343,13 @@ static NSDateFormatter *_formatter;
     return [f stringFromDate:date];
 }
 
++ (NSString *)formatTimeRangeFullHour:(REMTimeRange *)range{
+    NSString *start=[REMTimeHelper formatTimeFullHour:range.startTime isChangeTo24Hour:NO];
+    NSString *end=[REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];
+    
+    return [NSString stringWithFormat:@"%@ -- %@",start,end];
+}
+
 
 + (REMTimeRange *) maxTimeRangeOfTimeRanges:(NSArray *)timeRanges
 {

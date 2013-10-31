@@ -7,12 +7,14 @@
 //
 
 #import "REMWidgetMaxViewController.h"
-//#import "REMChartLegendTableViewController.h"
+#import "REMWidgetDetailViewController.h"
+#import "REMWidgetCellViewController.h"
+
 
 @interface REMWidgetMaxViewController()
-{
-    NSArray *_hiddenSeries;
-}
+
+
+
 /*
 @property (nonatomic,strong) REMWidgetMaxDiagramViewController *chartController;
 @property (nonatomic,strong) NSArray *currentStepList;
@@ -20,6 +22,46 @@
 @end
 
 @implementation REMWidgetMaxViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+        
+    }
+    return self;
+}
+
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    [self.view setFrame:CGRectMake(0, 0, 1024, 748)];
+    
+    for (int i=0; i<self.dashboardInfo.widgets.count; ++i) {
+        REMWidgetObject *obj=self.dashboardInfo.widgets[i];
+        REMWidgetDetailViewController *sub=[[REMWidgetDetailViewController alloc]init];
+        sub.widgetInfo=obj;
+        REMWidgetCellViewController *cellController= self.widgetCollectionController.childViewControllers[i];
+        sub.energyData=cellController.chartData;
+        
+        
+        [self addChildViewController:sub];
+    }
+    
+    REMWidgetDetailViewController *c=self.childViewControllers[0];
+    [self.view addSubview:c.view];
+}
+
+- (void)popToBuildingCover{
+    [self performSegueWithIdentifier:@"exitWidgetSegue" sender:self];
+    
+    
+}
+
+
+
+
 /*
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
