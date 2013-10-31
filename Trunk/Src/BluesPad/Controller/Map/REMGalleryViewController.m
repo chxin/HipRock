@@ -16,7 +16,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingEntranceSegue.h"
 #import "REMBuildingViewController.h"
-#import "REMMapGallerySegue.h"
 #import "REMGalleryGroupView.h"
 #import "REMGalleryCollectionViewController.h"
 
@@ -87,10 +86,7 @@
 
 -(void)switchButtonPressed
 {
-    REMMapGallerySegue *segue = [[REMMapGallerySegue alloc] initWithIdentifier:kSegue_GalleryToMap source:self destination:self.mapViewController];
-    
-    [self prepareForSegue:segue sender:self];
-    [segue perform];
+    [self performSegueWithIdentifier:kSegue_GalleryToMap sender:self];
 }
 
 -(void)groupBuildings
@@ -192,6 +188,11 @@
     self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
     
     [self performSegueWithIdentifier:kSegue_GalleryToBuilding sender:self];
+}
+
+-(IBAction)unwindSegueToGallery:(UIStoryboardSegue *)sender
+{
+    
 }
 
 #pragma mark - Private methods

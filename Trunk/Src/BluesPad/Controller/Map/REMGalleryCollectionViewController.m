@@ -16,9 +16,7 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMBuildingOverallModel.h"
 #import <QuartzCore/QuartzCore.h>
-#import "REMBuildingEntranceSegue.h"
 #import "REMBuildingViewController.h"
-#import "REMMapGallerySegue.h"
 
 @interface REMGalleryCollectionViewController ()
 

@@ -9,6 +9,7 @@
 #import "REMMarkerBubbleView.h"
 #import "REMBuildingModel.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import "REMBuildingOverallModel.h"
 
 @interface REMMarkerBubbleView ()
 

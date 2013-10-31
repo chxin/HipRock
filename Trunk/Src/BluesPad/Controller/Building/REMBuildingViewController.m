@@ -165,17 +165,13 @@
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if([segue.identifier isEqualToString:@"buildingToMapSegue"]==YES){
-//        REMMapViewController *mapController = segue.destinationViewController;
-//        mapController.buildingInfoArray = self.buildingOverallArray;
-//    }
-    if([segue.identifier isEqualToString:kSegue_BuildingToMap] == YES){
+    if([segue.identifier isEqualToString:kSegue_BuildingToMap] || [segue.identifier isEqualToString:kSegue_BuildingToGallery]){
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
         
-        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, [((id)self.fromController) initialZoomRect], self.view.frame)];
+        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, CGRectZero, self.view.frame)];
     }
     if([segue.identifier isEqualToString:@"maxWidgetSegue"]==YES){
-        REMImageView *view = self.imageArray[self.currentIndex];
+        REMImageView *view = self.imageArray[self.currentBuildingIndex];
         
         REMDashboardController *dashboard=view.dashboardController;
         
@@ -667,10 +663,10 @@
 
 -(IBAction)backButtonPressed:(id)sender
 {
-    REMBuildingEntranceSegue *segue = [[REMBuildingEntranceSegue alloc] initWithIdentifier:kSegue_BuildingToMap source:self destination:self.fromController];
+    //decide where to go
+    NSString *segueIdentifier = [self.fromController class] == [REMGalleryViewController class] ? kSegue_BuildingToGallery : kSegue_BuildingToMap;
     
-    [self prepareForSegue:segue sender:self];
-    [segue perform];
+    [self performSegueWithIdentifier:segueIdentifier sender:self];
 }
 
 -(void)executeExport:(REMMaskManager *)masker{

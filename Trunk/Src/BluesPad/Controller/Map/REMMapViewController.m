@@ -209,23 +209,24 @@ static BOOL isInitialPresenting = YES;
 {
     if([segue.identifier isEqualToString:kSegue_MapToBuilding] == YES)
     {
-        REMBuildingSegueZoomParamter segueParameter = REMBuildingSegueZoomParamterMake(isInitialPresenting, self.currentBuildingIndex, [self getDestinationZoomRect:self.currentBuildingIndex], self.view.frame);
+        //take a snapshot of self
+        self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
         
+        //prepare custom segue parameters
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
-        [customSegue prepareSegueWithParameter:segueParameter];
+        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(isInitialPresenting, self.currentBuildingIndex, [self getDestinationZoomRect:self.currentBuildingIndex], self.view.frame)];
         
-        
+        //prepare destination view controller
         REMBuildingViewController *buildingViewController = customSegue.destinationViewController;
         buildingViewController.fromController = self;
         buildingViewController.buildingInfoArray = self.buildingInfoArray;
         buildingViewController.currentBuildingIndex = self.currentBuildingIndex;
     }
     
-    if([segue.identifier isEqualToString:kSegue_MapToGallery] == YES){
-        REMGalleryViewController *galleryViewController = segue.destinationViewController;
-        
-        galleryViewController.mapViewController = self;
-        galleryViewController.buildingInfoArray = self.buildingInfoArray;
+    if([segue.identifier isEqualToString:kSegue_MapToGallery]){
+        //prepare destination view controller
+        REMGalleryViewController *galleryController = segue.destinationViewController;
+        galleryController.buildingInfoArray = self.buildingInfoArray;
     }
 }
 
@@ -290,7 +291,6 @@ static BOOL isInitialPresenting = YES;
 {
     [self.view setUserInteractionEnabled:NO];
     
-    self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
     self.initialZoomRect = [self getZoomFrameFromMarker:marker];
     self.currentBuildingIndex = [self buildingIndexFromBuilding:[marker.userData building]];
     
@@ -311,6 +311,12 @@ static BOOL isInitialPresenting = YES;
 
     self.currentBuildingIndex = [self buildingIndexFromBuilding:[bubble.marker.userData building]];
     [self presentBuildingView];
+}
+
+#pragma mark - Segue
+-(IBAction)unwindSegueToMap:(UIStoryboardSegue *)sender
+{
+    
 }
 
 @end
