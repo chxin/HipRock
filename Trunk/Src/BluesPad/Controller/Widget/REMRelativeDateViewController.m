@@ -76,39 +76,39 @@
         }
     }
     if(indexPath.row == 0){
-        name=@"之前七天";
+        name=NSLocalizedString(@"Common_Last7Day", @""); //@"之前七天";
     }
     else if (indexPath.row ==1)
     {
-        name=@"今天";
+        name=NSLocalizedString(@"Common_Today", @""); //@"今天";
     }
     else if (indexPath.row ==2)
     {
-        name=@"昨天";
+        name=NSLocalizedString(@"Common_Yesterday", @""); //@"昨天";
     }
     else if (indexPath.row ==3)
     {
-        name=@"本周";
+        name=NSLocalizedString(@"Common_ThisWeek", @""); //@"本周";
     }
     else if (indexPath.row ==4)
     {
-        name=@"上周";
+        name=NSLocalizedString(@"Common_LastWeek", @""); //@"上周";
     }
     else if (indexPath.row ==5)
     {
-        name=@"本月";
+        name=NSLocalizedString(@"Common_ThisMonth", @""); //@"本月";
     }
     else if (indexPath.row ==6)
     {
-        name=@"上月";
+        name=NSLocalizedString(@"Common_LastMonth", @""); //@"上月";
     }
     else if (indexPath.row ==7)
     {
-        name=@"今年";
+        name=NSLocalizedString(@"Common_ThisYear", @""); //@"今年";
     }
     else if (indexPath.row ==8)
     {
-        name=@"去年";
+        name=NSLocalizedString(@"Common_LastYear", @""); //@"去年";
     }
     
     

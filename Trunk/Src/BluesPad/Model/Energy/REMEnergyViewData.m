@@ -63,6 +63,16 @@
         
     }
     
+    if((NSNull *)dictionary[@"VisibleTimeRange"] != [NSNull null] && dictionary[@"VisibleTimeRange"]!= nil)
+    {
+        self.visibleTimeRange = [[REMTimeRange alloc] initWithDictionary:(NSDictionary *)dictionary[@"VisibleTimeRange"]];
+    }
+    
+    if((NSNull *)dictionary[@"GlobalTimeRange"] != [NSNull null] && dictionary[@"GlobalTimeRange"]!= nil)
+    {
+        self.globalTimeRange = [[REMTimeRange alloc] initWithDictionary:(NSDictionary *)dictionary[@"GlobalTimeRange"]];
+    }
+    
 }
 
 @end
