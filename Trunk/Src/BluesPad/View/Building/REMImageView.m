@@ -8,6 +8,7 @@
 
 #import "REMImageView.h"
 #import "REMCommonHeaders.h"
+#import "REMDimensions.h"
 
 #define kDashboardThreshold 361+65+85+45
 
@@ -226,7 +227,7 @@
     self.shareDashboardButton=shareDashboard;
     [self.shareDashboardButton setHidden:YES];
     
-    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(kBuildingLeftMargin, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
+    UIButton *backButton = [[UIButton alloc]initWithFrame:kDMCommon_TopLeftButtonFrame];
     
     backButton.adjustsImageWhenHighlighted=YES;
     backButton.showsTouchWhenHighlighted=YES;
@@ -767,8 +768,9 @@
     self.titleLabel=titleLabel;
     
     UIButton *logoButton = [self.controller getCustomerLogoButton];
+    
    
-    [logoButton setFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, titleLabel.frame.origin.y, logoButton.frame.size.width, logoButton.frame.size.height)];
+    //[logoButton setFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, titleLabel.frame.origin.y, logoButton.frame.size.width, logoButton.frame.size.height)];
     
     [logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
     

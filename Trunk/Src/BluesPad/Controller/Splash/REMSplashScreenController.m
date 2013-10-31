@@ -1,7 +1,7 @@
 //
 //  REMSplashScreenController.m
 //  Blues
-//
+//  ©2013 施耐德电气（中国）有限公司版权所有
 //  Created by 张 锋 on 7/26/13.
 //
 //
@@ -16,11 +16,7 @@
 
 @interface REMSplashScreenController ()
 
-@property (nonatomic,strong) NSMutableArray *buildingInfoArray;
-@property (nonatomic,strong) REMLoginCarouselController *carouselController;
-@property (nonatomic,strong) NSTimer *timer;
-
-
+@property (nonatomic,weak) REMLoginCarouselController *carouselController;
 
 @end
 
@@ -45,16 +41,12 @@
             [invocation setTarget:self];
             [invocation setSelector:selector];
             
-            self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
+            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
             
-            NSLog(@"%f", [((NSDate *)[NSDate date]) timeIntervalSince1970]);
             [self showMapView:^(void){
-                NSLog(@"%f", [((NSDate *)[NSDate date]) timeIntervalSince1970]);
-                if(self.timer != nil){
-                    if([self.timer isValid])
-                        [self.timer invalidate];
-                    
-                    self.timer = nil;
+                if(timer != nil){
+                    if([timer isValid])
+                        [timer invalidate];
                 }
             }];
         }];
@@ -210,8 +202,6 @@
     {
         REMMapViewController *mapViewController = segue.destinationViewController;
         mapViewController.buildingInfoArray = self.buildingInfoArray;
-        self.buildingInfoArray=nil;
-        mapViewController.splashScreenController = self;
     }
 }
 

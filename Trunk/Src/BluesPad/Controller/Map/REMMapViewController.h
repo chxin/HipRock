@@ -1,7 +1,7 @@
 //
 //  REMMapViewController.h
 //  Blues
-//
+//  ©2013 施耐德电气（中国）有限公司版权所有
 //  Created by 张 锋 on 9/25/13.
 //
 //
@@ -11,28 +11,28 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "REMControllerBase.h"
 #import "REMBuildingModel.h"
-@class REMGallaryViewController;
+#import "REMBuildingOverallModel.h"
+@class REMGalleryViewController;
 @class REMBuildingViewController;
+@class REMMarkerBubbleView;
 
 @interface REMMapViewController : REMControllerBase<GMSMapViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIButton *gallarySwitchButton;
-
-@property (nonatomic,strong) NSArray *buildingInfoArray;
-@property (nonatomic,strong) REMSplashScreenController *splashScreenController;
-@property (nonatomic,strong) REMBuildingViewController *buildingViewController;
+@property (nonatomic,weak) NSArray *buildingInfoArray;
+@property (nonatomic,weak) REMBuildingViewController *buildingViewController;
 
 @property (nonatomic,strong) UIImageView *snapshot;
 @property (nonatomic) CGRect initialZoomRect;
 
-@property (nonatomic,strong) REMBuildingModel *selectedBuilding;
+@property (nonatomic) int currentBuildingIndex;
 
 
-- (IBAction)gallarySwitchButtonPressed:(id)sender;
 -(void)setIsInitialPresenting:(BOOL)isInitial;
 
 -(void)presentBuildingView;
 
--(CGRect)getCurrentZoomRect:(NSNumber *)currentBuildingId;
+-(void)bubbleTapped:(REMMarkerBubbleView *)bubble;
+
+-(CGRect)getDestinationZoomRect: (int)currentBuildingIndex;
 
 @end

@@ -1,7 +1,7 @@
 //
 //  REMBuildingModel.m
 //  Blues
-//
+//  ©2013 施耐德电气（中国）有限公司版权所有
 //  Created by 张 锋 on 8/1/13.
 //
 //
@@ -25,6 +25,7 @@
     self.pictureIds=dictionary[@"PictureIds"];
     self.latitude = [dictionary[@"Latitude"] doubleValue];
     self.longitude = [dictionary[@"Longitude"] doubleValue];
+    self.province = dictionary[@"Province"];
 }
 
 @end

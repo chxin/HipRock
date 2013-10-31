@@ -1,7 +1,7 @@
 //
 //  REMWidgetSyntaxObject.m
 //  Blues
-//
+//  ©2013 施耐德电气（中国）有限公司版权所有
 //  Created by TanTan on 7/4/13.
 //
 //
@@ -38,6 +38,10 @@
     else if([self.contentSyntax.xtype isEqualToString:@"rankcolumnchartcomponent"]== YES)
     {
         self.diagramType =REMDiagramTypeRanking;
+    }
+    else if([self.contentSyntax.xtype isEqualToString:@"stackchartcomponent"]== YES)
+    {
+        self.diagramType =REMDiagramTypeStackColumn;
     }
     
     NSDictionary *shareInfo = dictionary[@"SimpleShareInfo"];
