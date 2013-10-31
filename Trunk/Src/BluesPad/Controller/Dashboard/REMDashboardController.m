@@ -140,10 +140,57 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     if(cell==nil){
         cell = [[REMDashboardCellViewCell alloc]initWithStyle: UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    cell.buildingController=self.buildingController;
-    [cell initWidgetCollection:self.dashboardArray[indexPath.section] withGroupName:[self groupName]];
+    
+    if(cell.contentView.subviews.count>0) return cell;
+    
+    CGRect viewFrame= [self addTitleForCell:cell withDashboardInfo:self.dashboardArray[indexPath.section]];
+    
+    REMWidgetCollectionViewController *widgetCollectionController = [[REMWidgetCollectionViewController alloc]initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc]init]];
+    
+    
+    [self addChildViewController:widgetCollectionController];
+    
+    widgetCollectionController.viewFrame=viewFrame;
+    
+    widgetCollectionController.currentDashboardIndex=indexPath.section;
+    
+    widgetCollectionController.dashboardInfo=self.dashboardArray[indexPath.section];
+    widgetCollectionController.groupName=[self groupName];
+    
+    
+    
+    [cell.contentView addSubview:widgetCollectionController.view];
     
     return cell;
+}
+
+- (CGRect)addTitleForCell:(REMDashboardCellViewCell *)cell withDashboardInfo:(REMDashboardObj *)dashboardInfo{
+    CGRect frame=cell.contentView.frame;
+    CGRect shareFrame;
+    if(dashboardInfo.shareInfo!=nil && [dashboardInfo.shareInfo isEqual:[NSNull null]]== NO && [dashboardInfo.shareInfo.userRealName isEqual:[NSNull null]]==NO){
+        shareFrame = CGRectMake(0, 11, frame.size.width, 11-4);
+        UILabel *shareName=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x, 11, frame.size.width, 11)];
+        shareName.textColor=[UIColor whiteColor];
+        shareName.text=dashboardInfo.shareInfo.userRealName;
+        [cell.contentView addSubview:shareName];
+    }
+    else{
+        shareFrame = CGRectMake(0, 0, frame.size.width, 0);
+    }
+    
+    
+    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x,shareFrame.origin.y+shareFrame.size.height, frame.size.width, 16)];
+    title.text=dashboardInfo.name;
+    title.backgroundColor=[UIColor clearColor];
+    title.textColor=[UIColor whiteColor];
+    title.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:14];
+    [cell.contentView addSubview:title];
+    
+    return CGRectMake(0, title.frame.origin.y+title.frame.size.height+14, frame.size.width, cell.contentView.frame.size.height-(title.frame.origin.y+title.frame.size.height+14));
+}
+
+- (void)maxWidget{
+    [self.buildingController performSegueWithIdentifier:@"maxWidgetSegue" sender:self];
 }
 
 - (void)didReceiveMemoryWarning

@@ -46,7 +46,7 @@
 
 @property (nonatomic) BOOL isSwitchingCommodityButtonGroup;
 
-@property (nonatomic,strong) REMDashboardController *dashboardController;
+
 
 @property (nonatomic) BOOL hasLoadedWholeView;
 

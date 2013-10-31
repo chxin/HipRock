@@ -12,11 +12,14 @@
 #import "REMWidgetCollectionViewController.h"
 
 @class REMBuildingViewController;
+@class REMDashboardController;
 
 @interface REMDashboardCellViewCell : UITableViewCell
 
 - (void)initWidgetCollection:(REMDashboardObj *)dashboardInfo withGroupName:(NSString *)groupName;
 
 @property (nonatomic,weak) REMBuildingViewController *buildingController;
+@property (nonatomic,weak) REMDashboardController *dashboardController;
+
 
 @end

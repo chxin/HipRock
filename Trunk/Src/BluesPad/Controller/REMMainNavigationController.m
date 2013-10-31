@@ -8,6 +8,7 @@
 
 #import "REMMainNavigationController.h"
 #import "REMSplashScreenController.h"
+#import "REMMaxWidgetSegue.h"
 
 @interface REMMainNavigationController ()
 
@@ -34,6 +35,19 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (UIStoryboardSegue *)segueForUnwindingToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController identifier:(NSString *)identifier
+{
+    if([identifier isEqualToString:@"exitWidgetSegue"]==YES){
+        return [[REMMaxWidgetSegue alloc]initWithIdentifier:identifier source:fromViewController destination:toViewController];
+    }
+    
+    
+    UIStoryboardSegue *segue=[super segueForUnwindingToViewController:toViewController fromViewController:fromViewController identifier:identifier];
+    
+    return segue;
 }
 
 -(void)presentLoginView:(void (^)(void))completed

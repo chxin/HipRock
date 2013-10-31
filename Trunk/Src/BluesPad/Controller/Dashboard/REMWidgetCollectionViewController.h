@@ -13,20 +13,24 @@
 
 @class REMDashboardCollectionCellView;
 @class REMBuildingViewController;
+@class REMDashboardController;
 
 @interface REMWidgetCollectionViewController : UICollectionViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
 @property (nonatomic) CGRect viewFrame;
 
-@property (nonatomic,weak) NSArray *widgetArray;
 
 @property (nonatomic,strong) NSString *groupName;
 
-- (void)maxWidget:(REMDashboardCollectionCellView *)cell;
+@property (nonatomic,weak) REMDashboardObj *dashboardInfo;
 
-@property (nonatomic,weak) REMDashboardCollectionCellView *readyToMaxCell;
+@property (nonatomic) NSUInteger currentMaxWidgetIndex;
+@property (nonatomic,copy) NSNumber *currentMaxWidgetId;
 
-@property (nonatomic,weak) REMBuildingViewController *buildingController;
+@property (nonatomic) NSUInteger currentDashboardIndex;
+
+
+- (void)maxWidget;
 
 @end

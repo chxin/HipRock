@@ -10,7 +10,7 @@
 
 @interface REMMaxWidgetSegue : UIStoryboardSegue
 
-@property (nonatomic,weak) UIButton *origSmallCell;
+@property (nonatomic,weak) UIView *origSmallCell;
 
 
 @end

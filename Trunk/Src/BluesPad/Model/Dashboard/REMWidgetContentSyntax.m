@@ -56,42 +56,43 @@
     }
     else if([self.relativeDate isEqualToString:@"Last7Day"]==YES){
         self.relativeDateType = REMRelativeTimeRangeTypeLast7Days;
-        self.relativeDateComponent=@"之前七天";
+        self.relativeDateComponent= NSLocalizedString(@"Common_Last7Day", @""); //@"之前七天";
     }
     else if([self.relativeDate isEqualToString:@"Today"]==YES){
         self.relativeDateType=REMRelativeTimeRangeTypeToday;
-        self.relativeDateComponent=@"今天";
+        self.relativeDateComponent=NSLocalizedString(@"Common_Today", @""); //@"今天";
     }
     else if([self.relativeDate isEqualToString:@"Yesterday"]==YES){
         self.relativeDateType=REMRelativeTimeRangeTypeYesterday;
-        self.relativeDateComponent=@"昨天";
+        self.relativeDateComponent=NSLocalizedString(@"Common_Yesterday", @""); //@"昨天";
     }
     else if([self.relativeDate isEqualToString:@"ThisMonth"]==YES){
         self.relativeDateType=REMRelativeTimeRangeTypeThisMonth;
-        self.relativeDateComponent=@"本月";
+        self.relativeDateComponent=NSLocalizedString(@"Common_ThisMonth", @""); //@"本月";
     }
     else if([self.relativeDate isEqualToString:@"LastMonth"]==YES){
         self.relativeDateType=REMRelativeTimeRangeTypeLastMonth;
-        self.relativeDateComponent=@"上月";
+        self.relativeDateComponent=NSLocalizedString(@"Common_LastMonth", @""); //@"上月";
     }
     else if([self.relativeDate isEqualToString:@"ThisWeek"]==YES){
         self.relativeDateType=REMRelativeTimeRangeTypeThisWeek;
-        self.relativeDateComponent=@"本周";
+        self.relativeDateComponent=NSLocalizedString(@"Common_ThisWeek", @""); //@"本周";
     }
     else if([self.relativeDate isEqualToString:@"LastWeek"]==YES){
         self.relativeDateType=REMRelativeTimeRangeTypeLastWeek;
-        self.relativeDateComponent=@"上周";
+        self.relativeDateComponent=NSLocalizedString(@"Common_LastWeek", @""); //@"上周";
     }
     else if([self.relativeDate isEqualToString:@"ThisYear"]==YES){
         self.relativeDateType=REMRelativeTimeRangeTypeThisYear;
-        self.relativeDateComponent=@"今年";
+        self.relativeDateComponent=NSLocalizedString(@"Common_ThisYear", @""); //@"今年";
     }
     else if([self.relativeDate isEqualToString:@"LastYear"]==YES){
         self.relativeDateType=REMRelativeTimeRangeTypeLastYear;
-        self.relativeDateComponent=@"去年";
+        self.relativeDateComponent=NSLocalizedString(@"Common_LastYear", @""); //@"去年";
     }
     else{
         self.relativeDateType=REMRelativeTimeRangeTypeNone;
+        self.relativeDateComponent=nil;
     }
     
     

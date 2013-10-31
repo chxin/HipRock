@@ -14,6 +14,8 @@
 
 @class REMImageView;
 @class REMBuildingViewController;
+@class REMDashboardController;
+
 
 @interface REMDashboardController : UITableViewController<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
@@ -24,6 +26,14 @@
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 
 -(void)cancelAllRequest;
+
+- (void) maxWidget;
+
+@property (nonatomic) NSUInteger currentMaxDashboardIndex;
+@property (nonatomic,copy) NSNumber *currentMaxDashboardId;
+
+
+@property (nonatomic,weak) UIView *readyToMaxCell;
 
 @property (nonatomic,weak) REMBuildingViewController *buildingController;
 

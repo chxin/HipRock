@@ -13,6 +13,7 @@
 #import "REMBuildingConstants.h"
 #import "REMSettingViewController.h"
 #import "REMMapViewController.h"
+#import "REMDashboardController.h"
 
 typedef enum _BuildingSourceType{
     BuildingSourceTypeFromMap,
@@ -38,5 +39,9 @@ typedef enum _BuildingSourceType{
 - (void)switchToDashboard;
 
 - (void)switchToBuildingInfo;
+
+- (IBAction)exitMaxWidget:(UIStoryboardSegue *)sender;
+
+@property (nonatomic,weak) REMDashboardController *maxDashbaordController;
 
 @end

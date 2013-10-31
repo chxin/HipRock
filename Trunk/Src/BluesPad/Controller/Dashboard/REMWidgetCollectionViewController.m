@@ -8,7 +8,7 @@
 
 #import "REMWidgetCollectionViewController.h"
 #import "REMWidgetMaxView.h"
-
+#import "REMWidgetCellViewController.h"
 #import "REMMaxWidgetSegue.h"
 
 @interface REMWidgetCollectionViewController ()
@@ -30,18 +30,33 @@ static NSString *cellId=@"widgetcell";
     return self;
 }
 
-- (void)loadView{
-    UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc]init];
-    [flowlayout setMinimumInteritemSpacing:8];
+
+
+
+- (id)initWithCollectionViewLayout:(UICollectionViewFlowLayout *)flowlayout
+{
+    if(self = [super initWithCollectionViewLayout:flowlayout]){
+        
+        //[flowlayout setMinimumInteritemSpacing:8];
+        
+        [flowlayout setSectionInset:UIEdgeInsetsZero];
+        
+        //[flowlayout setItemSize: CGSizeMake(100, 100)];
+        [flowlayout setItemSize:CGSizeMake(233, 157)];
+        
+    }
     
-    [flowlayout setSectionInset:UIEdgeInsetsZero];
-    
-    //[flowlayout setItemSize: CGSizeMake(100, 100)];
-    [flowlayout setItemSize:CGSizeMake(233, 157)];
-    
-    self.collectionView=[[REMDashboardCollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:flowlayout];
+    return self;
+}
+
+
+
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
     [self.collectionView setFrame:self.viewFrame];
     self.view=self.collectionView;
+    //        NSLog(@"colletion view1:%@",NSStringFromCGRect(self.view.frame));
     [self.collectionView registerClass:[REMDashboardCollectionCellView class] forCellWithReuseIdentifier:cellId];
     self.collectionView.dataSource=self;
     self.collectionView.delegate=self;
@@ -55,12 +70,13 @@ static NSString *cellId=@"widgetcell";
 
 
 
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.widgetArray.count;
+    return self.dashboardInfo.widgets.count;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -73,46 +89,46 @@ static NSString *cellId=@"widgetcell";
 {
     REMDashboardCollectionCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     
-    REMWidgetObject *widget=self.widgetArray[indexPath.row];
+    if(cell.contentView.subviews.count>0)return cell;
     
-    cell.controller=self;
+    REMWidgetCellViewController *controller=[[REMWidgetCellViewController alloc]init];
+    controller.viewFrame=cell.contentView.bounds;
+    REMWidgetObject *widget=self.dashboardInfo.widgets[indexPath.row];
     
-    [cell initWidgetCell:widget withGroupName:self.groupName];
-    //UITapGestureRecognizer *tap= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onWidgetTap:)];
-    //[cell addGestureRecognizer:tap];
+    controller.widgetInfo=widget;
+    
+    controller.currentIndex=indexPath.row;
+    
+    [self addChildViewController:controller];
+    
+    [cell.contentView addSubview:controller.view];
     
     
     
     return cell;
     
 }
--(void)onWidgetTap:(UITapGestureRecognizer *)sender {
-    REMDashboardCollectionCellView *cell = (REMDashboardCollectionCellView*)sender.view;
-    if (cell.chartLoaded) {
-        REMWidgetMaxView* maxView = [[REMWidgetMaxView alloc]initWithSuperView:self.view widgetCell:cell];
-        
-        [maxView show:YES];
-    }
+
+
+- (void)maxWidget{
+
+    
+    REMWidgetObject *obj=self.dashboardInfo.widgets[self.currentMaxWidgetIndex];
+    
+    self.currentMaxWidgetId=obj.widgetId;
+    
+    REMDashboardController *parent=(REMDashboardController *)self.parentViewController;
+    
+    parent.currentMaxDashboardIndex=self.currentDashboardIndex;
+    parent.currentMaxDashboardId=self.dashboardInfo.dashboardId;
+    
+    [parent maxWidget];
+    
+    //[self.buildingController performSegueWithIdentifier:@"maxWidgetSegue" sender:self];
 }
 
-- (void)maxWidget:(REMDashboardCollectionCellView *)cell{
-    self.readyToMaxCell=cell;
-    [self.buildingController performSegueWithIdentifier:@"maxWidgetSegue" sender:self];
-}
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue isKindOfClass:[REMMaxWidgetSegue class]]==YES){
-        REMMaxWidgetSegue *s = (REMMaxWidgetSegue *)segue;
-        s.origSmallCell=self.readyToMaxCell.imageButton;
-        
-    }
-}
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
 
 - (void)didReceiveMemoryWarning
 {

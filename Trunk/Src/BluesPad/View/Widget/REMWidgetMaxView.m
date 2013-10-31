@@ -27,8 +27,8 @@ const int kStatusBarHeight = 20;
 {
     self = [super initWithSuperView:superView];
     if (self) {
-        _widgetInfo = widgetCell.widgetInfo;
-        chartData = widgetCell.chartData;
+        //_widgetInfo = widgetCell.widgetInfo;
+        //chartData = widgetCell.chartData;
         self.currentWidgetCell = widgetCell;
         
         REMScreenEdgetGestureRecognizer *rec = [[REMScreenEdgetGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];

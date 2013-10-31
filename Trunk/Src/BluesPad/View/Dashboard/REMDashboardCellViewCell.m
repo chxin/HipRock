@@ -35,6 +35,7 @@
         self.contentView.backgroundColor=self.backgroundColor;
         self.backgroundView=[[UIView alloc]initWithFrame:self.contentView.frame];
         self.accessoryView=nil;
+        
         self.contentView.layer.borderWidth=1;
         self.contentView.layer.borderColor=[UIColor redColor].CGColor;
     }
@@ -53,6 +54,8 @@
                                         );
 }
 
+
+/*
 
 - (void)initWidgetCollection:(REMDashboardObj *)dashboardInfo withGroupName:(NSString *)groupName
 {
@@ -85,7 +88,7 @@
     
     
     //NSLog(@"splitbar:%@",NSStringFromCGRect(frame));
-    /*
+ 
     CGRect frame1 = CGRectMake(0, title.frame.origin.y+title.frame.size.height+7, frame.size.width, 1);
     CGRect frame2 = CGRectMake(0, frame1.origin.y+1, frame1.size.width, frame1.size.height);
     
@@ -116,20 +119,21 @@
     
     [self.contentView.layer insertSublayer:layer1 above:self.contentView.layer];
     [self.contentView.layer insertSublayer:layer2 above:self.contentView.layer];
-    */
+    
     
     UICollectionViewFlowLayout *flowlayout =[[UICollectionViewFlowLayout alloc]init];
     REMWidgetCollectionViewController *controller = [[REMWidgetCollectionViewController alloc]initWithCollectionViewLayout:flowlayout];
     controller.groupName=groupName;
     self.collectionController=controller;
     self.collectionController.buildingController=self.buildingController;
+    self.collectionController.dashboardController=self.dashboardController;
     self.collectionController.widgetArray=dashboardInfo.widgets;
     self.collectionController.viewFrame=CGRectMake(0, title.frame.origin.y+title.frame.size.height+14, frame.size.width, self.contentView.frame.size.height-(title.frame.origin.y+title.frame.size.height+14));
     [self.contentView addSubview: self.collectionController.collectionView];
 
     
 }
-
+*/
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
