@@ -21,6 +21,9 @@
 #import "REMWidgetMaxViewController.h"
 #import "REMWidgetCellViewController.h"
 
+
+const static CGFloat imageGap=10;
+
 @interface REMBuildingViewController ()
 @property (nonatomic,strong) NSArray *imageArray;
 //@property (nonatomic) NSUInteger currentIndex;
@@ -71,27 +74,14 @@
     self.view.backgroundColor=[UIColor blackColor];
     self.currentScrollOffset=-kBuildingCommodityViewTop;
     
+    self.cumulateX=0;
     
     [self addObserver:self forKeyPath:@"currentScrollOffset" options:0 context:nil];
-    
-//    if (self.currentBuilding != nil) {
-//        for (int i=0; i<self.buildingInfoArray.count; ++i) {
-//            REMBuildingOverallModel *model = self.buildingInfoArray[i];
-//            if([model.building.buildingId isEqualToNumber:self.currentBuilding.building.buildingId]==YES){
-//                self.currentIndex=i;
-//                break;
-//            }
-//        }
-//    }
-//    else{
-//        self.currentIndex=0;
-//    }
-    
     
     
     if(self.buildingInfoArray.count>0){
         
-         [self blurredImageView];
+        [self blurredImageView];
         
         UIPanGestureRecognizer *rec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
         [self.view addGestureRecognizer:rec];
@@ -104,13 +94,6 @@
         [self.view addGestureRecognizer:pinch];
     }
     
-    
-    
-    
-    self.cumulateX=0;
-    
-    
-    
 }
 
 
@@ -118,7 +101,6 @@
 -(void)dealloc{
     
     [self removeObserver:self forKeyPath:@"currentScrollOffset"];
-    return;
     for (REMImageView *view in self.imageArray) {
         [view removeFromSuperview];
     }
@@ -198,17 +180,9 @@
 {
     NSString* defaultBuildingName = [[NSBundle mainBundle]pathForResource:@"DefaultBuilding" ofType:@"png"];
     self.defaultImage = [UIImage imageWithContentsOfFile:defaultBuildingName];
-    //self.defaultImage = [UIImage imageWithContentsOfFile:@"DefaultBuilding"];
-    //dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    //UIImage *image = self.defaultImage;
-    //dispatch_async(concurrentQueue, ^{
-        UIImage *view = [REMImageHelper blurImage:self.defaultImage];
-     //   dispatch_async(dispatch_get_main_queue(), ^{
-            self.defaultBlurImage=view;
-            [self initImageView];
-     //   });
-   // });
-    
+    UIImage *view = [REMImageHelper blurImage:self.defaultImage];
+    self.defaultBlurImage=view;
+    [self initImageView];
 }
 
 - (void)initImageView
@@ -260,7 +234,7 @@
     for (int i=0; i<arr.count; ++i) {
         NSNumber *num = arr[i];
         float f = [num floatValue];
-        f = f+(1024+5)*moveCount*-1;
+        f = f+(1024+imageGap)*moveCount*-1;
         NSNumber *num1 = [NSNumber numberWithFloat:f];
          [ar addObject:num1];
     }
@@ -363,7 +337,7 @@
             for (int i=0; i<self.imageArray.count; ++i) {
                 NSNumber *num = self.originCenterXArray[i];
                 float f = [num floatValue];
-                f = f+sign*(1024+5);
+                f = f+sign*(1024+imageGap);
                 NSNumber *num1 = [NSNumber numberWithFloat:f];
                 
                 [ar addObject:num1];
@@ -645,6 +619,36 @@
 
 #pragma mark -
 #pragma mark segue
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:kSegue_BuildingToMap] == YES){
+        REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
+        
+        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, [((id)self.fromController) initialZoomRect], self.view.frame)];
+    }
+    if([segue.identifier isEqualToString:@"maxWidgetSegue"]==YES){
+        REMImageView *view = self.imageArray[self.currentBuildingIndex];
+        
+        REMDashboardController *dashboard=view.dashboardController;
+        
+        REMWidgetCollectionViewController *collection= dashboard.childViewControllers[dashboard.currentMaxDashboardIndex];
+        
+        
+        REMWidgetMaxViewController *maxController = segue.destinationViewController;
+        self.maxDashbaordController=dashboard;
+        maxController.widgetCollectionController=collection;
+        maxController.dashboardInfo=dashboard.dashboardArray[dashboard.currentMaxDashboardIndex];
+        
+    }
+}
+
+- (IBAction)exitMaxWidget:(UIStoryboardSegue *)sender
+{
+    
+}
+
+
 - (IBAction)dashboardButtonPressed:(id)sender
 {
     [self performSegueWithIdentifier:@"buildingToDashboardSegue" sender:self];

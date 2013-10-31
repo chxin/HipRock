@@ -1493,10 +1493,10 @@
 				7A153C9917AA497C00413D3C /* REMWidgetMaxViewController.m */,
 				B4FAD669181F524A00EF1459 /* REMWidgetDetailViewController.h */,
 				B4FAD66A181F524A00EF1459 /* REMWidgetDetailViewController.m */,
-				B4FFB0C618191A15004C5404 /* REMRelativeDateViewController.h */,
-				B4FFB0C718191A15004C5404 /* REMRelativeDateViewController.m */,
 				B4FFB0C918191A41004C5404 /* REMDatePickerViewController.h */,
 				B4FFB0CA18191A41004C5404 /* REMDatePickerViewController.m */,
+				B4FFB0C618191A15004C5404 /* REMRelativeDateViewController.h */,
+				B4FFB0C718191A15004C5404 /* REMRelativeDateViewController.m */,
 			);
 			name = Widget;
 			path = Controller/Widget;

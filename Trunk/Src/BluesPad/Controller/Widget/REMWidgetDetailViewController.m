@@ -1,14 +1,14 @@
 //
 //  REMWidgetDetailViewController.m
 //  Blues
-//
+//  ©2013 施耐德电气（中国）有限公司版权所有
 //  Created by tantan on 10/29/13.
 //
 //
 
 #import "REMWidgetDetailViewController.h"
 #import "REMBuildingViewController.h"
-#import "REMEnum.h"
+
 #import "REMTimeHelper.h"
 #import "REMRankingWidgetWrapper.h"
 #import "REMLineWidgetWrapper.h"
@@ -25,8 +25,8 @@ const static CGFloat kWidgetTitleHeight=30;
 const static CGFloat kWidgetTitleFontSize=25;
 const static CGFloat kWidgetDatePickerLeftMargin=15;
 const static CGFloat kWidgetDatePickerTopMargin=70;
-const static CGFloat kWidgetDatePickerHeight=30;
-const static CGFloat kWidgetDatePickerWidth=250;
+const static CGFloat kWidgetDatePickerHeight=40;
+const static CGFloat kWidgetDatePickerWidth=220;
 const static CGFloat kWidgetStepSingleButtonWidth=60;
 const static CGFloat kWidgetChartLeftMargin=10;
 const static CGFloat kWidgetChartTopMargin=kWidgetDatePickerTopMargin+kWidgetDatePickerHeight;
@@ -37,11 +37,12 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
 
 @property (nonatomic,weak) UIButton *backButton;
 @property (nonatomic,weak) UILabel *widgetTitleLabel;
-@property (nonatomic,weak) UISegmentedControl *diagramTypeControl;
+@property (nonatomic,weak) UISegmentedControl *legendControl;
 @property (nonatomic,weak) UISegmentedControl *stepControl;
 @property (nonatomic,weak) UIButton *datePickerButton;
 
 @property (nonatomic,weak) UIView *chartContainer;
+
 
 @end
 
@@ -86,37 +87,34 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
     [self.view addSubview:widgetTitle];
     self.widgetTitleLabel=widgetTitle;
     
-    UISegmentedControl *diagramControl=[[UISegmentedControl alloc] initWithItems:@[@"line",@"column",@"pie"]];
-    [diagramControl setFrame:CGRectMake(800, backButton.frame.origin.y, 200, 30)];
-    UIImage *line=[UIImage imageNamed:@"Back"];
-    UIImage *column=[UIImage imageNamed:@"Up"];
-    UIImage *pie=[UIImage imageNamed:@"Down"];
-    [diagramControl setImage:line forSegmentAtIndex:0];
-    [diagramControl setImage:column forSegmentAtIndex:1];
-    [diagramControl setImage:pie forSegmentAtIndex:2];
+    UISegmentedControl *legendControl=[[UISegmentedControl alloc] initWithItems:@[@"search",@"legend"]];
+    [legendControl setFrame:CGRectMake(800, backButton.frame.origin.y, 200, 30)];
+    UIImage *search=[UIImage imageNamed:@"Up"];
+    UIImage *legend=[UIImage imageNamed:@"Down"];
+    [legendControl setImage:search forSegmentAtIndex:0];
+    [legendControl setImage:legend forSegmentAtIndex:1];
+    [legendControl setSelectedSegmentIndex:1];
     
-    [self.view addSubview:diagramControl];
-    self.diagramTypeControl=diagramControl;
+    [self.view addSubview:legendControl];
+    self.legendControl=legendControl;
     
     UIButton *timePickerButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, kWidgetDatePickerTopMargin, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
-    NSString *text=self.widgetInfo.contentSyntax.relativeDateComponent;
     
-    if(text==nil){
-        text=[REMTimeHelper formatTimeRangeFullHour:self.widgetInfo.contentSyntax.timeRanges[0]];
-    }
 
-    [timePickerButton setBackgroundImage:[UIImage imageNamed:@"Oil"] forState:UIControlStateNormal];
+    
+    
+    [timePickerButton setImage:[UIImage imageNamed:@"Oil_pressed"] forState:UIControlStateNormal];
+    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 180)];
     
     timePickerButton.titleLabel.textColor=[UIColor grayColor];
-    timePickerButton.titleLabel.text=text;
     
     [self.view addSubview:timePickerButton];
     self.datePickerButton = timePickerButton;
     
     
     UISegmentedControl *stepControl=[[UISegmentedControl alloc] initWithItems:@[@"hour",@"day",@"week",@"month",@"year"]];
-    [stepControl setFrame:CGRectMake(800, timePickerButton.frame.origin.y, 5*kWidgetStepSingleButtonWidth, 30)];
+    [stepControl setFrame:CGRectMake(700, timePickerButton.frame.origin.y, 5*kWidgetStepSingleButtonWidth, 30)];
     [stepControl setTitle:NSLocalizedString(@"Common_Hour", "") forSegmentAtIndex:0];//小时
     [stepControl setTitle:NSLocalizedString(@"Common_Day", "") forSegmentAtIndex:1];//天
     [stepControl setTitle:NSLocalizedString(@"Common_Week", "") forSegmentAtIndex:2];//周
@@ -129,12 +127,16 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
     UIView *chartContainer=[[UIView alloc]initWithFrame:CGRectMake(kWidgetChartLeftMargin, kWidgetChartTopMargin, kWidgetChartWidth, kWidgetChartHeight)];
     [self.view addSubview:chartContainer];
     self.chartContainer=chartContainer;
-    
+    self.chartContainer.layer.borderColor=[UIColor redColor].CGColor;
+    self.chartContainer.layer.borderWidth=1;
     [self showEnergyChart];
+    
+    [self setStepControlStatusByStep:self.widgetInfo.contentSyntax.stepType];
+    [self setDatePickerButtonValueByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateType];
 }
 
 - (void) showEnergyChart{
-    CGRect widgetRect = self.chartContainer.frame;
+    CGRect widgetRect = self.chartContainer.bounds;
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     
     NSMutableDictionary* style = [[NSMutableDictionary alloc]init];
@@ -174,6 +176,52 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
         [self.chartContainer addSubview:widgetWrapper.view];
     }
 
+}
+
+
+
+- (void) setDatePickerButtonValueByTimeRange:(REMTimeRange *)range withRelative:(REMRelativeTimeRangeType)relativeType{
+    NSString *text;
+    
+    if(relativeType!=REMRelativeTimeRangeTypeNone){
+        text=[REMTimeHelper formatTimeRangeFullHour:range];
+    }
+    else{
+        
+    }
+    
+    self.datePickerButton.titleLabel.text=text;
+}
+
+- (void) setStepControlStatusByTimeRange:(REMTimeRange *)range {
+    
+    
+}
+
+- (void) setStepControlStatusByStep:(REMEnergyStep)step{
+    NSUInteger pressedIndex;
+    if (step == REMEnergyStepHour) {
+        pressedIndex=0;
+    }
+    else if(step == REMEnergyStepDay){
+        pressedIndex=1;
+    }
+    else if(step == REMEnergyStepWeek){
+        pressedIndex=2;
+    }
+    else if(step == REMEnergyStepMonth){
+        pressedIndex=3;
+    }
+    else if(step == REMEnergyStepYear){
+        pressedIndex=4;
+    }
+    else{
+        pressedIndex=NSNotFound;
+    }
+    if(pressedIndex!=NSNotFound){
+        [self.stepControl setSelectedSegmentIndex:pressedIndex];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
