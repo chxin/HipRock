@@ -549,6 +549,7 @@
 		EF9ACF6118067CCB00097661 /* REMXFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9ACF6018067CCB00097661 /* REMXFormatter.m */; };
 		EF9ACF641806821500097661 /* REMYFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9ACF631806821500097661 /* REMYFormatter.m */; };
 		EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9F28B017CB54DE00E775ED /* REMStatusBar.m */; };
+		EFD6F093181F9C6200AE0A57 /* REMBarPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD6F092181F9C6200AE0A57 /* REMBarPlot.m */; };
 		EFDAACB91803F27F008BC9AF /* REMPieChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACB81803F27F008BC9AF /* REMPieChartWrapper.m */; };
 		EFDAACBC1803F6C2008BC9AF /* REMChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */; };
 		EFDAACBF18052E0C008BC9AF /* REMPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */; };
@@ -1200,6 +1201,8 @@
 		EF9ACF631806821500097661 /* REMYFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMYFormatter.m; path = LabelFormatter/REMYFormatter.m; sourceTree = "<group>"; };
 		EF9F28AF17CB54DD00E775ED /* REMStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMStatusBar.h; sourceTree = "<group>"; };
 		EF9F28B017CB54DE00E775ED /* REMStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMStatusBar.m; sourceTree = "<group>"; };
+		EFD6F091181F9C6200AE0A57 /* REMBarPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBarPlot.h; sourceTree = "<group>"; };
+		EFD6F092181F9C6200AE0A57 /* REMBarPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBarPlot.m; sourceTree = "<group>"; };
 		EFDAACB71803F27F008BC9AF /* REMPieChartWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPieChartWrapper.h; sourceTree = "<group>"; };
 		EFDAACB81803F27F008BC9AF /* REMPieChartWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartWrapper.m; sourceTree = "<group>"; };
 		EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartDataProcessor.m; sourceTree = "<group>"; };
@@ -2501,6 +2504,8 @@
 				EF8A47E517F959B5009B5C33 /* ChartWrapper */,
 				EF8A47EE17F959B5009B5C33 /* DataProcessor */,
 				EF8A47F017F959B5009B5C33 /* Series */,
+				EFD6F091181F9C6200AE0A57 /* REMBarPlot.h */,
+				EFD6F092181F9C6200AE0A57 /* REMBarPlot.m */,
 			);
 			name = Chart;
 			path = Common/Utility/Chart;
@@ -2958,6 +2963,7 @@
 				7A153CCA17AA4B5C00413D3C /* REMEnergyUsageDataModel.m in Sources */,
 				7A153CCD17AA4EDB00413D3C /* REMRankingDataModel.m in Sources */,
 				7A37AA5C17AB56F100316902 /* REMUserValidationModel.m in Sources */,
+				EFD6F093181F9C6200AE0A57 /* REMBarPlot.m in Sources */,
 				7A2E7EBD17F28E8A000EB506 /* REMLoginCustomerViewController.m in Sources */,
 				EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */,
 				7A37AA6317AB944B00316902 /* REMNumberLabel.m in Sources */,

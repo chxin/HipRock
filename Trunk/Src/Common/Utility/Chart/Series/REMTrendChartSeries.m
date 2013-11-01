@@ -17,6 +17,7 @@
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
     self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle];
     if (self) {
+        _yScale = @(1);
         _startDate = startDate;
         if (energyData.count == 0 || processor == nil) {
             _maxX = 0;
@@ -32,6 +33,11 @@
     [super beforePlotAddToGraph:graph seriesList:seriesList selfIndex:selfIndex];
     CPTXYAxis* yAxis = (CPTXYAxis*)[graph.axisSet.axes objectAtIndex:self.yAxisIndex + 1];
     plot.plotSpace = yAxis.plotSpace;
+}
+-(void)setYScale:(NSNumber *)yScale {
+    if ([yScale isEqualToNumber:self.yScale]) return;
+    _yScale = yScale;
+    [[self getPlot]reloadData];
 }
 
 -(BOOL)isOccupy {

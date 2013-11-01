@@ -14,6 +14,7 @@
 -(REMYFormatter*)init {
     self = [super init];
     if (self) {
+        self.yScale = @(1);
         numberFormatter = [[NSNumberFormatter alloc] init];
         numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     }
@@ -27,7 +28,8 @@
 }
 - (NSString *)stringForObjectValue:(id)obj {
     NSNumber* number = (NSNumber*)obj;
-    double numberValue = [number doubleValue];
+    double numberValue = number.doubleValue * self.yScale.doubleValue;
+    number = [NSNumber numberWithDouble:numberValue];
     
     if(numberValue == 0){
         return @"0";
