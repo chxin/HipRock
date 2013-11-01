@@ -130,7 +130,7 @@ const static CGFloat widgetGap=10;
     
     [self.view addSubview:view];
     self.srcBg=view;
-    
+    [self.srcBg setHidden:YES];
     
     UIView *glassView = [[UIView alloc]initWithFrame:self.view.frame];
     glassView.alpha=0;
@@ -155,7 +155,7 @@ const static CGFloat widgetGap=10;
     for (int i=0; i<self.childViewControllers.count; ++i) {
         REMWidgetDetailViewController *vc = self.childViewControllers[i];
         NSInteger gap=i-self.currentWidgetIndex;
-        [vc.view setCenter:CGPointMake(gap*(self.view.frame.size.width+widgetGap)+self.view.frame.size.width/2, vc.view.center.y)];
+        [vc.view setCenter:CGPointMake(gap*(self.view.frame.size.width+widgetGap), vc.view.center.y)];
         
     }
 }
@@ -196,7 +196,7 @@ const static CGFloat widgetGap=10;
                     [self.bloodWhiteView setHidden:YES];
                     [self.bloodView setHidden:YES];
                 }
-                NSLog(@"bg frame:%@",NSStringFromCGRect(self.srcBg.frame));
+                //NSLog(@"bg frame:%@",NSStringFromCGRect(self.srcBg.frame));
                 if(self.srcBg.frame.origin.x>0){
                     
                     self.readyToClose=NO;
