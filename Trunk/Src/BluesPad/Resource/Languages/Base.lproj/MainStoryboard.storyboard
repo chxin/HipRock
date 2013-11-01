@@ -172,7 +172,7 @@
                     <navigationItem key="navigationItem" id="jlr-Hs-a1y"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <segue destination="Fzj-ui-CY3" kind="popover" identifier="datePickerSegue" id="CMb-4Q-MIx">
+                        <segue destination="Fzj-ui-CY3" kind="popover" identifier="timerPickerSegue" id="CMb-4Q-MIx">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES"/>
                         </segue>
                         <segue destination="sO2-LG-KMS" kind="unwind" identifier="exitWidgetSegue" unwindAction="exitMaxWidget:" id="moD-S9-c5g"/>
