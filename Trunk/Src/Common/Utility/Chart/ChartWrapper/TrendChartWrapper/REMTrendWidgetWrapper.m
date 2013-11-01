@@ -51,9 +51,17 @@
         self.baseDateOfX = ((REMEnergyData*)self.energyViewData.targetGlobalData.energyData[0]).localTime;
         globalEndDate = ((REMEnergyData*)self.energyViewData.targetGlobalData.energyData[self.energyViewData.targetGlobalData.energyData.count-1]).localTime;
     } else {
-        REMTimeRange* theFirstTimeRange = [self.widgetSyntax.timeRanges objectAtIndex:0];
-        self.baseDateOfX = theFirstTimeRange.startTime;
-        globalEndDate = theFirstTimeRange.endTime;
+//        REMTimeRange* theFirstTimeRange = [self.widgetSyntax.timeRanges objectAtIndex:0];
+//        self.baseDateOfX = theFirstTimeRange.startTime;
+//        globalEndDate = theFirstTimeRange.endTime;
+        REMTargetEnergyData* se = self.energyViewData.targetEnergyData[0];
+        if (se.energyData.count == 0) {
+            self.baseDateOfX = [NSDate dateWithTimeIntervalSince1970:0];
+            globalEndDate = self.baseDateOfX;
+        } else {
+            self.baseDateOfX = ((REMEnergyData*)se.energyData[0]).localTime;
+            globalEndDate = ((REMEnergyData*)se.energyData[se.energyData.count-1]).localTime;
+        }
     }
     
     sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
@@ -65,9 +73,12 @@
 }
 
 -(NSRange)createInitialRange {
-    NSDate* endDate = ((REMTimeRange*)[self.widgetSyntax.timeRanges objectAtIndex:0]).endTime;
-    NSNumber* globalLength = [self roundDate:endDate startDate:self.baseDateOfX step:self.widgetSyntax.step.intValue roundToFloor:NO];
-    return NSMakeRange(0, globalLength.intValue);
+    REMTimeRange* theFirstTimeRange = [self.widgetSyntax.timeRanges objectAtIndex:0];
+    NSDate* endDate = theFirstTimeRange.endTime;
+    NSDate* startDate = theFirstTimeRange.startTime;
+    int startPoint = [self roundDate:startDate startDate:self.baseDateOfX step:self.widgetSyntax.step.intValue roundToFloor:YES].intValue;
+    int endPoint = [self roundDate:endDate startDate:self.baseDateOfX step:self.widgetSyntax.step.intValue roundToFloor:NO].intValue;
+    return NSMakeRange(startPoint, endPoint - startPoint);
 }
 
 -(REMTrendChartSeries*)createSeriesConfigOfIndex:(uint)seriesIndex {
