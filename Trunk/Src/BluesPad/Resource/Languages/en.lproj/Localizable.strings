@@ -8,6 +8,22 @@
 //Common, prefix: Common_
 "Common_ServerError" = "抱歉!服务器错误,无法获取最新的能源数据。请稍候再试。";
 "Common_Building"="楼宇";
+"Common_Last7Day"="之前七天";
+"Common_Today"="今天";
+"Common_Yesterday"="昨天";
+"Common_ThisWeek"="本周";
+"Common_LastWeek"="上周";
+"Common_ThisMonth"="本月";
+"Common_LastMonth"="上月";
+"Common_ThisYear"="今年";
+"Common_LastYear"="去年";
+"Common_Hour"="小时";
+"Common_Day"="天";
+"Common_Week"="周";
+"Common_Month"="月";
+"Common_Year"="年";
+"Common_CustomTime"="自定义";
+
 
 
 //Login, prefix: Login_

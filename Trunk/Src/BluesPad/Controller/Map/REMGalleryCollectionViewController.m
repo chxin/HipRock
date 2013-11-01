@@ -16,9 +16,7 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMBuildingOverallModel.h"
 #import <QuartzCore/QuartzCore.h>
-#import "REMBuildingEntranceSegue.h"
 #import "REMBuildingViewController.h"
-#import "REMMapGallerySegue.h"
 
 @interface REMGalleryCollectionViewController ()
 
@@ -31,10 +29,11 @@
 
 #define kGalleryBuildingImageGroupName @"GALLERY"
 
--(id)initWithBuildingInfoArray:(NSArray *)buildingInfoArray
+-(id)initWithKey:(NSString *)key andBuildingInfoArray:(NSArray *)buildingInfoArray
 {
     self = [super init];
     if(self != nil){
+        self.collectionKey = key;
         self.buildingInfoArray = buildingInfoArray;
     }
     
@@ -72,67 +71,50 @@
     
     return CGRectMake(0, 0, kDMGallery_GalleryGroupViewWidth, height);
 }
-//
-//
-//- (void)viewDidLoad
-//{
-//	// Do any additional setup after loading the view.
+
+
+- (void)viewDidLoad
+{
+	// Do any additional setup after loading the view.
+    
+    
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+
+
+- (void)galleryCellTapped:(REMGalleryCollectionCell *)cell
+{
+    
+    
+//    NSLog(@"cellFrame: %@",NSStringFromCGRect(cell.frame));
 //    
+//    CGRect cellFrameInCollectionView = [self.collectionView convertRect:cell.frame toView: self.collectionView.superview];
+//    NSLog(@"cellFrameInCollectionView: %@",NSStringFromCGRect(cellFrameInCollectionView));
 //    
-//}
-//
-//-(void)viewDidAppear:(BOOL)animated
-//{
-//    //[self playZoomAnimation:YES];
-//}
-//
-//- (void)didReceiveMemoryWarning
-//{
-//    [super didReceiveMemoryWarning];
-//    // Dispose of any resources that can be recreated.
-//}
-//
-//
-//
-//
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if([segue.identifier isEqualToString:kSegue_GalleryToBuilding] == YES)
-//    {
-//        REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
-//        customSegue.isNoAnimation = self.isPinching;
-//        customSegue.isInitialPresenting = NO;
-//        customSegue.initialZoomRect = self.initialZoomRect;
-//        customSegue.finalZoomRect = self.view.frame;
-//        customSegue.currentBuilding = self.selectedBuilding == nil?[self.buildingInfoArray[0] building]:self.selectedBuilding;
-//        
-//        if(self.selectedBuilding == nil){
-//            UICollectionViewCell *cell = [galleryView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
-//            self.initialZoomRect = cell.frame;
-//        }
-//        
-//        self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
-//        
-//        REMBuildingViewController *buildingViewController = customSegue.destinationViewController;
-//        buildingViewController.buildingOverallArray = self.buildingInfoArray;
-//        buildingViewController.splashScreenController = self.splashScreenController;
-//        buildingViewController.fromController = self;
-//        buildingViewController.currentBuildingId = self.selectedBuilding.buildingId;
+//    CGRect cellFrameInTableCellContentView = [self.collectionView.superview convertRect:cellFrameInCollectionView toView:self.collectionView.superview.superview];
+//    NSLog(@"cellFrameInTableCellContentView: %@",NSStringFromCGRect(cellFrameInTableCellContentView));
+//    
+//    CGRect cellFrameInTableCellView = [self.collectionView.superview.superview convertRect:cellFrameInTableCellContentView toView:self.collectionView.superview.superview.superview];
+//    NSLog(@"cellFrameInTableCellView: %@",NSStringFromCGRect(cellFrameInTableCellView));
+    
+//    CGRect cellFrameInTableCellView = cell.frame;
+//    UIView *cycleView = self.collectionView;
+//    for(int i=0;i<3;i++){
+//        cellFrameInTableCellView = [cycleView convertRect:cellFrameInTableCellView toView: cycleView.superview];
+//        cycleView = cycleView.superview;
 //    }
-//}
-//
-//- (void)galleryCellTapped:(REMGalleryCollectionCell *)cell
-//{
-//    [self.view setUserInteractionEnabled:NO];
-//    
-//    self.initialZoomRect = cell.frame;
-//    self.selectedBuilding = cell.building;
-//    self.isPinching = NO;
-//    
-//    [self performSegueWithIdentifier:kSegue_GalleryToBuilding sender:self];
-//}
-//
-//
+    
+    [((REMGalleryViewController *)self.parentViewController) presentBuildingViewForBuilding:cell.building fromCell:cell];
+}
+
+
 //-(void)galleryCellPinched:(REMGalleryCollectionCell *)cell :(UIPinchGestureRecognizer *)pinch
 //{
 //    if(pinch.state  == UIGestureRecognizerStateBegan){
@@ -227,21 +209,27 @@
             }];
         }
     }
+    else{
+        completed([UIImage imageNamed:@"DefaultBuilding-Small.png"]);
+    }
 }
-//
-//-(CGRect)getCurrentZoomRect:(NSNumber *)currentBuildingId
-//{
-//    for (REMGalleryCollectionCell *cell in galleryView.visibleCells){
-//        //NSLog(@"%@",NSStringFromCGRect(cell.frame));
-//        
-//        if(cell.building.buildingId == currentBuildingId)
-//            return cell.frame;
-//    }
-//    
-//    return CGRectZero;
-//}
-//
-//
+
+-(REMGalleryCollectionCell *)cellForBuilding:(NSNumber *)buildingId
+{
+    int buildingIndex = 0;
+    for(int i=0;i<self.buildingInfoArray.count;i++){
+        if([[self.buildingInfoArray[i] building].buildingId isEqualToNumber:buildingId]){
+            buildingIndex = i;
+            break;
+        }
+    }
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:buildingIndex inSection:0];
+    
+    return (REMGalleryCollectionCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+}
+
+
 #pragma mark collection view delegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -254,13 +242,12 @@
 {
     REMGalleryCollectionCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier_GalleryCollectionCell forIndexPath:indexPath];
     
-    REMBuildingModel *building = ((REMBuildingOverallModel *)self.buildingInfoArray[indexPath.row]).building;
-    
-    cell.building = building;
+    cell.building = [self.buildingInfoArray[indexPath.row] building];
+    cell.titleLabel.text = cell.building.name;
     cell.controller = self;
     
-    [self loadBuildingSmallImage:building.pictureIds :^(UIImage *image) {
-        cell.backgroundImage = image;
+    [self loadBuildingSmallImage:cell.building.pictureIds :^(UIImage *image) {
+        ((UIImageView *)cell.backgroundView).image = image;
     }];
     
     return cell;
@@ -268,7 +255,17 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(147, 110);
+    return kDMGallery_GalleryCellSize;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return kDMGallery_GalleryCellVerticleSpace;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return kDMGallery_GalleryCellHorizontalSpace;
 }
 
 

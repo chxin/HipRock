@@ -8,6 +8,10 @@
 
 #import "REMMainNavigationController.h"
 #import "REMSplashScreenController.h"
+#import "REMMaxWidgetSegue.h"
+#import "REMBuildingEntranceSegue.h"
+#import "REMStoryboardDefinitions.h"
+#import "REMMapGallerySegue.h"
 
 @interface REMMainNavigationController ()
 
@@ -34,6 +38,35 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (UIStoryboardSegue *)segueForUnwindingToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController identifier:(NSString *)identifier
+{
+    //gallery to map
+    if([identifier isEqualToString:kSegue_GalleryToMap]){
+        return [[REMMapGallerySegue alloc] initWithIdentifier:identifier source:fromViewController destination:toViewController];
+    }
+    
+    //building to map
+    if([identifier isEqualToString:kSegue_BuildingToMap]){
+        return [[REMBuildingEntranceSegue alloc] initWithIdentifier:identifier source:fromViewController destination:toViewController];
+    }
+    
+    //building to gallery
+    if([identifier isEqualToString:kSegue_BuildingToGallery]){
+        return [[REMBuildingEntranceSegue alloc] initWithIdentifier:identifier source:fromViewController destination:toViewController];
+    }
+    
+    //chart to dashboard
+    if([identifier isEqualToString:@"exitWidgetSegue"]==YES){
+        return [[REMMaxWidgetSegue alloc]initWithIdentifier:identifier source:fromViewController destination:toViewController];
+    }
+    
+    
+    UIStoryboardSegue *segue=[super segueForUnwindingToViewController:toViewController fromViewController:fromViewController identifier:identifier];
+    
+    return segue;
 }
 
 -(void)presentLoginView:(void (^)(void))completed

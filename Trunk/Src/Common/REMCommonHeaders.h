@@ -8,6 +8,7 @@
 //Constants
 #import "REMApplicationContext.h"
 #import "REMApplicationInfo.h"
+#import "REMCommonDefinition.h"
 #import "REMEnergyConstants.h"
 
 //DataAccess
@@ -46,6 +47,8 @@
 //TrendChartWrapper
 #import "REMColumnWidgetWrapper.h"
 #import "REMLineWidgetWrapper.h"
+#import "REMRankingWidgetWrapper.h"
+#import "REMStackColumnWidgetWrapper.h"
 #import "REMTrendWidgetWrapper.h"
 
 //DataProcessor

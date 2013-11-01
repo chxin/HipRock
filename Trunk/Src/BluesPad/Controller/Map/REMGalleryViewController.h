@@ -9,10 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "REMMapViewController.h"
 #import "REMControllerBase.h"
+#import "REMGalleryCollectionCell.h"
 
 @interface REMGalleryViewController : REMControllerBase<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic,strong) NSArray *buildingInfoArray;
-@property (nonatomic,weak) REMMapViewController *mapViewController;
+#pragma mark - Properties
+@property (nonatomic,weak) NSArray *buildingInfoArray;
+@property (nonatomic) int currentBuildingIndex;
+
+@property (nonatomic) CGRect initialZoomRect;
+@property (nonatomic,strong) UIImageView *snapshot;
+
+#pragma mark - Methods
+-(CGRect)getDestinationZoomRect:(int)currentBuildingIndex;
+-(void)presentBuildingViewForBuilding:(REMBuildingModel *)building fromCell:(UICollectionViewCell *)cell;
 
 @end

@@ -16,7 +16,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingEntranceSegue.h"
 #import "REMBuildingViewController.h"
-#import "REMMapGallerySegue.h"
 #import "REMGalleryGroupView.h"
 #import "REMGalleryCollectionViewController.h"
 
@@ -24,7 +23,6 @@
 @interface REMGalleryViewController ()
 
 @property (nonatomic,strong) NSMutableDictionary *buildingGroups;
-
 @property (nonatomic,weak) UITableView *galleryTableView;
 
 @end
@@ -88,10 +86,7 @@
 
 -(void)switchButtonPressed
 {
-    REMMapGallerySegue *segue = [[REMMapGallerySegue alloc] initWithIdentifier:kSegue_GalleryToMap source:self destination:self.mapViewController];
-    
-    [self prepareForSegue:segue sender:self];
-    [segue perform];
+    [self performSegueWithIdentifier:kSegue_GalleryToMap sender:self];
 }
 
 -(void)groupBuildings
@@ -127,7 +122,6 @@
 }
 
 #pragma mark -UITableView data source delegate
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -143,7 +137,7 @@
     NSString *key = [self.buildingGroups allKeys][indexPath.row];
     NSArray *array = [self.buildingGroups objectForKey:key];
     
-    REMGalleryCollectionViewController *collectionController = [[REMGalleryCollectionViewController alloc] initWithBuildingInfoArray:array];
+    REMGalleryCollectionViewController *collectionController = [[REMGalleryCollectionViewController alloc] initWithKey:key andBuildingInfoArray:array];
     [self addChildViewController:collectionController];
     
     REMGalleryGroupView *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier_GalleryGroupCell forIndexPath:indexPath];
@@ -165,5 +159,96 @@
 {
     return NO;
 }
+
+#pragma mark - Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:kSegue_GalleryToBuilding] == YES)
+    {
+        REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
+        
+        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, self.initialZoomRect, self.view.frame)];
+        
+        REMBuildingViewController *buildingViewController = customSegue.destinationViewController;
+        buildingViewController.buildingInfoArray = self.buildingInfoArray;
+        buildingViewController.fromController = self;
+        buildingViewController.currentBuildingIndex = self.currentBuildingIndex;
+    }
+}
+
+-(void)presentBuildingViewForBuilding:(REMBuildingModel *)building fromCell:(UICollectionViewCell *)cell
+{
+    [self.view setUserInteractionEnabled:NO];
+    
+    CGRect cellFrameInView = [self getGalleryCollectionCellFrameInGalleryView:cell];
+    
+    self.initialZoomRect = cellFrameInView;
+    self.currentBuildingIndex = [self buildingIndexFromBuilding:building];
+    self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
+    
+    [self performSegueWithIdentifier:kSegue_GalleryToBuilding sender:self];
+}
+
+-(IBAction)unwindSegueToGallery:(UIStoryboardSegue *)sender
+{
+    
+}
+
+#pragma mark - Private methods
+
+-(int)buildingIndexFromBuilding:(REMBuildingModel *)building
+{
+    for(int i=0;i<self.buildingInfoArray.count;i++){
+        REMBuildingOverallModel *buildingInfo = self.buildingInfoArray[i];
+        if([buildingInfo.building.buildingId isEqualToNumber:building.buildingId])
+            return i;
+    }
+    
+    return 0;
+}
+
+-(CGRect)getDestinationZoomRect:(int)currentBuildingIndex
+{
+    // Find the collection controller
+    REMGalleryCollectionViewController *currentCollectionController = nil;
+    
+    for(UIViewController *controller in self.childViewControllers){
+        if([controller class] == [REMGalleryCollectionViewController class]){
+            currentCollectionController = (REMGalleryCollectionViewController *)controller;
+            NSString *controllerKey = currentCollectionController.collectionKey;
+            
+            REMBuildingModel *building = [self.buildingInfoArray[currentBuildingIndex] building];
+            
+            if(!REMIsNilOrNull(controllerKey) && [controllerKey isEqualToString:building.province]){
+                currentCollectionController = (REMGalleryCollectionViewController *)controller;
+                break;
+            }
+        }
+    }
+    
+    // Find the cell, get its frame and return
+    UICollectionViewCell *cell = [currentCollectionController cellForBuilding:[self.buildingInfoArray[currentBuildingIndex] building].buildingId];
+    self.currentBuildingIndex = currentBuildingIndex;
+    
+    return [self getGalleryCollectionCellFrameInGalleryView:cell];
+}
+
+
+-(CGRect)getGalleryCollectionCellFrameInGalleryView:(UICollectionViewCell *)cell
+{
+    UIView *collectionView = cell.superview;
+    CGRect cellFrameInCollectionVIew = cell.frame;
+    
+    UIView *cycleView = collectionView;
+    CGRect cellFrameInGalleryView = cellFrameInCollectionVIew;
+    
+    while(![cycleView isEqual:self.view]){
+        cellFrameInGalleryView = [cycleView convertRect:cellFrameInGalleryView toView: cycleView.superview];
+        cycleView = cycleView.superview;
+    }
+    
+    return cellFrameInGalleryView;
+}
+
 
 @end

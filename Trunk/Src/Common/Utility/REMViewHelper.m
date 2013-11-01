@@ -25,4 +25,22 @@
     return CGPointMake(x, y);
 }
 
++(CGRect)getFrame:(CGRect)frame ofView:(UIView *)view inAncestorView:(UIView *)ancestorView
+{
+    //NSLog(@"view:%@ frame:%@ ancestor: %@\n", [view class], NSStringFromCGRect(frame), [ancestorView class]);
+    
+    if ([view isEqual:ancestorView]) {
+        return frame;
+    }
+    
+    UIView *currentView = view.superview;
+    CGRect frameInParentView = [currentView convertRect:frame toView:currentView.superview];
+    if([currentView.superview isEqual:ancestorView])
+        return frameInParentView;
+    else{
+        currentView = currentView.superview;
+        return [REMViewHelper getFrame:frameInParentView ofView:currentView inAncestorView:ancestorView];
+    }
+}
+
 @end
