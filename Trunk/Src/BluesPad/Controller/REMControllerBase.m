@@ -48,7 +48,7 @@
 {
     UIButton *customerLogoButton = [[UIButton alloc]initWithFrame:kDMCommon_CustomerLogoFrame];
     
-    [customerLogoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
+    [customerLogoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
     
     [customerLogoButton addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     

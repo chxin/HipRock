@@ -16,9 +16,7 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMBuildingOverallModel.h"
 #import <QuartzCore/QuartzCore.h>
-#import "REMBuildingEntranceSegue.h"
 #import "REMBuildingViewController.h"
-#import "REMMapGallerySegue.h"
 
 @interface REMGalleryCollectionViewController ()
 
@@ -49,20 +47,24 @@
     CGRect collectionViewFrame = [self getCollectionFrame];
     
     self.view = [[UIView alloc] initWithFrame:collectionViewFrame];
+    self.view.clipsToBounds = NO;
     
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
     [layout setSectionInset:kDMGallery_GalleryCollectionViewInsets];
     
-    UICollectionView *galleryView = [[UICollectionView alloc] initWithFrame:collectionViewFrame collectionViewLayout:layout];
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:collectionViewFrame collectionViewLayout:layout];
+    collectionView.translatesAutoresizingMaskIntoConstraints = NO;
+    collectionView.frame = collectionViewFrame;
+    collectionView.dataSource = self;
+    collectionView.delegate = self;
+    [collectionView registerClass:[REMGalleryCollectionCell class] forCellWithReuseIdentifier:kCellIdentifier_GalleryCollectionCell];
+    [collectionView setBackgroundColor:[UIColor clearColor]];
+    collectionView.layer.borderColor = [UIColor redColor].CGColor;
+    collectionView.layer.borderWidth = 1.0;
     
-    galleryView.frame = collectionViewFrame;
-    galleryView.dataSource = self;
-    galleryView.delegate = self;
-    [galleryView registerClass:[REMGalleryCollectionCell class] forCellWithReuseIdentifier:kCellIdentifier_GalleryCollectionCell];
-    [galleryView setBackgroundColor:[UIColor clearColor]];
+    self.collectionView = collectionView;
     
-    self.collectionView = galleryView;
-    
+    [self.view addSubview:self.collectionView];
     [self viewDidLoad];
 }
 
@@ -70,6 +72,8 @@
 {
     int rowCount = (self.buildingInfoArray.count / 6) + 1;
     CGFloat height = kDMGallery_GalleryCollectionViewTopMargin + kDMGallery_GalleryCollectionViewBottomMargin + (rowCount * kDMGallery_GalleryCellHeight) + ((rowCount - 1) * kDMGallery_GalleryCellVerticleSpace);
+    
+    NSLog(@"collection view height: %d", kDMGallery_GalleryGroupViewWidth);
     
     return CGRectMake(0, 0, kDMGallery_GalleryGroupViewWidth, height);
 }
@@ -79,7 +83,13 @@
 {
 	// Do any additional setup after loading the view.
     
+    NSLog(@"collectionviewframe1: %@",NSStringFromCGRect(self.collectionView.frame));
     
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"collectionviewframe2: %@",NSStringFromCGRect(self.collectionView.frame));
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,78 +103,57 @@
 
 - (void)galleryCellTapped:(REMGalleryCollectionCell *)cell
 {
-    CGRect cellFrameInTableCell = [self.collectionView convertRect:cell.frame toView: self.collectionView.superview];
-    
-    [((REMGalleryViewController *)self.parentViewController) presentBuildingViewForBuilding:cell.building fromFrame:cellFrameInTableCell];
+    [((REMGalleryViewController *)self.parentViewController) presentBuildingViewFromCell:cell];
 }
 
 
-//-(void)galleryCellPinched:(REMGalleryCollectionCell *)cell :(UIPinchGestureRecognizer *)pinch
-//{
-//    if(pinch.state  == UIGestureRecognizerStateBegan){
-//        UIImageView *snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:cell]];
-//        cell.snapshot = snapshot;
-//        
-//        
-//        UIView *cover = [[UIView alloc] initWithFrame:cell.frame];
-//        [cover setBackgroundColor:[UIColor blackColor]];
-//        cell.blackCover = cover;
-//        
-//        [self.view addSubview:cell.blackCover];
-//        [self.view addSubview:cell.snapshot];
-//    }
-//    
-//    if(pinch.state  == UIGestureRecognizerStateChanged){
-//        CGFloat scale = pinch.scale < 1 ? 1 : pinch.scale;
-//        CGAffineTransform scaleTransform = CGAffineTransformMakeScale(scale, scale);
-//        cell.snapshot.layer.affineTransform = scaleTransform;
-//        
-//        CGPoint point = [pinch locationInView:self.view];
-//        cell.snapshot.center = point;
-//    }
-//    
-//    if(pinch.state  == UIGestureRecognizerStateEnded || pinch.state  == UIGestureRecognizerStateCancelled || pinch.state  == UIGestureRecognizerStateFailed){
-//        
-//        if(pinch.scale <= 1){ //scale did not change,
-//            CGPoint pinchPoint = [pinch locationInView:self.view];
-//            CGPoint cellCenter = [REMViewHelper getCenterOfRect:cell.frame];
-//            
-//            if(pinchPoint.x != cellCenter.x || pinchPoint.y != cellCenter.y){ //but position changed
-//                [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//                    self.snapshot.center = self.view.center;
-//                } completion:^(BOOL finished) {
-//                    [cell.blackCover removeFromSuperview];
-//                    cell.blackCover = nil;
-//                    
-//                    [cell.snapshot removeFromSuperview];
-//                    cell.snapshot = nil;
-//                }];
-//            }
-//        }
-//        else{ //scale larger
-//            CGRect initialiZoomRect = cell.snapshot.frame;
-//            [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//                //from self.snapshot.frame to self.mapViewController.initialZoomRect;
-//                self.snapshot.transform = [REMViewHelper getScaleTransformFromOriginalFrame:initialiZoomRect andFinalFrame:self.view.frame];
-//                self.snapshot.center = [REMViewHelper getCenterOfRect:self.view.frame];
-//            } completion:^(BOOL finished) {
-//                [cell.blackCover removeFromSuperview];
-//                cell.blackCover = nil;
-//                
-//                [cell.snapshot removeFromSuperview];
-//                cell.snapshot = nil;
-//                
-//                self.initialZoomRect = cell.frame;
-//                self.selectedBuilding = cell.building;
-//                self.isPinching = YES;
-//                
-//                [self performSegueWithIdentifier:kSegue_GalleryToBuilding sender:self];
-//            }];
-//        }
-//        
-//    }
-//}
-//
+-(void)galleryCellPinched:(REMGalleryCollectionCell *)cell :(UIPinchGestureRecognizer *)pinch
+{
+    REMGalleryViewController *galleryController = (REMGalleryViewController *)self.parentViewController;
+    
+    if(pinch.state  == UIGestureRecognizerStateBegan){
+        [cell beginPinch]; //snapshot will be ready
+        [galleryController.view addSubview:cell.snapshot];
+    }
+    
+    if(pinch.state  == UIGestureRecognizerStateChanged){
+        CGFloat scale = pinch.scale < 1 ? 1 : pinch.scale;
+        CGAffineTransform scaleTransform = CGAffineTransformMakeScale(scale, scale);
+        CGPoint point = [pinch locationInView:galleryController.view];
+        
+        cell.snapshot.layer.affineTransform = scaleTransform;
+        cell.snapshot.center = point;
+    }
+    
+    if(pinch.state  == UIGestureRecognizerStateEnded || pinch.state  == UIGestureRecognizerStateCancelled || pinch.state  == UIGestureRecognizerStateFailed){
+        if(pinch.scale <= 1){ //scale did not change,
+            CGPoint pinchPoint = [pinch locationInView:galleryController.view];
+            CGPoint cellCenterInGalleryView = [self.collectionView convertPoint:cell.center toView:galleryController.view];
+
+            if(pinchPoint.x != cellCenterInGalleryView.x || pinchPoint.y != cellCenterInGalleryView.y){ //but position changed
+                [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    cell.snapshot.center = cellCenterInGalleryView;
+                } completion:^(BOOL finished) {
+                    [cell endPinch];
+                }];
+            }
+        }
+        else{ //scale larger
+            CGFloat scale = galleryController.view.frame.size.width / cell.frame.size.width;
+            [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                cell.snapshot.layer.affineTransform = CGAffineTransformMakeScale(scale, scale);
+                cell.snapshot.center = galleryController.view.center;
+            } completion:^(BOOL finished) {
+                [cell endPinch];
+                
+                galleryController.initialZoomRect = [self.collectionView convertRect:cell.frame toView:galleryController.view];
+                galleryController.currentBuildingIndex = [galleryController buildingIndexFromBuilding:cell.building];
+                self.isPinching = YES;
+            }];
+        }
+    }
+}
+
 -(void)loadBuildingSmallImage:(NSArray *)imageIds :(void (^)(UIImage *))completed
 {
     if(imageIds != nil && imageIds.count > 0){
@@ -193,16 +182,24 @@
             }];
         }
     }
+    else{
+        completed([UIImage imageNamed:@"DefaultBuilding-Small"]);
+    }
 }
 
--(CGRect)cellFrameForBuilding:(NSNumber *)buildingId
+-(REMGalleryCollectionCell *)cellForBuilding:(NSNumber *)buildingId
 {
-    for(REMGalleryCollectionCell *cell in self.collectionView.visibleCells){
-        if([cell.building.buildingId isEqualToNumber:buildingId])
-            return [self.collectionView convertRect:cell.frame toView: self.collectionView.superview];
+    int buildingIndex = 0;
+    for(int i=0;i<self.buildingInfoArray.count;i++){
+        if([[self.buildingInfoArray[i] building].buildingId isEqualToNumber:buildingId]){
+            buildingIndex = i;
+            break;
+        }
     }
     
-    return CGRectZero;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:buildingIndex inSection:0];
+    
+    return (REMGalleryCollectionCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
 }
 
 
@@ -231,7 +228,17 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(147, 110);
+    return kDMGallery_GalleryCellSize;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return kDMGallery_GalleryCellVerticleSpace;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return kDMGallery_GalleryCellHorizontalSpace;
 }
 
 

@@ -7,6 +7,7 @@
 //
 
 #import "REMChartHeader.h"
+#import "REMBarPlot.h"
 
 @implementation REMTrendChartColumnSeries
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
@@ -55,9 +56,44 @@
     if (fieldEnum == CPTBarPlotFieldBarLocation) {
         return [self.dataProcessor processX:point.localTime];
     } else if (fieldEnum == CPTBarPlotFieldBarTip) {
-        return [self.dataProcessor processY:point.dataValue];
+        NSNumber* yVal = [self.dataProcessor processY:point.dataValue];
+        if ([yVal isEqual:[NSNull null]]) return yVal;
+        else {
+            return [NSNumber numberWithDouble: yVal.doubleValue / self.yScale.doubleValue];
+        }
     } else {
         return nil;
     }
 }
+
+//-(CPTNumericData*)dataForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndexRange:(NSRange)indexRange {
+//    NSUInteger location = indexRange.location;
+//    NSUInteger length = indexRange.length;
+//    if (location <= length) {
+//        length = location + length * 2;
+//        location = 0;
+//    } else {
+//        location = location - length;
+//        length = 3 * length;
+//    }
+//    NSUInteger end = location + length;
+//    if (end > self.energyData.count) end = self.energyData.count;
+//    NSMutableArray* numbers = [[NSMutableArray alloc]initWithCapacity:end-location];
+//    for (uint i = location; i < end; i++) {
+//        NSNumber* val = nil;
+//        REMEnergyData* point = [self.energyData objectAtIndex:i];
+//        if (fieldEnum == CPTBarPlotFieldBarLocation) {
+//            val = [self.dataProcessor processX:point.localTime];
+//        } else if (fieldEnum == CPTBarPlotFieldBarTip) {
+//            val = [self.dataProcessor processY:point.dataValue];
+//        }
+//        if (val == nil || val == NULL || [val isEqual:[NSNull null]]) {
+//            [numbers addObject:[NSNull null]];
+//        } else {
+//            [numbers addObject:val];
+//        }
+//    }
+//    
+//    return [[CPTNumericData alloc]initWithArray:numbers dataType:[self getPlot].doubleDataType shape:nil];
+//}
 @end

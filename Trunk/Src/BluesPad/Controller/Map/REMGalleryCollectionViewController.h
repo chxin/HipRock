@@ -26,7 +26,7 @@
 
 -(id)initWithKey:(NSString *)key andBuildingInfoArray:(NSArray *)buildingInfoArray;
 
--(CGRect)cellFrameForBuilding:(NSNumber *)buildingId;
+-(REMGalleryCollectionCell *)cellForBuilding:(NSNumber *)buildingId;
 
 @end
 

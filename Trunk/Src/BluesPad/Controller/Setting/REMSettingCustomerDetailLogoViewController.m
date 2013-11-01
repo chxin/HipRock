@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.logoImageVIew.image=[REMApplicationContext instance].currentCustomerLogo;
+    self.logoImageVIew.image = REMAppCurrentLogo;
     
 }
 /*

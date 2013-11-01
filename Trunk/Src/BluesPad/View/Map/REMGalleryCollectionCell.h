@@ -17,8 +17,15 @@
 
 @property (nonatomic,weak) UILabel *titleLabel;
 
-@property (nonatomic,weak) UIImageView *snapshot;
-@property (nonatomic,weak) UIView *blackCover;
+@property (nonatomic,strong) UIImageView *snapshot;
+
+-(void)coverMe;
+-(void)uncoverMe;
+
+-(void)beginPinch;
+-(void)endPinch;
+
+
 
 
 @end

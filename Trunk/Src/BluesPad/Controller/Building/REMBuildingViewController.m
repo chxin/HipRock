@@ -20,12 +20,12 @@
 #import "REMWidgetDetailViewController.h"
 #import "REMWidgetMaxViewController.h"
 #import "REMWidgetCellViewController.h"
+#import "REMBuildingShareViewController.h"
 
 
 const static CGFloat imageGap=10;
 
 @interface REMBuildingViewController ()
-@property (nonatomic,strong) NSArray *imageArray;
 //@property (nonatomic) NSUInteger currentIndex;
 @property (nonatomic,strong) NSArray *originCenterXArray;
 @property (nonatomic) CGFloat cumulateX;
@@ -48,6 +48,7 @@ const static CGFloat imageGap=10;
 @property (nonatomic) CGFloat delta;
 
 @property (nonatomic) CGFloat speedBase;
+
 
 @end
 
@@ -144,8 +145,6 @@ const static CGFloat imageGap=10;
     [super didReceiveMemoryWarning];
     
 }
-
-
 
 
 
@@ -534,7 +533,7 @@ const static CGFloat imageGap=10;
 -(void)pinchThis:(UIPinchGestureRecognizer *)pinch
 {
     if(pinch.state  == UIGestureRecognizerStateBegan){
-        NSLog(@"pinch: Began");
+        //NSLog(@"pinch: Began");
         UIImageView *fromViewSnapshot = [((id)self.fromController) snapshot];
         
         self.snapshot = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:self.view]];
@@ -550,12 +549,12 @@ const static CGFloat imageGap=10;
         CGPoint point = [pinch locationInView:self.view];
         self.snapshot.center = point;
         
-        NSLog(@"pinch: Changed, scale: %f, point: %@", pinch.scale, NSStringFromCGPoint(point));
+        //NSLog(@"pinch: Changed, scale: %f, point: %@", pinch.scale, NSStringFromCGPoint(point));
         
     }
     
     if(pinch.state  == UIGestureRecognizerStateEnded || pinch.state  == UIGestureRecognizerStateCancelled || pinch.state  == UIGestureRecognizerStateFailed){
-        NSLog(@"pinch: Ended, state: %d, touch numbers: %d", pinch.state, pinch.numberOfTouches);
+        //NSLog(@"pinch: Ended, state: %d, touch numbers: %d", pinch.state, pinch.numberOfTouches);
         
         UIImageView *fromViewSnapshot = [((id)self.fromController) snapshot];
         if(pinch.scale >= 1){ //scale did not change,
@@ -573,7 +572,7 @@ const static CGFloat imageGap=10;
             }
         }
         else{ //scale smaller
-            CGRect initialiZoomRect = [((id)self.fromController) initialZoomRect];
+            CGRect initialiZoomRect = [((id)self.fromController) getDestinationZoomRect:self.currentBuildingIndex];
             [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 //from self.snapshot.frame to self.mapViewController.initialZoomRect;
                 self.snapshot.transform = [REMViewHelper getScaleTransformFromOriginalFrame:initialiZoomRect andFinalFrame:self.view.frame];
@@ -594,12 +593,11 @@ const static CGFloat imageGap=10;
 #pragma mark -
 #pragma mark segue
 
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:kSegue_BuildingToMap] == YES){
+    if([segue.identifier isEqualToString:kSegue_BuildingToMap] || [segue.identifier isEqualToString:kSegue_BuildingToGallery]){
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
         
-        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, [((id)self.fromController) initialZoomRect], self.view.frame)];
+        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, CGRectZero, self.view.frame)];
     }
     if([segue.identifier isEqualToString:@"maxWidgetSegue"]==YES){
         REMImageView *view = self.imageArray[self.currentBuildingIndex];
@@ -629,6 +627,33 @@ const static CGFloat imageGap=10;
 }
 
 - (IBAction)shareButtonPressed:(id)sender {
+    //[self performSegueWithIdentifier:kSegue_BuildingToSharePopover sender:self];
+    
+    REMBuildingShareViewController *shareController = [self.storyboard instantiateViewControllerWithIdentifier: @"sharePopover"];
+    
+    shareController.contentSizeForViewInPopover = CGSizeMake(156, 88);
+    
+    if(self.sharePopoverController == nil){
+        self.sharePopoverController = [[UIPopoverController alloc] initWithContentViewController:shareController];
+    }
+    
+    shareController.buildingController = self;
+    
+    [self.sharePopoverController setDelegate:self];
+    [self.sharePopoverController presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES ];
+}
+
+
+-(IBAction)backButtonPressed:(id)sender
+{
+    //decide where to go
+    NSString *segueIdentifier = [self.fromController class] == [REMGalleryViewController class] ? kSegue_BuildingToGallery : kSegue_BuildingToMap;
+    
+    [self performSegueWithIdentifier:segueIdentifier sender:self];
+}
+
+-(void)shareViaWeibo
+{
     REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:[UIApplication sharedApplication].keyWindow];
     
     [masker showMask];
@@ -639,15 +664,7 @@ const static CGFloat imageGap=10;
     [self performSelector:@selector(executeExport:) withObject:masker afterDelay:0.1];
 }
 
--(IBAction)backButtonPressed:(id)sender
-{
-    REMBuildingEntranceSegue *segue = [[REMBuildingEntranceSegue alloc] initWithIdentifier:kSegue_BuildingToMap source:self destination:self.fromController];
-    
-    [self prepareForSegue:segue sender:self];
-    [segue perform];
-}
-
--(void)executeExport:(REMMaskManager *)masker{
+-(void)executeWeiboExport:(REMMaskManager *)masker{
     REMImageView *view = self.imageArray[self.currentBuildingIndex];
     
     [view exportImage:^(UIImage *image, NSString* text){
@@ -678,5 +695,7 @@ const static CGFloat imageGap=10;
         
     }];
 }
+
+
 
 @end

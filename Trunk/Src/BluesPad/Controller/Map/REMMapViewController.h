@@ -7,28 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "REMSplashScreenController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import "REMControllerBase.h"
-#import "REMBuildingModel.h"
-#import "REMBuildingOverallModel.h"
-@class REMGalleryViewController;
-@class REMBuildingViewController;
 @class REMMarkerBubbleView;
 
 @interface REMMapViewController : REMControllerBase<GMSMapViewDelegate>
 
+#pragma mark - Properties
 @property (nonatomic,weak) NSArray *buildingInfoArray;
-@property (nonatomic,weak) REMBuildingViewController *buildingViewController;
-
-@property (nonatomic,strong) UIImageView *snapshot;
-@property (nonatomic) CGRect initialZoomRect;
-
 @property (nonatomic) int currentBuildingIndex;
 
+@property (nonatomic) CGRect initialZoomRect;
+@property (nonatomic,strong) UIImageView *snapshot;
 
--(void)setIsInitialPresenting:(BOOL)isInitial;
-
+#pragma mark - Methods
 -(void)presentBuildingView;
 
 -(void)bubbleTapped:(REMMarkerBubbleView *)bubble;

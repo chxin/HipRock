@@ -13,15 +13,16 @@
 
 @interface REMGalleryViewController : REMControllerBase<UITableViewDataSource, UITableViewDelegate>
 
+#pragma mark - Properties
 @property (nonatomic,weak) NSArray *buildingInfoArray;
 @property (nonatomic) int currentBuildingIndex;
-
-@property (nonatomic,weak) REMMapViewController *mapViewController;
 
 @property (nonatomic) CGRect initialZoomRect;
 @property (nonatomic,strong) UIImageView *snapshot;
 
+#pragma mark - Methods
 -(CGRect)getDestinationZoomRect:(int)currentBuildingIndex;
--(void)presentBuildingViewForBuilding:(REMBuildingModel *)building fromFrame:(CGRect)frameInTableCell;
+-(void)presentBuildingViewFromCell:(REMGalleryCollectionCell *)cell;
+-(int)buildingIndexFromBuilding:(REMBuildingModel *)building;
 
 @end
