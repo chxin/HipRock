@@ -50,40 +50,46 @@
     myPlot.barWidth = CPTDecimalFromFloat(barWidth);
 }
 
-//- (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
-//{
-//    REMEnergyData* point = [self.energyData objectAtIndex:idx];
-//    if (fieldEnum == CPTBarPlotFieldBarLocation) {
-//        return [self.dataProcessor processX:point.localTime];
-//    } else if (fieldEnum == CPTBarPlotFieldBarTip) {
-//        return [self.dataProcessor processY:point.dataValue];
-//    } else {
-//        return nil;
-//    }
-//}
-
--(CPTNumericData*)dataForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndexRange:(NSRange)indexRange {
-    NSUInteger location = indexRange.location;
-    NSUInteger length = indexRange.length;
-    if (location <= length) {
-        length = location + length * 2;
-        location = 0;
+- (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
+{
+    REMEnergyData* point = [self.energyData objectAtIndex:idx];
+    if (fieldEnum == CPTBarPlotFieldBarLocation) {
+        return [self.dataProcessor processX:point.localTime];
+    } else if (fieldEnum == CPTBarPlotFieldBarTip) {
+        return [self.dataProcessor processY:point.dataValue];
     } else {
-        location = location - length;
-        length = 3 * length;
+        return nil;
     }
-    NSUInteger end = location + length;
-    if (end > self.energyData.count) end = self.energyData.count;
-    NSMutableArray* numbers = [[NSMutableArray alloc]initWithCapacity:end-location];
-    for (uint i = location; i < end; i++) {
-        REMEnergyData* point = [self.energyData objectAtIndex:i];
-        if (fieldEnum == CPTBarPlotFieldBarLocation) {
-            [numbers addObject: [self.dataProcessor processX:point.localTime]];
-        } else if (fieldEnum == CPTBarPlotFieldBarTip) {
-            [numbers addObject:[self.dataProcessor processY:point.dataValue]];
-        }
-    }
-    
-    return [[CPTNumericData alloc]initWithArray:numbers dataType:[self getPlot].doubleDataType shape:nil];
 }
+
+//-(CPTNumericData*)dataForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndexRange:(NSRange)indexRange {
+//    NSUInteger location = indexRange.location;
+//    NSUInteger length = indexRange.length;
+//    if (location <= length) {
+//        length = location + length * 2;
+//        location = 0;
+//    } else {
+//        location = location - length;
+//        length = 3 * length;
+//    }
+//    NSUInteger end = location + length;
+//    if (end > self.energyData.count) end = self.energyData.count;
+//    NSMutableArray* numbers = [[NSMutableArray alloc]initWithCapacity:end-location];
+//    for (uint i = location; i < end; i++) {
+//        NSNumber* val = nil;
+//        REMEnergyData* point = [self.energyData objectAtIndex:i];
+//        if (fieldEnum == CPTBarPlotFieldBarLocation) {
+//            val = [self.dataProcessor processX:point.localTime];
+//        } else if (fieldEnum == CPTBarPlotFieldBarTip) {
+//            val = [self.dataProcessor processY:point.dataValue];
+//        }
+//        if (val == nil || val == NULL || [val isEqual:[NSNull null]]) {
+//            [numbers addObject:[NSNull null]];
+//        } else {
+//            [numbers addObject:val];
+//        }
+//    }
+//    
+//    return [[CPTNumericData alloc]initWithArray:numbers dataType:[self getPlot].doubleDataType shape:nil];
+//}
 @end
