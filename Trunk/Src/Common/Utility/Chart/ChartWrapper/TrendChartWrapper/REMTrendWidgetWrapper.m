@@ -113,14 +113,13 @@
     chartConfig.xGlobalLength = @([self createGlobalRange].length);
     
     chartConfig.series = [self extraSeriesConfig];
-    REMYFormatter* yFormatter = [[REMYFormatter alloc]init];
     NSMutableArray* yAxisList = [[NSMutableArray alloc]init];
     for (REMTrendChartSeries* s in chartConfig.series) {
         if (s.yAxisIndex >= yAxisList.count) {
             REMTrendChartAxisConfig* y = [[REMTrendChartAxisConfig alloc]initWithLineStyle:style[@"yLineStyle"] gridlineStyle:style[@"yGridlineStyle"] textStyle:style[@"yTextStyle"]];
             y.title = s.uomName;
             [yAxisList addObject:y];
-            y.labelFormatter = yFormatter;
+            y.labelFormatter = [[REMYFormatter alloc]init];
         }
     }
     chartConfig.yAxisConfig = yAxisList;

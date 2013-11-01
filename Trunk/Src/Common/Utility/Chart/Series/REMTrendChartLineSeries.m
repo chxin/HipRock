@@ -85,6 +85,11 @@
     if (fieldEnum == CPTScatterPlotFieldX) {
         return [self.dataProcessor processX:point.localTime];
     } else if (fieldEnum == CPTScatterPlotFieldY) {
+        NSNumber* yVal = [self.dataProcessor processY:point.dataValue];
+        if ([yVal isEqual:[NSNull null]]) return yVal;
+        else {
+            return [NSNumber numberWithDouble: yVal.doubleValue * self.yScale.doubleValue];
+        }
         return [self.dataProcessor processY:point.dataValue];
     } else {
         return nil;

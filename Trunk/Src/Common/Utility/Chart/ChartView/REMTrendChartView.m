@@ -18,11 +18,21 @@
     float xStableEndPoint;   // 弹性稳定区域的x轴终点
     float xUnstableStartPoint; // 弹性区域不稳定的x轴起点
     float xUnstableEndPoint; // 弹性区域不稳定的x轴起点
+    BOOL suspendDraw;
+    int redrawCount;
+}
+
+-(void)setNeedsDisplay {
+    if (suspendDraw) return;
+    [super setNeedsDisplay];
+    NSLog(@"%i", redrawCount);
+    redrawCount++;
 }
 
 -(REMTrendChartView*)initWithFrame:(CGRect)frame chartConfig:(REMTrendChartConfig*)config  {
     self = [super initWithFrame:frame];
     if (self) {
+        self.collapsesLayers = YES;
         self.allowPinchScaling = NO;
         self.userInteractionEnabled = config.userInteraction;
         maxXValOfSeries = INT32_MIN;
@@ -87,9 +97,10 @@
     [self rerenderYLabel];
     
     CPTPlotRange* xRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(currentXLocation) length:CPTDecimalFromFloat(currentXLength)];
-    for (CPTXYPlotSpace* pSpace in self.hostedGraph.allPlotSpaces) {
-        pSpace.xRange = xRange;
-    }
+    ((CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace).xRange = xRange;
+//    for (CPTXYPlotSpace* pSpace in self.hostedGraph.allPlotSpaces) {
+//        pSpace.xRange = xRange;
+//    }
     if (isTheFirstRender == YES) {
         [self rerenderXLabel];
         isTheFirstRender = NO;
@@ -186,21 +197,23 @@
     float yMajorLength = yMajorInterval * (self.horizentalGridLineAmount + 0.2);
     ((CPTXYPlotSpace*)(majorYAxis.plotSpace)).yRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(yMajorLength)];
     
+    NSMutableArray* scaleArray = [[NSMutableArray alloc]init];
+    [scaleArray addObject:@(1)];
     // 绘制其他Y轴
     for (uint i = 2; i < self.hostedGraph.axisSet.axes.count; i++) {
         CPTXYAxis* yAxis =[self.hostedGraph.axisSet.axes objectAtIndex:i];
-        CPTXYPlotSpace* thePlotspace = (CPTXYPlotSpace*)yAxis.plotSpace;
-        
         float yMax = ((NSNumber*)[yAxisMaxValues objectAtIndex:i-1]).floatValue;
-        if (yMax == majorYMax) {
-            yAxis.majorIntervalLength = majorYAxis.majorIntervalLength;
-            thePlotspace.yRange = ((CPTXYPlotSpace*)(majorYAxis.plotSpace)).yRange;
-        } else {
-            float interval = [self getYInterval:yMax intervalCount:self.horizentalGridLineAmount];
-            yAxis.majorIntervalLength = CPTDecimalFromFloat(interval);
-            thePlotspace.yRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(0) length:CPTDecimalFromInt(interval * (self.horizentalGridLineAmount + 0.2))];
-            
-        }
+        float interval = [self getYInterval:yMax intervalCount:self.horizentalGridLineAmount];
+        double scale = interval / yMajorInterval;
+        [scaleArray addObject:@(scale)];
+        
+        ((REMYFormatter*)yAxis.labelFormatter).yScale = @(scale);
+        yAxis.majorIntervalLength = majorYAxis.majorIntervalLength;
+    }
+    
+    for (int i = 0; i < self.hostedGraph.allPlots.count; i++) {
+        REMTrendChartSeries* s = self.series[i];
+        s.yScale = scaleArray[s.yAxisIndex];
     }
 }
 
@@ -252,13 +265,14 @@
             ((CPTXYPlotSpace*)yAxis.plotSpace).globalYRange = globalYRange;
         } else {
             graph.plotAreaFrame.paddingRight = yAxisConfig.reservedSpace.width + yAxisConfig.lineStyle.lineWidth + graph.plotAreaFrame.paddingRight;
-            CPTXYPlotSpace* plotSpace = [[CPTXYPlotSpace alloc]init];
-            yAxis.plotSpace = plotSpace;
+//            CPTXYPlotSpace* plotSpace = [[CPTXYPlotSpace alloc]init];
+//            yAxis.plotSpace = plotSpace;
+            yAxis.plotSpace = self.hostedGraph.defaultPlotSpace;
             yAxis.tickDirection = CPTSignPositive;
             yAxis.axisConstraints = [CPTConstraints constraintWithUpperOffset:reserveredRightSpace];
             reserveredRightSpace-=yAxisConfig.reservedSpace.width;
-            yAxis.plotSpace.allowsUserInteraction = NO;
-            [self.hostedGraph addPlotSpace:plotSpace];
+//            yAxis.plotSpace.allowsUserInteraction = NO;
+//            [self.hostedGraph addPlotSpace:plotSpace];
         }
         yAxis.labelingPolicy = CPTAxisLabelingPolicyFixedInterval;
         [axisArray addObject:yAxis];
@@ -291,16 +305,19 @@
 
 -(CPTPlotRange*)plotSpace:(CPTXYPlotSpace *)space willChangePlotRangeTo:(CPTPlotRange *)newRange forCoordinate:(CPTCoordinate)coordinate {
     if (coordinate == CPTCoordinateX) {
+        suspendDraw = YES;
+        redrawCount = 0;
         // Move other plotspace with the default plotspace
-        for (int i = 2; i < self.hostedGraph.axisSet.axes.count; i++) {
-            CPTXYPlotSpace* pSpace = (CPTXYPlotSpace*)((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:i]).plotSpace;
-            pSpace.xRange = newRange;
-        }
+//        for (int i = 2; i < self.hostedGraph.axisSet.axes.count; i++) {
+//            CPTXYPlotSpace* pSpace = (CPTXYPlotSpace*)((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:i]).plotSpace;
+//            pSpace.xRange = newRange;
+//        }
         float newRangeStart = [NSDecimalNumber decimalNumberWithDecimal:newRange.location].floatValue;
         float newRangeLength = [NSDecimalNumber decimalNumberWithDecimal:newRange.length].floatValue;
         if (newRangeStart >= xStableStartPoint && newRangeStart + newRangeLength <= xStableEndPoint) {
             [self renderRange:newRangeStart length:newRangeLength];
         }
+        suspendDraw = NO;
     } else if (coordinate == CPTCoordinateY) {
         return space.yRange; // disable y scrolling here.
     }

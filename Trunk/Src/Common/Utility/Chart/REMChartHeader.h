@@ -72,6 +72,8 @@
 @protected BOOL occupy;   // 所有为YES的序列，在同一个X轴位置的数据点的位置互斥。线图设为false，Bar、Column和StackColumn设为true
 }
 //@property (nonatomic, readonly) NSArray* points;
+
+@property (nonatomic) NSNumber* yScale;
 /*
  * 对应的Y轴的index，从0开始
  */
@@ -118,6 +120,7 @@
 @end
 
 @interface REMYFormatter : NSFormatter
+@property (nonatomic) NSNumber* yScale;
 @end
 
 typedef enum  {
