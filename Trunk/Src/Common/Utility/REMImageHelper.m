@@ -340,11 +340,11 @@
 
 + (NSString *)buildingImagePathWithId:(NSNumber *)imageId andType:(REMBuildingImageType)type
 {
-    if([REMApplicationContext instance].currentUser == nil){
+    if(REMAppCurrentUser == nil){
         return nil;
     }
     
-    NSString *currentUserName = [REMApplicationContext instance].currentUser.name;
+    NSString *currentUserName = REMAppCurrentUser.name;
     
     NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     

@@ -214,7 +214,7 @@ static BOOL isInitialPresenting = YES;
         
         //prepare custom segue parameters
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
-        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(isInitialPresenting, self.currentBuildingIndex, [self getDestinationZoomRect:self.currentBuildingIndex], self.view.frame)];
+        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, [self getDestinationZoomRect:self.currentBuildingIndex], self.view.frame)];
         
         //prepare destination view controller
         REMBuildingViewController *buildingViewController = customSegue.destinationViewController;

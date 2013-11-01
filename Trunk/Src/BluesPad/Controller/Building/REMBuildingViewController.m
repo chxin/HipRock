@@ -20,12 +20,12 @@
 #import "REMWidgetDetailViewController.h"
 #import "REMWidgetMaxViewController.h"
 #import "REMWidgetCellViewController.h"
+#import "REMBuildingShareViewController.h"
 
 
 const static CGFloat imageGap=10;
 
 @interface REMBuildingViewController ()
-@property (nonatomic,strong) NSArray *imageArray;
 //@property (nonatomic) NSUInteger currentIndex;
 @property (nonatomic,strong) NSArray *originCenterXArray;
 @property (nonatomic) CGFloat cumulateX;
@@ -48,6 +48,7 @@ const static CGFloat imageGap=10;
 @property (nonatomic) CGFloat delta;
 
 @property (nonatomic) CGFloat speedBase;
+
 
 @end
 
@@ -571,7 +572,7 @@ const static CGFloat imageGap=10;
             }
         }
         else{ //scale smaller
-            CGRect initialiZoomRect = [((id)self.fromController) initialZoomRect];
+            CGRect initialiZoomRect = [((id)self.fromController) getDestinationZoomRect:self.currentBuildingIndex];
             [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 //from self.snapshot.frame to self.mapViewController.initialZoomRect;
                 self.snapshot.transform = [REMViewHelper getScaleTransformFromOriginalFrame:initialiZoomRect andFinalFrame:self.view.frame];
@@ -626,6 +627,33 @@ const static CGFloat imageGap=10;
 }
 
 - (IBAction)shareButtonPressed:(id)sender {
+    //[self performSegueWithIdentifier:kSegue_BuildingToSharePopover sender:self];
+    
+    REMBuildingShareViewController *shareController = [self.storyboard instantiateViewControllerWithIdentifier: @"sharePopover"];
+    
+    shareController.contentSizeForViewInPopover = CGSizeMake(156, 88);
+    
+    if(self.sharePopoverController == nil){
+        self.sharePopoverController = [[UIPopoverController alloc] initWithContentViewController:shareController];
+    }
+    
+    shareController.buildingController = self;
+    
+    [self.sharePopoverController setDelegate:self];
+    [self.sharePopoverController presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES ];
+}
+
+
+-(IBAction)backButtonPressed:(id)sender
+{
+    //decide where to go
+    NSString *segueIdentifier = [self.fromController class] == [REMGalleryViewController class] ? kSegue_BuildingToGallery : kSegue_BuildingToMap;
+    
+    [self performSegueWithIdentifier:segueIdentifier sender:self];
+}
+
+-(void)shareViaWeibo
+{
     REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:[UIApplication sharedApplication].keyWindow];
     
     [masker showMask];
@@ -636,15 +664,7 @@ const static CGFloat imageGap=10;
     [self performSelector:@selector(executeExport:) withObject:masker afterDelay:0.1];
 }
 
--(IBAction)backButtonPressed:(id)sender
-{
-    //decide where to go
-    NSString *segueIdentifier = [self.fromController class] == [REMGalleryViewController class] ? kSegue_BuildingToGallery : kSegue_BuildingToMap;
-    
-    [self performSegueWithIdentifier:segueIdentifier sender:self];
-}
-
--(void)executeExport:(REMMaskManager *)masker{
+-(void)executeWeiboExport:(REMMaskManager *)masker{
     REMImageView *view = self.imageArray[self.currentBuildingIndex];
     
     [view exportImage:^(UIImage *image, NSString* text){
@@ -675,5 +695,7 @@ const static CGFloat imageGap=10;
         
     }];
 }
+
+
 
 @end

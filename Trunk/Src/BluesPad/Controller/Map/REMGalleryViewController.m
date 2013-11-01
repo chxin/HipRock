@@ -30,7 +30,7 @@
 
 @implementation REMGalleryViewController
 
-#define kGalleryBackgroundColor [UIColor colorWithRed:29.0/255.0 green:30.0/255.0 blue:31.0/255.0 alpha:1]
+
 
 -(void)viewDidLoad
 {
@@ -67,7 +67,7 @@
 -(void)stylize
 {
     self.view.frame = kDMDefaultViewFrame;
-    self.view.backgroundColor = kGalleryBackgroundColor;
+    self.view.backgroundColor = kDMGallery_BackgroundColor;
 }
 
 -(void)addGalleryGroupView
@@ -78,6 +78,8 @@
     tableView.backgroundColor = [UIColor clearColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
+//    tableView.layer.borderColor = [UIColor blueColor].CGColor;
+//    tableView.layer.borderWidth = 1.0;
     
     self.galleryTableView = tableView;
     [self.view addSubview:self.galleryTableView];
@@ -118,7 +120,7 @@
     int rowCount = (buildingCount / 6) + 1;
     CGFloat cellHeight = kDMGallery_GalleryGroupTitleFontSize + kDMGallery_GalleryCollectionViewTopMargin + kDMGallery_GalleryCollectionViewBottomMargin + (rowCount * kDMGallery_GalleryCellHeight) + ((rowCount - 1) * kDMGallery_GalleryCellVerticleSpace);
     
-    return CGRectMake(0, 0, kDMGallery_GalleryGroupViewWidth, cellHeight);
+    return CGRectMake(0, 0, kDMGallery_GalleryGroupViewWidth, cellHeight+1);
 }
 
 #pragma mark -UITableView data source delegate
@@ -176,18 +178,20 @@
     }
 }
 
--(void)presentBuildingViewForBuilding:(REMBuildingModel *)building fromCell:(UICollectionViewCell *)cell
+-(void)presentBuildingViewFromCell:(REMGalleryCollectionCell *)cell
 {
     [self.view setUserInteractionEnabled:NO];
     
     CGRect cellFrameInView = [self getGalleryCollectionCellFrameInGalleryView:cell];
     
     self.initialZoomRect = cellFrameInView;
-    self.currentBuildingIndex = [self buildingIndexFromBuilding:building];
+    self.currentBuildingIndex = [self buildingIndexFromBuilding:cell.building];
     self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
     
     [self performSegueWithIdentifier:kSegue_GalleryToBuilding sender:self];
 }
+
+
 
 -(IBAction)unwindSegueToGallery:(UIStoryboardSegue *)sender
 {

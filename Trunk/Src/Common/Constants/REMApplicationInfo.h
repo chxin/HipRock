@@ -13,6 +13,7 @@
 #define kFontSC "STHeitiSC-Medium"
 
 
+
 @interface REMApplicationInfo : NSObject
 +(void) initApplicationInfo;
 +(NSString*)formatVersion:(NSString*)versionString;

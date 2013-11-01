@@ -114,9 +114,9 @@
         if(validationResult.status == REMUserValidationSuccess)
         {
             REMUserModel *user = validationResult.user;
-            [[REMApplicationContext instance] setCurrentUser:user];
+            [REMAppContext setCurrentUser:user];
             
-            NSArray *customers = (NSArray *)([REMApplicationContext instance].currentUser.customers);
+            NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
             
             if(customers.count<=0){
                 [REMAlertHelper alert:REMLocalizedString(kLNLogin_NotAuthorized)];
@@ -125,7 +125,7 @@
             }
             
             if(customers.count == 1){
-                [[REMApplicationContext instance] setCurrentCustomer:customers[0]];
+                [REMAppContext setCurrentCustomer:customers[0]];
                 [self.loginCarouselController.splashScreenController showMapView:nil];
                 
                 return;
@@ -173,8 +173,8 @@
 
 -(void)loginSuccess
 {
-    [[REMApplicationContext instance].currentUser save];
-    [[REMApplicationContext instance].currentCustomer save];
+    [REMAppCurrentUser save];
+    [REMAppCurrentCustomer save];
 
     [self.loginCarouselController.splashScreenController showMapView:^{
         [self.loginButton stopIndicator];

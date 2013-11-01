@@ -89,7 +89,7 @@
 
 -(BOOL)isAlreadyLogin
 {
-    REMApplicationContext *context = [REMApplicationContext instance];
+    REMApplicationContext *context = REMAppContext;
     
     return context.currentUser!=nil && context.currentCustomer!=nil;
 }
@@ -99,8 +99,8 @@
     REMUserModel *storedUser = [REMUserModel getCached];
     REMCustomerModel *storedCustomer = [REMCustomerModel getCached];
     
-    [[REMApplicationContext instance] setCurrentUser:storedUser];
-    [[REMApplicationContext instance] setCurrentCustomer:storedCustomer];
+    [REMAppContext setCurrentUser:storedUser];
+    [REMAppContext setCurrentCustomer:storedCustomer];
 }
 
 - (void)showLoginView:(BOOL)isAnimated
@@ -140,7 +140,7 @@
 //    syntax.type = @"line";
 //    syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
     
-    NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
+    NSDictionary *parameter = @{@"customerId":REMAppCurrentCustomer.customerId};
     REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSBuildingInfo parameter:parameter];
     //buildingStore.isAccessLocal = YES;
     buildingStore.groupName = nil;
@@ -156,7 +156,7 @@
             [self.buildingInfoArray addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
         }
         
-        NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
+        NSDictionary *parameter = @{@"customerId":REMAppCurrentCustomer.customerId};
         REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter];
         //buildingStore.isAccessLocal = YES;
         logoStore.groupName = nil;
@@ -168,7 +168,7 @@
             
             UIImage *view = [REMImageHelper parseImageFromNSData:data];
             
-            [REMApplicationContext instance].currentCustomerLogo=view;
+            REMAppCurrentLogo = view;
             
             if(loadCompleted!=nil)
                 loadCompleted();

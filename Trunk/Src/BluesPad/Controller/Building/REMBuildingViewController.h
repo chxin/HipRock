@@ -20,7 +20,7 @@ typedef enum _BuildingSourceType{
     BuildingSourceTypeFromGallery
 } BuildingSourceType;
 
-@interface REMBuildingViewController : REMControllerBase<UIGestureRecognizerDelegate>
+@interface REMBuildingViewController : REMControllerBase<UIGestureRecognizerDelegate,UIPopoverControllerDelegate>
 
 @property (nonatomic,strong) NSArray *buildingInfoArray;
 
@@ -33,6 +33,9 @@ typedef enum _BuildingSourceType{
 @property (nonatomic,strong) UIImage *logoImage;
 
 @property (nonatomic,weak) UIViewController *fromController;
+
+@property (nonatomic,strong) UIPopoverController *sharePopoverController;
+@property (nonatomic,strong) NSArray *imageArray;
 
 
 - (void)switchToDashboard;

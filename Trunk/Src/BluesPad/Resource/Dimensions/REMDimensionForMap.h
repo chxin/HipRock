@@ -38,6 +38,8 @@
 #define kDMGallery_GalleryCellTitleHeight kDMGallery_GalleryCellTitleFontSize
 
 
+#define kDMGallery_BackgroundColor [UIColor colorWithRed:29.0/255.0 green:30.0/255.0 blue:31.0/255.0 alpha:1]
+
 #define kDMGallery_GalleryTableViewFrame CGRectMake(kDMCommon_ContentLeftMargin, kDMGallery_GalleryGroupViewTopOffset, kDMGallery_GalleryGroupViewWidth, kDMGallery_GalleryGroupViewHeight)
 
 #define kDMGallery_GalleryCollectionViewInsets UIEdgeInsetsMake(kDMGallery_GalleryCollectionViewTopMargin, 0, kDMGallery_GalleryCollectionViewBottomMargin, 0)
@@ -48,7 +50,7 @@
 
 #define kDMGallery_GalleryCellSize CGSizeMake(kDMGallery_GalleryCellWidth,kDMGallery_GalleryCellHeight)
 
-#define kDMGallery_GalleryCellHorizontalSpace (kDMGallery_GalleryGroupViewWidth - (kDMGallery_GalleryCellCountPerRow * kDMGallery_GalleryCellWidth)) / (kDMGallery_GalleryCellCountPerRow - 1)
+#define kDMGallery_GalleryCellHorizontalSpace 1
 
 
 #endif

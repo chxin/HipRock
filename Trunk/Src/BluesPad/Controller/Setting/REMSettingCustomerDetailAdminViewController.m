@@ -54,7 +54,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [REMApplicationContext instance].currentCustomer.administratorArray.count;
+    return REMAppCurrentCustomer.administratorArray.count;
     
 }
 
@@ -66,8 +66,8 @@
     if(cell==nil){
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    REMAdministratorModel *model=[REMApplicationContext instance].currentCustomer.administratorArray[indexPath.row];
-    cell.textLabel.text=model.realName;
+    REMAdministratorModel *model = REMAppCurrentCustomer.administratorArray[indexPath.row];
+    cell.textLabel.text = model.realName;
     return cell;
 }
 
