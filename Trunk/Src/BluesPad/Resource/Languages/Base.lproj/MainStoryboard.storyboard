@@ -145,7 +145,6 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <segue destination="R8X-Id-ksc" kind="modal" identifier="sendWeiboSegue" modalPresentationStyle="formSheet" id="gyV-e6-1Kn"/>
                         <segue destination="T2C-Tf-bPc" kind="custom" identifier="maxWidgetSegue" customClass="REMMaxWidgetSegue" id="VF8-aY-jAm"/>
                         <segue destination="at3-P1-D6R" kind="unwind" identifier="buildingToGallerySegue" unwindAction="unwindSegueToGallery:" id="7g6-Qk-QsX"/>
                         <segue destination="at3-P1-D6R" kind="unwind" identifier="buildingToMapSegue" unwindAction="unwindSegueToMap:" id="wUk-sf-qJM"/>
@@ -984,27 +983,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N1S-i0-15H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="840" y="283"/>
-        </scene>
-        <!--Building Weibo Send View Controller-->
-        <scene sceneID="bSI-Y3-KEb">
-            <objects>
-                <viewController autoresizesArchivedViewToFullSize="NO" id="R8X-Id-ksc" customClass="REMBuildingWeiboSendViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6wb-3G-qZF"/>
-                        <viewControllerLayoutGuide type="bottom" id="vza-Gi-cPM"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="IoS-KQ-jPq">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    </view>
-                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TOj-5Z-r5Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1296" y="-96"/>
+            <point key="canvasLocation" x="736" y="-1101"/>
         </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="KV1-Ck-0FS">
