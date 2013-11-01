@@ -41,7 +41,7 @@
 -(void)setGroupTitle:(NSString *)title
 {
     if(title==nil || [title isEqual:[NSNull null]]){
-        title = @" ";
+        title = @"其他";
     }
     
     CGSize titleSize = [title sizeWithFont:[UIFont systemFontOfSize:kDMGallery_GalleryGroupTitleFontSize]];

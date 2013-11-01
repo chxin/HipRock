@@ -22,6 +22,6 @@
 
 #pragma mark - Methods
 -(CGRect)getDestinationZoomRect:(int)currentBuildingIndex;
--(void)presentBuildingViewForBuilding:(REMBuildingModel *)building fromFrame:(CGRect)frameInTableCell;
+-(void)presentBuildingViewForBuilding:(REMBuildingModel *)building fromCell:(UICollectionViewCell *)cell;
 
 @end

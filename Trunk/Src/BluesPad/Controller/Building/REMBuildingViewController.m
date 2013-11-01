@@ -146,34 +146,6 @@ const static CGFloat imageGap=10;
 }
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:kSegue_BuildingToMap] || [segue.identifier isEqualToString:kSegue_BuildingToGallery]){
-        REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
-        
-        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, CGRectZero, self.view.frame)];
-    }
-    if([segue.identifier isEqualToString:@"maxWidgetSegue"]==YES){
-        REMImageView *view = self.imageArray[self.currentBuildingIndex];
-        
-        REMDashboardController *dashboard=view.dashboardController;
-        
-        REMWidgetCollectionViewController *collection= dashboard.childViewControllers[dashboard.currentMaxDashboardIndex];
-        
-        
-        REMWidgetMaxViewController *maxController = segue.destinationViewController;
-        self.maxDashbaordController=dashboard;
-        maxController.widgetCollectionController=collection;
-        maxController.dashboardInfo=dashboard.dashboardArray[dashboard.currentMaxDashboardIndex];
-        
-    }
-}
-
-- (IBAction)exitMaxWidget:(UIStoryboardSegue *)sender
-{
-    
-}
-
-
 
 
 - (void)blurredImageView
@@ -560,7 +532,7 @@ const static CGFloat imageGap=10;
 -(void)pinchThis:(UIPinchGestureRecognizer *)pinch
 {
     if(pinch.state  == UIGestureRecognizerStateBegan){
-        NSLog(@"pinch: Began");
+        //NSLog(@"pinch: Began");
         UIImageView *fromViewSnapshot = [((id)self.fromController) snapshot];
         
         self.snapshot = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:self.view]];
@@ -576,12 +548,12 @@ const static CGFloat imageGap=10;
         CGPoint point = [pinch locationInView:self.view];
         self.snapshot.center = point;
         
-        NSLog(@"pinch: Changed, scale: %f, point: %@", pinch.scale, NSStringFromCGPoint(point));
+        //NSLog(@"pinch: Changed, scale: %f, point: %@", pinch.scale, NSStringFromCGPoint(point));
         
     }
     
     if(pinch.state  == UIGestureRecognizerStateEnded || pinch.state  == UIGestureRecognizerStateCancelled || pinch.state  == UIGestureRecognizerStateFailed){
-        NSLog(@"pinch: Ended, state: %d, touch numbers: %d", pinch.state, pinch.numberOfTouches);
+        //NSLog(@"pinch: Ended, state: %d, touch numbers: %d", pinch.state, pinch.numberOfTouches);
         
         UIImageView *fromViewSnapshot = [((id)self.fromController) snapshot];
         if(pinch.scale >= 1){ //scale did not change,
@@ -620,12 +592,11 @@ const static CGFloat imageGap=10;
 #pragma mark -
 #pragma mark segue
 
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:kSegue_BuildingToMap] == YES){
+    if([segue.identifier isEqualToString:kSegue_BuildingToMap] || [segue.identifier isEqualToString:kSegue_BuildingToGallery]){
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
         
-        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, [((id)self.fromController) initialZoomRect], self.view.frame)];
+        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, CGRectZero, self.view.frame)];
     }
     if([segue.identifier isEqualToString:@"maxWidgetSegue"]==YES){
         REMImageView *view = self.imageArray[self.currentBuildingIndex];

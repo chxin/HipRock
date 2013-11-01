@@ -176,13 +176,12 @@
     }
 }
 
--(void)presentBuildingViewForBuilding:(REMBuildingModel *)building fromFrame:(CGRect)frameInTableCell
+-(void)presentBuildingViewForBuilding:(REMBuildingModel *)building fromCell:(UICollectionViewCell *)cell
 {
     [self.view setUserInteractionEnabled:NO];
     
-    CGRect cellFrameInView = [self.galleryTableView convertRect:frameInTableCell toView:self.view];
- 
-    NSLog(@"cell frame in tableview: %@",NSStringFromCGRect(cellFrameInView));
+    CGRect cellFrameInView = [self getGalleryCollectionCellFrameInGalleryView:cell];
+    
     self.initialZoomRect = cellFrameInView;
     self.currentBuildingIndex = [self buildingIndexFromBuilding:building];
     self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
@@ -218,22 +217,38 @@
             currentCollectionController = (REMGalleryCollectionViewController *)controller;
             NSString *controllerKey = currentCollectionController.collectionKey;
             
-            if(controllerKey!=nil && ![controllerKey isEqual:[NSNull null]] && [controllerKey isEqualToString:[self.buildingInfoArray[currentBuildingIndex] building].province]){
+            REMBuildingModel *building = [self.buildingInfoArray[currentBuildingIndex] building];
+            
+            if(!REMIsNilOrNull(controllerKey) && [controllerKey isEqualToString:building.province]){
                 currentCollectionController = (REMGalleryCollectionViewController *)controller;
+                break;
             }
         }
     }
     
     // Find the cell, get its frame and return
-    if(currentCollectionController == nil){
-        return CGRectZero;
-    }
-    
-    
-    CGRect cellFrameInTableCell = [currentCollectionController cellFrameForBuilding:[self.buildingInfoArray[currentBuildingIndex] building].buildingId];
+    UICollectionViewCell *cell = [currentCollectionController cellForBuilding:[self.buildingInfoArray[currentBuildingIndex] building].buildingId];
     self.currentBuildingIndex = currentBuildingIndex;
     
-    return [self.galleryTableView convertRect:cellFrameInTableCell toView:self.view];
+    return [self getGalleryCollectionCellFrameInGalleryView:cell];
 }
+
+
+-(CGRect)getGalleryCollectionCellFrameInGalleryView:(UICollectionViewCell *)cell
+{
+    UIView *collectionView = cell.superview;
+    CGRect cellFrameInCollectionVIew = cell.frame;
+    
+    UIView *cycleView = collectionView;
+    CGRect cellFrameInGalleryView = cellFrameInCollectionVIew;
+    
+    while(![cycleView isEqual:self.view]){
+        cellFrameInGalleryView = [cycleView convertRect:cellFrameInGalleryView toView: cycleView.superview];
+        cycleView = cycleView.superview;
+    }
+    
+    return cellFrameInGalleryView;
+}
+
 
 @end

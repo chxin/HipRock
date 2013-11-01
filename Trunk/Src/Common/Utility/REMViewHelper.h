@@ -14,4 +14,6 @@
 
 +(CGPoint)getCenterOfRect:(CGRect)rect;
 
++(CGRect)getFrame:(CGRect)frame ofView:(UIView *)view inAncestorView:(UIView *)ancestorView;
+
 @end

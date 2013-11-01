@@ -91,9 +91,27 @@
 
 - (void)galleryCellTapped:(REMGalleryCollectionCell *)cell
 {
-    CGRect cellFrameInTableCell = [self.collectionView convertRect:cell.frame toView: self.collectionView.superview];
     
-    [((REMGalleryViewController *)self.parentViewController) presentBuildingViewForBuilding:cell.building fromFrame:cellFrameInTableCell];
+    
+//    NSLog(@"cellFrame: %@",NSStringFromCGRect(cell.frame));
+//    
+//    CGRect cellFrameInCollectionView = [self.collectionView convertRect:cell.frame toView: self.collectionView.superview];
+//    NSLog(@"cellFrameInCollectionView: %@",NSStringFromCGRect(cellFrameInCollectionView));
+//    
+//    CGRect cellFrameInTableCellContentView = [self.collectionView.superview convertRect:cellFrameInCollectionView toView:self.collectionView.superview.superview];
+//    NSLog(@"cellFrameInTableCellContentView: %@",NSStringFromCGRect(cellFrameInTableCellContentView));
+//    
+//    CGRect cellFrameInTableCellView = [self.collectionView.superview.superview convertRect:cellFrameInTableCellContentView toView:self.collectionView.superview.superview.superview];
+//    NSLog(@"cellFrameInTableCellView: %@",NSStringFromCGRect(cellFrameInTableCellView));
+    
+//    CGRect cellFrameInTableCellView = cell.frame;
+//    UIView *cycleView = self.collectionView;
+//    for(int i=0;i<3;i++){
+//        cellFrameInTableCellView = [cycleView convertRect:cellFrameInTableCellView toView: cycleView.superview];
+//        cycleView = cycleView.superview;
+//    }
+    
+    [((REMGalleryViewController *)self.parentViewController) presentBuildingViewForBuilding:cell.building fromCell:cell];
 }
 
 
@@ -191,16 +209,24 @@
             }];
         }
     }
+    else{
+        completed([UIImage imageNamed:@"DefaultBuilding-Small.png"]);
+    }
 }
 
--(CGRect)cellFrameForBuilding:(NSNumber *)buildingId
+-(REMGalleryCollectionCell *)cellForBuilding:(NSNumber *)buildingId
 {
-    for(REMGalleryCollectionCell *cell in self.collectionView.visibleCells){
-        if([cell.building.buildingId isEqualToNumber:buildingId])
-            return [self.collectionView convertRect:cell.frame toView: self.collectionView.superview];
+    int buildingIndex = 0;
+    for(int i=0;i<self.buildingInfoArray.count;i++){
+        if([[self.buildingInfoArray[i] building].buildingId isEqualToNumber:buildingId]){
+            buildingIndex = i;
+            break;
+        }
     }
     
-    return CGRectZero;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:buildingIndex inSection:0];
+    
+    return (REMGalleryCollectionCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
 }
 
 
@@ -229,7 +255,17 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(147, 110);
+    return kDMGallery_GalleryCellSize;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return kDMGallery_GalleryCellVerticleSpace;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return kDMGallery_GalleryCellHorizontalSpace;
 }
 
 

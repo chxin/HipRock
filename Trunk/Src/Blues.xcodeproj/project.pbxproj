@@ -854,6 +854,7 @@
 		7A7F7B17181F7E3400A3C5AB /* REMGalleryGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGalleryGroupView.m; sourceTree = "<group>"; };
 		7A7F7B1A181F85A100A3C5AB /* REMGalleryCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMGalleryCollectionViewController.h; path = Controller/Map/REMGalleryCollectionViewController.h; sourceTree = "<group>"; };
 		7A7F7B1B181F85A100A3C5AB /* REMGalleryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMGalleryCollectionViewController.m; path = Controller/Map/REMGalleryCollectionViewController.m; sourceTree = "<group>"; };
+		7A82C1B218229831009835C4 /* REMCommonDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMCommonDefinition.h; path = Common/Constants/REMCommonDefinition.h; sourceTree = "<group>"; };
 		7A9557BB17C7374700249CED /* REMAirQualityDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAirQualityDataModel.h; sourceTree = "<group>"; };
 		7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAirQualityDataModel.m; sourceTree = "<group>"; };
 		7A9557BE17C73AD200249CED /* REMBuildingAirQualityChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAirQualityChart.h; sourceTree = "<group>"; };
@@ -1789,6 +1790,7 @@
 		7A5E2D4A177B3CF9000F77F9 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				7A82C1B218229831009835C4 /* REMCommonDefinition.h */,
 				38ED7D151785111300219469 /* REMApplicationInfo.h */,
 				38ED7D161785111300219469 /* REMApplicationInfo.m */,
 				B43BB10F1797B12D00617B1E /* REMEnergyConstants.h */,

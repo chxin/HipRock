@@ -44,6 +44,13 @@
 
 -(void)tapped:(UITapGestureRecognizer *)tapRecognizer
 {
+//    if(tapRecognizer.state == UIGestureRecognizerStateBegan){
+//        NSLog(@"tap begin");
+//    }
+//    if(tapRecognizer.state == UIGestureRecognizerStateEnded){
+//        NSLog(@"tap end");
+//    }
+    
     [self.controller galleryCellTapped:self];
 }
 
