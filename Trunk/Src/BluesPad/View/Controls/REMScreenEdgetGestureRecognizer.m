@@ -18,7 +18,7 @@
     [super touchesBegan:touches withEvent:event];
     self.eventStartPoint = [self locationInView:[UIApplication sharedApplication].keyWindow];
     float touchX = self.eventStartPoint.y;
-    if (touchX > 974 || touchX < 50) {
+    if (touchX > 1000 || touchX < 20) {
         self.state = UIGestureRecognizerStateBegan;
     } else {
         self.state = UIGestureRecognizerStateCancelled;

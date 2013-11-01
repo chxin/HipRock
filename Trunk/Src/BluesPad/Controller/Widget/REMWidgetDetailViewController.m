@@ -26,7 +26,7 @@ const static CGFloat kWidgetTitleFontSize=25;
 const static CGFloat kWidgetDatePickerLeftMargin=15;
 const static CGFloat kWidgetDatePickerTopMargin=70;
 const static CGFloat kWidgetDatePickerHeight=40;
-const static CGFloat kWidgetDatePickerWidth=220;
+const static CGFloat kWidgetDatePickerWidth=320;
 const static CGFloat kWidgetStepSingleButtonWidth=60;
 const static CGFloat kWidgetChartLeftMargin=10;
 const static CGFloat kWidgetChartTopMargin=kWidgetDatePickerTopMargin+kWidgetDatePickerHeight;
@@ -62,7 +62,6 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
     [self.view setBackgroundColor:[UIColor grayColor]];
     
     [self.view setFrame:CGRectMake(0, 0, 1024, 748)];
@@ -79,7 +78,7 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
     [self.view addSubview:backButton];
     self.backButton=backButton;
     
-    UILabel *widgetTitle=[[UILabel alloc]initWithFrame:CGRectMake(backButton.frame.origin.x+backButton.frame.size.width+kWidgetTitleLeftMargin, backButton.frame.origin.y, 1024, kWidgetTitleHeight)];
+    UILabel *widgetTitle=[[UILabel alloc]initWithFrame:CGRectMake(backButton.frame.origin.x+backButton.frame.size.width+kWidgetTitleLeftMargin, backButton.frame.origin.y, self.view.frame.size.width, kWidgetTitleHeight)];
     widgetTitle.text=self.widgetInfo.name;
     widgetTitle.backgroundColor=[UIColor clearColor];
     widgetTitle.textColor=[UIColor whiteColor];
@@ -105,11 +104,14 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
     
     
     [timePickerButton setImage:[UIImage imageNamed:@"Oil_pressed"] forState:UIControlStateNormal];
-    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 180)];
+    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, kWidgetDatePickerWidth-40)];
+    [timePickerButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
-    timePickerButton.titleLabel.textColor=[UIColor grayColor];
+    [timePickerButton addTarget:self action:@selector(showTimePicker) forControlEvents:UIControlEventTouchUpInside];
+    
     
     [self.view addSubview:timePickerButton];
+    
     self.datePickerButton = timePickerButton;
     
     
@@ -133,6 +135,10 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
     
     [self setStepControlStatusByStep:self.widgetInfo.contentSyntax.stepType];
     [self setDatePickerButtonValueByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateType];
+}
+
+- (void) showTimePicker{
+    [self performSegueWithIdentifier:@"timerPickerSegue" sender:self];
 }
 
 - (void) showEnergyChart{
@@ -181,16 +187,16 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
 
 
 - (void) setDatePickerButtonValueByTimeRange:(REMTimeRange *)range withRelative:(REMRelativeTimeRangeType)relativeType{
-    NSString *text;
+    NSString *text=[REMTimeHelper formatTimeRangeFullHour:range];
     
-    if(relativeType!=REMRelativeTimeRangeTypeNone){
-        text=[REMTimeHelper formatTimeRangeFullHour:range];
+    if(relativeType==REMRelativeTimeRangeTypeNone){
+        
     }
     else{
         
     }
     
-    self.datePickerButton.titleLabel.text=text;
+    [self.datePickerButton setTitle:text forState:UIControlStateNormal];
 }
 
 - (void) setStepControlStatusByTimeRange:(REMTimeRange *)range {

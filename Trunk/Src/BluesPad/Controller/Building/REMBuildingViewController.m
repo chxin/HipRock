@@ -168,7 +168,7 @@ const static CGFloat imageGap=10;
     
     for (;i<self.buildingInfoArray.count;++i) {
         REMBuildingOverallModel *model = self.buildingInfoArray[i];
-        REMImageView *imageView = [[REMImageView alloc]initWithFrame:CGRectMake((kImageWidth+kImageMargin)*i, 0, kImageWidth, kImageHeight) withBuildingOveralInfo:model ];
+        REMImageView *imageView = [[REMImageView alloc]initWithFrame:CGRectMake((kImageWidth+imageGap)*i, 0, kImageWidth, kImageHeight) withBuildingOveralInfo:model ];
         imageView.defaultImage=self.defaultImage;
         imageView.defaultBlurImage=self.defaultBlurImage;
         imageView.controller=self;
