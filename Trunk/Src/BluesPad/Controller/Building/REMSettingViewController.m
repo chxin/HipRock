@@ -199,7 +199,7 @@
 - (void) weiboSwitcherChanged:(UISwitch*)sender {
     BOOL isAuthed = [Weibo.weibo isAuthenticated];
     if (sender.on == NO && isAuthed) {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"解除绑定新浪微博？" delegate:self cancelButtonTitle:nil otherButtonTitles:@"放弃", @"解除绑定", nil];
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"Weibo_AccountUnbindingConfirm", @"") delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Weibo_AccountUnbindingNOButton", @""), NSLocalizedString(@"Weibo_AccountUnbindingYESButton", @""), nil];
         alertView.accessibilityIdentifier = @"weiboAccount";
         
         [alertView show];
@@ -207,10 +207,10 @@
         [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
             NSString *message = nil;
             if (!error) {
-                message = @"微博账户绑定成功";
+                message = NSLocalizedString(@"Weibo_AccountBindingSuccess", @"");
             }
             else {
-                message = [NSString stringWithFormat:@"微博账户绑定失败: %@", error];
+                message = [NSString stringWithFormat:NSLocalizedString(@"Weibo_AccountBindingFail", @""), error];
                 sender.on = NO;
             }
             [REMAlertHelper alert:message];
