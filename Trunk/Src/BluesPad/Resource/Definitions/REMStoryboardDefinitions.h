@@ -29,6 +29,8 @@
 
 #define kSegue_ToSettings @"settingsSegue"
 
+#define kSegue_BuildingToSharePopover @"buildingToSharePopover"
+
 
 #pragma mark - Storyboard IDs
 //Prefix: kStoryboard_

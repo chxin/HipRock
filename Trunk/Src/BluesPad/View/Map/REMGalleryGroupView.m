@@ -17,14 +17,16 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self){
-        //self.layer.borderColor = [UIColor purpleColor].CGColor;
-        //self.layer.borderWidth = 1.0;
+        self.layer.borderColor = [UIColor purpleColor].CGColor;
+        self.layer.borderWidth = 1.0;
+        self.clipsToBounds = NO;
+        self.backgroundColor = [UIColor clearColor];
         
         //background view
-        //self.backgroundView = [[UIView alloc] initWithFrame:self.bounds];
-        //self.backgroundView.backgroundColor = [UIColor greenColor];
-        //self.backgroundView.layer.borderWidth = 1;
-        //self.backgroundView.layer.borderColor = [UIColor redColor].CGColor;
+//        self.backgroundView = [[UIView alloc] initWithFrame:self.bounds];
+//        self.backgroundView.backgroundColor = [UIColor clearColor];
+//        self.backgroundView.layer.borderWidth = 1;
+//        self.backgroundView.layer.borderColor = [UIColor redColor].CGColor;
         
         //accessory view
         self.accessoryView = nil;
@@ -32,6 +34,7 @@
         //content view
         self.contentMode = UIViewContentModeScaleToFill;
         self.contentView.backgroundColor = [UIColor clearColor];
+        self.contentView.clipsToBounds = NO;
     }
     
     return self;

@@ -29,7 +29,7 @@
         
         UIButton *background = [UIButton buttonWithType:UIButtonTypeCustom];
         background.frame = self.bounds;
-        NSLog(@"h:%f",self.bounds.size.height);
+        //NSLog(@"h:%f",self.bounds.size.height);
 //        [background setUserInteractionEnabled:NO];
         [background setBackgroundImage:[[UIImage imageNamed:@"MarkerBubble.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(36.0f, 10.0f, 19.0f, 10.0f)] forState:UIControlStateNormal];
         [background setBackgroundImage:[[UIImage imageNamed:@"MarkerBubble_Pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(36.0f, 10.0f, 19.0f, 10.0f)] forState:UIControlStateHighlighted];

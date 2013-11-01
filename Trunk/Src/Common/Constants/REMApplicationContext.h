@@ -10,6 +10,11 @@
 #import "REMUserModel.h"
 #import "REMCustomerModel.h"
 
+#define REMAppContext [REMApplicationContext instance]
+#define REMAppCurrentUser REMAppContext.currentUser
+#define REMAppCurrentCustomer REMAppContext.currentCustomer
+#define REMAppCurrentLogo REMAppContext.currentCustomerLogo
+
 @interface REMApplicationContext : NSObject
 
 @property (nonatomic,strong) REMUserModel *currentUser;

@@ -297,6 +297,12 @@
 		7A3CB764180638A700B94DEE /* REMNetworkStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */; };
 		7A3DDCDA1786C05B008A1033 /* REMServiceAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */; };
 		7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDC1786C195008A1033 /* REMMaskManager.m */; };
+		7A44E03F18238ACB0080CEBE /* share-mail.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A44E03B18238ACB0080CEBE /* share-mail.png */; };
+		7A44E04018238ACB0080CEBE /* share-mail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A44E03C18238ACB0080CEBE /* share-mail@2x.png */; };
+		7A44E04118238ACB0080CEBE /* share-weibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A44E03D18238ACB0080CEBE /* share-weibo.png */; };
+		7A44E04218238ACB0080CEBE /* share-weibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A44E03E18238ACB0080CEBE /* share-weibo@2x.png */; };
+		7A44E04518238D5E0080CEBE /* REMBuildingShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A44E04418238D5E0080CEBE /* REMBuildingShareViewController.m */; };
+		7A44E047182398B60080CEBE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A44E046182398B60080CEBE /* MessageUI.framework */; };
 		7A48B47817CDDD03002DA386 /* LoginTextField-Focus.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B47417CDDD03002DA386 /* LoginTextField-Focus.png */; };
 		7A48B47917CDDD03002DA386 /* LoginTextField-Focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B47517CDDD03002DA386 /* LoginTextField-Focus@2x.png */; };
 		7A48B47A17CDDD03002DA386 /* LoginTextField.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A48B47617CDDD03002DA386 /* LoginTextField.png */; };
@@ -780,6 +786,13 @@
 		7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceAgent.m; path = Common/Communication/REMServiceAgent.m; sourceTree = "<group>"; };
 		7A3DDCDB1786C195008A1033 /* REMMaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMaskManager.h; path = Common/Utility/REMMaskManager.h; sourceTree = "<group>"; };
 		7A3DDCDC1786C195008A1033 /* REMMaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMaskManager.m; path = Common/Utility/REMMaskManager.m; sourceTree = "<group>"; };
+		7A44E03B18238ACB0080CEBE /* share-mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-mail.png"; sourceTree = "<group>"; };
+		7A44E03C18238ACB0080CEBE /* share-mail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-mail@2x.png"; sourceTree = "<group>"; };
+		7A44E03D18238ACB0080CEBE /* share-weibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-weibo.png"; sourceTree = "<group>"; };
+		7A44E03E18238ACB0080CEBE /* share-weibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-weibo@2x.png"; sourceTree = "<group>"; };
+		7A44E04318238D5E0080CEBE /* REMBuildingShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingShareViewController.h; sourceTree = "<group>"; };
+		7A44E04418238D5E0080CEBE /* REMBuildingShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingShareViewController.m; sourceTree = "<group>"; };
+		7A44E046182398B60080CEBE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
 		7A48B47417CDDD03002DA386 /* LoginTextField-Focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginTextField-Focus.png"; sourceTree = "<group>"; };
 		7A48B47517CDDD03002DA386 /* LoginTextField-Focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginTextField-Focus@2x.png"; sourceTree = "<group>"; };
 		7A48B47617CDDD03002DA386 /* LoginTextField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginTextField.png; sourceTree = "<group>"; };
@@ -1209,6 +1222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A44E047182398B60080CEBE /* MessageUI.framework in Frameworks */,
 				6ABA68C4180F759700A302BC /* GoogleMaps.framework in Frameworks */,
 				B4B61D7617C742E000245F1E /* CoreText.framework in Frameworks */,
 				7AB34E4D177D2975003E235E /* SystemConfiguration.framework in Frameworks */,
@@ -1447,6 +1461,8 @@
 				B493ADA817D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m */,
 				B4FFB0C31818C7C5004C5404 /* REMBuildingDataViewController.h */,
 				B4FFB0C41818C7C5004C5404 /* REMBuildingDataViewController.m */,
+				7A44E04318238D5E0080CEBE /* REMBuildingShareViewController.h */,
+				7A44E04418238D5E0080CEBE /* REMBuildingShareViewController.m */,
 			);
 			name = Building;
 			path = Controller/Building;
@@ -1937,6 +1953,7 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A44E046182398B60080CEBE /* MessageUI.framework */,
 				6ABA68C3180F759700A302BC /* GoogleMaps.framework */,
 				7A13C1AA17F40D99007E6AA9 /* libz.dylib */,
 				7A13C1A817F40D90007E6AA9 /* libicucore.dylib */,
@@ -2191,6 +2208,10 @@
 			isa = PBXGroup;
 			children = (
 				7ACFCBA317CDA62E00811976 /* commodity */,
+				7A44E03B18238ACB0080CEBE /* share-mail.png */,
+				7A44E03C18238ACB0080CEBE /* share-mail@2x.png */,
+				7A44E03D18238ACB0080CEBE /* share-weibo.png */,
+				7A44E03E18238ACB0080CEBE /* share-weibo@2x.png */,
 				7A2F76161810C82E006C19D8 /* DefaultBuilding-Small.png */,
 				7A2F76171810C82E006C19D8 /* DefaultBuilding-Small@2x.png */,
 				B4AB0B391807F9CD0053108B /* mail.jpg */,
@@ -2670,6 +2691,7 @@
 				7AD9D74F181A626400D9E8EC /* Map@2x.png in Resources */,
 				7A5AC7761817C4BD006C7CB1 /* EMOP_App_7@2x.png in Resources */,
 				B445AEAE177BEEB8002D2A59 /* README.txt in Resources */,
+				7A44E04118238ACB0080CEBE /* share-weibo.png in Resources */,
 				7AC3BB3417CC48750022E57E /* Default-568h@2x.png in Resources */,
 				B4EDFB1118064F2900873FA1 /* Share_normal.png in Resources */,
 				7AC3BB3517CC48750022E57E /* Default.png in Resources */,
@@ -2734,6 +2756,7 @@
 				7AD9D757181A626400D9E8EC /* UnqualifiedPin_Normal@2x.png in Resources */,
 				B45F8A5B17D5B0340079C74D /* PM2.5_pressed.png in Resources */,
 				7AD9D74B181A626400D9E8EC /* CommonPin_Normal@2x.png in Resources */,
+				7A44E03F18238ACB0080CEBE /* share-mail.png in Resources */,
 				B45F8A5C17D5B0340079C74D /* PM2.5_normal.png in Resources */,
 				B404428418175EF700A499FB /* Down.png in Resources */,
 				B45F8A5D17D5B0340079C74D /* NaturalGas_pressed.png in Resources */,
@@ -2759,6 +2782,7 @@
 				B4AB0B3A1807F9CD0053108B /* mail.jpg in Resources */,
 				B45F8A7217D5B04B0079C74D /* Electricity_pressed@2x.png in Resources */,
 				B45F8A7317D5B04B0079C74D /* NaturalGas_normal@2x.png in Resources */,
+				7A44E04218238ACB0080CEBE /* share-weibo@2x.png in Resources */,
 				B45F8A7417D5B04B0079C74D /* NaturalGas_pressed@2x.png in Resources */,
 				7AD9D74C181A626400D9E8EC /* Gallery.png in Resources */,
 				7AD9D74D181A626400D9E8EC /* Gallery@2x.png in Resources */,
@@ -2772,6 +2796,7 @@
 				B45F8A7A17D5B04B0079C74D /* Water_pressed@2x.png in Resources */,
 				B404428818175EF700A499FB /* Up.png in Resources */,
 				7A20761417E055E800CD137C /* Localizable.strings in Resources */,
+				7A44E04018238ACB0080CEBE /* share-mail@2x.png in Resources */,
 				B42C338917E18E63008289D2 /* DefaultBuilding@2x.png in Resources */,
 				B42C338B17E19064008289D2 /* DefaultBuilding.png in Resources */,
 				7AD9D750181A626400D9E8EC /* QualifiedPin_Focus.png in Resources */,
@@ -2990,6 +3015,7 @@
 				B46C8EBA17F27C25006DC4CB /* REMDashboardView.m in Sources */,
 				7A0288FD17C20CC500709111 /* WeiboDialogClosePNG.m in Sources */,
 				7A0288FE17C20CC500709111 /* WeiboDialog.m in Sources */,
+				7A44E04518238D5E0080CEBE /* REMBuildingShareViewController.m in Sources */,
 				EF8A47F817F959B5009B5C33 /* REMAbstractChartWrapper.m in Sources */,
 				EF8A480A17F95FA1009B5C33 /* REMLineWidgetWrapper.m in Sources */,
 				7A0288FF17C20CC500709111 /* WeiboLoginDialog.m in Sources */,

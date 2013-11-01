@@ -21,8 +21,6 @@
 @property (nonatomic,strong) UIImageView *snapshot;
 
 #pragma mark - Methods
--(void)setIsInitialPresenting:(BOOL)isInitial;
-
 -(void)presentBuildingView;
 
 -(void)bubbleTapped:(REMMarkerBubbleView *)bubble;

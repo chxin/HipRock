@@ -26,4 +26,6 @@ typedef enum _REMWidgetLegendType{
 @property (nonatomic) REMEnergyStep currentStep;
 @property (nonatomic) REMWidgetLegendType currentLegendType;
 
+
+
 @end
