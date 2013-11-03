@@ -65,8 +65,10 @@ const static CGFloat widgetGap=10;
     self.currentWidgetIndex=0;
     self.readyToClose=NO;
     [self addDashboardBg];
+    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     for (int i=0; i<self.dashboardInfo.widgets.count; ++i) {
         REMWidgetObject *obj=self.dashboardInfo.widgets[i];
+        
         REMWidgetDetailViewController *sub=[[REMWidgetDetailViewController alloc]init];
         sub.widgetInfo=obj;
         REMWidgetCellViewController *cellController= self.widgetCollectionController.childViewControllers[i];
@@ -97,7 +99,7 @@ const static CGFloat widgetGap=10;
     NSBundle* mb = [NSBundle mainBundle];
     UIImageView *whiteView= [[UIImageView alloc]initWithImage:[[UIImage alloc]initWithContentsOfFile:[mb pathForResource:@"Oil_normal" ofType:@"png"]]];
     //whiteView.clipsToBounds = YES;
-    CGFloat bloodCellX=self.childViewControllers.count*self.view.frame.size.width-45-30;
+    CGFloat bloodCellX=self.view.frame.size.width-45-30;
     CGFloat bloodCellY=self.view.frame.size.height/2+whiteView.frame.size.height/2;
     [whiteView setFrame:CGRectMake(bloodCellX, bloodCellY, 45,45)];
     UIImageView* greenView = [[UIImageView alloc]initWithImage:[[UIImage alloc]initWithContentsOfFile:[mb pathForResource:@"Oil_pressed" ofType:@"png"]]];
@@ -108,12 +110,13 @@ const static CGFloat widgetGap=10;
     
     whiteView.backgroundColor=[UIColor clearColor];
     greenView.backgroundColor=[UIColor clearColor];
-    UIViewController *vc= self.childViewControllers[self.childViewControllers.count-1];
+    UIViewController *vc= self.childViewControllers[0];
     [self.view insertSubview:greenView belowSubview:vc.view];
     [self.view insertSubview:whiteView belowSubview:greenView];
     self.bloodView=greenView;
     self.bloodWhiteView=whiteView;
-    
+    [self.bloodWhiteView setHidden:YES];
+    [self.bloodView setHidden:YES];
     
     //NSLog(@"blood white view:%@",NSStringFromCGRect(self.bloodWhiteView.frame));
     
@@ -155,10 +158,12 @@ const static CGFloat widgetGap=10;
     for (int i=0; i<self.childViewControllers.count; ++i) {
         REMWidgetDetailViewController *vc = self.childViewControllers[i];
         NSInteger gap=i-self.currentWidgetIndex;
-        [vc.view setCenter:CGPointMake(gap*(self.view.frame.size.width+widgetGap), vc.view.center.y)];
+        [vc.view setCenter:CGPointMake(gap*(self.view.frame.size.width+widgetGap)+self.view.frame.size.width/2, vc.view.center.y)];
+        //NSLog(@"view center:%@",NSStringFromCGRect(vc.view.frame));
         
     }
 }
+
 
 - (void)panthis:(REMScreenEdgetGestureRecognizer *)pan{
     
@@ -252,7 +257,7 @@ const static CGFloat widgetGap=10;
         
         if((sign<0 && self.currentWidgetIndex==self.dashboardInfo.widgets.count-1)
            || (sign>0 && self.currentWidgetIndex==0) ||
-           (ABS(p.x)<100 && ABS(self.cumulateX)<self.view.frame.size.width/8)){
+           (ABS(p.x)<200 && ABS(self.cumulateX)<self.view.frame.size.width/8)){
             addIndex=NO;
         }
         else{
@@ -271,13 +276,13 @@ const static CGFloat widgetGap=10;
         else{
             self.currentWidgetIndex = self.currentWidgetIndex+sign*-1;
             
-            if(ABS(p.x)<100){
+            if(ABS(p.x)<200){
                 [UIView animateWithDuration:0.4 delay:0
                                     options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
                                         
                                         [self moveAllViews];
                                     } completion:^(BOOL finished){
-                                        [self stopCoverPage:nil];
+                                        //[self stopCoverPage:nil];
                                     }];
             }
             else{
@@ -335,15 +340,18 @@ const static CGFloat widgetGap=10;
         UIView *v=vc.view;
         //NSLog(@"image:%@",NSStringFromCGRect(image.frame));
         CGFloat readyDis=v.center.x+distance;
-        
-        CGFloat x=(i-self.currentWidgetIndex)*self.view.frame.size.width+self.view.frame.size.width/2;
-        
+        CGFloat gap=i-(int)self.currentWidgetIndex;
+        NSLog(@"gap is %f",gap);
+        CGFloat page=self.view.frame.size.width+widgetGap;
+        NSLog(@"page is %f",page);
+        CGFloat x=gap*page+self.view.frame.size.width/2;
+        NSLog(@"x:%f,readyDis:%f",x,readyDis);
         if((distance < 0 &&readyDis<x) || (distance>0 && readyDis>x)){
             self.speed=sign*0.01;
             readyDis=x;
         }
         
-        [v setCenter: CGPointMake( readyDis,v.center.y)];
+        [v setCenter: CGPointMake(readyDis,v.center.y)];
     }
 }
 

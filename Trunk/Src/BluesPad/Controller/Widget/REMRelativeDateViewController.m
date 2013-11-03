@@ -29,6 +29,7 @@
 {
     [super viewDidLoad];
     self.currentRow=NSNotFound;
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"relativeCell"];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -63,6 +64,7 @@
     NSUInteger num=(NSUInteger)self.relativeDate;
     if(indexPath.row == (num-1) && self.currentRow == NSNotFound){
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        self.currentRow=indexPath.row;
     }
     else{
         if(self.currentRow!=NSNotFound && self.currentRow!=indexPath.row){
@@ -75,6 +77,7 @@
             }
         }
     }
+    cell.tag=indexPath.row+1;
     if(indexPath.row == 0){
         name=NSLocalizedString(@"Common_Last7Day", @""); //@"之前七天";
     }
@@ -123,6 +126,7 @@
     [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     [cell setSelected:NO];
     [cell setHighlighted:NO];
+    [self.datePickerController setTimeRangeByDateRelative:cell.textLabel.text withTimeRange:(REMRelativeTimeRangeType)cell.tag];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if(self.currentRow!=indexPath.row && self.currentRow!=NSNotFound){
         NSIndexPath *old=[NSIndexPath indexPathForRow:self.currentRow inSection:0];
@@ -135,6 +139,8 @@
     self.currentRow=indexPath.row;
 
 }
+
+
 
 /*
 // Override to support conditional editing of the table view.

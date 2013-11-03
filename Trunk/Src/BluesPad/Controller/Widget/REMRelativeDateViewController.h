@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "REMEnum.h"
+#import "REMDatePickerViewController.h"
+
+
 @interface REMRelativeDateViewController : UITableViewController
 
+
 @property (nonatomic) REMRelativeTimeRangeType relativeDate;
+
+@property (nonatomic,weak) REMDatePickerViewController *datePickerController;
 
 
 @end
