@@ -18,7 +18,7 @@
 @interface REMSplashScreenController ()
 
 @property (nonatomic,weak) REMLoginCarouselController *carouselController;
-@property (nonatomic,strong) REMColumnWidgetWrapper* w;
+
 @end
 
 @implementation REMSplashScreenController
@@ -42,7 +42,7 @@
     NSMutableArray* sereis = [[NSMutableArray alloc]init];
     for (int sIndex = 0; sIndex < 3; sIndex++) {
         NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 20000; i++) {
             REMEnergyData* data = [[REMEnergyData alloc]init];
             data.quality = REMEnergyDataQualityGood;
             data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
@@ -82,7 +82,6 @@
     REMColumnWidgetWrapper* columnWidget = [[REMColumnWidgetWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax styleDictionary:style];
     columnWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:columnWidget.view];
-    self.w = columnWidget;
 //    [self.view addSubview:[[REMTrend alloc]initWithFrame:CGRectMake(100, 0, 924, 708)]];
     
     
