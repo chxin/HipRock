@@ -24,14 +24,7 @@
 @implementation REMBarPlot {
     NSMutableDictionary* pathDic;
     CGFloat unitLengthInView;
-}
-
--(id)init {
-    return [super init];
-}
-
--(id)initWithFrame:(CGRect)newFrame {
-    return [super initWithFrame:newFrame];
+    NSMutableDictionary* locationToLayerDic;
 }
 
 /// @cond
@@ -114,7 +107,6 @@
 }
 -(CGFloat)lengthInView:(NSDecimal)decimalLength recal:(BOOL)recal
 {
-    if (!recal) return unitLengthInView * [NSDecimalNumber decimalNumberWithDecimal:decimalLength].floatValue;
     CGFloat length = 0.0;
     
     if ( self.barWidthsAreInViewCoordinates ) {
@@ -167,16 +159,9 @@
     }
     return length;
 }
--(void)drawInContext:(CGContextRef)ctx {
-    unitLengthInView = [self lengthInView:[NSDecimalNumber numberWithInt:1].decimalValue recal:YES];
-    [super drawInContext:ctx];
-}
--(void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-}
+
 -(void)renderAsVectorInContext:(CGContextRef)context
 {
-    self.masksToBorder = NO;
     if ( self.hidden ) {
         return;
     }
@@ -205,86 +190,49 @@
     if ( basesVary && (cachedLengths.numberOfSamples != cachedBases.numberOfSamples) ) {
         [NSException raise:CPTException format:@"Number of bar lengths and bases do not match"];
     }
-    
-    // This is where subclasses do their drawing
-//    if ( self.renderingRecursively ) {
-//        [self applyMaskToContext:context];
-//    }
-//    [self.shadow setShadowInContext:context];
-//    [super renderAsVectorInContext:context];
-    
-    CGContextBeginTransparencyLayer(context, NULL);
-//    for ( NSUInteger ii = 0; ii < barCount; ii++ ) {
-//        // Draw
-//        [self drawBarInContext:context recordIndex:ii];
-//    }
-    
-    CGMutablePathRef path = CGPathCreateMutable();
-    for ( NSUInteger ii = 0; ii < barCount; ii++ ) {
-        // Draw
-        CGPoint basePoint, tipPoint;
-        BOOL barExists = [self barAtRecordIndex:ii basePoint:&basePoint tipPoint:&tipPoint];
+    if (locationToLayerDic == nil) locationToLayerDic = [[NSMutableDictionary alloc]initWithCapacity:barCount];
+    if (locationToLayerDic.count != barCount) {
+        [locationToLayerDic removeAllObjects];
+//        CGContextBeginTransparencyLayer(context, NULL);
         
-        if ( !barExists ) {
-            continue;
+        for ( NSUInteger ii = 0; ii < barCount; ii++ ) {
+            CGPoint basePoint, tipPoint;
+            BOOL barExists = [self barAtRecordIndex:ii basePoint:&basePoint tipPoint:&tipPoint];
+            if ( !barExists ) {
+                continue;
+            }
+            if (![self barIsVisibleWithIndex:ii]) continue;
+//            CALayer* layer = [[CALayer alloc]init];
+//            [layer setFrame: [self getRectOfBasePoint:basePoint tipPoint:tipPoint]];
+//            layer.backgroundColor = [UIColor redColor].CGColor;
+//            [self addSublayer:layer];
         }
         
-        if (![self barIsVisibleWithIndex:ii]) continue;
-        CGRect r = [self getRectOfBasePoint:basePoint tipPoint:tipPoint];
-        CGPathAddRect(path, Nil, r);
+//        CGContextEndTransparencyLayer(context);
     }
-    CGContextSaveGState(context);
-//    CPTFill *theBarFill = [self barFillForIndex:0];
-    CGContextBeginPath(context);
-    CGContextAddPath(context, path);
-    CGContextSetFillColorWithColor(context, [UIColor redColor].CGColor);
-    CGContextFillPath(context);
-    
-//    if ( [theBarFill isKindOfClass:[CPTFill class]] ) {
-//        [theBarFill fillPathInContext:context];
-//    }
-    CGContextRestoreGState(context);
-    CGPathRelease(path);
-
-
-    CGContextEndTransparencyLayer(context);
+//    [self setNeedsDisplay];
+    CALayerArray* ff = self.sublayers;
 //    CGMutablePathRef path = CGPathCreateMutable();
-//    CGPathAddRect(path, NULL, CGRectMake(-25, 0, 50, 50));
-//    CGContextSaveGState(context);
-//    CPTFill *theBarFill = [self barFillForIndex:0];
-//    if ( [theBarFill isKindOfClass:[CPTFill class]] ) {
-//        CGContextBeginPath(context);
-//        CGContextAddPath(context, path);
-//        [theBarFill fillPathInContext:context];
-//    }
-//    CGContextRestoreGState(context);
-//    CGPathRelease(path);
-//    
-//    CGContextEndTransparencyLayer(context);
-////    self.paddingLeft = 25;
-//    CALayer* superLayer = self.superlayer;
-//    while (superLayer && [superLayer isKindOfClass:[CPTLayer class]]) {
-//        superLayer.masksToBounds = NO;
-//        CGRect FFF = superLayer.frame;
-////        superLayer.frame = CGRectMake(-300, 0, superLayer.frame.size.width+300, superLayer.frame.size.height);
-////        superLayer.backgroundColor = [UIColor yellowColor].CGColor;
-//        superLayer.borderWidth =1.0f;
-//        if ([superLayer isKindOfClass:[CPTPlotGroup class]]) {
-//            superLayer.borderColor = [UIColor greenColor].CGColor;
-//        } else if ([superLayer isKindOfClass:[CPTPlotArea class]]) {
-//            superLayer.borderColor = [UIColor blueColor].CGColor;
-//        } else if ([superLayer isKindOfClass:[CPTPlotAreaFrame class]]) {
-//            superLayer.borderColor = [UIColor orangeColor].CGColor;
-//            superLayer.borderWidth = 2.0f;
-//        } else {
-//            
+//    for ( NSUInteger ii = 0; ii < barCount; ii++ ) {
+//        CGPoint basePoint, tipPoint;
+//        BOOL barExists = [self barAtRecordIndex:ii basePoint:&basePoint tipPoint:&tipPoint];
+//        if ( !barExists ) {
+//            continue;
 //        }
-//        superLayer = superLayer.superlayer;
+//        if (![self barIsVisibleWithIndex:ii]) continue;
+//        CGPathAddRect(path, nil, [self getRectOfBasePoint:basePoint tipPoint:tipPoint]);
 //    }
-//    self.backgroundColor = [UIColor redColor].CGColor;
-}
--(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx {
-    
+//    CGPathCloseSubpath(path);
+//    
+//    CGContextBeginTransparencyLayer(context, NULL);
+//    CGContextSaveGState(context);
+//    
+//    CGContextBeginPath(context);
+//    CGContextAddPath(context, path);
+//    CGContextSetFillColorWithColor(context, [UIColor redColor].CGColor);
+//    CGContextFillPath(context);
+//    CGPathRelease(path);
+//    CGContextEndTransparencyLayer(context);
 }
 
 -(BOOL)barIsVisibleWithBasePoint:(CGPoint)basePoint
@@ -317,12 +265,7 @@
         return;
     }
     
-    // Return if bar is off screen
-//    if ( ![self barIsVisibleWithBasePoint:basePoint] ) {
-//        return;
-//    }
     if (![self barIsVisibleWithIndex:idx]) return;
-    
     
     CGMutablePathRef path = [self newBarPathWithContext:context basePoint:basePoint tipPoint:tipPoint];
     
