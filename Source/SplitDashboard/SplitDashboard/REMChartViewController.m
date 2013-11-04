@@ -104,7 +104,7 @@
 
 - (void) initLineChart
 {
-    CPTGraphHostingView *hostView = [[CPTGraphHostingView alloc] initWithFrame:CGRectMake(0, 0, 800, 500)];
+    CPTGraphHostingView *hostView = [[CPTGraphHostingView alloc] initWithFrame:CGRectMake(0, 0, 1024, 748)];
     
     CPTXYGraph *graph = [[CPTXYGraph alloc]  initWithFrame:hostView.bounds];
     graph.plotAreaFrame.masksToBorder=NO;
@@ -211,14 +211,15 @@
     int idx=0;
     for(REMSeries *series in self.data.series)
     {
-        CPTScatterPlot *line = [[CPTScatterPlot alloc] initWithFrame:graph.bounds ];
+        //CPTScatterPlot *line = [[CPTScatterPlot alloc] initWithFrame:graph.bounds ];
+        CPTBarPlot *line=[[CPTBarPlot alloc]initWithFrame:graph.bounds];
         line.identifier=series.uid;
         line.anchorPoint=CGPointZero;
         CPTMutableLineStyle *style=[[CPTMutableLineStyle alloc] init];
         style.lineWidth=1.5;
         style.lineColor= [self getColor:idx];
         
-        line.dataLineStyle=style;
+        //line.dataLineStyle=style;
         
         
         CPTPlotSymbol *symbol = [self getSymbol:idx];
@@ -226,8 +227,9 @@
         symbol.fill= [CPTFill fillWithColor:style.lineColor];
         
         symbol.size=CGSizeMake(7.0, 7.0);
-        line.plotSymbol=symbol;
+        //line.plotSymbol=symbol;
         
+        line.fill=[CPTFill fillWithColor:[self getColor:idx]];
         
         line.delegate=self;
         line.dataSource=self;

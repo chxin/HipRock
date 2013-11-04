@@ -15,7 +15,7 @@
 #import "REMColumnWidgetWrapper.h"
 #import "REMStackColumnWidgetWrapper.h"
 #import "REMDatePickerViewController.h"
-
+#import "REMWidgetBizDelegatorBase.h"
 
 
 const static CGFloat kWidgetBackButtonLeft=10;
@@ -45,6 +45,8 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
 @property (nonatomic,weak) UIView *chartContainer;
 @property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
 
+@property (nonatomic,strong) REMWidgetBizDelegatorBase *bizDelegator;
+
 @end
 
 @implementation REMWidgetDetailViewController
@@ -67,6 +69,10 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
     
     [self.view setFrame:CGRectMake(0, 0, 1024, 748)];
     
+    self.bizDelegator=[REMWidgetBizDelegatorBase bizDelegatorByWidgetInfo:self.widgetInfo];
+    self.bizDelegator.view=self.view;
+    self.bizDelegator.energyData=self.energyData;
+    self.bizDelegator.widgetInfo=self.widgetInfo;
     self.currentTimeRangeArray=[[NSMutableArray alloc]initWithCapacity:self.widgetInfo.contentSyntax.timeRanges.count];
     
     //self.view.layer.borderColor=[UIColor redColor].CGColor;
@@ -80,7 +86,7 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
     [backButton addTarget:self.parentViewController action:@selector(popToBuildingCover) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
     self.backButton=backButton;
-    
+
     UILabel *widgetTitle=[[UILabel alloc]initWithFrame:CGRectMake(backButton.frame.origin.x+backButton.frame.size.width+kWidgetTitleLeftMargin, backButton.frame.origin.y, self.view.frame.size.width, kWidgetTitleHeight)];
     widgetTitle.text=self.widgetInfo.name;
     widgetTitle.backgroundColor=[UIColor clearColor];
@@ -89,6 +95,10 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
     [self.view addSubview:widgetTitle];
     self.widgetTitleLabel=widgetTitle;
     
+    
+    [self.bizDelegator initBizView];
+}
+    /*
     UISegmentedControl *legendControl=[[UISegmentedControl alloc] initWithItems:@[@"search",@"legend"]];
     [legendControl setFrame:CGRectMake(800, backButton.frame.origin.y, 200, 30)];
     UIImage *search=[UIImage imageNamed:@"Up"];
@@ -165,6 +175,8 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
 {
     
     [self setDatePickerButtonValueByTimeRange:newRange withRelative:newDateComponent withRelativeType:relativeType];
+    
+    
 }
 
 
@@ -257,7 +269,7 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
     }
     
 }
-
+*/
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
