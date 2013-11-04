@@ -7,6 +7,7 @@
 //
 
 #import "REMTrend.h"
+#import <QuartzCore/QuartzCore.h>
 @interface REMTrend ()
 @property (nonatomic) NSMutableArray* yAxisLabelsArray;
 @property (nonatomic) NSMutableArray* xAxisLabelArray;

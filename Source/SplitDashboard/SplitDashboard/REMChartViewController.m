@@ -37,7 +37,7 @@
     NSTimeInterval beginInterval=[beginDate timeIntervalSince1970];
     NSLog(@"start:%f",beginInterval);
     
-    for(int i=1;i<=10;i++)
+    for(int i=1;i<=3;i++)
     {
         REMSeries *series= [[REMSeries alloc] init];
         series.uid=[NSString stringWithFormat:@"Plot%d",i ];
@@ -47,7 +47,7 @@
         NSTimeInterval interval=beginInterval;
         
         
-        for(int j=1;j<=100;j++)
+        for(int j=1;j<=200;j++)
         {
             NSNumber *xValue=[NSNumber numberWithDouble:j];
             NSNumber *yValue=[NSNumber numberWithInt:35+i*10];
@@ -104,7 +104,7 @@
 
 - (void) initLineChart
 {
-    CPTGraphHostingView *hostView = [[CPTGraphHostingView alloc] initWithFrame:CGRectMake(0, 0, 1024, 748)];
+    CPTGraphHostingView *hostView = [[CPTGraphHostingView alloc] initWithFrame:CGRectMake(0, 0, 1024, 600)];
     
     CPTXYGraph *graph = [[CPTXYGraph alloc]  initWithFrame:hostView.bounds];
     graph.plotAreaFrame.masksToBorder=NO;
@@ -221,7 +221,8 @@
         
         //line.dataLineStyle=style;
         
-        
+        line.barOffset=CPTDecimalFromInt(idx*10+5);
+        //line.barWidth=CPTDecimalFromInt(20);
         CPTPlotSymbol *symbol = [self getSymbol:idx];
         symbol.lineStyle=style;
         symbol.fill= [CPTFill fillWithColor:style.lineColor];
