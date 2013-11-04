@@ -13,6 +13,7 @@
 #import "REMBuildingConstants.h"
 #import "REMColor.h"
 
+static NSString* const kREMChartLongPressNotification = @"remtrendlongpress";
 
 
 //@interface REMTrendChartPoint : NSObject
@@ -24,7 +25,6 @@
 //-(REMTrendChartPoint*)initWithX:(float)x y:(NSNumber*)y point:(REMEnergyData*)p;
 //
 //@end
-
 
 
 
@@ -69,11 +69,12 @@
 @end
 
 @interface REMTrendChartSeries : REMChartSeries {
+@protected NSMutableArray* source;
 @protected BOOL occupy;   // 所有为YES的序列，在同一个X轴位置的数据点的位置互斥。线图设为false，Bar、Column和StackColumn设为true
 }
 //@property (nonatomic, readonly) NSArray* points;
 
-@property (nonatomic) NSNumber* yScale;
+@property (nonatomic) NSNumber* yScale; //因为将所有的序列都绘制在同一个plotspace上，多Y轴的时候需要将非主轴的Y值进行缩放。
 /*
  * 对应的Y轴的index，从0开始
  */
@@ -90,6 +91,9 @@
  * x数据处理的起点时间
  */
 @property (nonatomic, readonly) NSDate* startDate;
+
+@property (nonatomic, assign) NSRange visableRange;
+
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate;
 
 -(BOOL)isOccupy;

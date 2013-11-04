@@ -566,6 +566,7 @@
 		EFDEC2A81817C6B70008972E /* REMStackColumnWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDEC2A71817C6B70008972E /* REMStackColumnWidgetWrapper.m */; };
 		EFDEC2AB1817C8A80008972E /* REMTrendChartStackColumnSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDEC2AA1817C8A80008972E /* REMTrendChartStackColumnSeries.m */; };
 		EFF3BA0718167BA500DD92CF /* REMRankingWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF3BA0618167BA500DD92CF /* REMRankingWidgetWrapper.m */; };
+		EFFE29D818273E6D00F67DB5 /* REMTrend.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFE29D718273E6D00F67DB5 /* REMTrend.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1237,6 +1238,8 @@
 		EFDEC2AA1817C8A80008972E /* REMTrendChartStackColumnSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartStackColumnSeries.m; sourceTree = "<group>"; };
 		EFF3BA0518167BA500DD92CF /* REMRankingWidgetWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMRankingWidgetWrapper.h; sourceTree = "<group>"; };
 		EFF3BA0618167BA500DD92CF /* REMRankingWidgetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRankingWidgetWrapper.m; sourceTree = "<group>"; };
+		EFFE29D618273E6D00F67DB5 /* REMTrend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMTrend.h; sourceTree = "<group>"; };
+		EFFE29D718273E6D00F67DB5 /* REMTrend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrend.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1523,6 +1526,8 @@
 			children = (
 				7A153C8317AA497C00413D3C /* REMSplashScreenController.h */,
 				7A153C8417AA497C00413D3C /* REMSplashScreenController.m */,
+				EFFE29D618273E6D00F67DB5 /* REMTrend.h */,
+				EFFE29D718273E6D00F67DB5 /* REMTrend.m */,
 			);
 			name = Splash;
 			path = Controller/Splash;
@@ -3103,6 +3108,7 @@
 				B46C8EC317F27CDF006DC4CB /* REMDashboardCollectionCellView.m in Sources */,
 				EF8A47FD17F959B5009B5C33 /* REMTrendChartColumnSeries.m in Sources */,
 				B46C8EC017F27CB9006DC4CB /* REMDashboardCollectionView.m in Sources */,
+				EFFE29D818273E6D00F67DB5 /* REMTrend.m in Sources */,
 				B4EDFB1B180697F300873FA1 /* REMControllerBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -19,14 +19,30 @@
     float xUnstableStartPoint; // 弹性区域不稳定的x轴起点
     float xUnstableEndPoint; // 弹性区域不稳定的x轴起点
     BOOL suspendDraw;
-    int redrawCount;
+    
+    BOOL isLongPressedStatus;
 }
 
 -(void)setNeedsDisplay {
     if (suspendDraw) return;
     [super setNeedsDisplay];
-    NSLog(@"%i", redrawCount);
-    redrawCount++;
+//    NSLog(@"%i", redrawCount);
+//    redrawCount++;
+}
+
+-(void)longPress:(UILongPressGestureRecognizer*)recognizer {
+    UIGestureRecognizerState gstate = recognizer.state;
+    if (gstate == UIGestureRecognizerStateBegan && !isLongPressedStatus) {
+        isLongPressedStatus = YES;
+        CPTXYPlotSpace* plotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
+        NSDecimal pressedPoint[2];
+        [plotSpace plotPoint:pressedPoint forPlotAreaViewPoint:[recognizer locationInView:self]];
+        int xInCoor = floor([NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]].floatValue+0.5);
+//        for(REMTrendChartSeries* s in self.series) {
+//            s numberForPlot:nil field:<#(NSUInteger)#> recordIndex:<#(NSUInteger)#>
+//        }
+//        [[NSNotificationCenter defaultCenter]postNotificationName:kREMChartLongPressNotification object:self userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:xInCoor] forKey:@"x"]];
+    }
 }
 
 -(REMTrendChartView*)initWithFrame:(CGRect)frame chartConfig:(REMTrendChartConfig*)config  {
@@ -35,6 +51,10 @@
         self.collapsesLayers = YES;
         self.allowPinchScaling = NO;
         self.userInteractionEnabled = config.userInteraction;
+        if (self.userInteractionEnabled) {
+            UILongPressGestureRecognizer* longPressGR = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
+            [self addGestureRecognizer:longPressGR];
+        }
         maxXValOfSeries = INT32_MIN;
         isTheFirstRender = YES;
         
@@ -98,9 +118,10 @@
     
     CPTPlotRange* xRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(currentXLocation) length:CPTDecimalFromFloat(currentXLength)];
     ((CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace).xRange = xRange;
-//    for (CPTXYPlotSpace* pSpace in self.hostedGraph.allPlotSpaces) {
-//        pSpace.xRange = xRange;
-//    }
+    for (REMTrendChartSeries* s in self.series) {
+        s.visableRange = NSMakeRange(floor(currentXLocation), ceil(currentXLength));
+    }
+
     if (isTheFirstRender == YES) {
         [self rerenderXLabel];
         isTheFirstRender = NO;
@@ -306,7 +327,6 @@
 -(CPTPlotRange*)plotSpace:(CPTXYPlotSpace *)space willChangePlotRangeTo:(CPTPlotRange *)newRange forCoordinate:(CPTCoordinate)coordinate {
     if (coordinate == CPTCoordinateX) {
         suspendDraw = YES;
-        redrawCount = 0;
         // Move other plotspace with the default plotspace
 //        for (int i = 2; i < self.hostedGraph.axisSet.axes.count; i++) {
 //            CPTXYPlotSpace* pSpace = (CPTXYPlotSpace*)((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:i]).plotSpace;

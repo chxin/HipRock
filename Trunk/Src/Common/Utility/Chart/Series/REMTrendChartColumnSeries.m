@@ -52,11 +52,11 @@
 
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
 {
-    REMEnergyData* point = [self.energyData objectAtIndex:idx];
+    NSDictionary* point = source[idx];
     if (fieldEnum == CPTBarPlotFieldBarLocation) {
-        return [self.dataProcessor processX:point.localTime];
+        return point[@"x"];
     } else if (fieldEnum == CPTBarPlotFieldBarTip) {
-        NSNumber* yVal = [self.dataProcessor processY:point.dataValue];
+        NSNumber* yVal =  point[@"y"];;
         if ([yVal isEqual:[NSNull null]]) return yVal;
         else {
             return [NSNumber numberWithDouble: yVal.doubleValue / self.yScale.doubleValue];
