@@ -104,7 +104,19 @@
     REMTrendChartView* myView = [[REMTrendChartView alloc]initWithFrame:frame chartConfig:chartConfig];
     NSRange initialRange = [self createInitialRange];
     [myView renderRange:initialRange.location length:initialRange.length];
+//    if (chartConfig.userInteraction) {
+//        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(longPressAtX:) name:kREMChartLongPressNotification object:nil];
+//    }
     return  myView;
+}
+
+-(void)longPressAtX:(NSNotification *)notification {
+//    NSDictionary* fff = notification.userInfo;
+//    NSNumber* x = fff == nil ? nil : fff[@"x"];
+//    if (x!=nil) {
+//        NSDate* xDate = [sharedProcessor deprocessX:x.intValue];
+//        NSLog(@"%@", xDate);
+//    }
 }
 
 -(REMChartConfig*)getChartConfig:(NSDictionary*)style {
