@@ -211,6 +211,7 @@
 		7A095E73179571C80098DB16 /* REMWidgetAxisHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */; };
 		7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */; };
 		7A09D59A17B8D62F001EBC30 /* REMDataRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59917B8D62F001EBC30 /* REMDataRange.m */; };
+		7A0F7C5318279170009E898A /* REMChartSeriesLegend.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F7C5218279170009E898A /* REMChartSeriesLegend.m */; };
 		7A12280C18116DBF004DE778 /* REMViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A12280B18116DBF004DE778 /* REMViewHelper.m */; };
 		7A13C19517F40809007E6AA9 /* REMMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A13C19417F40809007E6AA9 /* REMMainNavigationController.m */; };
 		7A13C19B17F40D31007E6AA9 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7A13C19A17F40D31007E6AA9 /* GoogleMaps.bundle */; };
@@ -400,14 +401,14 @@
 		7AD9D757181A626400D9E8EC /* UnqualifiedPin_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD9D747181A626400D9E8EC /* UnqualifiedPin_Normal@2x.png */; };
 		7AD9D758181A6B4200D9E8EC /* SplashScreenBackgroud.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFCBDE17CDA62E00811976 /* SplashScreenBackgroud.jpg */; };
 		7AD9D759181A6B4200D9E8EC /* SplashScreenBackgroud@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFCBDF17CDA62E00811976 /* SplashScreenBackgroud@2x.jpg */; };
-		7AF3667817CF2D7400447650 /* REMChartSeriesIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3667717CF2D7400447650 /* REMChartSeriesIndicator.m */; };
+		7AF3667817CF2D7400447650 /* REMBuildingChartSeriesIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */; };
 		7AF6AC8117D1BA0D00D62A9A /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
 		7AF6AC8217D1BA5600D62A9A /* REMBuildingAirQualityChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9557BF17C73AD200249CED /* REMBuildingAirQualityChart.m */; };
 		7AF6AC8317D1BA5600D62A9A /* REMBuildingAirQualityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCD417C6023300C7AD56 /* REMBuildingAirQualityView.m */; };
 		7AF6AC8417D1BA5600D62A9A /* REMToggleButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */; };
 		7AF6AC8517D1BA5600D62A9A /* REMStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9F28B017CB54DE00E775ED /* REMStatusBar.m */; };
 		7AF6AC8717D1BA5600D62A9A /* REMInsetsTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A48B47D17CDE321002DA386 /* REMInsetsTextField.m */; };
-		7AF6AC8817D1BA5600D62A9A /* REMChartSeriesIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3667717CF2D7400447650 /* REMChartSeriesIndicator.m */; };
+		7AF6AC8817D1BA5600D62A9A /* REMBuildingChartSeriesIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */; };
 		7AF6AC8917D1BA5600D62A9A /* REMDataRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59917B8D62F001EBC30 /* REMDataRange.m */; };
 		7AF6AC8A17D1BA5600D62A9A /* REMBuildingTimeRangeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */; };
 		7AF6AC8B17D1BA5600D62A9A /* REMAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCD717C6057E00C7AD56 /* REMAirQualityModel.m */; };
@@ -647,6 +648,8 @@
 		7A09D59817B8D62F001EBC30 /* REMDataRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMDataRange.h; sourceTree = "<group>"; };
 		7A09D59917B8D62F001EBC30 /* REMDataRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMDataRange.m; sourceTree = "<group>"; };
 		7A0F7C5018277BAC009E898A /* REMImages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMImages.h; path = Resource/Definitions/REMImages.h; sourceTree = "<group>"; };
+		7A0F7C5118279170009E898A /* REMChartSeriesLegend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartSeriesLegend.h; sourceTree = "<group>"; };
+		7A0F7C5218279170009E898A /* REMChartSeriesLegend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartSeriesLegend.m; sourceTree = "<group>"; };
 		7A12280A18116DBF004DE778 /* REMViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMViewHelper.h; path = Common/Utility/REMViewHelper.h; sourceTree = "<group>"; };
 		7A12280B18116DBF004DE778 /* REMViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMViewHelper.m; path = Common/Utility/REMViewHelper.m; sourceTree = "<group>"; };
 		7A13C19317F40809007E6AA9 /* REMMainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMainNavigationController.h; path = Controller/REMMainNavigationController.h; sourceTree = "<group>"; };
@@ -1031,8 +1034,8 @@
 		7AD9D745181A626400D9E8EC /* UnqualifiedPin_Focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UnqualifiedPin_Focus@2x.png"; sourceTree = "<group>"; };
 		7AD9D746181A626400D9E8EC /* UnqualifiedPin_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UnqualifiedPin_Normal.png; sourceTree = "<group>"; };
 		7AD9D747181A626400D9E8EC /* UnqualifiedPin_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UnqualifiedPin_Normal@2x.png"; sourceTree = "<group>"; };
-		7AF3667617CF2D7400447650 /* REMChartSeriesIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartSeriesIndicator.h; sourceTree = "<group>"; };
-		7AF3667717CF2D7400447650 /* REMChartSeriesIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartSeriesIndicator.m; sourceTree = "<group>"; };
+		7AF3667617CF2D7400447650 /* REMBuildingChartSeriesIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartSeriesIndicator.h; sourceTree = "<group>"; };
+		7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingChartSeriesIndicator.m; sourceTree = "<group>"; };
 		B404427A18175EF700A499FB /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		B404427B18175EF700A499FB /* Back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Back@2x.png"; sourceTree = "<group>"; };
 		B404427C18175EF700A499FB /* Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Down.png; sourceTree = "<group>"; };
@@ -1683,10 +1686,12 @@
 				EF9F28B017CB54DE00E775ED /* REMStatusBar.m */,
 				7A48B47C17CDE321002DA386 /* REMInsetsTextField.h */,
 				7A48B47D17CDE321002DA386 /* REMInsetsTextField.m */,
-				7AF3667617CF2D7400447650 /* REMChartSeriesIndicator.h */,
-				7AF3667717CF2D7400447650 /* REMChartSeriesIndicator.m */,
+				7AF3667617CF2D7400447650 /* REMBuildingChartSeriesIndicator.h */,
+				7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */,
 				EF60822D17D818420093427C /* REMModalView.h */,
 				EF60822E17D818430093427C /* REMModalView.m */,
+				7A0F7C5118279170009E898A /* REMChartSeriesLegend.h */,
+				7A0F7C5218279170009E898A /* REMChartSeriesLegend.m */,
 			);
 			name = Controls;
 			path = View/Controls;
@@ -2978,6 +2983,7 @@
 				7A095E73179571C80098DB16 /* REMWidgetAxisHelper.m in Sources */,
 				B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */,
 				7A1D7C3717A6155D0050779D /* REMApplicationContext.m in Sources */,
+				7A0F7C5318279170009E898A /* REMChartSeriesLegend.m in Sources */,
 				B47ACC3017F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m in Sources */,
 				7A2F76151810C6C8006C19D8 /* REMScreenEdgetGestureRecognizer.m in Sources */,
 				7A1D7C3C17A637510050779D /* REMUserModel.m in Sources */,
@@ -3096,7 +3102,7 @@
 				7A9557C017C73AD200249CED /* REMBuildingAirQualityChart.m in Sources */,
 				EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */,
 				7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */,
-				7AF3667817CF2D7400447650 /* REMChartSeriesIndicator.m in Sources */,
+				7AF3667817CF2D7400447650 /* REMBuildingChartSeriesIndicator.m in Sources */,
 				7A7F7B18181F7E3400A3C5AB /* REMGalleryGroupView.m in Sources */,
 				B493ADA917D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m in Sources */,
 				EFDEC2A5181768540008972E /* REMTrendChartRankingSeries.m in Sources */,
@@ -3127,7 +3133,7 @@
 				7AF6AC8417D1BA5600D62A9A /* REMToggleButtonGroup.m in Sources */,
 				7AF6AC8517D1BA5600D62A9A /* REMStatusBar.m in Sources */,
 				7AF6AC8717D1BA5600D62A9A /* REMInsetsTextField.m in Sources */,
-				7AF6AC8817D1BA5600D62A9A /* REMChartSeriesIndicator.m in Sources */,
+				7AF6AC8817D1BA5600D62A9A /* REMBuildingChartSeriesIndicator.m in Sources */,
 				7AF6AC8917D1BA5600D62A9A /* REMDataRange.m in Sources */,
 				7AF6AC8A17D1BA5600D62A9A /* REMBuildingTimeRangeDataModel.m in Sources */,
 				7AF6AC8B17D1BA5600D62A9A /* REMAirQualityModel.m in Sources */,

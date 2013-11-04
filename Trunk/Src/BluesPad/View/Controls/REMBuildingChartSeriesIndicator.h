@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface REMChartSeriesIndicator : UIView
+@interface REMBuildingChartSeriesIndicator : UIView
 
 - (id)initWithFrame:(CGRect)frame title:(NSString *)text andColor:(UIColor *)color;
 

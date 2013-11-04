@@ -6,13 +6,13 @@
 //
 //
 
-#import "REMChartSeriesIndicator.h"
+#import "REMBuildingChartSeriesIndicator.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMCommonHeaders.h"
 #import "REMBuildingConstants.h"
 
 
-@interface REMChartSeriesIndicator()
+@interface REMBuildingChartSeriesIndicator()
 
 @property (nonatomic,strong) UIColor *color;
 @property (nonatomic,strong) NSString *title;
@@ -22,7 +22,7 @@
 
 @end 
 
-@implementation REMChartSeriesIndicator
+@implementation REMBuildingChartSeriesIndicator
 
 static CGFloat pointRadius = 7.5;
 static CGFloat pointLabelSpace = 11;
