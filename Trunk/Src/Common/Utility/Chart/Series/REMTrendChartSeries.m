@@ -17,6 +17,7 @@
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
     self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle];
     if (self) {
+        source = [[NSMutableArray alloc]init];
         _yScale = @(1);
         _startDate = startDate;
         if (energyData.count == 0 || processor == nil) {
@@ -38,6 +39,32 @@
     if ([yScale isEqualToNumber:self.yScale]) return;
     _yScale = yScale;
     [[self getPlot]reloadData];
+}
+
+-(void)setVisableRange:(NSRange)visableRange {
+    if(visableRange.location != self.visableRange.location || visableRange.length == self.visableRange.length) {
+        [source removeAllObjects];
+        _visableRange = visableRange;
+        NSDate* startDate = [self.dataProcessor deprocessX:visableRange.location];
+        NSDate* endDate = [self.dataProcessor deprocessX:visableRange.length+visableRange.location];
+        
+        NSUInteger index = 0;
+        REMEnergyData* data = nil;
+        NSUInteger allDataCount = self.energyData.count;
+        while (index < allDataCount) {
+            data = self.energyData[index];
+            index++;
+            if ([data.localTime compare:startDate]==NSOrderedAscending) continue;
+            if ([data.localTime compare:endDate]==NSOrderedDescending) continue;
+            [source addObject:@{@"x":[self.dataProcessor processX:data.localTime], @"y":[self.dataProcessor processY:data.dataValue]}];
+        }
+        [[self getPlot]reloadData];
+    }
+}
+
+-(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
+{
+    return self.visableRange.length;
 }
 
 -(BOOL)isOccupy {
