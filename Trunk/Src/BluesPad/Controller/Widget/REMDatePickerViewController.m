@@ -368,7 +368,7 @@
     }
 }
 - (IBAction)okClicked:(UIBarButtonItem *)sender {
-    [self.widgetController setNewTimeRange:self.timeRange withRelativeType:self.relativeDateType withRelativeDateComponent:self.relativeDate];
+    [self.datePickerProtocol setNewTimeRange:self.timeRange withRelativeType:self.relativeDateType withRelativeDateComponent:self.relativeDate];
     [self.popController dismissPopoverAnimated:YES];
 }
 - (IBAction)cancelClicked:(UIBarButtonItem *)sender {
