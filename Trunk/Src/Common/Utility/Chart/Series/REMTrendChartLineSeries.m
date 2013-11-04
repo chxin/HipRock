@@ -81,6 +81,9 @@
 
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
 {
+    if (self.energyData.count<=idx) {
+        return nil;
+    }
     REMEnergyData* point = [self.energyData objectAtIndex:idx];
     if (fieldEnum == CPTScatterPlotFieldX) {
         return [self.dataProcessor processX:point.localTime];
