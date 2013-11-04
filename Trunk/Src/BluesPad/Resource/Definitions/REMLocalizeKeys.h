@@ -6,11 +6,11 @@
 //
 //
 
-#define REMLocalizedString(a) NSLocalizedString(a,@"")
-
 
 #ifndef Blues_REMLocalizeKeys_h
 #define Blues_REMLocalizeKeys_h
+
+#import "REMCommonDefinition.h"
 
 #pragma mark Common
 //Common, prefix: kLNCommon_

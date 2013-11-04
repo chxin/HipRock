@@ -9,6 +9,16 @@
 #ifndef Blues_REMDimensionForChart_h
 #define Blues_REMDimensionForChart_h
 
-//prefix: dDMChart
+#import "REMDimensions.h"
+
+//prefix: kDMChart
+
+#define kDMChart_ToolbarTop 50
+#define kDMChart_ToolbarHeight 60
+#define kDMChart_ToolbarWidth kDMScreenWidth
+
+#define kDMChart_ToolbarFrame CGRectMake(0,kDMChart_ToolbarTop,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)
+#define kDMChart_ToolbarHiddenFrame CGRectMake(kDMChart_ToolbarWidth,kDMChart_ToolbarTop,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)
+
 
 #endif

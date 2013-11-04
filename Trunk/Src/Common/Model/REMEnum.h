@@ -33,6 +33,7 @@ REMDiagramType;
 
 typedef enum _REMEnergyStep:NSUInteger
 {
+    REMEnergyStepNone=0,
     REMEnergyStepHour=1,
     REMEnergyStepDay=2,
     REMEnergyStepWeek=5,

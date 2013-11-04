@@ -1,14 +1,14 @@
 //
 //  REMWidgetEnergyDelegator.m
 //  Blues
-//
+//  ©2013 施耐德电气（中国）有限公司版权所有
 //  Created by tantan on 11/4/13.
 //
 //
 
 #import "REMWidgetEnergyDelegator.h"
-
 #import <QuartzCore/QuartzCore.h>
+#import "REMDimensions.h"
 
 @interface REMWidgetEnergyDelegator()
 
@@ -19,25 +19,39 @@
 @property (nonatomic,strong) NSString *currentRelativeDate;
 @property (nonatomic) REMRelativeTimeRangeType  currentRelativeDateType;
 @property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
+
+@property (nonatomic,strong) REMAbstractChartWrapper *chartWrapper;
+
+
 @end
 
 @implementation REMWidgetEnergyDelegator
 
 - (void)initBizView{
+    
+    [self initModelAndSearcher];
+    
     [self initSearchView];
     [self initChartView];
+}
+
+- (void)initModelAndSearcher{
+    self.model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
+                  .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
+    self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType];
 }
 
 - (void)initChartView{
     UIView *chartContainer=[[UIView alloc]initWithFrame:CGRectMake(kWidgetChartLeftMargin, kWidgetChartTopMargin, kWidgetChartWidth, kWidgetChartHeight)];
     [self.view addSubview:chartContainer];
     self.chartContainer=chartContainer;
+    self.maskerView=self.chartContainer;
     self.chartContainer.layer.borderColor=[UIColor redColor].CGColor;
     self.chartContainer.layer.borderWidth=1;
     [self showEnergyChart];
-    
+
     [self setStepControlStatusByStep:self.widgetInfo.contentSyntax.stepType];
-    [self setDatePickerButtonValueByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateComponent withRelativeType:self.widgetInfo.contentSyntax.relativeDateType];
+    [self setDatePickerButtonValueNoSearchByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateComponent withRelativeType:self.widgetInfo.contentSyntax.relativeDateType];
 }
 
 - (void) showTimePicker{
@@ -62,8 +76,11 @@
 - (void)setNewTimeRange:(REMTimeRange *)newRange withRelativeType:(REMRelativeTimeRangeType)relativeType withRelativeDateComponent:(NSString *)newDateComponent
 {
     
-    [self setDatePickerButtonValueByTimeRange:newRange withRelative:newDateComponent withRelativeType:relativeType];
+    [self setDatePickerButtonValueNoSearchByTimeRange:newRange withRelative:newDateComponent withRelativeType:relativeType];
     
+    [self doSearch:^(REMEnergyViewData *data,REMError *error){
+        [self reloadChart];
+    }];
     
 }
 
@@ -108,13 +125,13 @@
     }
     if (widgetWrapper != nil) {
         [self.chartContainer addSubview:widgetWrapper.view];
+        self.chartWrapper=widgetWrapper;
     }
     
 }
 
-
-
-- (void) setDatePickerButtonValueByTimeRange:(REMTimeRange *)range withRelative:(NSString *)relativeDate withRelativeType:(REMRelativeTimeRangeType)relativeType {
+- (void) setDatePickerButtonValueNoSearchByTimeRange:(REMTimeRange *)range withRelative:(NSString *)relativeDate withRelativeType:(REMRelativeTimeRangeType)relativeType
+{
     NSString *text=[REMTimeHelper formatTimeRangeFullHour:range];
     
     
@@ -127,10 +144,13 @@
     self.currentRelativeDateType=relativeType;
 }
 
-- (void) setStepControlStatusByTimeRange:(REMTimeRange *)range {
-    
+
+
+- (void)reloadChart{
     
 }
+
+
 
 - (void) setStepControlStatusByStep:(REMEnergyStep)step{
     NSUInteger pressedIndex;
@@ -160,6 +180,8 @@
 
 
 - (void)initSearchView{
+    self.currentTimeRangeArray=[[NSMutableArray alloc]initWithCapacity:self.widgetInfo.contentSyntax.timeRanges.count];
+    
     
     UISegmentedControl *legendControl=[[UISegmentedControl alloc] initWithItems:@[@"search",@"legend"]];
     [legendControl setFrame:CGRectMake(800, kLegendSearchSwitcherTop, 200, 30)];
@@ -167,7 +189,8 @@
     UIImage *legend=[UIImage imageNamed:@"Down"];
     [legendControl setImage:search forSegmentAtIndex:0];
     [legendControl setImage:legend forSegmentAtIndex:1];
-    [legendControl setSelectedSegmentIndex:1];
+    [legendControl setSelectedSegmentIndex:0];
+    [legendControl addTarget:self action:@selector(legendSwitchSegmentPressed:) forControlEvents:UIControlEventValueChanged];
     
     [self.view addSubview:legendControl];
     self.legendSearchControl=legendControl;
@@ -200,6 +223,37 @@
     
     
 
+}
+
+-(void)legendSwitchSegmentPressed:(UISegmentedControl *)segment
+{
+    if(segment.selectedSegmentIndex == 0){//search toolbar
+        //if legend toolbar display, move it out of the view
+        if(self.legendView != nil){
+            [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.legendView.frame = kDMChart_ToolbarHiddenFrame;
+            } completion:^(BOOL finished) {
+                [self.legendView removeFromSuperview];
+                self.legendView = nil;
+            }];
+            
+        }
+    }
+    else{//legend toolbar
+        //if legend toolbar is not presenting, move it into the view
+        if(self.legendView == nil){
+            UIView *view = [[UIView alloc] initWithFrame:kDMChart_ToolbarHiddenFrame];
+            view.backgroundColor = [UIColor purpleColor];
+            
+            [self.view addSubview:view];
+            self.legendView = view;
+            
+            [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.legendView.frame = kDMChart_ToolbarFrame;
+            } completion:nil];
+        }
+        
+    }
 }
 
 @end
