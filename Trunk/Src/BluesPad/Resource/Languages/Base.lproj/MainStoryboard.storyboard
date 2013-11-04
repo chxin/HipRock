@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5WC-f7-YJK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5WC-f7-YJK">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
         <!--Splash Screen Controller-->
@@ -145,7 +145,6 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <segue destination="R8X-Id-ksc" kind="modal" identifier="sendWeiboSegue" modalPresentationStyle="formSheet" id="gyV-e6-1Kn"/>
                         <segue destination="T2C-Tf-bPc" kind="custom" identifier="maxWidgetSegue" customClass="REMMaxWidgetSegue" id="VF8-aY-jAm"/>
                         <segue destination="at3-P1-D6R" kind="unwind" identifier="buildingToGallerySegue" unwindAction="unwindSegueToGallery:" id="7g6-Qk-QsX"/>
                         <segue destination="at3-P1-D6R" kind="unwind" identifier="buildingToMapSegue" unwindAction="unwindSegueToMap:" id="wUk-sf-qJM"/>
@@ -173,73 +172,58 @@
                     <navigationItem key="navigationItem" id="jlr-Hs-a1y"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <segue destination="Fzj-ui-CY3" kind="popover" identifier="timerPickerSegue" id="CMb-4Q-MIx">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES"/>
-                        </segue>
                         <segue destination="sO2-LG-KMS" kind="unwind" identifier="exitWidgetSegue" unwindAction="exitMaxWidget:" id="moD-S9-c5g"/>
+                        <segue destination="Fzj-ui-CY3" kind="popover" id="aw6-EE-kdc">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ndb-ap-11w" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="sO2-LG-KMS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1396" y="-1574"/>
+            <point key="canvasLocation" x="1228" y="-1422"/>
         </scene>
         <!--Date Picker View Controller - 选择日期-->
         <scene sceneID="IK4-ou-HLv">
             <objects>
-                <viewController id="OUZ-1Y-oK9" customClass="REMDatePickerViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="dhz-Vq-6IW">
+                <viewController storyboardIdentifier="datePickerViewController" id="OUZ-1Y-oK9" customClass="REMDatePickerViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="dhz-Vq-6IW">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                        <sections>
-                            <tableViewSection id="N1O-Xk-0Sc">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="relativeDateCell" textLabel="Shb-bR-9P1" style="IBUITableViewCellStyleDefault" id="EXl-hT-G2p">
-                                        <rect key="frame" x="0.0" y="99" width="1024" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EXl-hT-G2p" id="ckH-Om-Eeh">
-                                            <rect key="frame" x="0.0" y="0.0" width="991" height="43"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="relativeDateCell" textLabel="Shb-bR-9P1" style="IBUITableViewCellStyleDefault" id="EXl-hT-G2p">
+                                <rect key="frame" x="0.0" y="119" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EXl-hT-G2p" id="ckH-Om-Eeh">
+                                    <rect key="frame" x="0.0" y="0.0" width="991" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Shb-bR-9P1">
+                                            <rect key="frame" x="15" y="0.0" width="974" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Shb-bR-9P1">
-                                                    <rect key="frame" x="15" y="0.0" width="974" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="LQc-FK-OV0">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="datePickerCell" id="2ne-OB-NTm">
-                                        <rect key="frame" x="0.0" y="163" width="1024" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2ne-OB-NTm" id="Q46-Go-9ph">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="FOT-P8-Lk6">
-                                        <rect key="frame" x="0.0" y="207" width="1024" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FOT-P8-Lk6" id="K1U-s5-lSc">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
                     </tableView>
                     <navigationItem key="navigationItem" title="选择日期" id="RcD-Lh-2d6">
-                        <barButtonItem key="backBarButtonItem" title="取消" id="oG2-5P-zry"/>
-                        <barButtonItem key="rightBarButtonItem" title="完成" id="con-6d-emQ"/>
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="YAj-gE-G13">
+                            <connections>
+                                <action selector="cancelClicked:" destination="OUZ-1Y-oK9" id="Fdk-YD-QnS"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="完成" id="con-6d-emQ">
+                            <connections>
+                                <action selector="okClicked:" destination="OUZ-1Y-oK9" id="zLg-LV-v5f"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                     <connections>
@@ -284,6 +268,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="默认日期" id="Ra1-tx-INm"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OQK-x4-bHt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -984,27 +969,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N1S-i0-15H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="840" y="283"/>
-        </scene>
-        <!--Building Weibo Send View Controller-->
-        <scene sceneID="bSI-Y3-KEb">
-            <objects>
-                <viewController autoresizesArchivedViewToFullSize="NO" id="R8X-Id-ksc" customClass="REMBuildingWeiboSendViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6wb-3G-qZF"/>
-                        <viewControllerLayoutGuide type="bottom" id="vza-Gi-cPM"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="IoS-KQ-jPq">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    </view>
-                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TOj-5Z-r5Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1296" y="-96"/>
+            <point key="canvasLocation" x="736" y="-1101"/>
         </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="KV1-Ck-0FS">
@@ -1065,8 +1030,9 @@
         <!--Navigation Controller-->
         <scene sceneID="2L1-wj-4e8">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Fzj-ui-CY3" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="datePickerNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Fzj-ui-CY3" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="xvc-c1-juF"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Od-wC-Tf4">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -17,8 +17,8 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self){
-        self.layer.borderColor = [UIColor purpleColor].CGColor;
-        self.layer.borderWidth = 1.0;
+//        self.layer.borderColor = [UIColor purpleColor].CGColor;
+//        self.layer.borderWidth = 1.0;
         self.clipsToBounds = NO;
         self.backgroundColor = [UIColor clearColor];
         

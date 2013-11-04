@@ -14,6 +14,7 @@
 #import "REMLineWidgetWrapper.h"
 #import "REMColumnWidgetWrapper.h"
 #import "REMStackColumnWidgetWrapper.h"
+#import "REMDatePickerViewController.h"
 
 
 
@@ -26,7 +27,7 @@ const static CGFloat kWidgetTitleFontSize=25;
 const static CGFloat kWidgetDatePickerLeftMargin=15;
 const static CGFloat kWidgetDatePickerTopMargin=70;
 const static CGFloat kWidgetDatePickerHeight=40;
-const static CGFloat kWidgetDatePickerWidth=320;
+const static CGFloat kWidgetDatePickerWidth=380;
 const static CGFloat kWidgetStepSingleButtonWidth=60;
 const static CGFloat kWidgetChartLeftMargin=10;
 const static CGFloat kWidgetChartTopMargin=kWidgetDatePickerTopMargin+kWidgetDatePickerHeight;
@@ -42,7 +43,7 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
 @property (nonatomic,weak) UIButton *datePickerButton;
 
 @property (nonatomic,weak) UIView *chartContainer;
-
+@property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
 
 @end
 
@@ -65,6 +66,8 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
     [self.view setBackgroundColor:[UIColor grayColor]];
     
     [self.view setFrame:CGRectMake(0, 0, 1024, 748)];
+    
+    self.currentTimeRangeArray=[[NSMutableArray alloc]initWithCapacity:self.widgetInfo.contentSyntax.timeRanges.count];
     
     //self.view.layer.borderColor=[UIColor redColor].CGColor;
     //self.view.layer.borderWidth=1;
@@ -134,12 +137,37 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
     [self showEnergyChart];
     
     [self setStepControlStatusByStep:self.widgetInfo.contentSyntax.stepType];
-    [self setDatePickerButtonValueByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateType];
+    [self setDatePickerButtonValueByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateComponent withRelativeType:self.widgetInfo.contentSyntax.relativeDateType];
+    
+    
 }
 
 - (void) showTimePicker{
-    [self performSegueWithIdentifier:@"timerPickerSegue" sender:self];
+    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    UINavigationController *nav=[storyboard instantiateViewControllerWithIdentifier:@"datePickerNavigationController"];
+    
+    //REMDatePickerViewController *dateViewController=[storyboard instantiateViewControllerWithIdentifier:@"datePickerViewController"];
+        
+    UIPopoverController *popoverController=[[UIPopoverController alloc]initWithContentViewController:nav];
+    REMDatePickerViewController *dateViewController =nav.childViewControllers[0];
+    dateViewController.relativeDate=self.currentRelativeDate;
+    dateViewController.timeRange=self.currentTimeRangeArray[0];
+    dateViewController.relativeDateType=self.currentRelativeDateType;
+    dateViewController.widgetController=self;
+    dateViewController.popController=popoverController;
+    [popoverController setPopoverContentSize:CGSizeMake(400, 500)];
+    [popoverController presentPopoverFromRect:self.datePickerButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown|UIPopoverArrowDirectionUp animated:YES];
+    self.datePickerPopoverController=popoverController;
+    //[self performSegueWithIdentifier:@"timePickerSegue" sender:self];
 }
+
+- (void)setNewTimeRange:(REMTimeRange *)newRange withRelativeType:(REMRelativeTimeRangeType)relativeType withRelativeDateComponent:(NSString *)newDateComponent
+{
+    
+    [self setDatePickerButtonValueByTimeRange:newRange withRelative:newDateComponent withRelativeType:relativeType];
+}
+
+
 
 - (void) showEnergyChart{
     CGRect widgetRect = self.chartContainer.bounds;
@@ -186,17 +214,17 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
 
 
 
-- (void) setDatePickerButtonValueByTimeRange:(REMTimeRange *)range withRelative:(REMRelativeTimeRangeType)relativeType{
+- (void) setDatePickerButtonValueByTimeRange:(REMTimeRange *)range withRelative:(NSString *)relativeDate withRelativeType:(REMRelativeTimeRangeType)relativeType {
     NSString *text=[REMTimeHelper formatTimeRangeFullHour:range];
     
-    if(relativeType==REMRelativeTimeRangeTypeNone){
-        
-    }
-    else{
-        
-    }
     
-    [self.datePickerButton setTitle:text forState:UIControlStateNormal];
+    NSString *text1=[NSString stringWithFormat:@"%@ %@",relativeDate,text];
+    
+    [self.datePickerButton setTitle:text1 forState:UIControlStateNormal];
+    
+    self.currentRelativeDate=relativeDate;
+    self.currentTimeRangeArray[0]=range;
+    self.currentRelativeDateType=relativeType;
 }
 
 - (void) setStepControlStatusByTimeRange:(REMTimeRange *)range {

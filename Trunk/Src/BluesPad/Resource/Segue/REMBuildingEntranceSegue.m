@@ -24,7 +24,7 @@
 
 - (void)perform
 {
-    if(self.parameter.isInitialPresenting){
+    if(self.parameter.isNeedAnimation){
         [self slideIn];
         
         return;

@@ -22,10 +22,13 @@ typedef enum _REMWidgetLegendType{
 @property (nonatomic,weak) REMEnergyViewData *energyData;
 
 
-@property (nonatomic,strong) NSArray *currentTimeRangeArray;
+@property (nonatomic,strong) NSMutableArray *currentTimeRangeArray;
 @property (nonatomic) REMEnergyStep currentStep;
 @property (nonatomic) REMWidgetLegendType currentLegendType;
 
+@property (nonatomic,strong) NSString *currentRelativeDate;
+@property (nonatomic) REMRelativeTimeRangeType  currentRelativeDateType;
 
+- (void) setNewTimeRange:(REMTimeRange *)newRange withRelativeType:(REMRelativeTimeRangeType)relativeType withRelativeDateComponent:(NSString *)newDateComponent;
 
 @end
