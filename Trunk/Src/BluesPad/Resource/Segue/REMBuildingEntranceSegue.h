@@ -11,17 +11,17 @@
 #import "REMMapViewController.h"
 
 struct REMBuildingSegueZoomParamter {
-    BOOL isInitialPresenting;
+    BOOL isNeedAnimation;
     int currentBuildingIndex;
     CGRect initialZoomFrame;
     CGRect finalZoomFrame;
 };
 typedef struct REMBuildingSegueZoomParamter REMBuildingSegueZoomParamter;
 
-static inline REMBuildingSegueZoomParamter  REMBuildingSegueZoomParamterMake(BOOL initial, int index, CGRect iniFrame, CGRect finFrame){
+static inline REMBuildingSegueZoomParamter  REMBuildingSegueZoomParamterMake(BOOL animation, int index, CGRect iniFrame, CGRect finFrame){
     REMBuildingSegueZoomParamter parameter;
     parameter.currentBuildingIndex = index;
-    parameter.isInitialPresenting = initial;
+    parameter.isNeedAnimation = animation;
     parameter.initialZoomFrame = iniFrame;
     parameter.finalZoomFrame = finFrame;
     
