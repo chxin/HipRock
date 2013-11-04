@@ -18,6 +18,7 @@
 #import "REMBuildingViewController.h"
 #import "REMGalleryGroupView.h"
 #import "REMGalleryCollectionViewController.h"
+#import "REMImages.h"
 
 
 @interface REMGalleryViewController ()
@@ -55,7 +56,7 @@
 {
     //add switch button
     UIButton *switchButton = [[UIButton alloc]initWithFrame:kDMCommon_TopLeftButtonFrame];
-    [switchButton setBackgroundImage:[UIImage imageNamed:@"Map.png"] forState:UIControlStateNormal];
+    [switchButton setBackgroundImage:REMIMG_Map forState:UIControlStateNormal];
     [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:switchButton];

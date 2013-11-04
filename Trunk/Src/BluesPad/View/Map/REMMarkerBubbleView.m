@@ -10,6 +10,7 @@
 #import "REMBuildingModel.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import "REMBuildingOverallModel.h"
+#import "REMImages.h"
 
 @interface REMMarkerBubbleView ()
 
@@ -31,8 +32,8 @@
         background.frame = self.bounds;
         //NSLog(@"h:%f",self.bounds.size.height);
 //        [background setUserInteractionEnabled:NO];
-        [background setBackgroundImage:[[UIImage imageNamed:@"MarkerBubble.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(36.0f, 10.0f, 19.0f, 10.0f)] forState:UIControlStateNormal];
-        [background setBackgroundImage:[[UIImage imageNamed:@"MarkerBubble_Pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(36.0f, 10.0f, 19.0f, 10.0f)] forState:UIControlStateHighlighted];
+        [background setBackgroundImage:[REMIMG_MarkerBubble resizableImageWithCapInsets:UIEdgeInsetsMake(36.0f, 10.0f, 19.0f, 10.0f)] forState:UIControlStateNormal];
+        [background setBackgroundImage:[REMIMG_MarkerBubble_Pressed resizableImageWithCapInsets:UIEdgeInsetsMake(36.0f, 10.0f, 19.0f, 10.0f)] forState:UIControlStateHighlighted];
 //        background.layer.shadowColor = [UIColor blackColor].CGColor;
 //        background.layer.shadowOpacity = 0.5;
 //        background.layer.shadowOffset = CGSizeMake(-5.0, -5.0);

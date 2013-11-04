@@ -16,6 +16,7 @@
 #import "REMLoginCustomerViewController.h"
 #import "REMLocalizeKeys.h"
 #import "REMStoryboardDefinitions.h"
+#import "REMImages.h"
 
 @interface REMLoginPageController ()
 
@@ -232,9 +233,9 @@
 -(void)styleLoginButton
 {
     UIEdgeInsets imageInsets = UIEdgeInsetsMake(0, 6.0, 0, 6.0);
-    UIImage *normalImage = [[UIImage imageNamed:@"Login-Normal.png"] resizableImageWithCapInsets:imageInsets];
-    UIImage *pressedImage = [[UIImage imageNamed:@"Login-Pressed.png"] resizableImageWithCapInsets:imageInsets];
-    UIImage *disabledImage = [[UIImage imageNamed:@"Login-Disable.png"] resizableImageWithCapInsets:imageInsets];
+    UIImage *normalImage = [REMIMG_Login_Normal resizableImageWithCapInsets:imageInsets];
+    UIImage *pressedImage = [REMIMG_Login_Pressed resizableImageWithCapInsets:imageInsets];
+    UIImage *disabledImage = [REMIMG_Login_Disable resizableImageWithCapInsets:imageInsets];
     
     [self.loginButton setBackgroundImage:normalImage forState:UIControlStateNormal];
     [self.loginButton setBackgroundImage:pressedImage forState:UIControlStateHighlighted];
@@ -243,16 +244,18 @@
 
 -(void)styleTextFieldNormalStatus:(UITextField *)textField
 {
-    [self setTextField:textField backgroundImage:@"LoginTextField.png"];
+    [self setTextField:textField backgroundImage:REMLoadPngImage(@"LoginTextField")];
 }
+
 -(void)styleTextFieldFocusStatus:(UITextField *)textField
 {
-    [self setTextField:textField backgroundImage:@"LoginTextField-Focus.png"];
+    [self setTextField:textField backgroundImage:REMLoadPngImage(@"LoginTextField-Focus")];
 }
--(void)setTextField:(UITextField *)textField backgroundImage:(NSString *)imageName
+
+-(void)setTextField:(UITextField *)textField backgroundImage:(UIImage *)image
 {
     UIEdgeInsets imageInsets = UIEdgeInsetsMake(0,8.0, 0, 8.0);
-    UIImage *normalImage = [[UIImage imageNamed:imageName] resizableImageWithCapInsets:imageInsets];
+    UIImage *normalImage = [image resizableImageWithCapInsets:imageInsets];
     
     [textField setBackground:normalImage];
 }
