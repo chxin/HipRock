@@ -1,7 +1,7 @@
 //
 //  REMWidgetEnergyDelegator.m
 //  Blues
-//
+//  ©2013 施耐德电气（中国）有限公司版权所有
 //  Created by tantan on 11/4/13.
 //
 //
@@ -20,25 +20,38 @@
 @property (nonatomic) REMRelativeTimeRangeType  currentRelativeDateType;
 @property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
 
+@property (nonatomic,strong) REMAbstractChartWrapper *chartWrapper;
+
+
 @end
 
 @implementation REMWidgetEnergyDelegator
 
 - (void)initBizView{
+    
+    [self initModelAndSearcher];
+    
     [self initSearchView];
     [self initChartView];
+}
+
+- (void)initModelAndSearcher{
+    self.model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
+                  .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
+    self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType];
 }
 
 - (void)initChartView{
     UIView *chartContainer=[[UIView alloc]initWithFrame:CGRectMake(kWidgetChartLeftMargin, kWidgetChartTopMargin, kWidgetChartWidth, kWidgetChartHeight)];
     [self.view addSubview:chartContainer];
     self.chartContainer=chartContainer;
+    self.maskerView=self.chartContainer;
     self.chartContainer.layer.borderColor=[UIColor redColor].CGColor;
     self.chartContainer.layer.borderWidth=1;
     [self showEnergyChart];
-    
+
     [self setStepControlStatusByStep:self.widgetInfo.contentSyntax.stepType];
-    [self setDatePickerButtonValueByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateComponent withRelativeType:self.widgetInfo.contentSyntax.relativeDateType];
+    [self setDatePickerButtonValueNoSearchByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateComponent withRelativeType:self.widgetInfo.contentSyntax.relativeDateType];
 }
 
 - (void) showTimePicker{
@@ -63,8 +76,11 @@
 - (void)setNewTimeRange:(REMTimeRange *)newRange withRelativeType:(REMRelativeTimeRangeType)relativeType withRelativeDateComponent:(NSString *)newDateComponent
 {
     
-    [self setDatePickerButtonValueByTimeRange:newRange withRelative:newDateComponent withRelativeType:relativeType];
+    [self setDatePickerButtonValueNoSearchByTimeRange:newRange withRelative:newDateComponent withRelativeType:relativeType];
     
+    [self doSearch:^(REMEnergyViewData *data,REMError *error){
+        [self reloadChart];
+    }];
     
 }
 
@@ -109,13 +125,13 @@
     }
     if (widgetWrapper != nil) {
         [self.chartContainer addSubview:widgetWrapper.view];
+        self.chartWrapper=widgetWrapper;
     }
     
 }
 
-
-
-- (void) setDatePickerButtonValueByTimeRange:(REMTimeRange *)range withRelative:(NSString *)relativeDate withRelativeType:(REMRelativeTimeRangeType)relativeType {
+- (void) setDatePickerButtonValueNoSearchByTimeRange:(REMTimeRange *)range withRelative:(NSString *)relativeDate withRelativeType:(REMRelativeTimeRangeType)relativeType
+{
     NSString *text=[REMTimeHelper formatTimeRangeFullHour:range];
     
     
@@ -128,10 +144,13 @@
     self.currentRelativeDateType=relativeType;
 }
 
-- (void) setStepControlStatusByTimeRange:(REMTimeRange *)range {
-    
+
+
+- (void)reloadChart{
     
 }
+
+
 
 - (void) setStepControlStatusByStep:(REMEnergyStep)step{
     NSUInteger pressedIndex;
@@ -161,6 +180,8 @@
 
 
 - (void)initSearchView{
+    self.currentTimeRangeArray=[[NSMutableArray alloc]initWithCapacity:self.widgetInfo.contentSyntax.timeRanges.count];
+    
     
     UISegmentedControl *legendControl=[[UISegmentedControl alloc] initWithItems:@[@"search",@"legend"]];
     [legendControl setFrame:CGRectMake(800, kLegendSearchSwitcherTop, 200, 30)];

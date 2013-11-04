@@ -37,6 +37,8 @@ const static CGFloat widgetGap=10;
 
 @property (nonatomic,weak) UIView *glassView;
 
+@property (nonatomic,strong) NSString *groupName;
+
 /*
 @property (nonatomic,strong) REMWidgetMaxDiagramViewController *chartController;
 @property (nonatomic,strong) NSArray *currentStepList;
@@ -64,13 +66,14 @@ const static CGFloat widgetGap=10;
     self.speedBase=1280;
     self.currentWidgetIndex=0;
     self.readyToClose=NO;
+    self.groupName=[NSString stringWithFormat:@"widget-%@",self.dashboardInfo.dashboardId];
     [self addDashboardBg];
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     for (int i=0; i<self.dashboardInfo.widgets.count; ++i) {
         REMWidgetObject *obj=self.dashboardInfo.widgets[i];
         
         REMWidgetDetailViewController *sub=[[REMWidgetDetailViewController alloc]init];
         sub.widgetInfo=obj;
+        sub.groupName=self.groupName;
         REMWidgetCellViewController *cellController= self.widgetCollectionController.childViewControllers[i];
         sub.energyData=cellController.chartData;
         
@@ -164,8 +167,13 @@ const static CGFloat widgetGap=10;
     }
 }
 
+- (void)cancelAllRequest{
+    [REMDataAccessor cancelAccess:self.groupName];
+}
 
 - (void)panthis:(REMScreenEdgetGestureRecognizer *)pan{
+    
+    [self cancelAllRequest];
     
     if(self.timer!=nil){
         [self.timer invalidate];

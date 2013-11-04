@@ -1,7 +1,7 @@
 //
 //  REMWidgetEnergyDelegator.h
 //  Blues
-//
+//  ©2013 施耐德电气（中国）有限公司版权所有
 //  Created by tantan on 11/4/13.
 //
 //
@@ -24,6 +24,11 @@ const static CGFloat kWidgetChartLeftMargin=10;
 const static CGFloat kWidgetChartTopMargin=kWidgetDatePickerTopMargin+kWidgetDatePickerHeight;
 const static CGFloat kWidgetChartWidth=1004;
 const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
+
+typedef enum _REMWidgetLegendType{
+    REMWidgetLegendTypeLegend,
+    REMWidgetLegendTypeSearch
+} REMWidgetLegendType;
 
 
 @interface REMWidgetEnergyDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol>
