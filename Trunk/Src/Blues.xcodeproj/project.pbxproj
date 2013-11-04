@@ -638,6 +638,7 @@
 		7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingTimeRangeDataModel.m; sourceTree = "<group>"; };
 		7A09D59817B8D62F001EBC30 /* REMDataRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMDataRange.h; sourceTree = "<group>"; };
 		7A09D59917B8D62F001EBC30 /* REMDataRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMDataRange.m; sourceTree = "<group>"; };
+		7A0F7C5018277BAC009E898A /* REMImages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMImages.h; path = Resource/Definitions/REMImages.h; sourceTree = "<group>"; };
 		7A12280A18116DBF004DE778 /* REMViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMViewHelper.h; path = Common/Utility/REMViewHelper.h; sourceTree = "<group>"; };
 		7A12280B18116DBF004DE778 /* REMViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMViewHelper.m; path = Common/Utility/REMViewHelper.m; sourceTree = "<group>"; };
 		7A13C19317F40809007E6AA9 /* REMMainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMainNavigationController.h; path = Controller/REMMainNavigationController.h; sourceTree = "<group>"; };
@@ -1586,6 +1587,7 @@
 			children = (
 				7A28495D18039B0300DC481B /* REMStoryboardDefinitions.h */,
 				7A6CB4EA18165AE1007515FB /* REMLocalizeKeys.h */,
+				7A0F7C5018277BAC009E898A /* REMImages.h */,
 			);
 			name = Definitions;
 			sourceTree = "<group>";

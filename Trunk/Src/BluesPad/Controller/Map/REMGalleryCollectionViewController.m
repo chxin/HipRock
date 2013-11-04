@@ -17,6 +17,7 @@
 #import "REMBuildingOverallModel.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingViewController.h"
+#import "REMImages.h"
 
 @interface REMGalleryCollectionViewController ()
 
@@ -182,9 +183,6 @@
             }];
         }
     }
-    else{
-        completed([UIImage imageNamed:@"DefaultBuilding-Small"]);
-    }
 }
 
 -(REMGalleryCollectionCell *)cellForBuilding:(NSNumber *)buildingId
@@ -218,6 +216,7 @@
     cell.building = [self.buildingInfoArray[indexPath.row] building];
     cell.titleLabel.text = cell.building.name;
     cell.controller = self;
+    ((UIImageView *)cell.backgroundView).image = REMIMG_DefaultBuilding_Small;
     
     [self loadBuildingSmallImage:cell.building.pictureIds :^(UIImage *image) {
         ((UIImageView *)cell.backgroundView).image = image;

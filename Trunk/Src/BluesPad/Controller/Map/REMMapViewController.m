@@ -22,6 +22,7 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMDimensions.h"
 #import "REMMarkerBubbleView.h"
+#import "REMImages.h"
 
 @interface REMMapViewController ()
 
@@ -67,7 +68,7 @@ static BOOL isInitialPresenting = YES;
 {
     //add switch button
     UIButton *switchButton = [[UIButton alloc]initWithFrame:kDMCommon_TopLeftButtonFrame];
-    [switchButton setBackgroundImage:[UIImage imageNamed:@"Gallery.png"] forState:UIControlStateNormal];
+    [switchButton setBackgroundImage:REMIMG_Gallery forState:UIControlStateNormal];
     [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:switchButton];
@@ -286,7 +287,9 @@ static BOOL isInitialPresenting = YES;
         iconStateName = @"Focus";
     }
     
-    return [UIImage imageNamed:[NSString stringWithFormat:@"%@%@.png", iconName, iconStateName]];
+    NSString *imageName = [NSString stringWithFormat:@"%@%@", iconName, iconStateName];
+    
+    return REMLoadPngImage(imageName);
 }
 
 #pragma mark GSMapView delegate
