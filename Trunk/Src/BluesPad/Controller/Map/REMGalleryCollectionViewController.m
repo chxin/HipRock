@@ -59,8 +59,8 @@
     collectionView.delegate = self;
     [collectionView registerClass:[REMGalleryCollectionCell class] forCellWithReuseIdentifier:kCellIdentifier_GalleryCollectionCell];
     [collectionView setBackgroundColor:[UIColor clearColor]];
-    collectionView.layer.borderColor = [UIColor redColor].CGColor;
-    collectionView.layer.borderWidth = 1.0;
+//    collectionView.layer.borderColor = [UIColor redColor].CGColor;
+//    collectionView.layer.borderWidth = 1.0;
     
     self.collectionView = collectionView;
     

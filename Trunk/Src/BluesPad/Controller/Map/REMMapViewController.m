@@ -104,15 +104,7 @@ static BOOL isInitialPresenting = YES;
         marker.map = mapView;
         marker.flat = NO;
         marker.zIndex = [building.buildingId integerValue];
-        
-        UIImage *markerIcon = [UIImage imageNamed:@"CommonPin_Normal.png"];
-        if(buildingInfo.isQualified != nil && [buildingInfo.isQualified isEqual:[NSNull null]] == NO){
-            if([buildingInfo.isQualified intValue] == 1)
-                markerIcon = [UIImage imageNamed:@"QualifiedPin_Normal.png"];
-            else
-                markerIcon = [UIImage imageNamed:@"UnqualifiedPin_Normal.png"];
-        }
-        marker.icon = markerIcon;
+        marker.icon = [self getMarkerIcon:buildingInfo forMarkerState:UIControlStateNormal];
     }
 }
 
@@ -279,11 +271,34 @@ static BOOL isInitialPresenting = YES;
     return 0;
 }
 
+-(UIImage *)getMarkerIcon:(REMBuildingOverallModel *)buildingInfo forMarkerState:(UIControlState)state
+{
+    NSString *iconName = @"CommonPin_";
+    if(buildingInfo.isQualified != nil && [buildingInfo.isQualified isEqual:[NSNull null]] == NO){
+        if([buildingInfo.isQualified intValue] == 1)
+            iconName = @"QualifiedPin_";
+        else
+            iconName = @"UnqualifiedPin_";
+    }
+    
+    NSString *iconStateName = @"Normal";
+    if(state != UIControlStateNormal){
+        iconStateName = @"Focus";
+    }
+    
+    return [UIImage imageNamed:[NSString stringWithFormat:@"%@%@.png", iconName, iconStateName]];
+}
+
 #pragma mark GSMapView delegate
 
 - (BOOL)mapView:(GMSMapView *)view didTapMarker:(GMSMarker *)marker
 {
+    GMSMarker *oldMarker = mapView.selectedMarker;
+    oldMarker.icon = [self getMarkerIcon:oldMarker.userData forMarkerState:UIControlStateNormal];
+    
+    marker.icon = [self getMarkerIcon:marker.userData forMarkerState:UIControlStateHighlighted];
     mapView.selectedMarker = marker;
+
     return YES;
 }
 
@@ -318,5 +333,6 @@ static BOOL isInitialPresenting = YES;
 {
     
 }
+
 
 @end
