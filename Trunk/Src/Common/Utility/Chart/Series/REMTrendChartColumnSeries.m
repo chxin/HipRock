@@ -21,7 +21,7 @@
 -(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex {
     [super beforePlotAddToGraph:graph seriesList:seriesList selfIndex:selfIndex];
     
-    const float pointMargin = 0.3;  // 左右柱子离minorTick的距离，单位为柱子宽度，即30%*barWidth
+    const float pointMargin = 2;  // 左右柱子离minorTick的距离，单位为柱子宽度，即30%*barWidth
     const float barMargin = 0.08; // 同x轴点柱子间的距离，单位为柱子宽度，即8%*barWidth
     
     CPTBarPlot* myPlot = (CPTBarPlot*)plot;
