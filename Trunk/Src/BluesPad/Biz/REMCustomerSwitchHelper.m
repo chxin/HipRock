@@ -15,11 +15,10 @@
 static NSString *customerSwitchKey=@"customerswitch";
 
 +(void)switchCustomerById:(NSNumber *)selectedCustomerId masker:(UIView *)view action:(void (^)(REMCustomerSwitchStatus, NSArray *))callback {
-    REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
     NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:2];
     [dic setObject:selectedCustomerId forKey:@"selectedCustomerId"];
-    if(currentCustomer!=nil){
-        [dic setObject:currentCustomer.customerId forKey:@"currentCustomerId"];
+    if(REMAppCurrentCustomer != nil){
+        [dic setObject:REMAppCurrentCustomer.customerId forKey:@"currentCustomerId"];
     }
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSCustomerSwitch parameter:dic];
     store.maskContainer=view;

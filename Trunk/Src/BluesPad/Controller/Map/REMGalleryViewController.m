@@ -7,7 +7,6 @@
 //
 
 #import "REMGalleryViewController.h"
-#import "REMGalleryCollectionView.h"
 #import "REMMapViewController.h"
 #import "REMGalleryCollectionCell.h"
 #import "REMCommonHeaders.h"
@@ -17,258 +16,243 @@
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingEntranceSegue.h"
 #import "REMBuildingViewController.h"
-#import "REMMapGallerySegue.h"
+#import "REMGalleryGroupView.h"
+#import "REMGalleryCollectionViewController.h"
 
-#define kGalleryBuildingImageGroupName @"GALLERY"
 
 @interface REMGalleryViewController ()
 
-@property (nonatomic) BOOL isPinching;
+@property (nonatomic,strong) NSMutableDictionary *buildingGroups;
+@property (nonatomic,weak) UITableView *galleryTableView;
 
 @end
 
 
-@implementation REMGalleryViewController{
-    REMGalleryCollectionView *galleryView;
-}
+@implementation REMGalleryViewController
 
-- (void)loadView
+
+
+-(void)viewDidLoad
 {
-    //[super loadView];
-    //initialize UICollectionView
+    //set self styles
+    [self stylize];
     
-    if(galleryView == nil){
-        UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
-        [layout setSectionInset:UIEdgeInsetsMake(109, 25, 0, 25)];
-        
-        //CGRect viewFrame = self.mapViewController.view == nil?CGRectZero:self.mapViewController.view.bounds;
-        
-        galleryView = [[REMGalleryCollectionView alloc] initWithFrame:self.mapViewController.view.frame collectionViewLayout:layout];
-        galleryView.dataSource = self;
-        galleryView.delegate = self;
-        [galleryView registerClass:[REMGalleryCollectionCell class] forCellWithReuseIdentifier:kCellIdentifier_GalleryCell];
-        [galleryView setBackgroundColor:[UIColor blackColor]];
-        
-        self.view = galleryView;
-    }
+    //add buttons
+    [self addButtons];
     
-    [self viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-
-- (void)viewDidLoad
-{
-	// Do any additional setup after loading the view.
+    //process data
+    [self groupBuildings];
     
-    [self addSwitchButton];
-    
-    [self.view addSubview:self.mapViewController.customerLogoButton];
+    //add gallery table view
+    [self addGalleryGroupView];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    //[self playZoomAnimation:YES];
 }
 
-- (void)didReceiveMemoryWarning
+-(void)addButtons
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)addSwitchButton
-{
-    UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];// [[UIButton alloc] initWithFrame:];
-    [switchButton setFrame:kDMCommon_TopLeftButtonFrame];
-    [switchButton setImage:[UIImage imageNamed:@"Map.png"] forState:UIControlStateNormal];
-    [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchDown];
+    //add switch button
+    UIButton *switchButton = [[UIButton alloc]initWithFrame:kDMCommon_TopLeftButtonFrame];
+    [switchButton setBackgroundImage:[UIImage imageNamed:@"Map.png"] forState:UIControlStateNormal];
+    [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:switchButton];
+    
+    //add customer logo button
+    [self.view addSubview:self.customerLogoButton];
 }
+
+-(void)stylize
+{
+    self.view.frame = kDMDefaultViewFrame;
+    self.view.backgroundColor = kDMGallery_BackgroundColor;
+}
+
+-(void)addGalleryGroupView
+{
+    UITableView *tableView = [[UITableView alloc] initWithFrame:kDMGallery_GalleryTableViewFrame style:UITableViewStylePlain];
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    tableView.backgroundColor = [UIColor clearColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
+//    tableView.layer.borderColor = [UIColor blueColor].CGColor;
+//    tableView.layer.borderWidth = 1.0;
+    
+    self.galleryTableView = tableView;
+    [self.view addSubview:self.galleryTableView];
+}
+
 
 -(void)switchButtonPressed
 {
-    REMMapGallerySegue *segue = [[REMMapGallerySegue alloc] initWithIdentifier:kSegue_GalleryToMap source:self destination:self.mapViewController];
-    
-    [self prepareForSegue:segue sender:self];
-    [segue perform];
+    [self performSegueWithIdentifier:kSegue_GalleryToMap sender:self];
 }
 
+-(void)groupBuildings
+{
+    if(self.buildingGroups == nil){
+        self.buildingGroups = [[NSMutableDictionary alloc] init];
+        
+        for (REMBuildingOverallModel *buildingInfo in self.buildingInfoArray) {
+            NSString *province = buildingInfo.building.province;
+            
+            if([self.buildingGroups objectForKey:province] == nil){
+                NSMutableArray *buildingArray = [[NSMutableArray alloc] init];
+                [buildingArray addObject:buildingInfo];
+                
+                [self.buildingGroups setObject:buildingArray forKey:province];
+            }
+            else{
+                NSMutableArray *buildingArray = [self.buildingGroups objectForKey:province];
+                [buildingArray addObject:buildingInfo];
+                
+                [self.buildingGroups setObject:buildingArray forKey:province];
+            }
+        }
+    }
+}
+
+-(CGRect)getGalleryGroupCellFrame:(int)buildingCount
+{
+    int rowCount = (buildingCount / 6) + 1;
+    CGFloat cellHeight = kDMGallery_GalleryGroupTitleFontSize + kDMGallery_GalleryCollectionViewTopMargin + kDMGallery_GalleryCollectionViewBottomMargin + (rowCount * kDMGallery_GalleryCellHeight) + ((rowCount - 1) * kDMGallery_GalleryCellVerticleSpace);
+    
+    return CGRectMake(0, 0, kDMGallery_GalleryGroupViewWidth, cellHeight+1);
+}
+
+#pragma mark -UITableView data source delegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.buildingGroups allKeys].count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *key = [self.buildingGroups allKeys][indexPath.row];
+    NSArray *array = [self.buildingGroups objectForKey:key];
+    
+    REMGalleryCollectionViewController *collectionController = [[REMGalleryCollectionViewController alloc] initWithKey:key andBuildingInfoArray:array];
+    [self addChildViewController:collectionController];
+    
+    REMGalleryGroupView *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier_GalleryGroupCell forIndexPath:indexPath];
+    
+    [cell setGroupTitle:key];
+    [cell setCollectionView:collectionController.collectionView];
+    
+    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *array = [self.buildingGroups objectForKey:[self.buildingGroups allKeys][indexPath.row]];
+    
+    return [self getGalleryGroupCellFrame:array.count].size.height;
+}
+
+-(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
+
+#pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([segue.identifier isEqualToString:kSegue_GalleryToBuilding] == YES)
     {
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
-        customSegue.isNoAnimation = self.isPinching;
-        customSegue.isInitialPresenting = NO;
-        customSegue.initialZoomRect = self.initialZoomRect;
-        customSegue.finalZoomRect = self.view.frame;
-        customSegue.currentBuilding = self.selectedBuilding == nil?[self.buildingInfoArray[0] building]:self.selectedBuilding;
         
-        if(self.selectedBuilding == nil){
-            UICollectionViewCell *cell = [galleryView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
-            self.initialZoomRect = cell.frame;
-        }
-        
-        self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
+        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, self.initialZoomRect, self.view.frame)];
         
         REMBuildingViewController *buildingViewController = customSegue.destinationViewController;
-        buildingViewController.buildingOverallArray = self.buildingInfoArray;
-        buildingViewController.splashScreenController = self.splashScreenController;
+        buildingViewController.buildingInfoArray = self.buildingInfoArray;
         buildingViewController.fromController = self;
-        buildingViewController.currentBuildingId = self.selectedBuilding.buildingId;
+        buildingViewController.currentBuildingIndex = self.currentBuildingIndex;
     }
 }
 
-- (void)galleryCellTapped:(REMGalleryCollectionCell *)cell
+-(void)presentBuildingViewFromCell:(REMGalleryCollectionCell *)cell
 {
     [self.view setUserInteractionEnabled:NO];
     
-    self.initialZoomRect = cell.frame;
-    self.selectedBuilding = cell.building;
-    self.isPinching = NO;
+    CGRect cellFrameInView = [self getGalleryCollectionCellFrameInGalleryView:cell];
+    
+    self.initialZoomRect = cellFrameInView;
+    self.currentBuildingIndex = [self buildingIndexFromBuilding:cell.building];
+    self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
     
     [self performSegueWithIdentifier:kSegue_GalleryToBuilding sender:self];
 }
 
 
--(void)galleryCellPinched:(REMGalleryCollectionCell *)cell :(UIPinchGestureRecognizer *)pinch
-{
-    if(pinch.state  == UIGestureRecognizerStateBegan){
-        UIImageView *snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:cell]];
-        cell.snapshot = snapshot;
-        
-        
-        UIView *cover = [[UIView alloc] initWithFrame:cell.frame];
-        [cover setBackgroundColor:[UIColor blackColor]];
-        cell.blackCover = cover;
-        
-        [self.view addSubview:cell.blackCover];
-        [self.view addSubview:cell.snapshot];
-    }
-    
-    if(pinch.state  == UIGestureRecognizerStateChanged){
-        CGFloat scale = pinch.scale < 1 ? 1 : pinch.scale;
-        CGAffineTransform scaleTransform = CGAffineTransformMakeScale(scale, scale);
-        cell.snapshot.layer.affineTransform = scaleTransform;
 
-        CGPoint point = [pinch locationInView:self.view];
-        cell.snapshot.center = point;
+-(IBAction)unwindSegueToGallery:(UIStoryboardSegue *)sender
+{
+    
+}
+
+#pragma mark - Private methods
+
+-(int)buildingIndexFromBuilding:(REMBuildingModel *)building
+{
+    for(int i=0;i<self.buildingInfoArray.count;i++){
+        REMBuildingOverallModel *buildingInfo = self.buildingInfoArray[i];
+        if([buildingInfo.building.buildingId isEqualToNumber:building.buildingId])
+            return i;
     }
     
-    if(pinch.state  == UIGestureRecognizerStateEnded || pinch.state  == UIGestureRecognizerStateCancelled || pinch.state  == UIGestureRecognizerStateFailed){
-        
-        if(pinch.scale <= 1){ //scale did not change,
-            CGPoint pinchPoint = [pinch locationInView:self.view];
-            CGPoint cellCenter = [REMViewHelper getCenterOfRect:cell.frame];
+    return 0;
+}
+
+-(CGRect)getDestinationZoomRect:(int)currentBuildingIndex
+{
+    // Find the collection controller
+    REMGalleryCollectionViewController *currentCollectionController = nil;
+    
+    for(UIViewController *controller in self.childViewControllers){
+        if([controller class] == [REMGalleryCollectionViewController class]){
+            currentCollectionController = (REMGalleryCollectionViewController *)controller;
+            NSString *controllerKey = currentCollectionController.collectionKey;
             
-            if(pinchPoint.x != cellCenter.x || pinchPoint.y != cellCenter.y){ //but position changed
-                [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    self.snapshot.center = self.view.center;
-                } completion:^(BOOL finished) {
-                    [cell.blackCover removeFromSuperview];
-                    cell.blackCover = nil;
-                    
-                    [cell.snapshot removeFromSuperview];
-                    cell.snapshot = nil;
-                }];
+            REMBuildingModel *building = [self.buildingInfoArray[currentBuildingIndex] building];
+            
+            if(!REMIsNilOrNull(controllerKey) && [controllerKey isEqualToString:building.province]){
+                currentCollectionController = (REMGalleryCollectionViewController *)controller;
+                break;
             }
         }
-        else{ //scale larger
-            CGRect initialiZoomRect = cell.snapshot.frame;
-            [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                //from self.snapshot.frame to self.mapViewController.initialZoomRect;
-                self.snapshot.transform = [REMViewHelper getScaleTransformFromOriginalFrame:initialiZoomRect andFinalFrame:self.view.frame];
-                self.snapshot.center = [REMViewHelper getCenterOfRect:self.view.frame];
-            } completion:^(BOOL finished) {
-                [cell.blackCover removeFromSuperview];
-                cell.blackCover = nil;
-                
-                [cell.snapshot removeFromSuperview];
-                cell.snapshot = nil;
-                
-                self.initialZoomRect = cell.frame;
-                self.selectedBuilding = cell.building;
-                self.isPinching = YES;
-                
-                [self performSegueWithIdentifier:kSegue_GalleryToBuilding sender:self];
-            }];
-        }
-
-    }
-}
-
--(void)loadBuildingSmallImage:(NSArray *)imageIds :(void (^)(UIImage *))completed
-{
-    if(imageIds != nil && imageIds.count > 0){
-        NSString *smallImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageSmall];
-        NSString *smallBlurImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageSmallBlured];
-        
-        if([[NSFileManager defaultManager] fileExistsAtPath:smallImagePath] == YES){
-            completed([UIImage imageWithContentsOfFile:smallImagePath]);
-        }
-        else{
-            NSDictionary *parameter = @{@"pictureId":imageIds[0], @"isSmall":@"true"};
-            REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingPicture parameter:parameter];
-            store.groupName = kGalleryBuildingImageGroupName;
-            [REMDataAccessor access:store success:^(id data) {
-                if(data == nil || [data length] <= 2)
-                    return;
-                
-                UIImage *smallImage = [REMImageHelper parseImageFromNSData:data];
-                [REMImageHelper writeImageFile:smallImage withFullPath:smallImagePath];
-                
-                UIImage *smallBlurImage = [REMImageHelper blurImage:smallImage];
-                [REMImageHelper writeImageFile:smallBlurImage withFileName:smallBlurImagePath];
-                
-                completed([UIImage imageWithContentsOfFile:smallImagePath]);
-            } error:^(NSError *error, id response) {
-            }];
-        }
-    }
-}
-
--(CGRect)getCurrentZoomRect:(NSNumber *)currentBuildingId
-{
-    for (REMGalleryCollectionCell *cell in galleryView.visibleCells){
-        //NSLog(@"%@",NSStringFromCGRect(cell.frame));
-        
-        if(cell.building.buildingId == currentBuildingId)
-            return cell.frame;
     }
     
-    return CGRectZero;
+    // Find the cell, get its frame and return
+    UICollectionViewCell *cell = [currentCollectionController cellForBuilding:[self.buildingInfoArray[currentBuildingIndex] building].buildingId];
+    self.currentBuildingIndex = currentBuildingIndex;
+    
+    return [self getGalleryCollectionCellFrameInGalleryView:cell];
 }
 
 
-#pragma mark collection view delegate
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+-(CGRect)getGalleryCollectionCellFrameInGalleryView:(UICollectionViewCell *)cell
 {
-    return self.buildingInfoArray.count;
+    UIView *collectionView = cell.superview;
+    CGRect cellFrameInCollectionVIew = cell.frame;
+    
+    UIView *cycleView = collectionView;
+    CGRect cellFrameInGalleryView = cellFrameInCollectionVIew;
+    
+    while(![cycleView isEqual:self.view]){
+        cellFrameInGalleryView = [cycleView convertRect:cellFrameInGalleryView toView: cycleView.superview];
+        cycleView = cycleView.superview;
+    }
+    
+    return cellFrameInGalleryView;
 }
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    REMGalleryCollectionCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier_GalleryCell forIndexPath:indexPath];
-    
-    REMBuildingModel *building = ((REMBuildingOverallModel *)self.buildingInfoArray[indexPath.row]).building;
-    
-    cell.building = building;
-    cell.controller = self;
-    
-    [self loadBuildingSmallImage:building.pictureIds :^(UIImage *image) {
-        cell.backgroundImage = image;
-    }];
-    
-    return cell;
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(147, 110);
-}
 
 @end

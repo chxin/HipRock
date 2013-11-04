@@ -16,11 +16,7 @@
 
 @interface REMSplashScreenController ()
 
-@property (nonatomic,strong) NSMutableArray *buildingInfoArray;
-@property (nonatomic,strong) REMLoginCarouselController *carouselController;
-@property (nonatomic,strong) NSTimer *timer;
-
-
+@property (nonatomic,weak) REMLoginCarouselController *carouselController;
 
 @end
 
@@ -29,9 +25,68 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
-    
+//    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
+//    syntax.xtype = @"columnchartcomponent";
+//    syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
+//    NSMutableArray* timeRanges = [[NSMutableArray alloc]initWithCapacity:1];
+//    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10]];
+//    [timeRanges setObject:r atIndexedSubscript:0];
+//    syntax.timeRanges = timeRanges;
+//    
+//    REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
+//    NSMutableArray* sereis = [[NSMutableArray alloc]init];
+//    for (int sIndex = 0; sIndex < 3; sIndex++) {
+//        NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
+//        for (int i = 0; i < 1000; i++) {
+//            REMEnergyData* data = [[REMEnergyData alloc]init];
+//            data.quality = REMEnergyDataQualityGood;
+//            data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
+//            data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
+//            [energyDataArray addObject:data];
+//        }
+//        REMTargetEnergyData* sData = [[REMTargetEnergyData alloc]init];
+//        sData.energyData = energyDataArray;
+//        sData.target = [[REMEnergyTargetModel alloc]init];
+//        sData.target.uomId = 0;
+//        [sereis addObject:sData];
+//    }
+//    energyViewData.targetEnergyData = sereis;
+//    
+//    NSMutableDictionary* style = [[NSMutableDictionary alloc]init];
+//    //    self.userInteraction = ([dictionary[@"userInteraction"] isEqualToString:@"YES"]) ? YES : NO;
+//    //    self.series = dictionary[@"series"];
+//    CPTMutableLineStyle* gridlineStyle = [[CPTMutableLineStyle alloc]init];
+//    CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
+//    gridlineStyle.lineColor = [CPTColor whiteColor];
+//    gridlineStyle.lineWidth = 1.0;
+//    textStyle.fontName = @kBuildingFontSCRegular;
+//    textStyle.fontSize = 16.0;
+//    textStyle.color = [CPTColor whiteColor];
+//    textStyle.textAlignment = CPTTextAlignmentCenter;
+//    
+//    [style setObject:@"YES" forKey:@"userInteraction"];
+//    [style setObject:@(0.05) forKey:@"animationDuration"];
+//    [style setObject:gridlineStyle forKey:@"xLineStyle"];
+//    [style setObject:textStyle forKey:@"xTextStyle"];
+//    //    [style setObject:nil forKey:@"xGridlineStyle"];
+//    //    [style setObject:nil forKey:@"yLineStyle"];
+//    [style setObject:textStyle forKey:@"yTextStyle"];
+//    [style setObject:gridlineStyle forKey:@"yGridlineStyle"];
+//    [style setObject:@(6) forKey:@"horizentalGridLineAmount"];
+//    REMColumnWidgetWrapper* columnWidget = [[REMColumnWidgetWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax styleDictionary:style];
+//    columnWidget.view.backgroundColor = [UIColor blackColor];
+//    [self.view addSubview:columnWidget.view];
+//    
+//    
+//    CPTXYAxis* f = [[CPTXYAxis alloc]initWithFrame:CGRectMake(0, 0, 300, 300)];
+//    f.axisLineStyle  = gridlineStyle;
+//    f.backgroundColor = [UIColor redColor].CGColor;
+//    [self.view.layer addSublayer:f];
+//    [f setNeedsDisplay];
     //decide where to go
     [self recoverAppContext];
     
@@ -45,16 +100,12 @@
             [invocation setTarget:self];
             [invocation setSelector:selector];
             
-            self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
+            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
             
-            NSLog(@"%f", [((NSDate *)[NSDate date]) timeIntervalSince1970]);
             [self showMapView:^(void){
-                NSLog(@"%f", [((NSDate *)[NSDate date]) timeIntervalSince1970]);
-                if(self.timer != nil){
-                    if([self.timer isValid])
-                        [self.timer invalidate];
-                    
-                    self.timer = nil;
+                if(timer != nil){
+                    if([timer isValid])
+                        [timer invalidate];
                 }
             }];
         }];
@@ -97,7 +148,7 @@
 
 -(BOOL)isAlreadyLogin
 {
-    REMApplicationContext *context = [REMApplicationContext instance];
+    REMApplicationContext *context = REMAppContext;
     
     return context.currentUser!=nil && context.currentCustomer!=nil;
 }
@@ -107,8 +158,8 @@
     REMUserModel *storedUser = [REMUserModel getCached];
     REMCustomerModel *storedCustomer = [REMCustomerModel getCached];
     
-    [[REMApplicationContext instance] setCurrentUser:storedUser];
-    [[REMApplicationContext instance] setCurrentCustomer:storedCustomer];
+    [REMAppContext setCurrentUser:storedUser];
+    [REMAppContext setCurrentCustomer:storedCustomer];
 }
 
 - (void)showLoginView:(BOOL)isAnimated
@@ -148,7 +199,7 @@
 //    syntax.type = @"line";
 //    syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
     
-    NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
+    NSDictionary *parameter = @{@"customerId":REMAppCurrentCustomer.customerId};
     REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSBuildingInfo parameter:parameter];
     //buildingStore.isAccessLocal = YES;
     buildingStore.groupName = nil;
@@ -164,7 +215,7 @@
             [self.buildingInfoArray addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
         }
         
-        NSDictionary *parameter = @{@"customerId":[REMApplicationContext instance].currentCustomer.customerId};
+        NSDictionary *parameter = @{@"customerId":REMAppCurrentCustomer.customerId};
         REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter];
         //buildingStore.isAccessLocal = YES;
         logoStore.groupName = nil;
@@ -176,7 +227,7 @@
             
             UIImage *view = [REMImageHelper parseImageFromNSData:data];
             
-            [REMApplicationContext instance].currentCustomerLogo=view;
+            REMAppCurrentLogo = view;
             
             if(loadCompleted!=nil)
                 loadCompleted();
@@ -210,8 +261,6 @@
     {
         REMMapViewController *mapViewController = segue.destinationViewController;
         mapViewController.buildingInfoArray = self.buildingInfoArray;
-        self.buildingInfoArray=nil;
-        mapViewController.splashScreenController = self;
     }
 }
 

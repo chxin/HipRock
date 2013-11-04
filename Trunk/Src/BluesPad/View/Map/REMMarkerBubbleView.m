@@ -9,6 +9,7 @@
 #import "REMMarkerBubbleView.h"
 #import "REMBuildingModel.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import "REMBuildingOverallModel.h"
 
 @interface REMMarkerBubbleView ()
 
@@ -28,7 +29,7 @@
         
         UIButton *background = [UIButton buttonWithType:UIButtonTypeCustom];
         background.frame = self.bounds;
-        NSLog(@"h:%f",self.bounds.size.height);
+        //NSLog(@"h:%f",self.bounds.size.height);
 //        [background setUserInteractionEnabled:NO];
         [background setBackgroundImage:[[UIImage imageNamed:@"MarkerBubble.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(36.0f, 10.0f, 19.0f, 10.0f)] forState:UIControlStateNormal];
         [background setBackgroundImage:[[UIImage imageNamed:@"MarkerBubble_Pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(36.0f, 10.0f, 19.0f, 10.0f)] forState:UIControlStateHighlighted];
@@ -44,7 +45,7 @@
         CGRect contentFrame = CGRectMake(0, 0, contentSize.width, contentSize.height);
         
         UILabel *label = [[UILabel alloc] initWithFrame:contentFrame];
-        label.text = ((REMBuildingModel *)marker.userData).name;
+        label.text = [marker.userData building].name;
         label.textAlignment = NSTextAlignmentCenter;
         label.backgroundColor = [UIColor clearColor];
         label.textColor = [UIColor colorWithRed:55.0/255.0 green:55.0/255.0 blue:55.0/255.0 alpha:1];
@@ -76,7 +77,7 @@
 
 -(CGSize)getContentSize:(GMSMarker *)marker
 {
-    CGSize textSize = [((REMBuildingModel *)marker.userData).name sizeWithFont: [UIFont systemFontOfSize:20]];
+    CGSize textSize = [[marker.userData building].name sizeWithFont: [UIFont systemFontOfSize:20]];
     
     return CGSizeMake(textSize.width+96, textSize.height+20);
 }

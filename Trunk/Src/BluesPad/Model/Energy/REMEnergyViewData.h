@@ -20,6 +20,8 @@
 @property (nonatomic,strong) NSArray *targetEnergyData;
 @property (nonatomic,strong) NSArray *calendarData;
 @property (nonatomic,strong) NSArray *error;
+@property (nonatomic,strong) REMTimeRange *visibleTimeRange;
+@property (nonatomic,strong) REMTimeRange *globalTimeRange;
 
 
 @end

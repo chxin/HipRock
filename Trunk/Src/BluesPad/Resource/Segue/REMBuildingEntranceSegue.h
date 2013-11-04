@@ -10,13 +10,29 @@
 #import "REMGalleryViewController.h"
 #import "REMMapViewController.h"
 
+struct REMBuildingSegueZoomParamter {
+    BOOL isNeedAnimation;
+    int currentBuildingIndex;
+    CGRect initialZoomFrame;
+    CGRect finalZoomFrame;
+};
+typedef struct REMBuildingSegueZoomParamter REMBuildingSegueZoomParamter;
+
+static inline REMBuildingSegueZoomParamter  REMBuildingSegueZoomParamterMake(BOOL animation, int index, CGRect iniFrame, CGRect finFrame){
+    REMBuildingSegueZoomParamter parameter;
+    parameter.currentBuildingIndex = index;
+    parameter.isNeedAnimation = animation;
+    parameter.initialZoomFrame = iniFrame;
+    parameter.finalZoomFrame = finFrame;
+    
+    return parameter;
+}
+
 @interface REMBuildingEntranceSegue : UIStoryboardSegue
 
-@property (nonatomic) BOOL isInitialPresenting;
-@property (nonatomic) BOOL isNoAnimation;
-@property (nonatomic) CGRect initialZoomRect;
-@property (nonatomic) CGRect finalZoomRect;
-@property (nonatomic,weak) REMBuildingModel *currentBuilding;
+@property (nonatomic) REMBuildingSegueZoomParamter parameter;
+
+-(void)prepareSegueWithParameter:(REMBuildingSegueZoomParamter)parameter;
 
 
 @end

@@ -15,19 +15,26 @@
 
 @implementation REMBuildingEntranceSegue
 
+#define sequeTime 0.3
+
+-(void)prepareSegueWithParameter:(REMBuildingSegueZoomParamter)parameter
+{
+    self.parameter = parameter;
+}
+
 - (void)perform
 {
-    if(self.isInitialPresenting){
+    if(self.parameter.isNeedAnimation){
         [self slideIn];
         
         return;
     }
     
-    if(self.isNoAnimation == YES){
-        [[self.sourceViewController navigationController] pushViewController:self.destinationViewController animated:NO];
-        
-        return;
-    }
+//    if(self.isNoAnimation == YES){
+//        [[self.sourceViewController navigationController] pushViewController:self.destinationViewController animated:NO];
+//        
+//        return;
+//    }
     
     if([self.sourceViewController class] == [REMBuildingViewController class]){
         [self exit];
@@ -52,7 +59,7 @@
     [mapController.view addSubview:transitionView];
     
     
-    [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:sequeTime delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         transitionView.frame = CGRectMake(0, 0, mapController.view.bounds.size.width, mapController.view.bounds.size.height);;
     } completion:^(BOOL finished) {
         [transitionView removeFromSuperview];
@@ -64,7 +71,6 @@
 //building enter
 -(void)enter
 {
-    NSLog(@"begin %@", [NSDate date]);
     REMBuildingViewController *buildingController = self.destinationViewController;
     
     UIView *sourceView = [self.sourceViewController view];//, *buildingView = buildingController.view;
@@ -74,17 +80,15 @@
     UIImageView *transitionView = [self getBuildingTransitionView];
     
     transitionView.frame = sourceView.bounds;
-    transitionView.transform = [REMViewHelper getScaleTransformFromOriginalFrame:self.initialZoomRect andFinalFrame:self.finalZoomRect];
-    transitionView.center = [REMViewHelper getCenterOfRect:self.initialZoomRect];
+    transitionView.transform = [REMViewHelper getScaleTransformFromOriginalFrame:self.parameter.initialZoomFrame andFinalFrame:self.parameter.finalZoomFrame];
+    transitionView.center = [REMViewHelper getCenterOfRect:self.parameter.initialZoomFrame];
     
     [sourceView addSubview:transitionView];
     
-    NSLog(@"animation %@", [NSDate date]);
-    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:sequeTime delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         transitionView.transform = CGAffineTransformMakeScale(1.0, 1.0);
-        transitionView.center = [REMViewHelper getCenterOfRect:self.finalZoomRect];
+        transitionView.center = [REMViewHelper getCenterOfRect:self.parameter.finalZoomFrame];
     } completion:^(BOOL finished){
-        NSLog(@"end %@", [NSDate date]);
         [transitionView removeFromSuperview];
         [sourceView setUserInteractionEnabled:YES];
         [[self.sourceViewController navigationController] pushViewController:buildingController animated:NO];
@@ -108,10 +112,10 @@
     [buildingView addSubview:snapshot];
     [buildingView addSubview:transitionView];
     
-    CGRect initialZoomRect = [((id)buildingController.fromController) getCurrentZoomRect:buildingController.currentBuildingId];
+    CGRect initialZoomRect = [((id)buildingController.fromController) getDestinationZoomRect:buildingController.currentBuildingIndex];
     
-    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        transitionView.transform = [REMViewHelper getScaleTransformFromOriginalFrame:initialZoomRect andFinalFrame:self.finalZoomRect];
+    [UIView animateWithDuration:sequeTime delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        transitionView.transform = [REMViewHelper getScaleTransformFromOriginalFrame:initialZoomRect andFinalFrame:self.parameter.finalZoomFrame];
         transitionView.center = [REMViewHelper getCenterOfRect:initialZoomRect];
     } completion:^(BOOL finished){
         [transitionView removeFromSuperview];
@@ -123,7 +127,7 @@
 -(UIImageView *)getBuildingTransitionView
 {
     //if no image at all, use default
-    NSArray *imageIds = self.currentBuilding.pictureIds;
+    NSArray *imageIds = [[self.sourceViewController buildingInfoArray][self.parameter.currentBuildingIndex] building].pictureIds;
     if(imageIds == nil || imageIds.count <= 0)
         return [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"DefaultBuilding.png"]];
     

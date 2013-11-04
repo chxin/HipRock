@@ -8,20 +8,24 @@
 
 #import <UIKit/UIKit.h>
 #import "REMBuildingModel.h"
-#import "REMGalleryViewController.h"
+#import "REMGalleryCollectionViewController.h"
 
 @interface REMGalleryCollectionCell : UICollectionViewCell
 
-@property (nonatomic,weak) REMGalleryViewController *controller;
-@property (nonatomic,weak, setter = setBuildingModel:, getter = getBuildingModel) REMBuildingModel *building;
-@property (nonatomic,strong, setter = setBackgroundImage:) UIImage *backgroundImage;
+@property (nonatomic,weak) REMGalleryCollectionViewController *controller;
+@property (nonatomic,weak) REMBuildingModel *building;
 
-@property (nonatomic,weak) UIImageView *snapshot;
-@property (nonatomic,weak) UIView *blackCover;
+@property (nonatomic,weak) UILabel *titleLabel;
 
--(void)setBuildingModel:(REMBuildingModel *)model;
--(REMBuildingModel *)getBuildingModel;
+@property (nonatomic,strong) UIImageView *snapshot;
 
--(void)setBackgroundImage:(UIImage *)image;
+-(void)coverMe;
+-(void)uncoverMe;
+
+-(void)beginPinch;
+-(void)endPinch;
+
+
+
 
 @end

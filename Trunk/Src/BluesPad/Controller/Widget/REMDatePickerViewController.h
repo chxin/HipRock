@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "REMWidgetObject.h"
+#import "REMWidgetDetailViewController.h"
 
-@interface REMDatePickerViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>
+@interface REMDatePickerViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
+
+@property (nonatomic,strong) REMTimeRange *timeRange;
+@property (nonatomic,strong) NSString *relativeDate;
+@property (nonatomic) REMRelativeTimeRangeType relativeDateType;
+
+@property (nonatomic,weak) REMWidgetDetailViewController *widgetController;
+@property (nonatomic,weak) UIPopoverController *popController;
+
+
+- (void)setTimeRangeByDateRelative:(NSString *)relative withTimeRange:(REMRelativeTimeRangeType )timeRangeType;
 
 @end

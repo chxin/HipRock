@@ -7,22 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "REMGalleryCollectionView.h"
 #import "REMMapViewController.h"
-@class REMGalleryCollectionCell;
+#import "REMControllerBase.h"
+#import "REMGalleryCollectionCell.h"
 
-@interface REMGalleryViewController : UICollectionViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
+@interface REMGalleryViewController : REMControllerBase<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic,strong) NSArray *buildingInfoArray;
-@property (nonatomic,weak) REMMapViewController *mapViewController;
-@property (nonatomic,weak) REMSplashScreenController *splashScreenController;
+#pragma mark - Properties
+@property (nonatomic,weak) NSArray *buildingInfoArray;
+@property (nonatomic) int currentBuildingIndex;
 
-@property (nonatomic,strong) UIImageView *snapshot;
 @property (nonatomic) CGRect initialZoomRect;
+@property (nonatomic,strong) UIImageView *snapshot;
 
-@property (nonatomic,strong) REMBuildingModel *selectedBuilding;
-
-- (void)galleryCellTapped:(REMGalleryCollectionCell *)cell;
--(void)galleryCellPinched:(REMGalleryCollectionCell *)cell :(UIPinchGestureRecognizer *)pinch;
+#pragma mark - Methods
+-(CGRect)getDestinationZoomRect:(int)currentBuildingIndex;
+-(void)presentBuildingViewFromCell:(REMGalleryCollectionCell *)cell;
+-(int)buildingIndexFromBuilding:(REMBuildingModel *)building;
 
 @end

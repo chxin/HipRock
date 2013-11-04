@@ -8,6 +8,21 @@
 //Common, prefix: Common_
 "Common_ServerError" = "抱歉!服务器错误,无法获取最新的能源数据。请稍候再试。";
 "Common_Building"="楼宇";
+"Common_Last7Day"="之前七天";
+"Common_Today"="今天";
+"Common_Yesterday"="昨天";
+"Common_ThisWeek"="本周";
+"Common_LastWeek"="上周";
+"Common_ThisMonth"="本月";
+"Common_LastMonth"="上月";
+"Common_ThisYear"="今年";
+"Common_LastYear"="去年";
+"Common_Hour"="小时";
+"Common_Day"="天";
+"Common_Week"="周";
+"Common_Month"="月";
+"Common_Year"="年";
+"Common_CustomTime"="自定义";
 
 //Login, prefix: Login_
 "Login_NoNetwork" = "无可用网络,无法获取最新的能源数据。";
@@ -37,6 +52,25 @@
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="下拉返回概览能耗信息";
 
+//Widget, prefix:Widget_
+"Widget_TimePickerTime"="时间";
+"Widget_TimePickerStart"="起始";
+"Widget_TimePickerEnd"="终止";
+
+//Weibo, prefix: Weibo_
+"Weibo_WindowTitle"="新浪微博";
+"Weibo_CancelButtonText"="取消";
+"Weibo_SendButtonText"="发布";
+"Weibo_IsSending"="新浪微博发送中…";
+"Weibo_SentSuccess"="新浪微博发送成功";
+"Weibo_SentFail"="新浪微博发送失败";
+"Weibo_AccountBindingFail"="微博账户绑定失败: %@";
+"Weibo_AccountBindingSuccess"="微博账户绑定成功";
+"Weibo_AccountUnbindingConfirm"="解除绑定新浪微博？";
+"Weibo_AccountUnbindingYESButton"="解除绑定";
+"Weibo_AccountUnbindingNOButton"="放弃";
+"Weibo_ContentOfElectirc"="%@本月用#Commodity#趋势及单位平米用#Commodity#趋势，本月用#Commodity#总能耗为#Usage##UomName#，节能持续进行中。";
+"Weibo_ContentOfPM25"="今天上午10:00，%@室外#Commodity#为#OutdoorVal##OutdoorUomName#；经霍尼韦尔净化后室内新风#Commodity#为#HoneywellVal##HoneywellUomName#，经美埃净化后室内新风#Commodity#为#MayairVal##MayairUomName#。";
 
 
 //Chart, prefix: Chart_

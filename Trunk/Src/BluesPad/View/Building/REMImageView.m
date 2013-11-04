@@ -47,7 +47,7 @@
 
 @property (nonatomic) BOOL isSwitchingCommodityButtonGroup;
 
-@property (nonatomic,strong) REMDashboardController *dashboardController;
+
 
 @property (nonatomic) BOOL hasLoadedWholeView;
 
@@ -197,7 +197,7 @@
 - (void)initButtons{
     
     
-    UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, kBuildingTitleTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
+    UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, kDMCommon_TopLeftButtonTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
     [shareButton setImage:[UIImage imageNamed:@"Share_normal.png"] forState:UIControlStateNormal];
     [shareButton setImage:[UIImage imageNamed:@"Share_disable.png"] forState:UIControlStateDisabled];
     //if (self.buildingInfo.commodityUsage.count == 0) {
@@ -772,7 +772,7 @@
    
     //[logoButton setFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, titleLabel.frame.origin.y, logoButton.frame.size.width, logoButton.frame.size.height)];
     
-    [logoButton setBackgroundImage:[REMApplicationContext instance].currentCustomerLogo forState:UIControlStateNormal];
+    [logoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
     
     logoButton.titleLabel.text=@"logo";
     

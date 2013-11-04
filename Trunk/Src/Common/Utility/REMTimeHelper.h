@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "REMLog.h"
 #import "REMTimeRange.h"
+#import "REMEnum.h"
 
 @class REMTimeRange;
 
@@ -37,13 +38,18 @@ typedef enum _REMDateTimePart : NSUInteger{
 
 +(NSNumber *) numberFromJSONString:(NSString *)jsonDate;
 
-+ (REMTimeRange *) relativeDateFromString:(NSString *)relativeDateString;
++ (REMTimeRange *) relativeDateFromType:(REMRelativeTimeRangeType)relativeDateType;
 
 + (NSString *)formatTimeFullHour:(NSDate *)date isChangeTo24Hour:(BOOL)change24Hour;
+
+
++ (NSString *)formatTimeRangeFullHour:(REMTimeRange *)range;
 
 + (REMTimeRange *) maxTimeRangeOfTimeRanges:(NSArray *)timeRanges;
 
 + (NSDate *)add:(int)difference onPart:(REMDateTimePart)part ofDate:(NSDate *)date;
+
+
 
 + (NSUInteger)getYear:(NSDate *)date;
 + (NSUInteger)getMonth:(NSDate *)date;
@@ -57,6 +63,7 @@ typedef enum _REMDateTimePart : NSUInteger{
 
 +(NSDate*)addMonthToDate:(NSDate*)date month:(NSInteger)month;
 +(NSDate*)dateFromYear:(int)year Month:(int)month Day:(int)day;
++(NSDate*)dateFromYear:(int)year Month:(int)month Day:(int)day Hour:(int)hour;
 +(NSDate *)today;
 +(NSDate *)tomorrow;
 +(NSDate *)convertLocalDateToGMT:(NSDate *)localDate;

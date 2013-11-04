@@ -15,10 +15,18 @@
 #import "REMBuildingEntranceSegue.h"
 #import "REMCommonHeaders.h"
 #import "REMStoryboardDefinitions.h"
+#import "REMMaxWidgetSegue.h"
+#import "REMDashboardController.h"
+#import "REMWidgetDetailViewController.h"
+#import "REMWidgetMaxViewController.h"
+#import "REMWidgetCellViewController.h"
+#import "REMBuildingShareViewController.h"
+
+
+const static CGFloat imageGap=10;
 
 @interface REMBuildingViewController ()
-@property (nonatomic,strong) NSArray *imageArray;
-@property (nonatomic) NSUInteger currentIndex;
+//@property (nonatomic) NSUInteger currentIndex;
 @property (nonatomic,strong) NSArray *originCenterXArray;
 @property (nonatomic) CGFloat cumulateX;
 
@@ -41,14 +49,12 @@
 
 @property (nonatomic) CGFloat speedBase;
 
+
 @end
 
 
 
 @implementation REMBuildingViewController{
-    CGFloat     pinchLastScale;
-    CGPoint     pinchLastPoint;
-    UIImageView *mapSnapshot;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -60,41 +66,23 @@
     return self;
 }
 
-- (void)loadView{
-    [super loadView];
-    
-    
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.speedBase=1280;
-	self.customImageLoadedDictionary = [[NSMutableDictionary alloc]initWithCapacity:self.buildingOverallArray.count];
+	self.customImageLoadedDictionary = [[NSMutableDictionary alloc]initWithCapacity:self.buildingInfoArray.count];
     self.view.backgroundColor=[UIColor blackColor];
     self.currentScrollOffset=-kBuildingCommodityViewTop;
     
+    self.cumulateX=0;
     
     [self addObserver:self forKeyPath:@"currentScrollOffset" options:0 context:nil];
     
-    if (self.currentBuildingId!=nil) {
-        for (int i=0; i<self.buildingOverallArray.count; ++i) {
-            REMBuildingOverallModel *model = self.buildingOverallArray[i];
-            if([model.building.buildingId isEqualToNumber:self.currentBuildingId]==YES){
-                self.currentIndex=i;
-                break;
-            }
-        }
-    }
-    else{
-        self.currentIndex=0;
-    }
     
-    
-    
-    if(self.buildingOverallArray.count>0){
+    if(self.buildingInfoArray.count>0){
         
-         [self blurredImageView];
+        [self blurredImageView];
         
         UIPanGestureRecognizer *rec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
         [self.view addGestureRecognizer:rec];
@@ -107,18 +95,12 @@
         [self.view addGestureRecognizer:pinch];
     }
     
-    
-    
-    
-    self.cumulateX=0;
-    
-    
-    
 }
 
 
 
 -(void)dealloc{
+    
     [self removeObserver:self forKeyPath:@"currentScrollOffset"];
     for (REMImageView *view in self.imageArray) {
         [view removeFromSuperview];
@@ -130,7 +112,7 @@
 {
     if([keyPath isEqualToString:@"currentScrollOffset"] == YES){
         for (int i=0; i<self.imageArray.count; ++i) {
-            if(i!= self.currentIndex){
+            if(i!= self.currentBuildingIndex){
                 if([[self.imageViewStatus objectForKey:@(i)] isEqualToNumber:@(1)] == YES){
                     REMImageView *view=self.imageArray[i];
                     [view setScrollOffset:self.currentScrollOffset];
@@ -146,7 +128,7 @@
 {
     if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] ==YES ){
         if(self.imageArray.count<1)return YES;
-        REMImageView *current = self.imageArray[self.currentIndex];
+        REMImageView *current = self.imageArray[self.currentBuildingIndex];
         return [current shouldResponseSwipe:touch];
             
         
@@ -165,54 +147,34 @@
 }
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if([segue.identifier isEqualToString:@"buildingToMapSegue"]==YES){
-//        REMMapViewController *mapController = segue.destinationViewController;
-//        mapController.buildingInfoArray = self.buildingOverallArray;
-//    }
-    if([segue.identifier isEqualToString:kSegue_BuildingToMap] == YES){
-        REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
-        
-        customSegue.initialZoomRect = [((id)self.fromController) initialZoomRect];
-        customSegue.finalZoomRect = self.view.frame;
-    }
-}
 
 
 - (void)blurredImageView
 {
     NSString* defaultBuildingName = [[NSBundle mainBundle]pathForResource:@"DefaultBuilding" ofType:@"png"];
     self.defaultImage = [UIImage imageWithContentsOfFile:defaultBuildingName];
-    //self.defaultImage = [UIImage imageWithContentsOfFile:@"DefaultBuilding"];
-    //dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    //UIImage *image = self.defaultImage;
-    //dispatch_async(concurrentQueue, ^{
-        UIImage *view = [REMImageHelper blurImage:self.defaultImage];
-     //   dispatch_async(dispatch_get_main_queue(), ^{
-            self.defaultBlurImage=view;
-            [self initImageView];
-     //   });
-   // });
-    
+    UIImage *view = [REMImageHelper blurImage:self.defaultImage];
+    self.defaultBlurImage=view;
+    [self initImageView];
 }
 
 - (void)initImageView
 {
     int i=0;
-    self.imageViewStatus = [[NSMutableDictionary alloc]initWithCapacity:self.buildingOverallArray.count];
-    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:self.buildingOverallArray.count];
+    self.imageViewStatus = [[NSMutableDictionary alloc]initWithCapacity:self.buildingInfoArray.count];
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:self.buildingInfoArray.count];
     
     
-    for (;i<self.buildingOverallArray.count;++i) {
-        REMBuildingOverallModel *model = self.buildingOverallArray[i];
-        REMImageView *imageView = [[REMImageView alloc]initWithFrame:CGRectMake((kImageWidth+kImageMargin)*i, 0, kImageWidth, kImageHeight) withBuildingOveralInfo:model ];
+    for (;i<self.buildingInfoArray.count;++i) {
+        REMBuildingOverallModel *model = self.buildingInfoArray[i];
+        REMImageView *imageView = [[REMImageView alloc]initWithFrame:CGRectMake((kImageWidth+imageGap)*i, 0, kImageWidth, kImageHeight) withBuildingOveralInfo:model ];
         imageView.defaultImage=self.defaultImage;
         imageView.defaultBlurImage=self.defaultBlurImage;
         imageView.controller=self;
         //if(i==self.currentIndex || i==(self.currentIndex+1) || i == (self.currentIndex-1)){
         
         [self.view addSubview:imageView];
-        if(i==self.currentIndex || i==(self.currentIndex+1) || i == (self.currentIndex-1)){
+        if(i==self.currentBuildingIndex || i==(self.currentBuildingIndex+1) || i == (self.currentBuildingIndex-1)){
             [imageView initWholeViewUseThumbnail:NO];
         }
         else{
@@ -239,13 +201,13 @@
     
     
     
-    int moveCount=self.currentIndex;
+    int moveCount=self.currentBuildingIndex;
     
     NSMutableArray *ar = [[NSMutableArray alloc] initWithCapacity:self.imageArray.count];
     for (int i=0; i<arr.count; ++i) {
         NSNumber *num = arr[i];
         float f = [num floatValue];
-        f = f+(1024+5)*moveCount*-1;
+        f = f+(1024+imageGap)*moveCount*-1;
         NSNumber *num1 = [NSNumber numberWithFloat:f];
          [ar addObject:num1];
     }
@@ -271,7 +233,7 @@
     //UIImage *image = self.defaultImage;
     dispatch_async(concurrentQueue, ^{
         for (int i=0; i<self.imageArray.count; ++i) {
-            if(i!=self.currentIndex && i!=(self.currentIndex+1) && i != (self.currentIndex-1)){
+            if(i!=self.currentBuildingIndex && i!=(self.currentBuildingIndex+1) && i != (self.currentBuildingIndex-1)){
                 REMImageView *imageView=self.imageArray[i];
                 [imageView initWholeViewUseThumbnail:NO];
             }
@@ -287,7 +249,7 @@
 #pragma mark buildingview
 
 - (void)loadImageData{
-    REMImageView *image = self.imageArray[self.currentIndex];
+    REMImageView *image = self.imageArray[self.currentBuildingIndex];
     [image requireChartData];
 }
 
@@ -310,10 +272,10 @@
         for (int i=0;i<self.imageArray.count;++i)
         {
             REMImageView *view = self.imageArray[i];
-            if(self.currentIndex == 0 && self.cumulateX>0){
+            if(self.currentBuildingIndex == 0 && self.cumulateX>0){
                 [view moveCenter:trans.x/2];
             }
-            else if((self.currentIndex==(self.imageArray.count-1)) && self.cumulateX<0){
+            else if((self.currentBuildingIndex==(self.imageArray.count-1)) && self.cumulateX<0){
                 [view moveCenter:trans.x/2];
             }
             else{
@@ -337,8 +299,8 @@
         
          BOOL addIndex=YES;
         
-        if((sign<0 && self.currentIndex==self.imageArray.count-1)
-           || (sign>0 && self.currentIndex==0) ||
+        if((sign<0 && self.currentBuildingIndex==self.imageArray.count-1)
+           || (sign>0 && self.currentBuildingIndex==0) ||
            (ABS(p.x)<100 && ABS(self.cumulateX)<512)){
             addIndex=NO;
         }
@@ -348,7 +310,7 @@
             for (int i=0; i<self.imageArray.count; ++i) {
                 NSNumber *num = self.originCenterXArray[i];
                 float f = [num floatValue];
-                f = f+sign*(1024+5);
+                f = f+sign*(1024+imageGap);
                 NSNumber *num1 = [NSNumber numberWithFloat:f];
                 
                 [ar addObject:num1];
@@ -378,8 +340,7 @@
             
             
             
-            self.currentIndex=self.currentIndex+sign*-1;
-            self.currentBuildingId=((REMBuildingOverallModel *)self.buildingOverallArray[self.currentIndex]).building.buildingId;
+            self.currentBuildingIndex = self.currentBuildingIndex+sign*-1;
 
             
             self.delta=M_PI_4/128.0f;
@@ -463,14 +424,14 @@
 
 - (void)stopCoverPage:(NSTimer *)timer{
     //NSLog(@"currentIndex:%d",self.currentIndex);
-    REMImageView *imageView=self.imageArray[self.currentIndex];
+    REMImageView *imageView=self.imageArray[self.currentBuildingIndex];
     [imageView initWholeViewUseThumbnail:NO];
     [imageView setScrollOffset:self.currentScrollOffset];
 
     [imageView requireChartData];
-    if(self.currentIndex<self.imageArray.count){
+    if(self.currentBuildingIndex<self.imageArray.count){
         CGFloat sign=self.speed<0?-1:1;
-        NSNumber *willIndex= @(self.currentIndex-1*sign);
+        NSNumber *willIndex= @(self.currentBuildingIndex-1*sign);
         if(willIndex.intValue>=self.imageArray.count || willIndex.intValue<0){
             return;
         }
@@ -572,15 +533,11 @@
 -(void)pinchThis:(UIPinchGestureRecognizer *)pinch
 {
     if(pinch.state  == UIGestureRecognizerStateBegan){
-        NSLog(@"pinch: Began");
-        if(mapSnapshot == nil)
-            mapSnapshot = [((id)self.fromController) snapshot];
-        
-        pinchLastScale = 1.0;
-        pinchLastPoint = [pinch locationInView:self.snapshot];
+        //NSLog(@"pinch: Began");
+        UIImageView *fromViewSnapshot = [((id)self.fromController) snapshot];
         
         self.snapshot = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:self.view]];
-        [self.view addSubview:mapSnapshot];
+        [self.view addSubview:fromViewSnapshot];
         [self.view addSubview:self.snapshot];
     }
     
@@ -592,22 +549,22 @@
         CGPoint point = [pinch locationInView:self.view];
         self.snapshot.center = point;
         
-        NSLog(@"pinch: Changed, scale: %f, point: %@", pinch.scale, NSStringFromCGPoint(point));
+        //NSLog(@"pinch: Changed, scale: %f, point: %@", pinch.scale, NSStringFromCGPoint(point));
         
-        pinchLastScale = pinch.scale;
-        pinchLastPoint = point;
     }
     
     if(pinch.state  == UIGestureRecognizerStateEnded || pinch.state  == UIGestureRecognizerStateCancelled || pinch.state  == UIGestureRecognizerStateFailed){
-        NSLog(@"pinch: Ended, state: %d, touch numbers: %d", pinch.state, pinch.numberOfTouches);
+        //NSLog(@"pinch: Ended, state: %d, touch numbers: %d", pinch.state, pinch.numberOfTouches);
         
-        if(pinchLastScale >= 1){ //scale did not change,
-            if(pinchLastPoint.x != self.view.center.x || pinchLastPoint.y != self.view.center.y){ //but position changed
+        UIImageView *fromViewSnapshot = [((id)self.fromController) snapshot];
+        if(pinch.scale >= 1){ //scale did not change,
+            CGPoint point = [pinch locationInView:self.view];
+            
+            if(point.x != self.view.center.x || point.y != self.view.center.y){ //but position changed
                 [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                     self.snapshot.center = self.view.center;
                 } completion:^(BOOL finished) {
-                    [mapSnapshot removeFromSuperview];
-                    mapSnapshot = nil;
+                    [fromViewSnapshot removeFromSuperview];
                     
                     [self.snapshot removeFromSuperview];
                     self.snapshot = nil;
@@ -615,17 +572,17 @@
             }
         }
         else{ //scale smaller
-            CGRect initialiZoomRect = [((id)self.fromController) initialZoomRect];
+            CGRect initialiZoomRect = [((id)self.fromController) getDestinationZoomRect:self.currentBuildingIndex];
             [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 //from self.snapshot.frame to self.mapViewController.initialZoomRect;
                 self.snapshot.transform = [REMViewHelper getScaleTransformFromOriginalFrame:initialiZoomRect andFinalFrame:self.view.frame];
                 self.snapshot.center = [REMViewHelper getCenterOfRect:initialiZoomRect];
             } completion:^(BOOL finished) {
-                [mapSnapshot removeFromSuperview];
-                mapSnapshot = nil;
+                [fromViewSnapshot removeFromSuperview];
                 
                 [self.snapshot removeFromSuperview];
                 self.snapshot = nil;
+                
                 [self.navigationController popViewControllerAnimated:NO];
             }];
         }
@@ -635,12 +592,68 @@
 
 #pragma mark -
 #pragma mark segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:kSegue_BuildingToMap] || [segue.identifier isEqualToString:kSegue_BuildingToGallery]){
+        REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
+        
+        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, CGRectZero, self.view.frame)];
+    }
+    if([segue.identifier isEqualToString:@"maxWidgetSegue"]==YES){
+        REMImageView *view = self.imageArray[self.currentBuildingIndex];
+        
+        REMDashboardController *dashboard=view.dashboardController;
+        
+        REMWidgetCollectionViewController *collection= dashboard.childViewControllers[dashboard.currentMaxDashboardIndex];
+        
+        
+        REMWidgetMaxViewController *maxController = segue.destinationViewController;
+        self.maxDashbaordController=dashboard;
+        maxController.widgetCollectionController=collection;
+        maxController.dashboardInfo=dashboard.dashboardArray[dashboard.currentMaxDashboardIndex];
+        
+    }
+}
+
+- (IBAction)exitMaxWidget:(UIStoryboardSegue *)sender
+{
+    
+}
+
+
 - (IBAction)dashboardButtonPressed:(id)sender
 {
     [self performSegueWithIdentifier:@"buildingToDashboardSegue" sender:self];
 }
 
 - (IBAction)shareButtonPressed:(id)sender {
+    //[self performSegueWithIdentifier:kSegue_BuildingToSharePopover sender:self];
+    
+    REMBuildingShareViewController *shareController = [self.storyboard instantiateViewControllerWithIdentifier: @"sharePopover"];
+    
+    shareController.contentSizeForViewInPopover = CGSizeMake(156, 88);
+    
+    if(self.sharePopoverController == nil){
+        self.sharePopoverController = [[UIPopoverController alloc] initWithContentViewController:shareController];
+    }
+    
+    shareController.buildingController = self;
+    
+    [self.sharePopoverController setDelegate:self];
+    [self.sharePopoverController presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES ];
+}
+
+
+-(IBAction)backButtonPressed:(id)sender
+{
+    //decide where to go
+    NSString *segueIdentifier = [self.fromController class] == [REMGalleryViewController class] ? kSegue_BuildingToGallery : kSegue_BuildingToMap;
+    
+    [self performSegueWithIdentifier:segueIdentifier sender:self];
+}
+
+-(void)shareViaWeibo
+{
     REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:[UIApplication sharedApplication].keyWindow];
     
     [masker showMask];
@@ -651,16 +664,8 @@
     [self performSelector:@selector(executeExport:) withObject:masker afterDelay:0.1];
 }
 
--(IBAction)backButtonPressed:(id)sender
-{
-    REMBuildingEntranceSegue *segue = [[REMBuildingEntranceSegue alloc] initWithIdentifier:kSegue_BuildingToMap source:self destination:self.fromController];
-    
-    [self prepareForSegue:segue sender:self];
-    [segue perform];
-}
-
--(void)executeExport:(REMMaskManager *)masker{
-    REMImageView *view = self.imageArray[self.currentIndex];
+-(void)executeWeiboExport:(REMMaskManager *)masker{
+    REMImageView *view = self.imageArray[self.currentBuildingIndex];
     
     [view exportImage:^(UIImage *image, NSString* text){
         [masker hideMask];
@@ -690,5 +695,7 @@
         
     }];
 }
+
+
 
 @end

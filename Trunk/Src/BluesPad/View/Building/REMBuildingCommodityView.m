@@ -282,14 +282,16 @@ typedef void(^SuccessCallback)(BOOL success);
         }
         else{
             model=[[REMCommodityUsageModel alloc]initWithDictionary:data];
-            if(self.buildingInfo.commodityUsage==nil){
-                self.buildingInfo.commodityUsage=@[model];
+            if(model!=nil){
+                if(self.buildingInfo.commodityUsage==nil){
+                    self.buildingInfo.commodityUsage=@[model];
+                }
+                else{
+                    NSMutableArray *newArray=[self.buildingInfo.commodityUsage mutableCopy];
+                    [newArray addObject:model];
+                    self.buildingInfo.commodityUsage=newArray;
+                }
             }
-            else{
-                NSMutableArray *newArray=[self.buildingInfo.commodityUsage mutableCopy];
-                [newArray addObject:model];
-                self.buildingInfo.commodityUsage=newArray;
-        }
         }
         [self.totalLabel hideLoading];
         [self.carbonLabel hideLoading];

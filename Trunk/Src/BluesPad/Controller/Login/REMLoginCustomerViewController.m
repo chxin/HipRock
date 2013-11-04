@@ -38,7 +38,7 @@ static NSString *CellIdentifier = @"loginCustomerCell";
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.customers = (NSArray *)([REMApplicationContext instance].currentUser.customers);
+    self.customers = (NSArray *)(REMAppCurrentUser.customers);
     
     
 }
@@ -91,7 +91,7 @@ static NSString *CellIdentifier = @"loginCustomerCell";
     }
     
     if(selectedCustomer != nil){
-        [[REMApplicationContext instance] setCurrentCustomer:selectedCustomer];
+        [REMAppContext setCurrentCustomer:selectedCustomer];
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
             [self.loginPageController loginSuccess];
         }];

@@ -25,6 +25,7 @@
     self.pictureIds=dictionary[@"PictureIds"];
     self.latitude = [dictionary[@"Latitude"] doubleValue];
     self.longitude = [dictionary[@"Longitude"] doubleValue];
+    self.province = dictionary[@"Province"];
 }
 
 @end

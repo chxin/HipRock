@@ -29,6 +29,7 @@
 {
     [super viewDidLoad];
     self.currentRow=NSNotFound;
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"relativeCell"];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -63,6 +64,7 @@
     NSUInteger num=(NSUInteger)self.relativeDate;
     if(indexPath.row == (num-1) && self.currentRow == NSNotFound){
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        self.currentRow=indexPath.row;
     }
     else{
         if(self.currentRow!=NSNotFound && self.currentRow!=indexPath.row){
@@ -75,40 +77,41 @@
             }
         }
     }
+    cell.tag=indexPath.row+1;
     if(indexPath.row == 0){
-        name=@"之前七天";
+        name=NSLocalizedString(@"Common_Last7Day", @""); //@"之前七天";
     }
     else if (indexPath.row ==1)
     {
-        name=@"今天";
+        name=NSLocalizedString(@"Common_Today", @""); //@"今天";
     }
     else if (indexPath.row ==2)
     {
-        name=@"昨天";
+        name=NSLocalizedString(@"Common_Yesterday", @""); //@"昨天";
     }
     else if (indexPath.row ==3)
     {
-        name=@"本周";
+        name=NSLocalizedString(@"Common_ThisWeek", @""); //@"本周";
     }
     else if (indexPath.row ==4)
     {
-        name=@"上周";
+        name=NSLocalizedString(@"Common_LastWeek", @""); //@"上周";
     }
     else if (indexPath.row ==5)
     {
-        name=@"本月";
+        name=NSLocalizedString(@"Common_ThisMonth", @""); //@"本月";
     }
     else if (indexPath.row ==6)
     {
-        name=@"上月";
+        name=NSLocalizedString(@"Common_LastMonth", @""); //@"上月";
     }
     else if (indexPath.row ==7)
     {
-        name=@"今年";
+        name=NSLocalizedString(@"Common_ThisYear", @""); //@"今年";
     }
     else if (indexPath.row ==8)
     {
-        name=@"去年";
+        name=NSLocalizedString(@"Common_LastYear", @""); //@"去年";
     }
     
     
@@ -123,6 +126,7 @@
     [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     [cell setSelected:NO];
     [cell setHighlighted:NO];
+    [self.datePickerController setTimeRangeByDateRelative:cell.textLabel.text withTimeRange:(REMRelativeTimeRangeType)cell.tag];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if(self.currentRow!=indexPath.row && self.currentRow!=NSNotFound){
         NSIndexPath *old=[NSIndexPath indexPathForRow:self.currentRow inSection:0];
@@ -135,6 +139,8 @@
     self.currentRow=indexPath.row;
 
 }
+
+
 
 /*
 // Override to support conditional editing of the table view.

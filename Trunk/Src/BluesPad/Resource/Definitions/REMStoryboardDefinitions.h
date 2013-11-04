@@ -29,6 +29,8 @@
 
 #define kSegue_ToSettings @"settingsSegue"
 
+#define kSegue_BuildingToSharePopover @"buildingToSharePopover"
+
 
 #pragma mark - Storyboard IDs
 //Prefix: kStoryboard_
@@ -39,6 +41,7 @@
 #pragma mark - cell identifiers
 //Prefix: kCellIdentifier_
 
-#define kCellIdentifier_GalleryCell @"galleryCellIdentifier"
+#define kCellIdentifier_GalleryGroupCell @"galleryGroupCellIdentifier"
+#define kCellIdentifier_GalleryCollectionCell @"galleryCollectionCellIdentifier"
 
 #endif
