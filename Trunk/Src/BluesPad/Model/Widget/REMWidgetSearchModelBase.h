@@ -22,7 +22,7 @@
 
 @property (nonatomic,strong) NSArray *timeRangeArray;
 
-+ (REMWidgetSearchModelBase *)searchModelByDataStoreType:(REMDataStoreType)dataStoreType;
++ (REMWidgetSearchModelBase *)searchModelByDataStoreType:(REMDataStoreType)dataStoreType withParam:(NSDictionary *)param;
 
 - (NSNumber *)stepNumberByStep:(REMEnergyStep)stepType;
 

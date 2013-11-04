@@ -30,7 +30,7 @@
     NSNumber *step=viewOption[@"Step"];
     NSArray *timeRanges=viewOption[@"TimeRanges"];
     self.tagIdArray= [NSArray arrayWithArray:tagIds];
-    
+    self.step=[self stepTypeByNumber:step];
     self.timeRangeArray=[NSArray arrayWithArray:timeRanges];
     
     

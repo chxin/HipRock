@@ -7,17 +7,56 @@
 //
 
 #import "REMWidgetSearchModelBase.h"
+#import "REMWidgetTagSearchModel.h"
+#import "REMWidgetCommoditySearchModel.h"
+
 
 @implementation REMWidgetSearchModelBase
 
-+ (REMWidgetSearchModelBase *)searchModelByDataStoreType:(REMDataStoreType)dataStoreType
++ (REMWidgetSearchModelBase *)searchModelByDataStoreType:(REMDataStoreType)dataStoreType withParam:(NSDictionary *)param
 {
+    REMWidgetSearchModelBase *model=nil;
+    if(dataStoreType == REMDSEnergyTagsTrend ||
+       dataStoreType == REMDSEnergyTagsTrendUnit ||
+       dataStoreType == REMDSEnergyTagsDistribute ||
+       dataStoreType ==REMDSEnergyMultiTimeTrend ||
+       dataStoreType == REMDSEnergyMultiTimeDistribute){
+        model = [[REMWidgetTagSearchModel alloc]init];
+    }
+    else if(dataStoreType ==REMDSEnergyCarbon ||
+            dataStoreType ==REMDSEnergyCarbonDistribute ||
+            dataStoreType == REMDSEnergyCarbonUnit ||
+            dataStoreType == REMDSEnergyCost ||
+            dataStoreType ==REMDSEnergyCostDistribute ||
+            dataStoreType == REMDSEnergyCostElectricity ||
+            dataStoreType == REMDSEnergyCostUnit)
+    {
+        model = [[REMWidgetCommoditySearchModel alloc]init];
+    }
+    [model setModelBySearchParam:param];
     
+    return model;
 }
 
 - (REMEnergyStep)stepTypeByNumber:(NSNumber *)stepNumber
 {
+    if ([stepNumber isEqualToNumber:@(1)]== YES) {
+        return REMEnergyStepHour;
+    }
+    else if([stepNumber isEqualToNumber:@(2)]==YES){
+        return REMEnergyStepDay;
+    }
+    else if([stepNumber isEqualToNumber:@(3)]==YES){
+        return REMEnergyStepMonth;
+    }
+    else if([stepNumber isEqualToNumber:@(4)]==YES){
+        return REMEnergyStepYear;
+    }
+    else if([stepNumber isEqualToNumber:@(5)]==YES){
+        return REMEnergyStepWeek;
+    }
     
+    return REMEnergyStepNone;
 }
 
 - (NSNumber *)stepNumberByStep:(REMEnergyStep)stepType{
