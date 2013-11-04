@@ -12,6 +12,7 @@
 #import "REMBuildingViewController.h"
 #import "REMDimensions.h"
 #import "REMCommonHeaders.h"
+#import "REMImages.h"
 
 @implementation REMBuildingEntranceSegue
 
@@ -129,7 +130,7 @@
     //if no image at all, use default
     NSArray *imageIds = [[self.sourceViewController buildingInfoArray][self.parameter.currentBuildingIndex] building].pictureIds;
     if(imageIds == nil || imageIds.count <= 0)
-        return [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"DefaultBuilding.png"]];
+        return [[UIImageView alloc] initWithImage:REMIMG_DefaultBuilding];
     
     //if there is large image, use large
     NSString *normalImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageNormal];
@@ -141,7 +142,7 @@
         return [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:smallImagePath]];
     //if even no small, use default
     else
-        return [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"DefaultBuilding.png"]];
+        return [[UIImageView alloc] initWithImage:REMIMG_DefaultBuilding];
 }
 
 @end

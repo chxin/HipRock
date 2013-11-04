@@ -10,6 +10,7 @@
 #import "REMLoginCarouselController.h"
 #import "REMAlertHelper.h"
 #import "REMLoginPageController.h"
+#import "REMImages.h"
 
 @interface REMLoginCarouselController ()
 
@@ -108,7 +109,7 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 
 -(UIView *)makeBackgroundView:(CGFloat)offset
 {
-    UIImage *backgroundImage = [[UIImage imageNamed:@"SlidePageBackground.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(9,21,26,21)];
+    UIImage *backgroundImage = [REMIMG_SlidePageBackground resizableImageWithCapInsets:UIEdgeInsetsMake(9,21,26,21)];
     
     
     CGRect backgroundFrame = CGRectMake(offset-kBackgroundLeftContentOffset, kImagePaddingTop+kBackgroundTopContentOffset, kSubViewWidth+kBackgroundLeftContentOffset + kBackgroundRightContentOffset, kSubViewHeight+kBackgroundTopContentOffset + kBackgroundBottomContentOffset);
@@ -121,9 +122,10 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 
 -(UIView *)makeImageView:(int)index
 {
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Propaganda_%d.jpg", index+1]]];
+    NSString *imageName = [NSString stringWithFormat: @"Propaganda_%d", index+1];
+    NSString *imageType = @"jpg";
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:REMLoadImage(imageName, imageType)];
     imageView.contentMode = UIViewContentModeScaleToFill;
-    
     
     return imageView;
 }
@@ -177,8 +179,8 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
     //UIEdgeInsetsMake(top, left, bottom, right);
     UIEdgeInsets imageInsets = UIEdgeInsetsMake(0, 12.0, 0, 12.0);
     
-    UIImage *normalStateImage = [[UIImage imageNamed:@"JumpLogin-Normal.png"] resizableImageWithCapInsets:imageInsets];
-    UIImage *pressedStateImage = [[UIImage imageNamed:@"JumpLogin-Pressed.png"] resizableImageWithCapInsets:imageInsets];
+    UIImage *normalStateImage = [REMIMG_JumpLogin_Normal resizableImageWithCapInsets:imageInsets];
+    UIImage *pressedStateImage = [REMIMG_JumpLogin_Pressed resizableImageWithCapInsets:imageInsets];
     
     [self.jumpLoginButton setBackgroundImage:normalStateImage forState:UIControlStateNormal];
     [self.jumpLoginButton setBackgroundImage:pressedStateImage forState:UIControlStateHighlighted];
