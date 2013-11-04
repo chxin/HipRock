@@ -12,10 +12,7 @@
 #ifndef Blues_REMImages_h
 #define Blues_REMImages_h
 
-#define REMLoadImage(a,b) [[UIImage alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(a) ofType:(b)]]
-#define REMLoadPngImage(a) REMLoadImage((a),@"png")
-#define REMLoadJpgImage(a) REMLoadImage((a),@"jpg")
-
+#import "REMCommonDefinition.h"
 
 #pragma mark - Definitions
 
