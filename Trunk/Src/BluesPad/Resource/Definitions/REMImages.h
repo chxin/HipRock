@@ -4,7 +4,10 @@
 //  ©2013 施耐德电气（中国）有限公司版权所有
 //  Created by 张 锋 on 10/22/13.
 //
+//  Warning: Content of this file is maintained by external tool,
+//           please do not change its content manually
 //
+//  To update this file, please goto Tools and execute gen-images.py
 
 #ifndef Blues_REMImages_h
 #define Blues_REMImages_h
@@ -13,7 +16,8 @@
 #define REMLoadPngImage(a) REMLoadImage((a),@"png")
 #define REMLoadJpgImage(a) REMLoadImage((a),@"jpg")
 
-//begin of definitions
+
+#pragma mark - Definitions
 
 //images in /:
 #define REMIMG_Default REMLoadImage(@"Default",@"png")
