@@ -19,6 +19,8 @@
 @property (nonatomic,weak) REMWidgetDetailViewController *widgetController;
 @property (nonatomic,weak) UIPopoverController *popController;
 
+@property (nonatomic) BOOL showHour;
+
 
 - (void)setTimeRangeByDateRelative:(NSString *)relative withTimeRange:(REMRelativeTimeRangeType )timeRangeType;
 

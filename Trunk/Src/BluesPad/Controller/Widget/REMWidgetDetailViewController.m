@@ -165,6 +165,8 @@ const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
 {
     
     [self setDatePickerButtonValueByTimeRange:newRange withRelative:newDateComponent withRelativeType:relativeType];
+    
+    
 }
 
 
