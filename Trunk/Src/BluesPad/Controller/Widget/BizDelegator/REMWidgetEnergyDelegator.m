@@ -7,8 +7,8 @@
 //
 
 #import "REMWidgetEnergyDelegator.h"
-
 #import <QuartzCore/QuartzCore.h>
+#import "REMDimensions.h"
 
 @interface REMWidgetEnergyDelegator()
 
@@ -19,6 +19,7 @@
 @property (nonatomic,strong) NSString *currentRelativeDate;
 @property (nonatomic) REMRelativeTimeRangeType  currentRelativeDateType;
 @property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
+
 @end
 
 @implementation REMWidgetEnergyDelegator
@@ -167,7 +168,8 @@
     UIImage *legend=[UIImage imageNamed:@"Down"];
     [legendControl setImage:search forSegmentAtIndex:0];
     [legendControl setImage:legend forSegmentAtIndex:1];
-    [legendControl setSelectedSegmentIndex:1];
+    [legendControl setSelectedSegmentIndex:0];
+    [legendControl addTarget:self action:@selector(legendSwitchSegmentPressed:) forControlEvents:UIControlEventValueChanged];
     
     [self.view addSubview:legendControl];
     self.legendSearchControl=legendControl;
@@ -200,6 +202,37 @@
     
     
 
+}
+
+-(void)legendSwitchSegmentPressed:(UISegmentedControl *)segment
+{
+    if(segment.selectedSegmentIndex == 0){//search toolbar
+        //if legend toolbar display, move it out of the view
+        if(self.legendView != nil){
+            [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.legendView.frame = kDMChart_ToolbarHiddenFrame;
+            } completion:^(BOOL finished) {
+                [self.legendView removeFromSuperview];
+                self.legendView = nil;
+            }];
+            
+        }
+    }
+    else{//legend toolbar
+        //if legend toolbar is not presenting, move it into the view
+        if(self.legendView == nil){
+            UIView *view = [[UIView alloc] initWithFrame:kDMChart_ToolbarHiddenFrame];
+            view.backgroundColor = [UIColor purpleColor];
+            
+            [self.view addSubview:view];
+            self.legendView = view;
+            
+            [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.legendView.frame = kDMChart_ToolbarFrame;
+            } completion:nil];
+        }
+        
+    }
 }
 
 @end
