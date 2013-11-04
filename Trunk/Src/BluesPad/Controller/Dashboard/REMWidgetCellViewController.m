@@ -91,11 +91,11 @@
         //    self.series = dictionary[@"series"];
         CPTMutableLineStyle* gridlineStyle = [[CPTMutableLineStyle alloc]init];
         CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
-        gridlineStyle.lineColor = [CPTColor whiteColor];
-        gridlineStyle.lineWidth = 1.0;
+        gridlineStyle.lineColor = [CPTColor blackColor];
+        gridlineStyle.lineWidth = .5f;
         textStyle.fontName = @kBuildingFontSCRegular;
         textStyle.fontSize = 10.0;
-        textStyle.color = [CPTColor whiteColor];
+        textStyle.color = [CPTColor blackColor];
         textStyle.textAlignment = CPTTextAlignmentCenter;
         
         [style setObject:@"YES" forKey:@"userInteraction"];
