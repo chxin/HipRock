@@ -39,20 +39,20 @@
 	// Do any additional setup after loading the view.
     
     [self.view setFrame:self.viewFrame];
-    NSLog(@"detail view:%@",NSStringFromCGRect(self.view.frame));
+    //NSLog(@"detail view:%@",NSStringFromCGRect(self.view.frame));
 
-    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(6, 9, self.view.frame.size.width, 13)];
+    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(kDashboardWidgetPadding, kDashboardWidgetTitleTopMargin, self.view.frame.size.width, kDashboardWidgetTitleSize)];
     title.backgroundColor=[UIColor clearColor];
-    title.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:13];
+    title.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetTitleSize];
     title.textColor=[REMColor colorByHexString:@"#4c4c4c"];
     title.text=self.widgetInfo.name;
     [self.view addSubview:title];
 
     
-    UILabel *time=[[UILabel alloc]initWithFrame:CGRectMake(title.frame.origin.x, title.frame.origin.y+title.frame.size.height+9, self.view.frame.size.width, 11)];
+    UILabel *time=[[UILabel alloc]initWithFrame:CGRectMake(title.frame.origin.x, title.frame.origin.y+title.frame.size.height+kDashboardWidgetTimeTopMargin, self.view.frame.size.width, kDashboardWidgetTimeSize)];
     time.backgroundColor=[UIColor clearColor];
     time.textColor=[REMColor colorByHexString:@"#5e5e5e"];
-    time.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:11];
+    time.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetTimeSize];
     if([self.widgetInfo.contentSyntax.relativeDate isEqual:[NSNull null]]==NO){
         time.text=self.widgetInfo.contentSyntax.relativeDateComponent;
     }
@@ -60,17 +60,22 @@
         REMTimeRange *range = self.widgetInfo.contentSyntax.timeRanges[0];
         NSString *start= [REMTimeHelper formatTimeFullHour:range.startTime isChangeTo24Hour:NO];
         NSString *end= [REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];
-        time.text=[NSString stringWithFormat:@"%@ 到 %@",start,end];
+        time.text=[NSString stringWithFormat:NSLocalizedString(@"Dashboard_TimeRange", @""),start,end];//%@ 到 %@
     }
     [self.view addSubview:time];
 
     if(self.widgetInfo.shareInfo!=nil||[self.widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
-        
+        UILabel *share=[[UILabel alloc]initWithFrame:CGRectMake(title.frame.origin.x, title.frame.origin.y+2, self.view.frame.size.width-(title.frame.origin.x*2), kDashboardWidgetShareSize)];
+        share.backgroundColor=[UIColor clearColor];
+        share.textColor=[REMColor colorByHexString:@"#5e5e5e"];
+        share.textAlignment=NSTextAlignmentRight;
+        share.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetShareSize];
+        [self.view addSubview:share];
     }
     
-    UIView *chartContainer = [[UIView alloc]initWithFrame:CGRectMake(5, time.frame.origin.y+time.frame.size.height+9, 222, 104)];
-    chartContainer.layer.borderColor=[UIColor redColor].CGColor;
-    chartContainer.layer.borderWidth=1;
+    UIView *chartContainer = [[UIView alloc]initWithFrame:CGRectMake(title.frame.origin.x, time.frame.origin.y+time.frame.size.height+kDashboardWidgetChartTopMargin, kDashboardWidgetChartWidth, kDashboardWidgetChartHeight)];
+    //chartContainer.layer.borderColor=[UIColor redColor].CGColor;
+    //chartContainer.layer.borderWidth=1;
     [self.view addSubview:chartContainer];
     
     self.chartContainer=chartContainer;

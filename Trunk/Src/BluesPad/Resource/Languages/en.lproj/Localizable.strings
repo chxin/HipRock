@@ -52,6 +52,7 @@
 
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="下拉返回概览能耗信息";
+"Dashboard_TimeRange"="%@ 到 %@";
 
 //Widget, prefix:Widget_
 "Widget_TimePickerTime"="时间";

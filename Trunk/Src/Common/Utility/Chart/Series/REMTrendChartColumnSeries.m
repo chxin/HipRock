@@ -52,6 +52,9 @@
 
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
 {
+    if(source.count<=idx){
+        return nil;
+    }
     NSDictionary* point = source[idx];
     if (fieldEnum == CPTBarPlotFieldBarLocation) {
         return point[@"x"];

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "REMChartHeader.h"
 
 @interface REMSplashScreenController : UIViewController
 
