@@ -26,7 +26,8 @@
     if (lineStyle == nil) {
         CPTMutableLineStyle* mutStyle = [[CPTMutableLineStyle alloc]init];
         mutStyle.lineWidth = 2;
-        mutStyle.lineColor = [REMColor colorByIndex:selfIndex];
+        color = [REMColor colorByIndex:selfIndex];
+        mutStyle.lineColor = color;
         lineStyle = mutStyle;
     }
     if (plotSymbol == nil) {

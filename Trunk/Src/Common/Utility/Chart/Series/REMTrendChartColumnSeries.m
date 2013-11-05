@@ -27,7 +27,8 @@
     CPTBarPlot* myPlot = (CPTBarPlot*)plot;
     CPTFill* plotFill = (self.plotStyle == nil ? nil : [self.plotStyle objectForKey:@"fill"]);
     if (plotFill == nil) {
-        plotFill = [CPTFill fillWithColor:[REMColor colorByIndex:selfIndex]];
+        color = [REMColor colorByIndex:selfIndex];
+        plotFill = [CPTFill fillWithColor:color];
     }
     myPlot.fill = plotFill;
     myPlot.lineStyle = nil;
