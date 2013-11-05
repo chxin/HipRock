@@ -10,6 +10,7 @@
 #import "REMDashboardCollectionView.h"
 #import "REMDashboardCollectionCellView.h"
 #import "REMBuildingViewController.h"
+#import "REMDashboardController.h"
 
 @class REMDashboardCollectionCellView;
 @class REMBuildingViewController;

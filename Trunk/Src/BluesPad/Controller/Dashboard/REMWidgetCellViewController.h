@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "REMWidgetObject.h"
 #import "REMEnergyViewData.h"
+#import "REMDashboardController.h"
 
 @interface REMWidgetCellViewController : UIViewController
 

@@ -12,9 +12,7 @@
 #import "REMBuildingViewController.h"
 
 const static CGFloat kLegendSearchSwitcherTop=10;
-const static CGFloat kWidgetTitleLeftMargin=10;
-const static CGFloat kWidgetTitleHeight=30;
-const static CGFloat kWidgetTitleFontSize=25;
+
 const static CGFloat kWidgetDatePickerLeftMargin=15;
 const static CGFloat kWidgetDatePickerTopMargin=70;
 const static CGFloat kWidgetDatePickerHeight=40;

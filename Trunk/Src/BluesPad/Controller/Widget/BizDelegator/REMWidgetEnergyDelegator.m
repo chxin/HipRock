@@ -73,16 +73,6 @@
     //[self performSegueWithIdentifier:@"timePickerSegue" sender:self];
 }
 
-- (void)setNewTimeRange:(REMTimeRange *)newRange withRelativeType:(REMRelativeTimeRangeType)relativeType withRelativeDateComponent:(NSString *)newDateComponent
-{
-    
-    [self setDatePickerButtonValueNoSearchByTimeRange:newRange withRelative:newDateComponent withRelativeType:relativeType];
-    
-    [self doSearch:^(REMEnergyViewData *data,REMError *error){
-        [self reloadChart];
-    }];
-    
-}
 
 
 
@@ -144,10 +134,36 @@
     self.currentRelativeDateType=relativeType;
 }
 
+- (void)setNewTimeRange:(REMTimeRange *)newRange withRelativeType:(REMRelativeTimeRangeType)relativeType withRelativeDateComponent:(NSString *)newDateComponent
+{
+    NSString *text=[REMTimeHelper formatTimeRangeFullHour:newRange];
+    
+    
+    NSString *text1=[NSString stringWithFormat:@"%@ %@",newDateComponent,text];
+    
+    [self.timePickerButton setTitle:text1 forState:UIControlStateNormal];
+    
+    self.model.timeRangeArray = @[newRange];
+    
+    
+    [self doSearch:^(REMEnergyViewData *data,REMError *error){
+        if(data!=nil){
+            self.currentRelativeDate=newDateComponent;
+            self.currentTimeRangeArray[0]=newRange;
+            self.currentRelativeDateType=relativeType;
+            [self reloadChart];
+        }
+    }];
+    
+}
+
 
 
 - (void)reloadChart{
-    
+    [self.chartWrapper.view removeFromSuperview];
+    [self.chartWrapper destroyView];
+    self.chartWrapper=nil;
+    [self showEnergyChart];
 }
 
 
@@ -182,6 +198,9 @@
 - (void)initSearchView{
     self.currentTimeRangeArray=[[NSMutableArray alloc]initWithCapacity:self.widgetInfo.contentSyntax.timeRanges.count];
     
+    UIView *searchViewContainer=[[UIView alloc]initWithFrame:kDMChart_ToolbarFrame];
+    
+    
     
     UISegmentedControl *legendControl=[[UISegmentedControl alloc] initWithItems:@[@"search",@"legend"]];
     [legendControl setFrame:CGRectMake(800, kLegendSearchSwitcherTop, 200, 30)];
@@ -196,7 +215,7 @@
     self.legendSearchControl=legendControl;
     
     UIButton *timePickerButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, kWidgetDatePickerTopMargin, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
+    [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, 0, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
     
     [timePickerButton setImage:[UIImage imageNamed:@"Oil_pressed"] forState:UIControlStateNormal];
     [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, kWidgetDatePickerWidth-40)];
@@ -205,7 +224,7 @@
     [timePickerButton addTarget:self action:@selector(showTimePicker) forControlEvents:UIControlEventTouchUpInside];
     
     
-    [self.view addSubview:timePickerButton];
+    [searchViewContainer addSubview:timePickerButton];
     
     self.timePickerButton = timePickerButton;
     
@@ -218,9 +237,10 @@
     [stepControl setTitle:NSLocalizedString(@"Common_Month", "") forSegmentAtIndex:3];//月
     [stepControl setTitle:NSLocalizedString(@"Common_Year", "") forSegmentAtIndex:4];//年
     
-    [self.view addSubview:stepControl];
+    [searchViewContainer addSubview:stepControl];
     self.stepControl=stepControl;
     
+    [self.view addSubview:searchViewContainer];
     
 
 }

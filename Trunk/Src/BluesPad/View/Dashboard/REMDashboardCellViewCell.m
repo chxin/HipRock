@@ -36,8 +36,8 @@
         self.backgroundView=[[UIView alloc]initWithFrame:self.contentView.frame];
         self.accessoryView=nil;
         
-        self.contentView.layer.borderWidth=1;
-        self.contentView.layer.borderColor=[UIColor redColor].CGColor;
+        //self.contentView.layer.borderWidth=1;
+        //self.contentView.layer.borderColor=[UIColor redColor].CGColor;
     }
     return self;
 }

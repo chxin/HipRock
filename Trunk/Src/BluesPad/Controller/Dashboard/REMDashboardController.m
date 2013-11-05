@@ -9,6 +9,9 @@
 #import "REMDashboardController.h"
 #import "REMDataAccessor.h"
 
+
+
+
 @interface REMDashboardController ()
 
 @property (nonatomic,weak) UILabel *buildingLabel;
@@ -50,7 +53,7 @@ static NSString *cellId=@"dashboardcell";
     
     //NSLog(@"frame:%@",NSStringFromCGRect(self.view.frame));
     
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, -40, 300, 17)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, kDashboardDragTitleMargin, 300, kDashboardDragTitleSize)];
     label.text=NSLocalizedString(@"Dashboard_PullDownShowGeneral", @"");//@"下拉返回概览能耗信息";
     label.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:label.frame.size.height];
     label.textColor=[UIColor whiteColor];
@@ -58,7 +61,7 @@ static NSString *cellId=@"dashboardcell";
     [self.tableView addSubview:label];
     self.buildingLabel=label;
     
-    CGRect imgFrame=CGRectMake(168, -40-8, 30, 30);
+    CGRect imgFrame=CGRectMake(168, kDashboardDragTitleMargin-8, 30, 30);
     UIImage *image=[UIImage imageNamed:@"Down"];
     UIImageView *arrow=[[UIImageView alloc]initWithImage:image];
     [arrow setFrame:imgFrame];
@@ -121,19 +124,22 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     REMDashboardObj *obj= self.dashboardArray[indexPath.section];
-    CGFloat titleHeight=49;
+    CGFloat titleHeight=kDashboardTitleSize+kDashboardTitleBottomMargin;
     if(obj.shareInfo!=nil){
-        titleHeight+=20;
+        titleHeight+=kDashboardShareSize+kDashboardTitleShareMargin;
     }
-    CGFloat cellMargin=8;
-    CGFloat cellHeight=157; //cell height
+    CGFloat cellMargin=kDashboardWidgetInnerVerticalMargin;
+    CGFloat cellHeight=kDashboardWidgetHeight; //cell height
     double n=obj.widgets.count/4.0f;
     float row= ceil(n);
     int margin=row>0?row-1:0;
     return titleHeight+row*cellHeight+cellMargin*margin;
 }
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return kDashboardInnerMargin;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     REMDashboardCellViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
@@ -168,8 +174,8 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     CGRect frame=cell.contentView.frame;
     CGRect shareFrame;
     if(dashboardInfo.shareInfo!=nil && [dashboardInfo.shareInfo isEqual:[NSNull null]]== NO && [dashboardInfo.shareInfo.userRealName isEqual:[NSNull null]]==NO){
-        shareFrame = CGRectMake(0, 11, frame.size.width, 11-4);
-        UILabel *shareName=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x, 11, frame.size.width, 11)];
+        shareFrame = CGRectMake(0, 0, frame.size.width, kDashboardShareSize);
+        UILabel *shareName=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x, shareFrame.origin.y, frame.size.width, shareFrame.size.height)];
         shareName.textColor=[UIColor whiteColor];
         shareName.text=dashboardInfo.shareInfo.userRealName;
         [cell.contentView addSubview:shareName];
@@ -179,14 +185,14 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     }
     
     
-    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x,shareFrame.origin.y+shareFrame.size.height, frame.size.width, 16)];
+    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x,shareFrame.origin.y+shareFrame.size.height, frame.size.width, kDashboardTitleSize)];
     title.text=dashboardInfo.name;
     title.backgroundColor=[UIColor clearColor];
     title.textColor=[UIColor whiteColor];
-    title.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:14];
+    title.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardTitleSize];
     [cell.contentView addSubview:title];
     
-    return CGRectMake(0, title.frame.origin.y+title.frame.size.height+14, frame.size.width, cell.contentView.frame.size.height-(title.frame.origin.y+title.frame.size.height+14));
+    return CGRectMake(0, title.frame.origin.y+title.frame.size.height+kDashboardTitleBottomMargin, frame.size.width, cell.contentView.frame.size.height-(title.frame.origin.y+title.frame.size.height+kDashboardTitleBottomMargin));
 }
 
 - (void)maxWidget{
