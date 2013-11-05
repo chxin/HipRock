@@ -533,7 +533,7 @@
     self.glassView = [[UIView alloc]initWithFrame:self.imageView.frame];
     self.glassView.alpha=0;
     self.glassView.contentMode=UIViewContentModeScaleToFill;
-    self.glassView.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
+    self.glassView.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.65];
     
     [self addSubview:self.glassView];
 }

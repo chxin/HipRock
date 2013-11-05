@@ -27,10 +27,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.logoImageVIew.image = REMAppCurrentLogo;
+    
+    //self.logoImageVIew.image = REMAppCurrentLogo;
     
 }
-/*
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -47,13 +48,20 @@
     if(cell==nil){
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
+    if(cell.contentView.subviews.count>0)return cell;
     
+    
+    UIImageView *image=[[UIImageView alloc] initWithImage:REMAppCurrentLogo];
+    [image setFrame:CGRectMake(-5,-5, 500, cell.frame.size.height)];
+    
+    //cell.contentView.contentMode=UIViewContentModeScaleToFill;
+    [cell.contentView addSubview:image];
     
     
     return cell;
     
 }
-*/
+
 
 
 - (void)didReceiveMemoryWarning
