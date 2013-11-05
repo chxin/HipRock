@@ -212,7 +212,7 @@ typedef enum  {
 @property (nonatomic, readonly) NSNumber* xGlobalLength;
 
 -(void)renderRange:(float)location length:(float)length;
-
+-(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden;
 @end
 
 @interface REMPieChartView : CPTGraphHostingView<CPTPlotSpaceDelegate,REMChartView>

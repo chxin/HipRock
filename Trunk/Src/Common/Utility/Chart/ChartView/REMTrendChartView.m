@@ -379,5 +379,12 @@
     return YES;
 }
 
+-(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
+    if (seriesIndex >= self.series.count) return;
+    REMTrendChartSeries* s = self.series[seriesIndex];
+    if ([s getPlot].hidden != hidden) {
+        [[s getPlot] setHidden:hidden];
+    }
+}
 
 @end
