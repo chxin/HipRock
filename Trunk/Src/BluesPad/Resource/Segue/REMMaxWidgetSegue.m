@@ -31,14 +31,20 @@
 - (void)max{
     REMWidgetMaxViewController *destController=self.destinationViewController;
     
-    UIView *destView = destController.view;
+    //UIView *destView = destController.view;
     
     
-    UIImage *image=[REMImageHelper imageWithView:destView];
+    //UIImage *image=[REMImageHelper imageWithView:destView];
     
-    UIImageView *destImageView=[[UIImageView alloc]initWithImage:image];
+    //UIImageView *destImageView=[[UIImageView alloc]initWithImage:image];
+    
     
     REMBuildingViewController *srcController= self.sourceViewController;
+    
+    UIView *destImageView=[[UIView alloc]initWithFrame:srcController.view.frame];
+    
+    [destImageView setBackgroundColor:[UIColor grayColor]];
+
     
     REMDashboardController *dashboardController=srcController.maxDashbaordController;
     
@@ -47,7 +53,7 @@
     REMWidgetCellViewController *cellController=collectionController.childViewControllers[collectionController.currentMaxWidgetIndex];
     UIButton *button=cellController.view.subviews[0];
     UIImageView *cloneView=[[UIImageView alloc]initWithImage:[REMImageHelper imageWithView:button]];
-    
+    destController.currentWidgetIndex=collectionController.currentMaxWidgetIndex;
     
     CGRect frame=[cellController.view convertRect:cellController.view.frame fromView:srcController.view];
     CGRect newFrame= CGRectMake(frame.origin.x*-1, frame.origin.y*-1, frame.size.width, frame.size.height);
@@ -55,7 +61,7 @@
     [cloneView setFrame:newFrame];
     [srcController.view addSubview:cloneView];
     
-    NSLog(@"max frame:%@",NSStringFromCGRect(newFrame));
+    //NSLog(@"max frame:%@",NSStringFromCGRect(newFrame));
     
     
     [srcController.view addSubview:destImageView];

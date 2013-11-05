@@ -30,5 +30,7 @@
 
 - (void) doSearch:(void(^)(REMEnergyViewData *data,REMError *error))callback;
 
+- (void) showChart;
+
 
 @end
