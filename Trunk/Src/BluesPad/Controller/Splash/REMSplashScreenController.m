@@ -31,9 +31,9 @@
     
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
-    [self.view addSubview:[[REMTrend alloc]initWithFrame:CGRectMake(100, 0, 924, 708)]];
+//    [self.view addSubview:[[REMTrend alloc]initWithFrame:CGRectMake(100, 0, 924, 708)]];
     
-//    [self oscarTest2];
+    [self oscarTest2];
     
     
     //decide where to go

@@ -9,20 +9,12 @@
 #import "REMTestChartView.h"
 #import "REMChartHeader.h"
 
-@implementation REMTestChartView {
-    NSUInteger currentLocation;
-    NSUInteger xLength;
-    NSUInteger seriesAmount;
-}
+@implementation REMTestChartView
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        currentLocation = 0;
-        xLength = 10;
-        seriesAmount = 3;
-        
         CPTGraphHostingView* hostingView = self;
         hostingView.hostedGraph=[[CPTXYGraph alloc] init];
         hostingView.allowPinchScaling = NO;
@@ -34,11 +26,11 @@
         hostingView.hostedGraph.plotAreaFrame.masksToBorder = NO;
         hostingView.backgroundColor = [UIColor blackColor];
         
-        for (NSUInteger i = 0; i < seriesAmount; i++) {
+        for (NSUInteger i = 0; i < 3; i++) {
             CPTBarPlot* barPlot = [[CPTBarPlot alloc]init];
             barPlot.dataSource = self;
-            barPlot.barWidth = CPTDecimalFromFloat(0.8/seriesAmount);
-            barPlot.barOffset = CPTDecimalFromFloat(0.8*i/seriesAmount);
+            barPlot.barWidth = CPTDecimalFromFloat(.2);
+            barPlot.barOffset = CPTDecimalFromFloat(.2*i);
             barPlot.fill = [CPTFill fillWithColor:[REMColor colorByIndex:i]];
             barPlot.delegate = self;
             [hostingView.hostedGraph addPlot:barPlot];
@@ -56,8 +48,8 @@
         y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
         
         CPTXYPlotSpace* thePlotSpace = (CPTXYPlotSpace*)hostingView.hostedGraph.defaultPlotSpace;
-        thePlotSpace.globalXRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(100)];
-        thePlotSpace.xRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(xLength)];
+        thePlotSpace.globalXRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt([self numberOfRecordsForPlot:nil])];
+        thePlotSpace.xRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(30)];
         thePlotSpace.globalYRange =[[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt([self numberOfRecordsForPlot:nil])];
         thePlotSpace.yRange =[[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt([self numberOfRecordsForPlot:nil])];
         thePlotSpace.delegate = self;
@@ -67,25 +59,25 @@
 }
 
 -(CPTPlotRange*)plotSpace:(CPTPlotSpace *)space willChangePlotRangeTo:(CPTPlotRange *)newRange forCoordinate:(CPTCoordinate)coordinate {
-    [self.hostedGraph reloadData];
+    NSLog(@"ffff");
     return newRange;
 }
 
 -(NSNumber*)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx {
-    return @(idx+currentLocation);
+    return @(idx);
 }
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot {
-    return xLength;
+    return 100;
 }
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
 
 @end
