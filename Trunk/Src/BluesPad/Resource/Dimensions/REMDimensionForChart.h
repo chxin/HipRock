@@ -21,4 +21,10 @@
 #define kDMChart_ToolbarHiddenFrame CGRectMake(kDMChart_ToolbarWidth,kDMChart_ToolbarTop,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)
 
 
+//legend
+#define kDMChart_LegendItemWidth 260
+#define kDMChart_LegendItemHeight 36
+#define kDMChart_LegnetItemOffset 15
+
+
 #endif

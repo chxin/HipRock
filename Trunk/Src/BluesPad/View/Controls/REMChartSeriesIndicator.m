@@ -1,0 +1,99 @@
+//
+//  REMChartSeriesIndicator.m
+//  Blues
+//
+//  Created by 张 锋 on 11/4/13.
+//
+//
+
+#import <QuartzCore/QuartzCore.h>
+#import "REMChartSeriesIndicator.h"
+
+@interface REMChartSeriesIndicator()
+
+@property (nonatomic) REMChartSeriesIndicatorType type;
+@property (nonatomic,strong) UIColor *color;
+
+@end
+
+#define kREMChartSeriesIndicatorSize 16.0f
+
+@implementation REMChartSeriesIndicator
+
++(REMChartSeriesIndicator *)indicatorWithType:(REMChartSeriesIndicatorType)type andColor:(UIColor *)color;
+{
+    REMChartSeriesIndicator *indicator = [[REMChartSeriesIndicator alloc] initWithFrame:CGRectMake(0, 0, kREMChartSeriesIndicatorSize, kREMChartSeriesIndicatorSize)];
+    indicator.type = type;
+    indicator.color = color;
+    
+    [indicator render];
+    
+    return indicator;
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+    }
+    return self;
+}
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect
+{
+    // Drawing code
+}
+*/
+
+-(void)render
+{
+    UIView *content = nil;
+    switch (self.type) {
+        case REMChartSeriesIndicatorLine:
+            content = [self getLineIndicator];
+            break;
+        case REMChartSeriesIndicatorColumn:
+            content = [self getColumnIndicator];
+            break;
+        case REMChartSeriesIndicatorPie:
+            content = [self getPieIndicator];
+            break;
+            
+        default:
+            break;
+    }
+    
+    if(content!=nil)
+       [self addSubview:content];
+}
+
+-(UIView *)getLineIndicator
+{
+    UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, 4, 16, 8)];
+    indicator.backgroundColor = self.color;
+    
+    return indicator;
+}
+
+-(UIView *)getColumnIndicator
+{
+    UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 16, 16)];
+    indicator.backgroundColor = self.color;
+    
+    return indicator;
+}
+
+-(UIView *)getPieIndicator
+{
+    UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 16, 16)];
+    indicator.layer.cornerRadius = 8;
+    indicator.layer.backgroundColor = self.color.CGColor;
+    
+    return indicator;
+}
+
+@end

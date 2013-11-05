@@ -212,6 +212,7 @@
 		7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */; };
 		7A09D59A17B8D62F001EBC30 /* REMDataRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59917B8D62F001EBC30 /* REMDataRange.m */; };
 		7A0F7C5318279170009E898A /* REMChartSeriesLegend.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F7C5218279170009E898A /* REMChartSeriesLegend.m */; };
+		7A0F7C5618279528009E898A /* REMChartSeriesIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F7C5518279528009E898A /* REMChartSeriesIndicator.m */; };
 		7A12280C18116DBF004DE778 /* REMViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A12280B18116DBF004DE778 /* REMViewHelper.m */; };
 		7A13C19517F40809007E6AA9 /* REMMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A13C19417F40809007E6AA9 /* REMMainNavigationController.m */; };
 		7A13C19B17F40D31007E6AA9 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7A13C19A17F40D31007E6AA9 /* GoogleMaps.bundle */; };
@@ -358,6 +359,7 @@
 		7A9B1E46177B3A8B00C282A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E21177B3A8B00C282A8 /* Foundation.framework */; };
 		7A9B1E6F177B3AFA00C282A8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A9B1E6D177B3AFA00C282A8 /* InfoPlist.strings */; };
 		7AA8838117F92286004D50BC /* REMGalleryCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA8837E17F92286004D50BC /* REMGalleryCollectionCell.m */; };
+		7AAA6777182884F2007AC717 /* REMChartToolTip.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA6776182884F2007AC717 /* REMChartToolTip.m */; };
 		7AB34E4C177D2975003E235E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4A177D2975003E235E /* MobileCoreServices.framework */; };
 		7AB34E4D177D2975003E235E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4B177D2975003E235E /* SystemConfiguration.framework */; };
 		7AB34E51177D2CE1003E235E /* REMServiceRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB34E50177D2CE1003E235E /* REMServiceRequestOperation.m */; };
@@ -650,6 +652,8 @@
 		7A0F7C5018277BAC009E898A /* REMImages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMImages.h; path = Resource/Definitions/REMImages.h; sourceTree = "<group>"; };
 		7A0F7C5118279170009E898A /* REMChartSeriesLegend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartSeriesLegend.h; sourceTree = "<group>"; };
 		7A0F7C5218279170009E898A /* REMChartSeriesLegend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartSeriesLegend.m; sourceTree = "<group>"; };
+		7A0F7C5418279528009E898A /* REMChartSeriesIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartSeriesIndicator.h; sourceTree = "<group>"; };
+		7A0F7C5518279528009E898A /* REMChartSeriesIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartSeriesIndicator.m; sourceTree = "<group>"; };
 		7A12280A18116DBF004DE778 /* REMViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMViewHelper.h; path = Common/Utility/REMViewHelper.h; sourceTree = "<group>"; };
 		7A12280B18116DBF004DE778 /* REMViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMViewHelper.m; path = Common/Utility/REMViewHelper.m; sourceTree = "<group>"; };
 		7A13C19317F40809007E6AA9 /* REMMainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMainNavigationController.h; path = Controller/REMMainNavigationController.h; sourceTree = "<group>"; };
@@ -908,6 +912,8 @@
 		7A9B1EB7177B3B9300C282A8 /* BluesPhoneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BluesPhoneTests.m; path = ../test/BluesPhoneTests/BluesPhoneTests.m; sourceTree = "<group>"; };
 		7AA8837D17F92286004D50BC /* REMGalleryCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMGalleryCollectionCell.h; sourceTree = "<group>"; };
 		7AA8837E17F92286004D50BC /* REMGalleryCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGalleryCollectionCell.m; sourceTree = "<group>"; };
+		7AAA6775182884F2007AC717 /* REMChartToolTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartToolTip.h; sourceTree = "<group>"; };
+		7AAA6776182884F2007AC717 /* REMChartToolTip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartToolTip.m; sourceTree = "<group>"; };
 		7AB34E46177D2828003E235E /* CommonTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CommonTests-Prefix.pch"; path = "../test/CommonTests/CommonTests-Prefix.pch"; sourceTree = "<group>"; };
 		7AB34E4A177D2975003E235E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		7AB34E4B177D2975003E235E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
@@ -1692,6 +1698,10 @@
 				EF60822E17D818430093427C /* REMModalView.m */,
 				7A0F7C5118279170009E898A /* REMChartSeriesLegend.h */,
 				7A0F7C5218279170009E898A /* REMChartSeriesLegend.m */,
+				7A0F7C5418279528009E898A /* REMChartSeriesIndicator.h */,
+				7A0F7C5518279528009E898A /* REMChartSeriesIndicator.m */,
+				7AAA6775182884F2007AC717 /* REMChartToolTip.h */,
+				7AAA6776182884F2007AC717 /* REMChartToolTip.m */,
 			);
 			name = Controls;
 			path = View/Controls;
@@ -2999,6 +3009,8 @@
 				B4F4B99E17F16F590096034D /* REMShareInfo.m in Sources */,
 				7A153C6117AA489600413D3C /* REMEnergyCalendarData.m in Sources */,
 				B4EDFB181806653400873FA1 /* REMEnergyMultiTimeSearcher.m in Sources */,
+				7A0F7C5618279528009E898A /* REMChartSeriesIndicator.m in Sources */,
+				7AAA6777182884F2007AC717 /* REMChartToolTip.m in Sources */,
 				B42FBF6117F519F5004F2F3A /* REMWidgetCollectionViewController.m in Sources */,
 				7A153C6217AA489600413D3C /* REMEnergyData.m in Sources */,
 				7A153C6317AA489600413D3C /* REMEnergyError.m in Sources */,

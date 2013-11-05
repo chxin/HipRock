@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "REMChartSeriesIndicator.h"
 
 @interface REMChartSeriesLegend : UIControl
+
+@property (nonatomic) int seriesIndex;
+@property (nonatomic,strong) NSString *seriesName;
+
+-(REMChartSeriesLegend *)initWithSeriesIndex:(int)index type:(REMChartSeriesIndicatorType)type andName:(NSString *)name;
 
 @end

@@ -9,6 +9,7 @@
 #import "REMWidgetEnergyDelegator.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMDimensions.h"
+#import "REMChartSeriesLegend.h"
 
 @interface REMWidgetEnergyDelegator()
 
@@ -242,11 +243,9 @@
     else{//legend toolbar
         //if legend toolbar is not presenting, move it into the view
         if(self.legendView == nil){
-            UIView *view = [[UIView alloc] initWithFrame:kDMChart_ToolbarHiddenFrame];
-            view.backgroundColor = [UIColor purpleColor];
+            self.legendView = [self prepareLegendView];
             
-            [self.view addSubview:view];
-            self.legendView = view;
+            [self.view addSubview:self.legendView];
             
             [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.legendView.frame = kDMChart_ToolbarFrame;
@@ -255,5 +254,28 @@
         
     }
 }
+
+-(UIView *)prepareLegendView
+{
+    UIView *view = [[UIView alloc] initWithFrame:kDMChart_ToolbarHiddenFrame];
+    view.backgroundColor = [UIColor purpleColor];
+    
+    for(int i=0;i<self.energyData.targetEnergyData.count; i++){
+        REMTargetEnergyData *targetData = self.energyData.targetEnergyData[i];
+        
+        REMChartSeriesLegend *legend = [[REMChartSeriesLegend alloc] initWithSeriesIndex:i type:REMChartSeriesIndicatorLine andName:targetData.target.name];
+        
+        CGFloat x = i * (kDMChart_LegendItemWidth + kDMChart_LegnetItemOffset);
+        CGFloat y = (kDMChart_ToolbarHeight - kDMChart_LegendItemHeight) / 2;
+        
+        legend.frame = CGRectMake(x, y, kDMChart_LegendItemWidth, kDMChart_LegendItemHeight);
+        
+        [view addSubview:legend];
+    }
+    
+    
+    return view;
+}
+
 
 @end
