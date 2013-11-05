@@ -52,7 +52,8 @@
     }
     
     if([self.relativeDate isEqual:[NSNull null]]==YES){
-        self.relativeDateType = REMRelativeTimeRangeTypeNone;
+        self.relativeDateType=REMRelativeTimeRangeTypeNone;
+        self.relativeDateComponent=NSLocalizedString(@"Common_CustomTime", @""); //@"自定义";
     }
     else if([self.relativeDate isEqualToString:@"Last7Day"]==YES){
         self.relativeDateType = REMRelativeTimeRangeTypeLast7Days;
@@ -92,7 +93,7 @@
     }
     else{
         self.relativeDateType=REMRelativeTimeRangeTypeNone;
-        self.relativeDateComponent=nil;
+        self.relativeDateComponent=NSLocalizedString(@"Common_CustomTime", @""); //@"自定义";
     }
     
     

@@ -18,7 +18,7 @@ const static CGFloat widgetGap=10;
 @interface REMWidgetMaxViewController()
 
 @property (nonatomic) CGFloat cumulateX;
-@property (nonatomic) NSUInteger currentWidgetIndex;
+
 
 @property (nonatomic) CGFloat speed;
 @property (nonatomic,weak) NSTimer *timer;
@@ -64,7 +64,6 @@ const static CGFloat widgetGap=10;
     [self.view setBackgroundColor:[UIColor blackColor]];
     self.cumulateX=0;
     self.speedBase=1280;
-    self.currentWidgetIndex=0;
     self.readyToClose=NO;
     self.groupName=[NSString stringWithFormat:@"widget-%@",self.dashboardInfo.dashboardId];
     [self addDashboardBg];
@@ -88,6 +87,10 @@ const static CGFloat widgetGap=10;
         [sub.view setCenter:CGPointMake(gap*(self.view.frame.size.width+widgetGap)+self.view.frame.size.width/2, self.view.center.y)];
         
         [self.view addSubview:sub.view];
+        
+        if(i==self.currentWidgetIndex || i==(self.currentWidgetIndex-1) || i == (self.currentWidgetIndex+1)){
+            [sub showChart];
+        }
     }
     
     [self addBloodCell];
@@ -310,7 +313,8 @@ const static CGFloat widgetGap=10;
 
 - (void)stopCoverPage:(NSTimer *)timer{
     //NSLog(@"currentIndex:%d",self.currentIndex);
-    
+    REMWidgetDetailViewController *current=self.childViewControllers[self.currentWidgetIndex];
+    [current showChart];
     
     if(self.currentWidgetIndex<self.childViewControllers.count){
         CGFloat sign=self.speed<0?-1:1;
@@ -320,7 +324,7 @@ const static CGFloat widgetGap=10;
         }
         REMWidgetDetailViewController *vc= self.childViewControllers[willIndex.intValue];
        
-        
+        [vc showChart];
         
     }
     

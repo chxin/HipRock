@@ -19,4 +19,6 @@
 
 @property (nonatomic,strong) NSString *groupName;
 
+- (void)showChart;
+
 @end
