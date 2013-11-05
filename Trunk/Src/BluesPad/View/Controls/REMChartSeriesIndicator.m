@@ -1,82 +1,99 @@
 //
 //  REMChartSeriesIndicator.m
 //  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by 张 锋 on 8/29/13.
+//
+//  Created by 张 锋 on 11/4/13.
 //
 //
 
-#import "REMChartSeriesIndicator.h"
 #import <QuartzCore/QuartzCore.h>
-#import "REMCommonHeaders.h"
-#import "REMBuildingConstants.h"
-
+#import "REMChartSeriesIndicator.h"
 
 @interface REMChartSeriesIndicator()
 
+@property (nonatomic) REMChartSeriesIndicatorType type;
 @property (nonatomic,strong) UIColor *color;
-@property (nonatomic,strong) NSString *title;
 
-@property (nonatomic,strong) UIView *pointView;
-@property (nonatomic,strong) UILabel *label;
+@end
 
-@end 
+#define kREMChartSeriesIndicatorSize 16.0f
 
 @implementation REMChartSeriesIndicator
 
-static CGFloat pointRadius = 7.5;
-static CGFloat pointLabelSpace = 11;
-static CGFloat fontSize = 14;
++(REMChartSeriesIndicator *)indicatorWithType:(REMChartSeriesIndicatorType)type andColor:(UIColor *)color;
+{
+    REMChartSeriesIndicator *indicator = [[REMChartSeriesIndicator alloc] initWithFrame:CGRectMake(0, 0, kREMChartSeriesIndicatorSize, kREMChartSeriesIndicatorSize)];
+    indicator.type = type;
+    indicator.color = color;
+    
+    [indicator render];
+    
+    return indicator;
+}
 
-- (id)initWithFrame:(CGRect)frame title:(NSString *)text andColor:(UIColor *)color
+- (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.color = color;
-        self.title = text;
-        
-        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
 
-
+/*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    [super drawRect:rect];
     // Drawing code
-    
-    //draw a point with color
-    if(self.pointView != nil){
-        self.pointView = nil;
+}
+*/
+
+-(void)render
+{
+    UIView *content = nil;
+    switch (self.type) {
+        case REMChartSeriesIndicatorLine:
+            content = [self getLineIndicator];
+            break;
+        case REMChartSeriesIndicatorColumn:
+            content = [self getColumnIndicator];
+            break;
+        case REMChartSeriesIndicatorPie:
+            content = [self getPieIndicator];
+            break;
+            
+        default:
+            break;
     }
     
-    CGFloat pointWidth = pointRadius*2;
-    self.pointView = [[UIView alloc] initWithFrame:CGRectMake(0,0, pointWidth, pointWidth)];
-    self.pointView.layer.cornerRadius = pointRadius;
-    self.pointView.backgroundColor = self.color;
-    
-    //draw a text label
-    if(self.label != nil){
-        self.label = nil;
-    }
-    
-    CGFloat labelOffset = pointWidth+pointLabelSpace, labelWidth = self.bounds.size.width-labelOffset, labelHeight=self.bounds.size.height;
-    self.label = [[UILabel alloc] initWithFrame:CGRectMake(labelOffset, 0, labelWidth, labelHeight)];
-    self.label.text = self.title;
-    self.label.textColor = [UIColor whiteColor];
-    self.label.font = [UIFont systemFontOfSize:fontSize];
-    self.label.backgroundColor = [UIColor clearColor];
-    
-    [self addSubview:self.pointView];
-    [self addSubview:self.label];
-    
-//    self.layer.borderColor = [UIColor redColor].CGColor;
-//    self.layer.borderWidth = 1.0;
+    if(content!=nil)
+       [self addSubview:content];
 }
 
+-(UIView *)getLineIndicator
+{
+    UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, 4, 16, 8)];
+    indicator.backgroundColor = self.color;
+    
+    return indicator;
+}
+
+-(UIView *)getColumnIndicator
+{
+    UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 16, 16)];
+    indicator.backgroundColor = self.color;
+    
+    return indicator;
+}
+
+-(UIView *)getPieIndicator
+{
+    UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 16, 16)];
+    indicator.layer.cornerRadius = 8;
+    indicator.layer.backgroundColor = self.color.CGColor;
+    
+    return indicator;
+}
 
 @end
