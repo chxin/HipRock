@@ -50,7 +50,7 @@
     self.maskerView=self.chartContainer;
     self.chartContainer.layer.borderColor=[UIColor redColor].CGColor;
     self.chartContainer.layer.borderWidth=1;
-    [self showEnergyChart];
+    //[self showEnergyChart];
 
     [self setStepControlStatusByStep:self.widgetInfo.contentSyntax.stepType];
     [self setDatePickerButtonValueNoSearchByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateComponent withRelativeType:self.widgetInfo.contentSyntax.relativeDateType];
@@ -76,9 +76,16 @@
 }
 
 
-
+- (void)showChart{
+    [self showEnergyChart];
+}
 
 - (void) showEnergyChart{
+    if(self.chartWrapper!=nil){
+        return;
+    }
+    
+    
     CGRect widgetRect = self.chartContainer.bounds;
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     

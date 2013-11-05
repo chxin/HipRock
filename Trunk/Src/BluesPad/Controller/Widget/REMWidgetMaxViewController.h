@@ -26,6 +26,8 @@
 
 @property (nonatomic,weak) REMWidgetCollectionViewController *widgetCollectionController;
 
+@property (nonatomic) NSUInteger currentWidgetIndex;
+
 - (void)popToBuildingCover;
 
 

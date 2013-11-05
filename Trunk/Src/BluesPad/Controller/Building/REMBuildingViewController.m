@@ -189,7 +189,6 @@ const static CGFloat imageGap=10;
     }
     self.imageArray=array;
   
-    //[self loadOtherImageView];
     
     NSMutableArray *arr = [[NSMutableArray alloc]initWithCapacity:self.imageArray.count];
     
@@ -228,21 +227,7 @@ const static CGFloat imageGap=10;
     
 }
 
-- (void)loadOtherImageView{
-    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    //UIImage *image = self.defaultImage;
-    dispatch_async(concurrentQueue, ^{
-        for (int i=0; i<self.imageArray.count; ++i) {
-            if(i!=self.currentBuildingIndex && i!=(self.currentBuildingIndex+1) && i != (self.currentBuildingIndex-1)){
-                REMImageView *imageView=self.imageArray[i];
-                [imageView initWholeViewUseThumbnail:NO];
-            }
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-        });
-    });
 
-}
 
 
 #pragma mark -

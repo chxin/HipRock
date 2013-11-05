@@ -32,16 +32,31 @@
 
 -(void)longPress:(UILongPressGestureRecognizer*)recognizer {
     UIGestureRecognizerState gstate = recognizer.state;
-    if (gstate == UIGestureRecognizerStateBegan && !isLongPressedStatus) {
+    if (gstate == UIGestureRecognizerStateBegan) {
         isLongPressedStatus = YES;
         CPTXYPlotSpace* plotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
         NSDecimal pressedPoint[2];
         [plotSpace plotPoint:pressedPoint forPlotAreaViewPoint:[recognizer locationInView:self]];
-        int xInCoor = floor([NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]].floatValue+0.5);
-//        for(REMTrendChartSeries* s in self.series) {
-//            s numberForPlot:nil field:<#(NSUInteger)#> recordIndex:<#(NSUInteger)#>
-//        }
-//        [[NSNotificationCenter defaultCenter]postNotificationName:kREMChartLongPressNotification object:self userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:xInCoor] forKey:@"x"]];
+        
+        NSMutableArray* pointsInTouch = [[NSMutableArray alloc]init];
+        
+        NSNumber* xInCoor = [NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]];
+        for(REMTrendChartSeries* s in self.series) {
+            NSArray* sampleData = [s getCurrentRangeSource];
+            for (NSDictionary* sPoint in sampleData) {
+                NSNumber* xVal = sPoint[@"x"];
+                if (fabs(xVal.doubleValue - xInCoor.doubleValue) <= 0.5) {
+                    [pointsInTouch addObject:@{
+                                               @"color": [s getSeriesColor],
+                                               @"energydata": sPoint[@"enenrgydata"]
+                                               }];
+                    break;
+                }
+            }
+            NSDate* xDate = [s.dataProcessor deprocessX:xInCoor.floatValue];
+            NSLog(@"%@", xDate);
+        }
+        [[NSNotificationCenter defaultCenter]postNotificationName:kREMChartLongPressNotification object:self userInfo:[NSDictionary dictionaryWithObject:pointsInTouch forKey:@"points"]];
     }
 }
 
@@ -114,13 +129,13 @@
     currentXLocation = location;
     currentXLength = length;
     
-    [self rerenderYLabel];
-    
     CPTPlotRange* xRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(currentXLocation) length:CPTDecimalFromFloat(currentXLength)];
     ((CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace).xRange = xRange;
     for (REMTrendChartSeries* s in self.series) {
-        s.visableRange = NSMakeRange(floor(currentXLocation), ceil(currentXLength));
+        s.visableRange = NSMakeRange(currentXLocation <= 0 ? 0 : floor(currentXLocation), ceil(currentXLength));
     }
+    
+    [self rerenderYLabel];
 
     if (isTheFirstRender == YES) {
         [self rerenderXLabel];
@@ -150,7 +165,7 @@
     int endX = ceil(currentXLocation + currentXLength);
     for (int i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = [self.series objectAtIndex:i];
-        NSNumber* maxY = [s maxYValBetween:startX and:endX];
+        NSNumber* maxY = [s maxYInCache];
         if (s.yAxisIndex >= yAxisMaxValues.count) {
             [yAxisMaxValues addObject:maxY];
         } else {

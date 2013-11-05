@@ -24,7 +24,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.xLength = 168;
+        self.xLength = 30;
         self.xLocation = 0;
         self.yAxisLabelsArray = [[NSMutableArray alloc]init];
         self.xAxisLabelArray = [[NSMutableArray alloc]init];
@@ -76,11 +76,12 @@
             CGFloat x = bar.frame.origin.x + xMovement;
             if (x<0) {
                 [bar setPosition:CGPointMake(bar.position.x+xMovement+900, bar.position.y)];
-            } else if (bar.position.x+xMovement+bar.bounds.size.width>self.bounds.size.width) {
+            } else if (bar.position.x+xMovement+bar.bounds.size.width>900) {
                 [bar setPosition:CGPointMake(bar.position.x+xMovement-900, bar.position.y)];
             } else {
                 [bar setPosition:CGPointMake(bar.position.x+xMovement, bar.position.y)];
             }
+            //[bar setPosition:CGPointMake(bar.position.x+xMovement, bar.position.y)];
         }
     }
     [CATransaction setDisableActions:caTransationState];

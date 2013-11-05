@@ -51,6 +51,8 @@
 
 @property (nonatomic) BOOL hasLoadedWholeView;
 
+@property (nonatomic,weak) UIImageView *cropTitleView;
+
 @end
 
 @implementation REMImageView
@@ -531,7 +533,7 @@
     self.glassView = [[UIView alloc]initWithFrame:self.imageView.frame];
     self.glassView.alpha=0;
     self.glassView.contentMode=UIViewContentModeScaleToFill;
-    self.glassView.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
+    self.glassView.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.65];
     
     [self addSubview:self.glassView];
 }
@@ -605,9 +607,22 @@
     }
     else{
         if(scrollView.contentOffset.y>kDashboardThreshold){
+            [self clipTitleView];
             [self.controller switchToDashboard];
         }
     }
+}
+
+- (void)clipTitleView{
+    UIImage *image=[REMImageHelper imageWithView:self];
+    CGRect rect=CGRectMake(0, 0, self.frame.size.width, kBuildingTitleHeight);
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], rect);
+    UIImage *img = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    
+    UIImageView *view=[[UIImageView alloc]initWithImage:img];
+    [self addSubview:view];
+    self.cropTitleView=view;
 }
 
 
@@ -638,6 +653,7 @@
     } completion:^(BOOL finished){
         [self changeShareButton:NO];
         [self.dataView setHidden:YES];
+        [self.cropTitleView removeFromSuperview];
         //NSLog(@"data view now frame:%@",NSStringFromCGRect(self.dataView.frame));
     }];
 }
@@ -667,11 +683,13 @@
         //self.dashboardController=nil;
         [self changeShareButton:YES];
         [self requireChartData];
+        [self.cropTitleView removeFromSuperview];
         
     }];
 }
 
 - (void)gotoBuildingInfo{
+    [self clipTitleView];
     [self.controller switchToBuildingInfo];
     
 }

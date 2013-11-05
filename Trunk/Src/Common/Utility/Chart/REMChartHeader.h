@@ -70,6 +70,7 @@ static NSString* const kREMChartLongPressNotification = @"remtrendlongpress";
 
 @interface REMTrendChartSeries : REMChartSeries {
 @protected NSMutableArray* source;
+@protected CPTColor* color;
 @protected BOOL occupy;   // 所有为YES的序列，在同一个X轴位置的数据点的位置互斥。线图设为false，Bar、Column和StackColumn设为true
 }
 //@property (nonatomic, readonly) NSArray* points;
@@ -97,7 +98,9 @@ static NSString* const kREMChartLongPressNotification = @"remtrendlongpress";
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate;
 
 -(BOOL)isOccupy;
--(NSNumber*)maxYValBetween:(int)minX and:(int)maxX;
+-(UIColor*)getSeriesColor;
+-(NSNumber*)maxYInCache;
+-(NSArray*)getCurrentRangeSource;
 @end
 
 @interface REMTrendChartColumnSeries : REMTrendChartSeries<CPTBarPlotDataSource>

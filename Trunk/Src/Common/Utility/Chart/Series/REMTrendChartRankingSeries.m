@@ -75,34 +75,21 @@
     else return yValue;
 }
 
--(NSNumber*)maxYValBetween:(int)minX and:(int)maxX {
-    NSNumber* maxY = [NSNumber numberWithInt:0];
-    int loopStart = MAX(0, minX);
-    int loopEnd = MIN(self.energyData.count, maxX);
+-(void)cacheDataOfRange {
+    NSUInteger loopEnd = MIN(self.visableRange.location+self.visableRange.length, self.energyData.count);
+    NSUInteger loopStart = MAX(0, self.visableRange.location);
     if (self.sortOrder == NSOrderedDescending) {
-        loopStart = self.energyData.count-maxX;
-        loopStart = MAX(0,loopStart);
-        loopEnd = MIN(self.energyData.count, (self.energyData.count-minX));
-    }
-    for (int j = loopStart; j < loopEnd; j++) {
-        NSNumber* yVal = [self numberForPlot:[self getPlot] field:CPTBarPlotFieldBarTip recordIndex:j];
-        if (yVal == nil || yVal == NULL || [yVal isEqual:[NSNull null]] || [yVal isLessThan:([NSNumber numberWithInt:0])]) continue;
-        if ([maxY isLessThan:yVal]) {
-            maxY = yVal;
+        for (NSUInteger i = loopEnd-1; i >= loopStart; i--) {
+            REMEnergyData* data = self.energyData[i];
+            [source addObject:@{@"x":@(self.energyData.count - i - 1), @"y":data.dataValue, @"enenrgydata":data}];
+            if (i==0)break;
+        }
+    } else {
+        for (NSUInteger i = loopStart; i < loopEnd; i++) {
+            REMEnergyData* data = self.energyData[i];
+            [source addObject:@{@"x":@(i), @"y":data.dataValue, @"enenrgydata":data}];
         }
     }
-    return maxY;
-}
-
-- (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
-{
-    if (fieldEnum == CPTBarPlotFieldBarLocation) {
-        return [NSNumber numberWithUnsignedInteger:((self.sortOrder == NSOrderedDescending) ? (self.energyData.count-idx-1) :idx)];
-    } else if (fieldEnum == CPTBarPlotFieldBarTip) {
-        REMEnergyData* point = [self.energyData objectAtIndex:idx];
-        return point.dataValue;
-    } else {
-        return nil;
-    }
+    [[self getPlot]reloadData];
 }
 @end
