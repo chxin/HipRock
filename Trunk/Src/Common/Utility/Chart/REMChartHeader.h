@@ -99,7 +99,7 @@ static NSString* const kREMChartLongPressNotification = @"remtrendlongpress";
 
 -(BOOL)isOccupy;
 -(UIColor*)getSeriesColor;
--(NSNumber*)maxYValBetween:(int)minX and:(int)maxX;
+-(NSNumber*)maxYInCache;
 -(NSArray*)getCurrentRangeSource;
 @end
 

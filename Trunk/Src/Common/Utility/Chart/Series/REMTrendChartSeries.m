@@ -45,24 +45,28 @@
 }
 
 -(void)setVisableRange:(NSRange)visableRange {
-    if(visableRange.location != self.visableRange.location || visableRange.length == self.visableRange.length) {
+    if(visableRange.location != self.visableRange.location || visableRange.length != self.visableRange.length) {
         [source removeAllObjects];
         _visableRange = visableRange;
-        NSDate* startDate = [self.dataProcessor deprocessX:visableRange.location];
-        NSDate* endDate = [self.dataProcessor deprocessX:visableRange.length+visableRange.location];
-        
-        NSUInteger index = 0;
-        REMEnergyData* data = nil;
-        NSUInteger allDataCount = self.energyData.count;
-        while (index < allDataCount) {
-            data = self.energyData[index];
-            index++;
-            if ([data.localTime compare:startDate]==NSOrderedAscending) continue;
-            if ([data.localTime compare:endDate]==NSOrderedDescending) break;
-            [source addObject:@{@"x":[self.dataProcessor processX:data.localTime], @"y":[self.dataProcessor processY:data.dataValue], @"enenrgydata":data}];
-        }
-        [[self getPlot]reloadData];
+        [self cacheDataOfRange];
     }
+}
+
+-(void)cacheDataOfRange {
+    NSDate* startDate = [self.dataProcessor deprocessX:self.visableRange.location];
+    NSDate* endDate = [self.dataProcessor deprocessX:self.visableRange.length+self.visableRange.location+2];
+    
+    NSUInteger index = 0;
+    REMEnergyData* data = nil;
+    NSUInteger allDataCount = self.energyData.count;
+    while (index < allDataCount) {
+        data = self.energyData[index];
+        index++;
+        if ([data.localTime compare:startDate]==NSOrderedAscending) continue;
+        if ([data.localTime compare:endDate]==NSOrderedDescending) break;
+        [source addObject:@{@"x":[self.dataProcessor processX:data.localTime], @"y":[self.dataProcessor processY:data.dataValue], @"enenrgydata":data}];
+    }
+    [[self getPlot]reloadData];
 }
 
 -(NSArray*)getCurrentRangeSource {
@@ -71,25 +75,21 @@
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
-    return self.visableRange.length;
+    return self.visableRange.length+2;
 }
 
 -(BOOL)isOccupy {
     return occupy;
 }
 
--(NSNumber*)maxYValBetween:(int)minX and:(int)maxX {
+
+-(NSNumber*)maxYInCache {
     NSNumber* maxY = [NSNumber numberWithInt:0];
-    NSDate* xStartDate = [self.dataProcessor deprocessX:minX];
-    NSDate* xEndDate = [self.dataProcessor deprocessX:maxX];
-    /*效率还可以改善*/
-    for (int j = 0; j < self.energyData.count; j++) {
-        REMEnergyData* point = [self.energyData objectAtIndex:j];
-        if ([point.localTime timeIntervalSinceDate:xStartDate] < 0) continue;
-        if ([point.localTime timeIntervalSinceDate:xEndDate] > 0) break;
-        NSNumber* yVal = [self.dataProcessor processY:point.dataValue];
+    
+    for (NSDictionary* dic in source) {
+        NSNumber* yVal = dic[@"y"];
         if (yVal == nil || yVal == NULL || [yVal isEqual:[NSNull null]] || [yVal isLessThan:([NSNumber numberWithInt:0])]) continue;
-        if (maxY.floatValue < yVal.floatValue) {
+        if ([maxY isLessThan:yVal]) {
             maxY = yVal;
         }
     }

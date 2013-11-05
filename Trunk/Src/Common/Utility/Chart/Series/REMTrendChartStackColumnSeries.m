@@ -77,20 +77,20 @@
     [super beforePlotAddToGraph:graph seriesList:seriesList selfIndex:selfIndex];
 }
 
--(NSNumber*)maxYValBetween:(int)minX and:(int)maxX {
-    NSNumber* minXObj = @(minX);
-    NSNumber* maxXObj = @(maxX);
-    NSNumber* maxY = [NSNumber numberWithInt:0];
-    for (NSDictionary* dic in self.convertedValues) {
-        NSNumber* x = dic[@"x"];
-        if ([x isGreaterThan:maxXObj] || [x isLessThan:minXObj]) continue;
-        NSNumber* yVal = dic[@"y"];
-        if (yVal == nil || yVal == NULL || [yVal isEqual:[NSNull null]] || [yVal isLessThan:([NSNumber numberWithInt:0])]) continue;
-        if (maxY.floatValue < yVal.floatValue) {
-            maxY = yVal;
-        }
-    }
-    return maxY;
+-(NSNumber*)maxYInCache {
+//    NSNumber* minXObj = @(minX);
+//    NSNumber* maxXObj = @(maxX);
+//    NSNumber* maxY = [NSNumber numberWithInt:0];
+//    for (NSDictionary* dic in self.convertedValues) {
+//        NSNumber* x = dic[@"x"];
+//        if ([x isGreaterThan:maxXObj] || [x isLessThan:minXObj]) continue;
+//        NSNumber* yVal = dic[@"y"];
+//        if (yVal == nil || yVal == NULL || [yVal isEqual:[NSNull null]] || [yVal isLessThan:([NSNumber numberWithInt:0])]) continue;
+//        if (maxY.floatValue < yVal.floatValue) {
+//            maxY = yVal;
+//        }
+//    }
+    return @(0);
 }
 
 @end

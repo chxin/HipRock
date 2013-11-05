@@ -129,13 +129,13 @@
     currentXLocation = location;
     currentXLength = length;
     
-    [self rerenderYLabel];
-    
     CPTPlotRange* xRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(currentXLocation) length:CPTDecimalFromFloat(currentXLength)];
     ((CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace).xRange = xRange;
     for (REMTrendChartSeries* s in self.series) {
-        s.visableRange = NSMakeRange(floor(currentXLocation), ceil(currentXLength));
+        s.visableRange = NSMakeRange(currentXLocation <= 0 ? 0 : floor(currentXLocation), ceil(currentXLength));
     }
+    
+    [self rerenderYLabel];
 
     if (isTheFirstRender == YES) {
         [self rerenderXLabel];
@@ -165,7 +165,7 @@
     int endX = ceil(currentXLocation + currentXLength);
     for (int i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = [self.series objectAtIndex:i];
-        NSNumber* maxY = [s maxYValBetween:startX and:endX];
+        NSNumber* maxY = [s maxYInCache];
         if (s.yAxisIndex >= yAxisMaxValues.count) {
             [yAxisMaxValues addObject:maxY];
         } else {

@@ -23,6 +23,7 @@
 }
 - (NSString *)stringForObjectValue:(id)obj {
     //    return ((NSNumber*)obj).stringValue;
+    if (self.interval == 0) return nil;
     int xVal = ((NSNumber*)obj).integerValue;
     if (xVal % self.interval == 0 && xVal >= 0) {
         NSDate* date = nil;

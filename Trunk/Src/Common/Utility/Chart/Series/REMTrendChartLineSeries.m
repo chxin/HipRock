@@ -79,22 +79,20 @@
     }
     return symbol;
 }
-
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
 {
-    if (self.energyData.count<=idx) {
+    if(source.count<=idx){
         return nil;
     }
-    REMEnergyData* point = [self.energyData objectAtIndex:idx];
+    NSDictionary* point = source[idx];
     if (fieldEnum == CPTScatterPlotFieldX) {
-        return [self.dataProcessor processX:point.localTime];
+        return point[@"x"];
     } else if (fieldEnum == CPTScatterPlotFieldY) {
-        NSNumber* yVal = [self.dataProcessor processY:point.dataValue];
+        NSNumber* yVal =  point[@"y"];;
         if ([yVal isEqual:[NSNull null]]) return yVal;
         else {
-            return [NSNumber numberWithDouble: yVal.doubleValue * self.yScale.doubleValue];
+            return [NSNumber numberWithDouble: yVal.doubleValue / self.yScale.doubleValue];
         }
-        return [self.dataProcessor processY:point.dataValue];
     } else {
         return nil;
     }
