@@ -26,7 +26,7 @@
         hostingView.hostedGraph.plotAreaFrame.masksToBorder = NO;
         hostingView.backgroundColor = [UIColor blackColor];
         
-        for (NSUInteger i = 0; i < 3; i++) {
+        for (NSUInteger i = 0; i < 5; i++) {
             CPTBarPlot* barPlot = [[CPTBarPlot alloc]init];
             barPlot.dataSource = self;
             barPlot.barWidth = CPTDecimalFromFloat(.2);
@@ -49,7 +49,7 @@
         
         CPTXYPlotSpace* thePlotSpace = (CPTXYPlotSpace*)hostingView.hostedGraph.defaultPlotSpace;
         thePlotSpace.globalXRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt([self numberOfRecordsForPlot:nil])];
-        thePlotSpace.xRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(30)];
+        thePlotSpace.xRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(10)];
         thePlotSpace.globalYRange =[[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt([self numberOfRecordsForPlot:nil])];
         thePlotSpace.yRange =[[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt([self numberOfRecordsForPlot:nil])];
         thePlotSpace.delegate = self;
@@ -68,7 +68,7 @@
 }
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot {
-    return 100;
+    return 50;
 }
 
 /*

@@ -37,12 +37,11 @@ static NSString *cellId=@"widgetcell";
 {
     if(self = [super initWithCollectionViewLayout:flowlayout]){
         
-        //[flowlayout setMinimumInteritemSpacing:8];
+        [flowlayout setMinimumInteritemSpacing:kDashboardWidgetInnerHorizonalMargin];
         
         [flowlayout setSectionInset:UIEdgeInsetsZero];
         
-        //[flowlayout setItemSize: CGSizeMake(100, 100)];
-        [flowlayout setItemSize:CGSizeMake(233, 157)];
+        [flowlayout setItemSize:CGSizeMake(kDashboardWidgetWidth, kDashboardWidgetHeight)];
         
     }
     
@@ -63,8 +62,8 @@ static NSString *cellId=@"widgetcell";
     [self.collectionView setBackgroundColor:[UIColor clearColor]];
     [self.collectionView setScrollEnabled:NO];
     [self.collectionView setContentInset:UIEdgeInsetsZero];
-    self.collectionView.layer.borderColor=[UIColor yellowColor].CGColor;
-    self.collectionView.layer.borderWidth=1;
+    //self.collectionView.layer.borderColor=[UIColor yellowColor].CGColor;
+    //self.collectionView.layer.borderWidth=1;
 }
 
 
@@ -81,7 +80,7 @@ static NSString *cellId=@"widgetcell";
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0, 0, 14, 0);
+    return UIEdgeInsetsMake(0, 0, kDashboardWidgetInnerVerticalMargin, 0);
 }
 
 

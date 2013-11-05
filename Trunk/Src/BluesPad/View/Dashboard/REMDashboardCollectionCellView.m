@@ -29,8 +29,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.contentView.layer.borderColor=[UIColor redColor].CGColor;
-        self.contentView.layer.borderWidth=1;
+        //self.contentView.layer.borderColor=[UIColor redColor].CGColor;
+        //self.contentView.layer.borderWidth=1;
         self.backgroundColor=[UIColor whiteColor];
         self.contentView.backgroundColor=[UIColor whiteColor];
         
