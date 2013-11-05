@@ -11,7 +11,7 @@
 #import "REMCommonHeaders.h"
 #import "REMDataRange.h"
 #import "REMBuildingAirQualityChart.h"
-#import "REMChartSeriesIndicator.h"
+#import "REMBuildingChartSeriesIndicator.h"
 #import "REMBuildingConstants.h"
 
 #define REMHalfDaySeconds 12*60*60
@@ -388,7 +388,7 @@ static NSDictionary *codeNameMap;
     for(NSDictionary *series in self.chartData){
         NSString *seriesCode = [series objectForKey:@"code"];
         
-        REMChartSeriesIndicator *indicator = [self getSeriesIndicatorWithCode:seriesCode];
+        REMBuildingChartSeriesIndicator *indicator = [self getSeriesIndicatorWithCode:seriesCode];
         [self.view addSubview:indicator];
     }
 }
@@ -428,7 +428,7 @@ static NSDictionary *codeNameMap;
     return label;
 }
 
--(REMChartSeriesIndicator *)getSeriesIndicatorWithCode:(NSString *)seriesCode
+-(REMBuildingChartSeriesIndicator *)getSeriesIndicatorWithCode:(NSString *)seriesCode
 {
     CGFloat fontSize = 14.0, y = self.chartView.hostView.bounds.size.height + 30, x = self.chartView.hostView.hostedGraph.plotAreaFrame.frame.origin.x, width=0.0, height=15.0, indicatorSpace = 18,dotWidth=15, dotSpace=11;
     
@@ -449,7 +449,7 @@ static NSDictionary *codeNameMap;
     NSString *indicatorName = codeNameMap[seriesCode];
     UIColor *indicatorColor = [self getColorWithCode:seriesCode].uiColor;
     
-    REMChartSeriesIndicator *indicator = [[REMChartSeriesIndicator alloc] initWithFrame:indicatorFrame title:indicatorName andColor:indicatorColor];
+    REMBuildingChartSeriesIndicator *indicator = [[REMBuildingChartSeriesIndicator alloc] initWithFrame:indicatorFrame title:indicatorName andColor:indicatorColor];
     
     return indicator;
 }

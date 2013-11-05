@@ -13,7 +13,7 @@
 #import "REMCommodityUsageModel.h"
 #import "CorePlot-CocoaTouch.h"
 #import "REMDataRange.h"
-#import "REMChartSeriesIndicator.h"
+#import "REMBuildingChartSeriesIndicator.h"
 #import "REMCommodityModel.h"
 
 
@@ -434,7 +434,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     
     CGFloat averageDataWidth = [averageDataTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
     CGRect averageDataFrame = CGRectMake(labelLeftOffset, labelTopOffset, averageDataWidth, fontSize);
-    REMChartSeriesIndicator *averageDataIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:averageDataFrame title:(NSString *)averageDataTitle andColor:averageDataColor];
+    REMBuildingChartSeriesIndicator *averageDataIndicator = [[REMBuildingChartSeriesIndicator alloc] initWithFrame:averageDataFrame title:(NSString *)averageDataTitle andColor:averageDataColor];
     
     [self.view addSubview:averageDataIndicator];
 
@@ -444,7 +444,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
         
         CGFloat benchmarkWidth = [kBenchmarkTitle sizeWithFont:[UIFont systemFontOfSize:fontSize]].width + 26;
         CGRect benchmarkFrame = CGRectMake(labelLeftOffset+averageDataWidth+labelDistance, labelTopOffset, benchmarkWidth, fontSize);
-        REMChartSeriesIndicator *benchmarkIndicator = [[REMChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:(NSString *)kBenchmarkTitle andColor:benchmarkColor];
+        REMBuildingChartSeriesIndicator *benchmarkIndicator = [[REMBuildingChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:(NSString *)kBenchmarkTitle andColor:benchmarkColor];
         
         [self.view addSubview:benchmarkIndicator];
     }

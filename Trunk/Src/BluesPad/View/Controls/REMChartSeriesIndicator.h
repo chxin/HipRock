@@ -1,15 +1,22 @@
 //
 //  REMChartSeriesIndicator.h
 //  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by 张 锋 on 8/29/13.
+//
+//  Created by 张 锋 on 11/4/13.
 //
 //
 
 #import <UIKit/UIKit.h>
 
+typedef enum _REMChartSeriesIndicatorType{
+    REMChartSeriesIndicatorLine,
+    REMChartSeriesIndicatorColumn,
+    REMChartSeriesIndicatorPie,
+} REMChartSeriesIndicatorType;
+
 @interface REMChartSeriesIndicator : UIView
 
-- (id)initWithFrame:(CGRect)frame title:(NSString *)text andColor:(UIColor *)color;
+
++(REMChartSeriesIndicator *)indicatorWithType:(REMChartSeriesIndicatorType)type andColor:(UIColor *)color;
 
 @end
