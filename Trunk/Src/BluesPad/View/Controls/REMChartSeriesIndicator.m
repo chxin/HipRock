@@ -8,6 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "REMChartSeriesIndicator.h"
+#import "REMDimensions.h"
 
 @interface REMChartSeriesIndicator()
 
@@ -16,13 +17,11 @@
 
 @end
 
-#define kREMChartSeriesIndicatorSize 16.0f
-
 @implementation REMChartSeriesIndicator
 
 +(REMChartSeriesIndicator *)indicatorWithType:(REMChartSeriesIndicatorType)type andColor:(UIColor *)color;
 {
-    REMChartSeriesIndicator *indicator = [[REMChartSeriesIndicator alloc] initWithFrame:CGRectMake(0, 0, kREMChartSeriesIndicatorSize, kREMChartSeriesIndicatorSize)];
+    REMChartSeriesIndicator *indicator = [[REMChartSeriesIndicator alloc] initWithFrame:CGRectMake(0, 0, kDMChart_LegendIndicatorSize, kDMChart_LegendIndicatorSize)];
     indicator.type = type;
     indicator.color = color;
     
@@ -94,6 +93,21 @@
     indicator.layer.backgroundColor = self.color.CGColor;
     
     return indicator;
+}
+
++(REMChartSeriesIndicatorType)indicatorTypeWithDiagramType:(REMDiagramType)diagramType
+{
+    switch (diagramType) {
+        case REMDiagramTypeLine:
+            return REMChartSeriesIndicatorLine;
+        case REMDiagramTypeColumn:
+            return REMChartSeriesIndicatorColumn;
+        case REMDiagramTypePie:
+            return REMChartSeriesIndicatorPie;
+            
+        default:
+            return REMChartSeriesIndicatorLine;
+    }
 }
 
 @end

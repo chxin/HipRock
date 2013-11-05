@@ -12,13 +12,16 @@
 #import "REMCommonHeaders.h"
 
 
-#define kREMChartSeriesLegendFrame CGRectMake(0,0,kDMChart_LegendItemWidth,kDMChart_LegendItemHeight)
+#define kREMLegendItemFrame CGRectMake(0,0,kDMChart_LegendItemWidth,kDMChart_LegendItemHeight)
+
+#define kREMLegendInnerIndicatorFrame CGRectMake(kDMChart_LegendIndicatorLeftOffset,kDMChart_LegendIndicatorTopOffset, kDMChart_LegendIndicatorSize,kDMChart_LegendIndicatorSize)
+
+#define kREMLegendInnerLabelFrame CGRectMake(kDMChart_LegendIndicatorLeftOffset + kDMChart_LegendIndicatorSize + kDMChart_LegendLabelLeftOffset, kDMChart_LegendLabelTopOffset, kDMChart_LegendItemWidth - (kDMChart_LegendIndicatorLeftOffset + kDMChart_LegendIndicatorSize + kDMChart_LegendLabelLeftOffset), kDMChart_LegendLabelFontSize+1)
 
 @interface REMChartSeriesLegend()
 
 @property (nonatomic,weak) REMChartSeriesIndicator *indicator;
 @property (nonatomic,weak) UILabel *label;
-@property (nonatomic) UIControlState state;
 
 @end
 
@@ -27,24 +30,27 @@
 
 -(REMChartSeriesLegend *)initWithSeriesIndex:(int)index type:(REMChartSeriesIndicatorType)type andName:(NSString *)name
 {
-    self = [super initWithFrame:kREMChartSeriesLegendFrame];
+    self = [super initWithFrame:kREMLegendItemFrame];
     if(self){
         self.seriesIndex = index;
         self.seriesName = name;
         
-        self.layer.borderColor = [UIColor redColor].CGColor;
-        self.layer.borderWidth = 1.0f;
+//        self.layer.borderColor = [UIColor darkGrayColor].CGColor;
+//        self.layer.borderWidth = 1.0f;
+        
         self.layer.cornerRadius = 5.0f;
+        [self updateState];
         
         
         //add indicator
         REMChartSeriesIndicator *indicator = [REMChartSeriesIndicator indicatorWithType:type andColor:[REMColor colorByIndex:index].uiColor];
+        indicator.frame = kREMLegendInnerIndicatorFrame;
         [self addSubview:indicator];
         
         //add label
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+        UILabel *label = [[UILabel alloc] initWithFrame:kREMLegendInnerLabelFrame];
         label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont systemFontOfSize:16.0];
+        label.font = [UIFont systemFontOfSize:kDMChart_LegendLabelFontSize];
         label.text = name;
         label.textColor = [UIColor blackColor];
         [self addSubview:label];
@@ -77,7 +83,28 @@
 
 -(void)legendTapped:(UITapGestureRecognizer *)gesture
 {
-    NSLog(@"legend tapped!");
+    if(self.state == UIControlStateNormal)
+        [self setSelected:YES];
+    else
+        [self setSelected:NO];
+    
+    [self updateState];
+    NSLog(@"legend tapped, status: %d!", self.state);
+    
+    //set the conrresponding series status
+    if(self.delegate != nil){
+        [self.delegate legendStateChanged:self.state onIndex:self.seriesIndex];
+    }
+}
+
+-(void)updateState
+{
+    if(self.state == UIControlStateNormal){
+        self.backgroundColor = [UIColor lightGrayColor];
+    }
+    else{
+        self.backgroundColor = [UIColor darkGrayColor];
+    }
 }
 
 @end

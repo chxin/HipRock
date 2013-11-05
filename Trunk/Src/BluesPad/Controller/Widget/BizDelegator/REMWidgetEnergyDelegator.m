@@ -9,6 +9,7 @@
 #import "REMWidgetEnergyDelegator.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMDimensions.h"
+#import "REMChartSeriesIndicator.h"
 #import "REMChartSeriesLegend.h"
 
 @interface REMWidgetEnergyDelegator()
@@ -263,9 +264,10 @@
     else{//legend toolbar
         //if legend toolbar is not presenting, move it into the view
         if(self.legendView == nil){
-            self.legendView = [self prepareLegendView];
+            UIView *view = [self prepareLegendView];
             
-            [self.view addSubview:self.legendView];
+            [self.view addSubview:view];
+            self.legendView = view;
             
             [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.legendView.frame = kDMChart_ToolbarFrame;
@@ -277,24 +279,37 @@
 
 -(UIView *)prepareLegendView
 {
-    UIView *view = [[UIView alloc] initWithFrame:kDMChart_ToolbarHiddenFrame];
-    view.backgroundColor = [UIColor purpleColor];
+    CGFloat scrollViewContentWidth = (kDMChart_LegendItemWidth + kDMChart_LegendItemLeftOffset) * self.energyData.targetEnergyData.count + kDMChart_LegendItemLeftOffset;
+    
+    UIScrollView *view = [[UIScrollView alloc] initWithFrame:kDMChart_ToolbarHiddenFrame];
+    view.backgroundColor = [UIColor whiteColor];
+    view.contentSize = CGSizeMake(scrollViewContentWidth, kDMChart_ToolbarHeight);
+    view.pagingEnabled = NO;
+    view.showsHorizontalScrollIndicator = NO;
+    view.showsVerticalScrollIndicator = NO;
+    
     
     for(int i=0;i<self.energyData.targetEnergyData.count; i++){
         REMTargetEnergyData *targetData = self.energyData.targetEnergyData[i];
         
-        REMChartSeriesLegend *legend = [[REMChartSeriesLegend alloc] initWithSeriesIndex:i type:REMChartSeriesIndicatorLine andName:targetData.target.name];
-        
-        CGFloat x = i * (kDMChart_LegendItemWidth + kDMChart_LegnetItemOffset);
+        REMChartSeriesIndicatorType indicatorType = [REMChartSeriesIndicator indicatorTypeWithDiagramType:self.widgetInfo.diagramType];
+        CGFloat x = i * (kDMChart_LegendItemWidth + kDMChart_LegendItemLeftOffset) + kDMChart_LegendItemLeftOffset;
         CGFloat y = (kDMChart_ToolbarHeight - kDMChart_LegendItemHeight) / 2;
         
+        REMChartSeriesLegend *legend = [[REMChartSeriesLegend alloc] initWithSeriesIndex:i type:indicatorType andName:targetData.target.name];
         legend.frame = CGRectMake(x, y, kDMChart_LegendItemWidth, kDMChart_LegendItemHeight);
+        legend.delegate = self;
         
         [view addSubview:legend];
     }
     
-    
     return view;
+}
+
+-(void)legendStateChanged:(UIControlState)state onIndex:(int)index
+{
+    //hide or show the series on index according to state
+    NSLog(@"Series %d is going to %@", index, state == UIControlStateNormal?@"show":@"hide");
 }
 
 

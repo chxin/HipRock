@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "REMChartSeriesIndicator.h"
 
+@protocol REMChartSeriesLegendDelegate <NSObject>
+
+-(void)legendStateChanged:(UIControlState)state onIndex:(int)index;
+
+@end
+
 @interface REMChartSeriesLegend : UIControl
 
 @property (nonatomic) int seriesIndex;
-@property (nonatomic,strong) NSString *seriesName;
+@property (nonatomic,weak) NSString *seriesName;
+@property (nonatomic,weak) NSObject<REMChartSeriesLegendDelegate> *delegate;
 
 -(REMChartSeriesLegend *)initWithSeriesIndex:(int)index type:(REMChartSeriesIndicatorType)type andName:(NSString *)name;
 

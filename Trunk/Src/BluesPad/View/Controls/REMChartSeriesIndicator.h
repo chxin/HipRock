@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "REMWidgetObject.h"
 
 typedef enum _REMChartSeriesIndicatorType{
     REMChartSeriesIndicatorLine,
@@ -18,5 +19,6 @@ typedef enum _REMChartSeriesIndicatorType{
 
 
 +(REMChartSeriesIndicator *)indicatorWithType:(REMChartSeriesIndicatorType)type andColor:(UIColor *)color;
++(REMChartSeriesIndicatorType)indicatorTypeWithDiagramType:(REMDiagramType)diagramType;
 
 @end
