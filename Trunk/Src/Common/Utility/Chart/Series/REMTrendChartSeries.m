@@ -9,6 +9,9 @@
 #import "REMChartHeader.h"
 
 @implementation REMTrendChartSeries
+-(UIColor*)getSeriesColor {
+    return color.uiColor;
+}
 
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle {
     NSDate* startDate = energyData.count > 0 ? ((REMEnergyData*)[energyData objectAtIndex:0]).localTime : [NSDate date];
@@ -55,11 +58,15 @@
             data = self.energyData[index];
             index++;
             if ([data.localTime compare:startDate]==NSOrderedAscending) continue;
-            if ([data.localTime compare:endDate]==NSOrderedDescending) continue;
-            [source addObject:@{@"x":[self.dataProcessor processX:data.localTime], @"y":[self.dataProcessor processY:data.dataValue]}];
+            if ([data.localTime compare:endDate]==NSOrderedDescending) break;
+            [source addObject:@{@"x":[self.dataProcessor processX:data.localTime], @"y":[self.dataProcessor processY:data.dataValue], @"enenrgydata":data}];
         }
         [[self getPlot]reloadData];
     }
+}
+
+-(NSArray*)getCurrentRangeSource {
+    return source;
 }
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
