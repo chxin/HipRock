@@ -77,9 +77,18 @@
 
 -(void)cacheDataOfRange {
     NSUInteger loopEnd = MIN(self.visableRange.location+self.visableRange.length, self.energyData.count);
-    for (NSUInteger i = self.visableRange.location; i < loopEnd; i++) {
-        REMEnergyData* data = self.energyData[i];
-        [source addObject:@{@"x":@(i), @"y":data.dataValue, @"enenrgydata":data}];
+    NSUInteger loopStart = MAX(0, self.visableRange.location);
+    if (self.sortOrder == NSOrderedDescending) {
+        for (NSUInteger i = loopEnd-1; i >= loopStart; i--) {
+            REMEnergyData* data = self.energyData[i];
+            [source addObject:@{@"x":@(self.energyData.count - i - 1), @"y":data.dataValue, @"enenrgydata":data}];
+            if (i==0)break;
+        }
+    } else {
+        for (NSUInteger i = loopStart; i < loopEnd; i++) {
+            REMEnergyData* data = self.energyData[i];
+            [source addObject:@{@"x":@(i), @"y":data.dataValue, @"enenrgydata":data}];
+        }
     }
     [[self getPlot]reloadData];
 }
