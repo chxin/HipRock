@@ -68,9 +68,10 @@
     
     
     [self.view addSubview:searchViewContainer];
+    self.searchView=searchViewContainer;
     
     UIButton *orderButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [orderButton setFrame:CGRectMake(900, self.searchView.frame.origin.y, 32, 32)];
+    [orderButton setFrame:CGRectMake(900, 0, 32, 32)];
     
     [orderButton setImage:[UIImage imageNamed:@"Up"] forState:UIControlStateNormal];
     orderButton.showsTouchWhenHighlighted=YES;
@@ -79,16 +80,19 @@
     [orderButton addTarget:self action:@selector(orderButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.searchView addSubview:orderButton];
     
-
+    self.orderButton=orderButton;
+    
 }
 
 - (void) orderButtonClicked:(UIButton *)button{
+    REMRankingWidgetWrapper *rank=(REMRankingWidgetWrapper *)self.chartWrapper;
     if(button.selected==YES){
         [button setSelected:NO];
-        
+        rank.sortOrder=NSOrderedAscending;
     }
     else{
         [button setSelected:YES];
+        rank.sortOrder=NSOrderedDescending;
     }
 }
 
