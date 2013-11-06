@@ -355,6 +355,21 @@ static NSDateFormatter *_formatter;
     return [f stringFromDate:date];
 }
 
++ (NSString *)formatTimeFullDay:(NSDate *)date
+{
+    NSDateFormatter *f = [REMTimeHelper currentFormatter];
+    [f setDateFormat:@"yyyy-MM-dd"];
+    
+    return [f stringFromDate:date];
+}
+
++ (NSString *)formatTimeRangeFullDay:(REMTimeRange *)range{
+    NSString *start=[REMTimeHelper formatTimeFullDay:range.startTime];
+    NSString *end=[REMTimeHelper formatTimeFullDay:range.endTime];
+    
+    return [NSString stringWithFormat:@"%@ -- %@",start,end];
+}
+
 + (NSString *)formatTimeRangeFullHour:(REMTimeRange *)range{
     NSString *start=[REMTimeHelper formatTimeFullHour:range.startTime isChangeTo24Hour:NO];
     NSString *end=[REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];

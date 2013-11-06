@@ -28,7 +28,7 @@
 
 - (void) initBizView;
 
-- (void) doSearch:(void(^)(REMEnergyViewData *data,REMBusinessErrorInfo *error))callback;
+- (void) doSearchWithModel:(REMWidgetSearchModelBase *)model callback:(void(^)(REMEnergyViewData *data,REMBusinessErrorInfo *error))callback;
 
 - (void) showChart;
 

@@ -9,7 +9,7 @@
 #import "REMWidgetSearchModelBase.h"
 #import "REMWidgetTagSearchModel.h"
 #import "REMWidgetCommoditySearchModel.h"
-
+#import "REMWidgetRankingSearchModel.h"
 
 @implementation REMWidgetSearchModelBase
 
@@ -32,6 +32,14 @@
             dataStoreType == REMDSEnergyCostUnit)
     {
         model = [[REMWidgetCommoditySearchModel alloc]init];
+    }
+    else if(dataStoreType == REMDSEnergyRankingCarbon ||
+            dataStoreType == REMDSEnergyRankingCost ||
+            dataStoreType == REMDSEnergyRankingEnergy){
+        model=[[REMWidgetRankingSearchModel alloc]init];
+    }
+    else if(dataStoreType == REMDSEnergyLabeling){
+        
     }
     [model setModelBySearchParam:param];
     

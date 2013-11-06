@@ -23,6 +23,8 @@
 
 @property (nonatomic,strong) REMWidgetStepEnergyModel *tempModel;
 
+@property (nonatomic,strong) NSArray *supportStepArray;
+
 @end
 
 @implementation REMWidgetEnergyDelegator
@@ -61,8 +63,6 @@
     UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     UINavigationController *nav=[storyboard instantiateViewControllerWithIdentifier:@"datePickerNavigationController"];
     
-    //REMDatePickerViewController *dateViewController=[storyboard instantiateViewControllerWithIdentifier:@"datePickerViewController"];
-    
     UIPopoverController *popoverController=[[UIPopoverController alloc]initWithContentViewController:nav];
     REMDatePickerViewController *dateViewController =nav.childViewControllers[0];
     dateViewController.relativeDate=self.tempModel.relativeDateComponent;
@@ -71,9 +71,10 @@
     dateViewController.datePickerProtocol=self;
     dateViewController.popController=popoverController;
     [popoverController setPopoverContentSize:CGSizeMake(400, 500)];
-    [popoverController presentPopoverFromRect:self.timePickerButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown|UIPopoverArrowDirectionUp animated:YES];
+    CGRect rect= CGRectMake(self.searchView.frame.origin.x, self.searchView.frame.origin.y+self.timePickerButton.frame.size.height+20, self.timePickerButton.frame.size.width, self.timePickerButton.frame.size.height);
+    [popoverController presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown|UIPopoverArrowDirectionUp animated:YES];
+    
     self.datePickerPopoverController=popoverController;
-    //[self performSegueWithIdentifier:@"timePickerSegue" sender:self];
 }
 
 
@@ -260,7 +261,7 @@
     
     [self changeStep:newStep];
     
-    [self doSearch:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
+    [self doSearchWithModel:self.tempModel callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
         if(data!=nil){
             [self changeTimeRange:newRange];
             [self reloadChart];
@@ -275,19 +276,59 @@
     
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+}
+
 - (void)rollback{
     REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
     [self setStepControlStatusByStepNoSearch:stepModel.step];
+    [self setDatePickerButtonValueNoSearchByTimeRange:stepModel.timeRangeArray[0] withRelative:stepModel.relativeDateComponent withRelativeType:stepModel.relativeDateType];
     
 }
 
 - (void)processStepErrorWithAvailableStep:(NSString *)availableStep{
+    NSArray *buttonArray;
+    NSArray *supportStep;
     if([availableStep isEqualToString:@"Monthly"]==YES){
-        
+        buttonArray=@[NSLocalizedString(@"Common_Month", @""),NSLocalizedString(@"Common_Year", @"")];
+        supportStep =@[@(REMEnergyStepMonth),@(REMEnergyStepYear)];
     }
     else if([availableStep isEqualToString:@"Daily"]==YES){
+        buttonArray=@[NSLocalizedString(@"Common_Daily", @""),NSLocalizedString(@"Common_Week", @""),NSLocalizedString(@"Common_Month", @"")];
+        supportStep =@[@(REMEnergyStepDay),@(REMEnergyStepWeek),@(REMEnergyStepMonth)];
+    }
+    else if([availableStep isEqualToString:@"Weekly"]==YES){
+        buttonArray=@[NSLocalizedString(@"Common_Week", @""),NSLocalizedString(@"Common_Month", @""),NSLocalizedString(@"Common_Year", @"")];
+        supportStep =@[@(REMEnergyStepWeek),@(REMEnergyStepMonth),@(REMEnergyStepYear)];
+    }
+    else if([availableStep isEqualToString:@"Yearly"]==YES){
+        buttonArray=@[NSLocalizedString(@"Common_Year", @"")];
+        supportStep =@[@(REMEnergyStepYear)];
+    }
+    else if([availableStep isEqualToString:@"Hourly"]==YES){
+        buttonArray=@[NSLocalizedString(@"Common_Hour", @""),NSLocalizedString(@"Common_Daily", @""),NSLocalizedString(@"Common_Week", @"")];
+        supportStep =@[@(REMEnergyStepHour),@(REMEnergyStepDay),@(REMEnergyStepWeek)];
+    }
+    else{
+        buttonArray=@[];
+    }
+    self.supportStepArray=supportStep;
+    UIAlertView *alert= [[UIAlertView alloc]init];
+    alert.title=@"";
+    for (int i=0; i<buttonArray.count; ++i) {
+        [alert addButtonWithTitle:buttonArray[i]];
         
     }
+    
+    [alert addButtonWithTitle:NSLocalizedString(@"Common_Cancel", @"")];
+    
+    alert.cancelButtonIndex=buttonArray.count;
+    alert.message=NSLocalizedString(@"Widget_StepError", @"");
+    
+    [alert show];
+    
 }
 
 - (void)changeTimeRange:(REMTimeRange *)newRange{
@@ -337,8 +378,9 @@
 
 - (void) setStepControlStatusByStep:(REMEnergyStep)step{
     [self setStepControlStatusByStepNoSearch:step];
-    self.tempModel.step=step;
-    [self doSearch:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
+    [self changeStep:step];
+    
+    [self doSearchWithModel:self.tempModel callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
         if(data!=nil){
             [self changeStep:step];
             [self reloadChart];
@@ -376,7 +418,7 @@
     
     [timePickerButton setImage:[UIImage imageNamed:@"Oil_pressed"] forState:UIControlStateNormal];
     [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, kWidgetDatePickerWidth-40)];
-    [timePickerButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [timePickerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     [timePickerButton addTarget:self action:@selector(showTimePicker) forControlEvents:UIControlEventTouchUpInside];
     

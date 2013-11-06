@@ -8,8 +8,18 @@
 
 #import "REMWidgetBizDelegatorBase.h"
 #import "REMDatePickerViewController.h"
+#import "REMWidgetEnergyDelegator.h"
+#import "REMDimensions.h"
+#import "REMWidgetRankingSearchModel.h"
+
+
 @interface REMWidgetRankingDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol>
 
-
+@property (nonatomic,weak) UIView *searchView;
+@property (nonatomic,weak) UIButton *timePickerButton;
+@property (nonatomic,weak) UIView *legendView;
+@property (nonatomic,weak) UISegmentedControl *legendSearchControl;
+@property (nonatomic,weak) UIView *chartContainer;
+@property (nonatomic,weak) UIButton *orderButton;
 
 @end
