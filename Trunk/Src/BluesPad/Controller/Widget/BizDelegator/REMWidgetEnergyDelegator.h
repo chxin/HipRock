@@ -10,6 +10,7 @@
 #import "REMDatePickerViewController.h"
 #import "REMColor.h"
 #import "REMBuildingViewController.h"
+#import "REMWidgetStepEnergyModel.h"
 #import "REMChartLegendItem.h"
 
 const static CGFloat kLegendSearchSwitcherTop=10;
@@ -30,7 +31,7 @@ typedef enum _REMWidgetLegendType{
 } REMWidgetLegendType;
 
 
-@interface REMWidgetEnergyDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol,REMChartLegendItemDelegate>
+@interface REMWidgetEnergyDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol,UIAlertViewDelegate,REMChartLegendItemDelegate>
 
 @property (nonatomic,weak) UIView *searchView;
 @property (nonatomic,weak) UIButton *timePickerButton;
@@ -42,5 +43,16 @@ typedef enum _REMWidgetLegendType{
 
 - (void)initSearchView;
 - (void)initChartView;
+
+- (void)changeTimeRange:(REMTimeRange *)newRange;
+
+
+- (void)changeStep:(REMEnergyStep) newStep;
+
+
+- (REMEnergyStep) initStepButtonWithRange:(REMTimeRange *)timeRange WithStep:(REMEnergyStep)step;
+
+
+
 
 @end

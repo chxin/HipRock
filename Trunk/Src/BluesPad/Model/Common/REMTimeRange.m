@@ -58,6 +58,19 @@
     return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.startTime forKey:@"StartTime"];
+    [aCoder encodeObject:self.endTime forKey:@"EndTime"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    NSDate *start=[aDecoder decodeObjectForKey:@"StartTime"];
+    NSDate *end=[aDecoder decodeObjectForKey:@"EndTime"];
+    return [self initWithStartTime:start EndTime:end];
+}
+
 -(NSString *)description
 {
     return [NSString stringWithFormat:@"{%f,%f}", [self.startTime timeIntervalSince1970], [self.endTime timeIntervalSince1970] ];

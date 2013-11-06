@@ -8,29 +8,44 @@
 
 #import "REMWidgetBizDelegatorBase.h"
 #import "REMWidgetEnergyDelegator.h"
+#import "REMWidgetRankingDelegator.h"
 
 @implementation REMWidgetBizDelegatorBase
 
 + (REMWidgetBizDelegatorBase *)bizDelegatorByWidgetInfo:(REMWidgetObject *)widgetInfo
 {
-    REMWidgetBizDelegatorBase *base=[[REMWidgetEnergyDelegator alloc]init];
+    REMWidgetBizDelegatorBase *delegator;
+    if(widgetInfo.contentSyntax.dataStoreType == REMDSEnergyRankingCarbon ||
+       widgetInfo.contentSyntax.dataStoreType == REMDSEnergyRankingCost ||
+       widgetInfo.contentSyntax.dataStoreType == REMDSEnergyRankingEnergy){
+        delegator=[[REMWidgetRankingDelegator alloc]init];
+    }
+    else if(widgetInfo.contentSyntax.dataStoreType == REMDSEnergyLabeling){
+        
+    }
+    else{
+        delegator=[[REMWidgetEnergyDelegator alloc]init];
+    }
     
-    
-    return base;
+    return delegator;
 }
 
-- (void)doSearch:(void (^)(REMEnergyViewData *data,REMError *error))callback{
-    [self.searcher queryEnergyDataByStoreType:self.widgetInfo.contentSyntax.dataStoreType andParameters:[self.model toSearchParam] withMaserContainer:self.maskerView  andGroupName:self.groupName callback:^(REMEnergyViewData *energyData){
-    
+- (void)initBizView{}
+
+- (void)showChart{}
+
+- (void)doSearchWithModel:(REMWidgetSearchModelBase *)model callback:(void (^)(REMEnergyViewData *, REMBusinessErrorInfo *))callback
+{
+    [self.searcher queryEnergyDataByStoreType:self.widgetInfo.contentSyntax.dataStoreType andParameters:[model toSearchParam] withMaserContainer:self.maskerView  andGroupName:self.groupName callback:^(REMEnergyViewData *energyData,REMBusinessErrorInfo *errorInfo){
+        
         self.energyData=energyData;
         
         if(callback!=nil){
-            callback(energyData,nil);
+            callback(energyData,errorInfo);
         }
-    
+        
     }];
-     
-
 }
+
 
 @end

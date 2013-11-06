@@ -13,7 +13,7 @@
 
 
 
-@interface REMTimeRange : REMJSONObject
+@interface REMTimeRange : REMJSONObject<NSCoding>
 
 - (id)initWithArray:(NSArray *)array;
 

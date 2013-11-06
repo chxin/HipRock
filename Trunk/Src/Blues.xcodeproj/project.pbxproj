@@ -359,7 +359,6 @@
 		7A9B1E46177B3A8B00C282A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E21177B3A8B00C282A8 /* Foundation.framework */; };
 		7A9B1E6F177B3AFA00C282A8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A9B1E6D177B3AFA00C282A8 /* InfoPlist.strings */; };
 		7AA8838117F92286004D50BC /* REMGalleryCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA8837E17F92286004D50BC /* REMGalleryCollectionCell.m */; };
-		7AAA6777182884F2007AC717 /* REMChartTooltipItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA6776182884F2007AC717 /* REMChartTooltipItem.m */; };
 		7AB34E4C177D2975003E235E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4A177D2975003E235E /* MobileCoreServices.framework */; };
 		7AB34E4D177D2975003E235E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4B177D2975003E235E /* SystemConfiguration.framework */; };
 		7AB34E51177D2CE1003E235E /* REMServiceRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB34E50177D2CE1003E235E /* REMServiceRequestOperation.m */; };
@@ -426,6 +425,10 @@
 		B404428718175EF700A499FB /* Nodata@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B404427F18175EF700A499FB /* Nodata@2x.png */; };
 		B404428818175EF700A499FB /* Up.png in Resources */ = {isa = PBXBuildFile; fileRef = B404428018175EF700A499FB /* Up.png */; };
 		B404428918175EF700A499FB /* Up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B404428118175EF700A499FB /* Up@2x.png */; };
+		B40F011A1828C3DC009650FD /* REMWidgetStepEnergyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B40F01191828C3DC009650FD /* REMWidgetStepEnergyModel.m */; };
+		B40F011D1828DAB7009650FD /* REMWidgetRankingDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B40F011C1828DAB7009650FD /* REMWidgetRankingDelegator.m */; };
+		B40F01201828DAD5009650FD /* REMWidgetLabelingDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B40F011F1828DAD5009650FD /* REMWidgetLabelingDelegator.m */; };
+		B40F01231828DB84009650FD /* REMWidgetMonthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40F01221828DB84009650FD /* REMWidgetMonthPickerViewController.m */; };
 		B41249F01803ECF0009022C5 /* REMCustomerSwitchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
@@ -513,7 +516,6 @@
 		B4B61D7617C742E000245F1E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B61D7517C742E000245F1E /* CoreText.framework */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		B4DC084017F90E2C005658C1 /* REMAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */; };
-		B4E815C7182731C800FB9BC5 /* REMWidgetDetailViewDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E815C6182731C800FB9BC5 /* REMWidgetDetailViewDelegator.m */; };
 		B4E815CB1827326C00FB9BC5 /* REMWidgetSearchModelBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E815CA1827326C00FB9BC5 /* REMWidgetSearchModelBase.m */; };
 		B4E815D11827375200FB9BC5 /* REMWidgetTagSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E815D01827375200FB9BC5 /* REMWidgetTagSearchModel.m */; };
 		B4E815D418273C3000FB9BC5 /* REMWidgetCommoditySearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E815D318273C3000FB9BC5 /* REMWidgetCommoditySearchModel.m */; };
@@ -526,6 +528,7 @@
 		B4EDFB1218064F2900873FA1 /* Share_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4EDFB0E18064F2900873FA1 /* Share_normal@2x.png */; };
 		B4EDFB181806653400873FA1 /* REMEnergyMultiTimeSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EDFB171806653400873FA1 /* REMEnergyMultiTimeSearcher.m */; };
 		B4EDFB1B180697F300873FA1 /* REMControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EDFB1A180697F300873FA1 /* REMControllerBase.m */; };
+		B4F0AF5C182A2B0A00CD8F3A /* REMChartTooltipItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AF5B182A2B0A00CD8F3A /* REMChartTooltipItem.m */; };
 		B4F3F601181E081800C8DF7F /* REMMaxWidgetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F3F600181E081800C8DF7F /* REMMaxWidgetSegue.m */; };
 		B4F4B99E17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
 		B4F4B99F17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
@@ -913,8 +916,6 @@
 		7A9B1EB7177B3B9300C282A8 /* BluesPhoneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BluesPhoneTests.m; path = ../test/BluesPhoneTests/BluesPhoneTests.m; sourceTree = "<group>"; };
 		7AA8837D17F92286004D50BC /* REMGalleryCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMGalleryCollectionCell.h; sourceTree = "<group>"; };
 		7AA8837E17F92286004D50BC /* REMGalleryCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGalleryCollectionCell.m; sourceTree = "<group>"; };
-		7AAA6775182884F2007AC717 /* REMChartTooltipItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartTooltipItem.h; sourceTree = "<group>"; };
-		7AAA6776182884F2007AC717 /* REMChartTooltipItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartTooltipItem.m; sourceTree = "<group>"; };
 		7AB34E46177D2828003E235E /* CommonTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CommonTests-Prefix.pch"; path = "../test/CommonTests/CommonTests-Prefix.pch"; sourceTree = "<group>"; };
 		7AB34E4A177D2975003E235E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		7AB34E4B177D2975003E235E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
@@ -1051,6 +1052,14 @@
 		B404427F18175EF700A499FB /* Nodata@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Nodata@2x.png"; path = "../Dashboard/Nodata@2x.png"; sourceTree = "<group>"; };
 		B404428018175EF700A499FB /* Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Up.png; sourceTree = "<group>"; };
 		B404428118175EF700A499FB /* Up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Up@2x.png"; sourceTree = "<group>"; };
+		B40F01181828C3DC009650FD /* REMWidgetStepEnergyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetStepEnergyModel.h; path = Model/Widget/REMWidgetStepEnergyModel.h; sourceTree = "<group>"; };
+		B40F01191828C3DC009650FD /* REMWidgetStepEnergyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetStepEnergyModel.m; path = Model/Widget/REMWidgetStepEnergyModel.m; sourceTree = "<group>"; };
+		B40F011B1828DAB7009650FD /* REMWidgetRankingDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetRankingDelegator.h; path = BizDelegator/REMWidgetRankingDelegator.h; sourceTree = "<group>"; };
+		B40F011C1828DAB7009650FD /* REMWidgetRankingDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetRankingDelegator.m; path = BizDelegator/REMWidgetRankingDelegator.m; sourceTree = "<group>"; };
+		B40F011E1828DAD5009650FD /* REMWidgetLabelingDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetLabelingDelegator.h; path = BizDelegator/REMWidgetLabelingDelegator.h; sourceTree = "<group>"; };
+		B40F011F1828DAD5009650FD /* REMWidgetLabelingDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetLabelingDelegator.m; path = BizDelegator/REMWidgetLabelingDelegator.m; sourceTree = "<group>"; };
+		B40F01211828DB84009650FD /* REMWidgetMonthPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetMonthPickerViewController.h; sourceTree = "<group>"; };
+		B40F01221828DB84009650FD /* REMWidgetMonthPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetMonthPickerViewController.m; sourceTree = "<group>"; };
 		B41249EE1803ECF0009022C5 /* REMCustomerSwitchHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMCustomerSwitchHelper.h; path = Biz/REMCustomerSwitchHelper.h; sourceTree = "<group>"; };
 		B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMCustomerSwitchHelper.m; path = Biz/REMCustomerSwitchHelper.m; sourceTree = "<group>"; };
 		B4198EAC178410D300B50475 /* REMLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLogManager.h; path = Common/Log/REMLogManager.h; sourceTree = "<group>"; };
@@ -1158,8 +1167,6 @@
 		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		B4DC083E17F90E2C005658C1 /* REMAdministratorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAdministratorModel.h; path = Common/Model/REMAdministratorModel.h; sourceTree = "<group>"; };
 		B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAdministratorModel.m; path = Common/Model/REMAdministratorModel.m; sourceTree = "<group>"; };
-		B4E815C5182731C800FB9BC5 /* REMWidgetDetailViewDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetDetailViewDelegator.h; sourceTree = "<group>"; };
-		B4E815C6182731C800FB9BC5 /* REMWidgetDetailViewDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetDetailViewDelegator.m; sourceTree = "<group>"; };
 		B4E815C91827326C00FB9BC5 /* REMWidgetSearchModelBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetSearchModelBase.h; path = Model/Widget/REMWidgetSearchModelBase.h; sourceTree = "<group>"; };
 		B4E815CA1827326C00FB9BC5 /* REMWidgetSearchModelBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetSearchModelBase.m; path = Model/Widget/REMWidgetSearchModelBase.m; sourceTree = "<group>"; };
 		B4E815CF1827375200FB9BC5 /* REMWidgetTagSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetTagSearchModel.h; path = Model/Widget/REMWidgetTagSearchModel.h; sourceTree = "<group>"; };
@@ -1182,6 +1189,8 @@
 		B4EDFB1A180697F300873FA1 /* REMControllerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMControllerBase.m; path = Controller/REMControllerBase.m; sourceTree = "<group>"; };
 		B4EDFB1C1806983600873FA1 /* REMDimensionForSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensionForSplashScreen.h; path = Resource/Dimensions/REMDimensionForSplashScreen.h; sourceTree = "<group>"; };
 		B4EDFB1D1806983600873FA1 /* REMDimensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensions.h; path = Resource/Dimensions/REMDimensions.h; sourceTree = "<group>"; };
+		B4F0AF5A182A2B0A00CD8F3A /* REMChartTooltipItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartTooltipItem.h; sourceTree = "<group>"; };
+		B4F0AF5B182A2B0A00CD8F3A /* REMChartTooltipItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartTooltipItem.m; sourceTree = "<group>"; };
 		B4F3F5FF181E081800C8DF7F /* REMMaxWidgetSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMaxWidgetSegue.h; path = Resource/Segue/REMMaxWidgetSegue.h; sourceTree = "<group>"; };
 		B4F3F600181E081800C8DF7F /* REMMaxWidgetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMaxWidgetSegue.m; path = Resource/Segue/REMMaxWidgetSegue.m; sourceTree = "<group>"; };
 		B4F4B99C17F16F590096034D /* REMShareInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMShareInfo.h; sourceTree = "<group>"; };
@@ -1559,8 +1568,8 @@
 				B4FFB0CA18191A41004C5404 /* REMDatePickerViewController.m */,
 				B4FFB0C618191A15004C5404 /* REMRelativeDateViewController.h */,
 				B4FFB0C718191A15004C5404 /* REMRelativeDateViewController.m */,
-				B4E815C5182731C800FB9BC5 /* REMWidgetDetailViewDelegator.h */,
-				B4E815C6182731C800FB9BC5 /* REMWidgetDetailViewDelegator.m */,
+				B40F01211828DB84009650FD /* REMWidgetMonthPickerViewController.h */,
+				B40F01221828DB84009650FD /* REMWidgetMonthPickerViewController.m */,
 			);
 			name = Widget;
 			path = Controller/Widget;
@@ -1683,6 +1692,8 @@
 		7A37AA6017AB944B00316902 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				B4F0AF5A182A2B0A00CD8F3A /* REMChartTooltipItem.h */,
+				B4F0AF5B182A2B0A00CD8F3A /* REMChartTooltipItem.m */,
 				7A2F76131810C6C8006C19D8 /* REMScreenEdgetGestureRecognizer.h */,
 				7A2F76141810C6C8006C19D8 /* REMScreenEdgetGestureRecognizer.m */,
 				7A37AA6117AB944B00316902 /* REMNumberLabel.h */,
@@ -1705,8 +1716,6 @@
 				7A0F7C5218279170009E898A /* REMChartLegendItem.m */,
 				7A0F7C5418279528009E898A /* REMChartSeriesIndicator.h */,
 				7A0F7C5518279528009E898A /* REMChartSeriesIndicator.m */,
-				7AAA6775182884F2007AC717 /* REMChartTooltipItem.h */,
-				7AAA6776182884F2007AC717 /* REMChartTooltipItem.m */,
 			);
 			name = Controls;
 			path = View/Controls;
@@ -2517,6 +2526,8 @@
 			children = (
 				B4E815C91827326C00FB9BC5 /* REMWidgetSearchModelBase.h */,
 				B4E815CA1827326C00FB9BC5 /* REMWidgetSearchModelBase.m */,
+				B40F01181828C3DC009650FD /* REMWidgetStepEnergyModel.h */,
+				B40F01191828C3DC009650FD /* REMWidgetStepEnergyModel.m */,
 				B4E815CF1827375200FB9BC5 /* REMWidgetTagSearchModel.h */,
 				B4E815D01827375200FB9BC5 /* REMWidgetTagSearchModel.m */,
 				B4E815D218273C3000FB9BC5 /* REMWidgetCommoditySearchModel.h */,
@@ -2534,6 +2545,10 @@
 				B4E815DD18276F4700FB9BC5 /* REMWidgetBizDelegatorBase.m */,
 				B4E815DF182770B700FB9BC5 /* REMWidgetEnergyDelegator.h */,
 				B4E815E0182770B700FB9BC5 /* REMWidgetEnergyDelegator.m */,
+				B40F011B1828DAB7009650FD /* REMWidgetRankingDelegator.h */,
+				B40F011C1828DAB7009650FD /* REMWidgetRankingDelegator.m */,
+				B40F011E1828DAD5009650FD /* REMWidgetLabelingDelegator.h */,
+				B40F011F1828DAD5009650FD /* REMWidgetLabelingDelegator.m */,
 			);
 			name = BizDelegator;
 			sourceTree = "<group>";
@@ -2951,6 +2966,7 @@
 				B445AEA2177BEEB8002D2A59 /* DDASLLogger.m in Sources */,
 				EF8A47F517F959B5009B5C33 /* REMTrendChartAxisConfig.m in Sources */,
 				EF9ACF6118067CCB00097661 /* REMXFormatter.m in Sources */,
+				B40F011A1828C3DC009650FD /* REMWidgetStepEnergyModel.m in Sources */,
 				B445AEA4177BEEB8002D2A59 /* DDFileLogger.m in Sources */,
 				EF9ACF641806821500097661 /* REMYFormatter.m in Sources */,
 				B445AEA6177BEEB8002D2A59 /* DDLog.m in Sources */,
@@ -2976,12 +2992,12 @@
 				7AB34E51177D2CE1003E235E /* REMServiceRequestOperation.m in Sources */,
 				B42FBF6417F574B5004F2F3A /* REMEnum.m in Sources */,
 				B49B6F511781491800BC130A /* REMColor.m in Sources */,
+				B40F01231828DB84009650FD /* REMWidgetMonthPickerViewController.m in Sources */,
 				B4FED1541804FEF400E0CE58 /* REMEnergySeacherBase.m in Sources */,
 				B4FFB0CF18192238004C5404 /* REMWidgetMaxView.m in Sources */,
 				EF8A47F717F959B5009B5C33 /* REMTrendChartView.m in Sources */,
 				B4E815D418273C3000FB9BC5 /* REMWidgetCommoditySearchModel.m in Sources */,
 				B47ACC2D17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m in Sources */,
-				B4E815C7182731C800FB9BC5 /* REMWidgetDetailViewDelegator.m in Sources */,
 				EFF3BA0718167BA500DD92CF /* REMRankingWidgetWrapper.m in Sources */,
 				B4198EAE178410D300B50475 /* REMLogManager.m in Sources */,
 				B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */,
@@ -3020,7 +3036,7 @@
 				7A153C6117AA489600413D3C /* REMEnergyCalendarData.m in Sources */,
 				B4EDFB181806653400873FA1 /* REMEnergyMultiTimeSearcher.m in Sources */,
 				7A0F7C5618279528009E898A /* REMChartSeriesIndicator.m in Sources */,
-				7AAA6777182884F2007AC717 /* REMChartTooltipItem.m in Sources */,
+				B40F01201828DAD5009650FD /* REMWidgetLabelingDelegator.m in Sources */,
 				B42FBF6117F519F5004F2F3A /* REMWidgetCollectionViewController.m in Sources */,
 				7A153C6217AA489600413D3C /* REMEnergyData.m in Sources */,
 				7A153C6317AA489600413D3C /* REMEnergyError.m in Sources */,
@@ -3059,6 +3075,7 @@
 				7A634BBC180E80140076C84D /* REMSplashMapSegue.m in Sources */,
 				7A5277F617AF4209007DA735 /* REMIndicatorButton.m in Sources */,
 				EF8A480017F959B5009B5C33 /* REMTrendChartSeries.m in Sources */,
+				B40F011D1828DAB7009650FD /* REMWidgetRankingDelegator.m in Sources */,
 				B4626BFC17B0A0D900A7759B /* REMBuildingCommodityView.m in Sources */,
 				EFFE29DB18279C8700F67DB5 /* REMTestChartView.m in Sources */,
 				B4911F4317B0D961007AEF7D /* REMBuildingConstants.m in Sources */,
@@ -3139,6 +3156,7 @@
 				B46C8EC017F27CB9006DC4CB /* REMDashboardCollectionView.m in Sources */,
 				EFFE29D818273E6D00F67DB5 /* REMTrend.m in Sources */,
 				B4EDFB1B180697F300873FA1 /* REMControllerBase.m in Sources */,
+				B4F0AF5C182A2B0A00CD8F3A /* REMChartTooltipItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

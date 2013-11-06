@@ -15,18 +15,18 @@
 
 @interface REMWidgetEnergyDelegator()
 
-@property (nonatomic,strong) NSMutableArray *currentTimeRangeArray;
-@property (nonatomic) REMEnergyStep currentStep;
-@property (nonatomic) REMWidgetLegendType currentLegendType;
 
-@property (nonatomic,strong) NSString *currentRelativeDate;
-@property (nonatomic) REMRelativeTimeRangeType  currentRelativeDateType;
+
 @property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
 
 @property (nonatomic,strong) REMAbstractChartWrapper *chartWrapper;
 
+@property (nonatomic,strong) NSArray *currentStepList;
 @property (nonatomic,weak) UIView *tooltipView;
 
+@property (nonatomic,strong) REMWidgetStepEnergyModel *tempModel;
+
+@property (nonatomic,strong) NSArray *supportStepArray;
 
 @end
 
@@ -47,7 +47,10 @@
     self.model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
                   .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
     self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType];
+    self.tempModel=(REMWidgetStepEnergyModel *)[REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
+                    .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
 }
+
 
 - (void)initChartView{
     UIView *chartContainer=[[UIView alloc]initWithFrame:CGRectMake(kWidgetChartLeftMargin, kWidgetChartTopMargin, kWidgetChartWidth, kWidgetChartHeight)];
@@ -58,7 +61,7 @@
     self.chartContainer.layer.borderWidth=1;
     //[self showEnergyChart];
 
-    [self setStepControlStatusByStep:self.widgetInfo.contentSyntax.stepType];
+    [self setStepControlStatusByStepNoSearch:self.widgetInfo.contentSyntax.stepType];
     [self setDatePickerButtonValueNoSearchByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateComponent withRelativeType:self.widgetInfo.contentSyntax.relativeDateType];
 }
 
@@ -66,19 +69,18 @@
     UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     UINavigationController *nav=[storyboard instantiateViewControllerWithIdentifier:@"datePickerNavigationController"];
     
-    //REMDatePickerViewController *dateViewController=[storyboard instantiateViewControllerWithIdentifier:@"datePickerViewController"];
-    
     UIPopoverController *popoverController=[[UIPopoverController alloc]initWithContentViewController:nav];
     REMDatePickerViewController *dateViewController =nav.childViewControllers[0];
-    dateViewController.relativeDate=self.currentRelativeDate;
-    dateViewController.timeRange=self.currentTimeRangeArray[0];
-    dateViewController.relativeDateType=self.currentRelativeDateType;
+    dateViewController.relativeDate=self.tempModel.relativeDateComponent;
+    dateViewController.timeRange=self.tempModel.timeRangeArray[0];
+    dateViewController.relativeDateType=self.tempModel.relativeDateType;
     dateViewController.datePickerProtocol=self;
     dateViewController.popController=popoverController;
     [popoverController setPopoverContentSize:CGSizeMake(400, 500)];
-    [popoverController presentPopoverFromRect:self.timePickerButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown|UIPopoverArrowDirectionUp animated:YES];
+    CGRect rect= CGRectMake(self.searchView.frame.origin.x, self.searchView.frame.origin.y+self.timePickerButton.frame.size.height+20, self.timePickerButton.frame.size.width, self.timePickerButton.frame.size.height);
+    [popoverController presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown|UIPopoverArrowDirectionUp animated:YES];
+    
     self.datePickerPopoverController=popoverController;
-    //[self performSegueWithIdentifier:@"timePickerSegue" sender:self];
 }
 
 
@@ -135,6 +137,8 @@
     
 }
 
+
+
 - (void) setDatePickerButtonValueNoSearchByTimeRange:(REMTimeRange *)range withRelative:(NSString *)relativeDate withRelativeType:(REMRelativeTimeRangeType)relativeType
 {
     NSString *text=[REMTimeHelper formatTimeRangeFullHour:range];
@@ -144,9 +148,106 @@
     
     [self.timePickerButton setTitle:text1 forState:UIControlStateNormal];
     
-    self.currentRelativeDate=relativeDate;
-    self.currentTimeRangeArray[0]=range;
-    self.currentRelativeDateType=relativeType;
+    self.tempModel.relativeDateComponent=relativeDate;
+    [self.tempModel setTimeRangeItem:range AtIndex:0];
+    self.tempModel.relativeDateType=relativeType;
+}
+
+- (REMEnergyStep) initStepButtonWithRange:(REMTimeRange *)range WithStep:(REMEnergyStep)step{
+    long diff = [range.endTime timeIntervalSinceDate:range.startTime];
+    NSMutableArray *lvs=[[NSMutableArray alloc]initWithCapacity:7];
+    [lvs addObject:[NSNumber numberWithLong:REMDAY]];
+    [lvs addObject:[NSNumber numberWithLong:REMWEEK]];
+    [lvs addObject:[NSNumber numberWithLong:REMDAY*31]];
+    [lvs addObject:[NSNumber numberWithLong:REMDAY*31*3]];
+    [lvs addObject:[NSNumber numberWithLong:REMYEAR]];
+    [lvs addObject:[NSNumber numberWithLong:REMYEAR*2]];
+    
+    [lvs addObject:[NSNumber numberWithLong:REMYEAR*10]];
+    
+    //long[ *lvs = @[REMDAY,REMWEEK,31*REMDAY,31*3*REMDAY,REMYEAR,REMYEAR*2,REMYEAR*10];
+    int i=0;
+    for ( ; i<lvs.count; ++i)
+    {
+        NSNumber *num = lvs[i];
+        if(diff<=[num longValue])
+        {
+            break;
+        }
+    }
+    NSMutableArray *list=[[NSMutableArray alloc] initWithCapacity:3];
+    NSMutableArray *titleList=[[NSMutableArray alloc] initWithCapacity:3];
+    
+    switch (i) {
+        case 0:
+            [list addObject:[NSNumber numberWithInt:1]];
+            [titleList addObject: NSLocalizedString(@"Common_Hour", "")];//小时
+            break;
+        case 1:
+            [list addObject:[NSNumber numberWithInt:1]];
+            [list addObject:[NSNumber numberWithInt:2]];
+            [titleList addObject:NSLocalizedString(@"Common_Hour", "")];//小时
+            [titleList addObject:NSLocalizedString(@"Common_Day", "")];//天
+            break;
+        case 2:
+            [list addObject:[NSNumber numberWithInt:2]];
+            [list addObject:[NSNumber numberWithInt:5]];
+            [titleList addObject:NSLocalizedString(@"Common_Day", "")];//天
+            [titleList addObject:NSLocalizedString(@"Common_Week", "")];//周
+            break;
+        case 3:
+            [list addObject:[NSNumber numberWithInt:2]];
+            [list addObject:[NSNumber numberWithInt:3]];
+            [list addObject:[NSNumber numberWithInt:5]];
+            [titleList addObject:NSLocalizedString(@"Common_Day", "")];//天
+            [titleList addObject:NSLocalizedString(@"Common_Week", "")];//周
+            [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
+            break;
+        case 4:
+            [list addObject:[NSNumber numberWithInt:3]];
+            [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
+            break;
+        case 5:
+            [list addObject:[NSNumber numberWithInt:3]];
+            [list addObject:[NSNumber numberWithInt:4]];
+            [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
+            [titleList addObject:NSLocalizedString(@"Common_Year", "")];//年
+            break;
+        case 6:
+            [list addObject:[NSNumber numberWithInt:3]];
+            [list addObject:[NSNumber numberWithInt:4]];
+            [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
+            [titleList addObject:NSLocalizedString(@"Common_Year", "")];//年
+        default:
+            break;
+    }
+    
+    
+    self.currentStepList=list;
+    [self.stepControl removeAllSegments];
+    
+    [self.stepControl initWithItems:titleList];
+    NSNumber *newStep = [NSNumber numberWithInt:((int)step)];
+    NSUInteger idx;
+    if([list containsObject:newStep] == YES)
+    {
+        idx= [list indexOfObject:newStep];
+    }
+    else
+    {
+        newStep = list[0];
+        idx =  0;
+    }
+    
+    [self.stepControl setSelectedSegmentIndex:idx];
+    
+    
+    return (REMEnergyStep)[newStep intValue];
+}
+
+
+- (void)copyTempModel{
+    self.model=[self.tempModel copy];
 }
 
 - (void)setNewTimeRange:(REMTimeRange *)newRange withRelativeType:(REMRelativeTimeRangeType)relativeType withRelativeDateComponent:(NSString *)newDateComponent
@@ -158,20 +259,91 @@
     
     [self.timePickerButton setTitle:text1 forState:UIControlStateNormal];
     
-    self.model.timeRangeArray = @[newRange];
+    [self changeTimeRange:newRange];
+    
+    REMEnergyStep newStep= [self initStepButtonWithRange:newRange WithStep:self.tempModel.step];
     
     
-    [self doSearch:^(REMEnergyViewData *data,REMError *error){
+    
+    [self changeStep:newStep];
+    
+    [self doSearchWithModel:self.tempModel callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
         if(data!=nil){
-            self.currentRelativeDate=newDateComponent;
-            self.currentTimeRangeArray[0]=newRange;
-            self.currentRelativeDateType=relativeType;
+            [self changeTimeRange:newRange];
             [self reloadChart];
+            [self copyTempModel];
+        }
+        else{
+            if([error.code isEqualToString:@"990001202004"]==YES){ //step error
+                [self processStepErrorWithAvailableStep:error.messages[0]];
+            }
         }
     }];
     
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+}
+
+- (void)rollback{
+    REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
+    [self setStepControlStatusByStepNoSearch:stepModel.step];
+    [self setDatePickerButtonValueNoSearchByTimeRange:stepModel.timeRangeArray[0] withRelative:stepModel.relativeDateComponent withRelativeType:stepModel.relativeDateType];
+    
+}
+
+- (void)processStepErrorWithAvailableStep:(NSString *)availableStep{
+    NSArray *buttonArray;
+    NSArray *supportStep;
+    if([availableStep isEqualToString:@"Monthly"]==YES){
+        buttonArray=@[NSLocalizedString(@"Common_Month", @""),NSLocalizedString(@"Common_Year", @"")];
+        supportStep =@[@(REMEnergyStepMonth),@(REMEnergyStepYear)];
+    }
+    else if([availableStep isEqualToString:@"Daily"]==YES){
+        buttonArray=@[NSLocalizedString(@"Common_Daily", @""),NSLocalizedString(@"Common_Week", @""),NSLocalizedString(@"Common_Month", @"")];
+        supportStep =@[@(REMEnergyStepDay),@(REMEnergyStepWeek),@(REMEnergyStepMonth)];
+    }
+    else if([availableStep isEqualToString:@"Weekly"]==YES){
+        buttonArray=@[NSLocalizedString(@"Common_Week", @""),NSLocalizedString(@"Common_Month", @""),NSLocalizedString(@"Common_Year", @"")];
+        supportStep =@[@(REMEnergyStepWeek),@(REMEnergyStepMonth),@(REMEnergyStepYear)];
+    }
+    else if([availableStep isEqualToString:@"Yearly"]==YES){
+        buttonArray=@[NSLocalizedString(@"Common_Year", @"")];
+        supportStep =@[@(REMEnergyStepYear)];
+    }
+    else if([availableStep isEqualToString:@"Hourly"]==YES){
+        buttonArray=@[NSLocalizedString(@"Common_Hour", @""),NSLocalizedString(@"Common_Daily", @""),NSLocalizedString(@"Common_Week", @"")];
+        supportStep =@[@(REMEnergyStepHour),@(REMEnergyStepDay),@(REMEnergyStepWeek)];
+    }
+    else{
+        buttonArray=@[];
+    }
+    self.supportStepArray=supportStep;
+    UIAlertView *alert= [[UIAlertView alloc]init];
+    alert.title=@"";
+    for (int i=0; i<buttonArray.count; ++i) {
+        [alert addButtonWithTitle:buttonArray[i]];
+        
+    }
+    
+    [alert addButtonWithTitle:NSLocalizedString(@"Common_Cancel", @"")];
+    
+    alert.cancelButtonIndex=buttonArray.count;
+    alert.message=NSLocalizedString(@"Widget_StepError", @"");
+    
+    [alert show];
+    
+}
+
+- (void)changeTimeRange:(REMTimeRange *)newRange{
+   [self.tempModel setTimeRangeItem:newRange AtIndex:0];
+}
+
+- (void)changeStep:(REMEnergyStep)newStep{
+    self.tempModel.step=newStep;
+}
 
 
 - (void)reloadChart{
@@ -181,9 +353,7 @@
     [self showEnergyChart];
 }
 
-
-
-- (void) setStepControlStatusByStep:(REMEnergyStep)step{
+- (void)setStepControlStatusByStepNoSearch:(REMEnergyStep)step{
     NSUInteger pressedIndex;
     if (step == REMEnergyStepHour) {
         pressedIndex=0;
@@ -205,13 +375,33 @@
     }
     if(pressedIndex!=NSNotFound){
         [self.stepControl setSelectedSegmentIndex:pressedIndex];
+        
     }
     
 }
 
 
+
+- (void) setStepControlStatusByStep:(REMEnergyStep)step{
+    [self setStepControlStatusByStepNoSearch:step];
+    [self changeStep:step];
+    
+    [self doSearchWithModel:self.tempModel callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
+        if(data!=nil){
+            [self changeStep:step];
+            [self reloadChart];
+            [self copyTempModel];
+        }
+        else{
+            if([error.code isEqualToString:@"990001202004"]==YES){ //step error
+                [self processStepErrorWithAvailableStep:error.messages[0]];
+            }
+        }
+    }];
+}
+
+
 - (void)initSearchView{
-    self.currentTimeRangeArray=[[NSMutableArray alloc]initWithCapacity:self.widgetInfo.contentSyntax.timeRanges.count];
     
     UIView *searchViewContainer=[[UIView alloc]initWithFrame:kDMChart_ToolbarFrame];
     
@@ -234,7 +424,7 @@
     
     [timePickerButton setImage:[UIImage imageNamed:@"Oil_pressed"] forState:UIControlStateNormal];
     [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, kWidgetDatePickerWidth-40)];
-    [timePickerButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [timePickerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     [timePickerButton addTarget:self action:@selector(showTimePicker) forControlEvents:UIControlEventTouchUpInside];
     
@@ -246,19 +436,18 @@
     
     UISegmentedControl *stepControl=[[UISegmentedControl alloc] initWithItems:@[@"hour",@"day",@"week",@"month",@"year"]];
     [stepControl setFrame:CGRectMake(700, timePickerButton.frame.origin.y, 5*kWidgetStepSingleButtonWidth, 30)];
-    [stepControl setTitle:NSLocalizedString(@"Common_Hour", "") forSegmentAtIndex:0];//小时
-    [stepControl setTitle:NSLocalizedString(@"Common_Day", "") forSegmentAtIndex:1];//天
-    [stepControl setTitle:NSLocalizedString(@"Common_Week", "") forSegmentAtIndex:2];//周
-    [stepControl setTitle:NSLocalizedString(@"Common_Month", "") forSegmentAtIndex:3];//月
-    [stepControl setTitle:NSLocalizedString(@"Common_Year", "") forSegmentAtIndex:4];//年
+    
     
     [searchViewContainer addSubview:stepControl];
     self.stepControl=stepControl;
-    
+    REMTimeRange *timeRange=self.widgetInfo.contentSyntax.timeRanges[0];
+    [self initStepButtonWithRange:timeRange WithStep:self.widgetInfo.contentSyntax.stepType];
     [self.view addSubview:searchViewContainer];
     
-
+    
 }
+
+
 
 -(void)legendSwitchSegmentPressed:(UISegmentedControl *)segment
 {
@@ -332,6 +521,7 @@
 }
 
 #pragma mark - Tooltip
+
 
 -(UIView *)prepareTooltipView
 {

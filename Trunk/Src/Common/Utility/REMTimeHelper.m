@@ -39,7 +39,9 @@
 
 + (NSString *)jsonStringFromDate:(NSDate *)date
 {
-    return [NSString stringWithFormat:@"\"/Date(%f)/\"",[date timeIntervalSince1970]];
+    long long time=(long long)([date timeIntervalSince1970]*1000);
+    NSString *str= [NSString stringWithFormat:@"/Date(%llu)/",time];
+    return str;
 }
 
 + (NSNumber *)numberFromJSONString:(NSString *)jsonDate
@@ -351,6 +353,21 @@ static NSDateFormatter *_formatter;
         return [NSString stringWithFormat:@"%@ %@",mid,@"24:00"];
     }
     return [f stringFromDate:date];
+}
+
++ (NSString *)formatTimeFullDay:(NSDate *)date
+{
+    NSDateFormatter *f = [REMTimeHelper currentFormatter];
+    [f setDateFormat:@"yyyy-MM-dd"];
+    
+    return [f stringFromDate:date];
+}
+
++ (NSString *)formatTimeRangeFullDay:(REMTimeRange *)range{
+    NSString *start=[REMTimeHelper formatTimeFullDay:range.startTime];
+    NSString *end=[REMTimeHelper formatTimeFullDay:range.endTime];
+    
+    return [NSString stringWithFormat:@"%@ -- %@",start,end];
 }
 
 + (NSString *)formatTimeRangeFullHour:(REMTimeRange *)range{

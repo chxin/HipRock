@@ -28,6 +28,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.showHour=YES;
     }
     return self;
 }
@@ -38,7 +39,7 @@
 	// Do any additional setup after loading the view.
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"relativeDateCell"];
     self.cellCount=2;
-    self.navigationController.navigationBar.backItem.title=@"取消";
+    self.navigationController.navigationBar.backItem.title=NSLocalizedString(@"Common_Cancel", @""); //@"取消";
 }
 
 
@@ -77,18 +78,27 @@
     UITableViewCell *startCell= [self.tableView cellForRowAtIndexPath:indexPath];
      label= startCell.contentView.subviews[1];
     label.text=[REMTimeHelper formatTimeFullHour:range.startTime isChangeTo24Hour:NO];
+    if(self.showHour==NO){
+        label.text=[REMTimeHelper formatTimeFullDay:range.startTime];
+    }
     
     if(self.timePickerIndex==1){
         indexPath=[NSIndexPath indexPathForRow:2 inSection:1];
         UITableViewCell *endCell= [self.tableView cellForRowAtIndexPath:indexPath];
         label= endCell.contentView.subviews[1];
         label.text=[REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];
+        if(self.showHour == NO){
+            label.text=[REMTimeHelper formatTimeFullDay:range.endTime];
+        }
     }
     else{
         indexPath=[NSIndexPath indexPathForRow:1 inSection:1];
         UITableViewCell *endCell= [self.tableView cellForRowAtIndexPath:indexPath];
         label= endCell.contentView.subviews[1];
         label.text=[REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];
+        if(self.showHour == NO){
+            label.text=[REMTimeHelper formatTimeFullDay:range.endTime];
+        }
     }
 
     
@@ -146,6 +156,9 @@
             cell.textLabel.text=NSLocalizedString(@"Widget_TimePickerStart", @"");// @"起始";
             UILabel *start=[[UILabel alloc]initWithFrame:cell.contentView.frame];
             start.text=[REMTimeHelper formatTimeFullHour:self.timeRange.startTime isChangeTo24Hour:NO];
+            if(self.showHour==NO){
+                start.text=[REMTimeHelper formatTimeFullDay:self.timeRange.startTime];
+            }
             start.backgroundColor=[UIColor clearColor];
             start.textAlignment=NSTextAlignmentCenter;
             [cell.contentView addSubview:start];
@@ -156,23 +169,39 @@
                 cell.textLabel.text=NSLocalizedString(@"Widget_TimePickerEnd", @"");// @"终止";
                 UILabel *end=[[UILabel alloc]initWithFrame:cell.contentView.frame];
                 end.text=[REMTimeHelper formatTimeFullHour:(NSDate *)self.timeRange.endTime isChangeTo24Hour:YES];
+                if(self.showHour==NO){
+                    end.text=[REMTimeHelper formatTimeFullDay:self.timeRange.endTime];
+                }
                 end.backgroundColor=[UIColor clearColor];
                 end.textAlignment=NSTextAlignmentCenter;
 
                 [cell.contentView addSubview:end];
             }
             else{
-                UIDatePicker *picker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width-20-80, cell.frame.size.height)];
+                CGFloat hourPickerWidth=0;
+                if(self.showHour==YES){
+                    hourPickerWidth=80;
+                }
+                else{
+                    hourPickerWidth=0;
+                }
+                UIDatePicker *picker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width-20-hourPickerWidth, cell.frame.size.height)];
                 [picker setDatePickerMode:UIDatePickerModeDate];
                 [picker addTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
-                UIPickerView *hourPicker=[[UIPickerView alloc]initWithFrame:CGRectMake(picker.frame.size.width, picker.frame.origin.y, 80, picker.frame.size.height)];
-                hourPicker.delegate=self;
-                hourPicker.dataSource=self;
-                hourPicker.showsSelectionIndicator=YES;
+                UIPickerView *hourPicker=nil;
+                if(self.showHour==YES){
+                    hourPicker=[[UIPickerView alloc]initWithFrame:CGRectMake(picker.frame.size.width, picker.frame.origin.y, hourPickerWidth, picker.frame.size.height)];
+                    hourPicker.delegate=self;
+                    hourPicker.dataSource=self;
+                    hourPicker.showsSelectionIndicator=YES;
+                }
+                
                 if(self.timePickerIndex==1){
                     [picker setDate:self.timeRange.startTime];
-                    NSUInteger hour=[REMTimeHelper getHour:self.timeRange.startTime];
-                    [hourPicker selectRow:hour inComponent:0 animated:NO];
+                    if(self.showHour==YES){
+                        NSUInteger hour=[REMTimeHelper getHour:self.timeRange.startTime];
+                        [hourPicker selectRow:hour inComponent:0 animated:NO];
+                    }
                     self.startPicker=picker;
                     self.startHourPicker=hourPicker;
                 }
@@ -187,7 +216,9 @@
                 //UIPickerView *hourPicker=[[UIPickerView alloc]initWithFrame:picker.frame];
                 
                 [cell.contentView addSubview:picker];
-                [cell.contentView addSubview:hourPicker];
+                if(self.showHour==YES){
+                    [cell.contentView addSubview:hourPicker];
+                }
             }
         }
     }
@@ -229,17 +260,27 @@
     
     NSUInteger hours= [hourPicker selectedRowInComponent:0];
     
+    if(self.showHour==NO){
+        hours=0;
+    }
+    
     NSDate *newDate=[REMTimeHelper dateFromYear:year Month:month Day:day Hour:hours];
     
     NSString *ret;
     
     if(picker==self.startPicker){
         ret=[REMTimeHelper formatTimeFullHour:newDate isChangeTo24Hour:NO];
+        if(self.showHour==NO){
+            ret=[REMTimeHelper formatTimeFullDay:newDate];
+        }
         REMTimeRange *newRange=[[REMTimeRange alloc]initWithStartTime:newDate EndTime:self.timeRange.endTime];
         self.timeRange=newRange;
     }
     else{
         ret=[REMTimeHelper formatTimeFullHour:newDate isChangeTo24Hour:YES];
+        if(self.showHour==NO){
+            ret=[REMTimeHelper formatTimeFullDay:newDate];
+        }
         REMTimeRange *newRange=[[REMTimeRange alloc]initWithStartTime:self.timeRange.startTime EndTime:newDate];
         self.timeRange=newRange;
     }
