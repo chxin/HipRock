@@ -11,6 +11,7 @@
 #import "REMDimensions.h"
 #import "REMChartSeriesIndicator.h"
 #import "REMChartLegendItem.h"
+#import "REMChartTooltipItem.h"
 
 @interface REMWidgetEnergyDelegator()
 
@@ -36,6 +37,9 @@
     
     [self initSearchView];
     [self initChartView];
+    
+    //TODO:Temp code, remove when tooltip delegate is ok
+    //[self.view addSubview:[self prepareTooltipView]];
 }
 
 - (void)initModelAndSearcher{
@@ -58,8 +62,6 @@
 
     [self setStepControlStatusByStepNoSearch:self.widgetInfo.contentSyntax.stepType];
     [self setDatePickerButtonValueNoSearchByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateComponent withRelativeType:self.widgetInfo.contentSyntax.relativeDateType];
-    
-    [self registerTooltopEvent];
 }
 
 - (void) showTimePicker{
@@ -519,7 +521,7 @@
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tooltipEventHandler:) name:kREMChartLongPressNotification object:nil];
 }
 
--(void)unregisterTooltopEvent
+-(UIView *)prepareTooltipView
 {
     //[[NSNotificationCenter defaultCenter] removeObserver:self name:kREMChartLongPressNotification object:nil];
 }
@@ -531,7 +533,7 @@
         REMEnergyData* pointData = dic[@"energydata"];
     }
     
-    NSLog(@"item count 2: %d", points.count);
+    return view;
 }
 
 @end
