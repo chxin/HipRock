@@ -93,4 +93,14 @@
     _sortOrder = sortOrder;
     [self cacheDataOfRange];
 }
+-(NSUInteger)getIndexOfCachePointByCoordinate:(double)xCoordinate {
+    int roundX = ceil(xCoordinate);
+    NSUInteger i = 0;
+    for (NSDictionary* dic in source) {
+        if (((NSNumber*)dic[@"x"]).intValue == roundX) break;
+        i++;
+    }
+    if (i >= self.visableRange.length) i = self.visableRange.length-1;
+    return i;
+}
 @end

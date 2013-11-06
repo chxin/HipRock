@@ -77,6 +77,18 @@
     [[self getPlot]reloadData];
 }
 
+-(NSUInteger)getIndexOfCachePointByCoordinate:(double)xCoordinate {
+    int roundX = floor(xCoordinate-0.5);
+    NSUInteger i = 0;
+    for (NSDictionary* dic in source) {
+        if (((NSNumber*)dic[@"x"]).intValue == roundX)
+            break;
+        i++;
+    }
+    if (i >= self.visableRange.length) i = self.visableRange.length;
+    return i;
+}
+
 -(NSArray*)getCurrentRangeSource {
     return source;
 }

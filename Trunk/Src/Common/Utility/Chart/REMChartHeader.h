@@ -107,6 +107,8 @@
 
 @property (nonatomic, assign) NSRange visableRange;
 
+-(NSUInteger)getIndexOfCachePointByCoordinate:(double)xCoordinate;
+
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate;
 
 -(BOOL)isOccupy;
