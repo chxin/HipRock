@@ -50,7 +50,7 @@
         BOOL highlightedXChanged = NO;
         for(NSUInteger i = 0; i < self.series.count; i++) {
             REMTrendChartSeries* s = self.series[i];
-            NSUInteger index = MAX(0, floor(xInCoor.doubleValue - currentXLocation));
+            NSUInteger index = MAX(0, round(xInCoor.doubleValue) - s.visableRange.location);
             NSDictionary* cachedPoint = [[s getCurrentRangeSource] objectAtIndex:index];
             if (i == 0) {
                 NSNumber* xVal = cachedPoint[@"x"];
