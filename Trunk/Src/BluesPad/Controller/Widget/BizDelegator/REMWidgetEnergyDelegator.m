@@ -325,6 +325,10 @@
 {
     //hide or show the series on index according to state
     NSLog(@"Series %d is going to %@", index, state == UIControlStateNormal?@"show":@"hide");
+    
+    if([self.chartWrapper.view isKindOfClass:[REMTrendChartView class]]){
+        [((REMTrendChartView *)self.chartWrapper.view) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
+    }
 }
 
 #pragma mark - Tooltip
