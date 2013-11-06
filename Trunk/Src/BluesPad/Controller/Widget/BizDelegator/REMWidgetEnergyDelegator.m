@@ -60,8 +60,6 @@
 
     [self setStepControlStatusByStep:self.widgetInfo.contentSyntax.stepType];
     [self setDatePickerButtonValueNoSearchByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateComponent withRelativeType:self.widgetInfo.contentSyntax.relativeDateType];
-    
-    [self registerTooltopEvent];
 }
 
 - (void) showTimePicker{
@@ -330,15 +328,6 @@
 }
 
 #pragma mark - Tooltip
--(void)registerTooltopEvent
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tooltipEventHandler:) name:kREMChartLongPressNotification object:nil];
-}
-
--(void)unregisterTooltopEvent
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kREMChartLongPressNotification object:nil];
-}
 
 -(UIView *)prepareTooltipView
 {
