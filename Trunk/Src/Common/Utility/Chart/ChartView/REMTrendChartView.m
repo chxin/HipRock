@@ -44,10 +44,13 @@
         NSMutableArray* targetNames = [[NSMutableArray alloc]init];
         NSNumber* xInCoor = [NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]];
         
+        [plotSpace plotPoint:pressedPoint forPlotAreaViewPoint:CGPointMake(0, 0)];
+        NSNumber* baseInCoor = [NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]];
+        
         BOOL highlightedXChanged = NO;
         for(NSUInteger i = 0; i < self.series.count; i++) {
             REMTrendChartSeries* s = self.series[i];
-            NSUInteger index = floor(xInCoor.doubleValue - currentXLocation);
+            NSUInteger index = MAX(0, floor(xInCoor.doubleValue - currentXLocation));
             NSDictionary* cachedPoint = [[s getCurrentRangeSource] objectAtIndex:index];
             if (i == 0) {
                 NSNumber* xVal = cachedPoint[@"x"];
@@ -403,6 +406,8 @@
         animateRange = [[CPTPlotRange alloc]initWithLocation:[NSDecimalNumber numberWithFloat:(xStableEndPoint-newRangeLength+xStableStartPoint)].decimalValue length:newRange.length];
     }
     if (animateRange != nil) {
+        currentXLocation = animateRange.locationDouble;
+        currentXLength = animateRange.lengthDouble;
         for (REMTrendChartSeries* s in self.series) {
             s.visableRange = NSMakeRange(animateRange.locationDouble, animateRange.lengthDouble);
         }

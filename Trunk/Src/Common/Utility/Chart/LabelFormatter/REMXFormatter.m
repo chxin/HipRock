@@ -59,6 +59,8 @@
             date = [REMTimeHelper addMonthToDate:self.startDate month:xVal*12];
             date = [REMTimeHelper convertLocalDateToGMT:date];
             [dateFormatter setDateFormat:@"yyyy年"];
+        } else {
+            return [NSString stringWithFormat:@"%i", xVal];
         }
         return [dateFormatter stringFromDate:date];
     } else {
