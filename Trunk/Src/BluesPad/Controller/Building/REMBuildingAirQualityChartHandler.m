@@ -1,10 +1,10 @@
-//
-//  REMBuildingAirQualityChartHandler.m
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by tantan on 8/22/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMBuildingAirQualityChartHandler.m
+ * Created      : tantan on 8/22/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMBuildingAirQualityChartHandler.h"
 #import "REMAirQualityDataModel.h"

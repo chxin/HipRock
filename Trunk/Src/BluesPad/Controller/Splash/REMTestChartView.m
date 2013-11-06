@@ -1,10 +1,10 @@
-//
-//  REMTestChartView.m
-//  Blues
-//
-//  Created by Zilong-Oscar.Xu on 11/4/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMTestChartView.m
+ * Created      : Zilong-Oscar.Xu on 11/4/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMTestChartView.h"
 #import "REMChartHeader.h"
@@ -15,6 +15,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        CPTMutableLineStyle* lineStyle = [[CPTMutableLineStyle alloc]init];
+        lineStyle.lineWidth = 1;
+        lineStyle.lineColor = [CPTColor whiteColor];
         CPTGraphHostingView* hostingView = self;
         hostingView.hostedGraph=[[CPTXYGraph alloc] init];
         hostingView.allowPinchScaling = NO;
@@ -26,21 +29,19 @@
         hostingView.hostedGraph.plotAreaFrame.masksToBorder = NO;
         hostingView.backgroundColor = [UIColor blackColor];
         
-        for (NSUInteger i = 0; i < 5; i++) {
-            CPTBarPlot* barPlot = [[CPTBarPlot alloc]init];
+        for (NSUInteger i = 0; i < 10; i++) {
+            CPTScatterPlot* barPlot = [[CPTScatterPlot alloc]init];
             barPlot.dataSource = self;
-            barPlot.barWidth = CPTDecimalFromFloat(.2);
-            barPlot.barOffset = CPTDecimalFromFloat(.2*i);
-            barPlot.fill = [CPTFill fillWithColor:[REMColor colorByIndex:i]];
+           // barPlot.barWidth = CPTDecimalFromFloat(.2);
+           // barPlot.barOffset = CPTDecimalFromFloat(.2*i);
+           // barPlot.fill = [CPTFill fillWithColor:[REMColor colorByIndex:i]];
+            barPlot.dataLineStyle = lineStyle;
             barPlot.delegate = self;
             [hostingView.hostedGraph addPlot:barPlot];
         }
         CPTXYAxisSet* set = (CPTXYAxisSet*)hostingView.hostedGraph.axisSet;
         CPTXYAxis* x = set.xAxis;
         CPTXYAxis* y = set.yAxis;
-        CPTMutableLineStyle* lineStyle = [[CPTMutableLineStyle alloc]init];
-        lineStyle.lineWidth = 1;
-        lineStyle.lineColor = [CPTColor whiteColor];
         x.axisLineStyle = lineStyle;
         y.axisLineStyle = lineStyle;
         x.majorIntervalLength = CPTDecimalFromInt(1);

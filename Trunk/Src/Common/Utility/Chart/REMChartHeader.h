@@ -1,19 +1,28 @@
-//
-//  REMChartHeader.h
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by Zilong-Oscar.Xu on 9/12/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMChartHeader.h
+ * Created      : Zilong-Oscar.Xu on 9/12/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import <Foundation/Foundation.h>
 #import "REMWidgetObject.h"
 #import "REMEnergyData.h"
 #import "CorePlot-CocoaTouch.h"
 #import "REMBuildingConstants.h"
+#import "REMEnergyTargetModel.h"
 #import "REMColor.h"
 
-static NSString* const kREMChartLongPressNotification = @"remtrendlongpress";
+@protocol REMTrendChartDelegate <NSObject>
+/*
+ * points: List<REMEnergyData>
+ * colors: List<UIColor>
+ * names: List<NSString>
+ */
+-(void)highlightPoints:(NSArray*)points colors:(NSArray*)colors names:(NSArray*)names;
+
+@end
 
 
 //@interface REMTrendChartPoint : NSObject
@@ -71,6 +80,8 @@ static NSString* const kREMChartLongPressNotification = @"remtrendlongpress";
 @interface REMTrendChartSeries : REMChartSeries {
 @protected NSMutableArray* source;
 @protected CPTColor* color;
+@protected CPTColor* diabledColor;
+@protected NSNumber* highlightIndex;
 @protected BOOL occupy;   // 所有为YES的序列，在同一个X轴位置的数据点的位置互斥。线图设为false，Bar、Column和StackColumn设为true
 }
 //@property (nonatomic, readonly) NSArray* points;
@@ -80,6 +91,7 @@ static NSString* const kREMChartLongPressNotification = @"remtrendlongpress";
  * 对应的Y轴的index，从0开始
  */
 @property (nonatomic) NSUInteger yAxisIndex;
+@property (nonatomic,weak) REMEnergyTargetModel* target;
 /*
  * 第一个点用processor处理后的x值，作为本序列在x方向上最小值
  */
@@ -99,8 +111,10 @@ static NSString* const kREMChartLongPressNotification = @"remtrendlongpress";
 
 -(BOOL)isOccupy;
 -(UIColor*)getSeriesColor;
--(NSNumber*)maxYValBetween:(int)minX and:(int)maxX;
+-(NSNumber*)maxYInCache;
 -(NSArray*)getCurrentRangeSource;
+-(void)highlightAt:(NSUInteger)index;
+-(void)dehighlight;
 @end
 
 @interface REMTrendChartColumnSeries : REMTrendChartSeries<CPTBarPlotDataSource>
@@ -199,7 +213,7 @@ typedef enum  {
 
 
 @interface REMTrendChartView : CPTGraphHostingView<CPTPlotSpaceDelegate,REMChartView,CPTAnimationDelegate>
-
+@property (nonatomic,weak) id<REMTrendChartDelegate> delegate;
 @property (nonatomic, readonly) NSArray* series;
 @property (nonatomic, readonly) BOOL verticalGridLine;
 @property (nonatomic, readonly) REMTrendChartAxisConfig* xAxisConfig;
@@ -212,7 +226,8 @@ typedef enum  {
 @property (nonatomic, readonly) NSNumber* xGlobalLength;
 
 -(void)renderRange:(float)location length:(float)length;
-
+-(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden;
+-(void)cancelToolTipStatus;
 @end
 
 @interface REMPieChartView : CPTGraphHostingView<CPTPlotSpaceDelegate,REMChartView>

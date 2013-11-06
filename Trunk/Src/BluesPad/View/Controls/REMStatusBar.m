@@ -1,10 +1,10 @@
-//
-//  REMStatusBar.m
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by Zilong-Oscar.Xu on 8/26/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMStatusBar.m
+ * Created      : Zilong-Oscar.Xu on 8/26/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMStatusBar.h"
 #import "REMApplicationInfo.h"

@@ -1,18 +1,16 @@
-//
-//  REMTrendChartRankingSeries.m
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by Zilong-Oscar.Xu on 10/23/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMTrendChartRankingSeries.m
+ * Created      : Zilong-Oscar.Xu on 10/23/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMChartHeader.h"
 #import "REMTargetEnergyData.h"
 
 @interface REMTrendChartRankingSeries()
-/****  ****/
-@property (nonatomic) NSMutableDictionary* dataTargetIdDic; // { key: targetID, value: REMEnergyData }
-@property (nonatomic) NSMutableDictionary* targetIdDic; // { key: targetID, value: REMEnergyTargetModel }
+@property (nonatomic) NSArray* targetNames;
 @end
 
 @implementation REMTrendChartRankingSeries
@@ -21,23 +19,19 @@
     return [self initWithData:energyData dataProcessor:processor plotStyle:plotStyle startDate:[NSDate dateWithTimeIntervalSince1970:0]];
 }
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
-    NSMutableDictionary* dataTargetIdDic = [[NSMutableDictionary alloc]init];
-    NSMutableDictionary* targetIdDic = [[NSMutableDictionary alloc]init];
-
     NSMutableArray* series0Data = [[NSMutableArray alloc]init];
+    NSMutableArray* targets = [[NSMutableArray alloc]init];
     for (int i = 0; i < energyData.count; i++) {
         REMTargetEnergyData* seriesData = [energyData objectAtIndex:i];
         if (seriesData.energyData != nil && seriesData.energyData.count > 0) {
             REMEnergyData* dataPoint = [seriesData.energyData objectAtIndex:0];
             [series0Data addObject:dataPoint];
-            [dataTargetIdDic setObject:dataPoint forKey:seriesData.target.targetId];
-            [targetIdDic setObject:seriesData.target forKey:seriesData.target.targetId];
+            [targets addObject:seriesData.target.name];
         }
     }
     self = [super initWithData:series0Data dataProcessor:processor plotStyle:plotStyle startDate:startDate];
     if (self) {
-        self.dataTargetIdDic = dataTargetIdDic;
-        self.targetIdDic = targetIdDic;
+        self.targetNames = targets;
         self.sortOrder = NSOrderedAscending;
         [self quickSort:series0Data left:0 right:series0Data.count-1];
     }
@@ -75,34 +69,21 @@
     else return yValue;
 }
 
--(NSNumber*)maxYValBetween:(int)minX and:(int)maxX {
-    NSNumber* maxY = [NSNumber numberWithInt:0];
-    int loopStart = MAX(0, minX);
-    int loopEnd = MIN(self.energyData.count, maxX);
+-(void)cacheDataOfRange {
+    NSUInteger loopEnd = MIN(self.visableRange.location+self.visableRange.length, self.energyData.count);
+    NSUInteger loopStart = MAX(0, self.visableRange.location);
     if (self.sortOrder == NSOrderedDescending) {
-        loopStart = self.energyData.count-maxX;
-        loopStart = MAX(0,loopStart);
-        loopEnd = MIN(self.energyData.count, (self.energyData.count-minX));
-    }
-    for (int j = loopStart; j < loopEnd; j++) {
-        NSNumber* yVal = [self numberForPlot:[self getPlot] field:CPTBarPlotFieldBarTip recordIndex:j];
-        if (yVal == nil || yVal == NULL || [yVal isEqual:[NSNull null]] || [yVal isLessThan:([NSNumber numberWithInt:0])]) continue;
-        if ([maxY isLessThan:yVal]) {
-            maxY = yVal;
+        for (NSUInteger i = loopEnd-1; i >= loopStart; i--) {
+            REMEnergyData* data = self.energyData[i];
+            [source addObject:@{@"x":@(self.energyData.count - i - 1), @"y":data.dataValue, @"enenrgydata":data, @"targetname":self.targetNames[i]}];
+            if (i==0)break;
+        }
+    } else {
+        for (NSUInteger i = loopStart; i < loopEnd; i++) {
+            REMEnergyData* data = self.energyData[i];
+            [source addObject:@{@"x":@(i), @"y":data.dataValue, @"enenrgydata":data,@"targetname":self.targetNames[i]}];
         }
     }
-    return maxY;
-}
-
-- (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
-{
-    if (fieldEnum == CPTBarPlotFieldBarLocation) {
-        return [NSNumber numberWithUnsignedInteger:((self.sortOrder == NSOrderedDescending) ? (self.energyData.count-idx-1) :idx)];
-    } else if (fieldEnum == CPTBarPlotFieldBarTip) {
-        REMEnergyData* point = [self.energyData objectAtIndex:idx];
-        return point.dataValue;
-    } else {
-        return nil;
-    }
+    [[self getPlot]reloadData];
 }
 @end

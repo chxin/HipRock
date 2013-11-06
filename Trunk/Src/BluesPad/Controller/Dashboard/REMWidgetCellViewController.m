@@ -1,10 +1,10 @@
-//
-//  REMWidgetCellViewController.m
-//  Blues
-//
-//  Created by tantan on 10/29/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMWidgetCellViewController.m
+ * Created      : tantan on 10/29/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMWidgetCellViewController.h"
 #import "REMBuildingViewController.h"
@@ -28,18 +28,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(chartLongPressed:) name:kREMChartLongPressNotification object:nil];
         // Custom initialization
     }
     return self;
-}
-
--(void)chartLongPressed:(NSNotification*)n {
-    NSArray* points = n.userInfo[@"points"];
-    for (NSDictionary* dic in points) {
-        UIColor* pointColor = dic[@"color"];
-        REMEnergyData* pointData = dic[@"energydata"];
-    }
 }
 
 - (void)viewDidLoad

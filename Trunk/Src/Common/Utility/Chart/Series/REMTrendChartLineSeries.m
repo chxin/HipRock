@@ -1,14 +1,17 @@
-//
-//  REMTrendChartScatterSeries.m
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by Zilong-Oscar.Xu on 9/13/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMTrendChartScatterSeries.m
+ * Created      : Zilong-Oscar.Xu on 9/13/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMChartHeader.h"
 
-@implementation REMTrendChartLineSeries
+@implementation REMTrendChartLineSeries{
+    CPTPlotSymbol* normalSymbol;
+    CPTPlotSymbol* disabledSymbol;
+}
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
     self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle startDate:startDate];
     occupy = NO;
@@ -21,23 +24,24 @@
     CPTScatterPlot* myPlot = (CPTScatterPlot*)plot;
     
     CPTLineStyle* lineStyle = (self.plotStyle == nil ? nil : [self.plotStyle objectForKey:@"lineStyle"]);
-    CPTPlotSymbol* plotSymbol = (self.plotStyle == nil ? nil : [self.plotStyle objectForKey:@"symbol"]);
     
     if (lineStyle == nil) {
         CPTMutableLineStyle* mutStyle = [[CPTMutableLineStyle alloc]init];
         mutStyle.lineWidth = 2;
-        color = [REMColor colorByIndex:selfIndex];
         mutStyle.lineColor = color;
         lineStyle = mutStyle;
     }
-    if (plotSymbol == nil) {
-        plotSymbol = [self getSymbol:selfIndex];
-        plotSymbol.fill = [CPTFill fillWithColor:lineStyle.lineColor];
-        plotSymbol.size = CGSizeMake(12.0, 12.0);
-        plotSymbol.lineStyle = nil;
-    }
+    normalSymbol = [self getSymbol:selfIndex];
+    normalSymbol.fill = [CPTFill fillWithColor:color];
+    normalSymbol.size = CGSizeMake(12.0, 12.0);
+    normalSymbol.lineStyle = nil;
+    
+    disabledSymbol = [self getSymbol:selfIndex];
+    disabledSymbol.fill = [CPTFill fillWithColor:diabledColor];
+    disabledSymbol.size = CGSizeMake(12.0, 12.0);
+    disabledSymbol.lineStyle = nil;
+    
     myPlot.dataLineStyle = lineStyle;
-    myPlot.plotSymbol = plotSymbol;
 }
 
 - (CPTPlotSymbol*) getSymbol:(uint)index {
@@ -79,24 +83,27 @@
     }
     return symbol;
 }
-
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
 {
-    if (self.energyData.count<=idx) {
+    if(source.count<=idx){
         return nil;
     }
-    REMEnergyData* point = [self.energyData objectAtIndex:idx];
+    NSDictionary* point = source[idx];
     if (fieldEnum == CPTScatterPlotFieldX) {
-        return [self.dataProcessor processX:point.localTime];
+        return point[@"x"];
     } else if (fieldEnum == CPTScatterPlotFieldY) {
-        NSNumber* yVal = [self.dataProcessor processY:point.dataValue];
+        NSNumber* yVal =  point[@"y"];;
         if ([yVal isEqual:[NSNull null]]) return yVal;
         else {
-            return [NSNumber numberWithDouble: yVal.doubleValue * self.yScale.doubleValue];
+            return [NSNumber numberWithDouble: yVal.doubleValue / self.yScale.doubleValue];
         }
-        return [self.dataProcessor processY:point.dataValue];
     } else {
         return nil;
     }
+}
+
+-(CPTPlotSymbol *)symbolForScatterPlot:(CPTScatterPlot *)plot recordIndex:(NSUInteger)idx {
+    if (highlightIndex == nil || highlightIndex.unsignedIntegerValue == idx) return normalSymbol;
+    else return disabledSymbol;
 }
 @end

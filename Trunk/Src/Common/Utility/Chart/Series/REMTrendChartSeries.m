@@ -1,10 +1,10 @@
-//
-//  REMTrendChartSeries.m
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by Zilong-Oscar.Xu on 9/13/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMTrendChartSeries.m
+ * Created      : Zilong-Oscar.Xu on 9/13/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMChartHeader.h"
 
@@ -34,6 +34,8 @@
     return self;
 }
 -(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex {
+    color = [REMColor colorByIndex:selfIndex];
+    diabledColor = [CPTColor colorWithCGColor:[color.uiColor colorWithAlphaComponent:0.5].CGColor];
     [super beforePlotAddToGraph:graph seriesList:seriesList selfIndex:selfIndex];
     CPTXYAxis* yAxis = (CPTXYAxis*)[graph.axisSet.axes objectAtIndex:self.yAxisIndex + 1];
     plot.plotSpace = yAxis.plotSpace;
@@ -45,24 +47,34 @@
 }
 
 -(void)setVisableRange:(NSRange)visableRange {
-    if(visableRange.location != self.visableRange.location || visableRange.length == self.visableRange.length) {
+    if(visableRange.location != self.visableRange.location || visableRange.length != self.visableRange.length) {
         [source removeAllObjects];
         _visableRange = visableRange;
-        NSDate* startDate = [self.dataProcessor deprocessX:visableRange.location];
-        NSDate* endDate = [self.dataProcessor deprocessX:visableRange.length+visableRange.location];
-        
-        NSUInteger index = 0;
-        REMEnergyData* data = nil;
-        NSUInteger allDataCount = self.energyData.count;
-        while (index < allDataCount) {
-            data = self.energyData[index];
-            index++;
-            if ([data.localTime compare:startDate]==NSOrderedAscending) continue;
-            if ([data.localTime compare:endDate]==NSOrderedDescending) break;
-            [source addObject:@{@"x":[self.dataProcessor processX:data.localTime], @"y":[self.dataProcessor processY:data.dataValue], @"enenrgydata":data}];
-        }
-        [[self getPlot]reloadData];
+        [self cacheDataOfRange];
     }
+}
+
+-(void)cacheDataOfRange {
+    NSUInteger index = self.visableRange.location;
+    
+    NSUInteger endLocation = self.visableRange.location + self.visableRange.length + 2;
+    for (REMEnergyData* data in self.energyData) {
+        int xVal = [self.dataProcessor processX:data.localTime].intValue;
+        if (xVal < self.visableRange.location) continue;
+        if (xVal > endLocation) break;
+        while (index != xVal) {
+            [source addObject:@{@"x":@(index), @"y":[NSNull null], @"enenrgydata":[NSNull null]}];
+            index++;
+        }
+        [source addObject:@{@"x":@(xVal), @"y":[self.dataProcessor processY:data.dataValue], @"enenrgydata":data}];
+        index++;
+        
+    }
+    while (index < endLocation) {
+        [source addObject:@{@"x":@(index), @"y":[NSNull null], @"enenrgydata":[NSNull null]}];
+        index++;
+    }
+    [[self getPlot]reloadData];
 }
 
 -(NSArray*)getCurrentRangeSource {
@@ -71,28 +83,33 @@
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
-    return self.visableRange.length;
+    return self.visableRange.length+2;
 }
 
 -(BOOL)isOccupy {
     return occupy;
 }
 
--(NSNumber*)maxYValBetween:(int)minX and:(int)maxX {
+
+-(NSNumber*)maxYInCache {
     NSNumber* maxY = [NSNumber numberWithInt:0];
-    NSDate* xStartDate = [self.dataProcessor deprocessX:minX];
-    NSDate* xEndDate = [self.dataProcessor deprocessX:maxX];
-    /*效率还可以改善*/
-    for (int j = 0; j < self.energyData.count; j++) {
-        REMEnergyData* point = [self.energyData objectAtIndex:j];
-        if ([point.localTime timeIntervalSinceDate:xStartDate] < 0) continue;
-        if ([point.localTime timeIntervalSinceDate:xEndDate] > 0) break;
-        NSNumber* yVal = [self.dataProcessor processY:point.dataValue];
+    
+    for (NSDictionary* dic in source) {
+        NSNumber* yVal = dic[@"y"];
         if (yVal == nil || yVal == NULL || [yVal isEqual:[NSNull null]] || [yVal isLessThan:([NSNumber numberWithInt:0])]) continue;
-        if (maxY.floatValue < yVal.floatValue) {
+        if ([maxY isLessThan:yVal]) {
             maxY = yVal;
         }
     }
     return maxY;
+}
+-(void)highlightAt:(NSUInteger)index {
+    highlightIndex = @(index);
+    [[self getPlot]reloadData];
+}
+
+-(void)dehighlight {
+    highlightIndex = nil;
+    [[self getPlot]reloadData];
 }
 @end

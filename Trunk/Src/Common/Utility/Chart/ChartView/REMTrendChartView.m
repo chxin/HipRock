@@ -1,10 +1,10 @@
-//
-//  REMTrendChartView.m
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by Zilong-Oscar.Xu on 9/13/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMTrendChartView.m
+ * Created      : Zilong-Oscar.Xu on 9/13/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMChartHeader.h"
 
@@ -20,7 +20,8 @@
     float xUnstableEndPoint; // 弹性区域不稳定的x轴起点
     BOOL suspendDraw;
     
-    BOOL isLongPressedStatus;
+    BOOL isHighlightedStatus;
+    NSNumber* highlightedX; // 上一个高亮的点的X轴位置
 }
 
 -(void)setNeedsDisplay {
@@ -33,32 +34,64 @@
 -(void)longPress:(UILongPressGestureRecognizer*)recognizer {
     UIGestureRecognizerState gstate = recognizer.state;
     if (gstate == UIGestureRecognizerStateBegan) {
-        isLongPressedStatus = YES;
+        isHighlightedStatus = YES;
         CPTXYPlotSpace* plotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
         NSDecimal pressedPoint[2];
         [plotSpace plotPoint:pressedPoint forPlotAreaViewPoint:[recognizer locationInView:self]];
         
-        NSMutableArray* pointsInTouch = [[NSMutableArray alloc]init];
-        
+        NSMutableArray* points = [[NSMutableArray alloc]init];
+        NSMutableArray* colors = [[NSMutableArray alloc]init];
+        NSMutableArray* targetNames = [[NSMutableArray alloc]init];
         NSNumber* xInCoor = [NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]];
-        for(REMTrendChartSeries* s in self.series) {
-            NSArray* sampleData = [s getCurrentRangeSource];
-            for (NSDictionary* sPoint in sampleData) {
-                NSNumber* xVal = sPoint[@"x"];
-                if (fabs(xVal.doubleValue - xInCoor.doubleValue) <= 0.5) {
-                    [pointsInTouch addObject:@{
-                                               @"color": [s getSeriesColor],
-                                               @"energydata": sPoint[@"enenrgydata"]
-                                               }];
-                    break;
+        
+        BOOL highlightedXChanged = NO;
+        for(NSUInteger i = 0; i < self.series.count; i++) {
+            REMTrendChartSeries* s = self.series[i];
+            NSUInteger index = floor(xInCoor.doubleValue - currentXLocation);
+            NSDictionary* cachedPoint = [[s getCurrentRangeSource] objectAtIndex:index];
+            if (i == 0) {
+                NSNumber* xVal = cachedPoint[@"x"];
+                if (highlightedX == nil || ![xVal isEqualToNumber:highlightedX]) {
+                    highlightedX = xVal;
+                    highlightedXChanged = YES;
                 }
             }
-            NSDate* xDate = [s.dataProcessor deprocessX:xInCoor.floatValue];
-            NSLog(@"%@", xDate);
+            if (highlightedXChanged) {
+                if (cachedPoint) {
+                    [points addObject:cachedPoint[@"enenrgydata"]];
+                } else {
+                    [points addObject:[NSNull null]];
+                }
+                
+                [colors addObject:[s getSeriesColor]];
+                
+                if (s.target) {
+                    [targetNames addObject:s.target.name];
+                } else {
+                    if (cachedPoint) [targetNames addObject:cachedPoint[@"targetname"]];
+                    else [targetNames addObject:[NSNull null]];
+                }
+                
+                [s highlightAt:index];
+            }
         }
-        [[NSNotificationCenter defaultCenter]postNotificationName:kREMChartLongPressNotification object:self userInfo:[NSDictionary dictionaryWithObject:pointsInTouch forKey:@"points"]];
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoints:colors:names:)] && highlightedXChanged) {
+            [self.delegate highlightPoints:points colors:colors names:targetNames];
+        }
     }
 }
+
+//-(NSDictionary*)getSa:(REMTrendChartSeries*)s xInCoor:(NSNumber*)xInCoor {
+//    NSArray* sampleData = [s getCurrentRangeSource];
+//    for (NSDictionary* sPoint in sampleData) {
+//        NSNumber* xVal = sPoint[@"x"];
+//        if (fabs(xVal.doubleValue + 0.5 - xInCoor.doubleValue) <= 0.5) {
+//            return sPoint;
+//        }
+//    }
+//    return nil;
+//}
 
 -(REMTrendChartView*)initWithFrame:(CGRect)frame chartConfig:(REMTrendChartConfig*)config  {
     self = [super initWithFrame:frame];
@@ -129,13 +162,13 @@
     currentXLocation = location;
     currentXLength = length;
     
-    [self rerenderYLabel];
-    
     CPTPlotRange* xRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromFloat(currentXLocation) length:CPTDecimalFromFloat(currentXLength)];
     ((CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace).xRange = xRange;
     for (REMTrendChartSeries* s in self.series) {
-        s.visableRange = NSMakeRange(floor(currentXLocation), ceil(currentXLength));
+        s.visableRange = NSMakeRange(currentXLocation <= 0 ? 0 : floor(currentXLocation), ceil(currentXLength));
     }
+    
+    [self rerenderYLabel];
 
     if (isTheFirstRender == YES) {
         [self rerenderXLabel];
@@ -161,11 +194,9 @@
 
 -(void)rerenderYLabel {
     NSMutableArray* yAxisMaxValues = [[NSMutableArray alloc]initWithCapacity:self.hostedGraph.axisSet.axes.count - 1];
-    int startX = floor(currentXLocation);
-    int endX = ceil(currentXLocation + currentXLength);
     for (int i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = [self.series objectAtIndex:i];
-        NSNumber* maxY = [s maxYValBetween:startX and:endX];
+        NSNumber* maxY = [s maxYInCache];
         if (s.yAxisIndex >= yAxisMaxValues.count) {
             [yAxisMaxValues addObject:maxY];
         } else {
@@ -341,23 +372,23 @@
 
 -(CPTPlotRange*)plotSpace:(CPTXYPlotSpace *)space willChangePlotRangeTo:(CPTPlotRange *)newRange forCoordinate:(CPTCoordinate)coordinate {
     if (coordinate == CPTCoordinateX) {
-        suspendDraw = YES;
-        // Move other plotspace with the default plotspace
-//        for (int i = 2; i < self.hostedGraph.axisSet.axes.count; i++) {
-//            CPTXYPlotSpace* pSpace = (CPTXYPlotSpace*)((CPTXYAxis*)[self.hostedGraph.axisSet.axes objectAtIndex:i]).plotSpace;
-//            pSpace.xRange = newRange;
-//        }
-        float newRangeStart = [NSDecimalNumber decimalNumberWithDecimal:newRange.location].floatValue;
-        float newRangeLength = [NSDecimalNumber decimalNumberWithDecimal:newRange.length].floatValue;
-        if (newRangeStart >= xStableStartPoint && newRangeStart + newRangeLength <= xStableEndPoint) {
-            [self renderRange:newRangeStart length:newRangeLength];
+        if (isHighlightedStatus) {
+            return space.xRange;
+        } else {
+            suspendDraw = YES;
+
+            float newRangeStart = [NSDecimalNumber decimalNumberWithDecimal:newRange.location].floatValue;
+            float newRangeLength = [NSDecimalNumber decimalNumberWithDecimal:newRange.length].floatValue;
+            if (newRangeStart >= xStableStartPoint && newRangeStart + newRangeLength <= xStableEndPoint) {
+                [self renderRange:newRangeStart length:newRangeLength];
+            }
+            suspendDraw = NO;
+            return newRange;
         }
-        suspendDraw = NO;
     } else if (coordinate == CPTCoordinateY) {
         return space.yRange; // disable y scrolling here.
     }
-    
-    return newRange;
+    return nil;
 }
 
 -(BOOL)plotSpace:(CPTXYPlotSpace *)space shouldHandlePointingDeviceUpEvent:(CPTNativeEvent *)event atPoint:(CGPoint)point {
@@ -372,6 +403,9 @@
         animateRange = [[CPTPlotRange alloc]initWithLocation:[NSDecimalNumber numberWithFloat:(xStableEndPoint-newRangeLength+xStableStartPoint)].decimalValue length:newRange.length];
     }
     if (animateRange != nil) {
+        for (REMTrendChartSeries* s in self.series) {
+            s.visableRange = NSMakeRange(animateRange.locationDouble, animateRange.lengthDouble);
+        }
         for (CPTPlotSpace* s in self.hostedGraph.allPlotSpaces) {
             [CPTAnimation animate:s property:@"xRange" fromPlotRange:newRange toPlotRange:animateRange duration:0.2 withDelay:0 animationCurve:CPTAnimationCurveSinusoidalOut delegate:self];
         }
@@ -379,5 +413,18 @@
     return YES;
 }
 
+-(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
+    if (seriesIndex >= self.series.count) return;
+    REMTrendChartSeries* s = self.series[seriesIndex];
+    if ([s getPlot].hidden != hidden) {
+        [[s getPlot] setHidden:hidden];
+    }
+}
+
+-(void)cancelToolTipStatus {
+    for (REMTrendChartSeries* s in self.series) {
+        [s dehighlight];
+    }
+}
 
 @end

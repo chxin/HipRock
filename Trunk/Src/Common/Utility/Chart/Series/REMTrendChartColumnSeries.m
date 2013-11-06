@@ -1,15 +1,18 @@
-//
-//  REMTrendChartColumnSeries.m
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by Zilong-Oscar.Xu on 9/13/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMTrendChartColumnSeries.m
+ * Created      : Zilong-Oscar.Xu on 9/13/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMChartHeader.h"
 #import "REMBarPlot.h"
 
-@implementation REMTrendChartColumnSeries
+@implementation REMTrendChartColumnSeries {
+    CPTFill* normalFill;
+    CPTFill* disabledFill;
+}
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
     self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle startDate:startDate];
     occupy = YES;
@@ -22,15 +25,13 @@
     [super beforePlotAddToGraph:graph seriesList:seriesList selfIndex:selfIndex];
     
     const float pointMargin = 2;  // 左右柱子离minorTick的距离，单位为柱子宽度，即30%*barWidth
-    const float barMargin = 0.08; // 同x轴点柱子间的距离，单位为柱子宽度，即8%*barWidth
+    const float barMargin = 0; // 同x轴点柱子间的距离，单位为柱子宽度，即8%*barWidth
     
     CPTBarPlot* myPlot = (CPTBarPlot*)plot;
-    CPTFill* plotFill = (self.plotStyle == nil ? nil : [self.plotStyle objectForKey:@"fill"]);
-    if (plotFill == nil) {
-        color = [REMColor colorByIndex:selfIndex];
-        plotFill = [CPTFill fillWithColor:color];
-    }
-    myPlot.fill = plotFill;
+    
+    normalFill = [CPTFill fillWithColor:color];
+    disabledFill = [CPTFill fillWithColor:diabledColor];
+    
     myPlot.lineStyle = nil;
     
     float barWidth = 0;
@@ -60,14 +61,19 @@
     if (fieldEnum == CPTBarPlotFieldBarLocation) {
         return point[@"x"];
     } else if (fieldEnum == CPTBarPlotFieldBarTip) {
-        NSNumber* yVal =  point[@"y"];;
+        NSNumber* yVal =  point[@"y"];
         if ([yVal isEqual:[NSNull null]]) return yVal;
         else {
             return [NSNumber numberWithDouble: yVal.doubleValue / self.yScale.doubleValue];
         }
     } else {
-        return nil;
+        return point[@"base"];
     }
+}
+
+-(CPTFill *)barFillForBarPlot:(CPTBarPlot *)barPlot recordIndex:(NSUInteger)idx {
+    if (highlightIndex == nil || highlightIndex.unsignedIntegerValue == idx) return normalFill;
+    else return disabledFill;
 }
 
 //-(CPTNumericData*)dataForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndexRange:(NSRange)indexRange {

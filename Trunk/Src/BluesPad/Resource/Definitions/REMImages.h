@@ -1,10 +1,10 @@
-//
-//  REMImages.h
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by 张 锋 on 10/22/13.
-//
-//  Warning: Content of this file is maintained by external tool,
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMImages.h
+ * Created      : 张 锋 on 10/22/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///  Warning: Content of this file is maintained by external tool,
 //           please do not change its content manually
 //
 //  To update this file, please goto Tools and execute gen-images.py

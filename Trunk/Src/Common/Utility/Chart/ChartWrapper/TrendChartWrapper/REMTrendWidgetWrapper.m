@@ -1,10 +1,10 @@
-//
-//  REMTrendWidget.m
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by Zilong-Oscar.Xu on 9/27/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMTrendWidget.m
+ * Created      : Zilong-Oscar.Xu on 9/27/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMTrendWidgetWrapper.h"
 //@interface REMTrendWidgetWrapper()
@@ -68,7 +68,7 @@
     sharedProcessor.step = self.widgetSyntax.step.intValue;
     sharedProcessor.baseDate = self.baseDateOfX;
     
-    NSNumber* globalLength = [self roundDate:globalEndDate startDate:self.baseDateOfX step:self.widgetSyntax.step.intValue roundToFloor:NO];
+    NSNumber* globalLength = @([self roundDate:globalEndDate startDate:self.baseDateOfX step:self.widgetSyntax.step.intValue roundToFloor:NO].intValue+1);
     return NSMakeRange(0, globalLength.intValue);
 }
 
