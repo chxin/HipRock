@@ -118,6 +118,7 @@
         i++;
     }
     if (i >= self.visableRange.length) i = self.visableRange.length;
+    if (i == 0) i = 1;
     return i;
 }
 @end
