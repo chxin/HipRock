@@ -68,7 +68,7 @@
     sharedProcessor.step = self.widgetSyntax.step.intValue;
     sharedProcessor.baseDate = self.baseDateOfX;
     
-    NSNumber* globalLength = [self roundDate:globalEndDate startDate:self.baseDateOfX step:self.widgetSyntax.step.intValue roundToFloor:NO];
+    NSNumber* globalLength = @([self roundDate:globalEndDate startDate:self.baseDateOfX step:self.widgetSyntax.step.intValue roundToFloor:NO].intValue+1);
     return NSMakeRange(0, globalLength.intValue);
 }
 

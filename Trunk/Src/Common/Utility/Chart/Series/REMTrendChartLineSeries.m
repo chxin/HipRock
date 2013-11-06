@@ -8,7 +8,10 @@
 
 #import "REMChartHeader.h"
 
-@implementation REMTrendChartLineSeries
+@implementation REMTrendChartLineSeries{
+    CPTPlotSymbol* normalSymbol;
+    CPTPlotSymbol* disabledSymbol;
+}
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
     self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle startDate:startDate];
     occupy = NO;
@@ -21,23 +24,24 @@
     CPTScatterPlot* myPlot = (CPTScatterPlot*)plot;
     
     CPTLineStyle* lineStyle = (self.plotStyle == nil ? nil : [self.plotStyle objectForKey:@"lineStyle"]);
-    CPTPlotSymbol* plotSymbol = (self.plotStyle == nil ? nil : [self.plotStyle objectForKey:@"symbol"]);
     
     if (lineStyle == nil) {
         CPTMutableLineStyle* mutStyle = [[CPTMutableLineStyle alloc]init];
         mutStyle.lineWidth = 2;
-        color = [REMColor colorByIndex:selfIndex];
         mutStyle.lineColor = color;
         lineStyle = mutStyle;
     }
-    if (plotSymbol == nil) {
-        plotSymbol = [self getSymbol:selfIndex];
-        plotSymbol.fill = [CPTFill fillWithColor:lineStyle.lineColor];
-        plotSymbol.size = CGSizeMake(12.0, 12.0);
-        plotSymbol.lineStyle = nil;
-    }
+    normalSymbol = [self getSymbol:selfIndex];
+    normalSymbol.fill = [CPTFill fillWithColor:color];
+    normalSymbol.size = CGSizeMake(12.0, 12.0);
+    normalSymbol.lineStyle = nil;
+    
+    disabledSymbol = [self getSymbol:selfIndex];
+    disabledSymbol.fill = [CPTFill fillWithColor:diabledColor];
+    disabledSymbol.size = CGSizeMake(12.0, 12.0);
+    disabledSymbol.lineStyle = nil;
+    
     myPlot.dataLineStyle = lineStyle;
-    myPlot.plotSymbol = plotSymbol;
 }
 
 - (CPTPlotSymbol*) getSymbol:(uint)index {
@@ -96,5 +100,10 @@
     } else {
         return nil;
     }
+}
+
+-(CPTPlotSymbol *)symbolForScatterPlot:(CPTScatterPlot *)plot recordIndex:(NSUInteger)idx {
+    if (highlightIndex == nil || highlightIndex.unsignedIntegerValue == idx) return normalSymbol;
+    else return disabledSymbol;
 }
 @end

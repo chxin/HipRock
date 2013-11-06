@@ -9,7 +9,10 @@
 #import "REMChartHeader.h"
 #import "REMBarPlot.h"
 
-@implementation REMTrendChartColumnSeries
+@implementation REMTrendChartColumnSeries {
+    CPTFill* normalFill;
+    CPTFill* disabledFill;
+}
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
     self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle startDate:startDate];
     occupy = YES;
@@ -22,15 +25,13 @@
     [super beforePlotAddToGraph:graph seriesList:seriesList selfIndex:selfIndex];
     
     const float pointMargin = 2;  // 左右柱子离minorTick的距离，单位为柱子宽度，即30%*barWidth
-    const float barMargin = 0.08; // 同x轴点柱子间的距离，单位为柱子宽度，即8%*barWidth
+    const float barMargin = 0; // 同x轴点柱子间的距离，单位为柱子宽度，即8%*barWidth
     
     CPTBarPlot* myPlot = (CPTBarPlot*)plot;
-    CPTFill* plotFill = (self.plotStyle == nil ? nil : [self.plotStyle objectForKey:@"fill"]);
-    if (plotFill == nil) {
-        color = [REMColor colorByIndex:selfIndex];
-        plotFill = [CPTFill fillWithColor:color];
-    }
-    myPlot.fill = plotFill;
+    
+    normalFill = [CPTFill fillWithColor:color];
+    disabledFill = [CPTFill fillWithColor:diabledColor];
+    
     myPlot.lineStyle = nil;
     
     float barWidth = 0;
@@ -68,6 +69,11 @@
     } else {
         return point[@"base"];
     }
+}
+
+-(CPTFill *)barFillForBarPlot:(CPTBarPlot *)barPlot recordIndex:(NSUInteger)idx {
+    if (highlightIndex == nil || highlightIndex.unsignedIntegerValue == idx) return normalFill;
+    else return disabledFill;
 }
 
 //-(CPTNumericData*)dataForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndexRange:(NSRange)indexRange {
