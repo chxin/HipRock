@@ -8,7 +8,7 @@
 
 #import "REMChartHeader.h"
 @interface REMTrendChartStackColumnSeries ()
-@property (nonatomic) NSMutableArray* convertedValues;  // Stack的基准值
+//@property (nonatomic) NSMutableArray* convertedValues;  // Stack的基准值
 @end
 
 //const NSString* xKey = @"x";
@@ -19,32 +19,38 @@
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
     self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle startDate:startDate];
     occupy = NO;
-    self.convertedValues = [[NSMutableArray alloc]initWithCapacity:self.energyData.count];
+//    self.convertedValues = [[NSMutableArray alloc]initWithCapacity:self.energyData.count];
     return self;
 }
--(NSDictionary*)getPointDicAtX:(NSNumber*)xLocation {
-    NSNumber* pointX = xLocation;
+//-(NSDictionary*)getPointDicAtX:(NSNumber*)xLocation {
+//    NSNumber* pointX = xLocation;
+//    
+//    NSDictionary* pointDic = nil;
+//    for (NSDictionary* pointInArray in self.convertedValues) {
+//        NSNumber* arrayX = (NSNumber*)pointInArray[@"x"];
+//        if ([arrayX isEqualToNumber:pointX]) {
+//            pointDic = pointInArray;
+//            break;
+//        }
+//    }
+//    return pointDic;
+//}
+
+-(void)cacheDataOfRange {
+    NSDate* startDate = [self.dataProcessor deprocessX:self.visableRange.location];
+    NSDate* endDate = [self.dataProcessor deprocessX:self.visableRange.length+self.visableRange.location+2];
     
-    NSDictionary* pointDic = nil;
-    for (NSDictionary* pointInArray in self.convertedValues) {
-        NSNumber* arrayX = (NSNumber*)pointInArray[@"x"];
-        if ([arrayX isEqualToNumber:pointX]) {
-            pointDic = pointInArray;
-            break;
-        }
+    NSUInteger index = 0;
+    REMEnergyData* data = nil;
+    NSUInteger allDataCount = self.energyData.count;
+    while (index < allDataCount) {
+        data = self.energyData[index];
+        index++;
+        if ([data.localTime compare:startDate]==NSOrderedAscending) continue;
+        if ([data.localTime compare:endDate]==NSOrderedDescending) break;
+        [source addObject:@{@"x":[self.dataProcessor processX:data.localTime], @"y":[self.dataProcessor processY:data.dataValue], @"enenrgydata":data}];
     }
-    return pointDic;
-}
--(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
-{
-    NSDictionary* pointDic = self.convertedValues[idx];
-    if (fieldEnum == CPTBarPlotFieldBarLocation) {
-        return [pointDic objectForKey:@"x"];
-    } else if (fieldEnum == CPTBarPlotFieldBarTip) {
-        return [pointDic objectForKey:@"y"];
-    } else {
-        return [pointDic objectForKey:@"base"];
-    }
+    [[self getPlot]reloadData];
 }
 
 -(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex {
@@ -56,24 +62,24 @@
             break;
         }
     }
-    for (int i = 0; i < self.energyData.count; i++) {
-        REMEnergyData* point = self.energyData[i];
-        NSNumber* pointX = [self.dataProcessor processX:point.localTime];
-        
-        REMTrendChartStackColumnSeries* previousSeries = self.previousStackSeries;
-        NSDecimalNumber* baseVal = [NSDecimalNumber decimalNumberWithString:@"0"];
-        if (previousSeries) {
-            NSDictionary* previousPointDic = [previousSeries getPointDicAtX:pointX];
-            if (previousPointDic) {
-                NSNumber* previousY = previousPointDic[@"y"];
-                baseVal = [NSDecimalNumber decimalNumberWithDecimal: previousY.decimalValue];
-            }
-        }
-        NSNumber* pointValue =[self.dataProcessor processY:point.dataValue];
-        NSNumber* pointY = [baseVal decimalNumberByAdding:[NSDecimalNumber decimalNumberWithDecimal:pointValue.decimalValue]];
-        
-        [self.convertedValues setObject:@{ @"x": pointX, @"y":pointY, @"base":baseVal } atIndexedSubscript:i];
-    }
+//    for (int i = 0; i < self.energyData.count; i++) {
+//        REMEnergyData* point = self.energyData[i];
+//        NSNumber* pointX = [self.dataProcessor processX:point.localTime];
+//        
+//        REMTrendChartStackColumnSeries* previousSeries = self.previousStackSeries;
+//        NSDecimalNumber* baseVal = [NSDecimalNumber decimalNumberWithString:@"0"];
+//        if (previousSeries) {
+//            NSDictionary* previousPointDic = [previousSeries getPointDicAtX:pointX];
+//            if (previousPointDic) {
+//                NSNumber* previousY = previousPointDic[@"y"];
+//                baseVal = [NSDecimalNumber decimalNumberWithDecimal: previousY.decimalValue];
+//            }
+//        }
+//        NSNumber* pointValue =[self.dataProcessor processY:point.dataValue];
+//        NSNumber* pointY = [baseVal decimalNumberByAdding:[NSDecimalNumber decimalNumberWithDecimal:pointValue.decimalValue]];
+//        
+//        [self.convertedValues setObject:@{ @"x": pointX, @"y":pointY, @"base":baseVal } atIndexedSubscript:i];
+//    }
     [super beforePlotAddToGraph:graph seriesList:seriesList selfIndex:selfIndex];
 }
 

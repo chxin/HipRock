@@ -54,7 +54,7 @@
 
 -(void)cacheDataOfRange {
     NSDate* startDate = [self.dataProcessor deprocessX:self.visableRange.location];
-    NSDate* endDate = [self.dataProcessor deprocessX:self.visableRange.length+self.visableRange.location+2];
+//    NSDate* endDate = [self.dataProcessor deprocessX:self.visableRange.length+self.visableRange.location+2];
     
     NSUInteger index = 0;
     REMEnergyData* data = nil;
@@ -63,8 +63,13 @@
         data = self.energyData[index];
         index++;
         if ([data.localTime compare:startDate]==NSOrderedAscending) continue;
-        if ([data.localTime compare:endDate]==NSOrderedDescending) break;
-        [source addObject:@{@"x":[self.dataProcessor processX:data.localTime], @"y":[self.dataProcessor processY:data.dataValue], @"enenrgydata":data}];
+        int processedX = [self.dataProcessor processX:data.localTime].intValue;
+        if (processedX >= self.visableRange.length+self.visableRange.location+2) break;
+        if (processedX == index - 1) {
+            [source addObject:@{@"x":@(index-1), @"y":[self.dataProcessor processY:data.dataValue], @"enenrgydata":data}];
+        } else {
+            [source addObject:@{@"x":@(index-1), @"y":[NSNull null], @"enenrgydata":[NSNull null]}];
+        }
     }
     [[self getPlot]reloadData];
 }

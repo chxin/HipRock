@@ -60,13 +60,13 @@
     if (fieldEnum == CPTBarPlotFieldBarLocation) {
         return point[@"x"];
     } else if (fieldEnum == CPTBarPlotFieldBarTip) {
-        NSNumber* yVal =  point[@"y"];;
+        NSNumber* yVal =  point[@"y"];
         if ([yVal isEqual:[NSNull null]]) return yVal;
         else {
             return [NSNumber numberWithDouble: yVal.doubleValue / self.yScale.doubleValue];
         }
     } else {
-        return nil;
+        return point[@"base"];
     }
 }
 
