@@ -12,7 +12,7 @@
 #import "REMWidgetObject.h"
 #import "REMEnergySeacherBase.h"
 #import "REMWidgetSearchModelBase.h"
-#import "REMError.h"
+#import "REMBusinessErrorInfo.h"
 
 @interface REMWidgetBizDelegatorBase : NSObject
 
@@ -28,7 +28,7 @@
 
 - (void) initBizView;
 
-- (void) doSearch:(void(^)(REMEnergyViewData *data,REMError *error))callback;
+- (void) doSearchWithModel:(REMWidgetSearchModelBase *)model callback:(void(^)(REMEnergyViewData *data,REMBusinessErrorInfo *error))callback;
 
 - (void) showChart;
 

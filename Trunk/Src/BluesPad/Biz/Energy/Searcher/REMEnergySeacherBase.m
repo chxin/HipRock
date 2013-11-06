@@ -10,6 +10,8 @@
 #import "REMEnergyMultiTimeSearcher.h"
 #import "REMEnergyViewData.h"
 
+
+
 @implementation REMEnergySeacherBase
 
 + (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType)storeType
@@ -22,7 +24,7 @@
     }
 }
 
-- (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(NSDictionary *)params withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void (^)(id))callback
+- (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(NSDictionary *)params withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void (^)(id,REMBusinessErrorInfo *))callback
 {
     REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:params];
     store.maskContainer=maskerContainer;
@@ -31,12 +33,11 @@
         if([data isEqual:[NSNull null]]==YES)return ;
         REMEnergyViewData *viewData=[[REMEnergyViewData alloc]initWithDictionary:data];
         if(callback!=nil){
-            callback(viewData);
+            callback(viewData,nil);
         }
     
-    } error:^(NSError *error,id response){
-    
-        NSLog(@"error:%@",error);
+    } error:^(NSError *error,REMBusinessErrorInfo *errorInfo){
+        callback(nil,errorInfo);
     }];
 }
 

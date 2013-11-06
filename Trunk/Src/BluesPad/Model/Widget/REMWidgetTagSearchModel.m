@@ -16,7 +16,10 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:3];
     dic[@"tagIds"]=self.tagIdArray;
     NSNumber *step=[self stepNumberByStep:self.step];
-    dic[@"viewOption"]=@{@"Step":step,@"IncludeNavigatorData":@(1),@"TimeRanges":self.timeRangeArray};
+    
+    NSArray *newTimeRangeArray=[self timeRangeToDictionaryArray];
+    
+    dic[@"viewOption"]=@{@"Step":step,@"IncludeNavigatorData":@(1),@"TimeRanges":newTimeRangeArray};
     if(self.industryId!=nil || self.zoneId!=nil){
         dic[@"benchmarkOption"]=@{@"IndustryId":self.industryId,@"ZoneId":self.zoneId};
     }
@@ -28,12 +31,19 @@
     NSArray *tagIds=param[@"tagIds"];
     NSDictionary *viewOption=param[@"viewOption"];
     NSNumber *step=viewOption[@"Step"];
-    NSArray *timeRanges=viewOption[@"TimeRanges"];
-    self.tagIdArray= [NSArray arrayWithArray:tagIds];
+    self.timeRangeArray= [self timeRangeToModelArray: viewOption[@"TimeRanges"]];
+    self.tagIdArray= [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:tagIds]];
     self.step=[self stepTypeByNumber:step];
-    self.timeRangeArray=[NSArray arrayWithArray:timeRanges];
-    
-    
 }
+
+- (id)copyWithZone:(NSZone *)zone{
+    REMWidgetTagSearchModel *model=[super copyWithZone:zone];
+    model.tagIdArray=[NSKeyedUnarchiver unarchiveObjectWithData:
+                         [NSKeyedArchiver archivedDataWithRootObject:self.tagIdArray]];
+    
+    return model;
+}
+
+
 
 @end

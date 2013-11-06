@@ -42,6 +42,9 @@ typedef enum _REMDateTimePart : NSUInteger{
 
 + (NSString *)formatTimeFullHour:(NSDate *)date isChangeTo24Hour:(BOOL)change24Hour;
 
++ (NSString *)formatTimeFullDay:(NSDate *)date;
+
++ (NSString *)formatTimeRangeFullDay:(REMTimeRange *)range;
 
 + (NSString *)formatTimeRangeFullHour:(REMTimeRange *)range;
 
