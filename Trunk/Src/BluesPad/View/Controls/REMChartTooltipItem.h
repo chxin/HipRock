@@ -10,4 +10,6 @@
 
 @interface REMChartTooltipItem : UIControl
 
+- (id)initWithFrame:(CGRect)frame withName:(NSString *)name color:(UIColor *)color andValue:(NSNumber *)dataValue;
+
 @end
