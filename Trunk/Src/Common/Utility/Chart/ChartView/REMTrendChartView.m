@@ -45,12 +45,11 @@
         NSNumber* xInCoor = [NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]];
         
         [plotSpace plotPoint:pressedPoint forPlotAreaViewPoint:CGPointMake(0, 0)];
-        NSNumber* baseInCoor = [NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]];
         
         BOOL highlightedXChanged = NO;
         for(NSUInteger i = 0; i < self.series.count; i++) {
             REMTrendChartSeries* s = self.series[i];
-            NSUInteger index = MAX(0, round(xInCoor.doubleValue) - s.visableRange.location);
+            NSUInteger index = MAX(0, round(xInCoor.doubleValue) - s.visableRange.location -1);
             NSDictionary* cachedPoint = [[s getCurrentRangeSource] objectAtIndex:index];
             if (i == 0) {
                 NSNumber* xVal = cachedPoint[@"x"];
