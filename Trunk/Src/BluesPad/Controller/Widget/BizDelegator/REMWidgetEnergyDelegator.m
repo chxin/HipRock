@@ -22,6 +22,7 @@
 @property (nonatomic,strong) REMAbstractChartWrapper *chartWrapper;
 
 @property (nonatomic,strong) NSArray *currentStepList;
+@property (nonatomic,weak) UIView *tooltipView;
 
 @property (nonatomic,strong) REMWidgetStepEnergyModel *tempModel;
 
@@ -523,7 +524,27 @@
 
 -(UIView *)prepareTooltipView
 {
-    //[[NSNotificationCenter defaultCenter] removeObserver:self name:kREMChartLongPressNotification object:nil];
+    UIScrollView *view = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kDMScreenHeight-kDMStatusBarHeight-kDMChart_TooltipViewHeight, kDMScreenWidth, kDMChart_TooltipViewHeight)];
+    view.layer.borderWidth = 1.0;
+    view.layer.borderColor = [UIColor blackColor].CGColor;
+    view.backgroundColor = [UIColor clearColor];
+    view.contentSize = CGSizeMake(kDMScreenWidth, kDMChart_ToolbarHeight);
+    view.pagingEnabled = NO;
+    view.showsHorizontalScrollIndicator = NO;
+    view.showsVerticalScrollIndicator = NO;
+    
+    int count = 4;
+    CGFloat itemWidth = (kDMScreenWidth - (count + 1) * kDMChart_TooltipItemLeftOffset) / count;
+    
+    for(int i=0;i<4;i++){
+        CGRect itemFrame = CGRectMake(kDMChart_TooltipItemTopOffset, (itemWidth * i) + kDMChart_TooltipItemLeftOffset, itemWidth, kDMChart_TooltipItemHeight);
+        NSLog(@"frame of %dth item: %@", i, NSStringFromCGRect(itemFrame));
+        REMChartTooltipItem *tooltipItem = [[REMChartTooltipItem alloc] initWithFrame:itemFrame withName:@"aaaaa" color:[REMColor colorByIndex:i].uiColor andValue:@(i)];
+        
+        [view addSubview:tooltipItem];
+    }
+    
+    return view;
 }
 
 -(void)tooltipEventHandler:(NSNotification*)notification {
