@@ -516,12 +516,12 @@
 #pragma mark - Tooltip
 -(void)registerTooltopEvent
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tooltipEventHandler:) name:kREMChartLongPressNotification object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tooltipEventHandler:) name:kREMChartLongPressNotification object:nil];
 }
 
 -(void)unregisterTooltopEvent
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kREMChartLongPressNotification object:nil];
+    //[[NSNotificationCenter defaultCenter] removeObserver:self name:kREMChartLongPressNotification object:nil];
 }
 
 -(void)tooltipEventHandler:(NSNotification*)notification {
