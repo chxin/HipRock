@@ -45,7 +45,7 @@
             NSArray* sampleData = [s getCurrentRangeSource];
             for (NSDictionary* sPoint in sampleData) {
                 NSNumber* xVal = sPoint[@"x"];
-                if (fabs(xVal.doubleValue - xInCoor.doubleValue) <= 0.5) {
+                if (fabs(xVal.doubleValue + 0.5 - xInCoor.doubleValue) <= 0.5) {
                     [pointsInTouch addObject:@{
                                                @"color": [s getSeriesColor],
                                                @"energydata": sPoint[@"enenrgydata"]
@@ -53,8 +53,6 @@
                     break;
                 }
             }
-            NSDate* xDate = [s.dataProcessor deprocessX:xInCoor.floatValue];
-            NSLog(@"%@", xDate);
         }
         [[NSNotificationCenter defaultCenter]postNotificationName:kREMChartLongPressNotification object:self userInfo:[NSDictionary dictionaryWithObject:pointsInTouch forKey:@"points"]];
     }
@@ -379,5 +377,12 @@
     return YES;
 }
 
+-(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
+    if (seriesIndex >= self.series.count) return;
+    REMTrendChartSeries* s = self.series[seriesIndex];
+    if ([s getPlot].hidden != hidden) {
+        [[s getPlot] setHidden:hidden];
+    }
+}
 
 @end
