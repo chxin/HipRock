@@ -1,12 +1,12 @@
-//
-//  REMChartSeriesLegend.m
-//  Blues
-//
-//  Created by 张 锋 on 11/4/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMChartSeriesLegend.m
+ * Created      : 张 锋 on 11/4/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
-#import "REMChartSeriesLegend.h"
+#import "REMChartLegendItem.h"
 #import "REMChartSeriesIndicator.h"
 #import "REMDimensions.h"
 #import "REMCommonHeaders.h"
@@ -18,7 +18,7 @@
 
 #define kREMLegendInnerLabelFrame CGRectMake(kDMChart_LegendIndicatorLeftOffset + kDMChart_LegendIndicatorSize + kDMChart_LegendLabelLeftOffset, kDMChart_LegendLabelTopOffset, kDMChart_LegendItemWidth - (kDMChart_LegendIndicatorLeftOffset + kDMChart_LegendIndicatorSize + kDMChart_LegendLabelLeftOffset), kDMChart_LegendLabelFontSize+1)
 
-@interface REMChartSeriesLegend()
+@interface REMChartLegendItem()
 
 @property (nonatomic,weak) REMChartSeriesIndicator *indicator;
 @property (nonatomic,weak) UILabel *label;
@@ -26,9 +26,9 @@
 @end
 
 
-@implementation REMChartSeriesLegend
+@implementation REMChartLegendItem
 
--(REMChartSeriesLegend *)initWithSeriesIndex:(int)index type:(REMChartSeriesIndicatorType)type andName:(NSString *)name
+-(REMChartLegendItem *)initWithSeriesIndex:(int)index type:(REMChartSeriesIndicatorType)type andName:(NSString *)name
 {
     self = [super initWithFrame:kREMLegendItemFrame];
     if(self){

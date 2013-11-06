@@ -1,10 +1,10 @@
-//
-//  REMTrendChartStackColumnSeries.m
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by Zilong-Oscar.Xu on 10/23/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMTrendChartStackColumnSeries.m
+ * Created      : Zilong-Oscar.Xu on 10/23/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMChartHeader.h"
 @interface REMTrendChartStackColumnSeries ()

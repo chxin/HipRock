@@ -1,10 +1,10 @@
-//
-//  REMMarkerBubbleView.m
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by 张 锋 on 10/28/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMMarkerBubbleView.m
+ * Created      : 张 锋 on 10/28/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMMarkerBubbleView.h"
 #import "REMBuildingModel.h"

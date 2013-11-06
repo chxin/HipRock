@@ -1,16 +1,16 @@
-//
-//  REMWidgetEnergyDelegator.m
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by tantan on 11/4/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMWidgetEnergyDelegator.m
+ * Created      : tantan on 11/4/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMWidgetEnergyDelegator.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMDimensions.h"
 #import "REMChartSeriesIndicator.h"
-#import "REMChartSeriesLegend.h"
+#import "REMChartLegendItem.h"
 
 @interface REMWidgetEnergyDelegator()
 
@@ -54,6 +54,8 @@
 
     [self setStepControlStatusByStep:self.widgetInfo.contentSyntax.stepType];
     [self setDatePickerButtonValueNoSearchByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateComponent withRelativeType:self.widgetInfo.contentSyntax.relativeDateType];
+    
+    [self registerTooltopEvent];
 }
 
 - (void) showTimePicker{
@@ -284,6 +286,8 @@
     }
 }
 
+#pragma mark - Legend bar
+
 -(UIView *)prepareLegendView
 {
     CGFloat scrollViewContentWidth = (kDMChart_LegendItemWidth + kDMChart_LegendItemLeftOffset) * self.energyData.targetEnergyData.count + kDMChart_LegendItemLeftOffset;
@@ -303,7 +307,7 @@
         CGFloat x = i * (kDMChart_LegendItemWidth + kDMChart_LegendItemLeftOffset) + kDMChart_LegendItemLeftOffset;
         CGFloat y = (kDMChart_ToolbarHeight - kDMChart_LegendItemHeight) / 2;
         
-        REMChartSeriesLegend *legend = [[REMChartSeriesLegend alloc] initWithSeriesIndex:i type:indicatorType andName:targetData.target.name];
+        REMChartLegendItem *legend = [[REMChartLegendItem alloc] initWithSeriesIndex:i type:indicatorType andName:targetData.target.name];
         legend.frame = CGRectMake(x, y, kDMChart_LegendItemWidth, kDMChart_LegendItemHeight);
         legend.delegate = self;
         
@@ -319,5 +323,25 @@
     NSLog(@"Series %d is going to %@", index, state == UIControlStateNormal?@"show":@"hide");
 }
 
+#pragma mark - Tooltip
+-(void)registerTooltopEvent
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tooltipEventHandler:) name:kREMChartLongPressNotification object:nil];
+}
+
+-(void)unregisterTooltopEvent
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kREMChartLongPressNotification object:nil];
+}
+
+-(void)tooltipEventHandler:(NSNotification*)notification {
+    NSArray* points = notification.userInfo[@"points"];
+    for (NSDictionary* dic in points) {
+        UIColor* pointColor = dic[@"color"];
+        REMEnergyData* pointData = dic[@"energydata"];
+    }
+    
+    NSLog(@"item count 2: %d", points.count);
+}
 
 @end

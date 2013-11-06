@@ -1,10 +1,10 @@
-//
-//  REMStorage.h
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by 徐 子龙 on 13-7-4.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMStorage.h
+ * Created      : 徐 子龙 on 13-7-4.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import <Foundation/Foundation.h>
 
