@@ -38,47 +38,45 @@
     return model;
 }
 
-- (REMEnergyStep)stepTypeByNumber:(NSNumber *)stepNumber
+- (NSArray *)timeRangeToDictionaryArray
 {
-    if ([stepNumber isEqualToNumber:@(1)]== YES) {
-        return REMEnergyStepHour;
-    }
-    else if([stepNumber isEqualToNumber:@(2)]==YES){
-        return REMEnergyStepDay;
-    }
-    else if([stepNumber isEqualToNumber:@(3)]==YES){
-        return REMEnergyStepMonth;
-    }
-    else if([stepNumber isEqualToNumber:@(4)]==YES){
-        return REMEnergyStepYear;
-    }
-    else if([stepNumber isEqualToNumber:@(5)]==YES){
-        return REMEnergyStepWeek;
+    NSMutableArray *newTimeRangeArray=[[NSMutableArray alloc]initWithCapacity:self.timeRangeArray.count];
+    
+    for (int i=0; i<self.timeRangeArray.count; ++i) {
+        REMTimeRange *range= self.timeRangeArray[i];
+        [newTimeRangeArray addObject:@{@"StartTime":[REMTimeHelper jsonStringFromDate:range.startTime],@"EndTime":[REMTimeHelper jsonStringFromDate:range.endTime]}];
     }
     
-    return REMEnergyStepNone;
+    return newTimeRangeArray;
 }
 
-- (NSNumber *)stepNumberByStep:(REMEnergyStep)stepType{
-    NSNumber *step;
-    if(stepType == REMEnergyStepHour){
-        step=@(1);
-    }
-    else if(stepType== REMEnergyStepDay){
-        step=@(2);
-    }
-    else if(stepType == REMEnergyStepWeek){
-        step=@(5);
-    }
-    else if(stepType == REMEnergyStepMonth){
-        step=@(3);
-    }
-    else if(stepType == REMEnergyStepYear){
-        step=@(4);
+- (void)setTimeRangeItem:(REMTimeRange *)range AtIndex:(NSUInteger)index
+{
+    NSMutableArray *newArray=[self.timeRangeArray mutableCopy];
+    newArray[index]=range;
+    self.timeRangeArray=newArray;
+}
+
+- (NSArray *)timeRangeToModelArray:(NSArray *)array
+{
+    NSMutableArray *newArray=[[NSMutableArray alloc]initWithCapacity:array.count];
+    for (int i=0; i<array.count; ++i) {
+        REMTimeRange *range=[[REMTimeRange alloc]initWithDictionary:array[i]];
+        [newArray addObject:range];
     }
     
-    return step;
-
+    return newArray;
 }
+
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    REMWidgetSearchModelBase *base=[[[self class]allocWithZone:zone]init];
+    base.timeRangeArray=[NSKeyedUnarchiver unarchiveObjectWithData:
+                         [NSKeyedArchiver archivedDataWithRootObject:self.timeRangeArray]];
+    
+    return base;
+}
+
 
 @end

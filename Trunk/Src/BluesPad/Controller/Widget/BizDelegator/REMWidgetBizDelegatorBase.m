@@ -19,13 +19,17 @@
     return base;
 }
 
-- (void)doSearch:(void (^)(REMEnergyViewData *data,REMError *error))callback{
-    [self.searcher queryEnergyDataByStoreType:self.widgetInfo.contentSyntax.dataStoreType andParameters:[self.model toSearchParam] withMaserContainer:self.maskerView  andGroupName:self.groupName callback:^(REMEnergyViewData *energyData){
+- (void)initBizView{}
+
+- (void)showChart{}
+
+- (void)doSearch:(void (^)(REMEnergyViewData *data,REMBusinessErrorInfo *error))callback{
+    [self.searcher queryEnergyDataByStoreType:self.widgetInfo.contentSyntax.dataStoreType andParameters:[self.model toSearchParam] withMaserContainer:self.maskerView  andGroupName:self.groupName callback:^(REMEnergyViewData *energyData,REMBusinessErrorInfo *errorInfo){
     
         self.energyData=energyData;
         
         if(callback!=nil){
-            callback(energyData,nil);
+            callback(energyData,errorInfo);
         }
     
     }];

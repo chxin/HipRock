@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "REMEnum.h"
+#import "REMTimeRange.h"
 
 
 @protocol REMWidgetSearchModelInterface <NSObject>
@@ -18,14 +19,21 @@
 
 @end
 
-@interface REMWidgetSearchModelBase : NSObject<REMWidgetSearchModelInterface>
+@interface REMWidgetSearchModelBase : NSObject<REMWidgetSearchModelInterface,NSCopying>
 
 @property (nonatomic,strong) NSArray *timeRangeArray;
 
 + (REMWidgetSearchModelBase *)searchModelByDataStoreType:(REMDataStoreType)dataStoreType withParam:(NSDictionary *)param;
 
-- (NSNumber *)stepNumberByStep:(REMEnergyStep)stepType;
+- (void) setTimeRangeItem:(REMTimeRange *)range AtIndex:(NSUInteger)index;
 
-- (REMEnergyStep)stepTypeByNumber:(NSNumber *)stepNumber;
+- (NSArray *)timeRangeToDictionaryArray;
+
+
+-(NSArray *)timeRangeToModelArray:(NSArray *)array;
+
+
+
+
 
 @end

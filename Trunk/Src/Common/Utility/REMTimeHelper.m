@@ -39,7 +39,9 @@
 
 + (NSString *)jsonStringFromDate:(NSDate *)date
 {
-    return [NSString stringWithFormat:@"\"/Date(%f)/\"",[date timeIntervalSince1970]];
+    long long time=(long long)([date timeIntervalSince1970]*1000);
+    NSString *str= [NSString stringWithFormat:@"/Date(%llu)/",time];
+    return str;
 }
 
 + (NSNumber *)numberFromJSONString:(NSString *)jsonDate

@@ -7,12 +7,10 @@
 //
 
 #import "REMWidgetSearchModelBase.h"
+#import "REMWidgetStepEnergyModel.h"
 
-@interface REMWidgetTagSearchModel : REMWidgetSearchModelBase
+@interface REMWidgetTagSearchModel : REMWidgetStepEnergyModel
 
 @property (nonatomic,strong) NSArray *tagIdArray;
-@property (nonatomic) REMEnergyStep step;
-@property (nonatomic,strong) NSNumber *zoneId;
-@property (nonatomic,strong) NSNumber *industryId;
 
 @end
