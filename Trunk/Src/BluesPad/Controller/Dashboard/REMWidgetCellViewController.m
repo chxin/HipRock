@@ -28,18 +28,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(chartLongPressed:) name:kREMChartLongPressNotification object:nil];
         // Custom initialization
     }
     return self;
-}
-
--(void)chartLongPressed:(NSNotification*)n {
-    NSArray* points = n.userInfo[@"points"];
-    for (NSDictionary* dic in points) {
-        UIColor* pointColor = dic[@"color"];
-        REMEnergyData* pointData = dic[@"energydata"];
-    }
 }
 
 - (void)viewDidLoad

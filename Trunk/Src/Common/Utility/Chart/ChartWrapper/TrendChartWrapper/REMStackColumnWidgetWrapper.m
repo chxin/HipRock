@@ -16,6 +16,7 @@
     
     REMTargetEnergyData* targetEnergyData = (REMTargetEnergyData*)self.energyViewData.targetEnergyData[seriesIndex];
     REMTrendChartStackColumnSeries* s =[[REMTrendChartStackColumnSeries alloc]initWithData:targetEnergyData.energyData dataProcessor:sharedProcessor plotStyle:nil startDate:self.baseDateOfX];
+    s.target = targetEnergyData.target;
     s.uomId = targetEnergyData.target.uomId;
     s.uomName = targetEnergyData.target.uomName;
     return s;

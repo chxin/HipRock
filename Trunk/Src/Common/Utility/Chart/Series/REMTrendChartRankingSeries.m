@@ -10,9 +10,7 @@
 #import "REMTargetEnergyData.h"
 
 @interface REMTrendChartRankingSeries()
-/****  ****/
-@property (nonatomic) NSMutableDictionary* dataTargetIdDic; // { key: targetID, value: REMEnergyData }
-@property (nonatomic) NSMutableDictionary* targetIdDic; // { key: targetID, value: REMEnergyTargetModel }
+@property (nonatomic) NSArray* targetNames;
 @end
 
 @implementation REMTrendChartRankingSeries
@@ -21,23 +19,19 @@
     return [self initWithData:energyData dataProcessor:processor plotStyle:plotStyle startDate:[NSDate dateWithTimeIntervalSince1970:0]];
 }
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
-    NSMutableDictionary* dataTargetIdDic = [[NSMutableDictionary alloc]init];
-    NSMutableDictionary* targetIdDic = [[NSMutableDictionary alloc]init];
-
     NSMutableArray* series0Data = [[NSMutableArray alloc]init];
+    NSMutableArray* targets = [[NSMutableArray alloc]init];
     for (int i = 0; i < energyData.count; i++) {
         REMTargetEnergyData* seriesData = [energyData objectAtIndex:i];
         if (seriesData.energyData != nil && seriesData.energyData.count > 0) {
             REMEnergyData* dataPoint = [seriesData.energyData objectAtIndex:0];
             [series0Data addObject:dataPoint];
-            [dataTargetIdDic setObject:dataPoint forKey:seriesData.target.targetId];
-            [targetIdDic setObject:seriesData.target forKey:seriesData.target.targetId];
+            [targets addObject:seriesData.target.name];
         }
     }
     self = [super initWithData:series0Data dataProcessor:processor plotStyle:plotStyle startDate:startDate];
     if (self) {
-        self.dataTargetIdDic = dataTargetIdDic;
-        self.targetIdDic = targetIdDic;
+        self.targetNames = targets;
         self.sortOrder = NSOrderedAscending;
         [self quickSort:series0Data left:0 right:series0Data.count-1];
     }
@@ -81,13 +75,13 @@
     if (self.sortOrder == NSOrderedDescending) {
         for (NSUInteger i = loopEnd-1; i >= loopStart; i--) {
             REMEnergyData* data = self.energyData[i];
-            [source addObject:@{@"x":@(self.energyData.count - i - 1), @"y":data.dataValue, @"enenrgydata":data}];
+            [source addObject:@{@"x":@(self.energyData.count - i - 1), @"y":data.dataValue, @"enenrgydata":data, @"targetname":self.targetNames[i]}];
             if (i==0)break;
         }
     } else {
         for (NSUInteger i = loopStart; i < loopEnd; i++) {
             REMEnergyData* data = self.energyData[i];
-            [source addObject:@{@"x":@(i), @"y":data.dataValue, @"enenrgydata":data}];
+            [source addObject:@{@"x":@(i), @"y":data.dataValue, @"enenrgydata":data,@"targetname":self.targetNames[i]}];
         }
     }
     [[self getPlot]reloadData];

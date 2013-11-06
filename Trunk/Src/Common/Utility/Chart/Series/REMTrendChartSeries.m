@@ -34,6 +34,8 @@
     return self;
 }
 -(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex {
+    color = [REMColor colorByIndex:selfIndex];
+    diabledColor = [CPTColor colorWithCGColor:[color.uiColor colorWithAlphaComponent:0.5].CGColor];
     [super beforePlotAddToGraph:graph seriesList:seriesList selfIndex:selfIndex];
     CPTXYAxis* yAxis = (CPTXYAxis*)[graph.axisSet.axes objectAtIndex:self.yAxisIndex + 1];
     plot.plotSpace = yAxis.plotSpace;
@@ -53,23 +55,24 @@
 }
 
 -(void)cacheDataOfRange {
-    NSDate* startDate = [self.dataProcessor deprocessX:self.visableRange.location];
-//    NSDate* endDate = [self.dataProcessor deprocessX:self.visableRange.length+self.visableRange.location+2];
+    NSUInteger index = self.visableRange.location;
     
-    NSUInteger index = 0;
-    REMEnergyData* data = nil;
-    NSUInteger allDataCount = self.energyData.count;
-    while (index < allDataCount) {
-        data = self.energyData[index];
-        index++;
-        if ([data.localTime compare:startDate]==NSOrderedAscending) continue;
-        int processedX = [self.dataProcessor processX:data.localTime].intValue;
-        if (processedX >= self.visableRange.length+self.visableRange.location+2) break;
-        if (processedX == index - 1) {
-            [source addObject:@{@"x":@(index-1), @"y":[self.dataProcessor processY:data.dataValue], @"enenrgydata":data}];
-        } else {
-            [source addObject:@{@"x":@(index-1), @"y":[NSNull null], @"enenrgydata":[NSNull null]}];
+    NSUInteger endLocation = self.visableRange.location + self.visableRange.length + 2;
+    for (REMEnergyData* data in self.energyData) {
+        int xVal = [self.dataProcessor processX:data.localTime].intValue;
+        if (xVal < self.visableRange.location) continue;
+        if (xVal > endLocation) break;
+        while (index != xVal) {
+            [source addObject:@{@"x":@(index), @"y":[NSNull null], @"enenrgydata":[NSNull null]}];
+            index++;
         }
+        [source addObject:@{@"x":@(xVal), @"y":[self.dataProcessor processY:data.dataValue], @"enenrgydata":data}];
+        index++;
+        
+    }
+    while (index < endLocation) {
+        [source addObject:@{@"x":@(index), @"y":[NSNull null], @"enenrgydata":[NSNull null]}];
+        index++;
     }
     [[self getPlot]reloadData];
 }
@@ -99,5 +102,14 @@
         }
     }
     return maxY;
+}
+-(void)highlightAt:(NSUInteger)index {
+    highlightIndex = @(index);
+    [[self getPlot]reloadData];
+}
+
+-(void)dehighlight {
+    highlightIndex = nil;
+    [[self getPlot]reloadData];
 }
 @end
