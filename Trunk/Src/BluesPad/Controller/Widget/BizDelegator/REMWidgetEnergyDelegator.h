@@ -1,16 +1,16 @@
-//
-//  REMWidgetEnergyDelegator.h
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by tantan on 11/4/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMWidgetEnergyDelegator.h
+ * Created      : tantan on 11/4/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMWidgetBizDelegatorBase.h"
 #import "REMDatePickerViewController.h"
 #import "REMColor.h"
 #import "REMBuildingViewController.h"
-#import "REMChartSeriesLegend.h"
+#import "REMChartLegendItem.h"
 
 const static CGFloat kLegendSearchSwitcherTop=10;
 
@@ -30,7 +30,7 @@ typedef enum _REMWidgetLegendType{
 } REMWidgetLegendType;
 
 
-@interface REMWidgetEnergyDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol,REMChartSeriesLegendDelegate>
+@interface REMWidgetEnergyDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol,REMChartLegendItemDelegate>
 
 @property (nonatomic,weak) UIView *searchView;
 @property (nonatomic,weak) UIButton *timePickerButton;

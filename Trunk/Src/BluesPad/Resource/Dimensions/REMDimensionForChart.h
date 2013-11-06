@@ -1,10 +1,10 @@
-//
-//  REMDimensionForChart.h
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by 张 锋 on 10/8/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMDimensionForChart.h
+ * Created      : 张 锋 on 10/8/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #ifndef Blues_REMDimensionForChart_h
 #define Blues_REMDimensionForChart_h
@@ -34,6 +34,12 @@
 #define kDMChart_LegendLabelLeftOffset 5
 #define kDMChart_LegendLabelFontSize 12
 #define kDMChart_LegendLabelTopOffset (kDMChart_LegendItemHeight - kDMChart_LegendLabelFontSize) / 2
+
+//tooltip
+#define kDMChart_TooltipHeight 120
+#define kDMChart_TooptipWidth kDMScreenWidth
+#define kDMChart_TooltipItemHeight 90
+#define kDMChart_TooltipTopOffset (kDMChart_TooltipHeight - kDMChart_TooltipItemHeight) / 2
 
 
 #endif

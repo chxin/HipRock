@@ -1,10 +1,10 @@
-//
-//  REMImageHelper.h
-//  Blues
-//  ©2013 施耐德电气（中国）有限公司版权所有
-//  Created by Zilong-Oscar.Xu on 7/31/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMImageHelper.h
+ * Created      : Zilong-Oscar.Xu on 7/31/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import <Foundation/Foundation.h>
 #import <Accelerate/Accelerate.h>

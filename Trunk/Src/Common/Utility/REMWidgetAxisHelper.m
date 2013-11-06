@@ -1,10 +1,10 @@
-//
-//  REMWidgetAxisHelper.m
-//  Blues
-//
-//  Created by 徐 子龙 on 13-7-16.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMWidgetAxisHelper.m
+ * Created      : 徐 子龙 on 13-7-16.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMWidgetAxisHelper.h"
 

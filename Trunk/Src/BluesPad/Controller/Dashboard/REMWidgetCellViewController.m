@@ -1,10 +1,10 @@
-//
-//  REMWidgetCellViewController.m
-//  Blues
-//
-//  Created by tantan on 10/29/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMWidgetCellViewController.m
+ * Created      : tantan on 10/29/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMWidgetCellViewController.h"
 #import "REMBuildingViewController.h"
@@ -40,6 +40,8 @@
         UIColor* pointColor = dic[@"color"];
         REMEnergyData* pointData = dic[@"energydata"];
     }
+    
+    NSLog(@"item count: %d", points.count);
 }
 
 - (void)viewDidLoad
