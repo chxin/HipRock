@@ -11,6 +11,7 @@
 #import "REMDimensions.h"
 #import "REMChartSeriesIndicator.h"
 #import "REMChartLegendItem.h"
+#import "REMChartTooltipItem.h"
 
 @interface REMWidgetEnergyDelegator()
 
@@ -24,6 +25,8 @@
 
 @property (nonatomic,strong) REMAbstractChartWrapper *chartWrapper;
 
+@property (nonatomic,weak) UIView *tooltipView;
+
 
 @end
 
@@ -35,6 +38,9 @@
     
     [self initSearchView];
     [self initChartView];
+    
+    //TODO:Temp code, remove when tooltip delegate is ok
+    //[self.view addSubview:[self prepareTooltipView]];
 }
 
 - (void)initModelAndSearcher{
@@ -334,14 +340,29 @@
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:kREMChartLongPressNotification object:nil];
 }
 
--(void)tooltipEventHandler:(NSNotification*)notification {
-    NSArray* points = notification.userInfo[@"points"];
-    for (NSDictionary* dic in points) {
-        UIColor* pointColor = dic[@"color"];
-        REMEnergyData* pointData = dic[@"energydata"];
+-(UIView *)prepareTooltipView
+{
+    UIScrollView *view = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kDMScreenHeight-kDMStatusBarHeight-kDMChart_TooltipViewHeight, kDMScreenWidth, kDMChart_TooltipViewHeight)];
+    view.layer.borderWidth = 1.0;
+    view.layer.borderColor = [UIColor blackColor].CGColor;
+    view.backgroundColor = [UIColor clearColor];
+    view.contentSize = CGSizeMake(kDMScreenWidth, kDMChart_ToolbarHeight);
+    view.pagingEnabled = NO;
+    view.showsHorizontalScrollIndicator = NO;
+    view.showsVerticalScrollIndicator = NO;
+    
+    int count = 4;
+    CGFloat itemWidth = (kDMScreenWidth - (count + 1) * kDMChart_TooltipItemLeftOffset) / count;
+    
+    for(int i=0;i<4;i++){
+        CGRect itemFrame = CGRectMake(kDMChart_TooltipItemTopOffset, (itemWidth * i) + kDMChart_TooltipItemLeftOffset, itemWidth, kDMChart_TooltipItemHeight);
+        NSLog(@"frame of %dth item: %@", i, NSStringFromCGRect(itemFrame));
+        REMChartTooltipItem *tooltipItem = [[REMChartTooltipItem alloc] initWithFrame:itemFrame withName:@"aaaaa" color:[REMColor colorByIndex:i].uiColor andValue:@(i)];
+        
+        [view addSubview:tooltipItem];
     }
     
-    NSLog(@"item count 2: %d", points.count);
+    return view;
 }
 
 @end

@@ -36,10 +36,12 @@
 #define kDMChart_LegendLabelTopOffset (kDMChart_LegendItemHeight - kDMChart_LegendLabelFontSize) / 2
 
 //tooltip
-#define kDMChart_TooltipHeight 120
-#define kDMChart_TooptipWidth kDMScreenWidth
+#define kDMChart_TooltipViewHeight 120
+#define kDMChart_TooptipViewWidth kDMScreenWidth
+
 #define kDMChart_TooltipItemHeight 90
-#define kDMChart_TooltipTopOffset (kDMChart_TooltipHeight - kDMChart_TooltipItemHeight) / 2
+#define kDMChart_TooltipItemTopOffset (kDMChart_TooltipViewHeight - kDMChart_TooltipItemHeight) / 2
+#define kDMChart_TooltipItemLeftOffset 10
 
 
 #endif
