@@ -517,10 +517,7 @@
 }
 
 #pragma mark - Tooltip
--(void)registerTooltopEvent
-{
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tooltipEventHandler:) name:kREMChartLongPressNotification object:nil];
-}
+
 
 -(UIView *)prepareTooltipView
 {
@@ -542,16 +539,6 @@
         REMChartTooltipItem *tooltipItem = [[REMChartTooltipItem alloc] initWithFrame:itemFrame withName:@"aaaaa" color:[REMColor colorByIndex:i].uiColor andValue:@(i)];
         
         [view addSubview:tooltipItem];
-    }
-    
-    return view;
-}
-
--(void)tooltipEventHandler:(NSNotification*)notification {
-    NSArray* points = notification.userInfo[@"points"];
-    for (NSDictionary* dic in points) {
-        UIColor* pointColor = dic[@"color"];
-        REMEnergyData* pointData = dic[@"energydata"];
     }
     
     return view;
