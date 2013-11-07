@@ -504,6 +504,7 @@
 		B48ED40A178EA8970032CD72 /* REMStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D1C1785115700219469 /* REMStorage.m */; };
 		B4911F4317B0D961007AEF7D /* REMBuildingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */; };
 		B4911F4817B0EB8B007AEF7D /* REMBuildingRankingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */; };
+		B4922466182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4922465182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m */; };
 		B493ADA917D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B493ADA817D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m */; };
 		B497341E17A769E400D0519A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */; };
 		B4978D9517979AFC00F94698 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38ED7D1E1785140900219469 /* libsqlite3.dylib */; };
@@ -1152,6 +1153,8 @@
 		B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingConstants.m; path = View/Building/REMBuildingConstants.m; sourceTree = "<group>"; };
 		B4911F4617B0EB8B007AEF7D /* REMBuildingRankingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingRankingView.h; path = View/Building/REMBuildingRankingView.h; sourceTree = "<group>"; };
 		B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingRankingView.m; path = View/Building/REMBuildingRankingView.m; sourceTree = "<group>"; };
+		B4922464182B411B0001389A /* REMWidgetMultiTimespanSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetMultiTimespanSearchModel.h; path = Model/Widget/REMWidgetMultiTimespanSearchModel.h; sourceTree = "<group>"; };
+		B4922465182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetMultiTimespanSearchModel.m; path = Model/Widget/REMWidgetMultiTimespanSearchModel.m; sourceTree = "<group>"; };
 		B493ADA717D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartHorizonalScrollDelegator.h; sourceTree = "<group>"; };
 		B493ADA817D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartHorizonalScrollDelegator.m; sourceTree = "<group>"; };
 		B49B6F4F1781491800BC130A /* REMColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMColor.h; path = Common/Utility/REMColor.h; sourceTree = "<group>"; };
@@ -2534,6 +2537,8 @@
 				B4E815D318273C3000FB9BC5 /* REMWidgetCommoditySearchModel.m */,
 				B4E815D518273E5600FB9BC5 /* REMWidgetRankingSearchModel.h */,
 				B4E815D618273E5600FB9BC5 /* REMWidgetRankingSearchModel.m */,
+				B4922464182B411B0001389A /* REMWidgetMultiTimespanSearchModel.h */,
+				B4922465182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m */,
 			);
 			name = Widget;
 			sourceTree = "<group>";
@@ -3003,6 +3008,7 @@
 				B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */,
 				EFDAACB91803F27F008BC9AF /* REMPieChartWrapper.m in Sources */,
 				7A1D142617850B2100CC2922 /* Reachability.m in Sources */,
+				B4922466182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m in Sources */,
 				EFDEC2AB1817C8A80008972E /* REMTrendChartStackColumnSeries.m in Sources */,
 				7A2E7ECB17F2DD41000EB506 /* REMBuildingTitleLabelView.m in Sources */,
 				38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */,

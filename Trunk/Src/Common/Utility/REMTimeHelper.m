@@ -136,6 +136,42 @@
     return (int)minute;
 }
 
++ (NSString *)relativeDateComponentFromType:(REMRelativeTimeRangeType)relativeDateType{
+    if(relativeDateType == REMRelativeTimeRangeTypeNone ){
+        return NSLocalizedString(@"Common_CustomTime", @""); //@"自定义";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeLast7Days){
+        return NSLocalizedString(@"Common_Last7Day", @""); //@"之前七天";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeToday){
+        return NSLocalizedString(@"Common_Today", @""); //@"今天";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeYesterday){
+        return NSLocalizedString(@"Common_Yesterday", @""); //@"昨天";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeThisMonth){
+        return NSLocalizedString(@"Common_ThisMonth", @""); //@"本月";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeLastMonth){
+        return NSLocalizedString(@"Common_LastMonth", @""); //@"上月";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeThisWeek){
+        return NSLocalizedString(@"Common_ThisWeek", @""); //@"本周";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeLastWeek){
+        return NSLocalizedString(@"Common_LastWeek", @""); //@"上周";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeThisYear){
+        return NSLocalizedString(@"Common_ThisYear", @""); //@"今年";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeLastYear){
+        return NSLocalizedString(@"Common_LastYear", @""); //@"去年";
+    }
+    else{
+        return NSLocalizedString(@"Common_CustomTime", @""); //@"自定义";
+    }
+
+}
 
 + (REMTimeRange *) relativeDateFromType:(REMRelativeTimeRangeType)relativeDateType
 {
