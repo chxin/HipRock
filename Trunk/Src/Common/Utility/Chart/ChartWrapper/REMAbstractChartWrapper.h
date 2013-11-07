@@ -17,10 +17,10 @@
 
 -(REMAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax styleDictionary:(NSDictionary*)style;
 -(void)destroyView;
--(void)redraw:(REMEnergyViewData *)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax;
-
+-(void)redraw:(REMEnergyViewData *)energyViewData;
+-(void)extraSyntax:(REMWidgetContentSyntax*)widgetSyntax;
 @property (nonatomic, readonly) UIView* view;
-@property (nonatomic, readonly, weak) REMWidgetContentSyntax* widgetSyntax;
+//@property (nonatomic, readonly, weak) REMWidgetContentSyntax* widgetSyntax;
 @property (nonatomic, readonly, weak) REMEnergyViewData* energyViewData;
 
 //@property (nonatomic, readonly) REMChartDataProcessor* dataProcessor;
