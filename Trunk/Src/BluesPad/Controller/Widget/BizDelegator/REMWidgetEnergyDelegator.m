@@ -226,7 +226,11 @@
     self.currentStepList=list;
     [self.stepControl removeAllSegments];
     
-    [self.stepControl initWithItems:titleList];
+    UISegmentedControl *control= [[UISegmentedControl alloc] initWithItems:titleList];
+    [control setFrame:self.stepControl.frame];
+    [self.stepControl removeFromSuperview];
+    [self.searchView addSubview:control];
+    self.stepControl=control;
     NSNumber *newStep = [NSNumber numberWithInt:((int)step)];
     NSUInteger idx;
     if([list containsObject:newStep] == YES)
@@ -441,7 +445,7 @@
     [searchViewContainer addSubview:stepControl];
     self.stepControl=stepControl;
     REMTimeRange *timeRange=self.widgetInfo.contentSyntax.timeRanges[0];
-    [self initStepButtonWithRange:timeRange WithStep:self.widgetInfo.contentSyntax.stepType];
+    REMEnergyStep step = [self initStepButtonWithRange:timeRange WithStep:self.widgetInfo.contentSyntax.stepType];
     [self.view addSubview:searchViewContainer];
     
     

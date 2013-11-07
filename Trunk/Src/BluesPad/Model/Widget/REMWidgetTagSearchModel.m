@@ -8,6 +8,12 @@
 
 #import "REMWidgetTagSearchModel.h"
 
+@interface REMWidgetTagSearchModel(){
+    REMRelativeTimeRangeType _relativeType;
+}
+
+@end
+
 @implementation REMWidgetTagSearchModel
 
 
@@ -34,6 +40,17 @@
     self.timeRangeArray= [self timeRangeToModelArray: viewOption[@"TimeRanges"]];
     self.tagIdArray= [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:tagIds]];
     self.step=[self stepTypeByNumber:step];
+}
+
+
+- (void)setRelativeDateType:(REMRelativeTimeRangeType)relativeDateType{
+    REMTimeRange *range= [REMTimeHelper relativeDateFromType:relativeDateType];
+    [self setTimeRangeItem:range AtIndex:0];
+    _relativeType=relativeDateType;
+}
+
+- (REMRelativeTimeRangeType)relativeDateType{
+    return _relativeType;
 }
 
 - (id)copyWithZone:(NSZone *)zone{

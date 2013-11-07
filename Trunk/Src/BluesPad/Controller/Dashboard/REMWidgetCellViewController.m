@@ -12,7 +12,7 @@
 #import "REMRankingWidgetWrapper.h"
 #import "REMAbstractChartWrapper.h"
 #import "REMWidgetCollectionViewController.h"
-
+#import "REMWidgetSearchModelBase.h"
 @interface REMWidgetCellViewController ()
 
 
@@ -20,6 +20,8 @@
 
 @property (nonatomic,strong) REMAbstractChartWrapper *wrapper;
 
+
+@property (nonatomic,strong) REMWidgetSearchModelBase *searchModel;
 @end
 
 @implementation REMWidgetCellViewController
@@ -40,6 +42,8 @@
     
     [self.view setFrame:self.viewFrame];
     //NSLog(@"detail view:%@",NSStringFromCGRect(self.view.frame));
+    
+    self.searchModel=[REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax.dataStoreType withParam:self.widgetInfo.contentSyntax.params];
 
     UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(kDashboardWidgetPadding, kDashboardWidgetTitleTopMargin, self.view.frame.size.width, kDashboardWidgetTitleSize)];
     title.backgroundColor=[UIColor clearColor];
@@ -140,7 +144,7 @@
 - (void)queryEnergyData:(REMWidgetContentSyntax *)syntax withGroupName:(NSString *)groupName{
    
     REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType];
-    [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:syntax.params withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *errorInfo){
+    [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:[self.searchModel toSearchParam]  withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *errorInfo){
         self.chartData = data;
         [self generateChart];
     }];
