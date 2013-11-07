@@ -199,6 +199,7 @@
 }
 
 -(void)rerenderYLabel {
+    if (self.series.count == 0) return;
     NSMutableArray* yAxisMaxValues = [[NSMutableArray alloc]initWithCapacity:self.hostedGraph.axisSet.axes.count - 1];
     for (int i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = [self.series objectAtIndex:i];
