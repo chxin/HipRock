@@ -44,6 +44,11 @@
         return 0;
     }
 }
+-(void)extraSyntax:(REMWidgetContentSyntax*)widgetSyntax {
+    _step = widgetSyntax.step.intValue;
+    _timeRange = widgetSyntax.timeRanges[0];
+    [super extraSyntax:widgetSyntax];
+}
 
 -(NSRange)createGlobalRange {
     NSDate* globalEndDate = nil;
@@ -65,19 +70,19 @@
     }
     
     sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
-    sharedProcessor.step = self.widgetSyntax.step.intValue;
+    sharedProcessor.step = self.step;
     sharedProcessor.baseDate = self.baseDateOfX;
     
-    NSNumber* globalLength = @([self roundDate:globalEndDate startDate:self.baseDateOfX step:self.widgetSyntax.step.intValue roundToFloor:NO].intValue+1);
+    NSNumber* globalLength = @([self roundDate:globalEndDate startDate:self.baseDateOfX step:self.step roundToFloor:NO].intValue+1);
     return NSMakeRange(0, globalLength.intValue);
 }
 
 -(NSRange)createInitialRange {
-    REMTimeRange* theFirstTimeRange = [self.widgetSyntax.timeRanges objectAtIndex:0];
+    REMTimeRange* theFirstTimeRange = self.timeRange;
     NSDate* endDate = theFirstTimeRange.endTime;
     NSDate* startDate = theFirstTimeRange.startTime;
-    int startPoint = [self roundDate:startDate startDate:self.baseDateOfX step:self.widgetSyntax.step.intValue roundToFloor:YES].intValue;
-    int endPoint = [self roundDate:endDate startDate:self.baseDateOfX step:self.widgetSyntax.step.intValue roundToFloor:NO].intValue;
+    int startPoint = [self roundDate:startDate startDate:self.baseDateOfX step:self.step roundToFloor:YES].intValue;
+    int endPoint = [self roundDate:endDate startDate:self.baseDateOfX step:self.step roundToFloor:NO].intValue;
     return NSMakeRange(startPoint, endPoint - startPoint);
 }
 
@@ -109,7 +114,7 @@
 
 -(REMChartConfig*)getChartConfig:(NSDictionary*)style {
     REMTrendChartConfig* chartConfig = [[REMTrendChartConfig alloc]initWithDictionary:style];
-    chartConfig.step = self.widgetSyntax.step.intValue;
+    chartConfig.step = self.step;
     chartConfig.xGlobalLength = @([self createGlobalRange].length);
     
     chartConfig.series = [self extraSeriesConfig];

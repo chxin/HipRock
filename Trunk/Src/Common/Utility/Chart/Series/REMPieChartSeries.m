@@ -19,10 +19,10 @@
     thePlot.identifier=@"pieplot1";
     
     thePlot.sliceDirection=CPTPieDirectionClockwise;
-    CPTMutableLineStyle* borderStyle = [[CPTMutableLineStyle alloc]init];
-    borderStyle.lineColor = [CPTColor whiteColor];
-    borderStyle.lineWidth = 1.0f;
-    thePlot.borderLineStyle = borderStyle;
+//    CPTMutableLineStyle* borderStyle = [[CPTMutableLineStyle alloc]init];
+//    borderStyle.lineColor = [CPTColor whiteColor];
+//    borderStyle.lineWidth = 1.0f;
+    thePlot.borderLineStyle = nil;
     
 //    CPTMutableShadow* shadow = [CPTMutableShadow shadow];
 //    shadow.shadowColor = [CPTColor whiteColor];

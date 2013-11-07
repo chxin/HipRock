@@ -15,11 +15,15 @@
     self = [super init];
     if (self) {
         _energyViewData = energyViewData;
-        _widgetSyntax = widgetSyntax;
+        [self extraSyntax:widgetSyntax];
         myStyle = style;
         _view = [self renderContentView:frame chartConfig:[self getChartConfig:style]];
     }
     return self;
+}
+
+-(void)extraSyntax:(REMWidgetContentSyntax*)widgetSyntax {
+    
 }
 
 -(void)destroyView {
@@ -52,13 +56,12 @@
     return nil;
 }
 
--(void)redraw:(REMEnergyViewData *)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax {
+-(void)redraw:(REMEnergyViewData *)energyViewData {
     CGRect frame = self.view.frame;
     UIView* superView = self.view.superview;
     [self destroyView];
     
     _energyViewData = energyViewData;
-    _widgetSyntax = widgetSyntax;
     _view = [self renderContentView:frame chartConfig:[self getChartConfig:myStyle]];
     if (superView) [superView addSubview:self.view];
 }
