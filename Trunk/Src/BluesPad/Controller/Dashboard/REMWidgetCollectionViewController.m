@@ -7,7 +7,6 @@
  --------------------------------------------------------------------------*///
 
 #import "REMWidgetCollectionViewController.h"
-#import "REMWidgetMaxView.h"
 #import "REMWidgetCellViewController.h"
 #import "REMMaxWidgetSegue.h"
 
