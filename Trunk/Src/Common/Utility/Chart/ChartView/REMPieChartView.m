@@ -9,8 +9,8 @@
 #import "REMChartHeader.h"
 @interface REMPieChartView()
 @property (nonatomic) NSMutableArray* pointAngles;
-@property (nonatomic) double rotationAngle;
-@property (nonatomic) double tochBegan;
+@property (nonatomic, assign) double rotationAngle;
+@property (nonatomic, assign) NSUInteger focusPointIndex;
 @end
 
 @implementation REMPieChartView
@@ -20,7 +20,7 @@
     if (self) {
         _series = config.series;
         self.rotationAngle = 0;
-        
+        _focusPointIndex = 0;
         CPTXYGraph *graph=[[CPTXYGraph alloc]initWithFrame:self.bounds];
         self.hostedGraph=graph;
         graph.axisSet = nil;
@@ -41,16 +41,15 @@
                 sumY += yVal.doubleValue;
             }
             self.pointAngles = [[NSMutableArray alloc]initWithCapacity:numberOfSlice+1];
-            [self.pointAngles addObject:@(0)];
+            [self.pointAngles addObject:@(M_PI*2)];
             double yCursor = 0;
             for (int i = 0; i < numberOfSlice; i++) {
                 NSNumber* yVal = yArray[i];
                 yCursor+=yVal.doubleValue;
-                [self.pointAngles addObject:@(yCursor/sumY*2*M_PI)];
+                [self.pointAngles addObject:@(M_PI*2-yCursor/sumY*2*M_PI)];
             }
             [s beforePlotAddToGraph:self.hostedGraph seriesList:self.series selfIndex:0];
             [self.hostedGraph addPlot:[s getPlot]];
-            NSLog(@"%@", self.pointAngles);
         }
     }
     [self alignSlice];
@@ -58,7 +57,6 @@
 }
 
 -(void)didMoveToSuperview {
-    
     UIView* fff = [[UIView alloc]initWithFrame:CGRectMake(self.center.x, 0, 1, 748)];
     fff.backgroundColor= [UIColor whiteColor];
     [self.superview addSubview:fff];
@@ -70,52 +68,58 @@
     CGPoint previousPoint = [theTouch previousLocationInView:self];
     CGPoint thePoint = [theTouch locationInView:self];
     double rotation =(atan((previousPoint.x-self.center.x)/(previousPoint.y-self.center.y))-atan((thePoint.x-self.center.x)/(thePoint.y-self.center.y)));
-    CGAffineTransform transform = self.transform;
-    transform = CGAffineTransformRotate(transform, rotation);
-    self.transform = transform;
+
     self.rotationAngle += rotation;
-//    NSLog(@"%f %f", self.rotationAngle, rotation);
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    self.tochBegan = self.rotationAngle;
-    
-}
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    NSLog(@"%f %f", self.tochBegan, self.rotationAngle);
     [self alignSlice];
 }
 
 -(void)alignSlice {
-    int i = 1;
-    if (self.rotationAngle == 0) i = 1;
-    else {
-    for (; i < self.pointAngles.count; i++) {
-        NSNumber* pieSlice = self.pointAngles[i];
-        if (M_PI*2-self.rotationAngle < pieSlice.doubleValue) {
-            NSLog(@"align to Point:%i %f", i, self.rotationAngle);
-            break;
-        }
-    }}
-    
-    self.rotationAngle = ([self.pointAngles[i-1] doubleValue]-[self.pointAngles[i] doubleValue])/2;
-    
-    double rotateTo =([self.pointAngles[i-1] doubleValue]-[self.pointAngles[i] doubleValue])/2;
-    CGAffineTransform transform = self.transform;
-    transform = CGAffineTransformRotate(transform,rotateTo);
-    self.transform = transform;
-//    self.rotationAngle += rotateTo;
-    NSLog(@"align to %f %i %f", self.rotationAngle, i, rotateTo);
+    if (self.pointAngles.count == 0) return;
+    if (self.pointAngles.count == 1) {
+        return;
+    }
+    NSNumber* pieSlice = self.pointAngles[self.focusPointIndex+1];
+    NSNumber* preSlice = self.pointAngles[self.focusPointIndex];
+    double targetRotation = (preSlice.doubleValue+pieSlice.doubleValue)/2;
+    [UIView animateWithDuration:0.2 animations:^(void){
+        self.rotationAngle = targetRotation;
+    }];
 }
 
 -(void)setRotationAngle:(double)rotationAngle {
     if (rotationAngle >= M_PI*2) {
-        _rotationAngle= rotationAngle - M_PI*2;
+        rotationAngle= rotationAngle - M_PI*2;
     } else if (rotationAngle < 0) {
-       _rotationAngle=M_PI*2 + rotationAngle;
-    } else {
-        _rotationAngle = rotationAngle;
+        rotationAngle= M_PI*2 + rotationAngle;
+    }
+    CGAffineTransform transform = self.transform;
+    transform = CGAffineTransformRotate(transform, rotationAngle-self.rotationAngle);
+    self.transform = transform;
+    _rotationAngle = rotationAngle;
+    
+    double selfRotaion = self.rotationAngle;
+    if (selfRotaion == 0) selfRotaion = M_PI*2;
+    for (int i = 1; i < self.pointAngles.count; i++) {
+        NSNumber* pieSlice = self.pointAngles[i];
+        if (selfRotaion > pieSlice.doubleValue) {
+            self.focusPointIndex = i - 1;
+            break;
+        }
+    }
+}
+
+-(void)setFocusPointIndex:(NSUInteger)focusPointIndex {
+    if (self.focusPointIndex != focusPointIndex) {
+        _focusPointIndex = focusPointIndex;
+        REMPieChartSeries* series = self.series[0];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:color:name:)]) {
+            [self.delegate highlightPoint:series.energyData[focusPointIndex] color:[series getColorByIndex:focusPointIndex].uiColor name:series.targetNames[focusPointIndex]];
+        }
+        NSLog(@"%i %@", self.focusPointIndex, series.targetNames[focusPointIndex]);
     }
 }
 
