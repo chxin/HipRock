@@ -235,5 +235,6 @@ typedef enum  {
 @interface REMPieChartView : CPTGraphHostingView<CPTPlotSpaceDelegate,REMChartView>
 
 @property (nonatomic, readonly) NSArray* series;
+-(void)cancelToolTipStatus;
 
 @end

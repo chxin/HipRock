@@ -14,8 +14,8 @@
     self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle];
     CPTPieChart* thePlot = [[CPTPieChart alloc]init];
     thePlot.pieInnerRadius=0;
-    thePlot.startAngle = M_PI;
-    thePlot.endAngle = -M_PI;
+//    thePlot.startAngle = M_PI;
+//    thePlot.endAngle = -M_PI;
     thePlot.identifier=@"pieplot1";
     
     thePlot.sliceDirection=CPTPieDirectionClockwise;
@@ -24,6 +24,11 @@
     borderStyle.lineWidth = 1.0f;
     thePlot.borderLineStyle = borderStyle;
     
+//    CPTMutableShadow* shadow = [CPTMutableShadow shadow];
+//    shadow.shadowColor = [CPTColor whiteColor];
+//    shadow.shadowBlurRadius = 5;
+//    thePlot.shadow = shadow;
+    
     plot = thePlot;
     return self;
 }
@@ -31,15 +36,15 @@
 -(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex {
     [super beforePlotAddToGraph:graph seriesList:seriesList selfIndex:selfIndex];
     CPTPieChart* thePlot = (CPTPieChart*)plot;
-    thePlot.pieRadius = (MIN(graph.bounds.size.height, graph.bounds.size.width)-2) / 2;
-    [CPTAnimation animate:plot
-        property:@"endAngle"
-        from: thePlot.endAngle
-        to: thePlot.startAngle
-        duration:self.animationDuration
-        withDelay:0
-        animationCurve:CPTAnimationCurveDefault
-    delegate:self];
+    thePlot.pieRadius = (MIN(graph.bounds.size.height, graph.bounds.size.width)-2) / 3;
+//    [CPTAnimation animate:plot
+//        property:@"endAngle"
+//        from: thePlot.endAngle
+//        to: thePlot.startAngle
+//        duration:self.animationDuration
+//        withDelay:0
+//        animationCurve:CPTAnimationCurveDefault
+//    delegate:self];
 }
 -(void)animationDidFinish:(CPTAnimationOperation *)operation {
     CPTPieChart* thePlot = (CPTPieChart*)plot;
