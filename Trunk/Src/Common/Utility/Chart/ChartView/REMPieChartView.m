@@ -63,12 +63,6 @@
     return self;
 }
 
--(void)didMoveToSuperview {
-    UIView* fff = [[UIView alloc]initWithFrame:CGRectMake(self.center.x, 0, 1, 748)];
-    fff.backgroundColor= [UIColor whiteColor];
-    [self.superview addSubview:fff];
-}
-
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     if (self.isFocusStatus) {
         [super touchesMoved:touches withEvent:event];
