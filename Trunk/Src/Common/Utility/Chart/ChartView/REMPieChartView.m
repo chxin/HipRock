@@ -28,7 +28,22 @@
             [s beforePlotAddToGraph:self.hostedGraph seriesList:self.series selfIndex:0];
             [self.hostedGraph addPlot:[s getPlot]];
         }
+        UIView* v = [[UIView alloc]initWithFrame:CGRectMake(self.center.x, self.center.y, 5, 5)];
+        v.backgroundColor = [UIColor redColor];
+        [self addSubview:v];
     }
     return self;
 }
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    CGAffineTransform transform = self.transform;
+    transform = CGAffineTransformRotate(transform, 2);
+    self.transform = transform;
+    [super touchesMoved:touches withEvent:event];
+}
+
+-(void)cancelToolTipStatus {
+    
+}
+
 @end
