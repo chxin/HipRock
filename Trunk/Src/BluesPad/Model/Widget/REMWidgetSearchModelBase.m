@@ -46,6 +46,12 @@
     return model;
 }
 
+- (NSDictionary *)toSearchParam{
+    return nil;
+}
+
+- (void)setModelBySearchParam:(NSDictionary *)param{}
+
 - (NSArray *)timeRangeToDictionaryArray
 {
     NSMutableArray *newTimeRangeArray=[[NSMutableArray alloc]initWithCapacity:self.timeRangeArray.count];
