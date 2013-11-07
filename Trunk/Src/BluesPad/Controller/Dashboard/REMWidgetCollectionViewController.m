@@ -84,21 +84,29 @@ static NSString *cellId=@"widgetcell";
 }
 
 
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     REMDashboardCollectionCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     
     if(cell.contentView.subviews.count>0)return cell;
     
-    REMWidgetCellViewController *controller=[[REMWidgetCellViewController alloc]init];
-    controller.viewFrame=cell.contentView.bounds;
-    REMWidgetObject *widget=self.dashboardInfo.widgets[indexPath.row];
+    REMWidgetCellViewController *controller;
+    if(self.childViewControllers.count>indexPath.row){
+        controller=self.childViewControllers[indexPath.row];
+    }
+    else{
+        controller=[[REMWidgetCellViewController alloc]init];
+        controller.viewFrame=cell.contentView.bounds;
+        REMWidgetObject *widget=self.dashboardInfo.widgets[indexPath.row];
+        
+        controller.widgetInfo=widget;
+        
+        controller.currentIndex=indexPath.row;
+        
+        [self addChildViewController:controller];
+    }
     
-    controller.widgetInfo=widget;
-    
-    controller.currentIndex=indexPath.row;
-    
-    [self addChildViewController:controller];
     
     [cell.contentView addSubview:controller.view];
     

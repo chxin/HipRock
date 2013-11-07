@@ -79,8 +79,62 @@
     [self.view addSubview:chartContainer];
     
     self.chartContainer=chartContainer;
+    if (self.chartData!=nil) {
+        [self generateChart];
+    }
+    else{
+        [self queryEnergyData:self.widgetInfo.contentSyntax withGroupName:self.groupName];
+    }
+}
+
+- (void)generateChart{
+    REMAbstractChartWrapper* widgetWrapper = nil;
+    REMDiagramType widgetType = self.widgetInfo.diagramType;
+    CGRect widgetRect = self.chartContainer.bounds;
+    REMEnergyViewData *data=self.chartData;
+    NSMutableDictionary* style = [[NSMutableDictionary alloc]init];
+    //    self.userInteraction = ([dictionary[@"userInteraction"] isEqualToString:@"YES"]) ? YES : NO;
+    //    self.series = dictionary[@"series"];
+    CPTMutableLineStyle* gridlineStyle = [[CPTMutableLineStyle alloc]init];
+    CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
+    gridlineStyle.lineColor = [CPTColor blackColor];
+    gridlineStyle.lineWidth = .5f;
+    textStyle.fontName = @kBuildingFontSCRegular;
+    textStyle.fontSize = 10.0;
+    textStyle.color = [CPTColor blackColor];
+    textStyle.textAlignment = CPTTextAlignmentCenter;
     
-    [self queryEnergyData:self.widgetInfo.contentSyntax withGroupName:self.groupName];
+    [style setObject:@"YES" forKey:@"userInteraction"];
+    [style setObject:@(0.05) forKey:@"animationDuration"];
+    [style setObject:gridlineStyle forKey:@"xLineStyle"];
+    [style setObject:textStyle forKey:@"xTextStyle"];
+    //    [style setObject:nil forKey:@"xGridlineStyle"];
+    //    [style setObject:nil forKey:@"yLineStyle"];
+    [style setObject:textStyle forKey:@"yTextStyle"];
+    [style setObject:gridlineStyle forKey:@"yGridlineStyle"];
+    [style setObject:@(6) forKey:@"horizentalGridLineAmount"];
+    if (widgetType == REMDiagramTypeLine) {
+        widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
+    } else if (widgetType == REMDiagramTypeColumn) {
+        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
+    } else if (widgetType == REMDiagramTypePie) {
+        widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
+    } else if (widgetType == REMDiagramTypeRanking) {
+        widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
+    } else if (widgetType == REMDiagramTypeStackColumn) {
+        widgetWrapper = [[REMStackColumnWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
+    }
+    if (widgetWrapper != nil) {
+        self.wrapper=widgetWrapper;
+        [self.chartContainer addSubview:widgetWrapper.view];
+        //[widgetWrapper destroyView];
+        
+        
+        NSRunLoop *loop=[NSRunLoop currentRunLoop];
+        NSTimer *timer= [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(snapshotChartView) userInfo:nil repeats:NO];
+        [loop addTimer:timer forMode:NSDefaultRunLoopMode];
+    }
+
 }
 
 - (void)queryEnergyData:(REMWidgetContentSyntax *)syntax withGroupName:(NSString *)groupName{
@@ -88,52 +142,7 @@
     REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType];
     [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:syntax.params withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *errorInfo){
         self.chartData = data;
-        REMAbstractChartWrapper* widgetWrapper = nil;
-        REMDiagramType widgetType = self.widgetInfo.diagramType;
-        CGRect widgetRect = self.chartContainer.bounds;
-        NSMutableDictionary* style = [[NSMutableDictionary alloc]init];
-        //    self.userInteraction = ([dictionary[@"userInteraction"] isEqualToString:@"YES"]) ? YES : NO;
-        //    self.series = dictionary[@"series"];
-        CPTMutableLineStyle* gridlineStyle = [[CPTMutableLineStyle alloc]init];
-        CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
-        gridlineStyle.lineColor = [CPTColor blackColor];
-        gridlineStyle.lineWidth = .5f;
-        textStyle.fontName = @kBuildingFontSCRegular;
-        textStyle.fontSize = 10.0;
-        textStyle.color = [CPTColor blackColor];
-        textStyle.textAlignment = CPTTextAlignmentCenter;
-        
-        [style setObject:@"YES" forKey:@"userInteraction"];
-        [style setObject:@(0.05) forKey:@"animationDuration"];
-        [style setObject:gridlineStyle forKey:@"xLineStyle"];
-        [style setObject:textStyle forKey:@"xTextStyle"];
-        //    [style setObject:nil forKey:@"xGridlineStyle"];
-        //    [style setObject:nil forKey:@"yLineStyle"];
-        [style setObject:textStyle forKey:@"yTextStyle"];
-        [style setObject:gridlineStyle forKey:@"yGridlineStyle"];
-        [style setObject:@(6) forKey:@"horizentalGridLineAmount"];
-        if (widgetType == REMDiagramTypeLine) {
-            widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
-        } else if (widgetType == REMDiagramTypeColumn) {
-            widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
-        } else if (widgetType == REMDiagramTypePie) {
-            widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
-        } else if (widgetType == REMDiagramTypeRanking) {
-            widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
-            //        } else if (widgetType == REMDiagramTypeStackColumn) {
-            //            widgetWrapper = [[REMStackColumnWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
-        }
-        if (widgetWrapper != nil) {
-            self.wrapper=widgetWrapper;
-            [self.chartContainer addSubview:widgetWrapper.view];
-            //[widgetWrapper destroyView];
-            
-            
-            NSRunLoop *loop=[NSRunLoop currentRunLoop];
-            NSTimer *timer= [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(snapshotChartView) userInfo:nil repeats:NO];
-            [loop addTimer:timer forMode:NSDefaultRunLoopMode];
-        }
-        
+        [self generateChart];
     }];
 }
 

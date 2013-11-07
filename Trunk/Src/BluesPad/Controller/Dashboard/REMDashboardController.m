@@ -142,30 +142,59 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    REMDashboardCellViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
-    if(cell==nil){
-        cell = [[REMDashboardCellViewCell alloc]initWithStyle: UITableViewCellStyleDefault reuseIdentifier:cellId];
+    REMDashboardCellViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath ];
+   
+    REMWidgetCollectionViewController *current;
+    for (REMWidgetCollectionViewController *vc in self.childViewControllers) {
+        if(vc.currentDashboardIndex == indexPath.section){
+            //NSLog(@"reuse cell:%@",indexPath);
+            current=vc;
+        }
     }
+    if(current!=nil){
+        if(current.view == cell.subviews.lastObject){
+            return cell;
+        }
+        else{
+            if(cell.contentView.subviews.count>0){
+                for (UIView *v in cell.contentView.subviews) {
+                    [v removeFromSuperview];
+                }
+                REMWidgetCollectionViewController *old= self.childViewControllers[cell.tag];
+                old.view=nil;
+            }
+        }
+    }
+    else{
+        if(cell.contentView.subviews.count>0){
+            for (UIView *v in cell.contentView.subviews) {
+                [v removeFromSuperview];
+            }
+            REMWidgetCollectionViewController *old= self.childViewControllers[cell.tag];
+            old.view=nil;
+           
+        }
+        REMWidgetCollectionViewController *widgetCollectionController = [[REMWidgetCollectionViewController alloc]initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc]init]];
+        
+        widgetCollectionController.currentDashboardIndex=indexPath.section;
+        widgetCollectionController.dashboardInfo=self.dashboardArray[indexPath.section];
+        widgetCollectionController.groupName=[self groupName];
+        
+        [self addChildViewController:widgetCollectionController];
+        current=widgetCollectionController;
+    }
+    //NSLog(@"index path:%@",indexPath);
+    //NSLog(@"content view frame:%@",NSStringFromCGRect(cell.contentView.frame));
     
-    if(cell.contentView.subviews.count>0) return cell;
+    
+    
     
     CGRect viewFrame= [self addTitleForCell:cell withDashboardInfo:self.dashboardArray[indexPath.section]];
     
-    REMWidgetCollectionViewController *widgetCollectionController = [[REMWidgetCollectionViewController alloc]initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc]init]];
+    current.viewFrame=viewFrame;
+    cell.tag=indexPath.section;
     
-    
-    [self addChildViewController:widgetCollectionController];
-    
-    widgetCollectionController.viewFrame=viewFrame;
-    
-    widgetCollectionController.currentDashboardIndex=indexPath.section;
-    
-    widgetCollectionController.dashboardInfo=self.dashboardArray[indexPath.section];
-    widgetCollectionController.groupName=[self groupName];
-    
-    
-    
-    [cell.contentView addSubview:widgetCollectionController.view];
+    [cell.contentView addSubview:current.view];
     
     return cell;
 }
