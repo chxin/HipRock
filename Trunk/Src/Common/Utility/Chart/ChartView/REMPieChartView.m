@@ -11,6 +11,7 @@
 @property (nonatomic) NSMutableArray* pointAngles;
 @property (nonatomic, assign) double rotationAngle;
 @property (nonatomic, assign) NSUInteger focusPointIndex;
+@property (nonatomic, assign) BOOL isFocusStatus;
 @end
 
 @implementation REMPieChartView
@@ -21,6 +22,12 @@
         _series = config.series;
         self.rotationAngle = 0;
         _focusPointIndex = 0;
+        self.userInteractionEnabled = config.userInteraction;
+        if (self.userInteractionEnabled) {
+            UILongPressGestureRecognizer* longPressGR = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
+            [self addGestureRecognizer:longPressGR];
+        }
+        _isFocusStatus = NO;
         CPTXYGraph *graph=[[CPTXYGraph alloc]initWithFrame:self.bounds];
         self.hostedGraph=graph;
         graph.axisSet = nil;
@@ -63,18 +70,22 @@
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesMoved:touches withEvent:event];
-    UITouch* theTouch = [touches anyObject];
-    CGPoint previousPoint = [theTouch previousLocationInView:self];
-    CGPoint thePoint = [theTouch locationInView:self];
-    double rotation =(atan((previousPoint.x-self.center.x)/(previousPoint.y-self.center.y))-atan((thePoint.x-self.center.x)/(thePoint.y-self.center.y)));
+    if (self.isFocusStatus) {
+        [super touchesMoved:touches withEvent:event];
+        UITouch* theTouch = [touches anyObject];
+        CGPoint previousPoint = [theTouch previousLocationInView:self];
+        CGPoint thePoint = [theTouch locationInView:self];
+        double rotation =(atan((previousPoint.x-self.center.x)/(previousPoint.y-self.center.y))-atan((thePoint.x-self.center.x)/(thePoint.y-self.center.y)));
 
-    self.rotationAngle += rotation;
+        self.rotationAngle += rotation;
+    }
 }
 
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self alignSlice];
+    if (self.isFocusStatus) {
+        [self alignSlice];
+    }
 }
 
 -(void)alignSlice {
@@ -112,19 +123,30 @@
     }
 }
 
+-(void) longPress:(UILongPressGestureRecognizer*) gest {
+    if (gest.state == UIGestureRecognizerStateBegan) {
+        self.isFocusStatus = YES;
+        [self sendPointFocusEvent];
+    }
+}
 -(void)setFocusPointIndex:(NSUInteger)focusPointIndex {
     if (self.focusPointIndex != focusPointIndex) {
         _focusPointIndex = focusPointIndex;
-        REMPieChartSeries* series = self.series[0];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:color:name:)]) {
-            [self.delegate highlightPoint:series.energyData[focusPointIndex] color:[series getColorByIndex:focusPointIndex].uiColor name:series.targetNames[focusPointIndex]];
-        }
-        NSLog(@"%i %@", self.focusPointIndex, series.targetNames[focusPointIndex]);
+        [self sendPointFocusEvent];
     }
 }
 
+-(void)sendPointFocusEvent {
+    NSUInteger focusPointIndex = self.focusPointIndex;
+    REMPieChartSeries* series = self.series[0];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:color:name:)]) {
+        [self.delegate highlightPoint:series.energyData[focusPointIndex] color:[series getColorByIndex:focusPointIndex].uiColor name:series.targetNames[focusPointIndex]];
+    }
+    NSLog(@"%i %@", self.focusPointIndex, series.targetNames[focusPointIndex]);
+}
+
 -(void)cancelToolTipStatus {
-    
+    self.isFocusStatus = NO;
 }
 
 @end
