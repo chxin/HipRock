@@ -52,6 +52,9 @@
 #define REMIMG_Water_normal REMLoadImage(@"Water_normal",@"png")
 #define REMIMG_Water_pressed REMLoadImage(@"Water_pressed",@"png")
 
+//images in /Chart:
+#define REMIMG_TooltipClose REMLoadImage(@"TooltipClose",@"png")
+
 //images in /Dashboard:
 #define REMIMG_Back REMLoadImage(@"Back",@"png")
 #define REMIMG_Down REMLoadImage(@"Down",@"png")
