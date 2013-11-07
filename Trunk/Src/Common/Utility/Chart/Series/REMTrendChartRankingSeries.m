@@ -95,12 +95,14 @@
 }
 -(NSUInteger)getIndexOfCachePointByCoordinate:(double)xCoordinate {
     int roundX = ceil(xCoordinate);
-    NSUInteger i = 0;
+    int i = 0;
     for (NSDictionary* dic in source) {
         if (((NSNumber*)dic[@"x"]).intValue == roundX) break;
         i++;
     }
+    i = i - 1;
     if (i >= self.visableRange.length) i = self.visableRange.length-1;
+    if (i < 0) i = 0;
     return i;
 }
 @end
