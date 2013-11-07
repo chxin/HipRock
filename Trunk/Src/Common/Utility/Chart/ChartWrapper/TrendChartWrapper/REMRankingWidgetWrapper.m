@@ -17,13 +17,13 @@
 }
 
 -(NSRange)createInitialRange {
-    int xLength = self.widgetSyntax.rankingRangeCode;
+    int xLength = self.rankingRangeCode;
     if (xLength == 0 || xLength > self.energyViewData.targetEnergyData.count) xLength = self.energyViewData.targetEnergyData.count;
     return NSMakeRange(0, xLength);
 }
 
 -(REMTrendChartRankingSeries*)createSeriesConfigOfIndex:(uint)seriesIndex {
-    _sortOrder = self.widgetSyntax.rankingSortOrder;
+//    _sortOrder = self.widgetSyntax.rankingSortOrder;
     
     REMTrendChartRankingSeries* s =[[REMTrendChartRankingSeries alloc]initWithData:self.energyViewData.targetEnergyData dataProcessor:nil plotStyle:nil startDate:nil];
     REMTargetEnergyData* targetEnergyData = (REMTargetEnergyData*)self.energyViewData.targetEnergyData[0];
@@ -31,6 +31,11 @@
     s.uomName = targetEnergyData.target.uomName;
     s.sortOrder = self.sortOrder;
     return s;
+}
+-(void)extraSyntax:(REMWidgetContentSyntax*)widgetSyntax {
+    [super extraSyntax:widgetSyntax];
+    _sortOrder = widgetSyntax.rankingSortOrder;
+    _rankingRangeCode = widgetSyntax.rankingRangeCode;
 }
 -(void)setSortOrder:(NSComparisonResult)theSortOrder {
     if (self.sortOrder == theSortOrder || theSortOrder == NSOrderedSame) return;

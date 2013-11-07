@@ -12,6 +12,7 @@
 @property (nonatomic) NSComparisonResult sortOrder;
 @property (nonatomic, assign) uint location;
 @property (nonatomic, assign) uint length;
+@property (nonatomic, assign) REMRankingRange rankingRangeCode;
 
 -(void)reloadData;
 @end

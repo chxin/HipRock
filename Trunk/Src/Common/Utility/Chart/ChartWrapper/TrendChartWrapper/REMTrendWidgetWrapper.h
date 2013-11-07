@@ -11,4 +11,6 @@
 @interface REMTrendWidgetWrapper : REMAbstractChartWrapper
 -(NSArray*)extraSeriesConfig;
 @property (nonatomic, weak) NSDate* baseDateOfX;
+@property (nonatomic, assign) REMEnergyStep step;
+@property (nonatomic, assign) REMTimeRange* timeRange;
 @end

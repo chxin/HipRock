@@ -31,63 +31,6 @@
 //    redrawCount++;
 }
 
--(void)longPress:(UILongPressGestureRecognizer*)recognizer {
-    UIGestureRecognizerState gstate = recognizer.state;
-    if (gstate == UIGestureRecognizerStateBegan) {
-        isHighlightedStatus = YES;
-        CPTXYPlotSpace* plotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
-        NSDecimal pressedPoint[2];
-        [plotSpace plotPoint:pressedPoint forPlotAreaViewPoint:[recognizer locationInView:self]];
-//        UIView* ddd = [[UIView alloc]initWithFrame:CGRectMake([recognizer locationInView:self].x, [recognizer locationInView:self].y, 20 ,20)];
-//        ddd.backgroundColor = [UIColor redColor];
-//        [self addSubview:ddd];
-        NSMutableArray* points = [[NSMutableArray alloc]init];
-        NSMutableArray* colors = [[NSMutableArray alloc]init];
-        NSMutableArray* targetNames = [[NSMutableArray alloc]init];
-        double xInCoor = [NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]].doubleValue;
-        
-        [plotSpace plotPoint:pressedPoint forPlotAreaViewPoint:CGPointMake(0, 0)];
-        NSNumber* basePoint = [NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]];
-        
-        BOOL highlightedXChanged = NO;
-        NSLog(@"%f %f", xInCoor, basePoint.doubleValue);
-        for(NSUInteger i = 0; i < self.series.count; i++) {
-            REMTrendChartSeries* s = self.series[i];
-            NSUInteger index = [s getIndexOfCachePointByCoordinate:xInCoor]; // MAX(0, round(xInCoor.doubleValue-0.5) - ceil(basePoint.doubleValue));
-            NSDictionary* cachedPoint = [[s getCurrentRangeSource] objectAtIndex:index];
-            if (i == 0) {
-                NSNumber* xVal = cachedPoint[@"x"];
-                if (highlightedX == nil || ![xVal isEqualToNumber:highlightedX]) {
-                    highlightedX = xVal;
-                    highlightedXChanged = YES;
-                }
-            }
-            if (highlightedXChanged) {
-                if (cachedPoint) {
-                    [points addObject:cachedPoint[@"enenrgydata"]];
-                } else {
-                    [points addObject:[NSNull null]];
-                }
-                
-                [colors addObject:[s getSeriesColor]];
-                
-                if (s.target) {
-                    [targetNames addObject:s.target.name];
-                } else {
-                    if (cachedPoint) [targetNames addObject:cachedPoint[@"targetname"]];
-                    else [targetNames addObject:[NSNull null]];
-                }
-                
-                [s highlightAt:index];
-            }
-        }
-        
-        if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoints:colors:names:)] && highlightedXChanged) {
-            [self.delegate highlightPoints:points colors:colors names:targetNames];
-        }
-    }
-}
-
 //-(NSDictionary*)getSa:(REMTrendChartSeries*)s xInCoor:(NSNumber*)xInCoor {
 //    NSArray* sampleData = [s getCurrentRangeSource];
 //    for (NSDictionary* sPoint in sampleData) {
@@ -199,6 +142,7 @@
 }
 
 -(void)rerenderYLabel {
+    if (self.series.count == 0) return;
     NSMutableArray* yAxisMaxValues = [[NSMutableArray alloc]initWithCapacity:self.hostedGraph.axisSet.axes.count - 1];
     for (int i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = [self.series objectAtIndex:i];
@@ -432,6 +376,95 @@
 -(void)cancelToolTipStatus {
     for (REMTrendChartSeries* s in self.series) {
         [s dehighlight];
+    }
+}
+
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (isHighlightedStatus) {
+        CPTXYPlotSpace* plotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
+        NSDecimal pressedPoint[2];
+        [plotSpace plotPoint:pressedPoint forPlotAreaViewPoint:[[touches anyObject] locationInView:self]];
+        
+        double xInCoor = [NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]].doubleValue;
+        
+        [self focusPointAtX:xInCoor];
+    } else {
+        [super touchesBegan:touches withEvent:event];
+    }
+}
+
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (isHighlightedStatus) {
+        CPTXYPlotSpace* plotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
+        NSDecimal pressedPoint[2];
+        [plotSpace plotPoint:pressedPoint forPlotAreaViewPoint:[[touches anyObject] locationInView:self]];
+        
+        double xInCoor = [NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]].doubleValue;
+        
+        [self focusPointAtX:xInCoor];
+    } else {
+        [super touchesBegan:touches withEvent:event];
+    }
+}
+
+-(void)focusPointAtX:(double)xInCoor {
+    NSDecimal pressedPoint[2];
+    CPTXYPlotSpace* plotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
+    NSMutableArray* points = [[NSMutableArray alloc]init];
+    NSMutableArray* colors = [[NSMutableArray alloc]init];
+    NSMutableArray* targetNames = [[NSMutableArray alloc]init];
+    [plotSpace plotPoint:pressedPoint forPlotAreaViewPoint:CGPointMake(0, 0)];
+    
+    BOOL highlightedXChanged = NO;
+    for(NSUInteger i = 0; i < self.series.count; i++) {
+        REMTrendChartSeries* s = self.series[i];
+        NSUInteger index = [s getIndexOfCachePointByCoordinate:xInCoor]; // MAX(0, round(xInCoor.doubleValue-0.5) - ceil(basePoint.doubleValue));
+        NSDictionary* cachedPoint = [[s getCurrentRangeSource] objectAtIndex:index];
+        if (i == 0) {
+            NSNumber* xVal = cachedPoint[@"x"];
+            if (highlightedX == nil || ![xVal isEqualToNumber:highlightedX]) {
+                highlightedX = xVal;
+                highlightedXChanged = YES;
+            }
+        }
+        if (highlightedXChanged) {
+            if (cachedPoint) {
+                [points addObject:cachedPoint[@"enenrgydata"]];
+            } else {
+                [points addObject:[NSNull null]];
+            }
+            
+            [colors addObject:[s getSeriesColor]];
+            
+            if (s.target) {
+                [targetNames addObject:s.target.name];
+            } else {
+                if (cachedPoint) [targetNames addObject:cachedPoint[@"targetname"]];
+                else [targetNames addObject:[NSNull null]];
+            }
+            
+            [s highlightAt:index];
+        }
+    }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoints:colors:names:)] && highlightedXChanged) {
+        [self.delegate highlightPoints:points colors:colors names:targetNames];
+    }
+}
+
+-(void)longPress:(UILongPressGestureRecognizer*)recognizer {
+    UIGestureRecognizerState gstate = recognizer.state;
+    if (gstate == UIGestureRecognizerStateBegan) {
+        isHighlightedStatus = YES;
+        CPTXYPlotSpace* plotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
+        NSDecimal pressedPoint[2];
+        [plotSpace plotPoint:pressedPoint forPlotAreaViewPoint:[recognizer locationInView:self]];
+        
+        double xInCoor = [NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]].doubleValue;
+        
+        [self focusPointAtX:xInCoor];
     }
 }
 

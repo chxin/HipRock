@@ -19,13 +19,18 @@
     NSMutableArray* series0Data = [[NSMutableArray alloc]init];
     int seriesCount = 0;
     if (self.energyViewData != nil && self.energyViewData.targetEnergyData != NULL) seriesCount =self.energyViewData.targetEnergyData.count;
+    NSMutableArray* targets = [[NSMutableArray alloc]init];
     for (uint i = 0; i < seriesCount; i++) {
         REMTargetEnergyData* seriesData = [self.energyViewData.targetEnergyData objectAtIndex:i];
         if (seriesData.energyData != nil && seriesData.energyData.count > 0) {
             [series0Data addObjectsFromArray:seriesData.energyData];
+            for (int j = 0; j < seriesData.energyData.count; j++) {
+                [targets addObject:seriesData.target.name == nil ? @"" : seriesData.target.name];
+            }
         }
     }
     REMPieChartSeries* s =[[REMPieChartSeries alloc]initWithData:series0Data dataProcessor:[[REMChartDataProcessor alloc]init] plotStyle:nil];
+    s.targetNames = targets;
     s.animationDuration = chartConfig.animationDuration;
     chartConfig.series = @[s];
     
