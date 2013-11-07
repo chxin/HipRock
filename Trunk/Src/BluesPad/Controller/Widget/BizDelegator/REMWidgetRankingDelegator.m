@@ -38,20 +38,6 @@
 - (void)initSearchView{
     UIView *searchViewContainer=[[UIView alloc]initWithFrame:kDMChart_ToolbarFrame];
     
-    
-    
-    UISegmentedControl *legendControl=[[UISegmentedControl alloc] initWithItems:@[@"search",@"legend"]];
-    [legendControl setFrame:CGRectMake(800, kLegendSearchSwitcherTop, 200, 30)];
-    UIImage *search=[UIImage imageNamed:@"Up"];
-    UIImage *legend=[UIImage imageNamed:@"Down"];
-    [legendControl setImage:search forSegmentAtIndex:0];
-    [legendControl setImage:legend forSegmentAtIndex:1];
-    [legendControl setSelectedSegmentIndex:0];
-    [legendControl addTarget:self action:@selector(legendSwitchSegmentPressed:) forControlEvents:UIControlEventValueChanged];
-    
-    [self.view addSubview:legendControl];
-    self.legendSearchControl=legendControl;
-    
     UIButton *timePickerButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, 0, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
     
