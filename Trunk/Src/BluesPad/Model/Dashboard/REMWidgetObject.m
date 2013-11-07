@@ -19,11 +19,13 @@
     self.layoutSyntax=dictionary[@"LayoutSyntax"];
     
     self.contentSyntax = [[REMWidgetContentSyntax alloc]initWithJSONString:dictionary[@"ContentSyntax"]];
-    if([self.contentSyntax.xtype isEqualToString:@"linechartcomponent"] ==YES)
+    if([self.contentSyntax.xtype isEqualToString:@"linechartcomponent"] ==YES ||
+       [self.contentSyntax.xtype isEqualToString:@"multitimespanlinechartcomponent"]==YES)
     {
         self.diagramType =REMDiagramTypeLine;
     }
-    else if([self.contentSyntax.xtype isEqualToString:@"columnchartcomponent"]== YES)
+    else if([self.contentSyntax.xtype isEqualToString:@"columnchartcomponent"]== YES ||
+            [self.contentSyntax.xtype isEqualToString:@"multitimespancolumnchartcomponent"]==YES)
     {
         self.diagramType =REMDiagramTypeColumn;
     }

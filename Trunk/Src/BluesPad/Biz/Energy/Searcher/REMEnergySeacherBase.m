@@ -8,20 +8,23 @@
 
 #import "REMEnergySeacherBase.h"
 #import "REMEnergyMultiTimeSearcher.h"
-#import "REMEnergyViewData.h"
+
 
 
 
 @implementation REMEnergySeacherBase
 
-+ (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType)storeType
++ (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType)storeType withWidgetInfo:(REMWidgetObject *)widgetInfo
 {
+    REMEnergySeacherBase *obj;
     if (storeType == REMDSEnergyMultiTimeDistribute ||storeType == REMDSEnergyMultiTimeTrend) {
-        return [[REMEnergyMultiTimeSearcher alloc]init];
+        obj= [[REMEnergyMultiTimeSearcher alloc]init];
     }
     else{
-        return [[REMEnergySeacherBase alloc]init];
+        obj=[[REMEnergySeacherBase alloc]init];
     }
+    obj.widgetInfo=widgetInfo;
+    return  obj;
 }
 
 - (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(NSDictionary *)params withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void (^)(id,REMBusinessErrorInfo *))callback
@@ -31,7 +34,7 @@
     store.groupName=groupName;
     [REMDataAccessor access:store success:^(NSDictionary *data){
         if([data isEqual:[NSNull null]]==YES)return ;
-        REMEnergyViewData *viewData=[[REMEnergyViewData alloc]initWithDictionary:data];
+        REMEnergyViewData *viewData=[self processEnergyData:data];
         if(callback!=nil){
             callback(viewData,nil);
         }
@@ -40,5 +43,11 @@
         callback(nil,errorInfo);
     }];
 }
+
+- (REMEnergyViewData *)processEnergyData:(NSDictionary *)rawData{
+    return [[REMEnergyViewData alloc]initWithDictionary:rawData];;
+}
+
+
 
 @end

@@ -62,6 +62,23 @@
     return previousDate;
 }
 
++ (NSDate *)getNextMondayFromDate:(NSDate *)date{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit fromDate:date];
+    
+    NSUInteger weekdayToday = [components weekday];
+    
+    if (weekdayToday==2 && [components hour]==0) {
+        return date;
+    }
+    [components setHour:0];
+    NSInteger daysToMonday = (9 - weekdayToday) % 7;
+    
+    NSDate *nextMonday = [components.date dateByAddingTimeInterval:60*60*24*daysToMonday];
+    
+    return nextMonday;
+}
+
 + (NSDate *)add:(int)difference onPart:(REMDateTimePart)part ofDate:(NSDate *)date;
 {
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];

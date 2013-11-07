@@ -53,7 +53,7 @@
             NSLog(@"%@", self.pointAngles);
         }
     }
-    [self alignSlice];
+    //[self alignSlice];
     return self;
 }
 
