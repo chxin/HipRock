@@ -10,7 +10,7 @@
 
 @implementation REMTrendChartLineSeries{
     CPTPlotSymbol* normalSymbol;
-    CPTPlotSymbol* disabledSymbol;
+    CPTPlotSymbol* highlightedSymbol;
 }
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
     self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle startDate:startDate];
@@ -36,10 +36,13 @@
     normalSymbol.size = CGSizeMake(12.0, 12.0);
     normalSymbol.lineStyle = nil;
     
-    disabledSymbol = [self getSymbol:selfIndex];
-    disabledSymbol.fill = [CPTFill fillWithColor:diabledColor];
-    disabledSymbol.size = CGSizeMake(12.0, 12.0);
-    disabledSymbol.lineStyle = nil;
+    highlightedSymbol = [self getSymbol:selfIndex];
+    highlightedSymbol.fill = [CPTFill fillWithColor:diabledColor];
+    highlightedSymbol.size = CGSizeMake(12.0, 12.0);
+    CPTMutableLineStyle* hLine = [[CPTMutableLineStyle alloc]init];
+    hLine.lineWidth = 3;
+    hLine.lineColor = [CPTColor whiteColor];
+    highlightedSymbol.lineStyle = hLine;
     
     myPlot.dataLineStyle = lineStyle;
 }
@@ -103,7 +106,19 @@
 }
 
 -(CPTPlotSymbol *)symbolForScatterPlot:(CPTScatterPlot *)plot recordIndex:(NSUInteger)idx {
-    if (highlightIndex == nil || highlightIndex.unsignedIntegerValue == idx) return normalSymbol;
-    else return disabledSymbol;
+    if (highlightIndex != nil && highlightIndex.unsignedIntegerValue == idx) return highlightedSymbol;
+    else return normalSymbol;
+}
+-(NSUInteger)getIndexOfCachePointByCoordinate:(double)xCoordinate {
+    int roundX = floor(xCoordinate);
+    NSUInteger i = 0;
+    for (NSDictionary* dic in source) {
+        if (((NSNumber*)dic[@"x"]).intValue == roundX)
+            break;
+        i++;
+    }
+    if (i >= self.visableRange.length) i = self.visableRange.length;
+    if (i == 0) i = 1;
+    return i;
 }
 @end

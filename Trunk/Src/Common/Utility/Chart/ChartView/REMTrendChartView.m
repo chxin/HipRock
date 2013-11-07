@@ -38,16 +38,22 @@
         CPTXYPlotSpace* plotSpace = (CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace;
         NSDecimal pressedPoint[2];
         [plotSpace plotPoint:pressedPoint forPlotAreaViewPoint:[recognizer locationInView:self]];
-        
+//        UIView* ddd = [[UIView alloc]initWithFrame:CGRectMake([recognizer locationInView:self].x, [recognizer locationInView:self].y, 20 ,20)];
+//        ddd.backgroundColor = [UIColor redColor];
+//        [self addSubview:ddd];
         NSMutableArray* points = [[NSMutableArray alloc]init];
         NSMutableArray* colors = [[NSMutableArray alloc]init];
         NSMutableArray* targetNames = [[NSMutableArray alloc]init];
-        NSNumber* xInCoor = [NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]];
+        double xInCoor = [NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]].doubleValue;
+        
+        [plotSpace plotPoint:pressedPoint forPlotAreaViewPoint:CGPointMake(0, 0)];
+        NSNumber* basePoint = [NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]];
         
         BOOL highlightedXChanged = NO;
+        NSLog(@"%f %f", xInCoor, basePoint.doubleValue);
         for(NSUInteger i = 0; i < self.series.count; i++) {
             REMTrendChartSeries* s = self.series[i];
-            NSUInteger index = floor(xInCoor.doubleValue - currentXLocation);
+            NSUInteger index = [s getIndexOfCachePointByCoordinate:xInCoor]; // MAX(0, round(xInCoor.doubleValue-0.5) - ceil(basePoint.doubleValue));
             NSDictionary* cachedPoint = [[s getCurrentRangeSource] objectAtIndex:index];
             if (i == 0) {
                 NSNumber* xVal = cachedPoint[@"x"];
@@ -403,6 +409,8 @@
         animateRange = [[CPTPlotRange alloc]initWithLocation:[NSDecimalNumber numberWithFloat:(xStableEndPoint-newRangeLength+xStableStartPoint)].decimalValue length:newRange.length];
     }
     if (animateRange != nil) {
+        currentXLocation = animateRange.locationDouble;
+        currentXLength = animateRange.lengthDouble;
         for (REMTrendChartSeries* s in self.series) {
             s.visableRange = NSMakeRange(animateRange.locationDouble, animateRange.lengthDouble);
         }

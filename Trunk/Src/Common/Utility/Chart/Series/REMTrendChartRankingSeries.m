@@ -72,7 +72,8 @@
 -(void)cacheDataOfRange {
     NSUInteger loopEnd = MIN(self.visableRange.location+self.visableRange.length, self.energyData.count);
     NSUInteger loopStart = MAX(0, self.visableRange.location);
-    if (self.sortOrder == NSOrderedDescending) {
+    [source removeAllObjects];
+    if (self.sortOrder == NSOrderedDescending && loopEnd != 0) {
         for (NSUInteger i = loopEnd-1; i >= loopStart; i--) {
             REMEnergyData* data = self.energyData[i];
             [source addObject:@{@"x":@(self.energyData.count - i - 1), @"y":data.dataValue, @"enenrgydata":data, @"targetname":self.targetNames[i]}];
@@ -85,5 +86,21 @@
         }
     }
     [[self getPlot]reloadData];
+}
+
+-(void)setSortOrder:(NSComparisonResult)sortOrder {
+    if (self.sortOrder == sortOrder || sortOrder == NSOrderedSame) return;
+    _sortOrder = sortOrder;
+    [self cacheDataOfRange];
+}
+-(NSUInteger)getIndexOfCachePointByCoordinate:(double)xCoordinate {
+    int roundX = ceil(xCoordinate);
+    NSUInteger i = 0;
+    for (NSDictionary* dic in source) {
+        if (((NSNumber*)dic[@"x"]).intValue == roundX) break;
+        i++;
+    }
+    if (i >= self.visableRange.length) i = self.visableRange.length-1;
+    return i;
 }
 @end
