@@ -416,10 +416,8 @@
     NSMutableArray* colors = [[NSMutableArray alloc]init];
     NSMutableArray* targetNames = [[NSMutableArray alloc]init];
     [plotSpace plotPoint:pressedPoint forPlotAreaViewPoint:CGPointMake(0, 0)];
-    NSNumber* basePoint = [NSDecimalNumber decimalNumberWithDecimal:pressedPoint[0]];
     
     BOOL highlightedXChanged = NO;
-    NSLog(@"%f %f", xInCoor, basePoint.doubleValue);
     for(NSUInteger i = 0; i < self.series.count; i++) {
         REMTrendChartSeries* s = self.series[i];
         NSUInteger index = [s getIndexOfCachePointByCoordinate:xInCoor]; // MAX(0, round(xInCoor.doubleValue-0.5) - ceil(basePoint.doubleValue));

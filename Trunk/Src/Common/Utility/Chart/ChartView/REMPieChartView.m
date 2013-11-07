@@ -59,7 +59,7 @@
             [self.hostedGraph addPlot:[s getPlot]];
         }
     }
-    [self alignSlice];
+    [self alignSliceWithAnimation:NO];
     return self;
 }
 
@@ -78,11 +78,11 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     if (self.isFocusStatus) {
-        [self alignSlice];
+        [self alignSliceWithAnimation:YES];
     }
 }
 
--(void)alignSlice {
+-(void)alignSliceWithAnimation:(BOOL)withAnimation {
     if (self.pointAngles.count == 0) return;
     if (self.pointAngles.count == 1) {
         return;
@@ -90,9 +90,13 @@
     NSNumber* pieSlice = self.pointAngles[self.focusPointIndex+1];
     NSNumber* preSlice = self.pointAngles[self.focusPointIndex];
     double targetRotation = (preSlice.doubleValue+pieSlice.doubleValue)/2;
-    [UIView animateWithDuration:0.2 animations:^(void){
+    if (withAnimation) {
+        [UIView animateWithDuration:0.2 animations:^(void){
+            self.rotationAngle = targetRotation;
+        }];
+    } else {
         self.rotationAngle = targetRotation;
-    }];
+    }
 }
 
 -(void)setRotationAngle:(double)rotationAngle {
