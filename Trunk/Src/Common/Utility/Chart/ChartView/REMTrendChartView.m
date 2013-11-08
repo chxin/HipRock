@@ -92,6 +92,7 @@
 }
 
 -(void)renderRange:(float)location length:(float)length {
+    if (self.series.count == 0) return;
     if (length <= 0) return;
     location -= 0.5;
     if (length == currentXLength && location == currentXLocation) return;
