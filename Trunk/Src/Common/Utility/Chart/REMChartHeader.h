@@ -22,6 +22,11 @@
  */
 -(void)highlightPoints:(NSArray*)points colors:(NSArray*)colors names:(NSArray*)names;
 
+/*
+ * Parameter data type: NSDate for line/column. NSNumber for ranking.
+ */
+-(void)willRangeChange:(id)start end:(id)end;
+
 @end
 @protocol REMTPieChartDelegate <NSObject>
 /*
