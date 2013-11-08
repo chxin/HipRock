@@ -59,7 +59,7 @@
             [self.hostedGraph addPlot:[s getPlot]];
         }
     }
-    //[self alignSlice];
+    [self alignSliceWithAnimation:NO];
     return self;
 }
 
