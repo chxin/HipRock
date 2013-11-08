@@ -29,9 +29,10 @@
         hostingView.hostedGraph.plotAreaFrame.masksToBorder = NO;
         hostingView.backgroundColor = [UIColor blackColor];
         
-        for (NSUInteger i = 0; i < 10; i++) {
+        for (NSUInteger i = 0; i < 1; i++) {
             CPTScatterPlot* barPlot = [[CPTScatterPlot alloc]init];
             barPlot.dataSource = self;
+            barPlot.delegate = self;
            // barPlot.barWidth = CPTDecimalFromFloat(.2);
            // barPlot.barOffset = CPTDecimalFromFloat(.2*i);
            // barPlot.fill = [CPTFill fillWithColor:[REMColor colorByIndex:i]];
@@ -50,7 +51,7 @@
         
         CPTXYPlotSpace* thePlotSpace = (CPTXYPlotSpace*)hostingView.hostedGraph.defaultPlotSpace;
         thePlotSpace.globalXRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt([self numberOfRecordsForPlot:nil])];
-        thePlotSpace.xRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(10)];
+        thePlotSpace.xRange = [[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(100)];
         thePlotSpace.globalYRange =[[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt([self numberOfRecordsForPlot:nil])];
         thePlotSpace.yRange =[[CPTPlotRange alloc]initWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt([self numberOfRecordsForPlot:nil])];
         thePlotSpace.delegate = self;
@@ -59,19 +60,24 @@
     return self;
 }
 
--(CPTPlotRange*)plotSpace:(CPTPlotSpace *)space willChangePlotRangeTo:(CPTPlotRange *)newRange forCoordinate:(CPTCoordinate)coordinate {
-    NSLog(@"ffff");
-    return newRange;
-}
 
 -(NSNumber*)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx {
     return @(idx);
 }
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot {
-    return 50;
+    return 110;
 }
 
+-(CPTPlotSymbol *)symbolForScatterPlot:(CPTScatterPlot *)plot recordIndex:(NSUInteger)idx {
+    CPTPlotSymbol* symbol = [CPTPlotSymbol rectanglePlotSymbol];
+    
+    symbol.fill= [CPTFill fillWithColor:[CPTColor whiteColor]];
+    symbol.size=CGSizeMake(10.0, 10.0);
+    symbol.lineStyle = nil;
+    
+    return symbol;
+}
 /*
  // Only override drawRect: if you perform custom drawing.
  // An empty implementation adversely affects performance during animation.
