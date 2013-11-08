@@ -62,6 +62,23 @@
     return previousDate;
 }
 
++ (NSDate *)getNextMondayFromDate:(NSDate *)date{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit fromDate:date];
+    
+    NSUInteger weekdayToday = [components weekday];
+    
+    if (weekdayToday==2 && [components hour]==0) {
+        return date;
+    }
+    [components setHour:0];
+    NSInteger daysToMonday = (9 - weekdayToday) % 7;
+    
+    NSDate *nextMonday = [components.date dateByAddingTimeInterval:60*60*24*daysToMonday];
+    
+    return nextMonday;
+}
+
 + (NSDate *)add:(int)difference onPart:(REMDateTimePart)part ofDate:(NSDate *)date;
 {
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -136,6 +153,42 @@
     return (int)minute;
 }
 
++ (NSString *)relativeDateComponentFromType:(REMRelativeTimeRangeType)relativeDateType{
+    if(relativeDateType == REMRelativeTimeRangeTypeNone ){
+        return NSLocalizedString(@"Common_CustomTime", @""); //@"自定义";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeLast7Days){
+        return NSLocalizedString(@"Common_Last7Day", @""); //@"之前七天";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeToday){
+        return NSLocalizedString(@"Common_Today", @""); //@"今天";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeYesterday){
+        return NSLocalizedString(@"Common_Yesterday", @""); //@"昨天";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeThisMonth){
+        return NSLocalizedString(@"Common_ThisMonth", @""); //@"本月";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeLastMonth){
+        return NSLocalizedString(@"Common_LastMonth", @""); //@"上月";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeThisWeek){
+        return NSLocalizedString(@"Common_ThisWeek", @""); //@"本周";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeLastWeek){
+        return NSLocalizedString(@"Common_LastWeek", @""); //@"上周";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeThisYear){
+        return NSLocalizedString(@"Common_ThisYear", @""); //@"今年";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeLastYear){
+        return NSLocalizedString(@"Common_LastYear", @""); //@"去年";
+    }
+    else{
+        return NSLocalizedString(@"Common_CustomTime", @""); //@"自定义";
+    }
+
+}
 
 + (REMTimeRange *) relativeDateFromType:(REMRelativeTimeRangeType)relativeDateType
 {
@@ -336,8 +389,10 @@
 static NSDateFormatter *_formatter;
 +(NSDateFormatter *)currentFormatter
 {
-    if(_formatter == nil)
+    if(_formatter == nil){
         _formatter = [[NSDateFormatter alloc]init];
+        [_formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    }
     
     return _formatter;
 }
@@ -456,8 +511,10 @@ static NSCalendar *_gregorianCalendar;
 static NSCalendar *_currentCalendar;
 +(NSCalendar *)currentCalendar
 {
-    if(_currentCalendar == nil)
+    if(_currentCalendar == nil){
         _currentCalendar = [NSCalendar currentCalendar];
+        [_currentCalendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"] ];
+    }
     
     return _currentCalendar;
 }

@@ -10,7 +10,7 @@
 #import "REMWidgetTagSearchModel.h"
 #import "REMWidgetCommoditySearchModel.h"
 #import "REMWidgetRankingSearchModel.h"
-
+#import "REMWidgetMultiTimespanSearchModel.h"
 @implementation REMWidgetSearchModelBase
 
 + (REMWidgetSearchModelBase *)searchModelByDataStoreType:(REMDataStoreType)dataStoreType withParam:(NSDictionary *)param
@@ -18,10 +18,12 @@
     REMWidgetSearchModelBase *model=nil;
     if(dataStoreType == REMDSEnergyTagsTrend ||
        dataStoreType == REMDSEnergyTagsTrendUnit ||
-       dataStoreType == REMDSEnergyTagsDistribute ||
-       dataStoreType ==REMDSEnergyMultiTimeTrend ||
-       dataStoreType == REMDSEnergyMultiTimeDistribute){
+       dataStoreType == REMDSEnergyTagsDistribute ){
         model = [[REMWidgetTagSearchModel alloc]init];
+    }
+    else if( dataStoreType ==REMDSEnergyMultiTimeTrend ||
+            dataStoreType == REMDSEnergyMultiTimeDistribute){
+        model =[[REMWidgetMultiTimespanSearchModel alloc]init];
     }
     else if(dataStoreType ==REMDSEnergyCarbon ||
             dataStoreType ==REMDSEnergyCarbonDistribute ||

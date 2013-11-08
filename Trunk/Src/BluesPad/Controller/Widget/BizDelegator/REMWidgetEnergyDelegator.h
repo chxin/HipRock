@@ -44,6 +44,7 @@ typedef enum _REMWidgetLegendType{
 
 - (void)initSearchView;
 - (void)initChartView;
+- (void)initModelAndSearcher;
 
 - (void)changeTimeRange:(REMTimeRange *)newRange;
 
