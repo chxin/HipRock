@@ -17,9 +17,7 @@
 
 @interface REMChartTooltipItem()
 
-@property (nonatomic,weak) REMChartSeriesIndicator *indicator;
-@property (nonatomic,weak) UILabel *nameLabel;
-@property (nonatomic,weak) UILabel *valueLabel;
+//@property (nonatomic,weak) REMChartSeriesIndicator *indicator;
 
 @end
 
@@ -35,11 +33,9 @@
         self.layer.borderWidth = 1.0f;
         self.backgroundColor = [UIColor whiteColor];
         
-        CGSize nameLabelSize = [name sizeWithFont:[UIFont systemFontOfSize:kNameLabelFontSize]];
-        CGSize valueLabelSize = [[dataValue stringValue] sizeWithFont:[UIFont systemFontOfSize:kValueLabelFontSize]];
+        CGSize nameLabelSize = [@"a" sizeWithFont:[UIFont systemFontOfSize:kNameLabelFontSize]];
+        CGSize valueLabelSize = [@"a" sizeWithFont:[UIFont systemFontOfSize:kValueLabelFontSize]];
         
-        NSLog(@"name size: %@", NSStringFromCGSize(nameLabelSize));
-        NSLog(@"value size: %@", NSStringFromCGSize(valueLabelSize));
         
         CGFloat contentHeight = kIndicatorSize*2 + valueLabelSize.height;
         CGFloat firstLineTopOffset = (frame.size.height - contentHeight) / 2;
@@ -61,6 +57,7 @@
         nameLabel.textColor = [UIColor blackColor];
         
         [self addSubview:nameLabel];
+        self.nameLabel = nameLabel;
         
         // Value label
         UILabel *valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, secondLineTopOffset, frame.size.width, valueLabelSize.height)];
@@ -70,6 +67,7 @@
         valueLabel.textColor = [UIColor lightGrayColor];
         
         [self addSubview:valueLabel];
+        self.valueLabel = valueLabel;
     }
     return self;
 }
