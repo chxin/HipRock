@@ -18,11 +18,12 @@
     return (REMWidgetTagSearchModel *)self.model;
 }
 
-- (NSTimeInterval)deltaTimeIntervalFromBaseTime:(NSDate *)baseTime ToSecondTime:(NSDate *)secondTime{
+- (NSDate *)deltaTimeIntervalFromBaseTime:(NSDate *)baseTime ToSecondTime:(NSDate *)secondTime origTime:(NSDate *)origTime{
     
     NSDate *newBase;
     NSDate *newFollow;
     REMEnergyStep step=[self tagModel].step;
+    
     if(step == REMEnergyStepDay){
         newBase=[REMTimeHelper dateFromYear:[REMTimeHelper getYear:baseTime] Month:[REMTimeHelper getMonth:baseTime] Day:[REMTimeHelper getDay:baseTime] Hour:0];
         if([REMTimeHelper getHour:baseTime]>0){
@@ -32,11 +33,13 @@
         if([REMTimeHelper getHour:newFollow]>0){
             newFollow =[REMTimeHelper add:1 onPart:REMDateTimePartDay ofDate:newFollow];
         }
+        return [origTime dateByAddingTimeInterval:[newFollow timeIntervalSinceDate:newBase]];
     }
     else if(step == REMEnergyStepWeek)
     {
         newBase =[REMTimeHelper getNextMondayFromDate:baseTime];
         newFollow=[REMTimeHelper getNextMondayFromDate:secondTime];
+        return [origTime dateByAddingTimeInterval:[newFollow timeIntervalSinceDate:newBase]];
     }
     else if(step == REMEnergyStepMonth){
         newBase=[REMTimeHelper dateFromYear:[REMTimeHelper getYear:baseTime] Month:[REMTimeHelper getMonth:baseTime] Day:1 Hour:0];
@@ -47,6 +50,12 @@
         if([REMTimeHelper getDay:secondTime] !=1 || [REMTimeHelper getHour:secondTime]!=0){
             newFollow =[REMTimeHelper add:1 onPart:REMDateTimePartMonth ofDate:newFollow];
         }
+        int followMonth= [REMTimeHelper getMonth:newFollow];
+        int baseMonth=[REMTimeHelper getMonth:newBase];
+        int followYear=[REMTimeHelper getYear:newFollow];
+        int baseYear=[REMTimeHelper getYear:newBase];
+        
+        
     }
     else if(step==REMEnergyStepYear){
         newBase=[REMTimeHelper dateFromYear:[REMTimeHelper getYear:baseTime] Month:1 Day:1 Hour:0];
@@ -62,9 +71,10 @@
         return 0;
     }
     
-    return [newFollow timeIntervalSinceDate:newBase];
+    return nil;
     
 }
+
 
 
 - (REMEnergyViewData *)processEnergyData:(NSDictionary *)rawData{
@@ -86,11 +96,11 @@
         REMTargetEnergyData *followData=data.targetEnergyData[i];
         NSMutableArray *energyDataArray=[[NSMutableArray alloc]initWithCapacity:baseData.energyData.count];
         REMTimeRange *followTimeRange=model.timeRangeArray[i];
-        NSTimeInterval delta = [self deltaTimeIntervalFromBaseTime:baseTimeRange.startTime ToSecondTime:followTimeRange.startTime];
+
         for (int j=0; j<baseData.energyData.count; ++j) {
             REMEnergyData *energyData=[[REMEnergyData alloc]init];
             REMEnergyData *origData=baseData.energyData[j];
-            energyData.localTime=[origData.localTime dateByAddingTimeInterval:delta];
+            energyData.localTime=[self deltaTimeIntervalFromBaseTime:baseTimeRange.startTime ToSecondTime:followTimeRange.startTime origTime:origData.localTime];
             energyData.dataValue=[origData.dataValue copy];
             energyData.quality=origData.quality;
             [energyDataArray addObject:energyData];
