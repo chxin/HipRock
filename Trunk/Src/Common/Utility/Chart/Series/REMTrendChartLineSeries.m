@@ -12,8 +12,8 @@
     CPTPlotSymbol* normalSymbol;
     CPTPlotSymbol* highlightedSymbol;
 }
--(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
-    self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle startDate:startDate];
+-(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle {
+    self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle];
     occupy = NO;
     plot = [[CPTScatterPlot alloc]init];
     return self;

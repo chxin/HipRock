@@ -11,7 +11,15 @@
 @implementation REMLineWidgetWrapper
 -(REMTrendChartSeries*)createSeriesConfigOfIndex:(uint)seriesIndex {
     REMTargetEnergyData* targetEnergyData = (REMTargetEnergyData*)self.energyViewData.targetEnergyData[seriesIndex];
-    REMTrendChartLineSeries* s =[[REMTrendChartLineSeries alloc]initWithData:targetEnergyData.energyData dataProcessor:sharedProcessor plotStyle:nil startDate:self.baseDateOfX];
+    REMTrendChartDataProcessor* processor = nil;
+    if (useSharedProcessor) {
+        processor = sharedProcessor;
+    } else {
+        processor = [[REMTrendChartDataProcessor alloc]init];
+        processor.step = sharedProcessor.step;
+        processor.baseDate = targetEnergyData.energyData.count > 0 ? [targetEnergyData.energyData[0] localTime] : [NSDate dateWithTimeIntervalSince1970:0];
+    }
+    REMTrendChartLineSeries* s =[[REMTrendChartLineSeries alloc]initWithData:targetEnergyData.energyData dataProcessor:processor plotStyle:nil];
     s.target = targetEnergyData.target;
     s.uomId = targetEnergyData.target.uomId;
     s.uomName = targetEnergyData.target.uomName;
