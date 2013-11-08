@@ -23,6 +23,15 @@
 -(void)highlightPoints:(NSArray*)points colors:(NSArray*)colors names:(NSArray*)names;
 
 @end
+@protocol REMTPieChartDelegate <NSObject>
+/*
+ * points: List<REMEnergyData>
+ * colors: List<UIColor>
+ * names: List<NSString>
+ */
+-(void)highlightPoint:(REMEnergyData*)point color:(UIColor*)color name:(NSString*)name;
+
+@end
 
 
 //@interface REMTrendChartPoint : NSObject
@@ -75,6 +84,8 @@
 
 @interface REMPieChartSeries : REMChartSeries<CPTPieChartDataSource,CPTAnimationDelegate>
 @property (nonatomic) float animationDuration;
+-(CPTColor*)getColorByIndex:(NSUInteger)idx;
+@property (nonatomic) NSArray* targetNames;
 @end
 
 @interface REMTrendChartSeries : REMChartSeries {
@@ -233,7 +244,7 @@ typedef enum  {
 @end
 
 @interface REMPieChartView : CPTGraphHostingView<CPTPlotSpaceDelegate,REMChartView>
-
+@property (nonatomic, weak) id<REMTPieChartDelegate> delegate;
 @property (nonatomic, readonly) NSArray* series;
 -(void)cancelToolTipStatus;
 

@@ -12,6 +12,8 @@
 #import "REMChartSeriesIndicator.h"
 #import "REMChartLegendItem.h"
 #import "REMChartTooltipItem.h"
+#import "REMTooltipView.h"
+#import "REMEnergyDataPointModel.h"
 
 @interface REMWidgetEnergyDelegator()
 
@@ -27,6 +29,7 @@
 @property (nonatomic,strong) REMWidgetStepEnergyModel *tempModel;
 
 @property (nonatomic,strong) NSArray *supportStepArray;
+
 
 @end
 
@@ -124,8 +127,10 @@
     REMAbstractChartWrapper  *widgetWrapper;
     if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
+        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypeColumn) {
         widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
+        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypePie) {
         widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
     } else if (widgetType == REMDiagramTypeRanking) {
@@ -538,15 +543,6 @@
 }
 
 #pragma mark - Tooltip
--(void)registerTooltopEvent
-{
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tooltipEventHandler:) name:kREMChartLongPressNotification object:nil];
-}
-
--(void)unregisterTooltopEvent
-{
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:kREMChartLongPressNotification object:nil];
-}
 
 -(UIView *)prepareTooltipView
 {
@@ -571,6 +567,68 @@
     }
     
     return view;
+}
+
+-(void)highlightPoints:(NSArray*)points colors:(NSArray*)colors names:(NSArray*)names
+{
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    for(int i=0;i<names.count;i++){
+        REMEnergyDataPointModel *point = [[REMEnergyDataPointModel alloc] init];
+        point.name = names[i];
+        point.color = colors[i];
+        point.dataValue = points[i];
+        
+        [list addObject:point];
+    }
+    
+    if(self.tooltipView!=nil){
+        [self hideTooltip:^{
+            [self showTooltip:list];
+        }];
+    }
+    else{
+        [self showTooltip:list];
+    }
+    
+    
+    
+}
+
+-(void)tooltipWillDisapear
+{
+    NSLog(@"tooltip will disappear");
+    
+    if(self.tooltipView!=nil){
+        [self hideTooltip:^{
+            //TODO: Set chart status to normal
+        }];
+    }
+}
+
+-(void)showTooltip:(NSArray *)data
+{
+    REMTooltipView *tooltip = [[REMTooltipView alloc] initWithFrame:CGRectMake(0, -kDMChart_TooltipViewHeight, kDMScreenWidth, kDMChart_TooltipViewHeight) andData:data];
+    tooltip.tooltipDelegate = self;
+    
+    [self.view addSubview:tooltip];
+    self.tooltipView = tooltip;
+    
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        tooltip.frame = CGRectMake(0, 0, kDMScreenWidth, kDMChart_TooltipViewHeight);
+    } completion:nil];
+}
+
+-(void)hideTooltip:(void (^)(void))complete
+{
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.tooltipView.frame = CGRectMake(0, -kDMChart_TooltipViewHeight, kDMScreenWidth, kDMChart_TooltipViewHeight);
+    } completion:^(BOOL isCompleted){
+        [self.tooltipView removeFromSuperview];
+        self.tooltipView = nil;
+        
+        if(complete != nil)
+            complete();
+    }];
 }
 
 @end

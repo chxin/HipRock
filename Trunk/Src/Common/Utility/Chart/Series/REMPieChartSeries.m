@@ -69,7 +69,11 @@
     }
 }
 
+-(CPTColor*)getColorByIndex:(NSUInteger)idx {
+    return [REMColor colorByIndex:idx];
+}
+
 -(CPTFill *)sliceFillForPieChart:(CPTPieChart *)pieChart recordIndex:(NSUInteger)idx {
-    return [CPTFill fillWithColor:[REMColor colorByIndex:idx]];
+    return [CPTFill fillWithColor:[self getColorByIndex:idx]];
 }
 @end
