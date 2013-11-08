@@ -13,16 +13,18 @@
     return color.uiColor;
 }
 
--(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle {
-    NSDate* startDate = energyData.count > 0 ? ((REMEnergyData*)[energyData objectAtIndex:0]).localTime : [NSDate date];
-    return [self initWithData:energyData dataProcessor:processor plotStyle:plotStyle startDate:startDate];
-}
--(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
+-(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMTrendChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle {
+//    NSDate* startDate = energyData.count > 0 ? ((REMEnergyData*)[energyData objectAtIndex:0]).localTime : [NSDate date];
+//    if (![startDate isEqualToDate:processor.baseDate]) {
+//        REMEnergyStep step = processor.step;
+//        processor = [[REMTrendChartDataProcessor alloc]init];
+//        processor.baseDate = startDate;
+//        processor.step = step;
+//    }
     self = [super initWithData:energyData dataProcessor:processor plotStyle:plotStyle];
     if (self) {
         source = [[NSMutableArray alloc]init];
         _yScale = @(1);
-        _startDate = startDate;
         if (energyData.count == 0 || processor == nil) {
             _maxX = 0;
             _minX = energyData.count - 1;

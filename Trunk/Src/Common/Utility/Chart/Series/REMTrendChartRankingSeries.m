@@ -16,9 +16,6 @@
 @implementation REMTrendChartRankingSeries
 
 -(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle {
-    return [self initWithData:energyData dataProcessor:processor plotStyle:plotStyle startDate:[NSDate dateWithTimeIntervalSince1970:0]];
-}
--(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate {
     NSMutableArray* series0Data = [[NSMutableArray alloc]init];
     NSMutableArray* targets = [[NSMutableArray alloc]init];
     for (int i = 0; i < energyData.count; i++) {
@@ -29,7 +26,7 @@
             [targets addObject:seriesData.target.name];
         }
     }
-    self = [super initWithData:series0Data dataProcessor:processor plotStyle:plotStyle startDate:startDate];
+    self = [super initWithData:series0Data dataProcessor:processor plotStyle:plotStyle];
     if (self) {
         self.targetNames = targets;
         self.sortOrder = NSOrderedAscending;

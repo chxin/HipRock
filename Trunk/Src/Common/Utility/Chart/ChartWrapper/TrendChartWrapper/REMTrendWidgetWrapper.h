@@ -8,7 +8,9 @@
 
 #import "REMAbstractChartWrapper.h"
 
-@interface REMTrendWidgetWrapper : REMAbstractChartWrapper
+@interface REMTrendWidgetWrapper : REMAbstractChartWrapper {
+@protected BOOL useSharedProcessor;
+}
 -(NSArray*)extraSeriesConfig;
 @property (nonatomic, weak) NSDate* baseDateOfX;
 @property (nonatomic, assign) REMEnergyStep step;

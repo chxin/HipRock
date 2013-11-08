@@ -25,7 +25,7 @@
 -(REMTrendChartRankingSeries*)createSeriesConfigOfIndex:(uint)seriesIndex {
 //    _sortOrder = self.widgetSyntax.rankingSortOrder;
     
-    REMTrendChartRankingSeries* s =[[REMTrendChartRankingSeries alloc]initWithData:self.energyViewData.targetEnergyData dataProcessor:nil plotStyle:nil startDate:nil];
+    REMTrendChartRankingSeries* s =[[REMTrendChartRankingSeries alloc]initWithData:self.energyViewData.targetEnergyData dataProcessor:nil plotStyle:nil];
     REMTargetEnergyData* targetEnergyData = (REMTargetEnergyData*)self.energyViewData.targetEnergyData[0];
     s.uomId = targetEnergyData.target.uomId;
     s.uomName = targetEnergyData.target.uomName;
