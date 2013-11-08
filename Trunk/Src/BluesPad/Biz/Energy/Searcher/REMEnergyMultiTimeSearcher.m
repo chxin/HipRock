@@ -9,16 +9,20 @@
 #import "REMEnergyMultiTimeSearcher.h"
 #import "REMTargetEnergyData.h"
 #import "REMEnergyData.h"
+#import "REMWidgetTagSearchModel.h"
+
 
 @implementation REMEnergyMultiTimeSearcher
 
-
+- (REMWidgetTagSearchModel *)tagModel{
+    return (REMWidgetTagSearchModel *)self.model;
+}
 
 - (NSTimeInterval)deltaTimeIntervalFromBaseTime:(NSDate *)baseTime ToSecondTime:(NSDate *)secondTime{
     
     NSDate *newBase;
     NSDate *newFollow;
-    REMEnergyStep step=self.widgetInfo.contentSyntax.stepType;
+    REMEnergyStep step=[self tagModel].step;
     if(step == REMEnergyStepDay){
         newBase=[REMTimeHelper dateFromYear:[REMTimeHelper getYear:baseTime] Month:[REMTimeHelper getMonth:baseTime] Day:[REMTimeHelper getDay:baseTime] Hour:0];
         if([REMTimeHelper getHour:baseTime]>0){
@@ -36,11 +40,11 @@
     }
     else if(step == REMEnergyStepMonth){
         newBase=[REMTimeHelper dateFromYear:[REMTimeHelper getYear:baseTime] Month:[REMTimeHelper getMonth:baseTime] Day:1 Hour:0];
-        if([REMTimeHelper getDay:newBase] !=1 || [REMTimeHelper getHour:newBase]!=0){
+        if([REMTimeHelper getDay:baseTime] !=1 || [REMTimeHelper getHour:baseTime]!=0){
             newBase =[REMTimeHelper add:1 onPart:REMDateTimePartMonth ofDate:newBase];
         }
         newFollow=[REMTimeHelper dateFromYear:[REMTimeHelper getYear:secondTime] Month:[REMTimeHelper getMonth:secondTime] Day:1 Hour:0];
-        if([REMTimeHelper getDay:newFollow] !=1 || [REMTimeHelper getHour:newFollow]!=0){
+        if([REMTimeHelper getDay:secondTime] !=1 || [REMTimeHelper getHour:secondTime]!=0){
             newFollow =[REMTimeHelper add:1 onPart:REMDateTimePartMonth ofDate:newFollow];
         }
     }
@@ -66,20 +70,22 @@
 - (REMEnergyViewData *)processEnergyData:(NSDictionary *)rawData{
     REMEnergyViewData *data=[super processEnergyData:rawData];
     
-    if(self.widgetInfo.contentSyntax.stepType == REMEnergyStepHour) return data;
+    REMWidgetTagSearchModel *model=[self tagModel];
+    
+    if(model.step == REMEnergyStepHour) return data;
     
     REMTargetEnergyData *baseData= data.targetEnergyData[0];
     
     
     
-    REMTimeRange *baseTimeRange=baseData.target.visiableTimeRange;
+    REMTimeRange *baseTimeRange=model.timeRangeArray[0];
    
     
 
     for (int i=1; i<data.targetEnergyData.count; ++i) {
         REMTargetEnergyData *followData=data.targetEnergyData[i];
         NSMutableArray *energyDataArray=[[NSMutableArray alloc]initWithCapacity:baseData.energyData.count];
-        REMTimeRange *followTimeRange=followData.target.visiableTimeRange;
+        REMTimeRange *followTimeRange=model.timeRangeArray[i];
         NSTimeInterval delta = [self deltaTimeIntervalFromBaseTime:baseTimeRange.startTime ToSecondTime:followTimeRange.startTime];
         for (int j=0; j<baseData.energyData.count; ++j) {
             REMEnergyData *energyData=[[REMEnergyData alloc]init];

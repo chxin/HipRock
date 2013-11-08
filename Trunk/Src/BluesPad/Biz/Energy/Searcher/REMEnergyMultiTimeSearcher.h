@@ -10,6 +10,5 @@
 
 @interface REMEnergyMultiTimeSearcher : REMEnergySeacherBase
 
-@property (nonatomic) REMEnergyStep step;
 
 @end

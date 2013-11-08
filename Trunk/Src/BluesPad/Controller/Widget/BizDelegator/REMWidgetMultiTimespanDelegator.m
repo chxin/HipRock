@@ -14,11 +14,4 @@
 
 
 
-- (void)changeStep:(REMEnergyStep)newStep
-{
-    [super changeStep:newStep];
-    REMEnergyMultiTimeSearcher *searcher=(REMEnergyMultiTimeSearcher *)self.searcher;
-    searcher.step=newStep;
-}
-
 @end

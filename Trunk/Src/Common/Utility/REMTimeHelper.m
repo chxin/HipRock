@@ -389,8 +389,10 @@
 static NSDateFormatter *_formatter;
 +(NSDateFormatter *)currentFormatter
 {
-    if(_formatter == nil)
+    if(_formatter == nil){
         _formatter = [[NSDateFormatter alloc]init];
+        [_formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    }
     
     return _formatter;
 }
@@ -509,8 +511,10 @@ static NSCalendar *_gregorianCalendar;
 static NSCalendar *_currentCalendar;
 +(NSCalendar *)currentCalendar
 {
-    if(_currentCalendar == nil)
+    if(_currentCalendar == nil){
         _currentCalendar = [NSCalendar currentCalendar];
+        [_currentCalendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"] ];
+    }
     
     return _currentCalendar;
 }

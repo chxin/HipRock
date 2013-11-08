@@ -27,9 +27,10 @@
     return  obj;
 }
 
-- (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(NSDictionary *)params withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void (^)(id,REMBusinessErrorInfo *))callback
+- (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(REMWidgetSearchModelBase *)model withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void (^)(id, REMBusinessErrorInfo *))callback
 {
-    REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:params];
+    self.model=model;
+    REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:[model toSearchParam]];
     store.maskContainer=maskerContainer;
     store.groupName=groupName;
     [REMDataAccessor access:store success:^(NSDictionary *data){
@@ -38,11 +39,12 @@
         if(callback!=nil){
             callback(viewData,nil);
         }
-    
+        
     } error:^(NSError *error,REMBusinessErrorInfo *errorInfo){
         callback(nil,errorInfo);
     }];
 }
+
 
 - (REMEnergyViewData *)processEnergyData:(NSDictionary *)rawData{
     return [[REMEnergyViewData alloc]initWithDictionary:rawData];;
