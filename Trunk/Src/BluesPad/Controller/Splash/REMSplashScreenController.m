@@ -72,15 +72,15 @@
     syntax.xtype = @"columnchartcomponent";
     syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
     NSMutableArray* timeRanges = [[NSMutableArray alloc]initWithCapacity:1];
-    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*70]];
+    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10]];
     [timeRanges setObject:r atIndexedSubscript:0];
     syntax.timeRanges = timeRanges;
     
     REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
     NSMutableArray* sereis = [[NSMutableArray alloc]init];
-    for (int sIndex = 0; sIndex < 1; sIndex++) {
+    for (int sIndex = 0; sIndex < 10; sIndex++) {
         NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
-        for (int i = 0; i < 80; i++) {
+        for (int i = 0; i < 10000; i++) {
             REMEnergyData* data = [[REMEnergyData alloc]init];
             data.quality = REMEnergyDataQualityGood;
             data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
@@ -117,7 +117,7 @@
     [style setObject:textStyle forKey:@"yTextStyle"];
     [style setObject:gridlineStyle forKey:@"yGridlineStyle"];
     [style setObject:@(6) forKey:@"horizentalGridLineAmount"];
-    REMLineWidgetWrapper* columnWidget = [[REMLineWidgetWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax styleDictionary:style];
+    REMColumnWidgetWrapper* columnWidget = [[REMColumnWidgetWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax styleDictionary:style];
     columnWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:columnWidget.view];
 }

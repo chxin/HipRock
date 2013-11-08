@@ -9,6 +9,6 @@
 #import "CPTGraphHostingView.h"
 #import "REMChartHeader.h"
 
-@interface REMTestChartView : CPTGraphHostingView<CPTBarPlotDataSource,CPTPlotSpaceDelegate, CPTBarPlotDelegate>
+@interface REMTestChartView : CPTGraphHostingView<CPTBarPlotDataSource,CPTPlotSpaceDelegate, CPTBarPlotDelegate, CPTScatterPlotDataSource, CPTScatterPlotDelegate>
 
 @end

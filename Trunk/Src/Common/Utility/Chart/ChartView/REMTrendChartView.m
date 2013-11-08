@@ -45,7 +45,7 @@
 -(REMTrendChartView*)initWithFrame:(CGRect)frame chartConfig:(REMTrendChartConfig*)config  {
     self = [super initWithFrame:frame];
     if (self) {
-        self.collapsesLayers = YES;
+        self.collapsesLayers = NO;
         self.allowPinchScaling = NO;
         self.userInteractionEnabled = config.userInteraction;
         if (self.userInteractionEnabled) {
