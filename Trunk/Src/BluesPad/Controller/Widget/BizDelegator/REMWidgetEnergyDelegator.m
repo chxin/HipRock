@@ -501,6 +501,22 @@
     }
 }
 
+#pragma mark -
+#pragma mark touch moved
+- (void)touchEndedInNormalStatus:(id)start end:(id)end
+{
+    
+}
+
+- (void)willRangeChange:(id)start end:(id)end
+{
+    NSDate *newStart=start;
+    NSDate *newEnd=end;
+    
+    
+}
+
+
 #pragma mark - Legend bar
 
 -(UIView *)prepareLegendView

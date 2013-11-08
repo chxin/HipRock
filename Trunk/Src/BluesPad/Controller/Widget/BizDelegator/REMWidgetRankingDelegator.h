@@ -11,6 +11,7 @@
 #import "REMWidgetEnergyDelegator.h"
 #import "REMDimensions.h"
 #import "REMWidgetRankingSearchModel.h"
+#import "REMChartHeader.h"
 
 
 @interface REMWidgetRankingDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol>
