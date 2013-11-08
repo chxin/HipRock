@@ -62,17 +62,6 @@
         _horizentalGridLineAmount = config.horizentalGridLineAmount;
         _series = config.series;
         _xGlobalLength = config.xGlobalLength;
-//        if (config.xStartDate == nil) {
-//            _xStartDate = ((REMTrendChartSeries*)[self.series objectAtIndex:0]).startDate;
-//            for (int i = 1; i < self.series.count; i++) {
-//                REMTrendChartSeries* s = [self.series objectAtIndex:i];
-//                if (s.startDate < _xStartDate) {
-//                    _xStartDate = s.startDate;
-//                }
-//            }
-//        } else {
-//            _xStartDate = config.xStartDate;
-//        }
         
         CPTXYGraph *graph=[[CPTXYGraph alloc]initWithFrame:self.bounds];
         self.hostedGraph=graph;
@@ -325,6 +314,20 @@
         if (isHighlightedStatus) {
             return space.xRange;
         } else {
+            id s, e;
+            
+            REMChartDataProcessor* processor = self.series.count > 0 ? ((REMTrendChartSeries*) self.series[0]).dataProcessor: nil;
+            if (processor) {
+                s = [processor deprocessX:newRange.locationDouble];
+                e = [processor deprocessX:newRange.lengthDouble+newRange.locationDouble];
+            } else {
+                s = [NSDecimalNumber decimalNumberWithDecimal:newRange.location];
+                e = @([s doubleValue] + [NSDecimalNumber decimalNumberWithDecimal:newRange.length].doubleValue);
+            }
+            
+            if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
+                [self.delegate willRangeChange:s end:e];
+            }
             suspendDraw = YES;
 
             float newRangeStart = [NSDecimalNumber decimalNumberWithDecimal:newRange.location].floatValue;
@@ -390,7 +393,7 @@
         
         [self focusPointAtX:xInCoor];
     } else {
-        [super touchesBegan:touches withEvent:event];
+        [super touchesMoved:touches withEvent:event];
     }
 }
 
