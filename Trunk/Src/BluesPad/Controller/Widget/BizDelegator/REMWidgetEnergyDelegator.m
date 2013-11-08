@@ -24,7 +24,7 @@
 @property (nonatomic,strong) REMAbstractChartWrapper *chartWrapper;
 
 @property (nonatomic,strong) NSArray *currentStepList;
-@property (nonatomic,weak) UIView *tooltipView;
+@property (nonatomic,weak) REMTooltipView *tooltipView;
 
 @property (nonatomic,strong) REMWidgetStepEnergyModel *tempModel;
 
@@ -569,9 +569,10 @@
     }
     
     if(self.tooltipView!=nil){
-        [self hideTooltip:^{
-            [self showTooltip:list];
-        }];
+//        [self hideTooltip:^{
+//            [self showTooltip:list];
+//        }];
+        [self.tooltipView update:list];
     }
     else{
         [self showTooltip:list];

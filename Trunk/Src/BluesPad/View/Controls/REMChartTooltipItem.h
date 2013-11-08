@@ -10,6 +10,9 @@
 
 @interface REMChartTooltipItem : UIControl
 
+@property (nonatomic,weak) UILabel *nameLabel;
+@property (nonatomic,weak) UILabel *valueLabel;
+
 - (id)initWithFrame:(CGRect)frame withName:(NSString *)name color:(UIColor *)color andValue:(NSNumber *)dataValue;
 
 @end

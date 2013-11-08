@@ -19,4 +19,6 @@
 
 - (id)initWithFrame:(CGRect)frame andData:(NSArray *)data;
 
+- (void)update:(NSArray *)data;
+
 @end
