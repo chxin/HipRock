@@ -26,6 +26,12 @@
 #define kTooltipItemMaxCount 4.2
 #define kTooltipMinWidth (kTooltipScrollViewWidth - ((int)kTooltipItemMaxCount)*kTooltipItemHorizontalOffset) / kTooltipItemMaxCount
 
+@interface REMTooltipView()
+
+@property (nonatomic,strong) NSMutableArray *tooltipItems;
+
+@end
+
 @implementation REMTooltipView
 
 - (id)initWithFrame:(CGRect)frame andData:(NSArray *)data;
@@ -38,6 +44,8 @@
         self.layer.borderColor = [UIColor blackColor].CGColor;
         self.backgroundColor = [UIColor whiteColor];
         
+        self.tooltipItems = [[NSMutableArray alloc] init];
+        
         [self drawScrollView:data];
         
         [self drawCloseView];
@@ -45,14 +53,17 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)update:(NSArray *)data
 {
-    // Drawing code
+    for(int i=0;i<data.count;i++){
+        REMEnergyDataPointModel *point = data[i];
+        
+        REMChartTooltipItem *item = [self.tooltipItems objectAtIndex:i];
+        
+        item.nameLabel.text = point.name;
+        item.valueLabel.text = REMIsNilOrNull(point.dataValue) ? @"" : [point.dataValue.dataValue stringValue];
+    }
 }
-*/
 
 -(void)drawScrollView:(NSArray *)data
 {
@@ -77,6 +88,7 @@
         REMChartTooltipItem *tooltipItem = [[REMChartTooltipItem alloc] initWithFrame:itemFrame withName:point.name color:point.color andValue: (REMIsNilOrNull(point.dataValue)? nil : point.dataValue.dataValue)];
         
         [view addSubview:tooltipItem];
+        [self.tooltipItems addObject:tooltipItem];
     }
     
     view.contentSize = CGSizeMake(contentWidth, kTooltipViewHeight);
