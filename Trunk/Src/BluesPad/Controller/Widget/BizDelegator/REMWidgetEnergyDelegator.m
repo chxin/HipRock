@@ -57,6 +57,7 @@
 
 - (void)initChartView{
     UIView *chartContainer=[[UIView alloc]initWithFrame:CGRectMake(kWidgetChartLeftMargin, kWidgetChartTopMargin, kWidgetChartWidth, kWidgetChartHeight)];
+    [chartContainer setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
     [self.view addSubview:chartContainer];
     self.chartContainer=chartContainer;
     self.maskerView=self.chartContainer;
@@ -420,30 +421,39 @@
 }
 
 
+
 - (void)initSearchView{
     
     UIView *searchViewContainer=[[UIView alloc]initWithFrame:kDMChart_ToolbarFrame];
     
-    
+    [searchViewContainer setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
     
     UISegmentedControl *legendControl=[[UISegmentedControl alloc] initWithItems:@[@"search",@"legend"]];
-    [legendControl setFrame:CGRectMake(800, kLegendSearchSwitcherTop, 200, 30)];
+    [legendControl setFrame:CGRectMake(kLegendSearchSwitcherLeft, kLegendSearchSwitcherTop, kLegendSearchSwitcherWidth, kLegendSearchSwitcherHeight)];
+    [legendControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+
     UIImage *search=[UIImage imageNamed:@"Up"];
     UIImage *legend=[UIImage imageNamed:@"Down"];
     [legendControl setImage:search forSegmentAtIndex:0];
     [legendControl setImage:legend forSegmentAtIndex:1];
+    //[legendControl setBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    //[legendControl setBackgroundColor:[UIColor clearColor]];
     [legendControl setSelectedSegmentIndex:0];
     [legendControl addTarget:self action:@selector(legendSwitchSegmentPressed:) forControlEvents:UIControlEventValueChanged];
     
+    
     [self.view addSubview:legendControl];
     self.legendSearchControl=legendControl;
+
     
-    UIButton *timePickerButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, 0, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
-    
+    UIButton *timePickerButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, kWidgetDatePickerTopMargin, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
+    timePickerButton.layer.borderColor=[UIColor clearColor].CGColor;
+    timePickerButton.layer.borderWidth=0;
     [timePickerButton setImage:[UIImage imageNamed:@"Oil_pressed"] forState:UIControlStateNormal];
     [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, kWidgetDatePickerWidth-40)];
-    [timePickerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    timePickerButton.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetDatePickerTitleSize];
+    [timePickerButton setTitleColor:[REMColor colorByHexString:@"#5e5e5e"] forState:UIControlStateNormal];
     
     [timePickerButton addTarget:self action:@selector(showTimePicker) forControlEvents:UIControlEventTouchUpInside];
     
@@ -499,13 +509,31 @@
         }
         
     }
+    
 }
 
 #pragma mark -
 #pragma mark touch moved
 - (void)touchEndedInNormalStatus:(id)start end:(id)end
 {
+    NSDate *newStart=start;
+    NSDate *newEnd=end;
     
+    [self willRangeChange:start end:end];
+    
+    if(self.tempModel.step == REMEnergyStepHour){
+        [self doSearchWithModel:self.tempModel callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
+            if(data!=nil){
+                [self reloadChart];
+                [self copyTempModel];
+            }
+            else{
+                if([error.code isEqualToString:@"990001202004"]==YES){ //step error
+                    [self processStepErrorWithAvailableStep:error.messages[0]];
+                }
+            }
+        }];
+    }
 }
 
 - (void)willRangeChange:(id)start end:(id)end

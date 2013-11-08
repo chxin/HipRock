@@ -18,12 +18,12 @@
 #import "REMWidgetBizDelegatorBase.h"
 
 
-const static CGFloat kWidgetBackButtonLeft=10;
-const static CGFloat kWidgetBackButtonTop=10;
-const static CGFloat kWidgetBackButtonWidthHeight=30;
+const static CGFloat kWidgetBackButtonLeft=25;
+const static CGFloat kWidgetBackButtonTop=18;
+const static CGFloat kWidgetBackButtonWidthHeight=32;
 const static CGFloat kWidgetTitleLeftMargin=10;
 const static CGFloat kWidgetTitleHeight=30;
-const static CGFloat kWidgetTitleFontSize=25;
+const static CGFloat kWidgetTitleFontSize=18;
 
 @interface REMWidgetDetailViewController ()
 
@@ -56,7 +56,7 @@ const static CGFloat kWidgetTitleFontSize=25;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.view setBackgroundColor:[UIColor grayColor]];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
     [self.view setFrame:CGRectMake(0, 0, 1024, 748)];
     
@@ -80,7 +80,7 @@ const static CGFloat kWidgetTitleFontSize=25;
     UILabel *widgetTitle=[[UILabel alloc]initWithFrame:CGRectMake(backButton.frame.origin.x+backButton.frame.size.width+kWidgetTitleLeftMargin, backButton.frame.origin.y, self.view.frame.size.width, kWidgetTitleHeight)];
     widgetTitle.text=self.widgetInfo.name;
     widgetTitle.backgroundColor=[UIColor clearColor];
-    widgetTitle.textColor=[UIColor whiteColor];
+    widgetTitle.textColor=[REMColor colorByHexString:@"#37ab3c"];
     widgetTitle.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetTitleFontSize];
     [self.view addSubview:widgetTitle];
     self.widgetTitleLabel=widgetTitle;
