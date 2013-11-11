@@ -26,7 +26,7 @@
  * Parameter data type: NSDate for line/column. NSNumber for ranking.
  */
 -(void)willRangeChange:(id)start end:(id)end;
-
+-(void)touchEndedInNormalStatus:(id)start end:(id)end;
 @end
 @protocol REMTPieChartDelegate <NSObject>
 /*
@@ -116,16 +116,10 @@
  * 最后一个点用processor处理后的x值，作为本序列在x方向上最大值
  */
 @property (nonatomic, readonly) float maxX;
-/*
- * x数据处理的起点时间
- */
-@property (nonatomic, readonly) NSDate* startDate;
 
 @property (nonatomic, assign) NSRange visableRange;
 
 -(NSUInteger)getIndexOfCachePointByCoordinate:(double)xCoordinate;
-
--(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle startDate:(NSDate*)startDate;
 
 -(BOOL)isOccupy;
 -(UIColor*)getSeriesColor;

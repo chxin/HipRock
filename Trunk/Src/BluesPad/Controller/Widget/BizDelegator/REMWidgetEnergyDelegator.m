@@ -51,7 +51,7 @@
 - (void)initModelAndSearcher{
     self.model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
                   .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
-    self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType];
+    self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
     self.tempModel=(REMWidgetStepEnergyModel *)[REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
                     .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
 }
@@ -67,6 +67,9 @@
     //[self showEnergyChart];
 
     [self setStepControlStatusByStepNoSearch:self.widgetInfo.contentSyntax.stepType];
+    
+    
+    
     [self setDatePickerButtonValueNoSearchByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateComponent withRelativeType:self.widgetInfo.contentSyntax.relativeDateType];
 }
 
@@ -241,6 +244,7 @@
     [self.stepControl removeFromSuperview];
     [self.searchView addSubview:control];
     self.stepControl=control;
+    [self.stepControl addTarget:self action:@selector(stepChanged:) forControlEvents:UIControlEventValueChanged];
     NSNumber *newStep = [NSNumber numberWithInt:((int)step)];
     NSUInteger idx;
     if([list containsObject:newStep] == YES)
@@ -259,6 +263,12 @@
     return (REMEnergyStep)[newStep intValue];
 }
 
+- (void)stepChanged:(UISegmentedControl *)control{
+    NSUInteger index=  control.selectedSegmentIndex;
+    NSNumber *number=self.currentStepList[index];
+    REMEnergyStep currentStep= (REMEnergyStep) [number intValue];
+    [self setStepControlStatusByStep:currentStep];
+}
 
 - (void)copyTempModel{
     self.model=[self.tempModel copy];
@@ -447,16 +457,19 @@
     
     self.timePickerButton = timePickerButton;
     
+    [self.view addSubview:searchViewContainer];
+    
+    self.searchView=searchViewContainer;
     
     UISegmentedControl *stepControl=[[UISegmentedControl alloc] initWithItems:@[@"hour",@"day",@"week",@"month",@"year"]];
     [stepControl setFrame:CGRectMake(700, timePickerButton.frame.origin.y, 5*kWidgetStepSingleButtonWidth, 30)];
     
-    
     [searchViewContainer addSubview:stepControl];
     self.stepControl=stepControl;
-    REMTimeRange *timeRange=self.widgetInfo.contentSyntax.timeRanges[0];
+     [self.stepControl addTarget:self action:@selector(stepChanged:) forControlEvents:UIControlEventValueChanged];
+    REMTimeRange *timeRange=self.tempModel.timeRangeArray[0];
     REMEnergyStep step = [self initStepButtonWithRange:timeRange WithStep:self.widgetInfo.contentSyntax.stepType];
-    [self.view addSubview:searchViewContainer];
+    
     
     
 }
@@ -492,6 +505,22 @@
         
     }
 }
+
+#pragma mark -
+#pragma mark touch moved
+- (void)touchEndedInNormalStatus:(id)start end:(id)end
+{
+    
+}
+
+- (void)willRangeChange:(id)start end:(id)end
+{
+    NSDate *newStart=start;
+    NSDate *newEnd=end;
+    
+    
+}
+
 
 #pragma mark - Legend bar
 

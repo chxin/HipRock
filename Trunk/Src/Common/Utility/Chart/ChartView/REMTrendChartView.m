@@ -45,7 +45,7 @@
 -(REMTrendChartView*)initWithFrame:(CGRect)frame chartConfig:(REMTrendChartConfig*)config  {
     self = [super initWithFrame:frame];
     if (self) {
-        self.collapsesLayers = YES;
+        self.collapsesLayers = NO;
         self.allowPinchScaling = NO;
         self.userInteractionEnabled = config.userInteraction;
         if (self.userInteractionEnabled) {
@@ -92,6 +92,7 @@
 }
 
 -(void)renderRange:(float)location length:(float)length {
+    if (self.series.count == 0) return;
     if (length <= 0) return;
     location -= 0.5;
     if (length == currentXLength && location == currentXLocation) return;
@@ -410,6 +411,24 @@
     } else {
         [super touchesBegan:touches withEvent:event];
     }
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (!isHighlightedStatus && self.delegate && [self.delegate respondsToSelector:@selector(touchEndedInNormalStatus:end:)]) {
+        id s, e;
+        
+        REMChartDataProcessor* processor = self.series.count > 0 ? ((REMTrendChartSeries*) self.series[0]).dataProcessor: nil;
+        CPTPlotRange* newRange = ((CPTXYPlotSpace*)self.hostedGraph.defaultPlotSpace).xRange;
+        if (processor) {
+            s = [processor deprocessX:newRange.locationDouble];
+            e = [processor deprocessX:newRange.lengthDouble+newRange.locationDouble];
+        } else {
+            s = [NSDecimalNumber decimalNumberWithDecimal:newRange.location];
+            e = @([s doubleValue] + [NSDecimalNumber decimalNumberWithDecimal:newRange.length].doubleValue);
+        }
+        [self.delegate touchEndedInNormalStatus:s end:e];
+    }
+    [super touchesEnded:touches withEvent:event];
 }
 
 -(void)focusPointAtX:(double)xInCoor {

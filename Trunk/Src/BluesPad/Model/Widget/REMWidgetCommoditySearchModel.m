@@ -8,6 +8,13 @@
 
 #import "REMWidgetCommoditySearchModel.h"
 
+
+@interface REMWidgetCommoditySearchModel(){
+    REMRelativeTimeRangeType _relativeType;
+}
+
+@end
+
 @implementation REMWidgetCommoditySearchModel
 
 
@@ -59,6 +66,20 @@
             self.hierarchyId=[hierId copy];
         }
     }
+}
+
+- (void)setRelativeDateType:(REMRelativeTimeRangeType)relativeDateType{
+    if(relativeDateType!=_relativeType){
+        REMTimeRange *range= [REMTimeHelper relativeDateFromType:relativeDateType];
+        [self setTimeRangeItem:range AtIndex:0];
+        _relativeType=relativeDateType;
+        self.relativeDateComponent=[REMTimeHelper relativeDateComponentFromType:_relativeType];
+
+    }
+}
+
+- (REMRelativeTimeRangeType)relativeDateType{
+    return _relativeType;
 }
 
 - (id)copyWithZone:(NSZone *)zone{

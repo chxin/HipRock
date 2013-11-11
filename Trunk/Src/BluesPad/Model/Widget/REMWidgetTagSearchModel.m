@@ -44,9 +44,12 @@
 
 
 - (void)setRelativeDateType:(REMRelativeTimeRangeType)relativeDateType{
-    REMTimeRange *range= [REMTimeHelper relativeDateFromType:relativeDateType];
-    [self setTimeRangeItem:range AtIndex:0];
-    _relativeType=relativeDateType;
+    if(relativeDateType!=_relativeType){
+        REMTimeRange *range= [REMTimeHelper relativeDateFromType:relativeDateType];
+        [self setTimeRangeItem:range AtIndex:0];
+        _relativeType=relativeDateType;
+        self.relativeDateComponent=[REMTimeHelper relativeDateComponentFromType:_relativeType];
+    }
 }
 
 - (REMRelativeTimeRangeType)relativeDateType{

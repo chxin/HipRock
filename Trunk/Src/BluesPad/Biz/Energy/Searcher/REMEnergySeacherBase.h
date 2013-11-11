@@ -10,13 +10,19 @@
 #import "REMEnum.h"
 #import "REMWidgetContentSyntax.h"
 #import "REMBusinessErrorInfo.h"
-
+#import "REMEnergyViewData.h"
+#import "REMWidgetObject.h"
+#import "REMWidgetSearchModelBase.h"
 
 @interface REMEnergySeacherBase : NSObject
 
-+ (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType) storeType;
+@property (nonatomic,weak) REMWidgetObject *widgetInfo;
+@property (nonatomic,weak) REMWidgetSearchModelBase *model;
 
-- (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(NSDictionary *)params withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void(^)(id,REMBusinessErrorInfo *))callback;
++ (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType) storeType withWidgetInfo:(REMWidgetObject *)widgetInfo;
 
+- (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(REMWidgetSearchModelBase *)model withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void(^)(id,REMBusinessErrorInfo *))callback;
+
+- (REMEnergyViewData *)processEnergyData:(NSDictionary *)rawData;
 
 @end

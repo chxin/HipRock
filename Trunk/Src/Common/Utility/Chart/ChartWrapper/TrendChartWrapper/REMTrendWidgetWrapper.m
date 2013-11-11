@@ -45,6 +45,10 @@
     }
 }
 -(void)extraSyntax:(REMWidgetContentSyntax*)widgetSyntax {
+    NSRange range = [widgetSyntax.xtype rangeOfString : @"multitimespan"];
+    BOOL found = ( range.location != NSNotFound );
+    useSharedProcessor = !found;
+    
     _step = widgetSyntax.step.intValue;
     _timeRange = widgetSyntax.timeRanges[0];
     [super extraSyntax:widgetSyntax];

@@ -8,37 +8,48 @@
 
 #import "REMEnergySeacherBase.h"
 #import "REMEnergyMultiTimeSearcher.h"
-#import "REMEnergyViewData.h"
+
 
 
 
 @implementation REMEnergySeacherBase
 
-+ (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType)storeType
++ (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType)storeType withWidgetInfo:(REMWidgetObject *)widgetInfo
 {
+    REMEnergySeacherBase *obj;
     if (storeType == REMDSEnergyMultiTimeDistribute ||storeType == REMDSEnergyMultiTimeTrend) {
-        return [[REMEnergyMultiTimeSearcher alloc]init];
+        obj= [[REMEnergyMultiTimeSearcher alloc]init];
     }
     else{
-        return [[REMEnergySeacherBase alloc]init];
+        obj=[[REMEnergySeacherBase alloc]init];
     }
+    obj.widgetInfo=widgetInfo;
+    return  obj;
 }
 
-- (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(NSDictionary *)params withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void (^)(id,REMBusinessErrorInfo *))callback
+- (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(REMWidgetSearchModelBase *)model withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void (^)(id, REMBusinessErrorInfo *))callback
 {
-    REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:params];
+    self.model=model;
+    REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:[model toSearchParam]];
     store.maskContainer=maskerContainer;
     store.groupName=groupName;
     [REMDataAccessor access:store success:^(NSDictionary *data){
         if([data isEqual:[NSNull null]]==YES)return ;
-        REMEnergyViewData *viewData=[[REMEnergyViewData alloc]initWithDictionary:data];
+        REMEnergyViewData *viewData=[self processEnergyData:data];
         if(callback!=nil){
             callback(viewData,nil);
         }
-    
+        
     } error:^(NSError *error,REMBusinessErrorInfo *errorInfo){
         callback(nil,errorInfo);
     }];
 }
+
+
+- (REMEnergyViewData *)processEnergyData:(NSDictionary *)rawData{
+    return [[REMEnergyViewData alloc]initWithDictionary:rawData];;
+}
+
+
 
 @end

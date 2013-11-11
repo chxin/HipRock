@@ -1,14 +1,12 @@
 /*------------------------------Summary-------------------------------------
  * Product Name : EMOP iOS Application Software
- * File Name	: REMEnergyMultiTimeSearcher.h
- * Created      : tantan on 10/10/13.
+ * File Name	: REMWidgetMultiTimespanDelegator.h
+ * Date Created : tantan on 11/7/13.
  * Description  : IOS Application software based on Energy Management Open Platform
  * Copyright    : Schneider Electric (China) Co., Ltd.
- --------------------------------------------------------------------------*///
+--------------------------------------------------------------------------*/
+#import "REMWidgetEnergyDelegator.h"
 
-#import "REMEnergySeacherBase.h"
-
-@interface REMEnergyMultiTimeSearcher : REMEnergySeacherBase
-
+@interface REMWidgetMultiTimespanDelegator : REMWidgetEnergyDelegator
 
 @end
