@@ -47,12 +47,12 @@
         if (xVal > endLocation) break;
         
         while (index != xVal) {
-            NSNumber* base = [self getBaseValueAtIndex:index];
+            NSNumber* base = [self getBaseValueAtIndex:index-self.visableRange.location];
             [source addObject:@{@"x":@(index), @"y":[NSNull null], @"base":base, @"enenrgydata":[NSNull null]}];
             index++;
         }
         
-        NSNumber* base = [self getBaseValueAtIndex:index];
+        NSNumber* base = [self getBaseValueAtIndex:index-self.visableRange.location];
         [source addObject:@{@"x":@(xVal), @"y":@([self.dataProcessor processY:data.dataValue].doubleValue+base.doubleValue), @"base":base, @"enenrgydata":data}];
         index++;
         
