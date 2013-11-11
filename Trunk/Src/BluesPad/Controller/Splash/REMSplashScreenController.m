@@ -96,28 +96,8 @@
     
     energyViewData.targetEnergyData = sereis;
     
-    NSMutableDictionary* style = [[NSMutableDictionary alloc]init];
-    //    self.userInteraction = ([dictionary[@"userInteraction"] isEqualToString:@"YES"]) ? YES : NO;
-    //    self.series = dictionary[@"series"];
-    CPTMutableLineStyle* gridlineStyle = [[CPTMutableLineStyle alloc]init];
-    CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
-    gridlineStyle.lineColor = [CPTColor whiteColor];
-    gridlineStyle.lineWidth = 1.0;
-    textStyle.fontName = @kBuildingFontSCRegular;
-    textStyle.fontSize = 16.0;
-    textStyle.color = [CPTColor whiteColor];
-    textStyle.textAlignment = CPTTextAlignmentCenter;
-    
-    [style setObject:@"YES" forKey:@"userInteraction"];
-    [style setObject:@(0.05) forKey:@"animationDuration"];
-    [style setObject:gridlineStyle forKey:@"xLineStyle"];
-    [style setObject:textStyle forKey:@"xTextStyle"];
-    //    [style setObject:nil forKey:@"xGridlineStyle"];
-    //    [style setObject:nil forKey:@"yLineStyle"];
-    [style setObject:textStyle forKey:@"yTextStyle"];
-    [style setObject:gridlineStyle forKey:@"yGridlineStyle"];
-    [style setObject:@(6) forKey:@"horizentalGridLineAmount"];
-    REMColumnWidgetWrapper* columnWidget = [[REMColumnWidgetWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax styleDictionary:style];
+    REMChartStyle* style = [REMChartStyle getMaximizedStyle];
+    REMColumnWidgetWrapper* columnWidget = [[REMColumnWidgetWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
     columnWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:columnWidget.view];
 }

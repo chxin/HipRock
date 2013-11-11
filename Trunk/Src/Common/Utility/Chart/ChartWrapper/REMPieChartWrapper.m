@@ -13,8 +13,8 @@
     return  [[REMPieChartView alloc]initWithFrame:frame chartConfig:chartConfig];
 }
 
--(REMChartConfig*)getChartConfig:(NSDictionary*)style {
-    REMChartConfig* chartConfig = [[REMChartConfig alloc]initWithDictionary:style];
+-(REMChartConfig*)getChartConfig:(REMChartStyle*)style {
+    REMChartConfig* chartConfig = [[REMChartConfig alloc]initWithStyle:style];
     
     NSMutableArray* series0Data = [[NSMutableArray alloc]init];
     int seriesCount = 0;

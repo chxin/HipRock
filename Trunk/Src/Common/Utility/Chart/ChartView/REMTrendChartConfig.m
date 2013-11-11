@@ -9,11 +9,11 @@
 #import "REMChartHeader.h"
 
 @implementation REMTrendChartConfig
--(REMTrendChartConfig*)initWithDictionary:(NSDictionary*)dictionary {
-    self = [super initWithDictionary:dictionary];
+-(REMChartConfig*)initWithStyle:(REMChartStyle *)style {
+    self = [super initWithStyle:style];
     if (self) {
-        self.xAxisConfig = [[REMTrendChartAxisConfig alloc]initWithLineStyle:dictionary[@"xLineStyle"] gridlineStyle:dictionary[@"xGridlineStyle"] textStyle:dictionary[@"xTextStyle"]];
-        self.horizentalGridLineAmount = ((NSNumber*)dictionary[@"horizentalGridLineAmount"]).intValue;
+        self.xAxisConfig = [[REMTrendChartAxisConfig alloc]initWithLineStyle:style.xLineStyle gridlineStyle:style.xGridlineStyle textStyle:style.xTextStyle];
+        self.horizentalGridLineAmount = style.horizentalGridLineAmount;
     }
     return self;
 }

@@ -13,6 +13,7 @@
 #import "REMBuildingConstants.h"
 #import "REMEnergyTargetModel.h"
 #import "REMColor.h"
+#import "REMChartStyle.h"
 
 @protocol REMTrendChartDelegate <NSObject>
 /*
@@ -187,7 +188,7 @@ typedef enum  {
  */
 @property (nonatomic, assign) float animationDuration;
 
--(REMChartConfig*)initWithDictionary:(NSDictionary*)dictionary;
+-(REMChartConfig*)initWithStyle:(REMChartStyle*)style;
 //+(REMChartConfig*)getMinimunWidgetDefaultSetting;
 //+(REMChartConfig*)getMaximunWidgetDefaultSetting;
 @end
