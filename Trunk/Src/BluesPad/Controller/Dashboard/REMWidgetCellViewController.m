@@ -174,7 +174,8 @@
         [v removeFromSuperview];
     }
     [self.view addSubview:button];
-    //self.wrapper=nil;
+    self.wrapper=nil;
+    self.searchModel=nil;
 }
 
 - (void)widgetButtonPressed:(UIButton *)button{
