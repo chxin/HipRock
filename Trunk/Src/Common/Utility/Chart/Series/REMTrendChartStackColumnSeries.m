@@ -37,20 +37,45 @@
 //}
 
 -(void)cacheDataOfRange {
-    NSDate* startDate = [self.dataProcessor deprocessX:self.visableRange.location];
-    NSDate* endDate = [self.dataProcessor deprocessX:self.visableRange.length+self.visableRange.location+2];
+    NSUInteger index = self.visableRange.location;
     
-    NSUInteger index = 0;
-    REMEnergyData* data = nil;
-    NSUInteger allDataCount = self.energyData.count;
-    while (index < allDataCount) {
-        data = self.energyData[index];
+    NSUInteger endLocation = self.visableRange.location + self.visableRange.length + 2;
+    
+    for (REMEnergyData* data in self.energyData) {
+        int xVal = [self.dataProcessor processX:data.localTime].intValue;
+        if (xVal < self.visableRange.location) continue;
+        if (xVal > endLocation) break;
+        
+        while (index != xVal) {
+            NSNumber* base = [self getBaseValueAtIndex:index];
+            [source addObject:@{@"x":@(index), @"y":[NSNull null], @"base":base, @"enenrgydata":[NSNull null]}];
+            index++;
+        }
+        
+        NSNumber* base = [self getBaseValueAtIndex:index];
+        [source addObject:@{@"x":@(xVal), @"y":@([self.dataProcessor processY:data.dataValue].doubleValue+base.doubleValue), @"base":base, @"enenrgydata":data}];
         index++;
-        if ([data.localTime compare:startDate]==NSOrderedAscending) continue;
-        if ([data.localTime compare:endDate]==NSOrderedDescending) break;
-        [source addObject:@{@"x":[self.dataProcessor processX:data.localTime], @"y":[self.dataProcessor processY:data.dataValue], @"enenrgydata":data}];
+        
+    }
+    while (index < endLocation) {
+        [source addObject:@{@"x":@(index), @"y":[NSNull null], @"enenrgydata":[NSNull null]}];
+        index++;
     }
     [[self getPlot]reloadData];
+}
+
+-(NSNumber*)getBaseValueAtIndex:(NSUInteger)index {
+    REMTrendChartStackColumnSeries* thePreviousSeries = self.previousStackSeries;
+    if (self.previousStackSeries) {
+        NSDictionary* prePoint = [thePreviousSeries getCurrentRangeSource][index];
+        NSNumber* base = prePoint[@"y"];
+        if ([base isEqual:[NSNull null]]) {
+            base = prePoint[@"base"];
+        }
+        return base;
+    } else {
+        return @(0);
+    }
 }
 
 -(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex {
