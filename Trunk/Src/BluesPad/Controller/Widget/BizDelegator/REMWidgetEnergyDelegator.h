@@ -14,6 +14,7 @@
 #import "REMChartLegendItem.h"
 #import "REMTooltipView.h"
 #import "REMDimensions.h"
+#import "REMTrendChartTooltipView.h"
 
 const static CGFloat kLegendSearchSwitcherTop=16;
 const static CGFloat kLegendSearchSwitcherLeft=758;
