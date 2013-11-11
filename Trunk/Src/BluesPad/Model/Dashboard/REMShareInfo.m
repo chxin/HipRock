@@ -25,6 +25,56 @@
     }
     NSNumber *userTitle=dictionary[@"UserTitle"];
     self.userTitle = (REMUserTitleType)[userTitle integerValue];
+    
+    NSString *title;
+    /*
+     REMUserTitleEEConsultant = 0,
+     REMUserTitleTechnician = 1,
+     REMUserTitleCustomerAdmin = 2,
+     REMUserTitlePlatformAdmin=3,
+     REMUserTitleEnergyManager=4,
+     REMUserTitleEnergyEngineer=5,
+     REMUserTitleDepartmentManager=6,
+     REMUserTitleCEO=7,
+     REMUserTitleBusinessPersonnel=8,
+     REMUserTitleSaleman=9,
+     REMUserTitleServiceProviderAdmin=10
+     */
+    
+    if (self.userTitle == REMUserTitleEEConsultant) {
+        title=@"";
+    }
+    else if(self.userTitle == REMUserTitleTechnician){
+        
+    }
+    else if(self.userTitle == REMUserTitleCustomerAdmin){
+        
+    }
+    else if(self.userTitle == REMUserTitlePlatformAdmin){
+        
+    }
+    else if(self.userTitle == REMUserTitleEnergyManager){
+        
+    }
+    else if(self.userTitle == REMUserTitleEnergyEngineer){
+        
+    }
+    else if(self.userTitle == REMUserTitleDepartmentManager){
+        
+    }
+    else if(self.userTitle == REMUserTitleCEO){
+        
+    }
+    else if(self.userTitle == REMUserTitleBusinessPersonnel){
+        
+    }
+    else if(self.userTitle == REMUserTitleSaleman){
+        
+    }
+    else if(self.userTitle == REMUserTitleServiceProviderAdmin){
+        
+    }
+    self.userTitleComponent=title;
 }
 
 @end

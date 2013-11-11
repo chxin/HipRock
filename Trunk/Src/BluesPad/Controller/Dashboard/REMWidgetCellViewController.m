@@ -191,6 +191,7 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    NSLog(@"didReceiveMemoryWarning :%@",[self class]);
 }
 
 @end

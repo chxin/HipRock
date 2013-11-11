@@ -160,8 +160,8 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
                 for (UIView *v in cell.contentView.subviews) {
                     [v removeFromSuperview];
                 }
-                REMWidgetCollectionViewController *old= self.childViewControllers[cell.tag];
-                old.view=nil;
+                //REMWidgetCollectionViewController *old= self.childViewControllers[cell.tag];
+                //old.view=nil;
             }
         }
     }
@@ -170,8 +170,8 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
             for (UIView *v in cell.contentView.subviews) {
                 [v removeFromSuperview];
             }
-            REMWidgetCollectionViewController *old= self.childViewControllers[cell.tag];
-            old.view=nil;
+            //REMWidgetCollectionViewController *old= self.childViewControllers[cell.tag];
+            //old.view=nil;
            
         }
         REMWidgetCollectionViewController *widgetCollectionController = [[REMWidgetCollectionViewController alloc]initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc]init]];
@@ -231,6 +231,7 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    NSLog(@"didReceiveMemoryWarning :%@",[self class]);
     // Dispose of any resources that can be recreated.
 }
 

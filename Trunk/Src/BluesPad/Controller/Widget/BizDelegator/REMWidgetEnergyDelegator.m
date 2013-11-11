@@ -56,13 +56,16 @@
 
 
 - (void)initChartView{
-    UIView *chartContainer=[[UIView alloc]initWithFrame:CGRectMake(kWidgetChartLeftMargin, kWidgetChartTopMargin, kWidgetChartWidth, kWidgetChartHeight)];
-    [chartContainer setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
-    [self.view addSubview:chartContainer];
+    UIView *c=[[UIView alloc]initWithFrame:CGRectMake(0, kWidgetChartTopMargin, 1024, kWidgetChartHeight)];
+    [c setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
+    UIView *chartContainer=[[UIView alloc]initWithFrame:CGRectMake(kWidgetChartLeftMargin, 0, kWidgetChartWidth, kWidgetChartHeight)];
+    [chartContainer setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:c];
+    [c addSubview:chartContainer];
     self.chartContainer=chartContainer;
     self.maskerView=self.chartContainer;
-    self.chartContainer.layer.borderColor=[UIColor redColor].CGColor;
-    self.chartContainer.layer.borderWidth=1;
+    //self.chartContainer.layer.borderColor=[UIColor redColor].CGColor;
+    //self.chartContainer.layer.borderWidth=1;
     //[self showEnergyChart];
 
     [self setStepControlStatusByStepNoSearch:self.widgetInfo.contentSyntax.stepType];
@@ -83,8 +86,9 @@
     dateViewController.relativeDateType=self.tempModel.relativeDateType;
     dateViewController.datePickerProtocol=self;
     dateViewController.popController=popoverController;
+    dateViewController.showHour=YES;
     [popoverController setPopoverContentSize:CGSizeMake(400, 500)];
-    CGRect rect= CGRectMake(self.searchView.frame.origin.x, self.searchView.frame.origin.y+self.timePickerButton.frame.size.height+20, self.timePickerButton.frame.size.width, self.timePickerButton.frame.size.height);
+    CGRect rect= CGRectMake(self.timePickerButton.frame.origin.x, self.searchView.frame.origin.y+self.timePickerButton.frame.origin.y, self.timePickerButton.frame.size.width, self.timePickerButton.frame.size.height);
     [popoverController presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown|UIPopoverArrowDirectionUp animated:YES];
     
     self.datePickerPopoverController=popoverController;
@@ -92,7 +96,12 @@
 
 
 - (void)showChart{
-    [self showEnergyChart];
+    if(self.energyData!=nil){
+        [self showEnergyChart];
+    }
+    else{
+        [self search];
+    }
 }
 
 - (void) showEnergyChart{
@@ -113,7 +122,7 @@
     gridlineStyle.lineWidth = 1.0;
     textStyle.fontName = @kBuildingFontSCRegular;
     textStyle.fontSize = 16.0;
-    textStyle.color = [CPTColor whiteColor];
+    textStyle.color = [CPTColor colorWithCGColor:[REMColor colorByHexString:@"#eaeaea"].CGColor];
     textStyle.textAlignment = CPTTextAlignmentCenter;
     
     [style setObject:@"YES" forKey:@"userInteraction"];
@@ -206,8 +215,8 @@
             break;
         case 3:
             [list addObject:[NSNumber numberWithInt:2]];
-            [list addObject:[NSNumber numberWithInt:3]];
             [list addObject:[NSNumber numberWithInt:5]];
+            [list addObject:[NSNumber numberWithInt:3]];
             [titleList addObject:NSLocalizedString(@"Common_Day", "")];//天
             [titleList addObject:NSLocalizedString(@"Common_Week", "")];//周
             [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
@@ -236,7 +245,20 @@
     [self.stepControl removeAllSegments];
     
     UISegmentedControl *control= [[UISegmentedControl alloc] initWithItems:titleList];
-    [control setFrame:self.stepControl.frame];
+    
+    CGFloat x=1024-kWidgetChartLeftMargin*2-list.count*kWidgetStepSingleButtonWidth;
+    
+    CGRect frame= CGRectMake(x, self.timePickerButton.frame.origin.y, list.count*kWidgetStepSingleButtonWidth, kWidgetStepButtonHeight);
+    
+    UIFont *font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:14];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
+                                                           forKey:UITextAttributeFont];
+    [control setTitleTextAttributes:attributes
+                                    forState:UIControlStateNormal];
+    
+    
+    
+    [control setFrame:frame];
     [self.stepControl removeFromSuperview];
     [self.searchView addSubview:control];
     self.stepControl=control;
@@ -287,18 +309,7 @@
     
     [self changeStep:newStep];
     
-    [self doSearchWithModel:self.tempModel callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
-        if(data!=nil){
-            [self changeTimeRange:newRange];
-            [self reloadChart];
-            [self copyTempModel];
-        }
-        else{
-            if([error.code isEqualToString:@"990001202004"]==YES){ //step error
-                [self processStepErrorWithAvailableStep:error.messages[0]];
-            }
-        }
-    }];
+    [self search];
     
 }
 
@@ -406,9 +417,12 @@
     [self setStepControlStatusByStepNoSearch:step];
     [self changeStep:step];
     
+    [self search];
+}
+
+- (void)search{
     [self doSearchWithModel:self.tempModel callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
         if(data!=nil){
-            [self changeStep:step];
             [self reloadChart];
             [self copyTempModel];
         }
@@ -430,7 +444,7 @@
     
     UISegmentedControl *legendControl=[[UISegmentedControl alloc] initWithItems:@[@"search",@"legend"]];
     [legendControl setFrame:CGRectMake(kLegendSearchSwitcherLeft, kLegendSearchSwitcherTop, kLegendSearchSwitcherWidth, kLegendSearchSwitcherHeight)];
-    [legendControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+    [legendControl setSegmentedControlStyle:UISegmentedControlStylePlain];
 
     UIImage *search=[UIImage imageNamed:@"Up"];
     UIImage *legend=[UIImage imageNamed:@"Down"];
@@ -450,8 +464,11 @@
     [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, kWidgetDatePickerTopMargin, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
     timePickerButton.layer.borderColor=[UIColor clearColor].CGColor;
     timePickerButton.layer.borderWidth=0;
+    [timePickerButton setBackgroundColor:[REMColor colorByHexString:@"#9d9d9d"]];
+    timePickerButton.layer.cornerRadius=4;
+    
     [timePickerButton setImage:[UIImage imageNamed:@"Oil_pressed"] forState:UIControlStateNormal];
-    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, kWidgetDatePickerWidth-40)];
+    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(8, 5, 8, kWidgetDatePickerWidth-40)];
     timePickerButton.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetDatePickerTitleSize];
     [timePickerButton setTitleColor:[REMColor colorByHexString:@"#5e5e5e"] forState:UIControlStateNormal];
     
@@ -467,7 +484,6 @@
     self.searchView=searchViewContainer;
     
     UISegmentedControl *stepControl=[[UISegmentedControl alloc] initWithItems:@[@"hour",@"day",@"week",@"month",@"year"]];
-    [stepControl setFrame:CGRectMake(700, timePickerButton.frame.origin.y, 5*kWidgetStepSingleButtonWidth, 30)];
     
     [searchViewContainer addSubview:stepControl];
     self.stepControl=stepControl;
@@ -522,17 +538,7 @@
     [self willRangeChange:start end:end];
     
     if(self.tempModel.step == REMEnergyStepHour){
-        [self doSearchWithModel:self.tempModel callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
-            if(data!=nil){
-                [self reloadChart];
-                [self copyTempModel];
-            }
-            else{
-                if([error.code isEqualToString:@"990001202004"]==YES){ //step error
-                    [self processStepErrorWithAvailableStep:error.messages[0]];
-                }
-            }
-        }];
+        [self search];
     }
 }
 
@@ -541,7 +547,9 @@
     NSDate *newStart=start;
     NSDate *newEnd=end;
     
+    REMTimeRange *newRange=[[REMTimeRange alloc]initWithStartTime:newStart EndTime:newEnd];
     
+    [self setDatePickerButtonValueNoSearchByTimeRange:newRange withRelative:self.tempModel.relativeDateComponent withRelativeType:self.tempModel.relativeDateType];
 }
 
 

@@ -33,8 +33,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.currentRow= NSNotFound;
-    
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:nil action:nil];
+    NSString *cancel=NSLocalizedString(@"Common_Cancel", @"");
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:cancel style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationController.navigationBar.topItem.backBarButtonItem = backButton;
 }
 
@@ -49,7 +49,8 @@
         
     }
     else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"正在获取新客户的能源信息,请稍候..." delegate:self cancelButtonTitle:@"放弃" otherButtonTitles:nil, nil];
+        NSString *str=NSLocalizedString(@"Setting_LoadingData", @""); //"正在获取新客户的能源信息,请稍候...";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:str delegate:self cancelButtonTitle:NSLocalizedString(@"Common_Giveup", @"") otherButtonTitles:nil, nil];
         alert.tag=1;
         [alert show];
         self.currentAlert=alert;
@@ -65,7 +66,8 @@
         [REMCustomerSwitchHelper cancelSwitch];
     }
     else if(alertView.tag==3){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"当前客户已被解除关联,请退出系统后重新登录。" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+        NSString *str=NSLocalizedString(@"Setting_CurrentCustomerDeleted", @"");//当前客户已被解除关联,请退出系统后重新登录。
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:str delegate:self cancelButtonTitle:NSLocalizedString(@"Common_OK",@"") otherButtonTitles:nil, nil];
         alert.tag=4;
         [alert show];
     }
@@ -78,10 +80,12 @@
 
 - (void)realSwitchCustomer:(NSNumber *)customerId{
     [REMCustomerSwitchHelper switchCustomerById:customerId masker:nil action:^(REMCustomerSwitchStatus status,NSArray *customerArray){
-        
+        NSString *str=NSLocalizedString(@"Setting_CustomerDeleted", @"");//该客户已被解除关联,请重新选择客户。
+        NSString *ok=NSLocalizedString(@"Common_OK",@"");
         if (status == REMCustomerSwitchStatusSelectedCustomerDeleted) {
             [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"该客户已被解除关联,请重新选择客户。" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:str delegate:self cancelButtonTitle:ok otherButtonTitles:nil, nil];
             alert.tag=2;
             [alert show];
             
@@ -96,7 +100,7 @@
         }
         else if(status == REMCustomerSwitchStatusBothDeleted){
             [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"该客户已被解除关联,请重新选择客户。" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:str delegate:self cancelButtonTitle:ok otherButtonTitles:nil, nil];
             alert.tag=3;
             [alert show];
 
