@@ -12,7 +12,6 @@
 #import "REMBuildingViewController.h"
 #import "REMWidgetStepEnergyModel.h"
 #import "REMChartLegendItem.h"
-#import "REMTooltipView.h"
 #import "REMDimensions.h"
 #import "REMTrendChartTooltipView.h"
 
