@@ -30,14 +30,15 @@
     }
     NSMutableDictionary *viewAssociation=[[NSMutableDictionary alloc]initWithCapacity:3];
     if(self.systemDimensionTemplateItemId!=nil){
-        [viewAssociation setObject:self.systemDimensionTemplateItemId forKey:@"systemDimensionTemplateId"];
+        [viewAssociation setObject:self.systemDimensionTemplateItemId forKey:@"SystemDimensionTemplateItemId"];
     }
     if(self.areaDimensionId!=nil){
-        [viewAssociation setObject:self.areaDimensionId forKey:@"areaDimensionId"];
+        [viewAssociation setObject:self.areaDimensionId forKey:@"AreaDimensionId"];
     }
     if(self.hierarchyId!=nil){
-        [viewAssociation setObject:self.hierarchyId forKey:@"hierarchy"];
+        [viewAssociation setObject:self.hierarchyId forKey:@"HierarchyId"];
     }
+    dic[@"viewAssociation"]=viewAssociation;
     return dic;
 }
 
