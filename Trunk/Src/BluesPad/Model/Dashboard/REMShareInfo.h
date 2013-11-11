@@ -15,5 +15,6 @@
 @property (nonatomic,strong) NSString *userTelephone;
 @property (nonatomic,strong) NSDate *shareTime;
 @property (nonatomic) REMUserTitleType userTitle;
+@property  (nonatomic,strong) NSString *userTitleComponent;
 
 @end

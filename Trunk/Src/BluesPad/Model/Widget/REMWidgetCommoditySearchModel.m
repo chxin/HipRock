@@ -23,7 +23,8 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:3];
     dic[@"commodityIds"]=self.commodityIdArray;
     NSNumber *step=[self stepNumberByStep:self.step];
-    dic[@"viewOption"]=@{@"Step":step,@"IncludeNavigatorData":@(1),@"TimeRanges":self.timeRangeArray};
+    NSArray *newTimeRangeArray=[self timeRangeToDictionaryArray];
+    dic[@"viewOption"]=@{@"Step":step,@"IncludeNavigatorData":@(1),@"TimeRanges":newTimeRangeArray};
     if(self.industryId!=nil || self.zoneId!=nil){
         dic[@"benchmarkOption"]=@{@"IndustryId":self.industryId,@"ZoneId":self.zoneId};
     }

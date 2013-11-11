@@ -154,7 +154,7 @@
     gridlineStyle.lineWidth = 1.0;
     textStyle.fontName = @kBuildingFontSCRegular;
     textStyle.fontSize = 16.0;
-    textStyle.color = [CPTColor whiteColor];
+    textStyle.color = [CPTColor colorWithCGColor:[REMColor colorByHexString:@"#eaeaea"].CGColor];
     textStyle.textAlignment = CPTTextAlignmentCenter;
     
     [style setObject:@"YES" forKey:@"userInteraction"];
@@ -193,7 +193,7 @@
     dateViewController.datePickerProtocol=self;
     dateViewController.popController=popoverController;
     [popoverController setPopoverContentSize:CGSizeMake(400, 500)];
-    CGRect rect= CGRectMake(self.searchView.frame.origin.x, self.searchView.frame.origin.y+self.timePickerButton.frame.size.height+20, self.timePickerButton.frame.size.width, self.timePickerButton.frame.size.height);
+    CGRect rect= CGRectMake(self.timePickerButton.frame.origin.x, self.searchView.frame.origin.y+self.timePickerButton.frame.origin.y, self.timePickerButton.frame.size.width, self.timePickerButton.frame.size.height);
     [popoverController presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown|UIPopoverArrowDirectionUp animated:YES];
     
     self.datePickerPopoverController=popoverController;

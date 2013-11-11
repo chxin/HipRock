@@ -39,11 +39,12 @@
     [self.searcher queryEnergyDataByStoreType:self.widgetInfo.contentSyntax.dataStoreType andParameters:model withMaserContainer:self.maskerView  andGroupName:self.groupName callback:^(REMEnergyViewData *energyData,REMBusinessErrorInfo *errorInfo){
         
         self.energyData=energyData;
-        
-        if(callback!=nil){
-            callback(energyData,errorInfo);
+        if(self.view!=nil){
+            if(callback!=nil){
+                callback(energyData,errorInfo);
+            }
         }
-        
+            
     }];
 }
 

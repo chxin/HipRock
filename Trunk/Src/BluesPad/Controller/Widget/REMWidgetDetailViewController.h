@@ -17,7 +17,6 @@
 @property (nonatomic,weak) REMWidgetObject *widgetInfo;
 @property (nonatomic,weak) REMEnergyViewData *energyData;
 
-@property (nonatomic,strong) NSString *groupName;
 
 - (void)showChart;
 

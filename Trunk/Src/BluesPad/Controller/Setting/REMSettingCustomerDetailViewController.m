@@ -56,11 +56,11 @@ static NSString * cellId=@"customerCell";
     
     
     if(indexPath.row==0){
-        cell.textLabel.text=@"名称";
+        cell.textLabel.text= NSLocalizedString(@"Setting_DetailName", @""); //@"名称";
         cell.detailTextLabel.text=customer.name;
     }
     else if(indexPath.row==1){
-        cell.textLabel.text=@"编码";
+        cell.textLabel.text=NSLocalizedString(@"Setting_DetailCode", @""); //@"编码";
         cell.detailTextLabel.text=customer.code;
     }
     else if(indexPath.row==2){
@@ -68,29 +68,29 @@ static NSString * cellId=@"customerCell";
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     }
     else if(indexPath.row==3){
-        cell.textLabel.text=@"地址";
+        cell.textLabel.text=NSLocalizedString(@"Setting_DetailAddress", @""); //@"地址";
         cell.detailTextLabel.text=customer.address;
     }
     else if(indexPath.row==4){
-        cell.textLabel.text=@"负责人";
+        cell.textLabel.text=NSLocalizedString(@"Setting_DetailAdmin", @""); //@"负责人";
         cell.detailTextLabel.text=customer.manager;
     }
     else if(indexPath.row==5){
-        cell.textLabel.text=@"负责人电话";
+        cell.textLabel.text=NSLocalizedString(@"Setting_DetailAdminTelephone", @""); //@"负责人电话";
         cell.detailTextLabel.text=customer.telephone;
     }
     else if(indexPath.row==6){
-        cell.textLabel.text=@"负责人电子邮箱";
+        cell.textLabel.text=NSLocalizedString(@"Setting_DetailAdminEmail", @""); //@"负责人电子邮箱";
         cell.detailTextLabel.text=customer.email;
     }
     else if(indexPath.row==7){
-        cell.textLabel.text=@"运营时间";
+        cell.textLabel.text=NSLocalizedString(@"Setting_DetailOperationDate", @""); //@"运营时间";
         NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
         [formatter setDateFormat:@"yyyy/MM/dd"];
         cell.detailTextLabel.text=[formatter stringFromDate:customer.startTime];
     }
     else if(indexPath.row==8){
-        cell.textLabel.text=@"客户管理员";
+        cell.textLabel.text=NSLocalizedString(@"Setting_DetailCustomerAdmin", @""); //@"客户管理员";
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         if(customer.administratorArray.count==1){
             REMAdministratorModel *model=customer.administratorArray[0];
@@ -99,12 +99,14 @@ static NSString * cellId=@"customerCell";
         else if(customer.administratorArray.count==2){
             REMAdministratorModel *model=customer.administratorArray[0];
             REMAdministratorModel *model1=customer.administratorArray[1];
-            cell.detailTextLabel.text=[NSString stringWithFormat:@"%@和%@",model.realName,model1.realName];
+            NSString *str=NSLocalizedString(@"Setting_DetailCustomerAdminTwoName", @""); //@"%@和%@"
+            cell.detailTextLabel.text=[NSString stringWithFormat:str,model.realName,model1.realName];
         }
         else if (customer.administratorArray.count>2){
             REMAdministratorModel *model=customer.administratorArray[0];
             REMAdministratorModel *model1=customer.administratorArray[1];
-            cell.detailTextLabel.text=[NSString stringWithFormat:@"%@和%@等%d人",model.realName,model1.realName,customer.administratorArray.count];
+            NSString *str=NSLocalizedString(@"Setting_DetailCustomerAdminThreeName", @""); //%@和%@等%d人
+            cell.detailTextLabel.text=[NSString stringWithFormat:str,model.realName,model1.realName,customer.administratorArray.count];
         }
     }
     
