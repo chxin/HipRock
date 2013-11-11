@@ -12,19 +12,25 @@
 #import "REMBuildingViewController.h"
 #import "REMWidgetStepEnergyModel.h"
 #import "REMChartLegendItem.h"
+#import "REMDimensions.h"
 #import "REMTrendChartTooltipView.h"
 
-const static CGFloat kLegendSearchSwitcherTop=10;
-
-const static CGFloat kWidgetDatePickerLeftMargin=15;
-const static CGFloat kWidgetDatePickerTopMargin=70;
-const static CGFloat kWidgetDatePickerHeight=40;
-const static CGFloat kWidgetDatePickerWidth=380;
+const static CGFloat kLegendSearchSwitcherTop=16;
+const static CGFloat kLegendSearchSwitcherLeft=758;
+const static CGFloat kLegendSearchSwitcherHeight=30;
+const static CGFloat kLegendSearchSwitcherWidth=102*2;
+const static CGFloat kWidgetDatePickerLeftMargin=25;
+const static CGFloat kWidgetDatePickerTopMargin=16;
+const static CGFloat kWidgetDatePickerHeight=29;
+const static CGFloat kWidgetDatePickerWidth=350;
+const static CGFloat kWidgetDatePickerTitleSize=14;
 const static CGFloat kWidgetStepSingleButtonWidth=60;
-const static CGFloat kWidgetChartLeftMargin=10;
-const static CGFloat kWidgetChartTopMargin=kWidgetDatePickerTopMargin+kWidgetDatePickerHeight;
-const static CGFloat kWidgetChartWidth=1004;
-const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin;
+const static CGFloat kWidgetStepButtonFontSize=14;
+const static CGFloat kWidgetStepButtonHeight=24;
+const static CGFloat kWidgetChartLeftMargin=25;
+const static CGFloat kWidgetChartTopMargin=kDMChart_ToolbarTop+kDMChart_ToolbarHeight;
+const static CGFloat kWidgetChartWidth=1024-kWidgetChartLeftMargin*2;
+const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin-kWidgetChartLeftMargin;
 
 typedef enum _REMWidgetLegendType{
     REMWidgetLegendTypeLegend,

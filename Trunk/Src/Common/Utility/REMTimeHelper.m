@@ -193,7 +193,8 @@
 + (REMTimeRange *) relativeDateFromType:(REMRelativeTimeRangeType)relativeDateType
 {
     NSDate *start,*end;
-            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [REMTimeHelper currentCalendar];
+    
     if (relativeDateType == REMRelativeTimeRangeTypeLast7Days) {
 
         
@@ -519,14 +520,14 @@ static NSCalendar *_currentCalendar;
     return _currentCalendar;
 }
 
-+(NSDate *)convertLocalDateToGMT:(NSDate *)localDate
-{
-    NSTimeInterval timeZoneOffset = [[NSTimeZone timeZoneWithName:@"Asia/Shanghai"] secondsFromGMT];
-    NSTimeInterval gmtTimeInterval = [localDate timeIntervalSinceReferenceDate] - timeZoneOffset;
-    NSDate *gmtDate = [NSDate dateWithTimeIntervalSinceReferenceDate:gmtTimeInterval];
-    
-    return gmtDate;
-}
+//+(NSDate *)convertLocalDateToGMT:(NSDate *)localDate
+//{
+//    NSTimeInterval timeZoneOffset = [[NSTimeZone timeZoneWithName:@"Asia/Shanghai"] secondsFromGMT];
+//    NSTimeInterval gmtTimeInterval = [localDate timeIntervalSinceReferenceDate] - timeZoneOffset;
+//    NSDate *gmtDate = [NSDate dateWithTimeIntervalSinceReferenceDate:gmtTimeInterval];
+//    
+//    return gmtDate;
+//}
 
 +(NSDate *)convertGMTDateToLocal:(NSDate *)GMTDate
 {

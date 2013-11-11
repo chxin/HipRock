@@ -13,8 +13,8 @@
 
 //prefix: kDMChart
 
-#define kDMChart_ToolbarTop 70
-#define kDMChart_ToolbarHeight 60
+#define kDMChart_ToolbarTop 62
+#define kDMChart_ToolbarHeight 56
 #define kDMChart_ToolbarWidth kDMScreenWidth
 
 #define kDMChart_ToolbarFrame CGRectMake(0,kDMChart_ToolbarTop,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)
