@@ -572,10 +572,6 @@ const static CGFloat imageGap=10;
                 [self.snapshot removeFromSuperview];
                 self.snapshot = nil;
                 
-                if ([(id)self.fromController respondsToSelector:@selector(uncoverCell)]) {
-                    [(id)self.fromController uncoverCell];
-                }
-                
                 [self back];
                 self.isPinching = NO;
             }];
@@ -645,6 +641,10 @@ const static CGFloat imageGap=10;
 
 -(void)back
 {
+    if ([(id)self.fromController respondsToSelector:@selector(uncoverCell)]) {
+        [(id)self.fromController uncoverCell];
+    }
+    
     //decide where to go
     NSString *segueIdentifier = [self.fromController class] == [REMGalleryViewController class] ? kSegue_BuildingToGallery : kSegue_BuildingToMap;
     
