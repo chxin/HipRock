@@ -557,7 +557,7 @@
     
     if (fieldEnum == CPTPieChartFieldSliceWidth) {
         NSDate* date =  [item objectForKey:@"x"];
-        date = [REMTimeHelper convertLocalDateToGMT:date];
+       // date = [REMTimeHelper convertLocalDateToGMT:date];
         NSInteger i = 0;
         if (currentSourceIndex < 2) i = [REMTimeHelper getHour:date] + 1;
         else if (currentSourceIndex < 4) i = [REMTimeHelper getDay:date];
