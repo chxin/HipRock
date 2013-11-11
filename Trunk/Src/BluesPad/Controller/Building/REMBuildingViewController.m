@@ -40,6 +40,7 @@ const static CGFloat imageGap=10;
 @property (nonatomic,strong) NSMutableDictionary *customImageLoadedDictionary;
 
 @property (nonatomic,strong) UIImageView *snapshot;
+@property (nonatomic,weak) UIImageView *sourceSnapshot;
 
 @property (nonatomic) CGFloat speed;
 @property (nonatomic,weak) NSTimer *timer;
@@ -48,6 +49,8 @@ const static CGFloat imageGap=10;
 @property (nonatomic) CGFloat delta;
 
 @property (nonatomic) CGFloat speedBase;
+
+@property (nonatomic) BOOL isPinching;
 
 
 @end
@@ -519,10 +522,11 @@ const static CGFloat imageGap=10;
 {
     if(pinch.state  == UIGestureRecognizerStateBegan){
         //NSLog(@"pinch: Began");
-        UIImageView *fromViewSnapshot = [((id)self.fromController) snapshot];
+        self.isPinching = YES;
+        self.sourceSnapshot = [((id)self.fromController) snapshot];
         
         self.snapshot = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:self.view]];
-        [self.view addSubview:fromViewSnapshot];
+        [self.view addSubview:self.sourceSnapshot];
         [self.view addSubview:self.snapshot];
     }
     
@@ -541,7 +545,6 @@ const static CGFloat imageGap=10;
     if(pinch.state  == UIGestureRecognizerStateEnded || pinch.state  == UIGestureRecognizerStateCancelled || pinch.state  == UIGestureRecognizerStateFailed){
         //NSLog(@"pinch: Ended, state: %d, touch numbers: %d", pinch.state, pinch.numberOfTouches);
         
-        UIImageView *fromViewSnapshot = [((id)self.fromController) snapshot];
         if(pinch.scale >= 1){ //scale did not change,
             CGPoint point = [pinch locationInView:self.view];
             
@@ -549,10 +552,11 @@ const static CGFloat imageGap=10;
                 [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                     self.snapshot.center = self.view.center;
                 } completion:^(BOOL finished) {
-                    [fromViewSnapshot removeFromSuperview];
+                    [self.sourceSnapshot removeFromSuperview];
                     
                     [self.snapshot removeFromSuperview];
                     self.snapshot = nil;
+                    self.isPinching = NO;
                 }];
             }
         }
@@ -563,12 +567,17 @@ const static CGFloat imageGap=10;
                 self.snapshot.transform = [REMViewHelper getScaleTransformFromOriginalFrame:initialiZoomRect andFinalFrame:self.view.frame];
                 self.snapshot.center = [REMViewHelper getCenterOfRect:initialiZoomRect];
             } completion:^(BOOL finished) {
-                [fromViewSnapshot removeFromSuperview];
+                [self.sourceSnapshot removeFromSuperview];
                 
                 [self.snapshot removeFromSuperview];
                 self.snapshot = nil;
                 
-                [self.navigationController popViewControllerAnimated:NO];
+                if ([(id)self.fromController respondsToSelector:@selector(uncoverCell)]) {
+                    [(id)self.fromController uncoverCell];
+                }
+                
+                [self back];
+                self.isPinching = NO;
             }];
         }
         
@@ -582,7 +591,7 @@ const static CGFloat imageGap=10;
     if([segue.identifier isEqualToString:kSegue_BuildingToMap] || [segue.identifier isEqualToString:kSegue_BuildingToGallery]){
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
         
-        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, CGRectZero, self.view.frame)];
+        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(self.isPinching, self.currentBuildingIndex, CGRectZero, self.view.frame)];
     }
     if([segue.identifier isEqualToString:@"maxWidgetSegue"]==YES){
         REMImageView *view = self.imageArray[self.currentBuildingIndex];
@@ -630,6 +639,11 @@ const static CGFloat imageGap=10;
 
 
 -(IBAction)backButtonPressed:(id)sender
+{
+    [self back];
+}
+
+-(void)back
 {
     //decide where to go
     NSString *segueIdentifier = [self.fromController class] == [REMGalleryViewController class] ? kSegue_BuildingToGallery : kSegue_BuildingToMap;

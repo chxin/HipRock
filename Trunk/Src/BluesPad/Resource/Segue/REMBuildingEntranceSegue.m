@@ -16,7 +16,10 @@
 
 @implementation REMBuildingEntranceSegue
 
-#define sequeTime 0.3
+#define kSequeTime 3.0f
+#define kFirstSugueTime 6.0f
+
+static float segueTime = kFirstSugueTime/10.0f;
 
 -(void)prepareSegueWithParameter:(REMBuildingSegueZoomParamter)parameter
 {
@@ -25,48 +28,24 @@
 
 - (void)perform
 {
-    if(self.parameter.isNeedAnimation){
-        [self slideIn];
-        
-        return;
-    }
-    
-//    if(self.isNoAnimation == YES){
-//        [[self.sourceViewController navigationController] pushViewController:self.destinationViewController animated:NO];
-//        
-//        return;
-//    }
-    
     if([self.sourceViewController class] == [REMBuildingViewController class]){
-        [self exit];
+        if(self.parameter.isNoAnimation == YES){
+            [[self.sourceViewController navigationController] popViewControllerAnimated:NO];
+        }
+        else{
+            [self exit];
+            if (segueTime == kFirstSugueTime/10.0f)
+                segueTime = kSequeTime/10.0f;
+        }
     }
     else{
-        [self enter];
+        if(self.parameter.isNoAnimation == YES){
+            [[self.sourceViewController navigationController] pushViewController:self.destinationViewController animated:NO];
+        }
+        else{
+            [self enter];
+        }
     }
-}
-
--(void)slideIn
-{
-    REMBuildingViewController *buildingController = self.destinationViewController;
-    REMMapViewController *mapController = self.sourceViewController;
-    
-    [mapController.view setUserInteractionEnabled:NO];
-    
-    //push building view into map view
-    UIImageView *transitionView = [self getBuildingTransitionView];
-    
-    transitionView.frame = CGRectMake(kDMScreenWidth, 0, mapController.view.bounds.size.width, mapController.view.bounds.size.height);
-    
-    [mapController.view addSubview:transitionView];
-    
-    
-    [UIView animateWithDuration:sequeTime delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        transitionView.frame = CGRectMake(0, 0, mapController.view.bounds.size.width, mapController.view.bounds.size.height);;
-    } completion:^(BOOL finished) {
-        [transitionView removeFromSuperview];
-        [mapController.view setUserInteractionEnabled:YES];
-        [mapController.navigationController pushViewController:buildingController animated:NO];
-    }];
 }
 
 //building enter
@@ -75,7 +54,7 @@
     REMBuildingViewController *buildingController = self.destinationViewController;
     
     UIView *sourceView = [self.sourceViewController view];//, *buildingView = buildingController.view;
-    [sourceView setUserInteractionEnabled:NO];
+    //[sourceView setUserInteractionEnabled:NO];
     
     //add building view as subview into map view
     UIImageView *transitionView = [self getBuildingTransitionView];
@@ -86,12 +65,12 @@
     
     [sourceView addSubview:transitionView];
     
-    [UIView animateWithDuration:sequeTime delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:segueTime delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         transitionView.transform = CGAffineTransformMakeScale(1.0, 1.0);
         transitionView.center = [REMViewHelper getCenterOfRect:self.parameter.finalZoomFrame];
     } completion:^(BOOL finished){
         [transitionView removeFromSuperview];
-        [sourceView setUserInteractionEnabled:YES];
+        //[sourceView setUserInteractionEnabled:YES];
         [[self.sourceViewController navigationController] pushViewController:buildingController animated:NO];
     }];
 }
@@ -102,7 +81,7 @@
     REMBuildingViewController *buildingController = self.sourceViewController;
     
     UIView *buildingView = buildingController.view;
-    [buildingView setUserInteractionEnabled:NO];
+    //[buildingView setUserInteractionEnabled:NO];
     UIImageView *snapshot = [((id)buildingController.fromController) snapshot];
     
     UIImageView *transitionView = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:buildingController.view]];
@@ -115,12 +94,14 @@
     
     CGRect initialZoomRect = [((id)buildingController.fromController) getDestinationZoomRect:buildingController.currentBuildingIndex];
     
-    [UIView animateWithDuration:sequeTime delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:segueTime delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         transitionView.transform = [REMViewHelper getScaleTransformFromOriginalFrame:initialZoomRect andFinalFrame:self.parameter.finalZoomFrame];
         transitionView.center = [REMViewHelper getCenterOfRect:initialZoomRect];
     } completion:^(BOOL finished){
         [transitionView removeFromSuperview];
-        [buildingView setUserInteractionEnabled:YES];
+        [snapshot removeFromSuperview];
+        
+        //[buildingView setUserInteractionEnabled:YES];
         [buildingController.navigationController popViewControllerAnimated:NO];
     }];
 }

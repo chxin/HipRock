@@ -74,8 +74,6 @@
     int rowCount = (self.buildingInfoArray.count / 6) + 1;
     CGFloat height = kDMGallery_GalleryCollectionViewTopMargin + kDMGallery_GalleryCollectionViewBottomMargin + (rowCount * kDMGallery_GalleryCellHeight) + ((rowCount - 1) * kDMGallery_GalleryCellVerticleSpace);
     
-    NSLog(@"collection view height: %d", kDMGallery_GalleryGroupViewWidth);
-    
     return CGRectMake(0, 0, kDMGallery_GalleryGroupViewWidth, height);
 }
 
@@ -84,13 +82,10 @@
 {
 	// Do any additional setup after loading the view.
     
-    NSLog(@"collectionviewframe1: %@",NSStringFromCGRect(self.collectionView.frame));
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    NSLog(@"collectionviewframe2: %@",NSStringFromCGRect(self.collectionView.frame));
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,7 +99,9 @@
 
 - (void)galleryCellTapped:(REMGalleryCollectionCell *)cell
 {
-    [((REMGalleryViewController *)self.parentViewController) presentBuildingViewFromCell:cell];
+    [cell coverMe];
+    
+    [((REMGalleryViewController *)self.parentViewController) presentBuildingViewFromCell:cell animated:NO];
 }
 
 
@@ -113,7 +110,9 @@
     REMGalleryViewController *galleryController = (REMGalleryViewController *)self.parentViewController;
     
     if(pinch.state  == UIGestureRecognizerStateBegan){
+        self.isPinching = YES;
         [cell beginPinch]; //snapshot will be ready
+        galleryController.snapshot = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:galleryController.view]];
         [galleryController.view addSubview:cell.snapshot];
     }
     
@@ -136,6 +135,7 @@
                     cell.snapshot.center = cellCenterInGalleryView;
                 } completion:^(BOOL finished) {
                     [cell endPinch];
+                    self.isPinching = NO;
                 }];
             }
         }
@@ -150,6 +150,9 @@
                 galleryController.initialZoomRect = [self.collectionView convertRect:cell.frame toView:galleryController.view];
                 galleryController.currentBuildingIndex = [galleryController buildingIndexFromBuilding:cell.building];
                 self.isPinching = YES;
+                
+                //show building view
+                [((REMGalleryViewController *)self.parentViewController) presentBuildingViewFromCell:cell animated:self.isPinching];
             }];
         }
     }

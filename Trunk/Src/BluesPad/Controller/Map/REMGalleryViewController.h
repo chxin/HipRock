@@ -22,7 +22,8 @@
 
 #pragma mark - Methods
 -(CGRect)getDestinationZoomRect:(int)currentBuildingIndex;
--(void)presentBuildingViewFromCell:(REMGalleryCollectionCell *)cell;
+-(void)presentBuildingViewFromCell:(REMGalleryCollectionCell *)cell animated:(BOOL)isAnimated;
 -(int)buildingIndexFromBuilding:(REMBuildingModel *)building;
+-(void)uncoverCell;
 
 @end
