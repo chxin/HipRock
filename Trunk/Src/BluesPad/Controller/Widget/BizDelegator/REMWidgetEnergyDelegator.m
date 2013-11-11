@@ -32,6 +32,8 @@
 
 @property (nonatomic,strong) NSArray *supportStepArray;
 
+@property (nonatomic,strong) NSMutableArray *hiddenSeries;
+
 
 @end
 
@@ -563,6 +565,11 @@
         legend.frame = CGRectMake(x, y, kDMChart_LegendItemWidth, kDMChart_LegendItemHeight);
         legend.delegate = self;
         
+        if(self.hiddenSeries != nil && self.hiddenSeries.count > 0 && [self.hiddenSeries containsObject:@(i)]){
+            [legend setSelected:YES];
+        }
+        
+        
         [view addSubview:legend];
     }
     
@@ -575,6 +582,20 @@
     //NSLog(@"Series %d is going to %@", index, state == UIControlStateNormal?@"show":@"hide");
     
     if([self.chartWrapper.view isKindOfClass:[REMTrendChartView class]]){
+        if(self.hiddenSeries == nil)
+            self.hiddenSeries = [[NSMutableArray alloc] init];
+        
+        if(state == UIControlStateNormal){
+            if([self.hiddenSeries containsObject:@(index)]){
+                [self.hiddenSeries removeObject:@(index)];
+            }
+        }
+        else{
+            if([self.hiddenSeries containsObject:@(index)] == NO){
+                [self.hiddenSeries addObject:@(index)];
+            }
+        }
+        
         [((REMTrendChartView *)self.chartWrapper.view) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
     }
 }

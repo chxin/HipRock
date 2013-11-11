@@ -22,5 +22,6 @@
 @property (nonatomic,weak) NSObject<REMChartLegendItemDelegate> *delegate;
 
 -(REMChartLegendItem *)initWithSeriesIndex:(int)index type:(REMChartSeriesIndicatorType)type andName:(NSString *)name;
+-(void)setSelected:(BOOL)selected;
 
 @end
