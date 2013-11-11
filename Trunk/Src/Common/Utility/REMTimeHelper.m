@@ -193,7 +193,8 @@
 + (REMTimeRange *) relativeDateFromType:(REMRelativeTimeRangeType)relativeDateType
 {
     NSDate *start,*end;
-            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [REMTimeHelper currentCalendar];
+    
     if (relativeDateType == REMRelativeTimeRangeTypeLast7Days) {
 
         
