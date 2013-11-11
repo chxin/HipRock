@@ -583,6 +583,10 @@
 // Trend chart delegate
 -(void)highlightPoints:(NSArray*)points colors:(NSArray*)colors names:(NSArray*)names
 {
+    if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
+        return;
+    }
+    
     NSMutableArray *models = [[NSMutableArray alloc] init];
     for(int i=0;i<names.count;i++){
         REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
