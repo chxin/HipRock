@@ -13,10 +13,14 @@
 
 #define REMIsNilOrNull(a) ((a)==nil || [(a) isEqual:[NSNull null]])
 
+#define REMRGBA(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)];
+#define REMHexColor(a) []
+
 #define REMLocalizedString(a) NSLocalizedString((a),@"")
 
 #define REMLoadImage(a,b) [[UIImage alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(a) ofType:(b)]]
 #define REMLoadPngImage(a) REMLoadImage((a),@"png")
 #define REMLoadJpgImage(a) REMLoadImage((a),@"jpg")
+
 
 #endif

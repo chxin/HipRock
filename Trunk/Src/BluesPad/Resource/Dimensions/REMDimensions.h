@@ -30,6 +30,8 @@
 
 #define kDMCommon_ContentLeftMargin 25
 
+#define kDMCommon_ContentWidth kDMScreenWidth - (2 * kDMCommon_ContentLeftMargin)
+
 #define kDMCommon_TopLeftButtonLeft kDMCommon_ContentLeftMargin
 #define kDMCommon_TopLeftButtonTop 23
 #define kDMCommon_TopLeftButtonWidth 32

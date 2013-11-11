@@ -12,8 +12,10 @@
 #import "REMChartSeriesIndicator.h"
 #import "REMChartLegendItem.h"
 #import "REMChartTooltipItem.h"
-#import "REMTooltipView.h"
-#import "REMEnergyDataPointModel.h"
+#import "REMTooltipViewBase.h"
+#import "REMTrendChartTooltipView.h"
+#import "REMPieChartTooltipView.h"
+#import "REMChartSeriesIndicator.h"
 
 @interface REMWidgetEnergyDelegator()
 
@@ -24,7 +26,7 @@
 @property (nonatomic,strong) REMAbstractChartWrapper *chartWrapper;
 
 @property (nonatomic,strong) NSArray *currentStepList;
-@property (nonatomic,weak) REMTooltipView *tooltipView;
+@property (nonatomic,weak) REMTooltipViewBase *tooltipView;
 
 @property (nonatomic,strong) REMWidgetStepEnergyModel *tempModel;
 
@@ -143,10 +145,13 @@
         ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypePie) {
         widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
+        ((REMPieChartView *)widgetWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypeRanking) {
         widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
+        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypeStackColumn) {
         widgetWrapper = [[REMStackColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax styleDictionary:style];
+        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     }
     if (widgetWrapper != nil) {
         [self.chartContainer addSubview:widgetWrapper.view];
@@ -587,7 +592,7 @@
 -(void)legendStateChanged:(UIControlState)state onIndex:(int)index
 {
     //hide or show the series on index according to state
-    NSLog(@"Series %d is going to %@", index, state == UIControlStateNormal?@"show":@"hide");
+    //NSLog(@"Series %d is going to %@", index, state == UIControlStateNormal?@"show":@"hide");
     
     if([self.chartWrapper.view isKindOfClass:[REMTrendChartView class]]){
         [((REMTrendChartView *)self.chartWrapper.view) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
@@ -595,86 +600,103 @@
 }
 
 #pragma mark - Tooltip
-
--(UIView *)prepareTooltipView
-{
-    UIScrollView *view = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kDMScreenHeight-kDMStatusBarHeight-kDMChart_TooltipViewHeight, kDMScreenWidth, kDMChart_TooltipViewHeight)];
-    view.layer.borderWidth = 1.0;
-    view.layer.borderColor = [UIColor blackColor].CGColor;
-    view.backgroundColor = [UIColor clearColor];
-    view.contentSize = CGSizeMake(kDMScreenWidth, kDMChart_ToolbarHeight);
-    view.pagingEnabled = NO;
-    view.showsHorizontalScrollIndicator = NO;
-    view.showsVerticalScrollIndicator = NO;
-    
-    int count = 4;
-    CGFloat itemWidth = (kDMScreenWidth - (count + 1) * kDMChart_TooltipItemLeftOffset) / count;
-    
-    for(int i=0;i<4;i++){
-        CGRect itemFrame = CGRectMake(kDMChart_TooltipItemTopOffset, (itemWidth * i) + kDMChart_TooltipItemLeftOffset, itemWidth, kDMChart_TooltipItemHeight);
-        NSLog(@"frame of %dth item: %@", i, NSStringFromCGRect(itemFrame));
-        REMChartTooltipItem *tooltipItem = [[REMChartTooltipItem alloc] initWithFrame:itemFrame withName:@"aaaaa" color:[REMColor colorByIndex:i].uiColor andValue:@(i)];
-        
-        [view addSubview:tooltipItem];
-    }
-    
-    return view;
-}
-
+// Trend chart delegate
 -(void)highlightPoints:(NSArray*)points colors:(NSArray*)colors names:(NSArray*)names
 {
-    NSMutableArray *list = [[NSMutableArray alloc] init];
+    NSMutableArray *models = [[NSMutableArray alloc] init];
     for(int i=0;i<names.count;i++){
-        REMEnergyDataPointModel *point = [[REMEnergyDataPointModel alloc] init];
-        point.name = names[i];
-        point.color = colors[i];
-        point.dataValue = points[i];
+        REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
+        model.title = names[i];
+        model.value = REMIsNilOrNull(points[i]) ? nil : [points[i] dataValue];
+        model.color = colors[i];
+        model.index = i;
+        model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType: self.widgetInfo.diagramType];
         
-        [list addObject:point];
+        [models addObject:model];
     }
     
     if(self.tooltipView!=nil){
-//        [self hideTooltip:^{
-//            [self showTooltip:list];
-//        }];
-        [self.tooltipView update:list];
+        [self.tooltipView update:models];
     }
     else{
-        [self showTooltip:list];
+        [self showTooltip:models:0];
+    }
+}
+
+// Pie chart delegate
+-(void)highlightPoint:(REMEnergyData*)point color:(UIColor*)color name:(NSString*)name
+{
+    NSLog(@"Pie %@ is now on the niddle.", name);
+    
+    NSMutableArray *models = [[NSMutableArray alloc] init];
+    int highlightIndex=0;
+    
+    for(int i=0;i<self.energyData.targetEnergyData.count;i++){
+        REMTargetEnergyData *targetData = self.energyData.targetEnergyData[i];
+        if([targetData.target.name isEqualToString:name]){
+            highlightIndex = i;
+        }
+        
+        REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
+        model.title = targetData.target.name;
+        model.value = REMIsNilOrNull(targetData.energyData[0]) ? nil : [targetData.energyData[0] dataValue];
+        model.color = [REMColor colorByIndex:i].uiColor;
+        model.index = i;
+        model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType: self.widgetInfo.diagramType];
+        
+        [models addObject:model];
     }
     
-    
-    
+    if(self.tooltipView != nil){
+        [self.tooltipView update:@(highlightIndex)];
+    }
+    else{
+        [self showTooltip:models:highlightIndex];
+    }
 }
 
 -(void)tooltipWillDisapear
 {
-    NSLog(@"tooltip will disappear");
+    NSLog(@"tool tip will disappear");
+    if(self.tooltipView==nil)
+        return;
     
-    if(self.tooltipView!=nil){
-        [self hideTooltip:^{
-            //TODO: Set chart status to normal
-        }];
-    }
+    [self hideTooltip:^{
+        id chartView = (id)self.chartWrapper.view;
+        if([chartView respondsToSelector:@selector(cancelToolTipStatus)]){
+            [chartView cancelToolTipStatus];
+        }
+    }];
 }
 
--(void)showTooltip:(NSArray *)data
+-(void)showTooltip:(NSArray *)data :(int)highlightIndex
 {
-    REMTooltipView *tooltip = [[REMTooltipView alloc] initWithFrame:CGRectMake(0, -kDMChart_TooltipViewHeight, kDMScreenWidth, kDMChart_TooltipViewHeight) andData:data];
-    tooltip.tooltipDelegate = self;
+    REMTooltipViewBase *tooltip;
+    switch (self.widgetInfo.diagramType) {
+        case REMDiagramTypePie:
+            tooltip = [[REMPieChartTooltipView alloc] initWithFrame:kDMChart_TooltipHiddenFrame data:data andHighlightIndex:highlightIndex];
+            tooltip.tooltipDelegate = self;
+            break;
+            
+        default:
+            tooltip = [[REMTrendChartTooltipView alloc] initWithFrame:kDMChart_TooltipHiddenFrame andData:data];
+            tooltip.tooltipDelegate = self;
+            
+            break;
+    }
     
     [self.view addSubview:tooltip];
     self.tooltipView = tooltip;
     
     [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        tooltip.frame = CGRectMake(0, 0, kDMScreenWidth, kDMChart_TooltipViewHeight);
+        tooltip.frame = kDMChart_TooltipFrame;
     } completion:nil];
 }
 
 -(void)hideTooltip:(void (^)(void))complete
 {
     [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.tooltipView.frame = CGRectMake(0, -kDMChart_TooltipViewHeight, kDMScreenWidth, kDMChart_TooltipViewHeight);
+        self.tooltipView.frame = kDMChart_TooltipHiddenFrame;
     } completion:^(BOOL isCompleted){
         [self.tooltipView removeFromSuperview];
         self.tooltipView = nil;

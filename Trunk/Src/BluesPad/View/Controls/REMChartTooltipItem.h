@@ -7,12 +7,25 @@
  --------------------------------------------------------------------------*///
 
 #import <UIKit/UIKit.h>
+#import "REMChartSeriesIndicator.h"
+
+@interface REMChartTooltipItemModel : NSObject
+
+@property (nonatomic) int index;
+@property (nonatomic,strong) NSNumber *identity;
+@property (nonatomic) REMChartSeriesIndicatorType type;
+@property (nonatomic,strong) UIColor *color;
+@property (nonatomic,strong) NSString *title;
+@property (nonatomic,strong) NSNumber *value;
+
+@end
 
 @interface REMChartTooltipItem : UIControl
 
-@property (nonatomic,weak) UILabel *nameLabel;
-@property (nonatomic,weak) UILabel *valueLabel;
+@property (nonatomic,weak) REMChartTooltipItemModel *model;
 
-- (id)initWithFrame:(CGRect)frame withName:(NSString *)name color:(UIColor *)color andValue:(NSNumber *)dataValue;
+- (id)initWithFrame:(CGRect)frame andData:(REMChartTooltipItemModel *)model;
+- (void)updateModel:(REMChartTooltipItemModel *)model;
+
 
 @end

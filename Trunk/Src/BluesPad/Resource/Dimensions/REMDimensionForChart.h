@@ -20,6 +20,8 @@
 #define kDMChart_ToolbarFrame CGRectMake(0,kDMChart_ToolbarTop,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)
 #define kDMChart_ToolbarHiddenFrame CGRectMake(kDMChart_ToolbarWidth,kDMChart_ToolbarTop,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)
 
+//indicator
+#define kDMChart_IndicatorSize 18
 
 //legend
 #define kDMChart_LegendItemWidth 260
@@ -36,12 +38,24 @@
 #define kDMChart_LegendLabelTopOffset (kDMChart_LegendItemHeight - kDMChart_LegendLabelFontSize) / 2
 
 //tooltip
-#define kDMChart_TooltipViewHeight 120
-#define kDMChart_TooptipViewWidth kDMScreenWidth
+#define kDMChart_TooltipViewHeight 84
+#define kDMChart_TooltipContentWidth kDMCommon_ContentWidth
+#define kDMChart_TooltipViewBackgroundColor @"#f8f8f8"
 
-#define kDMChart_TooltipItemHeight 90
-#define kDMChart_TooltipItemTopOffset (kDMChart_TooltipViewHeight - kDMChart_TooltipItemHeight) / 2
-#define kDMChart_TooltipItemLeftOffset 10
+#define kDMChart_TooltipCloseViewWidth 100
+#define kDMChart_TooltipCloseViewInnerLeftOffset 50
 
+#define kMDChart_TooltipItemLeftOffset 20
+#define kDMChart_TooltipItemWidth 211
+#define kDMChart_TooltipItemTitleLeftOffset 11
+#define kDMChart_TooltipItemTitleFontSize 14
+#define kDMChart_TooltipItemTitleColor @"#212121"
+#define kDMChart_TooltipItemDataValueFontSize 17
+#define kDMChart_TooltipItemDataValueColor @"#9c9c9c"
+#define kDMChart_TooltipItemDataValueTopOffset 13
+
+#define kDMChart_TooltipHiddenFrame CGRectMake(0, -kDMChart_TooltipViewHeight, kDMScreenWidth, kDMChart_TooltipViewHeight)
+#define kDMChart_TooltipFrame CGRectMake(0, 0, kDMScreenWidth, kDMChart_TooltipViewHeight)
+#define kDMChart_TooltipContentViewFrame CGRectMake(kDMCommon_ContentLeftMargin, 0, kDMChart_TooltipContentWidth, kDMChart_TooltipViewHeight)
 
 #endif

@@ -63,6 +63,7 @@
             break;
             
         default:
+            content = [self getLineIndicator];
             break;
     }
     
@@ -72,7 +73,7 @@
 
 -(UIView *)getLineIndicator
 {
-    UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, 4, 16, 8)];
+    UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, kDMChart_IndicatorSize / 4, kDMChart_IndicatorSize, kDMChart_IndicatorSize / 2)];
     indicator.backgroundColor = self.color;
     
     return indicator;
@@ -80,7 +81,7 @@
 
 -(UIView *)getColumnIndicator
 {
-    UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 16, 16)];
+    UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDMChart_IndicatorSize, kDMChart_IndicatorSize)];
     indicator.backgroundColor = self.color;
     
     return indicator;
@@ -88,8 +89,8 @@
 
 -(UIView *)getPieIndicator
 {
-    UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 16, 16)];
-    indicator.layer.cornerRadius = 8;
+    UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDMChart_IndicatorSize, kDMChart_IndicatorSize)];
+    indicator.layer.cornerRadius = kDMChart_IndicatorSize / 2;
     indicator.layer.backgroundColor = self.color.CGColor;
     
     return indicator;
