@@ -29,7 +29,7 @@
         NSDate* date = nil;
         if (self.step == REMEnergyStepHour) {
             date = [self.startDate dateByAddingTimeInterval:xVal*3600];
-            date = [REMTimeHelper convertLocalDateToGMT:date];
+//            date = [REMTimeHelper convertLocalDateToGMT:date];
             if ([REMTimeHelper getHour:date] < self.interval) {
                 [dateFormatter setDateFormat:@"d日h点"];
             } else {
@@ -37,7 +37,7 @@
             }
         } else if (self.step == REMEnergyStepDay) {
             date = [self.startDate dateByAddingTimeInterval:xVal*86400];
-            date = [REMTimeHelper convertLocalDateToGMT:date];
+//            date = [REMTimeHelper convertLocalDateToGMT:date];
             if ([REMTimeHelper getDay:date] <= self.interval) {
                 [dateFormatter setDateFormat:@"M月-d日"];
             } else {
@@ -45,11 +45,11 @@
             }
         } else if (self.step == REMEnergyStepWeek) {
             date = [self.startDate dateByAddingTimeInterval:xVal*604800];
-            date = [REMTimeHelper convertLocalDateToGMT:date];
+//            date = [REMTimeHelper convertLocalDateToGMT:date];
             [dateFormatter setDateFormat:@"M月-d日"];
         } else if (self.step == REMEnergyStepMonth) {
             date = [REMTimeHelper addMonthToDate:self.startDate month:xVal];
-            date = [REMTimeHelper convertLocalDateToGMT:date];
+//            date = [REMTimeHelper convertLocalDateToGMT:date];
             if ([REMTimeHelper getMonth:date] <= self.interval) {
                 [dateFormatter setDateFormat:@"yyyy年-M月"];
             } else {
@@ -57,7 +57,7 @@
             }
         } else if (self.step == REMEnergyStepYear) {
             date = [REMTimeHelper addMonthToDate:self.startDate month:xVal*12];
-            date = [REMTimeHelper convertLocalDateToGMT:date];
+//            date = [REMTimeHelper convertLocalDateToGMT:date];
             [dateFormatter setDateFormat:@"yyyy年"];
         } else {
             return [NSString stringWithFormat:@"%i", xVal];
