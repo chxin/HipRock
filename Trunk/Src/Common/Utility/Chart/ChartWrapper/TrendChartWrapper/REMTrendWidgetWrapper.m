@@ -116,8 +116,8 @@
     return  myView;
 }
 
--(REMChartConfig*)getChartConfig:(NSDictionary*)style {
-    REMTrendChartConfig* chartConfig = [[REMTrendChartConfig alloc]initWithDictionary:style];
+-(REMChartConfig*)getChartConfig:(REMChartStyle*)style {
+    REMTrendChartConfig* chartConfig = [[REMTrendChartConfig alloc]initWithStyle:style];
     chartConfig.step = self.step;
     chartConfig.xGlobalLength = @([self createGlobalRange].length);
     
@@ -125,7 +125,7 @@
     NSMutableArray* yAxisList = [[NSMutableArray alloc]init];
     for (REMTrendChartSeries* s in chartConfig.series) {
         if (s.yAxisIndex >= yAxisList.count) {
-            REMTrendChartAxisConfig* y = [[REMTrendChartAxisConfig alloc]initWithLineStyle:style[@"yLineStyle"] gridlineStyle:style[@"yGridlineStyle"] textStyle:style[@"yTextStyle"]];
+            REMTrendChartAxisConfig* y = [[REMTrendChartAxisConfig alloc]initWithLineStyle:style.yLineStyle gridlineStyle:style.yGridlineStyle textStyle:style.yTextStyle];
             y.title = s.uomName;
             [yAxisList addObject:y];
             y.labelFormatter = [[REMYFormatter alloc]init];

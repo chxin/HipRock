@@ -15,7 +15,7 @@
 @protected REMTrendChartDataProcessor* sharedProcessor;
 }
 
--(REMAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax styleDictionary:(NSDictionary*)style;
+-(REMAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style;
 -(void)destroyView;
 -(void)redraw:(REMEnergyViewData *)energyViewData;
 -(void)extraSyntax:(REMWidgetContentSyntax*)widgetSyntax;
