@@ -26,11 +26,11 @@
 
 @interface REMMapViewController ()
 
+@property (nonatomic,weak) GMSMapView *mapView;
+
 @end
 
-@implementation REMMapViewController{
-    GMSMapView *mapView;
-}
+@implementation REMMapViewController
 
 static BOOL isInitialPresenting = YES;
 -(void)setIsInitialPresenting:(BOOL)isInitial
@@ -45,10 +45,6 @@ static BOOL isInitialPresenting = YES;
     [self.view setFrame:kDMDefaultViewFrame];
     [self loadMapView];
     
-    if(mapView != nil){
-        [self.view addSubview: mapView];
-        [self.view sendSubviewToBack: mapView];
-    }
 }
 
 
@@ -59,7 +55,7 @@ static BOOL isInitialPresenting = YES;
     
     [self addButtons];
     
-    [self.view.layer insertSublayer:self.titleGradientLayer above:mapView.layer];
+    [self.view.layer insertSublayer:self.titleGradientLayer above:self.mapView.layer];
     
     [self showMarkers];
 }
@@ -102,7 +98,7 @@ static BOOL isInitialPresenting = YES;
         marker.userData = buildingInfo;
         marker.title = building.name;
         marker.snippet = building.code;
-        marker.map = mapView;
+        marker.map = self.mapView;
         marker.flat = NO;
         marker.zIndex = [building.buildingId integerValue];
         marker.icon = [self getMarkerIcon:buildingInfo forMarkerState:UIControlStateNormal];
@@ -121,7 +117,7 @@ static BOOL isInitialPresenting = YES;
     
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:defaultLatitude longitude:defaultLongitude zoom:defaultZoomLevel];
     
-    mapView = [GMSMapView mapWithFrame:mapViewFrame camera:camera];
+    GMSMapView *mapView = [GMSMapView mapWithFrame:mapViewFrame camera:camera];
     [mapView setCamera:camera];
     mapView.myLocationEnabled = NO;
     mapView.delegate = self;
@@ -129,6 +125,11 @@ static BOOL isInitialPresenting = YES;
     mapView.settings.rotateGestures = NO;
     
     [self updateCamera];
+    
+    [self.view addSubview: mapView];
+    [self.view sendSubviewToBack: mapView];
+    
+    self.mapView = mapView;
 }
 
 -(void)updateCamera
@@ -137,16 +138,16 @@ static BOOL isInitialPresenting = YES;
     if(self.buildingInfoArray.count == 1){
         REMBuildingModel *building = [self.buildingInfoArray[0] building];
         
-        [mapView setCamera:[GMSCameraPosition cameraWithLatitude:building.latitude longitude:building.longitude zoom:12]];
+        [self.mapView setCamera:[GMSCameraPosition cameraWithLatitude:building.latitude longitude:building.longitude zoom:12]];
     }
     else{// multiple buildings, set the rect
         //northEast and southWest
         UIEdgeInsets visiableBounds = [self getVisiableBounds];
         GMSCoordinateBounds *bounds = [self coordinateBoundsFromEdgeInsets:visiableBounds];
         
-        GMSCameraPosition *camera = [mapView cameraForBounds:bounds insets:kDMMap_MapEdgeInsets];
+        GMSCameraPosition *camera = [self.mapView cameraForBounds:bounds insets:kDMMap_MapEdgeInsets];
         
-        [mapView setCamera:camera];
+        [self.mapView setCamera:camera];
     }
 }
 
@@ -183,14 +184,21 @@ static BOOL isInitialPresenting = YES;
 {
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+//    [self.mapView removeFromSuperview];
+//    self.mapView = nil;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
-    [mapView stopRendering];
-    [mapView clear];
-    mapView = nil;
+    [self.mapView stopRendering];
+    [self.mapView clear];
+    [self.mapView removeFromSuperview];
+    self.mapView = nil;
 }
 
 - (void)switchButtonPressed
@@ -239,7 +247,7 @@ static BOOL isInitialPresenting = YES;
 
 -(CGRect)getZoomFrameFromMarker:(GMSMarker *)marker
 {
-    CGPoint markerPoint = [mapView.projection pointForCoordinate:marker.position];
+    CGPoint markerPoint = [self.mapView.projection pointForCoordinate:marker.position];
     return CGRectMake(markerPoint.x, markerPoint.y-40, 5.12, 3.84);
 }
 
@@ -249,10 +257,10 @@ static BOOL isInitialPresenting = YES;
 //        currentBuilding = self.buildingInfoArray[0];
 //    }
     
-    for (GMSMarker *marker in mapView.markers) {
+    for (GMSMarker *marker in self.mapView.markers) {
         if([[marker.userData building].buildingId isEqualToNumber:[self.buildingInfoArray[currentBuildingIndex] building].buildingId]){
             self.currentBuildingIndex = currentBuildingIndex;
-            mapView.selectedMarker = marker;
+            self.mapView.selectedMarker = marker;
             return [self getZoomFrameFromMarker: marker];
         }
     }
@@ -296,11 +304,11 @@ static BOOL isInitialPresenting = YES;
 
 - (BOOL)mapView:(GMSMapView *)view didTapMarker:(GMSMarker *)marker
 {
-    GMSMarker *oldMarker = mapView.selectedMarker;
+    GMSMarker *oldMarker = self.mapView.selectedMarker;
     oldMarker.icon = [self getMarkerIcon:oldMarker.userData forMarkerState:UIControlStateNormal];
     
     marker.icon = [self getMarkerIcon:marker.userData forMarkerState:UIControlStateHighlighted];
-    mapView.selectedMarker = marker;
+    self.mapView.selectedMarker = marker;
 
     return YES;
 }

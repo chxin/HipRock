@@ -198,7 +198,7 @@
     
     [REMDataAccessor access:buildingStore success:^(id data) {
         if([data count]<=0){
-            [REMAlertHelper alert:@"未配置客户及数据权限，请联系您的管理员。"];
+            [REMAlertHelper alert:REMLocalizedString(@"Login_NotAuthorized")];
         }
         
         self.buildingInfoArray = [[NSMutableArray alloc] initWithCapacity:[data count]];
@@ -253,6 +253,12 @@
         REMMapViewController *mapViewController = segue.destinationViewController;
         mapViewController.buildingInfoArray = self.buildingInfoArray;
     }
+}
+
+- (void)stopBreath
+{
+    [self.normalLogo.layer removeAllAnimations];
+    [self.flashLogo.layer removeAllAnimations];
 }
 
 - (void)didReceiveMemoryWarning

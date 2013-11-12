@@ -244,12 +244,12 @@
 
 -(void)styleTextFieldNormalStatus:(UITextField *)textField
 {
-    [self setTextField:textField backgroundImage:REMLoadPngImage(@"LoginTextField")];
+    [self setTextField:textField backgroundImage:REMIMG_LoginTextField];
 }
 
 -(void)styleTextFieldFocusStatus:(UITextField *)textField
 {
-    [self setTextField:textField backgroundImage:REMLoadPngImage(@"LoginTextField-Focus")];
+    [self setTextField:textField backgroundImage:REMIMG_LoginTextField_Focus];
 }
 
 -(void)setTextField:(UITextField *)textField backgroundImage:(UIImage *)image
