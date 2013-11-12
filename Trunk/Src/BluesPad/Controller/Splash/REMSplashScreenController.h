@@ -19,7 +19,6 @@
 
 - (void)showMapView:(void (^)(void))loadCompleted;
 - (void)showLoginView:(BOOL)isAnimated;
-- (void)stopBreath;
 
 
 @end
