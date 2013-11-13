@@ -53,6 +53,11 @@ static BOOL isInitialPresenting = YES;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    // iOS 7.0 supported
+    if([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
+    
     [self addButtons];
     
     [self.view.layer insertSublayer:self.titleGradientLayer above:self.mapView.layer];
@@ -110,7 +115,8 @@ static BOOL isInitialPresenting = YES;
 -(void)loadMapView
 {
     CGRect viewBounds = self.view.bounds;
-    CGRect mapViewFrame = CGRectMake(viewBounds.origin.x, viewBounds.origin.y, viewBounds.size.width, viewBounds.size.height);
+    CGRect mapViewFrame = CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight);
+    //CGRectMake(viewBounds.origin.x, viewBounds.origin.y, viewBounds.size.width, viewBounds.size.height);
     
     double defaultLatitude =38.0, defaultLongitude=104.0;
     CGFloat defaultZoomLevel = 4.0;
@@ -345,5 +351,9 @@ static BOOL isInitialPresenting = YES;
     
 }
 
+#pragma mark - IOS7 style
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
 
 @end

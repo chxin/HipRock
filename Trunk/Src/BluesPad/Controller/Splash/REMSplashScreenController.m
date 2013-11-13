@@ -15,6 +15,7 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMTrend.h"
 #import "REMTestChartView.h"
+#import "REMDimensions.h"
 
 @interface REMSplashScreenController ()
 
@@ -28,6 +29,10 @@
 {
     [super viewDidLoad];
     
+    // iOS 7.0 supported
+    if([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
     
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
@@ -267,6 +272,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
 
 
 @end
