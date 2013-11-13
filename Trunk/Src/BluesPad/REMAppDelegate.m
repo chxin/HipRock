@@ -47,6 +47,8 @@
     // Google key init
     [GMSServices provideAPIKey:@kGoogleMapsKey];
     
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     return YES;
 }
 

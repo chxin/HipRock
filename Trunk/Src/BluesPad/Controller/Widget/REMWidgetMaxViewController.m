@@ -58,6 +58,12 @@ const static CGFloat widgetGap=10;
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
+    // iOS 7.0 supported
+    if([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
+    
     [self.view setFrame:CGRectMake(0, 0, 1024, 748)];
     [self.view setBackgroundColor:[UIColor blackColor]];
     self.cumulateX=0;
@@ -382,5 +388,8 @@ const static CGFloat widgetGap=10;
     NSLog(@"didReceiveMemoryWarning :%@",[self class]);
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
+}
 
 @end
