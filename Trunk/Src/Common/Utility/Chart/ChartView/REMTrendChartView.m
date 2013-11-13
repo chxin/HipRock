@@ -381,6 +381,7 @@
     for (REMTrendChartSeries* s in self.series) {
         [s dehighlight];
     }
+    isHighlightedStatus = NO;
 }
 
 
