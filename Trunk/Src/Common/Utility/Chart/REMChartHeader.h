@@ -89,9 +89,11 @@
 
 
 @interface REMPieChartSeries : REMChartSeries<CPTPieChartDataSource,CPTAnimationDelegate>
+@property (nonatomic,strong) NSMutableArray* hiddenPointIndexes;
 @property (nonatomic) float animationDuration;
 -(CPTColor*)getColorByIndex:(NSUInteger)idx;
 @property (nonatomic) NSArray* targetNames;
+-(void)setHiddenAtIndex:(NSUInteger)index hidden:(BOOL)hidden;
 @end
 
 @interface REMTrendChartSeries : REMChartSeries {
