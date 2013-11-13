@@ -14,6 +14,7 @@
 #import "REMSettingViewController.h"
 #import "REMMapViewController.h"
 #import "REMDashboardController.h"
+#import "REMBuildingImageViewController.h"
 
 typedef enum _BuildingSourceType{
     BuildingSourceTypeFromMap,
@@ -41,6 +42,8 @@ typedef enum _BuildingSourceType{
 - (void)switchToDashboard;
 
 - (void)switchToBuildingInfo;
+
+- (void)setViewOffset:(CGFloat)offsetY;
 
 - (IBAction)exitMaxWidget:(UIStoryboardSegue *)sender;
 

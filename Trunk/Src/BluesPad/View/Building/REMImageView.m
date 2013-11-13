@@ -163,38 +163,6 @@
     }
 }
 
-/*
-- (void)didMoveToSuperview
-{
-    //NSLog(@"parent changed");
-    if(self.superview == nil){
-        
-        [self reset];
-        return;
-    }
-    else{
-        //NSLog(@"subview count:%d",self.subviews.count);
-        [self initImageView2:self.frame];
-        
-        [self initBottomGradientLayer];
-        
-        [self initGlassView];
-        
-        //[self initDataListView];
-        
-        [self initTitleView];
-        
-        
-        [self initButtons];
-        
-        //[self loadingBuildingImage];
-        
-    }
-    
-    
-    
-}
- */
 
 - (void)initButtons{
     
@@ -640,13 +608,13 @@
         self.dashboardController.buildingController=self.controller;
         self.dashboardController.buildingInfo=self.buildingInfo;
         self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
-        [self addSubview:self.dashboardController.tableView];
+        
     }
     if(self.dataView.frame.origin.y<0)return;
-    
+    [self addSubview:self.dashboardController.view];
     //NSLog(@"data view old frame:%@",NSStringFromCGRect(self.dataView.frame));
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
-        [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y-20, self.frame.size.width-kBuildingLeftMargin*2, self.dataView.frame.size.height)];
+        [self.dashboardController.view setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y-20, self.frame.size.width-kBuildingLeftMargin*2, self.dataView.frame.size.height)];
         
         [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, self.dataView.frame.origin.y-self.dataView.frame.size.height, self.dataView.frame.size.width, self.dataView.frame.size.height)];
         
@@ -674,7 +642,7 @@
     if(self.superview==nil)return;
     if(self.dataView.frame.origin.y>0)return;
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
-        [self.dashboardController.tableView setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height*2, self.frame.size.width-kBuildingLeftMargin*2, self.dataView.frame.size.height)];
+        [self.dashboardController.view setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height*2, self.frame.size.width-kBuildingLeftMargin*2, self.dataView.frame.size.height)];
         [self.dataView setHidden:NO];
         [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, self.dataView.frame.origin.y+self.dataView.frame.size.height, self.dataView.frame.size.width, self.dataView.frame.size.height)];
         
@@ -684,6 +652,9 @@
         [self changeShareButton:YES];
         [self requireChartData];
         [self.cropTitleView removeFromSuperview];
+        [self.dashboardController.view removeFromSuperview];
+        self.dashboardController.view=nil;
+        
         
     }];
 }

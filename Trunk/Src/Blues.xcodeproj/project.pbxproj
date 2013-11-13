@@ -430,6 +430,9 @@
 		B404428718175EF700A499FB /* Nodata@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B404427F18175EF700A499FB /* Nodata@2x.png */; };
 		B404428818175EF700A499FB /* Up.png in Resources */ = {isa = PBXBuildFile; fileRef = B404428018175EF700A499FB /* Up.png */; };
 		B404428918175EF700A499FB /* Up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B404428118175EF700A499FB /* Up@2x.png */; };
+		B408794A1830A960004042C1 /* REMBuildingImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40879491830A960004042C1 /* REMBuildingImageViewController.m */; };
+		B408794D1830CC69004042C1 /* REMBuildingCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B408794C1830CC69004042C1 /* REMBuildingCommodityViewController.m */; };
+		B40879501830D0BA004042C1 /* REMBuildingAirQualityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B408794F1830D0BA004042C1 /* REMBuildingAirQualityViewController.m */; };
 		B40F011A1828C3DC009650FD /* REMWidgetStepEnergyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B40F01191828C3DC009650FD /* REMWidgetStepEnergyModel.m */; };
 		B40F011D1828DAB7009650FD /* REMWidgetRankingDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B40F011C1828DAB7009650FD /* REMWidgetRankingDelegator.m */; };
 		B40F01201828DAD5009650FD /* REMWidgetLabelingDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B40F011F1828DAD5009650FD /* REMWidgetLabelingDelegator.m */; };
@@ -1066,6 +1069,12 @@
 		B404427F18175EF700A499FB /* Nodata@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Nodata@2x.png"; path = "../Dashboard/Nodata@2x.png"; sourceTree = "<group>"; };
 		B404428018175EF700A499FB /* Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Up.png; sourceTree = "<group>"; };
 		B404428118175EF700A499FB /* Up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Up@2x.png"; sourceTree = "<group>"; };
+		B40879481830A960004042C1 /* REMBuildingImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingImageViewController.h; sourceTree = "<group>"; };
+		B40879491830A960004042C1 /* REMBuildingImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingImageViewController.m; sourceTree = "<group>"; };
+		B408794B1830CC69004042C1 /* REMBuildingCommodityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingCommodityViewController.h; sourceTree = "<group>"; };
+		B408794C1830CC69004042C1 /* REMBuildingCommodityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingCommodityViewController.m; sourceTree = "<group>"; };
+		B408794E1830D0BA004042C1 /* REMBuildingAirQualityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAirQualityViewController.h; sourceTree = "<group>"; };
+		B408794F1830D0BA004042C1 /* REMBuildingAirQualityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingAirQualityViewController.m; sourceTree = "<group>"; };
 		B40F01181828C3DC009650FD /* REMWidgetStepEnergyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetStepEnergyModel.h; path = Model/Widget/REMWidgetStepEnergyModel.h; sourceTree = "<group>"; };
 		B40F01191828C3DC009650FD /* REMWidgetStepEnergyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetStepEnergyModel.m; path = Model/Widget/REMWidgetStepEnergyModel.m; sourceTree = "<group>"; };
 		B40F011B1828DAB7009650FD /* REMWidgetRankingDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetRankingDelegator.h; path = BizDelegator/REMWidgetRankingDelegator.h; sourceTree = "<group>"; };
@@ -1515,16 +1524,22 @@
 				7A1A854F17B4BB5D004D7167 /* REMBuildingChartHandler.m */,
 				7A1A855017B4BB5D004D7167 /* REMBuildingTrendChartHandler.h */,
 				7A1A855117B4BB5D004D7167 /* REMBuildingTrendChartHandler.m */,
-				7A153C6817AA497B00413D3C /* REMBuildingViewController.h */,
-				7A153C6917AA497B00413D3C /* REMBuildingViewController.m */,
 				B4A0FCD917C610B500C7AD56 /* REMBuildingAirQualityChartHandler.h */,
 				B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartHandler.m */,
 				B493ADA717D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.h */,
 				B493ADA817D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m */,
-				B4FFB0C31818C7C5004C5404 /* REMBuildingDataViewController.h */,
-				B4FFB0C41818C7C5004C5404 /* REMBuildingDataViewController.m */,
 				7A44E04318238D5E0080CEBE /* REMBuildingShareViewController.h */,
 				7A44E04418238D5E0080CEBE /* REMBuildingShareViewController.m */,
+				7A153C6817AA497B00413D3C /* REMBuildingViewController.h */,
+				7A153C6917AA497B00413D3C /* REMBuildingViewController.m */,
+				B40879481830A960004042C1 /* REMBuildingImageViewController.h */,
+				B40879491830A960004042C1 /* REMBuildingImageViewController.m */,
+				B4FFB0C31818C7C5004C5404 /* REMBuildingDataViewController.h */,
+				B4FFB0C41818C7C5004C5404 /* REMBuildingDataViewController.m */,
+				B408794B1830CC69004042C1 /* REMBuildingCommodityViewController.h */,
+				B408794C1830CC69004042C1 /* REMBuildingCommodityViewController.m */,
+				B408794E1830D0BA004042C1 /* REMBuildingAirQualityViewController.h */,
+				B408794F1830D0BA004042C1 /* REMBuildingAirQualityViewController.m */,
 			);
 			name = Building;
 			path = Controller/Building;
@@ -3063,6 +3078,7 @@
 				7A1D7C3F17A637630050779D /* REMCustomerModel.m in Sources */,
 				7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */,
 				7A1D7C4517A63E8B0050779D /* REMEncryptHelper.m in Sources */,
+				B408794D1830CC69004042C1 /* REMBuildingCommodityViewController.m in Sources */,
 				7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */,
 				7A153C5C17AA489600413D3C /* REMBuildingModel.m in Sources */,
 				7A153C5D17AA489600413D3C /* REMDashboardObj.m in Sources */,
@@ -3077,6 +3093,7 @@
 				B42FBF6117F519F5004F2F3A /* REMWidgetCollectionViewController.m in Sources */,
 				7A153C6217AA489600413D3C /* REMEnergyData.m in Sources */,
 				7A153C6317AA489600413D3C /* REMEnergyError.m in Sources */,
+				B40879501830D0BA004042C1 /* REMBuildingAirQualityViewController.m in Sources */,
 				7A153C6417AA489600413D3C /* REMEnergyTargetModel.m in Sources */,
 				7A153C6517AA489600413D3C /* REMEnergyViewData.m in Sources */,
 				7A153C6617AA489600413D3C /* REMTargetEnergyData.m in Sources */,
@@ -3184,6 +3201,7 @@
 				7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */,
 				7AF3667817CF2D7400447650 /* REMBuildingChartSeriesIndicator.m in Sources */,
 				7A7F7B18181F7E3400A3C5AB /* REMGalleryGroupView.m in Sources */,
+				B408794A1830A960004042C1 /* REMBuildingImageViewController.m in Sources */,
 				B493ADA917D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m in Sources */,
 				EFDEC2A5181768540008972E /* REMTrendChartRankingSeries.m in Sources */,
 				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,

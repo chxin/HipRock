@@ -40,7 +40,7 @@ static NSString *cellId=@"dashboardcell";
 - (void)cancelAllRequest{
     [REMDataAccessor cancelAccess:[self groupName]];
 }
-
+/*
 - (void)loadView{
     self.tableView= [[REMDashboardView alloc]initWithFrame:self.viewFrame style:UITableViewStyleGrouped];
      
@@ -68,11 +68,37 @@ static NSString *cellId=@"dashboardcell";
     [self.tableView addSubview:arrow];
     self.arrow=arrow;
 }
-
+*/
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.tableView= [[REMDashboardView alloc]initWithFrame:self.viewFrame style:UITableViewStyleGrouped];
+    
+    self.view=self.tableView;
+    self.tableView.dataSource=self;
+    self.tableView.delegate=self;
+    
+    [self.tableView registerClass:[REMDashboardCellViewCell class] forCellReuseIdentifier:cellId];
+    self.tableView.sectionFooterHeight=34;
+    
+    //NSLog(@"frame:%@",NSStringFromCGRect(self.view.frame));
+    
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, kDashboardDragTitleMargin, 300, kDashboardDragTitleSize)];
+    label.text=NSLocalizedString(@"Dashboard_PullDownShowGeneral", @"");//@"下拉返回概览能耗信息";
+    label.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:label.frame.size.height];
+    label.textColor=[UIColor whiteColor];
+    label.backgroundColor=[UIColor clearColor];
+    [self.tableView addSubview:label];
+    self.buildingLabel=label;
+    
+    CGRect imgFrame=CGRectMake(168, kDashboardDragTitleMargin-8, 30, 30);
+    UIImage *image=[UIImage imageNamed:@"Down"];
+    UIImageView *arrow=[[UIImageView alloc]initWithImage:image];
+    [arrow setFrame:imgFrame];
+    [self.tableView addSubview:arrow];
+    self.arrow=arrow;
     
 }
 
