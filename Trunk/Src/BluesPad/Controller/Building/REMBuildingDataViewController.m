@@ -40,20 +40,24 @@
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapthis)];
     [self.view addGestureRecognizer:tap];
     
-    if(self.currentOffsetY!=NSNotFound){
-        [scroll setContentOffset:CGPointMake(scroll.contentOffset.x, self.currentOffsetY)];
-    }
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
     self.currentCommodityIndex=0;
     [self initButtons];
     [self initDragLabel];
     [self initCommodityController];
     [self initCurrentCommodityView];
+    if(self.currentOffsetY!=NSNotFound){//must put behand the initCommodityController
+        [self scrollTo:self.currentOffsetY];
+        REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
+        [parent setBlurLevel:[self generateBlurLevel]];
+    }
 }
 
 - (void) initButtons{
@@ -227,7 +231,9 @@
 - (void)initCurrentCommodityView{
     if(self.childViewControllers.count>self.currentCommodityIndex){
         REMBuildingCommodityViewController *controller=self.childViewControllers[self.currentCommodityIndex];
-        if(controller.view.superview==nil){
+        REMBuildingImageViewController *imageController=(REMBuildingImageViewController *)self.parentViewController;
+        if(controller.isViewLoaded==NO){
+            [imageController loadingDataNow];
             [self.view addSubview:controller.view];
         }
         else{
@@ -244,17 +250,20 @@
         count=self.buildingInfo.commodityArray.count;
     }
     CGRect frame=CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.view.frame.size.width, 800);
-    for (int i=0; i<count; ++i) {
+    int i=0;
+    for (; i<count; ++i) {
         REMCommodityModel *model = self.buildingInfo.commodityArray[i];
         REMBuildingCommodityViewController *controller=[[REMBuildingCommodityViewController alloc]init];
         controller.commodityInfo=model;
         controller.buildingInfo=self.buildingInfo;
         controller.viewFrame=frame;
+        controller.index=i;
         [self addChildViewController:controller];
     }
     if(self.buildingInfo.airQuality!=nil){
         REMBuildingAirQualityViewController *controller=[[REMBuildingAirQualityViewController alloc]init];
         controller.viewFrame=frame;
+        controller.index=i;
         controller.airQualityInfo=self.buildingInfo.airQuality;
         controller.buildingInfo=self.buildingInfo;
         [self addChildViewController:controller];
@@ -331,13 +340,19 @@
 
 - (void)setCurrentOffsetY:(CGFloat)currentOffsetY{
     if(_currentOffsetY!=currentOffsetY){
+         _currentOffsetY=currentOffsetY;
         if(self.isViewLoaded==YES){
             UIScrollView *view=(UIScrollView *)self.view;
-            
-            [view setContentOffset:CGPointMake(view.contentOffset.x, currentOffsetY)];
-
+            if(view.contentOffset.y != currentOffsetY){
+                [view setContentOffset:CGPointMake(view.contentOffset.x, currentOffsetY)];
+            }
+            REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
+            [parent setBlurLevel:currentOffsetY];
+            if(parent.currentOffset!=currentOffsetY){
+                parent.currentOffset=currentOffsetY;
+            }
         }
-         _currentOffsetY=currentOffsetY;
+        
     }
 }
 
@@ -348,33 +363,12 @@
     
     if(scroll.contentOffset.y<kCommodityScrollTop)
     {
-        [self scrollUp];
+        [self scrollTo:kCommodityScrollTop]; //up
     }
     else
     {
-        [self scrollDown];
+        [self scrollTo:-kBuildingCommodityViewTop]; //down
     }
-}
-
-
-
-- (void)scrollUp
-{
-    
-    
-    [self scrollTo:kCommodityScrollTop];
-    
-    
-    
-}
-
-- (void)scrollDown
-{
-    
-    [self scrollTo:-kBuildingCommodityViewTop];
-    
-    
-    
 }
 
 - (void)scrollTo:(CGFloat)y
@@ -382,9 +376,15 @@
     //NSLog(@"x:%f",self.dataView.frame.origin.x);
     UIScrollView *scroll=(UIScrollView *)self.view;
     [scroll setContentOffset:CGPointMake(-kBuildingLeftMargin, y) animated:YES];
-    _currentOffsetY=y;
-    REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
-    parent.currentOffset=y;
+    //self.currentOffsetY=y;
+    
+}
+
+-(CGFloat) generateBlurLevel{
+    UIScrollView *scroll=(UIScrollView *)self.view;
+    float blurLevel=(scroll.contentOffset.y + scroll.contentInset.top) / (kBuildingCommodityViewTop+kCommodityScrollTop);
+    
+    return blurLevel;
 }
 
 
@@ -394,18 +394,20 @@
 //    }
     if(scrollView.contentOffset.y>=kCommodityScrollTop){
         //[self requireChartData];
-        REMBuildingCommodityViewController *controller=self.childViewControllers[self.currentCommodityIndex];
-        
+        if(self.childViewControllers.count>self.currentCommodityIndex){
+            REMBuildingCommodityViewController *controller=self.childViewControllers[self.currentCommodityIndex];
+            [controller showChart];
+        }
     }
 }
 
 - (void)roundPositionWhenDrag:(UIScrollView *)scrollView{
     if(scrollView.contentOffset.y<kCommodityScrollTop && scrollView.contentOffset.y>-kBuildingCommodityViewTop){
         if(ABS(scrollView.contentOffset.y) < (kBuildingCommodityViewTop+kCommodityScrollTop)/2){
-            [self scrollUp];
+            [self scrollTo:kCommodityScrollTop]; //up
         }
         else{
-            [self scrollDown];
+            [self scrollTo:-kBuildingCommodityViewTop]; //down
         }
     }
     else{
@@ -428,6 +430,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    self.currentOffsetY=scrollView.contentOffset.y;
     if(scrollView.contentOffset.y>kDashboardThreshold){
         [self showDashboardLabel:YES];
     }
@@ -459,12 +462,21 @@
     else{
         if(scrollView.contentOffset.y>kDashboardThreshold){
             REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
-            [parent switchToDashboard];
+            parent.currentCoverStatus=REMBuildingCoverStatusDashboard;
+            
         }
     }
 }
 
+- (void)loadingDataComplete:(NSUInteger)index{
+    REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
+    if(index == self.currentCommodityIndex){
+        [parent loadingDataComplete];
+    }
+}
+
 - (void)replaceImagesShowReal:(BOOL)showReal{
+    //not implemented 
 //    if(self.commodityViewDictionary.count<1)return ;
 //    REMBuildingCommodityView *view=   self.commodityViewDictionary[self.currentCommodityId];
 //    NSNumber *key=self.currentCommodityId;

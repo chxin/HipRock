@@ -7,10 +7,14 @@
 --------------------------------------------------------------------------*/
 #import "REMBuildingCommodityViewController.h"
 #import "REMBuildingChartViewController.h"
+#import "REMBuildingAverageChartViewController.h"
+#import "REMBuildingTrendChartViewController.h"
+#import "REMBuildingDataViewController.h"
+
 
 @interface REMBuildingCommodityViewController ()
 
-typedef void(^SuccessCallback)(BOOL success);
+//typedef void(^SuccessCallback)(BOOL success);
 
 @property (nonatomic,weak) REMBuildingTitleLabelView *totalLabel;
 
@@ -22,11 +26,11 @@ typedef void(^SuccessCallback)(BOOL success);
 @property (nonatomic,weak) REMBuildingChartContainerView *chartContainer2;
 @property (nonatomic,strong) REMCommodityUsageModel *commodityUsage;
 
+@property (nonatomic) NSUInteger counter;
 
+//@property (nonatomic,strong) SuccessCallback successBlock;
 
-@property (nonatomic,strong) SuccessCallback successBlock;
-
-@property (nonatomic) NSUInteger successCounter;
+//@property (nonatomic) NSUInteger successCounter;
 
 @property (nonatomic,strong) NSArray *chartViewSnapshotArray;
 
@@ -41,14 +45,72 @@ typedef void(^SuccessCallback)(BOOL success);
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self.view setFrame:self.viewFrame];
+    self.counter=0;
+    self.dataLoadComplete=NO;
     [self initCommodityView];
 }
+
+
 
 - (void)initCommodityView{
     [self initTotalValue];
     [self initDetailValue];
     [self initChartContainer];
-    [self loadTotalUsageByBuildingId:self.buildingInfo.building.buildingId ByCommodityId:self.commodityInfo.commodityId];
+    if(self.commodityUsage==nil){
+        [self loadTotalUsageByBuildingId:self.buildingInfo.building.buildingId ByCommodityId:self.commodityInfo.commodityId];
+    }
+    else{
+        [self addDataLabel];
+    }
+}
+
+- (void)loadedPart{
+    if (self.counter==2) {
+        self.dataLoadComplete=YES;
+        REMBuildingDataViewController *dataController=(REMBuildingDataViewController *)self.parentViewController;
+        [dataController loadingDataComplete:self.index];
+    }
+    self.counter++;
+}
+
+- (void)loadChartComplete{
+    [self loadedPart];
+}
+
+- (void)addDataLabel{
+    REMCommodityUsageModel *model=self.commodityUsage;
+    self.totalLabel.data=model.commodityUsage;
+    self.carbonLabel.data=model.carbonEquivalent;
+    self.rankingLabel.data=model.rankingData;
+    [self loadedPart];
+    if(model.targetValue!=nil &&
+       model.targetValue!=nil &&
+       ![model.targetValue.dataValue isEqual:[NSNull null]] &&
+       [model.targetValue.dataValue isGreaterThan:@(0)])
+    {
+        REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, self.rankingLabel.frame.origin.y, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
+        target.title=NSLocalizedString(@"Building_Target", @""); //@"目标值";
+        target.titleFontSize=kBuildingCommodityTitleFontSize;
+        target.titleMargin=kBuildingDetailInnerMargin;
+        target.leftMargin=kBuildingCommodityDetailTextMargin;
+        target.valueFontSize=kBuildingCommodityDetailValueFontSize;
+        target.uomFontSize=kBuildingCommodityDetailUomFontSize;
+        [target showTitle];
+        [self addSplitBar:target];
+        if (model.commodityUsage!=nil && model.commodityUsage.dataValue!=nil &&
+            ![model.commodityUsage.dataValue isEqual:[NSNull null]]) {
+            if(model.isTargetAchieved==YES){
+                [target setTitleIcon:[UIImage imageNamed:@"OverTarget"]];
+            }
+            else{
+                [target setTitleIcon:[UIImage imageNamed:@"NotOverTarget"]];
+            }
+        }
+        
+        [self.view addSubview:target];
+        self.targetLabel=target;
+        self.targetLabel.data=model.targetValue;
+    }
 }
 
 - (void)loadTotalUsageByBuildingId:(NSNumber *)buildingId ByCommodityId:(NSNumber *)commodityId
@@ -74,40 +136,7 @@ typedef void(^SuccessCallback)(BOOL success);
         [self.totalLabel hideLoading];
         [self.carbonLabel hideLoading];
         [self.rankingLabel hideLoading];
-        self.totalLabel.data=model.commodityUsage;
-        self.carbonLabel.data=model.carbonEquivalent;
-        self.rankingLabel.data=model.rankingData;
-        
-        if(model.targetValue!=nil &&
-           model.targetValue!=nil &&
-           ![model.targetValue.dataValue isEqual:[NSNull null]] &&
-           [model.targetValue.dataValue isGreaterThan:@(0)])
-        {
-            REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, self.rankingLabel.frame.origin.y, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
-            target.title=NSLocalizedString(@"Building_Target", @""); //@"目标值";
-            target.titleFontSize=kBuildingCommodityTitleFontSize;
-            target.titleMargin=kBuildingDetailInnerMargin;
-            target.leftMargin=kBuildingCommodityDetailTextMargin;
-            target.valueFontSize=kBuildingCommodityDetailValueFontSize;
-            target.uomFontSize=kBuildingCommodityDetailUomFontSize;
-            [target showTitle];
-            [self addSplitBar:target];
-            if (model.commodityUsage!=nil && model.commodityUsage.dataValue!=nil &&
-                ![model.commodityUsage.dataValue isEqual:[NSNull null]]) {
-                if(model.isTargetAchieved==YES){
-                    [target setTitleIcon:[UIImage imageNamed:@"OverTarget"]];
-                }
-                else{
-                    [target setTitleIcon:[UIImage imageNamed:@"NotOverTarget"]];
-                }
-            }
-            
-            [self.view addSubview:target];
-            self.targetLabel=target;
-            self.targetLabel.data=model.targetValue;
-            
-        }
-        
+        [self addDataLabel];
     } error:^(NSError *error, id response) {
         
     }];
@@ -197,22 +226,41 @@ typedef void(^SuccessCallback)(BOOL success);
     
 }
 
-
+- (void)initTitle{
+    
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kBuildingCommodityDetailWidth, kBuildingCommodityTitleFontSize)];
+    titleLabel.text=self.title;
+    titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    titleLabel.shadowOffset=CGSizeMake(1, 1);
+    
+    titleLabel.backgroundColor=[UIColor clearColor];
+    titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:kBuildingCommodityTitleFontSize];
+    titleLabel.textColor=[UIColor whiteColor];
+    [self.view addSubview:titleLabel];
+    
+}
 
 - (void)initChartContainer
 {
     int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;
     int chartContainerHeight=kBuildingChartHeight;
     NSString *title1=NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @"");//单位面积逐月用%@
-//    REMBuildingChartContainerView *view1 = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0,marginTop , kBuildingChartWidth, chartContainerHeight) withTitle: [NSString stringWithFormat:title1,self.commodityInfo.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
-//    
-//    [self.view addSubview:view1];
-//    self.chartContainer1=view1;
+    
+    UILabel *titleLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityTitleFontSize)];
+    titleLabel1.text=[NSString stringWithFormat:title1,self.commodityInfo.comment];
+    titleLabel1.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    titleLabel1.shadowOffset=CGSizeMake(1, 1);
+    
+    titleLabel1.backgroundColor=[UIColor clearColor];
+    titleLabel1.font = [UIFont fontWithName:@(kBuildingFontSC) size:kBuildingCommodityTitleFontSize];
+    titleLabel1.textColor=[UIColor whiteColor];
+    [self.view addSubview:titleLabel1];
+    
+    
     
     REMBuildingChartViewController *controller1=[[REMBuildingChartViewController alloc] init];
-    controller1.viewFrame=CGRectMake(0,marginTop , kBuildingChartWidth, chartContainerHeight);
-    controller1.title=[NSString stringWithFormat:title1,self.commodityInfo.comment];
-    controller1.chartHandlerClass=[REMBuildingAverageChartHandler class];
+    controller1.viewFrame=CGRectMake(0, marginTop+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, chartContainerHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
+    controller1.chartHandlerClass=[REMBuildingAverageViewController class];
     controller1.buildingId=self.buildingInfo.building.buildingId;
     controller1.commodityId=self.commodityInfo.commodityId;
     [self addChildViewController:controller1];
@@ -222,10 +270,20 @@ typedef void(^SuccessCallback)(BOOL success);
 
     NSString *title2=NSLocalizedString(@"Building_EnergyUsageByCommodity", @"");//用%@趋势图
     
+    UILabel *titleLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingCommodityDetailWidth, kBuildingCommodityTitleFontSize)];
+    titleLabel2.text=[NSString stringWithFormat:title2,self.commodityInfo.comment];;
+    titleLabel2.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    titleLabel2.shadowOffset=CGSizeMake(1, 1);
+    
+    titleLabel2.backgroundColor=[UIColor clearColor];
+    titleLabel2.font = [UIFont fontWithName:@(kBuildingFontSC) size:kBuildingCommodityTitleFontSize];
+    titleLabel2.textColor=[UIColor whiteColor];
+    [self.view addSubview:titleLabel2];
+
+    
     REMBuildingChartViewController *controller2=[[REMBuildingChartViewController alloc] init];
-    controller2.viewFrame=CGRectMake(0, marginTop1, kBuildingChartWidth, secondChartHeight);
-    controller2.title=[NSString stringWithFormat:title2,self.commodityInfo.comment];
-    controller2.chartHandlerClass=[REMBuildingTrendChartHandler class];
+    controller2.viewFrame=CGRectMake(0, marginTop1+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, secondChartHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
+    controller2.chartHandlerClass=[REMBuildingTrendChartViewController class];
     controller2.commodityId=self.commodityInfo.commodityId;
     controller2.buildingId=self.buildingInfo.building.buildingId;
     [self addChildViewController:controller2];
@@ -240,7 +298,9 @@ typedef void(^SuccessCallback)(BOOL success);
     
     for (int i=0; i<self.childViewControllers.count; ++i) {
         REMBuildingChartViewController *controller=self.childViewControllers[i];
-        [self.view addSubview:controller.view];
+        if(controller.view.superview==nil){
+            [self.view addSubview:controller.view];
+        }
     }
     
     /*

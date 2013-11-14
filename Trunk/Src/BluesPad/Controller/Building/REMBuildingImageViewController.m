@@ -36,14 +36,17 @@
     if (self) {
         // Custom initialization
         REMBuildingDataViewController *dataViewController=[[REMBuildingDataViewController alloc]init];
-        REMDashboardController *dashboardController=[[REMDashboardController alloc]init];
+        REMDashboardController *dashboardController=[[REMDashboardController alloc]initWithStyle:UITableViewStyleGrouped];
+        _currentCoverStatus=REMBuildingCoverStatusCoverPage;
+        _currentOffset=NSNotFound;
         [self addChildViewController:dataViewController];
         [self addChildViewController:dashboardController];
-        self.currentCoverStatus=REMBuildingCoverStatusCoverPage;
-        self.currentOffset=NSNotFound;
+
     }
     return self;
 }
+
+
 
 
 - (void)viewDidLoad
@@ -53,13 +56,17 @@
     self.loadingImageKey=[NSString stringWithFormat:@(kBuildingImageLoadingKeyPrefix),self.buildingInfo.building.buildingId];
     //NSLog(@"self view:%@",NSStringFromCGRect(self.view.frame));
     [self.view setFrame:self.viewFrame];
+    REMBuildingDataViewController *coverController=self.childViewControllers[0];
+    REMDashboardController *dashboardController=self.childViewControllers[1];
+    coverController.buildingInfo=self.buildingInfo;
+    coverController.viewFrame=CGRectMake(0, kBuildingTitleHeight, self.view.frame.size.width, self.view.frame.size.height-kBuildingTitleHeight);
+    coverController.upViewFrame=CGRectMake(coverController.viewFrame.origin.x, coverController.viewFrame.origin.y-coverController.viewFrame.size.height, coverController.viewFrame.size.width, coverController.viewFrame.size.height);
+    dashboardController.buildingInfo=self.buildingInfo;
+    dashboardController.viewFrame=CGRectMake(kBuildingLeftMargin, coverController.viewFrame.origin.y+coverController.viewFrame.size.height, self.view.frame.size.width-kBuildingLeftMargin*2, coverController.viewFrame.size.height);
+    dashboardController.upViewFrame=CGRectMake(dashboardController.viewFrame.origin.x, coverController.viewFrame.origin.y-20, dashboardController.viewFrame.size.width, dashboardController.viewFrame.size.height);
     [self loadSmallImageView];
 
     
-}
-
-- (BOOL)hasLoadView{
-    return self.glassView!=nil;
 }
 
 - (NSString *)buildingPictureFileName{
@@ -120,29 +127,32 @@
 
 
 - (void)loadContentView{
-    if ([self hasLoadView]==NO) {
+    if (self.glassView==nil) {
         [self initGlassView];
         [self initBottomGradientLayer];
         [self initButtons];
         [self loadingBuildingImage];
         [self initTitleView];
+        if(self.currentOffset!=NSNotFound){
+            [self setBlurLevel:self.currentOffset];
+        }
+        
     }
     if(self.currentCoverStatus == REMBuildingCoverStatusCoverPage){
         REMBuildingDataViewController *controller=self.childViewControllers[0];
         
-        controller.buildingInfo=self.buildingInfo;
-        controller.viewFrame=CGRectMake(0, kBuildingTitleHeight, self.view.frame.size.width, self.view.frame.size.height-kBuildingTitleHeight);
-        if(controller.view.superview==nil){
+       
+        if(controller.isViewLoaded == NO){
             [self.view addSubview:controller.view];
         }
     }
     else{
         REMDashboardController *controller=self.childViewControllers[1];
-        controller.buildingInfo=self.buildingInfo;
-        controller.viewFrame=CGRectMake(0, kBuildingTitleHeight, self.view.frame.size.width, self.view.frame.size.height-kBuildingTitleHeight);
-        if(controller.view.superview==nil){
+        if(controller.isViewLoaded == NO){
             [self.view addSubview:controller.view];
+            [controller.view setFrame:controller.upViewFrame];
         }
+        
     }
     
 }
@@ -254,9 +264,6 @@
     
     UIButton *logoButton = [self getCustomerLogoButton];
     
-    
-    //[logoButton setFrame:CGRectMake(kBuildingLeftMargin+kBuildingTitleButtonDimension, titleLabel.frame.origin.y, logoButton.frame.size.width, logoButton.frame.size.height)];
-    
     [logoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
     
     logoButton.titleLabel.text=@"logo";
@@ -325,10 +332,12 @@
     [self.view insertSubview:newBlurred aboveSubview:newView];
     
     
-    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
         newView.alpha=self.imageView.alpha;
         newBlurred.alpha=self.blurImageView.alpha;
     } completion:^(BOOL finished){
+        newView.alpha=self.imageView.alpha;
+        newBlurred.alpha=self.blurImageView.alpha;
         [self.imageView removeFromSuperview];
         [self.blurImageView removeFromSuperview];
         self.imageView.image=nil;
@@ -337,6 +346,7 @@
         self.blurImageView=nil;
         self.imageView = newView;
         self.blurImageView=newBlurred;
+
     }];
 
 }
@@ -396,6 +406,10 @@
     
 }
 - (void)clipTitleView{
+    if(self.cropTitleView!=nil){
+        [self.cropTitleView setHidden:NO];
+        return;
+    }
     UIImage *image=[REMImageHelper imageWithView:self.view];
     CGRect rect=CGRectMake(0, 0, self.view.frame.size.width, kBuildingTitleHeight);
     CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], rect);
@@ -411,22 +425,120 @@
 
 - (void)setCurrentOffset:(CGFloat)currentOffset{
     if(currentOffset!=_currentOffset){
+        _currentOffset=currentOffset;
         if(self.isViewLoaded==YES){
             if(self.currentCoverStatus == REMBuildingCoverStatusCoverPage){
                 REMBuildingDataViewController *controller=(REMBuildingDataViewController *)self.childViewControllers[0];
                 [controller setCurrentOffsetY:currentOffset];
             }
             else{
-                REMDashboardController *controller=(REMBuildingDataViewController *)self.childViewControllers[1];
+                REMDashboardController *controller=(REMDashboardController *)self.childViewControllers[1];
+                [controller setCurrentOffsetY:currentOffset];
             }
         }
-        
-        _currentOffset=currentOffset;
         REMBuildingViewController *buildingController=(REMBuildingViewController *)self.parentViewController;
         [buildingController setViewOffset:currentOffset];
     }
     
     
+}
+
+- (void)setBlurLevel:(CGFloat)offsetY {
+    float blurLevel=(offsetY + kBuildingCommodityViewTop) / (kBuildingCommodityViewTop+kCommodityScrollTop);
+    
+    if(self.blurImageView.alpha == blurLevel) return;
+    self.blurImageView.alpha = MAX(blurLevel,0);
+    
+    
+    self.glassView.alpha = MAX(0,MIN(blurLevel,0.8));
+    
+}
+
+
+
+- (void)setCurrentCoverStatus:(REMBuildingCoverStatus)currentCoverStatus{
+    if(_currentCoverStatus!=currentCoverStatus){
+        _currentCoverStatus=currentCoverStatus;
+        REMDashboardController *dashBoardController=(REMDashboardController *)self.childViewControllers[1];
+        REMBuildingDataViewController *coverController=(REMBuildingDataViewController *)self.childViewControllers[0];
+        
+        if (currentCoverStatus==REMBuildingCoverStatusDashboard) {
+            [self.shareButton setHidden:YES];
+            REMBuildingViewController *buildingController=(REMBuildingViewController *)self.parentViewController;
+            if(coverController.isViewLoaded==YES){
+                
+                if(dashBoardController.isViewLoaded==NO &&buildingController.currentCoverStatus!=currentCoverStatus){
+                    [self.view addSubview:dashBoardController.view];
+                }
+                if(buildingController.currentCoverStatus!=currentCoverStatus){
+                    [self clipTitleView];
+                    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
+                        [dashBoardController.view setHidden:NO];
+                        [dashBoardController.view setFrame:dashBoardController.upViewFrame];
+                        [coverController.view setFrame:coverController.upViewFrame];
+                        
+                    } completion:^(BOOL finished){
+                        [coverController.view setHidden:YES];
+                        [self.cropTitleView setHidden:YES];
+                    }];
+                }
+                else{
+                    [coverController.view setFrame:coverController.upViewFrame];
+                    [coverController.view setHidden:YES];
+                    if(dashBoardController.isViewLoaded){
+                        [dashBoardController.view setHidden:NO];
+                        [dashBoardController.view setFrame:dashBoardController.upViewFrame];
+                    }
+                }
+            }
+            
+            buildingController.currentCoverStatus=REMBuildingCoverStatusDashboard;
+        }
+        else{
+            [self.shareButton setHidden:YES];
+            REMBuildingViewController *buildingController=(REMBuildingViewController *)self.parentViewController;
+            if(dashBoardController.isViewLoaded==YES){
+
+                if(coverController.isViewLoaded==NO && buildingController.currentCoverStatus!=currentCoverStatus){
+                    [self.view addSubview:coverController.view];
+                    [coverController.view setFrame:coverController.upViewFrame];
+                }
+                if (buildingController.currentCoverStatus!=currentCoverStatus) {
+                    [self clipTitleView];
+                    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
+                        [coverController.view setHidden:NO];
+                        [coverController.view setFrame:coverController.viewFrame];
+                        [dashBoardController.view setFrame:dashBoardController.viewFrame];
+                        
+                    } completion:^(BOOL finished){
+                        [dashBoardController.view setHidden:YES];
+                        [self.cropTitleView setHidden:YES];
+                    }];
+                }
+                else{
+                    [dashBoardController.view setFrame:dashBoardController.viewFrame];
+                    [dashBoardController.view setHidden:YES];
+                    if(coverController.isViewLoaded){
+                        [coverController.view setHidden:NO];
+                        [coverController.view setFrame:coverController.viewFrame];
+                    }
+                }
+            }
+            
+            buildingController.currentCoverStatus=REMBuildingCoverStatusCoverPage;
+        }
+        
+        
+        
+    }
+}
+
+- (void)loadingDataNow{
+    [self.shareButton setEnabled:NO];
+}
+
+- (void)loadingDataComplete{
+    [self.shareButton setEnabled:YES];
 }
 
 
@@ -435,6 +547,18 @@
 {
     [super didReceiveMemoryWarning];
     NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    if(self.childViewControllers.count>0){
+        if(self.currentCoverStatus==REMBuildingCoverStatusCoverPage){
+            UIViewController *controller= self.childViewControllers[1];
+            controller.view=nil;
+            NSLog(@"release cover page");
+        }
+        else{
+            UIViewController *controller= self.childViewControllers[0];
+            controller.view=nil;
+            NSLog(@"release dashboard");
+        }
+    }
     // Dispose of any resources that can be recreated.
 }
 

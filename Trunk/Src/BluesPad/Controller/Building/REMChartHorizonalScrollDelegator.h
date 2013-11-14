@@ -13,13 +13,13 @@
 @interface REMChartHorizonalScrollDelegator : NSObject<CPTPlotSpaceDelegate>
 
 
-@property (nonatomic,strong) REMDataRange *globalRange;
+@property (nonatomic,weak) REMDataRange *globalRange;
 
-@property (nonatomic,strong) REMDataRange *visiableRange;
+@property (nonatomic,weak) REMDataRange *visiableRange;
 
-@property (nonatomic,strong) CPTGraphHostingView *hostView;
+@property (nonatomic,weak) CPTGraphHostingView *hostView;
 
-@property (nonatomic,strong) NSArray *snapshotArray;
+@property (nonatomic,weak) NSArray *snapshotArray;
 
 
 @end

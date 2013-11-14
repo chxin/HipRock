@@ -576,7 +576,7 @@
     else{
         if(scrollView.contentOffset.y>kDashboardThreshold){
             [self clipTitleView];
-            [self.controller switchToDashboard];
+            //[self.controller switchToDashboard];
         }
     }
 }
@@ -601,13 +601,13 @@
     
     if(self.dashboardController==nil){
         self.dashboardController = [[REMDashboardController alloc]initWithStyle:UITableViewStyleGrouped];
-        self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
+        //self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
         CGRect newFrame = CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height, self.frame.size.width-kBuildingLeftMargin*2, self.dataView.frame.size.height);
         self.dashboardController.viewFrame=newFrame;
-        self.dashboardController.imageView=self;
-        self.dashboardController.buildingController=self.controller;
+        //self.dashboardController.imageView=self;
+        //self.dashboardController.buildingController=self.controller;
         self.dashboardController.buildingInfo=self.buildingInfo;
-        self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
+        //self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
         
     }
     if(self.dataView.frame.origin.y<0)return;
@@ -661,7 +661,7 @@
 
 - (void)gotoBuildingInfo{
     [self clipTitleView];
-    [self.controller switchToBuildingInfo];
+    //[self.controller switchToBuildingInfo];
     
 }
 

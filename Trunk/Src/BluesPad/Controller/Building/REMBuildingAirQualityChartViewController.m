@@ -6,7 +6,7 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
  --------------------------------------------------------------------------*///
 
-#import "REMBuildingAirQualityChartHandler.h"
+#import "REMBuildingAirQualityChartViewController.h"
 #import "REMAirQualityDataModel.h"
 #import "REMCommonHeaders.h"
 #import "REMDataRange.h"
@@ -16,7 +16,7 @@
 
 #define REMHalfDaySeconds 12*60*60
 
-@interface REMBuildingAirQualityChartHandler ()
+@interface REMBuildingAirQualityChartViewController ()
 
 @property (nonatomic) CGRect viewFrame;
 @property (nonatomic,strong) REMBuildingAirQualityChart *chartView;
@@ -37,7 +37,7 @@
 
 @end
 
-@implementation REMBuildingAirQualityChartHandler
+@implementation REMBuildingAirQualityChartViewController
 
 
 static NSString *kOutdoorCode = @"GalaxySoho_Outdoor";
@@ -57,7 +57,7 @@ static NSDictionary *codeNameMap;
 
 
 
-- (REMBuildingAirQualityChartHandler *)initWithViewFrame:(CGRect)frame
+- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
 {
     self = [super init];
     if (self) {
@@ -74,12 +74,9 @@ static NSDictionary *codeNameMap;
 
 - (void)loadView
 {
-    [super loadView];
-    
     self.view = [[REMBuildingAirQualityChart alloc] initWithFrame:self.viewFrame];
     self.chartView = (REMBuildingAirQualityChart *)self.view;
     
-    [self viewDidLoad];
 }
 
 - (void)viewDidLoad

@@ -38,10 +38,8 @@ typedef enum _BuildingSourceType{
 @property (nonatomic,strong) UIPopoverController *sharePopoverController;
 @property (nonatomic,strong) NSArray *imageArray;
 
+@property (nonatomic) REMBuildingCoverStatus currentCoverStatus;
 
-- (void)switchToDashboard;
-
-- (void)switchToBuildingInfo;
 
 - (void)setViewOffset:(CGFloat)offsetY;
 

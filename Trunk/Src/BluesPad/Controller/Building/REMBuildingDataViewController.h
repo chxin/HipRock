@@ -19,7 +19,10 @@
 
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 @property (nonatomic) CGRect viewFrame;
+@property (nonatomic) CGRect upViewFrame;
 
 @property (nonatomic) CGFloat currentOffsetY;
+
+- (void)loadingDataComplete:(NSUInteger)index;
 
 @end

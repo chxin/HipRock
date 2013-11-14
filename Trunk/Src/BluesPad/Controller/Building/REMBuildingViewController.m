@@ -79,7 +79,7 @@ const static CGFloat buildingGap=10;
     
     self.cumulateX=0;
     
-    [self addObserver:self forKeyPath:@"currentScrollOffset" options:0 context:nil];
+    //[self addObserver:self forKeyPath:@"currentScrollOffset" options:0 context:nil];
     
     
     if(self.buildingInfoArray.count>0){
@@ -90,8 +90,6 @@ const static CGFloat buildingGap=10;
         [self.view addGestureRecognizer:rec];
         rec.delegate = self;
         
-        UITapGestureRecognizer *tap= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapthis:)];
-        [self.view addGestureRecognizer:tap];
         
         UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchThis:)];
         [self.view addGestureRecognizer:pinch];
@@ -103,25 +101,7 @@ const static CGFloat buildingGap=10;
 
 -(void)dealloc{
     
-    [self removeObserver:self forKeyPath:@"currentScrollOffset"];
-    for (REMImageView *view in self.imageArray) {
-        [view removeFromSuperview];
-    }
-    self.imageArray=nil;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if([keyPath isEqualToString:@"currentScrollOffset"] == YES){
-        for (int i=0; i<self.imageArray.count; ++i) {
-            if(i!= self.currentBuildingIndex){
-                if([[self.imageViewStatus objectForKey:@(i)] isEqualToNumber:@(1)] == YES){
-                    REMImageView *view=self.imageArray[i];
-                    [view setScrollOffset:self.currentScrollOffset];
-                }
-            }
-        }
-    }
+    
 }
 
 
@@ -129,11 +109,9 @@ const static CGFloat buildingGap=10;
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] ==YES ){
-        if(self.imageArray.count<1)return YES;
-        REMImageView *current = self.imageArray[self.currentBuildingIndex];
-        return [current shouldResponseSwipe:touch];
-            
-        
+        if(self.childViewControllers.count<1)return YES;
+        if( [touch.view isKindOfClass:[CPTGraphHostingView class]] == YES) return NO;
+        return YES;
     }
     else if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]==YES){
         return YES;
@@ -158,10 +136,6 @@ const static CGFloat buildingGap=10;
     
     
     int i=0;
-    //self.imageViewStatus = [[NSMutableDictionary alloc]initWithCapacity:self.buildingInfoArray.count];
-    //NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:self.buildingInfoArray.count];
-    
-    //NSLog(@"ns nav:%@",NSStringFromCGRect(self.navigationController.view.frame));
     for (;i<self.buildingInfoArray.count;++i) {
         REMBuildingOverallModel *model = self.buildingInfoArray[i];
         
@@ -172,70 +146,12 @@ const static CGFloat buildingGap=10;
         
         subController.viewFrame=CGRectMake(i*(kImageWidth+buildingGap), self.view.frame.origin.y,kImageWidth,kImageHeight);
         
-        //NSLog(@"subcontroller:%@",NSStringFromCGRect(subController.viewFrame));
-        
         
         [self addChildViewController:subController];
         
         [self.view addSubview:subController.view];
         
-        /*
-        REMImageView *imageView = [[REMImageView alloc]initWithFrame:CGRectMake((kImageWidth+imageGap)*i, 0, kImageWidth, kImageHeight) withBuildingOveralInfo:model ];
-        
-        
-        
-        imageView.defaultImage=self.defaultImage;
-        imageView.defaultBlurImage=self.defaultBlurImage;
-        imageView.controller=self;
-        
-        [self.view addSubview:imageView];
-        if(i==self.currentBuildingIndex || i==(self.currentBuildingIndex+1) || i == (self.currentBuildingIndex-1)){
-            [imageView initWholeViewUseThumbnail:NO];
-        }
-        else{
-            [imageView initWholeViewUseThumbnail:YES];
-        }
-        
-        [array addObject:imageView];
-         */
     }
-    /*
-    self.imageArray=array;
-    
-    
-    NSMutableArray *arr = [[NSMutableArray alloc]initWithCapacity:self.imageArray.count];
-    
-    for (i=0;i<self.imageArray.count;++i) {
-        REMImageView *view = self.imageArray[i];
-        NSNumber *num = [NSNumber numberWithFloat:view.center.x];
-        [arr addObject:num];
-    }
-    
-    
-    
-    int moveCount=self.currentBuildingIndex;
-    
-    NSMutableArray *ar = [[NSMutableArray alloc] initWithCapacity:self.imageArray.count];
-    for (int i=0; i<arr.count; ++i) {
-        NSNumber *num = arr[i];
-        float f = [num floatValue];
-        f = f+(1024+imageGap)*moveCount*-1;
-        NSNumber *num1 = [NSNumber numberWithFloat:f];
-        [ar addObject:num1];
-    }
-    
-    self.originCenterXArray=ar;
-    
-    for(int i=0;i<self.imageArray.count;++i)
-    {
-        NSNumber *s = self.originCenterXArray[i];
-        CGFloat x= [s floatValue];
-        REMImageView *image = self.imageArray[i];
-        [image setCenter: CGPointMake( x,image.center.y)];
-    }
-    
-    
-    [self loadImageData];*/
     
     [self stopCoverPage:nil];
 }
@@ -250,10 +166,6 @@ const static CGFloat buildingGap=10;
 #pragma mark -
 #pragma mark buildingview
 
-- (void)loadImageData{
-    REMImageView *image = self.imageArray[self.currentBuildingIndex];
-    [image requireChartData];
-}
 
 - (void) swipethis:(UIPanGestureRecognizer *)pan
 {
@@ -368,7 +280,6 @@ const static CGFloat buildingGap=10;
 - (void)stopCoverPage:(NSTimer *)timer{
     REMBuildingImageViewController *vc=self.childViewControllers[self.currentBuildingIndex];
     [vc loadContentView];
-    return;
     if(self.currentBuildingIndex<self.childViewControllers.count){
         CGFloat sign=self.speed<0?-1:1;
         NSNumber *willIndex= @(self.currentBuildingIndex-1*sign);
@@ -377,8 +288,6 @@ const static CGFloat buildingGap=10;
         }
         REMBuildingImageViewController *nextController= self.childViewControllers[willIndex.intValue];
         [nextController loadContentView];
-        //[nextView initWholeViewUseThumbnail:NO];
-        //[nextView setScrollOffset:self.currentScrollOffset];
         
     }
 
@@ -421,30 +330,24 @@ const static CGFloat buildingGap=10;
 }
 
 
-- (void)switchToDashboard
-{
-    for (REMImageView *view in self.imageArray) {
-        [view showDashboard];
+
+
+- (void)setCurrentCoverStatus:(REMBuildingCoverStatus)currentCoverStatus{
+    if(_currentCoverStatus!=currentCoverStatus){
+        _currentCoverStatus=currentCoverStatus;
+        if(currentCoverStatus== REMBuildingCoverStatusDashboard){
+            for (REMBuildingImageViewController *controller in self.childViewControllers) {
+                controller.currentCoverStatus=REMBuildingCoverStatusDashboard;
+            }
+        }
+        else{
+            for (REMBuildingImageViewController *controller in self.childViewControllers) {
+                controller.currentCoverStatus=REMBuildingCoverStatusCoverPage;
+            }
+        }
     }
 }
 
-- (void)switchToBuildingInfo{
-    for (REMImageView *view in self.imageArray) {
-        [view showBuildingInfo];
-    }
-}
-
-/*
--(void)tapthis:(UITapGestureRecognizer *)tap
-{
-    //NSLog(@"cumulatex:%f",self.cumulateX);
-    if(self.cumulateX!=0) return;
-    
-    for (REMImageView *view in self.imageArray) {
-        [view tapthis];
-    }
-}
-*/
 
 
 -(void)pinchThis:(UIPinchGestureRecognizer *)pinch
@@ -517,9 +420,9 @@ const static CGFloat buildingGap=10;
         [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, CGRectZero, self.view.frame)];
     }
     if([segue.identifier isEqualToString:@"maxWidgetSegue"]==YES){
-        REMImageView *view = self.imageArray[self.currentBuildingIndex];
+        REMBuildingImageViewController *controller = self.childViewControllers[self.currentBuildingIndex];
         
-        REMDashboardController *dashboard=view.dashboardController;
+        REMDashboardController *dashboard=(REMDashboardController *)controller.childViewControllers[1];
         
         REMWidgetCollectionViewController *collection= dashboard.childViewControllers[dashboard.currentMaxDashboardIndex];
         
@@ -527,7 +430,7 @@ const static CGFloat buildingGap=10;
         REMWidgetMaxViewController *maxController = segue.destinationViewController;
         self.maxDashbaordController=dashboard;
         maxController.widgetCollectionController=collection;
-        maxController.dashboardInfo=dashboard.dashboardArray[dashboard.currentMaxDashboardIndex];
+        maxController.dashboardInfo=dashboard.buildingInfo.dashboardArray[dashboard.currentMaxDashboardIndex];
         
     }
 }

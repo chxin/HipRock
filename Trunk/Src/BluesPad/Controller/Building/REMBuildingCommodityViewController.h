@@ -19,5 +19,9 @@
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 @property (nonatomic) CGRect viewFrame;
 
+@property (nonatomic) BOOL dataLoadComplete;
+@property (nonatomic) NSUInteger index;
+
 - (void) showChart;
+- (void)loadChartComplete;
 @end

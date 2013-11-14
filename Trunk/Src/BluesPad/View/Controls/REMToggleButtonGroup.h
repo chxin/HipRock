@@ -18,4 +18,9 @@
 -(void)registerButton:(REMToggleButton*)button;
 
 -(void)bindToggleChangeCallback:(id)performer selector:(SEL)selector;
+
+
+@property (nonatomic,weak) id toggleChangePerformer;
+
+
 @end

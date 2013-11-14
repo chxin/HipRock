@@ -126,8 +126,9 @@ const static CGFloat widgetGap=10;
 
 - (void) addDashboardBg{
     REMDashboardController *srcController=(REMDashboardController *) self.widgetCollectionController.parentViewController;
-    
-    UIImage *image=[REMImageHelper imageWithView:srcController.buildingController.view];
+    REMBuildingImageViewController *imageController=(REMBuildingImageViewController *)srcController.parentViewController;
+
+    UIImage *image=[REMImageHelper imageWithView:imageController.view];
     UIImageView *view = [[UIImageView alloc]initWithImage:image];
     [view setFrame:self.view.frame];
     [view setFrame:CGRectMake(200, 200, view.frame.size.width-400, view.frame.size.height-400)];

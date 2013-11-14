@@ -39,7 +39,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.view setFrame:self.viewFrame];
     //NSLog(@"detail view:%@",NSStringFromCGRect(self.view.frame));
     
@@ -152,10 +152,11 @@
 }
 
 - (void)snapshotChartView{
-    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, NO, 0.0);
-    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+//    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, NO, 0.0);
+//    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+//    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+    UIImage* image=[REMImageHelper imageWithView:self.view];
     //UIImageView *v = [[UIImageView alloc]initWithImage:image];
     
     UIButton *button =[UIButton buttonWithType:UIButtonTypeCustom];

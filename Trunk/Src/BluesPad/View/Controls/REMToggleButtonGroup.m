@@ -9,7 +9,6 @@
 #import "REMToggleButtonGroup.h"
 
 @implementation REMToggleButtonGroup {
-    id toggleChangePerformer;
     SEL toggleChangeSEL;
 }
 
@@ -44,7 +43,7 @@
             [activeBtn setOn:false];
         }
         [button setOn:YES];
-        [toggleChangePerformer performSelector:toggleChangeSEL withObject:button];
+        [self.toggleChangePerformer performSelector:toggleChangeSEL withObject:button];
     }
 }
 
@@ -56,7 +55,7 @@
 
 
 -(void)bindToggleChangeCallback:(id)performer selector:(SEL)selector {
-    toggleChangePerformer = performer;
+    self.toggleChangePerformer = performer;
     toggleChangeSEL = selector;
 }
 @end

@@ -15,7 +15,7 @@ typedef enum _REMBuildingCoverStatus{
     REMBuildingCoverStatusDashboard
 } REMBuildingCoverStatus;
 
-@interface REMBuildingImageViewController : REMControllerBase
+@interface REMBuildingImageViewController : REMControllerBase<UIGestureRecognizerDelegate>
 
 
 
@@ -30,10 +30,11 @@ typedef enum _REMBuildingCoverStatus{
 
 @property (nonatomic) CGFloat currentOffset;
 
-- (void)switchToDashboard;
-- (void)switchToBuildingCover;
+- (void)loadingDataComplete;
 
+- (void)loadingDataNow;
 
+- (void)setBlurLevel:(CGFloat)offsetY;
 
 - (void)loadContentView;
 
