@@ -45,8 +45,8 @@ def scanimages(root,output):
 		if (file.endswith('.png') or file.endswith('.jpg')) and ('@2x' not in file):
 			pointindex = file.rfind('.')
 			imagename = file[0:pointindex]
-			imagetype = file[pointindex+1:]
-			definition = '#define REMIMG_'+parseimagename(imagename)+' REMLoadImage(@"'+imagename+'",@"'+imagetype+'")'
+			#imagetype = file[pointindex+1:]
+			definition = '#define REMIMG_'+parseimagename(imagename)+' REMLoadImageNamed(@"'+imagename+'")'
 
 			#print file
 			#print definition

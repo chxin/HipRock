@@ -18,9 +18,9 @@
 
 #define REMLocalizedString(a) NSLocalizedString((a),@"")
 
-#define REMLoadImage(a,b) [[UIImage alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(a) ofType:(b)]]
-#define REMLoadPngImage(a) REMLoadImage((a),@"png")
-#define REMLoadJpgImage(a) REMLoadImage((a),@"jpg")
+#define REMLoadImageNamed(a) [UIImage imageNamed:(a)]
+
+#define REMLoadImageResource(a,b) [[UIImage alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(a) ofType:(b)]]
 
 #define REMOSGreaterThan(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 

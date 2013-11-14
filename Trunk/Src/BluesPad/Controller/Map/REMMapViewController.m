@@ -303,7 +303,7 @@ static BOOL isInitialPresenting = YES;
     
     NSString *imageName = [NSString stringWithFormat:@"%@%@", iconName, iconStateName];
     
-    return REMLoadPngImage(imageName);
+    return REMLoadImageNamed(imageName);
 }
 
 #pragma mark GSMapView delegate
