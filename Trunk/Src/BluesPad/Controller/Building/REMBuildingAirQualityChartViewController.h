@@ -6,9 +6,9 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
  --------------------------------------------------------------------------*///
 
-#import "REMBuildingChartHandler.h"
+#import "REMBuildingChartBaseViewController.h"
 #import "REMChartHorizonalScrollDelegator.h"
 
-@interface REMBuildingAirQualityChartHandler : REMBuildingChartHandler<CPTScatterPlotDataSource,CPTScatterPlotDelegate,CPTPlotSpaceDelegate>
+@interface REMBuildingAirQualityChartViewController : REMBuildingChartBaseViewController<CPTScatterPlotDataSource,CPTScatterPlotDelegate,CPTPlotSpaceDelegate>
 
 @end

@@ -7,7 +7,7 @@
  --------------------------------------------------------------------------*///
 
 #import <QuartzCore/QuartzCore.h>
-#import "REMBuildingAverageChartHandler.h"
+#import "REMBuildingAverageChartViewController.h"
 #import "REMBuildingAverageChart.h"
 #import "REMEnergyViewData.h"
 #import "REMCommodityUsageModel.h"
@@ -18,11 +18,11 @@
 
 
 
-@interface REMBuildingAverageChartHandler ()
+@interface REMBuildingAverageViewController ()
 
 @property (nonatomic) CGRect viewFrame;
 @property (nonatomic) long long commodityId;
-@property (nonatomic,strong) REMBuildingAverageChart *chartView;
+@property (nonatomic,weak) REMBuildingAverageChart *chartView;
 @property (nonatomic,strong) NSArray *chartData;
 @property (nonatomic,strong) REMEnergyViewData *averageData;
 
@@ -36,7 +36,7 @@
 
 @end
 
-@implementation REMBuildingAverageChartHandler
+@implementation REMBuildingAverageViewController
 
 
 static NSString *kBenchmarkTitle = @"目标值";
@@ -55,7 +55,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 }
 
 
-- (REMBuildingChartHandler *)initWithViewFrame:(CGRect)frame
+- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
 {
     self = [super init];
     if (self) {
@@ -73,12 +73,12 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 
 - (void)loadView
 {
-    [super loadView];
+    //[super loadView];
     
     self.view = [[REMBuildingAverageChart alloc] initWithFrame:self.viewFrame];
     self.chartView = (REMBuildingAverageChart *)self.view;
     
-    [self viewDidLoad];
+    //[self viewDidLoad];
 }
 
 - (void)viewDidLoad
@@ -132,6 +132,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     }
     else
     {
+        
         //initialize graph
         [self.chartView initializeGraph];
         

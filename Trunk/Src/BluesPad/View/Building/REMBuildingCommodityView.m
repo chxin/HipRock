@@ -342,8 +342,8 @@ typedef void(^SuccessCallback)(BOOL success);
     REMBuildingChartContainerView *averageContainer = self.chartViewArray[0];
     
     if(averageContainer.controller==nil){
-        REMBuildingAverageChartHandler *averageController = [[REMBuildingAverageChartHandler alloc]initWithViewFrame:CGRectMake(0, 0, averageContainer.frame.size.width, averageContainer.chartContainer.frame.size.height)];
-        averageContainer.controller=averageController;
+        //REMBuildingAverageChartHandler *averageController = [[REMBuildingAverageChartHandler alloc]initWithViewFrame:CGRectMake(0, 0, averageContainer.frame.size.width, averageContainer.chartContainer.frame.size.height)];
+        //averageContainer.controller=averageController;
     }
     
     
@@ -355,14 +355,14 @@ typedef void(^SuccessCallback)(BOOL success);
     REMBuildingChartContainerView *trendContainer = self.chartViewArray[1];
     
     if (trendContainer.controller==nil) {
-        REMBuildingTrendChartHandler  *trendController = [[REMBuildingTrendChartHandler alloc]initWithViewFrame:CGRectMake(0, 0, trendContainer.frame.size.width, trendContainer.chartContainer.frame.size.height)];
-        trendContainer.controller=trendController;
+        //REMBuildingTrendChartHandler  *trendController = [[REMBuildingTrendChartHandler alloc]initWithViewFrame:CGRectMake(0, 0, trendContainer.frame.size.width, trendContainer.chartContainer.frame.size.height)];
+        //trendContainer.controller=trendController;
         
     }
    
-    [trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil complete:^(BOOL success){
-        [self sucessRequest];    
-    }];
+    //[trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil complete:^(BOOL success){
+    //    [self sucessRequest];
+    //}];
 }
 /*
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event

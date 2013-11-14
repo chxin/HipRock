@@ -43,11 +43,12 @@ const static CGFloat kDashboardWidgetChartHeight=104;
 
 @interface REMDashboardController : UITableViewController<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
-@property (nonatomic,weak) NSArray *dashboardArray;
 @property (nonatomic) CGRect viewFrame;
-@property (nonatomic,weak) REMImageView *imageView;
+@property (nonatomic) CGRect upViewFrame;
 
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+
+@property (nonatomic) CGFloat currentOffsetY;
 
 -(void)cancelAllRequest;
 
@@ -59,7 +60,6 @@ const static CGFloat kDashboardWidgetChartHeight=104;
 
 @property (nonatomic,weak) UIView *readyToMaxCell;
 
-@property (nonatomic,weak) REMBuildingViewController *buildingController;
 
 
 @end

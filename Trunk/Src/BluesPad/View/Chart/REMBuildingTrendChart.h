@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "REMTimeRange.h"
 #import "REMEnergyViewData.h"
-#import "REMBuildingTrendChartHandler.h"
+#import "REMBuildingTrendChartViewController.h"
 #import "REMBuildingOverallModel.h"
 #import "REMToggleButton.h"
 #import "REMToggleButtonGroup.h"
