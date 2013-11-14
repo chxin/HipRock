@@ -8,9 +8,7 @@
 
 #import "REMToggleButtonGroup.h"
 
-@implementation REMToggleButtonGroup {
-    SEL toggleChangeSEL;
-}
+@implementation REMToggleButtonGroup
 
 -(id)init {
     self = [super init];
@@ -43,7 +41,9 @@
             [activeBtn setOn:false];
         }
         [button setOn:YES];
-        [self.toggleChangePerformer performSelector:toggleChangeSEL withObject:button];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(activedButtonChanged:)]) {
+            [self.delegate activedButtonChanged:button];
+        }
     }
 }
 
@@ -51,11 +51,5 @@
     [buttons addObject:button];
     
     [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-}
-
-
--(void)bindToggleChangeCallback:(id)performer selector:(SEL)selector {
-    self.toggleChangePerformer = performer;
-    toggleChangeSEL = selector;
 }
 @end

@@ -98,6 +98,10 @@
 "Weibo_ContentOfElectirc"="%@本月用#Commodity#趋势及单位平米用#Commodity#趋势，本月用#Commodity#总能耗为#Usage##UomName#，节能持续进行中。";
 "Weibo_ContentOfPM25"="今天上午10:00，%@室外#Commodity#为#OutdoorVal##OutdoorUomName#；经霍尼韦尔净化后室内新风#Commodity#为#HoneywellVal##HoneywellUomName#，经美埃净化后室内新风#Commodity#为#MayairVal##MayairUomName#。";
 
+//Mail, prefix: Mail_
+"Mail_AccountNotConfigured" = "未配置邮件账户";
+"Mail_Title" = "能耗信息分享自：";
+
 
 //Chart, prefix: Chart_
 

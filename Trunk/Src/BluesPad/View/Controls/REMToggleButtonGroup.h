@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "REMToggleButton.h"
 
+@protocol REMToggleButtonGroupDelegate <NSObject>
+
+-(void)activedButtonChanged:(UIButton*)newButton;
+
+@end
+
 @interface REMToggleButtonGroup : NSObject {
     NSMutableArray* buttons;
 }
@@ -17,10 +23,5 @@
 -(REMToggleButton*)getToggledButton;
 -(void)registerButton:(REMToggleButton*)button;
 
--(void)bindToggleChangeCallback:(id)performer selector:(SEL)selector;
-
-
-@property (nonatomic,weak) id toggleChangePerformer;
-
-
+@property (nonatomic,weak)id<REMToggleButtonGroupDelegate> delegate;
 @end

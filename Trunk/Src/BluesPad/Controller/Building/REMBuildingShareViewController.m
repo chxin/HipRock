@@ -11,6 +11,7 @@
 #import "REMBuildingShareViewController.h"
 #import "REMBuildingWeiboView.h"
 #import "REMImageView.h"
+#import "REMCommonDefinition.h"
 
 @interface REMBuildingShareViewController ()
 
@@ -44,7 +45,6 @@
 
 -(void)weiboButtonPressed:(UIButton *)button
 {
-    //here is weibo
     [self.buildingController.sharePopoverController dismissPopoverAnimated:YES];
     
     REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:[UIApplication sharedApplication].keyWindow];
@@ -65,7 +65,7 @@
         [self.buildingController.sharePopoverController dismissPopoverAnimated:YES];
         
         if(![MFMailComposeViewController canSendMail]){
-            [REMAlertHelper alert:@"未配置邮件账户"];
+            [REMAlertHelper alert:REMLocalizedString(@"Mail_AccountNotConfigured")];
             return ;
         }
         
@@ -73,7 +73,7 @@
         
         picker.mailComposeDelegate = self;
         
-        [picker setSubject:@"test"];
+        [picker setSubject:REMLocalizedString(@"Mail_Title")];
         
         // Set up the recipients.
 //        NSArray *toRecipients = [NSArray arrayWithObjects:@"first@example.com", nil];
