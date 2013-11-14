@@ -32,31 +32,23 @@
 
 @implementation REMMapViewController
 
-static BOOL isInitialPresenting = YES;
--(void)setIsInitialPresenting:(BOOL)isInitial
-{
-    isInitialPresenting = isInitial;
-}
 
 - (void)loadView
 {
     [super loadView];
 
     [self.view setFrame:kDMDefaultViewFrame];
-    [self loadMapView];
-    
 }
 
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
     // iOS 7.0 supported
-//    if([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
-//        [self setNeedsStatusBarAppearanceUpdate];
-//    }
+    REMUpdateStatusBarAppearenceForIOS7;
+    
+    [self loadMapView];
     
     [self addButtons];
     
@@ -80,13 +72,6 @@ static BOOL isInitialPresenting = YES;
     
     //add customer logo button
     [self.view addSubview:self.customerLogoButton];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    if(self.buildingInfoArray.count>0 && isInitialPresenting == YES){
-        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
-    }
 }
 
 -(void)showMarkers
@@ -186,6 +171,13 @@ static BOOL isInitialPresenting = YES;
     return [[GMSCoordinateBounds alloc] initWithCoordinate:northEast coordinate:southWest];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
+        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
 }
@@ -242,8 +234,8 @@ static BOOL isInitialPresenting = YES;
     [self performSegueWithIdentifier:kSegue_MapToBuilding sender:self];
     
     //if is initial, shut off
-    if(isInitialPresenting == YES)
-        isInitialPresenting = NO;
+    if(self.isInitialPresenting == YES)
+        self.isInitialPresenting = NO;
 }
 
 -(void)presentGalleryView

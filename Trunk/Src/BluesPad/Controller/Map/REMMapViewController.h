@@ -17,12 +17,12 @@
 @property (nonatomic,weak) NSArray *buildingInfoArray;
 @property (nonatomic) int currentBuildingIndex;
 
+@property (nonatomic) BOOL isInitialPresenting;
+
 @property (nonatomic) CGRect initialZoomRect;
 @property (nonatomic,strong) UIImageView *snapshot;
 
 #pragma mark - Methods
--(void)presentBuildingView;
-
 -(void)bubbleTapped:(REMMarkerBubbleView *)bubble;
 
 -(CGRect)getDestinationZoomRect: (int)currentBuildingIndex;

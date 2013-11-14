@@ -257,6 +257,7 @@
     {
         REMMapViewController *mapViewController = segue.destinationViewController;
         mapViewController.buildingInfoArray = self.buildingInfoArray;
+        mapViewController.isInitialPresenting = YES;
     }
 }
 
