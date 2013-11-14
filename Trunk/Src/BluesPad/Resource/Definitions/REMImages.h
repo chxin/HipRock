@@ -53,7 +53,11 @@
 #define REMIMG_Water_pressed REMLoadImageNamed(@"Water_pressed")
 
 //images in /Chart:
-#define REMIMG_TooltipClose REMLoadImageNamed(@"TooltipClose")
+#define REMIMG_Back_Chart REMLoadImageNamed(@"Back_Chart")
+#define REMIMG_Close_Chart REMLoadImageNamed(@"Close_Chart")
+#define REMIMG_DatePicker_Chart REMLoadImageNamed(@"DatePicker_Chart")
+#define REMIMG_DateView_Chart REMLoadImageNamed(@"DateView_Chart")
+#define REMIMG_Legend_Chart REMLoadImageNamed(@"Legend_Chart")
 
 //images in /Dashboard:
 #define REMIMG_Back REMLoadImageNamed(@"Back")
