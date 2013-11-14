@@ -53,7 +53,7 @@
 #define REMIMG_Water_pressed REMLoadImage(@"Water_pressed",@"png")
 
 //images in /Chart:
-#define REMIMG_TooltipClose REMLoadImage(@"TooltipClose",@"png")
+#define REMIMG_TooltipClose REMLoadImage(@"Close_Chart",@"png")
 
 //images in /Dashboard:
 #define REMIMG_Back REMLoadImage(@"Back",@"png")

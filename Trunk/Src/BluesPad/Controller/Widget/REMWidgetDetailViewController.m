@@ -73,7 +73,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     
     UIButton *backButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake(kWidgetBackButtonLeft, kWidgetBackButtonTop, kWidgetBackButtonWidthHeight, kWidgetBackButtonWidthHeight)];
-    [backButton setImage:[UIImage imageNamed:@"Back"] forState:UIControlStateNormal];
+    [backButton setImage:[UIImage imageNamed:@"Back_Chart"] forState:UIControlStateNormal];
     backButton.adjustsImageWhenHighlighted=YES;
     backButton.showsTouchWhenHighlighted=YES;
     [backButton addTarget:self.parentViewController action:@selector(popToBuildingCover) forControlEvents:UIControlEventTouchUpInside];

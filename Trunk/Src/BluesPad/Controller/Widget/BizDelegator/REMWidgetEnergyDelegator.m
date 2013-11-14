@@ -433,8 +433,8 @@
     [legendControl setFrame:CGRectMake(kLegendSearchSwitcherLeft, kLegendSearchSwitcherTop, kLegendSearchSwitcherWidth, kLegendSearchSwitcherHeight)];
     [legendControl setSegmentedControlStyle:UISegmentedControlStylePlain];
 
-    UIImage *search=[UIImage imageNamed:@"Up"];
-    UIImage *legend=[UIImage imageNamed:@"Down"];
+    UIImage *search=[UIImage imageNamed:@"DateView_Chart"];
+    UIImage *legend=[UIImage imageNamed:@"Legend_Chart"];
     [legendControl setImage:search forSegmentAtIndex:0];
     [legendControl setImage:legend forSegmentAtIndex:1];
     //[legendControl setBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
@@ -454,7 +454,7 @@
     [timePickerButton setBackgroundColor:[REMColor colorByHexString:@"#9d9d9d"]];
     timePickerButton.layer.cornerRadius=4;
     
-    [timePickerButton setImage:[UIImage imageNamed:@"Oil_pressed"] forState:UIControlStateNormal];
+    [timePickerButton setImage:[UIImage imageNamed:@"DatePicker_Chart"] forState:UIControlStateNormal];
     [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(8, 5, 8, kWidgetDatePickerWidth-40)];
     timePickerButton.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetDatePickerTitleSize];
     [timePickerButton setTitleColor:[REMColor colorByHexString:@"#5e5e5e"] forState:UIControlStateNormal];
