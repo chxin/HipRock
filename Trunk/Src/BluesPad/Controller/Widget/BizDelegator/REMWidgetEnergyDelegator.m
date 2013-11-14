@@ -54,14 +54,17 @@
     self.model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
                   .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
     self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
-    self.tempModel=(REMWidgetStepEnergyModel *)[REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
-                    .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
+    REMWidgetStepEnergyModel *m=(REMWidgetStepEnergyModel *)self.model;
+    m.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
+    
+    self.tempModel=[self.model copy];
+    
 }
 
 
 - (void)initChartView{
-    UIView *c=[[UIView alloc]initWithFrame:CGRectMake(0, kWidgetChartTopMargin, 1024, kWidgetChartHeight+kWidgetChartLeftMargin)];
-    [c setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
+    UIView *c=[[UIView alloc]initWithFrame:CGRectMake(0, kWidgetChartTopMargin, self.view.frame.size.width, kWidgetChartHeight+kWidgetChartLeftMargin)];
+    [c setBackgroundColor:[UIColor clearColor]];
     UIView *chartContainer=[[UIView alloc]initWithFrame:CGRectMake(kWidgetChartLeftMargin, 0, kWidgetChartWidth, kWidgetChartHeight)];
     [chartContainer setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:c];
@@ -76,7 +79,7 @@
     
     
     
-    [self setDatePickerButtonValueNoSearchByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateComponent withRelativeType:self.widgetInfo.contentSyntax.relativeDateType];
+    [self setDatePickerButtonValueNoSearchByTimeRange:self.tempModel.timeRangeArray[0] withRelative:self.tempModel.relativeDateComponent withRelativeType:self.tempModel.relativeDateType];
 }
 
 - (void) showTimePicker{

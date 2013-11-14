@@ -59,7 +59,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.view setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
     
     [self.view setFrame:CGRectMake(0, 0, 1024, 748)];
     
@@ -71,13 +71,16 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     //self.view.layer.borderColor=[UIColor redColor].CGColor;
     //self.view.layer.borderWidth=1;
     
+    UIView *titleContainer=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 63)];
+    [titleContainer setBackgroundColor:[REMColor colorByHexString:@"#f8f8f8"]];
+    
     UIButton *backButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake(kWidgetBackButtonLeft, kWidgetBackButtonTop, kWidgetBackButtonWidthHeight, kWidgetBackButtonWidthHeight)];
     [backButton setImage:[UIImage imageNamed:@"Back_Chart"] forState:UIControlStateNormal];
     backButton.adjustsImageWhenHighlighted=YES;
     backButton.showsTouchWhenHighlighted=YES;
     [backButton addTarget:self.parentViewController action:@selector(popToBuildingCover) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:backButton];
+    [titleContainer addSubview:backButton];
     self.backButton=backButton;
     
     
@@ -90,7 +93,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
         NSString *date=[REMTimeHelper formatTimeFullDay:self.widgetInfo.shareInfo.shareTime];
         NSString *userTitle=self.widgetInfo.shareInfo.userTitleComponent;
         shareTitle.text=[NSString stringWithFormat:NSLocalizedString(@"Widget_ShareTitle", @""),shareName,userTitle,date,shareTel];
-        [self.view addSubview:shareTitle];
+        [titleContainer addSubview:shareTitle];
         frame=CGRectMake(frame.origin.x, frame.origin.y+frame.size.height+9, frame.size.width, kWidgetTitleHeight);
     }
     else{
@@ -102,9 +105,9 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     widgetTitle.backgroundColor=[UIColor clearColor];
     widgetTitle.textColor=[REMColor colorByHexString:@"#37ab3c"];
     widgetTitle.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetTitleFontSize];
-    [self.view addSubview:widgetTitle];
+    [titleContainer addSubview:widgetTitle];
     self.widgetTitleLabel=widgetTitle;
-    
+    [self.view addSubview:titleContainer];
     
     [self.bizDelegator initBizView];
 }
