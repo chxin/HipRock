@@ -52,5 +52,4 @@
     
     [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
-
 @end

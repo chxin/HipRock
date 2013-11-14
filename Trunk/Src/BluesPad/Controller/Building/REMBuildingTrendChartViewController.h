@@ -16,7 +16,7 @@
 #import "REMWidgetAxisHelper.h"
 #import "REMToggleButtonGroup.h"
 
-@interface REMBuildingTrendChartHandler : REMBuildingChartHandler<CPTScatterPlotDataSource,CPTScatterPlotDelegate,CPTPlotSpaceDelegate,UIGestureRecognizerDelegate,CPTAxisDelegate,REMToggleButtonGroupDelegate>
+@interface REMBuildingTrendChartViewController : REMBuildingChartBaseViewController<CPTScatterPlotDataSource,CPTScatterPlotDelegate,CPTPlotSpaceDelegate,UIGestureRecognizerDelegate,CPTAxisDelegate,REMToggleButtonGroupDelegate>
 
 @property (nonatomic,strong) REMEnergyViewData *data;
 @property (nonatomic,strong) CPTXYGraph *graph;
