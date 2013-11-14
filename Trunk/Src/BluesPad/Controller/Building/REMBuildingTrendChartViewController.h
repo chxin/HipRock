@@ -14,8 +14,9 @@
 #import "CorePlot-CocoaTouch.h"
 #import "REMColor.h"
 #import "REMWidgetAxisHelper.h"
+#import "REMToggleButtonGroup.h"
 
-@interface REMBuildingTrendChartViewController : REMBuildingChartBaseViewController<CPTScatterPlotDataSource,CPTScatterPlotDelegate,CPTPlotSpaceDelegate,UIGestureRecognizerDelegate,CPTAxisDelegate>
+@interface REMBuildingTrendChartViewController : REMBuildingChartBaseViewController<CPTScatterPlotDataSource,CPTScatterPlotDelegate,CPTPlotSpaceDelegate,UIGestureRecognizerDelegate,CPTAxisDelegate,REMToggleButtonGroupDelegate>
 
 @property (nonatomic,strong) REMEnergyViewData *data;
 @property (nonatomic,strong) CPTXYGraph *graph;

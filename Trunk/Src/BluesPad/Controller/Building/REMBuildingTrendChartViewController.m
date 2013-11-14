@@ -24,6 +24,10 @@
 
 
 
+-(void)activedButtonChanged:(UIButton*)newButton {
+    [self intervalChanged:newButton];
+}
+
 - (void)loadView
 {
     
@@ -32,7 +36,8 @@
     
     currentSourceIndex = 0;
     myView.hostView.hostedGraph.defaultPlotSpace.delegate = self;
-    [myView.toggleGroup bindToggleChangeCallback:self selector:@selector(intervalChanged:)];
+    
+    myView.toggleGroup.delegate = self;
     
     self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
     
