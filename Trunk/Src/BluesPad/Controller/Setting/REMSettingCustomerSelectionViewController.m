@@ -72,6 +72,7 @@
         [alert show];
     }
     else if(alertView.tag==4){
+        [REMDataAccessor cancelAccess];
         [self.settingController logoutAndClearCache];
     }
     
@@ -106,7 +107,8 @@
 
         }
         else{
-            UINavigationController *nav=self.parentNavigationController;
+            //UINavigationController *nav=self.parentNavigationController;
+            REMMainNavigationController *mainController=(REMMainNavigationController *)self.navigationController.presentingViewController;
             [self.navigationController popToRootViewControllerAnimated:NO];
             REMCustomerModel *customer= [REMApplicationContext instance].currentUser.customers[self.currentRow];
             
@@ -125,9 +127,9 @@
             [[REMApplicationContext instance].currentCustomer updateInnerDictionary];
             [[REMApplicationContext instance].currentCustomer save];
             [self.settingController needReload];
-            
-            [nav dismissViewControllerAnimated:YES completion:^{
-                [self.settingController.mainNavigationController presentInitialView:^(void){
+            [REMDataAccessor cancelAccess];
+            [mainController dismissViewControllerAnimated:YES completion:^{
+                [mainController presentInitialView:^(void){
                     [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];
                 }];
             }];

@@ -185,13 +185,13 @@
     currentUser = nil;
     currentCustomer = nil;
     UINavigationController *nav=(UINavigationController *)self.parentViewController;
-    
-    NSLog(@"child controllers before: %d", nav.childViewControllers.count);
-    [nav dismissViewControllerAnimated:YES completion:^(void){
+    REMMainNavigationController *mainController=(REMMainNavigationController *)nav.presentingViewController;
+    //NSLog(@"child controllers before: %d", nav.childViewControllers.count);
+    [mainController dismissViewControllerAnimated:YES completion:^(void){
         //self.view = nil;
         [nav popToRootViewControllerAnimated:NO];
-        NSLog(@"child controllers after: %d", nav.childViewControllers.count);
-        [self.mainNavigationController presentLoginView:nil];
+        //NSLog(@"child controllers after: %d", nav.childViewControllers.count);
+        [mainController presentLoginView:nil];
         
         [REMStorage clearSessionStorage];
     }];
@@ -257,7 +257,7 @@
     if([segue.identifier isEqualToString:@"settingCustomerSelectionSegue"]==YES){
         REMSettingCustomerSelectionViewController *selectionVc= segue.destinationViewController;
         //selectionVc.splashController=self.splashScreenController;
-        selectionVc.parentNavigationController=self.mainNavigationController;
+        //selectionVc.parentNavigationController=self.mainNavigationController;
         selectionVc.settingController=self;
     }
 }

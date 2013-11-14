@@ -60,7 +60,7 @@
 
 
 - (void)initChartView{
-    UIView *c=[[UIView alloc]initWithFrame:CGRectMake(0, kWidgetChartTopMargin, 1024, kWidgetChartHeight)];
+    UIView *c=[[UIView alloc]initWithFrame:CGRectMake(0, kWidgetChartTopMargin, 1024, kWidgetChartHeight+kWidgetChartLeftMargin)];
     [c setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
     UIView *chartContainer=[[UIView alloc]initWithFrame:CGRectMake(kWidgetChartLeftMargin, 0, kWidgetChartWidth, kWidgetChartHeight)];
     [chartContainer setBackgroundColor:[UIColor whiteColor]];
