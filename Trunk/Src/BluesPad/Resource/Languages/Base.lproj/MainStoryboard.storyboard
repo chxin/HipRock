@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5WC-f7-YJK">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Splash Screen Controller-->
@@ -377,7 +377,7 @@
                                 <color key="textColor" red="1" green="0.14117647058823529" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhF-ie-yww">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhF-ie-yww">
                                 <rect key="frame" x="85" y="246" width="330" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="1" green="0.14117647059999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -417,31 +417,32 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="O1x-Zk-rej" firstAttribute="leading" secondItem="F05-SM-93U" secondAttribute="leading" id="1pn-pp-dfv"/>
-                            <constraint firstItem="TI6-QH-ZIu" firstAttribute="trailing" secondItem="VhF-ie-yww" secondAttribute="trailing" id="36e-j3-FMY"/>
                             <constraint firstItem="kLc-UC-bzf" firstAttribute="bottom" secondItem="HOs-72-HuV" secondAttribute="bottom" id="9Vp-Rs-vrh"/>
                             <constraint firstItem="kLc-UC-bzf" firstAttribute="trailing" secondItem="HOs-72-HuV" secondAttribute="trailing" id="B0w-xE-kCx"/>
-                            <constraint firstItem="Inb-Mi-MaB" firstAttribute="top" secondItem="VhF-ie-yww" secondAttribute="bottom" constant="13" id="CYd-ba-su3"/>
                             <constraint firstItem="kLc-UC-bzf" firstAttribute="centerX" secondItem="F05-SM-93U" secondAttribute="centerX" id="HMU-w2-dNR"/>
-                            <constraint firstItem="Inb-Mi-MaB" firstAttribute="trailing" secondItem="VhF-ie-yww" secondAttribute="trailing" id="HV6-th-H3e"/>
                             <constraint firstAttribute="bottom" secondItem="kLc-UC-bzf" secondAttribute="bottom" constant="293" id="INP-oA-LsO"/>
-                            <constraint firstItem="Inb-Mi-MaB" firstAttribute="leading" secondItem="VhF-ie-yww" secondAttribute="leading" id="Ilw-7D-ASk"/>
                             <constraint firstItem="NEh-h3-tnd" firstAttribute="trailing" secondItem="F05-SM-93U" secondAttribute="trailing" id="J5g-SX-H7T"/>
                             <constraint firstItem="O1x-Zk-rej" firstAttribute="top" secondItem="HOs-72-HuV" secondAttribute="bottom" constant="22" id="JhB-U5-CPS"/>
                             <constraint firstItem="NEh-h3-tnd" firstAttribute="leading" secondItem="F05-SM-93U" secondAttribute="leading" id="LJo-jx-RjN"/>
                             <constraint firstItem="kLc-UC-bzf" firstAttribute="leading" secondItem="9Ht-DR-dlm" secondAttribute="leading" id="MvL-rK-mQH"/>
+                            <constraint firstItem="VhF-ie-yww" firstAttribute="trailing" secondItem="F05-SM-93U" secondAttribute="trailing" id="O6H-Nj-DaQ"/>
+                            <constraint firstItem="Inb-Mi-MaB" firstAttribute="top" secondItem="VhF-ie-yww" secondAttribute="bottom" constant="12" id="Rfj-Uo-XCE"/>
+                            <constraint firstItem="VhF-ie-yww" firstAttribute="leading" secondItem="F05-SM-93U" secondAttribute="leading" id="WWw-ho-zSh"/>
                             <constraint firstItem="NEh-h3-tnd" firstAttribute="top" secondItem="O1x-Zk-rej" secondAttribute="bottom" constant="13" id="ZRk-aV-Rzh"/>
                             <constraint firstAttribute="trailing" secondItem="kLc-UC-bzf" secondAttribute="trailing" id="Zim-Xj-VKI"/>
                             <constraint firstItem="G3C-Rj-0hX" firstAttribute="top" secondItem="Inb-Mi-MaB" secondAttribute="bottom" constant="22" id="a2y-K7-F0C"/>
                             <constraint firstItem="F05-SM-93U" firstAttribute="top" secondItem="O1x-Zk-rej" secondAttribute="bottom" constant="63" id="aor-HC-yjw"/>
+                            <constraint firstItem="VhF-ie-yww" firstAttribute="trailing" secondItem="Inb-Mi-MaB" secondAttribute="trailing" id="dPx-0Q-Do6"/>
                             <constraint firstItem="HOs-72-HuV" firstAttribute="top" secondItem="kLc-UC-bzf" secondAttribute="bottom" id="dQD-bV-2vE"/>
-                            <constraint firstItem="O1x-Zk-rej" firstAttribute="leading" secondItem="VhF-ie-yww" secondAttribute="leading" id="kNn-gI-MMT"/>
-                            <constraint firstItem="kLc-UC-bzf" firstAttribute="centerX" secondItem="VhF-ie-yww" secondAttribute="centerX" id="nDJ-4e-H9b"/>
-                            <constraint firstItem="TI6-QH-ZIu" firstAttribute="leading" secondItem="VhF-ie-yww" secondAttribute="leading" id="ovN-mN-jwj"/>
+                            <constraint firstItem="VhF-ie-yww" firstAttribute="leading" secondItem="TI6-QH-ZIu" secondAttribute="leading" id="mRM-Xg-ncu"/>
                             <constraint firstItem="TI6-QH-ZIu" firstAttribute="top" secondItem="NEh-h3-tnd" secondAttribute="bottom" constant="31" id="pxv-Aq-OGI"/>
                             <constraint firstItem="TI6-QH-ZIu" firstAttribute="top" secondItem="F05-SM-93U" secondAttribute="bottom" constant="12" id="qL2-Oc-MHN"/>
                             <constraint firstItem="O1x-Zk-rej" firstAttribute="leading" secondItem="9Ht-DR-dlm" secondAttribute="leading" constant="85" id="unV-5E-WTR"/>
                             <constraint firstItem="kLc-UC-bzf" firstAttribute="top" secondItem="9Ht-DR-dlm" secondAttribute="top" id="vqX-rt-0oI"/>
+                            <constraint firstItem="VhF-ie-yww" firstAttribute="leading" secondItem="Inb-Mi-MaB" secondAttribute="leading" id="weT-Iz-N3s"/>
+                            <constraint firstItem="VhF-ie-yww" firstAttribute="trailing" secondItem="TI6-QH-ZIu" secondAttribute="trailing" id="yDR-5q-ojb"/>
                             <constraint firstItem="kLc-UC-bzf" firstAttribute="leading" secondItem="HOs-72-HuV" secondAttribute="leading" id="yTN-lc-YxY"/>
+                            <constraint firstItem="VhF-ie-yww" firstAttribute="top" secondItem="F05-SM-93U" secondAttribute="bottom" constant="62" id="yd6-vy-w0p"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -707,7 +708,7 @@
                         </sections>
                     </tableView>
                     <navigationItem key="navigationItem" title="设置" id="mnH-gw-Zz4">
-                        <barButtonItem key="rightBarButtonItem" title="完成" style="plain" id="2dd-Hn-SRO">
+                        <barButtonItem key="rightBarButtonItem" title="完成" style="done" id="2dd-Hn-SRO">
                             <connections>
                                 <action selector="backButtonPressed:" destination="wRO-Bn-ppJ" id="Ih8-u1-q9Y"/>
                             </connections>
