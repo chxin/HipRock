@@ -8,7 +8,7 @@
 
 #import "REMBuildingTitleView.h"
 #import "REMBuildingConstants.h"
-#import "REMBuildingChartHandler.h"
+#import "REMBuildingChartBaseViewController.h"
 #import "REMAverageUsageDataModel.h"
 
 
@@ -21,6 +21,6 @@
 
 @property (nonatomic,strong) UIView *chartContainer;
 
-@property (nonatomic,strong) REMBuildingChartHandler *controller;
+@property (nonatomic,strong) REMBuildingChartBaseViewController *controller;
 
 @end

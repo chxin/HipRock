@@ -7,7 +7,7 @@
  --------------------------------------------------------------------------*///
 
 #import <UIKit/UIKit.h>
-#import "REMBuildingChartHandler.h"
+#import "REMBuildingChartBaseViewController.h"
 #import "REMEnergyViewData.h"
 #import "CPTBarPlot.h"
 #import "CPTPlotSpace.h"

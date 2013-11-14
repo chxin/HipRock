@@ -325,8 +325,6 @@ static int requestTimeout = 45; //(s)
     
     NSString *content=[NSString stringWithFormat:userAgentFormat,[[device identifierForVendor] UUIDString],[device localizedModel],[device systemName],[device systemVersion],[device model]];
     
-    NSLog(content);
-    
     return content;
 }
 

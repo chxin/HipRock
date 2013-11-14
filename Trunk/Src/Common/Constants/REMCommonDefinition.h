@@ -24,8 +24,6 @@
 
 #define REMOSGreaterThan(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 
-#define REMOSV ([[UIDevice currentDevice] systemVersion])
-
 #define REMISIOS7 REMOSGreaterThan(@"7.0")
 
 

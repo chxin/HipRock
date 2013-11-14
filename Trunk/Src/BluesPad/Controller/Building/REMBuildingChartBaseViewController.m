@@ -6,16 +6,16 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
  --------------------------------------------------------------------------*///
 
-#import "REMBuildingChartHandler.h"
+#import "REMBuildingChartBaseViewController.h"
 
 
-@interface REMBuildingChartHandler ()
+@interface REMBuildingChartBaseViewController ()
 
-@property (nonatomic,strong) UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic,weak) UIActivityIndicatorView *activityIndicatorView;
 
 @end
 
-@implementation REMBuildingChartHandler
+@implementation REMBuildingChartBaseViewController
 
 
 static CPTLineStyle *axisLineStyle;
@@ -25,7 +25,7 @@ static CPTTextStyle *xAxisLabelStyle;
 static CPTTextStyle *yAxisLabelStyle;
 
 
-- (REMBuildingChartHandler *)initWithViewFrame:(CGRect)frame
+- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
 {
     self = [super init];
     if (self) {
@@ -38,6 +38,7 @@ static CPTTextStyle *yAxisLabelStyle;
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(REMError *))loadCompleted
 {
+    
     NSDictionary *param = [self assembleRequestParametersWithBuildingId:buildingId WithCommodityId:commodityID WithMetadata:averageUsageData];
     
     REMDataStore *store = [[REMDataStore alloc] initWithName:self.requestUrl parameter:param];
@@ -121,7 +122,7 @@ static CPTTextStyle *yAxisLabelStyle;
     
     animation.fromValue = [NSNumber numberWithFloat:0.0f];
     animation.removedOnCompletion = NO;
-    animation.delegate = self;
+    //animation.delegate = self;
     animation.fillMode = kCAFillModeForwards;
     
     return animation;
@@ -273,11 +274,12 @@ static NSNumberFormatter* formatter;
 -(void)startLoadingActivity
 {
     if(self.activityIndicatorView == nil){
-        self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         //self.activityIndicatorView.backgroundColor = [UIColor clearColor];
-        self.activityIndicatorView.frame = self.view.bounds;
+        view.frame = self.view.bounds;
         
-        [self.view addSubview:self.activityIndicatorView];
+        [self.view addSubview:view];
+        self.activityIndicatorView=view;
     }
     
     [self.activityIndicatorView startAnimating];
@@ -313,7 +315,7 @@ static NSNumberFormatter* formatter;
     [hostView.hostedGraph removeFromSuperlayer];
     hostView.hostedGraph=nil;
     [hostView removeFromSuperview];
-    hostView = nil;
+    //hostView = nil;
     [self.view removeFromSuperview];
     self.view = nil;
 }

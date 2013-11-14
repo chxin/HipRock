@@ -65,6 +65,12 @@
 "Building_LabelNoData"="无数据";
 "Building_PullUpMoreInfo"="￼上拉查看更多能耗信息";
 "Building_ReleaseSwitchView"="松开以显示";
+"Building_Target"="目标值";
+"Building_ThisMonthEnergyUsage"="本月用%@总量"; //本月用电总量，本月用水总量等
+"Building_CarbonUsage"="二氧化碳当量";
+"Building_CorporationRanking"="集团排名";
+"Building_EnergyUsageByAreaByMonth"="单位面积逐月用%@"; //单位面积逐月用电，单位面积逐月用水
+"Building_EnergyUsageByCommodity"="用%@趋势图"; //用电趋势图，用水趋势图
 
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="下拉返回概览能耗信息";
@@ -91,6 +97,10 @@
 "Weibo_AccountUnbindingNOButton"="放弃";
 "Weibo_ContentOfElectirc"="%@本月用#Commodity#趋势及单位平米用#Commodity#趋势，本月用#Commodity#总能耗为#Usage##UomName#，节能持续进行中。";
 "Weibo_ContentOfPM25"="今天上午10:00，%@室外#Commodity#为#OutdoorVal##OutdoorUomName#；经霍尼韦尔净化后室内新风#Commodity#为#HoneywellVal##HoneywellUomName#，经美埃净化后室内新风#Commodity#为#MayairVal##MayairUomName#。";
+
+//Mail, prefix: Mail_
+"Mail_AccountNotConfigured" = "未配置邮件账户";
+"Mail_Title" = "能耗信息分享自："
 
 
 //Chart, prefix: Chart_

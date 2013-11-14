@@ -13,13 +13,13 @@
 #import "REMError.h"
 
 
-@interface REMBuildingChartHandler : UIViewController
+@interface REMBuildingChartBaseViewController: UIViewController
 
 @property (nonatomic) REMDataStoreType requestUrl;
 
 @property (nonatomic,strong) NSArray *snapshotArray;
 
-- (REMBuildingChartHandler *)initWithViewFrame:(CGRect)frame;
+- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame;
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(REMError *error))loadCompleted;
 - (CPTGraphHostingView*) getHostView;

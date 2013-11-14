@@ -6,13 +6,13 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
  --------------------------------------------------------------------------*///
 
-#import "REMBuildingTrendChartHandler.h"
+#import "REMBuildingTrendChartViewController.h"
 #import "REMBuildingTrendChart.h"
 #import "REMWidgetAxisHelper.h"
 #import "REMBuildingTimeRangeDataModel.h"
 #import "REMTimeHelper.h"
 
-@interface REMBuildingTrendChartHandler () {
+@interface REMBuildingTrendChartViewController () {
     int currentSourceIndex; // Indicate that which button was pressed down.
 }
 
@@ -20,15 +20,8 @@
 
 @end
 
-@implementation REMBuildingTrendChartHandler
+@implementation REMBuildingTrendChartViewController
 
-- (void)purgeMemory{
-    [super purgeMemory];
-    self.data=nil;
-    self.chartData=nil;
-    self.graph=nil;
-    self.datasource=nil;
-}
 
 
 -(void)activedButtonChanged:(UIButton*)newButton {
@@ -37,7 +30,6 @@
 
 - (void)loadView
 {
-    [super loadView];
     
     // Custom initialization
     REMBuildingTrendChart* myView = [[REMBuildingTrendChart alloc] initWithFrame:self.viewFrame];
@@ -94,13 +86,10 @@
     y.majorGridLineStyle = [self gridLineStyle];
     y.plotSpace = self.graph.defaultPlotSpace;
     
-    
-    
-    [self viewDidLoad];
 }
 
 
-- (REMBuildingChartHandler *)initWithViewFrame:(CGRect)frame
+- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
 {
     self = [super init];
     if (self) {
@@ -535,7 +524,7 @@
     
     animation.fromValue = [NSNumber numberWithFloat:0.0f];
     animation.removedOnCompletion = NO;
-    animation.delegate = self;
+    //animation.delegate = self;
     animation.fillMode = kCAFillModeForwards;
     
     return animation;

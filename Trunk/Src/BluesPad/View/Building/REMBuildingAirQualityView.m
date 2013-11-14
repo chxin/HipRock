@@ -87,14 +87,14 @@
     REMBuildingChartContainerView *pmContainer = self.chartViewArray[0];
     
     if(pmContainer.controller==nil){
-        REMBuildingAirQualityChartHandler *pmController = [[REMBuildingAirQualityChartHandler alloc]initWithViewFrame:CGRectMake(0, 0, pmContainer.chartContainer.frame.size.width, pmContainer.chartContainer.frame.size.height)];
-        pmContainer.controller=pmController;
+        //REMBuildingAirQualityChartHandler *pmController = [[REMBuildingAirQualityChartHandler alloc]initWithViewFrame:CGRectMake(0, 0, pmContainer.chartContainer.frame.size.width, pmContainer.chartContainer.frame.size.height)];
+        //pmContainer.controller=pmController;
     }
     
     
-    [pmContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil complete:^(BOOL success){
-        callback(success);
-    }];
+    //[pmContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil complete:^(BOOL success){
+    //    callback(success);
+    //}];
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{

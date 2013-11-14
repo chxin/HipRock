@@ -132,8 +132,9 @@ const static CGFloat widgetGap=10;
 
 - (void) addDashboardBg{
     REMDashboardController *srcController=(REMDashboardController *) self.widgetCollectionController.parentViewController;
-    
-    UIImage *image=[REMImageHelper imageWithView:srcController.buildingController.view];
+    REMBuildingImageViewController *imageController=(REMBuildingImageViewController *)srcController.parentViewController;
+
+    UIImage *image=[REMImageHelper imageWithView:imageController.view];
     UIImageView *view = [[UIImageView alloc]initWithImage:image];
     [view setFrame:self.view.frame];
     [view setFrame:CGRectMake(200, 200, view.frame.size.width-400, view.frame.size.height-400)];
@@ -359,14 +360,10 @@ const static CGFloat widgetGap=10;
     {
         REMWidgetDetailViewController *vc=self.childViewControllers[i];
         UIView *v=vc.view;
-        //NSLog(@"image:%@",NSStringFromCGRect(image.frame));
         CGFloat readyDis=v.center.x+distance;
         CGFloat gap=i-(int)self.currentWidgetIndex;
-        NSLog(@"gap is %f",gap);
         CGFloat page=self.view.frame.size.width+widgetGap;
-        NSLog(@"page is %f",page);
         CGFloat x=gap*page+self.view.frame.size.width/2;
-        NSLog(@"x:%f,readyDis:%f",x,readyDis);
         if((distance < 0 &&readyDis<x) || (distance>0 && readyDis>x)){
             self.speed=sign*0.01;
             readyDis=x;

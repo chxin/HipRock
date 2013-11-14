@@ -114,7 +114,7 @@ static BOOL isInitialPresenting = YES;
 
 -(void)loadMapView
 {
-    CGRect viewBounds = self.view.bounds;
+    //CGRect viewBounds = self.view.bounds;
     CGRect mapViewFrame = CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight);
     //CGRectMake(viewBounds.origin.x, viewBounds.origin.y, viewBounds.size.width, viewBounds.size.height);
     

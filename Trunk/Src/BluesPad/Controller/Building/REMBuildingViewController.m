@@ -23,7 +23,7 @@
 #import "REMBuildingShareViewController.h"
 
 
-const static CGFloat imageGap=10;
+const static CGFloat buildingGap=10;
 
 @interface REMBuildingViewController ()
 //@property (nonatomic) NSUInteger currentIndex;
@@ -65,6 +65,7 @@ const static CGFloat imageGap=10;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
     }
     return self;
 }
@@ -73,26 +74,25 @@ const static CGFloat imageGap=10;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.speedBase=1280;
+    self.speedBase=2000;
 	self.customImageLoadedDictionary = [[NSMutableDictionary alloc]initWithCapacity:self.buildingInfoArray.count];
     self.view.backgroundColor=[UIColor blackColor];
+    [self.view setFrame:CGRectMake(0, 0, kImageWidth, kImageHeight)];
     self.currentScrollOffset=-kBuildingCommodityViewTop;
     
     self.cumulateX=0;
     
-    [self addObserver:self forKeyPath:@"currentScrollOffset" options:0 context:nil];
+    //[self addObserver:self forKeyPath:@"currentScrollOffset" options:0 context:nil];
     
     
     if(self.buildingInfoArray.count>0){
         
-        [self blurredImageView];
+        [self initDefaultImageView];
         
-        UIPanGestureRecognizer *rec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
+        UIPanGestureRecognizer *rec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(swipethis:)];
         [self.view addGestureRecognizer:rec];
         rec.delegate = self;
         
-        UITapGestureRecognizer *tap= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapthis:)];
-        [self.view addGestureRecognizer:tap];
         
         UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchThis:)];
         [self.view addGestureRecognizer:pinch];
@@ -104,25 +104,7 @@ const static CGFloat imageGap=10;
 
 -(void)dealloc{
     
-    [self removeObserver:self forKeyPath:@"currentScrollOffset"];
-    for (REMImageView *view in self.imageArray) {
-        [view removeFromSuperview];
-    }
-    self.imageArray=nil;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if([keyPath isEqualToString:@"currentScrollOffset"] == YES){
-        for (int i=0; i<self.imageArray.count; ++i) {
-            if(i!= self.currentBuildingIndex){
-                if([[self.imageViewStatus objectForKey:@(i)] isEqualToNumber:@(1)] == YES){
-                    REMImageView *view=self.imageArray[i];
-                    [view setScrollOffset:self.currentScrollOffset];
-                }
-            }
-        }
-    }
+    
 }
 
 
@@ -130,11 +112,9 @@ const static CGFloat imageGap=10;
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] ==YES ){
-        if(self.imageArray.count<1)return YES;
-        REMImageView *current = self.imageArray[self.currentBuildingIndex];
-        return [current shouldResponseSwipe:touch];
-            
-        
+        if(self.childViewControllers.count<1)return YES;
+        if( [touch.view isKindOfClass:[CPTGraphHostingView class]] == YES) return NO;
+        return YES;
     }
     else if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]==YES){
         return YES;
@@ -146,100 +126,49 @@ const static CGFloat imageGap=10;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    
+    NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    // Dispose of any resources that can be recreated.
 }
 
-
-
-
-- (void)blurredImageView
+- (void)initDefaultImageView
 {
     NSString* defaultBuildingName = [[NSBundle mainBundle]pathForResource:@"DefaultBuilding" ofType:@"png"];
     self.defaultImage = [UIImage imageWithContentsOfFile:defaultBuildingName];
     UIImage *view = [REMImageHelper blurImage:self.defaultImage];
     self.defaultBlurImage=view;
-    [self initImageView];
-}
-
-- (void)initImageView
-{
+    
+    
     int i=0;
-    self.imageViewStatus = [[NSMutableDictionary alloc]initWithCapacity:self.buildingInfoArray.count];
-    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:self.buildingInfoArray.count];
-    
-    
     for (;i<self.buildingInfoArray.count;++i) {
         REMBuildingOverallModel *model = self.buildingInfoArray[i];
-        REMImageView *imageView = [[REMImageView alloc]initWithFrame:CGRectMake((kImageWidth+imageGap)*i, 0, kImageWidth, kImageHeight) withBuildingOveralInfo:model ];
-        imageView.defaultImage=self.defaultImage;
-        imageView.defaultBlurImage=self.defaultBlurImage;
-        imageView.controller=self;
-        //if(i==self.currentIndex || i==(self.currentIndex+1) || i == (self.currentIndex-1)){
         
-        [self.view addSubview:imageView];
-        if(i==self.currentBuildingIndex || i==(self.currentBuildingIndex+1) || i == (self.currentBuildingIndex-1)){
-            [imageView initWholeViewUseThumbnail:NO];
-        }
-        else{
-            [imageView initWholeViewUseThumbnail:YES];
-        }
-        //    [self.imageViewStatus setObject:@(1) forKey:@(i)];
-        //}
-        //else{
-        //    [self.imageViewStatus setObject:@(0) forKey:@(i)];
-        //}
-        [array addObject:imageView];
-    }
-    self.imageArray=array;
-  
-    
-    NSMutableArray *arr = [[NSMutableArray alloc]initWithCapacity:self.imageArray.count];
-    
-    for (i=0;i<self.imageArray.count;++i) {
-        REMImageView *view = self.imageArray[i];
-        NSNumber *num = [NSNumber numberWithFloat:view.center.x];
-        [arr addObject:num];
+        REMBuildingImageViewController *subController=[[REMBuildingImageViewController alloc] init];
+        subController.buildingInfo=model;
+        subController.defaultImage=self.defaultImage;
+        subController.defaultBlurImage=self.defaultBlurImage;
+        
+        subController.viewFrame=CGRectMake(i*(kImageWidth+buildingGap), self.view.frame.origin.y,kImageWidth,kImageHeight);
+        
+        
+        [self addChildViewController:subController];
+        
+        [self.view addSubview:subController.view];
+        
     }
     
-    
-    
-    int moveCount=self.currentBuildingIndex;
-    
-    NSMutableArray *ar = [[NSMutableArray alloc] initWithCapacity:self.imageArray.count];
-    for (int i=0; i<arr.count; ++i) {
-        NSNumber *num = arr[i];
-        float f = [num floatValue];
-        f = f+(1024+imageGap)*moveCount*-1;
-        NSNumber *num1 = [NSNumber numberWithFloat:f];
-         [ar addObject:num1];
-    }
-            
-    self.originCenterXArray=ar;
-    
-    for(int i=0;i<self.imageArray.count;++i)
-    {
-        NSNumber *s = self.originCenterXArray[i];
-        CGFloat x= [s floatValue];
-        REMImageView *image = self.imageArray[i];
-        [image setCenter: CGPointMake( x,image.center.y)];
-    }
-    
-    
-    [self loadImageData];
-    
-    
+    [self stopCoverPage:nil];
 }
 
-
-
+- (void)setViewOffset:(CGFloat)offsetY
+{
+    for (REMBuildingImageViewController *controller in self.childViewControllers) {
+        [controller setCurrentOffset:offsetY];
+    }
+}
 
 #pragma mark -
 #pragma mark buildingview
 
-- (void)loadImageData{
-    REMImageView *image = self.imageArray[self.currentBuildingIndex];
-    [image requireChartData];
-}
 
 - (void) swipethis:(UIPanGestureRecognizer *)pan
 {
@@ -251,155 +180,96 @@ const static CGFloat imageGap=10;
     
     CGPoint trans= [pan translationInView:self.view];
     
-   // NSLog(@"state:%d",pan.state);
-    
     if(pan.state== UIGestureRecognizerStateChanged)
     {
         
         
-        for (int i=0;i<self.imageArray.count;++i)
+        for (int i=0;i<self.childViewControllers.count;++i)
         {
-            REMImageView *view = self.imageArray[i];
+            UIViewController *controller=self.childViewControllers[i];
+            CGFloat x;
             if(self.currentBuildingIndex == 0 && self.cumulateX>0){
-                [view moveCenter:trans.x/2];
+                x=trans.x/2;
             }
-            else if((self.currentBuildingIndex==(self.imageArray.count-1)) && self.cumulateX<0){
-                [view moveCenter:trans.x/2];
+            else if((self.currentBuildingIndex==(self.childViewControllers.count-1)) && self.cumulateX<0){
+                x=trans.x/2;
             }
             else{
-                [view moveCenter:trans.x];
+                x=trans.x;
             }
+            
+            [controller.view setCenter:CGPointMake(controller.view.center.x+trans.x, controller.view.center.y)];
         }
         
         self.cumulateX+=trans.x;
         
-        [pan setTranslation:CGPointZero inView:self.view];
+        
     }
     
     if(pan.state == UIGestureRecognizerStateEnded||pan.state == UIGestureRecognizerStateCancelled)
     {
         
-         CGPoint p= [pan velocityInView:self.view];
-        //NSLog(@"cumulatex:%f",self.cumulateX);
+        CGPoint p= [pan velocityInView:self.view];
         
         int sign= p.x>0?1:-1;
         
         
-         BOOL addIndex=YES;
+        BOOL addIndex=YES;
         
-        if((sign<0 && self.currentBuildingIndex==self.imageArray.count-1)
+        if((sign<0 && self.currentBuildingIndex==self.childViewControllers.count-1)
            || (sign>0 && self.currentBuildingIndex==0) ||
-           (ABS(p.x)<100 && ABS(self.cumulateX)<512)){
+           (ABS(p.x)<100 && ABS(self.cumulateX)<512) ||
+           (p.x<0 && self.cumulateX>0) || (p.x>0 && self.cumulateX<0)){
             addIndex=NO;
         }
         else{
             [self.stopTimer invalidate];
-            NSMutableArray *ar = [[NSMutableArray alloc] initWithCapacity:self.imageArray.count];
-            for (int i=0; i<self.imageArray.count; ++i) {
-                NSNumber *num = self.originCenterXArray[i];
-                float f = [num floatValue];
-                f = f+sign*(1024+imageGap);
-                NSNumber *num1 = [NSNumber numberWithFloat:f];
-                
-                [ar addObject:num1];
-            }
-            
-            self.originCenterXArray=ar;
-            
-            //NSLog(@"array:%@",ar);
+            addIndex=YES;
         }
         self.cumulateX=0;
+        
+        
         if(addIndex == NO){
             [UIView animateWithDuration:0.4 delay:0
                                 options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
                                     
-                                    //NSLog(@"array:%@",self.originCenterXArray);
-                                    for(int i=0;i<self.imageArray.count;++i)
-                                    {
-                                        NSNumber *s = self.originCenterXArray[i];
-                                        CGFloat x= [s floatValue];
-                                        REMImageView *image = self.imageArray[i];
-                                        [image setCenter: CGPointMake( x,image.center.y)];
-                                    }
+                                    [self moveAllViews];
                                 } completion:^(BOOL finished){}];
             
         }
         else{
-            
-            
-            
             self.currentBuildingIndex = self.currentBuildingIndex+sign*-1;
-
             
-            self.delta=M_PI_4/128.0f;
-            self.speed=self.speedBase*sign*self.delta;
-            
-            NSTimer *timer = [NSTimer timerWithTimeInterval:0.01 target:self selector:@selector(switchCoverPage:) userInfo:nil repeats:YES];
-            self.timer=timer;
-            [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-            
+            if(ABS(p.x)<200){
+                [UIView animateWithDuration:0.4 delay:0
+                                    options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
+                                        
+                                        [self moveAllViews];
+                                    } completion:^(BOOL finished){
+                                        [self stopCoverPage:nil];
+                                    }];
+            }
+            else{
+                self.delta=M_PI_4/128.0f;
+                self.speed=self.speedBase*sign*self.delta;
+                
+                NSTimer *timer = [NSTimer timerWithTimeInterval:0.01 target:self selector:@selector(switchCoverPage:) userInfo:nil repeats:YES];
+                self.timer=timer;
+                [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+            }
             
         }
-        [pan setTranslation:CGPointZero inView:self.view];
-        
-        /*
-        [UIView animateWithDuration:0.4 delay:0
-                            options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
-                                
-                                //NSLog(@"array:%@",self.originCenterXArray);
-                                for(int i=0;i<self.imageArray.count;++i)
-                                {
-                                    NSNumber *s = self.originCenterXArray[i];
-                                    CGFloat x= [s floatValue];
-                                    REMImageView *image = self.imageArray[i];
-                                    [image setCenter: CGPointMake( x,image.center.y)];
-                                }
-                                
-                                if(addIndex ==YES){
-                                    self.currentIndex=self.currentIndex+sign*-1;
-                                    self.currentBuildingId=((REMBuildingOverallModel *)self.buildingOverallArray[self.currentIndex]).building.buildingId;
-                                }
-                                //NSLog(@"currentIndex:%d",self.currentIndex);
-                                
-                                
-                            } completion:^(BOOL ret){
-                                if(addIndex == NO) return;
-                                [self.imageArray[oldIndex] moveOutOfWindow];
-                                [self loadImageData];
-                                if(self.currentIndex<self.imageArray.count){
-                                    NSNumber *willIndex= @(self.currentIndex-1*sign);
-                                    NSNumber *status = self.imageViewStatus[willIndex];
-                                    if([status isEqualToNumber:@(0)] ==YES){
-                                        REMImageView *nextView= self.imageArray[willIndex.intValue];
-                                        nextView.defaultImage=self.defaultImage;
-                                        nextView.defaultBlurImage=self.defaultBlurImage;
-                                        [self.view addSubview: nextView];
-                                        [nextView setScrollOffset:self.currentScrollOffset];
-                                        self.imageViewStatus[willIndex]=@(1);
-                                        
-                                    }
-                                }
-                                int idx = self.currentIndex;
-                                
-                                NSMutableArray *releaseArray=[[NSMutableArray alloc] initWithCapacity:self.imageArray.count];
-                                
-                                for (int i=0; i<self.imageArray.count; i++) {
-                                    if(i!=idx && i!=(idx+1) && i!=(idx-1)){
-                                        [releaseArray addObject:@(i)];
-                                    }
-                                
-                                }
-                                [self releaseOutOfWindowView:releaseArray];
-                                
-                                
-                                
-                            }];
-        
-        [pan setTranslation:CGPointZero inView:self.view];
-        */
         
     }
-    
+    [pan setTranslation:CGPointZero inView:self.view];
+}
+
+- (void) moveAllViews{
+    for (int i=0; i<self.childViewControllers.count; ++i) {
+        UIViewController *vc = self.childViewControllers[i];
+        NSInteger gap=i-self.currentBuildingIndex;
+        [vc.view setCenter:CGPointMake(gap*(self.view.frame.size.width+buildingGap)+self.view.frame.size.width/2, vc.view.center.y)];
+    }
 }
 
 - (void) readyToComplete{
@@ -411,23 +281,16 @@ const static CGFloat imageGap=10;
 }
 
 - (void)stopCoverPage:(NSTimer *)timer{
-    //NSLog(@"currentIndex:%d",self.currentIndex);
-    REMImageView *imageView=self.imageArray[self.currentBuildingIndex];
-    [imageView initWholeViewUseThumbnail:NO];
-    [imageView setScrollOffset:self.currentScrollOffset];
-
-    [imageView requireChartData];
-    if(self.currentBuildingIndex<self.imageArray.count){
+    REMBuildingImageViewController *vc=self.childViewControllers[self.currentBuildingIndex];
+    [vc loadContentView];
+    if(self.currentBuildingIndex<self.childViewControllers.count){
         CGFloat sign=self.speed<0?-1:1;
         NSNumber *willIndex= @(self.currentBuildingIndex-1*sign);
-        if(willIndex.intValue>=self.imageArray.count || willIndex.intValue<0){
+        if(willIndex.intValue>=self.childViewControllers.count || willIndex.intValue<0){
             return;
         }
-        REMImageView *nextView= self.imageArray[willIndex.intValue];
-        nextView.defaultImage=self.defaultImage;
-        nextView.defaultBlurImage=self.defaultBlurImage;
-        [nextView initWholeViewUseThumbnail:NO];
-        [nextView setScrollOffset:self.currentScrollOffset];
+        REMBuildingImageViewController *nextController= self.childViewControllers[willIndex.intValue];
+        [nextController loadContentView];
         
     }
 
@@ -451,68 +314,40 @@ const static CGFloat imageGap=10;
     
     self.speed=self.speedBase*sin(self.delta)*sign;
     
-    for(int i=0;i<self.imageArray.count;++i)
+    for(int i=0;i<self.childViewControllers.count;++i)
     {
-        NSNumber *s = self.originCenterXArray[i];
-        CGFloat x= [s floatValue];
-        REMImageView *image = self.imageArray[i];
-        //NSLog(@"image:%@",NSStringFromCGRect(image.frame));
-        CGFloat readyDis=image.center.x+distance;
-        
+        REMBuildingImageViewController *vc=self.childViewControllers[i];
+        UIView *v=vc.view;
+        CGFloat readyDis=v.center.x+distance;
+        CGFloat gap=i-(int)self.currentBuildingIndex;
+        CGFloat page=self.view.frame.size.width+buildingGap;
+        CGFloat x=gap*page+self.view.frame.size.width/2;
         if((distance < 0 &&readyDis<x) || (distance>0 && readyDis>x)){
             self.speed=sign*0.01;
             readyDis=x;
         }
         
-        [image setCenter: CGPointMake( readyDis,image.center.y)];
+        [v setCenter: CGPointMake(readyDis,v.center.y)];
     }
-    
-    
     
 }
 
-- (void)releaseOutOfWindowView:(NSArray *)releaseViews{
-    //NSLog(@"release views:%@",releaseViews);
-    @autoreleasepool {
-        for (NSNumber *num in releaseViews) {
-            REMImageView *image= self.imageArray[[num intValue]];
-            if([self.imageViewStatus[num] isEqual:@(1)]== YES){
-                [image removeFromSuperview];
-                self.imageViewStatus[num]=@(0);
+
+
+
+- (void)setCurrentCoverStatus:(REMBuildingCoverStatus)currentCoverStatus{
+    if(_currentCoverStatus!=currentCoverStatus){
+        _currentCoverStatus=currentCoverStatus;
+        if(currentCoverStatus== REMBuildingCoverStatusDashboard){
+            for (REMBuildingImageViewController *controller in self.childViewControllers) {
+                controller.currentCoverStatus=REMBuildingCoverStatusDashboard;
             }
         }
-    }
-    
-}
-
-- (void)switchToDashboard
-{
-    for (REMImageView *view in self.imageArray) {
-        [view showDashboard];
-    }
-}
-
-- (void)switchToBuildingInfo{
-    for (REMImageView *view in self.imageArray) {
-        [view showBuildingInfo];
-    }
-}
-
-
-- (void)panthis:(UIPanGestureRecognizer *)pan
-{
-    [self swipethis:pan];
-}
-
-
-
--(void)tapthis:(UITapGestureRecognizer *)tap
-{
-    //NSLog(@"cumulatex:%f",self.cumulateX);
-    if(self.cumulateX!=0) return;
-    
-    for (REMImageView *view in self.imageArray) {
-        [view tapthis];
+        else{
+            for (REMBuildingImageViewController *controller in self.childViewControllers) {
+                controller.currentCoverStatus=REMBuildingCoverStatusCoverPage;
+            }
+        }
     }
 }
 
@@ -590,9 +425,9 @@ const static CGFloat imageGap=10;
         [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(self.isPinching, self.currentBuildingIndex, CGRectZero, self.view.frame)];
     }
     if([segue.identifier isEqualToString:@"maxWidgetSegue"]==YES){
-        REMImageView *view = self.imageArray[self.currentBuildingIndex];
+        REMBuildingImageViewController *controller = self.childViewControllers[self.currentBuildingIndex];
         
-        REMDashboardController *dashboard=view.dashboardController;
+        REMDashboardController *dashboard=(REMDashboardController *)controller.childViewControllers[1];
         
         REMWidgetCollectionViewController *collection= dashboard.childViewControllers[dashboard.currentMaxDashboardIndex];
         
@@ -600,7 +435,7 @@ const static CGFloat imageGap=10;
         REMWidgetMaxViewController *maxController = segue.destinationViewController;
         self.maxDashbaordController=dashboard;
         maxController.widgetCollectionController=collection;
-        maxController.dashboardInfo=dashboard.dashboardArray[dashboard.currentMaxDashboardIndex];
+        maxController.dashboardInfo=dashboard.buildingInfo.dashboardArray[dashboard.currentMaxDashboardIndex];
         
     }
 }
@@ -657,9 +492,6 @@ const static CGFloat imageGap=10;
     
     [masker showMask];
     
-    //REMImageView *v= self.imageArray[self.currentIndex];
-    //[v prepareShare];
-    
     [self performSelector:@selector(executeExport:) withObject:masker afterDelay:0.1];
 }
 
@@ -670,28 +502,9 @@ const static CGFloat imageGap=10;
         [masker hideMask];
         
         REMBuildingWeiboView* weiboView = [[REMBuildingWeiboView alloc]initWithSuperView:self.view text:text image:image];
-//        [weiboView setWeiboText: text];
-//        [weiboView setWeiboImage:image];
+
         [weiboView show:YES];
-//        
-//        REMBuildingWeiboSendViewController* vc = [[REMBuildingWeiboSendViewController alloc]init];
-//        [vc setWeiboText: text];
-//        [vc setWeiboImage:image];
-//        [self performSegueWithIdentifier:@"sendWeiboSegue" sender: @{@"image": image, @"text": text}];
-        
-        
-//        UINavigationController *modalViewNavController =
-//        [[UINavigationController alloc]
-//         initWithRootViewController:vc];
-//        modalViewNavController.toolbarHidden = YES;
-//        modalViewNavController.navigationBarHidden = YES;
-//        modalViewNavController.view.backgroundColor = [UIColor clearColor];
-//        modalViewNavController.view.superview.alpha = 0.1;
-//        self.modalPresentationStyle = UIModalPresentationCurrentContext;
-//        self presentViewController:vc animated:<#(BOOL)#> completion:<#^(void)completion#>
-////        modalViewNavController.view.alpha = 0.1;
-//        [self.navigationController presentViewController:modalViewNavController animated:YES completion:Nil];
-        
+
     }];
 }
 

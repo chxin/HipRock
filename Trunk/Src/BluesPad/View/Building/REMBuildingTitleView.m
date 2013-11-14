@@ -42,6 +42,7 @@
 
 - (void)hideLoading{
     [self.masker hideMask];
+    self.masker=nil;
 }
 
 - (void)initEmptyTextLabelWithTitleSize:(CGFloat)titleSize withTitleMargin:(CGFloat)margin withLeftMargin:(CGFloat)leftMargin withOrigFontSize:(CGFloat)fontSize{
