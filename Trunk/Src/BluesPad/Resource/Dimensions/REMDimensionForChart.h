@@ -22,18 +22,17 @@
 
 //indicator
 #define kDMChart_IndicatorSize 18
+#define kDMChart_IndicatorLeftOffset 5
+#define kDMChart_IndicatorBorderWidth 3
+#define kDMChart_IndicatorBorderContentSpace 3
 
 //legend
-#define kDMChart_LegendItemWidth 260
-#define kDMChart_LegendItemHeight 36
-#define kDMChart_LegendItemLeftOffset 15
+#define kDMChart_LegendItemWidth 239
+#define kDMChart_LegendItemHeight 39
+#define kDMChart_LegendItemLeftOffset 12
 #define kDMChart_LegendItemTopOffset (kDMChart_ToolbarHeight - kDMChart_LegendItemHeight) / 2
 
-#define kDMChart_LegendIndicatorLeftOffset 5
-#define kDMChart_LegendIndicatorSize 16
-#define kDMChart_LegendIndicatorBorderWidth 3
-#define kDMChart_LegendIndicatorBorderContentSpace 3
-#define kDMChart_LegendIndicatorTopOffset (kDMChart_LegendItemHeight - kDMChart_LegendIndicatorSize) / 2
+#define kDMChart_LegendIndicatorTopOffset (kDMChart_LegendItemHeight - kDMChart_IndicatorSize) / 2
 
 #define kDMChart_LegendLabelLeftOffset 5
 #define kDMChart_LegendLabelFontSize 12

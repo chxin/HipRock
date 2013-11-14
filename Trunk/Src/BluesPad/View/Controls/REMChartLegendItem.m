@@ -14,9 +14,9 @@
 
 #define kREMLegendItemFrame CGRectMake(0,0,kDMChart_LegendItemWidth,kDMChart_LegendItemHeight)
 
-#define kREMLegendInnerIndicatorFrame CGRectMake(kDMChart_LegendIndicatorLeftOffset,kDMChart_LegendIndicatorTopOffset, kDMChart_LegendIndicatorSize,kDMChart_LegendIndicatorSize)
+#define kREMLegendInnerIndicatorFrame CGRectMake(kDMChart_IndicatorLeftOffset,kDMChart_LegendIndicatorTopOffset, kDMChart_IndicatorSize,kDMChart_IndicatorSize)
 
-#define kREMLegendInnerLabelFrame CGRectMake(kDMChart_LegendIndicatorLeftOffset + kDMChart_LegendIndicatorSize + kDMChart_LegendLabelLeftOffset, kDMChart_LegendLabelTopOffset, kDMChart_LegendItemWidth - (kDMChart_LegendIndicatorLeftOffset + kDMChart_LegendIndicatorSize + kDMChart_LegendLabelLeftOffset), kDMChart_LegendLabelFontSize+1)
+#define kREMLegendInnerLabelFrame CGRectMake(kDMChart_IndicatorLeftOffset + kDMChart_IndicatorSize + kDMChart_LegendLabelLeftOffset, kDMChart_LegendLabelTopOffset, kDMChart_LegendItemWidth - (kDMChart_IndicatorLeftOffset + kDMChart_IndicatorSize + kDMChart_LegendLabelLeftOffset), kDMChart_LegendLabelFontSize+1)
 
 @interface REMChartLegendItem()
 

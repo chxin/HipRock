@@ -21,7 +21,7 @@
 
 +(REMChartSeriesIndicator *)indicatorWithType:(REMChartSeriesIndicatorType)type andColor:(UIColor *)color;
 {
-    REMChartSeriesIndicator *indicator = [[REMChartSeriesIndicator alloc] initWithFrame:CGRectMake(0, 0, kDMChart_LegendIndicatorSize, kDMChart_LegendIndicatorSize)];
+    REMChartSeriesIndicator *indicator = [[REMChartSeriesIndicator alloc] initWithFrame:CGRectMake(0, 0, kDMChart_IndicatorSize, kDMChart_IndicatorSize)];
     indicator.type = type;
     indicator.color = color;
     
@@ -81,7 +81,7 @@
 
 -(UIView *)getColumnIndicator
 {
-    CGFloat contentTop = kDMChart_LegendIndicatorBorderWidth+kDMChart_LegendIndicatorBorderContentSpace;
+    CGFloat contentTop = kDMChart_IndicatorBorderWidth+kDMChart_IndicatorBorderContentSpace;
     CGFloat contentSize = kDMChart_IndicatorSize - 2*contentTop;
     
     CGRect mainframe = CGRectMake(0, 0, kDMChart_IndicatorSize, kDMChart_IndicatorSize);
@@ -91,7 +91,7 @@
     CAShapeLayer *borderLayer = [CAShapeLayer layer];
     borderLayer.frame = mainframe;
     borderLayer.borderColor = self.color.CGColor;
-    borderLayer.borderWidth = kDMChart_LegendIndicatorBorderWidth;
+    borderLayer.borderWidth = kDMChart_IndicatorBorderWidth;
     borderLayer.backgroundColor = [UIColor whiteColor].CGColor;
     
     
