@@ -76,6 +76,8 @@
     UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, kDMChart_IndicatorSize / 4, kDMChart_IndicatorSize, kDMChart_IndicatorSize / 2)];
     indicator.backgroundColor = self.color;
     
+    //CALayer *layer = [[CALayer alloc] init];
+    
     return indicator;
 }
 
