@@ -387,6 +387,8 @@
 		7ACFCC1317CDA62E00811976 /* SlidePageBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFCBD817CDA62E00811976 /* SlidePageBackground.png */; };
 		7ACFCC1417CDA62E00811976 /* SlidePageBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFCBD917CDA62E00811976 /* SlidePageBackground@2x.png */; };
 		7ACFCC1A17CDA62E00811976 /* SplashScreenLogo-Common.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFCBE017CDA62E00811976 /* SplashScreenLogo-Common.png */; };
+		7AD20A9318349844004661EE /* Close_Chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD20A9118349844004661EE /* Close_Chart.png */; };
+		7AD20A9418349844004661EE /* Close_Chart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD20A9218349844004661EE /* Close_Chart@2x.png */; };
 		7AD9D748181A626400D9E8EC /* CommonPin_Focus.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD9D738181A626400D9E8EC /* CommonPin_Focus.png */; };
 		7AD9D749181A626400D9E8EC /* CommonPin_Focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD9D739181A626400D9E8EC /* CommonPin_Focus@2x.png */; };
 		7AD9D74A181A626400D9E8EC /* CommonPin_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD9D73A181A626400D9E8EC /* CommonPin_Normal.png */; };
@@ -446,8 +448,6 @@
 		B41D55821834643B008E0813 /* DateView_Chart@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41D557A1834643B008E0813 /* DateView_Chart@2x.jpg */; };
 		B41D55831834643B008E0813 /* Legend_Chart.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41D557B1834643B008E0813 /* Legend_Chart.jpg */; };
 		B41D55841834643B008E0813 /* Legend_Chart@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41D557C1834643B008E0813 /* Legend_Chart@2x.jpg */; };
-		B41D55871834648E008E0813 /* Close_Chart.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41D55851834648E008E0813 /* Close_Chart.jpg */; };
-		B41D55881834648E008E0813 /* Close_Chart@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41D55861834648E008E0813 /* Close_Chart@2x.jpg */; };
 		B42C338917E18E63008289D2 /* DefaultBuilding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B42C338817E18E63008289D2 /* DefaultBuilding@2x.png */; };
 		B42C338B17E19064008289D2 /* DefaultBuilding.png in Resources */ = {isa = PBXBuildFile; fileRef = B42C338A17E19064008289D2 /* DefaultBuilding.png */; };
 		B42FBF6117F519F5004F2F3A /* REMWidgetCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6017F519F5004F2F3A /* REMWidgetCollectionViewController.m */; };
@@ -1051,6 +1051,8 @@
 		7ACFCBDE17CDA62E00811976 /* SplashScreenBackgroud.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SplashScreenBackgroud.jpg; sourceTree = "<group>"; };
 		7ACFCBDF17CDA62E00811976 /* SplashScreenBackgroud@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "SplashScreenBackgroud@2x.jpg"; sourceTree = "<group>"; };
 		7ACFCBE017CDA62E00811976 /* SplashScreenLogo-Common.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenLogo-Common.png"; sourceTree = "<group>"; };
+		7AD20A9118349844004661EE /* Close_Chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Close_Chart.png; sourceTree = "<group>"; };
+		7AD20A9218349844004661EE /* Close_Chart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Close_Chart@2x.png"; sourceTree = "<group>"; };
 		7AD9D738181A626400D9E8EC /* CommonPin_Focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CommonPin_Focus.png; sourceTree = "<group>"; };
 		7AD9D739181A626400D9E8EC /* CommonPin_Focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CommonPin_Focus@2x.png"; sourceTree = "<group>"; };
 		7AD9D73A181A626400D9E8EC /* CommonPin_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CommonPin_Normal.png; sourceTree = "<group>"; };
@@ -1105,8 +1107,6 @@
 		B41D557A1834643B008E0813 /* DateView_Chart@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "DateView_Chart@2x.jpg"; sourceTree = "<group>"; };
 		B41D557B1834643B008E0813 /* Legend_Chart.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Legend_Chart.jpg; sourceTree = "<group>"; };
 		B41D557C1834643B008E0813 /* Legend_Chart@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Legend_Chart@2x.jpg"; sourceTree = "<group>"; };
-		B41D55851834648E008E0813 /* Close_Chart.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Close_Chart.jpg; sourceTree = "<group>"; };
-		B41D55861834648E008E0813 /* Close_Chart@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Close_Chart@2x.jpg"; sourceTree = "<group>"; };
 		B42C338817E18E63008289D2 /* DefaultBuilding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuilding@2x.png"; sourceTree = "<group>"; };
 		B42C338A17E19064008289D2 /* DefaultBuilding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultBuilding.png; sourceTree = "<group>"; };
 		B42FBF5F17F519F5004F2F3A /* REMWidgetCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetCollectionViewController.h; sourceTree = "<group>"; };
@@ -1841,8 +1841,8 @@
 		7A4A4AB8182B8C2A003F1BB0 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
-				B41D55851834648E008E0813 /* Close_Chart.jpg */,
-				B41D55861834648E008E0813 /* Close_Chart@2x.jpg */,
+				7AD20A9118349844004661EE /* Close_Chart.png */,
+				7AD20A9218349844004661EE /* Close_Chart@2x.png */,
 				B41D55751834643B008E0813 /* Back_Chart.jpg */,
 				B41D55761834643B008E0813 /* Back_Chart@2x.jpg */,
 				B41D55771834643B008E0813 /* DatePicker_Chart.jpg */,
@@ -2890,7 +2890,6 @@
 				B404428618175EF700A499FB /* Nodata.png in Resources */,
 				7AD9D748181A626400D9E8EC /* CommonPin_Focus.png in Resources */,
 				7A5AC7781817C4BD006C7CB1 /* EMOP_Setting@2x.png in Resources */,
-				B41D55871834648E008E0813 /* Close_Chart.jpg in Resources */,
 				7ACFCC1417CDA62E00811976 /* SlidePageBackground@2x.png in Resources */,
 				B4EDFB1218064F2900873FA1 /* Share_normal@2x.png in Resources */,
 				B404428518175EF700A499FB /* Down@2x.png in Resources */,
@@ -2915,6 +2914,7 @@
 				B454BC0D17CDECD500D69A7B /* NotOverTarget@2x.png in Resources */,
 				7A48B48217CDF0FD002DA386 /* SplashScreenLogo-Common@2x.png in Resources */,
 				7A48B48317CDF0FD002DA386 /* SplashScreenLogo-Flash.png in Resources */,
+				7AD20A9418349844004661EE /* Close_Chart@2x.png in Resources */,
 				7A48B48417CDF0FD002DA386 /* SplashScreenLogo-Flash@2x.png in Resources */,
 				7A48B48F17CDFA38002DA386 /* Propaganda_1.jpg in Resources */,
 				7A6A14F8181E583F007D06B8 /* MarkerBubble.png in Resources */,
@@ -2950,7 +2950,6 @@
 				7A6A14F9181E583F007D06B8 /* MarkerBubble@2x.png in Resources */,
 				B45F8A6217D5B0340079C74D /* Electricity_normal.png in Resources */,
 				B45F8A6F17D5B04B0079C74D /* Coal_normal@2x.png in Resources */,
-				B41D55881834648E008E0813 /* Close_Chart@2x.jpg in Resources */,
 				7A5AC7751817C4BD006C7CB1 /* EMOP_APP_7.png in Resources */,
 				B45F8A7017D5B04B0079C74D /* Coal_pressed@2x.png in Resources */,
 				B45F8A7117D5B04B0079C74D /* Electricity_normal@2x.png in Resources */,
@@ -2983,6 +2982,7 @@
 				B42C338B17E19064008289D2 /* DefaultBuilding.png in Resources */,
 				B41D55841834643B008E0813 /* Legend_Chart@2x.jpg in Resources */,
 				7AD9D750181A626400D9E8EC /* QualifiedPin_Focus.png in Resources */,
+				7AD20A9318349844004661EE /* Close_Chart.png in Resources */,
 				B48BB8B917EFEE43004DBE5D /* WeiboBana.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

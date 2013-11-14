@@ -547,7 +547,7 @@
     CGFloat scrollViewContentWidth = (kDMChart_LegendItemWidth + kDMChart_LegendItemLeftOffset) * self.energyData.targetEnergyData.count + kDMChart_LegendItemLeftOffset;
     
     UIScrollView *view = [[UIScrollView alloc] initWithFrame:kDMChart_ToolbarHiddenFrame];
-    view.backgroundColor = [UIColor whiteColor];
+    view.backgroundColor = [REMColor colorByHexString:kDMChart_BackgroundColor];
     view.contentSize = CGSizeMake(scrollViewContentWidth, kDMChart_ToolbarHeight);
     view.pagingEnabled = NO;
     view.showsHorizontalScrollIndicator = NO;
@@ -608,6 +608,8 @@
         return;
     }
     
+    [self.searchView setHidden:YES];
+    
     NSMutableArray *models = [[NSMutableArray alloc] init];
     for(int i=0;i<names.count;i++){
         REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
@@ -635,6 +637,8 @@
     
     NSMutableArray *models = [[NSMutableArray alloc] init];
     int highlightIndex=0;
+    
+    [self.searchView setHidden:YES];
     
     for(int i=0;i<self.energyData.targetEnergyData.count;i++){
         REMTargetEnergyData *targetData = self.energyData.targetEnergyData[i];
@@ -671,6 +675,8 @@
         if([chartView respondsToSelector:@selector(cancelToolTipStatus)]){
             [chartView cancelToolTipStatus];
         }
+        
+        [self.searchView setHidden:NO];
     }];
 }
 

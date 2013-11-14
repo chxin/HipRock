@@ -61,7 +61,7 @@ const static CGFloat widgetGap=10;
     
     // iOS 7.0 supported
     if([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
-        [self setNeedsStatusBarAppearanceUpdate];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
     }
     
     [self.view setFrame:CGRectMake(0, 0, 1024, 748)];
