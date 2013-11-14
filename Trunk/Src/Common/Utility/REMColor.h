@@ -14,6 +14,7 @@
 @interface REMColor : NSObject
 
 + (UIColor *)colorByHexString:(NSString *)hexString;
++ (UIColor *)colorByHexString:(NSString *)hexString alpha:(CGFloat)alpha;
 
 + (CPTColor *)colorByIndex:(uint)index;
 

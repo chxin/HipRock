@@ -15,4 +15,5 @@
 @property (nonatomic, weak) NSDate* baseDateOfX;
 @property (nonatomic, assign) REMEnergyStep step;
 @property (nonatomic, assign) REMTimeRange* timeRange;
+@property (nonatomic, assign) REMCalendarType calenderType;
 @end
