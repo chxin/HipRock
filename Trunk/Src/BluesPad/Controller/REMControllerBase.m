@@ -55,15 +55,15 @@
     return customerLogoButton;
 }
 
-static UINavigationController *settingNavigationController;
+//static UINavigationController *settingNavigationController;
 
 - (void)settingButtonPressed:(UIButton *)button{
-    if(settingNavigationController == nil){
-        settingNavigationController = (UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:kStoryboard_SettingsPage];
+    //if(settingNavigationController == nil){
+    UINavigationController *    settingNavigationController = (UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:kStoryboard_SettingsPage];
         
         REMSettingViewController *settingController = (REMSettingViewController *)[settingNavigationController.childViewControllers lastObject];
-        settingController.mainNavigationController = (REMMainNavigationController *)self.navigationController;
-    }
+        //settingController.mainNavigationController = (REMMainNavigationController *)self.navigationController;
+    //}
     
     [self presentViewController:settingNavigationController animated:YES completion:nil];
 }

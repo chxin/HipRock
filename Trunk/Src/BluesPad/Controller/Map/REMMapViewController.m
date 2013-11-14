@@ -54,9 +54,9 @@ static BOOL isInitialPresenting = YES;
 	// Do any additional setup after loading the view.
     
     // iOS 7.0 supported
-    if([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
-        [self setNeedsStatusBarAppearanceUpdate];
-    }
+//    if([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
+//        [self setNeedsStatusBarAppearanceUpdate];
+//    }
     
     [self addButtons];
     
@@ -353,7 +353,8 @@ static BOOL isInitialPresenting = YES;
 
 #pragma mark - IOS7 style
 -(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
+    //return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 @end

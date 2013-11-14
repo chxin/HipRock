@@ -30,9 +30,9 @@
     [super viewDidLoad];
     
     // iOS 7.0 supported
-    if([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
-        [self setNeedsStatusBarAppearanceUpdate];
-    }
+//    if([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
+//        [self setNeedsStatusBarAppearanceUpdate];
+//    }
     
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
@@ -274,7 +274,8 @@
 
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
+    //return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 

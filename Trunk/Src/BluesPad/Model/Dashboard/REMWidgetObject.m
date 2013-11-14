@@ -29,7 +29,7 @@
     {
         self.diagramType =REMDiagramTypeColumn;
     }
-    else if([self.contentSyntax.xtype isEqualToString:@"unitenergygridcomponent"]== YES)
+    else if([self.contentSyntax.xtype rangeOfString:@"grid"].location!=NSNotFound)
     {
         self.diagramType =REMDiagramTypeGrid;
     }
