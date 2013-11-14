@@ -89,7 +89,7 @@
         [self setSelected:NO];
     
     [self updateState];
-    NSLog(@"legend tapped, status: %d!", self.state);
+    //NSLog(@"legend tapped, status: %d!", self.state);
     
     //set the conrresponding series status
     if(self.delegate != nil){
@@ -105,6 +105,12 @@
     else{
         self.backgroundColor = [UIColor darkGrayColor];
     }
+}
+
+-(void)setSelected:(BOOL)selected;
+{
+    [super setSelected:selected];
+    [self updateState];
 }
 
 @end

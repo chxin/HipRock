@@ -9,11 +9,11 @@
 #import "REMChartHeader.h"
 
 @implementation REMChartConfig
--(REMChartConfig*)initWithDictionary:(NSDictionary*)dictionary {
+-(REMChartConfig*)initWithStyle:(REMChartStyle*)style {
     self = [self init];
     if (self) {
-        self.userInteraction = ([dictionary[@"userInteraction"] isEqualToString:@"YES"]) ? YES : NO;
-        self.animationDuration = ((NSNumber*)dictionary[@"animationDuration"]).floatValue;
+        self.userInteraction = style.userInteraction;
+        self.animationDuration = style.animationDuration;
     }
     return self;
 }

@@ -147,4 +147,9 @@
     self.isFocusStatus = NO;
 }
 
+-(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
+    REMPieChartSeries* s = self.series[0];
+    if (seriesIndex >= s.energyData.count) return;
+    [s setHiddenAtIndex:seriesIndex hidden:hidden];
+}
 @end

@@ -30,6 +30,7 @@
 //    thePlot.shadow = shadow;
     
     plot = thePlot;
+    self.hiddenPointIndexes = [[NSMutableArray alloc]init];
     return self;
 }
 
@@ -61,6 +62,7 @@
 }
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
 {
+    if ([self isHiddenAtIndex:idx]) return nil;
     REMEnergyData* point = [self.energyData objectAtIndex:idx];
     if (fieldEnum == CPTPieChartFieldSliceWidth) {
         return [self.dataProcessor processY:point.dataValue];
@@ -69,11 +71,28 @@
     }
 }
 
+-(BOOL)isHiddenAtIndex:(NSUInteger)idx {
+    for (NSNumber* i in self.hiddenPointIndexes) {
+        if (i.integerValue == idx) return YES;
+    }
+    return NO;
+}
+
 -(CPTColor*)getColorByIndex:(NSUInteger)idx {
     return [REMColor colorByIndex:idx];
 }
 
 -(CPTFill *)sliceFillForPieChart:(CPTPieChart *)pieChart recordIndex:(NSUInteger)idx {
     return [CPTFill fillWithColor:[self getColorByIndex:idx]];
+}
+
+-(void)setHiddenAtIndex:(NSUInteger)index hidden:(BOOL)hidden {
+    BOOL isHiddenNow = [self isHiddenAtIndex:index];
+    if (isHiddenNow == hidden) return;
+    if (hidden) {
+        [self.hiddenPointIndexes addObject:@(index)];
+    } else {
+        [self.hiddenPointIndexes removeObject:@(index)];
+    }
 }
 @end

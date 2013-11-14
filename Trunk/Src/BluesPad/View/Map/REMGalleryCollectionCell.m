@@ -89,8 +89,8 @@
     UIView *coverView = [[UIView alloc] initWithFrame:self.bounds];
     coverView.backgroundColor = kDMGallery_BackgroundColor;
     
+    [self addSubview:coverView];
     self.cover = coverView;
-    [self addSubview:self.cover];
 }
 
 -(void)uncoverMe

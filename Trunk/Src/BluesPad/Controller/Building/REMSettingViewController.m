@@ -185,7 +185,12 @@
     currentUser = nil;
     currentCustomer = nil;
     UINavigationController *nav=(UINavigationController *)self.parentViewController;
+    
+    NSLog(@"child controllers before: %d", nav.childViewControllers.count);
     [nav dismissViewControllerAnimated:YES completion:^(void){
+        //self.view = nil;
+        [nav popToRootViewControllerAnimated:NO];
+        NSLog(@"child controllers after: %d", nav.childViewControllers.count);
         [self.mainNavigationController presentLoginView:nil];
         
         [REMStorage clearSessionStorage];

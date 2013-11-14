@@ -15,6 +15,7 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMTrend.h"
 #import "REMTestChartView.h"
+#import "REMDimensions.h"
 
 @interface REMSplashScreenController ()
 
@@ -28,6 +29,10 @@
 {
     [super viewDidLoad];
     
+    // iOS 7.0 supported
+    if([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
     
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
@@ -96,28 +101,8 @@
     
     energyViewData.targetEnergyData = sereis;
     
-    NSMutableDictionary* style = [[NSMutableDictionary alloc]init];
-    //    self.userInteraction = ([dictionary[@"userInteraction"] isEqualToString:@"YES"]) ? YES : NO;
-    //    self.series = dictionary[@"series"];
-    CPTMutableLineStyle* gridlineStyle = [[CPTMutableLineStyle alloc]init];
-    CPTMutableTextStyle* textStyle = [[CPTMutableTextStyle alloc]init];
-    gridlineStyle.lineColor = [CPTColor whiteColor];
-    gridlineStyle.lineWidth = 1.0;
-    textStyle.fontName = @kBuildingFontSCRegular;
-    textStyle.fontSize = 16.0;
-    textStyle.color = [CPTColor whiteColor];
-    textStyle.textAlignment = CPTTextAlignmentCenter;
-    
-    [style setObject:@"YES" forKey:@"userInteraction"];
-    [style setObject:@(0.05) forKey:@"animationDuration"];
-    [style setObject:gridlineStyle forKey:@"xLineStyle"];
-    [style setObject:textStyle forKey:@"xTextStyle"];
-    //    [style setObject:nil forKey:@"xGridlineStyle"];
-    //    [style setObject:nil forKey:@"yLineStyle"];
-    [style setObject:textStyle forKey:@"yTextStyle"];
-    [style setObject:gridlineStyle forKey:@"yGridlineStyle"];
-    [style setObject:@(6) forKey:@"horizentalGridLineAmount"];
-    REMColumnWidgetWrapper* columnWidget = [[REMColumnWidgetWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax styleDictionary:style];
+    REMChartStyle* style = [REMChartStyle getMaximizedStyle];
+    REMColumnWidgetWrapper* columnWidget = [[REMColumnWidgetWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
     columnWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:columnWidget.view];
 }
@@ -218,7 +203,7 @@
     
     [REMDataAccessor access:buildingStore success:^(id data) {
         if([data count]<=0){
-            [REMAlertHelper alert:@"未配置客户及数据权限，请联系您的管理员。"];
+            [REMAlertHelper alert:REMLocalizedString(@"Login_NotAuthorized")];
         }
         
         self.buildingInfoArray = [[NSMutableArray alloc] initWithCapacity:[data count]];
@@ -275,12 +260,22 @@
     }
 }
 
+- (void)stopBreath
+{
+    [self.normalLogo.layer removeAllAnimations];
+    [self.flashLogo.layer removeAllAnimations];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
 
 
 @end

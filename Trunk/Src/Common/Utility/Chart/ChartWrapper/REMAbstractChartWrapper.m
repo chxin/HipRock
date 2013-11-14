@@ -9,9 +9,9 @@
 #import "REMAbstractChartWrapper.h"
 
 @implementation REMAbstractChartWrapper {
-    NSDictionary* myStyle;
+    REMChartStyle* myStyle;
 }
--(REMAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax  styleDictionary:(NSDictionary*)style{
+-(REMAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax  style:(REMChartStyle*)style{
     self = [super init];
     if (self) {
         _energyViewData = energyViewData;
@@ -48,7 +48,7 @@
     _view = nil;
 }
 
--(REMChartConfig*)getChartConfig:(NSDictionary*)style {
+-(REMChartConfig*)getChartConfig:(REMChartStyle*)style {
     return nil;
 }
 
@@ -63,6 +63,7 @@
     
     _energyViewData = energyViewData;
     _view = [self renderContentView:frame chartConfig:[self getChartConfig:myStyle]];
+    myStyle = nil;
     if (superView) [superView addSubview:self.view];
 }
 @end

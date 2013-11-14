@@ -21,5 +21,4 @@
 - (void)showLoginView:(BOOL)isAnimated;
 
 
-
 @end

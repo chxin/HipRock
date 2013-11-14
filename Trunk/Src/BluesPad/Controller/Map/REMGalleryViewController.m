@@ -25,6 +25,8 @@
 
 @property (nonatomic,strong) NSMutableDictionary *buildingGroups;
 @property (nonatomic,weak) UITableView *galleryTableView;
+@property (nonatomic) BOOL isSegueAnimated;
+@property (nonatomic,weak) REMGalleryCollectionCell *focusedCell;
 
 @end
 
@@ -124,6 +126,13 @@
     return CGRectMake(0, 0, kDMGallery_GalleryGroupViewWidth, cellHeight+1);
 }
 
+-(void)uncoverCell
+{
+    if(self.focusedCell != nil){
+        [self.focusedCell uncoverMe];
+    }
+}
+
 #pragma mark -UITableView data source delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -170,7 +179,7 @@
     {
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
         
-        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, self.initialZoomRect, self.view.frame)];
+        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(self.isSegueAnimated, self.currentBuildingIndex, self.initialZoomRect, self.view.frame)];
         
         REMBuildingViewController *buildingViewController = customSegue.destinationViewController;
         buildingViewController.buildingInfoArray = self.buildingInfoArray;
@@ -179,15 +188,19 @@
     }
 }
 
--(void)presentBuildingViewFromCell:(REMGalleryCollectionCell *)cell
+-(void)presentBuildingViewFromCell:(REMGalleryCollectionCell *)cell animated:(BOOL)isAnimated
 {
-    [self.view setUserInteractionEnabled:NO];
+    //[self.view setUserInteractionEnabled:NO];
+    self.focusedCell = cell;
     
     CGRect cellFrameInView = [self getGalleryCollectionCellFrameInGalleryView:cell];
     
+    self.isSegueAnimated = isAnimated;
     self.initialZoomRect = cellFrameInView;
     self.currentBuildingIndex = [self buildingIndexFromBuilding:cell.building];
-    self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
+    if(!isAnimated){
+        self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
+    }
     
     [self performSegueWithIdentifier:kSegue_GalleryToBuilding sender:self];
 }

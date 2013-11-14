@@ -13,6 +13,7 @@
 #import "REMBuildingConstants.h"
 #import "REMEnergyTargetModel.h"
 #import "REMColor.h"
+#import "REMChartStyle.h"
 
 @protocol REMTrendChartDelegate <NSObject>
 /*
@@ -88,9 +89,11 @@
 
 
 @interface REMPieChartSeries : REMChartSeries<CPTPieChartDataSource,CPTAnimationDelegate>
+@property (nonatomic,strong) NSMutableArray* hiddenPointIndexes;
 @property (nonatomic) float animationDuration;
 -(CPTColor*)getColorByIndex:(NSUInteger)idx;
 @property (nonatomic) NSArray* targetNames;
+-(void)setHiddenAtIndex:(NSUInteger)index hidden:(BOOL)hidden;
 @end
 
 @interface REMTrendChartSeries : REMChartSeries {
@@ -187,7 +190,7 @@ typedef enum  {
  */
 @property (nonatomic, assign) float animationDuration;
 
--(REMChartConfig*)initWithDictionary:(NSDictionary*)dictionary;
+-(REMChartConfig*)initWithStyle:(REMChartStyle*)style;
 //+(REMChartConfig*)getMinimunWidgetDefaultSetting;
 //+(REMChartConfig*)getMaximunWidgetDefaultSetting;
 @end

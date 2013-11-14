@@ -9,6 +9,8 @@
 #ifndef Blues_REMDimensions_h
 #define Blues_REMDimensions_h
 
+#import "REMCommonDefinition.h"
+
 #import "REMDimensionForSplashScreen.h"
 #import "REMDimensionForLogin.h"
 #import "REMDimensionForMap.h"
@@ -16,6 +18,9 @@
 #import "REMDimensionForChart.h"
 
 #pragma mark System const dimensions
+
+#define REMDMCOMPATIOS7(d) (REMISIOS7 ? ((d) + kDMStatusBarHeight) : (d))
+
 //prefix: kDM
 
 #define kDMScreenWidth 1024
@@ -33,13 +38,19 @@
 #define kDMCommon_ContentWidth kDMScreenWidth - (2 * kDMCommon_ContentLeftMargin)
 
 #define kDMCommon_TopLeftButtonLeft kDMCommon_ContentLeftMargin
-#define kDMCommon_TopLeftButtonTop 23
+
+#define kDMCommon_TopLeftButtonTop REMDMCOMPATIOS7(23)
+
 #define kDMCommon_TopLeftButtonWidth 32
 #define kDMCommon_TopLeftButtonHeight 32
 #define kDMCommon_TopLeftButtonFrame CGRectMake(kDMCommon_TopLeftButtonLeft, kDMCommon_TopLeftButtonTop,kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)
 
 #define kDMCommon_CustomerLogoLeft kDMCommon_TopLeftButtonLeft + kDMCommon_TopLeftButtonWidth + 8
-#define kDMCommon_CustomerLogoTop 18
+
+#define kDMCommon_CustomerLogoTop REMDMCOMPATIOS7(18)
+
+
+
 #define kDMCommon_CustomerLogoWidth 210
 #define kDMCommon_CustomerLogoHeight 45
 #define kDMCommon_CustomerLogoFrame CGRectMake(kDMCommon_CustomerLogoLeft,kDMCommon_CustomerLogoTop,kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)
