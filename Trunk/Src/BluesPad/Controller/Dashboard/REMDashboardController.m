@@ -238,6 +238,7 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     
     
     UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x,shareFrame.origin.y+shareFrame.size.height, frame.size.width, kDashboardTitleSize)];
+    [title setBackgroundColor:[UIColor clearColor]];
     title.text=dashboardInfo.name;
     title.backgroundColor=[UIColor clearColor];
     title.textColor=[UIColor whiteColor];
