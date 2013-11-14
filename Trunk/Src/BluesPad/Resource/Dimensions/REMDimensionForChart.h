@@ -31,6 +31,8 @@
 
 #define kDMChart_LegendIndicatorLeftOffset 5
 #define kDMChart_LegendIndicatorSize 16
+#define kDMChart_LegendIndicatorBorderWidth 3
+#define kDMChart_LegendIndicatorBorderContentSpace 3
 #define kDMChart_LegendIndicatorTopOffset (kDMChart_LegendItemHeight - kDMChart_LegendIndicatorSize) / 2
 
 #define kDMChart_LegendLabelLeftOffset 5

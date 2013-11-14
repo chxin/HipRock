@@ -76,15 +76,45 @@
     UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, kDMChart_IndicatorSize / 4, kDMChart_IndicatorSize, kDMChart_IndicatorSize / 2)];
     indicator.backgroundColor = self.color;
     
-    //CALayer *layer = [[CALayer alloc] init];
-    
     return indicator;
 }
 
 -(UIView *)getColumnIndicator
 {
-    UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDMChart_IndicatorSize, kDMChart_IndicatorSize)];
-    indicator.backgroundColor = self.color;
+    CGFloat contentTop = kDMChart_LegendIndicatorBorderWidth+kDMChart_LegendIndicatorBorderContentSpace;
+    CGFloat contentSize = kDMChart_IndicatorSize - 2*contentTop;
+    
+    CGRect mainframe = CGRectMake(0, 0, kDMChart_IndicatorSize, kDMChart_IndicatorSize);
+    CGRect contentframe = CGRectMake(contentTop, contentTop, contentSize, contentSize);
+    
+    //border layer
+    CAShapeLayer *borderLayer = [CAShapeLayer layer];
+    borderLayer.frame = mainframe;
+    borderLayer.borderColor = self.color.CGColor;
+    borderLayer.borderWidth = kDMChart_LegendIndicatorBorderWidth;
+    borderLayer.backgroundColor = [UIColor whiteColor].CGColor;
+    
+    
+    //content layer
+    CAShapeLayer *contentLayer = [CAShapeLayer layer];
+    contentLayer.frame = contentframe;
+    contentLayer.backgroundColor = self.color.CGColor;
+    
+    
+    //render
+    UIGraphicsBeginImageContextWithOptions(mainframe.size, NO, 0.0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [borderLayer renderInContext:context];
+    [contentLayer renderInContext:context];
+    
+    UIGraphicsEndImageContext();
+    
+    //add into view
+    UIView *indicator = [[UIView alloc] initWithFrame:mainframe];
+    
+    [indicator.layer addSublayer:borderLayer];
+    [indicator.layer addSublayer:contentLayer];
     
     return indicator;
 }
