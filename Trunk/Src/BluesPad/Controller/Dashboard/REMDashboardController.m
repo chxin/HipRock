@@ -227,10 +227,17 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     CGRect shareFrame;
     if(dashboardInfo.shareInfo!=nil && [dashboardInfo.shareInfo isEqual:[NSNull null]]== NO && [dashboardInfo.shareInfo.userRealName isEqual:[NSNull null]]==NO){
         shareFrame = CGRectMake(0, 0, frame.size.width, kDashboardShareSize);
-        UILabel *shareName=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x, shareFrame.origin.y, frame.size.width, shareFrame.size.height)];
-        shareName.textColor=[UIColor whiteColor];
-        shareName.text=dashboardInfo.shareInfo.userRealName;
-        [cell.contentView addSubview:shareName];
+        UILabel *shareLabel=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x, shareFrame.origin.y, frame.size.width, shareFrame.size.height)];
+        shareLabel.textColor=[UIColor whiteColor];
+        shareLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardShareSize];
+        [shareLabel setBackgroundColor:[UIColor clearColor]];
+        NSString *shareName=dashboardInfo.shareInfo.userRealName;
+        NSString *shareTel=dashboardInfo.shareInfo.userTelephone;
+        NSString *date=[REMTimeHelper formatTimeFullDay:dashboardInfo.shareInfo.shareTime];
+        NSString *userTitle=dashboardInfo.shareInfo.userTitleComponent;
+        shareLabel.text=[NSString stringWithFormat:NSLocalizedString(@"Widget_ShareTitle", @""),shareName,userTitle,date,shareTel];
+        [cell.contentView addSubview:shareLabel];
+        shareFrame=CGRectMake(shareFrame.origin.x, shareFrame.origin.y+shareFrame.size.height, shareFrame.size.width, shareFrame.size.height);
     }
     else{
         shareFrame = CGRectMake(0, 0, frame.size.width, 0);

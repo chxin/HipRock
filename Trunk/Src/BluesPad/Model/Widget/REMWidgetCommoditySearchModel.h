@@ -17,4 +17,6 @@
 @property (nonatomic,strong) NSNumber *systemDimensionTemplateItemId;
 @property (nonatomic,strong) NSNumber *areaDimensionId;
 
+@property (nonatomic) REMCarbonUnit carbonUnit;
+
 @end
