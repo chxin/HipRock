@@ -56,8 +56,6 @@
     [self.view.layer insertSublayer:self.titleGradientLayer above:self.mapView.layer];
     
     [self showMarkers];
-    
-    NSLog(@"[viewDidLoad]user interaction enabled: %d", self.view.userInteractionEnabled);
 }
 
 -(void)addButtons
@@ -179,14 +177,10 @@
     if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
         [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
     }
-    
-    NSLog(@"[viewDidAppear]user interaction enabled: %d", self.view.userInteractionEnabled);
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
-    NSLog(@"[viewWillAppear]user interaction enabled: %d", self.view.userInteractionEnabled);
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -352,8 +346,8 @@
 
 #pragma mark - IOS7 style
 -(UIStatusBarStyle)preferredStatusBarStyle{
-    //return UIStatusBarStyleLightContent;
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
+    //return UIStatusBarStyleDefault;
 }
 
 @end

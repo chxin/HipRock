@@ -85,7 +85,7 @@
 -(void)stylize
 {
     self.view.frame = kDMDefaultViewFrame;
-    self.view.backgroundColor = [UIColor redColor];// kDMGallery_BackgroundColor;
+    self.view.backgroundColor = kDMGallery_BackgroundColor;
 }
 
 -(void)addGalleryGroupView
