@@ -233,7 +233,7 @@
 - (void)initTitleView
 {
     //CGFloat leftMargin=kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin;
-    UILabel *buildingType=[[UILabel alloc]initWithFrame:CGRectMake(0, 13, self.view.frame.size.width, kBuildingTypeTitleFontSize)];
+    UILabel *buildingType=[[UILabel alloc]initWithFrame:CGRectMake(0, 12, self.view.frame.size.width, kBuildingTypeTitleFontSize)];
     buildingType.backgroundColor=[UIColor clearColor];
     buildingType.text=NSLocalizedString(@"Common_Building", @"");//  @"楼宇";
     buildingType.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
@@ -248,7 +248,7 @@
     CGFloat titleSize=kBuildingTitleFontSize;
     
     
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, buildingType.frame.origin.y+buildingType.frame.size.height+7, self.view.frame.size.width, titleSize+5)];
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, buildingType.frame.origin.y+buildingType.frame.size.height+4, self.view.frame.size.width, titleSize)];
     titleLabel.text=self.buildingInfo.building.name ;
     titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     titleLabel.shadowOffset=CGSizeMake(1, 1);

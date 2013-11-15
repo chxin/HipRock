@@ -79,7 +79,7 @@ static NSString *cellId=@"widgetcell";
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0, 0, kDashboardWidgetInnerVerticalMargin, 0);
+    return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 

@@ -23,7 +23,7 @@
 #import "REMBuildingShareViewController.h"
 
 
-const static CGFloat buildingGap=10;
+const static CGFloat buildingGap=20;
 
 @interface REMBuildingViewController ()
 //@property (nonatomic) NSUInteger currentIndex;

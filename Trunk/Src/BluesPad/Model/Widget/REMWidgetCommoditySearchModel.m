@@ -42,6 +42,9 @@
     if(self.carbonUnit!=REMCarbonUnitNone){
         dic[@"destination"]=@(self.carbonUnit);
     }
+    if(self.hierarchyId!=nil){
+        dic[@"hierarchyId"]=self.hierarchyId;
+    }
     return dic;
 }
 
@@ -54,6 +57,8 @@
     self.commodityIdArray= [NSKeyedUnarchiver unarchiveObjectWithData:
                             [NSKeyedArchiver archivedDataWithRootObject:commodityIds]];
     self.step=[self stepTypeByNumber:step];
+    
+
     
     NSNumber *destination=param[@"destination"];
     if(destination!=nil){
@@ -75,6 +80,10 @@
         if(hierId!=nil && [hierId isEqual:[NSNull null]]==NO){
             self.hierarchyId=[hierId copy];
         }
+    }
+    NSNumber *hierId=param[@"hierarchyId"];
+    if(hierId!=nil){
+        self.hierarchyId=hierId;
     }
 }
 
