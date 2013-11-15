@@ -27,6 +27,7 @@
 @interface REMMapViewController ()
 
 @property (nonatomic,weak) GMSMapView *mapView;
+@property (nonatomic) int temp;
 
 @end
 
@@ -55,6 +56,8 @@
     [self.view.layer insertSublayer:self.titleGradientLayer above:self.mapView.layer];
     
     [self showMarkers];
+    
+    NSLog(@"[viewDidLoad]user interaction enabled: %d", self.view.userInteractionEnabled);
 }
 
 -(void)addButtons
@@ -176,10 +179,14 @@
     if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
         [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
     }
+    
+    NSLog(@"[viewDidAppear]user interaction enabled: %d", self.view.userInteractionEnabled);
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    
+    NSLog(@"[viewWillAppear]user interaction enabled: %d", self.view.userInteractionEnabled);
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -209,7 +216,9 @@
     if([segue.identifier isEqualToString:kSegue_MapToBuilding] == YES)
     {
         //take a snapshot of self
-        self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
+        UIImage *fake = [REMImageHelper imageWithView:self.view];
+        [REMImageHelper drawText:[NSString stringWithFormat:@"%d" ,self.temp++] inImage:fake inRect:CGRectMake(0, 0, 24, 24)];
+        self.snapshot = [[UIImageView alloc] initWithImage: fake];
         
         //prepare custom segue parameters
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
@@ -313,8 +322,6 @@
 
 - (void)mapView:(GMSMapView *)view didTapInfoWindowOfMarker:(GMSMarker *)marker
 {
-    [self.view setUserInteractionEnabled:NO];
-    
     self.initialZoomRect = [self getZoomFrameFromMarker:marker];
     self.currentBuildingIndex = [self buildingIndexFromBuilding:[marker.userData building]];
     

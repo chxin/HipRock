@@ -476,7 +476,7 @@ const static CGFloat buildingGap=10;
 
 -(void)back
 {
-    if ([(id)self.fromController respondsToSelector:@selector(uncoverCell)]) {
+    if ([self.fromController respondsToSelector:@selector(uncoverCell)]) {
         [(id)self.fromController uncoverCell];
     }
     

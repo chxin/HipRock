@@ -14,16 +14,24 @@
 #import "REMCommonHeaders.h"
 #import "REMImages.h"
 
+@interface REMBuildingEntranceSegue ()
+
+@property (nonatomic) CGFloat segueTime;
+
+@end
+
 @implementation REMBuildingEntranceSegue
 
-#define kSequeTime 3.0f
-#define kFirstSugueTime 6.0f
+#define kSequeTime 0.3f
+#define kFirstSugueTime 0.6f
 
-static float segueTime = kFirstSugueTime/10.0f;
+
 
 -(void)prepareSegueWithParameter:(REMBuildingSegueZoomParamter)parameter
 {
     self.parameter = parameter;
+    
+    self.segueTime = [self.sourceViewController isKindOfClass:[REMMapViewController class]] == YES && ((REMMapViewController *)self.sourceViewController).isInitialPresenting == YES ? kFirstSugueTime : kSequeTime;
 }
 
 - (void)perform
@@ -34,8 +42,6 @@ static float segueTime = kFirstSugueTime/10.0f;
         }
         else{
             [self exit];
-            if (segueTime == kFirstSugueTime/10.0f)
-                segueTime = kSequeTime/10.0f;
         }
     }
     else{
@@ -65,7 +71,7 @@ static float segueTime = kFirstSugueTime/10.0f;
     
     [sourceView addSubview:transitionView];
     
-    [UIView animateWithDuration:segueTime delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:self.segueTime delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         transitionView.transform = CGAffineTransformMakeScale(1.0, 1.0);
         transitionView.center = [REMViewHelper getCenterOfRect:self.parameter.finalZoomFrame];
     } completion:^(BOOL finished){
@@ -94,7 +100,7 @@ static float segueTime = kFirstSugueTime/10.0f;
     
     CGRect initialZoomRect = [((id)buildingController.fromController) getDestinationZoomRect:buildingController.currentBuildingIndex];
     
-    [UIView animateWithDuration:segueTime delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:self.segueTime delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         transitionView.transform = [REMViewHelper getScaleTransformFromOriginalFrame:initialZoomRect andFinalFrame:self.parameter.finalZoomFrame];
         transitionView.center = [REMViewHelper getCenterOfRect:initialZoomRect];
     } completion:^(BOOL finished){
