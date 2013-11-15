@@ -584,7 +584,7 @@
     //hide or show the series on index according to state
     //NSLog(@"Series %d is going to %@", index, state == UIControlStateNormal?@"show":@"hide");
     
-    if([self.chartWrapper.view isKindOfClass:[REMTrendChartView class]]){
+    //if([self.chartWrapper.view isKindOfClass:[REMTrendChartView class]]){
         if(self.hiddenSeries == nil)
             self.hiddenSeries = [[NSMutableArray alloc] init];
         
@@ -598,9 +598,10 @@
                 [self.hiddenSeries addObject:@(index)];
             }
         }
-        
-        [((REMTrendChartView *)self.chartWrapper.view) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
-    }
+    
+        if([self.chartWrapper.view respondsToSelector:@selector(setSeriesHiddenAtIndex:hidden:)])
+            [((id)self.chartWrapper.view) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
+    //}
 }
 
 #pragma mark - Tooltip
@@ -669,7 +670,7 @@
 
 -(void)tooltipWillDisapear
 {
-    NSLog(@"tool tip will disappear");
+    //NSLog(@"tool tip will disappear");
     if(self.tooltipView==nil)
         return;
     

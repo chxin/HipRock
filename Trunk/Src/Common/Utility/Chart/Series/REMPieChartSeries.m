@@ -94,5 +94,7 @@
     } else {
         [self.hiddenPointIndexes removeObject:@(index)];
     }
+    
+    [[self getPlot] reloadData];
 }
 @end
