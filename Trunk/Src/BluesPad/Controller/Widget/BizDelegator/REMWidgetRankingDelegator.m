@@ -33,7 +33,7 @@
                   .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
     self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
     
-    REMWidgetStepEnergyModel *m=(REMWidgetStepEnergyModel *)self.model;
+    REMWidgetRankingSearchModel *m=(REMWidgetRankingSearchModel *)self.model;
     m.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
 }
 
@@ -94,8 +94,8 @@
     self.chartContainer.layer.borderWidth=1;
     //[self showEnergyChart];
     
-    
-    [self setDatePickerButtonValueNoSearchByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateComponent withRelativeType:self.widgetInfo.contentSyntax.relativeDateType];
+     REMWidgetRankingSearchModel *m=(REMWidgetRankingSearchModel *)self.model;
+    [self setDatePickerButtonValueNoSearchByTimeRange:m.timeRangeArray[0] withRelative:m.relativeDateComponent withRelativeType:m.relativeDateType];
 }
 
 - (void) setDatePickerButtonValueNoSearchByTimeRange:(REMTimeRange *)range withRelative:(NSString *)relativeDate withRelativeType:(REMRelativeTimeRangeType)relativeType

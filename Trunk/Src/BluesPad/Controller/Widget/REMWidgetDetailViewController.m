@@ -88,6 +88,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     if(self.widgetInfo.shareInfo!=nil && [self.widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
         frame=CGRectMake(backButton.frame.origin.x+backButton.frame.size.width+kWidgetTitleLeftMargin, backButton.frame.origin.y, self.view.frame.size.width, kWidgetShareTitleHeight);
         UILabel *shareTitle=[[UILabel alloc]initWithFrame:frame];
+        [shareTitle setBackgroundColor:[UIColor clearColor]];
         NSString *shareName=self.widgetInfo.shareInfo.userRealName;
         NSString *shareTel=self.widgetInfo.shareInfo.userTelephone;
         NSString *date=[REMTimeHelper formatTimeFullDay:self.widgetInfo.shareInfo.shareTime];

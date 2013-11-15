@@ -141,7 +141,7 @@
     else if([self.storeType isEqualToString:@"energy.MultiIntervalDistribution"]==YES){
         self.dataStoreType = REMDSEnergyMultiTimeDistribute;
     }
-    else if([self.storeType isEqualToString:@"energy.CarbonUage"]==YES){
+    else if([self.storeType isEqualToString:@"energy.CarbonUsage"]==YES){
         self.dataStoreType = REMDSEnergyCarbon;
     }
     else if([self.storeType isEqualToString:@"energy.CarbonDistribution"]==YES){

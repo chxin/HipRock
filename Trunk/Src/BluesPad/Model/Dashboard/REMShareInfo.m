@@ -21,8 +21,9 @@
         self.shareTime=nil;
     }
     else{
-        self.shareTime=[NSDate dateWithTimeIntervalSince1970:longTime];
+        self.shareTime=[NSDate dateWithTimeIntervalSince1970:longTime/1000];
     }
+    
     NSNumber *userTitle=dictionary[@"UserTitle"];
     self.userTitle = (REMUserTitleType)[userTitle integerValue];
     
@@ -42,37 +43,37 @@
      */
     
     if (self.userTitle == REMUserTitleEEConsultant) {
-        title=@"";
+        title=NSLocalizedString(@"Admin_UserTitleEEConsultant", @"");
     }
     else if(self.userTitle == REMUserTitleTechnician){
-        
+        title=NSLocalizedString(@"Admin_UserTitleTechnician", @"");
     }
     else if(self.userTitle == REMUserTitleCustomerAdmin){
-        
+        title=NSLocalizedString(@"Admin_UserTitleCustomerAdmin", @"");
     }
     else if(self.userTitle == REMUserTitlePlatformAdmin){
-        
+        title=NSLocalizedString(@"Admin_UserTitlePlatformAdmin", @"");
     }
     else if(self.userTitle == REMUserTitleEnergyManager){
-        
+        title=NSLocalizedString(@"Admin_UserTitleEnergyManager", @"");
     }
     else if(self.userTitle == REMUserTitleEnergyEngineer){
-        
+        title=NSLocalizedString(@"Admin_UserTitleEnergyEngineer", @"");
     }
     else if(self.userTitle == REMUserTitleDepartmentManager){
-        
+        title=NSLocalizedString(@"Admin_UserTitleDepartmentManager", @"");
     }
     else if(self.userTitle == REMUserTitleCEO){
-        
+        title=NSLocalizedString(@"Admin_UserTitleCEO", @"");
     }
     else if(self.userTitle == REMUserTitleBusinessPersonnel){
-        
+        title=NSLocalizedString(@"Admin_UserTitleBusinessPersonnel", @"");
     }
     else if(self.userTitle == REMUserTitleSaleman){
-        
+        title=NSLocalizedString(@"Admin_UserTitleSaleman", @"");
     }
     else if(self.userTitle == REMUserTitleServiceProviderAdmin){
-        
+        title=NSLocalizedString(@"Admin_UserTitleServiceProviderAdmin", @"");
     }
     self.userTitleComponent=title;
 }
