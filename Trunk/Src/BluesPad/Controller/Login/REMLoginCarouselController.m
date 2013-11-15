@@ -123,7 +123,7 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
 -(UIView *)makeImageView:(int)index
 {
     NSString *imageName = [NSString stringWithFormat: @"Propaganda_%d", index+1];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:REMLoadImageNamed(imageName)];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:REMLoadImageResource(imageName, @"jpg")];
     imageView.contentMode = UIViewContentModeScaleToFill;
     
     return imageView;
