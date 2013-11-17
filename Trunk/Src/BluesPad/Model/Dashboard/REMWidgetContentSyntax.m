@@ -45,7 +45,7 @@
         self.calendarType=REMCalendarTypeHCSeason;
     }
     else if([self.calendar isEqualToString:@"work"]==YES){
-        self.calendarType=REMCalenderTypeWorkDay;
+        self.calendarType=REMCalenderTypeHoliday;
     }
     else{
         self.calendarType=REMCalendarTypeNone;

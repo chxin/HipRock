@@ -546,16 +546,5 @@
 
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    //NSLog(@"didReceiveMemoryWarning :%@",[self class]);
-    if(self.isViewLoaded==YES){
-        if (self.view.superview == nil) {
-            self.view=nil;
-        }
-    }
-    // Dispose of any resources that can be recreated.
-}
 
 @end

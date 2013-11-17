@@ -16,7 +16,7 @@
 #import "REMStackColumnWidgetWrapper.h"
 #import "REMDatePickerViewController.h"
 #import "REMWidgetBizDelegatorBase.h"
-
+#import "REMDimensions.h"
 
 const static CGFloat kWidgetBackButtonLeft=25;
 const static CGFloat kWidgetBackButtonTop=18;
@@ -62,7 +62,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 	// Do any additional setup after loading the view.
     [self.view setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
     
-    [self.view setFrame:CGRectMake(0, 0, 1024, 748)];
+    [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
     
     self.bizDelegator=[REMWidgetBizDelegatorBase bizDelegatorByWidgetInfo:self.widgetInfo];
     self.bizDelegator.view=self.view;
@@ -72,7 +72,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     //self.view.layer.borderColor=[UIColor redColor].CGColor;
     //self.view.layer.borderWidth=1;
     
-    UIView *titleContainer=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 63)];
+    UIView *titleContainer=[[UIView alloc]initWithFrame:CGRectMake(0, REMDMCOMPATIOS7(0), self.view.frame.size.width, 63)];
     [titleContainer setBackgroundColor:[REMColor colorByHexString:@"#f8f8f8"]];
     
     UIButton *backButton=[UIButton buttonWithType:UIButtonTypeCustom];

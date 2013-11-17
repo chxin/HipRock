@@ -41,8 +41,8 @@
 	// Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.view setFrame:self.viewFrame];
-    //NSLog(@"detail view:%@",NSStringFromCGRect(self.view.frame));
-    
+    NSLog(@"detail view:%@",NSStringFromCGRect(self.view.frame));
+
     self.searchModel=[REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax.dataStoreType withParam:self.widgetInfo.contentSyntax.params];
 
     UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(kDashboardWidgetPadding, kDashboardWidgetTitleTopMargin, self.view.frame.size.width, kDashboardWidgetTitleSize)];
@@ -111,6 +111,12 @@
     }
     if (widgetWrapper != nil) {
         self.wrapper=widgetWrapper;
+        if([widgetWrapper isKindOfClass:[REMTrendWidgetWrapper class]]==YES){
+            if(self.widgetInfo.contentSyntax.calendarType!=REMCalendarTypeNone){
+                REMTrendWidgetWrapper *trend=(REMTrendWidgetWrapper *)widgetWrapper;
+                trend.calenderType=self.widgetInfo.contentSyntax.calendarType;
+            }
+        }
         [self.chartContainer addSubview:widgetWrapper.view];
         //[widgetWrapper destroyView];
         
@@ -144,9 +150,10 @@
     [button setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     //[button setBounds:self.chartContainer.bounds];
     button.showsTouchWhenHighlighted=NO;
+    button.adjustsImageWhenHighlighted=NO;
     [button setBackgroundImage:image forState:UIControlStateNormal];
-    [button setBackgroundImage:image forState:UIControlStateHighlighted];
-    [button setBackgroundImage:image forState:UIControlStateSelected];
+    //[button setBackgroundImage:image forState:UIControlStateHighlighted];
+    //[button setBackgroundImage:image forState:UIControlStateSelected];
     button.tag=[self.widgetInfo.widgetId integerValue];
     [button addTarget:self action:@selector(widgetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     

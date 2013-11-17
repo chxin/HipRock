@@ -21,7 +21,7 @@
 #import "REMWidgetMaxViewController.h"
 #import "REMWidgetCellViewController.h"
 #import "REMBuildingShareViewController.h"
-
+#import "REMDimensions.h"
 
 const static CGFloat buildingGap=20;
 
@@ -77,7 +77,7 @@ const static CGFloat buildingGap=20;
     self.speedBase=2000;
 	self.customImageLoadedDictionary = [[NSMutableDictionary alloc]initWithCapacity:self.buildingInfoArray.count];
     self.view.backgroundColor=[UIColor blackColor];
-    [self.view setFrame:CGRectMake(0, 0, kImageWidth, kImageHeight)];
+    [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
     self.currentScrollOffset=-kBuildingCommodityViewTop;
     
     self.cumulateX=0;

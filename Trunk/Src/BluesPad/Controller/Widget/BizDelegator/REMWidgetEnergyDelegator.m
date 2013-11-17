@@ -131,7 +131,10 @@
     REMAbstractChartWrapper  *widgetWrapper;
     if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
+        REMTrendChartView *trendChart= (REMTrendChartView *)widgetWrapper.view;
+        trendChart.delegate = self;
+        
+        
     } else if (widgetType == REMDiagramTypeColumn) {
         widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         ((REMTrendChartView *)widgetWrapper.view).delegate = self;
@@ -146,6 +149,12 @@
         ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     }
     if (widgetWrapper != nil) {
+        if([widgetWrapper isKindOfClass:[REMTrendWidgetWrapper class]]==YES){
+            if(self.widgetInfo.contentSyntax.calendarType!=REMCalendarTypeNone){
+                REMTrendWidgetWrapper *trend=(REMTrendWidgetWrapper *)widgetWrapper;
+                trend.calenderType=self.widgetInfo.contentSyntax.calendarType;
+            }
+        }
         [self.chartContainer addSubview:widgetWrapper.view];
         self.chartWrapper=widgetWrapper;
     }

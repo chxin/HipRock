@@ -10,9 +10,9 @@
 #import "REMWidgetDetailViewController.h"
 #import "REMWidgetCellViewController.h"
 #import "REMScreenEdgetGestureRecognizer.h"
+#import "REMDimensions.h"
 
-
-const static CGFloat widgetGap=10;
+const static CGFloat widgetGap=20;
 
 
 @interface REMWidgetMaxViewController()
@@ -64,7 +64,7 @@ const static CGFloat widgetGap=10;
         [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
     }
     
-    [self.view setFrame:CGRectMake(0, 0, 1024, 748)];
+    [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
     [self.view setBackgroundColor:[UIColor blackColor]];
     self.cumulateX=0;
     self.speedBase=1280;
@@ -378,6 +378,7 @@ const static CGFloat widgetGap=10;
 
 
 - (void)popToBuildingCover{
+    [self cancelAllRequest];
     [self performSegueWithIdentifier:@"exitWidgetSegue" sender:self];
 }
 

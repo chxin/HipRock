@@ -545,6 +545,16 @@
     [self.shareButton setEnabled:YES];
 }
 
+- (void)releaseViewInController:(NSArray *)controllers{
+    if(controllers.count>0){
+        for (UIViewController *vc in controllers) {
+            if(vc.isViewLoaded==YES){
+                vc.view=nil;
+            }
+            [self releaseViewInController:vc.childViewControllers];
+        }
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -553,17 +563,11 @@
     if(self.childViewControllers.count>0){
         if(self.currentCoverStatus==REMBuildingCoverStatusCoverPage){
             UIViewController *controller= self.childViewControllers[1];
-            if(controller.isViewLoaded==YES){
-                controller.view = nil;
-                NSLog(@"release dashboard");
-            }
+             [self releaseViewInController:@[controller]];
         }
         else{
             UIViewController *controller= self.childViewControllers[0];
-            if(controller.isViewLoaded==YES){
-                controller.view = nil;
-                NSLog(@"release cover page");
-            }
+            [self releaseViewInController:@[controller]];
         }
     }
     // Dispose of any resources that can be recreated.

@@ -23,7 +23,6 @@
 @implementation REMBuildingTrendChartViewController
 
 
-
 -(void)activedButtonChanged:(UIButton*)newButton {
     [self intervalChanged:newButton];
 }
@@ -39,7 +38,7 @@
     
     myView.toggleGroup.delegate = self;
     
-    self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
+    
     
     self.view = myView;
     self.graph = (CPTXYGraph*)myView.hostView.hostedGraph;
@@ -95,6 +94,7 @@
     if (self) {
         self.viewFrame = frame;
         self.requestUrl=REMDSBuildingTimeRangeData;
+        self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
     }
     return self;
 }
@@ -386,6 +386,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    if(self.datasource.count==6){
+        REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
+        [myView.thisMonthButton setOn:YES];
+        [self intervalChanged:myView.thisMonthButton];
+    }
 }
 
 -(NSDictionary *)assembleRequestParametersWithBuildingId:(long long)buildingId WithCommodityId:(long long)commodityID WithMetadata:(REMAverageUsageDataModel *)averageData
@@ -452,11 +458,6 @@
     [self drawLabelWithText:NSLocalizedString(@"BuildingChart_DataError",@"")];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 

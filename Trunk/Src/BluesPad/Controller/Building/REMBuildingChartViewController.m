@@ -63,18 +63,6 @@
         [parent loadChartComplete];
     }
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-    //NSLog(@"didReceiveMemoryWarning :%@",[self class]);
-    // Dispose of any resources that can be recreated.
-    if(self.isViewLoaded==YES){
-        if (self.view.superview == nil) {
-            self.view=nil;
-        }
-    }
-    
-}
+
 
 @end
