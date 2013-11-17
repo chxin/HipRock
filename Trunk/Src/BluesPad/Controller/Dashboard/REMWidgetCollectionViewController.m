@@ -37,7 +37,7 @@ static NSString *cellId=@"widgetcell";
     if(self = [super initWithCollectionViewLayout:flowlayout]){
         
         [flowlayout setMinimumInteritemSpacing:kDashboardWidgetInnerHorizonalMargin];
-        
+        [flowlayout setMinimumLineSpacing:kDashboardWidgetInnerVerticalMargin];
         [flowlayout setSectionInset:UIEdgeInsetsZero];
         
         [flowlayout setItemSize:CGSizeMake(kDashboardWidgetWidth, kDashboardWidgetHeight)];
@@ -77,10 +77,6 @@ static NSString *cellId=@"widgetcell";
     return self.dashboardInfo.widgets.count;
 }
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(0, 0, 0, 0);
-}
 
 
 

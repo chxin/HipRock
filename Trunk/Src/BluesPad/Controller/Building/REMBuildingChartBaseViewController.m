@@ -36,7 +36,7 @@ static CPTTextStyle *yAxisLabelStyle;
     return self;
 }
 
-- (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(REMError *))loadCompleted
+- (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(id,REMBusinessErrorInfo *))loadCompleted
 {
     
     NSDictionary *param = [self assembleRequestParametersWithBuildingId:buildingId WithCommodityId:commodityID WithMetadata:averageUsageData];
@@ -52,17 +52,16 @@ static CPTTextStyle *yAxisLabelStyle;
         if(self.view==nil)return ;
         [self loadDataSuccessWithData:data];
         
-        loadCompleted(nil);
+        loadCompleted(data,nil);
         
         
         
         [self stopLoadingActivity];
-    } error:^(NSError *error, id response) {
+    } error:^(NSError *remError, REMBusinessErrorInfo *bizError) {
         [self stopLoadingActivity];
-        loadCompleted(nil);
-        REMError *remerror=(REMError *)error;
-        if(remerror!=nil){
-            [self loadDataFailureWithError:remerror withResponse:response];
+        loadCompleted(nil,bizError);
+        if(bizError!=nil){
+            [self loadDataFailureWithError:bizError ];
         }
     }];
 
@@ -73,7 +72,7 @@ static CPTTextStyle *yAxisLabelStyle;
     
 }
 
-- (void)loadDataFailureWithError:(REMError *)error withResponse:(id)response
+- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error
 {
     
 }
@@ -326,6 +325,13 @@ static NSNumberFormatter* formatter;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    //NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    // Dispose of any resources that can be recreated.
+    if(self.isViewLoaded==YES){
+        if (self.view.superview == nil) {
+            self.view=nil;
+        }
+    }
+    
 }
-
 @end

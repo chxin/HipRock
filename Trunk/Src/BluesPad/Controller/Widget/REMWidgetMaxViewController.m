@@ -333,6 +333,8 @@ const static CGFloat widgetGap=10;
             return;
         }
         REMWidgetDetailViewController *vc= self.childViewControllers[willIndex.intValue];
+        
+        
        
         [vc showChart];
         
@@ -382,7 +384,13 @@ const static CGFloat widgetGap=10;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    //NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    for (int i=0; i<self.childViewControllers.count; ++i) {
+        if(self.currentWidgetIndex!=i && (self.currentWidgetIndex-1)!=i && (self.currentWidgetIndex+1)!=i){
+            REMWidgetDetailViewController *vc=self.childViewControllers[i];
+            [vc releaseChart];
+        }
+    }
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{

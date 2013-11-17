@@ -14,7 +14,7 @@
 
 @interface REMBuildingChartViewController ()
 
-@property (nonatomic,strong) REMEnergyViewData *energyData;
+//@property (nonatomic,strong) REMEnergyViewData *energyData;
 //@property (nonatomic,strong) REMBuildingChartHandler *chartHandler;
 @end
 
@@ -44,10 +44,10 @@
     //chartContainer.layer.borderWidth=1;
     [self.view addSubview:chartContainer];
     
-    if (self.energyData==nil) {
+    if (self.childViewControllers.count==0) {
         REMBuildingChartBaseViewController *handler=[[self.chartHandlerClass alloc]initWithViewFrame:chartContainer.frame];
         [self.view addSubview:handler.view];
-        [handler loadData:[self.buildingId longLongValue]  :[self.commodityId longLongValue] :nil :^(REMError *error){
+        [handler loadData:[self.buildingId longLongValue]  :[self.commodityId longLongValue] :nil :^(id data,REMBusinessErrorInfo *error){
             if(error==nil){
                 REMBuildingCommodityViewController *parent=(REMBuildingCommodityViewController *)self.parentViewController;
                 [parent loadChartComplete];
@@ -57,13 +57,24 @@
         
     }
     else{
-        
+        REMBuildingChartBaseViewController *handler=(REMBuildingChartBaseViewController *)self.childViewControllers[0];
+        [self.view addSubview:handler.view];
+        REMBuildingCommodityViewController *parent=(REMBuildingCommodityViewController *)self.parentViewController;
+        [parent loadChartComplete];
     }
 }
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    //NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    // Dispose of any resources that can be recreated.
+    if(self.isViewLoaded==YES){
+        if (self.view.superview == nil) {
+            self.view=nil;
+        }
+    }
+    
 }
 
 @end

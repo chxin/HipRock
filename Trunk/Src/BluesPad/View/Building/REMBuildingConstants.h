@@ -13,7 +13,7 @@
 
 #define kBuildingTitleTop 33
 #define kBuildingTypeTitleFontSize 14
-#define kBuildingTitleFontSize 17
+#define kBuildingTitleFontSize 20
 #define kBuildingTitleHeight 109
 #define kBuildingTitleButtonDimension 46
 #define kBuildingTitleButtonTopMargin 20

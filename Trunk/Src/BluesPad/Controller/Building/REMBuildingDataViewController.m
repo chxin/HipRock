@@ -34,7 +34,7 @@
     UIScrollView *scroll=[[UIScrollView alloc]initWithFrame:self.viewFrame];
     scroll.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, kBuildingLeftMargin, 0, 0);
     scroll.showsVerticalScrollIndicator=NO;
-    [scroll setContentSize:CGSizeMake(0, 1150)];
+    [scroll setContentSize:CGSizeMake(0, 1180)];
     self.view=scroll;
     scroll.delegate=self;
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapthis)];
@@ -210,22 +210,6 @@
     self.currentCommodityIndex=current;
     [self initCurrentCommodityView];
     
-    //if([self.commodityViewDictionary objectForKey:@(commodityId)]==nil){
-        //[self.shareButton setEnabled:NO];
-    //    [self initCommodityById:@(commodityId)];
-    //}
-    //REMBuildingCommodityView *view=    self.commodityViewDictionary[@(commodityId)];
-    //view.alpha=1;
-    //REMBuildingCommodityView *currentView= self.commodityViewDictionary[@(current)];
-    //currentView.alpha=0;
-    //if(self.isUpScroll==YES){
-    //    [self requireChartDataWithBuildingId:self.buildingInfo.building.buildingId complete:^(BOOL success){
-    //        if(success==YES){
-    //            [self.shareButton setEnabled:YES];
-    //        }
-    //    }];
-    //}
-    
 }
 
 - (void)initCurrentCommodityView{
@@ -245,12 +229,14 @@
 
 - (void)initCommodityController
 {
+    if(self.childViewControllers.count>0)return;
     int count=0;
     if (self.buildingInfo.commodityArray!=nil) {
         count=self.buildingInfo.commodityArray.count;
     }
     CGRect frame=CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.view.frame.size.width, 800);
     int i=0;
+
     for (; i<count; ++i) {
         REMCommodityModel *model = self.buildingInfo.commodityArray[i];
         REMBuildingCommodityViewController *controller=[[REMBuildingCommodityViewController alloc]init];
@@ -311,9 +297,8 @@
     self.dashboardLabel=label;
     
     
-    CGRect imgFrame=CGRectMake(168, scroll.contentSize.height-25-16, 30, 30);
-    UIImage *image=[UIImage imageNamed:@"Up"];
-    UIImageView *arrow=[[UIImageView alloc]initWithImage:image];
+    CGRect imgFrame=CGRectMake(178, scroll.contentSize.height-25-16, 30, 30);
+    UIImageView *arrow=[[UIImageView alloc]initWithImage:REMIMG_Up];
     [arrow setFrame:imgFrame];
     [self.view addSubview:arrow];
     self.arrow=arrow;
@@ -564,7 +549,12 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    //NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    if(self.isViewLoaded==YES){
+        if (self.view.superview == nil) {
+            self.view=nil;
+        }
+    }
     // Dispose of any resources that can be recreated.
 }
 

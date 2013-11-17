@@ -246,7 +246,9 @@
     [self.view addSubview:buildingType];
     
     CGFloat titleSize=kBuildingTitleFontSize;
-    
+    if(self.buildingInfo.building.name.length>25){
+        titleSize=titleSize-3;
+    }
     
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, buildingType.frame.origin.y+buildingType.frame.size.height+4, self.view.frame.size.width, titleSize)];
     titleLabel.text=self.buildingInfo.building.name ;
@@ -260,6 +262,8 @@
     titleLabel.textColor=[UIColor whiteColor];
     
     [self.view addSubview:titleLabel];
+    
+    
     
     
     UIButton *logoButton = [self getCustomerLogoButton];
@@ -542,21 +546,24 @@
 }
 
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    //NSLog(@"didReceiveMemoryWarning :%@",[self class]);
     if(self.childViewControllers.count>0){
         if(self.currentCoverStatus==REMBuildingCoverStatusCoverPage){
             UIViewController *controller= self.childViewControllers[1];
-            controller.view=nil;
-            NSLog(@"release cover page");
+            if(controller.isViewLoaded==YES){
+                controller.view = nil;
+                NSLog(@"release dashboard");
+            }
         }
         else{
             UIViewController *controller= self.childViewControllers[0];
-            controller.view=nil;
-            NSLog(@"release dashboard");
+            if(controller.isViewLoaded==YES){
+                controller.view = nil;
+                NSLog(@"release cover page");
+            }
         }
     }
     // Dispose of any resources that can be recreated.

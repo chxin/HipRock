@@ -21,7 +21,7 @@
 
 - (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame;
 
-- (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(REMError *error))loadCompleted;
+- (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(id data,REMBusinessErrorInfo *error))loadCompleted;
 - (CPTGraphHostingView*) getHostView;
 -(void)longPressedAt:(NSDate*)x;
 
@@ -41,7 +41,7 @@
 
 - (NSDictionary *)assembleRequestParametersWithBuildingId:(long long)buildingId WithCommodityId:(long long)commodityID WithMetadata:(REMAverageUsageDataModel *)averageData;
 - (void)loadDataSuccessWithData:(id)data;
-- (void)loadDataFailureWithError:(REMError *)error withResponse:(id)response;
+- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error ;
 
 
 -(void)drawLabelWithText:(NSString *)text;

@@ -198,7 +198,7 @@ const static CGFloat buildingGap=20;
                 x=trans.x;
             }
             
-            [controller.view setCenter:CGPointMake(controller.view.center.x+trans.x, controller.view.center.y)];
+            [controller.view setCenter:CGPointMake(controller.view.center.x+x, controller.view.center.y)];
         }
         
         self.cumulateX+=trans.x;
