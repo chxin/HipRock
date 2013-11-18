@@ -9,19 +9,28 @@
 #import <UIKit/UIKit.h>
 #import "REMChartSeriesIndicator.h"
 
+
 @protocol REMChartLegendItemDelegate <NSObject>
 
 -(void)legendStateChanged:(UIControlState)state onIndex:(int)index;
 
 @end
 
-@interface REMChartLegendItem : UIControl
 
-@property (nonatomic) int seriesIndex;
-@property (nonatomic,weak) NSString *seriesName;
+@interface REMChartLegendItemModel : NSObject
+
+@property (nonatomic) int index;
+@property (nonatomic) REMChartSeriesIndicatorType type;
+@property (nonatomic,weak) NSString *title;
+@property (nonatomic) BOOL tappable;
 @property (nonatomic,weak) NSObject<REMChartLegendItemDelegate> *delegate;
 
--(REMChartLegendItem *)initWithSeriesIndex:(int)index type:(REMChartSeriesIndicatorType)type andName:(NSString *)name;
+@end
+
+
+@interface REMChartLegendItem : UIControl
+
+-(REMChartLegendItem *)initWithModel:(REMChartLegendItemModel *)model;
 -(void)setSelected:(BOOL)selected;
 
 @end
