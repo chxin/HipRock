@@ -16,6 +16,8 @@
 #import "REMTrendChartTooltipView.h"
 #import "REMPieChartTooltipView.h"
 #import "REMChartSeriesIndicator.h"
+#import "REMChartLegendView.h"
+#import "REMStackChartLegendView.h"
 
 @interface REMWidgetEnergyDelegator()
 
@@ -558,36 +560,32 @@
 
 -(UIView *)prepareLegendView
 {
-    CGFloat scrollViewContentWidth = (kDMChart_LegendItemWidth + kDMChart_LegendItemLeftOffset) * self.energyData.targetEnergyData.count + kDMChart_LegendItemLeftOffset;
+    REMChartLegendView *legend = nil;
     
-    UIScrollView *view = [[UIScrollView alloc] initWithFrame:kDMChart_ToolbarHiddenFrame];
-    view.backgroundColor = [REMColor colorByHexString:kDMChart_BackgroundColor];
-    view.contentSize = CGSizeMake(scrollViewContentWidth, kDMChart_ToolbarHeight);
-    view.pagingEnabled = NO;
-    view.showsHorizontalScrollIndicator = NO;
-    view.showsVerticalScrollIndicator = NO;
-    
-    
-    for(int i=0;i<self.energyData.targetEnergyData.count; i++){
-        REMTargetEnergyData *targetData = self.energyData.targetEnergyData[i];
+    if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
+        legend = [[REMStackChartLegendView alloc] initWithItems:nil andHiddenSeries:nil];
+    }
+    else{
+        NSMutableArray *itemModels = [[NSMutableArray alloc] init];
         
-        REMChartSeriesIndicatorType indicatorType = [REMChartSeriesIndicator indicatorTypeWithDiagramType:self.widgetInfo.diagramType];
-        CGFloat x = i * (kDMChart_LegendItemWidth + kDMChart_LegendItemLeftOffset) + kDMChart_LegendItemLeftOffset;
-        CGFloat y = (kDMChart_ToolbarHeight - kDMChart_LegendItemHeight) / 2;
+        for(int i=0;i<self.energyData.targetEnergyData.count; i++){
+            REMTargetEnergyData *targetData = self.energyData.targetEnergyData[i];
+            
+            REMChartLegendItemModel *model = [[REMChartLegendItemModel alloc] init];
+            
+            model.index = i;
+            model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType:self.widgetInfo.diagramType];
+            model.title = targetData.target.name;
+            model.delegate = self;
+            model.tappable = YES;
         
-        REMChartLegendItem *legend = [[REMChartLegendItem alloc] initWithSeriesIndex:i type:indicatorType andName:targetData.target.name];
-        legend.frame = CGRectMake(x, y, kDMChart_LegendItemWidth, kDMChart_LegendItemHeight);
-        legend.delegate = self;
-        
-        if(self.hiddenSeries != nil && self.hiddenSeries.count > 0 && [self.hiddenSeries containsObject:@(i)]){
-            [legend setSelected:YES];
+            [itemModels addObject:model];
         }
         
-        
-        [view addSubview:legend];
+        legend = [[REMChartLegendView alloc] initWithItems:itemModels andHiddenSeries:self.hiddenSeries];
     }
     
-    return view;
+    return legend;
 }
 
 -(void)legendStateChanged:(UIControlState)state onIndex:(int)index
