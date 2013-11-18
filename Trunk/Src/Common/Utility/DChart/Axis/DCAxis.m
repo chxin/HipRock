@@ -14,12 +14,9 @@
     if (self) {
 //        _axisCoordinate = DCAxisCoordinateX;
 //        _axisType = DCAxisTypeMajor;
-        _lineColor = [UIColor whiteColor];
-        _lineWidth = 1.0f;
+
         _lineStyle = DCLineTypeDefault;
         _visableSeriesAmount = 0;
-        _labelFont = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-        _labelColor = [UIColor whiteColor];
 //        _labelAlign = DCAxisLabelAlignBottomCenter;
     }
     return self;

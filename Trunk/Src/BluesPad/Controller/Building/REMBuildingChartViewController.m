@@ -10,7 +10,7 @@
 #import "REMBuildingAverageChartViewController.h"
 #import "REMBuildingAirQualityChartViewController.h"
 #import "REMBuildingCommodityViewController.h"
-
+#import "REMBuildingChartContainerView2.h"
 
 @interface REMBuildingChartViewController ()
 
@@ -19,6 +19,11 @@
 @end
 
 @implementation REMBuildingChartViewController
+
+
+-(void)loadView{
+    self.view=[[REMBuildingChartContainerView2 alloc]initWithFrame:CGRectMake(0, 0, self.viewFrame.size.width,self.viewFrame.size.height)];
+}
 
 
 - (void)viewDidLoad
@@ -30,22 +35,16 @@
 }
 
 
-- (void)dealloc{
-    //REMBuildingChartBaseViewController *chartHandler=  self.childViewControllers[0];
-    //[chartHandler purgeMemory];
-    //[chartHandler removeFromParentViewController];
-}
-
 - (void)initChartContainer
 {
-    UIView *chartContainer= [[UIView alloc]initWithFrame:self.viewFrame];
+    //UIView *chartContainer= [[UIView alloc]initWithFrame:self.viewFrame];
     //NSLog(@"chartcontainer:%@",NSStringFromCGRect(chartContainer.frame));
     //chartContainer.layer.borderColor=[UIColor redColor].CGColor;
     //chartContainer.layer.borderWidth=1;
-    [self.view addSubview:chartContainer];
+    //[self.view addSubview:chartContainer];
     
     if (self.childViewControllers.count==0) {
-        REMBuildingChartBaseViewController *handler=[[self.chartHandlerClass alloc]initWithViewFrame:chartContainer.frame];
+        REMBuildingChartBaseViewController *handler=[[self.chartHandlerClass alloc]initWithViewFrame:self.viewFrame];
         [self.view addSubview:handler.view];
         [handler loadData:[self.buildingId longLongValue]  :[self.commodityId longLongValue] :nil :^(id data,REMBusinessErrorInfo *error){
             if(error==nil){

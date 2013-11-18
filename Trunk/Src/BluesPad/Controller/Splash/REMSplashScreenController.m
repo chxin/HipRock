@@ -16,6 +16,7 @@
 #import "REMTrend.h"
 #import "REMTestChartView.h"
 #import "REMDimensions.h"
+#import "DChartColumnWrapper.h"
 
 @interface REMSplashScreenController ()
 
@@ -86,6 +87,7 @@
     for (int sIndex = 0; sIndex < 10; sIndex++) {
         NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
         for (int i = 0; i < 10000; i++) {
+            if (i%5==0) continue;
             REMEnergyData* data = [[REMEnergyData alloc]init];
             data.quality = REMEnergyDataQualityGood;
             data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
@@ -96,13 +98,14 @@
         sData.energyData = energyDataArray;
         sData.target = [[REMEnergyTargetModel alloc]init];
         sData.target.uomId = 0;
+        sData.target.uomName = [NSString stringWithFormat:@"%i", sIndex%3];
         [sereis addObject:sData];
     }
     
     energyViewData.targetEnergyData = sereis;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
-    REMColumnWidgetWrapper* columnWidget = [[REMColumnWidgetWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
+    DChartColumnWrapper* columnWidget = [[DChartColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
     columnWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:columnWidget.view];
 }
@@ -276,7 +279,7 @@
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     
-#if __IPHONE_7_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
+#if  __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_6_1
     return UIStatusBarStyleLightContent;
 #else
     return UIStatusBarStyleDefault;

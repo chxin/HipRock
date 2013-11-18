@@ -22,6 +22,7 @@
     if (self) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
         _numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        self.backgroundColor = [UIColor clearColor].CGColor;
     }
     return self;
 }
@@ -52,9 +53,7 @@
 -(void)didYIntervalChanged:(double)oldInterval newInterval:(double)newInterval yRange:(DCRange*)yRange {
     if (self.fontRef == nil) {
         self.fontSize = self.font.pointSize;
-        self.fontRef = CTFontCreateWithName((CFStringRef)self.font.fontName,
-                                            self.fontSize,
-                                            NULL);
+        self.fontRef = CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, self.fontSize,  NULL);
         CGSize size = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.font];
         self.labelWidth = size.width;
         self.labelHeight = size.height;
