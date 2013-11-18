@@ -21,9 +21,9 @@
 #import "REMWidgetMaxViewController.h"
 #import "REMWidgetCellViewController.h"
 #import "REMBuildingShareViewController.h"
+#import "REMDimensions.h"
 
-
-const static CGFloat buildingGap=10;
+const static CGFloat buildingGap=20;
 
 @interface REMBuildingViewController ()
 //@property (nonatomic) NSUInteger currentIndex;
@@ -77,7 +77,7 @@ const static CGFloat buildingGap=10;
     self.speedBase=2000;
 	self.customImageLoadedDictionary = [[NSMutableDictionary alloc]initWithCapacity:self.buildingInfoArray.count];
     self.view.backgroundColor=[UIColor blackColor];
-    [self.view setFrame:CGRectMake(0, 0, kImageWidth, kImageHeight)];
+    [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
     self.currentScrollOffset=-kBuildingCommodityViewTop;
     
     self.cumulateX=0;
@@ -198,7 +198,7 @@ const static CGFloat buildingGap=10;
                 x=trans.x;
             }
             
-            [controller.view setCenter:CGPointMake(controller.view.center.x+trans.x, controller.view.center.y)];
+            [controller.view setCenter:CGPointMake(controller.view.center.x+x, controller.view.center.y)];
         }
         
         self.cumulateX+=trans.x;

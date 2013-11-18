@@ -13,7 +13,7 @@
 #import "REMWidgetCellViewController.h"
 #import "REMDashboardController.h"
 #import "REMWidgetCollectionViewController.h"
-
+#import "REMDimensions.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -54,6 +54,8 @@
     UIButton *button=cellController.view.subviews[0];
     UIImageView *cloneView=[[UIImageView alloc]initWithImage:[REMImageHelper imageWithView:button]];
     destController.currentWidgetIndex=collectionController.currentMaxWidgetIndex;
+    //cloneView.layer.borderColor=[UIColor redColor].CGColor;
+    //cloneView.layer.borderWidth=1;
     
     CGRect frame=[cellController.view convertRect:cellController.view.frame fromView:srcController.view];
     CGRect newFrame= CGRectMake(frame.origin.x*-1, frame.origin.y*-1, frame.size.width, frame.size.height);
@@ -69,7 +71,7 @@
 
     
     
-    CGRect retFrame= CGRectMake(0, 0, 1024, 748);
+    CGRect retFrame= CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight));
     
     [destImageView setFrame:retFrame];
     destImageView.alpha=0;

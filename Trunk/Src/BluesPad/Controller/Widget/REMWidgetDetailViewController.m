@@ -16,7 +16,7 @@
 #import "REMStackColumnWidgetWrapper.h"
 #import "REMDatePickerViewController.h"
 #import "REMWidgetBizDelegatorBase.h"
-
+#import "REMDimensions.h"
 
 const static CGFloat kWidgetBackButtonLeft=25;
 const static CGFloat kWidgetBackButtonTop=18;
@@ -24,6 +24,7 @@ const static CGFloat kWidgetBackButtonWidthHeight=32;
 const static CGFloat kWidgetTitleLeftMargin=10;
 const static CGFloat kWidgetTitleHeight=30;
 const static CGFloat kWidgetTitleFontSize=18;
+const static CGFloat kWidgetShareTitleMargin=2;
 const static CGFloat kWidgetShareTitleHeight=14;
 const static CGFloat kWidgetShareTitleFontSize=14;
 
@@ -61,7 +62,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 	// Do any additional setup after loading the view.
     [self.view setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
     
-    [self.view setFrame:CGRectMake(0, 0, 1024, 748)];
+    [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
     
     self.bizDelegator=[REMWidgetBizDelegatorBase bizDelegatorByWidgetInfo:self.widgetInfo];
     self.bizDelegator.view=self.view;
@@ -71,7 +72,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     //self.view.layer.borderColor=[UIColor redColor].CGColor;
     //self.view.layer.borderWidth=1;
     
-    UIView *titleContainer=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 63)];
+    UIView *titleContainer=[[UIView alloc]initWithFrame:CGRectMake(0, REMDMCOMPATIOS7(0), self.view.frame.size.width, 63)];
     [titleContainer setBackgroundColor:[REMColor colorByHexString:@"#f8f8f8"]];
     
     UIButton *backButton=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -79,6 +80,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     [backButton setImage:[UIImage imageNamed:@"Back_Chart"] forState:UIControlStateNormal];
     backButton.adjustsImageWhenHighlighted=YES;
     backButton.showsTouchWhenHighlighted=YES;
+    
     [backButton addTarget:self.parentViewController action:@selector(popToBuildingCover) forControlEvents:UIControlEventTouchUpInside];
     [titleContainer addSubview:backButton];
     self.backButton=backButton;
@@ -86,16 +88,18 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     
     CGRect frame;
     if(self.widgetInfo.shareInfo!=nil && [self.widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
-        frame=CGRectMake(backButton.frame.origin.x+backButton.frame.size.width+kWidgetTitleLeftMargin, backButton.frame.origin.y, self.view.frame.size.width, kWidgetShareTitleHeight);
+        frame=CGRectMake(backButton.frame.origin.x+backButton.frame.size.width+kWidgetTitleLeftMargin, backButton.frame.origin.y, self.view.frame.size.width, kWidgetShareTitleFontSize);
         UILabel *shareTitle=[[UILabel alloc]initWithFrame:frame];
         [shareTitle setBackgroundColor:[UIColor clearColor]];
+        shareTitle.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetShareTitleFontSize];
+        shareTitle.textColor=[REMColor colorByHexString:@"#a2a2a2"];
         NSString *shareName=self.widgetInfo.shareInfo.userRealName;
         NSString *shareTel=self.widgetInfo.shareInfo.userTelephone;
         NSString *date=[REMTimeHelper formatTimeFullDay:self.widgetInfo.shareInfo.shareTime];
         NSString *userTitle=self.widgetInfo.shareInfo.userTitleComponent;
         shareTitle.text=[NSString stringWithFormat:NSLocalizedString(@"Widget_ShareTitle", @""),shareName,userTitle,date,shareTel];
         [titleContainer addSubview:shareTitle];
-        frame=CGRectMake(frame.origin.x, frame.origin.y+frame.size.height+9, frame.size.width, kWidgetTitleHeight);
+        frame=CGRectMake(frame.origin.x, frame.origin.y+frame.size.height+kWidgetShareTitleMargin, frame.size.width, kWidgetTitleHeight);
     }
     else{
         frame=CGRectMake(backButton.frame.origin.x+backButton.frame.size.width+kWidgetTitleLeftMargin, backButton.frame.origin.y, self.view.frame.size.width, kWidgetTitleHeight);
@@ -116,6 +120,10 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 - (void)showChart
 {
     [self.bizDelegator showChart];
+}
+
+- (void)releaseChart{
+    [self.bizDelegator releaseChart];
 }
 
 - (void)didReceiveMemoryWarning

@@ -19,5 +19,5 @@
 
 
 - (void)showChart;
-
+-(void)releaseChart;
 @end

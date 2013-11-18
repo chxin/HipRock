@@ -346,8 +346,8 @@
 
 #pragma mark - IOS7 style
 -(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
-    //return UIStatusBarStyleDefault;
+    //return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 @end

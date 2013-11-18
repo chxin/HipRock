@@ -41,6 +41,8 @@
     self.timeRangeArray= [self timeRangeToModelArray: viewOption[@"TimeRanges"]];
     self.tagIdArray= [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:tagIds]];
     self.step=[self stepTypeByNumber:step];
+    
+    NSDictionary *dataOption=viewOption[@"DataOption"];
 }
 
 

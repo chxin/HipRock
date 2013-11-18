@@ -88,6 +88,9 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     
     //UILongPressGestureRecognizer *longPressGuesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
     //[self.view addGestureRecognizer:longPressGuesture];
+    if(self.averageData!=nil){
+        [self loadChart];
+    }
 }
 
 
@@ -116,7 +119,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     }
 }
 
-- (void)loadDataFailureWithError:(REMError *)error withResponse:(id)response{
+- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error {
     NSString *text = NSLocalizedString(@"BuildingChart_DataError", @"");
     [self drawLabelWithText:text];
 }

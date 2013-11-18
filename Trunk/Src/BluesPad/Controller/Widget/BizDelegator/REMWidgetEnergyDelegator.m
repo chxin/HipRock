@@ -111,6 +111,13 @@
     }
 }
 
+- (void)releaseChart{
+    if(self.chartWrapper!=nil){
+        [self.chartWrapper destroyView];
+        self.chartWrapper=nil;
+    }
+}
+
 - (void) showEnergyChart{
     if(self.chartWrapper!=nil){
         return;
@@ -124,7 +131,10 @@
     REMAbstractChartWrapper  *widgetWrapper;
     if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
+        REMTrendChartView *trendChart= (REMTrendChartView *)widgetWrapper.view;
+        trendChart.delegate = self;
+        
+        
     } else if (widgetType == REMDiagramTypeColumn) {
         widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         ((REMTrendChartView *)widgetWrapper.view).delegate = self;
@@ -139,6 +149,12 @@
         ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     }
     if (widgetWrapper != nil) {
+        if([widgetWrapper isKindOfClass:[REMTrendWidgetWrapper class]]==YES){
+            if(self.widgetInfo.contentSyntax.calendarType!=REMCalendarTypeNone){
+                REMTrendWidgetWrapper *trend=(REMTrendWidgetWrapper *)widgetWrapper;
+                trend.calenderType=self.widgetInfo.contentSyntax.calendarType;
+            }
+        }
         [self.chartContainer addSubview:widgetWrapper.view];
         self.chartWrapper=widgetWrapper;
     }
@@ -236,7 +252,7 @@
     
     UISegmentedControl *control= [[UISegmentedControl alloc] initWithItems:titleList];
     
-    CGFloat x=1024-kWidgetChartLeftMargin*2-list.count*kWidgetStepSingleButtonWidth;
+    CGFloat x=kDMScreenWidth-kWidgetChartLeftMargin*2-list.count*kWidgetStepSingleButtonWidth;
     
     CGRect frame= CGRectMake(x, self.timePickerButton.frame.origin.y, list.count*kWidgetStepSingleButtonWidth, kWidgetStepButtonHeight);
     
@@ -436,10 +452,8 @@
     [legendControl setFrame:CGRectMake(kLegendSearchSwitcherLeft, kLegendSearchSwitcherTop, kLegendSearchSwitcherWidth, kLegendSearchSwitcherHeight)];
     [legendControl setSegmentedControlStyle:UISegmentedControlStylePlain];
 
-    UIImage *search=[UIImage imageNamed:@"DateView_Chart"];
-    UIImage *legend=[UIImage imageNamed:@"Legend_Chart"];
-    [legendControl setImage:search forSegmentAtIndex:0];
-    [legendControl setImage:legend forSegmentAtIndex:1];
+    [legendControl setImage:REMIMG_DateView_Chart forSegmentAtIndex:0];
+    [legendControl setImage:REMIMG_Legend_Chart forSegmentAtIndex:1];
     //[legendControl setBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     //[legendControl setBackgroundColor:[UIColor clearColor]];
     [legendControl setSelectedSegmentIndex:0];
@@ -457,8 +471,8 @@
     [timePickerButton setBackgroundColor:[REMColor colorByHexString:@"#9d9d9d"]];
     timePickerButton.layer.cornerRadius=4;
     
-    [timePickerButton setImage:[UIImage imageNamed:@"DatePicker_Chart"] forState:UIControlStateNormal];
-    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(8, 5, 8, kWidgetDatePickerWidth-40)];
+    [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];
+    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-40)];
     timePickerButton.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetDatePickerTitleSize];
     [timePickerButton setTitleColor:[REMColor colorByHexString:@"#5e5e5e"] forState:UIControlStateNormal];
     
