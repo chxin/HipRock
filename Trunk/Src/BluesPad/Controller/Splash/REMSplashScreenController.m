@@ -276,9 +276,10 @@
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     
-#if __IPHONE_3_2 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-    //return UIStatusBarStyleLightContent;
-    //return UIStatusBarStyleDefault;
+#if __IPHONE_7_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
+    return UIStatusBarStyleLightContent;
+#else
+    return UIStatusBarStyleDefault;
 #endif
 }
 
