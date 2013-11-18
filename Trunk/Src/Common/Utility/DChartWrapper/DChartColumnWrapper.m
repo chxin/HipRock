@@ -13,7 +13,7 @@
 
 -(DChartColumnWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style {
     self = [super init];
-    if (self) {
+    if (self && energyViewData.targetEnergyData.count != 0) {
         _energyViewData = energyViewData;
         
         DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) beginHRange:[[DCRange alloc]initWithLocation:-0.5 length:10] stacked:NO];
@@ -27,6 +27,7 @@
         processor.step = widgetSyntax.step.integerValue;
         NSRange range = [widgetSyntax.xtype rangeOfString : @"multitimespan"];
         BOOL allSeriesUserGlobalTime = (range.location == NSNotFound);
+        DCRange* globalRange = nil;
         if (allSeriesUserGlobalTime) {
             NSDate* processorBaseTime;
             NSDate* globalEndDate;
@@ -44,6 +45,8 @@
                 }
             }
             processor.baseDate = processorBaseTime;
+            globalRange = [[DCRange alloc]initWithLocation:0 length:[processor processX:globalEndDate].doubleValue];
+        } else {
         }
         
         NSMutableArray* seriesList = [[NSMutableArray alloc]initWithCapacity:energyViewData.targetEnergyData.count];
@@ -60,6 +63,12 @@
                 DCDataPoint* p = [[DCDataPoint alloc]init];
                 p.value = point.dataValue;
                 [datas addObject:p];
+            }
+            if (targetEnergy.energyData.count > 0) {
+                double rangeLength = [processor processX:[targetEnergy.energyData[targetEnergy.energyData.count-1] localTime]].doubleValue;
+                if (globalRange == nil || globalRange.length < rangeLength) {
+                    globalRange = [[DCRange alloc]initWithLocation:0 length:rangeLength];
+                }
             }
             DCColumnSeries* s = [[DCColumnSeries alloc]initWithData:datas];
             s.xAxis = view.xAxis;
@@ -83,6 +92,7 @@
             }
             [seriesList addObject:s];
         }
+        view.globalHRange = globalRange;
         view.seriesList = seriesList;
         
         view.userInteractionEnabled = style.userInteraction;
