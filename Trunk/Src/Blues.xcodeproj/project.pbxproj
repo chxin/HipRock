@@ -3470,6 +3470,7 @@
 				7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */,
 				7A153C5C17AA489600413D3C /* REMBuildingModel.m in Sources */,
 				7A644FDD1839D62C004B5C53 /* REMStackChartLegendView.m in Sources */,
+				EFD947031839DCBB00E9EC50 /* DCDataPoint.m in Sources */,
 				7A153C5D17AA489600413D3C /* REMDashboardObj.m in Sources */,
 				7A153C5E17AA489600413D3C /* REMFavoriteDashboardObj.m in Sources */,
 				7A153C5F17AA489600413D3C /* REMWidgetContentSyntax.m in Sources */,
