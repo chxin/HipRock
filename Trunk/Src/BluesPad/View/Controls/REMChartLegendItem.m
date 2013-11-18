@@ -20,6 +20,10 @@
 
 @interface REMChartLegendItem()
 
+@property (nonatomic) BOOL tappable;
+@property (nonatomic) int seriesIndex;
+@property (nonatomic,weak) NSObject<REMChartLegendItemDelegate> *delegate;
+
 @property (nonatomic,weak) REMChartSeriesIndicator *indicator;
 @property (nonatomic,weak) UILabel *label;
 
@@ -28,12 +32,14 @@
 
 @implementation REMChartLegendItem
 
--(REMChartLegendItem *)initWithSeriesIndex:(int)index type:(REMChartSeriesIndicatorType)type andName:(NSString *)name
+-(REMChartLegendItem *)initWithModel:(REMChartLegendItemModel *)model
 {
     self = [super initWithFrame:kREMLegendItemFrame];
     if(self){
-        self.seriesIndex = index;
-        self.seriesName = name;
+        self.seriesIndex = model.index;
+        self.delegate = model.delegate;
+        self.tappable = model.tappable;
+//        self.seriesName = name;
         
 //        self.layer.borderColor = [UIColor darkGrayColor].CGColor;
 //        self.layer.borderWidth = 1.0f;
@@ -42,7 +48,7 @@
         self.backgroundColor = [REMColor colorByHexString:kDMChart_LegendItemBackgroundColor];
         
         //add indicator
-        REMChartSeriesIndicator *indicator = [REMChartSeriesIndicator indicatorWithType:type andColor:[REMColor colorByIndex:index].uiColor];
+        REMChartSeriesIndicator *indicator = [REMChartSeriesIndicator indicatorWithType:model.type andColor:[REMColor colorByIndex:model.index].uiColor];
         indicator.frame = kREMLegendInnerIndicatorFrame;
         [self addSubview:indicator];
         self.indicator = indicator;
@@ -51,7 +57,7 @@
         UILabel *label = [[UILabel alloc] initWithFrame:kREMLegendInnerLabelFrame];
         label.backgroundColor = [UIColor clearColor];
         label.font = [UIFont systemFontOfSize:kDMChart_LegendLabelFontSize];
-        label.text = name;
+        label.text = model.title;
         label.textColor = [REMColor colorByHexString:kDMChart_LegendLabelFontColor];
         [self addSubview:label];
         self.label = label;
@@ -84,6 +90,9 @@
 
 -(void)legendTapped:(UITapGestureRecognizer *)gesture
 {
+    if(self.tappable == NO)
+        return;
+    
     if(self.state == UIControlStateNormal)
         [self setSelected:YES];
     else
@@ -115,5 +124,12 @@
     [super setSelected:selected];
     [self updateState];
 }
+
+@end
+
+
+@implementation REMChartLegendItemModel
+
+
 
 @end
