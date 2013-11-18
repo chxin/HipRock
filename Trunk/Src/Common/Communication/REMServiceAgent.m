@@ -95,6 +95,11 @@ static int requestTimeout = 45; //(s)
             
             error(remError,remErrorInfo);
             NetworkDecreaseActivity();
+            
+            if(maskContainer!=nil && maskManager != nil) //if mask has already shown
+            {
+                [maskManager hideMask];
+            }
             return;
         }
         
@@ -145,20 +150,16 @@ static int requestTimeout = 45; //(s)
         
         if(errorInfo.code == -1001){
             [REMAlertHelper alert:@"数据加载超时"];
-            NetworkDecreaseActivity();
-            return;
         }
-        if(errorInfo.code == -999){
+        else if(errorInfo.code == -999){
             REMLogInfo(@"Request canceled");
-            NetworkDecreaseActivity();
-            return;
         }
-        
-        if(error)
-        {
-            error(errorInfo,operation.responseString);
+        else{
+            if(error)
+            {
+                error(errorInfo,operation.responseString);
+            }
         }
-        
         if(maskContainer!=nil && maskManager != nil)
         {
             [maskManager hideMask];

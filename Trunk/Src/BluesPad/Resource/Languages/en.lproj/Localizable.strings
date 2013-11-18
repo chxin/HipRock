@@ -91,8 +91,16 @@
 "Widget_TimePickerTime"="时间";
 "Widget_TimePickerStart"="起始";
 "Widget_TimePickerEnd"="终止";
-"Widget_StepError"="不支持此步长，换个步长试试";
+"Widget_StepErrorHour"="按小时";
+"Widget_StepErrorDay"="按天";
+"Widget_StepErrorWeek"="按周";
+"Widget_StepErrorMonth"="按月";
+"Widget_StepErrorYear"="按年";
+"Widget_StepError"="所选数据点不支持%@的步长显示，换个步长试试。"; //所选数据点不支持按小时，按天，按周的步长显示，换个步长试试。
 "Widget_ShareTitle"="分享来源:%@ %@ %@ 电话:%@"; //分享来源：张三 工程师 2012-10-10 电话：13800138000
+"Widget_CalendarTimeError"="看不到日历背景色？换个时间试试";
+"Widget_CalendarStepError"="当前步长不支持显示%@背景色"; //当前步长不支持显示冷暖季背景色
+
 
 //Weibo, prefix: Weibo_
 "Weibo_WindowTitle"="新浪微博";
