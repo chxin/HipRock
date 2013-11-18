@@ -119,6 +119,8 @@
 
 
 //Chart, prefix: Chart_
+"Chart_TargetValue" = "目标值";
+"Chart_BaselineValue" = "基准值";
 "Chart_TOUPeak" = "峰时";
 "Chart_TOUValley" = "谷时";
 "Chart_TOUPlain" = "平时";
