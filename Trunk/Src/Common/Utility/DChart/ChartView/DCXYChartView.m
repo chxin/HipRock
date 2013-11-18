@@ -107,18 +107,22 @@
         [self.graphContext addHRangeObsever:self.columnLayer1];
         [self.graphContext addY1RangeObsever:self.columnLayer1];
         self._yLabelLayer1 = [self createYLabelLayer:self.yAxis1];
-        self._yLabelLayer1.frame = CGRectMake(self.plotRect.size.width+self.plotRect.origin.x, 0, self.y1LabelLayerSize.width, self.y1LabelLayerSize.height);
         self._yLabelLayer1.isMajorAxis = (self._yLabelLayer0 == nil);
+        self._yLabelLayer1.frame = CGRectMake(self._yLabelLayer1.isMajorAxis ? 0 : self.plotRect.size.width+self.plotRect.origin.x, 0, self.y1LabelLayerSize.width, self.y1LabelLayerSize.height);
         [self.graphContext addY1IntervalObsever:self._yLabelLayer1];
         [self._yLabelLayer1 setNeedsDisplay];
     }
     if (self.coordinate2) {
-        self.columnLayer2 = [self createColumnLayer:self.coordinate1];
+        self.columnLayer2 = [self createColumnLayer:self.coordinate2];
         [self.graphContext addHRangeObsever:self.columnLayer2];
         [self.graphContext addY2RangeObsever:self.columnLayer2];
         self._yLabelLayer2 = [self createYLabelLayer:self.yAxis2];
-        self._yLabelLayer1.isMajorAxis = (self._yLabelLayer0 == nil && self._yLabelLayer1 == nil);
-        self._yLabelLayer2.frame = CGRectMake(0, 0, self.y2LabelLayerSize.width, self.y2LabelLayerSize.height);
+        self._yLabelLayer2.isMajorAxis = (self._yLabelLayer0 == nil && self._yLabelLayer1 == nil);
+        CGFloat x = 0;
+        if (!self._yLabelLayer2.isMajorAxis) {
+            x = (self._yLabelLayer1 == nil) ? (self.plotRect.size.width+self.plotRect.origin.x) : (self.plotRect.size.width+self.plotRect.origin.x + self.y1LabelLayerSize.width);
+        }
+        self._yLabelLayer2.frame = CGRectMake(x, 0, self.y2LabelLayerSize.width, self.y2LabelLayerSize.height);
         [self.graphContext addY2IntervalObsever:self._yLabelLayer2];
         [self._yLabelLayer2 setNeedsDisplay];
     }
@@ -177,14 +181,6 @@
 }
 
 -(void)drawAxisLines {
-//    self._axisLayer = [[_DCAxisLayer alloc]init];
-//    self._axisLayer.graphContext = self.graphContext;
-//    self._axisLayer.frame = self.bounds;
-//    self._axisLayer.xAxis = self.xAxis;
-//    self._axisLayer.yMajorAxis = self.yAxis0;
-//    self._axisLayer.ySecondaryAxis = self.yAxis1;
-//    self._axisLayer.yThirdlyAxis = self.yAxis2;
-    
     float plotSpaceLeft = 0;
     float plotSpaceRight = self.frame.size.width;
     float plotSpaceTop = 0;
@@ -203,10 +199,11 @@
     
     if (self.yAxis1 && self.yAxis1.visableSeriesAmount > 0) {
         axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.yAxis1.labelFont];
-        plotSpaceRight = plotSpaceRight - axisSize.width - self.yAxis1.lineWidth - kDCLabelToLine;
+        CGFloat axisWidth = axisSize.width + self.yAxis2.lineWidth + kDCLabelToLine;
+        plotSpaceRight = plotSpaceRight - axisWidth;
         self.yAxis1.startPoint = CGPointMake(plotSpaceRight, 0);
         self.yAxis1.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
-        self.y1LabelLayerSize = CGSizeMake(plotSpaceRight, plotSpaceBottom);
+        self.y1LabelLayerSize = CGSizeMake(axisWidth, plotSpaceBottom);
     }
     if (self.yAxis2 && self.yAxis2.visableSeriesAmount > 0) {
         axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.yAxis2.labelFont];
@@ -220,8 +217,6 @@
     self.xAxis.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
     
     self.plotRect = CGRectMake(plotSpaceLeft, plotSpaceTop, plotSpaceRight-plotSpaceLeft, plotSpaceBottom-plotSpaceTop);
-//    [self.layer addSublayer:self._axisLayer];
-//    [self._axisLayer setNeedsDisplay];
 }
 
 -(void)drawHGridline {
@@ -234,11 +229,6 @@
     [self.layer addSublayer:self._hGridlineLayer];
     [self._hGridlineLayer setNeedsDisplay];
 }
-//static bool h;
-//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//    h = !h;
-//    [self setSeries:self.seriesList[0] hidden:h];
-//}
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     if ([event touchesForView:self].count != 1) return;
@@ -259,7 +249,7 @@
         
         for (DCXYSeries* s in seriesList) {
             s.yAxis.visableSeriesAmount++;
-            if (s.color == nil) s.color = [REMColor colorByIndex:seriesIndex];
+            if (s.color == nil) s.color = [REMColor colorByIndex:seriesIndex].uiColor;
             if ([s isKindOfClass:[DCColumnSeries class]]) {
                 if (self.graphContext.stacked) {
                     ((DCColumnSeries*)s).xRectStartAt = - 0.5 + kDCColumnOffset;

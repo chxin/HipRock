@@ -16,6 +16,7 @@
 #import "REMTrend.h"
 #import "REMTestChartView.h"
 #import "REMDimensions.h"
+#import "DChartColumnWrapper.h"
 
 @interface REMSplashScreenController ()
 
@@ -38,38 +39,38 @@
     self.navigationController.navigationBarHidden = YES;
     //    [self.view addSubview:[[REMTrend alloc]initWithFrame:CGRectMake(100, 0, 924, 708)]];
     
-//    [self oscarTest];
+    [self oscarTest];
     
     
     //decide where to go
-    [self recoverAppContext];
-    
-    if([self isAlreadyLogin]){
-        [self breathAnimation:^(void){
-            [self breathAnimation:nil];
-            
-            SEL selector = @selector(breathAnimation:);
-            
-            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:selector]];
-            [invocation setTarget:self];
-            [invocation setSelector:selector];
-            
-            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
-            
-            [self showMapView:^(void){
-                if(timer != nil){
-                    if([timer isValid])
-                        [timer invalidate];
-                }
-            }];
-        }];
-    }
-    else{
-        [self breathAnimation:^(void){
-            [self.logoView setHidden:YES];
-            [self showLoginView:YES];
-        }];
-    }
+//    [self recoverAppContext];
+//    
+//    if([self isAlreadyLogin]){
+//        [self breathAnimation:^(void){
+//            [self breathAnimation:nil];
+//            
+//            SEL selector = @selector(breathAnimation:);
+//            
+//            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:selector]];
+//            [invocation setTarget:self];
+//            [invocation setSelector:selector];
+//            
+//            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
+//            
+//            [self showMapView:^(void){
+//                if(timer != nil){
+//                    if([timer isValid])
+//                        [timer invalidate];
+//                }
+//            }];
+//        }];
+//    }
+//    else{
+//        [self breathAnimation:^(void){
+//            [self.logoView setHidden:YES];
+//            [self showLoginView:YES];
+//        }];
+//    }
 }
 
 -(void)oscarTest {
@@ -86,6 +87,7 @@
     for (int sIndex = 0; sIndex < 10; sIndex++) {
         NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
         for (int i = 0; i < 10000; i++) {
+            if (i%5==0) continue;
             REMEnergyData* data = [[REMEnergyData alloc]init];
             data.quality = REMEnergyDataQualityGood;
             data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
@@ -96,13 +98,14 @@
         sData.energyData = energyDataArray;
         sData.target = [[REMEnergyTargetModel alloc]init];
         sData.target.uomId = 0;
+        sData.target.uomName = [NSString stringWithFormat:@"%i", sIndex%3];
         [sereis addObject:sData];
     }
     
     energyViewData.targetEnergyData = sereis;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
-    REMColumnWidgetWrapper* columnWidget = [[REMColumnWidgetWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
+    DChartColumnWrapper* columnWidget = [[DChartColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
     columnWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:columnWidget.view];
 }

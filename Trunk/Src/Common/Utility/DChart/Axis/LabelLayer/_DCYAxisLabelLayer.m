@@ -22,6 +22,7 @@
     if (self) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
         _numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        self.backgroundColor = [UIColor clearColor].CGColor;
     }
     return self;
 }

@@ -12,6 +12,7 @@
 
 -(void)drawInContext:(CGContextRef)ctx {
     self.backgroundColor = [UIColor clearColor].CGColor;
+    self.contentsScale = [[UIScreen mainScreen] scale];
     if (self.graphContext && self.graphContext.hGridlineAmount > 0) {
         while (self.sublayers.count > 0) {
             [self.sublayers[0] removeFromSuperlayer];

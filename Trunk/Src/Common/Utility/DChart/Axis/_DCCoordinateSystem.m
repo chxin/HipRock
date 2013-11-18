@@ -66,7 +66,6 @@
             double yInterval = [DCUtility getYInterval:currentYRange parts:self.graphContext.hGridlineAmount];
             currentYRange = yInterval * self.graphContext.hGridlineAmount * kDCReservedSpace;
             DCRange* range = [[DCRange alloc]initWithLocation:0 length:currentYRange];
-            NSLog(@"round y to:%f %f", self.visableYMax, currentYRange);
             if (self.index == 0 && ![DCRange isRange:self.graphContext.y0Range equalTo:range]) {
                 self.graphContext.y0Range = range;
                 self.graphContext.y0Interval = yInterval;

@@ -20,6 +20,7 @@
     self = [super init];
     if (self) {
         self.masksToBounds = YES;
+        self.backgroundColor = [UIColor clearColor].CGColor;
     }
     return self;
 }
