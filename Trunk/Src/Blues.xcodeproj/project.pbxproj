@@ -467,6 +467,23 @@
 		EF9ACF641806821500097661 /* REMYFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9ACF631806821500097661 /* REMYFormatter.m */; };
 		EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9F28B017CB54DE00E775ED /* REMStatusBar.m */; };
 		EFD6F093181F9C6200AE0A57 /* REMBarPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD6F092181F9C6200AE0A57 /* REMBarPlot.m */; };
+		EFD946FC1839DCBB00E9EC50 /* _DCLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D11839DCBB00E9EC50 /* _DCLayer.m */; };
+		EFD946FD1839DCBB00E9EC50 /* _DCMagicLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D31839DCBB00E9EC50 /* _DCMagicLayer.m */; };
+		EFD946FE1839DCBB00E9EC50 /* _DCCoordinateSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D61839DCBB00E9EC50 /* _DCCoordinateSystem.m */; };
+		EFD946FF1839DCBB00E9EC50 /* DCAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D81839DCBB00E9EC50 /* DCAxis.m */; };
+		EFD947001839DCBB00E9EC50 /* _DCXAxisLabelLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946DB1839DCBB00E9EC50 /* _DCXAxisLabelLayer.m */; };
+		EFD947011839DCBB00E9EC50 /* _DCYAxisLabelLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946DD1839DCBB00E9EC50 /* _DCYAxisLabelLayer.m */; };
+		EFD947021839DCBB00E9EC50 /* DCXYChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946E01839DCBB00E9EC50 /* DCXYChartView.m */; };
+		EFD947031839DCBB00E9EC50 /* DCDataPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946E41839DCBB00E9EC50 /* DCDataPoint.m */; };
+		EFD947041839DCBB00E9EC50 /* DCContext.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946E61839DCBB00E9EC50 /* DCContext.m */; };
+		EFD947051839DCBB00E9EC50 /* DCRange.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946E81839DCBB00E9EC50 /* DCRange.m */; };
+		EFD947061839DCBB00E9EC50 /* _DCHGridlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946EB1839DCBB00E9EC50 /* _DCHGridlineLayer.m */; };
+		EFD947071839DCBB00E9EC50 /* _DCColumnsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946EE1839DCBB00E9EC50 /* _DCColumnsLayer.m */; };
+		EFD947081839DCBB00E9EC50 /* DCColumnSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F01839DCBB00E9EC50 /* DCColumnSeries.m */; };
+		EFD947091839DCBB00E9EC50 /* DCLineSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F21839DCBB00E9EC50 /* DCLineSeries.m */; };
+		EFD9470A1839DCBB00E9EC50 /* DCSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F41839DCBB00E9EC50 /* DCSeries.m */; };
+		EFD9470B1839DCBB00E9EC50 /* DCXYSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F61839DCBB00E9EC50 /* DCXYSeries.m */; };
+		EFD9470C1839DCBB00E9EC50 /* DCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F91839DCBB00E9EC50 /* DCUtility.m */; };
 		EFDAACB91803F27F008BC9AF /* REMPieChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACB81803F27F008BC9AF /* REMPieChartWrapper.m */; };
 		EFDAACBC1803F6C2008BC9AF /* REMChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */; };
 		EFDAACBF18052E0C008BC9AF /* REMPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */; };
@@ -1062,6 +1079,40 @@
 		EF9F28B017CB54DE00E775ED /* REMStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMStatusBar.m; sourceTree = "<group>"; };
 		EFD6F091181F9C6200AE0A57 /* REMBarPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBarPlot.h; sourceTree = "<group>"; };
 		EFD6F092181F9C6200AE0A57 /* REMBarPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBarPlot.m; sourceTree = "<group>"; };
+		EFD946D01839DCBB00E9EC50 /* _DCLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLayer.h; path = Common/Utility/DChart/_DCLayer.h; sourceTree = "<group>"; };
+		EFD946D11839DCBB00E9EC50 /* _DCLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLayer.m; path = Common/Utility/DChart/_DCLayer.m; sourceTree = "<group>"; };
+		EFD946D21839DCBB00E9EC50 /* _DCMagicLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCMagicLayer.h; path = Common/Utility/DChart/_DCMagicLayer.h; sourceTree = "<group>"; };
+		EFD946D31839DCBB00E9EC50 /* _DCMagicLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCMagicLayer.m; path = Common/Utility/DChart/_DCMagicLayer.m; sourceTree = "<group>"; };
+		EFD946D51839DCBB00E9EC50 /* _DCCoordinateSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCCoordinateSystem.h; sourceTree = "<group>"; };
+		EFD946D61839DCBB00E9EC50 /* _DCCoordinateSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCCoordinateSystem.m; sourceTree = "<group>"; };
+		EFD946D71839DCBB00E9EC50 /* DCAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCAxis.h; sourceTree = "<group>"; };
+		EFD946D81839DCBB00E9EC50 /* DCAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCAxis.m; sourceTree = "<group>"; };
+		EFD946DA1839DCBB00E9EC50 /* _DCXAxisLabelLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCXAxisLabelLayer.h; sourceTree = "<group>"; };
+		EFD946DB1839DCBB00E9EC50 /* _DCXAxisLabelLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCXAxisLabelLayer.m; sourceTree = "<group>"; };
+		EFD946DC1839DCBB00E9EC50 /* _DCYAxisLabelLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCYAxisLabelLayer.h; sourceTree = "<group>"; };
+		EFD946DD1839DCBB00E9EC50 /* _DCYAxisLabelLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCYAxisLabelLayer.m; sourceTree = "<group>"; };
+		EFD946DF1839DCBB00E9EC50 /* DCXYChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCXYChartView.h; sourceTree = "<group>"; };
+		EFD946E01839DCBB00E9EC50 /* DCXYChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCXYChartView.m; sourceTree = "<group>"; };
+		EFD946E31839DCBB00E9EC50 /* DCDataPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCDataPoint.h; sourceTree = "<group>"; };
+		EFD946E41839DCBB00E9EC50 /* DCDataPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCDataPoint.m; sourceTree = "<group>"; };
+		EFD946E51839DCBB00E9EC50 /* DCContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCContext.h; path = Common/Utility/DChart/DCContext.h; sourceTree = "<group>"; };
+		EFD946E61839DCBB00E9EC50 /* DCContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCContext.m; path = Common/Utility/DChart/DCContext.m; sourceTree = "<group>"; };
+		EFD946E71839DCBB00E9EC50 /* DCRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCRange.h; path = Common/Utility/DChart/DCRange.h; sourceTree = "<group>"; };
+		EFD946E81839DCBB00E9EC50 /* DCRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCRange.m; path = Common/Utility/DChart/DCRange.m; sourceTree = "<group>"; };
+		EFD946EA1839DCBB00E9EC50 /* _DCHGridlineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCHGridlineLayer.h; sourceTree = "<group>"; };
+		EFD946EB1839DCBB00E9EC50 /* _DCHGridlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCHGridlineLayer.m; sourceTree = "<group>"; };
+		EFD946ED1839DCBB00E9EC50 /* _DCColumnsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCColumnsLayer.h; sourceTree = "<group>"; };
+		EFD946EE1839DCBB00E9EC50 /* _DCColumnsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCColumnsLayer.m; sourceTree = "<group>"; };
+		EFD946EF1839DCBB00E9EC50 /* DCColumnSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCColumnSeries.h; sourceTree = "<group>"; };
+		EFD946F01839DCBB00E9EC50 /* DCColumnSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCColumnSeries.m; sourceTree = "<group>"; };
+		EFD946F11839DCBB00E9EC50 /* DCLineSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLineSeries.h; sourceTree = "<group>"; };
+		EFD946F21839DCBB00E9EC50 /* DCLineSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLineSeries.m; sourceTree = "<group>"; };
+		EFD946F31839DCBB00E9EC50 /* DCSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSeries.h; sourceTree = "<group>"; };
+		EFD946F41839DCBB00E9EC50 /* DCSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSeries.m; sourceTree = "<group>"; };
+		EFD946F51839DCBB00E9EC50 /* DCXYSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCXYSeries.h; sourceTree = "<group>"; };
+		EFD946F61839DCBB00E9EC50 /* DCXYSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCXYSeries.m; sourceTree = "<group>"; };
+		EFD946F81839DCBB00E9EC50 /* DCUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCUtility.h; sourceTree = "<group>"; };
+		EFD946F91839DCBB00E9EC50 /* DCUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCUtility.m; sourceTree = "<group>"; };
 		EFDAACB71803F27F008BC9AF /* REMPieChartWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPieChartWrapper.h; sourceTree = "<group>"; };
 		EFDAACB81803F27F008BC9AF /* REMPieChartWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartWrapper.m; sourceTree = "<group>"; };
 		EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartDataProcessor.m; sourceTree = "<group>"; };
@@ -1629,6 +1680,7 @@
 		7A5E2D47177B3CE2000F77F9 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				EFD946CD1839DB9E00E9EC50 /* DChart */,
 				EF8A47DE17F959B5009B5C33 /* Chart */,
 				7A095E71179571C80098DB16 /* REMWidgetAxisHelper.h */,
 				7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */,
@@ -2402,6 +2454,118 @@
 			name = LabelFormatter;
 			sourceTree = "<group>";
 		};
+		EFD946CD1839DB9E00E9EC50 /* DChart */ = {
+			isa = PBXGroup;
+			children = (
+				EFD946D01839DCBB00E9EC50 /* _DCLayer.h */,
+				EFD946D11839DCBB00E9EC50 /* _DCLayer.m */,
+				EFD946D21839DCBB00E9EC50 /* _DCMagicLayer.h */,
+				EFD946D31839DCBB00E9EC50 /* _DCMagicLayer.m */,
+				EFD946D41839DCBB00E9EC50 /* Axis */,
+				EFD946DE1839DCBB00E9EC50 /* ChartView */,
+				EFD946E11839DCBB00E9EC50 /* Common */,
+				EFD946E21839DCBB00E9EC50 /* DataPoint */,
+				EFD946E51839DCBB00E9EC50 /* DCContext.h */,
+				EFD946E61839DCBB00E9EC50 /* DCContext.m */,
+				EFD946E71839DCBB00E9EC50 /* DCRange.h */,
+				EFD946E81839DCBB00E9EC50 /* DCRange.m */,
+				EFD946E91839DCBB00E9EC50 /* Gridline */,
+				EFD946EC1839DCBB00E9EC50 /* Series */,
+				EFD946F71839DCBB00E9EC50 /* Utility */,
+			);
+			name = DChart;
+			sourceTree = "<group>";
+		};
+		EFD946D41839DCBB00E9EC50 /* Axis */ = {
+			isa = PBXGroup;
+			children = (
+				EFD946D51839DCBB00E9EC50 /* _DCCoordinateSystem.h */,
+				EFD946D61839DCBB00E9EC50 /* _DCCoordinateSystem.m */,
+				EFD946D71839DCBB00E9EC50 /* DCAxis.h */,
+				EFD946D81839DCBB00E9EC50 /* DCAxis.m */,
+				EFD946D91839DCBB00E9EC50 /* LabelLayer */,
+			);
+			name = Axis;
+			path = Common/Utility/DChart/Axis;
+			sourceTree = "<group>";
+		};
+		EFD946D91839DCBB00E9EC50 /* LabelLayer */ = {
+			isa = PBXGroup;
+			children = (
+				EFD946DA1839DCBB00E9EC50 /* _DCXAxisLabelLayer.h */,
+				EFD946DB1839DCBB00E9EC50 /* _DCXAxisLabelLayer.m */,
+				EFD946DC1839DCBB00E9EC50 /* _DCYAxisLabelLayer.h */,
+				EFD946DD1839DCBB00E9EC50 /* _DCYAxisLabelLayer.m */,
+			);
+			path = LabelLayer;
+			sourceTree = "<group>";
+		};
+		EFD946DE1839DCBB00E9EC50 /* ChartView */ = {
+			isa = PBXGroup;
+			children = (
+				EFD946DF1839DCBB00E9EC50 /* DCXYChartView.h */,
+				EFD946E01839DCBB00E9EC50 /* DCXYChartView.m */,
+			);
+			name = ChartView;
+			path = Common/Utility/DChart/ChartView;
+			sourceTree = "<group>";
+		};
+		EFD946E11839DCBB00E9EC50 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Common;
+			path = Common/Utility/DChart/Common;
+			sourceTree = "<group>";
+		};
+		EFD946E21839DCBB00E9EC50 /* DataPoint */ = {
+			isa = PBXGroup;
+			children = (
+				EFD946E31839DCBB00E9EC50 /* DCDataPoint.h */,
+				EFD946E41839DCBB00E9EC50 /* DCDataPoint.m */,
+			);
+			name = DataPoint;
+			path = Common/Utility/DChart/DataPoint;
+			sourceTree = "<group>";
+		};
+		EFD946E91839DCBB00E9EC50 /* Gridline */ = {
+			isa = PBXGroup;
+			children = (
+				EFD946EA1839DCBB00E9EC50 /* _DCHGridlineLayer.h */,
+				EFD946EB1839DCBB00E9EC50 /* _DCHGridlineLayer.m */,
+			);
+			name = Gridline;
+			path = Common/Utility/DChart/Gridline;
+			sourceTree = "<group>";
+		};
+		EFD946EC1839DCBB00E9EC50 /* Series */ = {
+			isa = PBXGroup;
+			children = (
+				EFD946ED1839DCBB00E9EC50 /* _DCColumnsLayer.h */,
+				EFD946EE1839DCBB00E9EC50 /* _DCColumnsLayer.m */,
+				EFD946EF1839DCBB00E9EC50 /* DCColumnSeries.h */,
+				EFD946F01839DCBB00E9EC50 /* DCColumnSeries.m */,
+				EFD946F11839DCBB00E9EC50 /* DCLineSeries.h */,
+				EFD946F21839DCBB00E9EC50 /* DCLineSeries.m */,
+				EFD946F31839DCBB00E9EC50 /* DCSeries.h */,
+				EFD946F41839DCBB00E9EC50 /* DCSeries.m */,
+				EFD946F51839DCBB00E9EC50 /* DCXYSeries.h */,
+				EFD946F61839DCBB00E9EC50 /* DCXYSeries.m */,
+			);
+			name = Series;
+			path = Common/Utility/DChart/Series;
+			sourceTree = "<group>";
+		};
+		EFD946F71839DCBB00E9EC50 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				EFD946F81839DCBB00E9EC50 /* DCUtility.h */,
+				EFD946F91839DCBB00E9EC50 /* DCUtility.m */,
+			);
+			name = Utility;
+			path = Common/Utility/DChart/Utility;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2577,6 +2741,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFD947051839DCBB00E9EC50 /* DCRange.m in Sources */,
 				B48ED409178EA8970032CD72 /* REMSqliteStorage.m in Sources */,
 				B48ED40A178EA8970032CD72 /* REMStorage.m in Sources */,
 				EFDAACBF18052E0C008BC9AF /* REMPieChartView.m in Sources */,
@@ -2585,7 +2750,9 @@
 				7A9B1E30177B3A8B00C282A8 /* REMAppDelegate.m in Sources */,
 				EF8A47F617F959B5009B5C33 /* REMTrendChartConfig.m in Sources */,
 				B445AEA0177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m in Sources */,
+				EFD947011839DCBB00E9EC50 /* _DCYAxisLabelLayer.m in Sources */,
 				B445AEA2177BEEB8002D2A59 /* DDASLLogger.m in Sources */,
+				EFD946FC1839DCBB00E9EC50 /* _DCLayer.m in Sources */,
 				EF8A47F517F959B5009B5C33 /* REMTrendChartAxisConfig.m in Sources */,
 				EF9ACF6118067CCB00097661 /* REMXFormatter.m in Sources */,
 				B40F011A1828C3DC009650FD /* REMWidgetStepEnergyModel.m in Sources */,
@@ -2595,6 +2762,7 @@
 				B4FFB0C818191A15004C5404 /* REMRelativeDateViewController.m in Sources */,
 				B445AEA8177BEEB8002D2A59 /* DDTTYLogger.m in Sources */,
 				B445AEAA177BEEB8002D2A59 /* ContextFilterLogFormatter.m in Sources */,
+				EFD947021839DCBB00E9EC50 /* DCXYChartView.m in Sources */,
 				B445AEAC177BEEB8002D2A59 /* DispatchQueueLogFormatter.m in Sources */,
 				B445AEB2177BFAE8002D2A59 /* REMLog.m in Sources */,
 				7A399E96177D238F00F0EB9F /* AFHTTPClient.m in Sources */,
@@ -2629,6 +2797,7 @@
 				EFDEC2AB1817C8A80008972E /* REMTrendChartStackColumnSeries.m in Sources */,
 				7A2E7ECB17F2DD41000EB506 /* REMBuildingTitleLabelView.m in Sources */,
 				38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */,
+				EFD947001839DCBB00E9EC50 /* _DCXAxisLabelLayer.m in Sources */,
 				7A1D14291785178800CC2922 /* REMNetworkHelper.m in Sources */,
 				EF8A47FF17F959B5009B5C33 /* REMChartSeries.m in Sources */,
 				7A2E7ECD17F2DD41000EB506 /* REMImageView.m in Sources */,
@@ -2641,10 +2810,12 @@
 				7A5DBD2B178FD034006C4EDE /* REMDataStore.m in Sources */,
 				7A095E73179571C80098DB16 /* REMWidgetAxisHelper.m in Sources */,
 				B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */,
+				EFD9470A1839DCBB00E9EC50 /* DCSeries.m in Sources */,
 				7A1D7C3717A6155D0050779D /* REMApplicationContext.m in Sources */,
 				7A0F7C5318279170009E898A /* REMChartLegendItem.m in Sources */,
 				B47ACC3017F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m in Sources */,
 				7A2F76151810C6C8006C19D8 /* REMScreenEdgetGestureRecognizer.m in Sources */,
+				EFD9470B1839DCBB00E9EC50 /* DCXYSeries.m in Sources */,
 				7A1D7C3C17A637510050779D /* REMUserModel.m in Sources */,
 				7A1D7C3F17A637630050779D /* REMCustomerModel.m in Sources */,
 				7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */,
@@ -2652,6 +2823,7 @@
 				B408794D1830CC69004042C1 /* REMBuildingCommodityViewController.m in Sources */,
 				7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */,
 				7A153C5C17AA489600413D3C /* REMBuildingModel.m in Sources */,
+				EFD947031839DCBB00E9EC50 /* DCDataPoint.m in Sources */,
 				7A153C5D17AA489600413D3C /* REMDashboardObj.m in Sources */,
 				7A153C5E17AA489600413D3C /* REMFavoriteDashboardObj.m in Sources */,
 				7A153C5F17AA489600413D3C /* REMWidgetContentSyntax.m in Sources */,
@@ -2676,6 +2848,7 @@
 				7A13C19517F40809007E6AA9 /* REMMainNavigationController.m in Sources */,
 				EF8A47FC17F959B5009B5C33 /* REMTrendChartDataProcessor.m in Sources */,
 				7A153CA417AA497C00413D3C /* REMLoginCarouselController.m in Sources */,
+				EFD947061839DCBB00E9EC50 /* _DCHGridlineLayer.m in Sources */,
 				7A153CA717AA497C00413D3C /* REMLoginPageController.m in Sources */,
 				7A153CAA17AA497C00413D3C /* REMSplashScreenController.m in Sources */,
 				B4DC084017F90E2C005658C1 /* REMAdministratorModel.m in Sources */,
@@ -2705,12 +2878,15 @@
 				EF8A480017F959B5009B5C33 /* REMTrendChartSeries.m in Sources */,
 				B40F011D1828DAB7009650FD /* REMWidgetRankingDelegator.m in Sources */,
 				B4626BFC17B0A0D900A7759B /* REMBuildingCommodityView.m in Sources */,
+				EFD947081839DCBB00E9EC50 /* DCColumnSeries.m in Sources */,
 				EFFE29DB18279C8700F67DB5 /* REMTestChartView.m in Sources */,
+				EFD947071839DCBB00E9EC50 /* _DCColumnsLayer.m in Sources */,
 				B4911F4317B0D961007AEF7D /* REMBuildingConstants.m in Sources */,
 				B4E815DE18276F4700FB9BC5 /* REMWidgetBizDelegatorBase.m in Sources */,
 				B4911F4817B0EB8B007AEF7D /* REMBuildingRankingView.m in Sources */,
 				EF8A480917F95FA1009B5C33 /* REMColumnWidgetWrapper.m in Sources */,
 				7A1A854217B4B2E9004D7167 /* REMBuildingTrendChart.m in Sources */,
+				EFD9470C1839DCBB00E9EC50 /* DCUtility.m in Sources */,
 				7A12280C18116DBF004DE778 /* REMViewHelper.m in Sources */,
 				7A66A28C1817794F000A6AB8 /* LoginBusiness.m in Sources */,
 				7A1A854517B4B303004D7167 /* REMBuildingAverageChart.m in Sources */,
@@ -2721,6 +2897,7 @@
 				7A1A855417B4BB5D004D7167 /* REMBuildingTrendChartViewController.m in Sources */,
 				7A1A855717B4E278004D7167 /* REMAverageUsageDataModel.m in Sources */,
 				7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */,
+				EFD946FF1839DCBB00E9EC50 /* DCAxis.m in Sources */,
 				B4E815E1182770B700FB9BC5 /* REMWidgetEnergyDelegator.m in Sources */,
 				7A09D59A17B8D62F001EBC30 /* REMDataRange.m in Sources */,
 				7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */,
@@ -2730,6 +2907,7 @@
 				B4FFB0CB18191A41004C5404 /* REMDatePickerViewController.m in Sources */,
 				7A0288ED17C20CC500709111 /* WeiboRequestOperation.m in Sources */,
 				EFDAACC218053911008BC9AF /* REMChartConfig.m in Sources */,
+				EFD947091839DCBB00E9EC50 /* DCLineSeries.m in Sources */,
 				7A0288EE17C20CC500709111 /* WeiboSignIn.m in Sources */,
 				7A0288EF17C20CC500709111 /* GeoInfo.m in Sources */,
 				7A0288F017C20CC500709111 /* Status.m in Sources */,
@@ -2741,6 +2919,7 @@
 				7A0288F317C20CC500709111 /* User.m in Sources */,
 				7A0288F417C20CC500709111 /* WeiboAccount.m in Sources */,
 				7A0288F517C20CC500709111 /* WeiboAuthentication.m in Sources */,
+				EFD946FE1839DCBB00E9EC50 /* _DCCoordinateSystem.m in Sources */,
 				7A0288F817C20CC500709111 /* ImageResourceLoader.m in Sources */,
 				7A0288F917C20CC500709111 /* NSDictionary+Json.m in Sources */,
 				7A2E7ECA17F2DD41000EB506 /* REMBuildingDataView.m in Sources */,
@@ -2769,6 +2948,7 @@
 				EF96300617C610A200BBC7DA /* REMSettingViewController.m in Sources */,
 				7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */,
 				7A9557C017C73AD200249CED /* REMBuildingAirQualityChart.m in Sources */,
+				EFD947041839DCBB00E9EC50 /* DCContext.m in Sources */,
 				EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */,
 				7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */,
 				7AF3667817CF2D7400447650 /* REMBuildingChartSeriesIndicator.m in Sources */,
@@ -2782,6 +2962,7 @@
 				EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */,
 				EF60822F17D818430093427C /* REMModalView.m in Sources */,
 				B46C8EC317F27CDF006DC4CB /* REMDashboardCollectionCellView.m in Sources */,
+				EFD946FD1839DCBB00E9EC50 /* _DCMagicLayer.m in Sources */,
 				EF8A47FD17F959B5009B5C33 /* REMTrendChartColumnSeries.m in Sources */,
 				B46C8EC017F27CB9006DC4CB /* REMDashboardCollectionView.m in Sources */,
 				EFFE29D818273E6D00F67DB5 /* REMTrend.m in Sources */,
