@@ -13,17 +13,17 @@
 -(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
     if (newRange != nil && newRange.location < -0.5) return;
-    long start = floor(newRange.location);
-    long end = ceil(newRange.length+newRange.location);
+    int start = floor(newRange.location);
+    int end = ceil(newRange.length+newRange.location);
     DCRange* newVisableRange = [[DCRange alloc]initWithLocation:start length:end-start+1];
     if ([DCRange isRange:self.visableRange equalTo:newVisableRange]) return;
     _visableRange = newVisableRange;
     
-    start = MAX(0, start);
-    end = MIN(end, self.datas.count-1);
+    start = start < 0 ? 0 : start;
+    end = end >= self.datas.count ? (self.datas.count - 1) : end;
     
     NSNumber* y = @(0);
-    for (NSUInteger i = start; i <= end; i++) {
+    for (int i = start; i <= end; i++) {
         DCDataPoint* p = self.datas[i];
         if (p.value == nil || [p.value isEqual:[NSNull null]]) continue;
         if ([y compare:p.value] == NSOrderedAscending) {

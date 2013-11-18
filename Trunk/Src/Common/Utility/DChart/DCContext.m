@@ -125,7 +125,7 @@ int const kDCLabelToLine = 5;              // label到轴线的距离
     
     for (id o in self.y2RangeObservers) {
         if ([o respondsToSelector:@selector(didYRangeChanged:newRange:)]) {
-            [o didYRangeChanged:oldRange newRange:self.y1Range];
+            [o didYRangeChanged:oldRange newRange:self.y2Range];
         }
     }
 }
