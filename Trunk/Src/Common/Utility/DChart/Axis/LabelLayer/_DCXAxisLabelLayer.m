@@ -79,7 +79,7 @@
 -(void)addLabelForX:(NSInteger)x {
     if (self.fontRef == nil) {
         self.fontSize = self.font.pointSize;
-        self.fontRef = CTFontCreateWithName((CFStringRef)self.font.fontName,
+        self.fontRef = CTFontCreateWithName((__bridge CFStringRef)self.font.fontName,
                                             self.fontSize,
                                             NULL);
     }
