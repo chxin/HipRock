@@ -154,6 +154,9 @@ const static CGFloat buildingGap=20;
         
         [self.view addSubview:subController.view];
         
+        NSInteger gap=i-self.currentBuildingIndex;
+        [subController.view setCenter:CGPointMake(gap*(self.view.frame.size.width+buildingGap)+self.view.frame.size.width/2, self.view.center.y)];
+        
     }
     
     [self stopCoverPage:nil];
