@@ -300,20 +300,17 @@
 
 - (void)setNewTimeRange:(REMTimeRange *)newRange withRelativeType:(REMRelativeTimeRangeType)relativeType withRelativeDateComponent:(NSString *)newDateComponent
 {
-    NSString *text=[REMTimeHelper formatTimeRangeFullHour:newRange];
+    self.tempModel.relativeDateComponent=newDateComponent;
+    self.tempModel.relativeDateType=relativeType;
+    REMEnergyStep newStep= [self initStepButtonWithRange:newRange WithStep:self.tempModel.step];
+    [self changeStep:newStep];
+    
+    NSString *text=[REMTimeHelper formatTimeRangeFullHour:self.tempModel.timeRangeArray[0]];
     
     
-    NSString *text1=[NSString stringWithFormat:@"%@ %@",newDateComponent,text];
+    NSString *text1=[NSString stringWithFormat:@"%@ %@",self.tempModel.relativeDateComponent,text];
     
     [self.timePickerButton setTitle:text1 forState:UIControlStateNormal];
-    
-    [self changeTimeRange:newRange];
-    
-    REMEnergyStep newStep= [self initStepButtonWithRange:newRange WithStep:self.tempModel.step];
-    
-    
-    
-    [self changeStep:newStep];
     
     [self search];
     
