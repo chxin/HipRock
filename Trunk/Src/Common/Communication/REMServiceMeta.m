@@ -27,7 +27,7 @@
 
 const static NSString *SVC_BASE_HOST = @"112.124.56.137";
 const static NSString *SVC_BASE_SCHEMA = @"http";
-const static NSString *SVC_BASE_SUFFIX = @"/v1.3.1.13/MobileApiHost/";
+const static NSString *SVC_BASE_SUFFIX = @"/v1.3.1.14/MobileApiHost/";
 
 //const static NSString *SVC_BASE_HOST = @"admin.energy-here.com";
 //const static NSString *SVC_BASE_SCHEMA = @"http";
@@ -37,7 +37,7 @@ const static NSString *SVC_BASE_SUFFIX = @"/v1.3.1.13/MobileApiHost/";
 #ifdef DailyBuild
 const static NSString *SVC_BASE_HOST = @"112.124.56.137";
 const static NSString *SVC_BASE_SCHEMA = @"http";
-const static NSString *SVC_BASE_SUFFIX = @"/v1.3.1.13/MobileApiHost/";
+const static NSString *SVC_BASE_SUFFIX = @"/v1.3.1.14/MobileApiHost/";
 
 //const static NSString *SVC_BASE_HOST = @"10.177.0.35";
 //const static NSString *SVC_BASE_SCHEMA = @"http";
@@ -50,7 +50,7 @@ const static NSString *SVC_BASE_SUFFIX = @"/v1.3.1.13/MobileApiHost/";
 //const static NSString *SVC_BASE_SUFFIX = @"/MobileApiHost/";
 const static NSString *SVC_BASE_HOST = @"112.124.56.137";
 const static NSString *SVC_BASE_SCHEMA = @"http";
-const static NSString *SVC_BASE_SUFFIX = @"/v1.3.1.13/MobileApiHost/";
+const static NSString *SVC_BASE_SUFFIX = @"/v1.3.1.14/MobileApiHost/";
 #endif
 
 
