@@ -257,13 +257,15 @@
     [self.view addSubview:titleLabel1];
     
     
-    
-    REMBuildingChartViewController *controller1=[[REMBuildingChartViewController alloc] init];
-    controller1.viewFrame=CGRectMake(0, marginTop+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, chartContainerHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
-    controller1.chartHandlerClass=[REMBuildingAverageViewController class];
-    controller1.buildingId=self.buildingInfo.building.buildingId;
-    controller1.commodityId=self.commodityInfo.commodityId;
-    [self addChildViewController:controller1];
+    if (self.childViewControllers.count<2) {
+        REMBuildingChartViewController *controller1=[[REMBuildingChartViewController alloc] init];
+        controller1.viewFrame=CGRectMake(0, marginTop+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, chartContainerHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
+        controller1.chartHandlerClass=[REMBuildingAverageViewController class];
+        controller1.buildingId=self.buildingInfo.building.buildingId;
+        controller1.commodityId=self.commodityInfo.commodityId;
+        [self addChildViewController:controller1];
+    }
+   
     
     int marginTop1=marginTop+chartContainerHeight+kBuildingCommodityBottomMargin;
     CGFloat secondChartHeight=chartContainerHeight+85;//85 is delta value for second chart in commodity view
@@ -280,16 +282,15 @@
     titleLabel2.textColor=[UIColor whiteColor];
     [self.view addSubview:titleLabel2];
 
+    if (self.childViewControllers.count<2) {
+        REMBuildingChartViewController *controller2=[[REMBuildingChartViewController alloc] init];
+        controller2.viewFrame=CGRectMake(0, marginTop1+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, secondChartHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
+        controller2.chartHandlerClass=[REMBuildingTrendChartViewController class];
+        controller2.commodityId=self.commodityInfo.commodityId;
+        controller2.buildingId=self.buildingInfo.building.buildingId;
+        [self addChildViewController:controller2];
     
-    REMBuildingChartViewController *controller2=[[REMBuildingChartViewController alloc] init];
-    controller2.viewFrame=CGRectMake(0, marginTop1+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, secondChartHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
-    controller2.chartHandlerClass=[REMBuildingTrendChartViewController class];
-    controller2.commodityId=self.commodityInfo.commodityId;
-    controller2.buildingId=self.buildingInfo.building.buildingId;
-    [self addChildViewController:controller2];
-    
-    
-//    REMBuildingChartContainerView *view2 = [[REMBuildingChartContainerView alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingChartWidth, secondChartHeight) withTitle:[NSString stringWithFormat:title2,self.commodityInfo.comment] andTitleFontSize:kBuildingCommodityTitleFontSize ];
+    }
     
 
 }
@@ -332,11 +333,6 @@
 
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    NSLog(@"didReceiveMemoryWarning :%@",[self class]);
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end

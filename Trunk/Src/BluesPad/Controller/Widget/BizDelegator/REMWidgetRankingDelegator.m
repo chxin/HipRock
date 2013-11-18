@@ -32,6 +32,9 @@
     self.model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
                   .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
     self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
+    
+    REMWidgetRankingSearchModel *m=(REMWidgetRankingSearchModel *)self.model;
+    m.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
 }
 
 
@@ -41,8 +44,8 @@
     UIButton *timePickerButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, 0, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
     
-    [timePickerButton setImage:[UIImage imageNamed:@"Oil_pressed"] forState:UIControlStateNormal];
-    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, kWidgetDatePickerWidth-40)];
+    [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];
+    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-40)];
     [timePickerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     [timePickerButton addTarget:self action:@selector(showTimePicker) forControlEvents:UIControlEventTouchUpInside];
@@ -59,10 +62,10 @@
     UIButton *orderButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [orderButton setFrame:CGRectMake(900, 0, 32, 32)];
     
-    [orderButton setImage:[UIImage imageNamed:@"Up"] forState:UIControlStateNormal];
+    [orderButton setImage:REMIMG_Ascend forState:UIControlStateNormal];
     orderButton.showsTouchWhenHighlighted=YES;
     orderButton.adjustsImageWhenHighlighted=YES;
-    [orderButton setImage:[UIImage imageNamed:@"Down"] forState:UIControlStateSelected];
+    [orderButton setImage:REMIMG_Descend forState:UIControlStateSelected];
     [orderButton addTarget:self action:@selector(orderButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.searchView addSubview:orderButton];
     
@@ -87,12 +90,12 @@
     [self.view addSubview:chartContainer];
     self.chartContainer=chartContainer;
     self.maskerView=self.chartContainer;
-    self.chartContainer.layer.borderColor=[UIColor redColor].CGColor;
-    self.chartContainer.layer.borderWidth=1;
+    //self.chartContainer.layer.borderColor=[UIColor redColor].CGColor;
+    //self.chartContainer.layer.borderWidth=1;
     //[self showEnergyChart];
     
-    
-    [self setDatePickerButtonValueNoSearchByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateComponent withRelativeType:self.widgetInfo.contentSyntax.relativeDateType];
+     REMWidgetRankingSearchModel *m=(REMWidgetRankingSearchModel *)self.model;
+    [self setDatePickerButtonValueNoSearchByTimeRange:m.timeRangeArray[0] withRelative:m.relativeDateComponent withRelativeType:m.relativeDateType];
 }
 
 - (void) setDatePickerButtonValueNoSearchByTimeRange:(REMTimeRange *)range withRelative:(NSString *)relativeDate withRelativeType:(REMRelativeTimeRangeType)relativeType
@@ -179,6 +182,11 @@
     self.datePickerPopoverController=popoverController;
 }
 
-
+- (void)releaseChart{
+    if(self.chartWrapper!=nil){
+        [self.chartWrapper destroyView];
+        self.chartWrapper=nil;
+    }
+}
 
 @end

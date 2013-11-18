@@ -94,7 +94,7 @@ static int requestTimeout = 45; //(s)
             REMError *remError = [[REMError alloc] initWithErrorInfo:remErrorInfo];
             
             error(remError,remErrorInfo);
-            
+            NetworkDecreaseActivity();
             return;
         }
         
@@ -145,10 +145,12 @@ static int requestTimeout = 45; //(s)
         
         if(errorInfo.code == -1001){
             [REMAlertHelper alert:@"数据加载超时"];
+            NetworkDecreaseActivity();
             return;
         }
         if(errorInfo.code == -999){
             REMLogInfo(@"Request canceled");
+            NetworkDecreaseActivity();
             return;
         }
         

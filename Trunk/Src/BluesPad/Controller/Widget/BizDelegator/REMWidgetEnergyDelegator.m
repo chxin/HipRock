@@ -54,14 +54,17 @@
     self.model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
                   .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
     self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
-    self.tempModel=(REMWidgetStepEnergyModel *)[REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
-                    .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
+    REMWidgetStepEnergyModel *m=(REMWidgetStepEnergyModel *)self.model;
+    m.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
+    
+    self.tempModel=[self.model copy];
+    
 }
 
 
 - (void)initChartView{
-    UIView *c=[[UIView alloc]initWithFrame:CGRectMake(0, kWidgetChartTopMargin, 1024, kWidgetChartHeight)];
-    [c setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
+    UIView *c=[[UIView alloc]initWithFrame:CGRectMake(0, kWidgetChartTopMargin, self.view.frame.size.width, kWidgetChartHeight+kWidgetChartLeftMargin)];
+    [c setBackgroundColor:[UIColor clearColor]];
     UIView *chartContainer=[[UIView alloc]initWithFrame:CGRectMake(kWidgetChartLeftMargin, 0, kWidgetChartWidth, kWidgetChartHeight)];
     [chartContainer setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:c];
@@ -76,7 +79,7 @@
     
     
     
-    [self setDatePickerButtonValueNoSearchByTimeRange:self.widgetInfo.contentSyntax.timeRanges[0] withRelative:self.widgetInfo.contentSyntax.relativeDateComponent withRelativeType:self.widgetInfo.contentSyntax.relativeDateType];
+    [self setDatePickerButtonValueNoSearchByTimeRange:self.tempModel.timeRangeArray[0] withRelative:self.tempModel.relativeDateComponent withRelativeType:self.tempModel.relativeDateType];
 }
 
 - (void) showTimePicker{
@@ -108,6 +111,13 @@
     }
 }
 
+- (void)releaseChart{
+    if(self.chartWrapper!=nil){
+        [self.chartWrapper destroyView];
+        self.chartWrapper=nil;
+    }
+}
+
 - (void) showEnergyChart{
     if(self.chartWrapper!=nil){
         return;
@@ -121,7 +131,10 @@
     REMAbstractChartWrapper  *widgetWrapper;
     if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
+        REMTrendChartView *trendChart= (REMTrendChartView *)widgetWrapper.view;
+        trendChart.delegate = self;
+        
+        
     } else if (widgetType == REMDiagramTypeColumn) {
         widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         ((REMTrendChartView *)widgetWrapper.view).delegate = self;
@@ -136,6 +149,12 @@
         ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     }
     if (widgetWrapper != nil) {
+        if([widgetWrapper isKindOfClass:[REMTrendWidgetWrapper class]]==YES){
+            if(self.widgetInfo.contentSyntax.calendarType!=REMCalendarTypeNone){
+                REMTrendWidgetWrapper *trend=(REMTrendWidgetWrapper *)widgetWrapper;
+                trend.calenderType=self.widgetInfo.contentSyntax.calendarType;
+            }
+        }
         [self.chartContainer addSubview:widgetWrapper.view];
         self.chartWrapper=widgetWrapper;
     }
@@ -233,7 +252,7 @@
     
     UISegmentedControl *control= [[UISegmentedControl alloc] initWithItems:titleList];
     
-    CGFloat x=1024-kWidgetChartLeftMargin*2-list.count*kWidgetStepSingleButtonWidth;
+    CGFloat x=kDMScreenWidth-kWidgetChartLeftMargin*2-list.count*kWidgetStepSingleButtonWidth;
     
     CGRect frame= CGRectMake(x, self.timePickerButton.frame.origin.y, list.count*kWidgetStepSingleButtonWidth, kWidgetStepButtonHeight);
     
@@ -433,10 +452,8 @@
     [legendControl setFrame:CGRectMake(kLegendSearchSwitcherLeft, kLegendSearchSwitcherTop, kLegendSearchSwitcherWidth, kLegendSearchSwitcherHeight)];
     [legendControl setSegmentedControlStyle:UISegmentedControlStylePlain];
 
-    UIImage *search=[UIImage imageNamed:@"DateView_Chart"];
-    UIImage *legend=[UIImage imageNamed:@"Legend_Chart"];
-    [legendControl setImage:search forSegmentAtIndex:0];
-    [legendControl setImage:legend forSegmentAtIndex:1];
+    [legendControl setImage:REMIMG_DateView_Chart forSegmentAtIndex:0];
+    [legendControl setImage:REMIMG_Legend_Chart forSegmentAtIndex:1];
     //[legendControl setBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     //[legendControl setBackgroundColor:[UIColor clearColor]];
     [legendControl setSelectedSegmentIndex:0];
@@ -454,8 +471,8 @@
     [timePickerButton setBackgroundColor:[REMColor colorByHexString:@"#9d9d9d"]];
     timePickerButton.layer.cornerRadius=4;
     
-    [timePickerButton setImage:[UIImage imageNamed:@"DatePicker_Chart"] forState:UIControlStateNormal];
-    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(8, 5, 8, kWidgetDatePickerWidth-40)];
+    [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];
+    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-40)];
     timePickerButton.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetDatePickerTitleSize];
     [timePickerButton setTitleColor:[REMColor colorByHexString:@"#5e5e5e"] forState:UIControlStateNormal];
     
@@ -547,7 +564,7 @@
     CGFloat scrollViewContentWidth = (kDMChart_LegendItemWidth + kDMChart_LegendItemLeftOffset) * self.energyData.targetEnergyData.count + kDMChart_LegendItemLeftOffset;
     
     UIScrollView *view = [[UIScrollView alloc] initWithFrame:kDMChart_ToolbarHiddenFrame];
-    view.backgroundColor = [UIColor whiteColor];
+    view.backgroundColor = [REMColor colorByHexString:kDMChart_BackgroundColor];
     view.contentSize = CGSizeMake(scrollViewContentWidth, kDMChart_ToolbarHeight);
     view.pagingEnabled = NO;
     view.showsHorizontalScrollIndicator = NO;
@@ -581,7 +598,7 @@
     //hide or show the series on index according to state
     //NSLog(@"Series %d is going to %@", index, state == UIControlStateNormal?@"show":@"hide");
     
-    if([self.chartWrapper.view isKindOfClass:[REMTrendChartView class]]){
+    //if([self.chartWrapper.view isKindOfClass:[REMTrendChartView class]]){
         if(self.hiddenSeries == nil)
             self.hiddenSeries = [[NSMutableArray alloc] init];
         
@@ -595,9 +612,10 @@
                 [self.hiddenSeries addObject:@(index)];
             }
         }
-        
-        [((REMTrendChartView *)self.chartWrapper.view) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
-    }
+    
+        if([self.chartWrapper.view respondsToSelector:@selector(setSeriesHiddenAtIndex:hidden:)])
+            [((id)self.chartWrapper.view) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
+    //}
 }
 
 #pragma mark - Tooltip
@@ -607,6 +625,8 @@
     if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
         return;
     }
+    
+    [self.searchView setHidden:YES];
     
     NSMutableArray *models = [[NSMutableArray alloc] init];
     for(int i=0;i<names.count;i++){
@@ -636,6 +656,8 @@
     NSMutableArray *models = [[NSMutableArray alloc] init];
     int highlightIndex=0;
     
+    [self.searchView setHidden:YES];
+    
     for(int i=0;i<self.energyData.targetEnergyData.count;i++){
         REMTargetEnergyData *targetData = self.energyData.targetEnergyData[i];
         if([targetData.target.name isEqualToString:name]){
@@ -662,7 +684,7 @@
 
 -(void)tooltipWillDisapear
 {
-    NSLog(@"tool tip will disappear");
+    //NSLog(@"tool tip will disappear");
     if(self.tooltipView==nil)
         return;
     
@@ -671,6 +693,8 @@
         if([chartView respondsToSelector:@selector(cancelToolTipStatus)]){
             [chartView cancelToolTipStatus];
         }
+        
+        [self.searchView setHidden:NO];
     }];
 }
 

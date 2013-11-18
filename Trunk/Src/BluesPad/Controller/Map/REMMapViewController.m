@@ -27,36 +27,29 @@
 @interface REMMapViewController ()
 
 @property (nonatomic,weak) GMSMapView *mapView;
+@property (nonatomic) int temp;
 
 @end
 
 @implementation REMMapViewController
 
-static BOOL isInitialPresenting = YES;
--(void)setIsInitialPresenting:(BOOL)isInitial
-{
-    isInitialPresenting = isInitial;
-}
 
 - (void)loadView
 {
     [super loadView];
 
     [self.view setFrame:kDMDefaultViewFrame];
-    [self loadMapView];
-    
 }
 
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
     // iOS 7.0 supported
-    if([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
-        [self setNeedsStatusBarAppearanceUpdate];
-    }
+    REMUpdateStatusBarAppearenceForIOS7;
+    
+    [self loadMapView];
     
     [self addButtons];
     
@@ -80,13 +73,6 @@ static BOOL isInitialPresenting = YES;
     
     //add customer logo button
     [self.view addSubview:self.customerLogoButton];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    if(self.buildingInfoArray.count>0 && isInitialPresenting == YES){
-        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
-    }
 }
 
 -(void)showMarkers
@@ -186,6 +172,13 @@ static BOOL isInitialPresenting = YES;
     return [[GMSCoordinateBounds alloc] initWithCoordinate:northEast coordinate:southWest];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
+        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
 }
@@ -217,7 +210,9 @@ static BOOL isInitialPresenting = YES;
     if([segue.identifier isEqualToString:kSegue_MapToBuilding] == YES)
     {
         //take a snapshot of self
-        self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
+        UIImage *fake = [REMImageHelper imageWithView:self.view];
+        [REMImageHelper drawText:[NSString stringWithFormat:@"%d" ,self.temp++] inImage:fake inRect:CGRectMake(0, 0, 24, 24)];
+        self.snapshot = [[UIImageView alloc] initWithImage: fake];
         
         //prepare custom segue parameters
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
@@ -242,8 +237,8 @@ static BOOL isInitialPresenting = YES;
     [self performSegueWithIdentifier:kSegue_MapToBuilding sender:self];
     
     //if is initial, shut off
-    if(isInitialPresenting == YES)
-        isInitialPresenting = NO;
+    if(self.isInitialPresenting == YES)
+        self.isInitialPresenting = NO;
 }
 
 -(void)presentGalleryView
@@ -321,8 +316,6 @@ static BOOL isInitialPresenting = YES;
 
 - (void)mapView:(GMSMapView *)view didTapInfoWindowOfMarker:(GMSMarker *)marker
 {
-    [self.view setUserInteractionEnabled:NO];
-    
     self.initialZoomRect = [self getZoomFrameFromMarker:marker];
     self.currentBuildingIndex = [self buildingIndexFromBuilding:[marker.userData building]];
     
@@ -353,7 +346,8 @@ static BOOL isInitialPresenting = YES;
 
 #pragma mark - IOS7 style
 -(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
+    //return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 @end

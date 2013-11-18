@@ -283,11 +283,12 @@
                 newEndText=[REMTimeHelper formatTimeFullDay:endTime];
             }
             
-            NSIndexPath *path=[NSIndexPath indexPathForRow:1 inSection:1];
+            NSIndexPath *path=[NSIndexPath indexPathForRow:2 inSection:1];
             UITableViewCell *cell= [self.tableView cellForRowAtIndexPath:path];
             UILabel *text= cell.contentView.subviews[1];
             text.text=newEndText;
         }
+        
         
         ret=[REMTimeHelper formatTimeFullHour:newDate isChangeTo24Hour:NO];
         if(self.showHour==NO){
@@ -402,7 +403,10 @@
                 NSArray* paths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:1]];
                 
                 if(self.cellCount==2) self.cellCount++;
-                
+                NSIndexPath *endPath=[NSIndexPath indexPathForRow:1 inSection:1];
+                UITableViewCell *cell=[tableView cellForRowAtIndexPath:endPath];
+                UILabel *label= cell.contentView.subviews[1];
+                label.textColor=[UIColor blackColor];
                 [self.tableView beginUpdates];
                 if(self.timePickerIndex==2){
                     NSArray* deletePaths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:2 inSection:1]];
@@ -412,6 +416,7 @@
                 [self.tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationTop ];
                 
                 [self.tableView endUpdates];
+                
             }
             
         }
@@ -442,6 +447,10 @@
                 [self.tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationTop ];
                 
                 [self.tableView endUpdates];
+                NSIndexPath *startPath=[NSIndexPath indexPathForRow:0 inSection:1];
+                UITableViewCell *cell=[tableView cellForRowAtIndexPath:startPath];
+                UILabel *label= cell.contentView.subviews[1];
+                label.textColor=[UIColor blackColor];
             }
         }
     }

@@ -23,7 +23,6 @@
 @implementation REMBuildingTrendChartViewController
 
 
-
 -(void)activedButtonChanged:(UIButton*)newButton {
     [self intervalChanged:newButton];
 }
@@ -39,7 +38,7 @@
     
     myView.toggleGroup.delegate = self;
     
-    self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
+    
     
     self.view = myView;
     self.graph = (CPTXYGraph*)myView.hostView.hostedGraph;
@@ -95,6 +94,7 @@
     if (self) {
         self.viewFrame = frame;
         self.requestUrl=REMDSBuildingTimeRangeData;
+        self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
     }
     return self;
 }
@@ -386,6 +386,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    if(self.datasource.count==6){
+        REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
+        [myView.thisMonthButton setOn:YES];
+        [self intervalChanged:myView.thisMonthButton];
+    }
 }
 
 -(NSDictionary *)assembleRequestParametersWithBuildingId:(long long)buildingId WithCommodityId:(long long)commodityID WithMetadata:(REMAverageUsageDataModel *)averageData
@@ -407,26 +413,27 @@
             [series setValue:[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1] forKey:@"color"];
             [self.datasource addObject:series];
         }
-    }
     
-    for(NSDictionary *item in (NSArray *)data){
-        REMBuildingTimeRangeDataModel* dataItem = [[REMBuildingTimeRangeDataModel alloc] initWithDictionary:item];
-        int index = [self getSourceIndex:dataItem.timeRangeType];
-        NSMutableDictionary* series = (NSMutableDictionary*) [self.datasource objectAtIndex:index];
-        NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%@", index, dataItem.timeRangeType, dataItem.timeRangeData.targetGlobalData.target.targetId];
-        [series setValue:targetIdentity forKey:@"identity"];
-        NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:dataItem.timeRangeData.targetEnergyData.count];
-        if(dataItem.timeRangeData.targetEnergyData.count>0){
-            REMTargetEnergyData* targetEData = dataItem.timeRangeData.targetEnergyData[0];
-            for (int i = 0; i < targetEData.energyData.count; i++) {
-                REMEnergyData* pointData = targetEData.energyData[i];
-                if ([pointData.dataValue isEqual:[NSNull null]] || pointData.dataValue.floatValue < 0) {
-                    [data addObject:@{@"y": [NSNull null], @"x": pointData.localTime  }];
-                } else {
-                    [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime  }];
+    
+        for(NSDictionary *item in (NSArray *)data){
+            REMBuildingTimeRangeDataModel* dataItem = [[REMBuildingTimeRangeDataModel alloc] initWithDictionary:item];
+            int index = [self getSourceIndex:dataItem.timeRangeType];
+            NSMutableDictionary* series = (NSMutableDictionary*) [self.datasource objectAtIndex:index];
+            NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%@", index, dataItem.timeRangeType, dataItem.timeRangeData.targetGlobalData.target.targetId];
+            [series setValue:targetIdentity forKey:@"identity"];
+            NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:dataItem.timeRangeData.targetEnergyData.count];
+            if(dataItem.timeRangeData.targetEnergyData.count>0){
+                REMTargetEnergyData* targetEData = dataItem.timeRangeData.targetEnergyData[0];
+                for (int i = 0; i < targetEData.energyData.count; i++) {
+                    REMEnergyData* pointData = targetEData.energyData[i];
+                    if ([pointData.dataValue isEqual:[NSNull null]] || pointData.dataValue.floatValue < 0) {
+                        [data addObject:@{@"y": [NSNull null], @"x": pointData.localTime  }];
+                    } else {
+                        [data addObject:@{@"y": pointData.dataValue, @"x": pointData.localTime  }];
+                    }
                 }
+                [series setValue:data forKey:@"data"];
             }
-            [series setValue:data forKey:@"data"];
         }
     }
     REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
@@ -435,7 +442,7 @@
     
 }
 
-- (void)loadDataFailureWithError:(REMError *)error withResponse:(id)response{
+- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error {
     if (self.datasource.count != 6) {
         for (int i = 0; i < 6; i++) {
             NSMutableDictionary* series = [[NSMutableDictionary alloc] init];
@@ -450,63 +457,7 @@
     
     [self drawLabelWithText:NSLocalizedString(@"BuildingChart_DataError",@"")];
 }
-/*
-- (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(void))loadCompleted
-{
-    NSMutableDictionary *buildingCommodityInfo = [[NSMutableDictionary alloc] init];
-    //    self.buildingInfo.building.buildingId
-    [buildingCommodityInfo setValue:[NSNumber numberWithLong: buildingId] forKey:@"buildingId"];
-    [buildingCommodityInfo setValue:[NSNumber numberWithLong:commodityID] forKey:@"commodityId"];
-    [buildingCommodityInfo setValue:[NSNumber numberWithInt:1] forKey:@"relativeType"];
-    REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSBuildingTimeRangeData parameter:buildingCommodityInfo];
-    store.isAccessLocal = YES;
-    store.groupName = [NSString stringWithFormat:@"b-%lld-%lld", buildingId, commodityID];
-    store.isStoreLocal = YES;
-    store.maskContainer = nil;
-    
-    if (self.datasource.count != 6) {
-        for (int i = 0; i < 6; i++) {
-            NSMutableDictionary* series = [[NSMutableDictionary alloc] init];
-            [series setValue:[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1] forKey:@"color"];
-            [self.datasource addObject:series];
-        }
-    }
-    void (^retrieveSuccess)(id data)=^(id data) {
-        for(NSDictionary *item in (NSArray *)data){
-            REMBuildingTimeRangeDataModel* dataItem = [[REMBuildingTimeRangeDataModel alloc] initWithDictionary:item];
-            int index = [self getSourceIndex:dataItem.timeRangeType];
-            NSMutableDictionary* series = (NSMutableDictionary*) [self.datasource objectAtIndex:index];
-            NSString* targetIdentity = [NSString stringWithFormat:@"%d-%d-%llu", index, dataItem.timeRangeType, dataItem.timeRangeData.targetGlobalData.target.targetId];
-            [series setValue:targetIdentity forKey:@"identity"];
-            NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:dataItem.timeRangeData.targetEnergyData.count];
-            REMTargetEnergyData* targetEData = dataItem.timeRangeData.targetEnergyData[0];
-            for (int i = 0; i < targetEData.energyData.count; i++) {
-                REMEnergyData* pointData = targetEData.energyData[i];
-                [data addObject:@{@"y": [[NSDecimalNumber alloc]initWithDecimal: pointData.dataValue], @"x": pointData.localTime  }];
-            }
-            [series setValue:data forKey:@"data"];
-            loadCompleted();
-        }
-        REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
-        [myView.thisMonthButton setOn:YES];
-        [self intervalChanged:myView.thisMonthButton];
-        
-        [self stopLoadingActivity];
-    };
-    void (^retrieveError)(NSError *error, id response) = ^(NSError *error, id response) {
-        //self.widgetTitle.text = [NSString stringWithFormat:@"Error: %@",error.description];
-        NSLog(@"error:%@",error);
-        [self stopLoadingActivity];
-    };
-    
-    [REMDataAccessor access:store success:retrieveSuccess error:retrieveError];
-}
-*/
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 
 

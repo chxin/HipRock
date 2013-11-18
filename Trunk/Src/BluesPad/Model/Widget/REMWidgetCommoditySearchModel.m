@@ -39,6 +39,12 @@
         [viewAssociation setObject:self.hierarchyId forKey:@"HierarchyId"];
     }
     dic[@"viewAssociation"]=viewAssociation;
+    if(self.carbonUnit!=REMCarbonUnitNone){
+        dic[@"destination"]=@(self.carbonUnit);
+    }
+    if(self.hierarchyId!=nil){
+        dic[@"hierarchyId"]=self.hierarchyId;
+    }
     return dic;
 }
 
@@ -51,6 +57,13 @@
     self.commodityIdArray= [NSKeyedUnarchiver unarchiveObjectWithData:
                             [NSKeyedArchiver archivedDataWithRootObject:commodityIds]];
     self.step=[self stepTypeByNumber:step];
+    
+
+    
+    NSNumber *destination=param[@"destination"];
+    if(destination!=nil){
+        self.carbonUnit=(REMCarbonUnit)[destination intValue];
+    }
     
     NSDictionary *viewAssocation=param[@"viewAssociation"];
     
@@ -67,6 +80,10 @@
         if(hierId!=nil && [hierId isEqual:[NSNull null]]==NO){
             self.hierarchyId=[hierId copy];
         }
+    }
+    NSNumber *hierId=param[@"hierarchyId"];
+    if(hierId!=nil){
+        self.hierarchyId=hierId;
     }
 }
 
@@ -91,7 +108,7 @@
     model.systemDimensionTemplateItemId=[self.systemDimensionTemplateItemId copyWithZone:zone];
     model.areaDimensionId=[self.systemDimensionTemplateItemId copyWithZone:zone];
     model.hierarchyId=[self.hierarchyId copyWithZone:zone];
-    
+    model.carbonUnit=self.carbonUnit;
     return model;
 }
 

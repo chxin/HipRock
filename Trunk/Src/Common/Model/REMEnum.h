@@ -19,6 +19,13 @@ typedef enum _REMCalenderType{
     REMCalendarTypeHCSeason
 } REMCalendarType;
 
+typedef enum _REMCarbonUnit{
+    REMCarbonUnitNone=0,
+    REMCarbonStardardCoal=2,
+    REMCarbonUnitCO2=3,
+    REMCarbonUnitTree=4
+    
+} REMCarbonUnit;
 
 typedef enum _REMDiagramType
 {

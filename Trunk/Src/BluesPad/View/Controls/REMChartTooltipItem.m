@@ -28,8 +28,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.layer.borderColor = [UIColor blueColor].CGColor;
-        self.layer.borderWidth = 1.0f;
+//        self.layer.borderColor = [UIColor blueColor].CGColor;
+//        self.layer.borderWidth = 1.0f;
         self.backgroundColor = [UIColor clearColor];
         
         self.model = model;

@@ -26,5 +26,7 @@
 
 #define REMISIOS7 REMOSGreaterThan(@"7.0")
 
+#define REMUpdateStatusBarAppearenceForIOS7 if(REMISIOS7){ [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)]; }
+
 
 #endif

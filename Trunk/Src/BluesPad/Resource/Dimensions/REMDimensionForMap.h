@@ -17,9 +17,9 @@
 
 
 #pragma mark kDMGallery
-#define kDMGallery_GalleryGroupViewTopOffset 109
+#define kDMGallery_GalleryGroupViewTopOffset REMDMCOMPATIOS7(109)
 #define kDMGallery_GalleryGroupViewWidth (kDMScreenWidth - 2*kDMCommon_ContentLeftMargin)
-#define kDMGallery_GalleryGroupViewHeight (kDMScreenHeight - kDMStatusBarHeight - kDMGallery_GalleryGroupViewTopOffset)
+#define kDMGallery_GalleryGroupViewHeight (kDMScreenHeight - kDMGallery_GalleryGroupViewTopOffset)
 
 #define kDMGallery_GalleryGroupTitleFontSize 16
 #define kDMGallery_GalleryGroupTitleFontColor [UIColor whiteColor]

@@ -27,7 +27,18 @@
 "Common_Giveup"="放弃";
 "Common_OK"="好";
 
-
+//Admin,prefix: Admin_
+"Admin_UserTitleEEConsultant"="能源工程顾问";
+"Admin_UserTitleTechnician"="技术人员";
+"Admin_UserTitleCustomerAdmin"="客户管理员";
+"Admin_UserTitlePlatformAdmin"="平台管理员";
+"Admin_UserTitleEnergyManager"="能源经理";
+"Admin_UserTitleEnergyEngineer"="能源工程师";
+"Admin_UserTitleDepartmentManager"="部门经理";
+"Admin_UserTitleCEO"="管理层";
+"Admin_UserTitleBusinessPersonnel"="业务人员";
+"Admin_UserTitleSaleman"="销售人员";
+"Admin_UserTitleServiceProviderAdmin"="服务商管理员";
 
 //Login, prefix: Login_
 "Login_NoNetwork" = "无可用网络,无法获取最新的能源数据。";

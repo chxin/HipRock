@@ -64,10 +64,10 @@
         //[self performSelector:@selector(loadChartData:) withObject:array afterDelay:0.1];
         //[self performSelector:@selector(loadChartData:) withObject:array afterDelay:0.1];
         
-        [self.controller loadData:[buildingId longLongValue] :[commodityId longLongValue] :averageData :^(REMError *error){
-            self.hasLoaded=YES;
-            callback(YES);
-        }];
+        //[self.controller loadData:[buildingId longLongValue] :[commodityId longLongValue] :averageData :^(REMError *error){
+        //    self.hasLoaded=YES;
+        //    callback(YES);
+        //}];
             }
 }
 
@@ -76,10 +76,10 @@
     NSNumber *commodityId=array[1];
     REMAverageUsageDataModel *averageData=array[2];
     void(^callback)(BOOL)=array[3];
-    [self.controller loadData:[buildingId longLongValue] :[commodityId longLongValue] :averageData :^(REMError *error){
-        self.hasLoaded=YES;
-        callback(YES);
-    }];
+    //[self.controller loadData:[buildingId longLongValue] :[commodityId longLongValue] :averageData :^(REMError *error){
+    //    self.hasLoaded=YES;
+    //    callback(YES);
+    //}];
 }
 
 /*

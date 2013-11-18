@@ -32,35 +32,7 @@ static NSString *cellId=@"dashboardcell";
 - (void)cancelAllRequest{
     [REMDataAccessor cancelAccess:[self groupName]];
 }
-/*
-- (void)loadView{
-    self.tableView= [[REMDashboardView alloc]initWithFrame:self.viewFrame style:UITableViewStyleGrouped];
-     
-    self.view=self.tableView;
-    self.tableView.dataSource=self;
-    self.tableView.delegate=self;
-    
-    [self.tableView registerClass:[REMDashboardCellViewCell class] forCellReuseIdentifier:cellId];
-    self.tableView.sectionFooterHeight=34;
-    
-    //NSLog(@"frame:%@",NSStringFromCGRect(self.view.frame));
-    
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, kDashboardDragTitleMargin, 300, kDashboardDragTitleSize)];
-    label.text=NSLocalizedString(@"Dashboard_PullDownShowGeneral", @"");//@"下拉返回概览能耗信息";
-    label.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:label.frame.size.height];
-    label.textColor=[UIColor whiteColor];
-    label.backgroundColor=[UIColor clearColor];
-    [self.tableView addSubview:label];
-    self.buildingLabel=label;
-    
-    CGRect imgFrame=CGRectMake(168, kDashboardDragTitleMargin-8, 30, 30);
-    UIImage *image=[UIImage imageNamed:@"Down"];
-    UIImageView *arrow=[[UIImageView alloc]initWithImage:image];
-    [arrow setFrame:imgFrame];
-    [self.tableView addSubview:arrow];
-    self.arrow=arrow;
-}
-*/
+
 
 - (void)loadView{
     self.tableView= [[REMDashboardView alloc]initWithFrame:self.viewFrame style:UITableViewStyleGrouped];
@@ -88,9 +60,8 @@ static NSString *cellId=@"dashboardcell";
     [self.tableView addSubview:label];
     self.buildingLabel=label;
     
-    CGRect imgFrame=CGRectMake(168, kDashboardDragTitleMargin-8, 30, 30);
-    UIImage *image=[UIImage imageNamed:@"Down"];
-    UIImageView *arrow=[[UIImageView alloc]initWithImage:image];
+    CGRect imgFrame=CGRectMake(178, kDashboardDragTitleMargin-8, 30, 30);
+    UIImageView *arrow=[[UIImageView alloc]initWithImage:REMIMG_Down];
     [arrow setFrame:imgFrame];
     [self.tableView addSubview:arrow];
     self.arrow=arrow;
@@ -166,7 +137,7 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     REMDashboardCellViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath ];
-   
+    [cell.contentView setFrame:CGRectMake(0, 0, cell.frame.size.width,cell.frame.size.height)];
     REMWidgetCollectionViewController *current;
     for (REMWidgetCollectionViewController *vc in self.childViewControllers) {
         if(vc.currentDashboardIndex == indexPath.section){
@@ -216,9 +187,15 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     
     current.viewFrame=viewFrame;
     cell.tag=indexPath.section;
-    
+    CGFloat height=[self tableView:self.tableView heightForRowAtIndexPath:indexPath];
+    [cell setFrame:CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, height)];
+    [cell.contentView setFrame:CGRectMake(0, 0, cell.bounds.size.width, cell.bounds.size.height)];
+    [current.view setFrame:viewFrame];
     [cell.contentView addSubview:current.view];
     
+    //NSLog(@"section:%d,cellcontent:%@,cell:%@,collection:%@",indexPath.section,NSStringFromCGRect(cell.contentView.frame), NSStringFromCGRect(cell.frame),NSStringFromCGRect(current.view.frame));
+    //cell.contentView.layer.borderWidth=1;
+    //cell.contentView.layer.borderColor=[UIColor redColor].CGColor;
     return cell;
 }
 
@@ -227,17 +204,24 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     CGRect shareFrame;
     if(dashboardInfo.shareInfo!=nil && [dashboardInfo.shareInfo isEqual:[NSNull null]]== NO && [dashboardInfo.shareInfo.userRealName isEqual:[NSNull null]]==NO){
         shareFrame = CGRectMake(0, 0, frame.size.width, kDashboardShareSize);
-        UILabel *shareName=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x, shareFrame.origin.y, frame.size.width, shareFrame.size.height)];
-        shareName.textColor=[UIColor whiteColor];
-        shareName.text=dashboardInfo.shareInfo.userRealName;
-        [cell.contentView addSubview:shareName];
+        UILabel *shareLabel=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x, shareFrame.origin.y, frame.size.width, shareFrame.size.height)];
+        shareLabel.textColor=[UIColor whiteColor];
+        shareLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardShareSize];
+        [shareLabel setBackgroundColor:[UIColor clearColor]];
+        NSString *shareName=dashboardInfo.shareInfo.userRealName;
+        NSString *shareTel=dashboardInfo.shareInfo.userTelephone;
+        NSString *date=[REMTimeHelper formatTimeFullDay:dashboardInfo.shareInfo.shareTime];
+        NSString *userTitle=dashboardInfo.shareInfo.userTitleComponent;
+        shareLabel.text=[NSString stringWithFormat:NSLocalizedString(@"Widget_ShareTitle", @""),shareName,userTitle,date,shareTel];
+        [cell.contentView addSubview:shareLabel];
+        //shareFrame=CGRectMake(shareFrame.origin.x, shareFrame.origin.y+shareFrame.size.height, shareFrame.size.width, shareFrame.size.height);
     }
     else{
         shareFrame = CGRectMake(0, 0, frame.size.width, 0);
     }
     
     
-    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x,shareFrame.origin.y+shareFrame.size.height, frame.size.width, kDashboardTitleSize)];
+    UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x,shareFrame.origin.y+shareFrame.size.height+kDashboardTitleShareMargin, frame.size.width, kDashboardTitleSize)];
     [title setBackgroundColor:[UIColor clearColor]];
     title.text=dashboardInfo.name;
     title.backgroundColor=[UIColor clearColor];
@@ -245,7 +229,7 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     title.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardTitleSize];
     [cell.contentView addSubview:title];
     
-    return CGRectMake(0, title.frame.origin.y+title.frame.size.height+kDashboardTitleBottomMargin, frame.size.width, cell.contentView.frame.size.height-(title.frame.origin.y+title.frame.size.height+kDashboardTitleBottomMargin));
+    return CGRectMake(0, title.frame.origin.y+title.frame.size.height+kDashboardTitleBottomMargin, frame.size.width, cell.contentView.frame.size.height-(title.frame.origin.y+title.frame.size.height+kDashboardTitleBottomMargin+1));
 }
 
 - (void)maxWidget{

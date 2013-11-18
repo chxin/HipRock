@@ -34,9 +34,18 @@
 @implementation REMGalleryViewController
 
 
+-(void)loadView
+{
+    [super loadView];
+    
+    //NSLog(@"gallery frame in loadView:%@", NSStringFromCGRect(self.view.frame));
+}
+
 
 -(void)viewDidLoad
 {
+    //NSLog(@"gallery frame in viewDidLoad:%@", NSStringFromCGRect(self.view.frame));
+    
     //set self styles
     [self stylize];
     
@@ -50,8 +59,14 @@
     [self addGalleryGroupView];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    //NSLog(@"gallery frame in viewWillAppear:%@", NSStringFromCGRect(self.view.frame));
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
+    //NSLog(@"gallery frame in viewDidAppear:%@", NSStringFromCGRect(self.view.frame));
 }
 
 -(void)addButtons

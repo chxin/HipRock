@@ -37,9 +37,12 @@
     NSArray *tagIds=param[@"tagIds"];
     NSDictionary *viewOption=param[@"viewOption"];
     NSNumber *step=viewOption[@"Step"];
+    
     self.timeRangeArray= [self timeRangeToModelArray: viewOption[@"TimeRanges"]];
     self.tagIdArray= [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:tagIds]];
     self.step=[self stepTypeByNumber:step];
+    
+    NSDictionary *dataOption=viewOption[@"DataOption"];
 }
 
 

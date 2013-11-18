@@ -233,7 +233,7 @@
 - (void)initTitleView
 {
     //CGFloat leftMargin=kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin;
-    UILabel *buildingType=[[UILabel alloc]initWithFrame:CGRectMake(0, 13, self.view.frame.size.width, kBuildingTypeTitleFontSize)];
+    UILabel *buildingType=[[UILabel alloc]initWithFrame:CGRectMake(0, 12, self.view.frame.size.width, kBuildingTypeTitleFontSize)];
     buildingType.backgroundColor=[UIColor clearColor];
     buildingType.text=NSLocalizedString(@"Common_Building", @"");//  @"楼宇";
     buildingType.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
@@ -246,9 +246,11 @@
     [self.view addSubview:buildingType];
     
     CGFloat titleSize=kBuildingTitleFontSize;
+    if(self.buildingInfo.building.name.length>25){
+        titleSize=titleSize-3;
+    }
     
-    
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, buildingType.frame.origin.y+buildingType.frame.size.height+7, self.view.frame.size.width, titleSize+5)];
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, buildingType.frame.origin.y+buildingType.frame.size.height+4, self.view.frame.size.width, titleSize)];
     titleLabel.text=self.buildingInfo.building.name ;
     titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     titleLabel.shadowOffset=CGSizeMake(1, 1);
@@ -262,13 +264,15 @@
     [self.view addSubview:titleLabel];
     
     
+    
+    
     UIButton *logoButton = [self getCustomerLogoButton];
     
     [logoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
     
     logoButton.titleLabel.text=@"logo";
-    
-    [logoButton addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [logoButton removeTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [logoButton addTarget:self.parentViewController action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     
     [self.view addSubview:logoButton];
@@ -541,22 +545,29 @@
     [self.shareButton setEnabled:YES];
 }
 
-
+- (void)releaseViewInController:(NSArray *)controllers{
+    if(controllers.count>0){
+        for (UIViewController *vc in controllers) {
+            if(vc.isViewLoaded==YES){
+                vc.view=nil;
+            }
+            [self releaseViewInController:vc.childViewControllers];
+        }
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    //NSLog(@"didReceiveMemoryWarning :%@",[self class]);
     if(self.childViewControllers.count>0){
         if(self.currentCoverStatus==REMBuildingCoverStatusCoverPage){
             UIViewController *controller= self.childViewControllers[1];
-            controller.view=nil;
-            NSLog(@"release cover page");
+             [self releaseViewInController:@[controller]];
         }
         else{
             UIViewController *controller= self.childViewControllers[0];
-            controller.view=nil;
-            NSLog(@"release dashboard");
+            [self releaseViewInController:@[controller]];
         }
     }
     // Dispose of any resources that can be recreated.

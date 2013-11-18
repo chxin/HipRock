@@ -10,9 +10,9 @@
 #import "REMWidgetDetailViewController.h"
 #import "REMWidgetCellViewController.h"
 #import "REMScreenEdgetGestureRecognizer.h"
+#import "REMDimensions.h"
 
-
-const static CGFloat widgetGap=10;
+const static CGFloat widgetGap=20;
 
 
 @interface REMWidgetMaxViewController()
@@ -61,10 +61,10 @@ const static CGFloat widgetGap=10;
     
     // iOS 7.0 supported
     if([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
-        [self setNeedsStatusBarAppearanceUpdate];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
     }
     
-    [self.view setFrame:CGRectMake(0, 0, 1024, 748)];
+    [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
     [self.view setBackgroundColor:[UIColor blackColor]];
     self.cumulateX=0;
     self.speedBase=1280;
@@ -333,6 +333,8 @@ const static CGFloat widgetGap=10;
             return;
         }
         REMWidgetDetailViewController *vc= self.childViewControllers[willIndex.intValue];
+        
+        
        
         [vc showChart];
         
@@ -376,13 +378,20 @@ const static CGFloat widgetGap=10;
 
 
 - (void)popToBuildingCover{
+    [self cancelAllRequest];
     [self performSegueWithIdentifier:@"exitWidgetSegue" sender:self];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    //NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    for (int i=0; i<self.childViewControllers.count; ++i) {
+        if(self.currentWidgetIndex!=i && (self.currentWidgetIndex-1)!=i && (self.currentWidgetIndex+1)!=i){
+            REMWidgetDetailViewController *vc=self.childViewControllers[i];
+            [vc releaseChart];
+        }
+    }
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
