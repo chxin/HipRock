@@ -192,6 +192,7 @@
     } else if (yIntervalMag < 1) {
         while (yIntervalMag < 1) {
             mag /= 10;
+            yIntervalMag*=10;
         }
     }
     return [self roundYInterval:(yMax / intervalCount / mag)] * mag;
