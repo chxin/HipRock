@@ -60,7 +60,62 @@
     self.tempModel=[self.model copy];
     
 }
-
+- (void)initSearchView{
+    
+    UIView *searchViewContainer=[[UIView alloc]initWithFrame:kDMChart_ToolbarFrame];
+    
+    [searchViewContainer setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
+    
+    UISegmentedControl *legendControl=[[UISegmentedControl alloc] initWithItems:@[@"search",@"legend"]];
+    [legendControl setFrame:CGRectMake(kLegendSearchSwitcherLeft, kLegendSearchSwitcherTop, kLegendSearchSwitcherWidth, kLegendSearchSwitcherHeight)];
+    [legendControl setSegmentedControlStyle:UISegmentedControlStylePlain];
+    
+    [legendControl setImage:REMIMG_DateView_Chart forSegmentAtIndex:0];
+    [legendControl setImage:REMIMG_Legend_Chart forSegmentAtIndex:1];
+    //[legendControl setBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    //[legendControl setBackgroundColor:[UIColor clearColor]];
+    [legendControl setSelectedSegmentIndex:0];
+    [legendControl addTarget:self action:@selector(legendSwitchSegmentPressed:) forControlEvents:UIControlEventValueChanged];
+    
+    
+    [self.view addSubview:legendControl];
+    self.legendSearchControl=legendControl;
+    
+    
+    UIButton *timePickerButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, kWidgetDatePickerTopMargin, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
+    timePickerButton.layer.borderColor=[UIColor clearColor].CGColor;
+    timePickerButton.layer.borderWidth=0;
+    [timePickerButton setBackgroundColor:[REMColor colorByHexString:@"#9d9d9d"]];
+    timePickerButton.layer.cornerRadius=4;
+    
+    [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];
+    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-40)];
+    timePickerButton.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetDatePickerTitleSize];
+    [timePickerButton setTitleColor:[REMColor colorByHexString:@"#5e5e5e"] forState:UIControlStateNormal];
+    
+    [timePickerButton addTarget:self action:@selector(showTimePicker) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [searchViewContainer addSubview:timePickerButton];
+    
+    self.timePickerButton = timePickerButton;
+    
+    [self.view addSubview:searchViewContainer];
+    
+    self.searchView=searchViewContainer;
+    
+    UISegmentedControl *stepControl=[[UISegmentedControl alloc] initWithItems:@[@"hour",@"day",@"week",@"month",@"year"]];
+    
+    [searchViewContainer addSubview:stepControl];
+    self.stepControl=stepControl;
+    [self.stepControl addTarget:self action:@selector(stepChanged:) forControlEvents:UIControlEventValueChanged];
+   // REMTimeRange *timeRange=self.tempModel.timeRangeArray[0];
+    //REMEnergyStep step = [self initStepButtonWithRange:timeRange WithStep:self.widgetInfo.contentSyntax.stepType];
+    
+    
+    
+}
 
 - (void)initChartView{
     UIView *c=[[UIView alloc]initWithFrame:CGRectMake(0, kWidgetChartTopMargin, self.view.frame.size.width, kWidgetChartHeight+kWidgetChartLeftMargin)];
@@ -74,12 +129,9 @@
     //self.chartContainer.layer.borderColor=[UIColor redColor].CGColor;
     //self.chartContainer.layer.borderWidth=1;
     //[self showEnergyChart];
-
-    [self setStepControlStatusByStepNoSearch:self.widgetInfo.contentSyntax.stepType];
-    
-    
     
     [self setDatePickerButtonValueNoSearchByTimeRange:self.tempModel.timeRangeArray[0] withRelative:self.tempModel.relativeDateComponent withRelativeType:self.tempModel.relativeDateType];
+    [self setStepControlStatusByStepNoSearch:self.tempModel.step];
 }
 
 - (void) showTimePicker{
@@ -316,10 +368,7 @@
     
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    
-}
+
 
 - (void)rollback{
     REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
@@ -355,6 +404,23 @@
         buttonArray=@[];
     }
     self.supportStepArray=supportStep;
+    BOOL include=NO;
+    for (NSNumber *canStepNumber in self.supportStepArray) {
+        REMEnergyStep canStep=(REMEnergyStep)[canStepNumber intValue];
+        for (NSNumber *showStepNumber in self.currentStepList) {
+            REMEnergyStep showStep=(REMEnergyStep)[showStepNumber intValue];
+            if(showStep==canStep){
+                include=YES;
+                break;
+            }
+        }
+        if(include==YES){
+            break;
+        }
+    }
+    if(include==NO){
+        buttonArray=@[];
+    }
     UIAlertView *alert= [[UIAlertView alloc]init];
     alert.title=@"";
     for (int i=0; i<buttonArray.count; ++i) {
@@ -371,6 +437,18 @@
     
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex>=self.supportStepArray.count) {
+        [self rollback];
+    }
+    else{
+        NSNumber *stepNumber=self.supportStepArray[buttonIndex];
+        REMEnergyStep step=(REMEnergyStep)[stepNumber intValue];
+        [self setStepControlStatusByStep:step];
+    }
+}
+
 - (void)changeTimeRange:(REMTimeRange *)newRange{
    [self.tempModel setTimeRangeItem:newRange AtIndex:0];
 }
@@ -381,32 +459,21 @@
 
 
 - (void)reloadChart{
-    [self.chartWrapper.view removeFromSuperview];
-    [self.chartWrapper destroyView];
-    self.chartWrapper=nil;
-    [self showEnergyChart];
+    [self.chartWrapper redraw:self.energyData];
 }
 
 - (void)setStepControlStatusByStepNoSearch:(REMEnergyStep)step{
-    NSUInteger pressedIndex;
-    if (step == REMEnergyStepHour) {
-        pressedIndex=0;
+    NSUInteger pressedIndex=NSNotFound;
+    int i=0;
+    for (; i<self.currentStepList.count; ++i) {
+        NSNumber *stepNumber=self.currentStepList[i];
+        REMEnergyStep step1=(REMEnergyStep)[stepNumber intValue];
+        if(step1==step){
+            pressedIndex=i;
+            break;
+        }
     }
-    else if(step == REMEnergyStepDay){
-        pressedIndex=1;
-    }
-    else if(step == REMEnergyStepWeek){
-        pressedIndex=2;
-    }
-    else if(step == REMEnergyStepMonth){
-        pressedIndex=3;
-    }
-    else if(step == REMEnergyStepYear){
-        pressedIndex=4;
-    }
-    else{
-        pressedIndex=NSNotFound;
-    }
+    
     if(pressedIndex!=NSNotFound){
         [self.stepControl setSelectedSegmentIndex:pressedIndex];
         
@@ -439,62 +506,6 @@
 
 
 
-- (void)initSearchView{
-    
-    UIView *searchViewContainer=[[UIView alloc]initWithFrame:kDMChart_ToolbarFrame];
-    
-    [searchViewContainer setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
-    
-    UISegmentedControl *legendControl=[[UISegmentedControl alloc] initWithItems:@[@"search",@"legend"]];
-    [legendControl setFrame:CGRectMake(kLegendSearchSwitcherLeft, kLegendSearchSwitcherTop, kLegendSearchSwitcherWidth, kLegendSearchSwitcherHeight)];
-    [legendControl setSegmentedControlStyle:UISegmentedControlStylePlain];
-
-    [legendControl setImage:REMIMG_DateView_Chart forSegmentAtIndex:0];
-    [legendControl setImage:REMIMG_Legend_Chart forSegmentAtIndex:1];
-    //[legendControl setBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    //[legendControl setBackgroundColor:[UIColor clearColor]];
-    [legendControl setSelectedSegmentIndex:0];
-    [legendControl addTarget:self action:@selector(legendSwitchSegmentPressed:) forControlEvents:UIControlEventValueChanged];
-    
-    
-    [self.view addSubview:legendControl];
-    self.legendSearchControl=legendControl;
-
-    
-    UIButton *timePickerButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, kWidgetDatePickerTopMargin, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
-    timePickerButton.layer.borderColor=[UIColor clearColor].CGColor;
-    timePickerButton.layer.borderWidth=0;
-    [timePickerButton setBackgroundColor:[REMColor colorByHexString:@"#9d9d9d"]];
-    timePickerButton.layer.cornerRadius=4;
-    
-    [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];
-    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-40)];
-    timePickerButton.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetDatePickerTitleSize];
-    [timePickerButton setTitleColor:[REMColor colorByHexString:@"#5e5e5e"] forState:UIControlStateNormal];
-    
-    [timePickerButton addTarget:self action:@selector(showTimePicker) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    [searchViewContainer addSubview:timePickerButton];
-    
-    self.timePickerButton = timePickerButton;
-    
-    [self.view addSubview:searchViewContainer];
-    
-    self.searchView=searchViewContainer;
-    
-    UISegmentedControl *stepControl=[[UISegmentedControl alloc] initWithItems:@[@"hour",@"day",@"week",@"month",@"year"]];
-    
-    [searchViewContainer addSubview:stepControl];
-    self.stepControl=stepControl;
-     [self.stepControl addTarget:self action:@selector(stepChanged:) forControlEvents:UIControlEventValueChanged];
-    REMTimeRange *timeRange=self.tempModel.timeRangeArray[0];
-    REMEnergyStep step = [self initStepButtonWithRange:timeRange WithStep:self.widgetInfo.contentSyntax.stepType];
-    
-    
-    
-}
 
 
 

@@ -129,7 +129,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    //NSLog(@"didReceiveMemoryWarning :%@",[self class]);
 }
 
 @end
