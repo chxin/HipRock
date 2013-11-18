@@ -304,6 +304,15 @@
 		7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A48B47D17CDE321002DA386 /* REMInsetsTextField.m */; };
 		7A4A4AB4182B3E63003F1BB0 /* REMTrendChartTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4A4AB3182B3E63003F1BB0 /* REMTrendChartTooltipView.m */; };
 		7A5277F617AF4209007DA735 /* REMIndicatorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5277F517AF4209007DA735 /* REMIndicatorButton.m */; };
+		7A58F24A1839A5650071DE7A /* mail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2411839A5650071DE7A /* mail.jpg */; };
+		7A58F24B1839A5650071DE7A /* Propaganda_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2421839A5650071DE7A /* Propaganda_1.jpg */; };
+		7A58F24C1839A5650071DE7A /* Propaganda_1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2431839A5650071DE7A /* Propaganda_1@2x.jpg */; };
+		7A58F24D1839A5650071DE7A /* Propaganda_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2441839A5650071DE7A /* Propaganda_2.jpg */; };
+		7A58F24E1839A5650071DE7A /* Propaganda_2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2451839A5650071DE7A /* Propaganda_2@2x.jpg */; };
+		7A58F24F1839A5650071DE7A /* Propaganda_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2461839A5650071DE7A /* Propaganda_3.jpg */; };
+		7A58F2501839A5650071DE7A /* Propaganda_3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2471839A5650071DE7A /* Propaganda_3@2x.jpg */; };
+		7A58F2511839A5650071DE7A /* SplashScreenBackgroud.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2481839A5650071DE7A /* SplashScreenBackgroud.jpg */; };
+		7A58F2521839A5650071DE7A /* SplashScreenBackgroud@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2491839A5650071DE7A /* SplashScreenBackgroud@2x.jpg */; };
 		7A5AC77F1817CBEF006C7CB1 /* REMBuildingEntranceSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AC77E1817CBEF006C7CB1 /* REMBuildingEntranceSegue.m */; };
 		7A5AC7821817CC34006C7CB1 /* REMMapGallerySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AC7811817CC34006C7CB1 /* REMMapGallerySegue.m */; };
 		7A5DBD28178FD014006C4EDE /* REMDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD27178FD014006C4EDE /* REMDataAccessor.m */; };
@@ -337,15 +346,6 @@
 		7AC54999181776910037F180 /* REMDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC54998181776910037F180 /* REMDashboardController.m */; };
 		7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
 		7AE8EEA11835C6A8007D0020 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEA01835C6A8007D0020 /* Images.xcassets */; };
-		7AE8EEB31835C9B4007D0020 /* mail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEA51835C9B4007D0020 /* mail.jpg */; };
-		7AE8EEB41835C9B4007D0020 /* Propaganda_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEA81835C9B4007D0020 /* Propaganda_1.jpg */; };
-		7AE8EEB51835C9B4007D0020 /* Propaganda_1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEA91835C9B4007D0020 /* Propaganda_1@2x.jpg */; };
-		7AE8EEB61835C9B4007D0020 /* Propaganda_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEAA1835C9B4007D0020 /* Propaganda_2.jpg */; };
-		7AE8EEB71835C9B4007D0020 /* Propaganda_2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEAB1835C9B4007D0020 /* Propaganda_2@2x.jpg */; };
-		7AE8EEB81835C9B4007D0020 /* Propaganda_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEAC1835C9B4007D0020 /* Propaganda_3.jpg */; };
-		7AE8EEB91835C9B4007D0020 /* Propaganda_3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEAD1835C9B4007D0020 /* Propaganda_3@2x.jpg */; };
-		7AE8EEBA1835C9B4007D0020 /* SplashScreenBackgroud.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB01835C9B4007D0020 /* SplashScreenBackgroud.jpg */; };
-		7AE8EEBB1835C9B4007D0020 /* SplashScreenBackgroud@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB11835C9B4007D0020 /* SplashScreenBackgroud@2x.jpg */; };
 		7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */; };
 		7AF3667817CF2D7400447650 /* REMBuildingChartSeriesIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */; };
 		7AF6AC8117D1BA0D00D62A9A /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
@@ -722,6 +722,15 @@
 		7A4A4AB3182B3E63003F1BB0 /* REMTrendChartTooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartTooltipView.m; sourceTree = "<group>"; };
 		7A5277F417AF4209007DA735 /* REMIndicatorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMIndicatorButton.h; sourceTree = "<group>"; };
 		7A5277F517AF4209007DA735 /* REMIndicatorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMIndicatorButton.m; sourceTree = "<group>"; };
+		7A58F2411839A5650071DE7A /* mail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mail.jpg; sourceTree = "<group>"; };
+		7A58F2421839A5650071DE7A /* Propaganda_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Propaganda_1.jpg; sourceTree = "<group>"; };
+		7A58F2431839A5650071DE7A /* Propaganda_1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Propaganda_1@2x.jpg"; sourceTree = "<group>"; };
+		7A58F2441839A5650071DE7A /* Propaganda_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Propaganda_2.jpg; sourceTree = "<group>"; };
+		7A58F2451839A5650071DE7A /* Propaganda_2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Propaganda_2@2x.jpg"; sourceTree = "<group>"; };
+		7A58F2461839A5650071DE7A /* Propaganda_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Propaganda_3.jpg; sourceTree = "<group>"; };
+		7A58F2471839A5650071DE7A /* Propaganda_3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Propaganda_3@2x.jpg"; sourceTree = "<group>"; };
+		7A58F2481839A5650071DE7A /* SplashScreenBackgroud.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SplashScreenBackgroud.jpg; sourceTree = "<group>"; };
+		7A58F2491839A5650071DE7A /* SplashScreenBackgroud@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "SplashScreenBackgroud@2x.jpg"; sourceTree = "<group>"; };
 		7A5AC77D1817CBEF006C7CB1 /* REMBuildingEntranceSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingEntranceSegue.h; path = Resource/Segue/REMBuildingEntranceSegue.h; sourceTree = "<group>"; };
 		7A5AC77E1817CBEF006C7CB1 /* REMBuildingEntranceSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingEntranceSegue.m; path = Resource/Segue/REMBuildingEntranceSegue.m; sourceTree = "<group>"; };
 		7A5AC7801817CC34006C7CB1 /* REMMapGallerySegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMapGallerySegue.h; path = Resource/Segue/REMMapGallerySegue.h; sourceTree = "<group>"; };
@@ -885,15 +894,6 @@
 		7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceMeta.h; path = Common/Communication/REMServiceMeta.h; sourceTree = "<group>"; };
 		7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceMeta.m; path = Common/Communication/REMServiceMeta.m; sourceTree = "<group>"; };
 		7AE8EEA01835C6A8007D0020 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BluesPad/Resource/Images.xcassets; sourceTree = SOURCE_ROOT; };
-		7AE8EEA51835C9B4007D0020 /* mail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mail.jpg; sourceTree = "<group>"; };
-		7AE8EEA81835C9B4007D0020 /* Propaganda_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Propaganda_1.jpg; sourceTree = "<group>"; };
-		7AE8EEA91835C9B4007D0020 /* Propaganda_1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Propaganda_1@2x.jpg"; sourceTree = "<group>"; };
-		7AE8EEAA1835C9B4007D0020 /* Propaganda_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Propaganda_2.jpg; sourceTree = "<group>"; };
-		7AE8EEAB1835C9B4007D0020 /* Propaganda_2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Propaganda_2@2x.jpg"; sourceTree = "<group>"; };
-		7AE8EEAC1835C9B4007D0020 /* Propaganda_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Propaganda_3.jpg; sourceTree = "<group>"; };
-		7AE8EEAD1835C9B4007D0020 /* Propaganda_3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Propaganda_3@2x.jpg"; sourceTree = "<group>"; };
-		7AE8EEB01835C9B4007D0020 /* SplashScreenBackgroud.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SplashScreenBackgroud.jpg; sourceTree = "<group>"; };
-		7AE8EEB11835C9B4007D0020 /* SplashScreenBackgroud@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "SplashScreenBackgroud@2x.jpg"; sourceTree = "<group>"; };
 		7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
 		7AF3667617CF2D7400447650 /* REMBuildingChartSeriesIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartSeriesIndicator.h; sourceTree = "<group>"; };
 		7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingChartSeriesIndicator.m; sourceTree = "<group>"; };
@@ -2055,67 +2055,19 @@
 		7AE8EEA21835C9B4007D0020 /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
-				7AE8EEA31835C9B4007D0020 /* Building */,
-				7AE8EEA61835C9B4007D0020 /* Chart */,
-				7AE8EEA71835C9B4007D0020 /* Login */,
-				7AE8EEAE1835C9B4007D0020 /* Map */,
-				7AE8EEAF1835C9B4007D0020 /* SplashScreen */,
+				7A58F2411839A5650071DE7A /* mail.jpg */,
+				7A58F2421839A5650071DE7A /* Propaganda_1.jpg */,
+				7A58F2431839A5650071DE7A /* Propaganda_1@2x.jpg */,
+				7A58F2441839A5650071DE7A /* Propaganda_2.jpg */,
+				7A58F2451839A5650071DE7A /* Propaganda_2@2x.jpg */,
+				7A58F2461839A5650071DE7A /* Propaganda_3.jpg */,
+				7A58F2471839A5650071DE7A /* Propaganda_3@2x.jpg */,
+				7A58F2481839A5650071DE7A /* SplashScreenBackgroud.jpg */,
+				7A58F2491839A5650071DE7A /* SplashScreenBackgroud@2x.jpg */,
 				7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */,
 			);
 			name = Pictures;
 			path = Resource/Pictures;
-			sourceTree = "<group>";
-		};
-		7AE8EEA31835C9B4007D0020 /* Building */ = {
-			isa = PBXGroup;
-			children = (
-				7AE8EEA41835C9B4007D0020 /* commodity */,
-				7AE8EEA51835C9B4007D0020 /* mail.jpg */,
-			);
-			path = Building;
-			sourceTree = "<group>";
-		};
-		7AE8EEA41835C9B4007D0020 /* commodity */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = commodity;
-			sourceTree = "<group>";
-		};
-		7AE8EEA61835C9B4007D0020 /* Chart */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Chart;
-			sourceTree = "<group>";
-		};
-		7AE8EEA71835C9B4007D0020 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				7AE8EEA81835C9B4007D0020 /* Propaganda_1.jpg */,
-				7AE8EEA91835C9B4007D0020 /* Propaganda_1@2x.jpg */,
-				7AE8EEAA1835C9B4007D0020 /* Propaganda_2.jpg */,
-				7AE8EEAB1835C9B4007D0020 /* Propaganda_2@2x.jpg */,
-				7AE8EEAC1835C9B4007D0020 /* Propaganda_3.jpg */,
-				7AE8EEAD1835C9B4007D0020 /* Propaganda_3@2x.jpg */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		7AE8EEAE1835C9B4007D0020 /* Map */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Map;
-			sourceTree = "<group>";
-		};
-		7AE8EEAF1835C9B4007D0020 /* SplashScreen */ = {
-			isa = PBXGroup;
-			children = (
-				7AE8EEB01835C9B4007D0020 /* SplashScreenBackgroud.jpg */,
-				7AE8EEB11835C9B4007D0020 /* SplashScreenBackgroud@2x.jpg */,
-			);
-			path = SplashScreen;
 			sourceTree = "<group>";
 		};
 		B41249ED1803ECAE009022C5 /* Biz */ = {
@@ -2504,22 +2456,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AE8EEB91835C9B4007D0020 /* Propaganda_3@2x.jpg in Resources */,
-				7AE8EEB31835C9B4007D0020 /* mail.jpg in Resources */,
+				7A58F24B1839A5650071DE7A /* Propaganda_1.jpg in Resources */,
+				7A58F24C1839A5650071DE7A /* Propaganda_1@2x.jpg in Resources */,
+				7A58F2521839A5650071DE7A /* SplashScreenBackgroud@2x.jpg in Resources */,
 				7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */,
+				7A58F24F1839A5650071DE7A /* Propaganda_3.jpg in Resources */,
 				7A5E2D95177B41B0000F77F9 /* InfoPlist.strings in Resources */,
+				7A58F2511839A5650071DE7A /* SplashScreenBackgroud.jpg in Resources */,
+				7A58F2501839A5650071DE7A /* Propaganda_3@2x.jpg in Resources */,
+				7A58F24A1839A5650071DE7A /* mail.jpg in Resources */,
 				7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */,
-				7AE8EEB51835C9B4007D0020 /* Propaganda_1@2x.jpg in Resources */,
-				7AE8EEBB1835C9B4007D0020 /* SplashScreenBackgroud@2x.jpg in Resources */,
 				B445AEAE177BEEB8002D2A59 /* README.txt in Resources */,
-				7AE8EEB41835C9B4007D0020 /* Propaganda_1.jpg in Resources */,
-				7AE8EEB81835C9B4007D0020 /* Propaganda_3.jpg in Resources */,
 				7AE8EEA11835C6A8007D0020 /* Images.xcassets in Resources */,
-				7AE8EEB71835C9B4007D0020 /* Propaganda_2@2x.jpg in Resources */,
 				7A13C19B17F40D31007E6AA9 /* GoogleMaps.bundle in Resources */,
+				7A58F24D1839A5650071DE7A /* Propaganda_2.jpg in Resources */,
+				7A58F24E1839A5650071DE7A /* Propaganda_2@2x.jpg in Resources */,
 				7A20761417E055E800CD137C /* Localizable.strings in Resources */,
-				7AE8EEB61835C9B4007D0020 /* Propaganda_2.jpg in Resources */,
-				7AE8EEBA1835C9B4007D0020 /* SplashScreenBackgroud.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3134,9 +3086,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 锋 张 (5TSTMPFUYK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos6.1]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3170,7 +3121,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5B259DE4-F6F3-42F1-AA72-F78CC66A34D7";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv7s i386 x86_64";
@@ -3192,7 +3143,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 锋 张 (5TSTMPFUYK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3220,7 +3171,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "02BC422A-77F0-468B-BCD7-099982293332";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -3340,7 +3291,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 锋 张 (5TSTMPFUYK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3368,7 +3319,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "01FF8FD4-050E-48B6-943F-5D12A7467788";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -3474,7 +3425,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 锋 张 (5TSTMPFUYK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3502,7 +3453,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "01FF8FD4-050E-48B6-943F-5D12A7467788";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
