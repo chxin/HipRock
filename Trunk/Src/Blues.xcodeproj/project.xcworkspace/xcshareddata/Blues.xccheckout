@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>D8016B3F-7BB5-483E-8E14-E76E0CDC47AB</string>
+	<string>37E39D59-0155-4CAA-ACAA-AE45F27E5AD7</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Blues</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>2EB6D794-23EE-486A-BCAB-953515E34D51</key>
-		<string>ssh://localhost/Blues.git</string>
+		<key>2791AC5A-14F1-48BA-A839-A34206086C5F</key>
+		<string>ssh://10.177.206.47/Blues.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Trunk/Src/Blues.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>2EB6D794-23EE-486A-BCAB-953515E34D51</key>
+		<key>2791AC5A-14F1-48BA-A839-A34206086C5F</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://localhost/Blues.git</string>
+	<string>ssh://10.177.206.47/Blues.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2EB6D794-23EE-486A-BCAB-953515E34D51</string>
+	<string>2791AC5A-14F1-48BA-A839-A34206086C5F</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2EB6D794-23EE-486A-BCAB-953515E34D51</string>
+			<string>2791AC5A-14F1-48BA-A839-A34206086C5F</string>
 			<key>IDESourceControlWCCName</key>
-			<string>BluesGit</string>
+			<string>Blues</string>
 		</dict>
 	</array>
 </dict>
