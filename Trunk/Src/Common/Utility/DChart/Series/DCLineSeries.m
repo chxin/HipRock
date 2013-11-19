@@ -13,7 +13,7 @@
 -(DCSeries*)initWithData:(NSArray*)seriesData {
     self = [super initWithData:seriesData];
     if (self) {
-        _lineWidth = 1;
+        _lineWidth = 2;
     }
     return self;
 }

@@ -8,14 +8,36 @@
 
 #import "_DCLineLayerCell.h"
 #import "_DCLinesLayer.h"
+@interface _DCLineLayerCell()
+@property (nonatomic,assign) CGRect frameInNextDraw;
+@property (nonatomic, assign) BOOL needSetFrameInNextDraw;
+@end
 
 @implementation _DCLineLayerCell
+-(id)initWithContext:(DCContext *)context {
+    self = [super initWithContext:context];
+    if (self) {
+        _needSetFrameInNextDraw = NO;
+    }
+    return self;
+}
+-(id)init {
+    self = [super init];
+    if (self) {
+        _needSetFrameInNextDraw = NO;
+    }
+    return self;
+}
 
 -(void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
-    self.masksToBounds = YES;
+    self.backgroundColor = [UIColor clearColor].CGColor;
+    self.masksToBounds = NO;
     if (self.xRange == nil) return;
     if (self.superlayer == nil) return;
+    
+    BOOL caTransationState = CATransaction.disableActions;
+    [CATransaction setDisableActions:YES];
     _DCLinesLayer* superLayer = (_DCLinesLayer*)self.superlayer;
     
     CGFloat heightUnitInScreen = (superLayer.yRange != nil && superLayer.yRange.length > 0) ? (self.frame.size.height / superLayer.yRange.length) : 0;
@@ -52,11 +74,15 @@
         CGContextAddLines(ctx, pointsForSeries, countOfPoints);
     }
     CGContextStrokePath(ctx);
-    self.hidden = NO;
+    if (self.needSetFrameInNextDraw) {
+        self.needSetFrameInNextDraw = NO;
+        self.frame = self.frameInNextDraw;
+    }
+    [CATransaction setDisableActions:caTransationState];
 }
 
--(void)setNeedsDisplay {
-    self.hidden = YES;
-    [super setNeedsDisplay];
+-(void)updateNeedsdisplayAndFrame:(CGRect)frame {
+    self.needSetFrameInNextDraw = YES;
+    self.frameInNextDraw = frame;
 }
 @end
