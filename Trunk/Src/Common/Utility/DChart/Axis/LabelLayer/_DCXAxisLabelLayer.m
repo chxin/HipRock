@@ -26,12 +26,6 @@
 }
 -(void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
-    int start = floor(self.graphContext.hRange.location);
-    int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
-    
-    for (int i = start; i <= end; i++) {
-        [self addLabelForX:i];
-    }
     
     CGPoint addLines[2];
     addLines[0].x = 0;
@@ -49,7 +43,8 @@
     CGContextStrokePath(ctx);
 }
 
--(void)viewTouchesMoveFrom:(CGPoint)from to:(CGPoint)to {
+-(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
+    double xMovementInScreen = self.frame.size.width * (newRange.location - oldRange.location) / newRange.length;
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
     
@@ -57,7 +52,7 @@
     [CATransaction setDisableActions:YES];
     for (NSNumber* key in self.xToLayerDic.allKeys) {
         CATextLayer* text = self.xToLayerDic[key];
-        CGRect toFrame = CGRectMake(text.frame.origin.x+to.x-from.x, text.frame.origin.y, text.frame.size.width, text.frame.size.height);
+        CGRect toFrame = CGRectMake(text.frame.origin.x-xMovementInScreen, text.frame.origin.y, text.frame.size.width, text.frame.size.height);
         if ([self isVisableInMyFrame:toFrame]) {
             text.frame = toFrame;
         } else {
@@ -68,7 +63,11 @@
     [CATransaction setDisableActions:caTransationState];
     
     for (int i = start; i <= end; i++) {
-        if (self.xToLayerDic[@(i)] == nil) [self addLabelForX:i];
+        if (self.xToLayerDic[@(i)] == nil) {
+            [self addLabelForX:i];
+            
+            NSLog(@"add label out of context:%i", self.sublayers.count);
+        }
     }
 }
 

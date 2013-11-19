@@ -14,6 +14,7 @@ extern double const kDCReservedSpace;
 extern CGFloat const kDCColumnOffset;
 extern CGFloat const kDCAnimationDuration;
 extern int const kDCLabelToLine;
+extern int const kDCFramesPerSecord;
 
 typedef enum _DCLineType {
     DCLineTypeDefault = 0,

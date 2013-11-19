@@ -12,6 +12,7 @@ double const kDCReservedSpace = 1.05;   // 纵向预留5%的高度
 CGFloat const kDCColumnOffset = 0.1;    // 柱图的横向预留空间
 CGFloat const kDCAnimationDuration = 0.4;    // 柱图的横向预留空间
 int const kDCLabelToLine = 5;              // label到轴线的距离
+int const kDCFramesPerSecord = 60;          // 动画帧数
 
 @interface DCContext()
 @property (nonatomic) NSMutableArray* hRangeObservers;
