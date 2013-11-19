@@ -57,7 +57,7 @@
     useSharedProcessor = !found;
     
     _step = widgetSyntax.step.intValue;
-    _timeRange = widgetSyntax.timeRanges[0];
+    _timeRange = self.energyViewData.visibleTimeRange;
     [super extraSyntax:widgetSyntax];
 }
 
