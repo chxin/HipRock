@@ -26,7 +26,7 @@
 #define kDMScreenWidth 1024
 #define kDMScreenHeight 768
 #define kDMStatusBarHeight 20
-#define kDMDefaultViewFrame CGRectMake(0,0,kDMScreenWidth,kDMScreenHeight-kDMStatusBarHeight)
+#define kDMDefaultViewFrame (REMISIOS7 ? CGRectMake(0,0,kDMScreenWidth,kDMScreenHeight) : CGRectMake(0,0,kDMScreenWidth,kDMScreenHeight-kDMStatusBarHeight))
 
 
 
