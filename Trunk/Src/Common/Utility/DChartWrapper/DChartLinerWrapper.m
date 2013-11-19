@@ -1,22 +1,22 @@
 //
-//  DChartColumnWrapper.m
+//  DChartLinerWrapper.m
 //  Blues
 //
-//  Created by Zilong-Oscar.Xu on 11/18/13.
+//  Created by Zilong-Oscar.Xu on 11/19/13.
 //
 //
 
-#import "DChartColumnWrapper.h"
+#import "DChartLinerWrapper.h"
 #import "REMChartHeader.h"  // FOR IMPORT REMChartDataProcessor only
 
-@implementation DChartColumnWrapper
+@implementation DChartLinerWrapper
 
--(DChartColumnWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style {
+-(DChartLinerWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style {
     self = [super init];
     if (self && energyViewData.targetEnergyData.count != 0) {
         _energyViewData = energyViewData;
         
-        DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:[[DCRange alloc]initWithLocation:-0.5 length:50] stacked:NO];
+        DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:[[DCRange alloc]initWithLocation:-0.5 length:100] stacked:NO];
         
         view.xAxis = [[DCAxis alloc]init];
         view.yAxis0 = [[DCAxis alloc]init];
@@ -70,7 +70,7 @@
                     globalRange = [[DCRange alloc]initWithLocation:-0.5 length:rangeLength];
                 }
             }
-            DCColumnSeries* s = [[DCColumnSeries alloc]initWithData:datas];
+            DCLineSeries* s = [[DCLineSeries alloc]initWithData:datas];
             s.xAxis = view.xAxis;
             if (view.yAxis0.axisTitle == nil) {
                 s.yAxis = view.yAxis0;

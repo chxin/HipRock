@@ -602,6 +602,7 @@
 		EF0346B0183B4BA600DE186A /* _DCLayerTrashbox.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */; };
 		EF0346B3183B520100DE186A /* _DCSeriesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B2183B520100DE186A /* _DCSeriesLayer.m */; };
 		EF0346B6183B6F6200DE186A /* _DCLineLayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B5183B6F6200DE186A /* _DCLineLayerCell.m */; };
+		EF0346B9183B979800DE186A /* DChartLinerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B8183B979800DE186A /* DChartLinerWrapper.m */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 		EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */; };
@@ -1368,6 +1369,8 @@
 		EF0346B2183B520100DE186A /* _DCSeriesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCSeriesLayer.m; sourceTree = "<group>"; };
 		EF0346B4183B6F6200DE186A /* _DCLineLayerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCLineLayerCell.h; sourceTree = "<group>"; };
 		EF0346B5183B6F6200DE186A /* _DCLineLayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCLineLayerCell.m; sourceTree = "<group>"; };
+		EF0346B7183B979800DE186A /* DChartLinerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DChartLinerWrapper.h; path = Common/Utility/DChartWrapper/DChartLinerWrapper.h; sourceTree = "<group>"; };
+		EF0346B8183B979800DE186A /* DChartLinerWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DChartLinerWrapper.m; path = Common/Utility/DChartWrapper/DChartLinerWrapper.m; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
@@ -3094,6 +3097,8 @@
 			children = (
 				EFD9470F1839DEE100E9EC50 /* DChartColumnWrapper.h */,
 				EFD947101839DEE100E9EC50 /* DChartColumnWrapper.m */,
+				EF0346B7183B979800DE186A /* DChartLinerWrapper.h */,
+				EF0346B8183B979800DE186A /* DChartLinerWrapper.m */,
 			);
 			name = DChartWrapper;
 			sourceTree = "<group>";
@@ -3506,6 +3511,7 @@
 				7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */,
 				7A1D7C4517A63E8B0050779D /* REMEncryptHelper.m in Sources */,
 				B408794D1830CC69004042C1 /* REMBuildingCommodityViewController.m in Sources */,
+				EF0346B9183B979800DE186A /* DChartLinerWrapper.m in Sources */,
 				7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */,
 				7A153C5C17AA489600413D3C /* REMBuildingModel.m in Sources */,
 				7A644FDD1839D62C004B5C53 /* REMStackChartLegendView.m in Sources */,

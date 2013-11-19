@@ -17,6 +17,7 @@
 #import "REMTestChartView.h"
 #import "REMDimensions.h"
 #import "DChartColumnWrapper.h"
+#import "DChartLinerWrapper.h"
 
 @interface REMSplashScreenController ()
 
@@ -175,9 +176,13 @@
     energyViewData.targetEnergyData = sereis;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
-    DChartColumnWrapper* columnWidget = [[DChartColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
+    DChartColumnWrapper* columnWidget = [[DChartColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 374) data:energyViewData widgetContext:syntax style:style];
     columnWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:columnWidget.view];
+    
+    DChartLinerWrapper* lineWidget = [[DChartLinerWrapper alloc]initWithFrame:CGRectMake(0, 374, 1024, 374) data:energyViewData widgetContext:syntax style:style];
+    lineWidget.view.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:lineWidget.view];
 }
 
 -(void)oscarTest2 {
