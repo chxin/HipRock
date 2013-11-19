@@ -19,55 +19,40 @@
 
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 
-
 @end
 
 @implementation REMMarkerBubbleView
 
 - (id)initWithMarker:(GMSMarker *)marker
 {
-    self = [super initWithFrame:CGRectZero];
+    CGRect frame = [self getBubbleFrame:marker];
+    
+    self = [super initWithFrame:frame];
     if (self) {
         self.marker = marker;
         self.buildingInfo = marker.userData;
         
-        self.backgroundColor = [UIColor clearColor];
-        self.layer.borderWidth = 1.0;
-        self.layer.borderColor = [UIColor greenColor].CGColor;
-        
-        
-        
-        
-        //titles
-        UILabel *mainTitleLabel = [self getMainTitleLabel], *subTitleLabel = [self getSubTitleLabel];
-        CGSize mainTitleLabelSize = mainTitleLabel.frame.size, subTitleLabelSize = subTitleLabel.frame.size;
-        
-        
-        //calc self frame
-        CGPoint markerPoint = [marker.map.projection pointForCoordinate:marker.position];
-        CGFloat contentWidth = (mainTitleLabelSize.width > subTitleLabelSize.width? mainTitleLabelSize.width : subTitleLabelSize.width) + 2*kDMMap_BubbleContentLeftOffset;
-        CGRect frame = CGRectMake(markerPoint.x, markerPoint.y, contentWidth, kDMMap_BubbleHeight);
-        self.frame = frame;
         
         //render rectangle
-        UIImage *bubbleBodyImage = [REMIMG_MapPopover_Rectangle resizableImageWithCapInsets:UIEdgeInsetsMake(7, 7, 7, 7)];
+        UIImage *bubbleBodyImage = [REMIMG_MapPopover_Rectangle resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9) resizingMode:UIImageResizingModeTile];
         UIImageView *bubbleBody = [[UIImageView alloc] initWithImage:bubbleBodyImage];
-        bubbleBody.layer.borderColor = [UIColor redColor].CGColor;
-        bubbleBody.layer.borderWidth = 1.0f;
-        bubbleBody.frame = CGRectMake(markerPoint.x, markerPoint.y, contentWidth, kDMMap_BubbleBodyHeight);
+        bubbleBody.frame = CGRectMake(0, 0, frame.size.width, kDMMap_BubbleBodyHeight);
         
         [self addSubview:bubbleBody];
         
         //render arrow
         UIImageView *bubbleArrow = [[UIImageView alloc] initWithImage:REMIMG_MapPopover_Arrow];
-        bubbleArrow.frame = CGRectMake((contentWidth - kDMMap_BubbleArrowWidth)/2, kDMMap_BubbleBodyHeight, kDMMap_BubbleArrowWidth, kDMMap_BubbleArrowHeight);
+        bubbleArrow.frame = CGRectMake((frame.size.width - kDMMap_BubbleArrowWidth)/2, kDMMap_BubbleBodyHeight, kDMMap_BubbleArrowWidth, kDMMap_BubbleArrowHeight);
         
         [self addSubview:bubbleArrow];
         
         //render label
-        [self addSubview:mainTitleLabel];
-        [self addSubview:subTitleLabel];
+        [self addSubview:[self getMainTitleLabel]];
+        [self addSubview:[self getSubTitleLabel]];
     }
+    
+    self.backgroundColor = [UIColor clearColor];
+    
     return self;
 }
 
@@ -82,27 +67,64 @@
 
 -(UILabel *)getMainTitleLabel
 {
-    NSString *text = self.buildingInfo.building.name;
+    NSString *mainTitleText = [self getMainTitleText:self.buildingInfo];
+    
     UIFont *font = [UIFont systemFontOfSize:kDMMap_BubbleContentMainTitleFontSize];
-    CGSize size = [text sizeWithFont:font];
+    CGSize size = [mainTitleText sizeWithFont:font];
     
     UILabel *label =  [[UILabel alloc] initWithFrame:CGRectMake(kDMMap_BubbleContentLeftOffset,kDMMap_BubbleContentTopOffset,size.width,size.height)];
     label.text = self.buildingInfo.building.name;
     label.textColor = [UIColor blackColor];
     label.font = font;
+    label.backgroundColor = [UIColor clearColor];
     
     return label;
 }
 
-
 -(UILabel *)getSubTitleLabel
+{
+    NSString *subTitleText = [self getSubTitleText:self.buildingInfo];
+    UIFont *font = [UIFont systemFontOfSize:kDMMap_BubbleContentSubTitleFontSize];
+    CGSize size = [subTitleText sizeWithFont:font];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kDMMap_BubbleContentLeftOffset,kDMMap_BubbleContentSubTitleTopOffset, size.width, size.height)];
+    label.text = @"Hello kitty";
+    label.font = font;
+    label.textColor = [UIColor blackColor];
+    label.backgroundColor = [UIColor clearColor];
+    
+    return label;
+}
+
+-(CGRect)getBubbleFrame:(GMSMarker *)marker
+{
+    REMBuildingOverallModel *buildingInfo = marker.userData;
+    
+    NSString *mainTitleText = [self getMainTitleText:buildingInfo], *subTitleText = [self getSubTitleText:buildingInfo];
+    
+    CGSize mainTitleSize = [mainTitleText sizeWithFont:[UIFont systemFontOfSize:kDMMap_BubbleContentMainTitleFontSize]];
+    CGSize subTitleSize = subTitleText == nil ? CGSizeZero : [subTitleText sizeWithFont:[UIFont systemFontOfSize:kDMMap_BubbleContentSubTitleFontSize]];
+    
+    CGFloat contentWidth = mainTitleSize.width > subTitleSize.width ? mainTitleSize.width : subTitleSize.width;
+    
+    CGPoint markerPoint = [marker.map.projection pointForCoordinate:marker.position];
+    
+    return CGRectMake(markerPoint.x, markerPoint.y, contentWidth + 2*kDMMap_BubbleContentLeftOffset, kDMMap_BubbleHeight);
+}
+
+-(NSString *)getMainTitleText:(REMBuildingOverallModel *)buildingInfo
+{
+    return buildingInfo.building.name;
+}
+
+-(NSString *)getSubTitleText:(REMBuildingOverallModel *)buildingInfo
 {
     REMCommodityUsageModel *usage = nil;
     REMCommodityModel *commodity = nil;
     
-    for(int i=0; i<self.buildingInfo.commodityArray.count; i++){
-        commodity = self.buildingInfo.commodityArray[i];
-        usage = self.buildingInfo.commodityUsage[i];
+    for(int i=0; i<buildingInfo.commodityArray.count; i++){
+        commodity = buildingInfo.commodityArray[i];
+        usage = buildingInfo.commodityUsage[i];
         
         if([commodity.commodityId intValue] == REMCommodityElectricity){
             break;
@@ -112,16 +134,7 @@
     if(usage == nil || commodity == nil || usage.commodityUsage == nil)
         return nil;
     
-    NSString *text = [NSString stringWithFormat:@"本月用电量：%f%@", [usage.commodityUsage.dataValue floatValue], usage.commodityUsage.uom.code];
-    UIFont *font = [UIFont systemFontOfSize:kDMMap_BubbleContentSubTitleFontSize];
-    CGSize size = [text sizeWithFont:font];
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kDMMap_BubbleContentLeftOffset,kDMMap_BubbleContentSubTitleTopOffset, size.width, size.height)];
-    label.text = text;
-    label.font = font;
-    label.textColor = [UIColor blackColor];
-    
-    return label;
+    return [NSString stringWithFormat:@"本月用电量：%f%@", [usage.commodityUsage.dataValue floatValue], usage.commodityUsage.uom.code];
 }
 
 

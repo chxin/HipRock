@@ -10,7 +10,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "REMMapViewController.h"
 
-@interface REMMarkerBubbleView : UIView
+@interface REMMarkerBubbleView : UIControl
 
 //@property (nonatomic,weak) REMMapViewController *controller;
 @property (nonatomic,weak) GMSMarker *marker;
