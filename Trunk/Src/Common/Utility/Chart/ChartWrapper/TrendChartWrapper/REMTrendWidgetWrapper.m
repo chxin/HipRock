@@ -57,27 +57,17 @@
     useSharedProcessor = !found;
     
     _step = widgetSyntax.step.intValue;
-    _timeRange = self.energyViewData.visibleTimeRange;
     [super extraSyntax:widgetSyntax];
 }
 
 -(NSRange)createGlobalRange {
     NSDate* globalEndDate = nil;
-    if (self.energyViewData.targetGlobalData != nil && self.energyViewData.targetGlobalData.energyData.count != 0) {
-        self.baseDateOfX = ((REMEnergyData*)self.energyViewData.targetGlobalData.energyData[0]).localTime;
-        globalEndDate = ((REMEnergyData*)self.energyViewData.targetGlobalData.energyData[self.energyViewData.targetGlobalData.energyData.count-1]).localTime;
+    if (self.energyViewData.globalTimeRange == Nil) {
+        self.baseDateOfX = self.energyViewData.visibleTimeRange.startTime;
+        globalEndDate = self.energyViewData.visibleTimeRange.endTime;
     } else {
-//        REMTimeRange* theFirstTimeRange = [self.widgetSyntax.timeRanges objectAtIndex:0];
-//        self.baseDateOfX = theFirstTimeRange.startTime;
-//        globalEndDate = theFirstTimeRange.endTime;
-        REMTargetEnergyData* se = self.energyViewData.targetEnergyData[0];
-        if (se.energyData.count == 0) {
-            self.baseDateOfX = [NSDate dateWithTimeIntervalSince1970:0];
-            globalEndDate = self.baseDateOfX;
-        } else {
-            self.baseDateOfX = ((REMEnergyData*)se.energyData[0]).localTime;
-            globalEndDate = ((REMEnergyData*)se.energyData[se.energyData.count-1]).localTime;
-        }
+        self.baseDateOfX = self.energyViewData.globalTimeRange.startTime;
+        globalEndDate = self.energyViewData.globalTimeRange.endTime;
     }
     
     sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
@@ -89,6 +79,7 @@
 }
 
 -(NSRange)createInitialRange {
+    _timeRange = self.energyViewData.visibleTimeRange;
     REMTimeRange* theFirstTimeRange = self.timeRange;
     NSDate* endDate = theFirstTimeRange.endTime;
     NSDate* startDate = theFirstTimeRange.startTime;
@@ -178,10 +169,5 @@
             }
         }
     }
-}
-
--(void)redraw:(REMEnergyViewData *)energyViewData {
-    _timeRange = energyViewData.visibleTimeRange;
-    [super redraw:energyViewData];
 }
 @end
