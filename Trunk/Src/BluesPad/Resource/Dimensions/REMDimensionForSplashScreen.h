@@ -9,7 +9,19 @@
 #ifndef Blues_REMDimensionForSplashScreen_h
 #define Blues_REMDimensionForSplashScreen_h
 
+#import "REMDimensions.h"
+
 //prefix: kDMSplash
+#define kDMSplash_LogoViewTopOffset REMDMCOMPATIOS7(190)
+#define kDMSplash_TitleLabelTopOffsetRelativeToLogo 14
+#define kDMSplash_TitleLabelFontSize 24
+#define kDMSplash_TitleLabelFontColor @"#ffffff"
+#define kDMSplash_CopyrightLabelFontSize 12
+#define kDMSplash_CopyrightLabelFontColor @"#ffffff"
+#define kDMSplash_CopyrightLabelBottomOffset 28
+
+
+
 
 
 #endif

@@ -35,6 +35,7 @@
 #pragma mark - Storyboard IDs
 //Prefix: kStoryboard_
 
+#define kStoryboard_LoginPage @"loginPage"
 #define kStoryboard_SettingsPage @"settingsPage"
 
 

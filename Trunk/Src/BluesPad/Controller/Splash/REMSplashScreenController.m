@@ -20,21 +20,91 @@
 
 @interface REMSplashScreenController ()
 
+@property (nonatomic,weak) UIView *backgroundView;
+@property (nonatomic,weak) UIView *logoView;
+@property (nonatomic,weak) UIView *normalLogo;
+@property (nonatomic,weak) UIView *flashLogo;
+
 @property (nonatomic,weak) REMLoginCarouselController *carouselController;
+
 @property (nonatomic) NSMutableArray* plotSource;
+
 @end
 
 @implementation REMSplashScreenController
 
+- (void)loadView
+{
+    [super loadView];
+    
+    if(self){
+        //load background
+        [self loadBackground];
+        
+        //load logo view
+        [self loadLogoView];
+        
+        //load copyright view
+        [self loadCopyrightView];
+    }
+}
+
+- (void)loadBackground
+{
+    UIImageView *background = [[UIImageView alloc] initWithImage:REMLoadImageResource(@"SplashScreenBackgroud", @"jpg")];
+    
+    [self.view addSubview:background];
+    self.backgroundView = background;
+}
+
+- (void)loadLogoView
+{
+    //Normal logo and flash logo
+    CGSize logoSize = REMIMG_SplashScreenLogo_Common.size;
+    UIImageView *normalLogo = [[UIImageView alloc] initWithImage:REMIMG_SplashScreenLogo_Common];
+    UIImageView *flashLogo = [[UIImageView alloc] initWithImage:REMIMG_SplashScreenLogo_Flash];
+    flashLogo.alpha = 0.0f;
+    
+    //Title label
+    NSString *titleText = REMLocalizedString(@"Splash_Title");
+    UIFont *font = [UIFont systemFontOfSize:kDMSplash_TitleLabelFontSize];
+    CGSize labelSize = [titleText sizeWithFont:font];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((logoSize.width - labelSize.width) / 2, logoSize.height + kDMSplash_TitleLabelTopOffsetRelativeToLogo, labelSize.width, labelSize.height)];
+    titleLabel.text = titleText;
+    titleLabel.font = font;
+    titleLabel.textColor = [REMColor colorByHexString:kDMSplash_TitleLabelFontColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    
+    //logo view
+    UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake((kDMScreenWidth-logoSize.width)/2, kDMSplash_LogoViewTopOffset, logoSize.width, logoSize.height + kDMSplash_TitleLabelTopOffsetRelativeToLogo + labelSize.height)];
+    [logoView addSubview:normalLogo];
+    [logoView addSubview:flashLogo];
+    [logoView addSubview:titleLabel];
+    
+    [self.view addSubview:logoView];
+    
+    self.logoView = logoView;
+    self.normalLogo = normalLogo;
+    self.flashLogo = flashLogo;
+}
+
+- (void)loadCopyrightView
+{
+    NSString *copyrightText = REMLocalizedString(@"Splash_Copyright");
+    UIFont *font = [UIFont systemFontOfSize:kDMSplash_CopyrightLabelFontSize];
+    CGSize labelSize = [copyrightText sizeWithFont:font];
+    
+    UILabel *copyrightLabel = [[UILabel alloc] initWithFrame:CGRectMake((kDMScreenWidth - labelSize.width)/2, REMDMCOMPATIOS7(kDMScreenHeight-labelSize.height-kDMSplash_CopyrightLabelBottomOffset-kDMStatusBarHeight), labelSize.width, labelSize.height)];
+    copyrightLabel.text = copyrightText;
+    copyrightLabel.font = font;
+    copyrightLabel.textColor = [REMColor colorByHexString:kDMSplash_CopyrightLabelFontColor];
+    copyrightLabel.backgroundColor = [UIColor clearColor];
+    
+    [self.view addSubview:copyrightLabel];
+}
+
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    
-    // iOS 7.0 supported
-//    if([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
-//        [self setNeedsStatusBarAppearanceUpdate];
-//    }
-    
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
     //    [self.view addSubview:[[REMTrend alloc]initWithFrame:CGRectMake(100, 0, 924, 708)]];
@@ -126,7 +196,7 @@
     CGFloat flashFinalAlpha = 0.9;
     CGFloat normalOriginalAlpha = 1;
     CGFloat normalFinalAlpha = 1;
-    
+
     self.flashLogo.alpha = flashOriginalAlpha;
     self.normalLogo.alpha = normalOriginalAlpha;
     [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
@@ -184,7 +254,7 @@
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
             carouselView.frame = self.view.bounds;
         } completion:^(BOOL finished) {
-            [self.carouselController initializationCarousel];
+            [self.carouselController playCarousel];
         }];
     }
     else{
@@ -266,8 +336,8 @@
 
 - (void)stopBreath
 {
-    [self.normalLogo.layer removeAllAnimations];
-    [self.flashLogo.layer removeAllAnimations];
+//    [self.normalLogo.layer removeAllAnimations];
+//    [self.flashLogo.layer removeAllAnimations];
 }
 
 - (void)didReceiveMemoryWarning

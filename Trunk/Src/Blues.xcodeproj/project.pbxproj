@@ -473,6 +473,7 @@
 		7A644FDA1839D619004B5C53 /* REMChartLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A644FD91839D619004B5C53 /* REMChartLegendView.m */; };
 		7A644FDD1839D62C004B5C53 /* REMStackChartLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A644FDC1839D62C004B5C53 /* REMStackChartLegendView.m */; };
 		7A644FE01839E88E004B5C53 /* REMChartLegendBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A644FDF1839E88E004B5C53 /* REMChartLegendBase.m */; };
+		7A664FD3183B0046004B9FF3 /* REMLoginCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A664FD2183B0046004B9FF3 /* REMLoginCard.m */; };
 		7A66A28C1817794F000A6AB8 /* LoginBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A66A28B1817794F000A6AB8 /* LoginBusiness.m */; };
 		7A6A14F1181E52F4007D06B8 /* REMMarkerBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6A14F0181E52F4007D06B8 /* REMMarkerBubbleView.m */; };
 		7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */; };
@@ -1088,6 +1089,8 @@
 		7A644FDC1839D62C004B5C53 /* REMStackChartLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMStackChartLegendView.m; sourceTree = "<group>"; };
 		7A644FDE1839E88E004B5C53 /* REMChartLegendBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartLegendBase.h; sourceTree = "<group>"; };
 		7A644FDF1839E88E004B5C53 /* REMChartLegendBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartLegendBase.m; sourceTree = "<group>"; };
+		7A664FD1183B0046004B9FF3 /* REMLoginCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginCard.h; sourceTree = "<group>"; };
+		7A664FD2183B0046004B9FF3 /* REMLoginCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginCard.m; sourceTree = "<group>"; };
 		7A66A28A1817794F000A6AB8 /* LoginBusiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginBusiness.h; sourceTree = "<group>"; };
 		7A66A28B1817794F000A6AB8 /* LoginBusiness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginBusiness.m; sourceTree = "<group>"; };
 		7A6A14EF181E52F4007D06B8 /* REMMarkerBubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMMarkerBubbleView.h; sourceTree = "<group>"; };
@@ -2135,6 +2138,8 @@
 				EF60822E17D818430093427C /* REMModalView.m */,
 				7A0F7C5418279528009E898A /* REMChartSeriesIndicator.h */,
 				7A0F7C5518279528009E898A /* REMChartSeriesIndicator.m */,
+				7A664FD1183B0046004B9FF3 /* REMLoginCard.h */,
+				7A664FD2183B0046004B9FF3 /* REMLoginCard.m */,
 			);
 			name = Controls;
 			path = View/Controls;
@@ -3523,6 +3528,7 @@
 				7A153CA717AA497C00413D3C /* REMLoginPageController.m in Sources */,
 				7A153CAA17AA497C00413D3C /* REMSplashScreenController.m in Sources */,
 				B4DC084017F90E2C005658C1 /* REMAdministratorModel.m in Sources */,
+				7A664FD3183B0046004B9FF3 /* REMLoginCard.m in Sources */,
 				B4F3F601181E081800C8DF7F /* REMMaxWidgetSegue.m in Sources */,
 				7A7EA6E1180548CB00A3BB56 /* REMNetworkStatusIndicator.m in Sources */,
 				7A153CB417AA497C00413D3C /* REMWidgetMaxViewController.m in Sources */,

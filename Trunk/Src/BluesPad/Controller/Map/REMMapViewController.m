@@ -47,7 +47,7 @@
 	// Do any additional setup after loading the view.
     
     // iOS 7.0 supported
-    REMUpdateStatusBarAppearenceForIOS7;
+    //REMUpdateStatusBarAppearenceForIOS7;
     
     [self loadMapView];
     
@@ -345,9 +345,15 @@
 }
 
 #pragma mark - IOS7 style
+
 -(UIStatusBarStyle)preferredStatusBarStyle{
-    //return UIStatusBarStyleLightContent;
+    
+#if  __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_6_1
+    return UIStatusBarStyleLightContent;
+#else
     return UIStatusBarStyleDefault;
+#endif
 }
+
 
 @end

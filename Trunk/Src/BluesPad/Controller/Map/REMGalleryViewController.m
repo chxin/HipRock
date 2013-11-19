@@ -283,5 +283,15 @@
     return cellFrameInGalleryView;
 }
 
+#pragma mark - IOS7 style
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    
+#if  __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_6_1
+    return UIStatusBarStyleLightContent;
+#else
+    return UIStatusBarStyleDefault;
+#endif
+}
 
 @end

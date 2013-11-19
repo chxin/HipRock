@@ -16,45 +16,12 @@
                     <view key="view" contentMode="scaleToFill" id="XgD-ii-3PV">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="SplashScreenBackgroud.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="yte-p9-fg9">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n0f-lw-iE2">
-                                <rect key="frame" x="256" y="190" width="512" height="610"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="SplashScreenLogo-Common.png" translatesAutoresizingMaskIntoConstraints="NO" id="EwQ-sM-g4j">
-                                        <rect key="frame" x="122" y="0.0" width="269" height="100"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="SplashScreenLogo-Flash.png" translatesAutoresizingMaskIntoConstraints="NO" id="hrS-r0-aDO">
-                                        <rect key="frame" x="122" y="0.0" width="269" height="100"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="能源管理开放平台" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6iF-YV-ve2">
-                                        <rect key="frame" x="0.0" y="114" width="512" height="32"/>
-                                        <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="24"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="© 2012-2013 施耐德电气（中国）有限公司版权所有" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JqP-yM-LYS">
-                                        <rect key="frame" x="0.0" y="524" width="512" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="VnJ-Zp-20y"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <outlet property="flashLogo" destination="hrS-r0-aDO" id="ID7-WT-p47"/>
-                        <outlet property="logoView" destination="n0f-lw-iE2" id="QSR-aa-obr"/>
-                        <outlet property="normalLogo" destination="EwQ-sM-g4j" id="sUM-63-Oaw"/>
                         <segue destination="8sm-Rk-4h3" kind="custom" identifier="splashToMapSegue" customClass="REMSplashMapSegue" id="9ca-ql-9sS"/>
                     </connections>
                 </viewController>
@@ -516,57 +483,12 @@
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="8bJ-kL-p21">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4k-aO-zDY">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="788"/>
-                            </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="TiN-so-PeV">
-                                <rect key="frame" x="493" y="601" width="38" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="38" id="p8o-m7-fZN"/>
-                                </constraints>
-                                <color key="pageIndicatorTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="pageChanged:" destination="dN9-ev-X3W" eventType="valueChanged" id="Ss3-QX-r8o"/>
-                                </connections>
-                            </pageControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqJ-rh-FGS">
-                                <rect key="frame" x="396" y="611" width="232" height="61"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="61" id="CgM-Bt-P0B"/>
-                                    <constraint firstAttribute="width" constant="232" id="dAa-QI-bnL"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                <state key="normal" title="登录">
-                                    <color key="titleColor" red="0.24705882352941178" green="0.55686274509803924" blue="0.12156862745098039" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="jumpLoginButtonTouchDown:" destination="dN9-ev-X3W" eventType="touchDown" id="1Al-8Y-OA7"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="yqJ-rh-FGS" firstAttribute="centerX" secondItem="y4k-aO-zDY" secondAttribute="centerX" id="4ta-ag-6ug"/>
-                            <constraint firstAttribute="bottom" secondItem="y4k-aO-zDY" secondAttribute="bottom" constant="-20" id="8BY-6y-Z2W"/>
-                            <constraint firstItem="y4k-aO-zDY" firstAttribute="top" secondItem="8bJ-kL-p21" secondAttribute="top" id="LSx-R9-lDX"/>
-                            <constraint firstItem="y4k-aO-zDY" firstAttribute="leading" secondItem="8bJ-kL-p21" secondAttribute="leading" id="aR2-ca-MYI"/>
-                            <constraint firstItem="yqJ-rh-FGS" firstAttribute="centerX" secondItem="TiN-so-PeV" secondAttribute="centerX" id="bSP-kb-hTr"/>
-                            <constraint firstAttribute="bottom" secondItem="TiN-so-PeV" secondAttribute="bottom" constant="130" id="fqG-Oo-Nuj"/>
-                            <constraint firstItem="y4k-aO-zDY" firstAttribute="trailing" secondItem="8bJ-kL-p21" secondAttribute="trailing" id="qex-FJ-B79"/>
-                            <constraint firstItem="yqJ-rh-FGS" firstAttribute="top" secondItem="8bJ-kL-p21" secondAttribute="top" constant="611" id="rwm-Dy-LOT"/>
-                        </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZIr-Dy-6v7"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <connections>
-                        <outlet property="jumpLoginButton" destination="yqJ-rh-FGS" id="vZV-Mp-TfG"/>
-                        <outlet property="pageControl" destination="TiN-so-PeV" id="vkq-w7-Bym"/>
-                        <outlet property="scrollView" destination="y4k-aO-zDY" id="V9E-Tk-uhV"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mjp-Au-mwu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1070,9 +992,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SplashScreenBackgroud.jpg" width="1024" height="768"/>
-        <image name="SplashScreenLogo-Common.png" width="269" height="100"/>
-        <image name="SplashScreenLogo-Flash.png" width="269" height="100"/>
         <image name="share-mail.png" width="48" height="48"/>
         <image name="share-weibo.png" width="48" height="48"/>
     </resources>

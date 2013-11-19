@@ -11,16 +11,13 @@
 
 @interface REMLoginCarouselController : UIViewController<UIScrollViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
-@property (weak, nonatomic) IBOutlet UIButton *jumpLoginButton;
 @property (nonatomic) BOOL showAnimation;
+@property (nonatomic,weak) REMSplashScreenController *splashScreenController;
 
-@property (nonatomic,strong) REMSplashScreenController *splashScreenController;
+//- (IBAction)pageChanged:(id)sender;
+//- (IBAction)jumpLoginButtonTouchDown:(id)sender;
 
-- (IBAction)pageChanged:(id)sender;
-- (IBAction)jumpLoginButtonTouchDown:(id)sender;
--(void)showLoginPage;
-- (void)initializationCarousel;
+-(void)showLoginCard;
+-(void)playCarousel;
 
 @end
