@@ -32,7 +32,7 @@
         self.accessoryView = nil;
         
         //content view
-        self.contentMode = UIViewContentModeScaleToFill;
+        //self.contentMode = UIViewContentModeScaleToFill;
         self.contentView.backgroundColor = [UIColor clearColor];
         self.contentView.clipsToBounds = NO;
     }
@@ -62,9 +62,6 @@
 
 -(void)setCollectionView:(UICollectionView *)collectionView
 {
-    CGRect frame =CGRectMake(0,kDMGallery_GalleryGroupTitleFontSize, collectionView.frame.size.width,collectionView.frame.size.height);
-    collectionView.frame = frame;
-    
     [self.contentView addSubview:collectionView];
 }
 
