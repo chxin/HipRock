@@ -1,35 +1,37 @@
 //
-//  DCMagicLayer.m
-//  Test
+//  _DCLayerTrashbox.m
+//  Blues
 //
-//  Created by Zilong-Oscar.Xu on 11/14/13.
-//  Copyright (c) 2013 Zilong-Oscar.Xu. All rights reserved.
+//  Created by Zilong-Oscar.Xu on 11/19/13.
+//
 //
 
-#import "_DCMagicLayer.h"
+#import "_DCLayerTrashbox.h"
 
-@implementation _DCMagicLayer
+@implementation _DCLayerTrashbox
+
 -(id)init {
     self = [super init];
     if (self) {
         _xToLayerDic = [[NSMutableDictionary alloc]init];
         _trashLayerBox = [[NSMutableArray alloc]init];
-        _trashBoxSize = 1;
+//        _trashBoxSize = 1;
     }
     return self;
 }
 
--(void)clearTrashBox {
-    while (self.trashLayerBox.count > self.trashBoxSize) {
-        CALayer* trashLayer = self.trashLayerBox[self.trashLayerBox.count-1];
-        [trashLayer removeFromSuperlayer];
-        [self.trashLayerBox removeObject:trashLayer];
-    }
-}
+//-(void)clearTrashBox {
+//    while (self.trashLayerBox.count > self.trashBoxSize) {
+//        CALayer* trashLayer = self.trashLayerBox[self.trashLayerBox.count-1];
+//        [trashLayer removeFromSuperlayer];
+//        [self.trashLayerBox removeObject:trashLayer];
+//    }
+//}
 -(void)moveLayerToTrashBox:(CALayer*)layer {
     [self.trashLayerBox addObject:layer];
     layer.hidden = YES;
 }
+
 -(CALayer*)popLayerFromTrashBox {
     CALayer* layer = nil;
     if (self.trashLayerBox.count > 0) {
@@ -39,14 +41,14 @@
     }
     return layer;
 }
--(void)removeFromSuperlayer {
+
+-(void)clearTrashBox {
     [self.xToLayerDic removeAllObjects];
     [self.trashLayerBox removeAllObjects];
-    [super removeFromSuperlayer];
 }
 
--(BOOL)isVisableInMyFrame:(CGRect)rect {
-    if (rect.origin.x >= self.bounds.size.width || rect.origin.y >= self.bounds.size.height
+-(BOOL)isFrame:(CGRect)rect visableIn:(CGRect)outter {
+    if (rect.origin.x >= outter.size.width || rect.origin.y >= outter.size.height
         || rect.origin.x+rect.size.width <= 0 || rect.origin.y+rect.size.height<=0) return NO;
     return YES;
 }

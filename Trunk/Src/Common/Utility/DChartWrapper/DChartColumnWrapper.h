@@ -12,6 +12,7 @@
 #import "REMEnergyViewData.h"
 #import "REMWidgetContentSyntax.h"
 #import "DCColumnSeries.h"
+#import "DCLineSeries.h"
 #import "DCContext.h"
 
 @interface DChartColumnWrapper : NSObject

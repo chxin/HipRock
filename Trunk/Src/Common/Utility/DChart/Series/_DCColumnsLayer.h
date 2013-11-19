@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "_DCMagicLayer.h"
 #import "_DCCoordinateSystem.h"
 #import "DCColumnSeries.h"
 #import "DCContext.h"
+#import "_DCLayerTrashbox.h"
+#import "_DCSeriesLayer.h"
 
-@interface _DCColumnsLayer : _DCMagicLayer<DCContextYRangeObserverProtocal,DCContextHRangeObserverProtocal>
-
--(id)initWithCoordinateSystem:(_DCCoordinateSystem*)coordinateSystem;
-- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden;
+@interface _DCColumnsLayer : _DCSeriesLayer
 @end

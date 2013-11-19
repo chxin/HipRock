@@ -9,5 +9,5 @@
 #import "DCXYSeries.h"
 
 @interface DCLineSeries : DCXYSeries
-
+@property (nonatomic, assign) CGFloat lineWidth;
 @end

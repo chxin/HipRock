@@ -9,77 +9,29 @@
 #import "_DCColumnsLayer.h"
 
 @interface _DCColumnsLayer()
-@property (nonatomic, strong) NSMutableArray* series;
-@property (nonatomic, strong) NSMutableArray* visableSeries;
-@property (nonatomic, weak) _DCCoordinateSystem* coordinateSystem;
-
-@property (nonatomic) CGFloat columnWidthInCoordinateSys;
-@property (nonatomic) CGFloat columnHeightUnitInScreen;
-@property (nonatomic, strong) DCRange* yRange;
-@property (nonatomic, strong) DCRange* xRange;
-
-@property (nonatomic, assign) BOOL enableGrowAnimation;
+@property (nonatomic, strong) _DCLayerTrashbox* trashbox;
 @end
 
 @implementation _DCColumnsLayer
 
 -(id)initWithCoordinateSystem:(_DCCoordinateSystem*)coordinateSystem {
-    self = [super init];
+    self = [super initWithCoordinateSystem:coordinateSystem];
     if (self) {
-        _enableGrowAnimation = YES;
-        NSMutableArray* s = [[NSMutableArray alloc]init];
-        for (DCSeries* se in coordinateSystem.seriesList) {
-            if ([se isKindOfClass:[DCColumnSeries class] ]) {
-                [s addObject:se];
-            }
-        }
-        _series = s;
-        self.masksToBounds = YES;
-        self.trashBoxSize = self.series.count;
-        _visableSeries = s.mutableCopy;
-        _coordinateSystem = coordinateSystem;
+        self.trashbox = [[_DCLayerTrashbox alloc]init];
     }
     return self;
 }
 
 -(void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
-    [self redraw:self.xRange y:self.yRange];
-}
-
--(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
-    if ([DCRange isRange:oldRange equalTo:newRange]) return;
-    [self redraw:self.xRange y:newRange];
-    _yRange = [newRange copy];
-}
-
--(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
-    if ([DCRange isRange:oldRange equalTo:newRange]) return;
-    if (oldRange == Nil) self.enableGrowAnimation = YES;
-    [self redraw:newRange y:self.xRange];
-    _xRange = [newRange copy];
     
-}
-
--(CGRect) getRectForSeries:(DCColumnSeries*)series index:(NSUInteger)index stackedHeight:(double)stackedHeight {
-    DCDataPoint* point = series.datas[index];
-    CGFloat columnHeight = [self getHeightOfPoint:point];
-    return CGRectMake(self.frame.size.width * (index + series.xRectStartAt - self.graphContext.hRange.location) / self.graphContext.hRange.length, self.frame.size.height-columnHeight-stackedHeight, self.frame.size.width * series.columnWidthInCoordinate / self.graphContext.hRange.length, columnHeight);
-}
-
--(void)redraw:(DCRange*)xRange y:(DCRange*)yRange {
-    if ([DCRange isRange:xRange equalTo:self.xRange] && [DCRange isRange:yRange equalTo:self.yRange]) return;
-    [self forceRedraw];
-}
-
--(void)forceRedraw {
     BOOL caTransationState = CATransaction.disableActions;
     [CATransaction setDisableActions:YES];
     if (self.visableSeries.count == 0) {
-        for (DCDataPoint* key in self.xToLayerDic.allKeys) {
-            [self moveLayerToTrashBox:self.xToLayerDic[key]];
+        for (DCDataPoint* key in self.trashbox.xToLayerDic.allKeys) {
+            [self.trashbox moveLayerToTrashBox:self.trashbox.xToLayerDic[key]];
         }
-        [self.xToLayerDic removeAllObjects];
+        [self.trashbox.xToLayerDic removeAllObjects];
     } else {
         self.columnWidthInCoordinateSys = (1 - 2 * kDCColumnOffset) / ((self.graphContext.stacked) ? 1 : self.series.count);
         self.columnHeightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.frame.size.height / self.yRange.length) : 0;
@@ -89,7 +41,6 @@
         start = MAX(0, start);
         
         NSMutableDictionary* xDics = [[NSMutableDictionary alloc]init];
-//        CAAnimation* a = [CATransaction begin ];
         for (int j = start; j<=end; j++) {
             double stackedHeight = 0;
             for (DCColumnSeries* s in self.series) {
@@ -97,9 +48,9 @@
                 if (![self.visableSeries containsObject:s]) continue;
                 DCDataPoint* key = s.datas[j];
                 
-                CALayer* column = self.xToLayerDic[key];
+                CALayer* column = self.trashbox.xToLayerDic[key];
                 CGRect toFrame = [self getRectForSeries:s index:j stackedHeight:stackedHeight];
-                BOOL isRectVisable = [self isVisableInMyFrame:toFrame];
+                BOOL isRectVisable = [self.trashbox isFrame:toFrame visableIn:self.bounds];
                 if (self.graphContext.stacked) stackedHeight += toFrame.size.height;
                 if (column == nil && isRectVisable) {
                     column = [[CALayer alloc]init];
@@ -126,20 +77,30 @@
                     column.frame = toFrame;
                     [xDics setObject:column forKey:key];
                 } else {
-                    [self moveLayerToTrashBox:column];
+                    [self.trashbox moveLayerToTrashBox:column];
+                    [column removeFromSuperlayer];
                 }
             }
         }
         
-        for (DCDataPoint* key in self.xToLayerDic.allKeys) {
+        for (DCDataPoint* key in self.trashbox.xToLayerDic.allKeys) {
             if (xDics[key] == nil) {
-                [self moveLayerToTrashBox:self.xToLayerDic[key]];
+                [self.trashbox.xToLayerDic[key] removeFromSuperlayer];
+                [self.trashbox moveLayerToTrashBox:self.trashbox.xToLayerDic[key]];
             }
         }
-        self.xToLayerDic = xDics;
+        self.trashbox.xToLayerDic = xDics;
     }
     [CATransaction setDisableActions:caTransationState];
     self.enableGrowAnimation = NO;
+    [self.trashbox.trashLayerBox removeAllObjects];
+}
+
+
+-(CGRect) getRectForSeries:(DCColumnSeries*)series index:(NSUInteger)index stackedHeight:(double)stackedHeight {
+    DCDataPoint* point = series.datas[index];
+    CGFloat columnHeight = [self getHeightOfPoint:point];
+    return CGRectMake(self.frame.size.width * (index + series.xRectStartAt - self.graphContext.hRange.location) / self.graphContext.hRange.length, self.frame.size.height-columnHeight-stackedHeight, self.frame.size.width * series.columnWidthInCoordinate / self.graphContext.hRange.length, columnHeight);
 }
 
 -(CGFloat)getHeightOfPoint:(DCDataPoint*)point {
@@ -150,26 +111,7 @@
     return self.columnHeightUnitInScreen * y;
 }
 
--(void)removeFromSuperlayer {
-    [self.series removeAllObjects];
-    [self.visableSeries removeAllObjects];
-    [super removeFromSuperlayer];
-}
-
-- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden {
-    if ([self.series containsObject:series]) {
-        if (hidden == [self.visableSeries containsObject:series]) {
-            if (hidden) {
-                [self.visableSeries removeObject:series];
-                series.yAxis.visableSeriesAmount--;
-                series.xAxis.visableSeriesAmount--;
-            } else {
-                [self.visableSeries addObject:series];
-                series.yAxis.visableSeriesAmount++;
-                series.xAxis.visableSeriesAmount++;
-            }
-            [self forceRedraw];
-        }
-    }
+-(BOOL)isValidSeriesForMe:(DCXYSeries*)series {
+    return [series isKindOfClass:[DCColumnSeries class]];
 }
 @end
