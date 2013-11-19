@@ -40,6 +40,7 @@ static NSString *cellId=@"dashboardcell";
     self.view=self.tableView;
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
+    
 }
 
 - (void)viewDidLoad
@@ -130,6 +131,8 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     return titleHeight+row*cellHeight+cellMargin*margin;
 }
 
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return kDashboardInnerMargin;
@@ -138,6 +141,7 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     REMDashboardCellViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath ];
     [cell.contentView setFrame:CGRectMake(0, 0, cell.frame.size.width,cell.frame.size.height)];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     REMWidgetCollectionViewController *current;
     for (REMWidgetCollectionViewController *vc in self.childViewControllers) {
         if(vc.currentDashboardIndex == indexPath.section){

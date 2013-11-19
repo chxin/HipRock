@@ -16,4 +16,5 @@
 @property (nonatomic, assign) REMEnergyStep step;
 @property (nonatomic, assign) REMTimeRange* timeRange;
 @property (nonatomic, assign) REMCalendarType calenderType;
+-(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step;
 @end

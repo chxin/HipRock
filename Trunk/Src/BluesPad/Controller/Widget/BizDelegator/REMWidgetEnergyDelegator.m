@@ -191,8 +191,11 @@
             NSString *text=NSLocalizedString(@"Widget_CalendarStepError", @"");
             [self showCalendarMsg:[NSString stringWithFormat:text,[self calendarComponent]]];
         }
+        [trend redraw:self.energyData step:self.tempModel.step];
     }
-    [self.chartWrapper redraw:self.energyData];
+    else{
+        [self.chartWrapper redraw:self.energyData];
+    }
 }
 
 - (void) showCalendarMsg:(NSString *)msg{
