@@ -124,6 +124,7 @@ const int cardCount = 4;
     
     [self addChildViewController:loginPageController];
     self.loginPageController = loginPageController;
+    self.loginPageController.loginCarouselController = self;
     
     return loginPageController.view;
 }
