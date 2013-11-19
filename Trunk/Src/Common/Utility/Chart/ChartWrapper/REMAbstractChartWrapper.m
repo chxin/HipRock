@@ -59,11 +59,12 @@
 -(void)redraw:(REMEnergyViewData *)energyViewData {
     CGRect frame = self.view.frame;
     UIView* superView = self.view.superview;
+    [self.view removeFromSuperview];
     [self destroyView];
     
     _energyViewData = energyViewData;
     _view = [self renderContentView:frame chartConfig:[self getChartConfig:myStyle]];
-    myStyle = nil;
+//    myStyle = nil;
     if (superView) [superView addSubview:self.view];
 }
 @end

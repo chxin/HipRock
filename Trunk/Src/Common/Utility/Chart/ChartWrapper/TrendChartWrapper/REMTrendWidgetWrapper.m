@@ -179,4 +179,9 @@
         }
     }
 }
+
+-(void)redraw:(REMEnergyViewData *)energyViewData {
+    _timeRange = energyViewData.visibleTimeRange;
+    [super redraw:energyViewData];
+}
 @end
