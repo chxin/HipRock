@@ -24,9 +24,6 @@
         self.masksToBounds = YES;
         _visableSeries = s.mutableCopy;
         _coordinateSystem = coordinateSystem;
-        if (coordinateSystem.graphContext) {
-            [coordinateSystem.graphContext addHRangeObsever:self];
-        }
     }
     return self;
 }

@@ -104,6 +104,8 @@
         [self.graphContext addY0RangeObsever:self.columnLayer0];
         self.lineLayer0 = [self createLineLayer:self.coordinate0];
         [self.graphContext addY0RangeObsever:self.lineLayer0];
+        [self.graphContext addHRangeObsever:self.columnLayer0];
+        [self.graphContext addHRangeObsever:self.lineLayer0];
         
         self._yLabelLayer0 = [self createYLabelLayer:self.yAxis0];
         self._yLabelLayer0.isMajorAxis = YES;
@@ -116,6 +118,8 @@
         [self.graphContext addY1RangeObsever:self.columnLayer1];
         self.lineLayer1 = [self createLineLayer:self.coordinate1];
         [self.graphContext addY1RangeObsever:self.lineLayer1];
+        [self.graphContext addHRangeObsever:self.columnLayer1];
+        [self.graphContext addHRangeObsever:self.lineLayer1];
         
         self._yLabelLayer1 = [self createYLabelLayer:self.yAxis1];
         self._yLabelLayer1.isMajorAxis = (self._yLabelLayer0 == nil);
@@ -128,6 +132,8 @@
         [self.graphContext addY2RangeObsever:self.columnLayer2];
         self.lineLayer2 = [self createLineLayer:self.coordinate2];
         [self.graphContext addY2RangeObsever:self.lineLayer2];
+        [self.graphContext addHRangeObsever:self.columnLayer2];
+        [self.graphContext addHRangeObsever:self.lineLayer2];
         
         self._yLabelLayer2 = [self createYLabelLayer:self.yAxis2];
         self._yLabelLayer2.isMajorAxis = (self._yLabelLayer0 == nil && self._yLabelLayer1 == nil);
@@ -164,20 +170,26 @@
 
 -(_DCColumnsLayer*)createColumnLayer:(_DCCoordinateSystem*)coordinate {
     _DCColumnsLayer* layer = [[_DCColumnsLayer alloc]initWithCoordinateSystem:coordinate];
-    layer.graphContext = self.graphContext;
-    layer.frame = self.plotRect;
-    [self.layer addSublayer:layer];
-    [layer setNeedsDisplay];
-    return layer;
+    if (layer.series.count > 0) {
+        layer.graphContext = self.graphContext;
+        layer.frame = self.plotRect;
+        [self.layer addSublayer:layer];
+        [layer setNeedsDisplay];
+        return layer;
+    }
+    return nil;
 }
 
 -(_DCLinesLayer*)createLineLayer:(_DCCoordinateSystem*)coordinate {
     _DCLinesLayer* layer = [[_DCLinesLayer alloc]initWithCoordinateSystem:coordinate];
-    layer.graphContext = self.graphContext;
-    layer.frame = self.plotRect;
-    [self.layer addSublayer:layer];
-    [layer setNeedsDisplay];
-    return layer;
+    if (layer.series.count > 0) {
+        layer.graphContext = self.graphContext;
+        layer.frame = self.plotRect;
+        [self.layer addSublayer:layer];
+        [layer setNeedsDisplay];
+        return layer;
+    }
+    return nil;
 }
 
 

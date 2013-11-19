@@ -36,6 +36,7 @@ double const kDCYRangeChangeDetection = 1.05;          // 在设定YRange的时�
     return self;
 }
 -(void)addHRangeObsever:(id<DCContextHRangeObserverProtocal>)observer {
+    if (observer == nil) return;
     if (self.hRangeObservers == nil) self.hRangeObservers = [[NSMutableArray alloc]init];
     [self.hRangeObservers addObject:observer];
 }
@@ -49,6 +50,7 @@ double const kDCYRangeChangeDetection = 1.05;          // 在设定YRange的时�
     }
 }
 -(void)addY0RangeObsever:(id<DCContextYRangeObserverProtocal>)observer {
+    if (observer == nil) return;
     if (self.y0RangeObservers == nil) self.y0RangeObservers = [[NSMutableArray alloc]init];
     [self.y0RangeObservers addObject:observer];
 }
@@ -62,6 +64,7 @@ double const kDCYRangeChangeDetection = 1.05;          // 在设定YRange的时�
     }
 }
 -(void)addY1RangeObsever:(id<DCContextYRangeObserverProtocal>)observer {
+    if (observer == nil) return;
     if (self.y1RangeObservers == nil) self.y1RangeObservers = [[NSMutableArray alloc]init];
     [self.y1RangeObservers addObject:observer];
 }
@@ -75,6 +78,7 @@ double const kDCYRangeChangeDetection = 1.05;          // 在设定YRange的时�
     }
 }
 -(void)addY2RangeObsever:(id<DCContextYRangeObserverProtocal>)observer {
+    if (observer == nil) return;
     if (self.y2RangeObservers == nil) self.y2RangeObservers = [[NSMutableArray alloc]init];
     [self.y2RangeObservers addObject:observer];
 }
@@ -148,6 +152,7 @@ double const kDCYRangeChangeDetection = 1.05;          // 在设定YRange的时�
     }
 }
 -(void)addY0IntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer {
+    if (observer == nil) return;
     if (self.y0IntervalObservers == nil) self.y0IntervalObservers = [[NSMutableArray alloc]init];
     [self.y0IntervalObservers addObject:observer];
 }
@@ -172,6 +177,7 @@ double const kDCYRangeChangeDetection = 1.05;          // 在设定YRange的时�
     }
 }
 -(void)addY1IntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer {
+    if (observer == nil) return;
     if (self.y1IntervalObservers == nil) self.y1IntervalObservers = [[NSMutableArray alloc]init];
     [self.y1IntervalObservers addObject:observer];
 }
@@ -196,6 +202,7 @@ double const kDCYRangeChangeDetection = 1.05;          // 在设定YRange的时�
     }
 }
 -(void)addY2IntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer {
+    if (observer == nil) return;
     if (self.y2IntervalObservers == nil) self.y2IntervalObservers = [[NSMutableArray alloc]init];
     [self.y2IntervalObservers addObject:observer];
 }

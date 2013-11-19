@@ -25,6 +25,11 @@
 
 -(void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
+    [self redraw];
+}
+
+-(void)redraw {
+    
     
     BOOL caTransationState = CATransaction.disableActions;
     [CATransaction setDisableActions:YES];
@@ -118,13 +123,15 @@
 
 -(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
+    if ([DCRange isRange:self.yRange equalTo:newRange]) return;
     [super didYRangeChanged:oldRange newRange:newRange];
-    [self setNeedsDisplay];
+    [self redraw];
 }
 
 -(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
+    if ([DCRange isRange:self.xRange equalTo:newRange]) return;
     [super didHRangeChanged:oldRange newRange:newRange];
-    [self setNeedsDisplay];
+    [self redraw];
 }
 @end
