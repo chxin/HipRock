@@ -79,7 +79,9 @@
     [self.view addSubview:switchButton];
     
     //add customer logo button
-    [self.view addSubview:self.customerLogoButton];
+    UIButton *logoButton = self.customerLogoButton;
+    logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,kDMCommon_CustomerLogoTop,kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
+    [self.view addSubview:logoButton];
 }
 
 -(void)stylize

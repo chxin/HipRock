@@ -11,7 +11,7 @@
 
 @interface REMLoginCustomerViewController : UITableViewController
 
-@property (nonatomic,strong) REMLoginPageController *loginPageController;
+@property (nonatomic,weak) REMLoginPageController *loginPageController;
 - (IBAction)cancelButtonPressed:(id)sender;
 
 @end

@@ -72,7 +72,9 @@
     }
     
     //add customer logo button
-    [self.view addSubview:self.customerLogoButton];
+    UIButton *logoButton = self.customerLogoButton;
+    logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,kDMCommon_CustomerLogoTop,kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
+    [self.view addSubview:logoButton];
 }
 
 -(void)showMarkers
@@ -116,7 +118,7 @@
     mapView.settings.consumesGesturesInView = NO;
     mapView.settings.rotateGestures = NO;
     
-    [self updateCamera];
+    [self updateCamera:mapView];
     
     [self.view addSubview: mapView];
     [self.view sendSubviewToBack: mapView];
@@ -124,22 +126,22 @@
     self.mapView = mapView;
 }
 
--(void)updateCamera
+-(void)updateCamera:(GMSMapView *)mapView
 {
     // one building, set the building's location
     if(self.buildingInfoArray.count == 1){
         REMBuildingModel *building = [self.buildingInfoArray[0] building];
         
-        [self.mapView setCamera:[GMSCameraPosition cameraWithLatitude:building.latitude longitude:building.longitude zoom:12]];
+        [mapView setCamera:[GMSCameraPosition cameraWithLatitude:building.latitude longitude:building.longitude zoom:12]];
     }
     else{// multiple buildings, set the rect
         //northEast and southWest
         UIEdgeInsets visiableBounds = [self getVisiableBounds];
         GMSCoordinateBounds *bounds = [self coordinateBoundsFromEdgeInsets:visiableBounds];
         
-        GMSCameraPosition *camera = [self.mapView cameraForBounds:bounds insets:kDMMap_MapEdgeInsets];
+        GMSCameraPosition *camera = [mapView cameraForBounds:bounds insets:kDMMap_MapEdgeInsets];
         
-        [self.mapView setCamera:camera];
+        [mapView setCamera:camera];
     }
 }
 
