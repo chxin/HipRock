@@ -62,7 +62,7 @@
     NSUInteger endLocation = self.visableRange.location + self.visableRange.length + 2;
     for (REMEnergyData* data in self.energyData) {
         int xVal = [self.dataProcessor processX:data.localTime].intValue;
-        if (xVal < self.visableRange.location) continue;
+        if (xVal < 0 || xVal < self.visableRange.location) continue;
         if (xVal > endLocation) break;
         while (index != xVal) {
             [source addObject:@{@"x":@(index), @"y":[NSNull null], @"enenrgydata":[NSNull null]}];
