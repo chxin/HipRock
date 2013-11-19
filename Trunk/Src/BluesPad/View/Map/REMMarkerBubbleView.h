@@ -12,10 +12,9 @@
 
 @interface REMMarkerBubbleView : UIView
 
-@property (nonatomic,weak) REMMapViewController *controller;
+//@property (nonatomic,weak) REMMapViewController *controller;
 @property (nonatomic,weak) GMSMarker *marker;
 
 - (id)initWithMarker:(GMSMarker *)marker;
-- (void)highlight;
 
 @end

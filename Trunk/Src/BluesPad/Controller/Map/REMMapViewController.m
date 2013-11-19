@@ -332,14 +332,6 @@
     return bubble;
 }
 
--(void)bubbleTapped:(REMMarkerBubbleView *)bubble
-{
-    self.initialZoomRect = [self getZoomFrameFromMarker:bubble.marker];
-
-    self.currentBuildingIndex = [self buildingIndexFromBuilding:[bubble.marker.userData building]];
-    [self presentBuildingView];
-}
-
 #pragma mark - Segue
 -(IBAction)unwindSegueToMap:(UIStoryboardSegue *)sender
 {
