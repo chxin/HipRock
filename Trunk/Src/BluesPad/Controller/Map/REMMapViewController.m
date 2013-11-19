@@ -85,7 +85,6 @@
         
         REMBuildingModel *building = buildingInfo.building;
         
-        
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.position = CLLocationCoordinate2DMake(building.latitude, building.longitude);
         marker.userData = buildingInfo;
@@ -330,14 +329,6 @@
     REMMarkerBubbleView *bubble = [[REMMarkerBubbleView alloc] initWithMarker:marker];
     
     return bubble;
-}
-
--(void)bubbleTapped:(REMMarkerBubbleView *)bubble
-{
-    self.initialZoomRect = [self getZoomFrameFromMarker:bubble.marker];
-
-    self.currentBuildingIndex = [self buildingIndexFromBuilding:[bubble.marker.userData building]];
-    [self presentBuildingView];
 }
 
 #pragma mark - Segue
