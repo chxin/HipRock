@@ -159,7 +159,7 @@
             }
             else
             {
-                [self.loginCarouselController showLoginPage];
+                [self.loginCarouselController showLoginCard];
             }
         }
     }

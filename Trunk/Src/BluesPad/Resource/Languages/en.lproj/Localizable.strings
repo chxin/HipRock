@@ -40,7 +40,13 @@
 "Admin_UserTitleSaleman"="销售人员";
 "Admin_UserTitleServiceProviderAdmin"="服务商管理员";
 
+//Splash, prefix: Splash_
+"Splash_Title" = "能源管理开放平台";
+"Splash_Copyright" = "© 2012-2013 施耐德电气（中国）有限公司版权所有";
+
 //Login, prefix: Login_
+"Login_SkipToLoginButtonText" = "登录";
+"Login_LoginButtonText" = "登录";
 "Login_NoNetwork" = "无可用网络,无法获取最新的能源数据。";
 "Login_NetworkTimeout" = "网络连接超时,部分最新的能源数据未获得。";
 
@@ -122,6 +128,8 @@
 "Mail_AccountNotConfigured" = "未配置邮件账户";
 
 //Chart, prefix: Chart_
+"Chart_TargetValue" = "目标值";
+"Chart_BaselineValue" = "基准值";
 "Chart_TOUPeak" = "峰时";
 "Chart_TOUValley" = "谷时";
 "Chart_TOUPlain" = "平时";

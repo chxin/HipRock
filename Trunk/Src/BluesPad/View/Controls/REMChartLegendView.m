@@ -11,6 +11,7 @@
 
 @implementation REMChartLegendView
 
+
 - (id)initWithItems:(NSArray *)itemModels andHiddenSeries:(NSArray *)hiddenSeries
 {
     self = [super initWithFrame:kDMChart_ToolbarHiddenFrame];
