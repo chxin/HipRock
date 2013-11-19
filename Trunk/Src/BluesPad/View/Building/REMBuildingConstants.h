@@ -71,7 +71,7 @@
 #define kCommodityScrollTop -20
 
 #define kImageWidth 1024
-#define kImageHeight 768
+#define kImageHeight 748
 
 #define kImageMargin 5
 
