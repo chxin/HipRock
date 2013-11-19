@@ -582,6 +582,7 @@
 		B4E815D718273E5600FB9BC5 /* REMWidgetRankingSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E815D618273E5600FB9BC5 /* REMWidgetRankingSearchModel.m */; };
 		B4E815DE18276F4700FB9BC5 /* REMWidgetBizDelegatorBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E815DD18276F4700FB9BC5 /* REMWidgetBizDelegatorBase.m */; };
 		B4E815E1182770B700FB9BC5 /* REMWidgetEnergyDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E815E0182770B700FB9BC5 /* REMWidgetEnergyDelegator.m */; };
+		B4E88C2B1839D5FF001341F0 /* REMBuildingChartContainerView2.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E88C2A1839D5FF001341F0 /* REMBuildingChartContainerView2.m */; };
 		B4EDFB181806653400873FA1 /* REMEnergyMultiTimeSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EDFB171806653400873FA1 /* REMEnergyMultiTimeSearcher.m */; };
 		B4EDFB1B180697F300873FA1 /* REMControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EDFB1A180697F300873FA1 /* REMControllerBase.m */; };
 		B4F0AF5C182A2B0A00CD8F3A /* REMChartTooltipItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AF5B182A2B0A00CD8F3A /* REMChartTooltipItem.m */; };
@@ -1325,6 +1326,8 @@
 		B4E815DD18276F4700FB9BC5 /* REMWidgetBizDelegatorBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetBizDelegatorBase.m; path = BizDelegator/REMWidgetBizDelegatorBase.m; sourceTree = "<group>"; };
 		B4E815DF182770B700FB9BC5 /* REMWidgetEnergyDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetEnergyDelegator.h; path = BizDelegator/REMWidgetEnergyDelegator.h; sourceTree = "<group>"; };
 		B4E815E0182770B700FB9BC5 /* REMWidgetEnergyDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetEnergyDelegator.m; path = BizDelegator/REMWidgetEnergyDelegator.m; sourceTree = "<group>"; };
+		B4E88C291839D5FF001341F0 /* REMBuildingChartContainerView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingChartContainerView2.h; path = View/Building/REMBuildingChartContainerView2.h; sourceTree = "<group>"; };
+		B4E88C2A1839D5FF001341F0 /* REMBuildingChartContainerView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingChartContainerView2.m; path = View/Building/REMBuildingChartContainerView2.m; sourceTree = "<group>"; };
 		B4EDFB161806653400873FA1 /* REMEnergyMultiTimeSearcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergyMultiTimeSearcher.h; path = Biz/Energy/Searcher/REMEnergyMultiTimeSearcher.h; sourceTree = "<group>"; };
 		B4EDFB171806653400873FA1 /* REMEnergyMultiTimeSearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnergyMultiTimeSearcher.m; path = Biz/Energy/Searcher/REMEnergyMultiTimeSearcher.m; sourceTree = "<group>"; };
 		B4EDFB19180697F300873FA1 /* REMControllerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMControllerBase.h; path = Controller/REMControllerBase.h; sourceTree = "<group>"; };
@@ -2709,6 +2712,8 @@
 				B4A0FCD417C6023300C7AD56 /* REMBuildingAirQualityView.m */,
 				EF48011E17D7098D002A2EF6 /* REMBuildingWeiboView.h */,
 				EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */,
+				B4E88C291839D5FF001341F0 /* REMBuildingChartContainerView2.h */,
+				B4E88C2A1839D5FF001341F0 /* REMBuildingChartContainerView2.m */,
 			);
 			name = Building;
 			sourceTree = "<group>";
@@ -3594,6 +3599,7 @@
 				7A0288FE17C20CC500709111 /* WeiboDialog.m in Sources */,
 				7A44E04518238D5E0080CEBE /* REMBuildingShareViewController.m in Sources */,
 				EF8A47F817F959B5009B5C33 /* REMAbstractChartWrapper.m in Sources */,
+				B4E88C2B1839D5FF001341F0 /* REMBuildingChartContainerView2.m in Sources */,
 				EF8A480A17F95FA1009B5C33 /* REMLineWidgetWrapper.m in Sources */,
 				7A0288FF17C20CC500709111 /* WeiboLoginDialog.m in Sources */,
 				7A02890017C20CC500709111 /* Weibo.m in Sources */,
@@ -3973,7 +3979,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 锋 张 (5TSTMPFUYK)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4008,6 +4014,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv7s i386 x86_64";
@@ -4027,7 +4034,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 锋 张 (5TSTMPFUYK)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4055,7 +4062,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "02BC422A-77F0-468B-BCD7-099982293332";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -4173,7 +4180,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 锋 张 (5TSTMPFUYK)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4201,7 +4208,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "01FF8FD4-050E-48B6-943F-5D12A7467788";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -4305,7 +4312,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 锋 张 (5TSTMPFUYK)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4333,7 +4340,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "01FF8FD4-050E-48B6-943F-5D12A7467788";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;

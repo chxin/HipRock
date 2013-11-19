@@ -69,5 +69,17 @@ static CGFloat bottomAxisOffset = 16.0;
 }
 */
 
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
+    
+   BOOL ret=  [super pointInside:point withEvent:event];
+    
+    return ret;
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+    
+    return [super hitTest:point withEvent:event];
+}
+
 
 @end

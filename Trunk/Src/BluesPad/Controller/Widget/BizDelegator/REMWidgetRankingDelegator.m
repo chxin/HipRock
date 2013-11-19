@@ -98,6 +98,17 @@
     [self setDatePickerButtonValueNoSearchByTimeRange:m.timeRangeArray[0] withRelative:m.relativeDateComponent withRelativeType:m.relativeDateType];
 }
 
+- (void)search{
+    [self doSearchWithModel:self.model callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
+        if(data!=nil){
+            [self reloadChart];
+        }
+        else{
+        }
+    }];
+}
+
+
 - (void) setDatePickerButtonValueNoSearchByTimeRange:(REMTimeRange *)range withRelative:(NSString *)relativeDate withRelativeType:(REMRelativeTimeRangeType)relativeType
 {
     NSString *text=[REMTimeHelper formatTimeRangeFullDay:range];
@@ -117,21 +128,12 @@
     [self setDatePickerButtonValueNoSearchByTimeRange:newRange withRelative:newDateComponent withRelativeType:relativeType];
     
     
-    [self doSearchWithModel:self.model callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
-        if(data!=nil){
-            [self reloadChart];
-        }
-        else{
-        }
-    }];
+    [self search];
     
 }
 
 - (void)reloadChart{
-    [self.chartWrapper.view removeFromSuperview];
-    [self.chartWrapper destroyView];
-    self.chartWrapper=nil;
-    [self showEnergyChart];
+    [self.chartWrapper redraw:self.energyData];
 }
 
 

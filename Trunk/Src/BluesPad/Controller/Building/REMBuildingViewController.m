@@ -22,6 +22,7 @@
 #import "REMWidgetCellViewController.h"
 #import "REMBuildingShareViewController.h"
 #import "REMDimensions.h"
+#import "REMBuildingChartContainerView2.h"
 
 const static CGFloat buildingGap=20;
 
@@ -108,12 +109,12 @@ const static CGFloat buildingGap=20;
 }
 
 
-
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] ==YES ){
         if(self.childViewControllers.count<1)return YES;
-        if( [touch.view isKindOfClass:[CPTGraphHostingView class]] == YES) return NO;
+        NSLog(@"touch:%@",touch.view);
+        if( [touch.view isKindOfClass:[REMBuildingChartContainerView2 class]] == YES) return NO;
         return YES;
     }
     else if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]==YES){
@@ -126,7 +127,6 @@ const static CGFloat buildingGap=20;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    NSLog(@"didReceiveMemoryWarning :%@",[self class]);
     // Dispose of any resources that can be recreated.
 }
 
