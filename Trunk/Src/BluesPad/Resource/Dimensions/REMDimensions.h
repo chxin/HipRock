@@ -39,7 +39,7 @@
 
 #define kDMCommon_TopLeftButtonLeft kDMCommon_ContentLeftMargin
 
-#define kDMCommon_TopLeftButtonTop REMDMCOMPATIOS7(23)
+#define kDMCommon_TopLeftButtonTop 23
 
 #define kDMCommon_TopLeftButtonWidth 32
 #define kDMCommon_TopLeftButtonHeight 32
@@ -47,7 +47,7 @@
 
 #define kDMCommon_CustomerLogoLeft kDMCommon_TopLeftButtonLeft + kDMCommon_TopLeftButtonWidth 
 
-#define kDMCommon_CustomerLogoTop REMDMCOMPATIOS7(18)
+#define kDMCommon_CustomerLogoTop 18
 
 
 
