@@ -8,11 +8,7 @@
 
 #import "REMWidgetRankingSearchModel.h"
 
-@interface REMWidgetRankingSearchModel(){
-    REMRelativeTimeRangeType _relativeType;
-}
 
-@end
 
 @implementation REMWidgetRankingSearchModel
 
@@ -71,20 +67,6 @@
     
 }
 
-
-- (void)setRelativeDateType:(REMRelativeTimeRangeType)relativeDateType{
-    if(relativeDateType!=_relativeType){
-        REMTimeRange *range= [REMTimeHelper relativeDateFromType:relativeDateType];
-        [self setTimeRangeItem:range AtIndex:0];
-        _relativeType=relativeDateType;
-        self.relativeDateComponent=[REMTimeHelper relativeDateComponentFromType:_relativeType];
-    }
-}
-
-- (REMRelativeTimeRangeType)relativeDateType{
-    return _relativeType;
-}
-
 - (id)copyWithZone:(NSZone *)zone
 {
     REMWidgetRankingSearchModel *model=[super copyWithZone:zone];
@@ -96,8 +78,7 @@
     model.systemDimensionTemplateItemId=[self.systemDimensionTemplateItemId copyWithZone:zone];
     model.areaDimensionId=[self.systemDimensionTemplateItemId copyWithZone:zone];
     model.destination=[self.destination copyWithZone:zone];
-    model.relativeDateComponent=[self.relativeDateComponent copyWithZone:zone];
-    model.relativeDateType=self.relativeDateType;
+    
     return model;
 }
 

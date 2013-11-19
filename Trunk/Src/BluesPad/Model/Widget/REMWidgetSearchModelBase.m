@@ -11,6 +11,14 @@
 #import "REMWidgetCommoditySearchModel.h"
 #import "REMWidgetRankingSearchModel.h"
 #import "REMWidgetMultiTimespanSearchModel.h"
+
+
+@interface REMWidgetSearchModelBase(){
+    REMRelativeTimeRangeType _relativeType;
+}
+
+@end
+
 @implementation REMWidgetSearchModelBase
 
 + (REMWidgetSearchModelBase *)searchModelByDataStoreType:(REMDataStoreType)dataStoreType withParam:(NSDictionary *)param
@@ -18,7 +26,8 @@
     REMWidgetSearchModelBase *model=nil;
     if(dataStoreType == REMDSEnergyTagsTrend ||
        dataStoreType == REMDSEnergyTagsTrendUnit ||
-       dataStoreType == REMDSEnergyTagsDistribute ){
+       dataStoreType == REMDSEnergyTagsDistribute ||
+       dataStoreType == REMDSEnergyRatio){
         model = [[REMWidgetTagSearchModel alloc]init];
     }
     else if( dataStoreType ==REMDSEnergyMultiTimeTrend ||
@@ -84,13 +93,32 @@
     return newArray;
 }
 
+- (void)setRelativeDateType:(REMRelativeTimeRangeType)relativeDateType{
+    if(relativeDateType!=_relativeType){
+        if(relativeDateType!=REMRelativeTimeRangeTypeNone){
+            REMTimeRange *range= [REMTimeHelper relativeDateFromType:relativeDateType];
+            [self setTimeRangeItem:range AtIndex:0];
+        }
+        _relativeType=relativeDateType;
+        self.relativeDateComponent=[REMTimeHelper relativeDateComponentFromType:_relativeType];
+    }
+    if(self.relativeDateComponent==nil){
+        self.relativeDateComponent=[REMTimeHelper relativeDateComponentFromType:relativeDateType];
+    }
+}
+
+- (REMRelativeTimeRangeType)relativeDateType{
+    return _relativeType;
+}
+
 
 - (id)copyWithZone:(NSZone *)zone
 {
     REMWidgetSearchModelBase *base=[[[self class]allocWithZone:zone]init];
     base.timeRangeArray=[NSKeyedUnarchiver unarchiveObjectWithData:
                          [NSKeyedArchiver archivedDataWithRootObject:self.timeRangeArray]];
-    
+    base.relativeDateComponent=[self.relativeDateComponent copyWithZone:zone];
+    base.relativeDateType=self.relativeDateType;
     return base;
 }
 

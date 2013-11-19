@@ -27,6 +27,46 @@ typedef enum _REMCarbonUnit{
     
 } REMCarbonUnit;
 
+typedef enum _REMUnitType{
+    REMUnitTypeNone=0,
+    REMUnitTypeTotalPersonUnit=2,
+    REMUnitTypeTotalAreaUnit=3,
+    REMUnitTypeCoolingAreaUnit=4,
+    REMUnitTypeHeatingAreaUnit=5
+    
+} REMUnitType;
+
+typedef enum _REMRankingType{
+    REMRankingTypeNone=0,
+    REMRankingTypeCorporation=1,
+    REMRankingTypeTotalPersonUnit=2,
+    REMRankingTypeTotalAreaUnit=3,
+    REMRankingTypeCoolingAreaUnit=4,
+    REMRankingTypeHeatingAreaUnit=5
+    
+} REMRankingType;
+
+typedef enum _REMLabellingType{
+    REMLabellingTypeNone=0,
+    
+    REMLabellingTypeTotalPersonUnit=1,
+    REMLabellingTypeTotalAreaUnit=2,
+    REMLabellingTypeCoolingAreaUnit=3,
+    REMLabellingTypeHeatingAreaUnit=4,
+    REMLabellingTypeDayNightRatioValue=5,
+    REMLabellingTypeWorkDayRatioValue=6
+    
+} REMLabellingType;
+
+typedef enum _REMRatioType{
+    REMRatioTypeNone=0,
+    REMRatioTypeDayNight=1,
+    REMRatioTypeWorkDay=2,
+    REMRatioTypeDataValue=3
+    
+} REMRatioType;
+
+
 typedef enum _REMDiagramType
 {
     REMDiagramTypePie,

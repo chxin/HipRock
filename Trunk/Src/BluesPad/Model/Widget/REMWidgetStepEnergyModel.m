@@ -61,8 +61,12 @@
     base.step=self.step;
     base.zoneId=[self.zoneId copyWithZone:zone];
     base.industryId=[self.industryId copyWithZone:zone];
-    base.relativeDateComponent=[self.relativeDateComponent copyWithZone:zone];
-    base.relativeDateType=self.relativeDateType;
+    base.benchmarkText=[self.benchmarkText copyWithZone:zone];
+    
+    base.ratioType=self.ratioType;
+    base.unitType=self.unitType;
+    base.rankingType=self.rankingType;
+    base.labellingType=self.labellingType;
     return base;
 }
 

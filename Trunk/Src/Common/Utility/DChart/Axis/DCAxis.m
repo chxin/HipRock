@@ -12,12 +12,8 @@
 -(id)init {
     self = [super init];
     if (self) {
-//        _axisCoordinate = DCAxisCoordinateX;
-//        _axisType = DCAxisTypeMajor;
-
         _lineStyle = DCLineTypeDefault;
         _visableSeriesAmount = 0;
-//        _labelAlign = DCAxisLabelAlignBottomCenter;
     }
     return self;
 }

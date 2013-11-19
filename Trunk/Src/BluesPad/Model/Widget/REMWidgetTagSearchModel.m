@@ -8,11 +8,7 @@
 
 #import "REMWidgetTagSearchModel.h"
 
-@interface REMWidgetTagSearchModel(){
-    REMRelativeTimeRangeType _relativeType;
-}
 
-@end
 
 @implementation REMWidgetTagSearchModel
 
@@ -25,10 +21,27 @@
     
     NSArray *newTimeRangeArray=[self timeRangeToDictionaryArray];
     
-    dic[@"viewOption"]=@{@"Step":step,@"IncludeNavigatorData":@(1),@"TimeRanges":newTimeRangeArray};
+    
     if(self.industryId!=nil || self.zoneId!=nil){
         dic[@"benchmarkOption"]=@{@"IndustryId":self.industryId,@"ZoneId":self.zoneId};
     }
+    NSMutableDictionary *dataOption=[[NSMutableDictionary alloc]initWithCapacity:4];
+    if(self.ratioType!=REMRatioTypeNone ){
+        dataOption[@"RatioType"]=@(self.ratioType);
+        dic[@"ratioType"]=@(self.ratioType);
+    }
+    if(self.unitType!=REMUnitTypeNone){
+        dataOption[@"UnitType"]=@(self.unitType);
+    }
+    if(self.rankingType!=REMRankingTypeNone)
+    {
+        dataOption[@"RankType"]=@(self.rankingType);
+    }
+    if(self.labellingType!=REMLabellingTypeNone){
+        dataOption[@"LabelingType"]=@(self.labellingType);
+    }
+    
+    dic[@"viewOption"]=@{@"Step":step,@"IncludeNavigatorData":@(1),@"TimeRanges":newTimeRangeArray,@"DataOption":dataOption};
     return dic;
 }
 
@@ -42,22 +55,42 @@
     self.tagIdArray= [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:tagIds]];
     self.step=[self stepTypeByNumber:step];
     
-    NSDictionary *dataOption=viewOption[@"DataOption"];
-}
-
-
-- (void)setRelativeDateType:(REMRelativeTimeRangeType)relativeDateType{
-    if(relativeDateType!=_relativeType){
-        REMTimeRange *range= [REMTimeHelper relativeDateFromType:relativeDateType];
-        [self setTimeRangeItem:range AtIndex:0];
-        _relativeType=relativeDateType;
-        self.relativeDateComponent=[REMTimeHelper relativeDateComponentFromType:_relativeType];
+    NSDictionary *bench=param[@"benchmarkOption"];
+    if(bench!=nil && [bench isEqual:[NSNull null]]==NO){
+        self.industryId=bench[@"IndustryId"];
+        self.zoneId=bench[@"ZoneId"];
+        self.benchmarkText=bench[@"BenchmarkText"];
     }
+    
+    NSDictionary *dataOption=viewOption[@"DataOption"];
+    
+    if(dataOption!=nil){
+        NSNumber *ratioType=dataOption[@"RatioType"];
+        NSNumber *unitType=dataOption[@"UnitType"];
+        NSNumber *rankingType=dataOption[@"RankingType"];
+        NSNumber *labellingType=dataOption[@"LabelingType"];
+        
+        self.ratioType=(REMRatioType)[ratioType intValue];
+        self.unitType=(REMUnitType)[unitType intValue];
+        self.rankingType=(REMRankingType)[rankingType intValue];
+        self.labellingType=(REMLabellingType)[labellingType intValue];
+    }
+    else{
+        self.ratioType=REMRatioTypeNone;
+        self.unitType=REMUnitTypeNone;
+        self.rankingType=REMRankingTypeNone;
+        self.labellingType=REMLabellingTypeNone;
+    }
+    NSNumber *ratioType=param[@"ratioType"];
+    if(ratioType!=nil){
+        self.ratioType=(REMRatioType)[ratioType intValue];
+    }
+    
+    
 }
 
-- (REMRelativeTimeRangeType)relativeDateType{
-    return _relativeType;
-}
+
+
 
 - (id)copyWithZone:(NSZone *)zone{
     REMWidgetTagSearchModel *model=[super copyWithZone:zone];

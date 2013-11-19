@@ -45,7 +45,7 @@
                 }
             }
             processor.baseDate = processorBaseTime;
-            globalRange = [[DCRange alloc]initWithLocation:0 length:[processor processX:globalEndDate].doubleValue];
+            globalRange = [[DCRange alloc]initWithLocation:-0.5 length:[processor processX:globalEndDate].doubleValue];
         } else {
         }
         
@@ -67,7 +67,7 @@
             if (targetEnergy.energyData.count > 0) {
                 double rangeLength = [processor processX:[targetEnergy.energyData[targetEnergy.energyData.count-1] localTime]].doubleValue;
                 if (globalRange == nil || globalRange.length < rangeLength) {
-                    globalRange = [[DCRange alloc]initWithLocation:0 length:rangeLength];
+                    globalRange = [[DCRange alloc]initWithLocation:-0.5 length:rangeLength];
                 }
             }
             DCColumnSeries* s = [[DCColumnSeries alloc]initWithData:datas];

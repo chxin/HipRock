@@ -22,6 +22,4 @@
 @property (nonatomic,strong) NSNumber *rankType;
 
 @property (nonatomic,strong) NSNumber *destination;
-@property (nonatomic,strong) NSString *relativeDateComponent;
-@property (nonatomic) REMRelativeTimeRangeType relativeDateType;
 @end
