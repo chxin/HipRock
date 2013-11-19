@@ -45,4 +45,20 @@
         CGContextSetLineDash(context, 0, dash, 2);
     }
 }
+
++(BOOL)isMinorChangeForYRange:(DCRange*)oldRange new:(DCRange*)newRange {
+    if (oldRange.length > newRange.length) {
+        return oldRange.length/newRange.length <= kDCYRangeChangeDetection;
+    } else {
+        return newRange.length/oldRange.length <= kDCYRangeChangeDetection;
+    }
+}
+
+
+
++(BOOL)isFrame:(CGRect)rect visableIn:(CGRect)outter {
+    if (rect.origin.x >= outter.size.width || rect.origin.y >= outter.size.height
+        || rect.origin.x+rect.size.width <= 0 || rect.origin.y+rect.size.height<=0) return NO;
+    return YES;
+}
 @end

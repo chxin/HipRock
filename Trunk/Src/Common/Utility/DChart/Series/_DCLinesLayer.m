@@ -7,76 +7,101 @@
 //
 
 #import "_DCLinesLayer.h"
-@interface _DCLinesLayer()
+#import "_DCLineLayerCell.h"
+#import "REMColor.h"
+#import "DCUtility.h"
 
+NSUInteger const kDCLineLayerCells = 10;
+
+@interface _DCLinesLayer()
+@property (nonatomic, strong) NSMutableArray* cellList;
 @end
 
 @implementation _DCLinesLayer
--(void)drawInContext:(CGContextRef)ctx {
-    [super drawInContext:ctx];
-    self.columnHeightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.frame.size.height / self.yRange.length) : 0;
-    int start = floor(self.graphContext.hRange.location);
-    int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
-    start = MAX(0, start);
-    
-    CGContextSetLineJoin(ctx, kCGLineJoinMiter);
-    CGContextSetLineCap(ctx , kCGLineCapRound);
-    CGContextSetBlendMode(ctx, kCGBlendModeNormal);
-    
-
-    for (DCLineSeries* s in self.series) {
-        int loopEnd = s.datas.count-1;
-        if (end < loopEnd) loopEnd = end;
-        int numbersOfPoint = loopEnd-start+1;
-        CGPoint pointsForSeries[numbersOfPoint];
-        for (int j = start; j <= loopEnd; j++) {
-            DCDataPoint* p = s.datas[j];
-            pointsForSeries[j-start].x = self.frame.size.width*(j-self.graphContext.hRange.location)/self.graphContext.hRange.length;
-            pointsForSeries[j-start].y = self.frame.size.height-[self getHeightOfPoint:p];
-        }
-        CGContextSetLineWidth(ctx, s.lineWidth);
-        CGContextSetStrokeColorWithColor(ctx, s.color.CGColor);
-        CGContextBeginPath(ctx);
-        CGContextAddLines(ctx, pointsForSeries, numbersOfPoint);
-        CGContextStrokePath(ctx);
+-(id)initWithCoordinateSystem:(_DCCoordinateSystem*)coordinateSystem {
+    self = [super initWithCoordinateSystem:coordinateSystem];
+    if (self) {
+        self.cellList = [[NSMutableArray alloc]init];
     }
+    return self;
 }
-//    if (cachedPoints == nil || cachedPoints.count == 0) return;
-//
-//    CGSize sizeOfLayer = layer.frame.size;
-//
-//    DCRange* coordinateXRange = self.xAxis.range;
-//
-//    CGPoint points[cachedPoints.count];
-//    
-//    for (NSUInteger index = 0; index < cachedPoints.count; index++) {
-//        DCDataPoint* point = cachedPoints[index];
-//        
-//        points[index].x = sizeOfLayer.width * (index + cacheRange.location - coordinateXRange.location) / coordinateXRange.length;
-//        points[index].y = sizeOfLayer.height * (1 - point.value.doubleValue / self.yAxis.range.length);
-//    }
-//    
-//    CGContextSetLineJoin(ctx, kCGLineJoinMiter);
-//    CGContextSetLineCap(ctx , kCGLineCapRound);
-//    CGContextSetBlendMode(ctx, kCGBlendModeNormal);
-//    CGContextBeginPath(ctx);
-//    CGContextAddLines(ctx, points, cachedPoints.count);
-//    CGContextSetLineWidth(ctx, 1);
-//    CGContextSetStrokeColorWithColor(ctx, [UIColor whiteColor].CGColor);
-//    CGContextClosePath(ctx);
-//    CGContextStrokePath(ctx);
-//    
-//    layer.backgroundColor = [UIColor redColor].CGColor;
 
--(CGFloat)getHeightOfPoint:(DCDataPoint*)point {
-    double y = 0;
-    if (point.value != nil && ![point.value isEqual:[NSNull null]]) {
-        y = point.value.doubleValue;
+-(void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self updateCellsFrameNRange];
+}
+
+-(void)updateCellsFrameNRange {
+    CGFloat cellWidth = self.frame.size.width / (kDCLineLayerCells - 1);
+    if (self.cellList.count == 0) {
+        for (int i = 0; i < kDCLineLayerCells; i++) {
+            _DCLineLayerCell *cell = [[_DCLineLayerCell alloc]initWithContext:self.graphContext];
+            cell.frame = CGRectMake(i*cellWidth, 0, (i+1)*cellWidth, self.frame.size.height);
+//            cell.backgroundColor = [REMColor colorByIndex:i].cgColor;
+            [self addSublayer:cell];
+            [self.cellList addObject:cell];
+        }
     }
-    return self.columnHeightUnitInScreen * y;
+    BOOL needReRange = (((_DCLineLayerCell *)self.cellList[0]).xRange == nil && self.xRange != nil);
+    if (needReRange) {
+        double rangeCell = self.xRange.length / (kDCLineLayerCells - 1);
+        for (int i = 0; i < kDCLineLayerCells; i++) {
+            _DCLineLayerCell *cell = self.cellList[i];
+            cell.xRange = [[DCRange alloc]initWithLocation:self.xRange.location+i*rangeCell length:rangeCell];
+            cell.frame = CGRectMake(self.frame.size.width * (cell.xRange.location - self.xRange.location) / self.xRange.length, 0, cellWidth, self.frame.size.height);
+        }
+    }
 }
 
 -(BOOL)isValidSeriesForMe:(DCXYSeries*)series {
     return [series isKindOfClass:[DCLineSeries class]];
+}
+
+-(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
+    if ([DCRange isRange:oldRange equalTo:newRange]) return;
+    if (self.xRange == nil) {
+        [super didHRangeChanged:oldRange newRange:newRange];
+        [self updateCellsFrameNRange];
+    } else {
+        [super didHRangeChanged:oldRange newRange:newRange];
+        CGFloat cellWidth = self.frame.size.width / (kDCLineLayerCells - 1);
+        BOOL caTransationState = CATransaction.disableActions;
+        [CATransaction setDisableActions:YES];
+        for (int i = 0; i < kDCLineLayerCells; i++) {
+            _DCLineLayerCell *cell = self.cellList[i];
+            CGRect toFrame = CGRectMake(self.frame.size.width * (cell.xRange.location - self.xRange.location) / self.xRange.length, 0, cellWidth, self.frame.size.height);
+            if ([DCUtility isFrame:toFrame visableIn:self.bounds]) {
+                cell.frame = toFrame;
+            } else {
+                DCRange* newRange;
+                if (toFrame.origin.x < 0) {
+                    newRange = [[DCRange alloc]initWithLocation:cell.xRange.location + self.xRange.length + cell.xRange.length length:cell.xRange.length];
+                } else {
+                    newRange = [[DCRange alloc]initWithLocation:cell.xRange.location - self.xRange.length - cell.xRange.length length:cell.xRange.length];
+                }
+                
+                cell.xRange = newRange;
+                cell.hidden = YES;
+                toFrame = CGRectMake(self.frame.size.width * (cell.xRange.location - self.xRange.location) / self.xRange.length, 0, cellWidth, self.frame.size.height);
+                cell.frame = toFrame;
+                if ([newRange isVisableIn:self.graphContext.globalHRange]) {
+                    [cell setNeedsDisplay];
+                }
+            }
+        }
+        [CATransaction setDisableActions:caTransationState];
+    }
+}
+-(void)didYRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
+    if ([DCRange isRange:oldRange equalTo:newRange]) return;
+    [super didYRangeChanged:oldRange newRange:newRange];
+    [self setNeedsDisplay];
+}
+
+-(void)setNeedsDisplay {
+    for (int i = 0; i < kDCLineLayerCells; i++) {
+        _DCLineLayerCell *cell = self.cellList[i];
+        [cell setNeedsDisplay];
+    }
 }
 @end

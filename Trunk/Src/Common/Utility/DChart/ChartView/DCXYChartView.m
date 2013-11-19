@@ -268,26 +268,28 @@
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (self.graphContext.hRange.location < self.globalHRange.location) {
-        [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.globalHRange.location];
-    } else if (self.graphContext.hRange.length+self.graphContext.hRange.location>self.globalHRange.location+self.globalHRange.length) {
-        [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.globalHRange.length+self.globalHRange.location-self.graphContext.hRange.length];
+    if (self.graphContext.hRange.location < self.graphContext.globalHRange.location) {
+        [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.location];
+    } else if (self.graphContext.hRange.length+self.graphContext.hRange.location>self.graphContext.globalHRange.location+self.graphContext.globalHRange.length) {
+        [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.length+self.graphContext.globalHRange.location-self.graphContext.hRange.length];
     }
 }
 -(void)animateHRangeLocation {
-    double step =  [self.timer.userInfo[@"step"] doubleValue];
-    double to =  [self.timer.userInfo[@"to"] doubleValue];
-    double from =  [self.timer.userInfo[@"from"] doubleValue];
-    double newLocation = self.graphContext.hRange.location + step;
-    if (newLocation >= to && from < to) {
-        newLocation = to;
-        [self.timer invalidate];
+    if (self.timer.isValid) {
+        double step =  [self.timer.userInfo[@"step"] doubleValue];
+        double to =  [self.timer.userInfo[@"to"] doubleValue];
+        double from =  [self.timer.userInfo[@"from"] doubleValue];
+        double newLocation = self.graphContext.hRange.location + step;
+        if (newLocation >= to && from < to) {
+            newLocation = to;
+            [self.timer invalidate];
+        }
+        if(newLocation <= to && from > to) {
+            newLocation = to;
+            [self.timer invalidate];
+        }
+        self.graphContext.hRange = [[DCRange alloc]initWithLocation:newLocation length:self.graphContext.hRange.length];
     }
-    if(newLocation <= to && from > to) {
-        newLocation = to;
-        [self.timer invalidate];
-    }
-    self.graphContext.hRange = [[DCRange alloc]initWithLocation:newLocation length:self.graphContext.hRange.length];
 }
 
 -(void)animateHRangeLocationFrom:(double)from to:(double)to {

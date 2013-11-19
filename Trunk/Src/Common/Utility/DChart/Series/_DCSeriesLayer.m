@@ -12,6 +12,7 @@
 -(id)initWithCoordinateSystem:(_DCCoordinateSystem*)coordinateSystem {
     self = [super init];
     if (self) {
+        self.contentsScale = [UIScreen mainScreen].scale;
         _enableGrowAnimation = YES;
         NSMutableArray* s = [[NSMutableArray alloc]init];
         for (DCXYSeries* se in coordinateSystem.seriesList) {
@@ -31,22 +32,12 @@
 }
 
 -(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
-    if ([DCRange isRange:oldRange equalTo:newRange]) return;
-    [self redraw:self.xRange y:newRange];
-    _yRange = [newRange copy];
+    _yRange = newRange;
 }
 
 -(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
-    if ([DCRange isRange:oldRange equalTo:newRange]) return;
     if (oldRange == Nil) self.enableGrowAnimation = YES;
-    [self redraw:newRange y:self.xRange];
-    _xRange = [newRange copy];
-    
-}
-
--(void)redraw:(DCRange*)xRange y:(DCRange*)yRange {
-    if ([DCRange isRange:xRange equalTo:self.xRange] && [DCRange isRange:yRange equalTo:self.yRange]) return;
-    [self setNeedsDisplay];
+    _xRange = newRange;
 }
 
 -(void)removeFromSuperlayer {

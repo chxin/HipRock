@@ -16,7 +16,7 @@
     if (self && energyViewData.targetEnergyData.count != 0) {
         _energyViewData = energyViewData;
         
-        DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) beginHRange:[[DCRange alloc]initWithLocation:-0.5 length:100] stacked:NO];
+        DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) beginHRange:[[DCRange alloc]initWithLocation:-0.5 length:10] stacked:NO];
         
         view.xAxis = [[DCAxis alloc]init];
         view.yAxis0 = [[DCAxis alloc]init];
@@ -92,7 +92,7 @@
             }
             [seriesList addObject:s];
         }
-        view.globalHRange = [[DCRange alloc]initWithLocation:-0.5 length:150];
+        view.graphContext.globalHRange = [[DCRange alloc]initWithLocation:-0.5 length:150];
         view.seriesList = seriesList;
         
         view.userInteractionEnabled = style.userInteraction;

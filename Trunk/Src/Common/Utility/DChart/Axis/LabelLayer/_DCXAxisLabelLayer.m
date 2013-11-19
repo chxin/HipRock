@@ -57,7 +57,7 @@
     for (NSNumber* key in self.trashbox.xToLayerDic.allKeys) {
         CATextLayer* text = self.trashbox.xToLayerDic[key];
         CGRect toFrame = CGRectMake(text.frame.origin.x-xMovementInScreen, text.frame.origin.y, text.frame.size.width, text.frame.size.height);
-        if ([self.trashbox isFrame:toFrame visableIn:self.bounds]) {
+        if ([DCUtility isFrame:toFrame visableIn:self.bounds]) {
             text.frame = toFrame;
         } else {
             [self.trashbox.xToLayerDic removeObjectForKey:key];

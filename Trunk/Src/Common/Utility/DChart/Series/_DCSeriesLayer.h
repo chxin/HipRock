@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSMutableArray* visableSeries;
 
 @property (nonatomic) CGFloat columnWidthInCoordinateSys;
-@property (nonatomic) CGFloat columnHeightUnitInScreen;
+@property (nonatomic) CGFloat heightUnitInScreen;
 @property (nonatomic, strong) DCRange* yRange;
 @property (nonatomic, strong) DCRange* xRange;
 
@@ -27,5 +27,4 @@
 -(id)initWithCoordinateSystem:(_DCCoordinateSystem*)coordinateSystem;
 - (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden;
 -(BOOL)isValidSeriesForMe:(DCXYSeries*)series;
--(void)redraw:(DCRange*)xRange y:(DCRange*)yRange;
 @end

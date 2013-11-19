@@ -7,6 +7,7 @@
 //
 
 #import "_DCColumnsLayer.h"
+#import "DCUtility.h"
 
 @interface _DCColumnsLayer()
 @property (nonatomic, strong) _DCLayerTrashbox* trashbox;
@@ -34,7 +35,7 @@
         [self.trashbox.xToLayerDic removeAllObjects];
     } else {
         self.columnWidthInCoordinateSys = (1 - 2 * kDCColumnOffset) / ((self.graphContext.stacked) ? 1 : self.series.count);
-        self.columnHeightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.frame.size.height / self.yRange.length) : 0;
+        self.heightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.frame.size.height / self.yRange.length) : 0;
         
         int start = floor(self.graphContext.hRange.location);
         int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
@@ -50,7 +51,7 @@
                 
                 CALayer* column = self.trashbox.xToLayerDic[key];
                 CGRect toFrame = [self getRectForSeries:s index:j stackedHeight:stackedHeight];
-                BOOL isRectVisable = [self.trashbox isFrame:toFrame visableIn:self.bounds];
+                BOOL isRectVisable = [DCUtility isFrame:toFrame visableIn:self.bounds];
                 if (self.graphContext.stacked) stackedHeight += toFrame.size.height;
                 if (column == nil && isRectVisable) {
                     column = [[CALayer alloc]init];
@@ -108,10 +109,22 @@
     if (point.value != nil && ![point.value isEqual:[NSNull null]]) {
         y = point.value.doubleValue;
     }
-    return self.columnHeightUnitInScreen * y;
+    return self.heightUnitInScreen * y;
 }
 
 -(BOOL)isValidSeriesForMe:(DCXYSeries*)series {
     return [series isKindOfClass:[DCColumnSeries class]];
+}
+
+-(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
+    if ([DCRange isRange:oldRange equalTo:newRange]) return;
+    [super didYRangeChanged:oldRange newRange:newRange];
+    [self setNeedsDisplay];
+}
+
+-(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
+    if ([DCRange isRange:oldRange equalTo:newRange]) return;
+    [super didHRangeChanged:oldRange newRange:newRange];
+    [self setNeedsDisplay];
 }
 @end

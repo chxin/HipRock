@@ -46,10 +46,4 @@
     [self.xToLayerDic removeAllObjects];
     [self.trashLayerBox removeAllObjects];
 }
-
--(BOOL)isFrame:(CGRect)rect visableIn:(CGRect)outter {
-    if (rect.origin.x >= outter.size.width || rect.origin.y >= outter.size.height
-        || rect.origin.x+rect.size.width <= 0 || rect.origin.y+rect.size.height<=0) return NO;
-    return YES;
-}
 @end

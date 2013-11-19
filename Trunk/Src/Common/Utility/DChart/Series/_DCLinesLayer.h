@@ -11,5 +11,7 @@
 #import "DCLineSeries.h"
 #import "DCContext.h"
 
+extern NSUInteger const kDCLineLayerCells;
+
 @interface _DCLinesLayer : _DCSeriesLayer
 @end

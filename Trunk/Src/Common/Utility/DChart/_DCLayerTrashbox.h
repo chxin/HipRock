@@ -16,6 +16,4 @@
 -(void)clearTrashBox;
 -(void)moveLayerToTrashBox:(CALayer*)layer;
 -(CALayer*)popLayerFromTrashBox;
-
--(BOOL)isFrame:(CGRect)rect visableIn:(CGRect)outter;
 @end
