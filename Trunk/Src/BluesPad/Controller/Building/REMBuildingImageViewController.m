@@ -21,6 +21,7 @@
 @property (nonatomic,weak) UIButton *shareButton;
 @property (nonatomic,weak) UIButton *backButton;
 @property (nonatomic,weak) UIView *glassView;
+@property (nonatomic,weak) UIView *container;
 
 
 @property (nonatomic,strong) NSString *loadingImageKey;
@@ -128,6 +129,7 @@
 
 - (void)loadContentView{
     if (self.glassView==nil) {
+        [self initContainer];
         [self initGlassView];
         [self initBottomGradientLayer];
         [self initButtons];
@@ -143,13 +145,13 @@
         
        
         if(controller.isViewLoaded == NO){
-            [self.view addSubview:controller.view];
+            [self.container addSubview:controller.view];
         }
     }
     else{
         REMDashboardController *controller=self.childViewControllers[1];
         if(controller.isViewLoaded == NO){
-            [self.view addSubview:controller.view];
+            [self.container addSubview:controller.view];
             [controller.view setFrame:controller.upViewFrame];
         }
         
@@ -157,7 +159,12 @@
     
 }
 
-
+- (void)initContainer{
+    UIView *container=[[UIView alloc]initWithFrame:CGRectMake(0, REMDMCOMPATIOS7(0), self.view.frame.size.width, self.view.frame.size.height)];
+    [container setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:container];
+    self.container=container;
+}
 
 - (void)initGlassView
 {
@@ -172,7 +179,7 @@
 - (void)initBottomGradientLayer
 {
     CGFloat height=kBuildingBottomGradientLayerHeight;
-    CGRect frame = CGRectMake(0, self.view.frame.size.height-height, 1024, height);
+    CGRect frame = CGRectMake(0, self.container.frame.size.height-height, 1024, height);
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     
@@ -214,7 +221,7 @@
     shareButton.titleLabel.text=@"Share";
     [shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:shareButton];
+    [self.container addSubview:shareButton];
     self.shareButton=shareButton;
     
     
@@ -226,14 +233,14 @@
     [backButton setBackgroundImage:[UIImage imageNamed:@"Back"] forState:UIControlStateNormal];
     [backButton addTarget:self.parentViewController action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:backButton];
+    [self.container addSubview:backButton];
     self.backButton=backButton;
 }
 
 - (void)initTitleView
 {
     //CGFloat leftMargin=kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin;
-    UILabel *buildingType=[[UILabel alloc]initWithFrame:CGRectMake(0, 12, self.view.frame.size.width, kBuildingTypeTitleFontSize)];
+    UILabel *buildingType=[[UILabel alloc]initWithFrame:CGRectMake(0, 12, self.container.frame.size.width, kBuildingTypeTitleFontSize)];
     buildingType.backgroundColor=[UIColor clearColor];
     buildingType.text=NSLocalizedString(@"Common_Building", @"");//  @"楼宇";
     buildingType.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
@@ -243,14 +250,14 @@
     buildingType.textAlignment=NSTextAlignmentCenter;
     buildingType.textColor=[UIColor whiteColor];
     
-    [self.view addSubview:buildingType];
+    [self.container addSubview:buildingType];
     
     CGFloat titleSize=kBuildingTitleFontSize;
     if(self.buildingInfo.building.name.length>25){
         titleSize=titleSize-3;
     }
     
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, buildingType.frame.origin.y+buildingType.frame.size.height+4, self.view.frame.size.width, titleSize+2)];
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, buildingType.frame.origin.y+buildingType.frame.size.height+4, self.container.frame.size.width, titleSize+2)];
     titleLabel.text=self.buildingInfo.building.name ;
     titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     titleLabel.shadowOffset=CGSizeMake(1, 1);
@@ -261,7 +268,7 @@
     titleLabel.textAlignment=NSTextAlignmentCenter;
     titleLabel.textColor=[UIColor whiteColor];
     
-    [self.view addSubview:titleLabel];
+    [self.container addSubview:titleLabel];
     
     
     
@@ -275,7 +282,7 @@
     [logoButton addTarget:self.parentViewController action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    [self.view addSubview:logoButton];
+    [self.container addSubview:logoButton];
     
 }
 
@@ -414,14 +421,14 @@
         [self.cropTitleView setHidden:NO];
         return;
     }
-    UIImage *image=[REMImageHelper imageWithView:self.view];
-    CGRect rect=CGRectMake(0, 0, self.view.frame.size.width, kBuildingTitleHeight);
+    UIImage *image=[REMImageHelper imageWithView:self.container];
+    CGRect rect=CGRectMake(0, 0, self.container.frame.size.width, kBuildingTitleHeight);
     CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], rect);
     UIImage *img = [UIImage imageWithCGImage:imageRef];
     CGImageRelease(imageRef);
     
     UIImageView *view=[[UIImageView alloc]initWithImage:img];
-    [self.view addSubview:view];
+    [self.container addSubview:view];
     self.cropTitleView=view;
 }
 
@@ -472,7 +479,7 @@
             if(coverController.isViewLoaded==YES){
                 
                 if(dashBoardController.isViewLoaded==NO &&buildingController.currentCoverStatus!=currentCoverStatus){
-                    [self.view addSubview:dashBoardController.view];
+                    [self.container addSubview:dashBoardController.view];
                 }
                 if(buildingController.currentCoverStatus!=currentCoverStatus){
                     [self clipTitleView];
@@ -504,7 +511,7 @@
             if(dashBoardController.isViewLoaded==YES){
 
                 if(coverController.isViewLoaded==NO && buildingController.currentCoverStatus!=currentCoverStatus){
-                    [self.view addSubview:coverController.view];
+                    [self.container addSubview:coverController.view];
                     [coverController.view setFrame:coverController.upViewFrame];
                 }
                 if (buildingController.currentCoverStatus!=currentCoverStatus) {
