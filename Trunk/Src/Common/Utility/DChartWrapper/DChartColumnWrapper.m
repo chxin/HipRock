@@ -92,7 +92,7 @@
             }
             [seriesList addObject:s];
         }
-        view.globalHRange = globalRange;
+        view.globalHRange = [[DCRange alloc]initWithLocation:-0.5 length:20];
         view.seriesList = seriesList;
         
         view.userInteractionEnabled = style.userInteraction;

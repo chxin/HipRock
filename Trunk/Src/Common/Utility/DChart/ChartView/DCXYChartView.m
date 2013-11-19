@@ -40,6 +40,8 @@
 @property (nonatomic) CGSize y1LabelLayerSize;
 @property (nonatomic) CGSize y2LabelLayerSize;
 
+@property (nonatomic, strong) NSTimer* timer;
+
 //@property (nonatomic, strong) DCSeriesLayer* seriesLayer;
 
 @end
@@ -165,6 +167,7 @@
     self._xLabelLayer.axis = self.xAxis;
     self._xLabelLayer.font = self.xAxis.labelFont;
     self._xLabelLayer.fontColor = self.xAxis.labelColor;
+    [self.graphContext addHRangeObsever:self._xLabelLayer];
     self._xLabelLayer.frame = CGRectMake(self.plotRect.origin.x, self.plotRect.size.height, self.plotRect.size.width, self.frame.size.height - self.plotRect.size.height);
     [self.layer addSublayer:self._xLabelLayer];
     [self._xLabelLayer setNeedsDisplay];
@@ -230,13 +233,50 @@
     [self._hGridlineLayer setNeedsDisplay];
 }
 
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (self.timer.isValid) {
+        [self.timer invalidate];
+    }
+}
+
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     if ([event touchesForView:self].count != 1) return;
     UITouch* touch = [touches anyObject];
     CGPoint currentPoint = [touch locationInView:self];
     CGPoint previous = [touch previousLocationInView:self];
     self.graphContext.hRange = [[DCRange alloc]initWithLocation:(previous.x - currentPoint.x)*self.graphContext.hRange.length/self.plotRect.size.width+self.graphContext.hRange.location length:self.graphContext.hRange.length];
-    [self._xLabelLayer viewTouchesMoveFrom:previous to:currentPoint];
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (self.graphContext.hRange.location < self.globalHRange.location) {
+        [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.globalHRange.location];
+    } else if (self.graphContext.hRange.length+self.graphContext.hRange.location>self.globalHRange.location+self.globalHRange.length) {
+        [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.globalHRange.length+self.globalHRange.location-self.graphContext.hRange.length];
+    }
+}
+-(void)animateHRangeLocation {
+    double step =  [self.timer.userInfo[@"step"] doubleValue];
+    double to =  [self.timer.userInfo[@"to"] doubleValue];
+    double from =  [self.timer.userInfo[@"from"] doubleValue];
+    double newLocation = self.graphContext.hRange.location + step;
+    if (newLocation >= to && from < to) {
+        newLocation = to;
+        [self.timer invalidate];
+    }
+    if(newLocation <= to && from > to) {
+        newLocation = to;
+        [self.timer invalidate];
+    }
+    self.graphContext.hRange = [[DCRange alloc]initWithLocation:newLocation length:self.graphContext.hRange.length];
+}
+
+-(void)animateHRangeLocationFrom:(double)from to:(double)to {
+    if (from == to) return;
+    double frames = kDCAnimationDuration * kDCFramesPerSecord;
+    NSNumber* step = @((to - from)/frames);
+    NSDictionary* hRangeUserInfo = @{@"step":step, @"from":@(from), @"to":@(to)};
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animateHRangeLocation) userInfo:hRangeUserInfo repeats:YES];
+    [self.timer fire];
 }
 
 -(void)setSeriesList:(NSArray *)seriesList {

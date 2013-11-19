@@ -600,7 +600,6 @@
 		B4FFB0CB18191A41004C5404 /* REMDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4FFB0CA18191A41004C5404 /* REMDatePickerViewController.m */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
-		EF2DDDA8183A41830079D08A /* _DCContextAnimationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2DDDA7183A41830079D08A /* _DCContextAnimationLayer.m */; };
 		EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */; };
 		EF60822F17D818430093427C /* REMModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF60822E17D818430093427C /* REMModalView.m */; };
 		EF8A47F517F959B5009B5C33 /* REMTrendChartAxisConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8A47E117F959B5009B5C33 /* REMTrendChartAxisConfig.m */; };
@@ -1361,8 +1360,6 @@
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
-		EF2DDDA6183A41830079D08A /* _DCContextAnimationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCContextAnimationLayer.h; path = Common/Utility/DChart/_DCContextAnimationLayer.h; sourceTree = "<group>"; };
-		EF2DDDA7183A41830079D08A /* _DCContextAnimationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCContextAnimationLayer.m; path = Common/Utility/DChart/_DCContextAnimationLayer.m; sourceTree = "<group>"; };
 		EF48011E17D7098D002A2EF6 /* REMBuildingWeiboView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingWeiboView.h; path = View/Building/REMBuildingWeiboView.h; sourceTree = "<group>"; };
 		EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingWeiboView.m; path = View/Building/REMBuildingWeiboView.m; sourceTree = "<group>"; };
 		EF60822D17D818420093427C /* REMModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMModalView.h; sourceTree = "<group>"; };
@@ -2991,8 +2988,6 @@
 				EFD946E61839DCBB00E9EC50 /* DCContext.m */,
 				EFD946E71839DCBB00E9EC50 /* DCRange.h */,
 				EFD946E81839DCBB00E9EC50 /* DCRange.m */,
-				EF2DDDA6183A41830079D08A /* _DCContextAnimationLayer.h */,
-				EF2DDDA7183A41830079D08A /* _DCContextAnimationLayer.m */,
 			);
 			name = DChart;
 			sourceTree = "<group>";
@@ -3427,7 +3422,6 @@
 				EF8A47F517F959B5009B5C33 /* REMTrendChartAxisConfig.m in Sources */,
 				EF9ACF6118067CCB00097661 /* REMXFormatter.m in Sources */,
 				B40F011A1828C3DC009650FD /* REMWidgetStepEnergyModel.m in Sources */,
-				EF2DDDA8183A41830079D08A /* _DCContextAnimationLayer.m in Sources */,
 				B445AEA4177BEEB8002D2A59 /* DDFileLogger.m in Sources */,
 				EF9ACF641806821500097661 /* REMYFormatter.m in Sources */,
 				B445AEA6177BEEB8002D2A59 /* DDLog.m in Sources */,
