@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *passwordErrorLabel;
 @property (weak, nonatomic) IBOutlet REMIndicatorButton *loginButton;
 
-@property (nonatomic,strong) REMLoginCarouselController *loginCarouselController;
+@property (nonatomic,weak) REMLoginCarouselController *loginCarouselController;
 
 
 - (IBAction)loginButtonPressed:(id)sender;

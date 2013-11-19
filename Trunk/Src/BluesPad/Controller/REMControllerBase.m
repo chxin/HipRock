@@ -35,9 +35,9 @@
     gradient.colors = [NSArray arrayWithObjects: (id)gradientStartColor.CGColor, (id)gradientStopColor.CGColor, nil];
     
     UIGraphicsBeginImageContextWithOptions(gradient.frame.size, NO, 0.0);
-    CGContextRef c = UIGraphicsGetCurrentContext();
+    CGContextRef context = UIGraphicsGetCurrentContext();
     
-    [gradient renderInContext:c];
+    [gradient renderInContext:context];
     
     UIGraphicsEndImageContext();
     
@@ -46,24 +46,17 @@
 
 - (UIButton *)getCustomerLogoButton
 {
-    UIButton *customerLogoButton = [[UIButton alloc]initWithFrame:kDMCommon_CustomerLogoFrame];
+    UIButton *customerLogoButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kDMCommon_CustomerLogoWidth, kDMCommon_CustomerLogoHeight)];
     
     [customerLogoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
-    
     [customerLogoButton addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     return customerLogoButton;
 }
 
-//static UINavigationController *settingNavigationController;
 
 - (void)settingButtonPressed:(UIButton *)button{
-    //if(settingNavigationController == nil){
-    UINavigationController *    settingNavigationController = (UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:kStoryboard_SettingsPage];
-        
-        REMSettingViewController *settingController = (REMSettingViewController *)[settingNavigationController.childViewControllers lastObject];
-        //settingController.mainNavigationController = (REMMainNavigationController *)self.navigationController;
-    //}
+    UINavigationController *settingNavigationController = (UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:kStoryboard_SettingsPage];
     
     [self presentViewController:settingNavigationController animated:YES completion:nil];
 }

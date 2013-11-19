@@ -57,6 +57,7 @@
     self.loadingImageKey=[NSString stringWithFormat:@(kBuildingImageLoadingKeyPrefix),self.buildingInfo.building.buildingId];
     //NSLog(@"self view:%@",NSStringFromCGRect(self.view.frame));
     [self.view setFrame:self.viewFrame];
+    //NSLog(@"self view:%@",NSStringFromCGRect(self.view.frame));
     REMBuildingDataViewController *coverController=self.childViewControllers[0];
     REMDashboardController *dashboardController=self.childViewControllers[1];
     coverController.buildingInfo=self.buildingInfo;
@@ -124,13 +125,15 @@
     [self.view addSubview:blurImageView];
     self.imageView=imageView;
     self.blurImageView=blurImageView;
+    NSLog(@"image view:%@",NSStringFromCGRect(self.imageView.frame));
+    NSLog(@"blur image view:%@",NSStringFromCGRect(self.blurImageView.frame));
 }
 
 
 - (void)loadContentView{
     if (self.glassView==nil) {
-        [self initContainer];
         [self initGlassView];
+        [self initContainer];
         [self initBottomGradientLayer];
         [self initButtons];
         [self loadingBuildingImage];

@@ -138,8 +138,9 @@ const static CGFloat buildingGap=20;
     self.defaultBlurImage=view;
     
     
-    int i=0;
-    for (;i<self.buildingInfoArray.count;++i) {
+    int i=0,count=self.buildingInfoArray.count;
+    count=2;
+    for (;i<count;++i) {
         REMBuildingOverallModel *model = self.buildingInfoArray[i];
         
         REMBuildingImageViewController *subController=[[REMBuildingImageViewController alloc] init];
@@ -147,7 +148,7 @@ const static CGFloat buildingGap=20;
         subController.defaultImage=self.defaultImage;
         subController.defaultBlurImage=self.defaultBlurImage;
         
-        subController.viewFrame=CGRectMake(i*(kImageWidth+buildingGap), self.view.frame.origin.y,kImageWidth,kImageHeight);
+        subController.viewFrame=CGRectMake(i*(self.view.frame.size.width+buildingGap), self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height);
         
         
         [self addChildViewController:subController];
@@ -156,7 +157,7 @@ const static CGFloat buildingGap=20;
         
         NSInteger gap=i-self.currentBuildingIndex;
         [subController.view setCenter:CGPointMake(gap*(self.view.frame.size.width+buildingGap)+self.view.frame.size.width/2, self.view.center.y)];
-        
+        //NSLog(@"center:%@",NSStringFromCGPoint(subController.view.center));
     }
     
     [self stopCoverPage:nil];
