@@ -65,8 +65,6 @@
     for (int i = start; i <= end; i++) {
         if (self.xToLayerDic[@(i)] == nil) {
             [self addLabelForX:i];
-            
-            NSLog(@"add label out of context:%i", self.sublayers.count);
         }
     }
 }
