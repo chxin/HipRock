@@ -170,4 +170,10 @@
         }
     }
 }
+
+
+-(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
+    self.step = step;
+    [super redraw:energyViewData];
+}
 @end
