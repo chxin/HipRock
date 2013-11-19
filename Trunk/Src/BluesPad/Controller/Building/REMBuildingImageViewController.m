@@ -250,7 +250,7 @@
         titleSize=titleSize-3;
     }
     
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, buildingType.frame.origin.y+buildingType.frame.size.height+4, self.view.frame.size.width, titleSize)];
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, buildingType.frame.origin.y+buildingType.frame.size.height+4, self.view.frame.size.width, titleSize+2)];
     titleLabel.text=self.buildingInfo.building.name ;
     titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     titleLabel.shadowOffset=CGSizeMake(1, 1);

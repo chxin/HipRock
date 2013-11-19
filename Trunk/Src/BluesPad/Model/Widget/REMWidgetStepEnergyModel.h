@@ -19,8 +19,13 @@
 @property (nonatomic) REMEnergyStep step;
 @property (nonatomic,strong) NSNumber *zoneId;
 @property (nonatomic,strong) NSNumber *industryId;
+@property (nonatomic,strong) NSString *benchmarkText;
 
-@property (nonatomic,strong) NSString *relativeDateComponent;
-@property (nonatomic) REMRelativeTimeRangeType relativeDateType;
+
+
+@property (nonatomic) REMRatioType ratioType;
+@property (nonatomic) REMUnitType unitType;
+@property (nonatomic) REMRankingType rankingType;
+@property (nonatomic) REMLabellingType labellingType;
 
 @end

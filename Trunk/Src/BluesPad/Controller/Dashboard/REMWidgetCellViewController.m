@@ -41,9 +41,12 @@
 	// Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.view setFrame:self.viewFrame];
-    NSLog(@"detail view:%@",NSStringFromCGRect(self.view.frame));
+    //NSLog(@"detail view:%@",NSStringFromCGRect(self.view.frame));
 
     self.searchModel=[REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax.dataStoreType withParam:self.widgetInfo.contentSyntax.params];
+    if(self.widgetInfo.contentSyntax.relativeDateType!=REMRelativeTimeRangeTypeNone){
+        self.searchModel.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
+    }
 
     UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(kDashboardWidgetPadding, kDashboardWidgetTitleTopMargin, self.view.frame.size.width, kDashboardWidgetTitleSize)];
     title.backgroundColor=[UIColor clearColor];

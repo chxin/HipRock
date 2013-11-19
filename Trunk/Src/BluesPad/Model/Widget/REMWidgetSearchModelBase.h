@@ -23,6 +23,9 @@
 
 @property (nonatomic,strong) NSArray *timeRangeArray;
 
+@property (nonatomic,strong) NSString *relativeDateComponent;
+@property (nonatomic) REMRelativeTimeRangeType relativeDateType;
+
 + (REMWidgetSearchModelBase *)searchModelByDataStoreType:(REMDataStoreType)dataStoreType withParam:(NSDictionary *)param;
 
 - (void) setTimeRangeItem:(REMTimeRange *)range AtIndex:(NSUInteger)index;
