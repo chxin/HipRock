@@ -34,10 +34,13 @@ static NSString *cellId=@"dashboardcell";
 }
 
 
+
 - (void)loadView{
     self.tableView= [[REMDashboardView alloc]initWithFrame:self.viewFrame style:UITableViewStyleGrouped];
     //NSLog(@"viewframe:%@",NSStringFromCGRect(self.viewFrame));
     self.view=self.tableView;
+    //self.view.layer.borderWidth=1;
+    //self.view.layer.borderColor=[UIColor yellowColor].CGColor;
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
     
@@ -50,7 +53,8 @@ static NSString *cellId=@"dashboardcell";
     
     [self.tableView registerClass:[REMDashboardCellViewCell class] forCellReuseIdentifier:cellId];
     self.tableView.sectionFooterHeight=34;
-    
+    self.tableView.sectionHeaderHeight=0;
+    self.tableView.contentInset = UIEdgeInsetsMake(-REMDMCOMPATIOS7(18), 0, 0, 0);
     //NSLog(@"frame:%@",NSStringFromCGRect(self.view.frame));
     
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, kDashboardDragTitleMargin, 300, kDashboardDragTitleSize)];
@@ -209,7 +213,7 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     if(dashboardInfo.shareInfo!=nil && [dashboardInfo.shareInfo isEqual:[NSNull null]]== NO && [dashboardInfo.shareInfo.userRealName isEqual:[NSNull null]]==NO){
         shareFrame = CGRectMake(0, 0, frame.size.width, kDashboardShareSize);
         UILabel *shareLabel=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x, shareFrame.origin.y, frame.size.width, shareFrame.size.height)];
-        shareLabel.textColor=[UIColor whiteColor];
+        shareLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.8];
         shareLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardShareSize];
         [shareLabel setBackgroundColor:[UIColor clearColor]];
         NSString *shareName=dashboardInfo.shareInfo.userRealName;

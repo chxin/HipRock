@@ -13,6 +13,8 @@
 #import "REMEnergySeacherBase.h"
 #import "REMWidgetSearchModelBase.h"
 #import "REMBusinessErrorInfo.h"
+#import "REMWidgetDetailViewController.h"
+
 
 @interface REMWidgetBizDelegatorBase : NSObject
 
@@ -23,6 +25,7 @@
 @property (nonatomic,strong) REMWidgetSearchModelBase *model;
 @property (nonatomic,strong) NSString *groupName;
 @property (nonatomic,weak) UIView *maskerView;
+@property (nonatomic,weak) REMWidgetDetailViewController *ownerController;
 
 + (REMWidgetBizDelegatorBase *)bizDelegatorByWidgetInfo:(REMWidgetObject *)widgetInfo;
 

@@ -67,7 +67,7 @@
 }
 - (void)initSearchView{
     
-    UIView *searchViewContainer=[[UIView alloc]initWithFrame:kDMChart_ToolbarFrame];
+    UIView *searchViewContainer=[[UIView alloc]initWithFrame:CGRectMake(0,self.ownerController.titleContainer.frame.origin.y+self.ownerController.titleContainer.frame.size.height,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)];
     
     [searchViewContainer setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
     
@@ -83,7 +83,7 @@
     [legendControl addTarget:self action:@selector(legendSwitchSegmentPressed:) forControlEvents:UIControlEventValueChanged];
     
     
-    [self.view addSubview:legendControl];
+    [self.ownerController.titleContainer addSubview:legendControl];
     self.legendSearchControl=legendControl;
     
     
@@ -123,8 +123,8 @@
 }
 
 - (void)initChartView{
-    UIView *c=[[UIView alloc]initWithFrame:CGRectMake(0, kWidgetChartTopMargin, self.view.frame.size.width, kWidgetChartHeight+kWidgetChartLeftMargin)];
-    [c setBackgroundColor:[UIColor clearColor]];
+    UIView *c=[[UIView alloc]initWithFrame:CGRectMake(0, self.searchView.frame.origin.y+self.searchView.frame.size.height, self.view.frame.size.width, kWidgetChartHeight+kWidgetChartLeftMargin)];
+    [c setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
     UIView *chartContainer=[[UIView alloc]initWithFrame:CGRectMake(kWidgetChartLeftMargin, 0, kWidgetChartWidth, kWidgetChartHeight)];
     [chartContainer setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:c];
@@ -178,7 +178,13 @@
 
 - (NSString *)calendarComponent{
     if(self.widgetInfo.contentSyntax.calendarType==REMCalendarTypeHCSeason){
-        return @"冷暖季";
+        return NSLocalizedString(@"Widget_CalendarHC", @""); //"冷暖季";
+    }
+    else if(self.widgetInfo.contentSyntax.calendarType==REMCalenderTypeHoliday){
+        return NSLocalizedString(@"Widget_CalendarHoliday", @"");//非工作时间
+    }
+    else{
+        return @"";
     }
 }
 
@@ -441,7 +447,6 @@
 - (void)processStepErrorWithAvailableStep:(NSString *)availableStep{
     NSArray *buttonArray;
     NSArray *supportStep;
-    NSString *errorMsg;
     NSArray *errorMsgArray;
     if([availableStep isEqualToString:@"Monthly"]==YES){
         buttonArray=@[NSLocalizedString(@"Common_Month", @""),NSLocalizedString(@"Common_Year", @"")];

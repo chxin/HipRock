@@ -76,6 +76,7 @@
         share.backgroundColor=[UIColor clearColor];
         share.textColor=[REMColor colorByHexString:@"#5e5e5e"];
         share.textAlignment=NSTextAlignmentRight;
+        
         share.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetShareSize];
         [self.view addSubview:share];
     }

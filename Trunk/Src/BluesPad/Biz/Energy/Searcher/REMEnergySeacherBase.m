@@ -31,9 +31,19 @@
 {
     self.model=model;
     REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:[model toSearchParam]];
-    store.maskContainer=maskerContainer;
+    //store.maskContainer=maskerContainer;
+    
+    
+    UIActivityIndicatorView *activitor= [[UIActivityIndicatorView alloc] initWithFrame:maskerContainer.bounds];
+    [activitor setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+    //[activitor setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];
+
+    [maskerContainer addSubview:activitor];
+    [activitor startAnimating];
     store.groupName=groupName;
     [REMDataAccessor access:store success:^(NSDictionary *data){
+        [activitor stopAnimating];
+        [activitor removeFromSuperview];
         if([data isEqual:[NSNull null]]==YES)return ;
         REMEnergyViewData *viewData=[self processEnergyData:data];
         if(callback!=nil){
