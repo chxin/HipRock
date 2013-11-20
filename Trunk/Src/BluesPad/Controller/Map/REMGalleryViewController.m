@@ -72,7 +72,7 @@
 -(void)addButtons
 {
     //add switch button
-    UIButton *switchButton = [[UIButton alloc]initWithFrame:kDMCommon_TopLeftButtonFrame];
+    UIButton *switchButton = [[UIButton alloc]initWithFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, REMDMCOMPATIOS7( kDMCommon_TopLeftButtonTop),kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
     [switchButton setBackgroundImage:REMIMG_Map forState:UIControlStateNormal];
     [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
@@ -80,7 +80,7 @@
     
     //add customer logo button
     UIButton *logoButton = self.customerLogoButton;
-    logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,kDMCommon_CustomerLogoTop,kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
+    logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
     [self.view addSubview:logoButton];
 }
 
