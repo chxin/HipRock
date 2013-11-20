@@ -62,10 +62,16 @@
 }
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
 {
-    if ([self isHiddenAtIndex:idx]) return nil;
-    REMEnergyData* point = [self.energyData objectAtIndex:idx];
     if (fieldEnum == CPTPieChartFieldSliceWidth) {
-        return [self.dataProcessor processY:point.dataValue];
+        if ([self isHiddenAtIndex:idx]) {
+            return nil;
+        }
+        REMEnergyData* point = [self.energyData objectAtIndex:idx];
+        if ([point isEqual:[NSNull null]]) {
+            return nil;
+        } else {
+            return [self.dataProcessor processY:point.dataValue];
+        }
     } else {
         return [NSNumber numberWithInteger:idx];
     }
@@ -94,7 +100,19 @@
     } else {
         [self.hiddenPointIndexes removeObject:@(index)];
     }
-    
-    [[self getPlot] reloadData];
+    NSUInteger recordCount = [self numberOfRecordsForPlot:[self getPlot]];
+    double sumY = 0;
+    for (int i = 0; i < recordCount; i++) {
+        NSNumber* y = [self numberForPlot:[self getPlot] field:CPTPieChartFieldSliceWidth recordIndex:i];
+        if (y == nil || [y isEqual:[NSNull null]]) continue;
+        sumY += y.doubleValue;
+    }
+    if (self.hiddenPointIndexes.count == recordCount || sumY == 0) {
+        [self getPlot].graph.hostingView.hidden = YES;
+    } else {
+        [self getPlot].graph.hostingView.hidden = NO;
+        [[self getPlot] reloadData];
+//        [self getPlot].graph.hostingView.backgroundColor = [UIColor whiteColor]; // Coreplot在饼图为0之后有bug
+    }
 }
 @end
