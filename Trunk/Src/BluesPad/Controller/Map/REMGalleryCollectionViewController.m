@@ -30,9 +30,16 @@
 
 #define kGalleryBuildingImageGroupName @"GALLERY"
 
+
 -(id)initWithKey:(NSString *)key andBuildingInfoArray:(NSArray *)buildingInfoArray
 {
-    self = [super init];
+    UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowlayout setMinimumInteritemSpacing:1.0];
+    [flowlayout setMinimumLineSpacing:kDMGallery_GalleryCellVerticleSpace];
+    [flowlayout setItemSize:kDMGallery_GalleryCellSize];
+    
+    
+    self = [super initWithCollectionViewLayout:flowlayout];
     if(self != nil){
         self.collectionKey = key;
         self.buildingInfoArray = buildingInfoArray;
@@ -41,51 +48,33 @@
     return self;
 }
 
-- (void)loadView
-{
-	// Do any additional setup after loading the view.
-    // initialize UICollectionView
-    CGRect collectionViewFrame = [self getCollectionFrame];
-    
-    self.view = [[UIView alloc] initWithFrame:collectionViewFrame];
-    self.view.clipsToBounds = NO;
-    
-    UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
-    [layout setSectionInset:kDMGallery_GalleryCollectionViewInsets];
-    
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:collectionViewFrame collectionViewLayout:layout];
-    collectionView.translatesAutoresizingMaskIntoConstraints = NO;
-    collectionView.frame = collectionViewFrame;
-    collectionView.dataSource = self;
-    collectionView.delegate = self;
-    [collectionView registerClass:[REMGalleryCollectionCell class] forCellWithReuseIdentifier:kCellIdentifier_GalleryCollectionCell];
-    [collectionView setBackgroundColor:[UIColor clearColor]];
-//    collectionView.layer.borderColor = [UIColor redColor].CGColor;
-//    collectionView.layer.borderWidth = 1.0;
-    
-    self.collectionView = collectionView;
-    
-    [self.view addSubview:self.collectionView];
-    [self viewDidLoad];
-}
 
 -(CGRect)getCollectionFrame
 {
     int rowCount = (self.buildingInfoArray.count / 6) + 1;
     CGFloat height = kDMGallery_GalleryCollectionViewTopMargin + kDMGallery_GalleryCollectionViewBottomMargin + (rowCount * kDMGallery_GalleryCellHeight) + ((rowCount - 1) * kDMGallery_GalleryCellVerticleSpace);
     
-    return CGRectMake(0, 0, kDMGallery_GalleryGroupViewWidth, height);
+    return CGRectMake(0, kDMGallery_GalleryGroupTitleFontSize, kDMGallery_GalleryGroupViewWidth, height);
 }
 
 
 - (void)viewDidLoad
 {
-	// Do any additional setup after loading the view.
+    CGRect collectionViewFrame = [self getCollectionFrame];
     
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
+    self.view.frame = collectionViewFrame;
+    
+    self.collectionView.frame = collectionViewFrame;
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    self.collectionView.contentInset = kDMGallery_GalleryCollectionViewInsets;
+    self.collectionView.autoresizingMask = UIViewAutoresizingNone;
+    
+    [self.collectionView setScrollEnabled:NO];
+    [self.collectionView registerClass:[REMGalleryCollectionCell class] forCellWithReuseIdentifier:kCellIdentifier_GalleryCollectionCell];
+    [self.collectionView setBackgroundColor:[UIColor clearColor]];
+    
+    [self.view addSubview: self.collectionView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,9 +82,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
 
 - (void)galleryCellTapped:(REMGalleryCollectionCell *)cell
 {
@@ -204,7 +190,11 @@
 }
 
 
-#pragma mark collection view delegate
+#pragma mark collection view data source delegate
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -226,21 +216,6 @@
     }];
     
     return cell;
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return kDMGallery_GalleryCellSize;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    return kDMGallery_GalleryCellVerticleSpace;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return kDMGallery_GalleryCellHorizontalSpace;
 }
 
 

@@ -96,12 +96,22 @@ const static CGFloat widgetGap=20;
     }
     
     [self addBloodCell];
-    
-    REMScreenEdgetGestureRecognizer *rec=[[REMScreenEdgetGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
-    [self.view addGestureRecognizer:rec];
-    
+//    if(__IPHONE_7_0 == YES){
+//        UIScreenEdgePanGestureRecognizer *rec=[[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
+//        rec.edges=UIRectEdgeLeft;
+//        [self.view addGestureRecognizer:rec];
+//        UIScreenEdgePanGestureRecognizer *rec1=[[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
+//        rec1.edges=UIRectEdgeRight;
+//        [self.view addGestureRecognizer:rec1];
+//    }
+//    else{
+        REMScreenEdgetGestureRecognizer *rec=[[REMScreenEdgetGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
+        [self.view addGestureRecognizer:rec];
+//    }
     
 }
+
+
 
 - (void) addBloodCell{
     NSBundle* mb = [NSBundle mainBundle];
@@ -179,7 +189,7 @@ const static CGFloat widgetGap=20;
     }
 }
 
-- (void)panthis:(REMScreenEdgetGestureRecognizer *)pan{
+- (void)panthis:(UIPanGestureRecognizer *)pan{
     
     //[self cancelAllRequest];
     

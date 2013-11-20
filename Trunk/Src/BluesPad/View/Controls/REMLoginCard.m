@@ -40,7 +40,7 @@
 
 -(void)renderBackground
 {
-    UIImage *backgroundImage = [REMIMG_SlidePageBackground resizableImageWithCapInsets:UIEdgeInsetsMake(9,21,26,21)];
+    UIImage *backgroundImage = [REMIMG_SlidePageBackground resizableImageWithCapInsets:UIEdgeInsetsMake(14,21,28,21)];
     
     CGRect backgroundFrame = CGRectMake((kDMScreenWidth - kDMLogin_CardWidth) / 2, kDMLogin_CardTopOffset, kDMLogin_CardWidth, kDMLogin_CardHeight);
     

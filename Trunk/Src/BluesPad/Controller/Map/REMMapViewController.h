@@ -23,8 +23,6 @@
 @property (nonatomic,strong) UIImageView *snapshot;
 
 #pragma mark - Methods
--(void)bubbleTapped:(REMMarkerBubbleView *)bubble;
-
 -(CGRect)getDestinationZoomRect: (int)currentBuildingIndex;
 
 @end

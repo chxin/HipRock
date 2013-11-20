@@ -105,7 +105,9 @@
 "Widget_StepError"="所选数据点不支持%@的步长显示，换个步长试试。"; //所选数据点不支持按小时，按天，按周的步长显示，换个步长试试。
 "Widget_ShareTitle"="分享来源:%@ %@ %@ 电话:%@"; //分享来源：张三 工程师 2012-10-10 电话：13800138000
 "Widget_CalendarTimeError"="看不到日历背景色？换个时间试试";
-"Widget_CalendarStepError"="当前步长不支持显示%@背景色"; //当前步长不支持显示冷暖季背景色
+"Widget_CalendarHC"="冷暖季";
+"Widget_CalendarHoliday"="非工作时间";
+"Widget_CalendarStepError"="当前步长不支持显示%@背景色"; //当前步长不支持显示冷暖季背景色，当前步长不支持显示非工作时间背景色
 
 
 //Weibo, prefix: Weibo_

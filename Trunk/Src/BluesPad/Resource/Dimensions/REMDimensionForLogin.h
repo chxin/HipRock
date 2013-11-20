@@ -17,7 +17,7 @@
 #define kDMLogin_CardHeight 380
 #define kDMLogin_CardContentWidth 500
 #define kDMLogin_CardContentHeight 350
-#define kDMLogin_CardContentTopOffset 5
+#define kDMLogin_CardContentTopOffset 7 //5
 #define kDMLogin_CardContentLeftOffset 14
 #define kDMLogin_PageControlTopOffset kDMLogin_CardTopOffset + kDMLogin_CardHeight + 122 //142
 #define kDMLogin_PageControlHeight 8

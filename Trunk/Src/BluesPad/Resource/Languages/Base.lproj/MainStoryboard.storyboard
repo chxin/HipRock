@@ -52,7 +52,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ncs-SR-xwT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3246" y="-1486"/>
+            <point key="canvasLocation" x="-3102" y="-1166"/>
         </scene>
         <!--Gallery View Controller-->
         <scene sceneID="cCc-Oc-ASk">
@@ -120,7 +120,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujE-me-aPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="at3-P1-D6R" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-111" y="-898"/>
+            <point key="canvasLocation" x="-375" y="-1166"/>
         </scene>
         <!--Widget Month Picker View Controller - 选择日期-->
         <scene sceneID="Vo9-ng-vOg">
@@ -152,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IW-uy-Qy4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4216" y="-3019"/>
+            <point key="canvasLocation" x="4154" y="-2099"/>
         </scene>
         <!--Widget Max View Controller-->
         <scene sceneID="kih-fe-Pxz">
@@ -180,7 +180,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ndb-ap-11w" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="sO2-LG-KMS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1228" y="-1422"/>
+            <point key="canvasLocation" x="1180" y="-1166"/>
         </scene>
         <!--Date Picker View Controller - 选择日期-->
         <scene sceneID="IK4-ou-HLv">
@@ -231,7 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PEv-YT-C1q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4058" y="-1574"/>
+            <point key="canvasLocation" x="4154" y="-1166"/>
         </scene>
         <!--Relative Date View Controller - 默认日期-->
         <scene sceneID="DIC-c2-Wkg">
@@ -271,7 +271,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OQK-x4-bHt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5326" y="-1574"/>
+            <point key="canvasLocation" x="5662" y="-1166"/>
         </scene>
         <!--Login Page Controller-->
         <scene sceneID="Ym7-Sd-tBw">
@@ -688,7 +688,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yfe-N8-S8t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2056" y="-3686"/>
+            <point key="canvasLocation" x="-2104" y="-3894"/>
         </scene>
         <!--Setting Customer Detail View Controller - 客户信息-->
         <scene sceneID="yWL-Qk-a3K">
@@ -805,7 +805,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dag-9k-JiW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2036" y="-2921"/>
+            <point key="canvasLocation" x="-2104" y="-2725"/>
         </scene>
         <!--Setting Customer Detail Logo View Controller - Logo-->
         <scene sceneID="0I7-nP-QSv">
@@ -835,7 +835,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V6A-JF-NGC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1120" y="-3213"/>
+            <point key="canvasLocation" x="-1340" y="-3253"/>
         </scene>
         <!--Setting Customer Detail Admin View Controller - 客户管理员-->
         <scene sceneID="fpM-KK-Sce">
@@ -873,7 +873,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tj7-yR-Vc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1142" y="-2409"/>
+            <point key="canvasLocation" x="-1340" y="-2233"/>
         </scene>
         <!--Building Share View Controller-->
         <scene sceneID="MnH-Nj-E5s">
@@ -912,7 +912,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N1S-i0-15H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="736" y="-1101"/>
+            <point key="canvasLocation" x="480" y="-1357"/>
         </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="KV1-Ck-0FS">
@@ -930,7 +930,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="byd-8r-pNi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6291" y="-1294"/>
+            <point key="canvasLocation" x="-5891" y="-1294"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Di9-cL-lUr">
@@ -988,7 +988,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ai5-vc-Ijo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2764" y="-1574"/>
+            <point key="canvasLocation" x="2692" y="-1166"/>
         </scene>
     </scenes>
     <resources>
@@ -1001,6 +1001,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="jmn-Ww-5Fz"/>
+        <segue reference="RbE-hG-htp"/>
     </inferredMetricsTieBreakers>
 </document>

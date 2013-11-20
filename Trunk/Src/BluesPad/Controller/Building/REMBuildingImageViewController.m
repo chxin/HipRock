@@ -213,7 +213,21 @@
 
 - (void)initButtons{
     
-    UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, kDMCommon_TopLeftButtonTop, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
+   
+    
+    
+    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, kDMCommon_TopLeftButtonTop,kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
+    
+    backButton.adjustsImageWhenHighlighted=YES;
+    backButton.showsTouchWhenHighlighted=YES;
+    backButton.titleLabel.text=@"Back";
+    [backButton setBackgroundImage:[UIImage imageNamed:@"Back"] forState:UIControlStateNormal];
+    [backButton addTarget:self.parentViewController action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.container addSubview:backButton];
+    self.backButton=backButton;
+    
+    UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, backButton.frame.origin.y, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
     [shareButton setImage:[UIImage imageNamed:@"Share_normal.png"] forState:UIControlStateNormal];
     [shareButton setImage:[UIImage imageNamed:@"Share_disable.png"] forState:UIControlStateDisabled];
     //if (self.buildingInfo.commodityUsage.count == 0) {
@@ -226,18 +240,6 @@
     
     [self.container addSubview:shareButton];
     self.shareButton=shareButton;
-    
-    
-    UIButton *backButton = [[UIButton alloc]initWithFrame:kDMCommon_TopLeftButtonFrame];
-    
-    backButton.adjustsImageWhenHighlighted=YES;
-    backButton.showsTouchWhenHighlighted=YES;
-    backButton.titleLabel.text=@"Back";
-    [backButton setBackgroundImage:[UIImage imageNamed:@"Back"] forState:UIControlStateNormal];
-    [backButton addTarget:self.parentViewController action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.container addSubview:backButton];
-    self.backButton=backButton;
 }
 
 - (void)initTitleView
@@ -277,7 +279,7 @@
     
     
     UIButton *logoButton = [self getCustomerLogoButton];
-    
+    [logoButton setFrame:CGRectMake(self.backButton.frame.origin.x+self.backButton.frame.size.width, kDMCommon_CustomerLogoTop, logoButton.frame.size.width, logoButton.frame.size.height)];
     [logoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
     
     logoButton.titleLabel.text=@"logo";
@@ -424,11 +426,18 @@
         [self.cropTitleView setHidden:NO];
         return;
     }
-    UIImage *image=[REMImageHelper imageWithView:self.container];
+    //UIImage *image=[REMImageHelper imageWithView:self.container];
     CGRect rect=CGRectMake(0, 0, self.container.frame.size.width, kBuildingTitleHeight);
-    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], rect);
-    UIImage *img = [UIImage imageWithCGImage:imageRef];
-    CGImageRelease(imageRef);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, self.view.window.screen.scale);
+    [self.container.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    //CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], rect);
+    //UIImage *img = [UIImage imageWithCGImage:imageRef];
+    //CGImageRelease(imageRef);
     
     UIImageView *view=[[UIImageView alloc]initWithImage:img];
     [self.container addSubview:view];

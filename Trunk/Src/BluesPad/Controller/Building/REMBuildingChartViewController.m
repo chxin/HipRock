@@ -23,6 +23,8 @@
 
 -(void)loadView{
     self.view=[[REMBuildingChartContainerView2 alloc]initWithFrame:CGRectMake(0, 0, self.viewFrame.size.width,self.viewFrame.size.height)];
+    //self.view.layer.borderColor=[UIColor redColor].CGColor;
+    //self.view.layer.borderWidth=1;
 }
 
 
@@ -46,6 +48,8 @@
     if (self.childViewControllers.count==0) {
         REMBuildingChartBaseViewController *handler=[[self.chartHandlerClass alloc]initWithViewFrame:self.viewFrame];
         [self.view addSubview:handler.view];
+        //handler.view.layer.borderColor=[UIColor redColor].CGColor;
+        //handler.view.layer.borderWidth=1;
         [handler loadData:[self.buildingId longLongValue]  :[self.commodityId longLongValue] :nil :^(id data,REMBusinessErrorInfo *error){
             if(error==nil){
                 REMBuildingCommodityViewController *parent=(REMBuildingCommodityViewController *)self.parentViewController;

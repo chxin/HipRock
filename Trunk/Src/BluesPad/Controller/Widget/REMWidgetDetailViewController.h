@@ -16,7 +16,7 @@
 
 @property (nonatomic,weak) REMWidgetObject *widgetInfo;
 @property (nonatomic,weak) REMEnergyViewData *energyData;
-
+@property (nonatomic,weak) UIView *titleContainer;
 
 - (void)showChart;
 -(void)releaseChart;

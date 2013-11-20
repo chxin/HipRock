@@ -20,8 +20,8 @@
 #define kDMChart_ToolbarHeight 56
 #define kDMChart_ToolbarWidth kDMScreenWidth
 
-#define kDMChart_ToolbarFrame CGRectMake(0,kDMChart_ToolbarTop,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)
-#define kDMChart_ToolbarHiddenFrame CGRectMake(kDMChart_ToolbarWidth,kDMChart_ToolbarTop,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)
+#define kDMChart_ToolbarFrame CGRectMake(0,REMDMCOMPATIOS7(kDMChart_ToolbarTop),kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)
+#define kDMChart_ToolbarHiddenFrame CGRectMake(kDMChart_ToolbarWidth,REMDMCOMPATIOS7(kDMChart_ToolbarTop),kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)
 
 //indicator
 #define kDMChart_IndicatorSize 18
@@ -47,7 +47,7 @@
 #define kDMChart_LegendLabelHiddenFontColor @"#bababa"
 
 //tooltip
-#define kDMChart_TooltipViewHeight 84
+#define kDMChart_TooltipViewHeight REMDMCOMPATIOS7(84)
 #define kDMChart_TooltipContentWidth kDMCommon_ContentWidth
 #define kDMChart_TooltipViewBackgroundColor @"#f8f8f8"
 
