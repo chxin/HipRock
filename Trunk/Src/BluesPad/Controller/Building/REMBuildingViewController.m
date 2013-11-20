@@ -139,7 +139,7 @@ const static CGFloat buildingGap=20;
     
     
     int i=0,count=self.buildingInfoArray.count;
-    count=2;
+    //count=2;
     for (;i<count;++i) {
         REMBuildingOverallModel *model = self.buildingInfoArray[i];
         
@@ -312,7 +312,7 @@ const static CGFloat buildingGap=20;
     
     CGFloat sign=self.speed<0?-1:1;
     CGFloat distance=self.speed;
-    
+    NSLog(@"speed:%f,delta:%f",self.speed,self.delta);
     self.delta+=M_PI_4/128.0f;
     if(self.delta>M_PI)self.delta=M_PI;
     

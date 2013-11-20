@@ -34,8 +34,10 @@
     UIScrollView *scroll=[[UIScrollView alloc]initWithFrame:self.viewFrame];
     scroll.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, kBuildingLeftMargin, 0, 0);
     scroll.showsVerticalScrollIndicator=NO;
-    [scroll setContentSize:CGSizeMake(0, 1180)];
+    [scroll setContentSize:CGSizeMake(0, 1165)];
     self.view=scroll;
+    //scroll.layer.borderColor=[UIColor yellowColor].CGColor;
+    //scroll.layer.borderWidth=1;
     scroll.delegate=self;
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapthis)];
     [self.view addGestureRecognizer:tap];
@@ -280,7 +282,7 @@
 - (void)initDragLabel
 {
     UIScrollView *scroll=(UIScrollView *)self.view;
-    CGRect frame = CGRectMake(0, scroll.contentSize.height-17-16, 500, 17);
+    CGRect frame = CGRectMake(0, scroll.contentSize.height-17- REMDMCOMPATIOS7(10), 500, 17);
     
     UILabel *label =[[UILabel alloc]initWithFrame:frame];
     
@@ -297,7 +299,7 @@
     self.dashboardLabel=label;
     
     
-    CGRect imgFrame=CGRectMake(178, scroll.contentSize.height-25-16, 30, 30);
+    CGRect imgFrame=CGRectMake(178, scroll.contentSize.height-25-REMDMCOMPATIOS7(10), 30, 30);
     UIImageView *arrow=[[UIImageView alloc]initWithImage:REMIMG_Up];
     [arrow setFrame:imgFrame];
     [self.view addSubview:arrow];

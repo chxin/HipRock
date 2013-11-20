@@ -20,7 +20,7 @@
 //#import "REMWidgetTimePickerViewController.h"
 //#import "REMWidgetStepToolbarView.h"
 
-@interface REMWidgetMaxViewController : UIViewController
+@interface REMWidgetMaxViewController : UIViewController<UIGestureRecognizerDelegate>
 
 @property (nonatomic,weak) REMDashboardObj *dashboardInfo;
 

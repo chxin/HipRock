@@ -19,7 +19,7 @@
 #import "REMDimensions.h"
 
 const static CGFloat kWidgetBackButtonLeft=25;
-const static CGFloat kWidgetBackButtonTop=18;
+const static CGFloat kWidgetBackButtonTop=16;
 const static CGFloat kWidgetBackButtonWidthHeight=32;
 const static CGFloat kWidgetTitleLeftMargin=10;
 const static CGFloat kWidgetTitleHeight=30;
@@ -60,14 +60,15 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.view setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
-    
+    //[self.view setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
     
     self.bizDelegator=[REMWidgetBizDelegatorBase bizDelegatorByWidgetInfo:self.widgetInfo];
     self.bizDelegator.view=self.view;
     self.bizDelegator.energyData=self.energyData;
     self.bizDelegator.widgetInfo=self.widgetInfo;
+    self.bizDelegator.ownerController=self;
     self.bizDelegator.groupName=[NSString stringWithFormat:@"widget-%@",self.widgetInfo.widgetId];
     //self.view.layer.borderColor=[UIColor redColor].CGColor;
     //self.view.layer.borderWidth=1;
@@ -113,7 +114,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     [titleContainer addSubview:widgetTitle];
     self.widgetTitleLabel=widgetTitle;
     [self.view addSubview:titleContainer];
-    
+    self.titleContainer=titleContainer;
     [self.bizDelegator initBizView];
 }
 

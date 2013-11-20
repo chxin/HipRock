@@ -23,7 +23,6 @@
 @property (nonatomic,assign) float hGridlineWidth;
 @property (nonatomic) UIColor* hGridlineColor;
 @property (nonatomic,assign) DCLineType hGridlineStyle;
-@property (nonatomic,strong) DCRange* globalHRange;
 
 
 @property (nonatomic, strong) NSArray* seriesList;

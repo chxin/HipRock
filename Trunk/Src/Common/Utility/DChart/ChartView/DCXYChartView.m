@@ -12,6 +12,7 @@
 #import "_DCXAxisLabelLayer.h"
 #import "_DCYAxisLabelLayer.h"
 #import "_DCColumnsLayer.h"
+#import "_DCLinesLayer.h"
 #import "DCXYSeries.h"
 #import "REMColor.h"
 
@@ -29,6 +30,10 @@
 @property (nonatomic, strong) _DCColumnsLayer* columnLayer0;
 @property (nonatomic, strong) _DCColumnsLayer* columnLayer1;
 @property (nonatomic, strong) _DCColumnsLayer* columnLayer2;
+
+@property (nonatomic, strong) _DCLinesLayer* lineLayer0;
+@property (nonatomic, strong) _DCLinesLayer* lineLayer1;
+@property (nonatomic, strong) _DCLinesLayer* lineLayer2;
 
 @property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer0;
 @property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer1;
@@ -96,8 +101,12 @@
     self.coordinate2 = [self createCoordinateSystem:self.xAxis y:self.yAxis2 series:self.seriesList index:2];
     if (self.coordinate0) {
         self.columnLayer0 = [self createColumnLayer:self.coordinate0];
-        [self.graphContext addHRangeObsever:self.columnLayer0];
         [self.graphContext addY0RangeObsever:self.columnLayer0];
+        self.lineLayer0 = [self createLineLayer:self.coordinate0];
+        [self.graphContext addY0RangeObsever:self.lineLayer0];
+        [self.graphContext addHRangeObsever:self.columnLayer0];
+        [self.graphContext addHRangeObsever:self.lineLayer0];
+        
         self._yLabelLayer0 = [self createYLabelLayer:self.yAxis0];
         self._yLabelLayer0.isMajorAxis = YES;
         self._yLabelLayer0.frame = CGRectMake(0, 0, self.y0LabelLayerSize.width, self.y0LabelLayerSize.height);
@@ -106,8 +115,12 @@
     }
     if (self.coordinate1) {
         self.columnLayer1 = [self createColumnLayer:self.coordinate1];
-        [self.graphContext addHRangeObsever:self.columnLayer1];
         [self.graphContext addY1RangeObsever:self.columnLayer1];
+        self.lineLayer1 = [self createLineLayer:self.coordinate1];
+        [self.graphContext addY1RangeObsever:self.lineLayer1];
+        [self.graphContext addHRangeObsever:self.columnLayer1];
+        [self.graphContext addHRangeObsever:self.lineLayer1];
+        
         self._yLabelLayer1 = [self createYLabelLayer:self.yAxis1];
         self._yLabelLayer1.isMajorAxis = (self._yLabelLayer0 == nil);
         self._yLabelLayer1.frame = CGRectMake(self._yLabelLayer1.isMajorAxis ? 0 : self.plotRect.size.width+self.plotRect.origin.x, 0, self.y1LabelLayerSize.width, self.y1LabelLayerSize.height);
@@ -116,8 +129,12 @@
     }
     if (self.coordinate2) {
         self.columnLayer2 = [self createColumnLayer:self.coordinate2];
-        [self.graphContext addHRangeObsever:self.columnLayer2];
         [self.graphContext addY2RangeObsever:self.columnLayer2];
+        self.lineLayer2 = [self createLineLayer:self.coordinate2];
+        [self.graphContext addY2RangeObsever:self.lineLayer2];
+        [self.graphContext addHRangeObsever:self.columnLayer2];
+        [self.graphContext addHRangeObsever:self.lineLayer2];
+        
         self._yLabelLayer2 = [self createYLabelLayer:self.yAxis2];
         self._yLabelLayer2.isMajorAxis = (self._yLabelLayer0 == nil && self._yLabelLayer1 == nil);
         CGFloat x = 0;
@@ -153,11 +170,26 @@
 
 -(_DCColumnsLayer*)createColumnLayer:(_DCCoordinateSystem*)coordinate {
     _DCColumnsLayer* layer = [[_DCColumnsLayer alloc]initWithCoordinateSystem:coordinate];
-    layer.graphContext = self.graphContext;
-    layer.frame = self.plotRect;
-    [self.layer addSublayer:layer];
-    [layer setNeedsDisplay];
-    return layer;
+    if (layer.series.count > 0) {
+        layer.graphContext = self.graphContext;
+        layer.frame = self.plotRect;
+        [self.layer addSublayer:layer];
+        [layer setNeedsDisplay];
+        return layer;
+    }
+    return nil;
+}
+
+-(_DCLinesLayer*)createLineLayer:(_DCCoordinateSystem*)coordinate {
+    _DCLinesLayer* layer = [[_DCLinesLayer alloc]initWithCoordinateSystem:coordinate];
+    if (layer.series.count > 0) {
+        layer.graphContext = self.graphContext;
+        layer.frame = self.plotRect;
+        [self.layer addSublayer:layer];
+        [layer setNeedsDisplay];
+        return layer;
+    }
+    return nil;
 }
 
 
@@ -248,26 +280,28 @@
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (self.graphContext.hRange.location < self.globalHRange.location) {
-        [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.globalHRange.location];
-    } else if (self.graphContext.hRange.length+self.graphContext.hRange.location>self.globalHRange.location+self.globalHRange.length) {
-        [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.globalHRange.length+self.globalHRange.location-self.graphContext.hRange.length];
+    if (self.graphContext.hRange.location < self.graphContext.globalHRange.location) {
+        [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.location];
+    } else if (self.graphContext.hRange.length+self.graphContext.hRange.location>self.graphContext.globalHRange.location+self.graphContext.globalHRange.length) {
+        [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.length+self.graphContext.globalHRange.location-self.graphContext.hRange.length];
     }
 }
 -(void)animateHRangeLocation {
-    double step =  [self.timer.userInfo[@"step"] doubleValue];
-    double to =  [self.timer.userInfo[@"to"] doubleValue];
-    double from =  [self.timer.userInfo[@"from"] doubleValue];
-    double newLocation = self.graphContext.hRange.location + step;
-    if (newLocation >= to && from < to) {
-        newLocation = to;
-        [self.timer invalidate];
+    if (self.timer.isValid) {
+        double step =  [self.timer.userInfo[@"step"] doubleValue];
+        double to =  [self.timer.userInfo[@"to"] doubleValue];
+        double from =  [self.timer.userInfo[@"from"] doubleValue];
+        double newLocation = self.graphContext.hRange.location + step;
+        if (newLocation >= to && from < to) {
+            newLocation = to;
+            [self.timer invalidate];
+        }
+        if(newLocation <= to && from > to) {
+            newLocation = to;
+            [self.timer invalidate];
+        }
+        self.graphContext.hRange = [[DCRange alloc]initWithLocation:newLocation length:self.graphContext.hRange.length];
     }
-    if(newLocation <= to && from > to) {
-        newLocation = to;
-        [self.timer invalidate];
-    }
-    self.graphContext.hRange = [[DCRange alloc]initWithLocation:newLocation length:self.graphContext.hRange.length];
 }
 
 -(void)animateHRangeLocationFrom:(double)from to:(double)to {

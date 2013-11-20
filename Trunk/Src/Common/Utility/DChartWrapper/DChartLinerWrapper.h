@@ -1,8 +1,8 @@
 //
-//  DChartColumnWrapper.h
+//  DChartLinerWrapper.h
 //  Blues
 //
-//  Created by Zilong-Oscar.Xu on 11/18/13.
+//  Created by Zilong-Oscar.Xu on 11/19/13.
 //
 //
 
@@ -15,8 +15,9 @@
 #import "DCLineSeries.h"
 #import "DCContext.h"
 
-@interface DChartColumnWrapper : NSObject
+@interface DChartLinerWrapper : NSObject
 @property (nonatomic, readonly) DCXYChartView* view;
 @property (nonatomic, readonly, weak) REMEnergyViewData* energyViewData;
--(DChartColumnWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style;
+-(DChartLinerWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style;
+
 @end

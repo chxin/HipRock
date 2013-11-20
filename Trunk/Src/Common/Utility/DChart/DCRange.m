@@ -27,4 +27,8 @@
     
     return aRange.location == bRange.location && aRange.length == bRange.length;
 }
+-(BOOL)isVisableIn:(DCRange*)bRange {
+    return (self.location <= bRange.length+bRange.location && self.location >= bRange.location) ||
+    (self.location+self.length <= bRange.length+bRange.location && self.location+self.length >= bRange.location);
+}
 @end

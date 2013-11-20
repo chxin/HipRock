@@ -22,19 +22,19 @@ const static CGFloat kDashboardDragTitleMargin=-29;
 
 const static CGFloat kDashboardTitleSize=16;
 const static CGFloat kDashboardTitleBottomMargin=10;
-const static CGFloat kDashboardWidgetWidth=233;
+const static CGFloat kDashboardWidgetWidth=233+3;
 const static CGFloat kDashboardWidgetHeight=157+4;
-const static CGFloat kDashboardWidgetInnerVerticalMargin=14;
-const static CGFloat kDashboardWidgetInnerHorizonalMargin=14;
+const static CGFloat kDashboardWidgetInnerVerticalMargin=10;
+const static CGFloat kDashboardWidgetInnerHorizonalMargin=10;
 const static CGFloat kDashboardWidgetPadding=6;
 const static CGFloat kDashboardInnerMargin=30;
-const static CGFloat kDashboardTitleShareMargin=2;
+const static CGFloat kDashboardTitleShareMargin=3;
 const static CGFloat kDashboardShareSize=11;
 
 
 const static CGFloat kDashboardWidgetTitleTopMargin=8;
-const static CGFloat kDashboardWidgetTimeTopMargin=6;
-const static CGFloat kDashboardWidgetTitleSize=13;
+const static CGFloat kDashboardWidgetTimeTopMargin=5;
+const static CGFloat kDashboardWidgetTitleSize=14;
 const static CGFloat kDashboardWidgetTimeSize=11;
 const static CGFloat kDashboardWidgetShareSize=11;
 const static CGFloat kDashboardWidgetChartTopMargin=9;

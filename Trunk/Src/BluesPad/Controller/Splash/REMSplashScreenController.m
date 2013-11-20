@@ -17,6 +17,7 @@
 #import "REMTestChartView.h"
 #import "REMDimensions.h"
 #import "DChartColumnWrapper.h"
+#import "DChartLinerWrapper.h"
 
 @interface REMSplashScreenController ()
 
@@ -109,7 +110,7 @@
     self.navigationController.navigationBarHidden = YES;
     //    [self.view addSubview:[[REMTrend alloc]initWithFrame:CGRectMake(100, 0, 924, 708)]];
     
-//    [self oscarTest];
+    //[self oscarTest];
     
     
     //decide where to go
@@ -148,7 +149,7 @@
     syntax.xtype = @"columnchartcomponent";
     syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
     NSMutableArray* timeRanges = [[NSMutableArray alloc]initWithCapacity:1];
-    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10]];
+    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*100]];
     [timeRanges setObject:r atIndexedSubscript:0];
     syntax.timeRanges = timeRanges;
     
@@ -175,9 +176,13 @@
     energyViewData.targetEnergyData = sereis;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
-    DChartColumnWrapper* columnWidget = [[DChartColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
+    DChartColumnWrapper* columnWidget = [[DChartColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 374) data:energyViewData widgetContext:syntax style:style];
     columnWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:columnWidget.view];
+    
+    DChartLinerWrapper* lineWidget = [[DChartLinerWrapper alloc]initWithFrame:CGRectMake(0, 374, 1024, 374) data:energyViewData widgetContext:syntax style:style];
+    lineWidget.view.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:lineWidget.view];
 }
 
 -(void)oscarTest2 {
