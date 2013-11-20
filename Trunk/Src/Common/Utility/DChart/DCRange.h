@@ -13,4 +13,5 @@
 @property (nonatomic, readonly) double length;
 -(DCRange*)initWithLocation:(double)location length:(double)length;
 +(BOOL)isRange:(DCRange*)aRange equalTo:(DCRange*)bRange;
+-(BOOL)isVisableIn:(DCRange*)bRange;
 @end

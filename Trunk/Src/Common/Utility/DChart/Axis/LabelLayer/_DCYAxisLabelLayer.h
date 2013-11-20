@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Zilong-Oscar.Xu. All rights reserved.
 //
 
-#import "_DCMagicLayer.h"
 #import <CoreText/CoreText.h>
 #import "DCAxis.h"
+#import "_DCLayer.h"
 
 @interface _DCYAxisLabelLayer : _DCLayer<DCContextYIntervalObserverProtocal>
 

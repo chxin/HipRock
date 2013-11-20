@@ -17,9 +17,4 @@
     }
     return self;
 }
-
--(void)drawToLayer:(CALayer *)layer inContext:(CGContextRef)ctx {
-    // Nothing to do since it is a template.
-    return;
-}
 @end

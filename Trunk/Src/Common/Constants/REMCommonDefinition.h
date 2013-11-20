@@ -9,6 +9,13 @@
 #ifndef Blues_REMCommonDefinition_h
 #define Blues_REMCommonDefinition_h
 
+typedef enum _REMCommodity : int{
+    REMCommodityElectricity = 1,
+    REMCommodityWater = 2,
+    REMCommodityGas = 3,
+    REMCommoditySoftWater = 4,
+} REMCommodity;
+
 #define REMEmptyString @""
 
 #define REMIsNilOrNull(a) ((a)==nil || [(a) isEqual:[NSNull null]])

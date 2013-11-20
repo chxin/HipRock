@@ -12,11 +12,29 @@
 #import "REMDimensions.h"
 
 //prefix: kDMMap, kDMGallery
+#pragma mark kDMMap_
+
 #define kDMMap_MapEdgeInsetsLeft 80.0f
 #define kDMMap_MapEdgeInsets UIEdgeInsetsMake(kDMCommon_TitleGradientLayerHeight*2, kDMMap_MapEdgeInsetsLeft, kDMMap_MapEdgeInsetsLeft, kDMMap_MapEdgeInsetsLeft)
 
+#define kDMMap_BubbleBodyHeight 45
+#define kDMMap_BubbleArrowHeight 11
+#define kDMMap_BubbleArrowWidth 23
+#define kDMMap_BubbleHeight kDMMap_BubbleBodyHeight + kDMMap_BubbleArrowHeight
+#define kDMMap_BubbleBottomOffsetToMarker 6
 
-#pragma mark kDMGallery
+#define kDMMap_BubbleContentTopOffset 6
+#define kDMMap_BubbleContentLeftOffset 27
+#define kDMMap_BubbleContentMainTitleFontSize 17
+#define kDMMap_BubbleContentSubTitleFontSize 11
+#define kDMMap_BubbleContentSubTitleTopOffset kDMMap_BubbleContentTopOffset + kDMMap_BubbleContentMainTitleFontSize + 4
+
+
+
+
+
+#pragma mark kDMGallery_
+
 #define kDMGallery_GalleryGroupViewTopOffset REMDMCOMPATIOS7(109)
 #define kDMGallery_GalleryGroupViewWidth (kDMScreenWidth - 2*kDMCommon_ContentLeftMargin)
 #define kDMGallery_GalleryGroupViewHeight (kDMScreenHeight - kDMGallery_GalleryGroupViewTopOffset)

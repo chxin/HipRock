@@ -14,6 +14,8 @@ extern double const kDCReservedSpace;
 extern CGFloat const kDCColumnOffset;
 extern CGFloat const kDCAnimationDuration;
 extern int const kDCLabelToLine;
+extern int const kDCFramesPerSecord;
+extern double const kDCYRangeChangeDetection;
 
 typedef enum _DCLineType {
     DCLineTypeDefault = 0,
@@ -50,6 +52,8 @@ typedef enum _DCLineType {
 @property (nonatomic, assign) double y0Interval;
 @property (nonatomic, assign) double y1Interval;
 @property (nonatomic, assign) double y2Interval;
+
+@property (nonatomic,strong) DCRange* globalHRange;
 
 -(void)addHRangeObsever:(id<DCContextHRangeObserverProtocal>)observer;
 -(void)removeHRangeObsever:(id<DCContextHRangeObserverProtocal>)observer;

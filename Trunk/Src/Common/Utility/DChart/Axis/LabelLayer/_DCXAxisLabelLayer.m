@@ -11,6 +11,9 @@
 @interface _DCXAxisLabelLayer()
 @property (nonatomic, assign) CGFloat fontSize;
 @property (nonatomic, assign) CTFontRef fontRef;
+
+@property (nonatomic, strong) _DCLayerTrashbox* trashbox;
+
 @end
 
 
@@ -21,17 +24,12 @@
     if (self) {
         self.masksToBounds = YES;
         self.backgroundColor = [UIColor clearColor].CGColor;
+        self.trashbox = [[_DCLayerTrashbox alloc]init];
     }
     return self;
 }
 -(void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
-    int start = floor(self.graphContext.hRange.location);
-    int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
-    
-    for (int i = start; i <= end; i++) {
-        [self addLabelForX:i];
-    }
     
     CGPoint addLines[2];
     addLines[0].x = 0;
@@ -49,26 +47,29 @@
     CGContextStrokePath(ctx);
 }
 
--(void)viewTouchesMoveFrom:(CGPoint)from to:(CGPoint)to {
+-(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
+    double xMovementInScreen = self.frame.size.width * (newRange.location - oldRange.location) / newRange.length;
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
     
     BOOL caTransationState = CATransaction.disableActions;
     [CATransaction setDisableActions:YES];
-    for (NSNumber* key in self.xToLayerDic.allKeys) {
-        CATextLayer* text = self.xToLayerDic[key];
-        CGRect toFrame = CGRectMake(text.frame.origin.x+to.x-from.x, text.frame.origin.y, text.frame.size.width, text.frame.size.height);
-        if ([self isVisableInMyFrame:toFrame]) {
+    for (NSNumber* key in self.trashbox.xToLayerDic.allKeys) {
+        CATextLayer* text = self.trashbox.xToLayerDic[key];
+        CGRect toFrame = CGRectMake(text.frame.origin.x-xMovementInScreen, text.frame.origin.y, text.frame.size.width, text.frame.size.height);
+        if ([DCUtility isFrame:toFrame visableIn:self.bounds]) {
             text.frame = toFrame;
         } else {
-            [self.xToLayerDic removeObjectForKey:key];
+            [self.trashbox.xToLayerDic removeObjectForKey:key];
             [text removeFromSuperlayer];
         }
     }
     [CATransaction setDisableActions:caTransationState];
     
     for (int i = start; i <= end; i++) {
-        if (self.xToLayerDic[@(i)] == nil) [self addLabelForX:i];
+        if (self.trashbox.xToLayerDic[@(i)] == nil) {
+            [self addLabelForX:i];
+        }
     }
 }
 
@@ -85,7 +86,7 @@
     }
     CGFloat centerX = (x - self.graphContext.hRange.location) * self.frame.size.width / self.graphContext.hRange.length;
     
-    CATextLayer* text = (CATextLayer*)[self popLayerFromTrashBox];
+    CATextLayer* text = (CATextLayer*)[self.trashbox popLayerFromTrashBox];
     if (!text) {
         text = [[CATextLayer alloc]init];
         text.font = self.fontRef;
@@ -99,7 +100,7 @@
     [text setString:labelText];
     CGSize size = [DCUtility getSizeOfText:labelText forFont:self.font];
     text.frame = CGRectMake(centerX-size.width/2,self.frame.size.height/2-size.height/2, size.width,size.height);
-    [self.xToLayerDic setObject:text forKey:@(x)];
+    [self.trashbox.xToLayerDic setObject:text forKey:@(x)];
 }
 
 -(void)removeFromSuperlayer {
