@@ -114,7 +114,7 @@ const static CGFloat buildingGap=20;
     if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] ==YES ){
         if(self.childViewControllers.count<1)return YES;
         NSLog(@"touch:%@",touch.view);
-        if( [touch.view isKindOfClass:[REMBuildingChartContainerView2 class]] == YES) return NO;
+        if( [touch.view isKindOfClass:[CPTGraphHostingView class]] == YES) return NO;
         return YES;
     }
     else if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]==YES){
@@ -187,7 +187,7 @@ const static CGFloat buildingGap=20;
     if(pan.state== UIGestureRecognizerStateChanged)
     {
         
-        
+        [self stopChildViewScroll];
         for (int i=0;i<self.childViewControllers.count;++i)
         {
             UIViewController *controller=self.childViewControllers[i];
@@ -238,7 +238,10 @@ const static CGFloat buildingGap=20;
                                 options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
                                     
                                     [self moveAllViews];
-                                } completion:^(BOOL finished){}];
+                                } completion:^(BOOL finished){
+                                
+                                    [self enableChildViewScroll];
+                                }];
             
         }
         else{
@@ -297,9 +300,21 @@ const static CGFloat buildingGap=20;
         [nextController loadContentView];
         
     }
-
+    
+    [self enableChildViewScroll];
 }
 
+- (void)stopChildViewScroll{
+    for (REMBuildingImageViewController *c in self.childViewControllers) {
+        [c horizonalMoving];
+    }
+}
+
+- (void)enableChildViewScroll{
+    for (REMBuildingImageViewController *c in self.childViewControllers) {
+        [c horizonalStopped];
+    }
+}
 
 
 - (void)switchCoverPage:(NSTimer *)timer{

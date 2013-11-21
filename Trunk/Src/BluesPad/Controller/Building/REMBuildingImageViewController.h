@@ -38,5 +38,8 @@ typedef enum _REMBuildingCoverStatus{
 
 - (void)loadContentView;
 - (void)exportImage:(void (^)(UIImage *, NSString*))callback;
+- (void)horizonalMoving;
+- (void)horizonalStopped;
+
 
 @end

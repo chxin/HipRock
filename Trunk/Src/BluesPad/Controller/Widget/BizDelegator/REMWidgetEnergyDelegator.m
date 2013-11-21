@@ -212,7 +212,7 @@
                calendarData.calendarType == REMCalenderTypeCoolSeason)){
                 [validCalendarArray addObject:calendarData];
             }
-            else if(calendarType == REMCalenderTypeHoliday && (calendarData.calendarType == REMCalenderTypeHoliday || calendarData.calendarType == REMCalenderTypeNonworkDay)){
+            else if(calendarType == REMCalenderTypeHoliday && (calendarData.calendarType == REMCalenderTypeHoliday || calendarData.calendarType == REMCalenderTypeRestTime)){
                 [validCalendarArray addObject:calendarData];
             }
             else{
@@ -733,30 +733,7 @@
 
 -(UIView *)prepareLegendView
 {
-    REMChartLegendView *legend = nil;
-    
-    if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
-        //legend = [[REMStackChartLegendView alloc] initWithItems:nil andHiddenSeries:nil];
-    }
-    else{
-        NSMutableArray *itemModels = [[NSMutableArray alloc] init];
-        
-        for(int i=0;i<self.energyData.targetEnergyData.count; i++){
-            REMTargetEnergyData *targetData = self.energyData.targetEnergyData[i];
-            
-            REMChartLegendItemModel *model = [[REMChartLegendItemModel alloc] init];
-            
-            model.index = i;
-            model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType:self.widgetInfo.diagramType];
-            model.title = targetData.target.name;
-            model.delegate = self;
-            model.tappable = YES;
-        
-            [itemModels addObject:model];
-        }
-        
-        //legend = [[REMChartLegendView alloc] initWithItems:itemModels andHiddenSeries:self.hiddenSeries];
-    }
+    REMChartLegendBase *legend = [REMChartLegendBase legendWithData:self.energyData widget:self.widgetInfo parameters:self.tempModel andHiddenIndexes:self.hiddenSeries];
     
     return legend;
 }

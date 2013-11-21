@@ -11,7 +11,6 @@
 #import "REMBuildingTitleView.h"
 #import "REMBuildingTitleLabelView.h"
 #import "REMBuildingRankingView.h"
-#import "REMBuildingChartContainerView.h"
 
 @interface REMBuildingCommodityViewController : UIViewController
 
