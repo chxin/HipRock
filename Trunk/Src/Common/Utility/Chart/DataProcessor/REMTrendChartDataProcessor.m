@@ -16,11 +16,11 @@
     REMEnergyStep step = self.step;
     NSDate* startDate = self.baseDate;
     if (step == REMEnergyStepHour || step == REMEnergyStepDay || step == REMEnergyStepWeek) {
-        x = [xLocalTime timeIntervalSinceDate:startDate] / (step == REMEnergyStepHour ? 3600 : (step == REMEnergyStepDay ? 86400 : 604800));
+        x = [xLocalTime timeIntervalSinceDate:startDate] / (step == REMEnergyStepHour ? 3600.0 : (step == REMEnergyStepDay ? 86400.0 : 604800.0));
     } else if (step == REMEnergyStepYear) {
         x = (int)[REMTimeHelper getYear:xLocalTime] - (int)[REMTimeHelper getYear:startDate];
     } else {
-        x = ((int)[REMTimeHelper getYear:xLocalTime] - (int)[REMTimeHelper getYear:startDate]) * 12 + (int)[REMTimeHelper getMonth:xLocalTime] - (int)[REMTimeHelper getMonth:startDate];
+        x = ((int)[REMTimeHelper getYear:xLocalTime] - (int)[REMTimeHelper getYear:startDate]) * 12.0 + (int)[REMTimeHelper getMonth:xLocalTime] - (int)[REMTimeHelper getMonth:startDate];
     }
     return [NSNumber numberWithFloat:x];
 }
@@ -28,10 +28,10 @@
     REMEnergyStep step = self.step;
     NSDate* startDate = self.baseDate;
     if (step == REMEnergyStepHour || step == REMEnergyStepDay || step == REMEnergyStepWeek) {
-        float i = (step == REMEnergyStepHour ? 3600 : (step == REMEnergyStepDay ? 86400 : 604800));
+        float i = (step == REMEnergyStepHour ? 3600.0 : (step == REMEnergyStepDay ? 86400.0 : 604800.0));
         return[NSDate dateWithTimeInterval:i*x sinceDate:startDate];
     } else if (step == REMEnergyStepYear) {
-        int monthToAdd = 12*x;
+        int monthToAdd = 12.0*x;
         return [REMTimeHelper addMonthToDate:startDate month:monthToAdd];
     } else {
         int monthToAdd = x;
