@@ -139,6 +139,10 @@
 -(void)setCalenderType:(REMCalendarType)calenderType {
     if (calenderType == self.calenderType) return;
     _calenderType = calenderType;
+    [self updateCalender];
+}
+
+-(void) updateCalender {
     CPTXYAxis* xAxis = ((CPTXYAxisSet*)((REMTrendChartView*)self.view).hostedGraph.axisSet).xAxis;
     
     if(self.calenderType == REMCalendarTypeNone) {
@@ -175,5 +179,6 @@
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
     self.step = step;
     [super redraw:energyViewData];
+    [self updateCalender];
 }
 @end
