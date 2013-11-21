@@ -10,9 +10,11 @@
 
 @implementation REMAbstractChartWrapper {
     REMChartStyle* myStyle;
+    CGRect beginRect;
 }
 -(REMAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax  style:(REMChartStyle*)style{
     self = [super init];
+    beginRect = frame;
     if (self) {
         _energyViewData = energyViewData;
         [self extraSyntax:widgetSyntax];
@@ -57,13 +59,12 @@
 }
 
 -(void)redraw:(REMEnergyViewData *)energyViewData {
-    CGRect frame = self.view.frame;
     UIView* superView = self.view.superview;
     [self.view removeFromSuperview];
     [self destroyView];
     
     _energyViewData = energyViewData;
-    _view = [self renderContentView:frame chartConfig:[self getChartConfig:myStyle]];
+    _view = [self renderContentView:beginRect chartConfig:[self getChartConfig:myStyle]];
 //    myStyle = nil;
     if (superView) [superView addSubview:self.view];
 }
