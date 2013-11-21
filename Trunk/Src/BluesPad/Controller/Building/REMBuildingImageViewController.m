@@ -569,8 +569,23 @@
 - (void)horizonalMoving{
     REMBuildingDataViewController *dataController=(REMBuildingDataViewController *)self.childViewControllers[0];
     REMDashboardController *dashboardController=(REMDashboardController *)self.childViewControllers[1];
-    [dataController horizonalMoving];
-    [dashboardController horizonalMoving];
+    if(dataController.isViewLoaded==YES){
+        [dataController horizonalMoving];
+    }
+    if(dashboardController.isViewLoaded==YES){
+        [dashboardController horizonalMoving];
+    }
+}
+
+- (void)horizonalStopped{
+    REMBuildingDataViewController *dataController=(REMBuildingDataViewController *)self.childViewControllers[0];
+    REMDashboardController *dashboardController=(REMDashboardController *)self.childViewControllers[1];
+    if(dataController.isViewLoaded==YES){
+        [dataController horizonalStopped];
+    }
+    if(dashboardController.isViewLoaded==YES){
+        [dashboardController horizonalStopped];
+    }
 }
 
 - (void)releaseViewInController:(NSArray *)controllers{

@@ -212,7 +212,7 @@
                calendarData.calendarType == REMCalenderTypeCoolSeason)){
                 [validCalendarArray addObject:calendarData];
             }
-            else if(calendarType == REMCalenderTypeHoliday && (calendarData.calendarType == REMCalenderTypeHoliday || calendarData.calendarType == REMCalenderTypeNonworkDay)){
+            else if(calendarType == REMCalenderTypeHoliday && (calendarData.calendarType == REMCalenderTypeHoliday || calendarData.calendarType == REMCalenderTypeRestTime)){
                 [validCalendarArray addObject:calendarData];
             }
             else{
