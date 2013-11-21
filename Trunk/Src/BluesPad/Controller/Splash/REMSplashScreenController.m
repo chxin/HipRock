@@ -17,7 +17,7 @@
 #import "REMTestChartView.h"
 #import "REMDimensions.h"
 #import "DChartColumnWrapper.h"
-#import "DChartLinerWrapper.h"
+#import "DChartLineChartWrapper.h"
 
 @interface REMSplashScreenController ()
 
@@ -180,7 +180,7 @@
     columnWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:columnWidget.view];
     
-    DChartLinerWrapper* lineWidget = [[DChartLinerWrapper alloc]initWithFrame:CGRectMake(0, 374, 1024, 374) data:energyViewData widgetContext:syntax style:style];
+    DChartLineChartWrapper* lineWidget = [[DChartLineChartWrapper alloc]initWithFrame:CGRectMake(0, 374, 1024, 374) data:energyViewData widgetContext:syntax style:style];
     lineWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:lineWidget.view];
 }
