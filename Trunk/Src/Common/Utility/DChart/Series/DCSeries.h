@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DCDataPoint.h"
 #import "DCContext.h"
 
 typedef enum _DCSeriesType {

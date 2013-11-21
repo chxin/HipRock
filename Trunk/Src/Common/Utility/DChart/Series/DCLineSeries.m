@@ -14,7 +14,7 @@
     self = [super initWithEnergyData:seriesData];
     if (self) {
         _lineWidth = 2;
-        _symbol = DCLineSymbolTypeNone;
+        _symbolType = DCLineSymbolTypeNone;
         _symbolSize = 4;
     }
     return self;

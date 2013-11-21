@@ -20,6 +20,6 @@ typedef enum _DCLineSymbolType {
 
 @interface DCLineSeries : DCXYSeries
 @property (nonatomic, assign) CGFloat lineWidth;
-@property (nonatomic, assign) DCLineSymbolType symbol;
+@property (nonatomic, assign) DCLineSymbolType symbolType;
 @property (nonatomic, assign) CGFloat symbolSize;
 @end
