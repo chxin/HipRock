@@ -46,6 +46,7 @@
 @property (nonatomic) CGSize y2LabelLayerSize;
 
 @property (nonatomic, strong) NSTimer* timer;
+@property (nonatomic, strong) NSFormatter* xLabelFormatter;
 
 //@property (nonatomic, strong) DCSeriesLayer* seriesLayer;
 
@@ -194,14 +195,14 @@
 
 
 -(void)drawXLabelLayer {
-    self._xLabelLayer = [[_DCXAxisLabelLayer alloc]init];
-    self._xLabelLayer.graphContext = self.graphContext;
+    self._xLabelLayer = [[_DCXAxisLabelLayer alloc]initWithContext:self.graphContext];
     self._xLabelLayer.axis = self.xAxis;
     self._xLabelLayer.font = self.xAxis.labelFont;
     self._xLabelLayer.fontColor = self.xAxis.labelColor;
     [self.graphContext addHRangeObsever:self._xLabelLayer];
     self._xLabelLayer.frame = CGRectMake(self.plotRect.origin.x, self.plotRect.size.height, self.plotRect.size.width, self.frame.size.height - self.plotRect.size.height);
     [self.layer addSublayer:self._xLabelLayer];
+    self._xLabelLayer.labelFormatter = self.xLabelFormatter;
     [self._xLabelLayer setNeedsDisplay];
 }
 
@@ -363,5 +364,11 @@
     if (hidden) {
         
     }
+}
+-(void)setXLabelFormatter:(NSFormatter*)formatter {
+    if (self._xLabelLayer) {
+        self._xLabelLayer.labelFormatter = formatter;
+    }
+    _xLabelFormatter = formatter;
 }
 @end

@@ -31,6 +31,7 @@
     style.xTextStyle = textStyle;
     style.yTextStyle = textStyle;
     style.horizentalGridLineAmount = 6;
+    style.symbolSize = 8;
     return style;
 }
 +(REMChartStyle*)getMinimunStyle {
@@ -54,6 +55,7 @@
     style.xTextStyle = textStyle;
     style.yTextStyle = textStyle;
     style.horizentalGridLineAmount = 4;
+    style.symbolSize = 4;
     return style;
 }
 

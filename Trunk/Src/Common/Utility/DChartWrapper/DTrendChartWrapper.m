@@ -7,10 +7,13 @@
 //
 
 #import "DTrendChartWrapper.h"
+#import "_DCXLabelFormatter.h"
+
 @interface DTrendChartWrapper()
 @property (nonatomic, strong) NSMutableArray* processors;
 @property (nonatomic, strong) DCRange* beginRange;
 @property (nonatomic, strong) DCRange* globalRange;
+@property (nonatomic, strong) _DCXLabelFormatter* xLabelFormatter;
 @end
 
 @implementation DTrendChartWrapper
@@ -18,10 +21,11 @@
     self = [self init];
     if (self && energyViewData.targetEnergyData.count != 0) {
         _energyViewData = energyViewData;
-        [self updateProcessorAndRanges:widgetSyntax.xtype step:widgetSyntax.step.integerValue];
+        [self updateProcessorRangesFormatter:widgetSyntax.xtype step:widgetSyntax.step.integerValue];
         
         
         DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:self.beginRange stacked:NO];
+        [view setXLabelFormatter:self.xLabelFormatter];
         view.xAxis = [[DCAxis alloc]init];
         view.yAxis0 = [[DCAxis alloc]init];
         view.yAxis1 = [[DCAxis alloc]init];
@@ -70,7 +74,7 @@
             } else {
                 continue; // We just support 3 axes for now.
             }
-            [self customizeSeries:s seriesIndex:seriesIndex];
+            [self customizeSeries:s seriesIndex:seriesIndex chartStyle:style];
             [seriesList addObject:s];
             seriesIndex++;
         }
@@ -114,7 +118,7 @@
     return self;
 }
 
--(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index {
+-(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style {
     // Nothing to do.
 }
 
@@ -132,7 +136,7 @@
     return length;
 }
 
--(void)updateProcessorAndRanges:(NSString*)xtype step:(REMEnergyStep)step {
+-(void)updateProcessorRangesFormatter:(NSString*)xtype step:(REMEnergyStep)step {
     NSUInteger seriesAmount = [self getSeriesAmount];
     self.processors = [[NSMutableArray alloc]init];
     NSRange range = [xtype rangeOfString : @"multitimespan"];
@@ -188,6 +192,8 @@
     int endPoint = [self roundDate:beginningEnd startDate:baseDateOfX processor:sharedProcessor roundToFloor:NO].intValue;
     self.beginRange = [[DCRange alloc]initWithLocation:startPoint-0.5 length:endPoint-startPoint];
     self.globalRange = [[DCRange alloc]initWithLocation:-0.5 length:globalLength.doubleValue];
+    
+    self.xLabelFormatter = [[_DCXLabelFormatter alloc]initWithStartDate:baseDateOfX dataStep:step interval:1];
 }
 
 -(NSUInteger)getSeriesAmount {
