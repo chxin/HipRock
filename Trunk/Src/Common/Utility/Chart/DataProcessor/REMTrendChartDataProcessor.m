@@ -17,10 +17,14 @@
     NSDate* startDate = self.baseDate;
     if (step == REMEnergyStepHour || step == REMEnergyStepDay || step == REMEnergyStepWeek) {
         x = [xLocalTime timeIntervalSinceDate:startDate] / (step == REMEnergyStepHour ? 3600.0 : (step == REMEnergyStepDay ? 86400.0 : 604800.0));
-    } else if (step == REMEnergyStepYear) {
-        x = (int)[REMTimeHelper getYear:xLocalTime] - (int)[REMTimeHelper getYear:startDate];
     } else {
-        x = ((int)[REMTimeHelper getYear:xLocalTime] - (int)[REMTimeHelper getYear:startDate]) * 12.0 + (int)[REMTimeHelper getMonth:xLocalTime] - (int)[REMTimeHelper getMonth:startDate];
+        double year = ((double)[REMTimeHelper getYear:xLocalTime] - (double)[REMTimeHelper getYear:startDate]);
+        double month =(double)[REMTimeHelper getMonth:xLocalTime] - (double)[REMTimeHelper getMonth:startDate];
+        double date = [REMTimeHelper getDay:xLocalTime]-[REMTimeHelper getDay:startDate];
+        x = year * 12.0 + month + date/30;
+        if (step == REMEnergyStepYear) {
+            x = x/12;
+        }
     }
     return [NSNumber numberWithFloat:x];
 }

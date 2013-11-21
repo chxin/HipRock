@@ -167,7 +167,7 @@
             }
             if (fillColor == nil) continue;
             for (REMTimeRange* range in calender.timeRanges) {
-                NSNumber* start = [sharedProcessor processX:range.startTime];
+                NSNumber* start = @([sharedProcessor processX:range.startTime].doubleValue-0.5);
                 CPTLimitBand* b = [[CPTLimitBand alloc]initWithRange:[[CPTPlotRange alloc] initWithLocation:start.decimalValue length:CPTDecimalFromDouble([sharedProcessor processX:range.endTime].doubleValue - start.doubleValue)] fill:[CPTFill fillWithColor:fillColor]];
                 [xAxis addBackgroundLimitBand:b];
             }
