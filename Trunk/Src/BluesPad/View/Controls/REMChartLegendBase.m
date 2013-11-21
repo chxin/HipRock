@@ -11,8 +11,20 @@
 #import "REMEnergyTargetModel.h"
 #import "REMChartLegendItem.h"
 #import "REMColor.h"
+#import "REMStackChartLegendView.h"
+#import "REMChartLegendView.h"
 
 @implementation REMChartLegendBase
+
++(REMChartLegendBase *)legendWithData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget parameters:(REMWidgetSearchModelBase *)parameters andHiddenIndexes:(NSArray *)hiddenIndexes
+{
+    if(widget.contentSyntax.dataStoreType == REMDSEnergyCostElectricity){
+        return [[REMStackChartLegendView alloc] initWithData:data widget:widget parameters:parameters andHiddenIndexes:hiddenIndexes];
+    }
+    else{
+        return [[REMChartLegendView alloc] initWithData:data widget:widget parameters:parameters andHiddenIndexes:hiddenIndexes];
+    }
+}
 
 
 -(REMChartLegendBase *)initWithData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget parameters:(REMWidgetSearchModelBase *)parameters andHiddenIndexes:(NSArray *)hiddenIndexes
@@ -24,7 +36,7 @@
         self.widget = widget;
         self.parameters = parameters;
         
-        self.formator = [REMLegendFormatorBase formatorWidthData:data widget:widget andParameters:parameters];
+        self.formator = nil;//[REMLegendFormatorBase formatorWidthData:data widget:widget andParameters:parameters];
         self.itemModels = [self convertItemModels];
         
         [self render:hiddenIndexes];

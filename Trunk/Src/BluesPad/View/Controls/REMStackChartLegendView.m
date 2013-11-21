@@ -10,11 +10,11 @@
 
 @implementation REMStackChartLegendView
 
-
-- (void)addItems:(NSArray *)itemModels :(NSArray *)hiddenSeries
+-(NSArray *)convertItemModels
 {
     // Peak, blue; Valley, green; Plain, purple;
     NSArray *names = @[REMLocalizedString(@"Chart_TOUPeak"),REMLocalizedString(@"Chart_TOUValley"),REMLocalizedString(@"Chart_TOUPlain")];
+    NSMutableArray *models = [[NSMutableArray alloc] init];
     
     for(int i=0;i<3;i++){
         REMChartLegendItemModel *model = [[REMChartLegendItemModel alloc] init];
@@ -23,19 +23,10 @@
         model.type = REMChartSeriesIndicatorColumn;
         model.tappable = NO;
         
-        CGFloat x = i * (kDMChart_LegendItemWidth + kDMChart_LegendItemLeftOffset) + kDMChart_LegendItemLeftOffset;
-        CGFloat y = (kDMChart_ToolbarHeight - kDMChart_LegendItemHeight) / 2;
-        
-        REMChartLegendItem *legend = [[REMChartLegendItem alloc] initWithModel:model];
-        legend.frame = CGRectMake(x, y, kDMChart_LegendItemWidth, kDMChart_LegendItemHeight);
-        
-        [self addSubview:legend];
+        [models addObject:model];
     }
-}
-
--(NSArray *)convertItemModels
-{
-    return nil;
+    
+    return models;
 }
 
 @end
