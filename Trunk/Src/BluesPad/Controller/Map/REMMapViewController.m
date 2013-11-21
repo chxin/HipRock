@@ -61,7 +61,7 @@
 -(void)addButtons
 {
     //add switch button
-    UIButton *switchButton = [[UIButton alloc]initWithFrame:kDMCommon_TopLeftButtonFrame];
+    UIButton *switchButton = [[UIButton alloc]initWithFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, REMDMCOMPATIOS7(kDMCommon_TopLeftButtonTop),kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
     [switchButton setBackgroundImage:REMIMG_Gallery forState:UIControlStateNormal];
     [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
@@ -73,7 +73,7 @@
     
     //add customer logo button
     UIButton *logoButton = self.customerLogoButton;
-    logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,kDMCommon_CustomerLogoTop,kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
+    logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
     [self.view addSubview:logoButton];
 }
 
@@ -195,10 +195,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
-    [self.mapView stopRendering];
-    [self.mapView clear];
-    [self.mapView removeFromSuperview];
-    self.mapView = nil;
+    if([[self.navigationController.childViewControllers lastObject] isEqual:self] == NO){
+        [self.mapView stopRendering];
+        [self.mapView clear];
+        [self.mapView removeFromSuperview];
+        self.mapView = nil;
+    }
 }
 
 - (void)switchButtonPressed
@@ -242,8 +244,14 @@
         self.isInitialPresenting = NO;
 }
 
+-(int):(int)a :(int)b :(int)c
+{
+    return a+b+c;
+}
+
 -(void)presentGalleryView
 {
+    [self :1 :1 :1];
     [self performSegueWithIdentifier:kSegue_MapToGallery sender:self];
 }
 

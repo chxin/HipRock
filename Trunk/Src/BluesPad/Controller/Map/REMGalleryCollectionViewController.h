@@ -12,7 +12,7 @@
 #import "REMMapViewController.h"
 @class REMGalleryCollectionCell;
 
-@interface REMGalleryCollectionViewController : UICollectionViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
+@interface REMGalleryCollectionViewController : UICollectionViewController<UICollectionViewDataSource>
 
 @property (nonatomic,strong) NSString *collectionKey;
 @property (nonatomic,strong) NSArray *buildingInfoArray;

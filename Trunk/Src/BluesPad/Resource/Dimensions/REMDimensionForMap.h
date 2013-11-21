@@ -47,7 +47,7 @@
 #define kDMGallery_GalleryCellCountPerRow 6
 #define kDMGallery_GalleryCellWidth 157
 #define kDMGallery_GalleryCellHeight 118
-//#define kDMGallery_GalleryCellHorizontalSpace 10
+#define kDMGallery_GalleryCellHorizontalSpace 10
 #define kDMGallery_GalleryCellVerticleSpace 16
 #define kDMGallery_GalleryCellTitleTopOffset 9
 #define kDMGallery_GalleryCellTitleLeftOffset 9
@@ -68,7 +68,6 @@
 
 #define kDMGallery_GalleryCellSize CGSizeMake(kDMGallery_GalleryCellWidth,kDMGallery_GalleryCellHeight)
 
-#define kDMGallery_GalleryCellHorizontalSpace 1
 
 
 #endif

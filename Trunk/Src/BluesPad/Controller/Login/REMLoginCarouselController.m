@@ -68,7 +68,7 @@ const int cardCount = 4;
 
 -(void)loadSkipButtons
 {
-    UIEdgeInsets imageInsets = UIEdgeInsetsMake(0, 12.0, 0, 12.0);
+    UIEdgeInsets imageInsets = UIEdgeInsetsMake(5.0f, 12.0f, 0.0f, 12.0f);
     NSString *title = REMLocalizedString(@"Login_SkipToLoginButtonText");
     UIColor *titleColor = [REMColor colorByHexString:kDMLogin_SkipToLoginButtonFontColor];
     
@@ -91,7 +91,7 @@ const int cardCount = 4;
     self.navigationController.navigationBarHidden = YES;
     
     self.scrollView.delegate = self;
-    self.scrollView.contentOffset = CGPointMake(cardCount * kDMScreenWidth, 0);
+    self.scrollView.contentOffset = CGPointMake((cardCount - 1) * kDMScreenWidth, 0);
 
     [self loadCards];
 }

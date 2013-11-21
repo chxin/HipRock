@@ -477,6 +477,12 @@
 		7A66A28C1817794F000A6AB8 /* LoginBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A66A28B1817794F000A6AB8 /* LoginBusiness.m */; };
 		7A6A14F1181E52F4007D06B8 /* REMMarkerBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6A14F0181E52F4007D06B8 /* REMMarkerBubbleView.m */; };
 		7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */; };
+		7A7B2102183CAAF000C14248 /* REMLegendFormatorBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B2101183CAAF000C14248 /* REMLegendFormatorBase.m */; };
+		7A7B2105183CAB3600C14248 /* REMCommonLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B2104183CAB3600C14248 /* REMCommonLegendFormator.m */; };
+		7A7B2108183CAB4B00C14248 /* REMCarbonLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B2107183CAB4B00C14248 /* REMCarbonLegendFormator.m */; };
+		7A7B210B183CAB5F00C14248 /* REMCostLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B210A183CAB5F00C14248 /* REMCostLegendFormator.m */; };
+		7A7B210E183CAB7600C14248 /* REMUnitLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B210D183CAB7600C14248 /* REMUnitLegendFormator.m */; };
+		7A7B2111183CABB000C14248 /* REMRatioLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B2110183CABB000C14248 /* REMRatioLegendFormator.m */; };
 		7A7EA6E1180548CB00A3BB56 /* REMNetworkStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */; };
 		7A7F7B18181F7E3400A3C5AB /* REMGalleryGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F7B17181F7E3400A3C5AB /* REMGalleryGroupView.m */; };
 		7A7F7B1C181F85A100A3C5AB /* REMGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F7B1B181F85A100A3C5AB /* REMGalleryCollectionViewController.m */; };
@@ -499,6 +505,7 @@
 		7AB34E80177D33AB003E235E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4B177D2975003E235E /* SystemConfiguration.framework */; };
 		7AC54999181776910037F180 /* REMDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC54998181776910037F180 /* REMDashboardController.m */; };
 		7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
+		7AD0AB8B183CF52000525C82 /* REMTimeSliceLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD0AB8A183CF52000525C82 /* REMTimeSliceLegendFormator.m */; };
 		7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */; };
 		7AF3667817CF2D7400447650 /* REMBuildingChartSeriesIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */; };
 		7AF6AC8117D1BA0D00D62A9A /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
@@ -1105,6 +1112,13 @@
 		7A6E6D0B17A65CE500FBB264 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		7A6E6D0D17A65CE500FBB264 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		7A7B2100183CAAF000C14248 /* REMLegendFormatorBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLegendFormatorBase.h; path = Biz/Chart/LegendFormator/REMLegendFormatorBase.h; sourceTree = "<group>"; };
+		7A7B2101183CAAF000C14248 /* REMLegendFormatorBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLegendFormatorBase.m; path = Biz/Chart/LegendFormator/REMLegendFormatorBase.m; sourceTree = "<group>"; };
+		7A7B2104183CAB3600C14248 /* REMCommonLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMCommonLegendFormator.m; path = Biz/Chart/LegendFormator/REMCommonLegendFormator.m; sourceTree = "<group>"; };
+		7A7B2107183CAB4B00C14248 /* REMCarbonLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMCarbonLegendFormator.m; path = Biz/Chart/LegendFormator/REMCarbonLegendFormator.m; sourceTree = "<group>"; };
+		7A7B210A183CAB5F00C14248 /* REMCostLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMCostLegendFormator.m; path = Biz/Chart/LegendFormator/REMCostLegendFormator.m; sourceTree = "<group>"; };
+		7A7B210D183CAB7600C14248 /* REMUnitLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMUnitLegendFormator.m; path = Biz/Chart/LegendFormator/REMUnitLegendFormator.m; sourceTree = "<group>"; };
+		7A7B2110183CABB000C14248 /* REMRatioLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMRatioLegendFormator.m; path = Biz/Chart/LegendFormator/REMRatioLegendFormator.m; sourceTree = "<group>"; };
 		7A7EA6DF180548CB00A3BB56 /* REMNetworkStatusIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMNetworkStatusIndicator.h; path = Common/Communication/REMNetworkStatusIndicator.h; sourceTree = "<group>"; };
 		7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMNetworkStatusIndicator.m; path = Common/Communication/REMNetworkStatusIndicator.m; sourceTree = "<group>"; };
 		7A7F7B16181F7E3400A3C5AB /* REMGalleryGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMGalleryGroupView.h; sourceTree = "<group>"; };
@@ -1229,6 +1243,7 @@
 		7AC54998181776910037F180 /* REMDashboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMDashboardController.m; sourceTree = "<group>"; };
 		7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceMeta.h; path = Common/Communication/REMServiceMeta.h; sourceTree = "<group>"; };
 		7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceMeta.m; path = Common/Communication/REMServiceMeta.m; sourceTree = "<group>"; };
+		7AD0AB8A183CF52000525C82 /* REMTimeSliceLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeSliceLegendFormator.m; path = Biz/Chart/LegendFormator/REMTimeSliceLegendFormator.m; sourceTree = "<group>"; };
 		7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
 		7AF3667617CF2D7400447650 /* REMBuildingChartSeriesIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartSeriesIndicator.h; sourceTree = "<group>"; };
 		7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingChartSeriesIndicator.m; sourceTree = "<group>"; };
@@ -2437,6 +2452,37 @@
 			path = ../Lib/GMT;
 			sourceTree = "<group>";
 		};
+		7A7B20FD183CAA9200C14248 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				7A7B20FF183CAAA800C14248 /* TooltipFormator */,
+				7A7B20FE183CAA9800C14248 /* LegendFormator */,
+			);
+			name = Chart;
+			sourceTree = "<group>";
+		};
+		7A7B20FE183CAA9800C14248 /* LegendFormator */ = {
+			isa = PBXGroup;
+			children = (
+				7A7B2100183CAAF000C14248 /* REMLegendFormatorBase.h */,
+				7A7B2101183CAAF000C14248 /* REMLegendFormatorBase.m */,
+				7A7B2104183CAB3600C14248 /* REMCommonLegendFormator.m */,
+				7AD0AB8A183CF52000525C82 /* REMTimeSliceLegendFormator.m */,
+				7A7B2107183CAB4B00C14248 /* REMCarbonLegendFormator.m */,
+				7A7B210A183CAB5F00C14248 /* REMCostLegendFormator.m */,
+				7A7B210D183CAB7600C14248 /* REMUnitLegendFormator.m */,
+				7A7B2110183CABB000C14248 /* REMRatioLegendFormator.m */,
+			);
+			name = LegendFormator;
+			sourceTree = "<group>";
+		};
+		7A7B20FF183CAAA800C14248 /* TooltipFormator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TooltipFormator;
+			sourceTree = "<group>";
+		};
 		7A9B1E11177B3A6000C282A8 = {
 			isa = PBXGroup;
 			children = (
@@ -2706,6 +2752,7 @@
 		B41249ED1803ECAE009022C5 /* Biz */ = {
 			isa = PBXGroup;
 			children = (
+				7A7B20FD183CAA9200C14248 /* Chart */,
 				7A66A2891817794F000A6AB8 /* Login */,
 				B4FED1501804FE4E00E0CE58 /* Energy */,
 				B41249EE1803ECF0009022C5 /* REMCustomerSwitchHelper.h */,
@@ -3458,6 +3505,7 @@
 				B445AEA2177BEEB8002D2A59 /* DDASLLogger.m in Sources */,
 				EFD946FC1839DCBB00E9EC50 /* _DCLayer.m in Sources */,
 				EF8A47F517F959B5009B5C33 /* REMTrendChartAxisConfig.m in Sources */,
+				7A7B2105183CAB3600C14248 /* REMCommonLegendFormator.m in Sources */,
 				EF9ACF6118067CCB00097661 /* REMXFormatter.m in Sources */,
 				B40F011A1828C3DC009650FD /* REMWidgetStepEnergyModel.m in Sources */,
 				B445AEA4177BEEB8002D2A59 /* DDFileLogger.m in Sources */,
@@ -3581,6 +3629,7 @@
 				7A153CCA17AA4B5C00413D3C /* REMEnergyUsageDataModel.m in Sources */,
 				7A153CCD17AA4EDB00413D3C /* REMRankingDataModel.m in Sources */,
 				EFF701CF1830880600B371EC /* REMChartStyle.m in Sources */,
+				7A7B210B183CAB5F00C14248 /* REMCostLegendFormator.m in Sources */,
 				7A37AA5C17AB56F100316902 /* REMUserValidationModel.m in Sources */,
 				EFD6F093181F9C6200AE0A57 /* REMBarPlot.m in Sources */,
 				7A2E7EBD17F28E8A000EB506 /* REMLoginCustomerViewController.m in Sources */,
@@ -3611,6 +3660,7 @@
 				7A1A855417B4BB5D004D7167 /* REMBuildingTrendChartViewController.m in Sources */,
 				7A1A855717B4E278004D7167 /* REMAverageUsageDataModel.m in Sources */,
 				7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */,
+				7A7B2111183CABB000C14248 /* REMRatioLegendFormator.m in Sources */,
 				EFD946FF1839DCBB00E9EC50 /* DCAxis.m in Sources */,
 				B4E815E1182770B700FB9BC5 /* REMWidgetEnergyDelegator.m in Sources */,
 				7A09D59A17B8D62F001EBC30 /* REMDataRange.m in Sources */,
@@ -3627,10 +3677,12 @@
 				7A0288EF17C20CC500709111 /* GeoInfo.m in Sources */,
 				7A0288F017C20CC500709111 /* Status.m in Sources */,
 				7A0288F117C20CC500709111 /* StatusImage.m in Sources */,
+				7A7B2102183CAAF000C14248 /* REMLegendFormatorBase.m in Sources */,
 				B4FAD66E181F7CD000EF1459 /* REMWidgetCellViewController.m in Sources */,
 				B4FFB0C51818C7C5004C5404 /* REMBuildingDataViewController.m in Sources */,
 				7A2E7EC117F2DCB3000EB506 /* REMMapViewController.m in Sources */,
 				7A0288F217C20CC500709111 /* StatusVisible.m in Sources */,
+				7A7B210E183CAB7600C14248 /* REMUnitLegendFormator.m in Sources */,
 				7A0288F317C20CC500709111 /* User.m in Sources */,
 				7A0288F417C20CC500709111 /* WeiboAccount.m in Sources */,
 				7A0288F517C20CC500709111 /* WeiboAuthentication.m in Sources */,
@@ -3661,6 +3713,7 @@
 				7AC54999181776910037F180 /* REMDashboardController.m in Sources */,
 				B4A0FCD817C6057E00C7AD56 /* REMAirQualityModel.m in Sources */,
 				B4A0FCDB17C610B500C7AD56 /* REMBuildingAirQualityChartViewController.m in Sources */,
+				7AD0AB8B183CF52000525C82 /* REMTimeSliceLegendFormator.m in Sources */,
 				EF96300617C610A200BBC7DA /* REMSettingViewController.m in Sources */,
 				7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */,
 				7A9557C017C73AD200249CED /* REMBuildingAirQualityChart.m in Sources */,
@@ -3675,6 +3728,7 @@
 				7A644FDA1839D619004B5C53 /* REMChartLegendView.m in Sources */,
 				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,
 				EFDEC2A81817C6B70008972E /* REMStackColumnWidgetWrapper.m in Sources */,
+				7A7B2108183CAB4B00C14248 /* REMCarbonLegendFormator.m in Sources */,
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
 				EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */,
 				EF60822F17D818430093427C /* REMModalView.m in Sources */,

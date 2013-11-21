@@ -450,11 +450,6 @@ const static CGFloat buildingGap=20;
 }
 
 
-- (IBAction)dashboardButtonPressed:(id)sender
-{
-    [self performSegueWithIdentifier:@"buildingToDashboardSegue" sender:self];
-}
-
 - (IBAction)shareButtonPressed:(id)sender {
     //[self performSegueWithIdentifier:kSegue_BuildingToSharePopover sender:self];
     
