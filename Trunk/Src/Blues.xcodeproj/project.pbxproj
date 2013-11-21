@@ -525,6 +525,8 @@
 		B41249F01803ECF0009022C5 /* REMCustomerSwitchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
+		B420CE0F183CB59D000C7352 /* REMEnergyCostElectricitySearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B420CE0E183CB59D000C7352 /* REMEnergyCostElectricitySearcher.m */; };
+		B420CE16183CB6CD000C7352 /* REMClientErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B420CE15183CB6CD000C7352 /* REMClientErrorInfo.m */; };
 		B42FBF6117F519F5004F2F3A /* REMWidgetCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6017F519F5004F2F3A /* REMWidgetCollectionViewController.m */; };
 		B42FBF6417F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
 		B42FBF6517F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
@@ -1250,6 +1252,10 @@
 		B4198EAD178410D300B50475 /* REMLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLogManager.m; path = Common/Log/REMLogManager.m; sourceTree = "<group>"; };
 		B4198EB01784220300B50475 /* REMJSONHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMJSONHelper.h; path = Common/Utility/REMJSONHelper.h; sourceTree = "<group>"; };
 		B4198EB11784220300B50475 /* REMJSONHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMJSONHelper.m; path = Common/Utility/REMJSONHelper.m; sourceTree = "<group>"; };
+		B420CE0D183CB59D000C7352 /* REMEnergyCostElectricitySearcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergyCostElectricitySearcher.h; path = Biz/Energy/Searcher/REMEnergyCostElectricitySearcher.h; sourceTree = "<group>"; };
+		B420CE0E183CB59D000C7352 /* REMEnergyCostElectricitySearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnergyCostElectricitySearcher.m; path = Biz/Energy/Searcher/REMEnergyCostElectricitySearcher.m; sourceTree = "<group>"; };
+		B420CE14183CB6CD000C7352 /* REMClientErrorInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMClientErrorInfo.h; path = Biz/REMClientErrorInfo.h; sourceTree = "<group>"; };
+		B420CE15183CB6CD000C7352 /* REMClientErrorInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMClientErrorInfo.m; path = Biz/REMClientErrorInfo.m; sourceTree = "<group>"; };
 		B42FBF5F17F519F5004F2F3A /* REMWidgetCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetCollectionViewController.h; sourceTree = "<group>"; };
 		B42FBF6017F519F5004F2F3A /* REMWidgetCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetCollectionViewController.m; sourceTree = "<group>"; };
 		B42FBF6217F574B5004F2F3A /* REMEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnum.h; path = Common/Model/REMEnum.h; sourceTree = "<group>"; };
@@ -2708,6 +2714,15 @@
 			name = Biz;
 			sourceTree = "<group>";
 		};
+		B420CE13183CB69A000C7352 /* ErrorInfo */ = {
+			isa = PBXGroup;
+			children = (
+				B420CE14183CB6CD000C7352 /* REMClientErrorInfo.h */,
+				B420CE15183CB6CD000C7352 /* REMClientErrorInfo.m */,
+			);
+			name = ErrorInfo;
+			sourceTree = "<group>";
+		};
 		B4426FFE17AF305500762C68 /* Building */ = {
 			isa = PBXGroup;
 			children = (
@@ -2876,6 +2891,7 @@
 		B4FED1501804FE4E00E0CE58 /* Energy */ = {
 			isa = PBXGroup;
 			children = (
+				B420CE13183CB69A000C7352 /* ErrorInfo */,
 				B4FED1511804FE8800E0CE58 /* Searcher */,
 			);
 			name = Energy;
@@ -2888,6 +2904,8 @@
 				B4FED1531804FEF400E0CE58 /* REMEnergySeacherBase.m */,
 				B4EDFB161806653400873FA1 /* REMEnergyMultiTimeSearcher.h */,
 				B4EDFB171806653400873FA1 /* REMEnergyMultiTimeSearcher.m */,
+				B420CE0D183CB59D000C7352 /* REMEnergyCostElectricitySearcher.h */,
+				B420CE0E183CB59D000C7352 /* REMEnergyCostElectricitySearcher.m */,
 			);
 			name = Searcher;
 			sourceTree = "<group>";
@@ -3451,6 +3469,7 @@
 				EFD947021839DCBB00E9EC50 /* DCXYChartView.m in Sources */,
 				B445AEAC177BEEB8002D2A59 /* DispatchQueueLogFormatter.m in Sources */,
 				B445AEB2177BFAE8002D2A59 /* REMLog.m in Sources */,
+				B420CE16183CB6CD000C7352 /* REMClientErrorInfo.m in Sources */,
 				7A399E96177D238F00F0EB9F /* AFHTTPClient.m in Sources */,
 				7A6A14F1181E52F4007D06B8 /* REMMarkerBubbleView.m in Sources */,
 				B4D50A41183313C7007C93A4 /* REMBuildingChartViewController.m in Sources */,
@@ -3575,6 +3594,7 @@
 				EFD947081839DCBB00E9EC50 /* DCColumnSeries.m in Sources */,
 				EFFE29DB18279C8700F67DB5 /* REMTestChartView.m in Sources */,
 				EFD947071839DCBB00E9EC50 /* _DCColumnsLayer.m in Sources */,
+				B420CE0F183CB59D000C7352 /* REMEnergyCostElectricitySearcher.m in Sources */,
 				B4911F4317B0D961007AEF7D /* REMBuildingConstants.m in Sources */,
 				B4E815DE18276F4700FB9BC5 /* REMWidgetBizDelegatorBase.m in Sources */,
 				B4911F4817B0EB8B007AEF7D /* REMBuildingRankingView.m in Sources */,

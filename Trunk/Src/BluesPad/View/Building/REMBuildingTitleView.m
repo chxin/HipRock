@@ -49,7 +49,7 @@
     int marginTop=titleSize+margin+fontSize/4 ;
     int fs=ceil(fontSize/4+10);
     
-    UIImage *image=[UIImage imageNamed:@"Nodata"];
+    UIImage *image=REMIMG_Nodata;
     
     UIImageView *icon=[[UIImageView alloc]initWithImage:image];
     

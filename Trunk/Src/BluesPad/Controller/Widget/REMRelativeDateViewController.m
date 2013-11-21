@@ -137,6 +137,8 @@
     
     
     self.currentRow=indexPath.row;
+    
+    [self.navigationController popViewControllerAnimated:YES];
 
 }
 

@@ -25,4 +25,6 @@
 
 - (REMEnergyViewData *)processEnergyData:(NSDictionary *)rawData;
 
+- (REMBusinessErrorInfo *)beforeSendRequest;
+
 @end

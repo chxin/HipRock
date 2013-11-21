@@ -99,8 +99,8 @@
 
 //Widget, prefix:Widget_
 "Widget_TimePickerTime"="时间";
-"Widget_TimePickerStart"="起始";
-"Widget_TimePickerEnd"="终止";
+"Widget_TimePickerStart"="起始时间";
+"Widget_TimePickerEnd"="终止时间";
 "Widget_StepErrorHour"="按小时";
 "Widget_StepErrorDay"="按天";
 "Widget_StepErrorWeek"="按周";
@@ -112,6 +112,7 @@
 "Widget_CalendarHC"="冷暖季";
 "Widget_CalendarHoliday"="非工作时间";
 "Widget_CalendarStepError"="当前步长不支持显示%@背景色"; //当前步长不支持显示冷暖季背景色，当前步长不支持显示非工作时间背景色
+"Widget_CalendarCostElectricityStepError"="峰谷平不支持按小时展示";
 
 //Weibo, prefix: Weibo_
 "Weibo_WindowTitle"="新浪微博";

@@ -22,7 +22,9 @@
 @property (nonatomic,weak) UIButton *backButton;
 @property (nonatomic,weak) UIView *glassView;
 @property (nonatomic,weak) UIView *container;
-
+@property (nonatomic,weak) CALayer *bottomGradientLayer;
+@property (nonatomic,weak) UILabel *buildingTypeTitleView;
+@property (nonatomic,weak) UILabel *buildingTitleView;
 
 @property (nonatomic,strong) NSString *loadingImageKey;
 
@@ -125,8 +127,8 @@
     [self.view addSubview:blurImageView];
     self.imageView=imageView;
     self.blurImageView=blurImageView;
-    NSLog(@"image view:%@",NSStringFromCGRect(self.imageView.frame));
-    NSLog(@"blur image view:%@",NSStringFromCGRect(self.blurImageView.frame));
+    //NSLog(@"image view:%@",NSStringFromCGRect(self.imageView.frame));
+    //NSLog(@"blur image view:%@",NSStringFromCGRect(self.blurImageView.frame));
 }
 
 
@@ -203,7 +205,7 @@
     
     
     [self.view.layer insertSublayer:gradient above:self.glassView.layer];
-    
+    self.bottomGradientLayer=gradient;
     
     CAGradientLayer *layer=[self getTitleGradientLayer];
     [self.view.layer insertSublayer:layer above:self.glassView.layer];
@@ -236,7 +238,7 @@
     shareButton.showsTouchWhenHighlighted=YES;
     shareButton.adjustsImageWhenHighlighted=YES;
     shareButton.titleLabel.text=@"Share";
-    [shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [shareButton addTarget:self.parentViewController action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.container addSubview:shareButton];
     self.shareButton=shareButton;
@@ -256,7 +258,7 @@
     buildingType.textColor=[UIColor whiteColor];
     
     [self.container addSubview:buildingType];
-    
+    self.buildingTypeTitleView=buildingType;
     CGFloat titleSize=kBuildingTitleFontSize;
     if(self.buildingInfo.building.name.length>25){
         titleSize=titleSize-3;
@@ -275,7 +277,7 @@
     
     [self.container addSubview:titleLabel];
     
-    
+    self.buildingTitleView=titleLabel;
     
     
     UIButton *logoButton = [self getCustomerLogoButton];
@@ -574,6 +576,51 @@
         }
     }
 }
+
+-(UIImage*)getImageOfLayer:(CALayer*) layer{
+    UIGraphicsBeginImageContext(layer.frame.size);
+    [layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+- (void)exportImage:(void (^)(UIImage *, NSString*))callback
+{
+    REMBuildingDataViewController *dataViewController=self.childViewControllers[0];
+    NSDictionary *outputDic=[dataViewController realExport];
+    UIImage* dataImage = [outputDic objectForKey:@"image"];
+    float dataImageHeight = dataImage.size.height;
+    
+    CGFloat outputWidth = self.view.frame.size.width;
+    CGFloat outputHeightWithoutFooter = dataImageHeight + kBuildingCommodityViewTop + kBuildingTitleHeight;
+    CGFloat footerHeight = 98;
+    UIImage *footerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WeiboBana" ofType:@"jpg"]];
+    UIGraphicsBeginImageContext(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight));
+    [[UIColor blackColor]set];
+    UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
+    [[self getImageOfLayer:self.imageView.layer]drawInRect:self.imageView.frame];
+    [[self getImageOfLayer:self.buildingTitleView.layer]drawInRect:CGRectMake(self.backButton.frame.origin.x, self.backButton.frame.origin.y, self.buildingTitleView.frame.size.width, self.buildingTitleView.frame.size.height)];
+    //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
+    [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
+    [dataImage drawInRect:CGRectMake(0, kBuildingCommodityViewTop + kBuildingTitleHeight, outputWidth, dataImageHeight)];
+    
+    [footerImage drawInRect:CGRectMake(0, outputHeightWithoutFooter, 800, footerHeight)];
+    [[self getImageOfLayer:self.titleGradientLayer]drawInRect:self.titleGradientLayer.frame];
+    UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //        NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    //        NSString* myDocPath = myPaths[0];
+    //        NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo.png"];
+    //        [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
+    
+    
+    //[NSString str]
+    NSString* buildingName = self.buildingInfo.building.name;
+    NSString* text = [NSString stringWithFormat:[outputDic objectForKey:@"text"], buildingName];
+    callback(img, text);
+}
+
 
 - (void)didReceiveMemoryWarning
 {

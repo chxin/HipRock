@@ -24,5 +24,5 @@
 @property (nonatomic) CGFloat currentOffsetY;
 
 - (void)loadingDataComplete:(NSUInteger)index;
-
+- (NSDictionary *)realExport;
 @end
