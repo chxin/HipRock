@@ -10,12 +10,12 @@
 
 @implementation DCLineSeries
 
--(DCSeries*)initWithData:(NSArray*)seriesData {
-    self = [super initWithData:seriesData];
+-(DCSeries*)initWithEnergyData:(NSArray*)seriesData {
+    self = [super initWithEnergyData:seriesData];
     if (self) {
         _lineWidth = 2;
         _symbol = DCLineSymbolTypeNone;
-        _symbolSize = 12;
+        _symbolSize = 4;
     }
     return self;
 }

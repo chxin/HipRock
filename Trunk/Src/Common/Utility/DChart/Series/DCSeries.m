@@ -10,7 +10,7 @@
 
 @implementation DCSeries
 
--(DCSeries*)initWithData:(NSArray*)seriesData {
+-(DCSeries*)initWithEnergyData:(NSArray*)seriesData {
     self = [super init];
     if (self) {
         _datas = seriesData;

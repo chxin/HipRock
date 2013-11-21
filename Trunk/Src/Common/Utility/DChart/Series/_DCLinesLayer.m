@@ -65,7 +65,9 @@
         CGPoint pointsForSeries[loopEnd-start+1];
         for (int j = start; j <= loopEnd; j++) {
             DCDataPoint* point = s.datas[j];
-            if (point.value != nil && ![point.value isEqual:[NSNull null]]) {
+            if (point.pointType == DCDataPointTypeEmpty) {
+                continue;
+            } else if (point.pointType == DCDataPointTypeNormal) {
                 pointsForSeries[countOfPoints].x = self.frame.size.width*(j-self.graphContext.hRange.location)/self.graphContext.hRange.length;
                 pointsForSeries[countOfPoints].y = self.frame.size.height-self.heightUnitInScreen*point.value.doubleValue;
                 countOfPoints++;
@@ -78,7 +80,6 @@
         if (countOfPoints != 0) {
             CGContextAddLines(ctx, pointsForSeries, countOfPoints);
             CGContextStrokePath(ctx);
-            countOfPoints = 0;
         }
     }
     CGContextStrokePath(ctx);

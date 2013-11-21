@@ -27,6 +27,6 @@ typedef enum _DCSeriesType {
 /*
  * seriesData: IList<DCDataPoint>
  */
--(DCSeries*)initWithData:(NSArray*)seriesData;
+-(DCSeries*)initWithEnergyData:(NSArray*)seriesData;
 
 @end
