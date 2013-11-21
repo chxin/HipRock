@@ -13,8 +13,8 @@
 
 @interface _DCLinesLayer()
 
-@property (nonatomic, strong) _DCLayerTrashbox* symbolTrashbox;
-@property (nonatomic, strong) NSMutableDictionary* symbolsDic;
+//@property (nonatomic, strong) _DCLayerTrashbox* symbolTrashbox;
+//@property (nonatomic, strong) NSMutableDictionary* symbolsDic;
 @property (nonatomic, assign) BOOL symbolsAreHidden;
 @property (nonatomic, strong) NSTimer* timer;
 @end
@@ -23,7 +23,7 @@
 -(id)initWithCoordinateSystem:(_DCCoordinateSystem *)coordinateSystem {
     self = [super initWithCoordinateSystem:coordinateSystem];
     if (self) {
-        self.symbolTrashbox = [[_DCLayerTrashbox alloc]init];
+//        self.symbolTrashbox = [[_DCLayerTrashbox alloc]init];
         _symbolsAreHidden = NO;
 //        self.symbolsLayer = [[CALayer alloc]init];
 //        self.symbolsLayer.frame = self.bounds;
@@ -106,6 +106,7 @@
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
     NSMutableArray* pointsToDraw = [[NSMutableArray alloc]init];
+    NSUInteger i = 0;
     for (DCLineSeries* s in self.series) {
         NSMutableArray* seriesPoints = [[NSMutableArray alloc]init];
         for (int j = start; j<=end; j++) {
@@ -122,6 +123,7 @@
             }
         }
         [pointsToDraw addObject:seriesPoints];
+        i++;
     }
     [self.symbolsLayer drawSymbolsForPoints:pointsToDraw inSize:self.bounds.size];
     
@@ -188,7 +190,11 @@
     if (REMIsNilOrNull(self.symbolsLayer) || hidden == self.symbolsAreHidden) return;
     [self.timer setFireDate:nil];
     if (hidden) {
-        self.symbolsLayer.hidden = hidden;
+        _DCLineSymbolsLayer* layer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
+        layer.frame = self.symbolsLayer.frame;
+        [self.symbolsLayer.superlayer insertSublayer:layer below:self.symbolsLayer];
+        [self.symbolsLayer removeFromSuperlayer];
+        self.symbolsLayer = layer;
         self.symbolsAreHidden = hidden;
     } else {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(lazyRenderSymbol) userInfo:nil repeats:NO];

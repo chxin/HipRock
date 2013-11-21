@@ -35,7 +35,11 @@
             [((NSValue*)pointDic[@"location"]) getValue:&centerPoint];
             CGMutablePathRef path = CGPathCreateMutable();
             if (series.symbolType == DCLineSymbolTypeRectangle) {
-                CGContextAddRect(ctx, CGRectMake(centerPoint.x-halfSize, centerPoint.x-halfSize, series.symbolSize, series.symbolSize));
+                CGPathMoveToPoint(path, NULL, centerPoint.x-halfSize, centerPoint.y-halfSize);
+                CGPathAddLineToPoint(path, NULL, centerPoint.x+halfSize, centerPoint.y-halfSize);
+                CGPathAddLineToPoint(path, NULL, centerPoint.x+halfSize, centerPoint.y+halfSize);
+                CGPathAddLineToPoint(path, NULL, centerPoint.x-halfSize, centerPoint.y+halfSize);
+                CGContextAddPath(ctx, path);
             } else if (series.symbolType == DCLineSymbolTypeRound) {
                 CGContextAddArc(ctx, centerPoint.x, centerPoint.y, halfSize, 0 , M_PI*2, 0);
             } else if (series.symbolType == DCLineSymbolTypeDiamond) {
