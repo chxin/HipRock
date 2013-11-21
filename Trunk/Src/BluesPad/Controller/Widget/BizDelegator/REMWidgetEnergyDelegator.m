@@ -74,6 +74,17 @@
     
     UISegmentedControl *legendControl=[[UISegmentedControl alloc] initWithItems:@[@"search",@"legend"]];
     [legendControl setFrame:CGRectMake(kLegendSearchSwitcherLeft, kLegendSearchSwitcherTop, kLegendSearchSwitcherWidth, kLegendSearchSwitcherHeight)];
+    
+    
+//    [legendControl setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+//    
+//    NSMutableArray *tmpConstraints = [NSMutableArray array];
+//    
+//    [tmpConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-25-|" options:NSLayoutFormatAlignAllRight metrics:nil views:nil]];
+//    [legendControl addConstraints:tmpConstraints];
+    
+    
+    
     [legendControl setSegmentedControlStyle:UISegmentedControlStyleBezeled];
     
     [legendControl setImage:REMIMG_DateView_Chart forSegmentAtIndex:0];
@@ -396,23 +407,26 @@
     }
     NSMutableArray *list=[[NSMutableArray alloc] initWithCapacity:3];
     NSMutableArray *titleList=[[NSMutableArray alloc] initWithCapacity:3];
-    
+    int defaultStepIndex;
     switch (i) {
         case 0:
             [list addObject:[NSNumber numberWithInt:1]];
             [titleList addObject: NSLocalizedString(@"Common_Hour", "")];//小时
+            defaultStepIndex=0;
             break;
         case 1:
             [list addObject:[NSNumber numberWithInt:1]];
             [list addObject:[NSNumber numberWithInt:2]];
             [titleList addObject:NSLocalizedString(@"Common_Hour", "")];//小时
             [titleList addObject:NSLocalizedString(@"Common_Day", "")];//天
+            defaultStepIndex=1;
             break;
         case 2:
             [list addObject:[NSNumber numberWithInt:2]];
             [list addObject:[NSNumber numberWithInt:5]];
             [titleList addObject:NSLocalizedString(@"Common_Day", "")];//天
             [titleList addObject:NSLocalizedString(@"Common_Week", "")];//周
+            defaultStepIndex=0;
             break;
         case 3:
             [list addObject:[NSNumber numberWithInt:2]];
@@ -421,22 +435,26 @@
             [titleList addObject:NSLocalizedString(@"Common_Day", "")];//天
             [titleList addObject:NSLocalizedString(@"Common_Week", "")];//周
             [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
+            defaultStepIndex=2;
             break;
         case 4:
             [list addObject:[NSNumber numberWithInt:3]];
             [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
+            defaultStepIndex=0;
             break;
         case 5:
             [list addObject:[NSNumber numberWithInt:3]];
             [list addObject:[NSNumber numberWithInt:4]];
             [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
             [titleList addObject:NSLocalizedString(@"Common_Year", "")];//年
+            defaultStepIndex=0;
             break;
         case 6:
             [list addObject:[NSNumber numberWithInt:3]];
             [list addObject:[NSNumber numberWithInt:4]];
             [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
             [titleList addObject:NSLocalizedString(@"Common_Year", "")];//年
+            defaultStepIndex=0;
         default:
             break;
     }
@@ -450,6 +468,7 @@
     CGFloat x=kDMScreenWidth-kWidgetChartLeftMargin*2-list.count*kWidgetStepSingleButtonWidth;
     
     CGRect frame= CGRectMake(x, self.timePickerButton.frame.origin.y, list.count*kWidgetStepSingleButtonWidth, kWidgetStepButtonHeight);
+    
     control.tintColor=[UIColor grayColor];
     UIFont *font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:14];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
@@ -472,8 +491,8 @@
     }
     else
     {
-        newStep = list[0];
-        idx =  0;
+        newStep = list[defaultStepIndex];
+        idx =  defaultStepIndex;
     }
     
     [self.stepControl setSelectedSegmentIndex:idx];

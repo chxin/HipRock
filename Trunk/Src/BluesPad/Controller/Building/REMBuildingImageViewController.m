@@ -429,9 +429,9 @@
         return;
     }
     //UIImage *image=[REMImageHelper imageWithView:self.container];
-    CGRect rect=CGRectMake(0, 0, self.container.frame.size.width, kBuildingTitleHeight);
+    CGRect rect=CGRectMake(0, 0, self.view.frame.size.width, kBuildingTitleHeight);
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, self.view.window.screen.scale);
-    [self.container.layer renderInContext:UIGraphicsGetCurrentContext()];
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
     
     UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
     

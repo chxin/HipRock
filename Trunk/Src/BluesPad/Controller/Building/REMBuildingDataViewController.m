@@ -7,7 +7,7 @@
  --------------------------------------------------------------------------*///
 
 #import "REMBuildingDataViewController.h"
-
+#import "REMBuildingDataView.h"
 #define kDashboardThreshold 361+65+85+45
 
 @interface REMBuildingDataViewController ()
@@ -31,7 +31,7 @@
 
 -(void)loadView
 {
-    UIScrollView *scroll=[[UIScrollView alloc]initWithFrame:self.viewFrame];
+    REMBuildingDataView *scroll=[[REMBuildingDataView alloc]initWithFrame:self.viewFrame];
     scroll.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, kBuildingLeftMargin, 0, 0);
     scroll.showsVerticalScrollIndicator=NO;
     [scroll setContentSize:CGSizeMake(0, 1165)];
@@ -461,6 +461,8 @@
         [parent loadingDataComplete];
     }
 }
+
+
 
 - (void)horizonalMoving{
     UIScrollView *view=(UIScrollView *)self.view;
