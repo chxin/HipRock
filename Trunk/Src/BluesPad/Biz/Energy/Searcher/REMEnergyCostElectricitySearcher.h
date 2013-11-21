@@ -1,19 +1,12 @@
 /*------------------------------Summary-------------------------------------
  * Product Name : EMOP iOS Application Software
- * File Name	: REMChartLegendView.m
- * Date Created : 张 锋 on 11/18/13.
+ * File Name	: REMEnergyCostElectricitySearcher.h
+ * Date Created : tantan on 11/20/13.
  * Description  : IOS Application software based on Energy Management Open Platform
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
-#import "REMChartLegendView.h"
-#import "REMChartLegendItem.h"
-#import "REMColor.h"
+#import "REMEnergySeacherBase.h"
 
-@implementation REMChartLegendView
-
--(NSArray *)convertItemModels
-{
-    return nil;
-}
+@interface REMEnergyCostElectricitySearcher : REMEnergySeacherBase
 
 @end

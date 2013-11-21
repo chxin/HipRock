@@ -7,7 +7,7 @@
 //
 
 #import "_DCLayerTrashbox.h"
-
+#import <QuartzCore/QuartzCore.h>
 @implementation _DCLayerTrashbox
 
 -(id)init {

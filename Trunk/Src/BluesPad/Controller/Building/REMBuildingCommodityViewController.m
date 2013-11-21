@@ -24,7 +24,7 @@
 
 @property (nonatomic,weak) REMBuildingChartContainerView *chartContainer1;
 @property (nonatomic,weak) REMBuildingChartContainerView *chartContainer2;
-@property (nonatomic,strong) REMCommodityUsageModel *commodityUsage;
+
 
 @property (nonatomic) NSUInteger counter;
 
@@ -90,6 +90,7 @@
     {
         REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, self.rankingLabel.frame.origin.y, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
         target.title=NSLocalizedString(@"Building_Target", @""); //@"目标值";
+        target.textWidth=400;
         target.titleFontSize=kBuildingCommodityTitleFontSize;
         target.titleMargin=kBuildingDetailInnerMargin;
         target.leftMargin=kBuildingCommodityDetailTextMargin;
@@ -183,6 +184,7 @@
 {
     NSString *title=NSLocalizedString(@"Building_ThisMonthEnergyUsage", @"");//本月用%@总量
     REMBuildingTitleLabelView *totalLabel=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, 0, 900, kBuildingCommodityTotalHeight)];
+    totalLabel.textWidth=1000;
     totalLabel.title=[NSString stringWithFormat:title,self.commodityInfo.comment];
     totalLabel.titleFontSize=kBuildingCommodityTitleFontSize;
     totalLabel.titleMargin=kBuildingTotalInnerMargin;
@@ -202,7 +204,7 @@
     int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityBottomMargin;
     
     REMBuildingTitleLabelView *carbon=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
-    
+    carbon.textWidth=300;
     carbon.title=NSLocalizedString(@"Building_CarbonUsage", @""); //@"二氧化碳当量";
     carbon.titleFontSize=kBuildingCommodityTitleFontSize;
     carbon.titleMargin=kBuildingDetailInnerMargin;
@@ -216,6 +218,7 @@
     
     REMBuildingRankingView *ranking=[[REMBuildingRankingView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
     ranking.title=NSLocalizedString(@"Building_CorporationRanking", @""); //@"集团排名";
+    ranking.textWidth=300;
     ranking.titleFontSize=kBuildingCommodityTitleFontSize;
     ranking.titleMargin=kBuildingDetailInnerMargin;
     ranking.leftMargin=kBuildingCommodityDetailTextMargin;

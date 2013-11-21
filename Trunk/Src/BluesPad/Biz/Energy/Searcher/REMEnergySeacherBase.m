@@ -8,7 +8,7 @@
 
 #import "REMEnergySeacherBase.h"
 #import "REMEnergyMultiTimeSearcher.h"
-
+#import "REMEnergyCostElectricitySearcher.h"
 
 
 
@@ -20,6 +20,9 @@
     if (storeType == REMDSEnergyMultiTimeDistribute ||storeType == REMDSEnergyMultiTimeTrend) {
         obj= [[REMEnergyMultiTimeSearcher alloc]init];
     }
+    else if(storeType == REMDSEnergyCostElectricity){
+        obj= [[REMEnergyCostElectricitySearcher alloc]init];
+    }
     else{
         obj=[[REMEnergySeacherBase alloc]init];
     }
@@ -27,9 +30,21 @@
     return  obj;
 }
 
+- (REMBusinessErrorInfo *)beforeSendRequest{
+    return nil;
+}
+
 - (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(REMWidgetSearchModelBase *)model withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void (^)(id, REMBusinessErrorInfo *))callback
 {
     self.model=model;
+    
+    REMBusinessErrorInfo *error=[self beforeSendRequest];
+    if(error!=nil){
+        callback(nil,error);
+        return;
+    }
+    
+    
     REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:[model toSearchParam]];
     //store.maskContainer=maskerContainer;
     
@@ -51,6 +66,8 @@
         }
         
     } error:^(NSError *error,REMBusinessErrorInfo *errorInfo){
+        [activitor stopAnimating];
+        [activitor removeFromSuperview];
         callback(nil,errorInfo);
     }];
 }

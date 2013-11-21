@@ -450,11 +450,6 @@ const static CGFloat buildingGap=20;
 }
 
 
-- (IBAction)dashboardButtonPressed:(id)sender
-{
-    [self performSegueWithIdentifier:@"buildingToDashboardSegue" sender:self];
-}
-
 - (IBAction)shareButtonPressed:(id)sender {
     //[self performSegueWithIdentifier:kSegue_BuildingToSharePopover sender:self];
     
@@ -500,9 +495,8 @@ const static CGFloat buildingGap=20;
 }
 
 -(void)executeWeiboExport:(REMMaskManager *)masker{
-    REMImageView *view = self.imageArray[self.currentBuildingIndex];
     
-    [view exportImage:^(UIImage *image, NSString* text){
+    [self exportImage:^(UIImage *image, NSString* text){
         [masker hideMask];
         
         REMBuildingWeiboView* weiboView = [[REMBuildingWeiboView alloc]initWithSuperView:self.view text:text image:image];
@@ -511,6 +505,33 @@ const static CGFloat buildingGap=20;
 
     }];
 }
+
+- (void)exportImage:(void (^)(UIImage *, NSString*))callback
+{
+    REMBuildingImageViewController *viewController=self.childViewControllers[self.currentBuildingIndex];
+    
+    [viewController exportImage:callback];
+}
+
+
+
+/*
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
+
+-(UIImage*)getImageOfLayer:(CALayer*) layer{
+    UIGraphicsBeginImageContext(layer.frame.size);
+    [layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 
 #pragma mark - IOS7 style
 -(UIStatusBarStyle)preferredStatusBarStyle{

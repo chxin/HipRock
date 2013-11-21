@@ -11,15 +11,6 @@
 @implementation REMStackChartLegendView
 
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
 - (void)addItems:(NSArray *)itemModels :(NSArray *)hiddenSeries
 {
     // Peak, blue; Valley, green; Plain, purple;
@@ -40,6 +31,11 @@
         
         [self addSubview:legend];
     }
+}
+
+-(NSArray *)convertItemModels
+{
+    return nil;
 }
 
 @end

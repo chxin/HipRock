@@ -37,8 +37,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"relativeDateCell"];
+    //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"relativeDateCell"];
     self.cellCount=2;
+    [self.tableView setScrollEnabled:NO];
     self.navigationController.navigationBar.backItem.title=NSLocalizedString(@"Common_Cancel", @""); //@"取消";
 }
 
@@ -123,61 +124,57 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    cell = [tableView dequeueReusableCellWithIdentifier:@"relativeDateCell" forIndexPath:indexPath];
-    if(cell.contentView.subviews.count>0){
-        if(self.timePickerIndex==1){
-            if(self.startPicker!=nil){
-                [self.startPicker setHidden:NO];
-                [self.startHourPicker setHidden:NO];
-            }
-        }
-        else if(self.timePickerIndex==2){
-             if(self.endPicker!=nil){
-                 [self.endPicker setHidden:NO];
-                 [self.endHourPicker setHidden:NO];
-             }
-        }
-        else{
-            return cell;
-        }
-    }
+    //cell = [tableView dequeueReusableCellWithIdentifier:@"relativeDateCell" forIndexPath:indexPath];
+    
+//    if(cell.contentView.subviews.count>0){
+//        if(self.timePickerIndex==1){
+//            if(self.startPicker!=nil){
+//                [self.startPicker setHidden:NO];
+//                [self.startHourPicker setHidden:NO];
+//            }
+//        }
+//        else if(self.timePickerIndex==2){
+//             if(self.endPicker!=nil){
+//                 [self.endPicker setHidden:NO];
+//                 [self.endHourPicker setHidden:NO];
+//             }
+//        }
+//        else{
+//            return cell;
+//        }
+//    }
     
     if(indexPath.section==0){
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"datePickerCell"];
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text= NSLocalizedString(@"Widget_TimePickerTime", @"");// @"时间";
-        UILabel *relative=[[UILabel alloc]initWithFrame:cell.contentView.frame];
-        relative.backgroundColor=[UIColor clearColor];
-        relative.textAlignment=NSTextAlignmentCenter;
-        relative.text=self.relativeDate;
-        [cell.contentView addSubview:relative];
+        cell.detailTextLabel.text=self.relativeDate;
     }
     else{
         if(indexPath.row==0){
+            cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"datePickerCell"];
             cell.textLabel.text=NSLocalizedString(@"Widget_TimePickerStart", @"");// @"起始";
-            UILabel *start=[[UILabel alloc]initWithFrame:cell.contentView.frame];
-            start.text=[REMTimeHelper formatTimeFullHour:self.timeRange.startTime isChangeTo24Hour:NO];
+            NSString *text;
+            text=[REMTimeHelper formatTimeFullHour:self.timeRange.startTime isChangeTo24Hour:NO];
             if(self.showHour==NO){
-                start.text=[REMTimeHelper formatTimeFullDay:self.timeRange.startTime];
+                text=[REMTimeHelper formatTimeFullDay:self.timeRange.startTime];
             }
-            start.backgroundColor=[UIColor clearColor];
-            start.textAlignment=NSTextAlignmentCenter;
-            [cell.contentView addSubview:start];
-            //NSLog(@"cell is %@",NSStringFromCGRect(cell.frame));
+            cell.detailTextLabel.text=text;
         }
         else{
             if(self.cellCount==2){
+                cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"datePickerCell"];
                 cell.textLabel.text=NSLocalizedString(@"Widget_TimePickerEnd", @"");// @"终止";
-                UILabel *end=[[UILabel alloc]initWithFrame:cell.contentView.frame];
-                end.text=[REMTimeHelper formatTimeFullHour:(NSDate *)self.timeRange.endTime isChangeTo24Hour:YES];
+                NSString *text=[REMTimeHelper formatTimeFullHour:(NSDate *)self.timeRange.endTime isChangeTo24Hour:YES];
                 if(self.showHour==NO){
-                    end.text=[REMTimeHelper formatTimeFullDay:self.timeRange.endTime];
+                    text=[REMTimeHelper formatTimeFullDay:self.timeRange.endTime];
                 }
-                end.backgroundColor=[UIColor clearColor];
-                end.textAlignment=NSTextAlignmentCenter;
-
-                [cell.contentView addSubview:end];
+                cell.detailTextLabel.text=text;
             }
             else{
+                if(cell==nil){
+                    cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"datePickerScrollerCell"];
+                }
                 CGFloat hourPickerWidth=0;
                 if(self.showHour==YES){
                     hourPickerWidth=80;
@@ -185,7 +182,7 @@
                 else{
                     hourPickerWidth=0;
                 }
-                UIDatePicker *picker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width-20-hourPickerWidth, cell.frame.size.height)];
+                UIDatePicker *picker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width+60-hourPickerWidth, cell.frame.size.height)];
                 [picker setDatePickerMode:UIDatePickerModeDate];
                 [picker addTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
                 UIPickerView *hourPicker=nil;
@@ -213,7 +210,6 @@
                     [hourPicker selectRow:hour inComponent:0 animated:NO];
                     self.endHourPicker=hourPicker;
                 }
-                //UIPickerView *hourPicker=[[UIPickerView alloc]initWithFrame:picker.frame];
                 
                 [cell.contentView addSubview:picker];
                 if(self.showHour==YES){
