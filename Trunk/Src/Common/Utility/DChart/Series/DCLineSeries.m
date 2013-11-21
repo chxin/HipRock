@@ -14,6 +14,8 @@
     self = [super initWithData:seriesData];
     if (self) {
         _lineWidth = 2;
+        _symbol = DCLineSymbolTypeNone;
+        _symbolSize = 12;
     }
     return self;
 }

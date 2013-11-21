@@ -16,7 +16,7 @@
     if (self && energyViewData.targetEnergyData.count != 0) {
         _energyViewData = energyViewData;
         
-        DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:[[DCRange alloc]initWithLocation:-0.5 length:100] stacked:NO];
+        DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:[[DCRange alloc]initWithLocation:-0.5 length:40] stacked:NO];
         
         view.xAxis = [[DCAxis alloc]init];
         view.yAxis0 = [[DCAxis alloc]init];
@@ -50,6 +50,7 @@
         }
         
         NSMutableArray* seriesList = [[NSMutableArray alloc]initWithCapacity:energyViewData.targetEnergyData.count];
+        NSUInteger seriesIndex = 0;
         for (REMTargetEnergyData* targetEnergy in energyViewData.targetEnergyData) {
             NSMutableArray* datas = [[NSMutableArray alloc]init];
             if (!allSeriesUserGlobalTime && targetEnergy.energyData.count > 0) {
@@ -90,7 +91,9 @@
             } else {
                 continue; // We just support 3 axes for now.
             }
+            s.symbol = seriesIndex % 5;
             [seriesList addObject:s];
+            seriesIndex++;
         }
         view.graphContext.globalHRange = [[DCRange alloc]initWithLocation:-0.5 length:150];
         view.seriesList = seriesList;

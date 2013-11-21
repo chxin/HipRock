@@ -23,11 +23,11 @@
     for (uint i = 0; i < seriesCount; i++) {
         REMTargetEnergyData* seriesData = [self.energyViewData.targetEnergyData objectAtIndex:i];
         if (seriesData.energyData != nil && seriesData.energyData.count > 0) {
-            [series0Data addObjectsFromArray:seriesData.energyData];
-            for (int j = 0; j < seriesData.energyData.count; j++) {
-                [targets addObject:seriesData.target.name == nil ? @"" : seriesData.target.name];
-            }
+            [series0Data addObject:seriesData.energyData[0]];
+        } else {
+            [series0Data addObject:[NSNull null]];
         }
+        [targets addObject:seriesData.target.name == nil ? @"" : seriesData.target.name];
     }
     REMPieChartSeries* s =[[REMPieChartSeries alloc]initWithData:series0Data dataProcessor:[[REMChartDataProcessor alloc]init] plotStyle:nil];
     s.targetNames = targets;
