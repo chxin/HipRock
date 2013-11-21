@@ -8,11 +8,20 @@
 #import <UIKit/UIKit.h>
 #import "REMWidgetObject.h"
 #import "REMEnergyViewData.h"
+#import "REMWidgetSearchModelBase.h"
+#import "REMLegendFormatorBase.h"
 
 @interface REMChartLegendBase : UIScrollView
 
-+ (REMChartLegendBase *)legendWithEnergyData:(REMEnergyViewData *)data andWidgetInfo:(REMWidgetObject *)REMWidgetObject;
+@property (nonatomic,weak) REMEnergyViewData *data;
+@property (nonatomic,weak) REMWidgetObject *widget;
+@property (nonatomic,weak) REMWidgetSearchModelBase *parameters;
 
-- (id)initWithItems:(NSArray *)itemModels andHiddenSeries:(NSArray *)hiddenSeries;
+@property (nonatomic,strong) REMLegendFormatorBase *formator;
+@property (nonatomic,strong) NSArray *itemModels;
+
+-(REMChartLegendBase *)initWithData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget parameters:(REMWidgetSearchModelBase *)parameters andHiddenIndexes:(NSArray *)hiddenIndexes;
+
+-(NSArray *)convertItemModels;
 
 @end

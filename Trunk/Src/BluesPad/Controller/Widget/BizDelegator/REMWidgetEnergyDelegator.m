@@ -646,7 +646,7 @@
     REMChartLegendView *legend = nil;
     
     if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
-        legend = [[REMStackChartLegendView alloc] initWithItems:nil andHiddenSeries:nil];
+        //legend = [[REMStackChartLegendView alloc] initWithItems:nil andHiddenSeries:nil];
     }
     else{
         NSMutableArray *itemModels = [[NSMutableArray alloc] init];
@@ -665,7 +665,7 @@
             [itemModels addObject:model];
         }
         
-        legend = [[REMChartLegendView alloc] initWithItems:itemModels andHiddenSeries:self.hiddenSeries];
+        //legend = [[REMChartLegendView alloc] initWithItems:itemModels andHiddenSeries:self.hiddenSeries];
     }
     
     return legend;

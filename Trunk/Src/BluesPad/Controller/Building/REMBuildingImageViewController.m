@@ -236,7 +236,7 @@
     shareButton.showsTouchWhenHighlighted=YES;
     shareButton.adjustsImageWhenHighlighted=YES;
     shareButton.titleLabel.text=@"Share";
-    [shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [shareButton addTarget:self.parentViewController action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.container addSubview:shareButton];
     self.shareButton=shareButton;
