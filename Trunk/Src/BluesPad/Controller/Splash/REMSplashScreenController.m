@@ -281,7 +281,7 @@
     
     [REMDataAccessor access:buildingStore success:^(id data) {
         if([data count]<=0){
-            [REMAlertHelper alert:REMLocalizedString(@"Login_NotAuthorized")];
+            [REMAlertHelper alert:REMLocalizedString(@"Login_NoBuilding")];
         }
         
         self.buildingInfoArray = [[NSMutableArray alloc] initWithCapacity:[data count]];
