@@ -456,6 +456,11 @@ static NSDateFormatter *_localFormatter;
     return [NSString stringWithFormat:@"%@ -- %@",start,end];
 }
 
++(NSString*)formatTime:(NSDate *)date withFormat:(NSString*)format {
+    NSDateFormatter *f = [REMTimeHelper currentFormatter];
+    [f setDateFormat:format];
+    return [f stringFromDate:date];
+}
 
 + (REMTimeRange *) maxTimeRangeOfTimeRanges:(NSArray *)timeRanges
 {

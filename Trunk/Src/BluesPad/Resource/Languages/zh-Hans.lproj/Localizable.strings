@@ -139,3 +139,10 @@
 "Chart_TOUPeak" = "峰时";
 "Chart_TOUValley" = "谷时";
 "Chart_TOUPlain" = "平时";
+"Chart_X_Axis_Format_Year" = "yyyy年";
+"Chart_X_Axis_Format_Month" = "M月";
+"Chart_X_Axis_Format_Day" = "d日";
+"Chart_X_Axis_Format_Hour" = "h点";
+"Chart_X_Axis_Format_YearMonth" = "yyyy年-M月";
+"Chart_X_Axis_Format_MonthDay" = "M月-d日";
+"Chart_X_Axis_Format_DayHour" = "d日h点";

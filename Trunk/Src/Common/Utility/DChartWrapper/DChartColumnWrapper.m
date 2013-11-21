@@ -16,7 +16,7 @@
     if (self && energyViewData.targetEnergyData.count != 0) {
         _energyViewData = energyViewData;
         
-        DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:[[DCRange alloc]initWithLocation:-0.5 length:50] stacked:NO];
+        DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:[[DCRange alloc]initWithLocation:-0.5 length:3] stacked:NO];
         
         view.xAxis = [[DCAxis alloc]init];
         view.yAxis0 = [[DCAxis alloc]init];
