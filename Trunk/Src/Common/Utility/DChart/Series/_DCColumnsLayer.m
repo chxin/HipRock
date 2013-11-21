@@ -40,7 +40,6 @@
         [self.trashbox.xToLayerDic removeAllObjects];
     } else {
         self.columnWidthInCoordinateSys = (1 - 2 * kDCColumnOffset) / ((self.graphContext.stacked) ? 1 : self.series.count);
-        self.heightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.frame.size.height / self.yRange.length) : 0;
         
         int start = floor(self.graphContext.hRange.location);
         int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);

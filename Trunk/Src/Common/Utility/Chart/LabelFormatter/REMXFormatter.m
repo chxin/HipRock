@@ -8,61 +8,53 @@
 
 #import "REMChartHeader.h"
 
-@implementation REMXFormatter {
-    NSDateFormatter *dateFormatter;
-}
+@implementation REMXFormatter
 -(REMXFormatter*)initWithStartDate:(NSDate*)startDate dataStep:(REMEnergyStep)step interval:(int)interval {
     self = [super init];
     if (self) {
         _startDate = startDate;
         _interval = interval;
         _step = step;
-        dateFormatter = [[NSDateFormatter alloc] init];
     }
     return self;
 }
 - (NSString *)stringForObjectValue:(id)obj {
-    //    return ((NSNumber*)obj).stringValue;
     if (self.interval == 0) return nil;
     int xVal = ((NSNumber*)obj).integerValue;
     if (xVal % self.interval == 0 && xVal >= 0) {
         NSDate* date = nil;
+        NSString* format = nil;
         if (self.step == REMEnergyStepHour) {
             date = [self.startDate dateByAddingTimeInterval:xVal*3600];
-//            date = [REMTimeHelper convertLocalDateToGMT:date];
             if ([REMTimeHelper getHour:date] < self.interval) {
-                [dateFormatter setDateFormat:@"d日h点"];
+                format = NSLocalizedString(@"Chart_X_Axis_Format_DayHour", @"");
             } else {
-                [dateFormatter setDateFormat:@"h点"];
+                format = NSLocalizedString(@"Chart_X_Axis_Format_Hour", @"");
             }
         } else if (self.step == REMEnergyStepDay) {
             date = [self.startDate dateByAddingTimeInterval:xVal*86400];
-//            date = [REMTimeHelper convertLocalDateToGMT:date];
             if ([REMTimeHelper getDay:date] <= self.interval) {
-                [dateFormatter setDateFormat:@"M月-d日"];
+                format = NSLocalizedString(@"Chart_X_Axis_Format_MonthDay", @"");
             } else {
-                [dateFormatter setDateFormat:@"d日"];
+                format = NSLocalizedString(@"Chart_X_Axis_Format_Day", @"");
             }
         } else if (self.step == REMEnergyStepWeek) {
             date = [self.startDate dateByAddingTimeInterval:xVal*604800];
-//            date = [REMTimeHelper convertLocalDateToGMT:date];
-            [dateFormatter setDateFormat:@"M月-d日"];
+            format = NSLocalizedString(@"Chart_X_Axis_Format_MonthDay", @"");
         } else if (self.step == REMEnergyStepMonth) {
             date = [REMTimeHelper addMonthToDate:self.startDate month:xVal];
-//            date = [REMTimeHelper convertLocalDateToGMT:date];
             if ([REMTimeHelper getMonth:date] <= self.interval) {
-                [dateFormatter setDateFormat:@"yyyy年-M月"];
+                format = NSLocalizedString(@"Chart_X_Axis_Format_YearMonth", @"");
             } else {
-                [dateFormatter setDateFormat:@"M月"];
+                format = NSLocalizedString(@"Chart_X_Axis_Format_Month", @"");
             }
         } else if (self.step == REMEnergyStepYear) {
             date = [REMTimeHelper addMonthToDate:self.startDate month:xVal*12];
-//            date = [REMTimeHelper convertLocalDateToGMT:date];
-            [dateFormatter setDateFormat:@"yyyy年"];
+            format = NSLocalizedString(@"Chart_X_Axis_Format_Year", @"");
         } else {
             return [NSString stringWithFormat:@"%i", xVal];
         }
-        return [dateFormatter stringFromDate:date];
+        return [REMTimeHelper formatTime:date withFormat:format];
     } else {
         return @"";
     }

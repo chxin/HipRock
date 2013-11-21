@@ -74,7 +74,8 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     //self.view.layer.borderWidth=1;
     
     UIView *titleContainer=[[UIView alloc]initWithFrame:CGRectMake(0, REMDMCOMPATIOS7(0), self.view.frame.size.width, 63)];
-    [titleContainer setBackgroundColor:[REMColor colorByHexString:@"#f8f8f8"]];
+    //[titleContainer setBackgroundColor:[REMColor colorByHexString:@"#f8f8f8"]];
+    [titleContainer setBackgroundColor:[UIColor clearColor]];
     
     UIButton *backButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake(kWidgetBackButtonLeft, kWidgetBackButtonTop, kWidgetBackButtonWidthHeight, kWidgetBackButtonWidthHeight)];

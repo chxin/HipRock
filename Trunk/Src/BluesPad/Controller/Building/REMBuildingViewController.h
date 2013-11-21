@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "REMSplashScreenController.h"
-#import "REMImageView.h"
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingConstants.h"
 #import "REMSettingViewController.h"
 #import "REMMapViewController.h"
 #import "REMDashboardController.h"
 #import "REMBuildingImageViewController.h"
+
+@class  REMDashboardController;
 
 typedef enum _BuildingSourceType{
     BuildingSourceTypeFromMap,
@@ -44,6 +45,8 @@ typedef enum _BuildingSourceType{
 - (void)setViewOffset:(CGFloat)offsetY;
 
 - (IBAction)exitMaxWidget:(UIStoryboardSegue *)sender;
+
+- (void)exportImage:(void (^)(UIImage *, NSString*))callback;
 
 @property (nonatomic,weak) REMDashboardController *maxDashbaordController;
 

@@ -11,7 +11,6 @@
 #import "REMBuildingTitleView.h"
 #import "REMBuildingTitleLabelView.h"
 #import "REMBuildingRankingView.h"
-#import "REMBuildingChartContainerView.h"
 
 @interface REMBuildingCommodityViewController : UIViewController
 
@@ -21,7 +20,7 @@
 
 @property (nonatomic) BOOL dataLoadComplete;
 @property (nonatomic) NSUInteger index;
-
+@property (nonatomic,strong) REMCommodityUsageModel *commodityUsage;
 - (void) showChart;
 - (void)loadChartComplete;
 @end

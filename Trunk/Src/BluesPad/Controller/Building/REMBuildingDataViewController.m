@@ -462,6 +462,16 @@
     }
 }
 
+- (void)horizonalMoving{
+    UIScrollView *view=(UIScrollView *)self.view;
+    [view setUserInteractionEnabled:NO];
+}
+
+- (void)horizonalStopped{
+    UIScrollView *view=(UIScrollView *)self.view;
+    [view setUserInteractionEnabled:YES];
+}
+
 - (void)replaceImagesShowReal:(BOOL)showReal{
     //not implemented 
 //    if(self.commodityViewDictionary.count<1)return ;
@@ -544,9 +554,94 @@
 //}
 
 
+-(UIImage*)getImageOfLayer:(CALayer*) layer{
+    UIGraphicsBeginImageContext(layer.frame.size);
+    [layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
 
-
-
+- (NSDictionary *)realExport{
+    REMBuildingCommodityViewController *controller=self.childViewControllers[self.currentCommodityIndex];
+    UIView* chartView = controller.view;
+    UIScrollView *scrollView=(UIScrollView *)self.view;
+    CGFloat chartHeight = scrollView.contentSize.height;
+    
+    NSMutableArray* btnOutputImages = [[NSMutableArray alloc]initWithCapacity:self.buttonArray.count];
+    for (int i = 0; i < self.buttonArray.count; i++) {
+        UIButton* btn = [self.buttonArray objectAtIndex:i];
+        [btnOutputImages setObject:[self getImageOfLayer:btn.layer] atIndexedSubscript:i];
+    }
+    NSMutableArray* chartViewImages = [[NSMutableArray alloc]initWithCapacity:[chartView subviews].count];
+    for (int i = 0; i < [[chartView subviews]count]; i++) {
+        UIView* chartSubView = [[chartView subviews]objectAtIndex:i];
+        [chartViewImages setObject:[self getImageOfLayer:chartSubView.layer] atIndexedSubscript:i];
+    }
+    
+    UIGraphicsBeginImageContext(CGSizeMake(self.view.frame.size.width, kBuildingCommodityButtonDimension + kBuildingCommodityBottomMargin + chartHeight));
+    // Draw buttons
+    
+    for (int i = 0; i < self.buttonArray.count; i++) {
+        UIButton* btn = [self.buttonArray objectAtIndex:i];
+        UIImage* btnImage = [btnOutputImages objectAtIndex:i];
+        [btnImage drawInRect:CGRectMake(btn.frame.origin.x + kBuildingLeftMargin, 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
+    }
+    // Draw charts
+    for (int i = 0; i < chartViewImages.count; i++) {
+        UIImage* chartImage = [chartViewImages objectAtIndex:i];
+        UIView* chartSubView = [[chartView subviews]objectAtIndex:i];
+        [chartImage drawInRect:CGRectMake(chartSubView.frame.origin.x + kBuildingLeftMargin, kBuildingCommodityButtonDimension + kBuildingCommodityBottomMargin + chartSubView.frame.origin.y, chartSubView.frame.size.width, chartSubView.frame.size.height)];
+    }
+    //    [chartImage drawInRect:CGRectMake(kBuildingLeftMargin, kBuildingCommodityButtonDimension + kBuildingCommodityBottomMargin, chartView.frame.size.width, chartHeight)];
+    UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    NSString* stringFormat = nil;
+    if (self.currentCommodityIndex<self.buildingInfo.commodityArray.count) {
+        stringFormat = NSLocalizedString(@"Weibo_ContentOfElectirc", @"");
+        REMCommodityUsageModel *model =controller.commodityUsage;
+        NSString* commodityName = model.commodity.comment;
+        NSString* uomName = model.commodityUsage.uom.comment;
+        NSString* val = [model.commodityUsage.dataValue isEqual:[NSNull null]] ? nil : model.commodityUsage.dataValue.stringValue;
+        if (val == nil || commodityName == nil || uomName == nil) {
+            stringFormat = NSLocalizedString(@"BuildingChart_NoData", @"");
+        } else {
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#UomName#" withString:uomName];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Usage#" withString:val];
+        }
+    } else {
+        stringFormat = NSLocalizedString(@"Weibo_ContentOfPM25", @"");
+        REMAirQualityModel *model = self.buildingInfo.airQuality;
+        NSString* commodityName = model.commodity.comment;
+        NSString* outdoorVal = [model.outdoor.dataValue isEqual:[NSNull null]] ? nil : model.outdoor.dataValue.stringValue;
+        NSString* outdoorUom = model.outdoor.uom.comment;
+        NSString* honeywellVal = [model.honeywell.dataValue isEqual:[NSNull null]] ? nil : model.honeywell.dataValue.stringValue;
+        NSString* honeywellUom = model.honeywell.uom.comment;
+        NSString* mayairVal = [model.mayair.dataValue isEqual:[NSNull null]] ? nil : model.mayair.dataValue.stringValue;
+        NSString* mayairUom = model.mayair.uom.comment;
+        if (commodityName == nil || outdoorUom == nil || outdoorVal == nil || honeywellUom == nil || honeywellVal == nil || mayairUom == nil || mayairVal == nil) {
+            stringFormat = NSLocalizedString(@"BuildingChart_NoData", @"");
+        } else {
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorVal#" withString:outdoorVal];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorUomName#" withString:outdoorUom];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellVal#" withString:honeywellVal];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellUomName#" withString:honeywellUom];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairVal#" withString:mayairVal];
+            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairUomName#" withString:mayairUom];
+        }
+    }
+    //    NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    //    NSString* myDocPath = myPaths[0];
+    //    NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo2.png"];
+    //    [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
+    return @{
+             @"image": img,
+             @"text": stringFormat
+             };
+}
 
 
 @end

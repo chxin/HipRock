@@ -10,13 +10,14 @@
 
 
 typedef enum _REMCalenderType{
-    REMCalendarTypeNone,
-    REMCalenderTypeWorkDay,
-    REMCalenderTypeNonworkDay,
-    REMCalenderTypeHoliday,
-    REMCalenderTypeCoolSeason,
-    REMCalenderTypeHeatSeason,
-    REMCalendarTypeHCSeason
+    REMCalendarTypeNone=-1,
+    REMCalenderTypeWorkDay=0,
+    REMCalenderTypeRestTime=3,
+    REMCalenderTypeHoliday=1,
+    REMCalendarTypeWorkTime=2,
+    REMCalenderTypeCoolSeason=5,
+    REMCalenderTypeHeatSeason=4,
+    REMCalendarTypeHCSeason=6
 } REMCalendarType;
 
 typedef enum _REMCarbonUnit{

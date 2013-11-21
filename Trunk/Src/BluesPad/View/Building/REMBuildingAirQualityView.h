@@ -9,7 +9,7 @@
 #import "REMBuildingCommodityView.h"
 #import "REMAirQualityModel.h"
 #import "REMBuildingTitleLabelView.h"
-#import "REMBuildingChartContainerView.h"
+
 #import "REMBuildingAirQualityChartViewController.h"
 
 

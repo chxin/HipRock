@@ -30,6 +30,7 @@
 
 -(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
     _yRange = newRange;
+    self.heightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.frame.size.height / self.yRange.length) : 0;
 }
 
 -(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {

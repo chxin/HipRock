@@ -22,7 +22,7 @@
 
 @property (nonatomic,strong) NSString *emptyText;
 @property (nonatomic) CGFloat emptyTextFontSize;
-
+@property (nonatomic) CGFloat textWidth;
 @property (nonatomic,weak) UILabel *titleLabel;
 
 @property (nonatomic,weak) UILabel *emptyLabel;

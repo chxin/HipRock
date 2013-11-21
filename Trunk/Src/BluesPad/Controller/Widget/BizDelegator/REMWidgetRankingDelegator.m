@@ -45,10 +45,13 @@
     [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, 0, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
     
     [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];
-    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-40)];
-    [timePickerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-150)];
+    timePickerButton.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetDatePickerTitleSize];
+
+    [timePickerButton setTitleColor:[REMColor colorByHexString:@"#5e5e5e"] forState:UIControlStateNormal];
     
     [timePickerButton addTarget:self action:@selector(showTimePicker) forControlEvents:UIControlEventTouchUpInside];
+    [timePickerButton addTarget:self action:@selector(timePickerPressDown) forControlEvents:UIControlEventTouchDown];
     
     
     [searchViewContainer addSubview:timePickerButton];
@@ -163,7 +166,13 @@
     
 }
 
+- (void)timePickerPressDown{
+    [self.timePickerButton setBackgroundColor:[REMColor colorByHexString:@"#ebebeb"]];
+}
+
+
 - (void) showTimePicker{
+    [self.timePickerButton setBackgroundColor:[UIColor clearColor]];
     UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     UINavigationController *nav=[storyboard instantiateViewControllerWithIdentifier:@"datePickerNavigationController"];
     

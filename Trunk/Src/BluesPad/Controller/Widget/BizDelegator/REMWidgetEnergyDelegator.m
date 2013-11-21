@@ -18,6 +18,7 @@
 #import "REMChartSeriesIndicator.h"
 #import "REMChartLegendView.h"
 #import "REMStackChartLegendView.h"
+#import "REMClientErrorInfo.h"
 
 @interface REMWidgetEnergyDelegator()
 
@@ -73,7 +74,7 @@
     
     UISegmentedControl *legendControl=[[UISegmentedControl alloc] initWithItems:@[@"search",@"legend"]];
     [legendControl setFrame:CGRectMake(kLegendSearchSwitcherLeft, kLegendSearchSwitcherTop, kLegendSearchSwitcherWidth, kLegendSearchSwitcherHeight)];
-    [legendControl setSegmentedControlStyle:UISegmentedControlStylePlain];
+    [legendControl setSegmentedControlStyle:UISegmentedControlStyleBezeled];
     
     [legendControl setImage:REMIMG_DateView_Chart forSegmentAtIndex:0];
     [legendControl setImage:REMIMG_Legend_Chart forSegmentAtIndex:1];
@@ -81,7 +82,7 @@
     //[legendControl setBackgroundColor:[UIColor clearColor]];
     [legendControl setSelectedSegmentIndex:0];
     [legendControl addTarget:self action:@selector(legendSwitchSegmentPressed:) forControlEvents:UIControlEventValueChanged];
-    
+    [legendControl setTintColor:[REMColor colorByHexString:@"#37ab3c"]];
     
     [self.ownerController.titleContainer addSubview:legendControl];
     self.legendSearchControl=legendControl;
@@ -91,16 +92,17 @@
     [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, kWidgetDatePickerTopMargin, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
     timePickerButton.layer.borderColor=[UIColor clearColor].CGColor;
     timePickerButton.layer.borderWidth=0;
-    [timePickerButton setBackgroundColor:[REMColor colorByHexString:@"#9d9d9d"]];
+    //[timePickerButton setBackgroundColor:[REMColor colorByHexString:@"#9d9d9d"]];
+    
     timePickerButton.layer.cornerRadius=4;
     
     [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];
-    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-40)];
+    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-100)];
     timePickerButton.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetDatePickerTitleSize];
     [timePickerButton setTitleColor:[REMColor colorByHexString:@"#5e5e5e"] forState:UIControlStateNormal];
     
     [timePickerButton addTarget:self action:@selector(showTimePicker) forControlEvents:UIControlEventTouchUpInside];
-    
+    [timePickerButton addTarget:self action:@selector(timePickerPressDown) forControlEvents:UIControlEventTouchDown];
     
     [searchViewContainer addSubview:timePickerButton];
     
@@ -140,7 +142,14 @@
     [self setStepControlStatusByStepNoSearch:self.tempModel.step];
 }
 
+- (void)timePickerPressDown{
+    [self.timePickerButton setBackgroundColor:[REMColor colorByHexString:@"#ebebeb"]];
+}
+
+
 - (void) showTimePicker{
+    [self.timePickerButton setBackgroundColor:[UIColor clearColor]];
+
     UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     UINavigationController *nav=[storyboard instantiateViewControllerWithIdentifier:@"datePickerNavigationController"];
     
@@ -188,15 +197,89 @@
     }
 }
 
+- (void)checkCalendarDataWithCalendarType:(REMCalendarType)calendarType withSearchTimeRange:(REMTimeRange *)searchRange{
+    NSArray *calendarDataArray=self.energyData.calendarData;
+    if(calendarDataArray==nil || [calendarDataArray isEqual:[NSNull null]]==YES){
+        NSString *text=NSLocalizedString(@"Widget_CalendarTimeError", @"");
+        //看不到日历背景色？换个时间试试
+        [self showCalendarMsg:text];
+    }
+    else{
+        NSMutableArray *validCalendarArray=[[NSMutableArray alloc]initWithCapacity:calendarDataArray.count];
+        for (REMEnergyCalendarData *calendarData in calendarDataArray) {
+            if([calendarData isEqual:[NSNull null]]==YES) continue;
+            if(calendarType == REMCalendarTypeHCSeason && ( calendarData.calendarType == REMCalenderTypeHeatSeason ||
+               calendarData.calendarType == REMCalenderTypeCoolSeason)){
+                [validCalendarArray addObject:calendarData];
+            }
+            else if(calendarType == REMCalenderTypeHoliday && (calendarData.calendarType == REMCalenderTypeHoliday || calendarData.calendarType == REMCalenderTypeRestTime)){
+                [validCalendarArray addObject:calendarData];
+            }
+            else{
+                continue;
+            }
+        }
+        BOOL showMsg=NO;
+        for (REMEnergyCalendarData *calendarData in validCalendarArray) {
+            for (REMTimeRange *range in calendarData.timeRanges) {
+                if(range.endTime>=searchRange.startTime){
+                    showMsg=YES;
+                    break;
+                }
+            }
+            if(showMsg==YES){
+                break;
+            }
+            
+        }
+        if(showMsg==YES){
+            NSString *text=NSLocalizedString(@"Widget_CalendarTimeError", @"");
+            //看不到日历背景色？换个时间试试
+            [self showCalendarMsg:text];
+        }
+    }
+}
+
+- (void) processCalendar{
+    REMTrendWidgetWrapper *trend=(REMTrendWidgetWrapper *)self.chartWrapper;
+    
+    if(self.widgetInfo.contentSyntax.calendarType == REMCalendarTypeHCSeason){
+        if(self.tempModel.step == REMEnergyStepYear){
+            trend.calenderType=REMCalendarTypeNone;
+            NSString *text=NSLocalizedString(@"Widget_CalendarStepError", @"");
+            //"当前步长不支持显示冷暖季背景色"
+            [self showCalendarMsg:[NSString stringWithFormat:text,[self calendarComponent]]];
+        }
+        else{
+            trend.calenderType=REMCalendarTypeHCSeason;
+            [self checkCalendarDataWithCalendarType:REMCalendarTypeHCSeason withSearchTimeRange:self.tempModel.timeRangeArray[0]];
+        }
+    }
+    else if(self.widgetInfo.contentSyntax.calendarType == REMCalenderTypeHoliday){
+        if(self.tempModel.step == REMEnergyStepMonth ||
+           self.tempModel.step == REMEnergyStepYear ||
+           self.tempModel.step == REMEnergyStepWeek){
+            trend.calenderType=REMCalendarTypeNone;
+            NSString *text=NSLocalizedString(@"Widget_CalendarStepError", @"");
+            //"当前步长不支持显示非工作时间背景色"
+            [self showCalendarMsg:[NSString stringWithFormat:text,[self calendarComponent]]];
+        }
+        else{
+            trend.calenderType=REMCalenderTypeHoliday;
+            [self checkCalendarDataWithCalendarType:REMCalenderTypeHoliday withSearchTimeRange:self.tempModel.timeRangeArray[0]];
+        }
+    }
+    else{
+        
+    }
+
+}
+
 - (void)reloadChart{
     
     if([self.chartWrapper isKindOfClass:[REMTrendWidgetWrapper class]]==YES){
         REMTrendWidgetWrapper *trend=(REMTrendWidgetWrapper *)self.chartWrapper;
-        if(self.tempModel.step == REMEnergyStepYear){
-            trend.calenderType=REMCalendarTypeNone;
-            NSString *text=NSLocalizedString(@"Widget_CalendarStepError", @"");
-            [self showCalendarMsg:[NSString stringWithFormat:text,[self calendarComponent]]];
-        }
+        [self processCalendar];
         [trend redraw:self.energyData step:self.tempModel.step];
     }
     else{
@@ -363,11 +446,11 @@
     [self.stepControl removeAllSegments];
     
     UISegmentedControl *control= [[UISegmentedControl alloc] initWithItems:titleList];
-    
+    //[control setSegmentedControlStyle:UISegmentedControlStyleBezeled];
     CGFloat x=kDMScreenWidth-kWidgetChartLeftMargin*2-list.count*kWidgetStepSingleButtonWidth;
     
     CGRect frame= CGRectMake(x, self.timePickerButton.frame.origin.y, list.count*kWidgetStepSingleButtonWidth, kWidgetStepButtonHeight);
-    
+    control.tintColor=[UIColor grayColor];
     UIFont *font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:14];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
                                                            forKey:UITextAttributeFont];
@@ -441,6 +524,7 @@
     [self initStepButtonWithRange:stepModel.timeRangeArray[0] WithStep:stepModel.step];
     [self setStepControlStatusByStepNoSearch:stepModel.step];
     [self setDatePickerButtonValueNoSearchByTimeRange:stepModel.timeRangeArray[0] withRelative:stepModel.relativeDateComponent withRelativeType:stepModel.relativeDateType];
+    self.tempModel=[self.model copy];
     
 }
 
@@ -454,7 +538,7 @@
         errorMsgArray=@[NSLocalizedString(@"Widget_StepErrorHour", @""),NSLocalizedString(@"Widget_StepErrorDay", @""),NSLocalizedString(@"Widget_StepErrorWeek", @"")];
     }
     else if([availableStep isEqualToString:@"Daily"]==YES){
-        buttonArray=@[NSLocalizedString(@"Common_Daily", @""),NSLocalizedString(@"Common_Week", @""),NSLocalizedString(@"Common_Month", @"")];
+        buttonArray=@[NSLocalizedString(@"Common_Day", @""),NSLocalizedString(@"Common_Week", @""),NSLocalizedString(@"Common_Month", @"")];
         supportStep =@[@(REMEnergyStepDay),@(REMEnergyStepWeek),@(REMEnergyStepMonth)];
         errorMsgArray=@[NSLocalizedString(@"Widget_StepErrorHour", @"")];
     }
@@ -573,6 +657,12 @@
         else{
             if([error.code isEqualToString:@"990001202004"]==YES){ //step error
                 [self processStepErrorWithAvailableStep:error.messages[0]];
+            }
+            else if([error isKindOfClass:[REMClientErrorInfo class]]==YES){
+                REMClientErrorInfo *err=(REMClientErrorInfo *)error;
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:err.messageInfo delegate:nil cancelButtonTitle:NSLocalizedString(@"Common_OK", @"") otherButtonTitles:nil, nil];
+                [alert show];
+                [self rollback];
             }
         }
     }];

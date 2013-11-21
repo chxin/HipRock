@@ -266,13 +266,21 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self setLineSymbolsHidden:YES];
     if (self.timer.isValid) {
         [self.timer invalidate];
     }
 }
 
+-(void)setLineSymbolsHidden:(BOOL)symbolsAreHidden {
+    if (self.lineLayer0) [self.lineLayer0 setSymbolsHidden:symbolsAreHidden];
+    if (self.lineLayer1) [self.lineLayer1 setSymbolsHidden:symbolsAreHidden];
+    if (self.lineLayer2) [self.lineLayer2 setSymbolsHidden:symbolsAreHidden];
+}
+
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     if ([event touchesForView:self].count != 1) return;
+    [self setLineSymbolsHidden:YES];
     UITouch* touch = [touches anyObject];
     CGPoint currentPoint = [touch locationInView:self];
     CGPoint previous = [touch previousLocationInView:self];
@@ -284,6 +292,8 @@
         [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.location];
     } else if (self.graphContext.hRange.length+self.graphContext.hRange.location>self.graphContext.globalHRange.location+self.graphContext.globalHRange.length) {
         [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.length+self.graphContext.globalHRange.location-self.graphContext.hRange.length];
+    } else {
+        [self setLineSymbolsHidden:NO];
     }
 }
 -(void)animateHRangeLocation {
@@ -292,13 +302,10 @@
         double to =  [self.timer.userInfo[@"to"] doubleValue];
         double from =  [self.timer.userInfo[@"from"] doubleValue];
         double newLocation = self.graphContext.hRange.location + step;
-        if (newLocation >= to && from < to) {
+        if ((newLocation >= to && from < to) || (newLocation <= to && from > to)){
             newLocation = to;
             [self.timer invalidate];
-        }
-        if(newLocation <= to && from > to) {
-            newLocation = to;
-            [self.timer invalidate];
+            [self setLineSymbolsHidden:NO];
         }
         self.graphContext.hRange = [[DCRange alloc]initWithLocation:newLocation length:self.graphContext.hRange.length];
     }

@@ -48,6 +48,8 @@ typedef enum _REMDateTimePart : NSUInteger{
 
 + (NSString *)formatTimeFullDay:(NSDate *)date;
 
++(NSString*)formatTime:(NSDate *)date withFormat:(NSString*)format;
+
 + (NSString *)formatTimeRangeFullDay:(REMTimeRange *)range;
 
 + (NSString *)formatTimeRangeFullHour:(REMTimeRange *)range;

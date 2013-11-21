@@ -39,28 +39,38 @@
         if (self.series.count == 1) {
             REMPieChartSeries* s = [self.series objectAtIndex:0];
             CPTPieChart* plot = (CPTPieChart*)[s getPlot];
-            NSUInteger numberOfSlice = [s numberOfRecordsForPlot:plot];
-            double sumY = 0;
-            NSMutableArray* yArray = [[NSMutableArray alloc]initWithCapacity:numberOfSlice];
-            for (NSUInteger i = 0; i < numberOfSlice; i++) {
-                NSNumber* yVal = [s numberForPlot:plot field:CPTPieChartFieldSliceWidth recordIndex:i];
-                [yArray addObject:yVal];
-                sumY += yVal.doubleValue;
-            }
-            self.pointAngles = [[NSMutableArray alloc]initWithCapacity:numberOfSlice+1];
-            [self.pointAngles addObject:@(M_PI*2)];
-            double yCursor = 0;
-            for (int i = 0; i < numberOfSlice; i++) {
-                NSNumber* yVal = yArray[i];
-                yCursor+=yVal.doubleValue;
-                [self.pointAngles addObject:@(M_PI*2-yCursor/sumY*2*M_PI)];
-            }
+            [self reset];
             [s beforePlotAddToGraph:self.hostedGraph seriesList:self.series selfIndex:0];
-            [self.hostedGraph addPlot:[s getPlot]];
+            [self.hostedGraph addPlot:plot];
         }
     }
     [self alignSliceWithAnimation:NO];
     return self;
+}
+
+-(void)reset {
+    REMPieChartSeries* s = [self.series objectAtIndex:0];
+    CPTPieChart* plot = (CPTPieChart*)[s getPlot];
+    NSUInteger numberOfSlice = [s numberOfRecordsForPlot:plot];
+    double sumY = 0;
+    NSMutableArray* yArray = [[NSMutableArray alloc]initWithCapacity:numberOfSlice];
+    for (NSUInteger i = 0; i < numberOfSlice; i++) {
+        NSNumber* yVal = [s numberForPlot:plot field:CPTPieChartFieldSliceWidth recordIndex:i];
+        if (yVal==nil || [yVal isEqual:[NSNull null]]) {
+            [yArray addObject:@(0)];
+        } else {
+            [yArray addObject:yVal];
+            sumY +=  yVal.doubleValue;
+        }
+    }
+    self.pointAngles = [[NSMutableArray alloc]initWithCapacity:numberOfSlice+1];
+    [self.pointAngles addObject:@(M_PI*2)];
+    double yCursor = 0;
+    for (int i = 0; i < numberOfSlice; i++) {
+        NSNumber* yVal = yArray[i];
+        yCursor+=yVal.doubleValue;
+        [self.pointAngles addObject:@(M_PI*2-yCursor/sumY*2*M_PI)];
+    }
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -87,15 +97,30 @@
     if (self.pointAngles.count == 1) {
         return;
     }
-    NSNumber* pieSlice = self.pointAngles[self.focusPointIndex+1];
-    NSNumber* preSlice = self.pointAngles[self.focusPointIndex];
-    double targetRotation = (preSlice.doubleValue+pieSlice.doubleValue)/2;
-    if (withAnimation) {
-        [UIView animateWithDuration:0.2 animations:^(void){
+    NSNumber* pieSlice = nil;//self.pointAngles[self.focusPointIndex+1];
+    NSNumber* preSlice = nil;//self.pointAngles[self.focusPointIndex];
+    NSUInteger focusPointIndex = self.focusPointIndex;
+    BOOL hasNextFocusPoint = NO;
+    do {
+        pieSlice = self.pointAngles[focusPointIndex];
+        preSlice = self.pointAngles[focusPointIndex+1];
+        if (![pieSlice isEqualToNumber:preSlice]) {
+            hasNextFocusPoint = YES;
+            self.focusPointIndex = focusPointIndex;
+            break;
+        }
+        focusPointIndex++;
+        if (focusPointIndex == self.pointAngles.count-1) focusPointIndex = 0;
+    } while (focusPointIndex!=self.focusPointIndex);
+    if (hasNextFocusPoint) {
+        double targetRotation = (preSlice.doubleValue+pieSlice.doubleValue)/2;
+        if (withAnimation) {
+            [UIView animateWithDuration:0.2 animations:^(void){
+                self.rotationAngle = targetRotation;
+            }];
+        } else {
             self.rotationAngle = targetRotation;
-        }];
-    } else {
-        self.rotationAngle = targetRotation;
+        }
     }
 }
 
@@ -138,7 +163,7 @@
     NSUInteger focusPointIndex = self.focusPointIndex;
     REMPieChartSeries* series = self.series[0];
     if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:color:name:)]) {
-        [self.delegate highlightPoint:series.energyData[focusPointIndex] color:[series getColorByIndex:focusPointIndex].uiColor name:series.targetNames[focusPointIndex]];
+//        [self.delegate highlightPoint:series.energyData[focusPointIndex] color:[series getColorByIndex:focusPointIndex].uiColor name:series.targetNames[focusPointIndex]];
     }
     NSLog(@"%i %@", self.focusPointIndex, series.targetNames[focusPointIndex]);
 }
@@ -151,5 +176,7 @@
     REMPieChartSeries* s = self.series[0];
     if (seriesIndex >= s.energyData.count) return;
     [s setHiddenAtIndex:seriesIndex hidden:hidden];
+    [self reset];
+    [self alignSliceWithAnimation:NO];
 }
 @end

@@ -23,6 +23,7 @@
     if(self)
     {
         self.backgroundColor=[UIColor clearColor];
+        self.clipsToBounds=YES;
     }
     
     return self;
@@ -53,7 +54,8 @@
     
     
     int marginTop=titleSize+margin ;
-    REMNumberLabel *textLabel = [[REMNumberLabel alloc] initWithFrame:CGRectMake(leftMargin, marginTop, 1000, valueSize)];
+    REMNumberLabel *textLabel = [[REMNumberLabel alloc] initWithFrame:CGRectMake(leftMargin, marginTop, self.textWidth, valueSize)];
+    textLabel.clipsToBounds=YES;
     textLabel.fontSize=@(valueSize);
     textLabel.textColor=[UIColor whiteColor];
     textLabel.backgroundColor=[UIColor clearColor];

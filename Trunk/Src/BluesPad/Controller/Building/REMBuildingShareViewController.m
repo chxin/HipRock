@@ -10,7 +10,6 @@
 #import <MessageUI/MessageUI.h>
 #import "REMBuildingShareViewController.h"
 #import "REMBuildingWeiboView.h"
-#import "REMImageView.h"
 #import "REMCommonDefinition.h"
 
 @interface REMBuildingShareViewController ()
@@ -59,9 +58,9 @@
 {
     int index = self.buildingController.currentBuildingIndex;
     
-    REMImageView *view = [self.buildingController.imageArray objectAtIndex:index];
+    //REMImageView *view = [self.buildingController.childViewControllers objectAtIndex:index];
     
-    [view exportImage:^(UIImage *image, NSString* text){
+    [self.buildingController exportImage:^(UIImage *image, NSString* text){
         [self.buildingController.sharePopoverController dismissPopoverAnimated:YES];
         
         if(![MFMailComposeViewController canSendMail]){

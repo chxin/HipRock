@@ -6,7 +6,7 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMBuildingChartContainerView2.h"
-
+#import <QuartzCore/QuartzCore.h>
 @implementation REMBuildingChartContainerView2
 
 - (id)initWithFrame:(CGRect)frame
@@ -14,6 +14,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        //self.layer.borderColor=[UIColor redColor].CGColor;
+        //self.layer.borderWidth=1;
     }
     return self;
 }

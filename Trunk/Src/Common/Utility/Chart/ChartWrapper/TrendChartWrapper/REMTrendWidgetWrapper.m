@@ -139,6 +139,10 @@
 -(void)setCalenderType:(REMCalendarType)calenderType {
     if (calenderType == self.calenderType) return;
     _calenderType = calenderType;
+    [self updateCalender];
+}
+
+-(void) updateCalender {
     CPTXYAxis* xAxis = ((CPTXYAxisSet*)((REMTrendChartView*)self.view).hostedGraph.axisSet).xAxis;
     
     if(self.calenderType == REMCalendarTypeNone) {
@@ -163,8 +167,8 @@
             }
             if (fillColor == nil) continue;
             for (REMTimeRange* range in calender.timeRanges) {
-                NSNumber* start = [sharedProcessor processX:range.startTime];
-                CPTLimitBand* b = [[CPTLimitBand alloc]initWithRange:[[CPTPlotRange alloc] initWithLocation:start.decimalValue length:CPTDecimalFromDouble([sharedProcessor processX:range.endTime].doubleValue - start.doubleValue)] fill:[CPTFill fillWithColor:fillColor]];
+                NSNumber* start = @([sharedProcessor processX:range.startTime].doubleValue-0.5);
+                CPTLimitBand* b = [[CPTLimitBand alloc]initWithRange:[[CPTPlotRange alloc] initWithLocation:start.decimalValue length:CPTDecimalFromDouble([sharedProcessor processX:range.endTime].doubleValue -0.5 - start.doubleValue)] fill:[CPTFill fillWithColor:fillColor]];
                 [xAxis addBackgroundLimitBand:b];
             }
         }
@@ -175,5 +179,6 @@
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
     self.step = step;
     [super redraw:energyViewData];
+    [self updateCalender];
 }
 @end
