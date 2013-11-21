@@ -246,10 +246,20 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     [buildingController performSegueWithIdentifier:@"maxWidgetSegue" sender:self];
 }
 
+- (void)horizonalMoving{
+    UIScrollView *view=(UIScrollView *)self.view;
+    [view setUserInteractionEnabled:NO];
+}
+
+- (void)horizonalStopped{
+    UIScrollView *view=(UIScrollView *)self.view;
+    [view setUserInteractionEnabled:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    //NSLog(@"didReceiveMemoryWarning :%@",[self class]);
     // Dispose of any resources that can be recreated.
 }
 

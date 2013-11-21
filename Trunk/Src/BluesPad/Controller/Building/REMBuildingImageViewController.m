@@ -566,6 +566,13 @@
     [self.shareButton setEnabled:YES];
 }
 
+- (void)horizonalMoving{
+    REMBuildingDataViewController *dataController=(REMBuildingDataViewController *)self.childViewControllers[0];
+    REMDashboardController *dashboardController=(REMDashboardController *)self.childViewControllers[1];
+    [dataController horizonalMoving];
+    [dashboardController horizonalMoving];
+}
+
 - (void)releaseViewInController:(NSArray *)controllers{
     if(controllers.count>0){
         for (UIViewController *vc in controllers) {

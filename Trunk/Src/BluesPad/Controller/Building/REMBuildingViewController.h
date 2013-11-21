@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "REMSplashScreenController.h"
-#import "REMImageView.h"
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingConstants.h"
 #import "REMSettingViewController.h"
 #import "REMMapViewController.h"
 #import "REMDashboardController.h"
 #import "REMBuildingImageViewController.h"
+
+@class  REMDashboardController;
 
 typedef enum _BuildingSourceType{
     BuildingSourceTypeFromMap,

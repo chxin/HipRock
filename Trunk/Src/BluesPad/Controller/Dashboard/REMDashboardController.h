@@ -10,7 +10,6 @@
 #import "REMDashboardCellViewCell.h"
 #import "REMDashboardView.h"
 #import "REMDashboardObj.h"
-#import "REMImageView.h"
 
 @class REMImageView;
 @class REMBuildingViewController;
@@ -60,6 +59,7 @@ const static CGFloat kDashboardWidgetChartHeight=108;
 
 @property (nonatomic,weak) UIView *readyToMaxCell;
 
-
+- (void)horizonalMoving;
+- (void)horizonalStopped;
 
 @end

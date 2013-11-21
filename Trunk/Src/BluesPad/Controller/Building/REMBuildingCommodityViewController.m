@@ -10,6 +10,7 @@
 #import "REMBuildingAverageChartViewController.h"
 #import "REMBuildingTrendChartViewController.h"
 #import "REMBuildingDataViewController.h"
+#import "REMBuildingCommodityView.h"
 
 
 @interface REMBuildingCommodityViewController ()
@@ -22,8 +23,6 @@
 @property (nonatomic,weak) REMBuildingTitleLabelView *targetLabel;
 @property (nonatomic,weak) REMBuildingRankingView *rankingLabel;
 
-@property (nonatomic,weak) REMBuildingChartContainerView *chartContainer1;
-@property (nonatomic,weak) REMBuildingChartContainerView *chartContainer2;
 
 
 @property (nonatomic) NSUInteger counter;
@@ -39,12 +38,15 @@
 
 @implementation REMBuildingCommodityViewController
 
+- (void)loadView{
+    self.view=[[REMBuildingCommodityView alloc]initWithFrame:self.viewFrame];
+}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.view setFrame:self.viewFrame];
     self.counter=0;
     self.dataLoadComplete=NO;
     [self initCommodityView];
@@ -263,6 +265,7 @@
     if (self.childViewControllers.count<2) {
         REMBuildingChartViewController *controller1=[[REMBuildingChartViewController alloc] init];
         controller1.viewFrame=CGRectMake(0, marginTop+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, chartContainerHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
+        NSLog(@"view frame:%@",NSStringFromCGRect(controller1.viewFrame));
         controller1.chartHandlerClass=[REMBuildingAverageViewController class];
         controller1.buildingId=self.buildingInfo.building.buildingId;
         controller1.commodityId=self.commodityInfo.commodityId;
@@ -288,6 +291,7 @@
     if (self.childViewControllers.count<2) {
         REMBuildingChartViewController *controller2=[[REMBuildingChartViewController alloc] init];
         controller2.viewFrame=CGRectMake(0, marginTop1+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, secondChartHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
+        NSLog(@"view frame:%@",NSStringFromCGRect(controller2.viewFrame));
         controller2.chartHandlerClass=[REMBuildingTrendChartViewController class];
         controller2.commodityId=self.commodityInfo.commodityId;
         controller2.buildingId=self.buildingInfo.building.buildingId;
@@ -302,7 +306,7 @@
     
     for (int i=0; i<self.childViewControllers.count; ++i) {
         REMBuildingChartViewController *controller=self.childViewControllers[i];
-        if(controller.view.superview==nil){
+        if(controller.isViewLoaded==NO){
             [self.view addSubview:controller.view];
         }
     }

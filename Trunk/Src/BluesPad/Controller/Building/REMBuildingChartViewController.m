@@ -22,7 +22,7 @@
 
 
 -(void)loadView{
-    self.view=[[REMBuildingChartContainerView2 alloc]initWithFrame:CGRectMake(0, 0, self.viewFrame.size.width,self.viewFrame.size.height)];
+    self.view=[[REMBuildingChartContainerView2 alloc]initWithFrame:self.viewFrame];
     //self.view.layer.borderColor=[UIColor redColor].CGColor;
     //self.view.layer.borderWidth=1;
 }
@@ -46,7 +46,7 @@
     //[self.view addSubview:chartContainer];
     
     if (self.childViewControllers.count==0) {
-        REMBuildingChartBaseViewController *handler=[[self.chartHandlerClass alloc]initWithViewFrame:self.viewFrame];
+        REMBuildingChartBaseViewController *handler=[[self.chartHandlerClass alloc]initWithViewFrame:self.view.bounds];
         [self.view addSubview:handler.view];
         //handler.view.layer.borderColor=[UIColor redColor].CGColor;
         //handler.view.layer.borderWidth=1;

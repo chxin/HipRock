@@ -10,7 +10,6 @@
 #import <MessageUI/MessageUI.h>
 #import "REMBuildingShareViewController.h"
 #import "REMBuildingWeiboView.h"
-#import "REMImageView.h"
 #import "REMCommonDefinition.h"
 
 @interface REMBuildingShareViewController ()

@@ -462,6 +462,16 @@
     }
 }
 
+- (void)horizonalMoving{
+    UIScrollView *view=(UIScrollView *)self.view;
+    [view setUserInteractionEnabled:NO];
+}
+
+- (void)horizonalStopped{
+    UIScrollView *view=(UIScrollView *)self.view;
+    [view setUserInteractionEnabled:YES];
+}
+
 - (void)replaceImagesShowReal:(BOOL)showReal{
     //not implemented 
 //    if(self.commodityViewDictionary.count<1)return ;
