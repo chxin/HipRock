@@ -161,7 +161,7 @@
                     fillColor = [CPTColor colorWithCGColor:[REMColor colorByHexString:@"#e3f0ff" alpha:0.5].CGColor];
                 }
             } else if (self.calenderType == REMCalenderTypeHoliday) {
-                if (calender.calendarType == REMCalenderTypeHoliday) {
+                if (calender.calendarType == REMCalenderTypeHoliday || calender.calendarType == REMCalenderTypeRestTime) {
                     fillColor = [CPTColor colorWithCGColor:[REMColor colorByHexString:@"#eaeaea" alpha:0.5].CGColor];
                 }
             }
