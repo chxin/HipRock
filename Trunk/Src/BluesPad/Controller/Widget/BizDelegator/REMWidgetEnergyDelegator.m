@@ -703,7 +703,6 @@
                 self.legendView.frame = kDMChart_ToolbarFrame;
             } completion:nil];
         }
-        
     }
     
 }
@@ -738,6 +737,7 @@
 -(UIView *)prepareLegendView
 {
     REMChartLegendBase *legend = [REMChartLegendBase legendWithData:self.energyData widget:self.widgetInfo parameters:self.tempModel andHiddenIndexes:self.hiddenSeries];
+    legend.itemDelegate = self;
     
     return legend;
 }
@@ -771,29 +771,18 @@
 // Trend chart delegate
 -(void)highlightPoints:(NSArray*)points colors:(NSArray*)colors names:(NSArray*)names
 {
+    //what's stack column chart tooltip like?
     if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
         return;
     }
     
     [self.searchView setHidden:YES];
     
-    NSMutableArray *models = [[NSMutableArray alloc] init];
-    for(int i=0;i<names.count;i++){
-        REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
-        model.title = names[i];
-        model.value = REMIsNilOrNull(points[i]) ? nil : [points[i] dataValue];
-        model.color = colors[i];
-        model.index = i;
-        model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType: self.widgetInfo.diagramType];
-        
-        [models addObject:model];
-    }
-    
     if(self.tooltipView!=nil){
-        [self.tooltipView update:models];
+        [self.tooltipView updateHighlightedData:points];
     }
     else{
-        [self showTooltip:models:0];
+        [self showTooltip:points];
     }
 }
 
@@ -802,32 +791,13 @@
 {
     NSLog(@"Pie %@ is now on the niddle.", name);
     
-    NSMutableArray *models = [[NSMutableArray alloc] init];
-    int highlightIndex=0;
-    
     [self.searchView setHidden:YES];
     
-    for(int i=0;i<self.energyData.targetEnergyData.count;i++){
-        REMTargetEnergyData *targetData = self.energyData.targetEnergyData[i];
-        if([targetData.target.name isEqualToString:name]){
-            highlightIndex = i;
-        }
-        
-        REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
-        model.title = targetData.target.name;
-        model.value = REMIsNilOrNull(targetData.energyData[0]) ? nil : [targetData.energyData[0] dataValue];
-        model.color = [REMColor colorByIndex:i].uiColor;
-        model.index = i;
-        model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType: self.widgetInfo.diagramType];
-        
-        [models addObject:model];
-    }
-    
     if(self.tooltipView != nil){
-        [self.tooltipView update:@(highlightIndex)];
+        [self.tooltipView updateHighlightedData:@[point]];
     }
     else{
-        [self showTooltip:models:highlightIndex];
+        [self showTooltip:@[point]];
     }
 }
 
@@ -847,21 +817,10 @@
     }];
 }
 
--(void)showTooltip:(NSArray *)data :(int)highlightIndex
+-(void)showTooltip:(NSArray *)highlightedData
 {
-    REMTooltipViewBase *tooltip;
-    switch (self.widgetInfo.diagramType) {
-        case REMDiagramTypePie:
-            tooltip = [[REMPieChartTooltipView alloc] initWithFrame:kDMChart_TooltipHiddenFrame data:data andHighlightIndex:highlightIndex];
-            tooltip.tooltipDelegate = self;
-            break;
-            
-        default:
-            tooltip = [[REMTrendChartTooltipView alloc] initWithFrame:kDMChart_TooltipHiddenFrame andData:data];
-            tooltip.tooltipDelegate = self;
-            
-            break;
-    }
+    REMTooltipViewBase *tooltip = [REMTooltipViewBase tooltipWithHighlightedData:highlightedData inEnergyData:self.energyData widget:self.widgetInfo andParameters:self.tempModel];
+    tooltip.tooltipDelegate = self;
     
     [self.view addSubview:tooltip];
     self.tooltipView = tooltip;

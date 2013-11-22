@@ -1,41 +1,19 @@
 /*------------------------------Summary-------------------------------------
  * Product Name : EMOP iOS Application Software
- * File Name	: REMChartLegendView.m
- * Date Created : 张 锋 on 11/18/13.
+ * File Name	: REMTextIndicatorFormator.m
+ * Date Created : 张 锋 on 11/21/13.
  * Description  : IOS Application software based on Energy Management Open Platform
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
-#import "REMChartLegendView.h"
-#import "REMChartLegendItem.h"
-#import "REMColor.h"
-#import "REMWidgetStepEnergyModel.h"
+#import "REMTextIndicatorFormator.h"
+#import "REMEnergyTargetModel.h"
 #import "REMWidgetCommoditySearchModel.h"
+#import "REMWidgetObject.h"
 #import "REMWidgetTagSearchModel.h"
 
-@implementation REMChartLegendView
+@implementation REMTextIndicatorFormator
 
--(NSArray *)convertItemModels
-{
-    NSMutableArray *models = [[NSMutableArray alloc] init];
-    
-    for(int i=0;i<self.data.targetEnergyData.count; i++){
-        REMTargetEnergyData *targetData = self.data.targetEnergyData[i];
-        
-        REMChartLegendItemModel *model = [[REMChartLegendItemModel alloc] init];
-        
-        model.index = i;
-        model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType:self.widget.diagramType];
-        model.title = [self format:targetData.target];
-        model.delegate = self.itemDelegate;
-        model.tappable = NO;
-        
-        [models addObject:model];
-    }
-    
-    return models;
-}
-
--(NSString *)format:(REMEnergyTargetModel *)target
++(NSString *)formatTargetName:(REMEnergyTargetModel *)target withWidget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
     switch (target.type) {
         case REMEnergyTargetTag:
@@ -57,8 +35,8 @@
         case REMEnergyTargetCost:
         {
             //total or commodity
-            if([self.parameters isKindOfClass:[REMWidgetCommoditySearchModel class]]){
-                REMWidgetCommoditySearchModel *commodityParameters = (REMWidgetCommoditySearchModel *)self.parameters;
+            if([parameters isKindOfClass:[REMWidgetCommoditySearchModel class]]){
+                REMWidgetCommoditySearchModel *commodityParameters = (REMWidgetCommoditySearchModel *)parameters;
                 
                 if(commodityParameters.commodityIdArray.count>0){
                     return REMCommodities[@(target.commodityId)];
@@ -73,7 +51,7 @@
             
         case REMEnergyTargetBenchmarkValue:
         {
-            return [self.parameters respondsToSelector:@selector(benchmarkText)] ? [(id)self.parameters benchmarkText] : nil;
+            return [parameters respondsToSelector:@selector(benchmarkText)] ? [(id)parameters benchmarkText] : nil;
         }
             
         case REMEnergyTargetCalcValue:
@@ -92,11 +70,11 @@
                 return nil;
             
             //commodity or tag?
-            if([self.parameters isKindOfClass:[REMWidgetTagSearchModel class]]){ //tag
+            if([parameters isKindOfClass:[REMWidgetTagSearchModel class]]){ //tag
                 return [NSString stringWithFormat:format, target.name];
             }
-            else if([self.parameters isKindOfClass:[REMWidgetCommoditySearchModel class]]){ //carbon cost
-                NSArray *commodityIdArray = ((REMWidgetCommoditySearchModel *)self.parameters).commodityIdArray;
+            else if([parameters isKindOfClass:[REMWidgetCommoditySearchModel class]]){ //carbon cost
+                NSArray *commodityIdArray = ((REMWidgetCommoditySearchModel *)parameters).commodityIdArray;
                 NSString *prefix = nil;
                 
                 if(commodityIdArray.count>0){
@@ -122,5 +100,4 @@
         }
     }
 }
-
 @end
