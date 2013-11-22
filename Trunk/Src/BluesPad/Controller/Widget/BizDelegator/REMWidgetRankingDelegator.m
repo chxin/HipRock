@@ -28,6 +28,8 @@ const static CGFloat kRankButtonDimension=32;
     [self initSearchView];
     [self initChartView];
     
+    REMWidgetRankingSearchModel *m=(REMWidgetRankingSearchModel *)self.model;
+    [self setDatePickerButtonValueNoSearchByTimeRange:m.timeRangeArray[0] withRelative:m.relativeDateComponent withRelativeType:m.relativeDateType];
 }
 
 - (void)initModelAndSearcher{
@@ -51,8 +53,10 @@ const static CGFloat kRankButtonDimension=32;
     
     [searchViewContainer setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
     
-    UIButton *timePickerButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, 0, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
+    UIButton *timePickerButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    timePickerButton.layer.borderColor=[UIColor clearColor].CGColor;
+    timePickerButton.layer.borderWidth=0;
+    timePickerButton.layer.cornerRadius=4;
     timePickerButton.translatesAutoresizingMaskIntoConstraints = NO;
     [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];
     [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-150)];
@@ -117,15 +121,26 @@ const static CGFloat kRankButtonDimension=32;
     
     UIView *chartContainer=[[UIView alloc]init];
     chartContainer.translatesAutoresizingMaskIntoConstraints=NO;
-    [self.view addSubview:chartContainer];
+    [chartContainer setBackgroundColor:[UIColor whiteColor]];
+    [c addSubview:chartContainer];
     self.chartContainer=chartContainer;
     self.maskerView=self.chartContainer;
     //self.chartContainer.layer.borderColor=[UIColor redColor].CGColor;
     //self.chartContainer.layer.borderWidth=1;
     //[self showEnergyChart];
     
-     REMWidgetRankingSearchModel *m=(REMWidgetRankingSearchModel *)self.model;
-    [self setDatePickerButtonValueNoSearchByTimeRange:m.timeRangeArray[0] withRelative:m.relativeDateComponent withRelativeType:m.relativeDateType];
+    NSMutableArray *chartConstraints = [NSMutableArray array];
+    UIView *searchView=self.searchView;
+    NSDictionary *dic = NSDictionaryOfVariableBindings(chartContainer,searchView);
+    NSDictionary *metrics = @{@"margin":@(kWidgetChartLeftMargin),@"height":@(kWidgetChartHeight),@"width":@(kWidgetChartWidth),@"top":@(0)};
+    [chartConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[chartContainer(width)]-margin-|" options:0 metrics:metrics views:dic]];
+    [chartConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchView]-top-[chartContainer]-margin-|" options:0 metrics:metrics views:dic]];
+    
+    
+    [self.view addConstraints:chartConstraints];
+
+    
+    
 }
 
 - (void)search{
@@ -177,7 +192,7 @@ const static CGFloat kRankButtonDimension=32;
     }
     
     
-    CGRect widgetRect = self.chartContainer.bounds;
+    CGRect widgetRect = CGRectMake(0, 0, kWidgetChartWidth, kWidgetChartHeight);
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
