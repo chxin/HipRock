@@ -23,9 +23,13 @@ typedef enum _DChartStatus {
 @property (nonatomic, assign) DChartStatus chartStatus;
 @property (nonatomic, weak) DCContext* graphContext;
 @property (nonatomic, strong) DCRange* myStableRange;
+@property (nonatomic, assign) BOOL isStacked;
 @end
 
 @implementation DCTrendWrapper
+-(UIView*)getView {
+    return self.view;
+}
 -(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*)widgetSyntax style:(REMChartStyle*)style {
     self = [self init];
     if (self && energyViewData.targetEnergyData.count != 0) {
@@ -35,7 +39,7 @@ typedef enum _DChartStatus {
         [self updateProcessorRangesFormatter:widgetSyntax.xtype step:widgetSyntax.step.integerValue];
         
         
-        DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:self.beginRange stacked:NO];
+        DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:self.beginRange stacked:self.isStacked];
         [view setXLabelFormatter:self.xLabelFormatter];
         _view = view;
         view.xAxis = [[DCAxis alloc]init];
@@ -157,10 +161,11 @@ typedef enum _DChartStatus {
 }
 
 -(void)updateProcessorRangesFormatter:(NSString*)xtype step:(REMEnergyStep)step {
+    self.isStacked = ([xtype rangeOfString:@"stack"].location != NSNotFound);
+    
     NSUInteger seriesAmount = [self getSeriesAmount];
     self.processors = [[NSMutableArray alloc]init];
-    NSRange range = [xtype rangeOfString : @"multitimespan"];
-    BOOL allSeriesUserGlobalTime = (range.location == NSNotFound);
+    BOOL allSeriesUserGlobalTime = ([xtype rangeOfString : @"multitimespan"].location == NSNotFound);
     
     NSDate* baseDateOfX = nil;
     NSDate* globalEndDate = nil;

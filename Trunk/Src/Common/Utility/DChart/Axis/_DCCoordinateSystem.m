@@ -36,6 +36,7 @@
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
     
     if (self.graphContext) {
+        // 计算可视区域内的Y的最大值currentYRange
         double currentYRange = INT32_MIN;
         if (self.graphContext.stacked) {
             int start = floor(newRange.location);
@@ -45,6 +46,7 @@
             for (NSUInteger i = start; i <= end; i++) {
                 double yValAtIndex = 0;
                 for (DCXYSeries* s in self.visableSeries) {
+                    if (i >= s.datas.count) break;
                     DCDataPoint* p = s.datas[i];
                     if (p.value == nil || [p.value isEqual:[NSNull null]]) continue;
                     yValAtIndex+=p.value.doubleValue;
@@ -59,6 +61,7 @@
                 if (yMax > currentYRange) currentYRange = yMax;
             }
         }
+        // 根据maxY计算YRange并更新至graphContext
         if (self.visableYMax == currentYRange) {
             return;
         } else {

@@ -13,6 +13,7 @@
 #import "REMAbstractChartWrapper.h"
 #import "REMWidgetCollectionViewController.h"
 #import "REMWidgetSearchModelBase.h"
+#import "DCRankingWrapper.h"
 @interface REMWidgetCellViewController ()
 
 
@@ -108,34 +109,35 @@
 }
 
 - (void)generateChart{
-    REMAbstractChartWrapper* widgetWrapper = nil;
+    DAbstractChartWrapper* widgetWrapper = nil;
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     CGRect widgetRect = self.chartContainer.bounds;
     REMEnergyViewData *data=self.chartData;
     REMChartStyle* style = [REMChartStyle getMinimunStyle];
 
     if (widgetType == REMDiagramTypeLine) {
-        widgetWrapper = [[DChartLineChartWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCLineWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
 //        widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
     } else if (widgetType == REMDiagramTypeColumn) {
-        widgetWrapper = [[DChartColumnWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
 //        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
     } else if (widgetType == REMDiagramTypePie) {
         widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
     } else if (widgetType == REMDiagramTypeRanking) {
-        widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
+//        widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
     } else if (widgetType == REMDiagramTypeStackColumn) {
-        widgetWrapper = [[REMStackColumnWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
     }
     if (widgetWrapper != nil) {
         self.wrapper=widgetWrapper;
-        if([widgetWrapper isKindOfClass:[REMTrendWidgetWrapper class]]==YES){
+        if([widgetWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
             if(self.widgetInfo.contentSyntax.calendarType!=REMCalendarTypeNone){
-                REMTrendWidgetWrapper *trend=(REMTrendWidgetWrapper *)widgetWrapper;
+                DCTrendWrapper *trend=(DCTrendWrapper *)widgetWrapper;
                 trend.calenderType=self.widgetInfo.contentSyntax.calendarType;
             }
         }
-        [self.chartContainer addSubview:widgetWrapper.view];
+        [self.chartContainer addSubview:[widgetWrapper getView]];
         //[widgetWrapper destroyView];
         
         

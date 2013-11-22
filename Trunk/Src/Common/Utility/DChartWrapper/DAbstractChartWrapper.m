@@ -14,4 +14,12 @@
     
 }
 
+-(void)redraw:(REMEnergyViewData *)energyViewData {
+    
+}
+
+-(UIView*)getView {
+    return nil;
+}
+
 @end
