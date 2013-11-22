@@ -110,38 +110,38 @@
     self.navigationController.navigationBarHidden = YES;
     //    [self.view addSubview:[[REMTrend alloc]initWithFrame:CGRectMake(100, 0, 924, 708)]];
     
-    [self oscarTest];
+//    [self oscarTest];
     
     
     //decide where to go
-//    [self recoverAppContext];
-//    
-//    if([self isAlreadyLogin]){
-//        [self breathAnimation:^(void){
-//            [self breathAnimation:nil];
-//            
-//            SEL selector = @selector(breathAnimation:);
-//            
-//            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:selector]];
-//            [invocation setTarget:self];
-//            [invocation setSelector:selector];
-//            
-//            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
-//            
-//            [self showMapView:^(void){
-//                if(timer != nil){
-//                    if([timer isValid])
-//                        [timer invalidate];
-//                }
-//            }];
-//        }];
-//    }
-//    else{
-//        [self breathAnimation:^(void){
-//            [self.logoView setHidden:YES];
-//            [self showLoginView:YES];
-//        }];
-//    }
+    [self recoverAppContext];
+    
+    if([self isAlreadyLogin]){
+        [self breathAnimation:^(void){
+            [self breathAnimation:nil];
+            
+            SEL selector = @selector(breathAnimation:);
+            
+            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:selector]];
+            [invocation setTarget:self];
+            [invocation setSelector:selector];
+            
+            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
+            
+            [self showMapView:^(void){
+                if(timer != nil){
+                    if([timer isValid])
+                        [timer invalidate];
+                }
+            }];
+        }];
+    }
+    else{
+        [self breathAnimation:^(void){
+            [self.logoView setHidden:YES];
+            [self showLoginView:YES];
+        }];
+    }
 }
 
 -(void)oscarTest {
@@ -149,13 +149,13 @@
     syntax.xtype = @"columnchartcomponent";
     syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
     NSMutableArray* timeRanges = [[NSMutableArray alloc]initWithCapacity:1];
-    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*30]];
+    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*90]];
     [timeRanges setObject:r atIndexedSubscript:0];
     syntax.timeRanges = timeRanges;
     
     REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
     NSMutableArray* sereis = [[NSMutableArray alloc]init];
-    for (int sIndex = 0; sIndex < 10; sIndex++) {
+    for (int sIndex = 0; sIndex < 3; sIndex++) {
         NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
         for (int i = 0; i < 10000; i++) {
             REMEnergyData* data = [[REMEnergyData alloc]init];
