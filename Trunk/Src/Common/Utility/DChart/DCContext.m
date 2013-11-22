@@ -23,6 +23,7 @@ CGFloat const kDCSymbolAlpha = 0.8;    // 动画的时间长度
 CGFloat const kDCFocusPointAlpha = 0.4;    // focus的柱图，未被关注的柱子的透明度
 CGFloat const kDCFocusPointSymbolMagnify = 2;    // focus的线图的symbol放大倍数
 
+BOOL const kDCHideLineSymbolWhenDragging = NO;  // 在拖动时是否隐藏Symbol
 
 @interface DCContext()
 @property (nonatomic) NSMutableArray* hRangeObservers;

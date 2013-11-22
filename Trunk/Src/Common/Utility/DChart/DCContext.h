@@ -19,6 +19,7 @@ extern CGFloat const kDCSymbolAlpha;
 extern CGFloat const kDCFocusPointSymbolMagnify;
 extern int const kDCFramesPerSecord;
 extern double const kDCYRangeChangeDetection;
+extern BOOL const kDCHideLineSymbolWhenDragging;
 
 typedef enum _DCLineType {
     DCLineTypeDefault = 0,
