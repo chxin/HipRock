@@ -40,7 +40,8 @@
         self.widget = widget;
         self.parameters = parameters;
         
-        self.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
+        //self.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
+        self.backgroundColor = [UIColor purpleColor];
         
         self.itemModels = [self convertItemModels];
         
@@ -83,10 +84,13 @@
 //@private
 -(UIView *)renderCloseView
 {
-    UIView *closeView = [[UIView alloc] initWithFrame:CGRectMake(kDMChart_TooltipContentWidth - kDMChart_TooltipCloseViewWidth, 0, kDMChart_TooltipCloseViewWidth, kDMChart_TooltipViewHeight)];
-    closeView.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
+    UIView *closeView = [[UIView alloc] initWithFrame:CGRectMake(kDMChart_TooltipContentWidth - kDMChart_TooltipCloseViewWidth, 0, kDMChart_TooltipCloseViewWidth, kDMChart_TooltipContentHeight)];
+    //closeView.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
+    closeView.backgroundColor = [UIColor yellowColor];
+    closeView.layer.borderColor = [UIColor redColor].CGColor;
+    closeView.layer.borderWidth = 1.0;
     
-    CGFloat topOffset = (kDMChart_TooltipViewHeight - REMIMG_Close_Chart.size.height) / 2;
+    CGFloat topOffset = (kDMChart_TooltipContentHeight - REMIMG_Close_Chart.size.height) / 2;
     CGFloat leftOffset = kDMChart_TooltipCloseViewInnerLeftOffset;
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

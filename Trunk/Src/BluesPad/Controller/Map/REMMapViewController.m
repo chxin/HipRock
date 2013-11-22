@@ -186,8 +186,6 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-//    [self.mapView removeFromSuperview];
-//    self.mapView = nil;
 }
 
 - (void)didReceiveMemoryWarning
