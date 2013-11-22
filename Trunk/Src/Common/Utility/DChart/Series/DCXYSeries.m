@@ -10,6 +10,14 @@
 
 @implementation DCXYSeries
 
+-(DCSeries*)initWithEnergyData:(NSArray*)seriesData {
+    self = [super initWithEnergyData:seriesData];
+    if (self) {
+        _hidden = NO;
+    }
+    return self;
+}
+
 -(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
     if (newRange != nil && newRange.location < -0.5) return;
@@ -31,6 +39,17 @@
         }
     }
     _visableYMax = y;
+}
+
+-(void)setHidden:(BOOL)hidden {
+    if (hidden == self.hidden) return;
+    if (hidden) {
+        self.yAxis.visableSeriesAmount--;
+        self.xAxis.visableSeriesAmount--;
+    } else {
+        self.yAxis.visableSeriesAmount++;
+        self.xAxis.visableSeriesAmount++;
+    }
 }
 
 @end

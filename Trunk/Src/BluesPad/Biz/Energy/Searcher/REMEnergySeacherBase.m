@@ -49,16 +49,35 @@
     //store.maskContainer=maskerContainer;
     
     
-    UIActivityIndicatorView *activitor= [[UIActivityIndicatorView alloc] initWithFrame:maskerContainer.bounds];
-    [activitor setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+   
     //[activitor setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];
+    if(self.loadingView==nil){
+        UIActivityIndicatorView *activitor= [[UIActivityIndicatorView alloc] initWithFrame:maskerContainer.bounds];
+        [activitor setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+        self.loadingView=activitor;
+    }
+   
 
-    [maskerContainer addSubview:activitor];
-    [activitor startAnimating];
+    [maskerContainer addSubview:self.loadingView];
+    [self.loadingView startAnimating];
     store.groupName=groupName;
+    
+    
+    
+    if (self.loadingView.translatesAutoresizingMaskIntoConstraints==NO) {
+        NSLayoutConstraint *constraintX=[NSLayoutConstraint constraintWithItem:self.loadingView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:maskerContainer attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+        NSLayoutConstraint *constraintY=[NSLayoutConstraint constraintWithItem:self.loadingView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:maskerContainer attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+        [maskerContainer addConstraint:constraintX];
+        [maskerContainer addConstraint:constraintY];
+    }
+    
+    
+    
+    
+    
     [REMDataAccessor access:store success:^(NSDictionary *data){
-        [activitor stopAnimating];
-        [activitor removeFromSuperview];
+        [self.loadingView stopAnimating];
+        [self.loadingView removeFromSuperview];
         if([data isEqual:[NSNull null]]==YES)return ;
         REMEnergyViewData *viewData=[self processEnergyData:data];
         if(callback!=nil){
@@ -66,8 +85,8 @@
         }
         
     } error:^(NSError *error,REMBusinessErrorInfo *errorInfo){
-        [activitor stopAnimating];
-        [activitor removeFromSuperview];
+        [self.loadingView stopAnimating];
+        [self.loadingView removeFromSuperview];
         callback(nil,errorInfo);
     }];
 }

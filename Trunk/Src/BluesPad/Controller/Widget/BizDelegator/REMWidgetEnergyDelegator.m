@@ -67,6 +67,11 @@
     self.model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
                   .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
     self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
+    UIActivityIndicatorView *loader=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [loader setColor:[UIColor grayColor]];
+    [loader setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.3]];
+    self.searcher.loadingView=loader;
+    loader.translatesAutoresizingMaskIntoConstraints=NO;
     REMWidgetStepEnergyModel *m=(REMWidgetStepEnergyModel *)self.model;
     m.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
     
@@ -384,16 +389,18 @@
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
     REMAbstractChartWrapper  *widgetWrapper;
     if (widgetType == REMDiagramTypeLine) {
-//        widgetWrapper = [[DChartLineChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        REMTrendChartView *trendChart= (REMTrendChartView *)widgetWrapper.view;
-        trendChart.delegate = self;
+        widgetWrapper = [[DChartLineChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        ((DTrendChartWrapper*)widgetWrapper).delegate = self;
+//        widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+//        REMTrendChartView *trendChart= (REMTrendChartView *)widgetWrapper.view;
+//        trendChart.delegate = self;
         
         
     } else if (widgetType == REMDiagramTypeColumn) {
-//        widgetWrapper = [[DChartColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
+        widgetWrapper = [[DChartColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        ((DTrendChartWrapper*)widgetWrapper).delegate = self;
+//        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+//        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypePie) {
         widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         ((REMPieChartView *)widgetWrapper.view).delegate = self;
