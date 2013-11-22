@@ -59,6 +59,13 @@
         model.index = i;
         model.type = REMChartSeriesIndicatorPie;
         
+        if(REMIsNilOrNull(targetData.target.uomName)){
+            model.uom = REMUoms[@(targetData.target.uomId)];
+        }
+        else{
+            model.uom = targetData.target.uomName;
+        }
+        
         [itemModels addObject:model];
     }
     

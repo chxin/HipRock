@@ -90,10 +90,11 @@
 
 - (void)updateHighlightedData:(NSArray *)data
 {
-    NSArray *highlightedPoints = data; //highlightedPoints for trend data is an array
+    self.highlightedPoints = data;
+    self.itemModels = [self convertItemModels];
     
-    for(int i=0;i<highlightedPoints.count;i++)
-        [[self.tooltipItems objectAtIndex:i] updateModel:highlightedPoints[i]];
+    for(int i=0;i<self.itemModels.count;i++)
+        [[self.tooltipItems objectAtIndex:i] updateModel:self.itemModels[i]];
 }
 
 - (NSArray *)convertItemModels
@@ -113,6 +114,14 @@
         model.color = [REMColor colorByIndex:i].uiColor;
         model.index = i;
         model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType: self.widget.diagramType];
+        
+        if(REMIsNilOrNull(targetData.target.uomName)){
+            model.uom = REMUoms[@(targetData.target.uomId)];
+        }
+        else{
+            model.uom = targetData.target.uomName;
+        }
+        
         
         if([model isKindOfClass:[REMRankingTooltipItemModel class]]){
             ((REMRankingTooltipItemModel *)model).numerator = i;

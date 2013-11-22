@@ -25,8 +25,11 @@
 
 @implementation REMServiceAgent
 
+#define kREMCommMaxQueueWifi 16
+#define kREMCommMaxQueue3G 3
+
 static NSOperationQueue *queue = nil;
-static int maxQueueLength = 5;
+static int maxQueueLength = kREMCommMaxQueueWifi;
 #define kREMLogResquest 1 //0:no log, 1:log partial, 2: log full
 
 #ifdef DEBUG
@@ -268,10 +271,10 @@ static int requestTimeout = 45; //(s)
             maxQueueLength = 0;
             return NO;
         case ReachableViaWiFi:
-            maxQueueLength = 5;
+            maxQueueLength = kREMCommMaxQueueWifi;
             break;
         case ReachableViaWWAN:
-            maxQueueLength = 3;
+            maxQueueLength = kREMCommMaxQueue3G;
             break;
             
         default:

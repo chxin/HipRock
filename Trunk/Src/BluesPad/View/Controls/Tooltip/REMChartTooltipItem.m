@@ -58,7 +58,7 @@
         self.nameLabel = nameLabel;
         
         // Value label
-        UILabel *valueLabel = [self renderDataValueLabel:model.value];
+        UILabel *valueLabel = [self renderDataValueLabel:model];
         [self addSubview:valueLabel];
         self.valueLabel = valueLabel;
     }
@@ -69,7 +69,7 @@
 {
     self.nameLabel.text = model.title;
     
-    self.valueLabel.text = [self formatDataValue:model.value];
+    self.valueLabel.text = [self formatDataValue:model];
 }
 
 //-(void)setHighlighted:(BOOL)highlighted
@@ -80,10 +80,10 @@
 //    self.backgroundColor = backgroundColor;
 //}
 
-- (NSString *)formatDataValue:(NSNumber *)value
+- (NSString *)formatDataValue:(REMChartTooltipItemModel *)model
 {
     //TODO: Need format
-    return [value stringValue];
+    return [NSString stringWithFormat:@"%@%@", [model.value stringValue], model.uom];
 }
 
 
@@ -121,13 +121,13 @@
     return label;
 }
 
--(UILabel *)renderDataValueLabel:(NSNumber *)dataValue
+-(UILabel *)renderDataValueLabel:(REMChartTooltipItemModel *)model
 {
     UIFont *font = [UIFont systemFontOfSize:kDMChart_TooltipItemDataValueFontSize];
     CGFloat height = [@"a" sizeWithFont:font].height;
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, self.indicator.frame.origin.y + kDMChart_IndicatorSize + kDMChart_TooltipItemDataValueTopOffset, self.frame.size.width, height)];
-    label.text = [self formatDataValue:dataValue];
+    label.text = [self formatDataValue:model];
     label.backgroundColor = [UIColor clearColor];
     label.font = font;
     label.textColor = [REMColor colorByHexString:kDMChart_TooltipItemDataValueColor];

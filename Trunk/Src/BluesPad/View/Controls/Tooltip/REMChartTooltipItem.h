@@ -18,6 +18,7 @@
 @property (nonatomic,strong) UIColor *color;
 @property (nonatomic,strong) NSString *title;
 @property (nonatomic,strong) NSNumber *value;
+@property (nonatomic,strong) NSString *uom;
 
 @end
 
