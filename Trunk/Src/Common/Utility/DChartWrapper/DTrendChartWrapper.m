@@ -9,17 +9,25 @@
 #import "DTrendChartWrapper.h"
 #import "_DCXLabelFormatter.h"
 
+typedef enum _DChartStatus {
+    DChartStatusNormal,
+    DChartStatusFocus
+}DChartStatus;
+
 @interface DTrendChartWrapper()
 @property (nonatomic, strong) NSMutableArray* processors;
 @property (nonatomic, strong) DCRange* beginRange;
 @property (nonatomic, strong) DCRange* globalRange;
 @property (nonatomic, strong) _DCXLabelFormatter* xLabelFormatter;
+@property (nonatomic, strong) REMTrendChartDataProcessor* sharedProcessor;
+@property (nonatomic, assign) DChartStatus chartStatus;
 @end
 
 @implementation DTrendChartWrapper
 -(DTrendChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style {
     self = [self init];
     if (self && energyViewData.targetEnergyData.count != 0) {
+        _chartStatus = DChartStatusNormal;
         _energyViewData = energyViewData;
         [self updateProcessorRangesFormatter:widgetSyntax.xtype step:widgetSyntax.step.integerValue];
         
@@ -114,6 +122,8 @@
         }
         view.graphContext.hGridlineAmount = style.horizentalGridLineAmount;
         _view = view;
+        view.delegate = self;
+        [view.graphContext addHRangeObsever:self];
     }
     return self;
 }
@@ -152,15 +162,21 @@
         globalEndDate = beginningEnd;
     } else {
         baseDateOfX = self.energyViewData.globalTimeRange.startTime;
+        if ([baseDateOfX compare:beginningStart]==NSOrderedDescending) {
+            baseDateOfX = beginningStart;
+        }
         globalEndDate = self.energyViewData.globalTimeRange.endTime;
+        if ([globalEndDate compare:beginningEnd]==NSOrderedAscending) {
+            globalEndDate = beginningEnd;
+        }
     }
     
-    REMTrendChartDataProcessor* sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
-    sharedProcessor.step = step;
+    self.sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
+    self.sharedProcessor.step = step;
     
     if (allSeriesUserGlobalTime) {
         for (int i = 0; i < seriesAmount; i++) {
-            [self.processors addObject:sharedProcessor];
+            [self.processors addObject:self.sharedProcessor];
         }
     } else {
         for (REMTargetEnergyData* targetEnergy in self.energyViewData.targetEnergyData) {
@@ -186,10 +202,10 @@
         }
     }
     
-    sharedProcessor.baseDate = baseDateOfX;
-    NSNumber* globalLength = @([self roundDate:globalEndDate startDate:baseDateOfX processor:sharedProcessor roundToFloor:NO].intValue+1);
-    int startPoint = [self roundDate:beginningStart startDate:baseDateOfX processor:sharedProcessor roundToFloor:YES].intValue;
-    int endPoint = [self roundDate:beginningEnd startDate:baseDateOfX processor:sharedProcessor roundToFloor:NO].intValue;
+    self.sharedProcessor.baseDate = baseDateOfX;
+    NSNumber* globalLength = @([self roundDate:globalEndDate startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:NO].intValue);
+    int startPoint = [self roundDate:beginningStart startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:YES].intValue;
+    int endPoint = [self roundDate:beginningEnd startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:NO].intValue;
     self.beginRange = [[DCRange alloc]initWithLocation:startPoint-0.5 length:endPoint-startPoint];
     self.globalRange = [[DCRange alloc]initWithLocation:-0.5 length:globalLength.doubleValue];
     
@@ -199,4 +215,41 @@
 -(NSUInteger)getSeriesAmount {
     return self.energyViewData.targetEnergyData.count;
 }
+
+-(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
+    if ([DCRange isRange:oldRange equalTo:newRange]) return;
+    if (self.delegate == nil) return;
+    if ([self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
+        if (self.sharedProcessor == nil) {
+            [self.delegate performSelector:@selector(willRangeChange:end:) withObject:@(newRange.location) withObject:@(newRange.location+newRange.length)];
+        } else {
+            [self.delegate performSelector:@selector(willRangeChange:end:) withObject:[self.sharedProcessor deprocessX:newRange.location] withObject:[self.sharedProcessor deprocessX:newRange.location+newRange.length]];
+        }
+    }
+}
+
+-(void)touchedInPlotAt:(CGPoint)point xCoordinate:(double)xLocation {
+    if (self.chartStatus == DCDataPointTypeNormal) {
+        self.chartStatus = DChartStatusFocus;
+    }
+    [self.view focusAroundX:xLocation];
+}
+-(BOOL)panInPlotAt:(CGPoint)point translation:(CGPoint)translation {
+    if (self.chartStatus == DCDataPointTypeNormal) {
+        return YES;
+    } else {
+        [self.view focusAroundX:[self.view getXLocationForPoint:point]];
+        return NO;
+    }
+}
+
+
+///*
+// * points: List<REMEnergyData>
+// * colors: List<UIColor>
+// * names: List<NSString>
+// */
+//-(void)highlightPoints:(NSArray*)points colors:(NSArray*)colors names:(NSArray*)names;
+
+//-(void)touchEndedInNormalStatus:(id)start end:(id)end;
 @end

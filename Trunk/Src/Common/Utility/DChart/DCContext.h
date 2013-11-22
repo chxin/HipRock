@@ -14,6 +14,9 @@ extern double const kDCReservedSpace;
 extern CGFloat const kDCColumnOffset;
 extern CGFloat const kDCAnimationDuration;
 extern int const kDCLabelToLine;
+extern CGFloat const kDCFocusPointAlpha;
+extern CGFloat const kDCSymbolAlpha;
+extern CGFloat const kDCFocusPointSymbolMagnify;
 extern int const kDCFramesPerSecord;
 extern double const kDCYRangeChangeDetection;
 

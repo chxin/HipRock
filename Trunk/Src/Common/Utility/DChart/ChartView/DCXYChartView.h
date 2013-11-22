@@ -10,6 +10,7 @@
 #import "DCContext.h"
 #import "DCAxis.h"
 #import "DCXYSeries.h"
+#import "DCXYChartViewDelegate.h"
 
 @interface DCXYChartView : UIView
 @property (nonatomic, strong) DCAxis* xAxis;
@@ -24,13 +25,17 @@
 @property (nonatomic) UIColor* hGridlineColor;
 @property (nonatomic,assign) DCLineType hGridlineStyle;
 
+@property (nonatomic, weak) id<DCXYChartViewDelegate> delegate;
+
 
 @property (nonatomic, strong) NSArray* seriesList;
 - (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange stacked:(BOOL)stacked;
 
-- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden;
+//- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden;
 
 -(void)setXLabelFormatter:(NSFormatter*)formatter;
 //@property (nonatomic) NSArray* axis;
 //@property (nonatomic, readonly) DCContext* graphContext;
+-(double)getXLocationForPoint:(CGPoint)point;
+-(void)focusAroundX:(double)x;
 @end

@@ -52,6 +52,12 @@ static NSArray *chartColor;
     
 }
 
++(UIColor*)makeTransparent:(CGFloat)alpha withColor:(UIColor*)color {
+    CGFloat r, g, b, a;
+    [color getRed:&r green:&g blue:&b alpha:&a];
+    return [UIColor colorWithRed:r green:g blue:b alpha:alpha];
+}
+
 + (CPTColor *)colorByIndex:(uint)index
 {
     uint colorIndex = index % [REMColor sharedChartColor].count;

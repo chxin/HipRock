@@ -20,9 +20,9 @@
                 [s addObject:se];
             }
         }
+        _focusX = INT32_MIN;
         _series = s;
         self.masksToBounds = YES;
-        _visableSeries = s.mutableCopy;
         _coordinateSystem = coordinateSystem;
     }
     return self;
@@ -40,28 +40,38 @@
 
 -(void)removeFromSuperlayer {
     self.series = nil;
-    [self.visableSeries removeAllObjects];
     [super removeFromSuperlayer];
 }
 
 -(BOOL)isValidSeriesForMe:(DCXYSeries*)series {
     return NO;
 }
+//
+//- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden {
+//    if ([self.series containsObject:series]) {
+//        if (hidden == [self.visableSeries containsObject:series]) {
+//            if (hidden) {
+//                [self.visableSeries removeObject:series];
+//                series.yAxis.visableSeriesAmount--;
+//                series.xAxis.visableSeriesAmount--;
+//            } else {
+//                [self.visableSeries addObject:series];
+//                series.yAxis.visableSeriesAmount++;
+//                series.xAxis.visableSeriesAmount++;
+//            }
+//            [self setNeedsDisplay];
+//        }
+//    }
+//}
+-(void)focusOnX:(int)x {
+    if (self.focusX != x) {
+        _focusX = x;
+    }
+}
 
-- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden {
-    if ([self.series containsObject:series]) {
-        if (hidden == [self.visableSeries containsObject:series]) {
-            if (hidden) {
-                [self.visableSeries removeObject:series];
-                series.yAxis.visableSeriesAmount--;
-                series.xAxis.visableSeriesAmount--;
-            } else {
-                [self.visableSeries addObject:series];
-                series.yAxis.visableSeriesAmount++;
-                series.xAxis.visableSeriesAmount++;
-            }
-            [self setNeedsDisplay];
-        }
+-(void)defocus {
+    if (self.focusX != INT32_MIN) {
+        _focusX = INT32_MIN;
     }
 }
 @end

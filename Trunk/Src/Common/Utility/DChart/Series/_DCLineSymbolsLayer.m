@@ -12,7 +12,7 @@
 
 @interface _DCLineSymbolsLayer()
 @property (nonatomic, strong) NSArray* pointsToDraw;
-@property CGSize plotSize;
+@property CGSize plotSize;  // 因为对于接近0的点，symbol需要覆盖轴线，所以self.frame比实际绘图区域要大。这个PlotSize代表实际绘图区域
 @end
 
 @implementation _DCLineSymbolsLayer
@@ -29,38 +29,42 @@
         CGFloat halfSize = series.symbolSize / 2;
         CGFloat r, g, b, a;
         [series.color getRed:&r green:&g blue:&b alpha:&a];
-        CGContextSetRGBFillColor(ctx, r, g, b, a);
+        CGContextSetRGBFillColor(ctx, r, g, b, kDCSymbolAlpha);
+        NSUInteger pointIndex = 0;
         for (NSDictionary* pointDic in seriesPoints) {
             CGPoint centerPoint;
+            CGFloat sizeScale = [pointDic[@"symbolScale"] doubleValue];
+            
             [((NSValue*)pointDic[@"location"]) getValue:&centerPoint];
             CGMutablePathRef path = CGPathCreateMutable();
             if (series.symbolType == DCLineSymbolTypeRectangle) {
-                CGPathMoveToPoint(path, NULL, centerPoint.x-halfSize, centerPoint.y-halfSize);
-                CGPathAddLineToPoint(path, NULL, centerPoint.x+halfSize, centerPoint.y-halfSize);
-                CGPathAddLineToPoint(path, NULL, centerPoint.x+halfSize, centerPoint.y+halfSize);
-                CGPathAddLineToPoint(path, NULL, centerPoint.x-halfSize, centerPoint.y+halfSize);
+                CGPathMoveToPoint(path, NULL, centerPoint.x-halfSize*sizeScale, centerPoint.y-halfSize*sizeScale);
+                CGPathAddLineToPoint(path, NULL, centerPoint.x+halfSize*sizeScale, centerPoint.y-halfSize*sizeScale);
+                CGPathAddLineToPoint(path, NULL, centerPoint.x+halfSize*sizeScale, centerPoint.y+halfSize*sizeScale);
+                CGPathAddLineToPoint(path, NULL, centerPoint.x-halfSize*sizeScale, centerPoint.y+halfSize*sizeScale);
                 CGContextAddPath(ctx, path);
             } else if (series.symbolType == DCLineSymbolTypeRound) {
-                CGContextAddArc(ctx, centerPoint.x, centerPoint.y, halfSize, 0 , M_PI*2, 0);
+                CGContextAddArc(ctx, centerPoint.x, centerPoint.y, halfSize*sizeScale, 0 , M_PI*2, 0);
             } else if (series.symbolType == DCLineSymbolTypeDiamond) {
-                CGPathMoveToPoint(path, NULL, centerPoint.x, centerPoint.y-halfSize);
-                CGPathAddLineToPoint(path, NULL, centerPoint.x-halfSize, centerPoint.y);
-                CGPathAddLineToPoint(path, NULL, centerPoint.x, centerPoint.y+halfSize);
-                CGPathAddLineToPoint(path, NULL, centerPoint.x+halfSize, centerPoint.y);
+                CGPathMoveToPoint(path, NULL, centerPoint.x, centerPoint.y-halfSize*sizeScale);
+                CGPathAddLineToPoint(path, NULL, centerPoint.x-halfSize*sizeScale, centerPoint.y);
+                CGPathAddLineToPoint(path, NULL, centerPoint.x, centerPoint.y+halfSize*sizeScale);
+                CGPathAddLineToPoint(path, NULL, centerPoint.x+halfSize*sizeScale, centerPoint.y);
                 CGContextAddPath(ctx, path);
             } else if (series.symbolType == DCLineSymbolTypeTriangle) {
-                CGPathMoveToPoint(path, NULL, centerPoint.x, centerPoint.y-halfSize);
-                CGPathAddLineToPoint(path, NULL, centerPoint.x-halfSize, centerPoint.y+halfSize);
-                CGPathAddLineToPoint(path, NULL, centerPoint.x+halfSize, centerPoint.y+halfSize);
+                CGPathMoveToPoint(path, NULL, centerPoint.x, centerPoint.y-halfSize*sizeScale);
+                CGPathAddLineToPoint(path, NULL, centerPoint.x-halfSize*sizeScale, centerPoint.y+halfSize*sizeScale);
+                CGPathAddLineToPoint(path, NULL, centerPoint.x+halfSize*sizeScale, centerPoint.y+halfSize*sizeScale);
                 CGContextAddPath(ctx, path);
             } else if (series.symbolType == DCLineSymbolTypeBackTriangle) {
-                CGPathMoveToPoint(path, NULL, centerPoint.x, centerPoint.y+halfSize);
-                CGPathAddLineToPoint(path, NULL, centerPoint.x-halfSize, centerPoint.y-halfSize);
-                CGPathAddLineToPoint(path, NULL, centerPoint.x+halfSize, centerPoint.y-halfSize);
+                CGPathMoveToPoint(path, NULL, centerPoint.x, centerPoint.y+halfSize*sizeScale);
+                CGPathAddLineToPoint(path, NULL, centerPoint.x-halfSize*sizeScale, centerPoint.y-halfSize*sizeScale);
+                CGPathAddLineToPoint(path, NULL, centerPoint.x+halfSize*sizeScale, centerPoint.y-halfSize*sizeScale);
                 CGContextAddPath(ctx, path);
             }
             CGContextDrawPath(ctx, kCGPathFill);
             CGPathRelease(path);
+            pointIndex++;
         }
     }
     self.pointsToDraw = nil;

@@ -1485,6 +1485,7 @@
 		EFF3BA0618167BA500DD92CF /* REMRankingWidgetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRankingWidgetWrapper.m; sourceTree = "<group>"; };
 		EFF701CD1830880600B371EC /* REMChartStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartStyle.h; sourceTree = "<group>"; };
 		EFF701CE1830880600B371EC /* REMChartStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartStyle.m; sourceTree = "<group>"; };
+		EFFBE9C0183F04B400672E53 /* DCXYChartViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCXYChartViewDelegate.h; sourceTree = "<group>"; };
 		EFFE29D618273E6D00F67DB5 /* REMTrend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMTrend.h; sourceTree = "<group>"; };
 		EFFE29D718273E6D00F67DB5 /* REMTrend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrend.m; sourceTree = "<group>"; };
 		EFFE29D918279C8700F67DB5 /* REMTestChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMTestChartView.h; sourceTree = "<group>"; };
@@ -3106,6 +3107,7 @@
 			children = (
 				EFD946DF1839DCBB00E9EC50 /* DCXYChartView.h */,
 				EFD946E01839DCBB00E9EC50 /* DCXYChartView.m */,
+				EFFBE9C0183F04B400672E53 /* DCXYChartViewDelegate.h */,
 			);
 			name = ChartView;
 			path = Common/Utility/DChart/ChartView;

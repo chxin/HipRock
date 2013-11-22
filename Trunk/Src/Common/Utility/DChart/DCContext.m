@@ -12,10 +12,17 @@
 NSString* const kDCMaxLabel = @"999,999T";
 double const kDCReservedSpace = 1.1;   // 纵向预留10%的高度
 CGFloat const kDCColumnOffset = 0.1;    // 柱图的横向预留空间
-CGFloat const kDCAnimationDuration = 0.4;    // 柱图的横向预留空间
 int const kDCLabelToLine = 5;              // label到轴线的距离
-int const kDCFramesPerSecord = 60;          // 动画帧数
 double const kDCYRangeChangeDetection = 1.05;          // 在设定YRange的时候，如果新的YRange.length的变化不超过5%，则放弃此次设定。必须小于kDCReservedSpace。为改善动画效果
+
+int const kDCFramesPerSecord = 60;          // 动画帧数
+CGFloat const kDCAnimationDuration = 0.4;    // 动画的时间长度
+
+CGFloat const kDCSymbolAlpha = 0.8;    // 动画的时间长度
+
+CGFloat const kDCFocusPointAlpha = 0.4;    // focus的柱图，未被关注的柱子的透明度
+CGFloat const kDCFocusPointSymbolMagnify = 2;    // focus的线图的symbol放大倍数
+
 
 @interface DCContext()
 @property (nonatomic) NSMutableArray* hRangeObservers;
