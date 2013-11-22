@@ -189,19 +189,21 @@
     return self.heightUnitInScreen * y;
 }
 -(void)setSymbolsHidden:(BOOL)hidden {
-//    if (REMIsNilOrNull(self.symbolsLayer) || hidden == self.symbolsAreHidden) return;
-//    [self.timer setFireDate:nil];
-//    if (hidden) {
-//        _DCLineSymbolsLayer* layer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
-//        layer.frame = self.symbolsLayer.frame;
-//        [self.symbolsLayer.superlayer insertSublayer:layer below:self.symbolsLayer];
-//        [self.symbolsLayer removeFromSuperlayer];
-//        self.symbolsLayer = layer;
-//        self.symbolsAreHidden = hidden;
-//    } else {
-//        self.timer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(lazyRenderSymbol) userInfo:nil repeats:NO];
-//        [self.timer setFireDate:[NSDate dateWithTimeIntervalSinceNow:.5]];
-//    }
+    if (kDCHideLineSymbolWhenDragging) {
+        if (REMIsNilOrNull(self.symbolsLayer) || hidden == self.symbolsAreHidden) return;
+        [self.timer setFireDate:nil];
+        if (hidden) {
+            _DCLineSymbolsLayer* layer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
+            layer.frame = self.symbolsLayer.frame;
+            [self.symbolsLayer.superlayer insertSublayer:layer below:self.symbolsLayer];
+            [self.symbolsLayer removeFromSuperlayer];
+            self.symbolsLayer = layer;
+            self.symbolsAreHidden = hidden;
+        } else {
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(lazyRenderSymbol) userInfo:nil repeats:NO];
+            [self.timer setFireDate:[NSDate dateWithTimeIntervalSinceNow:.5]];
+        }
+    }
 }
 
 -(void)focusOnX:(int)x {

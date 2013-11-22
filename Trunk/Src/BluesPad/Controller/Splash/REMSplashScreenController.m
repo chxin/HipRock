@@ -160,11 +160,11 @@
         for (int i = 0; i < 10000; i++) {
             REMEnergyData* data = [[REMEnergyData alloc]init];
             data.quality = REMEnergyDataQualityGood;
-//            if (i%5==0) {
-//            
-//            } else {
-                data.dataValue = [NSNumber numberWithInt:(i%10+1)*10*(sIndex+1)];
-//            }
+            if (i%5==0) {
+            
+            } else {
+                data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
+            }
             data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
             [energyDataArray addObject:data];
         }
