@@ -8,6 +8,8 @@
 
 #import "REMWidgetRankingDelegator.h"
 
+const static CGFloat kRankButtonDimension=32;
+
 @interface REMWidgetRankingDelegator()
 
 @property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
@@ -35,7 +37,7 @@
     UIActivityIndicatorView *loader=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [loader setColor:[UIColor grayColor]];
     [loader setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.8]];
-    
+    loader.translatesAutoresizingMaskIntoConstraints=NO;
     self.searcher.loadingView=loader;
     REMWidgetRankingSearchModel *m=(REMWidgetRankingSearchModel *)self.model;
     m.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
@@ -43,11 +45,15 @@
 
 
 - (void)initSearchView{
-    UIView *searchViewContainer=[[UIView alloc]initWithFrame:kDMChart_ToolbarFrame];
+    
+    UIView *searchViewContainer=[[UIView alloc]initWithFrame:CGRectMake(0,self.ownerController.titleContainer.frame.origin.y+self.ownerController.titleContainer.frame.size.height,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)];
+    //searchViewContainer.translatesAutoresizingMaskIntoConstraints=NO;
+    
+    [searchViewContainer setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
     
     UIButton *timePickerButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, 0, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
-    
+    timePickerButton.translatesAutoresizingMaskIntoConstraints = NO;
     [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];
     [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-150)];
     timePickerButton.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetDatePickerTitleSize];
@@ -67,8 +73,8 @@
     self.searchView=searchViewContainer;
     
     UIButton *orderButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [orderButton setFrame:CGRectMake(900, 0, 32, 32)];
-    
+    //[orderButton setFrame:CGRectMake(900, 0, 32, 32)];
+    orderButton.translatesAutoresizingMaskIntoConstraints=NO;
     [orderButton setImage:REMIMG_Ascend forState:UIControlStateNormal];
     orderButton.showsTouchWhenHighlighted=YES;
     orderButton.adjustsImageWhenHighlighted=YES;
@@ -77,6 +83,18 @@
     [self.searchView addSubview:orderButton];
     
     self.orderButton=orderButton;
+    
+    
+    NSMutableArray *searchViewSubViewConstraints = [NSMutableArray array];
+    NSDictionary *searchViewSubViewDic = NSDictionaryOfVariableBindings(timePickerButton,orderButton);
+    NSDictionary *searchViewSubViewMetrics = @{@"margin":@(kWidgetDatePickerLeftMargin),@"buttonHeight":@(kWidgetDatePickerHeight),@"buttonWidth":@(kWidgetDatePickerWidth),@"top":@(kWidgetDatePickerTopMargin),@"rankDimension":@(kRankButtonDimension)};
+    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[timePickerButton(buttonWidth)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[timePickerButton(buttonHeight)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+    
+    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[orderButton]-margin-|" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[orderButton(rankDimension)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+    
+    [searchViewContainer addConstraints:searchViewSubViewConstraints];
     
 }
 
@@ -93,7 +111,12 @@
 }
 
 - (void)initChartView{
-    UIView *chartContainer=[[UIView alloc]initWithFrame:CGRectMake(kWidgetChartLeftMargin, kWidgetChartTopMargin, kWidgetChartWidth, kWidgetChartHeight)];
+    UIView *c=[[UIView alloc]initWithFrame:CGRectMake(0, REMDMCOMPATIOS7(0), self.view.frame.size.width, kDMScreenHeight-kDMStatusBarHeight)];
+    [c setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
+    [self.view insertSubview:c belowSubview:self.ownerController.titleContainer];
+    
+    UIView *chartContainer=[[UIView alloc]init];
+    chartContainer.translatesAutoresizingMaskIntoConstraints=NO;
     [self.view addSubview:chartContainer];
     self.chartContainer=chartContainer;
     self.maskerView=self.chartContainer;
