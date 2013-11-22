@@ -100,7 +100,7 @@
 {
     REMChartSeriesIndicator *indicator = [REMChartSeriesIndicator indicatorWithType:type andColor:color];
     CGRect indicatorFrame =indicator.frame;
-    indicatorFrame.origin.y = (kDMChart_TooltipViewHeight - (kDMChart_IndicatorSize + kDMChart_TooltipItemDataValueTopOffset + kDMChart_TooltipItemDataValueFontSize)) / 2;
+    indicatorFrame.origin.y = (kDMChart_TooltipContentHeight - (kDMChart_IndicatorSize + kDMChart_TooltipItemDataValueTopOffset + kDMChart_TooltipItemDataValueFontSize)) / 2;
     indicator.frame = indicatorFrame;
     
     return indicator;

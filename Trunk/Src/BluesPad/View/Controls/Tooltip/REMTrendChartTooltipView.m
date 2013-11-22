@@ -54,7 +54,7 @@
 -(UIScrollView *)renderScrollView
 {
     self.tooltipItems = [[NSMutableArray alloc] init];
-    UIScrollView *view = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kDMChart_TooltipContentWidth, kDMChart_TooltipViewHeight)];
+    UIScrollView *view = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kDMChart_TooltipContentWidth - kDMChart_TooltipCloseViewWidth, kDMChart_TooltipContentHeight)];
     
     view.pagingEnabled = NO;
     view.showsHorizontalScrollIndicator = NO;
@@ -65,11 +65,11 @@
     
     CGFloat itemOffset = kMDChart_TooltipItemLeftOffset;
     CGFloat itemWidth = kDMChart_TooltipItemWidth;
-    CGFloat contentWidth = (itemWidth + itemOffset) * itemCount;
+    CGFloat contentWidth = (itemWidth + itemOffset) * itemCount - kDMChart_TooltipCloseViewWidth;
     
     if(contentWidth < view.bounds.size.width){
-        itemOffset = itemCount == 1 ? 0 : (kDMChart_TooltipContentWidth - (itemCount * itemWidth)) / (itemCount - 1);
-        contentWidth = kDMChart_TooltipContentWidth;
+        itemOffset = itemCount == 1 ? 0 : (kDMChart_TooltipContentWidth - kDMChart_TooltipCloseViewWidth - (itemCount * itemWidth)) / (itemCount - 1);
+        contentWidth = kDMChart_TooltipContentWidth-kDMChart_TooltipCloseViewWidth;
     }
     
     for(int i=0;i<itemCount;i++){
@@ -81,7 +81,9 @@
         [self.tooltipItems addObject:tooltipItem];
     }
     
-    view.contentSize = CGSizeMake(contentWidth+kDMChart_TooltipCloseViewWidth, kDMChart_TooltipViewHeight);
+    view.contentSize = CGSizeMake(contentWidth, kDMChart_TooltipViewHeight);
+    
+    NSLog(@"scroll view width: %f, content width: %f", view.frame.size.width, view.contentSize.width);
     
     return view;
 }
