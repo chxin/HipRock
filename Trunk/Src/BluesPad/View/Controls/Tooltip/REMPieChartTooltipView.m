@@ -33,6 +33,17 @@
  * Cost total and single commodities
  */
 
+
+-(REMTooltipViewBase *)initWithHighlightedData:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
+{
+    self = [super initWithHighlightedData:points inEnergyData:data widget:widget andParameters:parameters];
+    
+    if(self){
+    }
+    
+    return self;
+}
+
 - (NSArray *)convertItemModels
 {
     self.highlightIndex = [self decideHighlightIndex];
@@ -71,7 +82,7 @@
     [self renderItems];
 }
 
--(UIScrollView *)renderScrollView:(NSArray *)itemModels
+-(UIScrollView *)renderScrollView
 {
     self.tooltipItems = [[NSMutableArray alloc] init];
     UIScrollView *view = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kDMChart_TooltipContentWidth, kDMChart_TooltipViewHeight)];
@@ -83,7 +94,7 @@
     view.scrollEnabled = NO;
     //    view.backgroundColor = [UIColor redColor];
     
-    int itemCount = self.data.targetEnergyData.count;
+    int itemCount = self.itemModels.count;
     
     CGFloat contentWidth = (kDMChart_TooltipItemWidth + kMDChart_TooltipItemLeftOffset) * itemCount;
     
@@ -93,9 +104,8 @@
     
     view.contentSize = CGSizeMake(contentWidth+kDMChart_TooltipCloseViewWidth, kDMChart_TooltipViewHeight);
     
-    
+    [self renderItems];
 
-    
     return view;
 }
 
@@ -124,11 +134,6 @@
 -(NSString *)formatTargetName:(REMEnergyTargetModel *)target
 {
     return [REMTextIndicatorFormator formatTargetName:target withWidget:self.widget andParameters:self.parameters];
-}
-
--(UIView *)pointerView
-{
-    return nil;
 }
 
 -(void)renderItems

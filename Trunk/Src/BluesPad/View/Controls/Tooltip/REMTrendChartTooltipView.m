@@ -40,7 +40,18 @@
  * Ranking
  */
 
--(UIScrollView *)renderScrollView:(NSArray *)itemModels
+
+-(REMTooltipViewBase *)initWithHighlightedData:(id)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
+{
+    self = [super initWithHighlightedData:points inEnergyData:data widget:widget andParameters:parameters];
+    
+    if(self){
+    }
+    
+    return self;
+}
+
+-(UIScrollView *)renderScrollView
 {
     self.tooltipItems = [[NSMutableArray alloc] init];
     UIScrollView *view = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kDMChart_TooltipContentWidth, kDMChart_TooltipViewHeight)];
@@ -50,7 +61,7 @@
     view.showsVerticalScrollIndicator = NO;
     view.clipsToBounds = YES;
     
-    int itemCount = itemModels.count;
+    int itemCount = self.itemModels.count;
     
     CGFloat itemOffset = kMDChart_TooltipItemLeftOffset;
     CGFloat itemWidth = kDMChart_TooltipItemWidth;
@@ -64,7 +75,7 @@
     for(int i=0;i<itemCount;i++){
         CGRect itemFrame = CGRectMake(i*(itemWidth + itemOffset),0,itemWidth,kDMChart_TooltipViewHeight);
         
-        REMChartTooltipItem *tooltipItem = [REMChartTooltipItem itemWithFrame:itemFrame andModel:itemModels[i]];
+        REMChartTooltipItem *tooltipItem = [REMChartTooltipItem itemWithFrame:itemFrame andModel:self.itemModels[i]];
         
         [view addSubview:tooltipItem];
         [self.tooltipItems addObject:tooltipItem];

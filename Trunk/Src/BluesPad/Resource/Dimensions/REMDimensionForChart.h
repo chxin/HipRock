@@ -48,7 +48,12 @@
 
 //tooltip
 #define kDMChart_TooltipViewHeight REMDMCOMPATIOS7(84)
+
+#define kDMChart_TooltipContentTopOffset REMDMCOMPATIOS7(0)
+#define kDMChart_TooltipContentLeftOffset kDMCommon_ContentLeftMargin
 #define kDMChart_TooltipContentWidth kDMCommon_ContentWidth
+#define kDMChart_TooltipContentHeight kDMChart_TooltipViewHeight - kDMChart_TooltipContentTopOffset
+
 #define kDMChart_TooltipViewBackgroundColor @"#f8f8f8"
 
 #define kDMChart_TooltipCloseViewWidth 100

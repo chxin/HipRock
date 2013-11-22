@@ -42,22 +42,15 @@
         
         self.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
         
-        UIView *contentView = [[UIView alloc] initWithFrame:kDMChart_TooltipContentViewFrame];
-        
-        UIView *pointerView = [self pointerView];
-        if(pointerView != nil)
-           [contentView addSubview:pointerView];
-        
         self.itemModels = [self convertItemModels];
         
-        UIScrollView *scrollView = [self renderScrollView];
-        [contentView addSubview:scrollView];
-        self.scrollView = scrollView;
+        UIView *contentView = [self renderContentView];
         
-        UIView *closeView = [self renderCloseView];
-        [contentView addSubview:closeView];
+        [contentView addSubview:[self renderScrollView]];
+        [contentView addSubview:[self renderCloseView]];
         
         [self addSubview:contentView];
+        self.contentView=contentView;
     }
     
     return self;
@@ -75,9 +68,16 @@
 {
     return nil;
 }
--(UIView *)pointerView
+
+//@private
+-(UIView *)renderContentView
 {
-    return nil;
+    CGRect frame = CGRectMake(kDMChart_TooltipContentLeftOffset, kDMChart_TooltipContentTopOffset, kDMChart_TooltipContentWidth, kDMChart_TooltipContentHeight);
+    
+    UIView *contentView = [[UIView alloc] initWithFrame:frame];
+    contentView.backgroundColor = [UIColor orangeColor];
+    
+    return contentView;
 }
 
 //@private
