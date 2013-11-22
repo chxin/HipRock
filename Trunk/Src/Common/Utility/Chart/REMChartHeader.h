@@ -29,13 +29,20 @@
 -(void)willRangeChange:(id)start end:(id)end;
 -(void)touchEndedInNormalStatus:(id)start end:(id)end;
 @end
+
+typedef enum _REMDirection{
+    REMDirectionLeft = -1,
+    REMDirectionNone = 0,
+    REMDirectionRight = 1
+}REMDirection;
+
 @protocol REMTPieChartDelegate <NSObject>
 /*
  * points: List<REMEnergyData>
  * colors: List<UIColor>
  * names: List<NSString>
  */
--(void)highlightPoint:(REMEnergyData*)point color:(UIColor*)color name:(NSString*)name;
+-(void)highlightPoint:(REMEnergyData*)point color:(UIColor*)color name:(NSString*)name direction:(REMDirection)direction;
 
 @end
 
