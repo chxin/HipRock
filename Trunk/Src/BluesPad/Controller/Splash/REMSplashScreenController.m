@@ -150,22 +150,22 @@
     syntax.xtype = @"columnchartcomponent";
     syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
     NSMutableArray* timeRanges = [[NSMutableArray alloc]initWithCapacity:1];
-    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*30]];
+    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10]];
     [timeRanges setObject:r atIndexedSubscript:0];
     syntax.timeRanges = timeRanges;
     
     REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
     NSMutableArray* sereis = [[NSMutableArray alloc]init];
-    for (int sIndex = 0; sIndex < 2; sIndex++) {
+    for (int sIndex = 0; sIndex < 10; sIndex++) {
         NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
         for (int i = 0; i < 10000; i++) {
             REMEnergyData* data = [[REMEnergyData alloc]init];
             data.quality = REMEnergyDataQualityGood;
-//            if (i%5==0) {
-//            
-//            } else {
-                data.dataValue = [NSNumber numberWithInt:(i%10+1)*10*(sIndex+1)];
-//            }
+            if (i%5==0) {
+            
+            } else {
+                data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
+            }
             data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
             [energyDataArray addObject:data];
         }
