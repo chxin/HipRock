@@ -787,7 +787,7 @@
 }
 
 // Pie chart delegate
--(void)highlightPoint:(REMEnergyData*)point color:(UIColor*)color name:(NSString*)name
+-(void)highlightPoint:(REMEnergyData*)point color:(UIColor*)color name:(NSString*)name direction:(REMDirection)direction
 {
     NSLog(@"Pie %@ is now on the niddle.", name);
     
