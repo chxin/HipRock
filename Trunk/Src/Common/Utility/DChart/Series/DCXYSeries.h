@@ -7,6 +7,7 @@
 //
 
 #import "DCSeries.h"
+#import "DCDataPoint.h"
 #import "DCAxis.h"
 #import "DCRange.h"
 

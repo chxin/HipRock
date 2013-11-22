@@ -56,6 +56,7 @@
         CGPathAddLineToPoint(path, NULL, self.symbolSize, self.halfSize);
         CGContextAddPath(ctx, path);
         CGContextDrawPath(ctx, kCGPathFill);
+        CGPathRelease(path);
     } else if (self.symbolType == DCLineSymbolTypeTriangle) {
         CGMutablePathRef path = CGPathCreateMutable();
         CGPathMoveToPoint(path, NULL, self.halfSize, 0);
@@ -63,6 +64,7 @@
         CGPathAddLineToPoint(path, NULL, self.symbolSize, self.symbolSize);
         CGContextAddPath(ctx, path);
         CGContextDrawPath(ctx, kCGPathFill);
+        CGPathRelease(path);
     } else if (self.symbolType == DCLineSymbolTypeBackTriangle) {
         CGMutablePathRef path = CGPathCreateMutable();
         CGPathMoveToPoint(path, NULL, 0, 0);
@@ -70,6 +72,7 @@
         CGPathAddLineToPoint(path, NULL, self.halfSize, self.symbolSize);
         CGContextAddPath(ctx, path);
         CGContextDrawPath(ctx, kCGPathFill);
+        CGPathRelease(path);
     }
 }
 @end

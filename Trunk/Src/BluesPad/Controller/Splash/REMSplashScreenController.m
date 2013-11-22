@@ -17,7 +17,7 @@
 #import "REMTestChartView.h"
 #import "REMDimensions.h"
 #import "DChartColumnWrapper.h"
-#import "DChartLinerWrapper.h"
+#import "DChartLineChartWrapper.h"
 
 @interface REMSplashScreenController ()
 
@@ -149,7 +149,7 @@
     syntax.xtype = @"columnchartcomponent";
     syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
     NSMutableArray* timeRanges = [[NSMutableArray alloc]initWithCapacity:1];
-    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*100]];
+    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10]];
     [timeRanges setObject:r atIndexedSubscript:0];
     syntax.timeRanges = timeRanges;
     
@@ -158,10 +158,13 @@
     for (int sIndex = 0; sIndex < 10; sIndex++) {
         NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
         for (int i = 0; i < 10000; i++) {
-            if (i%5==0) continue;
             REMEnergyData* data = [[REMEnergyData alloc]init];
             data.quality = REMEnergyDataQualityGood;
-            data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
+            if (i%5==0) {
+            
+            } else {
+                data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
+            }
             data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
             [energyDataArray addObject:data];
         }
@@ -172,6 +175,8 @@
         sData.target.uomName = [NSString stringWithFormat:@"%i", sIndex%3];
         [sereis addObject:sData];
     }
+    energyViewData.visibleTimeRange = r;
+    energyViewData.globalTimeRange = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10000]];
     
     energyViewData.targetEnergyData = sereis;
     
@@ -180,7 +185,7 @@
     columnWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:columnWidget.view];
     
-    DChartLinerWrapper* lineWidget = [[DChartLinerWrapper alloc]initWithFrame:CGRectMake(0, 374, 1024, 374) data:energyViewData widgetContext:syntax style:style];
+    DChartLineChartWrapper* lineWidget = [[DChartLineChartWrapper alloc]initWithFrame:CGRectMake(0, 374, 1024, 374) data:energyViewData widgetContext:syntax style:style];
     lineWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:lineWidget.view];
 }

@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DCDataPoint.h"
 #import "DCContext.h"
 
 typedef enum _DCSeriesType {
@@ -27,6 +26,6 @@ typedef enum _DCSeriesType {
 /*
  * seriesData: IList<DCDataPoint>
  */
--(DCSeries*)initWithData:(NSArray*)seriesData;
+-(DCSeries*)initWithEnergyData:(NSArray*)seriesData;
 
 @end

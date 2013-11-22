@@ -14,6 +14,7 @@
 #import "_DCColumnsLayer.h"
 #import "_DCLinesLayer.h"
 #import "DCXYSeries.h"
+#import "_DCLineSymbolsLayer.h"
 #import "REMColor.h"
 
 @interface DCXYChartView ()
@@ -35,6 +36,11 @@
 @property (nonatomic, strong) _DCLinesLayer* lineLayer1;
 @property (nonatomic, strong) _DCLinesLayer* lineLayer2;
 
+@property (nonatomic, strong) NSMutableArray* symbolLayers;
+//@property (nonatomic, strong) _DCLineSymbolsLayer* lineSymbolsLayer0;
+//@property (nonatomic, strong) _DCLineSymbolsLayer* lineSymbolsLayer1;
+//@property (nonatomic, strong) _DCLineSymbolsLayer* lineSymbolsLayer2;
+
 @property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer0;
 @property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer1;
 @property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer2;
@@ -46,6 +52,7 @@
 @property (nonatomic) CGSize y2LabelLayerSize;
 
 @property (nonatomic, strong) NSTimer* timer;
+@property (nonatomic, strong) NSFormatter* xLabelFormatter;
 
 //@property (nonatomic, strong) DCSeriesLayer* seriesLayer;
 
@@ -57,6 +64,7 @@
 - (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange stacked:(BOOL)stacked {
     self = [super initWithFrame:frame];
     if (self) {
+        self.symbolLayers = [[NSMutableArray alloc]init];
         self.graphContext = [[DCContext alloc]initWithStacked:stacked];
         self.graphContext.hGridlineAmount = 0;
         self.multipleTouchEnabled = YES;
@@ -145,9 +153,26 @@
         [self.graphContext addY2IntervalObsever:self._yLabelLayer2];
         [self._yLabelLayer2 setNeedsDisplay];
     }
+    for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
+        [self.layer addSublayer:symbol];
+    }
+    [self updateSymbolFrameSize];
+    
     self.graphContext.hRange = self.beginHRange;
     
     [super willMoveToSuperview: newSuperview];
+}
+
+-(void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self updateSymbolFrameSize];
+}
+
+-(void)updateSymbolFrameSize {
+    CGRect symbolFrameSize = CGRectMake(self.plotRect.origin.x, self.plotRect.origin.y, self.plotRect.size.width, self.plotRect.size.height + self.xAxis.lineWidth + kDCLabelToLine);
+    for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
+        symbol.frame = symbolFrameSize;
+    }
 }
 
 -(_DCCoordinateSystem*)createCoordinateSystem:(DCAxis*)x y:(DCAxis*)y series:(NSArray*)series index:(NSUInteger)index{
@@ -183,6 +208,9 @@
 -(_DCLinesLayer*)createLineLayer:(_DCCoordinateSystem*)coordinate {
     _DCLinesLayer* layer = [[_DCLinesLayer alloc]initWithCoordinateSystem:coordinate];
     if (layer.series.count > 0) {
+        _DCLineSymbolsLayer* symbols = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
+        layer.symbolsLayer = symbols;
+        [self.symbolLayers addObject:symbols];
         layer.graphContext = self.graphContext;
         layer.frame = self.plotRect;
         [self.layer addSublayer:layer];
@@ -194,14 +222,14 @@
 
 
 -(void)drawXLabelLayer {
-    self._xLabelLayer = [[_DCXAxisLabelLayer alloc]init];
-    self._xLabelLayer.graphContext = self.graphContext;
+    self._xLabelLayer = [[_DCXAxisLabelLayer alloc]initWithContext:self.graphContext];
     self._xLabelLayer.axis = self.xAxis;
     self._xLabelLayer.font = self.xAxis.labelFont;
     self._xLabelLayer.fontColor = self.xAxis.labelColor;
     [self.graphContext addHRangeObsever:self._xLabelLayer];
     self._xLabelLayer.frame = CGRectMake(self.plotRect.origin.x, self.plotRect.size.height, self.plotRect.size.width, self.frame.size.height - self.plotRect.size.height);
     [self.layer addSublayer:self._xLabelLayer];
+    self._xLabelLayer.labelFormatter = self.xLabelFormatter;
     [self._xLabelLayer setNeedsDisplay];
 }
 
@@ -363,5 +391,11 @@
     if (hidden) {
         
     }
+}
+-(void)setXLabelFormatter:(NSFormatter*)formatter {
+    if (self._xLabelLayer) {
+        self._xLabelLayer.labelFormatter = formatter;
+    }
+    _xLabelFormatter = formatter;
 }
 @end

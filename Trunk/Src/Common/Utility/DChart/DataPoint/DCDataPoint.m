@@ -19,6 +19,7 @@
     DCDataPoint *result = [[DCDataPoint alloc] init];
     if (result) {
         result.value = [self.value copyWithZone:zone];
+        result.energyData = self.energyData;
         result.hashForCopy = self.hashForCopy;
     }
     return result;

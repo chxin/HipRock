@@ -7,13 +7,17 @@
 //
 
 #import "DCSeries.h"
+#import "DCDataPoint.h"
 
 @implementation DCSeries
 
--(DCSeries*)initWithData:(NSArray*)seriesData {
+-(DCSeries*)initWithEnergyData:(NSArray*)seriesData {
     self = [super init];
     if (self) {
         _datas = seriesData;
+        for (DCDataPoint* p in self.datas) {
+            p.series = self;
+        }
     }
     return self;
 }

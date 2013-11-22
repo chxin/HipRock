@@ -29,6 +29,8 @@
 - (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange stacked:(BOOL)stacked;
 
 - (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden;
+
+-(void)setXLabelFormatter:(NSFormatter*)formatter;
 //@property (nonatomic) NSArray* axis;
 //@property (nonatomic, readonly) DCContext* graphContext;
 @end

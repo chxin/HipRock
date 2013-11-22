@@ -13,34 +13,21 @@
 
 @interface _DCLinesLayer()
 
-@property (nonatomic, strong) _DCLayerTrashbox* symbolTrashbox;
-@property (nonatomic, strong) NSMutableDictionary* symbolsDic;
+//@property (nonatomic, strong) _DCLayerTrashbox* symbolTrashbox;
+//@property (nonatomic, strong) NSMutableDictionary* symbolsDic;
 @property (nonatomic, assign) BOOL symbolsAreHidden;
-@property (nonatomic, strong) CALayer* symbolsLayer;
 @property (nonatomic, strong) NSTimer* timer;
 @end
 
 @implementation _DCLinesLayer
-//-(id)init {
-//    self = [super init];
-//    if (self) {
-//        self.symbolTrashbox = [[_DCLayerTrashbox alloc]init];
-//        _symbolsAreHidden = NO;
-//        self.symbolsLayer = [[CALayer alloc]init];
-//        self.symbolsLayer.frame = self.bounds;
-//        [self addSublayer:self.symbolsLayer];
-//        self.timer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(lazyRenderSymbol) userInfo:nil repeats:NO];
-//    }
-//    return self;
-//}
 -(id)initWithCoordinateSystem:(_DCCoordinateSystem *)coordinateSystem {
     self = [super initWithCoordinateSystem:coordinateSystem];
     if (self) {
-        self.symbolTrashbox = [[_DCLayerTrashbox alloc]init];
+//        self.symbolTrashbox = [[_DCLayerTrashbox alloc]init];
         _symbolsAreHidden = NO;
-        self.symbolsLayer = [[CALayer alloc]init];
-        self.symbolsLayer.frame = self.bounds;
-        [self addSublayer:self.symbolsLayer];
+//        self.symbolsLayer = [[CALayer alloc]init];
+//        self.symbolsLayer.frame = self.bounds;
+//        [self addSublayer:self.symbolsLayer];
     }
     return self;
 }
@@ -65,7 +52,9 @@
         CGPoint pointsForSeries[loopEnd-start+1];
         for (int j = start; j <= loopEnd; j++) {
             DCDataPoint* point = s.datas[j];
-            if (point.value != nil && ![point.value isEqual:[NSNull null]]) {
+            if (point.pointType == DCDataPointTypeEmpty) {
+                continue;
+            } else if (point.pointType == DCDataPointTypeNormal) {
                 pointsForSeries[countOfPoints].x = self.frame.size.width*(j-self.graphContext.hRange.location)/self.graphContext.hRange.length;
                 pointsForSeries[countOfPoints].y = self.frame.size.height-self.heightUnitInScreen*point.value.doubleValue;
                 countOfPoints++;
@@ -78,7 +67,6 @@
         if (countOfPoints != 0) {
             CGContextAddLines(ctx, pointsForSeries, countOfPoints);
             CGContextStrokePath(ctx);
-            countOfPoints = 0;
         }
     }
     CGContextStrokePath(ctx);
@@ -104,6 +92,7 @@
 }
 
 -(void)lazyRenderSymbol {
+    if (REMIsNilOrNull(self.symbolsLayer)) return;
     self.symbolsLayer.hidden = NO;
     self.symbolsAreHidden = NO;
     [self renderSymbols];
@@ -112,7 +101,33 @@
 }
 
 -(void)renderSymbols {
-    if (self.symbolsAreHidden) return;
+    if (REMIsNilOrNull(self.symbolsLayer) || self.symbolsAreHidden) return;
+    
+    int start = floor(self.graphContext.hRange.location);
+    int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
+    NSMutableArray* pointsToDraw = [[NSMutableArray alloc]init];
+    NSUInteger i = 0;
+    for (DCLineSeries* s in self.series) {
+        NSMutableArray* seriesPoints = [[NSMutableArray alloc]init];
+        for (int j = start; j<=end; j++) {
+            if (s.symbolType == DCLineSymbolTypeNone || s.symbolSize == 0) continue;
+            if (j >= s.datas.count) continue;
+            if (![self.visableSeries containsObject:s]) continue;
+            
+            DCDataPoint* key = s.datas[j];
+            CGRect toFrame = CGRectMake(self.frame.size.width*(j-self.graphContext.hRange.location)/self.graphContext.hRange.length-s.symbolSize/2, self.frame.size.height-[self getHeightOfPoint:key]-s.symbolSize/2, s.symbolSize, s.symbolSize);
+            BOOL isRectVisable = [DCUtility isFrame:toFrame visableIn:self.bounds] && (key.value != nil) && ![key.value isEqual:[NSNull null]];
+            if (isRectVisable) {
+                CGPoint location = CGPointMake(toFrame.origin.x+toFrame.size.width/2, toFrame.origin.y+toFrame.size.height/2);
+                [seriesPoints addObject:@{ @"dcpoint": s.datas[j], @"location": [NSValue valueWithCGPoint:location] }];
+            }
+        }
+        [pointsToDraw addObject:seriesPoints];
+        i++;
+    }
+    [self.symbolsLayer drawSymbolsForPoints:pointsToDraw inSize:self.bounds.size];
+    
+    /*
     if (self.symbolsDic == nil) self.symbolsDic = [[NSMutableDictionary alloc]init];
     for (DCDataPoint* symbolKey in self.symbolsDic.allKeys) {
         _DCSymbolLayer* symbol = self.symbolsDic[symbolKey];
@@ -162,6 +177,7 @@
         }
     }
     [CATransaction setDisableActions:caTransationState];
+     */
 }
 -(CGFloat)getHeightOfPoint:(DCDataPoint*)point {
     double y = 0;
@@ -171,10 +187,14 @@
     return self.heightUnitInScreen * y;
 }
 -(void)setSymbolsHidden:(BOOL)hidden {
-    if (hidden == self.symbolsAreHidden) return;
+    if (REMIsNilOrNull(self.symbolsLayer) || hidden == self.symbolsAreHidden) return;
     [self.timer setFireDate:nil];
     if (hidden) {
-        self.symbolsLayer.hidden = hidden;
+        _DCLineSymbolsLayer* layer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
+        layer.frame = self.symbolsLayer.frame;
+        [self.symbolsLayer.superlayer insertSublayer:layer below:self.symbolsLayer];
+        [self.symbolsLayer removeFromSuperlayer];
+        self.symbolsLayer = layer;
         self.symbolsAreHidden = hidden;
     } else {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(lazyRenderSymbol) userInfo:nil repeats:NO];

@@ -12,7 +12,12 @@
 #import "REMCommonHeaders.h"
 #import "REMDimensions.h"
 
+@implementation REMChartTooltipItemModel
+@end
+@implementation REMRankingTooltipItemModel
+@end
 
+//item view
 @interface REMChartTooltipItem()
 
 @property (nonatomic,weak) UILabel *nameLabel;
@@ -23,11 +28,19 @@
 
 @implementation REMChartTooltipItem
 
++(REMChartTooltipItem *)itemWithFrame:(CGRect)frame andModel:(REMChartTooltipItemModel *)model
+{
+    if([model isKindOfClass:[REMRankingTooltipItemModel class]])
+        return [[REMRankingTooltipItem alloc] initWithFrame:frame andData:(REMRankingTooltipItemModel *)model];
+    else
+        return [[REMChartTooltipItem alloc] initWithFrame:frame andData:model];
+}
+
 - (id)initWithFrame:(CGRect)frame andData:(REMChartTooltipItemModel *)model
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+// Initialization code
 //        self.layer.borderColor = [UIColor blueColor].CGColor;
 //        self.layer.borderWidth = 1.0f;
         self.backgroundColor = [UIColor clearColor];
@@ -59,13 +72,13 @@
     self.valueLabel.text = [self formatDataValue:model.value];
 }
 
--(void)setHighlighted:(BOOL)highlighted
-{
-    [super setHighlighted:highlighted];
-    
-    UIColor *backgroundColor = highlighted?[UIColor lightGrayColor]:[UIColor whiteColor];
-    self.backgroundColor = backgroundColor;
-}
+//-(void)setHighlighted:(BOOL)highlighted
+//{
+//    [super setHighlighted:highlighted];
+//    
+//    UIColor *backgroundColor = highlighted?[UIColor lightGrayColor]:[UIColor whiteColor];
+//    self.backgroundColor = backgroundColor;
+//}
 
 - (NSString *)formatDataValue:(NSNumber *)value
 {
@@ -121,12 +134,6 @@
     
     return label;
 }
-
-
-@end
-
-@implementation REMChartTooltipItemModel
-
 
 
 @end

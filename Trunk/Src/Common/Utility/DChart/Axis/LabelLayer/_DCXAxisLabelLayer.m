@@ -8,10 +8,11 @@
 
 #import "_DCXAxisLabelLayer.h"
 #import "DCUtility.h"
+#import "_DCXLabelFormatter.h"
+
 @interface _DCXAxisLabelLayer()
 @property (nonatomic, assign) CGFloat fontSize;
 @property (nonatomic, assign) CTFontRef fontRef;
-
 @property (nonatomic, strong) _DCLayerTrashbox* trashbox;
 
 @end
@@ -19,8 +20,8 @@
 
 @implementation _DCXAxisLabelLayer
 
--(id)init {
-    self = [super init];
+-(id)initWithContext:(DCContext *)context {
+    self = [super initWithContext:context];
     if (self) {
         self.masksToBounds = YES;
         self.backgroundColor = [UIColor clearColor].CGColor;
@@ -66,6 +67,7 @@
     }
     [CATransaction setDisableActions:caTransationState];
     
+    [self updateXFormatterInterval];
     for (int i = start; i <= end; i++) {
         if (self.trashbox.xToLayerDic[@(i)] == nil) {
             [self addLabelForX:i];
@@ -73,8 +75,12 @@
     }
 }
 
--(NSString*)textForX:(NSInteger)x {
-    return [NSString stringWithFormat:@"%li", (long)x];
+-(NSString*)textForX:(int)x {
+    if (self.labelFormatter) {
+        return [self.labelFormatter stringForObjectValue:@(x)];
+    } else {
+        return [NSString stringWithFormat:@"%i", x];
+    }
 }
 
 -(void)addLabelForX:(NSInteger)x {
@@ -108,5 +114,30 @@
         CFRelease(self.fontRef);
     }
     [super removeFromSuperlayer];
+}
+
+-(void)setLabelFormatter:(NSFormatter *)labelFormatter {
+    _labelFormatter = labelFormatter;
+    [self updateXFormatterInterval];
+}
+
+-(void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self updateXFormatterInterval];
+}
+
+-(void)updateXFormatterInterval {
+    if (!REMIsNilOrNull(self.labelFormatter) && [self.labelFormatter isKindOfClass:[_DCXLabelFormatter class]]) {
+        if (self.frame.size.width == 0 || REMIsNilOrNull(self.graphContext.hRange) || self.graphContext.hRange.length==0) return;
+        const int minDistance = 80;
+        int interval = 0;
+        float distanceNearbyPoints = self.frame.size.width / self.graphContext.hRange.length;
+        if (distanceNearbyPoints >= minDistance) {
+            interval = 1;
+        } else {
+            interval = ceil(minDistance / distanceNearbyPoints);
+        }
+        ((_DCXLabelFormatter*)self.labelFormatter).interval = interval;
+    }
 }
 @end

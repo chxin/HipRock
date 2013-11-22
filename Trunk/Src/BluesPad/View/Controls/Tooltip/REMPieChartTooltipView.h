@@ -10,8 +10,5 @@
 
 @interface REMPieChartTooltipView : REMTooltipViewBase
 
-- (id)initWithFrame:(CGRect)frame data:(NSArray *)data andHighlightIndex:(int)highlightIndex;
-
-- (void)update:(id)highlightIndex;
 
 @end
