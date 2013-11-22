@@ -155,7 +155,7 @@
     
     REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
     NSMutableArray* sereis = [[NSMutableArray alloc]init];
-    for (int sIndex = 0; sIndex < 2; sIndex++) {
+    for (int sIndex = 0; sIndex < 10; sIndex++) {
         NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
         for (int i = 0; i < 10000; i++) {
             REMEnergyData* data = [[REMEnergyData alloc]init];
