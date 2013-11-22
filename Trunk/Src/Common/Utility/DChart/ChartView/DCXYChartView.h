@@ -38,4 +38,5 @@
 //@property (nonatomic, readonly) DCContext* graphContext;
 -(double)getXLocationForPoint:(CGPoint)point;
 -(void)focusAroundX:(double)x;
+-(void)defocus;
 @end

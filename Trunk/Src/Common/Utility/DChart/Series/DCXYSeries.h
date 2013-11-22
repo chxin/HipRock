@@ -10,6 +10,7 @@
 #import "DCDataPoint.h"
 #import "DCAxis.h"
 #import "DCRange.h"
+#import "_DCSeriesLayer.h"
 #import "REMEnergyTargetModel.h"
 
 
@@ -21,5 +22,7 @@
 @property (nonatomic, weak) REMEnergyTargetModel* target;
 
 @property (nonatomic, assign)BOOL hidden;
+
+@property (nonatomic, weak) _DCSeriesLayer* seriesLayer;
 
 @end

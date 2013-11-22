@@ -450,6 +450,16 @@
         }
     }
 }
+-(void)defocus {
+    if (self.focusPointIndex == INT32_MIN) return;
+    self.focusPointIndex = INT32_MIN;
+    if (self.columnLayer0) [self.columnLayer0 defocus];
+    if (self.columnLayer1) [self.columnLayer1 defocus];
+    if (self.columnLayer2) [self.columnLayer2 defocus];
+    if (self.lineLayer0) [self.lineLayer0 defocus];
+    if (self.lineLayer1) [self.lineLayer1 defocus];
+    if (self.lineLayer2) [self.lineLayer2 defocus];
+}
 
 -(void)focusAroundX:(double)x {
     DCRange* globalRange = self.graphContext.globalHRange;

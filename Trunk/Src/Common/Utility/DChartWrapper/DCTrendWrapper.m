@@ -6,7 +6,7 @@
 //
 //
 
-#import "DTrendChartWrapper.h"
+#import "DCTrendWrapper.h"
 #import "_DCXLabelFormatter.h"
 
 typedef enum _DChartStatus {
@@ -14,7 +14,7 @@ typedef enum _DChartStatus {
     DChartStatusFocus
 }DChartStatus;
 
-@interface DTrendChartWrapper()
+@interface DCTrendWrapper()
 @property (nonatomic, strong) NSMutableArray* processors;
 @property (nonatomic, strong) DCRange* beginRange;
 @property (nonatomic, strong) DCRange* globalRange;
@@ -25,10 +25,11 @@ typedef enum _DChartStatus {
 @property (nonatomic, strong) DCRange* myStableRange;
 @end
 
-@implementation DTrendChartWrapper
--(DTrendChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style {
+@implementation DCTrendWrapper
+-(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*)widgetSyntax style:(REMChartStyle*)style {
     self = [self init];
     if (self && energyViewData.targetEnergyData.count != 0) {
+        [self extraSyntax:widgetSyntax];
         _chartStatus = DChartStatusNormal;
         _energyViewData = energyViewData;
         [self updateProcessorRangesFormatter:widgetSyntax.xtype step:widgetSyntax.step.integerValue];
@@ -36,58 +37,16 @@ typedef enum _DChartStatus {
         
         DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:self.beginRange stacked:NO];
         [view setXLabelFormatter:self.xLabelFormatter];
+        _view = view;
         view.xAxis = [[DCAxis alloc]init];
         view.yAxis0 = [[DCAxis alloc]init];
         view.yAxis1 = [[DCAxis alloc]init];
         view.yAxis2 = [[DCAxis alloc]init];
         NSMutableArray* seriesList = [[NSMutableArray alloc]initWithCapacity:energyViewData.targetEnergyData.count];
         NSUInteger seriesIndex = 0;
-        for (REMTargetEnergyData* targetEnergy in energyViewData.targetEnergyData) {
-            NSMutableArray* datas = [[NSMutableArray alloc]init];
-            REMTrendChartDataProcessor* processor = [self.processors objectAtIndex:seriesIndex];
-            for (REMEnergyData* point in targetEnergy.energyData) {
-                int processedX = [processor processX:point.localTime].integerValue;
-                while (datas.count < processedX) {
-                    DCDataPoint* p = [[DCDataPoint alloc]init];
-                    p.target = targetEnergy.target;
-                    p.pointType = DCDataPointTypeEmpty;
-                    [datas addObject:p];
-                }
-                DCDataPoint* p = [[DCDataPoint alloc]init];
-                p.energyData = point;
-                p.target = targetEnergy.target;
-                p.value = point.dataValue;
-                if (REMIsNilOrNull(p.value)) {
-                    p.pointType = DCDataPointTypeBreak;
-                } else {
-                    p.pointType = DCDataPointTypeNormal;
-                }
-                [datas addObject:p];
-            }
-            DCXYSeries* s = [[NSClassFromString(self.defaultSeriesClass) alloc]initWithEnergyData:datas];
-            s.xAxis = view.xAxis;
-            if (REMIsNilOrNull(view.yAxis0.axisTitle)) {
-                s.yAxis = view.yAxis0;
-                s.yAxis.axisTitle = targetEnergy.target.uomName;
-            } else if ([view.yAxis0.axisTitle isEqualToString:targetEnergy.target.uomName]){
-                s.yAxis = view.yAxis0;
-            } else if (REMIsNilOrNull(view.yAxis1.axisTitle)) {
-                s.yAxis = view.yAxis1;
-                s.yAxis.axisTitle = targetEnergy.target.uomName;
-            } else if ([view.yAxis1.axisTitle isEqualToString:targetEnergy.target.uomName]){
-                s.yAxis = view.yAxis1;
-            } else if (REMIsNilOrNull(view.yAxis2.axisTitle)) {
-                s.yAxis = view.yAxis2;
-                s.yAxis.axisTitle = targetEnergy.target.uomName;
-            } else if ([view.yAxis2.axisTitle isEqualToString:targetEnergy.target.uomName]){
-                s.yAxis = view.yAxis2;
-            } else {
-                continue; // We just support 3 axes for now.
-            }
-            s.target = targetEnergy.target;
-            [self customizeSeries:s seriesIndex:seriesIndex chartStyle:style];
-            [seriesList addObject:s];
-            seriesIndex++;
+        NSUInteger seriesAmount = [self getSeriesAmount];
+        for (; seriesIndex < seriesAmount; seriesIndex++) {
+            [seriesList addObject:[self createSeriesAt:seriesIndex style:style]];
         }
         view.graphContext.globalHRange = self.globalRange;
         view.seriesList = seriesList;
@@ -124,7 +83,6 @@ typedef enum _DChartStatus {
             view.yAxis2.labelFont = [UIFont fontWithName:style.yTextStyle.fontName size:style.yTextStyle.fontSize];
         }
         view.graphContext.hGridlineAmount = style.horizentalGridLineAmount;
-        _view = view;
         view.delegate = self;
         [view.graphContext addHRangeObsever:self];
     }
@@ -133,6 +91,55 @@ typedef enum _DChartStatus {
 
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style {
     // Nothing to do.
+}
+
+-(DCXYSeries*)createSeriesAt:(NSUInteger)index style:(REMChartStyle*)style {
+    DCXYChartView* view = self.view;
+    REMTargetEnergyData* targetEnergy = self.energyViewData.targetEnergyData[index];
+    NSMutableArray* datas = [[NSMutableArray alloc]init];
+    REMTrendChartDataProcessor* processor = [self.processors objectAtIndex:index];
+    for (REMEnergyData* point in targetEnergy.energyData) {
+        int processedX = [processor processX:point.localTime].integerValue;
+        while ((int)datas.count < processedX) {
+            DCDataPoint* p = [[DCDataPoint alloc]init];
+            p.target = targetEnergy.target;
+            p.pointType = DCDataPointTypeEmpty;
+            [datas addObject:p];
+        }
+        DCDataPoint* p = [[DCDataPoint alloc]init];
+        p.energyData = point;
+        p.target = targetEnergy.target;
+        p.value = point.dataValue;
+        if (REMIsNilOrNull(p.value)) {
+            p.pointType = DCDataPointTypeBreak;
+        } else {
+            p.pointType = DCDataPointTypeNormal;
+        }
+        [datas addObject:p];
+    }
+    DCXYSeries* s = [[NSClassFromString(self.defaultSeriesClass) alloc]initWithEnergyData:datas];
+    s.xAxis = view.xAxis;
+    if (REMIsNilOrNull(view.yAxis0.axisTitle)) {
+        s.yAxis = view.yAxis0;
+        s.yAxis.axisTitle = targetEnergy.target.uomName;
+    } else if ([view.yAxis0.axisTitle isEqualToString:targetEnergy.target.uomName]){
+        s.yAxis = view.yAxis0;
+    } else if (REMIsNilOrNull(view.yAxis1.axisTitle)) {
+        s.yAxis = view.yAxis1;
+        s.yAxis.axisTitle = targetEnergy.target.uomName;
+    } else if ([view.yAxis1.axisTitle isEqualToString:targetEnergy.target.uomName]){
+        s.yAxis = view.yAxis1;
+    } else if (REMIsNilOrNull(view.yAxis2.axisTitle)) {
+        s.yAxis = view.yAxis2;
+        s.yAxis.axisTitle = targetEnergy.target.uomName;
+    } else if ([view.yAxis2.axisTitle isEqualToString:targetEnergy.target.uomName]){
+        s.yAxis = view.yAxis2;
+    } else {
+        
+    }
+    s.target = targetEnergy.target;
+    [self customizeSeries:s seriesIndex:index chartStyle:style];
+    return s;
 }
 
 -(NSNumber*)roundDate:(NSDate*)lengthDate startDate:(NSDate*)startDate processor:(REMTrendChartDataProcessor*)processor roundToFloor:(BOOL)roundToFloor {
@@ -292,10 +299,16 @@ typedef enum _DChartStatus {
     }
 }
 
-///*
-// * points: List<REMEnergyData>
-// * colors: List<UIColor>
-// * names: List<NSString>
-// */
-//-(void)highlightPoints:(NSArray*)points colors:(NSArray*)colors names:(NSArray*)names;
+-(void)cancelToolTipStatus {
+    self.chartStatus = DCDataPointTypeNormal;
+    [self.view defocus];
+}
+-(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
+    if (seriesIndex >= self.view.seriesList.count) return;
+    DCXYSeries* series = self.view.seriesList[seriesIndex];
+    series.hidden = hidden;
+}
+-(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
+    
+}
 @end

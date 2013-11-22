@@ -44,6 +44,7 @@
     CGContextBeginPath(ctx);
     
     for (DCLineSeries* s in self.series) {
+        if (s.hidden) continue;
         int loopEnd = s.datas.count-1;
         if (end < loopEnd) loopEnd = end;
         CGContextSetLineWidth(ctx, s.lineWidth);
@@ -70,6 +71,7 @@
         }
     }
     CGContextStrokePath(ctx);
+    [self renderSymbols];
 }
 
 -(BOOL)isValidSeriesForMe:(DCXYSeries*)series {
@@ -81,14 +83,14 @@
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
     [super didYRangeChanged:oldRange newRange:newRange];
     [self setNeedsDisplay];
-    [self renderSymbols];
+//    [self renderSymbols];
 }
 
 -(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
     [super didHRangeChanged:oldRange newRange:newRange];
     [self setNeedsDisplay];
-    [self renderSymbols];
+//    [self renderSymbols];
 }
 
 -(void)lazyRenderSymbol {

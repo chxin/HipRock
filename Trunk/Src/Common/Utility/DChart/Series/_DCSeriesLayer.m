@@ -7,6 +7,7 @@
 //
 
 #import "_DCSeriesLayer.h"
+#import "DCXYSeries.h"
 
 @implementation _DCSeriesLayer
 -(id)initWithCoordinateSystem:(_DCCoordinateSystem*)coordinateSystem {
@@ -18,6 +19,7 @@
         for (DCXYSeries* se in coordinateSystem.seriesList) {
             if ([self isValidSeriesForMe:se]) {
                 [s addObject:se];
+                se.seriesLayer = self;
             }
         }
         _focusX = INT32_MIN;

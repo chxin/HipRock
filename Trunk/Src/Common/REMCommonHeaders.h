@@ -51,8 +51,8 @@
 #import "REMStackColumnWidgetWrapper.h"
 #import "REMTrendWidgetWrapper.h"
 
-#import "DChartColumnWrapper.h"
-#import "DChartLineChartWrapper.h"
+#import "DCColumnWrapper.h"
+#import "DCLineWrapper.h"
 
 //DataProcessor
 
