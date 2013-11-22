@@ -24,6 +24,8 @@ typedef enum _DChartStatus {
 @property (nonatomic, weak) DCContext* graphContext;
 @property (nonatomic, strong) DCRange* myStableRange;
 @property (nonatomic, assign) BOOL isStacked;
+@property (nonatomic) NSString* xtypeOfWidget;
+@property (nonatomic) REMChartStyle* style;
 @end
 
 @implementation DCTrendWrapper
@@ -33,64 +35,70 @@ typedef enum _DChartStatus {
 -(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*)widgetSyntax style:(REMChartStyle*)style {
     self = [self init];
     if (self && energyViewData.targetEnergyData.count != 0) {
+        self.xtypeOfWidget = widgetSyntax.xtype;
         [self extraSyntax:widgetSyntax];
+        _style = style;
+        
         _chartStatus = DChartStatusNormal;
         _energyViewData = energyViewData;
-        [self updateProcessorRangesFormatter:widgetSyntax.xtype step:widgetSyntax.step.integerValue];
+        [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
         
-        
-        DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:self.beginRange stacked:self.isStacked];
-        [view setXLabelFormatter:self.xLabelFormatter];
-        _view = view;
-        view.xAxis = [[DCAxis alloc]init];
-        view.yAxis0 = [[DCAxis alloc]init];
-        view.yAxis1 = [[DCAxis alloc]init];
-        view.yAxis2 = [[DCAxis alloc]init];
-        NSMutableArray* seriesList = [[NSMutableArray alloc]initWithCapacity:energyViewData.targetEnergyData.count];
-        NSUInteger seriesIndex = 0;
-        NSUInteger seriesAmount = [self getSeriesAmount];
-        for (; seriesIndex < seriesAmount; seriesIndex++) {
-            [seriesList addObject:[self createSeriesAt:seriesIndex style:style]];
-        }
-        view.graphContext.globalHRange = self.globalRange;
-        view.seriesList = seriesList;
-        
-        view.userInteractionEnabled = style.userInteraction;
-        
-        if (style.xLineStyle) {
-            view.xAxis.lineColor = style.xLineStyle.lineColor.uiColor;
-            view.xAxis.lineWidth = style.xLineStyle.lineWidth;
-        }
-        if (style.xTextStyle) {
-            view.xAxis.labelColor = style.xTextStyle.color.uiColor;
-            view.xAxis.labelFont = [UIFont fontWithName:style.xTextStyle.fontName size:style.xTextStyle.fontSize];
-        }
-        if (style.yGridlineStyle) {
-            view.hGridlineColor = style.yGridlineStyle.lineColor.uiColor;
-            view.hGridlineWidth = style.yGridlineStyle.lineWidth;
-        }
-        
-        if (style.yLineStyle) {
-            view.yAxis0.lineColor = style.yLineStyle.lineColor.uiColor;
-            view.yAxis1.lineColor = style.yLineStyle.lineColor.uiColor;
-            view.yAxis2.lineColor = style.yLineStyle.lineColor.uiColor;
-            view.yAxis0.lineWidth = style.yLineStyle.lineWidth;
-            view.yAxis1.lineWidth = style.yLineStyle.lineWidth;
-            view.yAxis2.lineWidth = style.yLineStyle.lineWidth;
-        }
-        if (style.yTextStyle) {
-            view.yAxis0.labelColor = style.yTextStyle.color.uiColor;
-            view.yAxis1.labelColor = style.yTextStyle.color.uiColor;
-            view.yAxis2.labelColor = style.yTextStyle.color.uiColor;
-            view.yAxis0.labelFont = [UIFont fontWithName:style.yTextStyle.fontName size:style.yTextStyle.fontSize];
-            view.yAxis1.labelFont = [UIFont fontWithName:style.yTextStyle.fontName size:style.yTextStyle.fontSize];
-            view.yAxis2.labelFont = [UIFont fontWithName:style.yTextStyle.fontName size:style.yTextStyle.fontSize];
-        }
-        view.graphContext.hGridlineAmount = style.horizentalGridLineAmount;
-        view.delegate = self;
-        [view.graphContext addHRangeObsever:self];
+        [self createChartView:frame];
     }
     return self;
+}
+
+-(void)createChartView:(CGRect)frame {
+    DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:self.beginRange stacked:self.isStacked];
+    [view setXLabelFormatter:self.xLabelFormatter];
+    _view = view;
+    view.xAxis = [[DCAxis alloc]init];
+    view.yAxis0 = [[DCAxis alloc]init];
+    view.yAxis1 = [[DCAxis alloc]init];
+    view.yAxis2 = [[DCAxis alloc]init];
+    NSMutableArray* seriesList = [[NSMutableArray alloc]initWithCapacity:self.energyViewData.targetEnergyData.count];
+    NSUInteger seriesIndex = 0;
+    NSUInteger seriesAmount = [self getSeriesAmount];
+    for (; seriesIndex < seriesAmount; seriesIndex++) {
+        [seriesList addObject:[self createSeriesAt:seriesIndex style:self.style]];
+    }
+    view.graphContext.globalHRange = self.globalRange;
+    view.seriesList = seriesList;
+    
+    view.userInteractionEnabled = self.style.userInteraction;
+    
+    if (self.style.xLineStyle) {
+        view.xAxis.lineColor = self.style.xLineStyle.lineColor.uiColor;
+        view.xAxis.lineWidth = self.style.xLineStyle.lineWidth;
+    }
+    if (self.style.xTextStyle) {
+        view.xAxis.labelColor = self.style.xTextStyle.color.uiColor;
+        view.xAxis.labelFont = [UIFont fontWithName:self.style.xTextStyle.fontName size:self.style.xTextStyle.fontSize];
+    }
+    if (self.style.yGridlineStyle) {
+        view.hGridlineColor = self.style.yGridlineStyle.lineColor.uiColor;
+        view.hGridlineWidth = self.style.yGridlineStyle.lineWidth;
+    }
+    
+    if (self.style.yLineStyle) {
+        view.yAxis0.lineColor = self.style.yLineStyle.lineColor.uiColor;
+        view.yAxis1.lineColor = self.style.yLineStyle.lineColor.uiColor;
+        view.yAxis2.lineColor = self.style.yLineStyle.lineColor.uiColor;
+        view.yAxis0.lineWidth = self.style.yLineStyle.lineWidth;
+        view.yAxis1.lineWidth = self.style.yLineStyle.lineWidth;
+        view.yAxis2.lineWidth = self.style.yLineStyle.lineWidth;
+    }
+    if (self.style.yTextStyle) {
+        view.yAxis0.labelColor = self.style.yTextStyle.color.uiColor;
+        view.yAxis1.labelColor = self.style.yTextStyle.color.uiColor;
+        view.yAxis2.labelColor = self.style.yTextStyle.color.uiColor;
+        view.yAxis0.labelFont = [UIFont fontWithName:self.style.yTextStyle.fontName size:self.style.yTextStyle.fontSize];
+        view.yAxis1.labelFont = [UIFont fontWithName:self.style.yTextStyle.fontName size:self.style.yTextStyle.fontSize];
+        view.yAxis2.labelFont = [UIFont fontWithName:self.style.yTextStyle.fontName size:self.style.yTextStyle.fontSize];
+    }
+    view.graphContext.hGridlineAmount = self.style.horizentalGridLineAmount;
+    view.delegate = self;
+    [view.graphContext addHRangeObsever:self];
 }
 
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style {
@@ -160,12 +168,12 @@ typedef enum _DChartStatus {
     return length;
 }
 
--(void)updateProcessorRangesFormatter:(NSString*)xtype step:(REMEnergyStep)step {
-    self.isStacked = ([xtype rangeOfString:@"stack"].location != NSNotFound);
+-(void)updateProcessorRangesFormatter:(REMEnergyStep)step {
+    self.isStacked = ([self.xtypeOfWidget rangeOfString:@"stack"].location != NSNotFound);
     
     NSUInteger seriesAmount = [self getSeriesAmount];
     self.processors = [[NSMutableArray alloc]init];
-    BOOL allSeriesUserGlobalTime = ([xtype rangeOfString : @"multitimespan"].location == NSNotFound);
+    BOOL allSeriesUserGlobalTime = ([self.xtypeOfWidget rangeOfString : @"multitimespan"].location == NSNotFound);
     
     NSDate* baseDateOfX = nil;
     NSDate* globalEndDate = nil;
@@ -316,4 +324,17 @@ typedef enum _DChartStatus {
 -(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
     
 }
+-(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
+    [self updateProcessorRangesFormatter:step];
+    CGRect frame = self.view.frame;
+    UIView* superView = self.view.superview;
+    [self.view removeFromSuperview];
+    _chartStatus = DChartStatusNormal;
+    _energyViewData = energyViewData;
+    [self updateProcessorRangesFormatter:step];
+    
+    [self createChartView:frame];
+    [superView addSubview:self.view];
+}
+
 @end

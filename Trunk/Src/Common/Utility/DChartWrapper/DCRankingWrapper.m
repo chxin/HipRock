@@ -64,7 +64,7 @@
     rankingSeries.datas = datas;
 }
 
--(void)updateProcessorRangesFormatter:(NSString*)xtype step:(REMEnergyStep)step {
+-(void)updateProcessorRangesFormatter:(REMEnergyStep)step {
     int rangeCode = self.rankingRangeCode;
     int datasAmount = self.energyViewData.targetEnergyData.count;
     self.beginRange = [[DCRange alloc]initWithLocation:-0.5 length:MIN(rangeCode, datasAmount)];
