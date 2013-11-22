@@ -224,7 +224,7 @@
                 sqlCmd = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@=?", STORAGE_FILE_SOURCE_NAME, STORAGE_NETWORK_SOURCE_FIELDS_NAME_ID];
                 sqlite3_prepare_v2(db, [sqlCmd UTF8String], -1, &statement, NULL);
                 sqlite3_bind_int64(statement, 1, recordId);
-                sqlStatus = sqlite3_step(statement);
+//                sqlStatus = sqlite3_step(statement);
                 sqlite3_finalize(statement);
             }
         }
