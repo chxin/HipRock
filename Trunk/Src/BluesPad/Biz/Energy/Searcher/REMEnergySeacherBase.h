@@ -19,6 +19,8 @@
 @property (nonatomic,weak) REMWidgetObject *widgetInfo;
 @property (nonatomic,weak) REMWidgetSearchModelBase *model;
 
+@property (nonatomic,strong) UIActivityIndicatorView *loadingView;
+
 + (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType) storeType withWidgetInfo:(REMWidgetObject *)widgetInfo;
 
 - (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(REMWidgetSearchModelBase *)model withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void(^)(id,REMBusinessErrorInfo *))callback;

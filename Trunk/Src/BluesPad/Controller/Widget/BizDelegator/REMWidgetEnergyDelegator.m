@@ -67,6 +67,11 @@
     self.model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
                   .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
     self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
+    UIActivityIndicatorView *loader=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [loader setColor:[UIColor grayColor]];
+    [loader setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.3]];
+    self.searcher.loadingView=loader;
+    loader.translatesAutoresizingMaskIntoConstraints=NO;
     REMWidgetStepEnergyModel *m=(REMWidgetStepEnergyModel *)self.model;
     m.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
     

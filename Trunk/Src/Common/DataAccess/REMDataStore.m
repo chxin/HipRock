@@ -74,7 +74,7 @@ static NSDictionary *serviceMap = nil;
           [NSNumber numberWithInt:REMDSEnergyTagsTrendUnit] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetEnergyUsageUnitData"],
           [NSNumber numberWithInt:REMDSEnergyTagsDistribute] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/AggregateTagsData"],
           [NSNumber numberWithInt:REMDSEnergyMultiTimeTrend] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetTagsData"],
-          [NSNumber numberWithInt:REMDSEnergyMultiTimeDistribute] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/AggregateTimeSpanData"],
+          [NSNumber numberWithInt:REMDSEnergyMultiTimeDistribute] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/AggregateTimeSpansData"],
           [NSNumber numberWithInt:REMDSEnergyCarbon] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetCarbonUsageData"],
           [NSNumber numberWithInt:REMDSEnergyCarbonUnit] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetCarbonUsageUnitData"],
           [NSNumber numberWithInt:REMDSEnergyCarbonDistribute] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/AggregateCarbonUsageData"],
