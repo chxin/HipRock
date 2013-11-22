@@ -19,6 +19,8 @@
 #import "REMChartLegendView.h"
 #import "REMStackChartLegendView.h"
 #import "REMClientErrorInfo.h"
+#import "DChartLineChartWrapper.h"
+#import "DChartColumnWrapper.h"
 
 @interface REMWidgetEnergyDelegator()
 
@@ -326,12 +328,14 @@
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
     REMAbstractChartWrapper  *widgetWrapper;
     if (widgetType == REMDiagramTypeLine) {
+//        widgetWrapper = [[DChartLineChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         REMTrendChartView *trendChart= (REMTrendChartView *)widgetWrapper.view;
         trendChart.delegate = self;
         
         
     } else if (widgetType == REMDiagramTypeColumn) {
+//        widgetWrapper = [[DChartColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypePie) {
