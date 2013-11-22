@@ -108,7 +108,7 @@
 "Widget_CalendarHC"="冷暖季";
 "Widget_CalendarHoliday"="非工作时间";
 "Widget_CalendarStepError"="当前步长不支持显示%@背景色"; //当前步长不支持显示冷暖季背景色，当前步长不支持显示非工作时间背景色
-"Widget_CalendarCostElectricityStepError"="峰谷平不支持按小时展示";
+"Widget_CalendarCostElectricityStepError"="峰谷平电价不支持按小时展示";
 
 //Weibo, prefix: Weibo_
 "Weibo_WindowTitle"="新浪微博";

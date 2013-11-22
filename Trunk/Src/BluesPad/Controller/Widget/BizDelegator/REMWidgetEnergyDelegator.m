@@ -178,7 +178,7 @@
 - (void)initChartView{
     UIView *c=[[UIView alloc]initWithFrame:CGRectMake(0, REMDMCOMPATIOS7(0), self.view.frame.size.width, kDMScreenHeight-kDMStatusBarHeight)];
     [c setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
-    //UIView *chartContainer=[[UIView alloc]initWithFrame:CGRectMake(kWidgetChartLeftMargin, 0, kWidgetChartWidth, kWidgetChartHeight)];
+    
     [self.view insertSubview:c belowSubview:self.ownerController.titleContainer];
     
     UIView *chartContainer=[[UIView alloc]init];
