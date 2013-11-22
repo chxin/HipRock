@@ -54,6 +54,11 @@
     [self initSearchView];
     [self initChartView];
     
+    
+    [self setDatePickerButtonValueNoSearchByTimeRange:self.tempModel.timeRangeArray[0] withRelative:self.tempModel.relativeDateComponent withRelativeType:self.tempModel.relativeDateType];
+    [self initStepButtonWithRange:self.tempModel.timeRangeArray[0] WithStep:self.tempModel.step];
+    [self setStepControlStatusByStepNoSearch:self.tempModel.step];
+    
     //TODO:Temp code, remove when tooltip delegate is ok
     //[self.view addSubview:[self prepareTooltipView]];
 }
@@ -62,6 +67,11 @@
     self.model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
                   .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
     self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
+    UIActivityIndicatorView *loader=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [loader setColor:[UIColor grayColor]];
+    [loader setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.3]];
+    self.searcher.loadingView=loader;
+    loader.translatesAutoresizingMaskIntoConstraints=NO;
     REMWidgetStepEnergyModel *m=(REMWidgetStepEnergyModel *)self.model;
     m.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
     
@@ -71,11 +81,14 @@
 - (void)initSearchView{
     
     UIView *searchViewContainer=[[UIView alloc]initWithFrame:CGRectMake(0,self.ownerController.titleContainer.frame.origin.y+self.ownerController.titleContainer.frame.size.height,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)];
+    //searchViewContainer.translatesAutoresizingMaskIntoConstraints=NO;
     
     [searchViewContainer setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
     
     UISegmentedControl *legendControl=[[UISegmentedControl alloc] initWithItems:@[@"search",@"legend"]];
-    [legendControl setFrame:CGRectMake(kLegendSearchSwitcherLeft, kLegendSearchSwitcherTop, kLegendSearchSwitcherWidth, kLegendSearchSwitcherHeight)];
+    //[legendControl setFrame:CGRectMake(kLegendSearchSwitcherLeft, kLegendSearchSwitcherTop, kLegendSearchSwitcherWidth, kLegendSearchSwitcherHeight)];
+    
+    
     [legendControl setSegmentedControlStyle:UISegmentedControlStyleBezeled];
     
     [legendControl setImage:REMIMG_DateView_Chart forSegmentAtIndex:0];
@@ -87,16 +100,29 @@
     [legendControl setTintColor:[REMColor colorByHexString:@"#37ab3c"]];
     
     [self.ownerController.titleContainer addSubview:legendControl];
+    
+    legendControl.translatesAutoresizingMaskIntoConstraints=NO;
+    
+    NSMutableArray *tmpConstraints = [NSMutableArray array];
+    NSDictionary *dict1 = NSDictionaryOfVariableBindings(legendControl);
+    NSDictionary *metrics = @{@"rightMargin":@(kWidgetChartLeftMargin),@"height":@(kLegendSearchSwitcherHeight),@"width":@(kLegendSearchSwitcherWidth),@"top":@(kLegendSearchSwitcherTop)};
+    [tmpConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[legendControl(width)]-rightMargin-|" options:0 metrics:metrics views:dict1]];
+    [tmpConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[legendControl(height)]" options:0 metrics:metrics views:dict1]];
+    
+    [self.ownerController.titleContainer addConstraints:tmpConstraints];
+
+    
     self.legendSearchControl=legendControl;
     
     
     UIButton *timePickerButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, kWidgetDatePickerTopMargin, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
+    //[timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, kWidgetDatePickerTopMargin, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
     timePickerButton.layer.borderColor=[UIColor clearColor].CGColor;
     timePickerButton.layer.borderWidth=0;
     //[timePickerButton setBackgroundColor:[REMColor colorByHexString:@"#9d9d9d"]];
     
     timePickerButton.layer.cornerRadius=4;
+    timePickerButton.translatesAutoresizingMaskIntoConstraints=NO;
     
     [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];
     [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-100)];
@@ -108,30 +134,56 @@
     
     [searchViewContainer addSubview:timePickerButton];
     
+    
+    
+    
+    
     self.timePickerButton = timePickerButton;
     
     [self.view addSubview:searchViewContainer];
     
     self.searchView=searchViewContainer;
     
-    UISegmentedControl *stepControl=[[UISegmentedControl alloc] initWithItems:@[@"hour",@"day",@"week",@"month",@"year"]];
-    
+    UISegmentedControl *stepControl=[[UISegmentedControl alloc] initWithItems:@[]];
+    stepControl.translatesAutoresizingMaskIntoConstraints=NO;
     [searchViewContainer addSubview:stepControl];
+    
+    stepControl.tintColor=[UIColor grayColor];
+    UIFont *font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:14];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
+                                                           forKey:UITextAttributeFont];
+    [stepControl setTitleTextAttributes:attributes
+                           forState:UIControlStateNormal];
     self.stepControl=stepControl;
     [self.stepControl addTarget:self action:@selector(stepChanged:) forControlEvents:UIControlEventValueChanged];
-   // REMTimeRange *timeRange=self.tempModel.timeRangeArray[0];
-    //REMEnergyStep step = [self initStepButtonWithRange:timeRange WithStep:self.widgetInfo.contentSyntax.stepType];
+    
+    
+    
+    NSMutableArray *searchViewSubViewConstraints = [NSMutableArray array];
+    NSDictionary *searchViewSubViewDic = NSDictionaryOfVariableBindings(timePickerButton,stepControl);
+    NSDictionary *searchViewSubViewMetrics = @{@"margin":@(kWidgetDatePickerLeftMargin),@"buttonHeight":@(kWidgetDatePickerHeight),@"buttonWidth":@(kWidgetDatePickerWidth),@"top":@(kWidgetDatePickerTopMargin),@"stepHeight":@(kWidgetStepButtonHeight),@"stepMinWidth":@(kWidgetStepSingleButtonWidth),@"stepMaxWidth":@(kWidgetStepSingleButtonWidth*3)};
+    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[timePickerButton(buttonWidth)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[timePickerButton(buttonHeight)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+    
+    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[stepControl]-margin-|" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[stepControl(stepHeight)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+    
+    [searchViewContainer addConstraints:searchViewSubViewConstraints];
     
     
     
 }
 
 - (void)initChartView{
-    UIView *c=[[UIView alloc]initWithFrame:CGRectMake(0, self.searchView.frame.origin.y+self.searchView.frame.size.height, self.view.frame.size.width, kWidgetChartHeight+kWidgetChartLeftMargin)];
+    UIView *c=[[UIView alloc]initWithFrame:CGRectMake(0, REMDMCOMPATIOS7(0), self.view.frame.size.width, kDMScreenHeight-kDMStatusBarHeight)];
     [c setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
-    UIView *chartContainer=[[UIView alloc]initWithFrame:CGRectMake(kWidgetChartLeftMargin, 0, kWidgetChartWidth, kWidgetChartHeight)];
+    //UIView *chartContainer=[[UIView alloc]initWithFrame:CGRectMake(kWidgetChartLeftMargin, 0, kWidgetChartWidth, kWidgetChartHeight)];
+    [self.view insertSubview:c belowSubview:self.ownerController.titleContainer];
+    
+    UIView *chartContainer=[[UIView alloc]init];
+    chartContainer.translatesAutoresizingMaskIntoConstraints=NO;
     [chartContainer setBackgroundColor:[UIColor whiteColor]];
-    [self.view addSubview:c];
+    
     [c addSubview:chartContainer];
     self.chartContainer=chartContainer;
     self.maskerView=self.chartContainer;
@@ -139,9 +191,18 @@
     //self.chartContainer.layer.borderWidth=1;
     //[self showEnergyChart];
     
-    [self setDatePickerButtonValueNoSearchByTimeRange:self.tempModel.timeRangeArray[0] withRelative:self.tempModel.relativeDateComponent withRelativeType:self.tempModel.relativeDateType];
-    [self initStepButtonWithRange:self.tempModel.timeRangeArray[0] WithStep:self.tempModel.step];
-    [self setStepControlStatusByStepNoSearch:self.tempModel.step];
+    
+    NSMutableArray *chartConstraints = [NSMutableArray array];
+    UIView *searchView=self.searchView;
+    NSDictionary *dic = NSDictionaryOfVariableBindings(chartContainer,searchView);
+    NSDictionary *metrics = @{@"margin":@(kWidgetChartLeftMargin),@"height":@(kWidgetChartHeight),@"width":@(kWidgetChartWidth),@"top":@(0)};
+    [chartConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[chartContainer(width)]-margin-|" options:0 metrics:metrics views:dic]];
+    [chartConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchView]-top-[chartContainer]-margin-|" options:0 metrics:metrics views:dic]];
+    
+    
+    [self.view addConstraints:chartConstraints];
+
+    
 }
 
 - (void)timePickerPressDown{
@@ -321,8 +382,8 @@
         return;
     }
     
+    CGRect widgetRect = CGRectMake(0, 0, kWidgetChartWidth, kWidgetChartHeight);
     
-    CGRect widgetRect = self.chartContainer.bounds;
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
@@ -402,23 +463,26 @@
     }
     NSMutableArray *list=[[NSMutableArray alloc] initWithCapacity:3];
     NSMutableArray *titleList=[[NSMutableArray alloc] initWithCapacity:3];
-    
+    int defaultStepIndex;
     switch (i) {
         case 0:
             [list addObject:[NSNumber numberWithInt:1]];
             [titleList addObject: NSLocalizedString(@"Common_Hour", "")];//小时
+            defaultStepIndex=0;
             break;
         case 1:
             [list addObject:[NSNumber numberWithInt:1]];
             [list addObject:[NSNumber numberWithInt:2]];
             [titleList addObject:NSLocalizedString(@"Common_Hour", "")];//小时
             [titleList addObject:NSLocalizedString(@"Common_Day", "")];//天
+            defaultStepIndex=1;
             break;
         case 2:
             [list addObject:[NSNumber numberWithInt:2]];
             [list addObject:[NSNumber numberWithInt:5]];
             [titleList addObject:NSLocalizedString(@"Common_Day", "")];//天
             [titleList addObject:NSLocalizedString(@"Common_Week", "")];//周
+            defaultStepIndex=0;
             break;
         case 3:
             [list addObject:[NSNumber numberWithInt:2]];
@@ -427,22 +491,26 @@
             [titleList addObject:NSLocalizedString(@"Common_Day", "")];//天
             [titleList addObject:NSLocalizedString(@"Common_Week", "")];//周
             [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
+            defaultStepIndex=2;
             break;
         case 4:
             [list addObject:[NSNumber numberWithInt:3]];
             [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
+            defaultStepIndex=0;
             break;
         case 5:
             [list addObject:[NSNumber numberWithInt:3]];
             [list addObject:[NSNumber numberWithInt:4]];
             [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
             [titleList addObject:NSLocalizedString(@"Common_Year", "")];//年
+            defaultStepIndex=0;
             break;
         case 6:
             [list addObject:[NSNumber numberWithInt:3]];
             [list addObject:[NSNumber numberWithInt:4]];
             [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
             [titleList addObject:NSLocalizedString(@"Common_Year", "")];//年
+            defaultStepIndex=0;
         default:
             break;
     }
@@ -451,25 +519,28 @@
     self.currentStepList=list;
     [self.stepControl removeAllSegments];
     
-    UISegmentedControl *control= [[UISegmentedControl alloc] initWithItems:titleList];
+    for (int i=0; i<titleList.count; ++i) {
+        [self.stepControl insertSegmentWithTitle:titleList[i] atIndex:i animated:NO];
+        [self.stepControl setWidth:kWidgetStepSingleButtonWidth forSegmentAtIndex:i];
+    }
+    //[self.searchView updateConstraints];
+    //[self.stepControl updateConstraints];
+    //UISegmentedControl *control= [[UISegmentedControl alloc] initWithItems:titleList];
     //[control setSegmentedControlStyle:UISegmentedControlStyleBezeled];
-    CGFloat x=kDMScreenWidth-kWidgetChartLeftMargin*2-list.count*kWidgetStepSingleButtonWidth;
+    //CGFloat x=kDMScreenWidth-kWidgetChartLeftMargin*2-list.count*kWidgetStepSingleButtonWidth;
     
-    CGRect frame= CGRectMake(x, self.timePickerButton.frame.origin.y, list.count*kWidgetStepSingleButtonWidth, kWidgetStepButtonHeight);
-    control.tintColor=[UIColor grayColor];
-    UIFont *font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:14];
-    NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
-                                                           forKey:UITextAttributeFont];
-    [control setTitleTextAttributes:attributes
-                                    forState:UIControlStateNormal];
+    //CGRect frame= CGRectMake(x, self.timePickerButton.frame.origin.y, list.count*kWidgetStepSingleButtonWidth, kWidgetStepButtonHeight);
+    
+    //control.tintColor=[UIColor grayColor];
     
     
     
-    [control setFrame:frame];
-    [self.stepControl removeFromSuperview];
-    [self.searchView addSubview:control];
-    self.stepControl=control;
-    [self.stepControl addTarget:self action:@selector(stepChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    //[control setFrame:frame];
+    //[self.stepControl removeFromSuperview];
+    //[self.searchView addSubview:control];
+    //self.stepControl=control;
+    //[self.stepControl addTarget:self action:@selector(stepChanged:) forControlEvents:UIControlEventValueChanged];
     NSNumber *newStep = [NSNumber numberWithInt:((int)step)];
     NSUInteger idx;
     if([list containsObject:newStep] == YES)
@@ -478,8 +549,8 @@
     }
     else
     {
-        newStep = list[0];
-        idx =  0;
+        newStep = list[defaultStepIndex];
+        idx =  defaultStepIndex;
     }
     
     [self.stepControl setSelectedSegmentIndex:idx];
