@@ -390,7 +390,7 @@
     REMAbstractChartWrapper  *widgetWrapper;
     if (widgetType == REMDiagramTypeLine) {
 //        widgetWrapper = [[DChartLineChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        ((DTrendChartWrapper*)widgetWrapper).delegate = self;
+//        ((DTrendChartWrapper*)widgetWrapper).delegate = self;
         widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         REMTrendChartView *trendChart= (REMTrendChartView *)widgetWrapper.view;
         trendChart.delegate = self;
@@ -398,7 +398,7 @@
         
     } else if (widgetType == REMDiagramTypeColumn) {
 //        widgetWrapper = [[DChartColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        ((DTrendChartWrapper*)widgetWrapper).delegate = self;
+//        ((DTrendChartWrapper*)widgetWrapper).delegate = self;
         widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypePie) {
