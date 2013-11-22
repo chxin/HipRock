@@ -106,20 +106,22 @@
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
     NSMutableArray* pointsToDraw = [[NSMutableArray alloc]init];
-    NSUInteger i = 0;
     for (DCLineSeries* s in self.series) {
+        if (s.hidden) continue;
         NSMutableArray* seriesPoints = [[NSMutableArray alloc]init];
+        NSUInteger i = 0;
         for (int j = start; j<=end; j++) {
             if (s.symbolType == DCLineSymbolTypeNone || s.symbolSize == 0) continue;
             if (j >= s.datas.count) continue;
-            if (![self.visableSeries containsObject:s]) continue;
             
             DCDataPoint* key = s.datas[j];
             CGRect toFrame = CGRectMake(self.frame.size.width*(j-self.graphContext.hRange.location)/self.graphContext.hRange.length-s.symbolSize/2, self.frame.size.height-[self getHeightOfPoint:key]-s.symbolSize/2, s.symbolSize, s.symbolSize);
             BOOL isRectVisable = [DCUtility isFrame:toFrame visableIn:self.bounds] && (key.value != nil) && ![key.value isEqual:[NSNull null]];
             if (isRectVisable) {
                 CGPoint location = CGPointMake(toFrame.origin.x+toFrame.size.width/2, toFrame.origin.y+toFrame.size.height/2);
-                [seriesPoints addObject:@{ @"dcpoint": s.datas[j], @"location": [NSValue valueWithCGPoint:location] }];
+                CGFloat symbolScale = 1;
+                if (j == self.focusX) symbolScale = kDCFocusPointSymbolMagnify;
+                [seriesPoints addObject:@{ @"dcpoint": s.datas[j], @"location": [NSValue valueWithCGPoint:location], @"symbolScale":@(symbolScale) }];
             }
         }
         [pointsToDraw addObject:seriesPoints];
@@ -199,6 +201,20 @@
     } else {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(lazyRenderSymbol) userInfo:nil repeats:NO];
         [self.timer setFireDate:[NSDate dateWithTimeIntervalSinceNow:.5]];
+    }
+}
+
+-(void)focusOnX:(int)x {
+    if (self.focusX != x) {
+        [super focusOnX:x];
+        [self renderSymbols];
+    }
+}
+
+-(void)defocus {
+    if (self.focusX != INT32_MIN) {
+        [super defocus];
+        [self renderSymbols];
     }
 }
 @end

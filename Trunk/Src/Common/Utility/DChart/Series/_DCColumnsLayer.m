@@ -8,6 +8,7 @@
 
 #import "_DCColumnsLayer.h"
 #import "DCUtility.h"
+#import "REMColor.h"
 
 @interface _DCColumnsLayer()
 @property (nonatomic, strong) _DCLayerTrashbox* trashbox;
@@ -33,7 +34,14 @@
     
     BOOL caTransationState = CATransaction.disableActions;
     [CATransaction setDisableActions:YES];
-    if (self.visableSeries.count == 0) {
+    BOOL allSeriesAreHidden = YES;
+    for (DCXYSeries* s in self.series) {
+        if (!s.hidden) {
+            allSeriesAreHidden = NO;
+            break;
+        }
+    }
+    if (allSeriesAreHidden) {
         for (DCDataPoint* key in self.trashbox.xToLayerDic.allKeys) {
             [self.trashbox moveLayerToTrashBox:self.trashbox.xToLayerDic[key]];
         }
@@ -49,8 +57,8 @@
         for (int j = start; j<=end; j++) {
             double stackedHeight = 0;
             for (DCColumnSeries* s in self.series) {
+                if (s.hidden) continue;
                 if (j >= s.datas.count) continue;
-                if (![self.visableSeries containsObject:s]) continue;
                 DCDataPoint* key = s.datas[j];
                 
                 CALayer* column = self.trashbox.xToLayerDic[key];
@@ -61,7 +69,11 @@
                     column = [[CALayer alloc]init];
                     column.frame = CGRectMake(toFrame.origin.x, self.frame.size.height, toFrame.size.width, toFrame.size.height);
                     [self addSublayer:column];
-                    column.backgroundColor = s.color.CGColor;
+                    if (self.focusX == INT32_MIN || j == self.focusX) {
+                        column.backgroundColor = s.color.CGColor;
+                    } else {
+                        column.backgroundColor = [REMColor makeTransparent:kDCFocusPointAlpha withColor:s.color].CGColor;
+                    }
                     [xDics setObject:column forKey:key];
                     if (self.enableGrowAnimation) {
                         CAAnimationGroup* g = [CAAnimationGroup animation];
@@ -81,6 +93,11 @@
                 } else if (column != nil && isRectVisable) {
                     column.frame = toFrame;
                     [xDics setObject:column forKey:key];
+                    if (self.focusX == INT32_MIN || j == self.focusX) {
+                        column.backgroundColor = s.color.CGColor;
+                    } else {
+                        column.backgroundColor = [REMColor makeTransparent:kDCFocusPointAlpha withColor:s.color].CGColor;
+                    }
                 } else {
                     [self.trashbox moveLayerToTrashBox:column];
                     [column removeFromSuperlayer];
@@ -132,5 +149,19 @@
     if ([DCRange isRange:self.xRange equalTo:newRange]) return;
     [super didHRangeChanged:oldRange newRange:newRange];
     [self redraw];
+}
+
+-(void)focusOnX:(int)x {
+    if (self.focusX != x) {
+        [super focusOnX:x];
+        [self redraw];
+    }
+}
+
+-(void)defocus {
+    if (self.focusX != INT32_MIN) {
+        [super defocus];
+        [self redraw];
+    }
 }
 @end

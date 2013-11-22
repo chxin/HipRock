@@ -15,7 +15,10 @@
 #import "REMColor.h"
 #import "REMChartStyle.h"
 
-@protocol REMTrendChartDelegate <NSObject>
+@protocol REMChartDelegate <NSObject>
+@end
+
+@protocol REMTrendChartDelegate <REMChartDelegate>
 /*
  * points: List<REMEnergyData>
  * colors: List<UIColor>
@@ -36,7 +39,7 @@ typedef enum _REMDirection{
     REMDirectionRight = 1
 }REMDirection;
 
-@protocol REMTPieChartDelegate <NSObject>
+@protocol REMTPieChartDelegate <REMChartDelegate>
 /*
  * points: List<REMEnergyData>
  * colors: List<UIColor>

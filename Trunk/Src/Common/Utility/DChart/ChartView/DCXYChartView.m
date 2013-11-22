@@ -54,7 +54,8 @@
 @property (nonatomic, strong) NSTimer* timer;
 @property (nonatomic, strong) NSFormatter* xLabelFormatter;
 
-//@property (nonatomic, strong) DCSeriesLayer* seriesLayer;
+@property (nonatomic, strong) UITapGestureRecognizer* tapGsRec;
+@property (nonatomic, strong) UIPanGestureRecognizer* panGsRec;
 
 @end
 
@@ -67,7 +68,7 @@
         self.symbolLayers = [[NSMutableArray alloc]init];
         self.graphContext = [[DCContext alloc]initWithStacked:stacked];
         self.graphContext.hGridlineAmount = 0;
-        self.multipleTouchEnabled = YES;
+//        self.multipleTouchEnabled = YES;
         _beginHRange = beginHRange;
     }
     return self;
@@ -159,6 +160,8 @@
     [self updateSymbolFrameSize];
     
     self.graphContext.hRange = self.beginHRange;
+    
+    [self updateGestures];
     
     [super willMoveToSuperview: newSuperview];
 }
@@ -293,43 +296,18 @@
     [self._hGridlineLayer setNeedsDisplay];
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self setLineSymbolsHidden:YES];
-    if (self.timer.isValid) {
-        [self.timer invalidate];
-    }
-}
-
 -(void)setLineSymbolsHidden:(BOOL)symbolsAreHidden {
     if (self.lineLayer0) [self.lineLayer0 setSymbolsHidden:symbolsAreHidden];
     if (self.lineLayer1) [self.lineLayer1 setSymbolsHidden:symbolsAreHidden];
     if (self.lineLayer2) [self.lineLayer2 setSymbolsHidden:symbolsAreHidden];
 }
 
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    if ([event touchesForView:self].count != 1) return;
-    [self setLineSymbolsHidden:YES];
-    UITouch* touch = [touches anyObject];
-    CGPoint currentPoint = [touch locationInView:self];
-    CGPoint previous = [touch previousLocationInView:self];
-    self.graphContext.hRange = [[DCRange alloc]initWithLocation:(previous.x - currentPoint.x)*self.graphContext.hRange.length/self.plotRect.size.width+self.graphContext.hRange.location length:self.graphContext.hRange.length];
-}
-
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (self.graphContext.hRange.location < self.graphContext.globalHRange.location) {
-        [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.location];
-    } else if (self.graphContext.hRange.length+self.graphContext.hRange.location>self.graphContext.globalHRange.location+self.graphContext.globalHRange.length) {
-        [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.length+self.graphContext.globalHRange.location-self.graphContext.hRange.length];
-    } else {
-        [self setLineSymbolsHidden:NO];
-    }
-}
 -(void)animateHRangeLocation {
     if (self.timer.isValid) {
-        double step =  [self.timer.userInfo[@"step"] doubleValue];
+        double hRangeAnimationStep =  [self.timer.userInfo[@"hRangeAnimationStep"] doubleValue];
         double to =  [self.timer.userInfo[@"to"] doubleValue];
         double from =  [self.timer.userInfo[@"from"] doubleValue];
-        double newLocation = self.graphContext.hRange.location + step;
+        double newLocation = self.graphContext.hRange.location + hRangeAnimationStep;
         if ((newLocation >= to && from < to) || (newLocation <= to && from > to)){
             newLocation = to;
             [self.timer invalidate];
@@ -342,8 +320,8 @@
 -(void)animateHRangeLocationFrom:(double)from to:(double)to {
     if (from == to) return;
     double frames = kDCAnimationDuration * kDCFramesPerSecord;
-    NSNumber* step = @((to - from)/frames);
-    NSDictionary* hRangeUserInfo = @{@"step":step, @"from":@(from), @"to":@(to)};
+    NSNumber* hRangeAnimationStep = @((to - from)/frames);
+    NSDictionary* hRangeUserInfo = @{@"hRangeAnimationStep":hRangeAnimationStep, @"from":@(from), @"to":@(to)};
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animateHRangeLocation) userInfo:hRangeUserInfo repeats:YES];
     [self.timer fire];
 }
@@ -384,18 +362,120 @@
 }
 
 
-- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden {
-    if (series.yAxis == self.yAxis0) [self.columnLayer0 setSeries:series hidden:hidden];
-    if (series.yAxis == self.yAxis1) [self.columnLayer1 setSeries:series hidden:hidden];
-    if (series.yAxis == self.yAxis2) [self.columnLayer2 setSeries:series hidden:hidden];
-    if (hidden) {
-        
-    }
-}
+//- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden {
+//    if (series.yAxis == self.yAxis0) [self.columnLayer0 setSeries:series hidden:hidden];
+//    if (series.yAxis == self.yAxis1) [self.columnLayer1 setSeries:series hidden:hidden];
+//    if (series.yAxis == self.yAxis2) [self.columnLayer2 setSeries:series hidden:hidden];
+//    if (hidden) {
+//        
+//    }
+//}
 -(void)setXLabelFormatter:(NSFormatter*)formatter {
     if (self._xLabelLayer) {
         self._xLabelLayer.labelFormatter = formatter;
     }
     _xLabelFormatter = formatter;
 }
+
+-(void)viewTapped:(UITapGestureRecognizer *)gesture {
+    CGPoint touchPoint = [gesture locationInView:self];
+    if (CGRectContainsPoint(self.plotRect, touchPoint)) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(touchedInPlotAt:xCoordinate:)]) {
+            [self.delegate touchedInPlotAt:touchPoint xCoordinate:[self getXLocationForPoint:touchPoint]];
+        }
+//        [self setLineSymbolsHidden:YES];
+        if (self.timer.isValid) {
+            [self.timer invalidate];
+        }
+    }
+}
+
+-(double)getXLocationForPoint:(CGPoint)point {
+    return self.graphContext.hRange.location+self.graphContext.hRange.length*(point.x-self.plotRect.origin.x)/self.plotRect.size.width;
+}
+
+-(void)viewPanned:(UIPanGestureRecognizer*)gesture {
+    CGPoint touchPoint = [gesture locationInView:self];
+//    if (CGRectContainsPoint(self.plotRect, touchPoint)) {
+        BOOL moveEnabled = YES;
+        CGPoint translation = [gesture translationInView:self];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(panInPlotAt:translation:)]) {
+            moveEnabled = [self.delegate panInPlotAt:touchPoint translation:translation];
+        }
+        if (moveEnabled) {
+            if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed) {
+                DCRange* stopRange = nil;
+                if (self.graphContext.hRange.location < self.graphContext.globalHRange.location) {
+//                    stopRange = [DCRange alloc]initWithLocation:<#(double)#> length:<#(double)#>;
+                    [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.location];
+                } else if (self.graphContext.hRange.length+self.graphContext.hRange.location>self.graphContext.globalHRange.location+self.graphContext.globalHRange.length) {
+                    stopRange = self.graphContext.hRange;
+                    [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.length+self.graphContext.globalHRange.location-self.graphContext.hRange.length];
+                } else {
+                    stopRange = self.graphContext.hRange;
+                    [self setLineSymbolsHidden:NO];
+                }
+                if (self.delegate && [self.delegate respondsToSelector:@selector(panStoppedAtRange:)]) {
+                    [self.delegate panStoppedAtRange:stopRange];
+                }
+            } else {
+                [self setLineSymbolsHidden:YES];
+                self.graphContext.hRange = [[DCRange alloc]initWithLocation:-translation.x*self.graphContext.hRange.length/self.plotRect.size.width+self.graphContext.hRange.location length:self.graphContext.hRange.length];
+            }
+        }
+        [gesture setTranslation:CGPointMake(0, 0) inView:self];
+//        NSLog(@"Pan gesture state:%d", gesture.state);
+//    }
+}
+
+-(void)setUserInteractionEnabled:(BOOL)userInteractionEnabled {
+    if(self.userInteractionEnabled == userInteractionEnabled) return;
+    [super setUserInteractionEnabled:userInteractionEnabled];
+    [self updateGestures];
+}
+
+-(void)updateGestures {
+    if (self.userInteractionEnabled) {
+        if (REMIsNilOrNull(self.tapGsRec)) {
+            self.tapGsRec = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewTapped:)];
+            self.panGsRec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(viewPanned:)];
+            [self addGestureRecognizer:self.tapGsRec];
+            [self addGestureRecognizer:self.panGsRec];
+        }
+    } else {
+        if (!REMIsNilOrNull(self.tapGsRec)) {
+            [self removeGestureRecognizer:self.tapGsRec];
+            self.tapGsRec = nil;
+            [self removeGestureRecognizer:self.panGsRec];
+            self.panGsRec = nil;
+        }
+    }
+}
+
+-(void)focusAroundX:(double)x {
+    DCRange* globalRange = self.graphContext.globalHRange;
+    if (x < globalRange.location) x = floor(globalRange.location);
+    if (x > globalRange.length+globalRange.length) x = ceil(globalRange.length+globalRange.location);
+    
+    int xRounded = floor(x+0.5);
+//    while (![self hasPointsAtX:xRounded]) {
+//        
+//    }
+    
+    if (self.columnLayer0) [self.columnLayer0 focusOnX:xRounded];
+    if (self.columnLayer1) [self.columnLayer1 focusOnX:xRounded];
+    if (self.columnLayer2) [self.columnLayer2 focusOnX:xRounded];
+    if (self.lineLayer0) [self.lineLayer0 focusOnX:xRounded];
+    if (self.lineLayer1) [self.lineLayer1 focusOnX:xRounded];
+    if (self.lineLayer2) [self.lineLayer2 focusOnX:xRounded];
+}
+
+// 检查在X上是否有pointType == DCDataPointTypeNormal的数据点
+//-(BOOL)hasPointsAtX:(int)x {
+//    for (DCXYSeries* s in self.seriesList) {
+//        if (s.hidden) continue;
+//        if (((DCDataPoint*)s.datas[x]).pointType == DCDataPointTypeNormal) return YES;
+//    }
+//    return NO;
+//}
 @end

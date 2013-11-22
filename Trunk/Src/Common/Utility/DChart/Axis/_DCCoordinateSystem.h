@@ -15,7 +15,7 @@
 @property (nonatomic, weak, readonly) DCAxis* xAxis;
 @property (nonatomic, weak, readonly) DCAxis* yAxis;
 @property (nonatomic, strong, readonly) NSArray* seriesList;
-@property (nonatomic, strong, readonly) NSArray* hiddenSeriesList;
+//@property (nonatomic, strong, readonly) NSArray* hiddenSeriesList;
 @property (nonatomic, weak) DCContext* graphContext;
 @property (nonatomic, assign, readonly) NSUInteger index;
 

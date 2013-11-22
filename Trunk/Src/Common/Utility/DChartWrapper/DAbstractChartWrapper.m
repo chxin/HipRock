@@ -10,4 +10,8 @@
 
 @implementation DAbstractChartWrapper
 
+-(void)cancelToolTipStatus {
+    
+}
+
 @end

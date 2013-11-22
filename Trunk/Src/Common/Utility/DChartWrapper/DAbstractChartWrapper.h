@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "REMChartHeader.h"
 
 @interface DAbstractChartWrapper : NSObject
+
+@property (nonatomic, weak) id<REMChartDelegate> delegate;
+-(void)cancelToolTipStatus;
 
 @end

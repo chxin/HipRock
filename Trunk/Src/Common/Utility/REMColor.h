@@ -17,5 +17,6 @@
 + (UIColor *)colorByHexString:(NSString *)hexString alpha:(CGFloat)alpha;
 
 + (CPTColor *)colorByIndex:(uint)index;
-
+// 修改一个UIColor的alpha值
++(UIColor*)makeTransparent:(CGFloat)alpha withColor:(UIColor*)color;
 @end

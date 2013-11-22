@@ -389,16 +389,18 @@
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
     REMAbstractChartWrapper  *widgetWrapper;
     if (widgetType == REMDiagramTypeLine) {
-//        widgetWrapper = [[DChartLineChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        REMTrendChartView *trendChart= (REMTrendChartView *)widgetWrapper.view;
-        trendChart.delegate = self;
+        widgetWrapper = [[DChartLineChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        ((DTrendChartWrapper*)widgetWrapper).delegate = self;
+//        widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+//        REMTrendChartView *trendChart= (REMTrendChartView *)widgetWrapper.view;
+//        trendChart.delegate = self;
         
         
     } else if (widgetType == REMDiagramTypeColumn) {
-//        widgetWrapper = [[DChartColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
+        widgetWrapper = [[DChartColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        ((DTrendChartWrapper*)widgetWrapper).delegate = self;
+//        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+//        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypePie) {
         widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         ((REMPieChartView *)widgetWrapper.view).delegate = self;

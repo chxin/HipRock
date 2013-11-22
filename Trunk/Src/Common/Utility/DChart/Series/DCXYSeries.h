@@ -18,5 +18,6 @@
 @property (nonatomic, weak) DCAxis* xAxis;
 @property (nonatomic, weak) DCAxis* yAxis;
 
+@property (nonatomic, assign)BOOL hidden;
 
 @end
