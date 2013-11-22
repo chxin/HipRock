@@ -149,7 +149,7 @@ static int requestTimeout = 45; //(s)
     
     void (^onFailure)(AFHTTPRequestOperation *operation, NSError *errorInfo) = ^(AFHTTPRequestOperation *operation, NSError *errorInfo)
     {
-        REMLogError(@"Communication error: %@\nServer response: %@", [error description], operation.responseString);
+        REMLogError(@"Communication error: %@\nUrl: %@\nServer response: %@", [error description], [operation.request.URL description], operation.responseString);
         
         if(errorInfo.code == -1001){
             [REMAlertHelper alert:@"数据加载超时"];
@@ -371,6 +371,7 @@ static int requestTimeout = 45; //(s)
             if(kREMLogResquest == 1 && jsonString.length > shortJsonStringLength){
                 jsonString = [NSString stringWithFormat:@"%@..",[jsonString substringToIndex:shortJsonStringLength]];
             }
+            NSLog(@"REM-RESPONSE url: %@", service.url);
             NSLog(@"REM-RESPONSE json: %@", jsonString);
         }
         else
