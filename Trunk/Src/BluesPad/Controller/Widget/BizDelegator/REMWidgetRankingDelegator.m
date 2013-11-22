@@ -35,7 +35,7 @@
     UIActivityIndicatorView *loader=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [loader setColor:[UIColor grayColor]];
     [loader setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.8]];
-    
+    loader.translatesAutoresizingMaskIntoConstraints=NO;
     self.searcher.loadingView=loader;
     REMWidgetRankingSearchModel *m=(REMWidgetRankingSearchModel *)self.model;
     m.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
@@ -43,7 +43,11 @@
 
 
 - (void)initSearchView{
-    UIView *searchViewContainer=[[UIView alloc]initWithFrame:kDMChart_ToolbarFrame];
+    
+    UIView *searchViewContainer=[[UIView alloc]initWithFrame:CGRectMake(0,self.ownerController.titleContainer.frame.origin.y+self.ownerController.titleContainer.frame.size.height,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)];
+    //searchViewContainer.translatesAutoresizingMaskIntoConstraints=NO;
+    
+    [searchViewContainer setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
     
     UIButton *timePickerButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     [timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, 0, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
