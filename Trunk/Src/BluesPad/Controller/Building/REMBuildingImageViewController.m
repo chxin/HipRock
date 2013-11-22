@@ -270,7 +270,7 @@
     titleLabel.shadowOffset=CGSizeMake(1, 1);
     
     titleLabel.backgroundColor=[UIColor clearColor];
-    titleLabel.font = [UIFont fontWithName:@(kBuildingFontLight) size:titleSize];
+    titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:titleSize];
     
     titleLabel.textAlignment=NSTextAlignmentCenter;
     titleLabel.textColor=[UIColor whiteColor];
