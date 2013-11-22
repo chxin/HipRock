@@ -16,7 +16,7 @@
 #import "REMTrendChartTooltipView.h"
 
 const static CGFloat kLegendSearchSwitcherTop=16;
-const static CGFloat kLegendSearchSwitcherLeft=758;
+const static CGFloat kLegendSearchSwitcherLeft=790;
 const static CGFloat kLegendSearchSwitcherHeight=30;
 const static CGFloat kLegendSearchSwitcherWidth=102*2;
 const static CGFloat kWidgetDatePickerLeftMargin=25;

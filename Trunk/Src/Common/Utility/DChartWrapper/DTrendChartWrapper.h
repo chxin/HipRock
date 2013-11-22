@@ -22,5 +22,6 @@
 @property (nonatomic, readonly) NSString* defaultSeriesClass;
 @property (nonatomic, readonly, weak) REMEnergyViewData* energyViewData;
 -(DTrendChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style;
--(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index;
+-(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style;
+-(void)updateProcessorRangesFormatter:(NSString*)xtype step:(REMEnergyStep)step;
 @end

@@ -213,7 +213,8 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     if(dashboardInfo.shareInfo!=nil && [dashboardInfo.shareInfo isEqual:[NSNull null]]== NO && [dashboardInfo.shareInfo.userRealName isEqual:[NSNull null]]==NO){
         shareFrame = CGRectMake(0, 0, frame.size.width, kDashboardShareSize);
         UILabel *shareLabel=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x, shareFrame.origin.y, frame.size.width, shareFrame.size.height)];
-        shareLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.8];
+        //shareLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.8];
+        shareLabel.textColor=[UIColor whiteColor];
         shareLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardShareSize];
         [shareLabel setBackgroundColor:[UIColor clearColor]];
         NSString *shareName=dashboardInfo.shareInfo.userRealName;
@@ -234,7 +235,8 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     title.text=dashboardInfo.name;
     title.backgroundColor=[UIColor clearColor];
     title.textColor=[UIColor whiteColor];
-    title.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardTitleSize];
+    //title.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardTitleSize];
+    title.font=[UIFont fontWithName:@(kBuildingFontSC) size:kDashboardTitleSize];
     [cell.contentView addSubview:title];
     
     return CGRectMake(0, title.frame.origin.y+title.frame.size.height+kDashboardTitleBottomMargin, frame.size.width, cell.contentView.frame.size.height-(title.frame.origin.y+title.frame.size.height+kDashboardTitleBottomMargin+1));

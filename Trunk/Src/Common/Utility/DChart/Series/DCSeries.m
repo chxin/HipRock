@@ -7,6 +7,7 @@
 //
 
 #import "DCSeries.h"
+#import "DCDataPoint.h"
 
 @implementation DCSeries
 
@@ -14,6 +15,9 @@
     self = [super init];
     if (self) {
         _datas = seriesData;
+        for (DCDataPoint* p in self.datas) {
+            p.series = self;
+        }
     }
     return self;
 }

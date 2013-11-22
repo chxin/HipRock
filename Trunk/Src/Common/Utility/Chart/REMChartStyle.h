@@ -21,6 +21,7 @@
 @property (nonatomic, strong) CPTTextStyle* yTextStyle;
 @property (nonatomic, strong) CPTLineStyle* yGridlineStyle;
 @property (nonatomic, assign) NSUInteger horizentalGridLineAmount;
+@property (nonatomic, assign) NSUInteger symbolSize;
 
 
 +(REMChartStyle*)getMaximizedStyle;

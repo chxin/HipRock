@@ -12,6 +12,7 @@
 @property (nonatomic, assign) double rotationAngle;
 @property (nonatomic, assign) NSUInteger focusPointIndex;
 @property (nonatomic, assign) BOOL isFocusStatus;
+@property (nonatomic, assign) REMDirection rotateDirection;
 @end
 
 @implementation REMPieChartView
@@ -19,6 +20,7 @@
 -(REMPieChartView*)initWithFrame:(CGRect)frame chartConfig:(REMChartConfig*)config  {
     self = [super initWithFrame:frame];
     if (self) {
+        self.rotateDirection = REMDirectionNone;
         _series = config.series;
         self.rotationAngle = 0;
         _focusPointIndex = 0;
@@ -79,6 +81,8 @@
         UITouch* theTouch = [touches anyObject];
         CGPoint previousPoint = [theTouch previousLocationInView:self];
         CGPoint thePoint = [theTouch locationInView:self];
+        if (thePoint.x > previousPoint.x) self.rotateDirection = REMDirectionRight;
+        else self.rotateDirection = REMDirectionLeft;
         double rotation =(atan((previousPoint.x-self.center.x)/(previousPoint.y-self.center.y))-atan((thePoint.x-self.center.x)/(thePoint.y-self.center.y)));
 
         self.rotationAngle += rotation;
@@ -88,6 +92,7 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     if (self.isFocusStatus) {
+        self.rotateDirection = REMDirectionNone;
         [self alignSliceWithAnimation:YES];
     }
 }
@@ -162,10 +167,9 @@
 -(void)sendPointFocusEvent {
     NSUInteger focusPointIndex = self.focusPointIndex;
     REMPieChartSeries* series = self.series[0];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:color:name:)]) {
-//        [self.delegate highlightPoint:series.energyData[focusPointIndex] color:[series getColorByIndex:focusPointIndex].uiColor name:series.targetNames[focusPointIndex]];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:color:name:direction:)]) {
+        [self.delegate highlightPoint:series.energyData[focusPointIndex] color:[series getColorByIndex:focusPointIndex].uiColor name:series.targetNames[focusPointIndex] direction:self.rotateDirection];
     }
-    NSLog(@"%i %@", self.focusPointIndex, series.targetNames[focusPointIndex]);
 }
 
 -(void)cancelToolTipStatus {

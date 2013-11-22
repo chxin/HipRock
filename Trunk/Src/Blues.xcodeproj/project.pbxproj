@@ -594,6 +594,7 @@
 		B4EDFB1B180697F300873FA1 /* REMControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EDFB1A180697F300873FA1 /* REMControllerBase.m */; };
 		B4F11182183DA71E004D53F6 /* REMBuildingCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F11181183DA71E004D53F6 /* REMBuildingCommodityView.m */; };
 		B4F11188183DA7F4004D53F6 /* REMBuildingChartContainerView2.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F11186183DA7F4004D53F6 /* REMBuildingChartContainerView2.m */; };
+		B4F1118B183DDF44004D53F6 /* REMBuildingDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F1118A183DDF44004D53F6 /* REMBuildingDataView.m */; };
 		B4F3F601181E081800C8DF7F /* REMMaxWidgetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F3F600181E081800C8DF7F /* REMMaxWidgetSegue.m */; };
 		B4F4B99E17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
 		B4F4B99F17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
@@ -611,6 +612,8 @@
 		EF0346B9183B979800DE186A /* DChartLineChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B8183B979800DE186A /* DChartLineChartWrapper.m */; };
 		EF1C5AD4183DB3A2002A9AAD /* DAbstractChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD3183DB3A2002A9AAD /* DAbstractChartWrapper.m */; };
 		EF1C5AD7183DB3CB002A9AAD /* DTrendChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD6183DB3CB002A9AAD /* DTrendChartWrapper.m */; };
+		EF1C5ADA183E00C9002A9AAD /* _DCXLabelFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD9183E00C9002A9AAD /* _DCXLabelFormatter.m */; };
+		EF1C5ADD183E23DA002A9AAD /* _DCLineSymbolsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5ADC183E23DA002A9AAD /* _DCLineSymbolsLayer.m */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 		EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */; };
@@ -1363,6 +1366,8 @@
 		B4F11181183DA71E004D53F6 /* REMBuildingCommodityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingCommodityView.m; path = View/Building/REMBuildingCommodityView.m; sourceTree = "<group>"; };
 		B4F11186183DA7F4004D53F6 /* REMBuildingChartContainerView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingChartContainerView2.m; sourceTree = "<group>"; };
 		B4F11187183DA7F4004D53F6 /* REMBuildingChartContainerView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartContainerView2.h; sourceTree = "<group>"; };
+		B4F11189183DDF44004D53F6 /* REMBuildingDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingDataView.h; path = View/Building/REMBuildingDataView.h; sourceTree = "<group>"; };
+		B4F1118A183DDF44004D53F6 /* REMBuildingDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingDataView.m; path = View/Building/REMBuildingDataView.m; sourceTree = "<group>"; };
 		B4F3F5FF181E081800C8DF7F /* REMMaxWidgetSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMaxWidgetSegue.h; path = Resource/Segue/REMMaxWidgetSegue.h; sourceTree = "<group>"; };
 		B4F3F600181E081800C8DF7F /* REMMaxWidgetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMaxWidgetSegue.m; path = Resource/Segue/REMMaxWidgetSegue.m; sourceTree = "<group>"; };
 		B4F4B99C17F16F590096034D /* REMShareInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMShareInfo.h; sourceTree = "<group>"; };
@@ -1393,6 +1398,10 @@
 		EF1C5AD3183DB3A2002A9AAD /* DAbstractChartWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DAbstractChartWrapper.m; path = Common/Utility/DChartWrapper/DAbstractChartWrapper.m; sourceTree = "<group>"; };
 		EF1C5AD5183DB3CB002A9AAD /* DTrendChartWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTrendChartWrapper.h; path = Common/Utility/DChartWrapper/DTrendChartWrapper.h; sourceTree = "<group>"; };
 		EF1C5AD6183DB3CB002A9AAD /* DTrendChartWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTrendChartWrapper.m; path = Common/Utility/DChartWrapper/DTrendChartWrapper.m; sourceTree = "<group>"; };
+		EF1C5AD8183E00C9002A9AAD /* _DCXLabelFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCXLabelFormatter.h; sourceTree = "<group>"; };
+		EF1C5AD9183E00C9002A9AAD /* _DCXLabelFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCXLabelFormatter.m; sourceTree = "<group>"; };
+		EF1C5ADB183E23DA002A9AAD /* _DCLineSymbolsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCLineSymbolsLayer.h; sourceTree = "<group>"; };
+		EF1C5ADC183E23DA002A9AAD /* _DCLineSymbolsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCLineSymbolsLayer.m; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
@@ -2795,6 +2804,8 @@
 				B4F11181183DA71E004D53F6 /* REMBuildingCommodityView.m */,
 				B4F11187183DA7F4004D53F6 /* REMBuildingChartContainerView2.h */,
 				B4F11186183DA7F4004D53F6 /* REMBuildingChartContainerView2.m */,
+				B4F11189183DDF44004D53F6 /* REMBuildingDataView.h */,
+				B4F1118A183DDF44004D53F6 /* REMBuildingDataView.m */,
 			);
 			name = Building;
 			sourceTree = "<group>";
@@ -3089,6 +3100,8 @@
 				EFD946DB1839DCBB00E9EC50 /* _DCXAxisLabelLayer.m */,
 				EFD946DC1839DCBB00E9EC50 /* _DCYAxisLabelLayer.h */,
 				EFD946DD1839DCBB00E9EC50 /* _DCYAxisLabelLayer.m */,
+				EF1C5AD8183E00C9002A9AAD /* _DCXLabelFormatter.h */,
+				EF1C5AD9183E00C9002A9AAD /* _DCXLabelFormatter.m */,
 			);
 			path = LabelLayer;
 			sourceTree = "<group>";
@@ -3144,6 +3157,8 @@
 				EF0346B2183B520100DE186A /* _DCSeriesLayer.m */,
 				EF54C8E4183C8D2400A07557 /* _DCSymbolLayer.h */,
 				EF54C8E5183C8D2400A07557 /* _DCSymbolLayer.m */,
+				EF1C5ADB183E23DA002A9AAD /* _DCLineSymbolsLayer.h */,
+				EF1C5ADC183E23DA002A9AAD /* _DCLineSymbolsLayer.m */,
 			);
 			name = Series;
 			path = Common/Utility/DChart/Series;
@@ -3522,6 +3537,7 @@
 				B445AEA8177BEEB8002D2A59 /* DDTTYLogger.m in Sources */,
 				B445AEAA177BEEB8002D2A59 /* ContextFilterLogFormatter.m in Sources */,
 				EFD947021839DCBB00E9EC50 /* DCXYChartView.m in Sources */,
+				EF1C5ADA183E00C9002A9AAD /* _DCXLabelFormatter.m in Sources */,
 				B445AEAC177BEEB8002D2A59 /* DispatchQueueLogFormatter.m in Sources */,
 				B445AEB2177BFAE8002D2A59 /* REMLog.m in Sources */,
 				B420CE16183CB6CD000C7352 /* REMClientErrorInfo.m in Sources */,
@@ -3604,6 +3620,7 @@
 				7A153C6217AA489600413D3C /* REMEnergyData.m in Sources */,
 				7A153C6317AA489600413D3C /* REMEnergyError.m in Sources */,
 				B40879501830D0BA004042C1 /* REMBuildingAirQualityViewController.m in Sources */,
+				B4F1118B183DDF44004D53F6 /* REMBuildingDataView.m in Sources */,
 				7A153C6417AA489600413D3C /* REMEnergyTargetModel.m in Sources */,
 				7A153C6517AA489600413D3C /* REMEnergyViewData.m in Sources */,
 				7A153C6617AA489600413D3C /* REMTargetEnergyData.m in Sources */,
@@ -3696,6 +3713,7 @@
 				7A7B210E183CAB7600C14248 /* REMUnitLegendFormator.m in Sources */,
 				7A0288F317C20CC500709111 /* User.m in Sources */,
 				7A0288F417C20CC500709111 /* WeiboAccount.m in Sources */,
+				EF1C5ADD183E23DA002A9AAD /* _DCLineSymbolsLayer.m in Sources */,
 				7A0288F517C20CC500709111 /* WeiboAuthentication.m in Sources */,
 				EFD946FE1839DCBB00E9EC50 /* _DCCoordinateSystem.m in Sources */,
 				7A0288F817C20CC500709111 /* ImageResourceLoader.m in Sources */,

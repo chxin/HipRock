@@ -24,9 +24,10 @@
 //    return self;
 //}
 
--(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index {
+-(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style {
     if ([self.defaultSeriesClass isEqualToString:NSStringFromClass([series class])]) {
-        ((DCLineSeries*)series).symbol = index % 5;
+        ((DCLineSeries*)series).symbolType = index % 5;
+        ((DCLineSeries*)series).symbolSize = style.symbolSize;
     }
 }
 @end

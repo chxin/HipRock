@@ -75,7 +75,7 @@ const static CGFloat buildingGap=20;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.speedBase=2000;
+    self.speedBase=500;
 	self.customImageLoadedDictionary = [[NSMutableDictionary alloc]initWithCapacity:self.buildingInfoArray.count];
     self.view.backgroundColor=[UIColor blackColor];
     [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
@@ -113,7 +113,7 @@ const static CGFloat buildingGap=20;
 {
     if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] ==YES ){
         if(self.childViewControllers.count<1)return YES;
-        NSLog(@"touch:%@",touch.view);
+        //NSLog(@"touch:%@",touch.view);
         if( [touch.view isKindOfClass:[CPTGraphHostingView class]] == YES) return NO;
         return YES;
     }
@@ -257,8 +257,9 @@ const static CGFloat buildingGap=20;
                                     }];
             }
             else{
-                self.delta=M_PI_4/128.0f;
-                self.speed=self.speedBase*sign*self.delta;
+                self.delta=M_PI_4;
+                self.speedBase=300;
+                self.speed=self.speedBase*sign*sin(self.delta);
                 
                 NSTimer *timer = [NSTimer timerWithTimeInterval:0.01 target:self selector:@selector(switchCoverPage:) userInfo:nil repeats:YES];
                 self.timer=timer;
@@ -327,11 +328,24 @@ const static CGFloat buildingGap=20;
     
     CGFloat sign=self.speed<0?-1:1;
     CGFloat distance=self.speed;
-    NSLog(@"speed:%f,delta:%f",self.speed,self.delta);
-    self.delta+=M_PI_4/128.0f;
-    if(self.delta>M_PI)self.delta=M_PI;
-    
-    self.speed=self.speedBase*sin(self.delta)*sign;
+    //NSLog(@"speed:%f,delta:%f",self.speed,self.delta);
+    CGFloat d=M_PI_4;
+    if(self.delta>=M_PI_2){
+        d/=4;
+        if(self.speedBase>100){
+            self.speedBase/=5;
+        }
+    }
+    CGFloat m= self.delta+d;
+
+    if(m>(M_PI*7/8)){
+        m=M_PI/8;
+    }
+    else{
+        self.delta=m;
+    }
+    //self.speedBase=ABS(self.speed);
+    self.speed=self.speedBase*sin(m)*sign;
     
     for(int i=0;i<self.childViewControllers.count;++i)
     {
@@ -345,6 +359,7 @@ const static CGFloat buildingGap=20;
             self.speed=sign*0.01;
             readyDis=x;
         }
+        
         
         [v setCenter: CGPointMake(readyDis,v.center.y)];
     }

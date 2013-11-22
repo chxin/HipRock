@@ -51,7 +51,9 @@
     UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(kDashboardWidgetPadding, kDashboardWidgetTitleTopMargin, self.view.frame.size.width, kDashboardWidgetTitleSize)];
     title.backgroundColor=[UIColor clearColor];
     title.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetTitleSize];
-    title.textColor=[REMColor colorByHexString:@"#4c4c4c"];
+    //title.font = [UIFont fontWithName:@(kBuildingFontSC) size:kDashboardWidgetTitleSize];
+    //title.textColor=[REMColor colorByHexString:@"#4c4c4c"];
+    title.textColor=[UIColor blackColor];
     title.text=self.widgetInfo.name;
     [self.view addSubview:title];
 
@@ -77,6 +79,7 @@
         share.textColor=[REMColor colorByHexString:@"#5e5e5e"];
         share.textAlignment=NSTextAlignmentRight;
         
+        //share.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetShareSize];
         share.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetShareSize];
         [self.view addSubview:share];
     }
@@ -87,12 +90,21 @@
     [self.view addSubview:chartContainer];
     
     self.chartContainer=chartContainer;
+    
+    
+    [self addConstraint];
+    
+    
     if (self.chartData!=nil) {
         [self generateChart];
     }
     else{
         [self queryEnergyData:self.widgetInfo.contentSyntax withGroupName:self.groupName];
     }
+}
+
+- (void) addConstraint{
+    
 }
 
 - (void)generateChart{
