@@ -21,6 +21,8 @@ typedef enum _DChartStatus {
 @property (nonatomic, strong) _DCXLabelFormatter* xLabelFormatter;
 @property (nonatomic, strong) REMTrendChartDataProcessor* sharedProcessor;
 @property (nonatomic, assign) DChartStatus chartStatus;
+@property (nonatomic, weak) DCContext* graphContext;
+@property (nonatomic, strong) DCRange* myStableRange;
 @end
 
 @implementation DTrendChartWrapper
@@ -82,6 +84,7 @@ typedef enum _DChartStatus {
             } else {
                 continue; // We just support 3 axes for now.
             }
+            s.target = targetEnergy.target;
             [self customizeSeries:s seriesIndex:seriesIndex chartStyle:style];
             [seriesList addObject:s];
             seriesIndex++;
@@ -208,6 +211,7 @@ typedef enum _DChartStatus {
     int endPoint = [self roundDate:beginningEnd startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:NO].intValue;
     self.beginRange = [[DCRange alloc]initWithLocation:startPoint-0.5 length:endPoint-startPoint];
     self.globalRange = [[DCRange alloc]initWithLocation:-0.5 length:globalLength.doubleValue];
+    self.myStableRange = self.beginRange;
     
     self.xLabelFormatter = [[_DCXLabelFormatter alloc]initWithStartDate:baseDateOfX dataStep:step interval:1];
 }
@@ -218,14 +222,28 @@ typedef enum _DChartStatus {
 
 -(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
-    if (self.delegate == nil) return;
-    if ([self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
-        if (self.sharedProcessor == nil) {
-            [self.delegate performSelector:@selector(willRangeChange:end:) withObject:@(newRange.location) withObject:@(newRange.location+newRange.length)];
-        } else {
-            [self.delegate performSelector:@selector(willRangeChange:end:) withObject:[self.sharedProcessor deprocessX:newRange.location] withObject:[self.sharedProcessor deprocessX:newRange.location+newRange.length]];
+    double rangeStart = newRange.location;
+    double rangeEnd = newRange.location + newRange.length;
+    if (rangeStart < self.globalRange.location) {
+        rangeStart = self.globalRange.location;
+        rangeEnd = self.globalRange.location + newRange.length;
+    }
+    if (rangeEnd > self.globalRange.length+self.globalRange.location) {
+        rangeEnd = self.globalRange.length+self.globalRange.location;
+        rangeStart = rangeEnd - newRange.length;
+    }
+    DCRange* myNewRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
+        if (![DCRange isRange:self.myStableRange equalTo:myNewRange]) {
+            if (self.sharedProcessor == nil) {
+                [self.delegate performSelector:@selector(willRangeChange:end:) withObject:@(rangeStart) withObject:@(rangeEnd)];
+            } else {
+                [self.delegate performSelector:@selector(willRangeChange:end:) withObject:[self.sharedProcessor deprocessX:rangeStart] withObject:[self.sharedProcessor deprocessX:rangeEnd]];
+            }
         }
     }
+    self.myStableRange = myNewRange;
 }
 
 -(void)touchedInPlotAt:(CGPoint)point xCoordinate:(double)xLocation {
@@ -234,6 +252,7 @@ typedef enum _DChartStatus {
     }
     [self.view focusAroundX:xLocation];
 }
+
 -(BOOL)panInPlotAt:(CGPoint)point translation:(CGPoint)translation {
     if (self.chartStatus == DCDataPointTypeNormal) {
         return YES;
@@ -243,6 +262,35 @@ typedef enum _DChartStatus {
     }
 }
 
+-(void)panStopped {
+    DCRange* newRange = self.graphContext.hRange;
+    double rangeStart = newRange.location;
+    double rangeEnd = newRange.location + newRange.length;
+    if (rangeStart < self.globalRange.location) {
+        rangeStart = self.globalRange.location;
+        rangeEnd = self.globalRange.location + newRange.length;
+    }
+    if (rangeEnd > self.globalRange.length+self.globalRange.location) {
+        rangeEnd = self.globalRange.length+self.globalRange.location;
+        rangeStart = rangeEnd - newRange.length;
+    }
+    DCRange* myNewRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
+    self.myStableRange = myNewRange;
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(touchEndedInNormalStatus:end:)]) {
+        if (self.sharedProcessor == nil) {
+            [self.delegate performSelector:@selector(touchEndedInNormalStatus:end:) withObject:@(rangeStart) withObject:@(rangeEnd)];
+        } else {
+            [self.delegate performSelector:@selector(touchEndedInNormalStatus:end:) withObject:[self.sharedProcessor deprocessX:rangeStart] withObject:[self.sharedProcessor deprocessX:rangeEnd]];
+        }
+    }
+}
+
+-(void)focusPointChanged:(NSArray *)dcpoints {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoints:)]) {
+        [self.delegate performSelector:@selector(highlightPoints:) withObject:dcpoints];
+    }
+}
 
 ///*
 // * points: List<REMEnergyData>
@@ -250,6 +298,4 @@ typedef enum _DChartStatus {
 // * names: List<NSString>
 // */
 //-(void)highlightPoints:(NSArray*)points colors:(NSArray*)colors names:(NSArray*)names;
-
-//-(void)touchEndedInNormalStatus:(id)start end:(id)end;
 @end
