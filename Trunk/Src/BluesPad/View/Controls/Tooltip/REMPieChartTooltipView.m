@@ -47,6 +47,7 @@
 - (NSArray *)convertItemModels
 {
     self.highlightIndex = [self decideHighlightIndex];
+    NSLog(@"highlight index: %d", self.highlightIndex);
     NSMutableArray *itemModels = [[NSMutableArray alloc] init];
     
     for(int i=0;i<self.data.targetEnergyData.count;i++){
