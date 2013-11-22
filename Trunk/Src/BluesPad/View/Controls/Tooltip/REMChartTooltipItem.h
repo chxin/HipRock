@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "REMChartSeriesIndicator.h"
 
+//item model
 @interface REMChartTooltipItemModel : NSObject
 
 @property (nonatomic) int index;
@@ -20,12 +21,27 @@
 
 @end
 
-@interface REMChartTooltipItem : UIControl
+//ranking item model
+@interface REMRankingTooltipItemModel : REMChartTooltipItemModel
+
+@property (nonatomic) int numerator,denominator;
+
+@end
+
+//item view
+@interface REMChartTooltipItem : UIView
 
 @property (nonatomic,weak) REMChartTooltipItemModel *model;
+
++(REMChartTooltipItem *)itemWithFrame:(CGRect)frame andModel:(REMChartTooltipItemModel *)model;
 
 - (id)initWithFrame:(CGRect)frame andData:(REMChartTooltipItemModel *)model;
 - (void)updateModel:(REMChartTooltipItemModel *)model;
 
-
 @end
+
+//ranking item view
+@interface REMRankingTooltipItem : REMChartTooltipItem
+@end
+
+
