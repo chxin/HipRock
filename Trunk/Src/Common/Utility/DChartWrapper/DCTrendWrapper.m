@@ -45,6 +45,7 @@ typedef enum _DChartStatus {
         [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
         
         [self createChartView:frame];
+        [self updateCalender];
     }
     return self;
 }
@@ -323,7 +324,7 @@ typedef enum _DChartStatus {
     series.hidden = hidden;
 }
 -(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
-    
+    _calenderType = syntax.calendarType;
 }
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
     [self updateProcessorRangesFormatter:step];

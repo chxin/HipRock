@@ -19,6 +19,7 @@
     self = [super initWithContext:context];
     if (self) {
         _layerDictionary = [[NSMutableDictionary alloc]init];
+        self.masksToBounds = YES;
     }
     return self;
 }
@@ -62,8 +63,10 @@
         if (self.layerDictionary[rangeToString] == nil) {
             CALayer* bandLayer = [[CALayer alloc]init];
             bandLayer.backgroundColor = band.color.CGColor;
-            bandLayer.frame = CGRectMake([DCUtility getScreenXIn:self.bounds xVal:band.range.location hRange:self.graphContext.hRange], 0, [DCUtility getScreenXIn:self.bounds xVal:band.range.length hRange:self.graphContext.hRange], self.bounds.size.height);
+            bandLayer.frame = CGRectMake([DCUtility getScreenXIn:self.bounds xVal:band.range.location hRange:self.graphContext.hRange], 0, [DCUtility getScreenXIn:self.bounds xVal:band.range.length+self.graphContext.hRange.location hRange:self.graphContext.hRange], self.bounds.size.height);
             [self addSublayer:bandLayer];
+            [self.layerDictionary setObject:bandLayer forKey:rangeToString];
+            NSLog(@"new bg frame: %f %f %f %f", bandLayer.frame.origin.x, bandLayer.frame.origin.y, bandLayer.frame.size.width, bandLayer.frame.size.height);
         }
     }
 }

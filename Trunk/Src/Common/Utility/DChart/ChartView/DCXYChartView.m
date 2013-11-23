@@ -61,6 +61,8 @@
 
 @property (nonatomic, strong) _DCBackgroundBandsLayer* backgroundBandsLayer;
 
+@property (nonatomic, strong) NSArray* bgBands;
+
 @end
 
 @implementation DCXYChartView
@@ -107,14 +109,15 @@
 }
 
 -(void)willMoveToSuperview:(UIView *)newSuperview {
+    [self drawAxisLines];
+    [self drawHGridline];
+    [self drawXLabelLayer];
+    
     self.backgroundBandsLayer = [[_DCBackgroundBandsLayer alloc]initWithContext:self.graphContext];
     self.backgroundBandsLayer.frame = self.plotRect;
     [self.graphContext addHRangeObsever:self.backgroundBandsLayer];
     [self.layer addSublayer:self.backgroundBandsLayer];
-    
-    [self drawAxisLines];
-    [self drawHGridline];
-    [self drawXLabelLayer];
+    [self.backgroundBandsLayer setBands:self.bgBands];
     
     self.coordinate0 = [self createCoordinateSystem:self.xAxis y:self.yAxis0 series:self.seriesList index:0];
     self.coordinate1 = [self createCoordinateSystem:self.xAxis y:self.yAxis1 series:self.seriesList index:1];
@@ -504,7 +507,10 @@
 }
 
 -(void)setBackgoundBands:(NSArray *)bands {
-    [self.backgroundBandsLayer setBands:bands];
+    self.bgBands = bands;
+    if (!REMIsNilOrNull(self.backgroundBandsLayer)) {
+        [self.backgroundBandsLayer setBands:bands];
+    }
 }
 // 检查在X上是否有pointType == DCDataPointTypeNormal的数据点
 //-(BOOL)hasPointsAtX:(int)x {
