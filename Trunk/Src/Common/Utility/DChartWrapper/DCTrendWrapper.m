@@ -35,6 +35,7 @@ typedef enum _DChartStatus {
 -(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*)widgetSyntax style:(REMChartStyle*)style {
     self = [self init];
     if (self && energyViewData.targetEnergyData.count != 0) {
+        _calenderType = REMCalendarTypeNone;
         self.xtypeOfWidget = widgetSyntax.xtype;
         [self extraSyntax:widgetSyntax];
         _style = style;
@@ -335,6 +336,45 @@ typedef enum _DChartStatus {
     
     [self createChartView:frame];
     [superView addSubview:self.view];
+    [self updateCalender];
 }
+
+-(void)setCalenderType:(REMCalendarType)calenderType {
+    if (calenderType == self.calenderType) return;
+    _calenderType = calenderType;
+    [self updateCalender];
+}
+
+-(void) updateCalender {
+    if (self.sharedProcessor == nil) return;
+    NSMutableArray* bands = [[NSMutableArray alloc]init];
+    if(self.calenderType != REMCalendarTypeNone) {
+        for (REMEnergyCalendarData* calender in self.energyViewData.calendarData) {
+            UIColor* fillColor = nil;
+            if (self.calenderType == REMCalendarTypeHCSeason) {
+                if (calender.calendarType == REMCalenderTypeHeatSeason) {
+                    fillColor = [REMColor colorByHexString:@"#fcf0e4" alpha:0.5];
+                } else if (calender.calendarType == REMCalenderTypeCoolSeason) {
+                    fillColor = [REMColor colorByHexString:@"#e3f0ff" alpha:0.5];
+                }
+            } else if (self.calenderType == REMCalenderTypeHoliday) {
+                if (calender.calendarType == REMCalenderTypeHoliday || calender.calendarType == REMCalenderTypeRestTime) {
+                    fillColor = [REMColor colorByHexString:@"#eaeaea" alpha:0.5];
+                }
+            }
+            if (fillColor == nil) continue;
+            for (REMTimeRange* range in calender.timeRanges) {
+                NSNumber* start = @([self.sharedProcessor processX:range.startTime].doubleValue-0.5);
+                DCRange* bandRange = [[DCRange alloc]initWithLocation:start.doubleValue length:[self.sharedProcessor processX:range.endTime].doubleValue -0.5 - start.doubleValue];
+                DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
+                b.range = bandRange;
+                b.color = fillColor;
+                [bands addObject:b];
+            }
+        }
+    }
+    [self.view setBackgoundBands:bands];
+}
+
 
 @end

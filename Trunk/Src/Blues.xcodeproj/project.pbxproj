@@ -665,6 +665,8 @@
 		EFDEC2AB1817C8A80008972E /* REMTrendChartStackColumnSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDEC2AA1817C8A80008972E /* REMTrendChartStackColumnSeries.m */; };
 		EFF3BA0718167BA500DD92CF /* REMRankingWidgetWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF3BA0618167BA500DD92CF /* REMRankingWidgetWrapper.m */; };
 		EFF701CF1830880600B371EC /* REMChartStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF701CE1830880600B371EC /* REMChartStyle.m */; };
+		EFF7514B183FC60F00C8BBE9 /* DCXYChartBackgroundBand.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF7514A183FC60F00C8BBE9 /* DCXYChartBackgroundBand.m */; };
+		EFF75151183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF75150183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m */; };
 		EFFBE9C6183F7A3700672E53 /* DCRankingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFBE9C5183F7A3700672E53 /* DCRankingWrapper.m */; };
 /* End PBXBuildFile section */
 
@@ -1487,6 +1489,10 @@
 		EFF3BA0618167BA500DD92CF /* REMRankingWidgetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRankingWidgetWrapper.m; sourceTree = "<group>"; };
 		EFF701CD1830880600B371EC /* REMChartStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartStyle.h; sourceTree = "<group>"; };
 		EFF701CE1830880600B371EC /* REMChartStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartStyle.m; sourceTree = "<group>"; };
+		EFF75149183FC60F00C8BBE9 /* DCXYChartBackgroundBand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCXYChartBackgroundBand.h; path = Common/Utility/DChart/DCXYChartBackgroundBand.h; sourceTree = "<group>"; };
+		EFF7514A183FC60F00C8BBE9 /* DCXYChartBackgroundBand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCXYChartBackgroundBand.m; path = Common/Utility/DChart/DCXYChartBackgroundBand.m; sourceTree = "<group>"; };
+		EFF7514F183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCBackgroundBandsLayer.h; path = Common/Utility/DChart/_DCBackgroundBandsLayer.h; sourceTree = "<group>"; };
+		EFF75150183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCBackgroundBandsLayer.m; path = Common/Utility/DChart/_DCBackgroundBandsLayer.m; sourceTree = "<group>"; };
 		EFFBE9C0183F04B400672E53 /* DCXYChartViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCXYChartViewDelegate.h; sourceTree = "<group>"; };
 		EFFBE9C4183F7A3700672E53 /* DCRankingWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCRankingWrapper.h; path = Common/Utility/DChartWrapper/DCRankingWrapper.h; sourceTree = "<group>"; };
 		EFFBE9C5183F7A3700672E53 /* DCRankingWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCRankingWrapper.m; path = Common/Utility/DChartWrapper/DCRankingWrapper.m; sourceTree = "<group>"; };
@@ -3070,6 +3076,10 @@
 				EFD946E81839DCBB00E9EC50 /* DCRange.m */,
 				EF0346AE183B4BA600DE186A /* _DCLayerTrashbox.h */,
 				EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */,
+				EFF75149183FC60F00C8BBE9 /* DCXYChartBackgroundBand.h */,
+				EFF7514A183FC60F00C8BBE9 /* DCXYChartBackgroundBand.m */,
+				EFF7514F183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.h */,
+				EFF75150183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m */,
 			);
 			name = DChart;
 			sourceTree = "<group>";
@@ -3560,6 +3570,7 @@
 				B49B6F511781491800BC130A /* REMColor.m in Sources */,
 				B40F01231828DB84009650FD /* REMWidgetMonthPickerViewController.m in Sources */,
 				EFFBE9C6183F7A3700672E53 /* DCRankingWrapper.m in Sources */,
+				EFF7514B183FC60F00C8BBE9 /* DCXYChartBackgroundBand.m in Sources */,
 				B4FED1541804FEF400E0CE58 /* REMEnergySeacherBase.m in Sources */,
 				EF0346B0183B4BA600DE186A /* _DCLayerTrashbox.m in Sources */,
 				EF8A47F717F959B5009B5C33 /* REMTrendChartView.m in Sources */,
@@ -3616,6 +3627,7 @@
 				B40F01201828DAD5009650FD /* REMWidgetLabelingDelegator.m in Sources */,
 				B42FBF6117F519F5004F2F3A /* REMWidgetCollectionViewController.m in Sources */,
 				7A153C6217AA489600413D3C /* REMEnergyData.m in Sources */,
+				EFF75151183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m in Sources */,
 				7A153C6317AA489600413D3C /* REMEnergyError.m in Sources */,
 				B40879501830D0BA004042C1 /* REMBuildingAirQualityViewController.m in Sources */,
 				B4F1118B183DDF44004D53F6 /* REMBuildingDataView.m in Sources */,

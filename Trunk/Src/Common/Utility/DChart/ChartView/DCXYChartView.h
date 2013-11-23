@@ -11,6 +11,7 @@
 #import "DCAxis.h"
 #import "DCXYSeries.h"
 #import "DCXYChartViewDelegate.h"
+#import "_DCBackgroundBandsLayer.h"
 
 @interface DCXYChartView : UIView
 @property (nonatomic, strong) DCAxis* xAxis;
@@ -39,4 +40,6 @@
 -(double)getXLocationForPoint:(CGPoint)point;
 -(void)focusAroundX:(double)x;
 -(void)defocus;
+
+-(void)setBackgoundBands:(NSArray*)bands;
 @end

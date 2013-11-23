@@ -17,4 +17,6 @@
 +(double)getYInterval:(double)yRangeLength parts:(NSUInteger)parts;
 +(BOOL)isMinorChangeForYRange:(DCRange*)oldRange new:(DCRange*)newRange;
 +(BOOL)isFrame:(CGRect)rect visableIn:(CGRect)outter;
+
++(double)getScreenXIn:(CGRect)plotRect xVal:(double)xValue hRange:(DCRange*)hRange;
 @end

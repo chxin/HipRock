@@ -59,6 +59,8 @@
 
 @property (nonatomic, assign) int focusPointIndex;
 
+@property (nonatomic, strong) _DCBackgroundBandsLayer* backgroundBandsLayer;
+
 @end
 
 @implementation DCXYChartView
@@ -70,6 +72,7 @@
         self.symbolLayers = [[NSMutableArray alloc]init];
         self.graphContext = [[DCContext alloc]initWithStacked:stacked];
         self.graphContext.hGridlineAmount = 0;
+        self.backgoundBands = [[NSMutableArray alloc]init];
 //        self.multipleTouchEnabled = YES;
         _beginHRange = beginHRange;
         _focusPointIndex = INT32_MIN;
@@ -104,6 +107,11 @@
 }
 
 -(void)willMoveToSuperview:(UIView *)newSuperview {
+    self.backgroundBandsLayer = [[_DCBackgroundBandsLayer alloc]initWithContext:self.graphContext];
+    self.backgroundBandsLayer.frame = self.plotRect;
+    [self.graphContext addHRangeObsever:self.backgroundBandsLayer];
+    [self.layer addSublayer:self.backgroundBandsLayer];
+    
     [self drawAxisLines];
     [self drawHGridline];
     [self drawXLabelLayer];
@@ -495,6 +503,9 @@
     }
 }
 
+-(void)setBackgoundBands:(NSArray *)bands {
+    [self.backgroundBandsLayer setBands:bands];
+}
 // 检查在X上是否有pointType == DCDataPointTypeNormal的数据点
 //-(BOOL)hasPointsAtX:(int)x {
 //    for (DCXYSeries* s in self.seriesList) {

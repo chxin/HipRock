@@ -14,6 +14,7 @@
     if (self) {
         _length = length;
         _location = location;
+        _end = location + length;
     }
     return self;
 }
@@ -27,8 +28,15 @@
     
     return aRange.location == bRange.location && aRange.length == bRange.length;
 }
++(BOOL)isRange:(DCRange *)aRange visableIn:(DCRange *)bRange {
+    if (REMIsNilOrNull(aRange) || REMIsNilOrNull(bRange)) return NO;
+    return (aRange.location <= bRange.end && aRange.location >= bRange.location) || (aRange.end <= bRange.end && aRange.end >= bRange.location);
+}
 -(BOOL)isVisableIn:(DCRange*)bRange {
     return (self.location <= bRange.length+bRange.location && self.location >= bRange.location) ||
     (self.location+self.length <= bRange.length+bRange.location && self.location+self.length >= bRange.location);
+}
+-(NSString*)description {
+    return [NSString stringWithFormat:@"DCRange: location-%f length:%f", self.location, self.length];
 }
 @end
