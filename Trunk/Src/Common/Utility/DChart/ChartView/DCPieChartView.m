@@ -98,7 +98,7 @@
         [self.panInertnessAnimTimer invalidate];
         self.panInertnessAnimTimer = nil;
         self.panStep = 0;
-        self.panStep = 0;
+        self.panSpeed = 0;
         self.panState = 0;
     }
 }
