@@ -611,6 +611,9 @@
 		EF0346B6183B6F6200DE186A /* _DCLineLayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B5183B6F6200DE186A /* _DCLineLayerCell.m */; };
 		EF0346B9183B979800DE186A /* DCLineWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B8183B979800DE186A /* DCLineWrapper.m */; };
 		EF03DC201841C886004B9EFD /* _DCHPinchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC1F1841C886004B9EFD /* _DCHPinchGestureRecognizer.m */; };
+		EF03DC231841E462004B9EFD /* DCPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC221841E462004B9EFD /* DCPieChartView.m */; };
+		EF03DC261841FA2F004B9EFD /* DCPieSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC251841FA2F004B9EFD /* DCPieSeries.m */; };
+		EF03DC291841FB45004B9EFD /* DCPieDataPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC281841FB45004B9EFD /* DCPieDataPoint.m */; };
 		EF1C5AD4183DB3A2002A9AAD /* DAbstractChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD3183DB3A2002A9AAD /* DAbstractChartWrapper.m */; };
 		EF1C5AD7183DB3CB002A9AAD /* DCTrendWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD6183DB3CB002A9AAD /* DCTrendWrapper.m */; };
 		EF1C5ADA183E00C9002A9AAD /* _DCXLabelFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD9183E00C9002A9AAD /* _DCXLabelFormatter.m */; };
@@ -1398,6 +1401,12 @@
 		EF0346B8183B979800DE186A /* DCLineWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCLineWrapper.m; path = Common/Utility/DChartWrapper/DCLineWrapper.m; sourceTree = "<group>"; };
 		EF03DC1E1841C886004B9EFD /* _DCHPinchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCHPinchGestureRecognizer.h; path = Common/Utility/DChart/_DCHPinchGestureRecognizer.h; sourceTree = "<group>"; };
 		EF03DC1F1841C886004B9EFD /* _DCHPinchGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCHPinchGestureRecognizer.m; path = Common/Utility/DChart/_DCHPinchGestureRecognizer.m; sourceTree = "<group>"; };
+		EF03DC211841E462004B9EFD /* DCPieChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCPieChartView.h; sourceTree = "<group>"; };
+		EF03DC221841E462004B9EFD /* DCPieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCPieChartView.m; sourceTree = "<group>"; };
+		EF03DC241841FA2F004B9EFD /* DCPieSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCPieSeries.h; sourceTree = "<group>"; };
+		EF03DC251841FA2F004B9EFD /* DCPieSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCPieSeries.m; sourceTree = "<group>"; };
+		EF03DC271841FB45004B9EFD /* DCPieDataPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCPieDataPoint.h; sourceTree = "<group>"; };
+		EF03DC281841FB45004B9EFD /* DCPieDataPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCPieDataPoint.m; sourceTree = "<group>"; };
 		EF1C5AD2183DB3A2002A9AAD /* DAbstractChartWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DAbstractChartWrapper.h; path = Common/Utility/DChartWrapper/DAbstractChartWrapper.h; sourceTree = "<group>"; };
 		EF1C5AD3183DB3A2002A9AAD /* DAbstractChartWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DAbstractChartWrapper.m; path = Common/Utility/DChartWrapper/DAbstractChartWrapper.m; sourceTree = "<group>"; };
 		EF1C5AD5183DB3CB002A9AAD /* DCTrendWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCTrendWrapper.h; path = Common/Utility/DChartWrapper/DCTrendWrapper.h; sourceTree = "<group>"; };
@@ -3121,6 +3130,8 @@
 				EFD946DF1839DCBB00E9EC50 /* DCXYChartView.h */,
 				EFD946E01839DCBB00E9EC50 /* DCXYChartView.m */,
 				EFFBE9C0183F04B400672E53 /* DCXYChartViewDelegate.h */,
+				EF03DC211841E462004B9EFD /* DCPieChartView.h */,
+				EF03DC221841E462004B9EFD /* DCPieChartView.m */,
 			);
 			name = ChartView;
 			path = Common/Utility/DChart/ChartView;
@@ -3131,6 +3142,8 @@
 			children = (
 				EFD946E31839DCBB00E9EC50 /* DCDataPoint.h */,
 				EFD946E41839DCBB00E9EC50 /* DCDataPoint.m */,
+				EF03DC271841FB45004B9EFD /* DCPieDataPoint.h */,
+				EF03DC281841FB45004B9EFD /* DCPieDataPoint.m */,
 			);
 			name = DataPoint;
 			path = Common/Utility/DChart/DataPoint;
@@ -3169,6 +3182,8 @@
 				EF54C8E5183C8D2400A07557 /* _DCSymbolLayer.m */,
 				EF1C5ADB183E23DA002A9AAD /* _DCLineSymbolsLayer.h */,
 				EF1C5ADC183E23DA002A9AAD /* _DCLineSymbolsLayer.m */,
+				EF03DC241841FA2F004B9EFD /* DCPieSeries.h */,
+				EF03DC251841FA2F004B9EFD /* DCPieSeries.m */,
 			);
 			name = Series;
 			path = Common/Utility/DChart/Series;
@@ -3642,6 +3657,7 @@
 				7A153C6617AA489600413D3C /* REMTargetEnergyData.m in Sources */,
 				B4FAD66B181F524A00EF1459 /* REMWidgetDetailViewController.m in Sources */,
 				7A153C9E17AA497C00413D3C /* REMBuildingViewController.m in Sources */,
+				EF03DC261841FA2F004B9EFD /* DCPieSeries.m in Sources */,
 				B47ACC3317F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m in Sources */,
 				7A5AC7821817CC34006C7CB1 /* REMMapGallerySegue.m in Sources */,
 				EFDAACC818054EBA008BC9AF /* REMPieChartSeries.m in Sources */,
@@ -3736,12 +3752,14 @@
 				EF8A47FE17F959B5009B5C33 /* REMTrendChartLineSeries.m in Sources */,
 				7A0288FA17C20CC500709111 /* PathHelper.m in Sources */,
 				7A0288FB17C20CC500709111 /* Resources.m in Sources */,
+				EF03DC291841FB45004B9EFD /* DCPieDataPoint.m in Sources */,
 				B41249F01803ECF0009022C5 /* REMCustomerSwitchHelper.m in Sources */,
 				7A7F7B1C181F85A100A3C5AB /* REMGalleryCollectionViewController.m in Sources */,
 				7A0288FC17C20CC500709111 /* URLRequestHelper.m in Sources */,
 				B4E815D718273E5600FB9BC5 /* REMWidgetRankingSearchModel.m in Sources */,
 				7AB9B399183DCF1100779C5E /* REMStackChartLegendView.m in Sources */,
 				B46C8EBA17F27C25006DC4CB /* REMDashboardView.m in Sources */,
+				EF03DC231841E462004B9EFD /* DCPieChartView.m in Sources */,
 				7A0288FD17C20CC500709111 /* WeiboDialogClosePNG.m in Sources */,
 				7A0288FE17C20CC500709111 /* WeiboDialog.m in Sources */,
 				7A44E04518238D5E0080CEBE /* REMBuildingShareViewController.m in Sources */,
