@@ -85,7 +85,8 @@ static NSString *cellId=@"widgetcell";
     REMDashboardCollectionCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     
     if(cell.contentView.subviews.count>0)return cell;
-    
+    [cell setBackgroundColor:[UIColor clearColor]];
+    [cell.contentView setBackgroundColor:[UIColor clearColor]];
     REMWidgetCellViewController *controller;
     if(self.childViewControllers.count>indexPath.row){
         controller=self.childViewControllers[indexPath.row];
