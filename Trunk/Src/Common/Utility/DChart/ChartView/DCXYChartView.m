@@ -446,6 +446,7 @@
     CGFloat preDis = [touch0 previousLocationInView:self].x - [touch1 previousLocationInView:self].x;
     CGFloat curDis = [touch0 locationInView:self].x - [touch1 locationInView:self].x;
     CGFloat scale = curDis / preDis;
+    if (scale <= 0) return;
     self.graphContext.hRange = [[DCRange alloc]initWithLocation:self.graphContext.hRange.location length:self.graphContext.hRange.length/scale];
     NSLog(@"pinch:%f %f", self.graphContext.hRange.location, self.graphContext.hRange.length);
 }
