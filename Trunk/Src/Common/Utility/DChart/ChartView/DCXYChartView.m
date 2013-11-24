@@ -16,6 +16,7 @@
 #import "DCXYSeries.h"
 #import "_DCLineSymbolsLayer.h"
 #import "REMColor.h"
+#import "_DCHPinchGestureRecognizer.h"
 
 @interface DCXYChartView ()
 @property (nonatomic, strong) DCRange* beginHRange;
@@ -56,6 +57,7 @@
 
 @property (nonatomic, strong) UITapGestureRecognizer* tapGsRec;
 @property (nonatomic, strong) UIPanGestureRecognizer* panGsRec;
+@property (nonatomic, strong) _DCHPinchGestureRecognizer* pinchGsRec;
 
 @property (nonatomic, assign) int focusPointIndex;
 
@@ -438,6 +440,21 @@
 //    }
 }
 
+-(void)viewPinched:(_DCHPinchGestureRecognizer*)gesture {
+    NSSet* touches = gesture.theTouches;
+    if (REMIsNilOrNull(touches) || touches.count != 2) return;
+    UITouch* touch0 = touches.allObjects[0];
+    UITouch* touch1 = touches.allObjects[1];
+    CGFloat preDis = [touch0 previousLocationInView:self].x - [touch1 previousLocationInView:self].x;
+    CGFloat curDis = [touch0 locationInView:self].x - [touch1 locationInView:self].x;
+    CGFloat scale = curDis / preDis;
+    self.graphContext.hRange = [[DCRange alloc]initWithLocation:self.graphContext.hRange.location length:self.graphContext.hRange.length/scale];
+    NSLog(@"pinch:%f %f", self.graphContext.hRange.location, self.graphContext.hRange.length);
+}
+
+
+
+
 -(void)setUserInteractionEnabled:(BOOL)userInteractionEnabled {
     if(self.userInteractionEnabled == userInteractionEnabled) return;
     [super setUserInteractionEnabled:userInteractionEnabled];
@@ -449,8 +466,10 @@
         if (REMIsNilOrNull(self.tapGsRec)) {
             self.tapGsRec = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewTapped:)];
             self.panGsRec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(viewPanned:)];
+            self.pinchGsRec = [[_DCHPinchGestureRecognizer alloc]initWithTarget:self action:@selector(viewPinched:)];
             [self addGestureRecognizer:self.tapGsRec];
             [self addGestureRecognizer:self.panGsRec];
+            [self addGestureRecognizer:self.pinchGsRec];
         }
     } else {
         if (!REMIsNilOrNull(self.tapGsRec)) {
@@ -458,6 +477,8 @@
             self.tapGsRec = nil;
             [self removeGestureRecognizer:self.panGsRec];
             self.panGsRec = nil;
+            [self removeGestureRecognizer:self.pinchGsRec];
+            self.pinchGsRec = nil;
         }
     }
 }

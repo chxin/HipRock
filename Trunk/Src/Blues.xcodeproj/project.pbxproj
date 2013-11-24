@@ -610,6 +610,7 @@
 		EF0346B3183B520100DE186A /* _DCSeriesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B2183B520100DE186A /* _DCSeriesLayer.m */; };
 		EF0346B6183B6F6200DE186A /* _DCLineLayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B5183B6F6200DE186A /* _DCLineLayerCell.m */; };
 		EF0346B9183B979800DE186A /* DCLineWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B8183B979800DE186A /* DCLineWrapper.m */; };
+		EF03DC201841C886004B9EFD /* _DCHPinchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC1F1841C886004B9EFD /* _DCHPinchGestureRecognizer.m */; };
 		EF1C5AD4183DB3A2002A9AAD /* DAbstractChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD3183DB3A2002A9AAD /* DAbstractChartWrapper.m */; };
 		EF1C5AD7183DB3CB002A9AAD /* DCTrendWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD6183DB3CB002A9AAD /* DCTrendWrapper.m */; };
 		EF1C5ADA183E00C9002A9AAD /* _DCXLabelFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD9183E00C9002A9AAD /* _DCXLabelFormatter.m */; };
@@ -1395,6 +1396,8 @@
 		EF0346B5183B6F6200DE186A /* _DCLineLayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCLineLayerCell.m; sourceTree = "<group>"; };
 		EF0346B7183B979800DE186A /* DCLineWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCLineWrapper.h; path = Common/Utility/DChartWrapper/DCLineWrapper.h; sourceTree = "<group>"; };
 		EF0346B8183B979800DE186A /* DCLineWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCLineWrapper.m; path = Common/Utility/DChartWrapper/DCLineWrapper.m; sourceTree = "<group>"; };
+		EF03DC1E1841C886004B9EFD /* _DCHPinchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCHPinchGestureRecognizer.h; path = Common/Utility/DChart/_DCHPinchGestureRecognizer.h; sourceTree = "<group>"; };
+		EF03DC1F1841C886004B9EFD /* _DCHPinchGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCHPinchGestureRecognizer.m; path = Common/Utility/DChart/_DCHPinchGestureRecognizer.m; sourceTree = "<group>"; };
 		EF1C5AD2183DB3A2002A9AAD /* DAbstractChartWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DAbstractChartWrapper.h; path = Common/Utility/DChartWrapper/DAbstractChartWrapper.h; sourceTree = "<group>"; };
 		EF1C5AD3183DB3A2002A9AAD /* DAbstractChartWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DAbstractChartWrapper.m; path = Common/Utility/DChartWrapper/DAbstractChartWrapper.m; sourceTree = "<group>"; };
 		EF1C5AD5183DB3CB002A9AAD /* DCTrendWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCTrendWrapper.h; path = Common/Utility/DChartWrapper/DCTrendWrapper.h; sourceTree = "<group>"; };
@@ -3080,6 +3083,8 @@
 				EFF7514A183FC60F00C8BBE9 /* DCXYChartBackgroundBand.m */,
 				EFF7514F183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.h */,
 				EFF75150183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m */,
+				EF03DC1E1841C886004B9EFD /* _DCHPinchGestureRecognizer.h */,
+				EF03DC1F1841C886004B9EFD /* _DCHPinchGestureRecognizer.m */,
 			);
 			name = DChart;
 			sourceTree = "<group>";
@@ -3535,6 +3540,7 @@
 				B4F11188183DA7F4004D53F6 /* REMBuildingChartContainerView2.m in Sources */,
 				EF8A47F517F959B5009B5C33 /* REMTrendChartAxisConfig.m in Sources */,
 				7A7B2105183CAB3600C14248 /* REMCommonLegendFormator.m in Sources */,
+				EF03DC201841C886004B9EFD /* _DCHPinchGestureRecognizer.m in Sources */,
 				EF9ACF6118067CCB00097661 /* REMXFormatter.m in Sources */,
 				B40F011A1828C3DC009650FD /* REMWidgetStepEnergyModel.m in Sources */,
 				B445AEA4177BEEB8002D2A59 /* DDFileLogger.m in Sources */,

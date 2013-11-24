@@ -49,24 +49,34 @@
 }
 
 -(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
-    double xMovementInScreen = self.frame.size.width * (newRange.location - oldRange.location) / newRange.length;
+    if ([DCRange isRange:oldRange equalTo:newRange]) return;
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
-    
     BOOL caTransationState = CATransaction.disableActions;
     [CATransaction setDisableActions:YES];
-    for (NSNumber* key in self.trashbox.xToLayerDic.allKeys) {
-        CATextLayer* text = self.trashbox.xToLayerDic[key];
-        CGRect toFrame = CGRectMake(text.frame.origin.x-xMovementInScreen, text.frame.origin.y, text.frame.size.width, text.frame.size.height);
-        if ([DCUtility isFrame:toFrame visableIn:self.bounds]) {
-            text.frame = toFrame;
-        } else {
+    if (oldRange.length == newRange.length) {
+        double xMovementInScreen = self.frame.size.width * (newRange.location - oldRange.location) / newRange.length;
+        
+        for (NSNumber* key in self.trashbox.xToLayerDic.allKeys) {
+            CATextLayer* text = self.trashbox.xToLayerDic[key];
+            CGRect toFrame = CGRectMake(text.frame.origin.x-xMovementInScreen, text.frame.origin.y, text.frame.size.width, text.frame.size.height);
+            if ([DCUtility isFrame:toFrame visableIn:self.bounds]) {
+                text.frame = toFrame;
+            } else {
+                [self.trashbox.xToLayerDic removeObjectForKey:key];
+                [text removeFromSuperlayer];
+            }
+        }
+    } else {
+        
+        for (NSNumber* key in self.trashbox.xToLayerDic.allKeys) {
+            CATextLayer* text = self.trashbox.xToLayerDic[key];
             [self.trashbox.xToLayerDic removeObjectForKey:key];
             [text removeFromSuperlayer];
         }
     }
-    [CATransaction setDisableActions:caTransationState];
     
+    [CATransaction setDisableActions:caTransationState];
     [self updateXFormatterInterval];
     for (int i = start; i <= end; i++) {
         if (self.trashbox.xToLayerDic[@(i)] == nil) {
