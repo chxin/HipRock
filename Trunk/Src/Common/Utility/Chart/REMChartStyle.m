@@ -17,7 +17,7 @@
     gridlineStyle.lineColor = [CPTColor colorWithCGColor:[REMColor colorByHexString:@"#eaeaea"].CGColor];
     gridlineStyle.lineWidth = 1.0;
     xlineStyle.lineColor = [CPTColor colorWithCGColor:[REMColor colorByHexString:@"#eaeaea"].CGColor];
-    xlineStyle.lineWidth = 1.0;
+    xlineStyle.lineWidth = 4.0;
     textStyle.fontName = @kBuildingFontSCRegular;
     textStyle.fontSize = 16.0;
     textStyle.color = [CPTColor colorWithCGColor:[REMColor colorByHexString:@"#969696"].CGColor];

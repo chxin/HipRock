@@ -253,8 +253,7 @@
 }
 
 -(_DCYAxisLabelLayer*) createYLabelLayer:(DCAxis*)yAxis {
-    _DCYAxisLabelLayer* _yLabelLayer = [[_DCYAxisLabelLayer alloc]init];
-    _yLabelLayer.graphContext = self.graphContext;
+    _DCYAxisLabelLayer* _yLabelLayer = [[_DCYAxisLabelLayer alloc]initWithContext:self.graphContext];
     _yLabelLayer.axis = yAxis;
     _yLabelLayer.font = yAxis.labelFont;
     _yLabelLayer.fontColor = yAxis.labelColor;
@@ -302,8 +301,7 @@
 }
 
 -(void)drawHGridline {
-    self._hGridlineLayer = [[_DCHGridlineLayer alloc]init];
-    self._hGridlineLayer.graphContext = self.graphContext;
+    self._hGridlineLayer = [[_DCHGridlineLayer alloc]initWithContext:self.graphContext];
     self._hGridlineLayer.frame = self.plotRect;
     self._hGridlineLayer.lineColor = self.hGridlineColor;
     self._hGridlineLayer.lineWidth = self.hGridlineWidth;
