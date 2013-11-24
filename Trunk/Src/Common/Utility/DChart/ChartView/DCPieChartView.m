@@ -35,13 +35,13 @@
     self = [super initWithFrame:frame];
     if (self) {
         _panState = -1;
-        _rotationAngle = 0.5;
+        _rotationAngle = 0;
         _fullAngle = 0;
         _indicatorAlpha = 0.5;
         self.backgroundColor = [UIColor whiteColor];
         self.radius = 180;
-        
         self.radiusForShadow = 190;
+        
         NSMutableArray* datas = [[NSMutableArray alloc]init];
         for (int i = 0; i < 10; i++) {
             DCPieDataPoint* p = [[DCPieDataPoint alloc]init];
@@ -153,7 +153,7 @@
     layer.contentsScale = [[UIScreen mainScreen] scale];
     [super drawLayer:layer inContext:ctx];
     
-    UIColor* shadowColor = [REMColor colorByHexString:@"#e9e9e9" alpha:self.fullAngle/2];
+    UIColor* shadowColor = [REMColor colorByHexString:kDCPieShadowColor alpha:self.fullAngle/2];
     CGContextSetFillColorWithColor(ctx, shadowColor.CGColor);
     CGContextMoveToPoint(ctx, self.center.x, self.center.y);
     CGContextAddArc(ctx, self.center.x, self.center.y, self.radiusForShadow, 0, M_PI*2, 0);
@@ -173,7 +173,7 @@
     }
     
     if(self.indicatorAlpha > 0) {
-        UIColor* indicatorColor = [REMColor colorByHexString:@"#e9e9e9" alpha:self.indicatorAlpha*self.fullAngle/2];
+        UIColor* indicatorColor = [REMColor colorByHexString:kDCPieIndicatorColor alpha:self.indicatorAlpha*self.fullAngle/2];
         CGContextSetFillColorWithColor(ctx, indicatorColor.CGColor);
         CGContextMoveToPoint(ctx, self.center.x, self.center.y-self.radius*2/3);
         CGContextAddArc(ctx, self.center.x, self.center.y, self.radius, -M_PI/20-M_PI/2, M_PI/20-M_PI/2, 0);
