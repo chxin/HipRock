@@ -174,12 +174,21 @@
         [self.layer addSublayer:symbol];
     }
     [self updateSymbolFrameSize];
-    
-    self.graphContext.hRange = self.beginHRange;
+    if ([self testHRangeChange:self.beginHRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByInitialize]) {
+        self.graphContext.hRange = self.beginHRange;
+    }
     
     [self updateGestures];
     
     [super willMoveToSuperview: newSuperview];
+}
+
+-(BOOL)testHRangeChange:(DCRange*)newRange oldRange:(DCRange*)oldRange sendBy:(DCHRangeChangeSender)senderType {
+    BOOL willChange = YES;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(testHRangeChange:oldRange:sendBy:)]) {
+        willChange = [self.delegate testHRangeChange:newRange oldRange:oldRange sendBy:senderType];
+    }
+    return willChange;
 }
 
 -(void)setFrame:(CGRect)frame {
@@ -327,7 +336,10 @@
             [self.timer invalidate];
             [self setLineSymbolsHidden:NO];
         }
-        self.graphContext.hRange = [[DCRange alloc]initWithLocation:newLocation length:self.graphContext.hRange.length];
+        DCRange* newRange = [[DCRange alloc]initWithLocation:newLocation length:self.graphContext.hRange.length];
+        if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByAnimation]) {
+            self.graphContext.hRange = newRange;
+        }
     }
 }
 
@@ -430,7 +442,10 @@
                 }
             } else {
                 [self setLineSymbolsHidden:YES];
-                self.graphContext.hRange = [[DCRange alloc]initWithLocation:-translation.x*self.graphContext.hRange.length/self.plotRect.size.width+self.graphContext.hRange.location length:self.graphContext.hRange.length];
+                DCRange* newRange = [[DCRange alloc]initWithLocation:-translation.x*self.graphContext.hRange.length/self.plotRect.size.width+self.graphContext.hRange.location length:self.graphContext.hRange.length];
+                if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByUserPan]) {
+                    self.graphContext.hRange = newRange;
+                }
             }
         }
         [gesture setTranslation:CGPointMake(0, 0) inView:self];
@@ -447,7 +462,10 @@
     CGFloat curDis = [touch0 locationInView:self].x - [touch1 locationInView:self].x;
     CGFloat scale = curDis / preDis;
     if (scale <= 0) return;
-    self.graphContext.hRange = [[DCRange alloc]initWithLocation:self.graphContext.hRange.location length:self.graphContext.hRange.length/scale];
+    DCRange* newRange = [[DCRange alloc]initWithLocation:self.graphContext.hRange.location length:self.graphContext.hRange.length/scale];
+    if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByUserPinch]) {
+        self.graphContext.hRange = newRange;
+    }
     NSLog(@"pinch:%f %f", self.graphContext.hRange.location, self.graphContext.hRange.length);
 }
 

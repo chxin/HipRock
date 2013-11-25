@@ -101,7 +101,6 @@ typedef enum _DChartStatus {
     view.graphContext.hGridlineAmount = self.style.horizentalGridLineAmount;
     view.delegate = self;
     self.graphContext = view.graphContext;
-    [view.graphContext addHRangeObsever:self];
 }
 
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style {
@@ -244,35 +243,6 @@ typedef enum _DChartStatus {
     return self.energyViewData.targetEnergyData.count;
 }
 
--(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
-    if ([DCRange isRange:oldRange equalTo:newRange]) return;
-    double rangeStart = newRange.location;
-    double rangeEnd = newRange.location + newRange.length;
-    if (rangeStart < self.graphContext.globalHRange.location) {
-        rangeStart = self.graphContext.globalHRange.location;
-        rangeEnd = self.graphContext.globalHRange.location + newRange.length;
-    }
-    if (rangeEnd > self.graphContext.globalHRange.end) {
-        rangeEnd = self.graphContext.globalHRange.end;
-        rangeStart = rangeEnd - newRange.length;
-    }
-    if (oldRange.length != newRange.length) {
-        [self updateCalender];
-    }
-    DCRange* myNewRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
-        if (![DCRange isRange:self.myStableRange equalTo:myNewRange]) {
-            if (self.sharedProcessor == nil) {
-                [self.delegate performSelector:@selector(willRangeChange:end:) withObject:@(rangeStart) withObject:@(rangeEnd)];
-            } else {
-                [self.delegate performSelector:@selector(willRangeChange:end:) withObject:[self.sharedProcessor deprocessX:rangeStart] withObject:[self.sharedProcessor deprocessX:rangeEnd]];
-            }
-        }
-    }
-    self.myStableRange = myNewRange;
-}
-
 -(void)touchedInPlotAt:(CGPoint)point xCoordinate:(double)xLocation {
     if (self.chartStatus == DCDataPointTypeNormal) {
         self.chartStatus = DChartStatusFocus;
@@ -381,5 +351,58 @@ typedef enum _DChartStatus {
     [self.view setBackgoundBands:bands];
 }
 
+-(BOOL)testHRangeChange:(DCRange *)newRange oldRange:(DCRange *)oldRange sendBy:(DCHRangeChangeSender)senderType {
+    if (senderType == DCHRangeChangeSenderByAnimation || senderType == DCHRangeChangeSenderByInitialize) return YES;
+    if ([DCRange isRange:oldRange equalTo:newRange]) return NO;
+    
+    if (senderType == DCHRangeChangeSenderByUserPan) {
+        double rangeStart = newRange.location;
+        double rangeEnd = newRange.end;
+        if (rangeStart < self.graphContext.globalHRange.location) {
+            rangeStart = self.graphContext.globalHRange.location;
+            rangeEnd = self.graphContext.globalHRange.location + newRange.length;
+        }
+        if (rangeEnd > self.graphContext.globalHRange.end) {
+            rangeEnd = self.graphContext.globalHRange.end;
+            rangeStart = rangeEnd - newRange.length;
+        }
+        
+        DCRange* myNewRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
+        BOOL shouldChange = YES;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
+            if (![DCRange isRange:self.myStableRange equalTo:myNewRange]) {
+                id param0, param1;
+                if (self.sharedProcessor == nil) {
+                    param0 = @(rangeStart);
+                    param1 = @(rangeEnd);
+                } else {
+                    param0 = [self.sharedProcessor deprocessX:rangeStart];
+                    param1 = [self.sharedProcessor deprocessX:rangeEnd];
+                }
+                shouldChange = (BOOL)[self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
+            }
+        }
+        if (shouldChange) self.myStableRange = myNewRange;
+        return shouldChange;
+    } else {
+        BOOL shouldChange = YES;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
+            id param0, param1;
+            if (self.sharedProcessor == nil) {
+                param0 = @(newRange.location);
+                param1 = @(newRange.end);
+            } else {
+                param0 = [self.sharedProcessor deprocessX:newRange.location];
+                param1 = [self.sharedProcessor deprocessX:newRange.end];
+            }
+            shouldChange = (BOOL)[self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
+        }
+        if (shouldChange) {
+            self.myStableRange = newRange;
+            [self updateCalender];
+        }
+        return shouldChange;
+    }
+}
 
 @end
