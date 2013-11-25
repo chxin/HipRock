@@ -10,7 +10,7 @@
 #import "DCRankingWrapper.h"
 
 const static CGFloat kRankButtonDimension=32;
-const static CGFloat kRankingTimePickerWidth=222;
+const static CGFloat kRankingTimePickerWidth=250;
 
 @interface REMWidgetRankingDelegator()
 
@@ -61,7 +61,7 @@ const static CGFloat kRankingTimePickerWidth=222;
     timePickerButton.layer.cornerRadius=4;
     timePickerButton.translatesAutoresizingMaskIntoConstraints = NO;
     [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];
-    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, -8, 0, 0)];
+    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, -4, 0, 0)];
     timePickerButton.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetDatePickerTitleSize];
 
     [timePickerButton setTitleColor:[REMColor colorByHexString:@"#5e5e5e"] forState:UIControlStateNormal];
