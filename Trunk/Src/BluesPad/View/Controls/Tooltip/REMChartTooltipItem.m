@@ -41,7 +41,7 @@
     self = [super initWithFrame:frame];
     if (self) {
 // Initialization code
-//        self.layer.borderColor = [UIColor blueColor].CGColor;
+//        self.layer.borderColor = [UIColor orangeColor].CGColor;
 //        self.layer.borderWidth = 1.0f;
         self.backgroundColor = [UIColor clearColor];
         
@@ -83,7 +83,7 @@
 - (NSString *)formatDataValue:(REMChartTooltipItemModel *)model
 {
     //TODO: Need format
-    return [NSString stringWithFormat:@"%@%@", [model.value stringValue], model.uom];
+    return [NSString stringWithFormat:@"%@%@", REMIsNilOrNull(model.value) ? @"": [model.value stringValue], model.uom];
 }
 
 

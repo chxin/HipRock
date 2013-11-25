@@ -23,9 +23,11 @@
 #define kDMLogin_PageControlHeight 8
 #define kDMLogin_PageControlTintColor @"#88c274"
 #define kDMLogin_SkipToLoginButtonTopOffset kDMLogin_PageControlTopOffset + kDMLogin_PageControlHeight + 26
-#define kDMLogin_SkipToLoginButtonWidth 232
+#define kDMLogin_SkipToLoginButtonWidth 160//232
 #define kDMLogin_SkipToLoginButtonHeight 50
 #define kDMLogin_SkipToLoginButtonFontSize 24
 #define kDMLogin_SkipToLoginButtonFontColor @"#3f8e1f"
+
+#define kDMLogin_SkipToTrialButtonLeftOffset 16
 
 #endif

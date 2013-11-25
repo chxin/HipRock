@@ -39,7 +39,6 @@
 
 @property (nonatomic,strong) NSMutableArray *hiddenSeries;
 
-
 @property (nonatomic,weak) UIView *calendarMsgView;
 
 
@@ -761,7 +760,6 @@
                 [self.legendView removeFromSuperview];
                 self.legendView = nil;
             }];
-            
         }
     }
     else{//legend toolbar

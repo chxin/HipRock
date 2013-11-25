@@ -73,7 +73,7 @@
     }
     
     for(int i=0;i<itemCount;i++){
-        CGRect itemFrame = CGRectMake(i*(itemWidth + itemOffset),0,itemWidth,kDMChart_TooltipViewHeight);
+        CGRect itemFrame = CGRectMake(i*(itemWidth + itemOffset),0,itemWidth,kDMChart_TooltipContentHeight);
         
         REMChartTooltipItem *tooltipItem = [REMChartTooltipItem itemWithFrame:itemFrame andModel:self.itemModels[i]];
         
@@ -81,7 +81,7 @@
         [self.tooltipItems addObject:tooltipItem];
     }
     
-    view.contentSize = CGSizeMake(contentWidth, kDMChart_TooltipViewHeight);
+    view.contentSize = CGSizeMake(contentWidth, kDMChart_TooltipContentHeight);
     
     NSLog(@"scroll view width: %f, content width: %f", view.frame.size.width, view.contentSize.width);
     

@@ -16,6 +16,7 @@ const static CGFloat kRankButtonDimension=32;
 
 @property (nonatomic,strong) REMAbstractChartWrapper *chartWrapper;
 
+@property (nonatomic,weak) REMTooltipViewBase *tooltipView;
 
 @end
 
@@ -240,6 +241,63 @@ const static CGFloat kRankButtonDimension=32;
         [self.chartWrapper destroyView];
         self.chartWrapper=nil;
     }
+}
+
+
+#pragma mark - Tooltip
+// Trend chart delegate
+-(void)highlightPoints:(NSArray*)points colors:(NSArray*)colors names:(NSArray*)names
+{
+    [self.searchView setHidden:YES];
+    
+    if(self.tooltipView!=nil){
+        [self.tooltipView updateHighlightedData:points];
+    }
+    else{
+        [self showTooltip:points];
+    }
+}
+
+-(void)showTooltip:(NSArray *)highlightedData
+{
+    REMTooltipViewBase *tooltip = [REMTooltipViewBase tooltipWithHighlightedData:highlightedData inEnergyData:self.energyData widget:self.widgetInfo andParameters:nil];
+    tooltip.tooltipDelegate = self;
+    
+    [self.view addSubview:tooltip];
+    self.tooltipView = tooltip;
+    
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        tooltip.frame = kDMChart_TooltipFrame;
+    } completion:nil];
+}
+
+-(void)hideTooltip:(void (^)(void))complete
+{
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.tooltipView.frame = kDMChart_TooltipHiddenFrame;
+    } completion:^(BOOL isCompleted){
+        [self.tooltipView removeFromSuperview];
+        self.tooltipView = nil;
+        
+        if(complete != nil)
+            complete();
+    }];
+}
+
+-(void)tooltipWillDisapear
+{
+    //NSLog(@"tool tip will disappear");
+    if(self.tooltipView==nil)
+        return;
+    
+    [self hideTooltip:^{
+        id chartView = (id)self.chartWrapper.view;
+        if([chartView respondsToSelector:@selector(cancelToolTipStatus)]){
+            [chartView cancelToolTipStatus];
+        }
+        
+        [self.searchView setHidden:NO];
+    }];
 }
 
 @end

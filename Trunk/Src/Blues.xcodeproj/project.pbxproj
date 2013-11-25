@@ -428,6 +428,7 @@
 		7A399E9D177D238F00F0EB9F /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E93177D238F00F0EB9F /* AFXMLRequestOperation.m */; };
 		7A399E9E177D238F00F0EB9F /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E95177D238F00F0EB9F /* UIImageView+AFNetworking.m */; };
 		7A399EA4177D279900F0EB9F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A399EA2177D279900F0EB9F /* InfoPlist.strings */; };
+		7A3C64FE184234CE003EDC7B /* REMLoginTrialCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C64FD184234CE003EDC7B /* REMLoginTrialCardController.m */; };
 		7A3CB75E1806385300B94DEE /* REMError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42117D877C3003B18E1 /* REMError.m */; };
 		7A3CB75F1806385300B94DEE /* REMBusinessErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */; };
 		7A3CB7601806385300B94DEE /* REMAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */; };
@@ -1031,6 +1032,8 @@
 		7A399E95177D238F00F0EB9F /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		7A399EA0177D279000F0EB9F /* CommonTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "CommonTests-Info.plist"; path = "../test/CommonTests/CommonTests-Info.plist"; sourceTree = "<group>"; };
 		7A399EA3177D279900F0EB9F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../test/CommonTests/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7A3C64FC184234CE003EDC7B /* REMLoginTrialCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginTrialCardController.h; sourceTree = "<group>"; };
+		7A3C64FD184234CE003EDC7B /* REMLoginTrialCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginTrialCardController.m; sourceTree = "<group>"; };
 		7A3DDCD81786C05B008A1033 /* REMServiceAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceAgent.h; path = Common/Communication/REMServiceAgent.h; sourceTree = "<group>"; };
 		7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceAgent.m; path = Common/Communication/REMServiceAgent.m; sourceTree = "<group>"; };
 		7A3DDCDB1786C195008A1033 /* REMMaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMaskManager.h; path = Common/Utility/REMMaskManager.h; sourceTree = "<group>"; };
@@ -2007,6 +2010,8 @@
 				7A153C7D17AA497B00413D3C /* REMLoginPageController.m */,
 				7A2E7EBB17F28E8A000EB506 /* REMLoginCustomerViewController.h */,
 				7A2E7EBC17F28E8A000EB506 /* REMLoginCustomerViewController.m */,
+				7A3C64FC184234CE003EDC7B /* REMLoginTrialCardController.h */,
+				7A3C64FD184234CE003EDC7B /* REMLoginTrialCardController.m */,
 			);
 			name = Login;
 			path = Controller/Login;
@@ -3648,6 +3653,7 @@
 				EFD947111839DEE100E9EC50 /* DChartColumnWrapper.m in Sources */,
 				7A153CC117AA4A5100413D3C /* REMBuildingOverallModel.m in Sources */,
 				7A2E7ECC17F2DD41000EB506 /* REMBuildingTitleView.m in Sources */,
+				7A3C64FE184234CE003EDC7B /* REMLoginTrialCardController.m in Sources */,
 				7A153CC417AA4B0D00413D3C /* REMCommodityUsageModel.m in Sources */,
 				B46C8EBD17F27C84006DC4CB /* REMDashboardCellViewCell.m in Sources */,
 				7A5AC77F1817CBEF006C7CB1 /* REMBuildingEntranceSegue.m in Sources */,

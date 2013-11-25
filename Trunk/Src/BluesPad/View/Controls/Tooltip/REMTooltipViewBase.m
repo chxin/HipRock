@@ -46,11 +46,17 @@
         
         UIView *contentView = [self renderContentView];
         
-        [contentView addSubview:[self renderScrollView]];
-        [contentView addSubview:[self renderCloseView]];
+        UIScrollView *scrollView = [self renderScrollView];
+        UIView *closeView = [self renderCloseView];
+        
+        
+        [contentView addSubview:scrollView];
+        [contentView addSubview:closeView];
         
         [self addSubview:contentView];
+        
         self.contentView=contentView;
+        self.scrollView = scrollView;
     }
     
     return self;

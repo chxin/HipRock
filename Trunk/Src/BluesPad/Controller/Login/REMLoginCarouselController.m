@@ -13,21 +13,25 @@
 #import "REMImages.h"
 #import "REMStoryboardDefinitions.h"
 #import "REMLoginCard.h"
+#import "REMLoginTrialCardController.h"
 
 @interface REMLoginCarouselController ()
 
 @property (nonatomic,weak) REMLoginPageController *loginPageController;
+@property (nonatomic,weak) REMLoginTrialCardController *trialCardController;
 
 @property (weak, nonatomic) UIScrollView *scrollView;
 @property (weak, nonatomic) UIPageControl *pageControl;
 @property (weak, nonatomic) UIButton *skipToLoginButton;
-@property (weak, nonatomic) UIButton *skipToDemoButton;
+@property (weak, nonatomic) UIButton *skipToTrialButton;
 
 @end
 
 @implementation REMLoginCarouselController
 
-const int cardCount = 4;
+const static int kCardCount = 5;
+static const int kTrialCardIndex = kCardCount - 1;
+static const int kLoginCardIndex = kCardCount - 2;
 
 - (void)loadView
 {
@@ -44,7 +48,7 @@ const int cardCount = 4;
 -(void)loadScrollView
 {
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:kDMDefaultViewFrame];
-    scrollView.contentSize = CGSizeMake(cardCount * kDMScreenWidth, scrollView.frame.size.height);
+    scrollView.contentSize = CGSizeMake(kCardCount * kDMScreenWidth, scrollView.frame.size.height);
     scrollView.pagingEnabled = YES;
     scrollView.bounces = NO;
     scrollView.showsHorizontalScrollIndicator = NO;
@@ -56,7 +60,7 @@ const int cardCount = 4;
     //load paging control
     UIPageControl *pageControl = [[UIPageControl alloc] init];
     pageControl.center = CGPointMake(kDMScreenWidth/2, kDMLogin_PageControlTopOffset);
-    pageControl.numberOfPages = cardCount;
+    pageControl.numberOfPages = kCardCount;
     pageControl.currentPage = 0;
     pageControl.autoresizingMask = UIViewAutoresizingNone;
     pageControl.backgroundColor = [UIColor redColor];
@@ -69,21 +73,33 @@ const int cardCount = 4;
 -(void)loadSkipButtons
 {
     UIEdgeInsets imageInsets = UIEdgeInsetsMake(5.0f, 12.0f, 0.0f, 12.0f);
-    NSString *title = REMLocalizedString(@"Login_SkipToLoginButtonText");
-    UIColor *titleColor = [REMColor colorByHexString:kDMLogin_SkipToLoginButtonFontColor];
     
     UIButton *skipToLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    skipToLoginButton.frame = CGRectMake((kDMScreenWidth-kDMLogin_SkipToLoginButtonWidth)/2, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
+    skipToLoginButton.frame = CGRectMake((kDMScreenWidth-2*kDMLogin_SkipToLoginButtonWidth - kDMLogin_SkipToTrialButtonLeftOffset)/2, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
     skipToLoginButton.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_SkipToLoginButtonFontSize];
     
-    [skipToLoginButton setTitleColor:titleColor forState:UIControlStateNormal];
-    [skipToLoginButton setTitle:title forState:UIControlStateNormal];
+    [skipToLoginButton setTitleColor:[REMColor colorByHexString:kDMLogin_SkipToLoginButtonFontColor] forState:UIControlStateNormal];
+    [skipToLoginButton setTitle:REMLocalizedString(@"Login_SkipToLoginButtonText") forState:UIControlStateNormal];
     [skipToLoginButton setBackgroundImage:[REMIMG_JumpLogin_Normal resizableImageWithCapInsets:imageInsets] forState:UIControlStateNormal];
     [skipToLoginButton setBackgroundImage:[REMIMG_JumpLogin_Pressed resizableImageWithCapInsets:imageInsets] forState:UIControlStateHighlighted];
     [skipToLoginButton addTarget:self action:@selector(jumpLoginButtonTouchDown:) forControlEvents:UIControlEventTouchUpInside];
     
+    UIButton *skipToTrialButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    skipToTrialButton.frame = CGRectMake(skipToLoginButton.frame.origin.x + kDMLogin_SkipToLoginButtonWidth + kDMLogin_SkipToTrialButtonLeftOffset, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
+    skipToTrialButton.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_SkipToLoginButtonFontSize];
+    [skipToTrialButton setTitleColor:[REMColor colorByHexString:kDMLogin_SkipToLoginButtonFontColor] forState:UIControlStateNormal];
+    [skipToTrialButton setTitle:REMLocalizedString(@"Login_SkipToTrialButtonText") forState:UIControlStateNormal];
+    [skipToTrialButton setBackgroundImage:[REMIMG_JumpLogin_Normal resizableImageWithCapInsets:imageInsets] forState:UIControlStateNormal];
+    [skipToTrialButton setBackgroundImage:[REMIMG_JumpLogin_Pressed resizableImageWithCapInsets:imageInsets] forState:UIControlStateHighlighted];
+    [skipToTrialButton addTarget:self action:@selector(jumpTrialButtonTouchDown:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
     [self.view addSubview:skipToLoginButton];
     self.skipToLoginButton = skipToLoginButton;
+    
+    [self.view addSubview:skipToTrialButton];
+    self.skipToTrialButton = skipToTrialButton;
 }
 
 - (void)viewDidLoad
@@ -91,15 +107,22 @@ const int cardCount = 4;
     self.navigationController.navigationBarHidden = YES;
     
     self.scrollView.delegate = self;
-    self.scrollView.contentOffset = CGPointMake((cardCount - 1) * kDMScreenWidth, 0);
+    self.scrollView.contentOffset = CGPointMake((kCardCount - 1) * kDMScreenWidth, 0);
 
     [self loadCards];
 }
 
 - (void)loadCards
 {
-    for (int i=0; i<cardCount; i++) {
-        UIView *content = i < cardCount - 1 ? [self renderImageCard:i] : [self renderLoginCard];
+    for (int i=0; i<kCardCount; i++) {
+        
+        UIView *content = nil;
+        if(i == kLoginCardIndex)
+            content = [self renderLoginCard];
+        else if(i == kTrialCardIndex)
+            content = [self renderTrialCard];
+        else
+            content = [self renderImageCard:i];
         
         REMLoginCard *card = [[REMLoginCard alloc] initWithContentView:content];
         card.frame = CGRectMake(kDMScreenWidth * i, card.frame.origin.y, card.frame.size.width, card.frame.size.height);
@@ -129,6 +152,17 @@ const int cardCount = 4;
     return loginPageController.view;
 }
 
+-(UIView *)renderTrialCard
+{
+    REMLoginTrialCardController *trialController = [[REMLoginTrialCardController alloc] init];
+    trialController.loginCarouselController = self;
+    
+    [self addChildViewController:trialController];
+    self.trialCardController = trialController;
+    
+    return trialController.view;
+}
+
 - (void)playCarousel
 {
     [UIView animateWithDuration:1.5 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -146,9 +180,13 @@ const int cardCount = 4;
     [self showLoginCard];
 }
 
+-(void)jumpTrialButtonTouchDown:(id)sender{
+    [self showPage:kTrialCardIndex withEaseAnimation:YES];
+}
+
 - (void)showLoginCard
 {
-    [self showPage:cardCount-1 withEaseAnimation:YES];
+    [self showPage:kLoginCardIndex withEaseAnimation:YES];
 }
 
 - (void)showPage:(int) page withEaseAnimation:(BOOL)ease
@@ -186,10 +224,18 @@ const int cardCount = 4;
     //NSLog(@"current page: %d",page);
 
     [self.pageControl setCurrentPage:page];
-    if(page == self.pageControl.numberOfPages-1)
+    
+    [self.skipToLoginButton setEnabled:YES];
+    [self.skipToTrialButton setEnabled:YES];
+    
+    if(page == kLoginCardIndex){
         [self.skipToLoginButton setEnabled:NO];
-    if(page==0 || page == self.pageControl.numberOfPages-2)
+        [self.skipToTrialButton setEnabled:YES];
+    }
+    if(page == kTrialCardIndex){
+        [self.skipToTrialButton setEnabled:NO];
         [self.skipToLoginButton setEnabled:YES];
+    }
 }
 
 @end
