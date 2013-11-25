@@ -799,8 +799,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="客户信息" id="lT4-Vf-6Yb"/>
                     <connections>
-                        <segue destination="Jdc-8P-g2p" kind="push" identifier="settingCustomerDetailLogoSegue" id="ZbP-I5-InW"/>
                         <segue destination="3SI-B8-pFI" kind="push" identifier="settingCustomerDetailAdminSegue" id="75B-a9-bOP"/>
+                        <segue destination="0Gw-Oc-ndZ" kind="push" identifier="settingCustomerDetailLogoSegue" id="Mc4-67-7X4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dag-9k-JiW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -808,34 +808,23 @@
             <point key="canvasLocation" x="-2104" y="-2725"/>
         </scene>
         <!--Setting Customer Detail Logo View Controller - Logo-->
-        <scene sceneID="0I7-nP-QSv">
+        <scene sceneID="aVh-Se-nuy">
             <objects>
-                <tableViewController id="Jdc-8P-g2p" customClass="REMSettingCustomerDetailLogoViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="DzU-1l-i6b">
+                <viewController title="Logo" id="0Gw-Oc-ndZ" customClass="REMSettingCustomerDetailLogoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZGi-6o-TS0"/>
+                        <viewControllerLayoutGuide type="bottom" id="IBg-DV-AcV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oHm-3x-EJd">
                         <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="logoCell" rowHeight="83" id="iLL-fu-Gci">
-                                <rect key="frame" x="0.0" y="119" width="540" height="83"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iLL-fu-Gci" id="9cK-qa-vsC">
-                                    <rect key="frame" x="0.0" y="0.0" width="540" height="82"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <sections/>
-                        <connections>
-                            <outlet property="dataSource" destination="Jdc-8P-g2p" id="Vkl-Hl-UJA"/>
-                            <outlet property="delegate" destination="Jdc-8P-g2p" id="STc-pv-jTh"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Logo" id="Fof-6G-NNA"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="V6A-JF-NGC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="sfT-9b-zsC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PAE-lT-cZj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1340" y="-3253"/>
+            <point key="canvasLocation" x="-1340" y="-3039"/>
         </scene>
         <!--Setting Customer Detail Admin View Controller - 客户管理员-->
         <scene sceneID="fpM-KK-Sce">

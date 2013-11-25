@@ -344,7 +344,7 @@
     newView.image=view;
     UIImageView *newBlurred= [self blurredImageView:newView];
     
-    
+    //[newBlurred setFrame:CGRectMake(-25, -25, newBlurred.frame.size.width+50, newBlurred.frame.size.height+50)];
     
     [self.view insertSubview:newView aboveSubview:self.blurImageView];
     [self.view insertSubview:newBlurred aboveSubview:newView];
@@ -474,8 +474,16 @@
     if(self.blurImageView.alpha == blurLevel) return;
     self.blurImageView.alpha = MAX(blurLevel,0);
     
+    if(blurLevel>=1.0){
+        self.imageView.alpha=0;
+    }
+    else{
+        self.imageView.alpha=1;
+    }
     
     self.glassView.alpha = MAX(0,MIN(blurLevel,0.8));
+    //NSLog(@"blurlevel:%f",blurLevel);
+    
     
 }
 

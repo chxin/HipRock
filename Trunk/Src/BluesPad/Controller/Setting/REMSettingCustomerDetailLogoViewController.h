@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface REMSettingCustomerDetailLogoViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>
+@interface REMSettingCustomerDetailLogoViewController :UIViewController
 
 @end
