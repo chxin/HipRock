@@ -30,6 +30,7 @@
 @property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
 
 @property (nonatomic,strong) DAbstractChartWrapper *chartWrapper;
+@property (nonatomic,strong) REMPieChartWrapper *pieWrapper;
 
 @property (nonatomic,strong) NSArray *currentStepList;
 @property (nonatomic,weak) REMTooltipViewBase *tooltipView;
@@ -343,6 +344,11 @@
 
 - (void)reloadChart{
     
+    if(self.pieWrapper!=nil){
+        [self.pieWrapper redraw:self.energyData];
+        return;
+    }
+    
     if([self.chartWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
         DCTrendWrapper *trend=(DCTrendWrapper *)self.chartWrapper;
         [self processCalendar];
@@ -381,7 +387,7 @@
 }
 
 - (void) showEnergyChart{
-    if(self.chartWrapper!=nil){
+    if(self.chartWrapper!=nil || self.pieWrapper){
         return;
     }
     
@@ -391,6 +397,7 @@
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
     DAbstractChartWrapper  *widgetWrapper;
+    REMPieChartWrapper *pieWrapper;
     if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[DCLineWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         widgetWrapper.delegate = self;
@@ -405,7 +412,7 @@
 //        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
 //        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypePie) {
-        widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        pieWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         ((REMPieChartView *)((REMPieChartWrapper*)widgetWrapper).view).delegate = self;
     } else if (widgetType == REMDiagramTypeRanking) {
         widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
@@ -423,6 +430,10 @@
         }
         [self.chartContainer addSubview:[widgetWrapper getView]];
         self.chartWrapper=widgetWrapper;
+    }
+    else if(pieWrapper!=nil){
+        [self.chartContainer addSubview:pieWrapper.view];
+        self.pieWrapper=pieWrapper;
     }
     
 }

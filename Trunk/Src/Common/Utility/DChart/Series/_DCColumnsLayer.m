@@ -54,9 +54,11 @@
         start = MAX(0, start);
         
         NSMutableDictionary* xDics = [[NSMutableDictionary alloc]init];
+        int seriesAmount = self.series.count;
         for (int j = start; j<=end; j++) {
             double stackedHeight = 0;
-            for (DCColumnSeries* s in self.series) {
+            for (int i = 0; i < seriesAmount; i++) {
+                DCColumnSeries* s = self.series[self.graphContext.stacked ? (seriesAmount-i-1) : i];
                 if (s.hidden) continue;
                 if (j >= s.datas.count) continue;
                 DCDataPoint* key = s.datas[j];
