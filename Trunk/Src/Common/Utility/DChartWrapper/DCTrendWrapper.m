@@ -109,13 +109,9 @@ typedef enum _DChartStatus {
 
 -(DCXYSeries*)createSeriesAt:(NSUInteger)index style:(REMChartStyle*)style {
     DCXYChartView* view = self.view;
-    NSUInteger eIndex = index;
-    if (self.isStacked) {
-        eIndex = [self getSeriesAmount] - index - 1; // 翻转stack图的序列
-    }
-    REMTargetEnergyData* targetEnergy = self.energyViewData.targetEnergyData[eIndex];
+    REMTargetEnergyData* targetEnergy = self.energyViewData.targetEnergyData[index];
     NSMutableArray* datas = [[NSMutableArray alloc]init];
-    REMTrendChartDataProcessor* processor = [self.processors objectAtIndex:eIndex];
+    REMTrendChartDataProcessor* processor = [self.processors objectAtIndex:index];
     for (REMEnergyData* point in targetEnergy.energyData) {
         int processedX = [processor processX:point.localTime].integerValue;
         while ((int)datas.count < processedX) {
