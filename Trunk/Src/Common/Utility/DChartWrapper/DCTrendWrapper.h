@@ -26,6 +26,6 @@
 
 -(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style;
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style;
--(void)updateProcessorRangesFormatter:(REMEnergyStep)step;
+-(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step;
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step;
 @end

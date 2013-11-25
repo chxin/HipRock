@@ -7,10 +7,6 @@
 //
 
 #import "DCRankingWrapper.h"
-@interface DCTrendWrapper()
-@property (nonatomic, strong) DCRange* beginRange;
-@property (nonatomic, strong) DCRange* globalRange;
-@end
 
 @implementation DCRankingWrapper
 
@@ -64,11 +60,12 @@
     rankingSeries.datas = datas;
 }
 
--(void)updateProcessorRangesFormatter:(REMEnergyStep)step {
+-(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
     int rangeCode = self.rankingRangeCode;
     int datasAmount = self.energyViewData.targetEnergyData.count;
-    self.beginRange = [[DCRange alloc]initWithLocation:-0.5 length:MIN(rangeCode, datasAmount)];
-    self.globalRange = [[DCRange alloc]initWithLocation:-0.5 length:datasAmount];
+    
+    
+    return @{ @"globalRange": [[DCRange alloc]initWithLocation:-0.5 length:datasAmount], @"beginRange": [[DCRange alloc]initWithLocation:-0.5 length:MIN(rangeCode, datasAmount)] };
 }
 
 -(void)extraSyntax:(REMWidgetContentSyntax*)syntax {

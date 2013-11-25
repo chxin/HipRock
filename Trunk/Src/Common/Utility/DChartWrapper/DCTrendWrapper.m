@@ -16,8 +16,8 @@ typedef enum _DChartStatus {
 
 @interface DCTrendWrapper()
 @property (nonatomic, strong) NSMutableArray* processors;
-@property (nonatomic, strong) DCRange* beginRange;
-@property (nonatomic, strong) DCRange* globalRange;
+//@property (nonatomic, strong) DCRange* beginRange;
+//@property (nonatomic, strong) DCRange* globalRange;
 @property (nonatomic, strong) _DCXLabelFormatter* xLabelFormatter;
 @property (nonatomic, strong) REMTrendChartDataProcessor* sharedProcessor;
 @property (nonatomic, assign) DChartStatus chartStatus;
@@ -42,16 +42,16 @@ typedef enum _DChartStatus {
         
         _chartStatus = DChartStatusNormal;
         _energyViewData = energyViewData;
-        [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
+        NSDictionary* dic = [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
         
-        [self createChartView:frame];
+        [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"]];
         [self updateCalender];
     }
     return self;
 }
 
--(void)createChartView:(CGRect)frame {
-    DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:self.beginRange stacked:self.isStacked];
+-(void)createChartView:(CGRect)frame beginRange:(DCRange*)beginRange globalRange:(DCRange*)globalRange {
+    DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:beginRange stacked:self.isStacked];
     [view setXLabelFormatter:self.xLabelFormatter];
     _view = view;
     view.xAxis = [[DCAxis alloc]init];
@@ -64,7 +64,7 @@ typedef enum _DChartStatus {
     for (; seriesIndex < seriesAmount; seriesIndex++) {
         [seriesList addObject:[self createSeriesAt:seriesIndex style:self.style]];
     }
-    view.graphContext.globalHRange = self.globalRange;
+    view.graphContext.globalHRange = globalRange;
     view.seriesList = seriesList;
     
     view.userInteractionEnabled = self.style.userInteraction;
@@ -171,7 +171,7 @@ typedef enum _DChartStatus {
     return length;
 }
 
--(void)updateProcessorRangesFormatter:(REMEnergyStep)step {
+-(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
     self.isStacked = ([self.xtypeOfWidget rangeOfString:@"stack"].location != NSNotFound);
     
     NSUInteger seriesAmount = [self getSeriesAmount];
@@ -232,11 +232,12 @@ typedef enum _DChartStatus {
     NSNumber* globalLength = @([self roundDate:globalEndDate startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:NO].intValue);
     int startPoint = [self roundDate:beginningStart startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:YES].intValue;
     int endPoint = [self roundDate:beginningEnd startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:NO].intValue;
-    self.beginRange = [[DCRange alloc]initWithLocation:startPoint-0.5 length:endPoint-startPoint];
-    self.globalRange = [[DCRange alloc]initWithLocation:-0.5 length:globalLength.doubleValue];
-    self.myStableRange = self.beginRange;
+    DCRange* beginRange = [[DCRange alloc]initWithLocation:startPoint-0.5 length:endPoint-startPoint];
+    DCRange* globalRange = [[DCRange alloc]initWithLocation:-0.5 length:globalLength.doubleValue];
+    self.myStableRange = beginRange;
     
     self.xLabelFormatter = [[_DCXLabelFormatter alloc]initWithStartDate:baseDateOfX dataStep:step interval:1];
+    return @{ @"globalRange": globalRange, @"beginRange": beginRange };
 }
 
 -(NSUInteger)getSeriesAmount {
@@ -247,13 +248,16 @@ typedef enum _DChartStatus {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
     double rangeStart = newRange.location;
     double rangeEnd = newRange.location + newRange.length;
-    if (rangeStart < self.globalRange.location) {
-        rangeStart = self.globalRange.location;
-        rangeEnd = self.globalRange.location + newRange.length;
+    if (rangeStart < self.graphContext.globalHRange.location) {
+        rangeStart = self.graphContext.globalHRange.location;
+        rangeEnd = self.graphContext.globalHRange.location + newRange.length;
     }
-    if (rangeEnd > self.globalRange.length+self.globalRange.location) {
-        rangeEnd = self.globalRange.length+self.globalRange.location;
+    if (rangeEnd > self.graphContext.globalHRange.end) {
+        rangeEnd = self.graphContext.globalHRange.end;
         rangeStart = rangeEnd - newRange.length;
+    }
+    if (oldRange.length != newRange.length) {
+        [self updateCalender];
     }
     DCRange* myNewRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
     
@@ -289,12 +293,12 @@ typedef enum _DChartStatus {
     DCRange* newRange = self.graphContext.hRange;
     double rangeStart = newRange.location;
     double rangeEnd = newRange.location + newRange.length;
-    if (rangeStart < self.globalRange.location) {
-        rangeStart = self.globalRange.location;
-        rangeEnd = self.globalRange.location + newRange.length;
+    if (rangeStart < self.graphContext.globalHRange.location) {
+        rangeStart = self.graphContext.globalHRange.location;
+        rangeEnd = self.graphContext.globalHRange.location + newRange.length;
     }
-    if (rangeEnd > self.globalRange.length+self.globalRange.location) {
-        rangeEnd = self.globalRange.length+self.globalRange.location;
+    if (rangeEnd > self.graphContext.globalHRange.end) {
+        rangeEnd = self.graphContext.globalHRange.end;
         rangeStart = rangeEnd - newRange.length;
     }
     DCRange* myNewRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
@@ -329,13 +333,13 @@ typedef enum _DChartStatus {
 }
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
     _energyViewData = energyViewData;
-    [self updateProcessorRangesFormatter:step];
+    NSDictionary* dic = [self updateProcessorRangesFormatter:step];
     CGRect frame = self.view.frame;
     UIView* superView = self.view.superview;
     [self.view removeFromSuperview];
     _chartStatus = DChartStatusNormal;
     
-    [self createChartView:frame];
+    [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"]];
     [superView addSubview:self.view];
     [self updateCalender];
 }

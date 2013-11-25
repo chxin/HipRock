@@ -99,7 +99,7 @@
     if (![self isPointInPie:point]) return nil;
     DCPieSeries* series = self.series;
     if (series.sumVisableValue == 0) return nil;
-    CGFloat pointAngle = asin((point.y-self.center.y)/pow(pow((point.x - self.center.x), 2) + pow(point.y-self.center.y, 2),0.5))*180/M_PI;
+    CGFloat pointAngle = asin((point.y-self.center.y)/pow(pow((point.x - self.center.x), 2) + pow(point.y-self.center.y, 2),0.5))*180/M_PI - self.rotationAngle*180;
     if (pointAngle < 0) pointAngle+=360;
     double sumPreviousPointValue = 0;
     NSUInteger i = 0;
@@ -120,7 +120,7 @@
 -(void)align {
     DCPieSeries* series = self.series;
     if (series.sumVisableValue == 0) return;
-    CGFloat const indicatorAngle = 270;
+    CGFloat const indicatorAngle = 270 - self.rotationAngle*180;
     double sumPreviousPointValue = 0;
     NSUInteger i = 0;
     for (; i < series.datas.count; i++) {
@@ -129,8 +129,8 @@
         double selfAngle = point.value.doubleValue / series.sumVisableValue * 360;
         sumPreviousPointValue += selfAngle;
         if (sumPreviousPointValue > indicatorAngle) {
-            CGFloat angelNeedToRotate = indicatorAngle - self.rotationAngle*180/M_PI + selfAngle/2 - sumPreviousPointValue;
-            NSLog(@"angelNeedToRotate %f", angelNeedToRotate);
+            CGFloat angelNeedToRotate = indicatorAngle - self.rotationAngle*180 + selfAngle/2 - sumPreviousPointValue;
+            NSLog(@"angelNeedToRotate %f %f %f %f %f %f %i", indicatorAngle, self.rotationAngle, self.rotationAngle*180, selfAngle, sumPreviousPointValue,angelNeedToRotate, i);
             break;
         }
     }
@@ -181,8 +181,8 @@
 }
 
 -(void)setRotationAngle:(CGFloat)rotationAngle {
-    if (rotationAngle >= M_PI * 2) rotationAngle -= M_PI*2;
-    if (rotationAngle < 0) rotationAngle += M_PI*2;
+    if (rotationAngle >= 2) rotationAngle -= 2;
+    if (rotationAngle < 0) rotationAngle += 2;
     _rotationAngle = rotationAngle;
     [self setNeedsDisplay];
 }
