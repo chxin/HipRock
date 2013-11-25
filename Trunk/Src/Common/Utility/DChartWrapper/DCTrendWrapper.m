@@ -160,7 +160,7 @@ typedef enum _DChartStatus {
     NSNumber* length = [processor processX:lengthDate];
     NSDate* edgeOfGlobalEnd = [processor deprocessX:length.intValue];
     NSComparisonResult end = [edgeOfGlobalEnd compare:lengthDate];
-    if (end == NSOrderedSame || end == NSOrderedDescending) {
+    if (end == NSOrderedDescending) {
         return length;
     } else if (roundToFloor) {
         length = @(length.intValue);
@@ -327,12 +327,12 @@ typedef enum _DChartStatus {
     _calenderType = syntax.calendarType;
 }
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
+    _energyViewData = energyViewData;
     [self updateProcessorRangesFormatter:step];
     CGRect frame = self.view.frame;
     UIView* superView = self.view.superview;
     [self.view removeFromSuperview];
     _chartStatus = DChartStatusNormal;
-    _energyViewData = energyViewData;
     
     [self createChartView:frame];
     [superView addSubview:self.view];
