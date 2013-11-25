@@ -861,9 +861,9 @@
 -(void)highlightPoints:(NSArray*)points
 {
     //points is an array of DCDataPoint
-    if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
-        return;
-    }
+//    if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
+//        return;
+//    }
     
     [self.searchView setHidden:YES];
     
