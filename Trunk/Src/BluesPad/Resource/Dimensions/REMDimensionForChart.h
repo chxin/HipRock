@@ -25,8 +25,9 @@
 
 //indicator
 #define kDMChart_IndicatorSize 18
-#define kDMChart_IndicatorBorderWidth 3
-#define kDMChart_IndicatorBorderContentSpace 3
+#define kDMChart_IndicatorLineWidth 2
+//#define kDMChart_IndicatorBorderWidth 3
+//#define kDMChart_IndicatorBorderContentSpace 3
 
 //legend
 #define kDMChart_LegendItemWidth 239
