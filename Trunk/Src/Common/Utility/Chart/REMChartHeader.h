@@ -25,6 +25,10 @@
  * names: List<NSString>
  */
 -(void)highlightPoints:(NSArray*)points colors:(NSArray*)colors names:(NSArray*)names;
+/*
+ * points: List<DCDataPoint>
+ */
+-(void)highlightPoints:(NSArray*)points;
 
 /*
  * Parameter data type: NSDate for line/column. NSNumber for ranking.

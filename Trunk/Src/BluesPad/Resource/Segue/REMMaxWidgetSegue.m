@@ -57,6 +57,8 @@
     //cloneView.layer.borderColor=[UIColor redColor].CGColor;
     //cloneView.layer.borderWidth=1;
     
+    [cellController.view setHidden:YES];
+    
     CGRect frame=[cellController.view convertRect:cellController.view.frame fromView:srcController.view];
     CGRect newFrame= CGRectMake(frame.origin.x*-1, frame.origin.y*-1, frame.size.width, frame.size.height);
     
@@ -119,7 +121,7 @@
     REMWidgetCollectionViewController *collectionController= dashboardController.childViewControllers[dashboardController.currentMaxDashboardIndex];
     
     REMWidgetCellViewController *cellController=collectionController.childViewControllers[collectionController.currentMaxWidgetIndex];
-    
+    [cellController.view setHidden:NO];
     
     CGRect frame=[cellController.view convertRect:cellController.view.frame fromView:destController.view];
     CGRect newFrame= CGRectMake(frame.origin.x*-1, frame.origin.y*-1, frame.size.width, frame.size.height);

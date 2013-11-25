@@ -10,6 +10,8 @@
 #import "DCDataPoint.h"
 #import "DCAxis.h"
 #import "DCRange.h"
+#import "_DCSeriesLayer.h"
+#import "REMEnergyTargetModel.h"
 
 
 @interface DCXYSeries : DCSeries<DCContextHRangeObserverProtocal>
@@ -17,7 +19,10 @@
 @property (nonatomic, readonly) NSNumber* visableYMax;
 @property (nonatomic, weak) DCAxis* xAxis;
 @property (nonatomic, weak) DCAxis* yAxis;
+@property (nonatomic, weak) REMEnergyTargetModel* target;
 
 @property (nonatomic, assign)BOOL hidden;
+
+@property (nonatomic, weak) _DCSeriesLayer* seriesLayer;
 
 @end

@@ -7,14 +7,16 @@
 //
 
 #import "REMWidgetRankingDelegator.h"
+#import "DCRankingWrapper.h"
 
 const static CGFloat kRankButtonDimension=32;
+const static CGFloat kRankingTimePickerWidth=222;
 
 @interface REMWidgetRankingDelegator()
 
 @property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
 
-@property (nonatomic,strong) REMAbstractChartWrapper *chartWrapper;
+@property (nonatomic,strong) DCRankingWrapper *chartWrapper;
 
 @property (nonatomic,weak) REMTooltipViewBase *tooltipView;
 
@@ -60,7 +62,7 @@ const static CGFloat kRankButtonDimension=32;
     timePickerButton.layer.cornerRadius=4;
     timePickerButton.translatesAutoresizingMaskIntoConstraints = NO;
     [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];
-    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-150)];
+    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, -8, 0, 0)];
     timePickerButton.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetDatePickerTitleSize];
 
     [timePickerButton setTitleColor:[REMColor colorByHexString:@"#5e5e5e"] forState:UIControlStateNormal];
@@ -92,7 +94,7 @@ const static CGFloat kRankButtonDimension=32;
     
     NSMutableArray *searchViewSubViewConstraints = [NSMutableArray array];
     NSDictionary *searchViewSubViewDic = NSDictionaryOfVariableBindings(timePickerButton,orderButton);
-    NSDictionary *searchViewSubViewMetrics = @{@"margin":@(kWidgetDatePickerLeftMargin),@"buttonHeight":@(kWidgetDatePickerHeight),@"buttonWidth":@(kWidgetDatePickerWidth),@"top":@(kWidgetDatePickerTopMargin),@"rankDimension":@(kRankButtonDimension)};
+    NSDictionary *searchViewSubViewMetrics = @{@"margin":@(kWidgetDatePickerLeftMargin),@"buttonHeight":@(kWidgetDatePickerHeight),@"buttonWidth":@(kRankingTimePickerWidth),@"top":@(kWidgetDatePickerTopMargin),@"rankDimension":@(kRankButtonDimension)};
     [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[timePickerButton(buttonWidth)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
     [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[timePickerButton(buttonHeight)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
     
@@ -104,14 +106,14 @@ const static CGFloat kRankButtonDimension=32;
 }
 
 - (void) orderButtonClicked:(UIButton *)button{
-    REMRankingWidgetWrapper *rank=(REMRankingWidgetWrapper *)self.chartWrapper;
+//    REMRankingWidgetWrapper *rank=(REMRankingWidgetWrapper *)self.chartWrapper;
     if(button.selected==YES){
         [button setSelected:NO];
-        rank.sortOrder=NSOrderedAscending;
+        self.chartWrapper.sortOrder=NSOrderedAscending;
     }
     else{
         [button setSelected:YES];
-        rank.sortOrder=NSOrderedDescending;
+        self.chartWrapper.sortOrder=NSOrderedDescending;
     }
 }
 
@@ -179,7 +181,7 @@ const static CGFloat kRankButtonDimension=32;
 }
 
 - (void)reloadChart{
-    [self.chartWrapper redraw:self.energyData];
+    [self.chartWrapper redraw:self.energyData step:REMEnergyStepNone];
 }
 
 
@@ -197,9 +199,9 @@ const static CGFloat kRankButtonDimension=32;
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
-    REMRankingWidgetWrapper  *widgetWrapper;
+    DCRankingWrapper  *widgetWrapper;
     if (widgetType == REMDiagramTypeRanking) {
-        widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
     }
     if (widgetWrapper != nil) {
         [self.chartContainer addSubview:widgetWrapper.view];
@@ -238,7 +240,7 @@ const static CGFloat kRankButtonDimension=32;
 
 - (void)releaseChart{
     if(self.chartWrapper!=nil){
-        [self.chartWrapper destroyView];
+//        [self.chartWrapper destroyView];
         self.chartWrapper=nil;
     }
 }

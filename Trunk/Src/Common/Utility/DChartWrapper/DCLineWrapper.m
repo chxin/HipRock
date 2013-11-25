@@ -6,9 +6,9 @@
 //
 //
 
-#import "DChartLineChartWrapper.h"
+#import "DCLineWrapper.h"
 
-@implementation DChartLineChartWrapper
+@implementation DCLineWrapper
 @synthesize defaultSeriesClass = _defaultSeriesClass;
 
 -(id)init {
@@ -19,7 +19,7 @@
     return self;
 }
 
-//-(DChartLineChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style {
+//-(DCLineWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style {
 //    self = [super initWithFrame:frame data:energyViewData widgetContext:widgetSyntax style:style];
 //    return self;
 //}

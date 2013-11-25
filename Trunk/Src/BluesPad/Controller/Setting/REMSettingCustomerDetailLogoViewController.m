@@ -14,12 +14,12 @@
 
 @implementation REMSettingCustomerDetailLogoViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
+    if(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]){
+        
     }
+    
     return self;
 }
 
@@ -27,40 +27,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+    [self.view setBackgroundColor:[UIColor grayColor]];
     //self.logoImageVIew.image = REMAppCurrentLogo;
-    
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString* cellId=@"logoCell";
-    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-    if(cell==nil){
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-    }
-    if(cell.contentView.subviews.count>0)return cell;
-    
-    
     UIImageView *image=[[UIImageView alloc] initWithImage:REMAppCurrentLogo];
-    [image setFrame:CGRectMake(-5,-5, 500, cell.frame.size.height)];
+    [image setFrame:CGRectMake((self.navigationController.view.frame.size.width-image.frame.size.width)/2,100, image.frame.size.width, image.frame.size.height)];
     
-    //cell.contentView.contentMode=UIViewContentModeScaleToFill;
-    [cell.contentView addSubview:image];
-    
-    
-    return cell;
-    
+    [self.view addSubview:image];
 }
+
 
 
 

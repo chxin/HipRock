@@ -25,6 +25,10 @@ CGFloat const kDCFocusPointSymbolMagnify = 2;    // focus的线图的symbol放�
 
 BOOL const kDCHideLineSymbolWhenDragging = NO;  // 在拖动时是否隐藏Symbol
 
+
+NSString* const kDCPieShadowColor = @"#e9e9e9";
+NSString* const kDCPieIndicatorColor = @"#e9e9e9";
+
 @interface DCContext()
 @property (nonatomic) NSMutableArray* hRangeObservers;
 @property (nonatomic) NSMutableArray* y0RangeObservers;

@@ -1,14 +1,14 @@
 //
-//  DChartColumnWrapper.m
+//  DCColumnWrapper.m
 //  Blues
 //
 //  Created by Zilong-Oscar.Xu on 11/18/13.
 //
 //
 
-#import "DChartColumnWrapper.h"
+#import "DCColumnWrapper.h"
 
-@implementation DChartColumnWrapper
+@implementation DCColumnWrapper
 @synthesize defaultSeriesClass = _defaultSeriesClass;
 
 -(id)init {
@@ -19,7 +19,7 @@
     return self;
 }
 
-//-(DChartColumnWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style {
+//-(DCColumnWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style {
 //    self = [super initWithFrame:frame data:energyViewData widgetContext:widgetSyntax style:style];
 //    if (self && energyViewData.targetEnergyData.count != 0) {
 //        _energyViewData = energyViewData;

@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DTrendChartWrapper.h"
+#import "DCTrendWrapper.h"
 
-@interface DChartLineChartWrapper : DTrendChartWrapper
+@interface DCLineWrapper : DCTrendWrapper
 
 @end

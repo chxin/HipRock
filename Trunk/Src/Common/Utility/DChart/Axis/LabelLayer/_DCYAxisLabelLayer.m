@@ -17,8 +17,8 @@
 @end
 
 @implementation _DCYAxisLabelLayer
--(id)init {
-    self = [super init];
+-(id)initWithContext:(DCContext *)context {
+    self = [super initWithContext:context];
     if (self) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
         _numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;

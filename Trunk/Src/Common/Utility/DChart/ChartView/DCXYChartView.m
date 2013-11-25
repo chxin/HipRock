@@ -16,6 +16,7 @@
 #import "DCXYSeries.h"
 #import "_DCLineSymbolsLayer.h"
 #import "REMColor.h"
+#import "_DCHPinchGestureRecognizer.h"
 
 @interface DCXYChartView ()
 @property (nonatomic, strong) DCRange* beginHRange;
@@ -56,6 +57,13 @@
 
 @property (nonatomic, strong) UITapGestureRecognizer* tapGsRec;
 @property (nonatomic, strong) UIPanGestureRecognizer* panGsRec;
+@property (nonatomic, strong) _DCHPinchGestureRecognizer* pinchGsRec;
+
+@property (nonatomic, assign) int focusPointIndex;
+
+@property (nonatomic, strong) _DCBackgroundBandsLayer* backgroundBandsLayer;
+
+@property (nonatomic, strong) NSArray* bgBands;
 
 @end
 
@@ -68,8 +76,10 @@
         self.symbolLayers = [[NSMutableArray alloc]init];
         self.graphContext = [[DCContext alloc]initWithStacked:stacked];
         self.graphContext.hGridlineAmount = 0;
+        self.backgoundBands = [[NSMutableArray alloc]init];
 //        self.multipleTouchEnabled = YES;
         _beginHRange = beginHRange;
+        _focusPointIndex = INT32_MIN;
     }
     return self;
 }
@@ -104,6 +114,12 @@
     [self drawAxisLines];
     [self drawHGridline];
     [self drawXLabelLayer];
+    
+    self.backgroundBandsLayer = [[_DCBackgroundBandsLayer alloc]initWithContext:self.graphContext];
+    self.backgroundBandsLayer.frame = self.plotRect;
+    [self.graphContext addHRangeObsever:self.backgroundBandsLayer];
+    [self.layer addSublayer:self.backgroundBandsLayer];
+    [self.backgroundBandsLayer setBands:self.bgBands];
     
     self.coordinate0 = [self createCoordinateSystem:self.xAxis y:self.yAxis0 series:self.seriesList index:0];
     self.coordinate1 = [self createCoordinateSystem:self.xAxis y:self.yAxis1 series:self.seriesList index:1];
@@ -237,8 +253,7 @@
 }
 
 -(_DCYAxisLabelLayer*) createYLabelLayer:(DCAxis*)yAxis {
-    _DCYAxisLabelLayer* _yLabelLayer = [[_DCYAxisLabelLayer alloc]init];
-    _yLabelLayer.graphContext = self.graphContext;
+    _DCYAxisLabelLayer* _yLabelLayer = [[_DCYAxisLabelLayer alloc]initWithContext:self.graphContext];
     _yLabelLayer.axis = yAxis;
     _yLabelLayer.font = yAxis.labelFont;
     _yLabelLayer.fontColor = yAxis.labelColor;
@@ -286,8 +301,7 @@
 }
 
 -(void)drawHGridline {
-    self._hGridlineLayer = [[_DCHGridlineLayer alloc]init];
-    self._hGridlineLayer.graphContext = self.graphContext;
+    self._hGridlineLayer = [[_DCHGridlineLayer alloc]initWithContext:self.graphContext];
     self._hGridlineLayer.frame = self.plotRect;
     self._hGridlineLayer.lineColor = self.hGridlineColor;
     self._hGridlineLayer.lineWidth = self.hGridlineWidth;
@@ -404,19 +418,15 @@
         }
         if (moveEnabled) {
             if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed) {
-                DCRange* stopRange = nil;
                 if (self.graphContext.hRange.location < self.graphContext.globalHRange.location) {
-//                    stopRange = [DCRange alloc]initWithLocation:<#(double)#> length:<#(double)#>;
                     [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.location];
                 } else if (self.graphContext.hRange.length+self.graphContext.hRange.location>self.graphContext.globalHRange.location+self.graphContext.globalHRange.length) {
-                    stopRange = self.graphContext.hRange;
                     [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.length+self.graphContext.globalHRange.location-self.graphContext.hRange.length];
                 } else {
-                    stopRange = self.graphContext.hRange;
                     [self setLineSymbolsHidden:NO];
                 }
-                if (self.delegate && [self.delegate respondsToSelector:@selector(panStoppedAtRange:)]) {
-                    [self.delegate panStoppedAtRange:stopRange];
+                if (self.delegate && [self.delegate respondsToSelector:@selector(panStopped)]) {
+                    [self.delegate panStopped];
                 }
             } else {
                 [self setLineSymbolsHidden:YES];
@@ -427,6 +437,22 @@
 //        NSLog(@"Pan gesture state:%d", gesture.state);
 //    }
 }
+
+-(void)viewPinched:(_DCHPinchGestureRecognizer*)gesture {
+    NSSet* touches = gesture.theTouches;
+    if (REMIsNilOrNull(touches) || touches.count != 2) return;
+    UITouch* touch0 = touches.allObjects[0];
+    UITouch* touch1 = touches.allObjects[1];
+    CGFloat preDis = [touch0 previousLocationInView:self].x - [touch1 previousLocationInView:self].x;
+    CGFloat curDis = [touch0 locationInView:self].x - [touch1 locationInView:self].x;
+    CGFloat scale = curDis / preDis;
+    if (scale <= 0) return;
+    self.graphContext.hRange = [[DCRange alloc]initWithLocation:self.graphContext.hRange.location length:self.graphContext.hRange.length/scale];
+    NSLog(@"pinch:%f %f", self.graphContext.hRange.location, self.graphContext.hRange.length);
+}
+
+
+
 
 -(void)setUserInteractionEnabled:(BOOL)userInteractionEnabled {
     if(self.userInteractionEnabled == userInteractionEnabled) return;
@@ -439,8 +465,10 @@
         if (REMIsNilOrNull(self.tapGsRec)) {
             self.tapGsRec = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewTapped:)];
             self.panGsRec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(viewPanned:)];
+            self.pinchGsRec = [[_DCHPinchGestureRecognizer alloc]initWithTarget:self action:@selector(viewPinched:)];
             [self addGestureRecognizer:self.tapGsRec];
             [self addGestureRecognizer:self.panGsRec];
+            [self addGestureRecognizer:self.pinchGsRec];
         }
     } else {
         if (!REMIsNilOrNull(self.tapGsRec)) {
@@ -448,8 +476,20 @@
             self.tapGsRec = nil;
             [self removeGestureRecognizer:self.panGsRec];
             self.panGsRec = nil;
+            [self removeGestureRecognizer:self.pinchGsRec];
+            self.pinchGsRec = nil;
         }
     }
+}
+-(void)defocus {
+    if (self.focusPointIndex == INT32_MIN) return;
+    self.focusPointIndex = INT32_MIN;
+    if (self.columnLayer0) [self.columnLayer0 defocus];
+    if (self.columnLayer1) [self.columnLayer1 defocus];
+    if (self.columnLayer2) [self.columnLayer2 defocus];
+    if (self.lineLayer0) [self.lineLayer0 defocus];
+    if (self.lineLayer1) [self.lineLayer1 defocus];
+    if (self.lineLayer2) [self.lineLayer2 defocus];
 }
 
 -(void)focusAroundX:(double)x {
@@ -458,18 +498,40 @@
     if (x > globalRange.length+globalRange.length) x = ceil(globalRange.length+globalRange.location);
     
     int xRounded = floor(x+0.5);
+    if (xRounded != self.focusPointIndex) {
 //    while (![self hasPointsAtX:xRounded]) {
 //        
 //    }
-    
-    if (self.columnLayer0) [self.columnLayer0 focusOnX:xRounded];
-    if (self.columnLayer1) [self.columnLayer1 focusOnX:xRounded];
-    if (self.columnLayer2) [self.columnLayer2 focusOnX:xRounded];
-    if (self.lineLayer0) [self.lineLayer0 focusOnX:xRounded];
-    if (self.lineLayer1) [self.lineLayer1 focusOnX:xRounded];
-    if (self.lineLayer2) [self.lineLayer2 focusOnX:xRounded];
+        self.focusPointIndex = xRounded;
+        if (self.columnLayer0) [self.columnLayer0 focusOnX:xRounded];
+        if (self.columnLayer1) [self.columnLayer1 focusOnX:xRounded];
+        if (self.columnLayer2) [self.columnLayer2 focusOnX:xRounded];
+        if (self.lineLayer0) [self.lineLayer0 focusOnX:xRounded];
+        if (self.lineLayer1) [self.lineLayer1 focusOnX:xRounded];
+        if (self.lineLayer2) [self.lineLayer2 focusOnX:xRounded];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(focusPointChanged:)]) {
+            NSMutableArray* points = [[NSMutableArray alloc]init];
+            for (DCXYSeries* s in self.seriesList) {
+                if (xRounded < 0 || xRounded >= s.datas.count) {
+                    DCDataPoint* p = [[DCDataPoint alloc]init];
+                    p.series = s;
+                    p.target = s.target;
+                    [points addObject:p];
+                } else {
+                    [points addObject:s.datas[self.focusPointIndex]];
+                }
+            }
+            [self.delegate focusPointChanged:points];
+        }
+    }
 }
 
+-(void)setBackgoundBands:(NSArray *)bands {
+    self.bgBands = bands;
+    if (!REMIsNilOrNull(self.backgroundBandsLayer)) {
+        [self.backgroundBandsLayer setBands:bands];
+    }
+}
 // 检查在X上是否有pointType == DCDataPointTypeNormal的数据点
 //-(BOOL)hasPointsAtX:(int)x {
 //    for (DCXYSeries* s in self.seriesList) {
