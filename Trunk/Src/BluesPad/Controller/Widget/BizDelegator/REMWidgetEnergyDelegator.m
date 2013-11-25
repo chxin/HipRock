@@ -797,8 +797,7 @@
 #pragma mark touch moved
 - (void)touchEndedInNormalStatus:(id)start end:(id)end
 {
-    NSDate *newStart=start;
-    NSDate *newEnd=end;
+    
     
     [self willRangeChange:start end:end];
     
@@ -813,8 +812,8 @@
     NSDate *newEnd=end;
     
     REMTimeRange *newRange=[[REMTimeRange alloc]initWithStartTime:newStart EndTime:newEnd];
-    
-    [self setDatePickerButtonValueNoSearchByTimeRange:newRange withRelative:self.tempModel.relativeDateComponent withRelativeType:self.tempModel.relativeDateType];
+    NSString *text=[REMTimeHelper relativeDateComponentFromType:REMRelativeTimeRangeTypeNone];
+    [self setDatePickerButtonValueNoSearchByTimeRange:newRange withRelative:text withRelativeType:REMRelativeTimeRangeTypeNone];
 }
 
 

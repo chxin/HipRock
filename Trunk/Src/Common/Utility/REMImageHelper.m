@@ -338,6 +338,7 @@
     return img;
 }
 
+
 + (NSString *)buildingImagePathWithId:(NSNumber *)imageId andType:(REMBuildingImageType)type
 {
     if(REMAppCurrentUser == nil){

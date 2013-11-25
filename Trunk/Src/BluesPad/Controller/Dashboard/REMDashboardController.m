@@ -73,7 +73,7 @@ static NSString *cellId=@"dashboardcell";
     
 }
 
-static NSString *dashboardGroupName=@"building-dashboard-%@";
+static NSString *dashboardGroupName=@"building-data-%@";
 
 #define kDashboardSwitchLabelTop -65
 
@@ -158,24 +158,11 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
             return cell;
         }
         else{
-            if(cell.contentView.subviews.count>0){
-                for (UIView *v in cell.contentView.subviews) {
-                    [v removeFromSuperview];
-                }
-                //REMWidgetCollectionViewController *old= self.childViewControllers[cell.tag];
-                //old.view=nil;
-            }
+            [self cleanCellContent:cell];
         }
     }
     else{
-        if(cell.contentView.subviews.count>0){
-            for (UIView *v in cell.contentView.subviews) {
-                [v removeFromSuperview];
-            }
-            //REMWidgetCollectionViewController *old= self.childViewControllers[cell.tag];
-            //old.view=nil;
-           
-        }
+        [self cleanCellContent:cell];
         REMWidgetCollectionViewController *widgetCollectionController = [[REMWidgetCollectionViewController alloc]initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc]init]];
         
         widgetCollectionController.currentDashboardIndex=indexPath.section;
@@ -205,6 +192,17 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     //cell.contentView.layer.borderWidth=1;
     //cell.contentView.layer.borderColor=[UIColor redColor].CGColor;
     return cell;
+}
+
+- (void)cleanCellContent:(UITableViewCell *)cell{
+    if(cell.contentView.subviews.count>0){
+        for (UIView *v in cell.contentView.subviews) {
+            [v removeFromSuperview];
+        }
+        //REMWidgetCollectionViewController *old= self.childViewControllers[cell.tag];
+        //[old releaseContentView];
+        
+    }
 }
 
 - (CGRect)addTitleForCell:(REMDashboardCellViewCell *)cell withDashboardInfo:(REMDashboardObj *)dashboardInfo{

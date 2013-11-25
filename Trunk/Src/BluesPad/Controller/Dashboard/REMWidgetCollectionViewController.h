@@ -31,7 +31,7 @@
 
 @property (nonatomic) NSUInteger currentDashboardIndex;
 
-
+- (void)releaseContentView;
 - (void)maxWidget;
 
 @end

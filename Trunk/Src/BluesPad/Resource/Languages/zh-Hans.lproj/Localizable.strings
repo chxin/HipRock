@@ -97,12 +97,14 @@
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="下拉返回概览能耗信息";
 "Dashboard_TimeRange"="%@ 到 %@";
+"Dashboard_Empty"="未配置任何仪表盘。";
 
 
 //Widget, prefix:Widget_
 "Widget_TimePickerTime"="时间";
 "Widget_TimePickerStart"="起始时间";
 "Widget_TimePickerEnd"="终止时间";
+"Widget_TimePickerError"="开始日期必须早于结束日期。";
 "Widget_StepErrorHour"="按小时";
 "Widget_StepErrorDay"="按天";
 "Widget_StepErrorWeek"="按周";
