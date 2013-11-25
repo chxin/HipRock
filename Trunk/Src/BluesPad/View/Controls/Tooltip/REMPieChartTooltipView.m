@@ -18,7 +18,6 @@
 
 @interface REMPieChartTooltipView ()
 
-@property (nonatomic,strong) NSMutableArray *tooltipItems;
 @property (nonatomic) int highlightIndex;
 
 @end
@@ -33,9 +32,22 @@
  * Cost total and single commodities
  */
 
+
+-(REMTooltipViewBase *)initWithHighlightedData:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
+{
+    self = [super initWithHighlightedData:points inEnergyData:data widget:widget andParameters:parameters];
+    
+    if(self){
+        [self renderItems];
+    }
+    
+    return self;
+}
+
 - (NSArray *)convertItemModels
 {
     self.highlightIndex = [self decideHighlightIndex];
+    NSLog(@"highlight index: %d", self.highlightIndex);
     NSMutableArray *itemModels = [[NSMutableArray alloc] init];
     
     for(int i=0;i<self.data.targetEnergyData.count;i++){
@@ -47,6 +59,13 @@
         model.color = [REMColor colorByIndex:i].uiColor;
         model.index = i;
         model.type = REMChartSeriesIndicatorPie;
+        
+        if(REMIsNilOrNull(targetData.target.uomName)){
+            model.uom = REMUoms[@(targetData.target.uomId)];
+        }
+        else{
+            model.uom = targetData.target.uomName;
+        }
         
         [itemModels addObject:model];
     }
@@ -71,19 +90,18 @@
     [self renderItems];
 }
 
--(UIScrollView *)renderScrollView:(NSArray *)itemModels
+-(UIScrollView *)renderScrollView
 {
-    self.tooltipItems = [[NSMutableArray alloc] init];
-    UIScrollView *view = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kDMChart_TooltipContentWidth, kDMChart_TooltipViewHeight)];
+    UIScrollView *view = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kDMChart_TooltipContentWidth-kDMChart_TooltipCloseViewWidth, kDMChart_TooltipContentHeight)];
     
     view.pagingEnabled = NO;
     view.showsHorizontalScrollIndicator = NO;
     view.showsVerticalScrollIndicator = NO;
     view.clipsToBounds = YES;
     view.scrollEnabled = NO;
-    //    view.backgroundColor = [UIColor redColor];
+    view.backgroundColor = [UIColor clearColor];
     
-    int itemCount = self.data.targetEnergyData.count;
+    int itemCount = self.itemModels.count;
     
     CGFloat contentWidth = (kDMChart_TooltipItemWidth + kMDChart_TooltipItemLeftOffset) * itemCount;
     
@@ -91,11 +109,8 @@
         contentWidth = kDMChart_TooltipContentWidth;
     }
     
-    view.contentSize = CGSizeMake(contentWidth+kDMChart_TooltipCloseViewWidth, kDMChart_TooltipViewHeight);
-    
-    
+    view.contentSize = CGSizeMake(contentWidth+kDMChart_TooltipCloseViewWidth, kDMChart_TooltipContentHeight);
 
-    
     return view;
 }
 
@@ -126,10 +141,13 @@
     return [REMTextIndicatorFormator formatTargetName:target withWidget:self.widget andParameters:self.parameters];
 }
 
--(UIView *)pointerView
-{
-    return nil;
-}
+//-(void)renderItems
+//{
+//    int itemCount = self.itemModels.count, index = self.highlightIndex;
+//    
+//    
+//    
+//}
 
 -(void)renderItems
 {
@@ -140,21 +158,31 @@
     
     CGFloat itemOffset = kMDChart_TooltipItemLeftOffset;
     CGFloat itemWidth = kDMChart_TooltipItemWidth;
-    CGFloat contentWidth = (itemWidth + itemOffset) * itemCount;
+    CGFloat contentWidth = (itemWidth + itemOffset) * itemCount - kDMChart_TooltipCloseViewWidth;
     
     
     if(contentWidth < kDMChart_TooltipContentWidth){
-        itemOffset = itemCount == 1 ? 0 : (kDMChart_TooltipContentWidth - (itemCount * itemWidth)) / (itemCount - 1);
-        contentWidth = kDMChart_TooltipContentWidth;
+        itemOffset = itemCount == 1 ? 0 : (kDMChart_TooltipContentWidth - kDMChart_TooltipCloseViewWidth - (itemCount * itemWidth)) / (itemCount - 1);
+        contentWidth = kDMChart_TooltipContentWidth - kDMChart_TooltipCloseViewWidth;
     }
     
     for(int i=0;i<itemCount;i++){
-        CGRect itemFrame = CGRectMake((i - index)*(itemWidth + itemOffset) + baseX,0,itemWidth,kDMChart_TooltipViewHeight);
+        CGRect itemFrame = CGRectMake((i - index)*(itemWidth + itemOffset) + baseX,0,itemWidth,kDMChart_TooltipContentHeight);
         
         REMChartTooltipItem *tooltipItem = [REMChartTooltipItem itemWithFrame:itemFrame andModel:self.itemModels[i]];
         
+        if(i==index){
+            tooltipItem.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
+            
+            tooltipItem.frame = CGRectMake((i - index)*(itemWidth + itemOffset) + baseX,5,itemWidth,kDMChart_TooltipContentHeight-10);
+            
+            tooltipItem.layer.shadowColor = [UIColor blackColor].CGColor;
+            tooltipItem.layer.shadowOffset = CGSizeMake(0, 0);
+            tooltipItem.layer.shadowOpacity = 0.4;
+            tooltipItem.layer.shadowRadius = 3.0;
+        }
+        
         [self.scrollView addSubview:tooltipItem];
-        [self.tooltipItems addObject:tooltipItem];
     }
 }
 

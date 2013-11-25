@@ -25,8 +25,11 @@
 
 @implementation REMServiceAgent
 
+#define kREMCommMaxQueueWifi 16
+#define kREMCommMaxQueue3G 3
+
 static NSOperationQueue *queue = nil;
-static int maxQueueLength = 5;
+static int maxQueueLength = kREMCommMaxQueueWifi;
 #define kREMLogResquest 1 //0:no log, 1:log partial, 2: log full
 
 #ifdef DEBUG
@@ -146,7 +149,7 @@ static int requestTimeout = 45; //(s)
     
     void (^onFailure)(AFHTTPRequestOperation *operation, NSError *errorInfo) = ^(AFHTTPRequestOperation *operation, NSError *errorInfo)
     {
-        REMLogError(@"Communication error: %@\nServer response: %@", [error description], operation.responseString);
+        REMLogError(@"Communication error: %@\nUrl: %@\nServer response: %@", [error description], [operation.request.URL description], operation.responseString);
         
         if(errorInfo.code == -1001){
             [REMAlertHelper alert:@"数据加载超时"];
@@ -268,10 +271,10 @@ static int requestTimeout = 45; //(s)
             maxQueueLength = 0;
             return NO;
         case ReachableViaWiFi:
-            maxQueueLength = 5;
+            maxQueueLength = kREMCommMaxQueueWifi;
             break;
         case ReachableViaWWAN:
-            maxQueueLength = 3;
+            maxQueueLength = kREMCommMaxQueue3G;
             break;
             
         default:
@@ -368,6 +371,7 @@ static int requestTimeout = 45; //(s)
             if(kREMLogResquest == 1 && jsonString.length > shortJsonStringLength){
                 jsonString = [NSString stringWithFormat:@"%@..",[jsonString substringToIndex:shortJsonStringLength]];
             }
+            NSLog(@"REM-RESPONSE url: %@", service.url);
             NSLog(@"REM-RESPONSE json: %@", jsonString);
         }
         else

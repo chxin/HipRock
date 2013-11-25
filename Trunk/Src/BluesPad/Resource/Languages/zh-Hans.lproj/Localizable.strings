@@ -47,7 +47,9 @@
 
 //Login, prefix: Login_
 "Login_SkipToLoginButtonText" = "登录";
+"Login_SkipToTrialButtonText" = "试用";
 "Login_LoginButtonText" = "登录";
+"Login_TrialButtonText" = "试用";
 "Login_NoNetwork" = "无可用网络,无法获取最新的能源数据。";
 "Login_NetworkTimeout" = "网络连接超时,部分最新的能源数据未获得。";
 
@@ -150,7 +152,7 @@
 "Chart_X_Axis_Format_Year" = "yyyy年";
 "Chart_X_Axis_Format_Month" = "M月";
 "Chart_X_Axis_Format_Day" = "d日";
-"Chart_X_Axis_Format_Hour" = "h点";
+"Chart_X_Axis_Format_Hour" = "H点";
 "Chart_X_Axis_Format_YearMonth" = "yyyy年-M月";
 "Chart_X_Axis_Format_MonthDay" = "M月-d日";
-"Chart_X_Axis_Format_DayHour" = "d日h点";
+"Chart_X_Axis_Format_DayHour" = "d日H点";

@@ -14,7 +14,7 @@
 #import "REMChartHeader.h"
 
 
-@interface REMWidgetRankingDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol>
+@interface REMWidgetRankingDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol,REMTrendChartDelegate,REMChartTooltipDelegate>
 
 @property (nonatomic,weak) UIView *searchView;
 @property (nonatomic,weak) UIButton *timePickerButton;
