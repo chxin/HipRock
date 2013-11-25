@@ -100,6 +100,7 @@ typedef enum _DChartStatus {
     }
     view.graphContext.hGridlineAmount = self.style.horizentalGridLineAmount;
     view.delegate = self;
+    self.graphContext = view.graphContext;
     [view.graphContext addHRangeObsever:self];
 }
 
