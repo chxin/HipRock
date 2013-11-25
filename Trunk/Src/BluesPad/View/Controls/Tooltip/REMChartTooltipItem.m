@@ -41,7 +41,7 @@
     self = [super initWithFrame:frame];
     if (self) {
 // Initialization code
-//        self.layer.borderColor = [UIColor blueColor].CGColor;
+//        self.layer.borderColor = [UIColor orangeColor].CGColor;
 //        self.layer.borderWidth = 1.0f;
         self.backgroundColor = [UIColor clearColor];
         
@@ -58,7 +58,7 @@
         self.nameLabel = nameLabel;
         
         // Value label
-        UILabel *valueLabel = [self renderDataValueLabel:model.value];
+        UILabel *valueLabel = [self renderDataValueLabel:model];
         [self addSubview:valueLabel];
         self.valueLabel = valueLabel;
     }
@@ -69,7 +69,7 @@
 {
     self.nameLabel.text = model.title;
     
-    self.valueLabel.text = [self formatDataValue:model.value];
+    self.valueLabel.text = [self formatDataValue:model];
 }
 
 //-(void)setHighlighted:(BOOL)highlighted
@@ -80,10 +80,10 @@
 //    self.backgroundColor = backgroundColor;
 //}
 
-- (NSString *)formatDataValue:(NSNumber *)value
+- (NSString *)formatDataValue:(REMChartTooltipItemModel *)model
 {
     //TODO: Need format
-    return [value stringValue];
+    return [NSString stringWithFormat:@"%@%@", REMIsNilOrNull(model.value) ? @"": [model.value stringValue], model.uom];
 }
 
 
@@ -100,7 +100,7 @@
 {
     REMChartSeriesIndicator *indicator = [REMChartSeriesIndicator indicatorWithType:type andColor:color];
     CGRect indicatorFrame =indicator.frame;
-    indicatorFrame.origin.y = (kDMChart_TooltipViewHeight - (kDMChart_IndicatorSize + kDMChart_TooltipItemDataValueTopOffset + kDMChart_TooltipItemDataValueFontSize)) / 2;
+    indicatorFrame.origin.y = (kDMChart_TooltipContentHeight - (kDMChart_IndicatorSize + kDMChart_TooltipItemDataValueTopOffset + kDMChart_TooltipItemDataValueFontSize)) / 2;
     indicator.frame = indicatorFrame;
     
     return indicator;
@@ -121,13 +121,13 @@
     return label;
 }
 
--(UILabel *)renderDataValueLabel:(NSNumber *)dataValue
+-(UILabel *)renderDataValueLabel:(REMChartTooltipItemModel *)model
 {
     UIFont *font = [UIFont systemFontOfSize:kDMChart_TooltipItemDataValueFontSize];
     CGFloat height = [@"a" sizeWithFont:font].height;
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, self.indicator.frame.origin.y + kDMChart_IndicatorSize + kDMChart_TooltipItemDataValueTopOffset, self.frame.size.width, height)];
-    label.text = [self formatDataValue:dataValue];
+    label.text = [self formatDataValue:model];
     label.backgroundColor = [UIColor clearColor];
     label.font = font;
     label.textColor = [REMColor colorByHexString:kDMChart_TooltipItemDataValueColor];

@@ -59,7 +59,7 @@
     if(bench!=nil && [bench isEqual:[NSNull null]]==NO){
         self.industryId=bench[@"IndustryId"];
         self.zoneId=bench[@"ZoneId"];
-        self.benchmarkText=bench[@"BenchmarkText"];
+        self.benchmarkText=bench[@"benchmarkText"];
     }
     
     NSDictionary *dataOption=viewOption[@"DataOption"];

@@ -42,22 +42,21 @@
         
         self.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
         
-        UIView *contentView = [[UIView alloc] initWithFrame:kDMChart_TooltipContentViewFrame];
-        
-        UIView *pointerView = [self pointerView];
-        if(pointerView != nil)
-           [contentView addSubview:pointerView];
-        
         self.itemModels = [self convertItemModels];
         
-        UIScrollView *scrollView = [self renderScrollView];
-        [contentView addSubview:scrollView];
-        self.scrollView = scrollView;
+        UIView *contentView = [self renderContentView];
         
+        UIScrollView *scrollView = [self renderScrollView];
         UIView *closeView = [self renderCloseView];
+        
+        
+        [contentView addSubview:scrollView];
         [contentView addSubview:closeView];
         
         [self addSubview:contentView];
+        
+        self.contentView=contentView;
+        self.scrollView = scrollView;
     }
     
     return self;
@@ -75,18 +74,25 @@
 {
     return nil;
 }
--(UIView *)pointerView
+
+//@private
+-(UIView *)renderContentView
 {
-    return nil;
+    CGRect frame = CGRectMake(kDMChart_TooltipContentLeftOffset, kDMChart_TooltipContentTopOffset, kDMChart_TooltipContentWidth, kDMChart_TooltipContentHeight);
+    
+    UIView *contentView = [[UIView alloc] initWithFrame:frame];
+    
+    return contentView;
 }
 
 //@private
 -(UIView *)renderCloseView
 {
-    UIView *closeView = [[UIView alloc] initWithFrame:CGRectMake(kDMChart_TooltipContentWidth - kDMChart_TooltipCloseViewWidth, 0, kDMChart_TooltipCloseViewWidth, kDMChart_TooltipViewHeight)];
-    closeView.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
+    UIView *closeView = [[UIView alloc] initWithFrame:CGRectMake(kDMChart_TooltipContentWidth - kDMChart_TooltipCloseViewWidth, 0, kDMChart_TooltipCloseViewWidth, kDMChart_TooltipContentHeight)];
+    //closeView.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
+    closeView.backgroundColor = [UIColor clearColor];
     
-    CGFloat topOffset = (kDMChart_TooltipViewHeight - REMIMG_Close_Chart.size.height) / 2;
+    CGFloat topOffset = (kDMChart_TooltipContentHeight - REMIMG_Close_Chart.size.height) / 2;
     CGFloat leftOffset = kDMChart_TooltipCloseViewInnerLeftOffset;
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

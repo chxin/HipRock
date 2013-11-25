@@ -25,8 +25,9 @@
 
 //indicator
 #define kDMChart_IndicatorSize 18
-#define kDMChart_IndicatorBorderWidth 3
-#define kDMChart_IndicatorBorderContentSpace 3
+#define kDMChart_IndicatorLineWidth 2
+//#define kDMChart_IndicatorBorderWidth 3
+//#define kDMChart_IndicatorBorderContentSpace 3
 
 //legend
 #define kDMChart_LegendItemWidth 239
@@ -48,7 +49,12 @@
 
 //tooltip
 #define kDMChart_TooltipViewHeight REMDMCOMPATIOS7(84)
+
+#define kDMChart_TooltipContentTopOffset REMDMCOMPATIOS7(0)
+#define kDMChart_TooltipContentLeftOffset kDMCommon_ContentLeftMargin
 #define kDMChart_TooltipContentWidth kDMCommon_ContentWidth
+#define kDMChart_TooltipContentHeight kDMChart_TooltipViewHeight - kDMChart_TooltipContentTopOffset
+
 #define kDMChart_TooltipViewBackgroundColor @"#f8f8f8"
 
 #define kDMChart_TooltipCloseViewWidth 100

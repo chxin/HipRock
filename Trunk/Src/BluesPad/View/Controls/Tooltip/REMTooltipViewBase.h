@@ -28,17 +28,19 @@
 @property (nonatomic,weak) NSObject<REMChartTooltipDelegate> *tooltipDelegate;
 
 @property (nonatomic,strong) NSArray *itemModels;
+
+@property (nonatomic,weak) UIView *contentView;
 @property (nonatomic,weak) UIScrollView *scrollView;
 
 // Methods
-+(REMTooltipViewBase *)tooltipWithHighlightedData:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
++ (REMTooltipViewBase *)tooltipWithHighlightedData:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
 
--(REMTooltipViewBase *)initWithHighlightedData:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
+- (REMTooltipViewBase *)initWithHighlightedData:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
 
 - (void)updateHighlightedData:(id)data;
 
 - (NSArray *)convertItemModels;
 
-- (UIView *)pointerView;
+- (UIView *)renderCloseView;
 
 @end

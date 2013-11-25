@@ -10,6 +10,7 @@
 #import "REMWidgetCommoditySearchModel.h"
 #import "REMWidgetObject.h"
 #import "REMWidgetTagSearchModel.h"
+#import "REMWidgetMultiTimespanSearchModel.h"
 
 @implementation REMTextIndicatorFormator
 
@@ -17,7 +18,12 @@
 {
     switch (target.type) {
         case REMEnergyTargetTag:
-            return target.name;
+            if([parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]]){
+                return [REMTimeHelper formatTimeRangeFullHour: target.visiableTimeRange];
+            }
+            else{
+                return target.name;
+            }
             
         case REMEnergyTargetTarget:
             return REMLocalizedString(@"Chart_TargetValue");
@@ -31,6 +37,7 @@
         case REMEnergyTargetValley:
             return REMLocalizedString(@"Chart_TOUValley");
             
+        case REMEnergyTargetHierarchy:
         case REMEnergyTargetCarbon:
         case REMEnergyTargetCost:
         {
@@ -38,7 +45,7 @@
             if([parameters isKindOfClass:[REMWidgetCommoditySearchModel class]]){
                 REMWidgetCommoditySearchModel *commodityParameters = (REMWidgetCommoditySearchModel *)parameters;
                 
-                if(commodityParameters.commodityIdArray.count>0){
+                if(commodityParameters.commodityIdArray.count>0 || widget.diagramType == REMDiagramTypePie){
                     return REMCommodities[@(target.commodityId)];
                 }
                 else{
@@ -84,14 +91,13 @@
                     prefix = REMLocalizedString(@"Chart_CarbonTotal");
                 }
                 
-                [NSString stringWithFormat:format, prefix];
+                return [NSString stringWithFormat:format, prefix];
             }
             else{
                 return nil;
             }
         }
             
-        case REMEnergyTargetHierarchy:
         case REMEnergyTargetKpi:
         case REMEnergyTargetAreaConsumption:
         default:

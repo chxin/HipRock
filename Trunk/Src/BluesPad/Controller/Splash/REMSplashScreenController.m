@@ -16,6 +16,7 @@
 #import "REMDimensions.h"
 #import "DCColumnWrapper.h"
 #import "DCLineWrapper.h"
+#import "DCPieChartView.h"
 
 @interface REMSplashScreenController ()
 
@@ -51,6 +52,7 @@
 - (void)loadBackground
 {
     UIImageView *background = [[UIImageView alloc] initWithImage:REMLoadImageResource(@"SplashScreenBackgroud", @"jpg")];
+    background.frame = REMISIOS7 ? CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight) : CGRectMake(0, -20, kDMScreenWidth, kDMScreenHeight);
     
     [self.view addSubview:background];
     self.backgroundView = background;
@@ -186,6 +188,9 @@
     DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:CGRectMake(0, 374, 1024, 374) data:energyViewData widgetContext:syntax style:style];
     lineWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:lineWidget.view];
+    
+    DCPieChartView* vvv = [[DCPieChartView alloc]initWithFrame:CGRectMake(0, 0, 1024, 748)];
+    [self.view addSubview:vvv];
 }
 
 

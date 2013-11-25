@@ -45,6 +45,7 @@ typedef enum _DChartStatus {
         [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
         
         [self createChartView:frame];
+        [self updateCalender];
     }
     return self;
 }
@@ -108,9 +109,13 @@ typedef enum _DChartStatus {
 
 -(DCXYSeries*)createSeriesAt:(NSUInteger)index style:(REMChartStyle*)style {
     DCXYChartView* view = self.view;
-    REMTargetEnergyData* targetEnergy = self.energyViewData.targetEnergyData[index];
+    NSUInteger eIndex = index;
+    if (self.isStacked) {
+        eIndex = [self getSeriesAmount] - index - 1; // 翻转stack图的序列
+    }
+    REMTargetEnergyData* targetEnergy = self.energyViewData.targetEnergyData[eIndex];
     NSMutableArray* datas = [[NSMutableArray alloc]init];
-    REMTrendChartDataProcessor* processor = [self.processors objectAtIndex:index];
+    REMTrendChartDataProcessor* processor = [self.processors objectAtIndex:eIndex];
     for (REMEnergyData* point in targetEnergy.energyData) {
         int processedX = [processor processX:point.localTime].integerValue;
         while ((int)datas.count < processedX) {
@@ -323,7 +328,7 @@ typedef enum _DChartStatus {
     series.hidden = hidden;
 }
 -(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
-    
+    _calenderType = syntax.calendarType;
 }
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
     [self updateProcessorRangesFormatter:step];
@@ -332,7 +337,6 @@ typedef enum _DChartStatus {
     [self.view removeFromSuperview];
     _chartStatus = DChartStatusNormal;
     _energyViewData = energyViewData;
-    [self updateProcessorRangesFormatter:step];
     
     [self createChartView:frame];
     [superView addSubview:self.view];
