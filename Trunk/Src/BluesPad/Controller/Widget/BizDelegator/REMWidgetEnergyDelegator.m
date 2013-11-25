@@ -19,8 +19,9 @@
 #import "REMChartLegendView.h"
 #import "REMStackChartLegendView.h"
 #import "REMClientErrorInfo.h"
-#import "DChartLineChartWrapper.h"
-#import "DChartColumnWrapper.h"
+#import "DCLineWrapper.h"
+#import "DCColumnWrapper.h"
+#import "DCRankingWrapper.h"
 
 @interface REMWidgetEnergyDelegator()
 
@@ -28,7 +29,7 @@
 
 @property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
 
-@property (nonatomic,strong) REMAbstractChartWrapper *chartWrapper;
+@property (nonatomic,strong) DAbstractChartWrapper *chartWrapper;
 
 @property (nonatomic,strong) NSArray *currentStepList;
 @property (nonatomic,weak) REMTooltipViewBase *tooltipView;
@@ -244,12 +245,12 @@
     }
 }
 
-- (void)releaseChart{
-    if(self.chartWrapper!=nil){
-        [self.chartWrapper destroyView];
-        self.chartWrapper=nil;
-    }
-}
+//- (void)releaseChart{
+//    if(self.chartWrapper!=nil){
+//        [self.chartWrapper destroyView];
+//        self.chartWrapper=nil;
+//    }
+//}
 
 - (NSString *)calendarComponent{
     if(self.widgetInfo.contentSyntax.calendarType==REMCalendarTypeHCSeason){
@@ -307,7 +308,7 @@
 }
 
 - (void) processCalendar{
-    REMTrendWidgetWrapper *trend=(REMTrendWidgetWrapper *)self.chartWrapper;
+    DCTrendWrapper *trend=(DCTrendWrapper *)self.chartWrapper;
     
     if(self.widgetInfo.contentSyntax.calendarType == REMCalendarTypeHCSeason){
         if(self.tempModel.step == REMEnergyStepYear){
@@ -343,8 +344,8 @@
 
 - (void)reloadChart{
     
-    if([self.chartWrapper isKindOfClass:[REMTrendWidgetWrapper class]]==YES){
-        REMTrendWidgetWrapper *trend=(REMTrendWidgetWrapper *)self.chartWrapper;
+    if([self.chartWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
+        DCTrendWrapper *trend=(DCTrendWrapper *)self.chartWrapper;
         [self processCalendar];
         [trend redraw:self.energyData step:self.tempModel.step];
     }
@@ -390,38 +391,38 @@
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
-    REMAbstractChartWrapper  *widgetWrapper;
+    DAbstractChartWrapper  *widgetWrapper;
     if (widgetType == REMDiagramTypeLine) {
-//        widgetWrapper = [[DChartLineChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-//        ((DTrendChartWrapper*)widgetWrapper).delegate = self;
-        widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        REMTrendChartView *trendChart= (REMTrendChartView *)widgetWrapper.view;
-        trendChart.delegate = self;
+        widgetWrapper = [[DCLineWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper.delegate = self;
+//        widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+//        REMTrendChartView *trendChart= (REMTrendChartView *)widgetWrapper.view;
+//        trendChart.delegate = self;
         
         
     } else if (widgetType == REMDiagramTypeColumn) {
-//        widgetWrapper = [[DChartColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-//        ((DTrendChartWrapper*)widgetWrapper).delegate = self;
-        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
+        widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper.delegate = self;
+//        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+//        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypePie) {
         widgetWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        ((REMPieChartView *)widgetWrapper.view).delegate = self;
+        ((REMPieChartView *)((REMPieChartWrapper*)widgetWrapper).view).delegate = self;
     } else if (widgetType == REMDiagramTypeRanking) {
-        widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
+        widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper.delegate = self;
     } else if (widgetType == REMDiagramTypeStackColumn) {
-        widgetWrapper = [[REMStackColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
+        widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper.delegate = self;
     }
     if (widgetWrapper != nil) {
-        if([widgetWrapper isKindOfClass:[REMTrendWidgetWrapper class]]==YES){
+        if([widgetWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
             if(self.widgetInfo.contentSyntax.calendarType!=REMCalendarTypeNone){
-                REMTrendWidgetWrapper *trend=(REMTrendWidgetWrapper *)widgetWrapper;
+                DCTrendWrapper *trend=(DCTrendWrapper *)widgetWrapper;
                 trend.calenderType=self.widgetInfo.contentSyntax.calendarType;
             }
         }
-        [self.chartContainer addSubview:widgetWrapper.view];
+        [self.chartContainer addSubview:[widgetWrapper getView]];
         self.chartWrapper=widgetWrapper;
     }
     
@@ -838,13 +839,16 @@
             }
         }
     
-        if([self.chartWrapper.view respondsToSelector:@selector(setSeriesHiddenAtIndex:hidden:)])
-            [((id)self.chartWrapper.view) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
+    if([[self.chartWrapper getView] respondsToSelector:@selector(setSeriesHiddenAtIndex:hidden:)])
+        [((id)[self.chartWrapper getView]) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
+    if([self.chartWrapper respondsToSelector:@selector(setSeriesHiddenAtIndex:hidden:)])
+        [((id)self.chartWrapper) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
     //}
 }
 
 #pragma mark - Tooltip
 // Trend chart delegate
+/*** this function will be removed when d-chart is ok ***/
 -(void)highlightPoints:(NSArray*)points colors:(NSArray*)colors names:(NSArray*)names
 {
     //what's stack column chart tooltip like?
@@ -859,6 +863,31 @@
     }
     else{
         [self showTooltip:points];
+    }
+}
+
+-(void)highlightPoints:(NSArray *)points {
+    //what's stack column chart tooltip like?
+    if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
+        return;
+    }
+    
+    [self.searchView setHidden:YES];
+    
+    NSMutableArray* energyPoints = [[NSMutableArray alloc]init];
+    for (DCDataPoint* p in points) {
+        if (p.energyData == nil) {
+            [energyPoints addObject:[NSNull null]];
+        } else {
+            [energyPoints addObject:p.energyData];
+        }
+    }
+    
+    if(self.tooltipView!=nil){
+        [self.tooltipView updateHighlightedData:energyPoints];
+    }
+    else{
+        [self showTooltip:energyPoints];
     }
 }
 
@@ -884,9 +913,12 @@
         return;
     
     [self hideTooltip:^{
-        id chartView = (id)self.chartWrapper.view;
+        id chartView = (id)[self.chartWrapper getView];
         if([chartView respondsToSelector:@selector(cancelToolTipStatus)]){
             [chartView cancelToolTipStatus];
+        }
+        if([self.chartWrapper respondsToSelector:@selector(cancelToolTipStatus)]){
+            [self.chartWrapper performSelector:@selector(cancelToolTipStatus) withObject:nil];
         }
         
         [self.searchView setHidden:NO];

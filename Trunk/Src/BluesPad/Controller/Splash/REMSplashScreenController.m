@@ -13,11 +13,9 @@
 #import "REMBuildingOverallModel.h"
 #import "REMMapViewController.h"
 #import "REMStoryboardDefinitions.h"
-#import "REMTrend.h"
-#import "REMTestChartView.h"
 #import "REMDimensions.h"
-#import "DChartColumnWrapper.h"
-#import "DChartLineChartWrapper.h"
+#import "DCColumnWrapper.h"
+#import "DCLineWrapper.h"
 
 @interface REMSplashScreenController ()
 
@@ -181,20 +179,13 @@
     energyViewData.targetEnergyData = sereis;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
-    DChartColumnWrapper* columnWidget = [[DChartColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 374) data:energyViewData widgetContext:syntax style:style];
+    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 374) data:energyViewData widgetContext:syntax style:style];
     columnWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:columnWidget.view];
     
-    DChartLineChartWrapper* lineWidget = [[DChartLineChartWrapper alloc]initWithFrame:CGRectMake(0, 374, 1024, 374) data:energyViewData widgetContext:syntax style:style];
+    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:CGRectMake(0, 374, 1024, 374) data:energyViewData widgetContext:syntax style:style];
     lineWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:lineWidget.view];
-}
-
--(void)oscarTest2 {
-    REMTestChartView* hostingView  = [[REMTestChartView alloc] initWithFrame:CGRectMake(0, 0, 1024, 748)];
-    
-    
-    [self.view addSubview:hostingView];
 }
 
 

@@ -17,12 +17,15 @@
 #import "REMChartHeader.h"  // FOR IMPORT REMChartDataProcessor only
 #import "DCXYChartViewDelegate.h"
 
-@interface DTrendChartWrapper : DAbstractChartWrapper<DCContextHRangeObserverProtocal, DCXYChartViewDelegate>
+@interface DCTrendWrapper : DAbstractChartWrapper<DCContextHRangeObserverProtocal, DCXYChartViewDelegate>
 
 @property (nonatomic, readonly) DCXYChartView* view;
 @property (nonatomic, readonly) NSString* defaultSeriesClass;
 @property (nonatomic, readonly, weak) REMEnergyViewData* energyViewData;
--(DTrendChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style;
+@property (nonatomic, assign) REMCalendarType calenderType;
+
+-(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style;
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style;
--(void)updateProcessorRangesFormatter:(NSString*)xtype step:(REMEnergyStep)step;
+-(void)updateProcessorRangesFormatter:(REMEnergyStep)step;
+-(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step;
 @end

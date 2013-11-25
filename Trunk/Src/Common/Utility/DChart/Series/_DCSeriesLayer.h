@@ -8,7 +8,7 @@
 
 #import "_DCLayer.h"
 #import "_DCCoordinateSystem.h"
-#import "DCLineSeries.h"
+//#import "DCXYSeries.h"
 #import "DCContext.h"
 
 @interface _DCSeriesLayer : _DCLayer<DCContextYRangeObserverProtocal,DCContextHRangeObserverProtocal>
@@ -26,7 +26,7 @@
 
 -(id)initWithCoordinateSystem:(_DCCoordinateSystem*)coordinateSystem;
 //- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden;
--(BOOL)isValidSeriesForMe:(DCXYSeries*)series;
+-(BOOL)isValidSeriesForMe:(id)series;
 
 -(void)focusOnX:(int)x;
 -(void)defocus;

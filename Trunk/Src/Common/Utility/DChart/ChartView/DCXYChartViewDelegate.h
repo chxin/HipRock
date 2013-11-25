@@ -16,5 +16,7 @@
  */
 -(BOOL)panInPlotAt:(CGPoint)point translation:(CGPoint)translation;
 
--(void)panStoppedAtRange:(DCRange*)range;
+-(void)panStopped;
+
+-(void)focusPointChanged:(NSArray*)dcpoints;
 @end

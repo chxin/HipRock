@@ -9,5 +9,5 @@
 #import "REMAbstractChartWrapper.h"
 
 @interface REMPieChartWrapper : REMAbstractChartWrapper
-
+-(UIView*)getView;
 @end

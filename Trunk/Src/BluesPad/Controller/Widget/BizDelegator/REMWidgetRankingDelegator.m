@@ -7,6 +7,7 @@
 //
 
 #import "REMWidgetRankingDelegator.h"
+#import "DCRankingWrapper.h"
 
 const static CGFloat kRankButtonDimension=32;
 const static CGFloat kRankingTimePickerWidth=222;
@@ -15,7 +16,7 @@ const static CGFloat kRankingTimePickerWidth=222;
 
 @property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
 
-@property (nonatomic,strong) REMAbstractChartWrapper *chartWrapper;
+@property (nonatomic,strong) DCRankingWrapper *chartWrapper;
 
 
 @end
@@ -104,14 +105,14 @@ const static CGFloat kRankingTimePickerWidth=222;
 }
 
 - (void) orderButtonClicked:(UIButton *)button{
-    REMRankingWidgetWrapper *rank=(REMRankingWidgetWrapper *)self.chartWrapper;
+//    REMRankingWidgetWrapper *rank=(REMRankingWidgetWrapper *)self.chartWrapper;
     if(button.selected==YES){
         [button setSelected:NO];
-        rank.sortOrder=NSOrderedAscending;
+        self.chartWrapper.sortOrder=NSOrderedAscending;
     }
     else{
         [button setSelected:YES];
-        rank.sortOrder=NSOrderedDescending;
+        self.chartWrapper.sortOrder=NSOrderedDescending;
     }
 }
 
@@ -179,7 +180,7 @@ const static CGFloat kRankingTimePickerWidth=222;
 }
 
 - (void)reloadChart{
-    [self.chartWrapper redraw:self.energyData];
+    [self.chartWrapper redraw:self.energyData step:REMEnergyStepNone];
 }
 
 
@@ -197,9 +198,9 @@ const static CGFloat kRankingTimePickerWidth=222;
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
-    REMRankingWidgetWrapper  *widgetWrapper;
+    DCRankingWrapper  *widgetWrapper;
     if (widgetType == REMDiagramTypeRanking) {
-        widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
     }
     if (widgetWrapper != nil) {
         [self.chartContainer addSubview:widgetWrapper.view];
@@ -238,7 +239,7 @@ const static CGFloat kRankingTimePickerWidth=222;
 
 - (void)releaseChart{
     if(self.chartWrapper!=nil){
-        [self.chartWrapper destroyView];
+//        [self.chartWrapper destroyView];
         self.chartWrapper=nil;
     }
 }

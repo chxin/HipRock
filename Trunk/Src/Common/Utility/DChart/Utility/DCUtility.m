@@ -61,4 +61,8 @@
         || rect.origin.x+rect.size.width <= 0 || rect.origin.y+rect.size.height<=0) return NO;
     return YES;
 }
+
++(double)getScreenXIn:(CGRect)plotRect xVal:(double)xValue hRange:(DCRange*)hRange {
+    return plotRect.origin.x + plotRect.size.width * (xValue-hRange.location) / hRange.length;
+}
 @end

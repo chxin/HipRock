@@ -36,4 +36,8 @@
     
     return chartConfig;
 }
+
+-(UIView*)getView {
+    return self.view;
+}
 @end
