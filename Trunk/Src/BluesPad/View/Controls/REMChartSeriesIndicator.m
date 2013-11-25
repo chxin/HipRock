@@ -134,6 +134,8 @@
     switch (diagramType) {
         case REMDiagramTypeLine:
             return REMChartSeriesIndicatorLine;
+        case REMDiagramTypeRanking:
+        case REMDiagramTypeStackColumn:
         case REMDiagramTypeColumn:
             return REMChartSeriesIndicatorColumn;
         case REMDiagramTypePie:
