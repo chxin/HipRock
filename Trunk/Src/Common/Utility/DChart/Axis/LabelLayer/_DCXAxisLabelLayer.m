@@ -116,7 +116,10 @@
                                             NULL);
     }
     CGFloat centerX = (x - self.graphContext.hRange.location) * self.frame.size.width / self.graphContext.hRange.length;
-    CGFloat maxLabelLength = [DCUtility getScreenXIn:self.frame xVal:0.8 hRange:self.graphContext.hRange] - [DCUtility getScreenXIn:self.frame xVal:0 hRange:self.graphContext.hRange];
+    CGFloat maxLabelLength = INT32_MAX;
+    if (self.labelFormatter && [self.labelFormatter respondsToSelector:@selector(getMaxXLabelLengthIn:)]) {
+        maxLabelLength = [((id<_DCXLabelFormatterProtocal>)self.labelFormatter) getMaxXLabelLengthIn:self.bounds];
+    }
     CATextLayer* text = (CATextLayer*)[self.trashbox popLayerFromTrashBox];
     if (!text) {
         text = [[CATextLayer alloc]init];

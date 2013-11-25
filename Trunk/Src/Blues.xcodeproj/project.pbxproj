@@ -1503,6 +1503,7 @@
 		EFDEC2AA1817C8A80008972E /* REMTrendChartStackColumnSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartStackColumnSeries.m; sourceTree = "<group>"; };
 		EFEA7EDD1843424500CF4C3E /* _DCRankingXLabelFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCRankingXLabelFormatter.h; sourceTree = "<group>"; };
 		EFEA7EDE1843424500CF4C3E /* _DCRankingXLabelFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCRankingXLabelFormatter.m; sourceTree = "<group>"; };
+		EFEA7EE018434F2400CF4C3E /* _DCXLabelFormatterProtocal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _DCXLabelFormatterProtocal.h; sourceTree = "<group>"; };
 		EFF3BA0518167BA500DD92CF /* REMRankingWidgetWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMRankingWidgetWrapper.h; sourceTree = "<group>"; };
 		EFF3BA0618167BA500DD92CF /* REMRankingWidgetWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRankingWidgetWrapper.m; sourceTree = "<group>"; };
 		EFF701CD1830880600B371EC /* REMChartStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartStyle.h; sourceTree = "<group>"; };
@@ -3130,6 +3131,7 @@
 				EF1C5AD9183E00C9002A9AAD /* _DCXLabelFormatter.m */,
 				EFEA7EDD1843424500CF4C3E /* _DCRankingXLabelFormatter.h */,
 				EFEA7EDE1843424500CF4C3E /* _DCRankingXLabelFormatter.m */,
+				EFEA7EE018434F2400CF4C3E /* _DCXLabelFormatterProtocal.h */,
 			);
 			path = LabelLayer;
 			sourceTree = "<group>";

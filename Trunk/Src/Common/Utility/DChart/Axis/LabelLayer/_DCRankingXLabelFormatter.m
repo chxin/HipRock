@@ -7,6 +7,7 @@
 //
 
 #import "_DCRankingXLabelFormatter.h"
+#import "DCUtility.h"
 
 @implementation _DCRankingXLabelFormatter
 -(id)initWithSeries:(DCXYSeries*)series {
@@ -24,5 +25,10 @@
     DCDataPoint* point = self.series.datas[index];
     if (REMIsNilOrNull(point.target)) return nil;
     return point.target.name;
+}
+
+-(double)getMaxXLabelLengthIn:(CGRect)plotRect {
+    DCContext* context = self.series.seriesLayer.graphContext;
+    return [DCUtility getScreenXIn:plotRect xVal:0.8 hRange:context.hRange] - [DCUtility getScreenXIn:plotRect xVal:0 hRange:context.hRange];
 }
 @end

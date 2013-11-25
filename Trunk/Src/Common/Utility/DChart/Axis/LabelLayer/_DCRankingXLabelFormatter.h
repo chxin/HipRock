@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "DCXYSeries.h"
+#import "_DCXLabelFormatterProtocal.h"
 
-@interface _DCRankingXLabelFormatter : NSFormatter
+@interface _DCRankingXLabelFormatter : NSFormatter<_DCXLabelFormatterProtocal>
 
 @property (nonatomic, weak) DCXYSeries* series;
 -(id)initWithSeries:(DCXYSeries*)series;
