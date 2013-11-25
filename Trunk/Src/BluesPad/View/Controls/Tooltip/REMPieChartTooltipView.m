@@ -33,9 +33,9 @@
  */
 
 
--(REMTooltipViewBase *)initWithHighlightedData:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
+-(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
-    self = [super initWithHighlightedData:points inEnergyData:data widget:widget andParameters:parameters];
+    self = [super initWithHighlightedPoints:points inEnergyData:data widget:widget andParameters:parameters];
     
     if(self){
         [self renderItems];

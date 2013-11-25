@@ -20,17 +20,17 @@
 
 @implementation REMTooltipViewBase
 
-+(REMTooltipViewBase *)tooltipWithHighlightedData:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
++(REMTooltipViewBase *)tooltipWithHighlightedPoints:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
     if(widget.diagramType == REMDiagramTypePie){
-        return [[REMPieChartTooltipView  alloc] initWithHighlightedData:points inEnergyData:data widget:widget andParameters:parameters];
+        return [[REMPieChartTooltipView  alloc] initWithHighlightedPoints:points inEnergyData:data widget:widget andParameters:parameters];
     }
     else{
-        return [[REMTrendChartTooltipView alloc] initWithHighlightedData:points inEnergyData:data widget:widget andParameters:parameters];
+        return [[REMTrendChartTooltipView alloc] initWithHighlightedPoints:points inEnergyData:data widget:widget andParameters:parameters];
     }
 }
 
--(REMTooltipViewBase *)initWithHighlightedData:(id)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
+-(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
     self = [super initWithFrame:kDMChart_TooltipHiddenFrame];
     

@@ -33,7 +33,7 @@
 /*
  * Parameter data type: NSDate for line/column. NSNumber for ranking.
  */
--(void)willRangeChange:(id)start end:(id)end;
+-(BOOL)willRangeChange:(id)start end:(id)end;
 -(void)touchEndedInNormalStatus:(id)start end:(id)end;
 @end
 

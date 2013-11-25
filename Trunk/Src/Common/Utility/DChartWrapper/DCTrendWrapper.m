@@ -16,8 +16,8 @@ typedef enum _DChartStatus {
 
 @interface DCTrendWrapper()
 @property (nonatomic, strong) NSMutableArray* processors;
-@property (nonatomic, strong) DCRange* beginRange;
-@property (nonatomic, strong) DCRange* globalRange;
+//@property (nonatomic, strong) DCRange* beginRange;
+//@property (nonatomic, strong) DCRange* globalRange;
 @property (nonatomic, strong) _DCXLabelFormatter* xLabelFormatter;
 @property (nonatomic, strong) REMTrendChartDataProcessor* sharedProcessor;
 @property (nonatomic, assign) DChartStatus chartStatus;
@@ -42,16 +42,16 @@ typedef enum _DChartStatus {
         
         _chartStatus = DChartStatusNormal;
         _energyViewData = energyViewData;
-        [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
+        NSDictionary* dic = [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
         
-        [self createChartView:frame];
+        [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"]];
         [self updateCalender];
     }
     return self;
 }
 
--(void)createChartView:(CGRect)frame {
-    DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:self.beginRange stacked:self.isStacked];
+-(void)createChartView:(CGRect)frame beginRange:(DCRange*)beginRange globalRange:(DCRange*)globalRange {
+    DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:beginRange stacked:self.isStacked];
     [view setXLabelFormatter:self.xLabelFormatter];
     _view = view;
     view.xAxis = [[DCAxis alloc]init];
@@ -64,7 +64,7 @@ typedef enum _DChartStatus {
     for (; seriesIndex < seriesAmount; seriesIndex++) {
         [seriesList addObject:[self createSeriesAt:seriesIndex style:self.style]];
     }
-    view.graphContext.globalHRange = self.globalRange;
+    view.graphContext.globalHRange = globalRange;
     view.seriesList = seriesList;
     
     view.userInteractionEnabled = self.style.userInteraction;
@@ -100,7 +100,7 @@ typedef enum _DChartStatus {
     }
     view.graphContext.hGridlineAmount = self.style.horizentalGridLineAmount;
     view.delegate = self;
-    [view.graphContext addHRangeObsever:self];
+    self.graphContext = view.graphContext;
 }
 
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style {
@@ -160,7 +160,7 @@ typedef enum _DChartStatus {
     NSNumber* length = [processor processX:lengthDate];
     NSDate* edgeOfGlobalEnd = [processor deprocessX:length.intValue];
     NSComparisonResult end = [edgeOfGlobalEnd compare:lengthDate];
-    if (end == NSOrderedSame || end == NSOrderedDescending) {
+    if (end == NSOrderedDescending) {
         return length;
     } else if (roundToFloor) {
         length = @(length.intValue);
@@ -170,7 +170,7 @@ typedef enum _DChartStatus {
     return length;
 }
 
--(void)updateProcessorRangesFormatter:(REMEnergyStep)step {
+-(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
     self.isStacked = ([self.xtypeOfWidget rangeOfString:@"stack"].location != NSNotFound);
     
     NSUInteger seriesAmount = [self getSeriesAmount];
@@ -231,41 +231,16 @@ typedef enum _DChartStatus {
     NSNumber* globalLength = @([self roundDate:globalEndDate startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:NO].intValue);
     int startPoint = [self roundDate:beginningStart startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:YES].intValue;
     int endPoint = [self roundDate:beginningEnd startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:NO].intValue;
-    self.beginRange = [[DCRange alloc]initWithLocation:startPoint-0.5 length:endPoint-startPoint];
-    self.globalRange = [[DCRange alloc]initWithLocation:-0.5 length:globalLength.doubleValue];
-    self.myStableRange = self.beginRange;
+    DCRange* beginRange = [[DCRange alloc]initWithLocation:startPoint-0.5 length:endPoint-startPoint];
+    DCRange* globalRange = [[DCRange alloc]initWithLocation:-0.5 length:globalLength.doubleValue];
+    self.myStableRange = beginRange;
     
     self.xLabelFormatter = [[_DCXLabelFormatter alloc]initWithStartDate:baseDateOfX dataStep:step interval:1];
+    return @{ @"globalRange": globalRange, @"beginRange": beginRange };
 }
 
 -(NSUInteger)getSeriesAmount {
     return self.energyViewData.targetEnergyData.count;
-}
-
--(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
-    if ([DCRange isRange:oldRange equalTo:newRange]) return;
-    double rangeStart = newRange.location;
-    double rangeEnd = newRange.location + newRange.length;
-    if (rangeStart < self.globalRange.location) {
-        rangeStart = self.globalRange.location;
-        rangeEnd = self.globalRange.location + newRange.length;
-    }
-    if (rangeEnd > self.globalRange.length+self.globalRange.location) {
-        rangeEnd = self.globalRange.length+self.globalRange.location;
-        rangeStart = rangeEnd - newRange.length;
-    }
-    DCRange* myNewRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
-        if (![DCRange isRange:self.myStableRange equalTo:myNewRange]) {
-            if (self.sharedProcessor == nil) {
-                [self.delegate performSelector:@selector(willRangeChange:end:) withObject:@(rangeStart) withObject:@(rangeEnd)];
-            } else {
-                [self.delegate performSelector:@selector(willRangeChange:end:) withObject:[self.sharedProcessor deprocessX:rangeStart] withObject:[self.sharedProcessor deprocessX:rangeEnd]];
-            }
-        }
-    }
-    self.myStableRange = myNewRange;
 }
 
 -(void)touchedInPlotAt:(CGPoint)point xCoordinate:(double)xLocation {
@@ -288,12 +263,12 @@ typedef enum _DChartStatus {
     DCRange* newRange = self.graphContext.hRange;
     double rangeStart = newRange.location;
     double rangeEnd = newRange.location + newRange.length;
-    if (rangeStart < self.globalRange.location) {
-        rangeStart = self.globalRange.location;
-        rangeEnd = self.globalRange.location + newRange.length;
+    if (rangeStart < self.graphContext.globalHRange.location) {
+        rangeStart = self.graphContext.globalHRange.location;
+        rangeEnd = self.graphContext.globalHRange.location + newRange.length;
     }
-    if (rangeEnd > self.globalRange.length+self.globalRange.location) {
-        rangeEnd = self.globalRange.length+self.globalRange.location;
+    if (rangeEnd > self.graphContext.globalHRange.end) {
+        rangeEnd = self.graphContext.globalHRange.end;
         rangeStart = rangeEnd - newRange.length;
     }
     DCRange* myNewRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
@@ -327,14 +302,14 @@ typedef enum _DChartStatus {
     _calenderType = syntax.calendarType;
 }
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
-    [self updateProcessorRangesFormatter:step];
+    _energyViewData = energyViewData;
+    NSDictionary* dic = [self updateProcessorRangesFormatter:step];
     CGRect frame = self.view.frame;
     UIView* superView = self.view.superview;
     [self.view removeFromSuperview];
     _chartStatus = DChartStatusNormal;
-    _energyViewData = energyViewData;
     
-    [self createChartView:frame];
+    [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"]];
     [superView addSubview:self.view];
     [self updateCalender];
 }
@@ -376,5 +351,58 @@ typedef enum _DChartStatus {
     [self.view setBackgoundBands:bands];
 }
 
+-(BOOL)testHRangeChange:(DCRange *)newRange oldRange:(DCRange *)oldRange sendBy:(DCHRangeChangeSender)senderType {
+    if (senderType == DCHRangeChangeSenderByAnimation || senderType == DCHRangeChangeSenderByInitialize) return YES;
+    if ([DCRange isRange:oldRange equalTo:newRange]) return NO;
+    
+    if (senderType == DCHRangeChangeSenderByUserPan) {
+        double rangeStart = newRange.location;
+        double rangeEnd = newRange.end;
+        if (rangeStart < self.graphContext.globalHRange.location) {
+            rangeStart = self.graphContext.globalHRange.location;
+            rangeEnd = self.graphContext.globalHRange.location + newRange.length;
+        }
+        if (rangeEnd > self.graphContext.globalHRange.end) {
+            rangeEnd = self.graphContext.globalHRange.end;
+            rangeStart = rangeEnd - newRange.length;
+        }
+        
+        DCRange* myNewRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
+        BOOL shouldChange = YES;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
+            if (![DCRange isRange:self.myStableRange equalTo:myNewRange]) {
+                id param0, param1;
+                if (self.sharedProcessor == nil) {
+                    param0 = @(rangeStart);
+                    param1 = @(rangeEnd);
+                } else {
+                    param0 = [self.sharedProcessor deprocessX:rangeStart];
+                    param1 = [self.sharedProcessor deprocessX:rangeEnd];
+                }
+                shouldChange = (BOOL)[self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
+            }
+        }
+        if (shouldChange) self.myStableRange = myNewRange;
+        return shouldChange;
+    } else {
+        BOOL shouldChange = YES;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
+            id param0, param1;
+            if (self.sharedProcessor == nil) {
+                param0 = @(newRange.location);
+                param1 = @(newRange.end);
+            } else {
+                param0 = [self.sharedProcessor deprocessX:newRange.location];
+                param1 = [self.sharedProcessor deprocessX:newRange.end];
+            }
+            shouldChange = (BOOL)[self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
+        }
+        if (shouldChange) {
+            self.myStableRange = newRange;
+            [self updateCalender];
+        }
+        return shouldChange;
+    }
+}
 
 @end

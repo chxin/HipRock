@@ -20,7 +20,7 @@
     } else {
         double year = ((double)[REMTimeHelper getYear:xLocalTime] - (double)[REMTimeHelper getYear:startDate]);
         double month =(double)[REMTimeHelper getMonth:xLocalTime] - (double)[REMTimeHelper getMonth:startDate];
-        double date = [REMTimeHelper getDay:xLocalTime]-[REMTimeHelper getDay:startDate];
+        double date = (double)[REMTimeHelper getDay:xLocalTime]-(double)[REMTimeHelper getDay:startDate];
         x = year * 12.0 + month + date/30;
         if (step == REMEnergyStepYear) {
             x = x/12;
