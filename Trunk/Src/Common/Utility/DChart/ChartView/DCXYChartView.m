@@ -403,6 +403,10 @@
     _xLabelFormatter = formatter;
 }
 
+-(void)relabelX {
+    [self._xLabelLayer setNeedsDisplay];
+}
+
 -(void)viewTapped:(UITapGestureRecognizer *)gesture {
     CGPoint touchPoint = [gesture locationInView:self];
     if (CGRectContainsPoint(self.plotRect, touchPoint)) {
