@@ -20,7 +20,7 @@
 @interface REMTooltipViewBase : UIView
 
 // Properties
-@property (nonatomic) NSArray *highlightedPoints;
+@property (nonatomic) NSArray *highlightedPoints; //array of DCChartPoint
 @property (nonatomic,weak) REMEnergyViewData *data;
 @property (nonatomic,weak) REMWidgetObject *widget;
 @property (nonatomic,weak) REMWidgetSearchModelBase *parameters;
@@ -33,9 +33,9 @@
 @property (nonatomic,weak) UIScrollView *scrollView;
 
 // Methods
-+ (REMTooltipViewBase *)tooltipWithHighlightedData:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
++ (REMTooltipViewBase *)tooltipWithHighlightedPoints:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
 
-- (REMTooltipViewBase *)initWithHighlightedData:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
+- (REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
 
 - (void)updateHighlightedData:(id)data;
 

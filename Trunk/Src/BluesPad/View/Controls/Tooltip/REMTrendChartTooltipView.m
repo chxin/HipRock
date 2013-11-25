@@ -15,6 +15,7 @@
 #import "REMWidgetTagSearchModel.h"
 #import "REMWidgetCommoditySearchModel.h"
 #import "REMTextIndicatorFormator.h"
+#import "DCDataPoint.h"
 
 
 @interface REMTrendChartTooltipView()
@@ -41,9 +42,9 @@
  */
 
 
--(REMTooltipViewBase *)initWithHighlightedData:(id)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
+-(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
-    self = [super initWithHighlightedData:points inEnergyData:data widget:widget andParameters:parameters];
+    self = [super initWithHighlightedPoints:points inEnergyData:data widget:widget andParameters:parameters];
     
     if(self){
     }
@@ -88,9 +89,9 @@
     return view;
 }
 
-- (void)updateHighlightedData:(NSArray *)data
+- (void)updateHighlightedData:(NSArray *)points
 {
-    self.highlightedPoints = data;
+    self.highlightedPoints = points;
     self.itemModels = [self convertItemModels];
     
     for(int i=0;i<self.itemModels.count;i++)
@@ -99,27 +100,33 @@
 
 - (NSArray *)convertItemModels
 {
-    NSArray *highlightedPoints = self.highlightedPoints; //highlightedPoints for trend data is an array
+    NSArray *highlightedPoints = self.highlightedPoints; //highlightedPoints for trend data is an array of DCChartPoint
     NSMutableArray *itemModels = [[NSMutableArray alloc] init];
     
     for(int i=0;i<highlightedPoints.count;i++){
-        REMEnergyData *point = highlightedPoints[i];
-        REMTargetEnergyData *targetData = self.data.targetEnergyData[i];
+        DCDataPoint *point = highlightedPoints[i];
+        
+        //properties of DCDataPoint
+        //@property (nonatomic) NSNumber* value;
+        //@property (nonatomic, assign) DCDataPointType pointType;
+        //@property (nonatomic, weak) REMEnergyData* energyData;
+        //@property (nonatomic, weak) REMEnergyTargetModel* target;
+        //@property (nonatomic, weak) DCSeries* series;
         
         REMDataStoreType storeType = self.widget.contentSyntax.dataStoreType;
         REMChartTooltipItemModel *model = (storeType == REMDSEnergyRankingCarbon || storeType == REMDSEnergyRankingCost || storeType == REMDSEnergyRankingEnergy) ? [[REMRankingTooltipItemModel alloc] init] : [[REMChartTooltipItemModel alloc] init];
         
-        model.title = [self formatTargetName:targetData.target];
-        model.value = REMIsNilOrNull(point) ? nil : point.dataValue;
+        model.title = [self formatTargetName:point.target];
+        model.value = REMIsNilOrNull(point) ? nil : point.value;
         model.color = [REMColor colorByIndex:i].uiColor;
         model.index = i;
         model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType: self.widget.diagramType];
         
-        if(REMIsNilOrNull(targetData.target.uomName)){
-            model.uom = REMUoms[@(targetData.target.uomId)];
+        if(REMIsNilOrNull(point.target.uomName)){
+            model.uom = REMUoms[@(point.target.uomId)];
         }
         else{
-            model.uom = targetData.target.uomName;
+            model.uom = point.target.uomName;
         }
         
         

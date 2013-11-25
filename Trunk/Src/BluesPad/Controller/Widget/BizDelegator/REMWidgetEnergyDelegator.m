@@ -858,16 +858,16 @@
 #pragma mark - Tooltip
 // Trend chart delegate
 /*** this function will be removed when d-chart is ok ***/
--(void)highlightPoints:(NSArray*)points colors:(NSArray*)colors names:(NSArray*)names
+-(void)highlightPoints:(NSArray*)points
 {
-    //what's stack column chart tooltip like?
+    //points is an array of DCDataPoint
     if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
         return;
     }
     
     [self.searchView setHidden:YES];
     
-    if(self.tooltipView!=nil){
+    if(self.tooltipView != nil){
         [self.tooltipView updateHighlightedData:points];
     }
     else{
@@ -875,30 +875,30 @@
     }
 }
 
--(void)highlightPoints:(NSArray *)points {
-    //what's stack column chart tooltip like?
-    if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
-        return;
-    }
-    
-    [self.searchView setHidden:YES];
-    
-    NSMutableArray* energyPoints = [[NSMutableArray alloc]init];
-    for (DCDataPoint* p in points) {
-        if (p.energyData == nil) {
-            [energyPoints addObject:[NSNull null]];
-        } else {
-            [energyPoints addObject:p.energyData];
-        }
-    }
-    
-    if(self.tooltipView!=nil){
-        [self.tooltipView updateHighlightedData:energyPoints];
-    }
-    else{
-        [self showTooltip:energyPoints];
-    }
-}
+//-(void)highlightPoints:(NSArray *)points {
+//    //what's stack column chart tooltip like?
+//    if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
+//        return;
+//    }
+//    
+//    [self.searchView setHidden:YES];
+//    
+//    NSMutableArray* energyPoints = [[NSMutableArray alloc]init];
+//    for (DCDataPoint* p in points) {
+//        if (p.energyData == nil) {
+//            [energyPoints addObject:[NSNull null]];
+//        } else {
+//            [energyPoints addObject:p.energyData];
+//        }
+//    }
+//    
+//    if(self.tooltipView!=nil){
+//        [self.tooltipView updateHighlightedData:energyPoints];
+//    }
+//    else{
+//        [self showTooltip:energyPoints];
+//    }
+//}
 
 // Pie chart delegate
 -(void)highlightPoint:(REMEnergyData*)point color:(UIColor*)color name:(NSString*)name direction:(REMDirection)direction
@@ -934,9 +934,9 @@
     }];
 }
 
--(void)showTooltip:(NSArray *)highlightedData
+-(void)showTooltip:(NSArray *)highlightedPoints
 {
-    REMTooltipViewBase *tooltip = [REMTooltipViewBase tooltipWithHighlightedData:highlightedData inEnergyData:self.energyData widget:self.widgetInfo andParameters:self.tempModel];
+    REMTooltipViewBase *tooltip = [REMTooltipViewBase tooltipWithHighlightedPoints:highlightedPoints inEnergyData:self.energyData widget:self.widgetInfo andParameters:self.tempModel];
     tooltip.tooltipDelegate = self;
     
     [self.view addSubview:tooltip];

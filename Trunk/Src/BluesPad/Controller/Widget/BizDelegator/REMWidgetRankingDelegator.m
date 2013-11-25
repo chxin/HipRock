@@ -262,7 +262,7 @@ const static CGFloat kRankingTimePickerWidth=250;
 
 -(void)showTooltip:(NSArray *)highlightedData
 {
-    REMTooltipViewBase *tooltip = [REMTooltipViewBase tooltipWithHighlightedData:highlightedData inEnergyData:self.energyData widget:self.widgetInfo andParameters:nil];
+    REMTooltipViewBase *tooltip = [REMTooltipViewBase tooltipWithHighlightedPoints:highlightedData inEnergyData:self.energyData widget:self.widgetInfo andParameters:nil];
     tooltip.tooltipDelegate = self;
     
     [self.view addSubview:tooltip];
