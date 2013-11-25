@@ -469,6 +469,9 @@
 }
 
 - (void)setBlurLevel:(CGFloat)offsetY {
+//    float blurLevel=(offsetY + kBuildingCommodityViewTop) / (kBuildingCommodityViewTop+kCommodityScrollTop);
+//     self.glassView.alpha = MAX(0,MIN(blurLevel,0.8));
+//    return;
     float blurLevel=(offsetY + kBuildingCommodityViewTop) / (kBuildingCommodityViewTop+kCommodityScrollTop);
     
     if(self.blurImageView.alpha == blurLevel) return;
