@@ -12,7 +12,9 @@
 
 @implementation REMDataStore
 
-static NSDictionary *energyStoreMap = nil;
+#define REMJsonSvc(a) [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:(a)]
+#define REMDataSvc(a) [[REMServiceMeta alloc] initWithDataResultRelativeUrl:(a)]
+
 static NSDictionary *serviceMap = nil;
 
 - (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter
@@ -27,35 +29,6 @@ static NSDictionary *serviceMap = nil;
     return store;
 }
 
-- (REMDataStore *)initWithEnergyStore:(NSString *)energyStore parameter:(id) parameter
-{
-    REMDataStore *store = [self init];
-    
-    //NSAssert(energyStore != nil, @"Oh shit, energy store does not exist");
-    
-    store.name = (REMDataStoreType)[[REMDataStore energyStoreMap] objectForKey:energyStore];
-    store.parameter = parameter;
-    
-    store.serviceMeta = [[REMDataStore serviceMap] objectForKey:[[REMDataStore energyStoreMap] objectForKey:energyStore]];
-    
-    return store;
-}
-
-
-+ (NSDictionary *) energyStoreMap
-{
-    if(energyStoreMap == nil)
-    {
-        energyStoreMap =
-        @{
-          @"energy.Energy": [NSNumber numberWithInt:REMDSEnergyTagsTrend],
-          @"energy.Distribution": [NSNumber numberWithInt:REMDSEnergyTagsDistribute],
-        };
-    }
-    
-    return energyStoreMap;
-}
-
 + (NSDictionary *) serviceMap
 {
     if(serviceMap == nil)
@@ -65,56 +38,91 @@ static NSDictionary *serviceMap = nil;
           /**
            *	AccessControl
            */
-          [NSNumber numberWithInt:REMDSUserValidate] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl :@"API/AccessControl.svc/ValidateUser"],
+          @(REMDSUserValidate) :
+              REMJsonSvc(@"API/AccessControl.svc/ValidateUser"),
+          @(REMDSDemoUserValidate) :
+              REMJsonSvc(@"API/AccessControl.svc/ValidateDemoUser"),
           
           /**
            *	Energy
            */
-          [NSNumber numberWithInt:REMDSEnergyTagsTrend] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetTagsData"],
-          [NSNumber numberWithInt:REMDSEnergyTagsTrendUnit] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetEnergyUsageUnitData"],
-          [NSNumber numberWithInt:REMDSEnergyTagsDistribute] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/AggregateTagsData"],
-          [NSNumber numberWithInt:REMDSEnergyMultiTimeTrend] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetTagsData"],
-          [NSNumber numberWithInt:REMDSEnergyMultiTimeDistribute] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/AggregateTimeSpansData"],
-          [NSNumber numberWithInt:REMDSEnergyCarbon] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetCarbonUsageData"],
-          [NSNumber numberWithInt:REMDSEnergyCarbonUnit] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetCarbonUsageUnitData"],
-          [NSNumber numberWithInt:REMDSEnergyCarbonDistribute] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/AggregateCarbonUsageData"],
-          [NSNumber numberWithInt:REMDSEnergyCost] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetCostData"],
-          [NSNumber numberWithInt:REMDSEnergyCostUnit] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetCostUnitData"],
-          [NSNumber numberWithInt:REMDSEnergyCostDistribute] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/AggregateCostData"],
-          [NSNumber numberWithInt:REMDSEnergyCostElectricity] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/GetElectricityCostData"],
-          [NSNumber numberWithInt:REMDSEnergyRatio] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/RatioGetTagsData"],
-          [NSNumber numberWithInt:REMDSEnergyRankingEnergy] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/RankingEnergyUsageData"],
-          [NSNumber numberWithInt:REMDSEnergyRankingCost] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/RankingCostData"],
-          [NSNumber numberWithInt:REMDSEnergyRankingCarbon] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Energy.svc/RankingCarbonData"],
+          @(REMDSEnergyTagsTrend) :
+              REMJsonSvc(@"API/Energy.svc/GetTagsData"),
+          @(REMDSEnergyTagsTrendUnit) :
+              REMJsonSvc(@"API/Energy.svc/GetEnergyUsageUnitData"),
+          @(REMDSEnergyTagsDistribute) :
+              REMJsonSvc(@"API/Energy.svc/AggregateTagsData"),
+          @(REMDSEnergyMultiTimeTrend) :
+              REMJsonSvc(@"API/Energy.svc/GetTagsData"),
+          @(REMDSEnergyMultiTimeDistribute) :
+              REMJsonSvc(@"API/Energy.svc/AggregateTimeSpansData"),
+          @(REMDSEnergyCarbon) :
+              REMJsonSvc(@"API/Energy.svc/GetCarbonUsageData"),
+          @(REMDSEnergyCarbonUnit) :
+              REMJsonSvc(@"API/Energy.svc/GetCarbonUsageUnitData"),
+          @(REMDSEnergyCarbonDistribute) :
+              REMJsonSvc(@"API/Energy.svc/AggregateCarbonUsageData"),
+          @(REMDSEnergyCost) :
+              REMJsonSvc(@"API/Energy.svc/GetCostData"),
+          @(REMDSEnergyCostUnit) :
+              REMJsonSvc(@"API/Energy.svc/GetCostUnitData"),
+          @(REMDSEnergyCostDistribute) :
+              REMJsonSvc(@"API/Energy.svc/AggregateCostData"),
+          @(REMDSEnergyCostElectricity) :
+              REMJsonSvc(@"API/Energy.svc/GetElectricityCostData"),
+          @(REMDSEnergyRatio) :
+              REMJsonSvc(@"API/Energy.svc/RatioGetTagsData"),
+          @(REMDSEnergyRankingEnergy) :
+              REMJsonSvc(@"API/Energy.svc/RankingEnergyUsageData"),
+          @(REMDSEnergyRankingCost) :
+              REMJsonSvc(@"API/Energy.svc/RankingCostData"),
+          @(REMDSEnergyRankingCarbon) :
+              REMJsonSvc(@"API/Energy.svc/RankingCarbonData"),
           
-          @(REMDSUserGetCurrent) : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/User.svc/GetCurrentUser"],
+          /**
+           * User
+           */
+          @(REMDSUserGetCurrent) :
+              REMJsonSvc(@"API/User.svc/GetCurrentUser"),
           
           /**
            * Customer
            */
-          [NSNumber numberWithInt:REMDSCustomerLogo] : [[REMServiceMeta alloc] initWithDataResultRelativeUrl:@"API/Hierarchy.svc/GetCustomerLogo"],
-          [NSNumber numberWithInt:REMDSCustomerSwitch] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Customer.svc/SwitchCustomer"],
+          @(REMDSCustomerLogo) :
+              REMDataSvc(@"API/Hierarchy.svc/GetCustomerLogo"),
+          @(REMDSCustomerSwitch) :
+              REMJsonSvc(@"API/Customer.svc/SwitchCustomer"),
+          
           /**
            *	Building
            */
-          [NSNumber numberWithInt:REMDSBuildingOverallData] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Building.svc/GetBuildingOverallData"],
-          [NSNumber numberWithInt:REMDSBuildingCommodityTotalUsage] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Building.svc/GetBuildingCommodityUsage"],
-          [NSNumber numberWithInt:REMDSBuildingInfo] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Building.svc/GetBuildingInfo"],
-          [NSNumber numberWithInt:REMDSBuildingAverageData] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Building.svc/GetBuildingAverageUsageData"],
-          [NSNumber numberWithInt:REMDSBuildingTimeRangeData] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Building.svc/GetBuildingTimeRangeData"],
-          [NSNumber numberWithInt:REMDSBuildingAirQuality] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Building.svc/GetBuildingAirQualityData"],
-          [NSNumber numberWithInt:REMDSBuildingPicture] : [[REMServiceMeta alloc] initWithDataResultRelativeUrl:@"API/Building.svc/GetBuildingPicture"],
+          @(REMDSBuildingOverallData) :
+              REMJsonSvc(@"API/Building.svc/GetBuildingOverallData"),
+          @(REMDSBuildingCommodityTotalUsage) :
+              REMJsonSvc(@"API/Building.svc/GetBuildingCommodityUsage"),
+          @(REMDSBuildingInfo) :
+              REMJsonSvc(@"API/Building.svc/GetBuildingInfo"),
+          @(REMDSBuildingAverageData) :
+              REMJsonSvc(@"API/Building.svc/GetBuildingAverageUsageData"),
+          @(REMDSBuildingTimeRangeData) :
+              REMJsonSvc(@"API/Building.svc/GetBuildingTimeRangeData"),
+          @(REMDSBuildingAirQuality) :
+              REMJsonSvc(@"API/Building.svc/GetBuildingAirQualityData"),
+          @(REMDSBuildingPicture) :
+              REMDataSvc(@"API/Building.svc/GetBuildingPicture"),
           
           
           /**
            *	Dashboard
            */
-          [NSNumber numberWithInt:REMDSDashboardFavorite] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Dashboard.svc/GetFavoriteDashboards"],
+          @(REMDSDashboardFavorite) :
+              REMJsonSvc(@"API/Dashboard.svc/GetFavoriteDashboards"),
           
           /**
            *	Other
            */
-          [NSNumber numberWithInt:REMDSLogSend] : [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:@"API/Log.svc/SendLog"],
+          @(REMDSLogSend) :
+              REMJsonSvc(@"API/Log.svc/SendLog"),
         };
     }
     

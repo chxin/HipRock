@@ -23,5 +23,10 @@ static REMApplicationContext *context = nil;
     return context;
 }
 
++ (void)destroy
+{
+    context = nil;
+}
+
 
 @end

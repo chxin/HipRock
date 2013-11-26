@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5WC-f7-YJK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5WC-f7-YJK">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Splash Screen Controller-->
@@ -419,12 +419,11 @@
                         <outlet property="passwordTextField" destination="TI6-QH-ZIu" id="LFA-rz-CPx"/>
                         <outlet property="userNameErrorLabel" destination="F05-SM-93U" id="2Q4-jG-kQZ"/>
                         <outlet property="userNameTextField" destination="NEh-h3-tnd" id="J73-vr-6gc"/>
-                        <segue destination="aGJ-if-abd" kind="modal" identifier="loginCustomerSegue" id="fhf-x2-3OY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZN-hP-sdL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4921" y="835"/>
+            <point key="canvasLocation" x="-4545" y="771"/>
         </scene>
         <!--Login Customer View Controller - 请选择客户-->
         <scene sceneID="cWq-0w-6Ae">
@@ -470,7 +469,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RSN-tn-dnu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3575" y="810"/>
+            <point key="canvasLocation" x="-2623" y="634"/>
         </scene>
         <!--Login Carousel Controller-->
         <scene sceneID="MgP-x0-zlk">
@@ -489,6 +488,9 @@
                     <navigationItem key="navigationItem" id="ZIr-Dy-6v7"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <segue destination="aGJ-if-abd" kind="modal" identifier="loginCustomerSegue" id="cMx-qB-szE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mjp-Au-mwu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -939,7 +941,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sU8-el-sNE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4292" y="700"/>
+            <point key="canvasLocation" x="-3420" y="524"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YZd-Lj-m7L">

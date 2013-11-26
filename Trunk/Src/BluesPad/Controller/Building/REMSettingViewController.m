@@ -184,6 +184,9 @@
     [currentCustomer kill];
     currentUser = nil;
     currentCustomer = nil;
+    
+    [REMApplicationContext destroy];
+    
     UINavigationController *nav=(UINavigationController *)self.parentViewController;
     REMMainNavigationController *mainController=(REMMainNavigationController *)nav.presentingViewController;
     //NSLog(@"child controllers before: %d", nav.childViewControllers.count);
@@ -194,6 +197,7 @@
         [mainController presentLoginView:nil];
         
         [REMStorage clearSessionStorage];
+        [REMStorage clearOnApplicationActive];
     }];
 }
 
@@ -247,9 +251,6 @@
     else if(indexPath.section == 1 && indexPath.row==0){
         [self performSegueWithIdentifier:@"settingCustomerSelectionSegue" sender:self];
     }
-    
-    
-    
 }
 
 
