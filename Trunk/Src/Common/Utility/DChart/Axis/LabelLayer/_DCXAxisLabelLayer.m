@@ -46,10 +46,24 @@
     CGContextSetLineWidth(ctx, self.axis.lineWidth);
     CGContextSetStrokeColorWithColor(ctx, self.axis.lineColor.CGColor);
     CGContextStrokePath(ctx);
+    
+    for (NSNumber* key in self.trashbox.xToLayerDic.allKeys) {
+        CATextLayer* text = self.trashbox.xToLayerDic[key];
+        [text removeFromSuperlayer];
+    }
+    [self.trashbox.xToLayerDic removeAllObjects];
+    int start = floor(self.graphContext.hRange.location);
+    int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
+    for (int i = start; i <= end; i++) {
+        if (self.trashbox.xToLayerDic[@(i)] == nil) {
+            [self addLabelForX:i];
+        }
+    }
 }
 
 -(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
+    
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
     BOOL caTransationState = CATransaction.disableActions;
@@ -85,6 +99,7 @@
     }
 }
 
+
 -(NSString*)textForX:(int)x {
     if (self.labelFormatter) {
         return [self.labelFormatter stringForObjectValue:@(x)];
@@ -101,7 +116,10 @@
                                             NULL);
     }
     CGFloat centerX = (x - self.graphContext.hRange.location) * self.frame.size.width / self.graphContext.hRange.length;
-    
+    CGFloat maxLabelLength = INT32_MAX;
+    if (self.labelFormatter && [self.labelFormatter respondsToSelector:@selector(getMaxXLabelLengthIn:)]) {
+        maxLabelLength = [((id<_DCXLabelFormatterProtocal>)self.labelFormatter) getMaxXLabelLengthIn:self.bounds];
+    }
     CATextLayer* text = (CATextLayer*)[self.trashbox popLayerFromTrashBox];
     if (!text) {
         text = [[CATextLayer alloc]init];
@@ -110,12 +128,21 @@
         text.contentsScale = [[UIScreen mainScreen] scale];
         text.foregroundColor = self.fontColor.CGColor;
         text.alignmentMode = kCAAlignmentCenter;
+        text.truncationMode = kCATruncationEnd;
         [self addSublayer:text];
     }
     NSString* labelText = [self textForX:x];
     [text setString:labelText];
     CGSize size = [DCUtility getSizeOfText:labelText forFont:self.font];
-    text.frame = CGRectMake(centerX-size.width/2,self.frame.size.height/2-size.height/2, size.width,size.height);
+    if (size.width > maxLabelLength) {
+        text.alignmentMode = kCAAlignmentLeft;
+        text.truncationMode = kCATruncationEnd;
+        text.frame = CGRectMake(centerX-maxLabelLength/2,self.frame.size.height/2-size.height/2, maxLabelLength,size.height);
+    } else {
+        text.alignmentMode = kCAAlignmentCenter;
+        text.truncationMode = kCATruncationNone;
+        text.frame = CGRectMake(centerX-size.width/2,self.frame.size.height/2-size.height/2, size.width,size.height);
+    }
     [self.trashbox.xToLayerDic setObject:text forKey:@(x)];
 }
 

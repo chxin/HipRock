@@ -60,4 +60,8 @@
         return @"";
     }
 }
+
+-(double)getMaxXLabelLengthIn:(CGRect)plotRect {
+    return INT32_MAX;
+}
 @end

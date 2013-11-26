@@ -9,11 +9,10 @@
 #import "_DCYAxisLabelLayer.h"
 #import "DCUtility.h"
 @interface _DCYAxisLabelLayer()
-@property (nonatomic, assign) CGFloat fontSize;
-@property (nonatomic, assign) CTFontRef fontRef;
-@property (nonatomic) CGFloat labelWidth;
-@property (nonatomic) CGFloat labelHeight;
 @property NSNumberFormatter* numberFormatter;
+@property (nonatomic, assign) CGFloat interval;
+@property (nonatomic, weak) DCRange* yRange;
+@property (nonatomic) CGRect myFrame;
 @end
 
 @implementation _DCYAxisLabelLayer
@@ -22,61 +21,63 @@
     if (self) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
         _numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        self.masksToBounds = NO;
         self.backgroundColor = [UIColor clearColor].CGColor;
+        _interval = 0;
     }
     return self;
 }
 -(void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
-    
-    CGPoint addLines[2];
-    addLines[0].x = self.isMajorAxis ? self.frame.size.width : 0;
-    addLines[0].y = 0;
-    addLines[1].x = addLines[0].x;
-    addLines[1].y = self.frame.size.height;
-    
-    CGContextSetLineJoin(ctx, kCGLineJoinMiter);
-    [DCUtility setLineStyle:ctx style:self.axis.lineStyle];
-    CGContextSetBlendMode(ctx, kCGBlendModeNormal);
-    CGContextBeginPath(ctx);
-    CGContextAddLines(ctx, addLines, 2);
-    CGContextSetLineWidth(ctx, self.axis.lineWidth);
-    CGContextSetStrokeColorWithColor(ctx, self.axis.lineColor.CGColor);
-    CGContextStrokePath(ctx);
-}
--(void)removeFromSuperlayer {
-    if (self.fontRef) {
-        CFRelease(self.fontRef);
+    if(self.axis.lineWidth > 0) {
+        CGPoint addLines[2];
+        addLines[0].x = self.isMajorAxis ? self.myFrame.size.width : 0;
+        addLines[0].y = 0;
+        addLines[1].x = addLines[0].x;
+        addLines[1].y = self.myFrame.size.height;
+        
+        CGContextSetLineJoin(ctx, kCGLineJoinMiter);
+        [DCUtility setLineStyle:ctx style:self.axis.lineStyle];
+        CGContextSetBlendMode(ctx, kCGBlendModeNormal);
+        CGContextBeginPath(ctx);
+        CGContextAddLines(ctx, addLines, 2);
+        CGContextSetLineWidth(ctx, self.axis.lineWidth);
+        CGContextSetStrokeColorWithColor(ctx, self.axis.lineColor.CGColor);
+        CGContextStrokePath(ctx);
     }
-    [super removeFromSuperlayer];
-}
--(void)didYIntervalChanged:(double)oldInterval newInterval:(double)newInterval yRange:(DCRange*)yRange {
-    if (self.fontRef == nil) {
-        self.fontSize = self.font.pointSize;
-        self.fontRef = CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, self.fontSize,  NULL);
-        CGSize size = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.font];
-        self.labelWidth = size.width;
-        self.labelHeight = size.height;
-    }
-    if (newInterval <= 0) return;
-    for (NSUInteger i = 0; i <= self.graphContext.hGridlineAmount; i++) {
-        CATextLayer* text = nil;
-        double yVal = i * newInterval;
-        if (self.sublayers.count == i) {
-            text = [[CATextLayer alloc]init];
-            text.font = self.fontRef;
-            text.fontSize = self.fontSize;
-            text.contentsScale = [[UIScreen mainScreen] scale];
-            text.foregroundColor = self.fontColor.CGColor;
-            text.alignmentMode = self.isMajorAxis ? kCAAlignmentRight :kCAAlignmentLeft;
-            text.frame = CGRectMake(self.isMajorAxis ? 0 : kDCLabelToLine, self.frame.size.height*(1-yVal/yRange.length)-self.labelHeight/2, self.labelWidth, self.labelHeight);
-            [self addSublayer:text];
-        } else {
-            text = self.sublayers[i];
+    if (self.interval > 0 && self.yRange != nil) {
+        CGContextSetFillColorWithColor(ctx, self.axis.labelColor.CGColor);
+        CGContextSelectFont(ctx, "Helvetica", self.axis.labelFont.pointSize, kCGEncodingMacRoman);
+        CGContextSetTextDrawingMode(ctx, kCGTextFill);
+        CGAffineTransform flip = CGAffineTransformMake(1, 0, 0, -1, 0, 0);
+        CGContextSetTextMatrix(ctx, flip);
+        
+        CGFloat labelWidth = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.font].width;
+        for (NSUInteger i = 0; i <= self.graphContext.hGridlineAmount; i++) {
+            double yVal = i * self.interval;
+            NSString* yString = [self stringForObjectValue:yVal];
+            CGSize stringSize = [DCUtility getSizeOfText:yString forFont:self.axis.labelFont];
+            
+            CGPoint pp = CGPointMake(self.isMajorAxis ? (labelWidth-stringSize.width) : self.myFrame.origin.x + kDCLabelToLine, self.myFrame.size.height*(1-yVal/self.yRange.length)+stringSize.height/3);
+            char *commentsMsg = (char *)[yString UTF8String];
+            CGContextShowTextAtPoint(ctx, pp.x, pp.y, commentsMsg, strlen(commentsMsg));
+            CGContextFillPath(ctx);
         }
-        text.string = [self stringForObjectValue:yVal];
     }
 }
+
+-(void)setFrame:(CGRect)frame {
+    self.myFrame = frame;
+    [super setFrame:self.superlayer.bounds];
+}
+
+-(void)didYIntervalChanged:(double)oldInterval newInterval:(double)newInterval yRange:(DCRange*)yRange {
+    if (newInterval <= 0) return;
+    self.interval = newInterval;
+    self.yRange = yRange;
+    [self setNeedsDisplay];
+}
+
 - (NSString *)stringForObjectValue:(double)y {
     if(y == 0){
         return @"0";

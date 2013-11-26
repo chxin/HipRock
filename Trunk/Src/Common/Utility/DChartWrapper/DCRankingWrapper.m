@@ -7,6 +7,7 @@
 //
 
 #import "DCRankingWrapper.h"
+#import "_DCRankingXLabelFormatter.h"
 
 @implementation DCRankingWrapper
 
@@ -38,6 +39,10 @@
     s.yAxis = view.yAxis0;
     s.yAxis.axisTitle = targetEnergy.target.uomName;
     [self customizeSeries:s seriesIndex:index chartStyle:style];
+    
+    
+    _DCRankingXLabelFormatter* formatter = [[_DCRankingXLabelFormatter alloc]initWithSeries:s];
+    [view setXLabelFormatter:formatter];
     return s;
 }
 
@@ -64,8 +69,7 @@
     int rangeCode = self.rankingRangeCode;
     int datasAmount = self.energyViewData.targetEnergyData.count;
     
-    
-    return @{ @"globalRange": [[DCRange alloc]initWithLocation:-0.5 length:datasAmount], @"beginRange": [[DCRange alloc]initWithLocation:-0.5 length:MIN(rangeCode, datasAmount)] };
+    return @{ @"globalRange": [[DCRange alloc]initWithLocation:-0.5 length:datasAmount], @"beginRange": [[DCRange alloc]initWithLocation:-0.5 length:MIN(rangeCode, datasAmount)], @"xformatter": [NSNull null] };
 }
 
 -(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
@@ -109,6 +113,7 @@
     if (_sortOrder != sortOrder) {
         _sortOrder = sortOrder;
         [self swapeAllDatas];
+        [self.view relabelX];
         
         DCXYSeries* rankingSeries = self.view.seriesList[0];
         [rankingSeries.seriesLayer setNeedsDisplay];

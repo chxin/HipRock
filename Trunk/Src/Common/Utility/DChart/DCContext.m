@@ -13,7 +13,6 @@ NSString* const kDCMaxLabel = @"999,999T";
 double const kDCReservedSpace = 1.1;   // 纵向预留10%的高度
 CGFloat const kDCColumnOffset = 0.1;    // 柱图的横向预留空间
 int const kDCLabelToLine = 5;              // label到轴线的距离
-double const kDCYRangeChangeDetection = 1.05;          // 在设定YRange的时候，如果新的YRange.length的变化不超过5%，则放弃此次设定。必须小于kDCReservedSpace。为改善动画效果
 
 int const kDCFramesPerSecord = 60;          // 动画帧数
 CGFloat const kDCAnimationDuration = 0.4;    // 动画的时间长度
@@ -118,7 +117,7 @@ NSString* const kDCPieIndicatorColor = @"#e9e9e9";
 }
 -(void)setY0Range:(DCRange *)y0Range {
     if ([DCRange isRange:y0Range equalTo:self.y0Range]) return;
-    if ([DCUtility isMinorChangeForYRange:self.y0Range new:y0Range]) return;
+//    if ([DCUtility isMinorChangeForYRange:self.y0Range new:y0Range]) return;
     DCRange* oldRange = self.y0Range;
     _y0Range = y0Range;
     
@@ -130,7 +129,7 @@ NSString* const kDCPieIndicatorColor = @"#e9e9e9";
 }
 -(void)setY1Range:(DCRange *)y1Range {
     if ([DCRange isRange:y1Range equalTo:self.y1Range]) return;
-    if ([DCUtility isMinorChangeForYRange:self.y1Range new:y1Range]) return;
+//    if ([DCUtility isMinorChangeForYRange:self.y1Range new:y1Range]) return;
     DCRange* oldRange = self.y1Range;
     _y1Range = y1Range;
     
@@ -142,7 +141,7 @@ NSString* const kDCPieIndicatorColor = @"#e9e9e9";
 }
 -(void)setY2Range:(DCRange *)y2Range {
     if ([DCRange isRange:y2Range equalTo:self.y2Range]) return;
-    if ([DCUtility isMinorChangeForYRange:self.y2Range new:y2Range]) return;
+//    if ([DCUtility isMinorChangeForYRange:self.y2Range new:y2Range]) return;
     DCRange* oldRange = self.y2Range;
     _y2Range = y2Range;
     

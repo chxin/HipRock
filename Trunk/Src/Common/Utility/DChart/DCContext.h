@@ -18,7 +18,6 @@ extern CGFloat const kDCFocusPointAlpha;
 extern CGFloat const kDCSymbolAlpha;
 extern CGFloat const kDCFocusPointSymbolMagnify;
 extern int const kDCFramesPerSecord;
-extern double const kDCYRangeChangeDetection;
 extern BOOL const kDCHideLineSymbolWhenDragging;
 extern NSString* const kDCPieShadowColor;
 extern NSString* const kDCPieIndicatorColor;

@@ -40,6 +40,6 @@
 -(double)getXLocationForPoint:(CGPoint)point;
 -(void)focusAroundX:(double)x;
 -(void)defocus;
-
+-(void)relabelX;
 -(void)setBackgoundBands:(NSArray*)bands;
 @end

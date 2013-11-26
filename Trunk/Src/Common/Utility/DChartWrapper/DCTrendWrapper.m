@@ -18,7 +18,7 @@ typedef enum _DChartStatus {
 @property (nonatomic, strong) NSMutableArray* processors;
 //@property (nonatomic, strong) DCRange* beginRange;
 //@property (nonatomic, strong) DCRange* globalRange;
-@property (nonatomic, strong) _DCXLabelFormatter* xLabelFormatter;
+//@property (nonatomic, strong) _DCXLabelFormatter* xLabelFormatter;
 @property (nonatomic, strong) REMTrendChartDataProcessor* sharedProcessor;
 @property (nonatomic, assign) DChartStatus chartStatus;
 @property (nonatomic, weak) DCContext* graphContext;
@@ -44,15 +44,15 @@ typedef enum _DChartStatus {
         _energyViewData = energyViewData;
         NSDictionary* dic = [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
         
-        [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"]];
+        [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"]];
         [self updateCalender];
     }
     return self;
 }
 
--(void)createChartView:(CGRect)frame beginRange:(DCRange*)beginRange globalRange:(DCRange*)globalRange {
+-(void)createChartView:(CGRect)frame beginRange:(DCRange*)beginRange globalRange:(DCRange*)globalRange xFormatter:(NSFormatter*)xLabelFormatter {
     DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:beginRange stacked:self.isStacked];
-    [view setXLabelFormatter:self.xLabelFormatter];
+    [view setXLabelFormatter:xLabelFormatter];
     _view = view;
     view.xAxis = [[DCAxis alloc]init];
     view.yAxis0 = [[DCAxis alloc]init];
@@ -234,9 +234,7 @@ typedef enum _DChartStatus {
     DCRange* beginRange = [[DCRange alloc]initWithLocation:startPoint-0.5 length:endPoint-startPoint];
     DCRange* globalRange = [[DCRange alloc]initWithLocation:-0.5 length:globalLength.doubleValue];
     self.myStableRange = beginRange;
-    
-    self.xLabelFormatter = [[_DCXLabelFormatter alloc]initWithStartDate:baseDateOfX dataStep:step interval:1];
-    return @{ @"globalRange": globalRange, @"beginRange": beginRange };
+        return @{ @"globalRange": globalRange, @"beginRange": beginRange, @"xformatter": [[_DCXLabelFormatter alloc]initWithStartDate:baseDateOfX dataStep:step interval:1]};
 }
 
 -(NSUInteger)getSeriesAmount {
@@ -309,7 +307,7 @@ typedef enum _DChartStatus {
     [self.view removeFromSuperview];
     _chartStatus = DChartStatusNormal;
     
-    [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"]];
+    [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"]];
     [superView addSubview:self.view];
     [self updateCalender];
 }
