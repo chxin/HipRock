@@ -17,10 +17,10 @@ int const kDCLabelToLine = 5;              // label到轴线的距离
 int const kDCFramesPerSecord = 60;          // 动画帧数
 CGFloat const kDCAnimationDuration = 0.4;    // 动画的时间长度
 
-CGFloat const kDCSymbolAlpha = 0.8;    // 动画的时间长度
+CGFloat const kDCSymbolAlpha = 1;    // 线图Symbol的alpha
 
 CGFloat const kDCFocusPointAlpha = 0.42;    // focus的柱图，未被关注的柱子的透明度
-CGFloat const kDCFocusPointSymbolMagnify = 2;    // focus的线图的symbol放大倍数
+CGFloat const kDCUnfocusPointSymbolAlph = 0.4;    // focus的线图的symbol的alpha
 
 BOOL const kDCHideLineSymbolWhenDragging = NO;  // 在拖动时是否隐藏Symbol
 
