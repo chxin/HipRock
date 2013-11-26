@@ -46,13 +46,9 @@
     }
 }
 
-+(BOOL)isMinorChangeForYRange:(DCRange*)oldRange new:(DCRange*)newRange {
-    if (oldRange.length > newRange.length) {
-        return oldRange.length/newRange.length <= kDCYRangeChangeDetection;
-    } else {
-        return newRange.length/oldRange.length <= kDCYRangeChangeDetection;
-    }
-}
+//+(BOOL)isMinorChangeForYRange:(DCRange*)oldRange new:(DCRange*)newRange {
+//    YES;
+//}
 
 
 
