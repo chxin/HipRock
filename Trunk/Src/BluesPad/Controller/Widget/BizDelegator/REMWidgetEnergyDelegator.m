@@ -453,7 +453,7 @@
     
 }
 
-- (REMEnergyStep) initStepButtonWithRange:(REMTimeRange *)range WithStep:(REMEnergyStep)step{
+- (NSDictionary *)tryNewStepByRange:(REMTimeRange *)range {
     long diff = [range.endTime timeIntervalSinceDate:range.startTime];
     NSMutableArray *lvs=[[NSMutableArray alloc]initWithCapacity:7];
     [lvs addObject:[NSNumber numberWithLong:REMDAY]];
@@ -477,7 +477,7 @@
     }
     NSMutableArray *list=[[NSMutableArray alloc] initWithCapacity:3];
     NSMutableArray *titleList=[[NSMutableArray alloc] initWithCapacity:3];
-    int defaultStepIndex;
+    int defaultStepIndex=0;
     switch (i) {
         case 0:
             [list addObject:[NSNumber numberWithInt:1]];
@@ -528,7 +528,20 @@
         default:
             break;
     }
+
+    REMEnergyStep defaultStep=(REMEnergyStep)[list[defaultStepIndex] integerValue];
+    NSDictionary *dic=@{@"stepList": list,@"titleList":titleList,@"defaultStep":@(defaultStep),@"defaultStepIndex":@(defaultStepIndex)};
     
+    return dic;
+}
+
+- (REMEnergyStep) initStepButtonWithRange:(REMTimeRange *)range WithStep:(REMEnergyStep)step{
+    
+    NSDictionary *dic=[self tryNewStepByRange:range];
+    
+    NSArray *list=dic[@"stepList"];
+    NSArray *titleList=dic[@"titleList"];
+    NSUInteger defaultStepIndex=[dic[@"defaultStepIndex"] integerValue];
     
     self.currentStepList=list;
     [self.stepControl removeAllSegments];
@@ -537,24 +550,7 @@
         [self.stepControl insertSegmentWithTitle:titleList[i] atIndex:i animated:NO];
         [self.stepControl setWidth:kWidgetStepSingleButtonWidth forSegmentAtIndex:i];
     }
-    //[self.searchView updateConstraints];
-    //[self.stepControl updateConstraints];
-    //UISegmentedControl *control= [[UISegmentedControl alloc] initWithItems:titleList];
-    //[control setSegmentedControlStyle:UISegmentedControlStyleBezeled];
-    //CGFloat x=kDMScreenWidth-kWidgetChartLeftMargin*2-list.count*kWidgetStepSingleButtonWidth;
     
-    //CGRect frame= CGRectMake(x, self.timePickerButton.frame.origin.y, list.count*kWidgetStepSingleButtonWidth, kWidgetStepButtonHeight);
-    
-    //control.tintColor=[UIColor grayColor];
-    
-    
-    
-    
-    //[control setFrame:frame];
-    //[self.stepControl removeFromSuperview];
-    //[self.searchView addSubview:control];
-    //self.stepControl=control;
-    //[self.stepControl addTarget:self action:@selector(stepChanged:) forControlEvents:UIControlEventValueChanged];
     NSNumber *newStep = [NSNumber numberWithInt:((int)step)];
     NSUInteger idx;
     if([list containsObject:newStep] == YES)
@@ -797,8 +793,7 @@
 #pragma mark touch moved
 - (void)touchEndedInNormalStatus:(id)start end:(id)end
 {
-    NSDate *newStart=start;
-    NSDate *newEnd=end;
+    
     
     [self willRangeChange:start end:end];
     
@@ -807,14 +802,32 @@
     }
 }
 
-- (void)willRangeChange:(id)start end:(id)end
+- (BOOL)willRangeChange:(id)start end:(id)end
 {
     NSDate *newStart=start;
     NSDate *newEnd=end;
-    
+    NSCalendar *calendar= [REMTimeHelper gregorianCalendar];
+    NSDateComponents *components= [calendar components:NSYearCalendarUnit| NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit| NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:newStart];
+    [components setMinute:0];
+    [components setSecond:0];
+    newStart=[calendar dateFromComponents:components];
+    components=[calendar components:NSYearCalendarUnit| NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit| NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:newEnd];
+    [components setMinute:0];
+    [components setSecond:0];
+    newEnd=[calendar dateFromComponents:components];
     REMTimeRange *newRange=[[REMTimeRange alloc]initWithStartTime:newStart EndTime:newEnd];
     
-    [self setDatePickerButtonValueNoSearchByTimeRange:newRange withRelative:self.tempModel.relativeDateComponent withRelativeType:self.tempModel.relativeDateType];
+    NSDictionary *dic= [self tryNewStepByRange:newRange];
+    REMEnergyStep step=(REMEnergyStep)[dic[@"defaultStep"] integerValue];
+    if(step!=self.tempModel.step){
+        return NO;
+    }
+    
+    
+    NSString *text=[REMTimeHelper relativeDateComponentFromType:REMRelativeTimeRangeTypeNone];
+    [self setDatePickerButtonValueNoSearchByTimeRange:newRange withRelative:text withRelativeType:REMRelativeTimeRangeTypeNone];
+    
+    return YES;
 }
 
 

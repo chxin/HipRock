@@ -28,6 +28,8 @@
 
 + (NSString *)buildingImagePathWithId:(NSNumber *)imageId andType:(REMBuildingImageType)type;
 
+
+
 + (void)writeImageFile:(UIImage *)image withFullPath:(NSString *)fullPath;
 
 + (UIImage *) drawText:(NSString*) text inImage:(UIImage*)image inRect:(CGRect)rect;

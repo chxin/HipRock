@@ -121,7 +121,7 @@
     NSDictionary *param = @{@"commodityId":commodityId,@"buildingId":buildingId};
     REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSBuildingCommodityTotalUsage parameter:param];
     store.maskContainer = nil;
-    store.groupName = [NSString stringWithFormat:@"b-%@-%@", buildingId, commodityId];
+    store.groupName = [NSString stringWithFormat:@"building-data-%@", buildingId];
     [self.totalLabel showLoading];
     [self.carbonLabel showLoading];
     [self.rankingLabel showLoading];

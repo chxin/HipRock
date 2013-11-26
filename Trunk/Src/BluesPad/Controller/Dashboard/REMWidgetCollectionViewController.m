@@ -77,7 +77,12 @@ static NSString *cellId=@"widgetcell";
     return self.dashboardInfo.widgets.count;
 }
 
-
+- (void)releaseContentView{
+    self.view=nil;
+    for (UIViewController *vc in self.childViewControllers) {
+        vc.view=nil;
+    }
+}
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -99,7 +104,7 @@ static NSString *cellId=@"widgetcell";
         controller.widgetInfo=widget;
         
         controller.currentIndex=indexPath.row;
-        
+        controller.groupName=self.groupName;
         [self addChildViewController:controller];
     }
     
@@ -137,7 +142,7 @@ static NSString *cellId=@"widgetcell";
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    //NSLog(@"didReceiveMemoryWarning :%@",[self class]);
 }
 
 @end

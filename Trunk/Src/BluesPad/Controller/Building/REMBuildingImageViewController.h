@@ -41,5 +41,7 @@ typedef enum _REMBuildingCoverStatus{
 - (void)horizonalMoving;
 - (void)horizonalStopped;
 
+- (void)releaseContentView;
+
 
 @end

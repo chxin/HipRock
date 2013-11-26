@@ -21,7 +21,7 @@
 
 @property (nonatomic,strong) DAbstractChartWrapper *wrapper;
 @property (nonatomic,strong) REMPieChartWrapper *pieWrapper;
-
+@property (nonatomic,strong) UIActivityIndicatorView *loadingView;
 
 
 @property (nonatomic,strong) REMWidgetSearchModelBase *searchModel;
@@ -44,6 +44,7 @@
 	// Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.view setFrame:self.viewFrame];
+    
     //NSLog(@"detail view:%@",NSStringFromCGRect(self.view.frame));
 
     self.searchModel=[REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax.dataStoreType withParam:self.widgetInfo.contentSyntax.params];
@@ -94,6 +95,8 @@
     
     self.chartContainer=chartContainer;
     
+   
+    
     
     [self addConstraint];
     
@@ -106,11 +109,21 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    if(self.loadingView!=nil){
+        [self.loadingView startAnimating];
+    }
+}
+
+
 - (void) addConstraint{
     
 }
 
 - (void)generateChart{
+    [self.loadingView stopAnimating];
+    [self.loadingView removeFromSuperview];
+    self.loadingView = nil;
     DAbstractChartWrapper *widgetWrapper = nil;
     REMPieChartWrapper *pieWrapper=nil;
     REMDiagramType widgetType = self.widgetInfo.diagramType;
@@ -160,12 +173,16 @@
 }
 
 - (void)queryEnergyData:(REMWidgetContentSyntax *)syntax withGroupName:(NSString *)groupName{
-   
+    UIActivityIndicatorView *loadingView=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [loadingView setFrame:self.chartContainer.bounds];
+    self.loadingView=loadingView;
     REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType withWidgetInfo:self.widgetInfo];
-    
+    searcher.loadingView=self.loadingView;
     [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:self.searchModel withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *errorInfo){
         self.chartData = data;
-        [self generateChart];
+        if(self.isViewLoaded==YES){
+            [self generateChart];
+        }
     }];
 }
 

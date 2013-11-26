@@ -73,7 +73,7 @@ static NSString *cellId=@"dashboardcell";
     
 }
 
-static NSString *dashboardGroupName=@"building-dashboard-%@";
+static NSString *dashboardGroupName=@"building-data-%@";
 
 #define kDashboardSwitchLabelTop -65
 
@@ -118,10 +118,20 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.buildingInfo.dashboardArray.count;
+    
+    NSInteger count= self.buildingInfo.dashboardArray.count;
+    if(count==0){
+        return 1;
+    }
+    return count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (self.buildingInfo.dashboardArray.count==0) {
+        return 100;
+    }
+    
     REMDashboardObj *obj= self.buildingInfo.dashboardArray[indexPath.section];
     CGFloat titleHeight=kDashboardTitleSize+kDashboardTitleBottomMargin;
     if(obj.shareInfo!=nil){
@@ -146,6 +156,16 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     REMDashboardCellViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath ];
     [cell.contentView setFrame:CGRectMake(0, 0, cell.frame.size.width,cell.frame.size.height)];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    if (self.buildingInfo.dashboardArray.count==0) {
+        NSString *emptyText=NSLocalizedString(@"Dashboard_Empty", @"");//未配置任何仪表盘。
+        cell.textLabel.textColor=[UIColor whiteColor];
+        cell.textLabel.font=[UIFont fontWithName:@(kBuildingFontSC) size:30];
+        cell.textLabel.text=emptyText;
+        return cell;
+    }
+    
+    
     REMWidgetCollectionViewController *current;
     for (REMWidgetCollectionViewController *vc in self.childViewControllers) {
         if(vc.currentDashboardIndex == indexPath.section){
@@ -158,24 +178,11 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
             return cell;
         }
         else{
-            if(cell.contentView.subviews.count>0){
-                for (UIView *v in cell.contentView.subviews) {
-                    [v removeFromSuperview];
-                }
-                //REMWidgetCollectionViewController *old= self.childViewControllers[cell.tag];
-                //old.view=nil;
-            }
+            [self cleanCellContent:cell];
         }
     }
     else{
-        if(cell.contentView.subviews.count>0){
-            for (UIView *v in cell.contentView.subviews) {
-                [v removeFromSuperview];
-            }
-            //REMWidgetCollectionViewController *old= self.childViewControllers[cell.tag];
-            //old.view=nil;
-           
-        }
+        [self cleanCellContent:cell];
         REMWidgetCollectionViewController *widgetCollectionController = [[REMWidgetCollectionViewController alloc]initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc]init]];
         
         widgetCollectionController.currentDashboardIndex=indexPath.section;
@@ -205,6 +212,17 @@ static NSString *dashboardGroupName=@"building-dashboard-%@";
     //cell.contentView.layer.borderWidth=1;
     //cell.contentView.layer.borderColor=[UIColor redColor].CGColor;
     return cell;
+}
+
+- (void)cleanCellContent:(UITableViewCell *)cell{
+    if(cell.contentView.subviews.count>0){
+        for (UIView *v in cell.contentView.subviews) {
+            [v removeFromSuperview];
+        }
+        //REMWidgetCollectionViewController *old= self.childViewControllers[cell.tag];
+        //[old releaseContentView];
+        
+    }
 }
 
 - (CGRect)addTitleForCell:(REMDashboardCellViewCell *)cell withDashboardInfo:(REMDashboardObj *)dashboardInfo{

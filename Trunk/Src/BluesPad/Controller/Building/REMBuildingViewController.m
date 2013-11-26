@@ -128,6 +128,35 @@ const static CGFloat buildingGap=20;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    BOOL needRelease=YES;
+    if (self.currentCoverStatus == REMBuildingCoverStatusCoverPage) {
+        for (REMBuildingImageViewController *imageController in self.childViewControllers){
+            UIViewController *dashboardController= imageController.childViewControllers[1];
+            if(dashboardController.isViewLoaded==YES){
+                needRelease=NO;
+                break;
+            }
+        }
+    }
+    else if(self.currentCoverStatus == REMBuildingCoverStatusDashboard){
+        for (REMBuildingImageViewController *imageController in self.childViewControllers){
+            UIViewController *coverController= imageController.childViewControllers[0];
+            if(coverController.isViewLoaded==YES){
+                needRelease=NO;
+                break;
+            }
+        }
+    }
+    
+    if(needRelease==YES){
+        for (int i=0; i<self.childViewControllers.count; ++i) {
+            if(i!=self.currentBuildingIndex && i!=(self.currentBuildingIndex-1) && i!=(self.currentBuildingIndex+1)){
+                REMBuildingImageViewController *imageController=self.childViewControllers[i];
+                [imageController releaseContentView];
+            }
+        }
+    }
+    
 }
 
 - (void)initDefaultImageView
@@ -245,6 +274,7 @@ const static CGFloat buildingGap=20;
             
         }
         else{
+            //[self cancelRequest:self.currentBuildingIndex];
             self.currentBuildingIndex = self.currentBuildingIndex+sign*-1;
             
             if(ABS(p.x)<200){
@@ -271,6 +301,15 @@ const static CGFloat buildingGap=20;
     }
     [pan setTranslation:CGPointZero inView:self.view];
 }
+
+- (void)cancelRequest:(int)index{
+    REMBuildingOverallModel *buildingInfo= self.buildingInfoArray[index];
+    NSString *text=[NSString stringWithFormat:@"building-data-%@",buildingInfo.building.buildingId];
+    
+    [REMDataAccessor cancelAccess:text];
+    
+}
+
 
 - (void) moveAllViews{
     for (int i=0; i<self.childViewControllers.count; ++i) {
@@ -508,6 +547,8 @@ const static CGFloat buildingGap=20;
     if ([self.fromController respondsToSelector:@selector(uncoverCell)]) {
         [(id)self.fromController uncoverCell];
     }
+    
+    [REMDataAccessor cancelAccess];
     
     //decide where to go
     NSString *segueIdentifier = [self.fromController class] == [REMGalleryViewController class] ? kSegue_BuildingToGallery : kSegue_BuildingToMap;

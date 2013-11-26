@@ -160,6 +160,8 @@
             [controller.view setFrame:controller.upViewFrame];
         }
         
+        
+        
     }
     
 }
@@ -531,7 +533,7 @@
             buildingController.currentCoverStatus=REMBuildingCoverStatusDashboard;
         }
         else{
-            [self.shareButton setHidden:YES];
+            [self.shareButton setHidden:NO];
             REMBuildingViewController *buildingController=(REMBuildingViewController *)self.parentViewController;
             if(dashBoardController.isViewLoaded==YES){
 
@@ -599,6 +601,10 @@
     }
 }
 
+- (void)releaseContentView{
+    [self releaseViewInController:self.childViewControllers];
+}
+
 - (void)releaseViewInController:(NSArray *)controllers{
     if(controllers.count>0){
         for (UIViewController *vc in controllers) {
@@ -610,6 +616,23 @@
     }
 }
 
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    //NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    if(self.childViewControllers.count>0){
+        if(self.currentCoverStatus==REMBuildingCoverStatusCoverPage){
+            UIViewController *controller= self.childViewControllers[1];
+            [self releaseViewInController:@[controller]];
+        }
+        else{
+            UIViewController *controller= self.childViewControllers[0];
+            [self releaseViewInController:@[controller]];
+        }
+    }
+    // Dispose of any resources that can be recreated.
+}
 -(UIImage*)getImageOfLayer:(CALayer*) layer{
     UIGraphicsBeginImageContext(layer.frame.size);
     [layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -655,21 +678,6 @@
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    //NSLog(@"didReceiveMemoryWarning :%@",[self class]);
-    if(self.childViewControllers.count>0){
-        if(self.currentCoverStatus==REMBuildingCoverStatusCoverPage){
-            UIViewController *controller= self.childViewControllers[1];
-             [self releaseViewInController:@[controller]];
-        }
-        else{
-            UIViewController *controller= self.childViewControllers[0];
-            [self releaseViewInController:@[controller]];
-        }
-    }
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end
