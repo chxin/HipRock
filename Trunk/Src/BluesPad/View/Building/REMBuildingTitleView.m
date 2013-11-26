@@ -47,8 +47,8 @@
 
 - (void)initEmptyTextLabelWithTitleSize:(CGFloat)titleSize withTitleMargin:(CGFloat)margin withLeftMargin:(CGFloat)leftMargin withOrigFontSize:(CGFloat)fontSize{
     int marginTop=titleSize+margin+fontSize/4 ;
-    int fs=ceil(fontSize/4+10);
-    
+    CGFloat fs=ceil(fontSize/4+10);
+    fs=self.emptyTextFontSize;
     UIImage *image=REMIMG_Nodata;
     
     UIImageView *icon=[[UIImageView alloc]initWithImage:image];
@@ -56,10 +56,10 @@
     [icon setFrame:CGRectMake(leftMargin, marginTop, 32, 32)];
     
     [self addSubview:icon];
-    
-    UILabel *emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftMargin+32, marginTop, 1000, fs)];
+    CGFloat textMarginTop=marginTop+icon.frame.size.height-fs;
+    UILabel *emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftMargin+icon.frame.size.width+8, textMarginTop, 1000, fs)];
     emptyLabel.font=[UIFont fontWithName:@(kBuildingFontSC) size:fs];
-    emptyLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.6];
+    emptyLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.5];
     if(self.emptyText ==nil){
         self.emptyText=NSLocalizedString(@"Building_LabelNoData", @"");
     }

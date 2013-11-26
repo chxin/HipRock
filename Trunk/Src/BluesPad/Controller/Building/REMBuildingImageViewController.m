@@ -225,15 +225,14 @@
     backButton.adjustsImageWhenHighlighted=YES;
     backButton.showsTouchWhenHighlighted=YES;
     backButton.titleLabel.text=@"Back";
-    [backButton setBackgroundImage:[UIImage imageNamed:@"Back"] forState:UIControlStateNormal];
+    [backButton setBackgroundImage:REMIMG_Back forState:UIControlStateNormal];
     [backButton addTarget:self.parentViewController action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.container addSubview:backButton];
     self.backButton=backButton;
     
     UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, backButton.frame.origin.y, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
-    [shareButton setImage:[UIImage imageNamed:@"Share_normal.png"] forState:UIControlStateNormal];
-    [shareButton setImage:[UIImage imageNamed:@"Share_disable.png"] forState:UIControlStateDisabled];
+    [shareButton setImage:REMIMG_Share_normal forState:UIControlStateNormal];
     //if (self.buildingInfo.commodityUsage.count == 0) {
     shareButton.enabled = NO;
     //}

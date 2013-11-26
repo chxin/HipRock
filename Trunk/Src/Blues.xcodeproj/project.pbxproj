@@ -57,10 +57,6 @@
 		6A61A72A1839B82000C6A228 /* share-mail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A68E1839B82000C6A228 /* share-mail@2x.png */; };
 		6A61A72B1839B82000C6A228 /* share-weibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A68F1839B82000C6A228 /* share-weibo.png */; };
 		6A61A72C1839B82000C6A228 /* share-weibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6901839B82000C6A228 /* share-weibo@2x.png */; };
-		6A61A72D1839B82000C6A228 /* Share_disable.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6911839B82000C6A228 /* Share_disable.png */; };
-		6A61A72E1839B82000C6A228 /* Share_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6921839B82000C6A228 /* Share_disable@2x.png */; };
-		6A61A72F1839B82000C6A228 /* Share_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6931839B82000C6A228 /* Share_normal.png */; };
-		6A61A7301839B82000C6A228 /* Share_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6941839B82000C6A228 /* Share_normal@2x.png */; };
 		6A61A7311839B82000C6A228 /* Ascend.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6961839B82000C6A228 /* Ascend.png */; };
 		6A61A7321839B82000C6A228 /* Ascend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6971839B82000C6A228 /* Ascend@2x.png */; };
 		6A61A7331839B82000C6A228 /* Back_Chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6981839B82000C6A228 /* Back_Chart.png */; };
@@ -591,6 +587,8 @@
 		B4E815D718273E5600FB9BC5 /* REMWidgetRankingSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E815D618273E5600FB9BC5 /* REMWidgetRankingSearchModel.m */; };
 		B4E815DE18276F4700FB9BC5 /* REMWidgetBizDelegatorBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E815DD18276F4700FB9BC5 /* REMWidgetBizDelegatorBase.m */; };
 		B4E815E1182770B700FB9BC5 /* REMWidgetEnergyDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E815E0182770B700FB9BC5 /* REMWidgetEnergyDelegator.m */; };
+		B4E8685418443B63007205F6 /* Share_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E8685218443B63007205F6 /* Share_normal.png */; };
+		B4E8685518443B63007205F6 /* Share_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E8685318443B63007205F6 /* Share_normal@2x.png */; };
 		B4EDFB181806653400873FA1 /* REMEnergyMultiTimeSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EDFB171806653400873FA1 /* REMEnergyMultiTimeSearcher.m */; };
 		B4EDFB1B180697F300873FA1 /* REMControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EDFB1A180697F300873FA1 /* REMControllerBase.m */; };
 		B4F11182183DA71E004D53F6 /* REMBuildingCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F11181183DA71E004D53F6 /* REMBuildingCommodityView.m */; };
@@ -749,10 +747,6 @@
 		6A61A68E1839B82000C6A228 /* share-mail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-mail@2x.png"; sourceTree = "<group>"; };
 		6A61A68F1839B82000C6A228 /* share-weibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-weibo.png"; sourceTree = "<group>"; };
 		6A61A6901839B82000C6A228 /* share-weibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-weibo@2x.png"; sourceTree = "<group>"; };
-		6A61A6911839B82000C6A228 /* Share_disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_disable.png; sourceTree = "<group>"; };
-		6A61A6921839B82000C6A228 /* Share_disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_disable@2x.png"; sourceTree = "<group>"; };
-		6A61A6931839B82000C6A228 /* Share_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_normal.png; sourceTree = "<group>"; };
-		6A61A6941839B82000C6A228 /* Share_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_normal@2x.png"; sourceTree = "<group>"; };
 		6A61A6961839B82000C6A228 /* Ascend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ascend.png; sourceTree = "<group>"; };
 		6A61A6971839B82000C6A228 /* Ascend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ascend@2x.png"; sourceTree = "<group>"; };
 		6A61A6981839B82000C6A228 /* Back_Chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back_Chart.png; sourceTree = "<group>"; };
@@ -1365,6 +1359,8 @@
 		B4E815DD18276F4700FB9BC5 /* REMWidgetBizDelegatorBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetBizDelegatorBase.m; path = BizDelegator/REMWidgetBizDelegatorBase.m; sourceTree = "<group>"; };
 		B4E815DF182770B700FB9BC5 /* REMWidgetEnergyDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetEnergyDelegator.h; path = BizDelegator/REMWidgetEnergyDelegator.h; sourceTree = "<group>"; };
 		B4E815E0182770B700FB9BC5 /* REMWidgetEnergyDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetEnergyDelegator.m; path = BizDelegator/REMWidgetEnergyDelegator.m; sourceTree = "<group>"; };
+		B4E8685218443B63007205F6 /* Share_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_normal.png; sourceTree = "<group>"; };
+		B4E8685318443B63007205F6 /* Share_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_normal@2x.png"; sourceTree = "<group>"; };
 		B4EDFB161806653400873FA1 /* REMEnergyMultiTimeSearcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergyMultiTimeSearcher.h; path = Biz/Energy/Searcher/REMEnergyMultiTimeSearcher.h; sourceTree = "<group>"; };
 		B4EDFB171806653400873FA1 /* REMEnergyMultiTimeSearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnergyMultiTimeSearcher.m; path = Biz/Energy/Searcher/REMEnergyMultiTimeSearcher.m; sourceTree = "<group>"; };
 		B4EDFB19180697F300873FA1 /* REMControllerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMControllerBase.h; path = Controller/REMControllerBase.h; sourceTree = "<group>"; };
@@ -1638,10 +1634,8 @@
 				6A61A68E1839B82000C6A228 /* share-mail@2x.png */,
 				6A61A68F1839B82000C6A228 /* share-weibo.png */,
 				6A61A6901839B82000C6A228 /* share-weibo@2x.png */,
-				6A61A6911839B82000C6A228 /* Share_disable.png */,
-				6A61A6921839B82000C6A228 /* Share_disable@2x.png */,
-				6A61A6931839B82000C6A228 /* Share_normal.png */,
-				6A61A6941839B82000C6A228 /* Share_normal@2x.png */,
+				B4E8685218443B63007205F6 /* Share_normal.png */,
+				B4E8685318443B63007205F6 /* Share_normal@2x.png */,
 			);
 			path = Building;
 			sourceTree = "<group>";
@@ -3331,7 +3325,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A61A7111839B82000C6A228 /* NaturalGas_pressed.png in Resources */,
-				6A61A72E1839B82000C6A228 /* Share_disable@2x.png in Resources */,
 				7A664FD8183B3369004B9FF3 /* MapPopover_Arrow.png in Resources */,
 				6A61A76F1839B82000C6A228 /* Login-Disable.png in Resources */,
 				6A61A70D1839B82000C6A228 /* Electricity_pressed.png in Resources */,
@@ -3339,7 +3332,6 @@
 				6A61A7061839B82000C6A228 /* EMOP_Spotlight_7@2x.png in Resources */,
 				6A61A7551839B82000C6A228 /* labelRight5.png in Resources */,
 				6A61A7121839B82000C6A228 /* NaturalGas_pressed@2x.png in Resources */,
-				6A61A72F1839B82000C6A228 /* Share_normal.png in Resources */,
 				6A61A7311839B82000C6A228 /* Ascend.png in Resources */,
 				6A61A78E1839B82000C6A228 /* UnqualifiedPin_Normal@2x.png in Resources */,
 				6A61A7761839B82000C6A228 /* LoginTextField-Focus@2x.png in Resources */,
@@ -3387,7 +3379,6 @@
 				6A61A7361839B82000C6A228 /* Close_Chart@2x.png in Resources */,
 				6A61A7131839B82000C6A228 /* Oil_normal.png in Resources */,
 				6A61A71A1839B82000C6A228 /* PM2.5_pressed@2x.png in Resources */,
-				6A61A7301839B82000C6A228 /* Share_normal@2x.png in Resources */,
 				6A61A71F1839B82000C6A228 /* DefaultBuilding-Small.png in Resources */,
 				6A61A73D1839B82000C6A228 /* labelLeft1.png in Resources */,
 				6A61A7571839B82000C6A228 /* labelRight6.png in Resources */,
@@ -3417,6 +3408,7 @@
 				6A61A6FD1839B82000C6A228 /* EMOP_App_6.png in Resources */,
 				6A61A71C1839B82000C6A228 /* Water_normal@2x.png in Resources */,
 				6A61A7621839B82000C6A228 /* TooltipsArrow_PieChart@2x.png in Resources */,
+				B4E8685418443B63007205F6 /* Share_normal.png in Resources */,
 				6A61A77B1839B82000C6A228 /* CommonPin_Focus.png in Resources */,
 				7A58F2501839A5650071DE7A /* Propaganda_3@2x.jpg in Resources */,
 				6A61A7911839B82000C6A228 /* SplashScreenLogo-Flash.png in Resources */,
@@ -3453,7 +3445,6 @@
 				6A61A77A1839B82000C6A228 /* SlidePageBackground@2x.png in Resources */,
 				6A61A76B1839B82000C6A228 /* JumpLogin-Normal.png in Resources */,
 				6A61A7801839B82000C6A228 /* Gallery@2x.png in Resources */,
-				6A61A72D1839B82000C6A228 /* Share_disable.png in Resources */,
 				6A61A78B1839B82000C6A228 /* UnqualifiedPin_Focus.png in Resources */,
 				6A61A7351839B82000C6A228 /* Close_Chart.png in Resources */,
 				6A61A7141839B82000C6A228 /* Oil_normal@2x.png in Resources */,
@@ -3473,6 +3464,7 @@
 				6A61A72C1839B82000C6A228 /* share-weibo@2x.png in Resources */,
 				6A61A7281839B82000C6A228 /* OverTarget@2x.png in Resources */,
 				6A61A7261839B82000C6A228 /* NotOverTarget@2x.png in Resources */,
+				B4E8685518443B63007205F6 /* Share_normal@2x.png in Resources */,
 				6A61A7151839B82000C6A228 /* Oil_pressed.png in Resources */,
 				6A61A73C1839B82000C6A228 /* Descend@2x.png in Resources */,
 				6A61A7211839B82000C6A228 /* DefaultBuilding.png in Resources */,

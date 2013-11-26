@@ -42,12 +42,12 @@
 {
     
     if(data==nil || data.dataValue==nil||[data.dataValue isEqual:[NSNull null]]==YES){
-        [self initEmptyTextLabelWithTitleSize:titleSize withTitleMargin:margin withLeftMargin:leftMargin withOrigFontSize:valueSize];
+        [self initEmptyTextLabelWithTitleSize:titleSize withTitleMargin:self.emptyTextMargin withLeftMargin:leftMargin withOrigFontSize:valueSize];
         return;
     }
     else{
         if([data.dataValue isLessThan:@(0)] ==YES){
-            [self initEmptyTextLabelWithTitleSize:titleSize withTitleMargin:margin withLeftMargin:leftMargin withOrigFontSize:valueSize];
+            [self initEmptyTextLabelWithTitleSize:titleSize withTitleMargin:self.emptyTextMargin withLeftMargin:leftMargin withOrigFontSize:valueSize];
             return;
         }
     }
