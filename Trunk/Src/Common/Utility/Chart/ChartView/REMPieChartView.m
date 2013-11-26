@@ -7,12 +7,15 @@
  --------------------------------------------------------------------------*///
 
 #import "REMChartHeader.h"
+#import "REMPieIndicatorLayer.h"
 @interface REMPieChartView()
 @property (nonatomic) NSMutableArray* pointAngles;
 @property (nonatomic, assign) double rotationAngle;
 @property (nonatomic, assign) NSUInteger focusPointIndex;
 @property (nonatomic, assign) BOOL isFocusStatus;
 @property (nonatomic, assign) REMDirection rotateDirection;
+
+@property (nonatomic, strong) REMPieIndicatorLayer* indicatorLayer;
 @end
 
 @implementation REMPieChartView
@@ -152,11 +155,20 @@
 }
 
 -(void) longPress:(UILongPressGestureRecognizer*) gest {
-    if (gest.state == UIGestureRecognizerStateBegan) {
+    if (gest.state == UIGestureRecognizerStateEnded) {
         self.isFocusStatus = YES;
         [self sendPointFocusEvent];
     }
 }
+
+-(void)setIsFocusStatus:(BOOL)isFocusStatus {
+    _isFocusStatus = isFocusStatus;
+    self.indicatorLayer.hidden = !isFocusStatus;
+    [self.indicatorLayer removeFromSuperlayer];
+    [self.superview.layer addSublayer:self.indicatorLayer];
+    [self.indicatorLayer setNeedsDisplay];
+}
+
 -(void)setFocusPointIndex:(NSUInteger)focusPointIndex {
     if (self.focusPointIndex != focusPointIndex) {
         _focusPointIndex = focusPointIndex;
@@ -170,6 +182,19 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:color:name:direction:)]) {
         [self.delegate highlightPoint:series.energyData[focusPointIndex] color:[series getColorByIndex:focusPointIndex].uiColor name:series.targetNames[focusPointIndex] direction:self.rotateDirection];
     }
+}
+
+-(void)didMoveToSuperview {
+    self.indicatorLayer = [[REMPieIndicatorLayer alloc]init];
+    self.indicatorLayer.pieRadius = (MIN(self.bounds.size.height, self.bounds.size.width)-2) / 3;
+    self.indicatorLayer.frame = self.frame;
+    [self.superview.layer addSublayer:self.indicatorLayer];
+//    [self.indicatorLayer setNeedsDisplay];
+}
+
+-(void)removeFromSuperview {
+    [self.indicatorLayer removeFromSuperlayer];
+    [super removeFromSuperview];
 }
 
 -(void)cancelToolTipStatus {
