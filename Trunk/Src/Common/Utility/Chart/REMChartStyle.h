@@ -22,6 +22,8 @@
 @property (nonatomic, strong) CPTLineStyle* yGridlineStyle;
 @property (nonatomic, assign) NSUInteger horizentalGridLineAmount;
 @property (nonatomic, assign) NSUInteger symbolSize;
+@property (nonatomic, assign) CGFloat xLabelToLine;
+@property (nonatomic, assign) CGFloat yLabelToLine;
 
 
 +(REMChartStyle*)getMaximizedStyle;

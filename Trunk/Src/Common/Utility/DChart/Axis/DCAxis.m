@@ -14,6 +14,7 @@
     if (self) {
         _lineStyle = DCLineTypeDefault;
         _visableSeriesAmount = 0;
+        _labelToLine = 0;
     }
     return self;
 }

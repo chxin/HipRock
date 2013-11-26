@@ -331,7 +331,7 @@ const static CGFloat buildingGap=20;
     REMBuildingImageViewController *vc=self.childViewControllers[self.currentBuildingIndex];
     [vc loadContentView];
     if(self.currentBuildingIndex<self.childViewControllers.count){
-        CGFloat sign=self.speed<0?-1:1;
+        CGFloat sign=self.speed<=0?-1:1;
         NSNumber *willIndex= @(self.currentBuildingIndex-1*sign);
         if(willIndex.intValue>=self.childViewControllers.count || willIndex.intValue<0){
             return;

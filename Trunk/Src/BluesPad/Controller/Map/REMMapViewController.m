@@ -198,6 +198,7 @@
         [self.mapView clear];
         [self.mapView removeFromSuperview];
         self.mapView = nil;
+        self.view=nil;
     }
 }
 
