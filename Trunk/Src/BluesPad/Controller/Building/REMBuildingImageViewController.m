@@ -150,12 +150,14 @@
         
        
         if(controller.isViewLoaded == NO){
+            [self.shareButton setHidden:NO];
             [self.container addSubview:controller.view];
         }
     }
     else{
         REMDashboardController *controller=self.childViewControllers[1];
         if(controller.isViewLoaded == NO){
+            [self.shareButton setHidden:YES];
             [self.container addSubview:controller.view];
             [controller.view setFrame:controller.upViewFrame];
         }
