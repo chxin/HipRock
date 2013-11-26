@@ -533,7 +533,7 @@
             buildingController.currentCoverStatus=REMBuildingCoverStatusDashboard;
         }
         else{
-            [self.shareButton setHidden:YES];
+            [self.shareButton setHidden:NO];
             REMBuildingViewController *buildingController=(REMBuildingViewController *)self.parentViewController;
             if(dashBoardController.isViewLoaded==YES){
 

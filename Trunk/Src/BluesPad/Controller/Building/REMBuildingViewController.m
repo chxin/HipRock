@@ -274,7 +274,7 @@ const static CGFloat buildingGap=20;
             
         }
         else{
-            [self cancelRequest:self.currentBuildingIndex];
+            //[self cancelRequest:self.currentBuildingIndex];
             self.currentBuildingIndex = self.currentBuildingIndex+sign*-1;
             
             if(ABS(p.x)<200){
