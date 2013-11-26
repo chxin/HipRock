@@ -15,7 +15,7 @@
 -(DCSeries*)initWithEnergyData:(NSArray*)seriesData {
     self = [super initWithEnergyData:seriesData];
     if (self) {
-        [self updateSumValue];
+        [self updateSumValueAndSlices];
         for (int i = 0; i < self.datas.count; i++) {
             DCPieDataPoint* p = self.datas[i];
             if (i == self.datas.count - 1) {
@@ -32,20 +32,39 @@
     _sumVisableValue = 9;
 }
 
--(void)updateSumValue {
+-(void)updateSumValueAndSlices {
     double sum = 0;
+    double previesSum[self.datas.count];
+    NSMutableArray* slices = [[NSMutableArray alloc]init];
     if (!REMIsNilOrNull(self.datas)) {
+        int index = 0;
         for (DCPieDataPoint* point in self.datas) {
+            previesSum[index] = sum;
             if (!point.hidden && point.pointType == DCDataPointTypeNormal) {
                 sum += point.value.doubleValue;
             }
+            index++;
         }
     }
+    int index = 0;
+    for (DCPieDataPoint* point in self.datas) {
+        if (!point.hidden && point.pointType == DCDataPointTypeNormal && sum != 0) {
+            DCPieSlice slice;
+            slice.sliceBegin = previesSum[index] * 2 / sum;
+            slice.sliceEnd = slice.sliceBegin + point.value.doubleValue * 2 / sum;
+            slice.sliceCenter = (slice.sliceBegin + slice.sliceEnd) / 2;
+            [slices addObject:[NSValue value:&slice withObjCType:@encode(DCPieSlice)]];
+        } else {
+            [slices addObject:[NSNull null]];
+        }
+        index++;
+    }
+    _pieSlices = slices;
     _sumVisableValue = sum;
 }
 
 -(void)setDatas:(NSArray *)datas {
     [super setDatas:datas];
-    [self updateSumValue];
+    [self updateSumValueAndSlices];
 }
 @end

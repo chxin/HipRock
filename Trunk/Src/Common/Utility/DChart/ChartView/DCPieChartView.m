@@ -12,14 +12,12 @@
 #import "DCPieSeries.h"
 
 @interface DCPieChartView()
-@property (nonatomic,strong) NSTimer* beginAnimTimer;
 @property (nonatomic,assign) CGFloat fullAngle;         // 扇图的总体的角度和，值域为[0-2]，例如如果只需要画半圆，fullAngle=1
 @property (nonatomic,assign) CGFloat radius;            // 圆形区域半径
 @property (nonatomic,assign) CGFloat radiusForShadow;   // 投影半径
 @property (nonatomic,strong) DCPieSeries* series;
 @property (nonatomic,assign) CGFloat rotationAngle;     // 扇图已经旋转的角度，值域为[0-2)，例如需要旋转90°，rotationAngle=0.5
 @property (nonatomic,assign) CGFloat indicatorAlpha;
-@property (nonatomic,assign) NSTimer* panInertnessAnimTimer;
 @property (nonatomic,strong) UIPanGestureRecognizer* panGesRec;
 @property (nonatomic,strong) UISwipeGestureRecognizer* swipeGesRec;
 
@@ -27,7 +25,17 @@
 @property (nonatomic,assign) CGFloat panSpeed;
 @property (nonatomic,assign) CGFloat panStep; // Pan松手时，speed减速的步长
 
+@property (nonatomic, assign) CGFloat animationTargetAngle;
+//@property (nonatomic, assign) CGFloat animationAngleSpeed;
+//@property (nonatomic, assign) CGFloat animationSpeedMax;
+
+@property (nonatomic, strong) NSMutableArray* animationSteps;
+
 @property (nonatomic,assign) CGPoint indicatorPoint; // indicator针尖的点位置
+
+@property (nonatomic,strong) NSTimer* beginAnimTimer;
+@property (nonatomic,assign) NSTimer* panInertnessAnimTimer;
+@property (nonatomic,assign) NSTimer* rotationAnimTimer;
 @end
 
 @implementation DCPieChartView
@@ -40,6 +48,9 @@
         _rotationAngle = 0;
         _fullAngle = 0;
         _indicatorAlpha = 0.5;
+        _animationTargetAngle = self.rotationAngle;
+//        _animationAngleSpeed = 0;
+        _animationSteps = [[NSMutableArray alloc]init];
         self.backgroundColor = [UIColor whiteColor];
         self.radius = 180;
         self.radiusForShadow = 190;
@@ -85,7 +96,7 @@
         self.rotationAngle += rotation;
         [gesture setTranslation:CGPointMake(0, 0) inView:self];
         
-        self.panStep  = rotation/kDCAnimationDuration/kDCFramesPerSecord;
+        self.panStep = rotation/kDCAnimationDuration/kDCFramesPerSecord;
         self.panSpeed = rotation;
     }
 }
@@ -95,80 +106,148 @@
     return panStart <= self.radiusForShadow;
 }
 
--(NSNumber*)findDataPointIndexByPoint:(CGPoint)point {
-    if (![self isPointInPie:point]) return nil;
-    DCPieSeries* series = self.series;
-    if (series.sumVisableValue == 0) return nil;
-    CGFloat pointAngle = asin((point.y-self.center.y)/pow(pow((point.x - self.center.x), 2) + pow(point.y-self.center.y, 2),0.5))*180/M_PI - self.rotationAngle*180;
-    if (pointAngle < 0) pointAngle+=360;
-    double sumPreviousPointValue = 0;
-    NSUInteger i = 0;
-    for (; i < series.datas.count; i++) {
-        DCPieDataPoint* point = series.datas[i];
-        if (point.hidden || point.pointType!=DCDataPointTypeNormal) continue;
-        double selfAngle = point.value.doubleValue / series.sumVisableValue * 360;
-        sumPreviousPointValue += selfAngle;
-        if (sumPreviousPointValue > pointAngle) {
-            NSLog(@"Found point which index is %i, its value is %f", i, point.value.doubleValue);
-            break;
-        }
-    }
-    return @(i);
-}
-
-// 动画停止后，将饼图旋转到和Indicator对齐的位置
--(void)align {
-    DCPieSeries* series = self.series;
-    if (series.sumVisableValue == 0) return;
-    CGFloat const indicatorAngle = 270 - self.rotationAngle*180;
-    double sumPreviousPointValue = 0;
-    NSUInteger i = 0;
-    for (; i < series.datas.count; i++) {
-        DCPieDataPoint* point = series.datas[i];
-        if (point.hidden || point.pointType!=DCDataPointTypeNormal) continue;
-        double selfAngle = point.value.doubleValue / series.sumVisableValue * 360;
-        sumPreviousPointValue += selfAngle;
-        if (sumPreviousPointValue > indicatorAngle) {
-            CGFloat angelNeedToRotate = indicatorAngle - self.rotationAngle*180 + selfAngle/2 - sumPreviousPointValue;
-            NSLog(@"angelNeedToRotate %f %f %f %f %f %f %i", indicatorAngle, self.rotationAngle, self.rotationAngle*180, selfAngle, sumPreviousPointValue,angelNeedToRotate, i);
-            break;
-        }
-    }
-}
+//-(NSNumber*)findDataPointIndexByPoint:(CGPoint)point {
+//    if (![self isPointInPie:point]) return nil;
+//    DCPieSeries* series = self.series;
+//    if (series.sumVisableValue == 0) return nil;
+//    CGFloat pointAngle = asin((point.y-self.center.y)/pow(pow((point.x - self.center.x), 2) + pow(point.y-self.center.y, 2),0.5))*180/M_PI - self.rotationAngle*180;
+//    if (pointAngle < 0) pointAngle+=360;
+//    double sumPreviousPointValue = 0;
+//    NSUInteger i = 0;
+//    for (; i < series.datas.count; i++) {
+//        DCPieDataPoint* point = series.datas[i];
+//        if (point.hidden || point.pointType!=DCDataPointTypeNormal) continue;
+//        double selfAngle = point.value.doubleValue / series.sumVisableValue * 360;
+//        sumPreviousPointValue += selfAngle;
+//        if (sumPreviousPointValue > pointAngle) {
+//            NSLog(@"Found point which index is %i, its value is %f", i, point.value.doubleValue);
+//            break;
+//        }
+//    }
+//    return @(i);
+//}
+//
+//// 动画停止后，将饼图旋转到和Indicator对齐的位置
+//-(void)align {
+//    NSNumber* indicatorIsAtNSNum = [self findDataPointIndexByPoint:self.indicatorPoint];
+//    if (REMIsNilOrNull(indicatorIsAtNSNum)) return;
+//    int indicatorIsAt = indicatorIsAtNSNum.intValue;
+//    
+//    CGFloat indicatorAngle = 270 - self.rotationAngle*180;
+//    if (indicatorAngle<0) indicatorAngle+=360;
+//    double sumPreviousPointValue = 0;
+//    NSUInteger i = 0;
+//    for (; i < indicatorIsAt; i++) {
+//        DCPieDataPoint* point = self.series.datas[i];
+//        if (point.hidden || point.pointType!=DCDataPointTypeNormal) continue;
+//        sumPreviousPointValue += point.value.doubleValue;
+//    }
+//    sumPreviousPointValue = sumPreviousPointValue / self.series.sumVisableValue * 360;
+//    CGFloat selfAngle = [(DCPieDataPoint*)self.series.datas[indicatorIsAt] value].doubleValue / self.series.sumVisableValue * 360;
+//    CGFloat angelNeedToRotate = indicatorAngle - selfAngle/2 - sumPreviousPointValue;
+//    NSLog(@"indicator: %f. Self rotation: %f. Slice: %f. PrePointsSum: %f. Need Rotation: %f. Index: %i.", indicatorAngle, self.rotationAngle*180, selfAngle, sumPreviousPointValue,angelNeedToRotate, i);
+//}
 
 
 /***
  * 停止Pan的惯性动画
  */
--(void)stopPanInertness {
-    if (self.panInertnessAnimTimer && [self.panInertnessAnimTimer isValid]) {
-        [self.panInertnessAnimTimer invalidate];
-        self.panInertnessAnimTimer = nil;
-        self.panStep = 0;
-        self.panSpeed = 0;
-        self.panState = 0;
-    }
-}
+//-(void)stopPanInertness {
+//    if (self.panInertnessAnimTimer && [self.panInertnessAnimTimer isValid]) {
+//        [self.panInertnessAnimTimer invalidate];
+//        self.panInertnessAnimTimer = nil;
+//        self.panStep = 0;
+//        self.panSpeed = 0;
+//        self.panState = 0;
+//    }
+//}
 
--(void)panInertnessAnimTimerTarget {
-    if (fabs(self.panSpeed) <= fabs(self.panStep)) {
-        [self stopPanInertness];
+//-(void)panInertnessAnimTimerTarget {
+//    if (fabs(self.panSpeed) <= fabs(self.panStep)) {
+//        [self stopPanInertness];
+//    } else {
+//        self.rotationAngle+=self.panSpeed;
+//        self.panSpeed -= self.panStep;
+//    }
+//}
+-(void)rotationAnimTimerTarget {
+    if (self.animationSteps == nil || self.animationSteps.count == 0) {
+        [self.rotationAnimTimer invalidate];
+        self.panSpeed = 0;
+//        self.rotationAngle = self.animationTargetAngle;
     } else {
-        self.rotationAngle+=self.panSpeed;
-        self.panSpeed -= self.panStep;
+        CGFloat step = [self.animationSteps[0] doubleValue];
+        [self.animationSteps removeObjectAtIndex:0];
+        self.rotationAngle+=step;
     }
+//    if (fabs(self.panSpeed) <= fabs(self.panStep)) {
+//        [self stopPanInertness];
+//    } else {
+//        self.rotationAngle+=self.panSpeed;
+//        self.panSpeed -= self.panStep;
+//    }
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.animationSteps removeAllObjects];
     [super touchesEnded:touches withEvent:event];
-    self.panInertnessAnimTimer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(panInertnessAnimTimerTarget) userInfo:nil repeats:YES];
+    if (self.series.sumVisableValue <= 0) return;
+    if (self.panSpeed > 0) {
+        self.animationTargetAngle = self.rotationAngle + self.panSpeed * 5;
+    } else {
+        self.animationTargetAngle = self.rotationAngle;
+    }
+//    while (self.animationTargetAngle < 0 || self.animationTargetAngle >=2) {
+//        self.animationTargetAngle += (self.animationTargetAngle<0)?2:-2;
+//    }
+    for (int i = 0; i < self.series.pieSlices.count; i++) {
+        if (REMIsNilOrNull(self.series.pieSlices)) continue;
+        DCPieSlice slice;
+        [self.series.pieSlices[i] getValue:&slice];
+        if (slice.sliceEnd > self.animationTargetAngle) {
+            self.animationTargetAngle = slice.sliceCenter;
+            break;
+        }
+    }
+    CGFloat angleNeedRotate = self.animationTargetAngle - self.rotationAngle;
+    NSUInteger frames = kDCAnimationDuration * kDCFramesPerSecord;
+    if (self.panSpeed > 0) {
+        CGFloat step = angleNeedRotate / [self sumFrom1To:frames];;
+        for (int i = 1; i <= frames; i++) {
+            [self.animationSteps addObject:@(self.panSpeed - (frames - i) * step)];
+        }
+    } else {
+        int halfFrame = 0;
+        CGFloat step = 0;
+        if (frames % 2 == 0) {
+            halfFrame = frames / 2;
+            step = angleNeedRotate / ([self sumFrom1To:halfFrame] * 2);
+        } else {
+            halfFrame = frames / 2 + 1;
+            step = angleNeedRotate / ([self sumFrom1To:halfFrame-1] * 2 + halfFrame);
+        }
+        for (int i = 0; i < frames; i++) {
+            if (i >= halfFrame) {
+                [self.animationSteps addObject:@((frames - i) * step)];
+            } else {
+                [self.animationSteps addObject:@(i * step)];
+            }
+        }
+    }
+    
+    self.rotationAnimTimer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(rotationAnimTimerTarget) userInfo:nil repeats:YES];
+//    self.panInertnessAnimTimer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(panInertnessAnimTimerTarget) userInfo:nil repeats:YES];
+}
+
+-(NSUInteger)sumFrom1To:(NSUInteger)i {
+    return (1 + i) * i / 2;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    [self stopPanInertness];
+//    [self stopPanInertness];
 //    [self findDataPointIndexByPoint:[touches.anyObject locationInView:self]];
-    [self align];
+//    [self align];
 }
 
 -(void)animateFullAngle {

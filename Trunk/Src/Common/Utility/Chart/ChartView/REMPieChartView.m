@@ -26,7 +26,7 @@
         _focusPointIndex = 0;
         self.userInteractionEnabled = config.userInteraction;
         if (self.userInteractionEnabled) {
-            UILongPressGestureRecognizer* longPressGR = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
+            UITapGestureRecognizer* longPressGR = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
             [self addGestureRecognizer:longPressGR];
         }
         _isFocusStatus = NO;

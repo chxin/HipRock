@@ -30,32 +30,48 @@
     }
 }
 
+-(REMTooltipViewBase *)initWithDefaults
+{
+    self = [super initWithFrame:kDMChart_TooltipHiddenFrame];
+    
+    if(self){
+        self.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
+        UIView *contentView = [self renderContentView];
+        [self addSubview:contentView];
+        self.contentView=contentView;
+        
+        UIView *closeView = [self renderCloseView];
+        [contentView addSubview:closeView];
+    }
+    
+    return self;
+}
+
 -(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
     self = [super initWithFrame:kDMChart_TooltipHiddenFrame];
     
     if(self){
+        self.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
+        UIView *contentView = [self renderContentView];
+        [self addSubview:contentView];
+        self.contentView=contentView;
+        
+        UIView *closeView = [self renderCloseView];
+        [contentView addSubview:closeView];
+        
+        //
         self.highlightedPoints = points;
         self.data = data;
         self.widget = widget;
         self.parameters = parameters;
         
-        self.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
-        
         self.itemModels = [self convertItemModels];
         
-        UIView *contentView = [self renderContentView];
-        
         UIScrollView *scrollView = [self renderScrollView];
-        UIView *closeView = [self renderCloseView];
         
         
-        [contentView addSubview:scrollView];
-        [contentView addSubview:closeView];
-        
-        [self addSubview:contentView];
-        
-        self.contentView=contentView;
+        [self.contentView addSubview:scrollView];
         self.scrollView = scrollView;
     }
     
