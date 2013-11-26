@@ -807,11 +807,11 @@
     NSDate *newStart=start;
     NSDate *newEnd=end;
     NSCalendar *calendar= [REMTimeHelper gregorianCalendar];
-    NSDateComponents *components= [calendar components:NSCalendarUnitYear| NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour| NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:newStart];
+    NSDateComponents *components= [calendar components:NSYearCalendarUnit| NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit| NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:newStart];
     [components setMinute:0];
     [components setSecond:0];
     newStart=[calendar dateFromComponents:components];
-    components=[calendar components:NSCalendarUnitYear| NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour| NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:newEnd];
+    components=[calendar components:NSYearCalendarUnit| NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit| NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:newEnd];
     [components setMinute:0];
     [components setSecond:0];
     newEnd=[calendar dateFromComponents:components];
