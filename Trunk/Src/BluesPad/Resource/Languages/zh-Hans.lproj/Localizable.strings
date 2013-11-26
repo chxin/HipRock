@@ -47,9 +47,12 @@
 
 //Login, prefix: Login_
 "Login_SkipToLoginButtonText" = "登录";
-"Login_SkipToTrialButtonText" = "试用";
+"Login_SkipToTrialButtonText" = "产品试用";
+"Login_TrialCardTitle" = "产品试用";
+"Login_TrialWelcomeText" = "欢迎试用施耐德EMOP能源管理开放平台";
 "Login_LoginButtonText" = "登录";
-"Login_TrialButtonText" = "试用";
+"Login_TrialButtonText" = "产品试用";
+"Login_CreatingDemoUserText" = "账号创建中，请稍候..";
 "Login_NoNetwork" = "无可用网络,无法获取最新的能源数据。";
 "Login_NetworkTimeout" = "网络连接超时,部分最新的能源数据未获得。";
 

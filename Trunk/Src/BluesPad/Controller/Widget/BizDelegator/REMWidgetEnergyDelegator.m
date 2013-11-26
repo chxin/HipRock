@@ -873,11 +873,6 @@
 /*** this function will be removed when d-chart is ok ***/
 -(void)highlightPoints:(NSArray*)points
 {
-    //points is an array of DCDataPoint
-//    if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
-//        return;
-//    }
-    
     [self.searchView setHidden:YES];
     
     if(self.tooltipView != nil){
@@ -887,31 +882,6 @@
         [self showTooltip:points];
     }
 }
-
-//-(void)highlightPoints:(NSArray *)points {
-//    //what's stack column chart tooltip like?
-//    if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
-//        return;
-//    }
-//    
-//    [self.searchView setHidden:YES];
-//    
-//    NSMutableArray* energyPoints = [[NSMutableArray alloc]init];
-//    for (DCDataPoint* p in points) {
-//        if (p.energyData == nil) {
-//            [energyPoints addObject:[NSNull null]];
-//        } else {
-//            [energyPoints addObject:p.energyData];
-//        }
-//    }
-//    
-//    if(self.tooltipView!=nil){
-//        [self.tooltipView updateHighlightedData:energyPoints];
-//    }
-//    else{
-//        [self showTooltip:energyPoints];
-//    }
-//}
 
 // Pie chart delegate
 -(void)highlightPoint:(REMEnergyData*)point color:(UIColor*)color name:(NSString*)name direction:(REMDirection)direction
@@ -935,13 +905,14 @@
         return;
     
     [self hideTooltip:^{
-        id chartView = (id)[self.chartWrapper getView];
-        if([chartView respondsToSelector:@selector(cancelToolTipStatus)]){
-            [chartView cancelToolTipStatus];
-        }
-        if([self.chartWrapper respondsToSelector:@selector(cancelToolTipStatus)]){
-            [self.chartWrapper performSelector:@selector(cancelToolTipStatus) withObject:nil];
-        }
+        [self.chartWrapper cancelToolTipStatus];
+//        id chartView = (id)[self.chartWrapper getView];
+//        if([chartView respondsToSelector:@selector(cancelToolTipStatus)]){
+//            [chartView cancelToolTipStatus];
+//        }
+//        if([self.chartWrapper respondsToSelector:@selector(cancelToolTipStatus)]){
+//            [self.chartWrapper performSelector:@selector(cancelToolTipStatus) withObject:nil];
+//        }
         
         [self.searchView setHidden:NO];
     }];

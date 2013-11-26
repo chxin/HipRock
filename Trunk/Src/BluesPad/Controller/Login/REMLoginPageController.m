@@ -132,7 +132,7 @@
                 return;
             }
             
-            [self performSegueWithIdentifier:kSegue_LoginToCustomer sender:self];
+            [self.loginCarouselController performSegueWithIdentifier:kSegue_LoginToCustomer sender:self];
             
         }
         else
@@ -182,15 +182,6 @@
     }];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:kSegue_LoginToCustomer] == YES)
-    {
-        UINavigationController *navigationController = segue.destinationViewController;
-        REMLoginCustomerViewController *customerController = navigationController.childViewControllers[0];
-        customerController.loginPageController = self;
-    }
-}
 
 #pragma mark - uitextfield delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

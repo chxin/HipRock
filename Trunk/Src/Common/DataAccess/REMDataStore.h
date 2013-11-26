@@ -15,6 +15,7 @@ typedef enum _REMDataStoreType
      * AccessControl
      */
     REMDSUserValidate,
+    REMDSDemoUserValidate,
     
     /**
      * User
@@ -81,8 +82,6 @@ typedef enum _REMDataStoreType
 @property (nonatomic,strong) NSString * groupName;
 
 - (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter;
-
-- (REMDataStore *)initWithEnergyStore:(NSString *)energyStore parameter:(id) parameter;
 
 @end
 
