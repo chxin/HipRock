@@ -65,7 +65,7 @@
     self.nameLabel.text = model.title;
     self.valueLabel.text = [self formatDataValue:model.value];
     self.numeratorLabel.text = [NSString stringWithFormat:@"%d",rankingModel.numerator];
-    self.denominatorLabel.text = [NSString stringWithFormat:@"%d",rankingModel.denominator];
+    self.denominatorLabel.text = [NSString stringWithFormat:@"/%d",rankingModel.denominator];
 }
 
 

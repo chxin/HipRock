@@ -194,7 +194,8 @@
     totalLabel.valueFontSize=kBuildingCommodityTotalValueFontSize;
     totalLabel.uomFontSize=kBuildingCommodityTotalUomFontSize;
     totalLabel.emptyText=NSLocalizedString(@"BuildingChart_NoData", @"");//@"请持续关注能耗变化";
-    totalLabel.emptyTextFontSize=60;
+    totalLabel.emptyTextFontSize=29;
+    totalLabel.emptyTextMargin=28;
     [totalLabel showTitle];
     [self.view addSubview:totalLabel];
     self.totalLabel=totalLabel;
@@ -213,6 +214,8 @@
     carbon.leftMargin=0;
     carbon.valueFontSize=kBuildingCommodityDetailValueFontSize;
     carbon.uomFontSize=kBuildingCommodityDetailUomFontSize;
+    carbon.emptyTextFontSize=20;
+    carbon.emptyTextMargin=28;
     [carbon showTitle];
     
     [self.view addSubview:carbon];
@@ -224,6 +227,8 @@
     ranking.titleFontSize=kBuildingCommodityTitleFontSize;
     ranking.titleMargin=kBuildingDetailInnerMargin;
     ranking.leftMargin=kBuildingCommodityDetailTextMargin;
+    ranking.emptyTextFontSize=20;
+    ranking.emptyTextMargin=28;
     [ranking showTitle];
     [self.view addSubview:ranking];
     self.rankingLabel=ranking;

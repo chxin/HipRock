@@ -35,6 +35,7 @@
 // Methods
 + (REMTooltipViewBase *)tooltipWithHighlightedPoints:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
 
+-(REMTooltipViewBase *)initWithDefaults;
 - (REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
 
 - (void)updateHighlightedData:(id)data;
@@ -42,5 +43,7 @@
 - (NSArray *)convertItemModels;
 
 - (UIView *)renderCloseView;
+
+-(UIScrollView *)renderScrollView;
 
 @end

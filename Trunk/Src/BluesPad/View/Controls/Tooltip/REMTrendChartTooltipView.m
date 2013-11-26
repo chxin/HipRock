@@ -106,34 +106,14 @@
     for(int i=0;i<highlightedPoints.count;i++){
         DCDataPoint *point = highlightedPoints[i];
         
-        //properties of DCDataPoint
-        //@property (nonatomic) NSNumber* value;
-        //@property (nonatomic, assign) DCDataPointType pointType;
-        //@property (nonatomic, weak) REMEnergyData* energyData;
-        //@property (nonatomic, weak) REMEnergyTargetModel* target;
-        //@property (nonatomic, weak) DCSeries* series;
-        
-        REMDataStoreType storeType = self.widget.contentSyntax.dataStoreType;
-        REMChartTooltipItemModel *model = (storeType == REMDSEnergyRankingCarbon || storeType == REMDSEnergyRankingCost || storeType == REMDSEnergyRankingEnergy) ? [[REMRankingTooltipItemModel alloc] init] : [[REMChartTooltipItemModel alloc] init];
+        REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
         
         model.title = [self formatTargetName:point.target];
         model.value = REMIsNilOrNull(point) ? nil : point.value;
         model.color = [REMColor colorByIndex:i].uiColor;
         model.index = i;
         model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType: self.widget.diagramType];
-        
-        if(REMIsNilOrNull(point.target.uomName)){
-            model.uom = REMUoms[@(point.target.uomId)];
-        }
-        else{
-            model.uom = point.target.uomName;
-        }
-        
-        
-        if([model isKindOfClass:[REMRankingTooltipItemModel class]]){
-            ((REMRankingTooltipItemModel *)model).numerator = i;
-            ((REMRankingTooltipItemModel *)model).denominator = self.data.targetEnergyData.count;
-        }
+        model.uom = point.target.uomName;
         
         [itemModels addObject:model];
     }

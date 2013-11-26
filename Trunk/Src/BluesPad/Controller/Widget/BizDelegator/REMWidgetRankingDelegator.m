@@ -8,6 +8,7 @@
 
 #import "REMWidgetRankingDelegator.h"
 #import "DCRankingWrapper.h"
+#import "REMRankingTooltipView.h"
 
 const static CGFloat kRankButtonDimension=32;
 const static CGFloat kRankingTimePickerWidth=250;
@@ -206,6 +207,7 @@ const static CGFloat kRankingTimePickerWidth=250;
     if (widgetWrapper != nil) {
         [self.chartContainer addSubview:widgetWrapper.view];
         self.chartWrapper=widgetWrapper;
+        widgetWrapper.delegate = self;
         
     }
     
@@ -248,7 +250,7 @@ const static CGFloat kRankingTimePickerWidth=250;
 
 #pragma mark - Tooltip
 // Trend chart delegate
--(void)highlightPoints:(NSArray*)points colors:(NSArray*)colors names:(NSArray*)names
+-(void)highlightPoints:(NSArray*)points
 {
     [self.searchView setHidden:YES];
     
@@ -262,7 +264,7 @@ const static CGFloat kRankingTimePickerWidth=250;
 
 -(void)showTooltip:(NSArray *)highlightedData
 {
-    REMTooltipViewBase *tooltip = [REMTooltipViewBase tooltipWithHighlightedPoints:highlightedData inEnergyData:self.energyData widget:self.widgetInfo andParameters:nil];
+    REMRankingTooltipView *tooltip = [[REMRankingTooltipView alloc] initWithHighlightedPoints:highlightedData inSerieses:self.chartWrapper.view.seriesList widget:self.widgetInfo andParameters:nil];
     tooltip.tooltipDelegate = self;
     
     [self.view addSubview:tooltip];
