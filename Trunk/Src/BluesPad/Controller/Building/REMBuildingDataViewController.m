@@ -57,8 +57,6 @@
     [self initCurrentCommodityView];
     if(self.currentOffsetY!=NSNotFound){//must put behand the initCommodityController
         [self scrollTo:self.currentOffsetY];
-        REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
-        [parent setBlurLevel:[self generateBlurLevel]];
     }
 }
 
@@ -367,12 +365,7 @@
     
 }
 
--(CGFloat) generateBlurLevel{
-    UIScrollView *scroll=(UIScrollView *)self.view;
-    float blurLevel=(scroll.contentOffset.y + scroll.contentInset.top) / (kBuildingCommodityViewTop+kCommodityScrollTop);
-    
-    return blurLevel;
-}
+
 
 
 -(void)checkIfRequestChartData:(UIScrollView *)scrollView{
