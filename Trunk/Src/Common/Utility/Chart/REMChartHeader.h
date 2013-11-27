@@ -38,9 +38,9 @@
 @end
 
 typedef enum _REMDirection{
-    REMDirectionLeft = -1,
+    REMDirectionLeft = -1,  // 顺时针
     REMDirectionNone = 0,
-    REMDirectionRight = 1
+    REMDirectionRight = 1   // 逆时针
 }REMDirection;
 
 @protocol REMTPieChartDelegate <REMChartDelegate>
