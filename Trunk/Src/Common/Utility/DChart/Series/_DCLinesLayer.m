@@ -51,18 +51,43 @@
         CGContextSetStrokeColorWithColor(ctx, s.color.CGColor);
         NSUInteger countOfPoints = 0;
         CGPoint pointsForSeries[loopEnd-start+1];
+        
+        // 从RangeStart向前再搜索一个非空点，并绘制曲线
+        for (int j = start-1; j >= 0; j--) {
+            DCDataPoint* point = s.datas[j];
+            if (point.pointType == DCDataPointTypeEmpty) {
+                continue;
+            } else if (point.pointType == DCDataPointTypeBreak) {
+                break;
+            } else {
+                pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue];
+                countOfPoints++;
+            }
+        }
+        // 绘制图形的主要部分
         for (int j = start; j <= loopEnd; j++) {
             DCDataPoint* point = s.datas[j];
             if (point.pointType == DCDataPointTypeEmpty) {
                 continue;
             } else if (point.pointType == DCDataPointTypeNormal) {
-                pointsForSeries[countOfPoints].x = self.frame.size.width*(j-self.graphContext.hRange.location)/self.graphContext.hRange.length;
-                pointsForSeries[countOfPoints].y = self.frame.size.height-self.heightUnitInScreen*point.value.doubleValue;
+                pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue];
                 countOfPoints++;
             } else {
                 CGContextAddLines(ctx, pointsForSeries, countOfPoints);
                 CGContextStrokePath(ctx);
                 countOfPoints = 0;
+            }
+        }
+        // 从RangeEnd向前后搜索一个非空点，并绘制曲线
+        for (int j = loopEnd+1; j < s.datas.count; j++) {
+            DCDataPoint* point = s.datas[j];
+            if (point.pointType == DCDataPointTypeEmpty) {
+                continue;
+            } else if (point.pointType == DCDataPointTypeBreak) {
+                break;
+            } else {
+                pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue];
+                countOfPoints++;
             }
         }
         if (countOfPoints != 0) {
@@ -72,6 +97,13 @@
     }
     CGContextStrokePath(ctx);
     [self renderSymbols];
+}
+
+-(CGPoint)getPointBy:(int)x y:(double)y {
+    CGPoint point;
+    point.x = self.frame.size.width*(x-self.graphContext.hRange.location)/self.graphContext.hRange.length;
+    point.y = self.frame.size.height-self.heightUnitInScreen*y;
+    return point;
 }
 
 -(BOOL)isValidSeriesForMe:(DCXYSeries*)series {
