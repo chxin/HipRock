@@ -991,14 +991,15 @@
         return;
     
     [self hideTooltip:^{
-        [self.chartWrapper cancelToolTipStatus];
-//        id chartView = (id)[self.chartWrapper getView];
-//        if([chartView respondsToSelector:@selector(cancelToolTipStatus)]){
-//            [chartView cancelToolTipStatus];
-//        }
-//        if([self.chartWrapper respondsToSelector:@selector(cancelToolTipStatus)]){
-//            [self.chartWrapper performSelector:@selector(cancelToolTipStatus) withObject:nil];
-//        }
+        if(self.widgetInfo.diagramType == REMDiagramTypePie){
+            id chartView = (id)self.pieWrapper.view;
+            if([chartView respondsToSelector:@selector(cancelToolTipStatus)]){
+                [chartView cancelToolTipStatus];
+            }
+        }
+        else{
+            [self.chartWrapper cancelToolTipStatus];
+        }
         
         [self.searchLegendViewContainer setHidden:NO];
     }];

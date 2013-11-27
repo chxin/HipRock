@@ -22,7 +22,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <segue destination="8sm-Rk-4h3" kind="push" identifier="splashToMapSegue" customClass="REMSplashMapSegue" id="9ca-ql-9sS"/>
+                        <segue destination="8sm-Rk-4h3" kind="custom" identifier="splashToMapSegue" customClass="REMSplashMapSegue" id="9ca-ql-9sS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i7s-2X-RpE" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -38,6 +38,7 @@
 
 - (id)initWithFrame:(CGRect)frame andData:(REMChartTooltipItemModel *)model;
 - (void)updateModel:(REMChartTooltipItemModel *)model;
+- (NSString *)formatDataValue:(REMChartTooltipItemModel *)model;
 
 @end
 
