@@ -60,6 +60,11 @@
     return self;
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"BizDetailChanged" object:nil];
+}
+
 - (void) receiveNotification:(NSNotification *) notification
 {
     // [notification name] should always be @"TestNotification"

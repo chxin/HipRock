@@ -57,6 +57,9 @@ const static CGFloat widgetGap=20;
     return self;
 }
 
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"BizChanged" object:nil];
+}
 
 
 - (void) receiveTestNotification:(NSNotification *) notification
