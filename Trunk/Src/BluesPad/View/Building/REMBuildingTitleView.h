@@ -13,15 +13,16 @@
 @interface REMBuildingTitleView : UIView
 
 
-@property (nonatomic,strong) NSString *title;
+@property (nonatomic,copy) NSString *title;
 @property (nonatomic) CGFloat titleFontSize;
 @property (nonatomic) CGFloat titleMargin;
 @property (nonatomic) CGFloat leftMargin;
 @property (nonatomic) CGFloat valueFontSize;
 @property (nonatomic) CGFloat uomFontSize;
 
-@property (nonatomic,strong) NSString *emptyText;
+@property (nonatomic,copy) NSString *emptyText;
 @property (nonatomic) CGFloat emptyTextFontSize;
+@property (nonatomic,copy) NSString *emptyTextFont;
 @property (nonatomic) CGFloat textWidth;
 @property (nonatomic,weak) UILabel *titleLabel;
 @property (nonatomic) CGFloat emptyTextMargin;

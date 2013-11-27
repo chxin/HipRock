@@ -17,7 +17,7 @@
 @interface REMSettingViewController : UITableViewController<UIAlertViewDelegate>
 
 //@property (nonatomic,strong) REMMainNavigationController *mainNavigationController;
-@property (nonatomic,strong) UISwitch *weiboAccoutSwitcher;
+@property (nonatomic,weak) UISwitch *weiboAccoutSwitcher;
 
 -(void)logoutAndClearCache;
 
