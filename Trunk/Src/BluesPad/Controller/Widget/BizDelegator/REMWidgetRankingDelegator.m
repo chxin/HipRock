@@ -92,6 +92,10 @@ const static CGFloat kRankingTimePickerWidth=250;
     
     self.orderButton=orderButton;
     
+    if(self.widgetInfo.contentSyntax.rankingSortOrder == NSOrderedDescending){
+        [orderButton setSelected:YES];
+    }
+    
     
     NSMutableArray *searchViewSubViewConstraints = [NSMutableArray array];
     NSDictionary *searchViewSubViewDic = NSDictionaryOfVariableBindings(timePickerButton,orderButton);
