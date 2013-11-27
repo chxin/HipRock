@@ -98,6 +98,13 @@ typedef enum _DChartStatus {
         view.yAxis1.labelFont = [UIFont fontWithName:self.style.yTextStyle.fontName size:self.style.yTextStyle.fontSize];
         view.yAxis2.labelFont = [UIFont fontWithName:self.style.yTextStyle.fontName size:self.style.yTextStyle.fontSize];
     }
+    view.focusSymbolLineColor = self.style.focusSymbolLineColor;
+    view.focusSymbolLineStyle = self.style.focusSymbolLineStyle;
+    view.focusSymbolLineWidth = self.style.focusSymbolLineWidth;
+    view.xAxis.labelToLine = self.style.xLabelToLine;
+    view.yAxis0.labelToLine = self.style.yLabelToLine;
+    view.yAxis1.labelToLine = self.style.yLabelToLine;
+    view.yAxis2.labelToLine = self.style.yLabelToLine;
     view.graphContext.hGridlineAmount = self.style.horizentalGridLineAmount;
     view.delegate = self;
     self.graphContext = view.graphContext;

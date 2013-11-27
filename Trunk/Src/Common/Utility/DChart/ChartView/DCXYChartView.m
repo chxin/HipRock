@@ -197,7 +197,7 @@
 }
 
 -(void)updateSymbolFrameSize {
-    CGRect symbolFrameSize = CGRectMake(self.plotRect.origin.x, self.plotRect.origin.y, self.plotRect.size.width, self.plotRect.size.height + self.xAxis.lineWidth + kDCLabelToLine);
+    CGRect symbolFrameSize = CGRectMake(self.plotRect.origin.x, self.plotRect.origin.y, self.plotRect.size.width, self.plotRect.size.height + self.xAxis.lineWidth + self.xAxis.labelToLine);
     for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
         symbol.frame = symbolFrameSize;
     }
@@ -238,6 +238,9 @@
     if (layer.series.count > 0) {
         _DCLineSymbolsLayer* symbols = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
         layer.symbolsLayer = symbols;
+        symbols.symbolLineStyle = self.focusSymbolLineStyle;
+        symbols.symbolLineWidth = self.focusSymbolLineWidth;
+        symbols.symbolLineColor = self.focusSymbolLineColor;
         [self.symbolLayers addObject:symbols];
         layer.graphContext = self.graphContext;
         layer.frame = self.plotRect;
@@ -279,17 +282,17 @@
     CGSize axisSize;
     
     axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.xAxis.labelFont];
-    plotSpaceBottom = plotSpaceBottom - axisSize.height - self.xAxis.lineWidth - kDCLabelToLine;
+    plotSpaceBottom = plotSpaceBottom - axisSize.height - self.xAxis.lineWidth - self.xAxis.labelToLine;
     
     axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.yAxis0.labelFont];
-    plotSpaceLeft = plotSpaceLeft + axisSize.width + self.yAxis0.lineWidth + kDCLabelToLine;
+    plotSpaceLeft = plotSpaceLeft + axisSize.width + self.yAxis0.lineWidth + self.yAxis0.labelToLine;
     self.yAxis0.startPoint = CGPointMake(plotSpaceLeft, 0);
     self.yAxis0.endPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
     self.y0LabelLayerSize = CGSizeMake(plotSpaceLeft, plotSpaceBottom);
     
     if (self.yAxis1 && self.yAxis1.visableSeriesAmount > 0) {
         axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.yAxis1.labelFont];
-        CGFloat axisWidth = axisSize.width + self.yAxis2.lineWidth + kDCLabelToLine;
+        CGFloat axisWidth = axisSize.width + self.yAxis1.lineWidth + self.yAxis1.labelToLine;
         plotSpaceRight = plotSpaceRight - axisWidth;
         self.yAxis1.startPoint = CGPointMake(plotSpaceRight, 0);
         self.yAxis1.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
@@ -297,7 +300,7 @@
     }
     if (self.yAxis2 && self.yAxis2.visableSeriesAmount > 0) {
         axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.yAxis2.labelFont];
-        CGFloat axisWidth = axisSize.width + self.yAxis2.lineWidth + kDCLabelToLine;
+        CGFloat axisWidth = axisSize.width + self.yAxis2.lineWidth + self.yAxis2.labelToLine;
         plotSpaceRight = plotSpaceRight - axisWidth;
         self.yAxis2.startPoint = CGPointMake(plotSpaceRight, 0);
         self.yAxis2.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);

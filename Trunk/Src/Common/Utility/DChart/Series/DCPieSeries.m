@@ -48,7 +48,7 @@
     }
     int index = 0;
     for (DCPieDataPoint* point in self.datas) {
-        if (!point.hidden && point.pointType == DCDataPointTypeNormal && sum != 0) {
+        if (!point.hidden && point.pointType == DCDataPointTypeNormal && sum != 0 && point.value.doubleValue != 0) {
             DCPieSlice slice;
             slice.sliceBegin = previesSum[index] * 2 / sum;
             slice.sliceEnd = slice.sliceBegin + point.value.doubleValue * 2 / sum;

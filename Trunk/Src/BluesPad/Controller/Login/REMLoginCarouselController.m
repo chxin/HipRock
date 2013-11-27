@@ -14,6 +14,7 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMLoginCard.h"
 #import "REMLoginTrialCardController.h"
+#import "REMLoginCustomerViewController.h"
 
 @interface REMLoginCarouselController ()
 
@@ -30,8 +31,8 @@
 @implementation REMLoginCarouselController
 
 const static int kCardCount = 5;
-static const int kTrialCardIndex = kCardCount - 1;
-static const int kLoginCardIndex = kCardCount - 2;
+static const int kLoginCardIndex = kCardCount - 1;
+static const int kTrialCardIndex = kCardCount - 2;
 
 - (void)loadView
 {
@@ -74,18 +75,10 @@ static const int kLoginCardIndex = kCardCount - 2;
 {
     UIEdgeInsets imageInsets = UIEdgeInsetsMake(5.0f, 12.0f, 0.0f, 12.0f);
     
-    UIButton *skipToLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    skipToLoginButton.frame = CGRectMake((kDMScreenWidth-2*kDMLogin_SkipToLoginButtonWidth - kDMLogin_SkipToTrialButtonLeftOffset)/2, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
-    skipToLoginButton.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_SkipToLoginButtonFontSize];
-    
-    [skipToLoginButton setTitleColor:[REMColor colorByHexString:kDMLogin_SkipToLoginButtonFontColor] forState:UIControlStateNormal];
-    [skipToLoginButton setTitle:REMLocalizedString(@"Login_SkipToLoginButtonText") forState:UIControlStateNormal];
-    [skipToLoginButton setBackgroundImage:[REMIMG_JumpLogin_Normal resizableImageWithCapInsets:imageInsets] forState:UIControlStateNormal];
-    [skipToLoginButton setBackgroundImage:[REMIMG_JumpLogin_Pressed resizableImageWithCapInsets:imageInsets] forState:UIControlStateHighlighted];
-    [skipToLoginButton addTarget:self action:@selector(jumpLoginButtonTouchDown:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *skipToTrialButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    skipToTrialButton.frame = CGRectMake(skipToLoginButton.frame.origin.x + kDMLogin_SkipToLoginButtonWidth + kDMLogin_SkipToTrialButtonLeftOffset, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
+    skipToTrialButton.frame = CGRectMake((kDMScreenWidth-2*kDMLogin_SkipToLoginButtonWidth - kDMLogin_SkipToTrialButtonLeftOffset)/2, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
+    
     skipToTrialButton.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_SkipToLoginButtonFontSize];
     [skipToTrialButton setTitleColor:[REMColor colorByHexString:kDMLogin_SkipToLoginButtonFontColor] forState:UIControlStateNormal];
     [skipToTrialButton setTitle:REMLocalizedString(@"Login_SkipToTrialButtonText") forState:UIControlStateNormal];
@@ -93,6 +86,17 @@ static const int kLoginCardIndex = kCardCount - 2;
     [skipToTrialButton setBackgroundImage:[REMIMG_JumpLogin_Pressed resizableImageWithCapInsets:imageInsets] forState:UIControlStateHighlighted];
     [skipToTrialButton addTarget:self action:@selector(jumpTrialButtonTouchDown:) forControlEvents:UIControlEventTouchUpInside];
     
+    
+    
+    UIButton *skipToLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    skipToLoginButton.frame = CGRectMake(skipToTrialButton.frame.origin.x + kDMLogin_SkipToLoginButtonWidth + kDMLogin_SkipToTrialButtonLeftOffset, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
+    skipToLoginButton.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_SkipToLoginButtonFontSize];
+    
+    [skipToLoginButton setTitleColor:[REMColor colorByHexString:kDMLogin_SkipToLoginButtonFontColor] forState:UIControlStateNormal];
+    [skipToLoginButton setTitle:REMLocalizedString(@"Login_SkipToLoginButtonText") forState:UIControlStateNormal];
+    [skipToLoginButton setBackgroundImage:[REMIMG_JumpLogin_Normal resizableImageWithCapInsets:imageInsets] forState:UIControlStateNormal];
+    [skipToLoginButton setBackgroundImage:[REMIMG_JumpLogin_Pressed resizableImageWithCapInsets:imageInsets] forState:UIControlStateHighlighted];
+    [skipToLoginButton addTarget:self action:@selector(jumpLoginButtonTouchDown:) forControlEvents:UIControlEventTouchUpInside];
     
     
     [self.view addSubview:skipToLoginButton];
@@ -214,6 +218,18 @@ static const int kLoginCardIndex = kCardCount - 2;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:kSegue_LoginToCustomer] == YES)
+    {
+        UINavigationController *navigationController = segue.destinationViewController;
+        REMLoginCustomerViewController *customerController = navigationController.childViewControllers[0];
+        customerController.loginPageController = self.loginPageController;
+    }
+}
+
 
 #pragma mark - scroll view delegate
 

@@ -7,12 +7,18 @@
  --------------------------------------------------------------------------*///
 
 #import "REMChartHeader.h"
+#import "REMPieIndicatorLayer.h"
+#import "REMPieShadowLayer.h"
+
 @interface REMPieChartView()
 @property (nonatomic) NSMutableArray* pointAngles;
 @property (nonatomic, assign) double rotationAngle;
 @property (nonatomic, assign) NSUInteger focusPointIndex;
 @property (nonatomic, assign) BOOL isFocusStatus;
 @property (nonatomic, assign) REMDirection rotateDirection;
+
+@property (nonatomic, strong) REMPieIndicatorLayer* indicatorLayer;
+@property (nonatomic, strong) REMPieShadowLayer* shadowLayer;
 @end
 
 @implementation REMPieChartView
@@ -21,6 +27,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.rotateDirection = REMDirectionNone;
+        self.shadowLayer = [[REMPieShadowLayer alloc]init];
+        self.shadowLayer.frame = self.bounds;
+        [self.layer addSublayer:self.shadowLayer];
         _series = config.series;
         self.rotationAngle = 0;
         _focusPointIndex = 0;
@@ -43,6 +52,18 @@
             CPTPieChart* plot = (CPTPieChart*)[s getPlot];
             [self reset];
             [s beforePlotAddToGraph:self.hostedGraph seriesList:self.series selfIndex:0];
+            CGFloat pieRadius = 0;
+            CGFloat shadowRadius = 0;
+            if (self.frame.size.width > 500) {
+                pieRadius = 180;
+                shadowRadius = 190;
+            } else {
+                pieRadius = 30;
+                shadowRadius = 32;
+            }
+            plot.pieRadius = pieRadius;
+            self.shadowLayer.shadowRadius = shadowRadius;
+            [self.shadowLayer setNeedsDisplay];
             [self.hostedGraph addPlot:plot];
         }
     }
@@ -152,11 +173,20 @@
 }
 
 -(void) longPress:(UILongPressGestureRecognizer*) gest {
-    if (gest.state == UIGestureRecognizerStateBegan) {
+    if (gest.state == UIGestureRecognizerStateEnded) {
         self.isFocusStatus = YES;
         [self sendPointFocusEvent];
     }
 }
+
+-(void)setIsFocusStatus:(BOOL)isFocusStatus {
+    _isFocusStatus = isFocusStatus;
+    self.indicatorLayer.hidden = !isFocusStatus;
+    [self.indicatorLayer removeFromSuperlayer];
+    [self.superview.layer addSublayer:self.indicatorLayer];
+    [self.indicatorLayer setNeedsDisplay];
+}
+
 -(void)setFocusPointIndex:(NSUInteger)focusPointIndex {
     if (self.focusPointIndex != focusPointIndex) {
         _focusPointIndex = focusPointIndex;
@@ -170,6 +200,19 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:color:name:direction:)]) {
         [self.delegate highlightPoint:series.energyData[focusPointIndex] color:[series getColorByIndex:focusPointIndex].uiColor name:series.targetNames[focusPointIndex] direction:self.rotateDirection];
     }
+}
+
+-(void)didMoveToSuperview {
+    self.indicatorLayer = [[REMPieIndicatorLayer alloc]init];
+    self.indicatorLayer.pieRadius = ((CPTPieChart*)[self.series[0] getPlot]).pieRadius;
+    self.indicatorLayer.frame = self.frame;
+    [self.superview.layer addSublayer:self.indicatorLayer];
+//    [self.indicatorLayer setNeedsDisplay];
+}
+
+-(void)removeFromSuperview {
+    [self.indicatorLayer removeFromSuperlayer];
+    [super removeFromSuperview];
 }
 
 -(void)cancelToolTipStatus {

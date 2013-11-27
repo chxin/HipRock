@@ -56,7 +56,7 @@
         model.color = [REMColor colorByIndex:i].uiColor;
         model.index = i;
         model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType: self.widget.diagramType];
-        model.numerator = [[self.serieses[0] datas] indexOfObject:point];
+        model.numerator = [[self.serieses[0] datas] indexOfObject:point] + 1;
         model.denominator = [[self.serieses[0] datas] count];
         model.uom = point.target.uomName;
         

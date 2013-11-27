@@ -22,6 +22,6 @@
 @property (nonatomic,strong) UIImage *currentCustomerLogo;
 
 + (REMApplicationContext *)instance;
-
++ (void)destroy;
 
 @end

@@ -807,15 +807,7 @@
 -(void)legendSwitchSegmentPressed:(UISegmentedControl *)segment
 {
     if(segment.selectedSegmentIndex == 0){//search toolbar
-        //if legend toolbar display, move it out of the view
-        if(self.legendView != nil){
-            [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                self.legendView.frame = kDMChart_ToolbarHiddenFrame;
-            } completion:^(BOOL finished) {
-                [self.legendView removeFromSuperview];
-                self.legendView = nil;
-            }];
-        }
+        [self hideLegendView];
     }
     else{//legend toolbar
         //if legend toolbar is not presenting, move it into the view
@@ -830,7 +822,6 @@
             } completion:nil];
         }
     }
-    
 }
 
 #pragma mark -
@@ -877,6 +868,33 @@
 
 #pragma mark - Legend bar
 
+-(void)showLegendView
+{
+    if(self.legendView == nil){
+        UIView *view = [self prepareLegendView];
+        
+        //TODO: should add into container
+        [self.view addSubview:view];
+        self.legendView = view;
+        
+        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.legendView.frame = kDMChart_ToolbarFrame;
+        } completion:nil];
+    }
+}
+
+-(void)hideLegendView
+{
+    if(self.legendView != nil){
+        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.legendView.frame = kDMChart_ToolbarHiddenFrame;
+        } completion:^(BOOL finished) {
+            [self.legendView removeFromSuperview];
+            self.legendView = nil;
+        }];
+    }
+}
+
 -(UIView *)prepareLegendView
 {
     REMChartLegendBase *legend = [REMChartLegendBase legendWithData:self.energyData widget:self.widgetInfo parameters:self.tempModel andHiddenIndexes:self.hiddenSeries];
@@ -917,11 +935,6 @@
 /*** this function will be removed when d-chart is ok ***/
 -(void)highlightPoints:(NSArray*)points
 {
-    //points is an array of DCDataPoint
-//    if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
-//        return;
-//    }
-    
     [self.searchView setHidden:YES];
     
     if(self.tooltipView != nil){
@@ -931,31 +944,6 @@
         [self showTooltip:points];
     }
 }
-
-//-(void)highlightPoints:(NSArray *)points {
-//    //what's stack column chart tooltip like?
-//    if(self.widgetInfo.diagramType == REMDiagramTypeStackColumn){
-//        return;
-//    }
-//    
-//    [self.searchView setHidden:YES];
-//    
-//    NSMutableArray* energyPoints = [[NSMutableArray alloc]init];
-//    for (DCDataPoint* p in points) {
-//        if (p.energyData == nil) {
-//            [energyPoints addObject:[NSNull null]];
-//        } else {
-//            [energyPoints addObject:p.energyData];
-//        }
-//    }
-//    
-//    if(self.tooltipView!=nil){
-//        [self.tooltipView updateHighlightedData:energyPoints];
-//    }
-//    else{
-//        [self showTooltip:energyPoints];
-//    }
-//}
 
 // Pie chart delegate
 -(void)highlightPoint:(REMEnergyData*)point color:(UIColor*)color name:(NSString*)name direction:(REMDirection)direction
@@ -979,13 +967,14 @@
         return;
     
     [self hideTooltip:^{
-        id chartView = (id)[self.chartWrapper getView];
-        if([chartView respondsToSelector:@selector(cancelToolTipStatus)]){
-            [chartView cancelToolTipStatus];
-        }
-        if([self.chartWrapper respondsToSelector:@selector(cancelToolTipStatus)]){
-            [self.chartWrapper performSelector:@selector(cancelToolTipStatus) withObject:nil];
-        }
+        [self.chartWrapper cancelToolTipStatus];
+//        id chartView = (id)[self.chartWrapper getView];
+//        if([chartView respondsToSelector:@selector(cancelToolTipStatus)]){
+//            [chartView cancelToolTipStatus];
+//        }
+//        if([self.chartWrapper respondsToSelector:@selector(cancelToolTipStatus)]){
+//            [self.chartWrapper performSelector:@selector(cancelToolTipStatus) withObject:nil];
+//        }
         
         [self.searchView setHidden:NO];
     }];

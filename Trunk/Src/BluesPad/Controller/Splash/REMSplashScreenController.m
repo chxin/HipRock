@@ -21,7 +21,6 @@
 @interface REMSplashScreenController ()
 
 @property (nonatomic,weak) UIView *backgroundView;
-@property (nonatomic,weak) UIView *logoView;
 @property (nonatomic,weak) UIView *normalLogo;
 @property (nonatomic,weak) UIView *flashLogo;
 

@@ -27,7 +27,6 @@
 @interface REMMapViewController ()
 
 @property (nonatomic,weak) GMSMapView *mapView;
-@property (nonatomic) int temp;
 
 @end
 
@@ -46,8 +45,6 @@
 {
 	// Do any additional setup after loading the view.
     
-    // iOS 7.0 supported
-    //REMUpdateStatusBarAppearenceForIOS7;
     
     [self loadMapView];
     
@@ -89,7 +86,6 @@
         marker.position = CLLocationCoordinate2DMake(building.latitude, building.longitude);
         marker.userData = buildingInfo;
         marker.title = building.name;
-        marker.snippet = building.code;
         marker.map = self.mapView;
         marker.flat = NO;
         marker.zIndex = [building.buildingId integerValue];
@@ -128,6 +124,9 @@
 -(void)updateCamera:(GMSMapView *)mapView
 {
     // one building, set the building's location
+    if(self.buildingInfoArray.count <= 0)
+        return;
+    
     if(self.buildingInfoArray.count == 1){
         REMBuildingModel *building = [self.buildingInfoArray[0] building];
         
@@ -213,7 +212,6 @@
     {
         //take a snapshot of self
         UIImage *fake = [REMImageHelper imageWithView:self.view];
-        [REMImageHelper drawText:[NSString stringWithFormat:@"%d" ,self.temp++] inImage:fake inRect:CGRectMake(0, 0, 24, 24)];
         self.snapshot = [[UIImageView alloc] initWithImage: fake];
         
         //prepare custom segue parameters
@@ -243,14 +241,8 @@
         self.isInitialPresenting = NO;
 }
 
--(int):(int)a :(int)b :(int)c
-{
-    return a+b+c;
-}
-
 -(void)presentGalleryView
 {
-    [self :1 :1 :1];
     [self performSegueWithIdentifier:kSegue_MapToGallery sender:self];
 }
 
