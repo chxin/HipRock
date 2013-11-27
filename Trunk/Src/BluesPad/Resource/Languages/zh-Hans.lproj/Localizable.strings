@@ -75,9 +75,15 @@
 "Setting_DetailAdminEmail"="负责人电子邮箱";
 "Setting_DetailOperationDate"="运营时间";
 "Setting_DetailCustomerAdmin"="客户管理员";
-"Setting_DetailCustomerAdminTwoName"="%@和%@"; //张三和李四
-"Setting_DetailCustomerAdminThreeName"="%@和%@等%d人"; //张三和李四等5人
+"Setting_DetailCustomerAdminTwoName"="%@ 和 %@"; //张三和李四
+"Setting_DetailCustomerAdminThreeName"="%@ 和 %@ 等%d人"; //张三和李四等5人
 
+"Setting_BindWeibo"="绑定新浪微博";
+"Setting_UserName"="显示名称";
+"Setting_EMOPID"="能源管理平台ID";
+"Setting_CurrentCustomer"="当前用户";
+"Setting_CustomerInfo"="客户信息";
+"Setting_Logout"="退出登录";
 //Map, prefix: Map_
 
 
@@ -100,7 +106,7 @@
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="下拉返回概览能耗信息";
 "Dashboard_TimeRange"="%@ 到 %@";
-"Dashboard_Empty"="未配置任何仪表盘。";
+"Dashboard_Empty"="未配置任何仪表盘";
 
 
 //Widget, prefix:Widget_

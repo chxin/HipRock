@@ -52,7 +52,7 @@ const static CGFloat kRankingTimePickerWidth=250;
 
 - (void)initSearchView{
     
-    UIView *searchViewContainer=[[UIView alloc]initWithFrame:CGRectMake(0,self.ownerController.titleContainer.frame.origin.y+self.ownerController.titleContainer.frame.size.height,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)];
+    UIView *searchViewContainer=[[UIView alloc]initWithFrame:CGRectMake(kDMCommon_ContentLeftMargin,self.ownerController.titleContainer.frame.origin.y+self.ownerController.titleContainer.frame.size.height,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)];
     //searchViewContainer.translatesAutoresizingMaskIntoConstraints=NO;
     
     [searchViewContainer setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
@@ -92,14 +92,18 @@ const static CGFloat kRankingTimePickerWidth=250;
     
     self.orderButton=orderButton;
     
+    if(self.widgetInfo.contentSyntax.rankingSortOrder == NSOrderedDescending){
+        [orderButton setSelected:YES];
+    }
+    
     
     NSMutableArray *searchViewSubViewConstraints = [NSMutableArray array];
     NSDictionary *searchViewSubViewDic = NSDictionaryOfVariableBindings(timePickerButton,orderButton);
     NSDictionary *searchViewSubViewMetrics = @{@"margin":@(kWidgetDatePickerLeftMargin),@"buttonHeight":@(kWidgetDatePickerHeight),@"buttonWidth":@(kRankingTimePickerWidth),@"top":@(kWidgetDatePickerTopMargin),@"rankDimension":@(kRankButtonDimension)};
-    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[timePickerButton(buttonWidth)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[timePickerButton(buttonWidth)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
     [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[timePickerButton(buttonHeight)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
     
-    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[orderButton]-margin-|" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[orderButton]-0-|" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
     [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[orderButton(rankDimension)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
     
     [searchViewContainer addConstraints:searchViewSubViewConstraints];

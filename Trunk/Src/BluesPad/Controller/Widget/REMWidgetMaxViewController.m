@@ -50,13 +50,16 @@ const static CGFloat widgetGap=20;
     if(self){
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(receiveTestNotification:)
-                                                     name:@"TestNotification"
+                                                     name:@"BizChanged"
                                                    object:nil];
     }
     
     return self;
 }
 
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"BizChanged" object:nil];
+}
 
 
 - (void) receiveTestNotification:(NSNotification *) notification
@@ -65,8 +68,9 @@ const static CGFloat widgetGap=20;
     // unless you use this method for observation of other notifications
     // as well.
     
-    if ([[notification name] isEqualToString:@"TestNotification"])
-        NSLog (@"Successfully received the test notification!");
+    if ([[notification name] isEqualToString:@"BizChanged"]){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BizDetailChanged" object:notification.object userInfo:notification.userInfo];
+    }
 }
 
 

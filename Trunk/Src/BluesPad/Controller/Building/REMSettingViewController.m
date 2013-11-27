@@ -80,23 +80,27 @@
     
     // weibo account binding cell
     if (indexPath.section == 2 && indexPath.item == 0) {
-        [[cell textLabel]setText:@"绑定新浪微博"];
-        self.weiboAccoutSwitcher = [[UISwitch alloc]initWithFrame:CGRectMake(405, 12, 79, 27)];
-        self.weiboAccoutSwitcher.on = [Weibo.weibo isAuthenticated];
-        [self.weiboAccoutSwitcher addTarget:self action:@selector(weiboSwitcherChanged:) forControlEvents:UIControlEventValueChanged];
-        [cell addSubview:self.weiboAccoutSwitcher];
+        [[cell textLabel]setText:NSLocalizedString(@"Setting_BindWeibo", @"")]; //绑定新浪微博
+        cell.detailTextLabel.text=@"";
+        UISwitch *switcher= [[UISwitch alloc]initWithFrame:CGRectZero];
+        cell.accessoryView=switcher;
+        switcher.on = [Weibo.weibo isAuthenticated];
+        [switcher addTarget:self action:@selector(weiboSwitcherChanged:) forControlEvents:UIControlEventValueChanged];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [cell addSubview:switcher];
+        self.weiboAccoutSwitcher=switcher;
     }
     //logout cell
     else if(indexPath.section==0){
         
-        
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         if(indexPath.row==0){
-            [[cell textLabel]setText:@"显示名称"];
+            [[cell textLabel]setText:NSLocalizedString(@"Setting_UserName", @"")]; //显示名称
             NSString *name=[REMApplicationContext instance].currentUser.realname;
             [cell.detailTextLabel setText:name];
         }
         else{
-            [[cell textLabel]setText:@"能源管理开发平台ID"];
+            [[cell textLabel]setText:NSLocalizedString(@"Setting_EMOPID", @"")];//能源管理开发平台ID
             NSString *name1=[REMApplicationContext instance].currentUser.name;
             [cell.detailTextLabel setText:name1];
         }
@@ -105,20 +109,20 @@
         
         
         if(indexPath.row==0){
-            [[cell textLabel]setText:@"当前客户"];
+            [[cell textLabel]setText:NSLocalizedString(@"Setting_CurrentCustomer", @"")];//当前客户
             NSString *name=[REMApplicationContext instance].currentCustomer.name;
             [cell.detailTextLabel setText:name];
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
         else{
-            [[cell textLabel]setText:@"客户信息"];
+            [[cell textLabel]setText:NSLocalizedString(@"Setting_CustomerInfo", @"")];//客户信息
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
     }
     else if(indexPath.section==3 && indexPath.row==0 ){
         UITableViewCell *cell1 = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell1"];
         //[[cell textLabel]setText:@"退出登录"];
-        cell1.textLabel.text=@"退出登录";
+        cell1.textLabel.text=NSLocalizedString(@"Setting_Logout", @"");//@"退出登录";
         cell1.textLabel.textColor=[UIColor redColor];
         cell1.textLabel.textAlignment=NSTextAlignmentCenter;
         return cell1;
@@ -241,6 +245,7 @@
      */
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     if(indexPath.section == 3 && indexPath.row==0){
         [self logout];
         

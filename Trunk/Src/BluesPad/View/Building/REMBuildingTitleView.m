@@ -58,7 +58,7 @@
     [self addSubview:icon];
     CGFloat textMarginTop=marginTop+icon.frame.size.height-fs;
     UILabel *emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftMargin+icon.frame.size.width+8, textMarginTop, 1000, fs)];
-    emptyLabel.font=[UIFont fontWithName:@(kBuildingFontSC) size:fs];
+    emptyLabel.font=[UIFont fontWithName:self.emptyTextFont size:fs];
     emptyLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.5];
     if(self.emptyText ==nil){
         self.emptyText=NSLocalizedString(@"Building_LabelNoData", @"");

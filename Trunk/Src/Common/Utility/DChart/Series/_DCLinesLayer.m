@@ -45,24 +45,52 @@
     
     for (DCLineSeries* s in self.series) {
         if (s.hidden) continue;
+        if (start >= s.datas.count) continue;
         int loopEnd = s.datas.count-1;
         if (end < loopEnd) loopEnd = end;
         CGContextSetLineWidth(ctx, s.lineWidth);
         CGContextSetStrokeColorWithColor(ctx, s.color.CGColor);
         NSUInteger countOfPoints = 0;
-        CGPoint pointsForSeries[loopEnd-start+1];
+        CGPoint pointsForSeries[loopEnd-start+3];
+        
+        // 从RangeStart向前再搜索一个非空点，并绘制曲线
+        for (int j = start-1; j >= 0; j--) {
+            DCDataPoint* point = s.datas[j];
+            if (point.pointType == DCDataPointTypeEmpty) {
+                continue;
+            } else if (point.pointType == DCDataPointTypeBreak) {
+                break;
+            } else {
+                pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue];
+                countOfPoints++;
+                break;
+            }
+        }
+        // 绘制图形的主要部分
         for (int j = start; j <= loopEnd; j++) {
             DCDataPoint* point = s.datas[j];
             if (point.pointType == DCDataPointTypeEmpty) {
                 continue;
             } else if (point.pointType == DCDataPointTypeNormal) {
-                pointsForSeries[countOfPoints].x = self.frame.size.width*(j-self.graphContext.hRange.location)/self.graphContext.hRange.length;
-                pointsForSeries[countOfPoints].y = self.frame.size.height-self.heightUnitInScreen*point.value.doubleValue;
+                pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue];
                 countOfPoints++;
             } else {
                 CGContextAddLines(ctx, pointsForSeries, countOfPoints);
                 CGContextStrokePath(ctx);
                 countOfPoints = 0;
+            }
+        }
+        // 从RangeEnd向前后搜索一个非空点，并绘制曲线
+        for (int j = loopEnd+1; j < s.datas.count; j++) {
+            DCDataPoint* point = s.datas[j];
+            if (point.pointType == DCDataPointTypeEmpty) {
+                continue;
+            } else if (point.pointType == DCDataPointTypeBreak) {
+                break;
+            } else {
+                pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue];
+                countOfPoints++;
+                break;
             }
         }
         if (countOfPoints != 0) {
@@ -72,6 +100,13 @@
     }
     CGContextStrokePath(ctx);
     [self renderSymbols];
+}
+
+-(CGPoint)getPointBy:(int)x y:(double)y {
+    CGPoint point;
+    point.x = self.frame.size.width*(x-self.graphContext.hRange.location)/self.graphContext.hRange.length;
+    point.y = self.frame.size.height-self.heightUnitInScreen*y;
+    return point;
 }
 
 -(BOOL)isValidSeriesForMe:(DCXYSeries*)series {
@@ -108,7 +143,6 @@
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
     NSMutableArray* pointsToDraw = [[NSMutableArray alloc]init];
-    NSNumber* symbolLineX = @([DCUtility getScreenXIn:self.bounds xVal:self.focusX hRange:self.graphContext.hRange]);
     for (DCLineSeries* s in self.series) {
         if (s.hidden) continue;
         NSMutableArray* seriesPoints = [[NSMutableArray alloc]init];
@@ -134,7 +168,7 @@
         [pointsToDraw addObject:seriesPoints];
         i++;
     }
-    [self.symbolsLayer drawSymbolsForPoints:pointsToDraw symbolLineAt:symbolLineX inSize:self.bounds.size];
+    [self.symbolsLayer drawSymbolsForPoints:pointsToDraw inSize:self.bounds.size];
     
     /*
     if (self.symbolsDic == nil) self.symbolsDic = [[NSMutableDictionary alloc]init];
@@ -202,9 +236,6 @@
         if (hidden) {
             _DCLineSymbolsLayer* layer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
             layer.frame = self.symbolsLayer.frame;
-            layer.symbolLineWidth = self.symbolsLayer.symbolLineWidth;
-            layer.symbolLineColor = self.symbolsLayer.symbolLineColor;
-            layer.symbolLineStyle = self.symbolsLayer.symbolLineStyle;
             [self.symbolsLayer.superlayer insertSublayer:layer below:self.symbolsLayer];
             [self.symbolsLayer removeFromSuperlayer];
             self.symbolsLayer = layer;

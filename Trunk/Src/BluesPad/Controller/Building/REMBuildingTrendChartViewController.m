@@ -423,7 +423,16 @@
             [series setValue:targetIdentity forKey:@"identity"];
             NSMutableArray* data = [[NSMutableArray alloc]initWithCapacity:dataItem.timeRangeData.targetEnergyData.count];
             if(dataItem.timeRangeData.targetEnergyData.count>0){
-                REMTargetEnergyData* targetEData = dataItem.timeRangeData.targetEnergyData[0];
+                REMTargetEnergyData* targetEData = nil;
+                for (int i = 0; i < dataItem.timeRangeData.targetEnergyData.count; i++) {
+                    targetEData = dataItem.timeRangeData.targetEnergyData[i];
+                    if (targetEData.target.type == REMEnergyTargetTag) {
+                        break;
+                    } else {
+                        targetEData = nil;
+                    };
+                }
+                if (targetEData == nil) continue;
                 for (int i = 0; i < targetEData.energyData.count; i++) {
                     REMEnergyData* pointData = targetEData.energyData[i];
                     if ([pointData.dataValue isEqual:[NSNull null]] || pointData.dataValue.floatValue < 0) {

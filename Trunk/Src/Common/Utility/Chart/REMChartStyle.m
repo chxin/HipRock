@@ -31,13 +31,14 @@
     style.xTextStyle = textStyle;
     style.yTextStyle = textStyle;
     style.horizentalGridLineAmount = 6;
-    style.symbolSize = 12;
+    style.symbolSize = 24;
     style.xLabelToLine = 12;
     style.yLabelToLine = 12;
     
-    style.focusSymbolLineColor = [REMColor colorByHexString:@"#eaeaea"];
+    style.focusSymbolLineColor = [REMColor colorByHexString:@"#f4f4f4"];
     style.focusSymbolLineStyle = DCLineTypeDefault;
     style.focusSymbolLineWidth = 2;
+    style.focusSymbolIndicatorSize = 40;
     
     return style;
 }

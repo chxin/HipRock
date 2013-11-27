@@ -29,9 +29,11 @@
 @property (nonatomic, assign) CGFloat focusSymbolLineWidth;
 @property (nonatomic, assign) DCLineType focusSymbolLineStyle;
 @property (nonatomic, strong) UIColor* focusSymbolLineColor;
+@property (nonatomic, assign) CGFloat focusSymbolIndicatorSize;
 
 @property (nonatomic, weak) id<DCXYChartViewDelegate> delegate;
 
+@property (nonatomic, assign) BOOL showIndicatorOnFocus;
 
 @property (nonatomic, strong) NSArray* seriesList;
 - (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange stacked:(BOOL)stacked;

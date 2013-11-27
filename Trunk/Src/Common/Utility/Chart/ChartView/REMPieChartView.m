@@ -61,6 +61,17 @@
                 pieRadius = 30;
                 shadowRadius = 32;
             }
+            double sumOfPie = 0;
+            if (!REMIsNilOrNull(s.energyData)) {
+                for (int i = 0; i < s.energyData.count; i++) {
+                    REMEnergyData* e = s.energyData[i];
+                    if (REMIsNilOrNull(e) || REMIsNilOrNull(e.dataValue)) continue;
+                    sumOfPie += e.dataValue.doubleValue;
+                }
+            }
+            if (sumOfPie == 0) {
+                shadowRadius = 0;
+            }
             plot.pieRadius = pieRadius;
             self.shadowLayer.shadowRadius = shadowRadius;
             [self.shadowLayer setNeedsDisplay];
@@ -197,7 +208,9 @@
 -(void)sendPointFocusEvent {
     NSUInteger focusPointIndex = self.focusPointIndex;
     REMPieChartSeries* series = self.series[0];
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:color:name:direction:)]) {
+        NSLog(@"Pie index:%i direction:%i", focusPointIndex, (int)self.rotateDirection);
         [self.delegate highlightPoint:series.energyData[focusPointIndex] color:[series getColorByIndex:focusPointIndex].uiColor name:series.targetNames[focusPointIndex] direction:self.rotateDirection];
     }
 }
