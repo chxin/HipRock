@@ -35,7 +35,7 @@
     style.xLabelToLine = 12;
     style.yLabelToLine = 12;
     
-    style.focusSymbolLineColor = [REMColor colorByHexString:@"#eaeaea"];
+    style.focusSymbolLineColor = [REMColor colorByHexString:@"#f4f4f4"];
     style.focusSymbolLineStyle = DCLineTypeDefault;
     style.focusSymbolLineWidth = 2;
     
