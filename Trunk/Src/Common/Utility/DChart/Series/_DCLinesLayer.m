@@ -45,12 +45,13 @@
     
     for (DCLineSeries* s in self.series) {
         if (s.hidden) continue;
+        if (start >= s.datas.count) continue;
         int loopEnd = s.datas.count-1;
         if (end < loopEnd) loopEnd = end;
         CGContextSetLineWidth(ctx, s.lineWidth);
         CGContextSetStrokeColorWithColor(ctx, s.color.CGColor);
         NSUInteger countOfPoints = 0;
-        CGPoint pointsForSeries[loopEnd-start+1];
+        CGPoint pointsForSeries[loopEnd-start+3];
         
         // 从RangeStart向前再搜索一个非空点，并绘制曲线
         for (int j = start-1; j >= 0; j--) {

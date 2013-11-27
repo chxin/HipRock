@@ -29,7 +29,7 @@
     
     start = start < 0 ? 0 : start;
     end = end >= self.datas.count ? (self.datas.count - 1) : end;
-    
+    if (start >= self.datas.count) return;
     NSNumber* y = @(0);
     // 从RangeStart向前再搜索一个非空点
     for (int j = start-1; j >= 0; j--) {
