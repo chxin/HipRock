@@ -33,13 +33,13 @@
         [datas addObject:point];
     }
     [self quickSort:datas left:0 right:datas.count-1];
-    if (self.sortOrder == NSOrderedDescending) [self swapeAllDatas];
     DCXYSeries* s = [[NSClassFromString(self.defaultSeriesClass) alloc]initWithEnergyData:datas];
     s.xAxis = view.xAxis;
     s.yAxis = view.yAxis0;
     s.yAxis.axisTitle = targetEnergy.target.uomName;
     [self customizeSeries:s seriesIndex:index chartStyle:style];
     
+    if (self.sortOrder == NSOrderedDescending) [self swapeAllDatas:s];
     
     _DCRankingXLabelFormatter* formatter = [[_DCRankingXLabelFormatter alloc]initWithSeries:s];
     [view setXLabelFormatter:formatter];
@@ -50,8 +50,7 @@
     // Nothing to do. cannot hide series in ranking chart.
 }
 
--(void)swapeAllDatas {
-    DCXYSeries* rankingSeries = self.view.seriesList[0];
+-(void)swapeAllDatas:(DCXYSeries*)rankingSeries {
     DCDataPoint* temp = nil;
     int i = 0, j = rankingSeries.datas.count - 1;
     NSMutableArray* datas = rankingSeries.datas.mutableCopy;
@@ -112,7 +111,7 @@
     if (sortOrder == NSOrderedSame) return;
     if (_sortOrder != sortOrder) {
         _sortOrder = sortOrder;
-        [self swapeAllDatas];
+        [self swapeAllDatas:self.view.seriesList[0]];
         [self.view relabelX];
         
         DCXYSeries* rankingSeries = self.view.seriesList[0];

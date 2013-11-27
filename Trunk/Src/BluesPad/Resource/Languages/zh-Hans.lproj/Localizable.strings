@@ -158,6 +158,6 @@
 "Chart_X_Axis_Format_Month" = "M月";
 "Chart_X_Axis_Format_Day" = "d日";
 "Chart_X_Axis_Format_Hour" = "H点";
-"Chart_X_Axis_Format_YearMonth" = "yyyy年-M月";
+"Chart_X_Axis_Format_YearMonth" = "yyyy年M月";
 "Chart_X_Axis_Format_MonthDay" = "M月d日";
 "Chart_X_Axis_Format_DayHour" = "d日H点";
