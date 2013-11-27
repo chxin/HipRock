@@ -26,6 +26,7 @@
 @property (nonatomic,strong) NSString *groupName;
 @property (nonatomic,weak) UIView *maskerView;
 @property (nonatomic,weak) REMWidgetDetailViewController *ownerController;
+@property (nonatomic,copy) NSString *status;
 
 + (REMWidgetBizDelegatorBase *)bizDelegatorByWidgetInfo:(REMWidgetObject *)widgetInfo;
 
