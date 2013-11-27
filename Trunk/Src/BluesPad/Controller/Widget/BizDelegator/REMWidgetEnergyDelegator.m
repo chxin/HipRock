@@ -488,7 +488,7 @@
 //        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypePie) {
         pieWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        ((REMPieChartView *)((REMPieChartWrapper*)widgetWrapper).view).delegate = self;
+        ((REMPieChartView *)pieWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypeRanking) {
         widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         widgetWrapper.delegate = self;
@@ -895,7 +895,7 @@
         UIView *view = [self prepareLegendView];
         
         //TODO: should add into container
-        [self.view addSubview:view];
+        [self.searchLegendViewContainer addSubview:view];
         self.legendView = view;
         
         [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -953,10 +953,9 @@
 
 #pragma mark - Tooltip
 // Trend chart delegate
-/*** this function will be removed when d-chart is ok ***/
 -(void)highlightPoints:(NSArray*)points
 {
-    [self.searchView setHidden:YES];
+    [self.searchLegendViewContainer setHidden:YES];
     
     if(self.tooltipView != nil){
         [self.tooltipView updateHighlightedData:points];
@@ -969,12 +968,15 @@
 // Pie chart delegate
 -(void)highlightPoint:(REMEnergyData*)point color:(UIColor*)color name:(NSString*)name direction:(REMDirection)direction
 {
-    NSLog(@"Pie %@ is now on the niddle.", name);
+    //NSLog(@"Pie %@ is now on the niddle.", name);
     
-    [self.searchView setHidden:YES];
+    [self.searchLegendViewContainer setHidden:YES];
     
     if(self.tooltipView != nil){
-        [self.tooltipView updateHighlightedData:@[point]];
+        //now tooltip view is pie tooltip
+        REMPieChartTooltipView *pieTooltip = (REMPieChartTooltipView *)self.tooltipView;
+        
+        [pieTooltip updateHighlightedData:@[point] fromDirection:direction];
     }
     else{
         [self showTooltip:@[point]];
@@ -997,7 +999,7 @@
 //            [self.chartWrapper performSelector:@selector(cancelToolTipStatus) withObject:nil];
 //        }
         
-        [self.searchView setHidden:NO];
+        [self.searchLegendViewContainer setHidden:NO];
     }];
 }
 

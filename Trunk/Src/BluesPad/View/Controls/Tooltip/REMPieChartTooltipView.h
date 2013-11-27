@@ -7,8 +7,10 @@
 --------------------------------------------------------------------------*/
 
 #import "REMTooltipViewBase.h"
+#import "REMChartHeader.h"
 
 @interface REMPieChartTooltipView : REMTooltipViewBase
 
+- (void)updateHighlightedData:(id)data fromDirection:(REMDirection)direction;
 
 @end
