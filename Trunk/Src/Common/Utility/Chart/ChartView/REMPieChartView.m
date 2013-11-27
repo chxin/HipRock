@@ -65,7 +65,7 @@
             if (!REMIsNilOrNull(s.energyData)) {
                 for (int i = 0; i < s.energyData.count; i++) {
                     REMEnergyData* e = s.energyData[i];
-                    if (REMIsNilOrNull(e.dataValue)) continue;
+                    if (REMIsNilOrNull(e) || REMIsNilOrNull(e.dataValue)) continue;
                     sumOfPie += e.dataValue.doubleValue;
                 }
             }
@@ -208,7 +208,9 @@
 -(void)sendPointFocusEvent {
     NSUInteger focusPointIndex = self.focusPointIndex;
     REMPieChartSeries* series = self.series[0];
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:color:name:direction:)]) {
+        NSLog(@"Pie index:%i direction:%i", focusPointIndex, (int)self.rotateDirection);
         [self.delegate highlightPoint:series.energyData[focusPointIndex] color:[series getColorByIndex:focusPointIndex].uiColor name:series.targetNames[focusPointIndex] direction:self.rotateDirection];
     }
 }
