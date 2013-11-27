@@ -101,6 +101,7 @@ typedef enum _DChartStatus {
     view.focusSymbolLineColor = self.style.focusSymbolLineColor;
     view.focusSymbolLineStyle = self.style.focusSymbolLineStyle;
     view.focusSymbolLineWidth = self.style.focusSymbolLineWidth;
+    view.focusSymbolIndicatorSize = self.style.focusSymbolIndicatorSize;
     view.xAxis.labelToLine = self.style.xLabelToLine;
     view.yAxis0.labelToLine = self.style.yLabelToLine;
     view.yAxis1.labelToLine = self.style.yLabelToLine;
@@ -108,6 +109,11 @@ typedef enum _DChartStatus {
     view.graphContext.hGridlineAmount = self.style.horizentalGridLineAmount;
     view.delegate = self;
     self.graphContext = view.graphContext;
+    [self customizeView:view];
+}
+
+-(void)customizeView:(DCXYChartView*)view {
+    
 }
 
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style {

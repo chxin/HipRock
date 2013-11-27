@@ -30,4 +30,7 @@
         ((DCLineSeries*)series).symbolSize = style.symbolSize;
     }
 }
+-(void)customizeView:(DCXYChartView*)view {
+    view.showIndicatorOnFocus = YES;
+}
 @end

@@ -18,8 +18,12 @@
 #import "REMColor.h"
 #import "_DCHPinchGestureRecognizer.h"
 
+#import "_DCXYIndicatorLayer.h"
+
 @interface DCXYChartView ()
 @property (nonatomic, strong) DCRange* beginHRange;
+
+@property (nonatomic, strong) _DCXYIndicatorLayer* indicatorLayer;
 
 //@property (nonatomic, strong) _DCAxisLayer* _axisLayer;
 @property (nonatomic, strong) _DCHGridlineLayer* _hGridlineLayer;
@@ -110,10 +114,22 @@
     [super removeFromSuperview];
 }
 
+-(void)drawIndicatorLayer {
+    if (!self.showIndicatorOnFocus) return;
+    self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext];
+    self.indicatorLayer.frame = self.plotRect;
+    self.indicatorLayer.symbolLineStyle = self.focusSymbolLineStyle;
+    self.indicatorLayer.symbolLineWidth = self.focusSymbolLineWidth;
+    self.indicatorLayer.symbolLineColor = self.focusSymbolLineColor;
+    self.indicatorLayer.focusSymbolIndicatorSize = self.focusSymbolIndicatorSize;
+    [self.layer addSublayer:self.indicatorLayer];
+}
+
 -(void)willMoveToSuperview:(UIView *)newSuperview {
     [self drawAxisLines];
     [self drawHGridline];
     [self drawXLabelLayer];
+    [self drawIndicatorLayer];
     
     self.backgroundBandsLayer = [[_DCBackgroundBandsLayer alloc]initWithContext:self.graphContext];
     self.backgroundBandsLayer.frame = self.plotRect;
@@ -238,9 +254,6 @@
     if (layer.series.count > 0) {
         _DCLineSymbolsLayer* symbols = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
         layer.symbolsLayer = symbols;
-        symbols.symbolLineStyle = self.focusSymbolLineStyle;
-        symbols.symbolLineWidth = self.focusSymbolLineWidth;
-        symbols.symbolLineColor = self.focusSymbolLineColor;
         [self.symbolLayers addObject:symbols];
         layer.graphContext = self.graphContext;
         layer.frame = self.plotRect;
@@ -515,6 +528,10 @@
     if (self.lineLayer0) [self.lineLayer0 defocus];
     if (self.lineLayer1) [self.lineLayer1 defocus];
     if (self.lineLayer2) [self.lineLayer2 defocus];
+    if (self.indicatorLayer) {
+        self.indicatorLayer.symbolLineAt = nil;
+        [self.indicatorLayer setNeedsDisplay];
+    }
 }
 
 -(void)focusAroundX:(double)x {
@@ -534,6 +551,11 @@
         if (self.lineLayer0) [self.lineLayer0 focusOnX:xRounded];
         if (self.lineLayer1) [self.lineLayer1 focusOnX:xRounded];
         if (self.lineLayer2) [self.lineLayer2 focusOnX:xRounded];
+        if (self.indicatorLayer) {
+            self.indicatorLayer.symbolLineAt = @(xRounded);
+            [self.indicatorLayer setNeedsDisplay];
+        }
+        
         if (self.delegate && [self.delegate respondsToSelector:@selector(focusPointChanged:)]) {
             NSMutableArray* points = [[NSMutableArray alloc]init];
             for (DCXYSeries* s in self.seriesList) {

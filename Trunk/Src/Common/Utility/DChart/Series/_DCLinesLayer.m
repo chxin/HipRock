@@ -143,7 +143,6 @@
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
     NSMutableArray* pointsToDraw = [[NSMutableArray alloc]init];
-    NSNumber* symbolLineX = @([DCUtility getScreenXIn:self.bounds xVal:self.focusX hRange:self.graphContext.hRange]);
     for (DCLineSeries* s in self.series) {
         if (s.hidden) continue;
         NSMutableArray* seriesPoints = [[NSMutableArray alloc]init];
@@ -169,7 +168,7 @@
         [pointsToDraw addObject:seriesPoints];
         i++;
     }
-    [self.symbolsLayer drawSymbolsForPoints:pointsToDraw symbolLineAt:symbolLineX inSize:self.bounds.size];
+    [self.symbolsLayer drawSymbolsForPoints:pointsToDraw inSize:self.bounds.size];
     
     /*
     if (self.symbolsDic == nil) self.symbolsDic = [[NSMutableDictionary alloc]init];
@@ -237,9 +236,6 @@
         if (hidden) {
             _DCLineSymbolsLayer* layer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
             layer.frame = self.symbolsLayer.frame;
-            layer.symbolLineWidth = self.symbolsLayer.symbolLineWidth;
-            layer.symbolLineColor = self.symbolsLayer.symbolLineColor;
-            layer.symbolLineStyle = self.symbolsLayer.symbolLineStyle;
             [self.symbolsLayer.superlayer insertSublayer:layer below:self.symbolsLayer];
             [self.symbolsLayer removeFromSuperlayer];
             self.symbolsLayer = layer;
