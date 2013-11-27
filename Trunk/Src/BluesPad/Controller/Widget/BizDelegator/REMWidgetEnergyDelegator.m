@@ -263,6 +263,13 @@
     if(_currentLegendStatus!=currentLegendStatus){
         _currentLegendStatus=currentLegendStatus;
         
+        if (currentLegendStatus==REMWidgetLegendTypeSearch) {
+            [self hideLegendView];
+        }
+        else if(currentLegendStatus == REMWidgetLegendTypeLegend){
+            [self showLegendView];
+        }
+        
         [[NSNotificationCenter defaultCenter]
          postNotificationName:@"TestNotification"
          object:nil];
@@ -807,10 +814,10 @@
 -(void)legendSwitchSegmentPressed:(UISegmentedControl *)segment
 {
     if(segment.selectedSegmentIndex == 0){//search toolbar
-        [self hideLegendView];
+        self.currentLegendStatus=REMWidgetLegendTypeSearch;
     }
     else{//legend toolbar
-        [self showLegendView];
+        self.currentLegendStatus=REMWidgetLegendTypeLegend;
     }
 }
 
