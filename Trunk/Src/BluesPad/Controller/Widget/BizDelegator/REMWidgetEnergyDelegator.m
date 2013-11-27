@@ -763,30 +763,11 @@
 -(void)legendSwitchSegmentPressed:(UISegmentedControl *)segment
 {
     if(segment.selectedSegmentIndex == 0){//search toolbar
-        //if legend toolbar display, move it out of the view
-        if(self.legendView != nil){
-            [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                self.legendView.frame = kDMChart_ToolbarHiddenFrame;
-            } completion:^(BOOL finished) {
-                [self.legendView removeFromSuperview];
-                self.legendView = nil;
-            }];
-        }
+        [self hideLegendView];
     }
     else{//legend toolbar
-        //if legend toolbar is not presenting, move it into the view
-        if(self.legendView == nil){
-            UIView *view = [self prepareLegendView];
-            
-            [self.view addSubview:view];
-            self.legendView = view;
-            
-            [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                self.legendView.frame = kDMChart_ToolbarFrame;
-            } completion:nil];
-        }
+        [self showLegendView];
     }
-    
 }
 
 #pragma mark -
@@ -832,6 +813,33 @@
 
 
 #pragma mark - Legend bar
+
+-(void)showLegendView
+{
+    if(self.legendView == nil){
+        UIView *view = [self prepareLegendView];
+        
+        //TODO: should add into container
+        [self.view addSubview:view];
+        self.legendView = view;
+        
+        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.legendView.frame = kDMChart_ToolbarFrame;
+        } completion:nil];
+    }
+}
+
+-(void)hideLegendView
+{
+    if(self.legendView != nil){
+        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.legendView.frame = kDMChart_ToolbarHiddenFrame;
+        } completion:^(BOOL finished) {
+            [self.legendView removeFromSuperview];
+            self.legendView = nil;
+        }];
+    }
+}
 
 -(UIView *)prepareLegendView
 {
