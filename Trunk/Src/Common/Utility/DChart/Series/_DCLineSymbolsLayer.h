@@ -9,5 +9,8 @@
 #import "_DCLayer.h"
 
 @interface _DCLineSymbolsLayer : _DCLayer
--(void)drawSymbolsForPoints:(NSArray*)points inSize:(CGSize)plotSize;
+@property (nonatomic, assign) CGFloat symbolLineWidth;
+@property (nonatomic, assign) DCLineType symbolLineStyle;
+@property (nonatomic, strong) UIColor* symbolLineColor;
+-(void)drawSymbolsForPoints:(NSArray*)points symbolLineAt:(NSNumber*)symbolLineX inSize:(CGSize)plotSize;
 @end

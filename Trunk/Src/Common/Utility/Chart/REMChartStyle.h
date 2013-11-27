@@ -10,6 +10,7 @@
 #import "CorePlot-CocoaTouch.h"
 #import "REMColor.h"
 #import "REMBuildingConstants.h"
+#import "DCContext.h"
 
 @interface REMChartStyle : NSObject
 @property (nonatomic, assign) BOOL userInteraction;
@@ -24,6 +25,10 @@
 @property (nonatomic, assign) NSUInteger symbolSize;
 @property (nonatomic, assign) CGFloat xLabelToLine;
 @property (nonatomic, assign) CGFloat yLabelToLine;
+
+@property (nonatomic, assign) CGFloat focusSymbolLineWidth;
+@property (nonatomic, assign) DCLineType focusSymbolLineStyle;
+@property (nonatomic, strong) UIColor* focusSymbolLineColor;
 
 
 +(REMChartStyle*)getMaximizedStyle;

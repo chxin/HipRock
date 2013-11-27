@@ -26,6 +26,10 @@
 @property (nonatomic) UIColor* hGridlineColor;
 @property (nonatomic,assign) DCLineType hGridlineStyle;
 
+@property (nonatomic, assign) CGFloat focusSymbolLineWidth;
+@property (nonatomic, assign) DCLineType focusSymbolLineStyle;
+@property (nonatomic, strong) UIColor* focusSymbolLineColor;
+
 @property (nonatomic, weak) id<DCXYChartViewDelegate> delegate;
 
 

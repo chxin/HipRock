@@ -34,6 +34,11 @@
     style.symbolSize = 12;
     style.xLabelToLine = 12;
     style.yLabelToLine = 12;
+    
+    style.focusSymbolLineColor = [REMColor colorByHexString:@"#eaeaea"];
+    style.focusSymbolLineStyle = DCLineTypeDefault;
+    style.focusSymbolLineWidth = 2;
+    
     return style;
 }
 +(REMChartStyle*)getMinimunStyle {
