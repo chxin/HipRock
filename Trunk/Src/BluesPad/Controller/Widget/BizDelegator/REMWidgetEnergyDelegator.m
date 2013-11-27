@@ -810,17 +810,7 @@
         [self hideLegendView];
     }
     else{//legend toolbar
-        //if legend toolbar is not presenting, move it into the view
-        if(self.legendView == nil){
-            UIView *view = [self prepareLegendView];
-            
-            [self.view addSubview:view];
-            self.legendView = view;
-            self.currentLegendStatus=REMWidgetLegendTypeLegend;
-            [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                self.legendView.frame = kDMChart_ToolbarFrame;
-            } completion:nil];
-        }
+        [self showLegendView];
     }
 }
 
