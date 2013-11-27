@@ -871,7 +871,7 @@
         UIView *view = [self prepareLegendView];
         
         //TODO: should add into container
-        [self.view addSubview:view];
+        [self.searchLegendViewContainer addSubview:view];
         self.legendView = view;
         
         [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -931,7 +931,7 @@
 // Trend chart delegate
 -(void)highlightPoints:(NSArray*)points
 {
-    [self.searchView setHidden:YES];
+    [self.searchLegendViewContainer setHidden:YES];
     
     if(self.tooltipView != nil){
         [self.tooltipView updateHighlightedData:points];
@@ -946,7 +946,7 @@
 {
     //NSLog(@"Pie %@ is now on the niddle.", name);
     
-    [self.searchView setHidden:YES];
+    [self.searchLegendViewContainer setHidden:YES];
     
     if(self.tooltipView != nil){
         //now tooltip view is pie tooltip
@@ -975,7 +975,7 @@
 //            [self.chartWrapper performSelector:@selector(cancelToolTipStatus) withObject:nil];
 //        }
         
-        [self.searchView setHidden:NO];
+        [self.searchLegendViewContainer setHidden:NO];
     }];
 }
 
