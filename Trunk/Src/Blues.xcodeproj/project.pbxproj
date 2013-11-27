@@ -615,6 +615,7 @@
 		EF03DC261841FA2F004B9EFD /* DCPieSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC251841FA2F004B9EFD /* DCPieSeries.m */; };
 		EF03DC291841FB45004B9EFD /* DCPieDataPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC281841FB45004B9EFD /* DCPieDataPoint.m */; };
 		EF0BFE9E18446C010026C47D /* REMPieIndicatorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BFE9D18446C010026C47D /* REMPieIndicatorLayer.m */; };
+		EF0BFEA1184495DF0026C47D /* REMPieShadowLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BFEA0184495DF0026C47D /* REMPieShadowLayer.m */; };
 		EF1C5AD4183DB3A2002A9AAD /* DAbstractChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD3183DB3A2002A9AAD /* DAbstractChartWrapper.m */; };
 		EF1C5AD7183DB3CB002A9AAD /* DCTrendWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD6183DB3CB002A9AAD /* DCTrendWrapper.m */; };
 		EF1C5ADA183E00C9002A9AAD /* _DCXLabelFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD9183E00C9002A9AAD /* _DCXLabelFormatter.m */; };
@@ -1413,6 +1414,8 @@
 		EF03DC281841FB45004B9EFD /* DCPieDataPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCPieDataPoint.m; sourceTree = "<group>"; };
 		EF0BFE9C18446C010026C47D /* REMPieIndicatorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPieIndicatorLayer.h; sourceTree = "<group>"; };
 		EF0BFE9D18446C010026C47D /* REMPieIndicatorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieIndicatorLayer.m; sourceTree = "<group>"; };
+		EF0BFE9F184495DF0026C47D /* REMPieShadowLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPieShadowLayer.h; sourceTree = "<group>"; };
+		EF0BFEA0184495DF0026C47D /* REMPieShadowLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieShadowLayer.m; sourceTree = "<group>"; };
 		EF1C5AD2183DB3A2002A9AAD /* DAbstractChartWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DAbstractChartWrapper.h; path = Common/Utility/DChartWrapper/DAbstractChartWrapper.h; sourceTree = "<group>"; };
 		EF1C5AD3183DB3A2002A9AAD /* DAbstractChartWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DAbstractChartWrapper.m; path = Common/Utility/DChartWrapper/DAbstractChartWrapper.m; sourceTree = "<group>"; };
 		EF1C5AD5183DB3CB002A9AAD /* DCTrendWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCTrendWrapper.h; path = Common/Utility/DChartWrapper/DCTrendWrapper.h; sourceTree = "<group>"; };
@@ -3019,6 +3022,8 @@
 				EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */,
 				EF0BFE9C18446C010026C47D /* REMPieIndicatorLayer.h */,
 				EF0BFE9D18446C010026C47D /* REMPieIndicatorLayer.m */,
+				EF0BFE9F184495DF0026C47D /* REMPieShadowLayer.h */,
+				EF0BFEA0184495DF0026C47D /* REMPieShadowLayer.m */,
 			);
 			path = ChartView;
 			sourceTree = "<group>";
@@ -3588,6 +3593,7 @@
 				B4D50A41183313C7007C93A4 /* REMBuildingChartViewController.m in Sources */,
 				B4E815D11827375200FB9BC5 /* REMWidgetTagSearchModel.m in Sources */,
 				7A399E97177D238F00F0EB9F /* AFHTTPRequestOperation.m in Sources */,
+				EF0BFEA1184495DF0026C47D /* REMPieShadowLayer.m in Sources */,
 				7A399E98177D238F00F0EB9F /* AFImageRequestOperation.m in Sources */,
 				7AB9B39A183DCF1100779C5E /* REMChartTooltipItem.m in Sources */,
 				7A399E99177D238F00F0EB9F /* AFJSONRequestOperation.m in Sources */,

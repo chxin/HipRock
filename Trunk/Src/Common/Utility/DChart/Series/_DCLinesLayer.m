@@ -121,9 +121,10 @@
             BOOL isRectVisable = [DCUtility isFrame:toFrame visableIn:self.bounds] && (key.value != nil) && ![key.value isEqual:[NSNull null]];
             if (isRectVisable) {
                 CGPoint location = CGPointMake(toFrame.origin.x+toFrame.size.width/2, toFrame.origin.y+toFrame.size.height/2);
-                CGFloat symbolScale = 1;
-                if (j == self.focusX) symbolScale = kDCFocusPointSymbolMagnify;
-                [seriesPoints addObject:@{ @"dcpoint": s.datas[j], @"location": [NSValue valueWithCGPoint:location], @"symbolScale":@(symbolScale) }];
+                CGFloat symbolAlpha = 0;
+                if (j == self.focusX || self.focusX == INT32_MIN) symbolAlpha = kDCSymbolAlpha;
+                else symbolAlpha = kDCUnfocusPointSymbolAlph;
+                [seriesPoints addObject:@{ @"dcpoint": s.datas[j], @"location": [NSValue valueWithCGPoint:location], @"symbolAlpha":@(symbolAlpha) }];
             }
         }
         [pointsToDraw addObject:seriesPoints];

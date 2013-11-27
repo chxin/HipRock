@@ -36,8 +36,8 @@
 
 -(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex {
     [super beforePlotAddToGraph:graph seriesList:seriesList selfIndex:selfIndex];
-    CPTPieChart* thePlot = (CPTPieChart*)plot;
-    thePlot.pieRadius = (MIN(graph.bounds.size.height, graph.bounds.size.width)-2) / 3;
+//    CPTPieChart* thePlot = (CPTPieChart*)plot;
+//    thePlot.pieRadius = (MIN(graph.bounds.size.height, graph.bounds.size.width)-2) / 3;
 //    [CPTAnimation animate:plot
 //        property:@"endAngle"
 //        from: thePlot.endAngle

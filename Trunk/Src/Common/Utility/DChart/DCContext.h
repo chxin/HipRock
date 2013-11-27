@@ -16,7 +16,7 @@ extern CGFloat const kDCAnimationDuration;
 extern int const kDCLabelToLine;
 extern CGFloat const kDCFocusPointAlpha;
 extern CGFloat const kDCSymbolAlpha;
-extern CGFloat const kDCFocusPointSymbolMagnify;
+extern CGFloat const kDCUnfocusPointSymbolAlph;
 extern int const kDCFramesPerSecord;
 extern BOOL const kDCHideLineSymbolWhenDragging;
 extern NSString* const kDCPieShadowColor;
