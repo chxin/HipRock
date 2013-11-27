@@ -238,6 +238,9 @@
     if (layer.series.count > 0) {
         _DCLineSymbolsLayer* symbols = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
         layer.symbolsLayer = symbols;
+        symbols.symbolLineStyle = self.focusSymbolLineStyle;
+        symbols.symbolLineWidth = self.focusSymbolLineWidth;
+        symbols.symbolLineColor = self.focusSymbolLineColor;
         [self.symbolLayers addObject:symbols];
         layer.graphContext = self.graphContext;
         layer.frame = self.plotRect;
