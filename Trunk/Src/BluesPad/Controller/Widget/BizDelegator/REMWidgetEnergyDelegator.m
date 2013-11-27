@@ -111,7 +111,7 @@
 }
 - (void)initSearchView{
     
-    UIView *searchLegendViewContainer=[[UIView alloc]initWithFrame:CGRectMake(0,self.ownerController.titleContainer.frame.origin.y+self.ownerController.titleContainer.frame.size.height,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)];
+    UIView *searchLegendViewContainer=[[UIView alloc]initWithFrame:CGRectMake(0,self.ownerController.titleContainer.frame.origin.y+self.ownerController.titleContainer.frame.size.height,kDMScreenWidth,kDMChart_ToolbarHeight)];
     
     [searchLegendViewContainer setBackgroundColor:[UIColor clearColor]];
     
@@ -205,10 +205,10 @@
     NSMutableArray *searchViewSubViewConstraints = [NSMutableArray array];
     NSDictionary *searchViewSubViewDic = NSDictionaryOfVariableBindings(timePickerButton,stepControl);
     NSDictionary *searchViewSubViewMetrics = @{@"margin":@(kWidgetDatePickerLeftMargin),@"buttonHeight":@(kWidgetDatePickerHeight),@"buttonWidth":@(kWidgetDatePickerWidth),@"top":@(kWidgetDatePickerTopMargin),@"stepHeight":@(kWidgetStepButtonHeight),@"stepMinWidth":@(kWidgetStepSingleButtonWidth),@"stepMaxWidth":@(kWidgetStepSingleButtonWidth*3)};
-    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[timePickerButton(buttonWidth)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[timePickerButton(buttonWidth)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
     [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[timePickerButton(buttonHeight)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
     
-    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[stepControl]-margin-|" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[stepControl]-0-|" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
     [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[stepControl(stepHeight)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
     
     [searchViewContainer addConstraints:searchViewSubViewConstraints];
@@ -216,8 +216,8 @@
     
     NSMutableArray *searchContainerConstraints = [NSMutableArray array];
     NSDictionary *searchContainerDic = NSDictionaryOfVariableBindings(searchViewContainer);
-    NSDictionary *searchContainerMetrics = @{@"width":@(self.searchLegendViewContainer.frame.size.width),@"height":@(self.searchLegendViewContainer.frame.size.height)};
-    [searchContainerConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[searchViewContainer(width)]-0-|" options:0 metrics:searchContainerMetrics views:searchContainerDic]];
+    NSDictionary *searchContainerMetrics = @{@"width":@(kDMChart_ToolbarWidth),@"height":@(self.searchLegendViewContainer.frame.size.height),@"margin":@(kDMCommon_ContentLeftMargin)};
+    [searchContainerConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[searchViewContainer(width)]" options:0 metrics:searchContainerMetrics views:searchContainerDic]];
     [searchContainerConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[searchViewContainer(height)]-0-|" options:0 metrics:searchContainerMetrics views:searchContainerDic]];
 
     [searchLegendViewContainer addConstraints:searchContainerConstraints];

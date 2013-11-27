@@ -28,9 +28,9 @@ const static CGFloat kWidgetStepSingleButtonWidth=60;
 const static CGFloat kWidgetStepButtonFontSize=14;
 const static CGFloat kWidgetStepButtonHeight=24;
 const static CGFloat kWidgetChartLeftMargin=25;
-const static CGFloat kWidgetChartTopMargin=kDMChart_ToolbarTop+kDMChart_ToolbarHeight;
-const static CGFloat kWidgetChartWidth=1024-kWidgetChartLeftMargin*2;
-const static CGFloat kWidgetChartHeight=748-kWidgetChartTopMargin-kWidgetChartLeftMargin;
+//const static CGFloat kWidgetChartTopMargin=REMDMCOMPATIOS7(62)+kDMChart_ToolbarHeight;
+#define kWidgetChartWidth 1024-kWidgetChartLeftMargin*2
+#define kWidgetChartHeight 748-(REMDMCOMPATIOS7(62)+kDMChart_ToolbarHeight)-kWidgetChartLeftMargin
 
 typedef enum _REMWidgetLegendType{
     REMWidgetLegendTypeLegend,
