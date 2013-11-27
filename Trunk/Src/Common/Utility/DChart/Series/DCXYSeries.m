@@ -42,6 +42,7 @@
             if ([y compare:point.value] == NSOrderedAscending) {
                 y = point.value;
             }
+            break;
         }
     }
     // 搜索图形的主要部分
@@ -64,6 +65,7 @@
             if ([y compare:point.value] == NSOrderedAscending) {
                 y = point.value;
             }
+            break;
         }
     }
 //    for (int i = start; i <= end; i++) {

@@ -62,6 +62,7 @@
             } else {
                 pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue];
                 countOfPoints++;
+                break;
             }
         }
         // 绘制图形的主要部分
@@ -88,6 +89,7 @@
             } else {
                 pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue];
                 countOfPoints++;
+                break;
             }
         }
         if (countOfPoints != 0) {
