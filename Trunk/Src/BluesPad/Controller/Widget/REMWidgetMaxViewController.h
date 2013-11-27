@@ -28,33 +28,8 @@
 
 @property (nonatomic) NSUInteger currentWidgetIndex;
 
+
+
 - (void)popToBuildingCover;
 
-
-
-/*
-
-- (IBAction)searchClick:(UIButton *)sender;
-
-@property   (nonatomic,strong) REMEnergyViewData  *data;
-@property   (nonatomic,strong) REMWidgetObject  *widgetObj;
-@property (weak, nonatomic) IBOutlet REMWidgetMaxView *chartView;
-@property (weak, nonatomic) IBOutlet UIButton *relativeDateButton;
-@property (weak, nonatomic) IBOutlet UIButton *startDateButton;
-@property (weak, nonatomic) IBOutlet UIButton *endDateButton;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *stepButton;
-@property (nonatomic,strong) REMTimeRange *viewTimeRange;
-@property (nonatomic,strong) NSString *viewRelativeDateString;
-@property (weak, nonatomic) IBOutlet UILabel *tooltipLabel;
-- (IBAction)stepChanged:(UISegmentedControl *)sender;
-
-
-//@property (weak, nonatomic) IBOutlet REMWidgetStepToolbarView *stepToolbar;
-
-
-- (IBAction)legendTap:(id)sender;
-- (void)setRelativeDate:(NSString *)relativeDateString WithText:(NSString *)text;
-- (void)setStartDate:(NSDate *)date;
-- (void)setEndDate:(NSDate *)date;
-*/
 @end

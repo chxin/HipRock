@@ -45,14 +45,32 @@ const static CGFloat widgetGap=20;
 
 @implementation REMWidgetMaxViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if(self){
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(receiveTestNotification:)
+                                                     name:@"BizChanged"
+                                                   object:nil];
     }
+    
     return self;
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"BizChanged" object:nil];
+}
+
+
+- (void) receiveTestNotification:(NSNotification *) notification
+{
+    // [notification name] should always be @"TestNotification"
+    // unless you use this method for observation of other notifications
+    // as well.
+    
+    if ([[notification name] isEqualToString:@"BizChanged"]){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BizDetailChanged" object:notification.object userInfo:notification.userInfo];
+    }
 }
 
 
@@ -63,6 +81,8 @@ const static CGFloat widgetGap=20;
     if([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
         [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
     }
+    
+    
     
     [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
     [self.view setBackgroundColor:[UIColor blackColor]];

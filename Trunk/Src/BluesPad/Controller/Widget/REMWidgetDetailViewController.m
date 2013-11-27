@@ -119,6 +119,8 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     [self.bizDelegator initBizView];
 }
 
+
+
 - (void)showChart
 {
     [self.bizDelegator showChart];

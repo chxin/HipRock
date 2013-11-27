@@ -73,23 +73,6 @@
     return itemModels;
 }
 
-- (void)updateHighlightedData:(NSArray *)data
-{
-    self.highlightedPoints = data;
-    int newHighlightIndex = [self decideHighlightIndex];
-    int offset = self.highlightIndex - newHighlightIndex;
-    
-    NSLog(@"Now highlight index is %d, offset: %d", newHighlightIndex, offset);
-    
-    self.highlightIndex = newHighlightIndex;
-    
-    for(UIView *subview in self.scrollView.subviews){
-        [subview removeFromSuperview];
-    }
-    
-    [self renderItems];
-}
-
 -(UIScrollView *)renderScrollView
 {
     UIScrollView *view = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kDMChart_TooltipContentWidth-kDMChart_TooltipCloseViewWidth, kDMChart_TooltipContentHeight)];
@@ -110,36 +93,28 @@
     }
     
     view.contentSize = CGSizeMake(contentWidth+kDMChart_TooltipCloseViewWidth, kDMChart_TooltipContentHeight);
-
+    
     return view;
 }
 
 
--(int)decideHighlightIndex
+- (void)updateHighlightedData:(NSArray *)data fromDirection:(REMDirection)direction;
 {
-    if(self.highlightedPoints.count <=0)
-        return 0;
+    self.highlightedPoints = data;
+    int newHighlightIndex = [self decideHighlightIndex];
+    int offset = self.highlightIndex - newHighlightIndex;
     
-    REMEnergyData *point = self.highlightedPoints[0];
+    NSLog(@"Now highlight index is %d, offset: %d", newHighlightIndex, offset);
     
-    if(REMIsNilOrNull(point))
-        return 0;
+    self.highlightIndex = newHighlightIndex;
     
-    for(int i=0;i<self.data.targetEnergyData.count;i++){
-        REMTargetEnergyData *targetData = self.data.targetEnergyData[i];
-        
-        if([point isEqual:targetData.energyData[0]])
-            return i;
+    for(UIView *subview in self.scrollView.subviews){
+        [subview removeFromSuperview];
     }
     
-    return 0;
+    [self renderItems];
 }
 
-
--(NSString *)formatTargetName:(REMEnergyTargetModel *)target
-{
-    return [REMTextIndicatorFormator formatTargetName:target withWidget:self.widget andParameters:self.parameters];
-}
 
 //-(void)renderItems
 //{
@@ -186,28 +161,40 @@
     }
 }
 
--(UIView *)renderPointerView
+
+-(NSString *)formatTargetName:(REMEnergyTargetModel *)target
 {
-    UIView *view = [[UIView alloc] initWithFrame:kPieTooltipHighlightFrame];
-    view.layer.borderColor = [UIColor purpleColor].CGColor;
-    view.layer.borderWidth = 1.0;
-    view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.3];
-    
-    return view;
+    return [REMTextIndicatorFormator formatTargetName:target withWidget:self.widget andParameters:self.parameters];
 }
 
-- (void)update:(id)highlightIndex
+-(int)decideHighlightIndex
 {
-    int offset = self.highlightIndex - [highlightIndex intValue];
-    NSLog(@"Now highlight index is %d, offset: %d", [highlightIndex intValue], offset);
+    if(self.highlightedPoints.count <=0)
+        return 0;
     
-    self.highlightIndex = [highlightIndex intValue];
+    REMEnergyData *point = self.highlightedPoints[0];
     
-    for(UIView *subview in self.scrollView.subviews){
-        [subview removeFromSuperview];
+    if(REMIsNilOrNull(point))
+        return 0;
+    
+    for(int i=0;i<self.data.targetEnergyData.count;i++){
+        REMTargetEnergyData *targetData = self.data.targetEnergyData[i];
+        
+        if([point isEqual:targetData.energyData[0]])
+            return i;
     }
     
-    [self renderItems];
+    return 0;
 }
+
+//-(UIView *)renderPointerView
+//{
+//    UIView *view = [[UIView alloc] initWithFrame:kPieTooltipHighlightFrame];
+//    view.layer.borderColor = [UIColor purpleColor].CGColor;
+//    view.layer.borderWidth = 1.0;
+//    view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.3];
+//    
+//    return view;
+//}
 
 @end

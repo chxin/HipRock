@@ -41,12 +41,13 @@ typedef enum _REMWidgetLegendType{
 @interface REMWidgetEnergyDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol,UIAlertViewDelegate,REMChartLegendItemDelegate, REMTrendChartDelegate, REMTPieChartDelegate, REMChartTooltipDelegate>
 
 @property (nonatomic,weak) UIView *searchView;
+@property (nonatomic,weak) UIView *searchLegendViewContainer;
 @property (nonatomic,weak) UIButton *timePickerButton;
 @property (nonatomic,weak) UISegmentedControl *stepControl;
 @property (nonatomic,weak) UIView *legendView;
 @property (nonatomic,weak) UISegmentedControl *legendSearchControl;
 @property (nonatomic,weak) UIView *chartContainer;
-
+@property (nonatomic) REMWidgetLegendType currentLegendStatus;
 
 - (void)initSearchView;
 - (void)initChartView;

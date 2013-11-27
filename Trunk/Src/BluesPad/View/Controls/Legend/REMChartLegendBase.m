@@ -65,7 +65,7 @@
     for(int i=0;i<self.itemModels.count; i++){
         REMChartLegendItemModel *model = self.itemModels[i];
         
-        CGFloat x = i * (kDMChart_LegendItemWidth + kDMChart_LegendItemLeftOffset) + kDMChart_LegendItemLeftOffset;
+        CGFloat x = i * (kDMChart_LegendItemWidth + kDMChart_LegendItemLeftOffset);
         CGFloat y = (kDMChart_ToolbarHeight - kDMChart_LegendItemHeight) / 2;
         
         REMChartLegendItem *legend = [[REMChartLegendItem alloc] initWithModel:model];

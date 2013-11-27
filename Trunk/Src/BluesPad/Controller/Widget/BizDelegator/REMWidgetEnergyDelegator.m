@@ -48,6 +48,36 @@
 
 @implementation REMWidgetEnergyDelegator
 
+- (id)init{
+    self = [super init];
+    if(self){
+        _currentLegendStatus=REMWidgetLegendTypeSearch;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(receiveNotification:)
+                                                     name:@"BizDetailChanged"
+                                                   object:nil];
+    }
+    return self;
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"BizDetailChanged" object:nil];
+}
+
+- (void) receiveNotification:(NSNotification *) notification
+{
+    // [notification name] should always be @"TestNotification"
+    // unless you use this method for observation of other notifications
+    // as well.
+    
+    if ([[notification name] isEqualToString:@"BizDetailChanged"]){
+        REMWidgetLegendType status= (REMWidgetLegendType)[notification.userInfo[@"status"] integerValue];
+        self.currentLegendStatus=status;
+    }
+}
+
+
 - (void)initBizView{
     
     [self initModelAndSearcher];
@@ -81,10 +111,19 @@
 }
 - (void)initSearchView{
     
-    UIView *searchViewContainer=[[UIView alloc]initWithFrame:CGRectMake(0,self.ownerController.titleContainer.frame.origin.y+self.ownerController.titleContainer.frame.size.height,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)];
-    //searchViewContainer.translatesAutoresizingMaskIntoConstraints=NO;
+    UIView *searchLegendViewContainer=[[UIView alloc]initWithFrame:CGRectMake(0,self.ownerController.titleContainer.frame.origin.y+self.ownerController.titleContainer.frame.size.height,kDMChart_ToolbarWidth,kDMChart_ToolbarHeight)];
+    
+    [searchLegendViewContainer setBackgroundColor:[UIColor clearColor]];
+    
+    
+    UIView *searchViewContainer=[[UIView alloc]initWithFrame:CGRectMake(0, 0, searchLegendViewContainer.frame.size.width, searchLegendViewContainer.frame.size.height)];
+    searchViewContainer.translatesAutoresizingMaskIntoConstraints=NO;
     
     [searchViewContainer setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
+    
+    [searchLegendViewContainer addSubview:searchViewContainer];
+    
+    self.searchLegendViewContainer=searchLegendViewContainer;
     
     UISegmentedControl *legendControl=[[UISegmentedControl alloc] initWithItems:@[@"search",@"legend"]];
     //[legendControl setFrame:CGRectMake(kLegendSearchSwitcherLeft, kLegendSearchSwitcherTop, kLegendSearchSwitcherWidth, kLegendSearchSwitcherHeight)];
@@ -144,7 +183,7 @@
     
     self.timePickerButton = timePickerButton;
     
-    [self.view addSubview:searchViewContainer];
+    [self.view addSubview:searchLegendViewContainer];
     
     self.searchView=searchViewContainer;
     
@@ -175,7 +214,13 @@
     [searchViewContainer addConstraints:searchViewSubViewConstraints];
     
     
-    
+    NSMutableArray *searchContainerConstraints = [NSMutableArray array];
+    NSDictionary *searchContainerDic = NSDictionaryOfVariableBindings(searchViewContainer);
+    NSDictionary *searchContainerMetrics = @{@"width":@(self.searchLegendViewContainer.frame.size.width),@"height":@(self.searchLegendViewContainer.frame.size.height)};
+    [searchContainerConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[searchViewContainer(width)]-0-|" options:0 metrics:searchContainerMetrics views:searchContainerDic]];
+    [searchContainerConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[searchViewContainer(height)]-0-|" options:0 metrics:searchContainerMetrics views:searchContainerDic]];
+
+    [searchLegendViewContainer addConstraints:searchContainerConstraints];
 }
 
 - (void)initChartView{
@@ -229,10 +274,30 @@
     dateViewController.popController=popoverController;
     dateViewController.showHour=YES;
     [popoverController setPopoverContentSize:CGSizeMake(400, 500)];
-    CGRect rect= CGRectMake(self.timePickerButton.frame.origin.x, self.searchView.frame.origin.y+self.timePickerButton.frame.origin.y, self.timePickerButton.frame.size.width, self.timePickerButton.frame.size.height);
+    CGRect rect= CGRectMake(self.timePickerButton.frame.origin.x, self.searchLegendViewContainer.frame.origin.y+self.timePickerButton.frame.origin.y, self.timePickerButton.frame.size.width, self.timePickerButton.frame.size.height);
     [popoverController presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown|UIPopoverArrowDirectionUp animated:YES];
     
     self.datePickerPopoverController=popoverController;
+}
+
+- (void)setCurrentLegendStatus:(REMWidgetLegendType)currentLegendStatus
+{
+    if(_currentLegendStatus!=currentLegendStatus){
+        _currentLegendStatus=currentLegendStatus;
+        
+        if (currentLegendStatus==REMWidgetLegendTypeSearch) {
+            [self.legendSearchControl setSelectedSegmentIndex:0];
+            [self hideLegendView];
+        }
+        else if(currentLegendStatus == REMWidgetLegendTypeLegend){
+            [self.legendSearchControl setSelectedSegmentIndex:1];
+            [self showLegendView];
+        }
+        
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"BizChanged"
+         object:self userInfo:@{@"status":@(currentLegendStatus)}];
+    }
 }
 
 
@@ -245,12 +310,17 @@
     }
 }
 
-//- (void)releaseChart{
-//    if(self.chartWrapper!=nil){
-//        [self.chartWrapper destroyView];
-//        self.chartWrapper=nil;
-//    }
-//}
+- (void)releaseChart{
+    if(self.chartWrapper!=nil){
+        //[self.chartWrapper destroyView];
+        [[self.chartWrapper getView] removeFromSuperview];
+        self.chartWrapper=nil;
+    }
+    if(self.pieWrapper !=nil){
+        [self.pieWrapper.view removeFromSuperview];
+        self.pieWrapper=nil;
+    }
+}
 
 - (NSString *)calendarComponent{
     if(self.widgetInfo.contentSyntax.calendarType==REMCalendarTypeHCSeason){
@@ -286,15 +356,20 @@
                 continue;
             }
         }
-        BOOL showMsg=NO;
+        BOOL showMsg=YES;
         for (REMEnergyCalendarData *calendarData in validCalendarArray) {
+            
             for (REMTimeRange *range in calendarData.timeRanges) {
-                if(range.endTime>=searchRange.startTime){
-                    showMsg=YES;
+                if([range.endTime timeIntervalSinceDate:searchRange.endTime]<=0 && [range.endTime timeIntervalSinceDate:searchRange.startTime]>=0){
+                    showMsg=NO;
+                    break;
+                }
+                else if ([range.startTime timeIntervalSinceDate:searchRange.startTime] >= 0 && [range.startTime timeIntervalSinceDate:searchRange.endTime]<=0){
+                    showMsg=NO;
                     break;
                 }
             }
-            if(showMsg==YES){
+            if(showMsg==NO){
                 break;
             }
             
@@ -413,7 +488,7 @@
 //        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypePie) {
         pieWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        ((REMPieChartView *)((REMPieChartWrapper*)widgetWrapper).view).delegate = self;
+        ((REMPieChartView *)pieWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypeRanking) {
         widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         widgetWrapper.delegate = self;
@@ -763,10 +838,10 @@
 -(void)legendSwitchSegmentPressed:(UISegmentedControl *)segment
 {
     if(segment.selectedSegmentIndex == 0){//search toolbar
-        [self hideLegendView];
+        self.currentLegendStatus=REMWidgetLegendTypeSearch;
     }
     else{//legend toolbar
-        [self showLegendView];
+        self.currentLegendStatus=REMWidgetLegendTypeLegend;
     }
 }
 
@@ -820,7 +895,7 @@
         UIView *view = [self prepareLegendView];
         
         //TODO: should add into container
-        [self.view addSubview:view];
+        [self.searchLegendViewContainer addSubview:view];
         self.legendView = view;
         
         [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -878,10 +953,9 @@
 
 #pragma mark - Tooltip
 // Trend chart delegate
-/*** this function will be removed when d-chart is ok ***/
 -(void)highlightPoints:(NSArray*)points
 {
-    [self.searchView setHidden:YES];
+    [self.searchLegendViewContainer setHidden:YES];
     
     if(self.tooltipView != nil){
         [self.tooltipView updateHighlightedData:points];
@@ -894,12 +968,15 @@
 // Pie chart delegate
 -(void)highlightPoint:(REMEnergyData*)point color:(UIColor*)color name:(NSString*)name direction:(REMDirection)direction
 {
-    NSLog(@"Pie %@ is now on the niddle.", name);
+    //NSLog(@"Pie %@ is now on the niddle.", name);
     
-    [self.searchView setHidden:YES];
+    [self.searchLegendViewContainer setHidden:YES];
     
     if(self.tooltipView != nil){
-        [self.tooltipView updateHighlightedData:@[point]];
+        //now tooltip view is pie tooltip
+        REMPieChartTooltipView *pieTooltip = (REMPieChartTooltipView *)self.tooltipView;
+        
+        [pieTooltip updateHighlightedData:@[point] fromDirection:direction];
     }
     else{
         [self showTooltip:@[point]];
@@ -922,7 +999,7 @@
 //            [self.chartWrapper performSelector:@selector(cancelToolTipStatus) withObject:nil];
 //        }
         
-        [self.searchView setHidden:NO];
+        [self.searchLegendViewContainer setHidden:NO];
     }];
 }
 
