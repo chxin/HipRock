@@ -52,9 +52,26 @@
     self = [super init];
     if(self){
         _currentLegendStatus=REMWidgetLegendTypeSearch;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(receiveNotification:)
+                                                     name:@"BizDetailChanged"
+                                                   object:nil];
     }
     return self;
 }
+
+- (void) receiveNotification:(NSNotification *) notification
+{
+    // [notification name] should always be @"TestNotification"
+    // unless you use this method for observation of other notifications
+    // as well.
+    
+    if ([[notification name] isEqualToString:@"BizDetailChanged"]){
+        REMWidgetLegendType status= (REMWidgetLegendType)[notification.userInfo[@"status"] integerValue];
+        self.currentLegendStatus=status;
+    }
+}
+
 
 - (void)initBizView{
     
@@ -264,15 +281,17 @@
         _currentLegendStatus=currentLegendStatus;
         
         if (currentLegendStatus==REMWidgetLegendTypeSearch) {
+            [self.legendSearchControl setSelectedSegmentIndex:0];
             [self hideLegendView];
         }
         else if(currentLegendStatus == REMWidgetLegendTypeLegend){
+            [self.legendSearchControl setSelectedSegmentIndex:1];
             [self showLegendView];
         }
         
         [[NSNotificationCenter defaultCenter]
-         postNotificationName:@"TestNotification"
-         object:nil];
+         postNotificationName:@"BizChanged"
+         object:self userInfo:@{@"status":@(currentLegendStatus)}];
     }
 }
 
