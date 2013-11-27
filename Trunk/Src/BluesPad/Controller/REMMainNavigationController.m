@@ -63,7 +63,6 @@
         return [[REMMaxWidgetSegue alloc]initWithIdentifier:identifier source:fromViewController destination:toViewController];
     }
     
-    
     UIStoryboardSegue *segue=[super segueForUnwindingToViewController:toViewController fromViewController:fromViewController identifier:identifier];
     
     return segue;
@@ -72,6 +71,7 @@
 -(void)presentLoginView:(void (^)(void))completed
 {
     REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
+    [splashController.logoView setHidden:YES];
     
     [self popToRootViewControllerAnimated:YES];
     [splashController showLoginView:NO];

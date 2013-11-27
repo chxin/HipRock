@@ -27,7 +27,6 @@
 @interface REMMapViewController ()
 
 @property (nonatomic,weak) GMSMapView *mapView;
-@property (nonatomic) int temp;
 
 @end
 
@@ -213,7 +212,6 @@
     {
         //take a snapshot of self
         UIImage *fake = [REMImageHelper imageWithView:self.view];
-        [REMImageHelper drawText:[NSString stringWithFormat:@"%d" ,self.temp++] inImage:fake inRect:CGRectMake(0, 0, 24, 24)];
         self.snapshot = [[UIImageView alloc] initWithImage: fake];
         
         //prepare custom segue parameters
