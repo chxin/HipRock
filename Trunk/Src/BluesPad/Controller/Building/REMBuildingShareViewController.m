@@ -50,19 +50,41 @@
     
     [masker showMask];
     
-    [self.buildingController performSelector:@selector(executeWeiboExport:) withObject:masker afterDelay:0.1];
+    [self performSelector:@selector(executeWeiboExport:) withObject:masker afterDelay:0.1];
+}
+
+
+
+- (void)executeWeiboExport:(REMMaskManager *)masker{
+    [self.buildingController exportImage:^(UIImage *image, NSString* text){
+        [masker hideMask];
+        
+        REMBuildingWeiboView* weiboView = [[REMBuildingWeiboView alloc]initWithSuperView:self.buildingController.view text:text image:image];
+        
+        [weiboView show:YES];
+        
+    }];
 }
 
 
 -(void)mailButtonPressed:(UIButton *)button
 {
-    int index = self.buildingController.currentBuildingIndex;
     
-    //REMImageView *view = [self.buildingController.childViewControllers objectAtIndex:index];
+    [self.buildingController.sharePopoverController dismissPopoverAnimated:YES];
     
+    REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:[UIApplication sharedApplication].keyWindow];
+    
+    [masker showMask];
+    
+    [self performSelector:@selector(executeEmailExport:) withObject:masker afterDelay:0.1];
+    
+}
+
+- (void)executeEmailExport:(REMMaskManager *)masker{
     [self.buildingController exportImage:^(UIImage *image, NSString* text){
-        [self.buildingController.sharePopoverController dismissPopoverAnimated:YES];
+        [masker hideMask];
         
+            
         if(![MFMailComposeViewController canSendMail]){
             [REMAlertHelper alert:REMLocalizedString(@"Mail_AccountNotConfigured")];
             return ;
@@ -75,13 +97,13 @@
         [picker setSubject:REMLocalizedString(@"Mail_Title")];
         
         // Set up the recipients.
-//        NSArray *toRecipients = [NSArray arrayWithObjects:@"first@example.com", nil];
-//        NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil];
-//        NSArray *bccRecipients = [NSArray arrayWithObjects:@"four@example.com", nil];
+        //        NSArray *toRecipients = [NSArray arrayWithObjects:@"first@example.com", nil];
+        //        NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil];
+        //        NSArray *bccRecipients = [NSArray arrayWithObjects:@"four@example.com", nil];
         
-//        [picker setToRecipients:toRecipients];
-//        [picker setCcRecipients:ccRecipients];
-//        [picker setBccRecipients:bccRecipients];
+        //        [picker setToRecipients:toRecipients];
+        //        [picker setCcRecipients:ccRecipients];
+        //        [picker setBccRecipients:bccRecipients];
         
         // Attach an image to the email.
         NSData *myData = UIImagePNGRepresentation(image);
@@ -93,8 +115,14 @@
         
         // Present the mail composition interface.
         [self.buildingController presentViewController:picker animated:YES completion:nil];
+    
+
+        
     }];
 }
+
+
+
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {

@@ -565,10 +565,10 @@
     NSMutableArray* chartViewImages = [[NSMutableArray alloc]initWithCapacity:[chartView subviews].count];
     for (int i = 0; i < [[chartView subviews]count]; i++) {
         UIView* chartSubView = [[chartView subviews]objectAtIndex:i];
-        [chartViewImages setObject:[REMImageHelper imageWithView:chartSubView] atIndexedSubscript:i];
+        [chartViewImages setObject:[REMImageHelper imageWithLayer:chartSubView.layer] atIndexedSubscript:i];
     }
     
-    UIGraphicsBeginImageContext(CGSizeMake(self.view.frame.size.width, kBuildingCommodityButtonDimension + kBuildingCommodityBottomMargin + chartHeight));
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.view.frame.size.width, kBuildingCommodityButtonDimension + kBuildingCommodityBottomMargin + chartHeight),0,0.8);
     // Draw buttons
     
     for (int i = 0; i < self.buttonArray.count; i++) {
