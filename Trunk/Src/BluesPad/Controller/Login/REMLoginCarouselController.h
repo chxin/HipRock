@@ -18,6 +18,6 @@
 //- (IBAction)jumpLoginButtonTouchDown:(id)sender;
 
 -(void)showLoginCard;
--(void)playCarousel;
+-(void)playCarousel:(BOOL)isAnimated;
 
 @end

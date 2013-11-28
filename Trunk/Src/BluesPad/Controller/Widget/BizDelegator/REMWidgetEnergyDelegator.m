@@ -914,7 +914,7 @@
         [self.searchLegendViewContainer addSubview:view];
         self.legendView = view;
         
-        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             self.legendView.frame = kDMChart_ToolbarFrame;
         } completion:nil];
     }
@@ -923,7 +923,7 @@
 -(void)hideLegendView
 {
     if(self.legendView != nil){
-        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             self.legendView.frame = kDMChart_ToolbarHiddenFrame;
         } completion:^(BOOL finished) {
             [self.legendView removeFromSuperview];

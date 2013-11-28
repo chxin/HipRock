@@ -502,6 +502,10 @@
 		7AC54999181776910037F180 /* REMDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC54998181776910037F180 /* REMDashboardController.m */; };
 		7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
 		7AD0AB8B183CF52000525C82 /* REMTimeSliceLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD0AB8A183CF52000525C82 /* REMTimeSliceLegendFormator.m */; };
+		7AD8CE051847086000D815C6 /* Startup_iOS7.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD8CE011847086000D815C6 /* Startup_iOS7.png */; };
+		7AD8CE061847086000D815C6 /* Startup_iOS7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD8CE021847086000D815C6 /* Startup_iOS7@2x.png */; };
+		7AD8CE09184708CA00D815C6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD8CE07184708CA00D815C6 /* Default.png */; };
+		7AD8CE0A184708CA00D815C6 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD8CE08184708CA00D815C6 /* Default~ipad.png */; };
 		7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */; };
 		7AF3667817CF2D7400447650 /* REMBuildingChartSeriesIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */; };
 		7AF6AC8117D1BA0D00D62A9A /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
@@ -1257,6 +1261,10 @@
 		7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceMeta.h; path = Common/Communication/REMServiceMeta.h; sourceTree = "<group>"; };
 		7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceMeta.m; path = Common/Communication/REMServiceMeta.m; sourceTree = "<group>"; };
 		7AD0AB8A183CF52000525C82 /* REMTimeSliceLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeSliceLegendFormator.m; path = Biz/Chart/LegendFormator/REMTimeSliceLegendFormator.m; sourceTree = "<group>"; };
+		7AD8CE011847086000D815C6 /* Startup_iOS7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Startup_iOS7.png; sourceTree = "<group>"; };
+		7AD8CE021847086000D815C6 /* Startup_iOS7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Startup_iOS7@2x.png"; sourceTree = "<group>"; };
+		7AD8CE07184708CA00D815C6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		7AD8CE08184708CA00D815C6 /* Default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~ipad.png"; sourceTree = "<group>"; };
 		7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
 		7AF3667617CF2D7400447650 /* REMBuildingChartSeriesIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartSeriesIndicator.h; sourceTree = "<group>"; };
 		7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingChartSeriesIndicator.m; sourceTree = "<group>"; };
@@ -1605,6 +1613,7 @@
 		6A61A65D1839B81F00C6A228 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7AD8CDFE1847086000D815C6 /* LaunchImages */,
 				6A61A65E1839B81F00C6A228 /* AppIcon */,
 				6A61A6691839B81F00C6A228 /* Building */,
 				6A61A6951839B82000C6A228 /* Chart */,
@@ -2781,6 +2790,17 @@
 			path = ../lib/CorePlotHeaders;
 			sourceTree = "<group>";
 		};
+		7AD8CDFE1847086000D815C6 /* LaunchImages */ = {
+			isa = PBXGroup;
+			children = (
+				7AD8CE07184708CA00D815C6 /* Default.png */,
+				7AD8CE08184708CA00D815C6 /* Default~ipad.png */,
+				7AD8CE011847086000D815C6 /* Startup_iOS7.png */,
+				7AD8CE021847086000D815C6 /* Startup_iOS7@2x.png */,
+			);
+			path = LaunchImages;
+			sourceTree = "<group>";
+		};
 		7AE8EEA21835C9B4007D0020 /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
@@ -3386,12 +3406,14 @@
 				7A58F2521839A5650071DE7A /* SplashScreenBackgroud@2x.jpg in Resources */,
 				6A61A7611839B82000C6A228 /* TooltipsArrow_PieChart.png in Resources */,
 				6A61A7521839B82000C6A228 /* labelRight3@2x.png in Resources */,
+				7AD8CE09184708CA00D815C6 /* Default.png in Resources */,
 				6A61A7511839B82000C6A228 /* labelRight3.png in Resources */,
 				6A61A7681839B82000C6A228 /* Nodata@2x.png in Resources */,
 				6A61A76A1839B82000C6A228 /* Up@2x.png in Resources */,
 				6A61A7771839B82000C6A228 /* LoginTextField.png in Resources */,
 				6A61A7671839B82000C6A228 /* Nodata.png in Resources */,
 				6A61A7031839B82000C6A228 /* EMOP_Spotlight_6.png in Resources */,
+				7AD8CE051847086000D815C6 /* Startup_iOS7.png in Resources */,
 				6A61A74F1839B82000C6A228 /* labelRight2.png in Resources */,
 				6A61A7661839B82000C6A228 /* Down@2x.png in Resources */,
 				6A61A70B1839B82000C6A228 /* Electricity_normal.png in Resources */,
@@ -3429,6 +3451,7 @@
 				6A61A7041839B82000C6A228 /* EMOP_Spotlight_6@2x.png in Resources */,
 				6A61A7461839B82000C6A228 /* labelLeft5@2x.png in Resources */,
 				7A58F2511839A5650071DE7A /* SplashScreenBackgroud.jpg in Resources */,
+				7AD8CE0A184708CA00D815C6 /* Default~ipad.png in Resources */,
 				6A61A7401839B82000C6A228 /* labelLeft2@2x.png in Resources */,
 				6A61A78C1839B82000C6A228 /* UnqualifiedPin_Focus@2x.png in Resources */,
 				6A61A7691839B82000C6A228 /* Up.png in Resources */,
@@ -3442,6 +3465,7 @@
 				6A61A77B1839B82000C6A228 /* CommonPin_Focus.png in Resources */,
 				7A58F2501839A5650071DE7A /* Propaganda_3@2x.jpg in Resources */,
 				6A61A7911839B82000C6A228 /* SplashScreenLogo-Flash.png in Resources */,
+				7AD8CE061847086000D815C6 /* Startup_iOS7@2x.png in Resources */,
 				6A61A7901839B82000C6A228 /* SplashScreenLogo-Common@2x.png in Resources */,
 				7A58F24A1839A5650071DE7A /* mail.jpg in Resources */,
 				6A61A77D1839B82000C6A228 /* CommonPin_Normal.png in Resources */,
