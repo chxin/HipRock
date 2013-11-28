@@ -27,20 +27,22 @@
     REMSplashScreenController *splashController = self.sourceViewController;
     REMMapViewController *mapController = self.destinationViewController;
     
-    UIImageView *splashTransitionView = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:splashController.view]];
-    UIImageView *mapTransitionView = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:mapController.view]];
+    [splashController.navigationController pushViewController:mapController animated:YES];
     
-    [splashController.view addSubview:mapTransitionView];
-    [splashController.view addSubview:splashTransitionView];
-    
-    [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        splashTransitionView.alpha = 0;
-    } completion:^(BOOL finished) {
-        [splashTransitionView removeFromSuperview];
-        [mapTransitionView removeFromSuperview];
-        
-        [splashController.navigationController pushViewController:mapController animated:NO];
-    }];
+//    UIImageView *splashTransitionView = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:splashController.view]];
+//    UIImageView *mapTransitionView = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:mapController.view]];
+//    
+//    [splashController.view addSubview:mapTransitionView];
+//    [splashController.view addSubview:splashTransitionView];
+//    
+//    [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//        splashTransitionView.alpha = 0;
+//    } completion:^(BOOL finished) {
+//        [splashTransitionView removeFromSuperview];
+//        [mapTransitionView removeFromSuperview];
+//        
+//        [splashController.navigationController pushViewController:mapController animated:NO];
+//    }];
 }
 
 

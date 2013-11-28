@@ -74,6 +74,22 @@
     [instance changeMessge:message autoHide:autoHide];
 }
 
+-(void)setHidden:(BOOL)hidden {
+    [super setHidden:hidden];
+    if (self.hidden) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    } else {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screenDidRotate:) name:UIApplicationDidChangeStatusBarFrameNotification object:nil];
+    }
+}
+
+- (void)screenDidRotate:(NSNotification *)notification {
+    BOOL caTransationState = CATransaction.disableActions;
+    [CATransaction setDisableActions:YES];
+    [self resetOrientation];
+    [CATransaction setDisableActions:caTransationState];
+}
+
 - (void)resetOrientation {
     self.frame = [UIApplication sharedApplication].statusBarFrame;
     UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;

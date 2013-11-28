@@ -49,7 +49,7 @@
         self.nameLabel = nameLabel;
         
         // Value label
-        UILabel *valueLabel = [self renderDataValueLabel:model.value];
+        UILabel *valueLabel = [self renderDataValueLabel:model];
         [self addSubview:valueLabel];
         self.valueLabel = valueLabel;
 
@@ -63,17 +63,11 @@
     REMRankingTooltipItemModel *rankingModel = (REMRankingTooltipItemModel *)model;
     
     self.nameLabel.text = model.title;
-    self.valueLabel.text = [self formatDataValue:model.value];
+    self.valueLabel.text = [super formatDataValue:model];
     self.numeratorLabel.text = [NSString stringWithFormat:@"%d",rankingModel.numerator];
     self.denominatorLabel.text = [NSString stringWithFormat:@"/%d",rankingModel.denominator];
 }
 
-
-- (NSString *)formatDataValue:(NSNumber *)value
-{
-    //TODO: Need format
-    return [value stringValue];
-}
 
 -(UILabel *)renderNumeratorLabel
 {
@@ -124,7 +118,7 @@
     return label;
 }
 
--(UILabel *)renderDataValueLabel:(NSNumber *)dataValue
+-(UILabel *)renderDataValueLabel:(REMChartTooltipItemModel *)model
 {
     CGSize rankingSize = CGSizeMake(self.numeratorLabel.frame.size.width+self.denominatorLabel.frame.size.width, self.numeratorLabel.frame.size.height);
     
@@ -133,7 +127,7 @@
     CGRect frame = CGRectMake(rankingSize.width+kDMChart_TooltipItemTitleLeftOffset, self.numeratorLabel.frame.origin.y + rankingSize.height + kDMChart_TooltipItemDataValueTopOffset, self.frame.size.width - (rankingSize.width+kDMChart_TooltipItemTitleLeftOffset), height);
     
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
-    label.text = [self formatDataValue:dataValue];
+    label.text = [super formatDataValue:model];
     label.backgroundColor = [UIColor clearColor];
     label.font = font;
     label.textColor = [REMColor colorByHexString:kDMChart_TooltipItemDataValueColor];

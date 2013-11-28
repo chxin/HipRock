@@ -18,7 +18,9 @@
     }
     return self;
 }
-
+-(void)customizeView:(DCXYChartView*)view {
+    view.showIndicatorOnFocus = NO;
+}
 //-(DCColumnWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style {
 //    self = [super initWithFrame:frame data:energyViewData widgetContext:widgetSyntax style:style];
 //    if (self && energyViewData.targetEnergyData.count != 0) {

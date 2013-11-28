@@ -65,7 +65,7 @@
             if (!REMIsNilOrNull(s.energyData)) {
                 for (int i = 0; i < s.energyData.count; i++) {
                     REMEnergyData* e = s.energyData[i];
-                    if (REMIsNilOrNull(e.dataValue)) continue;
+                    if (REMIsNilOrNull(e) || REMIsNilOrNull(e.dataValue)) continue;
                     sumOfPie += e.dataValue.doubleValue;
                 }
             }
@@ -113,12 +113,39 @@
         UITouch* theTouch = [touches anyObject];
         CGPoint previousPoint = [theTouch previousLocationInView:self];
         CGPoint thePoint = [theTouch locationInView:self];
-        if (thePoint.x > previousPoint.x) self.rotateDirection = REMDirectionRight;
-        else self.rotateDirection = REMDirectionLeft;
+        NSNumber* preRotate = [self getAngleOfPoint:previousPoint];
+        NSNumber* curRotate = [self getAngleOfPoint:thePoint];
+        if (REMIsNilOrNull(preRotate) || REMIsNilOrNull(curRotate) || [preRotate isEqualToNumber:curRotate]) {
+            self.rotateDirection = REMDirectionNone;
+        } else if ([preRotate isLessThan:curRotate]) {
+            self.rotateDirection = REMDirectionLeft;
+        } else {
+            self.rotateDirection = REMDirectionRight;
+        }
         double rotation =(atan((previousPoint.x-self.center.x)/(previousPoint.y-self.center.y))-atan((thePoint.x-self.center.x)/(thePoint.y-self.center.y)));
 
         self.rotationAngle += rotation;
     }
+}
+
+-(NSNumber*)getAngleOfPoint:(CGPoint)point {
+    if (point.x == self.center.x && point.y == self.center.y) return nil;
+    if (point.x == self.center.x && point.y < self.center.y) return @(180);
+    if (point.x == self.center.x && point.y > self.center.y) return @(0);
+    if (point.y == self.center.y && point.x < self.center.x) return @(90);
+    if (point.y == self.center.y && point.x > self.center.x) return @(270);
+    int anglePlus = 0;
+    if (point.x < self.center.x && point.y < self.center.y) {
+        anglePlus = 180;
+    } else if (point.x < self.center.x && point.y > self.center.y) {
+        anglePlus = 90;
+    } else if (point.x > self.center.x && point.y > self.center.y) {
+        anglePlus = 0;
+    } else {
+        anglePlus = 270;
+    }
+    double arcSin = asin(abs(point.y-self.center.y)/pow(pow(point.y-self.center.y, 2)+pow(point.x-self.center.x, 2), 0.5))*180/M_PI;
+    return @(anglePlus+arcSin);
 }
 
 
@@ -208,7 +235,9 @@
 -(void)sendPointFocusEvent {
     NSUInteger focusPointIndex = self.focusPointIndex;
     REMPieChartSeries* series = self.series[0];
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:color:name:direction:)]) {
+        NSLog(@"Pie index:%i direction:%i", focusPointIndex, (int)self.rotateDirection);
         [self.delegate highlightPoint:series.energyData[focusPointIndex] color:[series getColorByIndex:focusPointIndex].uiColor name:series.targetNames[focusPointIndex] direction:self.rotateDirection];
     }
 }

@@ -29,6 +29,7 @@
 @property (nonatomic, assign) CGFloat focusSymbolLineWidth;
 @property (nonatomic, assign) DCLineType focusSymbolLineStyle;
 @property (nonatomic, strong) UIColor* focusSymbolLineColor;
+@property (nonatomic, assign) CGFloat focusSymbolIndicatorSize;
 
 
 +(REMChartStyle*)getMaximizedStyle;
