@@ -595,13 +595,6 @@ const static CGFloat buildingGap=20;
  }
  */
 
--(UIImage*)getImageOfLayer:(CALayer*) layer{
-    UIGraphicsBeginImageContext(layer.frame.size);
-    [layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
 
 
 #pragma mark - IOS7 style

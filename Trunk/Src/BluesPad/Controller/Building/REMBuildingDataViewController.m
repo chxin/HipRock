@@ -549,13 +549,7 @@
 //}
 
 
--(UIImage*)getImageOfLayer:(CALayer*) layer{
-    UIGraphicsBeginImageContext(layer.frame.size);
-    [layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
+
 
 - (NSDictionary *)realExport{
     REMBuildingCommodityViewController *controller=self.childViewControllers[self.currentCommodityIndex];
@@ -566,12 +560,12 @@
     NSMutableArray* btnOutputImages = [[NSMutableArray alloc]initWithCapacity:self.buttonArray.count];
     for (int i = 0; i < self.buttonArray.count; i++) {
         UIButton* btn = [self.buttonArray objectAtIndex:i];
-        [btnOutputImages setObject:[self getImageOfLayer:btn.layer] atIndexedSubscript:i];
+        [btnOutputImages setObject:[REMImageHelper imageWithView:btn] atIndexedSubscript:i];
     }
     NSMutableArray* chartViewImages = [[NSMutableArray alloc]initWithCapacity:[chartView subviews].count];
     for (int i = 0; i < [[chartView subviews]count]; i++) {
         UIView* chartSubView = [[chartView subviews]objectAtIndex:i];
-        [chartViewImages setObject:[self getImageOfLayer:chartSubView.layer] atIndexedSubscript:i];
+        [chartViewImages setObject:[REMImageHelper imageWithView:chartSubView] atIndexedSubscript:i];
     }
     
     UIGraphicsBeginImageContext(CGSizeMake(self.view.frame.size.width, kBuildingCommodityButtonDimension + kBuildingCommodityBottomMargin + chartHeight));

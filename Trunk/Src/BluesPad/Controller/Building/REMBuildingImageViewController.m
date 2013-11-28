@@ -634,13 +634,7 @@
     }
     // Dispose of any resources that can be recreated.
 }
--(UIImage*)getImageOfLayer:(CALayer*) layer{
-    UIGraphicsBeginImageContext(layer.frame.size);
-    [layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
+
 - (void)exportImage:(void (^)(UIImage *, NSString*))callback
 {
     REMBuildingDataViewController *dataViewController=self.childViewControllers[0];
@@ -655,14 +649,16 @@
     UIGraphicsBeginImageContext(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight));
     [[UIColor blackColor]set];
     UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
-    [[self getImageOfLayer:self.imageView.layer]drawInRect:self.imageView.frame];
-    [[self getImageOfLayer:self.buildingTitleView.layer]drawInRect:CGRectMake(self.backButton.frame.origin.x, self.backButton.frame.origin.y, self.buildingTitleView.frame.size.width, self.buildingTitleView.frame.size.height)];
+    [[REMImageHelper imageWithView:self.imageView] drawInRect:self.imageView.frame];
+    [[REMImageHelper imageWithView:self.buildingTitleView] drawInRect:CGRectMake(self.backButton.frame.origin.x, self.backButton.frame.origin.y, self.buildingTitleView.frame.size.width, self.buildingTitleView.frame.size.height)];
     //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
-    [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
+    
+    [[REMImageHelper imageWithLayer:self.bottomGradientLayer] drawInRect:self.bottomGradientLayer.frame];
+    
     [dataImage drawInRect:CGRectMake(0, kBuildingCommodityViewTop + kBuildingTitleHeight, outputWidth, dataImageHeight)];
     
     [footerImage drawInRect:CGRectMake(0, outputHeightWithoutFooter, 800, footerHeight)];
-    [[self getImageOfLayer:self.titleGradientLayer]drawInRect:self.titleGradientLayer.frame];
+    [[REMImageHelper imageWithLayer:self.titleGradientLayer] drawInRect:self.titleGradientLayer.frame];
     UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
