@@ -36,6 +36,11 @@
     return dic;
 }
 
+- (NSArray *)timeRangeToDictionaryArray{
+    [self fixTimeRange];
+    return [super timeRangeToDictionaryArray];
+}
+
 - (void)setModelBySearchParam:(NSDictionary *)param
 {
     NSArray *hierIds=param[@"hierarchyIds"];
@@ -65,6 +70,29 @@
     }
 
     
+}
+
+- (void)fixTimeRange{
+    REMTimeRange *timeRange=self.timeRangeArray[0];
+    NSCalendar *calendar=[REMTimeHelper currentCalendar];
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
+    NSDateComponents *components=[calendar components:unitFlags fromDate:timeRange.startTime];
+    [components setHour:0];
+    [components setMinute:0];
+    [components setSecond:0];
+    timeRange.startTime=[calendar dateFromComponents:components];
+    components=[calendar components:unitFlags fromDate:timeRange.endTime];
+    [components setHour:0];
+    [components setMinute:0];
+    [components setSecond:0];
+    timeRange.endTime=[calendar dateFromComponents:components];
+}
+
+- (void)setRelativeDateType:(REMRelativeTimeRangeType)relativeDateType{
+    [super setRelativeDateType:relativeDateType];
+    if(relativeDateType!=REMRelativeTimeRangeTypeNone){
+        [self fixTimeRange];
+    }
 }
 
 - (id)copyWithZone:(NSZone *)zone

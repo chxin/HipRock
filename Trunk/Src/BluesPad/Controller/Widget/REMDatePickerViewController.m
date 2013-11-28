@@ -63,6 +63,21 @@
     REMTimeRange *range=[REMTimeHelper relativeDateFromType:self.relativeDateType];
     self.timeRange=range;
     
+    if(self.showHour==NO){
+        NSCalendar *calendar=[REMTimeHelper gregorianCalendar];
+        unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
+        NSDateComponents *components=[calendar components:unitFlags fromDate:self.timeRange.startTime];
+        [components setHour:0];
+        [components setMinute:0];
+        [components setSecond:0];
+        self.timeRange.startTime=[calendar dateFromComponents:components];
+        components=[calendar components:unitFlags fromDate:self.timeRange.endTime];
+        [components setHour:0];
+        [components setMinute:0];
+        [components setSecond:0];
+        self.timeRange.endTime=[calendar dateFromComponents:components];
+    }
+    
     [self.startPicker setDate:range.startTime];
     [self.startHourPicker selectRow:[REMTimeHelper getHour:range.startTime] inComponent:0 animated:NO];
     int hour=[REMTimeHelper getHour:range.endTime];
