@@ -56,6 +56,8 @@
     }
     
     self.isQualified = dictionary[@"IsQualified"];
+    
+    self.electricityUsageThisMonth = [[REMCommodityUsageModel alloc] initWithDictionary:dictionary[@"ElectricUsageThisMonth"]];
 }
 
 @end

@@ -2402,9 +2402,9 @@
 				7A284954180398B600DC481B /* Definitions */,
 				7AE8EEA21835C9B4007D0020 /* Pictures */,
 				7A5E2D8D177B41B0000F77F9 /* InfoPlist.strings */,
+				7A20761617E055E800CD137C /* Localizable.strings */,
 				7A5E2D96177B41C3000F77F9 /* BluesPad-Info.plist */,
 				7A5E2D97177B41C3000F77F9 /* BluesPad-Prefix.pch */,
-				7A20761617E055E800CD137C /* Localizable.strings */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
