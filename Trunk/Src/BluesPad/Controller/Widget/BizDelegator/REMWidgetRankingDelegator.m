@@ -298,11 +298,10 @@ const static CGFloat kRankingTimePickerWidth=250;
     if(self.tooltipView==nil)
         return;
     
+    
+    
     [self hideTooltip:^{
-        id chartView = (id)self.chartWrapper.view;
-        if([chartView respondsToSelector:@selector(cancelToolTipStatus)]){
-            [chartView cancelToolTipStatus];
-        }
+        [self.chartWrapper cancelToolTipStatus];
         
         [self.searchView setHidden:NO];
     }];
