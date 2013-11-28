@@ -25,7 +25,7 @@
 @property (nonatomic,weak) CALayer *bottomGradientLayer;
 @property (nonatomic,weak) UILabel *buildingTypeTitleView;
 @property (nonatomic,weak) UILabel *buildingTitleView;
-
+@property (nonatomic,weak) UIButton *logoButton;
 @property (nonatomic,strong) NSString *loadingImageKey;
 
 @property (nonatomic,weak) UIImageView *cropTitleView;
@@ -293,7 +293,7 @@
     
     
     [self.container addSubview:logoButton];
-    
+    self.logoButton=logoButton;
 }
 
 
@@ -634,13 +634,7 @@
     }
     // Dispose of any resources that can be recreated.
 }
--(UIImage*)getImageOfLayer:(CALayer*) layer{
-    UIGraphicsBeginImageContext(layer.frame.size);
-    [layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
+
 - (void)exportImage:(void (^)(UIImage *, NSString*))callback
 {
     REMBuildingDataViewController *dataViewController=self.childViewControllers[0];
@@ -652,19 +646,37 @@
     CGFloat outputHeightWithoutFooter = dataImageHeight + kBuildingCommodityViewTop + kBuildingTitleHeight;
     CGFloat footerHeight = 98;
     UIImage *footerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WeiboBana" ofType:@"jpg"]];
-    UIGraphicsBeginImageContext(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight));
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight),1,0.7);
     [[UIColor blackColor]set];
     UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
-    [[self getImageOfLayer:self.imageView.layer]drawInRect:self.imageView.frame];
-    [[self getImageOfLayer:self.buildingTitleView.layer]drawInRect:CGRectMake(self.backButton.frame.origin.x, self.backButton.frame.origin.y, self.buildingTitleView.frame.size.width, self.buildingTitleView.frame.size.height)];
+    
+    
+    UIImage *newBgImage=[self getCachedImage:nil];
+    if(newBgImage==nil){
+        newBgImage = REMIMG_DefaultBuilding;
+    }
+    
+    
+    
+    
+    [newBgImage drawInRect:self.imageView.frame];
+    [[REMImageHelper imageWithView:self.logoButton] drawInRect:self.logoButton.frame];
+    [[REMImageHelper imageWithLayer:self.buildingTypeTitleView.layer] drawInRect:self.buildingTypeTitleView.frame];
+    [[REMImageHelper imageWithLayer:self.buildingTitleView.layer] drawInRect:self.buildingTitleView.frame];
     //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
-    [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
+    
+    [[REMImageHelper imageWithLayer:self.bottomGradientLayer] drawInRect:self.bottomGradientLayer.frame];
+    
     [dataImage drawInRect:CGRectMake(0, kBuildingCommodityViewTop + kBuildingTitleHeight, outputWidth, dataImageHeight)];
     
     [footerImage drawInRect:CGRectMake(0, outputHeightWithoutFooter, 800, footerHeight)];
-    [[self getImageOfLayer:self.titleGradientLayer]drawInRect:self.titleGradientLayer.frame];
+    [[REMImageHelper imageWithLayer:self.titleGradientLayer] drawInRect:self.titleGradientLayer.frame];
     UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
+    
+    
+    //UIImage *compressedImage=[UIImage imageWithData:UIImagePNGRepresentation(img)];
     
     //        NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     //        NSString* myDocPath = myPaths[0];

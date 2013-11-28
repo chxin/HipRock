@@ -161,8 +161,7 @@ const static CGFloat buildingGap=20;
 
 - (void)initDefaultImageView
 {
-    NSString* defaultBuildingName = [[NSBundle mainBundle]pathForResource:@"DefaultBuilding" ofType:@"png"];
-    self.defaultImage = [UIImage imageWithContentsOfFile:defaultBuildingName];
+    self.defaultImage = REMIMG_DefaultBuilding;
     UIImage *view = [REMImageHelper blurImage:self.defaultImage];
     self.defaultBlurImage=view;
     
@@ -556,26 +555,8 @@ const static CGFloat buildingGap=20;
     [self performSegueWithIdentifier:segueIdentifier sender:self];
 }
 
--(void)shareViaWeibo
-{
-    REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:[UIApplication sharedApplication].keyWindow];
-    
-    [masker showMask];
-    
-    [self performSelector:@selector(executeExport:) withObject:masker afterDelay:0.1];
-}
 
--(void)executeWeiboExport:(REMMaskManager *)masker{
-    
-    [self exportImage:^(UIImage *image, NSString* text){
-        [masker hideMask];
-        
-        REMBuildingWeiboView* weiboView = [[REMBuildingWeiboView alloc]initWithSuperView:self.view text:text image:image];
 
-        [weiboView show:YES];
-
-    }];
-}
 
 - (void)exportImage:(void (^)(UIImage *, NSString*))callback
 {
@@ -595,13 +576,6 @@ const static CGFloat buildingGap=20;
  }
  */
 
--(UIImage*)getImageOfLayer:(CALayer*) layer{
-    UIGraphicsBeginImageContext(layer.frame.size);
-    [layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
 
 
 #pragma mark - IOS7 style
