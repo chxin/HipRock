@@ -335,7 +335,7 @@ const static CGFloat widgetGap=20;
                     
                 }completion:^(BOOL finished){
                     [self.stopTimer invalidate];
-                    NSTimer *timer = [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(stopCoverPage:) userInfo:@{@"direction":@(sign)} repeats:NO];
+                    NSTimer *timer = [NSTimer timerWithTimeInterval:0.3 target:self selector:@selector(stopCoverPage:) userInfo:@{@"direction":@(sign)} repeats:NO];
                     NSRunLoop *current=[NSRunLoop currentRunLoop];
                     [current addTimer:timer forMode:NSDefaultRunLoopMode];
                     self.stopTimer = timer;
