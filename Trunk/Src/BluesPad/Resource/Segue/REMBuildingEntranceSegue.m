@@ -22,8 +22,8 @@
 
 @implementation REMBuildingEntranceSegue
 
-#define kSequeTime 0.3f
-#define kFirstSugueTime 0.6f
+#define kSequeTime 0.4f
+#define kFirstSugueTime kSequeTime
 
 
 
@@ -71,7 +71,7 @@
     
     [sourceView addSubview:transitionView];
     
-    [UIView animateWithDuration:self.segueTime delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:self.segueTime delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         transitionView.transform = CGAffineTransformMakeScale(1.0, 1.0);
         transitionView.center = [REMViewHelper getCenterOfRect:self.parameter.finalZoomFrame];
     } completion:^(BOOL finished){
@@ -100,7 +100,7 @@
     
     CGRect initialZoomRect = [((id)buildingController.fromController) getDestinationZoomRect:buildingController.currentBuildingIndex];
     
-    [UIView animateWithDuration:self.segueTime delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:self.segueTime delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         transitionView.transform = [REMViewHelper getScaleTransformFromOriginalFrame:initialZoomRect andFinalFrame:self.parameter.finalZoomFrame];
         transitionView.center = [REMViewHelper getCenterOfRect:initialZoomRect];
     } completion:^(BOOL finished){

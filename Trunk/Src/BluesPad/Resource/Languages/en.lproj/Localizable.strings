@@ -83,7 +83,9 @@
 "Setting_CurrentCustomer"="当前客户";
 "Setting_CustomerInfo"="客户信息";
 "Setting_Logout"="退出登录";
+
 //Map, prefix: Map_
+"Map_MarkerBubbleSubtitleFormat"="本月用电量：%d%@";
 
 
 //Gallery, prefix: Gallery_

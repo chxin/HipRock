@@ -23,11 +23,12 @@
 #define kDMMap_BubbleHeight kDMMap_BubbleBodyHeight + kDMMap_BubbleArrowHeight
 #define kDMMap_BubbleBottomOffsetToMarker 6
 
-#define kDMMap_BubbleContentTopOffset 6
+#define kDMMap_BubbleContentTopOffsetWithSubTitle 6
+#define kDMMap_BubbleContentTopOffsetWithoutSubTitle 14
 #define kDMMap_BubbleContentLeftOffset 27
 #define kDMMap_BubbleContentMainTitleFontSize 17
 #define kDMMap_BubbleContentSubTitleFontSize 11
-#define kDMMap_BubbleContentSubTitleTopOffset kDMMap_BubbleContentTopOffset + kDMMap_BubbleContentMainTitleFontSize + 4
+#define kDMMap_BubbleContentSubTitleTopOffset kDMMap_BubbleContentTopOffsetWithSubTitle + kDMMap_BubbleContentMainTitleFontSize + 4
 
 
 

@@ -246,25 +246,29 @@
     self.carouselController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginCarousel"];
     self.carouselController.showAnimation = isAnimated;
     UIView *carouselView = self.carouselController.view;
+    carouselView.frame = self.view.bounds;
     
     [self addChildViewController:self.carouselController];
     [self.view addSubview:carouselView];
     
     self.carouselController.splashScreenController = self;
     
-    carouselView.frame = CGRectMake(self.view.bounds.origin.x-1024, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
+    [self.carouselController playCarousel:isAnimated];
     
-    if(isAnimated==YES)
-    {
-        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-            carouselView.frame = self.view.bounds;
-        } completion:^(BOOL finished) {
-            [self.carouselController playCarousel];
-        }];
-    }
-    else{
-        carouselView.frame = self.view.bounds;
-    }
+//carouselView.frame = CGRectMake(self.view.bounds.origin.x-1024, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
+//    carouselView.frame = self.view.bounds;
+//    
+//    if(isAnimated==YES)
+//    {
+//        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+//            carouselView.frame = self.view.bounds;
+//        } completion:^(BOOL finished) {
+//            [self.carouselController playCarousel];
+//        }];
+//    }
+//    else{
+//        carouselView.frame = self.view.bounds;
+//    }
 }
 
 - (void)showMapView:(void (^)(void))loadCompleted

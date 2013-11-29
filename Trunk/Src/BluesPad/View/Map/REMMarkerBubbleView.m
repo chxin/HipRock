@@ -19,6 +19,9 @@
 
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 
+@property (nonatomic,weak) UILabel *titleLabel;
+@property (nonatomic,weak) UILabel *subTitleLabel;
+
 @end
 
 @implementation REMMarkerBubbleView
@@ -47,8 +50,13 @@
         [self addSubview:bubbleArrow];
         
         //render label
-        [self addSubview:[self getMainTitleLabel]];
-        [self addSubview:[self getSubTitleLabel]];
+        UILabel *subTitleLabel = [self getSubTitleLabel];
+        [self addSubview:subTitleLabel];
+        self.subTitleLabel = subTitleLabel;
+        
+        UILabel *mainTitleLabel = [self getMainTitleLabel];
+        [self addSubview:mainTitleLabel];
+        self.titleLabel = mainTitleLabel;
     }
     
     self.backgroundColor = [UIColor clearColor];
@@ -72,7 +80,9 @@
     UIFont *font = [UIFont systemFontOfSize:kDMMap_BubbleContentMainTitleFontSize];
     CGSize size = [mainTitleText sizeWithFont:font];
     
-    UILabel *label =  [[UILabel alloc] initWithFrame:CGRectMake(kDMMap_BubbleContentLeftOffset,kDMMap_BubbleContentTopOffset,size.width,size.height)];
+    CGFloat top = self.subTitleLabel == nil ? kDMMap_BubbleContentTopOffsetWithoutSubTitle : kDMMap_BubbleContentTopOffsetWithSubTitle;
+    
+    UILabel *label =  [[UILabel alloc] initWithFrame:CGRectMake(kDMMap_BubbleContentLeftOffset,top,size.width,size.height)];
     label.text = self.buildingInfo.building.name;
     label.textColor = [UIColor blackColor];
     label.font = font;
@@ -84,11 +94,15 @@
 -(UILabel *)getSubTitleLabel
 {
     NSString *subTitleText = [self getSubTitleText:self.buildingInfo];
+    
+    if(subTitleText == nil)
+        return nil;
+    
     UIFont *font = [UIFont systemFontOfSize:kDMMap_BubbleContentSubTitleFontSize];
     CGSize size = [subTitleText sizeWithFont:font];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kDMMap_BubbleContentLeftOffset,kDMMap_BubbleContentSubTitleTopOffset, size.width, size.height)];
-    label.text = @"Hello kitty";
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kDMMap_BubbleContentLeftOffset,kDMMap_BubbleContentSubTitleTopOffset , size.width, size.height)];
+    label.text = subTitleText;
     label.font = font;
     label.textColor = [UIColor blackColor];
     label.backgroundColor = [UIColor clearColor];
@@ -119,22 +133,27 @@
 
 -(NSString *)getSubTitleText:(REMBuildingOverallModel *)buildingInfo
 {
-    REMCommodityUsageModel *usage = nil;
-    REMCommodityModel *commodity = nil;
+    NSNumber *dataValue = buildingInfo.electricityUsageThisMonth.commodityUsage.dataValue;
+    NSString *uom = buildingInfo.electricityUsageThisMonth.commodityUsage.uom.code;
     
-    for(int i=0; i<buildingInfo.commodityArray.count; i++){
-        commodity = buildingInfo.commodityArray[i];
-        usage = buildingInfo.commodityUsage[i];
-        
-        if([commodity.commodityId intValue] == REMCommodityElectricity){
-            break;
-        }
-    }
+    return REMIsNilOrNull(dataValue) ? nil : [NSString stringWithFormat:REMLocalizedString(@"Map_MarkerBubbleSubtitleFormat"),  [dataValue intValue], uom];
+//    REMCommodityUsageModel *usage = nil;
+//    REMCommodityModel *commodity = nil;
+//    
+//    for(int i=0; i<buildingInfo.commodityArray.count; i++){
+//        commodity = buildingInfo.commodityArray[i];
+//        usage = buildingInfo.commodityUsage[i];
+//        
+//        if([commodity.commodityId intValue] == REMCommodityElectricity){
+//            break;
+//        }
+//    }
+//    
+//    if(usage == nil || commodity == nil || usage.commodityUsage == nil)
+//        return nil;
+//    
+//    return [NSString stringWithFormat:@"本月用电量：%f%@", [usage.commodityUsage.dataValue floatValue], usage.commodityUsage.uom.code];
     
-    if(usage == nil || commodity == nil || usage.commodityUsage == nil)
-        return nil;
-    
-    return [NSString stringWithFormat:@"本月用电量：%f%@", [usage.commodityUsage.dataValue floatValue], usage.commodityUsage.uom.code];
 }
 
 
