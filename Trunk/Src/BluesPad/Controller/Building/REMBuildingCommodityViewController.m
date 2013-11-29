@@ -195,7 +195,7 @@
     totalLabel.uomFontSize=kBuildingCommodityTotalUomFontSize;
     totalLabel.emptyText=NSLocalizedString(@"BuildingChart_NoData", @"");//@"请持续关注能耗变化";
     totalLabel.emptyTextFontSize=29;
-    totalLabel.emptyTextFont=@(kBuildingFontSC);
+    totalLabel.emptyTextFont=@(kBuildingFontSCRegular);
     totalLabel.emptyTextMargin=28;
     [totalLabel showTitle];
     [self.view addSubview:totalLabel];

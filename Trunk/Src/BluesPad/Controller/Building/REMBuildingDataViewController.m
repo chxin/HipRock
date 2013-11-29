@@ -283,12 +283,18 @@
     CGRect frame = CGRectMake(0, scroll.contentSize.height-17- REMDMCOMPATIOS7(10), 500, 17);
     
     UILabel *label =[[UILabel alloc]initWithFrame:frame];
-    
+    //label.layer.borderColor=[UIColor redColor].CGColor;
+    //label.layer.borderWidth=1;
+    label.textAlignment=NSTextAlignmentLeft;
     label.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:frame.size.height];
     
     label.text=NSLocalizedString(@"Building_PullUpMoreInfo", @"");//  @"￼上拉查看更多能耗信息";
+    //label.text=@"asd上拉查看更多能耗信息";
+    //label.adjustsLetterSpacingToFitWidth=YES;
+    //label.lineBreakMode=NSLineBreakByTruncatingTail;
     
-    
+    //label.autoresizingMask = UIViewAutoresizingNone;
+    //[label sizeToFit];
     
     label.textColor=[UIColor whiteColor];
     label.backgroundColor=[UIColor clearColor];

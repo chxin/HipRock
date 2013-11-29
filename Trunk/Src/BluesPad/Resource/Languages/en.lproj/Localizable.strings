@@ -94,7 +94,7 @@
 "Setting_BindWeibo"="绑定新浪微博";
 "Setting_UserName"="显示名称";
 "Setting_EMOPID"="能源管理平台ID";
-"Setting_CurrentCustomer"="当前用户";
+"Setting_CurrentCustomer"="当前客户";
 "Setting_CustomerInfo"="客户信息";
 "Setting_Logout"="退出登录";
 
@@ -109,7 +109,7 @@
 "BuildingChart_NoData"="暂无数据，请持续关注能耗变化";
 "BuildingChart_DataError"="数据错误，请联系管理员。";
 "Building_LabelNoData"="无数据";
-"Building_PullUpMoreInfo"="￼上拉查看更多能耗信息";
+"Building_PullUpMoreInfo"="上拉查看更多能耗信息";
 "Building_ReleaseSwitchView"="松开以显示";
 "Building_Target"="目标值";
 "Building_ThisMonthEnergyUsage"="本月用%@总量"; //本月用电总量，本月用水总量等

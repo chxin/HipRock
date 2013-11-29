@@ -38,13 +38,13 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     self.navigationController.navigationBar.topItem.backBarButtonItem=nil;
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     //self.navigationController=(UINavigationController *)self.parentViewController;
-    
     
 }
 

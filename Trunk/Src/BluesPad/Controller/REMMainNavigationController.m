@@ -12,7 +12,7 @@
 #import "REMBuildingEntranceSegue.h"
 #import "REMStoryboardDefinitions.h"
 #import "REMMapGallerySegue.h"
-
+#import "REMColor.h"
 @interface REMMainNavigationController ()
 
 @end
@@ -32,6 +32,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    if (REMISIOS7 == YES) {
+        [[UIBarButtonItem appearance] setTintColor:[REMColor colorByHexString:@"#37ab3c"]];
+        [[UINavigationBar appearance] setTintColor:[REMColor colorByHexString:@"#37ab3c"]];
+    }
 }
 
 - (void)didReceiveMemoryWarning
