@@ -10,4 +10,6 @@
 
 @interface REMInsetsTextField : UITextField
 
+-(id)initWithFrame:(CGRect)frame andInsets:(UIEdgeInsets)insets;
+
 @end

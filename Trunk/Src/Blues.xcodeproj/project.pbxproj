@@ -115,10 +115,6 @@
 		6A61A7681839B82000C6A228 /* Nodata@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6CF1839B82000C6A228 /* Nodata@2x.png */; };
 		6A61A7691839B82000C6A228 /* Up.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6D01839B82000C6A228 /* Up.png */; };
 		6A61A76A1839B82000C6A228 /* Up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6D11839B82000C6A228 /* Up@2x.png */; };
-		6A61A76B1839B82000C6A228 /* JumpLogin-Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6D31839B82000C6A228 /* JumpLogin-Normal.png */; };
-		6A61A76C1839B82000C6A228 /* JumpLogin-Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6D41839B82000C6A228 /* JumpLogin-Normal@2x.png */; };
-		6A61A76D1839B82000C6A228 /* JumpLogin-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6D51839B82000C6A228 /* JumpLogin-Pressed.png */; };
-		6A61A76E1839B82000C6A228 /* JumpLogin-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6D61839B82000C6A228 /* JumpLogin-Pressed@2x.png */; };
 		6A61A76F1839B82000C6A228 /* Login-Disable.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6D71839B82000C6A228 /* Login-Disable.png */; };
 		6A61A7701839B82000C6A228 /* Login-Disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6D81839B82000C6A228 /* Login-Disable@2x.png */; };
 		6A61A7711839B82000C6A228 /* Login-Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6D91839B82000C6A228 /* Login-Normal.png */; };
@@ -206,7 +202,7 @@
 		6AB1F2A617B8AC910065C1EB /* REMTargetEnergyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C5B17AA489600413D3C /* REMTargetEnergyData.m */; };
 		6AB1F2A817B8AC910065C1EB /* REMSplashScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C8417AA497C00413D3C /* REMSplashScreenController.m */; };
 		6AB1F2AA17B8AC910065C1EB /* REMLoginCarouselController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C7717AA497B00413D3C /* REMLoginCarouselController.m */; };
-		6AB1F2AC17B8AC910065C1EB /* REMLoginPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C7D17AA497B00413D3C /* REMLoginPageController.m */; };
+		6AB1F2AC17B8AC910065C1EB /* REMLoginCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C7D17AA497B00413D3C /* REMLoginCardController.m */; };
 		6AB1F2AE17B8AC910065C1EB /* REMBuildingAverageChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854D17B4BB5D004D7167 /* REMBuildingAverageChartViewController.m */; };
 		6AB1F2B017B8AC910065C1EB /* REMBuildingChartBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854F17B4BB5D004D7167 /* REMBuildingChartBaseViewController.m */; };
 		6AB1F2B217B8AC910065C1EB /* REMBuildingTrendChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A855117B4BB5D004D7167 /* REMBuildingTrendChartViewController.m */; };
@@ -376,7 +372,7 @@
 		7A153C6617AA489600413D3C /* REMTargetEnergyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C5B17AA489600413D3C /* REMTargetEnergyData.m */; };
 		7A153C9E17AA497C00413D3C /* REMBuildingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C6917AA497B00413D3C /* REMBuildingViewController.m */; };
 		7A153CA417AA497C00413D3C /* REMLoginCarouselController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C7717AA497B00413D3C /* REMLoginCarouselController.m */; };
-		7A153CA717AA497C00413D3C /* REMLoginPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C7D17AA497B00413D3C /* REMLoginPageController.m */; };
+		7A153CA717AA497C00413D3C /* REMLoginCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C7D17AA497B00413D3C /* REMLoginCardController.m */; };
 		7A153CAA17AA497C00413D3C /* REMSplashScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C8417AA497C00413D3C /* REMSplashScreenController.m */; };
 		7A153CB417AA497C00413D3C /* REMWidgetMaxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153C9917AA497C00413D3C /* REMWidgetMaxViewController.m */; };
 		7A153CBB17AA49EA00413D3C /* REMTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CBA17AA49EA00413D3C /* REMTimeRange.m */; };
@@ -424,7 +420,7 @@
 		7A399E9D177D238F00F0EB9F /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E93177D238F00F0EB9F /* AFXMLRequestOperation.m */; };
 		7A399E9E177D238F00F0EB9F /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E95177D238F00F0EB9F /* UIImageView+AFNetworking.m */; };
 		7A399EA4177D279900F0EB9F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A399EA2177D279900F0EB9F /* InfoPlist.strings */; };
-		7A3C64FE184234CE003EDC7B /* REMLoginTrialCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C64FD184234CE003EDC7B /* REMLoginTrialCardController.m */; };
+		7A3C64FE184234CE003EDC7B /* REMTrialCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C64FD184234CE003EDC7B /* REMTrialCardController.m */; };
 		7A3CB75E1806385300B94DEE /* REMError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42117D877C3003B18E1 /* REMError.m */; };
 		7A3CB75F1806385300B94DEE /* REMBusinessErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */; };
 		7A3CB7601806385300B94DEE /* REMAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */; };
@@ -434,8 +430,15 @@
 		7A3CB764180638A700B94DEE /* REMNetworkStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */; };
 		7A3DDCDA1786C05B008A1033 /* REMServiceAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */; };
 		7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDC1786C195008A1033 /* REMMaskManager.m */; };
+		7A3E02AA184889A7006295B3 /* REMLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3E02A9184889A7006295B3 /* REMLoginButton.m */; };
 		7A44E04518238D5E0080CEBE /* REMBuildingShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A44E04418238D5E0080CEBE /* REMBuildingShareViewController.m */; };
 		7A44E047182398B60080CEBE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A44E046182398B60080CEBE /* MessageUI.framework */; };
+		7A47F3A018482C1B007EE37B /* JumpLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39818482C1B007EE37B /* JumpLogin.png */; };
+		7A47F3A118482C1B007EE37B /* JumpLogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39918482C1B007EE37B /* JumpLogin@2x.png */; };
+		7A47F3A218482C1B007EE37B /* JumpTrial-Disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39A18482C1B007EE37B /* JumpTrial-Disabled.png */; };
+		7A47F3A318482C1B007EE37B /* JumpTrial-Disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39B18482C1B007EE37B /* JumpTrial-Disabled@2x.png */; };
+		7A47F3A418482C1B007EE37B /* JumpTrial.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39C18482C1B007EE37B /* JumpTrial.png */; };
+		7A47F3A518482C1B007EE37B /* JumpTrial@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39D18482C1B007EE37B /* JumpTrial@2x.png */; };
 		7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A48B47D17CDE321002DA386 /* REMInsetsTextField.m */; };
 		7A5277F617AF4209007DA735 /* REMIndicatorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5277F517AF4209007DA735 /* REMIndicatorButton.m */; };
 		7A58F24A1839A5650071DE7A /* mail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2411839A5650071DE7A /* mail.jpg */; };
@@ -499,13 +502,16 @@
 		7AB9B39E183DCF1100779C5E /* REMTrendChartTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B395183DCF1100779C5E /* REMTrendChartTooltipView.m */; };
 		7AB9B3A1183DF20B00779C5E /* REMRankingTooltipItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B3A0183DF20B00779C5E /* REMRankingTooltipItem.m */; };
 		7AB9B3A4183DF8FF00779C5E /* REMTextIndicatorFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B3A3183DF8FF00779C5E /* REMTextIndicatorFormator.m */; };
+		7ABFDDEF18482F7B004DD4E7 /* Default@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDED18482F7B004DD4E7 /* Default@2x~ipad.png */; };
+		7ABFDDF018482F7B004DD4E7 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDEE18482F7B004DD4E7 /* Default~ipad.png */; };
+		7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */; };
+		7ABFDDF418483119004DD4E7 /* JumpLogin-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */; };
+		7ABFDDF81848373C004DD4E7 /* REMLoginTitledCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF71848373C004DD4E7 /* REMLoginTitledCard.m */; };
 		7AC54999181776910037F180 /* REMDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC54998181776910037F180 /* REMDashboardController.m */; };
 		7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
 		7AD0AB8B183CF52000525C82 /* REMTimeSliceLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD0AB8A183CF52000525C82 /* REMTimeSliceLegendFormator.m */; };
 		7AD8CE051847086000D815C6 /* Startup_iOS7.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD8CE011847086000D815C6 /* Startup_iOS7.png */; };
 		7AD8CE061847086000D815C6 /* Startup_iOS7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD8CE021847086000D815C6 /* Startup_iOS7@2x.png */; };
-		7AD8CE09184708CA00D815C6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD8CE07184708CA00D815C6 /* Default.png */; };
-		7AD8CE0A184708CA00D815C6 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD8CE08184708CA00D815C6 /* Default~ipad.png */; };
 		7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */; };
 		7AF3667817CF2D7400447650 /* REMBuildingChartSeriesIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */; };
 		7AF6AC8117D1BA0D00D62A9A /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
@@ -815,10 +821,6 @@
 		6A61A6CF1839B82000C6A228 /* Nodata@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nodata@2x.png"; sourceTree = "<group>"; };
 		6A61A6D01839B82000C6A228 /* Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Up.png; sourceTree = "<group>"; };
 		6A61A6D11839B82000C6A228 /* Up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Up@2x.png"; sourceTree = "<group>"; };
-		6A61A6D31839B82000C6A228 /* JumpLogin-Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Normal.png"; sourceTree = "<group>"; };
-		6A61A6D41839B82000C6A228 /* JumpLogin-Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Normal@2x.png"; sourceTree = "<group>"; };
-		6A61A6D51839B82000C6A228 /* JumpLogin-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed.png"; sourceTree = "<group>"; };
-		6A61A6D61839B82000C6A228 /* JumpLogin-Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed@2x.png"; sourceTree = "<group>"; };
 		6A61A6D71839B82000C6A228 /* Login-Disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Login-Disable.png"; sourceTree = "<group>"; };
 		6A61A6D81839B82000C6A228 /* Login-Disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Login-Disable@2x.png"; sourceTree = "<group>"; };
 		6A61A6D91839B82000C6A228 /* Login-Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Login-Normal.png"; sourceTree = "<group>"; };
@@ -945,8 +947,8 @@
 		7A153C6917AA497B00413D3C /* REMBuildingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingViewController.m; sourceTree = "<group>"; };
 		7A153C7617AA497B00413D3C /* REMLoginCarouselController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginCarouselController.h; sourceTree = "<group>"; };
 		7A153C7717AA497B00413D3C /* REMLoginCarouselController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginCarouselController.m; sourceTree = "<group>"; };
-		7A153C7C17AA497B00413D3C /* REMLoginPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginPageController.h; sourceTree = "<group>"; };
-		7A153C7D17AA497B00413D3C /* REMLoginPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginPageController.m; sourceTree = "<group>"; };
+		7A153C7C17AA497B00413D3C /* REMLoginCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginCardController.h; sourceTree = "<group>"; };
+		7A153C7D17AA497B00413D3C /* REMLoginCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginCardController.m; sourceTree = "<group>"; };
 		7A153C8317AA497C00413D3C /* REMSplashScreenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSplashScreenController.h; sourceTree = "<group>"; };
 		7A153C8417AA497C00413D3C /* REMSplashScreenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSplashScreenController.m; sourceTree = "<group>"; };
 		7A153C9817AA497C00413D3C /* REMWidgetMaxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetMaxViewController.h; sourceTree = "<group>"; };
@@ -1042,15 +1044,23 @@
 		7A399E95177D238F00F0EB9F /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		7A399EA0177D279000F0EB9F /* CommonTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "CommonTests-Info.plist"; path = "../test/CommonTests/CommonTests-Info.plist"; sourceTree = "<group>"; };
 		7A399EA3177D279900F0EB9F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../test/CommonTests/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7A3C64FC184234CE003EDC7B /* REMLoginTrialCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginTrialCardController.h; sourceTree = "<group>"; };
-		7A3C64FD184234CE003EDC7B /* REMLoginTrialCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginTrialCardController.m; sourceTree = "<group>"; };
+		7A3C64FC184234CE003EDC7B /* REMTrialCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMTrialCardController.h; sourceTree = "<group>"; };
+		7A3C64FD184234CE003EDC7B /* REMTrialCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrialCardController.m; sourceTree = "<group>"; };
 		7A3DDCD81786C05B008A1033 /* REMServiceAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceAgent.h; path = Common/Communication/REMServiceAgent.h; sourceTree = "<group>"; };
 		7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceAgent.m; path = Common/Communication/REMServiceAgent.m; sourceTree = "<group>"; };
 		7A3DDCDB1786C195008A1033 /* REMMaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMaskManager.h; path = Common/Utility/REMMaskManager.h; sourceTree = "<group>"; };
 		7A3DDCDC1786C195008A1033 /* REMMaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMaskManager.m; path = Common/Utility/REMMaskManager.m; sourceTree = "<group>"; };
+		7A3E02A8184889A7006295B3 /* REMLoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginButton.h; sourceTree = "<group>"; };
+		7A3E02A9184889A7006295B3 /* REMLoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginButton.m; sourceTree = "<group>"; };
 		7A44E04318238D5E0080CEBE /* REMBuildingShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingShareViewController.h; sourceTree = "<group>"; };
 		7A44E04418238D5E0080CEBE /* REMBuildingShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingShareViewController.m; sourceTree = "<group>"; };
 		7A44E046182398B60080CEBE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
+		7A47F39818482C1B007EE37B /* JumpLogin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JumpLogin.png; sourceTree = "<group>"; };
+		7A47F39918482C1B007EE37B /* JumpLogin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin@2x.png"; sourceTree = "<group>"; };
+		7A47F39A18482C1B007EE37B /* JumpTrial-Disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpTrial-Disabled.png"; sourceTree = "<group>"; };
+		7A47F39B18482C1B007EE37B /* JumpTrial-Disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpTrial-Disabled@2x.png"; sourceTree = "<group>"; };
+		7A47F39C18482C1B007EE37B /* JumpTrial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JumpTrial.png; sourceTree = "<group>"; };
+		7A47F39D18482C1B007EE37B /* JumpTrial@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpTrial@2x.png"; sourceTree = "<group>"; };
 		7A48B47C17CDE321002DA386 /* REMInsetsTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMInsetsTextField.h; sourceTree = "<group>"; };
 		7A48B47D17CDE321002DA386 /* REMInsetsTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMInsetsTextField.m; sourceTree = "<group>"; };
 		7A5277F417AF4209007DA735 /* REMIndicatorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMIndicatorButton.h; sourceTree = "<group>"; };
@@ -1256,6 +1266,12 @@
 		7ABC2E22177BE6210000C060 /* NSCoderExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCoderExtensions.h; sourceTree = "<group>"; };
 		7ABC2E23177BE6210000C060 /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDecimalNumberExtensions.h; sourceTree = "<group>"; };
 		7ABC2E24177BE6210000C060 /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
+		7ABFDDED18482F7B004DD4E7 /* Default@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x~ipad.png"; sourceTree = "<group>"; };
+		7ABFDDEE18482F7B004DD4E7 /* Default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~ipad.png"; sourceTree = "<group>"; };
+		7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed.png"; sourceTree = "<group>"; };
+		7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed@2x.png"; sourceTree = "<group>"; };
+		7ABFDDF61848373C004DD4E7 /* REMLoginTitledCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginTitledCard.h; sourceTree = "<group>"; };
+		7ABFDDF71848373C004DD4E7 /* REMLoginTitledCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginTitledCard.m; sourceTree = "<group>"; };
 		7AC54997181776910037F180 /* REMDashboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMDashboardController.h; sourceTree = "<group>"; };
 		7AC54998181776910037F180 /* REMDashboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMDashboardController.m; sourceTree = "<group>"; };
 		7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceMeta.h; path = Common/Communication/REMServiceMeta.h; sourceTree = "<group>"; };
@@ -1263,8 +1279,6 @@
 		7AD0AB8A183CF52000525C82 /* REMTimeSliceLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeSliceLegendFormator.m; path = Biz/Chart/LegendFormator/REMTimeSliceLegendFormator.m; sourceTree = "<group>"; };
 		7AD8CE011847086000D815C6 /* Startup_iOS7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Startup_iOS7.png; sourceTree = "<group>"; };
 		7AD8CE021847086000D815C6 /* Startup_iOS7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Startup_iOS7@2x.png"; sourceTree = "<group>"; };
-		7AD8CE07184708CA00D815C6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		7AD8CE08184708CA00D815C6 /* Default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~ipad.png"; sourceTree = "<group>"; };
 		7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
 		7AF3667617CF2D7400447650 /* REMBuildingChartSeriesIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartSeriesIndicator.h; sourceTree = "<group>"; };
 		7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingChartSeriesIndicator.m; sourceTree = "<group>"; };
@@ -1781,10 +1795,14 @@
 		6A61A6D21839B82000C6A228 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				6A61A6D31839B82000C6A228 /* JumpLogin-Normal.png */,
-				6A61A6D41839B82000C6A228 /* JumpLogin-Normal@2x.png */,
-				6A61A6D51839B82000C6A228 /* JumpLogin-Pressed.png */,
-				6A61A6D61839B82000C6A228 /* JumpLogin-Pressed@2x.png */,
+				7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */,
+				7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */,
+				7A47F39818482C1B007EE37B /* JumpLogin.png */,
+				7A47F39918482C1B007EE37B /* JumpLogin@2x.png */,
+				7A47F39A18482C1B007EE37B /* JumpTrial-Disabled.png */,
+				7A47F39B18482C1B007EE37B /* JumpTrial-Disabled@2x.png */,
+				7A47F39C18482C1B007EE37B /* JumpTrial.png */,
+				7A47F39D18482C1B007EE37B /* JumpTrial@2x.png */,
 				6A61A6D71839B82000C6A228 /* Login-Disable.png */,
 				6A61A6D81839B82000C6A228 /* Login-Disable@2x.png */,
 				6A61A6D91839B82000C6A228 /* Login-Normal.png */,
@@ -2046,12 +2064,12 @@
 			children = (
 				7A153C7617AA497B00413D3C /* REMLoginCarouselController.h */,
 				7A153C7717AA497B00413D3C /* REMLoginCarouselController.m */,
-				7A153C7C17AA497B00413D3C /* REMLoginPageController.h */,
-				7A153C7D17AA497B00413D3C /* REMLoginPageController.m */,
 				7A2E7EBB17F28E8A000EB506 /* REMLoginCustomerViewController.h */,
 				7A2E7EBC17F28E8A000EB506 /* REMLoginCustomerViewController.m */,
-				7A3C64FC184234CE003EDC7B /* REMLoginTrialCardController.h */,
-				7A3C64FD184234CE003EDC7B /* REMLoginTrialCardController.m */,
+				7A153C7C17AA497B00413D3C /* REMLoginCardController.h */,
+				7A153C7D17AA497B00413D3C /* REMLoginCardController.m */,
+				7A3C64FC184234CE003EDC7B /* REMTrialCardController.h */,
+				7A3C64FD184234CE003EDC7B /* REMTrialCardController.m */,
 			);
 			name = Login;
 			path = Controller/Login;
@@ -2203,12 +2221,15 @@
 		7A37AA6017AB944B00316902 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				7ABFDDF5184836FE004DD4E7 /* Login */,
 				7AB9B382183DCF1100779C5E /* Legend */,
 				7AB9B38B183DCF1100779C5E /* Tooltip */,
 				7A2F76131810C6C8006C19D8 /* REMScreenEdgetGestureRecognizer.h */,
 				7A2F76141810C6C8006C19D8 /* REMScreenEdgetGestureRecognizer.m */,
 				7A37AA6117AB944B00316902 /* REMNumberLabel.h */,
 				7A37AA6217AB944B00316902 /* REMNumberLabel.m */,
+				7A48B47C17CDE321002DA386 /* REMInsetsTextField.h */,
+				7A48B47D17CDE321002DA386 /* REMInsetsTextField.m */,
 				EF97DDD917C20B5700A0374E /* REMToggleButton.h */,
 				EF97DDDA17C20B5700A0374E /* REMToggleButton.m */,
 				7A5277F417AF4209007DA735 /* REMIndicatorButton.h */,
@@ -2217,16 +2238,12 @@
 				EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */,
 				EF9F28AF17CB54DD00E775ED /* REMStatusBar.h */,
 				EF9F28B017CB54DE00E775ED /* REMStatusBar.m */,
-				7A48B47C17CDE321002DA386 /* REMInsetsTextField.h */,
-				7A48B47D17CDE321002DA386 /* REMInsetsTextField.m */,
 				7AF3667617CF2D7400447650 /* REMBuildingChartSeriesIndicator.h */,
 				7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */,
 				EF60822D17D818420093427C /* REMModalView.h */,
 				EF60822E17D818430093427C /* REMModalView.m */,
 				7A0F7C5418279528009E898A /* REMChartSeriesIndicator.h */,
 				7A0F7C5518279528009E898A /* REMChartSeriesIndicator.m */,
-				7A664FD1183B0046004B9FF3 /* REMLoginCard.h */,
-				7A664FD2183B0046004B9FF3 /* REMLoginCard.m */,
 			);
 			name = Controls;
 			path = View/Controls;
@@ -2790,11 +2807,24 @@
 			path = ../lib/CorePlotHeaders;
 			sourceTree = "<group>";
 		};
+		7ABFDDF5184836FE004DD4E7 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7A664FD1183B0046004B9FF3 /* REMLoginCard.h */,
+				7A664FD2183B0046004B9FF3 /* REMLoginCard.m */,
+				7ABFDDF61848373C004DD4E7 /* REMLoginTitledCard.h */,
+				7ABFDDF71848373C004DD4E7 /* REMLoginTitledCard.m */,
+				7A3E02A8184889A7006295B3 /* REMLoginButton.h */,
+				7A3E02A9184889A7006295B3 /* REMLoginButton.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 		7AD8CDFE1847086000D815C6 /* LaunchImages */ = {
 			isa = PBXGroup;
 			children = (
-				7AD8CE07184708CA00D815C6 /* Default.png */,
-				7AD8CE08184708CA00D815C6 /* Default~ipad.png */,
+				7ABFDDED18482F7B004DD4E7 /* Default@2x~ipad.png */,
+				7ABFDDEE18482F7B004DD4E7 /* Default~ipad.png */,
 				7AD8CE011847086000D815C6 /* Startup_iOS7.png */,
 				7AD8CE021847086000D815C6 /* Startup_iOS7@2x.png */,
 			);
@@ -3384,6 +3414,7 @@
 				6A61A7121839B82000C6A228 /* NaturalGas_pressed@2x.png in Resources */,
 				6A61A7311839B82000C6A228 /* Ascend.png in Resources */,
 				6A61A78E1839B82000C6A228 /* UnqualifiedPin_Normal@2x.png in Resources */,
+				7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */,
 				6A61A7761839B82000C6A228 /* LoginTextField-Focus@2x.png in Resources */,
 				6A61A7711839B82000C6A228 /* Login-Normal.png in Resources */,
 				6A61A70F1839B82000C6A228 /* NaturalGas_normal.png in Resources */,
@@ -3391,12 +3422,12 @@
 				6A61A7881839B82000C6A228 /* QualifiedPin_Focus@2x.png in Resources */,
 				6A61A7001839B82000C6A228 /* EMOP_App_7@2x.png in Resources */,
 				7A58F24B1839A5650071DE7A /* Propaganda_1.jpg in Resources */,
-				6A61A76C1839B82000C6A228 /* JumpLogin-Normal@2x.png in Resources */,
 				6A61A7491839B82000C6A228 /* labelLeft7.png in Resources */,
 				6A61A7191839B82000C6A228 /* PM2.5_pressed.png in Resources */,
 				6A61A7291839B82000C6A228 /* share-mail.png in Resources */,
 				6A61A7751839B82000C6A228 /* LoginTextField-Focus.png in Resources */,
 				7A58F24C1839A5650071DE7A /* Propaganda_1@2x.jpg in Resources */,
+				7ABFDDF018482F7B004DD4E7 /* Default~ipad.png in Resources */,
 				6A61A7101839B82000C6A228 /* NaturalGas_normal@2x.png in Resources */,
 				6A61A71B1839B82000C6A228 /* Water_normal.png in Resources */,
 				6A61A7321839B82000C6A228 /* Ascend@2x.png in Resources */,
@@ -3404,9 +3435,9 @@
 				6A61A7921839B82000C6A228 /* SplashScreenLogo-Flash@2x.png in Resources */,
 				6A61A7821839B82000C6A228 /* Map@2x.png in Resources */,
 				7A58F2521839A5650071DE7A /* SplashScreenBackgroud@2x.jpg in Resources */,
+				7A47F3A018482C1B007EE37B /* JumpLogin.png in Resources */,
 				6A61A7611839B82000C6A228 /* TooltipsArrow_PieChart.png in Resources */,
 				6A61A7521839B82000C6A228 /* labelRight3@2x.png in Resources */,
-				7AD8CE09184708CA00D815C6 /* Default.png in Resources */,
 				6A61A7511839B82000C6A228 /* labelRight3.png in Resources */,
 				6A61A7681839B82000C6A228 /* Nodata@2x.png in Resources */,
 				6A61A76A1839B82000C6A228 /* Up@2x.png in Resources */,
@@ -3417,7 +3448,6 @@
 				6A61A74F1839B82000C6A228 /* labelRight2.png in Resources */,
 				6A61A7661839B82000C6A228 /* Down@2x.png in Resources */,
 				6A61A70B1839B82000C6A228 /* Electricity_normal.png in Resources */,
-				6A61A76D1839B82000C6A228 /* JumpLogin-Pressed.png in Resources */,
 				6A61A7651839B82000C6A228 /* Down.png in Resources */,
 				6A61A70E1839B82000C6A228 /* Electricity_pressed@2x.png in Resources */,
 				6A61A7581839B82000C6A228 /* labelRight6@2x.png in Resources */,
@@ -3437,9 +3467,11 @@
 				6A61A7791839B82000C6A228 /* SlidePageBackground.png in Resources */,
 				6A61A7011839B82000C6A228 /* EMOP_Setting.png in Resources */,
 				6A61A7541839B82000C6A228 /* labelRight4@2x.png in Resources */,
+				7A47F3A218482C1B007EE37B /* JumpTrial-Disabled.png in Resources */,
 				7A58F24F1839A5650071DE7A /* Propaganda_3.jpg in Resources */,
 				6A61A7271839B82000C6A228 /* OverTarget.png in Resources */,
 				6A61A7741839B82000C6A228 /* Login-Pressed@2x.png in Resources */,
+				7ABFDDF418483119004DD4E7 /* JumpLogin-Pressed@2x.png in Resources */,
 				6A61A75A1839B82000C6A228 /* labelRight7@2x.png in Resources */,
 				6A61A7731839B82000C6A228 /* Login-Pressed.png in Resources */,
 				6A61A7471839B82000C6A228 /* labelLeft6.png in Resources */,
@@ -3451,7 +3483,6 @@
 				6A61A7041839B82000C6A228 /* EMOP_Spotlight_6@2x.png in Resources */,
 				6A61A7461839B82000C6A228 /* labelLeft5@2x.png in Resources */,
 				7A58F2511839A5650071DE7A /* SplashScreenBackgroud.jpg in Resources */,
-				7AD8CE0A184708CA00D815C6 /* Default~ipad.png in Resources */,
 				6A61A7401839B82000C6A228 /* labelLeft2@2x.png in Resources */,
 				6A61A78C1839B82000C6A228 /* UnqualifiedPin_Focus@2x.png in Resources */,
 				6A61A7691839B82000C6A228 /* Up.png in Resources */,
@@ -3459,6 +3490,7 @@
 				6A61A7811839B82000C6A228 /* Map.png in Resources */,
 				6A61A74C1839B82000C6A228 /* labelLeft8@2x.png in Resources */,
 				6A61A6FD1839B82000C6A228 /* EMOP_App_6.png in Resources */,
+				7A47F3A318482C1B007EE37B /* JumpTrial-Disabled@2x.png in Resources */,
 				6A61A71C1839B82000C6A228 /* Water_normal@2x.png in Resources */,
 				6A61A7621839B82000C6A228 /* TooltipsArrow_PieChart@2x.png in Resources */,
 				B4E8685418443B63007205F6 /* Share_normal.png in Resources */,
@@ -3487,7 +3519,6 @@
 				6A61A77E1839B82000C6A228 /* CommonPin_Normal@2x.png in Resources */,
 				6A61A6FE1839B82000C6A228 /* EMOP_App_6@2x.png in Resources */,
 				6A61A7371839B82000C6A228 /* DatePicker_Chart.png in Resources */,
-				6A61A76E1839B82000C6A228 /* JumpLogin-Pressed@2x.png in Resources */,
 				6A61A7341839B82000C6A228 /* Back_Chart@2x.png in Resources */,
 				7A664FDA183B3369004B9FF3 /* MapPopover_Rectangle.png in Resources */,
 				6A61A72B1839B82000C6A228 /* share-weibo.png in Resources */,
@@ -3497,10 +3528,10 @@
 				6A61A75C1839B82000C6A228 /* labelRight8@2x.png in Resources */,
 				7A13C19B17F40D31007E6AA9 /* GoogleMaps.bundle in Resources */,
 				6A61A77A1839B82000C6A228 /* SlidePageBackground@2x.png in Resources */,
-				6A61A76B1839B82000C6A228 /* JumpLogin-Normal.png in Resources */,
 				6A61A7801839B82000C6A228 /* Gallery@2x.png in Resources */,
 				6A61A78B1839B82000C6A228 /* UnqualifiedPin_Focus.png in Resources */,
 				6A61A7351839B82000C6A228 /* Close_Chart.png in Resources */,
+				7A47F3A118482C1B007EE37B /* JumpLogin@2x.png in Resources */,
 				6A61A7141839B82000C6A228 /* Oil_normal@2x.png in Resources */,
 				6A61A7331839B82000C6A228 /* Back_Chart.png in Resources */,
 				6A61A7221839B82000C6A228 /* DefaultBuilding@2x.png in Resources */,
@@ -3519,6 +3550,8 @@
 				6A61A7281839B82000C6A228 /* OverTarget@2x.png in Resources */,
 				6A61A7261839B82000C6A228 /* NotOverTarget@2x.png in Resources */,
 				B4E8685518443B63007205F6 /* Share_normal@2x.png in Resources */,
+				7ABFDDEF18482F7B004DD4E7 /* Default@2x~ipad.png in Resources */,
+				7A47F3A518482C1B007EE37B /* JumpTrial@2x.png in Resources */,
 				6A61A7151839B82000C6A228 /* Oil_pressed.png in Resources */,
 				6A61A73C1839B82000C6A228 /* Descend@2x.png in Resources */,
 				6A61A7211839B82000C6A228 /* DefaultBuilding.png in Resources */,
@@ -3530,6 +3563,7 @@
 				6A61A75E1839B82000C6A228 /* Legend_Chart@2x.png in Resources */,
 				6A61A71E1839B82000C6A228 /* Water_pressed@2x.png in Resources */,
 				6A61A7231839B82000C6A228 /* Menu_normal.png in Resources */,
+				7A47F3A418482C1B007EE37B /* JumpTrial.png in Resources */,
 				6A61A7441839B82000C6A228 /* labelLeft4@2x.png in Resources */,
 				6A61A7091839B82000C6A228 /* Coal_pressed.png in Resources */,
 				6A61A7431839B82000C6A228 /* labelLeft4.png in Resources */,
@@ -3646,6 +3680,7 @@
 				7A25725717F911AD0007438F /* REMGalleryViewController.m in Sources */,
 				7A399E9C177D238F00F0EB9F /* AFURLConnectionOperation.m in Sources */,
 				7A399E9D177D238F00F0EB9F /* AFXMLRequestOperation.m in Sources */,
+				7ABFDDF81848373C004DD4E7 /* REMLoginTitledCard.m in Sources */,
 				7AB34E51177D2CE1003E235E /* REMServiceRequestOperation.m in Sources */,
 				B42FBF6417F574B5004F2F3A /* REMEnum.m in Sources */,
 				B49B6F511781491800BC130A /* REMColor.m in Sources */,
@@ -3726,7 +3761,7 @@
 				EF8A47FC17F959B5009B5C33 /* REMTrendChartDataProcessor.m in Sources */,
 				7A153CA417AA497C00413D3C /* REMLoginCarouselController.m in Sources */,
 				EFD947061839DCBB00E9EC50 /* _DCHGridlineLayer.m in Sources */,
-				7A153CA717AA497C00413D3C /* REMLoginPageController.m in Sources */,
+				7A153CA717AA497C00413D3C /* REMLoginCardController.m in Sources */,
 				7A153CAA17AA497C00413D3C /* REMSplashScreenController.m in Sources */,
 				7AB9B3A4183DF8FF00779C5E /* REMTextIndicatorFormator.m in Sources */,
 				B4DC084017F90E2C005658C1 /* REMAdministratorModel.m in Sources */,
@@ -3740,7 +3775,7 @@
 				EFD947111839DEE100E9EC50 /* DCColumnWrapper.m in Sources */,
 				7A153CC117AA4A5100413D3C /* REMBuildingOverallModel.m in Sources */,
 				7A2E7ECC17F2DD41000EB506 /* REMBuildingTitleView.m in Sources */,
-				7A3C64FE184234CE003EDC7B /* REMLoginTrialCardController.m in Sources */,
+				7A3C64FE184234CE003EDC7B /* REMTrialCardController.m in Sources */,
 				7A153CC417AA4B0D00413D3C /* REMCommodityUsageModel.m in Sources */,
 				B46C8EBD17F27C84006DC4CB /* REMDashboardCellViewCell.m in Sources */,
 				7A5AC77F1817CBEF006C7CB1 /* REMBuildingEntranceSegue.m in Sources */,
@@ -3825,6 +3860,7 @@
 				7AB9B399183DCF1100779C5E /* REMStackChartLegendView.m in Sources */,
 				B46C8EBA17F27C25006DC4CB /* REMDashboardView.m in Sources */,
 				EF03DC231841E462004B9EFD /* DCPieChartView.m in Sources */,
+				7A3E02AA184889A7006295B3 /* REMLoginButton.m in Sources */,
 				7A0288FD17C20CC500709111 /* WeiboDialogClosePNG.m in Sources */,
 				7A0288FE17C20CC500709111 /* WeiboDialog.m in Sources */,
 				7A44E04518238D5E0080CEBE /* REMBuildingShareViewController.m in Sources */,
@@ -3956,7 +3992,7 @@
 				6AB1F2A617B8AC910065C1EB /* REMTargetEnergyData.m in Sources */,
 				6AB1F2A817B8AC910065C1EB /* REMSplashScreenController.m in Sources */,
 				6AB1F2AA17B8AC910065C1EB /* REMLoginCarouselController.m in Sources */,
-				6AB1F2AC17B8AC910065C1EB /* REMLoginPageController.m in Sources */,
+				6AB1F2AC17B8AC910065C1EB /* REMLoginCardController.m in Sources */,
 				6AB1F2AE17B8AC910065C1EB /* REMBuildingAverageChartViewController.m in Sources */,
 				6AB1F2B017B8AC910065C1EB /* REMBuildingChartBaseViewController.m in Sources */,
 				6AB1F2B217B8AC910065C1EB /* REMBuildingTrendChartViewController.m in Sources */,

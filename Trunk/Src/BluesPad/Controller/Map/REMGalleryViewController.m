@@ -97,7 +97,7 @@
     tableView.delegate = self;
     tableView.backgroundColor = [UIColor clearColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
+//    [tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
 //    tableView.layer.borderColor = [UIColor blueColor].CGColor;
 //    tableView.layer.borderWidth = 1.0;
     
@@ -169,7 +169,14 @@
     REMGalleryCollectionViewController *collectionController = [[REMGalleryCollectionViewController alloc] initWithKey:key andBuildingInfoArray:array];
     [self addChildViewController:collectionController];
     
-    REMGalleryGroupView *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier_GalleryGroupCell forIndexPath:indexPath];
+    //REMGalleryGroupView *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier_GalleryGroupCell forIndexPath:indexPath];
+    CGFloat y = tableView.frame.origin.y;
+    for(int i=0; i<indexPath.row-1; i++){
+        y += [self getGalleryGroupCellFrame:[self.buildingGroups[[self.buildingGroups allKeys][indexPath.row]] count]].size.height;
+    }
+    
+    CGRect cellFrame = CGRectMake(tableView.frame.origin.x, y, tableView.frame.size.width, [self getGalleryGroupCellFrame:array.count].size.height);
+    REMGalleryGroupView *cell = [[REMGalleryGroupView alloc] initWithFrame:cellFrame];
     
     [cell setGroupTitle:key];
     [cell setCollectionView:collectionController.collectionView];
@@ -188,6 +195,7 @@
 {
     return NO;
 }
+
 
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

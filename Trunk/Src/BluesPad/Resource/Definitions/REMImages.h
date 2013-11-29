@@ -33,7 +33,6 @@
 #define REMIMG_OverTarget REMLoadImageNamed(@"OverTarget")
 #define REMIMG_share_mail REMLoadImageNamed(@"share-mail")
 #define REMIMG_share_weibo REMLoadImageNamed(@"share-weibo")
-#define REMIMG_Share_disable REMLoadImageNamed(@"Share_disable")
 #define REMIMG_Share_normal REMLoadImageNamed(@"Share_normal")
 
 //images in /Building/commodity:
@@ -85,9 +84,15 @@
 #define REMIMG_Nodata REMLoadImageNamed(@"Nodata")
 #define REMIMG_Up REMLoadImageNamed(@"Up")
 
+//images in /Launch:
+#define REMIMG_Default~ipad REMLoadImageNamed(@"Default~ipad")
+#define REMIMG_Startup_iOS7 REMLoadImageNamed(@"Startup_iOS7")
+
 //images in /Login:
-#define REMIMG_JumpLogin_Normal REMLoadImageNamed(@"JumpLogin-Normal")
 #define REMIMG_JumpLogin_Pressed REMLoadImageNamed(@"JumpLogin-Pressed")
+#define REMIMG_JumpLogin REMLoadImageNamed(@"JumpLogin")
+#define REMIMG_JumpTrial_Disabled REMLoadImageNamed(@"JumpTrial-Disabled")
+#define REMIMG_JumpTrial REMLoadImageNamed(@"JumpTrial")
 #define REMIMG_Login_Disable REMLoadImageNamed(@"Login-Disable")
 #define REMIMG_Login_Normal REMLoadImageNamed(@"Login-Normal")
 #define REMIMG_Login_Pressed REMLoadImageNamed(@"Login-Pressed")

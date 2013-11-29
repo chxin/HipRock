@@ -8,6 +8,7 @@
 
 #import "REMLoginCustomerViewController.h"
 #import "REMCommonHeaders.h"
+#import "REMTrialCardController.h"
 
 @interface REMLoginCustomerViewController ()
 
@@ -113,7 +114,8 @@ static NSString *CellIdentifier = @"loginCustomerCell";
 
 - (IBAction)cancelButtonPressed:(id)sender {
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        [self.loginPageController.loginButton stopIndicator];
+        [self.loginPageController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        [self.loginPageController.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
     }];
 }
 @end
