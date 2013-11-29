@@ -27,29 +27,17 @@
 const static CGFloat buildingGap=20;
 
 @interface REMBuildingViewController ()
-//@property (nonatomic) NSUInteger currentIndex;
-@property (nonatomic,strong) NSArray *originCenterXArray;
+
 @property (nonatomic) CGFloat cumulateX;
-
-@property (nonatomic,strong) NSMutableDictionary *imageViewStatus;
-
 
 @property (nonatomic,strong) UIImage *defaultImage;
 @property (nonatomic,strong) UIImage *defaultBlurImage;
 
-
-@property (nonatomic,strong) NSMutableDictionary *customImageLoadedDictionary;
-
 @property (nonatomic,strong) UIImageView *snapshot;
 @property (nonatomic,weak) UIImageView *sourceSnapshot;
 
-@property (nonatomic) CGFloat speed;
-@property (nonatomic,weak) NSTimer *timer;
 @property (nonatomic,weak) NSTimer *stopTimer;
 
-@property (nonatomic) CGFloat delta;
-
-@property (nonatomic) CGFloat speedBase;
 
 @property (nonatomic) BOOL isPinching;
 
@@ -75,8 +63,6 @@ const static CGFloat buildingGap=20;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.speedBase=500;
-	self.customImageLoadedDictionary = [[NSMutableDictionary alloc]initWithCapacity:self.buildingInfoArray.count];
     self.view.backgroundColor=[UIColor blackColor];
     [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
     self.currentScrollOffset=-kBuildingCommodityViewTop;
@@ -204,11 +190,6 @@ const static CGFloat buildingGap=20;
 
 - (void) swipethis:(UIPanGestureRecognizer *)pan
 {
-
-    if(self.timer!=nil){
-        [self.timer invalidate];
-        [self readyToComplete];
-    }
     
     CGPoint trans= [pan translationInView:self.view];
     
@@ -286,13 +267,18 @@ const static CGFloat buildingGap=20;
                                     }];
             }
             else{
-                self.delta=M_PI_4;
-                self.speedBase=300;
-                self.speed=self.speedBase*sign*sin(self.delta);
                 
-                NSTimer *timer = [NSTimer timerWithTimeInterval:0.01 target:self selector:@selector(switchCoverPage:) userInfo:nil repeats:YES];
-                self.timer=timer;
-                [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+                [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction|  UIViewAnimationOptionCurveEaseInOut animations:^(void){
+                    [self moveAllViews];
+                    
+                }completion:^(BOOL finished){
+                    [self.stopTimer invalidate];
+                    NSTimer *timer = [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(stopCoverPage:) userInfo:@{@"direction":@(sign)} repeats:NO];
+                    NSRunLoop *current=[NSRunLoop currentRunLoop];
+                    [current addTimer:timer forMode:NSDefaultRunLoopMode];
+                    self.stopTimer = timer;
+                }];
+                
             }
             
         }
@@ -318,19 +304,13 @@ const static CGFloat buildingGap=20;
     }
 }
 
-- (void) readyToComplete{
-    NSTimer *timer = [NSTimer timerWithTimeInterval:0.2 target:self selector:@selector(stopCoverPage:) userInfo:nil repeats:NO];
-    
-    NSRunLoop *current=[NSRunLoop currentRunLoop];
-    [current addTimer:timer forMode:NSDefaultRunLoopMode];
-    self.stopTimer = timer;
-}
 
 - (void)stopCoverPage:(NSTimer *)timer{
+    //NSLog(@"complete:%d",self.currentBuildingIndex);
     REMBuildingImageViewController *vc=self.childViewControllers[self.currentBuildingIndex];
     [vc loadContentView];
     if(self.currentBuildingIndex<self.childViewControllers.count){
-        CGFloat sign=self.speed<=0?-1:1;
+        NSInteger sign=[timer.userInfo[@"direction"] integerValue];
         NSNumber *willIndex= @(self.currentBuildingIndex-1*sign);
         if(willIndex.intValue>=self.childViewControllers.count || willIndex.intValue<0){
             return;
@@ -356,53 +336,6 @@ const static CGFloat buildingGap=20;
 }
 
 
-- (void)switchCoverPage:(NSTimer *)timer{
-    
-    if (ABS(self.speed)<0.1) {
-        [timer invalidate];
-        [self readyToComplete];
-        return;
-    }
-    
-    CGFloat sign=self.speed<0?-1:1;
-    CGFloat distance=self.speed;
-    //NSLog(@"speed:%f,delta:%f",self.speed,self.delta);
-    CGFloat d=M_PI_4;
-    if(self.delta>=M_PI_2){
-        d/=4;
-        if(self.speedBase>100){
-            self.speedBase/=5;
-        }
-    }
-    CGFloat m= self.delta+d;
-
-    if(m>(M_PI*7/8)){
-        m=M_PI/8;
-    }
-    else{
-        self.delta=m;
-    }
-    //self.speedBase=ABS(self.speed);
-    self.speed=self.speedBase*sin(m)*sign;
-    
-    for(int i=0;i<self.childViewControllers.count;++i)
-    {
-        REMBuildingImageViewController *vc=self.childViewControllers[i];
-        UIView *v=vc.view;
-        CGFloat readyDis=v.center.x+distance;
-        CGFloat gap=i-(int)self.currentBuildingIndex;
-        CGFloat page=self.view.frame.size.width+buildingGap;
-        CGFloat x=gap*page+self.view.frame.size.width/2;
-        if((distance < 0 &&readyDis<x) || (distance>0 && readyDis>x)){
-            self.speed=sign*0.01;
-            readyDis=x;
-        }
-        
-        
-        [v setCenter: CGPointMake(readyDis,v.center.y)];
-    }
-    
-}
 
 
 

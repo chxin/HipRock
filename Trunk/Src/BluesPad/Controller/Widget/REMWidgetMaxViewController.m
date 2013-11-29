@@ -20,13 +20,8 @@ const static CGFloat widgetGap=20;
 @property (nonatomic) CGFloat cumulateX;
 
 
-@property (nonatomic) CGFloat speed;
-@property (nonatomic,weak) NSTimer *timer;
 @property (nonatomic,weak) NSTimer *stopTimer;
 
-@property (nonatomic) CGFloat delta;
-
-@property (nonatomic) CGFloat speedBase;
 
 @property (nonatomic,weak) UIView *bloodView;
 @property (nonatomic,weak) UIView *bloodWhiteView;
@@ -87,7 +82,6 @@ const static CGFloat widgetGap=20;
     [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
     [self.view setBackgroundColor:[UIColor blackColor]];
     self.cumulateX=0;
-    self.speedBase=1280;
     self.readyToClose=NO;
     [self addDashboardBg];
     for (int i=0; i<self.dashboardInfo.widgets.count; ++i) {
@@ -213,10 +207,6 @@ const static CGFloat widgetGap=20;
     
     //[self cancelAllRequest];
     
-    if(self.timer!=nil){
-        [self.timer invalidate];
-        [self readyToComplete];
-    }
     
     
     CGPoint trans= [pan translationInView:self.view];
@@ -340,12 +330,16 @@ const static CGFloat widgetGap=20;
                                     }];
             }
             else{
-                self.delta=M_PI_4/128.0f;
-                self.speed=self.speedBase*sign*self.delta;
-                
-                NSTimer *timer = [NSTimer timerWithTimeInterval:0.01 target:self selector:@selector(switchCoverPage:) userInfo:nil repeats:YES];
-                self.timer=timer;
-                [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+                [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction|  UIViewAnimationOptionCurveEaseInOut animations:^(void){
+                    [self moveAllViews];
+                    
+                }completion:^(BOOL finished){
+                    [self.stopTimer invalidate];
+                    NSTimer *timer = [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(stopCoverPage:) userInfo:@{@"direction":@(sign)} repeats:NO];
+                    NSRunLoop *current=[NSRunLoop currentRunLoop];
+                    [current addTimer:timer forMode:NSDefaultRunLoopMode];
+                    self.stopTimer = timer;
+                }];
             }
             
         }
@@ -361,7 +355,7 @@ const static CGFloat widgetGap=20;
     [current showChart];
     
     if(self.currentWidgetIndex<self.childViewControllers.count){
-        CGFloat sign=self.speed<0?-1:1;
+        NSInteger sign=[timer.userInfo[@"direction"] integerValue];
         NSNumber *willIndex= @(self.currentWidgetIndex-1*sign);
         if(willIndex.intValue>=self.childViewControllers.count || willIndex.intValue<0){
             return;
@@ -375,41 +369,6 @@ const static CGFloat widgetGap=20;
     }
     
 }
-
-- (void)switchCoverPage:(NSTimer *)timer{
-    
-    if (ABS(self.speed)<0.1) {
-        [timer invalidate];
-        [self readyToComplete];
-        return;
-    }
-    
-    CGFloat sign=self.speed<0?-1:1;
-    CGFloat distance=self.speed;
-    
-    self.delta+=M_PI_4/128.0f;
-    if(self.delta>M_PI)self.delta=M_PI;
-    
-    self.speed=self.speedBase*sin(self.delta)*sign;
-    
-    for(int i=0;i<self.childViewControllers.count;++i)
-    {
-        REMWidgetDetailViewController *vc=self.childViewControllers[i];
-        UIView *v=vc.view;
-        CGFloat readyDis=v.center.x+distance;
-        CGFloat gap=i-(int)self.currentWidgetIndex;
-        CGFloat page=self.view.frame.size.width+widgetGap;
-        CGFloat x=gap*page+self.view.frame.size.width/2;
-        if((distance < 0 &&readyDis<x) || (distance>0 && readyDis>x)){
-            self.speed=sign*0.01;
-            readyDis=x;
-        }
-        
-        [v setCenter: CGPointMake(readyDis,v.center.y)];
-    }
-}
-
-
 
 - (void)popToBuildingCover{
     [self cancelAllRequest];
