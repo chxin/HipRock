@@ -160,7 +160,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
     if (self.buildingInfo.dashboardArray.count==0) {
         NSString *emptyText=NSLocalizedString(@"Dashboard_Empty", @"");//未配置任何仪表盘。
         cell.textLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.5];
-        cell.textLabel.font=[UIFont fontWithName:@(kBuildingFontSC) size:29];
+        cell.textLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:29];
         cell.textLabel.text=emptyText;
         return cell;
     }

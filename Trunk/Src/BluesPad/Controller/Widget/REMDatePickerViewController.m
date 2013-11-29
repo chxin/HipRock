@@ -42,6 +42,7 @@
     self.cellCount=2;
     [self.tableView setScrollEnabled:NO];
     self.navigationController.navigationBar.backItem.title=NSLocalizedString(@"Common_Cancel", @""); //@"取消";
+    
 }
 
 
