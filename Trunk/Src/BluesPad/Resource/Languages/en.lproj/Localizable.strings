@@ -26,6 +26,7 @@
 "Common_Cancel"="取消";
 "Common_Giveup"="放弃";
 "Common_OK"="好";
+"Common_Quit"="退出";
 
 //Admin,prefix: Admin_
 "Admin_UserTitleEEConsultant"="能源工程顾问";
@@ -83,6 +84,7 @@
 "Setting_CurrentCustomer"="当前客户";
 "Setting_CustomerInfo"="客户信息";
 "Setting_Logout"="退出登录";
+"Setting_AreYouSureLogout"="您要退出当前账号登录吗?";
 
 //Map, prefix: Map_
 "Map_MarkerBubbleSubtitleFormat"="本月用电量：%d%@";

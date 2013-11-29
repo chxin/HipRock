@@ -273,7 +273,7 @@
     if (self.childViewControllers.count<2) {
         REMBuildingChartViewController *controller1=[[REMBuildingChartViewController alloc] init];
         controller1.viewFrame=CGRectMake(0, marginTop+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, chartContainerHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
-        NSLog(@"view frame:%@",NSStringFromCGRect(controller1.viewFrame));
+        //NSLog(@"view frame:%@",NSStringFromCGRect(controller1.viewFrame));
         controller1.chartHandlerClass=[REMBuildingAverageViewController class];
         controller1.buildingId=self.buildingInfo.building.buildingId;
         controller1.commodityId=self.commodityInfo.commodityId;
@@ -299,7 +299,7 @@
     if (self.childViewControllers.count<2) {
         REMBuildingChartViewController *controller2=[[REMBuildingChartViewController alloc] init];
         controller2.viewFrame=CGRectMake(0, marginTop1+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, secondChartHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
-        NSLog(@"view frame:%@",NSStringFromCGRect(controller2.viewFrame));
+        //NSLog(@"view frame:%@",NSStringFromCGRect(controller2.viewFrame));
         controller2.chartHandlerClass=[REMBuildingTrendChartViewController class];
         controller2.commodityId=self.commodityInfo.commodityId;
         controller2.buildingId=self.buildingInfo.building.buildingId;

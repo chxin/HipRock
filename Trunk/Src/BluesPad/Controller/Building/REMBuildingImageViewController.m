@@ -153,6 +153,9 @@
             [self.shareButton setHidden:NO];
             [self.container addSubview:controller.view];
         }
+        else{
+            [controller.view setHidden:NO];
+        }
     }
     else{
         REMDashboardController *controller=self.childViewControllers[1];
@@ -160,6 +163,10 @@
             [self.shareButton setHidden:YES];
             [self.container addSubview:controller.view];
             [controller.view setFrame:controller.upViewFrame];
+        }
+        else{
+            [controller.view setFrame:controller.upViewFrame];
+            [controller.view setHidden:NO];
         }
         
         

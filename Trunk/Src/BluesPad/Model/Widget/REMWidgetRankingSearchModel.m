@@ -37,7 +37,7 @@
 }
 
 - (NSArray *)timeRangeToDictionaryArray{
-    [self fixTimeRange];
+    //[self fixTimeRange];
     return [super timeRangeToDictionaryArray];
 }
 
@@ -87,14 +87,14 @@
     [components setSecond:0];
     timeRange.endTime=[calendar dateFromComponents:components];
 }
-
+/*
 - (void)setRelativeDateType:(REMRelativeTimeRangeType)relativeDateType{
     [super setRelativeDateType:relativeDateType];
     if(relativeDateType!=REMRelativeTimeRangeTypeNone){
         [self fixTimeRange];
     }
 }
-
+*/
 - (id)copyWithZone:(NSZone *)zone
 {
     REMWidgetRankingSearchModel *model=[super copyWithZone:zone];

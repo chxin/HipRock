@@ -165,15 +165,15 @@
             [[WeiboAccounts shared]signOut];
         }
     } else {
-        if(buttonIndex==0){
+        if(buttonIndex==1){
             [self logoutAndClearCache];
         }
     }
 }
 
 - (void)logout{
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"您要退出当前账号登录吗?" delegate:self cancelButtonTitle:nil otherButtonTitles:@"退出",@"放弃", nil];
+    //您要退出当前账号登录吗?
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"Setting_AreYouSureLogout", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"Common_Giveup", @"") otherButtonTitles:NSLocalizedString(@"Common_Quit",@""), nil];
     alert.cancelButtonIndex=1;
     
     [alert show];
