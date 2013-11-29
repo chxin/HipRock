@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "REMSplashScreenController.h"
+@class REMLoginCardController;
+@class REMTrialCardController;
 
 @interface REMLoginCarouselController : UIViewController<UIScrollViewDelegate>
 
 @property (nonatomic) BOOL showAnimation;
 @property (nonatomic,weak) REMSplashScreenController *splashScreenController;
+@property (nonatomic,weak) REMLoginCardController *loginPageController;
+@property (nonatomic,weak) REMTrialCardController *trialCardController;
 
 //- (IBAction)pageChanged:(id)sender;
 //- (IBAction)jumpLoginButtonTouchDown:(id)sender;

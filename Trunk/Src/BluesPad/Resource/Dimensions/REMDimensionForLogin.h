@@ -30,4 +30,56 @@
 
 #define kDMLogin_SkipToTrialButtonLeftOffset 16
 
+
+
+#define kDMLogin_CardTitleBackgroundColor @"#e8e8e8"
+#define kDMLogin_CardTitleBackgroundHeight 57
+#define kDMLogin_CardTitleBackgroundSeperatorColor @"#e0e0e0"
+#define kDMLogin_CardTitleBackgroundSeperatorHeight 2
+#define kDMLogin_CardTitleFontSize 24
+#define kDMLogin_CardTitleFontColor @"#5b5b5b"
+#define kDMLogin_CardTitleTopOffset (kDMLogin_CardTitleBackgroundHeight - kDMLogin_CardTitleFontSize)/2
+#define kDMLogin_CardTitleViewHeight kDMLogin_CardTitleBackgroundHeight + kDMLogin_CardTitleBackgroundSeperatorHeight
+#define kDMLogin_LoginButtonHeight 50
+#define kDMLogin_LoginButtonWidth 330
+//#define kDMLogin_LoginButtonTopOffset 220 //relative to title seperator line
+#define kDMLogin_LoginButtonLeftOffset (kDMLogin_CardContentWidth - kDMLogin_LoginButtonWidth)/2
+#define kDMLogin_LoginButtonFontColor @"#ffffff"
+#define kDMLogin_LoginButtonFontSize 24
+
+
+#define kDMLogin_TrialCardWelcomeTextTopOffset 92
+#define kDMLogin_TrialCardWelcomeTextFontSize 21
+#define kDMLogin_TrialCardWelcomeTextFontColor @"#383838"
+
+#define kDMLogin_LoginCardPromptLabelLeftOffset kDMLogin_LoginButtonLeftOffset
+#define kDMLogin_LoginCardPromptLabelTopOffset 22 //relative to title seperator line
+#define kDMLogin_LoginCardPromptLabelWidth kDMLogin_LoginButtonWidth
+#define kDMLogin_LoginCardPromptLabelFontSize 15
+#define kDMLogin_LoginCardPromptLabelFontColor @"#5b5b5b"
+#define kDMLogin_TextBoxWidth kDMLogin_LoginButtonWidth
+#define kDMLogin_TextBoxHeight 52
+#define kDMLogin_TextBoxFontSize 15
+#define kDMLogin_TextBoxFontColor @"#b8b8b8"
+#define kDMLogin_ErrorLabelFontSize 12
+#define kDMLogin_ErrorLabelFontColor @"#ff0000"
+#define kDMLogin_ErrorLabelWidth kDMLogin_LoginButtonWidth
+
+
+#define kDMLogin_UserNameTextBoxLeftOffset kDMLogin_LoginButtonLeftOffset
+#define kDMLogin_UserNameTextBoxTopOffset kDMLogin_LoginCardPromptLabelTopOffset+kDMLogin_LoginCardPromptLabelFontSize+13
+
+#define kDMLogin_UserNameErrorLabelLeftOffset kDMLogin_LoginButtonLeftOffset
+#define kDMLogin_UserNameErrorLabelTopOffset kDMLogin_UserNameTextBoxTopOffset+kDMLogin_TextBoxHeight+4
+
+
+#define kDMLogin_PasswordTextBoxLeftOffset kDMLogin_LoginButtonLeftOffset
+#define kDMLogin_PasswordTextBoxTopOffset kDMLogin_UserNameTextBoxTopOffset+kDMLogin_TextBoxHeight+22
+
+#define kDMLogin_PasswordErrorLabelLeftOffset kDMLogin_LoginButtonLeftOffset
+#define kDMLogin_PasswordErrorLabelTopOffset kDMLogin_PasswordTextBoxTopOffset+kDMLogin_TextBoxHeight+4
+
+#define kDMLogin_LoginButtonTopOffset kDMLogin_PasswordTextBoxTopOffset + kDMLogin_TextBoxHeight + 22
+
+
 #endif

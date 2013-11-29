@@ -8,23 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "REMLoginCarouselController.h"
-#import "REMIndicatorButton.h"
+#import "REMLoginButton.h"
 
-@interface REMLoginPageController : UIViewController<UITextFieldDelegate>
+@interface REMLoginCardController : UIViewController<UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UILabel *userNameErrorLabel;
-@property (weak, nonatomic) IBOutlet UILabel *passwordErrorLabel;
-@property (weak, nonatomic) IBOutlet REMIndicatorButton *loginButton;
+@property (weak, nonatomic) REMLoginButton *loginButton;
 
 @property (nonatomic,weak) REMLoginCarouselController *loginCarouselController;
 
-
-- (IBAction)loginButtonPressed:(id)sender;
-
-- (IBAction)textFieldChanged:(id)sender;
-//- (IBAction)passwordTextChanged:(id)sender;
 
 -(void)loginSuccess;
 
