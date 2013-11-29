@@ -54,7 +54,7 @@ static NSString *cellId=@"dashboardcell";
     [self.tableView registerClass:[REMDashboardCellViewCell class] forCellReuseIdentifier:cellId];
     self.tableView.sectionFooterHeight=34;
     self.tableView.sectionHeaderHeight=0;
-    self.tableView.contentInset = UIEdgeInsetsMake(-REMDMCOMPATIOS7(18), 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(-REMDMCOMPATIOS7(14), 0, 0, 0);
     //NSLog(@"frame:%@",NSStringFromCGRect(self.view.frame));
     
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, kDashboardDragTitleMargin, 300, kDashboardDragTitleSize)];
