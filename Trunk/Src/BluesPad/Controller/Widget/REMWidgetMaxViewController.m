@@ -115,7 +115,7 @@ const static CGFloat widgetGap=20;
         }
     }
     
-    [self addBloodCell];
+    //[self addBloodCell];
 //    if(__IPHONE_7_0 == YES){
 //        UIScreenEdgePanGestureRecognizer *rec=[[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
 //        rec.edges=UIRectEdgeLeft;
@@ -229,23 +229,27 @@ const static CGFloat widgetGap=20;
         for (int i=0;i<self.childViewControllers.count;++i)
         {
             REMWidgetDetailViewController *vc = self.childViewControllers[i];
-            if(self.currentWidgetIndex == 0 && self.cumulateX>0){
+            if((self.currentWidgetIndex == 0 && self.cumulateX>0 ) ||
+               ((self.currentWidgetIndex==(self.dashboardInfo.widgets.count-1)) && self.cumulateX<0)){
                 //NSLog(@"src bg:%@",NSStringFromCGRect(self.srcBg.frame));
                 [self.srcBg setHidden:NO];
                 if(ABS(self.cumulateX)<300 && self.srcBg.frame.origin.x>=0){
                     CGFloat rate=200.0f/160.0f;
                     CGFloat delta=self.cumulateX*rate;
+                    if (self.currentWidgetIndex!=0) {
+                        delta*=-1;
+                    }
                     CGFloat x=self.origSrcBgFrame.origin.x- delta;
                     if(x<0){
                         [self.srcBg setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
                     }
                     else{
                         [self.srcBg setFrame:CGRectMake(x, self.origSrcBgFrame.origin.y- delta, self.origSrcBgFrame.size.width+ 2*delta, self.origSrcBgFrame.size.height+ 2*delta)];
-                        CGFloat blurLevel=0.8*self.cumulateX/160.0f;
+                        CGFloat blurLevel=0.8*ABS(self.cumulateX)/160.0f;
                         self.glassView.alpha=MAX(0,MIN(blurLevel,0.8));
                     }
-                    [self.bloodWhiteView setHidden:YES];
-                    [self.bloodView setHidden:YES];
+                    //[self.bloodWhiteView setHidden:YES];
+                    //[self.bloodView setHidden:YES];
                 }
                 //NSLog(@"bg frame:%@",NSStringFromCGRect(self.srcBg.frame));
                 if(self.srcBg.frame.origin.x>0){
@@ -256,10 +260,10 @@ const static CGFloat widgetGap=20;
                     self.readyToClose=YES;
                 }
                 
-            }
+            }/*
             else if((self.currentWidgetIndex==(self.dashboardInfo.widgets.count-1)) && self.cumulateX<0){
-                [self.bloodView setHidden:NO];
-                [self.bloodWhiteView setHidden:NO];
+                //[self.bloodView setHidden:NO];
+                //[self.bloodWhiteView setHidden:NO];
                 if(ABS(self.cumulateX)<160 && self.bloodView.frame.size.width<=self.bloodWhiteView.frame.size.width){
                     [self.bloodView setFrame:CGRectMake(self.bloodWhiteView.frame.origin.x+self.bloodWhiteView.frame.size.width+self.cumulateX/3,self.bloodWhiteView.frame.origin.y, -self.cumulateX/3, self.bloodWhiteView.frame.size.height)];
                     [self.srcBg setHidden:YES];
@@ -277,10 +281,10 @@ const static CGFloat widgetGap=20;
                 }
                 
 
-            }
+            }*/
             else{
-                [self.bloodView setHidden:YES];
-                [self.bloodWhiteView setHidden:YES];
+                //[self.bloodView setHidden:YES];
+                //[self.bloodWhiteView setHidden:YES];
                 [self.srcBg setHidden:YES];
             }
             [vc.view setCenter:CGPointMake(vc.view.center.x+trans.x, vc.view.center.y)];

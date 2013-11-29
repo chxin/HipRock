@@ -432,7 +432,7 @@
         return;
     }
     //UIImage *image=[REMImageHelper imageWithView:self.container];
-    CGRect rect=CGRectMake(0, 0, self.view.frame.size.width, kBuildingTitleHeight);
+    CGRect rect=CGRectMake(0, 0, self.view.frame.size.width, REMDMCOMPATIOS7(kBuildingTitleHeight));
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, self.view.window.screen.scale);
     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
     
@@ -445,7 +445,7 @@
     //CGImageRelease(imageRef);
     
     UIImageView *view=[[UIImageView alloc]initWithImage:img];
-    [self.container addSubview:view];
+    [self.view addSubview:view];
     self.cropTitleView=view;
 }
 
@@ -475,6 +475,7 @@
 //    float blurLevel=(offsetY + kBuildingCommodityViewTop) / (kBuildingCommodityViewTop+kCommodityScrollTop);
 //     self.glassView.alpha = MAX(0,MIN(blurLevel,0.8));
 //    return;
+    
     float blurLevel=(offsetY + kBuildingCommodityViewTop) / (kBuildingCommodityViewTop+kCommodityScrollTop);
     
     if(self.blurImageView.alpha == blurLevel) return;
