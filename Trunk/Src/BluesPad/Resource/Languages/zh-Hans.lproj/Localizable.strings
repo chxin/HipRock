@@ -162,7 +162,7 @@
 
 //Mail, prefix: Mail_
 "Mail_AccountNotConfigured" = "未配置邮件账户";
-"Mail_Title" = "能耗信息分享自：";
+"Mail_Title" = "来自%@的“能源管理开放平台”信息分享";
 
 
 //Chart, prefix: Chart_

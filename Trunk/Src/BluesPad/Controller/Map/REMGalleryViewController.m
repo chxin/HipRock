@@ -31,6 +31,18 @@
 @end
 
 
+/*Group order
+ 北京
+ 上海
+ 天津
+ 重庆
+ /按首字母排列其他省/
+ /按首字母排列其他自治区/
+ 香港特别行政区
+ 澳门特别行政区
+ 台湾地区
+ */
+
 @implementation REMGalleryViewController
 
 
@@ -116,20 +128,18 @@
     if(self.buildingGroups == nil){
         self.buildingGroups = [[NSMutableDictionary alloc] init];
         
-        for (REMBuildingOverallModel *buildingInfo in self.buildingInfoArray) {
-            NSString *province = buildingInfo.building.province;
+        for(int i=0;i<REMProvinceOrder.count;i++){
+            NSString *province = REMProvinceOrder[i];
+            NSMutableArray *buildings = [[NSMutableArray alloc] init];
             
-            if([self.buildingGroups objectForKey:province] == nil){
-                NSMutableArray *buildingArray = [[NSMutableArray alloc] init];
-                [buildingArray addObject:buildingInfo];
-                
-                [self.buildingGroups setObject:buildingArray forKey:province];
+            for (REMBuildingOverallModel *buildingInfo in self.buildingInfoArray) {
+                if(!REMIsNilOrNull(buildingInfo.building.province) && [buildingInfo.building.province rangeOfString:province].length>0){
+                    [buildings addObject:buildingInfo];
+                }
             }
-            else{
-                NSMutableArray *buildingArray = [self.buildingGroups objectForKey:province];
-                [buildingArray addObject:buildingInfo];
-                
-                [self.buildingGroups setObject:buildingArray forKey:province];
+            
+            if(buildings.count > 0){
+                [self.buildingGroups setObject:buildings forKey:province];
             }
         }
     }
