@@ -9,8 +9,6 @@
 #import "REMWidgetCellViewController.h"
 #import "REMBuildingViewController.h"
 #import "REMEnergySeacherBase.h"
-#import "REMRankingWidgetWrapper.h"
-#import "REMAbstractChartWrapper.h"
 #import "REMWidgetCollectionViewController.h"
 #import "REMWidgetSearchModelBase.h"
 #import "DCRankingWrapper.h"

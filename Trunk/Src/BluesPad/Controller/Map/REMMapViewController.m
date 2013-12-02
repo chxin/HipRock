@@ -15,8 +15,6 @@
 #import "REMBuildingEntranceSegue.h"
 #import "REMBuildingViewController.h"
 
-#import "REMColumnWidgetWrapper.h"
-#import "REMLineWidgetWrapper.h"
 #import "REMChartHeader.h"
 #import "REMCommonHeaders.h"
 #import "REMStoryboardDefinitions.h"
