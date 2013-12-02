@@ -68,8 +68,8 @@
     }
     emptyLabel.text=self.emptyText;
     emptyLabel.backgroundColor=[UIColor clearColor];
-    emptyLabel.shadowOffset=CGSizeMake(1, 1);
-    emptyLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    //emptyLabel.shadowOffset=CGSizeMake(1, 1);
+    //emptyLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     
     [self addSubview:emptyLabel];
     
