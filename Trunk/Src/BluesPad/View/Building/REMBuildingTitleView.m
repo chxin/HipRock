@@ -8,6 +8,9 @@
 
 #import "REMBuildingTitleView.h"
 #import "REMMaskManager.h"
+#import "REMNumberHelper.h"
+
+
 @interface REMBuildingTitleView()
 
 @property (nonatomic,strong) REMMaskManager *masker;
@@ -65,26 +68,14 @@
     }
     emptyLabel.text=self.emptyText;
     emptyLabel.backgroundColor=[UIColor clearColor];
-    emptyLabel.shadowOffset=CGSizeMake(1, 1);
-    emptyLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    //emptyLabel.shadowOffset=CGSizeMake(1, 1);
+    //emptyLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     
     [self addSubview:emptyLabel];
     
     self.emptyLabel=emptyLabel;
 }
 
-- (NSString *)addThousandSeparator:(NSNumber *)number
-{
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setGroupingSeparator:@","];
-    [numberFormatter setGroupingSize:3];
-    [numberFormatter setUsesGroupingSeparator:YES];
-    [numberFormatter setDecimalSeparator:@"."];
-    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSString *theString = [numberFormatter stringFromNumber:number];
-    
-    return theString;
-}
 
 - (void)setTitleIcon:(UIImage *)image
 {

@@ -21,10 +21,8 @@
 
 @property (nonatomic, readonly) DCXYChartView* view;
 @property (nonatomic, readonly) NSString* defaultSeriesClass;
-@property (nonatomic, readonly, weak) REMEnergyViewData* energyViewData;
 @property (nonatomic, assign) REMCalendarType calenderType;
 
--(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style;
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style;
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step;
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step;
