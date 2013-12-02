@@ -363,6 +363,8 @@
     //login button
     REMLoginButton *button = [[REMLoginButton alloc] initWithFrame:frame andStatusTexts:statusText];
     [button addTarget:self action:@selector(loginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    button.titleLabel.textColor = [REMColor colorByHexString:kDMLogin_LoginButtonFontColor];
+    button.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_LoginButtonFontSize];
     
     return button;
 }
