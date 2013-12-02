@@ -37,7 +37,7 @@
     if(self.masker==nil){
         self.masker =[[REMMaskManager alloc]initWithContainer:self];
         [self.masker.mask setBackgroundColor:[UIColor clearColor]];
-        [self.masker.mask setFrame:CGRectMake(45, self.masker.mask.frame.origin.y+50, 50, 50)];
+        [self.masker.mask setFrame:CGRectMake(45, self.masker.mask.frame.origin.y+45, 50, 50)];
         
     }
     [self.masker showMask];

@@ -454,19 +454,21 @@ const static CGFloat buildingGap=20;
 - (IBAction)shareButtonPressed:(UIButton *)sender {
     //[self performSegueWithIdentifier:kSegue_BuildingToSharePopover sender:self];
     
-    REMBuildingShareViewController *shareController = [self.storyboard instantiateViewControllerWithIdentifier: @"sharePopover"];
-    
+    //REMBuildingShareViewController *shareController = [self.storyboard instantiateViewControllerWithIdentifier: @"sharePopover"];
+    REMBuildingShareViewController *shareController=[[REMBuildingShareViewController alloc]init];
     shareController.contentSizeForViewInPopover = CGSizeMake(156, 88);
     
     if(self.sharePopoverController == nil){
         self.sharePopoverController = [[UIPopoverController alloc] initWithContentViewController:shareController];
+        [self.sharePopoverController setPopoverContentSize:CGSizeMake(156, 88)];
+        //[self.sharePopoverController setBackgroundColor:[UIColor clearColor]];
     }
     
     shareController.buildingController = self;
     
-    [self.sharePopoverController setDelegate:self];
+    //[self.sharePopoverController setDelegate:self];
     
-    [self.sharePopoverController presentPopoverFromRect:CGRectMake(sender.frame.origin.x, sender.frame.origin.y, sender.frame.size.width,sender.frame.size.height) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES ];
+    [self.sharePopoverController presentPopoverFromRect:CGRectMake(sender.frame.origin.x, sender.frame.origin.y+REMDMCOMPATIOS7(0), sender.frame.size.width,sender.frame.size.height) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES ];
 }
 
 

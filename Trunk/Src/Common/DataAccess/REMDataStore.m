@@ -108,6 +108,8 @@ static NSDictionary *serviceMap = nil;
               REMJsonSvc(@"API/Building.svc/GetBuildingTimeRangeData"),
           @(REMDSBuildingAirQuality) :
               REMJsonSvc(@"API/Building.svc/GetBuildingAirQualityData"),
+          @(REMDSBuildingAirQualityTotalUsage) :
+              REMJsonSvc(@"API/Building.svc/GetBuildingAirQualityUsage"),
           @(REMDSBuildingPicture) :
               REMDataSvc(@"API/Building.svc/GetBuildingPicture"),
           

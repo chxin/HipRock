@@ -27,9 +27,6 @@
 
 @property (nonatomic) NSUInteger counter;
 
-//@property (nonatomic,strong) SuccessCallback successBlock;
-
-//@property (nonatomic) NSUInteger successCounter;
 
 @property (nonatomic,strong) NSArray *chartViewSnapshotArray;
 

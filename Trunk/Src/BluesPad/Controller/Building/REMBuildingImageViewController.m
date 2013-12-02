@@ -240,7 +240,7 @@
     [self.container addSubview:backButton];
     self.backButton=backButton;
     
-    UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, backButton.frame.origin.y, kBuildingTitleButtonDimension, kBuildingTitleButtonDimension)];
+    UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, backButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonWidth)];
     [shareButton setImage:REMIMG_Share_normal forState:UIControlStateNormal];
     //if (self.buildingInfo.commodityUsage.count == 0) {
     shareButton.enabled = NO;
@@ -654,7 +654,7 @@
     CGFloat outputHeightWithoutFooter = dataImageHeight + kBuildingCommodityViewTop + kBuildingTitleHeight;
     CGFloat footerHeight = 98;
     UIImage *footerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WeiboBana" ofType:@"jpg"]];
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight),1,0.7);
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight),1,1);
     [[UIColor blackColor]set];
     UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
     
