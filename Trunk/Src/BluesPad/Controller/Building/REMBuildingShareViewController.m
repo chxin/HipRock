@@ -11,6 +11,7 @@
 #import "REMBuildingShareViewController.h"
 #import "REMBuildingWeiboView.h"
 #import "REMCommonDefinition.h"
+#import "REMCommonHeaders.h"
 
 @interface REMBuildingShareViewController ()
 
@@ -94,7 +95,8 @@
         
         picker.mailComposeDelegate = self;
         
-        [picker setSubject:REMLocalizedString(@"Mail_Title")];
+        //来自XXX（User Real Name）的“能源管理开放平台”信息分享
+        [picker setSubject:[NSString stringWithFormat:REMLocalizedString(@"Mail_Title"), REMAppCurrentUser.realname]];
         
         // Set up the recipients.
         //        NSArray *toRecipients = [NSArray arrayWithObjects:@"first@example.com", nil];
