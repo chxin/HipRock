@@ -16,4 +16,5 @@
 @property (nonatomic, assign) CGFloat focusSymbolIndicatorSize;
 
 @property (nonatomic, strong) NSNumber* symbolLineAt;
+@property (nonatomic, assign) CGFloat pointXOffset;
 @end

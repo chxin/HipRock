@@ -119,11 +119,17 @@
 "Building_CorporationRanking"="集团排名";
 "Building_EnergyUsageByAreaByMonth"="单位面积逐月用%@"; //单位面积逐月用电，单位面积逐月用水
 "Building_EnergyUsageByCommodity"="用%@趋势图"; //用电趋势图，用水趋势图
+"Building_AirQualityIndoor"="室内PM2.5";
+"Building_AirQualityOutdoor"="室外PM2.5";
+"Building_AirQualityHoneywell"="室内新风PM2.5(霍尼)";
+"Building_AirQualityMayair"="室内新风PM2.5(美埃)";
+"Building_AirQualityDailyChart"="室内外PM2.5逐日含量";
 
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="下拉返回概览能耗信息";
 "Dashboard_TimeRange"="%@ 到 %@";
 "Dashboard_Empty"="未配置任何仪表盘";
+"Dashboard_ShareUserName"="分享者:%@"; //分享者：张三
 
 
 //Widget, prefix:Widget_

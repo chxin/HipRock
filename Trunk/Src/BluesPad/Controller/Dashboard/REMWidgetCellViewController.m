@@ -9,8 +9,6 @@
 #import "REMWidgetCellViewController.h"
 #import "REMBuildingViewController.h"
 #import "REMEnergySeacherBase.h"
-#import "REMRankingWidgetWrapper.h"
-#import "REMAbstractChartWrapper.h"
 #import "REMWidgetCollectionViewController.h"
 #import "REMWidgetSearchModelBase.h"
 #import "DCRankingWrapper.h"
@@ -59,7 +57,11 @@
     //title.font = [UIFont fontWithName:@(kBuildingFontSC) size:kDashboardWidgetTitleSize];
     //title.textColor=[REMColor colorByHexString:@"#4c4c4c"];
     title.textColor=[UIColor blackColor];
-    title.text=self.widgetInfo.name;
+    NSString *textTitle=self.widgetInfo.name;
+    if (textTitle.length>=10) {
+        textTitle= [[textTitle substringToIndex:9] stringByAppendingString:@"..."];
+    }
+    title.text=textTitle;
     [self.view addSubview:title];
 
     
@@ -78,13 +80,13 @@
     }
     [self.view addSubview:time];
 
-    if(self.widgetInfo.shareInfo!=nil||[self.widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
+    if(self.widgetInfo.shareInfo!=nil && [self.widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
+        
         UILabel *share=[[UILabel alloc]initWithFrame:CGRectMake(title.frame.origin.x, title.frame.origin.y+2, self.view.frame.size.width-(title.frame.origin.x*2), kDashboardWidgetShareSize)];
         share.backgroundColor=[UIColor clearColor];
         share.textColor=[REMColor colorByHexString:@"#5e5e5e"];
         share.textAlignment=NSTextAlignmentRight;
-        
-        //share.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetShareSize];
+        share.text= [NSString stringWithFormat: NSLocalizedString(@"Dashboard_ShareUserName", @"") , self.widgetInfo.shareInfo.userRealName];
         share.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetShareSize];
         [self.view addSubview:share];
     }

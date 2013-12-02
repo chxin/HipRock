@@ -9,11 +9,7 @@
 #import "REMDashboardCollectionCellView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMEnergySeacherBase.h"
-#import "REMLineWidgetWrapper.h"
-#import "REMColumnWidgetWrapper.h"
 #import "REMPieChartWrapper.h"
-#import "REMRankingWidgetWrapper.h"
-#import "REMStackColumnWidgetWrapper.h"
 
 @interface REMDashboardCollectionCellView ()
 

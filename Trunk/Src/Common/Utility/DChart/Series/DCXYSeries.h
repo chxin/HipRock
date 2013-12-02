@@ -20,6 +20,7 @@
 @property (nonatomic, weak) DCAxis* xAxis;
 @property (nonatomic, weak) DCAxis* yAxis;
 @property (nonatomic, weak) REMEnergyTargetModel* target;
+@property (nonatomic, assign) CGFloat pointXOffset;
 
 @property (nonatomic, assign)BOOL hidden;
 

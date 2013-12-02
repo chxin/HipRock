@@ -7,10 +7,14 @@
 --------------------------------------------------------------------------*/
 #import "REMBuildingCommodityViewController.h"
 
-@interface REMBuildingAirQualityViewController : REMBuildingCommodityViewController
+@interface REMBuildingAirQualityViewController : UIViewController
 
 @property (nonatomic,weak) REMAirQualityModel *airQualityInfo;
 @property (nonatomic) CGRect viewFrame;
-
-
+@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,strong) REMAirQualityModel *airQualityUsage;
+@property (nonatomic) BOOL dataLoadComplete;
+@property (nonatomic) NSUInteger index;
+- (void) showChart;
+- (void)loadChartComplete;
 @end

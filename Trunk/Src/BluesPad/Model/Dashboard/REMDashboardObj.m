@@ -33,7 +33,7 @@
     
     NSDictionary *shareInfo = dictionary[@"SimpleShareInfo"];
     
-    if(shareInfo!=nil){
+    if(shareInfo!=nil && [shareInfo isEqual:[NSNull null]]==NO){
         self.shareInfo=[[REMShareInfo alloc]initWithDictionary:shareInfo];
     }
     

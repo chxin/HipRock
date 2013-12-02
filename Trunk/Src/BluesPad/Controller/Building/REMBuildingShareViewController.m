@@ -19,29 +19,46 @@
 
 @implementation REMBuildingShareViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [self.view setFrame:CGRectMake(0, 0, 156, 88)];
+    if (REMISIOS7) {
+        [self.view setBackgroundColor:[UIColor clearColor]];
+    }
+    else{
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+    }
+    UIButton *weiboButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [weiboButton setImage:REMIMG_share_weibo forState:UIControlStateNormal];
+    [self.view addSubview:weiboButton];
+    self.weiboButton=weiboButton;
+
+    weiboButton.translatesAutoresizingMaskIntoConstraints=NO;
+    
+    UIButton *mailButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [mailButton setImage:REMIMG_share_mail forState:UIControlStateNormal];
+    [self.view addSubview:mailButton];
+    
+    mailButton.translatesAutoresizingMaskIntoConstraints=NO;
+    self.mailButton=mailButton;
+    
+    NSMutableArray *constaints=[NSMutableArray array];
+    NSDictionary *constaintsDic=NSDictionaryOfVariableBindings(weiboButton,mailButton);
+    NSDictionary *constaintsVar=@{@"dimension":@(48),@"margin":@(20)};
+    
+    [constaints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[weiboButton(dimension)]-margin-[mailButton(dimension)]-margin-|" options:0 metrics:constaintsVar views:constaintsDic]];
+    [constaints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-margin-[weiboButton(dimension)]" options:0 metrics:constaintsVar views:constaintsDic]];
+    [constaints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-margin-[mailButton(dimension)]" options:0 metrics:constaintsVar views:constaintsDic]];
+    [self.view addConstraints:constaints];
+    
     
     [self.weiboButton addTarget:self action:@selector(weiboButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.mailButton addTarget:self action:@selector(mailButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 -(void)weiboButtonPressed:(UIButton *)button
 {

@@ -61,7 +61,7 @@
             } else if (point.pointType == DCDataPointTypeBreak) {
                 break;
             } else {
-                pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue];
+                pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue xOffset:s.pointXOffset];
                 countOfPoints++;
                 break;
             }
@@ -72,7 +72,7 @@
             if (point.pointType == DCDataPointTypeEmpty) {
                 continue;
             } else if (point.pointType == DCDataPointTypeNormal) {
-                pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue];
+                pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue xOffset:s.pointXOffset];
                 countOfPoints++;
             } else {
                 CGContextAddLines(ctx, pointsForSeries, countOfPoints);
@@ -88,7 +88,7 @@
             } else if (point.pointType == DCDataPointTypeBreak) {
                 break;
             } else {
-                pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue];
+                pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue xOffset:s.pointXOffset];
                 countOfPoints++;
                 break;
             }
@@ -102,9 +102,9 @@
     [self renderSymbols];
 }
 
--(CGPoint)getPointBy:(int)x y:(double)y {
+-(CGPoint)getPointBy:(int)x y:(double)y xOffset:(double)xOffset {
     CGPoint point;
-    point.x = self.frame.size.width*(x-self.graphContext.hRange.location)/self.graphContext.hRange.length;
+    point.x = self.frame.size.width*(x+xOffset-self.graphContext.hRange.location)/self.graphContext.hRange.length;
     point.y = self.frame.size.height-self.heightUnitInScreen*y;
     return point;
 }
@@ -152,7 +152,7 @@
             if (j >= s.datas.count) continue;
             
             DCDataPoint* key = s.datas[j];
-            CGRect toFrame = CGRectMake(self.frame.size.width*(j-self.graphContext.hRange.location)/self.graphContext.hRange.length-s.symbolSize/2, self.frame.size.height-[self getHeightOfPoint:key]-s.symbolSize/2, s.symbolSize, s.symbolSize);
+            CGRect toFrame = CGRectMake(self.frame.size.width*(j+s.pointXOffset-self.graphContext.hRange.location)/self.graphContext.hRange.length-s.symbolSize/2, self.frame.size.height-[self getHeightOfPoint:key]-s.symbolSize/2, s.symbolSize, s.symbolSize);
             BOOL isRectVisable = [DCUtility isFrame:toFrame visableIn:self.bounds] && (key.value != nil) && ![key.value isEqual:[NSNull null]];
             if (isRectVisable) {
                 CGPoint location = CGPointMake(toFrame.origin.x+toFrame.size.width/2, toFrame.origin.y+toFrame.size.height/2);

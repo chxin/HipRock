@@ -45,12 +45,6 @@
 #import "REMPieChartWrapper.h"
 
 //TrendChartWrapper
-#import "REMColumnWidgetWrapper.h"
-#import "REMLineWidgetWrapper.h"
-#import "REMRankingWidgetWrapper.h"
-#import "REMStackColumnWidgetWrapper.h"
-#import "REMTrendWidgetWrapper.h"
-
 #import "DCColumnWrapper.h"
 #import "DCLineWrapper.h"
 
