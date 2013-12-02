@@ -91,7 +91,7 @@
 //images in /Login:
 #define REMIMG_JumpLogin_Pressed REMLoadImageNamed(@"JumpLogin-Pressed")
 #define REMIMG_JumpLogin REMLoadImageNamed(@"JumpLogin")
-#define REMIMG_JumpTrial_Disabled REMLoadImageNamed(@"JumpTrial-Disabled")
+#define REMIMG_JumpTrial_Pressed REMLoadImageNamed(@"JumpTrial-Pressed")
 #define REMIMG_JumpTrial REMLoadImageNamed(@"JumpTrial")
 #define REMIMG_Login_Disable REMLoadImageNamed(@"Login-Disable")
 #define REMIMG_Login_Normal REMLoadImageNamed(@"Login-Normal")

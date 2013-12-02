@@ -68,6 +68,8 @@
                                   @(REMLoginButtonDisableStatus):REMLocalizedString(@"Login_TrialButtonText"),
                                   };
     REMLoginButton *button = [[REMLoginButton alloc] initWithFrame:buttonFrame andStatusTexts:statusTexts];
+    button.titleLabel.textColor = [REMColor colorByHexString:kDMLogin_LoginButtonFontColor];
+    button.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_LoginButtonFontSize];
     [button addTarget:self action:@selector(trialButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     

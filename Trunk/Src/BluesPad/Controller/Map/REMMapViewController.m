@@ -87,8 +87,6 @@
         
         REMBuildingModel *building = buildingInfo.building;
         
-        NSLog(@"Building: %@, %f",building.name, building.latitude);
-        
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.position = CLLocationCoordinate2DMake(building.latitude, building.longitude);
         marker.userData = buildingInfo;
