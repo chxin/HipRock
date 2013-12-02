@@ -79,12 +79,12 @@
     [self.view addSubview:time];
 
     if(self.widgetInfo.shareInfo!=nil||[self.widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
+        
         UILabel *share=[[UILabel alloc]initWithFrame:CGRectMake(title.frame.origin.x, title.frame.origin.y+2, self.view.frame.size.width-(title.frame.origin.x*2), kDashboardWidgetShareSize)];
         share.backgroundColor=[UIColor clearColor];
         share.textColor=[REMColor colorByHexString:@"#5e5e5e"];
         share.textAlignment=NSTextAlignmentRight;
-        
-        //share.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetShareSize];
+        share.text= [NSString stringWithFormat: NSLocalizedString(@"Dashboard_ShareUserName", @"") , self.widgetInfo.shareInfo.userRealName];
         share.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetShareSize];
         [self.view addSubview:share];
     }

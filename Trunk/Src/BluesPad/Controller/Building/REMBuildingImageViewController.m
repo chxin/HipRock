@@ -292,7 +292,7 @@
     
     UIButton *logoButton = [self getCustomerLogoButton];
     [logoButton setFrame:CGRectMake(self.backButton.frame.origin.x+self.backButton.frame.size.width, kDMCommon_CustomerLogoTop, logoButton.frame.size.width, logoButton.frame.size.height)];
-    [logoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
+    //[logoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
     
     logoButton.titleLabel.text=@"logo";
     [logoButton removeTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
