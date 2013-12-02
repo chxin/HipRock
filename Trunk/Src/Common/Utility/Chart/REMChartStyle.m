@@ -40,6 +40,9 @@
     style.focusSymbolLineWidth = 2;
     style.focusSymbolIndicatorSize = 40;
     
+    style.pieRadius = 180;
+    style.pieShadowRadius = 190;
+    
     return style;
 }
 +(REMChartStyle*)getMinimunStyle {
@@ -66,6 +69,11 @@
     style.symbolSize = 4;
     style.xLabelToLine = 4;
     style.yLabelToLine = 4;
+    
+    
+    style.pieRadius = 30;
+    style.pieShadowRadius = 33;
+    
     return style;
 }
 

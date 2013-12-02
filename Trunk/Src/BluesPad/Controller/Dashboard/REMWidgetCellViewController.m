@@ -14,6 +14,7 @@
 #import "REMWidgetCollectionViewController.h"
 #import "REMWidgetSearchModelBase.h"
 #import "DCRankingWrapper.h"
+#import "DCPieWrapper.h"
 @interface REMWidgetCellViewController ()
 
 
@@ -158,7 +159,8 @@
         }
         else if(pieWrapper!=nil){
             self.pieWrapper=pieWrapper;
-            [self.chartContainer addSubview:pieWrapper.view];
+            [self.chartContainer addSubview:[pieWrapper getView]];
+//            [self.chartContainer addSubview:pieWrapper.view];
         }
         
         

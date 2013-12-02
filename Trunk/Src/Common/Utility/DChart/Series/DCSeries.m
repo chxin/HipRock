@@ -17,6 +17,13 @@
         _datas = seriesData;
         for (DCDataPoint* p in self.datas) {
             p.series = self;
+            if (REMIsNilOrNull(p.energyData)) {
+                p.pointType = DCDataPointTypeEmpty;
+            } else if (REMIsNilOrNull(p.value)) {
+                p.pointType = DCDataPointTypeBreak;
+            } else {
+                p.pointType = DCDataPointTypeNormal;
+            }
         }
     }
     return self;

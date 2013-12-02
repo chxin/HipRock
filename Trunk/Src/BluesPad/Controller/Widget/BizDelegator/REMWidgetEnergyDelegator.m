@@ -22,6 +22,7 @@
 #import "DCLineWrapper.h"
 #import "DCColumnWrapper.h"
 #import "DCRankingWrapper.h"
+#import "DCPieWrapper.h"
 
 @interface REMWidgetEnergyDelegator()
 

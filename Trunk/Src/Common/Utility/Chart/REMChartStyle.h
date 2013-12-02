@@ -31,6 +31,8 @@
 @property (nonatomic, strong) UIColor* focusSymbolLineColor;
 @property (nonatomic, assign) CGFloat focusSymbolIndicatorSize;
 
+@property (nonatomic, assign) CGFloat pieRadius;
+@property (nonatomic, assign) CGFloat pieShadowRadius;
 
 +(REMChartStyle*)getMaximizedStyle;
 +(REMChartStyle*)getMinimunStyle;
