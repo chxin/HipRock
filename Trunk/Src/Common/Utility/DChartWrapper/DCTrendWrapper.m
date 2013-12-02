@@ -225,6 +225,9 @@
     NSNumber* globalLength = @([self roundDate:globalEndDate startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:NO].intValue);
     int startPoint = [self roundDate:beginningStart startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:YES].intValue;
     int endPoint = [self roundDate:beginningEnd startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:NO].intValue;
+    int endHour = [REMTimeHelper getHour:beginningEnd];
+    if (endHour == 0) endPoint--;
+    if (endPoint < startPoint) endPoint = startPoint;
     DCRange* beginRange = [[DCRange alloc]initWithLocation:startPoint-0.5 length:endPoint-startPoint];
     DCRange* globalRange = [[DCRange alloc]initWithLocation:-0.5 length:globalLength.doubleValue];
     self.myStableRange = beginRange;
