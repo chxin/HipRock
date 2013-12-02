@@ -9,23 +9,13 @@
 #import "DCTrendWrapper.h"
 #import "_DCXLabelFormatter.h"
 
-typedef enum _DChartStatus {
-    DChartStatusNormal,
-    DChartStatusFocus
-}DChartStatus;
-
 @interface DCTrendWrapper()
 @property (nonatomic, strong) NSMutableArray* processors;
-//@property (nonatomic, strong) DCRange* beginRange;
-//@property (nonatomic, strong) DCRange* globalRange;
-//@property (nonatomic, strong) _DCXLabelFormatter* xLabelFormatter;
 @property (nonatomic, strong) REMTrendChartDataProcessor* sharedProcessor;
-@property (nonatomic, assign) DChartStatus chartStatus;
 @property (nonatomic, weak) DCContext* graphContext;
 @property (nonatomic, strong) DCRange* myStableRange;
 @property (nonatomic, assign) BOOL isStacked;
 @property (nonatomic) NSString* xtypeOfWidget;
-@property (nonatomic) REMChartStyle* style;
 @end
 
 @implementation DCTrendWrapper
@@ -33,15 +23,12 @@ typedef enum _DChartStatus {
     return self.view;
 }
 -(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*)widgetSyntax style:(REMChartStyle*)style {
-    self = [self init];
+    self = [super initWithFrame:frame data:energyViewData widgetContext:widgetSyntax style:style];
     if (self && energyViewData.targetEnergyData.count != 0) {
         _calenderType = REMCalendarTypeNone;
         self.xtypeOfWidget = widgetSyntax.xtype;
         [self extraSyntax:widgetSyntax];
-        _style = style;
         
-        _chartStatus = DChartStatusNormal;
-        _energyViewData = energyViewData;
         NSDictionary* dic = [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
         
         [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"]];
@@ -130,18 +117,12 @@ typedef enum _DChartStatus {
         while ((int)datas.count < processedX) {
             DCDataPoint* p = [[DCDataPoint alloc]init];
             p.target = targetEnergy.target;
-            p.pointType = DCDataPointTypeEmpty;
             [datas addObject:p];
         }
         DCDataPoint* p = [[DCDataPoint alloc]init];
         p.energyData = point;
         p.target = targetEnergy.target;
         p.value = point.dataValue;
-        if (REMIsNilOrNull(p.value)) {
-            p.pointType = DCDataPointTypeBreak;
-        } else {
-            p.pointType = DCDataPointTypeNormal;
-        }
         [datas addObject:p];
     }
     DCXYSeries* s = [[NSClassFromString(self.defaultSeriesClass) alloc]initWithEnergyData:datas];
@@ -313,12 +294,11 @@ typedef enum _DChartStatus {
     _calenderType = syntax.calendarType;
 }
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
-    _energyViewData = energyViewData;
+    [super redraw:energyViewData];
     NSDictionary* dic = [self updateProcessorRangesFormatter:step];
     CGRect frame = self.view.frame;
     UIView* superView = self.view.superview;
     [self.view removeFromSuperview];
-    _chartStatus = DChartStatusNormal;
     
     [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"]];
     [superView addSubview:self.view];

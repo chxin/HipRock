@@ -10,12 +10,23 @@
 
 @implementation DAbstractChartWrapper
 
+-(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style {
+    self = [self init];
+    if (self) {
+        _energyViewData = energyViewData;
+        _style = style;
+        _chartStatus = DChartStatusNormal;
+    }
+    return self;
+}
 -(void)cancelToolTipStatus {
     
 }
 
 -(void)redraw:(REMEnergyViewData *)energyViewData {
+    _energyViewData = energyViewData;
     
+    _chartStatus = DChartStatusNormal;
 }
 
 -(UIView*)getView {

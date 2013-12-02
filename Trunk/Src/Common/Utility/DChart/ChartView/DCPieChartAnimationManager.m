@@ -100,46 +100,91 @@
     [self playFrames:animationFrames];
 }
 
--(void)rotateAngle:(double)angle withInitialSpeed:(double)speed {
+-(void)rotateWithInitialSpeed:(double)speed {
     if (self.view == Nil) return;
-    if (speed * angle < 0) return;  // 速度和方向想法，动画很乱，不考虑
-    
-    double frames = kDCAnimationDuration * kDCFramesPerSecord;
-    int halfFrames = frames / 2;
-    double rotationAngleStep = 0;
-    double halfAngle = angle / 2;
-    
     NSMutableArray* animationFrames = [[NSMutableArray alloc]init];
-    
-    // 前半程，加速旋转到halfAngle
-    rotationAngleStep = (halfAngle - (speed * halfFrames)) / [self sumFrom:1 to:halfFrames];
-    DCPieChartAnimationFrame* halfTarget = [[DCPieChartAnimationFrame alloc]init];
-    halfTarget.rotationAngle = @(self.view.rotationAngle + halfAngle);
-    for (int i = 0; i < halfFrames; i++) {
-        DCPieChartAnimationFrame* aframe = [[DCPieChartAnimationFrame alloc]init];
-        int stepMulti = [self sumFrom:0 to:i+1] ;
-        aframe.rotationAngle = @(self.view.rotationAngle + speed * i + stepMulti * rotationAngleStep);
-        [animationFrames addObject:aframe];
-        NSLog(@"%i %f", animationFrames.count - 1, [(DCPieChartAnimationFrame*)animationFrames[animationFrames.count - 1] rotationAngle].doubleValue);
+    if (fabs(speed) < 0.05) {
+        double indicationAngle = 1.5 - self.view.rotationAngle;
+        if (indicationAngle < 0) {
+            indicationAngle += 2;
+        }
+        // 找到预计旋转角度对应的扇区的中线位置
+        double targetRotation = 0;  // 预计对准的扇区的中线位置
+        for (int i = 0; i < self.view.series.pieSlices.count; i++) {
+            if (REMIsNilOrNull(self.view.series.pieSlices)) continue;
+            DCPieSlice slice;
+            [self.view.series.pieSlices[i] getValue:&slice];
+            if (slice.sliceEnd > indicationAngle) {
+                targetRotation = slice.sliceCenter;
+                //            NSLog(@"index:%i slice:%f indicator:%f", i, targetRotation, indicationAngle);
+                break;
+            }
+        }
+        targetRotation = 1.5 - targetRotation;
+        if (targetRotation >= 2) targetRotation -= 2;
+        else if (targetRotation < 0) targetRotation += 2;
+        
+        double frames = kDCAnimationDuration * kDCFramesPerSecord;
+        double step = (targetRotation - self.view.rotationAngle) / frames;
+        for (int i = 0; i < frames; i++) {
+            DCPieChartAnimationFrame* aframe = [[DCPieChartAnimationFrame alloc]init];
+            aframe.rotationAngle = @(self.view.rotationAngle + step * i);
+            [animationFrames addObject:aframe];
+        }
+        DCPieChartAnimationFrame* frame = [[DCPieChartAnimationFrame alloc]init];
+        frame.rotationAngle = @(targetRotation);
+        [self animateToFrame:frame];
+        [animationFrames addObject:frame];
+    } else {
+        // 预计最后一帧的旋转的角度。并预先计算出所有帧的旋转。
+        double theSpeed = speed;
+        double rotation = self.view.rotationAngle;
+        double speedDown = 0.9;
+        theSpeed *= speedDown;
+        NSMutableArray* speedArray = [[NSMutableArray alloc]init];
+        while (fabs(theSpeed) > 0.00001) {
+            rotation += theSpeed;
+            [speedArray addObject:@(theSpeed)];
+            theSpeed*=speedDown;
+        }
+        
+        // 将最后一帧的角度与indicator对齐，并改成0-2的值域范围内
+        double indicationAngle = 1.5 - rotation;
+        int a = (indicationAngle)/2;
+        if (indicationAngle < 0) {
+            indicationAngle -= 2*(a-1);
+        } else if (a > 0) {
+            indicationAngle -= 2*a;
+        }
+        
+        // 找到预计旋转角度对应的扇区的中线位置
+        double targetRotation = 0;  // 预计对准的扇区的中线位置
+        for (int i = 0; i < self.view.series.pieSlices.count; i++) {
+            if (REMIsNilOrNull(self.view.series.pieSlices)) continue;
+            DCPieSlice slice;
+            [self.view.series.pieSlices[i] getValue:&slice];
+            if (slice.sliceEnd > indicationAngle) {
+                targetRotation = slice.sliceCenter;
+    //            NSLog(@"index:%i slice:%f indicator:%f", i, targetRotation, indicationAngle);
+                break;
+            }
+        }
+        double r = self.view.rotationAngle;
+
+        for (int i = 0; i < speedArray.count;i++) {
+            DCPieChartAnimationFrame* frame = [[DCPieChartAnimationFrame alloc]init];
+            r+=[speedArray[i] doubleValue];
+            frame.rotationAngle = @(r*(rotation - targetRotation + indicationAngle)/rotation);
+            [animationFrames addObject:frame];
+        }
+        DCPieChartAnimationFrame* frame = [[DCPieChartAnimationFrame alloc]init];
+        frame.rotationAngle = @(1.5-targetRotation);
+        [animationFrames addObject:frame];
+    //    NSLog(@"selfViewRotate:%f speed:%f rotation:%f", self.view.rotationAngle, speed, rotation);
+    //    for (DCPieChartAnimationFrame* f in animationFrames) {
+    //        NSLog(@"%f", f.rotationAngle.doubleValue);
+    //    }
     }
-//    [animationFrames addObject:halfTarget];
-    NSLog(@"%i %f", animationFrames.count - 1, [(DCPieChartAnimationFrame*)animationFrames[animationFrames.count - 1] rotationAngle].doubleValue);
-    
-    double currentSpeed = speed + rotationAngleStep * halfFrames;
-    // 后半程，减速到0
-    rotationAngleStep = (halfAngle - (currentSpeed * halfFrames)) / [self sumFrom:1 to:halfFrames];
-    DCPieChartAnimationFrame* target = [[DCPieChartAnimationFrame alloc]init];
-    target.rotationAngle = @(self.view.rotationAngle + angle);
-    for (int i = 0; i < halfFrames; i++) {
-        DCPieChartAnimationFrame* aframe = [[DCPieChartAnimationFrame alloc]init];
-        int stepMulti = [self sumFrom:0 to:i+1] ;
-        aframe.rotationAngle = @(halfTarget.rotationAngle.doubleValue + currentSpeed * (i+1) + stepMulti * rotationAngleStep);
-        [animationFrames addObject:aframe];
-        NSLog(@"%i %f", animationFrames.count - 1, [(DCPieChartAnimationFrame*)animationFrames[animationFrames.count - 1] rotationAngle].doubleValue);
-    }
-    [animationFrames addObject:target];
-    NSLog(@"%i %f", animationFrames.count - 1, [(DCPieChartAnimationFrame*)animationFrames[animationFrames.count - 1] rotationAngle].doubleValue);
-    
     // 应用动画
     [self playFrames:animationFrames];
 }

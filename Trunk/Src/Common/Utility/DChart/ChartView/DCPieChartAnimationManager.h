@@ -12,6 +12,6 @@
 @interface DCPieChartAnimationManager : NSObject
 -(id)initWithPieView:(UIView*)view;
 -(void)animateToFrame:(DCPieChartAnimationFrame*)targetFrame;
--(void)rotateAngle:(double)angle withInitialSpeed:(double)speed;
+-(void)rotateWithInitialSpeed:(double)speed;
 -(void)stopTimer;
 @end
