@@ -563,6 +563,7 @@
 		B445AECF177C0046002D2A59 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */; };
 		B445AED1177C0052002D2A59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AED0177C0052002D2A59 /* CoreGraphics.framework */; };
 		B445AEE2177C04E4002D2A59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AED0177C0052002D2A59 /* CoreGraphics.framework */; };
+		B4577EBF184C1886003C00CF /* REMNumberHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4577EBE184C1886003C00CF /* REMNumberHelper.m */; };
 		B469537817E96DCF003D5A98 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		B46C8EBA17F27C25006DC4CB /* REMDashboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EB917F27C25006DC4CB /* REMDashboardView.m */; };
 		B46C8EBD17F27C84006DC4CB /* REMDashboardCellViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EBC17F27C84006DC4CB /* REMDashboardCellViewCell.m */; };
@@ -1333,6 +1334,8 @@
 		B445AEB1177BFAE8002D2A59 /* REMLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLog.m; path = Common/Log/REMLog.m; sourceTree = "<group>"; };
 		B445AEBA177BFE66002D2A59 /* CommonTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B445AED0177C0052002D2A59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		B4577EBD184C1886003C00CF /* REMNumberHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMNumberHelper.h; path = Common/Utility/REMNumberHelper.h; sourceTree = "<group>"; };
+		B4577EBE184C1886003C00CF /* REMNumberHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMNumberHelper.m; path = Common/Utility/REMNumberHelper.m; sourceTree = "<group>"; };
 		B46C8EB817F27C25006DC4CB /* REMDashboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDashboardView.h; path = View/Dashboard/REMDashboardView.h; sourceTree = "<group>"; };
 		B46C8EB917F27C25006DC4CB /* REMDashboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardView.m; path = View/Dashboard/REMDashboardView.m; sourceTree = "<group>"; };
 		B46C8EBB17F27C84006DC4CB /* REMDashboardCellViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDashboardCellViewCell.h; path = View/Dashboard/REMDashboardCellViewCell.h; sourceTree = "<group>"; };
@@ -2339,6 +2342,8 @@
 				EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */,
 				7A12280A18116DBF004DE778 /* REMViewHelper.h */,
 				7A12280B18116DBF004DE778 /* REMViewHelper.m */,
+				B4577EBD184C1886003C00CF /* REMNumberHelper.h */,
+				B4577EBE184C1886003C00CF /* REMNumberHelper.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -3636,6 +3641,7 @@
 				B48ED409178EA8970032CD72 /* REMSqliteStorage.m in Sources */,
 				B48ED40A178EA8970032CD72 /* REMStorage.m in Sources */,
 				EFDAACBF18052E0C008BC9AF /* REMPieChartView.m in Sources */,
+				B4577EBF184C1886003C00CF /* REMNumberHelper.m in Sources */,
 				7A9B1E2C177B3A8B00C282A8 /* main.m in Sources */,
 				B4922469182B920C0001389A /* REMWidgetMultiTimespanDelegator.m in Sources */,
 				7A9B1E30177B3A8B00C282A8 /* REMAppDelegate.m in Sources */,

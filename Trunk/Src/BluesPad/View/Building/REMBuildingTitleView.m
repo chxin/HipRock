@@ -8,6 +8,9 @@
 
 #import "REMBuildingTitleView.h"
 #import "REMMaskManager.h"
+#import "REMNumberHelper.h"
+
+
 @interface REMBuildingTitleView()
 
 @property (nonatomic,strong) REMMaskManager *masker;
@@ -73,18 +76,6 @@
     self.emptyLabel=emptyLabel;
 }
 
-- (NSString *)addThousandSeparator:(NSNumber *)number
-{
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setGroupingSeparator:@","];
-    [numberFormatter setGroupingSize:3];
-    [numberFormatter setUsesGroupingSeparator:YES];
-    [numberFormatter setDecimalSeparator:@"."];
-    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSString *theString = [numberFormatter stringFromNumber:number];
-    
-    return theString;
-}
 
 - (void)setTitleIcon:(UIImage *)image
 {
