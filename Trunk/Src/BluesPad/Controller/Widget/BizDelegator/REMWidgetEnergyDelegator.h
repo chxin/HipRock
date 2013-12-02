@@ -22,7 +22,6 @@ const static CGFloat kLegendSearchSwitcherWidth=102*2;
 const static CGFloat kWidgetDatePickerLeftMargin=25;
 const static CGFloat kWidgetDatePickerTopMargin=16;
 const static CGFloat kWidgetDatePickerHeight=29;
-const static CGFloat kWidgetDatePickerWidth=326;
 const static CGFloat kWidgetDatePickerTitleSize=14;
 const static CGFloat kWidgetStepSingleButtonWidth=60;
 const static CGFloat kWidgetStepButtonFontSize=14;

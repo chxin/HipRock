@@ -130,7 +130,7 @@
     //[legendControl setFrame:CGRectMake(kLegendSearchSwitcherLeft, kLegendSearchSwitcherTop, kLegendSearchSwitcherWidth, kLegendSearchSwitcherHeight)];
     
     
-    [legendControl setSegmentedControlStyle:UISegmentedControlStyleBezeled];
+    [legendControl setSegmentedControlStyle:UISegmentedControlStylePlain];
     
     [legendControl setImage:REMIMG_DateView_Chart forSegmentAtIndex:0];
     [legendControl setImage:REMIMG_Legend_Chart forSegmentAtIndex:1];
@@ -161,7 +161,7 @@
     timePickerButton.layer.borderColor=[UIColor clearColor].CGColor;
     timePickerButton.layer.borderWidth=0;
     //[timePickerButton setBackgroundColor:[REMColor colorByHexString:@"#9d9d9d"]];
-    
+    [timePickerButton sizeToFit];
     timePickerButton.layer.cornerRadius=4;
     timePickerButton.translatesAutoresizingMaskIntoConstraints=NO;
     
@@ -205,8 +205,8 @@
     
     NSMutableArray *searchViewSubViewConstraints = [NSMutableArray array];
     NSDictionary *searchViewSubViewDic = NSDictionaryOfVariableBindings(timePickerButton,stepControl);
-    NSDictionary *searchViewSubViewMetrics = @{@"margin":@(kWidgetDatePickerLeftMargin),@"buttonHeight":@(kWidgetDatePickerHeight),@"buttonWidth":@(kWidgetDatePickerWidth),@"top":@(kWidgetDatePickerTopMargin),@"stepHeight":@(kWidgetStepButtonHeight),@"stepMinWidth":@(kWidgetStepSingleButtonWidth),@"stepMaxWidth":@(kWidgetStepSingleButtonWidth*3)};
-    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[timePickerButton(buttonWidth)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+    NSDictionary *searchViewSubViewMetrics = @{@"margin":@(kWidgetDatePickerLeftMargin),@"buttonHeight":@(kWidgetDatePickerHeight),@"top":@(kWidgetDatePickerTopMargin),@"stepHeight":@(kWidgetStepButtonHeight),@"stepMinWidth":@(kWidgetStepSingleButtonWidth),@"stepMaxWidth":@(kWidgetStepSingleButtonWidth*3)};
+    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[timePickerButton]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
     [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[timePickerButton(buttonHeight)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
     
     [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[stepControl]-0-|" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];

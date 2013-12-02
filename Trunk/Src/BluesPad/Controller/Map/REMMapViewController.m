@@ -76,12 +76,18 @@
 
 -(void)showMarkers
 {
-    for(int i=0; i<self.buildingInfoArray.count; i++){
-        REMBuildingOverallModel *buildingInfo = self.buildingInfoArray[i];
+    NSArray *buildings = [self.buildingInfoArray sortedArrayUsingComparator:^NSComparisonResult(REMBuildingOverallModel *b1, REMBuildingOverallModel *b2) {
+        return b1.building.latitude > b2.building.latitude ? NSOrderedAscending : NSOrderedDescending;
+    }];
+    
+    for(int i=0; i<buildings.count; i++){
+        REMBuildingOverallModel *buildingInfo = buildings[i];
         if(buildingInfo == nil || buildingInfo.building== nil)
             continue;
         
         REMBuildingModel *building = buildingInfo.building;
+        
+        NSLog(@"Building: %@, %f",building.name, building.latitude);
         
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.position = CLLocationCoordinate2DMake(building.latitude, building.longitude);
@@ -89,7 +95,7 @@
         marker.title = building.name;
         marker.map = self.mapView;
         marker.flat = NO;
-        marker.zIndex = [building.buildingId integerValue];
+        marker.zIndex = i;
         marker.icon = [self getMarkerIcon:buildingInfo forMarkerState:UIControlStateNormal];
         
         if(i==0)
