@@ -158,6 +158,10 @@ static NSDictionary *codeNameMap;
         REMEnergyTargetModel *target = targetEnergyData.target;
         NSArray *energyData = targetEnergyData.energyData;
         
+        if([@[kMayAirCode,kOutdoorCode,kHoneywellCode] containsObject:target.code] == NO){
+            continue;
+        }
+        
         NSString* targetIdentity = [NSString stringWithFormat:@"air-%d-%d-%@", i, target.type, target.targetId];
         NSMutableArray *data = [[NSMutableArray alloc] init];
         
