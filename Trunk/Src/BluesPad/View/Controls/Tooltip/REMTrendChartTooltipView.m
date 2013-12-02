@@ -22,6 +22,8 @@
 
 @property (nonatomic,strong) NSMutableArray *tooltipItems;
 
+@property (nonatomic,weak) UILabel *pointTimeLabel;
+
 @end
 
 @implementation REMTrendChartTooltipView
@@ -47,6 +49,7 @@
     self = [super initWithHighlightedPoints:points inEnergyData:data widget:widget andParameters:parameters];
     
     if(self){
+        
     }
     
     return self;
@@ -120,6 +123,12 @@
     
     return itemModels;
 }
+
+//-(UILabel *)renderTimeLabel
+//{
+//    DCDataPoint *point = self.highlightedPoints[0];
+//    REMEnergyData *data = point.energyData;
+//}
 
 -(NSString *)formatTargetName:(REMEnergyTargetModel *)target
 {

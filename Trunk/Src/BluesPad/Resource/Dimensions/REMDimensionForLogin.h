@@ -23,12 +23,21 @@
 #define kDMLogin_PageControlHeight 8
 #define kDMLogin_PageControlTintColor @"#88c274"
 #define kDMLogin_SkipToLoginButtonTopOffset kDMLogin_PageControlTopOffset + kDMLogin_PageControlHeight + 26
-#define kDMLogin_SkipToLoginButtonWidth 160//232
-#define kDMLogin_SkipToLoginButtonHeight 50
+#define kDMLogin_SkipToLoginButtonWidth 191 //232
+#define kDMLogin_SkipToLoginButtonHeight 62
 #define kDMLogin_SkipToLoginButtonFontSize 24
 #define kDMLogin_SkipToLoginButtonFontColor @"#3f8e1f"
+#define kDMLogin_SkipToLoginButtonImageTopShadowHeight 3
+#define kDMLogin_SkipToLoginButtonImageBottomShadowHeight 12
+#define kDMLogin_SkipToLoginButtonTextTopOffset (kDMLogin_SkipToLoginButtonHeight - kDMLogin_SkipToLoginButtonImageTopShadowHeight - kDMLogin_SkipToLoginButtonImageBottomShadowHeight - kDMLogin_SkipToLoginButtonFontSize) / 2 + kDMLogin_SkipToLoginButtonImageTopShadowHeight
 
-#define kDMLogin_SkipToTrialButtonLeftOffset 16
+#define kDMLogin_SkipToLoginButtonLeftOffset 31
+
+#define kDMLogin_SkipToTrialButtonFontSize kDMLogin_SkipToLoginButtonFontSize
+#define kDMLogin_SkipToTrialButtonFontColor @"#896700"
+#define kDMLogin_SkipToTrialButtonImageTopShadowHeight 4
+#define kDMLogin_SkipToTrialButtonImageBottomShadowHeight 13
+#define kDMLogin_SkipToTrialButtonTextTopOffset (kDMLogin_SkipToLoginButtonHeight - kDMLogin_SkipToTrialButtonImageTopShadowHeight - kDMLogin_SkipToTrialButtonImageBottomShadowHeight - kDMLogin_SkipToTrialButtonFontSize)/2 + kDMLogin_SkipToTrialButtonImageTopShadowHeight
 
 
 

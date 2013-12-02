@@ -31,13 +31,13 @@
         
         NSDictionary* dic = [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
         
-        [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"]];
+        [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:widgetSyntax.step.integerValue];
         [self updateCalender];
     }
     return self;
 }
 
--(void)createChartView:(CGRect)frame beginRange:(DCRange*)beginRange globalRange:(DCRange*)globalRange xFormatter:(NSFormatter*)xLabelFormatter {
+-(void)createChartView:(CGRect)frame beginRange:(DCRange*)beginRange globalRange:(DCRange*)globalRange xFormatter:(NSFormatter*)xLabelFormatter step:(REMEnergyStep)step{
     DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:beginRange stacked:self.isStacked];
     [view setXLabelFormatter:xLabelFormatter];
     _view = view;
@@ -96,6 +96,7 @@
     view.graphContext.hGridlineAmount = self.style.horizentalGridLineAmount;
     view.delegate = self;
     self.graphContext = view.graphContext;
+    if (step == REMEnergyStepHour || step == REMEnergyStepWeek) view.pointXOffset = 0.5;
     [self customizeView:view];
 }
 
@@ -222,9 +223,16 @@
     }
     
     self.sharedProcessor.baseDate = baseDateOfX;
-    NSNumber* globalLength = @([self roundDate:globalEndDate startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:NO].intValue);
-    int startPoint = [self roundDate:beginningStart startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:YES].intValue;
-    int endPoint = [self roundDate:beginningEnd startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:NO].intValue;
+    NSNumber* globalLength = [self.sharedProcessor processX:globalEndDate];// @([self roundDate:globalEndDate startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:NO].intValue);
+    double startPoint = [self.sharedProcessor processX:beginningStart].doubleValue;// [self roundDate:beginningStart startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:YES].intValue;
+    double endPoint = [self roundDate:beginningEnd startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:NO].intValue;
+    if (step == REMEnergyStepHour || step == REMEnergyStepWeek) {
+        endPoint+=0.5;
+    } else if ([REMTimeHelper getHour:beginningEnd] == 0) {
+        endPoint--;
+    }
+    
+    if (endPoint < startPoint) endPoint = startPoint;
     DCRange* beginRange = [[DCRange alloc]initWithLocation:startPoint-0.5 length:endPoint-startPoint];
     DCRange* globalRange = [[DCRange alloc]initWithLocation:-0.5 length:globalLength.doubleValue];
     self.myStableRange = beginRange;
@@ -300,7 +308,7 @@
     UIView* superView = self.view.superview;
     [self.view removeFromSuperview];
     
-    [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"]];
+    [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:step];
     [superView addSubview:self.view];
     [self updateCalender];
 }

@@ -961,11 +961,11 @@
             }
         }
     
-    if([[self.chartWrapper getView] respondsToSelector:@selector(setSeriesHiddenAtIndex:hidden:)])
-        [((id)[self.chartWrapper getView]) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
-    if([self.chartWrapper respondsToSelector:@selector(setSeriesHiddenAtIndex:hidden:)])
-        [((id)self.chartWrapper) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
-    //}
+    if ([self.chartWrapper isKindOfClass:[DCTrendWrapper class]]) {
+        [((DCTrendWrapper*)self.chartWrapper) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
+    } else if ([self.chartWrapper isKindOfClass:[DCPieChartView class]]) {
+        [((REMPieChartView*)[self.chartWrapper getView]) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
+    }
 }
 
 #pragma mark - Tooltip

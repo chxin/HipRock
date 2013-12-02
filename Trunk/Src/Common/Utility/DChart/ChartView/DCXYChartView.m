@@ -117,6 +117,7 @@
 -(void)drawIndicatorLayer {
     if (!self.showIndicatorOnFocus) return;
     self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext];
+    self.indicatorLayer.pointXOffset = self.pointXOffset;
     self.indicatorLayer.frame = self.plotRect;
     self.indicatorLayer.symbolLineStyle = self.focusSymbolLineStyle;
     self.indicatorLayer.symbolLineWidth = self.focusSymbolLineWidth;
@@ -126,6 +127,9 @@
 }
 
 -(void)willMoveToSuperview:(UIView *)newSuperview {
+    for (DCXYSeries* s in self.seriesList) {
+        s.pointXOffset = self.pointXOffset;
+    }
     [self drawAxisLines];
     [self drawHGridline];
     [self drawXLabelLayer];
@@ -535,6 +539,7 @@
 }
 
 -(void)focusAroundX:(double)x {
+    x-=self.pointXOffset;
     DCRange* globalRange = self.graphContext.globalHRange;
     if (x < globalRange.location) x = floor(globalRange.location);
     if (x > globalRange.length+globalRange.length) x = ceil(globalRange.length+globalRange.location);

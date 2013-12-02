@@ -101,7 +101,7 @@
 
 
 -(NSString*)textForX:(int)x {
-    if (self.labelFormatter) {
+    if (!REMIsNilOrNull(self.labelFormatter)) {
         return [self.labelFormatter stringForObjectValue:@(x)];
     } else {
         return [NSString stringWithFormat:@"%i", x];

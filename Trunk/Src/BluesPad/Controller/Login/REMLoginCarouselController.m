@@ -73,22 +73,27 @@ static const int kTrialCardIndex = kCardCount - 2;
 
 -(void)loadSkipButtons
 {
-    UIEdgeInsets imageInsets = UIEdgeInsetsMake(5.0f, 10.0f, 18.0f, 10.0f);
+    UIEdgeInsets imageInsets = UIEdgeInsetsMake(5.0f, 12.0f, 18.0f, 12.0f);
     
     
     UIButton *skipToTrialButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    skipToTrialButton.frame = CGRectMake((kDMScreenWidth-2*kDMLogin_SkipToLoginButtonWidth - kDMLogin_SkipToTrialButtonLeftOffset)/2, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
+    skipToTrialButton.frame = CGRectMake((kDMScreenWidth-2*kDMLogin_SkipToLoginButtonWidth - kDMLogin_SkipToLoginButtonLeftOffset)/2, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
     skipToTrialButton.alpha = 0;
-    skipToTrialButton.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_SkipToLoginButtonFontSize];
+    skipToTrialButton.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_SkipToTrialButtonFontSize];
     
-    [skipToTrialButton setTitleColor:[REMColor colorByHexString:kDMLogin_SkipToLoginButtonFontColor] forState:UIControlStateNormal];
+    [skipToTrialButton setTitleColor:[REMColor colorByHexString:kDMLogin_SkipToTrialButtonFontColor] forState:UIControlStateNormal];
     [skipToTrialButton setTitle:REMLocalizedString(@"Login_SkipToTrialButtonText") forState:UIControlStateNormal];
     [skipToTrialButton setBackgroundImage:[REMIMG_JumpTrial resizableImageWithCapInsets:imageInsets] forState:UIControlStateNormal];
-    [skipToTrialButton setBackgroundImage:[REMIMG_JumpTrial_Disabled resizableImageWithCapInsets:imageInsets] forState:UIControlStateHighlighted];
+    [skipToTrialButton setBackgroundImage:[REMIMG_JumpTrial_Pressed resizableImageWithCapInsets:imageInsets] forState:UIControlStateHighlighted];
     [skipToTrialButton addTarget:self action:@selector(jumpTrialButtonTouchDown:) forControlEvents:UIControlEventTouchUpInside];
+    skipToTrialButton.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+    skipToTrialButton.titleEdgeInsets = UIEdgeInsetsMake(kDMLogin_SkipToTrialButtonTextTopOffset, 0, 0, 0);
+    
+    
+    
     
     UIButton *skipToLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    skipToLoginButton.frame = CGRectMake(skipToTrialButton.frame.origin.x + kDMLogin_SkipToLoginButtonWidth + kDMLogin_SkipToTrialButtonLeftOffset, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
+    skipToLoginButton.frame = CGRectMake(skipToTrialButton.frame.origin.x + kDMLogin_SkipToLoginButtonWidth + kDMLogin_SkipToLoginButtonLeftOffset, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
     skipToLoginButton.alpha = 0;
     skipToLoginButton.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_SkipToLoginButtonFontSize];
     
@@ -97,6 +102,9 @@ static const int kTrialCardIndex = kCardCount - 2;
     [skipToLoginButton setBackgroundImage:[REMIMG_JumpLogin resizableImageWithCapInsets:imageInsets] forState:UIControlStateNormal];
     [skipToLoginButton setBackgroundImage:[REMIMG_JumpLogin_Pressed resizableImageWithCapInsets:imageInsets] forState:UIControlStateHighlighted];
     [skipToLoginButton addTarget:self action:@selector(jumpLoginButtonTouchDown:) forControlEvents:UIControlEventTouchUpInside];
+    skipToLoginButton.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+    skipToLoginButton.titleEdgeInsets = UIEdgeInsetsMake(kDMLogin_SkipToLoginButtonTextTopOffset, 0, 0, 0);
+
     
     [self.view addSubview:skipToLoginButton];
     self.skipToLoginButton = skipToLoginButton;
@@ -121,8 +129,6 @@ static const int kTrialCardIndex = kCardCount - 2;
         
         UIView *card = nil;
         if(i == kLoginCardIndex){
-//            UIView *content = [self renderLoginCard];
-//            card = [[REMLoginCard alloc] initWithContentView:content];
             card = [self renderLoginCard];
         }
         else if(i == kTrialCardIndex){
