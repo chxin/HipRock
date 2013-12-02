@@ -62,7 +62,6 @@
         model.value = REMIsNilOrNull(targetData.energyData[0]) ? nil : [targetData.energyData[0] dataValue];
         model.color = [REMColor colorByIndex:i].uiColor;
         model.index = i;
-        model.type = REMChartSeriesIndicatorPie;
         
         if(REMIsNilOrNull(targetData.target.uomName)){
             model.uom = REMUoms[@(targetData.target.uomId)];

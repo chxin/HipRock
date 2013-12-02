@@ -14,8 +14,6 @@
 
 @implementation REMChartTooltipItemModel
 @end
-@implementation REMRankingTooltipItemModel
-@end
 
 //item view
 @interface REMChartTooltipItem()
@@ -44,16 +42,10 @@
 //        self.layer.borderColor = [UIColor orangeColor].CGColor;
 //        self.layer.borderWidth = 1.0f;
         self.backgroundColor = [REMColor colorByHexString: kDMChart_TooltipViewBackgroundColor];
-        
         self.model = model;
         
-        // Indicator
-        REMChartSeriesIndicator *indicator = [self renderIndicator:model.type :model.color];
-        [self addSubview:indicator];
-        self.indicator = indicator;
-        
         // Name label
-        UILabel *nameLabel = [self renderTitleLabel:model.title];
+        UILabel *nameLabel = [self renderTitleLabel:model];
         [self addSubview:nameLabel];
         self.nameLabel = nameLabel;
         
@@ -72,51 +64,23 @@
     self.valueLabel.text = [self formatDataValue:model];
 }
 
-//-(void)setHighlighted:(BOOL)highlighted
-//{
-//    [super setHighlighted:highlighted];
-//    
-//    UIColor *backgroundColor = highlighted?[UIColor lightGrayColor]:[UIColor whiteColor];
-//    self.backgroundColor = backgroundColor;
-//}
-
 - (NSString *)formatDataValue:(REMChartTooltipItemModel *)model
 {
     //TODO: Need format
     return [NSString stringWithFormat:@"%@%@", REMIsNilOrNull(model.value) ? @"": [model.value stringValue], model.uom];
 }
 
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
--(REMChartSeriesIndicator *)renderIndicator:(REMChartSeriesIndicatorType)type :(UIColor *)color
-{
-    REMChartSeriesIndicator *indicator = [REMChartSeriesIndicator indicatorWithType:type andColor:color];
-    CGRect indicatorFrame =indicator.frame;
-    indicatorFrame.origin.y = (kDMChart_TooltipContentHeight - (kDMChart_IndicatorSize + kDMChart_TooltipItemDataValueTopOffset + kDMChart_TooltipItemDataValueFontSize)) / 2;
-    indicator.frame = indicatorFrame;
-    
-    return indicator;
-}
-
--(UILabel *)renderTitleLabel:(NSString *)title
+-(UILabel *)renderTitleLabel:(REMChartTooltipItemModel *)model
 {
     UIFont *font = [UIFont systemFontOfSize:kDMChart_TooltipItemTitleFontSize];
     CGFloat height = [@"a" sizeWithFont:font].height;
-    CGRect frame = CGRectMake(kDMChart_IndicatorSize+kDMChart_TooltipItemTitleLeftOffset, self.indicator.frame.origin.y+((kDMChart_IndicatorSize - height)/2), self.frame.size.width - 2*(kDMChart_IndicatorSize+kDMChart_TooltipItemTitleLeftOffset), height);
+    CGRect frame = CGRectMake(0, ((kDMChart_IndicatorSize - height)/2), self.frame.size.width - 2*(kDMChart_IndicatorSize+kDMChart_TooltipItemTitleLeftOffset), height);
     
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
-    label.text = title;
+    label.text = model.title;
     label.backgroundColor = [UIColor clearColor];
     label.font = font;
-    label.textColor = [REMColor colorByHexString:kDMChart_TooltipItemTitleColor];
+    label.textColor = model.color;
     
     return label;
 }

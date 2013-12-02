@@ -7,9 +7,12 @@
 --------------------------------------------------------------------------*/
 #import <QuartzCore/QuartzCore.h>
 #import "REMChartTooltipItem.h"
-#import "REMChartSeriesIndicator.h"
 #import "REMCommonHeaders.h"
 #import "REMDimensions.h"
+
+
+@implementation REMRankingTooltipItemModel
+@end
 
 
 //ranking item view

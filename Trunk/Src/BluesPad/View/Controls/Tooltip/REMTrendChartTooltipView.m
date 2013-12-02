@@ -115,7 +115,6 @@
         model.value = REMIsNilOrNull(point) ? nil : point.value;
         model.color = [REMColor colorByIndex:i].uiColor;
         model.index = i;
-        model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType: self.widget.diagramType];
         model.uom = point.target.uomName;
         
         [itemModels addObject:model];
