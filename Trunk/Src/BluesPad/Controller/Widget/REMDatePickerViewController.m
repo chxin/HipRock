@@ -109,11 +109,6 @@
     
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -164,6 +159,7 @@
                 text=[REMTimeHelper formatTimeFullDay:self.timeRange.startTime];
             }
             cell.detailTextLabel.text=text;
+            [self setDateTimeColor:cell.detailTextLabel withIsActive:NO];
         }
         else{
             if(self.cellCount==2){
@@ -174,6 +170,7 @@
                     text=[REMTimeHelper formatTimeFullDay:self.timeRange.endTime];
                 }
                 cell.detailTextLabel.text=text;
+                [self setDateTimeColor:cell.detailTextLabel withIsActive:NO];
             }
             else{
                 if(cell==nil){
@@ -344,12 +341,8 @@
         [self setMiddleLine:endText];
     }
     else{
-        if(endText.attributedText!=nil){
-            NSString *oldText= endText.text;
-            endText.attributedText=nil;
-            endText.text=oldText;
-            
-        }
+        [self removeMiddleLine:endText withIsActive:self.timePickerIndex==2];
+        
         
     }
     
@@ -361,7 +354,36 @@
     [attributeString addAttribute:NSStrikethroughStyleAttributeName
                             value:[NSNumber numberWithInt:2]
                             range:(NSRange){0,[attributeString length]}];
+    [label setTextColor:[UIColor redColor]];
     label.attributedText=attributeString;
+}
+
+- (void)removeMiddleLine:(UILabel *)label withIsActive:(BOOL)isActive{
+    
+    NSString *text=label.text;
+    label.attributedText=nil;
+    label.text=text;
+    if (isActive == YES) {
+        [label setTextColor:[REMColor colorByHexString:@"#37ab3c"]];
+    }
+    else{
+        [label setTextColor:[UIColor blackColor]];
+    }
+    
+    
+}
+
+- (void)setDateTimeColor:(UILabel *)label withIsActive:(BOOL)isActive{
+    if ([label.textColor isEqual:[UIColor redColor]]==YES) {
+        return;
+    }
+    if (isActive == YES) {
+        [label setTextColor:[REMColor colorByHexString:@"#37ab3c"]];
+    }
+    else{
+        [label setTextColor:[UIColor blackColor]];
+    }
+    
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
@@ -416,7 +438,7 @@
             return;
         }
         UILabel *label= cell.contentView.subviews[1];
-        label.textColor=[REMColor colorByHexString:@"#37ab3c"];
+        [self setDateTimeColor:label withIsActive:YES];
         if(indexPath.row==0){
             if(self.timePickerIndex == 1){
                 NSArray* deletePaths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:1]];
@@ -437,7 +459,7 @@
                 NSIndexPath *endPath=[NSIndexPath indexPathForRow:1 inSection:1];
                 UITableViewCell *cell=[tableView cellForRowAtIndexPath:endPath];
                 UILabel *label= cell.contentView.subviews[1];
-                label.textColor=[UIColor blackColor];
+                [self setDateTimeColor:label withIsActive:NO];
                 [self.tableView beginUpdates];
                 if(self.timePickerIndex==2){
                     NSArray* deletePaths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:2 inSection:1]];
@@ -461,7 +483,7 @@
                 [self.endHourPicker setHidden:YES];
                 [self.tableView deleteRowsAtIndexPaths:deletePaths withRowAnimation:UITableViewRowAnimationTop];
                 [self.tableView endUpdates];
-                label.textColor=[UIColor blackColor];
+                [self setDateTimeColor:label withIsActive:NO];
                 
             }
             else {
@@ -481,7 +503,7 @@
                 NSIndexPath *startPath=[NSIndexPath indexPathForRow:0 inSection:1];
                 UITableViewCell *cell=[tableView cellForRowAtIndexPath:startPath];
                 UILabel *label= cell.contentView.subviews[1];
-                label.textColor=[UIColor blackColor];
+                [self setDateTimeColor:label withIsActive:NO];
             }
         }
     }

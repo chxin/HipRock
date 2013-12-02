@@ -39,7 +39,10 @@
         NSMutableArray *dashboardList=[[NSMutableArray alloc]initWithCapacity:dashboardArray.count];
         for (NSDictionary *dashboard in dashboardArray) {
             REMDashboardObj *obj = [[REMDashboardObj alloc]initWithDictionary:dashboard];
-            [dashboardList addObject:obj];
+            if (obj.widgets.count!=0) {
+                [dashboardList addObject:obj];
+            }
+            
         }
         self.dashboardArray=dashboardList;
     }
