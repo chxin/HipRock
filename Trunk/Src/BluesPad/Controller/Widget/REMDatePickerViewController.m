@@ -42,6 +42,7 @@
     self.cellCount=2;
     [self.tableView setScrollEnabled:NO];
     self.navigationController.navigationBar.backItem.title=NSLocalizedString(@"Common_Cancel", @""); //@"取消";
+    
 }
 
 
@@ -62,6 +63,8 @@
     self.relativeDate=relative;
     REMTimeRange *range=[REMTimeHelper relativeDateFromType:self.relativeDateType];
     self.timeRange=range;
+    
+    
     
     [self.startPicker setDate:range.startTime];
     [self.startHourPicker selectRow:[REMTimeHelper getHour:range.startTime] inComponent:0 animated:NO];
@@ -175,6 +178,9 @@
             else{
                 if(cell==nil){
                     cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"datePickerScrollerCell"];
+                    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                    
+                    
                 }
                 CGFloat hourPickerWidth=0;
                 if(self.showHour==YES){
@@ -406,6 +412,9 @@
     }
     else{
         UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+        if ([cell.reuseIdentifier isEqualToString:@"datePickerScrollerCell"]==YES) {
+            return;
+        }
         UILabel *label= cell.contentView.subviews[1];
         label.textColor=[REMColor colorByHexString:@"#37ab3c"];
         if(indexPath.row==0){

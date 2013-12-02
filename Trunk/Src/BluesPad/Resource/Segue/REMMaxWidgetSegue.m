@@ -41,9 +41,11 @@
     
     REMBuildingViewController *srcController= self.sourceViewController;
     
-    UIView *destImageView=[[UIView alloc]initWithFrame:srcController.view.frame];
     
-    [destImageView setBackgroundColor:[UIColor grayColor]];
+    
+    //UIView *destImageView=[[UIView alloc]initWithFrame:srcController.view.frame];
+    
+    //[destImageView setBackgroundColor:[UIColor grayColor]];
 
     
     REMDashboardController *dashboardController=srcController.maxDashbaordController;
@@ -67,6 +69,8 @@
     
     //NSLog(@"max frame:%@",NSStringFromCGRect(newFrame));
     
+    UIView *destImageView=destController.view;
+    
     
     [srcController.view addSubview:destImageView];
     [srcController.view setUserInteractionEnabled:NO];
@@ -75,13 +79,13 @@
     
     CGRect retFrame= CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight));
     
-    [destImageView setFrame:retFrame];
+    //[destImageView setFrame:retFrame];
     destImageView.alpha=0;
     
     self.preMoveView=cloneView;
     self.readyMoveFrame=retFrame;
     self.readyMoveView=destImageView;
- 
+    
     
     NSTimer *timer =[NSTimer timerWithTimeInterval:0.2 target:self selector:@selector(flipToMax) userInfo:nil repeats:NO];
     NSRunLoop *loop=[NSRunLoop currentRunLoop];
@@ -90,11 +94,13 @@
 }
 
 - (void)flipToMax{
-    [UIView transitionWithView:self.preMoveView duration:0.4 options:UIViewAnimationOptionTransitionFlipFromRight animations:^(void){
+    
+    
+    
+    [UIView transitionWithView:self.preMoveView duration:0.6 options:UIViewAnimationOptionTransitionFlipFromRight animations:^(void){
         self.readyMoveView.alpha=1;
-        self.preMoveView.alpha=0;
+        //self.preMoveView.alpha=0;
         [self.preMoveView setFrame:self.readyMoveFrame];
-        //[self.readyMoveView setFrame:self.readyMoveFrame];
     } completion:^(BOOL finished){
         [self.preMoveView removeFromSuperview];
         [self.readyMoveView removeFromSuperview];
@@ -102,13 +108,14 @@
         [vc.view setUserInteractionEnabled:YES];
         [vc.navigationController pushViewController:self.destinationViewController animated:NO];
     }];
+     
 }
 
 
 - (void)min{
     REMBuildingViewController *destController=self.destinationViewController;
     REMWidgetMaxViewController *srcController=self.sourceViewController;
-    REMWidgetDetailViewController *currentDetailController= srcController.childViewControllers[0];
+    REMWidgetDetailViewController *currentDetailController= srcController.childViewControllers[srcController.currentWidgetIndex];
     
     UIImage *image=[REMImageHelper imageWithView:currentDetailController.view];
     

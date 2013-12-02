@@ -10,6 +10,7 @@
 #import "REMBuildingModel.h"
 #import "REMCommonHeaders.h"
 #import "REMAirQualityModel.h"
+#import "REMCommodityUsageModel.h"
 
 @interface REMBuildingOverallModel : REMJSONObject
 
@@ -19,5 +20,6 @@
 @property (nonatomic,strong) NSArray *dashboardArray;
 @property (nonatomic,strong) NSArray *commodityArray;
 @property (nonatomic,strong) NSNumber *isQualified;
+@property (nonatomic,strong) REMCommodityUsageModel *electricityUsageThisMonth;
 
 @end

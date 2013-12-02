@@ -45,6 +45,9 @@
     {
         self.diagramType =REMDiagramTypeStackColumn;
     }
+    else if([self.contentSyntax.xtype isEqualToString:@"labelingchartcomponent"]==YES){
+        self.diagramType=REMDiagramTypeLabelling;
+    }
     
     NSDictionary *shareInfo = dictionary[@"SimpleShareInfo"];
     

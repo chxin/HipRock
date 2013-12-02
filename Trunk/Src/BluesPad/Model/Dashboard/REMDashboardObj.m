@@ -24,7 +24,7 @@
     for(NSDictionary *dic in array)
     {
         REMWidgetObject *w = [[REMWidgetObject alloc]initWithDictionary:dic];
-        if(w.diagramType != REMDiagramTypeGrid){
+        if(w.diagramType != REMDiagramTypeGrid && w.diagramType!=REMDiagramTypeLabelling){
             [widgets addObject:w];
         }
     }

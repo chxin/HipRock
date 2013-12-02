@@ -1,15 +1,15 @@
 /*------------------------------Summary-------------------------------------
  * Product Name : EMOP iOS Application Software
- * File Name	: REMTrialCardController.h
- * Date Created : 张 锋 on 11/24/13.
+ * File Name	: REMLoginTitledCard.h
+ * Date Created : 张 锋 on 11/29/13.
  * Description  : IOS Application software based on Energy Management Open Platform
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
-#import "REMLoginCarouselController.h"
+#import "REMLoginCard.h"
 
-@interface REMLoginTrialCardController : UIViewController
+@interface REMLoginTitledCard : REMLoginCard
 
-@property (nonatomic,weak) REMLoginCarouselController *loginCarouselController;
+- (id)initWithTitle:(NSString *)title andContentView:(UIView *)contentView;
 
 @end

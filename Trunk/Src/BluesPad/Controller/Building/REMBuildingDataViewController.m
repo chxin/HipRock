@@ -283,12 +283,18 @@
     CGRect frame = CGRectMake(0, scroll.contentSize.height-17- REMDMCOMPATIOS7(10), 500, 17);
     
     UILabel *label =[[UILabel alloc]initWithFrame:frame];
-    
+    //label.layer.borderColor=[UIColor redColor].CGColor;
+    //label.layer.borderWidth=1;
+    label.textAlignment=NSTextAlignmentLeft;
     label.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:frame.size.height];
     
     label.text=NSLocalizedString(@"Building_PullUpMoreInfo", @"");//  @"￼上拉查看更多能耗信息";
+    //label.text=@"asd上拉查看更多能耗信息";
+    //label.adjustsLetterSpacingToFitWidth=YES;
+    //label.lineBreakMode=NSLineBreakByTruncatingTail;
     
-    
+    //label.autoresizingMask = UIViewAutoresizingNone;
+    //[label sizeToFit];
     
     label.textColor=[UIColor whiteColor];
     label.backgroundColor=[UIColor clearColor];
@@ -549,13 +555,7 @@
 //}
 
 
--(UIImage*)getImageOfLayer:(CALayer*) layer{
-    UIGraphicsBeginImageContext(layer.frame.size);
-    [layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
+
 
 - (NSDictionary *)realExport{
     REMBuildingCommodityViewController *controller=self.childViewControllers[self.currentCommodityIndex];
@@ -566,15 +566,15 @@
     NSMutableArray* btnOutputImages = [[NSMutableArray alloc]initWithCapacity:self.buttonArray.count];
     for (int i = 0; i < self.buttonArray.count; i++) {
         UIButton* btn = [self.buttonArray objectAtIndex:i];
-        [btnOutputImages setObject:[self getImageOfLayer:btn.layer] atIndexedSubscript:i];
+        [btnOutputImages setObject:[REMImageHelper imageWithView:btn] atIndexedSubscript:i];
     }
     NSMutableArray* chartViewImages = [[NSMutableArray alloc]initWithCapacity:[chartView subviews].count];
     for (int i = 0; i < [[chartView subviews]count]; i++) {
         UIView* chartSubView = [[chartView subviews]objectAtIndex:i];
-        [chartViewImages setObject:[self getImageOfLayer:chartSubView.layer] atIndexedSubscript:i];
+        [chartViewImages setObject:[REMImageHelper imageWithLayer:chartSubView.layer] atIndexedSubscript:i];
     }
     
-    UIGraphicsBeginImageContext(CGSizeMake(self.view.frame.size.width, kBuildingCommodityButtonDimension + kBuildingCommodityBottomMargin + chartHeight));
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.view.frame.size.width, kBuildingCommodityButtonDimension + kBuildingCommodityBottomMargin + chartHeight),0,0.8);
     // Draw buttons
     
     for (int i = 0; i < self.buttonArray.count; i++) {

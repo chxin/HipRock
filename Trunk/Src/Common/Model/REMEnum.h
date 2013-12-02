@@ -75,7 +75,8 @@ typedef enum _REMDiagramType
     REMDiagramTypeStackColumn,
     REMDiagramTypeLine,
     REMDiagramTypeColumn,
-    REMDiagramTypeGrid
+    REMDiagramTypeGrid,
+    REMDiagramTypeLabelling
 }
 REMDiagramType;
 

@@ -43,7 +43,7 @@
 // Initialization code
 //        self.layer.borderColor = [UIColor orangeColor].CGColor;
 //        self.layer.borderWidth = 1.0f;
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [REMColor colorByHexString: kDMChart_TooltipViewBackgroundColor];
         
         self.model = model;
         

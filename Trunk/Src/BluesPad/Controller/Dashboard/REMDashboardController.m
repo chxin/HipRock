@@ -54,7 +54,7 @@ static NSString *cellId=@"dashboardcell";
     [self.tableView registerClass:[REMDashboardCellViewCell class] forCellReuseIdentifier:cellId];
     self.tableView.sectionFooterHeight=34;
     self.tableView.sectionHeaderHeight=0;
-    self.tableView.contentInset = UIEdgeInsetsMake(-REMDMCOMPATIOS7(18), 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(-REMDMCOMPATIOS7(14), 0, 0, 0);
     //NSLog(@"frame:%@",NSStringFromCGRect(self.view.frame));
     
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, kDashboardDragTitleMargin, 300, kDashboardDragTitleSize)];
@@ -160,7 +160,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
     if (self.buildingInfo.dashboardArray.count==0) {
         NSString *emptyText=NSLocalizedString(@"Dashboard_Empty", @"");//未配置任何仪表盘。
         cell.textLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.5];
-        cell.textLabel.font=[UIFont fontWithName:@(kBuildingFontSC) size:29];
+        cell.textLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:29];
         cell.textLabel.text=emptyText;
         return cell;
     }

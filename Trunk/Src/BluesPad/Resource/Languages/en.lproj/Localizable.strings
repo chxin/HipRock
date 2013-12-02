@@ -26,6 +26,7 @@
 "Common_Cancel"="取消";
 "Common_Giveup"="放弃";
 "Common_OK"="好";
+"Common_Quit"="退出";
 
 //Admin,prefix: Admin_
 "Admin_UserTitleEEConsultant"="能源工程顾问";
@@ -47,15 +48,29 @@
 //Login, prefix: Login_
 "Login_SkipToLoginButtonText" = "登录";
 "Login_SkipToTrialButtonText" = "产品试用";
+
+"Login_LoginCardTitle" = "登录";
 "Login_TrialCardTitle" = "产品试用";
+
+//trial card
 "Login_TrialWelcomeText" = "欢迎试用施耐德EMOP能源管理开放平台";
 "Login_LoginButtonText" = "登录";
 "Login_TrialButtonText" = "产品试用";
+
 "Login_CreatingDemoUserText" = "账号创建中，请稍候..";
 
+
+//login card
+"Login_LoginPrompt" = "正在登录施耐德电气能源管理开放平台";
+"Login_LoginUsernamePlaceHolder" = "用户名";
+"Login_LoginPasswordPlaceHolder" = "密码";
+"Login_LoginButtonNormalText"="登录";
+"Login_LoginButtonWorkingText"="正在登录...";
+
+
+"Login_InputNotComplete"="请输入完整的用户名和密码";
 "Login_NoNetwork" = "无可用网络,无法获取最新的能源数据。";
 "Login_NetworkTimeout" = "网络连接超时,部分最新的能源数据未获得。";
-
 "Login_UserNotExist" = "该用户名不存在";
 "Login_WrongPassword" = "登录密码错误";
 "Login_NotAuthorized" = "未配置客户及相关数据权限,请联系您的管理员。";
@@ -80,10 +95,13 @@
 "Setting_BindWeibo"="绑定新浪微博";
 "Setting_UserName"="显示名称";
 "Setting_EMOPID"="能源管理平台ID";
-"Setting_CurrentCustomer"="当前用户";
+"Setting_CurrentCustomer"="当前客户";
 "Setting_CustomerInfo"="客户信息";
 "Setting_Logout"="退出登录";
+"Setting_AreYouSureLogout"="您要退出当前账号登录吗?";
+
 //Map, prefix: Map_
+"Map_MarkerBubbleSubtitleFormat"="本月用电量：%d%@";
 
 
 //Gallery, prefix: Gallery_
@@ -93,7 +111,7 @@
 "BuildingChart_NoData"="暂无数据，请持续关注能耗变化";
 "BuildingChart_DataError"="数据错误，请联系管理员。";
 "Building_LabelNoData"="无数据";
-"Building_PullUpMoreInfo"="￼上拉查看更多能耗信息";
+"Building_PullUpMoreInfo"="上拉查看更多能耗信息";
 "Building_ReleaseSwitchView"="松开以显示";
 "Building_Target"="目标值";
 "Building_ThisMonthEnergyUsage"="本月用%@总量"; //本月用电总量，本月用水总量等
@@ -144,6 +162,7 @@
 
 //Mail, prefix: Mail_
 "Mail_AccountNotConfigured" = "未配置邮件账户";
+"Mail_Title" = "来自%@的“能源管理开放平台”信息分享";
 
 //Chart, prefix: Chart_
 "Chart_TargetValue" = "目标值";

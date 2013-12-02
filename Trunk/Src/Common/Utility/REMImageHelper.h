@@ -26,6 +26,8 @@
 
 + (UIImage *) imageWithView:(UIView *)view;
 
++ (UIImage *) imageWithLayer:(CALayer *)layer;
+
 + (NSString *)buildingImagePathWithId:(NSNumber *)imageId andType:(REMBuildingImageType)type;
 
 

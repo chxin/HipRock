@@ -76,7 +76,8 @@
 
 -(void)showMarkers
 {
-    for(REMBuildingOverallModel *buildingInfo in self.buildingInfoArray){
+    for(int i=0; i<self.buildingInfoArray.count; i++){
+        REMBuildingOverallModel *buildingInfo = self.buildingInfoArray[i];
         if(buildingInfo == nil || buildingInfo.building== nil)
             continue;
         
@@ -90,6 +91,9 @@
         marker.flat = NO;
         marker.zIndex = [building.buildingId integerValue];
         marker.icon = [self getMarkerIcon:buildingInfo forMarkerState:UIControlStateNormal];
+        
+        if(i==0)
+            self.mapView.selectedMarker = marker;
     }
 }
 
@@ -175,7 +179,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
-        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
     }
 }
 

@@ -47,9 +47,6 @@
     
     [self.indicator startAnimating];
     
-    [self setEnabled:NO];
-    [self setTitleForAllStatus:self.loadingText];
-    
     self.indicatorStatus = YES;
 }
 
@@ -62,18 +59,7 @@
         self.indicator = nil;
     }
     
-    [self setEnabled:YES];
-    [self setTitleForAllStatus:self.backupTitle];
-    
     self.indicatorStatus = NO;
-}
-
--(void)setTitleForAllStatus:(NSString *)title
-{
-    self.backupTitle = self.titleLabel.text;
-    
-    [self setTitle:title forState:UIControlStateNormal];
-    [self setTitle:title forState:UIControlStateHighlighted];
 }
 
 @end

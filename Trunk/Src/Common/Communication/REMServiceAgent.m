@@ -30,7 +30,7 @@
 
 static NSOperationQueue *queue = nil;
 static int maxQueueLength = kREMCommMaxQueueWifi;
-#define kREMLogResquest 1 //0:no log, 1:log partial, 2: log full
+#define kREMLogResquest 0 //0:no log, 1:log partial, 2: log full
 
 #ifdef DEBUG
 static int requestTimeout = 1000; //(s)
@@ -342,7 +342,7 @@ static int requestTimeout = 45; //(s)
     
     NSString *base64Encoded = [REMEncryptHelper encodeBase64Data:encryptedData];
     
-    NSLog(@"%@",original);
+    //NSLog(@"%@",original);
     //NSLog(@"%@",base64Encoded);
     
     return base64Encoded;

@@ -105,8 +105,8 @@
 -(UIView *)renderCloseView
 {
     UIView *closeView = [[UIView alloc] initWithFrame:CGRectMake(kDMChart_TooltipContentWidth - kDMChart_TooltipCloseViewWidth, 0, kDMChart_TooltipCloseViewWidth, kDMChart_TooltipContentHeight)];
-    //closeView.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
-    closeView.backgroundColor = [UIColor clearColor];
+    closeView.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
+    //closeView.backgroundColor = [UIColor clearColor];
     
     CGFloat topOffset = (kDMChart_TooltipContentHeight - REMIMG_Close_Chart.size.height) / 2;
     CGFloat leftOffset = kDMChart_TooltipCloseViewInnerLeftOffset;
@@ -117,6 +117,8 @@
     [button setImage:REMIMG_Close_Chart forState:UIControlStateNormal];
     [button addTarget:self action:@selector(closeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [button setAdjustsImageWhenHighlighted:YES];
+    button.layer.borderWidth = 1.0;
+    button.layer.borderColor = [UIColor orangeColor].CGColor;
     
     [closeView addSubview:button];
     

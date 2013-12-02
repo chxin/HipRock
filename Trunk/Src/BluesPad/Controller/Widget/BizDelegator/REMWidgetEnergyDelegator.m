@@ -692,55 +692,71 @@
 }
 
 - (void)processStepErrorWithAvailableStep:(NSString *)availableStep{
-    NSArray *buttonArray;
+    NSMutableArray *buttonArray=[NSMutableArray array];
     NSArray *supportStep;
     NSArray *errorMsgArray;
     if([availableStep isEqualToString:@"Monthly"]==YES){
-        buttonArray=@[NSLocalizedString(@"Common_Month", @""),NSLocalizedString(@"Common_Year", @"")];
+        //buttonArray=@[NSLocalizedString(@"Common_Month", @""),NSLocalizedString(@"Common_Year", @"")];
         supportStep =@[@(REMEnergyStepMonth),@(REMEnergyStepYear)];
         errorMsgArray=@[NSLocalizedString(@"Widget_StepErrorHour", @""),NSLocalizedString(@"Widget_StepErrorDay", @""),NSLocalizedString(@"Widget_StepErrorWeek", @"")];
     }
     else if([availableStep isEqualToString:@"Daily"]==YES){
-        buttonArray=@[NSLocalizedString(@"Common_Day", @""),NSLocalizedString(@"Common_Week", @""),NSLocalizedString(@"Common_Month", @"")];
+        //buttonArray=@[NSLocalizedString(@"Common_Day", @""),NSLocalizedString(@"Common_Week", @""),NSLocalizedString(@"Common_Month", @"")];
         supportStep =@[@(REMEnergyStepDay),@(REMEnergyStepWeek),@(REMEnergyStepMonth)];
         errorMsgArray=@[NSLocalizedString(@"Widget_StepErrorHour", @"")];
     }
     else if([availableStep isEqualToString:@"Weekly"]==YES){
-        buttonArray=@[NSLocalizedString(@"Common_Week", @""),NSLocalizedString(@"Common_Month", @""),NSLocalizedString(@"Common_Year", @"")];
+        //buttonArray=@[NSLocalizedString(@"Common_Week", @""),NSLocalizedString(@"Common_Month", @""),NSLocalizedString(@"Common_Year", @"")];
         supportStep =@[@(REMEnergyStepWeek),@(REMEnergyStepMonth),@(REMEnergyStepYear)];
         errorMsgArray=@[NSLocalizedString(@"Widget_StepErrorHour", @""),NSLocalizedString(@"Widget_StepErrorDay", @"")];
     }
     else if([availableStep isEqualToString:@"Yearly"]==YES){
-        buttonArray=@[NSLocalizedString(@"Common_Year", @"")];
+        //buttonArray=@[NSLocalizedString(@"Common_Year", @"")];
         supportStep =@[@(REMEnergyStepYear)];
         errorMsgArray=@[NSLocalizedString(@"Widget_StepErrorHour", @""),NSLocalizedString(@"Widget_StepErrorDay", @""),NSLocalizedString(@"Widget_StepErrorWeek", @""),NSLocalizedString(@"Widget_StepErrorMonth", @"")];
     }
     else if([availableStep isEqualToString:@"Hourly"]==YES){
-        buttonArray=@[NSLocalizedString(@"Common_Hour", @""),NSLocalizedString(@"Common_Daily", @""),NSLocalizedString(@"Common_Week", @"")];
+        //buttonArray=@[NSLocalizedString(@"Common_Hour", @""),NSLocalizedString(@"Common_Daily", @""),NSLocalizedString(@"Common_Week", @"")];
         supportStep =@[@(REMEnergyStepHour),@(REMEnergyStepDay),@(REMEnergyStepWeek)];
         errorMsgArray=@[];
     }
-    else{
-        buttonArray=@[];
-    }
+    
     self.supportStepArray=supportStep;
-    BOOL include=NO;
-    for (NSNumber *canStepNumber in self.supportStepArray) {
-        REMEnergyStep canStep=(REMEnergyStep)[canStepNumber intValue];
+    
+    NSMutableArray *finalSupportStepArray=[NSMutableArray array];
+    for (int i=0;i<self.supportStepArray.count;++i) {
+        REMEnergyStep canStep=(REMEnergyStep)[self.supportStepArray[i] intValue];
         for (NSNumber *showStepNumber in self.currentStepList) {
             REMEnergyStep showStep=(REMEnergyStep)[showStepNumber intValue];
             if(showStep==canStep){
-                include=YES;
-                break;
+                [finalSupportStepArray addObject:@(showStep)];
             }
         }
-        if(include==YES){
-            break;
-        }
     }
-    if(include==NO){
-        buttonArray=@[];
+    if(finalSupportStepArray.count==0){
         self.supportStepArray=@[];
+    }
+    else{
+        self.supportStepArray=finalSupportStepArray;
+        for (int i=0; i<finalSupportStepArray.count; ++i) {
+            REMEnergyStep showStep=(REMEnergyStep)[finalSupportStepArray[i] intValue];
+            if (showStep == REMEnergyStepHour) {
+                [buttonArray addObject:NSLocalizedString(@"Common_Hour", @"")];
+            }
+            else if(showStep == REMEnergyStepDay) {
+                [buttonArray addObject:NSLocalizedString(@"Common_Day", @"")];
+            }
+            else if(showStep == REMEnergyStepWeek) {
+                [buttonArray addObject:NSLocalizedString(@"Common_Week", @"")];
+            }
+            else if(showStep == REMEnergyStepMonth) {
+                [buttonArray addObject:NSLocalizedString(@"Common_Month", @"")];
+            }
+            else if(showStep == REMEnergyStepYear) {
+                [buttonArray addObject:NSLocalizedString(@"Common_Year", @"")];
+            }
+        }
+        
     }
     UIAlertView *alert= [[UIAlertView alloc]init];
     alert.title=@"";
@@ -899,7 +915,7 @@
         [self.searchLegendViewContainer addSubview:view];
         self.legendView = view;
         
-        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             self.legendView.frame = kDMChart_ToolbarFrame;
         } completion:nil];
     }
@@ -908,7 +924,7 @@
 -(void)hideLegendView
 {
     if(self.legendView != nil){
-        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             self.legendView.frame = kDMChart_ToolbarHiddenFrame;
         } completion:^(BOOL finished) {
             [self.legendView removeFromSuperview];
@@ -970,6 +986,7 @@
 -(void)highlightPoint:(REMEnergyData*)point color:(UIColor*)color name:(NSString*)name direction:(REMDirection)direction
 {
     //NSLog(@"Pie %@ is now on the niddle.", name);
+    NSLog(@"direction is %d", direction);
     
     [self.searchLegendViewContainer setHidden:YES];
     
@@ -991,14 +1008,15 @@
         return;
     
     [self hideTooltip:^{
-        [self.chartWrapper cancelToolTipStatus];
-//        id chartView = (id)[self.chartWrapper getView];
-//        if([chartView respondsToSelector:@selector(cancelToolTipStatus)]){
-//            [chartView cancelToolTipStatus];
-//        }
-//        if([self.chartWrapper respondsToSelector:@selector(cancelToolTipStatus)]){
-//            [self.chartWrapper performSelector:@selector(cancelToolTipStatus) withObject:nil];
-//        }
+        if(self.widgetInfo.diagramType == REMDiagramTypePie){
+            id chartView = (id)self.pieWrapper.view;
+            if([chartView respondsToSelector:@selector(cancelToolTipStatus)]){
+                [chartView cancelToolTipStatus];
+            }
+        }
+        else{
+            [self.chartWrapper cancelToolTipStatus];
+        }
         
         [self.searchLegendViewContainer setHidden:NO];
     }];

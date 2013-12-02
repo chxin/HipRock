@@ -25,7 +25,7 @@
 @property (nonatomic,weak) CALayer *bottomGradientLayer;
 @property (nonatomic,weak) UILabel *buildingTypeTitleView;
 @property (nonatomic,weak) UILabel *buildingTitleView;
-
+@property (nonatomic,weak) UIButton *logoButton;
 @property (nonatomic,strong) NSString *loadingImageKey;
 
 @property (nonatomic,weak) UIImageView *cropTitleView;
@@ -153,6 +153,9 @@
             [self.shareButton setHidden:NO];
             [self.container addSubview:controller.view];
         }
+        else{
+            [controller.view setHidden:NO];
+        }
     }
     else{
         REMDashboardController *controller=self.childViewControllers[1];
@@ -160,6 +163,10 @@
             [self.shareButton setHidden:YES];
             [self.container addSubview:controller.view];
             [controller.view setFrame:controller.upViewFrame];
+        }
+        else{
+            [controller.view setFrame:controller.upViewFrame];
+            [controller.view setHidden:NO];
         }
         
         
@@ -293,7 +300,7 @@
     
     
     [self.container addSubview:logoButton];
-    
+    self.logoButton=logoButton;
 }
 
 
@@ -432,7 +439,7 @@
         return;
     }
     //UIImage *image=[REMImageHelper imageWithView:self.container];
-    CGRect rect=CGRectMake(0, 0, self.view.frame.size.width, kBuildingTitleHeight);
+    CGRect rect=CGRectMake(0, 0, self.view.frame.size.width, REMDMCOMPATIOS7(kBuildingTitleHeight));
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, self.view.window.screen.scale);
     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
     
@@ -445,7 +452,7 @@
     //CGImageRelease(imageRef);
     
     UIImageView *view=[[UIImageView alloc]initWithImage:img];
-    [self.container addSubview:view];
+    [self.view addSubview:view];
     self.cropTitleView=view;
 }
 
@@ -475,6 +482,7 @@
 //    float blurLevel=(offsetY + kBuildingCommodityViewTop) / (kBuildingCommodityViewTop+kCommodityScrollTop);
 //     self.glassView.alpha = MAX(0,MIN(blurLevel,0.8));
 //    return;
+    
     float blurLevel=(offsetY + kBuildingCommodityViewTop) / (kBuildingCommodityViewTop+kCommodityScrollTop);
     
     if(self.blurImageView.alpha == blurLevel) return;
@@ -634,13 +642,7 @@
     }
     // Dispose of any resources that can be recreated.
 }
--(UIImage*)getImageOfLayer:(CALayer*) layer{
-    UIGraphicsBeginImageContext(layer.frame.size);
-    [layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
+
 - (void)exportImage:(void (^)(UIImage *, NSString*))callback
 {
     REMBuildingDataViewController *dataViewController=self.childViewControllers[0];
@@ -652,19 +654,37 @@
     CGFloat outputHeightWithoutFooter = dataImageHeight + kBuildingCommodityViewTop + kBuildingTitleHeight;
     CGFloat footerHeight = 98;
     UIImage *footerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WeiboBana" ofType:@"jpg"]];
-    UIGraphicsBeginImageContext(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight));
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight),1,0.7);
     [[UIColor blackColor]set];
     UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
-    [[self getImageOfLayer:self.imageView.layer]drawInRect:self.imageView.frame];
-    [[self getImageOfLayer:self.buildingTitleView.layer]drawInRect:CGRectMake(self.backButton.frame.origin.x, self.backButton.frame.origin.y, self.buildingTitleView.frame.size.width, self.buildingTitleView.frame.size.height)];
+    
+    
+    UIImage *newBgImage=[self getCachedImage:nil];
+    if(newBgImage==nil){
+        newBgImage = REMIMG_DefaultBuilding;
+    }
+    
+    
+    
+    
+    [newBgImage drawInRect:self.imageView.frame];
+    [[REMImageHelper imageWithView:self.logoButton] drawInRect:self.logoButton.frame];
+    [[REMImageHelper imageWithLayer:self.buildingTypeTitleView.layer] drawInRect:self.buildingTypeTitleView.frame];
+    [[REMImageHelper imageWithLayer:self.buildingTitleView.layer] drawInRect:self.buildingTitleView.frame];
     //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
-    [[self getImageOfLayer:self.bottomGradientLayer]drawInRect:self.bottomGradientLayer.frame];
+    
+    [[REMImageHelper imageWithLayer:self.bottomGradientLayer] drawInRect:self.bottomGradientLayer.frame];
+    
     [dataImage drawInRect:CGRectMake(0, kBuildingCommodityViewTop + kBuildingTitleHeight, outputWidth, dataImageHeight)];
     
     [footerImage drawInRect:CGRectMake(0, outputHeightWithoutFooter, 800, footerHeight)];
-    [[self getImageOfLayer:self.titleGradientLayer]drawInRect:self.titleGradientLayer.frame];
+    [[REMImageHelper imageWithLayer:self.titleGradientLayer] drawInRect:self.titleGradientLayer.frame];
     UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
+    
+    
+    //UIImage *compressedImage=[UIImage imageWithData:UIImagePNGRepresentation(img)];
     
     //        NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     //        NSString* myDocPath = myPaths[0];

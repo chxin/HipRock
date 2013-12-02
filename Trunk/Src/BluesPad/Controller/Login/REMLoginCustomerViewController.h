@@ -7,11 +7,11 @@
  --------------------------------------------------------------------------*///
 
 #import <UIKit/UIKit.h>
-#import "REMLoginPageController.h"
+#import "REMLoginCardController.h"
 
 @interface REMLoginCustomerViewController : UITableViewController
 
-@property (nonatomic,weak) REMLoginPageController *loginPageController;
+@property (nonatomic,weak) REMLoginCardController *loginPageController;
 - (IBAction)cancelButtonPressed:(id)sender;
 
 @end

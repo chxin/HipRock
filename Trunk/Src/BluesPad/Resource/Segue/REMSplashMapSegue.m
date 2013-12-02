@@ -27,6 +27,8 @@
     REMSplashScreenController *splashController = self.sourceViewController;
     REMMapViewController *mapController = self.destinationViewController;
     
+    //[splashController.navigationController pushViewController:mapController animated:YES];
+    
     UIImageView *splashTransitionView = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:splashController.view]];
     UIImageView *mapTransitionView = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:mapController.view]];
     

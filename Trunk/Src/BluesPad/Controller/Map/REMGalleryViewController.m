@@ -31,6 +31,18 @@
 @end
 
 
+/*Group order
+ 北京
+ 上海
+ 天津
+ 重庆
+ /按首字母排列其他省/
+ /按首字母排列其他自治区/
+ 香港特别行政区
+ 澳门特别行政区
+ 台湾地区
+ */
+
 @implementation REMGalleryViewController
 
 
@@ -97,7 +109,7 @@
     tableView.delegate = self;
     tableView.backgroundColor = [UIColor clearColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
+//    [tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
 //    tableView.layer.borderColor = [UIColor blueColor].CGColor;
 //    tableView.layer.borderWidth = 1.0;
     
@@ -116,20 +128,18 @@
     if(self.buildingGroups == nil){
         self.buildingGroups = [[NSMutableDictionary alloc] init];
         
-        for (REMBuildingOverallModel *buildingInfo in self.buildingInfoArray) {
-            NSString *province = buildingInfo.building.province;
+        for(int i=0;i<REMProvinceOrder.count;i++){
+            NSString *province = REMProvinceOrder[i];
+            NSMutableArray *buildings = [[NSMutableArray alloc] init];
             
-            if([self.buildingGroups objectForKey:province] == nil){
-                NSMutableArray *buildingArray = [[NSMutableArray alloc] init];
-                [buildingArray addObject:buildingInfo];
-                
-                [self.buildingGroups setObject:buildingArray forKey:province];
+            for (REMBuildingOverallModel *buildingInfo in self.buildingInfoArray) {
+                if(!REMIsNilOrNull(buildingInfo.building.province) && [buildingInfo.building.province rangeOfString:province].length>0){
+                    [buildings addObject:buildingInfo];
+                }
             }
-            else{
-                NSMutableArray *buildingArray = [self.buildingGroups objectForKey:province];
-                [buildingArray addObject:buildingInfo];
-                
-                [self.buildingGroups setObject:buildingArray forKey:province];
+            
+            if(buildings.count > 0){
+                [self.buildingGroups setObject:buildings forKey:province];
             }
         }
     }
@@ -169,7 +179,14 @@
     REMGalleryCollectionViewController *collectionController = [[REMGalleryCollectionViewController alloc] initWithKey:key andBuildingInfoArray:array];
     [self addChildViewController:collectionController];
     
-    REMGalleryGroupView *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier_GalleryGroupCell forIndexPath:indexPath];
+    //REMGalleryGroupView *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier_GalleryGroupCell forIndexPath:indexPath];
+    CGFloat y = tableView.frame.origin.y;
+    for(int i=0; i<indexPath.row-1; i++){
+        y += [self getGalleryGroupCellFrame:[self.buildingGroups[[self.buildingGroups allKeys][indexPath.row]] count]].size.height;
+    }
+    
+    CGRect cellFrame = CGRectMake(tableView.frame.origin.x, y, tableView.frame.size.width, [self getGalleryGroupCellFrame:array.count].size.height);
+    REMGalleryGroupView *cell = [[REMGalleryGroupView alloc] initWithFrame:cellFrame];
     
     [cell setGroupTitle:key];
     [cell setCollectionView:collectionController.collectionView];
@@ -188,6 +205,7 @@
 {
     return NO;
 }
+
 
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
