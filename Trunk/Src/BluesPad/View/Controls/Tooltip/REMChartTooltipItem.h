@@ -14,7 +14,6 @@
 
 @property (nonatomic) int index;
 @property (nonatomic,strong) NSNumber *identity;
-@property (nonatomic) REMChartSeriesIndicatorType type;
 @property (nonatomic,strong) UIColor *color;
 @property (nonatomic,strong) NSString *title;
 @property (nonatomic,strong) NSNumber *value;
