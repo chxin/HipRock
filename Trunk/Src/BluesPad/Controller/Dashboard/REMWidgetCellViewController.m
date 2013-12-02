@@ -86,7 +86,11 @@
         share.backgroundColor=[UIColor clearColor];
         share.textColor=[REMColor colorByHexString:@"#5e5e5e"];
         share.textAlignment=NSTextAlignmentRight;
-        share.text= [NSString stringWithFormat: NSLocalizedString(@"Dashboard_ShareUserName", @"") , self.widgetInfo.shareInfo.userRealName];
+        NSString *userName=self.widgetInfo.shareInfo.userRealName;
+        if (userName.length>=4) {
+            userName = [[userName substringToIndex:3] stringByAppendingString:@"..."];
+        }
+        share.text= [NSString stringWithFormat: NSLocalizedString(@"Dashboard_ShareUserName", @"") , userName];
         share.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetShareSize];
         [self.view addSubview:share];
     }
