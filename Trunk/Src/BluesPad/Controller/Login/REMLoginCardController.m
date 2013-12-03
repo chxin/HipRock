@@ -13,7 +13,6 @@
 #import "REMSplashScreenController.h"
 #import "REMUserValidationModel.h"
 #import "REMCommonHeaders.h"
-#import "REMLoginCustomerViewController.h"
 #import "REMLocalizeKeys.h"
 #import "REMStoryboardDefinitions.h"
 #import "REMImages.h"
@@ -191,8 +190,8 @@
                 return;
             }
             
-            [self.loginCarouselController performSegueWithIdentifier:kSegue_LoginToCustomer sender:self];
-            
+            //[self.loginCarouselController performSegueWithIdentifier:kSegue_LoginToCustomer sender:self];
+            [self.loginCarouselController presentCustomerSelectionView];
         }
         else
         {

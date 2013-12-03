@@ -122,7 +122,8 @@
                 return;
             }
             
-            [self.loginCarouselController performSegueWithIdentifier:kSegue_LoginToCustomer sender:self];
+            //[self.loginCarouselController performSegueWithIdentifier:kSegue_LoginToCustomer sender:self];
+            [self.loginCarouselController presentCustomerSelectionView];
         }
         
         //[self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
