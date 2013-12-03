@@ -43,7 +43,8 @@
 	// Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.view setFrame:self.viewFrame];
-    
+    //self.view.layer.borderColor=[UIColor redColor].CGColor;
+    //self.view.layer.borderWidth=1;
     //NSLog(@"detail view:%@",NSStringFromCGRect(self.view.frame));
 
     self.searchModel=[REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax.dataStoreType withParam:self.widgetInfo.contentSyntax.params];
