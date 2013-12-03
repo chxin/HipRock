@@ -34,6 +34,11 @@
 @property (nonatomic, assign) CGFloat pieRadius;
 @property (nonatomic, assign) CGFloat pieShadowRadius;
 
+@property (nonatomic, assign) CGFloat plotPaddingTop;
+@property (nonatomic, assign) CGFloat plotPaddingLeft;
+@property (nonatomic, assign) CGFloat plotPaddingRight;
+@property (nonatomic, assign) CGFloat plotPaddingBottom;
+
 +(REMChartStyle*)getMaximizedStyle;
 +(REMChartStyle*)getMinimunStyle;
 @end
