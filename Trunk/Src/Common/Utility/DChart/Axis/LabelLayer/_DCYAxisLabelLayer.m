@@ -58,7 +58,7 @@
             NSString* yString = [self stringForObjectValue:yVal];
             CGSize stringSize = [DCUtility getSizeOfText:yString forFont:self.axis.labelFont];
             
-            CGPoint pp = CGPointMake(self.isMajorAxis ? (labelWidth-stringSize.width) : self.myFrame.origin.x + self.axis.labelToLine, self.myFrame.size.height*(1-yVal/self.yRange.length)+stringSize.height/3);
+            CGPoint pp = CGPointMake(self.isMajorAxis ? (labelWidth-stringSize.width+self.myFrame.origin.x) : self.myFrame.origin.x + self.axis.labelToLine, self.myFrame.size.height*(1-yVal/self.yRange.length)+stringSize.height/3);
             char *commentsMsg = (char *)[yString UTF8String];
             CGContextShowTextAtPoint(ctx, pp.x, pp.y, commentsMsg, strlen(commentsMsg));
             CGContextFillPath(ctx);

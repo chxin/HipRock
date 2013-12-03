@@ -93,6 +93,10 @@
     view.yAxis0.labelToLine = self.style.yLabelToLine;
     view.yAxis1.labelToLine = self.style.yLabelToLine;
     view.yAxis2.labelToLine = self.style.yLabelToLine;
+    view.plotPaddingRight = self.style.plotPaddingRight;
+    view.plotPaddingLeft = self.style.plotPaddingLeft;
+    view.plotPaddingTop = self.style.plotPaddingTop;
+    view.plotPaddingBottom = self.style.plotPaddingBottom;
     view.graphContext.hGridlineAmount = self.style.horizentalGridLineAmount;
     view.delegate = self;
     self.graphContext = view.graphContext;

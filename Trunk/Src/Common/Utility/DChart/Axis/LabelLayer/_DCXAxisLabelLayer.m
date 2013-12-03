@@ -137,11 +137,11 @@
     if (size.width > maxLabelLength) {
         text.alignmentMode = kCAAlignmentLeft;
         text.truncationMode = kCATruncationEnd;
-        text.frame = CGRectMake(centerX-maxLabelLength/2,self.frame.size.height/2-size.height/2, maxLabelLength,size.height);
+        text.frame = CGRectMake(centerX-maxLabelLength/2,self.frame.size.height-size.height, maxLabelLength,size.height);
     } else {
         text.alignmentMode = kCAAlignmentCenter;
         text.truncationMode = kCATruncationNone;
-        text.frame = CGRectMake(centerX-size.width/2,self.frame.size.height/2-size.height/2, size.width,size.height);
+        text.frame = CGRectMake(centerX-size.width/2,self.frame.size.height-size.height, size.width,size.height);
     }
     [self.trashbox.xToLayerDic setObject:text forKey:@(x)];
 }

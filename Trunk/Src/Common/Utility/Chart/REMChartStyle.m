@@ -43,6 +43,11 @@
     style.pieRadius = 180;
     style.pieShadowRadius = 190;
     
+    style.plotPaddingBottom = 22;
+    style.plotPaddingTop = 22;
+    style.plotPaddingLeft = 22;
+    style.plotPaddingRight = 22;
+    
     return style;
 }
 +(REMChartStyle*)getMinimunStyle {
@@ -70,6 +75,10 @@
     style.xLabelToLine = 4;
     style.yLabelToLine = 4;
     
+    style.plotPaddingBottom = 0;
+    style.plotPaddingTop = 0;
+    style.plotPaddingLeft = 0;
+    style.plotPaddingRight = 0;
     
     style.pieRadius = 30;
     style.pieShadowRadius = 33;
