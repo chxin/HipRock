@@ -148,7 +148,7 @@
     syntax.xtype = @"columnchartcomponent";
     syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
     NSMutableArray* timeRanges = [[NSMutableArray alloc]initWithCapacity:1];
-    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*90]];
+    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10]];
     [timeRanges setObject:r atIndexedSubscript:0];
     syntax.timeRanges = timeRanges;
     
@@ -180,16 +180,16 @@
     energyViewData.targetEnergyData = sereis;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
-    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 374) data:energyViewData widgetContext:syntax style:style];
+    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
     columnWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:columnWidget.view];
     
-    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:CGRectMake(0, 374, 1024, 374) data:energyViewData widgetContext:syntax style:style];
+    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
     lineWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:lineWidget.view];
-    
-    DCPieChartView* vvv = [[DCPieChartView alloc]initWithFrame:CGRectMake(0, 0, 1024, 748)];
-    [self.view addSubview:vvv];
+    self.plotSource = lineWidget;
+//    DCPieChartView* vvv = [[DCPieChartView alloc]initWithFrame:CGRectMake(0, 0, 1024, 748)];
+//    [self.view addSubview:vvv];
 }
 
 
