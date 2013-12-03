@@ -154,7 +154,7 @@
         
         self._yLabelLayer0 = [self createYLabelLayer:self.yAxis0];
         self._yLabelLayer0.isMajorAxis = YES;
-        self._yLabelLayer0.frame = CGRectMake(self.plotPaddingLeft, 0, self.y0LabelLayerSize.width, self.y0LabelLayerSize.height);
+        self._yLabelLayer0.frame = CGRectMake(self.plotPaddingLeft, self.plotPaddingTop, self.y0LabelLayerSize.width, self.y0LabelLayerSize.height);
         [self.graphContext addY0IntervalObsever:self._yLabelLayer0];
         [self._yLabelLayer0 setNeedsDisplay];
     }
