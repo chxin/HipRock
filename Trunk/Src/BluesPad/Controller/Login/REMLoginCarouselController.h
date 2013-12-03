@@ -23,5 +23,6 @@
 
 -(void)showLoginCard;
 -(void)playCarousel:(BOOL)isAnimated;
+-(void)presentCustomerSelectionView;
 
 @end

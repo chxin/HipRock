@@ -402,7 +402,6 @@
 		7A25725717F911AD0007438F /* REMGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A25725617F911AD0007438F /* REMGalleryViewController.m */; };
 		7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */; };
 		7A2BA42217D877C3003B18E1 /* REMError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42117D877C3003B18E1 /* REMError.m */; };
-		7A2E7EBD17F28E8A000EB506 /* REMLoginCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2E7EBC17F28E8A000EB506 /* REMLoginCustomerViewController.m */; };
 		7A2E7EC117F2DCB3000EB506 /* REMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2E7EC017F2DCB3000EB506 /* REMMapViewController.m */; };
 		7A2E7ECB17F2DD41000EB506 /* REMBuildingTitleLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2E7EC517F2DD41000EB506 /* REMBuildingTitleLabelView.m */; };
 		7A2E7ECC17F2DD41000EB506 /* REMBuildingTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2E7EC717F2DD41000EB506 /* REMBuildingTitleView.m */; };
@@ -503,6 +502,7 @@
 		7AB9B39E183DCF1100779C5E /* REMTrendChartTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B395183DCF1100779C5E /* REMTrendChartTooltipView.m */; };
 		7AB9B3A1183DF20B00779C5E /* REMRankingTooltipItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B3A0183DF20B00779C5E /* REMRankingTooltipItem.m */; };
 		7AB9B3A4183DF8FF00779C5E /* REMTextIndicatorFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B3A3183DF8FF00779C5E /* REMTextIndicatorFormator.m */; };
+		7ABD915D184DB784006AF935 /* REMLoginCustomerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABD915C184DB784006AF935 /* REMLoginCustomerTableViewController.m */; };
 		7ABFDDEF18482F7B004DD4E7 /* Default@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDED18482F7B004DD4E7 /* Default@2x~ipad.png */; };
 		7ABFDDF018482F7B004DD4E7 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDEE18482F7B004DD4E7 /* Default~ipad.png */; };
 		7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */; };
@@ -995,8 +995,6 @@
 		7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBusinessErrorInfo.m; path = Common/Model/REMBusinessErrorInfo.m; sourceTree = "<group>"; };
 		7A2BA42017D877C3003B18E1 /* REMError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMError.h; sourceTree = "<group>"; };
 		7A2BA42117D877C3003B18E1 /* REMError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMError.m; sourceTree = "<group>"; };
-		7A2E7EBB17F28E8A000EB506 /* REMLoginCustomerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginCustomerViewController.h; sourceTree = "<group>"; };
-		7A2E7EBC17F28E8A000EB506 /* REMLoginCustomerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginCustomerViewController.m; sourceTree = "<group>"; };
 		7A2E7EBF17F2DCB3000EB506 /* REMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMapViewController.h; path = Controller/Map/REMMapViewController.h; sourceTree = "<group>"; };
 		7A2E7EC017F2DCB3000EB506 /* REMMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMapViewController.m; path = Controller/Map/REMMapViewController.m; sourceTree = "<group>"; };
 		7A2E7EC417F2DD41000EB506 /* REMBuildingTitleLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingTitleLabelView.h; path = View/Building/REMBuildingTitleLabelView.h; sourceTree = "<group>"; };
@@ -1257,6 +1255,8 @@
 		7ABC2E22177BE6210000C060 /* NSCoderExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCoderExtensions.h; sourceTree = "<group>"; };
 		7ABC2E23177BE6210000C060 /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDecimalNumberExtensions.h; sourceTree = "<group>"; };
 		7ABC2E24177BE6210000C060 /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
+		7ABD915B184DB784006AF935 /* REMLoginCustomerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginCustomerTableViewController.h; sourceTree = "<group>"; };
+		7ABD915C184DB784006AF935 /* REMLoginCustomerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginCustomerTableViewController.m; sourceTree = "<group>"; };
 		7ABFDDED18482F7B004DD4E7 /* Default@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x~ipad.png"; sourceTree = "<group>"; };
 		7ABFDDEE18482F7B004DD4E7 /* Default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~ipad.png"; sourceTree = "<group>"; };
 		7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed.png"; sourceTree = "<group>"; };
@@ -2039,12 +2039,12 @@
 			children = (
 				7A153C7617AA497B00413D3C /* REMLoginCarouselController.h */,
 				7A153C7717AA497B00413D3C /* REMLoginCarouselController.m */,
-				7A2E7EBB17F28E8A000EB506 /* REMLoginCustomerViewController.h */,
-				7A2E7EBC17F28E8A000EB506 /* REMLoginCustomerViewController.m */,
 				7A153C7C17AA497B00413D3C /* REMLoginCardController.h */,
 				7A153C7D17AA497B00413D3C /* REMLoginCardController.m */,
 				7A3C64FC184234CE003EDC7B /* REMTrialCardController.h */,
 				7A3C64FD184234CE003EDC7B /* REMTrialCardController.m */,
+				7ABD915B184DB784006AF935 /* REMLoginCustomerTableViewController.h */,
+				7ABD915C184DB784006AF935 /* REMLoginCustomerTableViewController.m */,
 			);
 			name = Login;
 			path = Controller/Login;
@@ -3658,6 +3658,7 @@
 				7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */,
 				7A3DDCDA1786C05B008A1033 /* REMServiceAgent.m in Sources */,
 				7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */,
+				7ABD915D184DB784006AF935 /* REMLoginCustomerTableViewController.m in Sources */,
 				B48ED3EA178EA1740032CD72 /* REMTimeHelper.m in Sources */,
 				7A5DBD28178FD014006C4EDE /* REMDataAccessor.m in Sources */,
 				7A5DBD2B178FD034006C4EDE /* REMDataStore.m in Sources */,
@@ -3733,7 +3734,6 @@
 				7A7B210B183CAB5F00C14248 /* REMCostLegendFormator.m in Sources */,
 				7A37AA5C17AB56F100316902 /* REMUserValidationModel.m in Sources */,
 				EFD6F093181F9C6200AE0A57 /* REMBarPlot.m in Sources */,
-				7A2E7EBD17F28E8A000EB506 /* REMLoginCustomerViewController.m in Sources */,
 				EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */,
 				7A37AA6317AB944B00316902 /* REMNumberLabel.m in Sources */,
 				7A634BBC180E80140076C84D /* REMSplashMapSegue.m in Sources */,

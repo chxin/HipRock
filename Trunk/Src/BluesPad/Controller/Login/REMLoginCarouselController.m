@@ -14,8 +14,8 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMLoginCard.h"
 #import "REMTrialCardController.h"
-#import "REMLoginCustomerViewController.h"
 #import "REMLoginTitledCard.h"
+#import "REMLoginCustomerTableViewController.h"
 
 @interface REMLoginCarouselController ()
 
@@ -35,7 +35,9 @@ static const int kTrialCardIndex = kCardCount - 2;
 
 - (void)loadView
 {
-    [super loadView];
+    //[super loadView];
+    self.view = [[UIView alloc] initWithFrame: kDMDefaultViewFrame];
+    
     if(self){
         //load scroll view
         [self loadScrollView];
@@ -244,15 +246,16 @@ static const int kTrialCardIndex = kCardCount - 2;
     // Dispose of any resources that can be recreated.
 }
 
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+-(void)presentCustomerSelectionView
 {
-    if ([segue.identifier isEqualToString:kSegue_LoginToCustomer] == YES)
-    {
-        UINavigationController *navigationController = segue.destinationViewController;
-        REMLoginCustomerViewController *customerController = navigationController.childViewControllers[0];
-        customerController.loginPageController = self.loginPageController;
-    }
+    REMLoginCustomerTableViewController *customerController = [[REMLoginCustomerTableViewController alloc] init];
+    customerController.loginCardController = self.loginPageController;
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:customerController];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 

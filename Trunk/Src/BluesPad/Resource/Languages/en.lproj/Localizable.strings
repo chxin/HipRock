@@ -52,6 +52,8 @@
 "Login_LoginCardTitle" = "登录";
 "Login_TrialCardTitle" = "产品试用";
 
+"Login_CustomerSelectionTitle" = "请选择客户";
+
 //trial card
 "Login_TrialWelcomeText" = "欢迎试用施耐德EMOP能源管理开放平台";
 "Login_LoginButtonText" = "登录";
