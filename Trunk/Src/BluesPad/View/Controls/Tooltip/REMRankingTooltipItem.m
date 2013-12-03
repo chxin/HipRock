@@ -75,7 +75,7 @@
 -(UILabel *)renderNumeratorLabel
 {
     NSString *text = [NSString stringWithFormat:@"%d",self.rankingModel.numerator];
-    UIFont *font = [UIFont systemFontOfSize:24];
+    UIFont *font = [UIFont systemFontOfSize:kDMChart_RankingTooltipNumeratorFontSize];
     CGSize size = [text sizeWithFont:font];
     CGRect frame = CGRectMake(0, 0, size.width, size.height);
     
@@ -83,7 +83,9 @@
     label.text = text;
     label.backgroundColor = [UIColor clearColor];
     label.font = font;
-    label.textColor = [UIColor blackColor];
+    label.textColor = [REMColor colorByHexString:kDMChart_RankingTooltipNumeratorFontColor];
+//    label.layer.borderWidth = 1.0;
+//    label.layer.borderColor = [UIColor purpleColor].CGColor;
     
     return label;
 }
@@ -91,7 +93,7 @@
 -(UILabel *)renderDenominatorLabel
 {
     NSString *text = [NSString stringWithFormat:@"/%d",self.rankingModel.denominator];
-    UIFont *font = [UIFont systemFontOfSize:12];
+    UIFont *font = [UIFont systemFontOfSize:kDMChart_RankingTooltipDenominatorFontSize];
     CGSize size = [text sizeWithFont:font];
     CGRect frame = CGRectMake(self.numeratorLabel.frame.origin.x+self.numeratorLabel.frame.size.width, self.numeratorLabel.frame.origin.y + self.numeratorLabel.frame.size.height - size.height, size.width, size.height);
     
@@ -99,43 +101,55 @@
     label.text = text;
     label.backgroundColor = [UIColor clearColor];
     label.font = font;
-    label.textColor = [UIColor blackColor];
+    label.textColor = [REMColor colorByHexString:kDMChart_RankingTooltipDenominatorFontColor];
+//    label.layer.borderWidth = 1.0;
+//    label.layer.borderColor = [UIColor purpleColor].CGColor;
     
     return label;
 }
 
 -(UILabel *)renderTitleLabel:(NSString *)title
 {
-    CGSize rankingSize = CGSizeMake(self.numeratorLabel.frame.size.width+self.denominatorLabel.frame.size.width, self.numeratorLabel.frame.size.height);
+    CGFloat titleLeftOffset = [self getRankingSize].width + kDMChart_RankingTooltipTitleLeftOffset;
     
     UIFont *font = [UIFont systemFontOfSize:kDMChart_TooltipItemTitleFontSize];
     CGSize size = [@"a" sizeWithFont:font];
-    CGRect frame = CGRectMake(rankingSize.width+kDMChart_TooltipItemTitleLeftOffset, self.numeratorLabel.frame.origin.y, self.frame.size.width - (rankingSize.width+kDMChart_TooltipItemTitleLeftOffset), size.height);
+    CGRect frame = CGRectMake(titleLeftOffset, self.numeratorLabel.frame.origin.y, self.frame.size.width - titleLeftOffset, size.height);
     
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.text = title;
     label.backgroundColor = [UIColor clearColor];
     label.font = font;
     label.textColor = [REMColor colorByHexString:kDMChart_TooltipItemTitleColor];
+//    label.layer.borderWidth = 1.0;
+//    label.layer.borderColor = [UIColor purpleColor].CGColor;
     
     return label;
 }
 
 -(UILabel *)renderDataValueLabel:(REMChartTooltipItemModel *)model
 {
-    CGSize rankingSize = CGSizeMake(self.numeratorLabel.frame.size.width+self.denominatorLabel.frame.size.width, self.numeratorLabel.frame.size.height);
+    CGFloat labelLeftOffset = [self getRankingSize].width + kDMChart_RankingTooltipTitleLeftOffset;
+    CGFloat labelTopOffset = kDMChart_TooltipItemTitleFontSize + 11;
     
     UIFont *font = [UIFont systemFontOfSize:kDMChart_TooltipItemDataValueFontSize];
     CGFloat height = [@"a" sizeWithFont:font].height;
-    CGRect frame = CGRectMake(rankingSize.width+kDMChart_TooltipItemTitleLeftOffset, self.numeratorLabel.frame.origin.y + rankingSize.height + kDMChart_TooltipItemDataValueTopOffset, self.frame.size.width - (rankingSize.width+kDMChart_TooltipItemTitleLeftOffset), height);
+    CGRect frame = CGRectMake(labelLeftOffset, labelTopOffset, self.frame.size.width - labelLeftOffset, height);
     
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.text = [super formatDataValue:model];
     label.backgroundColor = [UIColor clearColor];
     label.font = font;
     label.textColor = [REMColor colorByHexString:kDMChart_TooltipItemDataValueColor];
+//    label.layer.borderWidth = 1.0;
+//    label.layer.borderColor = [UIColor purpleColor].CGColor;
     
     return label;
+}
+
+-(CGSize)getRankingSize
+{
+    return CGSizeMake(self.numeratorLabel.frame.size.width+self.denominatorLabel.frame.size.width, self.numeratorLabel.frame.size.height);
 }
 
 @end

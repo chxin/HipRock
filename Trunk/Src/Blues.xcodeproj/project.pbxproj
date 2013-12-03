@@ -3634,7 +3634,6 @@
 				EFDAACB91803F27F008BC9AF /* REMPieChartWrapper.m in Sources */,
 				7A1D142617850B2100CC2922 /* Reachability.m in Sources */,
 				B4922466182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m in Sources */,
-				EFDEC2AB1817C8A80008972E /* REMTrendChartStackColumnSeries.m in Sources */,
 				7A3F6701184C61610079A244 /* REMLoginTitledCard.m in Sources */,
 				7A2E7ECB17F2DD41000EB506 /* REMBuildingTitleLabelView.m in Sources */,
 				EF0346B3183B520100DE186A /* _DCSeriesLayer.m in Sources */,
