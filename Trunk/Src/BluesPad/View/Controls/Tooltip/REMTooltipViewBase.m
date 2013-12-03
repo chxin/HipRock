@@ -35,7 +35,8 @@
     self = [super initWithFrame:kDMChart_TooltipHiddenFrame];
     
     if(self){
-        self.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
+        //self.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
+        self.backgroundColor = [UIColor orangeColor];
         UIView *contentView = [self renderContentView];
         [self addSubview:contentView];
         self.contentView=contentView;
@@ -53,14 +54,12 @@
     
     if(self){
         self.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
+        //self.backgroundColor = [UIColor orangeColor];
         UIView *contentView = [self renderContentView];
+        //contentView.backgroundColor = [UIColor yellowColor];
         [self addSubview:contentView];
         self.contentView=contentView;
         
-        UIView *closeView = [self renderCloseView];
-        [contentView addSubview:closeView];
-        
-        //
         self.highlightedPoints = points;
         self.data = data;
         self.widget = widget;
@@ -69,10 +68,12 @@
         self.itemModels = [self convertItemModels];
         
         UIScrollView *scrollView = [self renderScrollView];
-        
-        
         [self.contentView addSubview:scrollView];
         self.scrollView = scrollView;
+        
+        
+        UIView *closeView = [self renderCloseView];
+        [self.contentView addSubview:closeView];
     }
     
     return self;
@@ -94,9 +95,8 @@
 //@private
 -(UIView *)renderContentView
 {
-    CGRect frame = CGRectMake(kDMChart_TooltipContentLeftOffset, kDMChart_TooltipContentTopOffset, kDMChart_TooltipContentWidth, kDMChart_TooltipContentHeight);
-    
-    UIView *contentView = [[UIView alloc] initWithFrame:frame];
+    UIView *contentView = [[UIView alloc] initWithFrame:kDMChart_TooltipContentViewFrame];
+    NSLog(@"content view frame: %@", NSStringFromCGRect(contentView.frame));
     
     return contentView;
 }
@@ -104,21 +104,15 @@
 //@private
 -(UIView *)renderCloseView
 {
-    UIView *closeView = [[UIView alloc] initWithFrame:CGRectMake(kDMChart_TooltipContentWidth - kDMChart_TooltipCloseViewWidth, 0, kDMChart_TooltipCloseViewWidth, kDMChart_TooltipContentHeight)];
+    UIView *closeView = [[UIView alloc] initWithFrame:kDMChart_TooltipCloseViewFrame];
     closeView.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
-    //closeView.backgroundColor = [UIColor clearColor];
-    
-    CGFloat topOffset = (kDMChart_TooltipContentHeight - REMIMG_Close_Chart.size.height) / 2;
-    CGFloat leftOffset = kDMChart_TooltipCloseViewInnerLeftOffset;
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setFrame:CGRectMake(leftOffset, topOffset, REMIMG_Close_Chart.size.width, REMIMG_Close_Chart.size.height)];
+    [button setFrame:CGRectMake(kDMChart_TooltipCloseIconLeftOffset, kDMChart_TooltipCloseIconTopOffset, kDMChart_TooltipCloseIconSize,kDMChart_TooltipCloseIconSize)];
     [button setContentMode:UIViewContentModeCenter];
     [button setImage:REMIMG_Close_Chart forState:UIControlStateNormal];
     [button addTarget:self action:@selector(closeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [button setAdjustsImageWhenHighlighted:YES];
-    button.layer.borderWidth = 1.0;
-    button.layer.borderColor = [UIColor orangeColor].CGColor;
     
     [closeView addSubview:button];
     

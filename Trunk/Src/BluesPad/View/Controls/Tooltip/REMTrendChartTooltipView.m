@@ -23,6 +23,7 @@
 @property (nonatomic,strong) NSMutableArray *tooltipItems;
 
 @property (nonatomic,weak) UILabel *pointTimeLabel;
+@property (nonatomic,weak) UILabel *timeLabel;
 
 @end
 
@@ -49,7 +50,10 @@
     self = [super initWithHighlightedPoints:points inEnergyData:data widget:widget andParameters:parameters];
     
     if(self){
-        
+        //add time view into content view
+        UILabel *timeLabel = [self renderTimeView];
+        [self.contentView addSubview:timeLabel];
+        self.timeLabel = timeLabel;
     }
     
     return self;
@@ -58,26 +62,28 @@
 -(UIScrollView *)renderScrollView
 {
     self.tooltipItems = [[NSMutableArray alloc] init];
-    UIScrollView *view = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kDMChart_TooltipContentWidth - kDMChart_TooltipCloseViewWidth, kDMChart_TooltipContentHeight)];
+    UIScrollView *view = [[UIScrollView alloc] initWithFrame:kDMChart_TooltipScrollViewFrame];
     
     view.pagingEnabled = NO;
     view.showsHorizontalScrollIndicator = NO;
     view.showsVerticalScrollIndicator = NO;
     view.clipsToBounds = YES;
+    view.layer.borderColor = [UIColor blackColor].CGColor;
+    view.layer.borderWidth = 1.0;
     
     int itemCount = self.itemModels.count;
     
-    CGFloat itemOffset = kMDChart_TooltipItemLeftOffset;
+    CGFloat itemOffset = kDMChart_TooltipItemOffset;
     CGFloat itemWidth = kDMChart_TooltipItemWidth;
     CGFloat contentWidth = (itemWidth + itemOffset) * itemCount - kDMChart_TooltipCloseViewWidth;
     
     if(contentWidth < view.bounds.size.width){
-        itemOffset = itemCount == 1 ? 0 : (kDMChart_TooltipContentWidth - kDMChart_TooltipCloseViewWidth - (itemCount * itemWidth)) / (itemCount - 1);
-        contentWidth = kDMChart_TooltipContentWidth-kDMChart_TooltipCloseViewWidth;
+        itemOffset = itemCount == 1 ? 0 : (kDMChart_TooltipScrollViewWidth - (itemCount * itemWidth)) / (itemCount - 1);
+        contentWidth = kDMChart_TooltipScrollViewWidth;
     }
     
     for(int i=0;i<itemCount;i++){
-        CGRect itemFrame = CGRectMake(i*(itemWidth + itemOffset),0,itemWidth,kDMChart_TooltipContentHeight);
+        CGRect itemFrame = CGRectMake(i*(itemWidth + itemOffset) ,0 , itemWidth, kDMChart_TooltipScrollViewHeight);
         
         REMChartTooltipItem *tooltipItem = [REMChartTooltipItem itemWithFrame:itemFrame andModel:self.itemModels[i]];
         
@@ -85,9 +91,7 @@
         [self.tooltipItems addObject:tooltipItem];
     }
     
-    view.contentSize = CGSizeMake(contentWidth, kDMChart_TooltipContentHeight);
-    
-    NSLog(@"scroll view width: %f, content width: %f", view.frame.size.width, view.contentSize.width);
+    view.contentSize = CGSizeMake(contentWidth, kDMChart_TooltipScrollViewHeight);
     
     return view;
 }
@@ -99,6 +103,9 @@
     
     for(int i=0;i<self.itemModels.count;i++)
         [[self.tooltipItems objectAtIndex:i] updateModel:self.itemModels[i]];
+    
+    DCDataPoint *point = self.highlightedPoints[0];
+    self.timeLabel.text = [self formatTimeText:point.energyData.localTime];
 }
 
 - (NSArray *)convertItemModels
@@ -129,9 +136,27 @@
 //    REMEnergyData *data = point.energyData;
 //}
 
+-(UILabel *)renderTimeView
+{
+    DCDataPoint *point = self.highlightedPoints[0];
+    
+    UILabel *timeLabel = [[UILabel alloc] initWithFrame:kDMChart_TooltipTimeViewFrame];
+    timeLabel.text = [self formatTimeText:point.energyData.localTime];
+    timeLabel.textColor = [REMColor colorByHexString:kDMChart_TooltipTimeViewFontColor];
+    timeLabel.font = [UIFont systemFontOfSize:kDMChart_TooltipTimeViewFontSize];
+    timeLabel.backgroundColor = [UIColor clearColor];
+    
+    return timeLabel;
+}
+
 -(NSString *)formatTargetName:(REMEnergyTargetModel *)target
 {
     return [REMTextIndicatorFormator formatTargetName:target withWidget:self.widget andParameters:self.parameters];
+}
+
+-(NSString *)formatTimeText:(NSDate *)time
+{
+    return [REMTimeHelper formatTimeFullHour:time isChangeTo24Hour:YES];
 }
 
 
