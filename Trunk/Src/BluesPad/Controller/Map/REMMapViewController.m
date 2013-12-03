@@ -94,7 +94,7 @@
         marker.zIndex = i;
         marker.icon = [self getMarkerIcon:buildingInfo forMarkerState:UIControlStateNormal];
         
-        if(i==0)
+        if([buildingInfo.building.buildingId isEqualToNumber:[self.buildingInfoArray[0] building].buildingId])
             self.mapView.selectedMarker = marker;
     }
 }
@@ -334,6 +334,11 @@
     REMMarkerBubbleView *bubble = [[REMMarkerBubbleView alloc] initWithMarker:marker];
     
     return bubble;
+}
+
+-(void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
+{
+    self.mapView.selectedMarker.icon = [self getMarkerIcon:self.mapView.selectedMarker.userData forMarkerState:UIControlStateNormal];
 }
 
 #pragma mark - Segue
