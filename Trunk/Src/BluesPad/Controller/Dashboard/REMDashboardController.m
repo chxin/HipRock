@@ -133,7 +133,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
     }
     
     REMDashboardObj *obj= self.buildingInfo.dashboardArray[indexPath.section];
-    CGFloat titleHeight=kDashboardTitleSize+kDashboardTitleBottomMargin;
+    CGFloat titleHeight=kDashboardTitleSize+kDashboardTitleBottomMargin+4;
     if(obj.shareInfo!=nil){
         titleHeight+=kDashboardShareSize+kDashboardTitleShareMargin;
     }
@@ -155,6 +155,8 @@ static NSString *dashboardGroupName=@"building-data-%@";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     REMDashboardCellViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath ];
     [cell.contentView setFrame:CGRectMake(0, 0, cell.frame.size.width,cell.frame.size.height)];
+    //cell.contentView.layer.borderWidth=1;
+    //cell.contentView.layer.borderColor=[UIColor yellowColor].CGColor;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     if (self.buildingInfo.dashboardArray.count==0) {

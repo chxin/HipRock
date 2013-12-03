@@ -118,7 +118,7 @@
     if (!self.showIndicatorOnFocus) return;
     self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext];
     self.indicatorLayer.pointXOffset = self.pointXOffset;
-    self.indicatorLayer.frame = self.plotRect;
+    self.indicatorLayer.frame = CGRectMake(self.plotRect.origin.x, 0, self.plotRect.size.width, self.plotRect.size.height+self.plotPaddingTop);// self.plotRect;
     self.indicatorLayer.symbolLineStyle = self.focusSymbolLineStyle;
     self.indicatorLayer.symbolLineWidth = self.focusSymbolLineWidth;
     self.indicatorLayer.symbolLineColor = self.focusSymbolLineColor;
@@ -154,7 +154,7 @@
         
         self._yLabelLayer0 = [self createYLabelLayer:self.yAxis0];
         self._yLabelLayer0.isMajorAxis = YES;
-        self._yLabelLayer0.frame = CGRectMake(0, 0, self.y0LabelLayerSize.width, self.y0LabelLayerSize.height);
+        self._yLabelLayer0.frame = CGRectMake(self.plotPaddingLeft, self.plotPaddingTop, self.y0LabelLayerSize.width, self.y0LabelLayerSize.height);
         [self.graphContext addY0IntervalObsever:self._yLabelLayer0];
         [self._yLabelLayer0 setNeedsDisplay];
     }
@@ -168,7 +168,7 @@
         
         self._yLabelLayer1 = [self createYLabelLayer:self.yAxis1];
         self._yLabelLayer1.isMajorAxis = (self._yLabelLayer0 == nil);
-        self._yLabelLayer1.frame = CGRectMake(self._yLabelLayer1.isMajorAxis ? 0 : self.plotRect.size.width+self.plotRect.origin.x, 0, self.y1LabelLayerSize.width, self.y1LabelLayerSize.height);
+        self._yLabelLayer1.frame = CGRectMake(self._yLabelLayer1.isMajorAxis ? self.plotPaddingLeft : self.plotRect.size.width+self.plotRect.origin.x, 0, self.y1LabelLayerSize.width, self.y1LabelLayerSize.height);
         [self.graphContext addY1IntervalObsever:self._yLabelLayer1];
         [self._yLabelLayer1 setNeedsDisplay];
     }
@@ -182,7 +182,7 @@
         
         self._yLabelLayer2 = [self createYLabelLayer:self.yAxis2];
         self._yLabelLayer2.isMajorAxis = (self._yLabelLayer0 == nil && self._yLabelLayer1 == nil);
-        CGFloat x = 0;
+        CGFloat x = self.plotPaddingLeft;
         if (!self._yLabelLayer2.isMajorAxis) {
             x = (self._yLabelLayer1 == nil) ? (self.plotRect.size.width+self.plotRect.origin.x) : (self.plotRect.size.width+self.plotRect.origin.x + self.y1LabelLayerSize.width);
         }
@@ -275,7 +275,7 @@
     self._xLabelLayer.font = self.xAxis.labelFont;
     self._xLabelLayer.fontColor = self.xAxis.labelColor;
     [self.graphContext addHRangeObsever:self._xLabelLayer];
-    self._xLabelLayer.frame = CGRectMake(self.plotRect.origin.x, self.plotRect.size.height, self.plotRect.size.width, self.frame.size.height - self.plotRect.size.height);
+    self._xLabelLayer.frame = CGRectMake(self.plotRect.origin.x, self.plotRect.size.height+self.plotRect.origin.y, self.plotRect.size.width, self.frame.size.height - self.plotRect.size.height - self.plotPaddingBottom - self.plotPaddingTop);
     [self.layer addSublayer:self._xLabelLayer];
     self._xLabelLayer.labelFormatter = self.xLabelFormatter;
     [self._xLabelLayer setNeedsDisplay];
@@ -291,10 +291,10 @@
 }
 
 -(void)drawAxisLines {
-    float plotSpaceLeft = 0;
-    float plotSpaceRight = self.frame.size.width;
-    float plotSpaceTop = 0;
-    float plotSpaceBottom = self.frame.size.height;
+    float plotSpaceLeft = self.plotPaddingLeft;
+    float plotSpaceRight = self.frame.size.width - plotSpaceLeft - self.plotPaddingRight;
+    float plotSpaceTop = self.plotPaddingTop;
+    float plotSpaceBottom = self.frame.size.height - self.plotPaddingBottom;
     
     CGSize axisSize;
     
@@ -303,25 +303,25 @@
     
     axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.yAxis0.labelFont];
     plotSpaceLeft = plotSpaceLeft + axisSize.width + self.yAxis0.lineWidth + self.yAxis0.labelToLine;
-    self.yAxis0.startPoint = CGPointMake(plotSpaceLeft, 0);
+    self.yAxis0.startPoint = CGPointMake(plotSpaceLeft, self.plotPaddingTop);
     self.yAxis0.endPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
-    self.y0LabelLayerSize = CGSizeMake(plotSpaceLeft, plotSpaceBottom);
+    self.y0LabelLayerSize = CGSizeMake(plotSpaceLeft, plotSpaceBottom-self.plotPaddingTop);
     
     if (self.yAxis1 && self.yAxis1.visableSeriesAmount > 0) {
         axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.yAxis1.labelFont];
         CGFloat axisWidth = axisSize.width + self.yAxis1.lineWidth + self.yAxis1.labelToLine;
         plotSpaceRight = plotSpaceRight - axisWidth;
-        self.yAxis1.startPoint = CGPointMake(plotSpaceRight, 0);
+        self.yAxis1.startPoint = CGPointMake(plotSpaceRight, self.plotPaddingTop);
         self.yAxis1.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
-        self.y1LabelLayerSize = CGSizeMake(axisWidth, plotSpaceBottom);
+        self.y1LabelLayerSize = CGSizeMake(axisWidth, plotSpaceBottom-self.plotPaddingTop);
     }
     if (self.yAxis2 && self.yAxis2.visableSeriesAmount > 0) {
         axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.yAxis2.labelFont];
         CGFloat axisWidth = axisSize.width + self.yAxis2.lineWidth + self.yAxis2.labelToLine;
         plotSpaceRight = plotSpaceRight - axisWidth;
-        self.yAxis2.startPoint = CGPointMake(plotSpaceRight, 0);
+        self.yAxis2.startPoint = CGPointMake(plotSpaceRight, self.plotPaddingTop);
         self.yAxis2.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
-        self.y2LabelLayerSize = CGSizeMake(axisWidth, plotSpaceBottom);
+        self.y2LabelLayerSize = CGSizeMake(axisWidth, plotSpaceBottom-self.plotPaddingTop);
     }
     self.xAxis.startPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
     self.xAxis.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);

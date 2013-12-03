@@ -14,15 +14,14 @@
 #import "REMDashboardController.h"
 #import "REMWidgetCollectionViewController.h"
 #import "REMDimensions.h"
-
+#import "UIView+FlipTransition.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface REMMaxWidgetSegue()
 
-@property (nonatomic) CGRect readyMoveFrame;
 @property (nonatomic,weak) UIView *readyMoveView;
-@property (nonatomic) BOOL isMax;
 @property (nonatomic,weak) UIView *preMoveView;
+@property (nonatomic,weak) REMWidgetCellViewController *cellController;
 @end
 
 @implementation REMMaxWidgetSegue
@@ -31,26 +30,6 @@
 - (void)max{
     REMWidgetMaxViewController *destController=self.destinationViewController;
     REMBuildingViewController *srcController= self.sourceViewController;
-    
-    
-    
-    
-    
-    //UIView *destView = destController.view;
-    
-    
-    //UIImage *image=[REMImageHelper imageWithView:destView];
-    
-    //UIImageView *destImageView=[[UIImageView alloc]initWithImage:image];
-    
-    
-    
-    
-    
-    
-    //UIView *destImageView=[[UIView alloc]initWithFrame:srcController.view.frame];
-    
-    //[destImageView setBackgroundColor:[UIColor grayColor]];
 
     
     REMDashboardController *dashboardController=srcController.maxDashbaordController;
@@ -58,40 +37,34 @@
     REMWidgetCollectionViewController *collectionController= dashboardController.childViewControllers[dashboardController.currentMaxDashboardIndex];
     
     REMWidgetCellViewController *cellController=collectionController.childViewControllers[collectionController.currentMaxWidgetIndex];
-    UIButton *button=cellController.view.subviews[0];
-    UIImageView *cloneView=[[UIImageView alloc]initWithImage:[REMImageHelper imageWithView:button]];
+
+    UIImage *image=[REMImageHelper imageWithLayer:cellController.view.layer];
+    
+    UIImageView *cloneView=[[UIImageView alloc]initWithImage:image];
     destController.currentWidgetIndex=collectionController.currentMaxWidgetIndex;
-    //cloneView.layer.borderColor=[UIColor redColor].CGColor;
-    //cloneView.layer.borderWidth=1;
     
     [cellController.view setHidden:YES];
-    
+    self.cellController = cellController;
     CGRect frame=[cellController.view convertRect:cellController.view.frame fromView:srcController.view];
     CGRect newFrame= CGRectMake(frame.origin.x*-1, frame.origin.y*-1, frame.size.width, frame.size.height);
     
     [cloneView setFrame:newFrame];
     [srcController.view addSubview:cloneView];
     
-    //NSLog(@"max frame:%@",NSStringFromCGRect(newFrame));
-    
     UIView *destImageView=destController.view;
     
-    
     [srcController.view addSubview:destImageView];
-    [srcController.view setUserInteractionEnabled:NO];
+    //[srcController.view setUserInteractionEnabled:NO];
 
     
     
     CGRect retFrame= CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight));
     
-    //[destImageView setFrame:retFrame];
-    destImageView.alpha=0;
+    [destImageView setFrame:retFrame];
+    [destImageView setHidden:YES];
     
     self.preMoveView=cloneView;
-    self.readyMoveFrame=retFrame;
     self.readyMoveView=destImageView;
-    
-    
     
     
     NSTimer *timer =[NSTimer timerWithTimeInterval:0.2 target:self selector:@selector(flipToMax) userInfo:nil repeats:NO];
@@ -101,21 +74,15 @@
 }
 
 - (void)flipToMax{
-    
-    
-    
-    [UIView transitionWithView:self.preMoveView duration:0.6 options:UIViewAnimationOptionTransitionFlipFromRight animations:^(void){
-        self.readyMoveView.alpha=1;
-        //self.preMoveView.alpha=0;
-        [self.preMoveView setFrame:self.readyMoveFrame];
-    } completion:^(BOOL finished){
-        [self.preMoveView removeFromSuperview];
+    [UIView flipTransitionFromView:self.preMoveView toView:self.readyMoveView duration:0.6 completion:^(BOOL finished){
         [self.readyMoveView removeFromSuperview];
+        [self.preMoveView removeFromSuperview];
         UIViewController *vc=self.sourceViewController;
         [vc.view setUserInteractionEnabled:YES];
+        [self.cellController.view setHidden:NO];
         [vc.navigationController pushViewController:self.destinationViewController animated:NO];
     }];
-     
+    
 }
 
 
@@ -134,33 +101,32 @@
     
     REMWidgetCollectionViewController *collectionController= dashboardController.childViewControllers[dashboardController.currentMaxDashboardIndex];
     
-    REMWidgetCellViewController *cellController=collectionController.childViewControllers[collectionController.currentMaxWidgetIndex];
-    [cellController.view setHidden:NO];
-    
+    REMWidgetCellViewController *cellController=collectionController.childViewControllers[srcController.currentWidgetIndex];
+    self.cellController=cellController;
     CGRect frame=[cellController.view convertRect:cellController.view.frame fromView:destController.view];
     CGRect newFrame= CGRectMake(frame.origin.x*-1, frame.origin.y*-1, frame.size.width, frame.size.height);
     
-    self.readyMoveFrame=newFrame;
+    UIImage *cloneImage=[REMImageHelper imageWithView:cellController.view];
+    UIImageView *cloneView=[[UIImageView alloc]initWithImage:cloneImage];
+    [cloneView setFrame:newFrame];
+    [cloneView setHidden:YES];
+    [destController.view addSubview:cloneView];
+    [cellController.view setHidden:YES];
     self.readyMoveView=destImageView;
+    self.preMoveView=cloneView;
     [srcController.navigationController popViewControllerAnimated:NO];
-    NSTimer *timer =[NSTimer timerWithTimeInterval:0.1 target:self selector:@selector(flipToSmall) userInfo:nil repeats:NO];
+    NSTimer *timer =[NSTimer timerWithTimeInterval:0.2 target:self selector:@selector(flipToSmall) userInfo:nil repeats:NO];
     NSRunLoop *loop=[NSRunLoop currentRunLoop];
     [loop addTimer:timer forMode:NSDefaultRunLoopMode];
 }
 
 - (void)flipToSmall{
-    [UIView transitionWithView:self.readyMoveView duration:0.4 options:  UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^(void){
-                        
-                        self.readyMoveView.alpha=0;
-                        
-                        [self.readyMoveView setFrame:self.readyMoveFrame];
-                        
-                    } completion:^(BOOL finished){
-                        
-                        [self.readyMoveView removeFromSuperview];
-                        
-                    }];
+    [UIView flipTransitionFromView:self.readyMoveView toView:self.preMoveView duration:0.6 completion:^(BOOL finished){
+        [self.readyMoveView removeFromSuperview];
+        [self.preMoveView removeFromSuperview];
+        [self.cellController.view setHidden:NO];
+    }];
+    
 }
 
 - (void)perform
