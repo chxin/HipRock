@@ -31,7 +31,7 @@
     style.xTextStyle = textStyle;
     style.yTextStyle = textStyle;
     style.horizentalGridLineAmount = 6;
-    style.symbolSize = 24;
+    style.symbolSize = 20;
     style.xLabelToLine = 12;
     style.yLabelToLine = 12;
     

@@ -30,6 +30,11 @@
 
 - (void)max{
     REMWidgetMaxViewController *destController=self.destinationViewController;
+    REMBuildingViewController *srcController= self.sourceViewController;
+    
+    
+    
+    
     
     //UIView *destView = destController.view;
     
@@ -39,7 +44,7 @@
     //UIImageView *destImageView=[[UIImageView alloc]initWithImage:image];
     
     
-    REMBuildingViewController *srcController= self.sourceViewController;
+    
     
     
     
@@ -85,6 +90,8 @@
     self.preMoveView=cloneView;
     self.readyMoveFrame=retFrame;
     self.readyMoveView=destImageView;
+    
+    
     
     
     NSTimer *timer =[NSTimer timerWithTimeInterval:0.2 target:self selector:@selector(flipToMax) userInfo:nil repeats:NO];

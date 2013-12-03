@@ -605,6 +605,9 @@
             break;
     }
 
+    if (list.count==0) {
+        return nil;
+    }
     REMEnergyStep defaultStep=(REMEnergyStep)[list[defaultStepIndex] integerValue];
     NSDictionary *dic=@{@"stepList": list,@"titleList":titleList,@"defaultStep":@(defaultStep),@"defaultStepIndex":@(defaultStepIndex)};
     
@@ -891,6 +894,9 @@
     REMTimeRange *newRange=[[REMTimeRange alloc]initWithStartTime:newStart EndTime:newEnd];
     
     NSDictionary *dic= [self tryNewStepByRange:newRange];
+    if (dic==nil) {
+        return NO;
+    }
     REMEnergyStep step=(REMEnergyStep)[dic[@"defaultStep"] integerValue];
     if(step!=self.tempModel.step){
         return NO;
