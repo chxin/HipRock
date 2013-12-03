@@ -647,7 +647,6 @@
 		EF96300617C610A200BBC7DA /* REMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMSettingViewController.m */; };
 		EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97DDDA17C20B5700A0374E /* REMToggleButton.m */; };
 		EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9F28B017CB54DE00E775ED /* REMStatusBar.m */; };
-		EFD6F093181F9C6200AE0A57 /* REMBarPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD6F092181F9C6200AE0A57 /* REMBarPlot.m */; };
 		EFD946FC1839DCBB00E9EC50 /* _DCLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D11839DCBB00E9EC50 /* _DCLayer.m */; };
 		EFD946FE1839DCBB00E9EC50 /* _DCCoordinateSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D61839DCBB00E9EC50 /* _DCCoordinateSystem.m */; };
 		EFD946FF1839DCBB00E9EC50 /* DCAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D81839DCBB00E9EC50 /* DCAxis.m */; };
@@ -1470,8 +1469,6 @@
 		EF97DDDA17C20B5700A0374E /* REMToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButton.m; sourceTree = "<group>"; };
 		EF9F28AF17CB54DD00E775ED /* REMStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMStatusBar.h; sourceTree = "<group>"; };
 		EF9F28B017CB54DE00E775ED /* REMStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMStatusBar.m; sourceTree = "<group>"; };
-		EFD6F091181F9C6200AE0A57 /* REMBarPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBarPlot.h; sourceTree = "<group>"; };
-		EFD6F092181F9C6200AE0A57 /* REMBarPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBarPlot.m; sourceTree = "<group>"; };
 		EFD946D01839DCBB00E9EC50 /* _DCLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLayer.h; path = Common/Utility/DChart/_DCLayer.h; sourceTree = "<group>"; };
 		EFD946D11839DCBB00E9EC50 /* _DCLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLayer.m; path = Common/Utility/DChart/_DCLayer.m; sourceTree = "<group>"; };
 		EFD946D51839DCBB00E9EC50 /* _DCCoordinateSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCCoordinateSystem.h; sourceTree = "<group>"; };
@@ -3049,8 +3046,6 @@
 				EF8A47E517F959B5009B5C33 /* ChartWrapper */,
 				EF8A47EE17F959B5009B5C33 /* DataProcessor */,
 				EF8A47F017F959B5009B5C33 /* Series */,
-				EFD6F091181F9C6200AE0A57 /* REMBarPlot.h */,
-				EFD6F092181F9C6200AE0A57 /* REMBarPlot.m */,
 				EFF701CD1830880600B371EC /* REMChartStyle.h */,
 				EFF701CE1830880600B371EC /* REMChartStyle.m */,
 			);
@@ -3733,7 +3728,6 @@
 				EFF701CF1830880600B371EC /* REMChartStyle.m in Sources */,
 				7A7B210B183CAB5F00C14248 /* REMCostLegendFormator.m in Sources */,
 				7A37AA5C17AB56F100316902 /* REMUserValidationModel.m in Sources */,
-				EFD6F093181F9C6200AE0A57 /* REMBarPlot.m in Sources */,
 				EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */,
 				7A37AA6317AB944B00316902 /* REMNumberLabel.m in Sources */,
 				7A634BBC180E80140076C84D /* REMSplashMapSegue.m in Sources */,
