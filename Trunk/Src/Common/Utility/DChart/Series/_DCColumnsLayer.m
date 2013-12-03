@@ -9,6 +9,9 @@
 #import "_DCColumnsLayer.h"
 #import "DCUtility.h"
 #import "REMColor.h"
+#import "DCDataPoint.h"
+#import "DCXYSeries.h"
+#import "DCColumnSeries.h"
 
 @interface _DCColumnsLayer()
 @property (nonatomic, strong) _DCLayerTrashbox* trashbox;

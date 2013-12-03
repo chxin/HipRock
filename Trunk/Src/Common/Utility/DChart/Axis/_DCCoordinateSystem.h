@@ -17,7 +17,19 @@
 @property (nonatomic, strong, readonly) NSArray* seriesList;
 //@property (nonatomic, strong, readonly) NSArray* hiddenSeriesList;
 @property (nonatomic, weak) DCContext* graphContext;
-@property (nonatomic, assign, readonly) NSUInteger index;
+@property (nonatomic, weak) UIView* chartView;
 
--(id)initWithSeries:(NSArray*)series x:(DCAxis*)x y:(DCAxis*)y index:(NSUInteger)index;
+@property (nonatomic, strong) DCRange* yRange;
+@property (nonatomic, assign) double yInterval;
+
+@property (nonatomic, assign) BOOL isMajor;
+
+//-(id)initWithSeries:(NSArray*)series x:(DCAxis*)x y:(DCAxis*)y index:(NSUInteger)index;
+
+-(id)initWithChartView:(UIView*)chartView y:(DCAxis*)y;
+
+-(CALayer*)getColumnLayer;
+-(CALayer*)getLineLayer;
+-(CALayer*)getAxisLabelLayer;
+
 @end

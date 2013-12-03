@@ -7,6 +7,7 @@
 //
 
 #import "DCXYSeries.h"
+#import "DCDataPoint.h"
 
 @implementation DCXYSeries
 

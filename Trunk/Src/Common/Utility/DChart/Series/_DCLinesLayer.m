@@ -9,7 +9,9 @@
 #import "_DCLinesLayer.h"
 #import "_DCLayerTrashbox.h"
 #import "_DCSymbolLayer.h"
+#import "DCDataPoint.h"
 #import "DCUtility.h"
+#import "DCLineSeries.h"
 
 @interface _DCLinesLayer()
 

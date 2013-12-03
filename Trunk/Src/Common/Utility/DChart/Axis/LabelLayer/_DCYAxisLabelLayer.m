@@ -67,6 +67,7 @@
 }
 
 -(void)setFrame:(CGRect)frame {
+    CGRect fff = self.frame;
     self.myFrame = frame;
     [super setFrame:self.superlayer.bounds];
 }

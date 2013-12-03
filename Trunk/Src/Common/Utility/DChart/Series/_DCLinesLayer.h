@@ -7,8 +7,6 @@
 //
 
 #import "_DCSeriesLayer.h"
-#import "_DCCoordinateSystem.h"
-#import "DCLineSeries.h"
 #import "DCContext.h"
 #import "_DCLineSymbolsLayer.h"
 
