@@ -43,6 +43,8 @@
     [self.view addGestureRecognizer:tap];
     
     
+    
+    
 }
 
 - (void)viewDidLoad
@@ -140,6 +142,10 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]init];
     
     [view addGestureRecognizer:tap];//eat tap event in button group to prevent scrollview from moving
+    
+    UIPanGestureRecognizer *pan=[[UIPanGestureRecognizer alloc]init];
+    [view addGestureRecognizer:pan];//eat tap event in button group to prevent imageview from moving
+
     
     [self.view addSubview:view];
 

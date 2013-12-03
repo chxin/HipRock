@@ -196,7 +196,6 @@ const static CGFloat buildingGap=20;
     if(pan.state== UIGestureRecognizerStateChanged)
     {
         
-        [self stopChildViewScroll];
         for (int i=0;i<self.childViewControllers.count;++i)
         {
             UIViewController *controller=self.childViewControllers[i];
@@ -249,7 +248,6 @@ const static CGFloat buildingGap=20;
                                     [self moveAllViews];
                                 } completion:^(BOOL finished){
                                 
-                                    [self enableChildViewScroll];
                                 }];
             
         }
@@ -320,19 +318,6 @@ const static CGFloat buildingGap=20;
         
     }
     
-    [self enableChildViewScroll];
-}
-
-- (void)stopChildViewScroll{
-    for (REMBuildingImageViewController *c in self.childViewControllers) {
-        [c horizonalMoving];
-    }
-}
-
-- (void)enableChildViewScroll{
-    for (REMBuildingImageViewController *c in self.childViewControllers) {
-        [c horizonalStopped];
-    }
 }
 
 
