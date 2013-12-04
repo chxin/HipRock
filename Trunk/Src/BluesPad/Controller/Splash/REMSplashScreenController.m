@@ -175,7 +175,7 @@
         [sereis addObject:sData];
     }
     energyViewData.visibleTimeRange = r;
-    energyViewData.globalTimeRange = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10000]];
+    energyViewData.globalTimeRange = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10]];
     
     energyViewData.targetEnergyData = sereis;
     

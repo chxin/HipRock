@@ -12,41 +12,27 @@
 #import "DCDataPoint.h"
 #import "DCUtility.h"
 #import "DCLineSeries.h"
-
-@interface _DCLinesLayer()
-@property (nonatomic, assign) BOOL symbolsAreHidden;
-@property (nonatomic, strong) NSTimer* timer;
-@end
+#import "REMColor.h"
 
 @implementation _DCLinesLayer
--(id)initWithCoordinateSystem:(_DCCoordinateSystem *)coordinateSystem {
-    self = [super initWithCoordinateSystem:coordinateSystem];
-    if (self) {
-        _symbolsAreHidden = NO;
-    }
-    return self;
-}
--(void)drawInContext:(CGContextRef)ctx {
-    [super drawInContext:ctx];
+
+-(NSArray*)getLines {
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
     start = MAX(0, start);
     
-    CGContextSetLineJoin(ctx, kCGLineJoinMiter);
-    CGContextSetLineCap(ctx , kCGLineCapRound);
-    CGContextSetBlendMode(ctx, kCGBlendModeNormal);
-    CGContextSetAllowsAntialiasing(ctx, YES);
-    CGContextBeginPath(ctx);
-    
+    CGFloat symbolAlpha = kDCUnfocusPointSymbolAlph;
+    if (self.focusX == INT32_MIN) {
+        symbolAlpha = 1;
+    }
+    NSMutableArray* lines = [[NSMutableArray alloc]init];
     for (DCLineSeries* s in self.series) {
         if (s.hidden) continue;
         if (start >= s.datas.count) continue;
         int loopEnd = s.datas.count-1;
         if (end < loopEnd) loopEnd = end;
-        CGContextSetLineWidth(ctx, s.lineWidth);
-        CGContextSetStrokeColorWithColor(ctx, s.color.CGColor);
-        NSUInteger countOfPoints = 0;
-        CGPoint pointsForSeries[loopEnd-start+3];
+        UIColor* lineColor = [REMColor makeTransparent:symbolAlpha withColor:s.color];
+        NSMutableArray* points = [[NSMutableArray alloc]init];
         
         // 从RangeStart向前再搜索一个非空点，并绘制曲线
         for (int j = start-1; j >= 0; j--) {
@@ -56,8 +42,7 @@
             } else if (point.pointType == DCDataPointTypeBreak) {
                 break;
             } else {
-                pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue xOffset:s.pointXOffset];
-                countOfPoints++;
+                [points addObject:[NSValue valueWithCGPoint:[self getPointBy:j y:point.value.doubleValue]]];
                 break;
             }
         }
@@ -67,12 +52,14 @@
             if (point.pointType == DCDataPointTypeEmpty) {
                 continue;
             } else if (point.pointType == DCDataPointTypeNormal) {
-                pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue xOffset:s.pointXOffset];
-                countOfPoints++;
+                [points addObject:[NSValue valueWithCGPoint:[self getPointBy:j y:point.value.doubleValue]]];
             } else {
-                CGContextAddLines(ctx, pointsForSeries, countOfPoints);
-                CGContextStrokePath(ctx);
-                countOfPoints = 0;
+                _DCLine* line = [[_DCLine alloc]init];
+                line.points = points;
+                line.lineColor = lineColor;
+                line.lineWidth = s.lineWidth;
+                [lines addObject:line];
+                points = [[NSMutableArray alloc]init];
             }
         }
         // 从RangeEnd向前后搜索一个非空点，并绘制曲线
@@ -83,20 +70,25 @@
             } else if (point.pointType == DCDataPointTypeBreak) {
                 break;
             } else {
-                pointsForSeries[countOfPoints] = [self getPointBy:j y:point.value.doubleValue xOffset:s.pointXOffset];
-                countOfPoints++;
+                [points addObject:[NSValue valueWithCGPoint:[self getPointBy:j y:point.value.doubleValue]]];
                 break;
             }
         }
-        if (countOfPoints != 0) {
-            CGContextAddLines(ctx, pointsForSeries, countOfPoints);
-            CGContextStrokePath(ctx);
+        if (points.count != 0) {
+            _DCLine* line = [[_DCLine alloc]init];
+            line.points = points;
+            line.lineColor = lineColor;
+            line.lineWidth = s.lineWidth;
+            [lines addObject:line];
         }
     }
-    CGContextStrokePath(ctx);
+    return lines;
+    
 }
 
--(CGPoint)getPointBy:(int)x y:(double)y xOffset:(double)xOffset {
+-(CGPoint)getPointBy:(int)x y:(double)y {
+    CGFloat xOffset = 0;
+    if (!self.graphContext.pointAlignToTick) xOffset = 0.5;
     CGPoint point;
     point.x = self.frame.size.width*(x+xOffset-self.graphContext.hRange.location)/self.graphContext.hRange.length;
     point.y = self.frame.size.height-self.heightUnitInScreen*y;
@@ -121,9 +113,9 @@
 //    [self setNeedsDisplay];
 ////    [self renderSymbols];
 //}
--(void)redraw {
-    [self setNeedsDisplay];
-}
+//-(void)redraw {
+//    [self setNeedsDisplay];
+//}
 
 //-(void)lazyRenderSymbol {
 //    if (REMIsNilOrNull(self.symbolsLayer)) return;
@@ -137,6 +129,8 @@
 -(NSArray*)getSymbols {
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
+    CGFloat pointXOffset = 0;
+    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
     NSMutableArray* pointsToDraw = [[NSMutableArray alloc]init];
     for (DCLineSeries* s in self.series) {
         if (s.hidden) continue;
@@ -147,7 +141,7 @@
             if (j >= s.datas.count) continue;
             
             DCDataPoint* key = s.datas[j];
-            CGRect toFrame = CGRectMake(self.frame.size.width*(j+s.pointXOffset-self.graphContext.hRange.location)/self.graphContext.hRange.length-s.symbolSize/2, self.frame.size.height-[self getHeightOfPoint:key]-s.symbolSize/2, s.symbolSize, s.symbolSize);
+            CGRect toFrame = CGRectMake(self.frame.size.width*(j+pointXOffset-self.graphContext.hRange.location)/self.graphContext.hRange.length-s.symbolSize/2, self.frame.size.height-[self getHeightOfPoint:key]-s.symbolSize/2, s.symbolSize, s.symbolSize);
             BOOL isRectVisable = [DCUtility isFrame:toFrame visableIn:self.bounds] && (key.value != nil) && ![key.value isEqual:[NSNull null]];
             if (isRectVisable) {
                 CGPoint location = CGPointMake(toFrame.origin.x+toFrame.size.width/2, toFrame.origin.y+toFrame.size.height/2);

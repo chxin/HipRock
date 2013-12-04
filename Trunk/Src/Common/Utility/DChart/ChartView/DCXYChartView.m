@@ -74,7 +74,6 @@
 -(void)drawIndicatorLayer {
     if (!self.showIndicatorOnFocus) return;
     self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext];
-    self.indicatorLayer.pointXOffset = self.pointXOffset;
     self.indicatorLayer.frame = CGRectMake(self.plotRect.origin.x, 0, self.plotRect.size.width, self.plotRect.size.height+self.plotPaddingTop);// self.plotRect;
     self.indicatorLayer.symbolLineStyle = self.focusSymbolLineStyle;
     self.indicatorLayer.symbolLineWidth = self.focusSymbolLineWidth;
@@ -88,9 +87,6 @@
     self.lineLayers = [[NSMutableArray alloc]init];
     [self.graphContext addHRangeObsever:self];
     
-    for (DCXYSeries* s in self.seriesList) {
-        s.pointXOffset = self.pointXOffset;
-    }
     [self drawAxisLines];
     [self drawHGridline];
     [self drawXLabelLayer];
@@ -172,11 +168,13 @@
 }
 
 -(void)renderSymbol {
+    NSMutableArray* lines = [[NSMutableArray alloc]init];
     NSMutableArray* symbolPoints = [[NSMutableArray alloc]init];
     for (_DCLinesLayer* lineLayer in self.lineLayers) {
+        [lines addObjectsFromArray:[lineLayer getLines]];
         [symbolPoints addObjectsFromArray:[lineLayer getSymbols]];
     }
-    [self.symbolLayer drawSymbolsForPoints:symbolPoints inSize:self.plotRect.size];
+    [self.symbolLayer drawSymbolsForPoints:symbolPoints lines:lines inSize:self.plotRect.size];
 }
 
 -(void)setFrame:(CGRect)frame {
@@ -444,7 +442,7 @@
 }
 
 -(void)focusAroundX:(double)x {
-    x-=self.pointXOffset;
+    if (!self.graphContext.pointAlignToTick) x-=0.5;
     DCRange* globalRange = self.graphContext.globalHRange;
     if (x < globalRange.location) x = floor(globalRange.location);
     if (x > globalRange.length+globalRange.length) x = ceil(globalRange.length+globalRange.location);

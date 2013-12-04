@@ -14,6 +14,7 @@
 
 @interface _DCLineSymbolsLayer()
 @property (nonatomic, strong) NSArray* pointsToDraw;
+@property (nonatomic, strong) NSArray* linesToDraw;
 @property (nonatomic, assign) CGSize plotSize;  // 因为对于接近0的点，symbol需要覆盖轴线，所以self.frame比实际绘图区域要大。这个PlotSize代表实际绘图区域
 @end
 
@@ -69,11 +70,28 @@
             pointIndex++;
         }
     }
+    
+    CGContextSetLineJoin(ctx, kCGLineJoinMiter);
+    CGContextSetLineCap(ctx , kCGLineCapRound);
+    CGContextSetBlendMode(ctx, kCGBlendModeNormal);
+    CGContextSetAllowsAntialiasing(ctx, YES);
+//    CGContextBeginPath(ctx);
+    for (_DCLine* line in self.linesToDraw) {
+        CGContextSetLineWidth(ctx, line.lineWidth);
+        CGContextSetStrokeColorWithColor(ctx, line.lineColor.CGColor);
+        CGPoint pointsForSeries[line.points.count];
+        for (int i = 0; i < line.points.count; i++) {
+            [((NSValue*)line.points[i]) getValue:&pointsForSeries[i]];
+        }
+        CGContextAddLines(ctx, pointsForSeries, line.points.count);
+        CGContextStrokePath(ctx);
+    }
     self.pointsToDraw = nil;
 }
 
--(void)drawSymbolsForPoints:(NSArray*)points inSize:(CGSize)plotSize {
+-(void)drawSymbolsForPoints:(NSArray*)points lines:(NSArray *)lines inSize:(CGSize)plotSize {
     self.pointsToDraw = points;
+    self.linesToDraw = lines;
     self.plotSize = plotSize;
     [self setNeedsDisplay];
 }

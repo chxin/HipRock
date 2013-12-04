@@ -15,7 +15,7 @@
     self = [super initWithEnergyData:seriesData];
     if (self) {
         _hidden = NO;
-        _pointXOffset = 0;
+//        _pointXOffset = 0;
     }
     return self;
 }
