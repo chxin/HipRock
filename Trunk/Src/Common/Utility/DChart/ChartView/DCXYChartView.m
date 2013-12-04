@@ -380,19 +380,14 @@
 }
 
 -(void)viewPinched:(_DCHPinchGestureRecognizer*)gesture {
-    NSSet* touches = gesture.theTouches;
-    if (REMIsNilOrNull(touches) || touches.count != 2) return;
-    UITouch* touch0 = touches.allObjects[0];
-    UITouch* touch1 = touches.allObjects[1];
-    CGFloat preDis = [touch0 previousLocationInView:self].x - [touch1 previousLocationInView:self].x;
-    CGFloat curDis = [touch0 locationInView:self].x - [touch1 locationInView:self].x;
-    CGFloat scale = curDis / preDis;
-    if (scale <= 0) return;
-    DCRange* newRange = [[DCRange alloc]initWithLocation:self.graphContext.hRange.location length:self.graphContext.hRange.length/scale];
+    CGFloat centerX = self.graphContext.hRange.location + self.graphContext.hRange.length * (gesture.centerX - self.plotRect.origin.x) / self.plotRect.size.width;
+    CGFloat start = centerX - (centerX - self.graphContext.hRange.location) * gesture.leftScale;
+    CGFloat end = centerX + (-centerX + self.graphContext.hRange.end) * gesture.rightScale;
+    
+    DCRange* newRange = [[DCRange alloc]initWithLocation:start length:end-start];
     if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByUserPinch]) {
         self.graphContext.hRange = newRange;
     }
-    NSLog(@"pinch:%f %f", self.graphContext.hRange.location, self.graphContext.hRange.length);
 }
 
 
