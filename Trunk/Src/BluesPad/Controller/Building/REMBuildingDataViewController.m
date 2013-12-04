@@ -17,7 +17,7 @@
 @property (nonatomic) NSUInteger currentCommodityIndex;
 
 @property (nonatomic,weak) UIImageView *arrow;
-
+@property (nonatomic,strong) NSMutableDictionary *commodityDataLoadStatus;
 @end
 
 @implementation REMBuildingDataViewController
@@ -25,6 +25,7 @@
 - (id)init{
     if(self=[super init]){
         _currentOffsetY=NSNotFound;
+        self.commodityDataLoadStatus=[NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -223,12 +224,29 @@
         REMBuildingCommodityViewController *controller=self.childViewControllers[self.currentCommodityIndex];
         REMBuildingImageViewController *imageController=(REMBuildingImageViewController *)self.parentViewController;
         if(controller.isViewLoaded==NO){
-            [imageController loadingDataNow];
+            imageController.shareButton.enabled=NO;
             [self.view addSubview:controller.view];
         }
         else{
             [controller.view setHidden:NO];
+            
+            NSNumber *status;
+            if ([controller isKindOfClass:[REMBuildingAirQualityViewController class]]==YES ) {
+                REMBuildingAirQualityViewController *controller1=(REMBuildingAirQualityViewController *)controller;
+                status=self.commodityDataLoadStatus[controller1.airQualityInfo.commodity.commodityId];
+            }
+            else{
+                status=self.commodityDataLoadStatus[controller.commodityInfo.commodityId];
+            }
+            if ([status isEqualToNumber:@(1)]==YES) {
+                imageController.shareButton.enabled=YES;
+            }
+            else{
+                imageController.shareButton.enabled=NO;
+            }
         }
+        [self checkIfRequestChartData:(UIScrollView *)self.view];
+
     }
 }
 
@@ -251,6 +269,7 @@
         controller.viewFrame=frame;
         controller.index=i;
         [self addChildViewController:controller];
+        self.commodityDataLoadStatus[model.commodityId]=@(0);
     }
     if(self.buildingInfo.airQuality!=nil){
         REMBuildingAirQualityViewController *controller=[[REMBuildingAirQualityViewController alloc]init];
@@ -259,20 +278,9 @@
         controller.airQualityInfo=self.buildingInfo.airQuality;
         controller.buildingInfo=self.buildingInfo;
         [self addChildViewController:controller];
+        self.commodityDataLoadStatus[self.buildingInfo.airQuality.commodity.commodityId]=@(0);
     }
-    /*
-    if(count>0){
-        REMCommodityModel *model = self.buildingInfo.commodityArray[0];
-        [self initCommodityById:model.commodityId];
-        self.currentCommodityId=model.commodityId;
-    }
-    else{
-        if(self.buildingInfo.airQuality!=nil){
-            [self initCommodityById:self.buildingInfo.airQuality.commodity.commodityId];
-            
-            self.currentCommodityId=self.buildingInfo.airQuality.commodity.commodityId;
-        }
-    }*/
+    
     
     
     
@@ -381,11 +389,7 @@
 
 
 -(void)checkIfRequestChartData:(UIScrollView *)scrollView{
-//    if(self.isInDashboard){
-//        [self showDashboard];
-//    }
     if(scrollView.contentOffset.y>=kCommodityScrollTop){
-        //[self requireChartData];
         if(self.childViewControllers.count>self.currentCommodityIndex){
             REMBuildingCommodityViewController *controller=self.childViewControllers[self.currentCommodityIndex];
             [controller showChart];
@@ -406,12 +410,6 @@
         [self scrollTo:scrollView.contentOffset.y];
     }
     
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    if(scrollView.contentOffset.y > kCommodityScrollTop){
-        [self replaceImagesShowReal:NO];
-    }
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
@@ -438,8 +436,6 @@
     
     if(scrollView.contentOffset.y>kCommodityScrollTop){
         [self checkIfRequestChartData:scrollView];
-        [self replaceImagesShowReal:YES];
-        
     }
     
 }
@@ -448,7 +444,7 @@
 {
     if(decelerate == NO){
         [self roundPositionWhenDrag:scrollView];
-        [self replaceImagesShowReal:YES];
+        [self checkIfRequestChartData:scrollView];
         
     }
     else{
@@ -462,104 +458,20 @@
 
 - (void)loadingDataComplete:(NSUInteger)index{
     REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
+    REMBuildingCommodityViewController *controller=self.childViewControllers[index];
+    if([controller isKindOfClass:[REMBuildingAirQualityViewController class]]==YES){
+        REMBuildingAirQualityViewController *controller1=(REMBuildingAirQualityViewController *)controller;
+        self.commodityDataLoadStatus[controller1.airQualityInfo.commodity.commodityId]=@(1);
+    }
+    else{
+        self.commodityDataLoadStatus[controller.commodityInfo.commodityId]=@(1);
+    }
+    
     if(index == self.currentCommodityIndex){
-        [parent loadingDataComplete];
+        
+        parent.shareButton.enabled=YES;
     }
 }
-
-
-
-- (void)horizonalMoving{
-    UIScrollView *view=(UIScrollView *)self.view;
-    [view setUserInteractionEnabled:NO];
-}
-
-- (void)horizonalStopped{
-    UIScrollView *view=(UIScrollView *)self.view;
-    [view setUserInteractionEnabled:YES];
-}
-
-- (void)replaceImagesShowReal:(BOOL)showReal{
-    //not implemented 
-//    if(self.commodityViewDictionary.count<1)return ;
-//    REMBuildingCommodityView *view=   self.commodityViewDictionary[self.currentCommodityId];
-//    NSNumber *key=self.currentCommodityId;
-//    if( self.successDic !=nil && [self.successDic[key] isEqualToNumber:@(1)] == YES){
-//        [view replaceChart:showReal];
-//    }
-}
-
-
-//- (void) showDashboard{
-//    self.isInDashboard=YES;
-//    if(self.superview==nil)return;
-//    
-//    if(self.dashboardController==nil){
-//        self.dashboardController = [[REMDashboardController alloc]initWithStyle:UITableViewStyleGrouped];
-//        self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
-//        CGRect newFrame = CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height, self.frame.size.width-kBuildingLeftMargin*2, self.dataView.frame.size.height);
-//        self.dashboardController.viewFrame=newFrame;
-//        self.dashboardController.imageView=self;
-//        self.dashboardController.buildingController=self.controller;
-//        self.dashboardController.buildingInfo=self.buildingInfo;
-//        self.dashboardController.dashboardArray=self.buildingInfo.dashboardArray;
-//        
-//    }
-//    if(self.dataView.frame.origin.y<0)return;
-//    [self addSubview:self.dashboardController.view];
-//    //NSLog(@"data view old frame:%@",NSStringFromCGRect(self.dataView.frame));
-//    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
-//        [self.dashboardController.view setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y-20, self.frame.size.width-kBuildingLeftMargin*2, self.dataView.frame.size.height)];
-//        
-//        [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, self.dataView.frame.origin.y-self.dataView.frame.size.height, self.dataView.frame.size.width, self.dataView.frame.size.height)];
-//        
-//    } completion:^(BOOL finished){
-//        [self changeShareButton:NO];
-//        [self.dataView setHidden:YES];
-//        [self.cropTitleView removeFromSuperview];
-//        //NSLog(@"data view now frame:%@",NSStringFromCGRect(self.dataView.frame));
-//    }];
-//}
-
-//- (void)changeShareButton:(BOOL)weibo{
-//    if(weibo){
-//        [self.shareButton setHidden:NO];
-//        [self.shareDashboardButton setHidden:YES];
-//    }
-//    else{
-//        [self.shareButton setHidden:YES];
-//        [self.shareDashboardButton setHidden:NO];
-//    }
-//}
-
-//- (void)showBuildingInfo{
-//    self.isInDashboard=NO;
-//    if(self.superview==nil)return;
-//    if(self.dataView.frame.origin.y>0)return;
-//    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
-//        [self.dashboardController.view setFrame:CGRectMake(kBuildingLeftMargin, self.dataView.frame.origin.y+self.dataView.frame.size.height*2, self.frame.size.width-kBuildingLeftMargin*2, self.dataView.frame.size.height)];
-//        [self.dataView setHidden:NO];
-//        [self.dataView setFrame:CGRectMake(self.dataView.frame.origin.x, self.dataView.frame.origin.y+self.dataView.frame.size.height, self.dataView.frame.size.width, self.dataView.frame.size.height)];
-//        
-//    } completion:^(BOOL finished){
-//        //[self.dashboardController.view removeFromSuperview];
-//        //self.dashboardController=nil;
-//        [self changeShareButton:YES];
-//        [self requireChartData];
-//        [self.cropTitleView removeFromSuperview];
-//        [self.dashboardController.view removeFromSuperview];
-//        self.dashboardController.view=nil;
-//        
-//        
-//    }];
-//}
-
-//- (void)gotoBuildingInfo{
-//    [self clipTitleView];
-//    [self.controller switchToBuildingInfo];
-//    
-//}
-
 
 
 
