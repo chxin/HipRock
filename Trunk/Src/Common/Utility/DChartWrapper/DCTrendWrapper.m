@@ -368,19 +368,19 @@
         
         DCRange* myNewRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
         BOOL shouldChange = YES;
-//        if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
-//            if (![DCRange isRange:self.myStableRange equalTo:myNewRange]) {
-//                id param0, param1;
-//                if (self.sharedProcessor == nil) {
-//                    param0 = @(rangeStart);
-//                    param1 = @(rangeEnd);
-//                } else {
-//                    param0 = [self.sharedProcessor deprocessX:rangeStart];
-//                    param1 = [self.sharedProcessor deprocessX:rangeEnd];
-//                }
-//                shouldChange = (BOOL)[self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
-//            }
-//        }
+        if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
+            if (![DCRange isRange:self.myStableRange equalTo:myNewRange]) {
+                id param0, param1;
+                if (self.sharedProcessor == nil) {
+                    param0 = @(rangeStart);
+                    param1 = @(rangeEnd);
+                } else {
+                    param0 = [self.sharedProcessor deprocessX:rangeStart];
+                    param1 = [self.sharedProcessor deprocessX:rangeEnd];
+                }
+                shouldChange = (BOOL)[self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
+            }
+        }
         if (shouldChange) self.myStableRange = myNewRange;
         return shouldChange;
     } else {
