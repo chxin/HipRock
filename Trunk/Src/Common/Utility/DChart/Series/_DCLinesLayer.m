@@ -116,18 +116,21 @@
 }
 
 
--(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
-    if ([DCRange isRange:oldRange equalTo:newRange]) return;
-    [super didYRangeChanged:oldRange newRange:newRange];
+//-(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
+//    if ([DCRange isRange:oldRange equalTo:newRange]) return;
+//    [super didYRangeChanged:oldRange newRange:newRange];
+//    [self setNeedsDisplay];
+////    [self renderSymbols];
+//}
+//
+//-(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
+//    if ([DCRange isRange:oldRange equalTo:newRange]) return;
+//    [super didHRangeChanged:oldRange newRange:newRange];
+//    [self setNeedsDisplay];
+////    [self renderSymbols];
+//}
+-(void)redraw {
     [self setNeedsDisplay];
-//    [self renderSymbols];
-}
-
--(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
-    if ([DCRange isRange:oldRange equalTo:newRange]) return;
-    [super didHRangeChanged:oldRange newRange:newRange];
-    [self setNeedsDisplay];
-//    [self renderSymbols];
 }
 
 -(void)lazyRenderSymbol {

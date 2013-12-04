@@ -23,7 +23,7 @@
 @property (nonatomic, strong) _DCLinesLayer* lineLayer;
 @property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer;
 
-@property (nonatomic, strong) NSMutableArray* yRangeObservers;
+//@property (nonatomic, strong) NSMutableArray* yRangeObservers;
 @property (nonatomic, strong) NSMutableArray* yIntervalObservers;
 @end
 
@@ -51,15 +51,15 @@
         _DCColumnsLayer* columnsLayer = [[_DCColumnsLayer alloc]initWithCoordinateSystem:self];
         if (columnsLayer.series.count > 0) {
             self.columnLayer = columnsLayer;
-            [self addYRangeObsever:columnsLayer];
-            [self.graphContext addHRangeObsever:columnsLayer];
+//            [self addYRangeObsever:columnsLayer];
+//            [self.graphContext addHRangeObsever:columnsLayer];
         }
         
         _DCLinesLayer* linesLayer = [[_DCLinesLayer alloc]initWithCoordinateSystem:self];
         if (linesLayer.series.count > 0) {
             self.lineLayer = linesLayer;
-            [self addYRangeObsever:linesLayer];
-            [self.graphContext addHRangeObsever:linesLayer];
+//            [self addYRangeObsever:linesLayer];
+//            [self.graphContext addHRangeObsever:linesLayer];
         }
         [self.graphContext addHRangeObsever:self];
     }
@@ -114,56 +114,48 @@
                 if (yMax > currentYRange) currentYRange = yMax;
             }
         }
-        // 根据maxY计算YRange并更新至graphContext
-        if (self.visableYMax == currentYRange) {
-            return;
-        } else {
+        // 根据maxY计算YRange并通知所有的YRangeObserver
+        if (self.visableYMax != currentYRange) {
             self.visableYMax = currentYRange;
             double yInterval = [DCUtility getYInterval:currentYRange parts:self.graphContext.hGridlineAmount];
             currentYRange = yInterval * self.graphContext.hGridlineAmount * kDCReservedSpace;
             self.yRange = [[DCRange alloc]initWithLocation:0 length:currentYRange];
             self.yInterval = yInterval;
-//            if (self.index == 0 && ![DCRange isRange:self.graphContext.y0Range equalTo:range]) {
-//                self.graphContext.y0Range = range;
-//                self.graphContext.y0Interval = yInterval;
-//            }
-//            if (self.index == 1 && ![DCRange isRange:self.graphContext.y1Range equalTo:range]) {
-//                self.graphContext.y1Range = range;
-//                self.graphContext.y1Interval = yInterval;
-//            }
-//            if (self.index == 2 && ![DCRange isRange:self.graphContext.y2Range equalTo:range]) {
-//                self.graphContext.y2Range = range;
-//                self.graphContext.y2Interval = yInterval;
-//            }
+        }
+        if (!REMIsNilOrNull(self.columnLayer)) {
+            [self.columnLayer redrawWithXRange:newRange yRange:self.yRange];
+        }
+        if (!REMIsNilOrNull(self.lineLayer)) {
+            [self.lineLayer redrawWithXRange:newRange yRange:self.yRange];
         }
     }
 }
 
--(void)setYRange:(DCRange *)yRange {
-    if ([DCRange isRange:yRange equalTo:self.yRange]) return;
-    DCRange* oldRange = self.yRange;
-    _yRange = yRange;
-    
-    for (id o in self.yRangeObservers) {
-        if ([o respondsToSelector:@selector(didYRangeChanged:newRange:)]) {
-            [o didYRangeChanged:oldRange newRange:self.yRange];
-        }
-    }
-}
--(void)addYRangeObsever:(id<DCContextYRangeObserverProtocal>)observer {
-    if (observer == nil) return;
-    if (self.yRangeObservers == nil) self.yRangeObservers = [[NSMutableArray alloc]init];
-    [self.yRangeObservers addObject:observer];
-}
--(void)removeYRangeObsever:(id<DCContextYRangeObserverProtocal>)observer {
-    if (self.yRangeObservers == nil || self.yRangeObservers.count==0) return;
-    for (id o in self.yRangeObservers) {
-        if (o == observer) {
-            [self.yRangeObservers removeObject:o];
-            break;
-        }
-    }
-}
+//-(void)setYRange:(DCRange *)yRange {
+//    if ([DCRange isRange:yRange equalTo:self.yRange]) return;
+//    DCRange* oldRange = self.yRange;
+//    _yRange = yRange;
+//    
+//    for (id o in self.yRangeObservers) {
+//        if ([o respondsToSelector:@selector(didYRangeChanged:newRange:)]) {
+//            [o didYRangeChanged:oldRange newRange:self.yRange];
+//        }
+//    }
+//}
+//-(void)addYRangeObsever:(id<DCContextYRangeObserverProtocal>)observer {
+//    if (observer == nil) return;
+//    if (self.yRangeObservers == nil) self.yRangeObservers = [[NSMutableArray alloc]init];
+//    [self.yRangeObservers addObject:observer];
+//}
+//-(void)removeYRangeObsever:(id<DCContextYRangeObserverProtocal>)observer {
+//    if (self.yRangeObservers == nil || self.yRangeObservers.count==0) return;
+//    for (id o in self.yRangeObservers) {
+//        if (o == observer) {
+//            [self.yRangeObservers removeObject:o];
+//            break;
+//        }
+//    }
+//}
 -(void)setYInterval:(double)yInterval {
     if (_yInterval == yInterval) return;
     double oldInterval = self.yInterval;

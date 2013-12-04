@@ -31,15 +31,15 @@
     return self;
 }
 
--(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
-    _yRange = newRange;
-    self.heightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.frame.size.height / self.yRange.length) : 0;
-}
-
--(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
-    if (oldRange == Nil) self.enableGrowAnimation = YES;
-    _xRange = newRange;
-}
+//-(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
+//    _yRange = newRange;
+//    self.heightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.frame.size.height / self.yRange.length) : 0;
+//}
+//
+//-(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
+//    if (oldRange == Nil) self.enableGrowAnimation = YES;
+//    _xRange = newRange;
+//}
 
 -(void)removeFromSuperlayer {
     self.series = nil;
@@ -48,6 +48,18 @@
 
 -(BOOL)isValidSeriesForMe:(DCXYSeries*)series {
     return NO;
+}
+
+-(void)redrawWithXRange:(DCRange*)xRange yRange:(DCRange*)yRange {
+    if ([DCRange isRange:xRange equalTo:self.xRange] && [DCRange isRange:yRange equalTo:self.yRange]) return;
+    _xRange = xRange;
+    _yRange = yRange;
+    _heightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.frame.size.height / self.yRange.length) : 0;
+    [self redraw];
+}
+
+-(void)redraw {
+    // Template. Nothing to do.
 }
 //
 //- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden {
