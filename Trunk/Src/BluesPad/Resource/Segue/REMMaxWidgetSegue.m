@@ -95,6 +95,7 @@
     
     UIImageView *destImageView=[[UIImageView alloc]initWithImage:image];
 
+    [destImageView setFrame:CGRectMake(srcController.lastPageXPosition, destImageView.frame.origin.y, destImageView.frame.size.width, destImageView.frame.size.height)];
     
     [destController.view addSubview:destImageView];
     REMDashboardController *dashboardController= destController.maxDashbaordController;

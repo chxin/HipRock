@@ -23,19 +23,11 @@ const static CGFloat widgetGap=20;
 @property (nonatomic,weak) NSTimer *stopTimer;
 
 
-@property (nonatomic,weak) UIView *bloodView;
-@property (nonatomic,weak) UIView *bloodWhiteView;
 @property (nonatomic,weak) UIImageView *srcBg;
-@property (nonatomic) CGRect origSrcBgFrame;
 
 @property (nonatomic) BOOL readyToClose;
 
-@property (nonatomic,weak) UIView *glassView;
 
-/*
-@property (nonatomic,strong) REMWidgetMaxDiagramViewController *chartController;
-@property (nonatomic,strong) NSArray *currentStepList;
-*/
 @end
 
 @implementation REMWidgetMaxViewController
@@ -83,7 +75,6 @@ const static CGFloat widgetGap=20;
     [self.view setBackgroundColor:[UIColor blackColor]];
     self.cumulateX=0;
     self.readyToClose=NO;
-    [self addDashboardBg];
     for (int i=0; i<self.dashboardInfo.widgets.count; ++i) {
         REMWidgetObject *obj=self.dashboardInfo.widgets[i];
         
@@ -152,55 +143,22 @@ const static CGFloat widgetGap=20;
 }
 
 
-- (void) addBloodCell{
-    NSBundle* mb = [NSBundle mainBundle];
-    UIImageView *whiteView= [[UIImageView alloc]initWithImage:[[UIImage alloc]initWithContentsOfFile:[mb pathForResource:@"Oil_normal" ofType:@"png"]]];
-    //whiteView.clipsToBounds = YES;
-    CGFloat bloodCellX=self.view.frame.size.width-45-30;
-    CGFloat bloodCellY=self.view.frame.size.height/2+whiteView.frame.size.height/2;
-    [whiteView setFrame:CGRectMake(bloodCellX, bloodCellY, 45,45)];
-    UIImageView* greenView = [[UIImageView alloc]initWithImage:[[UIImage alloc]initWithContentsOfFile:[mb pathForResource:@"Oil_pressed" ofType:@"png"]]];
-    greenView.clipsToBounds=YES;
-    greenView.contentMode=UIViewContentModeBottomRight;
-    
-    [greenView setFrame:CGRectMake(whiteView.frame.origin.x+whiteView.frame.size.width, whiteView.frame.origin.y, 0, whiteView.frame.size.height)];
-    
-    whiteView.backgroundColor=[UIColor clearColor];
-    greenView.backgroundColor=[UIColor clearColor];
-    UIViewController *vc= self.childViewControllers[0];
-    [self.view insertSubview:greenView belowSubview:vc.view];
-    [self.view insertSubview:whiteView belowSubview:greenView];
-    self.bloodView=greenView;
-    self.bloodWhiteView=whiteView;
-    [self.bloodWhiteView setHidden:YES];
-    [self.bloodView setHidden:YES];
-    
-    //NSLog(@"blood white view:%@",NSStringFromCGRect(self.bloodWhiteView.frame));
-    
-}
 
 - (void) addDashboardBg{
     REMDashboardController *srcController=(REMDashboardController *) self.widgetCollectionController.parentViewController;
     REMBuildingImageViewController *imageController=(REMBuildingImageViewController *)srcController.parentViewController;
-
+    REMWidgetCellViewController *cellController=self.widgetCollectionController.childViewControllers[self.currentWidgetIndex];
+    [cellController.view setHidden:YES];
     UIImage *image=[REMImageHelper imageWithView:imageController.view];
     UIImageView *view = [[UIImageView alloc]initWithImage:image];
     [view setFrame:self.view.frame];
-    [view setFrame:CGRectMake(200, 200, view.frame.size.width-400, view.frame.size.height-400)];
-    self.origSrcBgFrame=view.frame;
+    [view setFrame:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)];
+    UIViewController *controller=self.childViewControllers[self.currentWidgetIndex];
     
-    [self.view addSubview:view];
+    [self.view insertSubview:view belowSubview:controller.view];
     self.srcBg=view;
-    [self.srcBg setHidden:YES];
-    
-    UIView *glassView = [[UIView alloc]initWithFrame:self.view.frame];
-    glassView.alpha=0;
-    glassView.contentMode=UIViewContentModeScaleToFill;
-    glassView.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
-    
-    [self.view addSubview:glassView];
-    
-    self.glassView=glassView;
+    self.srcBg.alpha=0;
+    [cellController.view setHidden:NO];
 }
 
 
@@ -217,7 +175,6 @@ const static CGFloat widgetGap=20;
         REMWidgetDetailViewController *vc = self.childViewControllers[i];
         NSInteger gap=i-self.currentWidgetIndex;
         [vc.view setCenter:CGPointMake(gap*(self.view.frame.size.width+widgetGap)+self.view.frame.size.width/2, vc.view.center.y)];
-        //NSLog(@"view center:%@",NSStringFromCGRect(vc.view.frame));
         
     }
 }
@@ -230,9 +187,6 @@ const static CGFloat widgetGap=20;
 
 - (void)panthis:(UIPanGestureRecognizer *)pan{
     
-    //[self cancelAllRequest];
-    
-    
     
     CGPoint trans= [pan translationInView:self.view];
     
@@ -240,79 +194,49 @@ const static CGFloat widgetGap=20;
     if(pan.state== UIGestureRecognizerStateChanged)
     {
         
-        
+        CGFloat x;
         for (int i=0;i<self.childViewControllers.count;++i)
         {
             REMWidgetDetailViewController *vc = self.childViewControllers[i];
+            
             if((self.currentWidgetIndex == 0 && self.cumulateX>0 ) ||
                ((self.currentWidgetIndex==(self.dashboardInfo.widgets.count-1)) && self.cumulateX<0)){
-                //NSLog(@"src bg:%@",NSStringFromCGRect(self.srcBg.frame));
-                [self.srcBg setHidden:NO];
-                if(ABS(self.cumulateX)<300 && self.srcBg.frame.origin.x>=0){
-                    CGFloat rate=200.0f/160.0f;
-                    CGFloat delta=self.cumulateX*rate;
-                    if (self.currentWidgetIndex!=0) {
-                        delta*=-1;
-                    }
-                    CGFloat x=self.origSrcBgFrame.origin.x- delta;
-                    if(x<0){
-                        [self.srcBg setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-                    }
-                    else{
-                        [self.srcBg setFrame:CGRectMake(x, self.origSrcBgFrame.origin.y- delta, self.origSrcBgFrame.size.width+ 2*delta, self.origSrcBgFrame.size.height+ 2*delta)];
-                        CGFloat blurLevel=0.8*ABS(self.cumulateX)/160.0f;
-                        self.glassView.alpha=MAX(0,MIN(blurLevel,0.8));
-                    }
-                    //[self.bloodWhiteView setHidden:YES];
-                    //[self.bloodView setHidden:YES];
+                if (self.srcBg==nil) {
+                    [self addDashboardBg];
                 }
-                //NSLog(@"bg frame:%@",NSStringFromCGRect(self.srcBg.frame));
-                if(self.srcBg.frame.origin.x>0){
+                if(ABS(self.cumulateX)>128){
                     
-                    self.readyToClose=NO;
-                }
-                else{
-                    self.readyToClose=YES;
-                }
-                
-            }/*
-            else if((self.currentWidgetIndex==(self.dashboardInfo.widgets.count-1)) && self.cumulateX<0){
-                //[self.bloodView setHidden:NO];
-                //[self.bloodWhiteView setHidden:NO];
-                if(ABS(self.cumulateX)<160 && self.bloodView.frame.size.width<=self.bloodWhiteView.frame.size.width){
-                    [self.bloodView setFrame:CGRectMake(self.bloodWhiteView.frame.origin.x+self.bloodWhiteView.frame.size.width+self.cumulateX/3,self.bloodWhiteView.frame.origin.y, -self.cumulateX/3, self.bloodWhiteView.frame.size.height)];
-                    [self.srcBg setHidden:YES];
-                }
-                else{
-                    self.bloodView.frame=self.bloodWhiteView.frame;
-                }
-                if (self.bloodView.frame.origin.x>self.bloodWhiteView.frame.origin.x) {
-                    self.readyToClose=NO;
-                    //NSLog(@"blood view:%@",NSStringFromCGRect(self.bloodView.frame));
-                }
-                else{
                     
                     self.readyToClose=YES;
+                    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
+                        self.srcBg.alpha=1;
+                    }completion:nil];
                 }
+                else{
+                    self.readyToClose=NO;
+                    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
+                        self.srcBg.alpha=0;
+                    }completion:nil];
+                }
+                x=trans.x/4;
                 
-
-            }*/
-            else{
-                //[self.bloodView setHidden:YES];
-                //[self.bloodWhiteView setHidden:YES];
-                [self.srcBg setHidden:YES];
             }
-            [vc.view setCenter:CGPointMake(vc.view.center.x+trans.x, vc.view.center.y)];
+            else{
+                self.srcBg.alpha=0;
+                x=trans.x;
+            }
+            [vc.view setCenter:CGPointMake(vc.view.center.x+x, vc.view.center.y)];
             
         }
         
-        self.cumulateX+=trans.x;
+        self.cumulateX+=x;
         //NSLog(@"cumulate x:%f",self.cumulateX);
     }
     
     if(pan.state == UIGestureRecognizerStateEnded||pan.state == UIGestureRecognizerStateCancelled)
     {
         if(self.readyToClose==YES){
+            self.lastPageXPosition=self.cumulateX;
             [self popToBuildingCover];
             return;
         }
@@ -326,7 +250,8 @@ const static CGFloat widgetGap=20;
         
         if((sign<0 && self.currentWidgetIndex==self.dashboardInfo.widgets.count-1)
            || (sign>0 && self.currentWidgetIndex==0) ||
-           (ABS(p.x)<200 && ABS(self.cumulateX)<self.view.frame.size.width/8)){
+           (ABS(p.x)<200 && ABS(self.cumulateX)<self.view.frame.size.width/8) ||
+           (p.x<0 && self.cumulateX>0) || (p.x>0 && self.cumulateX<0)){
             addIndex=NO;
         }
         else{
@@ -343,6 +268,7 @@ const static CGFloat widgetGap=20;
             
         }
         else{
+            [self.srcBg removeFromSuperview];
             self.currentWidgetIndex = self.currentWidgetIndex+sign*-1;
             
             if(ABS(p.x)<200){
@@ -350,9 +276,7 @@ const static CGFloat widgetGap=20;
                                     options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
                                         
                                         [self moveAllViews];
-                                    } completion:^(BOOL finished){
-                                        //[self stopCoverPage:nil];
-                                    }];
+                                    } completion:nil];
             }
             else{
                 [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction|  UIViewAnimationOptionCurveEaseInOut animations:^(void){
