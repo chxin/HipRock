@@ -98,7 +98,7 @@
     NSMutableArray* yAxes = [[NSMutableArray alloc]init];
     for (DCXYSeries* s in series) {
         for (DCAxis* y in yAxes) {
-            if ([y.axisTitle isEqualToString:s.target.uomName]) {
+            if ((REMIsNilOrNull(y.axisTitle) && REMIsNilOrNull(s.target.uomName)) || [y.axisTitle isEqualToString:s.target.uomName]) {
                 s.yAxis = y;
                 break;
             }
