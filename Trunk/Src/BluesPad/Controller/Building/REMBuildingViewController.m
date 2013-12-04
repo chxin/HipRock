@@ -23,6 +23,7 @@
 #import "REMBuildingShareViewController.h"
 #import "REMDimensions.h"
 #import "REMBuildingChartContainerView2.h"
+#import <GPUImage/GPUImage.h>
 
 const static CGFloat buildingGap=20;
 

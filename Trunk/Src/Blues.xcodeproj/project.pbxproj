@@ -574,6 +574,8 @@
 		B46C8EC017F27CB9006DC4CB /* REMDashboardCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EBF17F27CB9006DC4CB /* REMDashboardCollectionView.m */; };
 		B46C8EC317F27CDF006DC4CB /* REMDashboardCollectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EC217F27CDF006DC4CB /* REMDashboardCollectionCellView.m */; };
 		B47422E617C45BCF0021B76C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
+		B477739A184F074500F68AED /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4777399184F074500F68AED /* CoreMedia.framework */; };
+		B477739C184F075300F68AED /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B477739B184F075300F68AED /* CoreVideo.framework */; };
 		B47ACC2A17F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC2917F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m */; };
 		B47ACC2D17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC2C17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m */; };
 		B47ACC3017F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC2F17F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m */; };
@@ -1337,6 +1339,8 @@
 		B46C8EBF17F27CB9006DC4CB /* REMDashboardCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardCollectionView.m; path = View/Dashboard/REMDashboardCollectionView.m; sourceTree = "<group>"; };
 		B46C8EC117F27CDF006DC4CB /* REMDashboardCollectionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDashboardCollectionCellView.h; path = View/Dashboard/REMDashboardCollectionCellView.h; sourceTree = "<group>"; };
 		B46C8EC217F27CDF006DC4CB /* REMDashboardCollectionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardCollectionCellView.m; path = View/Dashboard/REMDashboardCollectionCellView.m; sourceTree = "<group>"; };
+		B4777399184F074500F68AED /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
+		B477739B184F075300F68AED /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
 		B47ACC2817F80AAA00989B2C /* REMSettingCustomerSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerSelectionViewController.h; path = Controller/Setting/REMSettingCustomerSelectionViewController.h; sourceTree = "<group>"; };
 		B47ACC2917F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSettingCustomerSelectionViewController.m; path = Controller/Setting/REMSettingCustomerSelectionViewController.m; sourceTree = "<group>"; };
 		B47ACC2B17F80ACE00989B2C /* REMSettingCustomerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerDetailViewController.h; path = Controller/Setting/REMSettingCustomerDetailViewController.h; sourceTree = "<group>"; };
@@ -1532,6 +1536,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B477739C184F075300F68AED /* CoreVideo.framework in Frameworks */,
+				B477739A184F074500F68AED /* CoreMedia.framework in Frameworks */,
 				7A44E047182398B60080CEBE /* MessageUI.framework in Frameworks */,
 				6ABA68C4180F759700A302BC /* GoogleMaps.framework in Frameworks */,
 				B4B61D7617C742E000245F1E /* CoreText.framework in Frameworks */,
@@ -2527,6 +2533,8 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B477739B184F075300F68AED /* CoreVideo.framework */,
+				B4777399184F074500F68AED /* CoreMedia.framework */,
 				B4223D50184EFF44004D39C0 /* GPUImage.framework */,
 				7A44E046182398B60080CEBE /* MessageUI.framework */,
 				6ABA68C3180F759700A302BC /* GoogleMaps.framework */,
