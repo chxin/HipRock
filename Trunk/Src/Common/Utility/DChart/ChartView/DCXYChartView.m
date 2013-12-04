@@ -433,6 +433,10 @@
     for (_DCLinesLayer* lineLayer in self.lineLayers) {
         [lineLayer defocus];
     }
+    if (self.indicatorLayer) {
+        self.indicatorLayer.symbolLineAt = nil;
+        [self.indicatorLayer setNeedsDisplay];
+    }
 }
 
 -(void)focusAroundX:(double)x {
