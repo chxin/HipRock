@@ -97,7 +97,6 @@
             [self addLabelForX:i];
         }
     }
-    NSLog(@"%i", self.sublayers.count);
 }
 
 
