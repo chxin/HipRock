@@ -48,8 +48,8 @@
 }
 
 -(void)customizeView:(DCXYChartView*)view {
-    view.graphContext.pointAlignToTick = YES;
-    view.graphContext.xLabelAlignToTick = YES;
+    view.graphContext.pointAlignToTick = NO;
+    view.graphContext.xLabelAlignToTick = NO;
 }
 
 -(NSArray*)createYAxes:(NSArray*)series {
@@ -91,7 +91,7 @@
     int rangeCode = self.rankingRangeCode;
     int datasAmount = self.energyViewData.targetEnergyData.count;
     
-    return @{ @"globalRange": [[DCRange alloc]initWithLocation:-0.5 length:datasAmount], @"beginRange": [[DCRange alloc]initWithLocation:0 length:MIN(rangeCode, datasAmount)], @"xformatter": [NSNull null] };
+    return @{ @"globalRange": [[DCRange alloc]initWithLocation:0 length:datasAmount], @"beginRange": [[DCRange alloc]initWithLocation:0 length:MIN(rangeCode, datasAmount)], @"xformatter": [NSNull null] };
 }
 
 -(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
