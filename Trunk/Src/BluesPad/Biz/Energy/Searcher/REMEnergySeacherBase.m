@@ -54,6 +54,8 @@
     if(self.loadingView==nil){
         UIActivityIndicatorView *activitor= [[UIActivityIndicatorView alloc] initWithFrame:maskerContainer.bounds];
         [activitor setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+        
+        //[activitor setBackgroundColor:[[UIColor grayColor] colorWithAlphaComponent:0.8]];
         self.loadingView=activitor;
     }
    
@@ -69,6 +71,21 @@
         NSLayoutConstraint *constraintY=[NSLayoutConstraint constraintWithItem:self.loadingView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:maskerContainer attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
         [maskerContainer addConstraint:constraintX];
         [maskerContainer addConstraint:constraintY];
+        
+    }
+    
+    if (self.loadingBackgroundView!=nil) {
+        [maskerContainer addSubview:self.loadingBackgroundView];
+        if (self.loadingBackgroundView.translatesAutoresizingMaskIntoConstraints==NO) {
+            NSLayoutConstraint *constraintX=[NSLayoutConstraint constraintWithItem:self.loadingBackgroundView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:maskerContainer attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
+            NSLayoutConstraint *constraintWidth=[NSLayoutConstraint constraintWithItem:self.loadingBackgroundView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:maskerContainer attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+            NSLayoutConstraint *constraintY=[NSLayoutConstraint constraintWithItem:self.loadingBackgroundView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:maskerContainer attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+            NSLayoutConstraint *constraintHeight=[NSLayoutConstraint constraintWithItem:self.loadingBackgroundView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:maskerContainer attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
+            [maskerContainer addConstraint:constraintX];
+            [maskerContainer addConstraint:constraintY];
+            [maskerContainer addConstraint:constraintWidth];
+            [maskerContainer addConstraint:constraintHeight];
+        }
     }
     
     
@@ -78,6 +95,7 @@
     [REMDataAccessor access:store success:^(NSDictionary *data){
         [self.loadingView stopAnimating];
         [self.loadingView removeFromSuperview];
+        [self.loadingBackgroundView removeFromSuperview];
         if([data isEqual:[NSNull null]]==YES)return ;
         REMEnergyViewData *viewData=[self processEnergyData:data];
         if(callback!=nil){
@@ -85,6 +103,7 @@
         }
         
     } error:^(NSError *error,REMBusinessErrorInfo *errorInfo){
+        [self.loadingBackgroundView removeFromSuperview];
         [self.loadingView stopAnimating];
         [self.loadingView removeFromSuperview];
         callback(nil,errorInfo);

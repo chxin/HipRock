@@ -24,6 +24,24 @@
 #import "DCRankingWrapper.h"
 #import "DCPieWrapper.h"
 
+
+
+@interface REMWidgetStepCalculationModel : NSObject
+
+@property (nonatomic,strong) NSArray *stepList;
+@property (nonatomic,strong) NSArray *titleList;
+@property (nonatomic) REMEnergyStep defaultStep;
+@property (nonatomic) NSUInteger defaultStepIndex;
+
+@end
+
+@implementation REMWidgetStepCalculationModel
+
+
+@end
+
+
+
 @interface REMWidgetEnergyDelegator()
 
 
@@ -100,8 +118,12 @@
                   .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
     self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
     UIActivityIndicatorView *loader=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [loader setColor:[UIColor grayColor]];
-    [loader setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.3]];
+    [loader setColor:[UIColor blackColor]];
+    [loader setBackgroundColor:[UIColor clearColor]];
+    UIView *image=[[UIView alloc]init];
+    [image setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.4]];
+    image.translatesAutoresizingMaskIntoConstraints=NO;
+    self.searcher.loadingBackgroundView=image;
     self.searcher.loadingView=loader;
     loader.translatesAutoresizingMaskIntoConstraints=NO;
     REMWidgetStepEnergyModel *m=(REMWidgetStepEnergyModel *)self.model;
@@ -529,7 +551,7 @@
     
 }
 
-- (NSDictionary *)tryNewStepByRange:(REMTimeRange *)range {
+- (REMWidgetStepCalculationModel *)tryNewStepByRange:(REMTimeRange *)range {
     long diff = [range.endTime timeIntervalSinceDate:range.startTime];
     NSMutableArray *lvs=[[NSMutableArray alloc]initWithCapacity:7];
     [lvs addObject:[NSNumber numberWithLong:REMDAY]];
@@ -609,18 +631,55 @@
         return nil;
     }
     REMEnergyStep defaultStep=(REMEnergyStep)[list[defaultStepIndex] integerValue];
-    NSDictionary *dic=@{@"stepList": list,@"titleList":titleList,@"defaultStep":@(defaultStep),@"defaultStepIndex":@(defaultStepIndex)};
     
-    return dic;
+    REMWidgetStepCalculationModel *retModel=[[REMWidgetStepCalculationModel alloc]init];
+    retModel.stepList=list;
+    retModel.titleList=titleList;
+    retModel.defaultStep=defaultStep;
+    retModel.defaultStepIndex=defaultStepIndex;
+    
+    return retModel;
 }
 
-- (REMEnergyStep) initStepButtonWithRange:(REMTimeRange *)range WithStep:(REMEnergyStep)step{
+
+
+- (int)calculationStep:(NSArray *)stepList{
+    int ret=0;
+    for (NSNumber *number in stepList) {
+        REMEnergyStep step=(REMEnergyStep)[number integerValue];
+        if (step == REMEnergyStepHour) {
+            ret|=1;
+        }
+        else if(step == REMEnergyStepDay){
+            ret|=(1<<1);
+        }
+        else if(step == REMEnergyStepWeek){
+            ret|=(1<<2);
+        }
+        else if(step == REMEnergyStepMonth){
+            ret|=(1<<3);
+        }
+        else if(step == REMEnergyStepYear){
+            ret|=(1<<4);
+        }
+    }
     
-    NSDictionary *dic=[self tryNewStepByRange:range];
-    
-    NSArray *list=dic[@"stepList"];
-    NSArray *titleList=dic[@"titleList"];
-    NSUInteger defaultStepIndex=[dic[@"defaultStepIndex"] integerValue];
+    return ret;
+}
+
+- (REMEnergyStep)reloadStepButtonGroup:(REMWidgetStepCalculationModel *)model withSelectedStep:(REMEnergyStep)step isMustContain:(BOOL)mustContain{
+    NSArray *list=model.stepList;
+    NSArray *titleList=model.titleList;
+    NSUInteger defaultStepIndex=model.defaultStepIndex;
+    NSNumber *newStep = [NSNumber numberWithInt:((int)step)];
+    if (mustContain==YES) {
+        
+        if([list containsObject:newStep] == NO)
+        {
+            return step;
+        }
+
+    }
     
     self.currentStepList=list;
     [self.stepControl removeAllSegments];
@@ -630,7 +689,6 @@
         [self.stepControl setWidth:kWidgetStepSingleButtonWidth forSegmentAtIndex:i];
     }
     
-    NSNumber *newStep = [NSNumber numberWithInt:((int)step)];
     NSUInteger idx;
     if([list containsObject:newStep] == YES)
     {
@@ -644,8 +702,14 @@
     
     [self.stepControl setSelectedSegmentIndex:idx];
     
-    
     return (REMEnergyStep)[newStep intValue];
+}
+
+- (REMEnergyStep) initStepButtonWithRange:(REMTimeRange *)range WithStep:(REMEnergyStep)step{
+    
+    REMWidgetStepCalculationModel *model=[self tryNewStepByRange:range];
+    
+    return [self reloadStepButtonGroup:model withSelectedStep:step isMustContain:NO];
 }
 
 - (void)stepChanged:(UISegmentedControl *)control{
@@ -878,6 +942,8 @@
     }
 }
 
+
+
 - (BOOL)willRangeChange:(id)start end:(id)end
 {
     NSDate *newStart=start;
@@ -893,12 +959,22 @@
     newEnd=[calendar dateFromComponents:components];
     REMTimeRange *newRange=[[REMTimeRange alloc]initWithStartTime:newStart EndTime:newEnd];
     
-    NSDictionary *dic= [self tryNewStepByRange:newRange];
-    if (dic==nil) {
+    
+    
+    REMWidgetStepCalculationModel *model= [self tryNewStepByRange:newRange];
+    if (model==nil) {
         return NO;
     }
-    REMEnergyStep step=(REMEnergyStep)[dic[@"defaultStep"] integerValue];
-    if(step!=self.tempModel.step){
+    
+    int currentStepInt=[self calculationStep:self.currentStepList];
+    int newStepInt=[self calculationStep:model.stepList];
+    if(currentStepInt!=newStepInt){
+        [self reloadStepButtonGroup:model withSelectedStep:self.tempModel.step isMustContain:YES];
+    }
+    
+    
+    
+    if([model.stepList containsObject:@(self.tempModel.step)]==NO){
         return NO;
     }
     
