@@ -15,7 +15,7 @@
     return 1;
 }
 
--(DCXYSeries*)createSeriesAt:(NSUInteger)index style:(REMChartStyle*)style step:(REMEnergyStep)step {
+-(DCXYSeries*)createSeriesAt:(NSUInteger)index style:(REMChartStyle*)style {
     DCXYChartView* view = self.view;
     REMTargetEnergyData* targetEnergy = self.energyViewData.targetEnergyData[index];
     NSMutableArray* datas = [[NSMutableArray alloc]init];
