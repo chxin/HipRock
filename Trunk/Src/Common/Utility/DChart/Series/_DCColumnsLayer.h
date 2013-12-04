@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "_DCCoordinateSystem.h"
-#import "DCColumnSeries.h"
 #import "DCContext.h"
 #import "_DCLayerTrashbox.h"
 #import "_DCSeriesLayer.h"

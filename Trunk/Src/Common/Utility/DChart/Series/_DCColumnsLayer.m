@@ -9,6 +9,9 @@
 #import "_DCColumnsLayer.h"
 #import "DCUtility.h"
 #import "REMColor.h"
+#import "DCDataPoint.h"
+#import "DCXYSeries.h"
+#import "DCColumnSeries.h"
 
 @interface _DCColumnsLayer()
 @property (nonatomic, strong) _DCLayerTrashbox* trashbox;
@@ -30,8 +33,6 @@
 }
 
 -(void)redraw {
-    
-    
     BOOL caTransationState = CATransaction.disableActions;
     [CATransaction setDisableActions:YES];
     BOOL allSeriesAreHidden = YES;
@@ -137,20 +138,6 @@
 
 -(BOOL)isValidSeriesForMe:(DCXYSeries*)series {
     return [series isKindOfClass:[DCColumnSeries class]];
-}
-
--(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
-    if ([DCRange isRange:oldRange equalTo:newRange]) return;
-    if ([DCRange isRange:self.yRange equalTo:newRange]) return;
-    [super didYRangeChanged:oldRange newRange:newRange];
-    [self redraw];
-}
-
--(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
-    if ([DCRange isRange:oldRange equalTo:newRange]) return;
-    if ([DCRange isRange:self.xRange equalTo:newRange]) return;
-    [super didHRangeChanged:oldRange newRange:newRange];
-    [self redraw];
 }
 
 -(void)focusOnX:(int)x {

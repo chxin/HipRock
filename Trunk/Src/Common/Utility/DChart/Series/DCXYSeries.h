@@ -7,7 +7,6 @@
 //
 
 #import "DCSeries.h"
-#import "DCDataPoint.h"
 #import "DCAxis.h"
 #import "DCRange.h"
 #import "_DCSeriesLayer.h"
@@ -24,6 +23,6 @@
 
 @property (nonatomic, assign)BOOL hidden;
 
-@property (nonatomic, weak) _DCSeriesLayer* seriesLayer;
+@property (nonatomic, weak) CALayer* seriesLayer;
 
 @end

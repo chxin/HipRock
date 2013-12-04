@@ -11,8 +11,8 @@
 #import "_DCXLabelFormatter.h"
 
 @interface _DCXAxisLabelLayer()
-@property (nonatomic, assign) CGFloat fontSize;
-@property (nonatomic, assign) CTFontRef fontRef;
+//@property (nonatomic, assign) CGFloat fontSize;
+//@property (nonatomic, assign) CTFontRef fontRef;
 @property (nonatomic, strong) _DCLayerTrashbox* trashbox;
 
 @end
@@ -59,6 +59,10 @@
             [self addLabelForX:i];
         }
     }
+}
+
+-(void)willHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
+    // Nothing to do.
 }
 
 -(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
@@ -109,12 +113,12 @@
 }
 
 -(void)addLabelForX:(NSInteger)x {
-    if (self.fontRef == nil) {
-        self.fontSize = self.font.pointSize;
-        self.fontRef = CTFontCreateWithName((__bridge CFStringRef)self.font.fontName,
-                                            self.fontSize,
-                                            NULL);
-    }
+//    if (self.fontRef == nil) {
+//        self.fontSize = self.font.pointSize;
+//        self.fontRef = CTFontCreateWithName((__bridge CFStringRef)self.font.fontName,
+//                                            self.fontSize,
+//                                            NULL);
+//    }
     CGFloat centerX = (x - self.graphContext.hRange.location) * self.frame.size.width / self.graphContext.hRange.length;
     CGFloat maxLabelLength = INT32_MAX;
     if (self.labelFormatter && [self.labelFormatter respondsToSelector:@selector(getMaxXLabelLengthIn:)]) {
@@ -122,14 +126,18 @@
     }
     CATextLayer* text = (CATextLayer*)[self.trashbox popLayerFromTrashBox];
     if (!text) {
+        CTFontRef fRef = CTFontCreateWithName((__bridge CFStringRef)self.font.fontName,
+                                              self.font.pointSize,
+                                              NULL);
         text = [[CATextLayer alloc]init];
-        text.font = self.fontRef;
-        text.fontSize = self.fontSize;
+        text.font = fRef;
+        text.fontSize = self.font.pointSize;
         text.contentsScale = [[UIScreen mainScreen] scale];
         text.foregroundColor = self.fontColor.CGColor;
         text.alignmentMode = kCAAlignmentCenter;
         text.truncationMode = kCATruncationEnd;
         [self addSublayer:text];
+        CFRelease(fRef);
     }
     NSString* labelText = [self textForX:x];
     [text setString:labelText];
@@ -146,12 +154,13 @@
     [self.trashbox.xToLayerDic setObject:text forKey:@(x)];
 }
 
--(void)removeFromSuperlayer {
-    if (self.fontRef) {
-        CFRelease(self.fontRef);
-    }
-    [super removeFromSuperlayer];
-}
+//-(void)removeFromSuperlayer {
+//    if (self.fontRef) {
+//        CFRelease(self.fontRef);
+//        self.fontRef = nil;
+//    }
+//    [super removeFromSuperlayer];
+//}
 
 -(void)setLabelFormatter:(NSFormatter *)labelFormatter {
     _labelFormatter = labelFormatter;

@@ -13,11 +13,12 @@
 #import "DCXYChartViewDelegate.h"
 #import "_DCBackgroundBandsLayer.h"
 
-@interface DCXYChartView : UIView
+@interface DCXYChartView : UIView<DCContextHRangeObserverProtocal>
 @property (nonatomic, strong) DCAxis* xAxis;
-@property (nonatomic, strong) DCAxis* yAxis0;
-@property (nonatomic, strong) DCAxis* yAxis1;
-@property (nonatomic, strong) DCAxis* yAxis2;
+//@property (nonatomic, strong) DCAxis* yAxis0;
+//@property (nonatomic, strong) DCAxis* yAxis1;
+//@property (nonatomic, strong) DCAxis* yAxis2;
+@property (nonatomic, strong) NSArray* yAxisList;
 
 @property (nonatomic, strong) DCContext* graphContext;
 
@@ -41,6 +42,7 @@
 @property (nonatomic, assign) CGFloat pointXOffset;
 
 @property (nonatomic, strong) NSArray* seriesList;
+@property (nonatomic, assign) NSUInteger visableYAxisAmount;
 - (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange stacked:(BOOL)stacked;
 
 //- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden;

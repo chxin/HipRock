@@ -30,13 +30,14 @@ typedef enum _DCLineType {
 @protocol DCContextHRangeObserverProtocal <NSObject>
 
 -(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange;
+-(void)willHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange;
 
 @end
-@protocol DCContextYRangeObserverProtocal <NSObject>
-
--(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange;
-
-@end
+//@protocol DCContextYRangeObserverProtocal <NSObject>
+//
+//-(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange;
+//
+//@end
 @protocol DCContextYIntervalObserverProtocal <NSObject>
 
 -(void)didYIntervalChanged:(double)oldInterval newInterval:(double)newInterval yRange:(DCRange*)yRange;
@@ -50,28 +51,28 @@ typedef enum _DCLineType {
 @property (nonatomic, strong) DCRange* hRange;
 @property (nonatomic, readonly) BOOL stacked;
 
-@property (nonatomic, strong) DCRange* y0Range;
-@property (nonatomic, strong) DCRange* y1Range;
-@property (nonatomic, strong) DCRange* y2Range;
-
-@property (nonatomic, assign) double y0Interval;
-@property (nonatomic, assign) double y1Interval;
-@property (nonatomic, assign) double y2Interval;
+//@property (nonatomic, strong) DCRange* y0Range;
+//@property (nonatomic, strong) DCRange* y1Range;
+//@property (nonatomic, strong) DCRange* y2Range;
+//
+//@property (nonatomic, assign) double y0Interval;
+//@property (nonatomic, assign) double y1Interval;
+//@property (nonatomic, assign) double y2Interval;
 
 @property (nonatomic,strong) DCRange* globalHRange;
 
 -(void)addHRangeObsever:(id<DCContextHRangeObserverProtocal>)observer;
 -(void)removeHRangeObsever:(id<DCContextHRangeObserverProtocal>)observer;
--(void)addY0RangeObsever:(id<DCContextYRangeObserverProtocal>)observer;
--(void)removeY0RangeObsever:(id<DCContextYRangeObserverProtocal>)observer;
--(void)addY1RangeObsever:(id<DCContextYRangeObserverProtocal>)observer;
--(void)removeY1RangeObsever:(id<DCContextYRangeObserverProtocal>)observer;
--(void)addY2RangeObsever:(id<DCContextYRangeObserverProtocal>)observer;
--(void)removeY2RangeObsever:(id<DCContextYRangeObserverProtocal>)observer;
--(void)addY0IntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer;
--(void)removeY0IntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer;
--(void)addY1IntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer;
--(void)removeY1IntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer;
--(void)addY2IntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer;
--(void)removeY2IntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer;
+//-(void)addY0RangeObsever:(id<DCContextYRangeObserverProtocal>)observer;
+//-(void)removeY0RangeObsever:(id<DCContextYRangeObserverProtocal>)observer;
+//-(void)addY1RangeObsever:(id<DCContextYRangeObserverProtocal>)observer;
+//-(void)removeY1RangeObsever:(id<DCContextYRangeObserverProtocal>)observer;
+//-(void)addY2RangeObsever:(id<DCContextYRangeObserverProtocal>)observer;
+//-(void)removeY2RangeObsever:(id<DCContextYRangeObserverProtocal>)observer;
+//-(void)addY0IntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer;
+//-(void)removeY0IntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer;
+//-(void)addY1IntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer;
+//-(void)removeY1IntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer;
+//-(void)addY2IntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer;
+//-(void)removeY2IntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer;
 @end

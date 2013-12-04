@@ -41,6 +41,10 @@
     [self updateBands:xMovementInScreen];
 }
 
+-(void)willHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
+    // Nothing to do.
+}
+
 -(void)updateBands:(double)xMovementInScreen {
     if (REMIsNilOrNull(self.bands) || self.bands.count == 0) return;
     BOOL caTransationState = CATransaction.disableActions;

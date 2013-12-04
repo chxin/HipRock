@@ -7,14 +7,12 @@
 //
 
 #import "_DCSeriesLayer.h"
-#import "_DCCoordinateSystem.h"
-#import "DCLineSeries.h"
 #import "DCContext.h"
 #import "_DCLineSymbolsLayer.h"
 
 extern NSUInteger const kDCLineLayerCells;
 
 @interface _DCLinesLayer : _DCSeriesLayer
--(void)setSymbolsHidden:(BOOL)hidden;
-@property (nonatomic, weak) _DCLineSymbolsLayer* symbolsLayer;
+-(NSArray*)getSymbols;
+//@property (nonatomic, weak) _DCLineSymbolsLayer* symbolsLayer;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "DCXYSeries.h"
+#import "DCDataPoint.h"
 
 @implementation DCXYSeries
 
@@ -19,7 +20,7 @@
     return self;
 }
 
--(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
+-(void)willHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
     if (newRange != nil && newRange.location < -0.5) return;
     int start = floor(newRange.location);
@@ -69,14 +70,11 @@
             break;
         }
     }
-//    for (int i = start; i <= end; i++) {
-//        DCDataPoint* p = self.datas[i];
-//        if (p.value == nil || [p.value isEqual:[NSNull null]]) continue;
-//        if ([y compare:p.value] == NSOrderedAscending) {
-//            y = p.value;
-//        }
-//    }
     _visableYMax = y;
+}
+
+-(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
+    // Nothing to do.
 }
 
 -(void)setHidden:(BOOL)hidden {
