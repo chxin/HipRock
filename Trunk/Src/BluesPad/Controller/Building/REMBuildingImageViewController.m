@@ -18,7 +18,7 @@
 
 @property (nonatomic,weak) UIImageView *imageView;
 @property (nonatomic,weak) UIImageView *blurImageView;
-@property (nonatomic,weak) UIButton *shareButton;
+
 @property (nonatomic,weak) UIButton *backButton;
 @property (nonatomic,weak) UIView *glassView;
 @property (nonatomic,weak) UIView *container;
@@ -580,35 +580,7 @@
     }
 }
 
-- (void)loadingDataNow{
-    [self.shareButton setEnabled:NO];
-}
 
-- (void)loadingDataComplete{
-    [self.shareButton setEnabled:YES];
-}
-
-- (void)horizonalMoving{
-    REMBuildingDataViewController *dataController=(REMBuildingDataViewController *)self.childViewControllers[0];
-    REMDashboardController *dashboardController=(REMDashboardController *)self.childViewControllers[1];
-    if(dataController.isViewLoaded==YES){
-        [dataController horizonalMoving];
-    }
-    if(dashboardController.isViewLoaded==YES){
-        [dashboardController horizonalMoving];
-    }
-}
-
-- (void)horizonalStopped{
-    REMBuildingDataViewController *dataController=(REMBuildingDataViewController *)self.childViewControllers[0];
-    REMDashboardController *dashboardController=(REMDashboardController *)self.childViewControllers[1];
-    if(dataController.isViewLoaded==YES){
-        [dataController horizonalStopped];
-    }
-    if(dashboardController.isViewLoaded==YES){
-        [dashboardController horizonalStopped];
-    }
-}
 
 - (void)releaseContentView{
     [self releaseViewInController:self.childViewControllers];
