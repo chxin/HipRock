@@ -28,6 +28,7 @@
 
 @property (nonatomic) NSUInteger currentWidgetIndex;
 
+@property (nonatomic) CGFloat lastPageXPosition;
 
 
 - (void)popToBuildingCover;

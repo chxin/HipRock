@@ -201,10 +201,10 @@ const static CGFloat buildingGap=20;
             UIViewController *controller=self.childViewControllers[i];
             CGFloat x;
             if(self.currentBuildingIndex == 0 && self.cumulateX>0){
-                x=trans.x/2;
+                x=trans.x/4;
             }
             else if((self.currentBuildingIndex==(self.childViewControllers.count-1)) && self.cumulateX<0){
-                x=trans.x/2;
+                x=trans.x/4;
             }
             else{
                 x=trans.x;
