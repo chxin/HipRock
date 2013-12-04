@@ -33,7 +33,8 @@
 @property (nonatomic, strong) NSMutableArray* coodinates;
 @property (nonatomic, strong) NSMutableArray* columnLayers;
 @property (nonatomic, strong) NSMutableArray* lineLayers;
-@property (nonatomic, strong) NSMutableArray* symbolLayers;
+//@property (nonatomic, strong) NSMutableArray* symbolLayers;
+@property (nonatomic, strong) _DCLineSymbolsLayer* symbolLayer;
 
 @property (nonatomic) CGRect plotRect;
 
@@ -58,7 +59,7 @@
 - (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange stacked:(BOOL)stacked {
     self = [super initWithFrame:frame];
     if (self) {
-        self.symbolLayers = [[NSMutableArray alloc]init];
+//        self.symbolLayers = [[NSMutableArray alloc]init];
         self.graphContext = [[DCContext alloc]initWithStacked:stacked];
         self.graphContext.hGridlineAmount = 0;
         self.backgoundBands = [[NSMutableArray alloc]init];
@@ -115,9 +116,9 @@
         }
         _DCLinesLayer* linesLayer = [[_DCLinesLayer alloc]initWithCoordinateSystem:ds];
         if (linesLayer.series.count > 0) {
-            _DCLineSymbolsLayer* symbols = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
-            linesLayer.symbolsLayer = symbols;
-            [self.symbolLayers addObject:symbols];
+//            _DCLineSymbolsLayer* symbols = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
+//            linesLayer.symbolsLayer = symbols;
+//            [self.symbolLayers addObject:symbols];
             linesLayer.frame = self.plotRect;
             [self.layer addSublayer:linesLayer];
             [linesLayer setNeedsDisplay];
@@ -133,10 +134,11 @@
         [coordiates addObject:ds];
     }
     self.coodinates = coordiates;
-    
-    for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
-        [self.layer addSublayer:symbol];
-    }
+    self.symbolLayer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
+    [self.layer addSublayer:self.symbolLayer];
+//    for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
+//        [self.layer addSublayer:symbol];
+//    }
     [self updateSymbolFrameSize];
     if ([self testHRangeChange:self.beginHRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByInitialize]) {
         self.graphContext.hRange = self.beginHRange;
@@ -166,6 +168,15 @@
     for (_DCLinesLayer* lineLayer in self.lineLayers) {
         [lineLayer redrawWithXRange:newRange yRange:lineLayer.coordinateSystem.yRange];
     }
+    [self renderSymbol];
+}
+
+-(void)renderSymbol {
+    NSMutableArray* symbolPoints = [[NSMutableArray alloc]init];
+    for (_DCLinesLayer* lineLayer in self.lineLayers) {
+        [symbolPoints addObjectsFromArray:[lineLayer getSymbols]];
+    }
+    [self.symbolLayer drawSymbolsForPoints:symbolPoints inSize:self.plotRect.size];
 }
 
 -(void)setFrame:(CGRect)frame {
@@ -175,9 +186,10 @@
 
 -(void)updateSymbolFrameSize {
     CGRect symbolFrameSize = CGRectMake(self.plotRect.origin.x, self.plotRect.origin.y, self.plotRect.size.width, self.plotRect.size.height + self.xAxis.lineWidth + self.xAxis.labelToLine);
-    for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
-        symbol.frame = symbolFrameSize;
-    }
+//    for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
+//        symbol.frame = symbolFrameSize;
+//    }
+    self.symbolLayer.frame = symbolFrameSize;
 }
 
 
@@ -249,12 +261,6 @@
     [self._hGridlineLayer setNeedsDisplay];
 }
 
--(void)setLineSymbolsHidden:(BOOL)symbolsAreHidden {
-    for (_DCLinesLayer* lineLayer in self.lineLayers) {
-        [lineLayer setSymbolsHidden:symbolsAreHidden];
-    }
-}
-
 -(void)animateHRangeLocation {
     if (self.timer.isValid) {
         double hRangeAnimationStep =  [self.timer.userInfo[@"hRangeAnimationStep"] doubleValue];
@@ -264,7 +270,6 @@
         if ((newLocation >= to && from < to) || (newLocation <= to && from > to)){
             newLocation = to;
             [self.timer invalidate];
-            [self setLineSymbolsHidden:NO];
         }
         DCRange* newRange = [[DCRange alloc]initWithLocation:newLocation length:self.graphContext.hRange.length];
         if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByAnimation]) {
@@ -334,7 +339,6 @@
         if (self.delegate && [self.delegate respondsToSelector:@selector(touchedInPlotAt:xCoordinate:)]) {
             [self.delegate touchedInPlotAt:touchPoint xCoordinate:[self getXLocationForPoint:touchPoint]];
         }
-//        [self setLineSymbolsHidden:YES];
         if (self.timer.isValid) {
             [self.timer invalidate];
         }
@@ -360,13 +364,12 @@
                 } else if (self.graphContext.hRange.length+self.graphContext.hRange.location>self.graphContext.globalHRange.location+self.graphContext.globalHRange.length) {
                     [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.length+self.graphContext.globalHRange.location-self.graphContext.hRange.length];
                 } else {
-                    [self setLineSymbolsHidden:NO];
+                    
                 }
                 if (self.delegate && [self.delegate respondsToSelector:@selector(panStopped)]) {
                     [self.delegate panStopped];
                 }
             } else {
-                [self setLineSymbolsHidden:YES];
                 DCRange* newRange = [[DCRange alloc]initWithLocation:-translation.x*self.graphContext.hRange.length/self.plotRect.size.width+self.graphContext.hRange.location length:self.graphContext.hRange.length];
                 if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByUserPan]) {
                     self.graphContext.hRange = newRange;
@@ -437,6 +440,7 @@
         self.indicatorLayer.symbolLineAt = nil;
         [self.indicatorLayer setNeedsDisplay];
     }
+    [self renderSymbol];
 }
 
 -(void)focusAroundX:(double)x {
@@ -477,6 +481,7 @@
             [self.delegate focusPointChanged:points];
         }
     }
+    [self renderSymbol];
 }
 
 -(void)setBackgoundBands:(NSArray *)bands {

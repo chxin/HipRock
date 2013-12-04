@@ -94,7 +94,6 @@
         }
     }
     CGContextStrokePath(ctx);
-    [self renderSymbols];
 }
 
 -(CGPoint)getPointBy:(int)x y:(double)y xOffset:(double)xOffset {
@@ -135,11 +134,6 @@
 //    [self.timer invalidate];
 //}
 
--(void)renderSymbols {
-    if (REMIsNilOrNull(self.symbolsLayer) || self.symbolsAreHidden) return;
-    [self.symbolsLayer drawSymbolsForPoints:[self getSymbols] inSize:self.bounds.size];
-}
-
 -(NSArray*)getSymbols {
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
@@ -178,36 +172,5 @@
         y = point.value.doubleValue;
     }
     return self.heightUnitInScreen * y;
-}
--(void)setSymbolsHidden:(BOOL)hidden {
-    if (kDCHideLineSymbolWhenDragging) {
-        if (REMIsNilOrNull(self.symbolsLayer) || hidden == self.symbolsAreHidden) return;
-        [self.timer setFireDate:nil];
-        if (hidden) {
-            _DCLineSymbolsLayer* layer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
-            layer.frame = self.symbolsLayer.frame;
-            [self.symbolsLayer.superlayer insertSublayer:layer below:self.symbolsLayer];
-            [self.symbolsLayer removeFromSuperlayer];
-            self.symbolsLayer = layer;
-            self.symbolsAreHidden = hidden;
-        } else {
-            self.timer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(lazyRenderSymbol) userInfo:nil repeats:NO];
-            [self.timer setFireDate:[NSDate dateWithTimeIntervalSinceNow:.5]];
-        }
-    }
-}
-
--(void)focusOnX:(int)x {
-    if (self.focusX != x) {
-        [super focusOnX:x];
-        [self renderSymbols];
-    }
-}
-
--(void)defocus {
-    if (self.focusX != INT32_MIN) {
-        [super defocus];
-        [self renderSymbols];
-    }
 }
 @end
