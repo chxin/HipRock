@@ -540,6 +540,7 @@
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
 		B420CE0F183CB59D000C7352 /* REMEnergyCostElectricitySearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B420CE0E183CB59D000C7352 /* REMEnergyCostElectricitySearcher.m */; };
 		B420CE16183CB6CD000C7352 /* REMClientErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B420CE15183CB6CD000C7352 /* REMClientErrorInfo.m */; };
+		B4223D51184EFF44004D39C0 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4223D50184EFF44004D39C0 /* GPUImage.framework */; };
 		B42FBF6117F519F5004F2F3A /* REMWidgetCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6017F519F5004F2F3A /* REMWidgetCollectionViewController.m */; };
 		B42FBF6417F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
 		B42FBF6517F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
@@ -1294,6 +1295,7 @@
 		B420CE0E183CB59D000C7352 /* REMEnergyCostElectricitySearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnergyCostElectricitySearcher.m; path = Biz/Energy/Searcher/REMEnergyCostElectricitySearcher.m; sourceTree = "<group>"; };
 		B420CE14183CB6CD000C7352 /* REMClientErrorInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMClientErrorInfo.h; path = Biz/REMClientErrorInfo.h; sourceTree = "<group>"; };
 		B420CE15183CB6CD000C7352 /* REMClientErrorInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMClientErrorInfo.m; path = Biz/REMClientErrorInfo.m; sourceTree = "<group>"; };
+		B4223D50184EFF44004D39C0 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = ../Lib/GPUImage.framework; sourceTree = "<group>"; };
 		B42FBF5F17F519F5004F2F3A /* REMWidgetCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetCollectionViewController.h; sourceTree = "<group>"; };
 		B42FBF6017F519F5004F2F3A /* REMWidgetCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetCollectionViewController.m; sourceTree = "<group>"; };
 		B42FBF6217F574B5004F2F3A /* REMEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnum.h; path = Common/Model/REMEnum.h; sourceTree = "<group>"; };
@@ -1540,6 +1542,7 @@
 				7A13C1A917F40D90007E6AA9 /* libicucore.dylib in Frameworks */,
 				7A13C1A717F40D83007E6AA9 /* libc++.dylib in Frameworks */,
 				7A13C1A517F40D77007E6AA9 /* ImageIO.framework in Frameworks */,
+				B4223D51184EFF44004D39C0 /* GPUImage.framework in Frameworks */,
 				7A13C1A317F40D70007E6AA9 /* GLKit.framework in Frameworks */,
 				7A13C1A117F40D61007E6AA9 /* CoreLocation.framework in Frameworks */,
 				7A13C19F17F40D59007E6AA9 /* CoreData.framework in Frameworks */,
@@ -2524,6 +2527,7 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B4223D50184EFF44004D39C0 /* GPUImage.framework */,
 				7A44E046182398B60080CEBE /* MessageUI.framework */,
 				6ABA68C3180F759700A302BC /* GoogleMaps.framework */,
 				7A13C1AA17F40D99007E6AA9 /* libz.dylib */,
