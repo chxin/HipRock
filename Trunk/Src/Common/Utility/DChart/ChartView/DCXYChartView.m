@@ -27,36 +27,15 @@
 
 @property (nonatomic, strong) _DCXYIndicatorLayer* indicatorLayer;
 
-//@property (nonatomic, strong) _DCAxisLayer* _axisLayer;
 @property (nonatomic, strong) _DCHGridlineLayer* _hGridlineLayer;
 @property (nonatomic, strong) _DCXAxisLabelLayer* _xLabelLayer;
 
-//@property (nonatomic, strong) _DCCoordinateSystem* coordinate0;
-//@property (nonatomic, strong) _DCCoordinateSystem* coordinate1;
-//@property (nonatomic, strong) _DCCoordinateSystem* coordinate2;
-//
-//@property (nonatomic, strong) _DCColumnsLayer* columnLayer0;
-//@property (nonatomic, strong) _DCColumnsLayer* columnLayer1;
-//@property (nonatomic, strong) _DCColumnsLayer* columnLayer2;
-//
-//@property (nonatomic, strong) _DCLinesLayer* lineLayer0;
-//@property (nonatomic, strong) _DCLinesLayer* lineLayer1;
-//@property (nonatomic, strong) _DCLinesLayer* lineLayer2;
 @property (nonatomic, strong) NSMutableArray* coodinates;
+@property (nonatomic, strong) NSMutableArray* columnLayers;
+@property (nonatomic, strong) NSMutableArray* lineLayers;
 @property (nonatomic, strong) NSMutableArray* symbolLayers;
-//@property (nonatomic, strong) _DCLineSymbolsLayer* lineSymbolsLayer0;
-//@property (nonatomic, strong) _DCLineSymbolsLayer* lineSymbolsLayer1;
-//@property (nonatomic, strong) _DCLineSymbolsLayer* lineSymbolsLayer2;
-
-//@property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer0;
-//@property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer1;
-//@property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer2;
 
 @property (nonatomic) CGRect plotRect;
-
-//@property (nonatomic) CGSize y0LabelLayerSize;
-//@property (nonatomic) CGSize y1LabelLayerSize;
-//@property (nonatomic) CGSize y2LabelLayerSize;
 
 @property (nonatomic, strong) NSTimer* timer;
 @property (nonatomic, strong) NSFormatter* xLabelFormatter;
@@ -91,32 +70,6 @@
     return self;
 }
 
-//-(void)removeFromSuperview {
-////    [self._axisLayer removeFromSuperlayer];
-//    [self._hGridlineLayer removeFromSuperlayer];
-//    [self._xLabelLayer removeFromSuperlayer];
-//    if (self._yLabelLayer0) {
-//        [self._yLabelLayer0 removeFromSuperlayer];
-//        self._yLabelLayer0 = nil;
-//    }
-//    if (self._yLabelLayer1) {
-//        [self._yLabelLayer1 removeFromSuperlayer];
-//        self._yLabelLayer1 = nil;
-//    }
-//    if (self._yLabelLayer2) {
-//        [self._yLabelLayer2 removeFromSuperlayer];
-//        self._yLabelLayer2 = nil;
-//    }
-//    
-////    self._axisLayer = nil;
-//    self._hGridlineLayer = nil;
-//    self._xLabelLayer = nil;
-//    self.coordinate0 = nil;
-//    self.coordinate1 = nil;
-//    self.coordinate2 = nil;
-//    [super removeFromSuperview];
-//}
-
 -(void)drawIndicatorLayer {
     if (!self.showIndicatorOnFocus) return;
     self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext];
@@ -130,6 +83,10 @@
 }
 
 -(void)willMoveToSuperview:(UIView *)newSuperview {
+    self.columnLayers = [[NSMutableArray alloc]init];
+    self.lineLayers = [[NSMutableArray alloc]init];
+    [self.graphContext addHRangeObsever:self];
+    
     for (DCXYSeries* s in self.seriesList) {
         s.pointXOffset = self.pointXOffset;
     }
@@ -149,20 +106,22 @@
         _DCCoordinateSystem* ds = [[_DCCoordinateSystem alloc]initWithChartView:self y:y];
         ds.isMajor = (coordiates.count == 0);
         
-        _DCColumnsLayer* columnsLayer = (_DCColumnsLayer*)[ds getColumnLayer];
-        if (!REMIsNilOrNull(columnsLayer)) {
+        _DCColumnsLayer* columnsLayer = [[_DCColumnsLayer alloc]initWithCoordinateSystem:ds];
+        if (columnsLayer.series.count > 0) {
             columnsLayer.frame = self.plotRect;
             [self.layer addSublayer:columnsLayer];
             [columnsLayer setNeedsDisplay];
+            [self.columnLayers addObject:columnsLayer];
         }
-        _DCLinesLayer* linesLayer = (_DCLinesLayer*)[ds getLineLayer];
-        if (!REMIsNilOrNull(linesLayer)) {
+        _DCLinesLayer* linesLayer = [[_DCLinesLayer alloc]initWithCoordinateSystem:ds];
+        if (linesLayer.series.count > 0) {
             _DCLineSymbolsLayer* symbols = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
             linesLayer.symbolsLayer = symbols;
             [self.symbolLayers addObject:symbols];
             linesLayer.frame = self.plotRect;
             [self.layer addSublayer:linesLayer];
             [linesLayer setNeedsDisplay];
+            [self.lineLayers addObject:linesLayer];
         }
         if (coordiates.count < self.visableYAxisAmount) {
             _DCYAxisLabelLayer* _yLabelLayer = (_DCYAxisLabelLayer*)[ds getAxisLabelLayer];
@@ -194,6 +153,19 @@
         willChange = [self.delegate testHRangeChange:newRange oldRange:oldRange sendBy:senderType];
     }
     return willChange;
+}
+
+-(void)willHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
+    // Nothing to do.
+}
+
+-(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
+    for (_DCColumnsLayer* columnLayer in self.columnLayers) {
+        [columnLayer redrawWithXRange:newRange yRange:columnLayer.coordinateSystem.yRange];
+    }
+    for (_DCLinesLayer* lineLayer in self.lineLayers) {
+        [lineLayer redrawWithXRange:newRange yRange:lineLayer.coordinateSystem.yRange];
+    }
 }
 
 -(void)setFrame:(CGRect)frame {
@@ -278,9 +250,8 @@
 }
 
 -(void)setLineSymbolsHidden:(BOOL)symbolsAreHidden {
-    for (_DCCoordinateSystem* coordinate in self.coodinates) {
-        _DCLinesLayer* lineLayer = (_DCLinesLayer*)[coordinate getLineLayer];
-        if (!REMIsNilOrNull(lineLayer)) [lineLayer setSymbolsHidden:symbolsAreHidden];
+    for (_DCLinesLayer* lineLayer in self.lineLayers) {
+        [lineLayer setSymbolsHidden:symbolsAreHidden];
     }
 }
 
@@ -346,15 +317,6 @@
     }
 }
 
-
-//- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden {
-//    if (series.yAxis == self.yAxis0) [self.columnLayer0 setSeries:series hidden:hidden];
-//    if (series.yAxis == self.yAxis1) [self.columnLayer1 setSeries:series hidden:hidden];
-//    if (series.yAxis == self.yAxis2) [self.columnLayer2 setSeries:series hidden:hidden];
-//    if (hidden) {
-//        
-//    }
-//}
 -(void)setXLabelFormatter:(NSFormatter*)formatter {
     if (self._xLabelLayer) {
         self._xLabelLayer.labelFormatter = formatter;
@@ -465,15 +427,11 @@
 -(void)defocus {
     if (self.focusPointIndex == INT32_MIN) return;
     self.focusPointIndex = INT32_MIN;
-    for (_DCCoordinateSystem* coordinate in self.coodinates) {
-        _DCLinesLayer* lineLayer = (_DCLinesLayer*)[coordinate getLineLayer];
-        if (!REMIsNilOrNull(lineLayer)) [lineLayer defocus];
-        _DCColumnsLayer* columnLayer = (_DCColumnsLayer*)[coordinate getLineLayer];
-        if (!REMIsNilOrNull(columnLayer)) [columnLayer defocus];
+    for (_DCColumnsLayer* columnLayer in self.columnLayers) {
+        [columnLayer defocus];
     }
-    if (self.indicatorLayer) {
-        self.indicatorLayer.symbolLineAt = nil;
-        [self.indicatorLayer setNeedsDisplay];
+    for (_DCLinesLayer* lineLayer in self.lineLayers) {
+        [lineLayer defocus];
     }
 }
 
@@ -489,11 +447,11 @@
 //        
 //    }
         self.focusPointIndex = xRounded;
-        for (_DCCoordinateSystem* coordinate in self.coodinates) {
-            _DCLinesLayer* lineLayer = (_DCLinesLayer*)[coordinate getLineLayer];
-            if (!REMIsNilOrNull(lineLayer)) [lineLayer focusOnX:xRounded];
-            _DCColumnsLayer* columnLayer = (_DCColumnsLayer*)[coordinate getLineLayer];
-            if (!REMIsNilOrNull(columnLayer)) [columnLayer focusOnX:xRounded];
+        for (_DCColumnsLayer* columnLayer in self.columnLayers) {
+            [columnLayer focusOnX:xRounded];
+        }
+        for (_DCLinesLayer* lineLayer in self.lineLayers) {
+            [lineLayer focusOnX:xRounded];
         }
         if (self.indicatorLayer) {
             self.indicatorLayer.symbolLineAt = @(xRounded);

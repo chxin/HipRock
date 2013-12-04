@@ -107,6 +107,12 @@ NSString* const kDCPieIndicatorColor = @"#e9e9e9";
 -(void)setHRange:(DCRange *)hRange {
     if ([DCRange isRange:hRange equalTo:self.hRange]) return;
     DCRange* oldRange = self.hRange;
+    
+    for (id o in self.hRangeObservers) {
+        if ([o respondsToSelector:@selector(willHRangeChanged:newRange:)]) {
+            [o willHRangeChanged:oldRange newRange:hRange];
+        }
+    }
     _hRange = hRange;
     
     for (id o in self.hRangeObservers) {

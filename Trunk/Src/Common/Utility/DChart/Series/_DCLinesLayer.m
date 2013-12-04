@@ -14,9 +14,6 @@
 #import "DCLineSeries.h"
 
 @interface _DCLinesLayer()
-
-//@property (nonatomic, strong) _DCLayerTrashbox* symbolTrashbox;
-//@property (nonatomic, strong) NSMutableDictionary* symbolsDic;
 @property (nonatomic, assign) BOOL symbolsAreHidden;
 @property (nonatomic, strong) NSTimer* timer;
 @end
@@ -25,11 +22,7 @@
 -(id)initWithCoordinateSystem:(_DCCoordinateSystem *)coordinateSystem {
     self = [super initWithCoordinateSystem:coordinateSystem];
     if (self) {
-//        self.symbolTrashbox = [[_DCLayerTrashbox alloc]init];
         _symbolsAreHidden = NO;
-//        self.symbolsLayer = [[CALayer alloc]init];
-//        self.symbolsLayer.frame = self.bounds;
-//        [self addSublayer:self.symbolsLayer];
     }
     return self;
 }
@@ -133,18 +126,21 @@
     [self setNeedsDisplay];
 }
 
--(void)lazyRenderSymbol {
-    if (REMIsNilOrNull(self.symbolsLayer)) return;
-    self.symbolsLayer.hidden = NO;
-    self.symbolsAreHidden = NO;
-    [self renderSymbols];
-    [self.timer setFireDate:nil];
-    [self.timer invalidate];
-}
+//-(void)lazyRenderSymbol {
+//    if (REMIsNilOrNull(self.symbolsLayer)) return;
+//    self.symbolsLayer.hidden = NO;
+//    self.symbolsAreHidden = NO;
+//    [self renderSymbols];
+//    [self.timer setFireDate:nil];
+//    [self.timer invalidate];
+//}
 
 -(void)renderSymbols {
     if (REMIsNilOrNull(self.symbolsLayer) || self.symbolsAreHidden) return;
-    
+    [self.symbolsLayer drawSymbolsForPoints:[self getSymbols] inSize:self.bounds.size];
+}
+
+-(NSArray*)getSymbols {
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
     NSMutableArray* pointsToDraw = [[NSMutableArray alloc]init];
@@ -173,60 +169,9 @@
         [pointsToDraw addObject:seriesPoints];
         i++;
     }
-    [self.symbolsLayer drawSymbolsForPoints:pointsToDraw inSize:self.bounds.size];
-    
-    /*
-    if (self.symbolsDic == nil) self.symbolsDic = [[NSMutableDictionary alloc]init];
-    for (DCDataPoint* symbolKey in self.symbolsDic.allKeys) {
-        _DCSymbolLayer* symbol = self.symbolsDic[symbolKey];
-        symbol.hidden = YES;
-    }
-    
-    BOOL caTransationState = CATransaction.disableActions;
-    [CATransaction setDisableActions:YES];
-    int start = floor(self.graphContext.hRange.location);
-    int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
-    for (int j = start; j<=end; j++) {
-        for (DCLineSeries* s in self.series) {
-            if (s.symbol == DCLineSymbolTypeNone || s.symbolSize == 0) continue;
-            if (j >= s.datas.count) continue;
-            if (![self.visableSeries containsObject:s]) continue;
-            
-            DCDataPoint* key = s.datas[j];
-            
-            _DCSymbolLayer* symbol = self.symbolsDic[key];
-            CGRect toFrame = CGRectMake(self.frame.size.width*(j-self.graphContext.hRange.location)/self.graphContext.hRange.length-s.symbolSize/2, self.frame.size.height-[self getHeightOfPoint:key]-s.symbolSize/2, s.symbolSize, s.symbolSize);
-            BOOL isRectVisable = [DCUtility isFrame:toFrame visableIn:self.bounds] && (key.value != nil) && ![key.value isEqual:[NSNull null]];
-            
-            if (symbol == nil && isRectVisable) {
-                symbol = [[_DCSymbolLayer alloc]initWithContext:self.graphContext type:s.symbol size:s.symbolSize color:s.color];
-                symbol.frame = toFrame;
-                [self.symbolsLayer addSublayer:symbol];
-                [self.symbolsDic setObject:symbol forKey:key];
-                [symbol setNeedsDisplay];
-            } else if (symbol == nil && !isRectVisable) {
-                continue;
-            } else if (symbol != nil && isRectVisable) {
-                symbol.frame = toFrame;
-                symbol.hidden = NO;
-            } else {
-                [self.symbolsDic removeObjectForKey:key];
-                [symbol removeFromSuperlayer];
-            }
-        }
-    }
-    
-    NSArray* keysCopy = [self.symbolsDic.allKeys copy];
-    for (DCDataPoint* symbolKey in keysCopy) {
-        _DCSymbolLayer* symbol = self.symbolsDic[symbolKey];
-        if (symbol.hidden) {
-            [self.symbolsDic removeObjectForKey:symbolKey];
-            [symbol removeFromSuperlayer];
-        }
-    }
-    [CATransaction setDisableActions:caTransationState];
-     */
+    return pointsToDraw;
 }
+
 -(CGFloat)getHeightOfPoint:(DCDataPoint*)point {
     double y = 0;
     if (point.value != nil && ![point.value isEqual:[NSNull null]]) {

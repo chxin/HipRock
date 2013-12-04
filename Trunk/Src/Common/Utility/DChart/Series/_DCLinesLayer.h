@@ -14,5 +14,6 @@ extern NSUInteger const kDCLineLayerCells;
 
 @interface _DCLinesLayer : _DCSeriesLayer
 -(void)setSymbolsHidden:(BOOL)hidden;
+-(NSArray*)getSymbols;
 @property (nonatomic, weak) _DCLineSymbolsLayer* symbolsLayer;
 @end

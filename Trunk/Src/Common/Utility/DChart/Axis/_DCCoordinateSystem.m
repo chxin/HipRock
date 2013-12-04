@@ -19,8 +19,6 @@
 @property (nonatomic, strong) NSMutableArray* visableSeries;
 @property (nonatomic) double visableYMax;
 
-@property (nonatomic, strong) _DCColumnsLayer* columnLayer;
-@property (nonatomic, strong) _DCLinesLayer* lineLayer;
 @property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer;
 
 //@property (nonatomic, strong) NSMutableArray* yRangeObservers;
@@ -48,28 +46,9 @@
         _yAxis = y;
         y.visableSeriesAmount = seriesList.count;
         
-        _DCColumnsLayer* columnsLayer = [[_DCColumnsLayer alloc]initWithCoordinateSystem:self];
-        if (columnsLayer.series.count > 0) {
-            self.columnLayer = columnsLayer;
-//            [self addYRangeObsever:columnsLayer];
-//            [self.graphContext addHRangeObsever:columnsLayer];
-        }
-        
-        _DCLinesLayer* linesLayer = [[_DCLinesLayer alloc]initWithCoordinateSystem:self];
-        if (linesLayer.series.count > 0) {
-            self.lineLayer = linesLayer;
-//            [self addYRangeObsever:linesLayer];
-//            [self.graphContext addHRangeObsever:linesLayer];
-        }
         [self.graphContext addHRangeObsever:self];
     }
     return self;
-}
--(_DCColumnsLayer*)getColumnLayer {
-    return self.columnLayer;
-}
--(_DCLinesLayer*)getLineLayer {
-    return self.lineLayer;
 }
 
 -(_DCYAxisLabelLayer*)getAxisLabelLayer {
@@ -85,7 +64,7 @@
     return self._yLabelLayer;
 }
 
--(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
+-(void)willHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
     
     if (self.graphContext) {
@@ -122,40 +101,13 @@
             self.yRange = [[DCRange alloc]initWithLocation:0 length:currentYRange];
             self.yInterval = yInterval;
         }
-        if (!REMIsNilOrNull(self.columnLayer)) {
-            [self.columnLayer redrawWithXRange:newRange yRange:self.yRange];
-        }
-        if (!REMIsNilOrNull(self.lineLayer)) {
-            [self.lineLayer redrawWithXRange:newRange yRange:self.yRange];
-        }
     }
 }
 
-//-(void)setYRange:(DCRange *)yRange {
-//    if ([DCRange isRange:yRange equalTo:self.yRange]) return;
-//    DCRange* oldRange = self.yRange;
-//    _yRange = yRange;
-//    
-//    for (id o in self.yRangeObservers) {
-//        if ([o respondsToSelector:@selector(didYRangeChanged:newRange:)]) {
-//            [o didYRangeChanged:oldRange newRange:self.yRange];
-//        }
-//    }
-//}
-//-(void)addYRangeObsever:(id<DCContextYRangeObserverProtocal>)observer {
-//    if (observer == nil) return;
-//    if (self.yRangeObservers == nil) self.yRangeObservers = [[NSMutableArray alloc]init];
-//    [self.yRangeObservers addObject:observer];
-//}
-//-(void)removeYRangeObsever:(id<DCContextYRangeObserverProtocal>)observer {
-//    if (self.yRangeObservers == nil || self.yRangeObservers.count==0) return;
-//    for (id o in self.yRangeObservers) {
-//        if (o == observer) {
-//            [self.yRangeObservers removeObject:o];
-//            break;
-//        }
-//    }
-//}
+-(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
+    // Nothing to do.
+}
+
 -(void)setYInterval:(double)yInterval {
     if (_yInterval == yInterval) return;
     double oldInterval = self.yInterval;

@@ -30,13 +30,14 @@ typedef enum _DCLineType {
 @protocol DCContextHRangeObserverProtocal <NSObject>
 
 -(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange;
+-(void)willHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange;
 
 @end
-@protocol DCContextYRangeObserverProtocal <NSObject>
-
--(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange;
-
-@end
+//@protocol DCContextYRangeObserverProtocal <NSObject>
+//
+//-(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange;
+//
+//@end
 @protocol DCContextYIntervalObserverProtocal <NSObject>
 
 -(void)didYIntervalChanged:(double)oldInterval newInterval:(double)newInterval yRange:(DCRange*)yRange;

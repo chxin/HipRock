@@ -33,8 +33,6 @@
 }
 
 -(void)redraw {
-    
-    
     BOOL caTransationState = CATransaction.disableActions;
     [CATransaction setDisableActions:YES];
     BOOL allSeriesAreHidden = YES;
@@ -141,26 +139,6 @@
 -(BOOL)isValidSeriesForMe:(DCXYSeries*)series {
     return [series isKindOfClass:[DCColumnSeries class]];
 }
-
-//-(void)redrawWithXRange:(DCRange*)xRange yRange:(DCRange*)yRange {
-//    if ([DCRange isRange:xRange equalTo:self.xRange] && [DCRange isRange:yRange equalTo:self.yRange]) return;
-//    self.xRange = xRange;
-//    self.yRange = yRange;
-//}
-
-//-(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
-//    if ([DCRange isRange:oldRange equalTo:newRange]) return;
-//    if ([DCRange isRange:self.yRange equalTo:newRange]) return;
-//    [super didYRangeChanged:oldRange newRange:newRange];
-//    [self redraw];
-//}
-//
-//-(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
-//    if ([DCRange isRange:oldRange equalTo:newRange]) return;
-//    if ([DCRange isRange:self.xRange equalTo:newRange]) return;
-//    [super didHRangeChanged:oldRange newRange:newRange];
-//    [self redraw];
-//}
 
 -(void)focusOnX:(int)x {
     if (self.focusX != x) {

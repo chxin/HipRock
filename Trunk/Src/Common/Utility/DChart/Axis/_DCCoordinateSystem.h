@@ -28,8 +28,6 @@
 
 -(id)initWithChartView:(UIView*)chartView y:(DCAxis*)y;
 
--(CALayer*)getColumnLayer;
--(CALayer*)getLineLayer;
 -(CALayer*)getAxisLabelLayer;
 
 @end
