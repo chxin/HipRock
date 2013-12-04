@@ -74,7 +74,6 @@
 -(void)drawIndicatorLayer {
     if (!self.showIndicatorOnFocus) return;
     self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext];
-    self.indicatorLayer.pointXOffset = self.pointXOffset;
     self.indicatorLayer.frame = CGRectMake(self.plotRect.origin.x, 0, self.plotRect.size.width, self.plotRect.size.height+self.plotPaddingTop);// self.plotRect;
     self.indicatorLayer.symbolLineStyle = self.focusSymbolLineStyle;
     self.indicatorLayer.symbolLineWidth = self.focusSymbolLineWidth;
@@ -88,9 +87,6 @@
     self.lineLayers = [[NSMutableArray alloc]init];
     [self.graphContext addHRangeObsever:self];
     
-    for (DCXYSeries* s in self.seriesList) {
-        s.pointXOffset = self.pointXOffset;
-    }
     [self drawAxisLines];
     [self drawHGridline];
     [self drawXLabelLayer];
@@ -172,11 +168,13 @@
 }
 
 -(void)renderSymbol {
+    NSMutableArray* lines = [[NSMutableArray alloc]init];
     NSMutableArray* symbolPoints = [[NSMutableArray alloc]init];
     for (_DCLinesLayer* lineLayer in self.lineLayers) {
+        [lines addObjectsFromArray:[lineLayer getLines]];
         [symbolPoints addObjectsFromArray:[lineLayer getSymbols]];
     }
-    [self.symbolLayer drawSymbolsForPoints:symbolPoints inSize:self.plotRect.size];
+    [self.symbolLayer drawSymbolsForPoints:symbolPoints lines:lines inSize:self.plotRect.size];
 }
 
 -(void)setFrame:(CGRect)frame {
@@ -382,19 +380,14 @@
 }
 
 -(void)viewPinched:(_DCHPinchGestureRecognizer*)gesture {
-    NSSet* touches = gesture.theTouches;
-    if (REMIsNilOrNull(touches) || touches.count != 2) return;
-    UITouch* touch0 = touches.allObjects[0];
-    UITouch* touch1 = touches.allObjects[1];
-    CGFloat preDis = [touch0 previousLocationInView:self].x - [touch1 previousLocationInView:self].x;
-    CGFloat curDis = [touch0 locationInView:self].x - [touch1 locationInView:self].x;
-    CGFloat scale = curDis / preDis;
-    if (scale <= 0) return;
-    DCRange* newRange = [[DCRange alloc]initWithLocation:self.graphContext.hRange.location length:self.graphContext.hRange.length/scale];
+    CGFloat centerX = self.graphContext.hRange.location + self.graphContext.hRange.length * (gesture.centerX - self.plotRect.origin.x) / self.plotRect.size.width;
+    CGFloat start = centerX - (centerX - self.graphContext.hRange.location) * gesture.leftScale;
+    CGFloat end = centerX + (-centerX + self.graphContext.hRange.end) * gesture.rightScale;
+    
+    DCRange* newRange = [[DCRange alloc]initWithLocation:start length:end-start];
     if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByUserPinch]) {
         self.graphContext.hRange = newRange;
     }
-    NSLog(@"pinch:%f %f", self.graphContext.hRange.location, self.graphContext.hRange.length);
 }
 
 
@@ -444,7 +437,7 @@
 }
 
 -(void)focusAroundX:(double)x {
-    x-=self.pointXOffset;
+    if (!self.graphContext.pointAlignToTick) x-=0.5;
     DCRange* globalRange = self.graphContext.globalHRange;
     if (x < globalRange.location) x = floor(globalRange.location);
     if (x > globalRange.length+globalRange.length) x = ceil(globalRange.length+globalRange.location);

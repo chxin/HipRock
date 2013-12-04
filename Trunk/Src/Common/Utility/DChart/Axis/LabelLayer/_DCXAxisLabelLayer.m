@@ -23,7 +23,6 @@
 -(id)initWithContext:(DCContext *)context {
     self = [super initWithContext:context];
     if (self) {
-        self.masksToBounds = YES;
         self.backgroundColor = [UIColor clearColor].CGColor;
         self.trashbox = [[_DCLayerTrashbox alloc]init];
     }
@@ -119,7 +118,11 @@
 //                                            self.fontSize,
 //                                            NULL);
 //    }
-    CGFloat centerX = (x - self.graphContext.hRange.location) * self.frame.size.width / self.graphContext.hRange.length;
+    CGFloat offset = 0;
+    if (!self.graphContext.xLabelAlignToTick) {
+        offset = 0.5;
+    }
+    CGFloat centerX = (x + offset - self.graphContext.hRange.location) * self.frame.size.width / self.graphContext.hRange.length;
     CGFloat maxLabelLength = INT32_MAX;
     if (self.labelFormatter && [self.labelFormatter respondsToSelector:@selector(getMaxXLabelLengthIn:)]) {
         maxLabelLength = [((id<_DCXLabelFormatterProtocal>)self.labelFormatter) getMaxXLabelLengthIn:self.bounds];
@@ -136,7 +139,6 @@
         text.foregroundColor = self.fontColor.CGColor;
         text.alignmentMode = kCAAlignmentCenter;
         text.truncationMode = kCATruncationEnd;
-        [self addSublayer:text];
         CFRelease(fRef);
     }
     NSString* labelText = [self textForX:x];
@@ -151,7 +153,11 @@
         text.truncationMode = kCATruncationNone;
         text.frame = CGRectMake(centerX-size.width/2,self.frame.size.height-size.height, size.width,size.height);
     }
-    [self.trashbox.xToLayerDic setObject:text forKey:@(x)];
+    if ([DCUtility isFrame:text.frame visableIn:self.bounds]) {
+        [self.trashbox.xToLayerDic setObject:text forKey:@(x)];
+        [self addSublayer:text];
+    } else {
+    }
 }
 
 //-(void)removeFromSuperlayer {

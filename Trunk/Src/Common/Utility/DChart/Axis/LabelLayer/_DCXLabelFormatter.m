@@ -22,7 +22,7 @@
 - (NSString *)stringForObjectValue:(id)obj {
     if (self.interval == 0) return REMEmptyString;
     int xVal = ((NSNumber*)obj).integerValue;
-    if (xVal % self.interval == 0 && xVal >= 0) {
+    if (xVal % self.interval == 0) {
         NSDate* date = nil;
         NSString* format = nil;
         if (self.step == REMEnergyStepHour) {

@@ -7,7 +7,8 @@
 //
 
 #import "_DCLayer.h"
+#import "_DCLine.h"
 
 @interface _DCLineSymbolsLayer : _DCLayer
--(void)drawSymbolsForPoints:(NSArray*)points inSize:(CGSize)plotSize;
+-(void)drawSymbolsForPoints:(NSArray*)points lines:(NSArray*)lines inSize:(CGSize)plotSize;
 @end

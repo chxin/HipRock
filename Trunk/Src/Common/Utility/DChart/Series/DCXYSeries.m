@@ -15,22 +15,22 @@
     self = [super initWithEnergyData:seriesData];
     if (self) {
         _hidden = NO;
-        _pointXOffset = 0;
+//        _pointXOffset = 0;
     }
     return self;
 }
 
 -(void)willHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
-    if (newRange != nil && newRange.location < -0.5) return;
+    if (REMIsNilOrNull(newRange)) return;
     int start = floor(newRange.location);
-    int end = ceil(newRange.length+newRange.location);
+    start = start < 0 ? 0 : start;
+    int end = ceil(newRange.end);
+    end = end >= self.datas.count ? (self.datas.count - 1) : end;
     DCRange* newVisableRange = [[DCRange alloc]initWithLocation:start length:end-start+1];
     if ([DCRange isRange:self.visableRange equalTo:newVisableRange]) return;
     _visableRange = newVisableRange;
     
-    start = start < 0 ? 0 : start;
-    end = end >= self.datas.count ? (self.datas.count - 1) : end;
     if (start >= self.datas.count) return;
     NSNumber* y = @(0);
     // 从RangeStart向前再搜索一个非空点

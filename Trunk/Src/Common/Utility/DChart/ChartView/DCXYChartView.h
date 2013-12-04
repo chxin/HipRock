@@ -39,7 +39,7 @@
 @property (nonatomic, weak) id<DCXYChartViewDelegate> delegate;
 
 @property (nonatomic, assign) BOOL showIndicatorOnFocus;
-@property (nonatomic, assign) CGFloat pointXOffset;
+//@property (nonatomic, assign) CGFloat pointXOffset;
 
 @property (nonatomic, strong) NSArray* seriesList;
 @property (nonatomic, assign) NSUInteger visableYAxisAmount;
