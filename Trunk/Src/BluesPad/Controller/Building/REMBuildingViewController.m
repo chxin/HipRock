@@ -349,7 +349,27 @@ const static CGFloat buildingGap=20;
     if(pinch.state  == UIGestureRecognizerStateBegan){
         //NSLog(@"pinch: Began");
         self.isPinching = YES;
+        
+        
+        if([self.fromController isKindOfClass:[REMGalleryViewController class]]){
+            REMGalleryViewController *gallergyController = (REMGalleryViewController *)self.fromController;
+            
+            REMGalleryCollectionCell *cell = [gallergyController galleryCellForBuildingIndex:self.currentBuildingIndex];
+            
+            if([cell isEqual:gallergyController.focusedCell] == NO){ //if the focused cell has changed
+                gallergyController.focusedCell.alpha = 1.0; //old focused cell show
+                cell.alpha = 0; //new focused cell hide
+                
+                [gallergyController takeSnapshot];
+            }
+            
+            cell.alpha = 1.0;
+        }
+        
+        
         self.sourceSnapshot = [((id)self.fromController) snapshot];
+        
+        
         
         self.snapshot = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:self.view]];
         [self.view addSubview:self.sourceSnapshot];
@@ -463,6 +483,7 @@ const static CGFloat buildingGap=20;
     [self back];
 }
 
+//this method was called both when back button was pressed and pinch ended
 -(void)back
 {
 //    if ([self.fromController respondsToSelector:@selector(uncoverCell)]) {
@@ -473,10 +494,15 @@ const static CGFloat buildingGap=20;
         REMGalleryViewController *gallergyController = (REMGalleryViewController *)self.fromController;
         
         REMGalleryCollectionCell *cell = [gallergyController galleryCellForBuildingIndex:self.currentBuildingIndex];
-        gallergyController.focusedCell.alpha = 1.0;
-        cell.alpha = 0.5;
         
-        [gallergyController takeSnapshot];
+        if([cell isEqual:gallergyController.focusedCell] == NO){ //if the focused cell has changed
+            gallergyController.focusedCell.alpha = 1.0; //old focused cell show
+            cell.alpha = 0; //new focused cell hide
+            
+            [gallergyController takeSnapshot];
+        }
+        
+        cell.alpha = 1.0;
     }
     
     [REMDataAccessor cancelAccess];

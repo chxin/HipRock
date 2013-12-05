@@ -22,4 +22,6 @@
 @property (nonatomic,strong) NSNumber *isQualified;
 @property (nonatomic,strong) REMCommodityUsageModel *electricityUsageThisMonth;
 
++(int)indexOfBuilding:(REMBuildingModel *)building inBuildingOverallArray:(NSArray *)array;
+
 @end

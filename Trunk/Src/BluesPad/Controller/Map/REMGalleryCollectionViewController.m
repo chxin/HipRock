@@ -18,6 +18,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingViewController.h"
 #import "REMImages.h"
+#import "REMBuildingOverallModel.h"
 
 @interface REMGalleryCollectionViewController ()
 
@@ -37,7 +38,6 @@
     [flowlayout setMinimumInteritemSpacing:1.0];
     [flowlayout setMinimumLineSpacing:kDMGallery_GalleryCellVerticleSpace];
     [flowlayout setItemSize:kDMGallery_GalleryCellSize];
-    
     
     self = [super initWithCollectionViewLayout:flowlayout];
     if(self != nil){
@@ -85,7 +85,13 @@
 
 - (void)galleryCellTapped:(REMGalleryCollectionCell *)cell
 {
-    [((REMGalleryViewController *)self.parentViewController) presentBuildingViewFromCell:cell animated:NO];
+    if(!self.isPinching){
+        cell.alpha = 0;
+        [((REMGalleryViewController *)self.parentViewController) presentBuildingViewFromCell:cell animated:NO];
+    }
+    else{
+        NSLog(@"Gallery in PINCH status, TAP forbidden.");
+    }
 }
 
 
@@ -96,7 +102,8 @@
     if(pinch.state  == UIGestureRecognizerStateBegan){
         self.isPinching = YES;
         [cell beginPinch]; //snapshot will be ready
-        galleryController.snapshot = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:galleryController.view]];
+        //galleryController.snapshot = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:galleryController.view]];
+        [galleryController takeSnapshot];
         [galleryController.view addSubview:cell.snapshot];
     }
     
@@ -132,7 +139,7 @@
                 [cell endPinch];
                 
                 galleryController.initialZoomRect = [self.collectionView convertRect:cell.frame toView:galleryController.view];
-                galleryController.currentBuildingIndex = [galleryController buildingIndexFromBuilding:cell.building];
+                galleryController.currentBuildingIndex = [REMBuildingOverallModel indexOfBuilding:cell.building inBuildingOverallArray:self.buildingInfoArray]; //[galleryController buildingIndexFromBuilding:cell.building];
                 self.isPinching = YES;
                 
                 //show building view

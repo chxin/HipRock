@@ -25,6 +25,7 @@
 @interface REMMapViewController ()
 
 @property (nonatomic,weak) GMSMapView *mapView;
+@property (nonatomic,strong) NSMutableArray *markers;
 
 @end
 
@@ -82,6 +83,8 @@
         return b1.building.latitude > b2.building.latitude ? NSOrderedAscending : NSOrderedDescending;
     }];
     
+    self.markers = [[NSMutableArray alloc] init];
+    
     for(int i=0; i<buildings.count; i++){
         REMBuildingOverallModel *buildingInfo = buildings[i];
         if(buildingInfo == nil || buildingInfo.building== nil)
@@ -100,6 +103,8 @@
         
         if([buildingInfo.building.buildingId isEqualToNumber:[self.buildingInfoArray[0] building].buildingId])
             self.mapView.selectedMarker = marker;
+        
+        [self.markers addObject:marker];
     }
 }
 
@@ -203,7 +208,7 @@
     // Dispose of any resources that can be recreated.
     
     if([[self.navigationController.childViewControllers lastObject] isEqual:self] == NO){
-        [self.mapView stopRendering];
+        //[self.mapView stopRendering];
         [self.mapView clear];
         [self.mapView removeFromSuperview];
         self.mapView = nil;
@@ -268,7 +273,7 @@
 //        currentBuilding = self.buildingInfoArray[0];
 //    }
     
-    for (GMSMarker *marker in self.mapView.markers) {
+    for (GMSMarker *marker in self.markers) {
         if([[marker.userData building].buildingId isEqualToNumber:[self.buildingInfoArray[currentBuildingIndex] building].buildingId]){
             self.currentBuildingIndex = currentBuildingIndex;
             self.mapView.selectedMarker = marker;

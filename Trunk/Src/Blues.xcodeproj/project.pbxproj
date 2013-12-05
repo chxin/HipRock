@@ -503,15 +503,11 @@
 		7AB9B3A1183DF20B00779C5E /* REMRankingTooltipItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B3A0183DF20B00779C5E /* REMRankingTooltipItem.m */; };
 		7AB9B3A4183DF8FF00779C5E /* REMTextIndicatorFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B3A3183DF8FF00779C5E /* REMTextIndicatorFormator.m */; };
 		7ABD915D184DB784006AF935 /* REMLoginCustomerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABD915C184DB784006AF935 /* REMLoginCustomerTableViewController.m */; };
-		7ABFDDEF18482F7B004DD4E7 /* Default@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDED18482F7B004DD4E7 /* Default@2x~ipad.png */; };
-		7ABFDDF018482F7B004DD4E7 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDEE18482F7B004DD4E7 /* Default~ipad.png */; };
 		7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */; };
 		7ABFDDF418483119004DD4E7 /* JumpLogin-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */; };
 		7AC54999181776910037F180 /* REMDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC54998181776910037F180 /* REMDashboardController.m */; };
 		7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
 		7AD0AB8B183CF52000525C82 /* REMTimeSliceLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD0AB8A183CF52000525C82 /* REMTimeSliceLegendFormator.m */; };
-		7AD8CE051847086000D815C6 /* Startup_iOS7.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD8CE011847086000D815C6 /* Startup_iOS7.png */; };
-		7AD8CE061847086000D815C6 /* Startup_iOS7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD8CE021847086000D815C6 /* Startup_iOS7@2x.png */; };
 		7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */; };
 		7AF3667817CF2D7400447650 /* REMBuildingChartSeriesIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */; };
 		7AF6AC8117D1BA0D00D62A9A /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
@@ -528,6 +524,10 @@
 		7AF6AC8D17D1BA5600D62A9A /* REMBuildingAirQualityChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartViewController.m */; };
 		7AF6AC8E17D1BA5600D62A9A /* REMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMSettingViewController.m */; };
 		7AF6AC9117D1BB1200D62A9A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B61D7517C742E000245F1E /* CoreText.framework */; };
+		7AFC250E18503D3800B9CF11 /* Default-Landscape-IOS7.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AFC250A18503D3800B9CF11 /* Default-Landscape-IOS7.png */; };
+		7AFC250F18503D3800B9CF11 /* Default-Landscape-IOS7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AFC250B18503D3800B9CF11 /* Default-Landscape-IOS7@2x.png */; };
+		7AFC251018503D3800B9CF11 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AFC250C18503D3800B9CF11 /* Default-Landscape.png */; };
+		7AFC251118503D3800B9CF11 /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AFC250D18503D3800B9CF11 /* Default-Landscape@2x.png */; };
 		B408794A1830A960004042C1 /* REMBuildingImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40879491830A960004042C1 /* REMBuildingImageViewController.m */; };
 		B408794D1830CC69004042C1 /* REMBuildingCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B408794C1830CC69004042C1 /* REMBuildingCommodityViewController.m */; };
 		B40879501830D0BA004042C1 /* REMBuildingAirQualityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B408794F1830D0BA004042C1 /* REMBuildingAirQualityViewController.m */; };
@@ -1259,8 +1259,6 @@
 		7ABC2E24177BE6210000C060 /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
 		7ABD915B184DB784006AF935 /* REMLoginCustomerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginCustomerTableViewController.h; sourceTree = "<group>"; };
 		7ABD915C184DB784006AF935 /* REMLoginCustomerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginCustomerTableViewController.m; sourceTree = "<group>"; };
-		7ABFDDED18482F7B004DD4E7 /* Default@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x~ipad.png"; sourceTree = "<group>"; };
-		7ABFDDEE18482F7B004DD4E7 /* Default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~ipad.png"; sourceTree = "<group>"; };
 		7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed.png"; sourceTree = "<group>"; };
 		7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed@2x.png"; sourceTree = "<group>"; };
 		7AC54997181776910037F180 /* REMDashboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMDashboardController.h; sourceTree = "<group>"; };
@@ -1268,11 +1266,13 @@
 		7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceMeta.h; path = Common/Communication/REMServiceMeta.h; sourceTree = "<group>"; };
 		7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceMeta.m; path = Common/Communication/REMServiceMeta.m; sourceTree = "<group>"; };
 		7AD0AB8A183CF52000525C82 /* REMTimeSliceLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeSliceLegendFormator.m; path = Biz/Chart/LegendFormator/REMTimeSliceLegendFormator.m; sourceTree = "<group>"; };
-		7AD8CE011847086000D815C6 /* Startup_iOS7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Startup_iOS7.png; sourceTree = "<group>"; };
-		7AD8CE021847086000D815C6 /* Startup_iOS7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Startup_iOS7@2x.png"; sourceTree = "<group>"; };
 		7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
 		7AF3667617CF2D7400447650 /* REMBuildingChartSeriesIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartSeriesIndicator.h; sourceTree = "<group>"; };
 		7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingChartSeriesIndicator.m; sourceTree = "<group>"; };
+		7AFC250A18503D3800B9CF11 /* Default-Landscape-IOS7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-IOS7.png"; sourceTree = "<group>"; };
+		7AFC250B18503D3800B9CF11 /* Default-Landscape-IOS7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-IOS7@2x.png"; sourceTree = "<group>"; };
+		7AFC250C18503D3800B9CF11 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
+		7AFC250D18503D3800B9CF11 /* Default-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x.png"; sourceTree = "<group>"; };
 		B40879481830A960004042C1 /* REMBuildingImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingImageViewController.h; sourceTree = "<group>"; };
 		B40879491830A960004042C1 /* REMBuildingImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingImageViewController.m; sourceTree = "<group>"; };
 		B408794B1830CC69004042C1 /* REMBuildingCommodityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingCommodityViewController.h; sourceTree = "<group>"; };
@@ -2811,10 +2811,10 @@
 		7AD8CDFE1847086000D815C6 /* LaunchImages */ = {
 			isa = PBXGroup;
 			children = (
-				7ABFDDED18482F7B004DD4E7 /* Default@2x~ipad.png */,
-				7ABFDDEE18482F7B004DD4E7 /* Default~ipad.png */,
-				7AD8CE011847086000D815C6 /* Startup_iOS7.png */,
-				7AD8CE021847086000D815C6 /* Startup_iOS7@2x.png */,
+				7AFC250A18503D3800B9CF11 /* Default-Landscape-IOS7.png */,
+				7AFC250B18503D3800B9CF11 /* Default-Landscape-IOS7@2x.png */,
+				7AFC250C18503D3800B9CF11 /* Default-Landscape.png */,
+				7AFC250D18503D3800B9CF11 /* Default-Landscape@2x.png */,
 			);
 			path = LaunchImages;
 			sourceTree = "<group>";
@@ -3389,7 +3389,6 @@
 				6A61A7291839B82000C6A228 /* share-mail.png in Resources */,
 				6A61A7751839B82000C6A228 /* LoginTextField-Focus.png in Resources */,
 				7A58F24C1839A5650071DE7A /* Propaganda_1@2x.jpg in Resources */,
-				7ABFDDF018482F7B004DD4E7 /* Default~ipad.png in Resources */,
 				6A61A7101839B82000C6A228 /* NaturalGas_normal@2x.png in Resources */,
 				6A61A71B1839B82000C6A228 /* Water_normal.png in Resources */,
 				6A61A7321839B82000C6A228 /* Ascend@2x.png in Resources */,
@@ -3399,6 +3398,7 @@
 				7A58F2521839A5650071DE7A /* SplashScreenBackgroud@2x.jpg in Resources */,
 				7A47F3A018482C1B007EE37B /* JumpLogin.png in Resources */,
 				6A61A7611839B82000C6A228 /* TooltipsArrow_PieChart.png in Resources */,
+				7AFC250E18503D3800B9CF11 /* Default-Landscape-IOS7.png in Resources */,
 				6A61A7521839B82000C6A228 /* labelRight3@2x.png in Resources */,
 				6A61A7511839B82000C6A228 /* labelRight3.png in Resources */,
 				6A61A7681839B82000C6A228 /* Nodata@2x.png in Resources */,
@@ -3406,7 +3406,6 @@
 				6A61A7771839B82000C6A228 /* LoginTextField.png in Resources */,
 				6A61A7671839B82000C6A228 /* Nodata.png in Resources */,
 				6A61A7031839B82000C6A228 /* EMOP_Spotlight_6.png in Resources */,
-				7AD8CE051847086000D815C6 /* Startup_iOS7.png in Resources */,
 				6A61A74F1839B82000C6A228 /* labelRight2.png in Resources */,
 				6A61A7661839B82000C6A228 /* Down@2x.png in Resources */,
 				6A61A70B1839B82000C6A228 /* Electricity_normal.png in Resources */,
@@ -3449,6 +3448,7 @@
 				6A61A78C1839B82000C6A228 /* UnqualifiedPin_Focus@2x.png in Resources */,
 				6A61A7691839B82000C6A228 /* Up.png in Resources */,
 				6A61A75D1839B82000C6A228 /* Legend_Chart.png in Resources */,
+				7AFC251018503D3800B9CF11 /* Default-Landscape.png in Resources */,
 				6A61A7811839B82000C6A228 /* Map.png in Resources */,
 				6A61A74C1839B82000C6A228 /* labelLeft8@2x.png in Resources */,
 				6A61A6FD1839B82000C6A228 /* EMOP_App_6.png in Resources */,
@@ -3457,7 +3457,6 @@
 				6A61A77B1839B82000C6A228 /* CommonPin_Focus.png in Resources */,
 				7A58F2501839A5650071DE7A /* Propaganda_3@2x.jpg in Resources */,
 				6A61A7911839B82000C6A228 /* SplashScreenLogo-Flash.png in Resources */,
-				7AD8CE061847086000D815C6 /* Startup_iOS7@2x.png in Resources */,
 				6A61A7901839B82000C6A228 /* SplashScreenLogo-Common@2x.png in Resources */,
 				7A58F24A1839A5650071DE7A /* mail.jpg in Resources */,
 				6A61A77D1839B82000C6A228 /* CommonPin_Normal.png in Resources */,
@@ -3480,6 +3479,7 @@
 				6A61A6FE1839B82000C6A228 /* EMOP_App_6@2x.png in Resources */,
 				6A61A7371839B82000C6A228 /* DatePicker_Chart.png in Resources */,
 				6A61A7341839B82000C6A228 /* Back_Chart@2x.png in Resources */,
+				7AFC250F18503D3800B9CF11 /* Default-Landscape-IOS7@2x.png in Resources */,
 				7A664FDA183B3369004B9FF3 /* MapPopover_Rectangle.png in Resources */,
 				6A61A72B1839B82000C6A228 /* share-weibo.png in Resources */,
 				6A61A7181839B82000C6A228 /* PM2.5_normal@2x.png in Resources */,
@@ -3510,7 +3510,6 @@
 				6A61A72C1839B82000C6A228 /* share-weibo@2x.png in Resources */,
 				6A61A7281839B82000C6A228 /* OverTarget@2x.png in Resources */,
 				6A61A7261839B82000C6A228 /* NotOverTarget@2x.png in Resources */,
-				7ABFDDEF18482F7B004DD4E7 /* Default@2x~ipad.png in Resources */,
 				7A47F3A518482C1B007EE37B /* JumpTrial@2x.png in Resources */,
 				6A61A7151839B82000C6A228 /* Oil_pressed.png in Resources */,
 				6A61A73C1839B82000C6A228 /* Descend@2x.png in Resources */,
@@ -3532,6 +3531,7 @@
 				6A61A7721839B82000C6A228 /* Login-Normal@2x.png in Resources */,
 				6A61A7501839B82000C6A228 /* labelRight2@2x.png in Resources */,
 				6A61A78F1839B82000C6A228 /* SplashScreenLogo-Common.png in Resources */,
+				7AFC251118503D3800B9CF11 /* Default-Landscape@2x.png in Resources */,
 				6A61A7781839B82000C6A228 /* LoginTextField@2x.png in Resources */,
 				6A61A7421839B82000C6A228 /* labelLeft3@2x.png in Resources */,
 				6A61A74B1839B82000C6A228 /* labelLeft8.png in Resources */,

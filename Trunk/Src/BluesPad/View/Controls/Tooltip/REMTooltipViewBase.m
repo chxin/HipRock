@@ -35,8 +35,8 @@
     self = [super initWithFrame:kDMChart_TooltipHiddenFrame];
     
     if(self){
-        //self.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
-        self.backgroundColor = [UIColor orangeColor];
+        self.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
+        //self.backgroundColor = [UIColor orangeColor];
         UIView *contentView = [self renderContentView];
         [self addSubview:contentView];
         self.contentView=contentView;
