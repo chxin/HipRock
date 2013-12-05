@@ -64,7 +64,7 @@
     
     self.view.frame = collectionViewFrame;
     
-    self.collectionView.frame = collectionViewFrame;
+    self.collectionView.frame = CGRectMake(0,0,collectionViewFrame.size.width,collectionViewFrame.size.height);
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.contentInset = kDMGallery_GalleryCollectionViewInsets;
@@ -85,8 +85,6 @@
 
 - (void)galleryCellTapped:(REMGalleryCollectionCell *)cell
 {
-    [cell coverMe];
-    
     [((REMGalleryViewController *)self.parentViewController) presentBuildingViewFromCell:cell animated:NO];
 }
 

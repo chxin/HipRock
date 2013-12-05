@@ -19,9 +19,6 @@
 
 @property (nonatomic,strong) UIImageView *snapshot;
 
--(void)coverMe;
--(void)uncoverMe;
-
 -(void)beginPinch;
 -(void)endPinch;
 

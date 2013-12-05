@@ -49,7 +49,7 @@
     UIButton *customerLogoButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kDMCommon_CustomerLogoWidth, kDMCommon_CustomerLogoHeight)];
     
     [customerLogoButton setImage:REMAppCurrentLogo forState:UIControlStateNormal];
-    customerLogoButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    customerLogoButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
     customerLogoButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [customerLogoButton addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     

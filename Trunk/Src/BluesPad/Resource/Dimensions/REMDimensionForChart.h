@@ -30,7 +30,7 @@
 //#define kDMChart_IndicatorBorderContentSpace 3
 
 //legend
-#define kDMChart_LegendItemWidth 239
+#define kDMChart_LegendItemWidth 265//239
 #define kDMChart_LegendItemHeight 39
 #define kDMChart_LegendItemLeftOffset 10
 #define kDMChart_LegendItemTopOffset ((kDMChart_ToolbarHeight - kDMChart_LegendItemHeight) / 2)
@@ -89,8 +89,8 @@
 #define kDMChart_TooltipItemTitleColor @"#212121"
 
 #define kDMChart_TooltipItemDataValueLeftOffset kDMChart_TooltipItemTitleLeftOffset
-#define kDMChart_TooltipItemDataValueTopOffset (kDMChart_TooltipItemTitleTopOffset + kDMChart_TooltipItemTitleFontSize + 11)
-#define kDMChart_TooltipItemDataValueFontSize 17
+#define kDMChart_TooltipItemDataValueTopOffset (kDMChart_TooltipItemTitleTopOffset + kDMChart_TooltipItemTitleFontSize + 7)
+#define kDMChart_TooltipItemDataValueFontSize 24//17
 #define kDMChart_TooltipItemDataValueColor @"#686868"
 
 #define kDMChart_RankingTooltipNumeratorFontSize 39

@@ -10,6 +10,12 @@
 #import "REMDimensions.h"
 #import <QuartzCore/QuartzCore.h>
 
+@interface REMGalleryGroupView()
+
+@property (nonatomic,weak) UILabel *titleLabel;
+
+@end
+
 @implementation REMGalleryGroupView
 
 
@@ -43,25 +49,34 @@
 
 -(void)setGroupTitle:(NSString *)title
 {
-    if(title==nil || [title isEqual:[NSNull null]]){
-        title = @"其他";
+//    if(title==nil || [title isEqual:[NSNull null]]){
+//        title = @"其他";
+//    }
+    
+    if(self.titleLabel == nil){
+        UIFont *font = [UIFont systemFontOfSize:kDMGallery_GalleryGroupTitleFontSize];
+        CGSize titleSize = [title sizeWithFont:font];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kDMGallery_GalleryGroupViewWidth, titleSize.height)];
+        label.backgroundColor = [UIColor clearColor];
+        label.font = font;
+        label.textAlignment = NSTextAlignmentLeft;
+        label.textColor = kDMGallery_GalleryGroupTitleFontColor;
+        
+        [self.contentView addSubview:label];
+        self.titleLabel = label;
     }
     
-    CGSize titleSize = [title sizeWithFont:[UIFont systemFontOfSize:kDMGallery_GalleryGroupTitleFontSize]];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, titleSize.width, titleSize.height)];
-    label.text = title;
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:kDMGallery_GalleryGroupTitleFontSize];
-    label.textAlignment = NSTextAlignmentLeft;
-    label.textColor = kDMGallery_GalleryGroupTitleFontColor;
-    
-    [self.contentView addSubview:label];
-    
+    self.titleLabel.text = title;
 }
 
 
--(void)setCollectionView:(UICollectionView *)collectionView
+-(void)setCollectionView:(UIView *)collectionView
 {
+    for(id view in self.contentView.subviews){
+        if ([view isEqual:self.titleLabel] == NO)
+            [view removeFromSuperview];
+    }
+    
     [self.contentView addSubview:collectionView];
 }
 

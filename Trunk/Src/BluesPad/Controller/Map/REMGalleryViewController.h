@@ -19,11 +19,14 @@
 
 @property (nonatomic) CGRect initialZoomRect;
 @property (nonatomic,strong) UIImageView *snapshot;
+@property (nonatomic,weak) REMGalleryCollectionCell *focusedCell;
 
 #pragma mark - Methods
 -(CGRect)getDestinationZoomRect:(int)currentBuildingIndex;
 -(void)presentBuildingViewFromCell:(REMGalleryCollectionCell *)cell animated:(BOOL)isAnimated;
 -(int)buildingIndexFromBuilding:(REMBuildingModel *)building;
 -(void)uncoverCell;
+-(void)takeSnapshot;
+-(REMGalleryCollectionCell *)galleryCellForBuildingIndex:(int)buildingIndex;
 
 @end

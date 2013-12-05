@@ -68,8 +68,8 @@
     view.showsHorizontalScrollIndicator = NO;
     view.showsVerticalScrollIndicator = NO;
     view.clipsToBounds = YES;
-    view.layer.borderColor = [UIColor blackColor].CGColor;
-    view.layer.borderWidth = 1.0;
+//    view.layer.borderColor = [UIColor blackColor].CGColor;
+//    view.layer.borderWidth = 1.0;
     
     int itemCount = self.itemModels.count;
     
