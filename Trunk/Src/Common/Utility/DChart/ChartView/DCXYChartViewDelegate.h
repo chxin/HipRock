@@ -24,7 +24,7 @@ typedef enum _DCHRangeChangeSender {
 
 -(void)panStopped;
 
--(void)focusPointChanged:(NSArray*)dcpoints;
+-(void)focusPointChanged:(NSArray*)dcpoints at:(int)x;
 
 /**
  * 返回YES允许HRange的改变，否则HRange将不会改变

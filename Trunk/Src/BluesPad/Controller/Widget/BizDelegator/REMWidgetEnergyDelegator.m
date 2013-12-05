@@ -1052,7 +1052,7 @@
 
 #pragma mark - Tooltip
 // Trend chart delegate
--(void)highlightPoints:(NSArray*)points
+-(void)highlightPoints:(NSArray*)points x:(id)x
 {
     [self.searchLegendViewContainer setHidden:YES];
     

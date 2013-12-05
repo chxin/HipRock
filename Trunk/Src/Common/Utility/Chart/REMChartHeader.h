@@ -22,7 +22,7 @@
 /*
  * points: List<DCDataPoint>
  */
--(void)highlightPoints:(NSArray*)points;
+-(void)highlightPoints:(NSArray*)points x:(id)x;
 
 /*
  * Parameter data type: NSDate for line/column. NSNumber for ranking.

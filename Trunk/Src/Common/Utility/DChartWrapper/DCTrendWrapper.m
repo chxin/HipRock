@@ -283,9 +283,10 @@
     }
 }
 
--(void)focusPointChanged:(NSArray *)dcpoints {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoints:)]) {
-        [self.delegate performSelector:@selector(highlightPoints:) withObject:dcpoints];
+-(void)focusPointChanged:(NSArray *)dcpoints at:(int)x {
+    if (self.delegate && [[self.delegate class] conformsToProtocol:@protocol(REMTrendChartDelegate)]) {
+        id xVal = (REMIsNilOrNull(self.sharedProcessor)) ? @(x) : [self.sharedProcessor deprocessX:x];
+        [(id<REMTrendChartDelegate>)self.delegate highlightPoints:dcpoints x:xVal];
     }
 }
 
