@@ -11,8 +11,8 @@
 #import "_DCXLabelFormatter.h"
 
 @interface _DCXAxisLabelLayer()
-@property (nonatomic, assign) CGFloat fontSize;
-@property (nonatomic, assign) CTFontRef fontRef;
+//@property (nonatomic, assign) CGFloat fontSize;
+//@property (nonatomic, assign) CTFontRef fontRef;
 @property (nonatomic, strong) _DCLayerTrashbox* trashbox;
 
 @end
@@ -23,7 +23,6 @@
 -(id)initWithContext:(DCContext *)context {
     self = [super initWithContext:context];
     if (self) {
-        self.masksToBounds = YES;
         self.backgroundColor = [UIColor clearColor].CGColor;
         self.trashbox = [[_DCLayerTrashbox alloc]init];
     }
@@ -59,6 +58,10 @@
             [self addLabelForX:i];
         }
     }
+}
+
+-(void)willHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
+    // Nothing to do.
 }
 
 -(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
@@ -109,27 +112,34 @@
 }
 
 -(void)addLabelForX:(NSInteger)x {
-    if (self.fontRef == nil) {
-        self.fontSize = self.font.pointSize;
-        self.fontRef = CTFontCreateWithName((__bridge CFStringRef)self.font.fontName,
-                                            self.fontSize,
-                                            NULL);
+//    if (self.fontRef == nil) {
+//        self.fontSize = self.font.pointSize;
+//        self.fontRef = CTFontCreateWithName((__bridge CFStringRef)self.font.fontName,
+//                                            self.fontSize,
+//                                            NULL);
+//    }
+    CGFloat offset = 0;
+    if (!self.graphContext.xLabelAlignToTick) {
+        offset = 0.5;
     }
-    CGFloat centerX = (x - self.graphContext.hRange.location) * self.frame.size.width / self.graphContext.hRange.length;
+    CGFloat centerX = (x + offset - self.graphContext.hRange.location) * self.frame.size.width / self.graphContext.hRange.length;
     CGFloat maxLabelLength = INT32_MAX;
     if (self.labelFormatter && [self.labelFormatter respondsToSelector:@selector(getMaxXLabelLengthIn:)]) {
         maxLabelLength = [((id<_DCXLabelFormatterProtocal>)self.labelFormatter) getMaxXLabelLengthIn:self.bounds];
     }
     CATextLayer* text = (CATextLayer*)[self.trashbox popLayerFromTrashBox];
     if (!text) {
+        CTFontRef fRef = CTFontCreateWithName((__bridge CFStringRef)self.font.fontName,
+                                              self.font.pointSize,
+                                              NULL);
         text = [[CATextLayer alloc]init];
-        text.font = self.fontRef;
-        text.fontSize = self.fontSize;
+        text.font = fRef;
+        text.fontSize = self.font.pointSize;
         text.contentsScale = [[UIScreen mainScreen] scale];
         text.foregroundColor = self.fontColor.CGColor;
         text.alignmentMode = kCAAlignmentCenter;
         text.truncationMode = kCATruncationEnd;
-        [self addSublayer:text];
+        CFRelease(fRef);
     }
     NSString* labelText = [self textForX:x];
     [text setString:labelText];
@@ -143,15 +153,20 @@
         text.truncationMode = kCATruncationNone;
         text.frame = CGRectMake(centerX-size.width/2,self.frame.size.height-size.height, size.width,size.height);
     }
-    [self.trashbox.xToLayerDic setObject:text forKey:@(x)];
+    if ([DCUtility isFrame:text.frame visableIn:self.bounds]) {
+        [self.trashbox.xToLayerDic setObject:text forKey:@(x)];
+        [self addSublayer:text];
+    } else {
+    }
 }
 
--(void)removeFromSuperlayer {
-    if (self.fontRef) {
-        CFRelease(self.fontRef);
-    }
-    [super removeFromSuperlayer];
-}
+//-(void)removeFromSuperlayer {
+//    if (self.fontRef) {
+//        CFRelease(self.fontRef);
+//        self.fontRef = nil;
+//    }
+//    [super removeFromSuperlayer];
+//}
 
 -(void)setLabelFormatter:(NSFormatter *)labelFormatter {
     _labelFormatter = labelFormatter;

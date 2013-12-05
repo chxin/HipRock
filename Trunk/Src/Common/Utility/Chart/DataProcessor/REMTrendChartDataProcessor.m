@@ -34,12 +34,15 @@
     if (step == REMEnergyStepHour || step == REMEnergyStepDay || step == REMEnergyStepWeek) {
         float i = (step == REMEnergyStepHour ? 3600.0 : (step == REMEnergyStepDay ? 86400.0 : 604800.0));
         return[NSDate dateWithTimeInterval:i*x sinceDate:startDate];
-    } else if (step == REMEnergyStepYear) {
-        int monthToAdd = 12.0*x;
-        return [REMTimeHelper addMonthToDate:startDate month:monthToAdd];
     } else {
-        int monthToAdd = x;
-        return [REMTimeHelper addMonthToDate:startDate month:monthToAdd];
+        double monthToAdd = x;
+        if (step == REMEnergyStepYear) {
+            monthToAdd*=12;
+        }
+        int monthToAddInt = monthToAdd;
+        NSDate* d = [REMTimeHelper addMonthToDate:startDate month:monthToAddInt];
+        d = [NSDate dateWithTimeInterval:28*24*3600*(monthToAdd-(double)monthToAddInt) sinceDate:d];
+        return d;
     }
 }
 @end

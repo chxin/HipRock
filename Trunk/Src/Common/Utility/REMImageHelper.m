@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "REMEnum.h"
 #import "REMApplicationContext.h"
-
+#import <GPUImage/GPUImage.h>
 
 @implementation REMImageHelper {
     CIImage* beginImage;
@@ -106,18 +106,6 @@
 
 + (UIImage *)blurImage:(UIImage *)origImage
 {
-    
-    [EAGLContext setCurrentContext:nil];
-    
-    EAGLContext *myEAGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-    if([EAGLContext setCurrentContext:myEAGLContext] == NO){
-        return nil;
-    }
-    NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
-    [options setObject: [NSNull null] forKey: kCIContextWorkingColorSpace];
-    CIContext *myContext = [CIContext contextWithEAGLContext:myEAGLContext options:options];
-    
- 
     UIImage *image=origImage;
     if(origImage.size.width>1024){
         CGSize newSize=CGSizeMake(origImage.size.width/2, origImage.size.height/2);
@@ -127,43 +115,81 @@
         UIGraphicsEndImageContext();
         image=newImage;
     }
-
     
+    //GPUImageView *primaryView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
+    GPUImagePicture *pic=[[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput:YES];
     
+    GPUImageGaussianBlurFilter *filter=[[GPUImageGaussianBlurFilter alloc]init];
+    //[filter forceProcessingAtSize:CGSizeMake(1024, 768)];
     
+    filter.blurRadiusInPixels=15;
+    [pic addTarget:filter];
+    //[filter addTarget:primaryView];
+    [pic processImage];
     
-    // CIContext *myContext = [CIContext contextWithOptions:nil];
-    CIImage *ci = [[CIImage alloc]initWithCGImage:image.CGImage];
+    UIImage *retImage= [filter imageFromCurrentlyProcessedOutputWithOrientation:UIImageOrientationUp];
     
-    CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
-                                   keysAndValues: kCIInputImageKey,ci,@"inputRadius",@(15),nil];
+    return retImage;
+    //return  [filter imageFromCurrentlyProcessedOutput];
     
-    CIImage *outputImage = [filter1 outputImage];
-    
-    //NSLog(@"image size:%@",NSStringFromCGSize(imageView.image.size));
-    
-    //UIScreen *screen = [UIScreen mainScreen];
-    
-    //CGRect frame = CGRectMake(0, 0, screen.bounds.size.height*screen.scale,screen.bounds.size.width*screen.scale);
-    
-    //NSLog(@"blur frame:%@",NSStringFromCGRect(frame));
-    
-    CGRect retFrame=CGRectMake(0, 0, image.size.width*image.scale, image.size.height*image.scale);
-    
-    //NSLog(@"retframe:%@",NSStringFromCGRect(retFrame));
-    
-    CGImageRef cgimg =
-    [myContext createCGImage:outputImage fromRect:retFrame];
-    
-    
-    UIImage *view= [UIImage imageWithCGImage:cgimg];
-    CGImageRelease(cgimg);
-    
-    [EAGLContext setCurrentContext:nil];
-    
-    
-    
-    return view;
+//    
+//    [EAGLContext setCurrentContext:nil];
+//    
+//    EAGLContext *myEAGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+//    if([EAGLContext setCurrentContext:myEAGLContext] == NO){
+//        return nil;
+//    }
+//    NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
+//    [options setObject: [NSNull null] forKey: kCIContextWorkingColorSpace];
+//    CIContext *myContext = [CIContext contextWithEAGLContext:myEAGLContext options:options];
+//    
+// 
+//    UIImage *image=origImage;
+//    if(origImage.size.width>1024){
+//        CGSize newSize=CGSizeMake(origImage.size.width/2, origImage.size.height/2);
+//        UIGraphicsBeginImageContext(newSize);
+//        [origImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+//        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//        image=newImage;
+//    }
+//
+//    
+//    
+//    
+//    
+//    // CIContext *myContext = [CIContext contextWithOptions:nil];
+//    CIImage *ci = [[CIImage alloc]initWithCGImage:image.CGImage];
+//    
+//    CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
+//                                   keysAndValues: kCIInputImageKey,ci,@"inputRadius",@(15),nil];
+//    
+//    CIImage *outputImage = [filter1 outputImage];
+//    
+//    //NSLog(@"image size:%@",NSStringFromCGSize(imageView.image.size));
+//    
+//    //UIScreen *screen = [UIScreen mainScreen];
+//    
+//    //CGRect frame = CGRectMake(0, 0, screen.bounds.size.height*screen.scale,screen.bounds.size.width*screen.scale);
+//    
+//    //NSLog(@"blur frame:%@",NSStringFromCGRect(frame));
+//    
+//    CGRect retFrame=CGRectMake(0, 0, image.size.width*image.scale, image.size.height*image.scale);
+//    
+//    //NSLog(@"retframe:%@",NSStringFromCGRect(retFrame));
+//    
+//    CGImageRef cgimg =
+//    [myContext createCGImage:outputImage fromRect:retFrame];
+//    
+//    
+//    UIImage *view= [UIImage imageWithCGImage:cgimg];
+//    CGImageRelease(cgimg);
+//    
+//    [EAGLContext setCurrentContext:nil];
+//    
+//    
+//    
+//    return view;
 }
 
 - (void) frostedGlassImage:(UIImageView*)view image:(NSData*)imageData gradientValue:(int)gradientValue {

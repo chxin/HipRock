@@ -10,4 +10,7 @@
 
 @interface _DCHPinchGestureRecognizer : UIPinchGestureRecognizer
 @property (nonatomic, strong) NSSet* theTouches;
+@property (nonatomic, assign, readonly) CGFloat leftScale;
+@property (nonatomic, assign, readonly) CGFloat rightScale;
+@property (nonatomic, assign, readonly) CGFloat centerX;
 @end

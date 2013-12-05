@@ -8,6 +8,7 @@
 
 #import "DCTrendWrapper.h"
 #import "_DCXLabelFormatter.h"
+#import "DCDataPoint.h"
 
 @interface DCTrendWrapper()
 @property (nonatomic, strong) NSMutableArray* processors;
@@ -42,15 +43,16 @@
     [view setXLabelFormatter:xLabelFormatter];
     _view = view;
     view.xAxis = [[DCAxis alloc]init];
-    view.yAxis0 = [[DCAxis alloc]init];
-    view.yAxis1 = [[DCAxis alloc]init];
-    view.yAxis2 = [[DCAxis alloc]init];
+    
     NSMutableArray* seriesList = [[NSMutableArray alloc]initWithCapacity:self.energyViewData.targetEnergyData.count];
     NSUInteger seriesIndex = 0;
     NSUInteger seriesAmount = [self getSeriesAmount];
     for (; seriesIndex < seriesAmount; seriesIndex++) {
         [seriesList addObject:[self createSeriesAt:seriesIndex style:self.style]];
     }
+    view.yAxisList = [self createYAxes:seriesList];
+    
+    
     view.graphContext.globalHRange = globalRange;
     view.seriesList = seriesList;
     
@@ -69,30 +71,12 @@
         view.hGridlineWidth = self.style.yGridlineStyle.lineWidth;
     }
     
-    if (self.style.yLineStyle) {
-        view.yAxis0.lineColor = self.style.yLineStyle.lineColor.uiColor;
-        view.yAxis1.lineColor = self.style.yLineStyle.lineColor.uiColor;
-        view.yAxis2.lineColor = self.style.yLineStyle.lineColor.uiColor;
-        view.yAxis0.lineWidth = self.style.yLineStyle.lineWidth;
-        view.yAxis1.lineWidth = self.style.yLineStyle.lineWidth;
-        view.yAxis2.lineWidth = self.style.yLineStyle.lineWidth;
-    }
-    if (self.style.yTextStyle) {
-        view.yAxis0.labelColor = self.style.yTextStyle.color.uiColor;
-        view.yAxis1.labelColor = self.style.yTextStyle.color.uiColor;
-        view.yAxis2.labelColor = self.style.yTextStyle.color.uiColor;
-        view.yAxis0.labelFont = [UIFont fontWithName:self.style.yTextStyle.fontName size:self.style.yTextStyle.fontSize];
-        view.yAxis1.labelFont = [UIFont fontWithName:self.style.yTextStyle.fontName size:self.style.yTextStyle.fontSize];
-        view.yAxis2.labelFont = [UIFont fontWithName:self.style.yTextStyle.fontName size:self.style.yTextStyle.fontSize];
-    }
     view.focusSymbolLineColor = self.style.focusSymbolLineColor;
     view.focusSymbolLineStyle = self.style.focusSymbolLineStyle;
     view.focusSymbolLineWidth = self.style.focusSymbolLineWidth;
     view.focusSymbolIndicatorSize = self.style.focusSymbolIndicatorSize;
     view.xAxis.labelToLine = self.style.xLabelToLine;
-    view.yAxis0.labelToLine = self.style.yLabelToLine;
-    view.yAxis1.labelToLine = self.style.yLabelToLine;
-    view.yAxis2.labelToLine = self.style.yLabelToLine;
+    
     view.plotPaddingRight = self.style.plotPaddingRight;
     view.plotPaddingLeft = self.style.plotPaddingLeft;
     view.plotPaddingTop = self.style.plotPaddingTop;
@@ -100,8 +84,42 @@
     view.graphContext.hGridlineAmount = self.style.horizentalGridLineAmount;
     view.delegate = self;
     self.graphContext = view.graphContext;
-    if (step == REMEnergyStepHour || step == REMEnergyStepWeek) view.pointXOffset = 0.5;
+    if (step == REMEnergyStepHour || step == REMEnergyStepWeek) {
+        view.graphContext.pointAlignToTick = NO;
+        view.graphContext.xLabelAlignToTick = YES;
+    } else {
+        view.graphContext.pointAlignToTick = NO;
+        view.graphContext.xLabelAlignToTick = NO;
+    }
     [self customizeView:view];
+}
+
+-(NSArray*)createYAxes:(NSArray*)series {
+    NSMutableArray* yAxes = [[NSMutableArray alloc]init];
+    for (DCXYSeries* s in series) {
+        for (DCAxis* y in yAxes) {
+            if ((REMIsNilOrNull(y.axisTitle) && REMIsNilOrNull(s.target.uomName)) || [y.axisTitle isEqualToString:s.target.uomName]) {
+                s.yAxis = y;
+                break;
+            }
+        }
+        if (REMIsNilOrNull(s.yAxis)) {
+            DCAxis* y = [[DCAxis alloc]init];
+            s.yAxis = y;
+            y.axisTitle = s.target.uomName;
+            y.labelToLine = self.style.yLabelToLine;
+            if (self.style.yLineStyle) {
+                y.lineColor = self.style.yLineStyle.lineColor.uiColor;
+                y.lineWidth = self.style.yLineStyle.lineWidth;
+            }
+            if (self.style.yTextStyle) {
+                y.labelColor = self.style.yTextStyle.color.uiColor;
+                y.labelFont = [UIFont fontWithName:self.style.yTextStyle.fontName size:self.style.yTextStyle.fontSize];
+            }
+            [yAxes addObject:y];
+        }
+    }
+    return yAxes;
 }
 
 -(void)customizeView:(DCXYChartView*)view {
@@ -132,24 +150,7 @@
     }
     DCXYSeries* s = [[NSClassFromString(self.defaultSeriesClass) alloc]initWithEnergyData:datas];
     s.xAxis = view.xAxis;
-    if (REMIsNilOrNull(view.yAxis0.axisTitle)) {
-        s.yAxis = view.yAxis0;
-        s.yAxis.axisTitle = targetEnergy.target.uomName;
-    } else if ([view.yAxis0.axisTitle isEqualToString:targetEnergy.target.uomName]){
-        s.yAxis = view.yAxis0;
-    } else if (REMIsNilOrNull(view.yAxis1.axisTitle)) {
-        s.yAxis = view.yAxis1;
-        s.yAxis.axisTitle = targetEnergy.target.uomName;
-    } else if ([view.yAxis1.axisTitle isEqualToString:targetEnergy.target.uomName]){
-        s.yAxis = view.yAxis1;
-    } else if (REMIsNilOrNull(view.yAxis2.axisTitle)) {
-        s.yAxis = view.yAxis2;
-        s.yAxis.axisTitle = targetEnergy.target.uomName;
-    } else if ([view.yAxis2.axisTitle isEqualToString:targetEnergy.target.uomName]){
-        s.yAxis = view.yAxis2;
-    } else {
-        
-    }
+    
     s.target = targetEnergy.target;
     [self customizeSeries:s seriesIndex:index chartStyle:style];
     return s;
@@ -227,18 +228,13 @@
     }
     
     self.sharedProcessor.baseDate = baseDateOfX;
-    NSNumber* globalLength = [self.sharedProcessor processX:globalEndDate];// @([self roundDate:globalEndDate startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:NO].intValue);
-    double startPoint = [self.sharedProcessor processX:beginningStart].doubleValue;// [self roundDate:beginningStart startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:YES].intValue;
-    double endPoint = [self roundDate:beginningEnd startDate:baseDateOfX processor:self.sharedProcessor roundToFloor:NO].intValue;
-    if (step == REMEnergyStepHour || step == REMEnergyStepWeek) {
-        endPoint+=0.5;
-    } else if ([REMTimeHelper getHour:beginningEnd] == 0) {
-        endPoint--;
-    }
+    NSNumber* globalLength = [self.sharedProcessor processX:globalEndDate];
+    double startPoint = [self.sharedProcessor processX:beginningStart].doubleValue;
+    double endPoint = [self.sharedProcessor processX:beginningEnd].doubleValue;
     
     if (endPoint < startPoint) endPoint = startPoint;
-    DCRange* beginRange = [[DCRange alloc]initWithLocation:startPoint-0.5 length:endPoint-startPoint];
-    DCRange* globalRange = [[DCRange alloc]initWithLocation:-0.5 length:globalLength.doubleValue];
+    DCRange* beginRange = [[DCRange alloc]initWithLocation:startPoint length:endPoint-startPoint];
+    DCRange* globalRange = [[DCRange alloc]initWithLocation:0 length:globalLength.doubleValue];
     self.myStableRange = beginRange;
         return @{ @"globalRange": globalRange, @"beginRange": beginRange, @"xformatter": [[_DCXLabelFormatter alloc]initWithStartDate:baseDateOfX dataStep:step interval:1]};
 }

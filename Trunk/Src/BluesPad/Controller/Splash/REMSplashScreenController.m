@@ -154,7 +154,7 @@
     
     REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
     NSMutableArray* sereis = [[NSMutableArray alloc]init];
-    for (int sIndex = 0; sIndex < 3; sIndex++) {
+    for (int sIndex = 0; sIndex < 10; sIndex++) {
         NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
         for (int i = 0; i < 10000; i++) {
             REMEnergyData* data = [[REMEnergyData alloc]init];
@@ -171,7 +171,7 @@
         sData.energyData = energyDataArray;
         sData.target = [[REMEnergyTargetModel alloc]init];
         sData.target.uomId = 0;
-        sData.target.uomName = [NSString stringWithFormat:@"%i", sIndex%3];
+        sData.target.uomName = [NSString stringWithFormat:@"%i", sIndex];
         [sereis addObject:sData];
     }
     energyViewData.visibleTimeRange = r;
@@ -180,14 +180,14 @@
     energyViewData.targetEnergyData = sereis;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
-    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
-    columnWidget.view.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:columnWidget.view];
+//    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
+//    columnWidget.view.backgroundColor = [UIColor blackColor];
+//    [self.view addSubview:columnWidget.view];
     
     DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
     lineWidget.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:lineWidget.view];
-    self.plotSource = lineWidget;
+//    self.plotSource = lineWidget;
 //    DCPieChartView* vvv = [[DCPieChartView alloc]initWithFrame:CGRectMake(0, 0, 1024, 748)];
 //    [self.view addSubview:vvv];
 }

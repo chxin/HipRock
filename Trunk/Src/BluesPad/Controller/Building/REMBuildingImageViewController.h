@@ -27,19 +27,16 @@ typedef enum _REMBuildingCoverStatus{
 
 @property (nonatomic) REMBuildingCoverStatus currentCoverStatus;
 
+@property (nonatomic,weak) UIButton *shareButton;
 
 @property (nonatomic) CGFloat currentOffset;
 
-- (void)loadingDataComplete;
-
-- (void)loadingDataNow;
 
 - (void)setBlurLevel:(CGFloat)offsetY;
 
 - (void)loadContentView;
 - (void)exportImage:(void (^)(UIImage *, NSString*))callback;
-- (void)horizonalMoving;
-- (void)horizonalStopped;
+
 
 - (void)releaseContentView;
 

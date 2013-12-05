@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Zilong-Oscar.Xu. All rights reserved.
 //
 
+#import "DCDataPoint.h"
 #import "DCXYChartView.h"
 #import "_DCHGridlineLayer.h"
 #import "_DCCoordinateSystem.h"
@@ -17,6 +18,7 @@
 #import "_DCLineSymbolsLayer.h"
 #import "REMColor.h"
 #import "_DCHPinchGestureRecognizer.h"
+#import "DCColumnSeries.h"
 
 #import "_DCXYIndicatorLayer.h"
 
@@ -25,36 +27,16 @@
 
 @property (nonatomic, strong) _DCXYIndicatorLayer* indicatorLayer;
 
-//@property (nonatomic, strong) _DCAxisLayer* _axisLayer;
 @property (nonatomic, strong) _DCHGridlineLayer* _hGridlineLayer;
 @property (nonatomic, strong) _DCXAxisLabelLayer* _xLabelLayer;
 
-@property (nonatomic, strong) _DCCoordinateSystem* coordinate0;
-@property (nonatomic, strong) _DCCoordinateSystem* coordinate1;
-@property (nonatomic, strong) _DCCoordinateSystem* coordinate2;
-
-@property (nonatomic, strong) _DCColumnsLayer* columnLayer0;
-@property (nonatomic, strong) _DCColumnsLayer* columnLayer1;
-@property (nonatomic, strong) _DCColumnsLayer* columnLayer2;
-
-@property (nonatomic, strong) _DCLinesLayer* lineLayer0;
-@property (nonatomic, strong) _DCLinesLayer* lineLayer1;
-@property (nonatomic, strong) _DCLinesLayer* lineLayer2;
-
-@property (nonatomic, strong) NSMutableArray* symbolLayers;
-//@property (nonatomic, strong) _DCLineSymbolsLayer* lineSymbolsLayer0;
-//@property (nonatomic, strong) _DCLineSymbolsLayer* lineSymbolsLayer1;
-//@property (nonatomic, strong) _DCLineSymbolsLayer* lineSymbolsLayer2;
-
-@property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer0;
-@property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer1;
-@property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer2;
+@property (nonatomic, strong) NSMutableArray* coodinates;
+@property (nonatomic, strong) NSMutableArray* columnLayers;
+@property (nonatomic, strong) NSMutableArray* lineLayers;
+//@property (nonatomic, strong) NSMutableArray* symbolLayers;
+@property (nonatomic, strong) _DCLineSymbolsLayer* symbolLayer;
 
 @property (nonatomic) CGRect plotRect;
-
-@property (nonatomic) CGSize y0LabelLayerSize;
-@property (nonatomic) CGSize y1LabelLayerSize;
-@property (nonatomic) CGSize y2LabelLayerSize;
 
 @property (nonatomic, strong) NSTimer* timer;
 @property (nonatomic, strong) NSFormatter* xLabelFormatter;
@@ -77,47 +59,21 @@
 - (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange stacked:(BOOL)stacked {
     self = [super initWithFrame:frame];
     if (self) {
-        self.symbolLayers = [[NSMutableArray alloc]init];
+//        self.symbolLayers = [[NSMutableArray alloc]init];
         self.graphContext = [[DCContext alloc]initWithStacked:stacked];
         self.graphContext.hGridlineAmount = 0;
         self.backgoundBands = [[NSMutableArray alloc]init];
 //        self.multipleTouchEnabled = YES;
         _beginHRange = beginHRange;
         _focusPointIndex = INT32_MIN;
+        _visableYAxisAmount = 3;
     }
     return self;
-}
-
--(void)removeFromSuperview {
-//    [self._axisLayer removeFromSuperlayer];
-    [self._hGridlineLayer removeFromSuperlayer];
-    [self._xLabelLayer removeFromSuperlayer];
-    if (self._yLabelLayer0) {
-        [self._yLabelLayer0 removeFromSuperlayer];
-        self._yLabelLayer0 = nil;
-    }
-    if (self._yLabelLayer1) {
-        [self._yLabelLayer1 removeFromSuperlayer];
-        self._yLabelLayer1 = nil;
-    }
-    if (self._yLabelLayer2) {
-        [self._yLabelLayer2 removeFromSuperlayer];
-        self._yLabelLayer2 = nil;
-    }
-    
-//    self._axisLayer = nil;
-    self._hGridlineLayer = nil;
-    self._xLabelLayer = nil;
-    self.coordinate0 = nil;
-    self.coordinate1 = nil;
-    self.coordinate2 = nil;
-    [super removeFromSuperview];
 }
 
 -(void)drawIndicatorLayer {
     if (!self.showIndicatorOnFocus) return;
     self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext];
-    self.indicatorLayer.pointXOffset = self.pointXOffset;
     self.indicatorLayer.frame = CGRectMake(self.plotRect.origin.x, 0, self.plotRect.size.width, self.plotRect.size.height+self.plotPaddingTop);// self.plotRect;
     self.indicatorLayer.symbolLineStyle = self.focusSymbolLineStyle;
     self.indicatorLayer.symbolLineWidth = self.focusSymbolLineWidth;
@@ -127,9 +83,10 @@
 }
 
 -(void)willMoveToSuperview:(UIView *)newSuperview {
-    for (DCXYSeries* s in self.seriesList) {
-        s.pointXOffset = self.pointXOffset;
-    }
+    self.columnLayers = [[NSMutableArray alloc]init];
+    self.lineLayers = [[NSMutableArray alloc]init];
+    [self.graphContext addHRangeObsever:self];
+    
     [self drawAxisLines];
     [self drawHGridline];
     [self drawXLabelLayer];
@@ -141,58 +98,43 @@
     [self.layer addSublayer:self.backgroundBandsLayer];
     [self.backgroundBandsLayer setBands:self.bgBands];
     
-    self.coordinate0 = [self createCoordinateSystem:self.xAxis y:self.yAxis0 series:self.seriesList index:0];
-    self.coordinate1 = [self createCoordinateSystem:self.xAxis y:self.yAxis1 series:self.seriesList index:1];
-    self.coordinate2 = [self createCoordinateSystem:self.xAxis y:self.yAxis2 series:self.seriesList index:2];
-    if (self.coordinate0) {
-        self.columnLayer0 = [self createColumnLayer:self.coordinate0];
-        [self.graphContext addY0RangeObsever:self.columnLayer0];
-        self.lineLayer0 = [self createLineLayer:self.coordinate0];
-        [self.graphContext addY0RangeObsever:self.lineLayer0];
-        [self.graphContext addHRangeObsever:self.columnLayer0];
-        [self.graphContext addHRangeObsever:self.lineLayer0];
+    NSMutableArray* coordiates = [[NSMutableArray alloc]init];
+    for (DCAxis* y in self.yAxisList) {
+        _DCCoordinateSystem* ds = [[_DCCoordinateSystem alloc]initWithChartView:self y:y];
+        ds.isMajor = (coordiates.count == 0);
         
-        self._yLabelLayer0 = [self createYLabelLayer:self.yAxis0];
-        self._yLabelLayer0.isMajorAxis = YES;
-        self._yLabelLayer0.frame = CGRectMake(self.plotPaddingLeft, self.plotPaddingTop, self.y0LabelLayerSize.width, self.y0LabelLayerSize.height);
-        [self.graphContext addY0IntervalObsever:self._yLabelLayer0];
-        [self._yLabelLayer0 setNeedsDisplay];
-    }
-    if (self.coordinate1) {
-        self.columnLayer1 = [self createColumnLayer:self.coordinate1];
-        [self.graphContext addY1RangeObsever:self.columnLayer1];
-        self.lineLayer1 = [self createLineLayer:self.coordinate1];
-        [self.graphContext addY1RangeObsever:self.lineLayer1];
-        [self.graphContext addHRangeObsever:self.columnLayer1];
-        [self.graphContext addHRangeObsever:self.lineLayer1];
-        
-        self._yLabelLayer1 = [self createYLabelLayer:self.yAxis1];
-        self._yLabelLayer1.isMajorAxis = (self._yLabelLayer0 == nil);
-        self._yLabelLayer1.frame = CGRectMake(self._yLabelLayer1.isMajorAxis ? self.plotPaddingLeft : self.plotRect.size.width+self.plotRect.origin.x, 0, self.y1LabelLayerSize.width, self.y1LabelLayerSize.height);
-        [self.graphContext addY1IntervalObsever:self._yLabelLayer1];
-        [self._yLabelLayer1 setNeedsDisplay];
-    }
-    if (self.coordinate2) {
-        self.columnLayer2 = [self createColumnLayer:self.coordinate2];
-        [self.graphContext addY2RangeObsever:self.columnLayer2];
-        self.lineLayer2 = [self createLineLayer:self.coordinate2];
-        [self.graphContext addY2RangeObsever:self.lineLayer2];
-        [self.graphContext addHRangeObsever:self.columnLayer2];
-        [self.graphContext addHRangeObsever:self.lineLayer2];
-        
-        self._yLabelLayer2 = [self createYLabelLayer:self.yAxis2];
-        self._yLabelLayer2.isMajorAxis = (self._yLabelLayer0 == nil && self._yLabelLayer1 == nil);
-        CGFloat x = self.plotPaddingLeft;
-        if (!self._yLabelLayer2.isMajorAxis) {
-            x = (self._yLabelLayer1 == nil) ? (self.plotRect.size.width+self.plotRect.origin.x) : (self.plotRect.size.width+self.plotRect.origin.x + self.y1LabelLayerSize.width);
+        _DCColumnsLayer* columnsLayer = [[_DCColumnsLayer alloc]initWithCoordinateSystem:ds];
+        if (columnsLayer.series.count > 0) {
+            columnsLayer.frame = self.plotRect;
+            [self.layer addSublayer:columnsLayer];
+            [columnsLayer setNeedsDisplay];
+            [self.columnLayers addObject:columnsLayer];
         }
-        self._yLabelLayer2.frame = CGRectMake(x, 0, self.y2LabelLayerSize.width, self.y2LabelLayerSize.height);
-        [self.graphContext addY2IntervalObsever:self._yLabelLayer2];
-        [self._yLabelLayer2 setNeedsDisplay];
+        _DCLinesLayer* linesLayer = [[_DCLinesLayer alloc]initWithCoordinateSystem:ds];
+        if (linesLayer.series.count > 0) {
+//            _DCLineSymbolsLayer* symbols = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
+//            linesLayer.symbolsLayer = symbols;
+//            [self.symbolLayers addObject:symbols];
+            linesLayer.frame = self.plotRect;
+            [self.layer addSublayer:linesLayer];
+            [linesLayer setNeedsDisplay];
+            [self.lineLayers addObject:linesLayer];
+        }
+        if (coordiates.count < self.visableYAxisAmount) {
+            _DCYAxisLabelLayer* _yLabelLayer = (_DCYAxisLabelLayer*)[ds getAxisLabelLayer];
+            [self.layer addSublayer:_yLabelLayer];
+            _yLabelLayer.frame = CGRectMake(ds.isMajor ? ds.yAxis.startPoint.x-ds.yAxis.size.width :ds.yAxis.startPoint.x, self.plotRect.origin.y, ds.yAxis.size.width, ds.yAxis.size.height);
+            [_yLabelLayer setNeedsDisplay];
+        }
+        
+        [coordiates addObject:ds];
     }
-    for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
-        [self.layer addSublayer:symbol];
-    }
+    self.coodinates = coordiates;
+    self.symbolLayer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
+    [self.layer addSublayer:self.symbolLayer];
+//    for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
+//        [self.layer addSublayer:symbol];
+//    }
     [self updateSymbolFrameSize];
     if ([self testHRangeChange:self.beginHRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByInitialize]) {
         self.graphContext.hRange = self.beginHRange;
@@ -211,6 +153,30 @@
     return willChange;
 }
 
+-(void)willHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
+    // Nothing to do.
+}
+
+-(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
+    for (_DCColumnsLayer* columnLayer in self.columnLayers) {
+        [columnLayer redrawWithXRange:newRange yRange:columnLayer.coordinateSystem.yRange];
+    }
+    for (_DCLinesLayer* lineLayer in self.lineLayers) {
+        [lineLayer redrawWithXRange:newRange yRange:lineLayer.coordinateSystem.yRange];
+    }
+    [self renderSymbol];
+}
+
+-(void)renderSymbol {
+    NSMutableArray* lines = [[NSMutableArray alloc]init];
+    NSMutableArray* symbolPoints = [[NSMutableArray alloc]init];
+    for (_DCLinesLayer* lineLayer in self.lineLayers) {
+        [lines addObjectsFromArray:[lineLayer getLines]];
+        [symbolPoints addObjectsFromArray:[lineLayer getSymbols]];
+    }
+    [self.symbolLayer drawSymbolsForPoints:symbolPoints lines:lines inSize:self.plotRect.size];
+}
+
 -(void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     [self updateSymbolFrameSize];
@@ -218,55 +184,12 @@
 
 -(void)updateSymbolFrameSize {
     CGRect symbolFrameSize = CGRectMake(self.plotRect.origin.x, self.plotRect.origin.y, self.plotRect.size.width, self.plotRect.size.height + self.xAxis.lineWidth + self.xAxis.labelToLine);
-    for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
-        symbol.frame = symbolFrameSize;
-    }
+//    for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
+//        symbol.frame = symbolFrameSize;
+//    }
+    self.symbolLayer.frame = symbolFrameSize;
 }
 
--(_DCCoordinateSystem*)createCoordinateSystem:(DCAxis*)x y:(DCAxis*)y series:(NSArray*)series index:(NSUInteger)index{
-    NSMutableArray* seriesList = [[NSMutableArray alloc]init];
-    for (DCXYSeries* s in series) {
-        if (s.yAxis == y) {
-            [self.graphContext addHRangeObsever:s];
-            [seriesList addObject:s];
-        }
-    }
-    if (seriesList.count > 0) {
-        _DCCoordinateSystem* ds = [[_DCCoordinateSystem alloc]initWithSeries:seriesList x:x y:y index:index];
-        ds.graphContext = self.graphContext;
-        [self.graphContext addHRangeObsever:ds];
-        return ds;
-    } else {
-        return nil;
-    }
-}
-
--(_DCColumnsLayer*)createColumnLayer:(_DCCoordinateSystem*)coordinate {
-    _DCColumnsLayer* layer = [[_DCColumnsLayer alloc]initWithCoordinateSystem:coordinate];
-    if (layer.series.count > 0) {
-        layer.graphContext = self.graphContext;
-        layer.frame = self.plotRect;
-        [self.layer addSublayer:layer];
-        [layer setNeedsDisplay];
-        return layer;
-    }
-    return nil;
-}
-
--(_DCLinesLayer*)createLineLayer:(_DCCoordinateSystem*)coordinate {
-    _DCLinesLayer* layer = [[_DCLinesLayer alloc]initWithCoordinateSystem:coordinate];
-    if (layer.series.count > 0) {
-        _DCLineSymbolsLayer* symbols = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
-        layer.symbolsLayer = symbols;
-        [self.symbolLayers addObject:symbols];
-        layer.graphContext = self.graphContext;
-        layer.frame = self.plotRect;
-        [self.layer addSublayer:layer];
-        [layer setNeedsDisplay];
-        return layer;
-    }
-    return nil;
-}
 
 
 -(void)drawXLabelLayer {
@@ -301,27 +224,24 @@
     axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.xAxis.labelFont];
     plotSpaceBottom = plotSpaceBottom - axisSize.height - self.xAxis.lineWidth - self.xAxis.labelToLine;
     
-    axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.yAxis0.labelFont];
-    plotSpaceLeft = plotSpaceLeft + axisSize.width + self.yAxis0.lineWidth + self.yAxis0.labelToLine;
-    self.yAxis0.startPoint = CGPointMake(plotSpaceLeft, self.plotPaddingTop);
-    self.yAxis0.endPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
-    self.y0LabelLayerSize = CGSizeMake(plotSpaceLeft, plotSpaceBottom-self.plotPaddingTop);
-    
-    if (self.yAxis1 && self.yAxis1.visableSeriesAmount > 0) {
-        axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.yAxis1.labelFont];
-        CGFloat axisWidth = axisSize.width + self.yAxis1.lineWidth + self.yAxis1.labelToLine;
-        plotSpaceRight = plotSpaceRight - axisWidth;
-        self.yAxis1.startPoint = CGPointMake(plotSpaceRight, self.plotPaddingTop);
-        self.yAxis1.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
-        self.y1LabelLayerSize = CGSizeMake(axisWidth, plotSpaceBottom-self.plotPaddingTop);
-    }
-    if (self.yAxis2 && self.yAxis2.visableSeriesAmount > 0) {
-        axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.yAxis2.labelFont];
-        CGFloat axisWidth = axisSize.width + self.yAxis2.lineWidth + self.yAxis2.labelToLine;
-        plotSpaceRight = plotSpaceRight - axisWidth;
-        self.yAxis2.startPoint = CGPointMake(plotSpaceRight, self.plotPaddingTop);
-        self.yAxis2.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
-        self.y2LabelLayerSize = CGSizeMake(axisWidth, plotSpaceBottom-self.plotPaddingTop);
+    if (self.yAxisList.count > 0) {
+        DCAxis* majorYAxis = self.yAxisList[0];
+        axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:majorYAxis.labelFont];
+        plotSpaceLeft = plotSpaceLeft + axisSize.width + majorYAxis.lineWidth + majorYAxis.labelToLine;
+        majorYAxis.startPoint = CGPointMake(plotSpaceLeft, self.plotPaddingTop);
+        majorYAxis.endPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
+        majorYAxis.size = CGSizeMake(axisSize.width + majorYAxis.lineWidth + majorYAxis.labelToLine, plotSpaceBottom-self.plotPaddingTop);
+        
+        for (int i = 1; i < self.visableYAxisAmount; i++) {
+            if (i >= self.yAxisList.count) break;
+            DCAxis* secondaryYAxis = self.yAxisList[i];
+            axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:secondaryYAxis.labelFont];
+            CGFloat axisWidth = axisSize.width + secondaryYAxis.lineWidth + secondaryYAxis.labelToLine;
+            plotSpaceRight = plotSpaceRight - axisWidth;
+            secondaryYAxis.startPoint = CGPointMake(plotSpaceRight, self.plotPaddingTop);
+            secondaryYAxis.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
+            secondaryYAxis.size = CGSizeMake(axisWidth, plotSpaceBottom-self.plotPaddingTop);
+        }
     }
     self.xAxis.startPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
     self.xAxis.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
@@ -339,12 +259,6 @@
     [self._hGridlineLayer setNeedsDisplay];
 }
 
--(void)setLineSymbolsHidden:(BOOL)symbolsAreHidden {
-    if (self.lineLayer0) [self.lineLayer0 setSymbolsHidden:symbolsAreHidden];
-    if (self.lineLayer1) [self.lineLayer1 setSymbolsHidden:symbolsAreHidden];
-    if (self.lineLayer2) [self.lineLayer2 setSymbolsHidden:symbolsAreHidden];
-}
-
 -(void)animateHRangeLocation {
     if (self.timer.isValid) {
         double hRangeAnimationStep =  [self.timer.userInfo[@"hRangeAnimationStep"] doubleValue];
@@ -354,7 +268,6 @@
         if ((newLocation >= to && from < to) || (newLocation <= to && from > to)){
             newLocation = to;
             [self.timer invalidate];
-            [self setLineSymbolsHidden:NO];
         }
         DCRange* newRange = [[DCRange alloc]initWithLocation:newLocation length:self.graphContext.hRange.length];
         if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByAnimation]) {
@@ -407,15 +320,6 @@
     }
 }
 
-
-//- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden {
-//    if (series.yAxis == self.yAxis0) [self.columnLayer0 setSeries:series hidden:hidden];
-//    if (series.yAxis == self.yAxis1) [self.columnLayer1 setSeries:series hidden:hidden];
-//    if (series.yAxis == self.yAxis2) [self.columnLayer2 setSeries:series hidden:hidden];
-//    if (hidden) {
-//        
-//    }
-//}
 -(void)setXLabelFormatter:(NSFormatter*)formatter {
     if (self._xLabelLayer) {
         self._xLabelLayer.labelFormatter = formatter;
@@ -433,7 +337,6 @@
         if (self.delegate && [self.delegate respondsToSelector:@selector(touchedInPlotAt:xCoordinate:)]) {
             [self.delegate touchedInPlotAt:touchPoint xCoordinate:[self getXLocationForPoint:touchPoint]];
         }
-//        [self setLineSymbolsHidden:YES];
         if (self.timer.isValid) {
             [self.timer invalidate];
         }
@@ -459,13 +362,12 @@
                 } else if (self.graphContext.hRange.length+self.graphContext.hRange.location>self.graphContext.globalHRange.location+self.graphContext.globalHRange.length) {
                     [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.length+self.graphContext.globalHRange.location-self.graphContext.hRange.length];
                 } else {
-                    [self setLineSymbolsHidden:NO];
+                    
                 }
                 if (self.delegate && [self.delegate respondsToSelector:@selector(panStopped)]) {
                     [self.delegate panStopped];
                 }
             } else {
-                [self setLineSymbolsHidden:YES];
                 DCRange* newRange = [[DCRange alloc]initWithLocation:-translation.x*self.graphContext.hRange.length/self.plotRect.size.width+self.graphContext.hRange.location length:self.graphContext.hRange.length];
                 if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByUserPan]) {
                     self.graphContext.hRange = newRange;
@@ -478,19 +380,14 @@
 }
 
 -(void)viewPinched:(_DCHPinchGestureRecognizer*)gesture {
-    NSSet* touches = gesture.theTouches;
-    if (REMIsNilOrNull(touches) || touches.count != 2) return;
-    UITouch* touch0 = touches.allObjects[0];
-    UITouch* touch1 = touches.allObjects[1];
-    CGFloat preDis = [touch0 previousLocationInView:self].x - [touch1 previousLocationInView:self].x;
-    CGFloat curDis = [touch0 locationInView:self].x - [touch1 locationInView:self].x;
-    CGFloat scale = curDis / preDis;
-    if (scale <= 0) return;
-    DCRange* newRange = [[DCRange alloc]initWithLocation:self.graphContext.hRange.location length:self.graphContext.hRange.length/scale];
+    CGFloat centerX = self.graphContext.hRange.location + self.graphContext.hRange.length * (gesture.centerX - self.plotRect.origin.x) / self.plotRect.size.width;
+    CGFloat start = centerX - (centerX - self.graphContext.hRange.location) * gesture.leftScale;
+    CGFloat end = centerX + (-centerX + self.graphContext.hRange.end) * gesture.rightScale;
+    
+    DCRange* newRange = [[DCRange alloc]initWithLocation:start length:end-start];
     if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByUserPinch]) {
         self.graphContext.hRange = newRange;
     }
-    NSLog(@"pinch:%f %f", self.graphContext.hRange.location, self.graphContext.hRange.length);
 }
 
 
@@ -526,20 +423,21 @@
 -(void)defocus {
     if (self.focusPointIndex == INT32_MIN) return;
     self.focusPointIndex = INT32_MIN;
-    if (self.columnLayer0) [self.columnLayer0 defocus];
-    if (self.columnLayer1) [self.columnLayer1 defocus];
-    if (self.columnLayer2) [self.columnLayer2 defocus];
-    if (self.lineLayer0) [self.lineLayer0 defocus];
-    if (self.lineLayer1) [self.lineLayer1 defocus];
-    if (self.lineLayer2) [self.lineLayer2 defocus];
+    for (_DCColumnsLayer* columnLayer in self.columnLayers) {
+        [columnLayer defocus];
+    }
+    for (_DCLinesLayer* lineLayer in self.lineLayers) {
+        [lineLayer defocus];
+    }
     if (self.indicatorLayer) {
         self.indicatorLayer.symbolLineAt = nil;
         [self.indicatorLayer setNeedsDisplay];
     }
+    [self renderSymbol];
 }
 
 -(void)focusAroundX:(double)x {
-    x-=self.pointXOffset;
+    if (!self.graphContext.pointAlignToTick) x-=0.5;
     DCRange* globalRange = self.graphContext.globalHRange;
     if (x < globalRange.location) x = floor(globalRange.location);
     if (x > globalRange.length+globalRange.length) x = ceil(globalRange.length+globalRange.location);
@@ -550,12 +448,12 @@
 //        
 //    }
         self.focusPointIndex = xRounded;
-        if (self.columnLayer0) [self.columnLayer0 focusOnX:xRounded];
-        if (self.columnLayer1) [self.columnLayer1 focusOnX:xRounded];
-        if (self.columnLayer2) [self.columnLayer2 focusOnX:xRounded];
-        if (self.lineLayer0) [self.lineLayer0 focusOnX:xRounded];
-        if (self.lineLayer1) [self.lineLayer1 focusOnX:xRounded];
-        if (self.lineLayer2) [self.lineLayer2 focusOnX:xRounded];
+        for (_DCColumnsLayer* columnLayer in self.columnLayers) {
+            [columnLayer focusOnX:xRounded];
+        }
+        for (_DCLinesLayer* lineLayer in self.lineLayers) {
+            [lineLayer focusOnX:xRounded];
+        }
         if (self.indicatorLayer) {
             self.indicatorLayer.symbolLineAt = @(xRounded);
             [self.indicatorLayer setNeedsDisplay];
@@ -576,6 +474,7 @@
             [self.delegate focusPointChanged:points];
         }
     }
+    [self renderSymbol];
 }
 
 -(void)setBackgoundBands:(NSArray *)bands {

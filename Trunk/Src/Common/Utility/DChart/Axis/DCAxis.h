@@ -48,6 +48,7 @@
 //@property (nonatomic) DCAxisLabelAlign labelAlign;
 @property (nonatomic) CGPoint startPoint;   //绘制轴线时的起点
 @property (nonatomic) CGPoint endPoint;     //绘制轴线时的终点
+@property (nonatomic) CGSize size;
 
 @property (nonatomic, assign) NSUInteger visableSeriesAmount;  // 附加在该轴上的可见的序列的数量。主要用于y轴的隐藏。
 

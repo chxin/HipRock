@@ -27,6 +27,4 @@
 - (NSDictionary *)realExport;
 
 
-- (void)horizonalMoving;
-- (void)horizonalStopped;
 @end

@@ -30,8 +30,6 @@
 
 - (void)initTitle:(NSString *)text withSize:(CGFloat)size withLeftMargin:(CGFloat)leftMargin;
 
-- (NSString *)addThousandSeparator:(NSNumber *)number;
-
 - (void) setTitleIcon:(UIImage *)image;
 
 - (void)showLoading;

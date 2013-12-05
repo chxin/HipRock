@@ -9,6 +9,9 @@
 #import "_DCColumnsLayer.h"
 #import "DCUtility.h"
 #import "REMColor.h"
+#import "DCDataPoint.h"
+#import "DCXYSeries.h"
+#import "DCColumnSeries.h"
 
 @interface _DCColumnsLayer()
 @property (nonatomic, strong) _DCLayerTrashbox* trashbox;
@@ -30,8 +33,6 @@
 }
 
 -(void)redraw {
-    
-    
     BOOL caTransationState = CATransaction.disableActions;
     [CATransaction setDisableActions:YES];
     BOOL allSeriesAreHidden = YES;
@@ -120,11 +121,12 @@
     [self.trashbox.trashLayerBox removeAllObjects];
 }
 
-
 -(CGRect) getRectForSeries:(DCColumnSeries*)series index:(NSUInteger)index stackedHeight:(double)stackedHeight {
     DCDataPoint* point = series.datas[index];
     CGFloat columnHeight = [self getHeightOfPoint:point];
-    return CGRectMake(self.frame.size.width * (index + series.pointXOffset + series.xRectStartAt - self.graphContext.hRange.location) / self.graphContext.hRange.length, self.frame.size.height-columnHeight-stackedHeight, self.frame.size.width * series.columnWidthInCoordinate / self.graphContext.hRange.length, columnHeight);
+    CGFloat pointXOffset = 0;
+    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
+    return CGRectMake(self.frame.size.width * (index + pointXOffset + series.xRectStartAt - self.graphContext.hRange.location) / self.graphContext.hRange.length, self.frame.size.height-columnHeight-stackedHeight, self.frame.size.width * series.columnWidthInCoordinate / self.graphContext.hRange.length, columnHeight);
 }
 
 -(CGFloat)getHeightOfPoint:(DCDataPoint*)point {
@@ -137,20 +139,6 @@
 
 -(BOOL)isValidSeriesForMe:(DCXYSeries*)series {
     return [series isKindOfClass:[DCColumnSeries class]];
-}
-
--(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
-    if ([DCRange isRange:oldRange equalTo:newRange]) return;
-    if ([DCRange isRange:self.yRange equalTo:newRange]) return;
-    [super didYRangeChanged:oldRange newRange:newRange];
-    [self redraw];
-}
-
--(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
-    if ([DCRange isRange:oldRange equalTo:newRange]) return;
-    if ([DCRange isRange:self.xRange equalTo:newRange]) return;
-    [super didHRangeChanged:oldRange newRange:newRange];
-    [self redraw];
 }
 
 -(void)focusOnX:(int)x {

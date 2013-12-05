@@ -8,6 +8,7 @@
 
 #import "DCRankingWrapper.h"
 #import "_DCRankingXLabelFormatter.h"
+#import "DCDataPoint.h"
 
 @implementation DCRankingWrapper
 
@@ -35,7 +36,7 @@
     [self quickSort:datas left:0 right:datas.count-1];
     DCXYSeries* s = [[NSClassFromString(self.defaultSeriesClass) alloc]initWithEnergyData:datas];
     s.xAxis = view.xAxis;
-    s.yAxis = view.yAxis0;
+//    s.yAxis = view.yAxis0;
     s.yAxis.axisTitle = targetEnergy.target.uomName;
     [self customizeSeries:s seriesIndex:index chartStyle:style];
     
@@ -44,6 +45,28 @@
     _DCRankingXLabelFormatter* formatter = [[_DCRankingXLabelFormatter alloc]initWithSeries:s];
     [view setXLabelFormatter:formatter];
     return s;
+}
+
+-(void)customizeView:(DCXYChartView*)view {
+    view.graphContext.pointAlignToTick = NO;
+    view.graphContext.xLabelAlignToTick = NO;
+}
+
+-(NSArray*)createYAxes:(NSArray*)series {
+    DCXYSeries* s = series[0];
+    DCAxis* y = [[DCAxis alloc]init];
+    s.yAxis = y;
+    y.axisTitle = REMEmptyString;
+    y.labelToLine = self.style.yLabelToLine;
+    if (self.style.yLineStyle) {
+        y.lineColor = self.style.yLineStyle.lineColor.uiColor;
+        y.lineWidth = self.style.yLineStyle.lineWidth;
+    }
+    if (self.style.yTextStyle) {
+        y.labelColor = self.style.yTextStyle.color.uiColor;
+        y.labelFont = [UIFont fontWithName:self.style.yTextStyle.fontName size:self.style.yTextStyle.fontSize];
+    }
+    return @[y];
 }
 
 -(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
@@ -68,7 +91,7 @@
     int rangeCode = self.rankingRangeCode;
     int datasAmount = self.energyViewData.targetEnergyData.count;
     
-    return @{ @"globalRange": [[DCRange alloc]initWithLocation:-0.5 length:datasAmount], @"beginRange": [[DCRange alloc]initWithLocation:-0.5 length:MIN(rangeCode, datasAmount)], @"xformatter": [NSNull null] };
+    return @{ @"globalRange": [[DCRange alloc]initWithLocation:0 length:datasAmount], @"beginRange": [[DCRange alloc]initWithLocation:0 length:MIN(rangeCode, datasAmount)], @"xformatter": [NSNull null] };
 }
 
 -(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
