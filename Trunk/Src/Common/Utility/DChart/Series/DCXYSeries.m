@@ -32,7 +32,8 @@
     _visableRange = newVisableRange;
     
     if (start >= self.datas.count) return;
-    NSNumber* y = @(0);
+    NSNumber* yMax = @(INT16_MIN);
+    NSNumber* yMin = @(INT16_MAX);
     // 从RangeStart向前再搜索一个非空点
     for (int j = start-1; j >= 0; j--) {
         DCDataPoint* point = self.datas[j];
@@ -41,8 +42,11 @@
         } else if (point.pointType == DCDataPointTypeBreak) {
             break;
         } else {
-            if ([y compare:point.value] == NSOrderedAscending) {
-                y = point.value;
+            if ([yMax compare:point.value] == NSOrderedAscending) {
+                yMax = point.value;
+            }
+            if ([yMin compare:point.value] == NSOrderedDescending) {
+                yMin = point.value;
             }
             break;
         }
@@ -51,8 +55,11 @@
     for (int j = start; j <= end; j++) {
         DCDataPoint* point = self.datas[j];
         if (point.pointType == DCDataPointTypeNormal) {
-            if ([y compare:point.value] == NSOrderedAscending) {
-                y = point.value;
+            if ([yMax compare:point.value] == NSOrderedAscending) {
+                yMax = point.value;
+            }
+            if ([yMin compare:point.value] == NSOrderedDescending) {
+                yMin = point.value;
             }
         }
     }
@@ -64,13 +71,17 @@
         } else if (point.pointType == DCDataPointTypeBreak) {
             break;
         } else {
-            if ([y compare:point.value] == NSOrderedAscending) {
-                y = point.value;
+            if ([yMax compare:point.value] == NSOrderedAscending) {
+                yMax = point.value;
+            }
+            if ([yMin compare:point.value] == NSOrderedDescending) {
+                yMin = point.value;
             }
             break;
         }
     }
-    _visableYMax = y;
+    _visableYMax = yMax;
+    _visableYMin = yMin;
 }
 
 -(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
