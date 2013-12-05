@@ -57,9 +57,13 @@
     for(int i=0;i<self.data.targetEnergyData.count;i++){
         REMTargetEnergyData *targetData = self.data.targetEnergyData[i];
         
+        if(REMIsNilOrNull(targetData) || REMIsNilOrNull(targetData.energyData) || targetData.energyData.count<=0 || REMIsNilOrNull(targetData.energyData[0])){
+            continue;
+        }
+        
         REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
         model.title = [self formatTargetName:targetData.target];
-        model.value = REMIsNilOrNull(targetData.energyData[0]) ? nil : [targetData.energyData[0] dataValue];
+        model.value = [targetData.energyData[0] dataValue];
         model.color = [REMColor colorByIndex:i].uiColor;
         model.index = i;
         
