@@ -24,9 +24,9 @@
 @interface REMGalleryViewController ()
 
 @property (nonatomic,strong) NSMutableDictionary *buildingGroups;
+@property (nonatomic,strong) NSArray *orderedProvinceKeys;
 @property (nonatomic,weak) UITableView *galleryTableView;
 @property (nonatomic) BOOL isSegueAnimated;
-@property (nonatomic,weak) REMGalleryCollectionCell *focusedCell;
 
 @end
 
@@ -109,7 +109,7 @@
     tableView.delegate = self;
     tableView.backgroundColor = [UIColor clearColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    [tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
+    [tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
 //    tableView.layer.borderColor = [UIColor blueColor].CGColor;
 //    tableView.layer.borderWidth = 1.0;
     
@@ -125,24 +125,52 @@
 
 -(void)groupBuildings
 {
-    if(self.buildingGroups == nil){
-        self.buildingGroups = [[NSMutableDictionary alloc] init];
+    self.buildingGroups = [[NSMutableDictionary alloc] init];
+    int capacity = REMProvinceOrder.count+1;
+    NSMutableArray *tempKeys = [[NSMutableArray alloc] initWithCapacity:capacity];
+    for(int i=0; i<capacity; i++)
+        tempKeys[i] = @(0);
+    
+    
+    for(int i = 0; i<self.buildingInfoArray.count; i++){
+        REMBuildingOverallModel *buildingInfo = self.buildingInfoArray[i];
+        NSString *province = buildingInfo.building.province;
         
-        for(int i=0;i<REMProvinceOrder.count;i++){
-            NSString *province = REMProvinceOrder[i];
-            NSMutableArray *buildings = [[NSMutableArray alloc] init];
-            
-            for (REMBuildingOverallModel *buildingInfo in self.buildingInfoArray) {
-                if(!REMIsNilOrNull(buildingInfo.building.province) && [buildingInfo.building.province rangeOfString:province].length>0){
-                    [buildings addObject:buildingInfo];
-                }
-            }
-            
-            if(buildings.count > 0){
-                [self.buildingGroups setObject:buildings forKey:province];
-            }
+        int index = [self getProvinceIndex:province];
+        
+        if(index == -1){
+            province = @"海外";
+            index = REMProvinceOrder.count;
         }
+        
+        NSMutableArray *elements = REMIsNilOrNull(self.buildingGroups[province]) ? [[NSMutableArray alloc] init] : self.buildingGroups[province];
+        
+        [elements addObject:buildingInfo];
+        [tempKeys setObject:province atIndexedSubscript:index];
+        
+        [self.buildingGroups setObject:elements forKey:province];
     }
+    
+    NSMutableArray *keys = [[NSMutableArray alloc] init];
+    for(int i=0;i<tempKeys.count;i++){
+        if([tempKeys[i] isKindOfClass:[NSNumber class]] == NO)
+           [keys addObject:tempKeys[i]];
+    }
+    
+    self.orderedProvinceKeys = keys;
+}
+
+-(int)getProvinceIndex:(NSString *)province
+{
+    if([province isEqual:[NSNull null]] || province == nil || [province isEqualToString:@""])
+        return -1;
+    
+    for(int i=0;i<REMProvinceOrder.count;i++){
+        if([province rangeOfString:REMProvinceOrder[i]].length>0)
+            return i;
+    }
+    
+    return -1;
 }
 
 -(CGRect)getGalleryGroupCellFrame:(int)buildingCount
@@ -155,9 +183,9 @@
 
 -(void)uncoverCell
 {
-    if(self.focusedCell != nil){
-        [self.focusedCell uncoverMe];
-    }
+//    if(self.focusedCell != nil){
+//        self.focusedCell.alpha = 1.0f;
+//    }
 }
 
 #pragma mark -UITableView data source delegate
@@ -168,35 +196,39 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.buildingGroups allKeys].count;
+    return self.orderedProvinceKeys.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *key = [self.buildingGroups allKeys][indexPath.row];
+    NSString *key = self.orderedProvinceKeys[indexPath.row];
     NSArray *array = [self.buildingGroups objectForKey:key];
     
-    REMGalleryCollectionViewController *collectionController = [[REMGalleryCollectionViewController alloc] initWithKey:key andBuildingInfoArray:array];
-    [self addChildViewController:collectionController];
-    
-    //REMGalleryGroupView *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier_GalleryGroupCell forIndexPath:indexPath];
-    CGFloat y = tableView.frame.origin.y;
-    for(int i=0; i<indexPath.row-1; i++){
-        y += [self getGalleryGroupCellFrame:[self.buildingGroups[[self.buildingGroups allKeys][indexPath.row]] count]].size.height;
+    REMGalleryCollectionViewController *collectionController = nil;
+    for(int i=0;i<self.childViewControllers.count;i++){
+        UIViewController *controller  = self.childViewControllers[i];
+        if([controller isKindOfClass:[REMGalleryCollectionViewController class]] && [((REMGalleryCollectionViewController *)controller).collectionKey isEqualToString:key]){
+            collectionController = (REMGalleryCollectionViewController *)controller;
+            break;
+        }
     }
     
-    CGRect cellFrame = CGRectMake(tableView.frame.origin.x, y, tableView.frame.size.width, [self getGalleryGroupCellFrame:array.count].size.height);
-    REMGalleryGroupView *cell = [[REMGalleryGroupView alloc] initWithFrame:cellFrame];
+    if(collectionController == nil){
+        collectionController = [[REMGalleryCollectionViewController alloc] initWithKey:key andBuildingInfoArray:array];
+        [self addChildViewController:collectionController];
+    }
+    
+    REMGalleryGroupView *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier_GalleryGroupCell forIndexPath:indexPath];
     
     [cell setGroupTitle:key];
-    [cell setCollectionView:collectionController.collectionView];
+    [cell setCollectionView:collectionController.view];
     
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *array = [self.buildingGroups objectForKey:[self.buildingGroups allKeys][indexPath.row]];
+    NSArray *array = [self.buildingGroups objectForKey:self.orderedProvinceKeys[indexPath.row]];
     
     return [self getGalleryGroupCellFrame:array.count].size.height;
 }
@@ -225,8 +257,7 @@
 
 -(void)presentBuildingViewFromCell:(REMGalleryCollectionCell *)cell animated:(BOOL)isAnimated
 {
-    //[self.view setUserInteractionEnabled:NO];
-    self.focusedCell = cell;
+    [self.view setUserInteractionEnabled:NO];
     
     CGRect cellFrameInView = [self getGalleryCollectionCellFrameInGalleryView:cell];
     
@@ -236,6 +267,8 @@
     if(!isAnimated){
         self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
     }
+    self.focusedCell.alpha = 0.5;
+    self.focusedCell = cell;
     
     [self performSegueWithIdentifier:kSegue_GalleryToBuilding sender:self];
 }
@@ -263,37 +296,25 @@
 -(CGRect)getDestinationZoomRect:(int)currentBuildingIndex
 {
     // Find the collection controller
-    REMGalleryCollectionViewController *currentCollectionController = nil;
+    REMGalleryCollectionCell *cell = [self galleryCellForBuildingIndex:currentBuildingIndex];
     
-    for(UIViewController *controller in self.childViewControllers){
-        if([controller class] == [REMGalleryCollectionViewController class]){
-            currentCollectionController = (REMGalleryCollectionViewController *)controller;
-            NSString *controllerKey = currentCollectionController.collectionKey;
-            
-            REMBuildingModel *building = [self.buildingInfoArray[currentBuildingIndex] building];
-            
-            if(!REMIsNilOrNull(controllerKey) && [controllerKey isEqualToString:building.province]){
-                currentCollectionController = (REMGalleryCollectionViewController *)controller;
-                break;
-            }
-        }
-    }
-    
-    // Find the cell, get its frame and return
-    UICollectionViewCell *cell = [currentCollectionController cellForBuilding:[self.buildingInfoArray[currentBuildingIndex] building].buildingId];
     self.currentBuildingIndex = currentBuildingIndex;
+    
+//    self.focusedCell.alpha = 1.0;
+//    //cell.alpha = 0.5;
+    self.focusedCell = cell;
     
     return [self getGalleryCollectionCellFrameInGalleryView:cell];
 }
 
 
--(CGRect)getGalleryCollectionCellFrameInGalleryView:(UICollectionViewCell *)cell
+-(CGRect)getGalleryCollectionCellFrameInGalleryView:(REMGalleryCollectionCell *)cell
 {
     UIView *collectionView = cell.superview;
-    CGRect cellFrameInCollectionVIew = cell.frame;
+    CGRect cellFrameInCollectionView = cell.frame;
     
     UIView *cycleView = collectionView;
-    CGRect cellFrameInGalleryView = cellFrameInCollectionVIew;
+    CGRect cellFrameInGalleryView = cellFrameInCollectionView;
     
     while(![cycleView isEqual:self.view]){
         cellFrameInGalleryView = [cycleView convertRect:cellFrameInGalleryView toView: cycleView.superview];
@@ -301,6 +322,46 @@
     }
     
     return cellFrameInGalleryView;
+    //CGPoint point = [cell convertPoint:cell.frame.origin toView:self.galleryTableView];
+    
+    
+//    NSLog(@"cell point: %@", NSStringFromCGPoint(cell.frame.origin));
+//    NSLog(@"cell point in gallery view: %@", NSStringFromCGPoint(point));
+    
+//    NSLog(@"cell %@ frame: %@", cell.titleLabel.text, NSStringFromCGRect(cell.frame));
+//    CGRect cellFrameInGalleryView = [cell convertRect:cell.frame toView:self.view];
+//    NSLog(@"cell %@ frame in view: %@", cell.titleLabel.text, NSStringFromCGRect(cellFrameInGalleryView));
+    
+    
+//    return cellFrameInGalleryView;
+}
+
+-(void)takeSnapshot
+{
+    self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
+}
+
+-(REMGalleryCollectionCell *)galleryCellForBuildingIndex:(int)buildingIndex
+{
+    REMBuildingModel *currentBuilding = [self.buildingInfoArray[buildingIndex] building];
+    
+    REMGalleryCollectionViewController *currentCollectionController = nil;
+    
+    for(UIViewController *controller in self.childViewControllers){
+        if([controller isKindOfClass:[REMGalleryCollectionViewController class]]){
+            currentCollectionController = (REMGalleryCollectionViewController *)controller;
+            NSString *controllerKey = currentCollectionController.collectionKey;
+            
+            if(!REMIsNilOrNull(controllerKey) && [controllerKey isEqualToString:currentBuilding.province]){
+                currentCollectionController = (REMGalleryCollectionViewController *)controller;
+                break;
+            }
+        }
+    }
+    
+    REMGalleryCollectionCell *cell = [currentCollectionController cellForBuilding:currentBuilding.buildingId];
+    
+    return cell;
 }
 
 #pragma mark - IOS7 style

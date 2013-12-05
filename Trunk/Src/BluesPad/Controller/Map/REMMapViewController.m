@@ -51,6 +51,10 @@
     [self.view.layer insertSublayer:self.titleGradientLayer above:self.mapView.layer];
     
     [self showMarkers];
+    
+    if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
+        [self.view setUserInteractionEnabled:NO];
+    }
 }
 
 -(void)addButtons

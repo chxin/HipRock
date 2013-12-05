@@ -76,7 +76,7 @@
         transitionView.center = [REMViewHelper getCenterOfRect:self.parameter.finalZoomFrame];
     } completion:^(BOOL finished){
         [transitionView removeFromSuperview];
-        //[sourceView setUserInteractionEnabled:YES];
+        [sourceView setUserInteractionEnabled:YES];
         [[self.sourceViewController navigationController] pushViewController:buildingController animated:NO];
     }];
 }
@@ -107,7 +107,7 @@
         [transitionView removeFromSuperview];
         [snapshot removeFromSuperview];
         
-        //[buildingView setUserInteractionEnabled:YES];
+        [buildingView setUserInteractionEnabled:YES];
         [buildingController.navigationController popViewControllerAnimated:NO];
     }];
 }

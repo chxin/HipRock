@@ -13,7 +13,7 @@
 
 @interface REMGalleryCollectionCell ()
 
-@property (nonatomic,weak) UIView *cover;
+//@property (nonatomic,weak) UIView *cover;
 
 @end
 
@@ -73,30 +73,16 @@
     self.snapshot = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:self]];
     
     //add black cover
-    [self coverMe];
+    [self setHidden:YES];
 }
 
 -(void)endPinch
 {
-    [self uncoverMe];
+    [self setHidden:NO];
     
     [self.snapshot removeFromSuperview];
     self.snapshot = nil;
 }
 
--(void)coverMe
-{
-    UIView *coverView = [[UIView alloc] initWithFrame:self.bounds];
-    coverView.backgroundColor = kDMGallery_BackgroundColor;
-    
-    [self addSubview:coverView];
-    self.cover = coverView;
-}
-
--(void)uncoverMe
-{
-    [self.cover removeFromSuperview];
-    self.cover = nil;
-}
 
 @end

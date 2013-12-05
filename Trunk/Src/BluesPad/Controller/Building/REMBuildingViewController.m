@@ -464,8 +464,18 @@ const static CGFloat buildingGap=20;
 
 -(void)back
 {
-    if ([self.fromController respondsToSelector:@selector(uncoverCell)]) {
-        [(id)self.fromController uncoverCell];
+//    if ([self.fromController respondsToSelector:@selector(uncoverCell)]) {
+//        [(id)self.fromController uncoverCell];
+//    }
+    
+    if([self.fromController isKindOfClass:[REMGalleryViewController class]]){
+        REMGalleryViewController *gallergyController = (REMGalleryViewController *)self.fromController;
+        
+        REMGalleryCollectionCell *cell = [gallergyController galleryCellForBuildingIndex:self.currentBuildingIndex];
+        gallergyController.focusedCell.alpha = 1.0;
+        cell.alpha = 0.5;
+        
+        [gallergyController takeSnapshot];
     }
     
     [REMDataAccessor cancelAccess];

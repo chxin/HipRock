@@ -13,6 +13,6 @@
 //-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier andFrame:(CGRect)frame;
 
 -(void)setGroupTitle:(NSString *)title;
--(void)setCollectionView:(UICollectionView *)collectionView;
+-(void)setCollectionView:(UIView *)collectionView;
 
 @end
