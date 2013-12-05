@@ -640,7 +640,7 @@
     
     
     [newBgImage drawInRect:self.imageView.frame];
-    [[REMImageHelper imageWithView:self.logoButton] drawInRect:self.logoButton.frame];
+    [[REMImageHelper imageWithView:self.logoButton] drawInRect:CGRectMake(self.backButton.frame.origin.x, self.backButton.frame.origin.y, self.logoButton.frame.size.width, self.logoButton.frame.size.height)];
     [[REMImageHelper imageWithLayer:self.buildingTypeTitleView.layer] drawInRect:self.buildingTypeTitleView.frame];
     [[REMImageHelper imageWithLayer:self.buildingTitleView.layer] drawInRect:self.buildingTitleView.frame];
     //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
