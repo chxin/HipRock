@@ -141,4 +141,20 @@
         [rankingSeries.seriesLayer setNeedsDisplay];
     }
 }
+-(void)focusPointChanged:(NSArray *)dcpoints at:(int)x {
+    BOOL refocus = NO;
+    if (x >= ((DCXYSeries*)self.view.seriesList[0]).datas.count) {
+        x = ((DCXYSeries*)self.view.seriesList[0]).datas.count - 1;
+        refocus = YES;
+    }
+    if (x < 0) {
+        refocus = YES;
+        x = 0;
+    }
+    if (!refocus) {
+        [super focusPointChanged:dcpoints at:x];
+    } else {
+        [self.view focusAroundX:x];
+    }
+}
 @end

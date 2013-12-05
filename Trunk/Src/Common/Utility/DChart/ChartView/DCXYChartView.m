@@ -437,12 +437,18 @@
 }
 
 -(void)focusAroundX:(double)x {
-    if (!self.graphContext.pointAlignToTick) x-=0.5;
+    int xRounded = 0;
+    if (self.graphContext.pointAlignToTick) {
+        xRounded = floor(x-0.5);
+    } else {
+        xRounded = floor(x);
+    }
     DCRange* globalRange = self.graphContext.globalHRange;
-    if (x < globalRange.location) x = floor(globalRange.location);
-    if (x > globalRange.length+globalRange.length) x = ceil(globalRange.length+globalRange.location);
+    int globalStartCeil = ceil(globalRange.location);
+    int globalEndFloor = floor(globalRange.end);
+    if (xRounded < globalStartCeil) xRounded = globalStartCeil;
+    if (xRounded > globalEndFloor) xRounded = globalEndFloor;
     
-    int xRounded = floor(x+0.5);
     if (xRounded != self.focusPointIndex) {
 //    while (![self hasPointsAtX:xRounded]) {
 //        
@@ -459,7 +465,7 @@
             [self.indicatorLayer setNeedsDisplay];
         }
         
-        if (self.delegate && [self.delegate respondsToSelector:@selector(focusPointChanged:)]) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(focusPointChanged:at:)]) {
             NSMutableArray* points = [[NSMutableArray alloc]init];
             for (DCXYSeries* s in self.seriesList) {
                 if (xRounded < 0 || xRounded >= s.datas.count) {
@@ -471,7 +477,7 @@
                     [points addObject:s.datas[self.focusPointIndex]];
                 }
             }
-            [self.delegate focusPointChanged:points];
+            [self.delegate focusPointChanged:points at:xRounded];
         }
     }
     [self renderSymbol];
