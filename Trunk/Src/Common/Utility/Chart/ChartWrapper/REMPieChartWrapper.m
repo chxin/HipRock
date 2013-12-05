@@ -40,4 +40,9 @@
 -(UIView*)getView {
     return self.view;
 }
+-(void)redraw:(REMEnergyViewData *)energyViewData {
+    id<REMTPieChartDelegate> delegate = ((REMPieChartView*)[self getView]).delegate;
+    [super redraw:energyViewData];
+    ((REMPieChartView*)self.view).delegate = delegate;
+}
 @end
