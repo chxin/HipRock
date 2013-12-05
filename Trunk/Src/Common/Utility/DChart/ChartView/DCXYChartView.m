@@ -204,15 +204,6 @@
     [self._xLabelLayer setNeedsDisplay];
 }
 
--(_DCYAxisLabelLayer*) createYLabelLayer:(DCAxis*)yAxis {
-    _DCYAxisLabelLayer* _yLabelLayer = [[_DCYAxisLabelLayer alloc]initWithContext:self.graphContext];
-    _yLabelLayer.axis = yAxis;
-    _yLabelLayer.font = yAxis.labelFont;
-    _yLabelLayer.fontColor = yAxis.labelColor;
-    [self.layer addSublayer:_yLabelLayer];
-    return _yLabelLayer;
-}
-
 -(void)drawAxisLines {
     float plotSpaceLeft = self.plotPaddingLeft;
     float plotSpaceRight = self.frame.size.width - plotSpaceLeft - self.plotPaddingRight;
