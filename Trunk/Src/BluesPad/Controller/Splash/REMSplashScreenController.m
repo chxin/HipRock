@@ -154,7 +154,7 @@
     
     REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
     NSMutableArray* sereis = [[NSMutableArray alloc]init];
-    for (int sIndex = 0; sIndex < 1; sIndex++) {
+    for (int sIndex = 0; sIndex < 10; sIndex++) {
         NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
         for (int i = 0; i < 10000; i++) {
             REMEnergyData* data = [[REMEnergyData alloc]init];
@@ -175,7 +175,7 @@
         [sereis addObject:sData];
     }
     energyViewData.visibleTimeRange = r;
-    energyViewData.globalTimeRange = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10]];
+    energyViewData.globalTimeRange = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10000]];
     
     energyViewData.targetEnergyData = sereis;
     
