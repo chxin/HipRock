@@ -18,10 +18,10 @@ struct REMBuildingSegueZoomParamter {
 };
 typedef struct REMBuildingSegueZoomParamter REMBuildingSegueZoomParamter;
 
-static inline REMBuildingSegueZoomParamter  REMBuildingSegueZoomParamterMake(BOOL animation, int index, CGRect iniFrame, CGRect finFrame){
+static inline REMBuildingSegueZoomParamter  REMBuildingSegueZoomParamterMake(BOOL noanimation, int index, CGRect iniFrame, CGRect finFrame){
     REMBuildingSegueZoomParamter parameter;
     parameter.currentBuildingIndex = index;
-    parameter.isNoAnimation = animation;
+    parameter.isNoAnimation = noanimation;
     parameter.initialZoomFrame = iniFrame;
     parameter.finalZoomFrame = finFrame;
     

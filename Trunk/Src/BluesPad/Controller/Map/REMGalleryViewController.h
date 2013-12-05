@@ -22,10 +22,9 @@
 @property (nonatomic,weak) REMGalleryCollectionCell *focusedCell;
 
 #pragma mark - Methods
+-(void)presentBuildingViewFromCell:(REMGalleryCollectionCell *)cell animated:(BOOL)isNoAnimation;
+
 -(CGRect)getDestinationZoomRect:(int)currentBuildingIndex;
--(void)presentBuildingViewFromCell:(REMGalleryCollectionCell *)cell animated:(BOOL)isAnimated;
--(int)buildingIndexFromBuilding:(REMBuildingModel *)building;
--(void)uncoverCell;
 -(void)takeSnapshot;
 -(REMGalleryCollectionCell *)galleryCellForBuildingIndex:(int)buildingIndex;
 

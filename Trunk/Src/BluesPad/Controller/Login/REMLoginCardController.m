@@ -249,8 +249,10 @@
     }
     else if([textField isEqual:self.passwordTextField])
     {
-        [self loginButtonPressed:nil];
-        retValue = YES;
+        if(self.loginButton.isEnabled == YES){ //only call login when login button is enabled
+            [self loginButtonPressed:nil];
+            retValue = YES;
+        }
     }
     else
     {

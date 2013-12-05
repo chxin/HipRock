@@ -19,6 +19,7 @@
 #import "REMGalleryGroupView.h"
 #import "REMGalleryCollectionViewController.h"
 #import "REMImages.h"
+#import "REMBuildingOverallModel.h"
 
 
 @interface REMGalleryViewController ()
@@ -26,38 +27,18 @@
 @property (nonatomic,strong) NSMutableDictionary *buildingGroups;
 @property (nonatomic,strong) NSArray *orderedProvinceKeys;
 @property (nonatomic,weak) UITableView *galleryTableView;
-@property (nonatomic) BOOL isSegueAnimated;
+@property (nonatomic) BOOL isSegueNotAnimated;
 
 @end
 
 
-/*Group order
- 北京
- 上海
- 天津
- 重庆
- /按首字母排列其他省/
- /按首字母排列其他自治区/
- 香港特别行政区
- 澳门特别行政区
- 台湾地区
- */
-
 @implementation REMGalleryViewController
 
-
--(void)loadView
-{
-    [super loadView];
-    
-    //NSLog(@"gallery frame in loadView:%@", NSStringFromCGRect(self.view.frame));
-}
+#define REMGalleryTableCellHeight(c) (kDMGallery_GalleryGroupTitleFontSize + kDMGallery_GalleryCollectionViewTopMargin + kDMGallery_GalleryCollectionViewBottomMargin + ((((c) / 6) + 1) * kDMGallery_GalleryCellHeight) + (((c) / 6) * kDMGallery_GalleryCellVerticleSpace))
 
 
 -(void)viewDidLoad
 {
-    //NSLog(@"gallery frame in viewDidLoad:%@", NSStringFromCGRect(self.view.frame));
-    
     //set self styles
     [self stylize];
     
@@ -74,54 +55,17 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     //NSLog(@"gallery frame in viewWillAppear:%@", NSStringFromCGRect(self.view.frame));
+    
+    //self.focusedCell.alpha = 1.0;
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     //NSLog(@"gallery frame in viewDidAppear:%@", NSStringFromCGRect(self.view.frame));
-}
-
--(void)addButtons
-{
-    //add switch button
-    UIButton *switchButton = [[UIButton alloc]initWithFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, REMDMCOMPATIOS7( kDMCommon_TopLeftButtonTop),kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
-    [switchButton setBackgroundImage:REMIMG_Map forState:UIControlStateNormal];
-    [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:switchButton];
-    
-    //add customer logo button
-    UIButton *logoButton = self.customerLogoButton;
-    logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
-    [self.view addSubview:logoButton];
 }
 
--(void)stylize
-{
-    self.view.frame = kDMDefaultViewFrame;
-    self.view.backgroundColor = kDMGallery_BackgroundColor;
-}
-
--(void)addGalleryGroupView
-{
-    UITableView *tableView = [[UITableView alloc] initWithFrame:kDMGallery_GalleryTableViewFrame style:UITableViewStylePlain];
-    tableView.dataSource = self;
-    tableView.delegate = self;
-    tableView.backgroundColor = [UIColor clearColor];
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
-//    tableView.layer.borderColor = [UIColor blueColor].CGColor;
-//    tableView.layer.borderWidth = 1.0;
-    
-    self.galleryTableView = tableView;
-    [self.view addSubview:self.galleryTableView];
-}
-
-
--(void)switchButtonPressed
-{
-    [self performSegueWithIdentifier:kSegue_GalleryToMap sender:self];
-}
+#pragma mark - Data
 
 -(void)groupBuildings
 {
@@ -154,7 +98,7 @@
     NSMutableArray *keys = [[NSMutableArray alloc] init];
     for(int i=0;i<tempKeys.count;i++){
         if([tempKeys[i] isKindOfClass:[NSNumber class]] == NO)
-           [keys addObject:tempKeys[i]];
+            [keys addObject:tempKeys[i]];
     }
     
     self.orderedProvinceKeys = keys;
@@ -173,22 +117,53 @@
     return -1;
 }
 
--(CGRect)getGalleryGroupCellFrame:(int)buildingCount
+#pragma mark - Render
+
+-(void)addButtons
 {
-    int rowCount = (buildingCount / 6) + 1;
-    CGFloat cellHeight = kDMGallery_GalleryGroupTitleFontSize + kDMGallery_GalleryCollectionViewTopMargin + kDMGallery_GalleryCollectionViewBottomMargin + (rowCount * kDMGallery_GalleryCellHeight) + ((rowCount - 1) * kDMGallery_GalleryCellVerticleSpace);
+    //add switch button
+    UIButton *switchButton = [[UIButton alloc]initWithFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, REMDMCOMPATIOS7( kDMCommon_TopLeftButtonTop),kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
+    [switchButton setBackgroundImage:REMIMG_Map forState:UIControlStateNormal];
+    [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
-    return CGRectMake(0, 0, kDMGallery_GalleryGroupViewWidth, cellHeight+1);
+    [self.view addSubview:switchButton];
+    
+    //add customer logo button
+    UIButton *logoButton = self.customerLogoButton;
+    logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
+    [self.view addSubview:logoButton];
 }
 
--(void)uncoverCell
+-(void)stylize
 {
-//    if(self.focusedCell != nil){
-//        self.focusedCell.alpha = 1.0f;
-//    }
+    self.view.frame = kDMDefaultViewFrame;
+    self.view.backgroundColor = kDMGallery_BackgroundColor;
 }
 
-#pragma mark -UITableView data source delegate
+-(void)addGalleryGroupView
+{
+    UITableView *tableView = [[UITableView alloc] initWithFrame:kDMGallery_GalleryTableViewFrame style:UITableViewStylePlain];
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    tableView.backgroundColor = [UIColor clearColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.showsVerticalScrollIndicator = NO;
+    tableView.showsHorizontalScrollIndicator = NO;
+    [tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
+//    tableView.layer.borderColor = [UIColor blueColor].CGColor;
+//    tableView.layer.borderWidth = 1.0;
+    
+    self.galleryTableView = tableView;
+    [self.view addSubview:self.galleryTableView];
+}
+
+-(void)switchButtonPressed
+{
+    [self performSegueWithIdentifier:kSegue_GalleryToMap sender:self];
+}
+
+
+#pragma mark - UITableView delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -230,7 +205,7 @@
 {
     NSArray *array = [self.buildingGroups objectForKey:self.orderedProvinceKeys[indexPath.row]];
     
-    return [self getGalleryGroupCellFrame:array.count].size.height;
+    return REMGalleryTableCellHeight(array.count);
 }
 
 -(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
@@ -246,7 +221,7 @@
     {
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
         
-        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(self.isSegueAnimated, self.currentBuildingIndex, self.initialZoomRect, self.view.frame)];
+        [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(self.isSegueNotAnimated, self.currentBuildingIndex, self.initialZoomRect, self.view.frame)];
         
         REMBuildingViewController *buildingViewController = customSegue.destinationViewController;
         buildingViewController.buildingInfoArray = self.buildingInfoArray;
@@ -255,25 +230,27 @@
     }
 }
 
--(void)presentBuildingViewFromCell:(REMGalleryCollectionCell *)cell animated:(BOOL)isAnimated
+//will be called when tap or pinch end
+//if tap, isNoAmination parameter will be NO since segue will show the zooming animation
+//if pinch end, isNoAmination parameter will be YES since pinch will play zooming animation
+-(void)presentBuildingViewFromCell:(REMGalleryCollectionCell *)cell animated:(BOOL)isNoAnimation
 {
-    [self.view setUserInteractionEnabled:NO];
+    if(!isNoAnimation){
+        [self.view setUserInteractionEnabled:NO];
+    }
     
     CGRect cellFrameInView = [self getGalleryCollectionCellFrameInGalleryView:cell];
     
-    self.isSegueAnimated = isAnimated;
+    self.isSegueNotAnimated = isNoAnimation;
     self.initialZoomRect = cellFrameInView;
-    self.currentBuildingIndex = [self buildingIndexFromBuilding:cell.building];
-    if(!isAnimated){
-        self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
+    self.currentBuildingIndex = [REMBuildingOverallModel indexOfBuilding:cell.building inBuildingOverallArray:self.buildingInfoArray];//  [self buildingIndexFromBuilding:cell.building];
+    if(!isNoAnimation){
+        [self takeSnapshot];
     }
-    self.focusedCell.alpha = 0.5;
     self.focusedCell = cell;
     
     [self performSegueWithIdentifier:kSegue_GalleryToBuilding sender:self];
 }
-
-
 
 -(IBAction)unwindSegueToGallery:(UIStoryboardSegue *)sender
 {
@@ -281,65 +258,6 @@
 }
 
 #pragma mark - Private methods
-
--(int)buildingIndexFromBuilding:(REMBuildingModel *)building
-{
-    for(int i=0;i<self.buildingInfoArray.count;i++){
-        REMBuildingOverallModel *buildingInfo = self.buildingInfoArray[i];
-        if([buildingInfo.building.buildingId isEqualToNumber:building.buildingId])
-            return i;
-    }
-    
-    return 0;
-}
-
--(CGRect)getDestinationZoomRect:(int)currentBuildingIndex
-{
-    // Find the collection controller
-    REMGalleryCollectionCell *cell = [self galleryCellForBuildingIndex:currentBuildingIndex];
-    
-    self.currentBuildingIndex = currentBuildingIndex;
-    
-//    self.focusedCell.alpha = 1.0;
-//    //cell.alpha = 0.5;
-    self.focusedCell = cell;
-    
-    return [self getGalleryCollectionCellFrameInGalleryView:cell];
-}
-
-
--(CGRect)getGalleryCollectionCellFrameInGalleryView:(REMGalleryCollectionCell *)cell
-{
-    UIView *collectionView = cell.superview;
-    CGRect cellFrameInCollectionView = cell.frame;
-    
-    UIView *cycleView = collectionView;
-    CGRect cellFrameInGalleryView = cellFrameInCollectionView;
-    
-    while(![cycleView isEqual:self.view]){
-        cellFrameInGalleryView = [cycleView convertRect:cellFrameInGalleryView toView: cycleView.superview];
-        cycleView = cycleView.superview;
-    }
-    
-    return cellFrameInGalleryView;
-    //CGPoint point = [cell convertPoint:cell.frame.origin toView:self.galleryTableView];
-    
-    
-//    NSLog(@"cell point: %@", NSStringFromCGPoint(cell.frame.origin));
-//    NSLog(@"cell point in gallery view: %@", NSStringFromCGPoint(point));
-    
-//    NSLog(@"cell %@ frame: %@", cell.titleLabel.text, NSStringFromCGRect(cell.frame));
-//    CGRect cellFrameInGalleryView = [cell convertRect:cell.frame toView:self.view];
-//    NSLog(@"cell %@ frame in view: %@", cell.titleLabel.text, NSStringFromCGRect(cellFrameInGalleryView));
-    
-    
-//    return cellFrameInGalleryView;
-}
-
--(void)takeSnapshot
-{
-    self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
-}
 
 -(REMGalleryCollectionCell *)galleryCellForBuildingIndex:(int)buildingIndex
 {
@@ -364,8 +282,39 @@
     return cell;
 }
 
-#pragma mark - IOS7 style
+-(CGRect)getDestinationZoomRect:(int)currentBuildingIndex
+{
+    REMGalleryCollectionCell *cell = [self galleryCellForBuildingIndex:currentBuildingIndex];
+    
+    self.currentBuildingIndex = currentBuildingIndex;
+    
+    self.focusedCell = cell;
+    
+    return [self getGalleryCollectionCellFrameInGalleryView:cell];
+}
 
+-(CGRect)getGalleryCollectionCellFrameInGalleryView:(REMGalleryCollectionCell *)cell
+{
+    UIView *collectionView = cell.superview;
+    CGRect cellFrameInCollectionView = cell.frame;
+    
+    UIView *cycleView = collectionView;
+    CGRect cellFrameInGalleryView = cellFrameInCollectionView;
+    
+    while(![cycleView isEqual:self.view]){
+        cellFrameInGalleryView = [cycleView convertRect:cellFrameInGalleryView toView: cycleView.superview];
+        cycleView = cycleView.superview;
+    }
+    
+    return cellFrameInGalleryView;
+}
+
+-(void)takeSnapshot
+{
+    self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
+}
+
+#pragma mark - IOS7 style
 -(UIStatusBarStyle)preferredStatusBarStyle{
     
 #if  __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_6_1

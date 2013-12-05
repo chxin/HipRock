@@ -63,4 +63,18 @@
     self.electricityUsageThisMonth = [[REMCommodityUsageModel alloc] initWithDictionary:dictionary[@"ElectricUsageThisMonth"]];
 }
 
++(int)indexOfBuilding:(REMBuildingModel *)building inBuildingOverallArray:(NSArray *)array
+{
+    return [array indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        REMBuildingOverallModel *buildingOverall = obj;
+        
+        if([buildingOverall.building.buildingId isEqualToNumber:building.buildingId]){
+            *stop = YES;
+            return YES;
+        }
+        
+        return NO;
+    }];
+}
+
 @end
