@@ -152,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IW-uy-Qy4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4154" y="-2099"/>
+            <point key="canvasLocation" x="4770" y="-2099"/>
         </scene>
         <!--Widget Max View Controller-->
         <scene sceneID="kih-fe-Pxz">
@@ -180,7 +180,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ndb-ap-11w" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="sO2-LG-KMS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1180" y="-1166"/>
+            <point key="canvasLocation" x="1796" y="-1166"/>
         </scene>
         <!--Date Picker View Controller - 选择日期-->
         <scene sceneID="IK4-ou-HLv">
@@ -231,7 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PEv-YT-C1q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4154" y="-1166"/>
+            <point key="canvasLocation" x="4770" y="-1166"/>
         </scene>
         <!--Relative Date View Controller - 默认日期-->
         <scene sceneID="DIC-c2-Wkg">
@@ -271,53 +271,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OQK-x4-bHt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5662" y="-1166"/>
-        </scene>
-        <!--Login Customer View Controller - 请选择客户-->
-        <scene sceneID="cWq-0w-6Ae">
-            <objects>
-                <tableViewController autoresizesArchivedViewToFullSize="NO" id="CHr-fQ-ik4" customClass="REMLoginCustomerViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="LRA-X0-FCk">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loginCustomerCell" textLabel="ebq-25-up5" style="IBUITableViewCellStyleDefault" id="16D-3f-5O4">
-                                <rect key="frame" x="0.0" y="119" width="400" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="16D-3f-5O4" id="54Q-Zy-Bdo">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ebq-25-up5">
-                                            <rect key="frame" x="15" y="0.0" width="370" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="CHr-fQ-ik4" id="ape-uW-bGl"/>
-                            <outlet property="delegate" destination="CHr-fQ-ik4" id="e7o-DZ-2NI"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="请选择客户" id="qAd-kb-FAB">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="dCQ-hr-UPF">
-                            <connections>
-                                <action selector="cancelButtonPressed:" destination="CHr-fQ-ik4" id="a2p-wg-22v"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RSN-tn-dnu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2623" y="634"/>
+            <point key="canvasLocation" x="6278" y="-1166"/>
         </scene>
         <!--Login Carousel Controller-->
         <scene sceneID="MgP-x0-zlk">
@@ -336,9 +290,6 @@
                     <navigationItem key="navigationItem" id="ZIr-Dy-6v7"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <connections>
-                        <segue destination="aGJ-if-abd" kind="modal" identifier="loginCustomerSegue" id="cMx-qB-szE"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mjp-Au-mwu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -722,7 +673,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N1S-i0-15H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="480" y="-1357"/>
+            <point key="canvasLocation" x="-119" y="-293"/>
         </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="KV1-Ck-0FS">
@@ -741,26 +692,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="byd-8r-pNi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-5891" y="-1294"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Di9-cL-lUr">
-            <objects>
-                <navigationController autoresizesArchivedViewToFullSize="NO" definesPresentationContext="YES" modalPresentationStyle="formSheet" id="aGJ-if-abd" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xVn-S4-tNw">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="CHr-fQ-ik4" kind="relationship" relationship="rootViewController" id="ypd-eT-xKr"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sU8-el-sNE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3420" y="524"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YZd-Lj-m7L">
@@ -798,7 +729,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ai5-vc-Ijo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2692" y="-1166"/>
+            <point key="canvasLocation" x="3308" y="-1166"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -807,6 +738,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="jmn-Ww-5Fz"/>
+        <segue reference="RbE-hG-htp"/>
     </inferredMetricsTieBreakers>
 </document>
