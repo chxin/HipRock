@@ -92,6 +92,8 @@
 #define kDMChart_TooltipItemDataValueTopOffset (kDMChart_TooltipItemTitleTopOffset + kDMChart_TooltipItemTitleFontSize + 7)
 #define kDMChart_TooltipItemDataValueFontSize 24//17
 #define kDMChart_TooltipItemDataValueColor @"#686868"
+#define kDMChart_TooltipItemDataValueUomFontSize 14//17
+#define kDMChart_TooltipItemDataValueUomColor @"#686868"
 
 #define kDMChart_RankingTooltipNumeratorFontSize 39
 #define kDMChart_RankingTooltipNumeratorFontColor @"#212121"
