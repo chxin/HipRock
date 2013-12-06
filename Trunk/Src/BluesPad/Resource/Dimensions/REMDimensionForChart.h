@@ -50,7 +50,7 @@
 //tooltip
 #define kDMChart_TooltipViewHeight REMDMCOMPATIOS7(118)
 #define kDMChart_TooltipViewWidth kDMScreenWidth
-#define kDMChart_TooltipViewBackgroundColor @"#f8f8f8"
+#define kDMChart_TooltipViewBackgroundColor @"#f4f4f4"
 #define kDMChart_TooltipFrame CGRectMake(0, 0, kDMChart_TooltipViewWidth, kDMChart_TooltipViewHeight)
 #define kDMChart_TooltipHiddenFrame CGRectMake(0, -kDMChart_TooltipViewHeight, kDMChart_TooltipViewWidth, kDMChart_TooltipViewHeight)
 
