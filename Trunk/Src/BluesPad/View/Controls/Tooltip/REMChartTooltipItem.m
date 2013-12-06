@@ -104,13 +104,13 @@
 
 -(void)updateDataValue:(REMChartTooltipItemModel *)model
 {
-    NSString *text = [NSString stringWithFormat:@"%@%@", REMIsNilOrNull(model.value) ? @" ": [model.value stringValue], model.uom];
+    NSString *text = [NSString stringWithFormat:@"%@ %@", REMIsNilOrNull(model.value) ? @"": [model.value stringValue], model.uom];
     
     
     NSRange uomRange = [text rangeOfString:model.uom];
     NSRange valueRange = NSMakeRange(0, text.length - uomRange.length);
     
-    NSLog(@"valueRange:%@,uomRange:%@", NSStringFromRange(valueRange), NSStringFromRange(uomRange));
+    //NSLog(@"valueRange:%@,uomRange:%@", NSStringFromRange(valueRange), NSStringFromRange(uomRange));
     
     UIFont *valueFont = [UIFont systemFontOfSize:kDMChart_TooltipItemDataValueFontSize];
     UIColor *valueColor = [REMColor colorByHexString:kDMChart_TooltipItemDataValueColor];
