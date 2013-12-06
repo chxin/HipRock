@@ -41,10 +41,14 @@ const static CGFloat kRankingTimePickerWidth=250;
                   .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
     self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
     UIActivityIndicatorView *loader=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [loader setColor:[UIColor grayColor]];
-    [loader setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.8]];
-    loader.translatesAutoresizingMaskIntoConstraints=NO;
+    [loader setColor:[UIColor blackColor]];
+    [loader setBackgroundColor:[UIColor clearColor]];
+    UIView *image=[[UIView alloc]init];
+    [image setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.4]];
+    image.translatesAutoresizingMaskIntoConstraints=NO;
+    self.searcher.loadingBackgroundView=image;
     self.searcher.loadingView=loader;
+    loader.translatesAutoresizingMaskIntoConstraints=NO;
     REMWidgetRankingSearchModel *m=(REMWidgetRankingSearchModel *)self.model;
     m.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
 }
