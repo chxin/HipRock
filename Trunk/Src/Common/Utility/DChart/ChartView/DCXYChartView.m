@@ -145,6 +145,11 @@
     [super willMoveToSuperview: newSuperview];
 }
 
+-(void)removeFromSuperview {
+    self.graphContext = nil;
+    [super removeFromSuperview];
+}
+
 -(BOOL)testHRangeChange:(DCRange*)newRange oldRange:(DCRange*)oldRange sendBy:(DCHRangeChangeSender)senderType {
     BOOL willChange = YES;
     if (self.delegate && [self.delegate respondsToSelector:@selector(testHRangeChange:oldRange:sendBy:)]) {
