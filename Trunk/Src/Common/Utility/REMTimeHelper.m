@@ -126,6 +126,13 @@
     return [dayComponents month];
 }
 
++ (NSUInteger)getWeekDay:(NSDate *)date {
+    NSCalendar *calendar = [REMTimeHelper currentCalendar];
+    NSDateComponents *dayComponents = [calendar components:(NSWeekdayCalendarUnit) fromDate:date];
+    
+    return [dayComponents weekday];
+}
+
 
 + (NSUInteger)getDay:(NSDate *)date {
     NSCalendar *calendar = [REMTimeHelper currentCalendar];
@@ -564,6 +571,75 @@ static NSCalendar *_currentCalendar;
     NSDate *localDate = [NSDate dateWithTimeIntervalSinceReferenceDate:localTimeInterval];
     
     return localDate;
+}
+
++(NSString *)formatTooltipTime:(NSDate *)time byStep:(REMEnergyStep)step inRange:(REMTimeRange *)timeRange
+{
+    NSDateFormatter *f = [REMTimeHelper currentFormatter];
+    
+    switch (step) {
+        case REMEnergyStepHour:{
+            [f setDateFormat:@"yyyy年MM月dd日HH点"];
+            NSString *s1 = [f stringFromDate:time];
+            
+            NSDate *newDate = [time dateByAddingTimeInterval:60*60];
+            NSString *s2 = @"";
+            
+            if([REMTimeHelper getHour:newDate] < [REMTimeHelper getHour:time]){
+                s2 = @"24点";
+            }
+            else{
+                [f setDateFormat:@"HH点"];
+                s2 = [f stringFromDate:newDate];
+            }
+            
+            return [NSString stringWithFormat:@"%@-%@",s1,s2];
+        }
+        case REMEnergyStepDay:{
+            [f setDateFormat:@"yyyy年MM月dd日"];
+            return [f stringFromDate:time];
+        }
+        case REMEnergyStepMonth:{
+            [f setDateFormat:@"yyyy年MM月"];
+            return [f stringFromDate:time];
+        }
+        case REMEnergyStepYear:{
+            [f setDateFormat:@"yyyy年"];
+            return [f stringFromDate:time];
+        }
+        case REMEnergyStepWeek:{//week 2010年10月3日-10日,2010年10月29日-11月5日,2010年12月29日-2011年1月5日{}
+            [f setDateFormat:@"yyyy年MM月dd日"];
+            
+            int weekDay = [REMTimeHelper getWeekDay:time];
+            NSDate *date = [time dateByAddingTimeInterval:(0-weekDay+1) * 60 * 60];
+            NSString *s1 = [f stringFromDate:date];
+            
+            NSString *s2 = @"";
+            NSDate *newDate = [REMTimeHelper add:6 onPart:REMDateTimePartDay ofDate:date];
+            if ([REMTimeHelper getYear:newDate] > [REMTimeHelper getYear:date]) {
+                //2010年12月29日-2011年1月5日
+                //str += '-' + eft(newDate, ft.FullDay);
+                s2 = [f stringFromDate:newDate];
+            }
+            else if ([REMTimeHelper getMonth:newDate] > [REMTimeHelper getMonth:date]) {
+                //2010年10月29日-11月5日
+                //str += '-' + eft(newDate, ft.MonthDate);
+                [f setDateFormat:@"MM月dd日"];
+                s2 = [f stringFromDate:newDate];
+            }
+            else {
+                //2010年10月3日-10日
+                //str += '-' + eft(newDate, ft.Day);
+                [f setDateFormat:@"dd日"];
+                s2 = [f stringFromDate:date];
+            }
+            
+            return [NSString stringWithFormat:@"%@-%@",s1,s2];
+        }
+            
+        default:
+            return [REMTimeHelper formatTimeFullHour:time isChangeTo24Hour:YES];
+    }
 }
 
 @end

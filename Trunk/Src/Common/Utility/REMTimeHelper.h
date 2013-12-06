@@ -80,4 +80,8 @@ typedef enum _REMDateTimePart : NSUInteger{
 +(NSCalendar *)gregorianCalendar;
 +(NSCalendar *)currentCalendar;
 +(NSDate *)convertGMTDateToLocal:(NSDate *)GMTDate;
+
++(NSString *)formatTooltipTime:(NSDate *)time byStep:(REMEnergyStep)step inRange:(REMTimeRange *)timeRange;
+
+
 @end
