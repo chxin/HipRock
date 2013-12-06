@@ -714,16 +714,6 @@
             </objects>
             <point key="canvasLocation" x="-1340" y="-2233"/>
         </scene>
-        <!--Building Share View Controller-->
-        <scene sceneID="MnH-Nj-E5s">
-            <objects>
-                <viewController storyboardIdentifier="sharePopover" modalPresentationStyle="currentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="MgH-BN-oHb" customClass="REMBuildingShareViewController" sceneMemberID="viewController">
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="N1S-i0-15H" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="480" y="-1357"/>
-        </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="KV1-Ck-0FS">
             <objects>
