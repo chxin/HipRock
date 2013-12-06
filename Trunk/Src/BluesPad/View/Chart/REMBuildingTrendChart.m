@@ -51,7 +51,7 @@
         [self addSubview:self.noDataLabel];
     }
     
-    self.legendView = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height - kBuildingTrendChartLegendHeight + 23, frame.size.width, kBuildingTrendChartLegendHeight)];
+    self.legendView = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height - kBuildingTrendChartLegendHeight + 18, frame.size.width, kBuildingTrendChartLegendHeight)];
     [self addSubview: self.legendView];
     return self;
 }
