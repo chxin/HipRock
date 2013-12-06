@@ -91,20 +91,25 @@
             }
         } else {
             for (DCXYSeries* s in self.visableSeries) {
-                double yMax = s.visableYMax.doubleValue;
-                double yMin = s.visableYMin.doubleValue;
-                if (yMax > currentYMax) currentYMax = yMax;
-                if (yMin < currentYMin) currentYMin = yMin;
+                if (!REMIsNilOrNull(s.visableYMin)) {
+                    double yMax = s.visableYMax.doubleValue;
+                    if (yMax > currentYMax) currentYMax = yMax;
+                }
+                if (!REMIsNilOrNull(s.visableYMin)) {
+                    double yMin = s.visableYMin.doubleValue;
+                    if (yMin < currentYMin) currentYMin = yMin;
+                }
             }
         }
+        if (currentYMax == INT32_MIN) currentYMax = 0;
+        if (currentYMin == INT32_MIN) currentYMin = 0;
         
         // 根据maxY计算YRange并通知所有的YRangeObserver
-        double yInterval = [DCUtility getYInterval:currentYMax parts:self.graphContext.hGridlineAmount];
-        double newRangeLength = yInterval * self.graphContext.hGridlineAmount * kDCReservedSpace;
-        DCRange* newYRange = [[DCRange alloc]initWithLocation:0 length:newRangeLength];
+        DCYAxisIntervalCalculation calResult = [DCUtility calculatorYAxisByMin:currentYMin yMax:currentYMax parts:self.graphContext.hGridlineAmount];
+        DCRange* newYRange = [[DCRange alloc]initWithLocation:0 length:calResult.yMax];
         if ([self testYRange:newYRange visableMax:currentYMax visableMin:currentYMin]) {
             [self setYRange:newYRange];
-            self.yInterval = yInterval;
+            self.yInterval = calResult.yInterval;
         }
     }
 }
