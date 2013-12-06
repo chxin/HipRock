@@ -43,6 +43,7 @@
     
     if(self){
         [self renderItems2];
+        [self renderPointer];
     }
     
     return self;
@@ -266,6 +267,17 @@
         self.centerItem.alpha = 0.4f;
     }
         
+}
+
+-(void)renderPointer
+{
+    CGSize imageSize = REMIMG_TooltipsArrow_Chart.size;
+    UIImageView *pointer = [[UIImageView alloc] initWithImage: REMIMG_TooltipsArrow_Chart];
+//    pointer.layer.borderColor = [UIColor orangeColor].CGColor;
+//    pointer.layer.borderWidth = 1.0;
+    pointer.center = CGPointMake(kDMChart_TooltipViewWidth/2, kDMChart_TooltipViewHeight + imageSize.height/2);
+    
+    [self addSubview:pointer];
 }
 
 @end

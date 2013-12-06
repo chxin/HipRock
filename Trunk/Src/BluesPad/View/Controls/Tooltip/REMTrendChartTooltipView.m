@@ -140,8 +140,13 @@
 {
     DCDataPoint *point = self.highlightedPoints[0];
     
+    NSString *text = [self formatTimeText:point.energyData.localTime];
+    if(self.widget.contentSyntax.dataStoreType == REMDSEnergyMultiTimeTrend){
+        text = point.target.name;
+    }
+    
     UILabel *timeLabel = [[UILabel alloc] initWithFrame:kDMChart_TooltipTimeViewFrame];
-    timeLabel.text = [self formatTimeText:point.energyData.localTime];
+    timeLabel.text = text;
     timeLabel.textColor = [REMColor colorByHexString:kDMChart_TooltipTimeViewFontColor];
     timeLabel.font = [UIFont systemFontOfSize:kDMChart_TooltipTimeViewFontSize];
     timeLabel.backgroundColor = [UIColor clearColor];
@@ -156,6 +161,14 @@
 
 -(NSString *)formatTimeText:(NSDate *)time
 {
+    if([self.parameters isKindOfClass:[REMWidgetStepEnergyModel class]]){
+        REMWidgetStepEnergyModel *stepModel = (REMWidgetStepEnergyModel *)self.parameters;
+        
+        REMEnergyStep step = stepModel.step;
+        
+        return [REMTimeHelper formatTooltipTime:time byStep:step inRange:nil];
+    }
+    
     return [REMTimeHelper formatTimeFullHour:time isChangeTo24Hour:YES];
 }
 

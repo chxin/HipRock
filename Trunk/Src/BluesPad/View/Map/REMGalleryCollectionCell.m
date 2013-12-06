@@ -29,8 +29,9 @@
         //self.backgroundView = [[UIImageView alloc] initWithFrame:kDMGallery_GalleryCellFrame];
         
         UIButton *button = [[UIButton alloc] initWithFrame:self.bounds];
-        [button setBackgroundImage:REMIMG_DefaultBuilding_Small forState:UIControlStateNormal];
+        [button setImage:REMIMG_DefaultBuilding_Small forState:UIControlStateNormal];
         button.imageView.contentMode = UIViewContentModeScaleToFill;
+        button.contentMode = UIViewContentModeScaleToFill;
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [button addTarget:self action:@selector(pressed:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -48,12 +49,6 @@
         
         UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinching:)];
         [self addGestureRecognizer:pinchRecognizer];
-        
-//        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
-//        [self addGestureRecognizer:tapRecognizer];
-        
-//        UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(pressed:)];
-//        [self addGestureRecognizer:longPressRecognizer];
     }
     
     return self;
@@ -62,13 +57,6 @@
 
 -(void)pressed:(id)button
 {
-//    if(tapRecognizer.state == UIGestureRecognizerStateBegan){
-//        NSLog(@"tap begin");
-//    }
-//    if(tapRecognizer.state == UIGestureRecognizerStateEnded){
-//        NSLog(@"tap end");
-//    }
-    
     [self.controller galleryCellTapped:self];
 }
 

@@ -67,9 +67,9 @@
     REMRankingTooltipItemModel *rankingModel = (REMRankingTooltipItemModel *)model;
     
     self.nameLabel.text = model.title;
-    self.numeratorLabel.text = [NSString stringWithFormat:@"%d",rankingModel.numerator];
     self.denominatorLabel.text = [NSString stringWithFormat:@"/%d",rankingModel.denominator];
     
+    [self updateNumerator:rankingModel];
     [self updateDataValue:model];
 }
 
@@ -149,6 +149,24 @@
 -(CGSize)getRankingSize
 {
     return CGSizeMake(self.numeratorLabel.frame.size.width+self.denominatorLabel.frame.size.width, self.numeratorLabel.frame.size.height);
+}
+
+
+-(void)updateNumerator:(REMRankingTooltipItemModel *)model
+{
+    NSString *text = [NSString stringWithFormat:@"%d",model.numerator];
+    
+    CGSize oldSize = self.numeratorLabel.frame.size;
+    CGSize newSize = [text sizeWithFont:[UIFont systemFontOfSize:kDMChart_RankingTooltipNumeratorFontSize]];
+    
+    CGFloat diff = newSize.width - oldSize.width;
+    
+    CGRect numeratorFrame = CGRectMake(self.numeratorLabel.frame.origin.x,self.numeratorLabel.frame.origin.y,newSize.width,oldSize.height);
+    CGRect denominatorFrame = CGRectMake(self.denominatorLabel.frame.origin.x + diff, self.denominatorLabel.frame.origin.y, self.denominatorLabel.frame.size.width, self.denominatorLabel.frame.size.height);
+    
+    self.numeratorLabel.text = text;
+    self.numeratorLabel.frame = numeratorFrame;
+    self.denominatorLabel.frame = denominatorFrame;
 }
 
 @end

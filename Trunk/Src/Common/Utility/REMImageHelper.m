@@ -103,6 +103,66 @@
 
 }
 
++ (UIImage *)blurImageGaussian:(UIImage *)origImage{
+
+    [EAGLContext setCurrentContext:nil];
+
+    EAGLContext *myEAGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    if([EAGLContext setCurrentContext:myEAGLContext] == NO){
+        return nil;
+    }
+    NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
+    [options setObject: [NSNull null] forKey: kCIContextWorkingColorSpace];
+    CIContext *myContext = [CIContext contextWithEAGLContext:myEAGLContext options:options];
+
+
+    UIImage *image=origImage;
+    if(origImage.size.width>1024){
+        CGSize newSize=CGSizeMake(origImage.size.width/2, origImage.size.height/2);
+        UIGraphicsBeginImageContext(newSize);
+        [origImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        image=newImage;
+    }
+
+
+
+
+
+    // CIContext *myContext = [CIContext contextWithOptions:nil];
+    CIImage *ci = [[CIImage alloc]initWithCGImage:image.CGImage];
+
+    CIFilter *filter1 = [CIFilter filterWithName:@"CIGaussianBlur"
+                                   keysAndValues: kCIInputImageKey,ci,@"inputRadius",@(15),nil];
+
+    CIImage *outputImage = [filter1 outputImage];
+
+    //NSLog(@"image size:%@",NSStringFromCGSize(imageView.image.size));
+
+    //UIScreen *screen = [UIScreen mainScreen];
+
+    //CGRect frame = CGRectMake(0, 0, screen.bounds.size.height*screen.scale,screen.bounds.size.width*screen.scale);
+
+    //NSLog(@"blur frame:%@",NSStringFromCGRect(frame));
+
+    CGRect retFrame=CGRectMake(0, 0, image.size.width*image.scale, image.size.height*image.scale);
+
+    //NSLog(@"retframe:%@",NSStringFromCGRect(retFrame));
+
+    CGImageRef cgimg =
+    [myContext createCGImage:outputImage fromRect:retFrame];
+    
+    
+    UIImage *view= [UIImage imageWithCGImage:cgimg];
+    CGImageRelease(cgimg);
+    
+    [EAGLContext setCurrentContext:nil];
+    
+    
+    
+    return view;
+}
 
 + (UIImage *)blurImage:(UIImage *)origImage
 {

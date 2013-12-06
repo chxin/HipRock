@@ -30,6 +30,7 @@
 
 + (NSString *)buildingImagePathWithId:(NSNumber *)imageId andType:(REMBuildingImageType)type;
 
++ (UIImage *)blurImageGaussian:(UIImage *)origImage;
 
 
 + (void)writeImageFile:(UIImage *)image withFullPath:(NSString *)fullPath;
