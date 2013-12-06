@@ -55,7 +55,8 @@
         UILabel *valueLabel = [self renderDataValueLabel:model];
         [self addSubview:valueLabel];
         self.valueLabel = valueLabel;
-
+        
+        [self updateDataValue:model];
     }
     
     return self;
@@ -66,9 +67,10 @@
     REMRankingTooltipItemModel *rankingModel = (REMRankingTooltipItemModel *)model;
     
     self.nameLabel.text = model.title;
-    self.valueLabel.text = [super formatDataValue:model];
     self.numeratorLabel.text = [NSString stringWithFormat:@"%d",rankingModel.numerator];
     self.denominatorLabel.text = [NSString stringWithFormat:@"/%d",rankingModel.denominator];
+    
+    [self updateDataValue:model];
 }
 
 
@@ -137,10 +139,7 @@
     CGRect frame = CGRectMake(labelLeftOffset, labelTopOffset, self.frame.size.width - labelLeftOffset, height);
     
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
-    label.text = [super formatDataValue:model];
     label.backgroundColor = [UIColor clearColor];
-    label.font = font;
-    label.textColor = [REMColor colorByHexString:kDMChart_TooltipItemDataValueColor];
 //    label.layer.borderWidth = 1.0;
 //    label.layer.borderColor = [UIColor purpleColor].CGColor;
     

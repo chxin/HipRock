@@ -258,6 +258,8 @@
     if(self.centerItem == nil) return;
     
     if(isLighten){
+//        self.centerItem.layer.borderColor = [UIColor redColor].CGColor;
+//        self.centerItem.layer.borderWidth = 1.0;
         self.centerItem.alpha = 1.0f;
     }
     else{

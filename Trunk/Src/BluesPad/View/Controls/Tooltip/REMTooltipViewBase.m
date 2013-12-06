@@ -96,7 +96,6 @@
 -(UIView *)renderContentView
 {
     UIView *contentView = [[UIView alloc] initWithFrame:kDMChart_TooltipContentViewFrame];
-    NSLog(@"content view frame: %@", NSStringFromCGRect(contentView.frame));
     
     return contentView;
 }
