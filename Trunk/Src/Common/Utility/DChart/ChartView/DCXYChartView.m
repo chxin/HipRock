@@ -395,6 +395,7 @@
         if (REMIsNilOrNull(self.tapGsRec)) {
             self.tapGsRec = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewTapped:)];
             self.panGsRec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(viewPanned:)];
+            self.panGsRec.maximumNumberOfTouches = 1;
             self.pinchGsRec = [[_DCHPinchGestureRecognizer alloc]initWithTarget:self action:@selector(viewPinched:)];
             [self addGestureRecognizer:self.tapGsRec];
             [self addGestureRecognizer:self.panGsRec];
