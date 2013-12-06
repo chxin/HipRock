@@ -22,6 +22,7 @@
 @property (nonatomic,strong) REMToggleButton *thisYearButton;
 @property (nonatomic,strong) REMToggleButton *lastYearButton;
 @property (nonatomic,strong) REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,strong) UIView *legendView;
 @property (nonatomic,strong) CPTGraphHostingView *hostView;
 @property (nonatomic,strong) UILabel *noDataLabel;
 @property (nonatomic,strong) REMToggleButtonGroup* toggleGroup;
