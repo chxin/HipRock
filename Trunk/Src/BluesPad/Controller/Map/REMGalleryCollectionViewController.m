@@ -100,6 +100,7 @@
     REMGalleryViewController *galleryController = (REMGalleryViewController *)self.parentViewController;
     
     if(pinch.state  == UIGestureRecognizerStateBegan){
+        [cell.backgroundButton setAdjustsImageWhenHighlighted:NO];
         self.isPinching = YES;
         [cell beginPinch]; //snapshot will be ready
         //galleryController.snapshot = [[UIImageView alloc] initWithImage:[REMImageHelper imageWithView:galleryController.view]];
@@ -117,6 +118,9 @@
     }
     
     if(pinch.state  == UIGestureRecognizerStateEnded || pinch.state  == UIGestureRecognizerStateCancelled || pinch.state  == UIGestureRecognizerStateFailed){
+        
+        [cell.backgroundButton setAdjustsImageWhenHighlighted:YES];
+        
         if(pinch.scale <= 1){ //scale did not change,
             CGPoint pinchPoint = [pinch locationInView:galleryController.view];
             CGPoint cellCenterInGalleryView = [self.collectionView convertPoint:cell.center toView:galleryController.view];
@@ -214,10 +218,9 @@
     cell.building = [self.buildingInfoArray[indexPath.row] building];
     cell.titleLabel.text = cell.building.name;
     cell.controller = self;
-    ((UIImageView *)cell.backgroundView).image = REMIMG_DefaultBuilding_Small;
     
     [self loadBuildingSmallImage:cell.building.pictureIds :^(UIImage *image) {
-        ((UIImageView *)cell.backgroundView).image = image;
+        [cell.backgroundButton setImage:image forState:UIControlStateNormal];
     }];
     
     return cell;
