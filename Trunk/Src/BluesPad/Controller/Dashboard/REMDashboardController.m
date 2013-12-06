@@ -86,7 +86,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
     if(decelerate==YES && scrollView.contentOffset.y<kDashboardSwitchLabelTop){
         //self.isHiding=YES;
         
-        [REMDataAccessor cancelAccess:[self groupName]];
+        //[REMDataAccessor cancelAccess:[self groupName]];
         //[self.imageView gotoBuildingInfo];
         REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
         parent.currentCoverStatus=REMBuildingCoverStatusCoverPage;

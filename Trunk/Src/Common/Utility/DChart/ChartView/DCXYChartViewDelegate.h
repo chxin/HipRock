@@ -23,6 +23,7 @@ typedef enum _DCHRangeChangeSender {
 -(BOOL)panInPlotAt:(CGPoint)point translation:(CGPoint)translation;
 
 -(void)panStopped;
+-(void)pinchStopped;
 
 -(void)focusPointChanged:(NSArray*)dcpoints at:(int)x;
 

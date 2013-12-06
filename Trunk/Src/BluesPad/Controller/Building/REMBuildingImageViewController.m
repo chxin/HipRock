@@ -117,8 +117,9 @@
                 blurImage= [[UIImage alloc] initWithContentsOfFile:smallBlurPicPath];
             }
             else{
-                //blurImage=[REMImageHelper blurImage:image];
-                blurImage=nil;
+                blurImage=[REMImageHelper blurImage:image];
+                NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(blurImage)];
+                [data1 writeToFile:smallBlurPicPath atomically:YES];
             }
             blurImageView.image=blurImage;
         }
@@ -138,11 +139,14 @@
         [self initContainer];
         [self initBottomGradientLayer];
         [self initButtons];
-        [self loadingBuildingImage];
-        [self initTitleView];
+        
         if(self.currentOffset!=NSNotFound){
             [self setBlurLevel:self.currentOffset];
         }
+        
+        [self loadingBuildingImage];
+        [self initTitleView];
+        
         
     }
     if(self.currentCoverStatus == REMBuildingCoverStatusCoverPage){
@@ -152,9 +156,11 @@
         if(controller.isViewLoaded == NO){
             [self.shareButton setHidden:NO];
             [self.container addSubview:controller.view];
+            [controller.view setFrame:controller.viewFrame];
         }
         else{
             [controller.view setHidden:NO];
+            [controller.view setFrame:controller.viewFrame];
         }
     }
     else{

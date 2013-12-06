@@ -260,6 +260,10 @@
 }
 
 -(void)panStopped {
+    [self gestureStopped];
+}
+
+-(void)gestureStopped {
     DCRange* newRange = self.graphContext.hRange;
     double rangeStart = newRange.location;
     double rangeEnd = newRange.location + newRange.length;
@@ -282,6 +286,11 @@
         }
     }
 }
+
+-(void)pinchStopped {
+    [self gestureStopped];
+}
+
 
 -(void)focusPointChanged:(NSArray *)dcpoints at:(int)x {
     if (self.delegate && [[self.delegate class] conformsToProtocol:@protocol(REMTrendChartDelegate)]) {
@@ -407,6 +416,7 @@
         }
         return shouldChange;
     }
+    return YES;
 }
 
 @end

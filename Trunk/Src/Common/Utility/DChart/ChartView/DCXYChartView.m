@@ -375,9 +375,22 @@
     CGFloat start = centerX - (centerX - self.graphContext.hRange.location) * gesture.leftScale;
     CGFloat end = centerX + (-centerX + self.graphContext.hRange.end) * gesture.rightScale;
     
-    DCRange* newRange = [[DCRange alloc]initWithLocation:start length:end-start];
-    if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByUserPinch]) {
-        self.graphContext.hRange = newRange;
+    if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed) {
+        if (self.graphContext.hRange.location < self.graphContext.globalHRange.location) {
+            [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.location];
+        } else if (self.graphContext.hRange.length+self.graphContext.hRange.location>self.graphContext.globalHRange.location+self.graphContext.globalHRange.length) {
+            [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.length+self.graphContext.globalHRange.location-self.graphContext.hRange.length];
+        } else {
+            
+        }
+        if (self.delegate && [self.delegate respondsToSelector:@selector(pinchStopped)]) {
+            [self.delegate pinchStopped];
+        }
+    } else {
+        DCRange* newRange = [[DCRange alloc]initWithLocation:start length:end-start];
+        if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByUserPinch]) {
+            self.graphContext.hRange = newRange;
+        }
     }
 }
 
