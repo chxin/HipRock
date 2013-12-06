@@ -298,7 +298,8 @@ static int requestTimeout = 45; //(s)
 + (NSURLRequest *)buildRequestWithUrl: (NSString *)absoluteUrl andPostData:(NSData *)data
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:absoluteUrl]];
-    [request setTimeoutInterval:60*10];
+    [request setTimeoutInterval:requestTimeout];
+    [request setCachePolicy:NSURLCacheStorageAllowedInMemoryOnly];
     [request setHTTPMethod: @"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
