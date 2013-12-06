@@ -16,6 +16,7 @@
 @interface DCXYSeries : DCSeries<DCContextHRangeObserverProtocal>
 @property (nonatomic, strong) DCRange* visableRange;
 @property (nonatomic, readonly) NSNumber* visableYMax;
+@property (nonatomic, readonly) NSNumber* visableYMin;
 @property (nonatomic, weak) DCAxis* xAxis;
 @property (nonatomic, weak) DCAxis* yAxis;
 @property (nonatomic, weak) REMEnergyTargetModel* target;

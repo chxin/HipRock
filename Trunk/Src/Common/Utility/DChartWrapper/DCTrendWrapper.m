@@ -384,18 +384,22 @@
         }
         if (shouldChange) self.myStableRange = myNewRange;
         return shouldChange;
-    } else {
+    } else if (senderType == DCHRangeChangeSenderByUserPinch) {
         BOOL shouldChange = YES;
-        if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
-            id param0, param1;
-            if (self.sharedProcessor == nil) {
-                param0 = @(newRange.location);
-                param1 = @(newRange.end);
-            } else {
-                param0 = [self.sharedProcessor deprocessX:newRange.location];
-                param1 = [self.sharedProcessor deprocessX:newRange.end];
+        if (self.chartStatus != DCDataPointTypeNormal) {
+            shouldChange = NO;
+        } else {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
+                id param0, param1;
+                if (self.sharedProcessor == nil) {
+                    param0 = @(newRange.location);
+                    param1 = @(newRange.end);
+                } else {
+                    param0 = [self.sharedProcessor deprocessX:newRange.location];
+                    param1 = [self.sharedProcessor deprocessX:newRange.end];
+                }
+                shouldChange = (BOOL)[self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
             }
-            shouldChange = (BOOL)[self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
         }
         if (shouldChange) {
             self.myStableRange = newRange;

@@ -188,6 +188,7 @@
     honeywell.titleFontSize=kBuildingCommodityTitleFontSize;
     honeywell.titleMargin=kBuildingDetailInnerMargin;
     honeywell.leftMargin=kBuildingCommodityDetailTextMargin;
+    honeywell.valueFontSize=kBuildingCommodityDetailValueFontSize;
     honeywell.emptyTextFontSize=29;
     honeywell.emptyTextFont=@(kBuildingFontSCRegular);
     honeywell.emptyTextMargin=28;
@@ -206,6 +207,9 @@
     mayair.leftMargin=kBuildingCommodityDetailTextMargin;
     mayair.valueFontSize=kBuildingCommodityDetailValueFontSize;
     mayair.uomFontSize=kBuildingCommodityDetailUomFontSize;
+    mayair.emptyTextFontSize=29;
+    mayair.emptyTextFont=@(kBuildingFontSCRegular);
+    mayair.emptyTextMargin=28;
     [mayair showTitle];
     [self addSplitBar:mayair];
     

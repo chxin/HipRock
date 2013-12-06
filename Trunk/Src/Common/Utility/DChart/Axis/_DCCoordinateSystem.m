@@ -17,7 +17,6 @@
 
 @interface _DCCoordinateSystem()
 @property (nonatomic, strong) NSMutableArray* visableSeries;
-@property (nonatomic) double visableYMax;
 
 @property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer;
 
@@ -38,7 +37,6 @@
                 [seriesList addObject:s];
             }
         }
-        _visableYMax = INT32_MIN;
         _seriesList = seriesList;
         _visableSeries = [self.seriesList mutableCopy];
         _xAxis = chartView.xAxis;
@@ -69,10 +67,11 @@
     
     if (self.graphContext) {
         // 计算可视区域内的Y的最大值currentYRange
-        double currentYRange = INT32_MIN;
+        double currentYMax = INT32_MIN;
+        double currentYMin = INT32_MAX;
         if (self.graphContext.stacked) {
             int start = floor(newRange.location);
-            int end = ceil(newRange.length+newRange.location);
+            int end = ceil(newRange.end);
             start = MAX(0, start);
             
             for (NSUInteger i = start; i <= end; i++) {
@@ -83,22 +82,28 @@
                     if (p.value == nil || [p.value isEqual:[NSNull null]]) continue;
                     yValAtIndex+=p.value.doubleValue;
                 }
-                if (yValAtIndex > currentYRange) {
-                    currentYRange = yValAtIndex;
+                if (yValAtIndex > currentYMax) {
+                    currentYMax = yValAtIndex;
+                }
+                if (yValAtIndex < currentYMin) {
+                    currentYMin = yValAtIndex;
                 }
             }
         } else {
             for (DCXYSeries* s in self.visableSeries) {
                 double yMax = s.visableYMax.doubleValue;
-                if (yMax > currentYRange) currentYRange = yMax;
+                double yMin = s.visableYMin.doubleValue;
+                if (yMax > currentYMax) currentYMax = yMax;
+                if (yMin < currentYMin) currentYMin = yMin;
             }
         }
+        
         // 根据maxY计算YRange并通知所有的YRangeObserver
-        if (self.visableYMax != currentYRange) {
-            self.visableYMax = currentYRange;
-            double yInterval = [DCUtility getYInterval:currentYRange parts:self.graphContext.hGridlineAmount];
-            currentYRange = yInterval * self.graphContext.hGridlineAmount * kDCReservedSpace;
-            self.yRange = [[DCRange alloc]initWithLocation:0 length:currentYRange];
+        double yInterval = [DCUtility getYInterval:currentYMax parts:self.graphContext.hGridlineAmount];
+        double newRangeLength = yInterval * self.graphContext.hGridlineAmount * kDCReservedSpace;
+        DCRange* newYRange = [[DCRange alloc]initWithLocation:0 length:newRangeLength];
+        if ([self testYRange:newYRange visableMax:currentYMax visableMin:currentYMin]) {
+            [self setYRange:newYRange];
             self.yInterval = yInterval;
         }
     }
@@ -134,5 +139,30 @@
     }
 }
 
+/***
+ * 测试新的YRange是否需要被更新至Context。
+ * 条件：yRange的变化超过50%。
+ * 或：maxY的值已经超过了现有的YRange。
+ ***/
+-(BOOL)testYRange:(DCRange*)newRange visableMax:(double)max visableMin:(double)min {
+    if ([DCRange isRange:newRange equalTo:self.yRange]) return NO;
+    if (max > self.yRange.end) {
+        return YES;
+    }
+    if (self.yRange.end * 0.75 < (max+min)/2) {
+       return YES;   // 中值超过现有Range的75%
+    }
+    
+    // 变化是否超过50%
+    double currentYLength = self.yRange.length;
+    double willYLength = newRange.length;
+    if (REMIsNilOrNull(self.yRange) || self.yRange.length == 0 ||
+        (willYLength > currentYLength && ((willYLength - currentYLength) / currentYLength >= 0.5)) ||
+        (willYLength < currentYLength && ((currentYLength - willYLength) / willYLength >= 0.5))) {
+        return YES;
+    }
+    
+    return NO;
+}
 
 @end
