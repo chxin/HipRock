@@ -170,7 +170,7 @@
                 [REMImageHelper writeImageFile:smallImage withFullPath:smallImagePath];
                 
                 UIImage *smallBlurImage = [REMImageHelper blurImage:smallImage];
-                [REMImageHelper writeImageFile:smallBlurImage withFileName:smallBlurImagePath];
+                [REMImageHelper writeImageFile:smallBlurImage withFullPath:smallBlurImagePath];
                 
                 completed([UIImage imageWithContentsOfFile:smallImagePath]);
             } error:^(NSError *error, id response) {
