@@ -444,6 +444,9 @@
         [self.cropTitleView setHidden:NO];
         return;
     }
+    if (self.isViewLoaded==NO) {
+        return;
+    }
     //UIImage *image=[REMImageHelper imageWithView:self.container];
     CGRect rect=CGRectMake(0, 0, self.view.frame.size.width, REMDMCOMPATIOS7(kBuildingTitleHeight));
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, self.view.window.screen.scale);
