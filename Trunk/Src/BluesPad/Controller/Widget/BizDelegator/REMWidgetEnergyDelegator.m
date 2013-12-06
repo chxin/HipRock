@@ -104,6 +104,10 @@
     [self initSearchView];
     [self initChartView];
     
+    if (self.widgetInfo.diagramType == REMDiagramTypePie) {
+        [self.stepControl setHidden:YES];
+    }
+    
     
     [self setDatePickerButtonValueNoSearchByTimeRange:self.tempModel.timeRangeArray[0] withRelative:self.tempModel.relativeDateComponent withRelativeType:self.tempModel.relativeDateType];
     [self initStepButtonWithRange:self.tempModel.timeRangeArray[0] WithStep:self.tempModel.step];
