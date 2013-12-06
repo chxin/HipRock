@@ -91,7 +91,7 @@
     REMWidgetMaxViewController *srcController=self.sourceViewController;
     REMWidgetDetailViewController *currentDetailController= srcController.childViewControllers[srcController.currentWidgetIndex];
     
-    UIImage *image=[REMImageHelper imageWithView:currentDetailController.view];
+    UIImage *image=[REMImageHelper imageWithLayer:currentDetailController.view.layer];
     
     UIImageView *destImageView=[[UIImageView alloc]initWithImage:image];
 
