@@ -15,6 +15,7 @@
 @property (nonatomic,weak) REMGalleryCollectionViewController *controller;
 @property (nonatomic,weak) REMBuildingModel *building;
 
+@property (nonatomic,weak) UIButton *backgroundButton;
 @property (nonatomic,weak) UILabel *titleLabel;
 
 @property (nonatomic,strong) UIImageView *snapshot;

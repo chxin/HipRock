@@ -331,6 +331,7 @@
 
 - (void)mapView:(GMSMapView *)view didTapInfoWindowOfMarker:(GMSMarker *)marker
 {
+    [self.view setUserInteractionEnabled:NO];
     self.initialZoomRect = [self getZoomFrameFromMarker:marker];
     self.currentBuildingIndex = [self buildingIndexFromBuilding:[marker.userData building]];
     
