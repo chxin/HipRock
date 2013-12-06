@@ -442,6 +442,7 @@
 		7A47F3A518482C1B007EE37B /* JumpTrial@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39D18482C1B007EE37B /* JumpTrial@2x.png */; };
 		7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A48B47D17CDE321002DA386 /* REMInsetsTextField.m */; };
 		7A5277F617AF4209007DA735 /* REMIndicatorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5277F517AF4209007DA735 /* REMIndicatorButton.m */; };
+		7A57EF0E1851A9FF00838F8B /* REMGalleryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A57EF0D1851A9FF00838F8B /* REMGalleryTableView.m */; };
 		7A58F24A1839A5650071DE7A /* mail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2411839A5650071DE7A /* mail.jpg */; };
 		7A58F24B1839A5650071DE7A /* Propaganda_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2421839A5650071DE7A /* Propaganda_1.jpg */; };
 		7A58F24C1839A5650071DE7A /* Propaganda_1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2431839A5650071DE7A /* Propaganda_1@2x.jpg */; };
@@ -1058,6 +1059,8 @@
 		7A48B47D17CDE321002DA386 /* REMInsetsTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMInsetsTextField.m; sourceTree = "<group>"; };
 		7A5277F417AF4209007DA735 /* REMIndicatorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMIndicatorButton.h; sourceTree = "<group>"; };
 		7A5277F517AF4209007DA735 /* REMIndicatorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMIndicatorButton.m; sourceTree = "<group>"; };
+		7A57EF0C1851A9FF00838F8B /* REMGalleryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMGalleryTableView.h; sourceTree = "<group>"; };
+		7A57EF0D1851A9FF00838F8B /* REMGalleryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGalleryTableView.m; sourceTree = "<group>"; };
 		7A58F2411839A5650071DE7A /* mail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mail.jpg; sourceTree = "<group>"; };
 		7A58F2421839A5650071DE7A /* Propaganda_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Propaganda_1.jpg; sourceTree = "<group>"; };
 		7A58F2431839A5650071DE7A /* Propaganda_1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Propaganda_1@2x.jpg"; sourceTree = "<group>"; };
@@ -2669,6 +2672,8 @@
 				7AA8837E17F92286004D50BC /* REMGalleryCollectionCell.m */,
 				7A6A14EF181E52F4007D06B8 /* REMMarkerBubbleView.h */,
 				7A6A14F0181E52F4007D06B8 /* REMMarkerBubbleView.m */,
+				7A57EF0C1851A9FF00838F8B /* REMGalleryTableView.h */,
+				7A57EF0D1851A9FF00838F8B /* REMGalleryTableView.m */,
 			);
 			name = Map;
 			path = View/Map;
@@ -3648,6 +3653,7 @@
 				EF0346B0183B4BA600DE186A /* _DCLayerTrashbox.m in Sources */,
 				B4E815D418273C3000FB9BC5 /* REMWidgetCommoditySearchModel.m in Sources */,
 				B47ACC2D17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m in Sources */,
+				7A57EF0E1851A9FF00838F8B /* REMGalleryTableView.m in Sources */,
 				B4198EAE178410D300B50475 /* REMLogManager.m in Sources */,
 				B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */,
 				EF13626F184EFC6F00BEF648 /* _DCLine.m in Sources */,

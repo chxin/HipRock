@@ -10,11 +10,16 @@
 #import "DCRange.h"
 #import "DCContext.h"
 
+typedef struct _DCYAxisIntervalCalculation {
+    double yMax;
+    double yInterval;
+}DCYAxisIntervalCalculation;
+
 @interface DCUtility : NSObject
 +(CGSize)getSizeOfText:(NSString*)text forFont:(UIFont*)font;
 
 +(void)setLineStyle:(CGContextRef)context style:(DCLineType)style;
-+(double)getYInterval:(double)yRangeLength parts:(NSUInteger)parts;
++(DCYAxisIntervalCalculation)calculatorYAxisByMin:(double)yMin yMax:(double)yMax parts:(NSUInteger)parts;
 //+(BOOL)isMinorChangeForYRange:(DCRange*)oldRange new:(DCRange*)newRange;
 +(BOOL)isFrame:(CGRect)rect visableIn:(CGRect)outter;
 

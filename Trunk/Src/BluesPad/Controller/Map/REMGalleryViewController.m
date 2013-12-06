@@ -20,13 +20,14 @@
 #import "REMGalleryCollectionViewController.h"
 #import "REMImages.h"
 #import "REMBuildingOverallModel.h"
+#import "REMGalleryTableView.h"
 
 
 @interface REMGalleryViewController ()
 
 @property (nonatomic,strong) NSMutableDictionary *buildingGroups;
 @property (nonatomic,strong) NSArray *orderedProvinceKeys;
-@property (nonatomic,weak) UITableView *galleryTableView;
+@property (nonatomic,weak) REMGalleryTableView *galleryTableView;
 @property (nonatomic) BOOL isSegueNotAnimated;
 
 @end
@@ -142,7 +143,7 @@
 
 -(void)addGalleryGroupView
 {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:kDMGallery_GalleryTableViewFrame style:UITableViewStylePlain];
+    REMGalleryTableView *tableView = [[REMGalleryTableView alloc] initWithFrame:kDMGallery_GalleryTableViewFrame style:UITableViewStylePlain];
     tableView.dataSource = self;
     tableView.delegate = self;
     tableView.backgroundColor = [UIColor clearColor];
@@ -150,6 +151,8 @@
     tableView.showsVerticalScrollIndicator = NO;
     tableView.showsHorizontalScrollIndicator = NO;
     [tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
+    
+    
 //    tableView.layer.borderColor = [UIColor blueColor].CGColor;
 //    tableView.layer.borderWidth = 1.0;
     
@@ -313,6 +316,7 @@
 {
     self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
 }
+
 
 #pragma mark - IOS7 style
 -(UIStatusBarStyle)preferredStatusBarStyle{

@@ -13,25 +13,37 @@
     return [text sizeWithFont:font];
 }
 
-+(double)getYInterval:(double)yRangeLength parts:(NSUInteger)parts {
-    if (yRangeLength <= 0) return parts;
-    
-    double yIntervalMag = yRangeLength / parts;
-    double mag = 1;
-    if (yIntervalMag > 10) {
-        int yIntervalFLOOR = floor(yIntervalMag);
-        NSUInteger digitalOfYInterval = ((NSString*)[NSString stringWithFormat:@"%i", yIntervalFLOOR]).length;
-        mag = pow(10, digitalOfYInterval-1);
-    } else if (yIntervalMag < 1) {
-        while (yIntervalMag < 1) {
-            mag /= 10;
-            yIntervalMag*=10;
++(DCYAxisIntervalCalculation)calculatorYAxisByMin:(double)yMin yMax:(double)yMax parts:(NSUInteger)parts {
+    DCYAxisIntervalCalculation cal;
+    if (yMax <= 0 || yMax < yMin) {
+        cal.yInterval = 1;
+        cal.yMax = cal.yInterval * parts * kDCReservedSpace;
+    } else if(parts == 0) {
+        cal.yInterval = yMax;
+        cal.yMax = cal.yInterval * kDCReservedSpace;
+    } else {
+        double avg = (yMin + yMax ) / 2;
+        double possibleMax = MAX(yMax, avg / 0.75 / kDCReservedSpace);
+        // 计算Interval的位数
+        double yIntervalMag = possibleMax / parts;
+        double mag = 1;
+        if (yIntervalMag > 10) {
+            int yIntervalFLOOR = floor(yIntervalMag);
+            NSUInteger digitalOfYInterval = ((NSString*)[NSString stringWithFormat:@"%i", yIntervalFLOOR]).length;
+            mag = pow(10, digitalOfYInterval-1);
+        } else if (yIntervalMag < 1) {
+            while (yIntervalMag < 1) {
+                mag /= 10;
+                yIntervalMag*=10;
+            }
         }
+        cal.yInterval = [self roundYInterval:(possibleMax / parts / mag)] * mag;
+        cal.yMax = cal.yInterval * parts * kDCReservedSpace;
     }
-    return [self roundYInterval:(yRangeLength / parts / mag)] * mag;
+    return cal;
 }
 +(double)roundYInterval:(float)yInterval {
-    for (double i = 1.0; i <= 10; i=i+0.1) {
+    for (double i = 1.0; i <= 10; i=i+0.5) {
         if (yInterval <= i) {
             return i;
         }

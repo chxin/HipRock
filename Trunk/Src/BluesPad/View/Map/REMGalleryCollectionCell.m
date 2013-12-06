@@ -26,30 +26,41 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundView = [[UIImageView alloc] initWithFrame:kDMGallery_GalleryCellFrame];
+        //self.backgroundView = [[UIImageView alloc] initWithFrame:kDMGallery_GalleryCellFrame];
         
-        if(self.titleLabel == nil){
-            UILabel *label = [[UILabel alloc] initWithFrame:kDMGallery_GalleryCellTitleFrame];
-            self.titleLabel = label;
-            self.titleLabel.textColor = [UIColor whiteColor];
-            self.titleLabel.backgroundColor = [UIColor clearColor];
-            self.titleLabel.font = [UIFont systemFontOfSize:kDMGallery_GalleryCellTitleFontSize];
-            
-            [self addSubview:self.titleLabel];
-        }
+        UIButton *button = [[UIButton alloc] initWithFrame:self.bounds];
+        [button setBackgroundImage:REMIMG_DefaultBuilding_Small forState:UIControlStateNormal];
+        button.imageView.contentMode = UIViewContentModeScaleToFill;
+        button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [button addTarget:self action:@selector(pressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:button];
+        self.backgroundButton = button;
+        
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:kDMGallery_GalleryCellTitleFrame];
+        label.textColor = [UIColor whiteColor];
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont systemFontOfSize:kDMGallery_GalleryCellTitleFontSize];
+        
+        [self.backgroundButton addSubview:label];
+        self.titleLabel = label;
         
         UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinching:)];
         [self addGestureRecognizer:pinchRecognizer];
         
-        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
-        [self addGestureRecognizer:tapRecognizer];
+//        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+//        [self addGestureRecognizer:tapRecognizer];
+        
+//        UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(pressed:)];
+//        [self addGestureRecognizer:longPressRecognizer];
     }
     
     return self;
 }
 
 
--(void)tapped:(UITapGestureRecognizer *)tapRecognizer
+-(void)pressed:(id)button
 {
 //    if(tapRecognizer.state == UIGestureRecognizerStateBegan){
 //        NSLog(@"tap begin");

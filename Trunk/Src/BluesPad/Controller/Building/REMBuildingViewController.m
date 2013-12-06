@@ -348,6 +348,9 @@ const static CGFloat buildingGap=20;
 {
     if(pinch.state  == UIGestureRecognizerStateBegan){
         //NSLog(@"pinch: Began");
+        if(self.isPinching)
+            return;
+        
         self.isPinching = YES;
         
         
@@ -480,6 +483,7 @@ const static CGFloat buildingGap=20;
 
 -(IBAction)backButtonPressed:(id)sender
 {
+    [self.view setUserInteractionEnabled:NO];
     [self back];
 }
 
