@@ -39,6 +39,10 @@
 @property (nonatomic, assign) CGFloat plotPaddingRight;
 @property (nonatomic, assign) CGFloat plotPaddingBottom;
 
+@property (nonatomic, strong) UIColor* yAxisTitleColor;
+@property (nonatomic, assign) CGFloat yAxisTitleToTopLabel; // UOM到最后一节YLabel的距离
+@property (nonatomic, assign) CGFloat yAxisTitleFontSize;
+
 +(REMChartStyle*)getMaximizedStyle;
 +(REMChartStyle*)getMinimunStyle;
 @end

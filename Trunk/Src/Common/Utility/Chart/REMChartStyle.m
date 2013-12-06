@@ -34,6 +34,9 @@
     style.symbolSize = 20;
     style.xLabelToLine = 12;
     style.yLabelToLine = 12;
+    style.yAxisTitleColor = [REMColor colorByHexString:@"#3b3b3b"];
+    style.yAxisTitleToTopLabel = 10;
+    style.yAxisTitleFontSize = 13;
     
     style.focusSymbolLineColor = [REMColor colorByHexString:@"#f4f4f4"];
     style.focusSymbolLineStyle = DCLineTypeDefault;
@@ -74,6 +77,9 @@
     style.symbolSize = 4;
     style.xLabelToLine = 4;
     style.yLabelToLine = 4;
+    style.yAxisTitleColor = [REMColor colorByHexString:@"#3b3b3b"];
+    style.yAxisTitleToTopLabel = 0;
+    style.yAxisTitleFontSize = 8;
     
     style.plotPaddingBottom = 0;
     style.plotPaddingTop = 0;
@@ -82,6 +88,8 @@
     
     style.pieRadius = 30;
     style.pieShadowRadius = 33;
+    
+    style.plotPaddingTop = 12;
     
     return style;
 }

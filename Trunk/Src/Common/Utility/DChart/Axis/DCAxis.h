@@ -53,4 +53,8 @@
 @property (nonatomic, assign) NSUInteger visableSeriesAmount;  // 附加在该轴上的可见的序列的数量。主要用于y轴的隐藏。
 
 @property (nonatomic, assign) CGFloat labelToLine; //label到轴线的距离
+
+@property (nonatomic, strong) UIColor* axisTitleColor;
+@property (nonatomic, assign) CGFloat axisTitleToTopLabel;
+@property (nonatomic, assign) CGFloat axisTitleFontSize;
 @end

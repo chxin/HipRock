@@ -55,6 +55,9 @@
         _yLabelLayer.axis = self.yAxis;
         _yLabelLayer.font = self.yAxis.labelFont;
         _yLabelLayer.fontColor = self.yAxis.labelColor;
+        _yLabelLayer.axisTitleFontSize = self.yAxis.axisTitleFontSize;
+        _yLabelLayer.axisTitleToTopLabel = self.yAxis.axisTitleToTopLabel;
+        _yLabelLayer.axisTitleColor = self.yAxis.axisTitleColor;
         _yLabelLayer.isMajorAxis = self.isMajor;
         self._yLabelLayer = _yLabelLayer;
         [self addYIntervalObsever:_yLabelLayer];

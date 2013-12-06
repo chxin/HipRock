@@ -17,4 +17,8 @@
 
 @property (nonatomic, weak) DCAxis* axis;
 @property (nonatomic, assign) BOOL isMajorAxis;
+
+@property (nonatomic, strong) UIColor* axisTitleColor;
+@property (nonatomic, assign) CGFloat axisTitleToTopLabel;
+@property (nonatomic, assign) CGFloat axisTitleFontSize;
 @end

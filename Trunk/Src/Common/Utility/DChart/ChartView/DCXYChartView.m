@@ -62,6 +62,7 @@
 //        self.symbolLayers = [[NSMutableArray alloc]init];
         self.graphContext = [[DCContext alloc]initWithStacked:stacked];
         self.graphContext.hGridlineAmount = 0;
+        self.layer.masksToBounds = YES;
         self.backgoundBands = [[NSMutableArray alloc]init];
 //        self.multipleTouchEnabled = YES;
         _beginHRange = beginHRange;

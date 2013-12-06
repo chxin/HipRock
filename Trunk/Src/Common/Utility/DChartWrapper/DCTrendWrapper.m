@@ -116,6 +116,9 @@
                 y.labelColor = self.style.yTextStyle.color.uiColor;
                 y.labelFont = [UIFont fontWithName:self.style.yTextStyle.fontName size:self.style.yTextStyle.fontSize];
             }
+            y.axisTitleColor = self.style.yAxisTitleColor;
+            y.axisTitleToTopLabel = self.style.yAxisTitleToTopLabel;
+            y.axisTitleFontSize = self.style.yAxisTitleFontSize;
             [yAxes addObject:y];
         }
     }
