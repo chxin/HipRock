@@ -52,4 +52,5 @@
 -(void)defocus;
 -(void)relabelX;
 -(void)setBackgoundBands:(NSArray*)bands;
+-(void)reloadData;
 @end

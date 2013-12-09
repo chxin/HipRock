@@ -374,6 +374,13 @@
     }
 }
 
+-(void)reloadData {
+    for (_DCColumnsLayer* columnLayer in self.columnLayers) {
+        [columnLayer setNeedsDisplay];
+    }
+    [self.symbolLayer setNeedsDisplay];
+}
+
 
 
 

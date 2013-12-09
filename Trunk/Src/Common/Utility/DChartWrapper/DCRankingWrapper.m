@@ -43,6 +43,7 @@
     if (self.sortOrder == NSOrderedDescending) [self swapeAllDatas:s];
     
     _DCRankingXLabelFormatter* formatter = [[_DCRankingXLabelFormatter alloc]initWithSeries:s];
+    formatter.graphContext = view.graphContext;
     [view setXLabelFormatter:formatter];
     return s;
 }
@@ -139,9 +140,7 @@
         _sortOrder = sortOrder;
         [self swapeAllDatas:self.view.seriesList[0]];
         [self.view relabelX];
-        
-        DCXYSeries* rankingSeries = self.view.seriesList[0];
-        [rankingSeries.seriesLayer setNeedsDisplay];
+        [self.view reloadData];
     }
 }
 -(void)focusPointChanged:(NSArray *)dcpoints at:(int)x {

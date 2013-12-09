@@ -98,7 +98,6 @@
         self.xAxis.visableSeriesAmount++;
     }
     _hidden = hidden;
-    if (self.seriesLayer) [self.seriesLayer setNeedsDisplay];
 }
 
 @end
