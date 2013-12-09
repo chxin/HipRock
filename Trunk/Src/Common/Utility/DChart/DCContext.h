@@ -55,6 +55,10 @@ typedef enum _DCLineType {
 
 @property (nonatomic,strong) DCRange* globalHRange;
 
+@property (nonatomic, assign) int focusX;
+@property (nonatomic, assign) BOOL showIndicatorOnFocus;
+
+
 -(void)addHRangeObsever:(id<DCContextHRangeObserverProtocal>)observer;
 -(void)removeHRangeObsever:(id<DCContextHRangeObserverProtocal>)observer;
 @end

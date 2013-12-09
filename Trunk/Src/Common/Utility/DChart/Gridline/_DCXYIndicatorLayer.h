@@ -14,6 +14,4 @@
 @property (nonatomic, assign) DCLineType symbolLineStyle;
 @property (nonatomic, strong) UIColor* symbolLineColor;
 @property (nonatomic, assign) CGFloat focusSymbolIndicatorSize;
-
-@property (nonatomic, strong) NSNumber* symbolLineAt;
 @end

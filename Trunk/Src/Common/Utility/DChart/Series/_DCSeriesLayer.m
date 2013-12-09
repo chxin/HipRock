@@ -23,7 +23,6 @@
             }
         }
         self.graphContext = coordinateSystem.graphContext;
-        _focusX = INT32_MIN;
         _series = s;
         self.masksToBounds = YES;
         _coordinateSystem = coordinateSystem;
@@ -78,15 +77,15 @@
 //        }
 //    }
 //}
--(void)focusOnX:(int)x {
-    if (self.focusX != x) {
-        _focusX = x;
-    }
-}
-
--(void)defocus {
-    if (self.focusX != INT32_MIN) {
-        _focusX = INT32_MIN;
-    }
-}
+//-(void)focusOnX:(int)x {
+//    if (self.focusX != x) {
+//        _focusX = x;
+//    }
+//}
+//
+//-(void)defocus {
+//    if (self.focusX != INT32_MIN) {
+//        _focusX = INT32_MIN;
+//    }
+//}
 @end

@@ -644,7 +644,6 @@
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 		EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */; };
-		EF54C8E6183C8D2400A07557 /* _DCSymbolLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF54C8E5183C8D2400A07557 /* _DCSymbolLayer.m */; };
 		EF60822F17D818430093427C /* REMModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF60822E17D818430093427C /* REMModalView.m */; };
 		EF8A47F817F959B5009B5C33 /* REMAbstractChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8A47E717F959B5009B5C33 /* REMAbstractChartWrapper.m */; };
 		EF8A47FF17F959B5009B5C33 /* REMChartSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8A47F317F959B5009B5C33 /* REMChartSeries.m */; };
@@ -1422,12 +1421,12 @@
 		B4FFB0C718191A15004C5404 /* REMRelativeDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRelativeDateViewController.m; sourceTree = "<group>"; };
 		B4FFB0C918191A41004C5404 /* REMDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMDatePickerViewController.h; sourceTree = "<group>"; };
 		B4FFB0CA18191A41004C5404 /* REMDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMDatePickerViewController.m; sourceTree = "<group>"; };
-		EF0346AB183B48A500DE186A /* _DCLinesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCLinesLayer.h; sourceTree = "<group>"; };
-		EF0346AC183B48A500DE186A /* _DCLinesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCLinesLayer.m; sourceTree = "<group>"; };
-		EF0346AE183B4BA600DE186A /* _DCLayerTrashbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLayerTrashbox.h; path = Common/Utility/DChart/_DCLayerTrashbox.h; sourceTree = "<group>"; };
-		EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLayerTrashbox.m; path = Common/Utility/DChart/_DCLayerTrashbox.m; sourceTree = "<group>"; };
-		EF0346B1183B520100DE186A /* _DCSeriesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCSeriesLayer.h; sourceTree = "<group>"; };
-		EF0346B2183B520100DE186A /* _DCSeriesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCSeriesLayer.m; sourceTree = "<group>"; };
+		EF0346AB183B48A500DE186A /* _DCLinesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLinesLayer.h; path = Common/Utility/DChart/Series/_DCLinesLayer.h; sourceTree = "<group>"; };
+		EF0346AC183B48A500DE186A /* _DCLinesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLinesLayer.m; path = Common/Utility/DChart/Series/_DCLinesLayer.m; sourceTree = "<group>"; };
+		EF0346AE183B4BA600DE186A /* _DCLayerTrashbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLayerTrashbox.h; path = ../_DCLayerTrashbox.h; sourceTree = "<group>"; };
+		EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLayerTrashbox.m; path = ../_DCLayerTrashbox.m; sourceTree = "<group>"; };
+		EF0346B1183B520100DE186A /* _DCSeriesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCSeriesLayer.h; path = Common/Utility/DChart/Series/_DCSeriesLayer.h; sourceTree = "<group>"; };
+		EF0346B2183B520100DE186A /* _DCSeriesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCSeriesLayer.m; path = Common/Utility/DChart/Series/_DCSeriesLayer.m; sourceTree = "<group>"; };
 		EF0346B7183B979800DE186A /* DCLineWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCLineWrapper.h; path = Common/Utility/DChartWrapper/DCLineWrapper.h; sourceTree = "<group>"; };
 		EF0346B8183B979800DE186A /* DCLineWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCLineWrapper.m; path = Common/Utility/DChartWrapper/DCLineWrapper.m; sourceTree = "<group>"; };
 		EF03DC1E1841C886004B9EFD /* _DCHPinchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCHPinchGestureRecognizer.h; path = Common/Utility/DChart/_DCHPinchGestureRecognizer.h; sourceTree = "<group>"; };
@@ -1444,28 +1443,26 @@
 		EF0BFE9D18446C010026C47D /* REMPieIndicatorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieIndicatorLayer.m; sourceTree = "<group>"; };
 		EF0BFE9F184495DF0026C47D /* REMPieShadowLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPieShadowLayer.h; sourceTree = "<group>"; };
 		EF0BFEA0184495DF0026C47D /* REMPieShadowLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieShadowLayer.m; sourceTree = "<group>"; };
-		EF0BFEA21844A5A60026C47D /* DCPieChartAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCPieChartAnimationManager.h; sourceTree = "<group>"; };
-		EF0BFEA31844A5A60026C47D /* DCPieChartAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCPieChartAnimationManager.m; sourceTree = "<group>"; };
-		EF0BFEA51844B7090026C47D /* DCPieChartAnimationFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCPieChartAnimationFrame.h; sourceTree = "<group>"; };
-		EF0BFEA61844B7090026C47D /* DCPieChartAnimationFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCPieChartAnimationFrame.m; sourceTree = "<group>"; };
-		EF13626D184EFC6F00BEF648 /* _DCLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCLine.h; sourceTree = "<group>"; };
-		EF13626E184EFC6F00BEF648 /* _DCLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCLine.m; sourceTree = "<group>"; };
+		EF0BFEA21844A5A60026C47D /* DCPieChartAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieChartAnimationManager.h; path = Common/Utility/DChart/ChartView/DCPieChartAnimationManager.h; sourceTree = "<group>"; };
+		EF0BFEA31844A5A60026C47D /* DCPieChartAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieChartAnimationManager.m; path = Common/Utility/DChart/ChartView/DCPieChartAnimationManager.m; sourceTree = "<group>"; };
+		EF0BFEA51844B7090026C47D /* DCPieChartAnimationFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieChartAnimationFrame.h; path = Common/Utility/DChart/ChartView/DCPieChartAnimationFrame.h; sourceTree = "<group>"; };
+		EF0BFEA61844B7090026C47D /* DCPieChartAnimationFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieChartAnimationFrame.m; path = Common/Utility/DChart/ChartView/DCPieChartAnimationFrame.m; sourceTree = "<group>"; };
+		EF13626D184EFC6F00BEF648 /* _DCLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLine.h; path = Common/Utility/DChart/Series/_DCLine.h; sourceTree = "<group>"; };
+		EF13626E184EFC6F00BEF648 /* _DCLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLine.m; path = Common/Utility/DChart/Series/_DCLine.m; sourceTree = "<group>"; };
 		EF1C5AD2183DB3A2002A9AAD /* DAbstractChartWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DAbstractChartWrapper.h; path = Common/Utility/DChartWrapper/DAbstractChartWrapper.h; sourceTree = "<group>"; };
 		EF1C5AD3183DB3A2002A9AAD /* DAbstractChartWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DAbstractChartWrapper.m; path = Common/Utility/DChartWrapper/DAbstractChartWrapper.m; sourceTree = "<group>"; };
 		EF1C5AD5183DB3CB002A9AAD /* DCTrendWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCTrendWrapper.h; path = Common/Utility/DChartWrapper/DCTrendWrapper.h; sourceTree = "<group>"; };
 		EF1C5AD6183DB3CB002A9AAD /* DCTrendWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCTrendWrapper.m; path = Common/Utility/DChartWrapper/DCTrendWrapper.m; sourceTree = "<group>"; };
-		EF1C5AD8183E00C9002A9AAD /* _DCXLabelFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCXLabelFormatter.h; sourceTree = "<group>"; };
-		EF1C5AD9183E00C9002A9AAD /* _DCXLabelFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCXLabelFormatter.m; sourceTree = "<group>"; };
-		EF1C5ADB183E23DA002A9AAD /* _DCLineSymbolsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCLineSymbolsLayer.h; sourceTree = "<group>"; };
-		EF1C5ADC183E23DA002A9AAD /* _DCLineSymbolsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCLineSymbolsLayer.m; sourceTree = "<group>"; };
+		EF1C5AD8183E00C9002A9AAD /* _DCXLabelFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCXLabelFormatter.h; path = Common/Utility/DChart/Axis/LabelLayer/_DCXLabelFormatter.h; sourceTree = "<group>"; };
+		EF1C5AD9183E00C9002A9AAD /* _DCXLabelFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCXLabelFormatter.m; path = Common/Utility/DChart/Axis/LabelLayer/_DCXLabelFormatter.m; sourceTree = "<group>"; };
+		EF1C5ADB183E23DA002A9AAD /* _DCLineSymbolsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLineSymbolsLayer.h; path = Common/Utility/DChart/Series/_DCLineSymbolsLayer.h; sourceTree = "<group>"; };
+		EF1C5ADC183E23DA002A9AAD /* _DCLineSymbolsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLineSymbolsLayer.m; path = Common/Utility/DChart/Series/_DCLineSymbolsLayer.m; sourceTree = "<group>"; };
 		EF2962B3184C6B53000A119F /* REMTrendChartDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartDataProcessor.m; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
 		EF48011E17D7098D002A2EF6 /* REMBuildingWeiboView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingWeiboView.h; path = View/Building/REMBuildingWeiboView.h; sourceTree = "<group>"; };
 		EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingWeiboView.m; path = View/Building/REMBuildingWeiboView.m; sourceTree = "<group>"; };
-		EF54C8E4183C8D2400A07557 /* _DCSymbolLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCSymbolLayer.h; sourceTree = "<group>"; };
-		EF54C8E5183C8D2400A07557 /* _DCSymbolLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCSymbolLayer.m; sourceTree = "<group>"; };
 		EF60822D17D818420093427C /* REMModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMModalView.h; sourceTree = "<group>"; };
 		EF60822E17D818430093427C /* REMModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMModalView.m; sourceTree = "<group>"; };
 		EF8A47E617F959B5009B5C33 /* REMAbstractChartWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAbstractChartWrapper.h; sourceTree = "<group>"; };
@@ -1482,8 +1479,8 @@
 		EF9F28B017CB54DE00E775ED /* REMStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMStatusBar.m; sourceTree = "<group>"; };
 		EFD946D01839DCBB00E9EC50 /* _DCLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLayer.h; path = Common/Utility/DChart/_DCLayer.h; sourceTree = "<group>"; };
 		EFD946D11839DCBB00E9EC50 /* _DCLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLayer.m; path = Common/Utility/DChart/_DCLayer.m; sourceTree = "<group>"; };
-		EFD946D51839DCBB00E9EC50 /* _DCCoordinateSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCCoordinateSystem.h; sourceTree = "<group>"; };
-		EFD946D61839DCBB00E9EC50 /* _DCCoordinateSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCCoordinateSystem.m; sourceTree = "<group>"; };
+		EFD946D51839DCBB00E9EC50 /* _DCCoordinateSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCCoordinateSystem.h; path = ../Axis/_DCCoordinateSystem.h; sourceTree = "<group>"; };
+		EFD946D61839DCBB00E9EC50 /* _DCCoordinateSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCCoordinateSystem.m; path = ../Axis/_DCCoordinateSystem.m; sourceTree = "<group>"; };
 		EFD946D71839DCBB00E9EC50 /* DCAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCAxis.h; sourceTree = "<group>"; };
 		EFD946D81839DCBB00E9EC50 /* DCAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCAxis.m; sourceTree = "<group>"; };
 		EFD946DA1839DCBB00E9EC50 /* _DCXAxisLabelLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCXAxisLabelLayer.h; sourceTree = "<group>"; };
@@ -1494,14 +1491,14 @@
 		EFD946E01839DCBB00E9EC50 /* DCXYChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCXYChartView.m; sourceTree = "<group>"; };
 		EFD946E31839DCBB00E9EC50 /* DCDataPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCDataPoint.h; sourceTree = "<group>"; };
 		EFD946E41839DCBB00E9EC50 /* DCDataPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCDataPoint.m; sourceTree = "<group>"; };
-		EFD946E51839DCBB00E9EC50 /* DCContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCContext.h; path = Common/Utility/DChart/DCContext.h; sourceTree = "<group>"; };
-		EFD946E61839DCBB00E9EC50 /* DCContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCContext.m; path = Common/Utility/DChart/DCContext.m; sourceTree = "<group>"; };
-		EFD946E71839DCBB00E9EC50 /* DCRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCRange.h; path = Common/Utility/DChart/DCRange.h; sourceTree = "<group>"; };
-		EFD946E81839DCBB00E9EC50 /* DCRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCRange.m; path = Common/Utility/DChart/DCRange.m; sourceTree = "<group>"; };
+		EFD946E51839DCBB00E9EC50 /* DCContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCContext.h; path = ../DCContext.h; sourceTree = "<group>"; };
+		EFD946E61839DCBB00E9EC50 /* DCContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCContext.m; path = ../DCContext.m; sourceTree = "<group>"; };
+		EFD946E71839DCBB00E9EC50 /* DCRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCRange.h; path = ../DCRange.h; sourceTree = "<group>"; };
+		EFD946E81839DCBB00E9EC50 /* DCRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCRange.m; path = ../DCRange.m; sourceTree = "<group>"; };
 		EFD946EA1839DCBB00E9EC50 /* _DCHGridlineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCHGridlineLayer.h; sourceTree = "<group>"; };
 		EFD946EB1839DCBB00E9EC50 /* _DCHGridlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCHGridlineLayer.m; sourceTree = "<group>"; };
-		EFD946ED1839DCBB00E9EC50 /* _DCColumnsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCColumnsLayer.h; sourceTree = "<group>"; };
-		EFD946EE1839DCBB00E9EC50 /* _DCColumnsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCColumnsLayer.m; sourceTree = "<group>"; };
+		EFD946ED1839DCBB00E9EC50 /* _DCColumnsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCColumnsLayer.h; path = Common/Utility/DChart/Series/_DCColumnsLayer.h; sourceTree = "<group>"; };
+		EFD946EE1839DCBB00E9EC50 /* _DCColumnsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCColumnsLayer.m; path = Common/Utility/DChart/Series/_DCColumnsLayer.m; sourceTree = "<group>"; };
 		EFD946EF1839DCBB00E9EC50 /* DCColumnSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCColumnSeries.h; sourceTree = "<group>"; };
 		EFD946F01839DCBB00E9EC50 /* DCColumnSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCColumnSeries.m; sourceTree = "<group>"; };
 		EFD946F11839DCBB00E9EC50 /* DCLineSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLineSeries.h; sourceTree = "<group>"; };
@@ -1522,9 +1519,9 @@
 		EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartSeries.m; sourceTree = "<group>"; };
 		EFDCC97C18472AD400955560 /* DCPieWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieWrapper.h; path = Common/Utility/DChartWrapper/DCPieWrapper.h; sourceTree = "<group>"; };
 		EFDCC97D18472AD400955560 /* DCPieWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieWrapper.m; path = Common/Utility/DChartWrapper/DCPieWrapper.m; sourceTree = "<group>"; };
-		EFEA7EDD1843424500CF4C3E /* _DCRankingXLabelFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCRankingXLabelFormatter.h; sourceTree = "<group>"; };
-		EFEA7EDE1843424500CF4C3E /* _DCRankingXLabelFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCRankingXLabelFormatter.m; sourceTree = "<group>"; };
-		EFEA7EE018434F2400CF4C3E /* _DCXLabelFormatterProtocal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _DCXLabelFormatterProtocal.h; sourceTree = "<group>"; };
+		EFEA7EDD1843424500CF4C3E /* _DCRankingXLabelFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCRankingXLabelFormatter.h; path = Common/Utility/DChart/Axis/LabelLayer/_DCRankingXLabelFormatter.h; sourceTree = "<group>"; };
+		EFEA7EDE1843424500CF4C3E /* _DCRankingXLabelFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCRankingXLabelFormatter.m; path = Common/Utility/DChart/Axis/LabelLayer/_DCRankingXLabelFormatter.m; sourceTree = "<group>"; };
+		EFEA7EE018434F2400CF4C3E /* _DCXLabelFormatterProtocal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = _DCXLabelFormatterProtocal.h; path = Common/Utility/DChart/Axis/LabelLayer/_DCXLabelFormatterProtocal.h; sourceTree = "<group>"; };
 		EFF701CD1830880600B371EC /* REMChartStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartStyle.h; sourceTree = "<group>"; };
 		EFF701CE1830880600B371EC /* REMChartStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartStyle.m; sourceTree = "<group>"; };
 		EFF75149183FC60F00C8BBE9 /* DCXYChartBackgroundBand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCXYChartBackgroundBand.h; path = Common/Utility/DChart/DCXYChartBackgroundBand.h; sourceTree = "<group>"; };
@@ -3115,29 +3112,161 @@
 			path = Series;
 			sourceTree = "<group>";
 		};
+		EFC4D213185574FB00E04688 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				EFC4D2201855772600E04688 /* Pie */,
+			);
+			name = Animation;
+			sourceTree = "<group>";
+		};
+		EFC4D2141855752C00E04688 /* Layer */ = {
+			isa = PBXGroup;
+			children = (
+				EFC4D2181855765000E04688 /* Series */,
+				EFD946D91839DCBB00E9EC50 /* LabelLayer */,
+				EFC4D216185575B700E04688 /* BackgroundBands */,
+				EFD946E91839DCBB00E9EC50 /* Gridline */,
+				EFD946D01839DCBB00E9EC50 /* _DCLayer.h */,
+				EFD946D11839DCBB00E9EC50 /* _DCLayer.m */,
+			);
+			name = Layer;
+			sourceTree = "<group>";
+		};
+		EFC4D2151855757600E04688 /* GestureRecognizer */ = {
+			isa = PBXGroup;
+			children = (
+				EF03DC1E1841C886004B9EFD /* _DCHPinchGestureRecognizer.h */,
+				EF03DC1F1841C886004B9EFD /* _DCHPinchGestureRecognizer.m */,
+			);
+			name = GestureRecognizer;
+			sourceTree = "<group>";
+		};
+		EFC4D216185575B700E04688 /* BackgroundBands */ = {
+			isa = PBXGroup;
+			children = (
+				EFF7514F183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.h */,
+				EFF75150183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m */,
+			);
+			name = BackgroundBands;
+			sourceTree = "<group>";
+		};
+		EFC4D217185575E200E04688 /* Formatter */ = {
+			isa = PBXGroup;
+			children = (
+				EF1C5AD8183E00C9002A9AAD /* _DCXLabelFormatter.h */,
+				EF1C5AD9183E00C9002A9AAD /* _DCXLabelFormatter.m */,
+				EFEA7EDD1843424500CF4C3E /* _DCRankingXLabelFormatter.h */,
+				EFEA7EDE1843424500CF4C3E /* _DCRankingXLabelFormatter.m */,
+				EFEA7EE018434F2400CF4C3E /* _DCXLabelFormatterProtocal.h */,
+			);
+			name = Formatter;
+			sourceTree = "<group>";
+		};
+		EFC4D2181855765000E04688 /* Series */ = {
+			isa = PBXGroup;
+			children = (
+				EFC4D21A1855768200E04688 /* Line */,
+				EFC4D2191855767900E04688 /* Column */,
+				EF0346B1183B520100DE186A /* _DCSeriesLayer.h */,
+				EF0346B2183B520100DE186A /* _DCSeriesLayer.m */,
+			);
+			name = Series;
+			sourceTree = "<group>";
+		};
+		EFC4D2191855767900E04688 /* Column */ = {
+			isa = PBXGroup;
+			children = (
+				EFD946ED1839DCBB00E9EC50 /* _DCColumnsLayer.h */,
+				EFD946EE1839DCBB00E9EC50 /* _DCColumnsLayer.m */,
+			);
+			name = Column;
+			sourceTree = "<group>";
+		};
+		EFC4D21A1855768200E04688 /* Line */ = {
+			isa = PBXGroup;
+			children = (
+				EF13626D184EFC6F00BEF648 /* _DCLine.h */,
+				EF13626E184EFC6F00BEF648 /* _DCLine.m */,
+				EF0346AB183B48A500DE186A /* _DCLinesLayer.h */,
+				EF0346AC183B48A500DE186A /* _DCLinesLayer.m */,
+				EF1C5ADB183E23DA002A9AAD /* _DCLineSymbolsLayer.h */,
+				EF1C5ADC183E23DA002A9AAD /* _DCLineSymbolsLayer.m */,
+			);
+			name = Line;
+			sourceTree = "<group>";
+		};
+		EFC4D21B185576BC00E04688 /* Column */ = {
+			isa = PBXGroup;
+			children = (
+				EFD946EF1839DCBB00E9EC50 /* DCColumnSeries.h */,
+				EFD946F01839DCBB00E9EC50 /* DCColumnSeries.m */,
+			);
+			name = Column;
+			sourceTree = "<group>";
+		};
+		EFC4D21C185576C600E04688 /* Line */ = {
+			isa = PBXGroup;
+			children = (
+				EFD946F11839DCBB00E9EC50 /* DCLineSeries.h */,
+				EFD946F21839DCBB00E9EC50 /* DCLineSeries.m */,
+			);
+			name = Line;
+			sourceTree = "<group>";
+		};
+		EFC4D21D185576D100E04688 /* Pie */ = {
+			isa = PBXGroup;
+			children = (
+				EF03DC241841FA2F004B9EFD /* DCPieSeries.h */,
+				EF03DC251841FA2F004B9EFD /* DCPieSeries.m */,
+			);
+			name = Pie;
+			sourceTree = "<group>";
+		};
+		EFC4D21E185576DC00E04688 /* Trend */ = {
+			isa = PBXGroup;
+			children = (
+				EFC4D21B185576BC00E04688 /* Column */,
+				EFC4D21C185576C600E04688 /* Line */,
+				EFD946F51839DCBB00E9EC50 /* DCXYSeries.h */,
+				EFD946F61839DCBB00E9EC50 /* DCXYSeries.m */,
+			);
+			name = Trend;
+			sourceTree = "<group>";
+		};
+		EFC4D21F185576FC00E04688 /* BackgroundBand */ = {
+			isa = PBXGroup;
+			children = (
+				EFF75149183FC60F00C8BBE9 /* DCXYChartBackgroundBand.h */,
+				EFF7514A183FC60F00C8BBE9 /* DCXYChartBackgroundBand.m */,
+			);
+			name = BackgroundBand;
+			sourceTree = "<group>";
+		};
+		EFC4D2201855772600E04688 /* Pie */ = {
+			isa = PBXGroup;
+			children = (
+				EF0BFEA21844A5A60026C47D /* DCPieChartAnimationManager.h */,
+				EF0BFEA31844A5A60026C47D /* DCPieChartAnimationManager.m */,
+				EF0BFEA51844B7090026C47D /* DCPieChartAnimationFrame.h */,
+				EF0BFEA61844B7090026C47D /* DCPieChartAnimationFrame.m */,
+			);
+			name = Pie;
+			sourceTree = "<group>";
+		};
 		EFD946CD1839DB9E00E9EC50 /* DChart */ = {
 			isa = PBXGroup;
 			children = (
+				EFC4D21F185576FC00E04688 /* BackgroundBand */,
+				EFC4D217185575E200E04688 /* Formatter */,
+				EFC4D2151855757600E04688 /* GestureRecognizer */,
+				EFC4D2141855752C00E04688 /* Layer */,
+				EFC4D213185574FB00E04688 /* Animation */,
 				EFD946D41839DCBB00E9EC50 /* Axis */,
 				EFD946DE1839DCBB00E9EC50 /* ChartView */,
 				EFD946E21839DCBB00E9EC50 /* DataPoint */,
-				EFD946E91839DCBB00E9EC50 /* Gridline */,
 				EFD946EC1839DCBB00E9EC50 /* Series */,
 				EFD946F71839DCBB00E9EC50 /* Utility */,
-				EFD946D01839DCBB00E9EC50 /* _DCLayer.h */,
-				EFD946D11839DCBB00E9EC50 /* _DCLayer.m */,
-				EFD946E51839DCBB00E9EC50 /* DCContext.h */,
-				EFD946E61839DCBB00E9EC50 /* DCContext.m */,
-				EFD946E71839DCBB00E9EC50 /* DCRange.h */,
-				EFD946E81839DCBB00E9EC50 /* DCRange.m */,
-				EF0346AE183B4BA600DE186A /* _DCLayerTrashbox.h */,
-				EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */,
-				EFF75149183FC60F00C8BBE9 /* DCXYChartBackgroundBand.h */,
-				EFF7514A183FC60F00C8BBE9 /* DCXYChartBackgroundBand.m */,
-				EFF7514F183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.h */,
-				EFF75150183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m */,
-				EF03DC1E1841C886004B9EFD /* _DCHPinchGestureRecognizer.h */,
-				EF03DC1F1841C886004B9EFD /* _DCHPinchGestureRecognizer.m */,
 			);
 			name = DChart;
 			sourceTree = "<group>";
@@ -3145,9 +3274,6 @@
 		EFD946D41839DCBB00E9EC50 /* Axis */ = {
 			isa = PBXGroup;
 			children = (
-				EFD946D91839DCBB00E9EC50 /* LabelLayer */,
-				EFD946D51839DCBB00E9EC50 /* _DCCoordinateSystem.h */,
-				EFD946D61839DCBB00E9EC50 /* _DCCoordinateSystem.m */,
 				EFD946D71839DCBB00E9EC50 /* DCAxis.h */,
 				EFD946D81839DCBB00E9EC50 /* DCAxis.m */,
 			);
@@ -3162,27 +3288,19 @@
 				EFD946DB1839DCBB00E9EC50 /* _DCXAxisLabelLayer.m */,
 				EFD946DC1839DCBB00E9EC50 /* _DCYAxisLabelLayer.h */,
 				EFD946DD1839DCBB00E9EC50 /* _DCYAxisLabelLayer.m */,
-				EF1C5AD8183E00C9002A9AAD /* _DCXLabelFormatter.h */,
-				EF1C5AD9183E00C9002A9AAD /* _DCXLabelFormatter.m */,
-				EFEA7EDD1843424500CF4C3E /* _DCRankingXLabelFormatter.h */,
-				EFEA7EDE1843424500CF4C3E /* _DCRankingXLabelFormatter.m */,
-				EFEA7EE018434F2400CF4C3E /* _DCXLabelFormatterProtocal.h */,
 			);
-			path = LabelLayer;
+			name = LabelLayer;
+			path = Common/Utility/DChart/Axis/LabelLayer;
 			sourceTree = "<group>";
 		};
 		EFD946DE1839DCBB00E9EC50 /* ChartView */ = {
 			isa = PBXGroup;
 			children = (
+				EFFBE9C0183F04B400672E53 /* DCXYChartViewDelegate.h */,
 				EFD946DF1839DCBB00E9EC50 /* DCXYChartView.h */,
 				EFD946E01839DCBB00E9EC50 /* DCXYChartView.m */,
-				EFFBE9C0183F04B400672E53 /* DCXYChartViewDelegate.h */,
 				EF03DC211841E462004B9EFD /* DCPieChartView.h */,
 				EF03DC221841E462004B9EFD /* DCPieChartView.m */,
-				EF0BFEA21844A5A60026C47D /* DCPieChartAnimationManager.h */,
-				EF0BFEA31844A5A60026C47D /* DCPieChartAnimationManager.m */,
-				EF0BFEA51844B7090026C47D /* DCPieChartAnimationFrame.h */,
-				EF0BFEA61844B7090026C47D /* DCPieChartAnimationFrame.m */,
 			);
 			name = ChartView;
 			path = Common/Utility/DChart/ChartView;
@@ -3215,28 +3333,10 @@
 		EFD946EC1839DCBB00E9EC50 /* Series */ = {
 			isa = PBXGroup;
 			children = (
-				EFD946ED1839DCBB00E9EC50 /* _DCColumnsLayer.h */,
-				EFD946EE1839DCBB00E9EC50 /* _DCColumnsLayer.m */,
-				EF0346AB183B48A500DE186A /* _DCLinesLayer.h */,
-				EF0346AC183B48A500DE186A /* _DCLinesLayer.m */,
-				EFD946EF1839DCBB00E9EC50 /* DCColumnSeries.h */,
-				EFD946F01839DCBB00E9EC50 /* DCColumnSeries.m */,
-				EFD946F11839DCBB00E9EC50 /* DCLineSeries.h */,
-				EFD946F21839DCBB00E9EC50 /* DCLineSeries.m */,
+				EFC4D21E185576DC00E04688 /* Trend */,
+				EFC4D21D185576D100E04688 /* Pie */,
 				EFD946F31839DCBB00E9EC50 /* DCSeries.h */,
 				EFD946F41839DCBB00E9EC50 /* DCSeries.m */,
-				EFD946F51839DCBB00E9EC50 /* DCXYSeries.h */,
-				EFD946F61839DCBB00E9EC50 /* DCXYSeries.m */,
-				EF0346B1183B520100DE186A /* _DCSeriesLayer.h */,
-				EF0346B2183B520100DE186A /* _DCSeriesLayer.m */,
-				EF54C8E4183C8D2400A07557 /* _DCSymbolLayer.h */,
-				EF54C8E5183C8D2400A07557 /* _DCSymbolLayer.m */,
-				EF1C5ADB183E23DA002A9AAD /* _DCLineSymbolsLayer.h */,
-				EF1C5ADC183E23DA002A9AAD /* _DCLineSymbolsLayer.m */,
-				EF03DC241841FA2F004B9EFD /* DCPieSeries.h */,
-				EF03DC251841FA2F004B9EFD /* DCPieSeries.m */,
-				EF13626D184EFC6F00BEF648 /* _DCLine.h */,
-				EF13626E184EFC6F00BEF648 /* _DCLine.m */,
 			);
 			name = Series;
 			path = Common/Utility/DChart/Series;
@@ -3245,6 +3345,14 @@
 		EFD946F71839DCBB00E9EC50 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				EFD946D51839DCBB00E9EC50 /* _DCCoordinateSystem.h */,
+				EFD946D61839DCBB00E9EC50 /* _DCCoordinateSystem.m */,
+				EF0346AE183B4BA600DE186A /* _DCLayerTrashbox.h */,
+				EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */,
+				EFD946E51839DCBB00E9EC50 /* DCContext.h */,
+				EFD946E61839DCBB00E9EC50 /* DCContext.m */,
+				EFD946E71839DCBB00E9EC50 /* DCRange.h */,
+				EFD946E81839DCBB00E9EC50 /* DCRange.m */,
 				EFD946F81839DCBB00E9EC50 /* DCUtility.h */,
 				EFD946F91839DCBB00E9EC50 /* DCUtility.m */,
 			);
@@ -3788,7 +3896,6 @@
 				7A0288ED17C20CC500709111 /* WeiboRequestOperation.m in Sources */,
 				EFEA7EDF1843424500CF4C3E /* _DCRankingXLabelFormatter.m in Sources */,
 				B4F11182183DA71E004D53F6 /* REMBuildingCommodityView.m in Sources */,
-				EF54C8E6183C8D2400A07557 /* _DCSymbolLayer.m in Sources */,
 				EFDAACC218053911008BC9AF /* REMChartConfig.m in Sources */,
 				EFD947091839DCBB00E9EC50 /* DCLineSeries.m in Sources */,
 				EF0BFEA71844B7090026C47D /* DCPieChartAnimationFrame.m in Sources */,

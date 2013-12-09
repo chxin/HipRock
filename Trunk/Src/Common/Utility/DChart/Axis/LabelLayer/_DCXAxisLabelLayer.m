@@ -52,7 +52,7 @@
     }
     [self.trashbox.xToLayerDic removeAllObjects];
     int start = floor(self.graphContext.hRange.location);
-    int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
+    int end = ceil(self.graphContext.hRange.end);
     for (int i = start; i <= end; i++) {
         if (self.trashbox.xToLayerDic[@(i)] == nil) {
             [self addLabelForX:i];
