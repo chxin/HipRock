@@ -450,7 +450,7 @@
 -(void)focusAroundX:(double)x {
     int xRounded = 0;
     if (self.graphContext.pointAlignToTick) {
-        xRounded = floor(x-0.5);
+        xRounded = floor(x+0.5);
     } else {
         xRounded = floor(x);
     }
