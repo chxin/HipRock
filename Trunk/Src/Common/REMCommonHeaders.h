@@ -93,7 +93,6 @@
 #import "_DCLinesLayer.h"
 #import "_DCLineSymbolsLayer.h"
 #import "_DCSeriesLayer.h"
-#import "_DCSymbolLayer.h"
 #import "DCColumnSeries.h"
 #import "DCLineSeries.h"
 #import "DCPieSeries.h"
