@@ -19,7 +19,7 @@
 @interface REMBuildingTrendChartViewController : REMBuildingChartBaseViewController<CPTScatterPlotDataSource,CPTScatterPlotDelegate,CPTPlotSpaceDelegate,UIGestureRecognizerDelegate,CPTAxisDelegate,REMToggleButtonGroupDelegate>
 
 @property (nonatomic,strong) REMEnergyViewData *data;
-@property (nonatomic,strong) CPTXYGraph *graph;
+@property (nonatomic,weak) CPTXYGraph *graph;
 @property (nonatomic,strong) NSMutableArray *chartData;
 @property (nonatomic) double maxEnergyValue;
 @property (nonatomic) NSInteger maxDateIndex;
