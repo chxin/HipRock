@@ -263,7 +263,9 @@ const static CGFloat kRankingTimePickerWidth=250;
     [self.searchView setHidden:YES];
     
     if(self.tooltipView!=nil){
-        [self.tooltipView updateHighlightedData:points];
+        REMTrendChartTooltipView *trendTooltip = (REMTrendChartTooltipView *)self.tooltipView;
+        
+        [trendTooltip updateHighlightedData:points atX:x];
     }
     else{
         [self showTooltip:points];

@@ -575,6 +575,10 @@ static NSCalendar *_currentCalendar;
 
 +(NSString *)formatTooltipTime:(NSDate *)time byStep:(REMEnergyStep)step inRange:(REMTimeRange *)timeRange
 {
+    if(time == nil){
+        return @"";
+    }
+    
     NSDateFormatter *f = [REMTimeHelper currentFormatter];
     
     switch (step) {
@@ -611,7 +615,7 @@ static NSCalendar *_currentCalendar;
             [f setDateFormat:@"yyyy年MM月dd日"];
             
             int weekDay = [REMTimeHelper getWeekDay:time];
-            NSDate *date = [time dateByAddingTimeInterval:(0-weekDay+1) * 60 * 60];
+            NSDate *date = [REMTimeHelper add:(0-weekDay+2) onPart:REMDateTimePartDay ofDate:time]; //[time dateByAddingTimeInterval:(0-weekDay+1) * 60 * 60];
             NSString *s1 = [f stringFromDate:date];
             
             NSString *s2 = @"";
@@ -631,7 +635,7 @@ static NSCalendar *_currentCalendar;
                 //2010年10月3日-10日
                 //str += '-' + eft(newDate, ft.Day);
                 [f setDateFormat:@"dd日"];
-                s2 = [f stringFromDate:date];
+                s2 = [f stringFromDate:newDate];
             }
             
             return [NSString stringWithFormat:@"%@-%@",s1,s2];

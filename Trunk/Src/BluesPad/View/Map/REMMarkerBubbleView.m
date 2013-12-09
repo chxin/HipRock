@@ -14,6 +14,7 @@
 #import "REMDimensions.h"
 #import "REMCommodityUsageModel.h"
 #import "REMEnergyUsageDataModel.h"
+#import "REMCommonHeaders.h"
 
 @interface REMMarkerBubbleView ()
 
@@ -136,24 +137,9 @@
     NSNumber *dataValue = buildingInfo.electricityUsageThisMonth.commodityUsage.dataValue;
     NSString *uom = buildingInfo.electricityUsageThisMonth.commodityUsage.uom.code;
     
-    return REMIsNilOrNull(dataValue) ? nil : [NSString stringWithFormat:REMLocalizedString(@"Map_MarkerBubbleSubtitleFormat"),  [dataValue intValue], uom];
-//    REMCommodityUsageModel *usage = nil;
-//    REMCommodityModel *commodity = nil;
-//    
-//    for(int i=0; i<buildingInfo.commodityArray.count; i++){
-//        commodity = buildingInfo.commodityArray[i];
-//        usage = buildingInfo.commodityUsage[i];
-//        
-//        if([commodity.commodityId intValue] == REMCommodityElectricity){
-//            break;
-//        }
-//    }
-//    
-//    if(usage == nil || commodity == nil || usage.commodityUsage == nil)
-//        return nil;
-//    
-//    return [NSString stringWithFormat:@"本月用电量：%f%@", [usage.commodityUsage.dataValue floatValue], usage.commodityUsage.uom.code];
+    NSString *formattedDataValue = [REMNumberHelper formatStringWithThousandSep:dataValue withRoundDigit:0];
     
+    return REMIsNilOrNull(dataValue) ? nil : [NSString stringWithFormat:REMLocalizedString(@"Map_MarkerBubbleSubtitleFormat"),  formattedDataValue, uom];
 }
 
 

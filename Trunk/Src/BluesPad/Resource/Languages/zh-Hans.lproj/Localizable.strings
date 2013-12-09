@@ -107,7 +107,7 @@
 
 
 //Map, prefix: Map_
-"Map_MarkerBubbleSubtitleFormat"="本月用电量：%d%@";
+"Map_MarkerBubbleSubtitleFormat"="本月用电量：%@%@";
 
 
 //Gallery, prefix: Gallery_

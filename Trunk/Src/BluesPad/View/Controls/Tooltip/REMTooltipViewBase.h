@@ -33,12 +33,12 @@
 @property (nonatomic,weak) UIScrollView *scrollView;
 
 // Methods
-+ (REMTooltipViewBase *)tooltipWithHighlightedPoints:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
++ (REMTooltipViewBase *)tooltipWithHighlightedPoints:(NSArray *)points atX:(id)x inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
 
 -(REMTooltipViewBase *)initWithDefaults;
-- (REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
+- (REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points atX:(id)x inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
 
-- (void)updateHighlightedData:(id)data;
+//- (void)updateHighlightedData:(id)data;
 
 - (NSArray *)convertItemModels;
 

@@ -15,7 +15,7 @@
 
 @property (nonatomic) BOOL showAnimation;
 @property (nonatomic,weak) REMSplashScreenController *splashScreenController;
-@property (nonatomic,weak) REMLoginCardController *loginPageController;
+@property (nonatomic,weak) REMLoginCardController *loginCardController;
 @property (nonatomic,weak) REMTrialCardController *trialCardController;
 
 //- (IBAction)pageChanged:(id)sender;

@@ -162,8 +162,8 @@ static const int kTrialCardIndex = kCardCount - 2;
     REMLoginCardController *loginPageController = [[REMLoginCardController alloc] init];
     
     [self addChildViewController:loginPageController];
-    self.loginPageController = loginPageController;
-    self.loginPageController.loginCarouselController = self;
+    self.loginCardController = loginPageController;
+    self.loginCardController.loginCarouselController = self;
     
     return loginPageController.view;
 }
@@ -195,6 +195,10 @@ static const int kTrialCardIndex = kCardCount - 2;
         self.skipToLoginButton.alpha = 1;
         self.skipToTrialButton.alpha = 1;
         self.pageControl.alpha = 1;
+        
+        [self.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        [self.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        
         [self showPage:kLoginCardIndex withEaseAnimation:NO];
     }
 }
@@ -249,7 +253,7 @@ static const int kTrialCardIndex = kCardCount - 2;
 -(void)presentCustomerSelectionView
 {
     REMLoginCustomerTableViewController *customerController = [[REMLoginCustomerTableViewController alloc] init];
-    customerController.loginCardController = self.loginPageController;
+    customerController.loginCardController = self.loginCardController;
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:customerController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
