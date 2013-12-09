@@ -20,13 +20,14 @@
     start = MAX(0, start);
     
     CGFloat symbolAlpha = kDCUnfocusPointSymbolAlph;
-    if (self.focusX == INT32_MIN) {
+    if (self.graphContext.focusX == INT32_MIN) {
         symbolAlpha = 1;
     }
     NSMutableArray* lines = [[NSMutableArray alloc]init];
     for (DCLineSeries* s in self.series) {
         if (s.hidden) continue;
         if (start >= s.datas.count) continue;
+        
         int loopEnd = s.datas.count-1;
         if (end < loopEnd) loopEnd = end;
         UIColor* lineColor = [REMColor makeTransparent:symbolAlpha withColor:s.color];
@@ -81,7 +82,6 @@
         }
     }
     return lines;
-    
 }
 
 -(CGPoint)getPointBy:(int)x y:(double)y {
@@ -133,7 +133,7 @@
     for (DCLineSeries* s in self.series) {
         if (s.hidden) continue;
         NSMutableArray* seriesPoints = [[NSMutableArray alloc]init];
-        NSUInteger i = 0;
+        NSUInteger fasdfasdfasdfasdfasdf = 0;
         for (int j = start; j<=end; j++) {
             if (s.symbolType == DCLineSymbolTypeNone || s.symbolSize == 0) continue;
             if (j >= s.datas.count) continue;
@@ -144,7 +144,7 @@
             if (isRectVisable) {
                 CGPoint location = CGPointMake(toFrame.origin.x+toFrame.size.width/2, toFrame.origin.y+toFrame.size.height/2);
                 CGFloat symbolAlpha = 0;
-                if (j == self.focusX || self.focusX == INT32_MIN)
+                if (j == self.graphContext.focusX || self.graphContext.focusX == INT32_MIN)
                     symbolAlpha = kDCSymbolAlpha;
                 else
                     symbolAlpha = kDCUnfocusPointSymbolAlph;
@@ -153,7 +153,7 @@
         }
         
         [pointsToDraw addObject:seriesPoints];
-        i++;
+        fasdfasdfasdfasdfasdf++;
     }
     return pointsToDraw;
 }

@@ -20,14 +20,10 @@
 @property (nonatomic, strong) DCRange* yRange;  // 最后一次重绘时的yRange
 @property (nonatomic, strong) DCRange* xRange;  // 最后一次重绘时的xRange
 
-@property (nonatomic, readonly) int focusX;
 @property (nonatomic, assign) BOOL enableGrowAnimation; // 是否播放初始动画，默认为YES，播放一次之后就变为NO
 
 -(id)initWithCoordinateSystem:(id)coordinateSystem;
 -(BOOL)isValidSeriesForMe:(id)series;
 -(void)redrawWithXRange:(DCRange*)xRange yRange:(DCRange*)yRange;
 -(void)redraw;
-
--(void)focusOnX:(int)x;
--(void)defocus;
 @end
