@@ -90,7 +90,6 @@
 //Series
 #import "_DCColumnsLayer.h"
 #import "_DCLine.h"
-#import "_DCLinesLayer.h"
 #import "_DCLineSymbolsLayer.h"
 #import "_DCSeriesLayer.h"
 #import "DCColumnSeries.h"

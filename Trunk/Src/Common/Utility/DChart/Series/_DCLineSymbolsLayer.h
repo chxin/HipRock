@@ -10,5 +10,6 @@
 #import "_DCLine.h"
 
 @interface _DCLineSymbolsLayer : _DCLayer
--(void)drawSymbolsForPoints:(NSArray*)points lines:(NSArray*)lines inSize:(CGSize)plotSize;
+@property (nonatomic, readonly, strong) NSArray* series;
+-(id)initWithContext:(DCContext*)context series:(NSArray*)series;
 @end

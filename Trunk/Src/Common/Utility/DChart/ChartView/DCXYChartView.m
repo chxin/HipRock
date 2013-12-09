@@ -13,7 +13,6 @@
 #import "_DCXAxisLabelLayer.h"
 #import "_DCYAxisLabelLayer.h"
 #import "_DCColumnsLayer.h"
-#import "_DCLinesLayer.h"
 #import "DCXYSeries.h"
 #import "_DCLineSymbolsLayer.h"
 #import "REMColor.h"
@@ -32,7 +31,7 @@
 
 @property (nonatomic, strong) NSMutableArray* coodinates;
 @property (nonatomic, strong) NSMutableArray* columnLayers;
-@property (nonatomic, strong) NSMutableArray* lineLayers;
+//@property (nonatomic, strong) NSMutableArray* lineLayers;
 //@property (nonatomic, strong) NSMutableArray* symbolLayers;
 @property (nonatomic, strong) _DCLineSymbolsLayer* symbolLayer;
 
@@ -80,7 +79,6 @@
 
 -(void)willMoveToSuperview:(UIView *)newSuperview {
     self.columnLayers = [[NSMutableArray alloc]init];
-    self.lineLayers = [[NSMutableArray alloc]init];
     [self.graphContext addHRangeObsever:self];
     
     [self drawAxisLines];
@@ -105,11 +103,6 @@
             [self.layer addSublayer:columnsLayer];
             [self.columnLayers addObject:columnsLayer];
         }
-        _DCLinesLayer* linesLayer = [[_DCLinesLayer alloc]initWithCoordinateSystem:ds];
-        if (linesLayer.series.count > 0) {
-            linesLayer.frame = self.graphContext.plotRect;
-            [self.lineLayers addObject:linesLayer];
-        }
         if (coordiates.count < self.visableYAxisAmount) {
             _DCYAxisLabelLayer* _yLabelLayer = (_DCYAxisLabelLayer*)[ds getAxisLabelLayer];
             [self.layer addSublayer:_yLabelLayer];
@@ -120,7 +113,12 @@
         [coordiates addObject:ds];
     }
     self.coodinates = coordiates;
-    self.symbolLayer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
+    
+    NSMutableArray* lineSeries = [[NSMutableArray alloc]init];
+    for (DCXYSeries* s in self.seriesList) {
+        if (s.type == DCSeriesTypeLine) [lineSeries addObject:s];
+    }
+    self.symbolLayer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext series:lineSeries];
     [self.layer addSublayer:self.symbolLayer];
 //    for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
 //        [self.layer addSublayer:symbol];
@@ -156,20 +154,7 @@
     for (_DCColumnsLayer* columnLayer in self.columnLayers) {
         [columnLayer redrawWithXRange:newRange yRange:columnLayer.coordinateSystem.yRange];
     }
-    for (_DCLinesLayer* lineLayer in self.lineLayers) {
-        [lineLayer redrawWithXRange:newRange yRange:lineLayer.coordinateSystem.yRange];
-    }
-    [self renderLineAndSymbols];
-}
-
--(void)renderLineAndSymbols {
-    NSMutableArray* lines = [[NSMutableArray alloc]init];
-    NSMutableArray* symbolPoints = [[NSMutableArray alloc]init];
-    for (_DCLinesLayer* lineLayer in self.lineLayers) {
-        [lines addObjectsFromArray:[lineLayer getLines]];
-        [symbolPoints addObjectsFromArray:[lineLayer getSymbols]];
-    }
-    [self.symbolLayer drawSymbolsForPoints:symbolPoints lines:lines inSize:self.graphContext.plotRect.size];
+    [self.symbolLayer setNeedsDisplay];
 }
 
 -(void)setFrame:(CGRect)frame {
@@ -429,7 +414,7 @@
     if (self.indicatorLayer) {
         [self.indicatorLayer setNeedsDisplay];
     }
-    [self renderLineAndSymbols];
+    [self.symbolLayer setNeedsDisplay];
 }
 
 -(void)focusAroundX:(double)x {
@@ -469,7 +454,7 @@
             [self.delegate focusPointChanged:points at:xRounded];
         }
     }
-    [self renderLineAndSymbols];
+    [self.symbolLayer setNeedsDisplay];
 }
 
 -(void)setBackgoundBands:(NSArray *)bands {

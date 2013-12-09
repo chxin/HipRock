@@ -53,7 +53,6 @@
     if ([DCRange isRange:xRange equalTo:self.xRange] && [DCRange isRange:yRange equalTo:self.yRange]) return;
     _xRange = xRange;
     _yRange = yRange;
-    _heightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.frame.size.height / self.yRange.length) : 0;
     [self redraw];
 }
 

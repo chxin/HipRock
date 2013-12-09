@@ -11,14 +11,9 @@
 const BOOL kDCDefaultSuspendRedraw = NO;
 
 @implementation _DCLayer
--(void)setNeedsDisplay {
-    if (!self.redrawSuspended) [super setNeedsDisplay];
-}
-
 -(id)initWithContext:(DCContext*)context {
     self = [self init];
     if (self) {
-        self.redrawSuspended = kDCDefaultSuspendRedraw;
         self.graphContext = context;
         self.contentsScale = [[UIScreen mainScreen] scale];
     }

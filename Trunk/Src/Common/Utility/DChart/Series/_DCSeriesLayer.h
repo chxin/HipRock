@@ -16,7 +16,6 @@
 @property (nonatomic, strong) NSArray* series;
 
 @property (nonatomic) CGFloat columnWidthInCoordinateSys;
-@property (nonatomic) CGFloat heightUnitInScreen;
 @property (nonatomic, strong) DCRange* yRange;  // 最后一次重绘时的yRange
 @property (nonatomic, strong) DCRange* xRange;  // 最后一次重绘时的xRange
 
