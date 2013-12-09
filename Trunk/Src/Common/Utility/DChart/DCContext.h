@@ -58,6 +58,8 @@ typedef enum _DCLineType {
 @property (nonatomic, assign) int focusX;
 @property (nonatomic, assign) BOOL showIndicatorOnFocus;
 
+@property (nonatomic) CGRect plotRect;
+
 
 -(void)addHRangeObsever:(id<DCContextHRangeObserverProtocal>)observer;
 -(void)removeHRangeObsever:(id<DCContextHRangeObserverProtocal>)observer;

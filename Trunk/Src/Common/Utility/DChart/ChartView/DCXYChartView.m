@@ -36,8 +36,6 @@
 //@property (nonatomic, strong) NSMutableArray* symbolLayers;
 @property (nonatomic, strong) _DCLineSymbolsLayer* symbolLayer;
 
-@property (nonatomic) CGRect plotRect;
-
 @property (nonatomic, strong) NSTimer* timer;
 @property (nonatomic, strong) NSFormatter* xLabelFormatter;
 
@@ -72,7 +70,7 @@
 -(void)drawIndicatorLayer {
     if (!self.graphContext.showIndicatorOnFocus) return;
     self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext];
-    self.indicatorLayer.frame = CGRectMake(self.plotRect.origin.x, 0, self.plotRect.size.width, self.plotRect.size.height+self.plotPaddingTop);// self.plotRect;
+    self.indicatorLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, 0, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height+self.plotPaddingTop);// self.graphContext.plotRect;
     self.indicatorLayer.symbolLineStyle = self.focusSymbolLineStyle;
     self.indicatorLayer.symbolLineWidth = self.focusSymbolLineWidth;
     self.indicatorLayer.symbolLineColor = self.focusSymbolLineColor;
@@ -91,7 +89,7 @@
     [self drawIndicatorLayer];
     
     self.backgroundBandsLayer = [[_DCBackgroundBandsLayer alloc]initWithContext:self.graphContext];
-    self.backgroundBandsLayer.frame = self.plotRect;
+    self.backgroundBandsLayer.frame = self.graphContext.plotRect;
     [self.graphContext addHRangeObsever:self.backgroundBandsLayer];
     [self.layer addSublayer:self.backgroundBandsLayer];
     [self.backgroundBandsLayer setBands:self.bgBands];
@@ -103,25 +101,19 @@
         
         _DCColumnsLayer* columnsLayer = [[_DCColumnsLayer alloc]initWithCoordinateSystem:ds];
         if (columnsLayer.series.count > 0) {
-            columnsLayer.frame = self.plotRect;
+            columnsLayer.frame = self.graphContext.plotRect;
             [self.layer addSublayer:columnsLayer];
-            [columnsLayer setNeedsDisplay];
             [self.columnLayers addObject:columnsLayer];
         }
         _DCLinesLayer* linesLayer = [[_DCLinesLayer alloc]initWithCoordinateSystem:ds];
         if (linesLayer.series.count > 0) {
-//            _DCLineSymbolsLayer* symbols = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext];
-//            linesLayer.symbolsLayer = symbols;
-//            [self.symbolLayers addObject:symbols];
-            linesLayer.frame = self.plotRect;
-            [self.layer addSublayer:linesLayer];
-            [linesLayer setNeedsDisplay];
+            linesLayer.frame = self.graphContext.plotRect;
             [self.lineLayers addObject:linesLayer];
         }
         if (coordiates.count < self.visableYAxisAmount) {
             _DCYAxisLabelLayer* _yLabelLayer = (_DCYAxisLabelLayer*)[ds getAxisLabelLayer];
             [self.layer addSublayer:_yLabelLayer];
-            _yLabelLayer.frame = CGRectMake(ds.isMajor ? ds.yAxis.startPoint.x-ds.yAxis.size.width :ds.yAxis.startPoint.x, self.plotRect.origin.y, ds.yAxis.size.width, ds.yAxis.size.height);
+            _yLabelLayer.frame = CGRectMake(ds.isMajor ? ds.yAxis.startPoint.x-ds.yAxis.size.width :ds.yAxis.startPoint.x, self.graphContext.plotRect.origin.y, ds.yAxis.size.width, ds.yAxis.size.height);
             [_yLabelLayer setNeedsDisplay];
         }
         
@@ -177,7 +169,7 @@
         [lines addObjectsFromArray:[lineLayer getLines]];
         [symbolPoints addObjectsFromArray:[lineLayer getSymbols]];
     }
-    [self.symbolLayer drawSymbolsForPoints:symbolPoints lines:lines inSize:self.plotRect.size];
+    [self.symbolLayer drawSymbolsForPoints:symbolPoints lines:lines inSize:self.graphContext.plotRect.size];
 }
 
 -(void)setFrame:(CGRect)frame {
@@ -186,7 +178,7 @@
 }
 
 -(void)updateSymbolFrameSize {
-    CGRect symbolFrameSize = CGRectMake(self.plotRect.origin.x, self.plotRect.origin.y, self.plotRect.size.width, self.plotRect.size.height + self.xAxis.lineWidth + self.xAxis.labelToLine);
+    CGRect symbolFrameSize = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height + self.xAxis.lineWidth + self.xAxis.labelToLine);
 //    for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
 //        symbol.frame = symbolFrameSize;
 //    }
@@ -201,7 +193,7 @@
     self._xLabelLayer.font = self.xAxis.labelFont;
     self._xLabelLayer.fontColor = self.xAxis.labelColor;
     [self.graphContext addHRangeObsever:self._xLabelLayer];
-    self._xLabelLayer.frame = CGRectMake(self.plotRect.origin.x, self.plotRect.size.height+self.plotRect.origin.y, self.plotRect.size.width, self.frame.size.height - self.plotRect.size.height - self.plotPaddingBottom - self.plotPaddingTop);
+    self._xLabelLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.size.height+self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.frame.size.height - self.graphContext.plotRect.size.height - self.plotPaddingBottom - self.plotPaddingTop);
     [self.layer addSublayer:self._xLabelLayer];
     self._xLabelLayer.labelFormatter = self.xLabelFormatter;
     [self._xLabelLayer setNeedsDisplay];
@@ -240,12 +232,12 @@
     self.xAxis.startPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
     self.xAxis.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
     
-    self.plotRect = CGRectMake(plotSpaceLeft, plotSpaceTop, plotSpaceRight-plotSpaceLeft, plotSpaceBottom-plotSpaceTop);
+    self.graphContext.plotRect = CGRectMake(plotSpaceLeft, plotSpaceTop, plotSpaceRight-plotSpaceLeft, plotSpaceBottom-plotSpaceTop);
 }
 
 -(void)drawHGridline {
     self._hGridlineLayer = [[_DCHGridlineLayer alloc]initWithContext:self.graphContext];
-    self._hGridlineLayer.frame = self.plotRect;
+    self._hGridlineLayer.frame = self.graphContext.plotRect;
     self._hGridlineLayer.lineColor = self.hGridlineColor;
     self._hGridlineLayer.lineWidth = self.hGridlineWidth;
     self._hGridlineLayer.lineStyle = self.hGridlineStyle;
@@ -327,7 +319,7 @@
 
 -(void)viewTapped:(UITapGestureRecognizer *)gesture {
     CGPoint touchPoint = [gesture locationInView:self];
-    if (CGRectContainsPoint(self.plotRect, touchPoint)) {
+    if (CGRectContainsPoint(self.graphContext.plotRect, touchPoint)) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(touchedInPlotAt:xCoordinate:)]) {
             [self.delegate touchedInPlotAt:touchPoint xCoordinate:[self getXLocationForPoint:touchPoint]];
         }
@@ -338,12 +330,12 @@
 }
 
 -(double)getXLocationForPoint:(CGPoint)point {
-    return self.graphContext.hRange.location+self.graphContext.hRange.length*(point.x-self.plotRect.origin.x)/self.plotRect.size.width;
+    return self.graphContext.hRange.location+self.graphContext.hRange.length*(point.x-self.graphContext.plotRect.origin.x)/self.graphContext.plotRect.size.width;
 }
 
 -(void)viewPanned:(UIPanGestureRecognizer*)gesture {
     CGPoint touchPoint = [gesture locationInView:self];
-//    if (CGRectContainsPoint(self.plotRect, touchPoint)) {
+//    if (CGRectContainsPoint(self.graphContext.plotRect, touchPoint)) {
         BOOL moveEnabled = YES;
         CGPoint translation = [gesture translationInView:self];
         if (self.delegate && [self.delegate respondsToSelector:@selector(panInPlotAt:translation:)]) {
@@ -362,7 +354,7 @@
                     [self.delegate panStopped];
                 }
             } else {
-                DCRange* newRange = [[DCRange alloc]initWithLocation:-translation.x*self.graphContext.hRange.length/self.plotRect.size.width+self.graphContext.hRange.location length:self.graphContext.hRange.length];
+                DCRange* newRange = [[DCRange alloc]initWithLocation:-translation.x*self.graphContext.hRange.length/self.graphContext.plotRect.size.width+self.graphContext.hRange.location length:self.graphContext.hRange.length];
                 if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByUserPan]) {
                     self.graphContext.hRange = newRange;
                 }
@@ -374,7 +366,7 @@
 }
 
 -(void)viewPinched:(_DCHPinchGestureRecognizer*)gesture {
-    CGFloat centerX = self.graphContext.hRange.location + self.graphContext.hRange.length * (gesture.centerX - self.plotRect.origin.x) / self.plotRect.size.width;
+    CGFloat centerX = self.graphContext.hRange.location + self.graphContext.hRange.length * (gesture.centerX - self.graphContext.plotRect.origin.x) / self.graphContext.plotRect.size.width;
     CGFloat start = centerX - (centerX - self.graphContext.hRange.location) * gesture.leftScale;
     CGFloat end = centerX + (-centerX + self.graphContext.hRange.end) * gesture.rightScale;
     
