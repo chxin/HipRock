@@ -11,6 +11,6 @@
 
 @interface REMTrendChartTooltipView : REMTooltipViewBase
 
-
+- (void)updateHighlightedData:(NSArray *)points atX:(id)x;
 
 @end

@@ -23,6 +23,7 @@
 @property (nonatomic,weak) UIView *backgroundView;
 @property (nonatomic,weak) UIView *normalLogo;
 @property (nonatomic,weak) UIView *flashLogo;
+@property (nonatomic,weak) UIView *copyrightView;
 
 @property (nonatomic,weak) REMLoginCarouselController *carouselController;
 
@@ -50,6 +51,10 @@
 
 - (void)loadBackground
 {
+    if(self.backgroundView != nil){
+        return;
+    }
+    
     UIImageView *background = [[UIImageView alloc] initWithImage:REMLoadImageResource(@"SplashScreenBackgroud", @"jpg")];
     background.frame = REMISIOS7 ? CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight) : CGRectMake(0, -20, kDMScreenWidth, kDMScreenHeight);
     
@@ -60,6 +65,10 @@
 - (void)loadLogoView
 {
     //Normal logo and flash logo
+    if(self.logoView != nil){
+        return;
+    }
+    
     CGSize logoSize = REMIMG_SplashScreenLogo_Common.size;
     UIImageView *normalLogo = [[UIImageView alloc] initWithImage:REMIMG_SplashScreenLogo_Common];
     UIImageView *flashLogo = [[UIImageView alloc] initWithImage:REMIMG_SplashScreenLogo_Flash];
@@ -90,6 +99,10 @@
 
 - (void)loadCopyrightView
 {
+    if(self.copyrightView!=nil){
+        return;
+    }
+    
     NSString *copyrightText = REMLocalizedString(@"Splash_Copyright");
     UIFont *font = [UIFont systemFontOfSize:kDMSplash_CopyrightLabelFontSize];
     CGSize labelSize = [copyrightText sizeWithFont:font];
@@ -101,6 +114,7 @@
     copyrightLabel.backgroundColor = [UIColor clearColor];
     
     [self.view addSubview:copyrightLabel];
+    self.copyrightView = copyrightLabel;
 }
 
 - (void)viewDidLoad
@@ -239,36 +253,24 @@
 - (void)showLoginView:(BOOL)isAnimated
 {
     if(self.carouselController!=nil){
-        [self.carouselController.view removeFromSuperview];
-        self.carouselController = nil;
+//        [self.carouselController.view removeFromSuperview];
+//        self.carouselController = nil;
+        
+        [self.carouselController playCarousel:isAnimated];
     }
-    
-    self.carouselController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginCarousel"];
-    self.carouselController.showAnimation = isAnimated;
-    UIView *carouselView = self.carouselController.view;
-    carouselView.frame = self.view.bounds;
-    
-    [self addChildViewController:self.carouselController];
-    [self.view addSubview:carouselView];
-    
-    self.carouselController.splashScreenController = self;
-    
-    [self.carouselController playCarousel:isAnimated];
-    
-//carouselView.frame = CGRectMake(self.view.bounds.origin.x-1024, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
-//    carouselView.frame = self.view.bounds;
-//    
-//    if(isAnimated==YES)
-//    {
-//        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-//            carouselView.frame = self.view.bounds;
-//        } completion:^(BOOL finished) {
-//            [self.carouselController playCarousel];
-//        }];
-//    }
-//    else{
-//        carouselView.frame = self.view.bounds;
-//    }
+    else{
+        self.carouselController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginCarousel"];
+        self.carouselController.showAnimation = isAnimated;
+        UIView *carouselView = self.carouselController.view;
+        carouselView.frame = self.view.bounds;
+        
+        [self addChildViewController:self.carouselController];
+        [self.view addSubview:carouselView];
+        
+        self.carouselController.splashScreenController = self;
+        
+        [self.carouselController playCarousel:isAnimated];
+    }
 }
 
 - (void)showMapView:(void (^)(void))loadCompleted

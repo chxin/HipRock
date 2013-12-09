@@ -196,9 +196,9 @@
     //NSLog(@"child controllers before: %d", nav.childViewControllers.count);
     [mainController dismissViewControllerAnimated:YES completion:^(void){
         //self.view = nil;
-        [nav popToRootViewControllerAnimated:NO];
+        //[nav popToRootViewControllerAnimated:NO];
         //NSLog(@"child controllers after: %d", nav.childViewControllers.count);
-        [mainController presentLoginView:nil];
+        [mainController logout:nil];
         
         [REMStorage clearSessionStorage];
         [REMStorage clearOnApplicationActive];

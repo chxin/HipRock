@@ -25,6 +25,8 @@
 @property (nonatomic,weak) UILabel *pointTimeLabel;
 @property (nonatomic,weak) UILabel *timeLabel;
 
+@property (nonatomic,strong) NSDate *xTime;
+
 @end
 
 @implementation REMTrendChartTooltipView
@@ -45,12 +47,14 @@
  */
 
 
--(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
+-(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points atX:(id)x inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
-    self = [super initWithHighlightedPoints:points inEnergyData:data widget:widget andParameters:parameters];
+    self = [super initWithHighlightedPoints:points atX:x inEnergyData:data widget:widget andParameters:parameters];
     
     if(self){
         //add time view into content view
+        self.xTime = [x isKindOfClass:[NSDate class]] ? x : nil;
+        
         UILabel *timeLabel = [self renderTimeView];
         [self.contentView addSubview:timeLabel];
         self.timeLabel = timeLabel;
@@ -96,7 +100,7 @@
     return view;
 }
 
-- (void)updateHighlightedData:(NSArray *)points
+- (void)updateHighlightedData:(NSArray *)points atX:(id)x
 {
     self.highlightedPoints = points;
     self.itemModels = [self convertItemModels];
@@ -104,8 +108,8 @@
     for(int i=0;i<self.itemModels.count;i++)
         [[self.tooltipItems objectAtIndex:i] updateModel:self.itemModels[i]];
     
-    DCDataPoint *point = self.highlightedPoints[0];
-    self.timeLabel.text = [self formatTimeText:point.energyData.localTime];
+    NSDate *time = [x isKindOfClass:[NSDate class]] ? x : nil;
+    self.timeLabel.text = [self formatTimeText:time];
 }
 
 - (NSArray *)convertItemModels
@@ -140,13 +144,13 @@
 {
     DCDataPoint *point = self.highlightedPoints[0];
     
-    NSString *text = [self formatTimeText:point.energyData.localTime];
+    NSString *text = [self formatTimeText:self.xTime];
     if(self.widget.contentSyntax.dataStoreType == REMDSEnergyMultiTimeTrend){
         text = point.target.name;
     }
     
     UILabel *timeLabel = [[UILabel alloc] initWithFrame:kDMChart_TooltipTimeViewFrame];
-    timeLabel.text = text;
+    timeLabel.text = text == nil ? @" " : text;
     timeLabel.textColor = [REMColor colorByHexString:kDMChart_TooltipTimeViewFontColor];
     timeLabel.font = [UIFont systemFontOfSize:kDMChart_TooltipTimeViewFontSize];
     timeLabel.backgroundColor = [UIColor clearColor];

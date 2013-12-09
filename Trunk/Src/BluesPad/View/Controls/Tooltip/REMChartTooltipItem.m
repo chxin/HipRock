@@ -104,7 +104,8 @@
 
 -(void)updateDataValue:(REMChartTooltipItemModel *)model
 {
-    NSString *text = [NSString stringWithFormat:@"%@ %@", REMIsNilOrNull(model.value) ? @"": [model.value stringValue], model.uom];
+    NSString *valueText = [REMNumberHelper formatStringWithThousandSep:model.value withRoundDigit:0];
+    NSString *text = [NSString stringWithFormat:@"%@ %@", REMIsNilOrNull(model.value) ? @"": valueText, model.uom];
     
     
     NSRange uomRange = [text rangeOfString:model.uom];
