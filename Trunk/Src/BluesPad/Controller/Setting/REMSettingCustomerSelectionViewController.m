@@ -128,8 +128,8 @@
             [[REMApplicationContext instance].currentCustomer save];
             [self.settingController needReload];
             [REMDataAccessor cancelAccess];
-
-            [mainController dismissViewControllerAnimated:YES completion:^{
+            
+            [mainController dismissViewControllerAnimated:NO completion:^{
                 [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];
                 [mainController popToRootViewControllerAnimated:YES];
                 [mainController presentInitialView:^(void){
