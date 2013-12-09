@@ -88,8 +88,8 @@
         view.graphContext.pointAlignToTick = NO;
         view.graphContext.xLabelAlignToTick = YES;
     } else {
-        view.graphContext.pointAlignToTick = NO;
-        view.graphContext.xLabelAlignToTick = NO;
+        view.graphContext.pointAlignToTick = YES;
+        view.graphContext.xLabelAlignToTick = YES;
     }
     [self customizeView:view];
 }
