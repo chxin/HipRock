@@ -40,7 +40,7 @@
         self.linesToDraw = nil;
     }
     
-    if (REMIsNilOrNull(self.pointsToDraw) && self.pointsToDraw.count > 0) {
+    if (!REMIsNilOrNull(self.pointsToDraw) && self.pointsToDraw.count > 0) {
         for (NSArray* seriesPoints in self.pointsToDraw) {
             if (seriesPoints.count==0) continue;
             DCDataPoint* point = seriesPoints[0][@"dcpoint"];

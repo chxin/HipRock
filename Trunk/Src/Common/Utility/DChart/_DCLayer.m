@@ -16,7 +16,7 @@ const BOOL kDCDefaultSuspendRedraw = NO;
 }
 
 -(id)initWithContext:(DCContext*)context {
-    self = [super init];
+    self = [self init];
     if (self) {
         self.redrawSuspended = kDCDefaultSuspendRedraw;
         self.graphContext = context;
