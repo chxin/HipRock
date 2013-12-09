@@ -95,9 +95,9 @@ const static CGFloat widgetGap=20;
             
             [self.view addSubview:sub.view];
             
-            if(i==self.currentWidgetIndex || i==(self.currentWidgetIndex-1) || i == (self.currentWidgetIndex+1)){
-                [sub showChart];
-            }
+//            if(i==self.currentWidgetIndex || i==(self.currentWidgetIndex-1) || i == (self.currentWidgetIndex+1)){
+//                [sub showChart];
+//            }
         }
         
     }
@@ -120,24 +120,27 @@ const static CGFloat widgetGap=20;
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
+    if (parent==nil) {
+        return;
+    }
     for (int i=0; i<self.childViewControllers.count; ++i) {
         
         REMWidgetDetailViewController *sub=self.childViewControllers[i];
         
-        if (i!=self.currentWidgetIndex) {
-            UIView *view = sub.view;
-            [view setFrame:CGRectMake(i*self.view.frame.size.width, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height)];
-            
-            
-            NSInteger gap=i-self.currentWidgetIndex;
-            [sub.view setCenter:CGPointMake(gap*(self.view.frame.size.width+widgetGap)+self.view.frame.size.width/2, self.view.center.y)];
-            
-            [self.view addSubview:sub.view];
-            
-            if(i==self.currentWidgetIndex || i==(self.currentWidgetIndex-1) || i == (self.currentWidgetIndex+1)){
-                [sub showChart];
-            }
+        
+        UIView *view = sub.view;
+        [view setFrame:CGRectMake(i*self.view.frame.size.width, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height)];
+        
+        
+        NSInteger gap=i-self.currentWidgetIndex;
+        [sub.view setCenter:CGPointMake(gap*(self.view.frame.size.width+widgetGap)+self.view.frame.size.width/2, self.view.center.y)];
+        
+        [self.view addSubview:sub.view];
+        
+        if(i==self.currentWidgetIndex || i==(self.currentWidgetIndex-1) || i == (self.currentWidgetIndex+1)){
+            [sub showChart];
         }
+        
         
     }
 }

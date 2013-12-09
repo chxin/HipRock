@@ -445,7 +445,10 @@
 }
 
 - (void)reloadChart{
-    
+    if (self.pieWrapper==nil && self.chartWrapper==nil) {
+        [self showEnergyChart];
+        return;
+    }
     if(self.pieWrapper!=nil){
         [self.pieWrapper redraw:self.energyData];
         return;
@@ -901,6 +904,7 @@
     [self doSearchWithModel:self.tempModel callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
         if(data!=nil){
             [self copyTempModel];
+            
             [self reloadChart];
             
         }
