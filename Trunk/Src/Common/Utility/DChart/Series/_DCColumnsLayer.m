@@ -72,7 +72,7 @@
                     column = [[CALayer alloc]init];
                     column.frame = CGRectMake(toFrame.origin.x, self.frame.size.height, toFrame.size.width, toFrame.size.height);
                     [self addSublayer:column];
-                    if (self.focusX == INT32_MIN || j == self.focusX) {
+                    if (self.graphContext.focusX == INT32_MIN || j == self.graphContext.focusX) {
                         column.backgroundColor = s.color.CGColor;
                     } else {
                         column.backgroundColor = [REMColor makeTransparent:kDCFocusPointAlpha withColor:s.color].CGColor;
@@ -96,7 +96,7 @@
                 } else if (column != nil && isRectVisable) {
                     column.frame = toFrame;
                     [xDics setObject:column forKey:key];
-                    if (self.focusX == INT32_MIN || j == self.focusX) {
+                    if (self.graphContext.focusX == INT32_MIN || j == self.graphContext.focusX) {
                         column.backgroundColor = s.color.CGColor;
                     } else {
                         column.backgroundColor = [REMColor makeTransparent:kDCFocusPointAlpha withColor:s.color].CGColor;
@@ -141,17 +141,4 @@
     return [series isKindOfClass:[DCColumnSeries class]];
 }
 
--(void)focusOnX:(int)x {
-    if (self.focusX != x) {
-        [super focusOnX:x];
-        [self redraw];
-    }
-}
-
--(void)defocus {
-    if (self.focusX != INT32_MIN) {
-        [super defocus];
-        [self redraw];
-    }
-}
 @end

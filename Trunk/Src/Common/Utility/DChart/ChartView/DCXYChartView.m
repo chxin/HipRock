@@ -45,8 +45,6 @@
 @property (nonatomic, strong) UIPanGestureRecognizer* panGsRec;
 @property (nonatomic, strong) _DCHPinchGestureRecognizer* pinchGsRec;
 
-@property (nonatomic, assign) int focusPointIndex;
-
 @property (nonatomic, strong) _DCBackgroundBandsLayer* backgroundBandsLayer;
 
 @property (nonatomic, strong) NSArray* bgBands;
@@ -66,14 +64,13 @@
         self.backgoundBands = [[NSMutableArray alloc]init];
 //        self.multipleTouchEnabled = YES;
         _beginHRange = beginHRange;
-        _focusPointIndex = INT32_MIN;
         _visableYAxisAmount = 3;
     }
     return self;
 }
 
 -(void)drawIndicatorLayer {
-    if (!self.showIndicatorOnFocus) return;
+    if (!self.graphContext.showIndicatorOnFocus) return;
     self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext];
     self.indicatorLayer.frame = CGRectMake(self.plotRect.origin.x, 0, self.plotRect.size.width, self.plotRect.size.height+self.plotPaddingTop);// self.plotRect;
     self.indicatorLayer.symbolLineStyle = self.focusSymbolLineStyle;
@@ -170,10 +167,10 @@
     for (_DCLinesLayer* lineLayer in self.lineLayers) {
         [lineLayer redrawWithXRange:newRange yRange:lineLayer.coordinateSystem.yRange];
     }
-    [self renderSymbol];
+    [self renderLineAndSymbols];
 }
 
--(void)renderSymbol {
+-(void)renderLineAndSymbols {
     NSMutableArray* lines = [[NSMutableArray alloc]init];
     NSMutableArray* symbolPoints = [[NSMutableArray alloc]init];
     for (_DCLinesLayer* lineLayer in self.lineLayers) {
@@ -432,19 +429,15 @@
     }
 }
 -(void)defocus {
-    if (self.focusPointIndex == INT32_MIN) return;
-    self.focusPointIndex = INT32_MIN;
+    if (self.graphContext.focusX == INT32_MIN) return;
+    self.graphContext.focusX = INT32_MIN;
     for (_DCColumnsLayer* columnLayer in self.columnLayers) {
-        [columnLayer defocus];
-    }
-    for (_DCLinesLayer* lineLayer in self.lineLayers) {
-        [lineLayer defocus];
+        [columnLayer setNeedsDisplay];
     }
     if (self.indicatorLayer) {
-        self.indicatorLayer.symbolLineAt = nil;
         [self.indicatorLayer setNeedsDisplay];
     }
-    [self renderSymbol];
+    [self renderLineAndSymbols];
 }
 
 -(void)focusAroundX:(double)x {
@@ -460,19 +453,12 @@
     if (xRounded < globalStartCeil) xRounded = globalStartCeil;
     if (xRounded > globalEndFloor) xRounded = globalEndFloor;
     
-    if (xRounded != self.focusPointIndex) {
-//    while (![self hasPointsAtX:xRounded]) {
-//        
-//    }
-        self.focusPointIndex = xRounded;
+    if (xRounded != self.graphContext.focusX) {
+        self.graphContext.focusX = xRounded;
         for (_DCColumnsLayer* columnLayer in self.columnLayers) {
-            [columnLayer focusOnX:xRounded];
-        }
-        for (_DCLinesLayer* lineLayer in self.lineLayers) {
-            [lineLayer focusOnX:xRounded];
+            [columnLayer setNeedsDisplay];
         }
         if (self.indicatorLayer) {
-            self.indicatorLayer.symbolLineAt = @(xRounded);
             [self.indicatorLayer setNeedsDisplay];
         }
         
@@ -485,13 +471,13 @@
                     p.target = s.target;
                     [points addObject:p];
                 } else {
-                    [points addObject:s.datas[self.focusPointIndex]];
+                    [points addObject:s.datas[xRounded]];
                 }
             }
             [self.delegate focusPointChanged:points at:xRounded];
         }
     }
-    [self renderSymbol];
+    [self renderLineAndSymbols];
 }
 
 -(void)setBackgoundBands:(NSArray *)bands {
