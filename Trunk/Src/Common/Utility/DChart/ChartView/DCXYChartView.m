@@ -170,10 +170,10 @@
     for (_DCLinesLayer* lineLayer in self.lineLayers) {
         [lineLayer redrawWithXRange:newRange yRange:lineLayer.coordinateSystem.yRange];
     }
-    [self renderSymbol];
+    [self renderLineAndSymbols];
 }
 
--(void)renderSymbol {
+-(void)renderLineAndSymbols {
     NSMutableArray* lines = [[NSMutableArray alloc]init];
     NSMutableArray* symbolPoints = [[NSMutableArray alloc]init];
     for (_DCLinesLayer* lineLayer in self.lineLayers) {
@@ -444,7 +444,7 @@
         self.indicatorLayer.symbolLineAt = nil;
         [self.indicatorLayer setNeedsDisplay];
     }
-    [self renderSymbol];
+    [self renderLineAndSymbols];
 }
 
 -(void)focusAroundX:(double)x {
@@ -491,7 +491,7 @@
             [self.delegate focusPointChanged:points at:xRounded];
         }
     }
-    [self renderSymbol];
+    [self renderLineAndSymbols];
 }
 
 -(void)setBackgoundBands:(NSArray *)bands {
