@@ -208,6 +208,8 @@
     //[button setBounds:self.chartContainer.bounds];
     button.showsTouchWhenHighlighted=NO;
     button.adjustsImageWhenHighlighted=NO;
+    [button setExclusiveTouch:YES];
+    [button setMultipleTouchEnabled:NO];
     [button setBackgroundImage:image forState:UIControlStateNormal];
     //[button setBackgroundImage:image forState:UIControlStateHighlighted];
     //[button setBackgroundImage:image forState:UIControlStateSelected];
