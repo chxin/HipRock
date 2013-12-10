@@ -38,6 +38,7 @@
     s.xAxis = view.xAxis;
 //    s.yAxis = view.yAxis0;
     s.yAxis.axisTitle = targetEnergy.target.uomName;
+    s.color = [REMColor colorByIndex:0].uiColor;
     [self customizeSeries:s seriesIndex:index chartStyle:style];
     
     if (self.sortOrder == NSOrderedDescending) [self swapeAllDatas:s];
