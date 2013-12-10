@@ -60,7 +60,12 @@
         [label drawInRect:theLastLabelRect withFont:self.font lineBreakMode:NSLineBreakByClipping alignment:self.isMajorAxis ? NSTextAlignmentRight : NSTextAlignmentLeft];
     }
     if (!REMIsNilOrNull(self.axis.axisTitle) && self.axis.axisTitle.length > 0) {
-        [self.axis.axisTitle drawInRect:CGRectMake(theLastLabelRect.origin.x, theLastLabelRect.origin.y - theLastLabelRect.size.height - self.axisTitleToTopLabel, theLastLabelRect.size.width, theLastLabelRect.size.height) withFont:self.font lineBreakMode:NSLineBreakByClipping alignment:self.isMajorAxis ? NSTextAlignmentRight : NSTextAlignmentLeft];
+        UIFont* titleFont = self.font;
+        CGRect fontLabelRect = CGRectMake(theLastLabelRect.origin.x, theLastLabelRect.origin.y - theLastLabelRect.size.height - self.axisTitleToTopLabel, theLastLabelRect.size.width, theLastLabelRect.size.height);
+        while ([DCUtility getSizeOfText:self.axis.axisTitle forFont:titleFont].width > fontLabelRect.size.width) {
+            titleFont = [UIFont fontWithName:titleFont.fontName size:titleFont.pointSize-1];
+        }
+        [self.axis.axisTitle drawInRect:fontLabelRect withFont:titleFont lineBreakMode:NSLineBreakByClipping alignment:self.isMajorAxis ? NSTextAlignmentRight : NSTextAlignmentLeft];
     }
     UIGraphicsPopContext();
 }

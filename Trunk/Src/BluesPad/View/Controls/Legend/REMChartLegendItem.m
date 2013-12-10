@@ -12,11 +12,11 @@
 #import "REMCommonHeaders.h"
 
 
-#define kREMLegendItemFrame CGRectMake(0,0,kDMChart_LegendItemWidth,kDMChart_LegendItemHeight)
+//#define kREMLegendItemFrame CGRectMake(0,0,kDMChart_LegendItemWidth,kDMChart_LegendItemHeight)
 
 #define kREMLegendInnerIndicatorFrame CGRectMake(kDMChart_LegendIndicatorLeftOffset,kDMChart_LegendIndicatorTopOffset, kDMChart_IndicatorSize,kDMChart_IndicatorSize)
 
-#define kREMLegendInnerLabelFrame CGRectMake(kDMChart_LegendIndicatorLeftOffset + kDMChart_IndicatorSize + kDMChart_LegendLabelLeftOffset, kDMChart_LegendLabelTopOffset, kDMChart_LegendItemWidth - (kDMChart_LegendIndicatorLeftOffset + kDMChart_IndicatorSize + kDMChart_LegendLabelLeftOffset), kDMChart_LegendLabelFontSize+1)
+#define kREMLegendInnerLabelFrame CGRectMake(kDMChart_LegendIndicatorLeftOffset + kDMChart_IndicatorSize + kDMChart_LegendLabelLeftOffset, kDMChart_LegendLabelTopOffset, self.frame.size.width - (kDMChart_LegendIndicatorLeftOffset + kDMChart_IndicatorSize + kDMChart_LegendLabelLeftOffset), kDMChart_LegendLabelFontSize+1)
 
 @interface REMChartLegendItem()
 
@@ -32,9 +32,9 @@
 
 @implementation REMChartLegendItem
 
--(REMChartLegendItem *)initWithModel:(REMChartLegendItemModel *)model
+-(REMChartLegendItem *)initWithFrame:(CGRect)frame andModel:(REMChartLegendItemModel *)model
 {
-    self = [super initWithFrame:kREMLegendItemFrame];
+    self = [super initWithFrame:frame];
     if(self){
         self.seriesIndex = model.index;
         self.delegate = model.delegate;
@@ -48,7 +48,7 @@
         self.backgroundColor = [REMColor colorByHexString:kDMChart_LegendItemBackgroundColor];
         
         //add indicator
-        REMChartSeriesIndicator *indicator = [REMChartSeriesIndicator indicatorWithType:model.type andColor:[REMColor colorByIndex:model.index].uiColor];
+        REMChartSeriesIndicator *indicator = model.isBenchmark ? [REMChartSeriesIndicator indicatorWithType:REMChartSeriesIndicatorLine andColor:[REMColor colorByHexString:kDMChart_BenchmarkColor]] : [REMChartSeriesIndicator indicatorWithType:model.type andColor:[REMColor colorByIndex:model.index].uiColor];
         indicator.frame = kREMLegendInnerIndicatorFrame;
         [self addSubview:indicator];
         self.indicator = indicator;

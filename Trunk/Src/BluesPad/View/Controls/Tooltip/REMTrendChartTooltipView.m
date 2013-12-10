@@ -16,6 +16,7 @@
 #import "REMWidgetCommoditySearchModel.h"
 #import "REMTextIndicatorFormator.h"
 #import "DCDataPoint.h"
+#import "REMWidgetMultiTimespanSearchModel.h"
 
 
 @interface REMTrendChartTooltipView()
@@ -46,6 +47,7 @@
  * Ranking
  */
 
+#define REMSeriesIsMultiTime [self.parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]]
 
 -(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points atX:(id)x inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
@@ -78,7 +80,7 @@
     int itemCount = self.itemModels.count;
     
     CGFloat itemOffset = kDMChart_TooltipItemOffset;
-    CGFloat itemWidth = kDMChart_TooltipItemWidth;
+    CGFloat itemWidth = REMSeriesIsMultiTime ? 300 : kDMChart_TooltipItemWidth;
     CGFloat contentWidth = (itemWidth + itemOffset) * itemCount - kDMChart_TooltipCloseViewWidth;
     
     if(contentWidth < view.bounds.size.width){
@@ -124,7 +126,7 @@
         
         model.title = [self formatTargetName:point.target];
         model.value = REMIsNilOrNull(point) ? nil : point.value;
-        model.color = [REMColor colorByIndex:i].uiColor;
+        model.color = point.series.color;
         model.index = i;
         model.uom = point.target.uomName;
         
@@ -160,7 +162,7 @@
 
 -(NSString *)formatTargetName:(REMEnergyTargetModel *)target
 {
-    return [REMTextIndicatorFormator formatTargetName:target withWidget:self.widget andParameters:self.parameters];
+    return [REMTextIndicatorFormator formatTargetName:target inEnergyData:self.data withWidget:self.widget andParameters:self.parameters];
 }
 
 -(NSString *)formatTimeText:(NSDate *)time

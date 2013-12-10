@@ -231,7 +231,7 @@
 
 -(NSString *)formatTargetName:(REMEnergyTargetModel *)target
 {
-    return [REMTextIndicatorFormator formatTargetName:target withWidget:self.widget andParameters:self.parameters];
+    return [REMTextIndicatorFormator formatTargetName:target inEnergyData:self.data withWidget:self.widget andParameters:self.parameters];
 }
 
 -(int)decideHighlightIndex

@@ -53,7 +53,7 @@
         
         model.title = point.target.name;
         model.value = point.value;
-        model.color = [REMColor colorByIndex:i].uiColor;
+        model.color = point.series.color;
         model.index = i;
         model.numerator = [[self.serieses[0] datas] indexOfObject:point] + 1;
         model.denominator = [[self.serieses[0] datas] count];
