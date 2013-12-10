@@ -82,7 +82,12 @@
 
 
 - (REMEnergyViewData *)processEnergyData:(NSDictionary *)rawData{
+    
     REMEnergyViewData *data=[super processEnergyData:rawData];
+    
+    if (self.widgetInfo.diagramType == REMDiagramTypePie) {
+        return data;
+    }
     
     REMWidgetTagSearchModel *model=[self tagModel];
     
