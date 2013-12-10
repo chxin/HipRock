@@ -232,11 +232,11 @@
                 if (baseDateOfX == nil) {
                     baseDateOfX = seriesBeginDate;
                     globalEndDate = seriesEndDate;
-                } else {
-                    if ([baseDateOfX compare:seriesBeginDate] == NSOrderedDescending) {
-                        baseDateOfX = seriesBeginDate;
-                        globalEndDate = seriesEndDate;
-                    }
+//                } else {
+//                    if ([baseDateOfX compare:seriesBeginDate] == NSOrderedDescending) {
+//                        baseDateOfX = seriesBeginDate;
+//                        globalEndDate = seriesEndDate;
+//                    }
                 }
                 processor.baseDate = seriesBeginDate;
             }
