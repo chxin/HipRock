@@ -137,7 +137,7 @@
     NSNumber *dataValue = buildingInfo.electricityUsageThisMonth.commodityUsage.dataValue;
     NSString *uom = buildingInfo.electricityUsageThisMonth.commodityUsage.uom.code;
     
-    NSString *formattedDataValue = [REMNumberHelper formatStringWithThousandSep:dataValue withRoundDigit:0];
+    NSString *formattedDataValue = [REMNumberHelper formatDataValueWithCarry:dataValue];
     
     return REMIsNilOrNull(dataValue) ? nil : [NSString stringWithFormat:REMLocalizedString(@"Map_MarkerBubbleSubtitleFormat"),  formattedDataValue, uom];
 }

@@ -101,7 +101,13 @@
         label= endCell.contentView.subviews[1];
         label.text=[REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];
         if(self.showHour == NO){
-            label.text=[REMTimeHelper formatTimeFullDay:range.endTime];
+            if (hour==0) {
+                NSDate *newEndDate=[REMTimeHelper add:-1 onPart:REMDateTimePartDay ofDate:range.endTime];
+                label.text=[REMTimeHelper formatTimeFullDay:newEndDate];
+            }
+            else{
+                label.text=[REMTimeHelper formatTimeFullDay:range.endTime];
+            }
         }
     }
 
@@ -146,7 +152,13 @@
                 cell.textLabel.text=NSLocalizedString(@"Widget_TimePickerEnd", @"");// @"终止";
                 NSString *text=[REMTimeHelper formatTimeFullHour:(NSDate *)self.timeRange.endTime isChangeTo24Hour:YES];
                 if(self.showHour==NO){
-                    text=[REMTimeHelper formatTimeFullDay:self.timeRange.endTime];
+                    if ([REMTimeHelper getHour:self.timeRange.endTime]==0) {
+                        NSDate *newEndDate=[REMTimeHelper add:-1 onPart:REMDateTimePartDay ofDate:self.timeRange.endTime];
+                        text=[REMTimeHelper formatTimeFullDay:newEndDate];
+                    }
+                    else{
+                        text=[REMTimeHelper formatTimeFullDay:self.timeRange.endTime];
+                    }
                 }
                 cell.detailTextLabel.text=text;
                 [self setDateTimeColor:cell.detailTextLabel withIsActive:NO];

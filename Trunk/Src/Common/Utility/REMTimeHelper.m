@@ -451,8 +451,14 @@ static NSDateFormatter *_localFormatter;
 
 + (NSString *)formatTimeRangeFullDay:(REMTimeRange *)range{
     NSString *start=[REMTimeHelper formatTimeFullDay:range.startTime];
-    NSString *end=[REMTimeHelper formatTimeFullDay:range.endTime];
-    
+    NSString *end;
+    if([REMTimeHelper getHour:range.endTime]==0){
+        NSDate *newEndDate=[REMTimeHelper add:-1 onPart:REMDateTimePartDay ofDate:range.endTime];
+        end=[REMTimeHelper formatTimeFullDay:newEndDate];
+    }
+    else{
+        end=[REMTimeHelper formatTimeFullDay:range.endTime];
+    }
     return [NSString stringWithFormat:@"%@ -- %@",start,end];
 }
 
