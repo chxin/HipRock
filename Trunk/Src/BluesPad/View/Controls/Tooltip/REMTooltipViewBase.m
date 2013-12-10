@@ -20,6 +20,8 @@
 
 @implementation REMTooltipViewBase
 
+
+
 +(REMTooltipViewBase *)tooltipWithHighlightedPoints:(NSArray *)points atX:(id)x inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
     if(widget.diagramType == REMDiagramTypePie){

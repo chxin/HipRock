@@ -29,6 +29,7 @@
         model.title = [self format:targetData.target];
         model.delegate = self.itemDelegate;
         model.tappable = NO;
+        model.isBenchmark = targetData.target.type == REMEnergyTargetBenchmarkValue;
         
         [models addObject:model];
     }
@@ -38,7 +39,7 @@
 
 -(NSString *)format:(REMEnergyTargetModel *)target
 {
-    return [REMTextIndicatorFormator formatTargetName:target withWidget:self.widget andParameters:self.parameters];
+    return [REMTextIndicatorFormator formatTargetName:target inEnergyData:self.data withWidget:self.widget andParameters:self.parameters];
 }
 
 @end

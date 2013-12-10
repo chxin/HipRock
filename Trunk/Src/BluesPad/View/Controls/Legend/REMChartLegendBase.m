@@ -13,8 +13,11 @@
 #import "REMColor.h"
 #import "REMStackChartLegendView.h"
 #import "REMChartLegendView.h"
+#import "REMWidgetMultiTimespanSearchModel.h"
 
 @implementation REMChartLegendBase
+
+#define REMSeriesIsMultiTime [self.parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]]
 
 +(REMChartLegendBase *)legendWithData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget parameters:(REMWidgetSearchModelBase *)parameters andHiddenIndexes:(NSArray *)hiddenIndexes
 {
@@ -54,7 +57,9 @@
 //@private
 -(void)render:(NSArray *)hiddenIndexes
 {
-    CGFloat scrollViewContentWidth = (kDMChart_LegendItemWidth + kDMChart_LegendItemLeftOffset) * self.itemModels.count + kDMChart_LegendItemLeftOffset;
+    CGFloat width = REMSeriesIsMultiTime ? 320 : kDMChart_LegendItemWidth;
+    
+    CGFloat scrollViewContentWidth = (width + kDMChart_LegendItemLeftOffset) * self.itemModels.count + kDMChart_LegendItemLeftOffset;
     
     self.backgroundColor = [REMColor colorByHexString:kDMChart_BackgroundColor];
     self.contentSize = CGSizeMake(scrollViewContentWidth, kDMChart_ToolbarHeight);
@@ -65,11 +70,10 @@
     for(int i=0;i<self.itemModels.count; i++){
         REMChartLegendItemModel *model = self.itemModels[i];
         
-        CGFloat x = i * (kDMChart_LegendItemWidth + kDMChart_LegendItemLeftOffset);
+        CGFloat x = i * (width + kDMChart_LegendItemLeftOffset);
         CGFloat y = (kDMChart_ToolbarHeight - kDMChart_LegendItemHeight) / 2;
         
-        REMChartLegendItem *legend = [[REMChartLegendItem alloc] initWithModel:model];
-        legend.frame = CGRectMake(x, y, kDMChart_LegendItemWidth, kDMChart_LegendItemHeight);
+        REMChartLegendItem *legend = [[REMChartLegendItem alloc] initWithFrame:CGRectMake(x, y, width, kDMChart_LegendItemHeight) andModel:model];
         
         if(hiddenIndexes != nil && hiddenIndexes.count > 0 && [hiddenIndexes containsObject:@(i)]){
             [legend setSelected:YES];

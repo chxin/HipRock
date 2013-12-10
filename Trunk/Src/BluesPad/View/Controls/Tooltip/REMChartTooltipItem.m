@@ -72,7 +72,7 @@
     UIFont *font = [UIFont systemFontOfSize:kDMChart_TooltipItemTitleFontSize];
     CGFloat height = [@"a" sizeWithFont:font].height;
     //CGRect frame = CGRectMake(0, ((kDMChart_IndicatorSize - height)/2), self.frame.size.width - 2*(kDMChart_IndicatorSize+kDMChart_TooltipItemTitleLeftOffset), height);
-    CGRect frame = CGRectMake(kDMChart_TooltipItemTitleLeftOffset, kDMChart_TooltipItemTitleTopOffset, kDMChart_TooltipItemTitleWidth, height);
+    CGRect frame = CGRectMake(kDMChart_TooltipItemTitleLeftOffset, kDMChart_TooltipItemTitleTopOffset, self.frame.size.width, height);
     
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.text = model.title;
@@ -89,7 +89,7 @@
     CGFloat height = [@"a" sizeWithFont:font].height;
     
     //CGRectMake(0, self.indicator.frame.origin.y + kDMChart_IndicatorSize + kDMChart_TooltipItemDataValueTopOffset, self.frame.size.width, height)
-    CGRect frame = CGRectMake(kDMChart_TooltipItemDataValueLeftOffset, kDMChart_TooltipItemDataValueTopOffset, kDMChart_TooltipItemWidth, height);
+    CGRect frame = CGRectMake(kDMChart_TooltipItemDataValueLeftOffset, kDMChart_TooltipItemDataValueTopOffset, self.frame.size.width, height);
     
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.backgroundColor = [UIColor clearColor];
