@@ -45,6 +45,9 @@
 
 @property (nonatomic, strong) UIColor* benchmarkColor;
 
+@property (nonatomic, strong) UIFont* backgroundBandFont;
+@property (nonatomic, strong) UIColor* backgroundBandFontColor;
+
 +(REMChartStyle*)getMaximizedStyle;
 +(REMChartStyle*)getMinimunStyle;
 @end

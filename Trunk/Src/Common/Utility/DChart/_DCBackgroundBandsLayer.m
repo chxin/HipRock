@@ -7,6 +7,7 @@
 //
 
 #import "_DCBackgroundBandsLayer.h"
+#import <CoreText/CoreText.h>
 #import "DCUtility.h"
 
 @interface _DCBackgroundBandsLayer()
@@ -61,6 +62,9 @@
         }
     }
     [CATransaction setDisableActions:caTransationState];
+    CTFontRef fRef = CTFontCreateWithName((__bridge CFStringRef)self.font.fontName,
+                                          self.font.pointSize,
+                                          NULL);
     for (DCXYChartBackgroundBand* band in self.bands) {
         if (![DCRange isRange:band.range visableIn:self.graphContext.hRange]) continue;
         NSString* rangeToString = [band.range description];
@@ -68,11 +72,24 @@
             CALayer* bandLayer = [[CALayer alloc]init];
             bandLayer.backgroundColor = band.color.CGColor;
             bandLayer.frame = CGRectMake([DCUtility getScreenXIn:self.bounds xVal:band.range.location hRange:self.graphContext.hRange], 0, [DCUtility getScreenXIn:self.bounds xVal:band.range.length+self.graphContext.hRange.location hRange:self.graphContext.hRange], self.bounds.size.height);
+            if (!REMIsNilOrNull(band.title) && band.title.length > 0) {
+                CATextLayer* bandText = [[CATextLayer alloc]init];
+                bandText.contentsScale = [[UIScreen mainScreen] scale];
+                bandText.alignmentMode = kCAAlignmentLeft;
+                bandLayer.masksToBounds = NO;
+                bandText.font = fRef;
+                bandText.fontSize = self.font.pointSize;
+                bandText.foregroundColor = self.fontColor.CGColor;
+                [bandText setString:band.title];
+                CGSize size = [DCUtility getSizeOfText:band.title forFont:self.font];
+                bandText.frame = CGRectMake(0, 0, size.width, size.height);
+                [bandLayer addSublayer:bandText];
+            }
             [self addSublayer:bandLayer];
             [self.layerDictionary setObject:bandLayer forKey:rangeToString];
-            NSLog(@"new bg frame: %f %f %f %f", bandLayer.frame.origin.x, bandLayer.frame.origin.y, bandLayer.frame.size.width, bandLayer.frame.size.height);
         }
     }
+    CFRelease(fRef);
 }
 
 @end

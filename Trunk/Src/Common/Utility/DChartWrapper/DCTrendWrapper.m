@@ -77,6 +77,9 @@
     view.focusSymbolIndicatorSize = self.style.focusSymbolIndicatorSize;
     view.xAxis.labelToLine = self.style.xLabelToLine;
     
+    view.backgroundBandFontColor = self.style.backgroundBandFontColor;
+    view.backgroundBandFont = self.style.backgroundBandFont;
+    
     view.plotPaddingRight = self.style.plotPaddingRight;
     view.plotPaddingLeft = self.style.plotPaddingLeft;
     view.plotPaddingTop = self.style.plotPaddingTop;
@@ -346,15 +349,20 @@
     if(self.calenderType != REMCalendarTypeNone) {
         for (REMEnergyCalendarData* calender in self.energyViewData.calendarData) {
             UIColor* fillColor = nil;
+            NSString* bandString = nil;
+
             if (self.calenderType == REMCalendarTypeHCSeason) {
                 if (calender.calendarType == REMCalenderTypeHeatSeason) {
                     fillColor = [REMColor colorByHexString:@"#fcf0e4" alpha:0.5];
+                    bandString = REMLocalizedString(@"Chart_Background_Text_HSeason");
                 } else if (calender.calendarType == REMCalenderTypeCoolSeason) {
                     fillColor = [REMColor colorByHexString:@"#e3f0ff" alpha:0.5];
+                    bandString = REMLocalizedString(@"Chart_Background_Text_CSeason");
                 }
             } else if (self.calenderType == REMCalenderTypeHoliday) {
                 if (calender.calendarType == REMCalenderTypeHoliday || calender.calendarType == REMCalenderTypeRestTime) {
                     fillColor = [REMColor colorByHexString:@"#eaeaea" alpha:0.5];
+                    bandString = REMLocalizedString(@"Chart_Background_Text_NonWorkday");
                 }
             }
             if (fillColor == nil) continue;
@@ -364,6 +372,7 @@
                 DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
                 b.range = bandRange;
                 b.color = fillColor;
+                b.title = bandString;
                 [bands addObject:b];
             }
         }

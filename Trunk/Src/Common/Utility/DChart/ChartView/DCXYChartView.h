@@ -40,6 +40,10 @@
 
 @property (nonatomic, strong) NSArray* seriesList;
 @property (nonatomic, assign) NSUInteger visableYAxisAmount;
+
+@property (nonatomic, strong) UIFont* backgroundBandFont;
+@property (nonatomic, strong) UIColor* backgroundBandFontColor;
+
 - (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange stacked:(BOOL)stacked;
 
 //- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden;
