@@ -44,6 +44,8 @@
 @property (nonatomic, strong) UIFont* backgroundBandFont;
 @property (nonatomic, strong) UIColor* backgroundBandFontColor;
 
+@property (nonatomic, assign) BOOL blockReboundAnimation;   // YES的时候禁止回弹动画
+
 - (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange stacked:(BOOL)stacked;
 
 //- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden;

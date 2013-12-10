@@ -247,6 +247,9 @@
     for(int i=0;i<self.data.targetEnergyData.count;i++){
         REMTargetEnergyData *targetData = self.data.targetEnergyData[i];
         
+        if(REMIsNilOrNull(targetData.energyData) || targetData.energyData.count <= 0)
+            continue;
+        
         if([point isEqual:targetData.energyData[0]])
             return i;
     }

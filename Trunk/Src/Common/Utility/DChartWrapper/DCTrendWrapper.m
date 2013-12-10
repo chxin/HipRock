@@ -94,6 +94,9 @@
         view.graphContext.pointAlignToTick = YES;
         view.graphContext.xLabelAlignToTick = YES;
     }
+    
+    view.blockReboundAnimation = (step == REMEnergyStepHour);   // 步长为小时时禁止回弹动画
+    
     [self customizeView:view];
 }
 
@@ -229,11 +232,11 @@
                 if (baseDateOfX == nil) {
                     baseDateOfX = seriesBeginDate;
                     globalEndDate = seriesEndDate;
-                } else {
-                    if ([baseDateOfX compare:seriesBeginDate] == NSOrderedDescending) {
-                        baseDateOfX = seriesBeginDate;
-                        globalEndDate = seriesEndDate;
-                    }
+//                } else {
+//                    if ([baseDateOfX compare:seriesBeginDate] == NSOrderedDescending) {
+//                        baseDateOfX = seriesBeginDate;
+//                        globalEndDate = seriesEndDate;
+//                    }
                 }
                 processor.baseDate = seriesBeginDate;
             }
@@ -281,16 +284,20 @@
     DCRange* newRange = self.graphContext.hRange;
     double rangeStart = newRange.location;
     double rangeEnd = newRange.location + newRange.length;
-    if (rangeStart < self.graphContext.globalHRange.location) {
-        rangeStart = self.graphContext.globalHRange.location;
-        rangeEnd = self.graphContext.globalHRange.location + newRange.length;
+    if (self.sharedProcessor && self.sharedProcessor.step == REMEnergyStepHour) {
+        // Nothing to do. Delegate will reload data from server when step is hour.
+    } else {
+        if (rangeStart < self.graphContext.globalHRange.location) {
+            rangeStart = self.graphContext.globalHRange.location;
+            rangeEnd = self.graphContext.globalHRange.location + newRange.length;
+        }
+        if (rangeEnd > self.graphContext.globalHRange.end) {
+            rangeEnd = self.graphContext.globalHRange.end;
+            rangeStart = rangeEnd - newRange.length;
+        }
+        newRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
     }
-    if (rangeEnd > self.graphContext.globalHRange.end) {
-        rangeEnd = self.graphContext.globalHRange.end;
-        rangeStart = rangeEnd - newRange.length;
-    }
-    DCRange* myNewRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
-    self.myStableRange = myNewRange;
+    self.myStableRange = newRange;
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(touchEndedInNormalStatus:end:)]) {
         if (self.sharedProcessor == nil) {
