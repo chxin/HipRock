@@ -22,15 +22,16 @@
         symbolLinePoints[1].x = symbolLinePoints[0].x;
         symbolLinePoints[1].y = self.frame.size.height;
         
-        CGContextSetLineJoin(ctx, kCGLineJoinMiter);
-        [DCUtility setLineStyle:ctx style:self.symbolLineStyle];
-        CGContextSetBlendMode(ctx, kCGBlendModeNormal);
-        CGContextBeginPath(ctx);
-        CGContextAddLines(ctx, symbolLinePoints, 2);
-        CGContextSetLineWidth(ctx, self.symbolLineWidth);
-        CGContextSetStrokeColorWithColor(ctx, self.symbolLineColor.CGColor);
-        CGContextStrokePath(ctx);
-        
+        if (self.graphContext.showIndicatorLineOnFocus) {
+            CGContextSetLineJoin(ctx, kCGLineJoinMiter);
+            [DCUtility setLineStyle:ctx style:self.symbolLineStyle];
+            CGContextSetBlendMode(ctx, kCGBlendModeNormal);
+            CGContextBeginPath(ctx);
+            CGContextAddLines(ctx, symbolLinePoints, 2);
+            CGContextSetLineWidth(ctx, self.symbolLineWidth);
+            CGContextSetStrokeColorWithColor(ctx, self.symbolLineColor.CGColor);
+            CGContextStrokePath(ctx);
+        }
         
         CGMutablePathRef path = CGPathCreateMutable();
         CGContextSetFillColorWithColor(ctx, self.symbolLineColor.CGColor);

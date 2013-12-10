@@ -67,7 +67,6 @@
 }
 
 -(void)drawIndicatorLayer {
-    if (!self.graphContext.showIndicatorOnFocus) return;
     self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext];
     self.indicatorLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, 0, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height+self.plotPaddingTop);// self.graphContext.plotRect;
     self.indicatorLayer.symbolLineStyle = self.focusSymbolLineStyle;
