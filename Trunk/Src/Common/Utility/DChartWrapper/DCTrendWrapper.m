@@ -146,6 +146,7 @@
     REMTrendChartDataProcessor* processor = [self.processors objectAtIndex:index];
     for (REMEnergyData* point in targetEnergy.energyData) {
         int processedX = [processor processX:point.localTime].integerValue;
+        if (processedX < 0) continue;
         while ((int)datas.count < processedX) {
             DCDataPoint* p = [[DCDataPoint alloc]init];
             p.target = targetEnergy.target;
@@ -161,7 +162,7 @@
     if (!REMIsNilOrNull(targetEnergy.target) && targetEnergy.target.type == REMEnergyTargetBenchmarkValue) {
         s = [[DCLineSeries alloc]initWithEnergyData:datas];
         s.color = style.benchmarkColor;
-        ((DCLineSeries*)s).symbolType = DCLineSymbolTypeRound;
+        ((DCLineSeries*)s).symbolType = index % 5;
         ((DCLineSeries*)s).symbolSize = style.symbolSize;
     } else {
         s = [[NSClassFromString(self.defaultSeriesClass) alloc]initWithEnergyData:datas];
