@@ -74,7 +74,7 @@
     [components setHour:0];
     NSInteger daysToMonday = (9 - weekdayToday) % 7;
     
-    NSDate *nextMonday = [components.date dateByAddingTimeInterval:60*60*24*daysToMonday];
+    NSDate *nextMonday = [date dateByAddingTimeInterval:60*60*24*daysToMonday];
     
     return nextMonday;
 }
