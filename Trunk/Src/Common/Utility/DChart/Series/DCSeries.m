@@ -14,6 +14,7 @@
 -(DCSeries*)initWithEnergyData:(NSArray*)seriesData {
     self = [super init];
     if (self) {
+        _color = [UIColor blackColor];
         _datas = seriesData;
         for (DCDataPoint* p in self.datas) {
             p.series = self;

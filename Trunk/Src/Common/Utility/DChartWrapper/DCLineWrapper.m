@@ -29,6 +29,7 @@
         ((DCLineSeries*)series).symbolType = index % 5;
         ((DCLineSeries*)series).symbolSize = style.symbolSize;
     }
+    [super customizeSeries:series seriesIndex:index chartStyle:style];
 }
 -(void)customizeView:(DCXYChartView*)view {
     view.graphContext.showIndicatorOnFocus = YES;

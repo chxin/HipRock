@@ -266,7 +266,6 @@
         
         for (DCXYSeries* s in seriesList) {
             s.yAxis.visableSeriesAmount++;
-            if (s.color == nil) s.color = [REMColor colorByIndex:seriesIndex].uiColor;
             if ([s isKindOfClass:[DCColumnSeries class]]) {
                 if (self.graphContext.stacked) {
                     ((DCColumnSeries*)s).xRectStartAt = - 0.5 + kDCColumnOffset;
