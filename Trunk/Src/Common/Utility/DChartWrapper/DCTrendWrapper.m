@@ -151,9 +151,17 @@
         p.value = point.dataValue;
         [datas addObject:p];
     }
-    DCXYSeries* s = [[NSClassFromString(self.defaultSeriesClass) alloc]initWithEnergyData:datas];
+    DCXYSeries* s;
+    if (!REMIsNilOrNull(targetEnergy.target) && targetEnergy.target.type == REMEnergyTargetBenchmarkValue) {
+        s = [[DCLineSeries alloc]initWithEnergyData:datas];
+        s.color = style.benchmarkColor;
+        ((DCLineSeries*)s).symbolType = DCLineSymbolTypeRound;
+        ((DCLineSeries*)s).symbolSize = style.symbolSize;
+    } else {
+        s = [[NSClassFromString(self.defaultSeriesClass) alloc]initWithEnergyData:datas];
+        s.color = [REMColor colorByIndex:index].uiColor;
+    }
     s.xAxis = view.xAxis;
-    
     s.target = targetEnergy.target;
     [self customizeSeries:s seriesIndex:index chartStyle:style];
     return s;

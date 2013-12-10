@@ -9,7 +9,7 @@
 #import "REMDatePickerViewController.h"
 #import "REMRelativeDateViewController.h"
 #import "REMColor.h"
-
+#import "REMBuildingConstants.h"
 @interface REMDatePickerViewController ()
 
 @property (nonatomic,weak) UIDatePicker *startPicker;
@@ -42,7 +42,6 @@
     self.cellCount=2;
     [self.tableView setScrollEnabled:NO];
     self.navigationController.navigationBar.backItem.title=NSLocalizedString(@"Common_Cancel", @""); //@"取消";
-    
 }
 
 
@@ -123,26 +122,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    //cell = [tableView dequeueReusableCellWithIdentifier:@"relativeDateCell" forIndexPath:indexPath];
-    
-//    if(cell.contentView.subviews.count>0){
-//        if(self.timePickerIndex==1){
-//            if(self.startPicker!=nil){
-//                [self.startPicker setHidden:NO];
-//                [self.startHourPicker setHidden:NO];
-//            }
-//        }
-//        else if(self.timePickerIndex==2){
-//             if(self.endPicker!=nil){
-//                 [self.endPicker setHidden:NO];
-//                 [self.endHourPicker setHidden:NO];
-//             }
-//        }
-//        else{
-//            return cell;
-//        }
-//    }
-    
     if(indexPath.section==0){
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"datePickerCell"];
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
@@ -187,6 +166,8 @@
                     hourPickerWidth=0;
                 }
                 UIDatePicker *picker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width+60-hourPickerWidth, cell.frame.size.height)];
+                [picker setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+                [picker setCalendar:[REMTimeHelper currentCalendar]];
                 [picker setDatePickerMode:UIDatePickerModeDate];
                 [picker addTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
                 
@@ -227,6 +208,9 @@
                         if (hour==0) {
                             hour=23;
                             [self.endPicker setDate:[REMTimeHelper add:-1 onPart:REMDateTimePartDay ofDate:self.timeRange.endTime]];
+                        }
+                        else{
+                            hour--;
                         }
                         [hourPicker selectRow:hour inComponent:0 animated:NO];
                         
@@ -296,7 +280,7 @@
     
     if(picker==self.startPicker){
         NSDate *endTime=self.timeRange.endTime;
-        if ([newDate timeIntervalSinceDate:[NSDate date]]>=0) {//greater than now
+        if ([[REMTimeHelper convertToUtc:newDate] timeIntervalSinceDate:[NSDate date]]>=0) {//greater than now
             REMTimeRange *range = [REMTimeHelper relativeDateFromType:REMRelativeTimeRangeTypeToday];
             newDate=[REMTimeHelper add:-1 onPart:REMDateTimePartHour ofDate:range.endTime];
         }
@@ -310,7 +294,8 @@
     }
     else{
         NSDate *startTime=self.timeRange.startTime;
-        if ([newDate timeIntervalSinceDate:[NSDate date]]>=0) {//greater than now
+        
+        if ([[REMTimeHelper convertToUtc:newDate] timeIntervalSinceDate:[NSDate date]]>=0) {//greater than now
             REMTimeRange *range = [REMTimeHelper relativeDateFromType:REMRelativeTimeRangeTypeToday];
             newDate=range.endTime;
         }

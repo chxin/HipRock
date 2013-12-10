@@ -59,7 +59,7 @@ typedef enum _REMDateTimePart : NSUInteger{
 + (NSDate *)add:(int)difference onPart:(REMDateTimePart)part ofDate:(NSDate *)date;
 
 
-
++ (NSDate *)now;
 + (NSUInteger)getYear:(NSDate *)date;
 + (NSUInteger)getMonth:(NSDate *)date;
 + (NSUInteger)getDay:(NSDate *)date;
@@ -80,7 +80,7 @@ typedef enum _REMDateTimePart : NSUInteger{
 +(NSCalendar *)gregorianCalendar;
 +(NSCalendar *)currentCalendar;
 +(NSDate *)convertGMTDateToLocal:(NSDate *)GMTDate;
-
++ (NSDate *)convertToUtc:(NSDate *)date;
 +(NSString *)formatTooltipTime:(NSDate *)time byStep:(REMEnergyStep)step inRange:(REMTimeRange *)timeRange;
 
 

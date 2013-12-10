@@ -83,6 +83,7 @@
     [REMCustomerSwitchHelper switchCustomerById:customerId masker:nil action:^(REMCustomerSwitchStatus status,NSArray *customerArray){
         NSString *str=NSLocalizedString(@"Setting_CustomerDeleted", @"");//该客户已被解除关联,请重新选择客户。
         NSString *ok=NSLocalizedString(@"Common_OK",@"");
+        
         if (status == REMCustomerSwitchStatusSelectedCustomerDeleted) {
             [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];
             

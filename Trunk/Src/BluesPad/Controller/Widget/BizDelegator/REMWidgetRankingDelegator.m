@@ -190,12 +190,22 @@ const static CGFloat kRankingTimePickerWidth=250;
 }
 
 - (void)reloadChart{
-    [self.chartWrapper redraw:self.energyData step:REMEnergyStepNone];
+    if(self.chartWrapper == nil){
+        [self showEnergyChart];
+    }
+    else{
+        [self.chartWrapper redraw:self.energyData step:REMEnergyStepNone];
+    }
 }
 
 
 - (void)showChart{
-    [self showEnergyChart];
+    if(self.energyData!=nil){
+        [self showEnergyChart];
+    }
+    else{
+        [self search];
+    }
 }
 
 - (void) showEnergyChart{
@@ -251,6 +261,7 @@ const static CGFloat kRankingTimePickerWidth=250;
 - (void)releaseChart{
     if(self.chartWrapper!=nil){
 //        [self.chartWrapper destroyView];
+        [[self.chartWrapper getView] removeFromSuperview];
         self.chartWrapper=nil;
     }
 }

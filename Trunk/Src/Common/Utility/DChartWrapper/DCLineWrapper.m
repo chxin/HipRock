@@ -25,10 +25,11 @@
 //}
 
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style {
-    if ([self.defaultSeriesClass isEqualToString:NSStringFromClass([series class])]) {
+    if ([self.defaultSeriesClass isEqualToString:NSStringFromClass([series class])] && (REMIsNilOrNull(series.target) || series.target.type != REMEnergyTargetBenchmarkValue)) {
         ((DCLineSeries*)series).symbolType = index % 5;
         ((DCLineSeries*)series).symbolSize = style.symbolSize;
     }
+    [super customizeSeries:series seriesIndex:index chartStyle:style];
 }
 -(void)customizeView:(DCXYChartView*)view {
     view.graphContext.showIndicatorOnFocus = YES;

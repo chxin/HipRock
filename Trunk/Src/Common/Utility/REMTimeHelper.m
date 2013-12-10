@@ -528,6 +528,25 @@ static NSDateFormatter *_localFormatter;
     return [[REMTimeHelper gregorianCalendar] dateFromComponents:components];
 }
 
++ (NSDate *)now
+{
+    NSDate *today = [NSDate date];
+    
+    NSCalendar *calendar = [REMTimeHelper gregorianCalendar];
+    
+    NSDateComponents *todayEndComps = [calendar components:(NSMinuteCalendarUnit| NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
+    [todayEndComps setYear:todayEndComps.year];
+    [todayEndComps setMonth:todayEndComps.month];
+    [todayEndComps setDay:todayEndComps.day];
+    [todayEndComps setHour:todayEndComps.hour];
+    [todayEndComps setMinute:todayEndComps.minute];
+    [todayEndComps setSecond:0];
+    
+    NSDate *now=[calendar dateFromComponents:todayEndComps];
+    
+    return now;
+}
+
 +(NSDate *)tomorrow
 {
     return [REMTimeHelper add:1 onPart:REMDateTimePartDay ofDate:[REMTimeHelper today]];
@@ -553,6 +572,25 @@ static NSCalendar *_currentCalendar;
     }
     
     return _currentCalendar;
+}
+
++ (NSDate *)convertToUtc:(NSDate *)date{
+    
+    
+    NSCalendar *calendar = [REMTimeHelper currentCalendar];
+    
+    NSDateComponents *comp = [calendar components:(NSMinuteCalendarUnit| NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:date];
+    NSDateComponents *utcComp=[[NSDateComponents alloc]init];
+    [utcComp setYear:comp.year];
+    [utcComp setMonth:comp.month];
+    [utcComp setDay:comp.day];
+    [utcComp setHour:comp.hour];
+    [utcComp setMinute:comp.minute];
+    [utcComp setSecond:0];
+    NSCalendar *calendarWithZone=[NSCalendar currentCalendar];
+    NSDate *utc=[calendarWithZone dateFromComponents:utcComp];
+    
+    return utc;
 }
 
 //+(NSDate *)convertLocalDateToGMT:(NSDate *)localDate
