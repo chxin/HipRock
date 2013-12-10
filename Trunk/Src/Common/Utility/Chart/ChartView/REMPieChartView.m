@@ -7,7 +7,6 @@
  --------------------------------------------------------------------------*///
 
 #import "REMChartHeader.h"
-#import "REMPieIndicatorLayer.h"
 #import "REMPieShadowLayer.h"
 
 @interface REMPieChartView()
@@ -17,7 +16,6 @@
 @property (nonatomic, assign) BOOL isFocusStatus;
 @property (nonatomic, assign) REMDirection rotateDirection;
 
-@property (nonatomic, strong) REMPieIndicatorLayer* indicatorLayer;
 @property (nonatomic, strong) REMPieShadowLayer* shadowLayer;
 @end
 
@@ -125,6 +123,9 @@
         double rotation =(atan((previousPoint.x-self.center.x)/(previousPoint.y-self.center.y))-atan((thePoint.x-self.center.x)/(thePoint.y-self.center.y)));
 
         self.rotationAngle += rotation;
+    } else {
+        self.isFocusStatus = YES;
+        [self sendPointFocusEvent];
     }
 }
 
@@ -217,14 +218,6 @@
     }
 }
 
--(void)setIsFocusStatus:(BOOL)isFocusStatus {
-    _isFocusStatus = isFocusStatus;
-    self.indicatorLayer.hidden = !isFocusStatus;
-    [self.indicatorLayer removeFromSuperlayer];
-    [self.superview.layer addSublayer:self.indicatorLayer];
-    [self.indicatorLayer setNeedsDisplay];
-}
-
 -(void)setFocusPointIndex:(NSUInteger)focusPointIndex {
     if (self.focusPointIndex != focusPointIndex) {
         _focusPointIndex = focusPointIndex;
@@ -240,19 +233,6 @@
         NSLog(@"Pie index:%i direction:%i", focusPointIndex, (int)self.rotateDirection);
         [self.delegate highlightPoint:series.energyData[focusPointIndex] color:[series getColorByIndex:focusPointIndex].uiColor name:series.targetNames[focusPointIndex] direction:self.rotateDirection];
     }
-}
-
--(void)didMoveToSuperview {
-    self.indicatorLayer = [[REMPieIndicatorLayer alloc]init];
-    self.indicatorLayer.pieRadius = ((CPTPieChart*)[self.series[0] getPlot]).pieRadius;
-    self.indicatorLayer.frame = self.frame;
-    [self.superview.layer addSublayer:self.indicatorLayer];
-//    [self.indicatorLayer setNeedsDisplay];
-}
-
--(void)removeFromSuperview {
-    [self.indicatorLayer removeFromSuperlayer];
-    [super removeFromSuperview];
 }
 
 -(void)cancelToolTipStatus {

@@ -39,7 +39,6 @@
 //Chart
 
 //ChartView
-#import "REMPieIndicatorLayer.h"
 #import "REMPieShadowLayer.h"
 
 //ChartWrapper
