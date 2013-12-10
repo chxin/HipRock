@@ -125,6 +125,9 @@
         double rotation =(atan((previousPoint.x-self.center.x)/(previousPoint.y-self.center.y))-atan((thePoint.x-self.center.x)/(thePoint.y-self.center.y)));
 
         self.rotationAngle += rotation;
+    } else {
+        self.isFocusStatus = YES;
+        [self sendPointFocusEvent];
     }
 }
 
