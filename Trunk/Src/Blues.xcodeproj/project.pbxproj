@@ -537,6 +537,7 @@
 		B40F01201828DAD5009650FD /* REMWidgetLabelingDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B40F011F1828DAD5009650FD /* REMWidgetLabelingDelegator.m */; };
 		B40F01231828DB84009650FD /* REMWidgetMonthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40F01221828DB84009650FD /* REMWidgetMonthPickerViewController.m */; };
 		B41249F01803ECF0009022C5 /* REMCustomerSwitchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */; };
+		B414C43E1855946900CB81B6 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = B414C43D1855946900CB81B6 /* Configuration.plist */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
 		B420CE0F183CB59D000C7352 /* REMEnergyCostElectricitySearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B420CE0E183CB59D000C7352 /* REMEnergyCostElectricitySearcher.m */; };
@@ -1290,6 +1291,7 @@
 		B40F01221828DB84009650FD /* REMWidgetMonthPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetMonthPickerViewController.m; sourceTree = "<group>"; };
 		B41249EE1803ECF0009022C5 /* REMCustomerSwitchHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMCustomerSwitchHelper.h; path = Biz/REMCustomerSwitchHelper.h; sourceTree = "<group>"; };
 		B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMCustomerSwitchHelper.m; path = Biz/REMCustomerSwitchHelper.m; sourceTree = "<group>"; };
+		B414C43D1855946900CB81B6 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Configuration.plist; path = Resource/Configuration.plist; sourceTree = "<group>"; };
 		B4198EAC178410D300B50475 /* REMLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLogManager.h; path = Common/Log/REMLogManager.h; sourceTree = "<group>"; };
 		B4198EAD178410D300B50475 /* REMLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLogManager.m; path = Common/Log/REMLogManager.m; sourceTree = "<group>"; };
 		B4198EB01784220300B50475 /* REMJSONHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMJSONHelper.h; path = Common/Utility/REMJSONHelper.h; sourceTree = "<group>"; };
@@ -2401,6 +2403,7 @@
 				7A20761617E055E800CD137C /* Localizable.strings */,
 				7A5E2D96177B41C3000F77F9 /* BluesPad-Info.plist */,
 				7A5E2D97177B41C3000F77F9 /* BluesPad-Prefix.pch */,
+				B414C43D1855946900CB81B6 /* Configuration.plist */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -3483,6 +3486,7 @@
 				6A61A7121839B82000C6A228 /* NaturalGas_pressed@2x.png in Resources */,
 				6A61A7311839B82000C6A228 /* Ascend.png in Resources */,
 				7A3F66F3184C561D0079A244 /* JumpTrial-Pressed.png in Resources */,
+				B414C43E1855946900CB81B6 /* Configuration.plist in Resources */,
 				6A61A78E1839B82000C6A228 /* UnqualifiedPin_Normal@2x.png in Resources */,
 				7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */,
 				6A61A7761839B82000C6A228 /* LoginTextField-Focus@2x.png in Resources */,

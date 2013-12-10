@@ -218,7 +218,7 @@
                                 <action selector="cancelClicked:" destination="OUZ-1Y-oK9" id="Fdk-YD-QnS"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="完成" id="con-6d-emQ">
+                        <barButtonItem key="rightBarButtonItem" title="完成" style="done" id="con-6d-emQ">
                             <connections>
                                 <action selector="okClicked:" destination="OUZ-1Y-oK9" id="zLg-LV-v5f"/>
                             </connections>

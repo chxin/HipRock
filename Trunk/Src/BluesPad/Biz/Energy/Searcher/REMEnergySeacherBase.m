@@ -36,6 +36,11 @@
 
 - (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(REMWidgetSearchModelBase *)model withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void (^)(id, REMBusinessErrorInfo *))callback
 {
+    if (self.loadingView!=nil && self.loadingView.isAnimating==YES) {
+        return;
+    }
+    
+    
     self.model=model;
     
     REMBusinessErrorInfo *error=[self beforeSendRequest];
@@ -65,12 +70,15 @@
     store.groupName=groupName;
     
     
+    NSMutableArray *allConstaints=[NSMutableArray array];
     
     if (self.loadingView.translatesAutoresizingMaskIntoConstraints==NO) {
         NSLayoutConstraint *constraintX=[NSLayoutConstraint constraintWithItem:self.loadingView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:maskerContainer attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
         NSLayoutConstraint *constraintY=[NSLayoutConstraint constraintWithItem:self.loadingView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:maskerContainer attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
         [maskerContainer addConstraint:constraintX];
         [maskerContainer addConstraint:constraintY];
+        [allConstaints addObject:constraintX];
+        [allConstaints addObject:constraintY];
         
     }
     
@@ -85,8 +93,13 @@
             [maskerContainer addConstraint:constraintY];
             [maskerContainer addConstraint:constraintWidth];
             [maskerContainer addConstraint:constraintHeight];
+            [allConstaints addObject:constraintX];
+            [allConstaints addObject:constraintY];
+            [allConstaints addObject:constraintWidth];
+            [allConstaints addObject:constraintHeight];
         }
     }
+    
     
     
     
@@ -96,6 +109,7 @@
         [self.loadingView stopAnimating];
         [self.loadingView removeFromSuperview];
         [self.loadingBackgroundView removeFromSuperview];
+        [maskerContainer removeConstraints:allConstaints];
         if([data isEqual:[NSNull null]]==YES)return ;
         REMEnergyViewData *viewData=[self processEnergyData:data];
         if(callback!=nil){
@@ -106,6 +120,7 @@
         [self.loadingBackgroundView removeFromSuperview];
         [self.loadingView stopAnimating];
         [self.loadingView removeFromSuperview];
+        [maskerContainer removeConstraints:allConstaints];
         callback(nil,errorInfo);
     }];
 }

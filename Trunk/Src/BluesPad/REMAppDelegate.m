@@ -47,8 +47,22 @@
     // Google key init
     [GMSServices provideAPIKey:kGoogleMapsKey];
     
+#ifndef DEBUG
     
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Configuration" ofType:@"plist"];
     
+    // Read from document directory
+    NSMutableDictionary *settingsItem = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+    
+    BOOL shouldCleanCache=(BOOL)[settingsItem[@"shouldCleanCache"] boolValue];
+    
+    if (shouldCleanCache==YES) {
+        NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSFileManager *fileManager=[NSFileManager defaultManager];
+        
+    }
+    
+#endif
     
     return YES;
 }

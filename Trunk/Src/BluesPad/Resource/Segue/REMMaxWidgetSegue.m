@@ -28,8 +28,15 @@
 
 
 - (void)max{
+    
+    
+    
     REMWidgetMaxViewController *destController=self.destinationViewController;
     REMBuildingViewController *srcController= self.sourceViewController;
+    
+    UINavigationController *nav=srcController.navigationController;
+    
+
 
     
     REMDashboardController *dashboardController=srcController.maxDashbaordController;
