@@ -622,7 +622,6 @@
 		B4FFB0C51818C7C5004C5404 /* REMBuildingDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4FFB0C41818C7C5004C5404 /* REMBuildingDataViewController.m */; };
 		B4FFB0C818191A15004C5404 /* REMRelativeDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4FFB0C718191A15004C5404 /* REMRelativeDateViewController.m */; };
 		B4FFB0CB18191A41004C5404 /* REMDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4FFB0CA18191A41004C5404 /* REMDatePickerViewController.m */; };
-		EF0346AD183B48A500DE186A /* _DCLinesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346AC183B48A500DE186A /* _DCLinesLayer.m */; };
 		EF0346B0183B4BA600DE186A /* _DCLayerTrashbox.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */; };
 		EF0346B3183B520100DE186A /* _DCSeriesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B2183B520100DE186A /* _DCSeriesLayer.m */; };
 		EF0346B9183B979800DE186A /* DCLineWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B8183B979800DE186A /* DCLineWrapper.m */; };
@@ -1421,8 +1420,6 @@
 		B4FFB0C718191A15004C5404 /* REMRelativeDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRelativeDateViewController.m; sourceTree = "<group>"; };
 		B4FFB0C918191A41004C5404 /* REMDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMDatePickerViewController.h; sourceTree = "<group>"; };
 		B4FFB0CA18191A41004C5404 /* REMDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMDatePickerViewController.m; sourceTree = "<group>"; };
-		EF0346AB183B48A500DE186A /* _DCLinesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLinesLayer.h; path = Common/Utility/DChart/Series/_DCLinesLayer.h; sourceTree = "<group>"; };
-		EF0346AC183B48A500DE186A /* _DCLinesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLinesLayer.m; path = Common/Utility/DChart/Series/_DCLinesLayer.m; sourceTree = "<group>"; };
 		EF0346AE183B4BA600DE186A /* _DCLayerTrashbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLayerTrashbox.h; path = ../_DCLayerTrashbox.h; sourceTree = "<group>"; };
 		EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLayerTrashbox.m; path = ../_DCLayerTrashbox.m; sourceTree = "<group>"; };
 		EF0346B1183B520100DE186A /* _DCSeriesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCSeriesLayer.h; path = Common/Utility/DChart/Series/_DCSeriesLayer.h; sourceTree = "<group>"; };
@@ -3188,8 +3185,6 @@
 			children = (
 				EF13626D184EFC6F00BEF648 /* _DCLine.h */,
 				EF13626E184EFC6F00BEF648 /* _DCLine.m */,
-				EF0346AB183B48A500DE186A /* _DCLinesLayer.h */,
-				EF0346AC183B48A500DE186A /* _DCLinesLayer.m */,
 				EF1C5ADB183E23DA002A9AAD /* _DCLineSymbolsLayer.h */,
 				EF1C5ADC183E23DA002A9AAD /* _DCLineSymbolsLayer.m */,
 			);
@@ -3794,7 +3789,6 @@
 				7A1D7C3717A6155D0050779D /* REMApplicationContext.m in Sources */,
 				B47ACC3017F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m in Sources */,
 				7A2F76151810C6C8006C19D8 /* REMScreenEdgetGestureRecognizer.m in Sources */,
-				EF0346AD183B48A500DE186A /* _DCLinesLayer.m in Sources */,
 				EFD9470B1839DCBB00E9EC50 /* DCXYSeries.m in Sources */,
 				7A1D7C3C17A637510050779D /* REMUserModel.m in Sources */,
 				7A1D7C3F17A637630050779D /* REMCustomerModel.m in Sources */,

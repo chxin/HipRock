@@ -9,8 +9,8 @@
 #import "DCSeries.h"
 #import "DCAxis.h"
 #import "DCRange.h"
-#import "_DCSeriesLayer.h"
 #import "REMEnergyTargetModel.h"
+#import "_DCCoordinateSystem.h"
 
 
 @interface DCXYSeries : DCSeries<DCContextHRangeObserverProtocal>
@@ -20,10 +20,9 @@
 @property (nonatomic, weak) DCAxis* xAxis;
 @property (nonatomic, weak) DCAxis* yAxis;
 @property (nonatomic, weak) REMEnergyTargetModel* target;
+@property (nonatomic, weak) _DCCoordinateSystem* coordinate;
 //@property (nonatomic, assign) CGFloat pointXOffset;
 
 @property (nonatomic, assign)BOOL hidden;
-
-@property (nonatomic, weak) CALayer* seriesLayer;
 
 @end

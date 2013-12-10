@@ -24,8 +24,6 @@
 
 @interface _DCLayer : CALayer
 
-@property (nonatomic) BOOL redrawSuspended;
-
 @property (nonatomic, weak) DCContext* graphContext;
 
 -(id)initWithContext:(DCContext*)context;

@@ -43,6 +43,8 @@
 @property (nonatomic, assign) CGFloat yAxisTitleToTopLabel; // UOM到最后一节YLabel的距离
 @property (nonatomic, assign) CGFloat yAxisTitleFontSize;
 
+@property (nonatomic, strong) UIColor* benchmarkColor;
+
 +(REMChartStyle*)getMaximizedStyle;
 +(REMChartStyle*)getMinimunStyle;
 @end

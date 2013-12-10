@@ -103,7 +103,7 @@
 "Setting_AreYouSureLogout"="您要退出当前账号登录吗?";
 
 //Map, prefix: Map_
-"Map_MarkerBubbleSubtitleFormat"="本月用电量：%d%@";
+"Map_MarkerBubbleSubtitleFormat"="本月用电量：%@%@";
 
 
 //Gallery, prefix: Gallery_

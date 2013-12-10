@@ -1033,23 +1033,19 @@
 
 -(void)legendStateChanged:(UIControlState)state onIndex:(int)index
 {
-    //hide or show the series on index according to state
-    //NSLog(@"Series %d is going to %@", index, state == UIControlStateNormal?@"show":@"hide");
+    if(self.hiddenSeries == nil)
+        self.hiddenSeries = [[NSMutableArray alloc] init];
     
-    //if([self.chartWrapper.view isKindOfClass:[REMTrendChartView class]]){
-        if(self.hiddenSeries == nil)
-            self.hiddenSeries = [[NSMutableArray alloc] init];
-        
-        if(state == UIControlStateNormal){
-            if([self.hiddenSeries containsObject:@(index)]){
-                [self.hiddenSeries removeObject:@(index)];
-            }
+    if(state == UIControlStateNormal){
+        if([self.hiddenSeries containsObject:@(index)]){
+            [self.hiddenSeries removeObject:@(index)];
         }
-        else{
-            if([self.hiddenSeries containsObject:@(index)] == NO){
-                [self.hiddenSeries addObject:@(index)];
-            }
+    }
+    else{
+        if([self.hiddenSeries containsObject:@(index)] == NO){
+            [self.hiddenSeries addObject:@(index)];
         }
+    }
     
     if ([self.chartWrapper isKindOfClass:[DCTrendWrapper class]]) {
         [((DCTrendWrapper*)self.chartWrapper) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
@@ -1065,10 +1061,12 @@
     [self.searchLegendViewContainer setHidden:YES];
     
     if(self.tooltipView != nil){
-        [self.tooltipView updateHighlightedData:points];
+        REMTrendChartTooltipView *trendTooltip = (REMTrendChartTooltipView *)self.tooltipView;
+        
+        [trendTooltip updateHighlightedData:points atX:x];
     }
     else{
-        [self showTooltip:points];
+        [self showTooltip:points forX:x];
     }
 }
 
@@ -1087,7 +1085,7 @@
         [pieTooltip updateHighlightedData:@[point] fromDirection:direction];
     }
     else{
-        [self showTooltip:@[point]];
+        [self showTooltip:@[point] forX:nil];
     }
 }
 
@@ -1112,9 +1110,9 @@
     }];
 }
 
--(void)showTooltip:(NSArray *)highlightedPoints
+-(void)showTooltip:(NSArray *)highlightedPoints forX:(id)x
 {
-    REMTooltipViewBase *tooltip = [REMTooltipViewBase tooltipWithHighlightedPoints:highlightedPoints inEnergyData:self.energyData widget:self.widgetInfo andParameters:self.tempModel];
+    REMTooltipViewBase *tooltip = [REMTooltipViewBase tooltipWithHighlightedPoints:highlightedPoints atX:x inEnergyData:self.energyData widget:self.widgetInfo andParameters:self.tempModel];
     tooltip.tooltipDelegate = self;
     
     [self.view addSubview:tooltip];

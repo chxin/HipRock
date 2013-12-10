@@ -11,7 +11,6 @@
 #import "DCXYSeries.h"
 #import "DCUtility.h"
 #import "_DCColumnsLayer.h"
-#import "_DCLinesLayer.h"
 #import "DCXYChartView.h"
 #import "_DCYAxisLabelLayer.h"
 
@@ -35,6 +34,7 @@
             if (s.yAxis == y) {
                 [self.graphContext addHRangeObsever:s];
                 [seriesList addObject:s];
+                s.coordinate = self;
             }
         }
         _seriesList = seriesList;
@@ -112,6 +112,7 @@
         DCRange* newYRange = [[DCRange alloc]initWithLocation:0 length:calResult.yMax];
         if ([self testYRange:newYRange visableMax:currentYMax visableMin:currentYMin]) {
             [self setYRange:newYRange];
+            self.heightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.graphContext.plotRect.size.height / self.yRange.length) : 0;
             self.yInterval = calResult.yInterval;
         }
     }

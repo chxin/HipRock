@@ -9,7 +9,6 @@
 #import "_DCRankingXLabelFormatter.h"
 #import "DCUtility.h"
 #import "DCDataPoint.h"
-#import "_DCSeriesLayer.h"
 
 @implementation _DCRankingXLabelFormatter
 -(id)initWithSeries:(DCXYSeries*)series {
@@ -30,7 +29,7 @@
 }
 
 -(double)getMaxXLabelLengthIn:(CGRect)plotRect {
-    DCContext* context = ((_DCSeriesLayer*)self.series.seriesLayer).graphContext;
+    DCContext* context = self.graphContext;
     return [DCUtility getScreenXIn:plotRect xVal:0.8 hRange:context.hRange] - [DCUtility getScreenXIn:plotRect xVal:0 hRange:context.hRange];
 }
 @end

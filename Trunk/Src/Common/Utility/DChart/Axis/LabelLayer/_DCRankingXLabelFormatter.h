@@ -13,6 +13,7 @@
 @interface _DCRankingXLabelFormatter : NSFormatter<_DCXLabelFormatterProtocal>
 
 @property (nonatomic, weak) DCXYSeries* series;
+@property (nonatomic, weak) DCContext* graphContext;
 -(id)initWithSeries:(DCXYSeries*)series;
 
 @end

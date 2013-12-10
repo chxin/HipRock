@@ -134,7 +134,7 @@
     if (point.value != nil && ![point.value isEqual:[NSNull null]]) {
         y = point.value.doubleValue;
     }
-    return self.heightUnitInScreen * y;
+    return self.coordinateSystem.heightUnitInScreen * y;
 }
 
 -(BOOL)isValidSeriesForMe:(DCXYSeries*)series {

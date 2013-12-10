@@ -16,6 +16,7 @@
         _lineWidth = 2;
         _symbolType = DCLineSymbolTypeNone;
         _symbolSize = 4;
+        self.type = DCSeriesTypeLine;
     }
     return self;
 }

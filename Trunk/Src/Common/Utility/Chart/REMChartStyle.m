@@ -51,6 +51,8 @@
     style.plotPaddingLeft = 22;
     style.plotPaddingRight = 22;
     
+    style.benchmarkColor = [REMColor colorByHexString:@"#f15e31"];
+    
     return style;
 }
 +(REMChartStyle*)getMinimunStyle {
@@ -90,6 +92,8 @@
     style.pieShadowRadius = 33;
     
     style.plotPaddingTop = 12;
+    
+    style.benchmarkColor = [REMColor colorByHexString:@"#f15e31"];
     
     return style;
 }

@@ -83,7 +83,7 @@
 -(void)trialButtonPressed:(UIButton *)sender
 {
     [self.trialButton setLoginButtonStatus:REMLoginButtonWorkingStatus];
-    [self.loginCarouselController.loginPageController.loginButton setLoginButtonStatus:REMLoginButtonDisableStatus];
+    [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonDisableStatus];
     
     [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(createDemoUser) userInfo:nil repeats:NO];
 }
