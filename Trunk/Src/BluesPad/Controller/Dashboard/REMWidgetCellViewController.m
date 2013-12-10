@@ -175,7 +175,7 @@
         
         
         NSRunLoop *loop=[NSRunLoop currentRunLoop];
-        NSTimer *timer= [NSTimer timerWithTimeInterval:5 target:self selector:@selector(snapshotChartView) userInfo:nil repeats:NO];
+        NSTimer *timer= [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(snapshotChartView) userInfo:nil repeats:NO];
         [loop addTimer:timer forMode:NSDefaultRunLoopMode];
     }
 

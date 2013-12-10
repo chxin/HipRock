@@ -207,7 +207,7 @@ const static CGFloat widgetGap=20;
                 if (self.srcBg==nil) {
                     [self addDashboardBg];
                 }
-                if(ABS(self.cumulateX)>128){
+                if(ABS(self.cumulateX)>90){
                     
                     
                     self.readyToClose=YES;

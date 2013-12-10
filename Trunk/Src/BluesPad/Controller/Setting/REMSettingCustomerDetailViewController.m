@@ -41,7 +41,8 @@ static NSString * cellId=@"customerCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 9;
+    //return 9;
+    return 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -63,33 +64,33 @@ static NSString * cellId=@"customerCell";
         cell.textLabel.text=NSLocalizedString(@"Setting_DetailCode", @""); //@"编码";
         cell.detailTextLabel.text=customer.code;
     }
+//    else if(indexPath.row==2){
+//        cell.textLabel.text=@"Logo";
+//        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+//    }
     else if(indexPath.row==2){
-        cell.textLabel.text=@"Logo";
-        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    }
-    else if(indexPath.row==3){
         cell.textLabel.text=NSLocalizedString(@"Setting_DetailAddress", @""); //@"地址";
         cell.detailTextLabel.text=customer.address;
     }
-    else if(indexPath.row==4){
+    else if(indexPath.row==3){
         cell.textLabel.text=NSLocalizedString(@"Setting_DetailAdmin", @""); //@"负责人";
         cell.detailTextLabel.text=customer.manager;
     }
-    else if(indexPath.row==5){
+    else if(indexPath.row==4){
         cell.textLabel.text=NSLocalizedString(@"Setting_DetailAdminTelephone", @""); //@"负责人电话";
         cell.detailTextLabel.text=customer.telephone;
     }
-    else if(indexPath.row==6){
+    else if(indexPath.row==5){
         cell.textLabel.text=NSLocalizedString(@"Setting_DetailAdminEmail", @""); //@"负责人电子邮箱";
         cell.detailTextLabel.text=customer.email;
     }
-    else if(indexPath.row==7){
+    else if(indexPath.row==6){
         cell.textLabel.text=NSLocalizedString(@"Setting_DetailOperationDate", @""); //@"运营时间";
         NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
         [formatter setDateFormat:@"yyyy/MM/dd"];
         cell.detailTextLabel.text=[formatter stringFromDate:customer.startTime];
     }
-    else if(indexPath.row==8){
+    else if(indexPath.row==7){
         cell.textLabel.text=NSLocalizedString(@"Setting_DetailCustomerAdmin", @""); //@"客户管理员";
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         if(customer.administratorArray.count==1){
@@ -119,10 +120,13 @@ static NSString * cellId=@"customerCell";
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO];
     
-    if(indexPath.row==2){
-        [self performSegueWithIdentifier:@"settingCustomerDetailLogoSegue" sender:self];
-    }
-    else if(indexPath.row==8){
+//    if(indexPath.row==2){
+//        [self performSegueWithIdentifier:@"settingCustomerDetailLogoSegue" sender:self];
+//    }
+//    else if(indexPath.row==8){
+//        [self performSegueWithIdentifier:@"settingCustomerDetailAdminSegue" sender:self];
+//    }
+    if (indexPath.row==7) {
         [self performSegueWithIdentifier:@"settingCustomerDetailAdminSegue" sender:self];
     }
 }
