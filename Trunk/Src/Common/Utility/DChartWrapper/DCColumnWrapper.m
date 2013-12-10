@@ -19,6 +19,6 @@
     return self;
 }
 -(void)customizeView:(DCXYChartView*)view {
-    view.graphContext.showIndicatorOnFocus = NO;
+    view.graphContext.showIndicatorLineOnFocus = NO;
 }
 @end

@@ -67,7 +67,6 @@
 }
 
 -(void)drawIndicatorLayer {
-    if (!self.graphContext.showIndicatorOnFocus) return;
     self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext];
     self.indicatorLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, 0, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height+self.plotPaddingTop);// self.graphContext.plotRect;
     self.indicatorLayer.symbolLineStyle = self.focusSymbolLineStyle;
@@ -88,6 +87,8 @@
     
     self.backgroundBandsLayer = [[_DCBackgroundBandsLayer alloc]initWithContext:self.graphContext];
     self.backgroundBandsLayer.frame = self.graphContext.plotRect;
+    self.backgroundBandsLayer.fontColor = self.backgroundBandFontColor;
+    self.backgroundBandsLayer.font = self.backgroundBandFont;
     [self.graphContext addHRangeObsever:self.backgroundBandsLayer];
     [self.layer addSublayer:self.backgroundBandsLayer];
     [self.backgroundBandsLayer setBands:self.bgBands];

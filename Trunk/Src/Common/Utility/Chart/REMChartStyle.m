@@ -53,6 +53,9 @@
     
     style.benchmarkColor = [REMColor colorByHexString:@"#f15e31"];
     
+    style.backgroundBandFontColor = [REMColor colorByHexString:@"#3b3b3b"];
+    style.backgroundBandFont = [UIFont fontWithName:@(kBuildingFontSCRegular) size:12];
+    
     return style;
 }
 +(REMChartStyle*)getMinimunStyle {
@@ -94,6 +97,9 @@
     style.plotPaddingTop = 12;
     
     style.benchmarkColor = [REMColor colorByHexString:@"#f15e31"];
+    
+    style.backgroundBandFontColor = [REMColor colorByHexString:@"#3b3b3b"];
+    style.backgroundBandFont = [UIFont fontWithName:@(kBuildingFontSCRegular) size:8];
     
     return style;
 }
