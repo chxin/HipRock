@@ -33,6 +33,7 @@
         button.imageView.contentMode = UIViewContentModeScaleToFill;
         button.contentMode = UIViewContentModeScaleToFill;
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        button.exclusiveTouch = YES;
         [button addTarget:self action:@selector(pressed:) forControlEvents:UIControlEventTouchUpInside];
         
         [self addSubview:button];

@@ -72,7 +72,7 @@
     UIFont *font = [UIFont systemFontOfSize:kDMChart_TooltipItemTitleFontSize];
     CGFloat height = [@"a" sizeWithFont:font].height;
     //CGRect frame = CGRectMake(0, ((kDMChart_IndicatorSize - height)/2), self.frame.size.width - 2*(kDMChart_IndicatorSize+kDMChart_TooltipItemTitleLeftOffset), height);
-    CGRect frame = CGRectMake(kDMChart_TooltipItemTitleLeftOffset, kDMChart_TooltipItemTitleTopOffset, kDMChart_TooltipItemTitleWidth, height);
+    CGRect frame = CGRectMake(kDMChart_TooltipItemTitleLeftOffset, kDMChart_TooltipItemTitleTopOffset, self.frame.size.width, height);
     
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.text = model.title;
@@ -89,7 +89,7 @@
     CGFloat height = [@"a" sizeWithFont:font].height;
     
     //CGRectMake(0, self.indicator.frame.origin.y + kDMChart_IndicatorSize + kDMChart_TooltipItemDataValueTopOffset, self.frame.size.width, height)
-    CGRect frame = CGRectMake(kDMChart_TooltipItemDataValueLeftOffset, kDMChart_TooltipItemDataValueTopOffset, kDMChart_TooltipItemWidth, height);
+    CGRect frame = CGRectMake(kDMChart_TooltipItemDataValueLeftOffset, kDMChart_TooltipItemDataValueTopOffset, self.frame.size.width, height);
     
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.backgroundColor = [UIColor clearColor];
@@ -105,10 +105,11 @@
 -(void)updateDataValue:(REMChartTooltipItemModel *)model
 {
     NSString *valueText = [REMNumberHelper formatStringWithThousandSep:model.value withRoundDigit:0];
-    NSString *text = [NSString stringWithFormat:@"%@ %@", REMIsNilOrNull(model.value) ? @"": valueText, model.uom];
+    NSString *uomText = REMIsNilOrNull(model.uom) ? @"" : model.uom;
+    NSString *text = [NSString stringWithFormat:@"%@ %@", REMIsNilOrNull(model.value) ? @"": valueText, uomText];
     
     
-    NSRange uomRange = [text rangeOfString:model.uom];
+    NSRange uomRange = REMIsNilOrNull(model.uom) ? NSMakeRange(0, 0) : [text rangeOfString:model.uom];
     NSRange valueRange = NSMakeRange(0, text.length - uomRange.length);
     
     //NSLog(@"valueRange:%@,uomRange:%@", NSStringFromRange(valueRange), NSStringFromRange(uomRange));
@@ -120,8 +121,10 @@
     UIColor *uomColor = [REMColor colorByHexString:kDMChart_TooltipItemDataValueUomColor];
     
     NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:text];
-    [content setAttributes: @{NSFontAttributeName:valueFont,NSForegroundColorAttributeName:valueColor} range:valueRange];
-    [content setAttributes:@{NSFontAttributeName:uomFont,NSForegroundColorAttributeName:uomColor} range:uomRange];
+    if(valueRange.length > 0)
+        [content setAttributes: @{NSFontAttributeName:valueFont,NSForegroundColorAttributeName:valueColor} range:valueRange];
+    if(uomRange.length>0)
+        [content setAttributes:@{NSFontAttributeName:uomFont,NSForegroundColorAttributeName:uomColor} range:uomRange];
     
     self.valueLabel.attributedText = content;
 }

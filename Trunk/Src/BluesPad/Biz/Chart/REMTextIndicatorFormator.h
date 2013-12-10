@@ -10,7 +10,8 @@
 #import "REMWidgetCommoditySearchModel.h"
 #import "REMWidgetObject.h"
 #import "REMWidgetTagSearchModel.h"
+#import "REMEnergyViewData.h"
 
 @interface REMTextIndicatorFormator : NSObject
-+(NSString *)formatTargetName:(REMEnergyTargetModel *)target withWidget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
++(NSString *)formatTargetName:(REMEnergyTargetModel *)target inEnergyData:(REMEnergyViewData *)data withWidget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
 @end

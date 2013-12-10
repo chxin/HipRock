@@ -109,6 +109,8 @@
 #define kDMChart_RankingTooltipDataValueFontSize kDMChart_TooltipItemDataValueFontSize
 #define kDMChart_RankingTooltipDataValueFontColor kDMChart_TooltipItemDataValueColor
 
+//chart
+#define kDMChart_BenchmarkColor @"#f15e31"
 
 
 

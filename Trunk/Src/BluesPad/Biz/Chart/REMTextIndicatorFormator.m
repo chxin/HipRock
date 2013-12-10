@@ -11,15 +11,27 @@
 #import "REMWidgetObject.h"
 #import "REMWidgetTagSearchModel.h"
 #import "REMWidgetMultiTimespanSearchModel.h"
+#import "REMEnergyViewData.h"
+#import "REMTargetEnergyData.h"
 
 @implementation REMTextIndicatorFormator
 
-+(NSString *)formatTargetName:(REMEnergyTargetModel *)target withWidget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
++(NSString *)formatTargetName:(REMEnergyTargetModel *)target inEnergyData:(REMEnergyViewData *)data withWidget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
     switch (target.type) {
         case REMEnergyTargetTag:
             if([parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]]){
-                return [REMTimeHelper formatTimeRangeFullHour: target.visiableTimeRange];
+                int index = [data.targetEnergyData indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+                    if([((REMTargetEnergyData *)obj).target isEqual:target]){
+                        *stop = YES;
+                        return YES;
+                    }
+                    return NO;
+                }];
+                
+                NSString *timeString = [REMTimeHelper formatTimeRangeFullHour: parameters.timeRangeArray[index]];
+                NSLog(@"multiple time: %@", timeString);
+                return timeString;
             }
             else{
                 return target.name;

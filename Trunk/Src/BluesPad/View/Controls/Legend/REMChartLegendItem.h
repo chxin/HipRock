@@ -22,6 +22,7 @@
 @property (nonatomic) int index;
 @property (nonatomic) REMChartSeriesIndicatorType type;
 @property (nonatomic,weak) NSString *title;
+@property (nonatomic) BOOL isBenchmark;
 @property (nonatomic) BOOL tappable;
 @property (nonatomic,weak) NSObject<REMChartLegendItemDelegate> *delegate;
 
@@ -30,7 +31,7 @@
 
 @interface REMChartLegendItem : UIControl
 
--(REMChartLegendItem *)initWithModel:(REMChartLegendItemModel *)model;
+-(REMChartLegendItem *)initWithFrame:(CGRect)frame andModel:(REMChartLegendItemModel *)model;
 -(void)setSelected:(BOOL)selected;
 
 @end
