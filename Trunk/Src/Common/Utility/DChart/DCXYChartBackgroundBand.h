@@ -12,4 +12,5 @@
 @interface DCXYChartBackgroundBand : NSObject
 @property (nonatomic, strong) DCRange* range;
 @property (nonatomic, strong) UIColor* color;
+@property (nonatomic, strong) NSString* title;
 @end

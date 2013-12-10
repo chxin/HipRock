@@ -196,3 +196,7 @@
 "Chart_X_Axis_Format_YearMonth" = "yyyy年M月";
 "Chart_X_Axis_Format_MonthDay" = "M月d日";
 "Chart_X_Axis_Format_DayHour" = "d日H点";
+
+"Chart_Background_Text_HSeason" = "采暖季";
+"Chart_Background_Text_CSeason" = "供冷季";
+"Chart_Background_Text_NonWorkday" = "非工作日";
