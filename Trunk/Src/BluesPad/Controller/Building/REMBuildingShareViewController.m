@@ -24,12 +24,16 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self.view setFrame:CGRectMake(0, 0, 156, 88)];
+    
     if (REMISIOS7) {
         [self.view setBackgroundColor:[UIColor clearColor]];
     }
     else{
         [self.view setBackgroundColor:[UIColor whiteColor]];
     }
+    
+    
+    
     UIButton *weiboButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [weiboButton setImage:REMIMG_share_weibo forState:UIControlStateNormal];
     [self.view addSubview:weiboButton];
@@ -38,7 +42,7 @@
     weiboButton.translatesAutoresizingMaskIntoConstraints=NO;
     
     UIButton *mailButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [mailButton setImage:REMIMG_share_mail forState:UIControlStateNormal];
+    [mailButton setImage:REMIMG_share_email forState:UIControlStateNormal];
     [self.view addSubview:mailButton];
     
     mailButton.translatesAutoresizingMaskIntoConstraints=NO;
