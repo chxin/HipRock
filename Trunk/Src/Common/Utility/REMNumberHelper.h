@@ -9,6 +9,6 @@
 
 @interface REMNumberHelper : NSObject
 
-+ (NSString *) formatStringWithThousandSep:(NSNumber *)number withRoundDigit:(NSUInteger)digit;
++ (NSString *) formatStringWithThousandSep:(NSNumber *)number withRoundDigit:(NSUInteger)digit withIsRound:(BOOL)isRound;
 +(NSString *)formatDataValueWithCarry:(NSNumber *)number;
 @end
