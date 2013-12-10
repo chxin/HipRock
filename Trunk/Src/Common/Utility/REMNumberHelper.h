@@ -10,5 +10,5 @@
 @interface REMNumberHelper : NSObject
 
 + (NSString *) formatStringWithThousandSep:(NSNumber *)number withRoundDigit:(NSUInteger)digit;
-
++(NSString *)formatDataValueWithCarry:(NSNumber *)number;
 @end
