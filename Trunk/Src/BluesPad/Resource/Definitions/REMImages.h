@@ -31,8 +31,9 @@
 #define REMIMG_Menu_normal REMLoadImageNamed(@"Menu_normal")
 #define REMIMG_NotOverTarget REMLoadImageNamed(@"NotOverTarget")
 #define REMIMG_OverTarget REMLoadImageNamed(@"OverTarget")
-#define REMIMG_share_mail REMLoadImageNamed(@"share-mail")
+#define REMIMG_share_email REMLoadImageNamed(@"share-email")
 #define REMIMG_share_weibo REMLoadImageNamed(@"share-weibo")
+#define REMIMG_share_weixin REMLoadImageNamed(@"share-weixin")
 #define REMIMG_Share_normal REMLoadImageNamed(@"Share_normal")
 
 //images in /Building/commodity:
@@ -85,8 +86,8 @@
 #define REMIMG_Up REMLoadImageNamed(@"Up")
 
 //images in /Launch:
-#define REMIMG_Default~ipad REMLoadImageNamed(@"Default~ipad")
-#define REMIMG_Startup_iOS7 REMLoadImageNamed(@"Startup_iOS7")
+#define REMIMG_Default_Landscape_IOS7 REMLoadImageNamed(@"Default-Landscape-IOS7")
+#define REMIMG_Default_Landscape REMLoadImageNamed(@"Default-Landscape")
 
 //images in /Login:
 #define REMIMG_JumpLogin_Pressed REMLoadImageNamed(@"JumpLogin-Pressed")
