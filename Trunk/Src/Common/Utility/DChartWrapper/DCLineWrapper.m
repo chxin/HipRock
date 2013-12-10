@@ -25,7 +25,7 @@
 //}
 
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style {
-    if ([self.defaultSeriesClass isEqualToString:NSStringFromClass([series class])] && !REMIsNilOrNull(series.target) && series.target.type == REMEnergyTargetBenchmarkValue) {
+    if ([self.defaultSeriesClass isEqualToString:NSStringFromClass([series class])] && (REMIsNilOrNull(series.target) || series.target.type != REMEnergyTargetBenchmarkValue)) {
         ((DCLineSeries*)series).symbolType = index % 5;
         ((DCLineSeries*)series).symbolSize = style.symbolSize;
     }
