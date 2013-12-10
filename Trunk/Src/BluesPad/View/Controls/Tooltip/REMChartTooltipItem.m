@@ -105,10 +105,11 @@
 -(void)updateDataValue:(REMChartTooltipItemModel *)model
 {
     NSString *valueText = [REMNumberHelper formatStringWithThousandSep:model.value withRoundDigit:0];
-    NSString *text = [NSString stringWithFormat:@"%@ %@", REMIsNilOrNull(model.value) ? @"": valueText, model.uom];
+    NSString *uomText = REMIsNilOrNull(model.uom) ? @"" : model.uom;
+    NSString *text = [NSString stringWithFormat:@"%@ %@", REMIsNilOrNull(model.value) ? @"": valueText, uomText];
     
     
-    NSRange uomRange = [text rangeOfString:model.uom];
+    NSRange uomRange = REMIsNilOrNull(model.uom) ? NSMakeRange(0, 0) : [text rangeOfString:model.uom];
     NSRange valueRange = NSMakeRange(0, text.length - uomRange.length);
     
     //NSLog(@"valueRange:%@,uomRange:%@", NSStringFromRange(valueRange), NSStringFromRange(uomRange));
@@ -120,8 +121,10 @@
     UIColor *uomColor = [REMColor colorByHexString:kDMChart_TooltipItemDataValueUomColor];
     
     NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:text];
-    [content setAttributes: @{NSFontAttributeName:valueFont,NSForegroundColorAttributeName:valueColor} range:valueRange];
-    [content setAttributes:@{NSFontAttributeName:uomFont,NSForegroundColorAttributeName:uomColor} range:uomRange];
+    if(valueRange.length > 0)
+        [content setAttributes: @{NSFontAttributeName:valueFont,NSForegroundColorAttributeName:valueColor} range:valueRange];
+    if(uomRange.length>0)
+        [content setAttributes:@{NSFontAttributeName:uomFont,NSForegroundColorAttributeName:uomColor} range:uomRange];
     
     self.valueLabel.attributedText = content;
 }
