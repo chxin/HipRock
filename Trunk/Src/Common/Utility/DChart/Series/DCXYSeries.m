@@ -34,21 +34,23 @@
     if (start >= self.datas.count) return;
     NSNumber* yMax = nil;
     NSNumber* yMin = nil;
-    // 从RangeStart向前再搜索一个非空点
-    for (int j = start-1; j >= 0; j--) {
-        DCDataPoint* point = self.datas[j];
-        if (point.pointType == DCDataPointTypeEmpty) {
-            continue;
-        } else if (point.pointType == DCDataPointTypeBreak) {
-            break;
-        } else {
-            if (REMIsNilOrNull(yMax) || [yMax compare:point.value] == NSOrderedAscending) {
-                yMax = point.value;
+    if (self.type == DCSeriesTypeLine) {
+        // 从RangeStart向前再搜索一个非空点
+        for (int j = start-1; j >= 0; j--) {
+            DCDataPoint* point = self.datas[j];
+            if (point.pointType == DCDataPointTypeEmpty) {
+                continue;
+            } else if (point.pointType == DCDataPointTypeBreak) {
+                break;
+            } else {
+                if (REMIsNilOrNull(yMax) || [yMax compare:point.value] == NSOrderedAscending) {
+                    yMax = point.value;
+                }
+                if (REMIsNilOrNull(yMin) || [yMin compare:point.value] == NSOrderedDescending) {
+                    yMin = point.value;
+                }
+                break;
             }
-            if (REMIsNilOrNull(yMin) || [yMin compare:point.value] == NSOrderedDescending) {
-                yMin = point.value;
-            }
-            break;
         }
     }
     // 搜索图形的主要部分
@@ -63,21 +65,23 @@
             }
         }
     }
-    // 从RangeEnd向前后搜索一个非空点
-    for (int j = end+1; j < self.datas.count; j++) {
-        DCDataPoint* point = self.datas[j];
-        if (point.pointType == DCDataPointTypeEmpty) {
-            continue;
-        } else if (point.pointType == DCDataPointTypeBreak) {
-            break;
-        } else {
-            if (REMIsNilOrNull(yMax) || [yMax compare:point.value] == NSOrderedAscending) {
-                yMax = point.value;
+    if (self.type == DCSeriesTypeLine) {
+        // 从RangeEnd向前后搜索一个非空点
+        for (int j = end+1; j < self.datas.count; j++) {
+            DCDataPoint* point = self.datas[j];
+            if (point.pointType == DCDataPointTypeEmpty) {
+                continue;
+            } else if (point.pointType == DCDataPointTypeBreak) {
+                break;
+            } else {
+                if (REMIsNilOrNull(yMax) || [yMax compare:point.value] == NSOrderedAscending) {
+                    yMax = point.value;
+                }
+                if (REMIsNilOrNull(yMin) || [yMin compare:point.value] == NSOrderedDescending) {
+                    yMin = point.value;
+                }
+                break;
             }
-            if (REMIsNilOrNull(yMin) || [yMin compare:point.value] == NSOrderedDescending) {
-                yMin = point.value;
-            }
-            break;
         }
     }
     _visableYMax = yMax;
