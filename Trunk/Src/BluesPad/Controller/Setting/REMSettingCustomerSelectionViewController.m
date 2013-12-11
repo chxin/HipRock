@@ -132,7 +132,6 @@
             
             [mainController dismissViewControllerAnimated:NO completion:^{
                 [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];
-                [mainController popToRootViewControllerAnimated:YES];
                 [mainController presentInitialView:^(void){
                     
                 }];
