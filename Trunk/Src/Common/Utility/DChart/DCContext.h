@@ -63,4 +63,5 @@ typedef enum _DCLineType {
 
 -(void)addHRangeObsever:(id<DCContextHRangeObserverProtocal>)observer;
 -(void)removeHRangeObsever:(id<DCContextHRangeObserverProtocal>)observer;
+-(void)clearHRangeObservers;
 @end

@@ -63,6 +63,10 @@ NSString* const kDCPieIndicatorColor = @"#e9e9e9";
         }
     }
 }
+
+-(void)clearHRangeObservers {
+    [self.hRangeObservers removeAllObjects];
+}
 //-(void)addY0RangeObsever:(id<DCContextYRangeObserverProtocal>)observer {
 //    if (observer == nil) return;
 //    if (self.y0RangeObservers == nil) self.y0RangeObservers = [[NSMutableArray alloc]init];

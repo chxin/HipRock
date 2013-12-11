@@ -135,6 +135,7 @@
 }
 
 -(void)removeFromSuperview {
+    [self.graphContext clearHRangeObservers];
     self.graphContext = nil;
     while (self.layer.sublayers.count != 0) {
         [self.layer.sublayers[self.layer.sublayers.count - 1] removeFromSuperlayer];
