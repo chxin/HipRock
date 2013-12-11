@@ -105,10 +105,12 @@
 
 -(void)presentInitialView:(void (^)(void))completed
 {
+    [self popToRootViewControllerAnimated:YES];
+    
     //load data, when load finised, show map view
     REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
-    
-    [splashController showMapView:completed];
+    [splashController showLogoView];
+    [splashController breathShowMapView:NO :completed];
 }
 
 -(id)getChildControllerInstanceOfClass:(Class)cls

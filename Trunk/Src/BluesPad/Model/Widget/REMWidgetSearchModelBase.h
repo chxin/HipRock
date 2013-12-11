@@ -23,6 +23,8 @@
 
 @property (nonatomic,strong) NSArray *timeRangeArray;
 
+@property (nonatomic,strong) NSArray *searchTimeRangeArray;
+
 @property (nonatomic,strong) NSString *relativeDateComponent;
 @property (nonatomic) REMRelativeTimeRangeType relativeDateType;
 

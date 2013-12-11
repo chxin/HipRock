@@ -29,7 +29,9 @@
                     return NO;
                 }];
                 
-                NSString *timeString = [REMTimeHelper formatTimeRangeFullHour: parameters.timeRangeArray[index]];
+                NSString *timeString = [REMTimeHelper formatTimeRangeFullHour: parameters.searchTimeRangeArray[index]];
+                
+                
                 NSLog(@"multiple time: %@", timeString);
                 return timeString;
             }

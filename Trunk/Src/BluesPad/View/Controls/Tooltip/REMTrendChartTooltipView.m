@@ -47,7 +47,7 @@
  * Ranking
  */
 
-#define REMSeriesIsMultiTime [self.parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]]
+#define REMSeriesIsMultiTime ([self.parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]])
 
 -(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points atX:(id)x inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
@@ -110,8 +110,8 @@
     for(int i=0;i<self.itemModels.count;i++)
         [[self.tooltipItems objectAtIndex:i] updateModel:self.itemModels[i]];
     
-    NSDate *time = [x isKindOfClass:[NSDate class]] ? x : nil;
-    self.timeLabel.text = [self formatTimeText:time];
+    DCDataPoint *point = self.highlightedPoints.count>0?self.highlightedPoints[0]:nil;
+    self.timeLabel.text = REMSeriesIsMultiTime ? (point ? point.target.name:@"") : [self formatTimeText:self.xTime];
 }
 
 - (NSArray *)convertItemModels
@@ -124,7 +124,7 @@
         
         REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
         
-        model.title = [self formatTargetName:point.target];
+        model.title = [self formatTargetName:point];
         model.value = REMIsNilOrNull(point) ? nil : point.value;
         model.color = point.series.color;
         model.index = i;
@@ -146,10 +146,7 @@
 {
     DCDataPoint *point = self.highlightedPoints[0];
     
-    NSString *text = [self formatTimeText:self.xTime];
-    if(self.widget.contentSyntax.dataStoreType == REMDSEnergyMultiTimeTrend){
-        text = point.target.name;
-    }
+    NSString *text = REMSeriesIsMultiTime ? point.target.name : [self formatTimeText:self.xTime];
     
     UILabel *timeLabel = [[UILabel alloc] initWithFrame:kDMChart_TooltipTimeViewFrame];
     timeLabel.text = text == nil ? @" " : text;
@@ -160,9 +157,29 @@
     return timeLabel;
 }
 
--(NSString *)formatTargetName:(REMEnergyTargetModel *)target
+-(NSString *)formatTargetName:(DCDataPoint *)point
 {
-    return [REMTextIndicatorFormator formatTargetName:target inEnergyData:self.data withWidget:self.widget andParameters:self.parameters];
+    if(REMSeriesIsMultiTime){
+        //get the point's time
+        //add time difference according to its index
+        int index = [self.data.targetEnergyData indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            if([((REMTargetEnergyData *)obj).target isEqual:point.target]){
+                *stop = YES;
+                return YES;
+            }
+            return NO;
+        }];
+        
+        REMTimeRange *range0 = self.parameters.searchTimeRangeArray[0], *rangei = self.parameters.searchTimeRangeArray[index];
+        
+        NSTimeInterval diff = [rangei.startTime timeIntervalSinceDate: range0.startTime];
+        
+        NSDate *realtime = [point.energyData.localTime dateByAddingTimeInterval:diff];
+        
+        return [REMTimeHelper formatTooltipTime:realtime byStep:self.widget.contentSyntax.stepType inRange:rangei];
+    }
+    
+    return [REMTextIndicatorFormator formatTargetName:point.target inEnergyData:self.data withWidget:self.widget andParameters:self.parameters];
 }
 
 -(NSString *)formatTimeText:(NSDate *)time

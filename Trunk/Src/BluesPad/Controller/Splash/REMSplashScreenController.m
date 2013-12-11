@@ -130,31 +130,61 @@
     [self recoverAppContext];
     
     if([self isAlreadyLogin]){
-        [self breathAnimation:^(void){
-            [self breathAnimation:nil];
-            
-            SEL selector = @selector(breathAnimation:);
-            
-            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:selector]];
-            [invocation setTarget:self];
-            [invocation setSelector:selector];
-            
-            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
-            
-            [self showMapView:^(void){
-                if(timer != nil){
-                    if([timer isValid])
-                        [timer invalidate];
-                }
-            }];
-        }];
+        [self breathShowMapView:YES:nil];
     }
     else{
-        [self breathAnimation:^(void){
-            [self.logoView setHidden:YES];
-            [self showLoginView:YES];
-        }];
+        [self breathShowLoginView];
     }
+}
+
+-(void)breathShowMapView:(BOOL)isAfterBreathOnce :(void (^)(void))completed
+{
+    void (^breathLoadMapView)(void) = ^(void){
+        [self breathAnimation:nil];
+        
+        SEL selector = @selector(breathAnimation:);
+        
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:selector]];
+        [invocation setTarget:self];
+        [invocation setSelector:selector];
+        
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
+        
+        [self showMapView:^(void){
+            if(timer != nil){
+                if([timer isValid])
+                    [timer invalidate];
+            }
+            
+            if(completed)
+                completed();
+        }];
+    };
+    
+    if(isAfterBreathOnce == NO){
+        breathLoadMapView();
+    }
+    else{
+        [self breathAnimation:breathLoadMapView];
+    }
+}
+
+-(void)breathShowLoginView
+{
+    [self breathAnimation:^(void){
+        [self.logoView setHidden:YES];
+        [self showLoginView:YES];
+    }];
+}
+
+-(void)showLogoView
+{
+    if(self.carouselController!=nil){
+        [self.carouselController.view removeFromSuperview];
+        [self.carouselController removeFromParentViewController];
+    }
+    
+    [self.logoView setHidden:NO];
 }
 
 -(void)oscarTest {
