@@ -136,6 +136,27 @@
 
 -(void)removeFromSuperview {
     self.graphContext = nil;
+    while (self.layer.sublayers.count != 0) {
+        [self.layer.sublayers[self.layer.sublayers.count - 1] removeFromSuperlayer];
+    }
+    if (self.timer.isValid) {
+        [self.timer invalidate];
+    }
+    self.timer = nil;
+    self.backgroundBandsLayer = Nil;
+    self.symbolLayer = nil;
+    self.indicatorLayer = nil;
+    self.seriesList = nil;
+    [self.columnLayers removeAllObjects];
+    self._hGridlineLayer = nil;
+    self._xLabelLayer = nil;
+    [self.coodinates removeAllObjects];
+    self.beginHRange = nil;
+    self.xLabelFormatter = nil;
+    self.userInteractionEnabled = NO;
+    self.bgBands = nil;
+    self.xAxis = nil;
+    self.yAxisList = nil;
     [super removeFromSuperview];
 }
 
