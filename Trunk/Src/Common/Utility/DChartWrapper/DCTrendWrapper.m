@@ -193,12 +193,18 @@
     
     NSUInteger seriesAmount = [self getSeriesAmount];
     self.processors = [[NSMutableArray alloc]init];
-    BOOL allSeriesUserGlobalTime = ([self.xtypeOfWidget rangeOfString : @"multitimespan"].location == NSNotFound);
+//    BOOL allSeriesUserGlobalTime = ([self.xtypeOfWidget rangeOfString : @"multitimespan"].location == NSNotFound);
     
     NSDate* baseDateOfX = nil;
     NSDate* globalEndDate = nil;
-    NSDate* beginningStart = self.energyViewData.visibleTimeRange.startTime;
-    NSDate* beginningEnd = self.energyViewData.visibleTimeRange.endTime;
+    NSDate* beginningStart = nil;
+    NSDate* beginningEnd = nil;
+    self.sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
+    self.sharedProcessor.step = step;
+    
+//    if (allSeriesUserGlobalTime) {
+    beginningStart = self.energyViewData.visibleTimeRange.startTime;
+    beginningEnd = self.energyViewData.visibleTimeRange.endTime;
     
     if (REMIsNilOrNull(self.energyViewData.globalTimeRange)) {
         baseDateOfX = beginningStart;
@@ -213,37 +219,34 @@
             globalEndDate = beginningEnd;
         }
     }
-    
-    self.sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
-    self.sharedProcessor.step = step;
-    
-    if (allSeriesUserGlobalTime) {
-        for (int i = 0; i < seriesAmount; i++) {
-            [self.processors addObject:self.sharedProcessor];
-        }
-    } else {
-        for (REMTargetEnergyData* targetEnergy in self.energyViewData.targetEnergyData) {
-            REMTrendChartDataProcessor* processor = [[REMTrendChartDataProcessor alloc]init];
-            processor.step = step;
-            if (targetEnergy.energyData.count == 0) {
-                processor.baseDate = [NSDate dateWithTimeIntervalSince1970:0];
-            } else {
-                NSDate* seriesBeginDate = [targetEnergy.energyData[0] localTime];
-                NSDate* seriesEndDate = [targetEnergy.energyData[targetEnergy.energyData.count-1] localTime];
-                if (baseDateOfX == nil) {
-                    baseDateOfX = seriesBeginDate;
-                    globalEndDate = seriesEndDate;
-//                } else {
-//                    if ([baseDateOfX compare:seriesBeginDate] == NSOrderedDescending) {
-//                        baseDateOfX = seriesBeginDate;
-//                        globalEndDate = seriesEndDate;
-//                    }
-                }
-                processor.baseDate = seriesBeginDate;
-            }
-            [self.processors addObject:processor];
-        }
+    for (int i = 0; i < seriesAmount; i++) {
+        [self.processors addObject:self.sharedProcessor];
     }
+//    } else {
+//        for (REMTargetEnergyData* targetEnergy in self.energyViewData.targetEnergyData) {
+//            REMTrendChartDataProcessor* processor = [[REMTrendChartDataProcessor alloc]init];
+//            processor.step = step;
+//            if (REMIsNilOrNull(targetEnergy.target) || REMIsNilOrNull(targetEnergy.target.globalTimeRange)) {
+//                processor.baseDate = [NSDate dateWithTimeIntervalSince1970:0];
+//            } else {
+//                NSDate* seriesBeginDate = targetEnergy.target.globalTimeRange.startTime;
+//                NSDate* seriesEndDate = targetEnergy.target.globalTimeRange.endTime;
+//                if (baseDateOfX == nil) {
+//                    baseDateOfX = seriesBeginDate;
+//                    globalEndDate = seriesEndDate;
+//                    beginningEnd = targetEnergy.target.visiableTimeRange.endTime;
+//                    beginningStart = targetEnergy.target.visiableTimeRange.startTime;
+////                } else {
+////                    if ([baseDateOfX compare:seriesBeginDate] == NSOrderedDescending) {
+////                        baseDateOfX = seriesBeginDate;
+////                        globalEndDate = seriesEndDate;
+////                    }
+//                }
+//                processor.baseDate = seriesBeginDate;
+//            }
+//            [self.processors addObject:processor];
+//        }
+//    }
     
     self.sharedProcessor.baseDate = baseDateOfX;
     NSNumber* globalLength = [self.sharedProcessor processX:globalEndDate];
