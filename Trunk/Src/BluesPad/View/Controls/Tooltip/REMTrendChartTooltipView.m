@@ -159,9 +159,14 @@
 
 -(NSString *)formatTargetName:(DCDataPoint *)point
 {
+    REMEnergyStep step = ((REMWidgetStepEnergyModel *)self.parameters).step;
+    
     if(REMSeriesIsMultiTime){
         //get the point's time
         //add time difference according to its index
+        if(point.energyData.localTime == nil)
+            return nil;
+        
         int index = [self.data.targetEnergyData indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
             if([((REMTargetEnergyData *)obj).target isEqual:point.target]){
                 *stop = YES;
@@ -172,11 +177,18 @@
         
         REMTimeRange *range0 = self.parameters.searchTimeRangeArray[0], *rangei = self.parameters.searchTimeRangeArray[index];
         
-        NSTimeInterval diff = [rangei.startTime timeIntervalSinceDate: range0.startTime];
+        NSDate *pointtime = point.energyData.localTime, *realtime;
+        if(step == REMEnergyStepMonth || step == REMEnergyStepYear){
+            int monthDiff = [[REMTimeHelper getMonthTicksFromDate:rangei.startTime] intValue] - [[REMTimeHelper getMonthTicksFromDate:range0.startTime] intValue];
+            
+            realtime = [REMTimeHelper add:monthDiff onPart:REMDateTimePartMonth ofDate:pointtime];
+        }
+        else{
+            NSTimeInterval diff = [rangei.startTime timeIntervalSinceDate: range0.startTime];
+            realtime = [pointtime dateByAddingTimeInterval:diff];
+        }
         
-        NSDate *realtime = [point.energyData.localTime dateByAddingTimeInterval:diff];
-        
-        return [REMTimeHelper formatTooltipTime:realtime byStep:self.widget.contentSyntax.stepType inRange:rangei];
+        return [REMTimeHelper formatTooltipTime:realtime byStep:step inRange:rangei];
     }
     
     return [REMTextIndicatorFormator formatTargetName:point.target inEnergyData:self.data withWidget:self.widget andParameters:self.parameters];

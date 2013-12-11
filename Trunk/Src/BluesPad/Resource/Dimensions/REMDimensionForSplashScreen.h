@@ -16,9 +16,9 @@
 #define kDMSplash_TitleLabelTopOffsetRelativeToLogo 14
 #define kDMSplash_TitleLabelFontSize 24
 #define kDMSplash_TitleLabelFontColor @"#ffffff"
-#define kDMSplash_CopyrightLabelFontSize 10
+#define kDMSplash_CopyrightLabelFontSize 12//10
 #define kDMSplash_CopyrightLabelFontColor @"#ffffff"
-#define kDMSplash_CopyrightLabelBottomOffset 38
+#define kDMSplash_CopyrightLabelBottomOffset 28//38
 
 
 
