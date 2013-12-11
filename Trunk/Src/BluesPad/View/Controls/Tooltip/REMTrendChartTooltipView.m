@@ -47,7 +47,7 @@
  * Ranking
  */
 
-#define REMSeriesIsMultiTime [self.parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]]
+#define REMSeriesIsMultiTime ([self.parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]])
 
 -(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points atX:(id)x inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
@@ -110,8 +110,8 @@
     for(int i=0;i<self.itemModels.count;i++)
         [[self.tooltipItems objectAtIndex:i] updateModel:self.itemModels[i]];
     
-    NSDate *time = [x isKindOfClass:[NSDate class]] ? x : nil;
-    self.timeLabel.text = [self formatTimeText:time];
+    DCDataPoint *point = self.highlightedPoints.count>0?self.highlightedPoints[0]:nil;
+    self.timeLabel.text = REMSeriesIsMultiTime && point ? @"" : point.target.name;
 }
 
 - (NSArray *)convertItemModels
@@ -146,10 +146,7 @@
 {
     DCDataPoint *point = self.highlightedPoints[0];
     
-    NSString *text = [self formatTimeText:self.xTime];
-    if(self.widget.contentSyntax.dataStoreType == REMDSEnergyMultiTimeTrend){
-        text = point.target.name;
-    }
+    NSString *text = REMSeriesIsMultiTime ? point.target.name : [self formatTimeText:self.xTime];
     
     UILabel *timeLabel = [[UILabel alloc] initWithFrame:kDMChart_TooltipTimeViewFrame];
     timeLabel.text = text == nil ? @" " : text;
@@ -162,6 +159,7 @@
 
 -(NSString *)formatTargetName:(REMEnergyTargetModel *)target
 {
+    
     return [REMTextIndicatorFormator formatTargetName:target inEnergyData:self.data withWidget:self.widget andParameters:self.parameters];
 }
 
