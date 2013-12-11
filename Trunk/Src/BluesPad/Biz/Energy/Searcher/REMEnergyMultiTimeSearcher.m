@@ -99,7 +99,8 @@
     
     REMTimeRange *baseTimeRange=model.timeRangeArray[0];
    
-    
+    NSDate *minStart = [NSDate date];
+    NSDate *maxEnd= [NSDate dateWithTimeIntervalSince1970:0];
 
     for (int i=1; i<data.targetEnergyData.count; ++i) {
         REMTargetEnergyData *followData=data.targetEnergyData[i];
@@ -117,6 +118,21 @@
         }
         followData.energyData=energyDataArray;
     }
+    
+    for (REMTargetEnergyData *energyData in data.targetEnergyData) {
+        REMEnergyData *startData = energyData.energyData[0];
+        REMEnergyData *endData=energyData.energyData[energyData.energyData.count-1];
+        if ([startData.localTime compare:minStart] == NSOrderedAscending) {
+            minStart=[startData.localTime copy];
+        }
+        if ([endData.localTime compare:maxEnd] == NSOrderedDescending) {
+            maxEnd=[endData.localTime copy];
+        }
+    }
+    
+    data.globalTimeRange.startTime=minStart;
+    data.globalTimeRange.endTime=maxEnd;
+    
     
     return data;
 }
