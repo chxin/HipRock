@@ -18,6 +18,7 @@
 #import "REMColor.h"
 #import "_DCHPinchGestureRecognizer.h"
 #import "DCColumnSeries.h"
+#import "DCTrendAnimationManager.h"
 
 #import "_DCXYIndicatorLayer.h"
 
@@ -35,7 +36,10 @@
 //@property (nonatomic, strong) NSMutableArray* symbolLayers;
 @property (nonatomic, strong) _DCLineSymbolsLayer* symbolLayer;
 
-@property (nonatomic, strong) NSTimer* timer;
+//@property (nonatomic, strong) NSTimer* timer;
+
+@property (nonatomic, strong) DCTrendAnimationManager* animationManager;
+
 @property (nonatomic, strong) NSFormatter* xLabelFormatter;
 
 @property (nonatomic, strong) UITapGestureRecognizer* tapGsRec;
@@ -62,6 +66,8 @@
 //        self.multipleTouchEnabled = YES;
         _beginHRange = beginHRange;
         _visableYAxisAmount = 3;
+        self.animationManager = [[DCTrendAnimationManager alloc]init];
+        self.animationManager.view = self;
     }
     return self;
 }
@@ -135,7 +141,11 @@
 }
 
 -(void)removeFromSuperview {
-    [self.timer invalidate];
+    [self.animationManager invalidate];
+    self.animationManager.view = nil;
+    self.animationManager = nil;
+    
+//    [self.timer invalidate];
     [self.graphContext clearHRangeObservers];
     self.graphContext = nil;
     while (self.layer.sublayers.count != 0) {
@@ -250,32 +260,6 @@
     [self._hGridlineLayer setNeedsDisplay];
 }
 
--(void)animateHRangeLocation {
-    if (self.timer.isValid) {
-        double hRangeAnimationStep =  [self.timer.userInfo[@"hRangeAnimationStep"] doubleValue];
-        double to =  [self.timer.userInfo[@"to"] doubleValue];
-        double from =  [self.timer.userInfo[@"from"] doubleValue];
-        double newLocation = self.graphContext.hRange.location + hRangeAnimationStep;
-        if ((newLocation >= to && from < to) || (newLocation <= to && from > to)){
-            newLocation = to;
-            [self.timer invalidate];
-        }
-        DCRange* newRange = [[DCRange alloc]initWithLocation:newLocation length:self.graphContext.hRange.length];
-        if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByAnimation]) {
-            self.graphContext.hRange = newRange;
-        }
-    }
-}
-
--(void)animateHRangeLocationFrom:(double)from to:(double)to {
-    if (from == to) return;
-    double frames = kDCAnimationDuration * kDCFramesPerSecord;
-    NSNumber* hRangeAnimationStep = @((to - from)/frames);
-    NSDictionary* hRangeUserInfo = @{@"hRangeAnimationStep":hRangeAnimationStep, @"from":@(from), @"to":@(to)};
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animateHRangeLocation) userInfo:hRangeUserInfo repeats:YES];
-    [self.timer fire];
-}
-
 -(void)setSeriesList:(NSArray *)seriesList {
     if (seriesList != self.seriesList) {
         self.xAxis.visableSeriesAmount = seriesList.count;
@@ -327,9 +311,7 @@
         if (self.delegate && [self.delegate respondsToSelector:@selector(touchedInPlotAt:xCoordinate:)]) {
             [self.delegate touchedInPlotAt:touchPoint xCoordinate:[self getXLocationForPoint:touchPoint]];
         }
-        if (self.timer.isValid) {
-            [self.timer invalidate];
-        }
+        [self.animationManager invalidate];
     }
 }
 
@@ -349,9 +331,9 @@
             if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed) {
                 if (!self.blockReboundAnimation) {
                     if (self.graphContext.hRange.location < self.graphContext.globalHRange.location || self.graphContext.hRange.length > self.graphContext.globalHRange.length) {
-                        [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.location];
+                        [self.animationManager animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.location];
                     } else if (self.graphContext.hRange.end>self.graphContext.globalHRange.end) {
-                        [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.end-self.graphContext.hRange.length];
+                        [self.animationManager animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.end-self.graphContext.hRange.length];
                     } else {
                         
                     }
@@ -379,9 +361,9 @@
     if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed) {
         if (!self.blockReboundAnimation) {
             if (self.graphContext.hRange.location < self.graphContext.globalHRange.location || self.graphContext.hRange.length > self.graphContext.globalHRange.length) {
-                [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.location];
+                [self.animationManager animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.location];
             } else if (self.graphContext.hRange.end>self.graphContext.globalHRange.end) {
-                [self animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.end-self.graphContext.hRange.length];
+                [self.animationManager animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.end-self.graphContext.hRange.length];
             } else {
                 
             }
