@@ -105,13 +105,16 @@
 - (void)updateHighlightedData:(NSArray *)points atX:(id)x
 {
     self.highlightedPoints = points;
+    self.xTime = [x isKindOfClass:[NSDate class]] ? x : nil;
     self.itemModels = [self convertItemModels];
+    
     
     for(int i=0;i<self.itemModels.count;i++)
         [[self.tooltipItems objectAtIndex:i] updateModel:self.itemModels[i]];
     
     DCDataPoint *point = self.highlightedPoints.count>0?self.highlightedPoints[0]:nil;
-    self.timeLabel.text = REMSeriesIsMultiTime ? (point ? point.target.name:@"") : [self formatTimeText:self.xTime];
+    NSString *timeLabelText = REMSeriesIsMultiTime ? (point ? point.target.name:@"") : [self formatTimeText:self.xTime];
+    self.timeLabel.text = timeLabelText;
 }
 
 - (NSArray *)convertItemModels
