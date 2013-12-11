@@ -91,10 +91,10 @@
         if (REMIsNilOrNull(t)) {
             t = self.cacheLayer;
             t.hidden = NO;
-            [t setString:textStringArray[i]];
             [self.visableLabelLayers setObject:t forKey:textXValArray[i]];
             self.cacheLayer = [self constructCacheTextLayer];
         }
+        [t setString:textStringArray[i]];
         CGRect rect;
         [[textFrameArray objectAtIndex:i] getValue:&rect];
         t.frame = rect;
