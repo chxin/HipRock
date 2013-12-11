@@ -135,15 +135,12 @@
 }
 
 -(void)removeFromSuperview {
+    [self.timer invalidate];
     [self.graphContext clearHRangeObservers];
     self.graphContext = nil;
     while (self.layer.sublayers.count != 0) {
         [self.layer.sublayers[self.layer.sublayers.count - 1] removeFromSuperlayer];
     }
-    if (self.timer.isValid) {
-        [self.timer invalidate];
-    }
-    self.timer = nil;
     self.backgroundBandsLayer = Nil;
     self.symbolLayer = nil;
     self.indicatorLayer = nil;
