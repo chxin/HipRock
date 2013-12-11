@@ -115,8 +115,8 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     REMWidgetSearchModelBase *base=[[[self class]allocWithZone:zone]init];
-    base.timeRangeArray=[NSKeyedUnarchiver unarchiveObjectWithData:
-                         [NSKeyedArchiver archivedDataWithRootObject:self.timeRangeArray]];
+    base.timeRangeArray=[self.timeRangeArray copyWithZone:zone];
+    base.searchTimeRangeArray=[self.timeRangeArray copyWithZone:zone];
     base.relativeDateComponent=[self.relativeDateComponent copyWithZone:zone];
     base.relativeDateType=self.relativeDateType;
     return base;
