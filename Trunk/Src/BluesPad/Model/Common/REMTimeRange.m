@@ -71,6 +71,11 @@
     return [self initWithStartTime:start EndTime:end];
 }
 
+- (id)copyWithZone:(NSZone *)zone{
+    return [NSKeyedUnarchiver unarchiveObjectWithData:
+     [NSKeyedArchiver archivedDataWithRootObject:self]];
+}
+
 -(NSString *)description
 {
     return [NSString stringWithFormat:@"{%f,%f}", [self.startTime timeIntervalSince1970], [self.endTime timeIntervalSince1970] ];

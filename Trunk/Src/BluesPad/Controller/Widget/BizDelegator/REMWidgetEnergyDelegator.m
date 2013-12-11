@@ -540,7 +540,20 @@
         [self.chartContainer addSubview:pieWrapper.view];
         self.pieWrapper=pieWrapper;
     }
+
+    [self syncSearchTimeRange];
     
+}
+
+- (void)syncSearchTimeRange{
+    NSMutableArray *searchTimeRange=[NSMutableArray array];
+    
+    for (int i=0; i<self.tempModel.timeRangeArray.count; ++i) {
+        REMTimeRange *range=self.tempModel.timeRangeArray[i];
+        [searchTimeRange addObject:[range copy]];
+    }
+    
+    self.tempModel.searchTimeRangeArray=searchTimeRange;
 }
 
 
@@ -903,6 +916,7 @@
 - (void)search{
     [self doSearchWithModel:self.tempModel callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
         if(data!=nil){
+            [self syncSearchTimeRange];
             [self copyTempModel];
             
             [self reloadChart];
