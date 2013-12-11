@@ -30,7 +30,7 @@
 
 static NSOperationQueue *queue = nil;
 static int maxQueueLength = kREMCommMaxQueueWifi;
-#define kREMLogResquest 0 //0:no log, 1:log partial, 2: log full
+#define kREMLogResquest 1 //0:no log, 1:log partial, 2: log full
 
 #if defined(DEBUG)
 static int requestTimeout = 1000; //(s)

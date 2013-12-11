@@ -19,6 +19,7 @@
 
 - (void)showMapView:(void (^)(void))loadCompleted;
 - (void)showLoginView:(BOOL)isAnimated;
-
+- (void)breathShowMapView:(BOOL)isAfterBreathOnce :(void (^)(void))completed;
+- (void)showLogoView;
 
 @end
