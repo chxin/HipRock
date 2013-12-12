@@ -22,6 +22,8 @@
     double frames = kDCAnimationDuration * kDCFramesPerSecord;
     NSNumber* hRangeAnimationStep = @((to - from)/frames);
     NSDictionary* hRangeUserInfo = @{@"hRangeAnimationStep":hRangeAnimationStep, @"from":@(from), @"to":@(to)};
+    [self.timer invalidate];
+    self.timer = nil;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animateHRangeLocation) userInfo:hRangeUserInfo repeats:YES];
 }
 
