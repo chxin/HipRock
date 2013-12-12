@@ -150,11 +150,10 @@
     return (int)hour;
 }
 
-+ (int )getLocalNowTimePart:(REMDateTimePart)timePart  {
-    NSDate *now = [NSDate date];
++ (int )getTimePart:(REMDateTimePart)timePart ofLocalDate:(NSDate *)date  {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSUInteger unitFlags =NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit |NSHourCalendarUnit |NSMinuteCalendarUnit;
-    NSDateComponents *components = [calendar components:unitFlags fromDate:now];
+    NSDateComponents *components = [calendar components:unitFlags fromDate:date];
     
     switch (timePart) {
         case REMDateTimePartHour:
