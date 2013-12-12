@@ -190,6 +190,7 @@
     honeywell.leftMargin=kBuildingCommodityDetailTextMargin;
     honeywell.valueFontSize=kBuildingCommodityDetailValueFontSize;
     honeywell.emptyTextFontSize=29;
+    honeywell.uomFontSize=kBuildingCommodityDetailUomFontSize;
     honeywell.emptyTextFont=@(kBuildingFontSCRegular);
     honeywell.emptyTextMargin=28;
     [honeywell showTitle];
