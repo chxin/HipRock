@@ -64,7 +64,7 @@ typedef enum _REMDateTimePart : NSUInteger{
 + (NSUInteger)getMonth:(NSDate *)date;
 + (NSUInteger)getDay:(NSDate *)date;
 + (int )getHour:(NSDate *)date;
-+ (int )getLocalHour;
++ (int )getLocalNowTimePart:(REMDateTimePart)timePart;
 + (int)getMinute:(NSDate *)date;
 +(NSNumber *)getMonthTicksFromDate:(NSDate *)date;
 +(NSDate *)getDateFromMonthTicks:(NSNumber *)monthTicks;

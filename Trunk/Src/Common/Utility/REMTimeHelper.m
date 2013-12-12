@@ -150,14 +150,26 @@
     return (int)hour;
 }
 
-+ (int )getLocalHour  {
++ (int )getLocalNowTimePart:(REMDateTimePart)timePart  {
     NSDate *now = [NSDate date];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSUInteger unitFlags =NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit |NSHourCalendarUnit |NSMinuteCalendarUnit;
     NSDateComponents *components = [calendar components:unitFlags fromDate:now];
-    NSInteger hour = [components hour];
     
-    return (int)hour;
+    switch (timePart) {
+        case REMDateTimePartHour:
+            return [components hour];
+        case REMDateTimePartDay:
+            return [components day];
+        case REMDateTimePartMonth:
+            return [components month];
+        case REMDateTimePartYear:
+            return [components year];
+            
+        default:
+            return [components hour];
+            break;
+    }
 }
 
 
