@@ -541,6 +541,7 @@
         self.pieWrapper=pieWrapper;
     }
 
+    [self processEnergyDataInnerError:self.energyData];
     [self syncSearchTimeRange];
     
 }
@@ -913,6 +914,21 @@
     [self search];
 }
 
+- (void)processEnergyDataInnerError:(REMEnergyViewData *)data{
+    if (data.error!=nil && [data.error isEqual:[NSNull null]]==NO && data.error.count>0) {
+        REMEnergyError *error= data.error[0];
+        if (error!=nil && [error isEqual:[NSNull null]]==NO) {
+            NSString *errorCode= [error.errorCode substringFromIndex:7];
+            errorCode=[NSString stringWithFormat:@"Energy_%@",errorCode];
+            NSString *showText= NSLocalizedString(errorCode, @"");
+            if (error.params!=nil && [error.params isEqual:[NSNull null]]==NO && error.params.count>0) {
+                
+            }
+            [self showCalendarMsg:showText];
+        }
+    }
+}
+
 - (void)search{
     [self doSearchWithModel:self.tempModel callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
         if(data!=nil){
@@ -920,6 +936,8 @@
             [self copyTempModel];
             
             [self reloadChart];
+            
+            [self processEnergyDataInnerError:data];
             
         }
         else{
