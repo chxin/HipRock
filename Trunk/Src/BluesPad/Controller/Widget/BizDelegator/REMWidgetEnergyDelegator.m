@@ -915,6 +915,7 @@
 }
 
 - (void)processEnergyDataInnerError:(REMEnergyViewData *)data{
+    return;
     if (data.error!=nil && [data.error isEqual:[NSNull null]]==NO && data.error.count>0) {
         REMEnergyError *error= data.error[0];
         if (error!=nil && [error isEqual:[NSNull null]]==NO) {
