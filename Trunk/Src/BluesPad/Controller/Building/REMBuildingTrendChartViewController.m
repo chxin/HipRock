@@ -238,18 +238,18 @@
     
     NSMutableArray *xLabelLocations = [[NSMutableArray alloc]init];
     NSMutableArray *xtickLocations = [[NSMutableArray alloc]init];
-    
+    NSDate* now = [REMTimeHelper convertGMTDateToLocal:[NSDate date]];
     int xCount = 0;
     if (currentSourceIndex == 0) {
-        xCount = [REMTimeHelper getHour:[NSDate date]];
+        xCount = [REMTimeHelper getHour:now];
     } else if (currentSourceIndex == 1) {
         xCount = 24;
     } else if (currentSourceIndex == 2) {
-        xCount = [REMTimeHelper getDay:[NSDate date]];
+        xCount = [REMTimeHelper getDay:now];
     } else if (currentSourceIndex == 3) {
-        xCount = [REMTimeHelper getDaysOfDate:[REMTimeHelper addMonthToDate:[NSDate date] month:-1]];
+        xCount = [REMTimeHelper getDaysOfDate:[REMTimeHelper addMonthToDate:now month:-1]];
     } else if (currentSourceIndex == 4) {
-        xCount = [REMTimeHelper getMonth:[NSDate date]];
+        xCount = [REMTimeHelper getMonth:now];
     } else {
         xCount = 12;
     }
