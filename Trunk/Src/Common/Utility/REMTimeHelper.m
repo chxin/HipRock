@@ -150,6 +150,16 @@
     return (int)hour;
 }
 
++ (int )getLocalHour  {
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger unitFlags =NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit |NSHourCalendarUnit |NSMinuteCalendarUnit;
+    NSDateComponents *components = [calendar components:unitFlags fromDate:now];
+    NSInteger hour = [components hour];
+    
+    return (int)hour;
+}
+
 
 + (int)getMinute:(NSDate *)date {
     NSCalendar *calendar = [REMTimeHelper currentCalendar];
