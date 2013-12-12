@@ -196,6 +196,7 @@
 //    BOOL allSeriesUserGlobalTime = ([self.xtypeOfWidget rangeOfString : @"multitimespan"].location == NSNotFound);
     
     NSDate* baseDateOfX = nil;
+    NSDate* globalStartdDate = nil;
     NSDate* globalEndDate = nil;
     NSDate* beginningStart = nil;
     NSDate* beginningEnd = nil;
@@ -207,12 +208,12 @@
     beginningEnd = self.energyViewData.visibleTimeRange.endTime;
     
     if (REMIsNilOrNull(self.energyViewData.globalTimeRange)) {
-        baseDateOfX = beginningStart;
+        globalStartdDate = beginningStart;
         globalEndDate = beginningEnd;
     } else {
-        baseDateOfX = self.energyViewData.globalTimeRange.startTime;
-        if ([baseDateOfX compare:beginningStart]==NSOrderedDescending) {
-            baseDateOfX = beginningStart;
+        globalStartdDate = self.energyViewData.globalTimeRange.startTime;
+        if ([globalStartdDate compare:beginningStart]==NSOrderedDescending) {
+            globalStartdDate = beginningStart;
         }
         globalEndDate = self.energyViewData.globalTimeRange.endTime;
         if ([globalEndDate compare:beginningEnd]==NSOrderedAscending) {
@@ -248,16 +249,30 @@
 //        }
 //    }
     
+    baseDateOfX = globalStartdDate;
+    if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
+        NSDate* baseDateFromEnergyData = nil;
+        for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
+            if (d.energyData.count > 0) {
+                baseDateFromEnergyData = [d.energyData[0] localTime];
+                self.sharedProcessor.baseDate = baseDateFromEnergyData;
+                baseDateOfX = [self.sharedProcessor deprocessX:floorf([self.sharedProcessor processX:baseDateOfX].doubleValue)];
+                break;
+            }
+        }
+    }
+    
     self.sharedProcessor.baseDate = baseDateOfX;
-    NSNumber* globalLength = [self.sharedProcessor processX:globalEndDate];
+    double globalStart = [self.sharedProcessor processX:globalStartdDate].doubleValue;
+    double globalLength = [self.sharedProcessor processX:globalEndDate].doubleValue - globalStart;
     double startPoint = [self.sharedProcessor processX:beginningStart].doubleValue;
     double endPoint = [self.sharedProcessor processX:beginningEnd].doubleValue;
     
     if (endPoint < startPoint) endPoint = startPoint;
     DCRange* beginRange = [[DCRange alloc]initWithLocation:startPoint length:endPoint-startPoint];
-    DCRange* globalRange = [[DCRange alloc]initWithLocation:0 length:globalLength.doubleValue];
+    DCRange* globalRange = [[DCRange alloc]initWithLocation:globalStart length:globalLength];
     self.myStableRange = beginRange;
-        return @{ @"globalRange": globalRange, @"beginRange": beginRange, @"xformatter": [[_DCXLabelFormatter alloc]initWithStartDate:baseDateOfX dataStep:step interval:1]};
+    return @{ @"globalRange": globalRange, @"beginRange": beginRange, @"xformatter": [[_DCXLabelFormatter alloc]initWithStartDate:baseDateOfX dataStep:step interval:1]};
 }
 
 -(NSUInteger)getSeriesAmount {
