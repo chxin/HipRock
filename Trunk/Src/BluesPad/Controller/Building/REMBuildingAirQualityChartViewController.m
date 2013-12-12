@@ -405,11 +405,11 @@ static NSDictionary *codeNameMap;
     
     if(standardCode == (NSString *)kChinaStandardCode){
         standard = self.standardChina;
-        standardColor = [UIColor colorWithRed:255.0/255.0 green:97.0/255.0 blue:106.0/255.0 alpha:1];
+        standardColor = [self getColorWithCode:standardCode].uiColor;//[UIColor colorWithRed:255.0/255.0 green:97.0/255.0 blue:106.0/255.0 alpha:1];
     }
     else{
         standard = self.standardAmerican;
-        standardColor = [UIColor colorWithRed:119.0/255.0 green:196.0/255.0 blue:255.0/255.0 alpha:1];
+        standardColor = [self getColorWithCode:standardCode].uiColor;//[UIColor colorWithRed:119.0/255.0 green:196.0/255.0 blue:255.0/255.0 alpha:1];
     }
     
     NSString *labelText = [NSString stringWithFormat: labelTextFormat,[standard.standardValue intValue],standard.uom];
@@ -439,7 +439,7 @@ static NSDictionary *codeNameMap;
         CGSize size = [name sizeWithFont:font];
         
         x += width == 0 ? width : width + indicatorSpace;
-        width = size.width +dotWidth+ dotSpace;
+        width = size.width + dotWidth + dotSpace + 5;
         
         if([seriesCode isEqualToString:(NSString *)code])
             break;
