@@ -244,8 +244,15 @@
     if(REMIsNilOrNull(point))
         return 0;
     
-    for(int i=0;i<self.data.targetEnergyData.count;i++){
-        REMTargetEnergyData *targetData = self.data.targetEnergyData[i];
+    NSMutableArray *energyData = [[NSMutableArray alloc] init];
+    for(REMTargetEnergyData *targetData in self.data.targetEnergyData){
+        if(!REMIsNilOrNull(targetData) && !REMIsNilOrNull(targetData.energyData) && targetData.energyData.count > 0){
+            [energyData addObject:targetData];
+        }
+    }
+    
+    for(int i=0;i<energyData.count;i++){
+        REMTargetEnergyData *targetData = energyData[i];
         
         if(REMIsNilOrNull(targetData.energyData) || targetData.energyData.count <= 0)
             continue;

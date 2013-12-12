@@ -32,7 +32,8 @@
         [button setImage:REMIMG_DefaultBuilding_Small forState:UIControlStateNormal];
         button.imageView.contentMode = UIViewContentModeScaleToFill;
         button.contentMode = UIViewContentModeScaleToFill;
-        button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
+        button.contentVerticalAlignment = UIControlContentHorizontalAlignmentFill;
         button.exclusiveTouch = YES;
         [button addTarget:self action:@selector(pressed:) forControlEvents:UIControlEventTouchUpInside];
         
