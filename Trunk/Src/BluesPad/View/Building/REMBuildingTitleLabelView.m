@@ -63,7 +63,11 @@
     textLabel.backgroundColor=[UIColor clearColor];
     textLabel.shadowOffset=CGSizeMake(1, 1);
     textLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-    textLabel.text=[REMNumberHelper formatStringWithThousandSep:data.dataValue withRoundDigit:0 withIsRound:YES];
+    int digit=0;
+    if ([data.dataValue isGreaterThanOrEqualTo:@(1000)]==NO) {
+        digit=2;
+    }
+    textLabel.text=[REMNumberHelper formatStringWithThousandSep:data.dataValue withRoundDigit:digit withIsRound:YES];
     [self addSubview:textLabel];
     self.textLabel=textLabel;
     //NSLog(@"font:%@",[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:valueSize]);
