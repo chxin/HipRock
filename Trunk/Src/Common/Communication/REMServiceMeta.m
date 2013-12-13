@@ -11,7 +11,8 @@
 
 @implementation REMServiceMeta
 
-//v0.4dev branch checkin
+//Change CurrentDataSource value in configuration.plist in Resource folder
+//to change service url for different build options
 
 #if defined(DEBUG)
 const static NSString *BUILDOPTION = @"Debug";
