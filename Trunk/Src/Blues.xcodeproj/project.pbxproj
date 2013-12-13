@@ -505,6 +505,7 @@
 		7AB9B39E183DCF1100779C5E /* REMTrendChartTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B395183DCF1100779C5E /* REMTrendChartTooltipView.m */; };
 		7AB9B3A1183DF20B00779C5E /* REMRankingTooltipItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B3A0183DF20B00779C5E /* REMRankingTooltipItem.m */; };
 		7AB9B3A4183DF8FF00779C5E /* REMTextIndicatorFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B3A3183DF8FF00779C5E /* REMTextIndicatorFormator.m */; };
+		7ABD828E185AD75500A2AC06 /* REMAppConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABD828D185AD75500A2AC06 /* REMAppConfiguration.m */; };
 		7ABD915D184DB784006AF935 /* REMLoginCustomerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABD915C184DB784006AF935 /* REMLoginCustomerTableViewController.m */; };
 		7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */; };
 		7ABFDDF418483119004DD4E7 /* JumpLogin-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */; };
@@ -1263,6 +1264,8 @@
 		7ABC2E22177BE6210000C060 /* NSCoderExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCoderExtensions.h; sourceTree = "<group>"; };
 		7ABC2E23177BE6210000C060 /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDecimalNumberExtensions.h; sourceTree = "<group>"; };
 		7ABC2E24177BE6210000C060 /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
+		7ABD828C185AD75500A2AC06 /* REMAppConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAppConfiguration.h; path = Common/Configuration/REMAppConfiguration.h; sourceTree = "<group>"; };
+		7ABD828D185AD75500A2AC06 /* REMAppConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAppConfiguration.m; path = Common/Configuration/REMAppConfiguration.m; sourceTree = "<group>"; };
 		7ABD915B184DB784006AF935 /* REMLoginCustomerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginCustomerTableViewController.h; sourceTree = "<group>"; };
 		7ABD915C184DB784006AF935 /* REMLoginCustomerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginCustomerTableViewController.m; sourceTree = "<group>"; };
 		7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed.png"; sourceTree = "<group>"; };
@@ -2284,6 +2287,7 @@
 		7A5E2D45177B3CD3000F77F9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7ABD828B185AD71B00A2AC06 /* Configuration */,
 				B454795D184DAB9700D3441B /* Animation */,
 				7A2BA41F17D877B1003B18E1 /* Error */,
 				7A1D7C3917A637110050779D /* Model */,
@@ -2801,6 +2805,15 @@
 			);
 			name = CorePlotHeaders;
 			path = ../lib/CorePlotHeaders;
+			sourceTree = "<group>";
+		};
+		7ABD828B185AD71B00A2AC06 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				7ABD828C185AD75500A2AC06 /* REMAppConfiguration.h */,
+				7ABD828D185AD75500A2AC06 /* REMAppConfiguration.m */,
+			);
+			name = Configuration;
 			sourceTree = "<group>";
 		};
 		7ABFDDF5184836FE004DD4E7 /* Login */ = {
@@ -3938,6 +3951,7 @@
 				B4E815D718273E5600FB9BC5 /* REMWidgetRankingSearchModel.m in Sources */,
 				7AB9B399183DCF1100779C5E /* REMStackChartLegendView.m in Sources */,
 				B46C8EBA17F27C25006DC4CB /* REMDashboardView.m in Sources */,
+				7ABD828E185AD75500A2AC06 /* REMAppConfiguration.m in Sources */,
 				EF03DC231841E462004B9EFD /* DCPieChartView.m in Sources */,
 				7A3F66FF184C61610079A244 /* REMLoginButton.m in Sources */,
 				7A0288FD17C20CC500709111 /* WeiboDialogClosePNG.m in Sources */,

@@ -9,17 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "REMUserModel.h"
 #import "REMCustomerModel.h"
+#import "REMAppConfiguration.h"
 
 #define REMAppContext [REMApplicationContext instance]
 #define REMAppCurrentUser REMAppContext.currentUser
 #define REMAppCurrentCustomer REMAppContext.currentCustomer
 #define REMAppCurrentLogo REMAppContext.currentCustomerLogo
+#define REMAppConfig REMAppContext.appConfig
 
 @interface REMApplicationContext : NSObject
 
 @property (nonatomic,strong) REMUserModel *currentUser;
 @property (nonatomic,strong) REMCustomerModel *currentCustomer;
 @property (nonatomic,strong) UIImage *currentCustomerLogo;
+
+@property (nonatomic,strong) REMAppConfiguration *appConfig;
 
 + (REMApplicationContext *)instance;
 + (void)destroy;
