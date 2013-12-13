@@ -12,11 +12,7 @@
 
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
-    NSDictionary *globalDataDict = dictionary[@"TargetGlobalData"];
-    if([globalDataDict isEqual:[NSNull null]] == NO)
-    {
-        self.targetGlobalData = [[REMTargetEnergyData alloc]initWithDictionary:globalDataDict];
-    }
+   
     
     if([dictionary[@"TargetEnergyData"] isEqual:[NSNull null]] == NO){
         NSArray *targetArray= dictionary[@"TargetEnergyData"];
@@ -73,6 +69,14 @@
         self.globalTimeRange = [[REMTimeRange alloc] initWithDictionary:(NSDictionary *)dictionary[@"GlobalTimeRange"]];
     }
     
+    NSArray *labellingArray=dictionary[@"LabellingLevels"];
+    if ([labellingArray isEqual:[NSNull null]]==NO) {
+        NSMutableArray *labellings=[[NSMutableArray alloc]initWithCapacity:labellingArray.count];
+        for (int i=0; i<labellingArray.count; ++i) {
+            [labellings addObject:[[REMEnergyLabellingLevelData alloc]initWithDictionary:labellingArray[i]]];
+        }
+        self.labellingLevelArray=labellings;
+    }
 }
 
 @end

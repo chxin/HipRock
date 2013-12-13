@@ -110,20 +110,26 @@
     return [calendar dateByAddingComponents:components toDate:date options:0];
 }
 
-
-+ (NSUInteger)getYear:(NSDate *)date {
-    NSCalendar *calendar = [REMTimeHelper currentCalendar];
++ (NSUInteger)getYear:(NSDate *)date withCalendar:(NSCalendar *)calendar{
     NSDateComponents *dayComponents = [calendar components:(NSYearCalendarUnit) fromDate:date];
     
     return [dayComponents year];
 }
 
++ (NSUInteger)getYear:(NSDate *)date {
+    return [REMTimeHelper getYear:date withCalendar:[REMTimeHelper currentCalendar]];
+}
 
-+ (NSUInteger)getMonth:(NSDate *)date{
-    NSCalendar *calendar = [REMTimeHelper currentCalendar];
++ (NSUInteger)getMonth:(NSDate *)date withCalendar:(NSCalendar *)calendar{
+    
     NSDateComponents *dayComponents = [calendar components:(NSMonthCalendarUnit) fromDate:date];
     
     return [dayComponents month];
+}
+
++ (NSUInteger)getMonth:(NSDate *)date{
+    
+    return [REMTimeHelper getMonth:date withCalendar:[REMTimeHelper currentCalendar]];
 }
 
 + (NSUInteger)getWeekDay:(NSDate *)date {
@@ -466,6 +472,20 @@ static NSDateFormatter *_localFormatter;
 {
     NSDateFormatter *f = [REMTimeHelper currentFormatter];
     [f setDateFormat:@"yyyy-MM-dd"];
+    
+    return [f stringFromDate:date];
+}
+
++ (NSString *)formatTimeFullMonth:(NSDate *)date{
+    NSDateFormatter *f = [REMTimeHelper currentFormatter];
+    [f setDateFormat:NSLocalizedString(@"Common_YearMonthFormat", @"")];
+    
+    return [f stringFromDate:date];
+}
+
++ (NSString *)formatTimeFullYear:(NSDate *)date{
+    NSDateFormatter *f = [REMTimeHelper currentFormatter];
+    [f setDateFormat:NSLocalizedString(@"Common_WholeYearFormat", @"")];
     
     return [f stringFromDate:date];
 }

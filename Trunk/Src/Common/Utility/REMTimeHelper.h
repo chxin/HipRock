@@ -48,17 +48,22 @@ typedef enum _REMDateTimePart : NSUInteger{
 
 + (NSString *)formatTimeFullDay:(NSDate *)date;
 
++ (NSString *)formatTimeFullYear:(NSDate *)date;
+
 +(NSString*)formatTime:(NSDate *)date withFormat:(NSString*)format;
 
 + (NSString *)formatTimeRangeFullDay:(REMTimeRange *)range;
 
 + (NSString *)formatTimeRangeFullHour:(REMTimeRange *)range;
 
++ (NSString *)formatTimeFullMonth:(NSDate *)date;
+
 + (REMTimeRange *) maxTimeRangeOfTimeRanges:(NSArray *)timeRanges;
 
 + (NSDate *)add:(int)difference onPart:(REMDateTimePart)part ofDate:(NSDate *)date;
 
-
++ (NSUInteger)getYear:(NSDate *)date withCalendar:(NSCalendar *)calendar;
++ (NSUInteger)getMonth:(NSDate *)date withCalendar:(NSCalendar *)calendar;
 + (NSDate *)now;
 + (NSUInteger)getYear:(NSDate *)date;
 + (NSUInteger)getMonth:(NSDate *)date;

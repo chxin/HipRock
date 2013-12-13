@@ -78,6 +78,8 @@ static NSDictionary *serviceMap = nil;
               REMJsonSvc(@"API/Energy.svc/RankingCostData"),
           @(REMDSEnergyRankingCarbon) :
               REMJsonSvc(@"API/Energy.svc/RankingCarbonData"),
+          @(REMDSEnergyLabeling) :
+              REMJsonSvc(@"API/Energy.svc/LabellingGetTagsData"),
           
           /**
            * User

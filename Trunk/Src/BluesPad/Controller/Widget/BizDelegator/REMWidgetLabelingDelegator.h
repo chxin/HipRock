@@ -7,7 +7,9 @@
 //
 
 #import "REMWidgetBizDelegatorBase.h"
+#import "REMWidgetMonthPickerViewController.h"
 
-@interface REMWidgetLabelingDelegator : REMWidgetBizDelegatorBase
+
+@interface REMWidgetLabelingDelegator : REMWidgetBizDelegatorBase<REMWidgetMonthPickerViewProtocol>
 
 @end
