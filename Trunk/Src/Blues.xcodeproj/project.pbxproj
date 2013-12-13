@@ -552,6 +552,8 @@
 		B42FBF6617F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
 		B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
 		B442701317AF316500762C68 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
+		B44313E4185AAE7800486594 /* REMWidgetLabellingSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B44313E3185AAE7800486594 /* REMWidgetLabellingSearchModel.m */; };
+		B44313E7185AD4A100486594 /* REMEnergyLabellingLevelData.m in Sources */ = {isa = PBXBuildFile; fileRef = B44313E6185AD4A100486594 /* REMEnergyLabellingLevelData.m */; };
 		B445AE7D177BE8B5002D2A59 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */; };
 		B445AEA0177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE91177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m */; };
 		B445AEA2177BEEB8002D2A59 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE93177BEEB7002D2A59 /* DDASLLogger.m */; };
@@ -1315,6 +1317,10 @@
 		B43BB10F1797B12D00617B1E /* REMEnergyConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergyConstants.h; path = Common/Constants/REMEnergyConstants.h; sourceTree = "<group>"; };
 		B43BB1101797B12D00617B1E /* REMEnergyConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnergyConstants.m; path = Common/Constants/REMEnergyConstants.m; sourceTree = "<group>"; };
 		B442701217AF316500762C68 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
+		B44313E2185AAE7800486594 /* REMWidgetLabellingSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetLabellingSearchModel.h; path = Model/Widget/REMWidgetLabellingSearchModel.h; sourceTree = "<group>"; };
+		B44313E3185AAE7800486594 /* REMWidgetLabellingSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetLabellingSearchModel.m; path = Model/Widget/REMWidgetLabellingSearchModel.m; sourceTree = "<group>"; };
+		B44313E5185AD4A100486594 /* REMEnergyLabellingLevelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMEnergyLabellingLevelData.h; sourceTree = "<group>"; };
+		B44313E6185AD4A100486594 /* REMEnergyLabellingLevelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMEnergyLabellingLevelData.m; sourceTree = "<group>"; };
 		B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		B445AE90177BEEB7002D2A59 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		B445AE91177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
@@ -1997,6 +2003,8 @@
 				7A153C5917AA489600413D3C /* REMEnergyViewData.m */,
 				7A153C5A17AA489600413D3C /* REMTargetEnergyData.h */,
 				7A153C5B17AA489600413D3C /* REMTargetEnergyData.m */,
+				B44313E5185AD4A100486594 /* REMEnergyLabellingLevelData.h */,
+				B44313E6185AD4A100486594 /* REMEnergyLabellingLevelData.m */,
 			);
 			name = Energy;
 			path = Model/Energy;
@@ -3028,6 +3036,8 @@
 				B4E815D618273E5600FB9BC5 /* REMWidgetRankingSearchModel.m */,
 				B4922464182B411B0001389A /* REMWidgetMultiTimespanSearchModel.h */,
 				B4922465182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m */,
+				B44313E2185AAE7800486594 /* REMWidgetLabellingSearchModel.h */,
+				B44313E3185AAE7800486594 /* REMWidgetLabellingSearchModel.m */,
 			);
 			name = Widget;
 			sourceTree = "<group>";
@@ -3752,6 +3762,7 @@
 				EF03DC201841C886004B9EFD /* _DCHPinchGestureRecognizer.m in Sources */,
 				B40F011A1828C3DC009650FD /* REMWidgetStepEnergyModel.m in Sources */,
 				B445AEA4177BEEB8002D2A59 /* DDFileLogger.m in Sources */,
+				B44313E7185AD4A100486594 /* REMEnergyLabellingLevelData.m in Sources */,
 				B445AEA6177BEEB8002D2A59 /* DDLog.m in Sources */,
 				B4FFB0C818191A15004C5404 /* REMRelativeDateViewController.m in Sources */,
 				B445AEA8177BEEB8002D2A59 /* DDTTYLogger.m in Sources */,
@@ -3773,6 +3784,7 @@
 				7A399E99177D238F00F0EB9F /* AFJSONRequestOperation.m in Sources */,
 				EFDAACBC1803F6C2008BC9AF /* REMChartDataProcessor.m in Sources */,
 				7A399E9A177D238F00F0EB9F /* AFNetworkActivityIndicatorManager.m in Sources */,
+				B44313E4185AAE7800486594 /* REMWidgetLabellingSearchModel.m in Sources */,
 				7A399E9E177D238F00F0EB9F /* UIImageView+AFNetworking.m in Sources */,
 				7AA8838117F92286004D50BC /* REMGalleryCollectionCell.m in Sources */,
 				7A399E9B177D238F00F0EB9F /* AFPropertyListRequestOperation.m in Sources */,

@@ -9,6 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "REMDatePickerViewController.h"
 
-@interface REMWidgetMonthPickerViewController : UIViewController
+@protocol REMWidgetMonthPickerViewProtocol <NSObject>
 
+- (void) setNewDate:(NSDate *)date withStep:(REMEnergyStep)step;
+
+@end
+
+@interface REMWidgetMonthPickerViewController : UIViewController<UIPickerViewDataSource,UIPickerViewDelegate>
+
+@property (nonatomic,strong) REMTimeRange *timeRange;
+@property (nonatomic) REMEnergyStep step;
+@property (nonatomic,weak) UIPopoverController *popController;
+@property (nonatomic) CGSize popSize;
+@property (nonatomic) id<REMWidgetMonthPickerViewProtocol> datePickerProtocol;
 @end
