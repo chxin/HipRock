@@ -1,10 +1,10 @@
-//
-//  REMEnergyCalendarData.m
-//  Blues
-//
-//  Created by TanTan on 7/11/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMEnergyCalendarData.m
+ * Created      : TanTan on 7/11/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMEnergyCalendarData.h"
 

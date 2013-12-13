@@ -14,4 +14,6 @@
     #import <SystemConfiguration/SystemConfiguration.h>
     #import <MobileCoreServices/MobileCoreServices.h>
     #import "REMLog.h"
+    #import "REMImages.h"
+    #import "REMDimensions.h"
 #endif

@@ -1,10 +1,10 @@
-//
-//  REMBuildingAverageChart.m
-//  Blues
-//
-//  Created by 张 锋 on 8/9/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMBuildingAverageChart.m
+ * Created      : 张 锋 on 8/9/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMBuildingAverageChart.h"
 
@@ -31,8 +31,8 @@ static CGFloat bottomAxisOffset = 16.0;
 -(void)initializeGraph
 {
     CGRect hostViewFrame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height-33-16);
-    NSLog(@"view:%@",NSStringFromCGRect(self.bounds));
-    NSLog(@"host:%@",NSStringFromCGRect(hostViewFrame));
+//    NSLog(@"view:%@",NSStringFromCGRect(self.bounds));
+//    NSLog(@"host:%@",NSStringFromCGRect(hostViewFrame));
     
     self.hostView = [[CPTGraphHostingView alloc]initWithFrame:hostViewFrame];
     
@@ -68,6 +68,18 @@ static CGFloat bottomAxisOffset = 16.0;
     // Drawing code
 }
 */
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
+    
+   BOOL ret=  [super pointInside:point withEvent:event];
+    
+    return ret;
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+    
+    return [super hitTest:point withEvent:event];
+}
 
 
 @end

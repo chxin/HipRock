@@ -1,31 +1,15 @@
-//
-//  REMWidgetSyntaxObject.h
-//  Blues
-//
-//  Created by TanTan on 7/4/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMWidgetSyntaxObject.h
+ * Created      : TanTan on 7/4/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMJSONObject.h"
 #import "REMWidgetContentSyntax.h"
-
-typedef enum _REMDiagramType
-{
-    REMDiagramTypePie,           
-    REMDiagramTypeLine,
-    REMDiagramTypeColumn,
-    REMDiagramTypeGrid
-}
-REMDiagramType;
-
-typedef enum _REMEnergyStep:NSUInteger
-{
-    REMEnergyStepHour=1,
-    REMEnergyStepDay=2,
-    REMEnergyStepWeek=5,
-    REMEnergyStepMonth=3,
-    REMEnergyStepYear=4
-} REMEnergyStep;
+#import "REMShareInfo.h"
+#import "REMEnum.h"
 
 
 @interface REMWidgetObject : REMJSONObject
@@ -37,6 +21,6 @@ typedef enum _REMEnergyStep:NSUInteger
 @property (nonatomic,strong) NSString *layoutSyntax;
 @property (nonatomic,strong) REMWidgetContentSyntax *contentSyntax;
 @property (nonatomic) REMDiagramType diagramType;
-
+@property (nonatomic,strong) REMShareInfo *shareInfo;
 
 @end

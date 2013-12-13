@@ -1,10 +1,10 @@
-//
-//  REMBuildingModel.m
-//  Blues
-//
-//  Created by 张 锋 on 8/1/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMBuildingModel.m
+ * Created      : 张 锋 on 8/1/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMBuildingModel.h"
 
@@ -23,6 +23,9 @@
     self.pathLevel = [dictionary[@"PathLevel"] intValue];
     self.hasDataPrivilege = [dictionary[@"HasDataPrivilege"] boolValue];
     self.pictureIds=dictionary[@"PictureIds"];
+    self.latitude = [dictionary[@"Latitude"] doubleValue];
+    self.longitude = [dictionary[@"Longitude"] doubleValue];
+    self.province = dictionary[@"Province"];
 }
 
 @end

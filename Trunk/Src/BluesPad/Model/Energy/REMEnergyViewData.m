@@ -1,10 +1,10 @@
-//
-//  REMEnergyViewData.m
-//  Blues
-//
-//  Created by TanTan on 7/11/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMEnergyViewData.m
+ * Created      : TanTan on 7/11/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMEnergyViewData.h"
 
@@ -61,6 +61,16 @@
         }
         self.error=errorMArray;
         
+    }
+    
+    if((NSNull *)dictionary[@"VisibleTimeRange"] != [NSNull null] && dictionary[@"VisibleTimeRange"]!= nil)
+    {
+        self.visibleTimeRange = [[REMTimeRange alloc] initWithDictionary:(NSDictionary *)dictionary[@"VisibleTimeRange"]];
+    }
+    
+    if((NSNull *)dictionary[@"GlobalTimeRange"] != [NSNull null] && dictionary[@"GlobalTimeRange"]!= nil)
+    {
+        self.globalTimeRange = [[REMTimeRange alloc] initWithDictionary:(NSDictionary *)dictionary[@"GlobalTimeRange"]];
     }
     
 }

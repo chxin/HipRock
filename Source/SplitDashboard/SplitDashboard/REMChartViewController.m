@@ -42,14 +42,14 @@
         REMSeries *series= [[REMSeries alloc] init];
         series.uid=[NSString stringWithFormat:@"Plot%d",i ];
         
-        series.data = [[NSMutableArray alloc] initWithCapacity:100];
+        series.data = [[NSMutableArray alloc] initWithCapacity:200];
         
         NSTimeInterval interval=beginInterval;
         
         
-        for(int j=1;j<=100;j++)
+        for(int j=1;j<=168;j++)
         {
-            NSNumber *xValue=[NSNumber numberWithDouble:j];
+            NSNumber *xValue=[NSNumber numberWithDouble:j*10];
             NSNumber *yValue=[NSNumber numberWithInt:35+i*10];
             
             interval+=60*60;// one hour
@@ -96,7 +96,7 @@
         [self.colors addObject:[CPTColor colorWithComponentRed:
                                 ((rgbValue & 0xFF0000)>>16)/255.00
                                                          green:((rgbValue & 0xFF00) >> 8)/255.00
-                                                          blue:((rgbValue & 0xFF)/255.00) alpha:1.0]];
+                                                          blue:((rgbValue & 0xFF)/255.00) alpha:0.5]];
     }
     
     
@@ -104,7 +104,7 @@
 
 - (void) initLineChart
 {
-    CPTGraphHostingView *hostView = [[CPTGraphHostingView alloc] initWithFrame:CGRectMake(0, 0, 800, 500)];
+    CPTGraphHostingView *hostView = [[CPTGraphHostingView alloc] initWithFrame:CGRectMake(0, 0, 1024, 600)];
     
     CPTXYGraph *graph = [[CPTXYGraph alloc]  initWithFrame:hostView.bounds];
     graph.plotAreaFrame.masksToBorder=NO;
@@ -130,7 +130,7 @@
     
     CPTPlotRange *bandRange=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(10) length:CPTDecimalFromInt(20)];
     CPTLimitBand *band= [CPTLimitBand limitBandWithRange:bandRange fill:[CPTFill fillWithColor:[CPTColor lightGrayColor]]];
-    [x addBackgroundLimitBand:band];
+    //[x addBackgroundLimitBand:band];
     
     CPTXYAxis *y= [[ CPTXYAxis alloc]init];
     y.coordinate=CPTCoordinateY;
@@ -145,7 +145,7 @@
     
     
     plotSpace.xRange= [CPTPlotRange plotRangeWithLocation:CPTDecimalFromLong(0) length:CPTDecimalFromInt(50)];
-    plotSpace.yRange=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(200)];
+    plotSpace.yRange=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(140)];
     
     
     CPTMutablePlotRange *visibleXRange=[plotSpace.xRange mutableCopy];
@@ -153,22 +153,25 @@
     [visibleXRange expandRangeByFactor:CPTDecimalFromFloat(1.025)];
     visibleXRange.location=plotSpace.xRange.location;
     x.visibleRange=visibleXRange;
-    [visibleYRange expandRangeByFactor:CPTDecimalFromFloat(1.05)];
-    y.visibleRange=visibleYRange;
+    //[visibleYRange expandRangeByFactor:CPTDecimalFromFloat(1.05)];
+    //y.visibleRange=visibleYRange;
     CPTMutablePlotRange *globalXRange=[plotSpace.xRange mutableCopy];
     [globalXRange setLength:CPTDecimalFromFloat(250.0f)];
     plotSpace.globalXRange=globalXRange;
+    CPTMutablePlotRange *globalYRange=[plotSpace.yRange mutableCopy];
+    [globalYRange setLength:CPTDecimalFromFloat(140)];
     
+    plotSpace.globalYRange=globalYRange;
     
     
     x.plotSpace=plotSpace;
     y.plotSpace=plotSpace;
-    
-    y.gridLinesRange = plotSpace.yRange;
-    CPTMutableLineStyle *gridLineStyle=[[CPTMutableLineStyle alloc]init];
-    gridLineStyle.lineWidth=1.0f;
-    gridLineStyle.lineColor=[CPTColor lightGrayColor];
-    y.majorGridLineStyle=gridLineStyle;
+    x.minorTickAxisLabels=nil;
+    //y.gridLinesRange = plotSpace.yRange;
+    //CPTMutableLineStyle *gridLineStyle=[[CPTMutableLineStyle alloc]init];
+    //gridLineStyle.lineWidth=1.0f;
+    //gridLineStyle.lineColor=[CPTColor lightGrayColor];
+    //y.majorGridLineStyle=gridLineStyle;
     y.axisConstraints=[CPTConstraints constraintWithLowerOffset:0.0f];
     y.minorTickLength=0;
     CPTXYPlotSpace *y1Space= [[CPTXYPlotSpace alloc]init];
@@ -177,7 +180,7 @@
     y1Space.yRange=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(500)];
     y1Space.delegate=self;
     y1Space.allowsUserInteraction=YES;
-    [graph addPlotSpace:y1Space];
+    //[graph addPlotSpace:y1Space];
     
     CPTXYAxis *y1 =[[CPTXYAxis alloc]init];
     y1.tickDirection = CPTSignPositive;
@@ -194,7 +197,7 @@
     
     CPTXYAxisSet *axisSet= [[CPTXYAxisSet alloc] init];
     
-    axisSet.axes =[NSArray arrayWithObjects:x,y, y1,nil];
+    axisSet.axes =[NSArray arrayWithObjects:x,y, /*y1,*/nil];
     
     graph.axisSet=axisSet;
     
@@ -211,32 +214,42 @@
     int idx=0;
     for(REMSeries *series in self.data.series)
     {
-        CPTScatterPlot *line = [[CPTScatterPlot alloc] initWithFrame:graph.bounds ];
+        //CPTScatterPlot *line = [[CPTScatterPlot alloc] initWithFrame:graph.bounds ];
+        CPTBarPlot *line=[[CPTBarPlot alloc]initWithFrame:graph.bounds];
         line.identifier=series.uid;
         line.anchorPoint=CGPointZero;
         CPTMutableLineStyle *style=[[CPTMutableLineStyle alloc] init];
-        style.lineWidth=1.5;
+        style.lineWidth=3;
         style.lineColor= [self getColor:idx];
+        line.barWidthsAreInViewCoordinates=YES;
+        //line.dataLineStyle=style;
+        line.borderColor=nil;
+        line.lineStyle=nil;
+        line.barBasesVary=NO;
+        line.cachePrecision=CPTPlotCachePrecisionDouble;
+        line.shadow=nil;
+        line.barOffset=CPTDecimalFromInt(idx*20+5);
+        line.barWidth=CPTDecimalFromInt(20);
+        line.lineStyle=style;
+        //CPTPlotSymbol *symbol = [self getSymbol:idx];
+        //symbol.lineStyle=style;
+        //symbol.fill= [CPTFill fillWithColor:style.lineColor];
         
-        line.dataLineStyle=style;
+        //symbol.size=CGSizeMake(7.0, 7.0);
+        //line.plotSymbol=symbol;
         
-        
-        CPTPlotSymbol *symbol = [self getSymbol:idx];
-        symbol.lineStyle=style;
-        symbol.fill= [CPTFill fillWithColor:style.lineColor];
-        
-        symbol.size=CGSizeMake(7.0, 7.0);
-        line.plotSymbol=symbol;
-        
-        
+        //line.fill=[CPTFill fillWithColor:[self getColor:idx]];
+        line.fill=nil;
         line.delegate=self;
         line.dataSource=self;
+        [graph addPlot:line];
+        /*
         if(idx % 2 == 0){
             [graph addPlot:line toPlotSpace:y1Space];
         }
         else{
             [graph addPlot:line toPlotSpace:plotSpace];
-        }
+        }*/
         idx++;
         
         [line addAnimation:anim forKey:@"grow"];
@@ -270,7 +283,7 @@
 }
 
 
-
+/*
 - (CPTPlotRange *)plotSpace:(CPTPlotSpace *)space willChangePlotRangeTo:(CPTPlotRange *)newRange forCoordinate:(CPTCoordinate)coordinate
 {
     CPTXYAxisSet *axisSet=(CPTXYAxisSet *)space.graph.axisSet;
@@ -321,7 +334,7 @@
     
     return range;
 }
-
+*/
 
 - (CPTPlotSymbol *) getSymbol:(int) index
 {
@@ -395,6 +408,7 @@
     xAxis.labelingPolicy = CPTAxisLabelingPolicyNone;
     xAxis.majorTickLocations=[NSSet setWithArray:tickLocations];
     xAxis.minorTickLength=0.0f;
+    xAxis.minorTickAxisLabels=nil;
     xAxis.axisLabels= [NSSet setWithArray:locations];
     
     
@@ -419,7 +433,7 @@
     
     
     NSNumber *num;
-    CPTScatterPlot *line = (CPTScatterPlot *)plot;
+    CPTBarPlot *line = (CPTBarPlot *)plot;
     for (REMSeries *series in self.data.series){
         
         if([line.identifier isEqual:series.uid] == YES)

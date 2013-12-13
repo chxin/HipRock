@@ -58,17 +58,17 @@
             [listArray addObject:truePath];
             NSData *reader = [NSData dataWithContentsOfFile:truePath];
             int length=reader.length;
-            NSLog(@"length:%d",length);
+            //NSLog(@"length:%d",length);
             NSString *str= [[NSString alloc]initWithContentsOfFile:truePath encoding:NSUTF8StringEncoding error:nil];
             
-            NSLog(@"string:%@",str);
+            //NSLog(@"string:%@",str);
             
         }
     }
     
     
     
-    NSLog(@"%@",fileList);
+    //NSLog(@"%@",fileList);
 }
 
 @end

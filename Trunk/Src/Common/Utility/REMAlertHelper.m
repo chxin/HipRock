@@ -1,10 +1,10 @@
-//
-//  REMAlertHelper.m
-//  Blues
-//
-//  Created by zhangfeng on 7/4/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMAlertHelper.m
+ * Created      : zhangfeng on 7/4/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMAlertHelper.h"
 

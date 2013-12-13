@@ -1,364 +1,346 @@
-//
-//  REMWidgetMaxViewController.m
-//  Blues
-//
-//  Created by TanTan on 7/1/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMWidgetMaxViewController.m
+ * Created      : TanTan on 7/1/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMWidgetMaxViewController.h"
-#import "REMChartLegendTableViewController.h"
+#import "REMWidgetDetailViewController.h"
+#import "REMWidgetCellViewController.h"
+#import "REMScreenEdgetGestureRecognizer.h"
+#import "REMDimensions.h"
+
+const static CGFloat widgetGap=20;
+
 
 @interface REMWidgetMaxViewController()
-{
-    NSArray *_hiddenSeries;
-}
-@property (nonatomic,strong) REMWidgetMaxDiagramViewController *chartController;
-@property (nonatomic,strong) NSArray *currentStepList;
+
+@property (nonatomic) CGFloat cumulateX;
+
+
+@property (nonatomic,weak) NSTimer *stopTimer;
+
+
+@property (nonatomic,weak) UIImageView *srcBg;
+
+@property (nonatomic) BOOL readyToClose;
+
 
 @end
 
 @implementation REMWidgetMaxViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if(self){
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(receiveTestNotification:)
+                                                     name:@"BizChanged"
+                                                   object:nil];
     }
+    
     return self;
 }
 
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"BizChanged" object:nil];
+}
 
-- (void)initDiagram
+
+- (void) receiveTestNotification:(NSNotification *) notification
 {
-    switch (self.widgetObj.diagramType) {
-        case REMDiagramTypeLine:
-            self.chartController= [[REMWidgetMaxLineViewController alloc]init];
-            break;
-        case REMDiagramTypeColumn:
-            self.chartController= [[REMWidgetMaxColumnViewController alloc]init];
-            break;
-        case REMDiagramTypePie:
-            self.chartController= [[REMWidgetMaxPieViewController alloc]init];
-            break;
-            
-        default:
-            break;
+    // [notification name] should always be @"TestNotification"
+    // unless you use this method for observation of other notifications
+    // as well.
+    
+    if ([[notification name] isEqualToString:@"BizChanged"]){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BizDetailChanged" object:notification.object userInfo:notification.userInfo];
     }
-    self.chartController.maxViewController = self;
-    
-    //self.chartController = [[REMWidgetMaxPieViewController alloc]init];
-    self.chartController.data=self.data;
-    self.chartController.chartView=self.chartView;
-    self.chartController.widgetModel = self.widgetObj;
-    
-    
-    
-    [self.chartController initDiagram];
 }
 
-- (void)reloadChart
-{
-    self.chartController.data=self.data;
-    
-    [self.chartController reloadChart];
-    
-    
-    [self setStepButtonWithRange:self.viewTimeRange Step:((REMEnergyStep)[self.widgetObj.contentSyntax.step integerValue])];
-    
-    [self.stepToolbar setNeedsDisplay];
-    [self.stepToolbar setNeedsLayout];
-}
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    [self.navigationController setNavigationBarHidden:NO];
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:16/255.0f green:127/255.0f blue:66/255.0f alpha:1];
     
-    if([self.widgetObj.contentSyntax.relativeDate isEqual:[NSNull null]] == NO)
-    {
-        self.viewRelativeDateString = [NSString stringWithString:self.widgetObj.contentSyntax.relativeDate];
+    // iOS 7.0 supported
+    if([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
     }
-    else
-    {
-        self.viewRelativeDateString = @"Customize";
+    
+    
+    
+    [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
+    [self.view setBackgroundColor:[UIColor blackColor]];
+    self.cumulateX=0;
+    self.readyToClose=NO;
+    for (int i=0; i<self.dashboardInfo.widgets.count; ++i) {
+        REMWidgetObject *obj=self.dashboardInfo.widgets[i];
+        
+        REMWidgetDetailViewController *sub=[[REMWidgetDetailViewController alloc]init];
+        sub.widgetInfo=obj;
+        REMWidgetCellViewController *cellController= self.widgetCollectionController.childViewControllers[i];
+        sub.energyData=cellController.chartData;
+        
+        
+        [self addChildViewController:sub];
+        if (i==self.currentWidgetIndex) {
+            UIView *view = sub.view;
+            [view setFrame:CGRectMake(i*self.view.frame.size.width, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height)];
+            
+            
+            NSInteger gap=i-self.currentWidgetIndex;
+            [sub.view setCenter:CGPointMake(gap*(self.view.frame.size.width+widgetGap)+self.view.frame.size.width/2, self.view.center.y)];
+            
+            [self.view addSubview:sub.view];
+            
+//            if(i==self.currentWidgetIndex || i==(self.currentWidgetIndex-1) || i == (self.currentWidgetIndex+1)){
+//                [sub showChart];
+//            }
+        }
         
     }
-    //self.viewRelativeDateString = self.widgetObj.contentSyntax.relativeDate;
     
-    REMTimeRange *range = self.widgetObj.contentSyntax.timeRanges[0];
-    
-    
-    self.viewTimeRange =[[ REMTimeRange alloc]initWithStartTime:[range.startTime copy]  EndTime:[range.endTime copy]];
-    
-    //self.viewTimeRange  = self.widgetObj.contentSyntax.timeRanges[0];
-    
-    
-    if([self.viewRelativeDateString isEqualToString:@"Customize"] == YES)
-    {
-        [self setStartDate:self.viewTimeRange.startTime];
-        [self setEndDate:self.viewTimeRange.endTime];
-    }
-    
-        NSString *text=[REMEnergyConstants sharedRelativeDateDictionary][self.viewRelativeDateString];
-        [self setRelativeDate:self.viewRelativeDateString WithText:text];
-    [self setStepButtonWithRange:self.viewTimeRange Step:((REMEnergyStep)[self.widgetObj.contentSyntax.step integerValue])];
-    
+    //[self addBloodCell];
+//    if(__IPHONE_7_0 == YES){
+//        UIScreenEdgePanGestureRecognizer *rec=[[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
+//        rec.edges=UIRectEdgeLeft;
+//        [self.view addGestureRecognizer:rec];
+//        UIScreenEdgePanGestureRecognizer *rec1=[[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
+//        rec1.edges=UIRectEdgeRight;
+//        [self.view addGestureRecognizer:rec1];
+//    }
+//    else{
+        REMScreenEdgetGestureRecognizer *rec=[[REMScreenEdgetGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
+        [self.view addGestureRecognizer:rec];
+//    }
     
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)didMoveToParentViewController:(UIViewController *)parent
 {
-    [self initDiagram];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if([segue.identifier isEqualToString:@"relativeDateSegue"] ==YES)
-    {
-        REMWidgetRelativeDateTableViewController *table= (REMWidgetRelativeDateTableViewController *) segue.destinationViewController;
-        
-        table.popController = ((UIStoryboardPopoverSegue *)segue).popoverController;
-        table.maxController=self;
-        table.relativeDataString=self.viewRelativeDateString;
+    if (parent==nil) {
+        return;
     }
-    
-    if([segue.identifier isEqualToString:@"endTimeSegue"]==YES)
-    {
-        REMWidgetTimePickerViewController *timeController =  segue.destinationViewController;
+    for (int i=0; i<self.childViewControllers.count; ++i) {
         
-        timeController.dateTime=self.viewTimeRange.endTime;
-        timeController.popController=((UIStoryboardPopoverSegue *)segue).popoverController;
-        timeController.maxController=self;
-        timeController.type=@"end";
-    }
-    
-    
-    if([segue.identifier isEqualToString:@"startTimeSegue"]==YES)
-    {
-        REMWidgetTimePickerViewController *timeController =  segue.destinationViewController;
+        REMWidgetDetailViewController *sub=self.childViewControllers[i];
         
-        timeController.dateTime=self.viewTimeRange.startTime;
-        timeController.popController=((UIStoryboardPopoverSegue *)segue).popoverController;
-        timeController.maxController=self;
-        timeController.type=@"start";
-    }
-    if([segue.identifier isEqualToString:@"legendSegue"])
-    {
-        REMChartLegendTableViewController *legendController = (REMChartLegendTableViewController *)segue.destinationViewController;
         
-        legendController.popoverViewController = ((UIStoryboardPopoverSegue *)segue).popoverController;
-        legendController.maxViewController = self;
-        legendController.chartController = self.chartController;
-        legendController.targetEnergyData = self.data.targetEnergyData;
+        UIView *view = sub.view;
+        [view setFrame:CGRectMake(i*self.view.frame.size.width, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height)];
+        
+        
+        NSInteger gap=i-self.currentWidgetIndex;
+        [sub.view setCenter:CGPointMake(gap*(self.view.frame.size.width+widgetGap)+self.view.frame.size.width/2, self.view.center.y)];
+        
+        [self.view addSubview:sub.view];
+        
+        if(i==self.currentWidgetIndex || i==(self.currentWidgetIndex-1) || i == (self.currentWidgetIndex+1)){
+            [sub showChart];
+        }
+        
+        
     }
 }
 
-- (void)setStepButtonWithRange:(REMTimeRange *)range Step:(REMEnergyStep)step
-{
-    long diff = [range.endTime timeIntervalSinceDate:range.startTime];
-    NSMutableArray *lvs=[[NSMutableArray alloc]initWithCapacity:7];
-    [lvs addObject:[NSNumber numberWithLong:REMDAY]];
-    [lvs addObject:[NSNumber numberWithLong:REMWEEK]];
-    [lvs addObject:[NSNumber numberWithLong:REMDAY*31]];
-    [lvs addObject:[NSNumber numberWithLong:REMDAY*31*3]];
-    [lvs addObject:[NSNumber numberWithLong:REMYEAR]];
-    [lvs addObject:[NSNumber numberWithLong:REMYEAR*2]];
+
+
+- (void) addDashboardBg{
+    REMDashboardController *srcController=(REMDashboardController *) self.widgetCollectionController.parentViewController;
+    REMBuildingImageViewController *imageController=(REMBuildingImageViewController *)srcController.parentViewController;
+    REMWidgetCellViewController *cellController=self.widgetCollectionController.childViewControllers[self.currentWidgetIndex];
+    [cellController.view setHidden:YES];
+    UIImage *image=[REMImageHelper imageWithView:imageController.view];
+    UIImageView *view = [[UIImageView alloc]initWithImage:image];
+    [view setFrame:self.view.frame];
+    [view setFrame:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)];
+    UIViewController *controller=self.childViewControllers[self.currentWidgetIndex];
     
-    [lvs addObject:[NSNumber numberWithLong:REMYEAR*10]];
+    [self.view insertSubview:view belowSubview:controller.view];
+    self.srcBg=view;
+    self.srcBg.alpha=0;
+    [cellController.view setHidden:NO];
+}
+
+
+- (void) readyToComplete{
+    NSTimer *timer = [NSTimer timerWithTimeInterval:0.2 target:self selector:@selector(stopCoverPage:) userInfo:nil repeats:NO];
     
-    //long[ *lvs = @[REMDAY,REMWEEK,31*REMDAY,31*3*REMDAY,REMYEAR,REMYEAR*2,REMYEAR*10];
-    int i=0;
-    for ( ; i<lvs.count; ++i)
+    NSRunLoop *current=[NSRunLoop currentRunLoop];
+    [current addTimer:timer forMode:NSDefaultRunLoopMode];
+    self.stopTimer = timer;
+}
+
+- (void) moveAllViews{
+    for (int i=0; i<self.childViewControllers.count; ++i) {
+        REMWidgetDetailViewController *vc = self.childViewControllers[i];
+        NSInteger gap=i-self.currentWidgetIndex;
+        [vc.view setCenter:CGPointMake(gap*(self.view.frame.size.width+widgetGap)+self.view.frame.size.width/2, vc.view.center.y)];
+        
+    }
+}
+
+- (void)cancelAllRequest{
+    for (REMWidgetObject *widget in self.dashboardInfo.widgets) {
+        [REMDataAccessor cancelAccess:[NSString stringWithFormat:@"widget-%@",widget.widgetId]];
+    }
+}
+
+- (void)panthis:(UIPanGestureRecognizer *)pan{
+    
+    
+    CGPoint trans= [pan translationInView:self.view];
+    
+    
+    if(pan.state== UIGestureRecognizerStateChanged)
     {
-        NSNumber *num = lvs[i];
-        if(diff<=[num longValue])
+        
+        CGFloat x;
+        for (int i=0;i<self.childViewControllers.count;++i)
         {
-            break;
+            REMWidgetDetailViewController *vc = self.childViewControllers[i];
+            
+            if((self.currentWidgetIndex == 0 && self.cumulateX>0 ) ||
+               ((self.currentWidgetIndex==(self.dashboardInfo.widgets.count-1)) && self.cumulateX<0)){
+                if (self.srcBg==nil) {
+                    [self addDashboardBg];
+                }
+                if(ABS(self.cumulateX)>90){
+                    
+                    
+                    self.readyToClose=YES;
+                    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
+                        self.srcBg.alpha=1;
+                    }completion:nil];
+                }
+                else{
+                    self.readyToClose=NO;
+                    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
+                        self.srcBg.alpha=0;
+                    }completion:nil];
+                }
+                x=trans.x/4;
+                
+            }
+            else{
+                self.srcBg.alpha=0;
+                x=trans.x;
+            }
+            [vc.view setCenter:CGPointMake(vc.view.center.x+x, vc.view.center.y)];
+            
+        }
+        
+        self.cumulateX+=x;
+        //NSLog(@"cumulate x:%f",self.cumulateX);
+    }
+    
+    if(pan.state == UIGestureRecognizerStateEnded||pan.state == UIGestureRecognizerStateCancelled)
+    {
+        if(self.readyToClose==YES){
+            self.lastPageXPosition=self.cumulateX;
+            [self popToBuildingCover];
+            return;
+        }
+        
+        CGPoint p= [pan velocityInView:self.view];
+        
+        int sign= p.x>0?1:-1;
+        
+        
+        BOOL addIndex=YES;
+        
+        if((sign<0 && self.currentWidgetIndex==self.dashboardInfo.widgets.count-1)
+           || (sign>0 && self.currentWidgetIndex==0) ||
+           (ABS(p.x)<200 && ABS(self.cumulateX)<self.view.frame.size.width/8) ||
+           (p.x<0 && self.cumulateX>0) || (p.x>0 && self.cumulateX<0)){
+            addIndex=NO;
+        }
+        else{
+            [self.stopTimer invalidate];
+            addIndex=YES;
+        }
+        self.cumulateX=0;
+        if(addIndex == NO){
+            [UIView animateWithDuration:0.4 delay:0
+                                options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
+                                    
+                                    [self moveAllViews];
+                                } completion:^(BOOL finished){}];
+            
+        }
+        else{
+            [self.srcBg removeFromSuperview];
+            self.currentWidgetIndex = self.currentWidgetIndex+sign*-1;
+            
+            if(ABS(p.x)<200){
+                [UIView animateWithDuration:0.4 delay:0
+                                    options: UIViewAnimationOptionCurveEaseInOut animations:^(void) {
+                                        
+                                        [self moveAllViews];
+                                    } completion:nil];
+            }
+            else{
+                [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction|  UIViewAnimationOptionCurveEaseInOut animations:^(void){
+                    [self moveAllViews];
+                    
+                }completion:^(BOOL finished){
+                    [self.stopTimer invalidate];
+                    NSTimer *timer = [NSTimer timerWithTimeInterval:0.3 target:self selector:@selector(stopCoverPage:) userInfo:@{@"direction":@(sign)} repeats:NO];
+                    NSRunLoop *current=[NSRunLoop currentRunLoop];
+                    [current addTimer:timer forMode:NSDefaultRunLoopMode];
+                    self.stopTimer = timer;
+                }];
+            }
+            
         }
     }
-    NSMutableArray *list=[[NSMutableArray alloc] initWithCapacity:3];
-    NSMutableArray *titleList=[[NSMutableArray alloc] initWithCapacity:3];
-    switch (i) {
-        case 0:
-            [list addObject:[NSNumber numberWithInt:1]];
-            [titleList addObject:@"H"];
-            break;
-        case 1:
-            [list addObject:[NSNumber numberWithInt:1]];
-            [list addObject:[NSNumber numberWithInt:2]];
-                        [titleList addObject:@"H"];
-                        [titleList addObject:@"D"];
-            break;
-        case 2:
-            [list addObject:[NSNumber numberWithInt:2]];
-            [list addObject:[NSNumber numberWithInt:5]];
-                        [titleList addObject:@"D"];
-                        [titleList addObject:@"W"];
-            break;
-        case 3:
-            [list addObject:[NSNumber numberWithInt:2]];
-            [list addObject:[NSNumber numberWithInt:3]];
-            [list addObject:[NSNumber numberWithInt:5]];
-                        [titleList addObject:@"D"];
-                        [titleList addObject:@"W"];
-                        [titleList addObject:@"M"];
-            break;
-        case 4:
-            [list addObject:[NSNumber numberWithInt:3]];
-            [titleList addObject:@"M"];
-            break;
-        case 5:
-            [list addObject:[NSNumber numberWithInt:3]];
-            [list addObject:[NSNumber numberWithInt:4]];
-            [titleList addObject:@"M"];
-            [titleList addObject:@"Y"];
-            break;
-        case 6:
-            [list addObject:[NSNumber numberWithInt:3]];
-            [list addObject:[NSNumber numberWithInt:4]];
-            [titleList addObject:@"M"];
-            [titleList addObject:@"Y"];
-        default:
-            break;
-    }
-    self.currentStepList=list;
-    [self.stepButton removeAllSegments];
-
-    [self.stepButton initWithItems:titleList];
-    NSNumber *newStep = [NSNumber numberWithInt:((int)step)];
-    NSUInteger idx;
-    if([list containsObject:newStep] == YES)
-    {
-        idx= [list indexOfObject:newStep];
-    }
-    else
-    {
-        newStep = list[0];
-        idx =  [newStep intValue];
-    }
-    
-    [self.stepButton setSelectedSegmentIndex:idx];
-    
-}
-
-- (void)stepChanged:(UISegmentedControl *)sender
-{
-    if(sender.selected ==YES)
-    {
-        
-        NSMutableDictionary *newParam = [self.widgetObj.contentSyntax.params copy];
-        
-        NSMutableDictionary *viewOption = [newParam[@"viewOption"] mutableCopy];
-        
-        NSInteger idx = sender.selectedSegmentIndex;
-        
-        NSNumber *step= self.currentStepList[idx];
-        
-        [viewOption setObject:step forKey: @"Step"];
-        
-        [self searchData:viewOption];
-    }
-}
-
-- (void)setStartDate:(NSDate *)date
-{
-    [self.startDateButton setTitle:[REMTimeHelper formatTimeFullHour:date] forState:UIControlStateNormal];
-    self.viewTimeRange.startTime=date;
-    [self setRelativeDate:@"Customize" WithText:nil];
-}
-
-- (void)setEndDate:(NSDate *)date
-{
-    [self.endDateButton setTitle:[REMTimeHelper formatTimeFullHour:date] forState:UIControlStateNormal];
-    self.viewTimeRange.endTime=date;
-        [self setRelativeDate:@"Customize" WithText:nil];
+    [pan setTranslation:CGPointZero inView:self.view];
 }
 
 
-- (void)setRelativeDate:(NSString *)relativeDateString WithText:(NSString *)text
-{
-    if(text == nil)
-    {
-        text = [REMEnergyConstants sharedRelativeDateDictionary][relativeDateString];
-    }
-    [self.relativeDateButton setTitle:text forState:UIControlStateNormal];
-    [self.relativeDateButton setTitle:text forState:UIControlStateHighlighted];
-    [self.relativeDateButton setTitle:text forState:UIControlStateSelected];
+- (void)stopCoverPage:(NSTimer *)timer{
+    //NSLog(@"currentIndex:%d",self.currentIndex);
     
-    if([relativeDateString isEqualToString:@"Customize"] == NO)
-    {
-        REMTimeRange *range=    [REMTimeHelper relativeDateFromString:relativeDateString];
-        //NSString *startTime = [REMTimeHelper formatTimeFullHour:range.startTime];
+    REMWidgetDetailViewController *current=self.childViewControllers[self.currentWidgetIndex];
+    [current showChart];
+    
+    if(self.currentWidgetIndex<self.childViewControllers.count){
+        NSInteger sign=[timer.userInfo[@"direction"] integerValue];
+        NSNumber *willIndex= @(self.currentWidgetIndex-1*sign);
+        if(willIndex.intValue>=self.childViewControllers.count || willIndex.intValue<0){
+            return;
+        }
+        REMWidgetDetailViewController *vc= self.childViewControllers[willIndex.intValue];
         
-        [self.startDateButton setTitle:[REMTimeHelper formatTimeFullHour:range.startTime] forState:UIControlStateNormal];
-        [self.endDateButton setTitle:[REMTimeHelper formatTimeFullHour:range.endTime] forState:UIControlStateNormal];
         
-        self.viewTimeRange = range;
-    }
-    else
-    {
+       
+        [vc showChart];
         
     }
     
-    self.viewRelativeDateString=relativeDateString;
-//     [self setStepButtonWithRange:self.viewTimeRange Step:((REMEnergyStep)[self.widgetObj.contentSyntax.step integerValue])];
-    
+}
+
+- (void)popToBuildingCover{
+    [self cancelAllRequest];
+    [self performSegueWithIdentifier:@"exitWidgetSegue" sender:self];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    //NSLog(@"didReceiveMemoryWarning :%@",[self class]);
+    for (int i=0; i<self.childViewControllers.count; ++i) {
+        if(self.currentWidgetIndex!=i && (self.currentWidgetIndex-1)!=i && (self.currentWidgetIndex+1)!=i){
+            REMWidgetDetailViewController *vc=self.childViewControllers[i];
+            [vc releaseChart];
+        }
+    }
 }
 
-- (void) searchData:(NSDictionary *)param
-{
-    REMDataStore *store = [[REMDataStore alloc] initWithEnergyStore:self.widgetObj.contentSyntax.storeType parameter:param];
-    store.isAccessLocal = NO;
-    store.isStoreLocal = YES;
-    store.maskContainer = self.view;
-    store.groupName = nil;
-    
-    void (^retrieveSuccess)(id data)=^(id data) {
-        self.data = [[REMEnergyViewData alloc] initWithDictionary:(NSDictionary *)data];
-        
-        [self reloadChart];
-        
-    };
-    void (^retrieveError)(NSError *error, id response) = ^(NSError *error, id response) {
-        //self.widgetTitle.text = [NSString stringWithFormat:@"Error: %@",error.description];
-    };
-    
-    
-    [REMDataAccessor access:store success:retrieveSuccess error:retrieveError];
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
 }
 
-- (IBAction)searchClick:(UIButton *)sender {
-    
-    NSMutableDictionary *newParam = [self.widgetObj.contentSyntax.params copy];
-    
-    NSMutableDictionary *viewOption = [newParam[@"viewOption"] mutableCopy];
-    [viewOption setObject:@[[self.viewTimeRange toJsonDictionary]] forKey: @"TimeRanges"];
-    
-    [self searchData:newParam];
-    
-}
-
-#pragma mark - navigation bar item actions
-
-- (IBAction) legendTap:(id)sender
-{
-    [self performSegueWithIdentifier:@"legendSegue" sender:self];
-}
-- (IBAction) renameTap:(UIButton *)sender
-{}
-- (IBAction) deleteTap:(UIButton *)sender
-{}
-- (IBAction) favoriteTap:(UIButton *)sender
-{}
 @end

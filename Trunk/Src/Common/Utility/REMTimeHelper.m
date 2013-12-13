@@ -1,10 +1,10 @@
-//
-//  REMTimeHelper.m
-//  Blues
-//
-//  Created by TanTan on 7/11/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMTimeHelper.m
+ * Created      : TanTan on 7/11/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMTimeHelper.h"
 
@@ -14,6 +14,11 @@
 
 + (long long)longLongFromJSONString:(NSString *)jsonDate
 {
+    if(jsonDate == nil || [jsonDate isEqual:[NSNull null]]==YES){
+        return 0;
+    }
+    
+    
     NSError *error;
     NSRegularExpression *regex= [NSRegularExpression regularExpressionWithPattern:@"\\d+" options:0 error:&error];
     
@@ -30,6 +35,13 @@
     }
     
     return 0;
+}
+
++ (NSString *)jsonStringFromDate:(NSDate *)date
+{
+    long long time=(long long)([date timeIntervalSince1970]*1000);
+    NSString *str= [NSString stringWithFormat:@"/Date(%llu)/",time];
+    return str;
 }
 
 + (NSNumber *)numberFromJSONString:(NSString *)jsonDate
@@ -50,9 +62,26 @@
     return previousDate;
 }
 
++ (NSDate *)getNextMondayFromDate:(NSDate *)date{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit fromDate:date];
+    
+    NSUInteger weekdayToday = [components weekday];
+    
+    if (weekdayToday==2 && [components hour]==0) {
+        return date;
+    }
+    [components setHour:0];
+    NSInteger daysToMonday = (9 - weekdayToday) % 7;
+    
+    NSDate *nextMonday = [date dateByAddingTimeInterval:60*60*24*daysToMonday];
+    
+    return nextMonday;
+}
+
 + (NSDate *)add:(int)difference onPart:(REMDateTimePart)part ofDate:(NSDate *)date;
 {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [[NSDateComponents alloc] init];
     switch (part) {
         case REMDateTimePartSecond:
@@ -97,6 +126,13 @@
     return [dayComponents month];
 }
 
++ (NSUInteger)getWeekDay:(NSDate *)date {
+    NSCalendar *calendar = [REMTimeHelper currentCalendar];
+    NSDateComponents *dayComponents = [calendar components:(NSWeekdayCalendarUnit) fromDate:date];
+    
+    return [dayComponents weekday];
+}
+
 
 + (NSUInteger)getDay:(NSDate *)date {
     NSCalendar *calendar = [REMTimeHelper currentCalendar];
@@ -114,6 +150,27 @@
     return (int)hour;
 }
 
++ (int )getTimePart:(REMDateTimePart)timePart ofLocalDate:(NSDate *)date  {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger unitFlags =NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit |NSHourCalendarUnit |NSMinuteCalendarUnit;
+    NSDateComponents *components = [calendar components:unitFlags fromDate:date];
+    
+    switch (timePart) {
+        case REMDateTimePartHour:
+            return [components hour];
+        case REMDateTimePartDay:
+            return [components day];
+        case REMDateTimePartMonth:
+            return [components month];
+        case REMDateTimePartYear:
+            return [components year];
+            
+        default:
+            return [components hour];
+            break;
+    }
+}
+
 
 + (int)getMinute:(NSDate *)date {
     NSCalendar *calendar = [REMTimeHelper currentCalendar];
@@ -124,12 +181,50 @@
     return (int)minute;
 }
 
++ (NSString *)relativeDateComponentFromType:(REMRelativeTimeRangeType)relativeDateType{
+    if(relativeDateType == REMRelativeTimeRangeTypeNone ){
+        return NSLocalizedString(@"Common_CustomTime", @""); //@"自定义";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeLast7Days){
+        return NSLocalizedString(@"Common_Last7Day", @""); //@"之前七天";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeToday){
+        return NSLocalizedString(@"Common_Today", @""); //@"今天";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeYesterday){
+        return NSLocalizedString(@"Common_Yesterday", @""); //@"昨天";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeThisMonth){
+        return NSLocalizedString(@"Common_ThisMonth", @""); //@"本月";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeLastMonth){
+        return NSLocalizedString(@"Common_LastMonth", @""); //@"上月";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeThisWeek){
+        return NSLocalizedString(@"Common_ThisWeek", @""); //@"本周";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeLastWeek){
+        return NSLocalizedString(@"Common_LastWeek", @""); //@"上周";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeThisYear){
+        return NSLocalizedString(@"Common_ThisYear", @""); //@"今年";
+    }
+    else if(relativeDateType == REMRelativeTimeRangeTypeLastYear){
+        return NSLocalizedString(@"Common_LastYear", @""); //@"去年";
+    }
+    else{
+        return NSLocalizedString(@"Common_CustomTime", @""); //@"自定义";
+    }
 
-+ (REMTimeRange *)relativeDateFromString:(NSString *)relativeDateString
+}
+
++ (REMTimeRange *) relativeDateFromType:(REMRelativeTimeRangeType)relativeDateType
 {
     NSDate *start,*end;
-            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    if ([relativeDateString isEqualToString:@"Last7Day"] == YES) {
+    NSCalendar *calendar = [REMTimeHelper currentCalendar];
+    NSCalendar *calendarWithZone=[NSCalendar currentCalendar];
+    
+    if (relativeDateType == REMRelativeTimeRangeTypeLast7Days) {
 
         
 
@@ -148,12 +243,15 @@
         end = [calendar dateFromComponents:todayComps];
         start = [calendar dateFromComponents:last7dayEndComps];
     }
-    else if([relativeDateString isEqualToString:@"Today"] == YES)
+    else if(relativeDateType == REMRelativeTimeRangeTypeToday)
     {
         NSDate *today = [NSDate date];
-        NSDateComponents *todayEndComps = [calendar components:( NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
+        NSDateComponents *todayEndComps = [calendarWithZone components:( NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
         [todayEndComps setMinute:0];
         [todayEndComps setSecond:0];
+        [todayEndComps setYear:todayEndComps.year];
+        [todayEndComps setMonth:todayEndComps.month];
+        [todayEndComps setDay:todayEndComps.day];
         
         NSDateComponents *todayStartComps = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
         [todayStartComps setMinute:0];
@@ -162,7 +260,7 @@
         end = [calendar dateFromComponents:todayEndComps];
         start = [calendar dateFromComponents:todayStartComps];
     }
-    else if([relativeDateString isEqualToString:@"Yesterday"] == YES)
+    else if(relativeDateType == REMRelativeTimeRangeTypeYesterday)
     {
         NSDate *today = [NSDate date];
         NSDateComponents *todayEndComps = [calendar components:( NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
@@ -180,7 +278,7 @@
         end = [calendar dateFromComponents:todayEndComps];
         start = [calendar dateFromComponents:yesterday];
     }
-    else if([relativeDateString isEqualToString:@"LastMonth"] == YES)
+    else if(relativeDateType == REMRelativeTimeRangeTypeLastMonth)
     {
         NSDate *today = [NSDate date];
         NSDateComponents *todayEndComps = [calendar components:( NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
@@ -201,23 +299,28 @@
         end = [calendar dateFromComponents:firstDayOfMonth];
         start = [calendar dateFromComponents:firstDayOfLastMonth];
     }
-    else if([relativeDateString isEqualToString:@"ThisWeek"] == YES)
+    else if(relativeDateType == REMRelativeTimeRangeTypeThisWeek)
     {
         NSDate *today = [NSDate date];
-        NSDateComponents *todayEndComps = [calendar components:( NSWeekdayCalendarUnit| NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
+        NSDateComponents *todayEndComps = [calendarWithZone components:( NSWeekdayCalendarUnit| NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
         [todayEndComps setMinute:0];
         [todayEndComps setSecond:0];
-        [todayEndComps setHour:0];
+        [todayEndComps setYear:todayEndComps.year];
+        [todayEndComps setMonth:todayEndComps.month];
+        [todayEndComps setDay:todayEndComps.day];
         
         NSDateComponents *firstDayOfThisWeek = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
         
-        [firstDayOfThisWeek setDay:([todayEndComps day] - ([todayEndComps weekday] - 2))];
+        int gap=todayEndComps.weekday-2;
+        if(gap<0) gap=6;
+        
+        [firstDayOfThisWeek setDay:([todayEndComps day] - gap)];
         
         
         end = [calendar dateFromComponents:todayEndComps];
         start = [calendar dateFromComponents:firstDayOfThisWeek];
     }
-    else if([relativeDateString isEqualToString:@"LastWeek"] == YES)
+    else if(relativeDateType == REMRelativeTimeRangeTypeLastWeek)
     {
         NSDate *today = [NSDate date];
         NSDateComponents *todayEndComps = [calendar components:(NSWeekdayCalendarUnit| NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
@@ -235,13 +338,15 @@
         end = [calendar dateFromComponents:firstDayOfThisWeek];
         start = [calendar dateFromComponents:firstDayOfLastWeek];
     }
-    else if([relativeDateString isEqualToString:@"ThisMonth"] == YES)
+    else if(relativeDateType == REMRelativeTimeRangeTypeThisMonth)
     {
         NSDate *today = [NSDate date];
-        NSDateComponents *todayEndComps = [calendar components:( NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
+        NSDateComponents *todayEndComps = [calendarWithZone components:( NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
+        [todayEndComps setYear:todayEndComps.year];
+        [todayEndComps setMonth:todayEndComps.month];
+        [todayEndComps setDay:todayEndComps.day];
         [todayEndComps setMinute:0];
         [todayEndComps setSecond:0];
-        [todayEndComps setHour:0];
         
         NSDateComponents *firstDayOfMonth = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
         [firstDayOfMonth setMinute:0];
@@ -251,13 +356,16 @@
         end = [calendar dateFromComponents:todayEndComps];
         start = [calendar dateFromComponents:firstDayOfMonth];
     }
-    else if([relativeDateString isEqualToString:@"ThisYear"] == YES)
+    else if(relativeDateType == REMRelativeTimeRangeTypeThisYear)
     {
         NSDate *today = [NSDate date];
-        NSDateComponents *todayComps = [calendar components:( NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
+        NSDateComponents *todayComps = [calendarWithZone components:( NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
         [todayComps setMinute:0];
         [todayComps setSecond:0];
-        [todayComps setHour:0];
+        [todayComps setDay:todayComps.day];
+        [todayComps setHour:todayComps.hour];
+        [todayComps setYear:todayComps.year];
+        [todayComps setMonth:todayComps.month];
         
         NSDateComponents *firstDayOfYear = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
         [firstDayOfYear setMinute:0];
@@ -268,7 +376,7 @@
         end = [calendar dateFromComponents:todayComps];
         start = [calendar dateFromComponents:firstDayOfYear];
     }
-    else if([relativeDateString isEqualToString:@"LastYear"] == YES)
+    else if(relativeDateType == REMRelativeTimeRangeTypeLastYear)
     {
         NSDate *today = [NSDate date];
         NSDateComponents *todayComps = [calendar components:( NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
@@ -296,8 +404,15 @@
 +(NSDate*)dateFromYear:(int)year Month:(int)month Day:(int)day
 {
     NSString *date = [NSString stringWithFormat:@"%4d-%02d-%02d", year, month, day];
-    NSDateFormatter *formater = [[NSDateFormatter alloc] init];
+    NSDateFormatter *formater = [REMTimeHelper currentFormatter];
     [formater setDateFormat:@"yyyy-MM-dd"];
+    return [formater dateFromString:date];
+}
+
++ (NSDate *)dateFromYear:(int)year Month:(int)month Day:(int)day Hour:(int)hour{
+    NSString *date = [NSString stringWithFormat:@"%4d-%02d-%02d %02d", year, month, day,hour];
+    NSDateFormatter *formater = [REMTimeHelper currentFormatter];
+    [formater setDateFormat:@"yyyy-MM-dd HH"];
     return [formater dateFromString:date];
 }
 
@@ -310,16 +425,76 @@
     NSDateComponents* dateComponents = [[NSDateComponents alloc]init];
     [dateComponents setMonth:month];
     NSCalendar* calendar = [REMTimeHelper currentCalendar];
-    return [calendar dateByAddingComponents:dateComponents toDate:[NSDate date] options:0];
+    return [calendar dateByAddingComponents:dateComponents toDate:date options:0];
 }
 
-+ (NSString *)formatTimeFullHour:(NSDate *)date
+
+static NSDateFormatter *_formatter;
++(NSDateFormatter *)currentFormatter
 {
-    NSDateFormatter *f = [[NSDateFormatter alloc]init];
+    if(_formatter == nil){
+        _formatter = [[NSDateFormatter alloc]init];
+        [_formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    }
+    
+    return _formatter;
+}
+static NSDateFormatter *_localFormatter;
++(NSDateFormatter *)currentLocalFormatter
+{
+    if(_localFormatter == nil){
+        _localFormatter = [[NSDateFormatter alloc]init];
+    }
+    
+    return _localFormatter;
+}
+
++ (NSString *)formatTimeFullHour:(NSDate *)date isChangeTo24Hour:(BOOL)change24Hour
+{
+    NSDateFormatter *f = [REMTimeHelper currentFormatter];
     [f setDateFormat:@"yyyy-MM-dd HH:mm"];
+    if(change24Hour==YES && [REMTimeHelper getHour:date]==0){
+        [f setDateFormat:@"yyyy-MM-dd"];
+        date = [date dateByAddingTimeInterval:-24*60*60];
+        NSString *mid=[f stringFromDate:date];
+        return [NSString stringWithFormat:@"%@ %@",mid,@"24:00"];
+    }
     return [f stringFromDate:date];
 }
 
++ (NSString *)formatTimeFullDay:(NSDate *)date
+{
+    NSDateFormatter *f = [REMTimeHelper currentFormatter];
+    [f setDateFormat:@"yyyy-MM-dd"];
+    
+    return [f stringFromDate:date];
+}
+
++ (NSString *)formatTimeRangeFullDay:(REMTimeRange *)range{
+    NSString *start=[REMTimeHelper formatTimeFullDay:range.startTime];
+    NSString *end;
+    if([REMTimeHelper getHour:range.endTime]==0){
+        NSDate *newEndDate=[REMTimeHelper add:-1 onPart:REMDateTimePartDay ofDate:range.endTime];
+        end=[REMTimeHelper formatTimeFullDay:newEndDate];
+    }
+    else{
+        end=[REMTimeHelper formatTimeFullDay:range.endTime];
+    }
+    return [NSString stringWithFormat:@"%@ -- %@",start,end];
+}
+
++ (NSString *)formatTimeRangeFullHour:(REMTimeRange *)range{
+    NSString *start=[REMTimeHelper formatTimeFullHour:range.startTime isChangeTo24Hour:NO];
+    NSString *end=[REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];
+    
+    return [NSString stringWithFormat:@"%@ -- %@",start,end];
+}
+
++(NSString*)formatTime:(NSDate *)date withFormat:(NSString*)format {
+    NSDateFormatter *f = [REMTimeHelper currentFormatter];
+    [f setDateFormat:format];
+    return [f stringFromDate:date];
+}
 
 + (REMTimeRange *) maxTimeRangeOfTimeRanges:(NSArray *)timeRanges
 {
@@ -380,6 +555,25 @@
     return [[REMTimeHelper gregorianCalendar] dateFromComponents:components];
 }
 
++ (NSDate *)now
+{
+    NSDate *today = [NSDate date];
+    
+    NSCalendar *calendar = [REMTimeHelper gregorianCalendar];
+    
+    NSDateComponents *todayEndComps = [calendar components:(NSMinuteCalendarUnit| NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
+    [todayEndComps setYear:todayEndComps.year];
+    [todayEndComps setMonth:todayEndComps.month];
+    [todayEndComps setDay:todayEndComps.day];
+    [todayEndComps setHour:todayEndComps.hour];
+    [todayEndComps setMinute:todayEndComps.minute];
+    [todayEndComps setSecond:0];
+    
+    NSDate *now=[calendar dateFromComponents:todayEndComps];
+    
+    return now;
+}
+
 +(NSDate *)tomorrow
 {
     return [REMTimeHelper add:1 onPart:REMDateTimePartDay ofDate:[REMTimeHelper today]];
@@ -394,23 +588,46 @@ static NSCalendar *_gregorianCalendar;
     return _gregorianCalendar;
 }
 
+
+
 static NSCalendar *_currentCalendar;
 +(NSCalendar *)currentCalendar
 {
-    if(_currentCalendar == nil)
+    if(_currentCalendar == nil){
         _currentCalendar = [NSCalendar currentCalendar];
+        [_currentCalendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"] ];
+    }
     
     return _currentCalendar;
 }
 
-+(NSDate *)convertLocalDateToGMT:(NSDate *)localDate
-{
-    NSTimeInterval timeZoneOffset = [[NSTimeZone timeZoneWithName:@"Asia/Shanghai"] secondsFromGMT];
-    NSTimeInterval gmtTimeInterval = [localDate timeIntervalSinceReferenceDate] - timeZoneOffset;
-    NSDate *gmtDate = [NSDate dateWithTimeIntervalSinceReferenceDate:gmtTimeInterval];
++ (NSDate *)convertToUtc:(NSDate *)date{
     
-    return gmtDate;
+    
+    NSCalendar *calendar = [REMTimeHelper currentCalendar];
+    
+    NSDateComponents *comp = [calendar components:(NSMinuteCalendarUnit| NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:date];
+    NSDateComponents *utcComp=[[NSDateComponents alloc]init];
+    [utcComp setYear:comp.year];
+    [utcComp setMonth:comp.month];
+    [utcComp setDay:comp.day];
+    [utcComp setHour:comp.hour];
+    [utcComp setMinute:comp.minute];
+    [utcComp setSecond:0];
+    NSCalendar *calendarWithZone=[NSCalendar currentCalendar];
+    NSDate *utc=[calendarWithZone dateFromComponents:utcComp];
+    
+    return utc;
 }
+
+//+(NSDate *)convertLocalDateToGMT:(NSDate *)localDate
+//{
+//    NSTimeInterval timeZoneOffset = [[NSTimeZone timeZoneWithName:@"Asia/Shanghai"] secondsFromGMT];
+//    NSTimeInterval gmtTimeInterval = [localDate timeIntervalSinceReferenceDate] - timeZoneOffset;
+//    NSDate *gmtDate = [NSDate dateWithTimeIntervalSinceReferenceDate:gmtTimeInterval];
+//    
+//    return gmtDate;
+//}
 
 +(NSDate *)convertGMTDateToLocal:(NSDate *)GMTDate
 {
@@ -419,6 +636,79 @@ static NSCalendar *_currentCalendar;
     NSDate *localDate = [NSDate dateWithTimeIntervalSinceReferenceDate:localTimeInterval];
     
     return localDate;
+}
+
++(NSString *)formatTooltipTime:(NSDate *)time byStep:(REMEnergyStep)step inRange:(REMTimeRange *)timeRange
+{
+    if(time == nil){
+        return @"";
+    }
+    
+    NSDateFormatter *f = [REMTimeHelper currentFormatter];
+    
+    switch (step) {
+        case REMEnergyStepHour:{
+            [f setDateFormat:@"yyyy年MM月dd日HH点"];
+            NSString *s1 = [f stringFromDate:time];
+            
+            NSDate *newDate = [time dateByAddingTimeInterval:60*60];
+            NSString *s2 = @"";
+            
+            if([REMTimeHelper getHour:newDate] < [REMTimeHelper getHour:time]){
+                s2 = @"24点";
+            }
+            else{
+                [f setDateFormat:@"HH点"];
+                s2 = [f stringFromDate:newDate];
+            }
+            
+            return [NSString stringWithFormat:@"%@-%@",s1,s2];
+        }
+        case REMEnergyStepDay:{
+            [f setDateFormat:@"yyyy年MM月dd日"];
+            return [f stringFromDate:time];
+        }
+        case REMEnergyStepMonth:{
+            [f setDateFormat:@"yyyy年MM月"];
+            return [f stringFromDate:time];
+        }
+        case REMEnergyStepYear:{
+            [f setDateFormat:@"yyyy年"];
+            return [f stringFromDate:time];
+        }
+        case REMEnergyStepWeek:{//week 2010年10月3日-10日,2010年10月29日-11月5日,2010年12月29日-2011年1月5日{}
+            [f setDateFormat:@"yyyy年MM月dd日"];
+            
+            int weekDay = [REMTimeHelper getWeekDay:time];
+            NSDate *date = [REMTimeHelper add:(0-weekDay+2) onPart:REMDateTimePartDay ofDate:time]; //[time dateByAddingTimeInterval:(0-weekDay+1) * 60 * 60];
+            NSString *s1 = [f stringFromDate:date];
+            
+            NSString *s2 = @"";
+            NSDate *newDate = [REMTimeHelper add:6 onPart:REMDateTimePartDay ofDate:date];
+            if ([REMTimeHelper getYear:newDate] > [REMTimeHelper getYear:date]) {
+                //2010年12月29日-2011年1月5日
+                //str += '-' + eft(newDate, ft.FullDay);
+                s2 = [f stringFromDate:newDate];
+            }
+            else if ([REMTimeHelper getMonth:newDate] > [REMTimeHelper getMonth:date]) {
+                //2010年10月29日-11月5日
+                //str += '-' + eft(newDate, ft.MonthDate);
+                [f setDateFormat:@"MM月dd日"];
+                s2 = [f stringFromDate:newDate];
+            }
+            else {
+                //2010年10月3日-10日
+                //str += '-' + eft(newDate, ft.Day);
+                [f setDateFormat:@"dd日"];
+                s2 = [f stringFromDate:newDate];
+            }
+            
+            return [NSString stringWithFormat:@"%@-%@",s1,s2];
+        }
+            
+        default:
+            return [REMTimeHelper formatTimeFullHour:time isChangeTo24Hour:YES];
+    }
 }
 
 @end

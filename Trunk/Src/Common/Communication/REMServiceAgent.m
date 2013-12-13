@@ -1,10 +1,10 @@
-//
-//  REMServiceAgent.m
-//  Blues
-//
-//  Created by zhangfeng on 7/5/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMServiceAgent.m
+ * Created      : zhangfeng on 7/5/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMServiceAgent.h"
 #import "AFHTTPRequestOperation.h"
@@ -25,33 +25,30 @@
 
 @implementation REMServiceAgent
 
+#define kREMCommMaxQueueWifi 16
+#define kREMCommMaxQueue3G 3
+
 static NSOperationQueue *queue = nil;
-static int maxQueueLength = 5;
+static int maxQueueLength = kREMCommMaxQueueWifi;
+#define kREMLogResquest 2 //0:no log, 1:log partial, 2: log full
 
-#ifdef DEBUG
+#if defined(DEBUG)
 static int requestTimeout = 1000; //(s)
-#endif
-
-#ifdef DailyBuild
+#else
 static int requestTimeout = 45; //(s)
 #endif
 
-#ifdef InternalRelease
-static int requestTimeout = 45; //(s)
-#endif
-
-#ifdef Release
-static int requestTimeout = 45; //(s)
-#endif
 
 #define NetworkIncreaseActivity() [[REMNetworkStatusIndicator sharedManager] increaseActivity];
 #define NetworkDecreaseActivity() [[REMNetworkStatusIndicator sharedManager] decreaseActivity];
 #define NetworkClearActivity() [[REMNetworkStatusIndicator sharedManager] noActivity];
 
+
+
 + (void) call: (REMServiceMeta *) service withBody:(id)body mask:(UIView *) maskContainer group:(NSString *)groupName store:(BOOL) isStore success:(void (^)(id data))success error:(void (^)(NSError *error, id response))error progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
 {
     //check network status and notify if no connection or 3g or 2g
-    if(![REMServiceAgent checkNetworkStatus])
+    if([REMServiceAgent checkNetworkStatus] == NO)
     {
         return;
     }
@@ -83,10 +80,7 @@ static int requestTimeout = 45; //(s)
     void (^onSuccess)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
     {
 #ifdef DEBUG
-//        if(service.responseType == REMServiceResponseJson)
-//            NSLog(@"url:%@\nresponse string:%@", [operation.request.URL description], operation.responseString);
-//        else
-//            NSLog(@"url:%@\nresponse data:%d bytes", [operation.request.URL description], [operation.responseData length]);
+        [REMServiceAgent logResponse:service :operation];
 #endif
         
         //if there is error message
@@ -97,7 +91,12 @@ static int requestTimeout = 45; //(s)
             REMError *remError = [[REMError alloc] initWithErrorInfo:remErrorInfo];
             
             error(remError,remErrorInfo);
+            NetworkDecreaseActivity();
             
+            if(maskContainer!=nil && maskManager != nil) //if mask has already shown
+            {
+                [maskManager hideMask];
+            }
             return;
         }
         
@@ -138,33 +137,31 @@ static int requestTimeout = 45; //(s)
             [maskManager hideMask];
         }
         
-        //
-        operation = nil;
         NetworkDecreaseActivity();
+        operation = nil;
     };
     
     void (^onFailure)(AFHTTPRequestOperation *operation, NSError *errorInfo) = ^(AFHTTPRequestOperation *operation, NSError *errorInfo)
     {
-        REMLogError(@"Communication error: %@\nServer response: %@", [error description], operation.responseString);
+        REMLogError(@"Communication error: %@\nUrl: %@\nServer response: %@", [error description], [operation.request.URL description], operation.responseString);
         
         if(errorInfo.code == -1001){
             [REMAlertHelper alert:@"数据加载超时"];
-            return;
         }
-        if(errorInfo.code == -999){
+        else if(errorInfo.code == -999){
             REMLogInfo(@"Request canceled");
-            return;
         }
-        
-        if(error)
-        {
-            error(errorInfo,operation.responseString);
+        else{
+            if(error)
+            {
+                error(errorInfo,operation.responseString);
+            }
         }
-        
         if(maskContainer!=nil && maskManager != nil)
         {
             [maskManager hideMask];
         }
+        
         NetworkDecreaseActivity();
     };
     
@@ -177,28 +174,25 @@ static int requestTimeout = 45; //(s)
     REMServiceRequestOperation *serviceOperation = [REMServiceRequestOperation operationWithRequest:request];
     
     [serviceOperation setCompletionBlockWithSuccess:onSuccess failure:onFailure];
-    
-    if(progress)
-        [serviceOperation setDownloadProgressBlock:onProgress];
-    
-    serviceOperation.maskManager=maskManager;
+    [serviceOperation setDownloadProgressBlock:onProgress];
+    [serviceOperation setMaskManager:maskManager];
     if(groupName!=nil && [groupName isEqual:[NSNull null]]==NO && [groupName isEqualToString:@""] == NO)
     {
         serviceOperation.groupName = groupName;
     }
-        
-    //[serviceOperation start];
     
     if(queue == nil)
     {
         [REMServiceAgent initializeQueue];
     }
     
+//log the request
 #ifdef DEBUG
-//    NSLog(@"request: %@",[request.URL description]);
+    [REMServiceAgent logRequest:request];
 #endif
     
     [queue addOperation:serviceOperation];
+    
     NetworkIncreaseActivity();
 }
 
@@ -208,6 +202,7 @@ static int requestTimeout = 45; //(s)
     if(queue!=NULL && queue != nil && queue.operationCount > 0)
     {
         [queue cancelAllOperations];
+        
         NetworkClearActivity();
     }
 }
@@ -242,6 +237,7 @@ static int requestTimeout = 45; //(s)
             if(operation.maskManager!=nil){
                 [operation.maskManager hideMask];
             }
+            
             [operation cancel];
             NetworkDecreaseActivity();
         }
@@ -269,13 +265,10 @@ static int requestTimeout = 45; //(s)
             maxQueueLength = 0;
             return NO;
         case ReachableViaWiFi:
-            maxQueueLength = 5;
+            maxQueueLength = kREMCommMaxQueueWifi;
             break;
-        case ReachableViaWWAN3G:
-            maxQueueLength = 2;
-            break;
-        case ReachableViaWWAN2G:
-            maxQueueLength = 1;
+        case ReachableViaWWAN:
+            maxQueueLength = kREMCommMaxQueue3G;
             break;
             
         default:
@@ -299,7 +292,8 @@ static int requestTimeout = 45; //(s)
 + (NSURLRequest *)buildRequestWithUrl: (NSString *)absoluteUrl andPostData:(NSData *)data
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:absoluteUrl]];
-    [request setTimeoutInterval:60*10];
+    [request setTimeoutInterval:requestTimeout];
+    [request setCachePolicy:NSURLCacheStorageAllowedInMemoryOnly];
     [request setHTTPMethod: @"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
@@ -314,6 +308,9 @@ static int requestTimeout = 45; //(s)
     //add user info
     [request setValue:[REMServiceAgent getUserInfo] forHTTPHeaderField:@"Blues-User"];
     
+    //enable gzip
+    [request setValue:@"gzip,deflate,sdch" forHTTPHeaderField:@"accept-encoding"];
+    
     if(data!=NULL && data != nil && data.length > 0)
     {
         [request setHTTPBody:data];
@@ -324,7 +321,7 @@ static int requestTimeout = 45; //(s)
 
 + (NSString *)getUserAgent
 {
-    NSString *userAgentFormat = @"Blues/0.2(PS;%@;%@;%@;%@;%@;)";
+    NSString *userAgentFormat = @"Blues/0.4(PS;%@;%@;%@;%@;%@;)";
     UIDevice *device = [UIDevice currentDevice];
     
     NSString *content=[NSString stringWithFormat:userAgentFormat,[[device identifierForVendor] UUIDString],[device localizedModel],[device systemName],[device systemVersion],[device model]];
@@ -334,14 +331,15 @@ static int requestTimeout = 45; //(s)
 
 + (NSString *)getUserInfo
 {
-    REMApplicationContext* context = [REMApplicationContext instance];
-    NSString *original = [NSString stringWithFormat:@"%lld|%@|%lld",context.currentUser.userId,context.currentUser.name, context.currentUser.spId];
-    //NSLog(@"%@",original);
+    NSString *original = [NSString stringWithFormat:@"%lld|%@|%lld",REMAppCurrentUser.userId,REMAppCurrentUser.name, REMAppCurrentUser.spId];
     
     NSData *encryptedData = [REMEncryptHelper AES256EncryptData:[original dataUsingEncoding:NSUTF8StringEncoding] withKey:@"41758bd9d7294737"];
     
     NSString *base64Encoded = [REMEncryptHelper encodeBase64Data:encryptedData];
+    
+    //NSLog(@"%@",original);
     //NSLog(@"%@",base64Encoded);
+    
     return base64Encoded;
 }
 
@@ -352,4 +350,28 @@ static int requestTimeout = 45; //(s)
     return [result valueForKey:[NSString stringWithFormat:@"%@Result",[service lastPathComponent]]];
 }
 
++(void)logRequest:(NSURLRequest *)request
+{
+    if(kREMLogResquest != 0){
+        NSLog(@"REM-REQUEST: %@", [request.URL description]);
+    }
+}
+
++(void)logResponse:(REMServiceMeta *)service :(AFHTTPRequestOperation *)operation
+{
+    if(kREMLogResquest !=0 ){
+        int shortJsonStringLength = 48;
+        if(service.responseType == REMServiceResponseJson){
+            NSString *jsonString = operation.responseString;
+            if(kREMLogResquest == 1 && jsonString.length > shortJsonStringLength){
+                jsonString = [NSString stringWithFormat:@"%@..",[jsonString substringToIndex:shortJsonStringLength]];
+            }
+            NSLog(@"REM-RESPONSE url: %@", service.url);
+            NSLog(@"REM-RESPONSE json: %@", jsonString);
+        }
+        else
+            NSLog(@"REM-RESPONSE data: %d bytes", [operation.responseData length]);
+    }
+}
 @end
+

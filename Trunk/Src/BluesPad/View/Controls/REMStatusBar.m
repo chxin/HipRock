@@ -1,10 +1,10 @@
-//
-//  REMStatusBar.m
-//  Blues
-//
-//  Created by Zilong-Oscar.Xu on 8/26/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMStatusBar.m
+ * Created      : Zilong-Oscar.Xu on 8/26/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMStatusBar.h"
 #import "REMApplicationInfo.h"
@@ -72,6 +72,22 @@
     
     instance.hidden = NO;
     [instance changeMessge:message autoHide:autoHide];
+}
+
+-(void)setHidden:(BOOL)hidden {
+    [super setHidden:hidden];
+    if (self.hidden) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    } else {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screenDidRotate:) name:UIApplicationDidChangeStatusBarFrameNotification object:nil];
+    }
+}
+
+- (void)screenDidRotate:(NSNotification *)notification {
+    BOOL caTransationState = CATransaction.disableActions;
+    [CATransaction setDisableActions:YES];
+    [self resetOrientation];
+    [CATransaction setDisableActions:caTransationState];
 }
 
 - (void)resetOrientation {

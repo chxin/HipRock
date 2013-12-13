@@ -1,10 +1,10 @@
-//
-//  REMCustomer.h
-//  Blues
-//
-//  Created by 张 锋 on 7/29/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMCustomer.h
+ * Created      : 张 锋 on 7/29/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import <Foundation/Foundation.h>
 #import "REMJSONObject.h"
@@ -21,6 +21,8 @@
 @property (nonatomic,strong) NSString *comment;
 @property (nonatomic,strong) NSNumber *timezoneId;
 @property (nonatomic,strong) NSNumber *logoId;
+@property (nonatomic,strong) NSDate *startTime;
+@property (nonatomic,strong) NSArray *administratorArray;
 
 
 - (void)save;

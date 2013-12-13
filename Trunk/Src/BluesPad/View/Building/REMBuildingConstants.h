@@ -1,18 +1,19 @@
-//
-//  REMBuildingConstants.h
-//  Blues
-//
-//  Created by tantan on 8/6/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMBuildingConstants.h
+ * Created      : tantan on 8/6/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import <Foundation/Foundation.h>
 
 
 #define kBuildingLeftMargin 25
 
-#define kBuildingTitleTop 23
-#define kBuildingTitleFontSize 43
+#define kBuildingTitleTop 33
+#define kBuildingTypeTitleFontSize 14
+#define kBuildingTitleFontSize 20
 #define kBuildingTitleHeight 109
 #define kBuildingTitleButtonDimension 46
 #define kBuildingTitleButtonTopMargin 20
@@ -74,9 +75,10 @@
 
 #define kImageMargin 5
 
-#define kBuildingTrendChartLegendHeight 85
+#define kBuildingTrendChartLegendHeight 43
 #define kBuildingChartHeight 266
 #define kBuildingChartWidth 840
+
 
 
 
