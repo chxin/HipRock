@@ -48,6 +48,8 @@
 @property (nonatomic, strong) UIFont* backgroundBandFont;
 @property (nonatomic, strong) UIColor* backgroundBandFontColor;
 
+@property (nonatomic, assign) BOOL playBeginAnimation;
+
 +(REMChartStyle*)getMaximizedStyle;
 +(REMChartStyle*)getMinimunStyle;
 @end

@@ -7,71 +7,33 @@
  --------------------------------------------------------------------------*///
 
 #import "REMServiceMeta.h"
+#import "REMApplicationContext.h"
 
 @implementation REMServiceMeta
 
-//v0.4dev branch checkin
+//Change CurrentDataSource value in configuration.plist in Resource folder
+//to change service url for different build options
 
 #if defined(DEBUG)
-//const static NSString *SVC_BASE_HOST = @"10.177.206.79";
-//const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
-
-//const static NSString *SVC_BASE_HOST = @"10.177.122.189";
-//const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
-//
-//const static NSString *SVC_BASE_HOST = @"10.177.0.35";
-//const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
-
-const static NSString *SVC_BASE_HOST = @"112.124.56.137";
-const static NSString *SVC_BASE_SCHEMA = @"http";
-const static NSString *SVC_BASE_SUFFIX = @"/v1.4.0.21/Mobile/MobileApiHost/";
-
-//const static NSString *SVC_BASE_HOST = @"admin.energy-here.com";
-//const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/MobileApiHost/";
-
-//const static NSString *SVC_BASE_HOST = @"emopmobile.energymost.com";
-//const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/";
-
+const static NSString *BUILDOPTION = @"Debug";
 #elif defined(DailyBuild)
-const static NSString *SVC_BASE_HOST = @"112.124.56.137";
-const static NSString *SVC_BASE_SCHEMA = @"http";
-const static NSString *SVC_BASE_SUFFIX = @"/v1.4.0.21/Mobile/MobileApiHost/";
-
-//const static NSString *SVC_BASE_HOST = @"emopmobile.energymost.com";
-//const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/";
-
-//const static NSString *SVC_BASE_HOST = @"10.177.0.35";
-//const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
-
+const static NSString *BUILDOPTION = @"DailyBuild";
 #elif defined(InternalRelease)
-const static NSString *SVC_BASE_HOST = @"112.124.56.137";
-const static NSString *SVC_BASE_SCHEMA = @"http";
-const static NSString *SVC_BASE_SUFFIX = @"/v1.4.0.21/Mobile/MobileApiHost/";
-
-//const static NSString *SVC_BASE_HOST = @"admin.energy-here.com";
-//const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/MobileApiHost/";
-//const static NSString *SVC_BASE_HOST = @"emopmobile.energymost.com";
-//const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/";
-
+const static NSString *BUILDOPTION = @"InternalRelease";
 #else
-const static NSString *SVC_BASE_HOST = @"emopmobile.energymost.com";
-const static NSString *SVC_BASE_SCHEMA = @"http";
-const static NSString *SVC_BASE_SUFFIX = @"/";
+const static NSString *BUILDOPTION = @"Release";
 #endif
 
 
 + (NSString *)absoluteUrl:(NSString *)relativeUrl
 {
-    NSString *absoluteUrl = [NSString stringWithFormat:@"%@://%@%@%@",SVC_BASE_SCHEMA,SVC_BASE_HOST,SVC_BASE_SUFFIX,relativeUrl];
+    NSString *dataSourceName = REMAppConfig.currentDataSource[BUILDOPTION];
+    NSDictionary *serviceInfo = REMAppConfig.dataSources[dataSourceName];
+    NSString *serviceBaseUrl = [NSString stringWithFormat:@"%@://%@%@",serviceInfo[@"schema"],serviceInfo[@"host"],serviceInfo[@"path"]];
+    
+    //NSLog(@"BUILDOPTION:%@\nSVCBASE:%@", BUILDOPTION, serviceBaseUrl);
+    
+    NSString *absoluteUrl = [serviceBaseUrl stringByAppendingString:relativeUrl];;
     
     return absoluteUrl;
 }

@@ -25,12 +25,12 @@
 #ifdef DEBUG
 
 #define kDefaultUserName @"SchneiderElectricChina"
-#define kDefaultPassword @"P@ssw0rd"
+#define kDefaultPassword @"P@ssw0rdChina"
 
 #elif InternalRelease
 
 #define kDefaultUserName @"SchneiderElectricChina"
-#define kDefaultPassword @"P@ssw0rd"
+#define kDefaultPassword @"P@ssw0rdChina"
 
 #else
 
@@ -196,6 +196,7 @@
         else
         {
             [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+            [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
             
             if(validationResult.status == REMUserValidationWrongName)
             {
@@ -223,6 +224,7 @@
 -(void) dataCallFail: (NSError *) error result:(NSObject *)response
 {
     [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+    [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
     
     [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
 }

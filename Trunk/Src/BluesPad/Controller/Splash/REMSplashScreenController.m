@@ -17,6 +17,7 @@
 #import "DCColumnWrapper.h"
 #import "DCLineWrapper.h"
 #import "DCPieChartView.h"
+#import "DCLabelingChartView.h"
 
 @interface REMSplashScreenController ()
 
@@ -121,8 +122,7 @@
 {
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
-    //    [self.view addSubview:[[REMTrend alloc]initWithFrame:CGRectMake(100, 0, 924, 708)]];
-    
+    [self.view addSubview:[[DCLabelingChartView alloc]initWithFrame:self.view.bounds]];
 //    [self oscarTest];
     
     
@@ -151,9 +151,8 @@
         NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
         
         [self showMapView:^(void){
-            if(timer != nil){
-                if([timer isValid])
-                    [timer invalidate];
+            if(timer != nil && [timer isValid]){
+                [timer invalidate];
             }
             
             if(completed)
@@ -283,9 +282,6 @@
 - (void)showLoginView:(BOOL)isAnimated
 {
     if(self.carouselController!=nil){
-//        [self.carouselController.view removeFromSuperview];
-//        self.carouselController = nil;
-        
         [self.carouselController playCarousel:isAnimated];
     }
     else{
@@ -305,15 +301,8 @@
 
 - (void)showMapView:(void (^)(void))loadCompleted
 {
-    //    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
-    //    syntax.type = @"line";
-    //    syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
-    
     NSDictionary *parameter = @{@"customerId":REMAppCurrentCustomer.customerId};
     REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSBuildingInfo parameter:parameter];
-    //buildingStore.isAccessLocal = YES;
-    buildingStore.groupName = nil;
-    buildingStore.maskContainer = nil;
     
     [REMDataAccessor access:buildingStore success:^(id data) {
         if([data count]<=0){
@@ -327,7 +316,6 @@
         
         NSDictionary *parameter = @{@"customerId":REMAppCurrentCustomer.customerId};
         REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter];
-        //buildingStore.isAccessLocal = YES;
         logoStore.groupName = nil;
         logoStore.maskContainer = nil;
         
@@ -344,7 +332,6 @@
             
             [self performSegueWithIdentifier:kSegue_SplashToMap sender:self];
         } error:^(NSError *error, id response) {
-            //
             
             if(loadCompleted!=nil)
                 loadCompleted();
@@ -375,11 +362,6 @@
     }
 }
 
-- (void)stopBreath
-{
-//    [self.normalLogo.layer removeAllAnimations];
-//    [self.flashLogo.layer removeAllAnimations];
-}
 
 - (void)didReceiveMemoryWarning
 {

@@ -102,30 +102,23 @@
 
 -(void)rotateWithInitialSpeed:(double)speed {
     if (self.view == Nil) return;
+    NSLog(@"speed:%f", speed);
     NSMutableArray* animationFrames = [[NSMutableArray alloc]init];
     if (fabs(speed) < 0.05) {
-        double indicationAngle = 1.5 - self.view.rotationAngle;
+        double indicationAngle = -self.view.rotationAngle;
         if (indicationAngle < 0) {
             indicationAngle += 2;
         }
         // 找到预计旋转角度对应的扇区的中线位置
-        double targetRotation = 0;  // 预计对准的扇区的中线位置
-        for (int i = 0; i < self.view.series.pieSlices.count; i++) {
-            if (REMIsNilOrNull(self.view.series.pieSlices)) continue;
-            DCPieSlice slice;
-            [self.view.series.pieSlices[i] getValue:&slice];
-            if (slice.sliceEnd > indicationAngle) {
-                targetRotation = slice.sliceCenter;
-                //            NSLog(@"index:%i slice:%f indicator:%f", i, targetRotation, indicationAngle);
-                break;
-            }
-        }
-        targetRotation = 1.5 - targetRotation;
+        double targetRotation = [self.view.series findNearbySliceCenter:indicationAngle];  // 预计对准的扇区的中线位置
+        targetRotation = -targetRotation;
         if (targetRotation >= 2) targetRotation -= 2;
         else if (targetRotation < 0) targetRotation += 2;
         
         double frames = kDCAnimationDuration * kDCFramesPerSecord;
-        double step = (targetRotation - self.view.rotationAngle) / frames;
+        double rotationDelta = targetRotation - self.view.rotationAngle;
+        if (fabs(rotationDelta) > 1) rotationDelta = rotationDelta + ((rotationDelta > 0) ? -2 : 2);
+        double step = rotationDelta / frames;
         for (int i = 0; i < frames; i++) {
             DCPieChartAnimationFrame* aframe = [[DCPieChartAnimationFrame alloc]init];
             aframe.rotationAngle = @(self.view.rotationAngle + step * i);
@@ -133,7 +126,6 @@
         }
         DCPieChartAnimationFrame* frame = [[DCPieChartAnimationFrame alloc]init];
         frame.rotationAngle = @(targetRotation);
-        [self animateToFrame:frame];
         [animationFrames addObject:frame];
     } else {
         // 预计最后一帧的旋转的角度。并预先计算出所有帧的旋转。
@@ -149,7 +141,7 @@
         }
         
         // 将最后一帧的角度与indicator对齐，并改成0-2的值域范围内
-        double indicationAngle = 1.5 - rotation;
+        double indicationAngle = -rotation;
         int a = (indicationAngle)/2;
         if (indicationAngle < 0) {
             indicationAngle -= 2*(a-1);
@@ -158,17 +150,7 @@
         }
         
         // 找到预计旋转角度对应的扇区的中线位置
-        double targetRotation = 0;  // 预计对准的扇区的中线位置
-        for (int i = 0; i < self.view.series.pieSlices.count; i++) {
-            if (REMIsNilOrNull(self.view.series.pieSlices)) continue;
-            DCPieSlice slice;
-            [self.view.series.pieSlices[i] getValue:&slice];
-            if (slice.sliceEnd > indicationAngle) {
-                targetRotation = slice.sliceCenter;
-    //            NSLog(@"index:%i slice:%f indicator:%f", i, targetRotation, indicationAngle);
-                break;
-            }
-        }
+        double targetRotation = [self.view.series findNearbySliceCenter:indicationAngle];  // 预计对准的扇区的中线位置
         double r = self.view.rotationAngle;
 
         for (int i = 0; i < speedArray.count;i++) {
@@ -178,21 +160,21 @@
             [animationFrames addObject:frame];
         }
         DCPieChartAnimationFrame* frame = [[DCPieChartAnimationFrame alloc]init];
-        frame.rotationAngle = @(1.5-targetRotation);
+        frame.rotationAngle = @(-targetRotation);
         [animationFrames addObject:frame];
-    //    NSLog(@"selfViewRotate:%f speed:%f rotation:%f", self.view.rotationAngle, speed, rotation);
-    //    for (DCPieChartAnimationFrame* f in animationFrames) {
-    //        NSLog(@"%f", f.rotationAngle.doubleValue);
-    //    }
+    }
+//    NSLog(@"selfViewRotate:%f speed:%f rotation:%f", self.view.rotationAngle, speed, rotation);
+    for (DCPieChartAnimationFrame* f in animationFrames) {
+        NSLog(@"%f", f.rotationAngle.doubleValue);
     }
     // 应用动画
     [self playFrames:animationFrames];
 }
 
--(void)playFrames:(NSMutableArray*)frames {
+-(void)playFrames:(NSArray*)frames {
     if (frames == nil || frames.count == 0) return;
     if (self.animationTimer && [self.animationTimer isValid]) [self.animationTimer invalidate];
-    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animationTimerTarget) userInfo:frames repeats:YES];
+    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animationTimerTarget) userInfo:frames.mutableCopy repeats:YES];
 }
 
 -(void)animationTimerTarget {
@@ -222,7 +204,7 @@
             if (theFrame.indicatorAlpha) {
                 self.view.indicatorAlpha = theFrame.indicatorAlpha.doubleValue;
             }
-            [self.view setNeedsDisplay];
+            [self.view redraw];
         }
     }
 }

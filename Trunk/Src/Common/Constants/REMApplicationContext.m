@@ -7,6 +7,7 @@
  --------------------------------------------------------------------------*///
 
 #import "REMApplicationContext.h"
+#import "REMAppConfiguration.h"
 
 @implementation REMApplicationContext
 
@@ -26,6 +27,17 @@ static REMApplicationContext *context = nil;
 + (void)destroy
 {
     context = nil;
+}
+
+-(REMApplicationContext *)init
+{
+    self = [super init];
+    
+    if(self){
+        self.appConfig = [[REMAppConfiguration alloc] init];
+    }
+    
+    return self;
 }
 
 

@@ -11,7 +11,7 @@
 #import "REMWidgetCommoditySearchModel.h"
 #import "REMWidgetRankingSearchModel.h"
 #import "REMWidgetMultiTimespanSearchModel.h"
-
+#import "REMWidgetLabellingSearchModel.h"
 
 @interface REMWidgetSearchModelBase(){
     REMRelativeTimeRangeType _relativeType;
@@ -50,7 +50,7 @@
         model=[[REMWidgetRankingSearchModel alloc]init];
     }
     else if(dataStoreType == REMDSEnergyLabeling){
-        
+        model = [[REMWidgetLabellingSearchModel alloc]init];
     }
     [model setModelBySearchParam:param];
     

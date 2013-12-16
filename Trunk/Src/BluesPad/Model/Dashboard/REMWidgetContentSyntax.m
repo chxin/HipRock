@@ -159,6 +159,9 @@
     else if([self.storeType isEqualToString:@"energy.RatioUsage"]==YES){
         self.dataStoreType = REMDSEnergyRatio;
     }
+    else if([self.storeType isEqualToString:@"energy.Labeling"]==YES){
+        self.dataStoreType = REMDSEnergyLabeling;
+    }
     else if([self.storeType isEqualToString:@"energy.RankUsage"]==YES){
         NSString *api=[self.params objectForKey:@"api"];
         if([api isEqualToString:@"RankingEnergyUsageData"]==YES){

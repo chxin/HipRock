@@ -239,7 +239,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
         [shareLabel setBackgroundColor:[UIColor clearColor]];
         NSString *shareName=dashboardInfo.shareInfo.userRealName;
         NSString *shareTel=dashboardInfo.shareInfo.userTelephone;
-        NSString *date=[REMTimeHelper formatTimeFullDay:dashboardInfo.shareInfo.shareTime];
+        NSString *date=[REMTimeHelper formatTimeFullDay:dashboardInfo.shareInfo.shareTime isChangeTo24Hour:NO];
         NSString *userTitle=dashboardInfo.shareInfo.userTitleComponent;
         shareLabel.text=[NSString stringWithFormat:NSLocalizedString(@"Widget_ShareTitle", @""),shareName,userTitle,date,shareTel];
         [cell.contentView addSubview:shareLabel];

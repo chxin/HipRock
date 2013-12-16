@@ -39,18 +39,23 @@
 
 @implementation REMBuildingAirQualityChartViewController
 
+#define kTagCodeSuffixOutdoor @"Outdoor"
+#define kTagCodeSuffixHoneywell @"Honeywell"
+#define kTagCodeSuffixMayAir @"MayAir"
+#define kAmericanStandardCode @"美国标准"
+#define kChinaStandardCode @"中国标准"
 
-static NSString *kOutdoorCode = @"GalaxySoho_Outdoor";
-static NSString *kMayAirCode = @"GalaxySoho_MayAir";
-static NSString *kHoneywellCode = @"GalaxySoho_Honeywell";
-static NSString *kAmericanStandardCode = @"美国标准";
-static NSString *kChinaStandardCode = @"中国标准";
+//"Building_AirQualityOutdoor"="室外PM2.5";
+//"Building_AirQualityHoneywell"="室内新风PM2.5(霍尼)";
+//"Building_AirQualityMayair"="室内新风PM2.5(美埃)";
+//"Building_AirQualityAmericanStandard"="%d %@(PM2.5美国标准)";
+//"Building_AirQualityChinaStandard"="%d %@(PM2.5中国标准)";
 
-static NSString *kOutdoorLabelName = @"室外PM2.5";
-static NSString *kHoneywellLabelName = @"室内新风PM2.5(霍尼)";
-static NSString *kMayAirLabelName = @"室内新风PM2.5(美埃)";
-static NSString *kAmericanStandardLabelFormat = @"%d %@(PM2.5美国标准)";
-static NSString *kChinaStandardLabelFormat = @"%d %@(PM2.5中国标准)";
+#define kWordAirQualityOutdoor REMLocalizedString(@"Building_AirQualityOutdoor")
+#define kWordAirQualityHoneywell REMLocalizedString(@"Building_AirQualityHoneywell")
+#define kWordAirQualityMayair REMLocalizedString(@"Building_AirQualityMayair")
+#define kWordAirQualityAmericanStandard REMLocalizedString(@"Building_AirQualityAmericanStandard")
+#define kWordAirQualityChinaStandard REMLocalizedString(@"Building_AirQualityChinaStandard")
 
 
 static NSDictionary *codeNameMap;
@@ -64,7 +69,12 @@ static NSDictionary *codeNameMap;
         // Custom initialization
         self.viewFrame = frame;
         self.scrollManager = [[REMChartHorizonalScrollDelegator alloc]init];
-        codeNameMap = [[NSDictionary alloc] initWithObjects:@[kOutdoorLabelName,kMayAirLabelName,kHoneywellLabelName,kAmericanStandardLabelFormat,kChinaStandardLabelFormat] forKeys:@[kOutdoorCode,kMayAirCode,kHoneywellCode,kAmericanStandardCode,kChinaStandardCode]];
+        codeNameMap = @{kTagCodeSuffixOutdoor:kWordAirQualityOutdoor,
+                        kTagCodeSuffixHoneywell:kWordAirQualityHoneywell,
+                        kTagCodeSuffixMayAir:kWordAirQualityMayair,
+                        kAmericanStandardCode:kWordAirQualityAmericanStandard,
+                        kChinaStandardCode:kWordAirQualityChinaStandard,};
+        
         self.requestUrl=REMDSBuildingAirQuality;
         
         self.formatter = [[NSDateFormatter alloc] init];
@@ -158,7 +168,19 @@ static NSDictionary *codeNameMap;
         REMEnergyTargetModel *target = targetEnergyData.target;
         NSArray *energyData = targetEnergyData.energyData;
         
-        if([@[kMayAirCode,kOutdoorCode,kHoneywellCode] containsObject:target.code] == NO){
+        NSString *seriesCode = nil;
+        
+        if([target.code hasSuffix:kTagCodeSuffixHoneywell]){
+            seriesCode = kTagCodeSuffixHoneywell;
+        }
+        else if([target.code hasSuffix:kTagCodeSuffixMayAir]){
+            seriesCode = kTagCodeSuffixMayAir;
+        }
+        else if([target.code hasSuffix:kTagCodeSuffixOutdoor]){
+            seriesCode = kTagCodeSuffixOutdoor;
+        }
+        
+        if(seriesCode == nil){
             continue;
         }
         
@@ -181,7 +203,7 @@ static NSDictionary *codeNameMap;
             self.dataValueRange.end = MAX(self.dataValueRange.end, [point.dataValue doubleValue]);
         }
         
-        NSDictionary* series = @{@"code":target.code,@"title":target.name, @"identity":targetIdentity, @"data":data};
+        NSDictionary* series = @{@"code":seriesCode,@"title":target.name, @"identity":targetIdentity, @"data":data};
         
         [convertedData addObject:series];
     }
@@ -191,10 +213,10 @@ static NSDictionary *codeNameMap;
     }
     
     for(REMAirQualityStandardModel *standard in self.airQualityData.standards){
-        if([standard.standardName isEqual: kAmericanStandardCode]){
+        if([standard.standardName isEqualToString: kAmericanStandardCode]){
             self.standardAmerican = standard;
         }
-        if([standard.standardName isEqual: kChinaStandardCode]){
+        if([standard.standardName isEqualToString: kChinaStandardCode]){
             self.standardChina = standard;
         }
     }
@@ -365,8 +387,8 @@ static NSDictionary *codeNameMap;
     CPTPlotRange *bandRangeChina=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([self.standardAmerican.standardValue doubleValue]) length:CPTDecimalFromDouble([self.standardChina.standardValue doubleValue] - [self.standardAmerican.standardValue doubleValue])];
     CPTPlotRange *bandRangeAmerican=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([self.standardAmerican.standardValue doubleValue])];
     
-    CPTColor *chinaColor = [self getColorWithCode:(NSString *)kChinaStandardCode];
-    CPTColor *americanColor = [self getColorWithCode:(NSString *)kAmericanStandardCode];
+    CPTColor *chinaColor = [self getColorWithCode:kChinaStandardCode];
+    CPTColor *americanColor = [self getColorWithCode:kAmericanStandardCode];
     
     
     CPTLimitBand *standardBandChina= [CPTLimitBand limitBandWithRange:bandRangeChina fill:[CPTFill fillWithColor:chinaColor]];
@@ -379,7 +401,7 @@ static NSDictionary *codeNameMap;
 -(void)drawLabels
 {
     //standard labels
-    for(NSString *standardCode in @[(NSString *)kChinaStandardCode, (NSString *)kAmericanStandardCode]){
+    for(NSString *standardCode in @[kChinaStandardCode, kAmericanStandardCode]){
         UILabel *standardLabel = [self getStandardLabelWithCode:standardCode];
         
         [self.view addSubview:standardLabel];
@@ -403,7 +425,7 @@ static NSDictionary *codeNameMap;
     REMAirQualityStandardModel *standard;
     UIColor *standardColor;// = [self getColorWithCode:standardCode].uiColor;
     
-    if(standardCode == (NSString *)kChinaStandardCode){
+    if([standardCode isEqualToString: kChinaStandardCode]){
         standard = self.standardChina;
         standardColor = [self getColorWithCode:standardCode].uiColor;//[UIColor colorWithRed:255.0/255.0 green:97.0/255.0 blue:106.0/255.0 alpha:1];
     }
@@ -433,7 +455,7 @@ static NSDictionary *codeNameMap;
 {
     CGFloat fontSize = 14.0, y = self.chartView.hostView.bounds.size.height + 30, x = self.chartView.hostView.hostedGraph.plotAreaFrame.frame.origin.x, width=0.0, height=15.0, indicatorSpace = 18,dotWidth=15, dotSpace=11;
     
-    for(NSString *code in @[kOutdoorCode,kHoneywellCode,kMayAirCode]){
+    for(NSString *code in @[kTagCodeSuffixOutdoor,kTagCodeSuffixHoneywell,kTagCodeSuffixMayAir]){
         NSString *name = codeNameMap[code];
         UIFont *font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:fontSize];
         CGSize size = [name sizeWithFont:font];
@@ -441,7 +463,7 @@ static NSDictionary *codeNameMap;
         x += width == 0 ? width : width + indicatorSpace;
         width = size.width + dotWidth + dotSpace + 5;
         
-        if([seriesCode isEqualToString:(NSString *)code])
+        if([seriesCode isEqualToString:code])
             break;
     }
     
@@ -457,19 +479,19 @@ static NSDictionary *codeNameMap;
 
 -(CPTColor *)getColorWithCode:(NSString *)code
 {
-    if([code isEqualToString:(NSString *)kMayAirCode]){
+    if([code isEqualToString:kTagCodeSuffixMayAir]){
         return [[CPTColor alloc] initWithComponentRed:0.0/255.0 green:163.0/255.0 blue:179.0/255.0 alpha:1];
     }
-    else if([code isEqualToString:(NSString *)kHoneywellCode]){
+    else if([code isEqualToString:kTagCodeSuffixHoneywell]){
         return [[CPTColor alloc] initWithComponentRed:97.0/255.0 green:184.0/255.0 blue:2.0/255.0 alpha:1];
     }
-    else if([code isEqualToString:(NSString *)kOutdoorCode]){
+    else if([code isEqualToString:kTagCodeSuffixOutdoor]){
         return [[CPTColor alloc] initWithComponentRed:106.0/255.0 green:99.0/255.0 blue:74.0/255.0 alpha:1];
     }
-    else if([code isEqualToString:(NSString *)kChinaStandardCode]){
+    else if([code isEqualToString:kChinaStandardCode]){
         return [[CPTColor alloc] initWithComponentRed:58.0/255.0 green:255.0/255.0 blue:168.0/255.0 alpha:0.43];
     }
-    else if([code isEqualToString:(NSString *)kAmericanStandardCode]){
+    else if([code isEqualToString:kAmericanStandardCode]){
         return [[CPTColor alloc] initWithComponentRed:0.0/255.0 green:226.0/255.0 blue:255.0/255.0 alpha:0.39];
     }
     else{

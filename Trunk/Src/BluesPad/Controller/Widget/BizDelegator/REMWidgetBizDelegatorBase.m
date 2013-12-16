@@ -9,6 +9,7 @@
 #import "REMWidgetBizDelegatorBase.h"
 #import "REMWidgetEnergyDelegator.h"
 #import "REMWidgetRankingDelegator.h"
+#import "REMWidgetLabelingDelegator.h"
 
 @implementation REMWidgetBizDelegatorBase
 
@@ -21,7 +22,7 @@
         delegator=[[REMWidgetRankingDelegator alloc]init];
     }
     else if(widgetInfo.contentSyntax.dataStoreType == REMDSEnergyLabeling){
-        
+        delegator=[[REMWidgetLabelingDelegator alloc]init];
     }
     else{
         delegator=[[REMWidgetEnergyDelegator alloc]init];

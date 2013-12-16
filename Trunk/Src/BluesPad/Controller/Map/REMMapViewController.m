@@ -229,6 +229,8 @@
         UIImage *fake = [REMImageHelper imageWithView:self.view];
         self.snapshot = [[UIImageView alloc] initWithImage: fake];
         
+        
+        
         //prepare custom segue parameters
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
         [customSegue prepareSegueWithParameter:REMBuildingSegueZoomParamterMake(NO, self.currentBuildingIndex, [self getDestinationZoomRect:self.currentBuildingIndex], self.view.frame)];

@@ -7,7 +7,15 @@
 //
 
 #import "DCPieSeries.h"
+
+typedef struct _DCPieSlice {
+    CGFloat sliceBegin; // 饼图Slice的起始角度，值域为[0-2)
+    CGFloat sliceCenter; // 饼图Slice的起始角度和终止角度的均值，值域为(0-2)
+    CGFloat sliceEnd; // 饼图Slice的终止角度的均值，值域为(0-2]
+}DCPieSlice;
+
 @interface DCPieSeries()
+@property (nonatomic, strong) NSArray* pieSlices;
 @end
 
 @implementation DCPieSeries
@@ -30,6 +38,27 @@
 
 -(void)didPointHiddenChanged:(DCPieDataPoint *)point {
     _sumVisableValue = 9;
+}
+
+-(NSUInteger)findIndexOfSlide:(CGFloat)angle {
+    angle = 2 - angle;
+    NSUInteger index = 0;
+    for (int i = 0; i < self.pieSlices.count; i++) {
+        if (REMIsNilOrNull(self.pieSlices) || REMIsNilOrNull(self.pieSlices[i])) continue;
+        DCPieSlice slice;
+        [self.pieSlices[i] getValue:&slice];
+        if (slice.sliceEnd > angle) {
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
+
+-(CGFloat)findNearbySliceCenter:(CGFloat)angle {
+    DCPieSlice slice;
+    [self.pieSlices[[self findIndexOfSlide:angle]] getValue:&slice];
+    return slice.sliceCenter;
 }
 
 -(void)updateSumValueAndSlices {

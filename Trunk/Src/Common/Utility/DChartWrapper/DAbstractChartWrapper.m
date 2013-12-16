@@ -20,7 +20,7 @@
     return self;
 }
 -(void)cancelToolTipStatus {
-    
+    _chartStatus = DChartStatusNormal;
 }
 
 -(void)redraw:(REMEnergyViewData *)energyViewData {

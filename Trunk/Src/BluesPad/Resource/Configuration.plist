@@ -2,7 +2,57 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>shouldCleanCache</key>
+	<key>ShouldCleanCache</key>
 	<true/>
+	<key>DataSources</key>
+	<dict>
+		<key>local</key>
+		<dict>
+			<key>schema</key>
+			<string>http</string>
+			<key>host</key>
+			<string>10.177.206.79</string>
+			<key>path</key>
+			<string>/Mobile/</string>
+		</dict>
+		<key>dev</key>
+		<dict>
+			<key>schema</key>
+			<string>http</string>
+			<key>host</key>
+			<string>10.177.0.35</string>
+			<key>path</key>
+			<string>/Mobile/</string>
+		</dict>
+		<key>test</key>
+		<dict>
+			<key>schema</key>
+			<string>http</string>
+			<key>host</key>
+			<string>112.124.56.137</string>
+			<key>path</key>
+			<string>/v1.4.0.22/Mobile/MobileApiHost/</string>
+		</dict>
+		<key>production</key>
+		<dict>
+			<key>schema</key>
+			<string>http</string>
+			<key>host</key>
+			<string>emopmobile.energymost.com</string>
+			<key>path</key>
+			<string>/</string>
+		</dict>
+	</dict>
+	<key>CurrentDataSource</key>
+	<dict>
+		<key>Debug</key>
+		<string>local</string>
+		<key>DailyBuild</key>
+		<string>test</string>
+		<key>InternalRelease</key>
+		<string>test</string>
+		<key>Release</key>
+		<string>production</string>
+	</dict>
 </dict>
 </plist>

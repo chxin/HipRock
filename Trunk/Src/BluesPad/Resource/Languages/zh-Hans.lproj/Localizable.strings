@@ -27,7 +27,9 @@
 "Common_Giveup"="放弃";
 "Common_OK"="好";
 "Common_Quit"="退出";
-
+"Common_WholeYear"="全年"; //1月，2月...12月，全年
+"Common_YearMonthFormat"="yyyy年MM月";
+"Common_WholeYearFormat"="yyyy年全年";
 
 //Admin,prefix: Admin_
 "Admin_UserTitleEEConsultant"="能源工程顾问";
@@ -130,6 +132,8 @@
 "Building_AirQualityHoneywell"="室内新风PM2.5(霍尼)";
 "Building_AirQualityMayair"="室内新风PM2.5(美埃)";
 "Building_AirQualityDailyChart"="室内外PM2.5逐日含量";
+"Building_AirQualityAmericanStandard"="%d %@(PM2.5美国标准)";
+"Building_AirQualityChinaStandard"="%d %@(PM2.5中国标准)";
 
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="下拉返回概览能耗信息";
