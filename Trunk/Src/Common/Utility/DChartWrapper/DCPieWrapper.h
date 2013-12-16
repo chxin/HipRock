@@ -8,8 +8,9 @@
 
 #import "DAbstractChartWrapper.h"
 #import "DCPieChartView.h"
+#import "DCPieChartViewDelegate.h"
 
-@interface DCPieWrapper : DAbstractChartWrapper
+@interface DCPieWrapper : DAbstractChartWrapper<DCPieChartViewDelegate>
 @property (nonatomic, readonly) DCPieChartView* view;
 @property (nonatomic, readonly, weak) REMEnergyViewData* energyViewData;
 @property (nonatomic, assign) REMCalendarType calenderType;

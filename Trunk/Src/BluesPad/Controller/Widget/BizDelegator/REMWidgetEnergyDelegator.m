@@ -49,7 +49,6 @@
 @property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
 
 @property (nonatomic,strong) DAbstractChartWrapper *chartWrapper;
-@property (nonatomic,strong) REMPieChartWrapper *pieWrapper;
 
 @property (nonatomic,strong) NSArray *currentStepList;
 @property (nonatomic,weak) REMTooltipViewBase *tooltipView;
@@ -343,10 +342,6 @@
         [[self.chartWrapper getView] removeFromSuperview];
         self.chartWrapper=nil;
     }
-    if(self.pieWrapper !=nil){
-        [self.pieWrapper.view removeFromSuperview];
-        self.pieWrapper=nil;
-    }
 }
 
 - (NSString *)calendarComponent{
@@ -445,14 +440,14 @@
 }
 
 - (void)reloadChart{
-    if (self.pieWrapper==nil && self.chartWrapper==nil) {
+    if (self.chartWrapper==nil) {
         [self showEnergyChart];
         return;
     }
-    if(self.pieWrapper!=nil){
-        [self.pieWrapper redraw:self.energyData];
-        return;
-    }
+//    if(self.pieWrapper!=nil){
+//        [self.pieWrapper redraw:self.energyData];
+//        return;
+//    }
     
     if([self.chartWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
         DCTrendWrapper *trend=(DCTrendWrapper *)self.chartWrapper;
@@ -492,7 +487,7 @@
 }
 
 - (void) showEnergyChart{
-    if(self.chartWrapper!=nil || self.pieWrapper){
+    if(self.chartWrapper!=nil){
         return;
     }
     
@@ -502,7 +497,6 @@
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
     DAbstractChartWrapper  *widgetWrapper;
-    REMPieChartWrapper *pieWrapper;
     if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[DCLineWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         widgetWrapper.delegate = self;
@@ -517,8 +511,8 @@
 //        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
 //        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypePie) {
-        pieWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-        ((REMPieChartView *)pieWrapper.view).delegate = self;
+        widgetWrapper = [[DCPieWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper.delegate = self;
     } else if (widgetType == REMDiagramTypeRanking) {
         widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         widgetWrapper.delegate = self;
@@ -535,10 +529,6 @@
         }
         [self.chartContainer addSubview:[widgetWrapper getView]];
         self.chartWrapper=widgetWrapper;
-    }
-    else if(pieWrapper!=nil){
-        [self.chartContainer addSubview:pieWrapper.view];
-        self.pieWrapper=pieWrapper;
     }
 
     [self processEnergyDataInnerError:self.energyData];
@@ -1129,15 +1119,7 @@
         return;
     
     [self hideTooltip:^{
-        if(self.widgetInfo.diagramType == REMDiagramTypePie){
-            id chartView = (id)self.pieWrapper.view;
-            if([chartView respondsToSelector:@selector(cancelToolTipStatus)]){
-                [chartView cancelToolTipStatus];
-            }
-        }
-        else{
-            [self.chartWrapper cancelToolTipStatus];
-        }
+        [self.chartWrapper cancelToolTipStatus];
         
         [self.searchLegendViewContainer setHidden:NO];
     }];

@@ -41,10 +41,6 @@
 //ChartView
 #import "REMPieShadowLayer.h"
 
-//ChartWrapper
-#import "REMAbstractChartWrapper.h"
-#import "REMPieChartWrapper.h"
-
 //DataProcessor
 #import "REMChartHeader.h"
 #import "REMChartStyle.h"

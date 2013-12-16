@@ -7,6 +7,9 @@
 //
 
 #import "DCPieWrapper.h"
+@interface DCPieWrapper()
+@property (nonatomic,assign) int focusIndex;
+@end
 
 @implementation DCPieWrapper
 -(DCPieWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*)widgetSyntax style:(REMChartStyle*)style {
@@ -25,18 +28,42 @@
                 p.value = point.dataValue;
             } else {
             }
+            p.color = [REMColor colorByIndex:i].uiColor;
             p.target = seriesData.target;
             [series0Data addObject:p];
         }
         DCPieSeries* series = [[DCPieSeries alloc]initWithEnergyData:series0Data];
         
         _view = [[DCPieChartView alloc]initWithFrame:frame series:series];
+        self.view.delegate = self;
+        self.view.playBeginAnimation = self.style.playBeginAnimation;
         self.view.userInteractionEnabled = self.style.userInteraction;
         self.view.radius = style.pieRadius;
         self.view.radiusForShadow = style.pieShadowRadius;
+        self.focusIndex = INT32_MIN;
     }
     return self;
 }
+
+-(void)pieRotated {
+    if (self.view.focusPointIndex < self.view.series.datas.count && self.view.focusPointIndex != self.focusIndex && self.chartStatus == DChartStatusFocus) {
+        self.focusIndex = self.view.focusPointIndex;
+        DCPieDataPoint* piePoint = self.view.series.datas[self.view.focusPointIndex];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:color:name:direction:)]) {
+            [((id<REMTPieChartDelegate>)self.delegate) highlightPoint:piePoint.energyData color:piePoint.color name:piePoint.target.name direction:self.view.rotateDirection];
+        }
+    }
+}
+
+-(void)touchBegan {
+    self.chartStatus = DChartStatusFocus;
+}
+
+-(void)cancelToolTipStatus {
+    [super cancelToolTipStatus];
+    self.focusIndex = INT32_MIN;
+}
+
 
 -(UIView*)getView {
     return self.view;

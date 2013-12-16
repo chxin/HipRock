@@ -56,6 +56,8 @@
     style.backgroundBandFontColor = [REMColor colorByHexString:@"#3b3b3b"];
     style.backgroundBandFont = [UIFont fontWithName:@(kBuildingFontSCRegular) size:12];
     
+    style.playBeginAnimation = YES;
+    
     return style;
 }
 +(REMChartStyle*)getMinimunStyle {
@@ -100,6 +102,8 @@
     
     style.backgroundBandFontColor = [REMColor colorByHexString:@"#3b3b3b"];
     style.backgroundBandFont = [UIFont fontWithName:@(kBuildingFontSCRegular) size:8];
+    
+    style.playBeginAnimation = NO;
     
     return style;
 }

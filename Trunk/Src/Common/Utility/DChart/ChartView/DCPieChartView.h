@@ -10,6 +10,7 @@
 #import "DCContext.h"
 #import "DCPieDataPoint.h"
 #import "DCPieSeries.h"
+#import "DCPieChartViewDelegate.h"
 
 @interface DCPieChartView : UIView
 
@@ -21,5 +22,13 @@
 @property (nonatomic,assign) CGFloat indicatorAlpha;
 @property (nonatomic,assign) BOOL showIndicator;
 
+@property (nonatomic, assign) BOOL playBeginAnimation;
+@property (nonatomic, weak) id<DCPieChartViewDelegate> delegate;
+
+@property (nonatomic, readonly, assign) NSUInteger focusPointIndex;
+
+@property (nonatomic, readonly, assign) REMDirection rotateDirection;
+
 - (id)initWithFrame:(CGRect)frame series:(DCPieSeries*)series;
+-(void)redraw;
 @end
