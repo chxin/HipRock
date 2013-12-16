@@ -126,6 +126,8 @@
 "Building_AirQualityHoneywell"="室内新风PM2.5(霍尼)";
 "Building_AirQualityMayair"="室内新风PM2.5(美埃)";
 "Building_AirQualityDailyChart"="室内外PM2.5逐日含量";
+"Building_AirQualityAmericanStandard"="%d %@(PM2.5美国标准)";
+"Building_AirQualityChinaStandard"="%d %@(PM2.5中国标准)";
 
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="下拉返回概览能耗信息";

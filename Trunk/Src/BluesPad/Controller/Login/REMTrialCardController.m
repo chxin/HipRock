@@ -97,6 +97,14 @@
     tempUser.spId = 1;
     [REMAppContext setCurrentUser:tempUser];
     
+    //network
+    if([REMNetworkHelper checkIsNoConnect] == YES){
+        [REMAlertHelper alert:REMLocalizedString(kLNLogin_NoNetwork)];
+        [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        return;
+    }
+    
     //so demo user will be created in sp1
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSDemoUserValidate parameter:nil];
     [REMDataAccessor access:store success:^(id data) {
@@ -131,6 +139,7 @@
     } error:^(NSError *error, id response) {
         //[REMAlertHelper alert:@""];
         [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
     }];
 }
 
