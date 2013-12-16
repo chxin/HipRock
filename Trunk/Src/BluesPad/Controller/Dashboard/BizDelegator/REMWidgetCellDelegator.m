@@ -11,6 +11,8 @@
 #import "REMColor.h"
 #import "REMDashboardController.h"
 #import "REMWidgetCollectionViewController.h"
+#import "REMWidgetRankingCellDelegator.h"
+
 
 @implementation REMWidgetCellDelegator
 
@@ -19,6 +21,11 @@
     REMWidgetCellDelegator *delegator;
     if (widgetInfo.contentSyntax.dataStoreType == REMDSEnergyLabeling) {
         delegator = [[REMWidgetLabellingCellDelegator alloc]init];
+    }
+    else if(widgetInfo.contentSyntax.dataStoreType == REMDSEnergyRankingCarbon ||
+            widgetInfo.contentSyntax.dataStoreType == REMDSEnergyRankingEnergy ||
+            widgetInfo.contentSyntax.dataStoreType == REMDSEnergyRankingCost){
+        delegator = [[REMWidgetRankingCellDelegator alloc]init];
     }
     else{
         delegator = [[REMWidgetCellDelegator alloc]init];
@@ -32,11 +39,12 @@
 }
 
 - (NSString *)cellTimeTitle{
-    if([self.widgetInfo.contentSyntax.relativeDate isEqual:[NSNull null]]==NO){
-        return self.widgetInfo.contentSyntax.relativeDateComponent;
+    
+    if (self.searchModel.relativeDateType != REMRelativeTimeRangeTypeNone) {
+        return self.searchModel.relativeDateComponent;
     }
     else{
-        REMTimeRange *range = self.widgetInfo.contentSyntax.timeRanges[0];
+        REMTimeRange *range = self.searchModel.timeRangeArray[0];
         NSString *start= [REMTimeHelper formatTimeFullHour:range.startTime isChangeTo24Hour:NO];
         NSString *end= [REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];
         return [NSString stringWithFormat:NSLocalizedString(@"Dashboard_TimeRange", @""),start,end];//%@ 到 %@
