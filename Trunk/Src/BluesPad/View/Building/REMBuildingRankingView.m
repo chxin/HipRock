@@ -1,61 +1,64 @@
-//
-//  REMBuildingRankingView.m
-//  Blues
-//
-//  Created by tantan on 8/6/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMBuildingRankingView.m
+ * Created      : tantan on 8/6/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMBuildingRankingView.h"
 
 @interface REMBuildingRankingView()
 
-@property (nonatomic,strong) REMNumberLabel *rankingLabel;
 @property (nonatomic,strong) UILabel *totalLabel;
 
 @end
 
 @implementation REMBuildingRankingView
 
-- (id)initWithFrame:(CGRect)frame withData:(REMRankingDataModel *)data withTitle:(NSString *)title andTitleFontSize:(CGFloat)size  withTitleMargin:(CGFloat)margin withLeftMargin:(CGFloat)leftMargin
+- (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if(self)
     {
         self.backgroundColor=[UIColor clearColor];
-        [self initTitle:title withSize:size withLeftMargin:leftMargin];
-        [self initTextLabel:data withSize:size  withTitleMargin:margin withLeftMargin:leftMargin];
+        
+        
     }
     
     return self;
 }
 
+- (void)setData:(REMRankingDataModel *)data{
+    [self initTextLabel:data withSize:self.titleFontSize  withTitleMargin:self.titleMargin withLeftMargin:self.leftMargin];
+}
+
 - (void)initTextLabel:(REMRankingDataModel *)data withSize:(CGFloat)titleSize withTitleMargin:(CGFloat)margin withLeftMargin:(CGFloat)leftMargin
 {
     if(data==nil ||[data isEqual:[NSNull null]]==YES ){
-        [self initEmptyTextLabelWithTitleSize:titleSize withTitleMargin:margin withLeftMargin:leftMargin withOrigFontSize:kBuildingCommodityDetailValueFontSize];
+        [self initEmptyTextLabelWithTitleSize:titleSize withTitleMargin:self.emptyTextMargin withLeftMargin:leftMargin withOrigFontSize:kBuildingCommodityDetailValueFontSize];
         return;
     }
     else{
         if(data.numerator<0){
-            [self initEmptyTextLabelWithTitleSize:titleSize withTitleMargin:margin withLeftMargin:leftMargin withOrigFontSize:kBuildingCommodityDetailValueFontSize];
+            [self initEmptyTextLabelWithTitleSize:titleSize withTitleMargin:self.emptyTextMargin withLeftMargin:leftMargin withOrigFontSize:kBuildingCommodityDetailValueFontSize];
             return;
         }
     }
     
     int marginTop=titleSize+margin;
-    self.rankingLabel = [[REMNumberLabel alloc] initWithFrame:CGRectMake(leftMargin, marginTop, 1024, kBuildingCommodityDetailValueFontSize)];
-    self.rankingLabel.fontSize=@(kBuildingCommodityDetailValueFontSize);
-    self.rankingLabel.textColor=[UIColor whiteColor];
-    self.rankingLabel.backgroundColor=[UIColor clearColor];
-    self.rankingLabel.shadowOffset=CGSizeMake(1, 1);
-    self.rankingLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-    self.rankingLabel.text=[NSString stringWithFormat:@"%d", data.numerator];
-    [self addSubview:self.rankingLabel];
-    
+    REMNumberLabel *rankingLabel = [[REMNumberLabel alloc] initWithFrame:CGRectMake(leftMargin, marginTop, 1024, kBuildingCommodityDetailValueFontSize)];
+    rankingLabel.fontSize=@(kBuildingCommodityDetailValueFontSize);
+    rankingLabel.textColor=[UIColor whiteColor];
+    rankingLabel.backgroundColor=[UIColor clearColor];
+    rankingLabel.shadowOffset=CGSizeMake(1, 1);
+    rankingLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    rankingLabel.text=[NSString stringWithFormat:@"%d", data.numerator];
+    [self addSubview:rankingLabel];
+    self.textLabel=rankingLabel;
     //NSLog(@"font:%@",[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:valueSize]);
     
-    CGSize expectedLabelSize = [self.rankingLabel.text sizeWithFont:[UIFont fontWithName:@(kBuildingFontLight) size:kBuildingCommodityDetailValueFontSize]];
+    CGSize expectedLabelSize = [rankingLabel.text sizeWithFont:[UIFont fontWithName:@(kBuildingFontLight) size:kBuildingCommodityDetailValueFontSize]];
     
     //NSLog(@"valuesize:%f",valueSize);
     self.totalLabel = [[UILabel alloc]initWithFrame:CGRectMake(expectedLabelSize.width+leftMargin, marginTop+expectedLabelSize.height-kBuildingCommodityDetailValueFontSize, 200, kBuildingCommodityDetailValueFontSize)];

@@ -1,13 +1,27 @@
-//
-//  REMUser.h
-//  Blues
-//
-//  Created by 张 锋 on 7/29/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMUser.h
+ * Created      : 张 锋 on 7/29/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import <Foundation/Foundation.h>
 #import "REMJSONObject.h"
+
+typedef enum _REMUserTitleType : NSUInteger {
+    REMUserTitleEEConsultant = 0,
+    REMUserTitleTechnician = 1,
+    REMUserTitleCustomerAdmin = 2,
+    REMUserTitlePlatformAdmin=3,
+    REMUserTitleEnergyManager=4,
+    REMUserTitleEnergyEngineer=5,
+    REMUserTitleDepartmentManager=6,
+    REMUserTitleCEO=7,
+    REMUserTitleBusinessPersonnel=8,
+    REMUserTitleSaleman=9,
+    REMUserTitleServiceProviderAdmin=10
+} REMUserTitleType;
 
 @interface REMUserModel : REMJSONObject
 

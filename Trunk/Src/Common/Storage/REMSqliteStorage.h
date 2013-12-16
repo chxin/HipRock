@@ -1,10 +1,10 @@
-//
-//  REMSqliteStorage.h
-//  Blues
-//
-//  Created by Xu Zilong on 7/1/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMSqliteStorage.h
+ * Created      : Xu Zilong on 7/1/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>

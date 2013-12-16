@@ -1,10 +1,10 @@
-//
-//  REMIndicatorButton.m
-//  Blues
-//
-//  Created by 张 锋 on 8/5/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMIndicatorButton.m
+ * Created      : 张 锋 on 8/5/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMIndicatorButton.h"
 
@@ -47,9 +47,6 @@
     
     [self.indicator startAnimating];
     
-    [self setEnabled:NO];
-    [self setTitleForAllStatus:self.loadingText];
-    
     self.indicatorStatus = YES;
 }
 
@@ -62,18 +59,7 @@
         self.indicator = nil;
     }
     
-    [self setEnabled:YES];
-    [self setTitleForAllStatus:self.backupTitle];
-    
     self.indicatorStatus = NO;
-}
-
--(void)setTitleForAllStatus:(NSString *)title
-{
-    self.backupTitle = self.titleLabel.text;
-    
-    [self setTitle:title forState:UIControlStateNormal];
-    [self setTitle:title forState:UIControlStateHighlighted];
 }
 
 @end

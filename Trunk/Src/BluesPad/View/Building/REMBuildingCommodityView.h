@@ -1,34 +1,12 @@
-//
-//  REMBuildingCommodityView.h
-//  Blues
-//
-//  Created by tantan on 8/6/13.
-//
-//
-
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMBuildingCommodityView.h
+ * Date Created : tantan on 11/21/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+--------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
-#import "REMBuildingTitleView.h"
-#import "REMBuildingTitleLabelView.h"
-#import "REMNumberLabel.h"
-#import "REMCommodityUsageModel.h"
-#import "REMBuildingConstants.h"
-#import "REMBuildingRankingView.h"
-#import "REMBuildingChartContainerView.h"
-#import "REMBuildingAverageChartHandler.h"
-#import "REMBuildingTrendChartHandler.h"
 
-@interface REMBuildingCommodityView : UIView//UIScrollView
-
-@property (nonatomic,strong) NSArray *chartViewArray;
-
-- (id)initWithFrame:(CGRect)frame withCommodityInfo:(REMCommodityUsageModel *)commodityInfo;
-
-- (void)addSplitBar:(UIView *)view;
-
-- (void)replaceChart:(BOOL)showReal;
-
--(void)prepareShare;
-
-- (void)requireChartDataWithBuildingId:(NSNumber *)buildingId withCommodityId:(NSNumber *)commodityId complete:(void(^)(BOOL))callback;
+@interface REMBuildingCommodityView : UIView
 
 @end

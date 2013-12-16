@@ -1,10 +1,10 @@
-//
-//  REMEnergyConstants.m
-//  Blues
-//
-//  Created by 谭 坦 on 7/18/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMEnergyConstants.m
+ * Created      : 谭 坦 on 7/18/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMEnergyConstants.h"
 

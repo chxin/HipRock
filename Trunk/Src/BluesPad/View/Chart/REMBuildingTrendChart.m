@@ -1,14 +1,15 @@
-//
-//  REMBuildingTrendChart.m
-//  Blues
-//
-//  Created by 张 锋 on 8/9/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMBuildingTrendChart.m
+ * Created      : 张 锋 on 8/9/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMBuildingTrendChart.h"
 #import "REMToggleButtonGroup.h"
-#import "REMBuildingConstants.h"
+#import "REMChartHeader.h"
+#import "REMLocalizeKeys.h"
 
 @implementation REMBuildingTrendChart
 
@@ -38,7 +39,7 @@
         
         [self addSubview:self.hostView];
         
-        NSString *noDataText = NSLocalizedString(@"BuildingChart_NoData", @"");
+        NSString *noDataText = REMLocalizedString(kLNBuildingChart_NoData);
         CGFloat fontSize = 36;
         CGSize labelSize = [noDataText sizeWithFont:[UIFont systemFontOfSize:fontSize]];
         self.noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];
@@ -50,7 +51,7 @@
         [self addSubview:self.noDataLabel];
     }
     
-    self.legendView = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height - kBuildingTrendChartLegendHeight + 23, frame.size.width, kBuildingTrendChartLegendHeight)];
+    self.legendView = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height - kBuildingTrendChartLegendHeight + 10, frame.size.width, kBuildingTrendChartLegendHeight)];
     [self addSubview: self.legendView];
     return self;
 }

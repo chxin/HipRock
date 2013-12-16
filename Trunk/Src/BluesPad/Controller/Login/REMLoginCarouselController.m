@@ -1,155 +1,226 @@
-//
-//  REMPrefaceViewController.m
-//  Blues
-//
-//  Created by 张 锋 on 7/25/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMPrefaceViewController.m
+ * Created      : 张 锋 on 7/25/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import <QuartzCore/QuartzCore.h>
 #import "REMLoginCarouselController.h"
 #import "REMAlertHelper.h"
-#import "REMLoginPageController.h"
+#import "REMLoginCardController.h"
+#import "REMImages.h"
+#import "REMStoryboardDefinitions.h"
+#import "REMLoginCard.h"
+#import "REMTrialCardController.h"
+#import "REMLoginTitledCard.h"
+#import "REMLoginCustomerTableViewController.h"
 
 @interface REMLoginCarouselController ()
 
-@property (nonatomic,strong) REMLoginPageController *loginPageController;
+
+@property (weak, nonatomic) UIScrollView *scrollView;
+@property (weak, nonatomic) UIPageControl *pageControl;
+@property (weak, nonatomic) UIButton *skipToLoginButton;
+@property (weak, nonatomic) UIButton *skipToTrialButton;
 
 @end
 
 @implementation REMLoginCarouselController
 
-const NSInteger kSlideImageCount = 3;
-const NSInteger kScreenWidth = 1024;
-const NSInteger kSubViewWidth = 500;
-const NSInteger kSubViewHeight = 350;
-const NSInteger kSubViewDistance = kScreenWidth - kSubViewWidth;
-const NSInteger kImagePaddingTop = 84;
-const CGFloat kBackgroundLeftShadowOffset = 10;
-const CGFloat kBackgroundRightShadownOffset = kBackgroundLeftShadowOffset;
-const CGFloat kBackgroundTopShadowOffset = 2;
-const CGFloat kBackgroundBottomShadowOffset = 18;
-const CGFloat kBackgroundBorderThickness = 6;
-const CGFloat kBackgroundHorizontalShadownWidth = kBackgroundLeftShadowOffset + kBackgroundRightShadownOffset;
-const CGFloat kBackgroundVerticalShadowWidth = kBackgroundTopShadowOffset + kBackgroundBottomShadowOffset;
-const CGFloat kBackgroundLeftContentOffset = kBackgroundLeftShadowOffset + kBackgroundBorderThickness;
-const CGFloat kBackgroundRightContentOffset = kBackgroundRightShadownOffset + kBackgroundBorderThickness;
-const CGFloat kBackgroundTopContentOffset = kBackgroundTopShadowOffset + kBackgroundBorderThickness;
-const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + kBackgroundBorderThickness;
+static const int kCardCount = 5;
+static const int kLoginCardIndex = kCardCount - 1;
+static const int kTrialCardIndex = kCardCount - 2;
 
-
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (void)loadView
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    //[super loadView];
+    self.view = [[UIView alloc] initWithFrame: kDMDefaultViewFrame];
+    
+    if(self){
+        //load scroll view
+        [self loadScrollView];
+        
+        //load jump button
+        [self loadSkipButtons];
     }
-    return self;
+}
+
+-(void)loadScrollView
+{
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:kDMDefaultViewFrame];
+    scrollView.contentSize = CGSizeMake(kCardCount * kDMScreenWidth, scrollView.frame.size.height);
+    scrollView.pagingEnabled = YES;
+    scrollView.bounces = NO;
+    scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.showsVerticalScrollIndicator = NO;
+    
+    [self.view addSubview:scrollView];
+    self.scrollView = scrollView;
+    
+    //load paging control
+    UIPageControl *pageControl = [[UIPageControl alloc] init];
+    pageControl.center = CGPointMake(kDMScreenWidth/2, kDMLogin_PageControlTopOffset);
+    pageControl.numberOfPages = kCardCount;
+    pageControl.currentPage = 0;
+    pageControl.autoresizingMask = UIViewAutoresizingNone;
+    pageControl.backgroundColor = [UIColor redColor];
+    pageControl.alpha = 0;
+    [pageControl addTarget:self action:@selector(pageChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    [self.view addSubview:pageControl];
+    self.pageControl = pageControl;
+}
+
+-(void)loadSkipButtons
+{
+    UIEdgeInsets imageInsets = UIEdgeInsetsMake(5.0f, 12.0f, 18.0f, 12.0f);
+    
+    
+    UIButton *skipToTrialButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    skipToTrialButton.frame = CGRectMake((kDMScreenWidth-2*kDMLogin_SkipToLoginButtonWidth - kDMLogin_SkipToLoginButtonLeftOffset)/2, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
+    skipToTrialButton.alpha = 0;
+    skipToTrialButton.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_SkipToTrialButtonFontSize];
+    
+    [skipToTrialButton setTitleColor:[REMColor colorByHexString:kDMLogin_SkipToTrialButtonFontColor] forState:UIControlStateNormal];
+    [skipToTrialButton setTitle:REMLocalizedString(@"Login_SkipToTrialButtonText") forState:UIControlStateNormal];
+    [skipToTrialButton setBackgroundImage:[REMIMG_JumpTrial resizableImageWithCapInsets:imageInsets] forState:UIControlStateNormal];
+    [skipToTrialButton setBackgroundImage:[REMIMG_JumpTrial_Pressed resizableImageWithCapInsets:imageInsets] forState:UIControlStateHighlighted];
+    [skipToTrialButton addTarget:self action:@selector(jumpTrialButtonTouchDown:) forControlEvents:UIControlEventTouchUpInside];
+    skipToTrialButton.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+    skipToTrialButton.titleEdgeInsets = UIEdgeInsetsMake(kDMLogin_SkipToTrialButtonTextTopOffset, 0, 0, 0);
+    
+    
+    
+    
+    UIButton *skipToLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    skipToLoginButton.frame = CGRectMake(skipToTrialButton.frame.origin.x + kDMLogin_SkipToLoginButtonWidth + kDMLogin_SkipToLoginButtonLeftOffset, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
+    skipToLoginButton.alpha = 0;
+    skipToLoginButton.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_SkipToLoginButtonFontSize];
+    
+    [skipToLoginButton setTitleColor:[REMColor colorByHexString:kDMLogin_SkipToLoginButtonFontColor] forState:UIControlStateNormal];
+    [skipToLoginButton setTitle:REMLocalizedString(@"Login_SkipToLoginButtonText") forState:UIControlStateNormal];
+    [skipToLoginButton setBackgroundImage:[REMIMG_JumpLogin resizableImageWithCapInsets:imageInsets] forState:UIControlStateNormal];
+    [skipToLoginButton setBackgroundImage:[REMIMG_JumpLogin_Pressed resizableImageWithCapInsets:imageInsets] forState:UIControlStateHighlighted];
+    [skipToLoginButton addTarget:self action:@selector(jumpLoginButtonTouchDown:) forControlEvents:UIControlEventTouchUpInside];
+    skipToLoginButton.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+    skipToLoginButton.titleEdgeInsets = UIEdgeInsetsMake(kDMLogin_SkipToLoginButtonTextTopOffset, 0, 0, 0);
+
+    
+    [self.view addSubview:skipToLoginButton];
+    self.skipToLoginButton = skipToLoginButton;
+    
+    [self.view addSubview:skipToTrialButton];
+    self.skipToTrialButton = skipToTrialButton;
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    
     self.navigationController.navigationBarHidden = YES;
     
-    self.loginPageController = (REMLoginPageController *)[self.storyboard instantiateViewControllerWithIdentifier:@"loginPage"];
-    self.loginPageController.loginCarouselController = self;
+    self.scrollView.delegate = self;
+    self.scrollView.contentOffset = CGPointMake((kCardCount) * kDMScreenWidth, 0);
 
-    [self initialize];
-    [self stylize];
+    [self loadCards];
 }
 
-- (void)initialize
+- (void)loadCards
 {
-    [self.scrollView setDelegate:self];
-    self.scrollView.frame = CGRectMake((kScreenWidth-kSubViewWidth+kSubViewDistance)/2, 50, kSubViewWidth+kSubViewDistance, kSubViewHeight);
-    
-    NSInteger viewOffset = kSubViewDistance/2;
-    
-    for(int i=0;i<kSlideImageCount + 1;i++)
-    {
-        UIView *backgroundView = [self makeBackgroundView:viewOffset];
+    for (int i=0; i<kCardCount; i++) {
         
-        UIView *slideView = i<kSlideImageCount?[self makeImageView:i]:self.loginPageController.view;
+        UIView *card = nil;
+        if(i == kLoginCardIndex){
+            card = [self renderLoginCard];
+        }
+        else if(i == kTrialCardIndex){
+            card = [self renderTrialCard];
+        }
+        else{
+            UIView *content = [self renderImageCard:i];
+            card = [[REMLoginCard alloc] initWithContentView:content];
+        }
         
-        CGRect viewFrame = CGRectMake(kBackgroundLeftContentOffset, kBackgroundTopContentOffset, kSubViewWidth, kSubViewHeight);
-        [slideView setFrame:viewFrame];
+        card.frame = CGRectMake(kDMScreenWidth * i, card.frame.origin.y, card.frame.size.width, card.frame.size.height);
         
-        [backgroundView addSubview:slideView];
-        backgroundView.userInteractionEnabled = YES;
-        
-        [self.scrollView addSubview:backgroundView];
-        
-        
-        
-        viewOffset += kSubViewWidth + kSubViewDistance;
+        [self.scrollView addSubview:card];
     }
-    
-    self.pageControl.currentPage = 0;
-    self.pageControl.numberOfPages = self.scrollView.subviews.count;
-    
-    int viewCount = self.scrollView.subviews.count;
-    int contentWidth = viewCount*kScreenWidth;
-    
-    self.scrollView.contentSize = CGSizeMake(contentWidth, self.scrollView.bounds.size.height);
-    self.scrollView.contentOffset = CGPointMake(viewOffset-kSubViewDistance/2, 0);
-    
-//    if(self.showAnimation == YES){
-//        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(initializationCarousel) userInfo:nil repeats:NO];
-//    }
 }
 
-- (void)stylize
-{
-    [self styleJumpLoginButton];
-}
 
--(UIView *)makeBackgroundView:(CGFloat)offset
+-(UIView *)renderImageCard:(int)index
 {
-    UIImage *backgroundImage = [[UIImage imageNamed:@"SlidePageBackground.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(9,21,26,21)];
-    
-    
-    CGRect backgroundFrame = CGRectMake(offset-kBackgroundLeftContentOffset, kImagePaddingTop+kBackgroundTopContentOffset, kSubViewWidth+kBackgroundLeftContentOffset + kBackgroundRightContentOffset, kSubViewHeight+kBackgroundTopContentOffset + kBackgroundBottomContentOffset);
-    
-    UIImageView *backgroundView = [[UIImageView alloc] initWithFrame:backgroundFrame];
-    [backgroundView setImage:backgroundImage];
-    
-    return backgroundView;
-}
-
--(UIView *)makeImageView:(int)index
-{
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Propaganda_%d.jpg", index+1]]];
+    NSString *imageName = [NSString stringWithFormat: @"Propaganda_%d", index+1];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:REMLoadImageResource(imageName, @"jpg")];
     imageView.contentMode = UIViewContentModeScaleToFill;
-    
     
     return imageView;
 }
 
-- (void)initializationCarousel
+-(UIView *)renderLoginCard
 {
-    CGRect rect = CGRectMake(0, 0, kSubViewWidth+kSubViewDistance, kSubViewHeight);
+    REMLoginCardController *loginPageController = [[REMLoginCardController alloc] init];
     
-    [UIView animateWithDuration:1.5 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        [self.scrollView scrollRectToVisible:rect animated:NO];
-    } completion:nil];
+    [self addChildViewController:loginPageController];
+    self.loginCardController = loginPageController;
+    self.loginCardController.loginCarouselController = self;
+    
+    return loginPageController.view;
+}
+
+-(UIView *)renderTrialCard
+{
+    REMTrialCardController *trialController = [[REMTrialCardController alloc] init];
+    trialController.loginCarouselController = self;
+    
+    [self addChildViewController:trialController];
+    self.trialCardController = trialController;
+    
+    return trialController.view;
+}
+
+-(void)playCarousel:(BOOL)isAnimated
+{
+    if(isAnimated){
+        [UIView animateWithDuration:0.3 delay:0.8 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.skipToLoginButton.alpha = 1;
+            self.skipToTrialButton.alpha = 1;
+            self.pageControl.alpha = 1;
+        } completion:nil];
+        [UIView animateWithDuration:1.1 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            [self.scrollView scrollRectToVisible:kDMDefaultViewFrame animated:NO];
+        } completion:nil];
+    }
+    else{
+        self.skipToLoginButton.alpha = 1;
+        self.skipToTrialButton.alpha = 1;
+        self.pageControl.alpha = 1;
+        
+        [self.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        [self.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        
+        [self showPage:kLoginCardIndex withEaseAnimation:NO];
+    }
 }
 
 
-- (IBAction)pageChanged:(id)sender {
+
+- (void)pageChanged:(id)sender {
     UIPageControl *pager = (UIPageControl *)sender;
     [self showPage:pager.currentPage withEaseAnimation:NO];
 }
 
-- (IBAction)jumpLoginButtonTouchDown:(id)sender {
-    [self showLoginPage];
+- (void)jumpLoginButtonTouchDown:(id)sender {
+    [self showLoginCard];
 }
 
--(void)showLoginPage
+-(void)jumpTrialButtonTouchDown:(id)sender{
+    [self showPage:kTrialCardIndex withEaseAnimation:YES];
+}
+
+- (void)showLoginCard
 {
-    [self showPage:self.scrollView.subviews.count-1 withEaseAnimation:YES];
+    [self showPage:kLoginCardIndex withEaseAnimation:YES];
 }
 
 - (void)showPage:(int) page withEaseAnimation:(BOOL)ease
@@ -157,12 +228,13 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
     if(page<0 || page>=self.scrollView.subviews.count)
         return;
     
-    int offset = (kSubViewWidth + kSubViewDistance) * page;
+    int offset = kDMScreenWidth * page;
     
     CGRect visiableZone = self.scrollView.bounds;
     visiableZone.origin = CGPointMake(offset, self.scrollView.contentOffset.y);
     
     if(ease == YES){
+        //[UIView animateWithDuration:(0.3 * ABS(self.pageControl.currentPage - page)) delay:0 options:
         [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [self.scrollView scrollRectToVisible:visiableZone animated:NO];
         } completion:nil];
@@ -172,29 +244,24 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
     }
 }
 
-- (void)styleJumpLoginButton
-{
-    //UIEdgeInsetsMake(top, left, bottom, right);
-    UIEdgeInsets imageInsets = UIEdgeInsetsMake(0, 12.0, 0, 12.0);
-    
-    UIImage *normalStateImage = [[UIImage imageNamed:@"JumpLogin-Normal.png"] resizableImageWithCapInsets:imageInsets];
-    UIImage *pressedStateImage = [[UIImage imageNamed:@"JumpLogin-Pressed.png"] resizableImageWithCapInsets:imageInsets];
-    
-    [self.jumpLoginButton setBackgroundImage:normalStateImage forState:UIControlStateNormal];
-    [self.jumpLoginButton setBackgroundImage:pressedStateImage forState:UIControlStateHighlighted];
-    
-    
-    
-    //[self.jumpLoginButton setBackgroundColor:[UIColor redColor]];
-    
-//    self.jumpLoginButton set
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)presentCustomerSelectionView
+{
+    REMLoginCustomerTableViewController *customerController = [[REMLoginCustomerTableViewController alloc] init];
+    customerController.loginCardController = self.loginCardController;
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:customerController];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    [self presentViewController:navController animated:YES completion:nil];
+}
+
 
 #pragma mark - scroll view delegate
 
@@ -205,10 +272,18 @@ const CGFloat kBackgroundBottomContentOffset = kBackgroundBottomShadowOffset + k
     //NSLog(@"current page: %d",page);
 
     [self.pageControl setCurrentPage:page];
-    if(page == self.pageControl.numberOfPages-1)
-        [self.jumpLoginButton setEnabled:NO];
-    if(page==0 || page == self.pageControl.numberOfPages-2)
-        [self.jumpLoginButton setEnabled:YES];
+    
+    [self.skipToLoginButton setEnabled:YES];
+    [self.skipToTrialButton setEnabled:YES];
+    
+    if(page == kLoginCardIndex){
+        [self.skipToLoginButton setEnabled:NO];
+        [self.skipToTrialButton setEnabled:YES];
+    }
+    if(page == kTrialCardIndex){
+        [self.skipToTrialButton setEnabled:NO];
+        [self.skipToLoginButton setEnabled:YES];
+    }
 }
 
 @end

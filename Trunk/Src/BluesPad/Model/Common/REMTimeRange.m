@@ -1,10 +1,10 @@
-//
-//  REMTimeRange.m
-//  Blues
-//
-//  Created by TanTan on 7/11/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMTimeRange.m
+ * Created      : TanTan on 7/11/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMTimeRange.h"
 
@@ -56,6 +56,24 @@
     
     }
     return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.startTime forKey:@"StartTime"];
+    [aCoder encodeObject:self.endTime forKey:@"EndTime"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    NSDate *start=[aDecoder decodeObjectForKey:@"StartTime"];
+    NSDate *end=[aDecoder decodeObjectForKey:@"EndTime"];
+    return [self initWithStartTime:start EndTime:end];
+}
+
+- (id)copyWithZone:(NSZone *)zone{
+    return [NSKeyedUnarchiver unarchiveObjectWithData:
+     [NSKeyedArchiver archivedDataWithRootObject:self]];
 }
 
 -(NSString *)description

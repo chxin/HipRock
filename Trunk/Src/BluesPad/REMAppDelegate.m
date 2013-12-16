@@ -1,18 +1,23 @@
-//
-//  REMAppDelegate.m
-//  BluesPad
-//
-//  Created by zhangfeng on 6/26/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMAppDelegate.m
+ * Created      : zhangfeng on 6/26/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMAppDelegate.h"
 #import "REMLog.h"
 #import "REMStorage.h"
 #import "REMApplicationInfo.h"
 #import "WeiboSDK.h"
+#import <GoogleMaps/GoogleMaps.h>
 
 //comment
+
+#define kWeiboAppKey @"216981675"
+#define kWeiboAppSecret @"6e25a0619b4431091ce0b663f4c479c8"
+#define kGoogleMapsKey @"AIzaSyAQRlAzROZjk_Z_J50nDGeytcnDUp57czw"
 
 @implementation REMAppDelegate
 
@@ -26,15 +31,38 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    // Log init
     [REMLog bind];
     
+    // App info init
     [REMApplicationInfo initApplicationInfo];
     
-    [REMStorage clearSessionStorage];
-    [REMStorage clearOnApplicationActive];
+    //[REMStorage clearSessionStorage];
     
-    Weibo *weibo = [[Weibo alloc] initWithAppKey:@"216981675" withAppSecret:@"6e25a0619b4431091ce0b663f4c479c8"];
+    // Weibo app key init
+    Weibo *weibo = [[Weibo alloc] initWithAppKey:kWeiboAppKey withAppSecret:kWeiboAppSecret];
     [Weibo setWeibo:weibo];
+    
+    // Google key init
+    [GMSServices provideAPIKey:kGoogleMapsKey];
+    
+#ifndef DEBUG
+    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Configuration" ofType:@"plist"];
+    
+    // Read from document directory
+    NSMutableDictionary *settingsItem = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+    
+    BOOL shouldCleanCache=(BOOL)[settingsItem[@"shouldCleanCache"] boolValue];
+    
+    if (shouldCleanCache==YES) {
+        NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSFileManager *fileManager=[NSFileManager defaultManager];
+        
+    }
+    
+#endif
     
     return YES;
 }
@@ -52,8 +80,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [REMStorage clearSessionStorage];
-    [REMStorage clearOnApplicationActive];
+    //[REMStorage clearOnApplicationActive];
     
 }
 
@@ -70,6 +97,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
+    REMLogWarn(@"REM memory warning..");
 }
 
 @end

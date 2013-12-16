@@ -1,62 +1,71 @@
-//
-//  REMServiceMeta.m
-//  Blues
-//
-//  Created by 张 锋 on 8/13/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMServiceMeta.m
+ * Created      : 张 锋 on 8/13/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMServiceMeta.h"
 
 @implementation REMServiceMeta
 
+//v0.4dev branch checkin
 
-#ifdef DEBUG
+#if defined(DEBUG)
 //const static NSString *SVC_BASE_HOST = @"10.177.206.79";
 //const static NSString *SVC_BASE_SCHEMA = @"http";
 //const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
+
+//const static NSString *SVC_BASE_HOST = @"10.177.122.189";
+//const static NSString *SVC_BASE_SCHEMA = @"http";
+//const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
+//
+//const static NSString *SVC_BASE_HOST = @"10.177.0.35";
+//const static NSString *SVC_BASE_SCHEMA = @"http";
+//const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
+
+const static NSString *SVC_BASE_HOST = @"112.124.56.137";
+const static NSString *SVC_BASE_SCHEMA = @"http";
+const static NSString *SVC_BASE_SUFFIX = @"/v1.4.0.21/Mobile/MobileApiHost/";
+
+//const static NSString *SVC_BASE_HOST = @"admin.energy-here.com";
+//const static NSString *SVC_BASE_SCHEMA = @"http";
+//const static NSString *SVC_BASE_SUFFIX = @"/MobileApiHost/";
+
+//const static NSString *SVC_BASE_HOST = @"emopmobile.energymost.com";
+//const static NSString *SVC_BASE_SCHEMA = @"http";
+//const static NSString *SVC_BASE_SUFFIX = @"/";
+
+#elif defined(DailyBuild)
+const static NSString *SVC_BASE_HOST = @"112.124.56.137";
+const static NSString *SVC_BASE_SCHEMA = @"http";
+const static NSString *SVC_BASE_SUFFIX = @"/v1.4.0.21/Mobile/MobileApiHost/";
+
+//const static NSString *SVC_BASE_HOST = @"emopmobile.energymost.com";
+//const static NSString *SVC_BASE_SCHEMA = @"http";
+//const static NSString *SVC_BASE_SUFFIX = @"/";
 
 //const static NSString *SVC_BASE_HOST = @"10.177.0.35";
 //const static NSString *SVC_BASE_SCHEMA = @"http";
 //const static NSString *SVC_BASE_SUFFIX = @"/Mobile/";
 
-//const static NSString *SVC_BASE_HOST = @"112.124.56.137";
-//const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/v1.3.0.24/MobileApiHost/";
-
-const static NSString *SVC_BASE_HOST = @"admin.energy-here.com";
+#elif defined(InternalRelease)
+const static NSString *SVC_BASE_HOST = @"112.124.56.137";
 const static NSString *SVC_BASE_SCHEMA = @"http";
-const static NSString *SVC_BASE_SUFFIX = @"/MobileApiHost_v1.3.0.23/";
-#endif
+const static NSString *SVC_BASE_SUFFIX = @"/v1.4.0.21/Mobile/MobileApiHost/";
 
-#ifdef DailyBuild
-//const static NSString *SVC_BASE_HOST = @"112.124.56.137";
+//const static NSString *SVC_BASE_HOST = @"admin.energy-here.com";
 //const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/v1.3.0.24/MobileApiHost/";
-
-const static NSString *SVC_BASE_HOST = @"admin.energy-here.com";
-const static NSString *SVC_BASE_SCHEMA = @"http";
-const static NSString *SVC_BASE_SUFFIX = @"/MobileApiHost_v1.3.0.23/";
-#endif
-
-#ifdef InternalRelease
-const static NSString *SVC_BASE_HOST = @"admin.energy-here.com";
-const static NSString *SVC_BASE_SCHEMA = @"http";
-const static NSString *SVC_BASE_SUFFIX = @"/MobileApiHost_v1.3.0.23/";
-
-//const static NSString *SVC_BASE_HOST = @"223.4.20.20";
+//const static NSString *SVC_BASE_SUFFIX = @"/MobileApiHost/";
+//const static NSString *SVC_BASE_HOST = @"emopmobile.energymost.com";
 //const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/v1.3.0.24/MobileApiHost/";
-#endif
+//const static NSString *SVC_BASE_SUFFIX = @"/";
 
-#ifdef Release
-const static NSString *SVC_BASE_HOST = @"admin.energy-here.com";
+#else
+const static NSString *SVC_BASE_HOST = @"emopmobile.energymost.com";
 const static NSString *SVC_BASE_SCHEMA = @"http";
-const static NSString *SVC_BASE_SUFFIX = @"/MobileApiHost_v1.3.0.23/";
-
-//const static NSString *SVC_BASE_HOST = @"223.4.20.20";
-//const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/v1.3.0.24/MobileApiHost/";
+const static NSString *SVC_BASE_SUFFIX = @"/";
 #endif
 
 

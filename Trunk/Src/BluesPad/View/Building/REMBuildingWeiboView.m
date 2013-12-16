@@ -1,10 +1,10 @@
-//
-//  REMBuildingWeiboView.m
-//  Blues
-//
-//  Created by Zilong-Oscar.Xu on 9/4/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMBuildingWeiboView.m
+ * Created      : Zilong-Oscar.Xu on 9/4/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMBuildingWeiboView.h"
 #import "REMColor.h"
@@ -70,7 +70,7 @@ const NSInteger kWeiboMaxLength = 140;
     buttonTextSize = 16;
     titleTextSize = 16;
     inputTextSize = 16;
-        
+    
     weiboContentView = [[UIView alloc]initWithFrame:CGRectMake((self.frame.size.width - kWeiboWindowWidth) / 2, (self.frame.size.height - kWeiboWindowHeight) / 2, kWeiboWindowWidth, kWeiboWindowHeight)];
     weiboContentView.layer.cornerRadius = 5;
     weiboContentView.layer.masksToBounds = YES;
@@ -79,7 +79,7 @@ const NSInteger kWeiboMaxLength = 140;
     UIView* topToolbar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kWeiboWindowWidth, kWeiboToolbarHeight)];
     topToolbar.backgroundColor = mainBackgroundColor;
     UILabel* toolbarLabel = [[UILabel alloc]initWithFrame:topToolbar.frame];
-    [toolbarLabel setText:@"新浪微博"];
+    [toolbarLabel setText:NSLocalizedString(@"Weibo_WindowTitle",@"")];
     toolbarLabel.textAlignment = NSTextAlignmentCenter;
     toolbarLabel.backgroundColor = [UIColor clearColor];
     [toolbarLabel setTextColor:[UIColor blackColor]];
@@ -92,13 +92,13 @@ const NSInteger kWeiboMaxLength = 140;
     cancelBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:buttonTextSize];
     cancelBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
     [cancelBtn setTitleColor:buttonEnableTextColor forState:UIControlStateNormal];
-    [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelBtn setTitle:NSLocalizedString(@"Weibo_CancelButtonText", @"") forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(cancelClicked:) forControlEvents:UIControlEventTouchUpInside];
     [sendBtn setFrame:CGRectMake(kWeiboWindowWidth - kWeiboButtonWidth - kWeiboButtonMargin, 0, kWeiboButtonWidth, kWeiboToolbarHeight)];
     sendBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:buttonTextSize];
     sendBtn.titleLabel.textAlignment = NSTextAlignmentRight;
     [sendBtn setTitleColor:buttonEnableTextColor forState:UIControlStateNormal];
-    [sendBtn setTitle:@"发布" forState:UIControlStateNormal];
+    [sendBtn setTitle:NSLocalizedString(@"Weibo_SendButtonText", @"") forState:UIControlStateNormal];
     [sendBtn addTarget:self action:@selector(sendClicked:) forControlEvents:UIControlEventTouchUpInside];
     [topToolbar addSubview:cancelBtn];
     [topToolbar addSubview:sendBtn];
@@ -204,7 +204,7 @@ const NSInteger kWeiboMaxLength = 140;
                 [self sendWeibo];
             }
             else {
-                message = [NSString stringWithFormat:@"微博账户绑定失败: %@", error];
+                message = [NSString stringWithFormat:NSLocalizedString(@"Weibo_AccountBindingFail", @""), error];
                 [REMAlertHelper alert:message];
             }
         }];
@@ -214,27 +214,28 @@ const NSInteger kWeiboMaxLength = 140;
 }
 
 -(void)sendWeibo {
-//    [UIView beginAnimations:@"move" context:nil];
-//    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//    [UIView setAnimationDuration:0.4f];
-//    self.view.superview.bounds = CGRectMake(0, -100, kWeiboWindowWidth, kWeiboWindowHeight);
-//    [self.view.superview.layer setShadowOffset:CGSizeMake(0, 100)];
-//    [UIView commitAnimations];
-
-    [REMStatusBar showStatusMessage:@"新浪微博发送中…" autoHide:NO];
+    //    [UIView beginAnimations:@"move" context:nil];
+    //    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    //    [UIView setAnimationDuration:0.4f];
+    //    self.view.superview.bounds = CGRectMake(0, -100, kWeiboWindowWidth, kWeiboWindowHeight);
+    //    [self.view.superview.layer setShadowOffset:CGSizeMake(0, 100)];
+    //    [UIView commitAnimations];
+    
+    [REMStatusBar showStatusMessage:NSLocalizedString(@"Weibo_IsSending", @"") autoHide:NO];
     [Weibo.weibo newStatus:textView.text pic:UIImagePNGRepresentation(self.weiboImage) completed:^(Status *status, NSError *error) {
         NSString *message = nil;
         if (error) {
             message = [NSString stringWithFormat:@"failed to post:%@", error];
             NSLog(@"%@", message);
-            [REMStatusBar showStatusMessage:@"新浪微博发送失败"];
+            [REMStatusBar showStatusMessage:NSLocalizedString(@"Weibo_SentFail", @"")];
         }
         else {
-            [REMStatusBar showStatusMessage:@"新浪微博发送成功"];
+            [REMStatusBar showStatusMessage:NSLocalizedString(@"Weibo_SentSuccess", @"")];
         }
     }];
     [self close:YES];
 }
+
 
 - (int)convertToInt:(NSString*)strtemp {
     int strlength = 0;

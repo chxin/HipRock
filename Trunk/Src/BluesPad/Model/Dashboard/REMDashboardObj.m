@@ -1,10 +1,10 @@
-//
-//  REMDashboardObj.m
-//  Blues
-//
-//  Created by TanTan on 7/4/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMDashboardObj.m
+ * Created      : TanTan on 7/4/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMDashboardObj.h"
 
@@ -24,10 +24,19 @@
     for(NSDictionary *dic in array)
     {
         REMWidgetObject *w = [[REMWidgetObject alloc]initWithDictionary:dic];
-        [widgets addObject:w];
+        if(w.diagramType != REMDiagramTypeGrid && w.diagramType!=REMDiagramTypeLabelling){
+            [widgets addObject:w];
+        }
     }
     
     self.widgets=widgets;
+    
+    NSDictionary *shareInfo = dictionary[@"SimpleShareInfo"];
+    
+    if(shareInfo!=nil && [shareInfo isEqual:[NSNull null]]==NO){
+        self.shareInfo=[[REMShareInfo alloc]initWithDictionary:shareInfo];
+    }
+    
 }
 
 @end

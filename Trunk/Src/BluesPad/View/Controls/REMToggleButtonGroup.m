@@ -1,17 +1,14 @@
-//
-//  REMToggleButtonGroup.m
-//  Blues
-//
-//  Created by Zilong-Oscar.Xu on 8/20/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMToggleButtonGroup.m
+ * Created      : Zilong-Oscar.Xu on 8/20/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMToggleButtonGroup.h"
 
-@implementation REMToggleButtonGroup {
-    id toggleChangePerformer;
-    SEL toggleChangeSEL;
-}
+@implementation REMToggleButtonGroup
 
 -(id)init {
     self = [super init];
@@ -44,7 +41,9 @@
             [activeBtn setOn:false];
         }
         [button setOn:YES];
-        [toggleChangePerformer performSelector:toggleChangeSEL withObject:button];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(activedButtonChanged:)]) {
+            [self.delegate activedButtonChanged:button];
+        }
     }
 }
 
@@ -52,11 +51,5 @@
     [buttons addObject:button];
     
     [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-}
-
-
--(void)bindToggleChangeCallback:(id)performer selector:(SEL)selector {
-    toggleChangePerformer = performer;
-    toggleChangeSEL = selector;
 }
 @end

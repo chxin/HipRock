@@ -1,10 +1,10 @@
-//
-//  REMNetworkHelper.m
-//  Blues
-//
-//  Created by zhangfeng on 7/4/13.
-//
-//
+/*------------------------------Summary-------------------------------------
+ * Product Name : EMOP iOS Application Software
+ * File Name	: REMNetworkHelper.m
+ * Created      : zhangfeng on 7/4/13.
+ * Description  : IOS Application software based on Energy Management Open Platform
+ * Copyright    : Schneider Electric (China) Co., Ltd.
+ --------------------------------------------------------------------------*///
 
 #import "REMNetworkHelper.h"
 #import "Reachability.h"
@@ -26,12 +26,7 @@
 
 + (BOOL) checkIs3G
 {
-    return [REMNetworkHelper checkCurrentNetworkStatus] == ReachableViaWWAN3G;
-}
-
-+ (BOOL) checkIs2G
-{
-    return [REMNetworkHelper checkCurrentNetworkStatus] == ReachableViaWWAN2G;
+    return [REMNetworkHelper checkCurrentNetworkStatus] == ReachableViaWWAN;
 }
 
 + (BOOL) checkIsNoConnect
