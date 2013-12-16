@@ -480,7 +480,7 @@ static NSDateFormatter *_localFormatter;
     else{
         ret=[f stringFromDate:date];
     }
-    
+    return ret;
 }
 
 + (NSString *)formatTimeFullMonth:(NSDate *)date{

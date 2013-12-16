@@ -34,7 +34,7 @@
     REMWidgetMaxViewController *destController=self.destinationViewController;
     REMBuildingViewController *srcController= self.sourceViewController;
 
-
+    [srcController.view setUserInteractionEnabled:NO];
     
     REMDashboardController *dashboardController=srcController.maxDashbaordController;
     
@@ -94,7 +94,7 @@
     REMBuildingViewController *destController=self.destinationViewController;
     REMWidgetMaxViewController *srcController=self.sourceViewController;
     REMWidgetDetailViewController *currentDetailController= srcController.childViewControllers[srcController.currentWidgetIndex];
-    
+    [destController.view setUserInteractionEnabled:YES];
     UIImage *image=[REMImageHelper imageWithLayer:currentDetailController.view.layer];
     
     UIImageView *destImageView=[[UIImageView alloc]initWithImage:image];
