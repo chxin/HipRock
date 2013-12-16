@@ -13,5 +13,6 @@
 -(id)initWithPieView:(UIView*)view;
 -(void)animateToFrame:(DCPieChartAnimationFrame*)targetFrame;
 -(void)rotateWithInitialSpeed:(double)speed;
+-(void)playFrames:(NSArray*)frames;
 -(void)stopTimer;
 @end

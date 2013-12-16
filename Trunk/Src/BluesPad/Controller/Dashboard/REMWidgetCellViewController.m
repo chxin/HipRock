@@ -19,7 +19,6 @@
 @property (nonatomic,weak) UIView *chartContainer;
 
 @property (nonatomic,strong) DAbstractChartWrapper *wrapper;
-@property (nonatomic,strong) REMPieChartWrapper *pieWrapper;
 @property (nonatomic,strong) UIActivityIndicatorView *loadingView;
 
 
@@ -133,7 +132,6 @@
     [self.loadingView removeFromSuperview];
     self.loadingView = nil;
     DAbstractChartWrapper *widgetWrapper = nil;
-    REMPieChartWrapper *pieWrapper=nil;
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     CGRect widgetRect = self.chartContainer.bounds;
     REMEnergyViewData *data=self.chartData;
@@ -146,32 +144,24 @@
         widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
 //        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
     } else if (widgetType == REMDiagramTypePie) {
-        pieWrapper = [[REMPieChartWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCPieWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
     } else if (widgetType == REMDiagramTypeRanking) {
 //        widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
         widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
     } else if (widgetType == REMDiagramTypeStackColumn) {
         widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
     }
-    if (widgetWrapper != nil || pieWrapper!=nil) {
-        if(widgetWrapper!=nil){
-            self.wrapper=widgetWrapper;
-            if([widgetWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
-                if(self.widgetInfo.contentSyntax.calendarType!=REMCalendarTypeNone){
-                    DCTrendWrapper *trend=(DCTrendWrapper *)widgetWrapper;
-                    trend.calenderType=self.widgetInfo.contentSyntax.calendarType;
-                }
+    if (widgetWrapper != nil) {
+        self.wrapper=widgetWrapper;
+        if([widgetWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
+            if(self.widgetInfo.contentSyntax.calendarType!=REMCalendarTypeNone){
+                DCTrendWrapper *trend=(DCTrendWrapper *)widgetWrapper;
+                trend.calenderType=self.widgetInfo.contentSyntax.calendarType;
             }
-            [self.chartContainer addSubview:[widgetWrapper getView]];
+//        } else if ([widgetWrapper isKindOfClass:[DCPieWrapper class]]) {
+            
         }
-        else if(pieWrapper!=nil){
-            self.pieWrapper=pieWrapper;
-            [self.chartContainer addSubview:[pieWrapper getView]];
-//            [self.chartContainer addSubview:pieWrapper.view];
-        }
-        
-        
-        //[widgetWrapper destroyView];
+        [self.chartContainer addSubview:[widgetWrapper getView]];
         
         
         NSRunLoop *loop=[NSRunLoop currentRunLoop];
@@ -220,15 +210,11 @@
     if(self.wrapper!=nil){
         [[self.wrapper getView] removeFromSuperview];
     }
-    else if(self.pieWrapper!=nil){
-        [self.pieWrapper.view removeFromSuperview];
-    }
     for (UIView *v in self.view.subviews) {
         [v removeFromSuperview];
     }
     [self.view addSubview:button];
     self.wrapper=nil;
-    self.pieWrapper=nil;
     self.searchModel=nil;
 }
 

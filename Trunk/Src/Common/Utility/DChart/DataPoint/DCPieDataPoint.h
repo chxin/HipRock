@@ -11,4 +11,5 @@
 @interface DCPieDataPoint : DCDataPoint
 @property (nonatomic, assign) BOOL hidden;
 @property (nonatomic, weak) DCPieDataPoint* nextPoint;
+@property (nonatomic, strong) UIColor* color;
 @end

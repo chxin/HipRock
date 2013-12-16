@@ -280,14 +280,14 @@
 }
 
 -(void)touchedInPlotAt:(CGPoint)point xCoordinate:(double)xLocation {
-    if (self.chartStatus == DCDataPointTypeNormal) {
+    if (self.chartStatus == DChartStatusNormal) {
         self.chartStatus = DChartStatusFocus;
     }
     [self.view focusAroundX:xLocation];
 }
 
 -(BOOL)panInPlotAt:(CGPoint)point translation:(CGPoint)translation {
-    if (self.chartStatus == DCDataPointTypeNormal) {
+    if (self.chartStatus == DChartStatusNormal) {
         return YES;
     } else {
         [self.view focusAroundX:[self.view getXLocationForPoint:point]];
@@ -340,7 +340,7 @@
 }
 
 -(void)cancelToolTipStatus {
-    self.chartStatus = DCDataPointTypeNormal;
+    [super cancelToolTipStatus];
     [self.view defocus];
 }
 -(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
@@ -441,7 +441,7 @@
         return shouldChange;
     } else if (senderType == DCHRangeChangeSenderByUserPinch) {
         BOOL shouldChange = YES;
-        if (self.chartStatus != DCDataPointTypeNormal) {
+        if (self.chartStatus != DChartStatusNormal) {
             shouldChange = NO;
         } else {
             if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
