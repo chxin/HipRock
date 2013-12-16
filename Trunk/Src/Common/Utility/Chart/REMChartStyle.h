@@ -50,6 +50,10 @@
 
 @property (nonatomic, assign) BOOL playBeginAnimation;
 
+@property (nonatomic, assign) CGFloat labelingLineWidth;
+@property (nonatomic, strong) UIColor* labelingLineColor;
+@property (nonatomic, strong) NSString* labelingFontName;
+
 +(REMChartStyle*)getMaximizedStyle;
 +(REMChartStyle*)getMinimunStyle;
 @end

@@ -58,6 +58,10 @@
     
     style.playBeginAnimation = YES;
     
+    style.labelingLineWidth = 2;
+    style.labelingLineColor = [UIColor grayColor];
+    style.labelingFontName = @(kBuildingFontSC);
+    
     return style;
 }
 +(REMChartStyle*)getMinimunStyle {
@@ -104,6 +108,10 @@
     style.backgroundBandFont = [UIFont fontWithName:@(kBuildingFontSCRegular) size:8];
     
     style.playBeginAnimation = NO;
+    
+    style.labelingLineWidth = 1;
+    style.labelingLineColor = [UIColor grayColor];
+    style.labelingFontName = @(kBuildingFontSC);
     
     return style;
 }

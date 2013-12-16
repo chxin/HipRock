@@ -24,7 +24,8 @@ extern NSString* const kDCPieIndicatorColor;
 
 typedef enum _DCLineType {
     DCLineTypeDefault = 0,
-    DCLineTypeDotted = 1
+    DCLineTypeDotted = 1,
+    DCLineTypeDashed = 2
 }DCLineType;
 
 @protocol DCContextHRangeObserverProtocal <NSObject>

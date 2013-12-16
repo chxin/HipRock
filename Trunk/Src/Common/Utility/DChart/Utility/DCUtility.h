@@ -18,7 +18,7 @@ typedef struct _DCYAxisIntervalCalculation {
 @interface DCUtility : NSObject
 +(CGSize)getSizeOfText:(NSString*)text forFont:(UIFont*)font;
 
-+(void)setLineStyle:(CGContextRef)context style:(DCLineType)style;
++(void)setLineStyle:(CGContextRef)context style:(DCLineType)style lineWidth:(CGFloat)lineWidth;
 +(DCYAxisIntervalCalculation)calculatorYAxisByMin:(double)yMin yMax:(double)yMax parts:(NSUInteger)parts;
 //+(BOOL)isMinorChangeForYRange:(DCRange*)oldRange new:(DCRange*)newRange;
 +(BOOL)isFrame:(CGRect)rect visableIn:(CGRect)outter;

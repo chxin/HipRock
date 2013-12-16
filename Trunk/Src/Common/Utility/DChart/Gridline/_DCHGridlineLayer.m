@@ -26,7 +26,7 @@
             addLines[1].y = addLines[0].y;
             
             CGContextSetLineJoin(ctx, kCGLineJoinMiter);
-            [DCUtility setLineStyle:ctx style:self.lineStyle];
+            [DCUtility setLineStyle:ctx style:self.lineStyle lineWidth:self.lineWidth];
             CGContextSetBlendMode(ctx, kCGBlendModeNormal);
             CGContextBeginPath(ctx);
             CGContextAddLines(ctx, addLines, 2);

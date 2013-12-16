@@ -8,6 +8,9 @@
 
 #import "DCLabelingWrapper.h"
 #import "DCLabelingChartView.h"
+#import "DCLabelingSeries.h"
+#import "DCLabelingLabel.h"
+#import "REMColor.h"
 
 @interface DCLabelingWrapper()
 @property (nonatomic, strong) DCLabelingChartView* view;
@@ -18,16 +21,54 @@
     self = [super initWithFrame:frame data:energyViewData widgetContext:widgetSyntax style:style];
     if (self && energyViewData.labellingLevelArray.count != 0) {
         self.view = [[DCLabelingChartView alloc]initWithFrame:frame];
+        NSArray* textArray = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L"];
+        DCLabelingSeries* s = [[DCLabelingSeries alloc]init];
+        NSMutableArray* stages = [[NSMutableArray alloc]initWithCapacity:self.energyViewData.targetEnergyData.count];
+        for (int i = 0; i < self.energyViewData.labellingLevelArray.count; i++) {
+            REMEnergyLabellingLevelData* d = self.energyViewData.labellingLevelArray[i];
+            DCLabelingStage* stage = [[DCLabelingStage alloc]init];
+            stage.stageText = textArray[i];
+            stage.color = [REMColor colorByIndex:i].uiColor;
+            stage.tooltipText = [NSString stringWithFormat:@"%ld-%ld%@", (long)d.minValue.integerValue, (long)d.maxValue.integerValue, d.uom];
+            [stages addObject:stage];
+        }
+        s.stages = stages;
+        
+        NSMutableArray* labels = [[NSMutableArray alloc]init];
+        for (REMTargetEnergyData* targetEnergyData in self.energyViewData.targetEnergyData) {
+            if (REMIsNilOrNull(targetEnergyData.energyData) || targetEnergyData.energyData.count == 0) continue;
+            REMEnergyData* energyData = targetEnergyData.energyData[0];
+            if (REMIsNilOrNull(energyData.dataValue)) continue;
+            for (int i = 0; i < stages.count; i++) {
+                REMEnergyLabellingLevelData* d = self.energyViewData.labellingLevelArray[i];
+                if ([d.minValue compare:energyData.dataValue]!=NSOrderedDescending &&
+                    [d.maxValue compare:energyData.dataValue]==NSOrderedDescending) {
+                    DCLabelingLabel* label = [[DCLabelingLabel alloc]init];
+                    label.name = targetEnergyData.target.name;
+                    label.color = [stages[i] color];
+                    label.stageText = [stages[i] stageText];
+                    label.labelText = [NSString stringWithFormat:@"%ld%@", (long)energyData.dataValue.integerValue, d.uom];
+                    label.stage = i;
+                    [labels addObject:label];
+                    break;
+                }
+            }
+        }
+        s.labels = labels;
+        self.view.paddingRight = self.style.plotPaddingRight;
+        self.view.paddingLeft = self.style.plotPaddingLeft;
+        self.view.paddingTop = self.style.plotPaddingTop;
+        self.view.paddingBottom = self.style.plotPaddingBottom;
+        self.view.lineWidth = style.labelingLineWidth;
+        self.view.lineColor = style.labelingLineColor;
+        self.view.fontName = style.labelingFontName;
+        self.view.series = s;
         self.view.delegate = self;
     }
     return self;
 }
 
--(NSUInteger)getStageCount {
-    return self.energyViewData.labellingLevelArray.count;
-}
-
--(NSUInteger)getLabelCount {
-    return self.energyViewData.targetEnergyData.count;
+-(UIView*)getView {
+    return self.view;
 }
 @end

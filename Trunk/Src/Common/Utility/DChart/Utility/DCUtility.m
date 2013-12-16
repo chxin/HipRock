@@ -51,9 +51,12 @@
     return 10;
 }
 
-+(void)setLineStyle:(CGContextRef)context style:(DCLineType)style {
++(void)setLineStyle:(CGContextRef)context style:(DCLineType)style lineWidth:(CGFloat)lineWidth {
     if (style == DCLineTypeDotted) {
-        CGFloat dash[] = {1, 1};
+        CGFloat dash[] = {lineWidth, lineWidth};
+        CGContextSetLineDash(context, 0, dash, 2);
+    } else if (style == DCLineTypeDashed) {
+        CGFloat dash[] = {lineWidth*4, lineWidth};
         CGContextSetLineDash(context, 0, dash, 2);
     }
 }

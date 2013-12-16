@@ -17,7 +17,8 @@
 #import "DCColumnWrapper.h"
 #import "DCLineWrapper.h"
 #import "DCPieChartView.h"
-#import "DCLabelingChartView.h"
+#import "DCLabelingWrapper.h"
+#import "REMEnergyLabellingLevelData.h"
 
 @interface REMSplashScreenController ()
 
@@ -122,19 +123,19 @@
 {
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
-    [self.view addSubview:[[DCLabelingChartView alloc]initWithFrame:self.view.bounds]];
-//    [self oscarTest];
+    
+    [self oscarTest];
     
     
     //decide where to go
-    [self recoverAppContext];
-    
-    if([self isAlreadyLogin]){
-        [self breathShowMapView:YES:nil];
-    }
-    else{
-        [self breathShowLoginView];
-    }
+//    [self recoverAppContext];
+//    
+//    if([self isAlreadyLogin]){
+//        [self breathShowMapView:YES:nil];
+//    }
+//    else{
+//        [self breathShowLoginView];
+//    }
 }
 
 -(void)breathShowMapView:(BOOL)isAfterBreathOnce :(void (^)(void))completed
@@ -197,16 +198,16 @@
     
     REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
     NSMutableArray* sereis = [[NSMutableArray alloc]init];
-    for (int sIndex = 0; sIndex < 10; sIndex++) {
+    for (int sIndex = 0; sIndex < 3; sIndex++) {
         NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
         for (int i = 0; i < 10000; i++) {
             REMEnergyData* data = [[REMEnergyData alloc]init];
             data.quality = REMEnergyDataQualityGood;
-            if (i%5==0) {
-            
-            } else {
+//            if (i%5==0) {
+//            
+//            } else {
                 data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
-            }
+//            }
             data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
             [energyDataArray addObject:data];
         }
@@ -220,19 +221,31 @@
     energyViewData.visibleTimeRange = r;
     energyViewData.globalTimeRange = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10000]];
     
+    NSMutableArray *labellings=[[NSMutableArray alloc]initWithCapacity:5];
+    for (int i=0; i<8; ++i) {
+        REMEnergyLabellingLevelData* a = [[REMEnergyLabellingLevelData alloc]init];
+        a.name = @"FFFF0";
+        a.maxValue = @((i + 1) * 20);
+        a.maxValue = @(i * 20);
+        a.uomId = 0;
+        a.uom = @"FFFF0";
+        [labellings addObject:a];
+    }
+    energyViewData.labellingLevelArray = labellings;
     energyViewData.targetEnergyData = sereis;
-    
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
 //    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
 //    columnWidget.view.backgroundColor = [UIColor blackColor];
 //    [self.view addSubview:columnWidget.view];
     
-    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
-    lineWidget.view.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:lineWidget.view];
+//    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
+//    lineWidget.view.backgroundColor = [UIColor blackColor];
+//    [self.view addSubview:lineWidget.view];
 //    self.plotSource = lineWidget;
-//    DCPieChartView* vvv = [[DCPieChartView alloc]initWithFrame:CGRectMake(0, 0, 1024, 748)];
-//    [self.view addSubview:vvv];
+    
+    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
+    self.self.plotSource = labelingWrapper;
+    [self.view addSubview:[labelingWrapper getView]];
 }
 
 
