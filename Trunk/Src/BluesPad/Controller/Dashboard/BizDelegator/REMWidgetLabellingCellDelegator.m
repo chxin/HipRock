@@ -14,7 +14,14 @@
 - (NSString *)cellTimeTitle
 {
     REMWidgetLabellingSearchModel *labellingModel=(REMWidgetLabellingSearchModel *)self.searchModel;
-    return labellingModel.benchmarkText;
+    REMTimeRange *range=labellingModel.timeRangeArray[0];
+    REMEnergyStep step=labellingModel.step;
+    NSString *text=[REMTimeHelper formatTimeFullMonth:range.startTime];
+    if (step == REMEnergyStepYear) {
+        text=[REMTimeHelper formatTimeFullYear:range.startTime];
+    }
+
+    return text;
 }
 
 @end

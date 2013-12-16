@@ -468,12 +468,19 @@ static NSDateFormatter *_localFormatter;
     return [f stringFromDate:date];
 }
 
-+ (NSString *)formatTimeFullDay:(NSDate *)date
++ (NSString *)formatTimeFullDay:(NSDate *)date isChangeTo24Hour:(BOOL)change24Hour;
 {
     NSDateFormatter *f = [REMTimeHelper currentFormatter];
     [f setDateFormat:@"yyyy-MM-dd"];
-    
-    return [f stringFromDate:date];
+    NSString *ret;
+    if(change24Hour ==YES && [REMTimeHelper getHour:date]==0){
+        NSDate *newEndDate=[REMTimeHelper add:-1 onPart:REMDateTimePartDay ofDate:date];
+        ret=[f stringFromDate:newEndDate];
+    }
+    else{
+        ret=[f stringFromDate:date];
+    }
+    return ret;
 }
 
 + (NSString *)formatTimeFullMonth:(NSDate *)date{
@@ -491,15 +498,8 @@ static NSDateFormatter *_localFormatter;
 }
 
 + (NSString *)formatTimeRangeFullDay:(REMTimeRange *)range{
-    NSString *start=[REMTimeHelper formatTimeFullDay:range.startTime];
-    NSString *end;
-    if([REMTimeHelper getHour:range.endTime]==0){
-        NSDate *newEndDate=[REMTimeHelper add:-1 onPart:REMDateTimePartDay ofDate:range.endTime];
-        end=[REMTimeHelper formatTimeFullDay:newEndDate];
-    }
-    else{
-        end=[REMTimeHelper formatTimeFullDay:range.endTime];
-    }
+    NSString *start=[REMTimeHelper formatTimeFullDay:range.startTime isChangeTo24Hour:NO];
+    NSString *end =[REMTimeHelper formatTimeFullDay:range.startTime isChangeTo24Hour:YES];
     return [NSString stringWithFormat:@"%@ -- %@",start,end];
 }
 
