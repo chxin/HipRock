@@ -90,11 +90,6 @@ const static CGFloat buildingGap=20;
 
 
 
--(void)dealloc{
-    
-    
-}
-
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
@@ -148,6 +143,10 @@ const static CGFloat buildingGap=20;
 
 - (void)initDefaultImageView
 {
+    
+
+    
+    
     self.defaultImage = REMIMG_DefaultBuilding;
     UIImage *view = [UIImage imageNamed:@"DefaultBuildingBlur"];
     
@@ -156,7 +155,7 @@ const static CGFloat buildingGap=20;
     
     
     int i=0,count=self.buildingInfoArray.count;
-    //count=2;
+    
     for (;i<count;++i) {
         REMBuildingOverallModel *model = self.buildingInfoArray[i];
         
@@ -310,8 +309,12 @@ const static CGFloat buildingGap=20;
     //NSLog(@"complete:%d",self.currentBuildingIndex);
     REMBuildingImageViewController *vc=self.childViewControllers[self.currentBuildingIndex];
     [vc loadContentView];
+    
     if(self.currentBuildingIndex<self.childViewControllers.count){
         NSInteger sign=[timer.userInfo[@"direction"] integerValue];
+        if (timer==nil) {
+            sign=-1;
+        }
         NSNumber *willIndex= @(self.currentBuildingIndex-1*sign);
         if(willIndex.intValue>=self.childViewControllers.count || willIndex.intValue<0){
             return;
@@ -320,6 +323,11 @@ const static CGFloat buildingGap=20;
         [nextController loadContentView];
         
     }
+    
+//    UILabel *text=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+//    text.text=@"atasdf";
+//    [self.view addSubview:text];
+    return;
     
 }
 
