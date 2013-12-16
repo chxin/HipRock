@@ -58,17 +58,14 @@
     
     view.userInteractionEnabled = self.style.userInteraction;
     
-    if (self.style.xLineStyle) {
-        view.xAxis.lineColor = self.style.xLineStyle.lineColor.uiColor;
-        view.xAxis.lineWidth = self.style.xLineStyle.lineWidth;
-    }
-    if (self.style.xTextStyle) {
-        view.xAxis.labelColor = self.style.xTextStyle.color.uiColor;
-        view.xAxis.labelFont = [UIFont fontWithName:self.style.xTextStyle.fontName size:self.style.xTextStyle.fontSize];
-    }
-    if (self.style.yGridlineStyle) {
-        view.hGridlineColor = self.style.yGridlineStyle.lineColor.uiColor;
-        view.hGridlineWidth = self.style.yGridlineStyle.lineWidth;
+    view.xAxis.lineColor = self.style.xLineColor;
+    view.xAxis.lineWidth = self.style.xLineWidth;
+    view.xAxis.labelColor = self.style.xTextColor;
+    view.xAxis.labelFont = self.style.xTextFont;
+    
+    if (self.style.yGridlineWidth > 0) {
+        view.hGridlineColor = self.style.yGridlineColor;
+        view.hGridlineWidth = self.style.yGridlineWidth;
     }
     
     view.focusSymbolLineColor = self.style.focusSymbolLineColor;
@@ -114,13 +111,13 @@
             s.yAxis = y;
             y.axisTitle = s.target.uomName;
             y.labelToLine = self.style.yLabelToLine;
-            if (self.style.yLineStyle) {
-                y.lineColor = self.style.yLineStyle.lineColor.uiColor;
-                y.lineWidth = self.style.yLineStyle.lineWidth;
+            if (self.style.yLineWidth > 0) {
+                y.lineColor = self.style.yLineColor;
+                y.lineWidth = self.style.yLineWidth;
             }
-            if (self.style.yTextStyle) {
-                y.labelColor = self.style.yTextStyle.color.uiColor;
-                y.labelFont = [UIFont fontWithName:self.style.yTextStyle.fontName size:self.style.yTextStyle.fontSize];
+            if (self.style.yTextFont && self.style.yTextColor) {
+                y.labelColor = self.style.yTextColor;
+                y.labelFont = self.style.yTextFont;
             }
             y.axisTitleColor = self.style.yAxisTitleColor;
             y.axisTitleToTopLabel = self.style.yAxisTitleToTopLabel;

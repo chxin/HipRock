@@ -640,7 +640,6 @@
 		EF03DC261841FA2F004B9EFD /* DCPieSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC251841FA2F004B9EFD /* DCPieSeries.m */; };
 		EF03DC291841FB45004B9EFD /* DCPieDataPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC281841FB45004B9EFD /* DCPieDataPoint.m */; };
 		EF0459941845CEAF0086D5AC /* _DCXYIndicatorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0459931845CEAF0086D5AC /* _DCXYIndicatorLayer.m */; };
-		EF0BFEA1184495DF0026C47D /* REMPieShadowLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BFEA0184495DF0026C47D /* REMPieShadowLayer.m */; };
 		EF0BFEA41844A5A60026C47D /* DCPieChartAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BFEA31844A5A60026C47D /* DCPieChartAnimationManager.m */; };
 		EF0BFEA71844B7090026C47D /* DCPieChartAnimationFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BFEA61844B7090026C47D /* DCPieChartAnimationFrame.m */; };
 		EF13626F184EFC6F00BEF648 /* _DCLine.m in Sources */ = {isa = PBXBuildFile; fileRef = EF13626E184EFC6F00BEF648 /* _DCLine.m */; };
@@ -655,8 +654,6 @@
 		EF60822F17D818430093427C /* REMModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF60822E17D818430093427C /* REMModalView.m */; };
 		EF652B68185867C2007D4049 /* DCTrendAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EF652B67185867C2007D4049 /* DCTrendAnimationManager.m */; };
 		EF7CF5F6185D82F2000BA4AE /* DCPieLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF7CF5F5185D82F2000BA4AE /* DCPieLayer.m */; };
-		EF8A47F817F959B5009B5C33 /* REMAbstractChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8A47E717F959B5009B5C33 /* REMAbstractChartWrapper.m */; };
-		EF8A47FF17F959B5009B5C33 /* REMChartSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8A47F317F959B5009B5C33 /* REMChartSeries.m */; };
 		EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */; };
 		EF96300617C610A200BBC7DA /* REMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMSettingViewController.m */; };
 		EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97DDDA17C20B5700A0374E /* REMToggleButton.m */; };
@@ -678,11 +675,7 @@
 		EFD9470B1839DCBB00E9EC50 /* DCXYSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F61839DCBB00E9EC50 /* DCXYSeries.m */; };
 		EFD9470C1839DCBB00E9EC50 /* DCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F91839DCBB00E9EC50 /* DCUtility.m */; };
 		EFD947111839DEE100E9EC50 /* DCColumnWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD947101839DEE100E9EC50 /* DCColumnWrapper.m */; };
-		EFDAACB91803F27F008BC9AF /* REMPieChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACB81803F27F008BC9AF /* REMPieChartWrapper.m */; };
 		EFDAACBC1803F6C2008BC9AF /* REMChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */; };
-		EFDAACBF18052E0C008BC9AF /* REMPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */; };
-		EFDAACC218053911008BC9AF /* REMChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC118053911008BC9AF /* REMChartConfig.m */; };
-		EFDAACC818054EBA008BC9AF /* REMPieChartSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */; };
 		EFDCC97E18472AD400955560 /* DCPieWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCC97D18472AD400955560 /* DCPieWrapper.m */; };
 		EFE8697D185E9FF800DC0007 /* DCLabelingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE8697C185E9FF800DC0007 /* DCLabelingChartView.m */; };
 		EFE86981185EC3EB00DC0007 /* DCLabelingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */; };
@@ -1469,8 +1462,6 @@
 		EF03DC281841FB45004B9EFD /* DCPieDataPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCPieDataPoint.m; sourceTree = "<group>"; };
 		EF0459921845CEAF0086D5AC /* _DCXYIndicatorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCXYIndicatorLayer.h; sourceTree = "<group>"; };
 		EF0459931845CEAF0086D5AC /* _DCXYIndicatorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCXYIndicatorLayer.m; sourceTree = "<group>"; };
-		EF0BFE9F184495DF0026C47D /* REMPieShadowLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPieShadowLayer.h; sourceTree = "<group>"; };
-		EF0BFEA0184495DF0026C47D /* REMPieShadowLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieShadowLayer.m; sourceTree = "<group>"; };
 		EF0BFEA21844A5A60026C47D /* DCPieChartAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieChartAnimationManager.h; path = Common/Utility/DChart/ChartView/DCPieChartAnimationManager.h; sourceTree = "<group>"; };
 		EF0BFEA31844A5A60026C47D /* DCPieChartAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieChartAnimationManager.m; path = Common/Utility/DChart/ChartView/DCPieChartAnimationManager.m; sourceTree = "<group>"; };
 		EF0BFEA51844B7090026C47D /* DCPieChartAnimationFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieChartAnimationFrame.h; path = Common/Utility/DChart/ChartView/DCPieChartAnimationFrame.h; sourceTree = "<group>"; };
@@ -1497,9 +1488,6 @@
 		EF652B67185867C2007D4049 /* DCTrendAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCTrendAnimationManager.m; path = Common/Utility/DChart/ChartView/DCTrendAnimationManager.m; sourceTree = "<group>"; };
 		EF7CF5F4185D82F2000BA4AE /* DCPieLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieLayer.h; path = Common/Utility/DChart/ChartView/DCPieLayer.h; sourceTree = "<group>"; };
 		EF7CF5F5185D82F2000BA4AE /* DCPieLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieLayer.m; path = Common/Utility/DChart/ChartView/DCPieLayer.m; sourceTree = "<group>"; };
-		EF8A47E617F959B5009B5C33 /* REMAbstractChartWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAbstractChartWrapper.h; sourceTree = "<group>"; };
-		EF8A47E717F959B5009B5C33 /* REMAbstractChartWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAbstractChartWrapper.m; sourceTree = "<group>"; };
-		EF8A47F317F959B5009B5C33 /* REMChartSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartSeries.m; sourceTree = "<group>"; };
 		EF8A480117F95A1D009B5C33 /* REMChartHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartHeader.h; sourceTree = "<group>"; };
 		EF8F1D7717C2FE5400D3E29F /* REMToggleButtonGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButtonGroup.h; sourceTree = "<group>"; };
 		EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButtonGroup.m; sourceTree = "<group>"; };
@@ -1543,12 +1531,7 @@
 		EFD946F91839DCBB00E9EC50 /* DCUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCUtility.m; sourceTree = "<group>"; };
 		EFD9470F1839DEE100E9EC50 /* DCColumnWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCColumnWrapper.h; path = Common/Utility/DChartWrapper/DCColumnWrapper.h; sourceTree = "<group>"; };
 		EFD947101839DEE100E9EC50 /* DCColumnWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCColumnWrapper.m; path = Common/Utility/DChartWrapper/DCColumnWrapper.m; sourceTree = "<group>"; };
-		EFDAACB71803F27F008BC9AF /* REMPieChartWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPieChartWrapper.h; sourceTree = "<group>"; };
-		EFDAACB81803F27F008BC9AF /* REMPieChartWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartWrapper.m; sourceTree = "<group>"; };
 		EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartDataProcessor.m; sourceTree = "<group>"; };
-		EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartView.m; sourceTree = "<group>"; };
-		EFDAACC118053911008BC9AF /* REMChartConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartConfig.m; sourceTree = "<group>"; };
-		EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartSeries.m; sourceTree = "<group>"; };
 		EFDCC97C18472AD400955560 /* DCPieWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieWrapper.h; path = Common/Utility/DChartWrapper/DCPieWrapper.h; sourceTree = "<group>"; };
 		EFDCC97D18472AD400955560 /* DCPieWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieWrapper.m; path = Common/Utility/DChartWrapper/DCPieWrapper.m; sourceTree = "<group>"; };
 		EFE8697B185E9FF800DC0007 /* DCLabelingChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLabelingChartView.h; sourceTree = "<group>"; };
@@ -3143,37 +3126,12 @@
 			isa = PBXGroup;
 			children = (
 				EF8A480117F95A1D009B5C33 /* REMChartHeader.h */,
-				EF8A47DF17F959B5009B5C33 /* ChartView */,
-				EF8A47E517F959B5009B5C33 /* ChartWrapper */,
 				EF8A47EE17F959B5009B5C33 /* DataProcessor */,
-				EF8A47F017F959B5009B5C33 /* Series */,
 				EFF701CD1830880600B371EC /* REMChartStyle.h */,
 				EFF701CE1830880600B371EC /* REMChartStyle.m */,
 			);
 			name = Chart;
 			path = Common/Utility/Chart;
-			sourceTree = "<group>";
-		};
-		EF8A47DF17F959B5009B5C33 /* ChartView */ = {
-			isa = PBXGroup;
-			children = (
-				EFDAACC118053911008BC9AF /* REMChartConfig.m */,
-				EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */,
-				EF0BFE9F184495DF0026C47D /* REMPieShadowLayer.h */,
-				EF0BFEA0184495DF0026C47D /* REMPieShadowLayer.m */,
-			);
-			path = ChartView;
-			sourceTree = "<group>";
-		};
-		EF8A47E517F959B5009B5C33 /* ChartWrapper */ = {
-			isa = PBXGroup;
-			children = (
-				EF8A47E617F959B5009B5C33 /* REMAbstractChartWrapper.h */,
-				EF8A47E717F959B5009B5C33 /* REMAbstractChartWrapper.m */,
-				EFDAACB71803F27F008BC9AF /* REMPieChartWrapper.h */,
-				EFDAACB81803F27F008BC9AF /* REMPieChartWrapper.m */,
-			);
-			path = ChartWrapper;
 			sourceTree = "<group>";
 		};
 		EF8A47EE17F959B5009B5C33 /* DataProcessor */ = {
@@ -3183,15 +3141,6 @@
 				EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */,
 			);
 			path = DataProcessor;
-			sourceTree = "<group>";
-		};
-		EF8A47F017F959B5009B5C33 /* Series */ = {
-			isa = PBXGroup;
-			children = (
-				EF8A47F317F959B5009B5C33 /* REMChartSeries.m */,
-				EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */,
-			);
-			path = Series;
 			sourceTree = "<group>";
 		};
 		EFC4D213185574FB00E04688 /* Animation */ = {
@@ -3860,7 +3809,6 @@
 				EFD947051839DCBB00E9EC50 /* DCRange.m in Sources */,
 				B48ED409178EA8970032CD72 /* REMSqliteStorage.m in Sources */,
 				B48ED40A178EA8970032CD72 /* REMStorage.m in Sources */,
-				EFDAACBF18052E0C008BC9AF /* REMPieChartView.m in Sources */,
 				B4577EBF184C1886003C00CF /* REMNumberHelper.m in Sources */,
 				7A9B1E2C177B3A8B00C282A8 /* main.m in Sources */,
 				B4922469182B920C0001389A /* REMWidgetMultiTimespanDelegator.m in Sources */,
@@ -3893,7 +3841,6 @@
 				B4D50A41183313C7007C93A4 /* REMBuildingChartViewController.m in Sources */,
 				B4E815D11827375200FB9BC5 /* REMWidgetTagSearchModel.m in Sources */,
 				7A399E97177D238F00F0EB9F /* AFHTTPRequestOperation.m in Sources */,
-				EF0BFEA1184495DF0026C47D /* REMPieShadowLayer.m in Sources */,
 				7A399E98177D238F00F0EB9F /* AFImageRequestOperation.m in Sources */,
 				7AB9B39A183DCF1100779C5E /* REMChartTooltipItem.m in Sources */,
 				7A3F66F8184C61570079A244 /* REMChartSeriesIndicator.m in Sources */,
@@ -3923,7 +3870,6 @@
 				B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */,
 				EF13626F184EFC6F00BEF648 /* _DCLine.m in Sources */,
 				B4A87539185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m in Sources */,
-				EFDAACB91803F27F008BC9AF /* REMPieChartWrapper.m in Sources */,
 				EFE8698C185EF3B700DC0007 /* DCLabelingLabel.m in Sources */,
 				7A1D142617850B2100CC2922 /* Reachability.m in Sources */,
 				B4922466182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m in Sources */,
@@ -3934,7 +3880,6 @@
 				38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */,
 				EFD947001839DCBB00E9EC50 /* _DCXAxisLabelLayer.m in Sources */,
 				7A1D14291785178800CC2922 /* REMNetworkHelper.m in Sources */,
-				EF8A47FF17F959B5009B5C33 /* REMChartSeries.m in Sources */,
 				B47ACC2A17F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m in Sources */,
 				7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */,
 				7A3DDCDA1786C05B008A1033 /* REMServiceAgent.m in Sources */,
@@ -3986,7 +3931,6 @@
 				EF03DC261841FA2F004B9EFD /* DCPieSeries.m in Sources */,
 				B47ACC3317F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m in Sources */,
 				7A5AC7821817CC34006C7CB1 /* REMMapGallerySegue.m in Sources */,
-				EFDAACC818054EBA008BC9AF /* REMPieChartSeries.m in Sources */,
 				7A13C19517F40809007E6AA9 /* REMMainNavigationController.m in Sources */,
 				7A153CA417AA497C00413D3C /* REMLoginCarouselController.m in Sources */,
 				EFD947061839DCBB00E9EC50 /* _DCHGridlineLayer.m in Sources */,
@@ -4051,7 +3995,6 @@
 				7A0288ED17C20CC500709111 /* WeiboRequestOperation.m in Sources */,
 				EFEA7EDF1843424500CF4C3E /* _DCRankingXLabelFormatter.m in Sources */,
 				B4F11182183DA71E004D53F6 /* REMBuildingCommodityView.m in Sources */,
-				EFDAACC218053911008BC9AF /* REMChartConfig.m in Sources */,
 				EFD947091839DCBB00E9EC50 /* DCLineSeries.m in Sources */,
 				EF0BFEA71844B7090026C47D /* DCPieChartAnimationFrame.m in Sources */,
 				7A0288EE17C20CC500709111 /* WeiboSignIn.m in Sources */,
@@ -4090,7 +4033,6 @@
 				7A0288FD17C20CC500709111 /* WeiboDialogClosePNG.m in Sources */,
 				7A0288FE17C20CC500709111 /* WeiboDialog.m in Sources */,
 				7A44E04518238D5E0080CEBE /* REMBuildingShareViewController.m in Sources */,
-				EF8A47F817F959B5009B5C33 /* REMAbstractChartWrapper.m in Sources */,
 				7A0288FF17C20CC500709111 /* WeiboLoginDialog.m in Sources */,
 				7A02890017C20CC500709111 /* Weibo.m in Sources */,
 				EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */,

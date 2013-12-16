@@ -1075,7 +1075,7 @@
     if ([self.chartWrapper isKindOfClass:[DCTrendWrapper class]]) {
         [((DCTrendWrapper*)self.chartWrapper) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
     } else if ([self.chartWrapper isKindOfClass:[DCPieChartView class]]) {
-        [((REMPieChartView*)[self.chartWrapper getView]) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
+//        [((REMPieChartView*)[self.chartWrapper getView]) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
     }
 }
 

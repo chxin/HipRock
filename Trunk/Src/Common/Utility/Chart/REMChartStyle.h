@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CorePlot-CocoaTouch.h"
 #import "REMColor.h"
 #import "REMBuildingConstants.h"
 #import "DCContext.h"
@@ -15,12 +14,21 @@
 @interface REMChartStyle : NSObject
 @property (nonatomic, assign) BOOL userInteraction;
 @property (nonatomic, assign) CGFloat animationDuration;
-@property (nonatomic, strong) CPTLineStyle* xLineStyle;
-@property (nonatomic, strong) CPTTextStyle* xTextStyle;
-@property (nonatomic, strong) CPTLineStyle* xGridlineStyle;
-@property (nonatomic, strong) CPTLineStyle* yLineStyle;
-@property (nonatomic, strong) CPTTextStyle* yTextStyle;
-@property (nonatomic, strong) CPTLineStyle* yGridlineStyle;
+
+@property (nonatomic, strong) UIColor* xLineColor;
+@property (nonatomic, assign) CGFloat xLineWidth;
+@property (nonatomic, strong) UIColor* xGridlineColor;
+@property (nonatomic, assign) CGFloat xGridlineWidth;
+@property (nonatomic, strong) UIColor* xTextColor;
+@property (nonatomic, strong) UIFont* xTextFont;
+
+@property (nonatomic, strong) UIColor* yLineColor;
+@property (nonatomic, assign) CGFloat yLineWidth;
+@property (nonatomic, strong) UIColor* yGridlineColor;
+@property (nonatomic, assign) CGFloat yGridlineWidth;
+@property (nonatomic, strong) UIColor* yTextColor;
+@property (nonatomic, strong) UIFont* yTextFont;
+
 @property (nonatomic, assign) NSUInteger horizentalGridLineAmount;
 @property (nonatomic, assign) NSUInteger symbolSize;
 @property (nonatomic, assign) CGFloat xLabelToLine;
