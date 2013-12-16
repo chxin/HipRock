@@ -31,7 +31,7 @@
 			<key>host</key>
 			<string>112.124.56.137</string>
 			<key>path</key>
-			<string>/v1.4.0.21/Mobile/MobileApiHost/</string>
+			<string>/v1.4.0.22/Mobile/MobileApiHost/</string>
 		</dict>
 		<key>production</key>
 		<dict>
