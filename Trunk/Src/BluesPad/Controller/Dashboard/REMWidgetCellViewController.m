@@ -13,6 +13,8 @@
 #import "REMWidgetSearchModelBase.h"
 #import "DCRankingWrapper.h"
 #import "DCPieWrapper.h"
+#import "REMWidgetCellDelegator.h"
+
 @interface REMWidgetCellViewController ()
 
 
@@ -23,6 +25,7 @@
 
 
 @property (nonatomic,strong) REMWidgetSearchModelBase *searchModel;
+@property (nonatomic,strong) REMWidgetCellDelegator *bizDelegator;
 @end
 
 @implementation REMWidgetCellViewController
@@ -50,7 +53,9 @@
     if(self.widgetInfo.contentSyntax.relativeDateType!=REMRelativeTimeRangeTypeNone){
         self.searchModel.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
     }
-
+    
+    
+    
     UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(kDashboardWidgetPadding, kDashboardWidgetTitleTopMargin, self.view.frame.size.width, kDashboardWidgetTitleSize)];
     title.backgroundColor=[UIColor clearColor];
     title.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetTitleSize];
@@ -63,23 +68,31 @@
     }
     title.text=textTitle;
     [self.view addSubview:title];
-
     
-    UILabel *time=[[UILabel alloc]initWithFrame:CGRectMake(title.frame.origin.x, title.frame.origin.y+title.frame.size.height+kDashboardWidgetTimeTopMargin, self.view.frame.size.width, kDashboardWidgetTimeSize)];
-    time.backgroundColor=[UIColor clearColor];
-    time.textColor=[REMColor colorByHexString:@"#5e5e5e"];
-    time.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetTimeSize];
-    if([self.widgetInfo.contentSyntax.relativeDate isEqual:[NSNull null]]==NO){
-        time.text=self.widgetInfo.contentSyntax.relativeDateComponent;
-    }
-    else{
-        REMTimeRange *range = self.widgetInfo.contentSyntax.timeRanges[0];
-        NSString *start= [REMTimeHelper formatTimeFullHour:range.startTime isChangeTo24Hour:NO];
-        NSString *end= [REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];
-        time.text=[NSString stringWithFormat:NSLocalizedString(@"Dashboard_TimeRange", @""),start,end];//%@ 到 %@
-    }
-    [self.view addSubview:time];
+    
+    self.bizDelegator=[REMWidgetCellDelegator bizWidgetCellDelegator:self.widgetInfo];
+    self.bizDelegator.view=self.view;
+    self.bizDelegator.title=title;
+    self.bizDelegator.searchModel=self.searchModel;
+    
+    
+//    UILabel *time=[[UILabel alloc]initWithFrame:CGRectMake(title.frame.origin.x, title.frame.origin.y+title.frame.size.height+kDashboardWidgetTimeTopMargin, self.view.frame.size.width, kDashboardWidgetTimeSize)];
+//    time.backgroundColor=[UIColor clearColor];
+//    time.textColor=[REMColor colorByHexString:@"#5e5e5e"];
+//    time.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetTimeSize];
+//    if([self.widgetInfo.contentSyntax.relativeDate isEqual:[NSNull null]]==NO){
+//        time.text=self.widgetInfo.contentSyntax.relativeDateComponent;
+//    }
+//    else{
+//        REMTimeRange *range = self.widgetInfo.contentSyntax.timeRanges[0];
+//        NSString *start= [REMTimeHelper formatTimeFullHour:range.startTime isChangeTo24Hour:NO];
+//        NSString *end= [REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];
+//        time.text=[NSString stringWithFormat:NSLocalizedString(@"Dashboard_TimeRange", @""),start,end];//%@ 到 %@
+//    }
+//    [self.view addSubview:time];
 
+    [self.bizDelegator initBizView];
+    
     if(self.widgetInfo.shareInfo!=nil && [self.widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
         
         UILabel *share=[[UILabel alloc]initWithFrame:CGRectMake(title.frame.origin.x, title.frame.origin.y+2, self.view.frame.size.width-(title.frame.origin.x*2), kDashboardWidgetShareSize)];
@@ -94,7 +107,7 @@
         share.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetShareSize];
         [self.view addSubview:share];
     }
-    
+    UILabel *time=self.bizDelegator.timeLabel;
     UIView *chartContainer = [[UIView alloc]initWithFrame:CGRectMake(title.frame.origin.x, time.frame.origin.y+time.frame.size.height+kDashboardWidgetChartTopMargin, kDashboardWidgetChartWidth, kDashboardWidgetChartHeight)];
     //chartContainer.layer.borderColor=[UIColor redColor].CGColor;
     //chartContainer.layer.borderWidth=1;

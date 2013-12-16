@@ -27,6 +27,9 @@
 "Common_Giveup"="放弃";
 "Common_OK"="好";
 "Common_Quit"="退出";
+"Common_WholeYear"="全年"; //1月，2月...12月，全年
+"Common_YearMonthFormat"="yyyy年MM月";
+"Common_WholeYearFormat"="yyyy年全年";
 
 //Admin,prefix: Admin_
 "Admin_UserTitleEEConsultant"="能源工程顾问";
@@ -153,6 +156,7 @@
 "Widget_CalendarHoliday"="非工作时间";
 "Widget_CalendarStepError"="当前步长不支持显示%@背景色"; //当前步长不支持显示冷暖季背景色，当前步长不支持显示非工作时间背景色
 "Widget_CalendarCostElectricityStepError"="峰谷平电价不支持按小时展示";
+
 
 //Weibo, prefix: Weibo_
 "Weibo_WindowTitle"="新浪微博";

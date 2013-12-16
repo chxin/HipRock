@@ -552,6 +552,8 @@
 		B42FBF6617F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
 		B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
 		B442701317AF316500762C68 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
+		B44313E4185AAE7800486594 /* REMWidgetLabellingSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B44313E3185AAE7800486594 /* REMWidgetLabellingSearchModel.m */; };
+		B44313E7185AD4A100486594 /* REMEnergyLabellingLevelData.m in Sources */ = {isa = PBXBuildFile; fileRef = B44313E6185AD4A100486594 /* REMEnergyLabellingLevelData.m */; };
 		B445AE7D177BE8B5002D2A59 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */; };
 		B445AEA0177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE91177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m */; };
 		B445AEA2177BEEB8002D2A59 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE93177BEEB7002D2A59 /* DDASLLogger.m */; };
@@ -600,6 +602,11 @@
 		B4A0FCD517C6023300C7AD56 /* REMBuildingAirQualityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCD417C6023300C7AD56 /* REMBuildingAirQualityView.m */; };
 		B4A0FCD817C6057E00C7AD56 /* REMAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCD717C6057E00C7AD56 /* REMAirQualityModel.m */; };
 		B4A0FCDB17C610B500C7AD56 /* REMBuildingAirQualityChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartViewController.m */; };
+		B4A87530185E98F200BF3601 /* DefaultBuildingBlur.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A8752F185E98F200BF3601 /* DefaultBuildingBlur.png */; };
+		B4A87532185EBC3D00BF3601 /* DefaultBuildingBlur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A87531185EBC3D00BF3601 /* DefaultBuildingBlur@2x.png */; };
+		B4A87536185EC6D800BF3601 /* REMWidgetCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A87535185EC6D800BF3601 /* REMWidgetCellDelegator.m */; };
+		B4A87539185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A87538185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m */; };
+		B4A8753C185ED02200BF3601 /* REMWidgetRankingCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A8753B185ED02200BF3601 /* REMWidgetRankingCellDelegator.m */; };
 		B4B61D7617C742E000245F1E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B61D7517C742E000245F1E /* CoreText.framework */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		B4D50A41183313C7007C93A4 /* REMBuildingChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D50A40183313C7007C93A4 /* REMBuildingChartViewController.m */; };
@@ -677,6 +684,8 @@
 		EFDAACC218053911008BC9AF /* REMChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC118053911008BC9AF /* REMChartConfig.m */; };
 		EFDAACC818054EBA008BC9AF /* REMPieChartSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */; };
 		EFDCC97E18472AD400955560 /* DCPieWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCC97D18472AD400955560 /* DCPieWrapper.m */; };
+		EFE8697D185E9FF800DC0007 /* DCLabelingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE8697C185E9FF800DC0007 /* DCLabelingChartView.m */; };
+		EFE86981185EC3EB00DC0007 /* DCLabelingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */; };
 		EFEA7EDF1843424500CF4C3E /* _DCRankingXLabelFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEA7EDE1843424500CF4C3E /* _DCRankingXLabelFormatter.m */; };
 		EFF701CF1830880600B371EC /* REMChartStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF701CE1830880600B371EC /* REMChartStyle.m */; };
 		EFF7514B183FC60F00C8BBE9 /* DCXYChartBackgroundBand.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF7514A183FC60F00C8BBE9 /* DCXYChartBackgroundBand.m */; };
@@ -1316,6 +1325,10 @@
 		B43BB10F1797B12D00617B1E /* REMEnergyConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergyConstants.h; path = Common/Constants/REMEnergyConstants.h; sourceTree = "<group>"; };
 		B43BB1101797B12D00617B1E /* REMEnergyConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnergyConstants.m; path = Common/Constants/REMEnergyConstants.m; sourceTree = "<group>"; };
 		B442701217AF316500762C68 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
+		B44313E2185AAE7800486594 /* REMWidgetLabellingSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetLabellingSearchModel.h; path = Model/Widget/REMWidgetLabellingSearchModel.h; sourceTree = "<group>"; };
+		B44313E3185AAE7800486594 /* REMWidgetLabellingSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetLabellingSearchModel.m; path = Model/Widget/REMWidgetLabellingSearchModel.m; sourceTree = "<group>"; };
+		B44313E5185AD4A100486594 /* REMEnergyLabellingLevelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMEnergyLabellingLevelData.h; sourceTree = "<group>"; };
+		B44313E6185AD4A100486594 /* REMEnergyLabellingLevelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMEnergyLabellingLevelData.m; sourceTree = "<group>"; };
 		B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		B445AE90177BEEB7002D2A59 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		B445AE91177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
@@ -1382,6 +1395,14 @@
 		B4A0FCD717C6057E00C7AD56 /* REMAirQualityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAirQualityModel.m; sourceTree = "<group>"; };
 		B4A0FCD917C610B500C7AD56 /* REMBuildingAirQualityChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAirQualityChartViewController.h; sourceTree = "<group>"; };
 		B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingAirQualityChartViewController.m; sourceTree = "<group>"; };
+		B4A8752F185E98F200BF3601 /* DefaultBuildingBlur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultBuildingBlur.png; sourceTree = "<group>"; };
+		B4A87531185EBC3D00BF3601 /* DefaultBuildingBlur@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuildingBlur@2x.png"; sourceTree = "<group>"; };
+		B4A87534185EC6D800BF3601 /* REMWidgetCellDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetCellDelegator.h; path = BizDelegator/REMWidgetCellDelegator.h; sourceTree = "<group>"; };
+		B4A87535185EC6D800BF3601 /* REMWidgetCellDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetCellDelegator.m; path = BizDelegator/REMWidgetCellDelegator.m; sourceTree = "<group>"; };
+		B4A87537185EC72100BF3601 /* REMWidgetLabellingCellDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetLabellingCellDelegator.h; path = BizDelegator/REMWidgetLabellingCellDelegator.h; sourceTree = "<group>"; };
+		B4A87538185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetLabellingCellDelegator.m; path = BizDelegator/REMWidgetLabellingCellDelegator.m; sourceTree = "<group>"; };
+		B4A8753A185ED02200BF3601 /* REMWidgetRankingCellDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetRankingCellDelegator.h; path = BizDelegator/REMWidgetRankingCellDelegator.h; sourceTree = "<group>"; };
+		B4A8753B185ED02200BF3601 /* REMWidgetRankingCellDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetRankingCellDelegator.m; path = BizDelegator/REMWidgetRankingCellDelegator.m; sourceTree = "<group>"; };
 		B4B61D7517C742E000245F1E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		B4D50A3F183313C7007C93A4 /* REMBuildingChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartViewController.h; sourceTree = "<group>"; };
@@ -1527,6 +1548,11 @@
 		EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartSeries.m; sourceTree = "<group>"; };
 		EFDCC97C18472AD400955560 /* DCPieWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieWrapper.h; path = Common/Utility/DChartWrapper/DCPieWrapper.h; sourceTree = "<group>"; };
 		EFDCC97D18472AD400955560 /* DCPieWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieWrapper.m; path = Common/Utility/DChartWrapper/DCPieWrapper.m; sourceTree = "<group>"; };
+		EFE8697B185E9FF800DC0007 /* DCLabelingChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLabelingChartView.h; sourceTree = "<group>"; };
+		EFE8697C185E9FF800DC0007 /* DCLabelingChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLabelingChartView.m; sourceTree = "<group>"; };
+		EFE8697F185EC3EB00DC0007 /* DCLabelingWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCLabelingWrapper.h; path = Common/Utility/DChartWrapper/DCLabelingWrapper.h; sourceTree = "<group>"; };
+		EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCLabelingWrapper.m; path = Common/Utility/DChartWrapper/DCLabelingWrapper.m; sourceTree = "<group>"; };
+		EFE86983185EC73E00DC0007 /* DCLabelingChartDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCLabelingChartDelegate.h; sourceTree = "<group>"; };
 		EFEA7EDD1843424500CF4C3E /* _DCRankingXLabelFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCRankingXLabelFormatter.h; path = Common/Utility/DChart/Axis/LabelLayer/_DCRankingXLabelFormatter.h; sourceTree = "<group>"; };
 		EFEA7EDE1843424500CF4C3E /* _DCRankingXLabelFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCRankingXLabelFormatter.m; path = Common/Utility/DChart/Axis/LabelLayer/_DCRankingXLabelFormatter.m; sourceTree = "<group>"; };
 		EFEA7EE018434F2400CF4C3E /* _DCXLabelFormatterProtocal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = _DCXLabelFormatterProtocal.h; path = Common/Utility/DChart/Axis/LabelLayer/_DCXLabelFormatterProtocal.h; sourceTree = "<group>"; };
@@ -1656,6 +1682,8 @@
 				6A61A6841839B82000C6A228 /* DefaultBuilding-Small@2x.png */,
 				6A61A6851839B82000C6A228 /* DefaultBuilding.png */,
 				6A61A6861839B82000C6A228 /* DefaultBuilding@2x.png */,
+				B4A8752F185E98F200BF3601 /* DefaultBuildingBlur.png */,
+				B4A87531185EBC3D00BF3601 /* DefaultBuildingBlur@2x.png */,
 				6A61A6871839B82000C6A228 /* Menu_normal.png */,
 				6A61A6881839B82000C6A228 /* Menu_normal@2x.png */,
 				6A61A6891839B82000C6A228 /* NotOverTarget.png */,
@@ -2001,6 +2029,8 @@
 				7A153C5917AA489600413D3C /* REMEnergyViewData.m */,
 				7A153C5A17AA489600413D3C /* REMTargetEnergyData.h */,
 				7A153C5B17AA489600413D3C /* REMTargetEnergyData.m */,
+				B44313E5185AD4A100486594 /* REMEnergyLabellingLevelData.h */,
+				B44313E6185AD4A100486594 /* REMEnergyLabellingLevelData.m */,
 			);
 			name = Energy;
 			path = Model/Energy;
@@ -2041,6 +2071,7 @@
 		7A153C6A17AA497B00413D3C /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				B4A87533185EC63600BF3601 /* BizDelegator */,
 				7AC54997181776910037F180 /* REMDashboardController.h */,
 				7AC54998181776910037F180 /* REMDashboardController.m */,
 				B42FBF5F17F519F5004F2F3A /* REMWidgetCollectionViewController.h */,
@@ -3017,6 +3048,19 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		B4A87533185EC63600BF3601 /* BizDelegator */ = {
+			isa = PBXGroup;
+			children = (
+				B4A87534185EC6D800BF3601 /* REMWidgetCellDelegator.h */,
+				B4A87535185EC6D800BF3601 /* REMWidgetCellDelegator.m */,
+				B4A87537185EC72100BF3601 /* REMWidgetLabellingCellDelegator.h */,
+				B4A87538185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m */,
+				B4A8753A185ED02200BF3601 /* REMWidgetRankingCellDelegator.h */,
+				B4A8753B185ED02200BF3601 /* REMWidgetRankingCellDelegator.m */,
+			);
+			name = BizDelegator;
+			sourceTree = "<group>";
+		};
 		B4E815C81827321600FB9BC5 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -3032,6 +3076,8 @@
 				B4E815D618273E5600FB9BC5 /* REMWidgetRankingSearchModel.m */,
 				B4922464182B411B0001389A /* REMWidgetMultiTimespanSearchModel.h */,
 				B4922465182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m */,
+				B44313E2185AAE7800486594 /* REMWidgetLabellingSearchModel.h */,
+				B44313E3185AAE7800486594 /* REMWidgetLabellingSearchModel.m */,
 			);
 			name = Widget;
 			sourceTree = "<group>";
@@ -3151,6 +3197,7 @@
 		EFC4D2141855752C00E04688 /* Layer */ = {
 			isa = PBXGroup;
 			children = (
+				EFE8697E185EA72200DC0007 /* Labeling */,
 				EF7CF5F3185D82D0000BA4AE /* Pie */,
 				EFC4D2181855765000E04688 /* Series */,
 				EFD946D91839DCBB00E9EC50 /* LabelLayer */,
@@ -3323,12 +3370,9 @@
 		EFD946DE1839DCBB00E9EC50 /* ChartView */ = {
 			isa = PBXGroup;
 			children = (
-				EFFBE9C0183F04B400672E53 /* DCXYChartViewDelegate.h */,
-				EFD946DF1839DCBB00E9EC50 /* DCXYChartView.h */,
-				EFD946E01839DCBB00E9EC50 /* DCXYChartView.m */,
-				EF01DB58185B1BCF00A6ADCB /* DCPieChartViewDelegate.h */,
-				EF03DC211841E462004B9EFD /* DCPieChartView.h */,
-				EF03DC221841E462004B9EFD /* DCPieChartView.m */,
+				EFE8697A185E9FD900DC0007 /* Labeling */,
+				EFE86979185E9FD200DC0007 /* Pie */,
+				EFE86978185E9FC200DC0007 /* Trend */,
 			);
 			name = ChartView;
 			path = Common/Utility/DChart/ChartView;
@@ -3361,6 +3405,7 @@
 		EFD946EC1839DCBB00E9EC50 /* Series */ = {
 			isa = PBXGroup;
 			children = (
+				EFE86982185EC69F00DC0007 /* Labeling */,
 				EFC4D21E185576DC00E04688 /* Trend */,
 				EFC4D21D185576D100E04688 /* Pie */,
 				EFD946F31839DCBB00E9EC50 /* DCSeries.h */,
@@ -3403,8 +3448,54 @@
 				EFFBE9C5183F7A3700672E53 /* DCRankingWrapper.m */,
 				EFDCC97C18472AD400955560 /* DCPieWrapper.h */,
 				EFDCC97D18472AD400955560 /* DCPieWrapper.m */,
+				EFE8697F185EC3EB00DC0007 /* DCLabelingWrapper.h */,
+				EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */,
 			);
 			name = DChartWrapper;
+			sourceTree = "<group>";
+		};
+		EFE86978185E9FC200DC0007 /* Trend */ = {
+			isa = PBXGroup;
+			children = (
+				EFFBE9C0183F04B400672E53 /* DCXYChartViewDelegate.h */,
+				EFD946DF1839DCBB00E9EC50 /* DCXYChartView.h */,
+				EFD946E01839DCBB00E9EC50 /* DCXYChartView.m */,
+			);
+			name = Trend;
+			sourceTree = "<group>";
+		};
+		EFE86979185E9FD200DC0007 /* Pie */ = {
+			isa = PBXGroup;
+			children = (
+				EF01DB58185B1BCF00A6ADCB /* DCPieChartViewDelegate.h */,
+				EF03DC211841E462004B9EFD /* DCPieChartView.h */,
+				EF03DC221841E462004B9EFD /* DCPieChartView.m */,
+			);
+			name = Pie;
+			sourceTree = "<group>";
+		};
+		EFE8697A185E9FD900DC0007 /* Labeling */ = {
+			isa = PBXGroup;
+			children = (
+				EFE8697B185E9FF800DC0007 /* DCLabelingChartView.h */,
+				EFE8697C185E9FF800DC0007 /* DCLabelingChartView.m */,
+				EFE86983185EC73E00DC0007 /* DCLabelingChartDelegate.h */,
+			);
+			name = Labeling;
+			sourceTree = "<group>";
+		};
+		EFE8697E185EA72200DC0007 /* Labeling */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Labeling;
+			sourceTree = "<group>";
+		};
+		EFE86982185EC69F00DC0007 /* Labeling */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Labeling;
 			sourceTree = "<group>";
 		};
 		EFF410531858651700E479EC /* Trend */ = {
@@ -3543,7 +3634,9 @@
 				6A61A7751839B82000C6A228 /* LoginTextField-Focus.png in Resources */,
 				7A58F24C1839A5650071DE7A /* Propaganda_1@2x.jpg in Resources */,
 				6A61A7101839B82000C6A228 /* NaturalGas_normal@2x.png in Resources */,
+				B4A87532185EBC3D00BF3601 /* DefaultBuildingBlur@2x.png in Resources */,
 				6A61A71B1839B82000C6A228 /* Water_normal.png in Resources */,
+				B4A87530185E98F200BF3601 /* DefaultBuildingBlur.png in Resources */,
 				6A61A7321839B82000C6A228 /* Ascend@2x.png in Resources */,
 				6A61A7591839B82000C6A228 /* labelRight7.png in Resources */,
 				6A61A7921839B82000C6A228 /* SplashScreenLogo-Flash@2x.png in Resources */,
@@ -3763,10 +3856,14 @@
 				EFD946FC1839DCBB00E9EC50 /* _DCLayer.m in Sources */,
 				B4F11188183DA7F4004D53F6 /* REMBuildingChartContainerView2.m in Sources */,
 				EF0BFEA41844A5A60026C47D /* DCPieChartAnimationManager.m in Sources */,
+				EFE86981185EC3EB00DC0007 /* DCLabelingWrapper.m in Sources */,
 				7A7B2105183CAB3600C14248 /* REMCommonLegendFormator.m in Sources */,
 				EF03DC201841C886004B9EFD /* _DCHPinchGestureRecognizer.m in Sources */,
 				B40F011A1828C3DC009650FD /* REMWidgetStepEnergyModel.m in Sources */,
 				B445AEA4177BEEB8002D2A59 /* DDFileLogger.m in Sources */,
+				B4A87536185EC6D800BF3601 /* REMWidgetCellDelegator.m in Sources */,
+				B4A8753C185ED02200BF3601 /* REMWidgetRankingCellDelegator.m in Sources */,
+				B44313E7185AD4A100486594 /* REMEnergyLabellingLevelData.m in Sources */,
 				B445AEA6177BEEB8002D2A59 /* DDLog.m in Sources */,
 				B4FFB0C818191A15004C5404 /* REMRelativeDateViewController.m in Sources */,
 				B445AEA8177BEEB8002D2A59 /* DDTTYLogger.m in Sources */,
@@ -3788,6 +3885,7 @@
 				7A399E99177D238F00F0EB9F /* AFJSONRequestOperation.m in Sources */,
 				EFDAACBC1803F6C2008BC9AF /* REMChartDataProcessor.m in Sources */,
 				7A399E9A177D238F00F0EB9F /* AFNetworkActivityIndicatorManager.m in Sources */,
+				B44313E4185AAE7800486594 /* REMWidgetLabellingSearchModel.m in Sources */,
 				7A399E9E177D238F00F0EB9F /* UIImageView+AFNetworking.m in Sources */,
 				7AA8838117F92286004D50BC /* REMGalleryCollectionCell.m in Sources */,
 				7A399E9B177D238F00F0EB9F /* AFPropertyListRequestOperation.m in Sources */,
@@ -3809,6 +3907,7 @@
 				B4198EAE178410D300B50475 /* REMLogManager.m in Sources */,
 				B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */,
 				EF13626F184EFC6F00BEF648 /* _DCLine.m in Sources */,
+				B4A87539185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m in Sources */,
 				EFDAACB91803F27F008BC9AF /* REMPieChartWrapper.m in Sources */,
 				7A1D142617850B2100CC2922 /* Reachability.m in Sources */,
 				B4922466182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m in Sources */,
@@ -3958,6 +4057,7 @@
 				7A0288F817C20CC500709111 /* ImageResourceLoader.m in Sources */,
 				7A0288F917C20CC500709111 /* NSDictionary+Json.m in Sources */,
 				7A0288FA17C20CC500709111 /* PathHelper.m in Sources */,
+				EFE8697D185E9FF800DC0007 /* DCLabelingChartView.m in Sources */,
 				7A0288FB17C20CC500709111 /* Resources.m in Sources */,
 				EF03DC291841FB45004B9EFD /* DCPieDataPoint.m in Sources */,
 				B4547960184DABF700D3441B /* UIView+FlipTransition.m in Sources */,

@@ -125,7 +125,7 @@
         <!--Widget Month Picker View Controller - 选择日期-->
         <scene sceneID="Vo9-ng-vOg">
             <objects>
-                <viewController storyboardIdentifier="monthPickerViewController" id="mgs-5e-6Cv" customClass="REMWidgetMonthPickerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="monthPickerController" id="mgs-5e-6Cv" customClass="REMWidgetMonthPickerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lt2-pl-7iq"/>
                         <viewControllerLayoutGuide type="bottom" id="MUw-fY-Thm"/>
@@ -136,23 +136,24 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="选择日期" id="EoP-UA-SR0">
                         <barButtonItem key="leftBarButtonItem" title="取消" id="yMK-AO-7YM">
                             <connections>
                                 <action selector="cancelClicked:" destination="mgs-5e-6Cv" id="sVj-Ur-w2c"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="完成" id="ler-yj-cX1">
+                        <barButtonItem key="rightBarButtonItem" title="完成" style="done" id="ler-yj-cX1">
                             <connections>
                                 <action selector="okClicked:" destination="mgs-5e-6Cv" id="U6q-cY-WMh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IW-uy-Qy4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4770" y="-2099"/>
+            <point key="canvasLocation" x="4592" y="-2371"/>
         </scene>
         <!--Widget Max View Controller-->
         <scene sceneID="kih-fe-Pxz">
@@ -175,12 +176,15 @@
                         <segue destination="Fzj-ui-CY3" kind="popover" id="aw6-EE-kdc">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
+                        <segue destination="NpH-nl-7td" kind="popover" id="ce5-LQ-Qg6">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ndb-ap-11w" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="sO2-LG-KMS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1796" y="-1166"/>
+            <point key="canvasLocation" x="1792" y="-1166"/>
         </scene>
         <!--Date Picker View Controller - 选择日期-->
         <scene sceneID="IK4-ou-HLv">
@@ -714,12 +718,29 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="OUZ-1Y-oK9" kind="relationship" relationship="rootViewController" id="IL2-0Y-zhA"/>
-                        <segue destination="mgs-5e-6Cv" kind="push" id="HXM-dQ-Acw"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ai5-vc-Ijo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3308" y="-1166"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="206-mw-I0A">
+            <objects>
+                <navigationController storyboardIdentifier="monthPickerNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="NpH-nl-7td" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="INw-fD-jTB">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="mgs-5e-6Cv" kind="relationship" relationship="rootViewController" id="8V0-co-xXG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m0M-3e-OqK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3362" y="-2371"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

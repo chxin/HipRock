@@ -27,7 +27,9 @@
 "Common_Giveup"="放弃";
 "Common_OK"="好";
 "Common_Quit"="退出";
-
+"Common_WholeYear"="全年"; //1月，2月...12月，全年
+"Common_YearMonthFormat"="yyyy年MM月";
+"Common_WholeYearFormat"="yyyy年全年";
 
 //Admin,prefix: Admin_
 "Admin_UserTitleEEConsultant"="能源工程顾问";

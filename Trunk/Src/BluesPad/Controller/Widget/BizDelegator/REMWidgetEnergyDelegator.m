@@ -905,13 +905,15 @@
 }
 
 - (void)processEnergyDataInnerError:(REMEnergyViewData *)data{
-    return;
     if (data.error!=nil && [data.error isEqual:[NSNull null]]==NO && data.error.count>0) {
         REMEnergyError *error= data.error[0];
         if (error!=nil && [error isEqual:[NSNull null]]==NO) {
             NSString *errorCode= [error.errorCode substringFromIndex:7];
             errorCode=[NSString stringWithFormat:@"Energy_%@",errorCode];
             NSString *showText= NSLocalizedString(errorCode, @"");
+            if ([errorCode isEqualToString:showText]==YES) {
+                return;
+            }
             if (error.params!=nil && [error.params isEqual:[NSNull null]]==NO && error.params.count>0) {
                 
             }

@@ -93,7 +93,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
         shareTitle.textColor=[REMColor colorByHexString:@"#a2a2a2"];
         NSString *shareName=self.widgetInfo.shareInfo.userRealName;
         NSString *shareTel=self.widgetInfo.shareInfo.userTelephone;
-        NSString *date=[REMTimeHelper formatTimeFullDay:self.widgetInfo.shareInfo.shareTime];
+        NSString *date=[REMTimeHelper formatTimeFullDay:self.widgetInfo.shareInfo.shareTime isChangeTo24Hour:NO];
         NSString *userTitle=self.widgetInfo.shareInfo.userTitleComponent;
         shareTitle.text=[NSString stringWithFormat:NSLocalizedString(@"Widget_ShareTitle", @""),shareName,userTitle,date,shareTel];
         [titleContainer addSubview:shareTitle];

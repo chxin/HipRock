@@ -22,7 +22,7 @@
 @property (nonatomic,strong) NSString *relativeDate;
 @property (nonatomic) REMRelativeTimeRangeType relativeDateType;
 
-@property (nonatomic,weak) NSObject<REMWidgetDatePickerViewProtocol> *datePickerProtocol;
+@property (nonatomic,weak) id<REMWidgetDatePickerViewProtocol> datePickerProtocol;
 @property (nonatomic,weak) UIPopoverController *popController;
 
 @property (nonatomic) BOOL showHour;
