@@ -45,12 +45,6 @@
 #define kAmericanStandardCode @"美国标准"
 #define kChinaStandardCode @"中国标准"
 
-//"Building_AirQualityOutdoor"="室外PM2.5";
-//"Building_AirQualityHoneywell"="室内新风PM2.5(霍尼)";
-//"Building_AirQualityMayair"="室内新风PM2.5(美埃)";
-//"Building_AirQualityAmericanStandard"="%d %@(PM2.5美国标准)";
-//"Building_AirQualityChinaStandard"="%d %@(PM2.5中国标准)";
-
 #define kWordAirQualityOutdoor REMLocalizedString(@"Building_AirQualityOutdoor")
 #define kWordAirQualityHoneywell REMLocalizedString(@"Building_AirQualityHoneywell")
 #define kWordAirQualityMayair REMLocalizedString(@"Building_AirQualityMayair")
