@@ -24,7 +24,7 @@
 
 @end
 
-CGFloat const kDCLabelingTooltipArcWidth = 2;
+//CGFloat const kDCLabelingTooltipArcWidth = 2;
 
 CGFloat const kDCLabelingStageVerticalMargin = 0.5;
 CGFloat const kDCLabelingLabelToStageHeight = 2;
@@ -82,16 +82,18 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         CGContextDrawPath(ctx, kCGPathFill);
         CGPathRelease(path);
         
-        UIGraphicsPushContext(ctx);
-        CGContextSetLineWidth(ctx, kDCLabelingTooltipArcWidth);
-        CGContextSetStrokeColorWithColor(ctx, [UIColor whiteColor].CGColor);
-        CGPoint tooltipCenter = CGPointMake(baseX+ self.stageHeight / 2, baseY + self.stageHeight / 2);
-        CGContextAddArc(ctx, tooltipCenter.x, tooltipCenter.y, tooltipIconRadius, 0, M_PI*2, 0);
-        CGContextDrawPath(ctx, kCGPathStroke);
-        CGContextSetFillColorWithColor(ctx, [UIColor whiteColor].CGColor);
-        [tooltipIconText drawInRect:CGRectMake(tooltipCenter.x-tooltipIconRadius, tooltipCenter.y-tooltipIconFontSize/2, tooltipIconRadius*2, tooltipIconRadius*2) withFont:tooltipIconFont lineBreakMode:NSLineBreakByClipping alignment: NSTextAlignmentCenter];
-        [[self.series.stages[i] stageText] drawInRect:CGRectMake(baseX, tooltipCenter.y-stageFontSize/2+kDCLabelingTooltipArcWidth, theWidth - self.stageHeight / 2, stageFontSize) withFont:stageTextFont lineBreakMode:NSLineBreakByClipping alignment: NSTextAlignmentRight];
-        UIGraphicsPopContext();
+        if (self.tooltipArcLineWidth > 0) {
+            UIGraphicsPushContext(ctx);
+            CGContextSetLineWidth(ctx, self.tooltipArcLineWidth);
+            CGContextSetStrokeColorWithColor(ctx, [UIColor whiteColor].CGColor);
+            CGPoint tooltipCenter = CGPointMake(baseX+ self.stageHeight / 2, baseY + self.stageHeight / 2);
+            CGContextAddArc(ctx, tooltipCenter.x, tooltipCenter.y, tooltipIconRadius, 0, M_PI*2, 0);
+            CGContextDrawPath(ctx, kCGPathStroke);
+            CGContextSetFillColorWithColor(ctx, [UIColor whiteColor].CGColor);
+            [tooltipIconText drawInRect:CGRectMake(tooltipCenter.x-tooltipIconRadius, tooltipCenter.y-tooltipIconFontSize/2, tooltipIconRadius*2, tooltipIconRadius*2) withFont:tooltipIconFont lineBreakMode:NSLineBreakByClipping alignment: NSTextAlignmentCenter];
+            [[self.series.stages[i] stageText] drawInRect:CGRectMake(baseX, tooltipCenter.y-stageFontSize/2+self.tooltipArcLineWidth, theWidth - self.stageHeight / 2, stageFontSize) withFont:stageTextFont lineBreakMode:NSLineBreakByClipping alignment: NSTextAlignmentRight];
+            UIGraphicsPopContext();
+        }
     }
     
     CGFloat labelFontSize = 0;

@@ -18,6 +18,7 @@
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, strong) UIColor* lineColor;
 @property (nonatomic, strong) NSString* fontName;
+@property (nonatomic, assign) CGFloat tooltipArcLineWidth;
 
 @property (nonatomic, strong) DCLabelingSeries* series;
 

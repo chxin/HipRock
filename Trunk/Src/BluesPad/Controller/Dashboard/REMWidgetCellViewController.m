@@ -13,6 +13,7 @@
 #import "REMWidgetSearchModelBase.h"
 #import "DCRankingWrapper.h"
 #import "DCPieWrapper.h"
+#import "DCLabelingWrapper.h"
 #import "REMWidgetCellDelegator.h"
 
 @interface REMWidgetCellViewController ()
@@ -163,6 +164,8 @@
         widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
     } else if (widgetType == REMDiagramTypeStackColumn) {
         widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
+    } else if (widgetType == REMDiagramTypeLabelling) {
+        widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
     }
     if (widgetWrapper != nil) {
         self.wrapper=widgetWrapper;

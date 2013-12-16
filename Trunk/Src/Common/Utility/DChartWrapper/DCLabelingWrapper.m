@@ -29,7 +29,9 @@
             DCLabelingStage* stage = [[DCLabelingStage alloc]init];
             stage.stageText = textArray[i];
             stage.color = [REMColor colorByIndex:i].uiColor;
-            stage.tooltipText = [NSString stringWithFormat:@"%ld-%ld%@", (long)d.minValue.integerValue, (long)d.maxValue.integerValue, d.uom];
+            NSString* minText = REMIsNilOrNull(d.minValue) ? @"" : d.minValue.stringValue;
+            NSString* maxText = REMIsNilOrNull(d.maxValue) ? @"" : d.maxValue.stringValue;
+            stage.tooltipText = [NSString stringWithFormat:@"%@-%@%@", minText, maxText, d.uom];
             [stages addObject:stage];
         }
         s.stages = stages;
@@ -41,8 +43,8 @@
             if (REMIsNilOrNull(energyData.dataValue)) continue;
             for (int i = 0; i < stages.count; i++) {
                 REMEnergyLabellingLevelData* d = self.energyViewData.labellingLevelArray[i];
-                if ([d.minValue compare:energyData.dataValue]!=NSOrderedDescending &&
-                    [d.maxValue compare:energyData.dataValue]==NSOrderedDescending) {
+                if ((REMIsNilOrNull(d.minValue) || [d.minValue compare:energyData.dataValue]!=NSOrderedDescending) &&
+                    (REMIsNilOrNull(d.maxValue) || [d.maxValue compare:energyData.dataValue]==NSOrderedDescending)) {
                     DCLabelingLabel* label = [[DCLabelingLabel alloc]init];
                     label.name = targetEnergyData.target.name;
                     label.color = [stages[i] color];
@@ -62,6 +64,7 @@
         self.view.lineWidth = style.labelingLineWidth;
         self.view.lineColor = style.labelingLineColor;
         self.view.fontName = style.labelingFontName;
+        self.view.tooltipArcLineWidth = style.labelingTooltipArcLineWidth;
         self.view.series = s;
         self.view.delegate = self;
     }

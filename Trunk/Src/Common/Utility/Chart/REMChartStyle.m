@@ -51,6 +51,7 @@
     style.labelingLineWidth = 2;
     style.labelingLineColor = [UIColor grayColor];
     style.labelingFontName = @(kBuildingFontSC);
+    style.labelingTooltipArcLineWidth = 2;
     
     return style;
 }
@@ -92,6 +93,7 @@
     style.labelingLineWidth = 1;
     style.labelingLineColor = [UIColor grayColor];
     style.labelingFontName = @(kBuildingFontSC);
+    style.labelingTooltipArcLineWidth = 0.5;
     
     return style;
 }
