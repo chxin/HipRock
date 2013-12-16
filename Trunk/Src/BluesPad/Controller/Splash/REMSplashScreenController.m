@@ -17,6 +17,7 @@
 #import "DCColumnWrapper.h"
 #import "DCLineWrapper.h"
 #import "DCPieChartView.h"
+#import "DCLabelingChartView.h"
 
 @interface REMSplashScreenController ()
 
@@ -121,7 +122,7 @@
 {
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
-    
+    [self.view addSubview:[[DCLabelingChartView alloc]initWithFrame:self.view.bounds]];
 //    [self oscarTest];
     
     

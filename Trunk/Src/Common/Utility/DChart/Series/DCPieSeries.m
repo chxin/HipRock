@@ -44,7 +44,7 @@ typedef struct _DCPieSlice {
     angle = 2 - angle;
     NSUInteger index = 0;
     for (int i = 0; i < self.pieSlices.count; i++) {
-        if (REMIsNilOrNull(self.pieSlices)) continue;
+        if (REMIsNilOrNull(self.pieSlices) || REMIsNilOrNull(self.pieSlices[i])) continue;
         DCPieSlice slice;
         [self.pieSlices[i] getValue:&slice];
         if (slice.sliceEnd > angle) {
