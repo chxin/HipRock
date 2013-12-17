@@ -69,7 +69,6 @@
     dashboardController.viewFrame=CGRectMake(kBuildingLeftMargin, coverController.viewFrame.origin.y+coverController.viewFrame.size.height, self.view.frame.size.width-kBuildingLeftMargin*2, coverController.viewFrame.size.height);
     dashboardController.upViewFrame=CGRectMake(dashboardController.viewFrame.origin.x, coverController.viewFrame.origin.y-20, dashboardController.viewFrame.size.width, dashboardController.viewFrame.size.height);
     [self loadSmallImageView];
-
     
 }
 
@@ -471,7 +470,19 @@
     if(currentOffset!=_currentOffset){
         _currentOffset=currentOffset;
         if(self.isViewLoaded==YES){
-            NSLog(@"image controller:%f",currentOffset);
+           // NSLog(@"image controller:%f",currentOffset);
+            CGFloat offset=currentOffset;
+            if (offset>=kCommodityScrollTop) {
+                offset=ABS(kCommodityScrollTop);
+            }
+            else if (offset<=-kBuildingCommodityViewTop){
+                offset=-kBuildingCommodityViewTop;
+            }
+            CGFloat move=20;
+            CGFloat y=(kBuildingCommodityViewTop+offset)*move/(kBuildingCommodityViewTop+kCommodityScrollTop);
+            //NSLog(@"center:%@",NSStringFromCGPoint(self.imageView.center));
+            self.blurImageView.center=CGPointMake(self.imageView.center.x, self.view.center.y-y);
+            self.imageView.center=CGPointMake(self.imageView.center.x, self.view.center.y-y);
             if(self.currentCoverStatus == REMBuildingCoverStatusCoverPage){
                 REMBuildingDataViewController *controller=(REMBuildingDataViewController *)self.childViewControllers[0];
                 [controller setCurrentOffsetY:currentOffset];

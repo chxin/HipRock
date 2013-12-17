@@ -155,7 +155,7 @@ const static CGFloat buildingGap=20;
     
     
     int i=0,count=self.buildingInfoArray.count;
-    
+    //count=2;
     for (;i<count;++i) {
         REMBuildingOverallModel *model = self.buildingInfoArray[i];
         
