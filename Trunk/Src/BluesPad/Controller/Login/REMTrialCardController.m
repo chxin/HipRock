@@ -60,7 +60,6 @@
     welcomeLabel.textColor = [REMColor colorByHexString:kDMLogin_TrialCardWelcomeTextFontColor];
     welcomeLabel.backgroundColor = [UIColor clearColor];
     
-    
     CGRect buttonFrame = CGRectMake(kDMLogin_LoginButtonLeftOffset, kDMLogin_LoginButtonTopOffset, kDMLogin_LoginButtonWidth, kDMLogin_LoginButtonHeight);
     NSDictionary *statusTexts = @{
                                   @(REMLoginButtonNormalStatus):REMLocalizedString(@"Login_TrialButtonText"),
@@ -97,6 +96,14 @@
     tempUser.spId = 1;
     [REMAppContext setCurrentUser:tempUser];
     
+    //network
+    if([REMNetworkHelper checkIsNoConnect] == YES){
+        [REMAlertHelper alert:REMLocalizedString(kLNLogin_NoNetwork)];
+        [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        return;
+    }
+    
     //so demo user will be created in sp1
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSDemoUserValidate parameter:nil];
     [REMDataAccessor access:store success:^(id data) {
@@ -131,6 +138,7 @@
     } error:^(NSError *error, id response) {
         //[REMAlertHelper alert:@""];
         [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
     }];
 }
 
