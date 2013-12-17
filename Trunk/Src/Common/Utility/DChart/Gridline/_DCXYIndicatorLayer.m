@@ -24,7 +24,7 @@
         
         if (self.graphContext.showIndicatorLineOnFocus) {
             CGContextSetLineJoin(ctx, kCGLineJoinMiter);
-            [DCUtility setLineStyle:ctx style:self.symbolLineStyle];
+            [DCUtility setLineStyle:ctx style:self.symbolLineStyle lineWidth:self.symbolLineWidth];
             CGContextSetBlendMode(ctx, kCGBlendModeNormal);
             CGContextBeginPath(ctx);
             CGContextAddLines(ctx, symbolLinePoints, 2);

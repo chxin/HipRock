@@ -9,6 +9,4 @@
 #import <Foundation/Foundation.h>
 
 @protocol DCLabelingChartDelegate <NSObject>
--(NSUInteger)getStageCount;
--(NSUInteger)getLabelCount;
 @end

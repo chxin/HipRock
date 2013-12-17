@@ -11,9 +11,9 @@
 			<key>schema</key>
 			<string>http</string>
 			<key>host</key>
-			<string>10.177.206.79</string>
+			<string>112.124.56.137</string>
 			<key>path</key>
-			<string>/Mobile/</string>
+			<string>/v1.4.0.22/Mobile/MobileApiHost/</string>
 		</dict>
 		<key>dev</key>
 		<dict>

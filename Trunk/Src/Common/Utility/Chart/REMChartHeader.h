@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "REMWidgetObject.h"
 #import "REMEnergyData.h"
-#import "CorePlot-CocoaTouch.h"
 #import "REMBuildingConstants.h"
 #import "REMEnergyTargetModel.h"
 #import "REMColor.h"
@@ -73,70 +72,4 @@ typedef enum _REMDirection{
 @interface REMTrendChartDataProcessor : REMChartDataProcessor
 @property (nonatomic, weak) NSDate* baseDate;
 @property (nonatomic, assign) REMEnergyStep step;
-@end
-
-@interface REMChartSeries : NSObject<CPTPlotDataSource> {
-@protected CPTPlot* plot;
-}
-
-@property (nonatomic, readonly) NSDictionary* plotStyle;
-@property (nonatomic, readonly) NSArray* energyData;
-@property (nonatomic, readonly) REMChartDataProcessor* dataProcessor;
-@property (nonatomic, assign) long long uomId;
-@property (nonatomic) NSString* uomName;
-
-
--(CPTPlot*)getPlot;
-
--(REMChartSeries*)initWithData:(NSArray*)energyData dataProcessor:(REMChartDataProcessor*)processor plotStyle:(NSDictionary*)plotStyle;
--(void)beforePlotAddToGraph:(CPTGraph*)graph seriesList:(NSArray*)seriesList selfIndex:(uint)selfIndex;
-
-@end
-
-
-
-
-@interface REMPieChartSeries : REMChartSeries<CPTPieChartDataSource,CPTAnimationDelegate>
-@property (nonatomic,strong) NSMutableArray* hiddenPointIndexes;
-@property (nonatomic) float animationDuration;
--(CPTColor*)getColorByIndex:(NSUInteger)idx;
-@property (nonatomic) NSArray* targetNames;
--(void)setHiddenAtIndex:(NSUInteger)index hidden:(BOOL)hidden;
-@end
-
-
-
-
-
-
-@interface REMChartConfig : NSObject
-@property (nonatomic, assign) BOOL userInteraction;
-/*
- * IList<REMChartSeries>
- */
-@property (nonatomic) NSArray* series;
-/*
- * IList<REMChartSeries>
- */
-@property (nonatomic, assign) float animationDuration;
-
--(REMChartConfig*)initWithStyle:(REMChartStyle*)style;
-//+(REMChartConfig*)getMinimunWidgetDefaultSetting;
-//+(REMChartConfig*)getMaximunWidgetDefaultSetting;
-@end
-
-
-
-@protocol REMChartView <NSObject>
--(id)initWithFrame:(CGRect)frame chartConfig:(REMChartConfig*)config;
-@end
-
-
-
-@interface REMPieChartView : CPTGraphHostingView<CPTPlotSpaceDelegate,REMChartView>
-@property (nonatomic, weak) id<REMTPieChartDelegate> delegate;
-@property (nonatomic, readonly) NSArray* series;
--(void)cancelToolTipStatus;
-
--(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden;
 @end

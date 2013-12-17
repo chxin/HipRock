@@ -60,13 +60,13 @@
     s.yAxis = y;
     y.axisTitle = REMEmptyString;
     y.labelToLine = self.style.yLabelToLine;
-    if (self.style.yLineStyle) {
-        y.lineColor = self.style.yLineStyle.lineColor.uiColor;
-        y.lineWidth = self.style.yLineStyle.lineWidth;
+    if (self.style.yLineWidth > 0) {
+        y.lineColor = self.style.yLineColor;
+        y.lineWidth = self.style.yLineWidth;
     }
-    if (self.style.yTextStyle) {
-        y.labelColor = self.style.yTextStyle.color.uiColor;
-        y.labelFont = [UIFont fontWithName:self.style.yTextStyle.fontName size:self.style.yTextStyle.fontSize];
+    if (self.style.yTextFont) {
+        y.labelColor = self.style.yTextColor;
+        y.labelFont = self.style.yTextFont;
     }
     y.axisTitleColor = self.style.yAxisTitleColor;
     y.axisTitleToTopLabel = self.style.yAxisTitleToTopLabel;

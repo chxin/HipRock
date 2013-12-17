@@ -22,6 +22,7 @@
 #import "DCLineWrapper.h"
 #import "DCColumnWrapper.h"
 #import "DCRankingWrapper.h"
+#import "DCLabelingWrapper.h"
 #import "DCPieWrapper.h"
 
 
@@ -519,6 +520,8 @@
     } else if (widgetType == REMDiagramTypeStackColumn) {
         widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         widgetWrapper.delegate = self;
+    } else if (widgetType == REMDiagramTypeLabelling) {
+        widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
     }
     if (widgetWrapper != nil) {
         if([widgetWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
@@ -1075,7 +1078,7 @@
     if ([self.chartWrapper isKindOfClass:[DCTrendWrapper class]]) {
         [((DCTrendWrapper*)self.chartWrapper) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
     } else if ([self.chartWrapper isKindOfClass:[DCPieChartView class]]) {
-        [((REMPieChartView*)[self.chartWrapper getView]) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
+//        [((REMPieChartView*)[self.chartWrapper getView]) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
     }
 }
 

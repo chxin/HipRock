@@ -184,7 +184,7 @@
     for (_DCColumnsLayer* columnLayer in self.columnLayers) {
         [columnLayer redrawWithXRange:newRange yRange:columnLayer.coordinateSystem.yRange];
     }
-    [self.symbolLayer setNeedsDisplayInRect:CGRectMake(0, 0, 500, self.symbolLayer.frame.size.height)];
+    [self.symbolLayer setNeedsDisplay];
 }
 
 -(void)setFrame:(CGRect)frame {
