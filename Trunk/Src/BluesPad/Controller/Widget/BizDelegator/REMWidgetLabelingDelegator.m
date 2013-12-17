@@ -12,7 +12,7 @@
 #import "REMBuildingConstants.h"
 #import "REMWidgetEnergyDelegator.h"
 #import "REMWidgetMonthPickerViewController.h"
-
+#import "DCLabelingWrapper.h"
 
 const static CGFloat kLabellingTimePickerWidth=105;
 const static CGFloat kLabellingBenchmarkFontSize=20;
@@ -21,7 +21,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
 
 @property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
 @property (nonatomic,weak) UIButton *timePickerButton;
-//@property (nonatomic,strong) DCRankingWrapper *chartWrapper;
+@property (nonatomic,strong) DCLabelingWrapper *chartWrapper;
 @property (nonatomic,weak) UIView *chartContainer;
 @property (nonatomic,weak) UIView *searchView;
 @property (nonatomic,weak) UILabel *benchmarkTextLabel;
@@ -140,12 +140,12 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
 }
 
 - (void)reloadChart{
-//    if(self.chartWrapper == nil){
-//        [self showEnergyChart];
-//    }
-//    else{
-//        [self.chartWrapper redraw:self.energyData step:REMEnergyStepNone];
-//    }
+    if(self.chartWrapper == nil){
+        [self showEnergyChart];
+    }
+    else{
+        [self.chartWrapper redraw:self.energyData];
+    }
 }
 
 
@@ -159,25 +159,24 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
 }
 
 - (void) showEnergyChart{
-//    if(self.chartWrapper!=nil){
-//        return;
-//    }
+    if(self.chartWrapper!=nil){
+        return;
+    }
     
     
     CGRect widgetRect = CGRectMake(0, 0, kWidgetChartWidth, kWidgetChartHeight);
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
-//    DCRankingWrapper  *widgetWrapper;
+    DCLabelingWrapper  *widgetWrapper;
     if (widgetType == REMDiagramTypeLabelling) {
-//        widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
     }
-//    if (widgetWrapper != nil) {
-//        [self.chartContainer addSubview:widgetWrapper.view];
-//        self.chartWrapper=widgetWrapper;
-//        widgetWrapper.delegate = self;
-//        
-//    }
+    if (widgetWrapper != nil) {
+        [self.chartContainer addSubview:[widgetWrapper getView]];
+        self.chartWrapper=widgetWrapper;
+        
+    }
     
 }
 
@@ -243,11 +242,10 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
 
 
 - (void)releaseChart{
-//    if(self.chartWrapper!=nil){
-//        //        [self.chartWrapper destroyView];
-//        [[self.chartWrapper getView] removeFromSuperview];
-//        self.chartWrapper=nil;
-//    }
+    if(self.chartWrapper!=nil){
+        [[self.chartWrapper getView] removeFromSuperview];
+        self.chartWrapper=nil;
+    }
 }
 
 
