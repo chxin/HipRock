@@ -23,4 +23,5 @@
 @property (nonatomic, strong) DCLabelingSeries* series;
 
 @property (nonatomic, weak) id<DCLabelingChartDelegate> delegate;
+
 @end

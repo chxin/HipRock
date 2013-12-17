@@ -205,6 +205,9 @@
 "Chart_Background_Text_CSeason" = "供冷季";
 "Chart_Background_Text_NonWorkday" = "非工作日";
 
+"Chart_Labeling_LessThan" = "小于";
+"Chart_Labeling_MoreThan" = "大于";
+
 
 //Energy, prefix:Energy_
 "Energy_02601"="缺少昼夜日历的部分，无法绘图。请设置后再试。";
@@ -213,4 +216,5 @@
 "Energy_02604"="缺少供冷面积的部分，无法绘图。请设置后再试。";
 "Energy_02605"="缺少采暖面积的部分，无法绘图。请设置后再试。";
 "Energy_02606"="缺少人口数量的部分，无法绘图。请设置后再试。";
+
 
