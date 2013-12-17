@@ -471,6 +471,7 @@
     if(currentOffset!=_currentOffset){
         _currentOffset=currentOffset;
         if(self.isViewLoaded==YES){
+            NSLog(@"image controller:%f",currentOffset);
             if(self.currentCoverStatus == REMBuildingCoverStatusCoverPage){
                 REMBuildingDataViewController *controller=(REMBuildingDataViewController *)self.childViewControllers[0];
                 [controller setCurrentOffsetY:currentOffset];
