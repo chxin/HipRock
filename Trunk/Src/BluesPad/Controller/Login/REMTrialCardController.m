@@ -53,12 +53,21 @@
     NSString *welcomeText = REMLocalizedString(@"Login_TrialWelcomeText");
     UIFont *welcomeFont = [UIFont systemFontOfSize:kDMLogin_TrialCardWelcomeTextFontSize];
     CGSize welcomeLabelSize = [welcomeText sizeWithFont:welcomeFont];
-    UILabel *welcomeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kDMLogin_TrialCardWelcomeTextTopOffset, kDMLogin_CardContentWidth, welcomeLabelSize.height)];
+    UILabel *welcomeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 40/*kDMLogin_TrialCardWelcomeTextTopOffset 92*/, kDMLogin_CardContentWidth, welcomeLabelSize.height)];
     welcomeLabel.textAlignment = NSTextAlignmentCenter;
     welcomeLabel.text = welcomeText;
     welcomeLabel.font = welcomeFont;
     welcomeLabel.textColor = [REMColor colorByHexString:kDMLogin_TrialCardWelcomeTextFontColor];
     welcomeLabel.backgroundColor = [UIColor clearColor];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 102, 100, 48)];
+    label.text = @"邮箱：";
+    
+    
+    UITextField *textfield = [[UITextField alloc] init];
+    textfield.frame = CGRectMake(70,126,400,45);
+    textfield.backgroundColor = [UIColor orangeColor];
+    
     
     
     CGRect buttonFrame = CGRectMake(kDMLogin_LoginButtonLeftOffset, kDMLogin_LoginButtonTopOffset, kDMLogin_LoginButtonWidth, kDMLogin_LoginButtonHeight);
@@ -74,6 +83,8 @@
     
     
     [content addSubview:welcomeLabel];
+    [content addSubview:label];
+    [content addSubview:textfield];
     [content addSubview:button];
     self.trialButton = button;
     
