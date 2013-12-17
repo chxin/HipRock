@@ -24,13 +24,13 @@
 
 #ifdef DEBUG
 
-#define kDefaultUserName @"SchneiderElectricChina"
-#define kDefaultPassword @"P@ssw0rdChina"
+#define kDefaultUserName @""
+#define kDefaultPassword @""
 
 #elif InternalRelease
 
-#define kDefaultUserName @"SchneiderElectricChina"
-#define kDefaultPassword @"P@ssw0rdChina"
+#define kDefaultUserName @""
+#define kDefaultPassword @""
 
 #else
 
