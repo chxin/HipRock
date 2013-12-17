@@ -29,9 +29,17 @@
             DCLabelingStage* stage = [[DCLabelingStage alloc]init];
             stage.stageText = textArray[i];
             stage.color = [REMColor colorByIndex:i].uiColor;
-            NSString* minText = REMIsNilOrNull(d.minValue) ? @"" : d.minValue.stringValue;
-            NSString* maxText = REMIsNilOrNull(d.maxValue) ? @"" : d.maxValue.stringValue;
-            stage.tooltipText = [NSString stringWithFormat:@"%@-%@%@", minText, maxText, d.uom];
+            BOOL minValueNil = REMIsNilOrNull(d.minValue);
+            BOOL maxValueNil = REMIsNilOrNull(d.maxValue);
+            if (minValueNil && maxValueNil) {
+                stage.tooltipText = REMEmptyString;
+            } else if (minValueNil && !maxValueNil) {
+                stage.tooltipText = [NSString stringWithFormat:@"%@%@%@", REMLocalizedString(@"Chart_Labeling_LessThan"), d.maxValue.stringValue, d.uom];
+            } else if(!minValueNil && maxValueNil) {
+                stage.tooltipText = [NSString stringWithFormat:@"%@%@%@", REMLocalizedString(@"Chart_Labeling_MoreThan"), d.minValue.stringValue, d.uom];
+            } else {
+                stage.tooltipText = [NSString stringWithFormat:@"%@-%@%@", d.minValue.stringValue, d.maxValue.stringValue, d.uom];
+            }
             [stages addObject:stage];
         }
         s.stages = stages;

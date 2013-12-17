@@ -214,8 +214,9 @@
         REMTargetEnergyData* sData = [[REMTargetEnergyData alloc]init];
         sData.energyData = energyDataArray;
         sData.target = [[REMEnergyTargetModel alloc]init];
+        sData.target.name = @"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
         sData.target.uomId = 0;
-        sData.target.uomName = [NSString stringWithFormat:@"%i", sIndex];
+        sData.target.uomName = [NSString stringWithFormat:@"UOM%i", sIndex];
         [sereis addObject:sData];
     }
     energyViewData.visibleTimeRange = r;
@@ -228,7 +229,7 @@
         a.maxValue = @((i + 1) * 20);
         a.maxValue = @(i * 20);
         a.uomId = 0;
-        a.uom = @"FFFF0";
+        a.uom = [NSString stringWithFormat:@"UOM%i", i];
         [labellings addObject:a];
     }
     energyViewData.labellingLevelArray = labellings;
