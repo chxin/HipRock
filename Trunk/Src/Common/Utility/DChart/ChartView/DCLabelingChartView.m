@@ -173,7 +173,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     self.labelHeight = kDCLabelingLabelToStageHeight * self.stageHeight;
     
     CGFloat plotWidth = CGRectGetWidth(self.frame)-self.paddingLeft-self.paddingRight;
-    self.stageWidth = (plotWidth - labelCount * self.lineWidth) / (1 + kDCLabelingStageHorizentalMargin + kDCLabelingLabelToStageWidth * (1 + 2 * kDCLabelingLabelHorizentalMargin) * labelCount);
+    self.stageWidth = (plotWidth - labelCount * self.lineWidth) / (1 + kDCLabelingStageHorizentalMargin + kDCLabelingLabelToStageWidth * (1 + 2 * kDCLabelingLabelHorizentalMargin) * labelCount - kDCLabelingLabelHorizentalMargin);
     self.stageHorizentalMargin = self.stageWidth * kDCLabelingStageHorizentalMargin;
     self.labelWidth = self.stageWidth * kDCLabelingLabelToStageWidth;
     self.labelHorizentalMargin = self.labelWidth * kDCLabelingLabelHorizentalMargin;
