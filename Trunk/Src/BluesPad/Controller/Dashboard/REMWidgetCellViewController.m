@@ -48,7 +48,6 @@
     [self.view setFrame:self.viewFrame];
     //self.view.layer.borderColor=[UIColor redColor].CGColor;
     //self.view.layer.borderWidth=1;
-    //NSLog(@"detail view:%@",NSStringFromCGRect(self.view.frame));
 
     self.searchModel=[REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax.dataStoreType withParam:self.widgetInfo.contentSyntax.params];
     if(self.widgetInfo.contentSyntax.relativeDateType!=REMRelativeTimeRangeTypeNone){
@@ -60,8 +59,6 @@
     UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(kDashboardWidgetPadding, kDashboardWidgetTitleTopMargin, self.view.frame.size.width, kDashboardWidgetTitleSize)];
     title.backgroundColor=[UIColor clearColor];
     title.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetTitleSize];
-    //title.font = [UIFont fontWithName:@(kBuildingFontSC) size:kDashboardWidgetTitleSize];
-    //title.textColor=[REMColor colorByHexString:@"#4c4c4c"];
     title.textColor=[UIColor blackColor];
     NSString *textTitle=self.widgetInfo.name;
     if (textTitle.length>=10) {
@@ -75,22 +72,6 @@
     self.bizDelegator.view=self.view;
     self.bizDelegator.title=title;
     self.bizDelegator.searchModel=self.searchModel;
-    
-    
-//    UILabel *time=[[UILabel alloc]initWithFrame:CGRectMake(title.frame.origin.x, title.frame.origin.y+title.frame.size.height+kDashboardWidgetTimeTopMargin, self.view.frame.size.width, kDashboardWidgetTimeSize)];
-//    time.backgroundColor=[UIColor clearColor];
-//    time.textColor=[REMColor colorByHexString:@"#5e5e5e"];
-//    time.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetTimeSize];
-//    if([self.widgetInfo.contentSyntax.relativeDate isEqual:[NSNull null]]==NO){
-//        time.text=self.widgetInfo.contentSyntax.relativeDateComponent;
-//    }
-//    else{
-//        REMTimeRange *range = self.widgetInfo.contentSyntax.timeRanges[0];
-//        NSString *start= [REMTimeHelper formatTimeFullHour:range.startTime isChangeTo24Hour:NO];
-//        NSString *end= [REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];
-//        time.text=[NSString stringWithFormat:NSLocalizedString(@"Dashboard_TimeRange", @""),start,end];//%@ 到 %@
-//    }
-//    [self.view addSubview:time];
 
     [self.bizDelegator initBizView];
     
@@ -153,14 +134,11 @@
 
     if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[DCLineWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
-//        widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
     } else if (widgetType == REMDiagramTypeColumn) {
         widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
-//        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
     } else if (widgetType == REMDiagramTypePie) {
         widgetWrapper = [[DCPieWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
     } else if (widgetType == REMDiagramTypeRanking) {
-//        widgetWrapper = [[REMRankingWidgetWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
         widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
     } else if (widgetType == REMDiagramTypeStackColumn) {
         widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:data widgetContext:self.widgetInfo.contentSyntax style:style];
@@ -174,8 +152,6 @@
                 DCTrendWrapper *trend=(DCTrendWrapper *)widgetWrapper;
                 trend.calenderType=self.widgetInfo.contentSyntax.calendarType;
             }
-//        } else if ([widgetWrapper isKindOfClass:[DCPieWrapper class]]) {
-            
         }
         [self.chartContainer addSubview:[widgetWrapper getView]];
         
@@ -202,27 +178,18 @@
 }
 
 - (void)snapshotChartView{
-//    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, NO, 0.0);
-//    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-//    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
     UIImage* image=[REMImageHelper imageWithView:self.view];
-    //UIImageView *v = [[UIImageView alloc]initWithImage:image];
     
     UIButton *button =[UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    //[button setBounds:self.chartContainer.bounds];
     button.showsTouchWhenHighlighted=NO;
     button.adjustsImageWhenHighlighted=NO;
     [button setExclusiveTouch:YES];
     [button setMultipleTouchEnabled:NO];
     [button setBackgroundImage:image forState:UIControlStateNormal];
-    //[button setBackgroundImage:image forState:UIControlStateHighlighted];
-    //[button setBackgroundImage:image forState:UIControlStateSelected];
     button.tag=[self.widgetInfo.widgetId integerValue];
     [button addTarget:self action:@selector(widgetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-    //[self.wrapper destroyView];
     if(self.wrapper!=nil){
         [[self.wrapper getView] removeFromSuperview];
     }
@@ -232,6 +199,7 @@
     [self.view addSubview:button];
     self.wrapper=nil;
     self.searchModel=nil;
+    self.bizDelegator=nil;
 }
 
 - (void)widgetButtonPressed:(UIButton *)button{

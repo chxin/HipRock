@@ -683,6 +683,7 @@
 		EFE86989185EEF7300DC0007 /* DCLabelingStage.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86988185EEF7300DC0007 /* DCLabelingStage.m */; };
 		EFE8698C185EF3B700DC0007 /* DCLabelingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE8698B185EF3B700DC0007 /* DCLabelingLabel.m */; };
 		EFEA7EDF1843424500CF4C3E /* _DCRankingXLabelFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEA7EDE1843424500CF4C3E /* _DCRankingXLabelFormatter.m */; };
+		EFEBAE38185FFD5D00B76549 /* DCLabelingTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEBAE37185FFD5D00B76549 /* DCLabelingTooltipView.m */; };
 		EFF701CF1830880600B371EC /* REMChartStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF701CE1830880600B371EC /* REMChartStyle.m */; };
 		EFF7514B183FC60F00C8BBE9 /* DCXYChartBackgroundBand.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF7514A183FC60F00C8BBE9 /* DCXYChartBackgroundBand.m */; };
 		EFF75151183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF75150183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m */; };
@@ -1548,6 +1549,8 @@
 		EFEA7EDD1843424500CF4C3E /* _DCRankingXLabelFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCRankingXLabelFormatter.h; path = Common/Utility/DChart/Axis/LabelLayer/_DCRankingXLabelFormatter.h; sourceTree = "<group>"; };
 		EFEA7EDE1843424500CF4C3E /* _DCRankingXLabelFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCRankingXLabelFormatter.m; path = Common/Utility/DChart/Axis/LabelLayer/_DCRankingXLabelFormatter.m; sourceTree = "<group>"; };
 		EFEA7EE018434F2400CF4C3E /* _DCXLabelFormatterProtocal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = _DCXLabelFormatterProtocal.h; path = Common/Utility/DChart/Axis/LabelLayer/_DCXLabelFormatterProtocal.h; sourceTree = "<group>"; };
+		EFEBAE36185FFD5D00B76549 /* DCLabelingTooltipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLabelingTooltipView.h; sourceTree = "<group>"; };
+		EFEBAE37185FFD5D00B76549 /* DCLabelingTooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLabelingTooltipView.m; sourceTree = "<group>"; };
 		EFF701CD1830880600B371EC /* REMChartStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartStyle.h; sourceTree = "<group>"; };
 		EFF701CE1830880600B371EC /* REMChartStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartStyle.m; sourceTree = "<group>"; };
 		EFF75149183FC60F00C8BBE9 /* DCXYChartBackgroundBand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCXYChartBackgroundBand.h; path = Common/Utility/DChart/DCXYChartBackgroundBand.h; sourceTree = "<group>"; };
@@ -3438,6 +3441,8 @@
 				EFE8697B185E9FF800DC0007 /* DCLabelingChartView.h */,
 				EFE8697C185E9FF800DC0007 /* DCLabelingChartView.m */,
 				EFE86983185EC73E00DC0007 /* DCLabelingChartDelegate.h */,
+				EFEBAE36185FFD5D00B76549 /* DCLabelingTooltipView.h */,
+				EFEBAE37185FFD5D00B76549 /* DCLabelingTooltipView.m */,
 			);
 			name = Labeling;
 			sourceTree = "<group>";
@@ -3821,6 +3826,7 @@
 				EF0BFEA41844A5A60026C47D /* DCPieChartAnimationManager.m in Sources */,
 				EFE86981185EC3EB00DC0007 /* DCLabelingWrapper.m in Sources */,
 				7A7B2105183CAB3600C14248 /* REMCommonLegendFormator.m in Sources */,
+				EFEBAE38185FFD5D00B76549 /* DCLabelingTooltipView.m in Sources */,
 				EF03DC201841C886004B9EFD /* _DCHPinchGestureRecognizer.m in Sources */,
 				B40F011A1828C3DC009650FD /* REMWidgetStepEnergyModel.m in Sources */,
 				B445AEA4177BEEB8002D2A59 /* DDFileLogger.m in Sources */,
