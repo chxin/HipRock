@@ -51,4 +51,8 @@ typedef enum _REMCommodity : int{
 ]
 
 
+#define REMCurrentUserCacheKey @"CurrentUser"
+#define REMCurrentCustomerCacheKey @"CurrentCustomer"
+
+
 #endif

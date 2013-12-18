@@ -10,10 +10,10 @@
 #import "REMCustomerModel.h"
 #import "REMStorage.h"
 #import "REMApplicationInfo.h"
+#import "REMCommonDefinition.h"
 
 @implementation REMUserModel
 
-static NSString *kCurrentUserCacheKey = @"CurrentUser";
 
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
@@ -70,18 +70,24 @@ static NSString *kCurrentUserCacheKey = @"CurrentUser";
 
 - (void)save
 {
-    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:kCurrentUserCacheKey value:[self serialize] expired:REMNeverExpired];
+    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:REMCurrentUserCacheKey value:[self serialize] expired:REMNeverExpired];
 }
 
 - (void)kill
 {
-    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:kCurrentUserCacheKey value:@"" expired:REMNeverExpired];
+    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:REMCurrentUserCacheKey value:@"" expired:REMNeverExpired];
 }
 
 + (REMUserModel *)getCached
 {
-    NSDictionary *dictionary = [REMJSONHelper objectByString:[REMStorage get:[REMApplicationInfo getApplicationCacheKey] key:kCurrentUserCacheKey]];
+    NSDictionary *dictionary = [REMJSONHelper objectByString:[REMStorage get:[REMApplicationInfo getApplicationCacheKey] key:REMCurrentUserCacheKey]];
     return [[REMUserModel alloc] initWithDictionary:dictionary];
+}
+
++(void)clean
+{
+    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:REMCurrentUserCacheKey value:@"" expired:REMNeverExpired];
+    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:REMCurrentCustomerCacheKey value:@"" expired:REMNeverExpired];
 }
 
 @end

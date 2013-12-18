@@ -15,7 +15,6 @@
 
 @implementation REMCustomerModel
 
-static NSString *kCurrentCustomerCacheKey = @"CurrentCustomer";
 
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
@@ -48,17 +47,17 @@ static NSString *kCurrentCustomerCacheKey = @"CurrentCustomer";
 
 - (void)save
 {
-    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:kCurrentCustomerCacheKey value:[self serialize] expired:REMNeverExpired];
+    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:REMCurrentCustomerCacheKey value:[self serialize] expired:REMNeverExpired];
 }
 
 - (void)kill
 {
-    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:kCurrentCustomerCacheKey value:@"" expired:REMNeverExpired];
+    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:REMCurrentCustomerCacheKey value:@"" expired:REMNeverExpired];
 }
 
 + (REMCustomerModel *)getCached
 {
-    NSDictionary *dictionary = [REMJSONHelper objectByString:[REMStorage get:[REMApplicationInfo getApplicationCacheKey] key:kCurrentCustomerCacheKey]];
+    NSDictionary *dictionary = [REMJSONHelper objectByString:[REMStorage get:[REMApplicationInfo getApplicationCacheKey] key:REMCurrentCustomerCacheKey]];
     return [[REMCustomerModel alloc] initWithDictionary:dictionary];
 }
 
