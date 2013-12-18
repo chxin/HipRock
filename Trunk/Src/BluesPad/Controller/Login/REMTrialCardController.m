@@ -20,6 +20,9 @@
 
 @interface REMTrialCardController ()
 
+@property (nonatomic,weak) UITextField *emailTextField;
+@property (nonatomic,weak) UILabel *errorLabel;
+
 
 @end
 
@@ -53,29 +56,35 @@
     NSString *welcomeText = REMLocalizedString(@"Login_TrialWelcomeText");
     UIFont *welcomeFont = [UIFont systemFontOfSize:kDMLogin_TrialCardWelcomeTextFontSize];
     CGSize welcomeLabelSize = [welcomeText sizeWithFont:welcomeFont];
-    UILabel *welcomeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 40/*kDMLogin_TrialCardWelcomeTextTopOffset 92*/, kDMLogin_CardContentWidth, welcomeLabelSize.height)];
+    UILabel *welcomeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 50/*kDMLogin_TrialCardWelcomeTextTopOffset 92*/, kDMLogin_CardContentWidth, welcomeLabelSize.height)];
     welcomeLabel.textAlignment = NSTextAlignmentCenter;
     welcomeLabel.text = welcomeText;
     welcomeLabel.font = welcomeFont;
     welcomeLabel.textColor = [REMColor colorByHexString:kDMLogin_TrialCardWelcomeTextFontColor];
     welcomeLabel.backgroundColor = [UIColor clearColor];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 102, 100, 48)];
-    label.text = @"邮箱：";
-    
     
     UITextField *textfield = [[UITextField alloc] init];
-    textfield.frame = CGRectMake(70,126,400,45);
-    textfield.backgroundColor = [UIColor orangeColor];
+    textfield.frame = CGRectMake(kDMLogin_LoginButtonLeftOffset,kDMLogin_LoginButtonTopOffset-90,330,45);
+    textfield.placeholder = @"邮箱";
+    textfield.layer.borderWidth = 1.0;
+    textfield.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    textfield.layer.cornerRadius = 3;
+    textfield.delegate = self;
+    textfield.returnKeyType = UIReturnKeyGo;
     
-    
+    CGRect labelFrame = CGRectMake(kDMLogin_LoginButtonLeftOffset, kDMLogin_LoginButtonTopOffset-38, 330, 12);
+    UILabel *errorLabel = [[UILabel alloc] initWithFrame:labelFrame];
+    errorLabel.textColor = [UIColor redColor];
+    errorLabel.font = [UIFont systemFontOfSize:12];
+    [errorLabel setHidden:YES];
     
     CGRect buttonFrame = CGRectMake(kDMLogin_LoginButtonLeftOffset, kDMLogin_LoginButtonTopOffset, kDMLogin_LoginButtonWidth, kDMLogin_LoginButtonHeight);
     NSDictionary *statusTexts = @{
                                   @(REMLoginButtonNormalStatus):REMLocalizedString(@"Login_TrialButtonText"),
                                   @(REMLoginButtonWorkingStatus):REMLocalizedString(@"Login_CreatingDemoUserText"),
                                   @(REMLoginButtonDisableStatus):REMLocalizedString(@"Login_TrialButtonText"),
-                                  };
+                                };
     REMLoginButton *button = [[REMLoginButton alloc] initWithFrame:buttonFrame andStatusTexts:statusTexts];
     button.titleLabel.textColor = [REMColor colorByHexString:kDMLogin_LoginButtonFontColor];
     button.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_LoginButtonFontSize];
@@ -83,9 +92,12 @@
     
     
     [content addSubview:welcomeLabel];
-    [content addSubview:label];
+    [content addSubview:errorLabel];
     [content addSubview:textfield];
     [content addSubview:button];
+    
+    self.emailTextField = textfield;
+    self.errorLabel = errorLabel;
     self.trialButton = button;
     
     return content;
@@ -93,6 +105,19 @@
 
 -(void)trialButtonPressed:(UIButton *)sender
 {
+    [self.errorLabel setHidden:YES];
+    
+    NSString *email = [self.emailTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    if(email == nil || [email isEqualToString:@""] || [email rangeOfString:@"."].length <= 0 || [email rangeOfString:@"@"].length <= 0){
+        [self.errorLabel setHidden:NO];
+        self.errorLabel.text = @"请输入正确的邮箱地址";
+        
+        return;
+    }
+    
+    [self.view endEditing:YES];
+    
     [self.trialButton setLoginButtonStatus:REMLoginButtonWorkingStatus];
     [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonDisableStatus];
     
@@ -141,17 +166,34 @@
                 return;
             }
             
-            //[self.loginCarouselController performSegueWithIdentifier:kSegue_LoginToCustomer sender:self];
             [self.loginCarouselController presentCustomerSelectionView];
         }
         
         //[self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-        
     } error:^(NSError *error, id response) {
         //[REMAlertHelper alert:@""];
         [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
         [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
     }];
+}
+
+
+#pragma mark - uitextfield delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    BOOL retValue = NO;
+    // see if we're on the username or password fields
+    if([textField isEqual:self.emailTextField])
+    {
+        if(self.trialButton.isEnabled == YES){ //only call login when login button is enabled
+            [self trialButtonPressed:nil];
+            retValue = YES;
+        }
+    }
+    else
+    {
+    }
+    return retValue;
 }
 
 @end

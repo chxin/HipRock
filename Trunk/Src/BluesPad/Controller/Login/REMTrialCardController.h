@@ -9,7 +9,7 @@
 #import "REMLoginCarouselController.h"
 #import "REMLoginButton.h"
 
-@interface REMTrialCardController : UIViewController
+@interface REMTrialCardController : UIViewController<UITextFieldDelegate>
 
 @property (nonatomic,weak) REMLoginCarouselController *loginCarouselController;
 
