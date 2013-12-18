@@ -44,7 +44,21 @@
     self.navigationController.navigationBar.backItem.title=NSLocalizedString(@"Common_Cancel", @""); //@"取消";
 }
 
-
+- (void)dealloc
+{
+    [self.startPicker setDatePickerMode:UIDatePickerModeCountDownTimer];
+    [self.endPicker setDatePickerMode:UIDatePickerModeCountDownTimer];
+    [self.startPicker removeTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.endPicker removeTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
+    self.startHourPicker.dataSource=nil;
+    self.endHourPicker.dataSource=nil;
+    self.startHourPicker.delegate=nil;
+    self.endHourPicker.delegate=nil;
+    self.startHourPicker=nil;
+    self.endHourPicker=nil;
+    
+    
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     REMRelativeDateViewController *vc= segue.destinationViewController;
@@ -174,7 +188,8 @@
                 
                 if(self.timePickerIndex==1){
                     [picker setDate:self.timeRange.startTime];
-                    
+                    [self.startPicker removeTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
+                    self.startPicker = nil;
                     self.startPicker=picker;
                    
                 }
@@ -184,6 +199,8 @@
                         NSDate *newEndDate=[REMTimeHelper add:-1 onPart:REMDateTimePartDay ofDate:self.timeRange.endTime];
                         [picker setDate:newEndDate];
                     }
+                    [self.endPicker removeTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
+                    self.endPicker=nil;
                     self.endPicker=picker;
                    
                 }
@@ -390,6 +407,23 @@
     return 24;
 }
 
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, pickerView.bounds.size.width, 44)];
+    [label setBackgroundColor:[UIColor clearColor]];
+    [label setTextColor:[UIColor blackColor]];
+    label.font=[UIFont boldSystemFontOfSize:22];
+    label.textAlignment=NSTextAlignmentCenter;
+    NSUInteger ret=row;
+    if (pickerView == self.endHourPicker) {
+        ret++;
+    }
+    
+    label.text=[NSString stringWithFormat:@"%d",ret];
+    
+    return label;
+}
+
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     NSUInteger ret=row;
@@ -503,6 +537,7 @@
     }
 }
 - (IBAction)okClicked:(UIBarButtonItem *)sender {
+
     
     NSDate *endTime=self.timeRange.endTime;
     NSDate *startTime=self.timeRange.startTime;
@@ -517,6 +552,7 @@
     
     [self.datePickerProtocol setNewTimeRange:self.timeRange withRelativeType:self.relativeDateType withRelativeDateComponent:self.relativeDate];
     [self.popController dismissPopoverAnimated:YES];
+
 }
 - (IBAction)cancelClicked:(UIBarButtonItem *)sender {
     [self.popController dismissPopoverAnimated:YES];
