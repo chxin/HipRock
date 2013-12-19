@@ -202,8 +202,8 @@
                 UIDatePicker *picker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width+60-hourPickerWidth, cell.frame.size.height)];
                 [picker setDatePickerMode:UIDatePickerModeDate];
                 
-                [picker setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-                [picker setCalendar:[REMTimeHelper currentCalendar]];
+                //[picker setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+                //[picker setCalendar:[REMTimeHelper currentCalendar]];
                 
                 //[picker addTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
                 
