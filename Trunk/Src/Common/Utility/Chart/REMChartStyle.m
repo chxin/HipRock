@@ -31,7 +31,7 @@
     style.xTextStyle = textStyle;
     style.yTextStyle = textStyle;
     style.horizentalGridLineAmount = 6;
-    style.symbolSize = 20;
+    style.symbolSize = 14;
     style.xLabelToLine = 12;
     style.yLabelToLine = 12;
     style.yAxisTitleColor = [REMColor colorByHexString:@"#3b3b3b"];
@@ -44,7 +44,7 @@
     style.focusSymbolIndicatorSize = 40;
     
     style.pieRadius = 180;
-    style.pieShadowRadius = 190;
+    style.pieShadowRadius = 188;
     
     style.plotPaddingBottom = 22;
     style.plotPaddingTop = 22;

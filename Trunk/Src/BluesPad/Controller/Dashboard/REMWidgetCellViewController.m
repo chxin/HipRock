@@ -213,8 +213,8 @@
     UIButton *button =[UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     //[button setBounds:self.chartContainer.bounds];
-    button.showsTouchWhenHighlighted=NO;
-    button.adjustsImageWhenHighlighted=NO;
+    //button.showsTouchWhenHighlighted=NO;
+    button.adjustsImageWhenHighlighted=YES;
     [button setExclusiveTouch:YES];
     [button setMultipleTouchEnabled:NO];
     [button setBackgroundImage:image forState:UIControlStateNormal];
