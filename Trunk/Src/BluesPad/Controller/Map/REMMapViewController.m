@@ -49,15 +49,10 @@
     
     [self.view.layer insertSublayer:self.titleGradientLayer above:self.mapView.layer];
     
-    if(self.buildingInfoArray == nil || self.buildingInfoArray.count <= 0){
-        [REMAlertHelper alert:REMLocalizedString(@"Login_NoBuilding")];
-    }
-    else{
-        [self showMarkers];
-        
-        if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
-            [self.view setUserInteractionEnabled:NO];
-        }
+    [self showMarkers];
+    
+    if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
+        [self.view setUserInteractionEnabled:NO];
     }
 }
 

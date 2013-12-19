@@ -16,6 +16,7 @@ typedef enum _REMDataStoreType
      */
     REMDSUserValidate,
     REMDSDemoUserValidate,
+    REMDSUserCustomerValidate,
     
     /**
      * User

@@ -42,6 +42,8 @@ static NSDictionary *serviceMap = nil;
               REMJsonSvc(@"API/AccessControl.svc/ValidateUser"),
           @(REMDSDemoUserValidate) :
               REMJsonSvc(@"API/AccessControl.svc/ValidateDemoUser"),
+          @(REMDSUserCustomerValidate) :
+              REMJsonSvc(@"API/AccessControl.svc/ValidateUserCustomer"),
           
           /**
            *	Energy

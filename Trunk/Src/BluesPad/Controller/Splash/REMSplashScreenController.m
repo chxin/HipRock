@@ -18,6 +18,9 @@
 #import "DCLineWrapper.h"
 #import "DCPieChartView.h"
 #import "REMLocalizeKeys.h"
+#import "REMCustomerModel.h"
+#import "REMUserModel.h"
+#import "REMUserValidationModel.h"
 
 @interface REMSplashScreenController ()
 
@@ -131,7 +134,41 @@
     [self recoverAppContext];
     
     if([self isAlreadyLogin]){
-        [self breathShowMapView:YES:nil];
+        //if network is ok and (user or customer does not exist) goto login
+        //else goto map
+        BOOL isNoConnect = [REMNetworkHelper checkIsNoConnect];
+        
+        if(isNoConnect){
+            [self breathShowMapView:YES:nil];
+        }
+        else{
+            REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserCustomerValidate parameter:@{@"userName":REMAppCurrentUser.name,@"customerId":REMAppCurrentCustomer.customerId}];
+            [REMDataAccessor access:store success:^(id data) {
+                REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
+                
+                if(validationResult.status == REMUserValidationSuccess){
+                    [self breathShowMapView:YES:nil];
+                }
+                else{
+                    //clear login info
+                    [REMAlertHelper alert:REMLocalizedString(@"Login_NotAuthorized")];
+                    
+                    REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
+                    REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
+                    
+                    [currentUser kill];
+                    [currentCustomer kill];
+                    currentUser = nil;
+                    currentCustomer = nil;
+                    
+                    [REMApplicationContext destroy];
+                    
+                    [self breathShowLoginView];
+                }
+            } error:^(NSError *error, id response) {
+                [self breathShowMapView:YES:nil];
+            }];
+        }
     }
     else{
         [self breathShowLoginView];
@@ -312,6 +349,15 @@
     buildingStore.maskContainer = nil;
     
     [REMDataAccessor access:buildingStore success:^(id data) {
+        if([data count] <= 0){
+            [REMAlertHelper alert:REMLocalizedString(@"Login_NotAuthorized")];
+            
+            if([self isAlreadyLogin]){
+                [self showLoginView:YES];
+            }
+            
+            return;
+        }
         
         self.buildingInfoArray = [[NSMutableArray alloc] init];
         

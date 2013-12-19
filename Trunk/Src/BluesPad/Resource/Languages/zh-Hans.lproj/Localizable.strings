@@ -78,7 +78,7 @@
 "Login_UserNotExist" = "该用户名不存在";
 "Login_WrongPassword" = "登录密码错误";
 "Login_NotAuthorized" = "未配置客户及相关数据权限,请联系您的管理员。";
-"Login_NoBuilding" = "没有任何可显示的楼宇";
+//"Login_NoBuilding" = "没有任何可显示的楼宇";
 "Login_AccountLocked" = "登录失败，您的用户名暂时无法使用";
 
 
