@@ -238,7 +238,7 @@
     UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, kDMCommon_TopLeftButtonTop,kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
     
     backButton.adjustsImageWhenHighlighted=YES;
-    backButton.showsTouchWhenHighlighted=YES;
+    //backButton.showsTouchWhenHighlighted=YES;
     backButton.titleLabel.text=@"Back";
     [backButton setBackgroundImage:REMIMG_Back forState:UIControlStateNormal];
     [backButton addTarget:self.parentViewController action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -251,7 +251,7 @@
     //if (self.buildingInfo.commodityUsage.count == 0) {
     shareButton.enabled = NO;
     //}
-    shareButton.showsTouchWhenHighlighted=YES;
+    //shareButton.showsTouchWhenHighlighted=YES;
     shareButton.adjustsImageWhenHighlighted=YES;
     shareButton.titleLabel.text=@"Share";
     [shareButton addTarget:self.parentViewController action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];

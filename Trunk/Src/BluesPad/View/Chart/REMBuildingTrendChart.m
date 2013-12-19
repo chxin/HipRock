@@ -59,7 +59,7 @@
 - (REMToggleButton*) makeButton:(NSString*)buttonText rect:(CGRect)rect{
     REMToggleButton* btn = [REMToggleButton buttonWithType: UIButtonTypeCustom];
     [btn setFrame:rect];
-    btn.showsTouchWhenHighlighted = YES;
+    //btn.showsTouchWhenHighlighted = YES;
     btn.adjustsImageWhenHighlighted = YES;
     [btn setTitle:buttonText forState:UIControlStateNormal];
     //btn.backgroundColor = [UIColor redColor];
