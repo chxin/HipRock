@@ -350,6 +350,7 @@
             UIScrollView *view=(UIScrollView *)self.view;
             if(view.contentOffset.y != currentOffsetY){
                 [view setContentOffset:CGPointMake(view.contentOffset.x, currentOffsetY)];
+                [self checkIfRequestChartData:view];
             }
             REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
             [parent setBlurLevel:currentOffsetY];
