@@ -38,5 +38,7 @@
 
 -(void) releaseChart;
 
+- (void)rollback;
+
 
 @end

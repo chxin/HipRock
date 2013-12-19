@@ -80,7 +80,7 @@
         [btn.titleLabel setFont:[UIFont fontWithName:@(kBuildingFontSCRegular) size:12]];
         NSString *str = [self retrieveCommodityImageName:model];
         btn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentCenter;
-        btn.showsTouchWhenHighlighted=YES;
+        //btn.showsTouchWhenHighlighted=YES;
         btn.adjustsImageWhenHighlighted=YES;
         
         btn.titleEdgeInsets=UIEdgeInsetsMake(41, 0, 0, 0);
@@ -103,7 +103,7 @@
         
         btn.tag=i;
         NSString *str = [self retrieveCommodityImageName:model.commodity];
-        btn.showsTouchWhenHighlighted=YES;
+        //btn.showsTouchWhenHighlighted=YES;
         btn.adjustsImageWhenHighlighted=YES;
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
@@ -350,14 +350,15 @@
             UIScrollView *view=(UIScrollView *)self.view;
             if(view.contentOffset.y != currentOffsetY){
                 [view setContentOffset:CGPointMake(view.contentOffset.x, currentOffsetY)];
+                [self checkIfRequestChartData:view];
             }
-            REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
-            [parent setBlurLevel:currentOffsetY];
-            if(parent.currentOffset!=currentOffsetY){
-                parent.currentOffset=currentOffsetY;
-            }
+            
         }
-        
+        REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
+        [parent setBlurLevel:currentOffsetY];
+        if(parent.currentOffset!=currentOffsetY){
+            parent.currentOffset=currentOffsetY;
+        }
     }
 }
 
