@@ -47,9 +47,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     self = [super initWithFrame:frame];
     if (self) {
         self.tooltipIconCentrePoints = [[NSMutableArray alloc]init];
-        self.backgroundColor = [UIColor whiteColor];
-        // Initialization code
-//        [self constructSharp:500 height:100 arc:90 radius:40 color:[REMColor colorByIndex:0].uiColor];
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
