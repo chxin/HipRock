@@ -352,13 +352,13 @@
                 [view setContentOffset:CGPointMake(view.contentOffset.x, currentOffsetY)];
                 [self checkIfRequestChartData:view];
             }
-            REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
-            [parent setBlurLevel:currentOffsetY];
-            if(parent.currentOffset!=currentOffsetY){
-                parent.currentOffset=currentOffsetY;
-            }
+            
         }
-        
+        REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
+        [parent setBlurLevel:currentOffsetY];
+        if(parent.currentOffset!=currentOffsetY){
+            parent.currentOffset=currentOffsetY;
+        }
     }
 }
 

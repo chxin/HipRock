@@ -310,6 +310,9 @@ const static CGFloat buildingGap=20;
     [vc loadContentView];
     if(self.currentBuildingIndex<self.childViewControllers.count){
         NSInteger sign=[timer.userInfo[@"direction"] integerValue];
+        if (timer==nil) {
+            sign=-1;
+        }
         NSNumber *willIndex= @(self.currentBuildingIndex-1*sign);
         if(willIndex.intValue>=self.childViewControllers.count || willIndex.intValue<0){
             return;

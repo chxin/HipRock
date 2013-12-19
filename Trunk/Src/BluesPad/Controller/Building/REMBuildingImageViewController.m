@@ -470,17 +470,18 @@
 - (void)setCurrentOffset:(CGFloat)currentOffset{
     if(currentOffset!=_currentOffset){
         _currentOffset=currentOffset;
-        if(self.isViewLoaded==YES){
-            if(self.currentCoverStatus == REMBuildingCoverStatusCoverPage){
-                REMBuildingDataViewController *controller=(REMBuildingDataViewController *)self.childViewControllers[0];
-                [controller setCurrentOffsetY:currentOffset];
-            }
-            else{
-                REMDashboardController *controller=(REMDashboardController *)self.childViewControllers[1];
-                [controller setCurrentOffsetY:currentOffset];
-            }
+        if(self.currentCoverStatus == REMBuildingCoverStatusCoverPage){
+            REMBuildingDataViewController *controller=(REMBuildingDataViewController *)self.childViewControllers[0];
+            [controller setCurrentOffsetY:currentOffset];
         }
+        else{
+            REMDashboardController *controller=(REMDashboardController *)self.childViewControllers[1];
+            [controller setCurrentOffsetY:currentOffset];
+        }
+        
+        
         REMBuildingViewController *buildingController=(REMBuildingViewController *)self.parentViewController;
+
         [buildingController setViewOffset:currentOffset];
     }
     
@@ -494,7 +495,6 @@
     
     float blurLevel=(offsetY + kBuildingCommodityViewTop) / (kBuildingCommodityViewTop+kCommodityScrollTop);
     
-    if(self.blurImageView.alpha == blurLevel) return;
     self.blurImageView.alpha = MAX(blurLevel,0);
     
     if(blurLevel>=1.0){
