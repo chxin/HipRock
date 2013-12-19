@@ -27,8 +27,6 @@
     return [[UIApplication sharedApplication] delegate];
 }
 
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.

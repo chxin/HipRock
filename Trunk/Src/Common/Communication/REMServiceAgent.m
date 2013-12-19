@@ -21,6 +21,7 @@
 #import "REMBusinessErrorInfo.h"
 #import "REMError.h"
 #import "REMNetworkStatusIndicator.h"
+#import "REMCancelBlockAlertViewController.h"
 
 
 @implementation REMServiceAgent
@@ -150,7 +151,9 @@ static int requestTimeout = 45; //(s)
         }
         else{
             if(errorInfo.code == -1001){
-                [REMAlertHelper alert:@"数据加载超时"];
+                REMCancelBlockAlertViewController *alertController = [[REMCancelBlockAlertViewController alloc] initWithMessage:REMLocalizedString(@"Login_NetworkTimeout") cancelButtonTitle:REMLocalizedString(@"Common_OK") cancelBlock:error andError:errorInfo];
+                
+                [alertController show];
             }
             
             if(error)

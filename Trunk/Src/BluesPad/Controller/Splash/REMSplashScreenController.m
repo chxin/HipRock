@@ -17,6 +17,7 @@
 #import "DCColumnWrapper.h"
 #import "DCLineWrapper.h"
 #import "DCPieChartView.h"
+#import "REMLocalizeKeys.h"
 
 @interface REMSplashScreenController ()
 
@@ -305,47 +306,38 @@
 
 - (void)showMapView:(void (^)(void))loadCompleted
 {
-    //    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
-    //    syntax.type = @"line";
-    //    syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
-    
     NSDictionary *parameter = @{@"customerId":REMAppCurrentCustomer.customerId};
     REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSBuildingInfo parameter:parameter];
-    //buildingStore.isAccessLocal = YES;
     buildingStore.groupName = nil;
     buildingStore.maskContainer = nil;
     
     [REMDataAccessor access:buildingStore success:^(id data) {
-        if([data count]<=0){
-            [REMAlertHelper alert:REMLocalizedString(@"Login_NoBuilding")];
-        }
         
-        self.buildingInfoArray = [[NSMutableArray alloc] initWithCapacity:[data count]];
+        self.buildingInfoArray = [[NSMutableArray alloc] init];
+        
         for(NSDictionary *item in (NSArray *)data){
             [self.buildingInfoArray addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
         }
         
         NSDictionary *parameter = @{@"customerId":REMAppCurrentCustomer.customerId};
         REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter];
-        //buildingStore.isAccessLocal = YES;
         logoStore.groupName = nil;
         logoStore.maskContainer = nil;
         
         [REMDataAccessor access:logoStore success:^(id data) {
-            //TODO: what if customer logo is null?
-            if(data == nil || [data length] == 2) return;
+            UIImage *logo = nil;
             
-            UIImage *view = [REMImageHelper parseImageFromNSData:data];
+            if(data != nil && [data length] > 2) {
+                logo = [REMImageHelper parseImageFromNSData:data];
+            }
             
-            REMAppCurrentLogo = view;
+            REMAppCurrentLogo = logo;
             
             if(loadCompleted!=nil)
                 loadCompleted();
             
             [self performSegueWithIdentifier:kSegue_SplashToMap sender:self];
         } error:^(NSError *error, id response) {
-            //
-            
             if(loadCompleted!=nil)
                 loadCompleted();
             
@@ -354,9 +346,11 @@
         
         
     } error:^(NSError *error, id response) {
-        if(error.code != 1001) {
-            [REMAlertHelper alert:@"数据加载错误"];
+        if(error.code != -1001) {
+            [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
         }
+        
+        [self performSegueWithIdentifier:kSegue_SplashToMap sender:self];
     }];
 }
 

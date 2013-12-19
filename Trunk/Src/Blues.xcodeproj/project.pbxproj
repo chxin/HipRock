@@ -424,6 +424,7 @@
 		7A3CB7621806385300B94DEE /* REMCustomerSwitchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */; };
 		7A3CB763180638A700B94DEE /* REMAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */; };
 		7A3CB764180638A700B94DEE /* REMNetworkStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */; };
+		7A3D0491186291AA001F8BDC /* REMCancelBlockAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3D0490186291AA001F8BDC /* REMCancelBlockAlertViewController.m */; };
 		7A3DDCDA1786C05B008A1033 /* REMServiceAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */; };
 		7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDC1786C195008A1033 /* REMMaskManager.m */; };
 		7A3F66F3184C561D0079A244 /* JumpTrial-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3F66F2184C561D0079A244 /* JumpTrial-Pressed.png */; };
@@ -1032,6 +1033,8 @@
 		7A399EA3177D279900F0EB9F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../test/CommonTests/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7A3C64FC184234CE003EDC7B /* REMTrialCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMTrialCardController.h; sourceTree = "<group>"; };
 		7A3C64FD184234CE003EDC7B /* REMTrialCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrialCardController.m; sourceTree = "<group>"; };
+		7A3D048F186291AA001F8BDC /* REMCancelBlockAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMCancelBlockAlertViewController.h; path = Common/Communication/REMCancelBlockAlertViewController.h; sourceTree = "<group>"; };
+		7A3D0490186291AA001F8BDC /* REMCancelBlockAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMCancelBlockAlertViewController.m; path = Common/Communication/REMCancelBlockAlertViewController.m; sourceTree = "<group>"; };
 		7A3DDCD81786C05B008A1033 /* REMServiceAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceAgent.h; path = Common/Communication/REMServiceAgent.h; sourceTree = "<group>"; };
 		7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceAgent.m; path = Common/Communication/REMServiceAgent.m; sourceTree = "<group>"; };
 		7A3DDCDB1786C195008A1033 /* REMMaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMaskManager.h; path = Common/Utility/REMMaskManager.h; sourceTree = "<group>"; };
@@ -2352,6 +2355,8 @@
 				7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */,
 				7A7EA6DF180548CB00A3BB56 /* REMNetworkStatusIndicator.h */,
 				7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */,
+				7A3D048F186291AA001F8BDC /* REMCancelBlockAlertViewController.h */,
+				7A3D0490186291AA001F8BDC /* REMCancelBlockAlertViewController.m */,
 			);
 			name = Communication;
 			sourceTree = "<group>";
@@ -3949,6 +3954,7 @@
 				EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */,
 				7AB9B39E183DCF1100779C5E /* REMTrendChartTooltipView.m in Sources */,
 				EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */,
+				7A3D0491186291AA001F8BDC /* REMCancelBlockAlertViewController.m in Sources */,
 				B4A0FCD517C6023300C7AD56 /* REMBuildingAirQualityView.m in Sources */,
 				7AC54999181776910037F180 /* REMDashboardController.m in Sources */,
 				B4A0FCD817C6057E00C7AD56 /* REMAirQualityModel.m in Sources */,

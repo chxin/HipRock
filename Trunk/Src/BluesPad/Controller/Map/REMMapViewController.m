@@ -43,18 +43,21 @@
 - (void)viewDidLoad
 {
 	// Do any additional setup after loading the view.
-    
-    
     [self loadMapView];
     
     [self addButtons];
     
     [self.view.layer insertSublayer:self.titleGradientLayer above:self.mapView.layer];
     
-    [self showMarkers];
-    
-    if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
-        [self.view setUserInteractionEnabled:NO];
+    if(self.buildingInfoArray == nil || self.buildingInfoArray.count <= 0){
+        [REMAlertHelper alert:REMLocalizedString(@"Login_NoBuilding")];
+    }
+    else{
+        [self showMarkers];
+        
+        if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
+            [self.view setUserInteractionEnabled:NO];
+        }
     }
 }
 
