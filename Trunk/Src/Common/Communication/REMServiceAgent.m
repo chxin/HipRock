@@ -21,7 +21,6 @@
 #import "REMBusinessErrorInfo.h"
 #import "REMError.h"
 #import "REMNetworkStatusIndicator.h"
-#import "REMCancelBlockAlertViewController.h"
 
 
 @implementation REMServiceAgent
@@ -34,7 +33,7 @@ static int maxQueueLength = kREMCommMaxQueueWifi;
 #define kREMLogResquest 2 //0:no log, 1:log partial, 2: log full
 
 #if defined(DEBUG)
-static int requestTimeout = 1000; //(s)
+static int requestTimeout = 30; //(s)
 #else
 static int requestTimeout = 45; //(s)
 #endif
@@ -151,9 +150,7 @@ static int requestTimeout = 45; //(s)
         }
         else{
             if(errorInfo.code == -1001){
-                REMCancelBlockAlertViewController *alertController = [[REMCancelBlockAlertViewController alloc] initWithMessage:REMLocalizedString(@"Login_NetworkTimeout") cancelButtonTitle:REMLocalizedString(@"Common_OK") cancelBlock:error andError:errorInfo];
-                
-                [alertController show];
+                [REMAlertHelper alert:REMLocalizedString(@"Login_NetworkTimeout")];
             }
             
             if(error)

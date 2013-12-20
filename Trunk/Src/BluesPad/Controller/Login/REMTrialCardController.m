@@ -136,9 +136,12 @@
         //[self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
         
     } error:^(NSError *error, id response) {
-        //[REMAlertHelper alert:@""];
         [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
         [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        
+        if(error.code != -1001) {
+            [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
+        }
     }];
 }
 

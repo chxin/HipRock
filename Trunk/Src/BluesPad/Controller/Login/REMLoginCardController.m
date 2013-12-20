@@ -226,7 +226,9 @@
     [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
     [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
     
-    [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
+    if(error.code != -1001) {
+        [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
+    }
 }
 
 -(void)loginSuccess
