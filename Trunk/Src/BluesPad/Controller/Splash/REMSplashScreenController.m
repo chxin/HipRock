@@ -198,7 +198,7 @@
     
     REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
     NSMutableArray* sereis = [[NSMutableArray alloc]init];
-    for (int sIndex = 0; sIndex < 3; sIndex++) {
+    for (int sIndex = 0; sIndex < 10; sIndex++) {
         NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
         for (int i = 0; i < 10000; i++) {
             REMEnergyData* data = [[REMEnergyData alloc]init];
@@ -235,6 +235,11 @@
     energyViewData.labellingLevelArray = labellings;
     energyViewData.targetEnergyData = sereis;
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
+    CGRect miniRect = CGRectMake(0, 0, 222, 108);
+    CGRect maxiRect = CGRectMake(0, 0, 974, 605);
+    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+    [self.view addSubview:pieWrapper.view];
+    self.plotSource = pieWrapper;
 //    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
 //    columnWidget.view.backgroundColor = [UIColor blackColor];
 //    [self.view addSubview:columnWidget.view];
@@ -243,11 +248,9 @@
 //    lineWidget.view.backgroundColor = [UIColor blackColor];
 //    [self.view addSubview:lineWidget.view];
     //    self.plotSource = lineWidget;
-    CGRect miniRect = CGRectMake(0, 0, 222, 108);
-    CGRect maxiRect = CGRectMake(0, 0, 974, 605);
-    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
-    self.self.plotSource = labelingWrapper;
-    [self.view addSubview:[labelingWrapper getView]];
+//    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+//    self.self.plotSource = labelingWrapper;
+//    [self.view addSubview:[labelingWrapper getView]];
 }
 
 
