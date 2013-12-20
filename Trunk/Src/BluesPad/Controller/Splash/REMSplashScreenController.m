@@ -234,7 +234,7 @@
     }
     energyViewData.labellingLevelArray = labellings;
     energyViewData.targetEnergyData = sereis;
-    REMChartStyle* style = [REMChartStyle getMinimunStyle];
+    REMChartStyle* style = [REMChartStyle getMaximizedStyle];
 //    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
 //    columnWidget.view.backgroundColor = [UIColor blackColor];
 //    [self.view addSubview:columnWidget.view];
@@ -245,7 +245,7 @@
     //    self.plotSource = lineWidget;
     CGRect miniRect = CGRectMake(0, 0, 222, 108);
     CGRect maxiRect = CGRectMake(0, 0, 974, 605);
-    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:miniRect data:energyViewData widgetContext:syntax style:style];
+    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
     self.self.plotSource = labelingWrapper;
     [self.view addSubview:[labelingWrapper getView]];
 }

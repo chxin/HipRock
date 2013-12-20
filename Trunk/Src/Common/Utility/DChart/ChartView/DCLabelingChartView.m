@@ -14,9 +14,6 @@
 #import "DCLabelingTooltipView.h"
 
 @interface DCLabelingChartView()
-//@property (nonatomic, assign) CGFloat stageHeight;
-//@property (nonatomic, assign) CGFloat stageWidth;
-@property (nonatomic, assign) CGFloat tooltipIconRadius;
 
 @property (nonatomic, strong) NSMutableArray* tooltipIconCentrePoints;
 @property (nonatomic,strong) UITapGestureRecognizer* tapGsRec;
@@ -74,7 +71,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         CGPoint iconCenter;
         [self.tooltipIconCentrePoints[tapIconIndex] getValue:&iconCenter];
         CGFloat distance = sqrt(pow(touchPoint.x-iconCenter.x, 2) + pow(touchPoint.y-iconCenter.y, 2));
-        if (distance <= self.tooltipIconRadius) {
+        if (distance <= self.style.labelingTooltipIconRadius) {
             isTapOnIcon = YES;
             break;
         }
@@ -88,36 +85,36 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
 }
 
 -(void)showTooltipForIndex:(NSUInteger)index {
-//    CGFloat tooltipHeight = self.stageHeight * 0.8;
-//    if (REMIsNilOrNull(self.tooltipView)) {
-//        self.tooltipView = [[DCLabelingTooltipView alloc]init];
-//        self.tooltipView.hidden = YES;
-//        self.tooltipView.fontName = self.fontName;
-//        self.tooltipView.alpha = 0;
-//        self.tooltipView.height = tooltipHeight;
-//        [self addSubview:self.tooltipView];
-//    }
-//    
-//    self.tooltipView.stageText = [self.series.stages[index] stageText];
-//    self.tooltipView.labelText = [self.series.stages[index] tooltipText];
-//    CGPoint iconCenter;
-//    [self.tooltipIconCentrePoints[index] getValue:&iconCenter];
-//    CGRect toFrame = CGRectMake(iconCenter.x + self.tooltipIconRadius * 1.2, iconCenter.y - tooltipHeight / 2, [self.tooltipView getWidth], tooltipHeight);
-//    
-//    if (self.tooltipView.hidden) {
-//        self.tooltipView.hidden = NO;
-//        self.tooltipView.frame = toFrame;
-//        [UIView animateWithDuration:0.2 animations:^(void){
-//            self.tooltipView.alpha = 1;
-//            self.tooltipView.color = [self.series.stages[index] color];
-//        }];
-//    } else {
-//        [UIView animateWithDuration:0.2 animations:^(void){
-//            self.tooltipView.alpha = 1;
-//            self.tooltipView.frame = toFrame;
-//            self.tooltipView.color = [self.series.stages[index] color];
-//        }];
-//    }
+    CGFloat tooltipHeight = 60;
+    if (REMIsNilOrNull(self.tooltipView)) {
+        self.tooltipView = [[DCLabelingTooltipView alloc]init];
+        self.tooltipView.hidden = YES;
+        self.tooltipView.fontName = self.style.labelingFontName;
+        self.tooltipView.alpha = 0;
+        self.tooltipView.height = tooltipHeight;
+        [self addSubview:self.tooltipView];
+    }
+    
+    self.tooltipView.stageText = [self.series.stages[index] stageText];
+    self.tooltipView.labelText = [self.series.stages[index] tooltipText];
+    CGPoint iconCenter;
+    [self.tooltipIconCentrePoints[index] getValue:&iconCenter];
+    CGRect toFrame = CGRectMake(iconCenter.x + self.style.labelingTooltipIconRadius * 1.2, iconCenter.y - tooltipHeight / 2, [self.tooltipView getWidth], tooltipHeight);
+    
+    if (self.tooltipView.hidden) {
+        self.tooltipView.hidden = NO;
+        self.tooltipView.frame = toFrame;
+        [UIView animateWithDuration:0.2 animations:^(void){
+            self.tooltipView.alpha = 1;
+            self.tooltipView.color = [self.series.stages[index] color];
+        }];
+    } else {
+        [UIView animateWithDuration:0.2 animations:^(void){
+            self.tooltipView.alpha = 1;
+            self.tooltipView.frame = toFrame;
+            self.tooltipView.color = [self.series.stages[index] color];
+        }];
+    }
 }
 
 -(void)hideTooltip {
@@ -240,27 +237,6 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     }
 }
 
-/***点必须是按顺时针排列****/
-//-(void)drawRoundPath:(NSArray*)points fillColor:(UIColor*)fillColor radius:(CGFloat)radius {
-//    CGContextSetFillColorWithColor(ctx, fillColor.CGColor);
-//    CGMutablePathRef path = CGPathCreateMutable();
-//    for (int i = 0; i < points.count; i++) {
-//        CGPoint basePoint;
-//        [points[i] getValue:&basePoint];
-//        CGPathMoveToPoint(path, NULL, basePoint.y+radius, basePoint.x);
-//        CGPathAddQuadCurveToPoint(path, NULL, basePoint.x, basePoint.y, basePoint, <#CGFloat y#>)
-//    }
-//    CGPathMoveToPoint(path, NULL, baseX, baseY + labelHeight / 2);
-//    CGPathAddLineToPoint(path, NULL, baseX + labelHeight / 2, baseY);
-//    CGPathAddLineToPoint(path, NULL, labelRightBound, baseY);
-//    CGPathAddLineToPoint(path, NULL, labelRightBound, baseY + labelHeight);
-//    CGPathAddLineToPoint(path, NULL, baseX + labelHeight / 2, baseY + labelHeight);
-//    CGPathCloseSubpath(path);
-//    CGContextAddPath(ctx, path);
-//    CGContextDrawPath(ctx, kCGPathFill);
-//    CGPathRelease(path);
-//}
-
 -(void)drawLineAt:(CGFloat)x inContext:(CGContextRef)ctx {
     CGPoint addLines[2];
     addLines[0].x = x + self.style.labelingLineWidth / 2;
@@ -301,32 +277,4 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     else if (stageCount <= 7) return self.style.labelingStageHeightFor7Levels;
     else return self.style.labelingStageHeightFor8Levels;
 }
-
-//-(CAShapeLayer*)constructSharp:(CGFloat)width height:(CGFloat)height arc:(CGFloat)arc radius:(CGFloat)radius color:(UIColor*)color {
-//    CAShapeLayer* layer = [[CAShapeLayer alloc]init];
-//    UIBezierPath*    aPath = [UIBezierPath bezierPath];
-//    // Set the starting point of the shape.
-//    CGFloat x = 0; //radius * sin((180-arc/2)*M_PI/180);
-//    
-//    layer.fillColor = color.CGColor;
-//    [aPath moveToPoint:CGPointZero];
-//    [aPath addLineToPoint:CGPointMake(width - height / 2 - x, 0)];
-////    [aPath addArcWithCenter:CGPointMake(width - height / 2 - x, radius) radius:radius startAngle:M_PI/2*3 endAngle:M_PI*(1.5+arc/360) clockwise:YES];
-//    [aPath addLineToPoint:CGPointMake(width, height/2)];
-////    [aPath addArcWithCenter:CGPointMake(width - height / 2 - x, height - radius) radius:radius startAngle:M_PI/2 endAngle:M_PI*(0.5-arc/360) clockwise:NO];
-//    [aPath addLineToPoint:CGPointMake(width - height / 2 - x, height)];
-//    [aPath addLineToPoint:CGPointMake(0.0, height)];
-//    
-//    [aPath closePath];
-//    layer.frame = CGRectMake(100, 100, width, height);
-//    layer.cornerRadius = 5;
-//    layer.path = aPath.CGPath;
-//    layer.contentsScale = [UIScreen mainScreen].scale;
-//    [self.layer addSublayer:layer];
-//    return layer;
-//}
-//
-//-(UIBezierPath*)getPath {
-//    
-//}
 @end
