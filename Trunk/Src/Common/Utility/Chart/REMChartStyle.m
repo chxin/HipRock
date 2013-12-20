@@ -142,7 +142,7 @@
     style.labelingTooltipIconFontLeftMargin = 6;
     style.labelingTooltipIconFontTopMargin = 1;
     style.labelingStageFontSize = 6;
-    style.labelingStageFontRightMargin = 2.5;
+    style.labelingStageFontRightMargin = 4.5;
     style.labelingStageFontTopMargin = 1;
     style.labelingLabelFontSize = 11;
     style.labelingLabelFontRightMargin = 5;
