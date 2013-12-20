@@ -124,18 +124,18 @@
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
     
-    [self oscarTest];
+//    [self oscarTest];
     
     
     //decide where to go
-//    [self recoverAppContext];
-//    
-//    if([self isAlreadyLogin]){
-//        [self breathShowMapView:YES:nil];
-//    }
-//    else{
-//        [self breathShowLoginView];
-//    }
+    [self recoverAppContext];
+    
+    if([self isAlreadyLogin]){
+        [self breathShowMapView:YES:nil];
+    }
+    else{
+        [self breathShowLoginView];
+    }
 }
 
 -(void)breathShowMapView:(BOOL)isAfterBreathOnce :(void (^)(void))completed
