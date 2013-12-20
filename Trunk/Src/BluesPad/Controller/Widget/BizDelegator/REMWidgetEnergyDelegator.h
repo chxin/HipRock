@@ -37,7 +37,7 @@ typedef enum _REMWidgetLegendType{
 } REMWidgetLegendType;
 
 
-@interface REMWidgetEnergyDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol,UIAlertViewDelegate,REMChartLegendItemDelegate, REMTrendChartDelegate, REMTPieChartDelegate, REMChartTooltipDelegate>
+@interface REMWidgetEnergyDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol,UIAlertViewDelegate,REMChartLegendItemDelegate, REMTrendChartDelegate, REMTPieChartDelegate, REMChartTooltipDelegate,UIPopoverControllerDelegate>
 
 @property (nonatomic,weak) UIView *searchView;
 @property (nonatomic,weak) UIView *searchLegendViewContainer;
