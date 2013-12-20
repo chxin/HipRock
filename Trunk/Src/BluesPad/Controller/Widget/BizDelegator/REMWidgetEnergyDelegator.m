@@ -979,13 +979,6 @@
     
 }
 
-- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
-{
-    UINavigationController *nav= (UINavigationController *)self.datePickerPopoverController.contentViewController;
-    REMDatePickerViewController *picker=nav.childViewControllers[0];
-    [picker purgeMemory];
-    return YES;
-}
 
 #pragma mark -
 #pragma mark touch moved

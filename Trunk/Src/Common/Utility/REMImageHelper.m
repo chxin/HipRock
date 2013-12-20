@@ -167,14 +167,14 @@
 + (UIImage *)blurImage:(UIImage *)origImage
 {
     UIImage *image=origImage;
-    if(origImage.size.width>1024){
-        CGSize newSize=CGSizeMake(origImage.size.width/2, origImage.size.height/2);
-        UIGraphicsBeginImageContext(newSize);
-        [origImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        image=newImage;
-    }
+//    if(origImage.size.width>1024){
+//        CGSize newSize=CGSizeMake(origImage.size.width/2, origImage.size.height/2);
+//        UIGraphicsBeginImageContext(newSize);
+//        [origImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+//        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//        image=newImage;
+//    }
     
     //GPUImageView *primaryView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
     GPUImagePicture *pic=[[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput:YES];
@@ -302,7 +302,7 @@
     CGImageRelease(cgimg);
 }
 
-+ (UIImage *)parseImageFromNSData:(NSData *)data{
++ (UIImage *)parseImageFromNSData:(NSData *)data withScale:(CGFloat)scaleFactor{
     if (!data || [data length] == 0) {
         return nil;
     }
@@ -372,7 +372,8 @@
     if(height>frame.size.height){
         height=frame.size.height;
     }
-    
+    width*=scaleFactor;
+    height*=scaleFactor;
     
     CGContextRef context = CGBitmapContextCreate(NULL, width, height, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo);
     

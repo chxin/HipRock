@@ -337,7 +337,7 @@
             //TODO: what if customer logo is null?
             if(data == nil || [data length] == 2) return;
             
-            UIImage *view = [REMImageHelper parseImageFromNSData:data];
+            UIImage *view = [REMImageHelper parseImageFromNSData:data withScale:1.0];
             
             REMAppCurrentLogo = view;
             

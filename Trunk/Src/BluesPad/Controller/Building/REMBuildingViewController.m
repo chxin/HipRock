@@ -47,19 +47,7 @@ const static CGFloat buildingGap=20;
 
 
 
-@implementation REMBuildingViewController{
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        
-    }
-    return self;
-}
-
+@implementation REMBuildingViewController
 
 - (void)viewDidLoad
 {
@@ -143,9 +131,6 @@ const static CGFloat buildingGap=20;
 
 - (void)initDefaultImageView
 {
-    
-
-    
     
     self.defaultImage = REMIMG_DefaultBuilding;
     UIImage *view = [UIImage imageNamed:@"DefaultBuildingBlur"];

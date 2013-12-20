@@ -44,41 +44,8 @@
     self.navigationController.navigationBar.backItem.title=NSLocalizedString(@"Common_Cancel", @""); //@"取消";
 }
 
-- (void)purgeMemory{
-    if(self.timePickerIndex == 1){
-        NSArray* deletePaths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:1]];
-        self.cellCount--;
-        self.timePickerIndex=NSNotFound;
-        [self.tableView beginUpdates];
-        [self.startPicker setHidden:YES];
-        [self.startHourPicker setHidden:YES];
-        [self.tableView deleteRowsAtIndexPaths:deletePaths withRowAnimation:UITableViewRowAnimationTop];
-        [self.tableView endUpdates];
-        //label.textColor=[UIColor blackColor];
-        
-    }
-    //[self.startPicker setDate:[NSDate date] animated:NO];
-    [self.startPicker setUserInteractionEnabled:NO];
-    [self.startPicker setEnabled:NO];
-    [self.startPicker removeTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
-    [self.startPicker removeFromSuperview];
-    
-    [self.endPicker removeTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
-    self.startHourPicker.dataSource=nil;
-    self.endHourPicker.dataSource=nil;
-    self.startHourPicker.delegate=nil;
-    self.endHourPicker.delegate=nil;
-    self.startHourPicker=nil;
-    self.endHourPicker=nil;
-    
-}
 
-- (void)dealloc
-{
-   
-    
-    
-}
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     REMRelativeDateViewController *vc= segue.destinationViewController;
@@ -202,10 +169,10 @@
                 UIDatePicker *picker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width+60-hourPickerWidth, cell.frame.size.height)];
                 [picker setDatePickerMode:UIDatePickerModeDate];
                 
-                //[picker setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-                //[picker setCalendar:[REMTimeHelper currentCalendar]];
+                [picker setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+                [picker setCalendar:[REMTimeHelper currentCalendar]];
                 
-                //[picker addTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
+                [picker addTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
                 
                 
                 if(self.timePickerIndex==1){
@@ -382,7 +349,6 @@
 }
 
 - (void)setMiddleLine:(UILabel *)label{
-    return;
     NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:label.text];
     [attributeString addAttribute:NSStrikethroughStyleAttributeName
                             value:[NSNumber numberWithInt:2]
@@ -392,7 +358,6 @@
 }
 
 - (void)removeMiddleLine:(UILabel *)label withIsActive:(BOOL)isActive{
-    return;
     NSString *text=label.text;
     label.attributedText=nil;
     label.text=text;
@@ -407,7 +372,6 @@
 }
 
 - (void)setDateTimeColor:(UILabel *)label withIsActive:(BOOL)isActive{
-    return;
     if ([label.textColor isEqual:[UIColor redColor]]==YES) {
         return;
     }
@@ -430,22 +394,6 @@
     return 24;
 }
 
-//- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
-//{
-//    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, pickerView.bounds.size.width, 44)];
-//    [label setBackgroundColor:[UIColor clearColor]];
-//    [label setTextColor:[UIColor blackColor]];
-//    label.font=[UIFont boldSystemFontOfSize:22];
-//    label.textAlignment=NSTextAlignmentCenter;
-//    NSUInteger ret=row;
-//    if (pickerView == self.endHourPicker) {
-//        ret++;
-//    }
-//    
-//    label.text=[NSString stringWithFormat:@"%d",ret];
-//    
-//    return label;
-//}
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
@@ -500,7 +448,7 @@
                 [self.startHourPicker setHidden:YES];
                 [self.tableView deleteRowsAtIndexPaths:deletePaths withRowAnimation:UITableViewRowAnimationTop];
                 [self.tableView endUpdates];
-                //label.textColor=[UIColor blackColor];
+                label.textColor=[UIColor blackColor];
                 
             }
             else {
