@@ -124,18 +124,18 @@
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
     
-//    [self oscarTest];
+    [self oscarTest];
     
     
     //decide where to go
-    [self recoverAppContext];
-    
-    if([self isAlreadyLogin]){
-        [self breathShowMapView:YES:nil];
-    }
-    else{
-        [self breathShowLoginView];
-    }
+//    [self recoverAppContext];
+//    
+//    if([self isAlreadyLogin]){
+//        [self breathShowMapView:YES:nil];
+//    }
+//    else{
+//        [self breathShowLoginView];
+//    }
 }
 
 -(void)breathShowMapView:(BOOL)isAfterBreathOnce :(void (^)(void))completed
@@ -234,7 +234,7 @@
     }
     energyViewData.labellingLevelArray = labellings;
     energyViewData.targetEnergyData = sereis;
-    REMChartStyle* style = [REMChartStyle getMaximizedStyle];
+    REMChartStyle* style = [REMChartStyle getMinimunStyle];
 //    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
 //    columnWidget.view.backgroundColor = [UIColor blackColor];
 //    [self.view addSubview:columnWidget.view];
@@ -242,9 +242,10 @@
 //    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
 //    lineWidget.view.backgroundColor = [UIColor blackColor];
 //    [self.view addSubview:lineWidget.view];
-//    self.plotSource = lineWidget;
-    
-    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
+    //    self.plotSource = lineWidget;
+    CGRect miniRect = CGRectMake(0, 0, 222, 108);
+    CGRect maxiRect = CGRectMake(0, 0, 974, 605);
+    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:miniRect data:energyViewData widgetContext:syntax style:style];
     self.self.plotSource = labelingWrapper;
     [self.view addSubview:[labelingWrapper getView]];
 }
