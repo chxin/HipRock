@@ -17,6 +17,7 @@
 @property (nonatomic, strong) DCRange* myStableRange;
 @property (nonatomic, assign) BOOL isStacked;
 @property (nonatomic) NSString* xtypeOfWidget;
+@property (nonatomic,strong) NSMutableArray* hiddenSeriesTargetsId;
 @end
 
 @implementation DCTrendWrapper
@@ -29,6 +30,7 @@
         _calenderType = REMCalendarTypeNone;
         self.xtypeOfWidget = widgetSyntax.xtype;
         [self extraSyntax:widgetSyntax];
+        self.hiddenSeriesTargetsId = [[NSMutableArray alloc]init];
         
         NSDictionary* dic = [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
         
@@ -346,6 +348,11 @@
     if (seriesIndex >= self.view.seriesList.count) return;
     DCXYSeries* series = self.view.seriesList[seriesIndex];
     [self.view setSeries:series hidden:hidden];
+    if (hidden) {
+        [self.hiddenSeriesTargetsId addObject:series.target.targetId];
+    } else {
+        [self.hiddenSeriesTargetsId removeObject:series.target.targetId];
+    }
 }
 -(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
     _calenderType = syntax.calendarType;
@@ -355,9 +362,15 @@
     NSDictionary* dic = [self updateProcessorRangesFormatter:step];
     CGRect frame = self.view.frame;
     UIView* superView = self.view.superview;
+    
     [self.view removeFromSuperview];
     
     [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:step];
+    for(DCXYSeries* s in self.view.seriesList) {
+        if ([self.hiddenSeriesTargetsId containsObject:s.target.targetId]) {
+            s.hidden = YES;
+        }
+    }
     [superView addSubview:self.view];
     [self updateCalender];
 }
