@@ -203,6 +203,7 @@
 "Chart_Background_Text_CSeason" = "供冷季";
 "Chart_Background_Text_NonWorkday" = "非工作日";
 
+"Chart_Labeling_EffecioncyTextFormat" = "能效标识：%@";
 "Chart_Labeling_LessOrEqualThan" = "<=";
 "Chart_Labeling_MoreThan" = ">";
 "Chart_Labeling_HighEffectioncy" = "高能效";
