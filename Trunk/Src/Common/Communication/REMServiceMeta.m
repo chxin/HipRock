@@ -52,13 +52,13 @@ const static NSString *SVC_BASE_SUFFIX = @"/v1.4.0.26/Mobile/MobileApiHost/";
 //const static NSString *SVC_BASE_SUFFIX = @"/";
 
 #else
-//const static NSString *SVC_BASE_HOST = @"emopmobile.energymost.com";
-//const static NSString *SVC_BASE_SCHEMA = @"http";
-//const static NSString *SVC_BASE_SUFFIX = @"/";
-
-const static NSString *SVC_BASE_HOST = @"112.124.56.137";
+const static NSString *SVC_BASE_HOST = @"emopmobile.energymost.com";
 const static NSString *SVC_BASE_SCHEMA = @"http";
-const static NSString *SVC_BASE_SUFFIX = @"/v1.4.0.26/Mobile/MobileApiHost/";
+const static NSString *SVC_BASE_SUFFIX = @"/";
+
+//const static NSString *SVC_BASE_HOST = @"112.124.56.137";
+//const static NSString *SVC_BASE_SCHEMA = @"http";
+//const static NSString *SVC_BASE_SUFFIX = @"/v1.4.0.26/Mobile/MobileApiHost/";
 #endif
 
 
