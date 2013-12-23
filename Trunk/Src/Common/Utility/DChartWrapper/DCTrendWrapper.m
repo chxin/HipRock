@@ -43,6 +43,7 @@
     [view setXLabelFormatter:xLabelFormatter];
     _view = view;
     view.xAxis = [[DCAxis alloc]init];
+    view.xAxis.coordinate = DCAxisCoordinateX;
     
     NSMutableArray* seriesList = [[NSMutableArray alloc]initWithCapacity:self.energyViewData.targetEnergyData.count];
     NSUInteger seriesIndex = 0;
@@ -109,6 +110,7 @@
         if (REMIsNilOrNull(s.yAxis)) {
             DCAxis* y = [[DCAxis alloc]init];
             s.yAxis = y;
+            y.coordinate = DCAxisCoordinateY;
             y.axisTitle = s.target.uomName;
             y.labelToLine = self.style.yLabelToLine;
             if (self.style.yLineWidth > 0) {
@@ -343,7 +345,7 @@
 -(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
     if (seriesIndex >= self.view.seriesList.count) return;
     DCXYSeries* series = self.view.seriesList[seriesIndex];
-    series.hidden = hidden;
+    [self.view setSeries:series hidden:hidden];
 }
 -(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
     _calenderType = syntax.calendarType;

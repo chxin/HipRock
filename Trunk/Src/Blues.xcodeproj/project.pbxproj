@@ -3162,7 +3162,7 @@
 			children = (
 				EF7CF5F3185D82D0000BA4AE /* Pie */,
 				EFC4D2181855765000E04688 /* Series */,
-				EFD946D91839DCBB00E9EC50 /* LabelLayer */,
+				EFD946D91839DCBB00E9EC50 /* Axis */,
 				EFC4D216185575B700E04688 /* BackgroundBands */,
 				EFD946E91839DCBB00E9EC50 /* Gridline */,
 				EFD946D01839DCBB00E9EC50 /* _DCLayer.h */,
@@ -3319,7 +3319,7 @@
 			path = Common/Utility/DChart/Axis;
 			sourceTree = "<group>";
 		};
-		EFD946D91839DCBB00E9EC50 /* LabelLayer */ = {
+		EFD946D91839DCBB00E9EC50 /* Axis */ = {
 			isa = PBXGroup;
 			children = (
 				EFD946DA1839DCBB00E9EC50 /* _DCXAxisLabelLayer.h */,
@@ -3327,7 +3327,7 @@
 				EFD946DC1839DCBB00E9EC50 /* _DCYAxisLabelLayer.h */,
 				EFD946DD1839DCBB00E9EC50 /* _DCYAxisLabelLayer.m */,
 			);
-			name = LabelLayer;
+			name = Axis;
 			path = Common/Utility/DChart/Axis/LabelLayer;
 			sourceTree = "<group>";
 		};
