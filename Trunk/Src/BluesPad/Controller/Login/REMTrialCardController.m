@@ -139,7 +139,7 @@
         [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
         [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
         
-        if(error.code != -1001) {
+        if(error.code != -1001 && error.code != 306) {
             [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
         }
     }];

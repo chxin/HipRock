@@ -149,7 +149,7 @@ static int requestTimeout = 45; //(s)
             REMLogInfo(@"Request canceled");
         }
         else{
-            if(errorInfo.code == -1001){
+            if(errorInfo.code == -1001 || errorInfo.code == 306){
                 [REMAlertHelper alert:REMLocalizedString(@"Login_NetworkTimeout")];
             }
             
