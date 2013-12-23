@@ -19,6 +19,7 @@
 #import "_DCHPinchGestureRecognizer.h"
 #import "DCColumnSeries.h"
 #import "DCTrendAnimationManager.h"
+#import "_DCVGridlineLayer.h"
 
 #import "_DCXYIndicatorLayer.h"
 
@@ -35,6 +36,7 @@
 //@property (nonatomic, strong) NSMutableArray* lineLayers;
 //@property (nonatomic, strong) NSMutableArray* symbolLayers;
 @property (nonatomic, strong) _DCLineSymbolsLayer* symbolLayer;
+@property (nonatomic, strong) _DCVGridlineLayer* _vGridlineLayer;
 
 //@property (nonatomic, strong) NSTimer* timer;
 
@@ -68,6 +70,7 @@
         _visableYAxisAmount = 3;
         self.animationManager = [[DCTrendAnimationManager alloc]init];
         self.animationManager.view = self;
+        self.hasVGridlines = NO;
     }
     return self;
 }
@@ -88,6 +91,7 @@
     
     [self drawAxisLines];
     [self drawHGridline];
+    [self drawVGridlines];
     [self drawXLabelLayer];
     [self drawIndicatorLayer];
     
@@ -144,7 +148,7 @@
     [self.animationManager invalidate];
     self.animationManager.view = nil;
     self.animationManager = nil;
-    
+    self._vGridlineLayer = nil;
 //    [self.timer invalidate];
     [self.graphContext clearHRangeObservers];
     self.graphContext = nil;
@@ -166,6 +170,14 @@
     self.xAxis = nil;
     self.yAxisList = nil;
     [super removeFromSuperview];
+}
+
+-(void)drawVGridlines {
+    if (!self.hasVGridlines) return;
+    self._vGridlineLayer = [[_DCVGridlineLayer alloc]initWithContext:self.graphContext];
+    self._vGridlineLayer.frame = self.graphContext.plotRect;
+    [self.layer addSublayer:self._vGridlineLayer];
+    [self._vGridlineLayer setNeedsDisplay];
 }
 
 -(BOOL)testHRangeChange:(DCRange*)newRange oldRange:(DCRange*)oldRange sendBy:(DCHRangeChangeSender)senderType {

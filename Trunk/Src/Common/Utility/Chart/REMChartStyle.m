@@ -50,12 +50,12 @@
     
     style.labelingLineWidth = 1;
     style.labelingLineColor = [REMColor colorByHexString:@"#cfcfcf"];
-    style.labelingFontName = @(kBuildingFontSC);
-    style.labelingTooltipArcLineWidth = 2;
+    style.labelingFontName = @(kBuildingFontSCRegular);
+    style.labelingTooltipArcLineWidth = 0;
     style.labelingStageMinWidth = 156;
     style.labelingStageToLineMargin = 21;
     style.labelingLabelToLineMargin = 21;
-    style.labelingStageMaxWidth = 447;
+    style.labelingStageMaxWidth = 403;
     style.labelingLabelWidth = 123;
     style.labelingLabelHeight = 84;
     style.labelingStageToStageTextMargin = 16;
@@ -85,6 +85,15 @@
     style.labelingStageHeightFor8Levels = 44;
     style.labelingLabelTagNameFontSize = 20;
     style.labelingRadius = 2;
+    style.labelingTooltipViewFontSize = 14;
+    style.labelingTooltipViewFontColor = [REMColor colorByHexString:@"#373737"];
+    style.labelingTooltipViewHeight = 57;
+    style.labelingTooltipViewCornerRadius = 5;
+    style.labelingTooltipViewHPadding = 48;
+    style.labelingTooltipViewVPadding = 4;
+    style.labelingTooltipViewTriangleHeight = 11;
+    style.labelingTooltipViewTriangleWidth = 23;
+    style.labelingTooltipViewTriangleMinPaddingToEdge = 10;
     
     return style;
 }
@@ -125,7 +134,7 @@
     
     style.labelingLineWidth = 0.5f;
     style.labelingLineColor = [REMColor colorByHexString:@"#cfcfcf"];
-    style.labelingFontName = @(kBuildingFontSC);
+    style.labelingFontName = @(kBuildingFontSCRegular);
     style.labelingTooltipArcLineWidth = 0;
     style.labelingStageMinWidth = 39;
     style.labelingStageToLineMargin = 5;

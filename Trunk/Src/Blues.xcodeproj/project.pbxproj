@@ -651,6 +651,7 @@
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 		EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */; };
+		EF5D1A801867D10E0069C8F5 /* _DCVGridlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5D1A7F1867D10E0069C8F5 /* _DCVGridlineLayer.m */; };
 		EF60822F17D818430093427C /* REMModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF60822E17D818430093427C /* REMModalView.m */; };
 		EF652B68185867C2007D4049 /* DCTrendAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EF652B67185867C2007D4049 /* DCTrendAnimationManager.m */; };
 		EF7CF5F6185D82F2000BA4AE /* DCPieLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF7CF5F5185D82F2000BA4AE /* DCPieLayer.m */; };
@@ -1483,6 +1484,8 @@
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
 		EF48011E17D7098D002A2EF6 /* REMBuildingWeiboView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingWeiboView.h; path = View/Building/REMBuildingWeiboView.h; sourceTree = "<group>"; };
 		EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingWeiboView.m; path = View/Building/REMBuildingWeiboView.m; sourceTree = "<group>"; };
+		EF5D1A7E1867D10E0069C8F5 /* _DCVGridlineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCVGridlineLayer.h; sourceTree = "<group>"; };
+		EF5D1A7F1867D10E0069C8F5 /* _DCVGridlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCVGridlineLayer.m; sourceTree = "<group>"; };
 		EF60822D17D818420093427C /* REMModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMModalView.h; sourceTree = "<group>"; };
 		EF60822E17D818430093427C /* REMModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMModalView.m; sourceTree = "<group>"; };
 		EF652B66185867C2007D4049 /* DCTrendAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCTrendAnimationManager.h; path = Common/Utility/DChart/ChartView/DCTrendAnimationManager.h; sourceTree = "<group>"; };
@@ -3157,7 +3160,6 @@
 		EFC4D2141855752C00E04688 /* Layer */ = {
 			isa = PBXGroup;
 			children = (
-				EFE8697E185EA72200DC0007 /* Labeling */,
 				EF7CF5F3185D82D0000BA4AE /* Pie */,
 				EFC4D2181855765000E04688 /* Series */,
 				EFD946D91839DCBB00E9EC50 /* LabelLayer */,
@@ -3359,6 +3361,8 @@
 				EFD946EB1839DCBB00E9EC50 /* _DCHGridlineLayer.m */,
 				EF0459921845CEAF0086D5AC /* _DCXYIndicatorLayer.h */,
 				EF0459931845CEAF0086D5AC /* _DCXYIndicatorLayer.m */,
+				EF5D1A7E1867D10E0069C8F5 /* _DCVGridlineLayer.h */,
+				EF5D1A7F1867D10E0069C8F5 /* _DCVGridlineLayer.m */,
 			);
 			name = Gridline;
 			path = Common/Utility/DChart/Gridline;
@@ -3444,13 +3448,6 @@
 				EFE86983185EC73E00DC0007 /* DCLabelingChartDelegate.h */,
 				EFEBAE36185FFD5D00B76549 /* DCLabelingTooltipView.h */,
 				EFEBAE37185FFD5D00B76549 /* DCLabelingTooltipView.m */,
-			);
-			name = Labeling;
-			sourceTree = "<group>";
-		};
-		EFE8697E185EA72200DC0007 /* Labeling */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			name = Labeling;
 			sourceTree = "<group>";
@@ -4035,6 +4032,7 @@
 				7AB9B399183DCF1100779C5E /* REMStackChartLegendView.m in Sources */,
 				B46C8EBA17F27C25006DC4CB /* REMDashboardView.m in Sources */,
 				7ABD828E185AD75500A2AC06 /* REMAppConfiguration.m in Sources */,
+				EF5D1A801867D10E0069C8F5 /* _DCVGridlineLayer.m in Sources */,
 				EF03DC231841E462004B9EFD /* DCPieChartView.m in Sources */,
 				7A3F66FF184C61610079A244 /* REMLoginButton.m in Sources */,
 				7A0288FD17C20CC500709111 /* WeiboDialogClosePNG.m in Sources */,

@@ -102,6 +102,15 @@
 @property (nonatomic,assign) CGFloat labelingStageHeightFor7Levels;
 @property (nonatomic,assign) CGFloat labelingStageHeightFor8Levels;
 @property (nonatomic,assign) CGFloat labelingRadius;
+@property (nonatomic,assign) CGFloat labelingTooltipViewFontSize;
+@property (nonatomic,strong) UIColor* labelingTooltipViewFontColor;
+@property (nonatomic,assign) CGFloat labelingTooltipViewHeight;
+@property (nonatomic,assign) CGFloat labelingTooltipViewHPadding;
+@property (nonatomic,assign) CGFloat labelingTooltipViewVPadding;
+@property (nonatomic,assign) CGFloat labelingTooltipViewCornerRadius;
+@property (nonatomic,assign) CGFloat labelingTooltipViewTriangleWidth;
+@property (nonatomic,assign) CGFloat labelingTooltipViewTriangleHeight;
+@property (nonatomic,assign) CGFloat labelingTooltipViewTriangleMinPaddingToEdge;
 //@property (nonatomic,assign) 
 
 /****** Labeling Style End *******/
