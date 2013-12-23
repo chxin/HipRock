@@ -19,7 +19,7 @@
     style.yGridlineColor = [REMColor colorByHexString:@"#eaeaea"];
     style.yGridlineWidth = 1.0;
     style.horizentalGridLineAmount = 6;
-    style.symbolSize = 20;
+    style.symbolSize = 14;
     style.xLabelToLine = 12;
     style.yLabelToLine = 12;
     style.yAxisTitleColor = [REMColor colorByHexString:@"#3b3b3b"];
@@ -34,7 +34,7 @@
     style.focusSymbolIndicatorSize = 40;
     
     style.pieRadius = 180;
-    style.pieShadowRadius = 190;
+    style.pieShadowRadius = 188;
     
     style.plotPaddingBottom = 22;
     style.plotPaddingTop = 22;
@@ -48,10 +48,52 @@
     
     style.playBeginAnimation = YES;
     
-    style.labelingLineWidth = 2;
-    style.labelingLineColor = [UIColor grayColor];
-    style.labelingFontName = @(kBuildingFontSC);
-    style.labelingTooltipArcLineWidth = 2;
+    style.labelingLineWidth = 1;
+    style.labelingLineColor = [REMColor colorByHexString:@"#cfcfcf"];
+    style.labelingFontName = @(kBuildingFontSCRegular);
+    style.labelingTooltipArcLineWidth = 0;
+    style.labelingStageMinWidth = 156;
+    style.labelingStageToLineMargin = 21;
+    style.labelingLabelToLineMargin = 21;
+    style.labelingStageMaxWidth = 403;
+    style.labelingLabelWidth = 123;
+    style.labelingLabelHeight = 84;
+    style.labelingStageToStageTextMargin = 16;
+    style.labelingStageToBorderMargin = 66;
+    style.labelingStageFontColor = [REMColor colorByHexString:@"#3b3b3b"];
+    style.labelingTooltipIconLeftMargin = 12;
+    style.labelingTooltipIconRadius = 14;
+    style.labelingTooltipIconFontSize = 22;
+    style.labelingTooltipIconFontLeftMargin = 24;
+    style.labelingTooltipIconFontTopMargin = 1;
+    style.labelingStageFontSize = 31;
+    style.labelingStageFontRightMargin = 27;
+    style.labelingStageFontTopMargin = 2;
+    style.labelingLabelFontSize = 65;
+    style.labelingLabelFontRightMargin = 10;
+    style.labelingLabelFontTopMargin = 14;
+    style.labelingEffectFontSize = 18;
+    style.labelingLabelValueFontColor = [REMColor colorByHexString:@"#3b3b3b"];
+    style.labelingLabelValueFontSize = 20;
+    style.labelingLabelValueFontTopMarginToLabel = 10;
+    style.labelingLabelTagNameTopMargin = 35;
+    style.labelingStageHeightFor3Levels = 84;
+    style.labelingStageHeightFor4Levels = 80;
+    style.labelingStageHeightFor5Levels = 70;
+    style.labelingStageHeightFor6Levels = 54;
+    style.labelingStageHeightFor7Levels = 48;
+    style.labelingStageHeightFor8Levels = 44;
+    style.labelingLabelTagNameFontSize = 20;
+    style.labelingRadius = 2;
+    style.labelingTooltipViewFontSize = 14;
+    style.labelingTooltipViewFontColor = [REMColor colorByHexString:@"#373737"];
+    style.labelingTooltipViewHeight = 57;
+    style.labelingTooltipViewCornerRadius = 5;
+    style.labelingTooltipViewHPadding = 48;
+    style.labelingTooltipViewVPadding = 4;
+    style.labelingTooltipViewTriangleHeight = 11;
+    style.labelingTooltipViewTriangleWidth = 23;
+    style.labelingTooltipViewTriangleMinPaddingToEdge = 10;
     
     return style;
 }
@@ -90,10 +132,44 @@
     
     style.playBeginAnimation = NO;
     
-    style.labelingLineWidth = 1;
-    style.labelingLineColor = [UIColor grayColor];
-    style.labelingFontName = @(kBuildingFontSC);
-    style.labelingTooltipArcLineWidth = 0.5;
+    style.labelingLineWidth = 0.5f;
+    style.labelingLineColor = [REMColor colorByHexString:@"#cfcfcf"];
+    style.labelingFontName = @(kBuildingFontSCRegular);
+    style.labelingTooltipArcLineWidth = 0;
+    style.labelingStageMinWidth = 39;
+    style.labelingStageToLineMargin = 5;
+    style.labelingLabelToLineMargin = 5;
+    style.labelingStageMaxWidth = 78;
+    style.labelingLabelWidth = 34;
+    style.labelingLabelHeight = 18;
+    style.labelingStageToStageTextMargin = 4;
+    style.labelingStageToBorderMargin = 16;
+    style.labelingStageFontColor = [REMColor colorByHexString:@"#3b3b3b"];
+    style.labelingTooltipIconLeftMargin = 3;
+    style.labelingTooltipIconRadius = 3;
+    style.labelingTooltipIconFontSize = 6;
+    style.labelingTooltipIconFontLeftMargin = 6;
+    style.labelingTooltipIconFontTopMargin = 1;
+    style.labelingStageFontSize = 6;
+    style.labelingStageFontRightMargin = 4.5;
+    style.labelingStageFontTopMargin = 1;
+    style.labelingLabelFontSize = 11;
+    style.labelingLabelFontRightMargin = 5;
+    style.labelingLabelFontTopMargin = 3.5;
+    style.labelingEffectFontSize = 5;
+    style.labelingLabelValueFontColor = [REMColor colorByHexString:@"#3b3b3b"];
+    style.labelingLabelValueFontSize = 5;
+    style.labelingLabelValueFontTopMarginToLabel = 2;
+    style.labelingLabelTagNameTopMargin = 2;
+    style.labelingLabelTagNameFontSize = 5;
+    
+    style.labelingStageHeightFor3Levels = 18;
+    style.labelingStageHeightFor4Levels = 14;
+    style.labelingStageHeightFor5Levels = 11;
+    style.labelingStageHeightFor6Levels = 9;
+    style.labelingStageHeightFor7Levels = 8;
+    style.labelingStageHeightFor8Levels = 7;
+    style.labelingRadius = 0.7;
     
     return style;
 }

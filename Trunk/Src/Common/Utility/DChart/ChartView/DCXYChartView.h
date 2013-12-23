@@ -22,6 +22,7 @@
 
 @property (nonatomic, strong) DCContext* graphContext;
 
+@property (nonatomic, assign) BOOL hasVGridlines;
 
 @property (nonatomic,assign) float hGridlineWidth;
 @property (nonatomic) UIColor* hGridlineColor;

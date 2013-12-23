@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "REMChartHeader.h"
 
 @interface DCLabelingTooltipView : UIView
-@property (nonatomic, strong) UIColor* color;
-@property (nonatomic, strong) NSString* stageText;
+@property (nonatomic, strong) NSString* benchmarkText;
 @property (nonatomic, strong) NSString* labelText;
 
-@property (nonatomic, strong) NSString* fontName;
-@property (nonatomic, assign) CGFloat height;
+@property (nonatomic, weak) REMChartStyle* style;
 
--(CGFloat)getWidth;
+-(void)showAt:(CGPoint)point;
+- (id)initWithStyle:(REMChartStyle*)style;
 @end

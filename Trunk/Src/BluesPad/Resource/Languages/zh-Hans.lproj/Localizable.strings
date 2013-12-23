@@ -205,8 +205,10 @@
 "Chart_Background_Text_CSeason" = "供冷季";
 "Chart_Background_Text_NonWorkday" = "非工作日";
 
-"Chart_Labeling_LessThan" = "小于";
-"Chart_Labeling_MoreThan" = "大于";
+"Chart_Labeling_LessOrEqualThan" = "<=";
+"Chart_Labeling_MoreThan" = ">";
+"Chart_Labeling_HighEffectioncy" = "高能效";
+"Chart_Labeling_LowEffectioncy" = "低能效";
 
 
 //Energy, prefix:Energy_

@@ -12,4 +12,5 @@
 @interface DCLabelingSeries : NSObject
 @property (nonatomic, strong) NSArray* stages;
 @property (nonatomic, strong) NSArray* labels;
+@property (nonatomic, strong) NSString* benchmarkText;
 @end

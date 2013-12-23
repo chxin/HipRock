@@ -192,9 +192,10 @@
     syntax.xtype = @"columnchartcomponent";
     syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
     NSMutableArray* timeRanges = [[NSMutableArray alloc]initWithCapacity:1];
-    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10]];
+    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*12]];
     [timeRanges setObject:r atIndexedSubscript:0];
     syntax.timeRanges = timeRanges;
+    syntax.params = @{@"benchmarkOption":@{@"benchmarkText":@"TEST全行业Benckmark"}};
     
     REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
     NSMutableArray* sereis = [[NSMutableArray alloc]init];
@@ -235,17 +236,25 @@
     energyViewData.labellingLevelArray = labellings;
     energyViewData.targetEnergyData = sereis;
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
-//    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
+    CGRect miniRect = CGRectMake(0, 0, 222, 108);
+    CGRect maxiRect = CGRectMake(0, 0, 974, 605);
+    
+//    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+//    [self.view addSubview:pieWrapper.view];
+//    self.plotSource = pieWrapper;
+//    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
 //    columnWidget.view.backgroundColor = [UIColor blackColor];
+//    columnWidget.view.hasVGridlines = YES;
+//    columnWidget.view.graphContext.hGridlineAmount = 4;
 //    [self.view addSubview:columnWidget.view];
     
 //    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
 //    lineWidget.view.backgroundColor = [UIColor blackColor];
 //    [self.view addSubview:lineWidget.view];
 //    self.plotSource = lineWidget;
-    
-    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
-    self.self.plotSource = labelingWrapper;
+    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+    self.plotSource = labelingWrapper;
+    [labelingWrapper getView].backgroundColor = [UIColor whiteColor];
     [self.view addSubview:[labelingWrapper getView]];
 }
 
