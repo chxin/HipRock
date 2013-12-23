@@ -17,6 +17,9 @@
     self = [super initWithContext:context];
     if (self) {
         _series = series;
+        for (DCXYSeries* s in series) {
+            s.layer = self;
+        }
     }
     return self;
 }

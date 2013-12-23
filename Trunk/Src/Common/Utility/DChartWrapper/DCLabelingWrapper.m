@@ -21,7 +21,7 @@
 @implementation DCLabelingWrapper
 -(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style {
     self = [super initWithFrame:frame data:energyViewData widgetContext:widgetSyntax style:style];
-    self.benckmarkText = widgetSyntax.params[@"benchmarkOption"][@"benchmarkText"];
+    self.benckmarkText = [NSString stringWithFormat:REMLocalizedString(@"Chart_Labeling_EffecioncyTextFormat"), widgetSyntax.params[@"benchmarkOption"][@"benchmarkText"]];
     if (self && energyViewData.labellingLevelArray.count != 0) {
         self.view = [self createView:frame];
     }

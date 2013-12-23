@@ -98,7 +98,7 @@
     else
         [self setSelected:NO];
     
-//    [self updateState];
+    [self updateState];
     //NSLog(@"legend tapped, status: %d!", self.state);
     
     //set the conrresponding series status

@@ -75,7 +75,7 @@
             textFrame = CGRectMake(centerX-size.width/2,self.frame.size.height-size.height, size.width,size.height);
         }
         if ([DCUtility isFrame:textFrame visableIn:self.bounds]) {
-            [labelText drawInRect:textFrame withFont:self.font lineBreakMode:NSLineBreakByClipping alignment: NSTextAlignmentCenter];
+            [labelText drawInRect:textFrame withFont:self.font lineBreakMode:NSLineBreakByTruncatingTail alignment: NSTextAlignmentCenter];
         }
     }
     UIGraphicsPopContext();

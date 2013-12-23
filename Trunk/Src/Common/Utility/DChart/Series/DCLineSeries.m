@@ -7,6 +7,7 @@
 //
 
 #import "DCLineSeries.h"
+#import "_DCLineSymbolsLayer.h"
 
 @implementation DCLineSeries
 
@@ -19,5 +20,12 @@
         self.type = DCSeriesTypeLine;
     }
     return self;
+}
+
+-(void)setHidden:(BOOL)hidden {
+    if (self.hidden != hidden) {
+        [super setHidden:hidden];
+        [(_DCLineSymbolsLayer*)self.layer setNeedsDisplay];
+    }
 }
 @end
