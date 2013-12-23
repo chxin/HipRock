@@ -235,10 +235,18 @@
 {
     [REMAppCurrentUser save];
     [REMAppCurrentCustomer save];
-
-    [self.loginCarouselController.splashScreenController showMapView:^{
-        //[self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-    }];
+    
+    
+    if([REMNetworkHelper checkIsNoConnect]){
+        [REMAlertHelper alert:REMLocalizedString(@"Login_NoNetwork")];
+        [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        
+        return;
+    }
+    else{
+        [self.loginCarouselController.splashScreenController showMapView:^{ }];
+    }
 }
 
 

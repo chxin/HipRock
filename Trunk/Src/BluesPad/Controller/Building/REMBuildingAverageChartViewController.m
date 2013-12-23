@@ -117,6 +117,9 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     if(self.averageData!=nil){
         [self loadChart];
     }
+    else{
+        [self drawLabelWithText:REMLocalizedString(@"BuildingChart_NoData")];
+    }
 }
 
 - (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error {
