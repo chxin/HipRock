@@ -127,7 +127,9 @@
     
     NSMutableArray* lineSeries = [[NSMutableArray alloc]init];
     for (DCXYSeries* s in self.seriesList) {
-        if (s.type == DCSeriesTypeLine) [lineSeries addObject:s];
+        if (s.type == DCSeriesTypeLine) {
+            [lineSeries addObject:s];
+        }
     }
     self.symbolLayer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext series:lineSeries];
     [self.layer addSublayer:self.symbolLayer];

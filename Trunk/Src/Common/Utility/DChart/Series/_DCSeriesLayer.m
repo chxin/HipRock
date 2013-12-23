@@ -19,6 +19,7 @@
         for (DCXYSeries* se in coordinateSystem.seriesList) {
             if ([self isValidSeriesForMe:se]) {
                 [s addObject:se];
+                se.layer = self;
             }
         }
         self.graphContext = coordinateSystem.graphContext;
