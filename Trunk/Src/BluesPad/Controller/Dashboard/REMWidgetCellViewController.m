@@ -126,6 +126,12 @@
     [self.loadingView stopAnimating];
     [self.loadingView removeFromSuperview];
     self.loadingView = nil;
+    
+    if (self.chartData==nil) {
+        [self snapshotChartView];
+        return;
+    }
+    
     DAbstractChartWrapper *widgetWrapper = nil;
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     CGRect widgetRect = self.chartContainer.bounds;

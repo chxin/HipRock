@@ -938,14 +938,19 @@
             
         }
         else{
-            if([error.code isEqualToString:@"990001202004"]==YES){ //step error
-                [self processStepErrorWithAvailableStep:error.messages[0]];
-            }
-            else if([error isKindOfClass:[REMClientErrorInfo class]]==YES){
-                REMClientErrorInfo *err=(REMClientErrorInfo *)error;
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:err.messageInfo delegate:nil cancelButtonTitle:NSLocalizedString(@"Common_OK", @"") otherButtonTitles:nil, nil];
-                [alert show];
+            if (error == nil) { //timeout
                 [self rollback];
+            }
+            else{
+                if([error.code isEqualToString:@"990001202004"]==YES){ //step error
+                    [self processStepErrorWithAvailableStep:error.messages[0]];
+                }
+                else if([error isKindOfClass:[REMClientErrorInfo class]]==YES){
+                    REMClientErrorInfo *err=(REMClientErrorInfo *)error;
+                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:err.messageInfo delegate:nil cancelButtonTitle:NSLocalizedString(@"Common_OK", @"") otherButtonTitles:nil, nil];
+                    [alert show];
+                    [self rollback];
+                }
             }
         }
     }];
@@ -974,13 +979,6 @@
     
 }
 
-- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
-{
-    UINavigationController *nav= (UINavigationController *)self.datePickerPopoverController.contentViewController;
-    REMDatePickerViewController *picker=nav.childViewControllers[0];
-    [picker purgeMemory];
-    return YES;
-}
 
 #pragma mark -
 #pragma mark touch moved

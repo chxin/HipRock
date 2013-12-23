@@ -161,6 +161,9 @@ const static CGFloat kRankingTimePickerWidth=250;
             [self reloadChart];
         }
         else{
+            if (error == nil) {
+                
+            }
         }
     }];
 }
