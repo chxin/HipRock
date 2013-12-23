@@ -460,11 +460,11 @@ const static CGFloat buildingGap=20;
     
     //REMBuildingShareViewController *shareController = [self.storyboard instantiateViewControllerWithIdentifier: @"sharePopover"];
     REMBuildingShareViewController *shareController=[[REMBuildingShareViewController alloc]init];
-    shareController.contentSizeForViewInPopover = CGSizeMake(156, 88);
+    shareController.contentSizeForViewInPopover = CGSizeMake(156, 100);
     
     if(self.sharePopoverController == nil){
         self.sharePopoverController = [[UIPopoverController alloc] initWithContentViewController:shareController];
-        [self.sharePopoverController setPopoverContentSize:CGSizeMake(156, 88)];
+        [self.sharePopoverController setPopoverContentSize:CGSizeMake(156, 100)];
         //[self.sharePopoverController setBackgroundColor:[UIColor clearColor]];
     }
     
