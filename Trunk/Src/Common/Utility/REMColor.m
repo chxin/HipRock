@@ -33,6 +33,19 @@ static NSArray *chartColor;
     return chartColor;
 }
 
++ (NSArray*)labelingColors {
+    return @[
+             @"#33963f",
+             @"#40d12c",
+             @"#95eb40",
+             @"#fffc2a",
+             @"#ffd92a",
+             @"#fcaf35",
+             @"#fc7b35",
+             @"#eb4040"
+             ];
+}
+
 + (UIColor *)colorByHexString:(NSString *)hexString
 {
     return [self colorByHexString:hexString alpha:1.0];
@@ -57,6 +70,36 @@ static NSArray *chartColor;
     [color getRed:&r green:&g blue:&b alpha:&a];
     return [UIColor colorWithRed:r green:g blue:b alpha:alpha];
 }
+
++(UIColor*)getLabelingColor:(uint)index stageCount:(uint)stageCount {
+    NSArray* hexes;
+    NSArray* labelingColors = [self labelingColors];
+    switch (stageCount) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+            hexes = @[labelingColors[0], labelingColors[3], labelingColors[7]];
+            break;
+        case 4:
+            hexes = @[labelingColors[0], labelingColors[2], labelingColors[3], labelingColors[7]];
+            break;
+        case 5:
+            hexes = @[labelingColors[0], labelingColors[1], labelingColors[3], labelingColors[6], labelingColors[7]];
+            break;
+        case 6:
+            hexes = @[labelingColors[0], labelingColors[1], labelingColors[2], labelingColors[4], labelingColors[6], labelingColors[7]];
+            break;
+        case 7:
+            hexes = @[labelingColors[0], labelingColors[1], labelingColors[2], labelingColors[3], labelingColors[4], labelingColors[6], labelingColors[7]];
+            break;
+        default:
+            hexes = labelingColors;
+            break;
+    }
+    return [self colorByHexString:hexes[index]];
+}
+
 
 + (CPTColor *)colorByIndex:(uint)index
 {

@@ -469,29 +469,28 @@
 - (void)setCurrentOffset:(CGFloat)currentOffset{
     if(currentOffset!=_currentOffset){
         _currentOffset=currentOffset;
-        if(self.isViewLoaded==YES){
            // NSLog(@"image controller:%f",currentOffset);
-            CGFloat offset=currentOffset;
-            if (offset>=kCommodityScrollTop) {
-                offset=ABS(kCommodityScrollTop);
-            }
-            else if (offset<=-kBuildingCommodityViewTop){
-                offset=-kBuildingCommodityViewTop;
-            }
-            CGFloat move=20;
-            CGFloat y=(kBuildingCommodityViewTop+offset)*move/(kBuildingCommodityViewTop+kCommodityScrollTop);
-            //NSLog(@"center:%@",NSStringFromCGPoint(self.imageView.center));
-            self.blurImageView.center=CGPointMake(self.imageView.center.x, self.view.center.y-y);
-            self.imageView.center=CGPointMake(self.imageView.center.x, self.view.center.y-y);
-            if(self.currentCoverStatus == REMBuildingCoverStatusCoverPage){
-                REMBuildingDataViewController *controller=(REMBuildingDataViewController *)self.childViewControllers[0];
-                [controller setCurrentOffsetY:currentOffset];
-            }
-            else{
-                REMDashboardController *controller=(REMDashboardController *)self.childViewControllers[1];
-                [controller setCurrentOffsetY:currentOffset];
-            }
+        CGFloat offset=currentOffset;
+        if (offset>=kCommodityScrollTop) {
+            offset=ABS(kCommodityScrollTop);
         }
+        else if (offset<=-kBuildingCommodityViewTop){
+            offset=-kBuildingCommodityViewTop;
+        }
+        CGFloat move=20;
+        CGFloat y=(kBuildingCommodityViewTop+offset)*move/(kBuildingCommodityViewTop+kCommodityScrollTop);
+        //NSLog(@"center:%@",NSStringFromCGPoint(self.imageView.center));
+        self.blurImageView.center=CGPointMake(self.imageView.center.x, self.view.center.y-y);
+        self.imageView.center=CGPointMake(self.imageView.center.x, self.view.center.y-y);
+        if(self.currentCoverStatus == REMBuildingCoverStatusCoverPage){
+            REMBuildingDataViewController *controller=(REMBuildingDataViewController *)self.childViewControllers[0];
+            [controller setCurrentOffsetY:currentOffset];
+        }
+        else{
+            REMDashboardController *controller=(REMDashboardController *)self.childViewControllers[1];
+            [controller setCurrentOffsetY:currentOffset];
+        }
+        
         REMBuildingViewController *buildingController=(REMBuildingViewController *)self.parentViewController;
         [buildingController setViewOffset:currentOffset];
     }
@@ -506,7 +505,6 @@
     
     float blurLevel=(offsetY + kBuildingCommodityViewTop) / (kBuildingCommodityViewTop+kCommodityScrollTop);
     
-    if(self.blurImageView.alpha == blurLevel) return;
     self.blurImageView.alpha = MAX(blurLevel,0);
     
     if(blurLevel>=1.0){

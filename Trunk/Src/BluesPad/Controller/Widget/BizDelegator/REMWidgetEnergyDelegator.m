@@ -293,6 +293,7 @@
     UINavigationController *nav=[storyboard instantiateViewControllerWithIdentifier:@"datePickerNavigationController"];
     
     UIPopoverController *popoverController=[[UIPopoverController alloc]initWithContentViewController:nav];
+    popoverController.delegate=self;
     REMDatePickerViewController *dateViewController =nav.childViewControllers[0];
     dateViewController.relativeDate=self.tempModel.relativeDateComponent;
     dateViewController.timeRange=self.tempModel.timeRangeArray[0];
@@ -963,6 +964,22 @@
     else{//legend toolbar
         self.currentLegendStatus=REMWidgetLegendTypeLegend;
     }
+}
+
+#pragma mark -
+#pragma mark popoverController delegate
+-(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    self.datePickerPopoverController=nil;
+    
+}
+
+- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
+{
+    UINavigationController *nav= (UINavigationController *)self.datePickerPopoverController.contentViewController;
+    REMDatePickerViewController *picker=nav.childViewControllers[0];
+    [picker purgeMemory];
+    return YES;
 }
 
 #pragma mark -

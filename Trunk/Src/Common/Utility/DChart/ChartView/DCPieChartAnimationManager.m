@@ -100,75 +100,75 @@
     [self playFrames:animationFrames];
 }
 
+-(double)ffff:(double)v {
+    int a = (v)/2;
+    if (v < 0) {
+        v -= 2*(a-1);
+    } else if (a > 0) {
+        v -= 2*a;
+    }
+    return v;
+}
+
+-(NSArray*)getAngleTurningFramesFrom:(double)from to:(double)to {
+    int frames = kDCAnimationDuration * kDCFramesPerSecord;
+    int halfFrames = frames / 2;
+    int stepDiv = [self sumFrom:0 to:halfFrames];
+    double rotationAngleStep = (to - from) / 2 / stepDiv;
+    NSMutableArray* animationFrames = [[NSMutableArray alloc]init];
+    
+    double currentRotation = from;
+    double currentSpeed = 0;
+    for (int i = 0; i < halfFrames; i++) {
+        DCPieChartAnimationFrame* aframe = [[DCPieChartAnimationFrame alloc]init];
+        currentSpeed+= rotationAngleStep;
+        currentRotation += currentSpeed;
+        aframe.rotationAngle = @(currentRotation);
+        [animationFrames addObject:aframe];
+    }
+    for (int i = halfFrames; i < frames; i++) {
+        DCPieChartAnimationFrame* aframe = [[DCPieChartAnimationFrame alloc]init];
+        currentRotation += currentSpeed;
+        aframe.rotationAngle = @(currentRotation);
+        [animationFrames addObject:aframe];
+        currentSpeed-= rotationAngleStep;
+    }
+    DCPieChartAnimationFrame* targetFrame = [[DCPieChartAnimationFrame alloc]init];
+    targetFrame.rotationAngle = @(to);
+    [animationFrames addObject:targetFrame];
+    return animationFrames;
+}
+
 -(void)rotateWithInitialSpeed:(double)speed {
     if (self.view == Nil) return;
-    NSLog(@"speed:%f", speed);
+    
     NSMutableArray* animationFrames = [[NSMutableArray alloc]init];
-    if (fabs(speed) < 0.05) {
-        double indicationAngle = -self.view.rotationAngle;
-        if (indicationAngle < 0) {
-            indicationAngle += 2;
-        }
-        // 找到预计旋转角度对应的扇区的中线位置
-        double targetRotation = [self.view.series findNearbySliceCenter:indicationAngle];  // 预计对准的扇区的中线位置
-        targetRotation = -targetRotation;
-        if (targetRotation >= 2) targetRotation -= 2;
-        else if (targetRotation < 0) targetRotation += 2;
-        
-        double frames = kDCAnimationDuration * kDCFramesPerSecord;
-        double rotationDelta = targetRotation - self.view.rotationAngle;
-        if (fabs(rotationDelta) > 1) rotationDelta = rotationDelta + ((rotationDelta > 0) ? -2 : 2);
-        double step = rotationDelta / frames;
-        for (int i = 0; i < frames; i++) {
-            DCPieChartAnimationFrame* aframe = [[DCPieChartAnimationFrame alloc]init];
-            aframe.rotationAngle = @(self.view.rotationAngle + step * i);
-            [animationFrames addObject:aframe];
-        }
+    
+    double theSpeed = speed;
+    double rotation = self.view.rotationAngle;
+    double speedDown = 0.9;
+    theSpeed *= speedDown;
+    NSMutableArray* speedArray = [[NSMutableArray alloc]init];
+    while (fabs(theSpeed) > 0.00001) {
+        rotation += theSpeed;
+        [speedArray addObject:@(theSpeed)];
+        theSpeed*=speedDown;
+    }
+    double estimatedRotationAngle = self.view.rotationAngle;
+    for (int i = 0; i < speedArray.count;i++) {
         DCPieChartAnimationFrame* frame = [[DCPieChartAnimationFrame alloc]init];
-        frame.rotationAngle = @(targetRotation);
-        [animationFrames addObject:frame];
-    } else {
-        // 预计最后一帧的旋转的角度。并预先计算出所有帧的旋转。
-        double theSpeed = speed;
-        double rotation = self.view.rotationAngle;
-        double speedDown = 0.9;
-        theSpeed *= speedDown;
-        NSMutableArray* speedArray = [[NSMutableArray alloc]init];
-        while (fabs(theSpeed) > 0.00001) {
-            rotation += theSpeed;
-            [speedArray addObject:@(theSpeed)];
-            theSpeed*=speedDown;
-        }
-        
-        // 将最后一帧的角度与indicator对齐，并改成0-2的值域范围内
-        double indicationAngle = -rotation;
-        int a = (indicationAngle)/2;
-        if (indicationAngle < 0) {
-            indicationAngle -= 2*(a-1);
-        } else if (a > 0) {
-            indicationAngle -= 2*a;
-        }
-        
-        // 找到预计旋转角度对应的扇区的中线位置
-        double targetRotation = [self.view.series findNearbySliceCenter:indicationAngle];  // 预计对准的扇区的中线位置
-        double r = self.view.rotationAngle;
-
-        for (int i = 0; i < speedArray.count;i++) {
-            DCPieChartAnimationFrame* frame = [[DCPieChartAnimationFrame alloc]init];
-            r+=[speedArray[i] doubleValue];
-            frame.rotationAngle = @(r*(rotation - targetRotation + indicationAngle)/rotation);
-            [animationFrames addObject:frame];
-        }
-        DCPieChartAnimationFrame* frame = [[DCPieChartAnimationFrame alloc]init];
-        frame.rotationAngle = @(-targetRotation);
+        estimatedRotationAngle+=[speedArray[i] doubleValue];
+        frame.rotationAngle = @(estimatedRotationAngle);
         [animationFrames addObject:frame];
     }
-//    NSLog(@"selfViewRotate:%f speed:%f rotation:%f", self.view.rotationAngle, speed, rotation);
-    for (DCPieChartAnimationFrame* f in animationFrames) {
-        NSLog(@"%f", f.rotationAngle.doubleValue);
-    }
+    double lastFrameAlignedRotation = [self ffff:estimatedRotationAngle];
+    double targetRotation = 2 - [self.view.series findNearbySliceCenter:lastFrameAlignedRotation];  // 预计对准的扇区的中线位置
+    [animationFrames addObjectsFromArray:[self getAngleTurningFramesFrom:lastFrameAlignedRotation to:targetRotation]];
     // 应用动画
     [self playFrames:animationFrames];
+    
+    return;
+    
 }
 
 -(void)playFrames:(NSArray*)frames {

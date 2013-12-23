@@ -15,4 +15,6 @@
 -(void)rotateWithInitialSpeed:(double)speed;
 -(void)playFrames:(NSArray*)frames;
 -(void)stopTimer;
+
+-(NSArray*)getAngleTurningFramesFrom:(double)from to:(double)to;
 @end

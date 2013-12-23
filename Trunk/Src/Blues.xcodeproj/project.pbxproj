@@ -2337,7 +2337,6 @@
 			children = (
 				EFD9470E1839DEAF00E9EC50 /* DChartWrapper */,
 				EFD946CD1839DB9E00E9EC50 /* DChart */,
-				EF8A47DE17F959B5009B5C33 /* Chart */,
 				7A095E71179571C80098DB16 /* REMWidgetAxisHelper.h */,
 				7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */,
 				B49B6F4F1781491800BC130A /* REMColor.h */,
@@ -3129,7 +3128,6 @@
 			isa = PBXGroup;
 			children = (
 				EF8A480117F95A1D009B5C33 /* REMChartHeader.h */,
-				EF8A47EE17F959B5009B5C33 /* DataProcessor */,
 				EFF701CD1830880600B371EC /* REMChartStyle.h */,
 				EFF701CE1830880600B371EC /* REMChartStyle.m */,
 			);
@@ -3143,7 +3141,8 @@
 				EF2962B3184C6B53000A119F /* REMTrendChartDataProcessor.m */,
 				EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */,
 			);
-			path = DataProcessor;
+			name = DataProcessor;
+			path = Common/Utility/Chart/DataProcessor;
 			sourceTree = "<group>";
 		};
 		EFC4D213185574FB00E04688 /* Animation */ = {
@@ -3292,6 +3291,8 @@
 		EFD946CD1839DB9E00E9EC50 /* DChart */ = {
 			isa = PBXGroup;
 			children = (
+				EF8A47DE17F959B5009B5C33 /* Chart */,
+				EF8A47EE17F959B5009B5C33 /* DataProcessor */,
 				EFC4D21F185576FC00E04688 /* BackgroundBand */,
 				EFC4D217185575E200E04688 /* Formatter */,
 				EFC4D2151855757600E04688 /* GestureRecognizer */,

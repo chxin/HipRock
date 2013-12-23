@@ -34,7 +34,7 @@
         REMEnergyLabellingLevelData* d = self.energyViewData.labellingLevelArray[i];
         DCLabelingStage* stage = [[DCLabelingStage alloc]init];
         stage.stageText = textArray[i];
-        stage.color = [REMColor colorByIndex:i].uiColor;
+        stage.color = [REMColor getLabelingColor:i stageCount:self.energyViewData.labellingLevelArray.count];
         BOOL minValueNil = REMIsNilOrNull(d.minValue);
         BOOL maxValueNil = REMIsNilOrNull(d.maxValue);
         if (minValueNil && maxValueNil) {
@@ -71,16 +71,10 @@
         }
     }
     s.labels = labels;
-    view.paddingRight = self.style.plotPaddingRight;
-    view.paddingLeft = self.style.plotPaddingLeft;
-    view.paddingTop = self.style.plotPaddingTop;
-    view.paddingBottom = self.style.plotPaddingBottom;
-    view.lineWidth = self.style.labelingLineWidth;
-    view.lineColor = self.style.labelingLineColor;
-    view.fontName = self.style.labelingFontName;
-    view.tooltipArcLineWidth = self.style.labelingTooltipArcLineWidth;
     view.series = s;
     view.delegate = self;
+    view.style = self.style;
+    
     return view;
 }
 

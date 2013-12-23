@@ -19,4 +19,6 @@
 + (CPTColor *)colorByIndex:(uint)index;
 // 修改一个UIColor的alpha值
 +(UIColor*)makeTransparent:(CGFloat)alpha withColor:(UIColor*)color;
+
++(UIColor*)getLabelingColor:(uint)index stageCount:(uint)stageCount;
 @end

@@ -161,14 +161,12 @@
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
     if (self.series.sumVisableValue <= 0) return;
-    if (self.panSpeed != 0) {
+    if (fabs(self.panSpeed) >= 0.05) {
         [self.animationManager rotateWithInitialSpeed:self.panSpeed];
-        self.panSpeed = 0;
     } else {
-        DCPieChartAnimationFrame* targetFrame = [[DCPieChartAnimationFrame alloc]init];
-        targetFrame.rotationAngle = @(-[self.series findNearbySliceCenter:self.rotationAngle]);
-        [self.animationManager animateToFrame:targetFrame];
+        [self.animationManager playFrames:[self.animationManager getAngleTurningFramesFrom:self.rotationAngle to:2-[self.series findNearbySliceCenter:self.rotationAngle]]];
     }
+    self.panSpeed = 0;
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
