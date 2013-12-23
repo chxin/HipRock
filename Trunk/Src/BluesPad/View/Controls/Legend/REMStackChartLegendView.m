@@ -22,6 +22,8 @@
         model.title = names[i];
         model.type = REMChartSeriesIndicatorColumn;
         model.tappable = YES;
+        model.legendView = self;
+        
         
         [models addObject:model];
     }
