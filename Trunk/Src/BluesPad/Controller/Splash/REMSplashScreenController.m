@@ -150,7 +150,7 @@
                     [self breathShowMapView:YES:nil];
                 }
                 else{
-                    //clear login info
+                    //clear login info, TODO:should prompt user that will logout
                     [REMAlertHelper alert:REMLocalizedString(@"Login_NotAuthorized")];
                     
                     REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
