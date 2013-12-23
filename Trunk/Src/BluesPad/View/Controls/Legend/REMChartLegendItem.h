@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "REMChartSeriesIndicator.h"
+@class REMChartLegendBase;
+
 
 
 @protocol REMChartLegendItemDelegate <NSObject>
@@ -24,7 +26,7 @@
 @property (nonatomic,weak) NSString *title;
 @property (nonatomic) BOOL isBenchmark;
 @property (nonatomic) BOOL tappable;
-@property (nonatomic,weak) NSObject<REMChartLegendItemDelegate> *delegate;
+@property (nonatomic,weak) REMChartLegendBase *legendView;
 
 @end
 

@@ -55,11 +55,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     self.loadingImageKey=[NSString stringWithFormat:@(kBuildingImageLoadingKeyPrefix),self.buildingInfo.building.buildingId];
-    //NSLog(@"self view:%@",NSStringFromCGRect(self.view.frame));
     [self.view setFrame:self.viewFrame];
-    //NSLog(@"self view:%@",NSStringFromCGRect(self.view.frame));
+    [self setChildControllerFrame];
+    [self loadSmallImageView];
+    
+}
+
+- (void)setChildControllerFrame{
     REMBuildingDataViewController *coverController=self.childViewControllers[0];
     REMDashboardController *dashboardController=self.childViewControllers[1];
     coverController.buildingInfo=self.buildingInfo;
@@ -68,8 +71,6 @@
     dashboardController.buildingInfo=self.buildingInfo;
     dashboardController.viewFrame=CGRectMake(kBuildingLeftMargin, coverController.viewFrame.origin.y+coverController.viewFrame.size.height, self.view.frame.size.width-kBuildingLeftMargin*2, coverController.viewFrame.size.height);
     dashboardController.upViewFrame=CGRectMake(dashboardController.viewFrame.origin.x, coverController.viewFrame.origin.y-20, dashboardController.viewFrame.size.width, dashboardController.viewFrame.size.height);
-    [self loadSmallImageView];
-    
 }
 
 - (NSString *)buildingPictureFileName{
@@ -92,7 +93,7 @@
 - (void)loadSmallImageView{
     
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    //NSLog(@"imageview:%@",NSStringFromCGRect(imageView.frame));
+
     UIImageView *blurImageView=[[UIImageView alloc]initWithFrame:imageView.frame];
     blurImageView.alpha=0;
     if([self hasExistBuildingPic]==NO){
@@ -237,7 +238,7 @@
     UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, kDMCommon_TopLeftButtonTop,kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
     
     backButton.adjustsImageWhenHighlighted=YES;
-    backButton.showsTouchWhenHighlighted=YES;
+    //backButton.showsTouchWhenHighlighted=YES;
     backButton.titleLabel.text=@"Back";
     [backButton setBackgroundImage:REMIMG_Back forState:UIControlStateNormal];
     [backButton addTarget:self.parentViewController action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -250,7 +251,7 @@
     //if (self.buildingInfo.commodityUsage.count == 0) {
     shareButton.enabled = NO;
     //}
-    shareButton.showsTouchWhenHighlighted=YES;
+    //shareButton.showsTouchWhenHighlighted=YES;
     shareButton.adjustsImageWhenHighlighted=YES;
     shareButton.titleLabel.text=@"Share";
     [shareButton addTarget:self.parentViewController action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -320,7 +321,7 @@
     }
     else{
         if(data==nil)return nil;
-        UIImage *image= [REMImageHelper parseImageFromNSData:data];
+        UIImage *image= [REMImageHelper parseImageFromNSData:data withScale:1.125];
         
         NSString *pngFilePath = [self buildingPictureFileName];
         NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
@@ -352,13 +353,15 @@
 
 
 - (void)loadImageViewByImage:(UIImage *)image{
-    UIImageView *newView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
-    newView.contentMode=UIViewContentModeScaleToFill;
+    UIImageView *newView = [[UIImageView alloc]initWithFrame:CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.imageView.frame.size.width, self.imageView.frame.size.height*1.125)];
+    newView.contentMode=UIViewContentModeCenter;
+    newView.clipsToBounds=YES;
     newView.alpha=0;
     UIImage *view = image;
     newView.image=view;
     UIImageView *newBlurred= [self blurredImageView:newView];
-    
+    newBlurred.contentMode=UIViewContentModeCenter;
+    newBlurred.clipsToBounds=YES;
     //[newBlurred setFrame:CGRectMake(-25, -25, newBlurred.frame.size.width+50, newBlurred.frame.size.height+50)];
     
     [self.view insertSubview:newView aboveSubview:self.blurImageView];
@@ -412,7 +415,8 @@
 {
     UIImageView *blurred = [[UIImageView alloc]initWithFrame:imageView.frame];
     blurred.alpha=0;
-    blurred.contentMode=UIViewContentModeScaleToFill;
+    blurred.contentMode=UIViewContentModeCenter;
+    blurred.clipsToBounds=YES;
     blurred.backgroundColor=[UIColor clearColor];
     
     NSString *blurImagePath= [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageNormalBlured];
@@ -502,7 +506,6 @@
 //    float blurLevel=(offsetY + kBuildingCommodityViewTop) / (kBuildingCommodityViewTop+kCommodityScrollTop);
 //     self.glassView.alpha = MAX(0,MIN(blurLevel,0.8));
 //    return;
-    
     float blurLevel=(offsetY + kBuildingCommodityViewTop) / (kBuildingCommodityViewTop+kCommodityScrollTop);
     
     self.blurImageView.alpha = MAX(blurLevel,0);

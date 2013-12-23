@@ -10,7 +10,7 @@
 #import "REMChartSeriesIndicator.h"
 #import "REMDimensions.h"
 #import "REMCommonHeaders.h"
-
+#import "REMChartLegendBase.h"
 
 //#define kREMLegendItemFrame CGRectMake(0,0,kDMChart_LegendItemWidth,kDMChart_LegendItemHeight)
 
@@ -22,7 +22,7 @@
 
 @property (nonatomic) BOOL tappable;
 @property (nonatomic) int seriesIndex;
-@property (nonatomic,weak) NSObject<REMChartLegendItemDelegate> *delegate;
+@property (nonatomic,weak) REMChartLegendBase *legendView;
 
 @property (nonatomic,weak) REMChartSeriesIndicator *indicator;
 @property (nonatomic,weak) UILabel *label;
@@ -37,7 +37,7 @@
     self = [super initWithFrame:frame];
     if(self){
         self.seriesIndex = model.index;
-        self.delegate = model.delegate;
+        self.legendView = model.legendView;
         self.tappable = model.tappable;
 //        self.seriesName = name;
         
@@ -102,8 +102,8 @@
     //NSLog(@"legend tapped, status: %d!", self.state);
     
     //set the conrresponding series status
-    if(self.delegate != nil){
-        [self.delegate legendStateChanged:self.state onIndex:self.seriesIndex];
+    if(self.legendView != nil && self.legendView.itemDelegate != nil){
+        [self.legendView.itemDelegate legendStateChanged:self.state onIndex:self.seriesIndex];
     }
 }
 

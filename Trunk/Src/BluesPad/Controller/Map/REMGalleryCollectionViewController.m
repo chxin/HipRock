@@ -170,7 +170,7 @@
                 if(data == nil || [data length] <= 2)
                     return;
                 
-                UIImage *smallImage = [REMImageHelper parseImageFromNSData:data];
+                UIImage *smallImage = [REMImageHelper parseImageFromNSData:data withScale:1.0];
                 [REMImageHelper writeImageFile:smallImage withFullPath:smallImagePath];
                 
                 UIImage *smallBlurImage = [REMImageHelper blurImage:smallImage];

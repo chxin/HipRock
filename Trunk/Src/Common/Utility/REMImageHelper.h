@@ -18,7 +18,7 @@
 
 + (UIImage *)blurImage2:(UIImage *)origImage;
 
-+ (UIImage *)parseImageFromNSData:(NSData *)data;
++ (UIImage *)parseImageFromNSData:(NSData *)data withScale:(CGFloat)scaleFactor;
 
 + (void)writeImageFile:(UIImage *)image withFileName:(NSString *)fileName;
 

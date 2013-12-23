@@ -27,7 +27,6 @@
 
 @property (nonatomic) BOOL showHour;
 
-- (void)purgeMemory;
 - (void)setTimeRangeByDateRelative:(NSString *)relative withTimeRange:(REMRelativeTimeRangeType )timeRangeType;
 
 @end
