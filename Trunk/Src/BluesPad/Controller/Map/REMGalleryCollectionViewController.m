@@ -148,6 +148,8 @@
                 
                 //show building view
                 [((REMGalleryViewController *)self.parentViewController) presentBuildingViewFromCell:cell animated:self.isPinching];
+                
+                self.isPinching = NO;
             }];
         }
     }

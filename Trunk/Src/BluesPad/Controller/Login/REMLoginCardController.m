@@ -180,6 +180,8 @@
             if(customers.count<=0){
                 [REMAlertHelper alert:REMLocalizedString(kLNLogin_NotAuthorized)];
                 
+                [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+                [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
                 return;
             }
             
