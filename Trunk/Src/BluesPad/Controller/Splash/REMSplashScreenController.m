@@ -320,6 +320,7 @@
 
 - (void)showLoginView:(BOOL)isAnimated
 {
+    [self.logoView setHidden:YES];
     if(self.carouselController!=nil){
 //        [self.carouselController.view removeFromSuperview];
 //        self.carouselController = nil;
@@ -353,7 +354,7 @@
             [REMAlertHelper alert:REMLocalizedString(@"Login_NotAuthorized")];
             
             if([self isAlreadyLogin]){
-                [self showLoginView:YES];
+                [self showLoginView:NO];
             }
             
             return;

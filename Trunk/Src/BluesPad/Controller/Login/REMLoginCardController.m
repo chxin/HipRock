@@ -246,7 +246,10 @@
         return;
     }
     else{
-        [self.loginCarouselController.splashScreenController showMapView:^{ }];
+        [self.loginCarouselController.splashScreenController showMapView:^{
+            [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+            [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        }];
     }
 }
 
