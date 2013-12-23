@@ -12,6 +12,7 @@
 #import "REMWidgetCommoditySearchModel.h"
 #import "REMWidgetTagSearchModel.h"
 #import "REMTextIndicatorFormator.h"
+#import "REMChartLegendBase.h"
 
 @implementation REMChartLegendView
 
@@ -27,7 +28,7 @@
         model.index = i;
         model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType:self.widget.diagramType];
         model.title = [self format:targetData.target];
-        model.delegate = self.itemDelegate;
+        model.legendView = self;
         model.tappable = YES;
         model.isBenchmark = targetData.target.type == REMEnergyTargetBenchmarkValue;
         

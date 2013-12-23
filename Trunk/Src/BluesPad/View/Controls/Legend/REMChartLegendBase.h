@@ -12,6 +12,7 @@
 #import "REMLegendFormatorBase.h"
 #import "REMChartLegendItem.h"
 
+
 @interface REMChartLegendBase : UIScrollView
 
 @property (nonatomic,weak) REMEnergyViewData *data;
@@ -30,3 +31,5 @@
 -(NSArray *)convertItemModels;
 
 @end
+
+
