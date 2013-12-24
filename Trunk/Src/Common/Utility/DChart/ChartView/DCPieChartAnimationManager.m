@@ -399,7 +399,6 @@ const NSString* stepKey = @"step";
     DCPieSlice slice;
     NSUInteger index = [self findIndexOfSlide:angle];
     NSValue* val = self.pieSlices[index];
-    NSLog(@"%i", index);
     if (!REMIsNilOrNull(val)) {
         [val getValue:&slice];
     }
