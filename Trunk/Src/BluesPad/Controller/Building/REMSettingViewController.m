@@ -14,7 +14,7 @@
 
 
 @interface REMSettingViewController ()
-
+@property (nonatomic) BOOL isLoggingOut;
 @end
 
 @implementation REMSettingViewController
@@ -38,13 +38,14 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     self.navigationController.navigationBar.topItem.backBarButtonItem=nil;
-    
+    self.isLoggingOut=NO;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     //self.navigationController=(UINavigationController *)self.parentViewController;
+    self.isLoggingOut=NO;
     
 }
 
@@ -168,6 +169,9 @@
         if(buttonIndex==1){
             [self logoutAndClearCache];
         }
+        else{
+            self.isLoggingOut=NO;
+        }
     }
 }
 
@@ -247,7 +251,11 @@
     [cell setSelected:NO];
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     if(indexPath.section == 3 && indexPath.row==0){
-        [self logout];
+        if (self.isLoggingOut==NO) {
+            self.isLoggingOut=YES;
+            [self logout];
+        }
+        
         
     }
     else if(indexPath.section==1 && indexPath.row==1){

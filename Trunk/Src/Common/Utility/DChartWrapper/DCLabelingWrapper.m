@@ -48,7 +48,7 @@
         } else if(!minValueNil && maxValueNil) {
             stage.tooltipText = [NSString stringWithFormat:@"%@%@%@", REMLocalizedString(@"Chart_Labeling_MoreThan"), [REMNumberHelper formatDataValueWithCarry:d.minValue], d.uom];
         } else {
-            stage.tooltipText = [NSString stringWithFormat:@"%@%@-%@%@", [REMNumberHelper formatDataValueWithCarry:d.minValue], d.uom, [REMNumberHelper formatDataValueWithCarry:d.maxValue], d.uom];
+            stage.tooltipText = [NSString stringWithFormat:@"%@%@ - %@%@", [REMNumberHelper formatDataValueWithCarry:d.minValue], d.uom, [REMNumberHelper formatDataValueWithCarry:d.maxValue], d.uom];
         }
         [stages addObject:stage];
     }
