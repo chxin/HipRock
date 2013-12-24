@@ -222,6 +222,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     REMWidgetLabellingSearchModel *labellingModel=(REMWidgetLabellingSearchModel *)self.model;
     
     dateViewController.timeRange=labellingModel.timeRangeArray[0];
+    dateViewController.step=labellingModel.step;
     dateViewController.popController=popoverController;
     dateViewController.datePickerProtocol=self;
     [popoverController setPopoverContentSize:dateViewController.popSize];
