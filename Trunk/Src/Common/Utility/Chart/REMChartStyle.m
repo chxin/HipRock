@@ -76,7 +76,7 @@
     style.labelingLabelValueFontColor = [REMColor colorByHexString:@"#3b3b3b"];
     style.labelingLabelValueFontSize = 20;
     style.labelingLabelValueFontTopMarginToLabel = 10;
-    style.labelingLabelTagNameTopMargin = 35;
+    style.labelingLabelTagNameTopMargin = 20;
     style.labelingStageHeightFor3Levels = 84;
     style.labelingStageHeightFor4Levels = 80;
     style.labelingStageHeightFor5Levels = 70;

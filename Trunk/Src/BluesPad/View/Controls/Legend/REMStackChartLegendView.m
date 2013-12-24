@@ -21,7 +21,7 @@
         model.index = i;
         model.title = names[i];
         model.type = REMChartSeriesIndicatorColumn;
-        model.tappable = YES;
+        model.tappable = NO;
         model.legendView = self;
         
         

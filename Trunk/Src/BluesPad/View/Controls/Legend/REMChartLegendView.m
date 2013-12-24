@@ -29,7 +29,7 @@
         model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType:self.widget.diagramType];
         model.title = [self format:targetData.target];
         model.legendView = self;
-        model.tappable = YES;
+        model.tappable = NO;
         model.isBenchmark = targetData.target.type == REMEnergyTargetBenchmarkValue;
         
         [models addObject:model];
