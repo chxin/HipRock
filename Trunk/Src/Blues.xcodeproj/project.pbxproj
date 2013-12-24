@@ -580,6 +580,22 @@
 		B46C8EBD17F27C84006DC4CB /* REMDashboardCellViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EBC17F27C84006DC4CB /* REMDashboardCellViewCell.m */; };
 		B46C8EC017F27CB9006DC4CB /* REMDashboardCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EBF17F27CB9006DC4CB /* REMDashboardCollectionView.m */; };
 		B46C8EC317F27CDF006DC4CB /* REMDashboardCollectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EC217F27CDF006DC4CB /* REMDashboardCollectionCellView.m */; };
+		B4707D8618697B1C00FBA393 /* Cooling_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D7E18697B1C00FBA393 /* Cooling_normal.png */; };
+		B4707D8718697B1C00FBA393 /* Cooling_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D7F18697B1C00FBA393 /* Cooling_pressed.png */; };
+		B4707D8818697B1C00FBA393 /* Heating_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8018697B1C00FBA393 /* Heating_normal.png */; };
+		B4707D8918697B1C00FBA393 /* Heating_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8118697B1C00FBA393 /* Heating_pressed.png */; };
+		B4707D8A18697B1C00FBA393 /* Humidity_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8218697B1C00FBA393 /* Humidity_normal.png */; };
+		B4707D8B18697B1C00FBA393 /* Humidity_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8318697B1C00FBA393 /* Humidity_pressed.png */; };
+		B4707D8C18697B1C00FBA393 /* Temperature_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8418697B1C00FBA393 /* Temperature_normal.png */; };
+		B4707D8D18697B1C00FBA393 /* Temperature_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8518697B1C00FBA393 /* Temperature_pressed.png */; };
+		B4707D9618697B2900FBA393 /* Cooling_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8E18697B2900FBA393 /* Cooling_normal@2x.png */; };
+		B4707D9718697B2900FBA393 /* Cooling_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8F18697B2900FBA393 /* Cooling_pressed@2x.png */; };
+		B4707D9818697B2900FBA393 /* Heating_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9018697B2900FBA393 /* Heating_normal@2x.png */; };
+		B4707D9918697B2900FBA393 /* Heating_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9118697B2900FBA393 /* Heating_pressed@2x.png */; };
+		B4707D9A18697B2900FBA393 /* Humidity_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9218697B2900FBA393 /* Humidity_normal@2x.png */; };
+		B4707D9B18697B2900FBA393 /* Humidity_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9318697B2900FBA393 /* Humidity_pressed@2x.png */; };
+		B4707D9C18697B2900FBA393 /* Temperature_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9418697B2900FBA393 /* Temperature_normal@2x.png */; };
+		B4707D9D18697B2900FBA393 /* Temperature_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9518697B2900FBA393 /* Temperature_pressed@2x.png */; };
 		B47422E617C45BCF0021B76C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
 		B477739A184F074500F68AED /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4777399184F074500F68AED /* CoreMedia.framework */; };
 		B477739C184F075300F68AED /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B477739B184F075300F68AED /* CoreVideo.framework */; };
@@ -1361,6 +1377,22 @@
 		B46C8EBF17F27CB9006DC4CB /* REMDashboardCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardCollectionView.m; path = View/Dashboard/REMDashboardCollectionView.m; sourceTree = "<group>"; };
 		B46C8EC117F27CDF006DC4CB /* REMDashboardCollectionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDashboardCollectionCellView.h; path = View/Dashboard/REMDashboardCollectionCellView.h; sourceTree = "<group>"; };
 		B46C8EC217F27CDF006DC4CB /* REMDashboardCollectionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardCollectionCellView.m; path = View/Dashboard/REMDashboardCollectionCellView.m; sourceTree = "<group>"; };
+		B4707D7E18697B1C00FBA393 /* Cooling_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cooling_normal.png; sourceTree = "<group>"; };
+		B4707D7F18697B1C00FBA393 /* Cooling_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cooling_pressed.png; sourceTree = "<group>"; };
+		B4707D8018697B1C00FBA393 /* Heating_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Heating_normal.png; sourceTree = "<group>"; };
+		B4707D8118697B1C00FBA393 /* Heating_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Heating_pressed.png; sourceTree = "<group>"; };
+		B4707D8218697B1C00FBA393 /* Humidity_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Humidity_normal.png; sourceTree = "<group>"; };
+		B4707D8318697B1C00FBA393 /* Humidity_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Humidity_pressed.png; sourceTree = "<group>"; };
+		B4707D8418697B1C00FBA393 /* Temperature_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Temperature_normal.png; sourceTree = "<group>"; };
+		B4707D8518697B1C00FBA393 /* Temperature_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Temperature_pressed.png; sourceTree = "<group>"; };
+		B4707D8E18697B2900FBA393 /* Cooling_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cooling_normal@2x.png"; sourceTree = "<group>"; };
+		B4707D8F18697B2900FBA393 /* Cooling_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cooling_pressed@2x.png"; sourceTree = "<group>"; };
+		B4707D9018697B2900FBA393 /* Heating_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Heating_normal@2x.png"; sourceTree = "<group>"; };
+		B4707D9118697B2900FBA393 /* Heating_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Heating_pressed@2x.png"; sourceTree = "<group>"; };
+		B4707D9218697B2900FBA393 /* Humidity_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Humidity_normal@2x.png"; sourceTree = "<group>"; };
+		B4707D9318697B2900FBA393 /* Humidity_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Humidity_pressed@2x.png"; sourceTree = "<group>"; };
+		B4707D9418697B2900FBA393 /* Temperature_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Temperature_normal@2x.png"; sourceTree = "<group>"; };
+		B4707D9518697B2900FBA393 /* Temperature_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Temperature_pressed@2x.png"; sourceTree = "<group>"; };
 		B4777399184F074500F68AED /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
 		B477739B184F075300F68AED /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
 		B47ACC2817F80AAA00989B2C /* REMSettingCustomerSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerSelectionViewController.h; path = Controller/Setting/REMSettingCustomerSelectionViewController.h; sourceTree = "<group>"; };
@@ -1703,6 +1735,22 @@
 		6A61A66A1839B81F00C6A228 /* commodity */ = {
 			isa = PBXGroup;
 			children = (
+				B4707D7E18697B1C00FBA393 /* Cooling_normal.png */,
+				B4707D7F18697B1C00FBA393 /* Cooling_pressed.png */,
+				B4707D8E18697B2900FBA393 /* Cooling_normal@2x.png */,
+				B4707D8F18697B2900FBA393 /* Cooling_pressed@2x.png */,
+				B4707D8018697B1C00FBA393 /* Heating_normal.png */,
+				B4707D8118697B1C00FBA393 /* Heating_pressed.png */,
+				B4707D9018697B2900FBA393 /* Heating_normal@2x.png */,
+				B4707D9118697B2900FBA393 /* Heating_pressed@2x.png */,
+				B4707D8218697B1C00FBA393 /* Humidity_normal.png */,
+				B4707D8318697B1C00FBA393 /* Humidity_pressed.png */,
+				B4707D9218697B2900FBA393 /* Humidity_normal@2x.png */,
+				B4707D9318697B2900FBA393 /* Humidity_pressed@2x.png */,
+				B4707D8418697B1C00FBA393 /* Temperature_normal.png */,
+				B4707D8518697B1C00FBA393 /* Temperature_pressed.png */,
+				B4707D9418697B2900FBA393 /* Temperature_normal@2x.png */,
+				B4707D9518697B2900FBA393 /* Temperature_pressed@2x.png */,
 				6A61A66B1839B81F00C6A228 /* Coal_normal.png */,
 				6A61A66C1839B81F00C6A228 /* Coal_normal@2x.png */,
 				6A61A66D1839B81F00C6A228 /* Coal_pressed.png */,
@@ -3588,11 +3636,13 @@
 				B414C43E1855946900CB81B6 /* Configuration.plist in Resources */,
 				6A61A78E1839B82000C6A228 /* UnqualifiedPin_Normal@2x.png in Resources */,
 				7A5A97381856D54E0084E228 /* share-weixin.png in Resources */,
+				B4707D9618697B2900FBA393 /* Cooling_normal@2x.png in Resources */,
 				7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */,
 				6A61A7761839B82000C6A228 /* LoginTextField-Focus@2x.png in Resources */,
 				6A61A7711839B82000C6A228 /* Login-Normal.png in Resources */,
 				6A61A70F1839B82000C6A228 /* NaturalGas_normal.png in Resources */,
 				6A61A7891839B82000C6A228 /* QualifiedPin_Normal.png in Resources */,
+				B4707D9A18697B2900FBA393 /* Humidity_normal@2x.png in Resources */,
 				6A61A7881839B82000C6A228 /* QualifiedPin_Focus@2x.png in Resources */,
 				6A61A7001839B82000C6A228 /* EMOP_App_7@2x.png in Resources */,
 				7A58F24B1839A5650071DE7A /* Propaganda_1.jpg in Resources */,
@@ -3603,6 +3653,7 @@
 				6A61A7101839B82000C6A228 /* NaturalGas_normal@2x.png in Resources */,
 				B4A87532185EBC3D00BF3601 /* DefaultBuildingBlur@2x.png in Resources */,
 				6A61A71B1839B82000C6A228 /* Water_normal.png in Resources */,
+				B4707D8818697B1C00FBA393 /* Heating_normal.png in Resources */,
 				B4A87530185E98F200BF3601 /* DefaultBuildingBlur.png in Resources */,
 				6A61A7321839B82000C6A228 /* Ascend@2x.png in Resources */,
 				6A61A7591839B82000C6A228 /* labelRight7.png in Resources */,
@@ -3614,6 +3665,7 @@
 				7AFC250E18503D3800B9CF11 /* Default-Landscape-IOS7.png in Resources */,
 				6A61A7521839B82000C6A228 /* labelRight3@2x.png in Resources */,
 				6A61A7511839B82000C6A228 /* labelRight3.png in Resources */,
+				B4707D8918697B1C00FBA393 /* Heating_pressed.png in Resources */,
 				6A61A7681839B82000C6A228 /* Nodata@2x.png in Resources */,
 				6A61A76A1839B82000C6A228 /* Up@2x.png in Resources */,
 				6A61A7771839B82000C6A228 /* LoginTextField.png in Resources */,
@@ -3621,6 +3673,8 @@
 				6A61A7031839B82000C6A228 /* EMOP_Spotlight_6.png in Resources */,
 				6A61A74F1839B82000C6A228 /* labelRight2.png in Resources */,
 				7A5A97391856D54E0084E228 /* share-weixin@2x.png in Resources */,
+				B4707D8618697B1C00FBA393 /* Cooling_normal.png in Resources */,
+				B4707D9718697B2900FBA393 /* Cooling_pressed@2x.png in Resources */,
 				6A61A7661839B82000C6A228 /* Down@2x.png in Resources */,
 				6A61A70B1839B82000C6A228 /* Electricity_normal.png in Resources */,
 				6A61A7651839B82000C6A228 /* Down.png in Resources */,
@@ -3634,6 +3688,7 @@
 				7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */,
 				6A61A7391839B82000C6A228 /* DateView_Chart.png in Resources */,
 				6A61A78D1839B82000C6A228 /* UnqualifiedPin_Normal.png in Resources */,
+				B4707D8D18697B1C00FBA393 /* Temperature_pressed.png in Resources */,
 				6A61A7361839B82000C6A228 /* Close_Chart@2x.png in Resources */,
 				6A61A7131839B82000C6A228 /* Oil_normal.png in Resources */,
 				6A61A71A1839B82000C6A228 /* PM2.5_pressed@2x.png in Resources */,
@@ -3659,12 +3714,14 @@
 				6A61A7461839B82000C6A228 /* labelLeft5@2x.png in Resources */,
 				7A58F2511839A5650071DE7A /* SplashScreenBackgroud.jpg in Resources */,
 				6A61A7401839B82000C6A228 /* labelLeft2@2x.png in Resources */,
+				B4707D9D18697B2900FBA393 /* Temperature_pressed@2x.png in Resources */,
 				6A61A78C1839B82000C6A228 /* UnqualifiedPin_Focus@2x.png in Resources */,
 				6A61A7691839B82000C6A228 /* Up.png in Resources */,
 				6A61A75D1839B82000C6A228 /* Legend_Chart.png in Resources */,
 				7AFC251018503D3800B9CF11 /* Default-Landscape.png in Resources */,
 				6A61A7811839B82000C6A228 /* Map.png in Resources */,
 				6A61A74C1839B82000C6A228 /* labelLeft8@2x.png in Resources */,
+				B4707D9B18697B2900FBA393 /* Humidity_pressed@2x.png in Resources */,
 				6A61A6FD1839B82000C6A228 /* EMOP_App_6.png in Resources */,
 				6A61A71C1839B82000C6A228 /* Water_normal@2x.png in Resources */,
 				6A61A7621839B82000C6A228 /* TooltipsArrow_PieChart@2x.png in Resources */,
@@ -3692,12 +3749,17 @@
 				6A61A73B1839B82000C6A228 /* Descend.png in Resources */,
 				6A61A77E1839B82000C6A228 /* CommonPin_Normal@2x.png in Resources */,
 				6A61A6FE1839B82000C6A228 /* EMOP_App_6@2x.png in Resources */,
+				B4707D8B18697B1C00FBA393 /* Humidity_pressed.png in Resources */,
 				6A61A7371839B82000C6A228 /* DatePicker_Chart.png in Resources */,
+				B4707D9918697B2900FBA393 /* Heating_pressed@2x.png in Resources */,
+				B4707D9818697B2900FBA393 /* Heating_normal@2x.png in Resources */,
+				B4707D9C18697B2900FBA393 /* Temperature_normal@2x.png in Resources */,
 				6A61A7341839B82000C6A228 /* Back_Chart@2x.png in Resources */,
 				7AFC250F18503D3800B9CF11 /* Default-Landscape-IOS7@2x.png in Resources */,
 				7A664FDA183B3369004B9FF3 /* MapPopover_Rectangle.png in Resources */,
 				6A61A72B1839B82000C6A228 /* share-weibo.png in Resources */,
 				6A61A7181839B82000C6A228 /* PM2.5_normal@2x.png in Resources */,
+				B4707D8A18697B1C00FBA393 /* Humidity_normal.png in Resources */,
 				6A61A74A1839B82000C6A228 /* labelLeft7@2x.png in Resources */,
 				B445AEAE177BEEB8002D2A59 /* README.txt in Resources */,
 				6A61A75C1839B82000C6A228 /* labelRight8@2x.png in Resources */,
@@ -3727,6 +3789,7 @@
 				6A61A7281839B82000C6A228 /* OverTarget@2x.png in Resources */,
 				6A61A7261839B82000C6A228 /* NotOverTarget@2x.png in Resources */,
 				7A47F3A518482C1B007EE37B /* JumpTrial@2x.png in Resources */,
+				B4707D8718697B1C00FBA393 /* Cooling_pressed.png in Resources */,
 				6A61A7151839B82000C6A228 /* Oil_pressed.png in Resources */,
 				6A61A73C1839B82000C6A228 /* Descend@2x.png in Resources */,
 				6A61A7211839B82000C6A228 /* DefaultBuilding.png in Resources */,
@@ -3745,6 +3808,7 @@
 				6A61A7431839B82000C6A228 /* labelLeft4.png in Resources */,
 				6A61A7201839B82000C6A228 /* DefaultBuilding-Small@2x.png in Resources */,
 				6A61A7721839B82000C6A228 /* Login-Normal@2x.png in Resources */,
+				B4707D8C18697B1C00FBA393 /* Temperature_normal.png in Resources */,
 				6A61A7501839B82000C6A228 /* labelRight2@2x.png in Resources */,
 				6A61A78F1839B82000C6A228 /* SplashScreenLogo-Common.png in Resources */,
 				7AFC251118503D3800B9CF11 /* Default-Landscape@2x.png in Resources */,
