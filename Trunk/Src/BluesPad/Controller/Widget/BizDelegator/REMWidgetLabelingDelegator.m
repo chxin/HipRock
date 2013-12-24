@@ -88,24 +88,25 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     [self.view addSubview:searchViewContainer];
     self.searchView=searchViewContainer;
     
-    UILabel *benchmarkLabel=[[UILabel alloc]init];
-    REMWidgetLabellingSearchModel *labellingModel=(REMWidgetLabellingSearchModel *)self.model;
-    benchmarkLabel.font=[UIFont fontWithName:@(kBuildingFontSC) size:kLabellingBenchmarkFontSize];
-    benchmarkLabel.text=labellingModel.benchmarkText;
-    benchmarkLabel.translatesAutoresizingMaskIntoConstraints=NO;
-    [benchmarkLabel setBackgroundColor:[UIColor clearColor]];
-    [benchmarkLabel setTextColor:[REMColor colorByHexString:@"#5e5e5e"]];
-    [searchViewContainer addSubview:benchmarkLabel];
-    
-    self.benchmarkTextLabel=benchmarkLabel;
+//    UILabel *benchmarkLabel=[[UILabel alloc]init];
+//    REMWidgetLabellingSearchModel *labellingModel=(REMWidgetLabellingSearchModel *)self.model;
+//    benchmarkLabel.font=[UIFont fontWithName:@(kBuildingFontSC) size:kLabellingBenchmarkFontSize];
+//    benchmarkLabel.text=labellingModel.benchmarkText;
+//    benchmarkLabel.translatesAutoresizingMaskIntoConstraints=NO;
+//    [benchmarkLabel setBackgroundColor:[UIColor clearColor]];
+//    [benchmarkLabel setTextColor:[REMColor colorByHexString:@"#5e5e5e"]];
+//    [searchViewContainer addSubview:benchmarkLabel];
+//    
+//    self.benchmarkTextLabel=benchmarkLabel;
     
     
     NSMutableArray *searchViewSubViewConstraints = [NSMutableArray array];
-    NSDictionary *searchViewSubViewDic = NSDictionaryOfVariableBindings(timePickerButton,benchmarkLabel);
+    NSDictionary *searchViewSubViewDic = NSDictionaryOfVariableBindings(timePickerButton/*,benchmarkLabel*/);
     NSDictionary *searchViewSubViewMetrics = @{@"margin":@(kWidgetDatePickerLeftMargin),@"buttonHeight":@(kWidgetDatePickerHeight),@"buttonWidth":@(kLabellingTimePickerWidth),@"top":@(kWidgetDatePickerTopMargin),@"labelMargin":@(kWidgetDatePickerLeftMargin*2),@"benchmarkHeight":@(kLabellingBenchmarkFontSize+2)};
-    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[timePickerButton(buttonWidth)]-labelMargin-[benchmarkLabel]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[timePickerButton(buttonWidth)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+//    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[timePickerButton(buttonWidth)]-labelMargin-[benchmarkLabel]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
     [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[timePickerButton(buttonHeight)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
-    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[benchmarkLabel(benchmarkHeight)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
+//    [searchViewSubViewConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[benchmarkLabel(benchmarkHeight)]" options:0 metrics:searchViewSubViewMetrics views:searchViewSubViewDic]];
     
     [searchViewContainer addConstraints:searchViewSubViewConstraints];
     
