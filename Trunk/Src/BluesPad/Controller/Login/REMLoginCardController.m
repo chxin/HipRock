@@ -186,6 +186,10 @@
             
             if(customers.count == 1){
                 [REMAppContext setCurrentCustomer:customers[0]];
+                
+                [REMAppCurrentUser save];
+                [REMAppCurrentCustomer save];
+                
                 [self.loginCarouselController.splashScreenController showMapView:nil];
                 
                 return;

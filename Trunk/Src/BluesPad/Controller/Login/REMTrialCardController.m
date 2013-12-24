@@ -119,11 +119,18 @@
             if(customers.count<=0){
                 [REMAlertHelper alert:REMLocalizedString(kLNLogin_NotAuthorized)];
                 
+                [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+                [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+                
                 return;
             }
             
             if(customers.count == 1){
                 [REMAppContext setCurrentCustomer:customers[0]];
+                
+                [REMAppCurrentUser save];
+                [REMAppCurrentCustomer save];
+                
                 [self.loginCarouselController.splashScreenController showMapView:nil];
                 
                 return;
