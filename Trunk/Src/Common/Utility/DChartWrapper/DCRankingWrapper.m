@@ -75,7 +75,7 @@
     return @[y];
 }
 
--(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
+-(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
     // Nothing to do. cannot hide series in ranking chart.
 }
 

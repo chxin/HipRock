@@ -29,7 +29,7 @@
 
 @property (nonatomic,weak) REMLoginCarouselController *carouselController;
 
-@property (nonatomic) DCTrendWrapper* plotSource;
+@property (nonatomic) DAbstractChartWrapper* plotSource;
 
 @end
 
@@ -124,7 +124,7 @@
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
     
-//    [self oscarTest];
+    [self oscarTest];
     
     
     //decide where to go
@@ -239,15 +239,15 @@
     CGRect miniRect = CGRectMake(0, 0, 222, 108);
     CGRect maxiRect = CGRectMake(0, 0, 974, 605);
     
-//    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
-//    [self.view addSubview:pieWrapper.view];
-//    self.plotSource = pieWrapper;
-    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
-    self.plotSource = columnWidget;
-    columnWidget.view.backgroundColor = [UIColor blackColor];
-    columnWidget.view.hasVGridlines = YES;
-    columnWidget.view.graphContext.hGridlineAmount = 4;
-    [self.view addSubview:columnWidget.view];
+    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+    [self.view addSubview:pieWrapper.view];
+    self.plotSource = pieWrapper;
+//    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+//    self.plotSource = columnWidget;
+//    columnWidget.view.backgroundColor = [UIColor blackColor];
+//    columnWidget.view.hasVGridlines = YES;
+//    columnWidget.view.graphContext.hGridlineAmount = 4;
+//    [self.view addSubview:columnWidget.view];
     
 //    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
 //    lineWidget.view.backgroundColor = [UIColor blackColor];
@@ -282,13 +282,20 @@
 }
 
 -(void)buttonPressed:(UIButton *)button {
-    [self.plotSource setSeriesHiddenAtIndex:0 hidden:![self.plotSource.view.seriesList[0] hidden]];
+    [self showOrHideAtIndex:0];
+}
+-(void)showOrHideAtIndex:(NSUInteger)index {
+    if ([self.plotSource isKindOfClass:[DCTrendWrapper class]]) {
+        [(DCTrendWrapper*)self.plotSource setHiddenAtIndex:index hidden:![((DCTrendWrapper*)self.plotSource).view.seriesList[index] hidden]];
+    } else if ([self.plotSource isKindOfClass:[DCPieWrapper class]]) {
+        [(DCPieWrapper*)self.plotSource setHiddenAtIndex:index hidden:![((DCPieWrapper*)self.plotSource).view.series.datas[index] hidden]];
+    }
 }
 -(void)buttonPressed1:(UIButton *)button {
-    [self.plotSource setSeriesHiddenAtIndex:1 hidden:![self.plotSource.view.seriesList[1] hidden]];
+    [self showOrHideAtIndex:1];
 }
 -(void)buttonPressed2:(UIButton *)button {
-    [self.plotSource setSeriesHiddenAtIndex:2 hidden:![self.plotSource.view.seriesList[2] hidden]];
+    [self showOrHideAtIndex:2];
 }
 
 

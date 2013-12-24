@@ -10,9 +10,7 @@
 #import "DCPieDataPoint.h"
 
 @interface DCPieSeries : DCSeries
-@property (nonatomic, readonly) double sumVisableValue;
+//@property (nonatomic, readonly) double sumVisableValue;
 
--(void)didPointHiddenChanged:(DCPieDataPoint*)point;
--(CGFloat)findNearbySliceCenter:(CGFloat)angle;
--(NSUInteger)findIndexOfSlide:(CGFloat)angle;
+//-(void)didPointHiddenChanged:(DCPieDataPoint*)point;
 @end

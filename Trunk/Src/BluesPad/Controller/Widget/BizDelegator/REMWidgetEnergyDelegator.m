@@ -1089,12 +1089,13 @@
             [self.hiddenSeries addObject:@(index)];
         }
     }
-    
-    if ([self.chartWrapper isKindOfClass:[DCTrendWrapper class]]) {
-        [((DCTrendWrapper*)self.chartWrapper) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
-    } else if ([self.chartWrapper isKindOfClass:[DCPieChartView class]]) {
-//        [((REMPieChartView*)[self.chartWrapper getView]) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
-    }
+    [self.chartWrapper setHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
+//    if ([self.chartWrapper isKindOfClass:[DCTrendWrapper class]]) {
+//        [((DCTrendWrapper*)self.chartWrapper) setSeriesHiddenAtIndex:index hidden:(state != UIControlStateNormal)];
+//    } else if ([self.chartWrapper isKindOfClass:[DCPieWrapper class]]) {
+//        DCPieDataPoint* pie = ((DCPieChartView*)[self.chartWrapper getView]).series.datas[index];
+//        pie.hidden = (state != UIControlStateNormal);
+//    }
 }
 
 #pragma mark - Tooltip
