@@ -47,7 +47,7 @@
 {
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:[UIColor lightGrayColor]];
+    //[self.view setBackgroundColor:[UIColor lightGrayColor]];
 	// Do any additional setup after loading the view.
     UIPickerView *datePicker=[[UIPickerView alloc]init];
     [self.view addSubview:datePicker];
