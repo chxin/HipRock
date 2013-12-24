@@ -40,7 +40,12 @@
         [series0Data addObject:p];
     }
     DCPieSeries* series = [[DCPieSeries alloc]initWithEnergyData:series0Data];
-    
+    for(DCPieDataPoint* slice in series.datas) {
+        if (REMIsNilOrNull(slice.target.targetId)) continue;
+        if ([self.hiddenTargetsId containsObject:slice.target.targetId]) {
+            slice.hidden = YES;
+        }
+    }
     _view = [[DCPieChartView alloc]initWithFrame:frame series:series];
     self.view.delegate = self;
     self.view.playBeginAnimation = self.style.playBeginAnimation;
@@ -75,12 +80,6 @@
     CGRect frame = self.view.frame;
     [self.view removeFromSuperview];
     [self createView:frame data:energyViewData style:self.style];
-    for(DCPieDataPoint* slice in self.view.series.datas) {
-        if (REMIsNilOrNull(slice.target.targetId)) continue;
-        if ([self.hiddenTargetsId containsObject:slice.target.targetId]) {
-            slice.hidden = YES;
-        }
-    }
     [superView addSubview:self.view];
 }
 

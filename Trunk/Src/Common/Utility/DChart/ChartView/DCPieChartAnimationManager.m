@@ -48,7 +48,7 @@ const NSString* stepKey = @"step";
             NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
             [dic setObject:point forKey:pointKey];
             if (point.pointType == DCDataPointTypeNormal) {
-                [dic setObject:point.value forKey:valueKey];
+                [dic setObject: point.hidden ? @(0) : point.value forKey:valueKey];
                 [dic setObject:@(point.value.doubleValue/kDCAnimationDuration/kDCFramesPerSecord) forKey:stepKey];
             } else {
                 [dic setObject:[NSNull null] forKey:valueKey];
@@ -379,7 +379,9 @@ const NSString* stepKey = @"step";
 }
 
 -(NSUInteger)findIndexOfSlide:(CGFloat)angle {
-    angle = 2 - angle;
+    if (angle != 0) {
+        angle = 2 - angle;
+    }
     NSUInteger index = 0;
     for (int i = 0; i < self.pieSlices.count; i++) {
         if (REMIsNilOrNull(self.pieSlices) || REMIsNilOrNull(self.pieSlices[i])) continue;
@@ -395,7 +397,12 @@ const NSString* stepKey = @"step";
 
 -(CGFloat)findNearbySliceCenter:(CGFloat)angle {
     DCPieSlice slice;
-    [self.pieSlices[[self findIndexOfSlide:angle]] getValue:&slice];
+    NSUInteger index = [self findIndexOfSlide:angle];
+    NSValue* val = self.pieSlices[index];
+    NSLog(@"%i", index);
+    if (!REMIsNilOrNull(val)) {
+        [val getValue:&slice];
+    }
     return slice.sliceCenter;
 }
 

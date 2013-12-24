@@ -86,23 +86,23 @@
 -(void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
     [self updateGestures];
-    if ([self.animationManager getVisableSliceSum] > 0) {
-        double targetRotation = [self.animationManager findNearbySliceCenter:0];
-        DCPieChartAnimationFrame* targetFrame = [[DCPieChartAnimationFrame alloc]init];
-        targetFrame.radius = @(self.radius);
-        targetFrame.radiusForShadow = @(self.radiusForShadow);
-        targetFrame.rotationAngle = @(-targetRotation);
-        targetFrame.fullAngle = @(2);
-        targetFrame.indicatorAlpha = @(0.8);
-        if (self.playBeginAnimation) {
-            self.radius = 0;
-            self.radiusForShadow = 0;
-            [self.animationManager animateToFrame:targetFrame];
-        } else {
-            [self.animationManager playFrames:@[targetFrame]];
-        }
-        self.pieLayer.frame = CGRectMake(self.center.x-targetFrame.radiusForShadow.doubleValue, self.center.y-targetFrame.radiusForShadow.doubleValue, targetFrame.radiusForShadow.doubleValue*2, targetFrame.radiusForShadow.doubleValue*2);
+    
+    double targetRotation = [self.animationManager findNearbySliceCenter:0];
+    DCPieChartAnimationFrame* targetFrame = [[DCPieChartAnimationFrame alloc]init];
+    targetFrame.radius = @(self.radius);
+    targetFrame.radiusForShadow = @(self.radiusForShadow);
+    targetFrame.rotationAngle = @(-targetRotation);
+    targetFrame.fullAngle = @(2);
+    targetFrame.indicatorAlpha = @(0.8);
+    if (self.playBeginAnimation) {
+        self.radius = 0;
+        self.radiusForShadow = 0;
+        [self.animationManager animateToFrame:targetFrame];
+    } else {
+        [self.animationManager playFrames:@[targetFrame]];
     }
+    self.pieLayer.frame = CGRectMake(self.center.x-targetFrame.radiusForShadow.doubleValue, self.center.y-targetFrame.radiusForShadow.doubleValue, targetFrame.radiusForShadow.doubleValue*2, targetFrame.radiusForShadow.doubleValue*2);
+    
 }
 
 -(void)redraw {
