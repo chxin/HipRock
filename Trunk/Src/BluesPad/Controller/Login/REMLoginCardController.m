@@ -321,7 +321,7 @@
     userNameTextBox.text = kDefaultUserName;
     userNameTextBox.font = [UIFont systemFontOfSize:kDMLogin_TextBoxFontSize];
     userNameTextBox.textColor = [REMColor colorByHexString:kDMLogin_TextBoxFontColor];
-    [userNameTextBox addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+    [userNameTextBox addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventValueChanged];
     [self setTextField:userNameTextBox backgroundImage:REMIMG_LoginTextField];
     
     return userNameTextBox;
@@ -350,7 +350,7 @@
     passwordTextBox.text = kDefaultPassword;
     passwordTextBox.font = [UIFont systemFontOfSize:kDMLogin_TextBoxFontSize];
     passwordTextBox.textColor = [REMColor colorByHexString:kDMLogin_TextBoxFontColor];
-    [passwordTextBox addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+    [passwordTextBox addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventValueChanged];
     [self setTextField:passwordTextBox backgroundImage:REMIMG_LoginTextField];
     
     return passwordTextBox;
@@ -382,7 +382,6 @@
     [button addTarget:self action:@selector(loginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     button.titleLabel.textColor = [REMColor colorByHexString:kDMLogin_LoginButtonFontColor];
     button.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_LoginButtonFontSize];
-    button.enabled = NO;
     
     return button;
 }
