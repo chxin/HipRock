@@ -348,6 +348,8 @@
     if (seriesIndex >= self.view.seriesList.count) return;
     DCXYSeries* series = self.view.seriesList[seriesIndex];
     [self.view setSeries:series hidden:hidden];
+    NSNumber* targetId = series.target.targetId;
+    if (REMIsNilOrNull(targetId)) return;
     if (hidden) {
         [self.hiddenSeriesTargetsId addObject:series.target.targetId];
     } else {
