@@ -77,7 +77,6 @@
 
 -(void)drawIndicatorLayer {
     self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext];
-    self.indicatorLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, 0, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height+self.plotPaddingTop);// self.graphContext.plotRect;
     self.indicatorLayer.symbolLineStyle = self.focusSymbolLineStyle;
     self.indicatorLayer.symbolLineWidth = self.focusSymbolLineWidth;
     self.indicatorLayer.symbolLineColor = self.focusSymbolLineColor;
@@ -89,14 +88,13 @@
     self.columnLayers = [[NSMutableArray alloc]init];
     [self.graphContext addHRangeObsever:self];
     
-    [self drawAxisLines];
+    [self recalculatePlotRect];
     [self drawHGridline];
     [self drawVGridlines];
     [self drawXLabelLayer];
     [self drawIndicatorLayer];
     
     self.backgroundBandsLayer = [[_DCBackgroundBandsLayer alloc]initWithContext:self.graphContext];
-    self.backgroundBandsLayer.frame = self.graphContext.plotRect;
     self.backgroundBandsLayer.fontColor = self.backgroundBandFontColor;
     self.backgroundBandsLayer.font = self.backgroundBandFont;
     [self.graphContext addHRangeObsever:self.backgroundBandsLayer];
@@ -110,14 +108,12 @@
         
         _DCColumnsLayer* columnsLayer = [[_DCColumnsLayer alloc]initWithCoordinateSystem:ds];
         if (columnsLayer.series.count > 0) {
-            columnsLayer.frame = self.graphContext.plotRect;
             [self.layer addSublayer:columnsLayer];
             [self.columnLayers addObject:columnsLayer];
         }
         if (coordiates.count < self.visableYAxisAmount) {
             _DCYAxisLabelLayer* _yLabelLayer = (_DCYAxisLabelLayer*)[ds getAxisLabelLayer];
             [self.layer addSublayer:_yLabelLayer];
-            _yLabelLayer.frame = CGRectMake(ds.isMajor ? ds.yAxis.startPoint.x-ds.yAxis.size.width :ds.yAxis.startPoint.x, self.graphContext.plotRect.origin.y, ds.yAxis.size.width, ds.yAxis.size.height);
             [_yLabelLayer setNeedsDisplay];
         }
         
@@ -136,7 +132,7 @@
 //    for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
 //        [self.layer addSublayer:symbol];
 //    }
-    [self updateSymbolFrameSize];
+    [self updateAllLayerFrame];
     if ([self testHRangeChange:self.beginHRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByInitialize]) {
         self.graphContext.hRange = self.beginHRange;
     }
@@ -203,18 +199,8 @@
 
 -(void)setFrame:(CGRect)frame {
     [super setFrame:frame];
-    [self updateSymbolFrameSize];
+    [self updateAllLayerFrame];
 }
-
--(void)updateSymbolFrameSize {
-    CGRect symbolFrameSize = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height + self.xAxis.lineWidth + self.xAxis.labelToLine);
-//    for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
-//        symbol.frame = symbolFrameSize;
-//    }
-    self.symbolLayer.frame = symbolFrameSize;
-}
-
-
 
 -(void)drawXLabelLayer {
     self._xLabelLayer = [[_DCXAxisLabelLayer alloc]initWithContext:self.graphContext];
@@ -222,13 +208,34 @@
     self._xLabelLayer.font = self.xAxis.labelFont;
     self._xLabelLayer.fontColor = self.xAxis.labelColor;
     [self.graphContext addHRangeObsever:self._xLabelLayer];
-    self._xLabelLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.size.height+self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.frame.size.height - self.graphContext.plotRect.size.height - self.plotPaddingBottom - self.plotPaddingTop);
     [self.layer addSublayer:self._xLabelLayer];
     self._xLabelLayer.labelFormatter = self.xLabelFormatter;
     [self._xLabelLayer setNeedsDisplay];
 }
 
--(void)drawAxisLines {
+-(void)updateAllLayerFrame {
+    self._xLabelLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.size.height+self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.frame.size.height - self.graphContext.plotRect.size.height - self.plotPaddingBottom - self.plotPaddingTop);
+    
+    self._hGridlineLayer.frame = self.graphContext.plotRect;
+    
+    self.backgroundBandsLayer.frame = self.graphContext.plotRect;
+    self.indicatorLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, 0, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height+self.plotPaddingTop);// self.graphContext.plotRect;
+    self.symbolLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height + self.xAxis.lineWidth + self.xAxis.labelToLine);
+    
+    for (_DCColumnsLayer* columnLayer in self.columnLayers) {
+        columnLayer.frame = self.graphContext.plotRect;
+    }
+    
+    for (int i = 0; i < self.coodinates.count; i++) {
+        if (i >= self.visableYAxisAmount) break;
+        _DCCoordinateSystem* ds = self.coodinates[i];
+        _DCYAxisLabelLayer* _yLabelLayer = (_DCYAxisLabelLayer*)[ds getAxisLabelLayer];
+        
+        _yLabelLayer.frame = CGRectMake(ds.isMajor ? ds.yAxis.startPoint.x-ds.yAxis.size.width :ds.yAxis.startPoint.x, self.graphContext.plotRect.origin.y, ds.yAxis.size.width, ds.yAxis.size.height);
+    }
+}
+
+-(void)recalculatePlotRect {
     float plotSpaceLeft = self.plotPaddingLeft;
     float plotSpaceRight = self.frame.size.width - plotSpaceLeft - self.plotPaddingRight;
     float plotSpaceTop = self.plotPaddingTop;
@@ -241,15 +248,18 @@
     
     if (self.yAxisList.count > 0) {
         DCAxis* majorYAxis = self.yAxisList[0];
-        axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:majorYAxis.labelFont];
-        plotSpaceLeft = plotSpaceLeft + axisSize.width + majorYAxis.lineWidth + majorYAxis.labelToLine;
-        majorYAxis.startPoint = CGPointMake(plotSpaceLeft, self.plotPaddingTop);
-        majorYAxis.endPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
-        majorYAxis.size = CGSizeMake(axisSize.width + majorYAxis.lineWidth + majorYAxis.labelToLine, plotSpaceBottom-self.plotPaddingTop);
+        if (majorYAxis.visableSeriesAmount > 0) {
+            axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:majorYAxis.labelFont];
+            plotSpaceLeft = plotSpaceLeft + axisSize.width + majorYAxis.lineWidth + majorYAxis.labelToLine;
+            majorYAxis.startPoint = CGPointMake(plotSpaceLeft, self.plotPaddingTop);
+            majorYAxis.endPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
+            majorYAxis.size = CGSizeMake(axisSize.width + majorYAxis.lineWidth + majorYAxis.labelToLine, plotSpaceBottom-self.plotPaddingTop);
+        }
         
         for (int i = 1; i < self.visableYAxisAmount; i++) {
             if (i >= self.yAxisList.count) break;
             DCAxis* secondaryYAxis = self.yAxisList[i];
+            if (secondaryYAxis.visableSeriesAmount == 0) continue;
             axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:secondaryYAxis.labelFont];
             CGFloat axisWidth = axisSize.width + secondaryYAxis.lineWidth + secondaryYAxis.labelToLine;
             plotSpaceRight = plotSpaceRight - axisWidth;
@@ -266,7 +276,6 @@
 
 -(void)drawHGridline {
     self._hGridlineLayer = [[_DCHGridlineLayer alloc]initWithContext:self.graphContext];
-    self._hGridlineLayer.frame = self.graphContext.plotRect;
     self._hGridlineLayer.lineColor = self.hGridlineColor;
     self._hGridlineLayer.lineWidth = self.hGridlineWidth;
     self._hGridlineLayer.lineStyle = self.hGridlineStyle;
@@ -487,6 +496,46 @@
     self.bgBands = bands;
     if (!REMIsNilOrNull(self.backgroundBandsLayer)) {
         [self.backgroundBandsLayer setBands:bands];
+    }
+}
+
+-(void)setSeries:(DCXYSeries *)series hidden:(BOOL)hidden {
+    if (series.hidden == hidden) return;
+    series.hidden = hidden;
+    if ([self.coodinates indexOfObject:series.coordinate] >= self.visableYAxisAmount) return;
+    _DCYAxisLabelLayer* yAxisLayer = (_DCYAxisLabelLayer*)[series.coordinate getAxisLabelLayer];
+    
+//    CGRect yAxisFrame = [yAxisLayer getVisualFrame];
+//    CGRect currentPlotRect = self.graphContext.plotRect;
+//    if (yAxisLayer.axis.visableSeriesAmount == 0) {
+//        yAxisLayer.hidden = YES;
+//        if (yAxisLayer.isMajorAxis) {
+//            self.graphContext.plotRect = CGRectMake(currentPlotRect.origin.x - yAxisFrame.size.width, currentPlotRect.origin.y, currentPlotRect.size.width+yAxisFrame.size.width, currentPlotRect.size.height);
+//        }
+//    } else {
+//        yAxisLayer.hidden = NO;
+//        if (yAxisLayer.isMajorAxis) {
+//            self.graphContext.plotRect = CGRectMake(currentPlotRect.origin.x + yAxisFrame.size.width, currentPlotRect.origin.y, currentPlotRect.size.width-yAxisFrame.size.width, currentPlotRect.size.height);
+//        }
+//    }
+    yAxisLayer.hidden = (yAxisLayer.axis.visableSeriesAmount == 0);
+    [self recalculatePlotRect];
+    [self updateAllLayerFrame];
+    [self.backgroundBandsLayer setBands:self.bgBands];
+    [self.symbolLayer setNeedsDisplay];
+    [self.indicatorLayer setNeedsDisplay];
+    [self._hGridlineLayer setNeedsDisplay];
+    [self._xLabelLayer setNeedsDisplay];
+    for (_DCColumnsLayer* columnLayer in self.columnLayers) {
+        [columnLayer redraw];
+    }
+    
+    for (int i = 0; i < self.coodinates.count; i++) {
+        if (i >= self.visableYAxisAmount) break;
+        _DCCoordinateSystem* ds = self.coodinates[i];
+        _DCYAxisLabelLayer* _yLabelLayer = (_DCYAxisLabelLayer*)[ds getAxisLabelLayer];
+        
+        [_yLabelLayer setNeedsDisplay];
     }
 }
 // 检查在X上是否有pointType == DCDataPointTypeNormal的数据点

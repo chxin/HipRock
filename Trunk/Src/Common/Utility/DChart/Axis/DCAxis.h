@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "DCRange.h"
 #import "DCContext.h"
-//typedef enum _DCAxisCoordinate {
-//    DCAxisCoordinateX = 0,
-//    DCAxisCoordinateY = 1
-//}DCAxisCoordinate;
+typedef enum _DCAxisCoordinate {
+    DCAxisCoordinateX = 0,
+    DCAxisCoordinateY = 1
+}DCAxisCoordinate;
 //
 //typedef enum _DCAxisLabelAlign {
 //    DCAxisLabelAlignTopCenter = 0,
@@ -35,6 +35,7 @@
 //@property (nonatomic,assign) DCAxisCoordinate axisCoordinate;
 //@property (nonatomic, assign) DCAxisType axisType;
 @property (nonatomic) NSString* axisTitle;
+@property (nonatomic,assign) DCAxisCoordinate coordinate;
 
 @property (nonatomic,assign) float lineWidth;
 @property (nonatomic) UIColor* lineColor;
@@ -57,4 +58,5 @@
 @property (nonatomic, strong) UIColor* axisTitleColor;
 @property (nonatomic, assign) CGFloat axisTitleToTopLabel;
 @property (nonatomic, assign) CGFloat axisTitleFontSize;
+
 @end

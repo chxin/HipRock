@@ -75,6 +75,10 @@
     [super setFrame:self.superlayer.bounds];
 }
 
+-(CGRect)getVisualFrame {
+    return self.myFrame;
+}
+
 -(void)didYIntervalChanged:(double)oldInterval newInterval:(double)newInterval yRange:(DCRange*)yRange {
     if (newInterval <= 0) return;
     self.interval = newInterval;
