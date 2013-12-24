@@ -15,7 +15,7 @@
 #import "_DCYAxisLabelLayer.h"
 
 @interface _DCCoordinateSystem()
-@property (nonatomic, strong) NSMutableArray* visableSeries;
+//@property (nonatomic, strong) NSMutableArray* visableSeries;
 
 @property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer;
 
@@ -38,7 +38,7 @@
             }
         }
         _seriesList = seriesList;
-        _visableSeries = [self.seriesList mutableCopy];
+//        _visableSeries = [self.seriesList mutableCopy];
         _xAxis = chartView.xAxis;
         _chartView = chartView;
         _yAxis = y;
@@ -69,52 +69,58 @@
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
     
     if (self.graphContext) {
-        // 计算可视区域内的Y的最大值currentYRange
-        double currentYMax = INT32_MIN;
-        double currentYMin = INT32_MAX;
-        if (self.graphContext.stacked) {
-            int start = floor(newRange.location);
-            int end = ceil(newRange.end);
-            start = MAX(0, start);
-            
-            for (NSUInteger i = start; i <= end; i++) {
-                double yValAtIndex = 0;
-                for (DCXYSeries* s in self.visableSeries) {
-                    if (i >= s.datas.count) break;
-                    DCDataPoint* p = s.datas[i];
-                    if (p.value == nil || [p.value isEqual:[NSNull null]]) continue;
-                    yValAtIndex+=p.value.doubleValue;
-                }
-                if (yValAtIndex > currentYMax) {
-                    currentYMax = yValAtIndex;
-                }
-                if (yValAtIndex < currentYMin) {
-                    currentYMin = yValAtIndex;
-                }
-            }
-        } else {
-            for (DCXYSeries* s in self.visableSeries) {
-                if (!REMIsNilOrNull(s.visableYMin)) {
-                    double yMax = s.visableYMax.doubleValue;
-                    if (yMax > currentYMax) currentYMax = yMax;
-                }
-                if (!REMIsNilOrNull(s.visableYMin)) {
-                    double yMin = s.visableYMin.doubleValue;
-                    if (yMin < currentYMin) currentYMin = yMin;
-                }
-            }
-        }
-        if (currentYMax == INT32_MIN) currentYMax = 0;
-        if (currentYMin == INT32_MIN) currentYMin = 0;
+        [self recalculatorYMaxInRange:newRange];
+    }
+}
+
+-(void)recalculatorYMaxInRange:(DCRange*)range {
+    // 计算可视区域内的Y的最大值currentYRange
+    double currentYMax = INT32_MIN;
+    double currentYMin = INT32_MAX;
+    if (self.graphContext.stacked) {
+        int start = floor(range.location);
+        int end = ceil(range.end);
+        start = MAX(0, start);
         
-        // 根据maxY计算YRange并通知所有的YRangeObserver
-        DCYAxisIntervalCalculation calResult = [DCUtility calculatorYAxisByMin:currentYMin yMax:currentYMax parts:self.graphContext.hGridlineAmount];
-        DCRange* newYRange = [[DCRange alloc]initWithLocation:0 length:calResult.yMax];
-        if ([self testYRange:newYRange visableMax:currentYMax visableMin:currentYMin]) {
-            [self setYRange:newYRange];
-            self.heightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.graphContext.plotRect.size.height / self.yRange.length) : 0;
-            self.yInterval = calResult.yInterval;
+        for (NSUInteger i = start; i <= end; i++) {
+            double yValAtIndex = 0;
+            for (DCXYSeries* s in self.seriesList) {
+                if (s.hidden) continue;
+                if (i >= s.datas.count) break;
+                DCDataPoint* p = s.datas[i];
+                if (p.value == nil || [p.value isEqual:[NSNull null]]) continue;
+                yValAtIndex+=p.value.doubleValue;
+            }
+            if (yValAtIndex > currentYMax) {
+                currentYMax = yValAtIndex;
+            }
+            if (yValAtIndex < currentYMin) {
+                currentYMin = yValAtIndex;
+            }
         }
+    } else {
+        for (DCXYSeries* s in self.seriesList) {
+            if (s.hidden) continue;
+            if (!REMIsNilOrNull(s.visableYMin)) {
+                double yMax = s.visableYMax.doubleValue;
+                if (yMax > currentYMax) currentYMax = yMax;
+            }
+            if (!REMIsNilOrNull(s.visableYMin)) {
+                double yMin = s.visableYMin.doubleValue;
+                if (yMin < currentYMin) currentYMin = yMin;
+            }
+        }
+    }
+    if (currentYMax == INT32_MIN) currentYMax = 0;
+    if (currentYMin == INT32_MIN) currentYMin = 0;
+    
+    // 根据maxY计算YRange并通知所有的YRangeObserver
+    DCYAxisIntervalCalculation calResult = [DCUtility calculatorYAxisByMin:currentYMin yMax:currentYMax parts:self.graphContext.hGridlineAmount];
+    DCRange* newYRange = [[DCRange alloc]initWithLocation:0 length:calResult.yMax];
+    if ([self testYRange:newYRange visableMax:currentYMax visableMin:currentYMin]) {
+        [self setYRange:newYRange];
+        self.heightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.graphContext.plotRect.size.height / self.yRange.length) : 0;
+        self.yInterval = calResult.yInterval;
     }
 }
 

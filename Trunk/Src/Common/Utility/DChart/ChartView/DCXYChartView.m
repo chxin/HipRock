@@ -521,6 +521,9 @@
     yAxisLayer.hidden = (yAxisLayer.axis.visableSeriesAmount == 0);
     [self recalculatePlotRect];
     [self updateAllLayerFrame];
+    for (_DCCoordinateSystem* s in self.coodinates) {
+        [s recalculatorYMaxInRange:self.graphContext.hRange];
+    }
     [self.backgroundBandsLayer setBands:self.bgBands];
     [self.symbolLayer setNeedsDisplay];
     [self.indicatorLayer setNeedsDisplay];
