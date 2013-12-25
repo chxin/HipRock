@@ -42,7 +42,6 @@
         _xAxis = chartView.xAxis;
         _chartView = chartView;
         _yAxis = y;
-        y.visableSeriesAmount = seriesList.count;
         
         [self.graphContext addHRangeObsever:self];
     }
@@ -59,6 +58,7 @@
         _yLabelLayer.axisTitleToTopLabel = self.yAxis.axisTitleToTopLabel;
         _yLabelLayer.axisTitleColor = self.yAxis.axisTitleColor;
         _yLabelLayer.isMajorAxis = self.isMajor;
+        _yLabelLayer.hidden = ([self.yAxis getVisableSeriesAmount] == 0);
         self._yLabelLayer = _yLabelLayer;
         [self addYIntervalObsever:_yLabelLayer];
     }

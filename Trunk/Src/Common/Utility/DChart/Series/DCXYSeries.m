@@ -92,16 +92,20 @@
     // Nothing to do.
 }
 
--(void)setHidden:(BOOL)hidden {
-    if (hidden == self.hidden) return;
-    if (hidden) {
-        self.yAxis.visableSeriesAmount--;
-        self.xAxis.visableSeriesAmount--;
-    } else {
-        self.yAxis.visableSeriesAmount++;
-        self.xAxis.visableSeriesAmount++;
+-(void)setXAxis:(DCAxis *)xAxis {
+    _xAxis = xAxis;
+    if (!REMIsNilOrNull(self.xAxis)) {
+        [self.xAxis detachSeries:self];
     }
-    _hidden = hidden;
+    [xAxis attachSeries:self];
+}
+
+-(void)setYAxis:(DCAxis *)yAxis {
+    _yAxis = yAxis;
+    if (!REMIsNilOrNull(self.yAxis)) {
+        [self.yAxis detachSeries:self];
+    }
+    [yAxis attachSeries:self];
 }
 
 @end

@@ -7,15 +7,36 @@
 //
 
 #import "DCAxis.h"
+#import "DCXYSeries.h"
+
+@interface DCAxis()
+@property (nonatomic, strong) NSMutableArray* seriesList;
+@end
 
 @implementation DCAxis
 -(id)init {
     self = [super init];
     if (self) {
+        _seriesList = [[NSMutableArray alloc]init];
         _lineStyle = DCLineTypeDefault;
-        _visableSeriesAmount = 0;
         _labelToLine = 0;
     }
     return self;
+}
+
+-(void)attachSeries:(DCSeries *)series {
+    [self.seriesList addObject:series];
+}
+
+-(void)detachSeries:(DCSeries *)series {
+    [self.seriesList removeObject:series];
+}
+
+-(NSUInteger)getVisableSeriesAmount {
+    NSUInteger count = 0;
+    for (DCXYSeries* s in self.seriesList) {
+        if (!s.hidden) count++;
+    }
+    return count;
 }
 @end

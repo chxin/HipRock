@@ -248,7 +248,7 @@
     
     if (self.yAxisList.count > 0) {
         DCAxis* majorYAxis = self.yAxisList[0];
-        if (majorYAxis.visableSeriesAmount > 0) {
+        if ([majorYAxis getVisableSeriesAmount] > 0) {
             axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:majorYAxis.labelFont];
             plotSpaceLeft = plotSpaceLeft + axisSize.width + majorYAxis.lineWidth + majorYAxis.labelToLine;
             majorYAxis.startPoint = CGPointMake(plotSpaceLeft, self.plotPaddingTop);
@@ -259,7 +259,7 @@
         for (int i = 1; i < self.visableYAxisAmount; i++) {
             if (i >= self.yAxisList.count) break;
             DCAxis* secondaryYAxis = self.yAxisList[i];
-            if (secondaryYAxis.visableSeriesAmount == 0) continue;
+            if ([secondaryYAxis getVisableSeriesAmount] == 0) continue;
             axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:secondaryYAxis.labelFont];
             CGFloat axisWidth = axisSize.width + secondaryYAxis.lineWidth + secondaryYAxis.labelToLine;
             plotSpaceRight = plotSpaceRight - axisWidth;
@@ -284,15 +284,20 @@
 }
 
 -(void)setSeriesList:(NSArray *)seriesList {
+    if (!REMIsNilOrNull(self.seriesList)) {
+        for (DCXYSeries* s in self.seriesList) {
+            [s.xAxis detachSeries:s];
+            [s.yAxis detachSeries:s];
+        }
+    }
+    
     if (seriesList != self.seriesList) {
-        self.xAxis.visableSeriesAmount = seriesList.count;
         _seriesList = seriesList;
         NSUInteger columnAmount = self.graphContext.stacked ? 1 : 0;
         
         NSUInteger seriesIndex = 0;
         
         for (DCXYSeries* s in seriesList) {
-            s.yAxis.visableSeriesAmount++;
             if ([s isKindOfClass:[DCColumnSeries class]]) {
                 if (self.graphContext.stacked) {
                     ((DCColumnSeries*)s).xRectStartAt = - 0.5 + kDCColumnOffset;
@@ -518,7 +523,7 @@
 //            self.graphContext.plotRect = CGRectMake(currentPlotRect.origin.x + yAxisFrame.size.width, currentPlotRect.origin.y, currentPlotRect.size.width-yAxisFrame.size.width, currentPlotRect.size.height);
 //        }
 //    }
-    yAxisLayer.hidden = (yAxisLayer.axis.visableSeriesAmount == 0);
+    yAxisLayer.hidden = ([yAxisLayer.axis getVisableSeriesAmount] == 0);
     [self recalculatePlotRect];
     [self updateAllLayerFrame];
     for (_DCCoordinateSystem* s in self.coodinates) {

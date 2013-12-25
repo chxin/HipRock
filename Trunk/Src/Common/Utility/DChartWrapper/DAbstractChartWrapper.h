@@ -22,6 +22,11 @@ typedef enum _DChartStatus {
 @property (nonatomic, readonly) REMChartStyle* style;
 @property (nonatomic, assign) DChartStatus chartStatus;
 
+
+-(void)addHiddenTarget:(REMEnergyTargetModel*)target;
+-(void)removeHiddenTarget:(REMEnergyTargetModel*)target;
+-(BOOL) isTargetHidden:(REMEnergyTargetModel*)target;
+
 -(void)cancelToolTipStatus;
 -(void)redraw:(REMEnergyViewData *)energyViewData;
 -(UIView*)getView;

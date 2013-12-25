@@ -30,6 +30,7 @@
 }
 -(void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
+    if (self.hidden) return;
     if(self.axis.lineWidth > 0) {
         CGPoint addLines[2];
         addLines[0].x = self.isMajorAxis ? self.myFrame.size.width : 0;
