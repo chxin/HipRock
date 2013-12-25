@@ -14,15 +14,6 @@
 //Change CurrentDataSource value in configuration.plist in Resource folder
 //to change service url for different build options
 
-#if defined(DEBUG)
-const static NSString *BUILDOPTION = @"Debug";
-#elif defined(DailyBuild)
-const static NSString *BUILDOPTION = @"DailyBuild";
-#elif defined(InternalRelease)
-const static NSString *BUILDOPTION = @"InternalRelease";
-#else
-const static NSString *BUILDOPTION = @"Release";
-#endif
 
 
 + (NSString *)absoluteUrl:(NSString *)relativeUrl

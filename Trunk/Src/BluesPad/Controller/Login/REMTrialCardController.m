@@ -156,11 +156,18 @@
             if(customers.count<=0){
                 [REMAlertHelper alert:REMLocalizedString(kLNLogin_NotAuthorized)];
                 
+                [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+                [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+                
                 return;
             }
             
             if(customers.count == 1){
                 [REMAppContext setCurrentCustomer:customers[0]];
+                
+                [REMAppCurrentUser save];
+                [REMAppCurrentCustomer save];
+                
                 [self.loginCarouselController.splashScreenController showMapView:nil];
                 
                 return;
@@ -170,10 +177,13 @@
         }
         
         //[self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-    } error:^(NSError *error, id response) {
-        //[REMAlertHelper alert:@""];
+    } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
         [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
         [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        
+        if(error.code != -1001 && error.code != 306) {
+            [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
+        }
     }];
 }
 

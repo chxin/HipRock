@@ -34,7 +34,7 @@ static int maxQueueLength = kREMCommMaxQueueWifi;
 #define kREMLogResquest 0 //0:no log, 1:log partial, 2: log full
 
 #if defined(DEBUG)
-static int requestTimeout = 1000; //(s)
+static int requestTimeout = 45; //(s)
 #else
 static int requestTimeout = 45; //(s)
 #endif
@@ -146,17 +146,15 @@ static int requestTimeout = 45; //(s)
     {
         REMLogError(@"Communication error: %@\nUrl: %@\nServer response: %@", [error description], [operation.request.URL description], operation.responseString);
         
-        if(errorInfo.code == -1001){
-            [REMAlertHelper alert:@"数据加载超时"];
+        REMDataAccessErrorStatus status = [REMServiceAgent decideErrorStatus:errorInfo];
+        
+        if(status == REMDataAccessFailed){
+            //TODO:change to failed message
+            [REMAlertHelper alert:REMLocalizedString(@"Login_NetworkTimeout")];
         }
-        else if(errorInfo.code == -999){
-            REMLogInfo(@"Request canceled");
-        }
-        else{
-            if(error)
-            {
-                error(errorInfo,operation.responseString);
-            }
+        
+        if(error) {
+            error(errorInfo,status,operation.responseString);
         }
         
         if(maskContainer!=nil && maskManager != nil) {
@@ -262,7 +260,7 @@ static int requestTimeout = 45; //(s)
     switch (currentNetworkStatus)
     {
         case NotReachable:
-            [REMAlertHelper alert:@"无法获取最新能源数据" withTitle:@"无可用网络"];
+            //[REMAlertHelper alert:@"无法获取最新能源数据" withTitle:@"无可用网络"];
             maxQueueLength = 0;
             return NO;
         case ReachableViaWiFi:

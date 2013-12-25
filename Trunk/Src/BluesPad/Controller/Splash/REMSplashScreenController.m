@@ -20,6 +20,11 @@
 #import "DCPieChartView.h"
 #import "DCLabelingWrapper.h"
 #import "REMEnergyLabellingLevelData.h"
+#import "REMLocalizeKeys.h"
+#import "REMCustomerModel.h"
+#import "REMUserModel.h"
+#import "REMUserValidationModel.h"
+#import "REMChartHeader.h"
 
 @interface REMSplashScreenController ()
 
@@ -132,7 +137,41 @@
     [self recoverAppContext];
     
     if([self isAlreadyLogin]){
-        [self breathShowMapView:YES:nil];
+        //if network is ok and (user or customer does not exist) goto login
+        //else goto map
+        BOOL isNoConnect = [REMNetworkHelper checkIsNoConnect];
+        
+        if(isNoConnect){
+            [self breathShowMapView:YES:nil];
+        }
+        else{
+            REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserCustomerValidate parameter:@{@"userName":REMAppCurrentUser.name,@"customerId":REMAppCurrentCustomer.customerId}];
+            [store access:^(id data) {
+                REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
+                
+                if(validationResult.status == REMUserValidationSuccess){
+                    [self breathShowMapView:YES:nil];
+                }
+                else{
+                    //clear login info, TODO:should prompt user that will logout
+                    [REMAlertHelper alert:REMLocalizedString(@"Login_NotAuthorized")];
+                    
+                    REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
+                    REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
+                    
+                    [currentUser kill];
+                    [currentCustomer kill];
+                    currentUser = nil;
+                    currentCustomer = nil;
+                    
+                    [REMApplicationContext destroy];
+                    
+                    [self breathShowLoginView];
+                }
+            } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
+                [self breathShowMapView:YES:nil];
+            }];
+        }
     }
     else{
         [self breathShowLoginView];
@@ -346,6 +385,7 @@
 
 - (void)showLoginView:(BOOL)isAnimated
 {
+    [self.logoView setHidden:YES];
     if(self.carouselController!=nil){
         [self.carouselController playCarousel:isAnimated];
     }
@@ -369,12 +409,19 @@
     NSDictionary *parameter = @{@"customerId":REMAppCurrentCustomer.customerId};
     REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSBuildingInfo parameter:parameter];
     
-    [REMDataAccessor access:buildingStore success:^(id data) {
-        if([data count]<=0){
-            [REMAlertHelper alert:REMLocalizedString(@"Login_NoBuilding")];
+    [buildingStore access:^(id data) {
+        if([data count] <= 0){
+            [REMAlertHelper alert:REMLocalizedString(@"Login_NotAuthorized")];
+            
+            if([self isAlreadyLogin]){
+                [self showLoginView:NO];
+            }
+            
+            return;
         }
         
-        self.buildingInfoArray = [[NSMutableArray alloc] initWithCapacity:[data count]];
+        self.buildingInfoArray = [[NSMutableArray alloc] init];
+        
         for(NSDictionary *item in (NSArray *)data){
             [self.buildingInfoArray addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
         }
@@ -384,20 +431,19 @@
         logoStore.groupName = nil;
         logoStore.maskContainer = nil;
         
-        [REMDataAccessor access:logoStore success:^(id data) {
-            //TODO: what if customer logo is null?
-            if(data == nil || [data length] == 2) return;
+        [logoStore access:^(id data) {
+            UIImage *logo = nil;
+            if(data != nil && [data length] > 2) {
+                logo = [REMImageHelper parseImageFromNSData:data withScale:1.0];
+            }
             
-            UIImage *view = [REMImageHelper parseImageFromNSData:data withScale:1.0];
-            
-            REMAppCurrentLogo = view;
+            REMAppCurrentLogo = logo;
             
             if(loadCompleted!=nil)
                 loadCompleted();
             
             [self performSegueWithIdentifier:kSegue_SplashToMap sender:self];
-        } error:^(NSError *error, id response) {
-            
+        } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
             if(loadCompleted!=nil)
                 loadCompleted();
             
@@ -405,10 +451,12 @@
         }];
         
         
-    } error:^(NSError *error, id response) {
-        if(error.code != 1001) {
-            [REMAlertHelper alert:@"数据加载错误"];
+    } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
+        if(error.code != -1001 && error.code != 306) {
+            [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
         }
+        
+        [self performSegueWithIdentifier:kSegue_SplashToMap sender:self];
     }];
 }
 

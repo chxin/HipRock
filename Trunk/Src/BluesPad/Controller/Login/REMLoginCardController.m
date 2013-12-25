@@ -147,8 +147,7 @@
     
     if(self.loginButton.indicatorStatus == NO)
     {
-        if(username == nil || [username isEqualToString:@""] ||  password == nil || [self.passwordTextField.text isEqualToString:@""])
-        {
+        if(username!=nil && ![username isEqualToString:@""] && password!=nil && ![password isEqualToString:@""]){
             [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
         }
         else
@@ -174,11 +173,17 @@
             if(customers.count<=0){
                 [REMAlertHelper alert:REMLocalizedString(kLNLogin_NotAuthorized)];
                 
+                [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+                [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
                 return;
             }
             
             if(customers.count == 1){
                 [REMAppContext setCurrentCustomer:customers[0]];
+                
+                [REMAppCurrentUser save];
+                [REMAppCurrentCustomer save];
+                
                 [self.loginCarouselController.splashScreenController showMapView:nil];
                 
                 return;
@@ -220,17 +225,30 @@
     [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
     [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
     
-    [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
+    if(error.code != -1001 && error.code != 306) {
+        [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
+    }
 }
 
 -(void)loginSuccess
 {
     [REMAppCurrentUser save];
     [REMAppCurrentCustomer save];
-
-    [self.loginCarouselController.splashScreenController showMapView:^{
-        //[self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-    }];
+    
+    
+    if([REMNetworkHelper checkIsNoConnect]){
+        [REMAlertHelper alert:REMLocalizedString(@"Login_NoNetwork")];
+        [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        
+        return;
+    }
+    else{
+        [self.loginCarouselController.splashScreenController showMapView:^{
+            [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+            [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        }];
+    }
 }
 
 

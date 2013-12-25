@@ -486,6 +486,7 @@
 - (void)setCurrentOffset:(CGFloat)currentOffset{
     if(currentOffset!=_currentOffset){
         _currentOffset=currentOffset;
+
            // NSLog(@"image controller:%f",currentOffset);
         CGFloat offset=currentOffset;
         if (offset>=kCommodityScrollTop) {
@@ -509,6 +510,7 @@
         }
         
         REMBuildingViewController *buildingController=(REMBuildingViewController *)self.parentViewController;
+
         [buildingController setViewOffset:currentOffset];
     }
     
