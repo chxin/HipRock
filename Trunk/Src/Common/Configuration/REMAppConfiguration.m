@@ -7,7 +7,18 @@
 --------------------------------------------------------------------------*/
 #import "REMAppConfiguration.h"
 
+
 @implementation REMAppConfiguration
+
+#if defined(DEBUG)
+const static NSString *BUILDOPTION = @"Debug";
+#elif defined(DailyBuild)
+const static NSString *BUILDOPTION = @"DailyBuild";
+#elif defined(InternalRelease)
+const static NSString *BUILDOPTION = @"InternalRelease";
+#else
+const static NSString *BUILDOPTION = @"Release";
+#endif
 
 -(REMAppConfiguration *)init
 {
@@ -18,7 +29,7 @@
         
         self.dictionary = [[NSDictionary alloc] initWithContentsOfFile:path];
         
-        self.shouldCleanCache = [self.dictionary[@"ShouldCleanCache"] boolValue];
+        //self.shouldCleanCache = [self.dictionary[@"ShouldCleanCache"] boolValue];
         
         [self resolveDataSourceSection];
     }
@@ -30,7 +41,10 @@
 -(void)resolveDataSourceSection
 {
     self.dataSources = (NSDictionary *)self.dictionary[@"DataSources"];
-    self.currentDataSource = (NSDictionary *)self.dictionary[@"CurrentDataSource"];
+    
+    NSString *currentDataSourceKey = [self.dictionary[@"CurrentDataSource"] objectForKey:BUILDOPTION];
+    
+    self.currentDataSource = self.dataSources[currentDataSourceKey];
 }
 
 @end

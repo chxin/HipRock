@@ -122,7 +122,7 @@
     [self.totalLabel showLoading];
     [self.carbonLabel showLoading];
     [self.rankingLabel showLoading];
-    [REMDataAccessor access:store success:^(NSDictionary *data) {
+    [store access:^(NSDictionary *data) {
         REMCommodityUsageModel *model=nil;
         if([data isEqual:[NSNull null]]==YES){
             model=nil;
@@ -137,7 +137,7 @@
         [self.carbonLabel hideLoading];
         [self.rankingLabel hideLoading];
         [self addDataLabel];
-    } error:^(NSError *error, id response) {
+    } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
         
     }];
 }

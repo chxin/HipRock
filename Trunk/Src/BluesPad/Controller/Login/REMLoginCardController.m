@@ -22,22 +22,6 @@
 #import "REMLoginButton.h"
 
 
-#ifdef DEBUG
-
-#define kDefaultUserName @"SchneiderElectricChina"
-#define kDefaultPassword @"P@ssw0rdChina"
-
-#elif InternalRelease
-
-#define kDefaultUserName @"SchneiderElectricChina"
-#define kDefaultPassword @"P@ssw0rdChina"
-
-#else
-
-#define kDefaultUserName @""
-#define kDefaultPassword @""
-
-#endif
 
 @interface REMLoginCardController ()
 
@@ -89,6 +73,16 @@
     self.passwordErrorLabel = passwordErrorLabel;
     self.loginButton = loginButton;
     
+#ifdef DEBUG
+    NSString *debugUser = REMAppConfig.currentDataSource[@"debug-user"];
+    if(!REMIsNilOrNull(debugUser) && ![debugUser isEqualToString:@""] && [debugUser rangeOfString:@"-"].length>0){
+        NSArray *debugUserInfo = [debugUser componentsSeparatedByString:@"-"];
+        self.userNameTextField.text = debugUserInfo[0];
+        self.passwordTextField.text = debugUserInfo[1];
+    
+    }
+#endif
+    
     return content;
 }
 
@@ -138,12 +132,12 @@
         [self dataCallSuccess:data];
     };
     
-    void (^errorHandler)(NSError *error, id response) = ^(NSError *error, id response)
+    void (^errorHandler)(NSError *error,REMDataAccessErrorStatus status, id response) = ^(NSError *error,REMDataAccessErrorStatus status, id response)
     {
         [self dataCallFail:error result:response];
     };
     
-    [REMDataAccessor access:store success:successHandler error:errorHandler];
+    [store access:successHandler error:errorHandler];
 }
 
 - (void)textFieldChanged:(id)sender
@@ -299,16 +293,17 @@
 
 -(UITextField *)renderUserNameField
 {
+    
     //username textbox
     UITextField *userNameTextBox = [[REMInsetsTextField alloc] initWithFrame:CGRectMake(kDMLogin_UserNameTextBoxLeftOffset, kDMLogin_UserNameTextBoxTopOffset, kDMLogin_TextBoxWidth, kDMLogin_TextBoxHeight) andInsets:UIEdgeInsetsMake(15, 10, 15, 10)];
     userNameTextBox.placeholder = REMLocalizedString(@"Login_LoginUsernamePlaceHolder");
     userNameTextBox.delegate = self;
     userNameTextBox.returnKeyType = UIReturnKeyNext;
-    userNameTextBox.text = kDefaultUserName;
     userNameTextBox.font = [UIFont systemFontOfSize:kDMLogin_TextBoxFontSize];
     userNameTextBox.textColor = [REMColor colorByHexString:kDMLogin_TextBoxFontColor];
     [userNameTextBox addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventValueChanged];
     [self setTextField:userNameTextBox backgroundImage:REMIMG_LoginTextField];
+    
     
     return userNameTextBox;
 }
@@ -333,7 +328,6 @@
     passwordTextBox.delegate = self;
     passwordTextBox.secureTextEntry = YES;
     passwordTextBox.returnKeyType = UIReturnKeyGo;
-    passwordTextBox.text = kDefaultPassword;
     passwordTextBox.font = [UIFont systemFontOfSize:kDMLogin_TextBoxFontSize];
     passwordTextBox.textColor = [REMColor colorByHexString:kDMLogin_TextBoxFontColor];
     [passwordTextBox addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventValueChanged];

@@ -16,6 +16,7 @@
 #import "REMDimensions.h"
 #import "DCColumnWrapper.h"
 #import "DCLineWrapper.h"
+#import "DCPieWrapper.h"
 #import "DCPieChartView.h"
 #import "DCLabelingWrapper.h"
 #import "REMEnergyLabellingLevelData.h"

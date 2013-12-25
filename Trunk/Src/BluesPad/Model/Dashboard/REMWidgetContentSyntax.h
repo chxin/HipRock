@@ -9,7 +9,7 @@
 #import "REMJSONObject.h"
 #import "REMTimeRange.h"
 #import "REMEnum.h"
-
+#import "REMCommonHeaders.h"
 
 @interface REMWidgetContentSyntax : REMJSONObject
 

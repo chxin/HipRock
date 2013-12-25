@@ -27,11 +27,9 @@ const static NSString *BUILDOPTION = @"Release";
 
 + (NSString *)absoluteUrl:(NSString *)relativeUrl
 {
-    NSString *dataSourceName = REMAppConfig.currentDataSource[BUILDOPTION];
-    NSDictionary *serviceInfo = REMAppConfig.dataSources[dataSourceName];
-    NSString *serviceBaseUrl = [NSString stringWithFormat:@"%@://%@%@",serviceInfo[@"schema"],serviceInfo[@"host"],serviceInfo[@"path"]];
+    NSString *serviceBaseUrl = REMAppConfig.currentDataSource[@"url"];
     
-    //NSLog(@"BUILDOPTION:%@\nSVCBASE:%@", BUILDOPTION, serviceBaseUrl);
+    NSLog(@"SVCBASE:%@", serviceBaseUrl);
     
     NSString *absoluteUrl = [serviceBaseUrl stringByAppendingString:relativeUrl];;
     

@@ -16,6 +16,7 @@
 #import "DCContext.h"
 #import "REMChartHeader.h"  // FOR IMPORT REMChartDataProcessor only
 #import "DCXYChartViewDelegate.h"
+#import "REMCommonHeaders.h"
 
 @interface DCTrendWrapper : DAbstractChartWrapper<DCXYChartViewDelegate>
 

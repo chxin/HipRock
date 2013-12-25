@@ -7,13 +7,16 @@
  --------------------------------------------------------------------------*///
 
 #import "REMDataStore.h"
-#import "REMServiceMeta.h"
+#import "REMDataStoreType.h"
+#import "REMServiceAgent.h"
+#import "REMNetworkHelper.h"
+#import "REMApplicationInfo.h"
+#import "REMStorage.h"
+#import "REMJSONHelper.h"
 
 
 @implementation REMDataStore
 
-#define REMJsonSvc(a) [[REMServiceMeta alloc] initWithJsonResultRelativeUrl:(a)]
-#define REMDataSvc(a) [[REMServiceMeta alloc] initWithDataResultRelativeUrl:(a)]
 
 static NSDictionary *serviceMap = nil;
 
@@ -23,7 +26,6 @@ static NSDictionary *serviceMap = nil;
     
     store.name = name;
     store.parameter = parameter;
-    
     store.serviceMeta = [[REMDataStore serviceMap] objectForKey:[NSNumber numberWithInt:name]];
     
     return store;
@@ -133,6 +135,61 @@ static NSDictionary *serviceMap = nil;
     return serviceMap;
 }
 
+- (void)access:(REMDataAccessSuccessBlock)succcess
+{
+    [self access:succcess error:nil progress:nil];
+}
+- (void)access:(REMDataAccessSuccessBlock)succcess error:(REMDataAccessErrorBlock)error
+{
+    [self access:succcess error:error progress:nil];
+}
+- (void)access:(REMDataAccessSuccessBlock)succcess error:(REMDataAccessErrorBlock)error progress:(REMDataAccessProgressBlock)progress
+{
+    
+}
 
+
++ (void) cancelAccess
+{
+    [REMServiceAgent cancel];
+}
+
++ (void) cancelAccess: (NSString *) groupName
+{
+    [REMServiceAgent cancel:groupName];
+}
+
+
+#pragma mark - private
+- (void)accessLocal:(REMDataAccessSuccessBlock)success error:(REMDataAccessErrorBlock)error
+{
+    id cachedResult = nil;
+    NSString *cacheKey = [REMServiceAgent buildParameterString:self.parameter];
+    
+    if(self.serviceMeta.responseType == REMServiceResponseJson)
+    {
+        cachedResult = [REMStorage get:self.serviceMeta.url key:cacheKey];
+    }
+    else if(self.serviceMeta.responseType == REMServiceResponseImage)
+    {
+        cachedResult = [REMStorage getFile:self.serviceMeta.url key:cacheKey];
+    }
+    
+    
+    
+    if(self.serviceMeta.responseType == REMServiceResponseJson)
+    {
+        success([REMJSONHelper objectByString:cachedResult]);
+    }
+    else if(self.serviceMeta.responseType == REMServiceResponseImage)
+    {
+        success(cachedResult);
+    }
+}
+
+-(void)accessRemote:(REMDataAccessSuccessBlock)success error:(REMDataAccessErrorBlock)error progress:(REMDataAccessProgressBlock)progress
+{
+    [REMServiceAgent call:self.serviceMeta withBody:self.parameter mask:self.maskContainer group:self.groupName store:YES success:success error:error progress:progress];
+}
 
 @end

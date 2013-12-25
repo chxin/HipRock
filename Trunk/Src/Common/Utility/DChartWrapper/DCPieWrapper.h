@@ -9,6 +9,10 @@
 #import "DAbstractChartWrapper.h"
 #import "DCPieChartView.h"
 #import "DCPieChartViewDelegate.h"
+#import "REMCommonHeaders.h"
+@class DCPieChartView;
+@class DCPieChartViewDelegate;
+
 
 @interface DCPieWrapper : DAbstractChartWrapper<DCPieChartViewDelegate>
 @property (nonatomic, readonly) DCPieChartView* view;

@@ -414,7 +414,7 @@
         store.groupName=self.loadingImageKey;
         
         
-        [REMDataAccessor access: store success:^(NSData *data){
+        [store access:^(NSData *data){
             if(data == nil || [data length] == 2) return;
             UIImage *view = [self getCachedImage:data];
             [self loadImageViewByImage:view];

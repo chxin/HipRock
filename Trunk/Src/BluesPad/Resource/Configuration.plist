@@ -8,39 +8,29 @@
 	<dict>
 		<key>local</key>
 		<dict>
-			<key>schema</key>
-			<string>http</string>
-			<key>host</key>
-			<string>112.124.56.137</string>
-			<key>path</key>
-			<string>/v1.4.0.22/Mobile/MobileApiHost/</string>
+			<key>url</key>
+			<string>http://112.124.56.137/v1.4.0.22/Mobile/MobileApiHost/</string>
+			<key>debug-user</key>
+			<string>SchneiderElectricChina|P@ssw0rd</string>
 		</dict>
 		<key>dev</key>
 		<dict>
-			<key>schema</key>
-			<string>http</string>
-			<key>host</key>
-			<string>10.177.0.35</string>
-			<key>path</key>
-			<string>/Mobile/</string>
+			<key>url</key>
+			<string>http://10.177.0.35/Mobile/</string>
+			<key>debug-user</key>
+			<string>SchneiderElectricChina|P@ssw0rd</string>
 		</dict>
 		<key>test</key>
 		<dict>
-			<key>schema</key>
-			<string>http</string>
-			<key>host</key>
-			<string>112.124.56.137</string>
-			<key>path</key>
-			<string>/v1.4.0.22/Mobile/MobileApiHost/</string>
+			<key>url</key>
+			<string>http://112.124.56.137/v1.4.0.22/Mobile/MobileApiHost/</string>
+			<key>debug-user</key>
+			<string>SchneiderElectricChina|P@ssw0rdChina</string>
 		</dict>
 		<key>production</key>
 		<dict>
-			<key>schema</key>
-			<string>http</string>
-			<key>host</key>
-			<string>emopmobile.energymost.com</string>
-			<key>path</key>
-			<string>/</string>
+			<key>url</key>
+			<string>http://emopmobile.energymost.com/</string>
 		</dict>
 	</dict>
 	<key>CurrentDataSource</key>
@@ -54,7 +44,5 @@
 		<key>Release</key>
 		<string>production</string>
 	</dict>
-	<key>ShouldCleanLoginStatus</key>
-	<true/>
 </dict>
 </plist>

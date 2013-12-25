@@ -9,6 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "DCPieChartView.h"
 #import "DCPieChartAnimationManager.h"
+#import "REMCommonHeaders.h"
 
 @interface DCPieLayer : CALayer
 @property (nonatomic, weak) DCPieChartView* view;

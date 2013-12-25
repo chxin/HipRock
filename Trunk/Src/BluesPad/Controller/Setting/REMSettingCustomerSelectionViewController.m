@@ -72,7 +72,7 @@
         [alert show];
     }
     else if(alertView.tag==4){
-        [REMDataAccessor cancelAccess];
+        [REMDataStore cancelAccess];
         [self.settingController logoutAndClearCache];
     }
     
@@ -128,7 +128,7 @@
             [[REMApplicationContext instance].currentCustomer updateInnerDictionary];
             [[REMApplicationContext instance].currentCustomer save];
             [self.settingController needReload];
-            [REMDataAccessor cancelAccess];
+            [REMDataStore cancelAccess];
             
             [mainController dismissViewControllerAnimated:NO completion:^{
                 [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];

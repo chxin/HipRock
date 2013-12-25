@@ -83,7 +83,7 @@
     [self.outdoorLabel showLoading];
     [self.honeywellLabel showLoading];
     [self.mayairLabel showLoading];
-    [REMDataAccessor access:store success:^(NSDictionary *data) {
+    [store access:^(NSDictionary *data) {
         REMAirQualityModel *model=nil;
         if([data isEqual:[NSNull null]]==YES){
             model=nil;
@@ -99,7 +99,7 @@
         [self.honeywellLabel hideLoading];
         [self.mayairLabel hideLoading];
         [self addDataLabel];
-    } error:^(NSError *error, id response) {
+    } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
         
     }];
 }

@@ -9,7 +9,7 @@
 #import "REMCustomerSwitchHelper.h"
 #import "REMApplicationContext.h"
 #import "REMCustomerModel.h"
-#import "REMDataAccessor.h"
+#import "REMCommonHeaders.h"
 @implementation REMCustomerSwitchHelper
 
 static NSString *customerSwitchKey=@"customerswitch";
@@ -23,7 +23,7 @@ static NSString *customerSwitchKey=@"customerswitch";
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSCustomerSwitch parameter:dic];
     store.maskContainer=view;
     store.groupName =customerSwitchKey;
-    [REMDataAccessor access: store success:^(NSDictionary *data){
+    [store access:^(NSDictionary *data){
         NSNumber *statusNumber=data[@"Status"];
         REMCustomerSwitchStatus status=(REMCustomerSwitchStatus)[statusNumber integerValue];
         NSArray *newList = data[@"Customers"];
@@ -42,7 +42,7 @@ static NSString *customerSwitchKey=@"customerswitch";
 
 + (void)cancelSwitch
 {
-    [REMDataAccessor cancelAccess:customerSwitchKey];
+    [REMDataStore cancelAccess:customerSwitchKey];
 }
 
 @end

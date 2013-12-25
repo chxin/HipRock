@@ -277,7 +277,7 @@ const static CGFloat buildingGap=20;
     REMBuildingOverallModel *buildingInfo= self.buildingInfoArray[index];
     NSString *text=[NSString stringWithFormat:@"building-data-%@",buildingInfo.building.buildingId];
     
-    [REMDataAccessor cancelAccess:text];
+    [REMDataStore cancelAccess:text];
     
 }
 
@@ -505,7 +505,7 @@ const static CGFloat buildingGap=20;
         cell.alpha = 1.0;
     }
     
-    [REMDataAccessor cancelAccess];
+    [REMDataStore cancelAccess];
     
     //decide where to go
     NSString *segueIdentifier = [self.fromController class] == [REMGalleryViewController class] ? kSegue_BuildingToGallery : kSegue_BuildingToMap;

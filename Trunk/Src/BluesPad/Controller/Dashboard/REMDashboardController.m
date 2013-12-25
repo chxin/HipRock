@@ -7,7 +7,6 @@
  --------------------------------------------------------------------------*///
 
 #import "REMDashboardController.h"
-#import "REMDataAccessor.h"
 
 
 
@@ -30,7 +29,7 @@ static NSString *cellId=@"dashboardcell";
 
 
 - (void)cancelAllRequest{
-    [REMDataAccessor cancelAccess:[self groupName]];
+    [REMDataStore cancelAccess:[self groupName]];
 }
 
 
