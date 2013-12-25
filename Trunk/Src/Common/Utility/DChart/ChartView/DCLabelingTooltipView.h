@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "REMChartHeader.h"
+#import "REMChartStyle.h"
 
 @interface DCLabelingTooltipView : UIView
 @property (nonatomic, strong) NSString* benchmarkText;

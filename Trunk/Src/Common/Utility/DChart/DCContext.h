@@ -22,12 +22,6 @@ extern BOOL const kDCHideLineSymbolWhenDragging;
 extern NSString* const kDCPieShadowColor;
 extern NSString* const kDCPieIndicatorColor;
 
-typedef enum _DCLineType {
-    DCLineTypeDefault = 0,
-    DCLineTypeDotted = 1,
-    DCLineTypeDashed = 2
-}DCLineType;
-
 @protocol DCContextHRangeObserverProtocal <NSObject>
 
 -(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange;

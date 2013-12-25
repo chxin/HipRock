@@ -7,6 +7,7 @@
 //
 
 #import "_DCLayer.h"
+#import "REMChartHeader.h"
 
 @interface _DCXYIndicatorLayer : _DCLayer
 

@@ -27,6 +27,9 @@
 @property (nonatomic,assign) float hGridlineWidth;
 @property (nonatomic) UIColor* hGridlineColor;
 @property (nonatomic,assign) DCLineType hGridlineStyle;
+@property (nonatomic,assign) float vGridlineWidth;
+@property (nonatomic) UIColor* vGridlineColor;
+@property (nonatomic,assign) DCLineType vGridlineStyle;
 @property (nonatomic, assign) CGFloat plotPaddingTop;
 @property (nonatomic, assign) CGFloat plotPaddingLeft;
 @property (nonatomic, assign) CGFloat plotPaddingRight;

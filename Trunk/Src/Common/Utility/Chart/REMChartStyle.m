@@ -18,6 +18,10 @@
     style.xLineWidth = 4.0;
     style.yGridlineColor = [REMColor colorByHexString:@"#eaeaea"];
     style.yGridlineWidth = 1.0;
+    style.yGridlineStyle = DCLineTypeDefault;
+    style.xGridlineColor = [REMColor colorByHexString:@"#eaeaea"];
+    style.xGridlineWidth = 0.0;
+    style.xGridlineStyle = DCLineTypeDefault;
     style.horizentalGridLineAmount = 6;
     style.symbolSize = 14;
     style.xLabelToLine = 12;
@@ -105,6 +109,10 @@
     style.xLineWidth = 2.0;
     style.yGridlineColor = [REMColor colorByHexString:@"#eaeaea"];
     style.yGridlineWidth = 1.0;
+    style.yGridlineStyle = DCLineTypeDefault;
+    style.xGridlineColor = [REMColor colorByHexString:@"#eaeaea"];
+    style.xGridlineWidth = 0.0;
+    style.xGridlineStyle = DCLineTypeDefault;
     style.yTextColor = style.xTextColor = [REMColor colorByHexString:@"#969696"];
     style.yTextFont = style.xTextFont = [UIFont fontWithName:@kBuildingFontSCRegular size:10.0];
     style.horizentalGridLineAmount = 4;

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "DCRange.h"
 #import "DCContext.h"
+#import "REMChartHeader.h"
+
 typedef enum _DCAxisCoordinate {
     DCAxisCoordinateX = 0,
     DCAxisCoordinateY = 1
