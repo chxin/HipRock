@@ -133,8 +133,9 @@ const static CGFloat buildingGap=20;
 {
     
     self.defaultImage = REMIMG_DefaultBuilding;
+    //self.defaultImage=[UIImage imageNamed:@"DefaultBuilding-new.jpg"];
     UIImage *view = [UIImage imageNamed:@"DefaultBuildingBlur"];
-    
+    //view = [REMImageHelper blurImage:self.defaultImage];
     
     self.defaultBlurImage=view;
     

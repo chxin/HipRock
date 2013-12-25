@@ -46,7 +46,13 @@
 
 - (UIButton *)getCustomerLogoButton
 {
-    UIButton *customerLogoButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kDMCommon_CustomerLogoWidth, kDMCommon_CustomerLogoHeight)];
+    UIButton *customerLogoButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    customerLogoButton.adjustsImageWhenHighlighted=YES;
+//    if (REMISIOS7) {
+//        customerLogoButton=[UIButton buttonWithType:UIButtonTypeSystem];
+//    }
+    
+    [customerLogoButton setFrame:CGRectMake(0, 0, kDMCommon_CustomerLogoWidth, kDMCommon_CustomerLogoHeight)];
     
     [customerLogoButton setImage:REMAppCurrentLogo forState:UIControlStateNormal];
     customerLogoButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
