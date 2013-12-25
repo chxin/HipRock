@@ -54,13 +54,12 @@
 @property (nonatomic,strong) NSArray *currentStepList;
 @property (nonatomic,weak) REMTooltipViewBase *tooltipView;
 
-@property (nonatomic,strong) REMWidgetStepEnergyModel *tempModel;
+
 
 @property (nonatomic,strong) NSArray *supportStepArray;
 
 @property (nonatomic,strong) NSMutableArray *hiddenSeries;
 
-@property (nonatomic,weak) UIView *calendarMsgView;
 
 
 @end
@@ -108,32 +107,20 @@
         [self.stepControl setHidden:YES];
     }
     
+    REMWidgetStepEnergyModel *tempModel=(REMWidgetStepEnergyModel *)self.tempModel;
     
-    [self setDatePickerButtonValueNoSearchByTimeRange:self.tempModel.timeRangeArray[0] withRelative:self.tempModel.relativeDateComponent withRelativeType:self.tempModel.relativeDateType];
-    [self initStepButtonWithRange:self.tempModel.timeRangeArray[0] WithStep:self.tempModel.step];
-    [self setStepControlStatusByStepNoSearch:self.tempModel.step];
+    [self setDatePickerButtonValueNoSearchByTimeRange:tempModel.timeRangeArray[0] withRelative:tempModel.relativeDateComponent withRelativeType:tempModel.relativeDateType];
+    [self initStepButtonWithRange:tempModel.timeRangeArray[0] WithStep:tempModel.step];
+    [self setStepControlStatusByStepNoSearch:tempModel.step];
     
     //TODO:Temp code, remove when tooltip delegate is ok
     //[self.view addSubview:[self prepareTooltipView]];
 }
 
 - (void)initModelAndSearcher{
-    self.model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
-                  .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
-    self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
-    UIActivityIndicatorView *loader=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [loader setColor:[UIColor blackColor]];
-    [loader setBackgroundColor:[UIColor clearColor]];
-    UIView *image=[[UIView alloc]init];
-    [image setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.4]];
-    image.translatesAutoresizingMaskIntoConstraints=NO;
-    self.searcher.loadingBackgroundView=image;
-    self.searcher.loadingView=loader;
-    loader.translatesAutoresizingMaskIntoConstraints=NO;
+    
     REMWidgetStepEnergyModel *m=(REMWidgetStepEnergyModel *)self.model;
     m.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
-    
-    self.tempModel=[self.model copy];
     
 }
 - (void)initSearchView{
@@ -330,6 +317,7 @@
 
 
 - (void)showChart{
+    [super showChart];
     if(self.energyData!=nil){
         [self showEnergyChart];
     }
@@ -363,7 +351,7 @@
     if(calendarDataArray==nil || [calendarDataArray isEqual:[NSNull null]]==YES){
         NSString *text=NSLocalizedString(@"Widget_CalendarTimeError", @"");
         //看不到日历背景色？换个时间试试
-        [self showCalendarMsg:text];
+        [self showPopupMsg:text];
     }
     else{
         NSMutableArray *validCalendarArray=[[NSMutableArray alloc]initWithCapacity:calendarDataArray.count];
@@ -401,20 +389,20 @@
         if(showMsg==YES){
             NSString *text=NSLocalizedString(@"Widget_CalendarTimeError", @"");
             //看不到日历背景色？换个时间试试
-            [self showCalendarMsg:text];
+            [self showPopupMsg:text];
         }
     }
 }
 
 - (void) processCalendar{
     DCTrendWrapper *trend=(DCTrendWrapper *)self.chartWrapper;
-    
+    REMWidgetStepEnergyModel *tempModel=(REMWidgetStepEnergyModel *)self.tempModel;
     if(self.widgetInfo.contentSyntax.calendarType == REMCalendarTypeHCSeason){
-        if(self.tempModel.step == REMEnergyStepYear){
+        if(tempModel.step == REMEnergyStepYear){
             trend.calenderType=REMCalendarTypeNone;
             NSString *text=NSLocalizedString(@"Widget_CalendarStepError", @"");
             //"当前步长不支持显示冷暖季背景色"
-            [self showCalendarMsg:[NSString stringWithFormat:text,[self calendarComponent]]];
+            [self showPopupMsg:[NSString stringWithFormat:text,[self calendarComponent]]];
         }
         else{
             trend.calenderType=REMCalendarTypeHCSeason;
@@ -422,17 +410,17 @@
         }
     }
     else if(self.widgetInfo.contentSyntax.calendarType == REMCalenderTypeHoliday){
-        if(self.tempModel.step == REMEnergyStepMonth ||
-           self.tempModel.step == REMEnergyStepYear ||
-           self.tempModel.step == REMEnergyStepWeek){
+        if(tempModel.step == REMEnergyStepMonth ||
+           tempModel.step == REMEnergyStepYear ||
+           tempModel.step == REMEnergyStepWeek){
             trend.calenderType=REMCalendarTypeNone;
             NSString *text=NSLocalizedString(@"Widget_CalendarStepError", @"");
             //"当前步长不支持显示非工作时间背景色"
-            [self showCalendarMsg:[NSString stringWithFormat:text,[self calendarComponent]]];
+            [self showPopupMsg:[NSString stringWithFormat:text,[self calendarComponent]]];
         }
         else{
             trend.calenderType=REMCalenderTypeHoliday;
-            [self checkCalendarDataWithCalendarType:REMCalenderTypeHoliday withSearchTimeRange:self.tempModel.timeRangeArray[0]];
+            [self checkCalendarDataWithCalendarType:REMCalenderTypeHoliday withSearchTimeRange:tempModel.timeRangeArray[0]];
         }
     }
     else{
@@ -441,52 +429,9 @@
 
 }
 
-- (void)reloadChart{
-    if (self.chartWrapper==nil) {
-        [self showEnergyChart];
-        return;
-    }
-//    if(self.pieWrapper!=nil){
-//        [self.pieWrapper redraw:self.energyData];
-//        return;
-//    }
-    
-    if([self.chartWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
-        DCTrendWrapper *trend=(DCTrendWrapper *)self.chartWrapper;
-        [self processCalendar];
-        [trend redraw:self.energyData step:self.tempModel.step];
-    }
-    else{
-        [self.chartWrapper redraw:self.energyData];
-    }
-}
 
-- (void) showCalendarMsg:(NSString *)msg{
-    UILabel *label=[[UILabel alloc]initWithFrame:CGRectZero];
-    label.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:20];
-    [label setBackgroundColor:[UIColor grayColor]];
-    label.text=msg;
-    label.textAlignment=NSTextAlignmentCenter;
-    CGSize expectedLabelSize = [label.text sizeWithFont:label.font];
-    CGFloat height=50;
-    CGFloat margin=50;
-    CGFloat bottom=10;
-    [label setFrame:CGRectMake((kDMScreenWidth-(expectedLabelSize.width+margin))/2, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight), expectedLabelSize.width+margin, height)];
-    [self.view addSubview:label];
-    [UIView animateWithDuration:0.5  delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
-        [label setFrame:CGRectMake(label.frame.origin.x, label.frame.origin.y-height-bottom, label.frame.size.width,label.frame.size.height)];
-    }completion: ^(BOOL finished){
-        [UIView animateWithDuration:0.5 delay:3 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
-            [label setFrame:CGRectMake(label.frame.origin.x, label.frame.origin.y+height+bottom, label.frame.size.width,label.frame.size.height)];
-        }completion:^(BOOL finished){
-            [self hideCalendarMsg];
-        }];
-    }];
-}
 
-- (void) hideCalendarMsg{
-    [self.calendarMsgView removeFromSuperview];
-}
+
 
 - (void) showEnergyChart{
     if(self.chartWrapper!=nil){
@@ -502,16 +447,11 @@
     if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[DCLineWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         widgetWrapper.delegate = self;
-//        widgetWrapper = [[REMLineWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-//        REMTrendChartView *trendChart= (REMTrendChartView *)widgetWrapper.view;
-//        trendChart.delegate = self;
         
         
     } else if (widgetType == REMDiagramTypeColumn) {
         widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         widgetWrapper.delegate = self;
-//        widgetWrapper = [[REMColumnWidgetWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-//        ((REMTrendChartView *)widgetWrapper.view).delegate = self;
     } else if (widgetType == REMDiagramTypePie) {
         widgetWrapper = [[DCPieWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
         widgetWrapper.delegate = self;
@@ -533,23 +473,10 @@
         }
         [self.chartContainer addSubview:[widgetWrapper getView]];
         self.chartWrapper=widgetWrapper;
-    }
-
-    [self processEnergyDataInnerError:self.energyData];
-    [self syncSearchTimeRange];
-    
+    }    
 }
 
-- (void)syncSearchTimeRange{
-    NSMutableArray *searchTimeRange=[NSMutableArray array];
-    
-    for (int i=0; i<self.tempModel.timeRangeArray.count; ++i) {
-        REMTimeRange *range=self.tempModel.timeRangeArray[i];
-        [searchTimeRange addObject:[range copy]];
-    }
-    
-    self.tempModel.searchTimeRangeArray=searchTimeRange;
-}
+
 
 
 
@@ -734,9 +661,6 @@
     [self setStepControlStatusByStep:currentStep];
 }
 
-- (void)copyTempModel{
-    self.model=[self.tempModel copy];
-}
 
 - (void)setNewTimeRange:(REMTimeRange *)newRange withRelativeType:(REMRelativeTimeRangeType)relativeType withRelativeDateComponent:(NSString *)newDateComponent
 {
@@ -753,7 +677,8 @@
         
         [self.timePickerButton setTitle:text1 forState:UIControlStateNormal];
     }
-    REMEnergyStep newStep= [self initStepButtonWithRange:newRange WithStep:self.tempModel.step];
+    REMWidgetStepEnergyModel *tempModel=(REMWidgetStepEnergyModel *)self.tempModel;
+    REMEnergyStep newStep= [self initStepButtonWithRange:newRange WithStep:tempModel.step];
     [self changeStep:newStep];
     
    
@@ -764,7 +689,7 @@
 
 
 
-- (void)rollback{
+- (void)innerRollback{
     REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
     [self initStepButtonWithRange:stepModel.timeRangeArray[0] WithStep:stepModel.step];
     [self setStepControlStatusByStepNoSearch:stepModel.step];
@@ -860,7 +785,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex>=self.supportStepArray.count) {
-        [self rollback];
+        [self innerRollback];
     }
     else{
         NSNumber *stepNumber=self.supportStepArray[buttonIndex];
@@ -873,9 +798,6 @@
    [self.tempModel setTimeRangeItem:newRange AtIndex:0];
 }
 
-- (void)changeStep:(REMEnergyStep)newStep{
-    self.tempModel.step=newStep;
-}
 
 
 
@@ -902,64 +824,53 @@
 
 
 - (void) setStepControlStatusByStep:(REMEnergyStep)step{
+    REMWidgetStepEnergyModel *tempModel=(REMWidgetStepEnergyModel *)self.tempModel;
+
     [self setStepControlStatusByStepNoSearch:step];
-    [self changeStep:step];
+    
+    tempModel.step=step;
     
     [self search];
 }
 
-- (void)processEnergyDataInnerError:(REMEnergyViewData *)data{
-    if (data.error!=nil && [data.error isEqual:[NSNull null]]==NO && data.error.count>0) {
-        REMEnergyError *error= data.error[0];
-        if (error!=nil && [error isEqual:[NSNull null]]==NO) {
-            NSString *errorCode= [error.errorCode substringFromIndex:7];
-            errorCode=[NSString stringWithFormat:@"Energy_%@",errorCode];
-            NSString *showText= NSLocalizedString(errorCode, @"");
-            if ([errorCode isEqualToString:showText]==YES) {
-                return;
-            }
-            if (error.params!=nil && [error.params isEqual:[NSNull null]]==NO && error.params.count>0) {
-                
-            }
-            [self showCalendarMsg:showText];
-        }
+- (void)rollbackWithError:(REMBusinessErrorInfo *)error
+{
+    if([error.code isEqualToString:@"990001202004"]==YES){ //step error
+        [self processStepErrorWithAvailableStep:error.messages[0]];
+    }
+    else{
+        [self innerRollback];
     }
 }
 
-- (void)search{
-    [self doSearchWithModel:self.tempModel callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
-        if(data!=nil){
-            [self syncSearchTimeRange];
-            [self copyTempModel];
-            
-            [self reloadChart];
-            
-            [self processEnergyDataInnerError:data];
-            
-        }
-        else{
-            if (error == nil) { //timeout
-                [self rollback];
-            }
-            else{
-                if([error.code isEqualToString:@"990001202004"]==YES){ //step error
-                    [self processStepErrorWithAvailableStep:error.messages[0]];
-                }
-                else if([error isKindOfClass:[REMClientErrorInfo class]]==YES){
-                    REMClientErrorInfo *err=(REMClientErrorInfo *)error;
-                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:err.messageInfo delegate:nil cancelButtonTitle:NSLocalizedString(@"Common_OK", @"") otherButtonTitles:nil, nil];
-                    [alert show];
-                    [self rollback];
-                }
-            }
-        }
-    }];
+-(void)changeStep:(REMEnergyStep)newStep{
+    REMWidgetStepEnergyModel *temp=(REMWidgetStepEnergyModel *)self.tempModel;
+    temp.step=newStep;
+}
+
+- (void)reloadChart{
+    
+    
+    if (self.chartWrapper==nil) {
+        [self showEnergyChart];
+        return;
+    }
+    REMWidgetStepEnergyModel *tempModel=(REMWidgetStepEnergyModel *)self.tempModel;
+
+    if([self.chartWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
+        DCTrendWrapper *trend=(DCTrendWrapper *)self.chartWrapper;
+        [self processCalendar];
+        [trend redraw:self.energyData step:tempModel.step];
+    }
+    else{
+        [self.chartWrapper redraw:self.energyData];
+    }
 }
 
 
-
-
-
+- (void)search{
+    [self searchData:self.tempModel];
+}
 
 -(void)legendSwitchSegmentPressed:(UISegmentedControl *)segment
 {
@@ -987,8 +898,9 @@
     
     
     [self willRangeChange:start end:end];
-    
-    if(self.tempModel.step == REMEnergyStepHour){
+    REMWidgetStepEnergyModel *tempModel=(REMWidgetStepEnergyModel *)self.tempModel;
+
+    if(tempModel.step == REMEnergyStepHour){
         [self search];
     }
 }
@@ -1019,13 +931,15 @@
     
     int currentStepInt=[self calculationStep:self.currentStepList];
     int newStepInt=[self calculationStep:model.stepList];
+    REMWidgetStepEnergyModel *tempModel=(REMWidgetStepEnergyModel *)self.tempModel;
+
     if(currentStepInt!=newStepInt){
-        [self reloadStepButtonGroup:model withSelectedStep:self.tempModel.step isMustContain:YES];
+        [self reloadStepButtonGroup:model withSelectedStep:tempModel.step isMustContain:YES];
     }
     
     
     
-    if([model.stepList containsObject:@(self.tempModel.step)]==NO){
+    if([model.stepList containsObject:@(tempModel.step)]==NO){
         return NO;
     }
     

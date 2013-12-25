@@ -48,7 +48,7 @@
     
     NSDictionary *viewOption=param[@"viewOption"];
     self.timeRangeArray=[self timeRangeToModelArray: viewOption[@"TimeRanges"]];
-    
+    self.searchTimeRangeArray=[self.timeRangeArray copy];
     self.hierarchyIdArray=[NSKeyedUnarchiver unarchiveObjectWithData:
                            [NSKeyedArchiver archivedDataWithRootObject:hierIds]];
     self.commodityIdArray=[NSKeyedUnarchiver unarchiveObjectWithData:

@@ -37,18 +37,6 @@ const static CGFloat kRankingTimePickerWidth=250;
 }
 
 - (void)initModelAndSearcher{
-    self.model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
-                  .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
-    self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
-    UIActivityIndicatorView *loader=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [loader setColor:[UIColor blackColor]];
-    [loader setBackgroundColor:[UIColor clearColor]];
-    UIView *image=[[UIView alloc]init];
-    [image setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.4]];
-    image.translatesAutoresizingMaskIntoConstraints=NO;
-    self.searcher.loadingBackgroundView=image;
-    self.searcher.loadingView=loader;
-    loader.translatesAutoresizingMaskIntoConstraints=NO;
     REMWidgetRankingSearchModel *m=(REMWidgetRankingSearchModel *)self.model;
     m.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
 }
@@ -137,9 +125,6 @@ const static CGFloat kRankingTimePickerWidth=250;
     [c addSubview:chartContainer];
     self.chartContainer=chartContainer;
     self.maskerView=self.chartContainer;
-    //self.chartContainer.layer.borderColor=[UIColor redColor].CGColor;
-    //self.chartContainer.layer.borderWidth=1;
-    //[self showEnergyChart];
     
     NSMutableArray *chartConstraints = [NSMutableArray array];
     UIView *searchView=self.searchView;
@@ -156,16 +141,8 @@ const static CGFloat kRankingTimePickerWidth=250;
 }
 
 - (void)search{
-    [self doSearchWithModel:self.model callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
-        if(data!=nil){
-            [self reloadChart];
-        }
-        else{
-            if (error == nil) {
-                
-            }
-        }
-    }];
+    
+    [self searchData:self.model];
 }
 
 
@@ -203,6 +180,7 @@ const static CGFloat kRankingTimePickerWidth=250;
 
 
 - (void)showChart{
+    [super showChart];
     if(self.energyData!=nil){
         [self showEnergyChart];
     }

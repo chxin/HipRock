@@ -34,6 +34,27 @@
     return nil;
 }
 
+- (void)setLoadingType:(REMEnergySearcherLoadingType)loadingType
+{
+    if (loadingType == REMEnergySearcherLoadingTypeLarge) {
+        UIActivityIndicatorView *loader=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        [loader setColor:[UIColor blackColor]];
+        [loader setBackgroundColor:[UIColor clearColor]];
+        UIView *image=[[UIView alloc]init];
+        [image setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.4]];
+        image.translatesAutoresizingMaskIntoConstraints=NO;
+        self.loadingBackgroundView=image;
+        self.loadingView=loader;
+        loader.translatesAutoresizingMaskIntoConstraints=NO;
+    }
+    else{
+        UIActivityIndicatorView *activitor= [[UIActivityIndicatorView alloc] init];
+        [activitor setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+        
+        self.loadingView=activitor;
+    }
+}
+
 - (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(REMWidgetSearchModelBase *)model withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void (^)(id, REMBusinessErrorInfo *))callback
 {
     if (self.loadingView!=nil && self.loadingView.isAnimating==YES) {
@@ -62,6 +83,11 @@
         
         //[activitor setBackgroundColor:[[UIColor grayColor] colorWithAlphaComponent:0.8]];
         self.loadingView=activitor;
+    }
+    else{
+        if (self.loadingView.translatesAutoresizingMaskIntoConstraints==YES) {
+            [self.loadingView setFrame:maskerContainer.bounds];
+        }
     }
    
 

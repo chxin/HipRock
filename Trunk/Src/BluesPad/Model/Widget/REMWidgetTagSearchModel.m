@@ -52,6 +52,7 @@
     NSNumber *step=viewOption[@"Step"];
     
     self.timeRangeArray= [self timeRangeToModelArray: viewOption[@"TimeRanges"]];
+    self.searchTimeRangeArray=[self.timeRangeArray copy];
     self.tagIdArray= [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:tagIds]];
     self.step=[self stepTypeByNumber:step];
     

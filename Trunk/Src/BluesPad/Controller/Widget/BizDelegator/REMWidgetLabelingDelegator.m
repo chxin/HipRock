@@ -33,8 +33,6 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
 
 
 - (void)initBizView{
-    //monthPickerViewController
-    [self initModelAndSearcher];
     [self initSearchView];
     [self initChartView];
     
@@ -42,20 +40,6 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     [self setDatePickerButtonValueNoSearchByTimeRange:m.timeRangeArray[0] withStep:m.step];
 }
 
-- (void)initModelAndSearcher{
-    self.model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
-                  .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
-    self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
-    UIActivityIndicatorView *loader=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [loader setColor:[UIColor blackColor]];
-    [loader setBackgroundColor:[UIColor clearColor]];
-    UIView *image=[[UIView alloc]init];
-    [image setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.4]];
-    image.translatesAutoresizingMaskIntoConstraints=NO;
-    self.searcher.loadingBackgroundView=image;
-    self.searcher.loadingView=loader;
-    loader.translatesAutoresizingMaskIntoConstraints=NO;
-}
 
 
 - (void)initSearchView{
@@ -182,13 +166,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
 }
 
 - (void)search{
-    [self doSearchWithModel:self.model callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
-        if(data!=nil){
-            [self reloadChart];
-        }
-        else{
-        }
-    }];
+    [self searchData:self.model];
 }
 
 - (void) setDatePickerButtonValueNoSearchByTimeRange:(REMTimeRange *)range withStep:(REMEnergyStep)step
