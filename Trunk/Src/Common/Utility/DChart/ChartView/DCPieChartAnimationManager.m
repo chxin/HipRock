@@ -9,33 +9,55 @@
 #import "DCPieChartAnimationManager.h"
 #import "DCPieChartView.h"
 
+
+typedef struct _DCPieSlice {
+    CGFloat sliceBegin; // 饼图Slice的起始角度，值域为[0-2)
+    CGFloat sliceCenter; // 饼图Slice的起始角度和终止角度的均值，值域为(0-2)
+    CGFloat sliceEnd; // 饼图Slice的终止角度的均值，值域为(0-2]
+}DCPieSlice;
+
 @interface DCPieChartAnimationManager()
 @property (nonatomic, weak) DCPieChartView* view;
-
 @property (nonatomic,strong) NSTimer* animationTimer;
+@property (nonatomic,strong) NSMutableArray* hiddenShowTimers;
+@property (nonatomic,strong) NSMutableArray* pointValueDics;
+@property (nonatomic, strong) NSArray* pieSlices;
+@property (nonatomic,assign) double sumVisableValue;
 @end
+
+const NSString* pointKey = @"point";
+const NSString* valueKey = @"value";
+const NSString* stepKey = @"step";
 
 @implementation DCPieChartAnimationManager
 -(id)initWithPieView:(DCPieChartView *)view {
     self = [super init];
     if (self) {
         _view = view;
+        _hiddenShowTimers = [[NSMutableArray alloc]init];
+        self.pointValueDics = [[NSMutableArray alloc]init];
     }
     return self;
 }
-//@property (nonatomic,assign) NSNumber* radius;            // 圆形区域半径
-//@property (nonatomic,assign) NSNumber* radiusForShadow;   // 投影半径
-//@property (nonatomic,assign) NSNumber* rotationAngle;     // 扇图已经旋转的角度，值域为[0-2)，例如需要旋转90°，rotationAngle=0.5
-//@property (nonatomic,assign) NSNumber* fullAngle;         // 扇图的总体的角度和，值域为[0-2]，例如如果只需要画半圆，fullAngle=1
-//@property (nonatomic,assign) NSNumber* indicatorAlpha;
--(void)playGrowUpAnimation {
-    DCPieChartAnimationFrame* startFrame = [[DCPieChartAnimationFrame alloc]init];
-    startFrame.radius = @(0);
-    startFrame.radiusForShadow = @(0);
-    startFrame.rotationAngle = @(0);
-    startFrame.fullAngle = @(0);
-    startFrame.indicatorAlpha = @(0);
 
+-(void)setSeries:(DCPieSeries *)series {
+    _series = series;
+    [self.pointValueDics removeAllObjects];
+    if (!REMIsNilOrNull(series)) {
+        for (DCPieDataPoint* point in series.datas) {
+            NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+            [dic setObject:point forKey:pointKey];
+            if (point.pointType == DCDataPointTypeNormal) {
+                [dic setObject: point.hidden ? @(0) : point.value forKey:valueKey];
+                [dic setObject:@(point.value.doubleValue/kDCAnimationDuration/kDCFramesPerSecord) forKey:stepKey];
+            } else {
+                [dic setObject:[NSNull null] forKey:valueKey];
+                [dic setObject:[NSNull null] forKey:stepKey];
+            }
+            [self.pointValueDics addObject:dic];
+        }
+    }
+    [self updateSumValueAndSlices];
 }
 
 /**计算等差数列**/
@@ -162,7 +184,7 @@
         [animationFrames addObject:frame];
     }
     double lastFrameAlignedRotation = [self ffff:estimatedRotationAngle];
-    double targetRotation = 2 - [self.view.series findNearbySliceCenter:lastFrameAlignedRotation];  // 预计对准的扇区的中线位置
+    double targetRotation = 2 - [self findNearbySliceCenter:lastFrameAlignedRotation];  // 预计对准的扇区的中线位置
     [animationFrames addObjectsFromArray:[self getAngleTurningFramesFrom:lastFrameAlignedRotation to:targetRotation]];
     // 应用动画
     [self playFrames:animationFrames];
@@ -214,6 +236,173 @@
         [self.animationTimer invalidate];
         self.animationTimer = nil;
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+-(void)updateSumValueAndSlices {
+    double sum = 0;
+    double previesSum[self.series.datas.count];
+    NSMutableArray* slices = [[NSMutableArray alloc]init];
+    if (!REMIsNilOrNull(self.series.datas)) {
+        int index = 0;
+        for (DCPieDataPoint* point in self.series.datas) {
+            previesSum[index] = sum;
+            if (point.pointType == DCDataPointTypeNormal) {
+                sum += [self getVisableValueOfPoint:point];
+            }
+            index++;
+        }
+    }
+    int index = 0;
+    for (DCPieDataPoint* point in self.series.datas) {
+        double pointVal = [self getVisableValueOfPoint:point];
+        if (point.pointType == DCDataPointTypeNormal && sum != 0 && pointVal != 0) {
+            DCPieSlice slice;
+            slice.sliceBegin = previesSum[index] * 2 / sum;
+            slice.sliceEnd = slice.sliceBegin + pointVal * 2 / sum;
+            slice.sliceCenter = (slice.sliceBegin + slice.sliceEnd) / 2;
+            [slices addObject:[NSValue value:&slice withObjCType:@encode(DCPieSlice)]];
+        } else {
+            [slices addObject:[NSNull null]];
+        }
+        index++;
+    }
+    _pieSlices = slices;
+    _sumVisableValue = sum;
+}
+
+-(void)setPoint:(DCPieDataPoint *)point hidden:(BOOL)hidden {
+    if (point.pointType != DCDataPointTypeNormal) {
+        point.hidden = hidden;
+        return;
+    }
+    for (NSMutableDictionary* valueDic in self.pointValueDics) {
+        if (valueDic[pointKey] == point) {
+            NSNumber* step = valueDic[stepKey];
+            if ([step isLessThan:@(0)] != hidden) {
+                [valueDic setObject:@(step.doubleValue*-1) forKey:stepKey];
+            }
+            break;
+        }
+    }
+    NSTimer* theTimer = nil;
+    for (NSTimer* timer in self.hiddenShowTimers) {
+        if (![timer isValid]) continue;
+        if (point == timer.userInfo) {
+            theTimer = timer;
+            break;
+        }
+    }
+    if (!theTimer) {
+        [self.hiddenShowTimers addObject:[NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(showOrHidePointTarget:) userInfo:point repeats:YES]];
+    }
+}
+
+-(void)showOrHidePointTarget:(NSTimer*)timer {
+    if (REMIsNilOrNull(self.view)) {
+        [timer invalidate];
+        [self.hiddenShowTimers removeObject:timer];
+        return;
+    }
+    if ([timer isValid]) {
+        DCPieDataPoint* point = timer.userInfo;
+        BOOL isInHidden = NO;   //正在进行隐藏
+        double step = 0;
+        double to = 0;
+        double value = 0;
+        NSMutableDictionary* vDic;
+        for (NSMutableDictionary* valueDic in self.pointValueDics) {
+            if (valueDic[pointKey] == point) {
+                step = [valueDic[stepKey] doubleValue];
+                vDic = valueDic;
+                value = [valueDic[valueKey] doubleValue];
+                if (step < 0) {
+                    to = 0;
+                    isInHidden = YES;
+                } else {
+                    to = point.value.doubleValue;
+                }
+                break;
+            }
+        }
+        BOOL willStop = NO;
+        value += step;
+        if (isInHidden) {
+            if (value <= 0) {
+                willStop = YES;
+                value = 0;
+            }
+        } else {
+            if (value > to) {
+                willStop = YES;
+                value = to;
+            }
+        }
+        [vDic setObject:@(value) forKey:valueKey];
+        [self updateSumValueAndSlices];
+        [self.view redraw];
+        if (willStop) {
+            [timer invalidate];
+            point.hidden = isInHidden;
+            [self.hiddenShowTimers removeObject:timer];
+            
+            if (self.sumVisableValue > 0) {
+                [self playFrames:[self getAngleTurningFramesFrom:self.view.rotationAngle to:2-[self findNearbySliceCenter:self.view.rotationAngle]]];
+            }
+        }
+    }
+}
+
+-(double)getVisableSliceSum {
+    return self.sumVisableValue;
+}
+
+-(double)getVisableValueOfPoint:(DCPieDataPoint*)point {
+    double angle = 0;
+    if (point.pointType == DCDataPointTypeNormal) {
+        for (NSMutableDictionary* dic in self.pointValueDics) {
+            if (point == dic[pointKey]) {
+                angle = [dic[valueKey] doubleValue];
+            }
+        }
+    }
+    return angle;
+}
+
+-(NSUInteger)findIndexOfSlide:(CGFloat)angle {
+    if (angle != 0) {
+        angle = 2 - angle;
+    }
+    NSUInteger index = 0;
+    for (int i = 0; i < self.pieSlices.count; i++) {
+        if (REMIsNilOrNull(self.pieSlices) || REMIsNilOrNull(self.pieSlices[i])) continue;
+        DCPieSlice slice;
+        [self.pieSlices[i] getValue:&slice];
+        if (slice.sliceEnd > angle) {
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
+
+-(CGFloat)findNearbySliceCenter:(CGFloat)angle {
+    DCPieSlice slice;
+    NSUInteger index = [self findIndexOfSlide:angle];
+    NSValue* val = self.pieSlices[index];
+    if (!REMIsNilOrNull(val)) {
+        [val getValue:&slice];
+    }
+    return slice.sliceCenter;
 }
 
 @end

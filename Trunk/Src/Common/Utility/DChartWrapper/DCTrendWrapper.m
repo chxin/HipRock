@@ -340,18 +340,28 @@
     }
 }
 
+-(NSUInteger)getVisableSeriesCount {
+    NSUInteger count = 0;
+    for (DCXYSeries* s in self.view.seriesList) {
+        if (!s.hidden) count++;
+    }
+    return count;
+}
+
 -(void)cancelToolTipStatus {
     [super cancelToolTipStatus];
     [self.view defocus];
 }
--(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
+-(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
     if (seriesIndex >= self.view.seriesList.count) return;
     DCXYSeries* series = self.view.seriesList[seriesIndex];
     [self.view setSeries:series hidden:hidden];
+    NSNumber* targetId = series.target.targetId;
+    if (REMIsNilOrNull(targetId)) return;
     if (hidden) {
-        [self.hiddenSeriesTargetsId addObject:series.target.targetId];
+        [self.hiddenSeriesTargetsId addObject:targetId];
     } else {
-        [self.hiddenSeriesTargetsId removeObject:series.target.targetId];
+        [self.hiddenSeriesTargetsId removeObject:targetId];
     }
 }
 -(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
@@ -367,6 +377,7 @@
     
     [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:step];
     for(DCXYSeries* s in self.view.seriesList) {
+        if (REMIsNilOrNull(s.target.targetId)) continue;
         if ([self.hiddenSeriesTargetsId containsObject:s.target.targetId]) {
             s.hidden = YES;
         }

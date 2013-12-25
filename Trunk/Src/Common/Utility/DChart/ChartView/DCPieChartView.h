@@ -30,5 +30,6 @@
 @property (nonatomic, readonly, assign) REMDirection rotateDirection;
 
 - (id)initWithFrame:(CGRect)frame series:(DCPieSeries*)series;
+-(void)setSlice:(DCPieDataPoint*)slice hidden:(BOOL)hidden;
 -(void)redraw;
 @end

@@ -18,12 +18,12 @@
     return self;
 }
 
--(void)setHidden:(BOOL)hidden {
-    if (hidden != self.hidden) {
-        _hidden = hidden;
-        if (self.series) {
-           [((DCPieSeries*)self.series) didPointHiddenChanged:self];
-        }
-    }
-}
+//-(void)setHidden:(BOOL)hidden {
+//    if (hidden != self.hidden) {
+//        _hidden = hidden;
+//        if (self.series) {
+//           [((DCPieSeries*)self.series) didPointHiddenChanged:self];
+//        }
+//    }
+//}
 @end
