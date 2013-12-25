@@ -14,25 +14,13 @@
 //Change CurrentDataSource value in configuration.plist in Resource folder
 //to change service url for different build options
 
-#if defined(DEBUG)
-
-const static NSString *BUILDOPTION = @"Debug";
-#elif defined(DailyBuild)
-const static NSString *BUILDOPTION = @"DailyBuild";
-#elif defined(InternalRelease)
-const static NSString *BUILDOPTION = @"InternalRelease";
-#else
-const static NSString *BUILDOPTION = @"Release";
-#endif
 
 
 + (NSString *)absoluteUrl:(NSString *)relativeUrl
 {
-    NSString *dataSourceName = REMAppConfig.currentDataSource[BUILDOPTION];
-    NSDictionary *serviceInfo = REMAppConfig.dataSources[dataSourceName];
-    NSString *serviceBaseUrl = [NSString stringWithFormat:@"%@://%@%@",serviceInfo[@"schema"],serviceInfo[@"host"],serviceInfo[@"path"]];
+    NSString *serviceBaseUrl = REMAppConfig.currentDataSource[@"url"];
     
-    //NSLog(@"BUILDOPTION:%@\nSVCBASE:%@", BUILDOPTION, serviceBaseUrl);
+    NSLog(@"SVCBASE:%@", serviceBaseUrl);
     
     NSString *absoluteUrl = [serviceBaseUrl stringByAppendingString:relativeUrl];;
     

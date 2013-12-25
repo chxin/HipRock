@@ -5,6 +5,9 @@
 #import "REMServiceMeta.h"
 #import "REMServiceRequestOperation.h"
 
+//Configuration
+#import "REMAppConfiguration.h"
+
 //Constants
 #import "REMApplicationContext.h"
 #import "REMApplicationInfo.h"
@@ -12,8 +15,8 @@
 #import "REMEnergyConstants.h"
 
 //DataAccess
-#import "REMDataAccessor.h"
 #import "REMDataStore.h"
+#import "REMDataStoreType.h"
 
 //Error
 #import "REMError.h"
@@ -42,8 +45,6 @@
 #import "REMChartHeader.h"
 #import "REMChartStyle.h"
 
-//Series
-
 //DChart
 #import "_DCBackgroundBandsLayer.h"
 #import "_DCHPinchGestureRecognizer.h"
@@ -62,9 +63,15 @@
 #import "_DCYAxisLabelLayer.h"
 
 //ChartView
+#import "DCLabelingChartDelegate.h"
+#import "DCLabelingChartView.h"
+#import "DCLabelingTooltipView.h"
 #import "DCPieChartAnimationFrame.h"
 #import "DCPieChartAnimationManager.h"
 #import "DCPieChartView.h"
+#import "DCPieChartViewDelegate.h"
+#import "DCPieLayer.h"
+#import "DCTrendAnimationManager.h"
 #import "DCXYChartView.h"
 #import "DCXYChartViewDelegate.h"
 
@@ -77,6 +84,7 @@
 
 //Gridline
 #import "_DCHGridlineLayer.h"
+#import "_DCVGridlineLayer.h"
 #import "_DCXYIndicatorLayer.h"
 
 //Series
@@ -85,6 +93,9 @@
 #import "_DCLineSymbolsLayer.h"
 #import "_DCSeriesLayer.h"
 #import "DCColumnSeries.h"
+#import "DCLabelingLabel.h"
+#import "DCLabelingSeries.h"
+#import "DCLabelingStage.h"
 #import "DCLineSeries.h"
 #import "DCPieSeries.h"
 #import "DCSeries.h"
@@ -96,6 +107,7 @@
 //DChartWrapper
 #import "DAbstractChartWrapper.h"
 #import "DCColumnWrapper.h"
+#import "DCLabelingWrapper.h"
 #import "DCLineWrapper.h"
 #import "DCPieWrapper.h"
 #import "DCRankingWrapper.h"

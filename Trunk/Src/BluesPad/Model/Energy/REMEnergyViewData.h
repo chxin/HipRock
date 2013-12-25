@@ -12,6 +12,7 @@
 #import "REMEnergyCalendarData.h"
 #import "REMEnergyError.h"
 #import "REMEnergyLabellingLevelData.h"
+#import "REMCommonHeaders.h"
 
 @interface REMEnergyViewData : REMJSONObject
 

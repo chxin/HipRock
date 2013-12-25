@@ -21,6 +21,7 @@
 #import "REMBusinessErrorInfo.h"
 #import "REMError.h"
 #import "REMNetworkStatusIndicator.h"
+#import "REMDataStoreType.h"
 
 
 @implementation REMServiceAgent
@@ -45,7 +46,7 @@ static int requestTimeout = 45; //(s)
 
 
 
-+ (void) call: (REMServiceMeta *) service withBody:(id)body mask:(UIView *) maskContainer group:(NSString *)groupName store:(BOOL) isStore success:(void (^)(id data))success error:(void (^)(NSError *error, id response))error progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
++ (void) call: (REMServiceMeta *) service withBody:(id)body mask:(UIView *) maskContainer group:(NSString *)groupName store:(BOOL) isStore success:(REMDataAccessSuccessBlock)success error:(REMDataAccessErrorBlock)error progress:(REMDataAccessProgressBlock)progress
 {
     //check network status and notify if no connection or 3g or 2g
     if([REMServiceAgent checkNetworkStatus] == NO)
@@ -90,7 +91,7 @@ static int requestTimeout = 45; //(s)
             
             REMError *remError = [[REMError alloc] initWithErrorInfo:remErrorInfo];
             
-            error(remError,remErrorInfo);
+            error(remError,NO,remErrorInfo);
             NetworkDecreaseActivity();
             
             if(maskContainer!=nil && maskManager != nil) //if mask has already shown
@@ -145,21 +146,18 @@ static int requestTimeout = 45; //(s)
     {
         REMLogError(@"Communication error: %@\nUrl: %@\nServer response: %@", [error description], [operation.request.URL description], operation.responseString);
         
-        if(errorInfo.code == -999){
-            REMLogInfo(@"Request canceled");
+        REMDataAccessErrorStatus status = [REMServiceAgent decideErrorStatus:errorInfo];
+        
+        if(status == REMDataAccessFailed){
+            //TODO:change to failed message
+            [REMAlertHelper alert:REMLocalizedString(@"Login_NetworkTimeout")];
         }
-        else{
-            if(errorInfo.code == -1001 || errorInfo.code == 306){
-                [REMAlertHelper alert:REMLocalizedString(@"Login_NetworkTimeout")];
-            }
-            
-            if(error)
-            {
-                error(errorInfo,operation.responseString);
-            }
+        
+        if(error) {
+            error(errorInfo,status,operation.responseString);
         }
-        if(maskContainer!=nil && maskManager != nil)
-        {
+        
+        if(maskContainer!=nil && maskManager != nil) {
             [maskManager hideMask];
         }
         
@@ -373,6 +371,22 @@ static int requestTimeout = 45; //(s)
         else
             NSLog(@"REM-RESPONSE data: %d bytes", [operation.responseData length]);
     }
+}
+
++(REMDataAccessErrorStatus)decideErrorStatus:(NSError *)error
+{
+    REMDataAccessErrorStatus status = REMDataAccessErrorMessage;
+    
+    if(error.code == -999){
+        status = REMDataAccessCanceled;
+        REMLogInfo(@"Request canceled");
+    }
+    if(error.code == -1001 || error.code == 306){
+        status = REMDataAccessFailed;
+        REMLogInfo(@"Network failure");
+    }
+    
+    return status;
 }
 @end
 

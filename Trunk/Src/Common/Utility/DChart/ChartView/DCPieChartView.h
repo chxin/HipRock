@@ -11,6 +11,8 @@
 #import "DCPieDataPoint.h"
 #import "DCPieSeries.h"
 #import "DCPieChartViewDelegate.h"
+#import "REMCommonHeaders.h"
+#import "REMChartHeader.h"
 
 @interface DCPieChartView : UIView
 

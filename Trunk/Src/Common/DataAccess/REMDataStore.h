@@ -7,72 +7,7 @@
  --------------------------------------------------------------------------*///
 
 #import <Foundation/Foundation.h>
-#import "REMServiceMeta.h"
-
-typedef enum _REMDataStoreType
-{
-    /*
-     * AccessControl
-     */
-    REMDSUserValidate,
-    REMDSDemoUserValidate,
-    REMDSUserCustomerValidate,
-    
-    /**
-     * User
-     */
-    REMDSUserGetCurrent,
-    
-    /**
-     * Customer
-     */
-    REMDSCustomerLogo,
-    REMDSCustomerSwitch,
-    
-    /**
-     *	Building
-     */
-    
-    REMDSBuildingInfo,
-    REMDSBuildingCommodityTotalUsage,
-    REMDSBuildingOverallData,
-    REMDSBuildingAverageData,
-    REMDSBuildingTimeRangeData,
-    REMDSBuildingPicture,
-    REMDSBuildingAirQualityTotalUsage,
-    REMDSBuildingAirQuality,
-    
-    /*
-     * Dashboard stores
-     */
-    REMDSDashboardFavorite,
-    
-    /*
-     * Energy stores
-     */
-    REMDSEnergyTagsTrend,
-    REMDSEnergyTagsTrendUnit,
-    REMDSEnergyTagsDistribute,
-    REMDSEnergyMultiTimeTrend,
-    REMDSEnergyMultiTimeDistribute,
-    REMDSEnergyCarbon,
-    REMDSEnergyCarbonUnit,
-    REMDSEnergyCarbonDistribute,
-    REMDSEnergyCost,
-    REMDSEnergyCostUnit,
-    REMDSEnergyCostDistribute,
-    REMDSEnergyCostElectricity,
-    REMDSEnergyRatio,
-    REMDSEnergyRankingEnergy,
-    REMDSEnergyRankingCost,
-    REMDSEnergyRankingCarbon,
-    REMDSEnergyLabeling,
-    /*
-     * Other
-     */
-    REMDSLogSend,
-    
-} REMDataStoreType;
+#import "REMDataStoreType.h"
 
 
 @interface REMDataStore : NSObject
@@ -83,11 +18,15 @@ typedef enum _REMDataStoreType
 @property (nonatomic,strong) UIView* maskContainer;
 @property (nonatomic,strong) NSString * groupName;
 
+
 - (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter;
 
+- (void)access:(REMDataAccessSuccessBlock)succcess;
+- (void)access:(REMDataAccessSuccessBlock)succcess error:(REMDataAccessErrorBlock)error;
+- (void)access:(REMDataAccessSuccessBlock)succcess error:(REMDataAccessErrorBlock)error progress:(REMDataAccessProgressBlock)progress;
+
++ (void) cancelAccess;
++ (void) cancelAccess: (NSString *) groupName;
+
 @end
 
-@interface REMMobileService : NSObject
-
-
-@end
