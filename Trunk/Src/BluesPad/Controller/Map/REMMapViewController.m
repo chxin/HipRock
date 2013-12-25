@@ -59,8 +59,17 @@
 -(void)addButtons
 {
     //add switch button
-    UIButton *switchButton = [[UIButton alloc]initWithFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, REMDMCOMPATIOS7(kDMCommon_TopLeftButtonTop),kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
-    [switchButton setBackgroundImage:REMIMG_Gallery forState:UIControlStateNormal];
+    UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    if (REMISIOS7) {
+        switchButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [switchButton setTintColor:[UIColor whiteColor]];
+    }
+    [switchButton setFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, REMDMCOMPATIOS7(kDMCommon_TopLeftButtonTop),kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
+    switchButton.adjustsImageWhenHighlighted=NO;
+    if (!REMISIOS7) {
+        switchButton.showsTouchWhenHighlighted=YES;
+    }
+    [switchButton setImage:REMIMG_Gallery forState:UIControlStateNormal];
     [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:switchButton];

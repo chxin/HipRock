@@ -233,26 +233,38 @@
 - (void)initButtons{
     
    
-    
-    
-    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, kDMCommon_TopLeftButtonTop,kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
-    
-    backButton.adjustsImageWhenHighlighted=YES;
+    UIButton *backButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    if (REMISIOS7) {
+        backButton=[UIButton buttonWithType:UIButtonTypeSystem];
+        [backButton setTintColor:[UIColor whiteColor]];
+    }
+    [backButton setFrame: CGRectMake(kDMCommon_TopLeftButtonLeft, kDMCommon_TopLeftButtonTop,kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
+    if (!REMISIOS7) {
+        backButton.showsTouchWhenHighlighted=YES;
+    }
+    backButton.adjustsImageWhenHighlighted=NO;
     //backButton.showsTouchWhenHighlighted=YES;
     backButton.titleLabel.text=@"Back";
-    [backButton setBackgroundImage:REMIMG_Back forState:UIControlStateNormal];
+    [backButton setImage:REMIMG_Back forState:UIControlStateNormal];
     [backButton addTarget:self.parentViewController action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.container addSubview:backButton];
     self.backButton=backButton;
-    
-    UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, backButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonWidth)];
+    UIButton *shareButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    if (REMISIOS7) {
+        shareButton=[UIButton buttonWithType:UIButtonTypeSystem];
+        [shareButton setTintColor:[UIColor whiteColor]];
+    }
+    [shareButton setFrame:CGRectMake(950, backButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonWidth)];
     [shareButton setImage:REMIMG_Share_normal forState:UIControlStateNormal];
     //if (self.buildingInfo.commodityUsage.count == 0) {
     shareButton.enabled = NO;
     //}
     //shareButton.showsTouchWhenHighlighted=YES;
-    shareButton.adjustsImageWhenHighlighted=YES;
+    shareButton.adjustsImageWhenHighlighted=NO;
+    if (!REMISIOS7) {
+        shareButton.showsTouchWhenHighlighted=YES;
+    }
     shareButton.titleLabel.text=@"Share";
     [shareButton addTarget:self.parentViewController action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -298,6 +310,7 @@
     
     UIButton *logoButton = [self getCustomerLogoButton];
     [logoButton setFrame:CGRectMake(self.backButton.frame.origin.x+self.backButton.frame.size.width, kDMCommon_CustomerLogoTop, logoButton.frame.size.width, logoButton.frame.size.height)];
+    
     //[logoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
     
     logoButton.titleLabel.text=@"logo";

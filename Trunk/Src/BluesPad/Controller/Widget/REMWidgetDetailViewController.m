@@ -74,9 +74,13 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     [titleContainer setBackgroundColor:[UIColor whiteColor]];
     
     UIButton *backButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    if (REMISIOS7) {
+        backButton=[UIButton buttonWithType:UIButtonTypeSystem];
+    }
     [backButton setFrame:CGRectMake(kWidgetBackButtonLeft, kWidgetBackButtonTop, kWidgetBackButtonWidthHeight, kWidgetBackButtonWidthHeight)];
     [backButton setImage:[UIImage imageNamed:@"Back_Chart"] forState:UIControlStateNormal];
-    backButton.adjustsImageWhenHighlighted=YES;
+    [backButton setTintColor:[REMColor colorByHexString:@"#37ab3c"] ];
+    backButton.adjustsImageWhenHighlighted=NO;
     //backButton.showsTouchWhenHighlighted=YES;
     
     [backButton addTarget:self.parentViewController action:@selector(popToBuildingCover) forControlEvents:UIControlEventTouchUpInside];

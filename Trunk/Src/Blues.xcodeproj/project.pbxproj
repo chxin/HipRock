@@ -596,7 +596,10 @@
 		B4707D9B18697B2900FBA393 /* Humidity_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9318697B2900FBA393 /* Humidity_pressed@2x.png */; };
 		B4707D9C18697B2900FBA393 /* Temperature_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9418697B2900FBA393 /* Temperature_normal@2x.png */; };
 		B4707D9D18697B2900FBA393 /* Temperature_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9518697B2900FBA393 /* Temperature_pressed@2x.png */; };
+<<<<<<< HEAD
 		B4707D9F1869863B00FBA393 /* DefaultBuilding-new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9E1869863A00FBA393 /* DefaultBuilding-new.jpg */; };
+=======
+>>>>>>> fdbc3bd04c4a3bdd243452910e49b0e467b462ba
 		B47422E617C45BCF0021B76C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
 		B477739A184F074500F68AED /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4777399184F074500F68AED /* CoreMedia.framework */; };
 		B477739C184F075300F68AED /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B477739B184F075300F68AED /* CoreVideo.framework */; };
@@ -1394,7 +1397,10 @@
 		B4707D9318697B2900FBA393 /* Humidity_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Humidity_pressed@2x.png"; sourceTree = "<group>"; };
 		B4707D9418697B2900FBA393 /* Temperature_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Temperature_normal@2x.png"; sourceTree = "<group>"; };
 		B4707D9518697B2900FBA393 /* Temperature_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Temperature_pressed@2x.png"; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		B4707D9E1869863A00FBA393 /* DefaultBuilding-new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "DefaultBuilding-new.jpg"; sourceTree = "<group>"; };
+=======
+>>>>>>> fdbc3bd04c4a3bdd243452910e49b0e467b462ba
 		B4777399184F074500F68AED /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
 		B477739B184F075300F68AED /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
 		B47ACC2817F80AAA00989B2C /* REMSettingCustomerSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerSelectionViewController.h; path = Controller/Setting/REMSettingCustomerSelectionViewController.h; sourceTree = "<group>"; };

@@ -161,7 +161,7 @@
     {
         return @"Water";
     }
-    else if([model.commodityId isEqualToNumber:@(12)] == YES)
+    else if([model.commodityId isEqualToNumber:@(12)] == YES)//pm2.5
     {
         return @"PM2.5";
     }
@@ -178,10 +178,10 @@
         return @"Oil";
     }
     else if([model.commodityId isEqualToNumber:@(8)]==YES){ //热量
-        return @"Electricity";
+        return @"Heating";
     }
     else if([model.commodityId isEqualToNumber:@(9)]==YES){ //冷量
-        return @"Oil";
+        return @"Cooling";
     }
     else if([model.commodityId isEqualToNumber:@(10)]==YES){ //煤
         return @"Coal";
