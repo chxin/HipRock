@@ -128,7 +128,7 @@
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
     
-    [self oscarTest];
+//    [self oscarTest];
     
     
     //decide where to go
