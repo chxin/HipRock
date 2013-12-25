@@ -70,6 +70,13 @@
     if (self.style.yGridlineWidth > 0) {
         view.hGridlineColor = self.style.yGridlineColor;
         view.hGridlineWidth = self.style.yGridlineWidth;
+        view.hGridlineStyle = self.style.yGridlineStyle;
+    }
+    view.hasVGridlines = self.style.xGridlineWidth > 0;
+    if (self.style.xGridlineWidth > 0) {
+        view.vGridlineColor = self.style.xGridlineColor;
+        view.vGridlineWidth = self.style.xGridlineWidth;
+        view.hGridlineStyle = self.style.xGridlineStyle;
     }
     
     view.focusSymbolLineColor = self.style.focusSymbolLineColor;

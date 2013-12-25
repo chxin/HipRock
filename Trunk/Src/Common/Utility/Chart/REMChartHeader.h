@@ -12,7 +12,12 @@
 #import "REMBuildingConstants.h"
 #import "REMEnergyTargetModel.h"
 #import "REMColor.h"
-#import "REMChartStyle.h"
+
+typedef enum _DCLineType {
+    DCLineTypeDefault = 0,
+    DCLineTypeDotted = 1,
+    DCLineTypeDashed = 2
+}DCLineType;
 
 @protocol REMChartDelegate <NSObject>
 @end

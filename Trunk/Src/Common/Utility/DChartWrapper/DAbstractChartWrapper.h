@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "REMChartHeader.h"
 #import "REMEnergyViewData.h"
+#import "REMChartStyle.h"
 
 typedef enum _DChartStatus {
     DChartStatusNormal,

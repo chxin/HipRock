@@ -173,7 +173,8 @@
 -(void)drawVGridlines {
     if (!self.hasVGridlines) return;
     self._vGridlineLayer = [[_DCVGridlineLayer alloc]initWithContext:self.graphContext];
-    self._vGridlineLayer.frame = self.graphContext.plotRect;
+    self._vGridlineLayer.view = self;
+    [self.graphContext addHRangeObsever:self._vGridlineLayer];
     [self.layer addSublayer:self._vGridlineLayer];
     [self._vGridlineLayer setNeedsDisplay];
 }
@@ -221,6 +222,7 @@
     self.backgroundBandsLayer.frame = self.graphContext.plotRect;
     self.indicatorLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, 0, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height+self.plotPaddingTop);// self.graphContext.plotRect;
     self.symbolLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height + self.xAxis.lineWidth + self.xAxis.labelToLine);
+    if (!REMIsNilOrNull(self._vGridlineLayer)) self._vGridlineLayer.frame = self.graphContext.plotRect;
     
     for (_DCColumnsLayer* columnLayer in self.columnLayers) {
         columnLayer.frame = self.graphContext.plotRect;

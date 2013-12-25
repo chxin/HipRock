@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "REMChartHeader.h"
 #import "REMColor.h"
 #import "REMBuildingConstants.h"
-#import "DCContext.h"
 
 @interface REMChartStyle : NSObject
 
@@ -23,6 +23,7 @@
 @property (nonatomic, assign) CGFloat xLineWidth;
 @property (nonatomic, strong) UIColor* xGridlineColor;
 @property (nonatomic, assign) CGFloat xGridlineWidth;
+@property (nonatomic, assign) DCLineType xGridlineStyle;
 @property (nonatomic, strong) UIColor* xTextColor;
 @property (nonatomic, strong) UIFont* xTextFont;
 @property (nonatomic, assign) CGFloat xLabelToLine;
@@ -31,6 +32,7 @@
 @property (nonatomic, assign) CGFloat yLineWidth;
 @property (nonatomic, strong) UIColor* yGridlineColor;
 @property (nonatomic, assign) CGFloat yGridlineWidth;
+@property (nonatomic, assign) DCLineType yGridlineStyle;
 @property (nonatomic, strong) UIColor* yTextColor;
 @property (nonatomic, strong) UIFont* yTextFont;
 @property (nonatomic, assign) CGFloat yLabelToLine;
