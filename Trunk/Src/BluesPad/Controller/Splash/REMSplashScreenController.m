@@ -239,16 +239,16 @@
     CGRect miniRect = CGRectMake(0, 0, 222, 108);
     CGRect maxiRect = CGRectMake(0, 0, 974, 605);
     
-//    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
-//    [self.view addSubview:pieWrapper.view];
-//    self.plotSource = pieWrapper;
-    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
-    self.plotSource = columnWidget;
-    
-    columnWidget.view.backgroundColor = [UIColor blackColor];
-    columnWidget.view.hasVGridlines = YES;
-    columnWidget.view.graphContext.hGridlineAmount = 4;
-    [self.view addSubview:columnWidget.view];
+    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+    [self.view addSubview:pieWrapper.view];
+    self.plotSource = pieWrapper;
+//    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+//    self.plotSource = columnWidget;
+//    
+//    columnWidget.view.backgroundColor = [UIColor blackColor];
+//    columnWidget.view.hasVGridlines = YES;
+//    columnWidget.view.graphContext.hGridlineAmount = 4;
+//    [self.view addSubview:columnWidget.view];
     
 //    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
 //    lineWidget.view.backgroundColor = [UIColor blackColor];
