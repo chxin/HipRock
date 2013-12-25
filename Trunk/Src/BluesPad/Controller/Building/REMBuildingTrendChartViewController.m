@@ -18,7 +18,7 @@
 }
 
 @property (nonatomic) CGRect viewFrame;
-
+@property (nonatomic, assign) BOOL loadDataSuccess;
 @end
 
 @implementation REMBuildingTrendChartViewController
@@ -30,7 +30,7 @@
 
 - (void)loadView
 {
-    
+    self.loadDataSuccess = NO;
     // Custom initialization
     REMBuildingTrendChart* myView = [[REMBuildingTrendChart alloc] initWithFrame:self.viewFrame];
     
@@ -171,6 +171,7 @@
 
 
 - (void)intervalChanged:(UIButton *)button {
+    if (!self.loadDataSuccess) return;
     REMRelativeTimeRangeType timeRange = REMRelativeTimeRangeTypeToday;
     REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
     if (button == myView.todayButton) {
@@ -449,6 +450,7 @@
 
 - (void)loadDataSuccessWithData:(id)data
 {
+    self.loadDataSuccess = YES;
     if (self.datasource.count != 6) {
         for (int i = 0; i < 6; i++) {
             NSMutableDictionary* timeIntervalData = [[NSMutableDictionary alloc] init];
@@ -504,6 +506,7 @@
 }
 
 - (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error {
+    self.loadDataSuccess = NO;
     if (self.datasource.count != 6) {
         for (int i = 0; i < 6; i++) {
             NSMutableDictionary* series = [[NSMutableDictionary alloc] init];
