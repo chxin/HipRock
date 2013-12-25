@@ -13,6 +13,8 @@
 #import "REMWidgetSearchModelBase.h"
 #import "DCRankingWrapper.h"
 #import "DCPieWrapper.h"
+#import "REMChartHeader.h"
+#import "DCLineWrapper.h"
 #import "DCLabelingWrapper.h"
 #import "REMWidgetCellDelegator.h"
 

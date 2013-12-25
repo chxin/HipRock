@@ -184,7 +184,7 @@ const static CGFloat widgetGap=20;
 
 - (void)cancelAllRequest{
     for (REMWidgetObject *widget in self.dashboardInfo.widgets) {
-        [REMDataAccessor cancelAccess:[NSString stringWithFormat:@"widget-%@",widget.widgetId]];
+        [REMDataStore cancelAccess:[NSString stringWithFormat:@"widget-%@",widget.widgetId]];
     }
 }
 

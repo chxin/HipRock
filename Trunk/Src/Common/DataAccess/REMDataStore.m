@@ -8,7 +8,6 @@
 
 #import "REMDataStore.h"
 #import "REMDataStoreType.h"
-#import "REMDataAccessor.h"
 #import "REMServiceAgent.h"
 #import "REMNetworkHelper.h"
 #import "REMApplicationInfo.h"

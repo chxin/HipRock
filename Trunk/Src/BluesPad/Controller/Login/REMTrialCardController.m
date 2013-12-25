@@ -143,7 +143,7 @@
     
     //so demo user will be created in sp1
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSDemoUserValidate parameter:nil];
-    [REMDataAccessor access:store success:^(id data) {
+    [store access:^(id data) {
         REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
         
         if(validationResult.status == REMUserValidationSuccess)
@@ -177,7 +177,7 @@
         }
         
         //[self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-    } error:^(NSError *error, id response) {
+    } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
         [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
         [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
         

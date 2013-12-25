@@ -48,7 +48,7 @@ static CPTTextStyle *yAxisLabelStyle;
     
     
     [self startLoadingActivity];
-    [REMDataAccessor access:store success:^(id data) {
+    [store access:^(id data) {
         if(self.view==nil)return ;
         [self loadDataSuccessWithData:data];
         
@@ -57,7 +57,7 @@ static CPTTextStyle *yAxisLabelStyle;
         
         
         [self stopLoadingActivity];
-    } error:^(NSError *remError, REMBusinessErrorInfo *bizError) {
+    } error:^(NSError *remError, REMDataAccessErrorStatus status, REMBusinessErrorInfo *bizError) {
         [self stopLoadingActivity];
         loadCompleted(nil,bizError);
         if(bizError!=nil){

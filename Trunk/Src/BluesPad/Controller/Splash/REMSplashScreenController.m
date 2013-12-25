@@ -16,6 +16,7 @@
 #import "REMDimensions.h"
 #import "DCColumnWrapper.h"
 #import "DCLineWrapper.h"
+#import "DCPieWrapper.h"
 #import "DCPieChartView.h"
 #import "DCLabelingWrapper.h"
 #import "REMEnergyLabellingLevelData.h"
@@ -23,6 +24,7 @@
 #import "REMCustomerModel.h"
 #import "REMUserModel.h"
 #import "REMUserValidationModel.h"
+#import "REMChartHeader.h"
 
 @interface REMSplashScreenController ()
 
@@ -144,7 +146,7 @@
         }
         else{
             REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserCustomerValidate parameter:@{@"userName":REMAppCurrentUser.name,@"customerId":REMAppCurrentCustomer.customerId}];
-            [REMDataAccessor access:store success:^(id data) {
+            [store access:^(id data) {
                 REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
                 
                 if(validationResult.status == REMUserValidationSuccess){
@@ -166,7 +168,7 @@
                     
                     [self breathShowLoginView];
                 }
-            } error:^(NSError *error, id response) {
+            } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
                 [self breathShowMapView:YES:nil];
             }];
         }
@@ -406,7 +408,7 @@
     NSDictionary *parameter = @{@"customerId":REMAppCurrentCustomer.customerId};
     REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSBuildingInfo parameter:parameter];
     
-    [REMDataAccessor access:buildingStore success:^(id data) {
+    [buildingStore access:^(id data) {
         if([data count] <= 0){
             [REMAlertHelper alert:REMLocalizedString(@"Login_NotAuthorized")];
             
@@ -428,7 +430,7 @@
         logoStore.groupName = nil;
         logoStore.maskContainer = nil;
         
-        [REMDataAccessor access:logoStore success:^(id data) {
+        [logoStore access:^(id data) {
             UIImage *logo = nil;
             if(data != nil && [data length] > 2) {
                 logo = [REMImageHelper parseImageFromNSData:data withScale:1.0];
@@ -440,7 +442,7 @@
                 loadCompleted();
             
             [self performSegueWithIdentifier:kSegue_SplashToMap sender:self];
-        } error:^(NSError *error, id response) {
+        } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
             if(loadCompleted!=nil)
                 loadCompleted();
             
@@ -448,7 +450,7 @@
         }];
         
         
-    } error:^(NSError *error, id response) {
+    } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
         if(error.code != -1001 && error.code != 306) {
             [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
         }

@@ -132,12 +132,12 @@
         [self dataCallSuccess:data];
     };
     
-    void (^errorHandler)(NSError *error, id response) = ^(NSError *error, id response)
+    void (^errorHandler)(NSError *error,REMDataAccessErrorStatus status, id response) = ^(NSError *error,REMDataAccessErrorStatus status, id response)
     {
         [self dataCallFail:error result:response];
     };
     
-    [REMDataAccessor access:store success:successHandler error:errorHandler];
+    [store access:successHandler error:errorHandler];
 }
 
 - (void)textFieldChanged:(id)sender

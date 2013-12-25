@@ -100,12 +100,7 @@
         }
     }
     
-    
-    
-    
-    
-    
-    [REMDataAccessor access:store success:^(NSDictionary *data){
+    [store access:^(id data) {
         [self.loadingView stopAnimating];
         [self.loadingView removeFromSuperview];
         [self.loadingBackgroundView removeFromSuperview];
@@ -115,8 +110,7 @@
         if(callback!=nil){
             callback(viewData,nil);
         }
-        
-    } error:^(NSError *error,REMBusinessErrorInfo *errorInfo){
+    } error:^(NSError *error, REMDataAccessErrorStatus status, REMBusinessErrorInfo *errorInfo) {
         [self.loadingBackgroundView removeFromSuperview];
         [self.loadingView stopAnimating];
         [self.loadingView removeFromSuperview];
