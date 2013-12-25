@@ -301,13 +301,22 @@
     UIView *collectionView = cell.superview;
     CGRect cellFrameInCollectionView = cell.frame;
     
-    UIView *cycleView = collectionView;
-    CGRect cellFrameInGalleryView = cellFrameInCollectionView;
     
-    while(![cycleView isEqual:self.view]){
-        cellFrameInGalleryView = [cycleView convertRect:cellFrameInGalleryView toView: cycleView.superview];
-        cycleView = cycleView.superview;
+    
+    //UIView *cycleView = collectionView;
+    //CGRect cellFrameInGalleryView = cellFrameInCollectionView;
+    
+    CGRect cellFrameInGalleryView = [collectionView convertRect:cellFrameInCollectionView toView:self.view];
+    
+    if([[collectionView superview] superview]==nil){
+        //int index  = [self.orderedProvinceKeys indexOfObject:cell.controller.collectionKey];
+        return CGRectMake(kDMCommon_ContentLeftMargin, 800, kDMGallery_GalleryCellWidth, kDMGallery_GalleryCellHeight);
     }
+    
+//    while(![cycleView isEqual:self.view] && cycleView!=nil){
+//        cellFrameInGalleryView = [cycleView convertRect:cellFrameInGalleryView toView: cycleView.superview];
+//        cycleView = cycleView.superview;
+//    }
     
     return cellFrameInGalleryView;
 }

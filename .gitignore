@@ -1,7 +1,5 @@
 .DS_Store
 *.xcuserdatad
 *.xcuserstate
-*.xcusersettings
 *.xcbkptlist
-*.xcworkspacedata
 *.xccheckout

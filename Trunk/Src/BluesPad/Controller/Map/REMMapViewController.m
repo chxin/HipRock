@@ -43,8 +43,6 @@
 - (void)viewDidLoad
 {
 	// Do any additional setup after loading the view.
-    
-    
     [self loadMapView];
     
     [self addButtons];

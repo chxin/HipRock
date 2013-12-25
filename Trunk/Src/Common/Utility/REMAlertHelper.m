@@ -17,7 +17,7 @@
 
 +(void) alert: (NSString *) message withTitle: (NSString *) title
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:REMLocalizedString(@"Common_OK") otherButtonTitles:nil];
     [alert show];
 }
 

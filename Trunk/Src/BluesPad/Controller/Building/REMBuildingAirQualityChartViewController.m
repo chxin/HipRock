@@ -103,6 +103,9 @@ static NSDictionary *codeNameMap;
     if(self.airQualityData!=nil){
         [self loadChart];
     }
+    else{
+        [self drawLabelWithText:NSLocalizedString(@"BuildingChart_NoData", @"")];
+    }
 }
 
 - (void)loadDataFailureWithError:(REMError *)error withResponse:(id)response{

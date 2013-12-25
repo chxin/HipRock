@@ -43,4 +43,6 @@ typedef enum _REMUserTitleType : NSUInteger {
 - (void)kill;
 + (REMUserModel *)getCached;
 
++(void)clean;
+
 @end

@@ -505,13 +505,13 @@
 		7AB9B39E183DCF1100779C5E /* REMTrendChartTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B395183DCF1100779C5E /* REMTrendChartTooltipView.m */; };
 		7AB9B3A1183DF20B00779C5E /* REMRankingTooltipItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B3A0183DF20B00779C5E /* REMRankingTooltipItem.m */; };
 		7AB9B3A4183DF8FF00779C5E /* REMTextIndicatorFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B3A3183DF8FF00779C5E /* REMTextIndicatorFormator.m */; };
+		7ABD828E185AD75500A2AC06 /* REMAppConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABD828D185AD75500A2AC06 /* REMAppConfiguration.m */; };
 		7ABD915D184DB784006AF935 /* REMLoginCustomerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABD915C184DB784006AF935 /* REMLoginCustomerTableViewController.m */; };
 		7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */; };
 		7ABFDDF418483119004DD4E7 /* JumpLogin-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */; };
 		7AC54999181776910037F180 /* REMDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC54998181776910037F180 /* REMDashboardController.m */; };
 		7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
 		7AD0AB8B183CF52000525C82 /* REMTimeSliceLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD0AB8A183CF52000525C82 /* REMTimeSliceLegendFormator.m */; };
-		7AD6528C186A768E00987E93 /* REMAppConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD6528B186A768E00987E93 /* REMAppConfiguration.m */; };
 		7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */; };
 		7AF3667817CF2D7400447650 /* REMBuildingChartSeriesIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */; };
 		7AF6AC8117D1BA0D00D62A9A /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
@@ -552,6 +552,8 @@
 		B42FBF6617F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
 		B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
 		B442701317AF316500762C68 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
+		B44313E4185AAE7800486594 /* REMWidgetLabellingSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B44313E3185AAE7800486594 /* REMWidgetLabellingSearchModel.m */; };
+		B44313E7185AD4A100486594 /* REMEnergyLabellingLevelData.m in Sources */ = {isa = PBXBuildFile; fileRef = B44313E6185AD4A100486594 /* REMEnergyLabellingLevelData.m */; };
 		B445AE7D177BE8B5002D2A59 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */; };
 		B445AEA0177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE91177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m */; };
 		B445AEA2177BEEB8002D2A59 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE93177BEEB7002D2A59 /* DDASLLogger.m */; };
@@ -578,6 +580,23 @@
 		B46C8EBD17F27C84006DC4CB /* REMDashboardCellViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EBC17F27C84006DC4CB /* REMDashboardCellViewCell.m */; };
 		B46C8EC017F27CB9006DC4CB /* REMDashboardCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EBF17F27CB9006DC4CB /* REMDashboardCollectionView.m */; };
 		B46C8EC317F27CDF006DC4CB /* REMDashboardCollectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EC217F27CDF006DC4CB /* REMDashboardCollectionCellView.m */; };
+		B4707D8618697B1C00FBA393 /* Cooling_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D7E18697B1C00FBA393 /* Cooling_normal.png */; };
+		B4707D8718697B1C00FBA393 /* Cooling_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D7F18697B1C00FBA393 /* Cooling_pressed.png */; };
+		B4707D8818697B1C00FBA393 /* Heating_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8018697B1C00FBA393 /* Heating_normal.png */; };
+		B4707D8918697B1C00FBA393 /* Heating_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8118697B1C00FBA393 /* Heating_pressed.png */; };
+		B4707D8A18697B1C00FBA393 /* Humidity_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8218697B1C00FBA393 /* Humidity_normal.png */; };
+		B4707D8B18697B1C00FBA393 /* Humidity_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8318697B1C00FBA393 /* Humidity_pressed.png */; };
+		B4707D8C18697B1C00FBA393 /* Temperature_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8418697B1C00FBA393 /* Temperature_normal.png */; };
+		B4707D8D18697B1C00FBA393 /* Temperature_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8518697B1C00FBA393 /* Temperature_pressed.png */; };
+		B4707D9618697B2900FBA393 /* Cooling_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8E18697B2900FBA393 /* Cooling_normal@2x.png */; };
+		B4707D9718697B2900FBA393 /* Cooling_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8F18697B2900FBA393 /* Cooling_pressed@2x.png */; };
+		B4707D9818697B2900FBA393 /* Heating_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9018697B2900FBA393 /* Heating_normal@2x.png */; };
+		B4707D9918697B2900FBA393 /* Heating_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9118697B2900FBA393 /* Heating_pressed@2x.png */; };
+		B4707D9A18697B2900FBA393 /* Humidity_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9218697B2900FBA393 /* Humidity_normal@2x.png */; };
+		B4707D9B18697B2900FBA393 /* Humidity_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9318697B2900FBA393 /* Humidity_pressed@2x.png */; };
+		B4707D9C18697B2900FBA393 /* Temperature_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9418697B2900FBA393 /* Temperature_normal@2x.png */; };
+		B4707D9D18697B2900FBA393 /* Temperature_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9518697B2900FBA393 /* Temperature_pressed@2x.png */; };
+		B4707D9F1869863B00FBA393 /* DefaultBuilding-new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9E1869863A00FBA393 /* DefaultBuilding-new.jpg */; };
 		B47422E617C45BCF0021B76C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
 		B477739A184F074500F68AED /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4777399184F074500F68AED /* CoreMedia.framework */; };
 		B477739C184F075300F68AED /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B477739B184F075300F68AED /* CoreVideo.framework */; };
@@ -600,6 +619,11 @@
 		B4A0FCD517C6023300C7AD56 /* REMBuildingAirQualityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCD417C6023300C7AD56 /* REMBuildingAirQualityView.m */; };
 		B4A0FCD817C6057E00C7AD56 /* REMAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCD717C6057E00C7AD56 /* REMAirQualityModel.m */; };
 		B4A0FCDB17C610B500C7AD56 /* REMBuildingAirQualityChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartViewController.m */; };
+		B4A87530185E98F200BF3601 /* DefaultBuildingBlur.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A8752F185E98F200BF3601 /* DefaultBuildingBlur.png */; };
+		B4A87532185EBC3D00BF3601 /* DefaultBuildingBlur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A87531185EBC3D00BF3601 /* DefaultBuildingBlur@2x.png */; };
+		B4A87536185EC6D800BF3601 /* REMWidgetCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A87535185EC6D800BF3601 /* REMWidgetCellDelegator.m */; };
+		B4A87539185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A87538185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m */; };
+		B4A8753C185ED02200BF3601 /* REMWidgetRankingCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A8753B185ED02200BF3601 /* REMWidgetRankingCellDelegator.m */; };
 		B4B61D7617C742E000245F1E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B61D7517C742E000245F1E /* CoreText.framework */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		B4D50A41183313C7007C93A4 /* REMBuildingChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D50A40183313C7007C93A4 /* REMBuildingChartViewController.m */; };
@@ -633,7 +657,6 @@
 		EF03DC261841FA2F004B9EFD /* DCPieSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC251841FA2F004B9EFD /* DCPieSeries.m */; };
 		EF03DC291841FB45004B9EFD /* DCPieDataPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC281841FB45004B9EFD /* DCPieDataPoint.m */; };
 		EF0459941845CEAF0086D5AC /* _DCXYIndicatorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0459931845CEAF0086D5AC /* _DCXYIndicatorLayer.m */; };
-		EF0BFEA1184495DF0026C47D /* REMPieShadowLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BFEA0184495DF0026C47D /* REMPieShadowLayer.m */; };
 		EF0BFEA41844A5A60026C47D /* DCPieChartAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BFEA31844A5A60026C47D /* DCPieChartAnimationManager.m */; };
 		EF0BFEA71844B7090026C47D /* DCPieChartAnimationFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BFEA61844B7090026C47D /* DCPieChartAnimationFrame.m */; };
 		EF13626F184EFC6F00BEF648 /* _DCLine.m in Sources */ = {isa = PBXBuildFile; fileRef = EF13626E184EFC6F00BEF648 /* _DCLine.m */; };
@@ -645,10 +668,10 @@
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 		EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */; };
+		EF5D1A801867D10E0069C8F5 /* _DCVGridlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5D1A7F1867D10E0069C8F5 /* _DCVGridlineLayer.m */; };
 		EF60822F17D818430093427C /* REMModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF60822E17D818430093427C /* REMModalView.m */; };
 		EF652B68185867C2007D4049 /* DCTrendAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EF652B67185867C2007D4049 /* DCTrendAnimationManager.m */; };
-		EF8A47F817F959B5009B5C33 /* REMAbstractChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8A47E717F959B5009B5C33 /* REMAbstractChartWrapper.m */; };
-		EF8A47FF17F959B5009B5C33 /* REMChartSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8A47F317F959B5009B5C33 /* REMChartSeries.m */; };
+		EF7CF5F6185D82F2000BA4AE /* DCPieLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF7CF5F5185D82F2000BA4AE /* DCPieLayer.m */; };
 		EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */; };
 		EF96300617C610A200BBC7DA /* REMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMSettingViewController.m */; };
 		EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97DDDA17C20B5700A0374E /* REMToggleButton.m */; };
@@ -670,13 +693,15 @@
 		EFD9470B1839DCBB00E9EC50 /* DCXYSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F61839DCBB00E9EC50 /* DCXYSeries.m */; };
 		EFD9470C1839DCBB00E9EC50 /* DCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F91839DCBB00E9EC50 /* DCUtility.m */; };
 		EFD947111839DEE100E9EC50 /* DCColumnWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD947101839DEE100E9EC50 /* DCColumnWrapper.m */; };
-		EFDAACB91803F27F008BC9AF /* REMPieChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACB81803F27F008BC9AF /* REMPieChartWrapper.m */; };
 		EFDAACBC1803F6C2008BC9AF /* REMChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */; };
-		EFDAACBF18052E0C008BC9AF /* REMPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */; };
-		EFDAACC218053911008BC9AF /* REMChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC118053911008BC9AF /* REMChartConfig.m */; };
-		EFDAACC818054EBA008BC9AF /* REMPieChartSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */; };
 		EFDCC97E18472AD400955560 /* DCPieWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCC97D18472AD400955560 /* DCPieWrapper.m */; };
+		EFE8697D185E9FF800DC0007 /* DCLabelingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE8697C185E9FF800DC0007 /* DCLabelingChartView.m */; };
+		EFE86981185EC3EB00DC0007 /* DCLabelingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */; };
+		EFE86986185EEF5300DC0007 /* DCLabelingSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86985185EEF5300DC0007 /* DCLabelingSeries.m */; };
+		EFE86989185EEF7300DC0007 /* DCLabelingStage.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86988185EEF7300DC0007 /* DCLabelingStage.m */; };
+		EFE8698C185EF3B700DC0007 /* DCLabelingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE8698B185EF3B700DC0007 /* DCLabelingLabel.m */; };
 		EFEA7EDF1843424500CF4C3E /* _DCRankingXLabelFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEA7EDE1843424500CF4C3E /* _DCRankingXLabelFormatter.m */; };
+		EFEBAE38185FFD5D00B76549 /* DCLabelingTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEBAE37185FFD5D00B76549 /* DCLabelingTooltipView.m */; };
 		EFF701CF1830880600B371EC /* REMChartStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF701CE1830880600B371EC /* REMChartStyle.m */; };
 		EFF7514B183FC60F00C8BBE9 /* DCXYChartBackgroundBand.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF7514A183FC60F00C8BBE9 /* DCXYChartBackgroundBand.m */; };
 		EFF75151183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF75150183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m */; };
@@ -1264,6 +1289,8 @@
 		7ABC2E22177BE6210000C060 /* NSCoderExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCoderExtensions.h; sourceTree = "<group>"; };
 		7ABC2E23177BE6210000C060 /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDecimalNumberExtensions.h; sourceTree = "<group>"; };
 		7ABC2E24177BE6210000C060 /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
+		7ABD828C185AD75500A2AC06 /* REMAppConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAppConfiguration.h; path = Common/Configuration/REMAppConfiguration.h; sourceTree = "<group>"; };
+		7ABD828D185AD75500A2AC06 /* REMAppConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAppConfiguration.m; path = Common/Configuration/REMAppConfiguration.m; sourceTree = "<group>"; };
 		7ABD915B184DB784006AF935 /* REMLoginCustomerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginCustomerTableViewController.h; sourceTree = "<group>"; };
 		7ABD915C184DB784006AF935 /* REMLoginCustomerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMLoginCustomerTableViewController.m; sourceTree = "<group>"; };
 		7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed.png"; sourceTree = "<group>"; };
@@ -1273,8 +1300,6 @@
 		7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceMeta.h; path = Common/Communication/REMServiceMeta.h; sourceTree = "<group>"; };
 		7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceMeta.m; path = Common/Communication/REMServiceMeta.m; sourceTree = "<group>"; };
 		7AD0AB8A183CF52000525C82 /* REMTimeSliceLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeSliceLegendFormator.m; path = Biz/Chart/LegendFormator/REMTimeSliceLegendFormator.m; sourceTree = "<group>"; };
-		7AD6528A186A768E00987E93 /* REMAppConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAppConfiguration.h; sourceTree = "<group>"; };
-		7AD6528B186A768E00987E93 /* REMAppConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAppConfiguration.m; sourceTree = "<group>"; };
 		7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
 		7AF3667617CF2D7400447650 /* REMBuildingChartSeriesIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartSeriesIndicator.h; sourceTree = "<group>"; };
 		7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingChartSeriesIndicator.m; sourceTree = "<group>"; };
@@ -1315,6 +1340,10 @@
 		B43BB10F1797B12D00617B1E /* REMEnergyConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergyConstants.h; path = Common/Constants/REMEnergyConstants.h; sourceTree = "<group>"; };
 		B43BB1101797B12D00617B1E /* REMEnergyConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnergyConstants.m; path = Common/Constants/REMEnergyConstants.m; sourceTree = "<group>"; };
 		B442701217AF316500762C68 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
+		B44313E2185AAE7800486594 /* REMWidgetLabellingSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetLabellingSearchModel.h; path = Model/Widget/REMWidgetLabellingSearchModel.h; sourceTree = "<group>"; };
+		B44313E3185AAE7800486594 /* REMWidgetLabellingSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetLabellingSearchModel.m; path = Model/Widget/REMWidgetLabellingSearchModel.m; sourceTree = "<group>"; };
+		B44313E5185AD4A100486594 /* REMEnergyLabellingLevelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMEnergyLabellingLevelData.h; sourceTree = "<group>"; };
+		B44313E6185AD4A100486594 /* REMEnergyLabellingLevelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMEnergyLabellingLevelData.m; sourceTree = "<group>"; };
 		B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		B445AE90177BEEB7002D2A59 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		B445AE91177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
@@ -1349,6 +1378,23 @@
 		B46C8EBF17F27CB9006DC4CB /* REMDashboardCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardCollectionView.m; path = View/Dashboard/REMDashboardCollectionView.m; sourceTree = "<group>"; };
 		B46C8EC117F27CDF006DC4CB /* REMDashboardCollectionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDashboardCollectionCellView.h; path = View/Dashboard/REMDashboardCollectionCellView.h; sourceTree = "<group>"; };
 		B46C8EC217F27CDF006DC4CB /* REMDashboardCollectionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardCollectionCellView.m; path = View/Dashboard/REMDashboardCollectionCellView.m; sourceTree = "<group>"; };
+		B4707D7E18697B1C00FBA393 /* Cooling_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cooling_normal.png; sourceTree = "<group>"; };
+		B4707D7F18697B1C00FBA393 /* Cooling_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cooling_pressed.png; sourceTree = "<group>"; };
+		B4707D8018697B1C00FBA393 /* Heating_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Heating_normal.png; sourceTree = "<group>"; };
+		B4707D8118697B1C00FBA393 /* Heating_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Heating_pressed.png; sourceTree = "<group>"; };
+		B4707D8218697B1C00FBA393 /* Humidity_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Humidity_normal.png; sourceTree = "<group>"; };
+		B4707D8318697B1C00FBA393 /* Humidity_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Humidity_pressed.png; sourceTree = "<group>"; };
+		B4707D8418697B1C00FBA393 /* Temperature_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Temperature_normal.png; sourceTree = "<group>"; };
+		B4707D8518697B1C00FBA393 /* Temperature_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Temperature_pressed.png; sourceTree = "<group>"; };
+		B4707D8E18697B2900FBA393 /* Cooling_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cooling_normal@2x.png"; sourceTree = "<group>"; };
+		B4707D8F18697B2900FBA393 /* Cooling_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cooling_pressed@2x.png"; sourceTree = "<group>"; };
+		B4707D9018697B2900FBA393 /* Heating_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Heating_normal@2x.png"; sourceTree = "<group>"; };
+		B4707D9118697B2900FBA393 /* Heating_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Heating_pressed@2x.png"; sourceTree = "<group>"; };
+		B4707D9218697B2900FBA393 /* Humidity_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Humidity_normal@2x.png"; sourceTree = "<group>"; };
+		B4707D9318697B2900FBA393 /* Humidity_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Humidity_pressed@2x.png"; sourceTree = "<group>"; };
+		B4707D9418697B2900FBA393 /* Temperature_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Temperature_normal@2x.png"; sourceTree = "<group>"; };
+		B4707D9518697B2900FBA393 /* Temperature_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Temperature_pressed@2x.png"; sourceTree = "<group>"; };
+		B4707D9E1869863A00FBA393 /* DefaultBuilding-new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "DefaultBuilding-new.jpg"; sourceTree = "<group>"; };
 		B4777399184F074500F68AED /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
 		B477739B184F075300F68AED /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
 		B47ACC2817F80AAA00989B2C /* REMSettingCustomerSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerSelectionViewController.h; path = Controller/Setting/REMSettingCustomerSelectionViewController.h; sourceTree = "<group>"; };
@@ -1381,6 +1427,14 @@
 		B4A0FCD717C6057E00C7AD56 /* REMAirQualityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAirQualityModel.m; sourceTree = "<group>"; };
 		B4A0FCD917C610B500C7AD56 /* REMBuildingAirQualityChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAirQualityChartViewController.h; sourceTree = "<group>"; };
 		B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingAirQualityChartViewController.m; sourceTree = "<group>"; };
+		B4A8752F185E98F200BF3601 /* DefaultBuildingBlur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultBuildingBlur.png; sourceTree = "<group>"; };
+		B4A87531185EBC3D00BF3601 /* DefaultBuildingBlur@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuildingBlur@2x.png"; sourceTree = "<group>"; };
+		B4A87534185EC6D800BF3601 /* REMWidgetCellDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetCellDelegator.h; path = BizDelegator/REMWidgetCellDelegator.h; sourceTree = "<group>"; };
+		B4A87535185EC6D800BF3601 /* REMWidgetCellDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetCellDelegator.m; path = BizDelegator/REMWidgetCellDelegator.m; sourceTree = "<group>"; };
+		B4A87537185EC72100BF3601 /* REMWidgetLabellingCellDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetLabellingCellDelegator.h; path = BizDelegator/REMWidgetLabellingCellDelegator.h; sourceTree = "<group>"; };
+		B4A87538185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetLabellingCellDelegator.m; path = BizDelegator/REMWidgetLabellingCellDelegator.m; sourceTree = "<group>"; };
+		B4A8753A185ED02200BF3601 /* REMWidgetRankingCellDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetRankingCellDelegator.h; path = BizDelegator/REMWidgetRankingCellDelegator.h; sourceTree = "<group>"; };
+		B4A8753B185ED02200BF3601 /* REMWidgetRankingCellDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetRankingCellDelegator.m; path = BizDelegator/REMWidgetRankingCellDelegator.m; sourceTree = "<group>"; };
 		B4B61D7517C742E000245F1E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		B4D50A3F183313C7007C93A4 /* REMBuildingChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartViewController.h; sourceTree = "<group>"; };
@@ -1427,6 +1481,7 @@
 		B4FFB0C718191A15004C5404 /* REMRelativeDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRelativeDateViewController.m; sourceTree = "<group>"; };
 		B4FFB0C918191A41004C5404 /* REMDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMDatePickerViewController.h; sourceTree = "<group>"; };
 		B4FFB0CA18191A41004C5404 /* REMDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMDatePickerViewController.m; sourceTree = "<group>"; };
+		EF01DB58185B1BCF00A6ADCB /* DCPieChartViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCPieChartViewDelegate.h; sourceTree = "<group>"; };
 		EF0346AE183B4BA600DE186A /* _DCLayerTrashbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLayerTrashbox.h; path = ../_DCLayerTrashbox.h; sourceTree = "<group>"; };
 		EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLayerTrashbox.m; path = ../_DCLayerTrashbox.m; sourceTree = "<group>"; };
 		EF0346B1183B520100DE186A /* _DCSeriesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCSeriesLayer.h; path = Common/Utility/DChart/Series/_DCSeriesLayer.h; sourceTree = "<group>"; };
@@ -1443,8 +1498,6 @@
 		EF03DC281841FB45004B9EFD /* DCPieDataPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCPieDataPoint.m; sourceTree = "<group>"; };
 		EF0459921845CEAF0086D5AC /* _DCXYIndicatorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCXYIndicatorLayer.h; sourceTree = "<group>"; };
 		EF0459931845CEAF0086D5AC /* _DCXYIndicatorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCXYIndicatorLayer.m; sourceTree = "<group>"; };
-		EF0BFE9F184495DF0026C47D /* REMPieShadowLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPieShadowLayer.h; sourceTree = "<group>"; };
-		EF0BFEA0184495DF0026C47D /* REMPieShadowLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieShadowLayer.m; sourceTree = "<group>"; };
 		EF0BFEA21844A5A60026C47D /* DCPieChartAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieChartAnimationManager.h; path = Common/Utility/DChart/ChartView/DCPieChartAnimationManager.h; sourceTree = "<group>"; };
 		EF0BFEA31844A5A60026C47D /* DCPieChartAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieChartAnimationManager.m; path = Common/Utility/DChart/ChartView/DCPieChartAnimationManager.m; sourceTree = "<group>"; };
 		EF0BFEA51844B7090026C47D /* DCPieChartAnimationFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieChartAnimationFrame.h; path = Common/Utility/DChart/ChartView/DCPieChartAnimationFrame.h; sourceTree = "<group>"; };
@@ -1465,13 +1518,14 @@
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
 		EF48011E17D7098D002A2EF6 /* REMBuildingWeiboView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingWeiboView.h; path = View/Building/REMBuildingWeiboView.h; sourceTree = "<group>"; };
 		EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingWeiboView.m; path = View/Building/REMBuildingWeiboView.m; sourceTree = "<group>"; };
+		EF5D1A7E1867D10E0069C8F5 /* _DCVGridlineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCVGridlineLayer.h; sourceTree = "<group>"; };
+		EF5D1A7F1867D10E0069C8F5 /* _DCVGridlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCVGridlineLayer.m; sourceTree = "<group>"; };
 		EF60822D17D818420093427C /* REMModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMModalView.h; sourceTree = "<group>"; };
 		EF60822E17D818430093427C /* REMModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMModalView.m; sourceTree = "<group>"; };
 		EF652B66185867C2007D4049 /* DCTrendAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCTrendAnimationManager.h; path = Common/Utility/DChart/ChartView/DCTrendAnimationManager.h; sourceTree = "<group>"; };
 		EF652B67185867C2007D4049 /* DCTrendAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCTrendAnimationManager.m; path = Common/Utility/DChart/ChartView/DCTrendAnimationManager.m; sourceTree = "<group>"; };
-		EF8A47E617F959B5009B5C33 /* REMAbstractChartWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAbstractChartWrapper.h; sourceTree = "<group>"; };
-		EF8A47E717F959B5009B5C33 /* REMAbstractChartWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAbstractChartWrapper.m; sourceTree = "<group>"; };
-		EF8A47F317F959B5009B5C33 /* REMChartSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartSeries.m; sourceTree = "<group>"; };
+		EF7CF5F4185D82F2000BA4AE /* DCPieLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieLayer.h; path = Common/Utility/DChart/ChartView/DCPieLayer.h; sourceTree = "<group>"; };
+		EF7CF5F5185D82F2000BA4AE /* DCPieLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieLayer.m; path = Common/Utility/DChart/ChartView/DCPieLayer.m; sourceTree = "<group>"; };
 		EF8A480117F95A1D009B5C33 /* REMChartHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartHeader.h; sourceTree = "<group>"; };
 		EF8F1D7717C2FE5400D3E29F /* REMToggleButtonGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMToggleButtonGroup.h; sourceTree = "<group>"; };
 		EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButtonGroup.m; sourceTree = "<group>"; };
@@ -1515,17 +1569,25 @@
 		EFD946F91839DCBB00E9EC50 /* DCUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCUtility.m; sourceTree = "<group>"; };
 		EFD9470F1839DEE100E9EC50 /* DCColumnWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCColumnWrapper.h; path = Common/Utility/DChartWrapper/DCColumnWrapper.h; sourceTree = "<group>"; };
 		EFD947101839DEE100E9EC50 /* DCColumnWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCColumnWrapper.m; path = Common/Utility/DChartWrapper/DCColumnWrapper.m; sourceTree = "<group>"; };
-		EFDAACB71803F27F008BC9AF /* REMPieChartWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPieChartWrapper.h; sourceTree = "<group>"; };
-		EFDAACB81803F27F008BC9AF /* REMPieChartWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartWrapper.m; sourceTree = "<group>"; };
 		EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartDataProcessor.m; sourceTree = "<group>"; };
-		EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartView.m; sourceTree = "<group>"; };
-		EFDAACC118053911008BC9AF /* REMChartConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartConfig.m; sourceTree = "<group>"; };
-		EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPieChartSeries.m; sourceTree = "<group>"; };
 		EFDCC97C18472AD400955560 /* DCPieWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieWrapper.h; path = Common/Utility/DChartWrapper/DCPieWrapper.h; sourceTree = "<group>"; };
 		EFDCC97D18472AD400955560 /* DCPieWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieWrapper.m; path = Common/Utility/DChartWrapper/DCPieWrapper.m; sourceTree = "<group>"; };
+		EFE8697B185E9FF800DC0007 /* DCLabelingChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLabelingChartView.h; sourceTree = "<group>"; };
+		EFE8697C185E9FF800DC0007 /* DCLabelingChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLabelingChartView.m; sourceTree = "<group>"; };
+		EFE8697F185EC3EB00DC0007 /* DCLabelingWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCLabelingWrapper.h; path = Common/Utility/DChartWrapper/DCLabelingWrapper.h; sourceTree = "<group>"; };
+		EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCLabelingWrapper.m; path = Common/Utility/DChartWrapper/DCLabelingWrapper.m; sourceTree = "<group>"; };
+		EFE86983185EC73E00DC0007 /* DCLabelingChartDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCLabelingChartDelegate.h; sourceTree = "<group>"; };
+		EFE86984185EEF5300DC0007 /* DCLabelingSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLabelingSeries.h; sourceTree = "<group>"; };
+		EFE86985185EEF5300DC0007 /* DCLabelingSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLabelingSeries.m; sourceTree = "<group>"; };
+		EFE86987185EEF7300DC0007 /* DCLabelingStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLabelingStage.h; sourceTree = "<group>"; };
+		EFE86988185EEF7300DC0007 /* DCLabelingStage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLabelingStage.m; sourceTree = "<group>"; };
+		EFE8698A185EF3B700DC0007 /* DCLabelingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLabelingLabel.h; sourceTree = "<group>"; };
+		EFE8698B185EF3B700DC0007 /* DCLabelingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLabelingLabel.m; sourceTree = "<group>"; };
 		EFEA7EDD1843424500CF4C3E /* _DCRankingXLabelFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCRankingXLabelFormatter.h; path = Common/Utility/DChart/Axis/LabelLayer/_DCRankingXLabelFormatter.h; sourceTree = "<group>"; };
 		EFEA7EDE1843424500CF4C3E /* _DCRankingXLabelFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCRankingXLabelFormatter.m; path = Common/Utility/DChart/Axis/LabelLayer/_DCRankingXLabelFormatter.m; sourceTree = "<group>"; };
 		EFEA7EE018434F2400CF4C3E /* _DCXLabelFormatterProtocal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = _DCXLabelFormatterProtocal.h; path = Common/Utility/DChart/Axis/LabelLayer/_DCXLabelFormatterProtocal.h; sourceTree = "<group>"; };
+		EFEBAE36185FFD5D00B76549 /* DCLabelingTooltipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLabelingTooltipView.h; sourceTree = "<group>"; };
+		EFEBAE37185FFD5D00B76549 /* DCLabelingTooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLabelingTooltipView.m; sourceTree = "<group>"; };
 		EFF701CD1830880600B371EC /* REMChartStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartStyle.h; sourceTree = "<group>"; };
 		EFF701CE1830880600B371EC /* REMChartStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartStyle.m; sourceTree = "<group>"; };
 		EFF75149183FC60F00C8BBE9 /* DCXYChartBackgroundBand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCXYChartBackgroundBand.h; path = Common/Utility/DChart/DCXYChartBackgroundBand.h; sourceTree = "<group>"; };
@@ -1647,11 +1709,14 @@
 		6A61A6691839B81F00C6A228 /* Building */ = {
 			isa = PBXGroup;
 			children = (
+				B4707D9E1869863A00FBA393 /* DefaultBuilding-new.jpg */,
 				6A61A66A1839B81F00C6A228 /* commodity */,
 				6A61A6831839B82000C6A228 /* DefaultBuilding-Small.png */,
 				6A61A6841839B82000C6A228 /* DefaultBuilding-Small@2x.png */,
 				6A61A6851839B82000C6A228 /* DefaultBuilding.png */,
 				6A61A6861839B82000C6A228 /* DefaultBuilding@2x.png */,
+				B4A8752F185E98F200BF3601 /* DefaultBuildingBlur.png */,
+				B4A87531185EBC3D00BF3601 /* DefaultBuildingBlur@2x.png */,
 				6A61A6871839B82000C6A228 /* Menu_normal.png */,
 				6A61A6881839B82000C6A228 /* Menu_normal@2x.png */,
 				6A61A6891839B82000C6A228 /* NotOverTarget.png */,
@@ -1673,6 +1738,22 @@
 		6A61A66A1839B81F00C6A228 /* commodity */ = {
 			isa = PBXGroup;
 			children = (
+				B4707D7E18697B1C00FBA393 /* Cooling_normal.png */,
+				B4707D7F18697B1C00FBA393 /* Cooling_pressed.png */,
+				B4707D8E18697B2900FBA393 /* Cooling_normal@2x.png */,
+				B4707D8F18697B2900FBA393 /* Cooling_pressed@2x.png */,
+				B4707D8018697B1C00FBA393 /* Heating_normal.png */,
+				B4707D8118697B1C00FBA393 /* Heating_pressed.png */,
+				B4707D9018697B2900FBA393 /* Heating_normal@2x.png */,
+				B4707D9118697B2900FBA393 /* Heating_pressed@2x.png */,
+				B4707D8218697B1C00FBA393 /* Humidity_normal.png */,
+				B4707D8318697B1C00FBA393 /* Humidity_pressed.png */,
+				B4707D9218697B2900FBA393 /* Humidity_normal@2x.png */,
+				B4707D9318697B2900FBA393 /* Humidity_pressed@2x.png */,
+				B4707D8418697B1C00FBA393 /* Temperature_normal.png */,
+				B4707D8518697B1C00FBA393 /* Temperature_pressed.png */,
+				B4707D9418697B2900FBA393 /* Temperature_normal@2x.png */,
+				B4707D9518697B2900FBA393 /* Temperature_pressed@2x.png */,
 				6A61A66B1839B81F00C6A228 /* Coal_normal.png */,
 				6A61A66C1839B81F00C6A228 /* Coal_normal@2x.png */,
 				6A61A66D1839B81F00C6A228 /* Coal_pressed.png */,
@@ -1997,6 +2078,8 @@
 				7A153C5917AA489600413D3C /* REMEnergyViewData.m */,
 				7A153C5A17AA489600413D3C /* REMTargetEnergyData.h */,
 				7A153C5B17AA489600413D3C /* REMTargetEnergyData.m */,
+				B44313E5185AD4A100486594 /* REMEnergyLabellingLevelData.h */,
+				B44313E6185AD4A100486594 /* REMEnergyLabellingLevelData.m */,
 			);
 			name = Energy;
 			path = Model/Energy;
@@ -2037,6 +2120,7 @@
 		7A153C6A17AA497B00413D3C /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				B4A87533185EC63600BF3601 /* BizDelegator */,
 				7AC54997181776910037F180 /* REMDashboardController.h */,
 				7AC54998181776910037F180 /* REMDashboardController.m */,
 				B42FBF5F17F519F5004F2F3A /* REMWidgetCollectionViewController.h */,
@@ -2287,7 +2371,7 @@
 		7A5E2D45177B3CD3000F77F9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				7AD65289186A768E00987E93 /* Configuration */,
+				7ABD828B185AD71B00A2AC06 /* Configuration */,
 				B454795D184DAB9700D3441B /* Animation */,
 				7A2BA41F17D877B1003B18E1 /* Error */,
 				7A1D7C3917A637110050779D /* Model */,
@@ -2307,7 +2391,6 @@
 			children = (
 				EFD9470E1839DEAF00E9EC50 /* DChartWrapper */,
 				EFD946CD1839DB9E00E9EC50 /* DChart */,
-				EF8A47DE17F959B5009B5C33 /* Chart */,
 				7A095E71179571C80098DB16 /* REMWidgetAxisHelper.h */,
 				7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */,
 				B49B6F4F1781491800BC130A /* REMColor.h */,
@@ -2807,6 +2890,15 @@
 			path = ../lib/CorePlotHeaders;
 			sourceTree = "<group>";
 		};
+		7ABD828B185AD71B00A2AC06 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				7ABD828C185AD75500A2AC06 /* REMAppConfiguration.h */,
+				7ABD828D185AD75500A2AC06 /* REMAppConfiguration.m */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
 		7ABFDDF5184836FE004DD4E7 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -2818,16 +2910,6 @@
 				7A3F66FE184C61610079A244 /* REMLoginTitledCard.m */,
 			);
 			name = Login;
-			sourceTree = "<group>";
-		};
-		7AD65289186A768E00987E93 /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				7AD6528A186A768E00987E93 /* REMAppConfiguration.h */,
-				7AD6528B186A768E00987E93 /* REMAppConfiguration.m */,
-			);
-			name = Configuration;
-			path = Common/Configuration;
 			sourceTree = "<group>";
 		};
 		7AD8CDFE1847086000D815C6 /* LaunchImages */ = {
@@ -3014,6 +3096,19 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		B4A87533185EC63600BF3601 /* BizDelegator */ = {
+			isa = PBXGroup;
+			children = (
+				B4A87534185EC6D800BF3601 /* REMWidgetCellDelegator.h */,
+				B4A87535185EC6D800BF3601 /* REMWidgetCellDelegator.m */,
+				B4A87537185EC72100BF3601 /* REMWidgetLabellingCellDelegator.h */,
+				B4A87538185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m */,
+				B4A8753A185ED02200BF3601 /* REMWidgetRankingCellDelegator.h */,
+				B4A8753B185ED02200BF3601 /* REMWidgetRankingCellDelegator.m */,
+			);
+			name = BizDelegator;
+			sourceTree = "<group>";
+		};
 		B4E815C81827321600FB9BC5 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -3029,6 +3124,8 @@
 				B4E815D618273E5600FB9BC5 /* REMWidgetRankingSearchModel.m */,
 				B4922464182B411B0001389A /* REMWidgetMultiTimespanSearchModel.h */,
 				B4922465182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m */,
+				B44313E2185AAE7800486594 /* REMWidgetLabellingSearchModel.h */,
+				B44313E3185AAE7800486594 /* REMWidgetLabellingSearchModel.m */,
 			);
 			name = Widget;
 			sourceTree = "<group>";
@@ -3072,41 +3169,24 @@
 			name = Searcher;
 			sourceTree = "<group>";
 		};
+		EF7CF5F3185D82D0000BA4AE /* Pie */ = {
+			isa = PBXGroup;
+			children = (
+				EF7CF5F4185D82F2000BA4AE /* DCPieLayer.h */,
+				EF7CF5F5185D82F2000BA4AE /* DCPieLayer.m */,
+			);
+			name = Pie;
+			sourceTree = "<group>";
+		};
 		EF8A47DE17F959B5009B5C33 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
 				EF8A480117F95A1D009B5C33 /* REMChartHeader.h */,
-				EF8A47DF17F959B5009B5C33 /* ChartView */,
-				EF8A47E517F959B5009B5C33 /* ChartWrapper */,
-				EF8A47EE17F959B5009B5C33 /* DataProcessor */,
-				EF8A47F017F959B5009B5C33 /* Series */,
 				EFF701CD1830880600B371EC /* REMChartStyle.h */,
 				EFF701CE1830880600B371EC /* REMChartStyle.m */,
 			);
 			name = Chart;
 			path = Common/Utility/Chart;
-			sourceTree = "<group>";
-		};
-		EF8A47DF17F959B5009B5C33 /* ChartView */ = {
-			isa = PBXGroup;
-			children = (
-				EFDAACC118053911008BC9AF /* REMChartConfig.m */,
-				EFDAACBE18052E0C008BC9AF /* REMPieChartView.m */,
-				EF0BFE9F184495DF0026C47D /* REMPieShadowLayer.h */,
-				EF0BFEA0184495DF0026C47D /* REMPieShadowLayer.m */,
-			);
-			path = ChartView;
-			sourceTree = "<group>";
-		};
-		EF8A47E517F959B5009B5C33 /* ChartWrapper */ = {
-			isa = PBXGroup;
-			children = (
-				EF8A47E617F959B5009B5C33 /* REMAbstractChartWrapper.h */,
-				EF8A47E717F959B5009B5C33 /* REMAbstractChartWrapper.m */,
-				EFDAACB71803F27F008BC9AF /* REMPieChartWrapper.h */,
-				EFDAACB81803F27F008BC9AF /* REMPieChartWrapper.m */,
-			);
-			path = ChartWrapper;
 			sourceTree = "<group>";
 		};
 		EF8A47EE17F959B5009B5C33 /* DataProcessor */ = {
@@ -3115,16 +3195,8 @@
 				EF2962B3184C6B53000A119F /* REMTrendChartDataProcessor.m */,
 				EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */,
 			);
-			path = DataProcessor;
-			sourceTree = "<group>";
-		};
-		EF8A47F017F959B5009B5C33 /* Series */ = {
-			isa = PBXGroup;
-			children = (
-				EF8A47F317F959B5009B5C33 /* REMChartSeries.m */,
-				EFDAACC718054EBA008BC9AF /* REMPieChartSeries.m */,
-			);
-			path = Series;
+			name = DataProcessor;
+			path = Common/Utility/Chart/DataProcessor;
 			sourceTree = "<group>";
 		};
 		EFC4D213185574FB00E04688 /* Animation */ = {
@@ -3139,8 +3211,9 @@
 		EFC4D2141855752C00E04688 /* Layer */ = {
 			isa = PBXGroup;
 			children = (
+				EF7CF5F3185D82D0000BA4AE /* Pie */,
 				EFC4D2181855765000E04688 /* Series */,
-				EFD946D91839DCBB00E9EC50 /* LabelLayer */,
+				EFD946D91839DCBB00E9EC50 /* Axis */,
 				EFC4D216185575B700E04688 /* BackgroundBands */,
 				EFD946E91839DCBB00E9EC50 /* Gridline */,
 				EFD946D01839DCBB00E9EC50 /* _DCLayer.h */,
@@ -3271,6 +3344,8 @@
 		EFD946CD1839DB9E00E9EC50 /* DChart */ = {
 			isa = PBXGroup;
 			children = (
+				EF8A47DE17F959B5009B5C33 /* Chart */,
+				EF8A47EE17F959B5009B5C33 /* DataProcessor */,
 				EFC4D21F185576FC00E04688 /* BackgroundBand */,
 				EFC4D217185575E200E04688 /* Formatter */,
 				EFC4D2151855757600E04688 /* GestureRecognizer */,
@@ -3295,7 +3370,7 @@
 			path = Common/Utility/DChart/Axis;
 			sourceTree = "<group>";
 		};
-		EFD946D91839DCBB00E9EC50 /* LabelLayer */ = {
+		EFD946D91839DCBB00E9EC50 /* Axis */ = {
 			isa = PBXGroup;
 			children = (
 				EFD946DA1839DCBB00E9EC50 /* _DCXAxisLabelLayer.h */,
@@ -3303,18 +3378,16 @@
 				EFD946DC1839DCBB00E9EC50 /* _DCYAxisLabelLayer.h */,
 				EFD946DD1839DCBB00E9EC50 /* _DCYAxisLabelLayer.m */,
 			);
-			name = LabelLayer;
+			name = Axis;
 			path = Common/Utility/DChart/Axis/LabelLayer;
 			sourceTree = "<group>";
 		};
 		EFD946DE1839DCBB00E9EC50 /* ChartView */ = {
 			isa = PBXGroup;
 			children = (
-				EFFBE9C0183F04B400672E53 /* DCXYChartViewDelegate.h */,
-				EFD946DF1839DCBB00E9EC50 /* DCXYChartView.h */,
-				EFD946E01839DCBB00E9EC50 /* DCXYChartView.m */,
-				EF03DC211841E462004B9EFD /* DCPieChartView.h */,
-				EF03DC221841E462004B9EFD /* DCPieChartView.m */,
+				EFE8697A185E9FD900DC0007 /* Labeling */,
+				EFE86979185E9FD200DC0007 /* Pie */,
+				EFE86978185E9FC200DC0007 /* Trend */,
 			);
 			name = ChartView;
 			path = Common/Utility/DChart/ChartView;
@@ -3339,6 +3412,8 @@
 				EFD946EB1839DCBB00E9EC50 /* _DCHGridlineLayer.m */,
 				EF0459921845CEAF0086D5AC /* _DCXYIndicatorLayer.h */,
 				EF0459931845CEAF0086D5AC /* _DCXYIndicatorLayer.m */,
+				EF5D1A7E1867D10E0069C8F5 /* _DCVGridlineLayer.h */,
+				EF5D1A7F1867D10E0069C8F5 /* _DCVGridlineLayer.m */,
 			);
 			name = Gridline;
 			path = Common/Utility/DChart/Gridline;
@@ -3347,6 +3422,7 @@
 		EFD946EC1839DCBB00E9EC50 /* Series */ = {
 			isa = PBXGroup;
 			children = (
+				EFE86982185EC69F00DC0007 /* Labeling */,
 				EFC4D21E185576DC00E04688 /* Trend */,
 				EFC4D21D185576D100E04688 /* Pie */,
 				EFD946F31839DCBB00E9EC50 /* DCSeries.h */,
@@ -3389,8 +3465,55 @@
 				EFFBE9C5183F7A3700672E53 /* DCRankingWrapper.m */,
 				EFDCC97C18472AD400955560 /* DCPieWrapper.h */,
 				EFDCC97D18472AD400955560 /* DCPieWrapper.m */,
+				EFE8697F185EC3EB00DC0007 /* DCLabelingWrapper.h */,
+				EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */,
 			);
 			name = DChartWrapper;
+			sourceTree = "<group>";
+		};
+		EFE86978185E9FC200DC0007 /* Trend */ = {
+			isa = PBXGroup;
+			children = (
+				EFFBE9C0183F04B400672E53 /* DCXYChartViewDelegate.h */,
+				EFD946DF1839DCBB00E9EC50 /* DCXYChartView.h */,
+				EFD946E01839DCBB00E9EC50 /* DCXYChartView.m */,
+			);
+			name = Trend;
+			sourceTree = "<group>";
+		};
+		EFE86979185E9FD200DC0007 /* Pie */ = {
+			isa = PBXGroup;
+			children = (
+				EF01DB58185B1BCF00A6ADCB /* DCPieChartViewDelegate.h */,
+				EF03DC211841E462004B9EFD /* DCPieChartView.h */,
+				EF03DC221841E462004B9EFD /* DCPieChartView.m */,
+			);
+			name = Pie;
+			sourceTree = "<group>";
+		};
+		EFE8697A185E9FD900DC0007 /* Labeling */ = {
+			isa = PBXGroup;
+			children = (
+				EFE8697B185E9FF800DC0007 /* DCLabelingChartView.h */,
+				EFE8697C185E9FF800DC0007 /* DCLabelingChartView.m */,
+				EFE86983185EC73E00DC0007 /* DCLabelingChartDelegate.h */,
+				EFEBAE36185FFD5D00B76549 /* DCLabelingTooltipView.h */,
+				EFEBAE37185FFD5D00B76549 /* DCLabelingTooltipView.m */,
+			);
+			name = Labeling;
+			sourceTree = "<group>";
+		};
+		EFE86982185EC69F00DC0007 /* Labeling */ = {
+			isa = PBXGroup;
+			children = (
+				EFE86984185EEF5300DC0007 /* DCLabelingSeries.h */,
+				EFE86985185EEF5300DC0007 /* DCLabelingSeries.m */,
+				EFE86987185EEF7300DC0007 /* DCLabelingStage.h */,
+				EFE86988185EEF7300DC0007 /* DCLabelingStage.m */,
+				EFE8698A185EF3B700DC0007 /* DCLabelingLabel.h */,
+				EFE8698B185EF3B700DC0007 /* DCLabelingLabel.m */,
+			);
+			name = Labeling;
 			sourceTree = "<group>";
 		};
 		EFF410531858651700E479EC /* Trend */ = {
@@ -3516,11 +3639,13 @@
 				B414C43E1855946900CB81B6 /* Configuration.plist in Resources */,
 				6A61A78E1839B82000C6A228 /* UnqualifiedPin_Normal@2x.png in Resources */,
 				7A5A97381856D54E0084E228 /* share-weixin.png in Resources */,
+				B4707D9618697B2900FBA393 /* Cooling_normal@2x.png in Resources */,
 				7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */,
 				6A61A7761839B82000C6A228 /* LoginTextField-Focus@2x.png in Resources */,
 				6A61A7711839B82000C6A228 /* Login-Normal.png in Resources */,
 				6A61A70F1839B82000C6A228 /* NaturalGas_normal.png in Resources */,
 				6A61A7891839B82000C6A228 /* QualifiedPin_Normal.png in Resources */,
+				B4707D9A18697B2900FBA393 /* Humidity_normal@2x.png in Resources */,
 				6A61A7881839B82000C6A228 /* QualifiedPin_Focus@2x.png in Resources */,
 				6A61A7001839B82000C6A228 /* EMOP_App_7@2x.png in Resources */,
 				7A58F24B1839A5650071DE7A /* Propaganda_1.jpg in Resources */,
@@ -3529,7 +3654,10 @@
 				6A61A7751839B82000C6A228 /* LoginTextField-Focus.png in Resources */,
 				7A58F24C1839A5650071DE7A /* Propaganda_1@2x.jpg in Resources */,
 				6A61A7101839B82000C6A228 /* NaturalGas_normal@2x.png in Resources */,
+				B4A87532185EBC3D00BF3601 /* DefaultBuildingBlur@2x.png in Resources */,
 				6A61A71B1839B82000C6A228 /* Water_normal.png in Resources */,
+				B4707D8818697B1C00FBA393 /* Heating_normal.png in Resources */,
+				B4A87530185E98F200BF3601 /* DefaultBuildingBlur.png in Resources */,
 				6A61A7321839B82000C6A228 /* Ascend@2x.png in Resources */,
 				6A61A7591839B82000C6A228 /* labelRight7.png in Resources */,
 				6A61A7921839B82000C6A228 /* SplashScreenLogo-Flash@2x.png in Resources */,
@@ -3540,6 +3668,7 @@
 				7AFC250E18503D3800B9CF11 /* Default-Landscape-IOS7.png in Resources */,
 				6A61A7521839B82000C6A228 /* labelRight3@2x.png in Resources */,
 				6A61A7511839B82000C6A228 /* labelRight3.png in Resources */,
+				B4707D8918697B1C00FBA393 /* Heating_pressed.png in Resources */,
 				6A61A7681839B82000C6A228 /* Nodata@2x.png in Resources */,
 				6A61A76A1839B82000C6A228 /* Up@2x.png in Resources */,
 				6A61A7771839B82000C6A228 /* LoginTextField.png in Resources */,
@@ -3547,6 +3676,8 @@
 				6A61A7031839B82000C6A228 /* EMOP_Spotlight_6.png in Resources */,
 				6A61A74F1839B82000C6A228 /* labelRight2.png in Resources */,
 				7A5A97391856D54E0084E228 /* share-weixin@2x.png in Resources */,
+				B4707D8618697B1C00FBA393 /* Cooling_normal.png in Resources */,
+				B4707D9718697B2900FBA393 /* Cooling_pressed@2x.png in Resources */,
 				6A61A7661839B82000C6A228 /* Down@2x.png in Resources */,
 				6A61A70B1839B82000C6A228 /* Electricity_normal.png in Resources */,
 				6A61A7651839B82000C6A228 /* Down.png in Resources */,
@@ -3560,6 +3691,7 @@
 				7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */,
 				6A61A7391839B82000C6A228 /* DateView_Chart.png in Resources */,
 				6A61A78D1839B82000C6A228 /* UnqualifiedPin_Normal.png in Resources */,
+				B4707D8D18697B1C00FBA393 /* Temperature_pressed.png in Resources */,
 				6A61A7361839B82000C6A228 /* Close_Chart@2x.png in Resources */,
 				6A61A7131839B82000C6A228 /* Oil_normal.png in Resources */,
 				6A61A71A1839B82000C6A228 /* PM2.5_pressed@2x.png in Resources */,
@@ -3585,12 +3717,14 @@
 				6A61A7461839B82000C6A228 /* labelLeft5@2x.png in Resources */,
 				7A58F2511839A5650071DE7A /* SplashScreenBackgroud.jpg in Resources */,
 				6A61A7401839B82000C6A228 /* labelLeft2@2x.png in Resources */,
+				B4707D9D18697B2900FBA393 /* Temperature_pressed@2x.png in Resources */,
 				6A61A78C1839B82000C6A228 /* UnqualifiedPin_Focus@2x.png in Resources */,
 				6A61A7691839B82000C6A228 /* Up.png in Resources */,
 				6A61A75D1839B82000C6A228 /* Legend_Chart.png in Resources */,
 				7AFC251018503D3800B9CF11 /* Default-Landscape.png in Resources */,
 				6A61A7811839B82000C6A228 /* Map.png in Resources */,
 				6A61A74C1839B82000C6A228 /* labelLeft8@2x.png in Resources */,
+				B4707D9B18697B2900FBA393 /* Humidity_pressed@2x.png in Resources */,
 				6A61A6FD1839B82000C6A228 /* EMOP_App_6.png in Resources */,
 				6A61A71C1839B82000C6A228 /* Water_normal@2x.png in Resources */,
 				6A61A7621839B82000C6A228 /* TooltipsArrow_PieChart@2x.png in Resources */,
@@ -3618,12 +3752,17 @@
 				6A61A73B1839B82000C6A228 /* Descend.png in Resources */,
 				6A61A77E1839B82000C6A228 /* CommonPin_Normal@2x.png in Resources */,
 				6A61A6FE1839B82000C6A228 /* EMOP_App_6@2x.png in Resources */,
+				B4707D8B18697B1C00FBA393 /* Humidity_pressed.png in Resources */,
 				6A61A7371839B82000C6A228 /* DatePicker_Chart.png in Resources */,
+				B4707D9918697B2900FBA393 /* Heating_pressed@2x.png in Resources */,
+				B4707D9818697B2900FBA393 /* Heating_normal@2x.png in Resources */,
+				B4707D9C18697B2900FBA393 /* Temperature_normal@2x.png in Resources */,
 				6A61A7341839B82000C6A228 /* Back_Chart@2x.png in Resources */,
 				7AFC250F18503D3800B9CF11 /* Default-Landscape-IOS7@2x.png in Resources */,
 				7A664FDA183B3369004B9FF3 /* MapPopover_Rectangle.png in Resources */,
 				6A61A72B1839B82000C6A228 /* share-weibo.png in Resources */,
 				6A61A7181839B82000C6A228 /* PM2.5_normal@2x.png in Resources */,
+				B4707D8A18697B1C00FBA393 /* Humidity_normal.png in Resources */,
 				6A61A74A1839B82000C6A228 /* labelLeft7@2x.png in Resources */,
 				B445AEAE177BEEB8002D2A59 /* README.txt in Resources */,
 				6A61A75C1839B82000C6A228 /* labelRight8@2x.png in Resources */,
@@ -3653,6 +3792,7 @@
 				6A61A7281839B82000C6A228 /* OverTarget@2x.png in Resources */,
 				6A61A7261839B82000C6A228 /* NotOverTarget@2x.png in Resources */,
 				7A47F3A518482C1B007EE37B /* JumpTrial@2x.png in Resources */,
+				B4707D8718697B1C00FBA393 /* Cooling_pressed.png in Resources */,
 				6A61A7151839B82000C6A228 /* Oil_pressed.png in Resources */,
 				6A61A73C1839B82000C6A228 /* Descend@2x.png in Resources */,
 				6A61A7211839B82000C6A228 /* DefaultBuilding.png in Resources */,
@@ -3663,6 +3803,7 @@
 				6A61A78A1839B82000C6A228 /* QualifiedPin_Normal@2x.png in Resources */,
 				6A61A75E1839B82000C6A228 /* Legend_Chart@2x.png in Resources */,
 				6A61A71E1839B82000C6A228 /* Water_pressed@2x.png in Resources */,
+				B4707D9F1869863B00FBA393 /* DefaultBuilding-new.jpg in Resources */,
 				6A61A7231839B82000C6A228 /* Menu_normal.png in Resources */,
 				7A3F66F5184C56440079A244 /* JumpTrial-Pressed@2x.png in Resources */,
 				7A47F3A418482C1B007EE37B /* JumpTrial.png in Resources */,
@@ -3671,6 +3812,7 @@
 				6A61A7431839B82000C6A228 /* labelLeft4.png in Resources */,
 				6A61A7201839B82000C6A228 /* DefaultBuilding-Small@2x.png in Resources */,
 				6A61A7721839B82000C6A228 /* Login-Normal@2x.png in Resources */,
+				B4707D8C18697B1C00FBA393 /* Temperature_normal.png in Resources */,
 				6A61A7501839B82000C6A228 /* labelRight2@2x.png in Resources */,
 				6A61A78F1839B82000C6A228 /* SplashScreenLogo-Common.png in Resources */,
 				7AFC251118503D3800B9CF11 /* Default-Landscape@2x.png in Resources */,
@@ -3738,7 +3880,6 @@
 				EFD947051839DCBB00E9EC50 /* DCRange.m in Sources */,
 				B48ED409178EA8970032CD72 /* REMSqliteStorage.m in Sources */,
 				B48ED40A178EA8970032CD72 /* REMStorage.m in Sources */,
-				EFDAACBF18052E0C008BC9AF /* REMPieChartView.m in Sources */,
 				B4577EBF184C1886003C00CF /* REMNumberHelper.m in Sources */,
 				7A9B1E2C177B3A8B00C282A8 /* main.m in Sources */,
 				B4922469182B920C0001389A /* REMWidgetMultiTimespanDelegator.m in Sources */,
@@ -3749,10 +3890,15 @@
 				EFD946FC1839DCBB00E9EC50 /* _DCLayer.m in Sources */,
 				B4F11188183DA7F4004D53F6 /* REMBuildingChartContainerView2.m in Sources */,
 				EF0BFEA41844A5A60026C47D /* DCPieChartAnimationManager.m in Sources */,
+				EFE86981185EC3EB00DC0007 /* DCLabelingWrapper.m in Sources */,
 				7A7B2105183CAB3600C14248 /* REMCommonLegendFormator.m in Sources */,
+				EFEBAE38185FFD5D00B76549 /* DCLabelingTooltipView.m in Sources */,
 				EF03DC201841C886004B9EFD /* _DCHPinchGestureRecognizer.m in Sources */,
 				B40F011A1828C3DC009650FD /* REMWidgetStepEnergyModel.m in Sources */,
 				B445AEA4177BEEB8002D2A59 /* DDFileLogger.m in Sources */,
+				B4A87536185EC6D800BF3601 /* REMWidgetCellDelegator.m in Sources */,
+				B4A8753C185ED02200BF3601 /* REMWidgetRankingCellDelegator.m in Sources */,
+				B44313E7185AD4A100486594 /* REMEnergyLabellingLevelData.m in Sources */,
 				B445AEA6177BEEB8002D2A59 /* DDLog.m in Sources */,
 				B4FFB0C818191A15004C5404 /* REMRelativeDateViewController.m in Sources */,
 				B445AEA8177BEEB8002D2A59 /* DDTTYLogger.m in Sources */,
@@ -3767,19 +3913,20 @@
 				B4D50A41183313C7007C93A4 /* REMBuildingChartViewController.m in Sources */,
 				B4E815D11827375200FB9BC5 /* REMWidgetTagSearchModel.m in Sources */,
 				7A399E97177D238F00F0EB9F /* AFHTTPRequestOperation.m in Sources */,
-				EF0BFEA1184495DF0026C47D /* REMPieShadowLayer.m in Sources */,
 				7A399E98177D238F00F0EB9F /* AFImageRequestOperation.m in Sources */,
 				7AB9B39A183DCF1100779C5E /* REMChartTooltipItem.m in Sources */,
 				7A3F66F8184C61570079A244 /* REMChartSeriesIndicator.m in Sources */,
 				7A399E99177D238F00F0EB9F /* AFJSONRequestOperation.m in Sources */,
 				EFDAACBC1803F6C2008BC9AF /* REMChartDataProcessor.m in Sources */,
 				7A399E9A177D238F00F0EB9F /* AFNetworkActivityIndicatorManager.m in Sources */,
+				B44313E4185AAE7800486594 /* REMWidgetLabellingSearchModel.m in Sources */,
 				7A399E9E177D238F00F0EB9F /* UIImageView+AFNetworking.m in Sources */,
 				7AA8838117F92286004D50BC /* REMGalleryCollectionCell.m in Sources */,
 				7A399E9B177D238F00F0EB9F /* AFPropertyListRequestOperation.m in Sources */,
 				7A25725717F911AD0007438F /* REMGalleryViewController.m in Sources */,
 				7A399E9C177D238F00F0EB9F /* AFURLConnectionOperation.m in Sources */,
 				7A399E9D177D238F00F0EB9F /* AFXMLRequestOperation.m in Sources */,
+				EF7CF5F6185D82F2000BA4AE /* DCPieLayer.m in Sources */,
 				7AB34E51177D2CE1003E235E /* REMServiceRequestOperation.m in Sources */,
 				B42FBF6417F574B5004F2F3A /* REMEnum.m in Sources */,
 				B49B6F511781491800BC130A /* REMColor.m in Sources */,
@@ -3794,16 +3941,17 @@
 				B4198EAE178410D300B50475 /* REMLogManager.m in Sources */,
 				B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */,
 				EF13626F184EFC6F00BEF648 /* _DCLine.m in Sources */,
-				EFDAACB91803F27F008BC9AF /* REMPieChartWrapper.m in Sources */,
+				B4A87539185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m in Sources */,
+				EFE8698C185EF3B700DC0007 /* DCLabelingLabel.m in Sources */,
 				7A1D142617850B2100CC2922 /* Reachability.m in Sources */,
 				B4922466182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m in Sources */,
 				7A3F6701184C61610079A244 /* REMLoginTitledCard.m in Sources */,
+				EFE86989185EEF7300DC0007 /* DCLabelingStage.m in Sources */,
 				7A2E7ECB17F2DD41000EB506 /* REMBuildingTitleLabelView.m in Sources */,
 				EF0346B3183B520100DE186A /* _DCSeriesLayer.m in Sources */,
 				38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */,
 				EFD947001839DCBB00E9EC50 /* _DCXAxisLabelLayer.m in Sources */,
 				7A1D14291785178800CC2922 /* REMNetworkHelper.m in Sources */,
-				EF8A47FF17F959B5009B5C33 /* REMChartSeries.m in Sources */,
 				B47ACC2A17F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m in Sources */,
 				7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */,
 				7A3DDCDA1786C05B008A1033 /* REMServiceAgent.m in Sources */,
@@ -3855,7 +4003,6 @@
 				EF03DC261841FA2F004B9EFD /* DCPieSeries.m in Sources */,
 				B47ACC3317F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m in Sources */,
 				7A5AC7821817CC34006C7CB1 /* REMMapGallerySegue.m in Sources */,
-				EFDAACC818054EBA008BC9AF /* REMPieChartSeries.m in Sources */,
 				7A13C19517F40809007E6AA9 /* REMMainNavigationController.m in Sources */,
 				7A153CA417AA497C00413D3C /* REMLoginCarouselController.m in Sources */,
 				EFD947061839DCBB00E9EC50 /* _DCHGridlineLayer.m in Sources */,
@@ -3920,7 +4067,6 @@
 				7A0288ED17C20CC500709111 /* WeiboRequestOperation.m in Sources */,
 				EFEA7EDF1843424500CF4C3E /* _DCRankingXLabelFormatter.m in Sources */,
 				B4F11182183DA71E004D53F6 /* REMBuildingCommodityView.m in Sources */,
-				EFDAACC218053911008BC9AF /* REMChartConfig.m in Sources */,
 				EFD947091839DCBB00E9EC50 /* DCLineSeries.m in Sources */,
 				EF0BFEA71844B7090026C47D /* DCPieChartAnimationFrame.m in Sources */,
 				7A0288EE17C20CC500709111 /* WeiboSignIn.m in Sources */,
@@ -3943,6 +4089,7 @@
 				7A0288F817C20CC500709111 /* ImageResourceLoader.m in Sources */,
 				7A0288F917C20CC500709111 /* NSDictionary+Json.m in Sources */,
 				7A0288FA17C20CC500709111 /* PathHelper.m in Sources */,
+				EFE8697D185E9FF800DC0007 /* DCLabelingChartView.m in Sources */,
 				7A0288FB17C20CC500709111 /* Resources.m in Sources */,
 				EF03DC291841FB45004B9EFD /* DCPieDataPoint.m in Sources */,
 				B4547960184DABF700D3441B /* UIView+FlipTransition.m in Sources */,
@@ -3952,13 +4099,13 @@
 				B4E815D718273E5600FB9BC5 /* REMWidgetRankingSearchModel.m in Sources */,
 				7AB9B399183DCF1100779C5E /* REMStackChartLegendView.m in Sources */,
 				B46C8EBA17F27C25006DC4CB /* REMDashboardView.m in Sources */,
-				7AD6528C186A768E00987E93 /* REMAppConfiguration.m in Sources */,
+				7ABD828E185AD75500A2AC06 /* REMAppConfiguration.m in Sources */,
+				EF5D1A801867D10E0069C8F5 /* _DCVGridlineLayer.m in Sources */,
 				EF03DC231841E462004B9EFD /* DCPieChartView.m in Sources */,
 				7A3F66FF184C61610079A244 /* REMLoginButton.m in Sources */,
 				7A0288FD17C20CC500709111 /* WeiboDialogClosePNG.m in Sources */,
 				7A0288FE17C20CC500709111 /* WeiboDialog.m in Sources */,
 				7A44E04518238D5E0080CEBE /* REMBuildingShareViewController.m in Sources */,
-				EF8A47F817F959B5009B5C33 /* REMAbstractChartWrapper.m in Sources */,
 				7A0288FF17C20CC500709111 /* WeiboLoginDialog.m in Sources */,
 				7A02890017C20CC500709111 /* Weibo.m in Sources */,
 				EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */,
@@ -3978,6 +4125,7 @@
 				7AF3667817CF2D7400447650 /* REMBuildingChartSeriesIndicator.m in Sources */,
 				7A7F7B18181F7E3400A3C5AB /* REMGalleryGroupView.m in Sources */,
 				B408794A1830A960004042C1 /* REMBuildingImageViewController.m in Sources */,
+				EFE86986185EEF5300DC0007 /* DCLabelingSeries.m in Sources */,
 				B493ADA917D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m in Sources */,
 				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,
 				7A7B2108183CAB4B00C14248 /* REMCarbonLegendFormator.m in Sources */,
@@ -4366,7 +4514,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F156A54D-4E80-420B-A4E7-A60C5F6493D8";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv7s i386 x86_64";
@@ -4414,7 +4562,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0AAA16CE-E1AE-4792-AABE-857046F9D10E";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -4560,7 +4708,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9B547894-339B-4B1E-924F-65A5FBF85E65";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -4692,7 +4840,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9B547894-339B-4B1E-924F-65A5FBF85E65";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;

@@ -15,6 +15,7 @@
 //to change service url for different build options
 
 #if defined(DEBUG)
+
 const static NSString *BUILDOPTION = @"Debug";
 #elif defined(DailyBuild)
 const static NSString *BUILDOPTION = @"DailyBuild";
