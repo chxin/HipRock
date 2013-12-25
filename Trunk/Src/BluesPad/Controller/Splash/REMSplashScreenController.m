@@ -244,6 +244,7 @@
     self.plotSource = pieWrapper;
 //    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
 //    self.plotSource = columnWidget;
+//    
 //    columnWidget.view.backgroundColor = [UIColor blackColor];
 //    columnWidget.view.hasVGridlines = YES;
 //    columnWidget.view.graphContext.hGridlineAmount = 4;
