@@ -19,7 +19,8 @@
 }
 -(void)drawInContext:(CGContextRef)ctx {
     CGPoint center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
-    if (self.view.series.sumVisableValue > 0) {
+    double sum = [self.animationManager getVisableSliceSum];
+    if (sum > 0) {
         UIColor* shadowColor = [REMColor colorByHexString:kDCPieShadowColor alpha:self.view.indicatorAlpha];
         CGContextSetFillColorWithColor(ctx, shadowColor.CGColor);
         CGContextMoveToPoint(ctx, center.x, center.y);
@@ -29,8 +30,8 @@
         CGFloat startAnglePI = self.view.rotationAngle * M_PI;
         for (int i = 0; i < self.view.series.datas.count; i++) {
             DCPieDataPoint* point = self.view.series.datas[i];
-            if (point.hidden || point.pointType != DCDataPointTypeNormal) continue;
-            CGFloat pieSlicePI = point.value.doubleValue / self.view.series.sumVisableValue * M_PI * self.view.fullAngle;
+            if (point.pointType != DCDataPointTypeNormal) continue;
+            CGFloat pieSlicePI = [self.animationManager getVisableValueOfPoint:point] / sum * M_PI * self.view.fullAngle;
             CGContextSetFillColorWithColor(ctx, point.color.CGColor);
             CGContextMoveToPoint(ctx, center.x, center.y);
             CGContextAddArc(ctx, center.x, center.y, self.view.radius, startAnglePI, pieSlicePI+startAnglePI, 0);

@@ -93,17 +93,26 @@
     if(self.tappable == NO)
         return;
     
-    if(self.state == UIControlStateNormal)
-        [self setSelected:YES];
-    else
+    BOOL stateChanged = NO;
+    id<REMChartLegendItemDelegate> delegate = self.legendView.itemDelegate;
+    if(self.state == UIControlStateNormal) {
+        if (REMIsNilOrNull(delegate) || [delegate canBeHidden]) {
+            [self setSelected:YES];
+            stateChanged = YES;
+        }
+    } else {
         [self setSelected:NO];
+        stateChanged = YES;
+    }
     
-    [self updateState];
-    //NSLog(@"legend tapped, status: %d!", self.state);
-    
-    //set the conrresponding series status
-    if(self.legendView != nil && self.legendView.itemDelegate != nil){
-        [self.legendView.itemDelegate legendStateChanged:self.state onIndex:self.seriesIndex];
+    if (stateChanged) {
+        [self updateState];
+        //NSLog(@"legend tapped, status: %d!", self.state);
+        
+        //set the conrresponding series status
+        if(!REMIsNilOrNull(delegate)){
+            [delegate legendStateChanged:self.state onIndex:self.seriesIndex];
+        }
     }
 }
 

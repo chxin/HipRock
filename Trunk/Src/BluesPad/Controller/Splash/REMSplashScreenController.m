@@ -29,7 +29,7 @@
 
 @property (nonatomic,weak) REMLoginCarouselController *carouselController;
 
-@property (nonatomic) NSMutableArray* plotSource;
+@property (nonatomic) DAbstractChartWrapper* plotSource;
 
 @end
 
@@ -239,23 +239,63 @@
     CGRect miniRect = CGRectMake(0, 0, 222, 108);
     CGRect maxiRect = CGRectMake(0, 0, 974, 605);
     
-//    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
-//    [self.view addSubview:pieWrapper.view];
-//    self.plotSource = pieWrapper;
+    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+    [self.view addSubview:pieWrapper.view];
+    self.plotSource = pieWrapper;
 //    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+//    self.plotSource = columnWidget;
 //    columnWidget.view.backgroundColor = [UIColor blackColor];
 //    columnWidget.view.hasVGridlines = YES;
 //    columnWidget.view.graphContext.hGridlineAmount = 4;
 //    [self.view addSubview:columnWidget.view];
     
-//    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
+//    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
 //    lineWidget.view.backgroundColor = [UIColor blackColor];
 //    [self.view addSubview:lineWidget.view];
 //    self.plotSource = lineWidget;
-    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
-    self.plotSource = labelingWrapper;
-    [labelingWrapper getView].backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:[labelingWrapper getView]];
+    
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 605, 100, 30)];
+    //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
+    [btn setTitle:@"show/hide" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn setTitleColor:[REMColor colorByHexString:@"#00ff48"] forState:UIControlStateSelected];
+    [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    UIButton *btn1 = [[UIButton alloc]initWithFrame:CGRectMake(100, 605, 100, 30)];
+    //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
+    [btn1 setTitle:@"show/hide" forState:UIControlStateNormal];
+    [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn1 setTitleColor:[REMColor colorByHexString:@"#00ff48"] forState:UIControlStateSelected];
+    [btn1 addTarget:self action:@selector(buttonPressed1:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn1];
+    UIButton *btn2 = [[UIButton alloc]initWithFrame:CGRectMake(200, 605, 100, 30)];
+    //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
+    [btn2 setTitle:@"show/hide" forState:UIControlStateNormal];
+    [btn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn2 setTitleColor:[REMColor colorByHexString:@"#00ff48"] forState:UIControlStateSelected];
+    [btn2 addTarget:self action:@selector(buttonPressed2:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn2];
+//    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+//    self.plotSource = labelingWrapper;
+//    [labelingWrapper getView].backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:[labelingWrapper getView]];
+}
+
+-(void)buttonPressed:(UIButton *)button {
+    [self showOrHideAtIndex:0];
+}
+-(void)showOrHideAtIndex:(NSUInteger)index {
+    if ([self.plotSource isKindOfClass:[DCTrendWrapper class]]) {
+        [(DCTrendWrapper*)self.plotSource setHiddenAtIndex:index hidden:![((DCTrendWrapper*)self.plotSource).view.seriesList[index] hidden]];
+    } else if ([self.plotSource isKindOfClass:[DCPieWrapper class]]) {
+        [(DCPieWrapper*)self.plotSource setHiddenAtIndex:index hidden:![((DCPieWrapper*)self.plotSource).view.series.datas[index] hidden]];
+    }
+}
+-(void)buttonPressed1:(UIButton *)button {
+    [self showOrHideAtIndex:1];
+}
+-(void)buttonPressed2:(UIButton *)button {
+    [self showOrHideAtIndex:2];
 }
 
 

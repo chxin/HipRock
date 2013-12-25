@@ -46,7 +46,9 @@
         
         _series = series;
         
+        self.animationManager.series = series;
         self.pieLayer = [[DCPieLayer alloc]init];
+        self.pieLayer.animationManager = self.animationManager;
         self.pieLayer.view = self;
         self.pieLayer.frame = CGRectMake(self.center.x, self.center.y, 0, 0);
         [self.layer addSublayer:self.pieLayer];
@@ -84,23 +86,23 @@
 -(void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
     [self updateGestures];
-    if (self.series.sumVisableValue > 0) {
-        double targetRotation = [self.series findNearbySliceCenter:0];
-        DCPieChartAnimationFrame* targetFrame = [[DCPieChartAnimationFrame alloc]init];
-        targetFrame.radius = @(self.radius);
-        targetFrame.radiusForShadow = @(self.radiusForShadow);
-        targetFrame.rotationAngle = @(-targetRotation);
-        targetFrame.fullAngle = @(2);
-        targetFrame.indicatorAlpha = @(0.8);
-        if (self.playBeginAnimation) {
-            self.radius = 0;
-            self.radiusForShadow = 0;
-            [self.animationManager animateToFrame:targetFrame];
-        } else {
-            [self.animationManager playFrames:@[targetFrame]];
-        }
-        self.pieLayer.frame = CGRectMake(self.center.x-targetFrame.radiusForShadow.doubleValue, self.center.y-targetFrame.radiusForShadow.doubleValue, targetFrame.radiusForShadow.doubleValue*2, targetFrame.radiusForShadow.doubleValue*2);
+    
+    double targetRotation = [self.animationManager findNearbySliceCenter:0];
+    DCPieChartAnimationFrame* targetFrame = [[DCPieChartAnimationFrame alloc]init];
+    targetFrame.radius = @(self.radius);
+    targetFrame.radiusForShadow = @(self.radiusForShadow);
+    targetFrame.rotationAngle = @(-targetRotation);
+    targetFrame.fullAngle = @(2);
+    targetFrame.indicatorAlpha = @(0.8);
+    if (self.playBeginAnimation) {
+        self.radius = 0;
+        self.radiusForShadow = 0;
+        [self.animationManager animateToFrame:targetFrame];
+    } else {
+        [self.animationManager playFrames:@[targetFrame]];
     }
+    self.pieLayer.frame = CGRectMake(self.center.x-targetFrame.radiusForShadow.doubleValue, self.center.y-targetFrame.radiusForShadow.doubleValue, targetFrame.radiusForShadow.doubleValue*2, targetFrame.radiusForShadow.doubleValue*2);
+    
 }
 
 -(void)redraw {
@@ -147,7 +149,7 @@
 
 -(void)sendPointFocusEvent {
     // 找到预计旋转角度对应的扇区的中线位置
-    _focusPointIndex = [self.series findIndexOfSlide:self.rotationAngle];
+    _focusPointIndex = [self.animationManager findIndexOfSlide:self.rotationAngle];
     if (self.delegate && [self.delegate respondsToSelector:@selector(pieRotated)]) {
         [self.delegate pieRotated];
     }
@@ -160,11 +162,11 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
-    if (self.series.sumVisableValue <= 0) return;
+    if ([self.animationManager getVisableSliceSum] <= 0) return;
     if (fabs(self.panSpeed) >= 0.05) {
         [self.animationManager rotateWithInitialSpeed:self.panSpeed];
     } else {
-        [self.animationManager playFrames:[self.animationManager getAngleTurningFramesFrom:self.rotationAngle to:2-[self.series findNearbySliceCenter:self.rotationAngle]]];
+        [self.animationManager playFrames:[self.animationManager getAngleTurningFramesFrom:self.rotationAngle to:2-[self.animationManager findNearbySliceCenter:self.rotationAngle]]];
     }
     self.panSpeed = 0;
 }
@@ -191,5 +193,10 @@
     if (fullAngle < 0) fullAngle = 0;
     if (_fullAngle == fullAngle) return;
     _fullAngle = fullAngle;
+}
+
+-(void)setSlice:(DCPieDataPoint *)slice hidden:(BOOL)hidden {
+    if (slice.hidden == hidden) return;
+    [self.animationManager setPoint:slice hidden:hidden];
 }
 @end

@@ -209,8 +209,8 @@
 "Chart_Labeling_EffecioncyTextFormat" = "能效标识：%@";
 "Chart_Labeling_LessOrEqualThan" = "<=";
 "Chart_Labeling_MoreThan" = ">";
-"Chart_Labeling_HighEffectioncy" = "高能效";
-"Chart_Labeling_LowEffectioncy" = "低能效";
+"Chart_Labeling_LowEnergyUse" = "低能耗";
+"Chart_Labeling_HighEnergyUse" = "高能耗";
 
 //Energy, prefix:Energy_
 "Energy_02601"="缺少昼夜日历的部分，无法绘图。请设置后再试。";

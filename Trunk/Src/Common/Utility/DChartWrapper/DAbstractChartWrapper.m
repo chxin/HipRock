@@ -33,4 +33,7 @@
     return nil;
 }
 
+-(NSUInteger)getVisableSeriesCount {
+    return 0;
+}
 @end

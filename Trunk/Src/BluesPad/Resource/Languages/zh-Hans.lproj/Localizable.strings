@@ -210,8 +210,8 @@
 "Chart_Labeling_EffecioncyTextFormat" = "能效标识：%@";
 "Chart_Labeling_LessOrEqualThan" = "<=";
 "Chart_Labeling_MoreThan" = ">";
-"Chart_Labeling_HighEffectioncy" = "高能效";
-"Chart_Labeling_LowEffectioncy" = "低能效";
+"Chart_Labeling_LowEnergyUse" = "低能耗";
+"Chart_Labeling_HighEnergyUse" = "高能耗";
 
 
 //Energy, prefix:Energy_

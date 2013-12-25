@@ -57,6 +57,7 @@
 -(NSArray*)createYAxes:(NSArray*)series {
     DCXYSeries* s = series[0];
     DCAxis* y = [[DCAxis alloc]init];
+    y.coordinate = DCAxisCoordinateY;
     s.yAxis = y;
     y.axisTitle = REMEmptyString;
     y.labelToLine = self.style.yLabelToLine;
@@ -74,7 +75,7 @@
     return @[y];
 }
 
--(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
+-(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
     // Nothing to do. cannot hide series in ranking chart.
 }
 
