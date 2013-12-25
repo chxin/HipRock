@@ -431,7 +431,7 @@
         [REMDataAccessor access:logoStore success:^(id data) {
             UIImage *logo = nil;
             if(data != nil && [data length] > 2) {
-                logo = [REMImageHelper parseImageFromNSData:data];
+                logo = [REMImageHelper parseImageFromNSData:data withScale:1.0];
             }
             
             REMAppCurrentLogo = logo;

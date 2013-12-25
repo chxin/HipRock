@@ -596,7 +596,6 @@
 		B4707D9B18697B2900FBA393 /* Humidity_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9318697B2900FBA393 /* Humidity_pressed@2x.png */; };
 		B4707D9C18697B2900FBA393 /* Temperature_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9418697B2900FBA393 /* Temperature_normal@2x.png */; };
 		B4707D9D18697B2900FBA393 /* Temperature_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9518697B2900FBA393 /* Temperature_pressed@2x.png */; };
-		B4707D9F1869863B00FBA393 /* DefaultBuilding-new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9E1869863A00FBA393 /* DefaultBuilding-new.jpg */; };
 		B47422E617C45BCF0021B76C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
 		B477739A184F074500F68AED /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4777399184F074500F68AED /* CoreMedia.framework */; };
 		B477739C184F075300F68AED /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B477739B184F075300F68AED /* CoreVideo.framework */; };
@@ -1394,7 +1393,6 @@
 		B4707D9318697B2900FBA393 /* Humidity_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Humidity_pressed@2x.png"; sourceTree = "<group>"; };
 		B4707D9418697B2900FBA393 /* Temperature_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Temperature_normal@2x.png"; sourceTree = "<group>"; };
 		B4707D9518697B2900FBA393 /* Temperature_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Temperature_pressed@2x.png"; sourceTree = "<group>"; };
-		B4707D9E1869863A00FBA393 /* DefaultBuilding-new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "DefaultBuilding-new.jpg"; sourceTree = "<group>"; };
 		B4777399184F074500F68AED /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
 		B477739B184F075300F68AED /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
 		B47ACC2817F80AAA00989B2C /* REMSettingCustomerSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerSelectionViewController.h; path = Controller/Setting/REMSettingCustomerSelectionViewController.h; sourceTree = "<group>"; };
@@ -1709,7 +1707,6 @@
 		6A61A6691839B81F00C6A228 /* Building */ = {
 			isa = PBXGroup;
 			children = (
-				B4707D9E1869863A00FBA393 /* DefaultBuilding-new.jpg */,
 				6A61A66A1839B81F00C6A228 /* commodity */,
 				6A61A6831839B82000C6A228 /* DefaultBuilding-Small.png */,
 				6A61A6841839B82000C6A228 /* DefaultBuilding-Small@2x.png */,
@@ -3803,7 +3800,6 @@
 				6A61A78A1839B82000C6A228 /* QualifiedPin_Normal@2x.png in Resources */,
 				6A61A75E1839B82000C6A228 /* Legend_Chart@2x.png in Resources */,
 				6A61A71E1839B82000C6A228 /* Water_pressed@2x.png in Resources */,
-				B4707D9F1869863B00FBA393 /* DefaultBuilding-new.jpg in Resources */,
 				6A61A7231839B82000C6A228 /* Menu_normal.png in Resources */,
 				7A3F66F5184C56440079A244 /* JumpTrial-Pressed@2x.png in Resources */,
 				7A47F3A418482C1B007EE37B /* JumpTrial.png in Resources */,
@@ -4514,7 +4510,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "F156A54D-4E80-420B-A4E7-A60C5F6493D8";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv7s i386 x86_64";
@@ -4534,7 +4530,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4562,7 +4558,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0AAA16CE-E1AE-4792-AABE-857046F9D10E";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -4708,7 +4704,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9B547894-339B-4B1E-924F-65A5FBF85E65";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -4840,7 +4836,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9B547894-339B-4B1E-924F-65A5FBF85E65";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
