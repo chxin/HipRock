@@ -340,6 +340,14 @@
     }
 }
 
+-(NSUInteger)getVisableSeriesCount {
+    NSUInteger count = 0;
+    for (DCXYSeries* s in self.view.seriesList) {
+        if (!s.hidden) count++;
+    }
+    return count;
+}
+
 -(void)cancelToolTipStatus {
     [super cancelToolTipStatus];
     [self.view defocus];

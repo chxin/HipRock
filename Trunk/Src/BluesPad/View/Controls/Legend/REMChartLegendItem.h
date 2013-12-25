@@ -15,6 +15,7 @@
 @protocol REMChartLegendItemDelegate <NSObject>
 
 -(void)legendStateChanged:(UIControlState)state onIndex:(int)index;
+-(BOOL)canBeHidden;
 
 @end
 

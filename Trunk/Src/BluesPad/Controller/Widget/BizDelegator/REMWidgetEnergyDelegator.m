@@ -1074,6 +1074,10 @@
     return legend;
 }
 
+-(BOOL)canBeHidden {
+    return [self.chartWrapper getVisableSeriesCount] > 1;
+}
+
 -(void)legendStateChanged:(UIControlState)state onIndex:(int)index
 {
     if(self.hiddenSeries == nil)

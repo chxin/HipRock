@@ -74,6 +74,14 @@
     self.focusIndex = INT32_MIN;
 }
 
+-(NSUInteger)getVisableSeriesCount {
+    NSUInteger count = 0;
+    for (DCPieDataPoint* s in self.view.series.datas) {
+        if (!s.hidden) count++;
+    }
+    return count;
+}
+
 -(void)redraw:(REMEnergyViewData *)energyViewData {
     [super redraw:energyViewData];
     UIView* superView = self.view.superview;
