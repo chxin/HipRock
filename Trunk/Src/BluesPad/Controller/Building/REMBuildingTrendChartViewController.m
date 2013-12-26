@@ -18,7 +18,7 @@
 }
 
 @property (nonatomic) CGRect viewFrame;
-
+@property (nonatomic, assign) BOOL loadDataSuccess;
 @end
 
 @implementation REMBuildingTrendChartViewController
@@ -30,7 +30,7 @@
 
 - (void)loadView
 {
-    
+    self.loadDataSuccess = NO;
     // Custom initialization
     REMBuildingTrendChart* myView = [[REMBuildingTrendChart alloc] initWithFrame:self.viewFrame];
     
@@ -95,7 +95,7 @@
 
 - (CPTGraphHostingView*) getHostView {
     return nil;
-   // return ((REMBuildingTrendChart*)self.view).hostView;
+    // return ((REMBuildingTrendChart*)self.view).hostView;
 }
 -(void)longPressedAt:(NSDate*)x {
     
@@ -157,7 +157,7 @@
     } else if (type == REMRelativeTimeRangeTypeLastYear) {
         i = 5;
     }
-     
+    
     return i;
 }
 
@@ -171,6 +171,7 @@
 
 
 - (void)intervalChanged:(UIButton *)button {
+    if (!self.loadDataSuccess) return;
     REMRelativeTimeRangeType timeRange = REMRelativeTimeRangeTypeToday;
     REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
     if (button == myView.todayButton) {
@@ -449,6 +450,7 @@
 
 - (void)loadDataSuccessWithData:(id)data
 {
+    self.loadDataSuccess = YES;
     if (self.datasource.count != 6) {
         for (int i = 0; i < 6; i++) {
             NSMutableDictionary* timeIntervalData = [[NSMutableDictionary alloc] init];
@@ -492,7 +494,7 @@
             [series setValue:data forKey:@"data"];
             NSString* targetIdentity = [NSString stringWithFormat:@"%d", sIndex];
             [series setValue:targetIdentity forKey:@"identity"];
-
+            
             [seriesArray addObject:series];
         }
         [timeIntervalData setValue:seriesArray forKey:@"seriesArray"];
@@ -504,6 +506,7 @@
 }
 
 - (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error {
+    self.loadDataSuccess = NO;
     if (self.datasource.count != 6) {
         for (int i = 0; i < 6; i++) {
             NSMutableDictionary* series = [[NSMutableDictionary alloc] init];
@@ -563,12 +566,12 @@
     
     if (fieldEnum == CPTPieChartFieldSliceWidth) {
         NSDate* date =  [item objectForKey:@"x"];
-       // date = [REMTimeHelper convertLocalDateToGMT:date];
+        // date = [REMTimeHelper convertLocalDateToGMT:date];
         NSInteger i = 0;
         if (currentSourceIndex < 2) i = [REMTimeHelper getHour:date] + 1;
         else if (currentSourceIndex < 4) i = [REMTimeHelper getDay:date];
         else if (currentSourceIndex < 6) i = [REMTimeHelper getMonth:date];
-//        return [NSNumber numberWithDouble:[date timeIntervalSince1970]];
+        //        return [NSNumber numberWithDouble:[date timeIntervalSince1970]];
         return [NSNumber numberWithInteger: i - 1];
     }
     else

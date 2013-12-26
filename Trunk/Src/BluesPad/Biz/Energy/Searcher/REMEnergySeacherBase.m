@@ -105,11 +105,11 @@
     
     if (self.loadingBackgroundView!=nil) {
         [maskerContainer addSubview:self.loadingBackgroundView];
+    }
     else{
         if (self.loadingView.translatesAutoresizingMaskIntoConstraints==YES) {
             [self.loadingView setFrame:maskerContainer.bounds];
         }
-    }
         if (self.loadingBackgroundView.translatesAutoresizingMaskIntoConstraints==NO) {
             NSLayoutConstraint *constraintX=[NSLayoutConstraint constraintWithItem:self.loadingBackgroundView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:maskerContainer attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
             NSLayoutConstraint *constraintWidth=[NSLayoutConstraint constraintWithItem:self.loadingBackgroundView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:maskerContainer attribute:NSLayoutAttributeWidth multiplier:1 constant:0];

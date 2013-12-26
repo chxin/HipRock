@@ -11,6 +11,7 @@
 #import "REMEnergyViewData.h"
 #import "REMCommonHeaders.h"
 #import "REMWidgetContentSyntax.h"
+#import "REMChartStyle.h"
   
 typedef enum _DChartStatus {
     DChartStatusNormal,
