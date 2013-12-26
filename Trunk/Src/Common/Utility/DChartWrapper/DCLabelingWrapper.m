@@ -59,20 +59,14 @@
         if (REMIsNilOrNull(targetEnergyData.energyData) || targetEnergyData.energyData.count == 0) continue;
         REMEnergyData* energyData = targetEnergyData.energyData[0];
         if (REMIsNilOrNull(energyData.dataValue)) continue;
-        for (int i = 0; i < stages.count; i++) {
-            REMEnergyLabellingLevelData* d = self.energyViewData.labellingLevelArray[i];
-            if ((REMIsNilOrNull(d.minValue) || [d.minValue compare:energyData.dataValue]!=NSOrderedDescending) &&
-                (REMIsNilOrNull(d.maxValue) || [d.maxValue compare:energyData.dataValue]==NSOrderedDescending)) {
-                DCLabelingLabel* label = [[DCLabelingLabel alloc]init];
-                label.name = targetEnergyData.target.name;
-                label.color = [stages[i] color];
-                label.stageText = [stages[i] stageText];
-                label.labelText = [NSString stringWithFormat:@"%@%@", [REMNumberHelper formatDataValueWithCarry:energyData.dataValue], d.uom];
-                label.stage = i;
-                [labels addObject:label];
-                break;
-            }
-        }
+        NSUInteger i = targetEnergyData.target.targetId.unsignedIntegerValue;
+        DCLabelingLabel* label = [[DCLabelingLabel alloc]init];
+        label.name = targetEnergyData.target.name;
+        label.color = [stages[i] color];
+        label.stageText = [stages[i] stageText];
+        label.labelText = [NSString stringWithFormat:@"%@%@", [REMNumberHelper formatDataValueWithCarry:energyData.dataValue], targetEnergyData.target.uomName];
+        label.stage = i;
+        [labels addObject:label];
     }
     s.labels = labels;
     view.series = s;

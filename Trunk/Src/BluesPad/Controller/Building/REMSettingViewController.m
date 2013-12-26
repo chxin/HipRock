@@ -59,7 +59,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -69,6 +69,7 @@
     if (section == 1) return 2;
     if (section == 2) return 1;
     if (section == 3) return 1;
+    if (section == 4) return 1;
     return 0;
 }
 
@@ -120,7 +121,11 @@
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
     }
-    else if(indexPath.section==3 && indexPath.row==0 ){
+    else if (indexPath.section==3 && indexPath.row==0){
+        [[cell textLabel]setText:NSLocalizedString(@"Setting_About", @"")];//关于云能效
+        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    }
+    else if(indexPath.section==4 && indexPath.row==0 ){
         UITableViewCell *cell1 = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell1"];
         //[[cell textLabel]setText:@"退出登录"];
         cell1.textLabel.text=NSLocalizedString(@"Setting_Logout", @"");//@"退出登录";
@@ -151,8 +156,8 @@
     if(indexPath.section==1 && indexPath.row==0){
         [self performSegueWithIdentifier:@"settingCustomerDetailSegue" sender:self];
     }
-    else if(indexPath.section==1 && indexPath.row==1){
-        
+    else if(indexPath.section==3 && indexPath.row==0){
+        [self performSegueWithIdentifier:@"settingAboutSegue" sender:self];
     }
 }
 
@@ -250,7 +255,7 @@
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO];
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if(indexPath.section == 3 && indexPath.row==0){
+    if(indexPath.section == 4 && indexPath.row==0){
         if (self.isLoggingOut==NO) {
             self.isLoggingOut=YES;
             [self logout];
@@ -263,6 +268,9 @@
     }
     else if(indexPath.section == 1 && indexPath.row==0){
         [self performSegueWithIdentifier:@"settingCustomerSelectionSegue" sender:self];
+    }
+    else if(indexPath.section==3 && indexPath.row==0){
+        [self performSegueWithIdentifier:@"settingAboutSegue" sender:self];
     }
 }
 

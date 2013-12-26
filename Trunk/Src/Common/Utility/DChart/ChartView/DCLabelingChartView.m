@@ -18,8 +18,9 @@
 @property (nonatomic, strong) NSMutableArray* tooltipIconCentrePoints;
 @property (nonatomic,strong) UITapGestureRecognizer* tapGsRec;
 @property (nonatomic,strong) DCLabelingTooltipView* tooltipView;
-@property (nonatomic,strong) NSMutableArray* stageShapeLayers;
-@property (nonatomic,strong) NSMutableArray* bezierPaths;
+//@property (nonatomic,strong) NSMutableArray* stageShapeLayers;
+@property (nonatomic,strong) NSMutableArray* stageBezierPaths;
+@property (nonatomic,strong) NSMutableArray* labelBezierPaths;
 
 @end
 
@@ -38,8 +39,9 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     if (self) {
         self.tooltipIconCentrePoints = [[NSMutableArray alloc]init];
         self.backgroundColor = [UIColor clearColor];
-        self.stageShapeLayers = [[NSMutableArray alloc]init];
-        self.bezierPaths = [[NSMutableArray alloc]init];
+//        self.stageShapeLayers = [[NSMutableArray alloc]init];
+        self.stageBezierPaths = [[NSMutableArray alloc]init];
+        self.labelBezierPaths = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -69,15 +71,28 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
 -(void)viewTapped:(UITapGestureRecognizer *)gesture {
     // Detect whether tap on icon.
     CGPoint touchPoint = [gesture locationInView:self];
+    BOOL touchStage = NO;
+    BOOL touchLevel = NO;
     int index = INT32_MIN;
-    for (int i = 0; i < self.bezierPaths.count; i++) {
-        UIBezierPath* p = self.bezierPaths[i];
+    for (int i = 0; i < self.stageBezierPaths.count; i++) {
+        UIBezierPath* p = self.stageBezierPaths[i];
         if ([p containsPoint:touchPoint]) {
             index = i;
+            touchStage = YES;
             break;
         }
     }
-    if (index >= 0) {
+    if (!touchStage) {
+        for (int  i = 0; i < self.labelBezierPaths.count; i++) {
+            UIBezierPath* p = self.labelBezierPaths[i];
+            if ([p containsPoint:touchPoint]) {
+                index = i;
+                touchLevel = YES;
+                break;
+            }
+        }
+    }
+    if (touchStage) {
         if (REMIsNilOrNull(self.tooltipView)) {
             self.tooltipView = [[DCLabelingTooltipView alloc]initWithStyle:self.style];
             self.tooltipView.style = self.style;
@@ -90,41 +105,9 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     } else {
         [self hideTooltip];
     }
-
-}
-
--(void)touchAt:(CGPoint)touchPoint {
-//    CGFloat tooltipHeight = 38;
-//    if (REMIsNilOrNull(self.tooltipView)) {
-//        self.tooltipView = [[DCLabelingTooltipView alloc]init];
-//        self.tooltipView.hidden = YES;
-//        self.tooltipView.fontName = self.style.labelingFontName;
-//        self.tooltipView.alpha = 0;
-//        self.tooltipView.height = tooltipHeight;
-//        [self addSubview:self.tooltipView];
-//    }
-//
-//    self.tooltipView.stageText = [self.series.stages[index] stageText];
-//    self.tooltipView.labelText = [self.series.stages[index] tooltipText];
-//    CGPoint iconCenter;
-//    [self.tooltipIconCentrePoints[index] getValue:&iconCenter];
-//    
-//    CGRect toFrame = CGRectMake(iconCenter.x - self.style.labelingTooltipViewToIconCenterLeft, iconCenter.y - self.style.labelingTooltipViewToIconCenterTop, [self.tooltipView getWidth], tooltipHeight);
-//    
-//    if (self.tooltipView.hidden) {
-//        self.tooltipView.hidden = NO;
-//        self.tooltipView.frame = toFrame;
-//        [UIView animateWithDuration:0.2 animations:^(void){
-//            self.tooltipView.alpha = 1;
-//            self.tooltipView.color = [self.series.stages[index] color];
-//        }];
-//    } else {
-//        [UIView animateWithDuration:0.2 animations:^(void){
-//            self.tooltipView.alpha = 1;
-//            self.tooltipView.frame = toFrame;
-//            self.tooltipView.color = [self.series.stages[index] color];
-//        }];
-//    }
+    if (touchLevel) {
+    } else {
+    }
 }
 
 -(void)hideTooltip {
@@ -168,8 +151,6 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         CGFloat baseY = basePoint.y;
         CGFloat theWidth = style.labelingStageMinWidth + i * stageWidthStep;
         
-        CAShapeLayer* shape = self.stageShapeLayers[i];
-        shape.fillColor = [self.series.stages[i] color].CGColor;
         UIBezierPath* aPath = [UIBezierPath bezierPath];
         [aPath moveToPoint:CGPointMake(baseX, baseY+radius)];
         [aPath addQuadCurveToPoint:CGPointMake(baseX+radius, baseY) controlPoint:CGPointMake(baseX, baseY)];
@@ -182,26 +163,11 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         [aPath addLineToPoint:CGPointMake(baseX+radius, baseY + stageHeight)];
         [aPath addQuadCurveToPoint:CGPointMake(baseX, baseY+stageHeight-radius) controlPoint:CGPointMake(baseX, baseY+stageHeight)];
         [aPath closePath];
-        [self.bezierPaths addObject:aPath];
-        shape.path = aPath.CGPath;
-        shape.hidden = YES;
+        [self.stageBezierPaths addObject:aPath];
         
         CGContextSetFillColorWithColor(ctx, [self.series.stages[i] color].CGColor);
-        CGMutablePathRef path = CGPathCreateMutable();
-        CGPathMoveToPoint(path, NULL, baseX, baseY+radius);
-        CGPathAddQuadCurveToPoint(path, NULL, baseX, baseY, baseX+radius, baseY);
-        CGPathAddLineToPoint(path, NULL, baseX + theWidth - stageHeight / 2-radius, baseY);
-        CGPathAddQuadCurveToPoint(path, NULL, baseX + theWidth - stageHeight / 2, baseY, baseX + theWidth - stageHeight / 2+radius, baseY+radius);
-        CGPathAddLineToPoint(path, NULL, baseX + theWidth - radius, baseY + stageHeight / 2 - radius);
-        CGPathAddQuadCurveToPoint(path, NULL, baseX + theWidth, baseY + stageHeight / 2, baseX + theWidth - radius, baseY + stageHeight / 2 + radius);
-        CGPathAddLineToPoint(path, NULL, baseX + theWidth - stageHeight / 2 + radius, baseY + stageHeight - radius);
-        CGPathAddQuadCurveToPoint(path, NULL, baseX + theWidth - stageHeight / 2, baseY + stageHeight, baseX + theWidth - stageHeight / 2 - radius, baseY + stageHeight);
-        CGPathAddLineToPoint(path, NULL, baseX+radius, baseY + stageHeight);
-        CGPathAddQuadCurveToPoint(path, NULL, baseX, baseY+stageHeight, baseX, baseY+stageHeight-radius);
-        CGPathCloseSubpath(path);
-        CGContextAddPath(ctx, path);
+        CGContextAddPath(ctx, aPath.CGPath);
         CGContextDrawPath(ctx, kCGPathFill);
-        CGPathRelease(path);
 
         
         basePoint.y = basePoint.y + stageHeight + stageVMargin;
@@ -228,23 +194,24 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         CGFloat baseX = hPadding+style.labelingStageMaxWidth+style.labelingStageToLineMargin+style.labelingLineWidth+(style.labelingLabelWidth+style.labelingLabelToLineMargin*2+style.labelingLineWidth)*i+style.labelingLabelToLineMargin;
         CGFloat baseY = style.plotPaddingTop+style.labelingStageToBorderMargin+stageHeight*((double)label.stage+0.5)+stageVMargin*(double)label.stage-labelHeight/2;
         CGFloat labelRightBound = baseX + labelWidth;
+        
+        UIBezierPath* aPath = [UIBezierPath bezierPath];
+        [aPath moveToPoint:CGPointMake(baseX+radius, baseY + labelHeight / 2+radius)];
+        [aPath addQuadCurveToPoint:CGPointMake(baseX  + radius, baseY + labelHeight / 2-radius) controlPoint:CGPointMake(baseX, baseY + labelHeight / 2)];
+        [aPath addLineToPoint:CGPointMake(baseX + labelHeight / 2-radius, baseY+radius)];
+        [aPath addQuadCurveToPoint:CGPointMake(baseX + labelHeight / 2 +radius, baseY) controlPoint:CGPointMake(baseX + labelHeight / 2, baseY)];
+        [aPath addLineToPoint:CGPointMake(labelRightBound-radius, baseY)];
+        [aPath addQuadCurveToPoint:CGPointMake(labelRightBound, baseY+radius) controlPoint:CGPointMake(labelRightBound, baseY)];
+        [aPath addLineToPoint:CGPointMake(labelRightBound, baseY + labelHeight - radius)];
+        [aPath addQuadCurveToPoint:CGPointMake(labelRightBound-radius, baseY + labelHeight) controlPoint:CGPointMake(labelRightBound, baseY + labelHeight)];
+        [aPath addLineToPoint:CGPointMake(baseX + labelHeight / 2 + radius, baseY + labelHeight)];
+        [aPath addQuadCurveToPoint:CGPointMake(baseX + labelHeight / 2-radius, baseY + labelHeight-radius) controlPoint:CGPointMake(baseX + labelHeight / 2, baseY + labelHeight)];
+        [aPath closePath];
+        [self.labelBezierPaths addObject:aPath];
         // Label色块
         CGContextSetFillColorWithColor(ctx, label.color.CGColor);
-        CGMutablePathRef path = CGPathCreateMutable();
-        CGPathMoveToPoint(path, NULL, baseX+radius, baseY + labelHeight / 2+radius);
-        CGPathAddQuadCurveToPoint(path, NULL, baseX, baseY + labelHeight / 2, baseX  + radius, baseY + labelHeight / 2-radius);
-        CGPathAddLineToPoint(path, NULL, baseX + labelHeight / 2-radius, baseY+radius);
-        CGPathAddQuadCurveToPoint(path, NULL, baseX + labelHeight / 2, baseY, baseX + labelHeight / 2 +radius, baseY);
-        CGPathAddLineToPoint(path, NULL, labelRightBound-radius, baseY);
-        CGPathAddQuadCurveToPoint(path, NULL, labelRightBound, baseY, labelRightBound, baseY+radius);
-        CGPathAddLineToPoint(path, NULL, labelRightBound, baseY + labelHeight - radius);
-        CGPathAddQuadCurveToPoint(path, NULL, labelRightBound, baseY + labelHeight, labelRightBound-radius, baseY + labelHeight);
-        CGPathAddLineToPoint(path, NULL, baseX + labelHeight / 2 + radius, baseY + labelHeight);
-        CGPathAddQuadCurveToPoint(path, NULL, baseX + labelHeight / 2, baseY + labelHeight, baseX + labelHeight / 2-radius, baseY + labelHeight-radius);
-        CGPathCloseSubpath(path);
-        CGContextAddPath(ctx, path);
+        CGContextAddPath(ctx, aPath.CGPath);
         CGContextDrawPath(ctx, kCGPathFill);
-        CGPathRelease(path);
         
         CGSize stageTextSize = [DCUtility getSizeOfText:label.stageText forFont:labelFont];
         [self drawText:label.name inContext:ctx font:labelTagNameFont rect:CGRectMake(baseX, style.plotPaddingTop+style.labelingLabelTagNameTopMargin, style.labelingLabelWidth, style.labelingLabelTagNameFontSize) alignment:NSTextAlignmentCenter color:style.labelingLabelValueFontColor];
@@ -280,15 +247,6 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
 
 -(void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
-    
-    NSUInteger stageCount = self.series.stages.count;
-    for (int i = 0; i < stageCount; i++) {
-        CAShapeLayer* shape = [[CAShapeLayer alloc]init];
-        shape.contentsScale = [UIScreen mainScreen].scale;
-        [self.layer addSublayer:shape];
-        [self.stageShapeLayers addObject:shape];
-    }
-    
     
     [self updateGestures];
     [self setNeedsDisplay];

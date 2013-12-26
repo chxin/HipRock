@@ -22,6 +22,12 @@ typedef enum _DCLineType {
 @protocol REMChartDelegate <NSObject>
 @end
 
+@protocol REMChartLabelingDelegate <REMChartDelegate>
+
+-(void)highlightPoint:(id)point;
+
+@end
+
 @protocol REMTrendChartDelegate <REMChartDelegate>
 /*
  * points: List<DCDataPoint>
