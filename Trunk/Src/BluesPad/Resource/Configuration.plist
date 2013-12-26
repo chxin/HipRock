@@ -9,9 +9,9 @@
 		<key>local</key>
 		<dict>
 			<key>url</key>
-			<string>http://112.124.56.137/v1.4.0.22/Mobile/MobileApiHost/</string>
+			<string>http://10.177.206.79/Mobile/</string>
 			<key>debug-user</key>
-			<string>SchneiderElectricChina|P@ssw0rd</string>
+			<string>SchneiderElectricChina|P@ssw0rdChina</string>
 		</dict>
 		<key>dev</key>
 		<dict>
@@ -23,7 +23,7 @@
 		<key>test</key>
 		<dict>
 			<key>url</key>
-			<string>http://112.124.56.137/v1.4.0.22/Mobile/MobileApiHost/</string>
+			<string>http://112.124.56.137/v1.4.0.26/Mobile/MobileApiHost/</string>
 			<key>debug-user</key>
 			<string>SchneiderElectricChina|P@ssw0rdChina</string>
 		</dict>
@@ -36,7 +36,7 @@
 	<key>CurrentDataSource</key>
 	<dict>
 		<key>Debug</key>
-		<string>test</string>
+		<string>local</string>
 		<key>DailyBuild</key>
 		<string>test</string>
 		<key>InternalRelease</key>

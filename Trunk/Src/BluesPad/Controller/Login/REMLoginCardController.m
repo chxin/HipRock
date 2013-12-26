@@ -75,11 +75,10 @@
     
 #ifdef DEBUG
     NSString *debugUser = REMAppConfig.currentDataSource[@"debug-user"];
-    if(!REMIsNilOrNull(debugUser) && ![debugUser isEqualToString:@""] && [debugUser rangeOfString:@"-"].length>0){
-        NSArray *debugUserInfo = [debugUser componentsSeparatedByString:@"-"];
+    if(!REMIsNilOrNull(debugUser) && ![debugUser isEqualToString:@""] && [debugUser rangeOfString:@"|"].length>0){
+        NSArray *debugUserInfo = [debugUser componentsSeparatedByString:@"|"];
         self.userNameTextField.text = debugUserInfo[0];
         self.passwordTextField.text = debugUserInfo[1];
-    
     }
 #endif
     
