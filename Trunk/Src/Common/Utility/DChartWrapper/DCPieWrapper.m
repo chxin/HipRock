@@ -9,14 +9,12 @@
 #import "DCPieWrapper.h"
 @interface DCPieWrapper()
 @property (nonatomic,assign) int focusIndex;
-@property (nonatomic,strong) NSMutableArray* hiddenTargetsId;
 @end
 
 @implementation DCPieWrapper
 -(DCPieWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*)widgetSyntax style:(REMChartStyle*)style {
     self = [super initWithFrame:frame data:energyViewData widgetContext:widgetSyntax style:style];
     if (self && energyViewData.targetEnergyData.count != 0) {
-        self.hiddenTargetsId = [[NSMutableArray alloc]init];
         [self createView:frame data:energyViewData style:style];
     }
     return self;
@@ -41,10 +39,8 @@
     }
     DCPieSeries* series = [[DCPieSeries alloc]initWithEnergyData:series0Data];
     for(DCPieDataPoint* slice in series.datas) {
-        if (REMIsNilOrNull(slice.target.targetId)) continue;
-        if ([self.hiddenTargetsId containsObject:slice.target.targetId]) {
-            slice.hidden = YES;
-        }
+        if (REMIsNilOrNull(slice.target)) continue;
+        slice.hidden = [self isTargetHidden:slice.target];
     }
     _view = [[DCPieChartView alloc]initWithFrame:frame series:series];
     self.view.delegate = self;
@@ -94,13 +90,12 @@
 -(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
     if (seriesIndex >= self.view.series.datas.count) return;
     DCPieDataPoint* slice = self.view.series.datas[seriesIndex];
-    NSNumber* targetId = slice.target.targetId;
     [self.view setSlice:slice hidden:hidden];
-    if (REMIsNilOrNull(targetId)) return;
+    if (REMIsNilOrNull(slice.target)) return;
     if (hidden) {
-        [self.hiddenTargetsId addObject:targetId];
+        [self addHiddenTarget:slice.target];
     } else {
-        [self.hiddenTargetsId removeObject:targetId];
+        [self removeHiddenTarget:slice.target];
     }
 }
 

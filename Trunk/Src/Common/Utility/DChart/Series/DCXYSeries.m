@@ -88,20 +88,20 @@
     _visableYMin = yMin;
 }
 
--(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
-    // Nothing to do.
+-(void)setXAxis:(DCAxis *)xAxis {
+    _xAxis = xAxis;
+    if (!REMIsNilOrNull(self.xAxis)) {
+        [self.xAxis detachSeries:self];
+    }
+    [xAxis attachSeries:self];
 }
 
--(void)setHidden:(BOOL)hidden {
-    if (hidden == self.hidden) return;
-    if (hidden) {
-        self.yAxis.visableSeriesAmount--;
-        self.xAxis.visableSeriesAmount--;
-    } else {
-        self.yAxis.visableSeriesAmount++;
-        self.xAxis.visableSeriesAmount++;
+-(void)setYAxis:(DCAxis *)yAxis {
+    _yAxis = yAxis;
+    if (!REMIsNilOrNull(self.yAxis)) {
+        [self.yAxis detachSeries:self];
     }
-    _hidden = hidden;
+    [yAxis attachSeries:self];
 }
 
 @end

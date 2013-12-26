@@ -363,14 +363,15 @@
     if (seriesIndex >= self.view.seriesList.count) return;
     DCXYSeries* series = self.view.seriesList[seriesIndex];
     [self.view setSeries:series hidden:hidden];
-    NSNumber* targetId = series.target.targetId;
-    if (REMIsNilOrNull(targetId)) return;
+    if (REMIsNilOrNull(series.target)) return;
+    
     if (hidden) {
-        [self.hiddenSeriesTargetsId addObject:targetId];
+        [self addHiddenTarget:series.target];
     } else {
-        [self.hiddenSeriesTargetsId removeObject:targetId];
+        [self removeHiddenTarget:series.target];
     }
 }
+
 -(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
     _calenderType = syntax.calendarType;
 }
@@ -384,10 +385,8 @@
     
     [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:step];
     for(DCXYSeries* s in self.view.seriesList) {
-        if (REMIsNilOrNull(s.target.targetId)) continue;
-        if ([self.hiddenSeriesTargetsId containsObject:s.target.targetId]) {
-            s.hidden = YES;
-        }
+        if (REMIsNilOrNull(s.target)) continue;
+        s.hidden = [self isTargetHidden:s.target];
     }
     [superView addSubview:self.view];
     [self updateCalender];

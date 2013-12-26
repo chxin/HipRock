@@ -31,4 +31,9 @@ typedef enum _DChartStatus {
 -(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style;
 -(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden;
 -(NSUInteger)getVisableSeriesCount;
+
+-(void)addHiddenTarget:(REMEnergyTargetModel*)target;
+-(void)removeHiddenTarget:(REMEnergyTargetModel*)target;
+-(BOOL) isTargetHidden:(REMEnergyTargetModel*)target;
+
 @end
