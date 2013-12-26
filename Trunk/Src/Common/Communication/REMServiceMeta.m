@@ -20,7 +20,7 @@
 {
     NSString *serviceBaseUrl = REMAppConfig.currentDataSource[@"url"];
     
-    NSLog(@"SVCBASE:%@", serviceBaseUrl);
+    //NSLog(@"SVCBASE:%@", serviceBaseUrl);
     
     NSString *absoluteUrl = [serviceBaseUrl stringByAppendingString:relativeUrl];;
     
