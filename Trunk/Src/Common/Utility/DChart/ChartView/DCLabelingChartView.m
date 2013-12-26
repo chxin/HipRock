@@ -111,13 +111,13 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     } else {
         [self hideTooltip];
     }
-    if (touchLevel) {
-        self.indicatorLayer.hidden = NO;
-        CGFloat centerX = [self.labelBezierPathsCenterX[index] doubleValue];
-        self.indicatorLayer.frame = CGRectMake(centerX - self.style.focusSymbolIndicatorSize / 2, self.indicatorLayer.frame.origin.y, self.indicatorLayer.frame.size.width, self.indicatorLayer.frame.size.height);
-    } else {
-        self.indicatorLayer.hidden = YES;
-    }
+//    if (touchLevel) {
+//        self.indicatorLayer.hidden = NO;
+//        CGFloat centerX = [self.labelBezierPathsCenterX[index] doubleValue];
+//        self.indicatorLayer.frame = CGRectMake(centerX - self.style.focusSymbolIndicatorSize / 2, self.indicatorLayer.frame.origin.y, self.indicatorLayer.frame.size.width, self.indicatorLayer.frame.size.height);
+//    } else {
+//        self.indicatorLayer.hidden = YES;
+//    }
 }
 
 -(void)hideTooltip {
