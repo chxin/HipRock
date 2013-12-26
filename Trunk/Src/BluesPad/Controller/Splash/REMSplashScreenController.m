@@ -130,7 +130,7 @@
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
     
-//    [self oscarTest];
+    [self oscarTest];
     
     
     //decide where to go
@@ -279,9 +279,9 @@
     CGRect miniRect = CGRectMake(0, 0, 222, 108);
     CGRect maxiRect = CGRectMake(0, 0, 974, 605);
     
-    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
-    [self.view addSubview:pieWrapper.view];
-    self.plotSource = pieWrapper;
+//    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+//    [self.view addSubview:pieWrapper.view];
+//    self.plotSource = pieWrapper;
 //    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
 //    self.plotSource = columnWidget;
 //    
@@ -316,10 +316,11 @@
     [btn2 setTitleColor:[REMColor colorByHexString:@"#00ff48"] forState:UIControlStateSelected];
     [btn2 addTarget:self action:@selector(buttonPressed2:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn2];
-//    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
-//    self.plotSource = labelingWrapper;
-//    [labelingWrapper getView].backgroundColor = [UIColor whiteColor];
-//    [self.view addSubview:[labelingWrapper getView]];
+    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+    self.plotSource = labelingWrapper;
+    [labelingWrapper getView].backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:[labelingWrapper getView]];
+    labelingWrapper.delegate = self;
 }
 
 -(void)buttonPressed:(UIButton *)button {

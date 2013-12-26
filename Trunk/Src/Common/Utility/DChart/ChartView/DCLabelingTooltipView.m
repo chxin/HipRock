@@ -148,7 +148,7 @@
     //左上圆角
     [aPath addQuadCurveToPoint:CGPointMake(cornerRadius,0) controlPoint:CGPointMake(0,0)];
     [aPath closePath];
-    [aPath fill];
+//    [aPath fill];
     self.triangleLayer.path = aPath.CGPath;
 }
 
