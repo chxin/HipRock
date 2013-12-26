@@ -90,41 +90,6 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     } else {
         [self hideTooltip];
     }
-
-}
-
--(void)touchAt:(CGPoint)touchPoint {
-//    CGFloat tooltipHeight = 38;
-//    if (REMIsNilOrNull(self.tooltipView)) {
-//        self.tooltipView = [[DCLabelingTooltipView alloc]init];
-//        self.tooltipView.hidden = YES;
-//        self.tooltipView.fontName = self.style.labelingFontName;
-//        self.tooltipView.alpha = 0;
-//        self.tooltipView.height = tooltipHeight;
-//        [self addSubview:self.tooltipView];
-//    }
-//
-//    self.tooltipView.stageText = [self.series.stages[index] stageText];
-//    self.tooltipView.labelText = [self.series.stages[index] tooltipText];
-//    CGPoint iconCenter;
-//    [self.tooltipIconCentrePoints[index] getValue:&iconCenter];
-//    
-//    CGRect toFrame = CGRectMake(iconCenter.x - self.style.labelingTooltipViewToIconCenterLeft, iconCenter.y - self.style.labelingTooltipViewToIconCenterTop, [self.tooltipView getWidth], tooltipHeight);
-//    
-//    if (self.tooltipView.hidden) {
-//        self.tooltipView.hidden = NO;
-//        self.tooltipView.frame = toFrame;
-//        [UIView animateWithDuration:0.2 animations:^(void){
-//            self.tooltipView.alpha = 1;
-//            self.tooltipView.color = [self.series.stages[index] color];
-//        }];
-//    } else {
-//        [UIView animateWithDuration:0.2 animations:^(void){
-//            self.tooltipView.alpha = 1;
-//            self.tooltipView.frame = toFrame;
-//            self.tooltipView.color = [self.series.stages[index] color];
-//        }];
-//    }
 }
 
 -(void)hideTooltip {
