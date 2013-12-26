@@ -535,6 +535,7 @@
 		B40F011D1828DAB7009650FD /* REMWidgetRankingDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B40F011C1828DAB7009650FD /* REMWidgetRankingDelegator.m */; };
 		B40F01201828DAD5009650FD /* REMWidgetLabelingDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B40F011F1828DAD5009650FD /* REMWidgetLabelingDelegator.m */; };
 		B40F01231828DB84009650FD /* REMWidgetMonthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40F01221828DB84009650FD /* REMWidgetMonthPickerViewController.m */; };
+		B41027CB186BBC68002437E2 /* REMSettingAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B41027CA186BBC68002437E2 /* REMSettingAboutViewController.m */; };
 		B41249F01803ECF0009022C5 /* REMCustomerSwitchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */; };
 		B414C43E1855946900CB81B6 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = B414C43D1855946900CB81B6 /* Configuration.plist */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
@@ -1315,6 +1316,8 @@
 		B40F011F1828DAD5009650FD /* REMWidgetLabelingDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetLabelingDelegator.m; path = BizDelegator/REMWidgetLabelingDelegator.m; sourceTree = "<group>"; };
 		B40F01211828DB84009650FD /* REMWidgetMonthPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetMonthPickerViewController.h; sourceTree = "<group>"; };
 		B40F01221828DB84009650FD /* REMWidgetMonthPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetMonthPickerViewController.m; sourceTree = "<group>"; };
+		B41027C9186BBC68002437E2 /* REMSettingAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingAboutViewController.h; path = Controller/Setting/REMSettingAboutViewController.h; sourceTree = "<group>"; };
+		B41027CA186BBC68002437E2 /* REMSettingAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSettingAboutViewController.m; path = Controller/Setting/REMSettingAboutViewController.m; sourceTree = "<group>"; };
 		B41249EE1803ECF0009022C5 /* REMCustomerSwitchHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMCustomerSwitchHelper.h; path = Biz/REMCustomerSwitchHelper.h; sourceTree = "<group>"; };
 		B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMCustomerSwitchHelper.m; path = Biz/REMCustomerSwitchHelper.m; sourceTree = "<group>"; };
 		B414C43D1855946900CB81B6 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Configuration.plist; path = Resource/Configuration.plist; sourceTree = "<group>"; };
@@ -3071,6 +3074,8 @@
 				B47ACC2F17F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m */,
 				B47ACC3117F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.h */,
 				B47ACC3217F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m */,
+				B41027C9186BBC68002437E2 /* REMSettingAboutViewController.h */,
+				B41027CA186BBC68002437E2 /* REMSettingAboutViewController.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -4073,6 +4078,7 @@
 				7A0288F317C20CC500709111 /* User.m in Sources */,
 				7A0288F417C20CC500709111 /* WeiboAccount.m in Sources */,
 				EF1C5ADD183E23DA002A9AAD /* _DCLineSymbolsLayer.m in Sources */,
+				B41027CB186BBC68002437E2 /* REMSettingAboutViewController.m in Sources */,
 				7A0288F517C20CC500709111 /* WeiboAuthentication.m in Sources */,
 				EFD946FE1839DCBB00E9EC50 /* _DCCoordinateSystem.m in Sources */,
 				7A0288F817C20CC500709111 /* ImageResourceLoader.m in Sources */,
