@@ -21,6 +21,8 @@
 //@property (nonatomic,strong) NSMutableArray* stageShapeLayers;
 @property (nonatomic,strong) NSMutableArray* stageBezierPaths;
 @property (nonatomic,strong) NSMutableArray* labelBezierPaths;
+@property (nonatomic,strong) NSMutableArray* labelBezierPathsCenterX;
+@property (nonatomic,strong) CAShapeLayer* indicatorLayer;
 
 @end
 
@@ -42,6 +44,10 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
 //        self.stageShapeLayers = [[NSMutableArray alloc]init];
         self.stageBezierPaths = [[NSMutableArray alloc]init];
         self.labelBezierPaths = [[NSMutableArray alloc]init];
+        self.indicatorLayer = [[CAShapeLayer alloc]init];
+        [self.layer addSublayer:self.indicatorLayer];
+        self.indicatorLayer.hidden = YES;
+        self.labelBezierPathsCenterX = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -106,7 +112,11 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         [self hideTooltip];
     }
     if (touchLevel) {
+        self.indicatorLayer.hidden = NO;
+        CGFloat centerX = [self.labelBezierPathsCenterX[index] doubleValue];
+        self.indicatorLayer.frame = CGRectMake(centerX - self.style.focusSymbolIndicatorSize / 2, self.indicatorLayer.frame.origin.y, self.indicatorLayer.frame.size.width, self.indicatorLayer.frame.size.height);
     } else {
+        self.indicatorLayer.hidden = YES;
     }
 }
 
@@ -151,19 +161,24 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         CGFloat baseY = basePoint.y;
         CGFloat theWidth = style.labelingStageMinWidth + i * stageWidthStep;
         
-        UIBezierPath* aPath = [UIBezierPath bezierPath];
-        [aPath moveToPoint:CGPointMake(baseX, baseY+radius)];
-        [aPath addQuadCurveToPoint:CGPointMake(baseX+radius, baseY) controlPoint:CGPointMake(baseX, baseY)];
-        [aPath addLineToPoint:CGPointMake(baseX + theWidth - stageHeight / 2-radius, baseY)];
-        [aPath addQuadCurveToPoint:CGPointMake(baseX + theWidth - stageHeight / 2+radius, baseY+radius) controlPoint:CGPointMake(baseX + theWidth - stageHeight / 2, baseY)];
-        [aPath addLineToPoint:CGPointMake(baseX + theWidth - radius, baseY + stageHeight / 2 - radius)];
-        [aPath addQuadCurveToPoint:CGPointMake(baseX + theWidth - radius, baseY + stageHeight / 2 + radius) controlPoint:CGPointMake(baseX + theWidth, baseY + stageHeight / 2)];
-        [aPath addLineToPoint:CGPointMake(baseX + theWidth - stageHeight / 2 + radius, baseY + stageHeight - radius)];
-        [aPath addQuadCurveToPoint:CGPointMake(baseX + theWidth - stageHeight / 2 - radius, baseY + stageHeight) controlPoint:CGPointMake(baseX + theWidth - stageHeight / 2, baseY + stageHeight)];
-        [aPath addLineToPoint:CGPointMake(baseX+radius, baseY + stageHeight)];
-        [aPath addQuadCurveToPoint:CGPointMake(baseX, baseY+stageHeight-radius) controlPoint:CGPointMake(baseX, baseY+stageHeight)];
-        [aPath closePath];
-        [self.stageBezierPaths addObject:aPath];
+        UIBezierPath* aPath = nil;
+        if (self.stageBezierPaths.count == i) {
+            aPath = [UIBezierPath bezierPath];
+            [aPath moveToPoint:CGPointMake(baseX, baseY+radius)];
+            [aPath addQuadCurveToPoint:CGPointMake(baseX+radius, baseY) controlPoint:CGPointMake(baseX, baseY)];
+            [aPath addLineToPoint:CGPointMake(baseX + theWidth - stageHeight / 2-radius, baseY)];
+            [aPath addQuadCurveToPoint:CGPointMake(baseX + theWidth - stageHeight / 2+radius, baseY+radius) controlPoint:CGPointMake(baseX + theWidth - stageHeight / 2, baseY)];
+            [aPath addLineToPoint:CGPointMake(baseX + theWidth - radius, baseY + stageHeight / 2 - radius)];
+            [aPath addQuadCurveToPoint:CGPointMake(baseX + theWidth - radius, baseY + stageHeight / 2 + radius) controlPoint:CGPointMake(baseX + theWidth, baseY + stageHeight / 2)];
+            [aPath addLineToPoint:CGPointMake(baseX + theWidth - stageHeight / 2 + radius, baseY + stageHeight - radius)];
+            [aPath addQuadCurveToPoint:CGPointMake(baseX + theWidth - stageHeight / 2 - radius, baseY + stageHeight) controlPoint:CGPointMake(baseX + theWidth - stageHeight / 2, baseY + stageHeight)];
+            [aPath addLineToPoint:CGPointMake(baseX+radius, baseY + stageHeight)];
+            [aPath addQuadCurveToPoint:CGPointMake(baseX, baseY+stageHeight-radius) controlPoint:CGPointMake(baseX, baseY+stageHeight)];
+            [aPath closePath];
+            [self.stageBezierPaths addObject:aPath];
+        } else {
+            aPath = self.stageBezierPaths[i];
+        }
         
         CGContextSetFillColorWithColor(ctx, [self.series.stages[i] color].CGColor);
         CGContextAddPath(ctx, aPath.CGPath);
@@ -194,20 +209,26 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         CGFloat baseX = hPadding+style.labelingStageMaxWidth+style.labelingStageToLineMargin+style.labelingLineWidth+(style.labelingLabelWidth+style.labelingLabelToLineMargin*2+style.labelingLineWidth)*i+style.labelingLabelToLineMargin;
         CGFloat baseY = style.plotPaddingTop+style.labelingStageToBorderMargin+stageHeight*((double)label.stage+0.5)+stageVMargin*(double)label.stage-labelHeight/2;
         CGFloat labelRightBound = baseX + labelWidth;
-        
-        UIBezierPath* aPath = [UIBezierPath bezierPath];
-        [aPath moveToPoint:CGPointMake(baseX+radius, baseY + labelHeight / 2+radius)];
-        [aPath addQuadCurveToPoint:CGPointMake(baseX  + radius, baseY + labelHeight / 2-radius) controlPoint:CGPointMake(baseX, baseY + labelHeight / 2)];
-        [aPath addLineToPoint:CGPointMake(baseX + labelHeight / 2-radius, baseY+radius)];
-        [aPath addQuadCurveToPoint:CGPointMake(baseX + labelHeight / 2 +radius, baseY) controlPoint:CGPointMake(baseX + labelHeight / 2, baseY)];
-        [aPath addLineToPoint:CGPointMake(labelRightBound-radius, baseY)];
-        [aPath addQuadCurveToPoint:CGPointMake(labelRightBound, baseY+radius) controlPoint:CGPointMake(labelRightBound, baseY)];
-        [aPath addLineToPoint:CGPointMake(labelRightBound, baseY + labelHeight - radius)];
-        [aPath addQuadCurveToPoint:CGPointMake(labelRightBound-radius, baseY + labelHeight) controlPoint:CGPointMake(labelRightBound, baseY + labelHeight)];
-        [aPath addLineToPoint:CGPointMake(baseX + labelHeight / 2 + radius, baseY + labelHeight)];
-        [aPath addQuadCurveToPoint:CGPointMake(baseX + labelHeight / 2-radius, baseY + labelHeight-radius) controlPoint:CGPointMake(baseX + labelHeight / 2, baseY + labelHeight)];
-        [aPath closePath];
-        [self.labelBezierPaths addObject:aPath];
+        UIBezierPath* aPath = nil;
+        if (self.labelBezierPaths.count == i) {
+            aPath = [UIBezierPath bezierPath];
+            
+            [aPath moveToPoint:CGPointMake(baseX+radius, baseY + labelHeight / 2+radius)];
+            [aPath addQuadCurveToPoint:CGPointMake(baseX  + radius, baseY + labelHeight / 2-radius) controlPoint:CGPointMake(baseX, baseY + labelHeight / 2)];
+            [aPath addLineToPoint:CGPointMake(baseX + labelHeight / 2-radius, baseY+radius)];
+            [aPath addQuadCurveToPoint:CGPointMake(baseX + labelHeight / 2 +radius, baseY) controlPoint:CGPointMake(baseX + labelHeight / 2, baseY)];
+            [aPath addLineToPoint:CGPointMake(labelRightBound-radius, baseY)];
+            [aPath addQuadCurveToPoint:CGPointMake(labelRightBound, baseY+radius) controlPoint:CGPointMake(labelRightBound, baseY)];
+            [aPath addLineToPoint:CGPointMake(labelRightBound, baseY + labelHeight - radius)];
+            [aPath addQuadCurveToPoint:CGPointMake(labelRightBound-radius, baseY + labelHeight) controlPoint:CGPointMake(labelRightBound, baseY + labelHeight)];
+            [aPath addLineToPoint:CGPointMake(baseX + labelHeight / 2 + radius, baseY + labelHeight)];
+            [aPath addQuadCurveToPoint:CGPointMake(baseX + labelHeight / 2-radius, baseY + labelHeight-radius) controlPoint:CGPointMake(baseX + labelHeight / 2, baseY + labelHeight)];
+            [aPath closePath];
+            [self.labelBezierPaths addObject:aPath];
+            [self.labelBezierPathsCenterX addObject:@(baseX + labelWidth / 2)];
+        } else {
+            aPath = self.labelBezierPaths[i];
+        }
         // Label色块
         CGContextSetFillColorWithColor(ctx, label.color.CGColor);
         CGContextAddPath(ctx, aPath.CGPath);
@@ -218,6 +239,15 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         [self drawText:label.stageText inContext:ctx font:labelFont rect:CGRectMake(baseX+style.labelingLabelWidth-stageTextSize.width-style.labelingLabelFontRightMargin, baseY+style.labelingLabelFontTopMargin, stageTextSize.width, stageTextSize.height) alignment:NSTextAlignmentRight color:[UIColor whiteColor]];
         [self drawText:label.labelText inContext:ctx font:labelValueFont rect:CGRectMake(baseX, baseY+labelHeight+style.labelingLabelValueFontTopMarginToLabel, style.labelingLabelWidth, style.labelingLabelValueFontSize) alignment:NSTextAlignmentRight color:style.labelingLabelValueFontColor];
     }
+    
+//    self.indicatorLayer
+    UIBezierPath* indicatorPath = [UIBezierPath bezierPath];
+    self.indicatorLayer.fillColor = self.style.focusSymbolLineColor.CGColor;
+    [indicatorPath moveToPoint:CGPointMake(0, 0)];
+    [indicatorPath addLineToPoint:CGPointMake(self.style.focusSymbolIndicatorSize, 0)];
+    [indicatorPath addLineToPoint:CGPointMake(self.style.focusSymbolIndicatorSize/2, self.style.focusSymbolIndicatorSize/2)];
+    [indicatorPath closePath];
+    self.indicatorLayer.path = indicatorPath.CGPath;
 }
 
 -(void)drawLineAt:(CGFloat)x inContext:(CGContextRef)ctx {

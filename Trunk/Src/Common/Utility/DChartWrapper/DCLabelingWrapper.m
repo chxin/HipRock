@@ -59,7 +59,7 @@
         if (REMIsNilOrNull(targetEnergyData.energyData) || targetEnergyData.energyData.count == 0) continue;
         REMEnergyData* energyData = targetEnergyData.energyData[0];
         if (REMIsNilOrNull(energyData.dataValue)) continue;
-        NSUInteger i = targetEnergyData.target.targetId.unsignedIntegerValue;
+        NSUInteger i = targetEnergyData.target.targetId.unsignedIntegerValue - 1;
         DCLabelingLabel* label = [[DCLabelingLabel alloc]init];
         label.name = targetEnergyData.target.name;
         label.color = [stages[i] color];
