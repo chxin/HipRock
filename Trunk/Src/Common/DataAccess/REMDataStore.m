@@ -49,9 +49,18 @@ static NSDictionary *serviceMap = nil;
 {
     [self access:succcess error:error progress:nil];
 }
-- (void)access:(REMDataAccessSuccessBlock)succcess error:(REMDataAccessErrorBlock)error progress:(REMDataAccessProgressBlock)progress
+- (void)access:(REMDataAccessSuccessBlock)success error:(REMDataAccessErrorBlock)error progress:(REMDataAccessProgressBlock)progress
 {
+    NetworkStatus netStaus = [REMNetworkHelper checkCurrentNetworkStatus];
     
+    //if network is not ok, get from cache
+    if(netStaus == NotReachable){
+        [self accessLocal:success error:error];
+    }
+    //if network is ok, get from network and always update cache data
+    else{
+        [self accessRemote:success error:error progress:progress];
+    }
 }
 
 
