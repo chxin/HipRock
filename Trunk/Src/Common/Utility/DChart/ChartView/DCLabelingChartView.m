@@ -18,9 +18,8 @@
 @property (nonatomic, strong) NSMutableArray* tooltipIconCentrePoints;
 @property (nonatomic,strong) UITapGestureRecognizer* tapGsRec;
 @property (nonatomic,strong) DCLabelingTooltipView* tooltipView;
-//@property (nonatomic,strong) NSMutableArray* stageShapeLayers;
-@property (nonatomic,strong) NSMutableArray* stageBezierPaths;
-@property (nonatomic,strong) NSMutableArray* labelBezierPaths;
+@property (nonatomic,strong) NSMutableArray* stageShapeLayers;
+@property (nonatomic,strong) NSMutableArray* bezierPaths;
 
 @end
 
@@ -40,8 +39,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         self.tooltipIconCentrePoints = [[NSMutableArray alloc]init];
         self.backgroundColor = [UIColor clearColor];
 //        self.stageShapeLayers = [[NSMutableArray alloc]init];
-        self.stageBezierPaths = [[NSMutableArray alloc]init];
-        self.labelBezierPaths = [[NSMutableArray alloc]init];
+        self.bezierPaths = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -72,8 +70,8 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     // Detect whether tap on icon.
     CGPoint touchPoint = [gesture locationInView:self];
     int index = INT32_MIN;
-    for (int i = 0; i < self.stageBezierPaths.count; i++) {
-        UIBezierPath* p = self.stageBezierPaths[i];
+    for (int i = 0; i < self.bezierPaths.count; i++) {
+        UIBezierPath* p = self.bezierPaths[i];
         if ([p containsPoint:touchPoint]) {
             index = i;
             break;
@@ -149,7 +147,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         [aPath addLineToPoint:CGPointMake(baseX+radius, baseY + stageHeight)];
         [aPath addQuadCurveToPoint:CGPointMake(baseX, baseY+stageHeight-radius) controlPoint:CGPointMake(baseX, baseY+stageHeight)];
         [aPath closePath];
-        [self.stageBezierPaths addObject:aPath];
+        [self.bezierPaths addObject:aPath];
 //        shape.path = aPath.CGPath;
 //        shape.hidden = YES;
         
@@ -195,34 +193,20 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         CGFloat baseX = hPadding+style.labelingStageMaxWidth+style.labelingStageToLineMargin+style.labelingLineWidth+(style.labelingLabelWidth+style.labelingLabelToLineMargin*2+style.labelingLineWidth)*i+style.labelingLabelToLineMargin;
         CGFloat baseY = style.plotPaddingTop+style.labelingStageToBorderMargin+stageHeight*((double)label.stage+0.5)+stageVMargin*(double)label.stage-labelHeight/2;
         CGFloat labelRightBound = baseX + labelWidth;
-        
-        UIBezierPath* aPath = [UIBezierPath bezierPath];
-        [aPath moveToPoint:CGPointMake(baseX+radius, baseY + labelHeight / 2+radius)];
-        [aPath addQuadCurveToPoint:CGPointMake(baseX  + radius, baseY + labelHeight / 2-radius) controlPoint:CGPointMake(baseX, baseY + labelHeight / 2)];
-        [aPath addLineToPoint:CGPointMake(baseX + labelHeight / 2-radius, baseY+radius)];
-        [aPath addQuadCurveToPoint:CGPointMake(baseX + labelHeight / 2 +radius, baseY) controlPoint:CGPointMake(baseX + labelHeight / 2, baseY)];
-        [aPath addLineToPoint:CGPointMake(labelRightBound-radius, baseY)];
-        [aPath addQuadCurveToPoint:CGPointMake(labelRightBound, baseY+radius) controlPoint:CGPointMake(labelRightBound, baseY)];
-        [aPath addLineToPoint:CGPointMake(labelRightBound, baseY + labelHeight - radius)];
-        [aPath addQuadCurveToPoint:CGPointMake(labelRightBound-radius, baseY + labelHeight) controlPoint:CGPointMake(labelRightBound, baseY + labelHeight)];
-        [aPath addLineToPoint:CGPointMake(baseX + labelHeight / 2 + radius, baseY + labelHeight)];
-        [aPath addQuadCurveToPoint:CGPointMake(baseX + labelHeight / 2-radius, baseY + labelHeight-radius) controlPoint:CGPointMake(baseX + labelHeight / 2, baseY + labelHeight)];
-        [aPath closePath];
-        [self.labelBezierPaths addObject:aPath];
         // Label色块
         CGContextSetFillColorWithColor(ctx, label.color.CGColor);
-        CGPathRef path = aPath.CGPath;
-//        CGPathMoveToPoint(path, NULL, baseX+radius, baseY + labelHeight / 2+radius);
-//        CGPathAddQuadCurveToPoint(path, NULL, baseX, baseY + labelHeight / 2, baseX  + radius, baseY + labelHeight / 2-radius);
-//        CGPathAddLineToPoint(path, NULL, baseX + labelHeight / 2-radius, baseY+radius);
-//        CGPathAddQuadCurveToPoint(path, NULL, baseX + labelHeight / 2, baseY, baseX + labelHeight / 2 +radius, baseY);
-//        CGPathAddLineToPoint(path, NULL, labelRightBound-radius, baseY);
-//        CGPathAddQuadCurveToPoint(path, NULL, labelRightBound, baseY, labelRightBound, baseY+radius);
-//        CGPathAddLineToPoint(path, NULL, labelRightBound, baseY + labelHeight - radius);
-//        CGPathAddQuadCurveToPoint(path, NULL, labelRightBound, baseY + labelHeight, labelRightBound-radius, baseY + labelHeight);
-//        CGPathAddLineToPoint(path, NULL, baseX + labelHeight / 2 + radius, baseY + labelHeight);
-//        CGPathAddQuadCurveToPoint(path, NULL, baseX + labelHeight / 2, baseY + labelHeight, baseX + labelHeight / 2-radius, baseY + labelHeight-radius);
-//        CGPathCloseSubpath(path);
+        CGMutablePathRef path = CGPathCreateMutable();
+        CGPathMoveToPoint(path, NULL, baseX+radius, baseY + labelHeight / 2+radius);
+        CGPathAddQuadCurveToPoint(path, NULL, baseX, baseY + labelHeight / 2, baseX  + radius, baseY + labelHeight / 2-radius);
+        CGPathAddLineToPoint(path, NULL, baseX + labelHeight / 2-radius, baseY+radius);
+        CGPathAddQuadCurveToPoint(path, NULL, baseX + labelHeight / 2, baseY, baseX + labelHeight / 2 +radius, baseY);
+        CGPathAddLineToPoint(path, NULL, labelRightBound-radius, baseY);
+        CGPathAddQuadCurveToPoint(path, NULL, labelRightBound, baseY, labelRightBound, baseY+radius);
+        CGPathAddLineToPoint(path, NULL, labelRightBound, baseY + labelHeight - radius);
+        CGPathAddQuadCurveToPoint(path, NULL, labelRightBound, baseY + labelHeight, labelRightBound-radius, baseY + labelHeight);
+        CGPathAddLineToPoint(path, NULL, baseX + labelHeight / 2 + radius, baseY + labelHeight);
+        CGPathAddQuadCurveToPoint(path, NULL, baseX + labelHeight / 2, baseY + labelHeight, baseX + labelHeight / 2-radius, baseY + labelHeight-radius);
+        CGPathCloseSubpath(path);
         CGContextAddPath(ctx, path);
         CGContextDrawPath(ctx, kCGPathFill);
         CGPathRelease(path);
