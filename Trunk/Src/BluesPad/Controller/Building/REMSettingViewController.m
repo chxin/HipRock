@@ -156,7 +156,7 @@
     if(indexPath.section==1 && indexPath.row==0){
         [self performSegueWithIdentifier:@"settingCustomerDetailSegue" sender:self];
     }
-    else if(indexPath.section==4 && indexPath.row==0){
+    else if(indexPath.section==3 && indexPath.row==0){
         [self performSegueWithIdentifier:@"settingAboutSegue" sender:self];
     }
 }
@@ -269,7 +269,9 @@
     else if(indexPath.section == 1 && indexPath.row==0){
         [self performSegueWithIdentifier:@"settingCustomerSelectionSegue" sender:self];
     }
-    
+    else if(indexPath.section==3 && indexPath.row==0){
+        [self performSegueWithIdentifier:@"settingAboutSegue" sender:self];
+    }
 }
 
 
