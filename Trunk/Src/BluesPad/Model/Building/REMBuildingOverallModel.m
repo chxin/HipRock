@@ -61,6 +61,18 @@
     self.isQualified = dictionary[@"IsQualified"];
     
     self.electricityUsageThisMonth = [[REMCommodityUsageModel alloc] initWithDictionary:dictionary[@"ElectricUsageThisMonth"]];
+    
+    NSArray *widgetRelationArray = dictionary[@"WidgetRelation"];
+    if (widgetRelationArray!=nil && [widgetRelationArray isEqual:[NSNull null]]==NO) {
+        NSMutableArray *widgetRelationList=[[NSMutableArray alloc]initWithCapacity:widgetRelationArray.count];
+        
+        for (NSDictionary *relation in widgetRelationList) {
+            REMBuildingCoverWidgetRelationModel *obj = [[REMBuildingCoverWidgetRelationModel alloc]initWithDictionary:relation];
+            [widgetRelationList addObject:obj];
+        }
+        self.widgetRelationArray=widgetRelationList;
+    }
+
 }
 
 +(int)indexOfBuilding:(REMBuildingModel *)building inBuildingOverallArray:(NSArray *)array
