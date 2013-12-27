@@ -568,6 +568,9 @@
 		B445AECF177C0046002D2A59 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */; };
 		B445AED1177C0052002D2A59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AED0177C0052002D2A59 /* CoreGraphics.framework */; };
 		B445AEE2177C04E4002D2A59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AED0177C0052002D2A59 /* CoreGraphics.framework */; };
+		B44F63AA186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B44F63A9186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.m */; };
+		B44F63AD186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44F63AC186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.m */; };
+		B44F63B0186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44F63AF186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.m */; };
 		B4547960184DABF700D3441B /* UIView+FlipTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = B454795F184DABF700D3441B /* UIView+FlipTransition.m */; };
 		B4577EBF184C1886003C00CF /* REMNumberHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4577EBE184C1886003C00CF /* REMNumberHelper.m */; };
 		B4577EC2184C48D2003C00CF /* Share_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4577EC0184C48D2003C00CF /* Share_normal.png */; };
@@ -1361,6 +1364,12 @@
 		B445AEB1177BFAE8002D2A59 /* REMLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLog.m; path = Common/Log/REMLog.m; sourceTree = "<group>"; };
 		B445AEBA177BFE66002D2A59 /* CommonTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B445AED0177C0052002D2A59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		B44F63A8186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingCoverWidgetRelationModel.h; sourceTree = "<group>"; };
+		B44F63A9186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingCoverWidgetRelationModel.m; sourceTree = "<group>"; };
+		B44F63AB186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingCoverWidgetViewController.h; sourceTree = "<group>"; };
+		B44F63AC186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingCoverWidgetViewController.m; sourceTree = "<group>"; };
+		B44F63AE186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetBuildingCoverViewController.h; sourceTree = "<group>"; };
+		B44F63AF186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetBuildingCoverViewController.m; sourceTree = "<group>"; };
 		B454795E184DABF700D3441B /* UIView+FlipTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FlipTransition.h"; sourceTree = "<group>"; };
 		B454795F184DABF700D3441B /* UIView+FlipTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FlipTransition.m"; sourceTree = "<group>"; };
 		B4577EBD184C1886003C00CF /* REMNumberHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMNumberHelper.h; path = Common/Utility/REMNumberHelper.h; sourceTree = "<group>"; };
@@ -2035,6 +2044,8 @@
 				B4A0FCD717C6057E00C7AD56 /* REMAirQualityModel.m */,
 				7A9557BB17C7374700249CED /* REMAirQualityDataModel.h */,
 				7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */,
+				B44F63A8186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.h */,
+				B44F63A9186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.m */,
 			);
 			name = Building;
 			path = Model/Building;
@@ -2107,6 +2118,8 @@
 				B408794F1830D0BA004042C1 /* REMBuildingAirQualityViewController.m */,
 				B4D50A3F183313C7007C93A4 /* REMBuildingChartViewController.h */,
 				B4D50A40183313C7007C93A4 /* REMBuildingChartViewController.m */,
+				B44F63AB186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.h */,
+				B44F63AC186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.m */,
 			);
 			name = Building;
 			path = Controller/Building;
@@ -2167,6 +2180,8 @@
 				B4FFB0C718191A15004C5404 /* REMRelativeDateViewController.m */,
 				B40F01211828DB84009650FD /* REMWidgetMonthPickerViewController.h */,
 				B40F01221828DB84009650FD /* REMWidgetMonthPickerViewController.m */,
+				B44F63AE186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.h */,
+				B44F63AF186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.m */,
 			);
 			name = Widget;
 			path = Controller/Widget;
@@ -3935,6 +3950,7 @@
 				7A57EF0E1851A9FF00838F8B /* REMGalleryTableView.m in Sources */,
 				B4198EAE178410D300B50475 /* REMLogManager.m in Sources */,
 				B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */,
+				B44F63B0186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.m in Sources */,
 				EF13626F184EFC6F00BEF648 /* _DCLine.m in Sources */,
 				B4A87539185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m in Sources */,
 				EFE8698C185EF3B700DC0007 /* DCLabelingLabel.m in Sources */,
@@ -3950,6 +3966,7 @@
 				B47ACC2A17F80AAA00989B2C /* REMSettingCustomerSelectionViewController.m in Sources */,
 				7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */,
 				7A3DDCDA1786C05B008A1033 /* REMServiceAgent.m in Sources */,
+				B44F63AD186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.m in Sources */,
 				7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */,
 				7ABD915D184DB784006AF935 /* REMLoginCustomerTableViewController.m in Sources */,
 				B48ED3EA178EA1740032CD72 /* REMTimeHelper.m in Sources */,
@@ -4000,6 +4017,7 @@
 				7A13C19517F40809007E6AA9 /* REMMainNavigationController.m in Sources */,
 				7A153CA417AA497C00413D3C /* REMLoginCarouselController.m in Sources */,
 				EFD947061839DCBB00E9EC50 /* _DCHGridlineLayer.m in Sources */,
+				B44F63AA186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.m in Sources */,
 				7A153CA717AA497C00413D3C /* REMLoginCardController.m in Sources */,
 				7A153CAA17AA497C00413D3C /* REMSplashScreenController.m in Sources */,
 				7AB9B3A4183DF8FF00779C5E /* REMTextIndicatorFormator.m in Sources */,

@@ -79,6 +79,35 @@
             </objects>
             <point key="canvasLocation" x="-1730" y="-329"/>
         </scene>
+        <!--Building Cover Widget View Controller-->
+        <scene sceneID="vwu-Yt-Iux">
+            <objects>
+                <tableViewController id="pmL-vf-YKl" customClass="REMBuildingCoverWidgetViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7fp-fN-Qu1">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="DjD-yx-ySN">
+                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DjD-yx-ySN" id="32e-gc-VwP">
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pmL-vf-YKl" id="vEJ-KU-6Tq"/>
+                            <outlet property="delegate" destination="pmL-vf-YKl" id="ZYk-ll-A6Y"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FIH-hF-Vsy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="864" y="-2197"/>
+        </scene>
         <!--Building View Controller-->
         <scene sceneID="XIG-df-ONL">
             <objects>
@@ -115,6 +144,9 @@
                         <segue destination="T2C-Tf-bPc" kind="custom" identifier="maxWidgetSegue" customClass="REMMaxWidgetSegue" id="VF8-aY-jAm"/>
                         <segue destination="at3-P1-D6R" kind="unwind" identifier="buildingToGallerySegue" unwindAction="unwindSegueToGallery:" id="7g6-Qk-QsX"/>
                         <segue destination="at3-P1-D6R" kind="unwind" identifier="buildingToMapSegue" unwindAction="unwindSegueToMap:" id="wUk-sf-qJM"/>
+                        <segue destination="pmL-vf-YKl" kind="popover" identifier="buildingCoverWidgetSegue" id="1jn-ep-yOc">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujE-me-aPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -177,6 +209,9 @@
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                         <segue destination="NpH-nl-7td" kind="popover" id="ce5-LQ-Qg6">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
+                        <segue destination="0Gt-be-FfQ" kind="popover" identifier="widgetBuildingCoverSegue" id="1t3-ld-sMP">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                     </connections>
@@ -664,6 +699,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ai5-vc-Ijo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3308" y="-1166"/>
+        </scene>
+        <!--Widget Building Cover View Controller-->
+        <scene sceneID="iIx-hv-aX6">
+            <objects>
+                <tableViewController id="0Gt-be-FfQ" customClass="REMWidgetBuildingCoverViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Tjq-av-kSv">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kyq-hm-yxE">
+                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kyq-hm-yxE" id="R4X-UP-8oh">
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="0Gt-be-FfQ" id="lPc-jQ-5T8"/>
+                            <outlet property="delegate" destination="0Gt-be-FfQ" id="EIX-SV-GkB"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M7a-4Q-2K9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3308" y="-57"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="206-mw-I0A">

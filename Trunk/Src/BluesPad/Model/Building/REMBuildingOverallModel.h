@@ -11,6 +11,7 @@
 #import "REMCommonHeaders.h"
 #import "REMAirQualityModel.h"
 #import "REMCommodityUsageModel.h"
+#import "REMBuildingCoverWidgetRelationModel.h"
 
 @interface REMBuildingOverallModel : REMJSONObject
 
@@ -21,6 +22,8 @@
 @property (nonatomic,strong) NSArray *commodityArray;
 @property (nonatomic,strong) NSNumber *isQualified;
 @property (nonatomic,strong) REMCommodityUsageModel *electricityUsageThisMonth;
+@property (nonatomic,strong) NSArray *widgetRelationArray;
+
 
 +(int)indexOfBuilding:(REMBuildingModel *)building inBuildingOverallArray:(NSArray *)array;
 

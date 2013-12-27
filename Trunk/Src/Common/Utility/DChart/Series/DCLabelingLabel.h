@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "REMTargetEnergyData.h"
 
 @interface DCLabelingLabel : NSObject
 @property (nonatomic, strong) NSString* name;
@@ -14,4 +15,6 @@
 @property (nonatomic, strong) NSString* stageText;
 @property (nonatomic, strong) NSString* labelText;
 @property (nonatomic, assign) NSUInteger stage;
+@property (nonatomic, weak) REMEnergyData* energyData;
+@property (nonatomic, weak) REMEnergyTargetModel* target;
 @end
