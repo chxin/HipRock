@@ -1,26 +1,24 @@
 /*------------------------------Summary-------------------------------------
  * Product Name : EMOP iOS Application Software
- * File Name	: REMBuildingCoverWidgetViewController.m
+ * File Name	: REMBuildingWidgetChartViewController.m
  * Date Created : tantan on 12/27/13.
  * Description  : IOS Application software based on Energy Management Open Platform
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
-#import "REMBuildingCoverWidgetViewController.h"
+#import "REMBuildingWidgetChartViewController.h"
 
-@interface REMBuildingCoverWidgetViewController ()
+@interface REMBuildingWidgetChartViewController ()
 
 @end
 
-@implementation REMBuildingCoverWidgetViewController
+@implementation REMBuildingWidgetChartViewController
 
-
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
+        // Custom initialization
     }
-    
     return self;
 }
 
@@ -29,8 +27,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
-
-
 
 - (void)didReceiveMemoryWarning
 {

@@ -6,7 +6,7 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMBuildingCommodityViewController.h"
-#import "REMBuildingChartViewController.h"
+#import "REMBuildingChartContainerViewController.h"
 #import "REMBuildingAverageChartViewController.h"
 #import "REMBuildingTrendChartViewController.h"
 #import "REMBuildingDataViewController.h"
@@ -250,6 +250,7 @@
     
 }
 
+
 - (void)initChartContainer
 {
     int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;
@@ -268,7 +269,7 @@
     
     
     if (self.childViewControllers.count<2) {
-        REMBuildingChartViewController *controller1=[[REMBuildingChartViewController alloc] init];
+        REMBuildingChartContainerViewController *controller1=[[REMBuildingChartContainerViewController alloc] init];
         controller1.viewFrame=CGRectMake(0, marginTop+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, chartContainerHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
         //NSLog(@"view frame:%@",NSStringFromCGRect(controller1.viewFrame));
         controller1.chartHandlerClass=[REMBuildingAverageViewController class];
@@ -294,7 +295,7 @@
     [self.view addSubview:titleLabel2];
 
     if (self.childViewControllers.count<2) {
-        REMBuildingChartViewController *controller2=[[REMBuildingChartViewController alloc] init];
+        REMBuildingChartContainerViewController *controller2=[[REMBuildingChartContainerViewController alloc] init];
         controller2.viewFrame=CGRectMake(0, marginTop1+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, secondChartHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
         //NSLog(@"view frame:%@",NSStringFromCGRect(controller2.viewFrame));
         controller2.chartHandlerClass=[REMBuildingTrendChartViewController class];
@@ -310,38 +311,11 @@
 - (void)showChart{
     
     for (int i=0; i<self.childViewControllers.count; ++i) {
-        REMBuildingChartViewController *controller=self.childViewControllers[i];
+        REMBuildingChartContainerViewController *controller=self.childViewControllers[i];
         if(controller.isViewLoaded==NO){
             [self.view addSubview:controller.view];
         }
     }
-    
-    /*
-    
-    REMBuildingChartContainerView *averageContainer = self.chartViewArray[0];
-    
-    if(averageContainer.controller==nil){
-        REMBuildingAverageChartHandler *averageController = [[REMBuildingAverageChartHandler alloc]initWithViewFrame:CGRectMake(0, 0, averageContainer.frame.size.width, averageContainer.chartContainer.frame.size.height)];
-        averageContainer.controller=averageController;
-    }
-    
-    
-    [averageContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil complete:^(BOOL success){
-        [self sucessRequest];
-    }];
-    
-    
-    REMBuildingChartContainerView *trendContainer = self.chartViewArray[1];
-    
-    if (trendContainer.controller==nil) {
-        REMBuildingTrendChartHandler  *trendController = [[REMBuildingTrendChartHandler alloc]initWithViewFrame:CGRectMake(0, 0, trendContainer.frame.size.width, trendContainer.chartContainer.frame.size.height)];
-        trendContainer.controller=trendController;
-        
-    }
-    
-    [trendContainer requireChartDataWithBuildingId:buildingId withCommodityId:commodityId withEnergyData:nil complete:^(BOOL success){
-        [self sucessRequest];
-    }];*/
 
 }
 

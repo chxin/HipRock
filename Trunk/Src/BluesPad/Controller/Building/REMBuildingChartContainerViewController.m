@@ -5,20 +5,20 @@
  * Description  : IOS Application software based on Energy Management Open Platform
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
-#import "REMBuildingChartViewController.h"
+#import "REMBuildingChartContainerViewController.h"
 #import "REMBuildingTrendChartViewController.h"
 #import "REMBuildingAverageChartViewController.h"
 #import "REMBuildingAirQualityChartViewController.h"
 #import "REMBuildingCommodityViewController.h"
 #import "REMBuildingChartContainerView2.h"
 
-@interface REMBuildingChartViewController ()
+@interface REMBuildingChartContainerViewController ()
 
 //@property (nonatomic,strong) REMEnergyViewData *energyData;
 //@property (nonatomic,strong) REMBuildingChartHandler *chartHandler;
 @end
 
-@implementation REMBuildingChartViewController
+@implementation REMBuildingChartContainerViewController
 
 
 -(void)loadView{
@@ -36,6 +36,16 @@
     [self initChartContainer];
 }
 
+- (void)requestData:(REMBuildingChartBaseViewController *)handler
+{
+    [handler loadData:[self.buildingId longLongValue]  :[self.commodityId longLongValue] :nil :^(id data,REMBusinessErrorInfo *error){
+        if(error==nil){
+            REMBuildingCommodityViewController *parent=(REMBuildingCommodityViewController *)self.parentViewController;
+            [parent loadChartComplete];
+        }
+    }];
+
+}
 
 - (void)initChartContainer
 {
@@ -50,13 +60,9 @@
         [self.view addSubview:handler.view];
         //handler.view.layer.borderColor=[UIColor redColor].CGColor;
         //handler.view.layer.borderWidth=1;
-        [handler loadData:[self.buildingId longLongValue]  :[self.commodityId longLongValue] :nil :^(id data,REMBusinessErrorInfo *error){
-            if(error==nil){
-                REMBuildingCommodityViewController *parent=(REMBuildingCommodityViewController *)self.parentViewController;
-                [parent loadChartComplete];
-            }
-        }];
+        [self requestData:handler];
         [self addChildViewController:handler];
+        
         
     }
     else{
