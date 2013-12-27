@@ -12,6 +12,7 @@
 #import "DCUtility.h"
 #import "DCLabelingLabel.h"
 #import "DCLabelingTooltipView.h"
+#import "REMColor.h"
 
 @interface DCLabelingChartView()
 
@@ -23,7 +24,7 @@
 @property (nonatomic,strong) NSMutableArray* labelBezierPaths;
 @property (nonatomic,strong) NSMutableArray* labelBezierPathsCenterX;
 @property (nonatomic,strong) CAShapeLayer* indicatorLayer;
-
+@property (nonatomic,assign) int focusLabelIndex;
 @end
 
 CGFloat const kDCLabelingStageVerticalMargin = 0.5;
@@ -48,6 +49,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         [self.layer addSublayer:self.indicatorLayer];
         self.indicatorLayer.hidden = YES;
         self.labelBezierPathsCenterX = [[NSMutableArray alloc]init];
+        self.focusLabelIndex = INT32_MIN;
     }
     return self;
 }
@@ -79,11 +81,12 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     CGPoint touchPoint = [gesture locationInView:self];
     BOOL touchStage = NO;
     BOOL touchLevel = NO;
-    int index = INT32_MIN;
+    int stageIndex = INT32_MIN;
+    int levelIndex = INT32_MIN;
     for (int i = 0; i < self.stageBezierPaths.count; i++) {
         UIBezierPath* p = self.stageBezierPaths[i];
         if ([p containsPoint:touchPoint]) {
-            index = i;
+            stageIndex = i;
             touchStage = YES;
             break;
         }
@@ -92,7 +95,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         for (int  i = 0; i < self.labelBezierPaths.count; i++) {
             UIBezierPath* p = self.labelBezierPaths[i];
             if ([p containsPoint:touchPoint]) {
-                index = i;
+                levelIndex = i;
                 touchLevel = YES;
                 break;
             }
@@ -105,7 +108,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
             [self addSubview:self.tooltipView];
         }
         self.tooltipView.benchmarkText = self.series.benchmarkText;
-        self.tooltipView.labelText = [self.series.stages[index] tooltipText];
+        self.tooltipView.labelText = [self.series.stages[stageIndex] tooltipText];
 
         [self.tooltipView showAt:touchPoint];
     } else {
@@ -113,10 +116,17 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     }
 //    if (touchLevel) {
 //        self.indicatorLayer.hidden = NO;
-//        CGFloat centerX = [self.labelBezierPathsCenterX[index] doubleValue];
+//        CGFloat centerX = [self.labelBezierPathsCenterX[levelIndex] doubleValue];
 //        self.indicatorLayer.frame = CGRectMake(centerX - self.style.focusSymbolIndicatorSize / 2, self.indicatorLayer.frame.origin.y, self.indicatorLayer.frame.size.width, self.indicatorLayer.frame.size.height);
 //    } else {
 //        self.indicatorLayer.hidden = YES;
+//    }
+//    if (!REMIsNilOrNull(self.delegate) && [self.delegate respondsToSelector:@selector(focusOn:)]) {
+//        if (levelIndex != self.focusLabelIndex) {
+//            self.focusLabelIndex = levelIndex;
+//            [self.delegate focusOn:levelIndex == INT32_MIN ? nil : self.series.labels[levelIndex]];
+//            [self setNeedsDisplay];
+//        }
 //    }
 }
 
@@ -230,7 +240,11 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
             aPath = self.labelBezierPaths[i];
         }
         // Label色块
-        CGContextSetFillColorWithColor(ctx, label.color.CGColor);
+        if (self.focusLabelIndex == INT32_MIN || i == self.focusLabelIndex) {
+            CGContextSetFillColorWithColor(ctx, label.color.CGColor);
+        } else {
+            CGContextSetFillColorWithColor(ctx, [REMColor makeTransparent:kDCFocusPointAlpha withColor:label.color].CGColor);
+        }
         CGContextAddPath(ctx, aPath.CGPath);
         CGContextDrawPath(ctx, kCGPathFill);
         
@@ -264,7 +278,6 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     CGContextSetLineWidth(ctx, self.style.labelingLineWidth);
     CGContextSetStrokeColorWithColor(ctx, self.style.labelingLineColor.CGColor);
     CGContextStrokePath(ctx);
-
 }
 
 -(void)drawText:(NSString*)text inContext:(CGContextRef)ctx font:(UIFont*)font rect:(CGRect)rect alignment:(NSTextAlignment)alignment color:(UIColor*)color {

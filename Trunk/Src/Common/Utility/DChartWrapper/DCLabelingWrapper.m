@@ -61,6 +61,8 @@
         if (REMIsNilOrNull(energyData.dataValue)) continue;
         NSUInteger i = targetEnergyData.target.targetId.unsignedIntegerValue - 1;
         DCLabelingLabel* label = [[DCLabelingLabel alloc]init];
+        label.target = targetEnergyData.target;
+        label.energyData = energyData;
         label.name = targetEnergyData.target.name;
         label.color = [stages[i] color];
         label.stageText = [stages[i] stageText];
@@ -88,5 +90,11 @@
     
     self.view = [self createView:frame];
     [superView addSubview:self.view];
+}
+
+-(void)focusOn:(DCLabelingLabel *)point {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:)]) {
+        [((id<REMChartLabelingDelegate>)(self.delegate)) highlightPoint:point];
+    }
 }
 @end

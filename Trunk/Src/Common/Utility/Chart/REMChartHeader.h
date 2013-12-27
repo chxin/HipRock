@@ -12,6 +12,7 @@
 #import "REMBuildingConstants.h"
 #import "REMEnergyTargetModel.h"
 #import "REMColor.h"
+#import "DCLabelingLabel.h"
 
 typedef enum _DCLineType {
     DCLineTypeDefault = 0,
@@ -24,7 +25,7 @@ typedef enum _DCLineType {
 
 @protocol REMChartLabelingDelegate <REMChartDelegate>
 
--(void)highlightPoint:(id)point;
+-(void)highlightPoint:(DCLabelingLabel*)point;
 
 @end
 
