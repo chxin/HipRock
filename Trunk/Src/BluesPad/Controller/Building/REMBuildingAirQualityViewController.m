@@ -8,7 +8,7 @@
 #import "REMBuildingAirQualityViewController.h"
 #import "REMBuildingAirQualityView.h"
 #import "REMBuildingDataViewController.h"
-#import "REMBuildingChartViewController.h"
+#import "REMBuildingChartContainerViewController.h"
 #import "REMBuildingAirQualityChartViewController.h"
 
 @interface REMBuildingAirQualityViewController ()
@@ -239,7 +239,7 @@
     
     
     if (self.childViewControllers.count<1) {
-        REMBuildingChartViewController *controller1=[[REMBuildingChartViewController alloc] init];
+        REMBuildingChartContainerViewController *controller1=[[REMBuildingChartContainerViewController alloc] init];
         controller1.viewFrame=CGRectMake(0, marginTop+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, chartContainerHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
         //NSLog(@"view frame:%@",NSStringFromCGRect(controller1.viewFrame));
         controller1.chartHandlerClass=[REMBuildingAirQualityChartViewController class];
@@ -252,7 +252,7 @@
 - (void)showChart{
     
     for (int i=0; i<self.childViewControllers.count; ++i) {
-        REMBuildingChartViewController *controller=self.childViewControllers[i];
+        REMBuildingChartContainerViewController *controller=self.childViewControllers[i];
         if(controller.isViewLoaded==NO){
             [self.view addSubview:controller.view];
         }
