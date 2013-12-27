@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DCLabelingLabel.h"
 
 @protocol DCLabelingChartDelegate <NSObject>
+-(void)focusOn:(DCLabelingLabel*)point;
 @end
