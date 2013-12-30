@@ -90,6 +90,9 @@
         self.requestUrl=REMDSBuildingTimeRangeData;
         self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
     }
+    for (int i = 0; i < 6; i++) {
+        [self.datasource addObject:[NSNull null]];
+    }
     return self;
 }
 
@@ -171,9 +174,11 @@
     
     REMBuildingTimeRangeDataModel* seriesArray = [self.datasource objectAtIndex:currentSourceIndex];
     int pointCount = 0;
-    for (int i = 0; i < seriesArray.timeRangeData.targetEnergyData.count; i++) {
-        REMTargetEnergyData* s = seriesArray.timeRangeData.targetEnergyData[i];
-        pointCount+= s.energyData.count;
+    if (!REMIsNilOrNull(seriesArray)) {
+        for (int i = 0; i < seriesArray.timeRangeData.targetEnergyData.count; i++) {
+            REMTargetEnergyData* s = seriesArray.timeRangeData.targetEnergyData[i];
+            pointCount+= s.energyData.count;
+        }
     }
     if (pointCount == 0) {
         myView.chartView.hidden = YES;
@@ -291,14 +296,7 @@
 
 - (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error {
     self.loadDataSuccess = NO;
-    if (self.datasource.count != 6) {
-        for (int i = 0; i < 6; i++) {
-            NSMutableDictionary* series = [[NSMutableDictionary alloc] init];
-            [series setValue:[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1] forKey:@"color"];
-            [self.datasource addObject:series];
-        }
-    }
-    
+
     REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
     [myView.thisMonthButton setOn:YES];
     [self intervalChanged:myView.thisMonthButton];

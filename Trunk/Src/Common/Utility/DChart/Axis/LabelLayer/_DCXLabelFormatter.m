@@ -16,6 +16,7 @@
         _startDate = startDate;
         _interval = interval;
         _step = step;
+        _stepSupplementary = YES;
     }
     return self;
 }
@@ -27,14 +28,14 @@
         NSString* format = nil;
         if (self.step == REMEnergyStepHour) {
             date = [self.startDate dateByAddingTimeInterval:xVal*3600];
-            if ([REMTimeHelper getHour:date] < self.interval) {
+            if ([REMTimeHelper getHour:date] < self.interval && self.stepSupplementary) {
                 format = NSLocalizedString(@"Chart_X_Axis_Format_DayHour", REMEmptyString);
             } else {
                 format = NSLocalizedString(@"Chart_X_Axis_Format_Hour", REMEmptyString);
             }
         } else if (self.step == REMEnergyStepDay) {
             date = [self.startDate dateByAddingTimeInterval:xVal*86400];
-            if ([REMTimeHelper getDay:date] <= self.interval) {
+            if ([REMTimeHelper getDay:date] <= self.interval && self.stepSupplementary) {
                 format = NSLocalizedString(@"Chart_X_Axis_Format_MonthDay", REMEmptyString);
             } else {
                 format = NSLocalizedString(@"Chart_X_Axis_Format_Day", REMEmptyString);
@@ -44,7 +45,7 @@
             format = NSLocalizedString(@"Chart_X_Axis_Format_MonthDay", REMEmptyString);
         } else if (self.step == REMEnergyStepMonth) {
             date = [REMTimeHelper addMonthToDate:self.startDate month:xVal];
-            if ([REMTimeHelper getMonth:date] <= self.interval) {
+            if ([REMTimeHelper getMonth:date] <= self.interval && self.stepSupplementary) {
                 format = NSLocalizedString(@"Chart_X_Axis_Format_YearMonth", REMEmptyString);
             } else {
                 format = NSLocalizedString(@"Chart_X_Axis_Format_Month", REMEmptyString);

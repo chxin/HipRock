@@ -6,10 +6,10 @@
 //
 //
 
-#import "DCBuildingTrendWrapper.h"
+#import "REMBuildingTrendWrapper.h"
 #import "_DCXLabelFormatter.h"
 
-@implementation DCBuildingTrendWrapper
+@implementation REMBuildingTrendWrapper
 @synthesize isStacked = _isStacked;
 @synthesize processors = _processors;
 @synthesize sharedProcessor = _sharedProcessor;
@@ -69,14 +69,25 @@
     }
     self.sharedProcessor.baseDate = baseDateOfX;
     DCRange* range = [[DCRange alloc]initWithLocation:0 length:length];
-    
-    return @{ @"globalRange": range, @"beginRange": range, @"xformatter": [[_DCXLabelFormatter alloc]initWithStartDate:baseDateOfX dataStep:step interval:1]};
+    _DCXLabelFormatter* formatter = [[_DCXLabelFormatter alloc]initWithStartDate:baseDateOfX dataStep:step interval:1];
+    formatter.stepSupplementary = NO;
+    return @{ @"globalRange": range, @"beginRange": range, @"xformatter": formatter};
 }
 
 -(void)customizeSeries:(DCLineSeries *)series seriesIndex:(int)index chartStyle:(REMChartStyle *)style {
     [super customizeSeries:series seriesIndex:index chartStyle:style];
     series.color = [self getSeriesColorByIndex:index];
     series.symbolType = DCLineSymbolTypeRound;
+}
+
+-(void)customizeView:(DCXYChartView *)view {
+    view.backgroundColor = [UIColor grayColor];
+    if (self.sharedProcessor.step == REMEnergyStepMonth || self.sharedProcessor.step == REMEnergyStepDay) {
+        view.graphContext.pointAlignToTick = NO;
+        view.graphContext.xLabelAlignToTick = NO;
+    } else {
+        
+    }
 }
 
 -(UIColor*)getSeriesColorByIndex:(int)index {

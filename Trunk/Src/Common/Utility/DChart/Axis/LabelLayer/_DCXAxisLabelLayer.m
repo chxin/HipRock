@@ -25,6 +25,7 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor].CGColor;
         self.visableLabelLayers = [[NSMutableDictionary alloc]init];
+        self.masksToBounds = NO;
     }
     return self;
 }

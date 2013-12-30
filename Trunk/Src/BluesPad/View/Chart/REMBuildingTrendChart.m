@@ -10,7 +10,7 @@
 #import "REMToggleButtonGroup.h"
 #import "REMChartHeader.h"
 #import "REMLocalizeKeys.h"
-#import "DCBuildingTrendWrapper.h"
+#import "REMBuildingTrendWrapper.h"
 
 const int buttonHeight = 30;
 const int buttonWidth = 70;
@@ -18,7 +18,7 @@ const int buttonMargin = 5;
 const int buttonFirstMargin = -20;
 
 @interface REMBuildingTrendChart()
-@property (nonatomic, strong) DCBuildingTrendWrapper* wrapper;
+@property (nonatomic, strong) REMBuildingTrendWrapper* wrapper;
 @end
 
 @implementation REMBuildingTrendChart
@@ -70,7 +70,7 @@ const int buttonFirstMargin = -20;
     syntax.step = @((int)step);
     REMChartStyle* style = [REMChartStyle getCoverStyle];
     if (self.wrapper == nil) {
-        self.wrapper = [[DCBuildingTrendWrapper alloc]initWithFrame:CGRectMake(0, buttonHeight, self.frame.size.width, self.frame.size.height - buttonHeight - 20 - kBuildingTrendChartLegendHeight) data:buildData.timeRangeData widgetContext:syntax style:style];
+        self.wrapper = [[REMBuildingTrendWrapper alloc]initWithFrame:CGRectMake(0, buttonHeight, self.frame.size.width, self.frame.size.height - buttonHeight - 20 - kBuildingTrendChartLegendHeight) data:buildData.timeRangeData widgetContext:syntax style:style];
         [self addSubview:self.wrapper.view];
     } else {
         self.wrapper.timeRangeType = timeRangeType;

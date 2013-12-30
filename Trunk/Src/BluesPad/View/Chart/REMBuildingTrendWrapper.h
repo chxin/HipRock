@@ -8,6 +8,6 @@
 
 #import "DCLineWrapper.h"
 
-@interface DCBuildingTrendWrapper : DCLineWrapper
+@interface REMBuildingTrendWrapper : DCLineWrapper
 @property (nonatomic, assign) REMRelativeTimeRangeType timeRangeType;
 @end
