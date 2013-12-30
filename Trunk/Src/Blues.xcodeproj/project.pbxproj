@@ -2214,14 +2214,11 @@
 		7A1A853617B4B257004D7167 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
-				7A1A854017B4B2E9004D7167 /* REMBuildingTrendChart.h */,
-				7A1A854117B4B2E9004D7167 /* REMBuildingTrendChart.m */,
+				EF19D8C81871643400807B3F /* BuildingTrend */,
 				7A1A854317B4B302004D7167 /* REMBuildingAverageChart.h */,
 				7A1A854417B4B303004D7167 /* REMBuildingAverageChart.m */,
 				7A9557BE17C73AD200249CED /* REMBuildingAirQualityChart.h */,
 				7A9557BF17C73AD200249CED /* REMBuildingAirQualityChart.m */,
-				EFD6C5BE186D58F5009E7B86 /* REMBuildingTrendWrapper.h */,
-				EFD6C5BF186D58F5009E7B86 /* REMBuildingTrendWrapper.m */,
 			);
 			name = Chart;
 			path = View/Chart;
@@ -3188,6 +3185,17 @@
 				B420CE0E183CB59D000C7352 /* REMEnergyCostElectricitySearcher.m */,
 			);
 			name = Searcher;
+			sourceTree = "<group>";
+		};
+		EF19D8C81871643400807B3F /* BuildingTrend */ = {
+			isa = PBXGroup;
+			children = (
+				7A1A854017B4B2E9004D7167 /* REMBuildingTrendChart.h */,
+				7A1A854117B4B2E9004D7167 /* REMBuildingTrendChart.m */,
+				EFD6C5BE186D58F5009E7B86 /* REMBuildingTrendWrapper.h */,
+				EFD6C5BF186D58F5009E7B86 /* REMBuildingTrendWrapper.m */,
+			);
+			name = BuildingTrend;
 			sourceTree = "<group>";
 		};
 		EF7CF5F3185D82D0000BA4AE /* Pie */ = {
