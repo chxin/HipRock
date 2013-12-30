@@ -49,6 +49,7 @@
 @property (nonatomic, strong) UIColor* backgroundBandFontColor;
 
 @property (nonatomic, assign) BOOL blockReboundAnimation;   // YES的时候禁止回弹动画
+@property (nonatomic, assign) BOOL xAxisLabelClipToBounds;
 
 - (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange stacked:(BOOL)stacked;
 

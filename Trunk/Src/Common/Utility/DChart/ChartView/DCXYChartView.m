@@ -205,6 +205,7 @@
 
 -(void)drawXLabelLayer {
     self._xLabelLayer = [[_DCXAxisLabelLayer alloc]initWithContext:self.graphContext];
+    self._xLabelLayer.labelClipToBounds = self.xAxisLabelClipToBounds;
     self._xLabelLayer.axis = self.xAxis;
     self._xLabelLayer.font = self.xAxis.labelFont;
     self._xLabelLayer.fontColor = self.xAxis.labelColor;

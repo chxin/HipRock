@@ -89,6 +89,7 @@
     view.plotPaddingTop = self.style.plotPaddingTop;
     view.plotPaddingBottom = self.style.plotPaddingBottom;
     view.graphContext.hGridlineAmount = self.style.horizentalGridLineAmount;
+    view.xAxisLabelClipToBounds = self.style.xLabelClipToBounds;
     view.delegate = self;
     self.graphContext = view.graphContext;
     if (step == REMEnergyStepHour || step == REMEnergyStepWeek) {

@@ -27,6 +27,7 @@
 @property (nonatomic, strong) UIColor* xTextColor;
 @property (nonatomic, strong) UIFont* xTextFont;
 @property (nonatomic, assign) CGFloat xLabelToLine;
+@property (nonatomic, assign) BOOL xLabelClipToBounds;
 // y轴格式
 @property (nonatomic, strong) UIColor* yLineColor;
 @property (nonatomic, assign) CGFloat yLineWidth;
