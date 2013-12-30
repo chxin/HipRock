@@ -192,10 +192,9 @@
     myView.legendView.hidden = NO;
     REMEnergyStep step = currentSourceIndex < 2 ? REMEnergyStepHour : (currentSourceIndex < 4 ? REMEnergyStepDay : REMEnergyStepMonth);
     [myView redrawWith:self.datasource[currentSourceIndex] step:step timeRangeType:timeRange];
-    
-    CGFloat legendLeft = 0;
+    CGFloat legendLeft = 57;
+    CGFloat labelDistance = 18;
     CGFloat legendTop = 0;
-    CGFloat labelDistance = 0;
     for (DCXYSeries* series in myView.chartView.seriesList) {
         CGFloat fontSize = 14;
         // Draw legend
