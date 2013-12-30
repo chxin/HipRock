@@ -10,16 +10,22 @@
 #import "REMToggleButtonGroup.h"
 #import "REMChartHeader.h"
 #import "REMLocalizeKeys.h"
+#import "DCBuildingTrendWrapper.h"
+
+const int buttonHeight = 30;
+const int buttonWidth = 70;
+const int buttonMargin = 5;
+const int buttonFirstMargin = -20;
+
+@interface REMBuildingTrendChart()
+@property (nonatomic, strong) DCBuildingTrendWrapper* wrapper;
+@end
 
 @implementation REMBuildingTrendChart
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    const int buttonHeight = 30;
-    const int buttonWidth = 70;
-    const int buttonMargin = 5;
-    const int buttonFirstMargin = -20;
     if (self) {
         self.toggleGroup = [[REMToggleButtonGroup alloc]init];
         self.todayButton = [self makeButton:@"今天" rect:CGRectMake(buttonFirstMargin, 0, buttonWidth,buttonHeight)];
@@ -28,16 +34,6 @@
         self.lastMonthButton = [self makeButton:@"上月" rect:CGRectMake((buttonMargin + buttonWidth)*3+buttonFirstMargin,0,buttonWidth,buttonHeight)];
         self.thisYearButton = [self makeButton:@"今年" rect:CGRectMake((buttonMargin + buttonWidth)*4+buttonFirstMargin,0,buttonWidth,buttonHeight)];
         self.lastYearButton = [self makeButton:@"去年" rect:CGRectMake((buttonMargin + buttonWidth)*5+buttonFirstMargin,0,buttonWidth,buttonHeight)];
-        
-        CPTGraphHostingView *hostView = [[CPTGraphHostingView alloc]initWithFrame:CGRectMake(0, buttonHeight, self.frame.size.width, self.frame.size.height - buttonHeight - 20 - kBuildingTrendChartLegendHeight)];
-//        hostView.backgroundColor = [UIColor redColor];
-        CPTXYGraph *graph=[[CPTXYGraph alloc]initWithFrame:frame];
-        hostView.hostedGraph=graph;
-//        graph.backgroundColor = [UIColor greenColor].CGColor;
-        self.hostView = hostView;
-        self.hostView.hidden = YES;
-        
-        [self addSubview:self.hostView];
         
         NSString *noDataText = REMLocalizedString(kLNBuildingChart_NoData);
         CGFloat fontSize = 36;
@@ -66,6 +62,21 @@
     [self addSubview:btn];
     [self.toggleGroup registerButton:btn];
     return btn;
+}
+
+-(void)redrawWith:(REMBuildingTimeRangeDataModel*)buildData step:(REMEnergyStep)step timeRangeType:(REMRelativeTimeRangeType)timeRangeType {
+    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
+    syntax.relativeDateType = timeRangeType;
+    syntax.step = @((int)step);
+    REMChartStyle* style = [REMChartStyle getCoverStyle];
+    if (self.wrapper == nil) {
+        self.wrapper = [[DCBuildingTrendWrapper alloc]initWithFrame:CGRectMake(0, buttonHeight, self.frame.size.width, self.frame.size.height - buttonHeight - 20 - kBuildingTrendChartLegendHeight) data:buildData.timeRangeData widgetContext:syntax style:style];
+        [self addSubview:self.wrapper.view];
+    } else {
+        self.wrapper.timeRangeType = timeRangeType;
+        [self.wrapper redraw:buildData.timeRangeData step:step];
+    }
+    self.chartView = self.wrapper.view;
 }
 
 

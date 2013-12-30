@@ -23,6 +23,9 @@
 @property (nonatomic, readonly) DCXYChartView* view;
 @property (nonatomic, readonly) NSString* defaultSeriesClass;
 @property (nonatomic, assign) REMCalendarType calenderType;
+@property (nonatomic, assign, readonly) BOOL isStacked;
+@property (nonatomic, strong, readonly) NSMutableArray* processors;
+@property (nonatomic, strong, readonly) REMTrendChartDataProcessor* sharedProcessor;
 
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style;
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step;

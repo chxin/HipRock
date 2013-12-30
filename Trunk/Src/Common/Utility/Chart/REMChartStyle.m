@@ -10,6 +10,44 @@
 
 @implementation REMChartStyle
 
++(REMChartStyle*)getCoverStyle {
+    REMChartStyle* style = [[REMChartStyle alloc]init];
+    style.userInteraction = NO;
+    style.animationDuration = 0.05;
+    style.xLineColor = [UIColor colorWithWhite:1 alpha:0.6];
+    style.xLineWidth = 1.0;
+    style.xGridlineWidth = style.xLineWidth;
+    style.xGridlineColor = style.xLineColor;
+    style.xGridlineStyle = DCLineTypeShortDashed;
+    style.yLineColor = style.xLineColor;
+    style.yLineWidth = style.xLineWidth;
+    style.yGridlineWidth = style.xLineWidth;
+    style.yGridlineColor = style.xLineColor;
+    style.yGridlineStyle = style.xGridlineStyle;
+    style.horizentalGridLineAmount = 5;
+    style.symbolSize = 12;
+    style.xLabelToLine = 8;
+    style.yLabelToLine = 8;
+    
+    style.yAxisTitleToTopLabel = 10;
+    style.yAxisTitleFontSize = 9;
+    style.yAxisTitleColor = style.yTextColor = style.xTextColor = [UIColor whiteColor];
+    style.yTextFont = style.xTextFont = [UIFont systemFontOfSize:11.0f];
+    
+    
+    style.plotPaddingBottom = 0;
+    style.plotPaddingTop = 0;
+    style.plotPaddingLeft = 0;
+    style.plotPaddingRight = 0;
+    
+    style.benchmarkColor = [REMColor colorByHexString:@"#f15e31"];
+    
+    
+    style.playBeginAnimation = YES;
+    
+    return style;
+}
+
 +(REMChartStyle*)getMaximizedStyle {
     REMChartStyle* style = [[REMChartStyle alloc]init];
     style.userInteraction = YES;

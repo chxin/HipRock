@@ -11,11 +11,8 @@
 #import "DCDataPoint.h"
 
 @interface DCTrendWrapper()
-@property (nonatomic, strong) NSMutableArray* processors;
-@property (nonatomic, strong) REMTrendChartDataProcessor* sharedProcessor;
 @property (nonatomic, weak) DCContext* graphContext;
 @property (nonatomic, strong) DCRange* myStableRange;
-@property (nonatomic, assign) BOOL isStacked;
 @property (nonatomic) NSString* xtypeOfWidget;
 @property (nonatomic,strong) NSMutableArray* hiddenSeriesTargetsId;
 @end
@@ -33,7 +30,7 @@
         self.hiddenSeriesTargetsId = [[NSMutableArray alloc]init];
         
         NSDictionary* dic = [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
-        
+        self.myStableRange = dic[@"beginRange"];
         [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:widgetSyntax.step.integerValue];
         [self updateCalender];
     }
@@ -75,7 +72,7 @@
     if (self.style.xGridlineWidth > 0) {
         view.vGridlineColor = self.style.xGridlineColor;
         view.vGridlineWidth = self.style.xGridlineWidth;
-        view.hGridlineStyle = self.style.xGridlineStyle;
+        view.vGridlineStyle = self.style.xGridlineStyle;
     }
     
     view.focusSymbolLineColor = self.style.focusSymbolLineColor;
@@ -197,10 +194,10 @@
 }
 
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
-    self.isStacked = ([self.xtypeOfWidget rangeOfString:@"stack"].location != NSNotFound);
+    _isStacked = ([self.xtypeOfWidget rangeOfString:@"stack"].location != NSNotFound);
     
     NSUInteger seriesAmount = [self getSeriesAmount];
-    self.processors = [[NSMutableArray alloc]init];
+    _processors = [[NSMutableArray alloc]init];
 //    BOOL allSeriesUserGlobalTime = ([self.xtypeOfWidget rangeOfString : @"multitimespan"].location == NSNotFound);
     
     NSDate* baseDateOfX = nil;
@@ -208,7 +205,7 @@
     NSDate* globalEndDate = nil;
     NSDate* beginningStart = nil;
     NSDate* beginningEnd = nil;
-    self.sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
+    _sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
     self.sharedProcessor.step = step;
     
 //    if (allSeriesUserGlobalTime) {
@@ -279,7 +276,6 @@
     if (endPoint < startPoint) endPoint = startPoint;
     DCRange* beginRange = [[DCRange alloc]initWithLocation:startPoint length:endPoint-startPoint];
     DCRange* globalRange = [[DCRange alloc]initWithLocation:globalStart length:globalLength];
-    self.myStableRange = beginRange;
     return @{ @"globalRange": globalRange, @"beginRange": beginRange, @"xformatter": [[_DCXLabelFormatter alloc]initWithStartDate:baseDateOfX dataStep:step interval:1]};
 }
 
@@ -383,6 +379,7 @@
     
     [self.view removeFromSuperview];
     
+    self.myStableRange = dic[@"beginRange"];
     [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:step];
     for(DCXYSeries* s in self.view.seriesList) {
         if (REMIsNilOrNull(s.target)) continue;

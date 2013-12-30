@@ -672,6 +672,7 @@
 		EF96300617C610A200BBC7DA /* REMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMSettingViewController.m */; };
 		EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97DDDA17C20B5700A0374E /* REMToggleButton.m */; };
 		EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9F28B017CB54DE00E775ED /* REMStatusBar.m */; };
+		EFD6C5C0186D58F5009E7B86 /* DCBuildingTrendWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD6C5BF186D58F5009E7B86 /* DCBuildingTrendWrapper.m */; };
 		EFD946FC1839DCBB00E9EC50 /* _DCLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D11839DCBB00E9EC50 /* _DCLayer.m */; };
 		EFD946FE1839DCBB00E9EC50 /* _DCCoordinateSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D61839DCBB00E9EC50 /* _DCCoordinateSystem.m */; };
 		EFD946FF1839DCBB00E9EC50 /* DCAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D81839DCBB00E9EC50 /* DCAxis.m */; };
@@ -1531,6 +1532,8 @@
 		EF97DDDA17C20B5700A0374E /* REMToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButton.m; sourceTree = "<group>"; };
 		EF9F28AF17CB54DD00E775ED /* REMStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMStatusBar.h; sourceTree = "<group>"; };
 		EF9F28B017CB54DE00E775ED /* REMStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMStatusBar.m; sourceTree = "<group>"; };
+		EFD6C5BE186D58F5009E7B86 /* DCBuildingTrendWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCBuildingTrendWrapper.h; sourceTree = "<group>"; };
+		EFD6C5BF186D58F5009E7B86 /* DCBuildingTrendWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCBuildingTrendWrapper.m; sourceTree = "<group>"; };
 		EFD946D01839DCBB00E9EC50 /* _DCLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLayer.h; path = Common/Utility/DChart/_DCLayer.h; sourceTree = "<group>"; };
 		EFD946D11839DCBB00E9EC50 /* _DCLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLayer.m; path = Common/Utility/DChart/_DCLayer.m; sourceTree = "<group>"; };
 		EFD946D51839DCBB00E9EC50 /* _DCCoordinateSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCCoordinateSystem.h; path = ../Axis/_DCCoordinateSystem.h; sourceTree = "<group>"; };
@@ -2197,6 +2200,8 @@
 				7A1A854417B4B303004D7167 /* REMBuildingAverageChart.m */,
 				7A9557BE17C73AD200249CED /* REMBuildingAirQualityChart.h */,
 				7A9557BF17C73AD200249CED /* REMBuildingAirQualityChart.m */,
+				EFD6C5BE186D58F5009E7B86 /* DCBuildingTrendWrapper.h */,
+				EFD6C5BF186D58F5009E7B86 /* DCBuildingTrendWrapper.m */,
 			);
 			name = Chart;
 			path = View/Chart;
@@ -4046,6 +4051,7 @@
 				7A1A855417B4BB5D004D7167 /* REMBuildingTrendChartViewController.m in Sources */,
 				7A1A855717B4E278004D7167 /* REMAverageUsageDataModel.m in Sources */,
 				7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */,
+				EFD6C5C0186D58F5009E7B86 /* DCBuildingTrendWrapper.m in Sources */,
 				7A7B2111183CABB000C14248 /* REMRatioLegendFormator.m in Sources */,
 				EFD946FF1839DCBB00E9EC50 /* DCAxis.m in Sources */,
 				B4E815E1182770B700FB9BC5 /* REMWidgetEnergyDelegator.m in Sources */,

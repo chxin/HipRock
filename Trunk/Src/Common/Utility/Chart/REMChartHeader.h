@@ -17,7 +17,8 @@
 typedef enum _DCLineType {
     DCLineTypeDefault = 0,
     DCLineTypeDotted = 1,
-    DCLineTypeDashed = 2
+    DCLineTypeDashed = 2,
+    DCLineTypeShortDashed = 3
 }DCLineType;
 
 @protocol REMChartDelegate <NSObject>
