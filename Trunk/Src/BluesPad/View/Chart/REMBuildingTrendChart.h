@@ -13,6 +13,8 @@
 #import "REMBuildingOverallModel.h"
 #import "REMToggleButton.h"
 #import "REMToggleButtonGroup.h"
+#import "DCXYChartView.h"
+#import "REMBuildingTimeRangeDataModel.h"
 
 @interface REMBuildingTrendChart : UIView
 @property (nonatomic,strong) REMToggleButton *todayButton;
@@ -23,8 +25,9 @@
 @property (nonatomic,strong) REMToggleButton *lastYearButton;
 @property (nonatomic,strong) REMBuildingOverallModel *buildingInfo;
 @property (nonatomic,strong) UIView *legendView;
-@property (nonatomic,strong) CPTGraphHostingView *hostView;
+@property (nonatomic,strong) DCXYChartView *chartView;
 @property (nonatomic,strong) UILabel *noDataLabel;
 @property (nonatomic,strong) REMToggleButtonGroup* toggleGroup;
+-(void)redrawWith:(REMBuildingTimeRangeDataModel*)buildData step:(REMEnergyStep)step timeRangeType:(REMRelativeTimeRangeType)timeRangeType;
 //@property (nonatomic,strong) CPTScatterPlot *scatterPlot;
 @end

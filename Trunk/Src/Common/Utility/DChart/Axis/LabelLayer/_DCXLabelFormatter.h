@@ -16,4 +16,5 @@
 @property (nonatomic, readonly) NSDate* startDate;
 @property (nonatomic, readonly) REMEnergyStep step;
 @property (nonatomic) int interval;
+@property (nonatomic, assign) BOOL stepSupplementary;   // 是否在新的年份/月份/天的第一个日期上补全年月日，默认YES
 @end

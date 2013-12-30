@@ -58,6 +58,9 @@
     } else if (style == DCLineTypeDashed) {
         CGFloat dash[] = {lineWidth*4, lineWidth};
         CGContextSetLineDash(context, 0, dash, 2);
+    } else if (style == DCLineTypeShortDashed) {
+        CGFloat dash[] = {lineWidth*2, lineWidth*2};
+        CGContextSetLineDash(context, 0, dash, 2);
     }
 }
 

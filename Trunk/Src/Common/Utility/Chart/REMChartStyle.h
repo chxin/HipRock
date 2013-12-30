@@ -119,4 +119,5 @@
 
 +(REMChartStyle*)getMaximizedStyle;
 +(REMChartStyle*)getMinimunStyle;
++(REMChartStyle*)getCoverStyle;
 @end
