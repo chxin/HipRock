@@ -39,4 +39,19 @@
     
 }
 
+- (NSArray *)trendWidgetArray{
+    NSMutableArray *array=[NSMutableArray array];
+    for (int i=0; i<self.widgets.count; ++i) {
+        REMWidgetObject *widget=self.widgets[i];
+        if (widget.diagramType == REMDiagramTypeColumn ||
+            widget.diagramType == REMDiagramTypeLine ||
+            widget.diagramType == REMDiagramTypeRanking ||
+            widget.diagramType == REMDiagramTypeStackColumn) {
+            [array addObject:widget];
+        }
+    }
+    
+    return array;
+}
+
 @end

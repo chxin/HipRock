@@ -11,6 +11,9 @@
 #import "REMBuildingTrendChartViewController.h"
 #import "REMBuildingDataViewController.h"
 #import "REMBuildingCommodityView.h"
+#import "REMBuildingCoverWidgetRelationModel.h"
+#import "REMBuildingCoverWidgetViewController.h"
+
 
 
 @interface REMBuildingCommodityViewController ()
@@ -30,6 +33,8 @@
 
 @property (nonatomic,strong) NSArray *chartViewSnapshotArray;
 
+
+@property (nonatomic,strong) UIPopoverController *popController;
 
 @end
 
@@ -250,12 +255,83 @@
     
 }
 
+- (REMDashboardObj *)dashboardInfoByPosition:(REMBuildingCoverWidgetPosition)position
+{
+    REMBuildingCoverWidgetRelationModel *currentRelation=nil;
+    for (REMBuildingCoverWidgetRelationModel *relation in self.buildingInfo.widgetRelationArray) {
+        if ([relation.buildingId isEqualToNumber:self.buildingInfo.building.buildingId] && [relation.commodityId isEqualToNumber:self.commodityInfo.commodityId]) {
+            currentRelation = relation;
+            break;
+        }
+    }
+    if (currentRelation!=nil) {
+        NSArray *array=self.buildingInfo.dashboardArray;
+        REMDashboardObj *dashboard= array[[currentRelation.dashboardId integerValue]];
+        return dashboard;
+    }
+    return nil;
+}
+
+- (REMWidgetObject *)widgetInfoByPosition:(REMBuildingCoverWidgetPosition)position{
+    REMBuildingCoverWidgetRelationModel *currentRelation;
+    for (REMBuildingCoverWidgetRelationModel *relation in self.buildingInfo.widgetRelationArray) {
+        if ([relation.buildingId isEqualToNumber:self.buildingInfo.building.buildingId] && [relation.commodityId isEqualToNumber:self.commodityInfo.commodityId]) {
+            currentRelation = relation;
+            break;
+        }
+    }
+    if (currentRelation) {
+        for (REMDashboardObj *dashboard in self.buildingInfo.dashboardArray) {
+            if ([dashboard.dashboardId isEqualToNumber:currentRelation.dashboardId]==YES) {
+                for (REMWidgetObject *widget in dashboard.widgets) {
+                    if ([widget.widgetId isEqualToNumber:currentRelation.widgetId] && position == currentRelation.position) {
+                        return widget;
+                    }
+                }
+            }
+        }
+    }
+    
+    return nil;
+}
+
+- (NSDictionary *)dashboardArrayForPiningWidget{
+    NSMutableArray *dashboardList = [NSMutableArray array];
+    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
+    for (int i=0; i<self.buildingInfo.dashboardArray.count; ++i) {
+        REMDashboardObj *dashboard = self.buildingInfo.dashboardArray[i];
+        NSArray *widgetList = [dashboard trendWidgetArray];
+        if (widgetList.count!=0) {
+            [dashboardList addObject:dashboard];
+            [dic setObject:widgetList forKey:dashboard.dashboardId];
+        }
+    }
+    return  @{@"list":dashboardList,@"widget":dic};
+}
+
+
+- (NSString *)chartTitleByPosition:(REMBuildingCoverWidgetPosition)position
+{
+    REMWidgetObject *widgetInfo=[self widgetInfoByPosition:position];
+    if (self.buildingInfo.widgetRelationArray==nil || widgetInfo==nil) {
+        if (position == REMBuildingCoverWidgetPositionFirst) {
+            return  NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @"");//单位面积逐月用%@
+        }
+        else{
+            return  NSLocalizedString(@"Building_EnergyUsageByCommodity", @"");//用%@趋势图
+        }
+    }
+    else{
+        return widgetInfo.name;
+    }
+}
+
 
 - (void)initChartContainer
 {
     int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;
     int chartContainerHeight=kBuildingChartHeight;
-    NSString *title1=NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @"");//单位面积逐月用%@
+    NSString *title1=[self chartTitleByPosition:REMBuildingCoverWidgetPositionFirst];
     
     UILabel *titleLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityTitleFontSize)];
     titleLabel1.text=[NSString stringWithFormat:title1,self.commodityInfo.comment];
@@ -267,6 +343,17 @@
     titleLabel1.textColor=[UIColor whiteColor];
     [self.view addSubview:titleLabel1];
     
+    UIButton *firstButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    if (REMISIOS7) {
+        firstButton=[UIButton buttonWithType:UIButtonTypeSystem];
+        firstButton.tintColor=[UIColor whiteColor];
+    }
+    [firstButton setImage:REMIMG_Back forState:UIControlStateNormal];
+    [firstButton setFrame:CGRectMake(kBuildingChartWidth-40, marginTop, 32, 32)];
+    firstButton.tag=0;
+    [firstButton addTarget:self action:@selector(widgetRelationButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:firstButton];
+    
     
     if (self.childViewControllers.count<2) {
         REMBuildingChartContainerViewController *controller1=[[REMBuildingChartContainerViewController alloc] init];
@@ -275,6 +362,7 @@
         controller1.chartHandlerClass=[REMBuildingAverageViewController class];
         controller1.buildingId=self.buildingInfo.building.buildingId;
         controller1.commodityId=self.commodityInfo.commodityId;
+        controller1.widgetInfo=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionFirst];
         [self addChildViewController:controller1];
     }
    
@@ -282,7 +370,7 @@
     int marginTop1=marginTop+chartContainerHeight+kBuildingCommodityBottomMargin;
     CGFloat secondChartHeight=chartContainerHeight+85;//85 is delta value for second chart in commodity view
 
-    NSString *title2=NSLocalizedString(@"Building_EnergyUsageByCommodity", @"");//用%@趋势图
+    NSString *title2=[self chartTitleByPosition:REMBuildingCoverWidgetPositionSecond];
     
     UILabel *titleLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingCommodityDetailWidth, kBuildingCommodityTitleFontSize)];
     titleLabel2.text=[NSString stringWithFormat:title2,self.commodityInfo.comment];;
@@ -293,6 +381,17 @@
     titleLabel2.font = [UIFont fontWithName:@(kBuildingFontSC) size:kBuildingCommodityTitleFontSize];
     titleLabel2.textColor=[UIColor whiteColor];
     [self.view addSubview:titleLabel2];
+    
+    UIButton *secondButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    if (REMISIOS7) {
+        secondButton=[UIButton buttonWithType:UIButtonTypeSystem];
+        secondButton.tintColor=[UIColor whiteColor];
+    }
+    [secondButton setImage:REMIMG_Back forState:UIControlStateNormal];
+    [secondButton setFrame:CGRectMake(kBuildingChartWidth-40, marginTop1, 32, 32)];
+    secondButton.tag=1;
+    [secondButton addTarget:self action:@selector(widgetRelationButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:secondButton];
 
     if (self.childViewControllers.count<2) {
         REMBuildingChartContainerViewController *controller2=[[REMBuildingChartContainerViewController alloc] init];
@@ -301,12 +400,55 @@
         controller2.chartHandlerClass=[REMBuildingTrendChartViewController class];
         controller2.commodityId=self.commodityInfo.commodityId;
         controller2.buildingId=self.buildingInfo.building.buildingId;
+        controller2.widgetInfo=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionSecond];
         [self addChildViewController:controller2];
     
     }
     
 
 }
+- (void)widgetRelationButtonClicked:(UIButton *)button{
+    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+
+    UINavigationController *nav= [storyboard instantiateViewControllerWithIdentifier:@"buildingWidgetNavigation"];
+    REMBuildingCoverWidgetViewController *coverRelationController= nav.childViewControllers[0];
+    coverRelationController.position=(REMBuildingCoverWidgetPosition)button.tag;
+    coverRelationController.buildingInfo=self.buildingInfo;
+    coverRelationController.commodityInfo=self.commodityInfo;
+    NSDictionary *dic=[self dashboardArrayForPiningWidget];
+    coverRelationController.dashboardArray=dic[@"list"];
+    coverRelationController.widgetDic=dic[@"widget"];
+    REMDashboardObj *dashboard=[self dashboardInfoByPosition:coverRelationController.position];
+    REMWidgetObject *widget=[self widgetInfoByPosition:coverRelationController.position];
+    if (widget==nil) {
+        if (coverRelationController.position == REMBuildingCoverWidgetPositionFirst) {
+            coverRelationController.selectedWidgetId = @(-1);
+            coverRelationController.selectedDashboardId=@(-1);
+        }
+        else{
+            coverRelationController.selectedWidgetId = @(-2);
+            coverRelationController.selectedDashboardId=@(-2);
+        }
+    }
+    else{
+        coverRelationController.selectedWidgetId=widget.widgetId;
+        coverRelationController.selectedDashboardId=dashboard.dashboardId;
+    }
+    UIPopoverController *popController= [[UIPopoverController alloc]initWithContentViewController:nav];
+    coverRelationController.popController=popController;
+    popController.delegate=self;
+    popController.popoverContentSize=CGSizeMake(350, 400);
+    self.popController=popController;
+    [popController presentPopoverFromRect:button.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+    
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    self.popController=nil;
+}
+
+
 
 - (void)showChart{
     

@@ -17,13 +17,10 @@
 
 @property (nonatomic) REMDataStoreType requestUrl;
 
-@property (nonatomic,strong) NSArray *snapshotArray;
-
 - (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame;
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(id data,REMBusinessErrorInfo *error))loadCompleted;
 - (CPTGraphHostingView*) getHostView;
--(void)longPressedAt:(NSDate*)x;
 
 
 -(CPTLineStyle *)axisLineStyle;

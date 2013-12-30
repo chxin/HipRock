@@ -67,6 +67,8 @@
     return _model;
 }
 
+- (void)reloadChart{}
+
 - (void)initBizView{}
 
 - (void)showChart{

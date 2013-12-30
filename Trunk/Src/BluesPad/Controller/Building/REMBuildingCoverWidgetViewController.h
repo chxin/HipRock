@@ -11,7 +11,20 @@
 
 @interface REMBuildingCoverWidgetViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>
 
-
+@property (nonatomic,weak) UIPopoverController *popController;
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+
+@property (nonatomic,strong) NSArray *dashboardArray;
+
+@property (nonatomic,strong) NSDictionary *widgetDic;
+
+
+@property (nonatomic,weak) REMCommodityModel *commodityInfo;
+
+@property (nonatomic) REMBuildingCoverWidgetPosition position;
+
+@property (nonatomic,copy) NSNumber *selectedWidgetId;
+
+@property (nonatomic,copy) NSNumber *selectedDashboardId;
 
 @end
