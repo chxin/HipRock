@@ -122,15 +122,19 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     self.titleContainer=titleContainer;
     [self.bizDelegator initBizView];
     
-    
-    UIButton *pinButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    if (REMISIOS7) {
-        pinButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        pinButton.tintColor=[REMColor colorByHexString:@"#37ab3c"];
-        
+    if ([self.bizDelegator shouldPinToBuildingCover]==YES) {
+        UIButton *pinButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        if (REMISIOS7) {
+            pinButton = [UIButton buttonWithType:UIButtonTypeSystem];
+            pinButton.tintColor=[REMColor colorByHexString:@"#37ab3c"];
+            
+        }
+        [pinButton setFrame:CGRectMake(750, kWidgetBackButtonTop, 32, 32)];
+        [pinButton setImage:REMIMG_Back_Chart forState:UIControlStateNormal];
+        [pinButton addTarget:self action:@selector(pinButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.titleContainer addSubview:pinButton];
     }
     
-    [pinButton addTarget:self action:@selector(pinButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (REMWidgetObject *)widgetByRelation:(REMBuildingCoverWidgetRelationModel *)relation{
@@ -162,11 +166,14 @@ const static CGFloat kWidgetShareTitleFontSize=14;
                     if (relation.position == REMBuildingCoverWidgetPositionFirst) {
                         dic[@"firstName"]=widget.name;
                         dic[@"firstId"]=widget.widgetId;
+                        dic[@"firstSelected"]=@(1);
                     }
                     else{
                         dic[@"secondName"]=widget.name;
                         dic[@"secondId"]=widget.widgetId;
+                        dic[@"secondSelected"]=@(1);
                     }
+                    
                 }
             }
         }
@@ -176,7 +183,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
             dic[@"secondName"]=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @""),commodity.comment];
             dic[@"secondId"]=@(-2);
         }
-        
+        [array addObject:dic];
     }
     
     return array;
@@ -184,7 +191,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 
 - (void)pinButtonClicked:(UIButton *)button{
     UIStoryboard *mainStoryboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    UINavigationController *nav= [mainStoryboard instantiateViewControllerWithIdentifier:@""];
+    UINavigationController *nav= [mainStoryboard instantiateViewControllerWithIdentifier:@"widgetBuildingCoverNavigation"];
     REMWidgetBuildingCoverViewController *buildingCoverWidgetController=nav.childViewControllers[0];
     buildingCoverWidgetController.data=[self piningWidgetList];
     UIPopoverController *popController=[[UIPopoverController alloc]initWithContentViewController:nav];
