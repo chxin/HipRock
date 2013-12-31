@@ -87,12 +87,25 @@
 }
 
 -(void)customizeView:(DCXYChartView *)view {
+//    BOOL hasBuildingTag = NO;
+//    for (DCXYSeries* s in view.seriesList) {
+//        if (s.target.type == REMEnergyTargetTag) {
+//            hasBuildingTag = YES;
+//        }
+//    }
     if (self.sharedProcessor.step == REMEnergyStepMonth || self.sharedProcessor.step == REMEnergyStepDay) {
         view.graphContext.pointAlignToTick = NO;
         view.graphContext.xLabelAlignToTick = NO;
     } else {
         
     }
+}
+
+-(NSUInteger)getSeriesAmount {
+    const int maxSeriesAmount = 10;
+    if (self.energyViewData.targetEnergyData.count <= maxSeriesAmount) return self.energyViewData.targetEnergyData.count;
+    
+    else return maxSeriesAmount;
 }
 
 -(UIColor*)getSeriesColorByIndex:(int)index {

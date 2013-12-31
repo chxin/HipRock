@@ -31,4 +31,5 @@
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step;
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step;
 -(void)customizeView:(DCXYChartView*)view;
+-(NSUInteger)getSeriesAmount;
 @end
