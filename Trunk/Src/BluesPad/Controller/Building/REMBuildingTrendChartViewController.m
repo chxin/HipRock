@@ -192,74 +192,24 @@
     myView.legendView.hidden = NO;
     REMEnergyStep step = currentSourceIndex < 2 ? REMEnergyStepHour : (currentSourceIndex < 4 ? REMEnergyStepDay : REMEnergyStepMonth);
     [myView redrawWith:self.datasource[currentSourceIndex] step:step timeRangeType:timeRange];
-    
-//    for (NSDictionary* series in seriesArray) {
-    
-//        scatterPlot = [[CPTScatterPlot alloc] initWithFrame: myView.hostView.hostedGraph.bounds];
-//        scatterPlot.plotSpace = myView.hostView.hostedGraph.defaultPlotSpace;
-//        CPTMutableLineStyle* scatterStyle = [CPTMutableLineStyle lineStyle];
-//        scatterStyle.lineColor = [series objectForKey:@"color"];
-//        scatterStyle.lineWidth = 2;
-//        
-//        CPTMutableLineStyle* symbolLineStyle = [CPTMutableLineStyle lineStyle];
-//        symbolLineStyle.lineWidth = 0;
-//        CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
-//        symbol.lineStyle=symbolLineStyle;
-//        symbol.size = CGSizeMake(12.0, 12.0);
-//        symbol.fill= [CPTFill fillWithColor:scatterStyle.lineColor];
-//        scatterPlot.plotSymbol=symbol;
-//        
-//        scatterPlot.dataLineStyle = scatterStyle;
-//        [scatterPlot addAnimation:[self columnAnimation] forKey:@"y"];
-//        
-//        scatterPlot.delegate = self;
-//        scatterPlot.dataSource = self;
-//        scatterPlot.identifier = [series objectForKey:@"identity"];
-//        [myView.hostView.hostedGraph addPlot:scatterPlot];
-        
-//        CGFloat fontSize = 14;
-//        CPTColor* color = [series objectForKey:@"color"];
-//        // Draw legend
-//        NSString* legendText = [series objectForKey:@"name"];
-//        CGSize textSize = [legendText sizeWithFont:[UIFont systemFontOfSize:fontSize]];
-//        CGFloat benchmarkWidth = textSize.width + 26;
-//        CGRect benchmarkFrame = CGRectMake(legendLeft, legendTop, benchmarkWidth, MAX(textSize.height, 15));
-//        legendLeft = legendLeft + benchmarkWidth + labelDistance;
-//        if (legendLeft > myView.legendView.bounds.size.width) {
-//            legendLeft = 57;
-//            legendTop += 14*2;
-//        }
-//        REMBuildingChartSeriesIndicator *benchmarkIndicator = [[REMBuildingChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:legendText andColor:color.uiColor];
-//        [myView.legendView addSubview:benchmarkIndicator];
-//    }
-//    [myView.hostView.hostedGraph reloadData];
-}
-
-- (void)drawToolTip: (NSInteger)index {
-//    [self.graph removeAllAnnotations];
-//    
-//    CPTScatterPlot* plot = [[self getHostView].hostedGraph.allPlots objectAtIndex:0];
-//    NSNumber *xValue = [plot cachedNumberForField:CPTScatterPlotFieldX recordIndex:index];
-//    
-//    CPTPlotRange *yRange   = [plot.plotSpace plotRangeForCoordinate:CPTCoordinateY];
-//    CPTPlotSpaceAnnotation* annotation = [[CPTPlotSpaceAnnotation alloc]initWithPlotSpace:plot.graph.defaultPlotSpace anchorPlotPoint:[NSArray arrayWithObjects:xValue,[ NSNumber numberWithFloat:yRange.maxLimitDouble ], nil]];
-//    annotation.displacement = CPTPointMake(0.0, plot.labelOffset);
-//    NSDictionary *item=[[self.datasource objectAtIndex:currentSourceIndex] objectForKey:@"data"][index];
-//    NSDate* xDate = [item objectForKey:@"x"];
-//    NSNumber* yVal = [item objectForKey:@"y"];
-//    CPTTextLayer* textLayer = [[CPTTextLayer alloc]initWithText: [NSString stringWithFormat: @"x:%@ \ry:%@", xDate, yVal ]];
-//    textLayer.fill = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:255 green:255 blue:255 alpha:1]];
-//    annotation.contentLayer = textLayer;
-//    
-//    CPTPlotSpaceAnnotation* lineAnno = [[CPTPlotSpaceAnnotation alloc]initWithPlotSpace:plot.graph.defaultPlotSpace anchorPlotPoint:[NSArray arrayWithObjects:xValue,[ NSNumber numberWithFloat:yRange.maxLimitDouble / 2 ], nil]];
-//    //lineAnno.displacement = CPTPointMake(0.0, plot.labelOffset);
-//    
-//    lineAnno.displacement = CGPointMake(0, (plot.graph.frame.size.height - plot.frame.size.height) / 2 - 15);
-//    CPTLayer* lineLayer = [[CPTLayer alloc]initWithFrame:CGRectMake(0, 0, 1, plot.frame.size.height)];
-//    lineLayer.backgroundColor = [UIColor whiteColor].CGColor;
-//    lineAnno.contentLayer = lineLayer;
-//    [self.graph addAnnotation:lineAnno];
-//    [self.graph addAnnotation:annotation];
+    CGFloat legendLeft = 57;
+    CGFloat labelDistance = 18;
+    CGFloat legendTop = 0;
+    for (DCXYSeries* series in myView.chartView.seriesList) {
+        CGFloat fontSize = 14;
+        // Draw legend
+        NSString* legendText = series.target.name;
+        CGSize textSize = [legendText sizeWithFont:[UIFont systemFontOfSize:fontSize]];
+        CGFloat benchmarkWidth = textSize.width + 26;
+        CGRect benchmarkFrame = CGRectMake(legendLeft, legendTop, benchmarkWidth, MAX(textSize.height, 15));
+        legendLeft = legendLeft + benchmarkWidth + labelDistance;
+        if (legendLeft > myView.legendView.bounds.size.width) {
+            legendLeft = 57;
+            legendTop += 14*2;
+        }
+        REMBuildingChartSeriesIndicator *benchmarkIndicator = [[REMBuildingChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:legendText andColor:series.color];
+        [myView.legendView addSubview:benchmarkIndicator];
+    }
 }
 
 - (void)viewDidLoad

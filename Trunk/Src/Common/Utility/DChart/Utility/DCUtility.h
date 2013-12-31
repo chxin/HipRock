@@ -25,4 +25,5 @@ typedef struct _DCYAxisIntervalCalculation {
 +(BOOL)isFrame:(CGRect)rect visableIn:(CGRect)outter;
 
 +(double)getScreenXIn:(CGRect)plotRect xVal:(double)xValue hRange:(DCRange*)hRange;
++(double)getScreenYIn:(CGRect)plotRect yVal:(double)yValue vRange:(DCRange*)vRange;
 @end

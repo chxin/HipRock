@@ -9,6 +9,7 @@
 #import "DCTrendWrapper.h"
 #import "_DCXLabelFormatter.h"
 #import "DCDataPoint.h"
+#import "DCXYChartBackgroundBand.h"
 
 @interface DCTrendWrapper()
 @property (nonatomic, weak) DCContext* graphContext;
@@ -89,6 +90,7 @@
     view.plotPaddingTop = self.style.plotPaddingTop;
     view.plotPaddingBottom = self.style.plotPaddingBottom;
     view.graphContext.hGridlineAmount = self.style.horizentalGridLineAmount;
+    view.xAxisLabelClipToBounds = self.style.xLabelClipToBounds;
     view.delegate = self;
     self.graphContext = view.graphContext;
     if (step == REMEnergyStepHour || step == REMEnergyStepWeek) {
@@ -424,6 +426,7 @@
                 DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
                 b.range = bandRange;
                 b.color = fillColor;
+                b.axis = self.view.xAxis;
                 b.title = bandString;
                 [bands addObject:b];
             }

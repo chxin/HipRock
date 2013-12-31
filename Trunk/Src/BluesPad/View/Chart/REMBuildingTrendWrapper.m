@@ -45,7 +45,7 @@
             baseDateOfX = today0H;
             break;
         case REMRelativeTimeRangeTypeYesterday:
-            baseDateOfX = [NSDate dateWithTimeInterval:24*3600 sinceDate:today0H];
+            baseDateOfX = [NSDate dateWithTimeInterval:-24*3600 sinceDate:today0H];
             length = 24;
             break;
         case REMRelativeTimeRangeTypeThisMonth:
@@ -69,8 +69,14 @@
     }
     self.sharedProcessor.baseDate = baseDateOfX;
     DCRange* range = [[DCRange alloc]initWithLocation:0 length:length];
-    _DCXLabelFormatter* formatter = [[_DCXLabelFormatter alloc]initWithStartDate:baseDateOfX dataStep:step interval:1];
-    formatter.stepSupplementary = NO;
+    NSFormatter* formatter = nil;
+    if (step == REMEnergyStepHour) {
+        formatter = [[NSNumberFormatter alloc]init];
+        [(NSNumberFormatter*)formatter setPositiveFormat:@"#点"];
+    } else {
+        formatter = [[_DCXLabelFormatter alloc]initWithStartDate:baseDateOfX dataStep:step interval:1];
+        ((_DCXLabelFormatter*)formatter).stepSupplementary = NO;
+    }
     return @{ @"globalRange": range, @"beginRange": range, @"xformatter": formatter};
 }
 
@@ -81,13 +87,25 @@
 }
 
 -(void)customizeView:(DCXYChartView *)view {
-    view.backgroundColor = [UIColor grayColor];
+//    BOOL hasBuildingTag = NO;
+//    for (DCXYSeries* s in view.seriesList) {
+//        if (s.target.type == REMEnergyTargetTag) {
+//            hasBuildingTag = YES;
+//        }
+//    }
     if (self.sharedProcessor.step == REMEnergyStepMonth || self.sharedProcessor.step == REMEnergyStepDay) {
         view.graphContext.pointAlignToTick = NO;
         view.graphContext.xLabelAlignToTick = NO;
     } else {
         
     }
+}
+
+-(NSUInteger)getSeriesAmount {
+    const int maxSeriesAmount = 10;
+    if (self.energyViewData.targetEnergyData.count <= maxSeriesAmount) return self.energyViewData.targetEnergyData.count;
+    
+    else return maxSeriesAmount;
 }
 
 -(UIColor*)getSeriesColorByIndex:(int)index {

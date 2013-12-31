@@ -58,6 +58,7 @@ typedef enum _DCAxisCoordinate {
 @property (nonatomic, strong) UIColor* axisTitleColor;
 @property (nonatomic, assign) CGFloat axisTitleToTopLabel;
 @property (nonatomic, assign) CGFloat axisTitleFontSize;
+@property (nonatomic, strong) NSArray* backgroundBands;
 
 -(void)attachSeries:(DCSeries*)series;
 -(void)detachSeries:(DCSeries*)series;
