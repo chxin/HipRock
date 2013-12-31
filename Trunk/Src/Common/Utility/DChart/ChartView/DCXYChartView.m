@@ -20,6 +20,7 @@
 #import "DCColumnSeries.h"
 #import "DCTrendAnimationManager.h"
 #import "_DCVGridlineLayer.h"
+#import "_DCBackgroundBandsLayer.h"
 
 #import "_DCXYIndicatorLayer.h"
 
@@ -95,11 +96,12 @@
     [self drawIndicatorLayer];
     
     self.backgroundBandsLayer = [[_DCBackgroundBandsLayer alloc]initWithContext:self.graphContext];
+    self.backgroundBandsLayer.view = self;
     self.backgroundBandsLayer.fontColor = self.backgroundBandFontColor;
     self.backgroundBandsLayer.font = self.backgroundBandFont;
     [self.graphContext addHRangeObsever:self.backgroundBandsLayer];
     [self.layer addSublayer:self.backgroundBandsLayer];
-    [self.backgroundBandsLayer setBands:self.bgBands];
+    [self redrawBgBands];
     
     NSMutableArray* coordiates = [[NSMutableArray alloc]init];
     for (DCAxis* y in self.yAxisList) {
@@ -138,6 +140,7 @@
     }
     
     [self updateGestures];
+    [self redrawBgBands];
     
     [super willMoveToSuperview: newSuperview];
 }
@@ -502,9 +505,33 @@
 
 -(void)setBackgoundBands:(NSArray *)bands {
     self.bgBands = bands;
-    if (!REMIsNilOrNull(self.backgroundBandsLayer)) {
-        [self.backgroundBandsLayer setBands:bands];
+    [self redrawBgBands];
+}
+
+-(void)redrawBgBands {
+    for (_DCCoordinateSystem* y in self.coodinates) {
+        NSMutableArray* bands = [[NSMutableArray alloc]init];
+        if (!REMIsNilOrNull(self.bgBands))  {
+            for (DCXYChartBackgroundBand* b in self.bgBands) {
+                if (b.axis == y.yAxis) {
+                    [bands addObject:b];
+                }
+            }
+        }
+        y.yAxis.backgroundBands = bands;
+        _DCYAxisLabelLayer* yLayer = (_DCYAxisLabelLayer*)[y getAxisLabelLayer];
+        [yLayer setNeedsDisplay];
     }
+    
+    NSMutableArray* xbands = [[NSMutableArray alloc]init];
+    if (!REMIsNilOrNull(self.bgBands))  {
+        for (DCXYChartBackgroundBand* b in self.bgBands) {
+            if (b.axis == self.xAxis) {
+                [xbands addObject:b];
+            }
+        }
+    }
+    [self.backgroundBandsLayer setBands:xbands];
 }
 
 -(void)setSeries:(DCXYSeries *)series hidden:(BOOL)hidden {
@@ -532,7 +559,7 @@
     for (_DCCoordinateSystem* s in self.coodinates) {
         [s recalculatorYMaxInRange:self.graphContext.hRange];
     }
-    [self.backgroundBandsLayer setBands:self.bgBands];
+    [self redrawBgBands];
     [self.symbolLayer setNeedsDisplay];
     [self.indicatorLayer setNeedsDisplay];
     [self._hGridlineLayer setNeedsDisplay];
@@ -547,6 +574,17 @@
         _DCYAxisLabelLayer* _yLabelLayer = (_DCYAxisLabelLayer*)[ds getAxisLabelLayer];
         
         [_yLabelLayer setNeedsDisplay];
+    }
+}
+
+-(DCRange*)getRangeOfAxis:(DCAxis*)axis {
+    if (axis.coordinate == DCAxisCoordinateX) {
+        return self.graphContext.hRange;
+    } else {
+        for (_DCCoordinateSystem* cs in self.coodinates) {
+            if (cs.yAxis == axis) return cs.yRange;
+        }
+        return nil;
     }
 }
 // 检查在X上是否有pointType == DCDataPointTypeNormal的数据点

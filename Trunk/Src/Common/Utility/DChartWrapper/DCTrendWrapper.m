@@ -9,6 +9,7 @@
 #import "DCTrendWrapper.h"
 #import "_DCXLabelFormatter.h"
 #import "DCDataPoint.h"
+#import "DCXYChartBackgroundBand.h"
 
 @interface DCTrendWrapper()
 @property (nonatomic, weak) DCContext* graphContext;
@@ -425,6 +426,7 @@
                 DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
                 b.range = bandRange;
                 b.color = fillColor;
+                b.axis = self.view.xAxis;
                 b.title = bandString;
                 [bands addObject:b];
             }

@@ -25,6 +25,7 @@
 #import "REMUserModel.h"
 #import "REMUserValidationModel.h"
 #import "REMChartHeader.h"
+#import "DCXYChartBackgroundBand.h"
 
 @interface REMSplashScreenController ()
 
@@ -130,7 +131,7 @@
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
     
-//    [self oscarTest];
+    [self oscarTest];
     
     
     //decide where to go
@@ -290,10 +291,18 @@
 //    columnWidget.view.graphContext.hGridlineAmount = 4;
 //    [self.view addSubview:columnWidget.view];
     
-//    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
-//    lineWidget.view.backgroundColor = [UIColor blackColor];
-//    [self.view addSubview:lineWidget.view];
-//    self.plotSource = lineWidget;
+    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+    lineWidget.view.backgroundColor = [UIColor blackColor];
+    NSMutableArray* bands = [[NSMutableArray alloc]init];
+    DCRange* bandRange = [[DCRange alloc]initWithLocation:0 length:20];
+    DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
+    b.range = bandRange;
+    b.color = [UIColor colorWithRed:0.5 green:0 blue:0 alpha:0.5];
+    b.axis = lineWidget.view.yAxisList[0];
+    [bands addObject:b];
+    [lineWidget.view setBackgoundBands:bands];
+    [self.view addSubview:lineWidget.view];
+    self.plotSource = lineWidget;
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 605, 100, 30)];
     //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
@@ -316,11 +325,11 @@
     [btn2 setTitleColor:[REMColor colorByHexString:@"#00ff48"] forState:UIControlStateSelected];
     [btn2 addTarget:self action:@selector(buttonPressed2:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn2];
-    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
-    self.plotSource = labelingWrapper;
-    [labelingWrapper getView].backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:[labelingWrapper getView]];
-    labelingWrapper.delegate = self;
+//    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+//    self.plotSource = labelingWrapper;
+//    [labelingWrapper getView].backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:[labelingWrapper getView]];
+//    labelingWrapper.delegate = self;
 }
 
 -(void)buttonPressed:(UIButton *)button {

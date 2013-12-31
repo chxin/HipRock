@@ -79,4 +79,8 @@
 +(double)getScreenXIn:(CGRect)plotRect xVal:(double)xValue hRange:(DCRange*)hRange {
     return plotRect.origin.x + plotRect.size.width * (xValue-hRange.location) / hRange.length;
 }
+
++(double)getScreenYIn:(CGRect)plotRect yVal:(double)yValue vRange:(DCRange*)vRange {
+    return plotRect.origin.y + plotRect.size.height * (vRange.end - yValue) / vRange.length;
+}
 @end
