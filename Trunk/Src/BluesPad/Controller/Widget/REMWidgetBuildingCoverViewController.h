@@ -9,4 +9,7 @@
 
 @interface REMWidgetBuildingCoverViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
 
+
+@property (nonatomic,weak) UIPopoverController *popController;
+@property (nonatomic,strong) NSArray *data;
 @end

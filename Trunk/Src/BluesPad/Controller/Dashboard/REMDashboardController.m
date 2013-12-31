@@ -8,7 +8,7 @@
 
 #import "REMDashboardController.h"
 
-
+#import "REMWidgetMaxViewController.h"
 
 
 @interface REMDashboardController ()
@@ -264,7 +264,16 @@ static NSString *dashboardGroupName=@"building-data-%@";
 - (void)maxWidget{
     REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
     REMBuildingViewController *buildingController=(REMBuildingViewController *)parent.parentViewController;
+    
     [buildingController performSegueWithIdentifier:@"maxWidgetSegue" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"maxWidgetSegue"]==YES) {
+        REMWidgetMaxViewController *maxController=segue.destinationViewController;
+        maxController.buildingInfo=self.buildingInfo;
+    }
 }
 
 - (void)horizonalMoving{

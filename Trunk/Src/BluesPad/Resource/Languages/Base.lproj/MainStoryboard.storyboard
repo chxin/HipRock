@@ -223,8 +223,8 @@
                         <segue destination="NpH-nl-7td" kind="popover" id="ce5-LQ-Qg6">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
-                        <segue destination="0Gt-be-FfQ" kind="popover" identifier="widgetBuildingCoverSegue" id="1t3-ld-sMP">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        <segue destination="aiA-Pd-ec5" kind="popover" identifier="widgetBuildingCoverSegue" id="1t3-ld-sMP">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
                         </segue>
                     </connections>
                 </viewController>
@@ -712,7 +712,7 @@
             </objects>
             <point key="canvasLocation" x="3308" y="-1166"/>
         </scene>
-        <!--Widget Building Cover View Controller-->
+        <!--Widget Building Cover View Controller - 添加至建筑封面-->
         <scene sceneID="iIx-hv-aX6">
             <objects>
                 <tableViewController id="0Gt-be-FfQ" customClass="REMWidgetBuildingCoverViewController" sceneMemberID="viewController">
@@ -723,7 +723,7 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kyq-hm-yxE">
-                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kyq-hm-yxE" id="R4X-UP-8oh">
                                     <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
@@ -736,10 +736,14 @@
                             <outlet property="delegate" destination="0Gt-be-FfQ" id="EIX-SV-GkB"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="添加至建筑封面" id="lbO-Sc-6OJ">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="Vgg-GN-dhw"/>
+                        <barButtonItem key="rightBarButtonItem" title="完成" style="done" id="wTV-vd-idZ"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M7a-4Q-2K9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3308" y="-57"/>
+            <point key="canvasLocation" x="4538" y="-57"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="206-mw-I0A">
@@ -776,6 +780,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z1D-Kq-BJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="892" y="-2381"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ebq-Mn-wr1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aiA-Pd-ec5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aRl-7G-1Dd">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0Gt-be-FfQ" kind="relationship" relationship="rootViewController" id="zhq-cx-N6V"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wcq-ij-6pa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3308" y="-57"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

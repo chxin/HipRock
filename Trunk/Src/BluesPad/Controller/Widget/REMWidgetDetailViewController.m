@@ -13,6 +13,10 @@
 #import "REMDatePickerViewController.h"
 #import "REMWidgetBizDelegatorBase.h"
 #import "REMDimensions.h"
+#import "REMWidgetBuildingCoverViewController.h"
+#import "REMBuildingOverallModel.h"
+#import "REMBuildingCoverWidgetRelationModel.h"
+
 
 const static CGFloat kWidgetBackButtonLeft=25;
 const static CGFloat kWidgetBackButtonTop=16;
@@ -37,7 +41,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 @property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
 
 @property (nonatomic,strong) REMWidgetBizDelegatorBase *bizDelegator;
-
+@property (nonatomic,strong) UIPopoverController *popController;
 @end
 
 @implementation REMWidgetDetailViewController
@@ -117,9 +121,87 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     [self.view addSubview:titleContainer];
     self.titleContainer=titleContainer;
     [self.bizDelegator initBizView];
+    
+    
+    UIButton *pinButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    if (REMISIOS7) {
+        pinButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        pinButton.tintColor=[REMColor colorByHexString:@"#37ab3c"];
+        
+    }
+    
+    [pinButton addTarget:self action:@selector(pinButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (REMWidgetObject *)widgetByRelation:(REMBuildingCoverWidgetRelationModel *)relation{
+    for (REMDashboardObj *dashboard in self.buildingInfo.dashboardArray) {
+        if ([relation.dashboardId isEqualToNumber:dashboard.dashboardId]==YES) {
+            for (REMWidgetObject *widget in dashboard.widgets) {
+                if ([widget.widgetId isEqualToNumber:relation.widgetId]==YES) {
+                    return widget;
+                }
+            }
+        }
+    }
+    return nil;
+}
 
+- (NSArray *)piningWidgetList{
+    NSMutableArray *array=[NSMutableArray array];
+    for (int i=0; i<self.buildingInfo.commodityArray.count; ++i) {
+        REMCommodityModel *commodity=self.buildingInfo.commodityArray[i];
+        NSMutableDictionary *dic=[NSMutableDictionary dictionary];
+        dic[@"name"]= commodity.comment;
+        dic[@"Id"]=commodity.commodityId;
+        BOOL found=NO;
+        for (REMBuildingCoverWidgetRelationModel *relation in self.buildingInfo.widgetRelationArray) {
+            if ([relation.commodityId isEqualToNumber:commodity.commodityId]==YES) {
+                found=YES;
+                REMWidgetObject *widget=[self widgetByRelation:relation];
+                if (widget!=nil) {
+                    if (relation.position == REMBuildingCoverWidgetPositionFirst) {
+                        dic[@"firstName"]=widget.name;
+                        dic[@"firstId"]=widget.widgetId;
+                    }
+                    else{
+                        dic[@"secondName"]=widget.name;
+                        dic[@"secondId"]=widget.widgetId;
+                    }
+                }
+            }
+        }
+        if (found==NO) {
+            dic[@"firstName"]=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByCommodity", @""),commodity.comment];
+            dic[@"firstId"]=@(-1);
+            dic[@"secondName"]=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @""),commodity.comment];
+            dic[@"secondId"]=@(-2);
+        }
+        
+    }
+    
+    return array;
+}
+
+- (void)pinButtonClicked:(UIButton *)button{
+    UIStoryboard *mainStoryboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    UINavigationController *nav= [mainStoryboard instantiateViewControllerWithIdentifier:@""];
+    REMWidgetBuildingCoverViewController *buildingCoverWidgetController=nav.childViewControllers[0];
+    buildingCoverWidgetController.data=[self piningWidgetList];
+    UIPopoverController *popController=[[UIPopoverController alloc]initWithContentViewController:nav];
+    popController.popoverContentSize=CGSizeMake(350, 400);
+    popController.delegate=self;
+    self.popController=popController;
+    [popController presentPopoverFromRect:button.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    
+    buildingCoverWidgetController.popController=popController;
+    
+    
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    self.popController=nil;
+}
 
 - (void)showChart
 {
