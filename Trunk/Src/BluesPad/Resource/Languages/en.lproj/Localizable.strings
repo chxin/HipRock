@@ -134,7 +134,9 @@
 "Building_ShareWeibo"="新浪微博";
 "Building_ShareEmail"="邮件";
 
-
+"Building_WidgetRelationTitle"="选取要替换的图表";
+"Building_WidgetRelationCommodityTitle"="默认图表 - %@";
+"Building_WidgetRelationInfo"="所选图表将会被替换为当前图表,并出现在所属建 筑封面中,以便您在快速查看该图表。";
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="下拉返回概览能耗信息";
 "Dashboard_TimeRange"="%@ 到 %@";

@@ -38,12 +38,14 @@
 
 - (void)requestData:(REMBuildingChartBaseViewController *)handler
 {
-    [handler loadData:[self.buildingId longLongValue]  :[self.commodityId longLongValue] :nil :^(id data,REMBusinessErrorInfo *error){
-        if(error==nil){
-            REMBuildingCommodityViewController *parent=(REMBuildingCommodityViewController *)self.parentViewController;
-            [parent loadChartComplete];
-        }
-    }];
+    if(self.widgetInfo==nil){
+        [handler loadData:[self.buildingId longLongValue]  :[self.commodityId longLongValue] :nil :^(id data,REMBusinessErrorInfo *error){
+            if(error==nil){
+                REMBuildingCommodityViewController *parent=(REMBuildingCommodityViewController *)self.parentViewController;
+                [parent loadChartComplete];
+            }
+        }];
+    }
 
 }
 

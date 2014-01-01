@@ -21,4 +21,6 @@
 @property (nonatomic,strong) NSArray *widgets;
 @property (nonatomic,strong) REMShareInfo *shareInfo;
 
+- (NSArray *)trendWidgetArray;
+
 @end

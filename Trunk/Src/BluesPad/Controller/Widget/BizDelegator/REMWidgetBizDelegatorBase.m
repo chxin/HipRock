@@ -67,7 +67,20 @@
     return _model;
 }
 
+- (void)reloadChart{}
+
 - (void)initBizView{}
+
+- (BOOL) shouldPinToBuildingCover{
+    if (self.widgetInfo.diagramType == REMDiagramTypeColumn ||
+        self.widgetInfo.diagramType == REMDiagramTypeLine ||
+        self.widgetInfo.diagramType == REMDiagramTypeRanking ||
+        self.widgetInfo.diagramType == REMDiagramTypeStackColumn) {
+        return YES;
+    }
+    
+    return NO;
+}
 
 - (void)showChart{
     if (self.energyData) {

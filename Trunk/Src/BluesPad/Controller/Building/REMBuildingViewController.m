@@ -444,6 +444,7 @@ const static CGFloat buildingGap=20;
         
         REMWidgetMaxViewController *maxController = segue.destinationViewController;
         self.maxDashbaordController=dashboard;
+        maxController.buildingInfo=self.buildingInfoArray[self.currentBuildingIndex];
         maxController.widgetCollectionController=collection;
         maxController.dashboardInfo=dashboard.buildingInfo.dashboardArray[dashboard.currentMaxDashboardIndex];
         

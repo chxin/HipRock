@@ -572,7 +572,6 @@
 		B44F63AD186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44F63AC186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.m */; };
 		B44F63B0186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44F63AF186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.m */; };
 		B44F63B6186D1BF80029B7F7 /* REMBuildingWidgetChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44F63B5186D1BF80029B7F7 /* REMBuildingWidgetChartViewController.m */; };
-		B44F63B9186D1C820029B7F7 /* REMBuildingWidgetChartContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44F63B8186D1C820029B7F7 /* REMBuildingWidgetChartContainerViewController.m */; };
 		B4547960184DABF700D3441B /* UIView+FlipTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = B454795F184DABF700D3441B /* UIView+FlipTransition.m */; };
 		B4577EBF184C1886003C00CF /* REMNumberHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4577EBE184C1886003C00CF /* REMNumberHelper.m */; };
 		B4577EC2184C48D2003C00CF /* Share_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4577EC0184C48D2003C00CF /* Share_normal.png */; };
@@ -677,6 +676,7 @@
 		EF96300617C610A200BBC7DA /* REMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMSettingViewController.m */; };
 		EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97DDDA17C20B5700A0374E /* REMToggleButton.m */; };
 		EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9F28B017CB54DE00E775ED /* REMStatusBar.m */; };
+		EFD6C5C0186D58F5009E7B86 /* REMBuildingTrendWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD6C5BF186D58F5009E7B86 /* REMBuildingTrendWrapper.m */; };
 		EFD946FC1839DCBB00E9EC50 /* _DCLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D11839DCBB00E9EC50 /* _DCLayer.m */; };
 		EFD946FE1839DCBB00E9EC50 /* _DCCoordinateSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D61839DCBB00E9EC50 /* _DCCoordinateSystem.m */; };
 		EFD946FF1839DCBB00E9EC50 /* DCAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D81839DCBB00E9EC50 /* DCAxis.m */; };
@@ -1374,8 +1374,6 @@
 		B44F63AF186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetBuildingCoverViewController.m; sourceTree = "<group>"; };
 		B44F63B4186D1BF80029B7F7 /* REMBuildingWidgetChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingWidgetChartViewController.h; sourceTree = "<group>"; };
 		B44F63B5186D1BF80029B7F7 /* REMBuildingWidgetChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingWidgetChartViewController.m; sourceTree = "<group>"; };
-		B44F63B7186D1C820029B7F7 /* REMBuildingWidgetChartContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingWidgetChartContainerViewController.h; sourceTree = "<group>"; };
-		B44F63B8186D1C820029B7F7 /* REMBuildingWidgetChartContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingWidgetChartContainerViewController.m; sourceTree = "<group>"; };
 		B454795E184DABF700D3441B /* UIView+FlipTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FlipTransition.h"; sourceTree = "<group>"; };
 		B454795F184DABF700D3441B /* UIView+FlipTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FlipTransition.m"; sourceTree = "<group>"; };
 		B4577EBD184C1886003C00CF /* REMNumberHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMNumberHelper.h; path = Common/Utility/REMNumberHelper.h; sourceTree = "<group>"; };
@@ -1546,6 +1544,8 @@
 		EF97DDDA17C20B5700A0374E /* REMToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMToggleButton.m; sourceTree = "<group>"; };
 		EF9F28AF17CB54DD00E775ED /* REMStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMStatusBar.h; sourceTree = "<group>"; };
 		EF9F28B017CB54DE00E775ED /* REMStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMStatusBar.m; sourceTree = "<group>"; };
+		EFD6C5BE186D58F5009E7B86 /* REMBuildingTrendWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingTrendWrapper.h; sourceTree = "<group>"; };
+		EFD6C5BF186D58F5009E7B86 /* REMBuildingTrendWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingTrendWrapper.m; sourceTree = "<group>"; };
 		EFD946D01839DCBB00E9EC50 /* _DCLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLayer.h; path = Common/Utility/DChart/_DCLayer.h; sourceTree = "<group>"; };
 		EFD946D11839DCBB00E9EC50 /* _DCLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLayer.m; path = Common/Utility/DChart/_DCLayer.m; sourceTree = "<group>"; };
 		EFD946D51839DCBB00E9EC50 /* _DCCoordinateSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCCoordinateSystem.h; path = ../Axis/_DCCoordinateSystem.h; sourceTree = "<group>"; };
@@ -2108,6 +2108,8 @@
 				7A1A855117B4BB5D004D7167 /* REMBuildingTrendChartViewController.m */,
 				B4A0FCD917C610B500C7AD56 /* REMBuildingAirQualityChartViewController.h */,
 				B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartViewController.m */,
+				B44F63B4186D1BF80029B7F7 /* REMBuildingWidgetChartViewController.h */,
+				B44F63B5186D1BF80029B7F7 /* REMBuildingWidgetChartViewController.m */,
 				B493ADA717D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.h */,
 				B493ADA817D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m */,
 				7A44E04318238D5E0080CEBE /* REMBuildingShareViewController.h */,
@@ -2126,10 +2128,6 @@
 				B4D50A40183313C7007C93A4 /* REMBuildingChartContainerViewController.m */,
 				B44F63AB186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.h */,
 				B44F63AC186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.m */,
-				B44F63B4186D1BF80029B7F7 /* REMBuildingWidgetChartViewController.h */,
-				B44F63B5186D1BF80029B7F7 /* REMBuildingWidgetChartViewController.m */,
-				B44F63B7186D1C820029B7F7 /* REMBuildingWidgetChartContainerViewController.h */,
-				B44F63B8186D1C820029B7F7 /* REMBuildingWidgetChartContainerViewController.m */,
 			);
 			name = Building;
 			path = Controller/Building;
@@ -2216,8 +2214,7 @@
 		7A1A853617B4B257004D7167 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
-				7A1A854017B4B2E9004D7167 /* REMBuildingTrendChart.h */,
-				7A1A854117B4B2E9004D7167 /* REMBuildingTrendChart.m */,
+				EF19D8C81871643400807B3F /* BuildingTrend */,
 				7A1A854317B4B302004D7167 /* REMBuildingAverageChart.h */,
 				7A1A854417B4B303004D7167 /* REMBuildingAverageChart.m */,
 				7A9557BE17C73AD200249CED /* REMBuildingAirQualityChart.h */,
@@ -3190,6 +3187,17 @@
 			name = Searcher;
 			sourceTree = "<group>";
 		};
+		EF19D8C81871643400807B3F /* BuildingTrend */ = {
+			isa = PBXGroup;
+			children = (
+				7A1A854017B4B2E9004D7167 /* REMBuildingTrendChart.h */,
+				7A1A854117B4B2E9004D7167 /* REMBuildingTrendChart.m */,
+				EFD6C5BE186D58F5009E7B86 /* REMBuildingTrendWrapper.h */,
+				EFD6C5BF186D58F5009E7B86 /* REMBuildingTrendWrapper.m */,
+			);
+			name = BuildingTrend;
+			sourceTree = "<group>";
+		};
 		EF7CF5F3185D82D0000BA4AE /* Pie */ = {
 			isa = PBXGroup;
 			children = (
@@ -4075,6 +4083,7 @@
 				7A1A855417B4BB5D004D7167 /* REMBuildingTrendChartViewController.m in Sources */,
 				7A1A855717B4E278004D7167 /* REMAverageUsageDataModel.m in Sources */,
 				7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */,
+				EFD6C5C0186D58F5009E7B86 /* REMBuildingTrendWrapper.m in Sources */,
 				7A7B2111183CABB000C14248 /* REMRatioLegendFormator.m in Sources */,
 				EFD946FF1839DCBB00E9EC50 /* DCAxis.m in Sources */,
 				B4E815E1182770B700FB9BC5 /* REMWidgetEnergyDelegator.m in Sources */,
@@ -4125,7 +4134,6 @@
 				B46C8EBA17F27C25006DC4CB /* REMDashboardView.m in Sources */,
 				7ABD828E185AD75500A2AC06 /* REMAppConfiguration.m in Sources */,
 				EF5D1A801867D10E0069C8F5 /* _DCVGridlineLayer.m in Sources */,
-				B44F63B9186D1C820029B7F7 /* REMBuildingWidgetChartContainerViewController.m in Sources */,
 				EF03DC231841E462004B9EFD /* DCPieChartView.m in Sources */,
 				7A3F66FF184C61610079A244 /* REMLoginButton.m in Sources */,
 				7A0288FD17C20CC500709111 /* WeiboDialogClosePNG.m in Sources */,

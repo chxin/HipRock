@@ -8,9 +8,11 @@
 
 #import "_DCLayer.h"
 #import "DCXYChartBackgroundBand.h"
+#import "DCXYChartView.h"
 
 @interface _DCBackgroundBandsLayer : _DCLayer<DCContextHRangeObserverProtocal>
 -(void)setBands:(NSArray*)bands;
 @property (nonatomic, strong) UIFont* font;
 @property (nonatomic, strong) UIColor* fontColor;
+@property (nonatomic, weak) DCXYChartView* view;
 @end

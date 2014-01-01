@@ -9,6 +9,8 @@
 #import "_DCYAxisLabelLayer.h"
 #import "DCUtility.h"
 #import "REMColor.h"
+#import "DCXYChartBackgroundBand.h"
+
 @interface _DCYAxisLabelLayer()
 @property NSNumberFormatter* numberFormatter;
 @property (nonatomic, assign) CGFloat interval;
@@ -46,6 +48,26 @@
         CGContextSetLineWidth(ctx, self.axis.lineWidth);
         CGContextSetStrokeColorWithColor(ctx, self.axis.lineColor.CGColor);
         CGContextStrokePath(ctx);
+    }
+    if (!REMIsNilOrNull(self.axis.backgroundBands)) {
+        DCRange* yRange = self.yRange;
+        for(DCXYChartBackgroundBand* band in self.axis.backgroundBands) {
+            CGFloat yTop = [DCUtility getScreenYIn:self.graphContext.plotRect yVal:band.range.end vRange:yRange];
+            CGFloat yBottom = [DCUtility getScreenYIn:self.graphContext.plotRect yVal:band.range.location vRange:yRange];
+            
+            CGMutablePathRef path = CGPathCreateMutable();
+            CGContextSetFillColorWithColor(ctx, band.color.CGColor);
+            CGFloat xLeft = self.graphContext.plotRect.origin.x;
+            CGFloat xRight = xLeft + CGRectGetWidth(self.graphContext.plotRect);
+            CGPathMoveToPoint(path, NULL, xLeft, yTop);
+            CGPathAddLineToPoint(path, NULL, xLeft, yBottom);
+            CGPathAddLineToPoint(path, NULL, xRight, yBottom);
+            CGPathAddLineToPoint(path, NULL, xRight, yTop);
+            CGPathCloseSubpath(path);
+            CGContextAddPath(ctx, path);
+            CGContextDrawPath(ctx, kCGPathFill);
+            CGPathRelease(path);
+        }
     }
     
     UIGraphicsPushContext(ctx);

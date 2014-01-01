@@ -10,12 +10,51 @@
 
 @implementation REMChartStyle
 
++(REMChartStyle*)getCoverStyle {
+    REMChartStyle* style = [[REMChartStyle alloc]init];
+    style.userInteraction = NO;
+    style.animationDuration = 0.05;
+    style.xLineColor = [UIColor colorWithWhite:1 alpha:0.6];
+    style.xLineWidth = 1.0;
+    style.xGridlineWidth = 0.5;
+    style.xGridlineColor = style.xLineColor;
+    style.xGridlineStyle = DCLineTypeShortDashed;
+    style.yLineColor = style.xLineColor;
+    style.yLineWidth = 1;
+    style.yGridlineWidth = 0.5;
+    style.yGridlineColor = style.xLineColor;
+    style.yGridlineStyle = style.xGridlineStyle;
+    style.horizentalGridLineAmount = 5;
+    style.symbolSize = 12;
+    style.xLabelToLine = 8;
+    style.yLabelToLine = 8;
+    style.xLabelClipToBounds = NO;
+    
+    style.yAxisTitleToTopLabel = 10;
+    style.yAxisTitleFontSize = 9;
+    style.yAxisTitleColor = style.yTextColor = style.xTextColor = [UIColor whiteColor];
+    style.yTextFont = style.xTextFont = [UIFont systemFontOfSize:11.0f];
+    
+    
+    style.plotPaddingBottom = 0;
+    style.plotPaddingTop = 0;
+    style.plotPaddingLeft = 0;
+    style.plotPaddingRight = 22;
+    
+    style.benchmarkColor = [REMColor colorByHexString:@"#f15e31"];
+    
+    
+    style.playBeginAnimation = YES;
+    
+    return style;
+}
+
 +(REMChartStyle*)getMaximizedStyle {
     REMChartStyle* style = [[REMChartStyle alloc]init];
     style.userInteraction = YES;
     style.animationDuration = 0.05;
     style.xLineColor = [REMColor colorByHexString:@"#9d9d9d"];
-    style.xLineWidth = 4.0;
+    style.xLineWidth = 2.0;
     style.yGridlineColor = [REMColor colorByHexString:@"#eaeaea"];
     style.yGridlineWidth = 1.0;
     style.yGridlineStyle = DCLineTypeDefault;
@@ -31,6 +70,7 @@
     style.yAxisTitleFontSize = 13;
     style.yTextColor = style.xTextColor = [REMColor colorByHexString:@"#969696"];
     style.yTextFont = style.xTextFont = [UIFont fontWithName:@kBuildingFontSCRegular size:15.0];
+    style.xLabelClipToBounds = YES;
     
     style.focusSymbolLineColor = [REMColor colorByHexString:@"#f4f4f4"];
     style.focusSymbolLineStyle = DCLineTypeDefault;
@@ -106,7 +146,7 @@
     style.userInteraction = NO;
     style.animationDuration = 0.05;
     style.xLineColor = [REMColor colorByHexString:@"#9d9d9d"];
-    style.xLineWidth = 2.0;
+    style.xLineWidth = 1.0;
     style.yGridlineColor = [REMColor colorByHexString:@"#eaeaea"];
     style.yGridlineWidth = 1.0;
     style.yGridlineStyle = DCLineTypeDefault;
@@ -122,6 +162,7 @@
     style.yAxisTitleColor = [REMColor colorByHexString:@"#3b3b3b"];
     style.yAxisTitleToTopLabel = 0;
     style.yAxisTitleFontSize = 8;
+    style.xLabelClipToBounds = YES;
     
     style.plotPaddingBottom = 0;
     style.plotPaddingTop = 0;

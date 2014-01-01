@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "REMBuildingCommodityViewController.h"
 #import "REMBuildingChartBaseViewController.h"
+#import "REMWidgetObject.h"
 
 @interface REMBuildingChartContainerViewController : UIViewController
 
@@ -15,7 +16,7 @@
 @property (nonatomic,strong) Class chartHandlerClass;
 @property (nonatomic,weak) NSNumber *buildingId;
 @property (nonatomic,weak) NSNumber *commodityId;
+@property (nonatomic,weak) REMWidgetObject *widgetInfo;
 
-- (void) requestData:(REMBuildingChartBaseViewController *)handler;
 
 @end

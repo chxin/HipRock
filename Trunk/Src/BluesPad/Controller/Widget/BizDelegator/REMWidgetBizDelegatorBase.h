@@ -50,6 +50,8 @@
 
 -(void) releaseChart;
 
+- (BOOL) shouldPinToBuildingCover;
+
 - (void)mergeTempModel;
 
 @end

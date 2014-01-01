@@ -79,18 +79,18 @@
             </objects>
             <point key="canvasLocation" x="-1730" y="-329"/>
         </scene>
-        <!--Building Cover Widget View Controller-->
+        <!--Building Cover Widget View Controller - 定制图表-->
         <scene sceneID="vwu-Yt-Iux">
             <objects>
                 <tableViewController id="pmL-vf-YKl" customClass="REMBuildingCoverWidgetViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7fp-fN-Qu1">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="7fp-fN-Qu1">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="DjD-yx-ySN">
-                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="119" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DjD-yx-ySN" id="32e-gc-VwP">
                                     <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
@@ -103,10 +103,22 @@
                             <outlet property="delegate" destination="pmL-vf-YKl" id="ZYk-ll-A6Y"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="定制图表" id="JU9-UC-XNc">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="uMy-xj-SYI">
+                            <connections>
+                                <action selector="cancelButtonClicked:" destination="pmL-vf-YKl" id="XLV-vu-DUI"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="完成" style="done" id="heT-ct-T8g">
+                            <connections>
+                                <action selector="okButtonClicked:" destination="pmL-vf-YKl" id="PJN-SM-dxb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FIH-hF-Vsy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="864" y="-2197"/>
+            <point key="canvasLocation" x="2122" y="-2381"/>
         </scene>
         <!--Building View Controller-->
         <scene sceneID="XIG-df-ONL">
@@ -144,7 +156,7 @@
                         <segue destination="T2C-Tf-bPc" kind="custom" identifier="maxWidgetSegue" customClass="REMMaxWidgetSegue" id="VF8-aY-jAm"/>
                         <segue destination="at3-P1-D6R" kind="unwind" identifier="buildingToGallerySegue" unwindAction="unwindSegueToGallery:" id="7g6-Qk-QsX"/>
                         <segue destination="at3-P1-D6R" kind="unwind" identifier="buildingToMapSegue" unwindAction="unwindSegueToMap:" id="wUk-sf-qJM"/>
-                        <segue destination="pmL-vf-YKl" kind="popover" identifier="buildingCoverWidgetSegue" id="1jn-ep-yOc">
+                        <segue destination="1e1-zh-Ldk" kind="popover" identifier="buildingCoverWidgetSegue" id="1jn-ep-yOc">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                     </connections>
@@ -185,7 +197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IW-uy-Qy4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4592" y="-2371"/>
+            <point key="canvasLocation" x="5822" y="-2371"/>
         </scene>
         <!--Widget Max View Controller-->
         <scene sceneID="kih-fe-Pxz">
@@ -211,8 +223,8 @@
                         <segue destination="NpH-nl-7td" kind="popover" id="ce5-LQ-Qg6">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
-                        <segue destination="0Gt-be-FfQ" kind="popover" identifier="widgetBuildingCoverSegue" id="1t3-ld-sMP">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        <segue destination="aiA-Pd-ec5" kind="popover" identifier="widgetBuildingCoverSegue" id="1t3-ld-sMP">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
                         </segue>
                     </connections>
                 </viewController>
@@ -700,18 +712,18 @@
             </objects>
             <point key="canvasLocation" x="3308" y="-1166"/>
         </scene>
-        <!--Widget Building Cover View Controller-->
+        <!--Widget Building Cover View Controller - 添加至建筑封面-->
         <scene sceneID="iIx-hv-aX6">
             <objects>
                 <tableViewController id="0Gt-be-FfQ" customClass="REMWidgetBuildingCoverViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Tjq-av-kSv">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Tjq-av-kSv">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kyq-hm-yxE">
-                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="119" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kyq-hm-yxE" id="R4X-UP-8oh">
                                     <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
@@ -724,10 +736,22 @@
                             <outlet property="delegate" destination="0Gt-be-FfQ" id="EIX-SV-GkB"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="添加至建筑封面" id="lbO-Sc-6OJ">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="Vgg-GN-dhw">
+                            <connections>
+                                <action selector="cancelButtonClicked:" destination="0Gt-be-FfQ" id="ncQ-3e-h7F"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="完成" style="done" id="wTV-vd-idZ">
+                            <connections>
+                                <action selector="okButtonClicked:" destination="0Gt-be-FfQ" id="3eN-gi-4eR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M7a-4Q-2K9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3308" y="-57"/>
+            <point key="canvasLocation" x="4538" y="-57"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="206-mw-I0A">
@@ -745,7 +769,43 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m0M-3e-OqK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3362" y="-2371"/>
+            <point key="canvasLocation" x="4592" y="-2371"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xnA-0H-Vsw">
+            <objects>
+                <navigationController storyboardIdentifier="buildingWidgetNavigation" automaticallyAdjustsScrollViewInsets="NO" id="1e1-zh-Ldk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bCU-WT-bMu">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="pmL-vf-YKl" kind="relationship" relationship="rootViewController" id="oD4-3W-z2R"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z1D-Kq-BJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="892" y="-2381"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ebq-Mn-wr1">
+            <objects>
+                <navigationController storyboardIdentifier="widgetBuildingCoverNavigation" automaticallyAdjustsScrollViewInsets="NO" id="aiA-Pd-ec5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aRl-7G-1Dd">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0Gt-be-FfQ" kind="relationship" relationship="rootViewController" id="zhq-cx-N6V"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wcq-ij-6pa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3308" y="-57"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

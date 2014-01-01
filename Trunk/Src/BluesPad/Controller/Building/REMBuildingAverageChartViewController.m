@@ -491,21 +491,6 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     int index = [[((NSString *)plot.identifier) componentsSeparatedByString:@"-"][0] intValue];
     
     return [[self.chartData[index] objectForKey:@"data"] count];
-    //
-//    NSUInteger records;
-//    CPTBarPlot *line = (CPTBarPlot *)plot;
-//    for (NSDictionary *series in self.chartData)
-//    {
-//        if([line.identifier isEqual:[series objectForKey:@"identity" ]] == YES)
-//        {
-//            records = [[series objectForKey:@"data"] count];
-//            break;
-//        }
-//    }
-////
-//    //NSLog(@"line %@ has %d records.",line.identifier, records);
-//    
-//    return records;
 }
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
@@ -523,99 +508,8 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
         return [point objectForKey:@"y"];
     }
     
-//    NSNumber *number;
-//    CPTBarPlot *line = (CPTBarPlot *)plot;
-//    for (NSDictionary *series in self.chartData)
-//    {
-//        if([line.identifier isEqual:[series objectForKey:@"identity" ]] == YES)
-//        {
-//            NSDictionary *point = [series objectForKey:@"data"][idx];
-//            
-//            if(fieldEnum == CPTBarPlotFieldBarLocation)
-//            {
-//                number = [point objectForKey:@"x"];
-//            }
-//            else
-//            {
-//                number = [point objectForKey:@"y"];
-//            }
-//            
-//            break;
-//        }
-//    }
-//    return number;
 }
 
 
 
-
-/*
- 
- -(void)longPressedAt:(NSDate*)x {
- 
- //determin x date
- NSTimeInterval pressingPoint = [x timeIntervalSince1970];
- NSArray *unitData = [self.chartData[0] objectForKey:@"data"];
- 
- int index = 0;
- NSDate *pointDate = nil;
- REMDataRange *pointRange = nil;
- NSDictionary *point = nil;
- for(;index<unitData.count;index++){
- point = unitData[index];
- 
- //15 day
- pointDate = [NSDate dateWithTimeIntervalSince1970: [((NSDate *)[point valueForKey:@"x"]) timeIntervalSince1970]];
- 
- NSDate *upperBoundDate = [REMTimeHelper add:15 onPart:REMDateTimePartDay ofDate:pointDate];
- NSDate *lowerBoundDate = [REMTimeHelper add:-15 onPart:REMDateTimePartDay ofDate:pointDate];
- pointRange = [[REMDataRange alloc] initWithStart:[lowerBoundDate timeIntervalSince1970] andEnd:[upperBoundDate timeIntervalSince1970]];
- 
- if([pointRange isValueInside:pressingPoint]){
- break;
- }
- }
- 
- if(pointDate != nil){
- CPTXYAxis *horizontalAxis = ((CPTXYAxisSet *)self.chartView.graph.axisSet).xAxis;
- 
- //clear the previous one tool tip
- if(self.chartView.annotationBand != nil){
- self.chartView.annotationBand = nil;
- [horizontalAxis removeBackgroundLimitBand:self.chartView.annotationBand];
- }
- 
- if(self.chartView.annotation != nil)
- {
- [self.chartView.graph.plotAreaFrame.plotArea removeAllAnnotations];
- self.chartView.annotation = nil;
- }
- 
- //draw lower part of the tool tip
- NSDate *bandStartDate = [REMTimeHelper add:-10 onPart:REMDateTimePartDay ofDate: pointDate];
- NSDate *bandEndDate = [REMTimeHelper add:10 onPart:REMDateTimePartDay ofDate: pointDate];
- CPTPlotRange *bandRange=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([bandStartDate timeIntervalSince1970]) length:CPTDecimalFromDouble([bandEndDate timeIntervalSince1970] - [bandStartDate timeIntervalSince1970])];
- CPTLimitBand *band= [CPTLimitBand limitBandWithRange:bandRange fill:[CPTFill fillWithColor:[CPTColor lightGrayColor]]];
- [horizontalAxis addBackgroundLimitBand:band];
- 
- //draw upper part of the tool tip
- CPTMutableTextStyle *tooltipTextStyle = [[CPTMutableTextStyle alloc] init];
- tooltipTextStyle.textAlignment = CPTTextAlignmentCenter;
- tooltipTextStyle.fontSize = 14.0;
- 
- CPTTextLayer *layer = [[CPTTextLayer alloc] initWithText:[[point valueForKey:@"y"] stringValue]];
- layer.textStyle = tooltipTextStyle;
- layer.backgroundColor = [UIColor lightGrayColor].CGColor;
- layer.bounds = CGRectMake(0, 0, 160, 40);
- layer.cornerRadius = 5;
- layer.borderColor = [UIColor redColor].CGColor;
- 
- NSArray *anchorPoint = [NSArray arrayWithObjects:[NSNumber numberWithDouble:[x timeIntervalSince1970] ],@100 , nil];
- 
- self.chartView.annotation = [[CPTPlotSpaceAnnotation alloc] initWithPlotSpace:self.chartView.graph.defaultPlotSpace anchorPlotPoint:anchorPoint];
- self.chartView.annotation.contentLayer = layer;
- [self.chartView.graph.plotAreaFrame.plotArea addAnnotation:self.chartView.annotation];
- }
- }
- */
 @end

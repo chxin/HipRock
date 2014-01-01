@@ -11,7 +11,6 @@
 #import "DCAxis.h"
 #import "DCXYSeries.h"
 #import "DCXYChartViewDelegate.h"
-#import "_DCBackgroundBandsLayer.h"
 
 @interface DCXYChartView : UIView<DCContextHRangeObserverProtocal>
 @property (nonatomic, strong) DCAxis* xAxis;
@@ -49,6 +48,9 @@
 @property (nonatomic, strong) UIColor* backgroundBandFontColor;
 
 @property (nonatomic, assign) BOOL blockReboundAnimation;   // YES的时候禁止回弹动画
+@property (nonatomic, assign) BOOL xAxisLabelClipToBounds;
+
+-(DCRange*)getRangeOfAxis:(DCAxis*)axis;
 
 - (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange stacked:(BOOL)stacked;
 
