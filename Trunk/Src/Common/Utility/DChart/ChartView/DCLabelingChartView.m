@@ -114,20 +114,20 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     } else {
         [self hideTooltip];
     }
-//    if (touchLevel) {
-//        self.indicatorLayer.hidden = NO;
-//        CGFloat centerX = [self.labelBezierPathsCenterX[levelIndex] doubleValue];
-//        self.indicatorLayer.frame = CGRectMake(centerX - self.style.focusSymbolIndicatorSize / 2, self.indicatorLayer.frame.origin.y, self.indicatorLayer.frame.size.width, self.indicatorLayer.frame.size.height);
-//    } else {
-//        self.indicatorLayer.hidden = YES;
-//    }
-//    if (!REMIsNilOrNull(self.delegate) && [self.delegate respondsToSelector:@selector(focusOn:)]) {
-//        if (levelIndex != self.focusLabelIndex) {
-//            self.focusLabelIndex = levelIndex;
-//            [self.delegate focusOn:levelIndex == INT32_MIN ? nil : self.series.labels[levelIndex]];
-//            [self setNeedsDisplay];
-//        }
-//    }
+    if (touchLevel) {
+        self.indicatorLayer.hidden = NO;
+        CGFloat centerX = [self.labelBezierPathsCenterX[levelIndex] doubleValue];
+        self.indicatorLayer.frame = CGRectMake(centerX - self.style.focusSymbolIndicatorSize / 2, self.indicatorLayer.frame.origin.y, self.indicatorLayer.frame.size.width, self.indicatorLayer.frame.size.height);
+    } else {
+        self.indicatorLayer.hidden = YES;
+    }
+    if (!REMIsNilOrNull(self.delegate) && [self.delegate respondsToSelector:@selector(focusOn:)]) {
+        if (levelIndex != self.focusLabelIndex) {
+            self.focusLabelIndex = levelIndex;
+            [self.delegate focusOn:levelIndex == INT32_MIN ? nil : self.series.labels[levelIndex]];
+            [self setNeedsDisplay];
+        }
+    }
 }
 
 -(void)hideTooltip {
