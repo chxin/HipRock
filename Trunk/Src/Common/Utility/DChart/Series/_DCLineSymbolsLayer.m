@@ -19,11 +19,30 @@
         _series = series;
         for (DCXYSeries* s in series) {
             s.layer = self;
+            _enableGrowAnimation = YES;
         }
     }
     return self;
 }
 
+-(void)setNeedsDisplay {
+    if (self.enableGrowAnimation) {
+        _enableGrowAnimation = NO;
+        CALayer* superLayer = self.superlayer;
+        CGPoint orig = superLayer.frame.origin;
+        CGRect newBounds = superLayer.bounds;
+        CGRect oldBounds = CGRectMake(newBounds.origin.x, newBounds.origin.y, 0, newBounds.size.height);
+        
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"bounds"];
+        animation.fromValue = [NSValue valueWithCGRect:oldBounds];
+        animation.toValue = [NSValue valueWithCGRect:newBounds];
+        animation.duration = kDCAnimationDuration;
+        superLayer.anchorPoint = CGPointZero;
+        superLayer.position = orig;
+        [superLayer addAnimation:animation forKey:@"bounds"];
+    }
+    [super setNeedsDisplay];
+}
 
 -(CGFloat)getHeightOfPoint:(DCDataPoint*)point heightUnit:(CGFloat)heightUnit {
     double y = 0;
