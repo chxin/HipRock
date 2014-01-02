@@ -12,6 +12,7 @@
 #import "REMPieChartTooltipView.h"
 #import "REMTrendChartTooltipView.h"
 #import "REMChartTooltipItem.h"
+#import "REMLabelingTooltipView.h"
 
 @interface REMTooltipViewBase()
 
@@ -26,6 +27,9 @@
 {
     if(widget.diagramType == REMDiagramTypePie){
         return [[REMPieChartTooltipView  alloc] initWithHighlightedPoints:points inEnergyData:data widget:widget andParameters:parameters];
+    }
+    else if(widget.diagramType == REMDiagramTypeLabelling){
+        return [[REMLabelingTooltipView alloc] initWithHighlightedPoints:points atX:x inEnergyData:data widget:widget andParameters:parameters];
     }
     else{
         return [[REMTrendChartTooltipView alloc] initWithHighlightedPoints:points atX:x inEnergyData:data widget:widget andParameters:parameters];

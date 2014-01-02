@@ -13,6 +13,7 @@
 #import "REMWidgetEnergyDelegator.h"
 #import "REMWidgetMonthPickerViewController.h"
 #import "DCLabelingWrapper.h"
+#import "DCLabelingChartView.h"
 
 const static CGFloat kLabellingTimePickerWidth=105;
 const static CGFloat kLabellingBenchmarkFontSize=20;
@@ -25,6 +26,8 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
 @property (nonatomic,weak) UIView *chartContainer;
 @property (nonatomic,weak) UIView *searchView;
 @property (nonatomic,weak) UILabel *benchmarkTextLabel;
+
+@property (nonatomic,weak) REMTooltipViewBase *tooltipView;
 
 @end
 
@@ -156,6 +159,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     DCLabelingWrapper  *widgetWrapper;
     if (widgetType == REMDiagramTypeLabelling) {
         widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper.delegate = self;
     }
     if (widgetWrapper != nil) {
         [self.chartContainer addSubview:[widgetWrapper getView]];
@@ -226,6 +230,59 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
         [[self.chartWrapper getView] removeFromSuperview];
         self.chartWrapper=nil;
     }
+}
+
+#pragma mark Tooltip
+-(void)highlightPoint:(DCLabelingLabel*)point
+{
+    NSDate *x = [self.tempModel.searchTimeRangeArray[0] startTime];
+    if(self.tooltipView != nil){
+        REMTrendChartTooltipView *trendTooltip = (REMTrendChartTooltipView *)self.tooltipView;
+        
+        [trendTooltip updateHighlightedData:@[point] atX:x];
+    }
+    else{
+        [self showTooltip:@[point] forX:x];
+    }
+    
+}
+
+
+-(void)tooltipWillDisapear
+{
+    //NSLog(@"tool tip will disappear");
+    if(self.tooltipView==nil)
+        return;
+    
+    [self hideTooltip:^{
+        [self.chartWrapper cancelToolTipStatus];
+    }];
+}
+
+-(void)showTooltip:(NSArray *)highlightedPoints forX:(id)x
+{
+    REMTooltipViewBase *tooltip = [REMTooltipViewBase tooltipWithHighlightedPoints:highlightedPoints atX:x inEnergyData:self.energyData widget:self.widgetInfo andParameters:self.tempModel];
+    tooltip.tooltipDelegate = self;
+    
+    [self.view addSubview:tooltip];
+    self.tooltipView = tooltip;
+    
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        tooltip.frame = kDMChart_TooltipFrame;
+    } completion:nil];
+}
+
+-(void)hideTooltip:(void (^)(void))complete
+{
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.tooltipView.frame = kDMChart_TooltipHiddenFrame;
+    } completion:^(BOOL isCompleted){
+        [self.tooltipView removeFromSuperview];
+        self.tooltipView = nil;
+        
+        if(complete != nil)
+            complete();
+    }];
 }
 
 
