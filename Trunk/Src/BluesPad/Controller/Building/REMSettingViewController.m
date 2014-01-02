@@ -65,8 +65,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (section == 0) return 2;
-    if (section == 1) return 2;
+    if (section == 0) return 4;
+    if (section == 1) return 1;
     if (section == 2) return 1;
     if (section == 3) return 1;
     if (section == 4) return 1;
@@ -81,7 +81,7 @@
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     
     // weibo account binding cell
-    if (indexPath.section == 2 && indexPath.item == 0) {
+    if (indexPath.section == 1 && indexPath.item == 0) {
         [[cell textLabel]setText:NSLocalizedString(@"Setting_BindWeibo", @"")]; //绑定新浪微博
         cell.detailTextLabel.text=@"";
         UISwitch *switcher= [[UISwitch alloc]initWithFrame:CGRectZero];
@@ -101,16 +101,12 @@
             NSString *name=[REMApplicationContext instance].currentUser.realname;
             [cell.detailTextLabel setText:name];
         }
-        else{
+        else if(indexPath.row==1){
             [[cell textLabel]setText:NSLocalizedString(@"Setting_EMOPID", @"")];//能源管理开发平台ID
             NSString *name1=[REMApplicationContext instance].currentUser.name;
             [cell.detailTextLabel setText:name1];
         }
-    }
-    else if(indexPath.section==1){
-        
-        
-        if(indexPath.row==0){
+        else if(indexPath.row==2){
             [[cell textLabel]setText:NSLocalizedString(@"Setting_CurrentCustomer", @"")];//当前客户
             NSString *name=[REMApplicationContext instance].currentCustomer.name;
             [cell.detailTextLabel setText:name];
@@ -121,7 +117,7 @@
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
     }
-    else if (indexPath.section==3 && indexPath.row==0){
+    else if (indexPath.section==2 && indexPath.row==0){
         [[cell textLabel]setText:NSLocalizedString(@"Setting_About", @"")];//关于云能效
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     }
@@ -149,14 +145,17 @@
          [logout addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
          [cell.contentView addSubview:logout];*/
     }
+    else if(indexPath.section==3 && indexPath.row==0){
+        cell.textLabel.text=@"更新全部数据";
+    }
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.section==1 && indexPath.row==0){
+    if(indexPath.section==0 && indexPath.row==2){
         [self performSegueWithIdentifier:@"settingCustomerDetailSegue" sender:self];
     }
-    else if(indexPath.section==3 && indexPath.row==0){
+    else if(indexPath.section==2 && indexPath.row==0){
         [self performSegueWithIdentifier:@"settingAboutSegue" sender:self];
     }
 }
@@ -263,13 +262,13 @@
         
         
     }
-    else if(indexPath.section==1 && indexPath.row==1){
+    else if(indexPath.section==0 && indexPath.row==3){
         [self performSegueWithIdentifier:@"settingCustomerDetailSegue" sender:self];
     }
-    else if(indexPath.section == 1 && indexPath.row==0){
+    else if(indexPath.section == 0 && indexPath.row==2){
         [self performSegueWithIdentifier:@"settingCustomerSelectionSegue" sender:self];
     }
-    else if(indexPath.section==3 && indexPath.row==0){
+    else if(indexPath.section==2 && indexPath.row==0){
         [self performSegueWithIdentifier:@"settingAboutSegue" sender:self];
     }
 }
