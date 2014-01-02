@@ -77,6 +77,11 @@
     style.focusSymbolLineWidth = 2;
     style.focusSymbolIndicatorSize = 40;
     
+    style.piePercentageTextHidden = NO;
+    style.piePercentageTextRadius = 144;
+    style.piePercentageTextColor = [UIColor whiteColor];
+    style.piePercentageTextFont = [UIFont fontWithName:@kBuildingFontSCRegular size:15.0];
+    
     style.pieRadius = 180;
     style.pieShadowRadius = 188;
     
@@ -169,6 +174,9 @@
     style.plotPaddingLeft = 0;
     style.plotPaddingRight = 0;
     
+    style.piePercentageTextHidden = YES;
+//    style.piePercentageTextColor = [UIColor whiteColor];
+//    style.piePercentageTextFont = [UIFont fontWithName:@kBuildingFontSCRegular size:15.0];
     style.pieRadius = 30;
     style.pieShadowRadius = 33;
     

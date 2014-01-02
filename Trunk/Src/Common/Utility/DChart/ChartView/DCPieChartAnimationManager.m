@@ -122,7 +122,8 @@ const NSString* stepKey = @"step";
     [self playFrames:animationFrames];
 }
 
--(double)ffff:(double)v {
+// 把一个数Mod2
+-(double)abs2:(double)v {
     int a = (v)/2;
     if (v < 0) {
         v -= 2*(a-1);
@@ -183,7 +184,7 @@ const NSString* stepKey = @"step";
         frame.rotationAngle = @(estimatedRotationAngle);
         [animationFrames addObject:frame];
     }
-    double lastFrameAlignedRotation = [self ffff:estimatedRotationAngle];
+    double lastFrameAlignedRotation = [self abs2:estimatedRotationAngle];
     double targetRotation = 2 - [self findNearbySliceCenter:lastFrameAlignedRotation];  // 预计对准的扇区的中线位置
     [animationFrames addObjectsFromArray:[self getAngleTurningFramesFrom:lastFrameAlignedRotation to:targetRotation]];
     // 应用动画
@@ -195,6 +196,7 @@ const NSString* stepKey = @"step";
 
 -(void)playFrames:(NSArray*)frames {
     if (frames == nil || frames.count == 0) return;
+    [self.view hidePercentageTexts];
     if (self.animationTimer && [self.animationTimer isValid]) [self.animationTimer invalidate];
     self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animationTimerTarget) userInfo:frames.mutableCopy repeats:YES];
 }
@@ -208,6 +210,7 @@ const NSString* stepKey = @"step";
         NSMutableArray* frames = self.animationTimer.userInfo;
         if (frames.count == 0) {
             [self stopTimer];
+            [self.view showPercentageTexts];
         } else {
             DCPieChartAnimationFrame* theFrame = frames[0];
             [frames removeObjectAtIndex:0];
@@ -285,6 +288,7 @@ const NSString* stepKey = @"step";
         point.hidden = hidden;
         return;
     }
+    [self.view hidePercentageTexts];
     for (NSMutableDictionary* valueDic in self.pointValueDics) {
         if (valueDic[pointKey] == point) {
             NSNumber* step = valueDic[stepKey];

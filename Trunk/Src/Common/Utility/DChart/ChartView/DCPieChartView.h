@@ -13,9 +13,10 @@
 #import "DCPieChartViewDelegate.h"
 #import "REMCommonHeaders.h"
 #import "REMChartHeader.h"
+#import "REMChartStyle.h"
 
 @interface DCPieChartView : UIView
-
+@property (nonatomic, weak) REMChartStyle* chartStyle;
 @property (nonatomic,strong,readonly) DCPieSeries* series;
 @property (nonatomic,assign) CGFloat radius;            // 圆形区域半径
 @property (nonatomic,assign) CGFloat radiusForShadow;   // 投影半径
@@ -33,5 +34,7 @@
 
 - (id)initWithFrame:(CGRect)frame series:(DCPieSeries*)series;
 -(void)setSlice:(DCPieDataPoint*)slice hidden:(BOOL)hidden;
+-(void)showPercentageTexts;
+-(void)hidePercentageTexts;
 -(void)redraw;
 @end

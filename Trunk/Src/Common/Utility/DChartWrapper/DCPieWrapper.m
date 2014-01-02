@@ -43,6 +43,7 @@
         slice.hidden = [self isTargetHidden:slice.target];
     }
     _view = [[DCPieChartView alloc]initWithFrame:frame series:series];
+    self.view.chartStyle = style;
     self.view.delegate = self;
     self.view.playBeginAnimation = self.style.playBeginAnimation;
     self.view.userInteractionEnabled = self.style.userInteraction;

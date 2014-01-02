@@ -172,6 +172,7 @@
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
+    [self hidePercentageTexts];
     [self.animationManager stopTimer];
     self.panSpeed = 0;
     _rotateDirection = REMDirectionNone;
@@ -198,5 +199,15 @@
 -(void)setSlice:(DCPieDataPoint *)slice hidden:(BOOL)hidden {
     if (slice.hidden == hidden) return;
     [self.animationManager setPoint:slice hidden:hidden];
+}
+
+-(void)showPercentageTexts {
+    self.pieLayer.percentageTextHidden = NO;
+    [self.pieLayer setNeedsDisplay];
+}
+
+-(void)hidePercentageTexts {
+    self.pieLayer.percentageTextHidden = YES;
+    [self.pieLayer setNeedsDisplay];
 }
 @end

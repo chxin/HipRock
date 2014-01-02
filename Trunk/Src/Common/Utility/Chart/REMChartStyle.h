@@ -63,6 +63,11 @@
 @property (nonatomic, strong) UIColor* focusSymbolLineColor;
 @property (nonatomic, assign) CGFloat focusSymbolIndicatorSize;
 
+@property (nonatomic, strong) UIFont* piePercentageTextFont;
+@property (nonatomic, assign) BOOL piePercentageTextHidden;
+@property (nonatomic, assign) CGFloat piePercentageTextRadius;  // 百分比文本距离Pie圆心的距离
+@property (nonatomic, strong) UIColor* piePercentageTextColor;
+
 @property (nonatomic, assign) CGFloat pieRadius;
 @property (nonatomic, assign) CGFloat pieShadowRadius;
 /****** PieChart Style End *******/
