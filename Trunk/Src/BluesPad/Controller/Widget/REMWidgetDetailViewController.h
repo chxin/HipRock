@@ -10,13 +10,14 @@
 #import "REMWidgetObject.h"
 #import "REMEnergyViewData.h"
 #import "REMEnum.h"
+#import "REMBuildingOverallModel.h"
 
-
-@interface REMWidgetDetailViewController : UIViewController
+@interface REMWidgetDetailViewController : UIViewController<UIPopoverControllerDelegate>
 
 @property (nonatomic,weak) REMWidgetObject *widgetInfo;
 @property (nonatomic,weak) REMEnergyViewData *energyData;
 @property (nonatomic,weak) UIView *titleContainer;
+@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 
 - (void)showChart;
 -(void)releaseChart;

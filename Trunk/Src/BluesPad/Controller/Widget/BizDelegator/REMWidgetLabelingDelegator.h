@@ -8,8 +8,10 @@
 
 #import "REMWidgetBizDelegatorBase.h"
 #import "REMWidgetMonthPickerViewController.h"
+#import "DCLabelingWrapper.h"
+#import "REMTooltipViewBase.h"
 
 
-@interface REMWidgetLabelingDelegator : REMWidgetBizDelegatorBase<REMWidgetMonthPickerViewProtocol>
+@interface REMWidgetLabelingDelegator : REMWidgetBizDelegatorBase<REMWidgetMonthPickerViewProtocol, REMChartLabelingDelegate,REMChartTooltipDelegate>
 
 @end

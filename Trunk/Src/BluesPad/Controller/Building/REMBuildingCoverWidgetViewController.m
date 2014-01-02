@@ -78,6 +78,29 @@
     }
 }
 
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (indexPath.section==0) {
+//        return 10;
+//    }
+//    return 44;
+//}
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    if (section==0) {
+//        return 22;
+//    }
+//    return 20;
+//}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    if (section == self.dashboardArray.count+1) {
+        return NSLocalizedString(@"Building_WidgetRelationInfo", @"");
+    }
+    return @"";
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -122,6 +145,7 @@
     [cell setSelected:NO];
     [cell setHighlighted:NO];
     [tableView deselectRowAtIndexPath:self.currentIndexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     UITableViewCell *oldCell=[tableView cellForRowAtIndexPath:self.currentIndexPath];
     [oldCell setSelected:NO];
     [oldCell setAccessoryType:UITableViewCellAccessoryNone];
