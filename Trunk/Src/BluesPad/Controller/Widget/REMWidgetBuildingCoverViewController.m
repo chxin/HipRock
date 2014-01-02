@@ -9,7 +9,7 @@
 
 @interface REMWidgetBuildingCoverViewController ()
 
-@property (nonatomic,strong) NSIndexPath *currentIndexPath;
+@property (nonatomic,strong) NSMutableArray *currentSelectedArray;
 
 @end
 
@@ -21,6 +21,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"widgetListCell"];
+    self.currentSelectedArray = [NSMutableArray array];
     for (int i=0; i<self.data.count; ++i) {
         NSDictionary *dic=self.data[i];
         NSInteger section=i+1;
@@ -32,10 +33,15 @@
             row=1;
         }
         if (row != NSNotFound) {
-            self.currentIndexPath=[NSIndexPath indexPathForRow:row inSection:section];
+            NSIndexPath *path=[NSIndexPath indexPathForRow:row inSection:section];
+            [self.currentSelectedArray addObject:path];
             break;
         }
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [self.popController setPopoverContentSize:CGSizeMake(350, 700) animated:YES];
 }
 
 
@@ -65,12 +71,12 @@
         cell.textLabel.text=dic[@"secondName"];
         cell.textLabel.tag=[dic[@"secondId"] integerValue];
     }
-    if (self.currentIndexPath.section == indexPath.section && self.currentIndexPath.row==indexPath.row) {
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    for (NSIndexPath *path in self.currentSelectedArray) {
+        if (path.section == indexPath.section && path.row==indexPath.row) {
+            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        }
     }
-    else{
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
-    }
+    
     return cell;
 }
 
@@ -89,14 +95,19 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    if (indexPath.section!=self.currentIndexPath.section && indexPath.row!=indexPath.row) {
-        UITableViewCell *oldCell=[tableView cellForRowAtIndexPath:self.currentIndexPath];
-        [oldCell setSelected:NO];
-        [oldCell setHighlighted:NO];
-        [oldCell setAccessoryType:UITableViewCellAccessoryNone];
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-        self.currentIndexPath=[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
+    for (NSIndexPath *path in self.currentSelectedArray) {
+        if (path.section == indexPath.section && indexPath.row==path.row) {
+            UITableViewCell *cell1=[tableView cellForRowAtIndexPath:path];
+            [cell1 setAccessoryType:UITableViewCellAccessoryNone];
+            [self.currentSelectedArray removeObject:path];
+            return;
+        }
     }
+    
+    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    NSIndexPath *newPath=[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
+    [self.currentSelectedArray addObject:newPath];
+    
     
 }
 
