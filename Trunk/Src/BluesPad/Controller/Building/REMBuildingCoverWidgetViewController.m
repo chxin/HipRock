@@ -44,6 +44,10 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [self.popController setPopoverContentSize:CGSizeMake(350, 700) animated:YES];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     NSUInteger counter=2;
     counter+=self.dashboardArray.count;
