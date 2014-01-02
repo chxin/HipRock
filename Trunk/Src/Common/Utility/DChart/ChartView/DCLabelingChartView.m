@@ -262,7 +262,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     
 //    self.indicatorLayer
     UIBezierPath* indicatorPath = [UIBezierPath bezierPath];
-    self.indicatorLayer.fillColor = self.style.focusSymbolLineColor.CGColor;
+    self.indicatorLayer.fillColor = self.style.indicatorColor.CGColor;
     [indicatorPath moveToPoint:CGPointMake(0, 0)];
     [indicatorPath addLineToPoint:CGPointMake(self.style.focusSymbolIndicatorSize, 0)];
     [indicatorPath addLineToPoint:CGPointMake(self.style.focusSymbolIndicatorSize/2, self.style.focusSymbolIndicatorSize/2)];
