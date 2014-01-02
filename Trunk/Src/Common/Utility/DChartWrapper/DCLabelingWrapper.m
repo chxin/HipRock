@@ -97,4 +97,9 @@
         [((id<REMChartLabelingDelegate>)(self.delegate)) highlightPoint:point];
     }
 }
+
+-(void)cancelToolTipStatus {
+    [super cancelToolTipStatus];
+    [self.view unfocusLabel];
+}
 @end

@@ -35,6 +35,7 @@
 //@property (nonatomic,assign) CGFloat tooltipIconLeftMargin;
 
 @property (nonatomic, strong) DCLabelingSeries* series;
+-(void)unfocusLabel;
 
 @property (nonatomic, weak) id<DCLabelingChartDelegate> delegate;
 

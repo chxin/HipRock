@@ -112,7 +112,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
 
         [self.tooltipView showAt:touchPoint];
     } else {
-        [self hideTooltip];
+        [self hideStageTooltip];
     }
     if (touchLevel) {
         self.indicatorLayer.hidden = NO;
@@ -130,7 +130,13 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     }
 }
 
--(void)hideTooltip {
+-(void)unfocusLabel {
+    self.focusLabelIndex = INT32_MIN;
+    self.indicatorLayer.hidden = YES;
+    [self setNeedsDisplay];
+}
+
+-(void)hideStageTooltip {
     if (!REMIsNilOrNull(self.tooltipView)) {
         [UIView animateWithDuration:0.2 animations:^(void){
             self.tooltipView.alpha = 0;
