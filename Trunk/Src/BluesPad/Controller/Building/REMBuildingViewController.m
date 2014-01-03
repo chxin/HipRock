@@ -353,6 +353,8 @@ const static CGFloat buildingGap=20;
         if([self.fromController isKindOfClass:[REMGalleryViewController class]]){
             REMGalleryViewController *gallergyController = (REMGalleryViewController *)self.fromController;
             
+            [gallergyController scrollToBuildingIndex:self.currentBuildingIndex];
+            
             REMGalleryCollectionCell *cell = [gallergyController galleryCellForBuildingIndex:self.currentBuildingIndex];
             
             if([cell isEqual:gallergyController.focusedCell] == NO){ //if the focused cell has changed
@@ -493,6 +495,8 @@ const static CGFloat buildingGap=20;
     
     if([self.fromController isKindOfClass:[REMGalleryViewController class]]){
         REMGalleryViewController *gallergyController = (REMGalleryViewController *)self.fromController;
+        
+        [gallergyController scrollToBuildingIndex:self.currentBuildingIndex];
         
         REMGalleryCollectionCell *cell = [gallergyController galleryCellForBuildingIndex:self.currentBuildingIndex];
         

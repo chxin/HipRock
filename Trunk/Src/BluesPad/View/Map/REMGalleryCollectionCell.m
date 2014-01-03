@@ -53,9 +53,17 @@
         
         UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinching:)];
         [self addGestureRecognizer:pinchRecognizer];
+        
+        //UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(taptest:)];
+        //[self addGestureRecognizer:tapRecognizer];
     }
     
     return self;
+}
+
+-(void)taptest:(UITapGestureRecognizer *)tap
+{
+    NSLog(@"cell tapped: %@", [tap.view class]);
 }
 
 
