@@ -23,8 +23,8 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self){
-//        self.layer.borderColor = [UIColor purpleColor].CGColor;
-//        self.layer.borderWidth = 1.0;
+        self.layer.borderColor = [UIColor purpleColor].CGColor;
+        self.layer.borderWidth = 1.0;
         self.clipsToBounds = NO;
         self.backgroundColor = [UIColor clearColor];
         
@@ -41,6 +41,8 @@
         //self.contentMode = UIViewContentModeScaleToFill;
         self.contentView.backgroundColor = [UIColor clearColor];
         self.contentView.clipsToBounds = NO;
+//        self.layer.borderColor = [UIColor orangeColor].CGColor;
+//        self.layer.borderWidth = 1.0;
     }
     
     return self;
