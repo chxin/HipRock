@@ -64,11 +64,13 @@
 
 -(void)touchBegan {
     self.chartStatus = DChartStatusFocus;
+    [self.view setIndicatorHidden:NO];
 }
 
 -(void)cancelToolTipStatus {
     [super cancelToolTipStatus];
     self.focusIndex = INT32_MIN;
+    [self.view setIndicatorHidden:YES];
 }
 
 -(NSUInteger)getVisableSeriesCount {

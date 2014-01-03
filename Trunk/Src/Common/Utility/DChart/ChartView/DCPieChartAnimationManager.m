@@ -134,6 +134,7 @@ const NSString* stepKey = @"step";
 }
 
 -(NSArray*)getAngleTurningFramesFrom:(double)from to:(double)to {
+    if (from == to) return nil;
     int frames = kDCAnimationDuration * kDCFramesPerSecord;
     int halfFrames = frames / 2;
     int stepDiv = [self sumFrom:0 to:halfFrames];

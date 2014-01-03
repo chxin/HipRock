@@ -87,12 +87,6 @@
 }
 
 -(void)customizeView:(DCXYChartView *)view {
-//    BOOL hasBuildingTag = NO;
-//    for (DCXYSeries* s in view.seriesList) {
-//        if (s.target.type == REMEnergyTargetTag) {
-//            hasBuildingTag = YES;
-//        }
-//    }
     if (self.sharedProcessor.step == REMEnergyStepMonth || self.sharedProcessor.step == REMEnergyStepDay) {
         view.graphContext.pointAlignToTick = NO;
         view.graphContext.xLabelAlignToTick = NO;
@@ -103,9 +97,16 @@
 
 -(NSUInteger)getSeriesAmount {
     const int maxSeriesAmount = 10;
-    if (self.energyViewData.targetEnergyData.count <= maxSeriesAmount) return self.energyViewData.targetEnergyData.count;
-    
-    else return maxSeriesAmount;
+    if (self.energyViewData.targetEnergyData.count <= maxSeriesAmount) {
+        return self.energyViewData.targetEnergyData.count;
+    } else {
+        for (REMTargetEnergyData* t in self.energyViewData.targetEnergyData) {
+            if (t.target.type == REMEnergyTargetTag) {
+                return maxSeriesAmount;
+            }
+        }
+        return maxSeriesAmount - 1;
+    }
 }
 
 -(UIColor*)getSeriesColorByIndex:(int)index {

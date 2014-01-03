@@ -37,4 +37,5 @@
 -(void)showPercentageTexts;
 -(void)hidePercentageTexts;
 -(void)redraw;
+-(void)setIndicatorHidden:(BOOL)hidden;
 @end

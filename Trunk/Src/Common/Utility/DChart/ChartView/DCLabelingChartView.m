@@ -257,12 +257,12 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         CGSize stageTextSize = [DCUtility getSizeOfText:label.stageText forFont:labelFont];
         [self drawText:label.name inContext:ctx font:labelTagNameFont rect:CGRectMake(baseX, style.plotPaddingTop+style.labelingLabelTagNameTopMargin, style.labelingLabelWidth, style.labelingLabelTagNameFontSize) alignment:NSTextAlignmentCenter color:style.labelingLabelValueFontColor];
         [self drawText:label.stageText inContext:ctx font:labelFont rect:CGRectMake(baseX+style.labelingLabelWidth-stageTextSize.width-style.labelingLabelFontRightMargin, baseY+style.labelingLabelFontTopMargin, stageTextSize.width, stageTextSize.height) alignment:NSTextAlignmentRight color:[UIColor whiteColor]];
-        [self drawText:label.labelText inContext:ctx font:labelValueFont rect:CGRectMake(baseX, baseY+labelHeight+style.labelingLabelValueFontTopMarginToLabel, style.labelingLabelWidth, style.labelingLabelValueFontSize) alignment:NSTextAlignmentRight color:style.labelingLabelValueFontColor];
+//        [self drawText:label.labelText inContext:ctx font:labelValueFont rect:CGRectMake(baseX, baseY+labelHeight+style.labelingLabelValueFontTopMarginToLabel, style.labelingLabelWidth, style.labelingLabelValueFontSize) alignment:NSTextAlignmentRight color:style.labelingLabelValueFontColor];
     }
     
 //    self.indicatorLayer
     UIBezierPath* indicatorPath = [UIBezierPath bezierPath];
-    self.indicatorLayer.fillColor = self.style.focusSymbolLineColor.CGColor;
+    self.indicatorLayer.fillColor = self.style.indicatorColor.CGColor;
     [indicatorPath moveToPoint:CGPointMake(0, 0)];
     [indicatorPath addLineToPoint:CGPointMake(self.style.focusSymbolIndicatorSize, 0)];
     [indicatorPath addLineToPoint:CGPointMake(self.style.focusSymbolIndicatorSize/2, self.style.focusSymbolIndicatorSize/2)];

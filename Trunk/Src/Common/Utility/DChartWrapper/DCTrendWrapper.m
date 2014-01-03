@@ -76,7 +76,7 @@
         view.vGridlineStyle = self.style.xGridlineStyle;
     }
     
-    view.focusSymbolLineColor = self.style.focusSymbolLineColor;
+    view.focusSymbolLineColor = self.style.indicatorColor;
     view.focusSymbolLineStyle = self.style.focusSymbolLineStyle;
     view.focusSymbolLineWidth = self.style.focusSymbolLineWidth;
     view.focusSymbolIndicatorSize = self.style.focusSymbolIndicatorSize;

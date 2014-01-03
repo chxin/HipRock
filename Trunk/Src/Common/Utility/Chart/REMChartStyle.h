@@ -16,6 +16,7 @@
 @property (nonatomic, assign) BOOL userInteraction;
 @property (nonatomic, assign) CGFloat animationDuration;
 @property (nonatomic, assign) BOOL playBeginAnimation;
+@property (nonatomic, strong) UIColor* indicatorColor;
 
 /****** XYChart Style Start *******/
 // x轴格式
@@ -60,7 +61,6 @@
 /****** PieChart Style Start *******/
 @property (nonatomic, assign) CGFloat focusSymbolLineWidth;
 @property (nonatomic, assign) DCLineType focusSymbolLineStyle;
-@property (nonatomic, strong) UIColor* focusSymbolLineColor;
 @property (nonatomic, assign) CGFloat focusSymbolIndicatorSize;
 
 @property (nonatomic, strong) UIFont* piePercentageTextFont;

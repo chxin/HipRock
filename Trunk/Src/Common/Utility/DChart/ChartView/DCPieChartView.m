@@ -15,6 +15,7 @@
 @interface DCPieChartView()
 @property (nonatomic,strong) UIPanGestureRecognizer* panGsRec;
 @property (nonatomic,strong) UITapGestureRecognizer* tapGsRec;
+@property (nonatomic, strong) CAShapeLayer* indicatorLayer;
 
 @property (nonatomic,assign) int panState; // 1表示已经开始，-1表示Pan已经停止
 @property (nonatomic,assign) CGFloat panSpeed;
@@ -31,6 +32,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
+        self.indicatorLayer = [[CAShapeLayer alloc]init];
+        self.indicatorLayer.contentsScale = [UIScreen mainScreen].scale;
+        self.indicatorLayer.hidden = YES;
+        [self.layer addSublayer:self.indicatorLayer];
         
         _animationManager = [[DCPieChartAnimationManager alloc]initWithPieView:self];
         _rotationAngle = 0;
@@ -87,6 +92,16 @@
     [super willMoveToSuperview:newSuperview];
     [self updateGestures];
     
+    CGFloat indicatorXCentre = CGRectGetWidth(self.bounds) / 2;
+    CGFloat indicatorSize = self.chartStyle.focusSymbolIndicatorSize;
+    self.indicatorLayer.fillColor = self.chartStyle.indicatorColor.CGColor;
+    UIBezierPath* indicatorPath = [UIBezierPath bezierPath];
+    [indicatorPath moveToPoint:CGPointMake(indicatorXCentre - indicatorSize / 2, 0)];
+    [indicatorPath addLineToPoint:CGPointMake(indicatorXCentre + indicatorSize / 2, 0)];
+    [indicatorPath addLineToPoint:CGPointMake(indicatorXCentre, indicatorSize / 2)];
+    [indicatorPath closePath];
+    self.indicatorLayer.path = indicatorPath.CGPath;
+    
     double targetRotation = [self.animationManager findNearbySliceCenter:0];
     DCPieChartAnimationFrame* targetFrame = [[DCPieChartAnimationFrame alloc]init];
     targetFrame.radius = @(self.radius);
@@ -110,6 +125,7 @@
 }
 
 -(void)viewPanned:(UIPanGestureRecognizer*)gesture {
+    [self hidePercentageTexts];
     CGPoint panPoint = [gesture locationInView:self];
     if (gesture.state == UIGestureRecognizerStateBegan) {
         if ([self isPointInPie:panPoint]) {
@@ -172,7 +188,6 @@
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    [self hidePercentageTexts];
     [self.animationManager stopTimer];
     self.panSpeed = 0;
     _rotateDirection = REMDirectionNone;
@@ -209,5 +224,9 @@
 -(void)hidePercentageTexts {
     self.pieLayer.percentageTextHidden = YES;
     [self.pieLayer setNeedsDisplay];
+}
+
+-(void)setIndicatorHidden:(BOOL)hidden {
+    self.indicatorLayer.hidden = hidden;
 }
 @end
