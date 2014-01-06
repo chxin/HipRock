@@ -282,19 +282,19 @@
 //    return [self formatNumber:number withMinDigits:0 andMaxDigits:0];
 //}
 
-static NSNumberFormatter* formatter;
--(NSString *)formatNumber:(NSNumber *)number withMinDigits:(int) minDigits andMaxDigits:(int)maxDigits
-{
-    if(formatter == nil){
-        formatter = [[NSNumberFormatter alloc] init];
-    }
-    
-    formatter.numberStyle = NSNumberFormatterDecimalStyle;
-    [formatter setMinimumFractionDigits:minDigits];
-    [formatter setMaximumFractionDigits:maxDigits];
-    
-    return [formatter stringFromNumber:number];
-}
+//static NSNumberFormatter* formatter;
+//-(NSString *)formatNumber:(NSNumber *)number withMinDigits:(int) minDigits andMaxDigits:(int)maxDigits
+//{
+//    if(formatter == nil){
+//        formatter = [[NSNumberFormatter alloc] init];
+//    }
+//    
+//    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+//    [formatter setMinimumFractionDigits:minDigits];
+//    [formatter setMaximumFractionDigits:maxDigits];
+//    
+//    return [formatter stringFromNumber:number];
+//}
 
 -(void)startLoadingActivity
 {

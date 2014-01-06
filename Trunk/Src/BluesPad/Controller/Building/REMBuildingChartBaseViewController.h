@@ -34,7 +34,7 @@
 -(void)startLoadingActivity;
 -(void)stopLoadingActivity;
 -(void)prepareShare;
-
+-(void)updateLegendView;
 -(void)purgeMemory;
 
 - (NSDictionary *)assembleRequestParametersWithBuildingId:(long long)buildingId WithCommodityId:(long long)commodityID WithMetadata:(REMAverageUsageDataModel *)averageData;

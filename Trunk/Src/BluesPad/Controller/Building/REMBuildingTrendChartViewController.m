@@ -12,6 +12,7 @@
 #import "REMTimeHelper.h"
 #import "REMBuildingTrendWrapper.h"
 #import "REMBuildingChartSeriesIndicator.h"
+#import "REMToggleButtonGroup.h"
 
 @interface REMBuildingTrendChartViewController ()
 
@@ -20,6 +21,8 @@
 @property (nonatomic) CGRect viewFrame;
 @property (nonatomic, assign) BOOL loadDataSuccess;
 @property (nonatomic,strong) NSMutableArray *datasource;
+@property (nonatomic,strong) REMToggleButtonGroup* toggleGroup;
+@property (nonatomic,strong) REMToggleButton* defaultButton;
 @end
 
 @implementation REMBuildingTrendChartViewController
@@ -36,17 +39,19 @@ const int buttonFirstMargin = -20;
         self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
         
         REMToggleButtonGroup* toggleGroup = [[REMToggleButtonGroup alloc]init];
-        [self makeButton:REMLocalizedString(@"Common_Today") rect:CGRectMake(buttonFirstMargin, 0, buttonWidth,buttonHeight) group:toggleGroup];
-        [self makeButton:REMLocalizedString(@"Common_Yesterday") rect:CGRectMake(buttonMargin + buttonWidth+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup];
-        [self makeButton:REMLocalizedString(@"Common_ThisMonth") rect:CGRectMake((buttonMargin + buttonWidth)*2+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup];
-        [self makeButton:REMLocalizedString(@"Common_LastMonth") rect:CGRectMake((buttonMargin + buttonWidth)*3+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup];
-        [self makeButton:REMLocalizedString(@"Common_ThisYear") rect:CGRectMake((buttonMargin + buttonWidth)*4+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup];
-        [self makeButton:REMLocalizedString(@"Common_LastYear") rect:CGRectMake((buttonMargin + buttonWidth)*5+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup];
+        _toggleGroup = toggleGroup;
+        [self makeButton:REMLocalizedString(@"Common_Today") rect:CGRectMake(buttonFirstMargin, 0, buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeToday);
+        [self makeButton:REMLocalizedString(@"Common_Yesterday") rect:CGRectMake(buttonMargin + buttonWidth+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeYesterday);
+        self.defaultButton = [self makeButton:REMLocalizedString(@"Common_ThisMonth") rect:CGRectMake((buttonMargin + buttonWidth)*2+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup];
+        self.defaultButton.on = YES;
+        self.defaultButton.value = @(REMRelativeTimeRangeTypeThisMonth);
+        [self makeButton:REMLocalizedString(@"Common_LastMonth") rect:CGRectMake((buttonMargin + buttonWidth)*3+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeLastMonth);
+        [self makeButton:REMLocalizedString(@"Common_ThisYear") rect:CGRectMake((buttonMargin + buttonWidth)*4+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeThisYear);
+        [self makeButton:REMLocalizedString(@"Common_LastYear") rect:CGRectMake((buttonMargin + buttonWidth)*5+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeLastYear);
         toggleGroup.delegate = self;
         self.loadDataSuccess = NO;
         self.timeRangeType = REMRelativeTimeRangeTypeThisMonth;
     }
-//    CGRect fff = CGRectMake(0, buttonHeight, self.frame.size.width + 22, self.frame.size.height - buttonHeight - 20 - kBuildingTrendChartLegendHeight);
     return self;
 }
 - (REMToggleButton*) makeButton:(NSString*)buttonText rect:(CGRect)rect group:(REMToggleButtonGroup*)toggleGroup{
@@ -60,8 +65,10 @@ const int buttonFirstMargin = -20;
     return btn;
 }
 
--(void)activedButtonChanged:(UIButton*)newButton {
-    [self intervalChanged:newButton];
+-(void)activedButtonChanged:(REMToggleButton*)newButton {
+    self.timeRangeType = [newButton.value intValue];
+    [self intervalChanged];
+    [self updateLegendView];
 }
 
 -(REMEnergyViewData*)convertData:(id)data {
@@ -75,6 +82,7 @@ const int buttonFirstMargin = -20;
     }
     return nil;
 }
+
 -(DCTrendWrapper*)constructWrapperWithFrame:(CGRect)frame {
     REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
     syntax.relativeDateType = self.timeRangeType;
@@ -87,104 +95,25 @@ const int buttonFirstMargin = -20;
 }
 
 -(void)prepareShare {
-//    if (currentSourceIndex != 2) {
-//        REMToggleButton* activeBtn = nil;
-//        REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
-//        if (currentSourceIndex == 0) {
-//            activeBtn = myView.todayButton;
-//        } else if (currentSourceIndex == 1) {
-//            activeBtn = myView.yestodayButton;
-//        } else if (currentSourceIndex == 2) {
-//            activeBtn = myView.thisMonthButton;
-//        } else if (currentSourceIndex == 3) {
-//            activeBtn = myView.lastMonthButton;
-//        } else if (currentSourceIndex == 4) {
-//            activeBtn = myView.thisYearButton;
-//        } else if (currentSourceIndex == 5) {
-//            activeBtn = myView.lastYearButton;
-//        }
-//        [myView.thisMonthButton setOn:YES];
-//        [activeBtn setOn:NO];
-//        [self intervalChanged:myView.thisMonthButton];
-//    }
-}
-
-- (int)getSourceIndex: (REMRelativeTimeRangeType)type {
-    int i = 0;
-    
-    if (type == REMRelativeTimeRangeTypeToday) {
-        i = 0;
-    } else if (type == REMRelativeTimeRangeTypeYesterday) {
-        i = 1;
-    } else if (type == REMRelativeTimeRangeTypeThisMonth) {
-        i = 2;
-    } else if (type == REMRelativeTimeRangeTypeLastMonth) {
-        i = 3;
-    } else if (type == REMRelativeTimeRangeTypeThisYear) {
-        i = 4;
-    } else if (type == REMRelativeTimeRangeTypeLastYear) {
-        i = 5;
+    if (self.timeRangeType != REMRelativeTimeRangeTypeThisMonth) {
+        self.defaultButton.on = YES;
+        self.timeRangeType = [self.defaultButton.value intValue];
+        [self intervalChanged];
+        [self updateLegendView];
     }
-    
-    return i;
 }
 
-
-- (void)intervalChanged:(UIButton *)button {
-//    if (!self.loadDataSuccess) return;
-//    REMRelativeTimeRangeType timeRange = REMRelativeTimeRangeTypeToday;
-//    REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
-//    if (button == myView.todayButton) {
-//        timeRange = REMRelativeTimeRangeTypeToday;
-//    } else if (button == myView.yestodayButton) {
-//        timeRange = REMRelativeTimeRangeTypeYesterday;
-//    } else if (button == myView.thisMonthButton) {
-//        timeRange = REMRelativeTimeRangeTypeThisMonth;
-//    } else if (button == myView.lastMonthButton) {
-//        timeRange = REMRelativeTimeRangeTypeLastMonth;
-//    } else if (button == myView.thisYearButton) {
-//        timeRange = REMRelativeTimeRangeTypeThisYear;
-//    } else if (button == myView.lastYearButton) {
-//        timeRange = REMRelativeTimeRangeTypeLastYear;
-//    }
-//    currentSourceIndex = [self getSourceIndex:timeRange];
-//    
-//    REMBuildingTimeRangeDataModel* seriesArray = [self.datasource objectAtIndex:currentSourceIndex];
-//    int pointCount = 0;
-//    if (!REMIsNilOrNull(seriesArray)) {
-//        for (int i = 0; i < seriesArray.timeRangeData.targetEnergyData.count; i++) {
-//            REMTargetEnergyData* s = seriesArray.timeRangeData.targetEnergyData[i];
-//            pointCount+= s.energyData.count;
-//        }
-//    }
-//    if (pointCount == 0) {
-//        myView.chartView.hidden = YES;
-//        [self drawLabelWithText:NSLocalizedString(@"BuildingChart_NoData", @"")];
-//        myView.legendView.hidden = YES;
-//        return;
-//    }
-//    self.textLabel.hidden = YES;
-//    myView.legendView.hidden = NO;
-//    REMEnergyStep step = currentSourceIndex < 2 ? REMEnergyStepHour : (currentSourceIndex < 4 ? REMEnergyStepDay : REMEnergyStepMonth);
-//    [myView redrawWith:self.datasource[currentSourceIndex] step:step timeRangeType:timeRange];
-//    CGFloat legendLeft = 57;
-//    CGFloat labelDistance = 18;
-//    CGFloat legendTop = 0;
-//    for (DCXYSeries* series in myView.chartView.seriesList) {
-//        CGFloat fontSize = 14;
-//        // Draw legend
-//        NSString* legendText = series.target.name;
-//        CGSize textSize = [legendText sizeWithFont:[UIFont systemFontOfSize:fontSize]];
-//        CGFloat benchmarkWidth = textSize.width + 26;
-//        CGRect benchmarkFrame = CGRectMake(legendLeft, legendTop, benchmarkWidth, MAX(textSize.height, 15));
-//        legendLeft = legendLeft + benchmarkWidth + labelDistance;
-//        if (legendLeft > myView.legendView.bounds.size.width) {
-//            legendLeft = 57;
-//            legendTop += 14*2;
-//        }
-//        REMBuildingChartSeriesIndicator *benchmarkIndicator = [[REMBuildingChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:legendText andColor:series.color];
-//        [myView.legendView addSubview:benchmarkIndicator];
-//    }
+- (void)intervalChanged {
+    if (!self.loadDataSuccess) return;
+    REMEnergyViewData* energyViewData = nil;
+    ((REMBuildingTrendWrapper*)self.chartWrapper).timeRangeType = self.timeRangeType;
+    for(REMBuildingTimeRangeDataModel *item in self.datasource){
+        if (item.timeRangeType == self.timeRangeType) {
+            energyViewData = item.timeRangeData;
+            break;
+        }
+    }
+    [self.chartWrapper redraw:energyViewData step:[self getEnergyStep]];
 }
 
 -(REMEnergyStep)getEnergyStep {
@@ -227,11 +156,6 @@ const int buttonFirstMargin = -20;
 
 - (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error {
     self.loadDataSuccess = NO;
-
-//    REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
-//    [myView.thisMonthButton setOn:YES];
-//    [self intervalChanged:myView.thisMonthButton];
-    
     [super loadDataFailureWithError:error];
 }
 
