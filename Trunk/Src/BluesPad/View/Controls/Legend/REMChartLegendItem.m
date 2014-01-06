@@ -11,6 +11,8 @@
 #import "REMDimensions.h"
 #import "REMCommonHeaders.h"
 #import "REMChartLegendBase.h"
+#import "DCSeries.h"
+#import "DCXYSeries.h"
 
 //#define kREMLegendItemFrame CGRectMake(0,0,kDMChart_LegendItemWidth,kDMChart_LegendItemHeight)
 
@@ -63,8 +65,13 @@
         self.label = label;
         
         //add tap gesture
+        //[self addTarget:self action:@selector(legendTapped:) forControlEvents:UIControlEventTouchUpInside];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(legendTapped:)];
         [self addGestureRecognizer:tap];
+        
+        if(model.isDefaultHidden){
+            [self setSelected:YES];
+        }
     }
     
     return self;

@@ -9,24 +9,24 @@
 #import "REMWidgetObject.h"
 #import "REMEnergyViewData.h"
 #import "REMWidgetSearchModelBase.h"
-#import "REMLegendFormatorBase.h"
 #import "REMChartLegendItem.h"
+#import "DAbstractChartWrapper.h"
 
 
 @interface REMChartLegendBase : UIScrollView
 
+@property (nonatomic,weak) DAbstractChartWrapper *chartWrapper;
 @property (nonatomic,weak) REMEnergyViewData *data;
 @property (nonatomic,weak) REMWidgetObject *widget;
 @property (nonatomic,weak) REMWidgetSearchModelBase *parameters;
 
 @property (nonatomic,weak) NSObject<REMChartLegendItemDelegate> *itemDelegate;
 
-@property (nonatomic,strong) REMLegendFormatorBase *formator;
 @property (nonatomic,strong) NSArray *itemModels;
 
-+(REMChartLegendBase *)legendWithData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget parameters:(REMWidgetSearchModelBase *)parameters andHiddenIndexes:(NSArray *)hiddenIndexes;
++(REMChartLegendBase *)legendViewChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget parameters:(REMWidgetSearchModelBase *)parameters;
 
--(REMChartLegendBase *)initWithData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget parameters:(REMWidgetSearchModelBase *)parameters andHiddenIndexes:(NSArray *)hiddenIndexes;
+-(REMChartLegendBase *)initWithChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget parameters:(REMWidgetSearchModelBase *)parameters;
 
 -(NSArray *)convertItemModels;
 

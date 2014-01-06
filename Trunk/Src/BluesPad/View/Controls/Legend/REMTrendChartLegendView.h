@@ -1,17 +1,15 @@
 /*------------------------------Summary-------------------------------------
  * Product Name : EMOP iOS Application Software
- * File Name	: REMCostLegendFormator.m
- * Date Created : 张 锋 on 11/20/13.
+ * File Name	: REMChartLegendView.h
+ * Date Created : 张 锋 on 11/18/13.
  * Description  : IOS Application software based on Energy Management Open Platform
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
-#import "REMLegendFormatorBase.h"
+#import <UIKit/UIKit.h>
+#import "REMWidgetObject.h"
+#import "REMEnergyViewData.h"
+#import "REMChartLegendBase.h"
 
-@implementation REMCostLegendFormator
-
--(NSString *)format:(int)index
-{
-    return nil;
-}
+@interface REMTrendChartLegendView : REMChartLegendBase
 
 @end
