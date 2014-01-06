@@ -30,7 +30,7 @@
     style.yLabelToLine = 10;
     style.xLabelClipToBounds = NO;
     
-    style.yAxisTitleToTopLabel = 10;
+    style.yAxisTitleToTopLabel = 0;
     style.yAxisTitleFontSize = 9;
     style.yAxisTitleColor = style.yTextColor = style.xTextColor = [UIColor whiteColor];
     style.yTextFont = style.xTextFont = [UIFont systemFontOfSize:11.0f];

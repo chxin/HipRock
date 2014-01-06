@@ -8,6 +8,7 @@
 
 #import "REMBuildingChartBaseViewController.h"
 #import "REMBuildingChartSeriesIndicator.h"
+#import "DCDataPoint.h"
 
 
 @interface REMBuildingChartBaseViewController ()
@@ -26,7 +27,6 @@
         self.view.frame = frame;
         
         self.legendContainer = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height-kBuildingTrendChartLegendHeight, frame.size.width, kBuildingTrendChartLegendHeight)];
-        self.legendContainer.backgroundColor = [UIColor colorWithRed:0.4 green:0 blue:0 alpha:0.7];
         [self.view addSubview:self.legendContainer];
     }
     return self;
@@ -64,17 +64,7 @@
 
 
 - (void)loadDataSuccessWithData:(id)data {
-    _energyViewData = [self convertData:data];
-    if (REMIsNilOrNull(self.chartWrapper)) {
-        // add 22 into width to show the xLabel which is outside of view bounds
-        _chartWrapper = [self constructWrapperWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+22, self.view.bounds.size.height-kBuildingTrendChartLegendHeight)];
-        if (!REMIsNilOrNull(self.chartWrapper)) {
-            [self.view addSubview:self.chartWrapper.view];
-        }
-    } else {
-        [self.chartWrapper redraw:self.energyViewData step:[self getEnergyStep]];
-    }
-    [self updateLegendView];
+    self.energyViewData = [self convertData:data];
 }
 
 /*
@@ -98,7 +88,7 @@
             
             CGSize textSize = [legendText sizeWithFont:legendFont];
             CGFloat averageDataWidth = textSize.width + 26;
-            if (averageDataWidth < 180) averageDataWidth = 180;
+            if (averageDataWidth > 180) averageDataWidth = 180;
             CGRect legendFrame = CGRectMake(labelLeftOffset, labelTopOffset, averageDataWidth, textSize.height);
             if (legendFrame.size.width + legendFrame.origin.x > self.legendContainer.bounds.size.width) {
                 labelLeftOffset = 57;
@@ -109,6 +99,40 @@
             labelLeftOffset=labelLeftOffset+averageDataWidth+labelDistance;
             [self.legendContainer addSubview:averageDataIndicator];
         }
+    }
+}
+
+-(void)setEnergyViewData:(REMEnergyViewData *)energyViewData {
+    _energyViewData = energyViewData;
+    
+    if (REMIsNilOrNull(self.chartWrapper)) {
+        // add 22 into width to show the xLabel which is outside of view bounds
+        _chartWrapper = [self constructWrapperWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+22, self.view.bounds.size.height-kBuildingTrendChartLegendHeight)];
+        if (!REMIsNilOrNull(self.chartWrapper)) {
+            [self.view addSubview:self.chartWrapper.view];
+        }
+    } else {
+        [self.chartWrapper redraw:self.energyViewData step:[self getEnergyStep]];
+    }
+    [self updateLegendView];
+    
+    BOOL hasPoint = NO;
+    for (DCXYSeries* s in self.chartWrapper.view.seriesList) {
+        for (DCDataPoint* point in s.datas) {
+            if (point.pointType == DCDataPointTypeNormal) {
+                hasPoint = YES;
+                break;
+            }
+        }
+    }
+    if (hasPoint) {
+        self.chartWrapper.view.hidden = NO;
+        self.textLabel.hidden = YES;
+        self.legendContainer.hidden = NO;
+    } else {
+        [self drawLabelWithText:NSLocalizedString(@"BuildingChart_NoData", @"")];
+        self.chartWrapper.view.hidden = YES;
+        self.legendContainer.hidden = YES;
     }
 }
 
@@ -169,15 +193,15 @@
 }
 
 
-- (NSDate*)getXDate:(CPTPlot*)plot hostingView:(CPTGraphHostingView*)hostingView gest:(UILongPressGestureRecognizer*) gest {
-    CGPoint touchPoint = [gest locationInView: hostingView];
-    CPTXYPlotSpace* plotSpace = (CPTXYPlotSpace*)hostingView.hostedGraph.defaultPlotSpace;
-    NSDecimal plotPoint[2];
-    
-    CGPoint pointInPlotArea = [plot convertPoint:touchPoint fromLayer:hostingView.hostedGraph];
-    [plotSpace plotPoint:plotPoint forPlotAreaViewPoint:pointInPlotArea];
-    return [NSDate dateWithTimeIntervalSince1970:[NSDecimalNumber decimalNumberWithDecimal:plotPoint[0]].floatValue];
-}
+//- (NSDate*)getXDate:(CPTPlot*)plot hostingView:(CPTGraphHostingView*)hostingView gest:(UILongPressGestureRecognizer*) gest {
+//    CGPoint touchPoint = [gest locationInView: hostingView];
+//    CPTXYPlotSpace* plotSpace = (CPTXYPlotSpace*)hostingView.hostedGraph.defaultPlotSpace;
+//    NSDecimal plotPoint[2];
+//    
+//    CGPoint pointInPlotArea = [plot convertPoint:touchPoint fromLayer:hostingView.hostedGraph];
+//    [plotSpace plotPoint:plotPoint forPlotAreaViewPoint:pointInPlotArea];
+//    return [NSDate dateWithTimeIntervalSince1970:[NSDecimalNumber decimalNumberWithDecimal:plotPoint[0]].floatValue];
+//}
 
 
 //-(CPTLineStyle *)axisLineStyle
@@ -321,7 +345,9 @@
 
 -(void)purgeMemory{
     [self.view removeFromSuperview];
+    _energyViewData = nil;
     self.view = nil;
+    _chartWrapper = nil;
 }
 
 

@@ -104,15 +104,13 @@ const int buttonFirstMargin = -20;
 
 - (void)intervalChanged {
     if (!self.loadDataSuccess) return;
-    REMEnergyViewData* energyViewData = nil;
     ((REMBuildingTrendWrapper*)self.chartWrapper).timeRangeType = self.timeRangeType;
     for(REMBuildingTimeRangeDataModel *item in self.datasource){
         if (item.timeRangeType == self.timeRangeType) {
-            energyViewData = item.timeRangeData;
+            self.energyViewData = item.timeRangeData;
             break;
         }
     }
-    [self.chartWrapper redraw:energyViewData step:[self getEnergyStep]];
 }
 
 -(REMEnergyStep)getEnergyStep {

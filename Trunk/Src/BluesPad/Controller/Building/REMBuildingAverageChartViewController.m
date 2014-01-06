@@ -21,13 +21,6 @@
 @interface REMBuildingAverageViewController ()
 
 @property (nonatomic) long long commodityId;
-@property (nonatomic,strong) NSArray *chartData;
-@property (nonatomic,strong) REMEnergyViewData *averageData;
-
-
-
-@property (nonatomic,strong) REMChartHorizonalScrollDelegator *scrollManager;
-
 @end
 
 @implementation REMBuildingAverageViewController
@@ -38,10 +31,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 
 - (void)purgeMemory{
     [super purgeMemory];
-    self.averageData=nil;
-    self.chartData=nil;
 //    self.chartView=nil;
-    self.scrollManager=nil;
 }
 
 
@@ -49,34 +39,10 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 {
     self = [super initWithViewFrame:frame];
     if (self) {
-        // Custom initialization
-        self.viewFrame = frame;
-        self.scrollManager = [[REMChartHorizonalScrollDelegator alloc]init];
         self.requestUrl=REMDSBuildingAverageData;
     }
     return self;
 }
-
--(void)prepareShare {
-    
-}
-
-//- (void)loadView
-//{
-//    //[super loadView];
-//    
-//    self.view = [[REMBuildingAverageChart alloc] initWithFrame:self.viewFrame];
-//    self.chartView = (REMBuildingAverageChart *)self.view;
-//    
-//    //[self viewDidLoad];
-//}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-//    [self loadChart];
-}
-
 
 -(DCTrendWrapper*)constructWrapperWithFrame:(CGRect)frame {
     REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
@@ -95,28 +61,6 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     
     return parameter;
 }
-
-//- (void)loadChart
-//{
-//    if(REMIsNilOrNull(self.averageData)) return;
-//    
-//    [self.chartView initializeGraphWithEnergyData:self.averageData];
-//    BOOL hasData = NO;
-//    for(DCXYSeries* s in self.chartView.wrapper.view.seriesList) {
-//        if (s.datas.count > 0) {
-//            hasData = YES;
-//            break;
-//        }
-//    }
-//    if(hasData) {
-//        self.textLabel.hidden = YES;
-//        self.chartView.wrapper.view.hidden = NO;
-//        [self drawChartLabels];
-//    } else {
-//        [self drawLabelWithText:NSLocalizedString(@"BuildingChart_NoData", @"")];
-//        self.chartView.wrapper.view.hidden = YES;
-//    }
-//}
 
 -(BOOL)isSeriesHasLegend:(DCXYSeries*)series index:(NSUInteger)index {
     return series.datas.count != 0;

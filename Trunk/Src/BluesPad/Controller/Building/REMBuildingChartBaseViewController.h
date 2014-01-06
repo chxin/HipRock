@@ -16,7 +16,7 @@
 
 @property (nonatomic) REMDataStoreType requestUrl;
 @property (nonatomic, strong, readonly) DCTrendWrapper* chartWrapper;
-@property (nonatomic, strong, readonly) REMEnergyViewData* energyViewData;
+@property (nonatomic, strong) REMEnergyViewData* energyViewData;
 @property (nonatomic, strong, readonly) UILabel* textLabel;
 @property (nonatomic, strong) NSString* wrapperClassName;
 @property (nonatomic,weak) REMWidgetObject *widgetInfo;
