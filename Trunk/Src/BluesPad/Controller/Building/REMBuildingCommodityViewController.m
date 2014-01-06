@@ -517,7 +517,7 @@
         otherContainer=self.childViewControllers[1];
         otherWidget=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionSecond];
         if(otherContainer.widgetInfo==nil){
-            if (otherWidget!=nil) {
+            if (otherWidget!=nil && [otherWidget.widgetId isEqualToNumber:@(-2)]==NO) {
                 self.secondChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionSecond];
                 otherContainer=[self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionSecond];
                 otherContainer.viewFrame=secondController.viewFrame;
@@ -555,7 +555,7 @@
         otherContainer=self.childViewControllers[0];
         otherWidget=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionFirst];
         if(otherContainer.widgetInfo==nil){
-            if (otherWidget!=nil) {
+            if (otherWidget!=nil && [otherWidget.widgetId isEqualToNumber:@(-1)]==NO) {
                 self.secondChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionFirst];
                 otherContainer=[self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionFirst];
                 otherContainer.viewFrame=firstController.viewFrame;

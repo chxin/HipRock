@@ -34,10 +34,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"widgetCell"];
-    if ([self.selectedDashboardId isEqualToNumber:@(-1)]==YES) {
+    if ([self.selectedWidgetId isEqualToNumber:@(-1)]==YES) {
         self.currentIndexPath = [NSIndexPath indexPathForRow:0 inSection:1];
     }
-    else if ([self.selectedDashboardId isEqualToNumber:@(-2)]==YES){
+    else if ([self.selectedWidgetId isEqualToNumber:@(-2)]==YES){
         self.currentIndexPath = [NSIndexPath indexPathForRow:1 inSection:1];
     }
     else{
@@ -147,10 +147,10 @@
     }
     if (indexPath.section==1) {
         if (indexPath.row==0) {
-            cell.textLabel.text=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByCommodity", @""),self.commodityInfo.comment];
+            cell.textLabel.text=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @""),self.commodityInfo.comment];
         }
         else{
-            cell.textLabel.text=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @""),self.commodityInfo.comment];
+            cell.textLabel.text=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByCommodity", @""),self.commodityInfo.comment];
         }
     }
     else{
