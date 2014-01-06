@@ -60,16 +60,15 @@
     REMEnergyViewData *energyData=[[REMEnergyViewData alloc]initWithDictionary:data];
     if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[DCLineWrapper alloc]initWithFrame:widgetRect data:energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-    } else if (widgetType == REMDiagramTypeColumn) {
+    }
+    else if (widgetType == REMDiagramTypeColumn) {
         widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-    } else if (widgetType == REMDiagramTypePie) {
-        widgetWrapper = [[DCPieWrapper alloc]initWithFrame:widgetRect data:energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-    } else if (widgetType == REMDiagramTypeRanking) {
+    }
+    else if (widgetType == REMDiagramTypeRanking) {
         widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-    } else if (widgetType == REMDiagramTypeStackColumn) {
+    }
+    else if (widgetType == REMDiagramTypeStackColumn) {
         widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:energyData widgetContext:self.widgetInfo.contentSyntax style:style];
-    } else if (widgetType == REMDiagramTypeLabelling) {
-        widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:energyData widgetContext:self.widgetInfo.contentSyntax style:style];
     }
     if (widgetWrapper != nil) {
         self.wrapper=widgetWrapper;
