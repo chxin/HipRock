@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "REMAverageUsageDataModel.h"
 #import "REMError.h"
+#import "REMWidgetObject.h"
 #import "DCTrendWrapper.h"
-
 
 @interface REMBuildingChartBaseViewController: UIViewController
 
@@ -19,6 +19,7 @@
 @property (nonatomic, strong, readonly) REMEnergyViewData* energyViewData;
 @property (nonatomic, strong, readonly) UILabel* textLabel;
 @property (nonatomic, strong) NSString* wrapperClassName;
+@property (nonatomic,weak) REMWidgetObject *widgetInfo;
 
 - (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame;
 
