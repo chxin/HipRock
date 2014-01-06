@@ -36,9 +36,9 @@
 
 #pragma mark kDMGallery_
 
-#define kDMGallery_GalleryGroupViewTopOffset REMDMCOMPATIOS7(109)
+#define kDMGallery_GalleryGroupViewTopOffset 109
 #define kDMGallery_GalleryGroupViewWidth (kDMScreenWidth - 2*kDMCommon_ContentLeftMargin)
-#define kDMGallery_GalleryGroupViewHeight (kDMScreenHeight - kDMGallery_GalleryGroupViewTopOffset)
+#define kDMGallery_GalleryGroupViewHeight (kDMScreenHeight - kDMStatusBarHeight - kDMGallery_GalleryGroupViewTopOffset)
 
 #define kDMGallery_GalleryGroupTitleFontSize 16
 #define kDMGallery_GalleryGroupTitleFontColor [UIColor whiteColor]
@@ -59,7 +59,7 @@
 
 #define kDMGallery_BackgroundColor [UIColor colorWithRed:29.0/255.0 green:30.0/255.0 blue:31.0/255.0 alpha:1]
 
-#define kDMGallery_GalleryTableViewFrame CGRectMake(kDMCommon_ContentLeftMargin, kDMGallery_GalleryGroupViewTopOffset, kDMGallery_GalleryGroupViewWidth, kDMGallery_GalleryGroupViewHeight)
+#define kDMGallery_GalleryTableViewFrame CGRectMake(kDMCommon_ContentLeftMargin, REMDMCOMPATIOS7(kDMGallery_GalleryGroupViewTopOffset), kDMGallery_GalleryGroupViewWidth, kDMGallery_GalleryGroupViewHeight)
 
 #define kDMGallery_GalleryCollectionViewInsets UIEdgeInsetsMake(kDMGallery_GalleryCollectionViewTopMargin, 0, kDMGallery_GalleryCollectionViewBottomMargin, 0)
 

@@ -131,7 +131,7 @@
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
     
-    [self oscarTest];
+//    [self oscarTest];
     
     
     //decide where to go
@@ -300,7 +300,7 @@
     b.color = [UIColor colorWithRed:0.5 green:0 blue:0 alpha:0.5];
     b.axis = lineWidget.view.yAxisList[0];
     [bands addObject:b];
-    [lineWidget.view setBackgoundBands:bands];
+//    [lineWidget.view setBackgoundBands:bands];
     [self.view addSubview:lineWidget.view];
     self.plotSource = lineWidget;
     

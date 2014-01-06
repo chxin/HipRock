@@ -36,6 +36,7 @@
 @property (nonatomic, strong) NSMutableArray* columnLayers;
 //@property (nonatomic, strong) NSMutableArray* lineLayers;
 //@property (nonatomic, strong) NSMutableArray* symbolLayers;
+@property (nonatomic, strong) CALayer* lineLayerContainer;
 @property (nonatomic, strong) _DCLineSymbolsLayer* symbolLayer;
 @property (nonatomic, strong) _DCVGridlineLayer* _vGridlineLayer;
 
@@ -72,6 +73,7 @@
         self.animationManager = [[DCTrendAnimationManager alloc]init];
         self.animationManager.view = self;
         self.hasVGridlines = NO;
+        self.lineLayerContainer = [[CALayer alloc]init];
     }
     return self;
 }
@@ -130,7 +132,9 @@
         }
     }
     self.symbolLayer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext series:lineSeries];
-    [self.layer addSublayer:self.symbolLayer];
+    [self.layer addSublayer:self.lineLayerContainer];
+    self.lineLayerContainer.masksToBounds = YES;
+    [self.lineLayerContainer addSublayer:self.symbolLayer];
 //    for (_DCLineSymbolsLayer * symbol in self.symbolLayers) {
 //        [self.layer addSublayer:symbol];
 //    }
@@ -225,7 +229,8 @@
     
     self.backgroundBandsLayer.frame = self.graphContext.plotRect;
     self.indicatorLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, 0, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height+self.plotPaddingTop);// self.graphContext.plotRect;
-    self.symbolLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height + self.xAxis.lineWidth + self.xAxis.labelToLine);
+    self.lineLayerContainer.frame = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height + self.xAxis.lineWidth + self.xAxis.labelToLine);
+    self.symbolLayer.frame = self.lineLayerContainer.bounds;
     if (!REMIsNilOrNull(self._vGridlineLayer)) self._vGridlineLayer.frame = self.graphContext.plotRect;
     
     for (_DCColumnsLayer* columnLayer in self.columnLayers) {

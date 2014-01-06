@@ -72,10 +72,15 @@
     style.yTextFont = style.xTextFont = [UIFont fontWithName:@kBuildingFontSCRegular size:15.0];
     style.xLabelClipToBounds = YES;
     
-    style.focusSymbolLineColor = [REMColor colorByHexString:@"#f4f4f4"];
+    style.indicatorColor = [REMColor colorByHexString:@"#f4f4f4"];
     style.focusSymbolLineStyle = DCLineTypeDefault;
     style.focusSymbolLineWidth = 2;
     style.focusSymbolIndicatorSize = 40;
+    
+    style.piePercentageTextHidden = NO;
+    style.piePercentageTextRadius = 144;
+    style.piePercentageTextColor = [UIColor whiteColor];
+    style.piePercentageTextFont = [UIFont fontWithName:@kBuildingFontSCRegular size:15.0];
     
     style.pieRadius = 180;
     style.pieShadowRadius = 188;
@@ -169,6 +174,9 @@
     style.plotPaddingLeft = 0;
     style.plotPaddingRight = 0;
     
+    style.piePercentageTextHidden = YES;
+//    style.piePercentageTextColor = [UIColor whiteColor];
+//    style.piePercentageTextFont = [UIFont fontWithName:@kBuildingFontSCRegular size:15.0];
     style.pieRadius = 30;
     style.pieShadowRadius = 33;
     

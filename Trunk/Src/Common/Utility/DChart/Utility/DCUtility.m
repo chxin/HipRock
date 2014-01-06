@@ -69,6 +69,14 @@
 //}
 
 
++(void)drawText:(NSString*)text inContext:(CGContextRef)ctx font:(UIFont*)font rect:(CGRect)rect alignment:(NSTextAlignment)alignment lineBreak:(NSLineBreakMode)lineBreak color:(UIColor*)color {
+    UIGraphicsPushContext(ctx);
+    CGContextSetStrokeColorWithColor(ctx, color.CGColor);
+    CGContextSetFillColorWithColor(ctx, color.CGColor);
+    [text drawInRect:rect withFont:font lineBreakMode:lineBreak alignment: alignment];
+    UIGraphicsPopContext();
+}
+
 
 +(BOOL)isFrame:(CGRect)rect visableIn:(CGRect)outter {
     if (rect.origin.x >= outter.size.width + outter.origin.x || rect.origin.y >= outter.size.height + outter.origin.y

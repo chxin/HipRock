@@ -49,6 +49,11 @@
     //process data
     [self groupBuildings];
     
+    for (NSString *key in self.orderedProvinceKeys) {
+        REMGalleryCollectionViewController *collectionController = [[REMGalleryCollectionViewController alloc] initWithKey:key andBuildingInfoArray:self.buildingGroups[key]];
+        [self addChildViewController:collectionController];
+    }
+    
     //add gallery table view
     [self addGalleryGroupView];
 }
@@ -159,19 +164,46 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.showsVerticalScrollIndicator = NO;
     tableView.showsHorizontalScrollIndicator = NO;
-    [tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
+    //[tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
     
     
-//    tableView.layer.borderColor = [UIColor blueColor].CGColor;
-//    tableView.layer.borderWidth = 1.0;
+    tableView.layer.borderColor = [UIColor blueColor].CGColor;
+    tableView.layer.borderWidth = 1.0;
+    
+    [tableView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(taptest:)]];
     
     self.galleryTableView = tableView;
     [self.view addSubview:self.galleryTableView];
 }
 
+-(void)taptest:(UITapGestureRecognizer *)tap
+{
+    for(REMGalleryCollectionViewController *gc in self.childViewControllers){
+        NSLog(@"%@",gc.collectionKey);
+    }
+    NSLog(@"tapped view: %@",[tap.view class]);
+}
+
 -(void)switchButtonPressed
 {
     [self performSegueWithIdentifier:kSegue_GalleryToMap sender:self];
+}
+
+-(void)scrollToBuildingIndex:(int)currentBuildingIndex
+{
+    REMBuildingOverallModel *buildingInfo = self.buildingInfoArray[currentBuildingIndex];
+    
+    int index = 0;
+    for(int i=0;i<self.orderedProvinceKeys.count;i++){
+        NSString *key = self.orderedProvinceKeys[i];
+        if([self.buildingGroups[key] containsObject:buildingInfo]){
+            index = i;
+            break;
+        }
+    }
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.galleryTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }
 
 
@@ -205,7 +237,8 @@
         [self addChildViewController:collectionController];
     }
     
-    REMGalleryGroupView *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier_GalleryGroupCell forIndexPath:indexPath];
+    //REMGalleryGroupView *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier_GalleryGroupCell forIndexPath:indexPath];
+    REMGalleryGroupView *cell = [[REMGalleryGroupView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Nil];
     
     [cell setGroupTitle:key];
     [cell setCollectionView:collectionController.view];
@@ -312,6 +345,7 @@
     
     if(collectionView.superview.superview == nil){
         return CGRectMake(kDMCommon_ContentLeftMargin, 800, kDMGallery_GalleryCellWidth, kDMGallery_GalleryCellHeight);
+        //return [self.galleryTableView convertRect:[self calculateRectForCell:cell] toView:self.view]  ;
     }
     
     return [collectionView convertRect:cellFrameInCollectionView toView:self.view];
@@ -329,6 +363,34 @@
 //    
 //    return cellFrameInGalleryView;
 }
+
+//-(CGRect)calculateRectForCell:(REMGalleryCollectionCell *)cell
+//{
+//    NSString *province = cell.building.province;
+//    
+//    int keyIndex = [self.orderedProvinceKeys indexOfObject:province];
+//    int cellIndex = [self.buildingGroups[province] indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+//        REMBuildingOverallModel *buildingInfo = obj;
+//        if([buildingInfo.building isEqual:cell.building]){
+//            *stop = YES;
+//            return YES;
+//        }
+//        return NO;
+//    }];
+//    
+//    CGFloat topOffset = 0;
+//    if(keyIndex>=1){
+//        for(int i=1;i<keyIndex;i++){
+//            topOffset += REMGalleryTableCellHeight([self.buildingGroups[self.orderedProvinceKeys[i-1]] count]);
+//        }
+//    }
+//    
+//    topOffset += kDMGallery_GalleryGroupTitleFontSize + ((cellIndex/6) * (kDMGallery_GalleryCellVerticleSpace + kDMGallery_GalleryCellHeight));
+//    
+//    CGFloat leftOffset = (cellIndex % 6)*(self.galleryTableView.frame.size.width / 6);
+//    
+//    return CGRectMake(leftOffset, topOffset, kDMGallery_GalleryCellWidth, kDMGallery_GalleryCellHeight);
+//}
 
 -(void)takeSnapshot
 {
