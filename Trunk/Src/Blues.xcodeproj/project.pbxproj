@@ -136,7 +136,6 @@
 		6AB1F25517B8AC910065C1EB /* REMEncryptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4417A63E8B0050779D /* REMEncryptHelper.m */; };
 		6AB1F25717B8AC910065C1EB /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 		6AB1F25A17B8AC910065C1EB /* REMBuildingTrendChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854117B4B2E9004D7167 /* REMBuildingTrendChart.m */; };
-		6AB1F25C17B8AC910065C1EB /* REMBuildingAverageChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854417B4B303004D7167 /* REMBuildingAverageChart.m */; };
 		6AB1F26A17B8AC910065C1EB /* REMBuildingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B4911F4217B0D961007AEF7D /* REMBuildingConstants.m */; };
 		6AB1F26C17B8AC910065C1EB /* REMBuildingRankingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */; };
 		6AB1F27017B8AC910065C1EB /* REMNumberLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A37AA6217AB944B00316902 /* REMNumberLabel.m */; };
@@ -341,7 +340,6 @@
 		7A153CCA17AA4B5C00413D3C /* REMEnergyUsageDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CC917AA4B5C00413D3C /* REMEnergyUsageDataModel.m */; };
 		7A153CCD17AA4EDB00413D3C /* REMRankingDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CCC17AA4EDB00413D3C /* REMRankingDataModel.m */; };
 		7A1A854217B4B2E9004D7167 /* REMBuildingTrendChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854117B4B2E9004D7167 /* REMBuildingTrendChart.m */; };
-		7A1A854517B4B303004D7167 /* REMBuildingAverageChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854417B4B303004D7167 /* REMBuildingAverageChart.m */; };
 		7A1A855217B4BB5D004D7167 /* REMBuildingAverageChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854D17B4BB5D004D7167 /* REMBuildingAverageChartViewController.m */; };
 		7A1A855317B4BB5D004D7167 /* REMBuildingChartBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854F17B4BB5D004D7167 /* REMBuildingChartBaseViewController.m */; };
 		7A1A855417B4BB5D004D7167 /* REMBuildingTrendChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A855117B4BB5D004D7167 /* REMBuildingTrendChartViewController.m */; };
@@ -635,6 +633,7 @@
 		EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF48011F17D7098D002A2EF6 /* REMBuildingWeiboView.m */; };
 		EF5D1A801867D10E0069C8F5 /* _DCVGridlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5D1A7F1867D10E0069C8F5 /* _DCVGridlineLayer.m */; };
 		EF60822F17D818430093427C /* REMModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF60822E17D818430093427C /* REMModalView.m */; };
+		EF61477A18765E7000ED9F1E /* REMBuildingAverageWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF61477918765E7000ED9F1E /* REMBuildingAverageWrapper.m */; };
 		EF652B68185867C2007D4049 /* DCTrendAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EF652B67185867C2007D4049 /* DCTrendAnimationManager.m */; };
 		EF7CF5F6185D82F2000BA4AE /* DCPieLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF7CF5F5185D82F2000BA4AE /* DCPieLayer.m */; };
 		EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */; };
@@ -914,8 +913,6 @@
 		7A153CCC17AA4EDB00413D3C /* REMRankingDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRankingDataModel.m; sourceTree = "<group>"; };
 		7A1A854017B4B2E9004D7167 /* REMBuildingTrendChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingTrendChart.h; sourceTree = "<group>"; };
 		7A1A854117B4B2E9004D7167 /* REMBuildingTrendChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingTrendChart.m; sourceTree = "<group>"; };
-		7A1A854317B4B302004D7167 /* REMBuildingAverageChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAverageChart.h; sourceTree = "<group>"; };
-		7A1A854417B4B303004D7167 /* REMBuildingAverageChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingAverageChart.m; sourceTree = "<group>"; };
 		7A1A854C17B4BB5D004D7167 /* REMBuildingAverageChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAverageChartViewController.h; sourceTree = "<group>"; };
 		7A1A854D17B4BB5D004D7167 /* REMBuildingAverageChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingAverageChartViewController.m; sourceTree = "<group>"; };
 		7A1A854E17B4BB5D004D7167 /* REMBuildingChartBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartBaseViewController.h; sourceTree = "<group>"; };
@@ -1462,6 +1459,8 @@
 		EF5D1A7F1867D10E0069C8F5 /* _DCVGridlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCVGridlineLayer.m; sourceTree = "<group>"; };
 		EF60822D17D818420093427C /* REMModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMModalView.h; sourceTree = "<group>"; };
 		EF60822E17D818430093427C /* REMModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMModalView.m; sourceTree = "<group>"; };
+		EF61477818765E7000ED9F1E /* REMBuildingAverageWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAverageWrapper.h; sourceTree = "<group>"; };
+		EF61477918765E7000ED9F1E /* REMBuildingAverageWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingAverageWrapper.m; sourceTree = "<group>"; };
 		EF652B66185867C2007D4049 /* DCTrendAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCTrendAnimationManager.h; path = Common/Utility/DChart/ChartView/DCTrendAnimationManager.h; sourceTree = "<group>"; };
 		EF652B67185867C2007D4049 /* DCTrendAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCTrendAnimationManager.m; path = Common/Utility/DChart/ChartView/DCTrendAnimationManager.m; sourceTree = "<group>"; };
 		EF7CF5F4185D82F2000BA4AE /* DCPieLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieLayer.h; path = Common/Utility/DChart/ChartView/DCPieLayer.h; sourceTree = "<group>"; };
@@ -2101,11 +2100,9 @@
 		7A1A853617B4B257004D7167 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
+				EF6147771876574200ED9F1E /* BuildingAirQuality */,
+				EF6147761876572F00ED9F1E /* BuildAverage */,
 				EF19D8C81871643400807B3F /* BuildingTrend */,
-				7A1A854317B4B302004D7167 /* REMBuildingAverageChart.h */,
-				7A1A854417B4B303004D7167 /* REMBuildingAverageChart.m */,
-				7A9557BE17C73AD200249CED /* REMBuildingAirQualityChart.h */,
-				7A9557BF17C73AD200249CED /* REMBuildingAirQualityChart.m */,
 			);
 			name = Chart;
 			path = View/Chart;
@@ -3087,6 +3084,24 @@
 			name = BuildingTrend;
 			sourceTree = "<group>";
 		};
+		EF6147761876572F00ED9F1E /* BuildAverage */ = {
+			isa = PBXGroup;
+			children = (
+				EF61477818765E7000ED9F1E /* REMBuildingAverageWrapper.h */,
+				EF61477918765E7000ED9F1E /* REMBuildingAverageWrapper.m */,
+			);
+			name = BuildAverage;
+			sourceTree = "<group>";
+		};
+		EF6147771876574200ED9F1E /* BuildingAirQuality */ = {
+			isa = PBXGroup;
+			children = (
+				7A9557BE17C73AD200249CED /* REMBuildingAirQualityChart.h */,
+				7A9557BF17C73AD200249CED /* REMBuildingAirQualityChart.m */,
+			);
+			name = BuildingAirQuality;
+			sourceTree = "<group>";
+		};
 		EF7CF5F3185D82D0000BA4AE /* Pie */ = {
 			isa = PBXGroup;
 			children = (
@@ -3910,6 +3925,7 @@
 				7A5AC77F1817CBEF006C7CB1 /* REMBuildingEntranceSegue.m in Sources */,
 				7A153CC717AA4B3400413D3C /* REMCommodityModel.m in Sources */,
 				7A153CCA17AA4B5C00413D3C /* REMEnergyUsageDataModel.m in Sources */,
+				EF61477A18765E7000ED9F1E /* REMBuildingAverageWrapper.m in Sources */,
 				7A153CCD17AA4EDB00413D3C /* REMRankingDataModel.m in Sources */,
 				EFF701CF1830880600B371EC /* REMChartStyle.m in Sources */,
 				7A7B210B183CAB5F00C14248 /* REMCostLegendFormator.m in Sources */,
@@ -3930,7 +3946,6 @@
 				EFD9470C1839DCBB00E9EC50 /* DCUtility.m in Sources */,
 				7A12280C18116DBF004DE778 /* REMViewHelper.m in Sources */,
 				7A66A28C1817794F000A6AB8 /* LoginBusiness.m in Sources */,
-				7A1A854517B4B303004D7167 /* REMBuildingAverageChart.m in Sources */,
 				7A1A855217B4BB5D004D7167 /* REMBuildingAverageChartViewController.m in Sources */,
 				B4E815CB1827326C00FB9BC5 /* REMWidgetSearchModelBase.m in Sources */,
 				7A1A855317B4BB5D004D7167 /* REMBuildingChartBaseViewController.m in Sources */,
@@ -4087,7 +4102,6 @@
 				6AB1F25517B8AC910065C1EB /* REMEncryptHelper.m in Sources */,
 				6AB1F25717B8AC910065C1EB /* REMImageHelper.m in Sources */,
 				6AB1F25A17B8AC910065C1EB /* REMBuildingTrendChart.m in Sources */,
-				6AB1F25C17B8AC910065C1EB /* REMBuildingAverageChart.m in Sources */,
 				6AB1F26A17B8AC910065C1EB /* REMBuildingConstants.m in Sources */,
 				6AB1F26C17B8AC910065C1EB /* REMBuildingRankingView.m in Sources */,
 				6AB1F27017B8AC910065C1EB /* REMNumberLabel.m in Sources */,

@@ -13,12 +13,11 @@
 #import "REMWidgetAxisHelper.h"
 #import "REMToggleButtonGroup.h"
 
-@interface REMBuildingTrendChartViewController : REMBuildingChartBaseViewController<UIGestureRecognizerDelegate,REMToggleButtonGroupDelegate>
+@interface REMBuildingTrendChartViewController : REMBuildingChartBaseViewController<REMToggleButtonGroupDelegate>
 
 @property (nonatomic,strong) REMEnergyViewData *data;
 @property (nonatomic,strong) NSMutableArray *chartData;
 @property (nonatomic) double maxEnergyValue;
 @property (nonatomic) NSInteger maxDateIndex;
-@property  (nonatomic,strong) NSMutableArray *datasource;
 
 @end

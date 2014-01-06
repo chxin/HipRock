@@ -8,28 +8,29 @@
 
 #import <UIKit/UIKit.h>
 #import "REMAverageUsageDataModel.h"
-#import "CPTGraphHostingView.h"
-#import "CorePlot-CocoaTouch.h"
 #import "REMError.h"
+#import "DCTrendWrapper.h"
 
 
 @interface REMBuildingChartBaseViewController: UIViewController
 
 @property (nonatomic) REMDataStoreType requestUrl;
+@property (nonatomic, strong, readonly) DCTrendWrapper* chartWrapper;
+@property (nonatomic, strong, readonly) REMEnergyViewData* energyViewData;
+@property (nonatomic, strong, readonly) UILabel* textLabel;
+@property (nonatomic, strong) NSString* wrapperClassName;
 
 - (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame;
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(id data,REMBusinessErrorInfo *error))loadCompleted;
-- (CPTGraphHostingView*) getHostView;
 
 
--(CPTLineStyle *)axisLineStyle;
--(CPTLineStyle *)gridLineStyle;
--(CPTLineStyle *)hiddenLineStyle;
--(CPTTextStyle *)xAxisLabelStyle;
--(CPTTextStyle *)yAxisLabelStyle;
+//-(CPTLineStyle *)axisLineStyle;
+//-(CPTLineStyle *)gridLineStyle;
+//-(CPTLineStyle *)hiddenLineStyle;
+//-(CPTTextStyle *)xAxisLabelStyle;
+//-(CPTTextStyle *)yAxisLabelStyle;
 
--(NSString *)formatDataValue:(NSNumber *)number;
 -(void)startLoadingActivity;
 -(void)stopLoadingActivity;
 -(void)prepareShare;
@@ -42,6 +43,5 @@
 
 
 -(void)drawLabelWithText:(NSString *)text;
-- (CABasicAnimation *) plotAnimation;
 
 @end

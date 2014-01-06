@@ -26,7 +26,6 @@
 @property (nonatomic,strong) REMBuildingOverallModel *buildingInfo;
 @property (nonatomic,strong) UIView *legendView;
 @property (nonatomic,strong) DCXYChartView *chartView;
-@property (nonatomic,strong) UILabel *noDataLabel;
 @property (nonatomic,strong) REMToggleButtonGroup* toggleGroup;
 -(void)redrawWith:(REMBuildingTimeRangeDataModel*)buildData step:(REMEnergyStep)step timeRangeType:(REMRelativeTimeRangeType)timeRangeType;
 //@property (nonatomic,strong) CPTScatterPlot *scatterPlot;

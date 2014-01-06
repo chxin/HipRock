@@ -25,9 +25,9 @@
     style.yGridlineColor = style.xLineColor;
     style.yGridlineStyle = style.xGridlineStyle;
     style.horizentalGridLineAmount = 5;
-    style.symbolSize = 12;
-    style.xLabelToLine = 8;
-    style.yLabelToLine = 8;
+    style.symbolSize = 10;
+    style.xLabelToLine = 6;
+    style.yLabelToLine = 10;
     style.xLabelClipToBounds = NO;
     
     style.yAxisTitleToTopLabel = 10;

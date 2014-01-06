@@ -104,12 +104,6 @@ static NSDictionary *codeNameMap;
         [self loadChart];
     }
 }
-
-- (void)loadDataFailureWithError:(REMError *)error withResponse:(id)response{
-    NSString *text = NSLocalizedString(@"BuildingChart_DataError", @"");
-    [self drawLabelWithText:text];
-}
-
 -(void)loadChart
 {
     //convert data
@@ -256,81 +250,81 @@ static NSDictionary *codeNameMap;
 
 -(void)initializeAxises
 {
-    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.hostView.hostedGraph.defaultPlotSpace;
-    
-    
-    //x axis
-    CPTXYAxis* x = [[CPTXYAxis alloc] init];
-    [x setLabelingPolicy:CPTAxisLabelingPolicyNone];
-    
-    x.coordinate = CPTCoordinateX;
-    x.orthogonalCoordinateDecimal = CPTDecimalFromInt(0);
-    x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
-    x.plotSpace = plotSpace;
-    x.axisLineStyle = [self axisLineStyle];
-    x.majorTickLineStyle = [self hiddenLineStyle];
-    x.minorTickLineStyle = [self hiddenLineStyle];
-    x.anchorPoint=CGPointZero;
-    x.minorGridLineStyle = [self gridLineStyle];
-    
-    
-    NSMutableSet *xlabels = [[NSMutableSet alloc] init];
-    NSMutableSet *xlocations = [[NSMutableSet alloc] init];
-    
-    NSDate *tickDate = [NSDate dateWithTimeIntervalSince1970:self.globalRange.start + REMHalfDaySeconds];
-
-    while ([tickDate timeIntervalSince1970] < self.globalRange.end) {
-        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDateLabel:tickDate] textStyle:[self xAxisLabelStyle]];
-        label.tickLocation = CPTDecimalFromDouble([tickDate timeIntervalSince1970]);
-        label.offset = 5;
-        
-        [xlabels addObject:label];
-        [xlocations addObject:[NSNumber numberWithDouble:[tickDate timeIntervalSince1970] + REMHalfDaySeconds]];
-        
-        tickDate = [REMTimeHelper add:1 onPart:REMDateTimePartDay ofDate:tickDate];
-    }
-    
-    x.axisLabels = xlabels;
-    x.minorTickLocations = xlocations;
-    
-    //y axis
-    CPTXYAxis* y= [[CPTXYAxis alloc] init];
-    [y setLabelingPolicy:CPTAxisLabelingPolicyNone];
-    
-    y.coordinate = CPTCoordinateY;
-    y.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
-    y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
-    y.plotSpace = plotSpace;
-    y.axisLineStyle = [self axisLineStyle];
-    y.anchorPoint=CGPointZero;
-    
-    
-    NSMutableSet *ylabels = [[NSMutableSet alloc] init];
-    NSMutableSet *yMajorLocations = [[NSMutableSet alloc] init];
-    double dataValue = 0;
-    while(dataValue<=self.dataValueRange.end){
-        NSNumber *number = [NSNumber numberWithDouble:dataValue];
-        
-        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDataValue:number] textStyle:[self yAxisLabelStyle]];
-        label.tickLocation = CPTDecimalFromDouble(dataValue);
-        label.offset = 5;
-        
-        [ylabels addObject:label];
-        [yMajorLocations addObject:[NSNumber numberWithDouble:dataValue]];
-        
-        dataValue+=self.dataValueRange.end / 4;
-    }
-    
-    y.axisLabels = ylabels;
-    y.majorTickLocations = yMajorLocations;
-    
-    
-    y.majorIntervalLength = CPTDecimalFromFloat(self.dataValueRange.end/4);
-    y.majorGridLineStyle = [self gridLineStyle];
-    y.labelTextStyle = [self yAxisLabelStyle];
-    
-    //add x and y axis into axis set
-    self.chartView.hostView.hostedGraph.axisSet.axes = @[x,y];
+//    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.chartView.hostView.hostedGraph.defaultPlotSpace;
+//    
+//    
+//    //x axis
+//    CPTXYAxis* x = [[CPTXYAxis alloc] init];
+//    [x setLabelingPolicy:CPTAxisLabelingPolicyNone];
+//    
+//    x.coordinate = CPTCoordinateX;
+//    x.orthogonalCoordinateDecimal = CPTDecimalFromInt(0);
+//    x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
+//    x.plotSpace = plotSpace;
+//    x.axisLineStyle = [self axisLineStyle];
+//    x.majorTickLineStyle = [self hiddenLineStyle];
+//    x.minorTickLineStyle = [self hiddenLineStyle];
+//    x.anchorPoint=CGPointZero;
+//    x.minorGridLineStyle = [self gridLineStyle];
+//    
+//    
+//    NSMutableSet *xlabels = [[NSMutableSet alloc] init];
+//    NSMutableSet *xlocations = [[NSMutableSet alloc] init];
+//    
+//    NSDate *tickDate = [NSDate dateWithTimeIntervalSince1970:self.globalRange.start + REMHalfDaySeconds];
+//
+//    while ([tickDate timeIntervalSince1970] < self.globalRange.end) {
+//        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDateLabel:tickDate] textStyle:[self xAxisLabelStyle]];
+//        label.tickLocation = CPTDecimalFromDouble([tickDate timeIntervalSince1970]);
+//        label.offset = 5;
+//        
+//        [xlabels addObject:label];
+//        [xlocations addObject:[NSNumber numberWithDouble:[tickDate timeIntervalSince1970] + REMHalfDaySeconds]];
+//        
+//        tickDate = [REMTimeHelper add:1 onPart:REMDateTimePartDay ofDate:tickDate];
+//    }
+//    
+//    x.axisLabels = xlabels;
+//    x.minorTickLocations = xlocations;
+//    
+//    //y axis
+//    CPTXYAxis* y= [[CPTXYAxis alloc] init];
+//    [y setLabelingPolicy:CPTAxisLabelingPolicyNone];
+//    
+//    y.coordinate = CPTCoordinateY;
+//    y.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
+//    y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0];
+//    y.plotSpace = plotSpace;
+//    y.axisLineStyle = [self axisLineStyle];
+//    y.anchorPoint=CGPointZero;
+//    
+//    
+//    NSMutableSet *ylabels = [[NSMutableSet alloc] init];
+//    NSMutableSet *yMajorLocations = [[NSMutableSet alloc] init];
+//    double dataValue = 0;
+//    while(dataValue<=self.dataValueRange.end){
+//        NSNumber *number = [NSNumber numberWithDouble:dataValue];
+//        
+//        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[self formatDataValue:number] textStyle:[self yAxisLabelStyle]];
+//        label.tickLocation = CPTDecimalFromDouble(dataValue);
+//        label.offset = 5;
+//        
+//        [ylabels addObject:label];
+//        [yMajorLocations addObject:[NSNumber numberWithDouble:dataValue]];
+//        
+//        dataValue+=self.dataValueRange.end / 4;
+//    }
+//    
+//    y.axisLabels = ylabels;
+//    y.majorTickLocations = yMajorLocations;
+//    
+//    
+//    y.majorIntervalLength = CPTDecimalFromFloat(self.dataValueRange.end/4);
+//    y.majorGridLineStyle = [self gridLineStyle];
+//    y.labelTextStyle = [self yAxisLabelStyle];
+//    
+//    //add x and y axis into axis set
+//    self.chartView.hostView.hostedGraph.axisSet.axes = @[x,y];
 }
 
 
@@ -350,46 +344,46 @@ static NSDictionary *codeNameMap;
 
 -(void)initializePlots
 {
-    for(NSDictionary *series in self.chartData){
-        CPTColor *lineColor = [self getColorWithCode:[series objectForKey:@"code"]];
-        
-        CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
-        symbol.fill= [CPTFill fillWithColor:lineColor];
-        symbol.size=CGSizeMake(10.0, 10.0);
-        symbol.lineStyle = [self hiddenLineStyle];
-        
-        CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
-        lineStyle.lineColor = lineColor;
-        lineStyle.lineWidth = 2;
-        
-        CPTScatterPlot *line = [[CPTScatterPlot alloc] initWithFrame:self.chartView.hostView.hostedGraph.bounds];
-        line.dataSource = self;
-        line.identifier = [series objectForKey:@"identity"];
-        
-        line.dataLineStyle = lineStyle;
-        line.plotSymbol = symbol;
-        line.delegate = self;
-        [line addAnimation:[self plotAnimation] forKey:@"grow"];
-        [self.chartView.hostView.hostedGraph addPlot:line];
-    }
+//    for(NSDictionary *series in self.chartData){
+//        CPTColor *lineColor = [self getColorWithCode:[series objectForKey:@"code"]];
+//        
+//        CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
+//        symbol.fill= [CPTFill fillWithColor:lineColor];
+//        symbol.size=CGSizeMake(10.0, 10.0);
+//        symbol.lineStyle = [self hiddenLineStyle];
+//        
+//        CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
+//        lineStyle.lineColor = lineColor;
+//        lineStyle.lineWidth = 2;
+//        
+//        CPTScatterPlot *line = [[CPTScatterPlot alloc] initWithFrame:self.chartView.hostView.hostedGraph.bounds];
+//        line.dataSource = self;
+//        line.identifier = [series objectForKey:@"identity"];
+//        
+//        line.dataLineStyle = lineStyle;
+//        line.plotSymbol = symbol;
+//        line.delegate = self;
+//        [line addAnimation:[self plotAnimation] forKey:@"grow"];
+//        [self.chartView.hostView.hostedGraph addPlot:line];
+//    }
 }
 
 -(void)drawStandards
 {
-    CPTXYAxis *verticalAxis = ((CPTXYAxisSet *)self.chartView.hostView.hostedGraph.axisSet).yAxis;
-    
-    CPTPlotRange *bandRangeChina=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([self.standardAmerican.standardValue doubleValue]) length:CPTDecimalFromDouble([self.standardChina.standardValue doubleValue] - [self.standardAmerican.standardValue doubleValue])];
-    CPTPlotRange *bandRangeAmerican=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([self.standardAmerican.standardValue doubleValue])];
-    
-    CPTColor *chinaColor = [self getColorWithCode:kChinaStandardCode];
-    CPTColor *americanColor = [self getColorWithCode:kAmericanStandardCode];
-    
-    
-    CPTLimitBand *standardBandChina= [CPTLimitBand limitBandWithRange:bandRangeChina fill:[CPTFill fillWithColor:chinaColor]];
-    CPTLimitBand *standardBandAmerican= [CPTLimitBand limitBandWithRange:bandRangeAmerican fill:[CPTFill fillWithColor:americanColor]];
-    
-    [verticalAxis addBackgroundLimitBand:standardBandChina];
-    [verticalAxis addBackgroundLimitBand:standardBandAmerican];
+//    CPTXYAxis *verticalAxis = ((CPTXYAxisSet *)self.chartView.hostView.hostedGraph.axisSet).yAxis;
+//    
+//    CPTPlotRange *bandRangeChina=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble([self.standardAmerican.standardValue doubleValue]) length:CPTDecimalFromDouble([self.standardChina.standardValue doubleValue] - [self.standardAmerican.standardValue doubleValue])];
+//    CPTPlotRange *bandRangeAmerican=[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble([self.standardAmerican.standardValue doubleValue])];
+//    
+//    CPTColor *chinaColor = [self getColorWithCode:kChinaStandardCode];
+//    CPTColor *americanColor = [self getColorWithCode:kAmericanStandardCode];
+//    
+//    
+//    CPTLimitBand *standardBandChina= [CPTLimitBand limitBandWithRange:bandRangeChina fill:[CPTFill fillWithColor:chinaColor]];
+//    CPTLimitBand *standardBandAmerican= [CPTLimitBand limitBandWithRange:bandRangeAmerican fill:[CPTFill fillWithColor:americanColor]];
+//    
+//    [verticalAxis addBackgroundLimitBand:standardBandChina];
+//    [verticalAxis addBackgroundLimitBand:standardBandAmerican];
 }
 
 -(void)drawLabels

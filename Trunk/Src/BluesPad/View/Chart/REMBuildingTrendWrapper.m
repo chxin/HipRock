@@ -20,7 +20,7 @@
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
     _isStacked = NO;
     
-    NSUInteger seriesAmount = self.energyViewData.targetEnergyData.count;
+    NSUInteger seriesAmount = [self getSeriesAmount];
     _processors = [[NSMutableArray alloc]init];
     
     NSDate* baseDateOfX = nil;
@@ -90,8 +90,6 @@
     if (self.sharedProcessor.step == REMEnergyStepMonth || self.sharedProcessor.step == REMEnergyStepDay) {
         view.graphContext.pointAlignToTick = NO;
         view.graphContext.xLabelAlignToTick = NO;
-    } else {
-        
     }
 }
 

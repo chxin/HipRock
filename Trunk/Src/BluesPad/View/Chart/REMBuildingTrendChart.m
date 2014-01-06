@@ -34,17 +34,6 @@ const int buttonFirstMargin = -20;
         self.lastMonthButton = [self makeButton:REMLocalizedString(@"Common_LastMonth") rect:CGRectMake((buttonMargin + buttonWidth)*3+buttonFirstMargin,0,buttonWidth,buttonHeight)];
         self.thisYearButton = [self makeButton:REMLocalizedString(@"Common_ThisYear") rect:CGRectMake((buttonMargin + buttonWidth)*4+buttonFirstMargin,0,buttonWidth,buttonHeight)];
         self.lastYearButton = [self makeButton:REMLocalizedString(@"Common_LastYear") rect:CGRectMake((buttonMargin + buttonWidth)*5+buttonFirstMargin,0,buttonWidth,buttonHeight)];
-        
-        NSString *noDataText = REMLocalizedString(kLNBuildingChart_NoData);
-        CGFloat fontSize = 36;
-        CGSize labelSize = [noDataText sizeWithFont:[UIFont systemFontOfSize:fontSize]];
-        self.noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];
-        self.noDataLabel.text = (NSString *)noDataText;
-        self.noDataLabel.textColor = [UIColor whiteColor];
-        self.noDataLabel.textAlignment = NSTextAlignmentLeft;
-        self.noDataLabel.backgroundColor = [UIColor clearColor];
-        self.noDataLabel.hidden = YES;
-        [self addSubview:self.noDataLabel];
     }
     
     self.legendView = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height - kBuildingTrendChartLegendHeight + 10, frame.size.width, kBuildingTrendChartLegendHeight)];

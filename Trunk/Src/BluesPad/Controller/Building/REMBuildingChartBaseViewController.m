@@ -7,38 +7,33 @@
  --------------------------------------------------------------------------*///
 
 #import "REMBuildingChartBaseViewController.h"
+#import "REMBuildingChartSeriesIndicator.h"
 
 
 @interface REMBuildingChartBaseViewController ()
 
 @property (nonatomic,weak) UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic,strong) UIView* legendContainer;
 
 @end
 
 @implementation REMBuildingChartBaseViewController
 
-
-static CPTLineStyle *axisLineStyle;
-static CPTLineStyle *gridLineStyle;
-static CPTLineStyle *hiddenLineStyle;
-static CPTTextStyle *xAxisLabelStyle;
-static CPTTextStyle *yAxisLabelStyle;
-
-
 - (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
 {
     self = [super init];
     if (self) {
-        // Custom initialization
-        //[self.view setFrame:frame];
-        //[self viewDidLoad];
+        self.view.frame = frame;
+        
+        self.legendContainer = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height-kBuildingTrendChartLegendHeight, frame.size.width, kBuildingTrendChartLegendHeight)];
+        self.legendContainer.backgroundColor = [UIColor colorWithRed:0.4 green:0 blue:0 alpha:0.7];
+        [self.view addSubview:self.legendContainer];
     }
     return self;
 }
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(id,REMBusinessErrorInfo *))loadCompleted
 {
-    
     NSDictionary *param = [self assembleRequestParametersWithBuildingId:buildingId WithCommodityId:commodityID WithMetadata:averageUsageData];
     
     REMDataStore *store = [[REMDataStore alloc] initWithName:self.requestUrl parameter:param];
@@ -61,20 +56,89 @@ static CPTTextStyle *yAxisLabelStyle;
         [self stopLoadingActivity];
         loadCompleted(nil,bizError);
         if(bizError!=nil){
-            [self loadDataFailureWithError:bizError ];
+            [self loadDataFailureWithError:bizError];
         }
     }];
 
 }
 
-- (void)loadDataSuccessWithData:(id)data
-{
-    
+
+- (void)loadDataSuccessWithData:(id)data {
+    _energyViewData = [self convertData:data];
+    if (REMIsNilOrNull(self.chartWrapper)) {
+        // add 22 into width to show the xLabel which is outside of view bounds
+        _chartWrapper = [self constructWrapperWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+22, self.view.bounds.size.height-kBuildingTrendChartLegendHeight)];
+        if (!REMIsNilOrNull(self.chartWrapper)) {
+            [self.view addSubview:self.chartWrapper.view];
+        }
+    } else {
+        [self.chartWrapper redraw:self.energyViewData step:[self getEnergyStep]];
+    }
+    [self updateLegendView];
 }
 
-- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error
-{
-    
+/*
+ * 更新Legend，当chartWrapper为隐藏时，所有的Legend都会被移除
+ */
+-(void)updateLegendView {
+    for (UIView* sub in self.legendContainer.subviews) {
+        [sub removeFromSuperview];
+    }
+    if (!REMIsNilOrNull(self.chartWrapper) && !self.chartWrapper.view.hidden) {
+        CGFloat labelTopOffset = 10;
+        CGFloat labelLeftOffset = 57;
+        CGFloat labelDistance = 18;
+        UIFont* legendFont = [UIFont systemFontOfSize:kCoverLegendFontSize];
+        
+        for (NSUInteger i = 0; i < self.chartWrapper.view.seriesList.count; i++) {
+            DCXYSeries* series = self.chartWrapper.view.seriesList[i];
+            if (![self isSeriesHasLegend:series index:i]) continue;
+            NSString* legendText = [self getLegendText:series index:i];
+            UIColor* legendColor = [self getLegendColor:series index:i];
+            
+            CGSize textSize = [legendText sizeWithFont:legendFont];
+            CGFloat averageDataWidth = textSize.width + 26;
+            if (averageDataWidth < 180) averageDataWidth = 180;
+            CGRect legendFrame = CGRectMake(labelLeftOffset, labelTopOffset, averageDataWidth, textSize.height);
+            if (legendFrame.size.width + legendFrame.origin.x > self.legendContainer.bounds.size.width) {
+                labelLeftOffset = 57;
+                labelTopOffset += 28;
+                legendFrame = CGRectMake(labelLeftOffset, labelTopOffset, averageDataWidth, textSize.height);
+            }
+            REMBuildingChartSeriesIndicator *averageDataIndicator = [[REMBuildingChartSeriesIndicator alloc] initWithFrame:CGRectMake(labelLeftOffset, labelTopOffset, averageDataWidth, textSize.height) title:legendText andColor:legendColor];
+            labelLeftOffset=labelLeftOffset+averageDataWidth+labelDistance;
+            [self.legendContainer addSubview:averageDataIndicator];
+        }
+    }
+}
+
+-(BOOL)isSeriesHasLegend:(DCXYSeries*)series index:(NSUInteger)index {
+    return YES;
+}
+
+-(NSString*)getLegendText:(DCXYSeries*)series index:(NSUInteger)index {
+    return series.target.name;
+}
+
+-(UIColor*)getLegendColor:(DCXYSeries*)series index:(NSUInteger)index {
+    [REMColor makeTransparent:1 withColor:series.color];
+    return series.color;
+}
+
+-(REMEnergyViewData*)convertData:(id)data {
+    return [[REMEnergyViewData alloc] initWithDictionary:data];
+}
+
+-(REMEnergyStep)getEnergyStep {
+    return REMEnergyStepNone;
+}
+
+-(DCTrendWrapper*)constructWrapperWithFrame:(CGRect)frame {
+    return nil;
+}
+
+- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error {
+    [self drawLabelWithText:NSLocalizedString(@"BuildingChart_DataError", @"")];
 }
 
 - (void)prepareShare{
@@ -89,59 +153,21 @@ static CPTTextStyle *yAxisLabelStyle;
 
 -(void)drawLabelWithText:(NSString *)text
 {
-    CGFloat fontSize = 36;
-    CGSize labelSize = [text sizeWithFont:[UIFont systemFontOfSize:fontSize]];
-    UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];
-    noDataLabel.text = text;
-    noDataLabel.textColor = [UIColor whiteColor];
-    noDataLabel.textAlignment = NSTextAlignmentLeft;
-    noDataLabel.backgroundColor = [UIColor clearColor];
-    
-    [self.view addSubview:noDataLabel];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    CPTGraphHostingView* hostView = [self getHostView];
-    if (hostView != nil) {
-//        // Do any additional setup after loading the view.
-//        UILongPressGestureRecognizer* gest = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
-//        //[gest setNumberOfTouchesRequired:100];
-//        [hostView addGestureRecognizer: gest];
-    }
-}
-
-- (CABasicAnimation *) plotAnimation
-{
-    //adding animation here
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale.y"];
-    [animation setDuration:0.5f];
-    animation.toValue = [NSNumber numberWithFloat:1.0f];
-    
-    animation.fromValue = [NSNumber numberWithFloat:0.0f];
-    animation.removedOnCompletion = NO;
-    //animation.delegate = self;
-    animation.fillMode = kCAFillModeForwards;
-    
-    return animation;
-}
-
-- (CPTGraphHostingView*) getHostView  {
-    return nil;
-}
--(void) longPress:(UILongPressGestureRecognizer*) gest {
-    if (gest.state == UIGestureRecognizerStateBegan) {
-        CPTGraphHostingView* hostingView = [self getHostView];
-        NSDate* touchedX = [self getXDate:[[hostingView.hostedGraph allPlots] objectAtIndex: 0] hostingView:hostingView gest:gest];
+    if (REMIsNilOrNull(self.textLabel)) {
+        CGFloat fontSize = 36;
+        CGSize labelSize = [text sizeWithFont:[UIFont systemFontOfSize:fontSize]];
+        UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];
+        noDataLabel.textColor = [UIColor whiteColor];
+        noDataLabel.textAlignment = NSTextAlignmentLeft;
+        noDataLabel.backgroundColor = [UIColor clearColor];
         
-        [self longPressedAt:touchedX];
+        [self.view addSubview:noDataLabel];
+        _textLabel = noDataLabel;
     }
+    self.textLabel.hidden = NO;
+    self.textLabel.text = text;
 }
 
--(void)longPressedAt:(NSDate*)x {
-    
-}
 
 - (NSDate*)getXDate:(CPTPlot*)plot hostingView:(CPTGraphHostingView*)hostingView gest:(UILongPressGestureRecognizer*) gest {
     CGPoint touchPoint = [gest locationInView: hostingView];
@@ -154,107 +180,107 @@ static CPTTextStyle *yAxisLabelStyle;
 }
 
 
--(CPTLineStyle *)axisLineStyle
-{
-    if(axisLineStyle == nil){
-        axisLineStyle = [[CPTMutableLineStyle alloc] init];
-        
-        CPTMutableLineStyle *style = [CPTMutableLineStyle lineStyle];
-        style.lineWidth = 1;
-        style.lineColor = [CPTColor colorWithCGColor:[UIColor colorWithWhite:1 alpha:0.8].CGColor];
-        
-        axisLineStyle = style;
-    }
-    
-    return axisLineStyle;
-}
+//-(CPTLineStyle *)axisLineStyle
+//{
+//    if(axisLineStyle == nil){
+//        axisLineStyle = [[CPTMutableLineStyle alloc] init];
+//        
+//        CPTMutableLineStyle *style = [CPTMutableLineStyle lineStyle];
+//        style.lineWidth = 1;
+//        style.lineColor = [CPTColor colorWithCGColor:[UIColor colorWithWhite:1 alpha:0.8].CGColor];
+//        
+//        axisLineStyle = style;
+//    }
+//    
+//    return axisLineStyle;
+//}
+//
+//-(CPTLineStyle *)gridLineStyle
+//{
+//    if(gridLineStyle==nil){
+//        CPTMutableLineStyle *style=[[CPTMutableLineStyle alloc] init];
+//        style.lineWidth = 1.0f;
+//        style.lineColor = [CPTColor colorWithCGColor:[UIColor colorWithWhite:1 alpha:0.4].CGColor];
+//        style.dashPattern = [NSArray arrayWithObjects:[NSDecimalNumber numberWithInt:2],[NSDecimalNumber numberWithInt:2],nil];
+//        
+//        gridLineStyle = style;
+//    }
+//    
+//    return gridLineStyle;
+//}
 
--(CPTLineStyle *)gridLineStyle
-{
-    if(gridLineStyle==nil){
-        CPTMutableLineStyle *style=[[CPTMutableLineStyle alloc] init];
-        style.lineWidth = 1.0f;
-        style.lineColor = [CPTColor colorWithCGColor:[UIColor colorWithWhite:1 alpha:0.4].CGColor];
-        style.dashPattern = [NSArray arrayWithObjects:[NSDecimalNumber numberWithInt:2],[NSDecimalNumber numberWithInt:2],nil];
-        
-        gridLineStyle = style;
-    }
-    
-    return gridLineStyle;
-}
+//-(CPTLineStyle *)hiddenLineStyle
+//{
+//    if(hiddenLineStyle == nil){
+//        CPTMutableLineStyle *style = [CPTMutableLineStyle lineStyle];
+//        style.lineWidth = 0;
+//        
+//        hiddenLineStyle = style;
+//    }
+//    
+//    return hiddenLineStyle;
+//}
+//
+//-(CPTTextStyle *)xAxisLabelStyle
+//{
+//    //text styles
+//    if(xAxisLabelStyle == nil){
+//        CPTMutableTextStyle *style = [CPTMutableTextStyle textStyle];
+//        style.fontSize = 11.0;
+//        style.color = [CPTColor whiteColor];
+//        
+//        xAxisLabelStyle = style;
+//    }
+//    
+//    return xAxisLabelStyle;
+//}
+//
+//-(CPTTextStyle *)yAxisLabelStyle
+//{
+//    //text styles
+//    if(yAxisLabelStyle == nil){
+//        CPTMutableTextStyle *style = [CPTMutableTextStyle textStyle];
+//        style.fontSize = 12.0;
+//        style.color = [CPTColor whiteColor];
+//        
+//        yAxisLabelStyle = style;
+//    }
+//    
+//    return yAxisLabelStyle;
+//}
 
--(CPTLineStyle *)hiddenLineStyle
-{
-    if(hiddenLineStyle == nil){
-        CPTMutableLineStyle *style = [CPTMutableLineStyle lineStyle];
-        style.lineWidth = 0;
-        
-        hiddenLineStyle = style;
-    }
-    
-    return hiddenLineStyle;
-}
-
--(CPTTextStyle *)xAxisLabelStyle
-{
-    //text styles
-    if(xAxisLabelStyle == nil){
-        CPTMutableTextStyle *style = [CPTMutableTextStyle textStyle];
-        style.fontSize = 11.0;
-        style.color = [CPTColor whiteColor];
-        
-        xAxisLabelStyle = style;
-    }
-    
-    return xAxisLabelStyle;
-}
-
--(CPTTextStyle *)yAxisLabelStyle
-{
-    //text styles
-    if(yAxisLabelStyle == nil){
-        CPTMutableTextStyle *style = [CPTMutableTextStyle textStyle];
-        style.fontSize = 12.0;
-        style.color = [CPTColor whiteColor];
-        
-        yAxisLabelStyle = style;
-    }
-    
-    return yAxisLabelStyle;
-}
-
--(NSString *)formatDataValue:(NSNumber *)number
-{
-    double numberValue = [number doubleValue];
-    
-    if(numberValue == 0){
-        return @"0";
-    }
-    if(numberValue < 1000){
-        return [self formatNumber:number withMinDigits:2 andMaxDigits:2];
-    }
-    if(numberValue < 1000000){
-        return [self formatNumber:number withMinDigits:0 andMaxDigits:0];
-    }
-    if(numberValue < 100000000){
-        NSString *text = [self formatNumber:[NSNumber numberWithDouble:numberValue/1000] withMinDigits:0 andMaxDigits:0];
-        return [NSString stringWithFormat:@"%@k", text];
-    }
-    if(numberValue < 100000000000){
-        NSString *text = [self formatNumber:[NSNumber numberWithDouble:numberValue/1000000] withMinDigits:0 andMaxDigits:0];
-        return [NSString stringWithFormat:@"%@M", text];
-    }
-    if(numberValue < 100000000000000){
-        NSString *text = [self formatNumber:[NSNumber numberWithDouble:numberValue/1000000000] withMinDigits:0 andMaxDigits:0];
-        return [NSString stringWithFormat:@"%@G", text];
-    }
-    if(numberValue < 100000000000000000){
-        NSString *text = [self formatNumber:[NSNumber numberWithDouble:numberValue/1000000000000] withMinDigits:0 andMaxDigits:0];
-        return [NSString stringWithFormat:@"%@T", text];
-    }
-        
-    return [self formatNumber:number withMinDigits:0 andMaxDigits:0];
-}
+//-(NSString *)formatDataValue:(NSNumber *)number
+//{
+//    double numberValue = [number doubleValue];
+//    
+//    if(numberValue == 0){
+//        return @"0";
+//    }
+//    if(numberValue < 1000){
+//        return [self formatNumber:number withMinDigits:2 andMaxDigits:2];
+//    }
+//    if(numberValue < 1000000){
+//        return [self formatNumber:number withMinDigits:0 andMaxDigits:0];
+//    }
+//    if(numberValue < 100000000){
+//        NSString *text = [self formatNumber:[NSNumber numberWithDouble:numberValue/1000] withMinDigits:0 andMaxDigits:0];
+//        return [NSString stringWithFormat:@"%@k", text];
+//    }
+//    if(numberValue < 100000000000){
+//        NSString *text = [self formatNumber:[NSNumber numberWithDouble:numberValue/1000000] withMinDigits:0 andMaxDigits:0];
+//        return [NSString stringWithFormat:@"%@M", text];
+//    }
+//    if(numberValue < 100000000000000){
+//        NSString *text = [self formatNumber:[NSNumber numberWithDouble:numberValue/1000000000] withMinDigits:0 andMaxDigits:0];
+//        return [NSString stringWithFormat:@"%@G", text];
+//    }
+//    if(numberValue < 100000000000000000){
+//        NSString *text = [self formatNumber:[NSNumber numberWithDouble:numberValue/1000000000000] withMinDigits:0 andMaxDigits:0];
+//        return [NSString stringWithFormat:@"%@T", text];
+//    }
+//        
+//    return [self formatNumber:number withMinDigits:0 andMaxDigits:0];
+//}
 
 static NSNumberFormatter* formatter;
 -(NSString *)formatNumber:(NSNumber *)number withMinDigits:(int) minDigits andMaxDigits:(int)maxDigits
@@ -294,27 +320,6 @@ static NSNumberFormatter* formatter;
 }
 
 -(void)purgeMemory{
-//    axisLineStyle=nil;
-//    gridLineStyle=nil;
-//    hiddenLineStyle=nil;
-//    xAxisLabelStyle=nil;
-//    yAxisLabelStyle=nil;
-    CPTGraphHostingView *hostView=[self getHostView];
-    [hostView.hostedGraph removeAllAnimations];
-    [hostView.hostedGraph removeAllAnnotations];
-    for (CPTAxis *axis in hostView.hostedGraph.axisSet.axes) {
-        axis.majorTickLocations=nil;
-        axis.minorTickAxisLabels=nil;
-        [axis removeFromSuperlayer];
-    }
-    [hostView.hostedGraph.axisSet removeFromSuperlayer];
-    hostView.hostedGraph.axisSet.axes=nil;
-    
-    [hostView.hostedGraph.plotAreaFrame removeFromSuperlayer];
-    [hostView.hostedGraph removeFromSuperlayer];
-    hostView.hostedGraph=nil;
-    [hostView removeFromSuperview];
-    //hostView = nil;
     [self.view removeFromSuperview];
     self.view = nil;
 }
