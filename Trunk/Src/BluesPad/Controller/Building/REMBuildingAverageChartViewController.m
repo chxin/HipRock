@@ -20,7 +20,6 @@
 
 @interface REMBuildingAverageViewController ()
 
-@property (nonatomic) CGRect viewFrame;
 @property (nonatomic) long long commodityId;
 @property (nonatomic,strong) NSArray *chartData;
 @property (nonatomic,strong) REMEnergyViewData *averageData;

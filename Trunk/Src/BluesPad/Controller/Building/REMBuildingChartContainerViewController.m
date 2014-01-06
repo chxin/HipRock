@@ -38,16 +38,14 @@
 
 - (void)requestData:(REMBuildingChartBaseViewController *)handler
 {
-    if(self.widgetInfo==nil){
-        [handler loadData:[self.buildingId longLongValue]  :[self.commodityId longLongValue] :nil :^(id data,REMBusinessErrorInfo *error){
-            if(error==nil){
-                REMBuildingCommodityViewController *parent=(REMBuildingCommodityViewController *)self.parentViewController;
-                [parent loadChartComplete];
-            }
-        }];
-    }
-
+    [handler loadData:[self.buildingId longLongValue]  :[self.commodityId longLongValue] :nil :^(id data,REMBusinessErrorInfo *error){
+        if(error==nil){
+            REMBuildingCommodityViewController *parent=(REMBuildingCommodityViewController *)self.parentViewController;
+            [parent loadChartComplete];
+        }
+    }];
 }
+
 
 - (void)initChartContainer
 {
@@ -59,6 +57,7 @@
     
     if (self.childViewControllers.count==0) {
         REMBuildingChartBaseViewController *handler=[[self.chartHandlerClass alloc]initWithViewFrame:self.view.bounds];
+        handler.widgetInfo=self.widgetInfo;
         [self.view addSubview:handler.view];
         //handler.view.layer.borderColor=[UIColor redColor].CGColor;
         //handler.view.layer.borderWidth=1;

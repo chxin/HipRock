@@ -534,6 +534,7 @@
 		B44F63B0186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44F63AF186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.m */; };
 		B44F63B6186D1BF80029B7F7 /* REMBuildingWidgetChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44F63B5186D1BF80029B7F7 /* REMBuildingWidgetChartViewController.m */; };
 		B4547960184DABF700D3441B /* UIView+FlipTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = B454795F184DABF700D3441B /* UIView+FlipTransition.m */; };
+		B456984618750E3B00FB43B8 /* REMPinToBuildingCoverHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B456984518750E3B00FB43B8 /* REMPinToBuildingCoverHelper.m */; };
 		B4577EBF184C1886003C00CF /* REMNumberHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4577EBE184C1886003C00CF /* REMNumberHelper.m */; };
 		B4577EC2184C48D2003C00CF /* Share_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4577EC0184C48D2003C00CF /* Share_normal.png */; };
 		B4577EC3184C48D2003C00CF /* Share_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4577EC1184C48D2003C00CF /* Share_normal@2x.png */; };
@@ -604,6 +605,7 @@
 		B4F4B99E17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
 		B4F4B99F17F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
 		B4F4B9A017F16F590096034D /* REMShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F4B99D17F16F590096034D /* REMShareInfo.m */; };
+		B4F6D617187A54AA00B4E07C /* REMBuildingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F6D616187A54AA00B4E07C /* REMBuildingChartView.m */; };
 		B4FAD66B181F524A00EF1459 /* REMWidgetDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4FAD66A181F524A00EF1459 /* REMWidgetDetailViewController.m */; };
 		B4FAD66E181F7CD000EF1459 /* REMWidgetCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4FAD66D181F7CD000EF1459 /* REMWidgetCellViewController.m */; };
 		B4FED1541804FEF400E0CE58 /* REMEnergySeacherBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B4FED1531804FEF400E0CE58 /* REMEnergySeacherBase.m */; };
@@ -1300,6 +1302,8 @@
 		B44F63B5186D1BF80029B7F7 /* REMBuildingWidgetChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingWidgetChartViewController.m; sourceTree = "<group>"; };
 		B454795E184DABF700D3441B /* UIView+FlipTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FlipTransition.h"; sourceTree = "<group>"; };
 		B454795F184DABF700D3441B /* UIView+FlipTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FlipTransition.m"; sourceTree = "<group>"; };
+		B456984418750E3B00FB43B8 /* REMPinToBuildingCoverHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMPinToBuildingCoverHelper.h; path = Biz/REMPinToBuildingCoverHelper.h; sourceTree = "<group>"; };
+		B456984518750E3B00FB43B8 /* REMPinToBuildingCoverHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMPinToBuildingCoverHelper.m; path = Biz/REMPinToBuildingCoverHelper.m; sourceTree = "<group>"; };
 		B4577EBD184C1886003C00CF /* REMNumberHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMNumberHelper.h; path = Common/Utility/REMNumberHelper.h; sourceTree = "<group>"; };
 		B4577EBE184C1886003C00CF /* REMNumberHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMNumberHelper.m; path = Common/Utility/REMNumberHelper.m; sourceTree = "<group>"; };
 		B4577EC0184C48D2003C00CF /* Share_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_normal.png; sourceTree = "<group>"; };
@@ -1402,6 +1406,8 @@
 		B4F3F600181E081800C8DF7F /* REMMaxWidgetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMaxWidgetSegue.m; path = Resource/Segue/REMMaxWidgetSegue.m; sourceTree = "<group>"; };
 		B4F4B99C17F16F590096034D /* REMShareInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMShareInfo.h; sourceTree = "<group>"; };
 		B4F4B99D17F16F590096034D /* REMShareInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMShareInfo.m; sourceTree = "<group>"; };
+		B4F6D615187A54AA00B4E07C /* REMBuildingChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartView.h; sourceTree = "<group>"; };
+		B4F6D616187A54AA00B4E07C /* REMBuildingChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingChartView.m; sourceTree = "<group>"; };
 		B4FAD669181F524A00EF1459 /* REMWidgetDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetDetailViewController.h; sourceTree = "<group>"; };
 		B4FAD66A181F524A00EF1459 /* REMWidgetDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetDetailViewController.m; sourceTree = "<group>"; };
 		B4FAD66C181F7CD000EF1459 /* REMWidgetCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetCellViewController.h; sourceTree = "<group>"; };
@@ -2847,6 +2853,8 @@
 				B4FED1501804FE4E00E0CE58 /* Energy */,
 				B41249EE1803ECF0009022C5 /* REMCustomerSwitchHelper.h */,
 				B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */,
+				B456984418750E3B00FB43B8 /* REMPinToBuildingCoverHelper.h */,
+				B456984518750E3B00FB43B8 /* REMPinToBuildingCoverHelper.m */,
 			);
 			name = Biz;
 			sourceTree = "<group>";
@@ -3840,6 +3848,7 @@
 				B4922466182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m in Sources */,
 				7A3F6701184C61610079A244 /* REMLoginTitledCard.m in Sources */,
 				EFE86989185EEF7300DC0007 /* DCLabelingStage.m in Sources */,
+				B456984618750E3B00FB43B8 /* REMPinToBuildingCoverHelper.m in Sources */,
 				7A2E7ECB17F2DD41000EB506 /* REMBuildingTitleLabelView.m in Sources */,
 				EF0346B3183B520100DE186A /* _DCSeriesLayer.m in Sources */,
 				38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */,
@@ -3998,6 +4007,7 @@
 				EF5D1A801867D10E0069C8F5 /* _DCVGridlineLayer.m in Sources */,
 				EF03DC231841E462004B9EFD /* DCPieChartView.m in Sources */,
 				7A3F66FF184C61610079A244 /* REMLoginButton.m in Sources */,
+				B4F6D617187A54AA00B4E07C /* REMBuildingChartView.m in Sources */,
 				7A0288FD17C20CC500709111 /* WeiboDialogClosePNG.m in Sources */,
 				7A0288FE17C20CC500709111 /* WeiboDialog.m in Sources */,
 				7A44E04518238D5E0080CEBE /* REMBuildingShareViewController.m in Sources */,

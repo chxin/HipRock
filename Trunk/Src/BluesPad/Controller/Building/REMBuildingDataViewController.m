@@ -8,7 +8,7 @@
 
 #import "REMBuildingDataViewController.h"
 #import "REMBuildingDataView.h"
-#define kDashboardThreshold 361+65+85+45
+#define kDashboardThreshold 361+65+85*2+45
 
 @interface REMBuildingDataViewController ()
 @property (nonatomic,weak) UILabel *dashboardLabel;
@@ -35,7 +35,7 @@
     REMBuildingDataView *scroll=[[REMBuildingDataView alloc]initWithFrame:self.viewFrame];
     scroll.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, kBuildingLeftMargin, 0, 0);
     scroll.showsVerticalScrollIndicator=NO;
-    [scroll setContentSize:CGSizeMake(0, 1165)];
+    [scroll setContentSize:CGSizeMake(0, 1165+85)];
     self.view=scroll;
     //scroll.layer.borderColor=[UIColor yellowColor].CGColor;
     //scroll.layer.borderWidth=1;

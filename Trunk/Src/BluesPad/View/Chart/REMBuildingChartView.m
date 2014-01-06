@@ -1,36 +1,21 @@
 /*------------------------------Summary-------------------------------------
  * Product Name : EMOP iOS Application Software
- * File Name	: REMBuildingChartContainerView2.m
- * Date Created : tantan on 11/18/13.
+ * File Name	: REMBuildingChartView.m
+ * Date Created : tantan on 1/6/14.
  * Description  : IOS Application software based on Energy Management Open Platform
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
-#import "REMBuildingChartContainerView2.h"
-#import <QuartzCore/QuartzCore.h>
-@implementation REMBuildingChartContainerView2
+#import "REMBuildingChartView.h"
+
+@implementation REMBuildingChartView
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        //self.layer.borderColor=[UIColor redColor].CGColor;
-        //self.layer.borderWidth=1;
     }
     return self;
-}
-
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-{
-    UIView *view=[super hitTest:point withEvent:event];
-    return view ;
-}
-
-- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
-{
-    BOOL ret=[super pointInside:point withEvent:event];
-    
-    return ret;
 }
 
 /*
@@ -41,5 +26,17 @@
     // Drawing code
 }
 */
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *view = [super hitTest:point withEvent:event];
+    return view;
+}
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+    BOOL ret=[super pointInside:point withEvent:event];
+    return ret;
+}
 
 @end

@@ -7,7 +7,7 @@
 --------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
 #import "REMBuildingOverallModel.h"
-
+#import "REMBuildingCommodityViewController.h"  
 
 @interface REMBuildingCoverWidgetViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>
 
@@ -26,5 +26,9 @@
 @property (nonatomic,copy) NSNumber *selectedWidgetId;
 
 @property (nonatomic,copy) NSNumber *selectedDashboardId;
+
+@property (nonatomic,weak) REMBuildingCommodityViewController *commodityController;
+
+@property (nonatomic) BOOL isRequesting;
 
 @end

@@ -18,7 +18,6 @@
 
 @property (nonatomic, assign) REMRelativeTimeRangeType timeRangeType;
 
-@property (nonatomic) CGRect viewFrame;
 @property (nonatomic, assign) BOOL loadDataSuccess;
 @property (nonatomic,strong) NSMutableArray *datasource;
 @property (nonatomic,strong) REMToggleButtonGroup* toggleGroup;
