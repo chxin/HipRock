@@ -14,8 +14,6 @@
 const static NSString *BUILDOPTION = @"Debug";
 #elif defined(DailyBuild)
 const static NSString *BUILDOPTION = @"DailyBuild";
-#elif defined(InternalRelease)
-const static NSString *BUILDOPTION = @"InternalRelease";
 #else
 const static NSString *BUILDOPTION = @"Release";
 #endif

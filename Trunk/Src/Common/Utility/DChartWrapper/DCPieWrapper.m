@@ -46,7 +46,6 @@
     self.view.chartStyle = style;
     self.view.delegate = self;
     self.view.playBeginAnimation = self.style.playBeginAnimation;
-    self.view.userInteractionEnabled = self.style.userInteraction;
     self.view.radius = style.pieRadius;
     self.view.radiusForShadow = style.pieShadowRadius;
     self.focusIndex = INT32_MIN;

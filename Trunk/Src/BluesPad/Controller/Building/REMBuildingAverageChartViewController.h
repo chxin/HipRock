@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "REMBuildingChartBaseViewController.h"
-#import "REMBuildingAverageChart.h"
 #import "REMChartHorizonalScrollDelegator.h"
 
-@interface REMBuildingAverageViewController : REMBuildingChartBaseViewController<CPTBarPlotDataSource,CPTBarPlotDelegate,CPTScatterPlotDataSource,CPTScatterPlotDelegate,CPTPlotSpaceDelegate,UIGestureRecognizerDelegate>
+@interface REMBuildingAverageViewController : REMBuildingChartBaseViewController
 
 
 @end

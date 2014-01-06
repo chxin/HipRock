@@ -12,7 +12,9 @@
 
 +(REMChartStyle*)getCoverStyle {
     REMChartStyle* style = [[REMChartStyle alloc]init];
-    style.userInteraction = YES;
+    style.acceptPan = YES;
+    style.acceptPinch = NO;
+    style.acceptTap = NO;
     style.animationDuration = 0.05;
     style.xLineColor = [UIColor colorWithWhite:1 alpha:0.6];
     style.xLineWidth = 1.0;
@@ -25,12 +27,12 @@
     style.yGridlineColor = style.xLineColor;
     style.yGridlineStyle = style.xGridlineStyle;
     style.horizentalGridLineAmount = 5;
-    style.symbolSize = 12;
-    style.xLabelToLine = 8;
-    style.yLabelToLine = 8;
+    style.symbolSize = 10;
+    style.xLabelToLine = 6;
+    style.yLabelToLine = 10;
     style.xLabelClipToBounds = NO;
     
-    style.yAxisTitleToTopLabel = 10;
+    style.yAxisTitleToTopLabel = 2;
     style.yAxisTitleFontSize = 9;
     style.yAxisTitleColor = style.yTextColor = style.xTextColor = [UIColor whiteColor];
     style.yTextFont = style.xTextFont = [UIFont systemFontOfSize:11.0f];
@@ -51,7 +53,9 @@
 
 +(REMChartStyle*)getMaximizedStyle {
     REMChartStyle* style = [[REMChartStyle alloc]init];
-    style.userInteraction = YES;
+    style.acceptPan = YES;
+    style.acceptPinch = YES;
+    style.acceptTap = YES;
     style.animationDuration = 0.05;
     style.xLineColor = [REMColor colorByHexString:@"#9d9d9d"];
     style.xLineWidth = 2.0;
@@ -148,7 +152,9 @@
 }
 +(REMChartStyle*)getMinimunStyle {
     REMChartStyle* style = [[REMChartStyle alloc]init];
-    style.userInteraction = NO;
+    style.acceptPan = NO;
+    style.acceptPinch = NO;
+    style.acceptTap = NO;
     style.animationDuration = 0.05;
     style.xLineColor = [REMColor colorByHexString:@"#9d9d9d"];
     style.xLineWidth = 1.0;

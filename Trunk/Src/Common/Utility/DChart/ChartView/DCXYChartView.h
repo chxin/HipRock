@@ -13,6 +13,9 @@
 #import "DCXYChartViewDelegate.h"
 
 @interface DCXYChartView : UIView<DCContextHRangeObserverProtocal>
+@property (nonatomic, assign) BOOL acceptPan;
+@property (nonatomic, assign) BOOL acceptPinch;
+@property (nonatomic, assign) BOOL acceptTap;
 @property (nonatomic, strong) DCAxis* xAxis;
 //@property (nonatomic, strong) DCAxis* yAxis0;
 //@property (nonatomic, strong) DCAxis* yAxis1;

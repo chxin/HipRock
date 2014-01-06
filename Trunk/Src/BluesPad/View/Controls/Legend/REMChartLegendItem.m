@@ -102,14 +102,15 @@
     
     BOOL stateChanged = NO;
     id<REMChartLegendItemDelegate> delegate = self.legendView.itemDelegate;
-    if(self.state == UIControlStateNormal) {
+    if(self.state == UIControlStateSelected){
+        [self setSelected:NO];
+        stateChanged = YES;
+    }
+    else{
         if (REMIsNilOrNull(delegate) || [delegate canBeHidden]) {
             [self setSelected:YES];
             stateChanged = YES;
         }
-    } else {
-        [self setSelected:NO];
-        stateChanged = YES;
     }
     
     if (stateChanged) {

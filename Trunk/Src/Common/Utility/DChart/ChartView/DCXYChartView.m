@@ -74,6 +74,13 @@
         self.animationManager.view = self;
         self.hasVGridlines = NO;
         self.lineLayerContainer = [[CALayer alloc]init];
+        self.tapGsRec = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewTapped:)];
+        [self addGestureRecognizer:self.tapGsRec];
+        self.panGsRec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(viewPanned:)];
+        self.panGsRec.maximumNumberOfTouches = 1;
+        [self addGestureRecognizer:self.panGsRec];
+        self.pinchGsRec = [[_DCHPinchGestureRecognizer alloc]initWithTarget:self action:@selector(viewPinched:)];
+        [self addGestureRecognizer:self.pinchGsRec];
     }
     return self;
 }
@@ -170,7 +177,6 @@
     [self.coodinates removeAllObjects];
     self.beginHRange = nil;
     self.xLabelFormatter = nil;
-    self.userInteractionEnabled = NO;
     self.bgBands = nil;
     self.xAxis = nil;
     self.yAxisList = nil;
@@ -425,37 +431,27 @@
     [self.symbolLayer setNeedsDisplay];
 }
 
+-(void)setAcceptPan:(BOOL)acceptPan {
+    self.panGsRec.enabled = acceptPan;
+    _acceptPan = acceptPan;
+}
 
+-(void)setAcceptPinch:(BOOL)acceptPinch {
+    self.pinchGsRec.enabled = acceptPinch;
+    _acceptPinch = acceptPinch;
+}
 
-
--(void)setUserInteractionEnabled:(BOOL)userInteractionEnabled {
-    if(self.userInteractionEnabled == userInteractionEnabled) return;
-    [super setUserInteractionEnabled:userInteractionEnabled];
-    [self updateGestures];
+-(void)setAcceptTap:(BOOL)acceptTap {
+    self.tapGsRec.enabled = acceptTap;
+    _acceptTap = acceptTap;
 }
 
 -(void)updateGestures {
-    if (self.userInteractionEnabled) {
-        if (REMIsNilOrNull(self.tapGsRec)) {
-            self.tapGsRec = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewTapped:)];
-            self.panGsRec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(viewPanned:)];
-            self.panGsRec.maximumNumberOfTouches = 1;
-            self.pinchGsRec = [[_DCHPinchGestureRecognizer alloc]initWithTarget:self action:@selector(viewPinched:)];
-            [self addGestureRecognizer:self.tapGsRec];
-            [self addGestureRecognizer:self.panGsRec];
-            [self addGestureRecognizer:self.pinchGsRec];
-        }
-    } else {
-        if (!REMIsNilOrNull(self.tapGsRec)) {
-            [self removeGestureRecognizer:self.tapGsRec];
-            self.tapGsRec = nil;
-            [self removeGestureRecognizer:self.panGsRec];
-            self.panGsRec = nil;
-            [self removeGestureRecognizer:self.pinchGsRec];
-            self.pinchGsRec = nil;
-        }
-    }
+    self.tapGsRec.enabled = self.acceptTap;
+    self.panGsRec.enabled = self.acceptPan;
+    self.pinchGsRec.enabled = self.acceptPinch;
 }
+
 -(void)defocus {
     if (self.graphContext.focusX == INT32_MIN) return;
     self.graphContext.focusX = INT32_MIN;

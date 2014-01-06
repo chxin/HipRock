@@ -32,7 +32,7 @@
 }
 
 - (void)loadView{
-    self.view = [[REMBuildingChartView alloc]initWithFrame:self.viewFrame];
+//    self.view = [[REMBuildingChartView alloc]initWithFrame:self.viewFrame];
 }
 
 - (void)viewDidLoad

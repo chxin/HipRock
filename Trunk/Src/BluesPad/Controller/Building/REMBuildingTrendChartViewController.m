@@ -7,215 +7,132 @@
  --------------------------------------------------------------------------*///
 
 #import "REMBuildingTrendChartViewController.h"
-#import "REMBuildingTrendChart.h"
 #import "REMWidgetAxisHelper.h"
 #import "REMBuildingTimeRangeDataModel.h"
 #import "REMTimeHelper.h"
+#import "REMBuildingTrendWrapper.h"
 #import "REMBuildingChartSeriesIndicator.h"
+#import "REMToggleButtonGroup.h"
 
-@interface REMBuildingTrendChartViewController () {
-    int currentSourceIndex; // Indicate that which button was pressed down.
-}
+@interface REMBuildingTrendChartViewController ()
+
+@property (nonatomic, assign) REMRelativeTimeRangeType timeRangeType;
 
 @property (nonatomic, assign) BOOL loadDataSuccess;
+@property (nonatomic,strong) NSMutableArray *datasource;
+@property (nonatomic,strong) REMToggleButtonGroup* toggleGroup;
+@property (nonatomic,strong) REMToggleButton* defaultButton;
 @end
 
 @implementation REMBuildingTrendChartViewController
 
-
--(void)activedButtonChanged:(UIButton*)newButton {
-    [self intervalChanged:newButton];
-}
-
-- (void)loadView
-{
-    self.loadDataSuccess = NO;
-    // Custom initialization
-    REMBuildingTrendChart* myView = [[REMBuildingTrendChart alloc] initWithFrame:self.viewFrame];
-    
-    currentSourceIndex = 0;
-//    myView.hostView.hostedGraph.defaultPlotSpace.delegate = self;
-//    
-    myView.toggleGroup.delegate = self;
-//
-//    
-//    
-    self.view = myView;
-//    self.graph = (CPTXYGraph*)myView.hostView.hostedGraph;
-//    
-//    
-//    self.graph.plotAreaFrame.masksToBorder = NO;
-//    self.graph.defaultPlotSpace.allowsUserInteraction = NO;
-//    
-//    self.graph.paddingTop = 18.0;
-//    self.graph.paddingLeft = 56.0;
-//    self.graph.paddingBottom = 0.0;
-//    self.graph.paddingRight = 0.0;
-//    
-//    self.graph.plotAreaFrame.paddingTop=0.0f;
-//    self.graph.plotAreaFrame.paddingRight=0.0f;
-//    self.graph.plotAreaFrame.paddingBottom=1.0f;
-//    self.graph.plotAreaFrame.paddingLeft=1.0f;
-//    
-//    CPTXYAxisSet *axisSet = (CPTXYAxisSet*)self.graph.axisSet;
-//    CPTXYAxis* x = axisSet.xAxis;
-//    [x setLabelingPolicy:CPTAxisLabelingPolicyNone];
-//    x.majorTickLineStyle = [self hiddenLineStyle];
-//    x.majorTickLength = 0;
-//    x.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
-//    x.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0f];
-//    x.axisLineStyle = [self axisLineStyle];
-//    x.majorGridLineStyle = [self gridLineStyle];
-//    x.plotSpace = self.graph.defaultPlotSpace;
-//    
-//    CPTXYAxis* y = axisSet.yAxis;
-//    [y setLabelingPolicy:CPTAxisLabelingPolicyNone];
-//    y.majorTickLineStyle = [self hiddenLineStyle];
-//    y.majorTickLength = 0;
-//    y.orthogonalCoordinateDecimal=CPTDecimalFromInt(0);
-//    y.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0f];
-//    y.axisLineStyle = [self axisLineStyle];
-//    y.majorGridLineStyle = [self gridLineStyle];
-//    y.plotSpace = self.graph.defaultPlotSpace;
-    
-}
-
-
+const int buttonHeight = 30;
+const int buttonWidth = 70;
+const int buttonMargin = 5;
+const int buttonFirstMargin = -20;
 - (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithViewFrame:frame];
     if (self) {
-        self.viewFrame = frame;
         self.requestUrl=REMDSBuildingTimeRangeData;
         self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
-    }
-    for (int i = 0; i < 6; i++) {
-        [self.datasource addObject:[NSNull null]];
+        
+        REMToggleButtonGroup* toggleGroup = [[REMToggleButtonGroup alloc]init];
+        _toggleGroup = toggleGroup;
+        [self makeButton:REMLocalizedString(@"Common_Today") rect:CGRectMake(buttonFirstMargin, 0, buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeToday);
+        [self makeButton:REMLocalizedString(@"Common_Yesterday") rect:CGRectMake(buttonMargin + buttonWidth+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeYesterday);
+        self.defaultButton = [self makeButton:REMLocalizedString(@"Common_ThisMonth") rect:CGRectMake((buttonMargin + buttonWidth)*2+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup];
+        self.defaultButton.on = YES;
+        self.defaultButton.value = @(REMRelativeTimeRangeTypeThisMonth);
+        [self makeButton:REMLocalizedString(@"Common_LastMonth") rect:CGRectMake((buttonMargin + buttonWidth)*3+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeLastMonth);
+        [self makeButton:REMLocalizedString(@"Common_ThisYear") rect:CGRectMake((buttonMargin + buttonWidth)*4+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeThisYear);
+        [self makeButton:REMLocalizedString(@"Common_LastYear") rect:CGRectMake((buttonMargin + buttonWidth)*5+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeLastYear);
+        toggleGroup.delegate = self;
+        self.loadDataSuccess = NO;
+        self.timeRangeType = REMRelativeTimeRangeTypeThisMonth;
     }
     return self;
 }
+- (REMToggleButton*) makeButton:(NSString*)buttonText rect:(CGRect)rect group:(REMToggleButtonGroup*)toggleGroup{
+    REMToggleButton* btn = [REMToggleButton buttonWithType: UIButtonTypeCustom];
+    [btn setFrame:rect];
+    btn.showsTouchWhenHighlighted = YES;
+    btn.adjustsImageWhenHighlighted = YES;
+    [btn setTitle:buttonText forState:UIControlStateNormal];
+    [self.view addSubview:btn];
+    [toggleGroup registerButton:btn];
+    return btn;
+}
 
-- (CPTGraphHostingView*) getHostView {
+-(void)activedButtonChanged:(REMToggleButton*)newButton {
+    self.timeRangeType = [newButton.value intValue];
+    [self intervalChanged];
+    [self updateLegendView];
+}
+
+-(REMEnergyViewData*)convertData:(id)data {
+    [self.datasource removeAllObjects];
+    for(NSDictionary *item in (NSArray *)data){
+        REMBuildingTimeRangeDataModel* dataItem = [[REMBuildingTimeRangeDataModel alloc] initWithDictionary:item];
+        [self.datasource addObject:dataItem];
+    }
+    for(REMBuildingTimeRangeDataModel *item in self.datasource){
+        if (item.timeRangeType == self.timeRangeType) return item.timeRangeData;
+    }
     return nil;
-    // return ((REMBuildingTrendChart*)self.view).hostView;
+}
+
+-(DCTrendWrapper*)constructWrapperWithFrame:(CGRect)frame {
+    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
+    syntax.relativeDateType = self.timeRangeType;
+    syntax.step = @([self getEnergyStep]);
+    REMChartStyle* style = [REMChartStyle getCoverStyle];
+    frame.origin.y = buttonHeight;
+    frame.size.height = frame.size.height - buttonHeight;
+    REMBuildingTrendWrapper* wrapper = [[REMBuildingTrendWrapper alloc]initWithFrame:frame data:self.energyViewData widgetContext:syntax style:style];
+    return wrapper;
 }
 
 -(void)prepareShare {
-    if (currentSourceIndex != 2) {
-        REMToggleButton* activeBtn = nil;
-        REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
-        if (currentSourceIndex == 0) {
-            activeBtn = myView.todayButton;
-        } else if (currentSourceIndex == 1) {
-            activeBtn = myView.yestodayButton;
-        } else if (currentSourceIndex == 2) {
-            activeBtn = myView.thisMonthButton;
-        } else if (currentSourceIndex == 3) {
-            activeBtn = myView.lastMonthButton;
-        } else if (currentSourceIndex == 4) {
-            activeBtn = myView.thisYearButton;
-        } else if (currentSourceIndex == 5) {
-            activeBtn = myView.lastYearButton;
-        }
-        [myView.thisMonthButton setOn:YES];
-        [activeBtn setOn:NO];
-        [self intervalChanged:myView.thisMonthButton];
+    if (self.timeRangeType != REMRelativeTimeRangeTypeThisMonth) {
+        self.defaultButton.on = YES;
+        self.timeRangeType = [self.defaultButton.value intValue];
+        [self intervalChanged];
+        [self updateLegendView];
     }
 }
 
-- (int)getSourceIndex: (REMRelativeTimeRangeType)type {
-    int i = 0;
-    
-    if (type == REMRelativeTimeRangeTypeToday) {
-        i = 0;
-    } else if (type == REMRelativeTimeRangeTypeYesterday) {
-        i = 1;
-    } else if (type == REMRelativeTimeRangeTypeThisMonth) {
-        i = 2;
-    } else if (type == REMRelativeTimeRangeTypeLastMonth) {
-        i = 3;
-    } else if (type == REMRelativeTimeRangeTypeThisYear) {
-        i = 4;
-    } else if (type == REMRelativeTimeRangeTypeLastYear) {
-        i = 5;
-    }
-    
-    return i;
-}
-
-- (CPTAxisLabel*)makeXLabel:(NSString*)labelText  location:(float)location labelStyle:(CPTTextStyle*)style {
-    CPTAxisLabel *label = [[CPTAxisLabel alloc]initWithText:labelText textStyle:style];
-    label.tickLocation= CPTDecimalFromFloat(location);
-    label.offset=5;
-    return label;
-}
-
-
-
-- (void)intervalChanged:(UIButton *)button {
+- (void)intervalChanged {
     if (!self.loadDataSuccess) return;
-    REMRelativeTimeRangeType timeRange = REMRelativeTimeRangeTypeToday;
-    REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
-    if (button == myView.todayButton) {
-        timeRange = REMRelativeTimeRangeTypeToday;
-    } else if (button == myView.yestodayButton) {
-        timeRange = REMRelativeTimeRangeTypeYesterday;
-    } else if (button == myView.thisMonthButton) {
-        timeRange = REMRelativeTimeRangeTypeThisMonth;
-    } else if (button == myView.lastMonthButton) {
-        timeRange = REMRelativeTimeRangeTypeLastMonth;
-    } else if (button == myView.thisYearButton) {
-        timeRange = REMRelativeTimeRangeTypeThisYear;
-    } else if (button == myView.lastYearButton) {
-        timeRange = REMRelativeTimeRangeTypeLastYear;
-    }
-    currentSourceIndex = [self getSourceIndex:timeRange];
-    
-    REMBuildingTimeRangeDataModel* seriesArray = [self.datasource objectAtIndex:currentSourceIndex];
-    int pointCount = 0;
-    if (!REMIsNilOrNull(seriesArray)) {
-        for (int i = 0; i < seriesArray.timeRangeData.targetEnergyData.count; i++) {
-            REMTargetEnergyData* s = seriesArray.timeRangeData.targetEnergyData[i];
-            pointCount+= s.energyData.count;
+    ((REMBuildingTrendWrapper*)self.chartWrapper).timeRangeType = self.timeRangeType;
+    for(REMBuildingTimeRangeDataModel *item in self.datasource){
+        if (item.timeRangeType == self.timeRangeType) {
+            self.energyViewData = item.timeRangeData;
+            break;
         }
-    }
-    if (pointCount == 0) {
-        myView.chartView.hidden = YES;
-        myView.noDataLabel.hidden = NO;
-        myView.legendView.hidden = YES;
-        //[self drawNoDataLabel];
-        return;
-    }
-
-    myView.noDataLabel.hidden = YES;
-    myView.legendView.hidden = NO;
-    REMEnergyStep step = currentSourceIndex < 2 ? REMEnergyStepHour : (currentSourceIndex < 4 ? REMEnergyStepDay : REMEnergyStepMonth);
-    [myView redrawWith:self.datasource[currentSourceIndex] step:step timeRangeType:timeRange];
-    CGFloat legendLeft = 57;
-    CGFloat labelDistance = 18;
-    CGFloat legendTop = 0;
-    for (DCXYSeries* series in myView.chartView.seriesList) {
-        CGFloat fontSize = 14;
-        // Draw legend
-        NSString* legendText = series.target.name;
-        CGSize textSize = [legendText sizeWithFont:[UIFont systemFontOfSize:fontSize]];
-        CGFloat benchmarkWidth = textSize.width + 26;
-        CGRect benchmarkFrame = CGRectMake(legendLeft, legendTop, benchmarkWidth, MAX(textSize.height, 15));
-        legendLeft = legendLeft + benchmarkWidth + labelDistance;
-        if (legendLeft > myView.legendView.bounds.size.width) {
-            legendLeft = 57;
-            legendTop += 14*2;
-        }
-        REMBuildingChartSeriesIndicator *benchmarkIndicator = [[REMBuildingChartSeriesIndicator alloc] initWithFrame:benchmarkFrame title:legendText andColor:series.color];
-        [myView.legendView addSubview:benchmarkIndicator];
     }
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+-(REMEnergyStep)getEnergyStep {
+    REMEnergyStep step = REMEnergyStepNone;
+    switch (self.timeRangeType) {
+        case REMRelativeTimeRangeTypeToday:
+        case REMRelativeTimeRangeTypeYesterday:
+            step = REMEnergyStepHour;
+            break;
+        case REMRelativeTimeRangeTypeThisMonth:
+        case REMRelativeTimeRangeTypeLastMonth:
+            step = REMEnergyStepDay;
+            break;
+        case REMRelativeTimeRangeTypeThisYear:
+        case REMRelativeTimeRangeTypeLastYear:
+            step = REMEnergyStepMonth;
+        default:
+            break;
+    }
+    return step;
 }
+
 
 -(NSDictionary *)assembleRequestParametersWithBuildingId:(long long)buildingId WithCommodityId:(long long)commodityID WithMetadata:(REMAverageUsageDataModel *)averageData
 {
@@ -228,29 +145,15 @@
     return buildingCommodityInfo;
 }
 
-- (void)loadDataSuccessWithData:(id)data
-{
-    self.loadDataSuccess = YES;
 
-    for(NSDictionary *item in (NSArray *)data){
-        REMBuildingTimeRangeDataModel* dataItem = [[REMBuildingTimeRangeDataModel alloc] initWithDictionary:item];
-        int index = [self getSourceIndex:dataItem.timeRangeType];
-        [self.datasource setObject:dataItem atIndexedSubscript:index];
-    }
-    REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
-    [myView.thisMonthButton setOn:YES];
-    [self intervalChanged:myView.thisMonthButton];
-    
+- (void)loadDataSuccessWithData:(id)data {
+    self.loadDataSuccess = YES;
+    [super loadDataSuccessWithData:data];
 }
 
 - (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error {
     self.loadDataSuccess = NO;
-
-    REMBuildingTrendChart* myView = (REMBuildingTrendChart*)self.view;
-    [myView.thisMonthButton setOn:YES];
-    [self intervalChanged:myView.thisMonthButton];
-    
-    [self drawLabelWithText:NSLocalizedString(@"BuildingChart_DataError",@"")];
+    [super loadDataFailureWithError:error];
 }
 
 @end

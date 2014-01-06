@@ -13,7 +13,9 @@
 
 @interface REMChartStyle : NSObject
 
-@property (nonatomic, assign) BOOL userInteraction;
+@property (nonatomic, assign) BOOL acceptPan;
+@property (nonatomic, assign) BOOL acceptPinch;
+@property (nonatomic, assign) BOOL acceptTap;
 @property (nonatomic, assign) CGFloat animationDuration;
 @property (nonatomic, assign) BOOL playBeginAnimation;
 @property (nonatomic, strong) UIColor* indicatorColor;

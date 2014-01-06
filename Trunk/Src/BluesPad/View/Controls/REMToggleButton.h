@@ -12,5 +12,6 @@
 @interface REMToggleButton : UIButton
 
 @property (nonatomic, getter=isOn) BOOL on;
+@property (nonatomic, strong) id value;
 
 @end

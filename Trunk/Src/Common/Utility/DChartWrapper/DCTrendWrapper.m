@@ -57,7 +57,9 @@
     view.graphContext.globalHRange = globalRange;
     view.seriesList = seriesList;
     
-    view.userInteractionEnabled = self.style.userInteraction;
+    view.acceptTap = self.style.acceptTap;
+    view.acceptPinch = self.style.acceptPinch;
+    view.acceptPan = self.style.acceptPan;
     
     view.xAxis.lineColor = self.style.xLineColor;
     view.xAxis.lineWidth = self.style.xLineWidth;
@@ -166,7 +168,7 @@
         [datas addObject:p];
     }
     DCXYSeries* s;
-    if (!REMIsNilOrNull(targetEnergy.target) && targetEnergy.target.type == REMEnergyTargetBenchmarkValue) {
+    if (!REMIsNilOrNull(targetEnergy.target) &&  [self isSpecialType:targetEnergy.target.type]) {
         s = [[DCLineSeries alloc]initWithEnergyData:datas];
         s.color = style.benchmarkColor;
         ((DCLineSeries*)s).symbolType = index % 5;
@@ -179,6 +181,11 @@
     s.target = targetEnergy.target;
     [self customizeSeries:s seriesIndex:index chartStyle:style];
     return s;
+}
+
+
+-(BOOL)isSpecialType:(REMEnergyTargetType)type {
+    return type == REMEnergyTargetBenchmarkValue;
 }
 
 -(NSNumber*)roundDate:(NSDate*)lengthDate startDate:(NSDate*)startDate processor:(REMTrendChartDataProcessor*)processor roundToFloor:(BOOL)roundToFloor {

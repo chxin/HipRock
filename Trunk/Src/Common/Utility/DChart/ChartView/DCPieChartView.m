@@ -57,35 +57,20 @@
         self.pieLayer.view = self;
         self.pieLayer.frame = CGRectMake(self.center.x, self.center.y, 0, 0);
         [self.layer addSublayer:self.pieLayer];
+        self.tapGsRec = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewTapped:)];
+        [self addGestureRecognizer:self.tapGsRec];
+        self.panGsRec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(viewPanned:)];
+        [self addGestureRecognizer:self.panGsRec];
+        self.panGsRec.maximumNumberOfTouches = 1;
+        self.tapGsRec.cancelsTouchesInView = NO;
+        self.panGsRec.cancelsTouchesInView = NO;
     }
     return self;
 }
 
 -(void)updateGestures {
-    if (self.userInteractionEnabled) {
-        if (REMIsNilOrNull(self.tapGsRec)) {
-            self.tapGsRec = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewTapped:)];
-            self.panGsRec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(viewPanned:)];
-            self.panGsRec.maximumNumberOfTouches = 1;
-            self.tapGsRec.cancelsTouchesInView = NO;
-            self.panGsRec.cancelsTouchesInView = NO;
-            [self addGestureRecognizer:self.tapGsRec];
-            [self addGestureRecognizer:self.panGsRec];
-        }
-    } else {
-        if (!REMIsNilOrNull(self.tapGsRec)) {
-            [self removeGestureRecognizer:self.tapGsRec];
-            self.tapGsRec = nil;
-            [self removeGestureRecognizer:self.panGsRec];
-            self.panGsRec = nil;
-        }
-    }
-}
-
--(void)setUserInteractionEnabled:(BOOL)userInteractionEnabled {
-    if(self.userInteractionEnabled == userInteractionEnabled) return;
-    [super setUserInteractionEnabled:userInteractionEnabled];
-    [self updateGestures];
+    self.tapGsRec.enabled = self.chartStyle.acceptTap;
+    self.panGsRec.enabled = self.chartStyle.acceptPan;
 }
 
 -(void)willMoveToSuperview:(UIView *)newSuperview {

@@ -36,10 +36,10 @@
 	<key>CurrentDataSource</key>
 	<dict>
 		<key>Debug</key>
-		<string>local</string>
+		<string>test</string>
 		<key>DailyBuild</key>
 		<string>test</string>
-		<key>InternalRelease</key>
+		<key>DailyBuild</key>
 		<string>test</string>
 		<key>Release</key>
 		<string>production</string>
