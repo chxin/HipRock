@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "REMChartSeriesIndicator.h"
+#import "DCSeries.h"
 @class REMChartLegendBase;
 
 
@@ -28,6 +29,7 @@
 @property (nonatomic) BOOL isBenchmark;
 @property (nonatomic) BOOL tappable;
 @property (nonatomic,weak) REMChartLegendBase *legendView;
+@property (nonatomic) BOOL isDefaultHidden;
 
 @end
 

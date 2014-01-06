@@ -11,38 +11,42 @@
 #import "REMEnergyTargetModel.h"
 #import "REMChartLegendItem.h"
 #import "REMColor.h"
-#import "REMStackChartLegendView.h"
-#import "REMChartLegendView.h"
 #import "REMWidgetMultiTimespanSearchModel.h"
+#import "REMStackChartLegendView.h"
+#import "REMTrendChartLegendView.h"
+#import "REMPieChartLegendView.h"
 
 @implementation REMChartLegendBase
 
 #define REMSeriesIsMultiTime [self.parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]]
 
-+(REMChartLegendBase *)legendWithData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget parameters:(REMWidgetSearchModelBase *)parameters andHiddenIndexes:(NSArray *)hiddenIndexes
+
++(REMChartLegendBase *)legendViewChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget parameters:(REMWidgetSearchModelBase *)parameters
 {
-    if(widget.contentSyntax.dataStoreType == REMDSEnergyCostElectricity){
-        return [[REMStackChartLegendView alloc] initWithData:data widget:widget parameters:parameters andHiddenIndexes:hiddenIndexes];
+    if(widget.diagramType == REMDiagramTypePie){
+        return [[REMPieChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters];
+    }
+    else if(widget.diagramType == REMDiagramTypeStackColumn){
+        return [[REMStackChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters];
     }
     else{
-        return [[REMChartLegendView alloc] initWithData:data widget:widget parameters:parameters andHiddenIndexes:hiddenIndexes];
+        return [[REMTrendChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters];
     }
 }
 
-
--(REMChartLegendBase *)initWithData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget parameters:(REMWidgetSearchModelBase *)parameters andHiddenIndexes:(NSArray *)hiddenIndexes
+-(REMChartLegendBase *)initWithChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget parameters:(REMWidgetSearchModelBase *)parameters
 {
     self = [super initWithFrame:kDMChart_ToolbarHiddenFrame];
     
     if(self){
-        self.data = data;
+        self.chartWrapper = chartWrapper;
         self.widget = widget;
         self.parameters = parameters;
+        self.data = data;
         
-        self.formator = nil;//[REMLegendFormatorBase formatorWidthData:data widget:widget andParameters:parameters];
         self.itemModels = [self convertItemModels];
         
-        [self render:hiddenIndexes];
+        [self render];
     }
     
     return self;
@@ -54,8 +58,8 @@
     return nil;
 }
 
-//@private
--(void)render:(NSArray *)hiddenIndexes
+
+-(void)render
 {
     CGFloat width = REMSeriesIsMultiTime ? 320 : kDMChart_LegendItemWidth;
     
@@ -75,51 +79,8 @@
         
         REMChartLegendItem *legend = [[REMChartLegendItem alloc] initWithFrame:CGRectMake(x, y, width, kDMChart_LegendItemHeight) andModel:model];
         
-        if(hiddenIndexes != nil && hiddenIndexes.count > 0 && [hiddenIndexes containsObject:@(i)]){
-            [legend setSelected:YES];
-        }
-        
         [self addSubview:legend];
     }
 }
-
-
-//switch (widget.contentSyntax.dataStoreType) {
-//    case REMDSEnergyTagsTrendUnit:
-//    case REMDSEnergyCarbonUnit:
-//    case REMDSEnergyCostUnit:
-//    case REMDSEnergyMultiTimeTrend:
-//    case REMDSEnergyMultiTimeDistribute:
-//    case REMDSEnergyCarbon:
-//    case REMDSEnergyCarbonDistribute:
-//    case REMDSEnergyCost:
-//    case REMDSEnergyCostDistribute:
-//    case REMDSEnergyCostElectricity:
-//    case REMDSEnergyRatio:
-//    case REMDSEnergyRankingEnergy:
-//    case REMDSEnergyRankingCost:
-//    case REMDSEnergyRankingCarbon:
-//    case REMDSEnergyLabeling:
-//    case REMDSEnergyTagsTrend:
-//    case REMDSEnergyTagsDistribute:
-//}
-//
-//switch (target.type) {
-//    case REMEnergyTargetTarget:
-//    case REMEnergyTargetBaseline:
-//    case REMEnergyTargetPlain:
-//    case REMEnergyTargetPeak:
-//    case REMEnergyTargetValley:
-//    case REMEnergyTargetCarbon:
-//    case REMEnergyTargetCost:
-//    case REMEnergyTargetBenchmarkValue:
-//    case REMEnergyTargetTag:
-//    case REMEnergyTargetKpi:
-//    case REMEnergyTargetCalcValue:
-//    case REMEnergyTargetOrigValue:
-//    case REMEnergyTargetTargetValue:
-//    case REMEnergyTargetBaseValue:
-//    case REMEnergyTargetHierarchy:
-//}
 
 @end
