@@ -273,6 +273,11 @@
                 return dashboard;
             }
         }
+        if ([currentRelation.dashboardId isEqualToNumber:@(-1)]==YES) {
+            REMDashboardObj *dashboard=[[REMDashboardObj alloc]init];
+            dashboard.dashboardId=currentRelation.dashboardId;
+            return dashboard;
+        }
     }
     return nil;
 }
@@ -280,7 +285,8 @@
 - (REMWidgetObject *)widgetInfoByPosition:(REMBuildingCoverWidgetPosition)position{
     REMBuildingCoverWidgetRelationModel *currentRelation;
     for (REMBuildingCoverWidgetRelationModel *relation in self.buildingInfo.widgetRelationArray) {
-        if ([relation.buildingId isEqualToNumber:self.buildingInfo.building.buildingId] && [relation.commodityId isEqualToNumber:self.commodityInfo.commodityId]) {
+        if ([relation.buildingId isEqualToNumber:self.buildingInfo.building.buildingId] && [relation.commodityId isEqualToNumber:self.commodityInfo.commodityId] &&
+            relation.position == position) {
             currentRelation = relation;
             break;
         }
@@ -295,10 +301,17 @@
                 }
             }
         }
+        if ([currentRelation.dashboardId isEqualToNumber:@(-1)]==YES) {
+            REMWidgetObject *widget=[[REMWidgetObject alloc]init];
+            widget.widgetId=currentRelation.widgetId;
+            return widget;
+        }
     }
     
     return nil;
 }
+
+
 
 - (NSDictionary *)dashboardArrayForPiningWidget{
     NSMutableArray *dashboardList = [NSMutableArray array];
@@ -318,13 +331,24 @@
 - (NSString *)chartTitleByPosition:(REMBuildingCoverWidgetPosition)position
 {
     REMWidgetObject *widgetInfo=[self widgetInfoByPosition:position];
-    if (self.buildingInfo.widgetRelationArray==nil || widgetInfo==nil) {
-        if (position == REMBuildingCoverWidgetPositionFirst) {
-            return  NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @"");//单位面积逐月用%@
+    if (self.buildingInfo.widgetRelationArray==nil || widgetInfo==nil || [widgetInfo.widgetId isLessThan:@(0)]==YES) {
+        NSString *title=NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @"");//单位面积逐月用%@
+        if ([widgetInfo.widgetId isEqualToNumber:@(-1)]==YES) {
+            title = NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @"");//单位面积逐月用%@
+        }
+        else if([widgetInfo.widgetId isEqualToNumber:@(-2)]==YES){
+            title = NSLocalizedString(@"Building_EnergyUsageByCommodity", @"");//用%@趋势图
         }
         else{
-            return  NSLocalizedString(@"Building_EnergyUsageByCommodity", @"");//用%@趋势图
+            if (position == REMBuildingCoverWidgetPositionFirst) {
+                title = NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @"");//单位面积逐月用%@
+            }
+            else{
+                title = NSLocalizedString(@"Building_EnergyUsageByCommodity", @"");//用%@趋势图
+            }
         }
+        return [NSString stringWithFormat:title,self.commodityInfo.comment];
+
     }
     else{
         return widgetInfo.name;
@@ -339,7 +363,7 @@
     NSString *title1=[self chartTitleByPosition:REMBuildingCoverWidgetPositionFirst];
     
     UILabel *titleLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityTitleFontSize)];
-    titleLabel1.text=[NSString stringWithFormat:title1,self.commodityInfo.comment];
+    titleLabel1.text=title1;
     titleLabel1.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     titleLabel1.shadowOffset=CGSizeMake(1, 1);
     
@@ -372,7 +396,7 @@
     NSString *title2=[self chartTitleByPosition:REMBuildingCoverWidgetPositionSecond];
     
     UILabel *titleLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingCommodityDetailWidth, kBuildingCommodityTitleFontSize)];
-    titleLabel2.text=[NSString stringWithFormat:title2,self.commodityInfo.comment];;
+    titleLabel2.text=title2;
     titleLabel2.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     titleLabel2.shadowOffset=CGSizeMake(1, 1);
     
@@ -405,8 +429,8 @@
 
 - (REMBuildingChartContainerViewController *)chartContainerControllerByPosition:(REMBuildingCoverWidgetPosition)position{
     REMBuildingChartContainerViewController *controller=[[REMBuildingChartContainerViewController alloc] init];
-    REMDashboardObj *dashboard=[self dashboardInfoByPosition:position];
-    if (dashboard==nil) {
+    REMWidgetObject *widget=[self widgetInfoByPosition:position];
+    if (widget==nil) {
         if (position == REMBuildingCoverWidgetPositionFirst) {
             controller.chartHandlerClass=[REMBuildingAverageViewController class];
         }
@@ -417,9 +441,15 @@
     else{
         controller.chartHandlerClass=[REMBuildingWidgetChartViewController class];
     }
+    if([widget.widgetId isEqualToNumber:@(-1)]==YES){
+        controller.chartHandlerClass=[REMBuildingAverageViewController class];
+    }
+    else if([widget.widgetId isEqualToNumber:@(-2)]==YES){
+        controller.chartHandlerClass=[REMBuildingTrendChartViewController class];
+    }
     controller.buildingId=self.buildingInfo.building.buildingId;
     controller.commodityId=self.commodityInfo.commodityId;
-    controller.widgetInfo=[self widgetInfoByPosition:position];
+    controller.widgetInfo=widget;
     return controller;
 }
 
@@ -436,6 +466,7 @@
     NSDictionary *dic=[self dashboardArrayForPiningWidget];
     coverRelationController.dashboardArray=dic[@"list"];
     coverRelationController.widgetDic=dic[@"widget"];
+    coverRelationController.commodityController=self;
     REMDashboardObj *dashboard=[self dashboardInfoByPosition:coverRelationController.position];
     REMWidgetObject *widget=[self widgetInfoByPosition:coverRelationController.position];
     if (widget==nil) {
@@ -501,7 +532,18 @@
             
         }
         [firstController removeFromParentViewController];
+        if (firstController.isViewLoaded==YES) {
+            [firstController.view removeFromSuperview];
+            [self.view addSubview: containerController.view];
+        }
+        
+        
         [secondController removeFromParentViewController];
+        if ([secondController isEqual:otherContainer]==NO && secondController.isViewLoaded==YES) {
+            [secondController.view removeFromSuperview];
+            [self.view addSubview:otherContainer.view];
+        }
+        
         [self addChildViewController:containerController];
         [self addChildViewController:otherContainer];
         
@@ -531,6 +573,16 @@
         [secondController removeFromParentViewController];
         [self addChildViewController:otherContainer];
         [self addChildViewController:containerController];
+        
+        if ([otherContainer isEqual:firstController]==NO && firstController.isViewLoaded==YES) {
+            [otherContainer.view removeFromSuperview];
+            [self.view addSubview:otherContainer.view];
+        }
+        if (secondController.isViewLoaded==YES) {
+            [secondController.view removeFromSuperview];
+            [self.view addSubview:containerController.view];
+        }
+        
     }
     self.popController=nil;
 }

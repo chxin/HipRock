@@ -187,7 +187,7 @@
     model.commodityId=self.commodityInfo.commodityId;
     model.buildingId=self.buildingInfo.building.buildingId;
 
-    if (self.currentIndexPath.section==0) {
+    if (self.currentIndexPath.section==1) {
         if ([self.selectedDashboardId isEqualToNumber:@(-1)] && self.currentIndexPath.row==0) {
             [self cancelButtonClicked:nil];
             return;
@@ -206,7 +206,7 @@
         model.widgetId=widgetId;
         model.dashboardId=@(-1);
     }
-    if (self.currentIndexPath.section!=0) {
+    if (self.currentIndexPath.section!=1) {
         REMDashboardObj *dashboard=self.dashboardArray[self.currentIndexPath.section-2];
         NSArray *widgetList=self.widgetDic[dashboard.dashboardId];
         REMWidgetObject *widget=widgetList[self.currentIndexPath.row];
