@@ -48,7 +48,6 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
     syntax.step = @(REMEnergyStepMonth);
     REMChartStyle* style = [REMChartStyle getCoverStyle];
-    style.userInteraction = YES;
     REMBuildingAverageWrapper* wrapper = [[REMBuildingAverageWrapper alloc]initWithFrame:frame data:self.energyViewData widgetContext:syntax style:style];
     return wrapper;
 }

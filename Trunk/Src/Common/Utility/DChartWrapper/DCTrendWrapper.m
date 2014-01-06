@@ -57,7 +57,9 @@
     view.graphContext.globalHRange = globalRange;
     view.seriesList = seriesList;
     
-    view.userInteractionEnabled = self.style.userInteraction;
+    view.acceptTap = self.style.acceptTap;
+    view.acceptPinch = self.style.acceptPinch;
+    view.acceptPan = self.style.acceptPan;
     
     view.xAxis.lineColor = self.style.xLineColor;
     view.xAxis.lineWidth = self.style.xLineWidth;
