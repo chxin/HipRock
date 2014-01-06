@@ -39,8 +39,6 @@
 		<string>test</string>
 		<key>DailyBuild</key>
 		<string>test</string>
-		<key>InternalRelease</key>
-		<string>test</string>
 		<key>Release</key>
 		<string>production</string>
 	</dict>
