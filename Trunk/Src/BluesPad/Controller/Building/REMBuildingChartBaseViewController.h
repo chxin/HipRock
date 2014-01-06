@@ -11,11 +11,14 @@
 #import "CPTGraphHostingView.h"
 #import "CorePlot-CocoaTouch.h"
 #import "REMError.h"
-
+#import "REMWidgetObject.h"
 
 @interface REMBuildingChartBaseViewController: UIViewController
 
 @property (nonatomic) REMDataStoreType requestUrl;
+@property (nonatomic) CGRect viewFrame;
+
+@property (nonatomic,weak) REMWidgetObject *widgetInfo;
 
 - (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame;
 

@@ -12,7 +12,7 @@
 
 +(REMChartStyle*)getCoverStyle {
     REMChartStyle* style = [[REMChartStyle alloc]init];
-    style.userInteraction = NO;
+    style.userInteraction = YES;
     style.animationDuration = 0.05;
     style.xLineColor = [UIColor colorWithWhite:1 alpha:0.6];
     style.xLineWidth = 1.0;

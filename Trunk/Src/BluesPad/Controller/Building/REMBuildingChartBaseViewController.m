@@ -32,6 +32,7 @@ static CPTTextStyle *yAxisLabelStyle;
         // Custom initialization
         //[self.view setFrame:frame];
         //[self viewDidLoad];
+        self.viewFrame=frame;
     }
     return self;
 }

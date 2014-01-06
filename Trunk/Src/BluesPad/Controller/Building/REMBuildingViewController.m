@@ -23,6 +23,7 @@
 #import "REMBuildingShareViewController.h"
 #import "REMDimensions.h"
 #import "REMBuildingChartContainerView2.h"
+#import "DCXYChartView.h"
 #import <GPUImage/GPUImage.h>
 
 const static CGFloat buildingGap=20;
@@ -84,7 +85,7 @@ const static CGFloat buildingGap=20;
     if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] ==YES ){
         if(self.childViewControllers.count<1)return YES;
         //NSLog(@"touch:%@",touch.view);
-        if( [touch.view isKindOfClass:[CPTGraphHostingView class]] == YES) return NO;
+        if( [touch.view isKindOfClass:[DCXYChartView class]] == YES) return NO;
         return YES;
     }
     else if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]==YES){
@@ -141,7 +142,7 @@ const static CGFloat buildingGap=20;
     
     
     int i=0,count=self.buildingInfoArray.count;
-    //count=2;
+    count=1;
     for (;i<count;++i) {
         REMBuildingOverallModel *model = self.buildingInfoArray[i];
         

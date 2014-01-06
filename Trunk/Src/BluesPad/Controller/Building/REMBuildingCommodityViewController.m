@@ -13,7 +13,7 @@
 #import "REMBuildingCommodityView.h"
 #import "REMBuildingCoverWidgetRelationModel.h"
 #import "REMBuildingCoverWidgetViewController.h"
-
+#import "REMBuildingWidgetChartViewController.h"
 
 
 @interface REMBuildingCommodityViewController ()
@@ -26,7 +26,8 @@
 @property (nonatomic,weak) REMBuildingTitleLabelView *targetLabel;
 @property (nonatomic,weak) REMBuildingRankingView *rankingLabel;
 
-
+@property (nonatomic,weak) UILabel *firstChartTitleLabel;
+@property (nonatomic,weak) UILabel *secondChartTitleLabel;
 
 @property (nonatomic) NSUInteger counter;
 
@@ -259,15 +260,19 @@
 {
     REMBuildingCoverWidgetRelationModel *currentRelation=nil;
     for (REMBuildingCoverWidgetRelationModel *relation in self.buildingInfo.widgetRelationArray) {
-        if ([relation.buildingId isEqualToNumber:self.buildingInfo.building.buildingId] && [relation.commodityId isEqualToNumber:self.commodityInfo.commodityId]) {
+        if ([relation.buildingId isEqualToNumber:self.buildingInfo.building.buildingId] && [relation.commodityId isEqualToNumber:self.commodityInfo.commodityId] &&
+            relation.position == position) {
             currentRelation = relation;
             break;
         }
     }
     if (currentRelation!=nil) {
         NSArray *array=self.buildingInfo.dashboardArray;
-        REMDashboardObj *dashboard= array[[currentRelation.dashboardId integerValue]];
-        return dashboard;
+        for (REMDashboardObj *dashboard in array) {
+            if ([dashboard.dashboardId isEqualToNumber:currentRelation.dashboardId]==YES) {
+                return dashboard;
+            }
+        }
     }
     return nil;
 }
@@ -342,7 +347,7 @@
     titleLabel1.font = [UIFont fontWithName:@(kBuildingFontSC) size:kBuildingCommodityTitleFontSize];
     titleLabel1.textColor=[UIColor whiteColor];
     [self.view addSubview:titleLabel1];
-    
+    self.firstChartTitleLabel=titleLabel1;
     UIButton *firstButton=[UIButton buttonWithType:UIButtonTypeCustom];
     if (REMISIOS7) {
         firstButton=[UIButton buttonWithType:UIButtonTypeSystem];
@@ -356,20 +361,14 @@
     
     
     if (self.childViewControllers.count<2) {
-        REMBuildingChartContainerViewController *controller1=[[REMBuildingChartContainerViewController alloc] init];
+        REMBuildingChartContainerViewController *controller1=[self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionFirst];
         controller1.viewFrame=CGRectMake(0, marginTop+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, chartContainerHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
-        //NSLog(@"view frame:%@",NSStringFromCGRect(controller1.viewFrame));
-        controller1.chartHandlerClass=[REMBuildingAverageViewController class];
-        controller1.buildingId=self.buildingInfo.building.buildingId;
-        controller1.commodityId=self.commodityInfo.commodityId;
-        controller1.widgetInfo=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionFirst];
         [self addChildViewController:controller1];
     }
    
     
     int marginTop1=marginTop+chartContainerHeight+kBuildingCommodityBottomMargin;
-    CGFloat secondChartHeight=chartContainerHeight+85;//85 is delta value for second chart in commodity view
-
+    CGFloat secondChartHeight=chartContainerHeight;
     NSString *title2=[self chartTitleByPosition:REMBuildingCoverWidgetPositionSecond];
     
     UILabel *titleLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingCommodityDetailWidth, kBuildingCommodityTitleFontSize)];
@@ -381,7 +380,7 @@
     titleLabel2.font = [UIFont fontWithName:@(kBuildingFontSC) size:kBuildingCommodityTitleFontSize];
     titleLabel2.textColor=[UIColor whiteColor];
     [self.view addSubview:titleLabel2];
-    
+    self.secondChartTitleLabel=titleLabel2;
     UIButton *secondButton=[UIButton buttonWithType:UIButtonTypeCustom];
     if (REMISIOS7) {
         secondButton=[UIButton buttonWithType:UIButtonTypeSystem];
@@ -394,19 +393,38 @@
     [self.view addSubview:secondButton];
 
     if (self.childViewControllers.count<2) {
-        REMBuildingChartContainerViewController *controller2=[[REMBuildingChartContainerViewController alloc] init];
+        REMBuildingChartContainerViewController *controller2=[self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionSecond];
         controller2.viewFrame=CGRectMake(0, marginTop1+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, secondChartHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
-        //NSLog(@"view frame:%@",NSStringFromCGRect(controller2.viewFrame));
-        controller2.chartHandlerClass=[REMBuildingTrendChartViewController class];
-        controller2.commodityId=self.commodityInfo.commodityId;
-        controller2.buildingId=self.buildingInfo.building.buildingId;
-        controller2.widgetInfo=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionSecond];
         [self addChildViewController:controller2];
     
     }
     
-
+    
 }
+
+
+- (REMBuildingChartContainerViewController *)chartContainerControllerByPosition:(REMBuildingCoverWidgetPosition)position{
+    REMBuildingChartContainerViewController *controller=[[REMBuildingChartContainerViewController alloc] init];
+    REMDashboardObj *dashboard=[self dashboardInfoByPosition:position];
+    if (dashboard==nil) {
+        if (position == REMBuildingCoverWidgetPositionFirst) {
+            controller.chartHandlerClass=[REMBuildingAverageViewController class];
+        }
+        else{
+            controller.chartHandlerClass=[REMBuildingTrendChartViewController class];
+        }
+    }
+    else{
+        controller.chartHandlerClass=[REMBuildingWidgetChartViewController class];
+    }
+    controller.buildingId=self.buildingInfo.building.buildingId;
+    controller.commodityId=self.commodityInfo.commodityId;
+    controller.widgetInfo=[self widgetInfoByPosition:position];
+    return controller;
+}
+
+
+
 - (void)widgetRelationButtonClicked:(UIButton *)button{
     UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
 
@@ -445,10 +463,77 @@
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
-    self.popController=nil;
+    UINavigationController *nav= (UINavigationController *)popoverController.contentViewController;
+    REMBuildingCoverWidgetViewController *widgetController=nav.childViewControllers[0];
+    if (widgetController.isRequesting==NO) {
+        self.popController=nil;
+    }
 }
 
-
+- (void)updateChartController{
+    UINavigationController *nav= (UINavigationController *)self.popController.contentViewController;
+    REMBuildingCoverWidgetViewController *widgetController=nav.childViewControllers[0];
+    REMBuildingChartContainerViewController *containerController;
+    REMBuildingChartContainerViewController *otherContainer;
+    REMWidgetObject *otherWidget;
+    REMBuildingChartContainerViewController *firstController=self.childViewControllers[0];
+    REMBuildingChartContainerViewController *secondController=self.childViewControllers[1];
+    if (widgetController.position == REMBuildingCoverWidgetPositionFirst) {
+        self.firstChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionFirst];
+        containerController = [self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionFirst];
+        
+        containerController.viewFrame=firstController.viewFrame;
+        otherContainer=self.childViewControllers[1];
+        otherWidget=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionSecond];
+        if(otherContainer.widgetInfo==nil){
+            if (otherWidget!=nil) {
+                self.secondChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionSecond];
+                otherContainer=[self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionSecond];
+                otherContainer.viewFrame=secondController.viewFrame;
+            }
+        }
+        else{
+            if (otherWidget==nil || [otherWidget.widgetId isEqualToNumber:otherContainer.widgetInfo.widgetId]==NO) {
+                self.secondChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionSecond];
+                otherContainer=[self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionSecond];
+                otherContainer.viewFrame=secondController.viewFrame;
+            }
+            
+        }
+        [firstController removeFromParentViewController];
+        [secondController removeFromParentViewController];
+        [self addChildViewController:containerController];
+        [self addChildViewController:otherContainer];
+        
+    }
+    else{
+        self.secondChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionSecond];
+        containerController = [self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionSecond];
+        containerController.viewFrame=secondController.viewFrame;
+        otherContainer=self.childViewControllers[0];
+        otherWidget=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionFirst];
+        if(otherContainer.widgetInfo==nil){
+            if (otherWidget!=nil) {
+                self.secondChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionFirst];
+                otherContainer=[self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionFirst];
+                otherContainer.viewFrame=firstController.viewFrame;
+            }
+        }
+        else{
+            if (otherWidget==nil || [otherWidget.widgetId isEqualToNumber:otherContainer.widgetInfo.widgetId]==NO) {
+                self.secondChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionFirst];
+                otherContainer=[self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionFirst];
+                otherContainer.viewFrame=firstController.viewFrame;
+            }
+            
+        }
+        [firstController removeFromParentViewController];
+        [secondController removeFromParentViewController];
+        [self addChildViewController:otherContainer];
+        [self addChildViewController:containerController];
+    }
+    self.popController=nil;
+}
 
 - (void)showChart{
     

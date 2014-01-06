@@ -224,7 +224,7 @@
 - (void)initChartContainer
 {
     int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;
-    int chartContainerHeight= kBuildingChartHeight*2+kBuildingCommodityBottomMargin+85;
+    int chartContainerHeight= kBuildingChartHeight*2+kBuildingCommodityBottomMargin;
     NSString *title1=NSLocalizedString(@"Building_AirQualityDailyChart", @"");//室内外PM2.5逐日含量
     
     UILabel *titleLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityTitleFontSize)];
