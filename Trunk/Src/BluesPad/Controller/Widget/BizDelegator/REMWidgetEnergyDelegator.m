@@ -16,7 +16,7 @@
 #import "REMTrendChartTooltipView.h"
 #import "REMPieChartTooltipView.h"
 #import "REMChartSeriesIndicator.h"
-#import "REMChartLegendView.h"
+#import "REMTrendChartLegendView.h"
 #import "REMStackChartLegendView.h"
 #import "REMClientErrorInfo.h"
 #import "DCLineWrapper.h"
@@ -982,7 +982,8 @@
 
 -(UIView *)prepareLegendView
 {
-    REMChartLegendBase *legend = [REMChartLegendBase legendWithData:self.energyData widget:self.widgetInfo parameters:self.tempModel andHiddenIndexes:self.hiddenSeries];
+    //REMChartLegendBase *legend = [REMChartLegendBase legendWithData:self.energyData widget:self.widgetInfo parameters:self.tempModel andHiddenIndexes:self.hiddenSeries];
+    REMChartLegendBase *legend = [REMChartLegendBase legendViewChartWrapper:self.chartWrapper data:self.energyData widget:self.widgetInfo parameters:self.tempModel];
     legend.itemDelegate = self;
     
     return legend;

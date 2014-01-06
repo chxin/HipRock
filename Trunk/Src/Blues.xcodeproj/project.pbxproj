@@ -425,12 +425,6 @@
 		7A66A28C1817794F000A6AB8 /* LoginBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A66A28B1817794F000A6AB8 /* LoginBusiness.m */; };
 		7A6A14F1181E52F4007D06B8 /* REMMarkerBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6A14F0181E52F4007D06B8 /* REMMarkerBubbleView.m */; };
 		7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */; };
-		7A7B2102183CAAF000C14248 /* REMLegendFormatorBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B2101183CAAF000C14248 /* REMLegendFormatorBase.m */; };
-		7A7B2105183CAB3600C14248 /* REMCommonLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B2104183CAB3600C14248 /* REMCommonLegendFormator.m */; };
-		7A7B2108183CAB4B00C14248 /* REMCarbonLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B2107183CAB4B00C14248 /* REMCarbonLegendFormator.m */; };
-		7A7B210B183CAB5F00C14248 /* REMCostLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B210A183CAB5F00C14248 /* REMCostLegendFormator.m */; };
-		7A7B210E183CAB7600C14248 /* REMUnitLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B210D183CAB7600C14248 /* REMUnitLegendFormator.m */; };
-		7A7B2111183CABB000C14248 /* REMRatioLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B2110183CABB000C14248 /* REMRatioLegendFormator.m */; };
 		7A7EA6E1180548CB00A3BB56 /* REMNetworkStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */; };
 		7A7F7B18181F7E3400A3C5AB /* REMGalleryGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F7B17181F7E3400A3C5AB /* REMGalleryGroupView.m */; };
 		7A7F7B1C181F85A100A3C5AB /* REMGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F7B1B181F85A100A3C5AB /* REMGalleryCollectionViewController.m */; };
@@ -454,7 +448,7 @@
 		7AB34E80177D33AB003E235E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4B177D2975003E235E /* SystemConfiguration.framework */; };
 		7AB9B396183DCF1100779C5E /* REMChartLegendBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B384183DCF1100779C5E /* REMChartLegendBase.m */; };
 		7AB9B397183DCF1100779C5E /* REMChartLegendItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B386183DCF1100779C5E /* REMChartLegendItem.m */; };
-		7AB9B398183DCF1100779C5E /* REMChartLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B388183DCF1100779C5E /* REMChartLegendView.m */; };
+		7AB9B398183DCF1100779C5E /* REMTrendChartLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B388183DCF1100779C5E /* REMTrendChartLegendView.m */; };
 		7AB9B399183DCF1100779C5E /* REMStackChartLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B38A183DCF1100779C5E /* REMStackChartLegendView.m */; };
 		7AB9B39A183DCF1100779C5E /* REMChartTooltipItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B38D183DCF1100779C5E /* REMChartTooltipItem.m */; };
 		7AB9B39B183DCF1100779C5E /* REMPieChartTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B38F183DCF1100779C5E /* REMPieChartTooltipView.m */; };
@@ -468,7 +462,6 @@
 		7ABFDDF418483119004DD4E7 /* JumpLogin-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */; };
 		7AC54999181776910037F180 /* REMDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC54998181776910037F180 /* REMDashboardController.m */; };
 		7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
-		7AD0AB8B183CF52000525C82 /* REMTimeSliceLegendFormator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD0AB8A183CF52000525C82 /* REMTimeSliceLegendFormator.m */; };
 		7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */; };
 		7AF3667817CF2D7400447650 /* REMBuildingChartSeriesIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */; };
 		7AF6AC8117D1BA0D00D62A9A /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
@@ -1068,13 +1061,6 @@
 		7A6E6D0B17A65CE500FBB264 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		7A6E6D0D17A65CE500FBB264 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
-		7A7B2100183CAAF000C14248 /* REMLegendFormatorBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLegendFormatorBase.h; path = Biz/Chart/LegendFormator/REMLegendFormatorBase.h; sourceTree = "<group>"; };
-		7A7B2101183CAAF000C14248 /* REMLegendFormatorBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLegendFormatorBase.m; path = Biz/Chart/LegendFormator/REMLegendFormatorBase.m; sourceTree = "<group>"; };
-		7A7B2104183CAB3600C14248 /* REMCommonLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMCommonLegendFormator.m; path = Biz/Chart/LegendFormator/REMCommonLegendFormator.m; sourceTree = "<group>"; };
-		7A7B2107183CAB4B00C14248 /* REMCarbonLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMCarbonLegendFormator.m; path = Biz/Chart/LegendFormator/REMCarbonLegendFormator.m; sourceTree = "<group>"; };
-		7A7B210A183CAB5F00C14248 /* REMCostLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMCostLegendFormator.m; path = Biz/Chart/LegendFormator/REMCostLegendFormator.m; sourceTree = "<group>"; };
-		7A7B210D183CAB7600C14248 /* REMUnitLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMUnitLegendFormator.m; path = Biz/Chart/LegendFormator/REMUnitLegendFormator.m; sourceTree = "<group>"; };
-		7A7B2110183CABB000C14248 /* REMRatioLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMRatioLegendFormator.m; path = Biz/Chart/LegendFormator/REMRatioLegendFormator.m; sourceTree = "<group>"; };
 		7A7EA6DF180548CB00A3BB56 /* REMNetworkStatusIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMNetworkStatusIndicator.h; path = Common/Communication/REMNetworkStatusIndicator.h; sourceTree = "<group>"; };
 		7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMNetworkStatusIndicator.m; path = Common/Communication/REMNetworkStatusIndicator.m; sourceTree = "<group>"; };
 		7A7F7B16181F7E3400A3C5AB /* REMGalleryGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMGalleryGroupView.h; sourceTree = "<group>"; };
@@ -1124,8 +1110,8 @@
 		7AB9B384183DCF1100779C5E /* REMChartLegendBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartLegendBase.m; sourceTree = "<group>"; };
 		7AB9B385183DCF1100779C5E /* REMChartLegendItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartLegendItem.h; sourceTree = "<group>"; };
 		7AB9B386183DCF1100779C5E /* REMChartLegendItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartLegendItem.m; sourceTree = "<group>"; };
-		7AB9B387183DCF1100779C5E /* REMChartLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartLegendView.h; sourceTree = "<group>"; };
-		7AB9B388183DCF1100779C5E /* REMChartLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartLegendView.m; sourceTree = "<group>"; };
+		7AB9B387183DCF1100779C5E /* REMTrendChartLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMTrendChartLegendView.h; sourceTree = "<group>"; };
+		7AB9B388183DCF1100779C5E /* REMTrendChartLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartLegendView.m; sourceTree = "<group>"; };
 		7AB9B389183DCF1100779C5E /* REMStackChartLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMStackChartLegendView.h; sourceTree = "<group>"; };
 		7AB9B38A183DCF1100779C5E /* REMStackChartLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMStackChartLegendView.m; sourceTree = "<group>"; };
 		7AB9B38C183DCF1100779C5E /* REMChartTooltipItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartTooltipItem.h; sourceTree = "<group>"; };
@@ -1226,7 +1212,6 @@
 		7AC54998181776910037F180 /* REMDashboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMDashboardController.m; sourceTree = "<group>"; };
 		7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceMeta.h; path = Common/Communication/REMServiceMeta.h; sourceTree = "<group>"; };
 		7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceMeta.m; path = Common/Communication/REMServiceMeta.m; sourceTree = "<group>"; };
-		7AD0AB8A183CF52000525C82 /* REMTimeSliceLegendFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeSliceLegendFormator.m; path = Biz/Chart/LegendFormator/REMTimeSliceLegendFormator.m; sourceTree = "<group>"; };
 		7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
 		7AF3667617CF2D7400447650 /* REMBuildingChartSeriesIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartSeriesIndicator.h; sourceTree = "<group>"; };
 		7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingChartSeriesIndicator.m; sourceTree = "<group>"; };
@@ -2474,34 +2459,10 @@
 		7A7B20FD183CAA9200C14248 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
-				7A7B20FF183CAAA800C14248 /* TooltipFormator */,
-				7A7B20FE183CAA9800C14248 /* LegendFormator */,
 				7AB9B3A2183DF8FF00779C5E /* REMTextIndicatorFormator.h */,
 				7AB9B3A3183DF8FF00779C5E /* REMTextIndicatorFormator.m */,
 			);
 			name = Chart;
-			sourceTree = "<group>";
-		};
-		7A7B20FE183CAA9800C14248 /* LegendFormator */ = {
-			isa = PBXGroup;
-			children = (
-				7A7B2100183CAAF000C14248 /* REMLegendFormatorBase.h */,
-				7A7B2101183CAAF000C14248 /* REMLegendFormatorBase.m */,
-				7A7B2104183CAB3600C14248 /* REMCommonLegendFormator.m */,
-				7AD0AB8A183CF52000525C82 /* REMTimeSliceLegendFormator.m */,
-				7A7B2107183CAB4B00C14248 /* REMCarbonLegendFormator.m */,
-				7A7B210A183CAB5F00C14248 /* REMCostLegendFormator.m */,
-				7A7B210D183CAB7600C14248 /* REMUnitLegendFormator.m */,
-				7A7B2110183CABB000C14248 /* REMRatioLegendFormator.m */,
-			);
-			name = LegendFormator;
-			sourceTree = "<group>";
-		};
-		7A7B20FF183CAAA800C14248 /* TooltipFormator */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = TooltipFormator;
 			sourceTree = "<group>";
 		};
 		7A9B1E11177B3A6000C282A8 = {
@@ -2675,16 +2636,18 @@
 		7AB9B382183DCF1100779C5E /* Legend */ = {
 			isa = PBXGroup;
 			children = (
-				7A3F66F6184C61560079A244 /* REMChartSeriesIndicator.h */,
-				7A3F66F7184C61570079A244 /* REMChartSeriesIndicator.m */,
 				7AB9B383183DCF1100779C5E /* REMChartLegendBase.h */,
 				7AB9B384183DCF1100779C5E /* REMChartLegendBase.m */,
-				7AB9B385183DCF1100779C5E /* REMChartLegendItem.h */,
-				7AB9B386183DCF1100779C5E /* REMChartLegendItem.m */,
-				7AB9B387183DCF1100779C5E /* REMChartLegendView.h */,
-				7AB9B388183DCF1100779C5E /* REMChartLegendView.m */,
+				7AB9B387183DCF1100779C5E /* REMTrendChartLegendView.h */,
+				7AB9B388183DCF1100779C5E /* REMTrendChartLegendView.m */,
+				7A156F38187A99C00029E852 /* REMPieChartLegendView.h */,
+				7A156F39187A99C00029E852 /* REMPieChartLegendView.m */,
 				7AB9B389183DCF1100779C5E /* REMStackChartLegendView.h */,
 				7AB9B38A183DCF1100779C5E /* REMStackChartLegendView.m */,
+				7A3F66F6184C61560079A244 /* REMChartSeriesIndicator.h */,
+				7A3F66F7184C61570079A244 /* REMChartSeriesIndicator.m */,
+				7AB9B385183DCF1100779C5E /* REMChartLegendItem.h */,
+				7AB9B386183DCF1100779C5E /* REMChartLegendItem.m */,
 			);
 			path = Legend;
 			sourceTree = "<group>";
@@ -3793,7 +3756,6 @@
 				B4F11188183DA7F4004D53F6 /* REMBuildingChartContainerView2.m in Sources */,
 				EF0BFEA41844A5A60026C47D /* DCPieChartAnimationManager.m in Sources */,
 				EFE86981185EC3EB00DC0007 /* DCLabelingWrapper.m in Sources */,
-				7A7B2105183CAB3600C14248 /* REMCommonLegendFormator.m in Sources */,
 				EFEBAE38185FFD5D00B76549 /* DCLabelingTooltipView.m in Sources */,
 				EF03DC201841C886004B9EFD /* _DCHPinchGestureRecognizer.m in Sources */,
 				B40F011A1828C3DC009650FD /* REMWidgetStepEnergyModel.m in Sources */,
@@ -3887,7 +3849,7 @@
 				EFD947031839DCBB00E9EC50 /* DCDataPoint.m in Sources */,
 				7A153C5D17AA489600413D3C /* REMDashboardObj.m in Sources */,
 				7A153C5E17AA489600413D3C /* REMFavoriteDashboardObj.m in Sources */,
-				7AB9B398183DCF1100779C5E /* REMChartLegendView.m in Sources */,
+				7AB9B398183DCF1100779C5E /* REMTrendChartLegendView.m in Sources */,
 				7A153C5F17AA489600413D3C /* REMWidgetContentSyntax.m in Sources */,
 				7A153C6017AA489600413D3C /* REMWidgetObject.m in Sources */,
 				B4F4B99E17F16F590096034D /* REMShareInfo.m in Sources */,
@@ -3935,7 +3897,6 @@
 				EF61477A18765E7000ED9F1E /* REMBuildingAverageWrapper.m in Sources */,
 				7A153CCD17AA4EDB00413D3C /* REMRankingDataModel.m in Sources */,
 				EFF701CF1830880600B371EC /* REMChartStyle.m in Sources */,
-				7A7B210B183CAB5F00C14248 /* REMCostLegendFormator.m in Sources */,
 				7A37AA5C17AB56F100316902 /* REMUserValidationModel.m in Sources */,
 				EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */,
 				7A37AA6317AB944B00316902 /* REMNumberLabel.m in Sources */,
@@ -3959,7 +3920,6 @@
 				7A1A855717B4E278004D7167 /* REMAverageUsageDataModel.m in Sources */,
 				7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */,
 				EFD6C5C0186D58F5009E7B86 /* REMBuildingTrendWrapper.m in Sources */,
-				7A7B2111183CABB000C14248 /* REMRatioLegendFormator.m in Sources */,
 				EFD946FF1839DCBB00E9EC50 /* DCAxis.m in Sources */,
 				B4E815E1182770B700FB9BC5 /* REMWidgetEnergyDelegator.m in Sources */,
 				7AB9B397183DCF1100779C5E /* REMChartLegendItem.m in Sources */,
@@ -3980,14 +3940,12 @@
 				7A0288EF17C20CC500709111 /* GeoInfo.m in Sources */,
 				7A0288F017C20CC500709111 /* Status.m in Sources */,
 				7A0288F117C20CC500709111 /* StatusImage.m in Sources */,
-				7A7B2102183CAAF000C14248 /* REMLegendFormatorBase.m in Sources */,
 				B4FAD66E181F7CD000EF1459 /* REMWidgetCellViewController.m in Sources */,
 				7AB9B39D183DCF1100779C5E /* REMTooltipViewBase.m in Sources */,
 				B4FFB0C51818C7C5004C5404 /* REMBuildingDataViewController.m in Sources */,
 				7A2E7EC117F2DCB3000EB506 /* REMMapViewController.m in Sources */,
 				EFDCC97E18472AD400955560 /* DCPieWrapper.m in Sources */,
 				7A0288F217C20CC500709111 /* StatusVisible.m in Sources */,
-				7A7B210E183CAB7600C14248 /* REMUnitLegendFormator.m in Sources */,
 				7A0288F317C20CC500709111 /* User.m in Sources */,
 				7A0288F417C20CC500709111 /* WeiboAccount.m in Sources */,
 				EF1C5ADD183E23DA002A9AAD /* _DCLineSymbolsLayer.m in Sources */,
@@ -4024,7 +3982,6 @@
 				7AC54999181776910037F180 /* REMDashboardController.m in Sources */,
 				B4A0FCD817C6057E00C7AD56 /* REMAirQualityModel.m in Sources */,
 				B4A0FCDB17C610B500C7AD56 /* REMBuildingAirQualityChartViewController.m in Sources */,
-				7AD0AB8B183CF52000525C82 /* REMTimeSliceLegendFormator.m in Sources */,
 				EF96300617C610A200BBC7DA /* REMSettingViewController.m in Sources */,
 				7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */,
 				7A9557C017C73AD200249CED /* REMBuildingAirQualityChart.m in Sources */,
@@ -4037,7 +3994,7 @@
 				EFE86986185EEF5300DC0007 /* DCLabelingSeries.m in Sources */,
 				B493ADA917D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m in Sources */,
 				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,
-				7A7B2108183CAB4B00C14248 /* REMCarbonLegendFormator.m in Sources */,
+				7A156F3A187A99C00029E852 /* REMPieChartLegendView.m in Sources */,
 				7A8E491C184442EB00FD1A38 /* REMRankingTooltipView.m in Sources */,
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
 				EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */,
@@ -4558,142 +4515,6 @@
 			};
 			name = Release;
 		};
-		B40E632A17DDA87900023124 /* InternalRelease */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUILD_VARIANTS = (
-					normal,
-					InternalRelease,
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = InternalRelease;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				OTHER_LDFLAGS = "-ObjC";
-				VALID_ARCHS = "armv7s armv7";
-			};
-			name = InternalRelease;
-		};
-		B40E632B17DDA87900023124 /* InternalRelease */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
-					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
-					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
-					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
-					/Users/zilong/Documents/Blues/Blues/Trunk/Src,
-					/Users/zilong/Documents/Blues/Blues/Trunk/Lib,
-					/Users/zilong/Documents/Blues/Blues/Blues/Trunk/Lib,
-					/Users/buildserver/BuildFolder/SourceCode/Master/BluesGit/Trunk/Lib,
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BluesPad/BluesPad-Prefix.pch";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "BluesPad/BluesPad-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../lib\"",
-				);
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9B547894-339B-4B1E-924F-65A5FBF85E65";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 2;
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = app;
-			};
-			name = InternalRelease;
-		};
-		B40E632C17DDA87900023124 /* InternalRelease */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BluesPad.app/BluesPad";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BluesPad/BluesPad-Prefix.pch";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "../test/BluesPadTests/BluesPadTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../lib\"",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = octest;
-			};
-			name = InternalRelease;
-		};
-		B40E632D17DDA87900023124 /* InternalRelease */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "../test/CommonTests/CommonTests-Prefix.pch";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "../Test/CommonTests/CommonTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../Lib\"",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = octest;
-			};
-			name = InternalRelease;
-		};
 		B41ECBA017B87D3A00758607 /* DailyBuild */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4914,7 +4735,6 @@
 				7A9B1E16177B3A6000C282A8 /* Debug */,
 				7A9B1E17177B3A6000C282A8 /* Release */,
 				B41ECBA017B87D3A00758607 /* DailyBuild */,
-				B40E632A17DDA87900023124 /* InternalRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DailyBuild;
@@ -4925,7 +4745,6 @@
 				7A9B1E52177B3A8B00C282A8 /* Debug */,
 				7A9B1E53177B3A8B00C282A8 /* Release */,
 				B41ECBA117B87D3A00758607 /* DailyBuild */,
-				B40E632B17DDA87900023124 /* InternalRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DailyBuild;
@@ -4936,7 +4755,6 @@
 				7A9B1E54177B3A8B00C282A8 /* Debug */,
 				7A9B1E55177B3A8B00C282A8 /* Release */,
 				B41ECBA217B87D3A00758607 /* DailyBuild */,
-				B40E632C17DDA87900023124 /* InternalRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DailyBuild;
@@ -4947,7 +4765,6 @@
 				B445AEC9177BFE66002D2A59 /* Debug */,
 				B445AECA177BFE66002D2A59 /* Release */,
 				B41ECBA317B87D3A00758607 /* DailyBuild */,
-				B40E632D17DDA87900023124 /* InternalRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DailyBuild;

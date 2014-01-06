@@ -1,36 +1,36 @@
 /*------------------------------Summary-------------------------------------
  * Product Name : EMOP iOS Application Software
- * File Name	: REMChartLegendView.m
- * Date Created : 张 锋 on 11/18/13.
+ * File Name	: REMPieChartLegendView.m
+ * Date Created : 张 锋 on 1/6/14.
  * Description  : IOS Application software based on Energy Management Open Platform
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
-#import "REMChartLegendView.h"
-#import "REMChartLegendItem.h"
-#import "REMColor.h"
-#import "REMWidgetStepEnergyModel.h"
-#import "REMWidgetCommoditySearchModel.h"
-#import "REMWidgetTagSearchModel.h"
+#import "REMPieChartLegendView.h"
+#import "DCPieWrapper.h"
+#import "DCPieSeries.h"
+#import "DCPieDataPoint.h"
 #import "REMTextIndicatorFormator.h"
-#import "REMChartLegendBase.h"
 
-@implementation REMChartLegendView
+@implementation REMPieChartLegendView
 
 -(NSArray *)convertItemModels
 {
     NSMutableArray *models = [[NSMutableArray alloc] init];
     
-    for(int i=0;i<self.data.targetEnergyData.count; i++){
-        REMTargetEnergyData *targetData = self.data.targetEnergyData[i];
+    DCPieSeries *series = ((DCPieWrapper *)self.chartWrapper).view.series;
+    
+    for(int i=0;i<series.datas.count;i++){
+        DCPieDataPoint *pieSlice = series.datas[i];
         
         REMChartLegendItemModel *model = [[REMChartLegendItemModel alloc] init];
         
         model.index = i;
         model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType:self.widget.diagramType];
-        model.title = [self format:targetData.target];
+        model.title = [self format:pieSlice.target];
         model.legendView = self;
         model.tappable = YES;
-        model.isBenchmark = targetData.target.type == REMEnergyTargetBenchmarkValue;
+        model.isBenchmark = pieSlice.target.type == REMEnergyTargetBenchmarkValue;
+        model.isDefaultHidden = pieSlice.hidden;
         
         [models addObject:model];
     }
