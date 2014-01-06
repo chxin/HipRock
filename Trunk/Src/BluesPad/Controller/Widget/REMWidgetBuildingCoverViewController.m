@@ -41,7 +41,11 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-    [self.popController setPopoverContentSize:CGSizeMake(350, 700) animated:YES];
+    CGFloat height=700;
+    if (self.tableView.contentSize.height<700) {
+        height=self.tableView.contentSize.height;
+    }
+    [self.popController setPopoverContentSize:CGSizeMake(350, height) animated:YES];
 }
 
 

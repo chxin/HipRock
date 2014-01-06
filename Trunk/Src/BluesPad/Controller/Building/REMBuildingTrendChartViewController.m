@@ -17,7 +17,6 @@
     int currentSourceIndex; // Indicate that which button was pressed down.
 }
 
-@property (nonatomic) CGRect viewFrame;
 @property (nonatomic, assign) BOOL loadDataSuccess;
 @end
 

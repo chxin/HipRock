@@ -23,4 +23,7 @@
 @property (nonatomic,strong) REMCommodityUsageModel *commodityUsage;
 - (void) showChart;
 - (void)loadChartComplete;
+
+- (void)updateChartController;
+
 @end

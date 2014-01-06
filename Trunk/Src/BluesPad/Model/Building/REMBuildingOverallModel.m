@@ -66,7 +66,7 @@
     if (widgetRelationArray!=nil && [widgetRelationArray isEqual:[NSNull null]]==NO) {
         NSMutableArray *widgetRelationList=[[NSMutableArray alloc]initWithCapacity:widgetRelationArray.count];
         
-        for (NSDictionary *relation in widgetRelationList) {
+        for (NSDictionary *relation in widgetRelationArray) {
             REMBuildingCoverWidgetRelationModel *obj = [[REMBuildingCoverWidgetRelationModel alloc]initWithDictionary:relation];
             [widgetRelationList addObject:obj];
         }

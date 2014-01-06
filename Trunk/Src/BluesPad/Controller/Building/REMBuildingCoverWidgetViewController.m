@@ -7,7 +7,7 @@
 --------------------------------------------------------------------------*/
 #import "REMBuildingCoverWidgetViewController.h"
 #import "REMDashboardObj.h"
-
+#import "REMPinToBuildingCoverHelper.h"
 
 @interface REMBuildingCoverWidgetViewController ()
 
@@ -23,6 +23,7 @@
     self = [super initWithStyle:style];
     if (self) {
         self.currentIndexPath=nil;
+        self.isRequesting=NO;
     }
     
     return self;
@@ -40,12 +41,35 @@
         self.currentIndexPath = [NSIndexPath indexPathForRow:1 inSection:1];
     }
     else{
-        self.currentIndexPath = [NSIndexPath indexPathForRow:[self.selectedWidgetId integerValue] inSection:[self.selectedDashboardId integerValue]];
+        NSUInteger section=NSNotFound;
+        NSUInteger row=NSNotFound;
+        for (int i=0; i<self.dashboardArray.count; ++i) {
+            REMDashboardObj *dashboard=self.dashboardArray[i];
+            if ([dashboard.dashboardId isEqualToNumber:self.selectedDashboardId]== YES) {
+                section=i+2;
+                NSArray *widgetList=self.widgetDic[dashboard.dashboardId];
+                for (int j=0; j<widgetList.count;j++) {
+                    REMWidgetObject *widget=widgetList[j];
+                    if ([widget.widgetId isEqualToNumber:self.selectedWidgetId]==YES) {
+                        row=j;
+                        break;
+                    }
+                }
+                if (section!=NSNotFound) {
+                    break;
+                }
+            }
+        }
+        self.currentIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
     }
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-    [self.popController setPopoverContentSize:CGSizeMake(350, 700) animated:YES];
+    CGFloat height=700;
+    if (self.tableView.contentSize.height<700) {
+        height=self.tableView.contentSize.height;
+    }
+    [self.popController setPopoverContentSize:CGSizeMake(350, height) animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -159,6 +183,55 @@
 
 
 - (IBAction)okButtonClicked:(id)sender {
+    REMBuildingCoverWidgetRelationModel *model= [[REMBuildingCoverWidgetRelationModel alloc]init];
+    model.commodityId=self.commodityInfo.commodityId;
+    model.buildingId=self.buildingInfo.building.buildingId;
+
+    if (self.currentIndexPath.section==0) {
+        if ([self.selectedDashboardId isEqualToNumber:@(-1)] && self.currentIndexPath.row==0) {
+            [self cancelButtonClicked:nil];
+            return;
+        }
+        if ([self.selectedDashboardId isEqualToNumber:@(-2)] && self.currentIndexPath.row==1) {
+            [self cancelButtonClicked:nil];
+            return;
+        }
+        NSNumber *widgetId;
+        if (self.currentIndexPath.row==0) {
+            widgetId=@(-1);
+        }
+        else{
+            widgetId=@(-2);
+        }
+        model.widgetId=widgetId;
+        model.dashboardId=@(-1);
+    }
+    if (self.currentIndexPath.section!=0) {
+        REMDashboardObj *dashboard=self.dashboardArray[self.currentIndexPath.section-2];
+        NSArray *widgetList=self.widgetDic[dashboard.dashboardId];
+        REMWidgetObject *widget=widgetList[self.currentIndexPath.row];
+        model.dashboardId=dashboard.dashboardId;
+        model.widgetId=widget.widgetId;
+    }
+    REMCustomerModel *customer=REMAppCurrentCustomer;
+    NSDictionary *modelDic=@{
+                             @"DashboardId":model.dashboardId,
+                             @"HierarchyId":model.buildingId,
+                             @"CommodityId":model.commodityId,
+                             @"Position":@((NSUInteger)self.position)
+                             };
+    NSMutableDictionary *newDic = [modelDic mutableCopy];
+    if (model.widgetId!=nil) {
+        [newDic setObject:model.widgetId forKey:@"WidgetId"];
+    }
+    ;
+    self.isRequesting=YES;
+    [REMPinToBuildingCoverHelper pinToBuildingCover:@{@"relationList":@[newDic],@"buildingId":model.buildingId,@"customerId":customer.customerId} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
+        if (status == REMPinToBuildingCoverStatusSuccess) {
+            [self.commodityController updateChartController];
+        }
+    }];
+    [self cancelButtonClicked:nil];
     
 }
 - (IBAction)cancelButtonClicked:(id)sender {
