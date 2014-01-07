@@ -101,7 +101,7 @@ static NSArray *chartColor;
 }
 
 
-+ (CPTColor *)colorByIndex:(uint)index
++ (UIColor *)colorByIndex:(uint)index
 {
     uint colorIndex = index % [REMColor sharedChartColor].count;
     uint colorDarken = floor(index / [REMColor sharedChartColor].count);
@@ -113,7 +113,7 @@ static NSArray *chartColor;
         uiColor = [self darkerColorForColor:uiColor];
     }
     
-    return [CPTColor colorWithCGColor:uiColor.CGColor];
+    return uiColor;
 }
 + (UIColor *)lighterColorForColor:(UIColor *)c
 {

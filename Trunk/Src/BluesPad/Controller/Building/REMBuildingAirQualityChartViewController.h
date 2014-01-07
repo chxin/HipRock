@@ -7,7 +7,6 @@
  --------------------------------------------------------------------------*///
 
 #import "REMBuildingChartBaseViewController.h"
-#import "REMChartHorizonalScrollDelegator.h"
 
 @interface REMBuildingAirQualityChartViewController : REMBuildingChartBaseViewController
 

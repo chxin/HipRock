@@ -180,7 +180,7 @@
         ((DCLineSeries*)s).symbolSize = style.symbolSize;
     } else {
         s = [[NSClassFromString(self.defaultSeriesClass) alloc]initWithEnergyData:datas];
-        s.color = [REMColor colorByIndex:index].uiColor;
+        s.color = [REMColor colorByIndex:index];
     }
     s.xAxis = view.xAxis;
     s.target = targetEnergy.target;

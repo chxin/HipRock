@@ -33,7 +33,7 @@
             p.value = point.dataValue;
         } else {
         }
-        p.color = [REMColor colorByIndex:i].uiColor;
+        p.color = [REMColor colorByIndex:i];
         p.target = seriesData.target;
         [series0Data addObject:p];
     }
