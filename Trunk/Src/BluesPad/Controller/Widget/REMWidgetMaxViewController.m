@@ -83,7 +83,7 @@ const static CGFloat widgetGap=20;
         REMWidgetCellViewController *cellController= self.widgetCollectionController.childViewControllers[i];
         sub.energyData=cellController.chartData;
         sub.buildingInfo=self.buildingInfo;
-        
+        sub.dashboardInfo=self.dashboardInfo;
         [self addChildViewController:sub];
         if (i==self.currentWidgetIndex) {
             UIView *view = sub.view;

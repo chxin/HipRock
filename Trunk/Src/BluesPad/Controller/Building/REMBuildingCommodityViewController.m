@@ -523,21 +523,6 @@
         containerController.viewFrame=firstController.viewFrame;
         otherContainer=self.childViewControllers[1];
         otherWidget=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionSecond];
-//        if(otherContainer.widgetInfo==nil){
-//            if (otherWidget!=nil && [otherWidget.widgetId isEqualToNumber:@(-2)]==NO) {
-//                self.secondChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionSecond];
-//                otherContainer=[self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionSecond];
-//                otherContainer.viewFrame=secondController.viewFrame;
-//            }
-//        }
-//        else{
-//            if (otherWidget==nil || [otherWidget.widgetId isEqualToNumber:otherContainer.widgetInfo.widgetId]==NO) {
-//                self.secondChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionSecond];
-//                otherContainer=[self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionSecond];
-//                otherContainer.viewFrame=secondController.viewFrame;
-//            }
-//            
-//        }
         
         if ([secondController.widgetInfo.widgetId isEqualToNumber:otherContainer.widgetInfo.widgetId]==NO) {
             self.secondChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionSecond];
@@ -568,21 +553,13 @@
         containerController.viewFrame=secondController.viewFrame;
         otherContainer=self.childViewControllers[0];
         otherWidget=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionFirst];
-        if(otherContainer.widgetInfo==nil){
-            if (otherWidget!=nil && [otherWidget.widgetId isEqualToNumber:@(-1)]==NO) {
-                self.secondChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionFirst];
-                otherContainer=[self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionFirst];
-                otherContainer.viewFrame=firstController.viewFrame;
-            }
+        
+        if ([firstController.widgetInfo.widgetId isEqualToNumber:otherContainer.widgetInfo.widgetId]==NO) {
+            self.firstChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionFirst];
+            otherContainer=[self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionFirst];
+            otherContainer.viewFrame=firstController.viewFrame;
         }
-        else{
-            if (otherWidget==nil || [otherWidget.widgetId isEqualToNumber:otherContainer.widgetInfo.widgetId]==NO) {
-                self.secondChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionFirst];
-                otherContainer=[self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionFirst];
-                otherContainer.viewFrame=firstController.viewFrame;
-            }
-            
-        }
+        
         [firstController removeFromParentViewController];
         [secondController removeFromParentViewController];
         [self addChildViewController:otherContainer];

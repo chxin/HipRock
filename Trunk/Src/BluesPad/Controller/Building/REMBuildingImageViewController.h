@@ -39,6 +39,6 @@ typedef enum _REMBuildingCoverStatus{
 
 
 - (void)releaseContentView;
-
+- (void)releaseAllDataView;
 
 @end
