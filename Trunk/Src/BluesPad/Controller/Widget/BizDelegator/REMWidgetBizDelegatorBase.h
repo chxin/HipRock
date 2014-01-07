@@ -52,6 +52,8 @@
 
 - (BOOL) shouldPinToBuildingCover;
 
+- (BOOL) shouldEnablePinToBuildingCoverButton;
+
 - (void)mergeTempModel;
 
 @end

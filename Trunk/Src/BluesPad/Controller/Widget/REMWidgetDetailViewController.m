@@ -130,9 +130,10 @@ const static CGFloat kWidgetShareTitleFontSize=14;
             
         }
         [pinButton setFrame:CGRectMake(750, kWidgetBackButtonTop, 32, 32)];
-        [pinButton setImage:REMIMG_Back_Chart forState:UIControlStateNormal];
+        [pinButton setImage:[UIImage imageNamed:@"ChartCustomization"] forState:UIControlStateNormal];
         [pinButton addTarget:self action:@selector(pinButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.titleContainer addSubview:pinButton];
+        [pinButton setEnabled:[self.bizDelegator shouldEnablePinToBuildingCoverButton]];
     }
     
 }
@@ -160,9 +161,9 @@ const static CGFloat kWidgetShareTitleFontSize=14;
         BOOL found=NO;
         for (REMBuildingCoverWidgetRelationModel *relation in self.buildingInfo.widgetRelationArray) {
             if ([relation.commodityId isEqualToNumber:commodity.commodityId]==YES) {
-                found=YES;
                 REMWidgetObject *widget=[self widgetByRelation:relation];
-                if (widget!=nil) {
+                if (widget!=nil && [widget.widgetId isGreaterThan:@(0)]==YES) {
+                    found=YES;
                     if (relation.position == REMBuildingCoverWidgetPositionFirst) {
                         dic[@"firstName"]=widget.name;
                         dic[@"firstId"]=widget.widgetId;
@@ -178,9 +179,9 @@ const static CGFloat kWidgetShareTitleFontSize=14;
             }
         }
         if (found==NO) {
-            dic[@"firstName"]=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByCommodity", @""),commodity.comment];
+            dic[@"firstName"]=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @""),commodity.comment];
             dic[@"firstId"]=@(-1);
-            dic[@"secondName"]=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @""),commodity.comment];
+            dic[@"secondName"]=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByCommodity", @""),commodity.comment];
             dic[@"secondId"]=@(-2);
         }
         [array addObject:dic];
