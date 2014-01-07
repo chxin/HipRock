@@ -188,14 +188,7 @@
     model.buildingId=self.buildingInfo.building.buildingId;
 
     if (self.currentIndexPath.section==1) {
-        if ([self.selectedDashboardId isEqualToNumber:@(-1)] && self.currentIndexPath.row==0) {
-            [self cancelButtonClicked:nil];
-            return;
-        }
-        if ([self.selectedDashboardId isEqualToNumber:@(-2)] && self.currentIndexPath.row==1) {
-            [self cancelButtonClicked:nil];
-            return;
-        }
+        
         NSNumber *widgetId;
         if (self.currentIndexPath.row==0) {
             widgetId=@(-1);
@@ -213,6 +206,13 @@
         model.dashboardId=dashboard.dashboardId;
         model.widgetId=widget.widgetId;
     }
+    
+    if ([self.selectedDashboardId isEqualToNumber:model.dashboardId]==YES &&
+        [self.selectedWidgetId isEqualToNumber:model.widgetId]==YES) {
+        [self cancelButtonClicked:nil];
+        return;
+    }
+    
     REMCustomerModel *customer=REMAppCurrentCustomer;
     NSDictionary *modelDic=@{
                              @"DashboardId":model.dashboardId,

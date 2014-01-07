@@ -44,22 +44,39 @@
     return gradient;
 }
 
-- (UIButton *)getCustomerLogoButton
+- (UIButton *)settingButton{
+    UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
+    if (REMISIOS7) {
+        button = [UIButton buttonWithType:UIButtonTypeSystem];
+        button.tintColor=[UIColor whiteColor];
+    }
+    else{
+        button.showsTouchWhenHighlighted = YES;
+    }
+    [button setImage:[UIImage imageNamed:@"Setting"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [button setFrame:CGRectMake(950, kDMCommon_TopLeftButtonTop, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonWidth)];
+    return button;
+}
+
+- (UIImageView *)customerLogoButton
 {
-    UIButton *customerLogoButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    customerLogoButton.adjustsImageWhenHighlighted=YES;
+//    UIButton *customerLogoButton=[UIButton buttonWithType:UIButtonTypeCustom];
+//    customerLogoButton.adjustsImageWhenHighlighted=YES;
 //    if (REMISIOS7) {
 //        customerLogoButton=[UIButton buttonWithType:UIButtonTypeSystem];
 //    }
+    UIImageView *imageView=[[UIImageView alloc]initWithImage:REMAppCurrentLogo];
+    imageView.contentMode=UIViewContentModeScaleToFill;
+    [imageView setFrame:CGRectMake(0, 0, kDMCommon_CustomerLogoWidth, kDMCommon_CustomerLogoHeight)];
     
-    [customerLogoButton setFrame:CGRectMake(0, 0, kDMCommon_CustomerLogoWidth, kDMCommon_CustomerLogoHeight)];
+//    [customerLogoButton setImage:REMAppCurrentLogo forState:UIControlStateNormal];
+//    customerLogoButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    customerLogoButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    //[customerLogoButton addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-    [customerLogoButton setImage:REMAppCurrentLogo forState:UIControlStateNormal];
-    customerLogoButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    customerLogoButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [customerLogoButton addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return customerLogoButton;
+//    return customerLogoButton;
+    return imageView;
 }
 
 
