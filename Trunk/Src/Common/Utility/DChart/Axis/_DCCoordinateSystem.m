@@ -101,10 +101,18 @@
     } else {
         for (DCXYSeries* s in self.seriesList) {
             if (s.hidden) continue;
-            if (!REMIsNilOrNull(s.visableYMin)) {
-                double yMax = s.visableYMax.doubleValue;
-                if (yMax > currentYMax) currentYMax = yMax;
+            NSNumber* yMaxObj = nil;
+            if (!REMIsNilOrNull(s.visableYMax) && REMIsNilOrNull(s.visableYMaxThreshold)) {
+                yMaxObj = s.visableYMax;
+            } else if (REMIsNilOrNull(s.visableYMax) && !REMIsNilOrNull(s.visableYMaxThreshold)) {
+                yMaxObj = s.visableYMaxThreshold;
+            } else if (!REMIsNilOrNull(s.visableYMax) && !REMIsNilOrNull(s.visableYMaxThreshold)) {
+                yMaxObj = [s.visableYMaxThreshold isLessThan:s.visableYMax] ? s.visableYMax : s.visableYMaxThreshold;
+            } else {
+                yMaxObj = nil;
             }
+            if (!REMIsNilOrNull(yMaxObj) && yMaxObj.doubleValue > currentYMax) currentYMax = yMaxObj.doubleValue;
+            
             if (!REMIsNilOrNull(s.visableYMin)) {
                 double yMin = s.visableYMin.doubleValue;
                 if (yMin < currentYMin) currentYMin = yMin;
@@ -112,7 +120,7 @@
         }
     }
     if (currentYMax == INT32_MIN) currentYMax = 0;
-    if (currentYMin == INT32_MIN) currentYMin = 0;
+    if (currentYMin == INT32_MAX) currentYMin = 0;
     
     // 根据maxY计算YRange并通知所有的YRangeObserver
     DCYAxisIntervalCalculation calResult = [DCUtility calculatorYAxisByMin:currentYMin yMax:currentYMax parts:self.graphContext.hGridlineAmount];
@@ -137,6 +145,10 @@
         if ([o respondsToSelector:@selector(didYIntervalChanged:newInterval:yRange:)]) {
             [o didYIntervalChanged:oldInterval newInterval:yInterval yRange:self.yRange];
         }
+    }
+    DCXYChartView* chartView = (DCXYChartView*)self.chartView;
+    if (chartView.delegate != nil && [chartView.delegate respondsToSelector:@selector(didYIntervalChange:forAxis:range:)]) {
+        [chartView.delegate didYIntervalChange:yInterval forAxis:self.yAxis range:self.yRange];
     }
 }
 -(void)addYIntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer {

@@ -18,6 +18,7 @@
 @property (nonatomic, strong) DCRange* visableRange;
 @property (nonatomic, readonly) NSNumber* visableYMax;
 @property (nonatomic, readonly) NSNumber* visableYMin;
+@property (nonatomic, strong) NSNumber* visableYMaxThreshold; // visableYMax不允许小于这个值
 @property (nonatomic, weak) DCAxis* xAxis;
 @property (nonatomic, weak) DCAxis* yAxis;
 @property (nonatomic, weak) REMEnergyTargetModel* target;

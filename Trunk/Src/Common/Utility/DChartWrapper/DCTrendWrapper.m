@@ -19,6 +19,11 @@
 @end
 
 @implementation DCTrendWrapper
+
+-(void)didYIntervalChange:(double)yInterval forAxis:(DCAxis *)yAxis range:(DCRange*)range {
+    // Nothing to do.
+}
+
 -(UIView*)getView {
     return self.view;
 }
