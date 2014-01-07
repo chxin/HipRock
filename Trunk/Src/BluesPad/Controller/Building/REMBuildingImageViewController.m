@@ -250,12 +250,19 @@
     
     [self.container addSubview:backButton];
     self.backButton=backButton;
+    
+    UIButton *settingButton=self.settingButton;
+    [settingButton removeTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [settingButton addTarget:self.parentViewController action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.container addSubview:settingButton];
+    
+    
     UIButton *shareButton=[UIButton buttonWithType:UIButtonTypeCustom];
     if (REMISIOS7) {
         shareButton=[UIButton buttonWithType:UIButtonTypeSystem];
         [shareButton setTintColor:[UIColor whiteColor]];
     }
-    [shareButton setFrame:CGRectMake(950, backButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonWidth)];
+    [shareButton setFrame:CGRectMake(settingButton.frame.origin.x-kDMCommon_TopLeftButtonWidth-10, backButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonWidth)];
     [shareButton setImage:REMIMG_Share_normal forState:UIControlStateNormal];
     //if (self.buildingInfo.commodityUsage.count == 0) {
     shareButton.enabled = NO;
@@ -269,6 +276,7 @@
     [shareButton addTarget:self.parentViewController action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.container addSubview:shareButton];
+    
     self.shareButton=shareButton;
 }
 
@@ -314,8 +322,8 @@
     //[logoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
     
     logoButton.titleLabel.text=@"logo";
-    [logoButton removeTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [logoButton addTarget:self.parentViewController action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+//    [logoButton removeTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+//    [logoButton addTarget:self.parentViewController action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     
     [self.container addSubview:logoButton];

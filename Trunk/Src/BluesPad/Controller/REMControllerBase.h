@@ -17,5 +17,5 @@
 
 - (CAGradientLayer *)getTitleGradientLayer;
 - (UIButton *)getCustomerLogoButton;
-
+- (UIButton *)settingButton;
 @end
