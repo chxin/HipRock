@@ -559,6 +559,8 @@
 		B47ACC2D17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC2C17F80ACE00989B2C /* REMSettingCustomerDetailViewController.m */; };
 		B47ACC3017F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC2F17F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m */; };
 		B47ACC3317F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B47ACC3217F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m */; };
+		B485EFE5187BA1A800D16583 /* Logo_About.png in Resources */ = {isa = PBXBuildFile; fileRef = B485EFE3187BA1A800D16583 /* Logo_About.png */; };
+		B485EFE6187BA1A800D16583 /* Logo_About@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B485EFE4187BA1A800D16583 /* Logo_About@2x.png */; };
 		B48ED3EA178EA1740032CD72 /* REMTimeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E9178EA1740032CD72 /* REMTimeHelper.m */; };
 		B48ED409178EA8970032CD72 /* REMSqliteStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D191785113600219469 /* REMSqliteStorage.m */; };
 		B48ED40A178EA8970032CD72 /* REMStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D1C1785115700219469 /* REMStorage.m */; };
@@ -1329,6 +1331,8 @@
 		B47ACC2F17F80AE400989B2C /* REMSettingCustomerDetailLogoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSettingCustomerDetailLogoViewController.m; path = Controller/Setting/REMSettingCustomerDetailLogoViewController.m; sourceTree = "<group>"; };
 		B47ACC3117F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingCustomerDetailAdminViewController.h; path = Controller/Setting/REMSettingCustomerDetailAdminViewController.h; sourceTree = "<group>"; };
 		B47ACC3217F80B2E00989B2C /* REMSettingCustomerDetailAdminViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSettingCustomerDetailAdminViewController.m; path = Controller/Setting/REMSettingCustomerDetailAdminViewController.m; sourceTree = "<group>"; };
+		B485EFE3187BA1A800D16583 /* Logo_About.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_About.png; sourceTree = "<group>"; };
+		B485EFE4187BA1A800D16583 /* Logo_About@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_About@2x.png"; sourceTree = "<group>"; };
 		B48ED3E8178EA1740032CD72 /* REMTimeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMTimeHelper.h; path = Common/Utility/REMTimeHelper.h; sourceTree = "<group>"; };
 		B48ED3E9178EA1740032CD72 /* REMTimeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeHelper.m; path = Common/Utility/REMTimeHelper.m; sourceTree = "<group>"; };
 		B48ED3EC178EA4A00032CD72 /* REMTimeHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMTimeHelperTests.h; path = ../Test/CommonTests/REMTimeHelperTests.h; sourceTree = "<group>"; };
@@ -1608,6 +1612,7 @@
 		6A61A65D1839B81F00C6A228 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B485EFE2187BA17900D16583 /* Setting */,
 				7AD8CDFE1847086000D815C6 /* LaunchImages */,
 				6A61A65E1839B81F00C6A228 /* AppIcon */,
 				6A61A6691839B81F00C6A228 /* Building */,
@@ -2961,6 +2966,15 @@
 			name = Setting;
 			sourceTree = "<group>";
 		};
+		B485EFE2187BA17900D16583 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				B485EFE3187BA1A800D16583 /* Logo_About.png */,
+				B485EFE4187BA1A800D16583 /* Logo_About@2x.png */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
 		B49B6F421781228200BC130A /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -3546,6 +3560,7 @@
 				7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */,
 				6A61A7761839B82000C6A228 /* LoginTextField-Focus@2x.png in Resources */,
 				6A61A7711839B82000C6A228 /* Login-Normal.png in Resources */,
+				B485EFE5187BA1A800D16583 /* Logo_About.png in Resources */,
 				6A61A70F1839B82000C6A228 /* NaturalGas_normal.png in Resources */,
 				6A61A7891839B82000C6A228 /* QualifiedPin_Normal.png in Resources */,
 				B4707D9A18697B2900FBA393 /* Humidity_normal@2x.png in Resources */,
@@ -3564,6 +3579,7 @@
 				6A61A7921839B82000C6A228 /* SplashScreenLogo-Flash@2x.png in Resources */,
 				6A61A7821839B82000C6A228 /* Map@2x.png in Resources */,
 				7A58F2521839A5650071DE7A /* SplashScreenBackgroud@2x.jpg in Resources */,
+				B485EFE6187BA1A800D16583 /* Logo_About@2x.png in Resources */,
 				7A47F3A018482C1B007EE37B /* JumpLogin.png in Resources */,
 				7AFC250E18503D3800B9CF11 /* Default-Landscape-IOS7.png in Resources */,
 				B4707D8918697B1C00FBA393 /* Heating_pressed.png in Resources */,
