@@ -10,7 +10,6 @@
 #import "REMBuildingChartBaseViewController.h"
 #import "REMEnergyViewData.h"
 #import "REMColor.h"
-#import "REMWidgetAxisHelper.h"
 #import "REMToggleButtonGroup.h"
 
 @interface REMBuildingTrendChartViewController : REMBuildingChartBaseViewController<REMToggleButtonGroupDelegate>

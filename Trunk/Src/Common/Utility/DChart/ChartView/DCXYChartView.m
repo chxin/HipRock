@@ -76,10 +76,13 @@
         self.lineLayerContainer = [[CALayer alloc]init];
         self.tapGsRec = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewTapped:)];
         [self addGestureRecognizer:self.tapGsRec];
+        self.tapGsRec.cancelsTouchesInView = NO;
         self.panGsRec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(viewPanned:)];
         self.panGsRec.maximumNumberOfTouches = 1;
+        self.panGsRec.cancelsTouchesInView = NO;
         [self addGestureRecognizer:self.panGsRec];
         self.pinchGsRec = [[_DCHPinchGestureRecognizer alloc]initWithTarget:self action:@selector(viewPinched:)];
+        self.pinchGsRec.cancelsTouchesInView = NO;
         [self addGestureRecognizer:self.pinchGsRec];
     }
     return self;

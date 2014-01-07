@@ -114,7 +114,7 @@ const NSString* stepKey = @"step";
             aframe.fullAngle = @(self.view.fullAngle + stepMulti * fullAngleStep);
         }
         if (targetFrame.indicatorAlpha) {
-            aframe.indicatorAlpha = @(self.view.indicatorAlpha + stepMulti * fullAngleStep);
+            aframe.indicatorAlpha = @(self.view.indicatorAlpha + stepMulti * indicatorAlphaStep);
         }
         [animationFrames addObject:aframe];
     }

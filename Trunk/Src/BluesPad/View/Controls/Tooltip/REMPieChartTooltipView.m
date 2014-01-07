@@ -65,7 +65,7 @@
         REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
         model.title = [self formatTargetName:targetData.target];
         model.value = [targetData.energyData[0] dataValue];
-        model.color = [REMColor colorByIndex:i].uiColor;
+        model.color = [REMColor colorByIndex:i];
         model.index = i;
         
         if(REMIsNilOrNull(targetData.target.uomName)){

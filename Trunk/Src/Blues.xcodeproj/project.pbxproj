@@ -126,7 +126,6 @@
 		6AB1F24117B8AC910065C1EB /* REMServiceAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */; };
 		6AB1F24317B8AC910065C1EB /* REMSqliteStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D191785113600219469 /* REMSqliteStorage.m */; };
 		6AB1F24517B8AC910065C1EB /* REMStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D1C1785115700219469 /* REMStorage.m */; };
-		6AB1F24717B8AC910065C1EB /* REMWidgetAxisHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */; };
 		6AB1F24917B8AC910065C1EB /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
 		6AB1F24B17B8AC910065C1EB /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
 		6AB1F24D17B8AC910065C1EB /* REMNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14281785178800CC2922 /* REMNetworkHelper.m */; };
@@ -191,8 +190,6 @@
 		6AB1F30117B8AD5E0065C1EB /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE99177BEEB7002D2A59 /* DDTTYLogger.m */; };
 		6AB1F30217B8AD840065C1EB /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		6AB1F30317B8B34A0065C1EB /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
-		6AB1F30917B8B3E40065C1EB /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB1F30817B8B3E40065C1EB /* libCorePlot-CocoaTouch.a */; };
-		6AB1F30A17B8B3E40065C1EB /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB1F30817B8B3E40065C1EB /* libCorePlot-CocoaTouch.a */; };
 		6AB1F30B17B8B40C0065C1EB /* REMJSONObject.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4017A637FD0050779D /* REMJSONObject.h */; };
 		6AB1F30C17B8B40C0065C1EB /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
 		6AB1F30D17B8B40C0065C1EB /* REMUserModel.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3A17A637510050779D /* REMUserModel.h */; };
@@ -219,8 +216,6 @@
 		6AB1F32617B8B40C0065C1EB /* REMSqliteStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D191785113600219469 /* REMSqliteStorage.m */; };
 		6AB1F32717B8B40C0065C1EB /* REMStorage.h in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D1B1785115700219469 /* REMStorage.h */; };
 		6AB1F32817B8B40C0065C1EB /* REMStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D1C1785115700219469 /* REMStorage.m */; };
-		6AB1F32917B8B40C0065C1EB /* REMWidgetAxisHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A095E71179571C80098DB16 /* REMWidgetAxisHelper.h */; };
-		6AB1F32A17B8B40C0065C1EB /* REMWidgetAxisHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */; };
 		6AB1F32B17B8B40C0065C1EB /* REMColor.h in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F4F1781491800BC130A /* REMColor.h */; };
 		6AB1F32C17B8B40C0065C1EB /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
 		6AB1F32D17B8B40C0065C1EB /* REMJSONHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB01784220300B50475 /* REMJSONHelper.h */; };
@@ -301,7 +296,6 @@
 		7A0288FE17C20CC500709111 /* WeiboDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E417C20CC400709111 /* WeiboDialog.m */; };
 		7A0288FF17C20CC500709111 /* WeiboLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E617C20CC500709111 /* WeiboLoginDialog.m */; };
 		7A02890017C20CC500709111 /* Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E817C20CC500709111 /* Weibo.m */; };
-		7A095E73179571C80098DB16 /* REMWidgetAxisHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */; };
 		7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */; };
 		7A09D59A17B8D62F001EBC30 /* REMDataRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59917B8D62F001EBC30 /* REMDataRange.m */; };
 		7A12280C18116DBF004DE778 /* REMViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A12280B18116DBF004DE778 /* REMViewHelper.m */; };
@@ -430,7 +424,6 @@
 		7A7F7B1C181F85A100A3C5AB /* REMGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F7B1B181F85A100A3C5AB /* REMGalleryCollectionViewController.m */; };
 		7A8E491C184442EB00FD1A38 /* REMRankingTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E491B184442EB00FD1A38 /* REMRankingTooltipView.m */; };
 		7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */; };
-		7A9557C017C73AD200249CED /* REMBuildingAirQualityChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9557BF17C73AD200249CED /* REMBuildingAirQualityChart.m */; };
 		7A9B1E20177B3A8B00C282A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */; };
 		7A9B1E22177B3A8B00C282A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E21177B3A8B00C282A8 /* Foundation.framework */; };
 		7A9B1E24177B3A8B00C282A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E23177B3A8B00C282A8 /* CoreGraphics.framework */; };
@@ -465,7 +458,6 @@
 		7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */; };
 		7AF3667817CF2D7400447650 /* REMBuildingChartSeriesIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */; };
 		7AF6AC8117D1BA0D00D62A9A /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
-		7AF6AC8217D1BA5600D62A9A /* REMBuildingAirQualityChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9557BF17C73AD200249CED /* REMBuildingAirQualityChart.m */; };
 		7AF6AC8317D1BA5600D62A9A /* REMBuildingAirQualityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCD417C6023300C7AD56 /* REMBuildingAirQualityView.m */; };
 		7AF6AC8417D1BA5600D62A9A /* REMToggleButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F1D7817C2FE5400D3E29F /* REMToggleButtonGroup.m */; };
 		7AF6AC8517D1BA5600D62A9A /* REMStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9F28B017CB54DE00E775ED /* REMStatusBar.m */; };
@@ -477,7 +469,6 @@
 		7AF6AC8C17D1BA5600D62A9A /* REMAirQualityDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */; };
 		7AF6AC8D17D1BA5600D62A9A /* REMBuildingAirQualityChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartViewController.m */; };
 		7AF6AC8E17D1BA5600D62A9A /* REMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96300517C610A200BBC7DA /* REMSettingViewController.m */; };
-		7AF6AC9117D1BB1200D62A9A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B61D7517C742E000245F1E /* CoreText.framework */; };
 		7AFC250E18503D3800B9CF11 /* Default-Landscape-IOS7.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AFC250A18503D3800B9CF11 /* Default-Landscape-IOS7.png */; };
 		7AFC250F18503D3800B9CF11 /* Default-Landscape-IOS7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AFC250B18503D3800B9CF11 /* Default-Landscape-IOS7@2x.png */; };
 		7AFC251018503D3800B9CF11 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AFC250C18503D3800B9CF11 /* Default-Landscape.png */; };
@@ -572,7 +563,6 @@
 		B4911F4817B0EB8B007AEF7D /* REMBuildingRankingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4911F4717B0EB8B007AEF7D /* REMBuildingRankingView.m */; };
 		B4922466182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4922465182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m */; };
 		B4922469182B920C0001389A /* REMWidgetMultiTimespanDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4922468182B920C0001389A /* REMWidgetMultiTimespanDelegator.m */; };
-		B493ADA917D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B493ADA817D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m */; };
 		B497341E17A769E400D0519A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */; };
 		B4978D9517979AFC00F94698 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38ED7D1E1785140900219469 /* libsqlite3.dylib */; };
 		B4978D9717979B3C00F94698 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38ED7D1E1785140900219469 /* libsqlite3.dylib */; };
@@ -585,7 +575,6 @@
 		B4A87536185EC6D800BF3601 /* REMWidgetCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A87535185EC6D800BF3601 /* REMWidgetCellDelegator.m */; };
 		B4A87539185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A87538185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m */; };
 		B4A8753C185ED02200BF3601 /* REMWidgetRankingCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A8753B185ED02200BF3601 /* REMWidgetRankingCellDelegator.m */; };
-		B4B61D7617C742E000245F1E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B61D7517C742E000245F1E /* CoreText.framework */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		B4D50A41183313C7007C93A4 /* REMBuildingChartContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D50A40183313C7007C93A4 /* REMBuildingChartContainerViewController.m */; };
 		B4DC084017F90E2C005658C1 /* REMAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */; };
@@ -628,6 +617,9 @@
 		EF1C5AD7183DB3CB002A9AAD /* DCTrendWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD6183DB3CB002A9AAD /* DCTrendWrapper.m */; };
 		EF1C5ADA183E00C9002A9AAD /* _DCXLabelFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD9183E00C9002A9AAD /* _DCXLabelFormatter.m */; };
 		EF1C5ADD183E23DA002A9AAD /* _DCLineSymbolsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5ADC183E23DA002A9AAD /* _DCLineSymbolsLayer.m */; };
+		EF2043AF187B96F200272319 /* REMBuildingAirQualityWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2043AE187B96F200272319 /* REMBuildingAirQualityWrapper.m */; };
+		EF2043B3187BD94400272319 /* REMNumberExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2043B2187BD94400272319 /* REMNumberExtension.m */; };
+		EF2043B5187BDC4300272319 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2043B4187BDC4300272319 /* CoreText.framework */; };
 		EF2962B4184C6B53000A119F /* REMTrendChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2962B3184C6B53000A119F /* REMTrendChartDataProcessor.m */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
@@ -845,8 +837,6 @@
 		7A0288E817C20CC500709111 /* Weibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Weibo.m; sourceTree = "<group>"; };
 		7A0288E917C20CC500709111 /* WeiboConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboConfig.h; sourceTree = "<group>"; };
 		7A0288EA17C20CC500709111 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
-		7A095E71179571C80098DB16 /* REMWidgetAxisHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetAxisHelper.h; path = Common/Utility/REMWidgetAxisHelper.h; sourceTree = "<group>"; };
-		7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetAxisHelper.m; path = Common/Utility/REMWidgetAxisHelper.m; sourceTree = "<group>"; };
 		7A09D59517B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingTimeRangeDataModel.h; sourceTree = "<group>"; };
 		7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingTimeRangeDataModel.m; sourceTree = "<group>"; };
 		7A09D59817B8D62F001EBC30 /* REMDataRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMDataRange.h; sourceTree = "<group>"; };
@@ -1079,8 +1069,6 @@
 		7A8E491B184442EB00FD1A38 /* REMRankingTooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRankingTooltipView.m; sourceTree = "<group>"; };
 		7A9557BB17C7374700249CED /* REMAirQualityDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAirQualityDataModel.h; sourceTree = "<group>"; };
 		7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAirQualityDataModel.m; sourceTree = "<group>"; };
-		7A9557BE17C73AD200249CED /* REMBuildingAirQualityChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAirQualityChart.h; sourceTree = "<group>"; };
-		7A9557BF17C73AD200249CED /* REMBuildingAirQualityChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingAirQualityChart.m; sourceTree = "<group>"; };
 		7A9B1E1C177B3A8B00C282A8 /* BluesPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluesPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		7A9B1E21177B3A8B00C282A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -1132,83 +1120,6 @@
 		7AB9B3A0183DF20B00779C5E /* REMRankingTooltipItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRankingTooltipItem.m; sourceTree = "<group>"; };
 		7AB9B3A2183DF8FF00779C5E /* REMTextIndicatorFormator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMTextIndicatorFormator.h; path = Biz/Chart/REMTextIndicatorFormator.h; sourceTree = "<group>"; };
 		7AB9B3A3183DF8FF00779C5E /* REMTextIndicatorFormator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTextIndicatorFormator.m; path = Biz/Chart/REMTextIndicatorFormator.m; sourceTree = "<group>"; };
-		7ABC2DD8177BE6210000C060 /* CorePlot-CocoaTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CorePlot-CocoaTouch.h"; sourceTree = "<group>"; };
-		7ABC2DD9177BE6210000C060 /* CPTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimation.h; sourceTree = "<group>"; };
-		7ABC2DDA177BE6210000C060 /* CPTAnimationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimationOperation.h; sourceTree = "<group>"; };
-		7ABC2DDB177BE6210000C060 /* CPTAnimationPeriod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimationPeriod.h; sourceTree = "<group>"; };
-		7ABC2DDC177BE6210000C060 /* CPTAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnnotation.h; sourceTree = "<group>"; };
-		7ABC2DDD177BE6210000C060 /* CPTAnnotationHostLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnnotationHostLayer.h; sourceTree = "<group>"; };
-		7ABC2DDE177BE6210000C060 /* CPTAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAxis.h; sourceTree = "<group>"; };
-		7ABC2DDF177BE6210000C060 /* CPTAxisLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAxisLabel.h; sourceTree = "<group>"; };
-		7ABC2DE0177BE6210000C060 /* CPTAxisLabelGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAxisLabelGroup.h; sourceTree = "<group>"; };
-		7ABC2DE1177BE6210000C060 /* CPTAxisSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAxisSet.h; sourceTree = "<group>"; };
-		7ABC2DE2177BE6210000C060 /* CPTAxisTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAxisTitle.h; sourceTree = "<group>"; };
-		7ABC2DE3177BE6210000C060 /* CPTBarPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTBarPlot.h; sourceTree = "<group>"; };
-		7ABC2DE4177BE6210000C060 /* CPTBorderedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTBorderedLayer.h; sourceTree = "<group>"; };
-		7ABC2DE5177BE6210000C060 /* CPTCalendarFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTCalendarFormatter.h; sourceTree = "<group>"; };
-		7ABC2DE6177BE6210000C060 /* CPTColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTColor.h; sourceTree = "<group>"; };
-		7ABC2DE7177BE6210000C060 /* CPTColorSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTColorSpace.h; sourceTree = "<group>"; };
-		7ABC2DE8177BE6210000C060 /* CPTConstraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTConstraints.h; sourceTree = "<group>"; };
-		7ABC2DE9177BE6210000C060 /* CPTDataSourceTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTDataSourceTestCase.h; sourceTree = "<group>"; };
-		7ABC2DEA177BE6210000C060 /* CPTDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTDefinitions.h; sourceTree = "<group>"; };
-		7ABC2DEB177BE6210000C060 /* CPTDerivedXYGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTDerivedXYGraph.h; sourceTree = "<group>"; };
-		7ABC2DEC177BE6210000C060 /* CPTExceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTExceptions.h; sourceTree = "<group>"; };
-		7ABC2DED177BE6210000C060 /* CPTFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTFill.h; sourceTree = "<group>"; };
-		7ABC2DEE177BE6210000C060 /* CPTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTGradient.h; sourceTree = "<group>"; };
-		7ABC2DEF177BE6210000C060 /* CPTGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTGraph.h; sourceTree = "<group>"; };
-		7ABC2DF0177BE6210000C060 /* CPTGraphHostingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTGraphHostingView.h; sourceTree = "<group>"; };
-		7ABC2DF1177BE6210000C060 /* CPTGridLineGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTGridLineGroup.h; sourceTree = "<group>"; };
-		7ABC2DF2177BE6210000C060 /* CPTGridLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTGridLines.h; sourceTree = "<group>"; };
-		7ABC2DF3177BE6210000C060 /* CPTImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTImage.h; sourceTree = "<group>"; };
-		7ABC2DF4177BE6210000C060 /* CPTLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTLayer.h; sourceTree = "<group>"; };
-		7ABC2DF5177BE6210000C060 /* CPTLayerAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTLayerAnnotation.h; sourceTree = "<group>"; };
-		7ABC2DF6177BE6210000C060 /* CPTLegend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTLegend.h; sourceTree = "<group>"; };
-		7ABC2DF7177BE6210000C060 /* CPTLegendEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTLegendEntry.h; sourceTree = "<group>"; };
-		7ABC2DF8177BE6210000C060 /* CPTLimitBand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTLimitBand.h; sourceTree = "<group>"; };
-		7ABC2DF9177BE6210000C060 /* CPTLineCap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTLineCap.h; sourceTree = "<group>"; };
-		7ABC2DFA177BE6210000C060 /* CPTLineStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTLineStyle.h; sourceTree = "<group>"; };
-		7ABC2DFB177BE6210000C060 /* CPTMutableLineStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTMutableLineStyle.h; sourceTree = "<group>"; };
-		7ABC2DFC177BE6210000C060 /* CPTMutableNumericData+TypeConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPTMutableNumericData+TypeConversion.h"; sourceTree = "<group>"; };
-		7ABC2DFD177BE6210000C060 /* CPTMutableNumericData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTMutableNumericData.h; sourceTree = "<group>"; };
-		7ABC2DFE177BE6210000C060 /* CPTMutablePlotRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTMutablePlotRange.h; sourceTree = "<group>"; };
-		7ABC2DFF177BE6210000C060 /* CPTMutableShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTMutableShadow.h; sourceTree = "<group>"; };
-		7ABC2E00177BE6210000C060 /* CPTMutableTextStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTMutableTextStyle.h; sourceTree = "<group>"; };
-		7ABC2E01177BE6210000C060 /* CPTNumericData+TypeConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPTNumericData+TypeConversion.h"; sourceTree = "<group>"; };
-		7ABC2E02177BE6210000C060 /* CPTNumericData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTNumericData.h; sourceTree = "<group>"; };
-		7ABC2E03177BE6210000C060 /* CPTNumericDataType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTNumericDataType.h; sourceTree = "<group>"; };
-		7ABC2E04177BE6210000C060 /* CPTPathExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPathExtensions.h; sourceTree = "<group>"; };
-		7ABC2E05177BE6210000C060 /* CPTPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPieChart.h; sourceTree = "<group>"; };
-		7ABC2E06177BE6210000C060 /* CPTPlatformSpecificCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlatformSpecificCategories.h; sourceTree = "<group>"; };
-		7ABC2E07177BE6210000C060 /* CPTPlatformSpecificDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlatformSpecificDefines.h; sourceTree = "<group>"; };
-		7ABC2E08177BE6210000C060 /* CPTPlatformSpecificFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlatformSpecificFunctions.h; sourceTree = "<group>"; };
-		7ABC2E09177BE6210000C060 /* CPTPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlot.h; sourceTree = "<group>"; };
-		7ABC2E0A177BE6210000C060 /* CPTPlotArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlotArea.h; sourceTree = "<group>"; };
-		7ABC2E0B177BE6210000C060 /* CPTPlotAreaFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlotAreaFrame.h; sourceTree = "<group>"; };
-		7ABC2E0C177BE6210000C060 /* CPTPlotGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlotGroup.h; sourceTree = "<group>"; };
-		7ABC2E0D177BE6210000C060 /* CPTPlotRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlotRange.h; sourceTree = "<group>"; };
-		7ABC2E0E177BE6210000C060 /* CPTPlotSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlotSpace.h; sourceTree = "<group>"; };
-		7ABC2E0F177BE6210000C060 /* CPTPlotSpaceAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlotSpaceAnnotation.h; sourceTree = "<group>"; };
-		7ABC2E10177BE6210000C060 /* CPTPlotSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlotSymbol.h; sourceTree = "<group>"; };
-		7ABC2E11177BE6210000C060 /* CPTRangePlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTRangePlot.h; sourceTree = "<group>"; };
-		7ABC2E12177BE6210000C060 /* CPTResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTResponder.h; sourceTree = "<group>"; };
-		7ABC2E13177BE6210000C060 /* CPTScatterPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTScatterPlot.h; sourceTree = "<group>"; };
-		7ABC2E14177BE6210000C060 /* CPTShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTShadow.h; sourceTree = "<group>"; };
-		7ABC2E15177BE6210000C060 /* CPTTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTTestCase.h; sourceTree = "<group>"; };
-		7ABC2E16177BE6210000C060 /* CPTTextLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTTextLayer.h; sourceTree = "<group>"; };
-		7ABC2E17177BE6210000C060 /* CPTTextStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTTextStyle.h; sourceTree = "<group>"; };
-		7ABC2E18177BE6210000C060 /* CPTTextStylePlatformSpecific.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTTextStylePlatformSpecific.h; sourceTree = "<group>"; };
-		7ABC2E19177BE6210000C060 /* CPTTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTTheme.h; sourceTree = "<group>"; };
-		7ABC2E1A177BE6210000C060 /* CPTTimeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTTimeFormatter.h; sourceTree = "<group>"; };
-		7ABC2E1B177BE6210000C060 /* CPTTradingRangePlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTTradingRangePlot.h; sourceTree = "<group>"; };
-		7ABC2E1C177BE6210000C060 /* CPTUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTUtilities.h; sourceTree = "<group>"; };
-		7ABC2E1D177BE6210000C060 /* CPTXYAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTXYAxis.h; sourceTree = "<group>"; };
-		7ABC2E1E177BE6210000C060 /* CPTXYAxisSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTXYAxisSet.h; sourceTree = "<group>"; };
-		7ABC2E1F177BE6210000C060 /* CPTXYGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTXYGraph.h; sourceTree = "<group>"; };
-		7ABC2E20177BE6210000C060 /* CPTXYPlotSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTXYPlotSpace.h; sourceTree = "<group>"; };
-		7ABC2E21177BE6210000C060 /* mainpage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainpage.h; sourceTree = "<group>"; };
-		7ABC2E22177BE6210000C060 /* NSCoderExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCoderExtensions.h; sourceTree = "<group>"; };
-		7ABC2E23177BE6210000C060 /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDecimalNumberExtensions.h; sourceTree = "<group>"; };
-		7ABC2E24177BE6210000C060 /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
 		7ABD828C185AD75500A2AC06 /* REMAppConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAppConfiguration.h; path = Common/Configuration/REMAppConfiguration.h; sourceTree = "<group>"; };
 		7ABD828D185AD75500A2AC06 /* REMAppConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAppConfiguration.m; path = Common/Configuration/REMAppConfiguration.m; sourceTree = "<group>"; };
 		7ABD915B184DB784006AF935 /* REMLoginCustomerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLoginCustomerTableViewController.h; sourceTree = "<group>"; };
@@ -1353,8 +1264,6 @@
 		B4922465182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetMultiTimespanSearchModel.m; path = Model/Widget/REMWidgetMultiTimespanSearchModel.m; sourceTree = "<group>"; };
 		B4922467182B920C0001389A /* REMWidgetMultiTimespanDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetMultiTimespanDelegator.h; path = BizDelegator/REMWidgetMultiTimespanDelegator.h; sourceTree = "<group>"; };
 		B4922468182B920C0001389A /* REMWidgetMultiTimespanDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetMultiTimespanDelegator.m; path = BizDelegator/REMWidgetMultiTimespanDelegator.m; sourceTree = "<group>"; };
-		B493ADA717D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartHorizonalScrollDelegator.h; sourceTree = "<group>"; };
-		B493ADA817D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartHorizonalScrollDelegator.m; sourceTree = "<group>"; };
 		B49B6F4F1781491800BC130A /* REMColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMColor.h; path = Common/Utility/REMColor.h; sourceTree = "<group>"; };
 		B49B6F501781491800BC130A /* REMColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMColor.m; path = Common/Utility/REMColor.m; sourceTree = "<group>"; };
 		B4A0FCD317C6023200C7AD56 /* REMBuildingAirQualityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingAirQualityView.h; path = View/Building/REMBuildingAirQualityView.h; sourceTree = "<group>"; };
@@ -1371,7 +1280,6 @@
 		B4A87538185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetLabellingCellDelegator.m; path = BizDelegator/REMWidgetLabellingCellDelegator.m; sourceTree = "<group>"; };
 		B4A8753A185ED02200BF3601 /* REMWidgetRankingCellDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetRankingCellDelegator.h; path = BizDelegator/REMWidgetRankingCellDelegator.h; sourceTree = "<group>"; };
 		B4A8753B185ED02200BF3601 /* REMWidgetRankingCellDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetRankingCellDelegator.m; path = BizDelegator/REMWidgetRankingCellDelegator.m; sourceTree = "<group>"; };
-		B4B61D7517C742E000245F1E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		B4D50A3F183313C7007C93A4 /* REMBuildingChartContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartContainerViewController.h; sourceTree = "<group>"; };
 		B4D50A40183313C7007C93A4 /* REMBuildingChartContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingChartContainerViewController.m; sourceTree = "<group>"; };
@@ -1452,6 +1360,11 @@
 		EF1C5AD9183E00C9002A9AAD /* _DCXLabelFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCXLabelFormatter.m; path = Common/Utility/DChart/Axis/LabelLayer/_DCXLabelFormatter.m; sourceTree = "<group>"; };
 		EF1C5ADB183E23DA002A9AAD /* _DCLineSymbolsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLineSymbolsLayer.h; path = Common/Utility/DChart/Series/_DCLineSymbolsLayer.h; sourceTree = "<group>"; };
 		EF1C5ADC183E23DA002A9AAD /* _DCLineSymbolsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLineSymbolsLayer.m; path = Common/Utility/DChart/Series/_DCLineSymbolsLayer.m; sourceTree = "<group>"; };
+		EF2043AD187B96F200272319 /* REMBuildingAirQualityWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAirQualityWrapper.h; sourceTree = "<group>"; };
+		EF2043AE187B96F200272319 /* REMBuildingAirQualityWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingAirQualityWrapper.m; sourceTree = "<group>"; };
+		EF2043B1187BD94400272319 /* REMNumberExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMNumberExtension.h; path = Common/Utility/REMNumberExtension.h; sourceTree = "<group>"; };
+		EF2043B2187BD94400272319 /* REMNumberExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMNumberExtension.m; path = Common/Utility/REMNumberExtension.m; sourceTree = "<group>"; };
+		EF2043B4187BDC4300272319 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		EF2962B3184C6B53000A119F /* REMTrendChartDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTrendChartDataProcessor.m; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
@@ -1548,11 +1461,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF2043B5187BDC4300272319 /* CoreText.framework in Frameworks */,
 				B477739C184F075300F68AED /* CoreVideo.framework in Frameworks */,
 				B477739A184F074500F68AED /* CoreMedia.framework in Frameworks */,
 				7A44E047182398B60080CEBE /* MessageUI.framework in Frameworks */,
 				6ABA68C4180F759700A302BC /* GoogleMaps.framework in Frameworks */,
-				B4B61D7617C742E000245F1E /* CoreText.framework in Frameworks */,
 				7AB34E4D177D2975003E235E /* SystemConfiguration.framework in Frameworks */,
 				B445AE7D177BE8B5002D2A59 /* QuartzCore.framework in Frameworks */,
 				B442701317AF316500762C68 /* OpenGLES.framework in Frameworks */,
@@ -1572,7 +1485,6 @@
 				7A9B1E20177B3A8B00C282A8 /* UIKit.framework in Frameworks */,
 				7A9B1E22177B3A8B00C282A8 /* Foundation.framework in Frameworks */,
 				7A9B1E24177B3A8B00C282A8 /* CoreGraphics.framework in Frameworks */,
-				6AB1F30917B8B3E40065C1EB /* libCorePlot-CocoaTouch.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1580,7 +1492,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AF6AC9117D1BB1200D62A9A /* CoreText.framework in Frameworks */,
 				6AB1F30217B8AD840065C1EB /* CoreImage.framework in Frameworks */,
 				6AB1F2DF17B8ACE60065C1EB /* SystemConfiguration.framework in Frameworks */,
 				6AB1F2DE17B8ACDF0065C1EB /* MobileCoreServices.framework in Frameworks */,
@@ -1610,7 +1521,6 @@
 				B445AEBB177BFE66002D2A59 /* SenTestingKit.framework in Frameworks */,
 				B445AEBC177BFE66002D2A59 /* UIKit.framework in Frameworks */,
 				B445AEBD177BFE66002D2A59 /* Foundation.framework in Frameworks */,
-				6AB1F30A17B8B3E40065C1EB /* libCorePlot-CocoaTouch.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2002,8 +1912,6 @@
 				B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartViewController.m */,
 				B44F63B4186D1BF80029B7F7 /* REMBuildingWidgetChartViewController.h */,
 				B44F63B5186D1BF80029B7F7 /* REMBuildingWidgetChartViewController.m */,
-				B493ADA717D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.h */,
-				B493ADA817D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m */,
 				7A44E04318238D5E0080CEBE /* REMBuildingShareViewController.h */,
 				7A44E04418238D5E0080CEBE /* REMBuildingShareViewController.m */,
 				7A153C6817AA497B00413D3C /* REMBuildingViewController.h */,
@@ -2297,8 +2205,6 @@
 			children = (
 				EFD9470E1839DEAF00E9EC50 /* DChartWrapper */,
 				EFD946CD1839DB9E00E9EC50 /* DChart */,
-				7A095E71179571C80098DB16 /* REMWidgetAxisHelper.h */,
-				7A095E72179571C80098DB16 /* REMWidgetAxisHelper.m */,
 				B49B6F4F1781491800BC130A /* REMColor.h */,
 				B49B6F501781491800BC130A /* REMColor.m */,
 				B4198EB01784220300B50475 /* REMJSONHelper.h */,
@@ -2319,6 +2225,8 @@
 				7A12280B18116DBF004DE778 /* REMViewHelper.m */,
 				B4577EBD184C1886003C00CF /* REMNumberHelper.h */,
 				B4577EBE184C1886003C00CF /* REMNumberHelper.m */,
+				EF2043B1187BD94400272319 /* REMNumberExtension.h */,
+				EF2043B2187BD94400272319 /* REMNumberExtension.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -2508,6 +2416,7 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EF2043B4187BDC4300272319 /* CoreText.framework */,
 				B477739B184F075300F68AED /* CoreVideo.framework */,
 				B4777399184F074500F68AED /* CoreMedia.framework */,
 				B4223D50184EFF44004D39C0 /* GPUImage.framework */,
@@ -2522,7 +2431,6 @@
 				7A13C19E17F40D59007E6AA9 /* CoreData.framework */,
 				7A13C19C17F40D4E007E6AA9 /* AVFoundation.framework */,
 				7A13C19A17F40D31007E6AA9 /* GoogleMaps.bundle */,
-				B4B61D7517C742E000245F1E /* CoreText.framework */,
 				6AB1F30817B8B3E40065C1EB /* libCorePlot-CocoaTouch.a */,
 				B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */,
 				B442701217AF316500762C68 /* OpenGLES.framework */,
@@ -2539,7 +2447,6 @@
 				7A6E6D0A17A65CE500FBB264 /* GMT */,
 				7A1D142317850B2100CC2922 /* Reachability */,
 				7A399E82177D238F00F0EB9F /* AFNetworking */,
-				7ABC2DD7177BE6210000C060 /* CorePlotHeaders */,
 				B445AE8F177BEEB7002D2A59 /* Lumberjack */,
 				38ED7D1E1785140900219469 /* libsqlite3.dylib */,
 			);
@@ -2689,91 +2596,6 @@
 				7A4CBAFC18741BEE0073C7BE /* REMLabelingTooltipView.m */,
 			);
 			path = Tooltip;
-			sourceTree = "<group>";
-		};
-		7ABC2DD7177BE6210000C060 /* CorePlotHeaders */ = {
-			isa = PBXGroup;
-			children = (
-				7ABC2DD8177BE6210000C060 /* CorePlot-CocoaTouch.h */,
-				7ABC2DD9177BE6210000C060 /* CPTAnimation.h */,
-				7ABC2DDA177BE6210000C060 /* CPTAnimationOperation.h */,
-				7ABC2DDB177BE6210000C060 /* CPTAnimationPeriod.h */,
-				7ABC2DDC177BE6210000C060 /* CPTAnnotation.h */,
-				7ABC2DDD177BE6210000C060 /* CPTAnnotationHostLayer.h */,
-				7ABC2DDE177BE6210000C060 /* CPTAxis.h */,
-				7ABC2DDF177BE6210000C060 /* CPTAxisLabel.h */,
-				7ABC2DE0177BE6210000C060 /* CPTAxisLabelGroup.h */,
-				7ABC2DE1177BE6210000C060 /* CPTAxisSet.h */,
-				7ABC2DE2177BE6210000C060 /* CPTAxisTitle.h */,
-				7ABC2DE3177BE6210000C060 /* CPTBarPlot.h */,
-				7ABC2DE4177BE6210000C060 /* CPTBorderedLayer.h */,
-				7ABC2DE5177BE6210000C060 /* CPTCalendarFormatter.h */,
-				7ABC2DE6177BE6210000C060 /* CPTColor.h */,
-				7ABC2DE7177BE6210000C060 /* CPTColorSpace.h */,
-				7ABC2DE8177BE6210000C060 /* CPTConstraints.h */,
-				7ABC2DE9177BE6210000C060 /* CPTDataSourceTestCase.h */,
-				7ABC2DEA177BE6210000C060 /* CPTDefinitions.h */,
-				7ABC2DEB177BE6210000C060 /* CPTDerivedXYGraph.h */,
-				7ABC2DEC177BE6210000C060 /* CPTExceptions.h */,
-				7ABC2DED177BE6210000C060 /* CPTFill.h */,
-				7ABC2DEE177BE6210000C060 /* CPTGradient.h */,
-				7ABC2DEF177BE6210000C060 /* CPTGraph.h */,
-				7ABC2DF0177BE6210000C060 /* CPTGraphHostingView.h */,
-				7ABC2DF1177BE6210000C060 /* CPTGridLineGroup.h */,
-				7ABC2DF2177BE6210000C060 /* CPTGridLines.h */,
-				7ABC2DF3177BE6210000C060 /* CPTImage.h */,
-				7ABC2DF4177BE6210000C060 /* CPTLayer.h */,
-				7ABC2DF5177BE6210000C060 /* CPTLayerAnnotation.h */,
-				7ABC2DF6177BE6210000C060 /* CPTLegend.h */,
-				7ABC2DF7177BE6210000C060 /* CPTLegendEntry.h */,
-				7ABC2DF8177BE6210000C060 /* CPTLimitBand.h */,
-				7ABC2DF9177BE6210000C060 /* CPTLineCap.h */,
-				7ABC2DFA177BE6210000C060 /* CPTLineStyle.h */,
-				7ABC2DFB177BE6210000C060 /* CPTMutableLineStyle.h */,
-				7ABC2DFC177BE6210000C060 /* CPTMutableNumericData+TypeConversion.h */,
-				7ABC2DFD177BE6210000C060 /* CPTMutableNumericData.h */,
-				7ABC2DFE177BE6210000C060 /* CPTMutablePlotRange.h */,
-				7ABC2DFF177BE6210000C060 /* CPTMutableShadow.h */,
-				7ABC2E00177BE6210000C060 /* CPTMutableTextStyle.h */,
-				7ABC2E01177BE6210000C060 /* CPTNumericData+TypeConversion.h */,
-				7ABC2E02177BE6210000C060 /* CPTNumericData.h */,
-				7ABC2E03177BE6210000C060 /* CPTNumericDataType.h */,
-				7ABC2E04177BE6210000C060 /* CPTPathExtensions.h */,
-				7ABC2E05177BE6210000C060 /* CPTPieChart.h */,
-				7ABC2E06177BE6210000C060 /* CPTPlatformSpecificCategories.h */,
-				7ABC2E07177BE6210000C060 /* CPTPlatformSpecificDefines.h */,
-				7ABC2E08177BE6210000C060 /* CPTPlatformSpecificFunctions.h */,
-				7ABC2E09177BE6210000C060 /* CPTPlot.h */,
-				7ABC2E0A177BE6210000C060 /* CPTPlotArea.h */,
-				7ABC2E0B177BE6210000C060 /* CPTPlotAreaFrame.h */,
-				7ABC2E0C177BE6210000C060 /* CPTPlotGroup.h */,
-				7ABC2E0D177BE6210000C060 /* CPTPlotRange.h */,
-				7ABC2E0E177BE6210000C060 /* CPTPlotSpace.h */,
-				7ABC2E0F177BE6210000C060 /* CPTPlotSpaceAnnotation.h */,
-				7ABC2E10177BE6210000C060 /* CPTPlotSymbol.h */,
-				7ABC2E11177BE6210000C060 /* CPTRangePlot.h */,
-				7ABC2E12177BE6210000C060 /* CPTResponder.h */,
-				7ABC2E13177BE6210000C060 /* CPTScatterPlot.h */,
-				7ABC2E14177BE6210000C060 /* CPTShadow.h */,
-				7ABC2E15177BE6210000C060 /* CPTTestCase.h */,
-				7ABC2E16177BE6210000C060 /* CPTTextLayer.h */,
-				7ABC2E17177BE6210000C060 /* CPTTextStyle.h */,
-				7ABC2E18177BE6210000C060 /* CPTTextStylePlatformSpecific.h */,
-				7ABC2E19177BE6210000C060 /* CPTTheme.h */,
-				7ABC2E1A177BE6210000C060 /* CPTTimeFormatter.h */,
-				7ABC2E1B177BE6210000C060 /* CPTTradingRangePlot.h */,
-				7ABC2E1C177BE6210000C060 /* CPTUtilities.h */,
-				7ABC2E1D177BE6210000C060 /* CPTXYAxis.h */,
-				7ABC2E1E177BE6210000C060 /* CPTXYAxisSet.h */,
-				7ABC2E1F177BE6210000C060 /* CPTXYGraph.h */,
-				7ABC2E20177BE6210000C060 /* CPTXYPlotSpace.h */,
-				7ABC2E21177BE6210000C060 /* mainpage.h */,
-				7ABC2E22177BE6210000C060 /* NSCoderExtensions.h */,
-				7ABC2E23177BE6210000C060 /* NSDecimalNumberExtensions.h */,
-				7ABC2E24177BE6210000C060 /* NSNumberExtensions.h */,
-			);
-			name = CorePlotHeaders;
-			path = ../lib/CorePlotHeaders;
 			sourceTree = "<group>";
 		};
 		7ABD828B185AD71B00A2AC06 /* Configuration */ = {
@@ -3093,8 +2915,8 @@
 		EF6147771876574200ED9F1E /* BuildingAirQuality */ = {
 			isa = PBXGroup;
 			children = (
-				7A9557BE17C73AD200249CED /* REMBuildingAirQualityChart.h */,
-				7A9557BF17C73AD200249CED /* REMBuildingAirQualityChart.m */,
+				EF2043AD187B96F200272319 /* REMBuildingAirQualityWrapper.h */,
+				EF2043AE187B96F200272319 /* REMBuildingAirQualityWrapper.m */,
 			);
 			name = BuildingAirQuality;
 			sourceTree = "<group>";
@@ -3864,7 +3686,6 @@
 				B48ED3EA178EA1740032CD72 /* REMTimeHelper.m in Sources */,
 				EF652B68185867C2007D4049 /* DCTrendAnimationManager.m in Sources */,
 				7A5DBD2B178FD034006C4EDE /* REMDataStore.m in Sources */,
-				7A095E73179571C80098DB16 /* REMWidgetAxisHelper.m in Sources */,
 				EF1C5AD7183DB3CB002A9AAD /* DCTrendWrapper.m in Sources */,
 				B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */,
 				EFD9470A1839DCBB00E9EC50 /* DCSeries.m in Sources */,
@@ -3930,6 +3751,7 @@
 				7A153CC717AA4B3400413D3C /* REMCommodityModel.m in Sources */,
 				7A153CCA17AA4B5C00413D3C /* REMEnergyUsageDataModel.m in Sources */,
 				EF61477A18765E7000ED9F1E /* REMBuildingAverageWrapper.m in Sources */,
+				EF2043B3187BD94400272319 /* REMNumberExtension.m in Sources */,
 				7A153CCD17AA4EDB00413D3C /* REMRankingDataModel.m in Sources */,
 				EFF701CF1830880600B371EC /* REMChartStyle.m in Sources */,
 				7A37AA5C17AB56F100316902 /* REMUserValidationModel.m in Sources */,
@@ -3991,6 +3813,7 @@
 				7A0288F817C20CC500709111 /* ImageResourceLoader.m in Sources */,
 				7A0288F917C20CC500709111 /* NSDictionary+Json.m in Sources */,
 				7A0288FA17C20CC500709111 /* PathHelper.m in Sources */,
+				EF2043AF187B96F200272319 /* REMBuildingAirQualityWrapper.m in Sources */,
 				EFE8697D185E9FF800DC0007 /* DCLabelingChartView.m in Sources */,
 				7A0288FB17C20CC500709111 /* Resources.m in Sources */,
 				EF03DC291841FB45004B9EFD /* DCPieDataPoint.m in Sources */,
@@ -4020,7 +3843,6 @@
 				B4A0FCDB17C610B500C7AD56 /* REMBuildingAirQualityChartViewController.m in Sources */,
 				EF96300617C610A200BBC7DA /* REMSettingViewController.m in Sources */,
 				7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */,
-				7A9557C017C73AD200249CED /* REMBuildingAirQualityChart.m in Sources */,
 				EFD947041839DCBB00E9EC50 /* DCContext.m in Sources */,
 				EF9F28B117CB54DE00E775ED /* REMStatusBar.m in Sources */,
 				7A48B47E17CDE321002DA386 /* REMInsetsTextField.m in Sources */,
@@ -4028,7 +3850,6 @@
 				7A7F7B18181F7E3400A3C5AB /* REMGalleryGroupView.m in Sources */,
 				B408794A1830A960004042C1 /* REMBuildingImageViewController.m in Sources */,
 				EFE86986185EEF5300DC0007 /* DCLabelingSeries.m in Sources */,
-				B493ADA917D5C41F00EED9B8 /* REMChartHorizonalScrollDelegator.m in Sources */,
 				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,
 				7A8E491C184442EB00FD1A38 /* REMRankingTooltipView.m in Sources */,
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
@@ -4049,7 +3870,6 @@
 				7A3CB7601806385300B94DEE /* REMAdministratorModel.m in Sources */,
 				7A3CB7611806385300B94DEE /* REMNetworkStatusIndicator.m in Sources */,
 				7A3CB7621806385300B94DEE /* REMCustomerSwitchHelper.m in Sources */,
-				7AF6AC8217D1BA5600D62A9A /* REMBuildingAirQualityChart.m in Sources */,
 				7AF6AC8317D1BA5600D62A9A /* REMBuildingAirQualityView.m in Sources */,
 				7AF6AC8417D1BA5600D62A9A /* REMToggleButtonGroup.m in Sources */,
 				7AF6AC8517D1BA5600D62A9A /* REMStatusBar.m in Sources */,
@@ -4091,7 +3911,6 @@
 				6AB1F24117B8AC910065C1EB /* REMServiceAgent.m in Sources */,
 				6AB1F24317B8AC910065C1EB /* REMSqliteStorage.m in Sources */,
 				6AB1F24517B8AC910065C1EB /* REMStorage.m in Sources */,
-				6AB1F24717B8AC910065C1EB /* REMWidgetAxisHelper.m in Sources */,
 				6AB1F24917B8AC910065C1EB /* REMColor.m in Sources */,
 				6AB1F24B17B8AC910065C1EB /* REMJSONHelper.m in Sources */,
 				6AB1F24D17B8AC910065C1EB /* REMNetworkHelper.m in Sources */,
@@ -4221,8 +4040,6 @@
 				6AB1F32617B8B40C0065C1EB /* REMSqliteStorage.m in Sources */,
 				6AB1F32717B8B40C0065C1EB /* REMStorage.h in Sources */,
 				6AB1F32817B8B40C0065C1EB /* REMStorage.m in Sources */,
-				6AB1F32917B8B40C0065C1EB /* REMWidgetAxisHelper.h in Sources */,
-				6AB1F32A17B8B40C0065C1EB /* REMWidgetAxisHelper.m in Sources */,
 				6AB1F32B17B8B40C0065C1EB /* REMColor.h in Sources */,
 				6AB1F32C17B8B40C0065C1EB /* REMColor.m in Sources */,
 				6AB1F32D17B8B40C0065C1EB /* REMJSONHelper.h in Sources */,
