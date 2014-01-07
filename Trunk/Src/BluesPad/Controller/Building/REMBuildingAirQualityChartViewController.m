@@ -18,7 +18,6 @@
 
 @interface REMBuildingAirQualityChartViewController ()
 
-@property (nonatomic) CGRect viewFrame;
 @property (nonatomic,strong) REMBuildingAirQualityChart *chartView;
 @property (nonatomic,strong) REMAirQualityDataModel *airQualityData;
 @property (nonatomic,strong) NSArray *chartData;
@@ -30,10 +29,6 @@
 
 @property (nonatomic,strong) REMAirQualityStandardModel *standardChina, *standardAmerican;
 @property (nonatomic,strong) UIColor *colorForChinaStandard, *colorForAmericanStandard;
-
-@property (nonatomic,strong) REMChartHorizonalScrollDelegator *scrollManager;
-@property (nonatomic,strong) NSDateFormatter *formatter;
-
 
 @end
 
@@ -58,11 +53,9 @@ static NSDictionary *codeNameMap;
 
 - (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithViewFrame:frame];
     if (self) {
         // Custom initialization
-        self.viewFrame = frame;
-        self.scrollManager = [[REMChartHorizonalScrollDelegator alloc]init];
         codeNameMap = @{kTagCodeSuffixOutdoor:kWordAirQualityOutdoor,
                         kTagCodeSuffixHoneywell:kWordAirQualityHoneywell,
                         kTagCodeSuffixMayAir:kWordAirQualityMayair,
@@ -70,24 +63,10 @@ static NSDictionary *codeNameMap;
                         kChinaStandardCode:kWordAirQualityChinaStandard,};
         
         self.requestUrl=REMDSBuildingAirQuality;
-        
-        self.formatter = [[NSDateFormatter alloc] init];
     }
     return self;
 }
 
-- (void)loadView
-{
-    self.view = [[REMBuildingAirQualityChart alloc] initWithFrame:self.viewFrame];
-    self.chartView = (REMBuildingAirQualityChart *)self.view;
-    
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
 
 -(NSDictionary *)assembleRequestParametersWithBuildingId:(long long)buildingId WithCommodityId:(long long)commodityID WithMetadata:(REMAverageUsageDataModel *)averageData
 {
@@ -96,13 +75,12 @@ static NSDictionary *codeNameMap;
     return parameter;
 }
 
-- (void)loadDataSuccessWithData:(id)data
-{
+-(REMEnergyViewData*)convertData:(id)data {
     self.airQualityData = [[REMAirQualityDataModel alloc] initWithDictionary:data];
-    
     if(self.airQualityData!=nil){
-        [self loadChart];
+        return self.airQualityData.airQualityData;
     }
+    return nil;
 }
 -(void)loadChart
 {
@@ -243,9 +221,6 @@ static NSDictionary *codeNameMap;
     CPTPlotRange *dataValuePlotRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(self.dataValueRange.end + [self.dataValueRange distance] * 0.05)];
     plotSpace.yRange = dataValuePlotRange;
     plotSpace.globalYRange = dataValuePlotRange;
-    
-    self.scrollManager.globalRange=self.globalRange;
-    self.scrollManager.visiableRange=self.visiableRange;
 }
 
 -(void)initializeAxises
@@ -325,21 +300,6 @@ static NSDictionary *codeNameMap;
 //    
 //    //add x and y axis into axis set
 //    self.chartView.hostView.hostedGraph.axisSet.axes = @[x,y];
-}
-
-
-
--(NSString *)formatDateLabel:(NSDate *)date
-{
-    int day = [REMTimeHelper getDay:date];
-    if(day == 1){
-        [self.formatter setDateFormat:@"MM月dd日"];
-    }
-    else{
-        [self.formatter setDateFormat:@"dd日"];
-    }
-    
-    return [self.formatter stringFromDate:date];
 }
 
 -(void)initializePlots
@@ -542,52 +502,5 @@ static NSDictionary *codeNameMap;
     
     return  YES;
 }
-
-#pragma mark - data source delegate
--(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
-{
-    NSUInteger records;
-    
-    CPTBarPlot *line = (CPTBarPlot *)plot;
-    for (NSDictionary *series in self.chartData)
-    {
-        if([line.identifier isEqual:[series objectForKey:@"identity" ]] == YES)
-        {
-            records = [[series objectForKey:@"data"] count];
-            break;
-        }
-    }
-    
-    //NSLog(@"line %@ has %d records.",line.identifier, records);
-    
-    return records;
-}
-
--(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
-{
-    NSNumber *number;
-    CPTBarPlot *line = (CPTBarPlot *)plot;
-    for (NSDictionary *series in self.chartData)
-    {
-        if([line.identifier isEqual:[series objectForKey:@"identity" ]] == YES)
-        {
-            NSDictionary *point = [series objectForKey:@"data"][idx];
-            
-            if(fieldEnum == CPTBarPlotFieldBarLocation)
-            {
-                //number = [NSNumber numberWithInt: idx];//[point objectForKey:@"x"];
-                number = [NSNumber numberWithDouble:[((NSDate *)[point objectForKey:@"x"]) timeIntervalSince1970]];
-            }
-            else
-            {
-                number = [point objectForKey:@"y"];
-            }
-            
-            break;
-        }
-    }
-    return number;
-}
-
 
 @end

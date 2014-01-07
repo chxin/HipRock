@@ -9,6 +9,6 @@
 #import "REMBuildingChartBaseViewController.h"
 #import "REMChartHorizonalScrollDelegator.h"
 
-@interface REMBuildingAirQualityChartViewController : REMBuildingChartBaseViewController<CPTScatterPlotDataSource,CPTScatterPlotDelegate,CPTPlotSpaceDelegate>
+@interface REMBuildingAirQualityChartViewController : REMBuildingChartBaseViewController
 
 @end

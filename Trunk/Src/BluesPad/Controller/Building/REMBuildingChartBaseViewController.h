@@ -44,5 +44,6 @@
 
 
 -(void)drawLabelWithText:(NSString *)text;
+-(REMEnergyViewData*)convertData:(id)data;
 
 @end
