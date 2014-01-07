@@ -81,9 +81,12 @@
     }
     
     //add customer logo button
-    UIButton *logoButton = self.customerLogoButton;
+    UIImageView *logoButton = self.customerLogoButton;
     logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
     [self.view addSubview:logoButton];
+    
+    UIButton *settingButton=self.settingButton;
+    [self.view addSubview:settingButton];
 }
 
 -(void)showMarkers

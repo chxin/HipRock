@@ -12,10 +12,9 @@
 @interface REMControllerBase : UIViewController
 
 @property (weak, nonatomic, getter = getTitleGradientLayer) CAGradientLayer *titleGradientLayer;
-@property (weak, nonatomic, getter = getCustomerLogoButton) UIButton *customerLogoButton;
+@property (weak, nonatomic) UIImageView *customerLogoButton;
 
 
 - (CAGradientLayer *)getTitleGradientLayer;
-- (UIButton *)getCustomerLogoButton;
 - (UIButton *)settingButton;
 @end

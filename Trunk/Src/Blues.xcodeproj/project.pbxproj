@@ -563,6 +563,8 @@
 		B485EFE6187BA1A800D16583 /* Logo_About@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B485EFE4187BA1A800D16583 /* Logo_About@2x.png */; };
 		B485EFE9187BC50600D16583 /* Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = B485EFE7187BC50600D16583 /* Setting.png */; };
 		B485EFEA187BC50600D16583 /* Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B485EFE8187BC50600D16583 /* Setting@2x.png */; };
+		B485EFED187BCF2900D16583 /* ChartCustomization.png in Resources */ = {isa = PBXBuildFile; fileRef = B485EFEB187BCF2900D16583 /* ChartCustomization.png */; };
+		B485EFEE187BCF2900D16583 /* ChartCustomization@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B485EFEC187BCF2900D16583 /* ChartCustomization@2x.png */; };
 		B48ED3EA178EA1740032CD72 /* REMTimeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E9178EA1740032CD72 /* REMTimeHelper.m */; };
 		B48ED409178EA8970032CD72 /* REMSqliteStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D191785113600219469 /* REMSqliteStorage.m */; };
 		B48ED40A178EA8970032CD72 /* REMStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D1C1785115700219469 /* REMStorage.m */; };
@@ -1337,6 +1339,8 @@
 		B485EFE4187BA1A800D16583 /* Logo_About@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_About@2x.png"; sourceTree = "<group>"; };
 		B485EFE7187BC50600D16583 /* Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Setting.png; sourceTree = "<group>"; };
 		B485EFE8187BC50600D16583 /* Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Setting@2x.png"; sourceTree = "<group>"; };
+		B485EFEB187BCF2900D16583 /* ChartCustomization.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChartCustomization.png; sourceTree = "<group>"; };
+		B485EFEC187BCF2900D16583 /* ChartCustomization@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChartCustomization@2x.png"; sourceTree = "<group>"; };
 		B48ED3E8178EA1740032CD72 /* REMTimeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMTimeHelper.h; path = Common/Utility/REMTimeHelper.h; sourceTree = "<group>"; };
 		B48ED3E9178EA1740032CD72 /* REMTimeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeHelper.m; path = Common/Utility/REMTimeHelper.m; sourceTree = "<group>"; };
 		B48ED3EC178EA4A00032CD72 /* REMTimeHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMTimeHelperTests.h; path = ../Test/CommonTests/REMTimeHelperTests.h; sourceTree = "<group>"; };
@@ -1651,6 +1655,8 @@
 			isa = PBXGroup;
 			children = (
 				6A61A66A1839B81F00C6A228 /* commodity */,
+				B485EFEB187BCF2900D16583 /* ChartCustomization.png */,
+				B485EFEC187BCF2900D16583 /* ChartCustomization@2x.png */,
 				6A61A6831839B82000C6A228 /* DefaultBuilding-Small.png */,
 				6A61A6841839B82000C6A228 /* DefaultBuilding-Small@2x.png */,
 				6A61A6851839B82000C6A228 /* DefaultBuilding.png */,
@@ -3638,6 +3644,7 @@
 				6A61A6FD1839B82000C6A228 /* EMOP_App_6.png in Resources */,
 				6A61A71C1839B82000C6A228 /* Water_normal@2x.png in Resources */,
 				6A61A77B1839B82000C6A228 /* CommonPin_Focus.png in Resources */,
+				B485EFEE187BCF2900D16583 /* ChartCustomization@2x.png in Resources */,
 				7A58F2501839A5650071DE7A /* Propaganda_3@2x.jpg in Resources */,
 				6A61A7911839B82000C6A228 /* SplashScreenLogo-Flash.png in Resources */,
 				6A61A7901839B82000C6A228 /* SplashScreenLogo-Common@2x.png in Resources */,
@@ -3695,6 +3702,7 @@
 				6A61A7211839B82000C6A228 /* DefaultBuilding.png in Resources */,
 				6A61A7381839B82000C6A228 /* DatePicker_Chart@2x.png in Resources */,
 				6A61A7021839B82000C6A228 /* EMOP_Setting@2x.png in Resources */,
+				B485EFED187BCF2900D16583 /* ChartCustomization.png in Resources */,
 				7A58F24E1839A5650071DE7A /* Propaganda_2@2x.jpg in Resources */,
 				7A20761417E055E800CD137C /* Localizable.strings in Resources */,
 				6A61A78A1839B82000C6A228 /* QualifiedPin_Normal@2x.png in Resources */,

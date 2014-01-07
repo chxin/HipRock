@@ -25,7 +25,7 @@
 @property (nonatomic,weak) CALayer *bottomGradientLayer;
 @property (nonatomic,weak) UILabel *buildingTypeTitleView;
 @property (nonatomic,weak) UILabel *buildingTitleView;
-@property (nonatomic,weak) UIButton *logoButton;
+@property (nonatomic,weak) UIImageView *logoButton;
 @property (nonatomic,strong) NSString *loadingImageKey;
 
 @property (nonatomic,weak) UIImageView *cropTitleView;
@@ -316,12 +316,12 @@
     self.buildingTitleView=titleLabel;
     
     
-    UIButton *logoButton = [self getCustomerLogoButton];
+    UIImageView *logoButton = self.customerLogoButton;
     [logoButton setFrame:CGRectMake(self.backButton.frame.origin.x+self.backButton.frame.size.width, kDMCommon_CustomerLogoTop, logoButton.frame.size.width, logoButton.frame.size.height)];
     
     //[logoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
     
-    logoButton.titleLabel.text=@"logo";
+//    logoButton.titleLabel.text=@"logo";
 //    [logoButton removeTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 //    [logoButton addTarget:self.parentViewController action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
