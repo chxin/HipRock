@@ -15,8 +15,6 @@
 #import "REMBuildingAirQualityWrapper.h"
 #import "DCXYChartBackgroundBand.h"
 
-#define REMHalfDaySeconds 12*60*60
-
 @interface REMBuildingAirQualityChartViewController ()
 
 @property (nonatomic,strong) REMAirQualityDataModel *airQualityData;
