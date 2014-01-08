@@ -522,6 +522,8 @@
 		B4577EBF184C1886003C00CF /* REMNumberHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4577EBE184C1886003C00CF /* REMNumberHelper.m */; };
 		B4577EC2184C48D2003C00CF /* Share_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4577EC0184C48D2003C00CF /* Share_normal.png */; };
 		B4577EC3184C48D2003C00CF /* Share_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4577EC1184C48D2003C00CF /* Share_normal@2x.png */; };
+		B4656BFD187D47E6008EAEA8 /* ChartCustomization_Widget.png in Resources */ = {isa = PBXBuildFile; fileRef = B4656BFB187D47E6008EAEA8 /* ChartCustomization_Widget.png */; };
+		B4656BFE187D47E6008EAEA8 /* ChartCustomization_Widget@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4656BFC187D47E6008EAEA8 /* ChartCustomization_Widget@2x.png */; };
 		B469537817E96DCF003D5A98 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		B46C8EBA17F27C25006DC4CB /* REMDashboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EB917F27C25006DC4CB /* REMDashboardView.m */; };
 		B46C8EBD17F27C84006DC4CB /* REMDashboardCellViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C8EBC17F27C84006DC4CB /* REMDashboardCellViewCell.m */; };
@@ -1212,6 +1214,8 @@
 		B4577EBE184C1886003C00CF /* REMNumberHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMNumberHelper.m; path = Common/Utility/REMNumberHelper.m; sourceTree = "<group>"; };
 		B4577EC0184C48D2003C00CF /* Share_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_normal.png; sourceTree = "<group>"; };
 		B4577EC1184C48D2003C00CF /* Share_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_normal@2x.png"; sourceTree = "<group>"; };
+		B4656BFB187D47E6008EAEA8 /* ChartCustomization_Widget.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChartCustomization_Widget.png; sourceTree = "<group>"; };
+		B4656BFC187D47E6008EAEA8 /* ChartCustomization_Widget@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChartCustomization_Widget@2x.png"; sourceTree = "<group>"; };
 		B46C8EB817F27C25006DC4CB /* REMDashboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDashboardView.h; path = View/Dashboard/REMDashboardView.h; sourceTree = "<group>"; };
 		B46C8EB917F27C25006DC4CB /* REMDashboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDashboardView.m; path = View/Dashboard/REMDashboardView.m; sourceTree = "<group>"; };
 		B46C8EBB17F27C84006DC4CB /* REMDashboardCellViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDashboardCellViewCell.h; path = View/Dashboard/REMDashboardCellViewCell.h; sourceTree = "<group>"; };
@@ -1565,6 +1569,8 @@
 			isa = PBXGroup;
 			children = (
 				6A61A66A1839B81F00C6A228 /* commodity */,
+				B4656BFB187D47E6008EAEA8 /* ChartCustomization_Widget.png */,
+				B4656BFC187D47E6008EAEA8 /* ChartCustomization_Widget@2x.png */,
 				B485EFEB187BCF2900D16583 /* ChartCustomization.png */,
 				B485EFEC187BCF2900D16583 /* ChartCustomization@2x.png */,
 				6A61A6831839B82000C6A228 /* DefaultBuilding-Small.png */,
@@ -3445,6 +3451,7 @@
 				6A61A7791839B82000C6A228 /* SlidePageBackground.png in Resources */,
 				6A61A7011839B82000C6A228 /* EMOP_Setting.png in Resources */,
 				7A58F24F1839A5650071DE7A /* Propaganda_3.jpg in Resources */,
+				B4656BFE187D47E6008EAEA8 /* ChartCustomization_Widget@2x.png in Resources */,
 				6A61A7271839B82000C6A228 /* OverTarget.png in Resources */,
 				6A61A7741839B82000C6A228 /* Login-Pressed@2x.png in Resources */,
 				B485EFE9187BC50600D16583 /* Setting.png in Resources */,
@@ -3472,6 +3479,7 @@
 				6A61A7901839B82000C6A228 /* SplashScreenLogo-Common@2x.png in Resources */,
 				7A58F24A1839A5650071DE7A /* mail.jpg in Resources */,
 				6A61A77D1839B82000C6A228 /* CommonPin_Normal.png in Resources */,
+				B4656BFD187D47E6008EAEA8 /* ChartCustomization_Widget.png in Resources */,
 				6A61A71D1839B82000C6A228 /* Water_pressed.png in Resources */,
 				7A664FD9183B3369004B9FF3 /* MapPopover_Arrow@2x.png in Resources */,
 				6A61A6FF1839B82000C6A228 /* EMOP_APP_7.png in Resources */,

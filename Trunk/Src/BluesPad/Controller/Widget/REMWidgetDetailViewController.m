@@ -129,8 +129,10 @@ const static CGFloat kWidgetShareTitleFontSize=14;
             pinButton.tintColor=[REMColor colorByHexString:@"#37ab3c"];
             
         }
-        [pinButton setFrame:CGRectMake(750, kWidgetBackButtonTop, 32, 32)];
-        [pinButton setImage:[UIImage imageNamed:@"ChartCustomization"] forState:UIControlStateNormal];
+        CGFloat x=750;
+        
+        [pinButton setFrame:CGRectMake(x, kWidgetBackButtonTop, 32, 32)];
+        [pinButton setImage:[UIImage imageNamed:@"ChartCustomization_Widget"] forState:UIControlStateNormal];
         [pinButton addTarget:self action:@selector(pinButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.titleContainer addSubview:pinButton];
         [pinButton setEnabled:[self.bizDelegator shouldEnablePinToBuildingCoverButton]];
@@ -169,14 +171,19 @@ const static CGFloat kWidgetShareTitleFontSize=14;
                         dic[@"firstName"]=widget.name;
                         dic[@"firstId"]=widget.widgetId;
                         dic[@"firstDashboardId"]=relation.dashboardId;
-                        dic[@"firstSelected"]=@(1);
+                        if ([self.widgetInfo.widgetId isEqualToNumber:widget.widgetId]) {
+                            dic[@"firstSelected"]=@(1);
+                        }
+                        
                     }
                     else{
                         foundSecond=YES;
                         dic[@"secondName"]=widget.name;
                         dic[@"secondId"]=widget.widgetId;
                         dic[@"secondDashboardId"]=relation.dashboardId;
-                        dic[@"secondSelected"]=@(1);
+                        if ([self.widgetInfo.widgetId isEqualToNumber:widget.widgetId]) {
+                            dic[@"secondSelected"]=@(1);
+                        }
                     }
                     
                 }

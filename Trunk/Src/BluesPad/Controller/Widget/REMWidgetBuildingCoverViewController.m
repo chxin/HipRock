@@ -25,6 +25,7 @@
 	// Do any additional setup after loading the view.
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"widgetListCell"];
     self.currentSelectedArray = [NSMutableArray array];
+    self.selectedPathArray=[NSMutableArray array];
     for (int i=0; i<self.data.count; ++i) {
         NSDictionary *dic=self.data[i];
         NSInteger section=i+1;
@@ -162,7 +163,7 @@
             
             REMCommodityModel *commodity=self.buildingInfo.commodityArray[path.section-1];
             dic[@"CommodityId"]=commodity.commodityId;
-            dic[@"Position"]= @(-1);
+            dic[@"Position"]= @(path.row-2);
             [array addObject:dic];
         }
         
