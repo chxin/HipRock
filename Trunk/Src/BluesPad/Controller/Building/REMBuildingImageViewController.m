@@ -660,6 +660,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)releaseAllDataView{
+    if (self.childViewControllers.count>0) {
+        UIViewController *controller= self.childViewControllers[0];
+        [self releaseViewInController:@[controller]];
+    }
+    
+}
+
 - (void)exportImage:(void (^)(UIImage *, NSString*))callback
 {
     REMBuildingDataViewController *dataViewController=self.childViewControllers[0];

@@ -50,6 +50,7 @@ const static CGFloat buildingGap=20;
 
 @implementation REMBuildingViewController
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -74,11 +75,30 @@ const static CGFloat buildingGap=20;
         UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchThis:)];
         [self.view addGestureRecognizer:pinch];
     }
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveNotification:)
+                                                 name:@"UpdateBuildingCoverRelation"
+                                               object:nil];
 }
 
+- (void)receiveNotification:(NSNotification *)notification{
+    if ([notification.name isEqualToString:@"UpdateBuildingCoverRelation"]==YES) {
+        for (REMBuildingImageViewController *imageController in self.childViewControllers) {
+            [imageController releaseAllDataView];
+            UIViewController *dataController = imageController.childViewControllers[0];
+            for (UIViewController *commodityController in dataController.childViewControllers) {
+                for (UIViewController *container in commodityController.childViewControllers) {
+                    [container removeFromParentViewController];
+                }
+            }
+        }
+    }
+}
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UpdateBuildingCoverRelation" object:nil];
 
+}
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {

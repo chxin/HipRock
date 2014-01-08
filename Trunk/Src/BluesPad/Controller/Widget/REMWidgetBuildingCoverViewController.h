@@ -6,10 +6,17 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
+#import "REMBuildingOverallModel.h"
+#import "REMWidgetDetailViewController.h"
+
 
 @interface REMWidgetBuildingCoverViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
 
 
 @property (nonatomic,weak) UIPopoverController *popController;
 @property (nonatomic,strong) NSArray *data;
+@property (nonatomic,weak) REMWidgetDetailViewController *detailController;
+@property (nonatomic) BOOL isRequesting;
+@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,weak) REMDashboardObj *dashboardInfo;
 @end

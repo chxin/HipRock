@@ -6,11 +6,14 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMWidgetBuildingCoverViewController.h"
+#import "REMPinToBuildingCoverHelper.h"
+#import "REMBuildingCoverWidgetRelationModel.h"
+
 
 @interface REMWidgetBuildingCoverViewController ()
 
 @property (nonatomic,strong) NSMutableArray *currentSelectedArray;
-
+@property (nonatomic,strong) NSIndexPath *selectedPath;
 @end
 
 @implementation REMWidgetBuildingCoverViewController
@@ -34,6 +37,7 @@
         }
         if (row != NSNotFound) {
             NSIndexPath *path=[NSIndexPath indexPathForRow:row inSection:section];
+            self.selectedPath=path;
             [self.currentSelectedArray addObject:path];
             break;
         }
@@ -128,6 +132,41 @@
 }
 
 - (IBAction)okButtonClicked:(id)sender {
+    NSMutableArray *array=[NSMutableArray array];
+    BOOL includeCurrent=NO;
+    for (NSIndexPath *path in self.currentSelectedArray) {
+        NSMutableDictionary *dic=[NSMutableDictionary dictionary];
+        dic[@"HierarchyId"]=self.buildingInfo.building.buildingId;
+        dic[@"WidgetId"]=self.detailController.widgetInfo.widgetId;
+        dic[@"DashboardId"]=self.dashboardInfo.dashboardId;
+        
+        REMCommodityModel *commodity=self.buildingInfo.commodityArray[path.section-1];
+        dic[@"CommodityId"]=commodity.commodityId;
+        dic[@"Position"]= @((REMBuildingCoverWidgetPosition)path.row);
+        if (path.section == self.selectedPath.section && path.row == self.selectedPath.row) {
+            includeCurrent=YES;
+        }
+        [array addObject:dic];
+    }
+    if (includeCurrent==NO && self.selectedPath!=nil) {
+        NSMutableDictionary *dic=[NSMutableDictionary dictionary];
+        dic[@"HierarchyId"]=self.buildingInfo.building.buildingId;
+        dic[@"WidgetId"]=self.detailController.widgetInfo.widgetId;
+        dic[@"DashboardId"]=self.dashboardInfo.dashboardId;
+        
+        REMCommodityModel *commodity=self.buildingInfo.commodityArray[self.selectedPath.section-1];
+        dic[@"CommodityId"]=commodity.commodityId;
+        dic[@"Position"]= @(-1);
+        [array addObject:dic];
+    }
+    self.isRequesting=YES;
+    REMCustomerModel *customer=REMAppCurrentCustomer;
+    [REMPinToBuildingCoverHelper pinToBuildingCover:@{@"relationList":array,@"buildingId":self.buildingInfo.building.buildingId,@"customerId":customer.customerId} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
+        if (status == REMPinToBuildingCoverStatusSuccess) {
+            [self.detailController updateBuildingCover];
+        }
+    }];
+    [self cancelButtonClicked:nil];
 }
 
 - (void)didReceiveMemoryWarning
