@@ -180,14 +180,6 @@
     [self.view addSubview:self.galleryTableView];
 }
 
--(void)taptest:(UITapGestureRecognizer *)tap
-{
-    for(REMGalleryCollectionViewController *gc in self.childViewControllers){
-        NSLog(@"%@",gc.collectionKey);
-    }
-    NSLog(@"tapped view: %@",[tap.view class]);
-}
-
 -(void)switchButtonPressed
 {
     [self performSegueWithIdentifier:kSegue_GalleryToMap sender:self];
@@ -195,6 +187,11 @@
 
 -(void)scrollToBuildingIndex:(int)currentBuildingIndex
 {
+    REMGalleryCollectionCell *cell = [self galleryCellForBuildingIndex:currentBuildingIndex];
+    
+    if(cell.superview.superview.superview!=nil)
+        return;
+    
     REMBuildingOverallModel *buildingInfo = self.buildingInfoArray[currentBuildingIndex];
     
     int index = 0;
@@ -207,7 +204,7 @@
     }
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    [self.galleryTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    [self.galleryTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
 }
 
 
