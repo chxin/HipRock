@@ -74,7 +74,6 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
     }
     return series.target.name;
 }
-
 //-(void)drawChartLabels {
 //    CGFloat legendLeft = 57;
 //    CGFloat labelDistance = 18;

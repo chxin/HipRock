@@ -92,5 +92,9 @@ static NSDictionary *codeNameMap;
     return REMEmptyString;
 }
 
+-(void)purgeMemory {
+    self.airQualityData = nil;
+    [super purgeMemory];
+}
 
 @end
