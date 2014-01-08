@@ -12,7 +12,7 @@
 #import "DCXYSeries.h"
 #import "DCXYChartViewDelegate.h"
 
-@interface DCXYChartView : UIView<DCContextHRangeObserverProtocal>
+@interface DCXYChartView : UIView<DCContextHRangeObserverProtocal,UIGestureRecognizerDelegate>
 @property (nonatomic, assign) BOOL acceptPan;
 @property (nonatomic, assign) BOOL acceptPinch;
 @property (nonatomic, assign) BOOL acceptTap;

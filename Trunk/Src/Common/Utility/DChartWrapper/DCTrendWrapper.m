@@ -108,7 +108,7 @@
         view.graphContext.xLabelAlignToTick = YES;
     }
     
-    view.blockReboundAnimation = (step == REMEnergyStepHour);   // 步长为小时时禁止回弹动画
+//    view.blockReboundAnimation = (step == REMEnergyStepHour);   // 步长为小时时禁止回弹动画
     
     [self customizeView:view];
 }

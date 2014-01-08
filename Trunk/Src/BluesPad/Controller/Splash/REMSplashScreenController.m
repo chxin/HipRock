@@ -277,22 +277,28 @@
     }
     energyViewData.labellingLevelArray = labellings;
     energyViewData.targetEnergyData = sereis;
-    REMChartStyle* style = [REMChartStyle getMinimunStyle];
-    CGRect miniRect = CGRectMake(0, 0, 222, 108);
-    CGRect maxiRect = CGRectMake(0, 0, 974, 605);
+    REMChartStyle* style = nil;
+    CGRect frame;
+    BOOL mini = NO;
+    if (mini) {
+        style = [REMChartStyle getMinimunStyle];
+        frame = CGRectMake(0, 0, 222, 108);
+    } else {
+        style = [REMChartStyle getMaximizedStyle];
+        frame = CGRectMake(0, 0, 974, 605);
+    }
     
-//    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+//    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
 //    [self.view addSubview:pieWrapper.view];
 //    self.plotSource = pieWrapper;
-//    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
-//    self.plotSource = columnWidget;
-//    
-//    columnWidget.view.backgroundColor = [UIColor blackColor];
-//    columnWidget.view.hasVGridlines = YES;
-//    columnWidget.view.graphContext.hGridlineAmount = 4;
-//    [self.view addSubview:columnWidget.view];
+    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
+    self.plotSource = columnWidget;
+    columnWidget.view.backgroundColor = [UIColor blackColor];
+    columnWidget.view.hasVGridlines = YES;
+    columnWidget.view.graphContext.hGridlineAmount = 4;
+    [self.view addSubview:columnWidget.view];
     
-//    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+//    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
 //    lineWidget.view.backgroundColor = [UIColor blackColor];
 //    NSMutableArray* bands = [[NSMutableArray alloc]init];
 //    DCRange* bandRange = [[DCRange alloc]initWithLocation:0 length:20];
@@ -327,11 +333,11 @@
     [btn2 addTarget:self action:@selector(buttonPressed2:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn2];
     
-    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:miniRect data:energyViewData widgetContext:syntax style:style];
-    self.plotSource = labelingWrapper;
-    [labelingWrapper getView].backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:[labelingWrapper getView]];
-    labelingWrapper.delegate = self;
+//    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
+//    self.plotSource = labelingWrapper;
+//    [labelingWrapper getView].backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:[labelingWrapper getView]];
+//    labelingWrapper.delegate = self;
 }
 
 -(void)buttonPressed:(UIButton *)button {
