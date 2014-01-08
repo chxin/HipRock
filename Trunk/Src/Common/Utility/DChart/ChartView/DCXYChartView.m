@@ -379,7 +379,7 @@
 }
 -(void)viewPanned:(UIPanGestureRecognizer*)gesture {
     CGPoint touchPoint = [gesture locationInView:self];
-    if (CGRectContainsPoint(self.graphContext.plotRect, touchPoint)) {
+//    if (CGRectContainsPoint(self.graphContext.plotRect, touchPoint)) {
         BOOL moveEnabled = YES;
         CGPoint translation = [gesture translationInView:self];
         if (self.delegate && [self.delegate respondsToSelector:@selector(panInPlotAt:translation:)]) {
@@ -408,7 +408,7 @@
         }
         [gesture setTranslation:CGPointMake(0, 0) inView:self];
 //        NSLog(@"Pan gesture state:%d", gesture.state);
-    }
+//    }
 }
 
 -(void)viewPinched:(_DCHPinchGestureRecognizer*)gesture {
