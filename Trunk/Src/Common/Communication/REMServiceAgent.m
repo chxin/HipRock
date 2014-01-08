@@ -330,7 +330,7 @@ static int requestTimeout = 45; //(s)
 
 + (NSString *)getUserInfo
 {
-    NSString *original = [NSString stringWithFormat:@"%lld|%lld|%@|%lld",REMAppCurrentUser.userId,[REMAppCurrentCustomer.customerId longLongValue],REMAppCurrentUser.name, REMAppCurrentUser.spId];
+    NSString *original = [NSString stringWithFormat:@"%lld|%@|%lld",REMAppCurrentUser.userId,REMAppCurrentUser.name, REMAppCurrentUser.spId];
     
     NSData *encryptedData = [REMEncryptHelper AES256EncryptData:[original dataUsingEncoding:NSUTF8StringEncoding] withKey:@"41758bd9d7294737"];
     

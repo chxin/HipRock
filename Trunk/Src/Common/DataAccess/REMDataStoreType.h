@@ -59,6 +59,7 @@ typedef enum _REMDataStoreType
     REMDSBuildingAirQualityTotalUsage,
     REMDSBuildingAirQuality,
     REMDSBuildingPinningToCover,
+    REMDSBuildingInfoUpdate,
     
     /*
      * Dashboard stores
@@ -138,6 +139,7 @@ typedef enum _REMDataStoreType
     @(REMDSBuildingAirQuality) : REMJsonSvc(@"API/Building.svc/GetBuildingAirQualityData"),\
     @(REMDSBuildingAirQualityTotalUsage) : REMJsonSvc(@"API/Building.svc/GetBuildingAirQualityUsage"),\
     @(REMDSBuildingPicture) : REMDataSvc(@"API/Building.svc/GetBuildingPicture"),\
+    @(REMDSBuildingInfoUpdate) : REMJsonSvc(@"API/Building.svc/GetBuildingInfoUpdate"),\
 \
     @(REMDSBuildingPinningToCover) : REMJsonSvc(@"API/Building.svc/CreateBuildingCoverRelation"),\
 \
