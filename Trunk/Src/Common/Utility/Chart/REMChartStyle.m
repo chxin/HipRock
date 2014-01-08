@@ -105,10 +105,10 @@
     style.labelingLineColor = [REMColor colorByHexString:@"#cfcfcf"];
     style.labelingFontName = @(kBuildingFontSCRegular);
     style.labelingTooltipArcLineWidth = 0;
-    style.labelingStageMinWidth = 156;
-    style.labelingStageToLineMargin = 21;
-    style.labelingLabelToLineMargin = 21;
-    style.labelingStageMaxWidth = 403;
+    style.labelingStageMinWidth = 157;
+    style.labelingStageToLineMargin = 14;
+    style.labelingLabelToLineMargin = 14;
+    style.labelingStageMaxWidth = 434;
     style.labelingLabelWidth = 123;
     style.labelingLabelHeight = 84;
     style.labelingStageToStageTextMargin = 16;
@@ -147,6 +147,11 @@
     style.labelingTooltipViewTriangleHeight = 11;
     style.labelingTooltipViewTriangleWidth = 23;
     style.labelingTooltipViewTriangleMinPaddingToEdge = 10;
+    style.labelingArrowVMargin=12;
+    style.labelingArrowLineWidth=1;
+    style.labelingArrowWidth=5;
+    style.labelingArrowHeight=12;
+    style.labelingArrowColor=[REMColor colorByHexString:@"#c4c4c4"];
     
     return style;
 }
@@ -200,8 +205,8 @@
     style.labelingFontName = @(kBuildingFontSCRegular);
     style.labelingTooltipArcLineWidth = 0;
     style.labelingStageMinWidth = 39;
-    style.labelingStageToLineMargin = 5;
-    style.labelingLabelToLineMargin = 5;
+    style.labelingStageToLineMargin = 3;
+    style.labelingLabelToLineMargin = 3;
     style.labelingStageMaxWidth = 78;
     style.labelingLabelWidth = 34;
     style.labelingLabelHeight = 18;
@@ -233,6 +238,11 @@
     style.labelingStageHeightFor7Levels = 8;
     style.labelingStageHeightFor8Levels = 7;
     style.labelingRadius = 0.7;
+    style.labelingArrowVMargin=3;
+    style.labelingArrowLineWidth=.5;
+    style.labelingArrowWidth=1.2;
+    style.labelingArrowHeight=3;
+    style.labelingArrowColor=[REMColor colorByHexString:@"#c4c4c4"];
     
     return style;
 }

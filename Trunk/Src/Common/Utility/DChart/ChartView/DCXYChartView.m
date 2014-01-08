@@ -75,13 +75,16 @@
         self.hasVGridlines = NO;
         self.lineLayerContainer = [[CALayer alloc]init];
         self.tapGsRec = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewTapped:)];
+        self.tapGsRec.delegate = self;
         [self addGestureRecognizer:self.tapGsRec];
         self.tapGsRec.cancelsTouchesInView = NO;
         self.panGsRec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(viewPanned:)];
+        self.panGsRec.delegate = self;
         self.panGsRec.maximumNumberOfTouches = 1;
         self.panGsRec.cancelsTouchesInView = NO;
         [self addGestureRecognizer:self.panGsRec];
         self.pinchGsRec = [[_DCHPinchGestureRecognizer alloc]initWithTarget:self action:@selector(viewPinched:)];
+        self.pinchGsRec.delegate = self;
         self.pinchGsRec.cancelsTouchesInView = NO;
         [self addGestureRecognizer:self.pinchGsRec];
     }
@@ -366,7 +369,14 @@
 -(double)getXLocationForPoint:(CGPoint)point {
     return self.graphContext.hRange.location+self.graphContext.hRange.length*(point.x-self.graphContext.plotRect.origin.x)/self.graphContext.plotRect.size.width;
 }
-
+//-(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+//    CGPoint touchPoint = [gestureRecognizer locationInView:self];
+//    NSLog(@"%@", CGRectContainsPoint(self.graphContext.plotRect, touchPoint) ? @"YES" : @"NO");
+//    return CGRectContainsPoint(self.graphContext.plotRect, touchPoint);
+//}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
 -(void)viewPanned:(UIPanGestureRecognizer*)gesture {
     CGPoint touchPoint = [gesture locationInView:self];
 //    if (CGRectContainsPoint(self.graphContext.plotRect, touchPoint)) {

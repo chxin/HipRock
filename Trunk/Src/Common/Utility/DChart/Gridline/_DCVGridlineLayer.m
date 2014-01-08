@@ -12,7 +12,7 @@
 @implementation _DCVGridlineLayer
 
 -(void)drawInContext:(CGContextRef)ctx {
-    if (self.graphContext && self.graphContext.hGridlineAmount > 0) {
+    if (self.graphContext && [DCUtility getScreenXIn:self.bounds xVal:1 hRange:self.graphContext.hRange] - [DCUtility getScreenXIn:self.bounds xVal:0 hRange:self.graphContext.hRange] >= 20) {
         int start = ceil(self.graphContext.hRange.location);
         int end = floor(self.graphContext.hRange.end);
         CGContextSetLineJoin(ctx, kCGLineJoinMiter);
@@ -42,7 +42,6 @@
 -(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
     if (oldRange.length == newRange.length) {
-        
         [self setNeedsDisplay];
     } else {
         [self setNeedsDisplay];

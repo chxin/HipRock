@@ -256,6 +256,7 @@
         REMTargetEnergyData* sData = [[REMTargetEnergyData alloc]init];
         sData.energyData = energyDataArray;
         sData.target = [[REMEnergyTargetModel alloc]init];
+        sData.target.targetId = @(1);
         sData.target.name = @"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
         sData.target.uomId = 0;
         sData.target.uomName = [NSString stringWithFormat:@"UOM%i", sIndex];
@@ -265,7 +266,7 @@
     energyViewData.globalTimeRange = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10000]];
     
     NSMutableArray *labellings=[[NSMutableArray alloc]initWithCapacity:5];
-    for (int i=0; i<8; ++i) {
+    for (int i=0; i<3; ++i) {
         REMEnergyLabellingLevelData* a = [[REMEnergyLabellingLevelData alloc]init];
         a.name = @"FFFF0";
         a.maxValue = @((i + 1) * 20);
@@ -276,33 +277,39 @@
     }
     energyViewData.labellingLevelArray = labellings;
     energyViewData.targetEnergyData = sereis;
-    REMChartStyle* style = [REMChartStyle getMaximizedStyle];
-    CGRect miniRect = CGRectMake(0, 0, 222, 108);
-    CGRect maxiRect = CGRectMake(0, 0, 974, 605);
+    REMChartStyle* style = nil;
+    CGRect frame;
+    BOOL mini = NO;
+    if (mini) {
+        style = [REMChartStyle getMinimunStyle];
+        frame = CGRectMake(0, 0, 222, 108);
+    } else {
+        style = [REMChartStyle getMaximizedStyle];
+        frame = CGRectMake(0, 0, 974, 605);
+    }
     
-//    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+//    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
 //    [self.view addSubview:pieWrapper.view];
 //    self.plotSource = pieWrapper;
-//    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
-//    self.plotSource = columnWidget;
-//    
-//    columnWidget.view.backgroundColor = [UIColor blackColor];
-//    columnWidget.view.hasVGridlines = YES;
-//    columnWidget.view.graphContext.hGridlineAmount = 4;
-//    [self.view addSubview:columnWidget.view];
+    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
+    self.plotSource = columnWidget;
+    columnWidget.view.backgroundColor = [UIColor blackColor];
+    columnWidget.view.hasVGridlines = YES;
+    columnWidget.view.graphContext.hGridlineAmount = 4;
+    [self.view addSubview:columnWidget.view];
     
-    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
-    lineWidget.view.backgroundColor = [UIColor blackColor];
-    NSMutableArray* bands = [[NSMutableArray alloc]init];
-    DCRange* bandRange = [[DCRange alloc]initWithLocation:0 length:20];
-    DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
-    b.range = bandRange;
-    b.color = [UIColor colorWithRed:0.5 green:0 blue:0 alpha:0.5];
-    b.axis = lineWidget.view.yAxisList[0];
-    [bands addObject:b];
-//    [lineWidget.view setBackgoundBands:bands];
-    [self.view addSubview:lineWidget.view];
-    self.plotSource = lineWidget;
+//    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
+//    lineWidget.view.backgroundColor = [UIColor blackColor];
+//    NSMutableArray* bands = [[NSMutableArray alloc]init];
+//    DCRange* bandRange = [[DCRange alloc]initWithLocation:0 length:20];
+//    DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
+//    b.range = bandRange;
+//    b.color = [UIColor colorWithRed:0.5 green:0 blue:0 alpha:0.5];
+//    b.axis = lineWidget.view.yAxisList[0];
+//    [bands addObject:b];
+////    [lineWidget.view setBackgoundBands:bands];
+//    [self.view addSubview:lineWidget.view];
+//    self.plotSource = lineWidget;
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 605, 100, 30)];
     //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
@@ -325,7 +332,8 @@
     [btn2 setTitleColor:[REMColor colorByHexString:@"#00ff48"] forState:UIControlStateSelected];
     [btn2 addTarget:self action:@selector(buttonPressed2:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn2];
-//    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:maxiRect data:energyViewData widgetContext:syntax style:style];
+    
+//    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
 //    self.plotSource = labelingWrapper;
 //    [labelingWrapper getView].backgroundColor = [UIColor whiteColor];
 //    [self.view addSubview:[labelingWrapper getView]];

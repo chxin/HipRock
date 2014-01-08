@@ -118,14 +118,12 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         self.indicatorLayer.hidden = NO;
         CGFloat centerX = [self.labelBezierPathsCenterX[levelIndex] doubleValue];
         self.indicatorLayer.frame = CGRectMake(centerX - self.style.focusSymbolIndicatorSize / 2, self.indicatorLayer.frame.origin.y, self.indicatorLayer.frame.size.width, self.indicatorLayer.frame.size.height);
-    } else {
-        self.indicatorLayer.hidden = YES;
-    }
-    if (!REMIsNilOrNull(self.delegate) && [self.delegate respondsToSelector:@selector(focusOn:)]) {
-        if (levelIndex != self.focusLabelIndex) {
-            self.focusLabelIndex = levelIndex;
-            [self.delegate focusOn:levelIndex == INT32_MIN ? nil : self.series.labels[levelIndex]];
-            [self setNeedsDisplay];
+        if (!REMIsNilOrNull(self.delegate) && [self.delegate respondsToSelector:@selector(focusOn:)]) {
+            if (levelIndex != self.focusLabelIndex) {
+                self.focusLabelIndex = levelIndex;
+                [self.delegate focusOn:levelIndex == INT32_MIN ? nil : self.series.labels[levelIndex]];
+                [self setNeedsDisplay];
+            }
         }
     }
 }
@@ -160,18 +158,32 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     
     CGFloat radius = self.style.labelingRadius;
     
-    CGFloat plotWidth = style.labelingStageMaxWidth + style.labelingStageToLineMargin + style.labelingLineWidth + labelCount * (style.labelingLabelToLineMargin*2 + style.labelingLineWidth + style.labelingLabelWidth);
+    CGFloat plotWidth = style.labelingStageMaxWidth + style.labelingStageToLineMargin + style.labelingLineWidth + labelCount * (style.labelingLabelToLineMargin*2 + style.labelingLineWidth + style.labelingLabelWidth)+style.labelingArrowLineWidth+style.labelingArrowVMargin*2;
     CGFloat hPadding = (CGRectGetWidth(self.bounds) - plotWidth) / 2;
     
     UIFont* effFont = [UIFont fontWithName:style.labelingFontName size:style.labelingEffectFontSize];
     [self drawText:REMLocalizedString(@"Chart_Labeling_LowEnergyUse") inContext:ctx font:effFont rect:CGRectMake(hPadding, style.labelingStageToBorderMargin-style.labelingStageToStageTextMargin-style.labelingEffectFontSize+style.plotPaddingTop, 9999, 9999) alignment:NSTextAlignmentLeft color:style.labelingStageFontColor];
     [self drawText:REMLocalizedString(@"Chart_Labeling_HighEnergyUse") inContext:ctx font:effFont rect:CGRectMake(hPadding, self.frame.size.height-style.plotPaddingBottom-style.labelingStageToBorderMargin+style.labelingStageToStageTextMargin, 9999, 9999) alignment:NSTextAlignmentLeft color:style.labelingStageFontColor];
     
-    
-    CGPoint basePoint = CGPointMake(hPadding, style.plotPaddingTop + style.labelingStageToBorderMargin);
+    CGFloat arrowSpaceWidth =  style.labelingArrowLineWidth+style.labelingArrowVMargin*2;
+    CGPoint basePoint = CGPointMake(hPadding+arrowSpaceWidth, style.plotPaddingTop + style.labelingStageToBorderMargin);
     CGFloat stageWidthStep = (style.labelingStageMaxWidth - style.labelingStageMinWidth) / (stageCount - 1);
     CGFloat stageHeight = [self getStageHeight:stageCount];
     CGFloat stageVMargin = (self.bounds.size.height - style.plotPaddingTop - style.plotPaddingBottom - style.labelingStageToBorderMargin * 2 - stageHeight * stageCount) / (stageCount - 1);
+    
+    // 绘制箭头
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGContextSetFillColorWithColor(ctx, self.style.labelingArrowColor.CGColor);
+    CGPathMoveToPoint(path, NULL, hPadding+style.labelingArrowLineWidth+style.labelingArrowVMargin, style.plotPaddingTop + style.labelingStageToBorderMargin);
+    CGPathAddLineToPoint(path, NULL, hPadding+style.labelingArrowLineWidth+style.labelingArrowVMargin, style.plotPaddingTop + style.labelingStageToBorderMargin+stageHeight*stageCount+stageVMargin*(stageCount-1));
+    CGPathAddLineToPoint(path, NULL, hPadding+style.labelingArrowVMargin, style.plotPaddingTop + style.labelingStageToBorderMargin+stageHeight*stageCount+stageVMargin*(stageCount-1));
+    CGPathAddLineToPoint(path, NULL, hPadding+style.labelingArrowVMargin, style.plotPaddingTop + style.labelingStageToBorderMargin+style.labelingArrowHeight);
+    CGPathAddLineToPoint(path, NULL, hPadding+style.labelingArrowVMargin-style.labelingArrowWidth, style.plotPaddingTop + style.labelingStageToBorderMargin+style.labelingArrowHeight);
+    CGContextAddPath(ctx, path);
+    CGContextClosePath(ctx);
+    CGContextDrawPath(ctx, kCGPathFill);
+    CGPathRelease(path);
+    
     for (int i = 0; i < stageCount; i++) {
         CGFloat baseX = basePoint.x;
         CGFloat baseY = basePoint.y;
@@ -209,10 +221,9 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         CGSize stageSize = [DCUtility getSizeOfText:stageText forFont:stageTextFont];
         [self drawText:stageText inContext:ctx font:stageTextFont rect:CGRectMake(baseX+theWidth-style.labelingStageFontRightMargin-stageSize.width, baseY+(stageHeight-stageSize.height)/2+style.labelingStageFontTopMargin, stageSize.width, stageSize.height) alignment:NSTextAlignmentLeft color:[UIColor whiteColor]];
     }
-    [self drawLineAt:hPadding+style.labelingStageMaxWidth+style.labelingStageToLineMargin+style.labelingLineWidth/2 inContext:ctx];
+    [self drawLineAt:hPadding+arrowSpaceWidth+style.labelingStageMaxWidth+style.labelingStageToLineMargin+style.labelingLineWidth/2 inContext:ctx];
 
     UIFont* labelFont = [UIFont fontWithName:style.labelingFontName size:style.labelingLabelFontSize];
-    UIFont* labelValueFont = [UIFont fontWithName:style.labelingFontName size:style.labelingLabelValueFontSize];
     UIFont* labelTagNameFont = [UIFont fontWithName:style.labelingFontName size:style.labelingLabelTagNameFontSize];
     CGFloat labelHeight = style.labelingLabelHeight;
     CGFloat labelWidth = style.labelingLabelWidth;
@@ -220,9 +231,9 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         DCLabelingLabel* label = self.series.labels[i];
         
         // 分割线
-        [self drawLineAt:hPadding+style.labelingStageMaxWidth+style.labelingStageToLineMargin+style.labelingLineWidth/2+(style.labelingLabelWidth+style.labelingLabelToLineMargin*2+style.labelingLineWidth)*(i+1) inContext:ctx];
+        [self drawLineAt:hPadding+arrowSpaceWidth+style.labelingStageMaxWidth+style.labelingStageToLineMargin+style.labelingLineWidth/2+(style.labelingLabelWidth+style.labelingLabelToLineMargin*2+style.labelingLineWidth)*(i+1) inContext:ctx];
         
-        CGFloat baseX = hPadding+style.labelingStageMaxWidth+style.labelingStageToLineMargin+style.labelingLineWidth+(style.labelingLabelWidth+style.labelingLabelToLineMargin*2+style.labelingLineWidth)*i+style.labelingLabelToLineMargin;
+        CGFloat baseX = hPadding+arrowSpaceWidth+style.labelingStageMaxWidth+style.labelingStageToLineMargin+style.labelingLineWidth+(style.labelingLabelWidth+style.labelingLabelToLineMargin*2+style.labelingLineWidth)*i+style.labelingLabelToLineMargin;
         CGFloat baseY = style.plotPaddingTop+style.labelingStageToBorderMargin+stageHeight*((double)label.stage+0.5)+stageVMargin*(double)label.stage-labelHeight/2;
         CGFloat labelRightBound = baseX + labelWidth;
         UIBezierPath* aPath = nil;
@@ -257,10 +268,9 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         CGSize stageTextSize = [DCUtility getSizeOfText:label.stageText forFont:labelFont];
         [self drawText:label.name inContext:ctx font:labelTagNameFont rect:CGRectMake(baseX, style.plotPaddingTop+style.labelingLabelTagNameTopMargin, style.labelingLabelWidth, style.labelingLabelTagNameFontSize) alignment:NSTextAlignmentCenter color:style.labelingLabelValueFontColor];
         [self drawText:label.stageText inContext:ctx font:labelFont rect:CGRectMake(baseX+style.labelingLabelWidth-stageTextSize.width-style.labelingLabelFontRightMargin, baseY+style.labelingLabelFontTopMargin, stageTextSize.width, stageTextSize.height) alignment:NSTextAlignmentRight color:[UIColor whiteColor]];
-//        [self drawText:label.labelText inContext:ctx font:labelValueFont rect:CGRectMake(baseX, baseY+labelHeight+style.labelingLabelValueFontTopMarginToLabel, style.labelingLabelWidth, style.labelingLabelValueFontSize) alignment:NSTextAlignmentRight color:style.labelingLabelValueFontColor];
     }
     
-//    self.indicatorLayer
+    
     UIBezierPath* indicatorPath = [UIBezierPath bezierPath];
     self.indicatorLayer.fillColor = self.style.indicatorColor.CGColor;
     [indicatorPath moveToPoint:CGPointMake(0, 0)];
