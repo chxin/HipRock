@@ -2594,12 +2594,12 @@
 				7AB9B395183DCF1100779C5E /* REMTrendChartTooltipView.m */,
 				7A8E491A184442EB00FD1A38 /* REMRankingTooltipView.h */,
 				7A8E491B184442EB00FD1A38 /* REMRankingTooltipView.m */,
+				7A4CBAFB18741BEE0073C7BE /* REMLabelingTooltipView.h */,
+				7A4CBAFC18741BEE0073C7BE /* REMLabelingTooltipView.m */,
 				7AB9B38C183DCF1100779C5E /* REMChartTooltipItem.h */,
 				7AB9B38D183DCF1100779C5E /* REMChartTooltipItem.m */,
 				7A3F6702184C61950079A244 /* REMRankingTooltipItem.h */,
 				7AB9B3A0183DF20B00779C5E /* REMRankingTooltipItem.m */,
-				7A4CBAFB18741BEE0073C7BE /* REMLabelingTooltipView.h */,
-				7A4CBAFC18741BEE0073C7BE /* REMLabelingTooltipView.m */,
 			);
 			path = Tooltip;
 			sourceTree = "<group>";

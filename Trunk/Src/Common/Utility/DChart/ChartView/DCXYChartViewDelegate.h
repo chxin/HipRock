@@ -17,10 +17,6 @@ typedef enum _DCHRangeChangeSender {
 @protocol DCXYChartViewDelegate <NSObject>
 -(void)touchedInPlotAt:(CGPoint)point xCoordinate:(double)xLocation;
 -(void)didYIntervalChange:(double)yInterval forAxis:(DCAxis *)yAxis range:(DCRange*)range;
-/*
- * return ture to move all series with pan, otherwise the chart will not move.
- */
--(BOOL)panInPlotAt:(CGPoint)point translation:(CGPoint)translation;
 
 -(void)panStopped;
 -(void)pinchStopped;

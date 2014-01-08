@@ -300,17 +300,10 @@
 -(void)touchedInPlotAt:(CGPoint)point xCoordinate:(double)xLocation {
     if (self.chartStatus == DChartStatusNormal) {
         self.chartStatus = DChartStatusFocus;
+//        self.view.acceptPan = NO;
+//        self.view.acceptPinch = NO;
     }
     [self.view focusAroundX:xLocation];
-}
-
--(BOOL)panInPlotAt:(CGPoint)point translation:(CGPoint)translation {
-    if (self.chartStatus == DChartStatusNormal) {
-        return YES;
-    } else {
-        [self.view focusAroundX:[self.view getXLocationForPoint:point]];
-        return NO;
-    }
 }
 
 -(void)panStopped {
@@ -367,6 +360,8 @@
 
 -(void)cancelToolTipStatus {
     [super cancelToolTipStatus];
+//    self.view.acceptPinch = self.style.acceptPinch;
+//    self.view.acceptPan = self.style.acceptPan;
     [self.view defocus];
 }
 -(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {

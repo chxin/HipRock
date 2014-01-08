@@ -46,7 +46,7 @@
 
 //Splash, prefix: Splash_
 "Splash_Title" = "能源管理开放平台";
-"Splash_Copyright" = "© 2012-2013 施耐德电气（中国）有限公司版权所有";
+"Splash_Copyright" = "© 2012-2014 施耐德电气（中国）有限公司版权所有";
 
 //Login, prefix: Login_
 "Login_SkipToLoginButtonText" = "登录";

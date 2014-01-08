@@ -378,14 +378,14 @@
     return YES;
 }
 -(void)viewPanned:(UIPanGestureRecognizer*)gesture {
-    CGPoint touchPoint = [gesture locationInView:self];
+//    CGPoint touchPoint = [gesture locationInView:self];
 //    if (CGRectContainsPoint(self.graphContext.plotRect, touchPoint)) {
-        BOOL moveEnabled = YES;
+//        BOOL moveEnabled = YES;
         CGPoint translation = [gesture translationInView:self];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(panInPlotAt:translation:)]) {
-            moveEnabled = [self.delegate panInPlotAt:touchPoint translation:translation];
-        }
-        if (moveEnabled) {
+//        if (self.delegate && [self.delegate respondsToSelector:@selector(panInPlotAt:translation:)]) {
+//            moveEnabled = [self.delegate panInPlotAt:touchPoint translation:translation];
+//        }
+//        if (moveEnabled) {
             if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed) {
                 if (!self.blockReboundAnimation) {
                     if (self.graphContext.hRange.location < self.graphContext.globalHRange.location || self.graphContext.hRange.length > self.graphContext.globalHRange.length) {
@@ -405,7 +405,7 @@
                     self.graphContext.hRange = newRange;
                 }
             }
-        }
+//        }
         [gesture setTranslation:CGPointMake(0, 0) inView:self];
 //        NSLog(@"Pan gesture state:%d", gesture.state);
 //    }

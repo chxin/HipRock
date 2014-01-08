@@ -55,8 +55,8 @@
     if (self.view.focusPointIndex < self.view.series.datas.count && self.view.focusPointIndex != self.focusIndex && self.chartStatus == DChartStatusFocus) {
         self.focusIndex = self.view.focusPointIndex;
         DCPieDataPoint* piePoint = self.view.series.datas[self.view.focusPointIndex];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:color:name:direction:)]) {
-            [((id<REMTPieChartDelegate>)self.delegate) highlightPoint:piePoint.energyData color:piePoint.color name:piePoint.target.name direction:self.view.rotateDirection];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:direction:)]) {
+            [((id<REMTPieChartDelegate>)self.delegate) highlightPoint:piePoint direction:self.view.rotateDirection];
         }
     }
 }
