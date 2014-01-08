@@ -13,6 +13,7 @@
 #import "REMEnergyTargetModel.h"
 #import "REMColor.h"
 #import "DCLabelingLabel.h"
+#import "DCPieDataPoint.h"
 
 typedef enum _DCLineType {
     DCLineTypeDefault = 0,
@@ -55,7 +56,7 @@ typedef enum _REMDirection{
  * colors: List<UIColor>
  * names: List<NSString>
  */
--(void)highlightPoint:(REMEnergyData*)point color:(UIColor*)color name:(NSString*)name direction:(REMDirection)direction;
+-(void)highlightPoint:(DCPieDataPoint*)point direction:(REMDirection)direction;
 
 @end
 
