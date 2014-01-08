@@ -121,6 +121,12 @@
 @property (nonatomic,assign) CGFloat labelingTooltipViewTriangleWidth;
 @property (nonatomic,assign) CGFloat labelingTooltipViewTriangleHeight;
 @property (nonatomic,assign) CGFloat labelingTooltipViewTriangleMinPaddingToEdge;
+
+@property (nonatomic,assign) CGFloat labelingArrowVMargin;
+@property (nonatomic,assign) CGFloat labelingArrowLineWidth;
+@property (nonatomic,assign) CGFloat labelingArrowWidth;
+@property (nonatomic,assign) CGFloat labelingArrowHeight;
+@property (nonatomic,strong) UIColor* labelingArrowColor;
 //@property (nonatomic,assign) 
 
 /****** Labeling Style End *******/
