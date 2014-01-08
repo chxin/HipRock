@@ -18,6 +18,7 @@
 @property (nonatomic,strong) NSString *title;
 @property (nonatomic,strong) NSNumber *value;
 @property (nonatomic,strong) NSString *uom;
+//@property (nonatomic) BOOL hidden;
 
 @end
 
