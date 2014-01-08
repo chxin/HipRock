@@ -13,7 +13,7 @@
 @interface REMWidgetBuildingCoverViewController ()
 
 @property (nonatomic,strong) NSMutableArray *currentSelectedArray;
-@property (nonatomic,strong) NSIndexPath *selectedPath;
+@property (nonatomic,strong) NSMutableArray *selectedPathArray;
 @end
 
 @implementation REMWidgetBuildingCoverViewController
@@ -31,15 +31,15 @@
         NSInteger row=NSNotFound;
         if ([dic objectForKey:@"firstSelected"]!=nil) {
             row=0;
-        }
-        else if([dic objectForKey:@"secondSelected"]!=nil){
-            row=1;
-        }
-        if (row != NSNotFound) {
             NSIndexPath *path=[NSIndexPath indexPathForRow:row inSection:section];
-            self.selectedPath=path;
+            [self.selectedPathArray addObject:path];
             [self.currentSelectedArray addObject:path];
-            break;
+        }
+        if([dic objectForKey:@"secondSelected"]!=nil){
+            row=1;
+            NSIndexPath *path=[NSIndexPath indexPathForRow:row inSection:section];
+            [self.selectedPathArray addObject:path];
+            [self.currentSelectedArray addObject:path];
         }
     }
 }
@@ -143,21 +143,29 @@
         REMCommodityModel *commodity=self.buildingInfo.commodityArray[path.section-1];
         dic[@"CommodityId"]=commodity.commodityId;
         dic[@"Position"]= @((REMBuildingCoverWidgetPosition)path.row);
-        if (path.section == self.selectedPath.section && path.row == self.selectedPath.row) {
-            includeCurrent=YES;
-        }
+        
         [array addObject:dic];
     }
-    if (includeCurrent==NO && self.selectedPath!=nil) {
-        NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-        dic[@"HierarchyId"]=self.buildingInfo.building.buildingId;
-        dic[@"WidgetId"]=self.detailController.widgetInfo.widgetId;
-        dic[@"DashboardId"]=self.dashboardInfo.dashboardId;
+    for (NSIndexPath *path in self.selectedPathArray) {
+        BOOL found=NO;
+        for (NSIndexPath *current in self.currentSelectedArray) {
+            if (current.section == path.section && current.row == path.row) {
+                found=YES;
+                break;
+            }
+        }
+        if (found==NO) {
+            NSMutableDictionary *dic=[NSMutableDictionary dictionary];
+            dic[@"HierarchyId"]=self.buildingInfo.building.buildingId;
+            dic[@"WidgetId"]=self.detailController.widgetInfo.widgetId;
+            dic[@"DashboardId"]=self.dashboardInfo.dashboardId;
+            
+            REMCommodityModel *commodity=self.buildingInfo.commodityArray[path.section-1];
+            dic[@"CommodityId"]=commodity.commodityId;
+            dic[@"Position"]= @(-1);
+            [array addObject:dic];
+        }
         
-        REMCommodityModel *commodity=self.buildingInfo.commodityArray[self.selectedPath.section-1];
-        dic[@"CommodityId"]=commodity.commodityId;
-        dic[@"Position"]= @(-1);
-        [array addObject:dic];
     }
     self.isRequesting=YES;
     REMCustomerModel *customer=REMAppCurrentCustomer;
