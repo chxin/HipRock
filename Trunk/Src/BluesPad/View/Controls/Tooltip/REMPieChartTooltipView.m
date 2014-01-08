@@ -266,27 +266,41 @@
     if(self.highlightedPoints.count <=0)
         return 0;
     
-    REMEnergyData *point = self.highlightedPoints[0];
+    DCPieDataPoint *point = self.highlightedPoints[0];
     
     if(REMIsNilOrNull(point))
         return 0;
     
-    NSMutableArray *energyData = [[NSMutableArray alloc] init];
-    for(REMTargetEnergyData *targetData in self.data.targetEnergyData){
-        if(!REMIsNilOrNull(targetData) && !REMIsNilOrNull(targetData.energyData) && targetData.energyData.count > 0){
-            [energyData addObject:targetData];
-        }
-    }
+    DCPieDataPoint *currentPoint = self.highlightedPoints[0];
     
-    for(int i=0;i<energyData.count;i++){
-        REMTargetEnergyData *targetData = energyData[i];
-        
-        if(REMIsNilOrNull(targetData.energyData) || targetData.energyData.count <= 0)
+    int index = 0;
+    for(DCPieDataPoint *brotherPoint in ((DCPieSeries *)currentPoint.series).datas){
+        if(brotherPoint.hidden)
             continue;
         
-        if([point isEqual:targetData.energyData[0]])
-            return i;
+        if([brotherPoint isEqual:currentPoint])
+            return index;
+        
+        index++;
     }
+    
+    
+//    NSMutableArray *energyData = [[NSMutableArray alloc] init];
+//    for(REMTargetEnergyData *targetData in self.data.targetEnergyData){
+//        if(!REMIsNilOrNull(targetData) && !REMIsNilOrNull(targetData.energyData) && targetData.energyData.count > 0){
+//            [energyData addObject:targetData];
+//        }
+//    }
+//    
+//    for(int i=0;i<energyData.count;i++){
+//        REMTargetEnergyData *targetData = energyData[i];
+//        
+//        if(REMIsNilOrNull(targetData.energyData) || targetData.energyData.count <= 0)
+//            continue;
+//        
+//        if([point isEqual:targetData.energyData[0]])
+//            return i;
+//    }
     
     return 0;
 }
