@@ -50,7 +50,7 @@
         self.backgroundColor = [REMColor colorByHexString:kDMChart_LegendItemBackgroundColor];
         
         //add indicator
-        REMChartSeriesIndicator *indicator = model.isBenchmark ? [REMChartSeriesIndicator indicatorWithType:REMChartSeriesIndicatorLine andColor:[REMColor colorByHexString:kDMChart_BenchmarkColor]] : [REMChartSeriesIndicator indicatorWithType:model.type andColor:[REMColor colorByIndex:model.index].uiColor];
+        REMChartSeriesIndicator *indicator = model.isBenchmark ? [REMChartSeriesIndicator indicatorWithType:REMChartSeriesIndicatorLine andColor:[REMColor colorByHexString:kDMChart_BenchmarkColor]] : [REMChartSeriesIndicator indicatorWithType:model.type andColor:[REMColor colorByIndex:model.index]];
         indicator.frame = kREMLegendInnerIndicatorFrame;
         [self addSubview:indicator];
         self.indicator = indicator;

@@ -106,6 +106,10 @@
 "Setting_CustomerInfo"="客户信息";
 "Setting_Logout"="退出登录";
 "Setting_AreYouSureLogout"="您要退出当前账号登录吗?";
+"Setting_AboutProductName"="施耐德电气“云能效”管理平台";
+"Setting_AboutVersion"="iPad版V%@"; //iPad版V1.0.0
+"Setting_AboutCopyrightChinese"="施耐德电气 版权所有";
+"Setting_AboutCopyrightEnglish"="Copyright@%@ Schneider Electric All Right Reserved";
 
 
 //Map, prefix: Map_

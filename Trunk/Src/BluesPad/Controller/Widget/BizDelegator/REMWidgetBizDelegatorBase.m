@@ -82,6 +82,16 @@
     return NO;
 }
 
+- (BOOL)shouldEnablePinToBuildingCoverButton
+{
+    if (self.ownerController.buildingInfo.commodityArray.count!=0) {
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
+
 - (void)showChart{
     if (self.energyData) {
         [self processEnergyDataInnerError:self.energyData];

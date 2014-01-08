@@ -25,7 +25,7 @@
 @property (nonatomic,weak) CALayer *bottomGradientLayer;
 @property (nonatomic,weak) UILabel *buildingTypeTitleView;
 @property (nonatomic,weak) UILabel *buildingTitleView;
-@property (nonatomic,weak) UIButton *logoButton;
+@property (nonatomic,weak) UIImageView *logoButton;
 @property (nonatomic,strong) NSString *loadingImageKey;
 
 @property (nonatomic,weak) UIImageView *cropTitleView;
@@ -250,12 +250,19 @@
     
     [self.container addSubview:backButton];
     self.backButton=backButton;
+    
+    UIButton *settingButton=self.settingButton;
+    [settingButton removeTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [settingButton addTarget:self.parentViewController action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.container addSubview:settingButton];
+    
+    
     UIButton *shareButton=[UIButton buttonWithType:UIButtonTypeCustom];
     if (REMISIOS7) {
         shareButton=[UIButton buttonWithType:UIButtonTypeSystem];
         [shareButton setTintColor:[UIColor whiteColor]];
     }
-    [shareButton setFrame:CGRectMake(950, backButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonWidth)];
+    [shareButton setFrame:CGRectMake(settingButton.frame.origin.x-kDMCommon_TopLeftButtonWidth-10, backButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonWidth)];
     [shareButton setImage:REMIMG_Share_normal forState:UIControlStateNormal];
     //if (self.buildingInfo.commodityUsage.count == 0) {
     shareButton.enabled = NO;
@@ -269,6 +276,7 @@
     [shareButton addTarget:self.parentViewController action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.container addSubview:shareButton];
+    
     self.shareButton=shareButton;
 }
 
@@ -308,14 +316,14 @@
     self.buildingTitleView=titleLabel;
     
     
-    UIButton *logoButton = [self getCustomerLogoButton];
+    UIImageView *logoButton = self.customerLogoButton;
     [logoButton setFrame:CGRectMake(self.backButton.frame.origin.x+self.backButton.frame.size.width, kDMCommon_CustomerLogoTop, logoButton.frame.size.width, logoButton.frame.size.height)];
     
     //[logoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
     
-    logoButton.titleLabel.text=@"logo";
-    [logoButton removeTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [logoButton addTarget:self.parentViewController action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+//    logoButton.titleLabel.text=@"logo";
+//    [logoButton removeTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+//    [logoButton addTarget:self.parentViewController action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     
     [self.container addSubview:logoButton];
@@ -650,6 +658,14 @@
         }
     }
     // Dispose of any resources that can be recreated.
+}
+
+- (void)releaseAllDataView{
+    if (self.childViewControllers.count>0) {
+        UIViewController *controller= self.childViewControllers[0];
+        [self releaseViewInController:@[controller]];
+    }
+    
 }
 
 - (void)exportImage:(void (^)(UIImage *, NSString*))callback

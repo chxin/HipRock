@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "REMBuildingChartBaseViewController.h"
-#import "REMChartHorizonalScrollDelegator.h"
 
 @interface REMBuildingAverageViewController : REMBuildingChartBaseViewController
 

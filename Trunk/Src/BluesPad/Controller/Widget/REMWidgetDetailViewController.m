@@ -130,9 +130,10 @@ const static CGFloat kWidgetShareTitleFontSize=14;
             
         }
         [pinButton setFrame:CGRectMake(750, kWidgetBackButtonTop, 32, 32)];
-        [pinButton setImage:REMIMG_Back_Chart forState:UIControlStateNormal];
+        [pinButton setImage:[UIImage imageNamed:@"ChartCustomization"] forState:UIControlStateNormal];
         [pinButton addTarget:self action:@selector(pinButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.titleContainer addSubview:pinButton];
+        [pinButton setEnabled:[self.bizDelegator shouldEnablePinToBuildingCoverButton]];
     }
     
 }
@@ -157,30 +158,36 @@ const static CGFloat kWidgetShareTitleFontSize=14;
         NSMutableDictionary *dic=[NSMutableDictionary dictionary];
         dic[@"name"]= commodity.comment;
         dic[@"Id"]=commodity.commodityId;
-        BOOL found=NO;
+        BOOL foundFirst=NO;
+        BOOL foundSecond=NO;
         for (REMBuildingCoverWidgetRelationModel *relation in self.buildingInfo.widgetRelationArray) {
             if ([relation.commodityId isEqualToNumber:commodity.commodityId]==YES) {
-                found=YES;
                 REMWidgetObject *widget=[self widgetByRelation:relation];
-                if (widget!=nil) {
+                if (widget!=nil && [widget.widgetId isGreaterThan:@(0)]==YES) {
                     if (relation.position == REMBuildingCoverWidgetPositionFirst) {
+                        foundFirst=YES;
                         dic[@"firstName"]=widget.name;
                         dic[@"firstId"]=widget.widgetId;
+                        dic[@"firstDashboardId"]=relation.dashboardId;
                         dic[@"firstSelected"]=@(1);
                     }
                     else{
+                        foundSecond=YES;
                         dic[@"secondName"]=widget.name;
                         dic[@"secondId"]=widget.widgetId;
+                        dic[@"secondDashboardId"]=relation.dashboardId;
                         dic[@"secondSelected"]=@(1);
                     }
                     
                 }
             }
         }
-        if (found==NO) {
-            dic[@"firstName"]=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByCommodity", @""),commodity.comment];
+        if (foundFirst==NO) {
+            dic[@"firstName"]=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @""),commodity.comment];
             dic[@"firstId"]=@(-1);
-            dic[@"secondName"]=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @""),commodity.comment];
+        }
+        if (foundSecond==NO) {
+            dic[@"secondName"]=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByCommodity", @""),commodity.comment];
             dic[@"secondId"]=@(-2);
         }
         [array addObject:dic];
@@ -193,6 +200,9 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     UIStoryboard *mainStoryboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     UINavigationController *nav= [mainStoryboard instantiateViewControllerWithIdentifier:@"widgetBuildingCoverNavigation"];
     REMWidgetBuildingCoverViewController *buildingCoverWidgetController=nav.childViewControllers[0];
+    buildingCoverWidgetController.buildingInfo=self.buildingInfo;
+    buildingCoverWidgetController.detailController=self;
+    buildingCoverWidgetController.dashboardInfo=self.dashboardInfo;
     buildingCoverWidgetController.data=[self piningWidgetList];
     UIPopoverController *popController=[[UIPopoverController alloc]initWithContentViewController:nav];
     popController.popoverContentSize=CGSizeMake(350, 400);
@@ -204,10 +214,20 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     
     
 }
+- (void)updateBuildingCover{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateBuildingCoverRelation" object:nil];
+    self.popController=nil;
+}
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
-    self.popController=nil;
+    UINavigationController *nav=(UINavigationController *)popoverController.contentViewController;
+    REMWidgetBuildingCoverViewController *pinController=nav.childViewControllers[0];
+    
+    if (pinController.isRequesting==NO) {
+        self.popController=nil;
+    }
+    
 }
 
 - (void)showChart

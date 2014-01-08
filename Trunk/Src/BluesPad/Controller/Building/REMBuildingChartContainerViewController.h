@@ -14,9 +14,9 @@
 
 @property (nonatomic) CGRect viewFrame;
 @property (nonatomic,strong) Class chartHandlerClass;
-@property (nonatomic,weak) NSNumber *buildingId;
-@property (nonatomic,weak) NSNumber *commodityId;
-@property (nonatomic,weak) REMWidgetObject *widgetInfo;
+@property (nonatomic,copy) NSNumber *buildingId;
+@property (nonatomic,copy) NSNumber *commodityId;
+@property (nonatomic,strong) REMWidgetObject *widgetInfo;
 
 
 @end

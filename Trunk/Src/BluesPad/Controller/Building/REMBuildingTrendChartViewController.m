@@ -7,7 +7,6 @@
  --------------------------------------------------------------------------*///
 
 #import "REMBuildingTrendChartViewController.h"
-#import "REMWidgetAxisHelper.h"
 #import "REMBuildingTimeRangeDataModel.h"
 #import "REMTimeHelper.h"
 #import "REMBuildingTrendWrapper.h"
