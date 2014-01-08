@@ -12,6 +12,8 @@
 #import "REMDimensions.h"
 #import "REMChartTooltipItem.h"
 #import "REMTextIndicatorFormator.h"
+#import "DCPieDataPoint.h"
+#import "DCPieSeries.h"
 
 #define kPieTooltipItemBaseLeft (kDMChart_TooltipContentWidth - kDMChart_TooltipItemWidth) / 2
 #define REMPieTooltipItemFrame(i) CGRectMake(kPieTooltipItemBaseLeft + (i)*(kDMChart_TooltipItemWidth + kMDChart_TooltipItemLeftOffset), 0, kDMChart_TooltipItemWidth, kDMChart_TooltipContentHeight)
@@ -55,28 +57,53 @@
     //NSLog(@"highlight index: %d", self.highlightIndex);
     NSMutableArray *itemModels = [[NSMutableArray alloc] init];
     
-    for(int i=0;i<self.data.targetEnergyData.count;i++){
-        REMTargetEnergyData *targetData = self.data.targetEnergyData[i];
-        
-        if(REMIsNilOrNull(targetData) || REMIsNilOrNull(targetData.energyData) || targetData.energyData.count<=0 || REMIsNilOrNull(targetData.energyData[0])){
+    DCPieDataPoint *currentPoint = self.highlightedPoints[0];
+    
+    int index = 0;
+    for(DCPieDataPoint *brotherPoint in ((DCPieSeries *)currentPoint.series).datas){
+        if(brotherPoint.hidden)
             continue;
-        }
         
         REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
-        model.title = [self formatTargetName:targetData.target];
-        model.value = [targetData.energyData[0] dataValue];
-        model.color = [REMColor colorByIndex:i];
-        model.index = i;
+        model.title = [self formatTargetName:brotherPoint.target];
+        model.value = brotherPoint.value;
+        model.color = brotherPoint.color;
+        model.index = index;
         
-        if(REMIsNilOrNull(targetData.target.uomName)){
-            model.uom = REMUoms[@(targetData.target.uomId)];
+        if(REMIsNilOrNull(brotherPoint.target.uomName)){
+            model.uom = REMUoms[@(brotherPoint.target.uomId)];
         }
         else{
-            model.uom = targetData.target.uomName;
+            model.uom = brotherPoint.target.uomName;
         }
         
         [itemModels addObject:model];
+        
+        index++;
     }
+    
+//    for(int i=0;i<self.data.targetEnergyData.count;i++){
+//        REMTargetEnergyData *targetData = self.data.targetEnergyData[i];
+//        
+//        if(REMIsNilOrNull(targetData) || REMIsNilOrNull(targetData.energyData) || targetData.energyData.count<=0 || REMIsNilOrNull(targetData.energyData[0])){
+//            continue;
+//        }
+//        
+//        REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
+//        model.title = [self formatTargetName:targetData.target];
+//        model.value = [targetData.energyData[0] dataValue];
+//        model.color = [REMColor colorByIndex:i];
+//        model.index = i;
+//        
+//        if(REMIsNilOrNull(targetData.target.uomName)){
+//            model.uom = REMUoms[@(targetData.target.uomId)];
+//        }
+//        else{
+//            model.uom = targetData.target.uomName;
+//        }
+//        
+//        [itemModels addObject:model];
+//    }
     
     return itemModels;
 }
