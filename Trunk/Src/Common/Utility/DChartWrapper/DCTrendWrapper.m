@@ -11,6 +11,7 @@
 #import "DCDataPoint.h"
 #import "DCXYChartBackgroundBand.h"
 #import "DCTrendAnimationManager.h"
+#import "REMWidgetStepCalculationModel.h"
 
 @interface DCTrendWrapper()
 @property (nonatomic, weak) DCContext* graphContext;
@@ -18,7 +19,7 @@
 @property (nonatomic) NSString* xtypeOfWidget;
 @property (nonatomic,strong) NSMutableArray* hiddenSeriesTargetsId;
 @property (nonatomic, strong) DCTrendAnimationManager* animationManager;
-@property (nonatomic, strong) NSNumber* panSpeed;
+@property (nonatomic, assign) double panSpeed;
 @end
 
 @implementation DCTrendWrapper
@@ -35,7 +36,7 @@
         self.hiddenSeriesTargetsId = [[NSMutableArray alloc]init];
         
         self.animationManager = [[DCTrendAnimationManager alloc]init];
-        
+        self.animationManager.delegate = self;
         NSDictionary* dic = [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
         self.myStableRange = dic[@"beginRange"];
         [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:widgetSyntax.step.integerValue];
@@ -274,101 +275,6 @@
     return self.energyViewData.targetEnergyData.count;
 }
 
--(void)touchedInPlotAt:(CGPoint)point xCoordinate:(double)xLocation {
-    if (self.chartStatus == DChartStatusNormal) {
-        self.chartStatus = DChartStatusFocus;
-//        self.view.acceptPan = NO;
-        self.view.acceptPinch = NO;
-    }
-    [self.view focusAroundX:xLocation];
-}
-
--(void)panWithSpeed:(CGFloat)speed panStopped:(BOOL)stopped {
-    if (!stopped) self.panSpeed = @(speed);
-    if (self.chartStatus != DChartStatusNormal || !stopped) return;
-    
-    if (self.sharedProcessor.step == REMEnergyStepHour) {
-        self.myStableRange = self.view.graphContext.hRange;
-    } else {
-        NSLog(@"pan translation x:%f", self.panSpeed.doubleValue);
-        [self.animationManager animateHRangeWithSpeed: REMIsNilOrNull(self.panSpeed) ? 0 : self.panSpeed.doubleValue];
-    }
-    self.panSpeed = nil;
-}
-
--(void)didHRangeApplyToView:(DCRange *)range {
-    DCRange* globalRange = self.view.graphContext.globalHRange;
-    double location = range.location;
-    double end = range.end;
-    if (location < globalRange.location) {
-        location = globalRange.location;
-    }
-    if (end > globalRange.end) {
-        end = globalRange.end;
-    }
-    self.myStableRange = [[DCRange alloc]initWithLocation:location length:end-location];
-}
-
--(void)setMyStableRange:(DCRange *)myStableRange {
-    if (![DCRange isRange:self.myStableRange equalTo:myStableRange]) {
-        _myStableRange = myStableRange;
-        // FIRE to delegate
-//        if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
-//            if (![DCRange isRange:self.myStableRange equalTo:myNewRange]) {
-//                id param0, param1;
-//                if (self.sharedProcessor == nil) {
-//                    param0 = @(rangeStart);
-//                    param1 = @(rangeEnd);
-//                } else {
-//                    param0 = [self.sharedProcessor deprocessX:rangeStart];
-//                    param1 = [self.sharedProcessor deprocessX:rangeEnd];
-//                }
-//                shouldChange = (BOOL)[self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
-//            }
-//        }
-    }
-}
-
--(void)gestureStopped {
-    DCRange* newRange = self.graphContext.hRange;
-    double rangeStart = newRange.location;
-    double rangeEnd = newRange.location + newRange.length;
-    if (self.sharedProcessor && self.sharedProcessor.step == REMEnergyStepHour) {
-        // Nothing to do. Delegate will reload data from server when step is hour.
-    } else {
-        if (rangeStart < self.graphContext.globalHRange.location) {
-            rangeStart = self.graphContext.globalHRange.location;
-            rangeEnd = self.graphContext.globalHRange.location + newRange.length;
-        }
-        if (rangeEnd > self.graphContext.globalHRange.end) {
-            rangeEnd = self.graphContext.globalHRange.end;
-            rangeStart = rangeEnd - newRange.length;
-        }
-        newRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
-    }
-    self.myStableRange = newRange;
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(touchEndedInNormalStatus:end:)]) {
-        if (self.sharedProcessor == nil) {
-            [self.delegate performSelector:@selector(touchEndedInNormalStatus:end:) withObject:@(rangeStart) withObject:@(rangeEnd)];
-        } else {
-            [self.delegate performSelector:@selector(touchEndedInNormalStatus:end:) withObject:[self.sharedProcessor deprocessX:rangeStart] withObject:[self.sharedProcessor deprocessX:rangeEnd]];
-        }
-    }
-}
-
--(void)pinchStopped {
-    [self gestureStopped];
-}
-
-
--(void)focusPointChanged:(NSArray *)dcpoints at:(int)x {
-    if (self.delegate && [[self.delegate class] conformsToProtocol:@protocol(REMTrendChartDelegate)]) {
-        id xVal = (REMIsNilOrNull(self.sharedProcessor)) ? @(x) : [self.sharedProcessor deprocessX:x];
-        [(id<REMTrendChartDelegate>)self.delegate highlightPoints:dcpoints x:xVal];
-    }
-}
-
 -(NSUInteger)getVisableSeriesCount {
     NSUInteger count = 0;
     for (DCXYSeries* s in self.view.seriesList) {
@@ -463,67 +369,115 @@
     [self.view setBackgoundBands:bands];
 }
 
--(BOOL)testHRangeChange:(DCRange *)newRange oldRange:(DCRange *)oldRange sendBy:(DCHRangeChangeSender)senderType {
-    if (senderType == DCHRangeChangeSenderByAnimation || senderType == DCHRangeChangeSenderByInitialize) return YES;
-    if ([DCRange isRange:oldRange equalTo:newRange]) return NO;
-    
-    if (senderType == DCHRangeChangeSenderByUserPan) {
-        double rangeStart = newRange.location;
-        double rangeEnd = newRange.end;
-        if (rangeStart < self.graphContext.globalHRange.location) {
-            rangeStart = self.graphContext.globalHRange.location;
-            rangeEnd = self.graphContext.globalHRange.location + newRange.length;
-        }
-        if (rangeEnd > self.graphContext.globalHRange.end) {
-            rangeEnd = self.graphContext.globalHRange.end;
-            rangeStart = rangeEnd - newRange.length;
-        }
-        
-        DCRange* myNewRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
-        BOOL shouldChange = YES;
-        if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
-            if (![DCRange isRange:self.myStableRange equalTo:myNewRange]) {
-                id param0, param1;
-                if (self.sharedProcessor == nil) {
-                    param0 = @(rangeStart);
-                    param1 = @(rangeEnd);
-                } else {
-                    param0 = [self.sharedProcessor deprocessX:rangeStart];
-                    param1 = [self.sharedProcessor deprocessX:rangeEnd];
-                }
-                shouldChange = (BOOL)[self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
-            }
-        }
-        if (shouldChange) self.myStableRange = myNewRange;
-        return shouldChange;
-    } else if (senderType == DCHRangeChangeSenderByUserPinch) {
-        BOOL shouldChange = YES;
-        if (self.chartStatus != DChartStatusNormal) {
-            shouldChange = NO;
-        } else {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
-                id param0, param1;
-                if (self.sharedProcessor == nil) {
-                    param0 = @(newRange.location);
-                    param1 = @(newRange.end);
-                } else {
-                    param0 = [self.sharedProcessor deprocessX:newRange.location];
-                    param1 = [self.sharedProcessor deprocessX:newRange.end];
-                }
-                shouldChange = (BOOL)[self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
-            }
-        }
-        if (shouldChange) {
-            self.myStableRange = newRange;
-            [self updateCalender];
-        }
-        return shouldChange;
-    }
-    return YES;
-}
 
-//######
+#pragma mark - DCXYChartViewDelegate implementation
+-(void)touchedInPlotAt:(CGPoint)point xCoordinate:(double)xLocation {
+    if (self.chartStatus == DChartStatusNormal) {
+        self.chartStatus = DChartStatusFocus;
+        //        self.view.acceptPan = NO;
+        self.view.acceptPinch = NO;
+    }
+    [self.view focusAroundX:xLocation];
+}
 -(void)didYIntervalChange:(double)yInterval forAxis:(DCAxis *)yAxis range:(DCRange*)range {
     // Nothing to do.
+}
+-(void)panWithSpeed:(CGFloat)speed panStopped:(BOOL)stopped {
+    if (!stopped) self.panSpeed = speed;
+    if (self.chartStatus != DChartStatusNormal) return;
+    
+    DCRange* globalRange = self.graphContext.globalHRange;
+    DCRange* range = self.graphContext.hRange;
+    double rangeLength = range.length;
+    double rangeLocation = range.location;
+    if (rangeLocation < globalRange.location) rangeLocation = globalRange.location;
+    if (range.end > globalRange.end) rangeLocation = globalRange.end - rangeLength;
+    self.myStableRange = [[DCRange alloc]initWithLocation:rangeLocation length:rangeLength];
+    
+    if (stopped) {
+        if (self.sharedProcessor.step == REMEnergyStepHour) {
+            self.myStableRange = self.view.graphContext.hRange;
+        } else {
+            [self.animationManager animateHRangeWithSpeed: self.panSpeed];
+        }
+        self.panSpeed = 0;
+        [self fireGestureStoppedEvent];
+    }
+}
+-(void)pinchStopped {
+    [self fireGestureStoppedEvent];
+}
+-(void)fireGestureStoppedEvent {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(pinchStoppedBetween:end:)]) {
+        DCRange* newRange = self.myStableRange;
+        double rangeStart = newRange.location;
+        double rangeEnd = newRange.location + newRange.length;
+        id start, end;
+        if (!REMIsNilOrNull(self.sharedProcessor)) {
+            if (self.sharedProcessor.step != REMEnergyStepHour && self.sharedProcessor.step != REMEnergyStepNone) {
+                start = [self.sharedProcessor deprocessX:rangeStart];
+                end = [self.sharedProcessor deprocessX:rangeEnd];
+            } else {
+                start = @(rangeStart);
+                end = @(rangeEnd);
+            }
+        }
+        [self.delegate performSelector:@selector(pinchStoppedBetween:end:) withObject:start withObject:end];
+    }
+}
+-(void)focusPointChanged:(NSArray *)dcpoints at:(int)x {
+    if (self.delegate && [[self.delegate class] conformsToProtocol:@protocol(REMTrendChartDelegate)]) {
+        id xVal = (REMIsNilOrNull(self.sharedProcessor)) ? @(x) : [self.sharedProcessor deprocessX:x];
+        [(id<REMTrendChartDelegate>)self.delegate highlightPoints:dcpoints x:xVal];
+    }
+}
+-(DCRange*)updatePinchRange:(DCRange *)newRange {
+    REMEnergyStep myStep = self.sharedProcessor.step;
+    if (myStep == REMEnergyStepNone) return newRange;
+    
+    NSUInteger newRangeTimeInterval = [[self.sharedProcessor deprocessX:newRange.end] timeIntervalSinceDate:[self.sharedProcessor deprocessX:newRange.location]];
+    DCRange* globalRange = self.graphContext.globalHRange;
+    
+    NSRange lengthRange = [[REMWidgetStepCalculationModel getStepIntervalRanges][myStep] rangeValue];
+    NSUInteger lengthRangeEnd = (lengthRange.length == NSUIntegerMax) ? NSUIntegerMax : (lengthRange.location + lengthRange.length);
+    if (newRange.location >= globalRange.location && newRange.end <= globalRange.end && newRangeTimeInterval > lengthRange.location && newRangeTimeInterval <= lengthRangeEnd) {
+        self.myStableRange = newRange;
+        return newRange;
+    } else {
+        self.myStableRange = self.graphContext.hRange;
+        return self.graphContext.hRange;
+    }
+}
+
+#pragma mark - DCTrendAnimationDelegate implementation
+-(void)didHRangeApplyToView:(DCRange*)range finalRange:(DCRange*)finalRange {
+    DCRange* globalRange = self.view.graphContext.globalHRange;
+    BOOL isAStableRange = (range.location >= globalRange.location) && (range.end <= globalRange.end);
+    if (isAStableRange) {
+        self.myStableRange = range;
+    } else {
+        self.myStableRange = finalRange;
+    }
+}
+
+
+
+#pragma mark - Fire to REMTrendChartDelegate
+-(void)setMyStableRange:(DCRange *)myStableRange {
+    if (![DCRange isRange:self.myStableRange equalTo:myStableRange]) {
+        _myStableRange = myStableRange;
+        // FIRE to delegate
+        if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
+            id param0, param1;
+            if (self.sharedProcessor == nil) {
+                param0 = @(myStableRange.location);
+                param1 = @(myStableRange.end);
+            } else {
+                param0 = [self.sharedProcessor deprocessX:myStableRange.location];
+                param1 = [self.sharedProcessor deprocessX:myStableRange.end];
+            }
+            [self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
+        }
+    }
 }
 @end

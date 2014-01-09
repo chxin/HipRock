@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @protocol DCTrendAnimationDelegate <NSObject>
--(void)didHRangeApplyToView:(DCRange*)range;
+-(void)didHRangeApplyToView:(DCRange*)range finalRange:(DCRange*)finalRange;
 @end

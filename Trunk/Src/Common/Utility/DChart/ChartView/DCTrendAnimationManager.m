@@ -55,37 +55,6 @@
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animateFramesTarget:) userInfo:hRangeFrames repeats:YES];
 }
 
--(void)animateHRangeLocationFrom:(double)from to:(double)to speed:(double)speed {
-    if (from == to || REMIsNilOrNull(self.view)) return;
-    CGFloat graphLength = self.view.graphContext.hRange.length;
-    CGFloat speedThreshold = graphLength / 100; // 速度小于此值则停止惯性，并开始计算到To位置的帧
-    NSMutableArray* hRangeFrames = [[NSMutableArray alloc]init];
-    double currentLocation = from;
-    while (fabs(speed) >= speedThreshold) {
-        speed = speed * 0.8;
-        currentLocation += speed;
-        [hRangeFrames addObject:[[DCRange alloc] initWithLocation:currentLocation length:graphLength]];
-    }
-    
-    // 计算到To位置的帧
-    if (currentLocation != to) {
-        double frames = kDCAnimationDuration * kDCFramesPerSecord;
-        double hRangeAnimationStep = (to - currentLocation)/frames;
-        while (currentLocation != to) {
-            double newLocation = currentLocation + hRangeAnimationStep;
-            if ((newLocation >= to && currentLocation < to) || (newLocation <= to && currentLocation > to)){
-                newLocation = to;
-            }
-            currentLocation = newLocation;
-            [hRangeFrames addObject:[[DCRange alloc] initWithLocation:currentLocation length:graphLength]];
-        }
-    }
-    
-    [self.timer invalidate];
-    self.timer = nil;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animateFramesTarget:) userInfo:hRangeFrames repeats:YES];
-}
-
 -(void)animateFramesTarget:(NSTimer*)timer {
     NSMutableArray* frames = (NSMutableArray*)timer.userInfo;
     if (REMIsNilOrNull(self.view) || REMIsNilOrNull(frames) || frames.count == 0) {
@@ -94,11 +63,11 @@
     }
     DCRange* hRange = frames[0];
     self.view.graphContext.hRange = hRange;
-    [frames removeObjectAtIndex:0];
     
-    if (!REMIsNilOrNull(self.delegate) && [self.delegate respondsToSelector:@selector(didHRangeApplyToView:)]) {
-        [self.delegate didHRangeApplyToView:hRange];
+    if (!REMIsNilOrNull(self.delegate) && [self.delegate respondsToSelector:@selector(didHRangeApplyToView:finalRange:)]) {
+        [self.delegate didHRangeApplyToView:hRange finalRange:frames[frames.count-1]];
     }
+    [frames removeObjectAtIndex:0];
 }
 
 -(void)animateHRangeLocationFrom:(double)from to:(double)to {
@@ -122,9 +91,7 @@
             [self.timer invalidate];
         }
         DCRange* newRange = [[DCRange alloc]initWithLocation:newLocation length:self.view.graphContext.hRange.length];
-        //        if ([self.view testHRangeChange:newRange oldRange:self.view.graphContext.hRange sendBy:DCHRangeChangeSenderByAnimation]) {
         self.view.graphContext.hRange = newRange;
-        //        }
     }
 }
 @end

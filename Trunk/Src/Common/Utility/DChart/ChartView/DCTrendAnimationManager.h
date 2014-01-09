@@ -16,6 +16,5 @@
 
 -(void)invalidate;
 -(void)animateHRangeLocationFrom:(double)from to:(double)to;
--(void)animateHRangeLocationFrom:(double)from to:(double)to speed:(double)speed;
 -(void)animateHRangeWithSpeed:(double)speed;
 @end

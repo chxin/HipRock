@@ -789,7 +789,7 @@
 
 #pragma mark -
 #pragma mark touch moved
-- (void)touchEndedInNormalStatus:(id)start end:(id)end
+- (void)gestureEndFrom:(id)start end:(id)end
 {
     
     
@@ -803,7 +803,7 @@
 
 
 
-- (BOOL)willRangeChange:(id)start end:(id)end
+- (void)willRangeChange:(id)start end:(id)end
 {
     NSDate *newStart=start;
     NSDate *newEnd=end;
@@ -822,7 +822,7 @@
     
     REMWidgetStepCalculationModel *model= [REMWidgetStepCalculationModel tryNewStepByRange:newRange];
     if (model==nil) {
-        return NO;
+        return;
     }
     
     int currentStepInt=[self calculationStep:self.currentStepList];
@@ -836,14 +836,14 @@
     
     
     if([model.stepList containsObject:@(tempModel.step)]==NO){
-        return NO;
+        return;
     }
     
     
     NSString *text=[REMTimeHelper relativeDateComponentFromType:REMRelativeTimeRangeTypeNone];
     [self setDatePickerButtonValueNoSearchByTimeRange:newRange withRelative:text withRelativeType:REMRelativeTimeRangeTypeNone];
     
-    return YES;
+    return;
 }
 
 

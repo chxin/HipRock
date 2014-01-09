@@ -18,4 +18,5 @@
 @property (nonatomic) NSUInteger defaultStepIndex;
 
 + (REMWidgetStepCalculationModel *)tryNewStepByRange:(REMTimeRange *)range;
++(NSArray*) getStepIntervalRanges;
 @end
