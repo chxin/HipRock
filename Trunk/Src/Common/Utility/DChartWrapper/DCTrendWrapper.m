@@ -10,19 +10,18 @@
 #import "_DCXLabelFormatter.h"
 #import "DCDataPoint.h"
 #import "DCXYChartBackgroundBand.h"
+#import "DCTrendAnimationManager.h"
 
 @interface DCTrendWrapper()
 @property (nonatomic, weak) DCContext* graphContext;
 @property (nonatomic, strong) DCRange* myStableRange;
 @property (nonatomic) NSString* xtypeOfWidget;
 @property (nonatomic,strong) NSMutableArray* hiddenSeriesTargetsId;
+@property (nonatomic, strong) DCTrendAnimationManager* animationManager;
+@property (nonatomic, strong) NSNumber* panSpeed;
 @end
 
 @implementation DCTrendWrapper
-
--(void)didYIntervalChange:(double)yInterval forAxis:(DCAxis *)yAxis range:(DCRange*)range {
-    // Nothing to do.
-}
 
 -(UIView*)getView {
     return self.view;
@@ -34,6 +33,8 @@
         self.xtypeOfWidget = widgetSyntax.xtype;
         [self extraSyntax:widgetSyntax];
         self.hiddenSeriesTargetsId = [[NSMutableArray alloc]init];
+        
+        self.animationManager = [[DCTrendAnimationManager alloc]init];
         
         NSDictionary* dic = [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
         self.myStableRange = dic[@"beginRange"];
@@ -111,6 +112,7 @@
 //    view.blockReboundAnimation = (step == REMEnergyStepHour);   // 步长为小时时禁止回弹动画
     
     [self customizeView:view];
+    self.animationManager.view = view;
 }
 
 -(NSArray*)createYAxes:(NSArray*)series {
@@ -242,31 +244,6 @@
     for (int i = 0; i < seriesAmount; i++) {
         [self.processors addObject:self.sharedProcessor];
     }
-//    } else {
-//        for (REMTargetEnergyData* targetEnergy in self.energyViewData.targetEnergyData) {
-//            REMTrendChartDataProcessor* processor = [[REMTrendChartDataProcessor alloc]init];
-//            processor.step = step;
-//            if (REMIsNilOrNull(targetEnergy.target) || REMIsNilOrNull(targetEnergy.target.globalTimeRange)) {
-//                processor.baseDate = [NSDate dateWithTimeIntervalSince1970:0];
-//            } else {
-//                NSDate* seriesBeginDate = targetEnergy.target.globalTimeRange.startTime;
-//                NSDate* seriesEndDate = targetEnergy.target.globalTimeRange.endTime;
-//                if (baseDateOfX == nil) {
-//                    baseDateOfX = seriesBeginDate;
-//                    globalEndDate = seriesEndDate;
-//                    beginningEnd = targetEnergy.target.visiableTimeRange.endTime;
-//                    beginningStart = targetEnergy.target.visiableTimeRange.startTime;
-////                } else {
-////                    if ([baseDateOfX compare:seriesBeginDate] == NSOrderedDescending) {
-////                        baseDateOfX = seriesBeginDate;
-////                        globalEndDate = seriesEndDate;
-////                    }
-//                }
-//                processor.baseDate = seriesBeginDate;
-//            }
-//            [self.processors addObject:processor];
-//        }
-//    }
     
     baseDateOfX = globalStartdDate;
     if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
@@ -301,13 +278,55 @@
     if (self.chartStatus == DChartStatusNormal) {
         self.chartStatus = DChartStatusFocus;
 //        self.view.acceptPan = NO;
-//        self.view.acceptPinch = NO;
+        self.view.acceptPinch = NO;
     }
     [self.view focusAroundX:xLocation];
 }
 
--(void)panStopped {
-    [self gestureStopped];
+-(void)panWithSpeed:(CGFloat)speed panStopped:(BOOL)stopped {
+    if (!stopped) self.panSpeed = @(speed);
+    if (self.chartStatus != DChartStatusNormal || !stopped) return;
+    
+    if (self.sharedProcessor.step == REMEnergyStepHour) {
+        self.myStableRange = self.view.graphContext.hRange;
+    } else {
+        NSLog(@"pan translation x:%f", self.panSpeed.doubleValue);
+        [self.animationManager animateHRangeWithSpeed: REMIsNilOrNull(self.panSpeed) ? 0 : self.panSpeed.doubleValue];
+    }
+    self.panSpeed = nil;
+}
+
+-(void)didHRangeApplyToView:(DCRange *)range {
+    DCRange* globalRange = self.view.graphContext.globalHRange;
+    double location = range.location;
+    double end = range.end;
+    if (location < globalRange.location) {
+        location = globalRange.location;
+    }
+    if (end > globalRange.end) {
+        end = globalRange.end;
+    }
+    self.myStableRange = [[DCRange alloc]initWithLocation:location length:end-location];
+}
+
+-(void)setMyStableRange:(DCRange *)myStableRange {
+    if (![DCRange isRange:self.myStableRange equalTo:myStableRange]) {
+        _myStableRange = myStableRange;
+        // FIRE to delegate
+//        if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
+//            if (![DCRange isRange:self.myStableRange equalTo:myNewRange]) {
+//                id param0, param1;
+//                if (self.sharedProcessor == nil) {
+//                    param0 = @(rangeStart);
+//                    param1 = @(rangeEnd);
+//                } else {
+//                    param0 = [self.sharedProcessor deprocessX:rangeStart];
+//                    param1 = [self.sharedProcessor deprocessX:rangeEnd];
+//                }
+//                shouldChange = (BOOL)[self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
+//            }
+//        }
+    }
 }
 
 -(void)gestureStopped {
@@ -360,7 +379,7 @@
 
 -(void)cancelToolTipStatus {
     [super cancelToolTipStatus];
-//    self.view.acceptPinch = self.style.acceptPinch;
+    self.view.acceptPinch = self.style.acceptPinch;
 //    self.view.acceptPan = self.style.acceptPan;
     [self.view defocus];
 }
@@ -381,6 +400,8 @@
     _calenderType = syntax.calendarType;
 }
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
+    [self.animationManager invalidate];
+    self.animationManager.view = nil;
     [super redraw:energyViewData];
     NSDictionary* dic = [self updateProcessorRangesFormatter:step];
     CGRect frame = self.view.frame;
@@ -501,4 +522,8 @@
     return YES;
 }
 
+//######
+-(void)didYIntervalChange:(double)yInterval forAxis:(DCAxis *)yAxis range:(DCRange*)range {
+    // Nothing to do.
+}
 @end

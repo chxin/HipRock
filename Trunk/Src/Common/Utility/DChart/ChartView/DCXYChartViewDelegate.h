@@ -17,8 +17,8 @@ typedef enum _DCHRangeChangeSender {
 @protocol DCXYChartViewDelegate <NSObject>
 -(void)touchedInPlotAt:(CGPoint)point xCoordinate:(double)xLocation;
 -(void)didYIntervalChange:(double)yInterval forAxis:(DCAxis *)yAxis range:(DCRange*)range;
+-(void)panWithSpeed:(CGFloat)speed panStopped:(BOOL)stopped;
 
--(void)panStopped;
 -(void)pinchStopped;
 
 -(void)focusPointChanged:(NSArray*)dcpoints at:(int)x;
