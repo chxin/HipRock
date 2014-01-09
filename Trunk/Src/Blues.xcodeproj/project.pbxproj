@@ -569,6 +569,7 @@
 		B4978D9517979AFC00F94698 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38ED7D1E1785140900219469 /* libsqlite3.dylib */; };
 		B4978D9717979B3C00F94698 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38ED7D1E1785140900219469 /* libsqlite3.dylib */; };
 		B49B6F511781491800BC130A /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
+		B4A0FBAF187E4B390007B9E5 /* REMUpdateAllManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FBAE187E4B390007B9E5 /* REMUpdateAllManager.m */; };
 		B4A0FCD517C6023300C7AD56 /* REMBuildingAirQualityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCD417C6023300C7AD56 /* REMBuildingAirQualityView.m */; };
 		B4A0FCD817C6057E00C7AD56 /* REMAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCD717C6057E00C7AD56 /* REMAirQualityModel.m */; };
 		B4A0FCDB17C610B500C7AD56 /* REMBuildingAirQualityChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A0FCDA17C610B500C7AD56 /* REMBuildingAirQualityChartViewController.m */; };
@@ -1270,6 +1271,8 @@
 		B4922468182B920C0001389A /* REMWidgetMultiTimespanDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetMultiTimespanDelegator.m; path = BizDelegator/REMWidgetMultiTimespanDelegator.m; sourceTree = "<group>"; };
 		B49B6F4F1781491800BC130A /* REMColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMColor.h; path = Common/Utility/REMColor.h; sourceTree = "<group>"; };
 		B49B6F501781491800BC130A /* REMColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMColor.m; path = Common/Utility/REMColor.m; sourceTree = "<group>"; };
+		B4A0FBAD187E4B390007B9E5 /* REMUpdateAllManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMUpdateAllManager.h; path = Biz/REMUpdateAllManager.h; sourceTree = "<group>"; };
+		B4A0FBAE187E4B390007B9E5 /* REMUpdateAllManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMUpdateAllManager.m; path = Biz/REMUpdateAllManager.m; sourceTree = "<group>"; };
 		B4A0FCD317C6023200C7AD56 /* REMBuildingAirQualityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingAirQualityView.h; path = View/Building/REMBuildingAirQualityView.h; sourceTree = "<group>"; };
 		B4A0FCD417C6023300C7AD56 /* REMBuildingAirQualityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingAirQualityView.m; path = View/Building/REMBuildingAirQualityView.m; sourceTree = "<group>"; };
 		B4A0FCD617C6057D00C7AD56 /* REMAirQualityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAirQualityModel.h; sourceTree = "<group>"; };
@@ -2665,6 +2668,8 @@
 				B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */,
 				B456984418750E3B00FB43B8 /* REMPinToBuildingCoverHelper.h */,
 				B456984518750E3B00FB43B8 /* REMPinToBuildingCoverHelper.m */,
+				B4A0FBAD187E4B390007B9E5 /* REMUpdateAllManager.h */,
+				B4A0FBAE187E4B390007B9E5 /* REMUpdateAllManager.m */,
 			);
 			name = Biz;
 			sourceTree = "<group>";
@@ -3675,6 +3680,7 @@
 				EF13626F184EFC6F00BEF648 /* _DCLine.m in Sources */,
 				B4A87539185EC72100BF3601 /* REMWidgetLabellingCellDelegator.m in Sources */,
 				EFE8698C185EF3B700DC0007 /* DCLabelingLabel.m in Sources */,
+				B4A0FBAF187E4B390007B9E5 /* REMUpdateAllManager.m in Sources */,
 				7A1D142617850B2100CC2922 /* Reachability.m in Sources */,
 				B4922466182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m in Sources */,
 				7A3F6701184C61610079A244 /* REMLoginTitledCard.m in Sources */,

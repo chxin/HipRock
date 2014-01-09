@@ -253,7 +253,7 @@ static const int kTrialCardIndex = kCardCount - 2;
 -(void)presentCustomerSelectionView
 {
     REMLoginCustomerTableViewController *customerController = [[REMLoginCustomerTableViewController alloc] init];
-    customerController.loginCardController = self.loginCardController;
+    //customerController.loginCardController = self.loginCardController;
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:customerController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;

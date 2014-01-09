@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "REMSplashScreenController.h"
 #import "REMSettingViewController.h"
-@interface REMSettingCustomerSelectionViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
+#import "REMLoginCustomerTableViewController.h"
+
+
+
+@interface REMSettingCustomerSelectionViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate,REMCustomerSelectionInterface>
 
 - (IBAction)switchCustomer:(UIBarButtonItem *)sender;
 

@@ -86,8 +86,10 @@
 
 //Setting, prefix: Setting_
 "Setting_LoadingData"="正在获取新客户的能源信息,请稍候...";
-"Setting_CurrentCustomerDeleted"="当前客户已被解除关联,请退出系统后重新登录。";
-"Setting_CustomerDeleted"="该客户已被解除关联,请重新选择客户。";
+"Setting_CurrentCustomerDeleted"="当前客户已被解除关联,请重新选择客户。";
+"Setting_SelectedCustomerDeleted"="该客户已被解除关联,请重新选择客户。";
+"Setting_UserDeleted"="您的用户已被删除,应用将退出登录状态";
+"Setting_NoAttachedCustomer"="您的用户未关联任何客户,应用将退出登录状态";
 "Setting_DetailName"="名称";
 "Setting_DetailCode"="编码";
 "Setting_DetailAddress"="地址";

@@ -45,6 +45,7 @@ typedef enum _REMDataStoreType
      */
     REMDSCustomerLogo,
     REMDSCustomerSwitch,
+    REMDSCustomerUpdateAll,
     
     /**
      *	Building
