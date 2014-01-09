@@ -655,6 +655,7 @@
 		EFD947111839DEE100E9EC50 /* DCColumnWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD947101839DEE100E9EC50 /* DCColumnWrapper.m */; };
 		EFDAACBC1803F6C2008BC9AF /* REMChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */; };
 		EFDCC97E18472AD400955560 /* DCPieWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCC97D18472AD400955560 /* DCPieWrapper.m */; };
+		EFE78DB7187E4372003FB710 /* REMWidgetStepCalculationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE78DB6187E4372003FB710 /* REMWidgetStepCalculationModel.m */; };
 		EFE8697D185E9FF800DC0007 /* DCLabelingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE8697C185E9FF800DC0007 /* DCLabelingChartView.m */; };
 		EFE86981185EC3EB00DC0007 /* DCLabelingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */; };
 		EFE86986185EEF5300DC0007 /* DCLabelingSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86985185EEF5300DC0007 /* DCLabelingSeries.m */; };
@@ -1433,6 +1434,9 @@
 		EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartDataProcessor.m; sourceTree = "<group>"; };
 		EFDCC97C18472AD400955560 /* DCPieWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieWrapper.h; path = Common/Utility/DChartWrapper/DCPieWrapper.h; sourceTree = "<group>"; };
 		EFDCC97D18472AD400955560 /* DCPieWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieWrapper.m; path = Common/Utility/DChartWrapper/DCPieWrapper.m; sourceTree = "<group>"; };
+		EFE78DB4187E33CD003FB710 /* DCTrendAnimationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DCTrendAnimationDelegate.h; path = Common/Utility/DChart/DCTrendAnimationDelegate.h; sourceTree = "<group>"; };
+		EFE78DB5187E4372003FB710 /* REMWidgetStepCalculationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetStepCalculationModel.h; path = Model/Widget/REMWidgetStepCalculationModel.h; sourceTree = "<group>"; };
+		EFE78DB6187E4372003FB710 /* REMWidgetStepCalculationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetStepCalculationModel.m; path = Model/Widget/REMWidgetStepCalculationModel.m; sourceTree = "<group>"; };
 		EFE8697B185E9FF800DC0007 /* DCLabelingChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLabelingChartView.h; sourceTree = "<group>"; };
 		EFE8697C185E9FF800DC0007 /* DCLabelingChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLabelingChartView.m; sourceTree = "<group>"; };
 		EFE8697F185EC3EB00DC0007 /* DCLabelingWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCLabelingWrapper.h; path = Common/Utility/DChartWrapper/DCLabelingWrapper.h; sourceTree = "<group>"; };
@@ -2857,6 +2861,8 @@
 				B4922465182B411B0001389A /* REMWidgetMultiTimespanSearchModel.m */,
 				B44313E2185AAE7800486594 /* REMWidgetLabellingSearchModel.h */,
 				B44313E3185AAE7800486594 /* REMWidgetLabellingSearchModel.m */,
+				EFE78DB5187E4372003FB710 /* REMWidgetStepCalculationModel.h */,
+				EFE78DB6187E4372003FB710 /* REMWidgetStepCalculationModel.m */,
 			);
 			name = Widget;
 			sourceTree = "<group>";
@@ -3279,6 +3285,7 @@
 			children = (
 				EF652B66185867C2007D4049 /* DCTrendAnimationManager.h */,
 				EF652B67185867C2007D4049 /* DCTrendAnimationManager.m */,
+				EFE78DB4187E33CD003FB710 /* DCTrendAnimationDelegate.h */,
 			);
 			name = Trend;
 			sourceTree = "<group>";
@@ -3642,6 +3649,7 @@
 				7A6A14F1181E52F4007D06B8 /* REMMarkerBubbleView.m in Sources */,
 				B4D50A41183313C7007C93A4 /* REMBuildingChartContainerViewController.m in Sources */,
 				B4E815D11827375200FB9BC5 /* REMWidgetTagSearchModel.m in Sources */,
+				EFE78DB7187E4372003FB710 /* REMWidgetStepCalculationModel.m in Sources */,
 				7A399E97177D238F00F0EB9F /* AFHTTPRequestOperation.m in Sources */,
 				7A399E98177D238F00F0EB9F /* AFImageRequestOperation.m in Sources */,
 				7AB9B39A183DCF1100779C5E /* REMChartTooltipItem.m in Sources */,
