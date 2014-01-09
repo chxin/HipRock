@@ -54,6 +54,9 @@
 
 - (BOOL) shouldEnablePinToBuildingCoverButton;
 
+- (CGFloat) xPositionForPinToBuildingCoverButton;
+
 - (void)mergeTempModel;
+
 
 @end
