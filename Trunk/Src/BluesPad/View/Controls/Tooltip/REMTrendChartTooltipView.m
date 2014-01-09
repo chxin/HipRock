@@ -17,6 +17,7 @@
 #import "REMTextIndicatorFormator.h"
 #import "DCDataPoint.h"
 #import "REMWidgetMultiTimespanSearchModel.h"
+#import "DCXYSeries.h"
 
 
 @interface REMTrendChartTooltipView()
@@ -122,18 +123,21 @@
     NSArray *highlightedPoints = self.highlightedPoints; //highlightedPoints for trend data is an array of DCChartPoint
     NSMutableArray *itemModels = [[NSMutableArray alloc] init];
     
+    int index = 0;
     for(int i=0;i<highlightedPoints.count;i++){
         DCDataPoint *point = highlightedPoints[i];
-        
-        REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
-        
-        model.title = [self formatTargetName:point];
-        model.value = REMIsNilOrNull(point) ? nil : point.value;
-        model.color = point.series.color;
-        model.index = i;
-        model.uom = point.target.uomName;
-        
-        [itemModels addObject:model];
+        if([point.series isKindOfClass:[DCXYSeries class]] && ((DCXYSeries *)point.series).hidden == NO){
+            REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
+            
+            model.title = [self formatTargetName:point];
+            model.value = REMIsNilOrNull(point) ? nil : point.value;
+            model.color = point.series.color;
+            model.index = index;
+            model.uom = point.target.uomName;
+            
+            [itemModels addObject:model];
+            index++;
+        }
     }
     
     return itemModels;

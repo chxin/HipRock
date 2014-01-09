@@ -8,8 +8,15 @@
 #import <UIKit/UIKit.h>
 #import "REMLoginCardController.h"
 
+@protocol REMLoginCustomerSelectionDelegate <NSObject>
+
+-(void)didSelectCustomer:(REMCustomerModel *)customer;
+-(void)didDismissView;
+
+@end
+
 @interface REMLoginCustomerTableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic,weak) REMLoginCardController *loginCardController;
+@property (nonatomic,weak) NSObject<REMLoginCustomerSelectionDelegate> *delegate;
 
 @end
