@@ -152,9 +152,7 @@
 //        [self.layer addSublayer:symbol];
 //    }
     [self updateAllLayerFrame];
-    if ([self testHRangeChange:self.beginHRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByInitialize]) {
-        self.graphContext.hRange = self.beginHRange;
-    }
+    self.graphContext.hRange = self.beginHRange;
     
     [self updateGestures];
     [self redrawBgBands];
@@ -196,14 +194,6 @@
     [self.graphContext addHRangeObsever:self._vGridlineLayer];
     [self.layer addSublayer:self._vGridlineLayer];
     [self._vGridlineLayer setNeedsDisplay];
-}
-
--(BOOL)testHRangeChange:(DCRange*)newRange oldRange:(DCRange*)oldRange sendBy:(DCHRangeChangeSender)senderType {
-    BOOL willChange = YES;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(testHRangeChange:oldRange:sendBy:)]) {
-        willChange = [self.delegate testHRangeChange:newRange oldRange:oldRange sendBy:senderType];
-    }
-    return willChange;
 }
 
 -(void)willHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
@@ -378,37 +368,18 @@
     return YES;
 }
 -(void)viewPanned:(UIPanGestureRecognizer*)gesture {
-//    CGPoint touchPoint = [gesture locationInView:self];
-//    if (CGRectContainsPoint(self.graphContext.plotRect, touchPoint)) {
-//        BOOL moveEnabled = YES;
-        CGPoint translation = [gesture translationInView:self];
-//        if (self.delegate && [self.delegate respondsToSelector:@selector(panInPlotAt:translation:)]) {
-//            moveEnabled = [self.delegate panInPlotAt:touchPoint translation:translation];
-//        }
-//        if (moveEnabled) {
-            if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed) {
-                if (!self.blockReboundAnimation) {
-                    if (self.graphContext.hRange.location < self.graphContext.globalHRange.location || self.graphContext.hRange.length > self.graphContext.globalHRange.length) {
-                        [self.animationManager animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.location];
-                    } else if (self.graphContext.hRange.end>self.graphContext.globalHRange.end) {
-                        [self.animationManager animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.end-self.graphContext.hRange.length];
-                    } else {
-                        
-                    }
-                }
-                if (self.delegate && [self.delegate respondsToSelector:@selector(panStopped)]) {
-                    [self.delegate panStopped];
-                }
-            } else {
-                DCRange* newRange = [[DCRange alloc]initWithLocation:-translation.x*self.graphContext.hRange.length/self.graphContext.plotRect.size.width+self.graphContext.hRange.location length:self.graphContext.hRange.length];
-                if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByUserPan]) {
-                    self.graphContext.hRange = newRange;
-                }
-            }
-//        }
-        [gesture setTranslation:CGPointMake(0, 0) inView:self];
-//        NSLog(@"Pan gesture state:%d", gesture.state);
-//    }
+    CGPoint translation = [gesture translationInView:self];
+    CGFloat speed = -translation.x*self.graphContext.hRange.length/self.graphContext.plotRect.size.width;
+    if (self.graphContext.focusX == INT32_MIN) {
+        self.graphContext.hRange = [[DCRange alloc]initWithLocation:speed+self.graphContext.hRange.location length:self.graphContext.hRange.length];
+    } else {
+        [self focusAroundX:[self getXLocationForPoint:[gesture locationInView:self]]];
+    }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(panWithSpeed:panStopped:)]) {
+        BOOL panStopped = (gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed);
+        [self.delegate panWithSpeed:speed panStopped:panStopped];
+    }
+    [gesture setTranslation:CGPointMake(0, 0) inView:self];
 }
 
 -(void)viewPinched:(_DCHPinchGestureRecognizer*)gesture {
@@ -417,23 +388,24 @@
     CGFloat end = centerX + (-centerX + self.graphContext.hRange.end) * gesture.rightScale;
     
     if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed) {
-        if (!self.blockReboundAnimation) {
-            if (self.graphContext.hRange.location < self.graphContext.globalHRange.location || self.graphContext.hRange.length > self.graphContext.globalHRange.length) {
-                [self.animationManager animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.location];
-            } else if (self.graphContext.hRange.end>self.graphContext.globalHRange.end) {
-                [self.animationManager animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.end-self.graphContext.hRange.length];
-            } else {
-                
-            }
-        }
+//        if (!self.blockReboundAnimation) {
+//            if (self.graphContext.hRange.location < self.graphContext.globalHRange.location || self.graphContext.hRange.length > self.graphContext.globalHRange.length) {
+//                [self.animationManager animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.location];
+//            } else if (self.graphContext.hRange.end>self.graphContext.globalHRange.end) {
+//                [self.animationManager animateHRangeLocationFrom:self.graphContext.hRange.location to:self.graphContext.globalHRange.end-self.graphContext.hRange.length];
+//            } else {
+//                
+//            }
+//        }
         if (self.delegate && [self.delegate respondsToSelector:@selector(pinchStopped)]) {
             [self.delegate pinchStopped];
         }
     } else {
         DCRange* newRange = [[DCRange alloc]initWithLocation:start length:end-start];
-        if ([self testHRangeChange:newRange oldRange:self.graphContext.hRange sendBy:DCHRangeChangeSenderByUserPinch]) {
-            self.graphContext.hRange = newRange;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(updatePinchRange:)]) {
+            newRange = [self.delegate updatePinchRange:newRange];
         }
+        self.graphContext.hRange = newRange;
     }
 }
 

@@ -10,8 +10,9 @@
 #import "REMSplashScreenController.h"
 @class REMLoginCardController;
 @class REMTrialCardController;
+#import "REMLoginCustomerTableViewController.h"
 
-@interface REMLoginCarouselController : UIViewController<UIScrollViewDelegate>
+@interface REMLoginCarouselController : UIViewController<UIScrollViewDelegate,REMLoginCustomerSelectionDelegate>
 
 @property (nonatomic) BOOL showAnimation;
 @property (nonatomic,weak) REMSplashScreenController *splashScreenController;
@@ -24,5 +25,7 @@
 -(void)showLoginCard;
 -(void)playCarousel:(BOOL)isAnimated;
 -(void)presentCustomerSelectionView;
+
+
 
 @end

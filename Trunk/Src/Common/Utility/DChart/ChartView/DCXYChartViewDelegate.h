@@ -7,24 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef enum _DCHRangeChangeSender {
-    DCHRangeChangeSenderByAnimation = 0,    // HRange的改变由动画发起
-    DCHRangeChangeSenderByInitialize = 1,   // 初始化发起
-    DCHRangeChangeSenderByUserPan = 2,         // HRange的改变由用户的Pan手势发起
-    DCHRangeChangeSenderByUserPinch = 3         // HRange的改变由用户的Pan手势发起
-} DCHRangeChangeSender;
 
 @protocol DCXYChartViewDelegate <NSObject>
 -(void)touchedInPlotAt:(CGPoint)point xCoordinate:(double)xLocation;
 -(void)didYIntervalChange:(double)yInterval forAxis:(DCAxis *)yAxis range:(DCRange*)range;
+-(void)panWithSpeed:(CGFloat)speed panStopped:(BOOL)stopped;
 
--(void)panStopped;
 -(void)pinchStopped;
 
 -(void)focusPointChanged:(NSArray*)dcpoints at:(int)x;
 
-/**
- * 返回YES允许HRange的改变，否则HRange将不会改变
- */
--(BOOL)testHRangeChange:(DCRange*)newRange oldRange:(DCRange*)oldRange sendBy:(DCHRangeChangeSender)senderType;
+-(DCRange*)updatePinchRange:(DCRange*)newRange;
 @end

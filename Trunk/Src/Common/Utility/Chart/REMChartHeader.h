@@ -40,8 +40,8 @@ typedef enum _DCLineType {
 /*
  * Parameter data type: NSDate for line/column. NSNumber for ranking.
  */
--(BOOL)willRangeChange:(id)start end:(id)end;
--(void)touchEndedInNormalStatus:(id)start end:(id)end;
+-(void)willRangeChange:(id)start end:(id)end;
+-(void)gestureEndFrom:(id)start end:(id)end;
 @end
 
 typedef enum _REMDirection{

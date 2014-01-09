@@ -7,6 +7,7 @@
 --------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
 #import "REMLoginCardController.h"
+#import "REMCustomerModel.h"
 
 @protocol REMLoginCustomerSelectionDelegate <NSObject>
 

@@ -17,6 +17,8 @@
 #pragma mark - Definitions
 
 //images in /:
+#define REMIMG_Logo_About REMLoadImageNamed(@"Logo_About")
+#define REMIMG_Setting REMLoadImageNamed(@"Setting")
 
 //images in /AppIcon:
 #define REMIMG_EMOP_App_6 REMLoadImageNamed(@"EMOP_App_6")
@@ -26,8 +28,11 @@
 #define REMIMG_EMOP_Spotlight_7 REMLoadImageNamed(@"EMOP_Spotlight_7")
 
 //images in /Building:
+#define REMIMG_ChartCustomization REMLoadImageNamed(@"ChartCustomization")
+#define REMIMG_ChartCustomization_Widget REMLoadImageNamed(@"ChartCustomization_Widget")
 #define REMIMG_DefaultBuilding_Small REMLoadImageNamed(@"DefaultBuilding-Small")
 #define REMIMG_DefaultBuilding REMLoadImageNamed(@"DefaultBuilding")
+#define REMIMG_DefaultBuildingBlur REMLoadImageNamed(@"DefaultBuildingBlur")
 #define REMIMG_Menu_normal REMLoadImageNamed(@"Menu_normal")
 #define REMIMG_NotOverTarget REMLoadImageNamed(@"NotOverTarget")
 #define REMIMG_OverTarget REMLoadImageNamed(@"OverTarget")
@@ -39,14 +44,22 @@
 //images in /Building/commodity:
 #define REMIMG_Coal_normal REMLoadImageNamed(@"Coal_normal")
 #define REMIMG_Coal_pressed REMLoadImageNamed(@"Coal_pressed")
+#define REMIMG_Cooling_normal REMLoadImageNamed(@"Cooling_normal")
+#define REMIMG_Cooling_pressed REMLoadImageNamed(@"Cooling_pressed")
 #define REMIMG_Electricity_normal REMLoadImageNamed(@"Electricity_normal")
 #define REMIMG_Electricity_pressed REMLoadImageNamed(@"Electricity_pressed")
+#define REMIMG_Heating_normal REMLoadImageNamed(@"Heating_normal")
+#define REMIMG_Heating_pressed REMLoadImageNamed(@"Heating_pressed")
+#define REMIMG_Humidity_normal REMLoadImageNamed(@"Humidity_normal")
+#define REMIMG_Humidity_pressed REMLoadImageNamed(@"Humidity_pressed")
 #define REMIMG_NaturalGas_normal REMLoadImageNamed(@"NaturalGas_normal")
 #define REMIMG_NaturalGas_pressed REMLoadImageNamed(@"NaturalGas_pressed")
 #define REMIMG_Oil_normal REMLoadImageNamed(@"Oil_normal")
 #define REMIMG_Oil_pressed REMLoadImageNamed(@"Oil_pressed")
 #define REMIMG_PM2_5_normal REMLoadImageNamed(@"PM2.5_normal")
 #define REMIMG_PM2_5_pressed REMLoadImageNamed(@"PM2.5_pressed")
+#define REMIMG_Temperature_normal REMLoadImageNamed(@"Temperature_normal")
+#define REMIMG_Temperature_pressed REMLoadImageNamed(@"Temperature_pressed")
 #define REMIMG_Water_normal REMLoadImageNamed(@"Water_normal")
 #define REMIMG_Water_pressed REMLoadImageNamed(@"Water_pressed")
 
@@ -84,6 +97,7 @@
 //images in /Map:
 #define REMIMG_CommonPin_Focus REMLoadImageNamed(@"CommonPin_Focus")
 #define REMIMG_CommonPin_Normal REMLoadImageNamed(@"CommonPin_Normal")
+#define REMIMG_DefaultMap REMLoadImageNamed(@"DefaultMap")
 #define REMIMG_Gallery REMLoadImageNamed(@"Gallery")
 #define REMIMG_Map REMLoadImageNamed(@"Map")
 #define REMIMG_MapPopover_Arrow REMLoadImageNamed(@"MapPopover_Arrow")

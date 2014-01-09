@@ -24,6 +24,15 @@ static REMApplicationContext *context = nil;
     return context;
 }
 
++ (void)recover
+{
+    REMUserModel *storedUser = [REMUserModel getCached];
+    REMCustomerModel *storedCustomer = [REMCustomerModel getCached];
+    
+    [REMAppContext setCurrentUser:storedUser];
+    [REMAppContext setCurrentCustomer:storedCustomer];
+}
+
 + (void)destroy
 {
     context = nil;

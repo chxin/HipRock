@@ -17,8 +17,9 @@
 #import "REMChartHeader.h"  // FOR IMPORT REMChartDataProcessor only
 #import "DCXYChartViewDelegate.h"
 #import "REMCommonHeaders.h"
+#import "DCTrendAnimationDelegate.h"
 
-@interface DCTrendWrapper : DAbstractChartWrapper<DCXYChartViewDelegate>
+@interface DCTrendWrapper : DAbstractChartWrapper<DCXYChartViewDelegate, DCTrendAnimationDelegate>
 
 @property (nonatomic, readonly) DCXYChartView* view;
 @property (nonatomic, readonly) NSString* defaultSeriesClass;
