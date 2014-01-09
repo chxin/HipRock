@@ -26,6 +26,7 @@
 @property (nonatomic,strong) REMAppConfiguration *appConfig;
 
 + (REMApplicationContext *)instance;
++ (void)recover;
 + (void)destroy;
 
 @end

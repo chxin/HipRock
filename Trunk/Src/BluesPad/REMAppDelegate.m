@@ -12,6 +12,7 @@
 #import "REMApplicationInfo.h"
 #import "WeiboSDK.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import "REMCommonHeaders.h"
 
 //comment
 
@@ -38,6 +39,9 @@
     // App info init
     [REMApplicationInfo initApplicationInfo];
     
+    // Recover login info
+    [REMApplicationContext recover];
+    
     //[REMStorage clearSessionStorage];
     
     // Weibo app key init
@@ -46,37 +50,10 @@
     
     // Google key init
     [GMSServices provideAPIKey:kGoogleMapsKey];
-    
-#ifndef DEBUG
-    
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Configuration" ofType:@"plist"];
-    
-    // Read from document directory
-    NSMutableDictionary *settingsItem = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
-    
-    BOOL shouldCleanCache=(BOOL)[settingsItem[@"shouldCleanCache"] boolValue];
-    
-    if (shouldCleanCache==YES) {
-        NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSFileManager *fileManager=[NSFileManager defaultManager];
-        NSError * error;
-        NSArray *imgArray= [fileManager contentsOfDirectoryAtPath:documents error:&error];
-        for (NSString *path in imgArray) {
-            if ([path.pathExtension isEqualToString:@"png"]==YES) {
-                NSString *fullPath=[documents stringByAppendingPathComponent:path];
-                [fileManager removeItemAtPath:fullPath error:&error];
-            }
-        }
-        settingsItem[@"shouldCleanCache"]=NO;
-        [settingsItem writeToFile:filePath atomically:YES];
-    }
-    
-#endif
-    
-    
-    
+
     return YES;
 }
+
 
 
 							

@@ -253,7 +253,7 @@ static const int kTrialCardIndex = kCardCount - 2;
 -(void)presentCustomerSelectionView
 {
     REMLoginCustomerTableViewController *customerController = [[REMLoginCustomerTableViewController alloc] init];
-    customerController.loginCardController = self.loginCardController;
+    customerController.delegate = self;
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:customerController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -284,6 +284,20 @@ static const int kTrialCardIndex = kCardCount - 2;
         [self.skipToTrialButton setEnabled:NO];
         [self.skipToLoginButton setEnabled:YES];
     }
+}
+
+#pragma mark  Customer selection delegate
+
+-(void)didSelectCustomer:(REMCustomerModel *)customer
+{
+    [REMAppContext setCurrentCustomer:customer];
+    [self.loginCardController loginSuccess];
+}
+
+-(void)didDismissView
+{
+    [self.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+    [self.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
 }
 
 @end

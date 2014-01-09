@@ -29,7 +29,6 @@
 
 @interface REMSplashScreenController ()
 
-@property (nonatomic,weak) UIView *backgroundView;
 @property (nonatomic,weak) UIView *normalLogo;
 @property (nonatomic,weak) UIView *flashLogo;
 @property (nonatomic,weak) UIView *copyrightView;
@@ -47,29 +46,21 @@
     [super loadView];
     
     if(self){
-        //load background
-        [self loadBackground];
+        BOOL isAlreadyLogin = [self isAlreadyLogin];
+        UIImage *backgroundImage = isAlreadyLogin ? REMIMG_DefaultMap : REMLoadImageResource(@"SplashScreenBackgroud", @"jpg");
         
-        //load logo view
-        [self loadLogoView];
-        
-        //load copyright view
-        [self loadCopyrightView];
+        [self loadBackground:backgroundImage];
     }
 }
 
-- (void)loadBackground
+-(void)loadBackground:(UIImage *)image
 {
-    if(self.backgroundView != nil){
-        return;
-    }
-    
-    UIImageView *background = [[UIImageView alloc] initWithImage:REMLoadImageResource(@"SplashScreenBackgroud", @"jpg")];
+    UIImageView *background = [[UIImageView alloc] initWithImage:image];
     background.frame = REMISIOS7 ? CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight) : CGRectMake(0, -20, kDMScreenWidth, kDMScreenHeight);
     
     [self.view addSubview:background];
-    self.backgroundView = background;
 }
+
 
 - (void)loadLogoView
 {
@@ -133,50 +124,58 @@
     
 //    [self oscarTest];
     
-    
-    //decide where to go
-    [self recoverAppContext];
-    
     if([self isAlreadyLogin]){
-        //if network is ok and (user or customer does not exist) goto login
-        //else goto map
-        BOOL isNoConnect = [REMNetworkHelper checkIsNoConnect];
-        
-        if(isNoConnect){
-            [self breathShowMapView:YES:nil];
-        }
-        else{
-            REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserCustomerValidate parameter:@{@"userName":REMAppCurrentUser.name,@"customerId":REMAppCurrentCustomer.customerId}];
-            [store access:^(id data) {
-                REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
-                
-                if(validationResult.status == REMUserValidationSuccess){
-                    [self breathShowMapView:YES:nil];
-                }
-                else{
-                    //clear login info, TODO:should prompt user that will logout
-                    [REMAlertHelper alert:REMLocalizedString(@"Login_NotAuthorized")];
-                    
-                    REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
-                    REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
-                    
-                    [currentUser kill];
-                    [currentCustomer kill];
-                    currentUser = nil;
-                    currentCustomer = nil;
-                    
-                    [REMApplicationContext destroy];
-                    
-                    [self breathShowLoginView];
-                }
-            } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
-                [self breathShowMapView:YES:nil];
-            }];
-        }
+        //perform splash map segue
+        [self performSegueWithIdentifier:kSegue_SplashToMap sender:self];
     }
     else{
-        [self breathShowLoginView];
+        //play login carousel
+        [self showLoginView:YES];
     }
+    
+    
+    //decide where to go
+    
+//    if([self isAlreadyLogin]){
+//        //if network is ok and (user or customer does not exist) goto login
+//        //else goto map
+//        BOOL isNoConnect = [REMNetworkHelper checkIsNoConnect];
+//        
+//        if(isNoConnect){
+//            [self breathShowMapView:YES:nil];
+//        }
+//        else{
+//            REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserCustomerValidate parameter:@{@"userName":REMAppCurrentUser.name,@"customerId":REMAppCurrentCustomer.customerId}];
+//            [store access:^(id data) {
+//                REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
+//                
+//                if(validationResult.status == REMUserValidationSuccess){
+//                    [self breathShowMapView:YES:nil];
+//                }
+//                else{
+//                    //clear login info, TODO:should prompt user that will logout
+//                    [REMAlertHelper alert:REMLocalizedString(@"Login_NotAuthorized")];
+//                    
+//                    REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
+//                    REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
+//                    
+//                    [currentUser kill];
+//                    [currentCustomer kill];
+//                    currentUser = nil;
+//                    currentCustomer = nil;
+//                    
+//                    [REMApplicationContext destroy];
+//                    
+//                    [self breathShowLoginView];
+//                }
+//            } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
+//                [self breathShowMapView:YES:nil];
+//            }];
+//        }
+//    }
+//    else{
+//        [self breathShowLoginView];
+//    }
 }
 
 -(void)breathShowMapView:(BOOL)isAfterBreathOnce :(void (^)(void))completed
@@ -392,14 +391,6 @@
     return context.currentUser!=nil && context.currentCustomer!=nil;
 }
 
--(void)recoverAppContext
-{
-    REMUserModel *storedUser = [REMUserModel getCached];
-    REMCustomerModel *storedCustomer = [REMCustomerModel getCached];
-    
-    [REMAppContext setCurrentUser:storedUser];
-    [REMAppContext setCurrentCustomer:storedCustomer];
-}
 
 - (void)showLoginView:(BOOL)isAnimated
 {

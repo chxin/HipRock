@@ -35,30 +35,33 @@
 - (void)loadView
 {
     [super loadView];
-
-    [self.view setFrame:kDMDefaultViewFrame];
+    
+    if(self.view){
+        [self.view setFrame:kDMDefaultViewFrame];
+        
+        [self loadMapView];
+        [self loadButtons];
+        [self.view.layer insertSublayer:self.titleGradientLayer above:self.mapView.layer];
+    }
 }
 
 
 - (void)viewDidLoad
 {
-	// Do any additional setup after loading the view.
-    
-    
-    [self loadMapView];
-    
-    [self addButtons];
-    
-    [self.view.layer insertSublayer:self.titleGradientLayer above:self.mapView.layer];
-    
-    [self showMarkers];
+    //[self showMarkers];
+    [self loadData];
     
     if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
         [self.view setUserInteractionEnabled:NO];
     }
 }
 
--(void)addButtons
+-(void)loadData
+{
+    
+}
+
+-(void)loadButtons
 {
     //add switch button
     UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -140,7 +143,7 @@
     mapView.settings.consumesGesturesInView = NO;
     mapView.settings.rotateGestures = NO;
     
-    [self updateCamera:mapView];
+    //[self updateCamera:mapView];
     
     [self.view addSubview: mapView];
     [self.view sendSubviewToBack: mapView];
