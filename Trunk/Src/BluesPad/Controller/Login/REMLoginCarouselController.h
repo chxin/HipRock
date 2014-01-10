@@ -25,6 +25,7 @@
 -(void)showLoginCard;
 -(void)playCarousel:(BOOL)isAnimated;
 -(void)presentCustomerSelectionView;
+-(void)setLoginButtonStatusNormal;
 
 
 

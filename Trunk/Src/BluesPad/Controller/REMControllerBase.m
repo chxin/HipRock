@@ -67,7 +67,7 @@
 //        customerLogoButton=[UIButton buttonWithType:UIButtonTypeSystem];
 //    }
     UIImageView *imageView=[[UIImageView alloc]initWithImage:REMAppCurrentLogo];
-    imageView.contentMode=UIViewContentModeScaleToFill;
+    imageView.contentMode=UIViewContentModeScaleAspectFill;
     [imageView setFrame:CGRectMake(0, 0, kDMCommon_CustomerLogoWidth, kDMCommon_CustomerLogoHeight)];
     
 //    [customerLogoButton setImage:REMAppCurrentLogo forState:UIControlStateNormal];

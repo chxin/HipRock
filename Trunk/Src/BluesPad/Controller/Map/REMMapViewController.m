@@ -53,7 +53,12 @@
 - (void)viewDidLoad
 {
     //[self showMarkers];
-    [self loadData];
+    if(REMAppContext.buildingInfoArray == nil){
+        [self loadData];
+    }
+    else{
+        [self updateView];
+    }
 }
 
 -(void)loadData
@@ -70,10 +75,7 @@
         void (^callback)(void) = nil;
         if(buildingInfoArray != nil){
             self.buildingInfoArray = buildingInfoArray;
-            callback =^{
-                [self updateCamera:self.mapView];
-                [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(showMarkers) userInfo:nil repeats:NO];
-            };
+            callback =^{ [self updateView]; };
         }
         else{
             if(errorStatus == REMDataAccessFailed){
@@ -108,13 +110,23 @@
     [self.view addSubview:switchButton];
     self.switchButton = switchButton;
     
+    UIButton *settingButton=self.settingButton;
+    [self.view addSubview:settingButton];
+}
+
+-(void)updateView
+{
+    [self renderCustomerLogo];
+    [self updateCamera:self.mapView];
+    [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(showMarkers) userInfo:nil repeats:NO];
+}
+
+-(void)renderCustomerLogo
+{
     //add customer logo button
     UIImageView *logoButton = self.customerLogoButton;
     logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
     [self.view addSubview:logoButton];
-    
-    UIButton *settingButton=self.settingButton;
-    [self.view addSubview:settingButton];
 }
 
 -(void)showMarkers
