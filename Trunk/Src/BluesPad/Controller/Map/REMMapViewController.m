@@ -22,6 +22,7 @@
 #import "REMMarkerBubbleView.h"
 #import "REMImages.h"
 #import "REMBlurredMapView.h"
+#import "REMUpdateAllManager.h"
 
 @interface REMMapViewController ()
 
@@ -65,7 +66,27 @@
     [self.view addSubview:mask];
     
     //begin load data
+    REMUpdateAllManager *manager = [REMUpdateAllManager defaultManager];
+    manager.mainNavigationController = (REMMainNavigationController *)self.navigationController;
     
+    [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
+        void (^callback)(void) = nil;
+        if(buildingInfoArray != nil){
+            self.buildingInfoArray = buildingInfoArray;
+            callback =^{ [self showMarkers]; };
+        }
+        else{
+            if(errorStatus == REMDataAccessFailed){
+                [REMAlertHelper alert:@"Failed"];
+            }
+            
+            if(errorStatus == REMDataAccessErrorMessage){
+                [REMAlertHelper alert:@"Error"];
+            }
+        }
+        
+        [mask hide:callback];
+    }];
 }
 
 -(void)loadButtons
