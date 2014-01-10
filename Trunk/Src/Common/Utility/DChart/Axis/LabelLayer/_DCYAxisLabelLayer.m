@@ -30,6 +30,7 @@
     }
     return self;
 }
+
 -(void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
     if (self.hidden) return;
@@ -107,7 +108,7 @@
     self.interval = newInterval;
     self.yRange = yRange;
     if (self.interval > 0 && self.yRange != nil) {
-//        [self setNeedsDisplay];
+        [self setNeedsDisplay];
     }
 }
 

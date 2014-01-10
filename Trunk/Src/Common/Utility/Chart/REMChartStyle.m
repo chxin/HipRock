@@ -12,6 +12,7 @@
 
 +(REMChartStyle*)getCoverStyle {
     REMChartStyle* style = [[REMChartStyle alloc]init];
+    style.useTextLayer = YES;
     style.acceptPan = YES;
     style.acceptPinch = NO;
     style.acceptTap = NO;
@@ -53,6 +54,7 @@
 
 +(REMChartStyle*)getMaximizedStyle {
     REMChartStyle* style = [[REMChartStyle alloc]init];
+    style.useTextLayer = YES;
     style.acceptPan = YES;
     style.acceptPinch = YES;
     style.acceptTap = YES;
@@ -157,6 +159,7 @@
 }
 +(REMChartStyle*)getMinimunStyle {
     REMChartStyle* style = [[REMChartStyle alloc]init];
+    style.useTextLayer = NO;
     style.acceptPan = NO;
     style.acceptPinch = NO;
     style.acceptTap = NO;

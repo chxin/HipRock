@@ -170,7 +170,7 @@
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
     if (oldRange.length != newRange.length)
         [self updateXFormatterInterval];
-//    [self setNeedsDisplay];
+    [self setNeedsDisplay];
 //    [self updateTexts];
 }
 

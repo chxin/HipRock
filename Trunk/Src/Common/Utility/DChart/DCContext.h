@@ -41,7 +41,7 @@ extern NSString* const kDCPieIndicatorColor;
 
 @interface DCContext : NSObject
 -(id)initWithStacked:(BOOL)stacked;
-
+@property (nonatomic, assign) BOOL useTextLayer;
 @property (nonatomic, assign) NSUInteger hGridlineAmount;
 @property (nonatomic, strong) DCRange* hRange;
 @property (nonatomic, readonly) BOOL stacked;
