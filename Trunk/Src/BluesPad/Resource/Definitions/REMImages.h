@@ -100,6 +100,7 @@
 #define REMIMG_DefaultMap REMLoadImageNamed(@"DefaultMap")
 #define REMIMG_Gallery REMLoadImageNamed(@"Gallery")
 #define REMIMG_Map REMLoadImageNamed(@"Map")
+#define REMIMG_MapBlur REMLoadImageNamed(@"MapBlur")
 #define REMIMG_MapPopover_Arrow REMLoadImageNamed(@"MapPopover_Arrow")
 #define REMIMG_MapPopover_Rectangle REMLoadImageNamed(@"MapPopover_Rectangle")
 #define REMIMG_QualifiedPin_Focus REMLoadImageNamed(@"QualifiedPin_Focus")
