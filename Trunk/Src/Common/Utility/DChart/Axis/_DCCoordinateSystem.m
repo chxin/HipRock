@@ -131,11 +131,6 @@
         self.yInterval = calResult.yInterval;
     }
 }
-
--(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
-    // Nothing to do.
-}
-
 -(void)setYInterval:(double)yInterval {
     if (_yInterval == yInterval) return;
     double oldInterval = self.yInterval;

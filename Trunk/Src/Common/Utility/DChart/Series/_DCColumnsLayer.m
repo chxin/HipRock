@@ -26,7 +26,13 @@
     }
     return self;
 }
-
+-(NSUInteger)getVisableSeriesCount {
+    NSUInteger count = 0;
+    for (DCColumnSeries* s in self.series) {
+        if (!s.hidden) count++;
+    }
+    return count;
+}
 -(void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
     [self redraw];

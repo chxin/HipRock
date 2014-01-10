@@ -166,15 +166,11 @@
 //    return text;
 //}
 
--(void)willHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
-    // Nothing to do.
-}
-
 -(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
     if (oldRange.length != newRange.length)
         [self updateXFormatterInterval];
-    [self setNeedsDisplay];
+//    [self setNeedsDisplay];
 //    [self updateTexts];
 }
 

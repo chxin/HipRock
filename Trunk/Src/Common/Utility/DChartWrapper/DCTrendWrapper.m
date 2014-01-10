@@ -110,8 +110,6 @@
         view.graphContext.xLabelAlignToTick = YES;
     }
     
-//    view.blockReboundAnimation = (step == REMEnergyStepHour);   // 步长为小时时禁止回弹动画
-    
     [self customizeView:view];
     self.animationManager.view = view;
 }
@@ -371,21 +369,29 @@
 
 
 #pragma mark - DCXYChartViewDelegate implementation
--(void)touchedInPlotAt:(CGPoint)point xCoordinate:(double)xLocation {
-    if (self.chartStatus == DChartStatusNormal) {
-        self.chartStatus = DChartStatusFocus;
-        //        self.view.acceptPan = NO;
-        self.view.acceptPinch = NO;
+-(void)touchesBegan {
+    [self.animationManager invalidate];
+}
+-(void)touchesEnded {
+    if (![DCRange isRange:self.myStableRange equalTo:self.graphContext.hRange] && self.chartStatus == DChartStatusNormal) {
+        [self panWithSpeed:0 panStopped:YES];
     }
-    [self.view focusAroundX:xLocation];
 }
--(void)didYIntervalChange:(double)yInterval forAxis:(DCAxis *)yAxis range:(DCRange*)range {
-    // Nothing to do.
+-(void)tapInPlotAt:(CGPoint)point xCoordinate:(double)xLocation {
+    if ([DCRange isRange:self.myStableRange equalTo:self.graphContext.hRange]) {
+        if (self.chartStatus == DChartStatusNormal) {
+            self.chartStatus = DChartStatusFocus;
+            //        self.view.acceptPan = NO;
+            self.view.acceptPinch = NO;
+        }
+        [self.view focusAroundX:xLocation];
+    }
 }
+
 -(void)panWithSpeed:(CGFloat)speed panStopped:(BOOL)stopped {
     if (!stopped) self.panSpeed = speed;
     if (self.chartStatus != DChartStatusNormal) return;
-    
+    self.view.acceptTap = NO;
     DCRange* globalRange = self.graphContext.globalHRange;
     DCRange* range = self.graphContext.hRange;
     double rangeLength = range.length;
@@ -393,12 +399,14 @@
     if (rangeLocation < globalRange.location) rangeLocation = globalRange.location;
     if (range.end > globalRange.end) rangeLocation = globalRange.end - rangeLength;
     self.myStableRange = [[DCRange alloc]initWithLocation:rangeLocation length:rangeLength];
-    
+
     if (stopped) {
         if (self.sharedProcessor.step == REMEnergyStepHour) {
             self.myStableRange = self.view.graphContext.hRange;
         } else {
-            [self.animationManager animateHRangeWithSpeed: self.panSpeed];
+            [self.animationManager animateHRangeWithSpeed: self.panSpeed completion:^() {
+                self.view.acceptTap = self.style.acceptTap;
+            }];
         }
         self.panSpeed = 0;
         [self fireGestureStoppedEvent];
@@ -431,22 +439,82 @@
         [(id<REMTrendChartDelegate>)self.delegate highlightPoints:dcpoints x:xVal];
     }
 }
--(DCRange*)updatePinchRange:(DCRange *)newRange {
+// 获取x轴上两个点之间的时间差，以秒为单位。
+-(NSTimeInterval)getTimeIntervalFrom:(double)from to:(double)to {
+    if (REMIsNilOrNull(self.sharedProcessor) || self.sharedProcessor.step == REMEnergyStepNone) return 0;
+    return [[self.sharedProcessor deprocessX:to] timeIntervalSinceDate:[self.sharedProcessor deprocessX:from]];
+}
+-(DCRange*)updatePinchRange:(DCRange *)newRange pinchCentreX:(CGFloat)centreX {
     REMEnergyStep myStep = self.sharedProcessor.step;
-    if (myStep == REMEnergyStepNone) return newRange;
-    
-    NSUInteger newRangeTimeInterval = [[self.sharedProcessor deprocessX:newRange.end] timeIntervalSinceDate:[self.sharedProcessor deprocessX:newRange.location]];
     DCRange* globalRange = self.graphContext.globalHRange;
+    DCRange* currentRange = self.graphContext.hRange;
     
+    if (myStep == REMEnergyStepNone || myStep == REMEnergyStepHour || newRange.length == currentRange.length) return newRange;
+    BOOL isZoomIn = newRange.length < currentRange.length;  // 正在放大视图，亦即可视的时间范围正在缩小
+    
+//    NSUInteger newRangeTimeInterval = [[self.sharedProcessor deprocessX:newRange.end] timeIntervalSinceDate:[self.sharedProcessor deprocessX:newRange.location]];
     NSRange lengthRange = [[REMWidgetStepCalculationModel getStepIntervalRanges][myStep] rangeValue];
-    NSUInteger lengthRangeEnd = (lengthRange.length == NSUIntegerMax) ? NSUIntegerMax : (lengthRange.location + lengthRange.length);
-    if (newRange.location >= globalRange.location && newRange.end <= globalRange.end && newRangeTimeInterval > lengthRange.location && newRangeTimeInterval <= lengthRangeEnd) {
-        self.myStableRange = newRange;
-        return newRange;
-    } else {
-        self.myStableRange = self.graphContext.hRange;
-        return self.graphContext.hRange;
+    NSUInteger minTimeInterval = lengthRange.location;  // 步长允许的最短的时间距离
+    NSUInteger maxTimeInterval = lengthRange.location + lengthRange.length; // 步长允许的最长时间距离
+    
+    /*** 对于左边界已经越界的情况(在时间选择器内查询数据)：只检查Pinch后数据的长度，和右边界。 ***/
+    if (currentRange.location < globalRange.location) {
+        double returnRangeEnd = newRange.end;
+        double returnRangeStart = newRange.location;
+        if (returnRangeEnd > globalRange.end) returnRangeEnd = globalRange.end;
+        NSTimeInterval returnRangeInterval = [self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd];
+        if ((isZoomIn && returnRangeInterval <= minTimeInterval) || (!isZoomIn && returnRangeInterval > maxTimeInterval)) {
+            return currentRange;
+        } else {
+            return [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
+        }
     }
+    /*** 对于左边界还没有越界的情况 ***/
+    else {
+        NSTimeInterval currentRangeTimeInterval = [self getTimeIntervalFrom:currentRange.location to:currentRange.end];
+        if (currentRange.end > globalRange.end || currentRangeTimeInterval <= minTimeInterval || currentRangeTimeInterval > maxTimeInterval) return currentRange;
+        double returnRangeEnd = newRange.end;
+        double returnRangeStart = newRange.location;
+        double returnRangeLength = 0;
+        if (isZoomIn) {
+            returnRangeLength = returnRangeEnd - returnRangeStart;
+            if ([self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd] <= minTimeInterval) {
+                return currentRange;
+            } else {
+                return [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeLength];
+            }
+        } else {
+            if (returnRangeStart < globalRange.location) returnRangeStart = globalRange.location;
+            if (returnRangeEnd > globalRange.end) returnRangeEnd = globalRange.end;
+            returnRangeLength = returnRangeEnd - returnRangeStart;
+            if ([self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd] > maxTimeInterval) {
+                return currentRange;
+            } else {
+                return [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeLength];
+            }
+        }
+    }
+    
+    
+//    NSUInteger globalRangeTimeInterval = [[self.sharedProcessor deprocessX:globalRange.end] timeIntervalSinceDate:[self.sharedProcessor deprocessX:globalRange.location]];
+//    if (globalRangeTimeInterval <= lengthRange.location) return self.graphContext.hRange;
+//    
+//    
+//    
+//    
+//    if (newRange.location >= globalRange.location && newRange.end <= globalRange.end && newRangeTimeInterval > lengthRange.location && newRangeTimeInterval <= lengthRangeEnd) {
+//        self.myStableRange = newRange;
+//        return newRange;
+//    } else {
+//        double start = newRange.location;
+//        double end = newRange.end;
+//        if (start < globalRange.location) start = globalRange.location;
+//        if (end > globalRange.end) end = globalRange.end;
+//        double length = end - start;
+//        
+//        self.myStableRange = self.graphContext.hRange;
+//        return self.graphContext.hRange;
+//    }
 }
 
 #pragma mark - DCTrendAnimationDelegate implementation

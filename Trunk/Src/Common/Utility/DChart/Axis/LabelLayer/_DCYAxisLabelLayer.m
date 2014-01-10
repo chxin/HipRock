@@ -107,7 +107,7 @@
     self.interval = newInterval;
     self.yRange = yRange;
     if (self.interval > 0 && self.yRange != nil) {
-        [self setNeedsDisplay];
+//        [self setNeedsDisplay];
     }
 }
 

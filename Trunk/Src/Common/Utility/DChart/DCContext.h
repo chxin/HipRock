@@ -23,7 +23,7 @@ extern NSString* const kDCPieShadowColor;
 extern NSString* const kDCPieIndicatorColor;
 
 @protocol DCContextHRangeObserverProtocal <NSObject>
-
+@optional
 -(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange;
 -(void)willHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange;
 
@@ -34,7 +34,7 @@ extern NSString* const kDCPieIndicatorColor;
 //
 //@end
 @protocol DCContextYIntervalObserverProtocal <NSObject>
-
+@optional
 -(void)didYIntervalChanged:(double)oldInterval newInterval:(double)newInterval yRange:(DCRange*)yRange;
 
 @end

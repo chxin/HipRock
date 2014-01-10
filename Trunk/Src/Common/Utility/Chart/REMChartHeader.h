@@ -26,12 +26,13 @@ typedef enum _DCLineType {
 @end
 
 @protocol REMChartLabelingDelegate <REMChartDelegate>
-
+@optional
 -(void)highlightPoint:(DCLabelingLabel*)point;
 
 @end
 
 @protocol REMTrendChartDelegate <REMChartDelegate>
+@optional
 /*
  * points: List<DCDataPoint>
  */
@@ -51,6 +52,7 @@ typedef enum _REMDirection{
 }REMDirection;
 
 @protocol REMTPieChartDelegate <REMChartDelegate>
+@optional
 /*
  * points: List<REMEnergyData>
  * colors: List<UIColor>

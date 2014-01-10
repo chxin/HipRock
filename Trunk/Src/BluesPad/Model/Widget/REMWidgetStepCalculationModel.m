@@ -16,8 +16,8 @@
     [intervalRanges addObject:[NSNull null]];   //    REMEnergyStepNone=0
     [intervalRanges addObject:[NSValue valueWithRange:NSMakeRange(0, REMWEEK)]];    // REMEnergyStepHour=1,
     [intervalRanges addObject:[NSValue valueWithRange:NSMakeRange(REMDAY, REMMONTH*3 - REMDAY)]];// REMEnergyStepDay=2,
-    [intervalRanges addObject:[NSValue valueWithRange:NSMakeRange(REMMONTH, NSUIntegerMax)]];// REMEnergyStepMonth=3,
-    [intervalRanges addObject:[NSValue valueWithRange:NSMakeRange(REMYEAR, NSUIntegerMax)]];// REMEnergyStepYear=4
+    [intervalRanges addObject:[NSValue valueWithRange:NSMakeRange(REMMONTH, NSUIntegerMax-REMMONTH)]];// REMEnergyStepMonth=3,
+    [intervalRanges addObject:[NSValue valueWithRange:NSMakeRange(REMYEAR, NSUIntegerMax-REMYEAR)]];// REMEnergyStepYear=4
     [intervalRanges addObject:[NSValue valueWithRange:NSMakeRange(REMWEEK, REMMONTH*3 - REMWEEK)]];// REMEnergyStepWeek=5,
     return intervalRanges;
 }
