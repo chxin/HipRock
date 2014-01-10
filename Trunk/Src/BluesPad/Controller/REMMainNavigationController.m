@@ -90,6 +90,9 @@
     //load data, when load finised, show map view
     REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
     [splashController showMapView];
+    
+    if(completed!=nil)
+        completed();
 }
 
 -(id)getChildControllerInstanceOfClass:(Class)cls
