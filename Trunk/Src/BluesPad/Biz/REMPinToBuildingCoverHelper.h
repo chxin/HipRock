@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingCoverWidgetRelationModel.h"
+#import "REMMainNavigationController.h"
 
 typedef enum _REMPinToBuildingCoverStatus{
     REMPinToBuildingCoverStatusSuccess,
@@ -16,8 +17,10 @@ typedef enum _REMPinToBuildingCoverStatus{
     REMPinToBuildingCoverStatusCommodityNotExist
 } REMPinToBuildingCoverStatus;
 
-@interface REMPinToBuildingCoverHelper : NSObject
+@interface REMPinToBuildingCoverHelper : NSObject<UIAlertViewDelegate>
 
-+ (void) pinToBuildingCover:(NSDictionary *)param withBuildingInfo:(REMBuildingOverallModel *)buildingInfo withCallback:(void(^)(REMPinToBuildingCoverStatus))callback;
+- (void) pinToBuildingCover:(NSDictionary *)param withBuildingInfo:(REMBuildingOverallModel *)buildingInfo withCallback:(void(^)(REMPinToBuildingCoverStatus))callback;
+
+@property (nonatomic,weak) REMMainNavigationController *mainNavigationController;
 
 @end

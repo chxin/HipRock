@@ -77,31 +77,11 @@
     [self popToRootViewControllerAnimated:YES];
     
     REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
-//    for(int i=0;i<splashController.childViewControllers.count; i++){
-//        UIViewController *childController = splashController.childViewControllers[i];
-//        [childController.view removeFromSuperview];
-//        [childController removeFromParentViewController];
-//        childController = nil;
-//    }
-    
-    splashController.buildingInfoArray = nil;
-    [splashController.logoView setHidden:YES];
-    
     [splashController showLoginView:NO];
+    
     if(completed!=nil)
         completed();
 }
-
-//-(void)presentLoginView:(void (^)(void))completed
-//{
-//    REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
-//    [splashController.logoView setHidden:YES];
-//    
-//    [self popToRootViewControllerAnimated:YES];
-//    [splashController showLoginView:NO];
-//    if(completed!=nil)
-//        completed();
-//}
 
 -(void)presentInitialView:(void (^)(void))completed
 {
@@ -109,8 +89,7 @@
     
     //load data, when load finised, show map view
     REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
-    [splashController showLogoView];
-    [splashController breathShowMapView:NO :completed];
+    [splashController showMapView];
 }
 
 -(id)getChildControllerInstanceOfClass:(Class)cls

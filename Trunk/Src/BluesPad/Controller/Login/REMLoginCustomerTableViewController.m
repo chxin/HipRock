@@ -58,7 +58,7 @@ static NSString *CellIdentifier = @"loginCustomerCell";
 - (void)cancelButtonPressed:(id)sender {
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         if(self.delegate!=nil){
-            [self.delegate didDismissView];
+            [self.delegate customerSelectionTableViewdidDismissView];
         }
     }];
 }
@@ -94,22 +94,28 @@ static NSString *CellIdentifier = @"loginCustomerCell";
     
     [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     
-    REMCustomerModel *selectedCustomer=nil;
-    
-    for(REMCustomerModel *customer in self.customers){
-        if([customer.name isEqualToString:cell.textLabel.text]){
-            selectedCustomer = customer;
-            break;
-        }
-    }
+    REMCustomerModel *selectedCustomer=self.customers[indexPath.row];
+//    
+//    for(REMCustomerModel *customer in self.customers){
+//        if([customer.name isEqualToString:cell.textLabel.text]){
+//            selectedCustomer = customer;
+//            break;
+//        }
+//    }
     
     if(selectedCustomer != nil){
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
             if(self.delegate!=nil){
-                [self.delegate didSelectCustomer:selectedCustomer];
+                [self.delegate customerSelectionTableView:tableView didSelectCustomer:selectedCustomer];
             }
         }];
     }
+}
+
+@synthesize customerArray;
+
+- (void)customerSelectionTableViewUpdate{
+    
 }
 
 @end

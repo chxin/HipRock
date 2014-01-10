@@ -129,7 +129,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
             pinButton.tintColor=[REMColor colorByHexString:@"#37ab3c"];
             
         }
-        CGFloat x=750;
+        CGFloat x=[self.bizDelegator xPositionForPinToBuildingCoverButton];
         
         [pinButton setFrame:CGRectMake(x, kWidgetBackButtonTop, 32, 32)];
         [pinButton setImage:[UIImage imageNamed:@"ChartCustomization_Widget"] forState:UIControlStateNormal];

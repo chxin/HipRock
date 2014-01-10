@@ -83,9 +83,11 @@
 "Login_AccountLocked" = "登录失败，您的用户名暂时无法使用";
 
 //Setting, prefix: Setting_
-"Setting_LoadingData"="正在获取新客户的能源信息,请稍候...";
-"Setting_CurrentCustomerDeleted"="当前客户已被解除关联,请退出系统后重新登录。";
-"Setting_CustomerDeleted"="该客户已被解除关联,请重新选择客户。";
+"Setting_LoadingData"="正在更新客户的楼宇及能耗信息，请稍候...";
+"Setting_CurrentCustomerDeleted"="当前客户已被解除关联,请重新选择客户。";
+"Setting_SelectedCustomerDeleted"="该客户已被解除关联,请重新选择客户。";
+"Setting_UserDeleted"="您的用户已被删除,应用将退出登录状态";
+"Setting_NoAttachedCustomer"="您的用户未关联任何客户,应用将退出登录状态";
 "Setting_DetailName"="名称";
 "Setting_DetailCode"="编码";
 "Setting_DetailAddress"="地址";
@@ -103,6 +105,7 @@
 "Setting_CurrentCustomer"="当前客户";
 "Setting_CustomerInfo"="客户信息";
 "Setting_Logout"="退出登录";
+"Setting_UpdateAll"="更新全部数据";
 "Setting_AreYouSureLogout"="您要退出当前账号登录吗?";
 "Setting_AboutProductName"="施耐德电气“云能效”管理平台";
 "Setting_AboutVersion"="iPad版V%@"; //iPad版V1.0.0
@@ -141,6 +144,10 @@
 "Building_WidgetRelationTitle"="选取要替换的图表";
 "Building_WidgetRelationCommodityTitle"="默认图表 - %@";
 "Building_WidgetRelationInfo"="所选图表将会被替换为当前图表,并出现在所属建 筑封面中,以便您在快速查看该图表。";
+"Building_WidgetRelationWidgetDeleted"="添加失败。小组件“%@”已被删除，请更新数据"; //添加失败。小组件“最近七天能效查看”已被删除，请更新数据
+"Building_WidgetRelationPositionDeleted"="添加失败。添加位置不存在，请更新数据";
+
+
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="下拉返回概览能耗信息";
 "Dashboard_TimeRange"="%@ 到 %@";

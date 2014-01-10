@@ -168,7 +168,7 @@
                 [REMAppCurrentUser save];
                 [REMAppCurrentCustomer save];
                 
-                [self.loginCarouselController.splashScreenController showMapView:nil];
+                [self.loginCarouselController.splashScreenController showMapView];
                 
                 return;
             }

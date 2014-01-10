@@ -55,7 +55,7 @@
     }
     [button setImage:[UIImage imageNamed:@"Setting"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [button setFrame:CGRectMake(950, kDMCommon_TopLeftButtonTop, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonWidth)];
+    [button setFrame:CGRectMake(950, REMDMCOMPATIOS7(kDMCommon_TopLeftButtonTop), kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonWidth)];
     return button;
 }
 
@@ -67,7 +67,7 @@
 //        customerLogoButton=[UIButton buttonWithType:UIButtonTypeSystem];
 //    }
     UIImageView *imageView=[[UIImageView alloc]initWithImage:REMAppCurrentLogo];
-    imageView.contentMode=UIViewContentModeScaleToFill;
+    imageView.contentMode=UIViewContentModeScaleAspectFill;
     [imageView setFrame:CGRectMake(0, 0, kDMCommon_CustomerLogoWidth, kDMCommon_CustomerLogoHeight)];
     
 //    [customerLogoButton setImage:REMAppCurrentLogo forState:UIControlStateNormal];

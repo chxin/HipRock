@@ -12,7 +12,8 @@ typedef enum _REMCustomerSwitchStatus {
     REMCustomerSwitchStatusSuccess = 0,
     REMCustomerSwitchStatusCurrentCustomerDeleted = 1,
     REMCustomerSwitchStatusSelectedCustomerDeleted=2,
-    REMCustomerSwitchStatusBothDeleted=3
+    REMCustomerSwitchStatusBothDeleted=3,
+    REMCustomerSwitchStatusUserDeleted=4
 } REMCustomerSwitchStatus;
 
 @interface REMCustomerSwitchHelper : NSObject
@@ -20,5 +21,6 @@ typedef enum _REMCustomerSwitchStatus {
 + (void)switchCustomerById:(NSNumber *)selectedCustomerId masker:(UIView *)view action:(void(^)(REMCustomerSwitchStatus,NSArray *))callback;
 
 + (void)cancelSwitch;
+
 
 @end

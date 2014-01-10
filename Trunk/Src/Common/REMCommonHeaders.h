@@ -38,9 +38,6 @@
 #import "REMStorage.h"
 
 //Utility
-
-//Chart
-
 #import "REMAlertHelper.h"
 #import "REMColor.h"
 #import "REMEncryptHelper.h"
@@ -48,7 +45,7 @@
 #import "REMJSONHelper.h"
 #import "REMMaskManager.h"
 #import "REMNetworkHelper.h"
+#import "REMNumberExtension.h"
 #import "REMNumberHelper.h"
 #import "REMTimeHelper.h"
 #import "REMViewHelper.h"
-#import "REMNumberExtension.h"

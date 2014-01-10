@@ -119,24 +119,69 @@
     [parameter setValue:password forKey:@"password"];
     
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserValidate parameter:parameter];
-    store.maskContainer = nil;
-    store.groupName = nil;
+    [store access:^(id data) {
+        if((NSNull *)data != [NSNull null] && data != nil) //login success
+        {
+            REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
+            
+            if(validationResult.status == REMUserValidationSuccess)
+            {
+                REMUserModel *user = validationResult.user;
+                [REMAppContext setCurrentUser:user];
+                
+                NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
+                
+                if(customers.count<=0){
+                    [REMAlertHelper alert:REMLocalizedString(kLNLogin_NotAuthorized)];
+                    [self.loginCarouselController setLoginButtonStatusNormal];
+                    
+                    return;
+                }
+                
+                if(customers.count == 1){
+                    [REMAppContext setCurrentCustomer:customers[0]];
+                    [self loginSuccess];
+                }
+                else{
+                    [self.loginCarouselController presentCustomerSelectionView];
+                }
+            }
+            else
+            {
+                [self.loginCarouselController setLoginButtonStatusNormal];
+                
+                if(validationResult.status == REMUserValidationWrongName)
+                {
+                    [self.userNameErrorLabel setHidden:NO];
+                    [self.userNameErrorLabel setText : REMLocalizedString(kLNLogin_UserNotExist) ];
+                }
+                else if (validationResult.status == REMUserValidationWrongPassword)
+                {
+                    [self.passwordErrorLabel setHidden:NO];
+                    [self.passwordErrorLabel setText : REMLocalizedString(kLNLogin_WrongPassword) ];
+                }
+                else if(validationResult.status == REMUserValidationInvalidSp)
+                {
+                    [self.userNameErrorLabel setHidden:NO];
+                    [self.userNameErrorLabel setText :  REMLocalizedString(kLNLogin_AccountLocked)];
+                }
+                else
+                {
+                    [self.loginCarouselController showLoginCard];
+                }
+            }
+        }
+    } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
+        [self.loginCarouselController setLoginButtonStatusNormal];
+        
+        if(error.code != -1001 && error.code != 306) {
+            [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
+        }
+    }];
     
     //mask login button
     [self.loginButton setLoginButtonStatus:REMLoginButtonWorkingStatus];
     [self.loginCarouselController.trialCardController.trialButton setEnabled:NO];
-    
-    void (^successHandler)(id data) = ^(id data)
-    {
-        [self dataCallSuccess:data];
-    };
-    
-    void (^errorHandler)(NSError *error,REMDataAccessErrorStatus status, id response) = ^(NSError *error,REMDataAccessErrorStatus status, id response)
-    {
-        [self dataCallFail:error result:response];
-    };
-    
-    [store access:successHandler error:errorHandler];
 }
 
 - (void)textFieldChanged:(id)sender
@@ -156,98 +201,14 @@
     }
 }
 
--(void) dataCallSuccess: (id) data
-{
-    if((NSNull *)data != [NSNull null] && data != nil) //login success
-    {
-        REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
-        
-        if(validationResult.status == REMUserValidationSuccess)
-        {
-            REMUserModel *user = validationResult.user;
-            [REMAppContext setCurrentUser:user];
-            
-            NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
-            
-            if(customers.count<=0){
-                [REMAlertHelper alert:REMLocalizedString(kLNLogin_NotAuthorized)];
-                
-                [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-                [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-                return;
-            }
-            
-            if(customers.count == 1){
-                [REMAppContext setCurrentCustomer:customers[0]];
-                
-                [REMAppCurrentUser save];
-                [REMAppCurrentCustomer save];
-                
-                [self.loginCarouselController.splashScreenController showMapView:nil];
-                
-                return;
-            }
-            
-            //[self.loginCarouselController performSegueWithIdentifier:kSegue_LoginToCustomer sender:self];
-            [self.loginCarouselController presentCustomerSelectionView];
-        }
-        else
-        {
-            [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-            [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-            
-            if(validationResult.status == REMUserValidationWrongName)
-            {
-                [self.userNameErrorLabel setHidden:NO];
-                [self.userNameErrorLabel setText : REMLocalizedString(kLNLogin_UserNotExist) ];
-            }
-            else if (validationResult.status == REMUserValidationWrongPassword)
-            {
-                [self.passwordErrorLabel setHidden:NO];
-                [self.passwordErrorLabel setText : REMLocalizedString(kLNLogin_WrongPassword) ];
-            }
-            else if(validationResult.status == REMUserValidationInvalidSp)
-            {
-                [self.userNameErrorLabel setHidden:NO];
-                [self.userNameErrorLabel setText :  REMLocalizedString(kLNLogin_AccountLocked)];
-            }
-            else
-            {
-                [self.loginCarouselController showLoginCard];
-            }
-        }
-    }
-}
-
--(void) dataCallFail: (NSError *) error result:(NSObject *)response
-{
-    [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-    [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-    
-    if(error.code != -1001 && error.code != 306) {
-        [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
-    }
-}
 
 -(void)loginSuccess
 {
     [REMAppCurrentUser save];
     [REMAppCurrentCustomer save];
     
-    
-    if([REMNetworkHelper checkIsNoConnect]){
-        [REMAlertHelper alert:REMLocalizedString(@"Login_NoNetwork")];
-        [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-        [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-        
-        return;
-    }
-    else{
-        [self.loginCarouselController.splashScreenController showMapView:^{
-            [self.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-            [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-        }];
-    }
+    [self.loginCarouselController.splashScreenController showMapView ];
+    [self.loginCarouselController setLoginButtonStatusNormal];
 }
 
 

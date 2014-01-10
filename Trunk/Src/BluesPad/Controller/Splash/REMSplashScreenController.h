@@ -11,15 +11,7 @@
 
 @interface REMSplashScreenController : UIViewController
 
-@property (weak, nonatomic) UIView *logoView;
-//@property (weak, nonatomic) IBOutlet UIImageView *flashLogo;
-//@property (weak, nonatomic) IBOutlet UIImageView *normalLogo;
-
-@property (nonatomic,strong) NSMutableArray *buildingInfoArray;
-
-- (void)showMapView:(void (^)(void))loadCompleted;
 - (void)showLoginView:(BOOL)isAnimated;
-- (void)breathShowMapView:(BOOL)isAfterBreathOnce :(void (^)(void))completed;
-- (void)showLogoView;
+- (void)showMapView;
 
 @end

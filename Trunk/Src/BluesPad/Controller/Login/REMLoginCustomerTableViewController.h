@@ -11,13 +11,22 @@
 
 @protocol REMLoginCustomerSelectionDelegate <NSObject>
 
--(void)didSelectCustomer:(REMCustomerModel *)customer;
--(void)didDismissView;
+-(void)customerSelectionTableView:(UITableView *)table didSelectCustomer:(REMCustomerModel *)customer;
+-(void)customerSelectionTableViewdidDismissView;
 
 @end
 
-@interface REMLoginCustomerTableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@protocol REMCustomerSelectionInterface
+
+- (void)customerSelectionTableViewUpdate;
+
+@property (nonatomic,strong) NSArray *customerArray;
+
+@end
+
+@interface REMLoginCustomerTableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource,REMCustomerSelectionInterface>
 
 @property (nonatomic,weak) NSObject<REMLoginCustomerSelectionDelegate> *delegate;
+
 
 @end

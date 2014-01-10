@@ -21,11 +21,15 @@
 #import "REMDimensions.h"
 #import "REMMarkerBubbleView.h"
 #import "REMImages.h"
+#import "REMBlurredMapView.h"
+#import "REMUpdateAllManager.h"
 
 @interface REMMapViewController ()
 
 @property (nonatomic,weak) GMSMapView *mapView;
 @property (nonatomic,strong) NSMutableArray *markers;
+@property (nonatomic,weak) REMBlurredMapView *mask;
+@property (nonatomic,weak) UIButton *switchButton;
 
 @end
 
@@ -40,8 +44,8 @@
         [self.view setFrame:kDMDefaultViewFrame];
         
         [self loadMapView];
-        [self loadButtons];
         [self.view.layer insertSublayer:self.titleGradientLayer above:self.mapView.layer];
+        [self loadButtons];
     }
 }
 
@@ -49,16 +53,42 @@
 - (void)viewDidLoad
 {
     //[self showMarkers];
-    [self loadData];
-    
-    if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
-        [self.view setUserInteractionEnabled:NO];
+    if(REMAppContext.buildingInfoArray == nil){
+        [self loadData];
+    }
+    else{
+        [self updateView];
     }
 }
 
 -(void)loadData
 {
+    REMBlurredMapView *mask = [[REMBlurredMapView alloc] initWithFrame:REMISIOS7 ? CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight) : CGRectMake(0, -20, kDMScreenWidth, kDMScreenHeight)];
     
+    [self.view addSubview:mask];
+    
+    //begin load data
+    REMUpdateAllManager *manager = [REMUpdateAllManager defaultManager];
+    manager.mainNavigationController = (REMMainNavigationController *)self.navigationController;
+    
+    [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
+        void (^callback)(void) = nil;
+        if(buildingInfoArray != nil){
+            self.buildingInfoArray = buildingInfoArray;
+            callback =^{ [self updateView]; };
+        }
+        else{
+            if(errorStatus == REMDataAccessFailed){
+                [REMAlertHelper alert:@"Failed"];
+            }
+            
+            if(errorStatus == REMDataAccessErrorMessage){
+                [REMAlertHelper alert:@"Error"];
+            }
+        }
+        
+        [mask hide:callback];
+    }];
 }
 
 -(void)loadButtons
@@ -78,22 +108,33 @@
     [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:switchButton];
-    
-    if(self.buildingInfoArray.count <= 0){
-        [switchButton setEnabled:NO];
-    }
-    
-    //add customer logo button
-    UIImageView *logoButton = self.customerLogoButton;
-    logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
-    [self.view addSubview:logoButton];
+    self.switchButton = switchButton;
     
     UIButton *settingButton=self.settingButton;
     [self.view addSubview:settingButton];
 }
 
+-(void)updateView
+{
+    [self renderCustomerLogo];
+    [self updateCamera:self.mapView];
+    [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(showMarkers) userInfo:nil repeats:NO];
+}
+
+-(void)renderCustomerLogo
+{
+    //add customer logo button
+    UIImageView *logoButton = self.customerLogoButton;
+    logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
+    [self.view addSubview:logoButton];
+}
+
 -(void)showMarkers
 {
+    if(self.buildingInfoArray.count <= 0){
+        [self.switchButton setEnabled:NO];
+    }
+    
     NSArray *buildings = [self.buildingInfoArray sortedArrayUsingComparator:^NSComparisonResult(REMBuildingOverallModel *b1, REMBuildingOverallModel *b2) {
         return b1.building.latitude > b2.building.latitude ? NSOrderedAscending : NSOrderedDescending;
     }];
@@ -115,11 +156,16 @@
         marker.flat = NO;
         marker.zIndex = i;
         marker.icon = [self getMarkerIcon:buildingInfo forMarkerState:UIControlStateNormal];
+        marker.appearAnimation = kGMSMarkerAnimationPop;
         
         if([buildingInfo.building.buildingId isEqualToNumber:[self.buildingInfoArray[0] building].buildingId])
             self.mapView.selectedMarker = marker;
         
         [self.markers addObject:marker];
+    }
+    
+    if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
+        [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
     }
 }
 
@@ -169,7 +215,8 @@
         
         GMSCameraPosition *camera = [mapView cameraForBounds:bounds insets:kDMMap_MapEdgeInsets];
         
-        [mapView setCamera:camera];
+        //[mapView setCamera:camera];
+        [mapView animateToCameraPosition:camera];
     }
 }
 
@@ -204,9 +251,6 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
-        [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
