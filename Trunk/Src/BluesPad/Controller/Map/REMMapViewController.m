@@ -21,11 +21,13 @@
 #import "REMDimensions.h"
 #import "REMMarkerBubbleView.h"
 #import "REMImages.h"
+#import "REMBlurredMapView.h"
 
 @interface REMMapViewController ()
 
 @property (nonatomic,weak) GMSMapView *mapView;
 @property (nonatomic,strong) NSMutableArray *markers;
+@property (nonatomic,weak) REMBlurredMapView *mask;
 
 @end
 
@@ -40,7 +42,6 @@
         [self.view setFrame:kDMDefaultViewFrame];
         
         [self loadMapView];
-        [self loadButtons];
         [self.view.layer insertSublayer:self.titleGradientLayer above:self.mapView.layer];
     }
 }
@@ -50,6 +51,7 @@
 {
     //[self showMarkers];
     [self loadData];
+    [self loadButtons];
     
     if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
         [self.view setUserInteractionEnabled:NO];
@@ -58,6 +60,11 @@
 
 -(void)loadData
 {
+    REMBlurredMapView *mask = [[REMBlurredMapView alloc] initWithFrame:REMISIOS7 ? CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight) : CGRectMake(0, -20, kDMScreenWidth, kDMScreenHeight)];
+    
+    [self.view addSubview:mask];
+    
+    //begin load data
     
 }
 

@@ -439,6 +439,11 @@
 		7AB34E51177D2CE1003E235E /* REMServiceRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB34E50177D2CE1003E235E /* REMServiceRequestOperation.m */; };
 		7AB34E7F177D33AB003E235E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4A177D2975003E235E /* MobileCoreServices.framework */; };
 		7AB34E80177D33AB003E235E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4B177D2975003E235E /* SystemConfiguration.framework */; };
+		7AB71684187F839500EA7544 /* DefaultMap.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71682187F839500EA7544 /* DefaultMap.png */; };
+		7AB71685187F839500EA7544 /* DefaultMap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71683187F839500EA7544 /* DefaultMap@2x.png */; };
+		7AB71688187F859B00EA7544 /* MapBlur.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71686187F859B00EA7544 /* MapBlur.png */; };
+		7AB71689187F859B00EA7544 /* MapBlur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71687187F859B00EA7544 /* MapBlur@2x.png */; };
+		7AB7168C187F8B4B00EA7544 /* REMBlurredMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB7168B187F8B4B00EA7544 /* REMBlurredMapView.m */; };
 		7AB9B396183DCF1100779C5E /* REMChartLegendBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B384183DCF1100779C5E /* REMChartLegendBase.m */; };
 		7AB9B397183DCF1100779C5E /* REMChartLegendItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B386183DCF1100779C5E /* REMChartLegendItem.m */; };
 		7AB9B398183DCF1100779C5E /* REMTrendChartLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB9B388183DCF1100779C5E /* REMTrendChartLegendView.m */; };
@@ -1104,6 +1109,12 @@
 		7AB34E5F177D31F1003E235E /* REMLogTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLogTests.m; path = ../test/CommonTests/REMLogTests.m; sourceTree = "<group>"; };
 		7AB34E63177D3203003E235E /* REMCommunicationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMCommunicationTests.h; path = ../test/CommonTests/REMCommunicationTests.h; sourceTree = "<group>"; };
 		7AB34E64177D3203003E235E /* REMCommunicationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMCommunicationTests.m; path = ../test/CommonTests/REMCommunicationTests.m; sourceTree = "<group>"; };
+		7AB71682187F839500EA7544 /* DefaultMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultMap.png; sourceTree = "<group>"; };
+		7AB71683187F839500EA7544 /* DefaultMap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultMap@2x.png"; sourceTree = "<group>"; };
+		7AB71686187F859B00EA7544 /* MapBlur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapBlur.png; sourceTree = "<group>"; };
+		7AB71687187F859B00EA7544 /* MapBlur@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MapBlur@2x.png"; sourceTree = "<group>"; };
+		7AB7168A187F8B4B00EA7544 /* REMBlurredMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBlurredMapView.h; sourceTree = "<group>"; };
+		7AB7168B187F8B4B00EA7544 /* REMBlurredMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBlurredMapView.m; sourceTree = "<group>"; };
 		7AB9B383183DCF1100779C5E /* REMChartLegendBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartLegendBase.h; sourceTree = "<group>"; };
 		7AB9B384183DCF1100779C5E /* REMChartLegendBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartLegendBase.m; sourceTree = "<group>"; };
 		7AB9B385183DCF1100779C5E /* REMChartLegendItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMChartLegendItem.h; sourceTree = "<group>"; };
@@ -1714,6 +1725,10 @@
 		6A61A6E31839B82000C6A228 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				7AB71686187F859B00EA7544 /* MapBlur.png */,
+				7AB71687187F859B00EA7544 /* MapBlur@2x.png */,
+				7AB71682187F839500EA7544 /* DefaultMap.png */,
+				7AB71683187F839500EA7544 /* DefaultMap@2x.png */,
 				7A664FD4183B3369004B9FF3 /* MapPopover_Arrow.png */,
 				7A664FD5183B3369004B9FF3 /* MapPopover_Arrow@2x.png */,
 				7A664FD6183B3369004B9FF3 /* MapPopover_Rectangle.png */,
@@ -2563,6 +2578,8 @@
 				7A6A14F0181E52F4007D06B8 /* REMMarkerBubbleView.m */,
 				7A57EF0C1851A9FF00838F8B /* REMGalleryTableView.h */,
 				7A57EF0D1851A9FF00838F8B /* REMGalleryTableView.m */,
+				7AB7168A187F8B4B00EA7544 /* REMBlurredMapView.h */,
+				7AB7168B187F8B4B00EA7544 /* REMBlurredMapView.m */,
 			);
 			name = Map;
 			path = View/Map;
@@ -3439,6 +3456,7 @@
 				7A5A97391856D54E0084E228 /* share-weixin@2x.png in Resources */,
 				B4707D8618697B1C00FBA393 /* Cooling_normal.png in Resources */,
 				B4707D9718697B2900FBA393 /* Cooling_pressed@2x.png in Resources */,
+				7AB71688187F859B00EA7544 /* MapBlur.png in Resources */,
 				6A61A7661839B82000C6A228 /* Down@2x.png in Resources */,
 				6A61A70B1839B82000C6A228 /* Electricity_normal.png in Resources */,
 				6A61A7651839B82000C6A228 /* Down.png in Resources */,
@@ -3487,6 +3505,7 @@
 				7A58F24A1839A5650071DE7A /* mail.jpg in Resources */,
 				6A61A77D1839B82000C6A228 /* CommonPin_Normal.png in Resources */,
 				B4656BFD187D47E6008EAEA8 /* ChartCustomization_Widget.png in Resources */,
+				7AB71685187F839500EA7544 /* DefaultMap@2x.png in Resources */,
 				6A61A71D1839B82000C6A228 /* Water_pressed.png in Resources */,
 				7A664FD9183B3369004B9FF3 /* MapPopover_Arrow@2x.png in Resources */,
 				6A61A6FF1839B82000C6A228 /* EMOP_APP_7.png in Resources */,
@@ -3519,6 +3538,7 @@
 				6A61A7331839B82000C6A228 /* Back_Chart.png in Resources */,
 				6A61A7221839B82000C6A228 /* DefaultBuilding@2x.png in Resources */,
 				6A61A77F1839B82000C6A228 /* Gallery.png in Resources */,
+				7AB71684187F839500EA7544 /* DefaultMap.png in Resources */,
 				6A61A7701839B82000C6A228 /* Login-Disable@2x.png in Resources */,
 				6A61A73A1839B82000C6A228 /* DateView_Chart@2x.png in Resources */,
 				6A61A7051839B82000C6A228 /* EMOP_Spotlight_7.png in Resources */,
@@ -3555,6 +3575,7 @@
 				6A61A78F1839B82000C6A228 /* SplashScreenLogo-Common.png in Resources */,
 				7AFC251118503D3800B9CF11 /* Default-Landscape@2x.png in Resources */,
 				6A61A7781839B82000C6A228 /* LoginTextField@2x.png in Resources */,
+				7AB71689187F859B00EA7544 /* MapBlur@2x.png in Resources */,
 				6A61A7241839B82000C6A228 /* Menu_normal@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3648,6 +3669,7 @@
 				7A399E96177D238F00F0EB9F /* AFHTTPClient.m in Sources */,
 				7A6A14F1181E52F4007D06B8 /* REMMarkerBubbleView.m in Sources */,
 				B4D50A41183313C7007C93A4 /* REMBuildingChartContainerViewController.m in Sources */,
+				7AB7168C187F8B4B00EA7544 /* REMBlurredMapView.m in Sources */,
 				B4E815D11827375200FB9BC5 /* REMWidgetTagSearchModel.m in Sources */,
 				EFE78DB7187E4372003FB710 /* REMWidgetStepCalculationModel.m in Sources */,
 				7A399E97177D238F00F0EB9F /* AFHTTPRequestOperation.m in Sources */,
