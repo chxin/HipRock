@@ -35,6 +35,8 @@ typedef void (^CustomerSelectionCallback)(REMCustomerUserConcurrencyStatus statu
 
 @property (nonatomic,weak) UIView *maskerView;
 
+@property (nonatomic) BOOL canCancel;
+
 @property (nonatomic,weak) UITableViewController<REMCustomerSelectionInterface> *tableViewController;
 
 - (void) updateAllBuildingInfoWithAction:(CustomerSelectionCallback )callback;

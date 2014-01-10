@@ -20,6 +20,8 @@
 
 @property (nonatomic,strong) NSDictionary *parameter;
 
+@property (nonatomic,weak) UIAlertView *alertView;
+
 @end
 
 @implementation REMUpdateAllManager
@@ -30,6 +32,7 @@
     REMUserModel *user=REMAppCurrentUser;
     manager.currentCustomerId=customer.customerId;
     manager.currentUserId=@(user.userId);
+    manager.canCancel=NO;
     return manager;
 }
 
@@ -63,10 +66,10 @@ static NSString *customerUpdateAll=@"customerupdateall";
         logoStore.groupName = nil;
         logoStore.maskContainer = nil;
         
-        [logoStore access:^(id data) {
+        [logoStore access:^(id data1) {
             UIImage *logo = nil;
-            if(data != nil && [data length] > 2) {
-                logo = [REMImageHelper parseImageFromNSData:data withScale:1.0];
+            if(data1 != nil && [data1 length] > 2) {
+                logo = [REMImageHelper parseImageFromNSData:data1 withScale:1.0];
             }
             
             REMAppCurrentLogo = logo;
@@ -95,7 +98,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
                 }
             }
             self.buildingInfoArray=buildingInfoList;
-            
+            [self.alertView dismissWithClickedButtonIndex:-1 animated:YES];
             if (status == REMCustomerUserConcurrencyStatusUserDeleted) {
                 [self statusUserDeleted];
             }
@@ -120,6 +123,14 @@ static NSString *customerUpdateAll=@"customerupdateall";
     } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
         callback(REMCustomerUserConcurrencyStatusFailed,nil,status);
     }];
+    
+    NSString *msg=NSLocalizedString(@"Setting_LoadingData", @"");//正在更新客户的楼宇及能耗信息，请稍后...
+    
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:msg delegate:self cancelButtonTitle:NSLocalizedString(@"Common_Giveup", @"") otherButtonTitles: nil];
+    alert.tag=-1;
+    [alert show];
+    self.alertView=alert;
+    
 }
 
 - (void)showAlertWithMessage:(NSString *)msg withTag:(NSInteger)tag{
@@ -173,16 +184,22 @@ static NSString *customerUpdateAll=@"customerupdateall";
     self.callback(REMCustomerUserConcurrencyStatusSuccess,self.buildingInfoArray,REMDataAccessCanceled);
 }
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (alertView.tag == 0 || alertView.tag == 3) { // logout,user deleted
-        [self logout];
+    if (buttonIndex==0) {
+        if (alertView.tag==-1) {//give up
+            [REMUpdateAllManager cancelUpdateAll:nil];
+        }
+        else if (alertView.tag == 0 || alertView.tag == 3) { // logout,user deleted
+            [self logout];
+        }
+        else if(alertView.tag == 1 || alertView.tag == 2){ //current customer deleted or selected customer deleted
+            [self showTableView];
+        }
     }
-    else if(alertView.tag == 1 || alertView.tag == 2){ //current customer deleted or selected customer deleted
-        [self showTableView];
-    }
-    
 }
+
+
 
 - (void)logout{
     REMUserModel *currentUser = [REMApplicationContext instance].currentUser;

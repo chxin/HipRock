@@ -61,6 +61,7 @@
     }
     else{
         REMUpdateAllManager *manager=[REMUpdateAllManager defaultManager];
+        manager.canCancel=YES;
         [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
             if (status == REMCustomerUserConcurrencyStatusSuccess) {
                 [self.settingController.navigationController popToRootViewControllerAnimated:YES];
