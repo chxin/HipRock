@@ -123,13 +123,15 @@ static NSString *customerUpdateAll=@"customerupdateall";
     } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
         callback(REMCustomerUserConcurrencyStatusFailed,nil,status);
     }];
+    if (self.canCancel==YES) {
+        NSString *msg=NSLocalizedString(@"Setting_LoadingData", @"");//正在更新客户的楼宇及能耗信息，请稍后...
+        
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:msg delegate:self cancelButtonTitle:NSLocalizedString(@"Common_Giveup", @"") otherButtonTitles: nil];
+        alert.tag=-1;
+        [alert show];
+        self.alertView=alert;
+    }
     
-    NSString *msg=NSLocalizedString(@"Setting_LoadingData", @"");//正在更新客户的楼宇及能耗信息，请稍后...
-    
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:msg delegate:self cancelButtonTitle:NSLocalizedString(@"Common_Giveup", @"") otherButtonTitles: nil];
-    alert.tag=-1;
-    [alert show];
-    self.alertView=alert;
     
 }
 
