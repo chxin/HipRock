@@ -226,7 +226,8 @@
     }
     ;
     self.isRequesting=YES;
-    [REMPinToBuildingCoverHelper pinToBuildingCover:@{@"relationList":@[newDic],@"buildingId":model.buildingId,@"customerId":customer.customerId} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
+    REMPinToBuildingCoverHelper *helper=[[REMPinToBuildingCoverHelper alloc]init];
+    [helper pinToBuildingCover:@{@"relationList":@[newDic],@"buildingId":model.buildingId,@"customerId":customer.customerId} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
         if (status == REMPinToBuildingCoverStatusSuccess) {
             [self.commodityController updateChartController];
         }

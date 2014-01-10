@@ -24,4 +24,14 @@
     }
 }
 
+- (NSDictionary *)updateInnerDictionary{
+    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
+    dic[@"CommodityId"] = [self.commodityId copy];
+    dic[@"HierarchyId"] = [self.buildingId copy];
+    dic[@"WidgetId"] = [self.widgetId copy];
+    dic[@"DashboardId"] = [self.dashboardId copy];
+    dic[@"Position"] = @((int)self.position);
+    return dic;
+}
+
 @end

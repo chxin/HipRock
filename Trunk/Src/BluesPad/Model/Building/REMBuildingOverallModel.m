@@ -75,6 +75,20 @@
 
 }
 
+- (NSDictionary *)updateInnerDictionary
+{
+    NSMutableArray *array=[NSMutableArray array];
+    for (int i=0; i<self.widgetRelationArray.count; ++i) {
+        REMBuildingCoverWidgetRelationModel *model=self.widgetRelationArray[i];
+        NSDictionary *dic = [model updateInnerDictionary];
+        [array addObject:dic];
+    }
+    NSMutableDictionary *newDic = [self.innerDictionary mutableCopy];
+    newDic[@"WidgetRelation"]=array;
+    self.innerDictionary=newDic;
+    return self.innerDictionary;
+}
+
 +(int)indexOfBuilding:(REMBuildingModel *)building inBuildingOverallArray:(NSArray *)array
 {
     return [array indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {

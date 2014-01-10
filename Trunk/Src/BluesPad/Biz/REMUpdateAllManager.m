@@ -9,7 +9,7 @@
 #import "REMCustomerModel.h"
 #import "REMUserModel.h"
 #import "REMBuildingOverallModel.h"
-
+#import "REMServiceAgent.h"
 
 @interface REMUpdateAllManager()
 
@@ -17,6 +17,8 @@
 @property (nonatomic,strong) NSArray *customerInfoArray;
 
 @property (nonatomic,strong) CustomerSelectionCallback callback;
+
+@property (nonatomic,strong) NSDictionary *parameter;
 
 @end
 
@@ -38,52 +40,83 @@ static NSString *customerUpdateAll=@"customerupdateall";
 {
     self.callback=callback;
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setObject:self.currentCustomerId forKey:@"selectedCustomerId"];
+    if (self.selectedCustomerId!=nil) {
+        [dic setObject:self.selectedCustomerId forKey:@"selectedCustomerId"];
+    }
     [dic setObject:self.currentCustomerId forKey:@"customerId"];
     
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:dic];
     store.maskContainer=self.maskerView;
     store.groupName =customerUpdateAll;
+    self.parameter=dic;
     [store access:^(NSDictionary *data){
-        NSNumber *statusNumber=data[@"Status"];
-        REMCustomerUserConcurrencyStatus status=(REMCustomerUserConcurrencyStatus)[statusNumber integerValue];
         
-        NSArray *newList = data[@"Customers"];
-        NSMutableArray *customerList=nil;
-        if(newList!=nil && [newList isEqual:[NSNull null]]==NO){
-            customerList = [[NSMutableArray alloc]initWithCapacity:newList.count];
-            for (NSDictionary *obj in newList) {
-                REMCustomerModel *model=[[REMCustomerModel alloc]initWithDictionary:obj];
-                [customerList addObject:model];
-            }
-        }
-        self.customerInfoArray=customerList;
-        NSArray *newBuildingList=data[@"BuildingInfo"];
-        NSMutableArray *buildingInfoList=nil;
-        if(newBuildingList!=nil && [newBuildingList isEqual:[NSNull null]]==NO){
-            buildingInfoList = [[NSMutableArray alloc]initWithCapacity:newBuildingList.count];
-            for (NSDictionary *obj in newBuildingList) {
-                REMBuildingOverallModel *model=[[REMBuildingOverallModel alloc]initWithDictionary:obj];
-                [buildingInfoList addObject:model];
-            }
-        }
-        self.buildingInfoArray=buildingInfoList;
         
-        if (status == REMCustomerUserConcurrencyStatusUserDeleted) {
-            [self statusUserDeleted];
+        NSDictionary *parameter;
+        if (self.selectedCustomerId!=nil) {
+            parameter= @{@"customerId":self.selectedCustomerId};
         }
-        else if(status == REMCustomerUserConcurrencyStatusCurrentCustomerDeleted){
-            [self statusCurrentCustomerDeleted];
+        else{
+            parameter= @{@"customerId":self.currentCustomerId};
         }
-        else if(status == REMCustomerUserConcurrencyStatusSelectedCustomerDeleted){
-            [self statusSelectedCustomerDeleted];
-        }
-        else if(status == REMCustomerUserConcurrencyStatusNoAttachedCustomer){
-            [self statusNoAttached];
-        }
-        else if(status == REMCustomerUserConcurrencyStatusSuccess){
-            [self statusSuccess];
-        }
+        REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter];
+        logoStore.groupName = nil;
+        logoStore.maskContainer = nil;
+        
+        [logoStore access:^(id data) {
+            UIImage *logo = nil;
+            if(data != nil && [data length] > 2) {
+                logo = [REMImageHelper parseImageFromNSData:data withScale:1.0];
+            }
+            
+            REMAppCurrentLogo = logo;
+            
+            
+            NSNumber *statusNumber=data[@"Status"];
+            REMCustomerUserConcurrencyStatus status=(REMCustomerUserConcurrencyStatus)[statusNumber integerValue];
+            
+            NSArray *newList = data[@"Customers"];
+            NSMutableArray *customerList=nil;
+            if(newList!=nil && [newList isEqual:[NSNull null]]==NO){
+                customerList = [[NSMutableArray alloc]initWithCapacity:newList.count];
+                for (NSDictionary *obj in newList) {
+                    REMCustomerModel *model=[[REMCustomerModel alloc]initWithDictionary:obj];
+                    [customerList addObject:model];
+                }
+            }
+            self.customerInfoArray=customerList;
+            NSArray *newBuildingList=data[@"BuildingInfo"];
+            NSMutableArray *buildingInfoList=nil;
+            if(newBuildingList!=nil && [newBuildingList isEqual:[NSNull null]]==NO){
+                buildingInfoList = [[NSMutableArray alloc]initWithCapacity:newBuildingList.count];
+                for (NSDictionary *obj in newBuildingList) {
+                    REMBuildingOverallModel *model=[[REMBuildingOverallModel alloc]initWithDictionary:obj];
+                    [buildingInfoList addObject:model];
+                }
+            }
+            self.buildingInfoArray=buildingInfoList;
+            
+            if (status == REMCustomerUserConcurrencyStatusUserDeleted) {
+                [self statusUserDeleted];
+            }
+            else if(status == REMCustomerUserConcurrencyStatusCurrentCustomerDeleted){
+                [self statusCurrentCustomerDeleted];
+            }
+            else if(status == REMCustomerUserConcurrencyStatusSelectedCustomerDeleted){
+                [self statusSelectedCustomerDeleted];
+            }
+            else if(status == REMCustomerUserConcurrencyStatusNoAttachedCustomer){
+                [self statusNoAttached];
+            }
+            else if(status == REMCustomerUserConcurrencyStatusSuccess){
+                [self statusSuccess];
+            }
+            
+        } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
+            callback(REMCustomerUserConcurrencyStatusFailed,nil,status);
+        }];
+        
+        
     } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
         callback(REMCustomerUserConcurrencyStatusFailed,nil,status);
     }];
@@ -130,7 +163,13 @@ static NSString *customerUpdateAll=@"customerupdateall";
 }
 
 - (void)statusSuccess{
+    REMApplicationContext *context=REMAppContext;
+    context.buildingInfoArray=self.buildingInfoArray;
     
+    NSString *parameterString = [REMServiceAgent buildParameterString:self.parameter];
+    NSData *postData = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *storageKey = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
+    context.buildingInfoArrayStorageKey=storageKey;
     self.callback(REMCustomerUserConcurrencyStatusSuccess,self.buildingInfoArray,REMDataAccessCanceled);
 }
 
