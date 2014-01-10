@@ -107,6 +107,7 @@
 "Setting_CurrentCustomer"="当前客户";
 "Setting_CustomerInfo"="客户信息";
 "Setting_Logout"="退出登录";
+"Setting_UpdateAll"="更新全部数据";
 "Setting_AreYouSureLogout"="您要退出当前账号登录吗?";
 "Setting_AboutProductName"="施耐德电气“云能效”管理平台";
 "Setting_AboutVersion"="iPad版V%@"; //iPad版V1.0.0
@@ -146,6 +147,9 @@
 "Building_WidgetRelationTitle"="选取要替换的图表";
 "Building_WidgetRelationCommodityTitle"="默认图表 - %@";
 "Building_WidgetRelationInfo"="所选图表将会被替换为当前图表,并出现在所属建 筑封面中,以便您在快速查看该图表。";
+"Building_WidgetRelationWidgetDeleted"="添加失败。小组件“%@”已被删除，请更新数据"; //添加失败。小组件“最近七天能效查看”已被删除，请更新数据
+"Building_WidgetRelationPositionDeleted"="添加失败。添加位置不存在，请更新数据";
+
 
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="下拉返回概览能耗信息";

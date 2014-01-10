@@ -16,7 +16,7 @@
 @property (nonatomic,strong) NSArray *buildingInfoArray;
 @property (nonatomic,strong) NSArray *customerInfoArray;
 
-@property (nonatomic,strong) CustomerSelectionCallback callback;
+@property (nonatomic,strong) REMCustomerSelectionCallback callback;
 
 @property (nonatomic,strong) NSDictionary *parameter;
 
@@ -39,7 +39,7 @@
 static NSString *customerUpdateAll=@"customerupdateall";
 
 
-- (void)updateAllBuildingInfoWithAction:(CustomerSelectionCallback)callback
+- (void)updateAllBuildingInfoWithAction:(REMCustomerSelectionCallback)callback
 {
     self.callback=callback;
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];

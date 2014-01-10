@@ -11,7 +11,7 @@
 #import "WeiboAccounts.h"
 #import "REMAlertHelper.h"
 #import "REMSettingCustomerSelectionViewController.h"
-
+#import "REMUpdateAllManager.h"
 
 @interface REMSettingViewController ()
 @property (nonatomic) BOOL isLoggingOut;
@@ -270,6 +270,16 @@
     }
     else if(indexPath.section==2 && indexPath.row==0){
         [self performSegueWithIdentifier:@"settingAboutSegue" sender:self];
+    }
+    else if(indexPath.section==3 && indexPath.row==0){
+        REMUpdateAllManager *manager=[REMUpdateAllManager defaultManager];
+        manager.canCancel=YES;
+        manager.mainNavigationController=(REMMainNavigationController *)self.presentingViewController.navigationController;
+        [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
+            if (status == REMCustomerUserConcurrencyStatusSuccess) {
+                
+            }
+        }];
     }
 }
 

@@ -252,6 +252,7 @@
     self.backButton=backButton;
     
     UIButton *settingButton=self.settingButton;
+    [settingButton setFrame:CGRectMake(settingButton.frame.origin.x, settingButton.frame.origin.y-kDMStatusBarHeight , settingButton.frame.size.width, settingButton.frame.size.height)];
     [settingButton removeTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [settingButton addTarget:self.parentViewController action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.container addSubview:settingButton];
