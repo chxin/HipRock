@@ -288,13 +288,16 @@ static const int kTrialCardIndex = kCardCount - 2;
 
 #pragma mark  Customer selection delegate
 
--(void)didSelectCustomer:(REMCustomerModel *)customer
+-(void)customerSelectionTableView:(UITableView *)table didSelectCustomer:(REMCustomerModel *)customer
 {
     [REMAppContext setCurrentCustomer:customer];
     [self.loginCardController loginSuccess];
 }
-
--(void)didDismissView
+-(void)customerSelectionTableViewdidDismissView
+{
+    [self setLoginButtonStatusNormal];
+}
+-(void)setLoginButtonStatusNormal
 {
     [self.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
     [self.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];

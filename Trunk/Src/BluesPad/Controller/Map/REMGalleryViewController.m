@@ -171,10 +171,8 @@
     //[tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
     
     
-    tableView.layer.borderColor = [UIColor blueColor].CGColor;
-    tableView.layer.borderWidth = 1.0;
-    
-    [tableView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(taptest:)]];
+//    tableView.layer.borderColor = [UIColor blueColor].CGColor;
+//    tableView.layer.borderWidth = 1.0;
     
     self.galleryTableView = tableView;
     [self.view addSubview:self.galleryTableView];

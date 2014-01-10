@@ -27,8 +27,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         //self.backgroundView = [[UIImageView alloc] initWithFrame:kDMGallery_GalleryCellFrame];
-        self.layer.borderColor = [UIColor orangeColor].CGColor;
-        self.layer.borderWidth = 1.0;
+//        self.layer.borderColor = [UIColor orangeColor].CGColor;
+//        self.layer.borderWidth = 1.0;
         
         UIButton *button = [[UIButton alloc] initWithFrame:self.bounds];
         [button setImage:REMIMG_DefaultBuilding_Small forState:UIControlStateNormal];
@@ -60,12 +60,6 @@
     
     return self;
 }
-
--(void)taptest:(UITapGestureRecognizer *)tap
-{
-    NSLog(@"cell tapped: %@", [tap.view class]);
-}
-
 
 -(void)pressed:(id)button
 {
