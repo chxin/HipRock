@@ -140,6 +140,11 @@ const static CGFloat kRankingTimePickerWidth=250;
     
 }
 
+- (CGFloat)xPositionForPinToBuildingCoverButton
+{
+    return 970;
+}
+
 - (void)search{
     
     [self searchData:self.model];

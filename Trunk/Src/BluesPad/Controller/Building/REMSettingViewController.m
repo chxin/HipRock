@@ -277,6 +277,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"settingCustomerSelectionSegue"]==YES){
         REMSettingCustomerSelectionViewController *selectionVc= segue.destinationViewController;
+        selectionVc.customerArray=[REMApplicationContext instance].currentUser.customers;
         //selectionVc.splashController=self.splashScreenController;
         //selectionVc.parentNavigationController=self.mainNavigationController;
         selectionVc.settingController=self;

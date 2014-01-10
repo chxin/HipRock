@@ -92,6 +92,11 @@
     }
 }
 
+- (CGFloat)xPositionForPinToBuildingCoverButton
+{
+    return 750;
+}
+
 - (void)showChart{
     if (self.energyData) {
         [self processEnergyDataInnerError:self.energyData];
