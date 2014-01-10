@@ -29,6 +29,7 @@
     [self.tableView reloadData];
 }
 
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -177,7 +178,8 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [REMApplicationContext instance].currentUser.customers.count;
+    //return [REMApplicationContext instance].currentUser.customers.count;
+    return self.customerArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -189,7 +191,7 @@
         
     }
     
-    NSArray *customers=[REMApplicationContext instance].currentUser.customers;
+    NSArray *customers= self.customerArray; //[REMApplicationContext instance].currentUser.customers;
     REMCustomerModel *model=customers[indexPath.row];
     cell.textLabel.text=model.name;
     NSString *currentName=[REMApplicationContext instance].currentCustomer.name;

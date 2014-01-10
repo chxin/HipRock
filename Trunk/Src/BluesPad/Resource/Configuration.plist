@@ -9,7 +9,7 @@
 		<key>local</key>
 		<dict>
 			<key>url</key>
-			<string>http://10.177.206.79/Mobile/</string>
+			<string>http://10.177.206.34/Mobile/</string>
 			<key>debug-user</key>
 			<string>SchneiderElectricChina|P@ssw0rdChina</string>
 		</dict>

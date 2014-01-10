@@ -9,7 +9,7 @@
 #import "REMLoginCustomerTableViewController.h"
 #import "REMMainNavigationController.h" 
 #import "REMLoginCustomerTableViewController.h"
-
+#import "REMDataStoreType.h"
 
 typedef enum _REMCustomerUserConcurrencyStatus {
     REMCustomerUserConcurrencyStatusSuccess = 0,

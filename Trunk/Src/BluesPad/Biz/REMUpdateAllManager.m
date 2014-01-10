@@ -41,7 +41,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
     [dic setObject:self.currentCustomerId forKey:@"selectedCustomerId"];
     [dic setObject:self.currentCustomerId forKey:@"customerId"];
     
-    REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSCustomerUpdateAll parameter:dic];
+    REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:dic];
     store.maskContainer=self.maskerView;
     store.groupName =customerUpdateAll;
     [store access:^(NSDictionary *data){
@@ -173,13 +173,10 @@ static NSString *customerUpdateAll=@"customerupdateall";
 
 - (void)customerSelectionTableView:(UITableView *)table didSelectCustomer:(REMCustomerModel *)customer
 {
-    REMUpdateAllManager *manager = [REMUpdateAllManager defaultManager];
-    manager.selectedCustomerId=customer.customerId;
-    manager.tableViewController=self.tableViewController;
-    __weak REMUpdateAllManager *that=self;
-    [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
-        that.callback(status,buildingInfoArray,errorStatus);
-    }];
+    
+    self.selectedCustomerId=customer.customerId;
+    self.tableViewController=self.tableViewController;
+    [self updateAllBuildingInfoWithAction:self.callback];
 }
 
 - (void)customerSelectionTableViewdidDismissView
