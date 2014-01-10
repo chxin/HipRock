@@ -68,9 +68,9 @@
                 [self.settingController.navigationController popToRootViewControllerAnimated:YES];
                 REMMainNavigationController *mainController=(REMMainNavigationController *)self.navigationController.presentingViewController;
                 [mainController dismissViewControllerAnimated:NO completion:^{
-//                    [mainController presentInitialView:^(void){
-//                        
-//                    }];
+                    [mainController presentInitialView:^(void){
+                        
+                    }];
                 }];
                 
             }
