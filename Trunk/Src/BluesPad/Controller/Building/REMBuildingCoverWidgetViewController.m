@@ -227,6 +227,7 @@
     ;
     self.isRequesting=YES;
     REMPinToBuildingCoverHelper *helper=[[REMPinToBuildingCoverHelper alloc]init];
+    helper.mainNavigationController=(REMMainNavigationController *)self.commodityController.parentViewController.parentViewController.parentViewController.navigationController;
     [helper pinToBuildingCover:@{@"relationList":@[newDic],@"buildingId":model.buildingId,@"customerId":customer.customerId} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
         if (status == REMPinToBuildingCoverStatusSuccess) {
             [self.commodityController updateChartController];

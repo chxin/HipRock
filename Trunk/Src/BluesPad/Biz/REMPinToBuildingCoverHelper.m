@@ -7,6 +7,9 @@
 --------------------------------------------------------------------------*/
 #import "REMPinToBuildingCoverHelper.h"
 #import "REMApplicationContext.h"
+#import "REMUpdateAllManager.h"
+
+
 @implementation REMPinToBuildingCoverHelper
 
 - (void)pinToBuildingCover:(NSDictionary *)param withBuildingInfo:(REMBuildingOverallModel *)buildingInfo withCallback:(void(^)(REMPinToBuildingCoverStatus))callback{
@@ -24,10 +27,10 @@
     }error:^(NSError *error,REMDataAccessErrorStatus status, REMBusinessErrorInfo * bizError){
         if (status == REMDataAccessErrorMessage) {
             if ([bizError.code isEqualToString:@""]==YES) {//widget deleted
-                
+                [self showMessage:NSLocalizedString(@"Building_WidgetRelationWidgetDeleted", @"")];
             }
             else if([bizError.code isEqualToString:@""]==YES){//container deleted
-                
+                [self showMessage:NSLocalizedString(@"Building_WidgetRelationPositionDeleted", @"")];
             }
         }
     }];
@@ -37,6 +40,16 @@
     NSString *updateString;
     UIAlertView *view = [[UIAlertView alloc]initWithTitle:@"" message:msg delegate:self cancelButtonTitle:updateString otherButtonTitles: nil];
     [view show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    REMUpdateAllManager *manager=[REMUpdateAllManager defaultManager];
+    manager.canCancel=YES;
+    manager.mainNavigationController = self.mainNavigationController;
+    [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
+        
+    }];
 }
 
 @end

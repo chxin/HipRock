@@ -20,7 +20,7 @@ typedef enum _REMCustomerUserConcurrencyStatus {
     REMCustomerUserConcurrencyStatusFailed=5
 } REMCustomerUserConcurrencyStatus;
 
-typedef void (^CustomerSelectionCallback)(REMCustomerUserConcurrencyStatus status,NSArray* buildingInfoArray,REMDataAccessErrorStatus errorStatus);
+typedef void (^REMCustomerSelectionCallback)(REMCustomerUserConcurrencyStatus status,NSArray* buildingInfoArray,REMDataAccessErrorStatus errorStatus);
 
 
 @interface REMUpdateAllManager : NSObject<UIAlertViewDelegate,REMLoginCustomerSelectionDelegate>
@@ -39,7 +39,7 @@ typedef void (^CustomerSelectionCallback)(REMCustomerUserConcurrencyStatus statu
 
 @property (nonatomic,weak) UITableViewController<REMCustomerSelectionInterface> *tableViewController;
 
-- (void) updateAllBuildingInfoWithAction:(CustomerSelectionCallback )callback;
+- (void) updateAllBuildingInfoWithAction:(REMCustomerSelectionCallback )callback;
 
 + (REMUpdateAllManager *)defaultManager;
 

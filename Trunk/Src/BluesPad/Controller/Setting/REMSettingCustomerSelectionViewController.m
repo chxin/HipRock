@@ -62,14 +62,15 @@
     else{
         REMUpdateAllManager *manager=[REMUpdateAllManager defaultManager];
         manager.canCancel=YES;
+        manager.selectedCustomerId = customer.customerId;
         [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
             if (status == REMCustomerUserConcurrencyStatusSuccess) {
                 [self.settingController.navigationController popToRootViewControllerAnimated:YES];
                 REMMainNavigationController *mainController=(REMMainNavigationController *)self.navigationController.presentingViewController;
                 [mainController dismissViewControllerAnimated:NO completion:^{
-                    [mainController presentInitialView:^(void){
-                        
-                    }];
+//                    [mainController presentInitialView:^(void){
+//                        
+//                    }];
                 }];
                 
             }

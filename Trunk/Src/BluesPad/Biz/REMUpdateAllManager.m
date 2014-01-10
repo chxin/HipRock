@@ -16,7 +16,7 @@
 @property (nonatomic,strong) NSArray *buildingInfoArray;
 @property (nonatomic,strong) NSArray *customerInfoArray;
 
-@property (nonatomic,strong) CustomerSelectionCallback callback;
+@property (nonatomic,strong) REMCustomerSelectionCallback callback;
 
 @property (nonatomic,strong) NSDictionary *parameter;
 
@@ -39,7 +39,7 @@
 static NSString *customerUpdateAll=@"customerupdateall";
 
 
-- (void)updateAllBuildingInfoWithAction:(CustomerSelectionCallback)callback
+- (void)updateAllBuildingInfoWithAction:(REMCustomerSelectionCallback)callback
 {
     self.callback=callback;
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -183,6 +183,30 @@ static NSString *customerUpdateAll=@"customerupdateall";
     NSData *postData = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
     NSString *storageKey = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
     context.buildingInfoArrayStorageKey=storageKey;
+    
+    if (self.customerInfoArray!=nil) {
+        context.currentUser.customers=self.customerInfoArray;
+        [context.currentUser updateInnerDictionary];
+        [context.currentUser save];
+    }
+    else{
+        self.customerInfoArray=context.currentUser.customers;
+    }
+    if (self.selectedCustomerId!=nil) {
+        for (REMCustomerModel *customer in self.customerInfoArray) {
+            if ([customer.customerId isEqualToNumber:self.selectedCustomerId]==YES) {
+                context.currentCustomer=customer;
+                [context.currentCustomer updateInnerDictionary];
+                [context.currentCustomer save];
+            }
+        }
+    }
+    
+        
+    
+    
+    
+    
     self.callback(REMCustomerUserConcurrencyStatusSuccess,self.buildingInfoArray,REMDataAccessCanceled);
 }
 
