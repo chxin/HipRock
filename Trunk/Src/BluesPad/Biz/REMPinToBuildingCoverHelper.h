@@ -18,6 +18,6 @@ typedef enum _REMPinToBuildingCoverStatus{
 
 @interface REMPinToBuildingCoverHelper : NSObject
 
-+ (void) pinToBuildingCover:(NSDictionary *)param withBuildingInfo:(REMBuildingOverallModel *)buildingInfo withCallback:(void(^)(REMPinToBuildingCoverStatus))callback;
+- (void) pinToBuildingCover:(NSDictionary *)param withBuildingInfo:(REMBuildingOverallModel *)buildingInfo withCallback:(void(^)(REMPinToBuildingCoverStatus))callback;
 
 @end

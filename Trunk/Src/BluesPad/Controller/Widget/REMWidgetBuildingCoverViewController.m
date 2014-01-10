@@ -170,7 +170,8 @@
     }
     self.isRequesting=YES;
     REMCustomerModel *customer=REMAppCurrentCustomer;
-    [REMPinToBuildingCoverHelper pinToBuildingCover:@{@"relationList":array,@"buildingId":self.buildingInfo.building.buildingId,@"customerId":customer.customerId} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
+    REMPinToBuildingCoverHelper *helper=[[REMPinToBuildingCoverHelper alloc]init];
+    [helper pinToBuildingCover:@{@"relationList":array,@"buildingId":self.buildingInfo.building.buildingId,@"customerId":customer.customerId} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
         if (status == REMPinToBuildingCoverStatusSuccess) {
             [self.detailController updateBuildingCover];
         }

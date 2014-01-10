@@ -8,6 +8,8 @@
 
 #import "REMApplicationContext.h"
 #import "REMAppConfiguration.h"
+#import "REMStorage.h"
+#import "REMDataStore.h"
 
 @implementation REMApplicationContext
 
@@ -49,5 +51,18 @@ static REMApplicationContext *context = nil;
     return self;
 }
 
++ (void)updateBuildingInfoArrayToStorage
+{
+    REMDataStore *store=[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:nil];
+    REMApplicationContext *context= REMAppContext;
+    NSArray *buildingArray=context.buildingInfoArray;
+    NSMutableArray *dicArray=[NSMutableArray array];
+    for (int i=0; i<buildingArray.count; ++i) {
+        REMJSONObject *obj=buildingArray[i];
+        [dicArray addObject: obj.innerDictionary];
+    }
+    
+    [REMStorage set:store.serviceMeta.url key:context.buildingInfoArrayStorageKey value:[REMJSONHelper stringByObject:dicArray] expired:REMWindowActiated];
+}
 
 @end

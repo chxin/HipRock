@@ -25,6 +25,12 @@
 
 @property (nonatomic,strong) REMAppConfiguration *appConfig;
 
+@property (nonatomic,strong) NSArray *buildingInfoArray;
+
+@property (nonatomic,strong) NSString *buildingInfoArrayStorageKey;
+
++ (void)updateBuildingInfoArrayToStorage;
+
 + (REMApplicationContext *)instance;
 + (void)recover;
 + (void)destroy;
