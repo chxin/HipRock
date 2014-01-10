@@ -73,7 +73,11 @@
         void (^callback)(void) = nil;
         if(buildingInfoArray != nil){
             self.buildingInfoArray = buildingInfoArray;
-            callback =^{ [self showMarkers]; };
+            callback =^{
+                [self updateCamera:self.mapView];
+                [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(showMarkers) userInfo:nil repeats:NO];
+                //[self showMarkers];
+            };
         }
         else{
             if(errorStatus == REMDataAccessFailed){
@@ -143,6 +147,7 @@
         marker.flat = NO;
         marker.zIndex = i;
         marker.icon = [self getMarkerIcon:buildingInfo forMarkerState:UIControlStateNormal];
+        marker.appearAnimation = kGMSMarkerAnimationPop;
         
         if([buildingInfo.building.buildingId isEqualToNumber:[self.buildingInfoArray[0] building].buildingId])
             self.mapView.selectedMarker = marker;
@@ -197,7 +202,8 @@
         
         GMSCameraPosition *camera = [mapView cameraForBounds:bounds insets:kDMMap_MapEdgeInsets];
         
-        [mapView setCamera:camera];
+        //[mapView setCamera:camera];
+        [mapView animateToCameraPosition:camera];
     }
 }
 
