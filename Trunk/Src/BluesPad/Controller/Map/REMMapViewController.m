@@ -29,6 +29,7 @@
 @property (nonatomic,weak) GMSMapView *mapView;
 @property (nonatomic,strong) NSMutableArray *markers;
 @property (nonatomic,weak) REMBlurredMapView *mask;
+@property (nonatomic,weak) UIButton *switchButton;
 
 @end
 
@@ -44,6 +45,7 @@
         
         [self loadMapView];
         [self.view.layer insertSublayer:self.titleGradientLayer above:self.mapView.layer];
+        [self loadButtons];
     }
 }
 
@@ -52,11 +54,6 @@
 {
     //[self showMarkers];
     [self loadData];
-    [self loadButtons];
-    
-    if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
-        [self.view setUserInteractionEnabled:NO];
-    }
 }
 
 -(void)loadData
@@ -76,7 +73,6 @@
             callback =^{
                 [self updateCamera:self.mapView];
                 [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(showMarkers) userInfo:nil repeats:NO];
-                //[self showMarkers];
             };
         }
         else{
@@ -110,10 +106,7 @@
     [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:switchButton];
-    
-    if(self.buildingInfoArray.count <= 0){
-        [switchButton setEnabled:NO];
-    }
+    self.switchButton = switchButton;
     
     //add customer logo button
     UIImageView *logoButton = self.customerLogoButton;
@@ -126,6 +119,10 @@
 
 -(void)showMarkers
 {
+    if(self.buildingInfoArray.count <= 0){
+        [self.switchButton setEnabled:NO];
+    }
+    
     NSArray *buildings = [self.buildingInfoArray sortedArrayUsingComparator:^NSComparisonResult(REMBuildingOverallModel *b1, REMBuildingOverallModel *b2) {
         return b1.building.latitude > b2.building.latitude ? NSOrderedAscending : NSOrderedDescending;
     }];
@@ -153,6 +150,10 @@
             self.mapView.selectedMarker = marker;
         
         [self.markers addObject:marker];
+    }
+    
+    if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
+        [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
     }
 }
 
@@ -238,9 +239,6 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
-        [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
