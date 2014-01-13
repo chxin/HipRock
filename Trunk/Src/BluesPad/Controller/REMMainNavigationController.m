@@ -13,6 +13,7 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMMapGallerySegue.h"
 #import "REMColor.h"
+
 @interface REMMainNavigationController ()
 
 @end
@@ -90,6 +91,9 @@
     //load data, when load finised, show map view
     REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
     [splashController showMapView];
+    
+    if(completed!=nil)
+        completed();
 }
 
 -(id)getChildControllerInstanceOfClass:(Class)cls
