@@ -13,7 +13,10 @@
 
 @implementation REMApplicationContext
 
+@synthesize cacheMode;
+
 static REMApplicationContext *context = nil;
+static BOOL CACHEMODE = NO;
 
 + (REMApplicationContext *)instance
 {
@@ -53,7 +56,7 @@ static REMApplicationContext *context = nil;
 
 + (void)updateBuildingInfoArrayToStorage
 {
-    REMDataStore *store=[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:nil];
+    REMDataStore *store=[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:nil accessCache:NO andMessageMap:nil];
     REMApplicationContext *context= REMAppContext;
     NSArray *buildingArray=context.buildingInfoArray;
     NSMutableArray *dicArray=[NSMutableArray array];
@@ -64,5 +67,18 @@ static REMApplicationContext *context = nil;
     
     [REMStorage set:store.serviceMeta.url key:context.buildingInfoArrayStorageKey value:[REMJSONHelper stringByObject:dicArray] expired:REMWindowActiated];
 }
+
+-(BOOL)getCacheMode
+{
+    return CACHEMODE;
+}
+-(void)setCacheMode:(BOOL)value
+{
+    @synchronized(self){
+        cacheMode = value;
+    }
+}
+
+
 
 @end

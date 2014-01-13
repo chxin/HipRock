@@ -28,11 +28,15 @@
 @property (nonatomic,strong) NSArray *buildingInfoArray;
 
 @property (nonatomic,strong) NSString *buildingInfoArrayStorageKey;
+@property (nonatomic,getter = getCacheMode, setter = setCacheMode:) BOOL cacheMode;
 
 + (void)updateBuildingInfoArrayToStorage;
 
 + (REMApplicationContext *)instance;
 + (void)recover;
 + (void)destroy;
+
+-(BOOL)getCacheMode;
+-(void)setCacheMode:(BOOL)value;
 
 @end

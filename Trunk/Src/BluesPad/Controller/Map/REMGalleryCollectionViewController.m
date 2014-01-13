@@ -166,7 +166,8 @@
         }
         else{
             NSDictionary *parameter = @{@"pictureId":imageIds[0], @"isSmall":@"true"};
-            REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingPicture parameter:parameter];
+            NSDictionary *messageMap = @{@(REMDataAccessNoConnection):REMLocalizedString(@"TODO:I18N"), @(REMDataAccessFailed):REMLocalizedString(@"TODO:I18N"),@(REMDataAccessErrorMessage):REMLocalizedString(@"TODO:I18N")};
+            REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingPicture parameter:parameter accessCache:YES andMessageMap:messageMap];
             store.groupName = kGalleryBuildingImageGroupName;
             [store access:^(id data) {
                 if(data == nil || [data length] <= 2)

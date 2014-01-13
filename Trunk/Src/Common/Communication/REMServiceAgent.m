@@ -22,6 +22,7 @@
 #import "REMError.h"
 #import "REMNetworkStatusIndicator.h"
 #import "REMDataStoreType.h"
+#import "REMApplicationContext.h"
 
 
 @implementation REMServiceAgent
@@ -46,116 +47,61 @@ static int requestTimeout = 45; //(s)
 
 
 
-+ (void) call: (REMServiceMeta *) service withBody:(id)body mask:(UIView *) maskContainer group:(NSString *)groupName store:(BOOL) isStore success:(REMDataAccessSuccessBlock)success error:(REMDataAccessErrorBlock)error progress:(REMDataAccessProgressBlock)progress
++ (void) call: (REMServiceMeta *) service withBody:(id)body mask:(UIView *) maskContainer group:(NSString *)groupName success:(REMDataAccessSuccessBlock)success error:(REMDataAccessErrorBlock)error progress:(REMDataAccessProgressBlock)progress
 {
-    //check network status and notify if no connection or 3g or 2g
-    if([REMServiceAgent checkNetworkStatus] == NO)
-    {
-        return;
-    }
+    //update queue length
+    [REMServiceAgent updateQueueLength];
     
-    REMMaskManager *maskManager = nil;
     //handle mask
-    if(maskContainer!=nil)
-    {
+    REMMaskManager *maskManager = nil;
+    if(maskContainer!=nil) {
         maskManager = [[REMMaskManager alloc] initWithContainer:maskContainer];
         [maskManager showMask];
     }
     
-    NSData *postData;
-    if([body isMemberOfClass:[NSData class]])
-    {
-        postData = body;
-    }
-    else
-    {
-        NSString *parameterString = [REMServiceAgent buildParameterString:(NSDictionary *)body];
-        postData = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
-        
-        //NSLog(@"%@",parameterString);
-    }
+    NSURLRequest *request = [REMServiceAgent buildRequestWithUrl:service.url andPostData:[REMServiceAgent buildPostData:body]];
     
-    NSURLRequest *request = [REMServiceAgent buildRequestWithUrl:service.url andPostData:postData];
-    
-    
-    void (^onSuccess)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject)
-    {
+    REMServiceOperationSuccessBlock onSuccess = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        //Log response
 #ifdef DEBUG
         [REMServiceAgent logResponse:service :operation];
 #endif
         
-        //if there is error message
-        if([operation.responseString hasPrefix:@"{\"error\":"] == YES){
+        //if there is error message, enter ERROR status
+        if([operation.responseString hasPrefix:@"{\"error\":"] == YES) {
             //TODO: process error message with different error types
-            REMBusinessErrorInfo *remErrorInfo = [[REMBusinessErrorInfo alloc] initWithJSONString:operation.responseString];
+            REMBusinessErrorInfo *businessError = [[REMBusinessErrorInfo alloc] initWithJSONString:operation.responseString];
+            REMError *errorInfo = [[REMError alloc] initWithErrorInfo:businessError];
             
-            REMError *remError = [[REMError alloc] initWithErrorInfo:remErrorInfo];
+            error(errorInfo,REMDataAccessErrorMessage,businessError);
             
-            error(remError,NO,remErrorInfo);
-            NetworkDecreaseActivity();
-            
-            if(maskContainer!=nil && maskManager != nil) //if mask has already shown
-            {
+            if(maskContainer!=nil && maskManager != nil) {//if mask has already shown
                 [maskManager hideMask];
             }
-            return;
         }
-        
-        id result;
-        
-        if(service.responseType == REMServiceResponseImage)
-        {
-            result = operation.responseData;
-        }
-        else
-        {
-            result = [REMServiceAgent deserializeResult:operation.responseString ofService:service.url];
-        }
-        
-        if(isStore==YES)
-        {
-            NSString *storageKey = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
-            switch (service.responseType) {
-                case REMServiceResponseJson:
-                    [REMStorage set:service.url key:storageKey value:[REMJSONHelper stringByObject:result] expired:REMWindowActiated];
-                    break;
-                case REMServiceResponseImage:
-                    [REMStorage setFile:service.url key:storageKey version:0 image:result];
-                    break;
-                    
-                default:
-                    break;
-            }
-        }
-        
-        if(success)
-        {
+        else{ //if ok, enter SUCCESS status
+            //store result to cache
+            id result = service.responseType == REMServiceResponseImage ? operation.responseData : [REMServiceAgent deserializeResult:operation.responseString ofService:service.url];
+            [REMServiceAgent writeCache:result forService:service withParameter:body];
+            
             success(result);
-        }
-        
-        if(maskContainer!=nil && maskManager != nil) //if mask has already shown
-        {
-            [maskManager hideMask];
+            
+            if(maskContainer!=nil && maskManager != nil) {//if mask has already shown
+                [maskManager hideMask];
+            }
+            
+            operation = nil;
         }
         
         NetworkDecreaseActivity();
-        operation = nil;
     };
     
-    void (^onFailure)(AFHTTPRequestOperation *operation, NSError *errorInfo) = ^(AFHTTPRequestOperation *operation, NSError *errorInfo)
-    {
+    REMServiceOperationFailureBlock onFailure = ^(AFHTTPRequestOperation *operation, NSError *errorInfo){
         REMLogError(@"Communication error: %@\nUrl: %@\nServer response: %@", [error description], [operation.request.URL description], operation.responseString);
         
         REMDataAccessErrorStatus status = [REMServiceAgent decideErrorStatus:errorInfo];
         
-        if(status == REMDataAccessFailed){
-            //TODO:change to failed message
-            [REMAlertHelper alert:REMLocalizedString(@"Login_NetworkTimeout")];
-        }
-        
-        if(error) {
-            error(errorInfo,status,operation.responseString);
-        }
+        error(errorInfo, status, operation.responseString);
         
         if(maskContainer!=nil && maskManager != nil) {
             [maskManager hideMask];
@@ -164,8 +110,7 @@ static int requestTimeout = 45; //(s)
         NetworkDecreaseActivity();
     };
     
-    void (^onProgress)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) = ^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead)
-    {
+    REMServiceOperationProgressBlock onProgress = ^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead){
         if(progress)
             progress(bytesRead,totalBytesRead,totalBytesExpectedToRead);
     };
@@ -175,31 +120,51 @@ static int requestTimeout = 45; //(s)
     [serviceOperation setCompletionBlockWithSuccess:onSuccess failure:onFailure];
     [serviceOperation setDownloadProgressBlock:onProgress];
     [serviceOperation setMaskManager:maskManager];
-    if(groupName!=nil && [groupName isEqual:[NSNull null]]==NO && [groupName isEqualToString:@""] == NO)
-    {
+    
+    if(groupName!=nil && [groupName isEqual:[NSNull null]]==NO && [groupName isEqualToString:@""] == NO){
         serviceOperation.groupName = groupName;
     }
     
-    if(queue == nil)
-    {
+    if(queue == nil){
         [REMServiceAgent initializeQueue];
     }
-    
-//log the request
-#ifdef DEBUG
-    [REMServiceAgent logRequest:request];
-#endif
     
     [queue addOperation:serviceOperation];
     
     NetworkIncreaseActivity();
 }
 
++(NSData *)buildPostData:(id)body
+{
+    NSData *postData;
+    if([body isMemberOfClass:[NSData class]]) {
+        postData = body;
+    }
+    else {
+        NSString *parameterString = [REMServiceAgent buildParameterString:(NSDictionary *)body];
+        postData = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
+    }
+    
+    return postData;
+}
+
++(void)writeCache:(id)result forService:(REMServiceMeta *)service withParameter:(id)body
+{
+    if([body isMemberOfClass:[NSData class]]){
+        NSString *storageKey = [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding];
+        if(service.responseType == REMServiceResponseJson){
+            [REMStorage set:service.url key:storageKey value:[REMJSONHelper stringByObject:result] expired:REMWindowActiated];
+        }
+        else{
+            [REMStorage setFile:service.url key:storageKey version:0 image:result];
+        }
+    }
+}
+
 
 + (void) cancel
 {
-    if(queue!=NULL && queue != nil && queue.operationCount > 0)
-    {
+    if(queue!=NULL && queue != nil && queue.operationCount > 0){
         [queue cancelAllOperations];
         
         NetworkClearActivity();
@@ -213,8 +178,7 @@ static int requestTimeout = 45; //(s)
         NSMutableArray *cancelList = [[NSMutableArray alloc] init];
         
         [queue setSuspended:YES];
-        for(int i=0;i<queue.operations.count;i++)
-        {
+        for(int i=0;i<queue.operations.count;i++){
             id operation = nil;
             @try {
                 if(i<=queue.operations.count-1)
@@ -225,8 +189,7 @@ static int requestTimeout = 45; //(s)
                 continue;
             }
             
-            if(operation!=nil && [operation isEqual:[NSNull null]] == NO && [((REMServiceRequestOperation *)operation).groupName isEqualToString:group] == YES)
-            {
+            if(operation!=nil && [operation isEqual:[NSNull null]] == NO && [((REMServiceRequestOperation *)operation).groupName isEqualToString:group] == YES){
                 [cancelList addObject:operation];
             }
         }
@@ -246,15 +209,14 @@ static int requestTimeout = 45; //(s)
 
 + (void) initializeQueue
 {
-    if(queue == nil)
-    {
+    if(queue == nil){
         queue = [[NSOperationQueue alloc] init];
         [queue setMaxConcurrentOperationCount:maxQueueLength];
     }
 }
 
 
-+ (BOOL) checkNetworkStatus
++ (BOOL)updateQueueLength
 {
     NetworkStatus currentNetworkStatus = [REMNetworkHelper checkCurrentNetworkStatus];
     switch (currentNetworkStatus)
@@ -278,8 +240,7 @@ static int requestTimeout = 45; //(s)
 
 + (NSString *)buildParameterString: (NSDictionary *)parameter
 {
-    if(parameter==nil)
-    {
+    if(parameter==nil){
         return nil;
     }
     
@@ -320,7 +281,7 @@ static int requestTimeout = 45; //(s)
 
 + (NSString *)getUserAgent
 {
-    NSString *userAgentFormat = @"Blues/0.4(PS;%@;%@;%@;%@;%@;)";
+    NSString *userAgentFormat = @"Blues/1.0(PS;%@;%@;%@;%@;%@;)";
     UIDevice *device = [UIDevice currentDevice];
     
     NSString *content=[NSString stringWithFormat:userAgentFormat,[[device identifierForVendor] UUIDString],[device localizedModel],[device systemName],[device systemVersion],[device model]];
