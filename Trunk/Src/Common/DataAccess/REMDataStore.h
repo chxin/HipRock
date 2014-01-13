@@ -10,16 +10,18 @@
 #import "REMDataStoreType.h"
 
 
-@interface REMDataStore : NSObject
+@interface REMDataStore : NSObject<UIAlertViewDelegate>
 
 @property (nonatomic) REMDataStoreType name;
 @property (nonatomic,strong) REMServiceMeta* serviceMeta;
 @property (nonatomic,strong) id parameter;
 @property (nonatomic,strong) UIView* maskContainer;
-@property (nonatomic,strong) NSString * groupName;
+@property (nonatomic,strong) NSString *groupName;
+@property (nonatomic,strong) NSDictionary *messageMap;
+@property (nonatomic) BOOL accessCache;
 
 
-- (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter;
+- (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter accessCache:(BOOL)accessCache andMessageMap:(NSDictionary *)messageMap;
 
 - (void)access:(REMDataAccessSuccessBlock)succcess;
 - (void)access:(REMDataAccessSuccessBlock)succcess error:(REMDataAccessErrorBlock)error;

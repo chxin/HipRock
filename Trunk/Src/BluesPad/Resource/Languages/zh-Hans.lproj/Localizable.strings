@@ -31,6 +31,11 @@
 "Common_YearMonthFormat"="yyyy年MM月";
 "Common_WholeYearFormat"="yyyy年全年";
 
+"Common_NetNoConnection"="无网络连接，请稍候再试";
+"Common_NetConnectionFailed"="网络连接失败，请稍候再试";
+"Common_NetServerError"="服务器错误";
+
+
 //Admin,prefix: Admin_
 "Admin_UserTitleEEConsultant"="能源工程顾问";
 "Admin_UserTitleTechnician"="技术人员";

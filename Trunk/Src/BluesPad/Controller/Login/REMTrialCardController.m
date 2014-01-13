@@ -142,7 +142,8 @@
     }
     
     //so demo user will be created in sp1
-    REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSDemoUserValidate parameter:nil];
+    NSDictionary *messageMap = @{@(REMDataAccessNoConnection):REMLocalizedString(@"TODO:I18N"), @(REMDataAccessFailed):REMLocalizedString(@"TODO:I18N"),@(REMDataAccessErrorMessage):REMLocalizedString(@"TODO:I18N")};
+    REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSDemoUserValidate parameter:nil accessCache:NO andMessageMap:messageMap];
     [store access:^(id data) {
         REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
         

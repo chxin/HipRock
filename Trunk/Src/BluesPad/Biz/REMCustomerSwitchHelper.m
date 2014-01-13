@@ -20,7 +20,8 @@ static NSString *customerSwitchKey=@"customerswitch";
     if(REMAppCurrentCustomer != nil){
         [dic setObject:REMAppCurrentCustomer.customerId forKey:@"currentCustomerId"];
     }
-    REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSCustomerSwitch parameter:dic];
+    NSDictionary *messageMap = @{@(REMDataAccessNoConnection):REMLocalizedString(@"TODO:I18N"), @(REMDataAccessFailed):REMLocalizedString(@"TODO:I18N"),@(REMDataAccessErrorMessage):REMLocalizedString(@"TODO:I18N")};
+    REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSCustomerSwitch parameter:dic accessCache:NO andMessageMap:messageMap];
     store.maskContainer=view;
     store.groupName =customerSwitchKey;
     [store access:^(NSDictionary *data){
