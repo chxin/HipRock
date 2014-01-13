@@ -15,6 +15,6 @@
 @property (nonatomic, weak) id<DCTrendAnimationDelegate> delegate;
 
 -(void)invalidate;
--(void)animateHRangeLocationFrom:(double)from to:(double)to;
--(void)animateHRangeWithSpeed:(double)speed;
+-(BOOL)isValid;
+-(void)animateHRangeWithSpeed:(double)speed completion:(void (^)())completion;
 @end

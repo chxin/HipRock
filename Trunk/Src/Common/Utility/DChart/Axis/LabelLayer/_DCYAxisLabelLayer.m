@@ -30,6 +30,7 @@
     }
     return self;
 }
+
 -(void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
     if (self.hidden) return;

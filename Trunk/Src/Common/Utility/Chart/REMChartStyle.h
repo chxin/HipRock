@@ -21,6 +21,7 @@
 @property (nonatomic, strong) UIColor* indicatorColor;
 
 /****** XYChart Style Start *******/
+@property (nonatomic, assign) BOOL useTextLayer;    // YES=文本使用CATextLayer绘制，NO=文本使用[NSString drawInRect]绘制
 // x轴格式
 @property (nonatomic, strong) UIColor* xLineColor;
 @property (nonatomic, assign) CGFloat xLineWidth;

@@ -25,6 +25,14 @@
     return self;
 }
 
+-(NSUInteger)getVisableSeriesCount {
+    NSUInteger count = 0;
+    for (DCLineSeries* s in self.series) {
+        if (!s.hidden) count++;
+    }
+    return count;
+}
+
 -(void)setNeedsDisplay {
     if (self.enableGrowAnimation) {
         _enableGrowAnimation = NO;

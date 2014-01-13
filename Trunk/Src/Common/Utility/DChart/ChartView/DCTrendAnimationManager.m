@@ -16,7 +16,7 @@
     [self.timer invalidate];
 }
 
--(void)animateHRangeWithSpeed:(double)speed {
+-(void)animateHRangeWithSpeed:(double)speed completion:(void (^)())completion {
     if (REMIsNilOrNull(self.view) || REMIsNilOrNull(self.view.graphContext)) return;
     CGFloat graphLength = self.view.graphContext.hRange.length;
     double currentLocation = self.view.graphContext.hRange.location;
@@ -52,11 +52,11 @@
     
     [self.timer invalidate];
     self.timer = nil;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animateFramesTarget:) userInfo:hRangeFrames repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animateFramesTarget:) userInfo:@{@"frames":hRangeFrames, @"callback": completion} repeats:YES];
 }
 
 -(void)animateFramesTarget:(NSTimer*)timer {
-    NSMutableArray* frames = (NSMutableArray*)timer.userInfo;
+    NSMutableArray* frames = (NSMutableArray*)timer.userInfo[@"frames"];
     if (REMIsNilOrNull(self.view) || REMIsNilOrNull(frames) || frames.count == 0) {
         [timer invalidate];
         return;
@@ -68,30 +68,13 @@
         [self.delegate didHRangeApplyToView:hRange finalRange:frames[frames.count-1]];
     }
     [frames removeObjectAtIndex:0];
-}
-
--(void)animateHRangeLocationFrom:(double)from to:(double)to {
-    if (from == to) return;
-    double frames = kDCAnimationDuration * kDCFramesPerSecord;
-    NSNumber* hRangeAnimationStep = @((to - from)/frames);
-    NSDictionary* hRangeUserInfo = @{@"hRangeAnimationStep":hRangeAnimationStep, @"from":@(from), @"to":@(to)};
-    [self.timer invalidate];
-    self.timer = nil;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animateHRangeLocation) userInfo:hRangeUserInfo repeats:YES];
-}
-
--(void)animateHRangeLocation {
-    if (self.timer.isValid) {
-        double hRangeAnimationStep =  [self.timer.userInfo[@"hRangeAnimationStep"] doubleValue];
-        double to =  [self.timer.userInfo[@"to"] doubleValue];
-        double from =  [self.timer.userInfo[@"from"] doubleValue];
-        double newLocation = self.view.graphContext.hRange.location + hRangeAnimationStep;
-        if ((newLocation >= to && from < to) || (newLocation <= to && from > to)){
-            newLocation = to;
-            [self.timer invalidate];
-        }
-        DCRange* newRange = [[DCRange alloc]initWithLocation:newLocation length:self.view.graphContext.hRange.length];
-        self.view.graphContext.hRange = newRange;
+    if (frames.count == 0) {
+        void(^callback)() = timer.userInfo[@"callback"];
+        callback();
     }
+}
+
+-(BOOL)isValid {
+    return !REMIsNilOrNull(self.timer) && [self.timer isValid];
 }
 @end
