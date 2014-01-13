@@ -87,10 +87,7 @@
 }
 
 -(void)customizeView:(DCXYChartView *)view {
-    if (self.sharedProcessor.step == REMEnergyStepMonth || self.sharedProcessor.step == REMEnergyStepDay) {
-        view.graphContext.pointAlignToTick = NO;
-        view.graphContext.xLabelAlignToTick = NO;
-    }
+    view.acceptPan = NO;
 }
 
 -(NSUInteger)getSeriesAmount {

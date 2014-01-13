@@ -107,8 +107,8 @@
         view.graphContext.pointAlignToTick = NO;
         view.graphContext.xLabelAlignToTick = YES;
     } else {
-        view.graphContext.pointAlignToTick = YES;
-        view.graphContext.xLabelAlignToTick = YES;
+        view.graphContext.pointAlignToTick = NO;
+        view.graphContext.xLabelAlignToTick = NO;
     }
     
     [self customizeView:view];
@@ -261,6 +261,7 @@
     self.sharedProcessor.baseDate = baseDateOfX;
     double globalStart = [self.sharedProcessor processX:globalStartdDate].doubleValue;
     double globalLength = [self.sharedProcessor processX:globalEndDate].doubleValue - globalStart;
+    if (!self.graphContext.xLabelAlignToTick) globalStart+=0.5;
     double startPoint = [self.sharedProcessor processX:beginningStart].doubleValue;
     double endPoint = [self.sharedProcessor processX:beginningEnd].doubleValue;
     
@@ -417,21 +418,19 @@
     [self fireGestureStoppedEvent];
 }
 -(void)fireGestureStoppedEvent {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(pinchStoppedBetween:end:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(gestureEndFrom:end:)]) {
         DCRange* newRange = self.myStableRange;
         double rangeStart = newRange.location;
         double rangeEnd = newRange.location + newRange.length;
         id start, end;
-        if (!REMIsNilOrNull(self.sharedProcessor)) {
-            if (self.sharedProcessor.step != REMEnergyStepHour && self.sharedProcessor.step != REMEnergyStepNone) {
-                start = [self.sharedProcessor deprocessX:rangeStart];
-                end = [self.sharedProcessor deprocessX:rangeEnd];
-            } else {
-                start = @(rangeStart);
-                end = @(rangeEnd);
-            }
+        if (!REMIsNilOrNull(self.sharedProcessor) && self.sharedProcessor.step != REMEnergyStepNone) {
+            start = [self.sharedProcessor deprocessX:rangeStart];
+            end = [self.sharedProcessor deprocessX:rangeEnd];
+        } else {
+            start = @(rangeStart);
+            end = @(rangeEnd);
         }
-        [self.delegate performSelector:@selector(pinchStoppedBetween:end:) withObject:start withObject:end];
+        [self.delegate performSelector:@selector(gestureEndFrom:end:) withObject:start withObject:end];
     }
 }
 -(void)focusPointChanged:(NSArray *)dcpoints at:(int)x {

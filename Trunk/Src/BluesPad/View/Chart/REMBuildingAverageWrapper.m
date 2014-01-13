@@ -20,12 +20,6 @@
     return type != REMEnergyTargetCalcValue;
 }
 
-
--(void)customizeView:(DCXYChartView *)view {
-    view.graphContext.pointAlignToTick = NO;
-    view.graphContext.xLabelAlignToTick = NO;
-}
-
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
     _isStacked = NO;
     

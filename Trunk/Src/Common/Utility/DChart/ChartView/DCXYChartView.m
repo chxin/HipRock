@@ -450,14 +450,14 @@
 
 -(void)focusAroundX:(double)x {
     int xRounded = 0;
-    if (self.graphContext.pointAlignToTick) {
-        xRounded = floor(x+0.5);
-    } else {
+    if (self.graphContext.xLabelAlignToTick) {
         xRounded = floor(x);
+    } else {
+        xRounded = floor(x-0.5);
     }
     DCRange* globalRange = self.graphContext.globalHRange;
-    int globalStartCeil = ceil(globalRange.location);
-    int globalEndFloor = floor(globalRange.end);
+    int globalStartCeil = floor(globalRange.location);
+    int globalEndFloor = ceil(globalRange.end);
     if (xRounded < globalStartCeil) xRounded = globalStartCeil;
     if (xRounded > globalEndFloor) xRounded = globalEndFloor;
     
