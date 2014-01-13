@@ -380,7 +380,14 @@
     BOOL panStopped = (gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed);
     if (speed == 0 && !panStopped) return;
     if (self.graphContext.focusX == INT32_MIN) {
-        self.graphContext.hRange = [[DCRange alloc]initWithLocation:speed+self.graphContext.hRange.location length:self.graphContext.hRange.length];
+        double location = speed+self.graphContext.hRange.location;
+        double end = location + self.graphContext.hRange.length;
+        if (location < self.graphContext.globalHRange.location) {
+            location = (self.graphContext.globalHRange.location - location) / 2 + location;
+        } else  if (end > self.graphContext.globalHRange.end) {
+            location = location - (end - self.graphContext.globalHRange.end) / 2;
+        }
+        self.graphContext.hRange = [[DCRange alloc]initWithLocation:location length:self.graphContext.hRange.length];
     } else {
         [self focusAroundX:[self getXLocationForPoint:[gesture locationInView:self]]];
     }
