@@ -376,8 +376,7 @@
     return YES;
 }
 -(void)viewPanned:(UIPanGestureRecognizer*)gesture {
-    CGPoint translation = [gesture translationInView:self];
-    CGFloat speed = -translation.x*self.graphContext.hRange.length/self.graphContext.plotRect.size.width;
+    CGFloat speed = -[gesture velocityInView:self].x*self.graphContext.hRange.length/self.graphContext.plotRect.size.width/kDCFramesPerSecord;
     BOOL panStopped = (gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed);
     if (speed == 0 && !panStopped) return;
     if (self.graphContext.focusX == INT32_MIN) {
@@ -388,7 +387,6 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(panWithSpeed:panStopped:)]) {
         [self.delegate panWithSpeed:speed panStopped:panStopped];
     }
-    [gesture setTranslation:CGPointMake(0, 0) inView:self];
 }
 
 -(void)viewPinched:(_DCHPinchGestureRecognizer*)gesture {
