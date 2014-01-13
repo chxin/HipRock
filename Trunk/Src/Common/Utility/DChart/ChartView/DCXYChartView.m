@@ -395,7 +395,6 @@
     CGFloat centerX = self.graphContext.hRange.location + self.graphContext.hRange.length * (gesture.centerX - self.graphContext.plotRect.origin.x) / self.graphContext.plotRect.size.width;
     CGFloat start = centerX - (centerX - self.graphContext.hRange.location) * gesture.leftScale;
     CGFloat end = centerX + (-centerX + self.graphContext.hRange.end) * gesture.rightScale;
-    NSLog(@"%f %f", gesture.leftScale, gesture.rightScale);
     if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(pinchStopped)]) {
             [self.delegate pinchStopped];

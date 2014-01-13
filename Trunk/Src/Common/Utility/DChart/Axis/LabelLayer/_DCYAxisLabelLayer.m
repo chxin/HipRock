@@ -16,6 +16,10 @@
 @property (nonatomic, assign) CGFloat interval;
 @property (nonatomic, weak) DCRange* yRange;
 @property (nonatomic) CGRect myFrame;
+@property (nonatomic) NSMutableArray* textFrames;
+@property (nonatomic, assign) CGRect axisTitleFrame;
+@property (nonatomic, strong) UIFont* axisTitleFont;
+@property (nonatomic, strong) NSMutableDictionary* textDictionary;
 @end
 
 @implementation _DCYAxisLabelLayer
@@ -27,6 +31,8 @@
         self.masksToBounds = NO;
         self.backgroundColor = [UIColor clearColor].CGColor;
         _interval = 0;
+        _textFrames = [[NSMutableArray alloc]init];
+        _textDictionary = [[NSMutableDictionary alloc]init];
     }
     return self;
 }
@@ -70,18 +76,54 @@
             CGPathRelease(path);
         }
     }
+    if (!self.graphContext.useTextLayer) {
+        UIGraphicsPushContext(ctx);
+        CGContextSetStrokeColorWithColor(ctx, self.fontColor.CGColor);
+        CGContextSetFillColorWithColor(ctx, self.fontColor.CGColor);
+        CGRect theLastLabelRect;
+        for (NSUInteger i = 0; i <= self.graphContext.hGridlineAmount; i++) {
+            double yVal = i * self.interval;
+            NSString* label = [self stringForObjectValue:yVal];
+            [self.textFrames[i] getValue:&theLastLabelRect];
+            [label drawInRect:theLastLabelRect withFont:self.font lineBreakMode:NSLineBreakByClipping alignment:self.isMajorAxis ? NSTextAlignmentRight : NSTextAlignmentLeft];
+        }
+        if (!REMIsNilOrNull(self.axis.axisTitle) && self.axis.axisTitle.length > 0) {
+            [self.axis.axisTitle drawInRect:self.axisTitleFrame withFont:self.axisTitleFont lineBreakMode:NSLineBreakByClipping alignment:self.isMajorAxis ? NSTextAlignmentRight : NSTextAlignmentLeft];
+        }
+        UIGraphicsPopContext();
+    }
+}
+
+-(void)setFrame:(CGRect)frame {
+    self.myFrame = frame;
+    [super setFrame:self.superlayer.bounds];
+    [self updateTextFrames];
+}
+
+-(void)setFont:(UIFont *)font {
+    _font = font;
+    [self updateTextFrames];
+}
+
+-(void)setIsMajorAxis:(BOOL)isMajorAxis {
+    _isMajorAxis = isMajorAxis;
+    [self updateTextFrames];
+}
+
+-(void)updateTextFrames {
+    if (self.font == Nil || self.yRange == nil) return;
+    [self.textFrames removeAllObjects];
     
-    UIGraphicsPushContext(ctx);
-    
-    CGContextSetStrokeColorWithColor(ctx, self.fontColor.CGColor);
-    CGContextSetFillColorWithColor(ctx, self.fontColor.CGColor);
     CGSize labelMaxSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.font];
     CGRect theLastLabelRect;
     for (NSUInteger i = 0; i <= self.graphContext.hGridlineAmount; i++) {
         double yVal = i * self.interval;
-        NSString* label = [self stringForObjectValue:yVal];
-        theLastLabelRect = CGRectMake(self.isMajorAxis ? self.myFrame.origin.x : self.myFrame.origin.x+self.axis.lineWidth+self.axis.labelToLine, self.myFrame.size.height*(1-yVal/self.yRange.length)-labelMaxSize.height/2+self.myFrame.origin.y, labelMaxSize.width, labelMaxSize.height);
-        [label drawInRect:theLastLabelRect withFont:self.font lineBreakMode:NSLineBreakByClipping alignment:self.isMajorAxis ? NSTextAlignmentRight : NSTextAlignmentLeft];
+        theLastLabelRect = CGRectMake(
+                                      self.isMajorAxis ? self.myFrame.origin.x : self.myFrame.origin.x+self.axis.lineWidth+self.axis.labelToLine,
+                                      self.myFrame.size.height*(1-yVal/self.yRange.length)-labelMaxSize.height/2+self.myFrame.origin.y,
+                                      labelMaxSize.width,
+                                      labelMaxSize.height);
+        [self.textFrames addObject:[NSValue valueWithCGRect:theLastLabelRect]];
     }
     if (!REMIsNilOrNull(self.axis.axisTitle) && self.axis.axisTitle.length > 0) {
         UIFont* titleFont = self.font;
@@ -89,14 +131,59 @@
         while ([DCUtility getSizeOfText:self.axis.axisTitle forFont:titleFont].width > fontLabelRect.size.width) {
             titleFont = [UIFont fontWithName:titleFont.fontName size:titleFont.pointSize-1];
         }
-        [self.axis.axisTitle drawInRect:fontLabelRect withFont:titleFont lineBreakMode:NSLineBreakByClipping alignment:self.isMajorAxis ? NSTextAlignmentRight : NSTextAlignmentLeft];
+        self.axisTitleFont = titleFont;
+        self.axisTitleFrame = fontLabelRect;
     }
-    UIGraphicsPopContext();
 }
 
--(void)setFrame:(CGRect)frame {
-    self.myFrame = frame;
-    [super setFrame:self.superlayer.bounds];
+-(void)updateTexts {
+    if (self.graphContext.useTextLayer) {
+        CGRect theLastLabelRect;
+        CTFontRef fRef = CTFontCreateWithName((__bridge CFStringRef)self.font.fontName,
+                                                self.font.pointSize,
+                                                NULL);
+        for (NSUInteger i = 0; i <= self.graphContext.hGridlineAmount; i++) {
+            CATextLayer* textLayer = self.textDictionary[@(i)];
+            if (textLayer == nil) {
+                textLayer = [[CATextLayer alloc]init];
+                [self addSublayer:textLayer];
+                textLayer.font = fRef;
+                textLayer.contentsScale = [[UIScreen mainScreen] scale];
+                textLayer.foregroundColor = self.fontColor.CGColor;
+                textLayer.truncationMode = kCATruncationEnd;
+                textLayer.fontSize = self.font.pointSize;
+                [self.textDictionary setObject:textLayer forKey:@(i)];
+            }
+            [self.textFrames[i] getValue:&theLastLabelRect];
+            textLayer.string = [self stringForObjectValue:i * self.interval];
+            textLayer.frame = theLastLabelRect;
+            textLayer.alignmentMode = self.isMajorAxis ? kCAAlignmentRight : kCAAlignmentLeft;
+        }
+        CFRelease(fRef);
+        
+        if (!REMIsNilOrNull(self.axis.axisTitle) && self.axis.axisTitle.length > 0) {
+            CATextLayer* textLayer = self.textDictionary[@"title"];
+            fRef = CTFontCreateWithName((__bridge CFStringRef)self.axisTitleFont.fontName,
+                                        self.axisTitleFont.pointSize,
+                                        NULL);
+            if (textLayer == nil) {
+                textLayer = [[CATextLayer alloc]init];
+                [self addSublayer:textLayer];
+                textLayer.font = fRef;
+                textLayer.contentsScale = [[UIScreen mainScreen] scale];
+                textLayer.foregroundColor = self.fontColor.CGColor;
+                textLayer.truncationMode = kCATruncationStart;
+                textLayer.fontSize = self.axisTitleFont.pointSize;
+                [self.textDictionary setObject:textLayer forKey:@"title"];
+            }
+            textLayer.string = self.axis.axisTitle;
+            textLayer.frame = self.axisTitleFrame;
+            textLayer.alignmentMode = self.isMajorAxis ? kCAAlignmentRight : kCAAlignmentLeft;
+        }
+        
+    } else {
+        [self setNeedsDisplay];
+    }
 }
 
 -(CGRect)getVisualFrame {
@@ -108,7 +195,8 @@
     self.interval = newInterval;
     self.yRange = yRange;
     if (self.interval > 0 && self.yRange != nil) {
-        [self setNeedsDisplay];
+        if (self.textFrames.count == 0) [self updateTextFrames];
+        [self updateTexts];
     }
 }
 
