@@ -205,7 +205,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
     }
     REMCustomerModel *current=REMAppCurrentCustomer;
     for (REMCustomerModel *customer in self.customerInfoArray) {
-        if ([customer.customerId isEqualToNumber:self.selectedCustomerId]==YES && [customer isEqual:current]==NO) {
+        if ([customer.customerId isEqualToNumber:self.currentCustomerId]==YES && [customer isEqual:current]==NO) {
             context.currentCustomer=customer;
             [context.currentCustomer updateInnerDictionary];
             [context.currentCustomer save];
