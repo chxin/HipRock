@@ -75,11 +75,7 @@ static int requestTimeout = 45; //(s)
             
             error(errorInfo,REMDataAccessErrorMessage,businessError);
             
-            error(remError,REMDataAccessErrorMessage,remErrorInfo);
-            NetworkDecreaseActivity();
-            
-            if(maskContainer!=nil && maskManager != nil) //if mask has already shown
-            {
+            if(maskContainer!=nil && maskManager != nil) {//if mask has already shown
                 [maskManager hideMask];
             }
         }
