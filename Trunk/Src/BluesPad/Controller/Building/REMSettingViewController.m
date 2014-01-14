@@ -272,7 +272,7 @@
         [self performSegueWithIdentifier:@"settingAboutSegue" sender:self];
     }
     else if(indexPath.section==3 && indexPath.row==0){
-        REMUpdateAllManager *manager=[REMUpdateAllManager defaultManager];
+        __weak REMUpdateAllManager *manager=[REMUpdateAllManager defaultManager];
         manager.canCancel=YES;
         manager.updateSource=REMCustomerUserConcurrencySourceUpdate;
         manager.mainNavigationController=(REMMainNavigationController *)self.presentingViewController;
