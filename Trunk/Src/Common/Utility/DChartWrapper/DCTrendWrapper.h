@@ -10,7 +10,6 @@
 #import "DCXYChartView.h"
 #import "REMChartStyle.h"
 #import "REMEnergyViewData.h"
-#import "REMWidgetContentSyntax.h"
 #import "DCColumnSeries.h"
 #import "DCLineSeries.h"
 #import "DCContext.h"

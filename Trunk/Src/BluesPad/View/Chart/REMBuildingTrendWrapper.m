@@ -14,8 +14,8 @@
 @synthesize processors = _processors;
 @synthesize sharedProcessor = _sharedProcessor;
 
--(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
-    _timeRangeType = syntax.relativeDateType;
+-(void)extraSyntax:(DWrapperConfig*)wrapperConfig {
+    _timeRangeType = wrapperConfig.relativeDateType;
 }
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
     _isStacked = NO;

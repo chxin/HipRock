@@ -12,8 +12,8 @@
 @end
 
 @implementation DCPieWrapper
--(DCPieWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*)widgetSyntax style:(REMChartStyle*)style {
-    self = [super initWithFrame:frame data:energyViewData widgetContext:widgetSyntax style:style];
+-(DCPieWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(REMChartStyle *)style {
+    self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
     if (self && energyViewData.targetEnergyData.count != 0) {
         [self createView:frame data:energyViewData style:style];
     }

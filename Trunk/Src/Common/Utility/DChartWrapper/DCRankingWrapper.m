@@ -100,9 +100,9 @@
     return @{ @"globalRange": [[DCRange alloc]initWithLocation:0 length:datasAmount], @"beginRange": [[DCRange alloc]initWithLocation:0 length:MIN(rangeCode, datasAmount)], @"xformatter": [NSNull null] };
 }
 
--(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
-    _rankingRangeCode = syntax.rankingRangeCode;
-    _sortOrder = syntax.rankingSortOrder;
+-(void)extraSyntax:(DWrapperConfig*)wrapperConfig {
+    _rankingRangeCode = wrapperConfig.rankingRangeCode;
+    _sortOrder = wrapperConfig.rankingDefaultSortOrder;
 }
 
 -(void)quickSort:(NSMutableArray*)energyList left:(int)left right:(int)right {
@@ -160,5 +160,14 @@
     } else {
         [self.view focusAroundX:x];
     }
+}
+
+-(DCRange*)updatePinchRange:(DCRange *)newRange pinchCentreX:(CGFloat)centreX {
+    DCRange* globalRange= self.view.graphContext.globalHRange;
+    double returnRangeEnd = newRange.end;
+    double returnRangeStart = newRange.location;
+    if (returnRangeStart < globalRange.location) returnRangeStart = globalRange.location;
+    if (returnRangeEnd > globalRange.end) returnRangeEnd = globalRange.end;
+    return [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
 }
 @end

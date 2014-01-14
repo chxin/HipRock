@@ -430,25 +430,38 @@
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
     DAbstractChartWrapper  *widgetWrapper;
+    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]init];
+    wrapperConfig.calendarType=self.widgetInfo.contentSyntax.calendarType;
+    wrapperConfig.rankingDefaultSortOrder=self.widgetInfo.contentSyntax.rankingSortOrder;
+    wrapperConfig.rankingRangeCode= self.widgetInfo.contentSyntax.rankingRangeCode;
+    if ([self.model isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
+        REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
+        wrapperConfig.stacked=NO;
+        wrapperConfig.step=stepModel.step;
+        wrapperConfig.benckmarkText=stepModel.benchmarkText;
+        wrapperConfig.relativeDateType=stepModel.relativeDateType;
+    }
+    
     if (widgetType == REMDiagramTypeLine) {
-        widgetWrapper = [[DCLineWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCLineWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
         widgetWrapper.delegate = self;
         
         
     } else if (widgetType == REMDiagramTypeColumn) {
-        widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
         widgetWrapper.delegate = self;
     } else if (widgetType == REMDiagramTypePie) {
-        widgetWrapper = [[DCPieWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCPieWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
         widgetWrapper.delegate = self;
     } else if (widgetType == REMDiagramTypeRanking) {
-        widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
         widgetWrapper.delegate = self;
     } else if (widgetType == REMDiagramTypeStackColumn) {
-        widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        wrapperConfig.stacked=YES;
+        widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
         widgetWrapper.delegate = self;
     } else if (widgetType == REMDiagramTypeLabelling) {
-        widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
     }
     if (widgetWrapper != nil) {
         if([widgetWrapper isKindOfClass:[DCTrendWrapper class]]==YES){

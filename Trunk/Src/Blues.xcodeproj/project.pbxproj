@@ -668,6 +668,7 @@
 		EFD947111839DEE100E9EC50 /* DCColumnWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD947101839DEE100E9EC50 /* DCColumnWrapper.m */; };
 		EFDAACBC1803F6C2008BC9AF /* REMChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */; };
 		EFDCC97E18472AD400955560 /* DCPieWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCC97D18472AD400955560 /* DCPieWrapper.m */; };
+		EFE3F61118851582009AD4A7 /* DWrapperConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61018851582009AD4A7 /* DWrapperConfig.m */; };
 		EFE78DB7187E4372003FB710 /* REMWidgetStepCalculationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE78DB6187E4372003FB710 /* REMWidgetStepCalculationModel.m */; };
 		EFE8697D185E9FF800DC0007 /* DCLabelingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE8697C185E9FF800DC0007 /* DCLabelingChartView.m */; };
 		EFE86981185EC3EB00DC0007 /* DCLabelingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */; };
@@ -1473,6 +1474,8 @@
 		EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMChartDataProcessor.m; sourceTree = "<group>"; };
 		EFDCC97C18472AD400955560 /* DCPieWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieWrapper.h; path = Common/Utility/DChartWrapper/DCPieWrapper.h; sourceTree = "<group>"; };
 		EFDCC97D18472AD400955560 /* DCPieWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieWrapper.m; path = Common/Utility/DChartWrapper/DCPieWrapper.m; sourceTree = "<group>"; };
+		EFE3F60F18851582009AD4A7 /* DWrapperConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DWrapperConfig.h; path = Common/Utility/DChartWrapper/DWrapperConfig.h; sourceTree = "<group>"; };
+		EFE3F61018851582009AD4A7 /* DWrapperConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DWrapperConfig.m; path = Common/Utility/DChartWrapper/DWrapperConfig.m; sourceTree = "<group>"; };
 		EFE78DB4187E33CD003FB710 /* DCTrendAnimationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DCTrendAnimationDelegate.h; path = Common/Utility/DChart/DCTrendAnimationDelegate.h; sourceTree = "<group>"; };
 		EFE78DB5187E4372003FB710 /* REMWidgetStepCalculationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetStepCalculationModel.h; path = Model/Widget/REMWidgetStepCalculationModel.h; sourceTree = "<group>"; };
 		EFE78DB6187E4372003FB710 /* REMWidgetStepCalculationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMWidgetStepCalculationModel.m; path = Model/Widget/REMWidgetStepCalculationModel.m; sourceTree = "<group>"; };
@@ -3337,6 +3340,8 @@
 				EFDCC97D18472AD400955560 /* DCPieWrapper.m */,
 				EFE8697F185EC3EB00DC0007 /* DCLabelingWrapper.h */,
 				EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */,
+				EFE3F60F18851582009AD4A7 /* DWrapperConfig.h */,
+				EFE3F61018851582009AD4A7 /* DWrapperConfig.m */,
 			);
 			name = DChartWrapper;
 			sourceTree = "<group>";
@@ -3887,6 +3892,7 @@
 				EF61477A18765E7000ED9F1E /* REMBuildingAverageWrapper.m in Sources */,
 				EF2043B3187BD94400272319 /* REMNumberExtension.m in Sources */,
 				7A153CCD17AA4EDB00413D3C /* REMRankingDataModel.m in Sources */,
+				EFE3F61118851582009AD4A7 /* DWrapperConfig.m in Sources */,
 				EFF701CF1830880600B371EC /* REMChartStyle.m in Sources */,
 				7A37AA5C17AB56F100316902 /* REMUserValidationModel.m in Sources */,
 				EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */,

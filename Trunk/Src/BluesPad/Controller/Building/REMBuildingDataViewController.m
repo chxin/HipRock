@@ -260,7 +260,7 @@
     if (self.buildingInfo.commodityArray!=nil) {
         count=self.buildingInfo.commodityArray.count;
     }
-    CGRect frame=CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.view.frame.size.width, 800);
+    CGRect frame=CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.view.frame.size.width, self.view.frame.size.height+kBuildingCommodityViewTop);
     int i=0;
 
     for (; i<count; ++i) {

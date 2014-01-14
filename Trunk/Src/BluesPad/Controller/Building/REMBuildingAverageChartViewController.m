@@ -45,10 +45,11 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 }
 
 -(DCTrendWrapper*)constructWrapperWithFrame:(CGRect)frame {
-    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
-    syntax.step = @(REMEnergyStepMonth);
+    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]init];
+    wrapperConfig.step = REMEnergyStepMonth;
+    wrapperConfig.stacked = NO;
     REMChartStyle* style = [REMChartStyle getCoverStyle];
-    REMBuildingAverageWrapper* wrapper = [[REMBuildingAverageWrapper alloc]initWithFrame:frame data:self.energyViewData widgetContext:syntax style:style];
+    REMBuildingAverageWrapper* wrapper = [[REMBuildingAverageWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig style:style];
     return wrapper;
 }
 

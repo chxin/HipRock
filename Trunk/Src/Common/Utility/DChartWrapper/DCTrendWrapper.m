@@ -16,7 +16,6 @@
 @interface DCTrendWrapper()
 @property (nonatomic, weak) DCContext* graphContext;
 @property (nonatomic, strong) DCRange* myStableRange;
-@property (nonatomic) NSString* xtypeOfWidget;
 @property (nonatomic,strong) NSMutableArray* hiddenSeriesTargetsId;
 @property (nonatomic, strong) DCTrendAnimationManager* animationManager;
 @property (nonatomic, assign) double panSpeed;
@@ -27,19 +26,19 @@
 -(UIView*)getView {
     return self.view;
 }
--(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*)widgetSyntax style:(REMChartStyle*)style {
-    self = [super initWithFrame:frame data:energyViewData widgetContext:widgetSyntax style:style];
+-(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(REMChartStyle *)style {
+    self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
     if (self && energyViewData.targetEnergyData.count != 0) {
         _calenderType = REMCalendarTypeNone;
-        self.xtypeOfWidget = widgetSyntax.xtype;
-        [self extraSyntax:widgetSyntax];
+        _isStacked = wrapperConfig.stacked;
+        [self extraSyntax:wrapperConfig];
         self.hiddenSeriesTargetsId = [[NSMutableArray alloc]init];
         
         self.animationManager = [[DCTrendAnimationManager alloc]init];
         self.animationManager.delegate = self;
-        NSDictionary* dic = [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
+        NSDictionary* dic = [self updateProcessorRangesFormatter:wrapperConfig.step];
         self.myStableRange = dic[@"beginRange"];
-        [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:widgetSyntax.step.integerValue];
+        [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:wrapperConfig.step];
         [self updateCalender];
     }
     return self;
@@ -210,11 +209,8 @@
 }
 
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
-    _isStacked = ([self.xtypeOfWidget rangeOfString:@"stack"].location != NSNotFound);
-    
     NSUInteger seriesAmount = [self getSeriesAmount];
     _processors = [[NSMutableArray alloc]init];
-//    BOOL allSeriesUserGlobalTime = ([self.xtypeOfWidget rangeOfString : @"multitimespan"].location == NSNotFound);
     
     NSDate* baseDateOfX = nil;
     NSDate* globalStartdDate = nil;
@@ -302,8 +298,8 @@
     }
 }
 
--(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
-    _calenderType = syntax.calendarType;
+-(void)extraSyntax:(DWrapperConfig*)wrapperConfig {
+    _calenderType = wrapperConfig.calendarType;
 }
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
     [self.animationManager invalidate];
