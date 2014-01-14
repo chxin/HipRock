@@ -76,7 +76,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
         else{
             parameter= @{@"customerId":self.currentCustomerId};
         }
-        REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter accessCache:YES andMessageMap:messageMap];
+        REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter accessCache:YES andMessageMap:nil];
         logoStore.groupName = nil;
         logoStore.maskContainer = nil;
         
