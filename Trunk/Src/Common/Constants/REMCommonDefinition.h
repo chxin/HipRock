@@ -17,13 +17,14 @@ typedef enum _REMCommodity : int{
 } REMCommodity;
 
 #define REMEmptyString @""
+#define REMStringNilOrEmpty(a) ((a) == nil || [(a) isEqualToString:REMEmptyString])
 
 #define REMIsNilOrNull(a) ((a)==nil || [(a) isEqual:[NSNull null]])
 
 #define REMRGBA(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)];
 #define REMHexColor(a) []
 
-#define REMLocalizedString(a) NSLocalizedString((a),@"")
+#define REMLocalizedString(a) (REMIsNilOrNull(a)? REMEmptyString : NSLocalizedString(a,REMEmptyString))
 
 #define REMLoadImageNamed(a) [UIImage imageNamed:(a)]
 
@@ -50,5 +51,11 @@ typedef enum _REMCommodity : int{
 @"香港",@"澳门",@"台湾"\
 ]
 
+#define REMREGEX_UserValidation @[@"^[a-zA-Z0-9_.]+$", @"[0-9]+", @"[a-zA-Z]+", @"^[0-9a-zA-Z_!@#$%^&*()][0-9a-zA-Z_!@#$%^&*()]*$", @"[ ]+"]
+
+#define REMREGEXMatch_UserName(a) [[NSRegularExpression regularExpressionWithPattern:REMREGEX_UserValidation[0] options:NSRegularExpressionCaseInsensitive error:NULL] firstMatchInString:(a) options:0 range:NSMakeRange(0, (a).length)]
+#define REMREGEXMatch_Password(a,b) [[NSRegularExpression regularExpressionWithPattern:REMREGEX_UserValidation[(b)] options:0 error:NULL] firstMatchInString:(a) options:0 range:NSMakeRange(0, (a).length)]
+
+#define REMDataAccessMessageMake(noconn,fail,error,cancel) @{@(REMDataAccessNoConnection):REMLocalizedString(noconn), @(REMDataAccessFailed):REMLocalizedString(fail),@(REMDataAccessErrorMessage):REMLocalizedString(error), @(REMDataAccessCanceled):REMLocalizedString(cancel)};
 
 #endif

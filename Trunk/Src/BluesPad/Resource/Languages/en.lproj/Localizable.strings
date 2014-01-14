@@ -61,6 +61,7 @@
 "Login_TrialCardTitle" = "产品试用";
 
 "Login_CustomerSelectionTitle" = "请选择客户";
+"Login_NoCustomer" = "产品登录失败，您的用户未关联任何客户";
 
 //trial card
 "Login_TrialWelcomeText" = "欢迎试用施耐德EMOP能源管理开放平台";
@@ -68,6 +69,11 @@
 "Login_TrialButtonText" = "产品试用";
 
 "Login_CreatingDemoUserText" = "账号创建中，请稍候..";
+
+"Login_TrialNoNetwork" = "产品试用申请失败。无网络连，请连接后再试。";
+"Login_TrialNetworkFailed" = "产品试用申请失败。网络故障,请稍后再试。";
+"Login_TrialServerError" = "产品试用申请失败。服务器故障，请稍后再试。";
+"Login_TrialNoCustomer" = "产品试用申请失败，您的用户未关联任何客户";
 
 
 //login card
@@ -79,13 +85,13 @@
 
 
 "Login_InputNotComplete"="请输入完整的用户名和密码";
-"Login_NoNetwork" = "无可用网络,无法获取最新的能源数据。";
-"Login_NetworkTimeout" = "网络连接超时,部分最新的能源数据未获得。";
 "Login_UserNotExist" = "该用户名不存在";
 "Login_WrongPassword" = "登录密码错误";
-"Login_NotAuthorized" = "未配置客户及相关数据权限,请联系您的管理员。";
-"Login_NoBuilding" = "没有任何可显示的楼宇";
 "Login_AccountLocked" = "登录失败，您的用户名暂时无法使用";
+
+"Login_NoNetwork" = "无网络连接,产品登录失败。请连接后再试。";
+"Login_NetworkFailed" = "网络故障,产品登录失败,请稍后再试。";
+"Login_ServerError" = "产品登录失败。服务器故障，请稍后再试。";
 
 //Setting, prefix: Setting_
 "Setting_LoadingData"="正在更新客户的楼宇及能耗信息，请稍候...";
@@ -119,6 +125,7 @@
 
 //Map, prefix: Map_
 "Map_MarkerBubbleSubtitleFormat"="本月用电量：%@%@";
+"Map_NoVisiableBuilding" = "￼当前客户无任何可显示的楼宇。";
 
 
 //Gallery, prefix: Gallery_
