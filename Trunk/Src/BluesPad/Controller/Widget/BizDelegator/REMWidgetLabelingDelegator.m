@@ -157,7 +157,13 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
     DCLabelingWrapper  *widgetWrapper;
-    DWrapperConfig* wrapperConfig = nil;
+    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]init];
+    
+    if ([self.model isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
+        REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
+        wrapperConfig.stacked=NO;
+        wrapperConfig.benckmarkText=stepModel.benchmarkText;
+    }
     if (widgetType == REMDiagramTypeLabelling) {
         widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
         widgetWrapper.delegate = self;

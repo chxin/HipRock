@@ -10,14 +10,14 @@
 #import "REMEnum.h"
 
 @interface DWrapperConfig : NSObject
-@property (nonatomic, assign) REMEnergyStep step;   // Line, Column
-@property (nonatomic, assign) BOOL stacked;         // Column
-@property (nonatomic, assign) REMCalendarType calendarType; // Line, Column
+@property (nonatomic) REMEnergyStep step;   // Line, Column
+@property (nonatomic) BOOL stacked;         // Column
+@property (nonatomic) REMCalendarType calendarType; // Line, Column
 
-@property (nonatomic, assign) REMRankingRange rankingRangeCode; // Ranking
-@property (nonatomic, assign) NSComparisonResult rankingDefaultSortOrder; // Ranking
+@property (nonatomic) REMRankingRange rankingRangeCode; // Ranking
+@property (nonatomic) NSComparisonResult rankingDefaultSortOrder; // Ranking
 
-@property (nonatomic, strong) NSString* benckmarkText; // Labeling
+@property (nonatomic, copy) NSString* benckmarkText; // Labeling
 
 
 @property (nonatomic) REMRelativeTimeRangeType relativeDateType; // Cover用电趋势图

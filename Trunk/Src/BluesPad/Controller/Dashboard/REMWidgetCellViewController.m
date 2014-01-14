@@ -17,7 +17,7 @@
 #import "DCLineWrapper.h"
 #import "DCLabelingWrapper.h"
 #import "REMWidgetCellDelegator.h"
-
+#import "REMWidgetStepEnergyModel.h"
 @interface REMWidgetCellViewController ()
 
 
@@ -139,7 +139,17 @@
     CGRect widgetRect = self.chartContainer.bounds;
     REMEnergyViewData *data=self.chartData;
     REMChartStyle* style = [REMChartStyle getMinimunStyle];
-    DWrapperConfig* wrapperConfig = nil;
+    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]init];
+    wrapperConfig.calendarType=self.widgetInfo.contentSyntax.calendarType;
+    wrapperConfig.rankingDefaultSortOrder=self.widgetInfo.contentSyntax.rankingSortOrder;
+    wrapperConfig.rankingRangeCode= self.widgetInfo.contentSyntax.rankingRangeCode;
+    if ([self.searchModel isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
+        REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.searchModel;
+        wrapperConfig.stacked=NO;
+        wrapperConfig.step=stepModel.step;
+        wrapperConfig.benckmarkText=stepModel.benchmarkText;
+        wrapperConfig.relativeDateType=stepModel.relativeDateType;
+    }
     if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[DCLineWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
     } else if (widgetType == REMDiagramTypeColumn) {
@@ -149,6 +159,7 @@
     } else if (widgetType == REMDiagramTypeRanking) {
         widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
     } else if (widgetType == REMDiagramTypeStackColumn) {
+        wrapperConfig.stacked=YES;
         widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
     } else if (widgetType == REMDiagramTypeLabelling) {
         widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
