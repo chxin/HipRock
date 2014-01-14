@@ -10,7 +10,6 @@
 #import "REMApplicationContext.h"
 #import "REMUserModel.h"
 #import "REMCustomerModel.h"
-#import "REMCustomerSwitchHelper.h"
 #import "REMUpdateAllManager.h"
 
 

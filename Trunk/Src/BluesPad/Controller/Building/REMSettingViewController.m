@@ -146,7 +146,8 @@
          [cell.contentView addSubview:logout];*/
     }
     else if(indexPath.section==3 && indexPath.row==0){
-        cell.textLabel.text=@"更新全部数据";
+        cell.textLabel.text=NSLocalizedString(@"Setting_UpdateAll", @""); //@"更新全部数据";
+        cell.textLabel.textColor=[REMColor colorByHexString:@"#37ab3c"];
     }
     return cell;
 }

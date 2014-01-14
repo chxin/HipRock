@@ -53,8 +53,16 @@ static NSString *customerUpdateAll=@"customerupdateall";
         [dic setObject:self.selectedCustomerId forKey:@"selectedCustomerId"];
     }
     [dic setObject:self.currentCustomerId forKey:@"customerId"];
-    
-    NSDictionary *messageMap = @{@(REMDataAccessNoConnection):REMLocalizedString(@"TODO:I18N"), @(REMDataAccessFailed):REMLocalizedString(@"TODO:I18N"),@(REMDataAccessErrorMessage):REMLocalizedString(@"TODO:I18N")};
+    NSDictionary *messageMap=nil;
+    if (self.updateSource == REMCustomerUserConcurrencySourceEnter) {
+        messageMap = REMDataAccessMessageMake(@"Setting_NoNetwork",@"Setting_NetworkFailed",@"Setting_ServerError",@"");
+    }
+    else if(self.updateSource == REMCustomerUserConcurrencySourceSwitchCustomer){
+        messageMap = REMDataAccessMessageMake(@"Setting_SwitchCustomerNoNetwork",@"Setting_SwitchCustomerNetworkFailed",@"Setting_SwitchCustomerServerError",@"");
+    }
+    else{
+        messageMap = REMDataAccessMessageMake(@"Setting_UpdateNoNetwork",@"Setting_UpdateNetworkFailed",@"Setting_UpdateServerError",@"");
+    }
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:dic accessCache:YES andMessageMap:messageMap];
     store.maskContainer=self.maskerView;
     store.groupName =customerUpdateAll;

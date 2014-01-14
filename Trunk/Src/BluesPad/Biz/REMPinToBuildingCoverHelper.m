@@ -13,8 +13,7 @@
 @implementation REMPinToBuildingCoverHelper
 
 - (void)pinToBuildingCover:(NSDictionary *)param withBuildingInfo:(REMBuildingOverallModel *)buildingInfo withCallback:(void(^)(REMPinToBuildingCoverStatus))callback{
-    NSDictionary *messageMap = @{@(REMDataAccessNoConnection):REMLocalizedString(@"TODO:I18N"), @(REMDataAccessFailed):REMLocalizedString(@"TODO:I18N"),@(REMDataAccessErrorMessage):REMLocalizedString(@"TODO:I18N")};
-    REMDataStore *store=[[REMDataStore alloc]initWithName:REMDSBuildingPinningToCover parameter:param accessCache:NO andMessageMap:messageMap];
+    REMDataStore *store=[[REMDataStore alloc]initWithName:REMDSBuildingPinningToCover parameter:param accessCache:NO andMessageMap:nil];
     
     [store access:^(NSArray *data){
         NSMutableArray *newArray=[NSMutableArray array];
