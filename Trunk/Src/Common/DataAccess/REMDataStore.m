@@ -13,6 +13,15 @@
 #import "REMApplicationInfo.h"
 #import "REMStorage.h"
 #import "REMJSONHelper.h"
+#import "REMAlertHelper.h"
+#import "REMApplicationContext.h"
+#import "REMBusinessErrorInfo.h"
+
+@interface REMDataStore()
+
+@property (nonatomic,strong) REMDataAccessSuccessBlock success;
+
+@end
 
 
 @implementation REMDataStore
@@ -20,21 +29,28 @@
 
 static NSDictionary *serviceMap = nil;
 
-- (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter
+- (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter accessCache:(BOOL)accessCache andMessageMap:(NSDictionary *)messageMap
 {
-    REMDataStore *store = [self init]; 
+    self = [super init];
     
-    store.name = name;
-    store.parameter = parameter;
-    store.serviceMeta = [[REMDataStore serviceMap] objectForKey:[NSNumber numberWithInt:name]];
+    if(self){
+        self.name = name;
+        self.parameter = parameter;
+        self.serviceMeta = [[REMDataStore serviceMap] objectForKey:[NSNumber numberWithInt:name]];
+        self.accessCache = accessCache;
+        if(messageMap == nil)
+            self.messageMap = REMNetworkMessageMap;
+        else
+            self.messageMap = messageMap;
+    }
     
-    return store;
+    
+    return self;
 }
 
 + (NSDictionary *) serviceMap
 {
-    if(serviceMap == nil)
-    {
+    if(serviceMap == nil){
         serviceMap = REMMobileServices;
     }
     
@@ -51,16 +67,33 @@ static NSDictionary *serviceMap = nil;
 }
 - (void)access:(REMDataAccessSuccessBlock)success error:(REMDataAccessErrorBlock)error progress:(REMDataAccessProgressBlock)progress
 {
-    NetworkStatus netStaus = [REMNetworkHelper checkCurrentNetworkStatus];
+    self.success = success;
     
-    //if network is not ok, get from cache
-    if(netStaus == NotReachable){
-        [self accessLocal:success error:error];
+    NetworkStatus reachability = [REMNetworkHelper checkCurrentNetworkStatus];
+    
+    BOOL cacheMode = [REMApplicationContext instance].cacheMode;
+    
+    if(reachability == NotReachable){
+        if(self.accessCache){
+            if(!cacheMode){
+                [REMAlertHelper alert:@"TODO:MoveToI18N:无网络，将加载本地缓存数据" delegate:nil];
+                [[REMApplicationContext instance] setCacheMode:YES];
+                [self accessLocal:success];
+            }
+            else{
+                [self accessLocal:success];
+            }
+        }
+        else{
+            [REMAlertHelper alert:self.messageMap[@(REMDataAccessNoConnection)]];
+            
+            error(nil, REMDataAccessNoConnection, nil);
+        }
+        
+        return;
     }
-    //if network is ok, get from network and always update cache data
-    else{
-        [self accessRemote:success error:error progress:progress];
-    }
+    
+    [self accessRemote:success error:error progress:progress];
 }
 
 
@@ -76,7 +109,7 @@ static NSDictionary *serviceMap = nil;
 
 
 #pragma mark - private
-- (void)accessLocal:(REMDataAccessSuccessBlock)success error:(REMDataAccessErrorBlock)error
+- (void)accessLocal:(REMDataAccessSuccessBlock)success
 {
     id cachedResult = nil;
     NSString *cacheKey = [REMServiceAgent buildParameterString:self.parameter];
@@ -90,8 +123,6 @@ static NSDictionary *serviceMap = nil;
         cachedResult = [REMStorage getFile:self.serviceMeta.url key:cacheKey];
     }
     
-    
-    
     if(self.serviceMeta.responseType == REMServiceResponseJson)
     {
         success([REMJSONHelper objectByString:cachedResult]);
@@ -104,7 +135,27 @@ static NSDictionary *serviceMap = nil;
 
 -(void)accessRemote:(REMDataAccessSuccessBlock)success error:(REMDataAccessErrorBlock)error progress:(REMDataAccessProgressBlock)progress
 {
-    [REMServiceAgent call:self.serviceMeta withBody:self.parameter mask:self.maskContainer group:self.groupName store:YES success:success error:error progress:progress];
+    [REMServiceAgent call:self.serviceMeta withBody:self.parameter mask:self.maskContainer group:self.groupName success:^(id data) {
+        //update cache mode to NO if cache mode is cache
+        if([REMApplicationContext instance].cacheMode == YES){
+            [[REMApplicationContext instance] setCacheMode:NO];
+        }
+        
+        success(data);
+    } error:^(NSError *errorInfo, REMDataAccessErrorStatus status, id response) {
+        if(status == REMDataAccessNoConnection || status == REMDataAccessFailed || (status == REMDataAccessErrorMessage && [((REMBusinessErrorInfo *)response).code isEqualToString:@"1"])){
+            NSString *message = self.messageMap[@(status)];
+            [REMAlertHelper alert:message];
+        }
+        
+        error(errorInfo,status,response);
+    } progress:progress];
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self accessLocal:self.success];
 }
 
 @end

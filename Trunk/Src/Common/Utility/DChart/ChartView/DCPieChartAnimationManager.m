@@ -196,10 +196,13 @@ const NSString* stepKey = @"step";
 }
 
 -(void)playFrames:(NSArray*)frames {
-    if (frames == nil || frames.count == 0) return;
-    [self.view hidePercentageTexts];
-    if (self.animationTimer && [self.animationTimer isValid]) [self.animationTimer invalidate];
-    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animationTimerTarget) userInfo:frames.mutableCopy repeats:YES];
+    if (frames == nil || frames.count == 0) {
+        [self.view showPercentageTexts];
+    } else {
+        [self.view hidePercentageTexts];
+        if (self.animationTimer && [self.animationTimer isValid]) [self.animationTimer invalidate];
+        self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animationTimerTarget) userInfo:frames.mutableCopy repeats:YES];
+    }
 }
 
 -(void)animationTimerTarget {

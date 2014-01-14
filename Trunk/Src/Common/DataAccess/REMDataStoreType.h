@@ -15,10 +15,12 @@
 
 
 
-typedef enum _REMDataAccessErrorStatus{
-    REMDataAccessFailed,
-    REMDataAccessCanceled,
-    REMDataAccessErrorMessage,
+typedef enum _REMDataAccessErrorStatus : NSUInteger{
+    REMDataAccessSucceed = 0,
+    REMDataAccessErrorMessage = 1,
+    REMDataAccessNoConnection = 2,
+    REMDataAccessFailed = 3,
+    REMDataAccessCanceled = 4,
 } REMDataAccessErrorStatus;
 
 typedef void(^REMDataAccessSuccessBlock)(id data);
@@ -149,5 +151,7 @@ typedef enum _REMDataStoreType
     /** Other */\
     @(REMDSLogSend) : REMJsonSvc(@"API/Log.svc/SendLog"),\
 };
+
+#define REMNetworkMessageMap @{@(REMDataAccessErrorMessage):REMLocalizedString(@"Common_NetServerError"), @(REMDataAccessFailed):REMLocalizedString(@"Common_NetConnectionFailed"), @(REMDataAccessNoConnection):REMLocalizedString(@"Common_NetConnectionFailed")}
 
 #endif

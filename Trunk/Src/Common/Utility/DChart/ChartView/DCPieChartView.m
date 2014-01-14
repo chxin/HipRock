@@ -110,10 +110,10 @@
 }
 
 -(void)viewPanned:(UIPanGestureRecognizer*)gesture {
-    [self hidePercentageTexts];
     CGPoint panPoint = [gesture locationInView:self];
     if (gesture.state == UIGestureRecognizerStateBegan) {
         if ([self isPointInPie:panPoint]) {
+            [self hidePercentageTexts];
             self.panState = 1;
             [self sendTouchBeganEvent];
         }

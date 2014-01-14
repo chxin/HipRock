@@ -36,7 +36,7 @@
     DCTrendWrapper *widgetWrapper = nil;
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     REMChartStyle* style = [REMChartStyle getCoverStyle];
-    if ([self getEnergyStep] == REMEnergyStepHour) style.acceptPan = NO;
+    style.acceptPan = [self getEnergyStep] != REMEnergyStepHour;
     if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[DCLineWrapper alloc]initWithFrame:frame data:self.energyViewData widgetContext:self.widgetInfo.contentSyntax style:style];
     }

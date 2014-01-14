@@ -51,7 +51,8 @@ static NSString *customerUpdateAll=@"customerupdateall";
     }
     [dic setObject:self.currentCustomerId forKey:@"customerId"];
     
-    REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:dic];
+    NSDictionary *messageMap = @{@(REMDataAccessNoConnection):REMLocalizedString(@"TODO:I18N"), @(REMDataAccessFailed):REMLocalizedString(@"TODO:I18N"),@(REMDataAccessErrorMessage):REMLocalizedString(@"TODO:I18N")};
+    REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:dic accessCache:YES andMessageMap:messageMap];
     store.maskContainer=self.maskerView;
     store.groupName =customerUpdateAll;
     self.parameter=dic;
@@ -64,7 +65,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
         else{
             parameter= @{@"customerId":self.currentCustomerId};
         }
-        REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter];
+        REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter accessCache:YES andMessageMap:messageMap];
         logoStore.groupName = nil;
         logoStore.maskContainer = nil;
         

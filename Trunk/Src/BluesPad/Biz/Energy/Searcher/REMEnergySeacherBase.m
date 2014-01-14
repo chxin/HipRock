@@ -71,7 +71,7 @@
     }
     
     
-    REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:[model toSearchParam]];
+    REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:[model toSearchParam] accessCache:YES andMessageMap:nil];
     //store.maskContainer=maskerContainer;
     
     

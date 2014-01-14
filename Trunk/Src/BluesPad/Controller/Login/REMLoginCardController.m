@@ -118,7 +118,8 @@
     [parameter setValue:username forKey:@"userName"];
     [parameter setValue:password forKey:@"password"];
     
-    REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserValidate parameter:parameter];
+    NSDictionary *messageMap = @{@(REMDataAccessNoConnection):REMLocalizedString(@"TODO:I18N"), @(REMDataAccessFailed):REMLocalizedString(@"TODO:I18N"),@(REMDataAccessErrorMessage):REMLocalizedString(@"TODO:I18N")};
+    REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserValidate parameter:parameter accessCache:NO andMessageMap:messageMap];
     [store access:^(id data) {
         if((NSNull *)data != [NSNull null] && data != nil) //login success
         {

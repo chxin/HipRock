@@ -376,26 +376,30 @@
     return YES;
 }
 -(void)viewPanned:(UIPanGestureRecognizer*)gesture {
-    CGPoint translation = [gesture translationInView:self];
-    CGFloat speed = -translation.x*self.graphContext.hRange.length/self.graphContext.plotRect.size.width;
+    CGFloat speed = -[gesture velocityInView:self].x*self.graphContext.hRange.length/self.graphContext.plotRect.size.width/kDCFramesPerSecord;
     BOOL panStopped = (gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed);
     if (speed == 0 && !panStopped) return;
     if (self.graphContext.focusX == INT32_MIN) {
-        self.graphContext.hRange = [[DCRange alloc]initWithLocation:speed+self.graphContext.hRange.location length:self.graphContext.hRange.length];
+        double location = speed+self.graphContext.hRange.location;
+        double end = location + self.graphContext.hRange.length;
+        if (location < self.graphContext.globalHRange.location) {
+            location = (self.graphContext.globalHRange.location - location) / 2 + location;
+        } else  if (end > self.graphContext.globalHRange.end) {
+            location = location - (end - self.graphContext.globalHRange.end) / 2;
+        }
+        self.graphContext.hRange = [[DCRange alloc]initWithLocation:location length:self.graphContext.hRange.length];
     } else {
         [self focusAroundX:[self getXLocationForPoint:[gesture locationInView:self]]];
     }
     if (self.delegate && [self.delegate respondsToSelector:@selector(panWithSpeed:panStopped:)]) {
         [self.delegate panWithSpeed:speed panStopped:panStopped];
     }
-    [gesture setTranslation:CGPointMake(0, 0) inView:self];
 }
 
 -(void)viewPinched:(_DCHPinchGestureRecognizer*)gesture {
     CGFloat centerX = self.graphContext.hRange.location + self.graphContext.hRange.length * (gesture.centerX - self.graphContext.plotRect.origin.x) / self.graphContext.plotRect.size.width;
     CGFloat start = centerX - (centerX - self.graphContext.hRange.location) * gesture.leftScale;
     CGFloat end = centerX + (-centerX + self.graphContext.hRange.end) * gesture.rightScale;
-    NSLog(@"%f %f", gesture.leftScale, gesture.rightScale);
     if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(pinchStopped)]) {
             [self.delegate pinchStopped];
@@ -451,14 +455,14 @@
 
 -(void)focusAroundX:(double)x {
     int xRounded = 0;
-    if (self.graphContext.pointAlignToTick) {
-        xRounded = floor(x+0.5);
-    } else {
+    if (self.graphContext.xLabelAlignToTick) {
         xRounded = floor(x);
+    } else {
+        xRounded = floor(x-0.5);
     }
     DCRange* globalRange = self.graphContext.globalHRange;
-    int globalStartCeil = ceil(globalRange.location);
-    int globalEndFloor = floor(globalRange.end);
+    int globalStartCeil = floor(globalRange.location);
+    int globalEndFloor = ceil(globalRange.end);
     if (xRounded < globalStartCeil) xRounded = globalStartCeil;
     if (xRounded > globalEndFloor) xRounded = globalEndFloor;
     

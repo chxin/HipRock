@@ -422,7 +422,8 @@
     }
     else{
         NSDictionary *param=@{@"pictureId":self.buildingInfo.building.pictureIds[0]};
-        REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param];
+        NSDictionary *messageMap = @{@(REMDataAccessNoConnection):REMLocalizedString(@"TODO:I18N"), @(REMDataAccessFailed):REMLocalizedString(@"TODO:I18N"),@(REMDataAccessErrorMessage):REMLocalizedString(@"TODO:I18N")};
+        REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param accessCache:YES andMessageMap:messageMap];
         store.groupName=self.loadingImageKey;
         
         
@@ -704,8 +705,9 @@
     [[REMImageHelper imageWithLayer:self.buildingTypeTitleView.layer] drawInRect:self.buildingTypeTitleView.frame];
     [[REMImageHelper imageWithLayer:self.buildingTitleView.layer] drawInRect:self.buildingTitleView.frame];
     //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
-    
-    [[REMImageHelper imageWithLayer:self.bottomGradientLayer] drawInRect:self.bottomGradientLayer.frame];
+    CGRect ffds = self.bottomGradientLayer.frame;
+    ffds = CGRectMake(ffds.origin.x, ffds.origin.y+kBuildingTitleTop, ffds.size.width, ffds.size.height);
+    [[REMImageHelper imageWithLayer:self.bottomGradientLayer] drawInRect:ffds];
     
     [dataImage drawInRect:CGRectMake(0, kBuildingCommodityViewTop + kBuildingTitleHeight, outputWidth, dataImageHeight)];
     

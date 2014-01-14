@@ -15,7 +15,7 @@
     CGFloat pointXOffset = 0;
     if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
     [super drawInContext:ctx];
-    if (self.graphContext.focusX != INT32_MIN && self.graphContext.focusX >= 0) {
+    if (self.graphContext.focusX != INT32_MIN) {
         CGPoint symbolLinePoints[2];
         symbolLinePoints[0].x = [DCUtility getScreenXIn:self.bounds xVal:self.graphContext.focusX+pointXOffset hRange:self.graphContext.hRange];
         symbolLinePoints[0].y = 0;
