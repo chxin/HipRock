@@ -48,7 +48,7 @@
 
 -(void)loadBackground
 {
-    UIImage *backgroundImage = /*isAlreadyLogin ? REMIMG_DefaultMap :*/ REMLoadImageResource(@"SplashScreenBackgroud", @"jpg");
+    UIImage *backgroundImage = /*[self isAlreadyLogin] ? REMIMG_MapBlur : */REMLoadImageResource(@"SplashScreenBackgroud", @"jpg");
     
     UIImageView *background = [[UIImageView alloc] initWithImage:backgroundImage];
     background.frame = REMISIOS7 ? CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight) : CGRectMake(0, -20, kDMScreenWidth, kDMScreenHeight);
@@ -137,7 +137,7 @@
 
 -(BOOL)isAlreadyLogin
 {
-    return REMAppContext.currentUser!=nil && REMAppContext.currentCustomer!=nil;
+    return REMAppContext.currentUser!=nil && REMAppContext.currentCustomer!=nil && REMAppContext.currentUser.isDemo == NO;
 }
 
 

@@ -24,5 +24,6 @@
 
 #pragma mark - Methods
 -(CGRect)getDestinationZoomRect: (int)currentBuildingIndex;
+-(void)updateView;
 
 @end

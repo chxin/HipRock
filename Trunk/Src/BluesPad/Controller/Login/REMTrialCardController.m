@@ -127,28 +127,19 @@
 -(void)createDemoUser
 {
     //use sp1 for all demo user
-    REMUserModel *tempUser = [[REMUserModel alloc] init];
-    tempUser.userId = 0;
-    tempUser.name = @"";
-    tempUser.spId = 1;
-    [REMAppContext setCurrentUser:tempUser];
-    
-    //network
-    if([REMNetworkHelper checkIsNoConnect] == YES){
-        [REMAlertHelper alert:REMLocalizedString(kLNLogin_NoNetwork)];
-        [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-        [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-        return;
-    }
+    [self setTempUser];
     
     //so demo user will be created in sp1
-    NSDictionary *messageMap = @{@(REMDataAccessNoConnection):REMLocalizedString(@"TODO:I18N"), @(REMDataAccessFailed):REMLocalizedString(@"TODO:I18N"),@(REMDataAccessErrorMessage):REMLocalizedString(@"TODO:I18N")};
+    NSDictionary *messageMap = REMDataAccessMessageMake(@"Login_TrialNoNetwork", @"Login_TrialNetworkFailed", @"Login_TrialServerError", @"");
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSDemoUserValidate parameter:nil accessCache:NO andMessageMap:messageMap];
     [store access:^(id data) {
+        if(REMIsNilOrNull(data)){ //TODO: empty response?
+            return ;
+        }
+        
         REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
         
-        if(validationResult.status == REMUserValidationSuccess)
-        {
+        if(validationResult.status == REMUserValidationSuccess) {
             REMUserModel *user = validationResult.user;
             [REMAppContext setCurrentUser:user];
             
@@ -156,36 +147,34 @@
             
             if(customers.count<=0){
                 [REMAlertHelper alert:REMLocalizedString(@"Login_TrialNoCustomer")];
-                
-                [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-                [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+                [self.loginCarouselController setLoginButtonStatusNormal];
                 
                 return;
             }
             
             if(customers.count == 1){
                 [REMAppContext setCurrentCustomer:customers[0]];
-                
-                [REMAppCurrentUser save];
-                [REMAppCurrentCustomer save];
-                
-                [self.loginCarouselController.splashScreenController showMapView];
-                
-                return;
+                [self.loginCarouselController loginSuccess];
             }
-            
-            [self.loginCarouselController presentCustomerSelectionView];
+            else{
+                [self.loginCarouselController presentCustomerSelectionView];
+            }
         }
-        
-        //[self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+        else {
+            [self.loginCarouselController setLoginButtonStatusNormal];
+        }
     } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
-        [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-        [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-        
-        if(error.code != -1001 && error.code != 306) {
-            [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
-        }
+        [self.loginCarouselController setLoginButtonStatusNormal];
     }];
+}
+
+-(void)setTempUser
+{
+    REMUserModel *tempUser = [[REMUserModel alloc] init];
+    tempUser.userId = 0;
+    tempUser.name = @"";
+    tempUser.spId = 1;
+    [REMAppContext setCurrentUser:tempUser];
 }
 
 
