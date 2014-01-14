@@ -13,6 +13,19 @@
     self = [super init];
     if (self) {
         _stacked = NO;
+        _isUnitChart = NO;
+    }
+    return self;
+}
+
+-(id)initWith:(REMWidgetObject*)widgetObj {
+    self = [self init];
+    if (self) {
+        _calendarType=widgetObj.contentSyntax.calendarType;
+        _rankingDefaultSortOrder=widgetObj.contentSyntax.rankingSortOrder;
+        _rankingRangeCode=widgetObj.contentSyntax.rankingRangeCode;
+        REMDataStoreType storeType = widgetObj.contentSyntax.dataStoreType;
+        _isUnitChart = (storeType==REMDSEnergyTagsTrendUnit || storeType==REMDSEnergyCarbonUnit || storeType==REMDSEnergyCostUnit);
     }
     return self;
 }
