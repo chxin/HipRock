@@ -11,7 +11,7 @@
 
 @interface DWrapperConfig : NSObject
 @property (nonatomic, assign) REMEnergyStep step;   // Line, Column
-@property (nonatomic, assign) BOOL stacked;         // Column
+@property (nonatomic, assign) BOOL stacked;         // Line, Column. Default No.
 @property (nonatomic, assign) REMCalendarType calendarType; // Line, Column
 
 @property (nonatomic, assign) REMRankingRange rankingRangeCode; // Ranking
