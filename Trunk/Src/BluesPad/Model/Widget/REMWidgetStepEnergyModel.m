@@ -20,7 +20,17 @@
 
 - (void)resetStepByTimeRange:(REMTimeRange *)range{
     REMWidgetStepCalculationModel *model = [REMWidgetStepCalculationModel tryNewStepByRange:range];
-    self.step=model.defaultStep;
+    BOOL found=NO;
+    for (NSNumber *stepNumber in model.stepList) {
+        if (self.step == ((REMEnergyStep)[stepNumber integerValue])) {
+            found=YES;
+            break;
+        }
+    }
+    if (found==NO) {
+        self.step=model.defaultStep;
+    }
+
 }
 
 - (REMEnergyStep)stepTypeByNumber:(NSNumber *)stepNumber
