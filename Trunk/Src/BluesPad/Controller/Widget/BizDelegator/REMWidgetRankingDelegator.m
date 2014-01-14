@@ -205,8 +205,9 @@ const static CGFloat kRankingTimePickerWidth=250;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
     DCRankingWrapper  *widgetWrapper;
+    DWrapperConfig* wrapperConfig = nil;
     if (widgetType == REMDiagramTypeRanking) {
-        widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
     }
     if (widgetWrapper != nil) {
         [self.chartContainer addSubview:widgetWrapper.view];

@@ -10,8 +10,8 @@
 #import "REMChartHeader.h"
 #import "REMEnergyViewData.h"
 #import "REMCommonHeaders.h"
-#import "REMWidgetContentSyntax.h"
 #import "REMChartStyle.h"
+#import "DWrapperConfig.h"
   
 typedef enum _DChartStatus {
     DChartStatusNormal,
@@ -28,7 +28,7 @@ typedef enum _DChartStatus {
 -(void)cancelToolTipStatus;
 -(void)redraw:(REMEnergyViewData *)energyViewData;
 -(UIView*)getView;
--(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style;
+-(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig*) wrapperConfig style:(REMChartStyle*)style;
 -(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden;
 -(NSUInteger)getVisableSeriesCount;
 

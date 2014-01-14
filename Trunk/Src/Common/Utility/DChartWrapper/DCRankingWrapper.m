@@ -100,9 +100,9 @@
     return @{ @"globalRange": [[DCRange alloc]initWithLocation:0 length:datasAmount], @"beginRange": [[DCRange alloc]initWithLocation:0 length:MIN(rangeCode, datasAmount)], @"xformatter": [NSNull null] };
 }
 
--(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
-    _rankingRangeCode = syntax.rankingRangeCode;
-    _sortOrder = syntax.rankingSortOrder;
+-(void)extraSyntax:(DWrapperConfig*)wrapperConfig {
+    _rankingRangeCode = wrapperConfig.rankingRangeCode;
+    _sortOrder = wrapperConfig.rankingDefaultSortOrder;
 }
 
 -(void)quickSort:(NSMutableArray*)energyList left:(int)left right:(int)right {
