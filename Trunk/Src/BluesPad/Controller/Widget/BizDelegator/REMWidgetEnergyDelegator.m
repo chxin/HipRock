@@ -430,10 +430,7 @@
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
     DAbstractChartWrapper  *widgetWrapper;
-    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]init];
-    wrapperConfig.calendarType=self.widgetInfo.contentSyntax.calendarType;
-    wrapperConfig.rankingDefaultSortOrder=self.widgetInfo.contentSyntax.rankingSortOrder;
-    wrapperConfig.rankingRangeCode= self.widgetInfo.contentSyntax.rankingRangeCode;
+    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.widgetInfo];
     if ([self.model isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
         REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
         wrapperConfig.stacked=NO;

@@ -139,10 +139,7 @@
     CGRect widgetRect = self.chartContainer.bounds;
     REMEnergyViewData *data=self.chartData;
     REMChartStyle* style = [REMChartStyle getMinimunStyle];
-    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]init];
-    wrapperConfig.calendarType=self.widgetInfo.contentSyntax.calendarType;
-    wrapperConfig.rankingDefaultSortOrder=self.widgetInfo.contentSyntax.rankingSortOrder;
-    wrapperConfig.rankingRangeCode= self.widgetInfo.contentSyntax.rankingRangeCode;
+    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.widgetInfo];
     if ([self.searchModel isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
         REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.searchModel;
         wrapperConfig.stacked=NO;

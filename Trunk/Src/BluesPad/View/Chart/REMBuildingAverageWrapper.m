@@ -47,6 +47,7 @@
 }
 
 -(void)customizeSeries:(DCXYSeries *)series seriesIndex:(int)index chartStyle:(REMChartStyle *)style {
+    [super customizeSeries:series seriesIndex:index chartStyle:style];
     if (series.type == DCSeriesTypeColumn) {
         series.color = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.7f];
     } else {
