@@ -77,7 +77,6 @@ static const int kTrialCardIndex = kCardCount - 2;
 {
     UIEdgeInsets imageInsets = UIEdgeInsetsMake(5.0f, 12.0f, 18.0f, 12.0f);
     
-    
     UIButton *skipToTrialButton = [UIButton buttonWithType:UIButtonTypeCustom];
     skipToTrialButton.frame = CGRectMake((kDMScreenWidth-2*kDMLogin_SkipToLoginButtonWidth - kDMLogin_SkipToLoginButtonLeftOffset)/2, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
     skipToTrialButton.alpha = 0;
@@ -90,9 +89,6 @@ static const int kTrialCardIndex = kCardCount - 2;
     [skipToTrialButton addTarget:self action:@selector(jumpTrialButtonTouchDown:) forControlEvents:UIControlEventTouchUpInside];
     skipToTrialButton.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
     skipToTrialButton.titleEdgeInsets = UIEdgeInsetsMake(kDMLogin_SkipToTrialButtonTextTopOffset, 0, 0, 0);
-    
-    
-    
     
     UIButton *skipToLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     skipToLoginButton.frame = CGRectMake(skipToTrialButton.frame.origin.x + kDMLogin_SkipToLoginButtonWidth + kDMLogin_SkipToLoginButtonLeftOffset, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
@@ -196,9 +192,6 @@ static const int kTrialCardIndex = kCardCount - 2;
         self.skipToTrialButton.alpha = 1;
         self.pageControl.alpha = 1;
         
-        [self.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-        [self.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-        
         [self showPage:kLoginCardIndex withEaseAnimation:NO];
     }
 }
@@ -286,12 +279,22 @@ static const int kTrialCardIndex = kCardCount - 2;
     }
 }
 
+
+-(void)loginSuccess
+{
+    [REMAppCurrentUser save];
+    [REMAppCurrentCustomer save];
+    
+    [self.splashScreenController showMapView ];
+    [self setLoginButtonStatusNormal];
+}
+
 #pragma mark  Customer selection delegate
 
 -(void)customerSelectionTableView:(UITableView *)table didSelectCustomer:(REMCustomerModel *)customer
 {
     [REMAppContext setCurrentCustomer:customer];
-    [self.loginCardController loginSuccess];
+    [self loginSuccess];
 }
 -(void)customerSelectionTableViewdidDismissView
 {

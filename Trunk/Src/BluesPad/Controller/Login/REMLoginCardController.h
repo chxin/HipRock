@@ -17,6 +17,5 @@
 @property (nonatomic,weak) REMLoginCarouselController *loginCarouselController;
 
 
--(void)loginSuccess;
 
 @end

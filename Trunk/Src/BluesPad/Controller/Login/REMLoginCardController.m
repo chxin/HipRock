@@ -36,8 +36,6 @@
 
 -(void)loadView
 {
-    //[super loadView];
-    
     UIView *contentView = [self renderContent];
     self.view = [[REMLoginTitledCard alloc] initWithTitle:REMLocalizedString(@"Login_LoginCardTitle") andContentView:contentView];
 }
@@ -45,7 +43,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     
 }
 
@@ -73,14 +70,15 @@
     self.passwordErrorLabel = passwordErrorLabel;
     self.loginButton = loginButton;
     
-#ifdef DEBUG
-    NSString *debugUser = REMAppConfig.currentDataSource[@"debug-user"];
-    if(!REMIsNilOrNull(debugUser) && ![debugUser isEqualToString:@""] && [debugUser rangeOfString:@"|"].length>0){
-        NSArray *debugUserInfo = [debugUser componentsSeparatedByString:@"|"];
-        self.userNameTextField.text = debugUserInfo[0];
-        self.passwordTextField.text = debugUserInfo[1];
-    }
-#endif
+//#ifdef DEBUG
+//    NSString *debugUser = REMAppConfig.currentDataSource[@"debug-user"];
+//    if(!REMIsNilOrNull(debugUser) && ![debugUser isEqualToString:@""] && [debugUser rangeOfString:@"|"].length>0){
+//        NSArray *debugUserInfo = [debugUser componentsSeparatedByString:@"|"];
+//        self.userNameTextField.text = debugUserInfo[0];
+//        self.passwordTextField.text = debugUserInfo[1];
+//        [self.loginButton setEnabled:YES];
+//    }
+//#endif
     
     return content;
 }
@@ -92,92 +90,87 @@
 }
 
 
-- (void)loginButtonPressed:(id)sender
+-(NSDictionary *)validateInput
 {
-    [self.userNameErrorLabel setHidden:YES];
-    [self.passwordErrorLabel setHidden:YES];
-    
     NSString *username = [self.userNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *password = [self.passwordTextField.text  stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
-    if(username == nil || [username isEqualToString:@""] ||  password == nil || [self.passwordTextField.text isEqualToString:@""])
-    {
+    if(REMStringNilOrEmpty(username) || REMStringNilOrEmpty(password)) {
         [REMAlertHelper alert:REMLocalizedString(@"Login_InputNotComplete")];
-        return;
+        return nil;
     }
     
-    [self.view endEditing:YES];
+    NSTextCheckingResult *usernameMatch = REMREGEXMatch_UserName(username);
+    if(username.length < 1 || username.length > 30 || usernameMatch == nil){
+        [self setErrorLabelTextWithStatus:REMUserValidationWrongName];
+        return nil;
+    }
     
-    //network
-    if([REMNetworkHelper checkIsNoConnect] == YES){
-        [REMAlertHelper alert:REMLocalizedString(kLNLogin_NoNetwork)];
-        return;
+    NSTextCheckingResult *passwordMatch1 = REMREGEXMatch_Password(password, 1), *passwordMatch2 = REMREGEXMatch_Password(password, 2), *passwordMatch3 = REMREGEXMatch_Password(password, 3), *passwordMatch4 = REMREGEXMatch_Password(password, 4);
+    
+    if (password.length < 6 || password.length > 20 || [password rangeOfString:@" "].length > 0 || passwordMatch1==nil || passwordMatch2==nil || passwordMatch3==nil || passwordMatch4!=nil) {
+        [self setErrorLabelTextWithStatus:REMUserValidationWrongPassword];
+        return nil;
     }
     
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setValue:username forKey:@"userName"];
     [parameter setValue:password forKey:@"password"];
     
-    NSDictionary *messageMap = @{@(REMDataAccessNoConnection):REMLocalizedString(@"TODO:I18N"), @(REMDataAccessFailed):REMLocalizedString(@"TODO:I18N"),@(REMDataAccessErrorMessage):REMLocalizedString(@"TODO:I18N")};
+    return parameter;
+}
+
+
+- (void)loginButtonPressed:(id)sender
+{
+    [self.userNameErrorLabel setHidden:YES];
+    [self.passwordErrorLabel setHidden:YES];
+    
+    NSDictionary *parameter = [self validateInput];
+    if(parameter == nil){
+        return;
+    }
+    
+    [self.view endEditing:YES];
+    
+    NSDictionary *messageMap = REMDataAccessMessageMake(@"Login_NoNetwork",@"Login_NetworkFailed",@"Login_ServerError",@"");
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserValidate parameter:parameter accessCache:NO andMessageMap:messageMap];
     [store access:^(id data) {
-        if((NSNull *)data != [NSNull null] && data != nil) //login success
+        if(REMIsNilOrNull(data)){ //TODO: empty response?
+            return ;
+        }
+        
+        REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
+        
+        if(validationResult.status == REMUserValidationSuccess)
         {
-            REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
+            REMUserModel *user = validationResult.user;
+            [REMAppContext setCurrentUser:user];
             
-            if(validationResult.status == REMUserValidationSuccess)
-            {
-                REMUserModel *user = validationResult.user;
-                [REMAppContext setCurrentUser:user];
-                
-                NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
-                
-                if(customers.count<=0){
-                    [REMAlertHelper alert:REMLocalizedString(kLNLogin_NotAuthorized)];
-                    [self.loginCarouselController setLoginButtonStatusNormal];
-                    
-                    return;
-                }
-                
-                if(customers.count == 1){
-                    [REMAppContext setCurrentCustomer:customers[0]];
-                    [self loginSuccess];
-                }
-                else{
-                    [self.loginCarouselController presentCustomerSelectionView];
-                }
-            }
-            else
-            {
+            NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
+            
+            if(customers.count<=0){
+                [REMAlertHelper alert:REMLocalizedString(@"Login_NoCustomer")];
                 [self.loginCarouselController setLoginButtonStatusNormal];
                 
-                if(validationResult.status == REMUserValidationWrongName)
-                {
-                    [self.userNameErrorLabel setHidden:NO];
-                    [self.userNameErrorLabel setText : REMLocalizedString(kLNLogin_UserNotExist) ];
-                }
-                else if (validationResult.status == REMUserValidationWrongPassword)
-                {
-                    [self.passwordErrorLabel setHidden:NO];
-                    [self.passwordErrorLabel setText : REMLocalizedString(kLNLogin_WrongPassword) ];
-                }
-                else if(validationResult.status == REMUserValidationInvalidSp)
-                {
-                    [self.userNameErrorLabel setHidden:NO];
-                    [self.userNameErrorLabel setText :  REMLocalizedString(kLNLogin_AccountLocked)];
-                }
-                else
-                {
-                    [self.loginCarouselController showLoginCard];
-                }
+                return;
             }
+            
+            if(customers.count == 1){
+                [REMAppContext setCurrentCustomer:customers[0]];
+                [self.loginCarouselController loginSuccess];
+            }
+            else{
+                [self.loginCarouselController presentCustomerSelectionView];
+            }
+        }
+        else
+        {
+            [self.loginCarouselController setLoginButtonStatusNormal];
+            [self setErrorLabelTextWithStatus:validationResult.status];
         }
     } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
         [self.loginCarouselController setLoginButtonStatusNormal];
-        
-        if(error.code != -1001 && error.code != 306) {
-            [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
-        }
     }];
     
     //mask login button
@@ -202,15 +195,27 @@
     }
 }
 
-
--(void)loginSuccess
+-(void)setErrorLabelTextWithStatus:(REMUserValidationStatus)status
 {
-    [REMAppCurrentUser save];
-    [REMAppCurrentCustomer save];
-    
-    [self.loginCarouselController.splashScreenController showMapView ];
-    [self.loginCarouselController setLoginButtonStatusNormal];
+    switch (status) {
+        case REMUserValidationWrongName:
+            [self.userNameErrorLabel setHidden:NO];
+            [self.userNameErrorLabel setText : REMLocalizedString(kLNLogin_UserNotExist)];
+            break;
+        case REMUserValidationWrongPassword:
+            [self.passwordErrorLabel setHidden:NO];
+            [self.passwordErrorLabel setText : REMLocalizedString(kLNLogin_WrongPassword) ];
+            break;
+        case REMUserValidationInvalidSp:
+            [self.userNameErrorLabel setHidden:NO];
+            [self.userNameErrorLabel setText :  REMLocalizedString(kLNLogin_AccountLocked)];
+            break;
+            
+        default:
+            break;
+    }
 }
+
 
 
 #pragma mark - uitextfield delegate
@@ -280,7 +285,9 @@
     userNameTextBox.returnKeyType = UIReturnKeyNext;
     userNameTextBox.font = [UIFont systemFontOfSize:kDMLogin_TextBoxFontSize];
     userNameTextBox.textColor = [REMColor colorByHexString:kDMLogin_TextBoxFontColor];
-    [userNameTextBox addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventValueChanged];
+    userNameTextBox.autocorrectionType = UITextAutocorrectionTypeNo;
+    userNameTextBox.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    [userNameTextBox addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self setTextField:userNameTextBox backgroundImage:REMIMG_LoginTextField];
     
     
@@ -309,7 +316,7 @@
     passwordTextBox.returnKeyType = UIReturnKeyGo;
     passwordTextBox.font = [UIFont systemFontOfSize:kDMLogin_TextBoxFontSize];
     passwordTextBox.textColor = [REMColor colorByHexString:kDMLogin_TextBoxFontColor];
-    [passwordTextBox addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventValueChanged];
+    [passwordTextBox addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self setTextField:passwordTextBox backgroundImage:REMIMG_LoginTextField];
     
     return passwordTextBox;
@@ -341,6 +348,7 @@
     [button addTarget:self action:@selector(loginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     button.titleLabel.textColor = [REMColor colorByHexString:kDMLogin_LoginButtonFontColor];
     button.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_LoginButtonFontSize];
+    button.enabled = NO;
     
     return button;
 }

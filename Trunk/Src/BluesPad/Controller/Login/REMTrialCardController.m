@@ -155,7 +155,7 @@
             NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
             
             if(customers.count<=0){
-                [REMAlertHelper alert:REMLocalizedString(kLNLogin_NotAuthorized)];
+                [REMAlertHelper alert:REMLocalizedString(@"Login_TrialNoCustomer")];
                 
                 [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
                 [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
