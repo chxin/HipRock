@@ -9,6 +9,7 @@
 #import "REMLoginCardController.h"
 #import "REMCustomerModel.h"
 
+
 @protocol REMLoginCustomerSelectionDelegate <NSObject>
 
 -(void)customerSelectionTableView:(UITableView *)table didSelectCustomer:(REMCustomerModel *)customer;
@@ -27,6 +28,6 @@
 @interface REMLoginCustomerTableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource,REMCustomerSelectionInterface>
 
 @property (nonatomic,weak) NSObject<REMLoginCustomerSelectionDelegate> *delegate;
-
+@property (nonatomic,strong) id holder;
 
 @end

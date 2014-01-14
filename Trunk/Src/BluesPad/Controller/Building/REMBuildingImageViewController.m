@@ -252,7 +252,10 @@
     self.backButton=backButton;
     
     UIButton *settingButton=self.settingButton;
-    [settingButton setFrame:CGRectMake(settingButton.frame.origin.x, settingButton.frame.origin.y-kDMStatusBarHeight , settingButton.frame.size.width, settingButton.frame.size.height)];
+    if (REMISIOS7) {
+        [settingButton setFrame:CGRectMake(settingButton.frame.origin.x, settingButton.frame.origin.y-kDMStatusBarHeight , settingButton.frame.size.width, settingButton.frame.size.height)];
+    }
+    
     [settingButton removeTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [settingButton addTarget:self.parentViewController action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.container addSubview:settingButton];
@@ -672,6 +675,9 @@
 - (void)exportImage:(void (^)(UIImage *, NSString*))callback
 {
     REMBuildingDataViewController *dataViewController=self.childViewControllers[0];
+    
+    
+    
     NSDictionary *outputDic=[dataViewController realExport];
     UIImage* dataImage = [outputDic objectForKey:@"image"];
     float dataImageHeight = dataImage.size.height;

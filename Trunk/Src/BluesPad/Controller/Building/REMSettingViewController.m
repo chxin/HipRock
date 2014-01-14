@@ -15,6 +15,7 @@
 
 @interface REMSettingViewController ()
 @property (nonatomic) BOOL isLoggingOut;
+@property (nonatomic,strong) REMUpdateAllManager *updateManager;
 @end
 
 @implementation REMSettingViewController
@@ -274,9 +275,20 @@
     else if(indexPath.section==3 && indexPath.row==0){
         REMUpdateAllManager *manager=[REMUpdateAllManager defaultManager];
         manager.canCancel=YES;
-        manager.mainNavigationController=(REMMainNavigationController *)self.presentingViewController.navigationController;
+        self.updateManager=manager;
+        manager.mainNavigationController=(REMMainNavigationController *)self.presentingViewController;
         [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
             if (status == REMCustomerUserConcurrencyStatusSuccess) {
+                REMMainNavigationController *mainController=(REMMainNavigationController *)self.presentingViewController;
+                if (mainController!=nil) {
+                    [mainController dismissViewControllerAnimated:YES completion:^(void){
+                        [mainController presentInitialView:nil];
+                    }];
+                }
+                else{
+                    [manager.mainNavigationController presentInitialView:nil];
+                }
+                self.updateManager=nil;
                 
             }
         }];

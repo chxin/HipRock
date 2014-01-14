@@ -12,6 +12,7 @@
 @interface REMBuildingCoverWidgetViewController ()
 
 @property (nonatomic,strong) NSIndexPath *currentIndexPath;
+@property (nonatomic,strong) REMPinToBuildingCoverHelper *pinHelper;
 
 @end
 
@@ -199,12 +200,14 @@
         model.widgetId=widgetId;
         model.dashboardId=@(-1);
     }
+    NSString *widgetName=nil;
     if (self.currentIndexPath.section!=1) {
         REMDashboardObj *dashboard=self.dashboardArray[self.currentIndexPath.section-2];
         NSArray *widgetList=self.widgetDic[dashboard.dashboardId];
         REMWidgetObject *widget=widgetList[self.currentIndexPath.row];
         model.dashboardId=dashboard.dashboardId;
         model.widgetId=widget.widgetId;
+        widgetName=widget.name;
     }
     
     if ([self.selectedDashboardId isEqualToNumber:model.dashboardId]==YES &&
@@ -228,6 +231,8 @@
     self.isRequesting=YES;
     REMPinToBuildingCoverHelper *helper=[[REMPinToBuildingCoverHelper alloc]init];
     helper.mainNavigationController=(REMMainNavigationController *)self.commodityController.parentViewController.parentViewController.parentViewController.navigationController;
+    helper.widgetName=widgetName;
+    self.pinHelper=helper;
     [helper pinToBuildingCover:@{@"relationList":@[newDic],@"buildingId":model.buildingId,@"customerId":customer.customerId} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
         if (status == REMPinToBuildingCoverStatusSuccess) {
             [self.commodityController updateChartController];

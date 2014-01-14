@@ -8,6 +8,8 @@
 
 #import "REMBuildingDataViewController.h"
 #import "REMBuildingDataView.h"
+#import "REMBuildingChartBaseViewController.h"
+
 #define kDashboardThreshold 361+65+85*2+45
 
 @interface REMBuildingDataViewController ()
@@ -480,6 +482,12 @@
     UIView* chartView = controller.view;
     UIScrollView *scrollView=(UIScrollView *)self.view;
     CGFloat chartHeight = scrollView.contentSize.height;
+    
+    for (UIViewController *container in self.childViewControllers) {
+        for (REMBuildingChartBaseViewController *chart in container.childViewControllers) {
+            [chart prepareShare];
+        }
+    }
     
     NSMutableArray* btnOutputImages = [[NSMutableArray alloc]initWithCapacity:self.buttonArray.count];
     for (int i = 0; i < self.buttonArray.count; i++) {

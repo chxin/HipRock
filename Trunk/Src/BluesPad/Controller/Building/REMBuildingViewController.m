@@ -546,6 +546,8 @@ const static CGFloat buildingGap=20;
 {
     REMBuildingImageViewController *viewController=self.childViewControllers[self.currentBuildingIndex];
     
+    
+    
     [viewController exportImage:callback];
 }
 

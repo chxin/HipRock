@@ -91,7 +91,7 @@ static int requestTimeout = 45; //(s)
             
             REMError *remError = [[REMError alloc] initWithErrorInfo:remErrorInfo];
             
-            error(remError,NO,remErrorInfo);
+            error(remError,REMDataAccessErrorMessage,remErrorInfo);
             NetworkDecreaseActivity();
             
             if(maskContainer!=nil && maskManager != nil) //if mask has already shown

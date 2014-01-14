@@ -22,5 +22,6 @@ typedef enum _REMPinToBuildingCoverStatus{
 - (void) pinToBuildingCover:(NSDictionary *)param withBuildingInfo:(REMBuildingOverallModel *)buildingInfo withCallback:(void(^)(REMPinToBuildingCoverStatus))callback;
 
 @property (nonatomic,weak) REMMainNavigationController *mainNavigationController;
+@property (nonatomic,copy) NSString *widgetName;
 
 @end

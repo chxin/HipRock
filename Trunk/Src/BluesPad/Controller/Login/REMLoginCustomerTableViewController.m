@@ -12,7 +12,6 @@
 
 @interface REMLoginCustomerTableViewController ()
 
-@property (nonatomic,strong) NSArray *customers;
 
 @end
 
@@ -32,8 +31,9 @@ static NSString *CellIdentifier = @"loginCustomerCell";
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:REMLocalizedString(@"Common_Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     self.navigationItem.title = REMLocalizedString(@"Login_CustomerSelectionTitle");
-    
-    self.customers = (NSArray *)(REMAppCurrentUser.customers);
+    if (self.customerArray==nil) {
+        self.customerArray=(NSArray *)(REMAppCurrentUser.customers);
+    }
 }
 
 -(UITableView *)renderCustomerTableView:(CGRect)frame
@@ -75,14 +75,14 @@ static NSString *CellIdentifier = @"loginCustomerCell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return self.customers.count;
+    return self.customerArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    REMCustomerModel *customer = self.customers[indexPath.row];
+    REMCustomerModel *customer = self.customerArray[indexPath.row];
     cell.textLabel.text = customer.name;
     
     return cell;
@@ -94,7 +94,7 @@ static NSString *CellIdentifier = @"loginCustomerCell";
     
     [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     
-    REMCustomerModel *selectedCustomer=self.customers[indexPath.row];
+    REMCustomerModel *selectedCustomer=self.customerArray[indexPath.row];
 //    
 //    for(REMCustomerModel *customer in self.customers){
 //        if([customer.name isEqualToString:cell.textLabel.text]){

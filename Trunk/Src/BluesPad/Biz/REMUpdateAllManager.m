@@ -20,7 +20,10 @@
 
 @property (nonatomic,strong) NSDictionary *parameter;
 
+@property (nonatomic) REMCustomerUserConcurrencyStatus lastStatus;
+
 @property (nonatomic,weak) UIAlertView *alertView;
+
 
 @end
 
@@ -54,7 +57,6 @@ static NSString *customerUpdateAll=@"customerupdateall";
     self.parameter=dic;
     [store access:^(NSDictionary *data){
         
-        
         NSDictionary *parameter;
         if (self.selectedCustomerId!=nil) {
             parameter= @{@"customerId":self.selectedCustomerId};
@@ -77,7 +79,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
             
             NSNumber *statusNumber=data[@"Status"];
             REMCustomerUserConcurrencyStatus status=(REMCustomerUserConcurrencyStatus)[statusNumber integerValue];
-            
+            self.lastStatus=status;
             NSArray *newList = data[@"Customers"];
             NSMutableArray *customerList=nil;
             if(newList!=nil && [newList isEqual:[NSNull null]]==NO){
@@ -86,8 +88,9 @@ static NSString *customerUpdateAll=@"customerupdateall";
                     REMCustomerModel *model=[[REMCustomerModel alloc]initWithDictionary:obj];
                     [customerList addObject:model];
                 }
+                self.customerInfoArray=customerList;
+
             }
-            self.customerInfoArray=customerList;
             NSArray *newBuildingList=data[@"BuildingInfo"];
             NSMutableArray *buildingInfoList=nil;
             if(newBuildingList!=nil && [newBuildingList isEqual:[NSNull null]]==NO){
@@ -96,8 +99,8 @@ static NSString *customerUpdateAll=@"customerupdateall";
                     REMBuildingOverallModel *model=[[REMBuildingOverallModel alloc]initWithDictionary:obj];
                     [buildingInfoList addObject:model];
                 }
+                self.buildingInfoArray=buildingInfoList;
             }
-            self.buildingInfoArray=buildingInfoList;
             [self.alertView dismissWithClickedButtonIndex:-1 animated:YES];
             if (status == REMCustomerUserConcurrencyStatusUserDeleted) {
                 [self statusUserDeleted];
@@ -149,8 +152,15 @@ static NSString *customerUpdateAll=@"customerupdateall";
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:customerController];
         navController.modalPresentationStyle = UIModalPresentationFormSheet;
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        
-        [self.mainNavigationController presentViewController:navController animated:YES completion:nil];
+        if (self.mainNavigationController.presentedViewController!=nil) {
+            customerController.holder=self;
+            [self.mainNavigationController dismissViewControllerAnimated:YES completion:^(void){
+                [self.mainNavigationController presentViewController:navController animated:YES completion:nil];
+            }];
+        }
+        else{
+            [self.mainNavigationController presentViewController:navController animated:YES completion:nil];
+        }
     }
     else{
         self.tableViewController.customerArray=self.customerInfoArray;
@@ -192,22 +202,19 @@ static NSString *customerUpdateAll=@"customerupdateall";
     else{
         self.customerInfoArray=context.currentUser.customers;
     }
-    if (self.selectedCustomerId!=nil) {
-        for (REMCustomerModel *customer in self.customerInfoArray) {
-            if ([customer.customerId isEqualToNumber:self.selectedCustomerId]==YES) {
-                context.currentCustomer=customer;
-                [context.currentCustomer updateInnerDictionary];
-                [context.currentCustomer save];
-            }
+    REMCustomerModel *current=REMAppCurrentCustomer;
+    for (REMCustomerModel *customer in self.customerInfoArray) {
+        if ([customer.customerId isEqualToNumber:self.selectedCustomerId]==YES && [customer isEqual:current]==NO) {
+            context.currentCustomer=customer;
+            [context.currentCustomer updateInnerDictionary];
+            [context.currentCustomer save];
         }
     }
     
-        
     
+    self.tableViewController=nil;
+    self.callback(REMCustomerUserConcurrencyStatusSuccess,self.buildingInfoArray,REMDataAccessFailed);
     
-    
-    
-    self.callback(REMCustomerUserConcurrencyStatusSuccess,self.buildingInfoArray,REMDataAccessCanceled);
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -255,8 +262,13 @@ static NSString *customerUpdateAll=@"customerupdateall";
 
 - (void)customerSelectionTableView:(UITableView *)table didSelectCustomer:(REMCustomerModel *)customer
 {
-    
-    self.selectedCustomerId=customer.customerId;
+    if (self.lastStatus == REMCustomerUserConcurrencyStatusCurrentCustomerDeleted) {
+        self.currentCustomerId=customer.customerId;
+        self.selectedCustomerId=nil;
+    }
+    else{
+        self.selectedCustomerId=customer.customerId;
+    }
     self.tableViewController=self.tableViewController;
     [self updateAllBuildingInfoWithAction:self.callback];
 }

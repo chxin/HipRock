@@ -11,6 +11,7 @@
 #import "REMLoginCustomerTableViewController.h"
 #import "REMDataStoreType.h"
 
+
 typedef enum _REMCustomerUserConcurrencyStatus {
     REMCustomerUserConcurrencyStatusSuccess = 0,
     REMCustomerUserConcurrencyStatusCurrentCustomerDeleted = 1,

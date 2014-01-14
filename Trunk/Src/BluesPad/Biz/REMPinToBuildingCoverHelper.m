@@ -26,10 +26,10 @@
         callback(REMPinToBuildingCoverStatusSuccess);
     }error:^(NSError *error,REMDataAccessErrorStatus status, REMBusinessErrorInfo * bizError){
         if (status == REMDataAccessErrorMessage) {
-            if ([bizError.code isEqualToString:@""]==YES) {//widget deleted
+            if ([bizError.code isEqualToString:@"050001216002"]==YES) {//widget deleted
                 [self showMessage:NSLocalizedString(@"Building_WidgetRelationWidgetDeleted", @"")];
             }
-            else if([bizError.code isEqualToString:@""]==YES){//container deleted
+            else if([bizError.code isEqualToString:@"050001216001"]==YES){//container deleted
                 [self showMessage:NSLocalizedString(@"Building_WidgetRelationPositionDeleted", @"")];
             }
         }
@@ -37,8 +37,9 @@
 }
 
 - (void)showMessage:(NSString *)msg{
-    NSString *updateString;
-    UIAlertView *view = [[UIAlertView alloc]initWithTitle:@"" message:msg delegate:self cancelButtonTitle:updateString otherButtonTitles: nil];
+    NSString *updateString=NSLocalizedString(@"Common_UpdateData", @"");
+    NSString *fullMsg = [NSString stringWithFormat:msg,self.widgetName];
+    UIAlertView *view = [[UIAlertView alloc]initWithTitle:@"" message:fullMsg delegate:self cancelButtonTitle:updateString otherButtonTitles: nil];
     [view show];
 }
 
@@ -48,7 +49,9 @@
     manager.canCancel=YES;
     manager.mainNavigationController = self.mainNavigationController;
     [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
-        
+        if (status == REMCustomerUserConcurrencyStatusSuccess) {
+            [self.mainNavigationController presentInitialView:nil];
+        }
     }];
 }
 
