@@ -9,5 +9,11 @@
 #import "DWrapperConfig.h"
 
 @implementation DWrapperConfig
-
+-(id)init {
+    self = [super init];
+    if (self) {
+        _stacked = NO;
+    }
+    return self;
+}
 @end
