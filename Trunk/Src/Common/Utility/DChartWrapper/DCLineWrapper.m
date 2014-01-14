@@ -19,11 +19,6 @@
     return self;
 }
 
-//-(DCLineWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style {
-//    self = [super initWithFrame:frame data:energyViewData widgetContext:widgetSyntax style:style];
-//    return self;
-//}
-
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style {
     if ([self.defaultSeriesClass isEqualToString:NSStringFromClass([series class])] && (REMIsNilOrNull(series.target) || series.target.type != REMEnergyTargetBenchmarkValue)) {
         ((DCLineSeries*)series).symbolType = index % 5;

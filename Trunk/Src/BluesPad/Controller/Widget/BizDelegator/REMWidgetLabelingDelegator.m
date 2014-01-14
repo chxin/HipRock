@@ -157,8 +157,9 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
     DCLabelingWrapper  *widgetWrapper;
+    DWrapperConfig* wrapperConfig = nil;
     if (widgetType == REMDiagramTypeLabelling) {
-        widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
         widgetWrapper.delegate = self;
     }
     if (widgetWrapper != nil) {

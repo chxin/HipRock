@@ -29,10 +29,10 @@
 
 //CGRect hostViewFrame = CGRectMake(0, 0, 710, self.bounds.size.height - topAxisOffset - 45);
 
--(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*) widgetSyntax style:(REMChartStyle*)style {
+-(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(REMChartStyle *)style {
     style.plotPaddingRight = 152;
     self.standardLabels = [[NSMutableDictionary alloc]init];
-    return [super initWithFrame:frame data:energyViewData widgetContext:widgetSyntax style:style];
+    return [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
 }
 
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {

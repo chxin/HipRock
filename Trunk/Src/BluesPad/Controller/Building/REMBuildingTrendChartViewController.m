@@ -82,13 +82,14 @@ const int buttonFirstMargin = -20;
 }
 
 -(DCTrendWrapper*)constructWrapperWithFrame:(CGRect)frame {
-    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
-    syntax.relativeDateType = self.timeRangeType;
-    syntax.step = @([self getEnergyStep]);
+    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]init];
+    wrapperConfig.step = [self getEnergyStep];
+    wrapperConfig.relativeDateType = self.timeRangeType;
+    
     REMChartStyle* style = [REMChartStyle getCoverStyle];
     frame.origin.y = buttonHeight;
     frame.size.height = frame.size.height - buttonHeight;
-    REMBuildingTrendWrapper* wrapper = [[REMBuildingTrendWrapper alloc]initWithFrame:frame data:self.energyViewData widgetContext:syntax style:style];
+    REMBuildingTrendWrapper* wrapper = [[REMBuildingTrendWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig style:style];
     return wrapper;
 }
 

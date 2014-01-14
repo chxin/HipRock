@@ -66,10 +66,11 @@ static NSDictionary *codeNameMap;
 }
 
 -(DCTrendWrapper*)constructWrapperWithFrame:(CGRect)frame {
-    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
-    syntax.step = @([self getEnergyStep]);
+    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]init];
+    wrapperConfig.step = [self getEnergyStep];
+    wrapperConfig.stacked = NO;
     REMChartStyle* style = [REMChartStyle getCoverStyle];
-    REMBuildingAirQualityWrapper* wrapper = [[REMBuildingAirQualityWrapper alloc]initWithFrame:frame data:self.energyViewData widgetContext:syntax style:style];
+    REMBuildingAirQualityWrapper* wrapper = [[REMBuildingAirQualityWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig style:style];
     [wrapper setStandardsBands:self.airQualityData.standards];
     return wrapper;
 }
