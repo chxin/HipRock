@@ -63,7 +63,7 @@
 //    [self oscarTest];
     if([self isAlreadyLogin]){
         //perform splash map segue
-        [self performSegueWithIdentifier:kSegue_SplashToMap sender:self];
+        [self showMapView];
     }
     else{
         //play login carousel
@@ -71,6 +71,69 @@
     }
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)keyboardWillShow
+{
+    if (self.view.frame.origin.y >= 0)
+    {
+        [self setViewMovedUp:YES];
+    }
+    else if (self.view.frame.origin.y < 0)
+    {
+        [self setViewMovedUp:NO];
+    }
+}
+
+-(void)keyboardWillHide
+{
+    if (self.view.frame.origin.y >= 0)
+    {
+        [self setViewMovedUp:YES];
+    }
+    else if (self.view.frame.origin.y < 0)
+    {
+        [self setViewMovedUp:NO];
+    }
+}
+
+-(void)setViewMovedUp:(BOOL)movedUp
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+    
+    CGFloat distance = 40;
+    
+    CGRect rect = self.view.frame;
+    if (movedUp)
+    {
+        // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
+        // 2. increase the size of the view so that the area behind the keyboard is covered up.
+        rect.origin.y -= distance;
+        rect.size.height += distance;
+    }
+    else
+    {
+        // revert back to the normal state.
+        rect.origin.y += distance;
+        rect.size.height -= distance;
+    }
+    self.view.frame = rect;
+    
+    [UIView commitAnimations];
+}
 
 -(BOOL)isAlreadyLogin
 {
@@ -81,21 +144,23 @@
 - (void)showLoginView:(BOOL)isAnimated
 {
     if(self.carouselController!=nil){
-        [self.carouselController playCarousel:isAnimated];
+        [self.carouselController.view removeFromSuperview];
+        [self.carouselController removeFromParentViewController];
+        
+        self.carouselController.view = nil;
+        self.carouselController = nil;
     }
-    else{
-        self.carouselController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginCarousel"];
-        self.carouselController.showAnimation = isAnimated;
-        UIView *carouselView = self.carouselController.view;
-        carouselView.frame = self.view.bounds;
-        
-        [self addChildViewController:self.carouselController];
-        [self.view addSubview:carouselView];
-        
-        self.carouselController.splashScreenController = self;
-        
-        [self.carouselController playCarousel:isAnimated];
-    }
+    
+    self.carouselController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginCarousel"];
+    UIView *carouselView = self.carouselController.view;
+    carouselView.frame = self.view.bounds;
+    
+    [self addChildViewController:self.carouselController];
+    [self.view addSubview:carouselView];
+    
+    self.carouselController.splashScreenController = self;
+    
+    [self.carouselController playCarousel:isAnimated];
 }
 
 - (void)showMapView
@@ -109,12 +174,6 @@
     {
         REMLoginCarouselController *loginCarouselController = segue.destinationViewController;
         loginCarouselController.splashScreenController = self;
-    }
-    else if([segue.identifier isEqualToString:kSegue_SplashToMap] == YES)
-    {
-//        REMMapViewController *mapViewController = segue.destinationViewController;
-//        mapViewController.buildingInfoArray = self.buildingInfoArray;
-//        mapViewController.isInitialPresenting = YES;
     }
 }
 
