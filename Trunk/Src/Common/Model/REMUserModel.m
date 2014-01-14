@@ -28,6 +28,7 @@ static NSString *kCurrentUserCacheKey = @"CurrentUser";
     self.userTypeName=dictionary[@"UserTypeName"];
     self.version = dictionary[@"Version"];
     self.spId = [dictionary[@"SpId"] longLongValue];
+    self.isDemo = [dictionary[@"DemoStatus"] boolValue];
     
     NSArray *array = (NSArray *)dictionary[@"Customers"];
     NSMutableArray *customers = [[NSMutableArray alloc] initWithCapacity:array.count];
@@ -52,6 +53,7 @@ static NSString *kCurrentUserCacheKey = @"CurrentUser";
     dic[@"UserTypeName"]=self.userTypeName;
     dic[@"Version"]=self.version;
     dic[@"SpId"]=@(self.spId);
+    dic[@"DemoStatus"]=@(self.isDemo?1:0);
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:self.customers.count];
     for (int i=0; i<self.customers.count;i++) {
         REMCustomerModel *model = self.customers[i];

@@ -13,6 +13,7 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMMapGallerySegue.h"
 #import "REMColor.h"
+#import "UINavigationController+Block.h"
 
 @interface REMMainNavigationController ()
 
@@ -86,14 +87,18 @@
 
 -(void)presentInitialView:(void (^)(void))completed
 {
-    [self popToRootViewControllerAnimated:YES];
+    REMMapViewController *mapController = [self getChildControllerInstanceOfClass:[REMMapViewController class]];
     
-    //load data, when load finised, show map view
-    REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
-    [splashController showMapView];
-    
-    if(completed!=nil)
-        completed();
+    if([self.topViewController isEqual:mapController] == NO){
+        [self popToViewController:mapController animated:YES onCompletion:^{
+            [mapController updateView];
+            if(completed) completed();
+        }];
+    }
+    else{
+        [mapController updateView];
+        if(completed) completed();
+    }
 }
 
 -(id)getChildControllerInstanceOfClass:(Class)cls

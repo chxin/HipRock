@@ -332,6 +332,15 @@
 		7A153CC717AA4B3400413D3C /* REMCommodityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CC617AA4B3400413D3C /* REMCommodityModel.m */; };
 		7A153CCA17AA4B5C00413D3C /* REMEnergyUsageDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CC917AA4B5C00413D3C /* REMEnergyUsageDataModel.m */; };
 		7A153CCD17AA4EDB00413D3C /* REMRankingDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A153CCC17AA4EDB00413D3C /* REMRankingDataModel.m */; };
+		7A1960F918851E52007FE76A /* CLLocationManager+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1960E318851E52007FE76A /* CLLocationManager+Block.m */; };
+		7A1960FA18851E52007FE76A /* NSURLConnection+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1960E618851E52007FE76A /* NSURLConnection+Block.m */; };
+		7A1960FB18851E52007FE76A /* MFMailComposeViewController+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1960EB18851E52007FE76A /* MFMailComposeViewController+Block.m */; };
+		7A1960FC18851E52007FE76A /* MFMessageComposeViewController+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1960ED18851E52007FE76A /* MFMessageComposeViewController+Block.m */; };
+		7A1960FD18851E52007FE76A /* UIActionSheet+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1960F018851E52007FE76A /* UIActionSheet+Block.m */; };
+		7A1960FE18851E52007FE76A /* UIAlertView+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1960F218851E52007FE76A /* UIAlertView+Block.m */; };
+		7A1960FF18851E52007FE76A /* UINavigationController+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1960F418851E52007FE76A /* UINavigationController+Block.m */; };
+		7A19610018851E52007FE76A /* UIPickerView+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1960F618851E52007FE76A /* UIPickerView+Block.m */; };
+		7A19610118851E52007FE76A /* UIPopoverController+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1960F818851E52007FE76A /* UIPopoverController+Block.m */; };
 		7A1A855217B4BB5D004D7167 /* REMBuildingAverageChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854D17B4BB5D004D7167 /* REMBuildingAverageChartViewController.m */; };
 		7A1A855317B4BB5D004D7167 /* REMBuildingChartBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A854F17B4BB5D004D7167 /* REMBuildingChartBaseViewController.m */; };
 		7A1A855417B4BB5D004D7167 /* REMBuildingTrendChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A855117B4BB5D004D7167 /* REMBuildingTrendChartViewController.m */; };
@@ -372,7 +381,6 @@
 		7A3CB75F1806385300B94DEE /* REMBusinessErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */; };
 		7A3CB7601806385300B94DEE /* REMAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */; };
 		7A3CB7611806385300B94DEE /* REMNetworkStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */; };
-		7A3CB7621806385300B94DEE /* REMCustomerSwitchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */; };
 		7A3CB763180638A700B94DEE /* REMAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */; };
 		7A3CB764180638A700B94DEE /* REMNetworkStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */; };
 		7A3DDCDA1786C05B008A1033 /* REMServiceAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */; };
@@ -486,7 +494,6 @@
 		B40F01201828DAD5009650FD /* REMWidgetLabelingDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B40F011F1828DAD5009650FD /* REMWidgetLabelingDelegator.m */; };
 		B40F01231828DB84009650FD /* REMWidgetMonthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40F01221828DB84009650FD /* REMWidgetMonthPickerViewController.m */; };
 		B41027CB186BBC68002437E2 /* REMSettingAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B41027CA186BBC68002437E2 /* REMSettingAboutViewController.m */; };
-		B41249F01803ECF0009022C5 /* REMCustomerSwitchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */; };
 		B414C43E1855946900CB81B6 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = B414C43D1855946900CB81B6 /* Configuration.plist */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
@@ -912,6 +919,26 @@
 		7A153CC917AA4B5C00413D3C /* REMEnergyUsageDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMEnergyUsageDataModel.m; sourceTree = "<group>"; };
 		7A153CCB17AA4EDB00413D3C /* REMRankingDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMRankingDataModel.h; sourceTree = "<group>"; };
 		7A153CCC17AA4EDB00413D3C /* REMRankingDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRankingDataModel.m; sourceTree = "<group>"; };
+		7A1960E218851E52007FE76A /* CLLocationManager+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocationManager+Block.h"; sourceTree = "<group>"; };
+		7A1960E318851E52007FE76A /* CLLocationManager+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocationManager+Block.m"; sourceTree = "<group>"; };
+		7A1960E518851E52007FE76A /* NSURLConnection+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLConnection+Block.h"; sourceTree = "<group>"; };
+		7A1960E618851E52007FE76A /* NSURLConnection+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLConnection+Block.m"; sourceTree = "<group>"; };
+		7A1960E718851E52007FE76A /* iOSBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSBlocks.h; sourceTree = "<group>"; };
+		7A1960E818851E52007FE76A /* iOSBlocksProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSBlocksProtocol.h; sourceTree = "<group>"; };
+		7A1960EA18851E52007FE76A /* MFMailComposeViewController+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFMailComposeViewController+Block.h"; sourceTree = "<group>"; };
+		7A1960EB18851E52007FE76A /* MFMailComposeViewController+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFMailComposeViewController+Block.m"; sourceTree = "<group>"; };
+		7A1960EC18851E52007FE76A /* MFMessageComposeViewController+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFMessageComposeViewController+Block.h"; sourceTree = "<group>"; };
+		7A1960ED18851E52007FE76A /* MFMessageComposeViewController+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFMessageComposeViewController+Block.m"; sourceTree = "<group>"; };
+		7A1960EF18851E52007FE76A /* UIActionSheet+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Block.h"; sourceTree = "<group>"; };
+		7A1960F018851E52007FE76A /* UIActionSheet+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Block.m"; sourceTree = "<group>"; };
+		7A1960F118851E52007FE76A /* UIAlertView+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Block.h"; sourceTree = "<group>"; };
+		7A1960F218851E52007FE76A /* UIAlertView+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Block.m"; sourceTree = "<group>"; };
+		7A1960F318851E52007FE76A /* UINavigationController+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Block.h"; sourceTree = "<group>"; };
+		7A1960F418851E52007FE76A /* UINavigationController+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Block.m"; sourceTree = "<group>"; };
+		7A1960F518851E52007FE76A /* UIPickerView+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPickerView+Block.h"; sourceTree = "<group>"; };
+		7A1960F618851E52007FE76A /* UIPickerView+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPickerView+Block.m"; sourceTree = "<group>"; };
+		7A1960F718851E52007FE76A /* UIPopoverController+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPopoverController+Block.h"; sourceTree = "<group>"; };
+		7A1960F818851E52007FE76A /* UIPopoverController+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPopoverController+Block.m"; sourceTree = "<group>"; };
 		7A1A854C17B4BB5D004D7167 /* REMBuildingAverageChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingAverageChartViewController.h; sourceTree = "<group>"; };
 		7A1A854D17B4BB5D004D7167 /* REMBuildingAverageChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingAverageChartViewController.m; sourceTree = "<group>"; };
 		7A1A854E17B4BB5D004D7167 /* REMBuildingChartBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartBaseViewController.h; sourceTree = "<group>"; };
@@ -1169,8 +1196,6 @@
 		B40F01221828DB84009650FD /* REMWidgetMonthPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetMonthPickerViewController.m; sourceTree = "<group>"; };
 		B41027C9186BBC68002437E2 /* REMSettingAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSettingAboutViewController.h; path = Controller/Setting/REMSettingAboutViewController.h; sourceTree = "<group>"; };
 		B41027CA186BBC68002437E2 /* REMSettingAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSettingAboutViewController.m; path = Controller/Setting/REMSettingAboutViewController.m; sourceTree = "<group>"; };
-		B41249EE1803ECF0009022C5 /* REMCustomerSwitchHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMCustomerSwitchHelper.h; path = Biz/REMCustomerSwitchHelper.h; sourceTree = "<group>"; };
-		B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMCustomerSwitchHelper.m; path = Biz/REMCustomerSwitchHelper.m; sourceTree = "<group>"; };
 		B414C43D1855946900CB81B6 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Configuration.plist; path = Resource/Configuration.plist; sourceTree = "<group>"; };
 		B4198EAC178410D300B50475 /* REMLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLogManager.h; path = Common/Log/REMLogManager.h; sourceTree = "<group>"; };
 		B4198EAD178410D300B50475 /* REMLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLogManager.m; path = Common/Log/REMLogManager.m; sourceTree = "<group>"; };
@@ -2042,6 +2067,66 @@
 			path = Model/Common;
 			sourceTree = "<group>";
 		};
+		7A1960E018851E52007FE76A /* IOSBlocks */ = {
+			isa = PBXGroup;
+			children = (
+				7A1960E118851E52007FE76A /* CoreLocation */,
+				7A1960E418851E52007FE76A /* Foundation */,
+				7A1960E718851E52007FE76A /* iOSBlocks.h */,
+				7A1960E818851E52007FE76A /* iOSBlocksProtocol.h */,
+				7A1960E918851E52007FE76A /* MessageUI */,
+				7A1960EE18851E52007FE76A /* UIKit */,
+			);
+			name = IOSBlocks;
+			path = ../Lib/IOSBlocks;
+			sourceTree = "<group>";
+		};
+		7A1960E118851E52007FE76A /* CoreLocation */ = {
+			isa = PBXGroup;
+			children = (
+				7A1960E218851E52007FE76A /* CLLocationManager+Block.h */,
+				7A1960E318851E52007FE76A /* CLLocationManager+Block.m */,
+			);
+			path = CoreLocation;
+			sourceTree = "<group>";
+		};
+		7A1960E418851E52007FE76A /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				7A1960E518851E52007FE76A /* NSURLConnection+Block.h */,
+				7A1960E618851E52007FE76A /* NSURLConnection+Block.m */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		7A1960E918851E52007FE76A /* MessageUI */ = {
+			isa = PBXGroup;
+			children = (
+				7A1960EA18851E52007FE76A /* MFMailComposeViewController+Block.h */,
+				7A1960EB18851E52007FE76A /* MFMailComposeViewController+Block.m */,
+				7A1960EC18851E52007FE76A /* MFMessageComposeViewController+Block.h */,
+				7A1960ED18851E52007FE76A /* MFMessageComposeViewController+Block.m */,
+			);
+			path = MessageUI;
+			sourceTree = "<group>";
+		};
+		7A1960EE18851E52007FE76A /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				7A1960EF18851E52007FE76A /* UIActionSheet+Block.h */,
+				7A1960F018851E52007FE76A /* UIActionSheet+Block.m */,
+				7A1960F118851E52007FE76A /* UIAlertView+Block.h */,
+				7A1960F218851E52007FE76A /* UIAlertView+Block.m */,
+				7A1960F318851E52007FE76A /* UINavigationController+Block.h */,
+				7A1960F418851E52007FE76A /* UINavigationController+Block.m */,
+				7A1960F518851E52007FE76A /* UIPickerView+Block.h */,
+				7A1960F618851E52007FE76A /* UIPickerView+Block.m */,
+				7A1960F718851E52007FE76A /* UIPopoverController+Block.h */,
+				7A1960F818851E52007FE76A /* UIPopoverController+Block.m */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
 		7A1A853617B4B257004D7167 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
@@ -2447,6 +2532,7 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A1960E018851E52007FE76A /* IOSBlocks */,
 				EF2043B4187BDC4300272319 /* CoreText.framework */,
 				B477739B184F075300F68AED /* CoreVideo.framework */,
 				B4777399184F074500F68AED /* CoreMedia.framework */,
@@ -2688,8 +2774,6 @@
 				7A7B20FD183CAA9200C14248 /* Chart */,
 				7A66A2891817794F000A6AB8 /* Login */,
 				B4FED1501804FE4E00E0CE58 /* Energy */,
-				B41249EE1803ECF0009022C5 /* REMCustomerSwitchHelper.h */,
-				B41249EF1803ECF0009022C5 /* REMCustomerSwitchHelper.m */,
 				B456984418750E3B00FB43B8 /* REMPinToBuildingCoverHelper.h */,
 				B456984518750E3B00FB43B8 /* REMPinToBuildingCoverHelper.m */,
 				B4A0FBAD187E4B390007B9E5 /* REMUpdateAllManager.h */,
@@ -3734,6 +3818,7 @@
 				7ABD915D184DB784006AF935 /* REMLoginCustomerTableViewController.m in Sources */,
 				B48ED3EA178EA1740032CD72 /* REMTimeHelper.m in Sources */,
 				EF652B68185867C2007D4049 /* DCTrendAnimationManager.m in Sources */,
+				7A1960FE18851E52007FE76A /* UIAlertView+Block.m in Sources */,
 				7A5DBD2B178FD034006C4EDE /* REMDataStore.m in Sources */,
 				EF1C5AD7183DB3CB002A9AAD /* DCTrendWrapper.m in Sources */,
 				B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */,
@@ -3743,9 +3828,12 @@
 				7A2F76151810C6C8006C19D8 /* REMScreenEdgetGestureRecognizer.m in Sources */,
 				EFD9470B1839DCBB00E9EC50 /* DCXYSeries.m in Sources */,
 				7A1D7C3C17A637510050779D /* REMUserModel.m in Sources */,
+				7A1960FC18851E52007FE76A /* MFMessageComposeViewController+Block.m in Sources */,
 				7A1D7C3F17A637630050779D /* REMCustomerModel.m in Sources */,
+				7A1960FA18851E52007FE76A /* NSURLConnection+Block.m in Sources */,
 				7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */,
 				7A1D7C4517A63E8B0050779D /* REMEncryptHelper.m in Sources */,
+				7A19610118851E52007FE76A /* UIPopoverController+Block.m in Sources */,
 				7AB9B3A1183DF20B00779C5E /* REMRankingTooltipItem.m in Sources */,
 				B408794D1830CC69004042C1 /* REMBuildingCommodityViewController.m in Sources */,
 				EF0346B9183B979800DE186A /* DCLineWrapper.m in Sources */,
@@ -3769,6 +3857,7 @@
 				EF0459941845CEAF0086D5AC /* _DCXYIndicatorLayer.m in Sources */,
 				B4F1118B183DDF44004D53F6 /* REMBuildingDataView.m in Sources */,
 				7A153C6417AA489600413D3C /* REMEnergyTargetModel.m in Sources */,
+				7A1960F918851E52007FE76A /* CLLocationManager+Block.m in Sources */,
 				7A153C6517AA489600413D3C /* REMEnergyViewData.m in Sources */,
 				7A153C6617AA489600413D3C /* REMTargetEnergyData.m in Sources */,
 				B4FAD66B181F524A00EF1459 /* REMWidgetDetailViewController.m in Sources */,
@@ -3784,6 +3873,7 @@
 				7A153CAA17AA497C00413D3C /* REMSplashScreenController.m in Sources */,
 				7AB9B3A4183DF8FF00779C5E /* REMTextIndicatorFormator.m in Sources */,
 				B4DC084017F90E2C005658C1 /* REMAdministratorModel.m in Sources */,
+				7A1960FD18851E52007FE76A /* UIActionSheet+Block.m in Sources */,
 				B4F3F601181E081800C8DF7F /* REMMaxWidgetSegue.m in Sources */,
 				7A7EA6E1180548CB00A3BB56 /* REMNetworkStatusIndicator.m in Sources */,
 				EF2962B4184C6B53000A119F /* REMTrendChartDataProcessor.m in Sources */,
@@ -3868,7 +3958,6 @@
 				7A0288FB17C20CC500709111 /* Resources.m in Sources */,
 				EF03DC291841FB45004B9EFD /* DCPieDataPoint.m in Sources */,
 				B4547960184DABF700D3441B /* UIView+FlipTransition.m in Sources */,
-				B41249F01803ECF0009022C5 /* REMCustomerSwitchHelper.m in Sources */,
 				7A7F7B1C181F85A100A3C5AB /* REMGalleryCollectionViewController.m in Sources */,
 				7A0288FC17C20CC500709111 /* URLRequestHelper.m in Sources */,
 				B4E815D718273E5600FB9BC5 /* REMWidgetRankingSearchModel.m in Sources */,
@@ -3884,6 +3973,8 @@
 				7A44E04518238D5E0080CEBE /* REMBuildingShareViewController.m in Sources */,
 				7A0288FF17C20CC500709111 /* WeiboLoginDialog.m in Sources */,
 				7A02890017C20CC500709111 /* Weibo.m in Sources */,
+				7A1960FB18851E52007FE76A /* MFMailComposeViewController+Block.m in Sources */,
+				7A1960FF18851E52007FE76A /* UINavigationController+Block.m in Sources */,
 				EF97DDDB17C20B5700A0374E /* REMToggleButton.m in Sources */,
 				7AB9B39E183DCF1100779C5E /* REMTrendChartTooltipView.m in Sources */,
 				EF8F1D7917C2FE5400D3E29F /* REMToggleButtonGroup.m in Sources */,
@@ -3901,6 +3992,7 @@
 				B408794A1830A960004042C1 /* REMBuildingImageViewController.m in Sources */,
 				EFE86986185EEF5300DC0007 /* DCLabelingSeries.m in Sources */,
 				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,
+				7A19610018851E52007FE76A /* UIPickerView+Block.m in Sources */,
 				7A8E491C184442EB00FD1A38 /* REMRankingTooltipView.m in Sources */,
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
 				EF48012017D7098D002A2EF6 /* REMBuildingWeiboView.m in Sources */,
@@ -3919,7 +4011,6 @@
 				7A3CB75F1806385300B94DEE /* REMBusinessErrorInfo.m in Sources */,
 				7A3CB7601806385300B94DEE /* REMAdministratorModel.m in Sources */,
 				7A3CB7611806385300B94DEE /* REMNetworkStatusIndicator.m in Sources */,
-				7A3CB7621806385300B94DEE /* REMCustomerSwitchHelper.m in Sources */,
 				7AF6AC8317D1BA5600D62A9A /* REMBuildingAirQualityView.m in Sources */,
 				7AF6AC8417D1BA5600D62A9A /* REMToggleButtonGroup.m in Sources */,
 				7AF6AC8517D1BA5600D62A9A /* REMStatusBar.m in Sources */,

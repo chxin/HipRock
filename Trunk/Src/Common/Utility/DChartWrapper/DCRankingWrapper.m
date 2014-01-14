@@ -161,4 +161,13 @@
         [self.view focusAroundX:x];
     }
 }
+
+-(DCRange*)updatePinchRange:(DCRange *)newRange pinchCentreX:(CGFloat)centreX {
+    DCRange* globalRange= self.view.graphContext.globalHRange;
+    double returnRangeEnd = newRange.end;
+    double returnRangeStart = newRange.location;
+    if (returnRangeStart < globalRange.location) returnRangeStart = globalRange.location;
+    if (returnRangeEnd > globalRange.end) returnRangeEnd = globalRange.end;
+    return [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
+}
 @end

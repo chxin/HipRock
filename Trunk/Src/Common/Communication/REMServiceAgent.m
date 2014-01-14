@@ -74,10 +74,6 @@ static int requestTimeout = 45; //(s)
             REMError *errorInfo = [[REMError alloc] initWithErrorInfo:businessError];
             
             error(errorInfo,REMDataAccessErrorMessage,businessError);
-            
-            if(maskContainer!=nil && maskManager != nil) {//if mask has already shown
-                [maskManager hideMask];
-            }
         }
         else{ //if ok, enter SUCCESS status
             //store result to cache
@@ -86,11 +82,11 @@ static int requestTimeout = 45; //(s)
             
             success(result);
             
-            if(maskContainer!=nil && maskManager != nil) {//if mask has already shown
-                [maskManager hideMask];
-            }
-            
             operation = nil;
+        }
+        
+        if(maskContainer!=nil && maskManager != nil) {//if mask has already shown
+            [maskManager hideMask];
         }
         
         NetworkDecreaseActivity();
@@ -336,15 +332,15 @@ static int requestTimeout = 45; //(s)
 
 +(REMDataAccessErrorStatus)decideErrorStatus:(NSError *)error
 {
-    REMDataAccessErrorStatus status = REMDataAccessErrorMessage;
+    REMDataAccessErrorStatus status = REMDataAccessFailed;
     
     if(error.code == -999){
         status = REMDataAccessCanceled;
         REMLogInfo(@"Request canceled");
     }
-    if(error.code == -1001 || error.code == 306){
+    else{
         status = REMDataAccessFailed;
-        REMLogInfo(@"Network failure");
+        REMLogInfo(@"Network failure with code: %d", error.code);
     }
     
     return status;

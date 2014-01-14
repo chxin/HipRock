@@ -70,15 +70,15 @@
     self.passwordErrorLabel = passwordErrorLabel;
     self.loginButton = loginButton;
     
-//#ifdef DEBUG
-//    NSString *debugUser = REMAppConfig.currentDataSource[@"debug-user"];
-//    if(!REMIsNilOrNull(debugUser) && ![debugUser isEqualToString:@""] && [debugUser rangeOfString:@"|"].length>0){
-//        NSArray *debugUserInfo = [debugUser componentsSeparatedByString:@"|"];
-//        self.userNameTextField.text = debugUserInfo[0];
-//        self.passwordTextField.text = debugUserInfo[1];
-//        [self.loginButton setEnabled:YES];
-//    }
-//#endif
+#ifdef DEBUG
+    NSString *debugUser = REMAppConfig.currentDataSource[@"debug-user"];
+    if(!REMIsNilOrNull(debugUser) && ![debugUser isEqualToString:@""] && [debugUser rangeOfString:@"|"].length>0){
+        NSArray *debugUserInfo = [debugUser componentsSeparatedByString:@"|"];
+        self.userNameTextField.text = debugUserInfo[0];
+        self.passwordTextField.text = debugUserInfo[1];
+        [self.loginButton setEnabled:YES];
+    }
+#endif
     
     return content;
 }
@@ -133,6 +133,10 @@
     
     [self.view endEditing:YES];
     
+    //mask login button
+    [self.loginButton setLoginButtonStatus:REMLoginButtonWorkingStatus];
+    [self.loginCarouselController.trialCardController.trialButton setLoginButtonStatus:REMLoginButtonDisableStatus];
+    
     NSDictionary *messageMap = REMDataAccessMessageMake(@"Login_NoNetwork",@"Login_NetworkFailed",@"Login_ServerError",@"");
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserValidate parameter:parameter accessCache:NO andMessageMap:messageMap];
     [store access:^(id data) {
@@ -142,8 +146,7 @@
         
         REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
         
-        if(validationResult.status == REMUserValidationSuccess)
-        {
+        if(validationResult.status == REMUserValidationSuccess) {
             REMUserModel *user = validationResult.user;
             [REMAppContext setCurrentUser:user];
             
@@ -164,18 +167,14 @@
                 [self.loginCarouselController presentCustomerSelectionView];
             }
         }
-        else
-        {
-            [self.loginCarouselController setLoginButtonStatusNormal];
+        else {
             [self setErrorLabelTextWithStatus:validationResult.status];
+            [self.loginCarouselController setLoginButtonStatusNormal];
         }
     } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
         [self.loginCarouselController setLoginButtonStatusNormal];
     }];
     
-    //mask login button
-    [self.loginButton setLoginButtonStatus:REMLoginButtonWorkingStatus];
-    [self.loginCarouselController.trialCardController.trialButton setEnabled:NO];
 }
 
 - (void)textFieldChanged:(id)sender

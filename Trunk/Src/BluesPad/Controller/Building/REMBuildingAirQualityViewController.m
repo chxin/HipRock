@@ -75,9 +75,8 @@
 }
 
 - (void)loadTotalUsageByBuildingId:(NSNumber *)buildingId{
-    NSDictionary *messageMap = @{@(REMDataAccessNoConnection):REMLocalizedString(@"TODO:I18N"), @(REMDataAccessFailed):REMLocalizedString(@"TODO:I18N"),@(REMDataAccessErrorMessage):REMLocalizedString(@"TODO:I18N")};
     NSDictionary *param = @{@"buildingId":buildingId};
-    REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSBuildingAirQualityTotalUsage parameter:param accessCache:YES andMessageMap:messageMap];
+    REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingAirQualityTotalUsage parameter:param accessCache:YES andMessageMap:nil];
     store.maskContainer = nil;
     store.groupName = [NSString stringWithFormat:@"building-data-%@", buildingId];
     [self.totalLabel showLoading];

@@ -73,7 +73,6 @@
     [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
         void (^callback)(void) = nil;
         if(buildingInfoArray != nil){
-            self.buildingInfoArray = buildingInfoArray;
             callback =^{ [self updateView]; };
         }
         else{
@@ -115,6 +114,7 @@
 
 -(void)updateView
 {
+    self.buildingInfoArray = REMAppContext.buildingInfoArray;
     [self renderCustomerLogo];
     [self updateCamera:self.mapView];
     [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(showMarkers) userInfo:nil repeats:NO];
@@ -122,6 +122,11 @@
 
 -(void)renderCustomerLogo
 {
+    if(self.customerLogoButton != nil){
+        [self.customerLogoButton removeFromSuperview];
+        self.customerLogoButton = nil;
+    }
+    
     //add customer logo button
     UIImageView *logoButton = self.customerLogoButton;
     logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
@@ -133,6 +138,8 @@
     if(self.buildingInfoArray.count <= 0){
         [self.switchButton setEnabled:NO];
     }
+    
+    [self.mapView clear];
     
     NSArray *buildings = [self.buildingInfoArray sortedArrayUsingComparator:^NSComparisonResult(REMBuildingOverallModel *b1, REMBuildingOverallModel *b2) {
         return b1.building.latitude > b2.building.latitude ? NSOrderedAscending : NSOrderedDescending;
