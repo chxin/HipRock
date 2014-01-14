@@ -21,6 +21,12 @@ typedef enum _REMCustomerUserConcurrencyStatus {
     REMCustomerUserConcurrencyStatusFailed=5
 } REMCustomerUserConcurrencyStatus;
 
+typedef enum _REMCustomerUserConcurrencySource{
+    REMCustomerUserConcurrencySourceEnter=0,
+    REMCustomerUserConcurrencySourceUpdate=1,
+    REMCustomerUserConcurrencySourceSwitchCustomer=2
+} REMCustomerUserConcurrencySource;
+
 typedef void (^REMCustomerSelectionCallback)(REMCustomerUserConcurrencyStatus status,NSArray* buildingInfoArray,REMDataAccessErrorStatus errorStatus);
 
 
@@ -33,6 +39,8 @@ typedef void (^REMCustomerSelectionCallback)(REMCustomerUserConcurrencyStatus st
 @property (nonatomic,copy) NSNumber *currentCustomerId;
 
 @property (nonatomic,weak) REMMainNavigationController *mainNavigationController;
+
+@property (nonatomic) REMCustomerUserConcurrencySource updateSource;
 
 @property (nonatomic,weak) UIView *maskerView;
 

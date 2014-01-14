@@ -27,7 +27,7 @@
             [newArray addObject:newR];
         }
         self.timeRangeArray=newArray;
-        
+        [self resetStepByTimeRange:newArray[0]];
     }
     
     

@@ -16,6 +16,8 @@
 
 - (REMEnergyStep)stepTypeByNumber:(NSNumber *)stepNumber;
 
+- (void)resetStepByTimeRange:(REMTimeRange *)range;
+
 @property (nonatomic) REMEnergyStep step;
 @property (nonatomic,strong) NSNumber *zoneId;
 @property (nonatomic,strong) NSNumber *industryId;

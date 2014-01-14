@@ -36,6 +36,9 @@
     manager.currentCustomerId=customer.customerId;
     manager.currentUserId=@(user.userId);
     manager.canCancel=NO;
+    manager.updateSource=REMCustomerUserConcurrencySourceEnter;
+    REMApplicationContext *context=REMAppContext;
+    context.updateManager=manager;
     return manager;
 }
 
@@ -120,11 +123,18 @@ static NSString *customerUpdateAll=@"customerupdateall";
             }
             
         } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
+            self.tableViewController=nil;
+            REMApplicationContext *context=REMAppContext;
+            context.updateManager=nil;
+            
             callback(REMCustomerUserConcurrencyStatusFailed,nil,status);
         }];
         
         
     } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
+        self.tableViewController=nil;
+        REMApplicationContext *context=REMAppContext;
+        context.updateManager=nil;
         callback(REMCustomerUserConcurrencyStatusFailed,nil,status);
     }];
     if (self.canCancel==YES) {
@@ -140,6 +150,13 @@ static NSString *customerUpdateAll=@"customerupdateall";
 }
 
 - (void)showAlertWithMessage:(NSString *)msg withTag:(NSInteger)tag{
+    if (self.updateSource == REMCustomerUserConcurrencySourceSwitchCustomer) {
+        msg = [NSLocalizedString(@"Setting_SwitchCustomerFailed", @"") stringByAppendingString:msg];
+    }
+    else if(self.updateSource == REMCustomerUserConcurrencySourceUpdate){
+        msg = [NSLocalizedString(@"Setting_UpdateFailed", @"") stringByAppendingString:msg];
+    }
+    
     UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:msg delegate:self cancelButtonTitle:NSLocalizedString(@"Common_OK", @"") otherButtonTitles:nil];
     alert.tag=tag;
     [alert show];
@@ -204,8 +221,12 @@ static NSString *customerUpdateAll=@"customerupdateall";
         self.customerInfoArray=context.currentUser.customers;
     }
     REMCustomerModel *current=REMAppCurrentCustomer;
+    NSNumber *newCustomerId = self.selectedCustomerId;
+    if (newCustomerId==nil) {
+        newCustomerId = self.currentCustomerId;
+    }
     for (REMCustomerModel *customer in self.customerInfoArray) {
-        if ([customer.customerId isEqualToNumber:self.currentCustomerId]==YES && [customer isEqual:current]==NO) {
+        if ([customer.customerId isEqualToNumber:newCustomerId]==YES && [customer isEqual:current]==NO) {
             context.currentCustomer=customer;
             [context.currentCustomer updateInnerDictionary];
             [context.currentCustomer save];
@@ -214,7 +235,9 @@ static NSString *customerUpdateAll=@"customerupdateall";
     
     
     self.tableViewController=nil;
+    context.updateManager=nil;
     self.callback(REMCustomerUserConcurrencyStatusSuccess,self.buildingInfoArray,REMDataAccessFailed);
+    
     
 }
 
@@ -236,8 +259,10 @@ static NSString *customerUpdateAll=@"customerupdateall";
 
 
 - (void)logout{
-    REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
-    REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
+    REMApplicationContext *context=REMAppContext;
+    REMUserModel *currentUser = context.currentUser;
+    REMCustomerModel *currentCustomer = context.currentCustomer;
+    self.tableViewController=nil;
     
     [currentUser kill];
     [currentCustomer kill];
@@ -254,6 +279,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
         //self.view = nil;
         //[nav popToRootViewControllerAnimated:NO];
         //NSLog(@"child controllers after: %d", nav.childViewControllers.count);
+        context.updateManager=nil;
         [mainController logout:nil];
         
         [REMStorage clearSessionStorage];
@@ -271,17 +297,22 @@ static NSString *customerUpdateAll=@"customerupdateall";
         self.selectedCustomerId=customer.customerId;
     }
     self.tableViewController=self.tableViewController;
+    self.updateSource=REMCustomerUserConcurrencySourceSwitchCustomer;
     [self updateAllBuildingInfoWithAction:self.callback];
 }
 
 - (void)customerSelectionTableViewdidDismissView
 {
-    
+    self.tableViewController=nil;
+    REMApplicationContext *context=REMAppContext;
+    context.updateManager=nil;
 }
 
 + (void)cancelUpdateAll:(void (^)(void))callback
 {
     [REMDataStore cancelAccess:customerUpdateAll];
+    REMApplicationContext *context=REMAppContext;
+    context.updateManager=nil;
     if (callback!= nil) {
         callback();
     }

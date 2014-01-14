@@ -13,6 +13,7 @@
 #import "REMWidgetMultiTimespanSearchModel.h"
 #import "REMWidgetLabellingSearchModel.h"
 
+
 @interface REMWidgetSearchModelBase(){
     REMRelativeTimeRangeType _relativeType;
 }
