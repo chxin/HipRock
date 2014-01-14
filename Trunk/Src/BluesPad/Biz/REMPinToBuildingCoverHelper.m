@@ -48,6 +48,7 @@
 {
     REMUpdateAllManager *manager=[REMUpdateAllManager defaultManager];
     manager.canCancel=YES;
+    manager.updateSource=REMCustomerUserConcurrencySourceUpdate;
     manager.mainNavigationController = self.mainNavigationController;
     [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
         if (status == REMCustomerUserConcurrencyStatusSuccess) {

@@ -10,6 +10,7 @@
 #import "REMUserModel.h"
 #import "REMCustomerModel.h"
 #import "REMAppConfiguration.h"
+#import "REMUpdateAllManager.h"
 
 #define REMAppContext [REMApplicationContext instance]
 #define REMAppCurrentUser REMAppContext.currentUser
@@ -26,6 +27,8 @@
 @property (nonatomic,strong) REMAppConfiguration *appConfig;
 
 @property (nonatomic,strong) NSArray *buildingInfoArray;
+
+@property (nonatomic,strong) REMUpdateAllManager *updateManager;
 
 @property (nonatomic,strong) NSString *buildingInfoArrayStorageKey;
 @property (nonatomic,getter = getCacheMode, setter = setCacheMode:) BOOL cacheMode;

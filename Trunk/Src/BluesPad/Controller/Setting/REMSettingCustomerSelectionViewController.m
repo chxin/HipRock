@@ -17,7 +17,7 @@
 @interface REMSettingCustomerSelectionViewController ()
 @property (nonatomic) NSUInteger currentRow;
 @property (nonatomic,weak) UIAlertView *currentAlert;
-
+@property (nonatomic,weak) REMUpdateAllManager *updateManager;
 @end
 
 @implementation REMSettingCustomerSelectionViewController
@@ -26,6 +26,7 @@
 
 - (void)customerSelectionTableViewUpdate
 {
+    self.currentRow=NSNotFound;
     [self.tableView reloadData];
 }
 
@@ -54,27 +55,33 @@
         [self.settingController.navigationController popToRootViewControllerAnimated:YES];
         return;
     }
-    REMCustomerModel *customer= [REMApplicationContext instance].currentUser.customers[self.currentRow];
+    REMCustomerModel *customer= self.customerArray[self.currentRow];
     if([customer.name isEqualToString:[REMApplicationContext instance].currentCustomer.name]==YES){
         [self.settingController.navigationController popToRootViewControllerAnimated:YES];
         return;
     }
     else{
-        REMUpdateAllManager *manager=[REMUpdateAllManager defaultManager];
-        manager.canCancel=YES;
-        manager.selectedCustomerId = customer.customerId;
-        [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
-            if (status == REMCustomerUserConcurrencyStatusSuccess) {
-                [self.settingController.navigationController popToRootViewControllerAnimated:YES];
-                REMMainNavigationController *mainController=(REMMainNavigationController *)self.navigationController.presentingViewController;
-                [mainController dismissViewControllerAnimated:NO completion:^{
-                    [mainController presentInitialView:^(void){
-                        
+        if (self.updateManager!=nil) {
+            [self.updateManager customerSelectionTableView:self.tableView didSelectCustomer:customer];
+        }
+        else{
+            REMUpdateAllManager *manager=[REMUpdateAllManager defaultManager];
+            manager.canCancel=YES;
+            manager.selectedCustomerId = customer.customerId;
+            manager.tableViewController=self;
+            manager.updateSource=REMCustomerUserConcurrencySourceSwitchCustomer;
+            self.updateManager=manager;
+            [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
+                if (status == REMCustomerUserConcurrencyStatusSuccess) {
+                    [self.settingController.navigationController popToRootViewControllerAnimated:YES];
+                    REMMainNavigationController *mainController=(REMMainNavigationController *)self.settingController.presentingViewController;
+                    [mainController dismissViewControllerAnimated:NO completion:^{
+                        [mainController presentInitialView:nil];
                     }];
-                }];
-                
-            }
-        }];
+                    
+                }
+            }];
+        }
 //        NSString *str=NSLocalizedString(@"Setting_LoadingData", @""); //"正在获取新客户的能源信息,请稍候...";
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:str delegate:self cancelButtonTitle:NSLocalizedString(@"Common_Giveup", @"") otherButtonTitles:nil, nil];
 //        alert.tag=1;
@@ -210,7 +217,9 @@
         else{
             if(self.currentRow==indexPath.row){
                 [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-                
+            }
+            else{
+                [cell setAccessoryType:UITableViewCellAccessoryNone];
             }
         }
     }
