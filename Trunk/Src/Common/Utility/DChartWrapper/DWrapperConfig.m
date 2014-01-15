@@ -13,7 +13,7 @@
     self = [super init];
     if (self) {
         _stacked = NO;
-        _isUnitChart = NO;
+        _isUnitOrRatioChart = NO;
     }
     return self;
 }
@@ -25,7 +25,7 @@
         _rankingDefaultSortOrder=widgetObj.contentSyntax.rankingSortOrder;
         _rankingRangeCode=widgetObj.contentSyntax.rankingRangeCode;
         REMDataStoreType storeType = widgetObj.contentSyntax.dataStoreType;
-        _isUnitChart = (storeType==REMDSEnergyTagsTrendUnit || storeType==REMDSEnergyCarbonUnit || storeType==REMDSEnergyCostUnit);
+        _isUnitOrRatioChart = (storeType==REMDSEnergyTagsTrendUnit || storeType==REMDSEnergyCarbonUnit || storeType==REMDSEnergyCostUnit || storeType==REMDSEnergyRatio);
     }
     return self;
 }

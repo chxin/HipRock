@@ -75,7 +75,7 @@ static BOOL CACHEMODE = NO;
 -(void)setCacheMode:(BOOL)value
 {
     @synchronized(self){
-        cacheMode = value;
+        CACHEMODE = value;
     }
 }
 

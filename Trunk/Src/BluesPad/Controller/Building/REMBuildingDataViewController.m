@@ -485,7 +485,8 @@
     
     for (UIViewController *container in self.childViewControllers) {
         for (REMBuildingChartBaseViewController *chart in container.childViewControllers) {
-            [chart prepareShare];
+            if ([chart respondsToSelector:@selector(prepareShare)])
+                [chart prepareShare];
         }
     }
     

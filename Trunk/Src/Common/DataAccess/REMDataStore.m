@@ -18,11 +18,6 @@
 #import "REMBusinessErrorInfo.h"
 #import "UIAlertView+Block.h"
 
-@interface REMDataStore()
-
-@property (nonatomic,strong) REMDataAccessSuccessBlock success;
-
-@end
 
 
 @implementation REMDataStore
@@ -68,8 +63,6 @@ static NSDictionary *serviceMap = nil;
 }
 - (void)access:(REMDataAccessSuccessBlock)success error:(REMDataAccessErrorBlock)error progress:(REMDataAccessProgressBlock)progress
 {
-    self.success = success;
-    
     NetworkStatus reachability = [REMNetworkHelper checkCurrentNetworkStatus];
     
     BOOL cacheMode = [REMApplicationContext instance].cacheMode;
@@ -153,14 +146,10 @@ static NSDictionary *serviceMap = nil;
             [REMAlertHelper alert:message];
         }
         
-        error(errorInfo,status,response);
+        if(error)
+            error(errorInfo,status,response);
     } progress:progress];
 }
 
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    [self accessLocal:self.success];
-}
 
 @end
