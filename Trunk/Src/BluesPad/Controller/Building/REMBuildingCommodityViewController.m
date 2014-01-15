@@ -466,6 +466,7 @@
     UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
 
     UINavigationController *nav= [storyboard instantiateViewControllerWithIdentifier:@"buildingWidgetNavigation"];
+    nav.navigationBar.translucent=NO;
     REMBuildingCoverWidgetViewController *coverRelationController= nav.childViewControllers[0];
     coverRelationController.position=(REMBuildingCoverWidgetPosition)button.tag;
     coverRelationController.buildingInfo=self.buildingInfo;
