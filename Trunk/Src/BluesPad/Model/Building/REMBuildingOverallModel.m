@@ -103,4 +103,32 @@
     }];
 }
 
++(NSArray *)sortByProvince:(NSArray *)buildingInfoArray
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    for(int i=0; i<REMProvinceOrder.count;i++){
+        NSString *key = REMProvinceOrder[i];
+        
+        for (int j=0; j<buildingInfoArray.count; j++) {
+            REMBuildingOverallModel *buildingInfo = buildingInfoArray[i];
+            NSString *province = buildingInfo.building.province;
+            
+            if([province rangeOfString:key].length>0) {
+                [array addObject:buildingInfo];
+            }
+        }
+    }
+    
+    //海外
+    for(REMBuildingOverallModel *buildingInfo in buildingInfoArray){
+        if([array containsObject:buildingInfo] == NO){
+            [array addObject:buildingInfo];
+        }
+    }
+    
+    return array;
+}
+
+
 @end

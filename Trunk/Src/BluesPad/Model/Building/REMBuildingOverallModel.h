@@ -26,5 +26,6 @@
 
 
 +(int)indexOfBuilding:(REMBuildingModel *)building inBuildingOverallArray:(NSArray *)array;
++(NSArray *)sortByProvince:(NSArray *)buildingInfoArray;
 
 @end

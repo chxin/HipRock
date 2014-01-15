@@ -258,18 +258,6 @@
     return [[GMSCoordinateBounds alloc] initWithCoordinate:northEast coordinate:southWest];
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
