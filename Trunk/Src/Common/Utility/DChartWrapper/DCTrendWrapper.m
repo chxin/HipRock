@@ -457,7 +457,7 @@
     NSUInteger maxTimeInterval = lengthRange.location + lengthRange.length; // 步长允许的最长时间距离
     
     /*** 对于左边界已经越界的情况(在时间选择器内查询数据)：只检查Pinch后数据的长度，和右边界。 ***/
-    if (currentRange.location < globalRange.location) {
+    if (self.myStableRange.location < globalRange.location) {
         double returnRangeEnd = newRange.end;
         double returnRangeStart = newRange.location;
         if (returnRangeEnd > globalRange.end) returnRangeEnd = globalRange.end;
