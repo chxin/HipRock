@@ -46,6 +46,8 @@
 
 @property (nonatomic,strong) NSMutableArray *hiddenSeries;
 
+@property (nonatomic) BOOL isReloadChart;
+
 
 
 @end
@@ -60,6 +62,7 @@
                                                  selector:@selector(receiveNotification:)
                                                      name:@"BizDetailChanged"
                                                    object:nil];
+        self.isReloadChart=NO;
     }
     return self;
 }
@@ -366,6 +369,10 @@
                     showMsg=NO;
                     break;
                 }
+                else if ([range.startTime timeIntervalSinceDate:searchRange.startTime]<=0 && [range.endTime timeIntervalSinceDate:searchRange.endTime]>=0){
+                    showMsg=NO;
+                    break;
+                }
             }
             if(showMsg==NO){
                 break;
@@ -479,6 +486,8 @@
 - (void) setDatePickerButtonValueNoSearchByTimeRange:(REMTimeRange *)range withRelative:(NSString *)relativeDate withRelativeType:(REMRelativeTimeRangeType)relativeType
 {
     NSString *text=[REMTimeHelper formatTimeRangeFullHour:range];
+    
+    
     
     
     NSString *text1=[NSString stringWithFormat:@"%@ %@",relativeDate,text];
@@ -756,7 +765,6 @@
 
 - (void)reloadChart{
     
-    
     if (self.chartWrapper==nil) {
         [self showEnergyChart];
         return;
@@ -828,7 +836,12 @@
     newEnd=[calendar dateFromComponents:components];
     REMTimeRange *newRange=[[REMTimeRange alloc]initWithStartTime:newStart EndTime:newEnd];
     
-    
+    //when reload chart, willRangeChanged delegator is called by call, then change relative date to custom date,
+    //this check avoids the situation
+    REMTimeRange *modelTimeRange=self.model.timeRangeArray[0];
+    if ([newRange.startTime isEqualToDate:modelTimeRange.startTime] && [newRange.endTime isEqualToDate:modelTimeRange.endTime]) {
+        return;
+    }
     
     REMWidgetStepCalculationModel *model= [REMWidgetStepCalculationModel tryNewStepByRange:newRange];
     if (model==nil) {

@@ -40,7 +40,7 @@
         return;
     }
     else{
-        if(data.numerator<0){
+        if(data.numerator<=0){
             [self initEmptyTextLabelWithTitleSize:titleSize withTitleMargin:self.emptyTextMargin withLeftMargin:leftMargin withOrigFontSize:kBuildingCommodityDetailValueFontSize];
             return;
         }
