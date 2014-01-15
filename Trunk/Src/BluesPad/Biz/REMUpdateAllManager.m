@@ -218,7 +218,8 @@ static NSString *customerUpdateAll=@"customerupdateall";
 
 - (void)statusSuccess{
     REMApplicationContext *context=REMAppContext;
-    context.buildingInfoArray=self.buildingInfoArray;
+    
+    context.buildingInfoArray=[REMBuildingOverallModel sortByProvince:self.buildingInfoArray];
     
     NSString *parameterString = [REMServiceAgent buildParameterString:self.parameter];
     NSData *postData = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
