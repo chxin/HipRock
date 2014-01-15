@@ -55,16 +55,20 @@ static NSString *customerUpdateAll=@"customerupdateall";
     }
     [dic setObject:self.currentCustomerId forKey:@"customerId"];
     NSDictionary *messageMap=nil;
+    BOOL accessCache=YES;
     if (self.updateSource == REMCustomerUserConcurrencySourceEnter) {
-        messageMap = REMDataAccessMessageMake(@"Setting_NoNetwork",@"Setting_NetworkFailed",@"Setting_ServerError",@"");
+        messageMap = REMDataAccessMessageMake(@"",@"Setting_NetworkFailed",@"Setting_ServerError",@"");
     }
     else if(self.updateSource == REMCustomerUserConcurrencySourceSwitchCustomer){
         messageMap = REMDataAccessMessageMake(@"Setting_SwitchCustomerNoNetwork",@"Setting_SwitchCustomerNetworkFailed",@"Setting_SwitchCustomerServerError",@"");
+        accessCache=NO;
     }
     else{
+        accessCache=NO;
         messageMap = REMDataAccessMessageMake(@"Setting_UpdateNoNetwork",@"Setting_UpdateNetworkFailed",@"Setting_UpdateServerError",@"");
     }
-    REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:dic accessCache:YES andMessageMap:messageMap];
+    
+    REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:dic accessCache:accessCache andMessageMap:messageMap];
     store.maskContainer=self.maskerView;
     store.groupName =customerUpdateAll;
     self.parameter=dic;
@@ -214,7 +218,8 @@ static NSString *customerUpdateAll=@"customerupdateall";
 
 - (void)statusSuccess{
     REMApplicationContext *context=REMAppContext;
-    context.buildingInfoArray=self.buildingInfoArray;
+    
+    context.buildingInfoArray=[REMBuildingOverallModel sortByProvince:self.buildingInfoArray];
     
     NSString *parameterString = [REMServiceAgent buildParameterString:self.parameter];
     NSData *postData = [parameterString dataUsingEncoding:NSUTF8StringEncoding];

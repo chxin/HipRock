@@ -30,7 +30,7 @@
 }
 +(BOOL)isRange:(DCRange *)aRange visableIn:(DCRange *)bRange {
     if (REMIsNilOrNull(aRange) || REMIsNilOrNull(bRange)) return NO;
-    return (aRange.location <= bRange.end && aRange.location >= bRange.location) || (aRange.end <= bRange.end && aRange.end >= bRange.location);
+    return !(aRange.location >= bRange.end || aRange.end <= bRange.location);
 }
 -(BOOL)isVisableIn:(DCRange*)bRange {
     return (self.location <= bRange.length+bRange.location && self.location >= bRange.location) ||
