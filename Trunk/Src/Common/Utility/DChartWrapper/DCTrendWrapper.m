@@ -154,6 +154,7 @@
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style {
     if (self.isUnitOrRatioChart && series.target.type == REMEnergyTargetOrigValue) {
         series.hidden = YES;
+        [self addHiddenTarget:series.target];
     }
 }
 
