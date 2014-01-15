@@ -76,50 +76,54 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     UIView *titleContainer=[[UIView alloc]initWithFrame:CGRectMake(0, REMDMCOMPATIOS7(0), self.view.frame.size.width, 63)];
     //[titleContainer setBackgroundColor:[REMColor colorByHexString:@"#f8f8f8"]];
     [titleContainer setBackgroundColor:[UIColor whiteColor]];
-    
-    UIButton *backButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    if (REMISIOS7) {
-        backButton=[UIButton buttonWithType:UIButtonTypeSystem];
-    }
-    [backButton setFrame:CGRectMake(kWidgetBackButtonLeft, kWidgetBackButtonTop, kWidgetBackButtonWidthHeight, kWidgetBackButtonWidthHeight)];
-    [backButton setImage:[UIImage imageNamed:@"Back_Chart"] forState:UIControlStateNormal];
-    [backButton setTintColor:[REMColor colorByHexString:@"#37ab3c"] ];
-    backButton.adjustsImageWhenHighlighted=NO;
-    //backButton.showsTouchWhenHighlighted=YES;
-    
-    [backButton addTarget:self.parentViewController action:@selector(popToBuildingCover) forControlEvents:UIControlEventTouchUpInside];
-    [titleContainer addSubview:backButton];
-    self.backButton=backButton;
-    
-    
-    CGRect frame;
-    if(self.widgetInfo.shareInfo!=nil && [self.widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
-        frame=CGRectMake(backButton.frame.origin.x+backButton.frame.size.width+kWidgetTitleLeftMargin, backButton.frame.origin.y, self.view.frame.size.width, kWidgetShareTitleFontSize);
-        UILabel *shareTitle=[[UILabel alloc]initWithFrame:frame];
-        [shareTitle setBackgroundColor:[UIColor clearColor]];
-        shareTitle.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetShareTitleFontSize];
-        shareTitle.textColor=[REMColor colorByHexString:@"#a2a2a2"];
-        NSString *shareName=self.widgetInfo.shareInfo.userRealName;
-        NSString *shareTel=self.widgetInfo.shareInfo.userTelephone;
-        NSString *date=[REMTimeHelper formatTimeFullDay:self.widgetInfo.shareInfo.shareTime isChangeTo24Hour:NO];
-        NSString *userTitle=self.widgetInfo.shareInfo.userTitleComponent;
-        shareTitle.text=[NSString stringWithFormat:NSLocalizedString(@"Widget_ShareTitle", @""),shareName,userTitle,date,shareTel];
-        [titleContainer addSubview:shareTitle];
-        frame=CGRectMake(frame.origin.x, frame.origin.y+frame.size.height+kWidgetShareTitleMargin, frame.size.width, kWidgetTitleHeight);
-    }
-    else{
-        frame=CGRectMake(backButton.frame.origin.x+backButton.frame.size.width+kWidgetTitleLeftMargin, backButton.frame.origin.y, self.view.frame.size.width, kWidgetTitleHeight);
-    }
 
-    UILabel *widgetTitle=[[UILabel alloc]initWithFrame:frame];
-    widgetTitle.text=self.widgetInfo.name;
-    widgetTitle.backgroundColor=[UIColor clearColor];
-    widgetTitle.textColor=[REMColor colorByHexString:@"#37ab3c"];
-    widgetTitle.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetTitleFontSize];
-    [titleContainer addSubview:widgetTitle];
-    self.widgetTitleLabel=widgetTitle;
+    [self initBackButton:titleContainer];
+//    UIButton *backButton=[UIButton buttonWithType:UIButtonTypeCustom];
+//    if (REMISIOS7) {
+//        backButton=[UIButton buttonWithType:UIButtonTypeSystem];
+//    }
+//    [backButton setFrame:CGRectMake(kWidgetBackButtonLeft, kWidgetBackButtonTop, kWidgetBackButtonWidthHeight, kWidgetBackButtonWidthHeight)];
+//    [backButton setImage:[UIImage imageNamed:@"Back_Chart"] forState:UIControlStateNormal];
+//    [backButton setTintColor:[REMColor colorByHexString:@"#37ab3c"] ];
+//    backButton.adjustsImageWhenHighlighted=NO;
+//    //backButton.showsTouchWhenHighlighted=YES;
+//    
+//    [backButton addTarget:self.parentViewController action:@selector(popToBuildingCover) forControlEvents:UIControlEventTouchUpInside];
+//    [titleContainer addSubview:backButton];
+//    self.backButton=backButton;
+//    
+//    
+//    CGRect frame;
+//    if(self.widgetInfo.shareInfo!=nil && [self.widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
+//        frame=CGRectMake(backButton.frame.origin.x+backButton.frame.size.width+kWidgetTitleLeftMargin, backButton.frame.origin.y, self.view.frame.size.width, kWidgetShareTitleFontSize);
+//        UILabel *shareTitle=[[UILabel alloc]initWithFrame:frame];
+//        [shareTitle setBackgroundColor:[UIColor clearColor]];
+//        shareTitle.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetShareTitleFontSize];
+//        shareTitle.textColor=[REMColor colorByHexString:@"#a2a2a2"];
+//        NSString *shareName=self.widgetInfo.shareInfo.userRealName;
+//        NSString *shareTel=self.widgetInfo.shareInfo.userTelephone;
+//        NSString *date=[REMTimeHelper formatTimeFullDay:self.widgetInfo.shareInfo.shareTime isChangeTo24Hour:NO];
+//        NSString *userTitle=self.widgetInfo.shareInfo.userTitleComponent;
+//        shareTitle.text=[NSString stringWithFormat:NSLocalizedString(@"Widget_ShareTitle", @""),shareName,userTitle,date,shareTel];
+//        [titleContainer addSubview:shareTitle];
+//        frame=CGRectMake(frame.origin.x, frame.origin.y+frame.size.height+kWidgetShareTitleMargin, frame.size.width, kWidgetTitleHeight);
+//    }
+//    else{
+//        frame=CGRectMake(backButton.frame.origin.x+backButton.frame.size.width+kWidgetTitleLeftMargin, backButton.frame.origin.y, self.view.frame.size.width, kWidgetTitleHeight);
+//    }
+//
+//    UILabel *widgetTitle=[[UILabel alloc]initWithFrame:frame];
+//    widgetTitle.text=self.widgetInfo.name;
+//    widgetTitle.backgroundColor=[UIColor clearColor];
+//    widgetTitle.textColor=[REMColor colorByHexString:@"#37ab3c"];
+//    widgetTitle.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetTitleFontSize];
+//    [titleContainer addSubview:widgetTitle];
+//    self.widgetTitleLabel=widgetTitle;
     [self.view addSubview:titleContainer];
     self.titleContainer=titleContainer;
+    
+    
+    
     [self.bizDelegator initBizView];
     
     if ([self.bizDelegator shouldPinToBuildingCover]==YES) {
@@ -138,6 +142,65 @@ const static CGFloat kWidgetShareTitleFontSize=14;
         [pinButton setEnabled:[self.bizDelegator shouldEnablePinToBuildingCoverButton]];
     }
     
+}
+
+- (void)initBackButton:(UIView *)container{
+    UIButton *backButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    if (REMISIOS7) {
+        backButton=[UIButton buttonWithType:UIButtonTypeSystem];
+    }
+    //backButton.layer.borderColor=[UIColor redColor].CGColor;
+    //backButton.layer.borderWidth=1;
+    backButton.titleLabel.textAlignment=NSTextAlignmentLeft;
+    [backButton setFrame:CGRectMake(kWidgetBackButtonLeft, 0, container.frame.size.width/2, container.frame.size.height)];
+    backButton.imageView.contentMode=UIViewContentModeLeft;
+    backButton.contentMode=UIViewContentModeLeft;
+    [backButton setImage:[UIImage imageNamed:@"Back_Chart"] forState:UIControlStateNormal];
+    [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [backButton setTintColor:[REMColor colorByHexString:@"#37ab3c"] ];
+    backButton.adjustsImageWhenHighlighted=NO;
+    
+    
+    NSString *shareTitle=nil;
+    NSString *widgetTitle=self.widgetInfo.name;
+    if(self.widgetInfo.shareInfo!=nil && [self.widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
+        NSString *shareName=self.widgetInfo.shareInfo.userRealName;
+        NSString *shareTel=self.widgetInfo.shareInfo.userTelephone;
+        NSString *date=[REMTimeHelper formatTimeFullDay:self.widgetInfo.shareInfo.shareTime isChangeTo24Hour:NO];
+        NSString *userTitle=self.widgetInfo.shareInfo.userTitleComponent;
+        shareTitle = [NSString stringWithFormat:NSLocalizedString(@"Widget_ShareTitle", @""),shareName,userTitle,date,shareTel];
+    }
+    NSString *fullTitle=widgetTitle;
+    if (shareTitle!=nil) {
+        fullTitle = [shareTitle stringByAppendingFormat:@"\n%@",widgetTitle];
+        backButton.titleLabel.numberOfLines=2;
+        backButton.titleLabel.lineBreakMode=NSLineBreakByWordWrapping;
+    }
+    
+    NSMutableAttributedString *attrString=[[NSMutableAttributedString alloc]initWithString:fullTitle];
+    if (shareTitle!=nil) {
+        NSRange shareRange=[fullTitle rangeOfString:shareTitle];
+        [attrString addAttribute:NSForegroundColorAttributeName value:[REMColor colorByHexString:@"#a2a2a2"] range:shareRange];
+        [attrString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetShareTitleFontSize] range:shareRange];
+        NSMutableParagraphStyle *paraStyle=[[NSMutableParagraphStyle alloc]init];
+        paraStyle.lineBreakMode=NSLineBreakByClipping;
+        paraStyle.alignment=NSTextAlignmentLeft;
+        paraStyle.lineSpacing=4;
+        [attrString addAttribute:NSParagraphStyleAttributeName value:paraStyle range:shareRange];
+    }
+    NSRange widgetTitleRange=[fullTitle rangeOfString:widgetTitle];
+    [attrString addAttribute:NSForegroundColorAttributeName value:[REMColor colorByHexString:@"#37ab3c"] range:widgetTitleRange];
+    [attrString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetTitleFontSize] range:widgetTitleRange];
+    NSMutableParagraphStyle *titleParaStyle=[[NSMutableParagraphStyle alloc]init];
+    
+    titleParaStyle.lineBreakMode=NSLineBreakByClipping;
+    titleParaStyle.alignment=NSTextAlignmentLeft;
+    [attrString addAttribute:NSParagraphStyleAttributeName value:titleParaStyle range:widgetTitleRange];
+    [backButton setAttributedTitle:attrString forState:UIControlStateNormal];
+    CGSize size = [backButton sizeThatFits:backButton.frame.size];
+    [backButton setFrame:CGRectMake(backButton.frame.origin.x, backButton.frame.origin.y, size.width, backButton.frame.size.height)];
+    [backButton addTarget:self.parentViewController action:@selector(popToBuildingCover) forControlEvents:UIControlEventTouchUpInside];
+    [container addSubview:backButton];
 }
 
 - (REMWidgetObject *)widgetByRelation:(REMBuildingCoverWidgetRelationModel *)relation{
