@@ -125,8 +125,20 @@
 "Setting_AboutVersion"="iPad版V%@"; //iPad版V1.0.0
 "Setting_AboutCopyrightChinese"="施耐德电气 版权所有";
 "Setting_AboutCopyrightEnglish"="Copyright@%@ Schneider Electric All Right Reserved";
-"Setting_UpdateFailed"="数据更新失败";
-"Setting_SwitchCustomerFailed"="客户选择失败";
+"Setting_UpdateFailed"="数据更新失败。";
+"Setting_SwitchCustomerFailed"="客户选择失败。";
+
+"Setting_NoNetwork"="无网络连接，应用将读取本地数据。";
+"Setting_NetworkFailed"="客户数据获取失败。网络故障，请连接后再试。";
+"Setting_ServerError"="客户数据获取失败。服务器故障，请稍后再试。";
+
+"Setting_UpdateNoNetwork"="数据更新失败。无网络连接，请稍后再试。";
+"Setting_UpdateNetworkFailed"="数据更新失败。网络故障，请稍后再试。";
+"Setting_UpdateServerError"="数据更新失败。服务器故障，请稍后再试。";
+
+"Setting_SwitchCustomerNoNetwork"="客户选择失败。无网络连接，请稍后再试。";
+"Setting_SwitchCustomerNetworkFailed"="客户选择失败。网络故障，请稍后再试。";
+"Setting_SwitchCustomerServerError"="客户选择失败。服务器故障，请稍后再试。";
 
 //Map, prefix: Map_
 "Map_MarkerBubbleSubtitleFormat"="本月用电量：%@%@";

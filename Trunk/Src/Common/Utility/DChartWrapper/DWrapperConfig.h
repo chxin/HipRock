@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "REMEnum.h"
+#import "REMWidgetObject.h"
+
 
 @interface DWrapperConfig : NSObject
 @property (nonatomic, assign) REMEnergyStep step;   // Line, Column
 @property (nonatomic, assign) BOOL stacked;         // Line, Column. Default No.
 @property (nonatomic, assign) REMCalendarType calendarType; // Line, Column
+@property (nonatomic, assign) BOOL isUnitChart;     // Line, Column. Default No.
 
 @property (nonatomic, assign) REMRankingRange rankingRangeCode; // Ranking
 @property (nonatomic, assign) NSComparisonResult rankingDefaultSortOrder; // Ranking
@@ -21,4 +24,6 @@
 
 
 @property (nonatomic) REMRelativeTimeRangeType relativeDateType; // Cover用电趋势图
+
+-(id)initWith:(REMWidgetObject*)widgetObj;
 @end
