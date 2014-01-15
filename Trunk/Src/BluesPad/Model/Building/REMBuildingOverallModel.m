@@ -111,10 +111,10 @@
         NSString *key = REMProvinceOrder[i];
         
         for (int j=0; j<buildingInfoArray.count; j++) {
-            REMBuildingOverallModel *buildingInfo = buildingInfoArray[i];
+            REMBuildingOverallModel *buildingInfo = buildingInfoArray[j];
             NSString *province = buildingInfo.building.province;
             
-            if([province rangeOfString:key].length>0) {
+            if(!REMIsNilOrNull(province) && [province rangeOfString:key].length>0) {
                 [array addObject:buildingInfo];
             }
         }
