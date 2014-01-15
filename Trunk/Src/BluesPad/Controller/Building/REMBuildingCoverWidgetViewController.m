@@ -168,6 +168,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     
     [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
@@ -175,6 +177,11 @@
     [cell setHighlighted:NO];
     [tableView deselectRowAtIndexPath:self.currentIndexPath animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    if (indexPath.section==self.currentIndexPath.section && indexPath.row == self.currentIndexPath.row) {
+        return;
+    }
+    
     UITableViewCell *oldCell=[tableView cellForRowAtIndexPath:self.currentIndexPath];
     [oldCell setSelected:NO];
     [oldCell setAccessoryType:UITableViewCellAccessoryNone];

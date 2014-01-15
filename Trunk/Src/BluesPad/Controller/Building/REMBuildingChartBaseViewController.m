@@ -85,7 +85,9 @@
             if (![self isSeriesHasLegend:series index:i]) continue;
             NSString* legendText = [self getLegendText:series index:i];
             UIColor* legendColor = [self getLegendColor:series index:i];
-            
+            if ([legendText isEqual:[NSNull null]]==YES) {
+                continue;
+            }
             CGSize textSize = [legendText sizeWithFont:legendFont];
             CGFloat averageDataWidth = textSize.width + 26;
             if (averageDataWidth > 180) averageDataWidth = 180;

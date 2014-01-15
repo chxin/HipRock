@@ -172,7 +172,7 @@
 
 "Building_WidgetRelationTitle"="选取要替换的图表";
 "Building_WidgetRelationCommodityTitle"="默认图表 - %@";
-"Building_WidgetRelationInfo"="所选图表将会被替换为当前图表,并出现在所属建 筑封面中,以便您在快速查看该图表。";
+"Building_WidgetRelationInfo"="所选图表将会被替换为当前图表,并出现在所属建筑封面中,以便您在快速查看该图表。";
 "Building_WidgetRelationWidgetDeleted"="添加失败。小组件“%@”已被删除，请更新数据"; //添加失败。小组件“最近七天能效查看”已被删除，请更新数据
 "Building_WidgetRelationPositionDeleted"="添加失败。添加位置不存在，请更新数据";
 
