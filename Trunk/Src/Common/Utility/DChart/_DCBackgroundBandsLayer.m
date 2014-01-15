@@ -38,8 +38,18 @@
 }
 
 -(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
-    double xMovementInScreen = self.frame.size.width * (newRange.location - oldRange.location) / newRange.length;
-    [self updateBands:xMovementInScreen];
+    if (oldRange.length == newRange.length) {
+        double xMovementInScreen = self.frame.size.width * (newRange.location - oldRange.location) / newRange.length;
+        [self updateBands:xMovementInScreen];
+    } else {
+        NSArray* allKeys = self.layerDictionary.allKeys;
+        for (NSString* key in allKeys) {
+            CALayer* bandLayer = self.layerDictionary[key];
+            [bandLayer removeFromSuperlayer];
+        }
+        [self.layerDictionary removeAllObjects];
+        [self updateBands:0];
+    }
 }
 
 -(void)updateBands:(double)xMovementInScreen {

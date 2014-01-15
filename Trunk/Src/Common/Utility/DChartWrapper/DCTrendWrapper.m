@@ -29,6 +29,7 @@
 -(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(REMChartStyle *)style {
     self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
     if (self && energyViewData.targetEnergyData.count != 0) {
+        _drawHCBackground = style.drawHCBackground;
         _isUnitOrRatioChart = wrapperConfig.isUnitOrRatioChart;
         _calenderType = REMCalendarTypeNone;
         _isStacked = wrapperConfig.stacked;
@@ -40,6 +41,9 @@
         NSDictionary* dic = [self updateProcessorRangesFormatter:wrapperConfig.step];
         self.myStableRange = dic[@"beginRange"];
         [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:wrapperConfig.step];
+        for (DCXYSeries* s in self.view.seriesList) {
+            if (s.hidden) [self addHiddenTarget:s.target];
+        }
         [self updateCalender];
     }
     return self;
@@ -331,7 +335,7 @@
 }
 
 -(void) updateCalender {
-    if (self.sharedProcessor == nil) return;
+    if (self.sharedProcessor == nil || !self.drawHCBackground) return;
     NSMutableArray* bands = [[NSMutableArray alloc]init];
     if(self.calenderType != REMCalendarTypeNone) {
         for (REMEnergyCalendarData* calender in self.energyViewData.calendarData) {
@@ -457,7 +461,7 @@
     NSUInteger maxTimeInterval = lengthRange.location + lengthRange.length; // 步长允许的最长时间距离
     
     /*** 对于左边界已经越界的情况(在时间选择器内查询数据)：只检查Pinch后数据的长度，和右边界。 ***/
-    if (currentRange.location < globalRange.location) {
+    if (self.myStableRange.location < globalRange.location) {
         double returnRangeEnd = newRange.end;
         double returnRangeStart = newRange.location;
         if (returnRangeEnd > globalRange.end) returnRangeEnd = globalRange.end;
@@ -465,7 +469,8 @@
         if ((isZoomIn && returnRangeInterval <= minTimeInterval) || (!isZoomIn && returnRangeInterval > maxTimeInterval)) {
             return currentRange;
         } else {
-            return [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
+            self.myStableRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
+            return self.myStableRange;
         }
     }
     /*** 对于左边界还没有越界的情况 ***/
@@ -479,8 +484,6 @@
             returnRangeLength = returnRangeEnd - returnRangeStart;
             if ([self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd] <= minTimeInterval) {
                 return currentRange;
-            } else {
-                return [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeLength];
             }
         } else {
             if (returnRangeStart < globalRange.location) returnRangeStart = globalRange.location;
@@ -488,10 +491,10 @@
             returnRangeLength = returnRangeEnd - returnRangeStart;
             if ([self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd] > maxTimeInterval) {
                 return currentRange;
-            } else {
-                return [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeLength];
             }
         }
+        self.myStableRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeLength];
+        return self.myStableRange;
     }
     
     
