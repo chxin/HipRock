@@ -26,7 +26,7 @@
 @property (nonatomic, assign, readonly) BOOL isStacked;
 @property (nonatomic, strong, readonly) NSMutableArray* processors;
 @property (nonatomic, strong, readonly) REMTrendChartDataProcessor* sharedProcessor;
-@property (nonatomic, assign, readonly) BOOL isUnitChart;
+@property (nonatomic, assign, readonly) BOOL isUnitOrRatioChart;
 
 -(BOOL)isSpecialType:(REMEnergyTargetType)type; // 一定被绘制成线图的Target类型，默认是REMEnergyTargetBenchmarkValue。Override
 

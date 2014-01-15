@@ -29,7 +29,7 @@
 -(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(REMChartStyle *)style {
     self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
     if (self && energyViewData.targetEnergyData.count != 0) {
-        _isUnitChart = wrapperConfig.isUnitChart;
+        _isUnitOrRatioChart = wrapperConfig.isUnitOrRatioChart;
         _calenderType = REMCalendarTypeNone;
         _isStacked = wrapperConfig.stacked;
         [self extraSyntax:wrapperConfig];
@@ -152,7 +152,7 @@
 }
 
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style {
-    if (self.isUnitChart && series.target.type == REMEnergyTargetOrigValue) {
+    if (self.isUnitOrRatioChart && series.target.type == REMEnergyTargetOrigValue) {
         series.hidden = YES;
     }
 }
