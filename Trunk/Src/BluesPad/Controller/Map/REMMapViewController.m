@@ -30,6 +30,7 @@
 @property (nonatomic,strong) NSMutableArray *markers;
 @property (nonatomic,weak) REMBlurredMapView *mask;
 @property (nonatomic,weak) UIButton *switchButton;
+@property (nonatomic,weak) UIImageView *customerLogoView;
 
 @end
 
@@ -122,15 +123,17 @@
 
 -(void)renderCustomerLogo
 {
-    if(self.customerLogoButton != nil){
-        [self.customerLogoButton removeFromSuperview];
-        self.customerLogoButton = nil;
+    if(self.customerLogoView != nil){
+        [self.customerLogoView removeFromSuperview];
+        self.customerLogoView = nil;
     }
     
     //add customer logo button
-    UIImageView *logoButton = self.customerLogoButton;
-    logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
-    [self.view addSubview:logoButton];
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:REMAppContext.currentCustomerLogo];
+    logoView.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
+    logoView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.view addSubview:logoView];
+    self.customerLogoView = logoView;
 }
 
 -(void)showMarkers

@@ -76,7 +76,7 @@ static NSDictionary *serviceMap = nil;
     if(reachability == NotReachable){
         if(self.accessCache){
             if(!cacheMode){
-                [REMAlertHelper alert:@"TODO:MoveToI18N:无网络，将加载本地缓存数据" delegate:nil];
+                [REMAlertHelper alert:@"TODO:MoveToI18N:" delegate:nil];
                 [[REMApplicationContext instance] setCacheMode:YES];
                 [self accessLocal:success];
             }

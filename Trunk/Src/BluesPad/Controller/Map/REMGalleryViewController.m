@@ -29,6 +29,7 @@
 @property (nonatomic,strong) NSArray *orderedProvinceKeys;
 @property (nonatomic,weak) REMGalleryTableView *galleryTableView;
 @property (nonatomic) BOOL isSegueNotAnimated;
+@property (nonatomic,weak) UIImageView *customerLogoView;
 
 @end
 
@@ -144,9 +145,11 @@
     [self.view addSubview:switchButton];
     
     //add customer logo button
-    UIImageView *logoButton = self.customerLogoButton;
-    logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
-    [self.view addSubview:logoButton];
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:REMAppContext.currentCustomerLogo];
+    logoView.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
+    logoView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.view addSubview:logoView];
+    self.customerLogoView = logoView;
     
     
     UIButton *settingButton=self.settingButton;
