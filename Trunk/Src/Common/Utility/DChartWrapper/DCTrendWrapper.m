@@ -29,6 +29,7 @@
 -(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(REMChartStyle *)style {
     self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
     if (self && energyViewData.targetEnergyData.count != 0) {
+        _drawHCBackground = style.drawHCBackground;
         _isUnitOrRatioChart = wrapperConfig.isUnitOrRatioChart;
         _calenderType = REMCalendarTypeNone;
         _isStacked = wrapperConfig.stacked;
@@ -334,7 +335,7 @@
 }
 
 -(void) updateCalender {
-    if (self.sharedProcessor == nil) return;
+    if (self.sharedProcessor == nil || !self.drawHCBackground) return;
     NSMutableArray* bands = [[NSMutableArray alloc]init];
     if(self.calenderType != REMCalendarTypeNone) {
         for (REMEnergyCalendarData* calender in self.energyViewData.calendarData) {
