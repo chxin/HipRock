@@ -77,13 +77,13 @@
             callback =^{ [self updateView]; };
         }
         else{
-            if(errorStatus == REMDataAccessFailed){
-                [REMAlertHelper alert:@"Failed"];
-            }
-            
-            if(errorStatus == REMDataAccessErrorMessage){
-                [REMAlertHelper alert:@"Error"];
-            }
+//            if(errorStatus == REMDataAccessFailed){
+//                [REMAlertHelper alert:@"Failed"];
+//            }
+//            
+//            if(errorStatus == REMDataAccessErrorMessage){
+//                [REMAlertHelper alert:@"Error"];
+//            }
         }
         
         [mask hide:callback];
