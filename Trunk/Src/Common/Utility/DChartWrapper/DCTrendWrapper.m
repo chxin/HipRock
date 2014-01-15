@@ -465,7 +465,8 @@
         if ((isZoomIn && returnRangeInterval <= minTimeInterval) || (!isZoomIn && returnRangeInterval > maxTimeInterval)) {
             return currentRange;
         } else {
-            return [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
+            self.myStableRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
+            return self.myStableRange;
         }
     }
     /*** 对于左边界还没有越界的情况 ***/
@@ -479,8 +480,6 @@
             returnRangeLength = returnRangeEnd - returnRangeStart;
             if ([self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd] <= minTimeInterval) {
                 return currentRange;
-            } else {
-                return [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeLength];
             }
         } else {
             if (returnRangeStart < globalRange.location) returnRangeStart = globalRange.location;
@@ -488,10 +487,10 @@
             returnRangeLength = returnRangeEnd - returnRangeStart;
             if ([self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd] > maxTimeInterval) {
                 return currentRange;
-            } else {
-                return [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeLength];
             }
         }
+        self.myStableRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeLength];
+        return self.myStableRange;
     }
     
     
