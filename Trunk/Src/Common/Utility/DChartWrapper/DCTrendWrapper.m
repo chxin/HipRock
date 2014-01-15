@@ -40,6 +40,9 @@
         NSDictionary* dic = [self updateProcessorRangesFormatter:wrapperConfig.step];
         self.myStableRange = dic[@"beginRange"];
         [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:wrapperConfig.step];
+        for (DCXYSeries* s in self.view.seriesList) {
+            if (s.hidden) [self addHiddenTarget:s.target];
+        }
         [self updateCalender];
     }
     return self;
@@ -154,7 +157,6 @@
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style {
     if (self.isUnitOrRatioChart && series.target.type == REMEnergyTargetOrigValue) {
         series.hidden = YES;
-        [self addHiddenTarget:series.target];
     }
 }
 
