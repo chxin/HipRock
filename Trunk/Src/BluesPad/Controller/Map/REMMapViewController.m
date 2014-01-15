@@ -36,6 +36,8 @@
 
 @implementation REMMapViewController
 
+#define REMDefaultMapCamera [GMSCameraPosition cameraWithLatitude:38.0 longitude:104.0 zoom:4.0]
+
 
 - (void)loadView
 {
@@ -116,8 +118,17 @@
 -(void)updateView
 {
     self.buildingInfoArray = REMAppContext.buildingInfoArray;
+    
+    if(self.buildingInfoArray.count <= 0){
+        [self.switchButton setEnabled:NO];
+        [REMAlertHelper alert:REMLocalizedString(@"Map_NoVisiableBuilding")];
+    }
+    else{
+        [self.switchButton setEnabled:YES];
+    }
+    
     [self renderCustomerLogo];
-    [self updateCamera:self.mapView];
+    [self updateCamera];
     [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(showMarkers) userInfo:nil repeats:NO];
 }
 
@@ -138,10 +149,6 @@
 
 -(void)showMarkers
 {
-    if(self.buildingInfoArray.count <= 0){
-        [self.switchButton setEnabled:NO];
-    }
-    
     [self.mapView clear];
     
     NSArray *buildings = [self.buildingInfoArray sortedArrayUsingComparator:^NSComparisonResult(REMBuildingOverallModel *b1, REMBuildingOverallModel *b2) {
@@ -186,13 +193,8 @@
     CGRect mapViewFrame = CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight);
     //CGRectMake(viewBounds.origin.x, viewBounds.origin.y, viewBounds.size.width, viewBounds.size.height);
     
-    double defaultLatitude =38.0, defaultLongitude=104.0;
-    CGFloat defaultZoomLevel = 4.0;
-    
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:defaultLatitude longitude:defaultLongitude zoom:defaultZoomLevel];
-    
-    GMSMapView *mapView = [GMSMapView mapWithFrame:mapViewFrame camera:camera];
-    [mapView setCamera:camera];
+    GMSMapView *mapView = [GMSMapView mapWithFrame:mapViewFrame camera:REMDefaultMapCamera];
+    //[mapView setCamera:REMDefaultMapCamera];
     mapView.myLocationEnabled = NO;
     mapView.delegate = self;
     mapView.settings.consumesGesturesInView = NO;
@@ -206,26 +208,29 @@
     self.mapView = mapView;
 }
 
--(void)updateCamera:(GMSMapView *)mapView
+-(void)updateCamera
 {
     // one building, set the building's location
-    if(self.buildingInfoArray.count <= 0)
+    if(self.buildingInfoArray.count <= 0){
+        [self.mapView animateToCameraPosition:REMDefaultMapCamera];
         return;
+    }
     
     if(self.buildingInfoArray.count == 1){
         REMBuildingModel *building = [self.buildingInfoArray[0] building];
+        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:building.latitude longitude:building.longitude zoom:12];
         
-        [mapView setCamera:[GMSCameraPosition cameraWithLatitude:building.latitude longitude:building.longitude zoom:12]];
+        [self.mapView animateToCameraPosition:camera];
     }
     else{// multiple buildings, set the rect
         //northEast and southWest
         UIEdgeInsets visiableBounds = [self getVisiableBounds];
         GMSCoordinateBounds *bounds = [self coordinateBoundsFromEdgeInsets:visiableBounds];
         
-        GMSCameraPosition *camera = [mapView cameraForBounds:bounds insets:kDMMap_MapEdgeInsets];
+        GMSCameraPosition *camera = [self.mapView cameraForBounds:bounds insets:kDMMap_MapEdgeInsets];
         
         //[mapView setCamera:camera];
-        [mapView animateToCameraPosition:camera];
+        [self.mapView animateToCameraPosition:camera];
     }
 }
 
