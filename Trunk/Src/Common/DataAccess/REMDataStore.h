@@ -10,7 +10,7 @@
 #import "REMDataStoreType.h"
 
 
-@interface REMDataStore : NSObject<UIAlertViewDelegate>
+@interface REMDataStore : NSObject
 
 @property (nonatomic) REMDataStoreType name;
 @property (nonatomic,strong) REMServiceMeta* serviceMeta;

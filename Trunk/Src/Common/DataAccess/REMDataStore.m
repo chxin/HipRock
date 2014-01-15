@@ -16,12 +16,8 @@
 #import "REMAlertHelper.h"
 #import "REMApplicationContext.h"
 #import "REMBusinessErrorInfo.h"
+#import "UIAlertView+Block.h"
 
-@interface REMDataStore()
-
-@property (nonatomic,strong) REMDataAccessSuccessBlock success;
-
-@end
 
 
 @implementation REMDataStore
@@ -67,8 +63,6 @@ static NSDictionary *serviceMap = nil;
 }
 - (void)access:(REMDataAccessSuccessBlock)success error:(REMDataAccessErrorBlock)error progress:(REMDataAccessProgressBlock)progress
 {
-    self.success = success;
-    
     NetworkStatus reachability = [REMNetworkHelper checkCurrentNetworkStatus];
     
     BOOL cacheMode = [REMApplicationContext instance].cacheMode;
@@ -76,9 +70,13 @@ static NSDictionary *serviceMap = nil;
     if(reachability == NotReachable){
         if(self.accessCache){
             if(!cacheMode){
-                [REMAlertHelper alert:@"TODO:MoveToI18N:无网络，将加载本地缓存数据" delegate:nil];
+                //[REMAlertHelper alert:REMLocalizedString(@"Common_NetNoConnectionLoadLocal") delegate:nil];
                 [[REMApplicationContext instance] setCacheMode:YES];
-                [self accessLocal:success];
+                [UIAlertView alertViewWithTitle:@"" message:REMLocalizedString(@"Common_NetNoConnectionLoadLocal") cancelButtonTitle:REMLocalizedString(@"Common_OK") otherButtonTitles:nil onDismiss:^(int buttonIndex, NSString *buttonTitle) {
+                    [self accessLocal:success];
+                } onCancel:^{
+                    [self accessLocal:success];
+                }];
             }
             else{
                 [self accessLocal:success];
@@ -148,14 +146,10 @@ static NSDictionary *serviceMap = nil;
             [REMAlertHelper alert:message];
         }
         
-        error(errorInfo,status,response);
+        if(error)
+            error(errorInfo,status,response);
     } progress:progress];
 }
 
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    [self accessLocal:self.success];
-}
 
 @end

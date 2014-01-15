@@ -320,8 +320,9 @@
     self.buildingTitleView=titleLabel;
     
     
-    UIImageView *logoButton = self.customerLogoButton;
-    [logoButton setFrame:CGRectMake(self.backButton.frame.origin.x+self.backButton.frame.size.width, kDMCommon_CustomerLogoTop, logoButton.frame.size.width, logoButton.frame.size.height)];
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:REMAppContext.currentCustomerLogo];
+    [logoView setFrame:CGRectMake(self.backButton.frame.origin.x+self.backButton.frame.size.width, kDMCommon_CustomerLogoTop, logoView.frame.size.width, logoView.frame.size.height)];
+    logoView.contentMode = UIViewContentModeScaleAspectFit;
     
     //[logoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
     
@@ -330,8 +331,8 @@
 //    [logoButton addTarget:self.parentViewController action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    [self.container addSubview:logoButton];
-    self.logoButton=logoButton;
+    [self.container addSubview:logoView];
+    self.logoButton=logoView;
 }
 
 

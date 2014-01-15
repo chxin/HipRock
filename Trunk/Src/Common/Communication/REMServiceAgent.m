@@ -146,8 +146,8 @@ static int requestTimeout = 45; //(s)
 
 +(void)writeCache:(id)result forService:(REMServiceMeta *)service withParameter:(id)body
 {
-    if([body isMemberOfClass:[NSData class]]){
-        NSString *storageKey = [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding];
+    if([body isKindOfClass:[NSDictionary class]]){
+        NSString *storageKey = [REMServiceAgent buildParameterString:(NSDictionary *)body];
         if(service.responseType == REMServiceResponseJson){
             [REMStorage set:service.url key:storageKey value:[REMJSONHelper stringByObject:result] expired:REMWindowActiated];
         }

@@ -59,26 +59,6 @@
     return button;
 }
 
-- (UIImageView *)customerLogoButton
-{
-//    UIButton *customerLogoButton=[UIButton buttonWithType:UIButtonTypeCustom];
-//    customerLogoButton.adjustsImageWhenHighlighted=YES;
-//    if (REMISIOS7) {
-//        customerLogoButton=[UIButton buttonWithType:UIButtonTypeSystem];
-//    }
-    UIImageView *imageView=[[UIImageView alloc]initWithImage:REMAppCurrentLogo];
-    imageView.contentMode=UIViewContentModeScaleAspectFill;
-    [imageView setFrame:CGRectMake(0, 0, kDMCommon_CustomerLogoWidth, kDMCommon_CustomerLogoHeight)];
-    
-//    [customerLogoButton setImage:REMAppCurrentLogo forState:UIControlStateNormal];
-//    customerLogoButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
-//    customerLogoButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    //[customerLogoButton addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
-//    return customerLogoButton;
-    return imageView;
-}
-
 
 - (void)settingButtonPressed:(UIButton *)button{
     UINavigationController *settingNavigationController = (UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:kStoryboard_SettingsPage];

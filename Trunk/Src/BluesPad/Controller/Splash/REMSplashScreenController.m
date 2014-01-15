@@ -175,6 +175,10 @@
         REMLoginCarouselController *loginCarouselController = segue.destinationViewController;
         loginCarouselController.splashScreenController = self;
     }
+    if([segue.identifier isEqualToString:kSegue_SplashToMap]){
+        REMMapViewController *mapController = segue.destinationViewController;
+        mapController.isInitialPresenting = YES;
+    }
 }
 
 
