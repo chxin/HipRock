@@ -77,13 +77,13 @@
             callback =^{ [self updateView]; };
         }
         else{
-            if(errorStatus == REMDataAccessFailed){
-                [REMAlertHelper alert:@"Failed"];
-            }
-            
-            if(errorStatus == REMDataAccessErrorMessage){
-                [REMAlertHelper alert:@"Error"];
-            }
+//            if(errorStatus == REMDataAccessFailed){
+//                [REMAlertHelper alert:@"Failed"];
+//            }
+//            
+//            if(errorStatus == REMDataAccessErrorMessage){
+//                [REMAlertHelper alert:@"Error"];
+//            }
         }
         
         [mask hide:callback];
@@ -256,18 +256,6 @@
     CLLocationCoordinate2D southWest = CLLocationCoordinate2DMake(insets.bottom, insets.left);
     
     return [[GMSCoordinateBounds alloc] initWithCoordinate:northEast coordinate:southWest];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
 }
 
 - (void)didReceiveMemoryWarning

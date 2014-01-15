@@ -10,6 +10,7 @@
 #import "REMUserModel.h"
 #import "REMBuildingOverallModel.h"
 #import "REMServiceAgent.h"
+#import "REMBuildingOverallModel.h"
 
 @interface REMUpdateAllManager()
 
@@ -107,7 +108,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
                 self.customerInfoArray=customerList;
 
             }
-            NSArray *newBuildingList=data[@"BuildingInfo"];
+            NSArray *newBuildingList= data[@"BuildingInfo"];
             NSMutableArray *buildingInfoList=nil;
             if(newBuildingList!=nil && [newBuildingList isEqual:[NSNull null]]==NO){
                 buildingInfoList = [[NSMutableArray alloc]initWithCapacity:newBuildingList.count];
@@ -115,7 +116,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
                     REMBuildingOverallModel *model=[[REMBuildingOverallModel alloc]initWithDictionary:obj];
                     [buildingInfoList addObject:model];
                 }
-                self.buildingInfoArray=buildingInfoList;
+                self.buildingInfoArray= [REMBuildingOverallModel sortByProvince: buildingInfoList];
             }
             [self.alertView dismissWithClickedButtonIndex:-1 animated:YES];
             if (status == REMCustomerUserConcurrencyStatusUserDeleted) {
