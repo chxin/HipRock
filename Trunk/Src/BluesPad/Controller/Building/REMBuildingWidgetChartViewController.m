@@ -14,6 +14,7 @@
 #import "REMBuildingChartView.h"
 #import "REMWidgetStepEnergyModel.h"
 #import "REMWidgetRankingSearchModel.h"
+#import "REMTextIndicatorFormator.h"
 
 
 @interface REMBuildingWidgetChartViewController ()
@@ -74,4 +75,7 @@
     return self.widgetInfo.contentSyntax.step.integerValue;
 }
 
+-(NSString*)getLegendText:(DCXYSeries*)series index:(NSUInteger)index {
+    return [REMTextIndicatorFormator formatTargetName:series.target inEnergyData:self.energyViewData withWidget:self.widgetInfo andParameters:nil];
+}
 @end
