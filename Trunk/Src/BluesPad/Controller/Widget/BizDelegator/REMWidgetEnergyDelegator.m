@@ -267,7 +267,7 @@
 
     UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     UINavigationController *nav=[storyboard instantiateViewControllerWithIdentifier:@"datePickerNavigationController"];
-    
+    nav.navigationBar.translucent=NO;
     UIPopoverController *popoverController=[[UIPopoverController alloc]initWithContentViewController:nav];
     popoverController.delegate=self;
     REMDatePickerViewController *dateViewController =nav.childViewControllers[0];

@@ -231,7 +231,7 @@ const static CGFloat kRankingTimePickerWidth=250;
     [self.timePickerButton setBackgroundColor:[UIColor clearColor]];
     UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     UINavigationController *nav=[storyboard instantiateViewControllerWithIdentifier:@"datePickerNavigationController"];
-    
+    nav.navigationBar.translucent=NO;
     UIPopoverController *popoverController=[[UIPopoverController alloc]initWithContentViewController:nav];
     REMDatePickerViewController *dateViewController =nav.childViewControllers[0];
     dateViewController.showHour=NO;

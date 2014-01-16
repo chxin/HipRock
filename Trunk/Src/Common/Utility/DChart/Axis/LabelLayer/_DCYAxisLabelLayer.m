@@ -42,10 +42,8 @@
     if (self.hidden) return;
     if(self.axis.lineWidth > 0) {
         CGPoint addLines[2];
-        addLines[0].x = self.isMajorAxis ? self.myFrame.size.width : 0;
-        addLines[0].y = 0;
-        addLines[1].x = addLines[0].x;
-        addLines[1].y = self.myFrame.size.height;
+        addLines[0] = self.axis.startPoint;
+        addLines[1] = self.axis.endPoint;
         
         CGContextSetLineJoin(ctx, kCGLineJoinMiter);
         [DCUtility setLineStyle:ctx style:self.axis.lineStyle lineWidth:self.axis.lineWidth];
