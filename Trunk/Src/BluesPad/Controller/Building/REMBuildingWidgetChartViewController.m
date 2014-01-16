@@ -22,21 +22,42 @@
 
 @property (nonatomic,strong) DAbstractChartWrapper *wrapper;
 @property (nonatomic,strong) REMWidgetSearchModelBase *model;
-
+@property (nonatomic,strong) REMEnergySeacherBase *searcher;
 @end
 
 @implementation REMBuildingWidgetChartViewController
 
-- (NSDictionary *)assembleRequestParametersWithBuildingId:(long long)buildingId WithCommodityId:(long long)commodityID WithMetadata:(REMAverageUsageDataModel *)averageData
+- (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(id, REMBusinessErrorInfo *))loadCompleted
 {
     REMWidgetSearchModelBase *model=[REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax.dataStoreType withParam:self.widgetInfo.contentSyntax.params];
     if(self.widgetInfo.contentSyntax.relativeDateType!=REMRelativeTimeRangeTypeNone){
         model.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
     }
-    self.requestUrl=self.widgetInfo.contentSyntax.dataStoreType;
     self.model=model;
-    return [model toSearchParam];
+    
+    self.requestUrl=self.widgetInfo.contentSyntax.dataStoreType;
+
+    self.searcher = [REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
+    
+    [self startLoadingActivity];
+    [self.searcher queryEnergyDataByStoreType:self.widgetInfo.contentSyntax.dataStoreType andParameters:self.model withMaserContainer:nil andGroupName:[NSString stringWithFormat:@"building-data-%@", @(buildingId)] callback:^(id data, REMBusinessErrorInfo *bizError) {
+        [self stopLoadingActivity];
+        if (bizError==nil) {
+            if(self.isViewLoaded==NO)return ;
+            self.energyViewData = data;
+            loadCompleted(data,nil);
+        }
+        else{
+            loadCompleted(nil,bizError);
+            if(bizError!=nil){
+                [self loadDataFailureWithError:bizError];
+            }
+        }
+        
+    }];
+    
 }
+
 
 -(DCTrendWrapper*)constructWrapperWithFrame:(CGRect)frame {
     DCTrendWrapper *widgetWrapper = nil;
