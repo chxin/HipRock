@@ -15,7 +15,7 @@
 #import "REMWidgetStepEnergyModel.h"
 #import "REMWidgetRankingSearchModel.h"
 #import "REMTextIndicatorFormator.h"
-
+#import "REMEnergySeacherBase.h"
 
 @interface REMBuildingWidgetChartViewController ()
 
