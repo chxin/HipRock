@@ -279,6 +279,11 @@
             return dashboard;
         }
     }
+    else{
+        REMDashboardObj *dashboard=[[REMDashboardObj alloc]init];
+        dashboard.dashboardId=@(-1);
+        return dashboard;
+    }
     return nil;
 }
 
@@ -306,6 +311,18 @@
             widget.widgetId=currentRelation.widgetId;
             return widget;
         }
+    }
+    else{
+        REMWidgetObject *widget=[[REMWidgetObject alloc]init];
+        widget.dashboardId=@(-1);
+        if (position == REMBuildingCoverWidgetPositionFirst) {
+            widget.widgetId=@(-1);
+        }
+        else{
+            widget.widgetId=@(-2);
+        }
+        
+        return widget;
     }
     
     return nil;
@@ -438,8 +455,8 @@
 - (REMBuildingChartContainerViewController *)chartContainerControllerByPosition:(REMBuildingCoverWidgetPosition)position{
     REMBuildingChartContainerViewController *controller=[[REMBuildingChartContainerViewController alloc] init];
     REMWidgetObject *widget=[self widgetInfoByPosition:position];
-    if (widget==nil) {
-        if (position == REMBuildingCoverWidgetPositionFirst) {
+    if ([widget.widgetId isLessThan:@(0)]==YES) {
+        if ([widget.widgetId isEqualToNumber:@(-1)]==YES) {
             controller.chartHandlerClass=[REMBuildingAverageViewController class];
         }
         else{
@@ -448,12 +465,6 @@
     }
     else{
         controller.chartHandlerClass=[REMBuildingWidgetChartViewController class];
-    }
-    if([widget.widgetId isEqualToNumber:@(-1)]==YES){
-        controller.chartHandlerClass=[REMBuildingAverageViewController class];
-    }
-    else if([widget.widgetId isEqualToNumber:@(-2)]==YES){
-        controller.chartHandlerClass=[REMBuildingTrendChartViewController class];
     }
     controller.buildingId=self.buildingInfo.building.buildingId;
     controller.commodityId=self.commodityInfo.commodityId;
@@ -478,20 +489,10 @@
     coverRelationController.commodityController=self;
     REMDashboardObj *dashboard=[self dashboardInfoByPosition:coverRelationController.position];
     REMWidgetObject *widget=[self widgetInfoByPosition:coverRelationController.position];
-    if (widget==nil) {
-        if (coverRelationController.position == REMBuildingCoverWidgetPositionFirst) {
-            coverRelationController.selectedWidgetId = @(-1);
-            coverRelationController.selectedDashboardId=@(-1);
-        }
-        else{
-            coverRelationController.selectedWidgetId = @(-2);
-            coverRelationController.selectedDashboardId=@(-2);
-        }
-    }
-    else{
-        coverRelationController.selectedWidgetId=widget.widgetId;
-        coverRelationController.selectedDashboardId=dashboard.dashboardId;
-    }
+    
+    coverRelationController.selectedWidgetId=widget.widgetId;
+    coverRelationController.selectedDashboardId=dashboard.dashboardId;
+    
     UIPopoverController *popController= [[UIPopoverController alloc]initWithContentViewController:nav];
     coverRelationController.popController=popController;
     popController.delegate=self;

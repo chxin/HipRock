@@ -242,6 +242,7 @@
     self.pinHelper=helper;
     [helper pinToBuildingCover:@{@"relationList":@[newDic],@"buildingId":model.buildingId,@"customerId":customer.customerId} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
         if (status == REMPinToBuildingCoverStatusSuccess) {
+            self.pinHelper=nil;
             [self.commodityController updateChartController];
         }
     }];
