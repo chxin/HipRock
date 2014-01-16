@@ -378,14 +378,15 @@
 -(void)viewPanned:(UIPanGestureRecognizer*)gesture {
     CGFloat speed = -[gesture velocityInView:self].x*self.graphContext.hRange.length/self.graphContext.plotRect.size.width/kDCFramesPerSecord;
     BOOL panStopped = (gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed);
+    NSLog(@"pan speed:%f, status:%hhd", speed, panStopped);
     if (speed == 0 && !panStopped) return;
     if (self.graphContext.focusX == INT32_MIN) {
         double location = speed+self.graphContext.hRange.location;
         double end = location + self.graphContext.hRange.length;
         if (location < self.graphContext.globalHRange.location) {
-            location = (self.graphContext.globalHRange.location - location) / 2 + location;
+            location = self.graphContext.hRange.location + speed / 8;
         } else  if (end > self.graphContext.globalHRange.end) {
-            location = location - (end - self.graphContext.globalHRange.end) / 2;
+            location = self.graphContext.hRange.location + speed / 8;
         }
         self.graphContext.hRange = [[DCRange alloc]initWithLocation:location length:self.graphContext.hRange.length];
     } else {
