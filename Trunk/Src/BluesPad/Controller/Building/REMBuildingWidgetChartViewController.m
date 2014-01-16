@@ -97,6 +97,6 @@
 }
 
 -(NSString*)getLegendText:(DCXYSeries*)series index:(NSUInteger)index {
-    return [REMTextIndicatorFormator formatTargetName:series.target inEnergyData:self.energyViewData withWidget:self.widgetInfo andParameters:nil];
+    return [REMTextIndicatorFormator formatTargetName:series.target inEnergyData:self.energyViewData withWidget:self.widgetInfo andParameters:self.model];
 }
 @end
