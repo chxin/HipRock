@@ -279,7 +279,8 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     popController.popoverContentSize=CGSizeMake(350, 400);
     popController.delegate=self;
     self.popController=popController;
-    [popController presentPopoverFromRect:button.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    CGRect frame=CGRectMake(button.frame.origin.x, REMDMCOMPATIOS7(button.frame.origin.y), button.frame.size.width, button.frame.size.height);
+    [popController presentPopoverFromRect:frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
     buildingCoverWidgetController.popController=popController;
     

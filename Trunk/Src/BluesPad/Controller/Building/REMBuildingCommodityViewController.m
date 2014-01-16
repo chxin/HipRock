@@ -381,6 +381,7 @@
     else{
         firstButton.showsTouchWhenHighlighted=YES;
     }
+    
     [firstButton setImage:image forState:UIControlStateNormal];
     [firstButton setFrame:CGRectMake(kBuildingChartWidth-40, marginTop, 32, 32)];
     firstButton.tag=0;

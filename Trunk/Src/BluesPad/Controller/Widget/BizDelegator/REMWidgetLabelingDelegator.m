@@ -202,7 +202,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     
     UINavigationController *nav=[storyboard instantiateViewControllerWithIdentifier:@"monthPickerNavigationController"];
-    
+    nav.navigationBar.translucent=NO;
    
     UIPopoverController *popoverController=[[UIPopoverController alloc]initWithContentViewController:nav];
     REMWidgetMonthPickerViewController *dateViewController=nav.childViewControllers[0];
