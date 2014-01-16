@@ -14,6 +14,7 @@
 
 @property (nonatomic,strong) NSMutableArray *currentSelectedArray;
 @property (nonatomic,strong) NSMutableArray *selectedPathArray;
+@property (nonatomic,strong) REMPinToBuildingCoverHelper *pinHelper;
 @end
 
 @implementation REMWidgetBuildingCoverViewController
@@ -134,7 +135,6 @@
 
 - (IBAction)okButtonClicked:(id)sender {
     NSMutableArray *array=[NSMutableArray array];
-    BOOL includeCurrent=NO;
     for (NSIndexPath *path in self.currentSelectedArray) {
         NSMutableDictionary *dic=[NSMutableDictionary dictionary];
         dic[@"HierarchyId"]=self.buildingInfo.building.buildingId;
@@ -171,10 +171,12 @@
     self.isRequesting=YES;
     REMCustomerModel *customer=REMAppCurrentCustomer;
     REMPinToBuildingCoverHelper *helper=[[REMPinToBuildingCoverHelper alloc]init];
+    self.pinHelper=helper;
     helper.mainNavigationController=(REMMainNavigationController *)self.detailController.parentViewController.navigationController;
     helper.widgetName=self.detailController.widgetInfo.name;
     [helper pinToBuildingCover:@{@"relationList":array,@"buildingId":self.buildingInfo.building.buildingId,@"customerId":customer.customerId} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
         if (status == REMPinToBuildingCoverStatusSuccess) {
+            self.pinHelper=nil;
             [self.detailController updateBuildingCover];
         }
     }];
