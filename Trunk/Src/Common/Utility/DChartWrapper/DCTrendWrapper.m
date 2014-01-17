@@ -264,7 +264,7 @@
     self.sharedProcessor.baseDate = baseDateOfX;
     double globalStart = [self.sharedProcessor processX:globalStartdDate].doubleValue;
     double globalLength = [self.sharedProcessor processX:globalEndDate].doubleValue - globalStart;
-    if (!self.graphContext.xLabelAlignToTick) globalStart+=0.5;
+//    if (!self.graphContext.xLabelAlignToTick) globalStart+=0.5;
     double startPoint = [self.sharedProcessor processX:beginningStart].doubleValue;
     double endPoint = [self.sharedProcessor processX:beginningEnd].doubleValue;
     
