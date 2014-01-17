@@ -94,10 +94,12 @@
             [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
             [titleList addObject:NSLocalizedString(@"Common_Year", "")];//年
             defaultStepIndex=0;
+            break;
         case 7:
             [list addObject:[NSNumber numberWithInt:4]];
             [titleList addObject:NSLocalizedString(@"Common_Year", "")];//年
             defaultStepIndex=0;
+            break;
         default:
             break;
     }
