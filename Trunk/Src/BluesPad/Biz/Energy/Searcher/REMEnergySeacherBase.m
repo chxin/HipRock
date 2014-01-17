@@ -132,10 +132,15 @@
         [self.loadingView removeFromSuperview];
         [self.loadingBackgroundView removeFromSuperview];
         [maskerContainer removeConstraints:allConstaints];
-        if([data isEqual:[NSNull null]]==YES)return ;
-        REMEnergyViewData *viewData=[self processEnergyData:data];
+        id ret;
+        if([data isEqual:[NSNull null]]==YES){
+            ret = nil;
+        }
+        else{
+            ret = [self processEnergyData:data];
+        }
         if(callback!=nil){
-            callback(viewData,nil);
+            callback(ret,nil);
         }
     } error:^(NSError *error, REMDataAccessErrorStatus status, REMBusinessErrorInfo *errorInfo) {
         [self.loadingBackgroundView removeFromSuperview];

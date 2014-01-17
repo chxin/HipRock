@@ -78,47 +78,8 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     [titleContainer setBackgroundColor:[UIColor whiteColor]];
 
     [self initBackButton:titleContainer];
-//    UIButton *backButton=[UIButton buttonWithType:UIButtonTypeCustom];
-//    if (REMISIOS7) {
-//        backButton=[UIButton buttonWithType:UIButtonTypeSystem];
-//    }
-//    [backButton setFrame:CGRectMake(kWidgetBackButtonLeft, kWidgetBackButtonTop, kWidgetBackButtonWidthHeight, kWidgetBackButtonWidthHeight)];
-//    [backButton setImage:[UIImage imageNamed:@"Back_Chart"] forState:UIControlStateNormal];
-//    [backButton setTintColor:[REMColor colorByHexString:@"#37ab3c"] ];
-//    backButton.adjustsImageWhenHighlighted=NO;
-//    //backButton.showsTouchWhenHighlighted=YES;
-//    
-//    [backButton addTarget:self.parentViewController action:@selector(popToBuildingCover) forControlEvents:UIControlEventTouchUpInside];
-//    [titleContainer addSubview:backButton];
-//    self.backButton=backButton;
-//    
-//    
-//    CGRect frame;
-//    if(self.widgetInfo.shareInfo!=nil && [self.widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
-//        frame=CGRectMake(backButton.frame.origin.x+backButton.frame.size.width+kWidgetTitleLeftMargin, backButton.frame.origin.y, self.view.frame.size.width, kWidgetShareTitleFontSize);
-//        UILabel *shareTitle=[[UILabel alloc]initWithFrame:frame];
-//        [shareTitle setBackgroundColor:[UIColor clearColor]];
-//        shareTitle.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetShareTitleFontSize];
-//        shareTitle.textColor=[REMColor colorByHexString:@"#a2a2a2"];
-//        NSString *shareName=self.widgetInfo.shareInfo.userRealName;
-//        NSString *shareTel=self.widgetInfo.shareInfo.userTelephone;
-//        NSString *date=[REMTimeHelper formatTimeFullDay:self.widgetInfo.shareInfo.shareTime isChangeTo24Hour:NO];
-//        NSString *userTitle=self.widgetInfo.shareInfo.userTitleComponent;
-//        shareTitle.text=[NSString stringWithFormat:NSLocalizedString(@"Widget_ShareTitle", @""),shareName,userTitle,date,shareTel];
-//        [titleContainer addSubview:shareTitle];
-//        frame=CGRectMake(frame.origin.x, frame.origin.y+frame.size.height+kWidgetShareTitleMargin, frame.size.width, kWidgetTitleHeight);
-//    }
-//    else{
-//        frame=CGRectMake(backButton.frame.origin.x+backButton.frame.size.width+kWidgetTitleLeftMargin, backButton.frame.origin.y, self.view.frame.size.width, kWidgetTitleHeight);
-//    }
-//
-//    UILabel *widgetTitle=[[UILabel alloc]initWithFrame:frame];
-//    widgetTitle.text=self.widgetInfo.name;
-//    widgetTitle.backgroundColor=[UIColor clearColor];
-//    widgetTitle.textColor=[REMColor colorByHexString:@"#37ab3c"];
-//    widgetTitle.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetTitleFontSize];
-//    [titleContainer addSubview:widgetTitle];
-//    self.widgetTitleLabel=widgetTitle;
+
+    
     [self.view addSubview:titleContainer];
     self.titleContainer=titleContainer;
     

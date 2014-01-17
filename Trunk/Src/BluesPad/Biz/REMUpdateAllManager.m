@@ -25,7 +25,7 @@
 
 @property (nonatomic,weak) UIAlertView *alertView;
 
-
+@property (nonatomic) BOOL isError;
 @end
 
 @implementation REMUpdateAllManager
@@ -138,19 +138,26 @@ static NSString *customerUpdateAll=@"customerupdateall";
         } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
             self.tableViewController=nil;
             REMApplicationContext *context=REMAppContext;
-            context.updateManager=nil;
             
+            if (self.alertView!=nil) {
+                [self.alertView dismissWithClickedButtonIndex:-1 animated:NO];
+            }
             callback(REMCustomerUserConcurrencyStatusFailed,nil,status);
+            context.updateManager=nil;
         }];
         
         
     } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
         self.tableViewController=nil;
         REMApplicationContext *context=REMAppContext;
-        context.updateManager=nil;
+        if (self.alertView!=nil) {
+            [self.alertView dismissWithClickedButtonIndex:-1 animated:NO];
+        }
         callback(REMCustomerUserConcurrencyStatusFailed,nil,status);
+        context.updateManager=nil;
     }];
-    if (self.canCancel==YES) {
+    REMApplicationContext *context=REMAppContext;
+    if (context.updateManager != nil && self.canCancel==YES) {
         NSString *msg=NSLocalizedString(@"Setting_LoadingData", @"");//正在更新客户的楼宇及能耗信息，请稍后...
         
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:msg delegate:self cancelButtonTitle:NSLocalizedString(@"Common_Giveup", @"") otherButtonTitles: nil];

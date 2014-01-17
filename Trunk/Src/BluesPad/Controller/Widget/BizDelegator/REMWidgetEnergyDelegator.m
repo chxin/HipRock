@@ -311,7 +311,9 @@
         [self showEnergyChart];
     }
     else{
-        [self search];
+        if (self.ownerController.hasServerError == NO) {
+            [self search];
+        }
     }
 }
 
@@ -472,6 +474,7 @@
             if(self.widgetInfo.contentSyntax.calendarType!=REMCalendarTypeNone){
                 DCTrendWrapper *trend=(DCTrendWrapper *)widgetWrapper;
                 trend.calenderType=self.widgetInfo.contentSyntax.calendarType;
+                [self processCalendar];
             }
         }
         [self.chartContainer addSubview:[widgetWrapper getView]];

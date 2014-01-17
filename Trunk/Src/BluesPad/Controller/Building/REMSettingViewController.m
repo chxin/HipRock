@@ -79,7 +79,7 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-    
+    REMApplicationContext *context=REMAppContext;
     // weibo account binding cell
     if (indexPath.section == 1 && indexPath.item == 0) {
         [[cell textLabel]setText:NSLocalizedString(@"Setting_BindWeibo", @"")]; //绑定新浪微博
@@ -98,12 +98,17 @@
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         if(indexPath.row==0){
             [[cell textLabel]setText:NSLocalizedString(@"Setting_UserName", @"")]; //显示名称
-            NSString *name=[REMApplicationContext instance].currentUser.realname;
+            
+            NSString *name=context.currentUser.realname;
+            
             [cell.detailTextLabel setText:name];
         }
         else if(indexPath.row==1){
             [[cell textLabel]setText:NSLocalizedString(@"Setting_EMOPID", @"")];//能源管理开发平台ID
-            NSString *name1=[REMApplicationContext instance].currentUser.name;
+            NSString *name1=context.currentUser.name;
+            if (context.currentUser.isDemo) {
+                name1=@"Demo";
+            }
             [cell.detailTextLabel setText:name1];
         }
         else if(indexPath.row==2){
