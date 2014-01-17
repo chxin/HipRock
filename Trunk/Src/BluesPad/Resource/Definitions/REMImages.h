@@ -20,13 +20,6 @@
 #define REMIMG_Logo_About REMLoadImageNamed(@"Logo_About")
 #define REMIMG_Setting REMLoadImageNamed(@"Setting")
 
-//images in /AppIcon:
-#define REMIMG_EMOP_App_6 REMLoadImageNamed(@"EMOP_App_6")
-#define REMIMG_EMOP_APP_7 REMLoadImageNamed(@"EMOP_APP_7")
-#define REMIMG_EMOP_Setting REMLoadImageNamed(@"EMOP_Setting")
-#define REMIMG_EMOP_Spotlight_6 REMLoadImageNamed(@"EMOP_Spotlight_6")
-#define REMIMG_EMOP_Spotlight_7 REMLoadImageNamed(@"EMOP_Spotlight_7")
-
 //images in /Building:
 #define REMIMG_ChartCustomization REMLoadImageNamed(@"ChartCustomization")
 #define REMIMG_ChartCustomization_Widget REMLoadImageNamed(@"ChartCustomization_Widget")
@@ -78,10 +71,6 @@
 #define REMIMG_Nodata REMLoadImageNamed(@"Nodata")
 #define REMIMG_Up REMLoadImageNamed(@"Up")
 
-//images in /Launch:
-#define REMIMG_Default_Landscape_IOS7 REMLoadImageNamed(@"Default-Landscape-IOS7")
-#define REMIMG_Default_Landscape REMLoadImageNamed(@"Default-Landscape")
-
 //images in /Login:
 #define REMIMG_JumpLogin_Pressed REMLoadImageNamed(@"JumpLogin-Pressed")
 #define REMIMG_JumpLogin REMLoadImageNamed(@"JumpLogin")
@@ -109,6 +98,7 @@
 #define REMIMG_UnqualifiedPin_Normal REMLoadImageNamed(@"UnqualifiedPin_Normal")
 
 //images in /Splash:
+#define REMIMG_SplashScreenBackgroud REMLoadImageNamed(@"SplashScreenBackgroud")
 #define REMIMG_SplashScreenLogo_Common REMLoadImageNamed(@"SplashScreenLogo-Common")
 #define REMIMG_SplashScreenLogo_Flash REMLoadImageNamed(@"SplashScreenLogo-Flash")
 
