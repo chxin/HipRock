@@ -124,7 +124,7 @@
         [self.textFrames addObject:[NSValue valueWithCGRect:theLastLabelRect]];
     }
     if (!REMIsNilOrNull(self.axis.axisTitle) && self.axis.axisTitle.length > 0) {
-        UIFont* titleFont = self.font;
+        UIFont* titleFont = [UIFont fontWithName:self.font.fontName size:self.axis.axisTitleFontSize];
         CGRect fontLabelRect = CGRectMake(theLastLabelRect.origin.x, theLastLabelRect.origin.y - theLastLabelRect.size.height - self.axisTitleToTopLabel, theLastLabelRect.size.width, theLastLabelRect.size.height);
         while ([DCUtility getSizeOfText:self.axis.axisTitle forFont:titleFont].width > fontLabelRect.size.width) {
             titleFont = [UIFont fontWithName:titleFont.fontName size:titleFont.pointSize-1];

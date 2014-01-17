@@ -70,6 +70,7 @@
     label.text = text;
     label.font = font;
     label.textColor = [UIColor whiteColor];
+    label.backgroundColor = [UIColor clearColor];
     
     [self addSubview:label];
     self.label = label;

@@ -48,7 +48,7 @@
 
 -(void)loadBackground
 {
-    UIImage *backgroundImage = /*[self isAlreadyLogin] ? REMIMG_MapBlur : */REMLoadImageResource(@"SplashScreenBackgroud", @"jpg");
+    UIImage *backgroundImage = REMIMG_SplashScreenBackgroud; ///*[self isAlreadyLogin] ? REMIMG_MapBlur : */REMLoadImageResource(@"SplashScreenBackgroud", @"jpg");
     
     UIImageView *background = [[UIImageView alloc] initWithImage:backgroundImage];
     background.frame = REMISIOS7 ? CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight) : CGRectMake(0, -20, kDMScreenWidth, kDMScreenHeight);
