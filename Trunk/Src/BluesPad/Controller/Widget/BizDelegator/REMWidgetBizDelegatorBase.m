@@ -113,7 +113,11 @@
 -(void)releaseChart{}
 
 - (void)rollbackWithError:(REMBusinessErrorInfo *)error{
-    
+    NSString *showText= [self processServerError:error.code];
+    if (showText == nil) {
+        return;
+    }
+    [self showPopupMsg:showText];
 }
 - (void)mergeTempModel{
     NSMutableArray *searchTimeRange=[NSMutableArray array];
@@ -156,11 +160,7 @@
                 }
                 else{
                     
-                    NSString *showText= [self processServerError:error.code];
-                    if (showText == nil) {
-                        return;
-                    }
-                    [self showPopupMsg:showText];
+                    
                     
                     [self rollbackWithError:error];
                 }

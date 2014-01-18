@@ -260,6 +260,7 @@ const static CGFloat widgetGap=20;
         }
         else{
             [self.stopTimer invalidate];
+            //NSLog(@"invalidate:%@",self.stopTimer);
             addIndex=YES;
         }
         self.cumulateX=0;
@@ -288,9 +289,11 @@ const static CGFloat widgetGap=20;
                     
                 }completion:^(BOOL finished){
                     [self.stopTimer invalidate];
-                    NSTimer *timer = [NSTimer timerWithTimeInterval:0.3 target:self selector:@selector(stopCoverPage:) userInfo:@{@"direction":@(sign)} repeats:NO];
+                    //NSLog(@"before new timer:%@",self.stopTimer);
+                    NSTimer *timer = [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(stopCoverPage:) userInfo:@{@"direction":@(sign)} repeats:NO];
                     NSRunLoop *current=[NSRunLoop currentRunLoop];
                     [current addTimer:timer forMode:NSDefaultRunLoopMode];
+                    //NSLog(@"timer:%@",timer);
                     self.stopTimer = timer;
                 }];
             }
@@ -302,7 +305,7 @@ const static CGFloat widgetGap=20;
 
 
 - (void)stopCoverPage:(NSTimer *)timer{
-    //NSLog(@"currentIndex:%d",self.currentIndex);
+    //NSLog(@"stop timer:%@",timer);
     
     REMWidgetDetailViewController *current=self.childViewControllers[self.currentWidgetIndex];
     [current showChart];

@@ -314,6 +314,11 @@
         if (self.ownerController.serverError == nil) {
             [self search];
         }
+        else{
+            if([self.ownerController.serverError.code isEqualToString:@"990001202004"]==YES){ //step error
+                [self processStepErrorWithAvailableStep:self.ownerController.serverError.messages[0]];
+            }
+        }
     }
 }
 
@@ -751,8 +756,10 @@
     [self search];
 }
 
+
 - (void)rollbackWithError:(REMBusinessErrorInfo *)error
 {
+    [super rollbackWithError:error];
     if([error.code isEqualToString:@"990001202004"]==YES){ //step error
         [self processStepErrorWithAvailableStep:error.messages[0]];
     }
