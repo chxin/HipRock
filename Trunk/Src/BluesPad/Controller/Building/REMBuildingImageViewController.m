@@ -429,8 +429,20 @@
         
         [store access:^(NSData *data){
             if(data == nil || [data length] == 2) return;
-            UIImage *view = [self getCachedImage:data];
-            [self loadImageViewByImage:view];
+            if (self.cropTitleView!=nil) {
+                [self.cropTitleView removeFromSuperview];
+                self.cropTitleView=nil;
+            }
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                UIImage *view = [self getCachedImage:data];
+                UIImageView *blurView=[[UIImageView alloc]initWithImage:view];
+                [self blurredImageView:blurView];
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                   [self loadImageViewByImage:view];
+                });
+            });
+            
         }];
     
     }
