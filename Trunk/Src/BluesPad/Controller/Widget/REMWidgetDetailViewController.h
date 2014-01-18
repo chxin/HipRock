@@ -21,7 +21,7 @@
 @property (nonatomic,weak) UIView *titleContainer;
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 @property (nonatomic,weak) REMDashboardObj *dashboardInfo;
-@property (nonatomic) BOOL hasServerError;
+@property (nonatomic,strong) REMBusinessErrorInfo *serverError;
 
 - (void)showChart;
 -(void)releaseChart;

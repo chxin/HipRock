@@ -26,9 +26,9 @@
         if (order == nil || order == NULL || [order isEqual:[NSNull null]]) {
             self.rankingSortOrder = NSOrderedSame;
         } else if (order.intValue == 2) {
-            self.rankingSortOrder = NSOrderedDescending;
-        } else {
             self.rankingSortOrder = NSOrderedAscending;
+        } else {
+            self.rankingSortOrder = NSOrderedDescending;
         }
         NSNumber* rangeCode = diagramConfig[@"rangeCode"];
         if (rangeCode == nil || rangeCode == NULL || [rangeCode isEqual:[NSNull null]]) {

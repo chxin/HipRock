@@ -84,7 +84,7 @@ const static CGFloat widgetGap=20;
         sub.energyData=cellController.chartData;
         sub.buildingInfo=self.buildingInfo;
         sub.dashboardInfo=self.dashboardInfo;
-        sub.hasServerError=cellController.hasServerError;
+        sub.serverError=cellController.serverError;
         [self addChildViewController:sub];
         if (i==self.currentWidgetIndex) {
             UIView *view = sub.view;
@@ -306,7 +306,7 @@ const static CGFloat widgetGap=20;
     
     REMWidgetDetailViewController *current=self.childViewControllers[self.currentWidgetIndex];
     [current showChart];
-    
+    /*
     if(self.currentWidgetIndex<self.childViewControllers.count){
         NSInteger sign=[timer.userInfo[@"direction"] integerValue];
         NSNumber *willIndex= @(self.currentWidgetIndex-1*sign);
@@ -319,7 +319,7 @@ const static CGFloat widgetGap=20;
        
         [vc showChart];
         
-    }
+    }*/
     
 }
 

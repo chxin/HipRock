@@ -138,6 +138,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
 
 
 - (void)showChart{
+    [super showChart];
     if(self.energyData!=nil){
         [self showEnergyChart];
     }
@@ -177,7 +178,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
 }
 
 - (void)search{
-    [self searchData:self.model];
+    [self searchData:self.tempModel];
 }
 
 - (void) setDatePickerButtonValueNoSearchByTimeRange:(REMTimeRange *)range withStep:(REMEnergyStep)step
@@ -187,7 +188,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
         text=[REMTimeHelper formatTimeFullYear:range.startTime];
     }
     [self.timePickerButton setTitle:text forState:UIControlStateNormal];
-    REMWidgetLabellingSearchModel *labellingModel=(REMWidgetLabellingSearchModel *)self.model;
+    REMWidgetLabellingSearchModel *labellingModel=(REMWidgetLabellingSearchModel *)self.tempModel;
     [labellingModel setTimeRangeItem:range AtIndex:0];
     
     labellingModel.step=step;
@@ -208,7 +209,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     REMWidgetMonthPickerViewController *dateViewController=nav.childViewControllers[0];
     dateViewController.popSize=CGSizeMake(300, 250);
 
-    REMWidgetLabellingSearchModel *labellingModel=(REMWidgetLabellingSearchModel *)self.model;
+    REMWidgetLabellingSearchModel *labellingModel=(REMWidgetLabellingSearchModel *)self.tempModel;
     
     dateViewController.timeRange=labellingModel.timeRangeArray[0];
     dateViewController.step=labellingModel.step;

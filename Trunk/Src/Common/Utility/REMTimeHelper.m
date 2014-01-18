@@ -499,7 +499,7 @@ static NSDateFormatter *_localFormatter;
 
 + (NSString *)formatTimeRangeFullDay:(REMTimeRange *)range{
     NSString *start=[REMTimeHelper formatTimeFullDay:range.startTime isChangeTo24Hour:NO];
-    NSString *end =[REMTimeHelper formatTimeFullDay:range.startTime isChangeTo24Hour:YES];
+    NSString *end =[REMTimeHelper formatTimeFullDay:range.endTime isChangeTo24Hour:YES];
     return [NSString stringWithFormat:@"%@ -- %@",start,end];
 }
 

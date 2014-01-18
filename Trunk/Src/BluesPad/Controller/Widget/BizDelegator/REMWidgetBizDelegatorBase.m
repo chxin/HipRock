@@ -101,6 +101,12 @@
     if (self.energyData) {
         [self processEnergyDataInnerError:self.energyData];
     }
+    if (self.ownerController.serverError!=nil) {
+        NSString *showText=[self processServerError:self.ownerController.serverError.code];
+        if (showText!=nil) {
+            [self showPopupMsg:showText];
+        }
+    }
     
 }
 
@@ -149,6 +155,13 @@
                     [self rollbackWithError:bizInfo];
                 }
                 else{
+                    
+                    NSString *showText= [self processServerError:error.code];
+                    if (showText == nil) {
+                        return;
+                    }
+                    [self showPopupMsg:showText];
+                    
                     [self rollbackWithError:error];
                 }
             }
@@ -157,14 +170,22 @@
 
 }
 
+- (NSString *)processServerError:(NSString *)errorCode {
+    NSString *errorCode1= [errorCode substringFromIndex:7];
+    errorCode1=[NSString stringWithFormat:@"Energy_%@",errorCode1];
+    NSString *showText= NSLocalizedString(errorCode1, @"");
+    if ([errorCode1 isEqualToString:showText]==YES) {
+        return nil;
+    }
+    return showText;
+}
+
 - (void)processEnergyDataInnerError:(REMEnergyViewData *)data{
     if (data.error!=nil && [data.error isEqual:[NSNull null]]==NO && data.error.count>0) {
         REMEnergyError *error= data.error[0];
         if (error!=nil && [error isEqual:[NSNull null]]==NO) {
-            NSString *errorCode= [error.errorCode substringFromIndex:7];
-            errorCode=[NSString stringWithFormat:@"Energy_%@",errorCode];
-            NSString *showText= NSLocalizedString(errorCode, @"");
-            if ([errorCode isEqualToString:showText]==YES) {
+            NSString *showText= [self processServerError:error.errorCode];
+            if (showText == nil) {
                 return;
             }
             if (error.params!=nil && [error.params isEqual:[NSNull null]]==NO && error.params.count>0) {
@@ -176,6 +197,7 @@
 }
 
 - (void) showPopupMsg:(NSString *)msg{
+    [self hidePopupMsg];
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectZero];
     label.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:20];
     [label setBackgroundColor:[UIColor grayColor]];

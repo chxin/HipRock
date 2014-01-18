@@ -20,5 +20,5 @@
 
 @property (nonatomic,strong) REMEnergyViewData *chartData;
 @property (nonatomic) CGRect viewFrame;
-@property (nonatomic) BOOL hasServerError;
+@property (nonatomic,strong) REMBusinessErrorInfo *serverError;
 @end

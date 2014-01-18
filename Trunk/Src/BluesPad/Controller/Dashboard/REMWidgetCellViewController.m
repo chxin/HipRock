@@ -187,7 +187,7 @@
     searcher.loadingView=self.loadingView;
     [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:self.searchModel withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *errorInfo){
         if (data==nil) {
-            self.hasServerError=YES;
+            self.serverError=errorInfo;
         }
         else{
             self.chartData = data;

@@ -311,7 +311,7 @@
         [self showEnergyChart];
     }
     else{
-        if (self.ownerController.hasServerError == NO) {
+        if (self.ownerController.serverError == nil) {
             [self search];
         }
     }

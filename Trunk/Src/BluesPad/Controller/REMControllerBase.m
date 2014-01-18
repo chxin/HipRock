@@ -55,7 +55,7 @@
     }
     [button setImage:[UIImage imageNamed:@"Setting"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [button setFrame:CGRectMake(967, REMDMCOMPATIOS7(kDMCommon_TopLeftButtonTop), kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonWidth)];
+    [button setFrame:CGRectMake(967, REMDMCOMPATIOS7(kDMCommon_TopLeftButtonTop), kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonHeight)];
     return button;
 }
 
