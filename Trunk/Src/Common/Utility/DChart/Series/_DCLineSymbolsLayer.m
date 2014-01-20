@@ -85,11 +85,15 @@
     CGContextSetLineCap(ctx , kCGLineCapRound);
     CGContextSetBlendMode(ctx, kCGBlendModeNormal);
     CGContextSetAllowsAntialiasing(ctx, YES);
-    CGFloat lineAlpha = (self.graphContext.focusX == INT32_MIN) ? 1: kDCUnfocusPointSymbolAlph;
     CGPoint linePoints[end-start+2];
     for (DCLineSeries* s in self.series) {
         if (s.hidden) continue;
         if (start >= s.datas.count) continue;
+        
+        CGFloat r, g, b, a;
+        [s.color getRed:&r green:&g blue:&b alpha:&a];
+        CGFloat lineAlpha = (self.graphContext.focusX == INT32_MIN) ? a: kDCUnfocusPointSymbolAlph*a;
+        
         int loopEnd = s.datas.count-1;
         if (end < loopEnd) loopEnd = end;
         
@@ -152,7 +156,6 @@
         for (int j = start; j<=end; j++) {
             if (s.symbolType == DCLineSymbolTypeNone || s.symbolSize == 0) continue;
             if (j >= s.datas.count) continue;
-            
             DCDataPoint* key = s.datas[j];
             CGRect toFrame = CGRectMake(plotRect.size.width*(j+pointXOffset-self.graphContext.hRange.location)/self.graphContext.hRange.length-s.symbolSize/2, plotRect.size.height-[self getHeightOfPoint:key heightUnit:s.coordinate.heightUnitInScreen]-s.symbolSize/2, s.symbolSize, s.symbolSize);
             BOOL isRectVisable = [DCUtility isFrame:toFrame visableIn:self.bounds] && (key.value != nil) && ![key.value isEqual:[NSNull null]];
@@ -161,9 +164,9 @@
                 CGFloat symbolAlpha = 0;
                 CGFloat halfSize = s.symbolSize / 2;
                 if (j == self.graphContext.focusX || self.graphContext.focusX == INT32_MIN)
-                    symbolAlpha = kDCSymbolAlpha;
+                    symbolAlpha = kDCSymbolAlpha*a;
                 else
-                    symbolAlpha = kDCUnfocusPointSymbolAlph;
+                    symbolAlpha = kDCUnfocusPointSymbolAlph*a;
                 
                 CGContextSetRGBFillColor(ctx, r, g, b, symbolAlpha);
                 CGMutablePathRef path = CGPathCreateMutable();
