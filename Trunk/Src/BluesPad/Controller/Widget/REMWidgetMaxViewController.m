@@ -84,6 +84,7 @@ const static CGFloat widgetGap=20;
         sub.energyData=cellController.chartData;
         sub.buildingInfo=self.buildingInfo;
         sub.dashboardInfo=self.dashboardInfo;
+        sub.hasServerError=cellController.hasServerError;
         [self addChildViewController:sub];
         if (i==self.currentWidgetIndex) {
             UIView *view = sub.view;
@@ -137,7 +138,7 @@ const static CGFloat widgetGap=20;
         
         [self.view addSubview:sub.view];
         
-        if(i==self.currentWidgetIndex || i==(self.currentWidgetIndex-1) || i == (self.currentWidgetIndex+1)){
+        if(i==self.currentWidgetIndex /*|| i==(self.currentWidgetIndex-1) || i == (self.currentWidgetIndex+1)*/){
             [sub showChart];
         }
         

@@ -186,7 +186,12 @@
     REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType withWidgetInfo:self.widgetInfo];
     searcher.loadingView=self.loadingView;
     [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:self.searchModel withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *errorInfo){
-        self.chartData = data;
+        if (data==nil) {
+            self.hasServerError=YES;
+        }
+        else{
+            self.chartData = data;
+        }
         if(self.isViewLoaded==YES){
             [self generateChart];
         }

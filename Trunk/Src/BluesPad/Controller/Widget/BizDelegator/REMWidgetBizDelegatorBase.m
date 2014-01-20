@@ -134,7 +134,7 @@
             
         }
         else{
-            if (error == nil) { //timeout
+            if (error == nil) { //timeout or server error
                 REMBusinessErrorInfo *bizInfo=[[REMBusinessErrorInfo alloc]init];
                 bizInfo.code=@"timeout";
                 [self rollbackWithError:bizInfo];
