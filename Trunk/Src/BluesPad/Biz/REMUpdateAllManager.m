@@ -273,32 +273,17 @@ static NSString *customerUpdateAll=@"customerupdateall";
 
 
 - (void)logout{
-    REMApplicationContext *context=REMAppContext;
-    REMUserModel *currentUser = context.currentUser;
-    REMCustomerModel *currentCustomer = context.currentCustomer;
-    self.tableViewController=nil;
-    
-    [currentUser kill];
-    [currentCustomer kill];
-    currentUser = nil;
-    currentCustomer = nil;
-    
-    
-    
-    [REMApplicationContext destroy];
     
     REMMainNavigationController *mainController=self.mainNavigationController;
-    //NSLog(@"child controllers before: %d", nav.childViewControllers.count);
-    [mainController dismissViewControllerAnimated:YES completion:^(void){
-        //self.view = nil;
-        //[nav popToRootViewControllerAnimated:NO];
-        //NSLog(@"child controllers after: %d", nav.childViewControllers.count);
-        context.updateManager=nil;
-        [mainController logout:nil];
-        
-        [REMStorage clearSessionStorage];
-        [REMStorage clearOnApplicationActive];
-    }];
+    
+    void (^completion)(void) = ^(void){ [mainController logout]; };
+    
+    if(mainController.presentedViewController != nil){
+        [mainController dismissViewControllerAnimated:YES completion:completion];
+    }
+    else{
+        completion();
+    }
 }
 
 - (void)customerSelectionTableView:(UITableView *)table didSelectCustomer:(REMCustomerModel *)customer
