@@ -144,7 +144,9 @@
         [self.rankingLabel hideLoading];
         [self addDataLabel];
     } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
-        
+        [self.totalLabel hideLoading];
+        [self.carbonLabel hideLoading];
+        [self.rankingLabel hideLoading];
     }];
 }
 
