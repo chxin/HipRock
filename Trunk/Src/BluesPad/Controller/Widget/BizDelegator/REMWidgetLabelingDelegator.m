@@ -159,7 +159,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
     DCLabelingWrapper  *widgetWrapper;
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]init];
-    wrapperConfig.timeRangeArray=self.model.timeRangeArray;
+    wrapperConfig.multiTimeSpans=self.model.timeRangeArray;
     if ([self.model isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
         REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
         wrapperConfig.stacked=NO;

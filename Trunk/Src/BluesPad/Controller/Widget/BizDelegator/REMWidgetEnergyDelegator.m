@@ -456,7 +456,7 @@
         wrapperConfig.step=stepModel.step;
         wrapperConfig.benckmarkText=stepModel.benchmarkText;
         wrapperConfig.relativeDateType=stepModel.relativeDateType;
-        wrapperConfig.timeRangeArray=stepModel.timeRangeArray;
+        wrapperConfig.multiTimeSpans=stepModel.timeRangeArray;
     }
     
     if (widgetType == REMDiagramTypeLine) {
