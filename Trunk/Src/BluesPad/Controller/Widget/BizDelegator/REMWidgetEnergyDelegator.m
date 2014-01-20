@@ -169,7 +169,7 @@
     
     [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];
     //[timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-100)];
-    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, -8, 0, 0)];
+    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, -4, 0, 0)];
     //timePickerButton.layer.borderColor=[UIColor redColor].CGColor;
     //timePickerButton.layer.borderWidth=1;
     timePickerButton.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetDatePickerTitleSize];

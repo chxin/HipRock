@@ -319,7 +319,7 @@
     self.dashboardLabel=label;
     
     
-    CGRect imgFrame=CGRectMake(178, scroll.contentSize.height-25-REMDMCOMPATIOS7(10), 30, 30);
+    CGRect imgFrame=CGRectMake(178, scroll.contentSize.height-20-REMDMCOMPATIOS7(10), 15, 20);
     UIImageView *arrow=[[UIImageView alloc]initWithImage:REMIMG_Up];
     [arrow setFrame:imgFrame];
     [self.view addSubview:arrow];

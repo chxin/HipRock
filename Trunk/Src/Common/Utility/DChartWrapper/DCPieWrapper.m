@@ -7,6 +7,7 @@
 //
 
 #import "DCPieWrapper.h"
+#import "DCUtility.h"
 @interface DCPieWrapper()
 @property (nonatomic,assign) int focusIndex;
 @end
@@ -63,7 +64,10 @@
 
 -(void)touchBegan {
     self.chartStatus = DChartStatusFocus;
-    [self.view setIndicatorHidden:NO];
+    [DCUtility runFunction:^(void){
+        [self.view setIndicatorHidden:NO];
+    } withDelay:0.5];
+    
 }
 
 -(void)cancelToolTipStatus {

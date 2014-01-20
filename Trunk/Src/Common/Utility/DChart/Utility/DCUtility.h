@@ -27,4 +27,5 @@ typedef struct _DCYAxisIntervalCalculation {
 +(double)getScreenXIn:(CGRect)plotRect xVal:(double)xValue hRange:(DCRange*)hRange;
 +(double)getScreenYIn:(CGRect)plotRect yVal:(double)yValue vRange:(DCRange*)vRange;
 +(void)drawText:(NSString*)text inContext:(CGContextRef)ctx font:(UIFont*)font rect:(CGRect)rect alignment:(NSTextAlignment)alignment lineBreak:(NSLineBreakMode)lineBreak color:(UIColor*)color;
++(void)runFunction:(void (^)())fn withDelay:(double)delay;
 @end
