@@ -41,8 +41,10 @@
         NSDictionary* dic = [self updateProcessorRangesFormatter:wrapperConfig.step];
         _myStableRange = dic[@"beginRange"];
         [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:wrapperConfig.step];
-        for (DCXYSeries* s in self.view.seriesList) {
-            if (s.hidden) [self addHiddenTarget:s.target];
+        
+        for (NSUInteger i = 0; i < self.view.seriesList.count; i++) {
+            DCXYSeries* s = self.view.seriesList[i];
+            if (s.hidden) [self addHiddenTarget:s.target index:i];
         }
         [self updateCalender];
     }
@@ -299,9 +301,9 @@
     if (REMIsNilOrNull(series.target)) return;
     
     if (hidden) {
-        [self addHiddenTarget:series.target];
+        [self addHiddenTarget:series.target index:seriesIndex];
     } else {
-        [self removeHiddenTarget:series.target];
+        [self removeHiddenTarget:series.target index:seriesIndex];
     }
 }
 
@@ -320,9 +322,10 @@
     
     _myStableRange = dic[@"beginRange"];
     [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:step];
-    for(DCXYSeries* s in self.view.seriesList) {
+    for(NSUInteger i = 0; i < self.view.seriesList.count; i++) {
+        DCXYSeries* s = self.view.seriesList[i];
         if (REMIsNilOrNull(s.target)) continue;
-        s.hidden = [self isTargetHidden:s.target];
+        s.hidden = [self isTargetHidden:s.target index:i];
     }
     [superView addSubview:self.view];
     [self updateCalender];

@@ -22,8 +22,8 @@
 
 @property (nonatomic, strong) NSString* benckmarkText; // Labeling
 
-@property (nonatomic,strong)  NSArray *timeRangeArray;
-
+@property (nonatomic, strong) NSArray* multiTimeSpans;  // 多时间段比较的每个序列的总体时间区间
+@property (nonatomic, assign) BOOL isMultiTimeChart;
 
 @property (nonatomic) REMRelativeTimeRangeType relativeDateType; // Cover用电趋势图
 

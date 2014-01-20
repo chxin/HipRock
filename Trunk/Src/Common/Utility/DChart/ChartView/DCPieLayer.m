@@ -43,7 +43,7 @@ const double kDCPiePercentageTextThreshold = 0.05; // 百分比低于这个值�
             CGContextAddArc(ctx, center.x, center.y, self.view.radius, startAnglePI, pieSlicePI+startAnglePI, 0);
             CGContextDrawPath(ctx, kCGPathFill);
             
-            if (!self.view.chartStyle.piePercentageTextHidden && !self.percentageTextHidden && pointValue / sum >= kDCPiePercentageTextThreshold) {
+            if (!self.view.chartStyle.piePercentageTextHidden && !self.percentageTextHidden && pointValue / sum > kDCPiePercentageTextThreshold) {
                 CGContextSaveGState(ctx);
                 CGFloat centerAngle = startAnglePI + pieSlicePI / 2;
                 CGPoint textCenter;
