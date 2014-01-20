@@ -44,7 +44,7 @@
 #define kDMCommon_TopLeftButtonWidth 26
 #define kDMCommon_TopLeftButtonHeight 32
 
-#define kDMCommon_CustomerLogoLeft kDMCommon_TopLeftButtonLeft + kDMCommon_TopLeftButtonWidth + 4
+#define kDMCommon_CustomerLogoLeft kDMCommon_TopLeftButtonLeft + kDMCommon_TopLeftButtonWidth + 8
 
 #define kDMCommon_CustomerLogoTop 18
 

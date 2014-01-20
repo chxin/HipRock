@@ -64,7 +64,7 @@ static NSString *cellId=@"dashboardcell";
     [self.tableView addSubview:label];
     self.buildingLabel=label;
     
-    CGRect imgFrame=CGRectMake(178, kDashboardDragTitleMargin-8, 30, 30);
+    CGRect imgFrame=CGRectMake(178, kDashboardDragTitleMargin-2,  15, 20);
     UIImageView *arrow=[[UIImageView alloc]initWithImage:REMIMG_Down];
     [arrow setFrame:imgFrame];
     [self.tableView addSubview:arrow];
