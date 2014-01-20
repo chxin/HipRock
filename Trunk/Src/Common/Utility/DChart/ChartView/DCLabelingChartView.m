@@ -115,9 +115,14 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         [self hideStageTooltip];
     }
     if (touchLevel) {
-        self.indicatorLayer.hidden = NO;
         CGFloat centerX = [self.labelBezierPathsCenterX[levelIndex] doubleValue];
-        self.indicatorLayer.frame = CGRectMake(centerX - self.style.focusSymbolIndicatorSize / 2, self.indicatorLayer.frame.origin.y, self.indicatorLayer.frame.size.width, self.indicatorLayer.frame.size.height);
+        CGRect indicatorFrame = CGRectMake(centerX - self.style.focusSymbolIndicatorSize / 2, self.indicatorLayer.frame.origin.y, self.indicatorLayer.frame.size.width, self.indicatorLayer.frame.size.height);
+        self.indicatorLayer.frame = indicatorFrame;
+        if (self.indicatorLayer.hidden) {
+            [DCUtility runFunction:^(void){
+                self.indicatorLayer.hidden = NO;
+            }withDelay:0.5];
+        }
         if (!REMIsNilOrNull(self.delegate) && [self.delegate respondsToSelector:@selector(focusOn:)]) {
             if (levelIndex != self.focusLabelIndex) {
                 self.focusLabelIndex = levelIndex;

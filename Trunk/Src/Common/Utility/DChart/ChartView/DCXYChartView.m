@@ -468,12 +468,16 @@
     if (xRounded > globalEndFloor) xRounded = globalEndFloor;
     
     if (xRounded != self.graphContext.focusX) {
+        double delay = 0;
+        if (self.graphContext.focusX == INT32_MIN) delay = 0.5;
         self.graphContext.focusX = xRounded;
         for (_DCColumnsLayer* columnLayer in self.columnLayers) {
             [columnLayer setNeedsDisplay];
         }
         if (self.indicatorLayer) {
-            [self.indicatorLayer setNeedsDisplay];
+            [DCUtility runFunction:^(void){
+                [self.indicatorLayer setNeedsDisplay];
+            } withDelay:delay];
         }
         
         if (self.delegate && [self.delegate respondsToSelector:@selector(focusPointChanged:at:)]) {
