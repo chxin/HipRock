@@ -78,15 +78,6 @@
         if(buildingInfoArray != nil){
             callback =^{ [self updateView]; };
         }
-        else{
-//            if(errorStatus == REMDataAccessFailed){
-//                [REMAlertHelper alert:@"Failed"];
-//            }
-//            
-//            if(errorStatus == REMDataAccessErrorMessage){
-//                [REMAlertHelper alert:@"Error"];
-//            }
-        }
         
         [mask hide:callback];
     }];
@@ -181,7 +172,7 @@
     }
     
     if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
-        [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
     }
 }
 

@@ -23,7 +23,7 @@
 		<key>test</key>
 		<dict>
 			<key>url</key>
-			<string>http://112.124.56.137/v1.5.0.9/Mobile/MobileApiHost/</string>
+			<string>http://112.124.56.137/v1.5.0.11/Mobile/MobileApiHost/</string>
 			<key>debug-user</key>
 			<string>SchneiderElectricChina|P@ssw0rdChina</string>
 		</dict>

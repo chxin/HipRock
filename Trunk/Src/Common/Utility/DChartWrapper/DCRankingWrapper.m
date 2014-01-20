@@ -52,6 +52,10 @@
 -(void)customizeView:(DCXYChartView*)view {
     view.graphContext.pointAlignToTick = NO;
     view.graphContext.xLabelAlignToTick = NO;
+    REMTargetEnergyData* t = nil;
+    if (!REMIsNilOrNull(self.energyViewData) && self.energyViewData.targetEnergyData.count > 0) t = self.energyViewData.targetEnergyData[0];
+    if (!REMIsNilOrNull(t) && !REMIsNilOrNull(t.target) && !(REMIsNilOrNull(t.target.uomName)))
+        ((DCAxis*)view.yAxisList[0]).axisTitle = t.target.uomName;
 }
 
 -(NSArray*)createYAxes:(NSArray*)series {

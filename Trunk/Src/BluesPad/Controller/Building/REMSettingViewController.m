@@ -195,27 +195,11 @@
 
 -(void)logoutAndClearCache
 {
-    REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
-    REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
-    
-    [currentUser kill];
-    [currentCustomer kill];
-    currentUser = nil;
-    currentCustomer = nil;
-    
-    [REMApplicationContext destroy];
-    
     UINavigationController *nav=(UINavigationController *)self.parentViewController;
     REMMainNavigationController *mainController=(REMMainNavigationController *)nav.presentingViewController;
-    //NSLog(@"child controllers before: %d", nav.childViewControllers.count);
+    
     [mainController dismissViewControllerAnimated:YES completion:^(void){
-        //self.view = nil;
-        //[nav popToRootViewControllerAnimated:NO];
-        //NSLog(@"child controllers after: %d", nav.childViewControllers.count);
-        [mainController logout:nil];
-        
-        [REMStorage clearSessionStorage];
-        [REMStorage clearOnApplicationActive];
+        [mainController logout];
     }];
 }
 
