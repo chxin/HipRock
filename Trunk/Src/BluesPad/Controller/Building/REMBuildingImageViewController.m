@@ -266,7 +266,7 @@
         shareButton=[UIButton buttonWithType:UIButtonTypeSystem];
         [shareButton setTintColor:[UIColor whiteColor]];
     }
-    [shareButton setFrame:CGRectMake(settingButton.frame.origin.x-kDMCommon_TopLeftButtonWidth-10, backButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonWidth)];
+    [shareButton setFrame:CGRectMake(settingButton.frame.origin.x-kDMCommon_TopLeftButtonWidth-10, backButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonHeight)];
     [shareButton setImage:REMIMG_Share_normal forState:UIControlStateNormal];
     //if (self.buildingInfo.commodityUsage.count == 0) {
     shareButton.enabled = NO;
@@ -321,7 +321,7 @@
     
     
     UIImageView *logoView = [[UIImageView alloc] initWithImage:REMAppContext.currentCustomerLogo];
-    [logoView setFrame:CGRectMake(self.backButton.frame.origin.x+self.backButton.frame.size.width, kDMCommon_CustomerLogoTop, logoView.frame.size.width, logoView.frame.size.height)];
+    [logoView setFrame:CGRectMake(kDMCommon_CustomerLogoLeft, kDMCommon_CustomerLogoTop, logoView.frame.size.width, logoView.frame.size.height)];
     logoView.contentMode = UIViewContentModeScaleAspectFit;
     
     //[logoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
