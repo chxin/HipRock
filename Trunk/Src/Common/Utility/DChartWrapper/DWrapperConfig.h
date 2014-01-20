@@ -22,6 +22,8 @@
 
 @property (nonatomic, strong) NSString* benckmarkText; // Labeling
 
+@property (nonatomic,strong)  NSArray *timeRangeArray;
+
 
 @property (nonatomic) REMRelativeTimeRangeType relativeDateType; // Cover用电趋势图
 
