@@ -14,6 +14,7 @@
     if (self) {
         _stacked = NO;
         _isUnitOrRatioChart = NO;
+        _isMultiTimeChart = NO;
     }
     return self;
 }
@@ -26,6 +27,7 @@
         _rankingRangeCode=widgetObj.contentSyntax.rankingRangeCode;
         REMDataStoreType storeType = widgetObj.contentSyntax.dataStoreType;
         _isUnitOrRatioChart = (storeType==REMDSEnergyTagsTrendUnit || storeType==REMDSEnergyCarbonUnit || storeType==REMDSEnergyCostUnit || storeType==REMDSEnergyRatio);
+        _isMultiTimeChart = (storeType == REMDSEnergyMultiTimeTrend || storeType == REMDSEnergyMultiTimeDistribute);
     }
     return self;
 }

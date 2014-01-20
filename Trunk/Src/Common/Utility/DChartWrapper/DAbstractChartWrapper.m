@@ -52,6 +52,7 @@
         _style = style;
         _chartStatus = DChartStatusNormal;
         _hiddenTargets = [[NSMutableArray alloc]init];
+        _isMultiTimeChart = wrapperConfig.isMultiTimeChart;
     }
     return self;
 }
@@ -77,26 +78,48 @@
     
 }
 
--(BOOL) isTargetHidden:(REMEnergyTargetModel*)target {
+-(BOOL) isTargetHidden:(REMEnergyTargetModel*)target index:(NSUInteger)index {
     BOOL isHidden = NO;
-    for (DCHiddenSeries* hs in self.hiddenTargets) {
-        if ([hs isSameTargetWith:target]) {
-            isHidden = YES;
-            break;
+    if (self.isMultiTimeChart) {
+        for (NSNumber* hIndex in self.hiddenTargets) {
+            if (hIndex.integerValue == index) {
+                isHidden = YES;
+                break;
+            }
+        }
+    } else {
+        for (DCHiddenSeries* hs in self.hiddenTargets) {
+            if ([hs isSameTargetWith:target]) {
+                isHidden = YES;
+                break;
+            }
         }
     }
     return isHidden;
 }
 
--(void)addHiddenTarget:(REMEnergyTargetModel*)target {
-    [self.hiddenTargets addObject:[[DCHiddenSeries alloc] initWithTarget:target]];
+-(void)addHiddenTarget:(REMEnergyTargetModel*)target index:(NSUInteger)index {
+    if (self.isMultiTimeChart) {
+        [self.hiddenTargets addObject:@(index)];
+    } else {
+        [self.hiddenTargets addObject:[[DCHiddenSeries alloc] initWithTarget:target]];
+    }
 }
 
--(void)removeHiddenTarget:(REMEnergyTargetModel*)target {
-    for (DCHiddenSeries* hs in self.hiddenTargets) {
-        if ([hs isSameTargetWith:target]) {
-            [self.hiddenTargets removeObject:hs];
-            break;
+-(void)removeHiddenTarget:(REMEnergyTargetModel*)target index:(NSUInteger)index {
+    if (self.isMultiTimeChart) {
+        for (NSNumber* hIndex in self.hiddenTargets) {
+            if (hIndex.integerValue == index) {
+                [self.hiddenTargets removeObject:hIndex];
+                break;
+            }
+        }
+    } else {
+        for (DCHiddenSeries* hs in self.hiddenTargets) {
+            if ([hs isSameTargetWith:target]) {
+                [self.hiddenTargets removeObject:hs];
+                break;
+            }
         }
     }
 }

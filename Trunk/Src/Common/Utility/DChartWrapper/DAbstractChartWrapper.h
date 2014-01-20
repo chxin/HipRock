@@ -24,6 +24,7 @@ typedef enum _DChartStatus {
 @property (nonatomic, readonly, weak) REMEnergyViewData* energyViewData;
 @property (nonatomic, readonly) REMChartStyle* style;
 @property (nonatomic, assign) DChartStatus chartStatus;
+@property (nonatomic, assign, readonly) BOOL isMultiTimeChart;
 
 -(void)cancelToolTipStatus;
 -(void)redraw:(REMEnergyViewData *)energyViewData;
@@ -32,8 +33,8 @@ typedef enum _DChartStatus {
 -(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden;
 -(NSUInteger)getVisableSeriesCount;
 
--(void)addHiddenTarget:(REMEnergyTargetModel*)target;
--(void)removeHiddenTarget:(REMEnergyTargetModel*)target;
--(BOOL) isTargetHidden:(REMEnergyTargetModel*)target;
+-(void)addHiddenTarget:(REMEnergyTargetModel*)target index:(NSUInteger)index;
+-(void)removeHiddenTarget:(REMEnergyTargetModel*)target index:(NSUInteger)index;
+-(BOOL) isTargetHidden:(REMEnergyTargetModel*)target index:(NSUInteger)index;
 
 @end

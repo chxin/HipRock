@@ -39,9 +39,10 @@
         [series0Data addObject:p];
     }
     DCPieSeries* series = [[DCPieSeries alloc]initWithEnergyData:series0Data];
-    for(DCPieDataPoint* slice in series.datas) {
+    for(NSUInteger i = 0; i < series.datas.count; i++) {
+        DCPieDataPoint* slice = series.datas[i];
         if (REMIsNilOrNull(slice.target)) continue;
-        slice.hidden = [self isTargetHidden:slice.target];
+        slice.hidden = [self isTargetHidden:slice.target index:i];
     }
     _view = [[DCPieChartView alloc]initWithFrame:frame series:series];
     self.view.chartStyle = style;
@@ -99,9 +100,9 @@
     [self.view setSlice:slice hidden:hidden];
     if (REMIsNilOrNull(slice.target)) return;
     if (hidden) {
-        [self addHiddenTarget:slice.target];
+        [self addHiddenTarget:slice.target index:seriesIndex];
     } else {
-        [self removeHiddenTarget:slice.target];
+        [self removeHiddenTarget:slice.target index:seriesIndex];
     }
 }
 
