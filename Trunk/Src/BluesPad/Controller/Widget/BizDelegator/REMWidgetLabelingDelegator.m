@@ -159,7 +159,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
     DCLabelingWrapper  *widgetWrapper;
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]init];
-    
+    wrapperConfig.timeRangeArray=self.model.timeRangeArray;
     if ([self.model isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
         REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
         wrapperConfig.stacked=NO;
@@ -262,8 +262,8 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     if(self.tooltipView==nil)
         return;
     
+    [self.chartWrapper cancelToolTipStatus];
     [self hideTooltip:^{
-        [self.chartWrapper cancelToolTipStatus];
     }];
 }
 
@@ -282,7 +282,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
 
 -(void)hideTooltip:(void (^)(void))complete
 {
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.3 delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.tooltipView.frame = kDMChart_TooltipHiddenFrame;
     } completion:^(BOOL isCompleted){
         [self.tooltipView removeFromSuperview];

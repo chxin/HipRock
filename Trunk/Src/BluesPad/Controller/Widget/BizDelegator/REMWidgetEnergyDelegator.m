@@ -163,13 +163,18 @@
     timePickerButton.layer.borderColor=[UIColor clearColor].CGColor;
     timePickerButton.layer.borderWidth=0;
     //[timePickerButton setBackgroundColor:[REMColor colorByHexString:@"#9d9d9d"]];
-    [timePickerButton sizeToFit];
+    
     timePickerButton.layer.cornerRadius=4;
     timePickerButton.translatesAutoresizingMaskIntoConstraints=NO;
     
     [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];
+    timePickerButton.imageView.contentMode=UIViewContentModeLeft;
+    [timePickerButton.imageView setFrame:CGRectMake(timePickerButton.imageView.frame.origin.x, timePickerButton.imageView.frame.origin.y, 26, 32)];
     //[timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-100)];
-    [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, -4, 0, 0)];
+    //[timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+//    [timePickerButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    //CGSize size= [timePickerButton sizeThatFits:CGSizeMake(500, kWidgetDatePickerHeight)];
+    [timePickerButton sizeToFit];
     //timePickerButton.layer.borderColor=[UIColor redColor].CGColor;
     //timePickerButton.layer.borderWidth=1;
     timePickerButton.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetDatePickerTitleSize];
@@ -451,6 +456,7 @@
         wrapperConfig.step=stepModel.step;
         wrapperConfig.benckmarkText=stepModel.benchmarkText;
         wrapperConfig.relativeDateType=stepModel.relativeDateType;
+        wrapperConfig.timeRangeArray=stepModel.timeRangeArray;
     }
     
     if (widgetType == REMDiagramTypeLine) {
@@ -498,7 +504,7 @@
     
     
     
-    NSString *text1=[NSString stringWithFormat:@"%@ %@",relativeDate,text];
+    NSString *text1=[NSString stringWithFormat:@"  %@ %@",relativeDate,text];
     
     [self.timePickerButton setTitle:text1 forState:UIControlStateNormal];
     self.tempModel.relativeDateType=relativeType;
@@ -984,10 +990,11 @@
     if(self.tooltipView==nil)
         return;
     
+    [self.chartWrapper cancelToolTipStatus];
+    
+    [self.searchLegendViewContainer setHidden:NO];
+    
     [self hideTooltip:^{
-        [self.chartWrapper cancelToolTipStatus];
-        
-        [self.searchLegendViewContainer setHidden:NO];
     }];
 }
 
@@ -1006,7 +1013,7 @@
 
 -(void)hideTooltip:(void (^)(void))complete
 {
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.3 delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.tooltipView.frame = kDMChart_TooltipHiddenFrame;
     } completion:^(BOOL isCompleted){
         [self.tooltipView removeFromSuperview];

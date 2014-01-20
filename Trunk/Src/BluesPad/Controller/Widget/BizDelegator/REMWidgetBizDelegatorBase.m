@@ -171,13 +171,16 @@
 }
 
 - (NSString *)processServerError:(NSString *)errorCode {
-    NSString *errorCode1= [errorCode substringFromIndex:7];
-    errorCode1=[NSString stringWithFormat:@"Energy_%@",errorCode1];
-    NSString *showText= NSLocalizedString(errorCode1, @"");
-    if ([errorCode1 isEqualToString:showText]==YES) {
-        return nil;
+    if(errorCode.length>7){
+        NSString *errorCode1= [errorCode substringFromIndex:7];
+        errorCode1=[NSString stringWithFormat:@"Energy_%@",errorCode1];
+        NSString *showText= NSLocalizedString(errorCode1, @"");
+        if ([errorCode1 isEqualToString:showText]==YES) {
+            return nil;
+        }
+        return showText;
     }
-    return showText;
+    return nil;
 }
 
 - (void)processEnergyDataInnerError:(REMEnergyViewData *)data{

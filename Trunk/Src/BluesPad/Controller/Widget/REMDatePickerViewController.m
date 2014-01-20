@@ -168,6 +168,9 @@
                 }
                 UIDatePicker *picker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width+60-hourPickerWidth, cell.frame.size.height)];
                 [picker setDatePickerMode:UIDatePickerModeDate];
+
+                
+                [picker setMinimumDate:[self minDate]];
                 
                 [picker setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
                 [picker setCalendar:[REMTimeHelper currentCalendar]];
@@ -253,7 +256,23 @@
     
 }
 
+- (NSDate *)minDate{
+    NSDateComponents *comp=[[NSDateComponents alloc]init];
+    [comp setYear:2000];
+    [comp setMonth:1];
+    [comp setDay:1];
+    NSCalendar *calendar=[REMTimeHelper currentCalendar];
+    NSDate *minDate = [calendar dateFromComponents:comp];
+    return minDate;
+}
+
 - (void) timePickerChanged:(UIDatePicker *)picker{
+
+    if ([picker.date isEqualToDate:[self minDate]]==YES) {
+        [picker setDate:[REMTimeHelper  add:-1 onPart:REMDateTimePartYear ofDate:picker.date] animated:NO];
+        [picker setDate:[self minDate] animated:YES];
+        
+    }
     
     self.relativeDateType=REMRelativeTimeRangeTypeNone;
     self.relativeDate=[REMTimeHelper relativeDateComponentFromType:self.relativeDateType];

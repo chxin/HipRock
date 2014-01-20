@@ -40,7 +40,7 @@
 + (NSString *)jsonStringFromDate:(NSDate *)date
 {
     long long time=(long long)([date timeIntervalSince1970]*1000);
-    NSString *str= [NSString stringWithFormat:@"/Date(%llu)/",time];
+    NSString *str= [NSString stringWithFormat:@"/Date(%lld)/",time];
     return str;
 }
 
