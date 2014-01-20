@@ -259,13 +259,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
-    if([[self.navigationController.childViewControllers lastObject] isEqual:self] == NO){
-        //[self.mapView stopRendering];
-        [self.mapView clear];
-        [self.mapView removeFromSuperview];
-        self.mapView = nil;
-        self.view=nil;
-    }
+//    if([[self.navigationController.childViewControllers lastObject] isEqual:self] == NO){
+//        //[self.mapView stopRendering];
+//        [self.mapView clear];
+//        [self.mapView removeFromSuperview];
+//        self.mapView = nil;
+//        self.view=nil;
+//    }
 }
 
 - (void)switchButtonPressed

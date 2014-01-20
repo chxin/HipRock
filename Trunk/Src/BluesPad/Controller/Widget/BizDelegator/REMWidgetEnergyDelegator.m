@@ -990,10 +990,11 @@
     if(self.tooltipView==nil)
         return;
     
+    [self.chartWrapper cancelToolTipStatus];
+    
+    [self.searchLegendViewContainer setHidden:NO];
+    
     [self hideTooltip:^{
-        [self.chartWrapper cancelToolTipStatus];
-        
-        [self.searchLegendViewContainer setHidden:NO];
     }];
 }
 
@@ -1012,7 +1013,7 @@
 
 -(void)hideTooltip:(void (^)(void))complete
 {
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.3 delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.tooltipView.frame = kDMChart_TooltipHiddenFrame;
     } completion:^(BOOL isCompleted){
         [self.tooltipView removeFromSuperview];
