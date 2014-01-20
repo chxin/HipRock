@@ -39,7 +39,7 @@
         self.animationManager = [[DCTrendAnimationManager alloc]init];
         self.animationManager.delegate = self;
         NSDictionary* dic = [self updateProcessorRangesFormatter:wrapperConfig.step];
-        self.myStableRange = dic[@"beginRange"];
+        _myStableRange = dic[@"beginRange"];
         [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:wrapperConfig.step];
         for (DCXYSeries* s in self.view.seriesList) {
             if (s.hidden) [self addHiddenTarget:s.target];
@@ -318,7 +318,7 @@
     
     [self.view removeFromSuperview];
     
-    self.myStableRange = dic[@"beginRange"];
+    _myStableRange = dic[@"beginRange"];
     [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:step];
     for(DCXYSeries* s in self.view.seriesList) {
         if (REMIsNilOrNull(s.target)) continue;
