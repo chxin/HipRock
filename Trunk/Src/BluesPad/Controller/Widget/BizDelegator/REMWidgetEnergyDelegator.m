@@ -173,7 +173,7 @@
     //[timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidgetDatePickerWidth-100)];
     //[timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
 //    [timePickerButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-    CGSize size= [timePickerButton sizeThatFits:CGSizeMake(500, kWidgetDatePickerHeight)];
+    //CGSize size= [timePickerButton sizeThatFits:CGSizeMake(500, kWidgetDatePickerHeight)];
     [timePickerButton sizeToFit];
     //timePickerButton.layer.borderColor=[UIColor redColor].CGColor;
     //timePickerButton.layer.borderWidth=1;
@@ -503,7 +503,7 @@
     
     
     
-    NSString *text1=[NSString stringWithFormat:@"%@ %@",relativeDate,text];
+    NSString *text1=[NSString stringWithFormat:@"  %@ %@",relativeDate,text];
     
     [self.timePickerButton setTitle:text1 forState:UIControlStateNormal];
     self.tempModel.relativeDateType=relativeType;
