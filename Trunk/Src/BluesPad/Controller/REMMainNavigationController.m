@@ -74,20 +74,33 @@
     return segue;
 }
 
--(void)logout:(void (^)(void))completed
+-(void)logout
 {
+    REMApplicationContext *context=REMAppContext;
+    REMUserModel *currentUser = context.currentUser;
+    REMCustomerModel *currentCustomer = context.currentCustomer;
+    
+    [currentUser kill];
+    [currentCustomer kill];
+    currentUser = nil;
+    currentCustomer = nil;
+    context.updateManager = nil;
+    
+    [REMApplicationContext destroy];
+    
+    [REMStorage clearSessionStorage];
+    [REMStorage clearOnApplicationActive];
+    
     [self popToRootViewControllerAnimated:YES];
     
     REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
     [splashController showLoginView:NO];
-    
-    if(completed!=nil)
-        completed();
 }
 
 -(void)presentInitialView:(void (^)(void))completed
 {
     REMMapViewController *mapController = [self getChildControllerInstanceOfClass:[REMMapViewController class]];
+    mapController.isInitialPresenting = true;
     
     if([self.topViewController isEqual:mapController] == NO){
         [self popToViewController:mapController animated:YES onCompletion:^{
