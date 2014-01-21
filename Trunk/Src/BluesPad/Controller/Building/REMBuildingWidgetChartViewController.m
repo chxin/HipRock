@@ -49,8 +49,12 @@
         }
         else{
             loadCompleted(nil,bizError);
-            
-            [self loadDataFailureWithError:bizError];
+            if (bizError == nil) {
+                [self loadDataFailureWithError:bizError withStatus:REMDataAccessFailed];
+            }
+            else{
+                [self loadDataFailureWithError:bizError withStatus:REMDataAccessErrorMessage];
+            }
             
         }
         

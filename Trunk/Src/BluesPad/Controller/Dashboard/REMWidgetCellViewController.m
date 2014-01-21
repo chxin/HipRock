@@ -212,8 +212,9 @@
 - (void)generateServerErrorLabel:(NSString *)msg{
     UILabel *label=[[UILabel alloc]init];
     label.translatesAutoresizingMaskIntoConstraints=NO;
-    label.textColor=[UIColor blackColor];
+    label.textColor= [[UIColor blackColor] colorWithAlphaComponent:0.6] ;
     label.text=msg;
+    label.font=[UIFont systemFontOfSize:kDashboardWidgetTitleSize];
     [label setBackgroundColor:[UIColor clearColor]];
     NSLayoutConstraint *constraintX=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
     NSLayoutConstraint *constraintY=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];

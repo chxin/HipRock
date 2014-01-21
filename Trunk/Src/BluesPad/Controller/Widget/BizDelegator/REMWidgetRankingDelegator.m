@@ -190,7 +190,10 @@ const static CGFloat kRankingTimePickerWidth=250;
         [self showEnergyChart];
     }
     else{
-        [self search];
+        if (self.ownerController.serverError == nil && self.ownerController.isServerTimeout==NO) {
+            [self search];
+        }
+        
     }
 }
 

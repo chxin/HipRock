@@ -143,7 +143,9 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
         [self showEnergyChart];
     }
     else{
-        [self search];
+        if (self.ownerController.serverError == nil && self.ownerController.isServerTimeout==NO) {
+            [self search];
+        }
     }
 }
 

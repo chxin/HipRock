@@ -38,6 +38,8 @@
 "Common_NetNoConnectionLoadLocal"="无网络连接,应用将读取本地数据。";
 "Common_ServerTimeout"="数据获取失败,网络故障。";
 "Common_ServerError"="数据获取失败,服务器故障。";
+"Common_ServerTimeoutSimple"="网络故障。";
+"Common_ServerErrorSimple"="服务器故障。";
 
 //Admin,prefix: Admin_
 "Admin_UserTitleEEConsultant"="能源工程顾问";

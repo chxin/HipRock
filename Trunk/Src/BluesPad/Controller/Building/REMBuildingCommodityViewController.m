@@ -157,9 +157,16 @@
             else{
                 serverError=NSLocalizedString(@"Common_ServerError", @"");
             }
+            NSString *serverErrorSimple;
+            if (status == REMDataAccessFailed) {
+                serverErrorSimple=NSLocalizedString(@"Common_ServerTimeoutSimple", @"");
+            }
+            else{
+                serverErrorSimple=NSLocalizedString(@"Common_ServerErrorSimple", @"");
+            }
             [self.totalLabel setEmptyText:serverError];
-            [self.carbonLabel setEmptyText:serverError];
-            [self.rankingLabel setEmptyText:serverError];
+            [self.carbonLabel setEmptyText:serverErrorSimple];
+            [self.rankingLabel setEmptyText:serverErrorSimple];
             [self addDataLabel];
         }
         
