@@ -38,7 +38,7 @@
     self.requestUrl=self.widgetInfo.contentSyntax.dataStoreType;
 
     self.searcher = [REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
-    
+    self.searcher.disableNetworkAlert=YES;
     [self startLoadingActivity];
     [self.searcher queryEnergyDataByStoreType:self.widgetInfo.contentSyntax.dataStoreType andParameters:self.model withMaserContainer:nil andGroupName:[NSString stringWithFormat:@"building-data-%@", @(buildingId)] callback:^(id data, REMBusinessErrorInfo *bizError) {
         [self stopLoadingActivity];
@@ -49,9 +49,9 @@
         }
         else{
             loadCompleted(nil,bizError);
-            if(bizError!=nil){
-                [self loadDataFailureWithError:bizError];
-            }
+            
+            [self loadDataFailureWithError:bizError];
+            
         }
         
     }];

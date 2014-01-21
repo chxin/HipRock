@@ -104,9 +104,9 @@
         [target showTitle];
         [self addSplitBar:target];
         if (model.commodityUsage!=nil && model.commodityUsage.dataValue!=nil &&
-            ![model.commodityUsage.dataValue isEqual:[NSNull null]]) {
+            [model.commodityUsage.dataValue isEqual:[NSNull null]] == NO) {
             if(model.isTargetAchieved==YES){
-                [target setTitleIcon:[UIImage imageNamed:@"OverTarget"]];
+                [target setTitleIcon:[UIImage imageNamed:@"OverTarget"] ];
             }
             else{
                 [target setTitleIcon:[UIImage imageNamed:@"NotOverTarget"]];
@@ -124,6 +124,7 @@
     NSDictionary *param = @{@"commodityId":commodityId,@"buildingId":buildingId};
     REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSBuildingCommodityTotalUsage parameter:param accessCache:YES andMessageMap:nil];
     store.maskContainer = nil;
+    store.disableAlert=YES;
     store.groupName = [NSString stringWithFormat:@"building-data-%@", buildingId];
     [self.totalLabel showLoading];
     [self.carbonLabel showLoading];
@@ -147,6 +148,13 @@
         [self.totalLabel hideLoading];
         [self.carbonLabel hideLoading];
         [self.rankingLabel hideLoading];
+        if (status == REMDataAccessFailed) {
+            NSString *serverError=NSLocalizedString(@"Building_ServerTimeout", @"");
+            [self.totalLabel setEmptyText:serverError];
+            [self.carbonLabel setEmptyText:serverError];
+            [self.rankingLabel setEmptyText:serverError];
+            [self addDataLabel];
+        }
     }];
 }
 

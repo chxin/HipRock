@@ -41,7 +41,7 @@
     store.maskContainer = nil;
     store.groupName = [NSString stringWithFormat:@"building-data-%@", @(buildingId)];
     
-    
+    store.disableAlert=YES;
     [self startLoadingActivity];
     [store access:^(id data) {
         if(self.view==nil)return ;
@@ -55,9 +55,9 @@
     } error:^(NSError *remError, REMDataAccessErrorStatus status, REMBusinessErrorInfo *bizError) {
         [self stopLoadingActivity];
         loadCompleted(nil,bizError);
-        if(bizError!=nil){
-            [self loadDataFailureWithError:bizError];
-        }
+        
+        [self loadDataFailureWithError:bizError];
+        
     }];
 
 }

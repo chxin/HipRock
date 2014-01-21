@@ -27,6 +27,7 @@
         obj=[[REMEnergySeacherBase alloc]init];
     }
     obj.widgetInfo=widgetInfo;
+    obj.disableNetworkAlert=NO;
     return  obj;
 }
 
@@ -74,7 +75,7 @@
     REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:[model toSearchParam] accessCache:YES andMessageMap:nil];
     //store.maskContainer=maskerContainer;
     
-    
+    store.disableAlert=self.disableNetworkAlert;
    
     //[activitor setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];
     if(self.loadingView==nil){
@@ -147,7 +148,12 @@
         [self.loadingView stopAnimating];
         [self.loadingView removeFromSuperview];
         [maskerContainer removeConstraints:allConstaints];
-        callback(nil,errorInfo);
+        if (status == REMDataAccessFailed) {
+            callback(nil,nil);
+        }
+        else if(errorInfo!=nil){
+            callback(nil,errorInfo);
+        }
     }];
 }
 

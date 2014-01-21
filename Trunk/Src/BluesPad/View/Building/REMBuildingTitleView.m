@@ -79,11 +79,14 @@
 
 - (void)setTitleIcon:(UIImage *)image
 {
+    if (self.titleLabel==nil || [self.titleLabel.text isEqual:[NSNull null]]==YES) {
+        return;
+    }
+    
+    
     UIImageView *view = [[UIImageView alloc]initWithImage:image];
     
     CGRect titleFrame = self.titleLabel.frame;
-    
-    
     
     CGSize expectedLabelSize = [self.titleLabel.text sizeWithFont:self.titleLabel.font];
     
