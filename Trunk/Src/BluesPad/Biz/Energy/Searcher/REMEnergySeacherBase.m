@@ -147,7 +147,12 @@
         [self.loadingView stopAnimating];
         [self.loadingView removeFromSuperview];
         [maskerContainer removeConstraints:allConstaints];
-        callback(nil,errorInfo);
+        if (status == REMDataAccessFailed) {
+            callback(nil,nil);
+        }
+        else if(errorInfo!=nil){
+            callback(nil,errorInfo);
+        }
     }];
 }
 

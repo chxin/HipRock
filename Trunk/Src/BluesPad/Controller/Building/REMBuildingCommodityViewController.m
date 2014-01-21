@@ -104,9 +104,9 @@
         [target showTitle];
         [self addSplitBar:target];
         if (model.commodityUsage!=nil && model.commodityUsage.dataValue!=nil &&
-            ![model.commodityUsage.dataValue isEqual:[NSNull null]]) {
+            [model.commodityUsage.dataValue isEqual:[NSNull null]] == NO) {
             if(model.isTargetAchieved==YES){
-                [target setTitleIcon:[UIImage imageNamed:@"OverTarget"]];
+                [target setTitleIcon:[UIImage imageNamed:@"OverTarget"] ];
             }
             else{
                 [target setTitleIcon:[UIImage imageNamed:@"NotOverTarget"]];
@@ -147,6 +147,13 @@
         [self.totalLabel hideLoading];
         [self.carbonLabel hideLoading];
         [self.rankingLabel hideLoading];
+        if (status == REMDataAccessFailed) {
+            NSString *serverError=NSLocalizedString(@"Building_ServerTimeout", @"");
+            [self.totalLabel setEmptyText:serverError];
+            [self.carbonLabel setEmptyText:serverError];
+            [self.rankingLabel setEmptyText:serverError];
+            [self addDataLabel];
+        }
     }];
 }
 
