@@ -141,7 +141,7 @@ static NSDictionary *serviceMap = nil;
         
         success(data);
     } error:^(NSError *errorInfo, REMDataAccessErrorStatus status, id response) {
-        if(self.disableAlert == YES && (status == REMDataAccessNoConnection || status == REMDataAccessFailed || (status == REMDataAccessErrorMessage && [response isKindOfClass:[REMBusinessErrorInfo class]] && [((REMBusinessErrorInfo *)response).code isEqualToString:@"1"]))){
+        if(self.disableAlert == NO && (status == REMDataAccessNoConnection || status == REMDataAccessFailed || (status == REMDataAccessErrorMessage && [response isKindOfClass:[REMBusinessErrorInfo class]] && [((REMBusinessErrorInfo *)response).code isEqualToString:@"1"]))){
             NSString *message = self.messageMap[@(status)];
             [REMAlertHelper alert:message];
         }
