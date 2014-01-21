@@ -36,6 +36,8 @@
 "Common_NetConnectionFailed"="网络连接失败，请稍候再试";
 "Common_NetServerError"="服务器错误";
 "Common_NetNoConnectionLoadLocal"="无网络连接,应用将读取本地数据。";
+"Common_ServerTimeout"="数据获取失败,网络故障。";
+"Common_ServerError"="数据获取失败,服务器故障。";
 
 //Admin,prefix: Admin_
 "Admin_UserTitleEEConsultant"="能源工程顾问";
@@ -147,10 +149,9 @@
 
 
 //Building, prefix: Building_
-"BuildingChart_NoData"="暂无数据，请持续关注能耗变化";
+"BuildingChart_NoData"="暂无上月数据，请持续关注能耗变化";
 "BuildingChart_DataError"="数据错误，请联系管理员。";
 "Building_LabelNoData"="无数据";
-"Building_ServerTimeout"="服务器错误";
 "Building_PullUpMoreInfo"="上拉查看更多能耗信息";
 "Building_ReleaseSwitchView"="松开以显示";
 "Building_Target"="目标值";
@@ -181,7 +182,6 @@
 "Dashboard_TimeRange"="%@ 到 %@";
 "Dashboard_Empty"="未配置任何仪表盘";
 "Dashboard_ShareUserName"="分享者:%@"; //分享者：张三
-"Dashboard_ServerTimeout"="服务器错误";
 
 //Widget, prefix:Widget_
 "Widget_TimePickerTime"="时间";
@@ -200,6 +200,7 @@
 "Widget_CalendarHoliday"="非工作时间";
 "Widget_CalendarStepError"="当前步长不支持显示%@背景色"; //当前步长不支持显示冷暖季背景色，当前步长不支持显示非工作时间背景色
 "Widget_CalendarCostElectricityStepError"="峰谷平电价不支持按小时展示";
+
 
 
 //Weibo, prefix: Weibo_

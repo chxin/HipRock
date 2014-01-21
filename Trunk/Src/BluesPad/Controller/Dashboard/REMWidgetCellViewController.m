@@ -190,10 +190,14 @@
     [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:self.searchModel withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *errorInfo){
         if (data==nil) {
             if (errorInfo==nil) { // timeout or network failed
-                [self generateServerErrorLabel];
+                [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerTimeout", @"")];
+                self.isServerTimeout=YES;
             }
             else{
                 self.serverError=errorInfo;
+                if ([errorInfo.code isEqualToString:@"1"]==YES) {
+                    [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerError", @"")];
+                }
             }
         }
         else{
@@ -205,17 +209,18 @@
     }];
 }
 
-- (void)generateServerErrorLabel{
+- (void)generateServerErrorLabel:(NSString *)msg{
     UILabel *label=[[UILabel alloc]init];
     label.translatesAutoresizingMaskIntoConstraints=NO;
     label.textColor=[UIColor blackColor];
-    label.text=NSLocalizedString(@"Dashboard_ServerTimeout", @"");
+    label.text=msg;
     [label setBackgroundColor:[UIColor clearColor]];
     NSLayoutConstraint *constraintX=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
     NSLayoutConstraint *constraintY=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
     [self.view addSubview:label];
     [self.view addConstraint:constraintX];
     [self.view addConstraint:constraintY];
+    
 
 }
 

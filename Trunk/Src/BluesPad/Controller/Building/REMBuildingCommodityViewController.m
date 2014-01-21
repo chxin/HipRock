@@ -148,13 +148,21 @@
         [self.totalLabel hideLoading];
         [self.carbonLabel hideLoading];
         [self.rankingLabel hideLoading];
-        if (status == REMDataAccessFailed) {
-            NSString *serverError=NSLocalizedString(@"Building_ServerTimeout", @"");
+        
+        if (status == REMDataAccessFailed || status == REMDataAccessErrorMessage) {
+            NSString *serverError;
+            if (status == REMDataAccessFailed) {
+                serverError=NSLocalizedString(@"Common_ServerTimeout", @"");
+            }
+            else{
+                serverError=NSLocalizedString(@"Common_ServerError", @"");
+            }
             [self.totalLabel setEmptyText:serverError];
             [self.carbonLabel setEmptyText:serverError];
             [self.rankingLabel setEmptyText:serverError];
             [self addDataLabel];
         }
+        
     }];
 }
 

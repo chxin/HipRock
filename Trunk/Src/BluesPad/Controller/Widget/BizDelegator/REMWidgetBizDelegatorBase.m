@@ -16,7 +16,7 @@
 @interface REMWidgetBizDelegatorBase()
 
 @property (nonatomic,weak) UIView *popupMsgView;
-
+@property (nonatomic,weak) UILabel *serverErrorLabel;
 
 @end
 
@@ -98,15 +98,39 @@
 }
 
 - (void)showChart{
+    
     if (self.energyData) {
         [self processEnergyDataInnerError:self.energyData];
     }
     if (self.ownerController.serverError!=nil) {
-        NSString *showText=[self processServerError:self.ownerController.serverError.code];
-        if (showText!=nil) {
-            [self showPopupMsg:showText];
+        if ([self.ownerController.serverError.code isEqualToString:@"1"]==YES) {
+            [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerError", @"")];
+        }
+        else{
+            NSString *showText=[self processServerError:self.ownerController.serverError.code];
+            if (showText!=nil) {
+                [self showPopupMsg:showText];
+            }
         }
     }
+    if (self.ownerController.isServerTimeout==YES) {
+        [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerTimeout", @"")];
+    }
+    
+}
+
+- (void)generateServerErrorLabel:(NSString *)msg{
+    UILabel *label=[[UILabel alloc]init];
+    label.translatesAutoresizingMaskIntoConstraints=NO;
+    label.textColor=[UIColor blackColor];
+    label.text=msg;
+    [label setBackgroundColor:[UIColor clearColor]];
+    NSLayoutConstraint *constraintX=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    NSLayoutConstraint *constraintY=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    [self.view addSubview:label];
+    [self.view addConstraint:constraintX];
+    [self.view addConstraint:constraintY];
+    self.serverErrorLabel=label;
     
 }
 
@@ -136,6 +160,11 @@
         if(data!=nil){
             self.energyData=data;
             
+            if (self.serverErrorLabel!=nil) {
+                [self.serverErrorLabel removeFromSuperview];
+                self.serverErrorLabel=nil;
+            }
+            
             [self mergeTempModel];
             
             [self reloadChart];
@@ -159,9 +188,6 @@
                     [self rollbackWithError:bizInfo];
                 }
                 else{
-                    
-                    
-                    
                     [self rollbackWithError:error];
                 }
             }
