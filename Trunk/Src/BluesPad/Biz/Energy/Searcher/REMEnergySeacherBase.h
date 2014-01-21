@@ -23,6 +23,7 @@ typedef enum _REMEnergySearcherLoadingType{
 
 @property (nonatomic,weak) REMWidgetObject *widgetInfo;
 @property (nonatomic,weak) REMWidgetSearchModelBase *model;
+@property (nonatomic) BOOL disableNetworkAlert;
 
 @property (nonatomic,strong) UIActivityIndicatorView *loadingView;
 @property (nonatomic,strong) UIView *loadingBackgroundView;

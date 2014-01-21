@@ -186,6 +186,7 @@
     self.loadingView=loadingView;
     REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType withWidgetInfo:self.widgetInfo];
     searcher.loadingView=self.loadingView;
+    searcher.disableNetworkAlert=YES;
     [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:self.searchModel withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *errorInfo){
         if (data==nil) {
             if (errorInfo==nil) { // timeout or network failed
