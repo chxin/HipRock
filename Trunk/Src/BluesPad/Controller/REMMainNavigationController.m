@@ -103,10 +103,13 @@
     mapController.isInitialPresenting = true;
     
     if([self.topViewController isEqual:mapController] == NO){
-        [self popToViewController:mapController animated:YES onCompletion:^{
-            [mapController updateView];
-            if(completed) completed();
-        }];
+        [self popToViewController:mapController animated:YES];
+        [mapController updateView];
+        if(completed) completed();
+//        [self popToViewController:mapController animated:YES onCompletion:^{
+//            [mapController updateView];
+//            if(completed) completed();
+//        }];
     }
     else{
         [mapController updateView];
