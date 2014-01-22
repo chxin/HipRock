@@ -228,15 +228,18 @@
 - (void) showPopupMsg:(NSString *)msg{
     [self hidePopupMsg];
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectZero];
-    label.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:20];
-    [label setBackgroundColor:[UIColor grayColor]];
+    label.font=[UIFont fontWithName:@(kBuildingFontSC) size:20];
+    label.textColor=[[UIColor blackColor] colorWithAlphaComponent:0.8];
+    [label setBackgroundColor:[UIColor whiteColor]];
     label.text=msg;
     label.textAlignment=NSTextAlignmentCenter;
     CGSize expectedLabelSize = [label.text sizeWithFont:label.font];
-    CGFloat height=50;
+    CGFloat height=40;
     CGFloat margin=50;
     CGFloat bottom=10;
-    
+    label.layer.borderWidth=1;
+    label.layer.borderColor=[[UIColor blackColor] colorWithAlphaComponent:0.6].CGColor;
+    label.layer.cornerRadius=8;
     [label setFrame:CGRectMake((kDMScreenWidth-(expectedLabelSize.width+margin))/2, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight), expectedLabelSize.width+margin, height)];
     [self.view addSubview:label];
     self.popupMsgView=label;
