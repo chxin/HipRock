@@ -17,12 +17,18 @@
 #import "REMApplicationContext.h"
 #import "REMBusinessErrorInfo.h"
 
+@interface REMDataStore()
+
+@property (nonatomic,strong) REMDataAccessSuccessBlock success;
+
+@end
 
 
 @implementation REMDataStore
 
 
 static NSDictionary *serviceMap = nil;
+static NSMutableArray *tempHolder = nil;
 
 - (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter accessCache:(BOOL)accessCache andMessageMap:(NSDictionary *)messageMap
 {
@@ -68,10 +74,15 @@ static NSDictionary *serviceMap = nil;
     
     if(reachability == NotReachable){
         if(self.accessCache){
+            
             if(!cacheMode){
-                [REMAlertHelper alert:REMLocalizedString(@"Common_NetNoConnectionLoadLocal") delegate:nil];
+                self.success = success;
+                if(tempHolder == nil)
+                    tempHolder = [[NSMutableArray alloc] init];
+                [tempHolder addObject:self];
+                
+                [REMAlertHelper alert:REMLocalizedString(@"Common_NetNoConnectionLoadLocal") delegate:self];
                 [[REMApplicationContext instance] setCacheMode:YES];
-                [self accessLocal:success];
             }
             else{
                 [self accessLocal:success];
@@ -144,6 +155,19 @@ static NSDictionary *serviceMap = nil;
         if(error)
             error(errorInfo,status,response);
     } progress:progress];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"store %@ index %d pressed", self.serviceMeta.url, buttonIndex);
+    [self accessLocal:self.success];
+    [tempHolder removeObject:self];
+//    
+//    for(REMDataStore *store in tempHolder){
+//    }
+//    
+//    for(REMDataStore *store in tempHolder)
+//        [tempHolder removeObject:store];
 }
 
 

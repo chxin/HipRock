@@ -230,12 +230,12 @@
 - (void) showPopupMsg:(NSString *)msg{
     [self hidePopupMsg];
     
-    REMPopNote *label = [[REMPopNote alloc] initWithText:msg];
+    REMPopNote *pop = [[REMPopNote alloc] initWithText:msg];
     
-    [self.view addSubview:label];
-    self.popupMsgView=label;
+    [self.view addSubview:pop];
+    self.popupMsgView=pop;
     
-    [label show:^{
+    [pop show:^{
         [self hidePopupMsg];
     }];
 }

@@ -82,7 +82,6 @@
 		6AB1F22D17B8AC910065C1EB /* REMCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3E17A637630050779D /* REMCustomerModel.m */; };
 		6AB1F22F17B8AC910065C1EB /* REMLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AEB1177BFAE8002D2A59 /* REMLog.m */; };
 		6AB1F23117B8AC910065C1EB /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
-		6AB1F23517B8AC910065C1EB /* REMDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD2A178FD034006C4EDE /* REMDataStore.m */; };
 		6AB1F23717B8AC910065C1EB /* REMApplicationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D161785111300219469 /* REMApplicationInfo.m */; };
 		6AB1F23B17B8AC910065C1EB /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
 		6AB1F23D17B8AC910065C1EB /* REMApplicationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3617A6155D0050779D /* REMApplicationContext.m */; };
@@ -164,8 +163,6 @@
 		6AB1F31217B8B40C0065C1EB /* REMLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AEB1177BFAE8002D2A59 /* REMLog.m */; };
 		6AB1F31317B8B40C0065C1EB /* REMLogManager.h in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAC178410D300B50475 /* REMLogManager.h */; };
 		6AB1F31417B8B40C0065C1EB /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
-		6AB1F31717B8B40C0065C1EB /* REMDataStore.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD29178FD034006C4EDE /* REMDataStore.h */; };
-		6AB1F31817B8B40C0065C1EB /* REMDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD2A178FD034006C4EDE /* REMDataStore.m */; };
 		6AB1F31917B8B40C0065C1EB /* REMApplicationInfo.h in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D151785111300219469 /* REMApplicationInfo.h */; };
 		6AB1F31A17B8B40C0065C1EB /* REMApplicationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D161785111300219469 /* REMApplicationInfo.m */; };
 		6AB1F31D17B8B40C0065C1EB /* REMEnergyConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = B43BB10F1797B12D00617B1E /* REMEnergyConstants.h */; };
@@ -369,7 +366,6 @@
 		7A5A97391856D54E0084E228 /* share-weixin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5A97351856D54E0084E228 /* share-weixin@2x.png */; };
 		7A5AC77F1817CBEF006C7CB1 /* REMBuildingEntranceSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AC77E1817CBEF006C7CB1 /* REMBuildingEntranceSegue.m */; };
 		7A5AC7821817CC34006C7CB1 /* REMMapGallerySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AC7811817CC34006C7CB1 /* REMMapGallerySegue.m */; };
-		7A5DBD2B178FD034006C4EDE /* REMDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DBD2A178FD034006C4EDE /* REMDataStore.m */; };
 		7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8B177B41B0000F77F9 /* MainStoryboard.storyboard */; };
 		7A5E2D95177B41B0000F77F9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8D177B41B0000F77F9 /* InfoPlist.strings */; };
 		7A634BBC180E80140076C84D /* REMSplashMapSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A634BBB180E80140076C84D /* REMSplashMapSegue.m */; };
@@ -393,6 +389,7 @@
 		7A95FF05188F663600510A07 /* PopNote.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A95FF03188F663600510A07 /* PopNote.png */; };
 		7A95FF06188F663600510A07 /* PopNote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A95FF04188F663600510A07 /* PopNote@2x.png */; };
 		7A95FF09188F718500510A07 /* REMPopNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A95FF08188F718500510A07 /* REMPopNote.m */; };
+		7A95FF0D188F951000510A07 /* REMDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A95FF0B188F951000510A07 /* REMDataStore.m */; };
 		7A9B1E20177B3A8B00C282A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */; };
 		7A9B1E22177B3A8B00C282A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E21177B3A8B00C282A8 /* Foundation.framework */; };
 		7A9B1E24177B3A8B00C282A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E23177B3A8B00C282A8 /* CoreGraphics.framework */; };
@@ -817,7 +814,6 @@
 		7A13C1A617F40D83007E6AA9 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libc++.dylib"; sourceTree = DEVELOPER_DIR; };
 		7A13C1A817F40D90007E6AA9 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libicucore.dylib; sourceTree = DEVELOPER_DIR; };
 		7A13C1AA17F40D99007E6AA9 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
-		7A14C5DD186AAACD0040F89B /* REMDataStoreType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMDataStoreType.h; path = Common/DataAccess/REMDataStoreType.h; sourceTree = "<group>"; };
 		7A153C4417AA489600413D3C /* REMBuildingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingModel.h; sourceTree = "<group>"; };
 		7A153C4517AA489600413D3C /* REMBuildingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingModel.m; sourceTree = "<group>"; };
 		7A153C4717AA489600413D3C /* REMDashboardObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMDashboardObj.h; sourceTree = "<group>"; };
@@ -982,8 +978,6 @@
 		7A5AC77E1817CBEF006C7CB1 /* REMBuildingEntranceSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingEntranceSegue.m; path = Resource/Segue/REMBuildingEntranceSegue.m; sourceTree = "<group>"; };
 		7A5AC7801817CC34006C7CB1 /* REMMapGallerySegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMapGallerySegue.h; path = Resource/Segue/REMMapGallerySegue.h; sourceTree = "<group>"; };
 		7A5AC7811817CC34006C7CB1 /* REMMapGallerySegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMapGallerySegue.m; path = Resource/Segue/REMMapGallerySegue.m; sourceTree = "<group>"; };
-		7A5DBD29178FD034006C4EDE /* REMDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDataStore.h; path = Common/DataAccess/REMDataStore.h; sourceTree = "<group>"; };
-		7A5DBD2A178FD034006C4EDE /* REMDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataStore.m; path = Common/DataAccess/REMDataStore.m; sourceTree = "<group>"; };
 		7A5E2D51177B3EAF000F77F9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "../test/BluesPadTests/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		7A5E2D54177B3EE0000F77F9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "../test/BluesPhoneTests/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		7A5E2D56177B3EEA000F77F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../test/BluesPhoneTests/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1040,6 +1034,9 @@
 		7A95FF04188F663600510A07 /* PopNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PopNote@2x.png"; sourceTree = "<group>"; };
 		7A95FF07188F718500510A07 /* REMPopNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPopNote.h; sourceTree = "<group>"; };
 		7A95FF08188F718500510A07 /* REMPopNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPopNote.m; sourceTree = "<group>"; };
+		7A95FF0A188F951000510A07 /* REMDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDataStore.h; path = Common/Communication/REMDataStore.h; sourceTree = "<group>"; };
+		7A95FF0B188F951000510A07 /* REMDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataStore.m; path = Common/Communication/REMDataStore.m; sourceTree = "<group>"; };
+		7A95FF0C188F951000510A07 /* REMDataStoreType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDataStoreType.h; path = Common/Communication/REMDataStoreType.h; sourceTree = "<group>"; };
 		7A9B1E1C177B3A8B00C282A8 /* BluesPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluesPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		7A9B1E21177B3A8B00C282A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -2167,16 +2164,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		7A3DDCD717869A32008A1033 /* DataAccess */ = {
-			isa = PBXGroup;
-			children = (
-				7A14C5DD186AAACD0040F89B /* REMDataStoreType.h */,
-				7A5DBD29178FD034006C4EDE /* REMDataStore.h */,
-				7A5DBD2A178FD034006C4EDE /* REMDataStore.m */,
-			);
-			name = DataAccess;
-			sourceTree = "<group>";
-		};
 		7A5E2D45177B3CD3000F77F9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -2185,7 +2172,6 @@
 				7A2BA41F17D877B1003B18E1 /* Error */,
 				7A1D7C3917A637110050779D /* Model */,
 				B445AE7E177BEC10002D2A59 /* Log */,
-				7A3DDCD717869A32008A1033 /* DataAccess */,
 				7A5E2D4A177B3CF9000F77F9 /* Constants */,
 				7A5E2D49177B3CF1000F77F9 /* Communication */,
 				7A5E2D48177B3CEA000F77F9 /* Storage */,
@@ -2240,6 +2226,9 @@
 		7A5E2D49177B3CF1000F77F9 /* Communication */ = {
 			isa = PBXGroup;
 			children = (
+				7A95FF0C188F951000510A07 /* REMDataStoreType.h */,
+				7A95FF0A188F951000510A07 /* REMDataStore.h */,
+				7A95FF0B188F951000510A07 /* REMDataStore.m */,
 				7AB34E4F177D2CE1003E235E /* REMServiceRequestOperation.h */,
 				7AB34E50177D2CE1003E235E /* REMServiceRequestOperation.m */,
 				7A3DDCD81786C05B008A1033 /* REMServiceAgent.h */,
@@ -3673,7 +3662,6 @@
 				7ABD915D184DB784006AF935 /* REMLoginCustomerTableViewController.m in Sources */,
 				B48ED3EA178EA1740032CD72 /* REMTimeHelper.m in Sources */,
 				EF652B68185867C2007D4049 /* DCTrendAnimationManager.m in Sources */,
-				7A5DBD2B178FD034006C4EDE /* REMDataStore.m in Sources */,
 				EF1C5AD7183DB3CB002A9AAD /* DCTrendWrapper.m in Sources */,
 				B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */,
 				EFD9470A1839DCBB00E9EC50 /* DCSeries.m in Sources */,
@@ -3733,6 +3721,7 @@
 				EFD947111839DEE100E9EC50 /* DCColumnWrapper.m in Sources */,
 				7A153CC117AA4A5100413D3C /* REMBuildingOverallModel.m in Sources */,
 				7A2E7ECC17F2DD41000EB506 /* REMBuildingTitleView.m in Sources */,
+				7A95FF0D188F951000510A07 /* REMDataStore.m in Sources */,
 				7A3C64FE184234CE003EDC7B /* REMTrialCardController.m in Sources */,
 				7A153CC417AA4B0D00413D3C /* REMCommodityUsageModel.m in Sources */,
 				B46C8EBD17F27C84006DC4CB /* REMDashboardCellViewCell.m in Sources */,
@@ -3892,7 +3881,6 @@
 				6AB1F22D17B8AC910065C1EB /* REMCustomerModel.m in Sources */,
 				6AB1F22F17B8AC910065C1EB /* REMLog.m in Sources */,
 				6AB1F23117B8AC910065C1EB /* REMLogManager.m in Sources */,
-				6AB1F23517B8AC910065C1EB /* REMDataStore.m in Sources */,
 				6AB1F23717B8AC910065C1EB /* REMApplicationInfo.m in Sources */,
 				6AB1F23B17B8AC910065C1EB /* REMEnergyConstants.m in Sources */,
 				6AB1F23D17B8AC910065C1EB /* REMApplicationContext.m in Sources */,
@@ -4012,8 +4000,6 @@
 				6AB1F31217B8B40C0065C1EB /* REMLog.m in Sources */,
 				6AB1F31317B8B40C0065C1EB /* REMLogManager.h in Sources */,
 				6AB1F31417B8B40C0065C1EB /* REMLogManager.m in Sources */,
-				6AB1F31717B8B40C0065C1EB /* REMDataStore.h in Sources */,
-				6AB1F31817B8B40C0065C1EB /* REMDataStore.m in Sources */,
 				6AB1F31917B8B40C0065C1EB /* REMApplicationInfo.h in Sources */,
 				6AB1F31A17B8B40C0065C1EB /* REMApplicationInfo.m in Sources */,
 				6AB1F31D17B8B40C0065C1EB /* REMEnergyConstants.h in Sources */,
