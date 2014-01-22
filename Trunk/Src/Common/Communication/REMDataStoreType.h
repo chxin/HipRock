@@ -11,10 +11,6 @@
 
 #import "REMServiceMeta.h"
 
-
-
-
-
 typedef enum _REMDataAccessErrorStatus : NSUInteger{
     REMDataAccessSucceed = 0,
     REMDataAccessErrorMessage = 1,
@@ -152,6 +148,6 @@ typedef enum _REMDataStoreType
     @(REMDSLogSend) : REMJsonSvc(@"API/Log.svc/SendLog"),\
 };
 
-#define REMNetworkMessageMap @{@(REMDataAccessErrorMessage):REMLocalizedString(@"Common_NetServerError"), @(REMDataAccessFailed):REMLocalizedString(@"Common_NetConnectionFailed"), @(REMDataAccessNoConnection):REMLocalizedString(@"Common_NetConnectionFailed")}
+#define REMNetworkMessageMap @{@(REMDataAccessErrorMessage):REMLocalizedString(@"Common_NetServerError"), @(REMDataAccessFailed):REMLocalizedString(@"Common_NetConnectionFailed"), @(REMDataAccessNoConnection):REMLocalizedString(@"Common_NetNoConnection")}
 
 #endif

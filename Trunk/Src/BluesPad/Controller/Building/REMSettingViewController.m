@@ -271,11 +271,11 @@
                 REMMainNavigationController *mainController=(REMMainNavigationController *)self.presentingViewController;
                 if (mainController!=nil) {
                     [mainController dismissViewControllerAnimated:YES completion:^(void){
-                        [mainController presentInitialView:nil];
+                        [mainController presentInitialView];
                     }];
                 }
                 else{
-                    [manager.mainNavigationController presentInitialView:nil];
+                    [manager.mainNavigationController presentInitialView];
                 }                
             }
         }];

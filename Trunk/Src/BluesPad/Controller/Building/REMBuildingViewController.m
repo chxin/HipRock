@@ -398,6 +398,11 @@ const static CGFloat buildingGap=20;
             
             cell.alpha = 1.0;
         }
+        if([self.fromController isKindOfClass:[REMMapViewController class]]){
+            REMMapViewController *mapController = (REMMapViewController *)self.fromController;
+            [mapController highlightMarker:self.currentBuildingIndex];
+            [mapController takeSnapshot];
+        }
         
         
         self.sourceSnapshot = [((id)self.fromController) snapshot];
@@ -540,6 +545,11 @@ const static CGFloat buildingGap=20;
         }
         
         cell.alpha = 1.0;
+    }
+    if([self.fromController isKindOfClass:[REMMapViewController class]]){
+        REMMapViewController *mapController = (REMMapViewController *)self.fromController;
+        [mapController highlightMarker:self.currentBuildingIndex];
+        [mapController takeSnapshot];
     }
     
     [REMDataStore cancelAccess];

@@ -25,5 +25,7 @@
 #pragma mark - Methods
 -(CGRect)getDestinationZoomRect: (int)currentBuildingIndex;
 -(void)updateView;
+-(void)highlightMarker:(int)buildingIndex;
+-(void)takeSnapshot;
 
 @end

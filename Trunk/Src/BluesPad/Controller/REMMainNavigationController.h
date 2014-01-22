@@ -11,6 +11,6 @@
 @interface REMMainNavigationController : UINavigationController
 
 -(void)logout;
--(void)presentInitialView:(void (^)(void))completed;
+-(void)presentInitialView;
 
 @end
