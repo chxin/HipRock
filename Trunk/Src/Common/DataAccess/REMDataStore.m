@@ -16,7 +16,6 @@
 #import "REMAlertHelper.h"
 #import "REMApplicationContext.h"
 #import "REMBusinessErrorInfo.h"
-#import "UIAlertView+Block.h"
 
 
 
@@ -70,13 +69,9 @@ static NSDictionary *serviceMap = nil;
     if(reachability == NotReachable){
         if(self.accessCache){
             if(!cacheMode){
-                //[REMAlertHelper alert:REMLocalizedString(@"Common_NetNoConnectionLoadLocal") delegate:nil];
+                [REMAlertHelper alert:REMLocalizedString(@"Common_NetNoConnectionLoadLocal") delegate:nil];
                 [[REMApplicationContext instance] setCacheMode:YES];
-                [UIAlertView alertViewWithTitle:@"" message:REMLocalizedString(@"Common_NetNoConnectionLoadLocal") cancelButtonTitle:REMLocalizedString(@"Common_OK") otherButtonTitles:nil onDismiss:^(int buttonIndex, NSString *buttonTitle) {
-                    [self accessLocal:success];
-                } onCancel:^{
-                    [self accessLocal:success];
-                }];
+                [self accessLocal:success];
             }
             else{
                 [self accessLocal:success];
