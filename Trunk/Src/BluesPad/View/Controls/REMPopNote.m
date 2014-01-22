@@ -10,32 +10,36 @@
 
 @implementation REMPopNote
 
+CGFloat height=45;
+CGFloat bottom=10;
+CGFloat margin=50;
+
 - (id)initWithText:(NSString *)text
 {
-    CGFloat height=40;
-    CGFloat margin=50;
-    
     UIFont *font = [UIFont fontWithName:@(kBuildingFontSC) size:20];
     CGSize size = [text sizeWithFont:font];
     
-    self = [super initWithFrame:CGRectMake((kDMScreenWidth-(size.width+margin))/2, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight), size.width+margin, height)];
+    UIImage *backgroundImage = [REMIMG_PopNote resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9) resizingMode:UIImageResizingModeTile];
+    
+    self = [super initWithImage:backgroundImage];
     if (self) {
         // Initialization code
-        self.text = text;
-        self.font = font;
-        self.textColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
-        self.textAlignment = NSTextAlignmentCenter;
+        self.frame = CGRectMake((kDMScreenWidth-(size.width+margin))/2, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight), size.width+margin, height);
         
-        self.backgroundColor = [UIColor redColor];//[UIColor colorWithPatternImage:[REMIMG_PopNote resizableImageWithCapInsets:UIEdgeInsetsMake(0, 14, 0, 14)]];
+        UILabel *label = [[UILabel alloc] initWithFrame:self.bounds];
+        
+        label.text = text;
+        label.font = font;
+        label.textColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
+        label.textAlignment = NSTextAlignmentCenter;
+        
+        [self addSubview:label];
     }
     return self;
 }
 
 -(void)show:(void (^)(void))complete
 {
-    CGFloat height=40;
-    CGFloat bottom=10;
-    
     [UIView animateWithDuration:0.5  delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
         [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y-height-bottom, self.frame.size.width,self.frame.size.height)];
     }completion: ^(BOOL finished){
