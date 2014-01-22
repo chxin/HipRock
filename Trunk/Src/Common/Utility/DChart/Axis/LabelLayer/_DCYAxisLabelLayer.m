@@ -96,6 +96,7 @@
     self.myFrame = frame;
     [super setFrame:self.superlayer.bounds];
     [self updateTextFrames];
+    [self updateTexts];
 }
 
 -(void)setFont:(UIFont *)font {
@@ -135,6 +136,7 @@
 }
 
 -(void)updateTexts {
+    if (REMIsNilOrNull(self.textFrames) || self.textFrames.count == 0) return;
     if (self.graphContext.useTextLayer) {
         CGRect theLastLabelRect;
         CTFontRef fRef = CTFontCreateWithName((__bridge CFStringRef)self.font.fontName,
