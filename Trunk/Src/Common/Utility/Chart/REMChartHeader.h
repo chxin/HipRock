@@ -86,6 +86,6 @@ typedef enum _REMDirection{
 -(NSDate*)deprocessX:(float)x;
 @end
 @interface REMTrendChartDataProcessor : REMChartDataProcessor
-@property (nonatomic, weak) NSDate* baseDate;
+@property (nonatomic, strong) NSDate* baseDate;
 @property (nonatomic, assign) REMEnergyStep step;
 @end

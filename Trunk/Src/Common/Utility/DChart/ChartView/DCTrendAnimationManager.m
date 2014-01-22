@@ -57,8 +57,10 @@
 
 -(void)animateFramesTarget:(NSTimer*)timer {
     NSMutableArray* frames = (NSMutableArray*)timer.userInfo[@"frames"];
+    void(^callback)() = timer.userInfo[@"callback"];
     if (REMIsNilOrNull(self.view) || REMIsNilOrNull(frames) || frames.count == 0) {
         [timer invalidate];
+        callback();
         return;
     }
     DCRange* hRange = frames[0];
@@ -68,10 +70,6 @@
         [self.delegate didHRangeApplyToView:hRange finalRange:frames[frames.count-1]];
     }
     [frames removeObjectAtIndex:0];
-    if (frames.count == 0) {
-        void(^callback)() = timer.userInfo[@"callback"];
-        callback();
-    }
 }
 
 -(BOOL)isValid {

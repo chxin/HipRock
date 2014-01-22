@@ -17,7 +17,8 @@
 -(void)extraSyntax:(DWrapperConfig*)wrapperConfig {
     _timeRangeType = wrapperConfig.relativeDateType;
 }
--(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
+-(NSDictionary*)updateProcessorRangesFormatter:(DWrapperConfig*)wrapperConfig {
+    REMEnergyStep step = wrapperConfig.step;
     _isStacked = NO;
     
     NSUInteger seriesAmount = [self getSeriesAmount];

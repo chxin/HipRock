@@ -29,6 +29,7 @@
     return [NSNumber numberWithFloat:x];
 }
 -(NSDate*)deprocessX:(float)x {
+    if (x == 0) return self.baseDate.copy;
     REMEnergyStep step = self.step;
     NSDate* startDate = self.baseDate;
     if (step == REMEnergyStepHour || step == REMEnergyStepDay || step == REMEnergyStepWeek) {
@@ -41,7 +42,9 @@
         }
         int monthToAddInt = monthToAdd;
         NSDate* d = [REMTimeHelper addMonthToDate:startDate month:monthToAddInt];
+        NSLog(@"this:%@ %f", d, x);
         d = [NSDate dateWithTimeInterval:28*24*3600*(monthToAdd-(double)monthToAddInt) sinceDate:d];
+        NSLog(@"that:%@ %f", d,x);
         return d;
     }
 }

@@ -94,6 +94,9 @@
         wrapperConfig.stacked=YES;
         widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig  style:style];
     }
+    for (DCXYSeries* s in widgetWrapper.view.seriesList) {
+        s.color = [REMColor makeTransparent:0.8 withColor:s.color];
+    }
     return widgetWrapper;
 }
 
