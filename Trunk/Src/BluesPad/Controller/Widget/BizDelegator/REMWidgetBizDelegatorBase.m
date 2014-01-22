@@ -12,6 +12,7 @@
 #import "REMWidgetLabelingDelegator.h"
 #import "REMClientErrorInfo.h"
 #import "REMImages.h"
+#import "REMPopNote.h"
 
 
 @interface REMWidgetBizDelegatorBase()
@@ -228,44 +229,14 @@
 
 - (void) showPopupMsg:(NSString *)msg{
     [self hidePopupMsg];
-//    UILabel *label=[[UILabel alloc]initWithFrame:CGRectZero];
-//    label.font=[UIFont fontWithName:@(kBuildingFontSC) size:20];
-//    label.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.8];
-//    //[label setBackgroundColor:[UIColor whiteColor]];
-//    label.text=msg;
-//    label.textAlignment=NSTextAlignmentCenter;
-//    CGSize expectedLabelSize = [label.text sizeWithFont:label.font];
-    CGFloat height=40;
-    CGFloat margin=50;
-    CGFloat bottom=10;
-////    label.layer.borderWidth=1;
-////    label.layer.borderColor=[[UIColor blackColor] colorWithAlphaComponent:0.6].CGColor;
-////    label.layer.cornerRadius=8;
-//    [label setFrame:CGRectMake((kDMScreenWidth-(expectedLabelSize.width+margin))/2, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight), expectedLabelSize.width+margin, height)];
     
+    REMPopNote *label = [[REMPopNote alloc] initWithText:msg];
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:20];
-    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:label];
+    self.popupMsgView=label;
     
-    CGSize size = [button.titleLabel.text sizeWithFont:button.titleLabel.font];
-    
-    [button setFrame:CGRectMake((kDMScreenWidth-(size.width+margin))/2, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight), size.width+margin, height)];
-    [button setTitle:msg forState:UIControlStateNormal];
-    [button setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.8] forState:UIControlStateNormal];
-    [button setImage:[REMIMG_PopNote resizableImageWithCapInsets:UIEdgeInsetsMake(0, 14, 0, 14)] forState:UIControlStateNormal];
-    [button setEnabled:NO];
-    
-    [self.view addSubview:button];
-    self.popupMsgView=button;
-    [UIView animateWithDuration:0.5  delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
-        [button setFrame:CGRectMake(button.frame.origin.x, button.frame.origin.y-height-bottom, button.frame.size.width,button.frame.size.height)];
-    }completion: ^(BOOL finished){
-        [UIView animateWithDuration:0.5 delay:3 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
-            [button setFrame:CGRectMake(button.frame.origin.x, button.frame.origin.y+height+bottom, button.frame.size.width,button.frame.size.height)];
-        }completion:^(BOOL finished){
-            [self hidePopupMsg];
-        }];
+    [label show:^{
+        [self hidePopupMsg];
     }];
 }
 

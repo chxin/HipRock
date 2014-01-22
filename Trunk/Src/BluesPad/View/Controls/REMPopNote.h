@@ -7,6 +7,9 @@
 --------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
 
-@interface REMPopNote : UILabel
+@interface REMPopNote : UIImageView
+
+- (id)initWithText:(NSString *)text;
+-(void)show:(void (^)(void))complete;
 
 @end
