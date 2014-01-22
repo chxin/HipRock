@@ -390,6 +390,9 @@
 		7A7F7B1C181F85A100A3C5AB /* REMGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F7B1B181F85A100A3C5AB /* REMGalleryCollectionViewController.m */; };
 		7A8E491C184442EB00FD1A38 /* REMRankingTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E491B184442EB00FD1A38 /* REMRankingTooltipView.m */; };
 		7A9557BD17C7374700249CED /* REMAirQualityDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */; };
+		7A95FF05188F663600510A07 /* PopNote.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A95FF03188F663600510A07 /* PopNote.png */; };
+		7A95FF06188F663600510A07 /* PopNote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A95FF04188F663600510A07 /* PopNote@2x.png */; };
+		7A95FF09188F718500510A07 /* REMPopNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A95FF08188F718500510A07 /* REMPopNote.m */; };
 		7A9B1E20177B3A8B00C282A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */; };
 		7A9B1E22177B3A8B00C282A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E21177B3A8B00C282A8 /* Foundation.framework */; };
 		7A9B1E24177B3A8B00C282A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E23177B3A8B00C282A8 /* CoreGraphics.framework */; };
@@ -1033,6 +1036,10 @@
 		7A8E491B184442EB00FD1A38 /* REMRankingTooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRankingTooltipView.m; sourceTree = "<group>"; };
 		7A9557BB17C7374700249CED /* REMAirQualityDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAirQualityDataModel.h; sourceTree = "<group>"; };
 		7A9557BC17C7374700249CED /* REMAirQualityDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAirQualityDataModel.m; sourceTree = "<group>"; };
+		7A95FF03188F663600510A07 /* PopNote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PopNote.png; sourceTree = "<group>"; };
+		7A95FF04188F663600510A07 /* PopNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PopNote@2x.png"; sourceTree = "<group>"; };
+		7A95FF07188F718500510A07 /* REMPopNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPopNote.h; sourceTree = "<group>"; };
+		7A95FF08188F718500510A07 /* REMPopNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPopNote.m; sourceTree = "<group>"; };
 		7A9B1E1C177B3A8B00C282A8 /* BluesPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluesPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		7A9B1E21177B3A8B00C282A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -1619,6 +1626,8 @@
 		6A61A6951839B82000C6A228 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
+				7A95FF03188F663600510A07 /* PopNote.png */,
+				7A95FF04188F663600510A07 /* PopNote@2x.png */,
 				B41750FF188CC7D00020AE8E /* DatePicker_Chart.png */,
 				B4175100188CC7D00020AE8E /* DatePicker_Chart@2x.png */,
 				B41750E7188CC7A80020AE8E /* Ascend.png */,
@@ -2114,6 +2123,8 @@
 				7AF3667717CF2D7400447650 /* REMBuildingChartSeriesIndicator.m */,
 				EF60822D17D818420093427C /* REMModalView.h */,
 				EF60822E17D818430093427C /* REMModalView.m */,
+				7A95FF07188F718500510A07 /* REMPopNote.h */,
+				7A95FF08188F718500510A07 /* REMPopNote.m */,
 			);
 			name = Controls;
 			path = View/Controls;
@@ -3420,6 +3431,7 @@
 				B41750F9188CC7A80020AE8E /* DateView_Chart.png in Resources */,
 				6A61A78D1839B82000C6A228 /* UnqualifiedPin_Normal.png in Resources */,
 				B4707D8D18697B1C00FBA393 /* Temperature_pressed.png in Resources */,
+				7A95FF06188F663600510A07 /* PopNote@2x.png in Resources */,
 				6A61A7131839B82000C6A228 /* Oil_normal.png in Resources */,
 				6A61A71A1839B82000C6A228 /* PM2.5_pressed@2x.png in Resources */,
 				6A61A71F1839B82000C6A228 /* DefaultBuilding-Small.png in Resources */,
@@ -3502,6 +3514,7 @@
 				6A61A78A1839B82000C6A228 /* QualifiedPin_Normal@2x.png in Resources */,
 				6A61A71E1839B82000C6A228 /* Water_pressed@2x.png in Resources */,
 				6A61A7231839B82000C6A228 /* Menu_normal.png in Resources */,
+				7A95FF05188F663600510A07 /* PopNote.png in Resources */,
 				B41750F6188CC7A80020AE8E /* Back_Chart@2x.png in Resources */,
 				7A3F66F5184C56440079A244 /* JumpTrial-Pressed@2x.png in Resources */,
 				7A47F3A418482C1B007EE37B /* JumpTrial.png in Resources */,
@@ -3707,6 +3720,7 @@
 				EFD947061839DCBB00E9EC50 /* _DCHGridlineLayer.m in Sources */,
 				B44F63AA186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.m in Sources */,
 				7A153CA717AA497C00413D3C /* REMLoginCardController.m in Sources */,
+				7A95FF09188F718500510A07 /* REMPopNote.m in Sources */,
 				7A153CAA17AA497C00413D3C /* REMSplashScreenController.m in Sources */,
 				7AB9B3A4183DF8FF00779C5E /* REMTextIndicatorFormator.m in Sources */,
 				B4DC084017F90E2C005658C1 /* REMAdministratorModel.m in Sources */,
