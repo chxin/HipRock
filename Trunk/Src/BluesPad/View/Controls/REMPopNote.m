@@ -6,25 +6,50 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMPopNote.h"
+#import "REMBuildingConstants.h"
 
 @implementation REMPopNote
 
-- (id)initWithFrame:(CGRect)frame andText:(NSString *)text
+CGFloat height=45;
+CGFloat bottom=10;
+CGFloat margin=50;
+
+- (id)initWithText:(NSString *)text
 {
-    self = [super initWithFrame:frame];
+    UIFont *font = [UIFont fontWithName:@(kBuildingFontSC) size:20];
+    CGSize size = [text sizeWithFont:font];
+    
+    UIImage *backgroundImage = [REMIMG_PopNote resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9) resizingMode:UIImageResizingModeTile];
+    
+    self = [super initWithImage:backgroundImage];
     if (self) {
         // Initialization code
+        self.frame = CGRectMake((kDMScreenWidth-(size.width+margin))/2, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight), size.width+margin, height);
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:self.bounds];
+        
+        label.text = text;
+        label.font = font;
+        label.textColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
+        label.textAlignment = NSTextAlignmentCenter;
+        
+        [self addSubview:label];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+-(void)show:(void (^)(void))complete
 {
-    // Drawing code
+    [UIView animateWithDuration:0.5  delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
+        [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y-height-bottom, self.frame.size.width,self.frame.size.height)];
+    }completion: ^(BOOL finished){
+        [UIView animateWithDuration:0.5 delay:3 options:UIViewAnimationOptionCurveEaseInOut animations:^(void){
+            [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y+height+bottom, self.frame.size.width,self.frame.size.height)];
+        }completion:^(BOOL finished){
+            if(complete)
+                complete();
+        }];
+    }];
 }
-*/
 
 @end

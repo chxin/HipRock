@@ -181,7 +181,9 @@
             }
             return NO;
         }];
-        
+        if (index == NSNotFound) {
+            return @"wrong";
+        }
         REMTimeRange *range0 = self.parameters.searchTimeRangeArray[0], *rangei = self.parameters.searchTimeRangeArray[index];
         
         NSDate *pointtime = point.energyData.localTime, *realtime;

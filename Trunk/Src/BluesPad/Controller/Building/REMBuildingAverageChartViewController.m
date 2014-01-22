@@ -34,15 +34,20 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 //    self.chartView=nil;
 }
 
-
-- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
+- (void)viewDidLoad
 {
-    self = [super initWithViewFrame:frame];
-    if (self) {
-        self.requestUrl=REMDSBuildingAverageData;
-    }
-    return self;
+    [super viewDidLoad];
+     self.requestUrl=REMDSBuildingAverageData;
 }
+
+//- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
+//{
+//    self = [super initWithViewFrame:frame];
+//    if (self) {
+//        self.requestUrl=REMDSBuildingAverageData;
+//    }
+//    return self;
+//}
 
 -(DCTrendWrapper*)constructWrapperWithFrame:(CGRect)frame {
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]init];

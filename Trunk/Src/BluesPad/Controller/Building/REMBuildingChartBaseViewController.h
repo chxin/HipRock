@@ -17,11 +17,11 @@
 @property (nonatomic) REMDataStoreType requestUrl;
 @property (nonatomic, strong, readonly) DCTrendWrapper* chartWrapper;
 @property (nonatomic, strong) REMEnergyViewData* energyViewData;
-@property (nonatomic, strong, readonly) UILabel* textLabel;
+@property (nonatomic, weak, readonly) UILabel* textLabel;
 @property (nonatomic, strong) NSString* wrapperClassName;
 @property (nonatomic,weak) REMWidgetObject *widgetInfo;
-
-- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame;
+@property (nonatomic) CGRect viewFrame;
+//- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame;
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(id data,REMBusinessErrorInfo *error))loadCompleted;
 
