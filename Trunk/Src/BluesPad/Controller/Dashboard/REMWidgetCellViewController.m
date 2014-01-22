@@ -146,7 +146,7 @@
         wrapperConfig.step=stepModel.step;
         wrapperConfig.benckmarkText=stepModel.benchmarkText;
         wrapperConfig.relativeDateType=stepModel.relativeDateType;
-        wrapperConfig.multiTimeSpans=stepModel.timeRangeArray;
+//        wrapperConfig.multiTimeSpans=stepModel.timeRangeArray;
     }
     if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[DCLineWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];

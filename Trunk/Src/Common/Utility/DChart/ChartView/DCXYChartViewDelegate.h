@@ -22,9 +22,8 @@
 -(void)didYIntervalChange:(double)yInterval forAxis:(DCAxis *)yAxis range:(DCRange*)range;
 -(void)panWithSpeed:(CGFloat)speed panStopped:(BOOL)stopped;
 
--(void)pinchStopped;
-
 -(void)focusPointChanged:(NSArray*)dcpoints at:(int)x;
 
--(DCRange*)updatePinchRange:(DCRange*)newRange pinchCentreX:(CGFloat)centreX;
+-(DCRange*)updatePinchRange:(DCRange*)newRange pinchCentreX:(CGFloat)centreX pinchStopped:(BOOL)stopped;
+-(DCRange*)updatePanRange:(DCRange *)newRange withSpeed:(double)speed;
 @end

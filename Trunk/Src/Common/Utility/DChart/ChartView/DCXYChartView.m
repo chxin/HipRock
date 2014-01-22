@@ -382,18 +382,16 @@
     if (speed == 0 && !panStopped) return;
     if (self.graphContext.focusX == INT32_MIN) {
         double location = speed+self.graphContext.hRange.location;
-        double end = location + self.graphContext.hRange.length;
-        if (location < self.graphContext.globalHRange.location) {
-            location = self.graphContext.hRange.location + speed / 8;
-        } else  if (end > self.graphContext.globalHRange.end) {
-            location = self.graphContext.hRange.location + speed / 8;
+        DCRange* newRange = [[DCRange alloc]initWithLocation:location length:self.graphContext.hRange.length];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(updatePanRange:withSpeed:)]) {
+            newRange = [self.delegate updatePanRange:newRange withSpeed:speed];
         }
-        self.graphContext.hRange = [[DCRange alloc]initWithLocation:location length:self.graphContext.hRange.length];
+        self.graphContext.hRange = newRange;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(panWithSpeed:panStopped:)]) {
+            [self.delegate panWithSpeed:speed panStopped:panStopped];
+        }
     } else {
         [self focusAroundX:[self getXLocationForPoint:[gesture locationInView:self]]];
-    }
-    if (self.delegate && [self.delegate respondsToSelector:@selector(panWithSpeed:panStopped:)]) {
-        [self.delegate panWithSpeed:speed panStopped:panStopped];
     }
 }
 
@@ -401,17 +399,14 @@
     CGFloat centerX = self.graphContext.hRange.location + self.graphContext.hRange.length * (gesture.centerX - self.graphContext.plotRect.origin.x) / self.graphContext.plotRect.size.width;
     CGFloat start = centerX - (centerX - self.graphContext.hRange.location) * gesture.leftScale;
     CGFloat end = centerX + (-centerX + self.graphContext.hRange.end) * gesture.rightScale;
-    if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(pinchStopped)]) {
-            [self.delegate pinchStopped];
-        }
-    } else {
-        DCRange* newRange = [[DCRange alloc]initWithLocation:start length:end-start];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(updatePinchRange:pinchCentreX:)]) {
-            newRange = [self.delegate updatePinchRange:newRange pinchCentreX:centerX];
-        }
-        self.graphContext.hRange = newRange;
+    
+    BOOL pinchStopped = (gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed);
+
+    DCRange* newRange = [[DCRange alloc]initWithLocation:start length:end-start];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(updatePinchRange:pinchCentreX:pinchStopped:)]) {
+        newRange = [self.delegate updatePinchRange:newRange pinchCentreX:centerX pinchStopped:pinchStopped];
     }
+    self.graphContext.hRange = newRange;
 }
 
 -(void)reloadData {
