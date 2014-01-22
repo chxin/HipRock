@@ -249,16 +249,28 @@
     
     baseDateOfX = globalStartdDate;
     if (wrapperConfig.step == REMEnergyStepHour && wrapperConfig.isMultiTimeChart) {
-        if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
-            NSDate* baseDateFromEnergyData = nil;
-            for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
-                if (d.energyData.count > 0) {
-                    baseDateFromEnergyData = [d.energyData[0] localTime];
-                    if ([baseDateFromEnergyData compare:baseDateOfX]==NSOrderedAscending) {
-                        baseDateOfX = baseDateFromEnergyData;
-                    }
-                }
+//        if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
+//            NSDate* baseDateFromEnergyData = nil;
+//            for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
+//                if (d.energyData.count > 0) {
+//                    baseDateFromEnergyData = [d.energyData[0] localTime];
+//                    if ([baseDateFromEnergyData compare:baseDateOfX]==NSOrderedAscending) {
+//                        baseDateOfX = baseDateFromEnergyData;
+//                    }
+//                }
+//            }
+//        }
+        self.sharedProcessor.baseDate = baseDateOfX;
+        for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
+            REMTrendChartDataProcessor* processor = [[REMTrendChartDataProcessor alloc]init];
+            processor.step = step;
+            if (d.energyData.count > 0) {
+                processor.baseDate = [d.energyData[0] localTime];
+            } else {
+                processor.baseDate = baseDateOfX;
             }
+            
+            [self.processors addObject:processor];
         }
     } else {
         if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
@@ -272,9 +284,12 @@
                 }
             }
         }
+        self.sharedProcessor.baseDate = baseDateOfX;
+        for (int i = 0; i < seriesAmount; i++) {
+            [self.processors addObject:self.sharedProcessor];
+        }
     }
 //    baseDateOfX = [REMTimeHelper dateFromYear:2013 Month:11 Day:1];
-    self.sharedProcessor.baseDate = baseDateOfX;
     
 //    if (self.isMultiTimeChart) {
 //        NSDate* firstStartTime = nil;
@@ -299,9 +314,6 @@
 //            [self.processors addObject:processor];
 //        }
 //    } else {
-        for (int i = 0; i < seriesAmount; i++) {
-            [self.processors addObject:self.sharedProcessor];
-        }
 //    }
     
     double globalStart = [self.sharedProcessor processX:globalStartdDate].doubleValue;
