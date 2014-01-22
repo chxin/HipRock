@@ -389,6 +389,7 @@
     if([self isMarkerVisible:currentMarker] == NO){
         GMSCameraUpdate *update = [GMSCameraUpdate setTarget:currentMarker.position];
         [self.mapView moveCamera:update];
+        self.mapView.selectedMarker = currentMarker;
     }
 }
 
