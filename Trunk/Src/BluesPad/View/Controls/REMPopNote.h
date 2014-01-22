@@ -9,4 +9,7 @@
 
 @interface REMPopNote : UILabel
 
+- (id)initWithText:(NSString *)text;
+-(void)show:(void (^)(void))complete;
+
 @end
