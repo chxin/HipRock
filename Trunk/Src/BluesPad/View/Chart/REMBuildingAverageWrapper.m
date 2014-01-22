@@ -20,8 +20,7 @@
     return type != REMEnergyTargetCalcValue;
 }
 
--(NSDictionary*)updateProcessorRangesFormatter:(DWrapperConfig*)wrapperConfig {
-    REMEnergyStep step = wrapperConfig.step;
+-(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
     _isStacked = NO;
     
     NSUInteger seriesAmount = [self getSeriesAmount];

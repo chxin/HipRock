@@ -97,7 +97,7 @@
     rankingSeries.datas = datas;
 }
 
--(NSDictionary*)updateProcessorRangesFormatter:(DWrapperConfig*)wrapperConfig {
+-(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
     int rangeCode = self.rankingRangeCode;
     int datasAmount = self.energyViewData.targetEnergyData.count;
     
@@ -166,7 +166,7 @@
     }
 }
 
--(DCRange*)updatePinchRange:(DCRange *)newRange pinchCentreX:(CGFloat)centreX {
+-(DCRange*)updatePinchRange:(DCRange*)newRange pinchCentreX:(CGFloat)centreX pinchStopped:(BOOL)stopped {
     DCRange* globalRange= self.view.graphContext.globalHRange;
     double returnRangeEnd = newRange.end;
     double returnRangeStart = newRange.location;
