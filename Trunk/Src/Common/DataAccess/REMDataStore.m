@@ -16,7 +16,6 @@
 #import "REMAlertHelper.h"
 #import "REMApplicationContext.h"
 #import "REMBusinessErrorInfo.h"
-#import "UIAlertView+Block.h"
 
 
 
@@ -70,13 +69,9 @@ static NSDictionary *serviceMap = nil;
     if(reachability == NotReachable){
         if(self.accessCache){
             if(!cacheMode){
-                //[REMAlertHelper alert:REMLocalizedString(@"Common_NetNoConnectionLoadLocal") delegate:nil];
+                [REMAlertHelper alert:REMLocalizedString(@"Common_NetNoConnectionLoadLocal") delegate:nil];
                 [[REMApplicationContext instance] setCacheMode:YES];
-                [UIAlertView alertViewWithTitle:@"" message:REMLocalizedString(@"Common_NetNoConnectionLoadLocal") cancelButtonTitle:REMLocalizedString(@"Common_OK") otherButtonTitles:nil onDismiss:^(int buttonIndex, NSString *buttonTitle) {
-                    [self accessLocal:success];
-                } onCancel:^{
-                    [self accessLocal:success];
-                }];
+                [self accessLocal:success];
             }
             else{
                 [self accessLocal:success];
@@ -141,7 +136,7 @@ static NSDictionary *serviceMap = nil;
         
         success(data);
     } error:^(NSError *errorInfo, REMDataAccessErrorStatus status, id response) {
-        if(status == REMDataAccessNoConnection || status == REMDataAccessFailed || (status == REMDataAccessErrorMessage && [response isKindOfClass:[REMBusinessErrorInfo class]] && [((REMBusinessErrorInfo *)response).code isEqualToString:@"1"])){
+        if(self.disableAlert == NO && (status == REMDataAccessNoConnection || status == REMDataAccessFailed || (status == REMDataAccessErrorMessage && [response isKindOfClass:[REMBusinessErrorInfo class]] && [((REMBusinessErrorInfo *)response).code isEqualToString:@"1"]))){
             NSString *message = self.messageMap[@(status)];
             [REMAlertHelper alert:message];
         }

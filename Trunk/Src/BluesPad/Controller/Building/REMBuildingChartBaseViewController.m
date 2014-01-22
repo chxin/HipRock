@@ -41,7 +41,7 @@
     store.maskContainer = nil;
     store.groupName = [NSString stringWithFormat:@"building-data-%@", @(buildingId)];
     
-    
+    store.disableAlert=YES;
     [self startLoadingActivity];
     [store access:^(id data) {
         if(self.view==nil)return ;
@@ -55,13 +55,26 @@
     } error:^(NSError *remError, REMDataAccessErrorStatus status, REMBusinessErrorInfo *bizError) {
         [self stopLoadingActivity];
         loadCompleted(nil,bizError);
-        if(bizError!=nil){
-            [self loadDataFailureWithError:bizError];
-        }
+        
+        [self loadDataFailureWithError:bizError withStatus:status];
+        
     }];
 
 }
 
+- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error withStatus:(REMDataAccessErrorStatus)status{
+    NSString *serverError = nil;
+    if (status == REMDataAccessFailed) {
+        serverError =NSLocalizedString(@"Common_ServerTimeout", @"");
+    }
+    else if (status == REMDataAccessErrorMessage && [error.code isEqualToString:@"1"]==YES){
+        serverError =NSLocalizedString(@"Common_ServerError", @"");
+    }
+    if (serverError != nil) {
+        [self drawLabelWithText:serverError];
+    }
+    
+}
 
 - (void)loadDataSuccessWithData:(id)data {
     self.energyViewData = [self convertData:data];
@@ -161,9 +174,7 @@
     return nil;
 }
 
-- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error {
-    [self drawLabelWithText:NSLocalizedString(@"BuildingChart_DataError", @"")];
-}
+
 
 - (void)prepareShare{
     
@@ -178,13 +189,14 @@
 -(void)drawLabelWithText:(NSString *)text
 {
     if (REMIsNilOrNull(self.textLabel)) {
-        CGFloat fontSize = 36;
-        CGSize labelSize = [text sizeWithFont:[UIFont systemFontOfSize:fontSize]];
+        CGFloat fontSize = 29;
+        UIFont *font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:fontSize];
+        CGSize labelSize = [text sizeWithFont:font];
         UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];
-        noDataLabel.textColor = [UIColor whiteColor];
+        noDataLabel.textColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
         noDataLabel.textAlignment = NSTextAlignmentLeft;
         noDataLabel.backgroundColor = [UIColor clearColor];
-        
+        noDataLabel.font=font;
         [self.view addSubview:noDataLabel];
         _textLabel = noDataLabel;
     }

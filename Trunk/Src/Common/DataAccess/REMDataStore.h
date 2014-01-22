@@ -19,6 +19,7 @@
 @property (nonatomic,strong) NSString *groupName;
 @property (nonatomic,strong) NSDictionary *messageMap;
 @property (nonatomic) BOOL accessCache;
+@property (nonatomic) BOOL disableAlert;
 
 
 - (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter accessCache:(BOOL)accessCache andMessageMap:(NSDictionary *)messageMap;

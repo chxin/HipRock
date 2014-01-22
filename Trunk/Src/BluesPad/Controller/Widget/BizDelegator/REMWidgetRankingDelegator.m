@@ -147,7 +147,7 @@ const static CGFloat kRankingTimePickerWidth=250;
 
 - (void)search{
     
-    [self searchData:self.model];
+    [self searchData:self.tempModel];
 }
 
 
@@ -159,7 +159,7 @@ const static CGFloat kRankingTimePickerWidth=250;
     NSString *text1=[NSString stringWithFormat:@"%@ %@",relativeDate,text];
     
     [self.timePickerButton setTitle:text1 forState:UIControlStateNormal];
-    REMWidgetRankingSearchModel *rankingModel=(REMWidgetRankingSearchModel *)self.model;
+    REMWidgetRankingSearchModel *rankingModel=(REMWidgetRankingSearchModel *)self.tempModel;
     [rankingModel setTimeRangeItem:range AtIndex:0];
     rankingModel.relativeDateComponent=relativeDate;
     rankingModel.relativeDateType=relativeType;
@@ -190,7 +190,10 @@ const static CGFloat kRankingTimePickerWidth=250;
         [self showEnergyChart];
     }
     else{
-        [self search];
+        if (self.ownerController.serverError == nil && self.ownerController.isServerTimeout==NO) {
+            [self search];
+        }
+        
     }
 }
 

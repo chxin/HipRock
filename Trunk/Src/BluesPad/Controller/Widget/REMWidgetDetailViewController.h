@@ -22,7 +22,7 @@
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
 @property (nonatomic,weak) REMDashboardObj *dashboardInfo;
 @property (nonatomic,strong) REMBusinessErrorInfo *serverError;
-
+@property (nonatomic) BOOL isServerTimeout;
 - (void)showChart;
 -(void)releaseChart;
 -(void)updateBuildingCover;

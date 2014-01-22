@@ -186,9 +186,19 @@
     self.loadingView=loadingView;
     REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType withWidgetInfo:self.widgetInfo];
     searcher.loadingView=self.loadingView;
+    searcher.disableNetworkAlert=YES;
     [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:self.searchModel withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *errorInfo){
         if (data==nil) {
-            self.serverError=errorInfo;
+            if (errorInfo==nil) { // timeout or network failed
+                [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerTimeout", @"")];
+                self.isServerTimeout=YES;
+            }
+            else{
+                self.serverError=errorInfo;
+                if ([errorInfo.code isEqualToString:@"1"]==YES) {
+                    [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerError", @"")];
+                }
+            }
         }
         else{
             self.chartData = data;
@@ -197,6 +207,22 @@
             [self generateChart];
         }
     }];
+}
+
+- (void)generateServerErrorLabel:(NSString *)msg{
+    UILabel *label=[[UILabel alloc]init];
+    label.translatesAutoresizingMaskIntoConstraints=NO;
+    label.textColor= [[UIColor blackColor] colorWithAlphaComponent:0.6] ;
+    label.text=msg;
+    label.font=[UIFont systemFontOfSize:kDashboardWidgetTitleSize];
+    [label setBackgroundColor:[UIColor clearColor]];
+    NSLayoutConstraint *constraintX=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    NSLayoutConstraint *constraintY=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    [self.view addSubview:label];
+    [self.view addConstraint:constraintX];
+    [self.view addConstraint:constraintY];
+    
+
 }
 
 - (void)snapshotChartView{

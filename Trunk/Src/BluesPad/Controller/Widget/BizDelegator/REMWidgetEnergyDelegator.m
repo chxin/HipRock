@@ -316,7 +316,7 @@
         [self showEnergyChart];
     }
     else{
-        if (self.ownerController.serverError == nil) {
+        if (self.ownerController.serverError == nil && self.ownerController.isServerTimeout==NO) {
             [self search];
         }
         else{

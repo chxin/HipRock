@@ -16,7 +16,7 @@
 @interface REMWidgetBizDelegatorBase()
 
 @property (nonatomic,weak) UIView *popupMsgView;
-
+@property (nonatomic,weak) UILabel *serverErrorLabel;
 
 @end
 
@@ -98,15 +98,39 @@
 }
 
 - (void)showChart{
+    
     if (self.energyData) {
         [self processEnergyDataInnerError:self.energyData];
     }
     if (self.ownerController.serverError!=nil) {
-        NSString *showText=[self processServerError:self.ownerController.serverError.code];
-        if (showText!=nil) {
-            [self showPopupMsg:showText];
+        if ([self.ownerController.serverError.code isEqualToString:@"1"]==YES) {
+            [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerError", @"")];
+        }
+        else{
+            NSString *showText=[self processServerError:self.ownerController.serverError.code];
+            if (showText!=nil) {
+                [self showPopupMsg:showText];
+            }
         }
     }
+    if (self.ownerController.isServerTimeout==YES) {
+        [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerTimeout", @"")];
+    }
+    
+}
+
+- (void)generateServerErrorLabel:(NSString *)msg{
+    UILabel *label=[[UILabel alloc]init];
+    label.translatesAutoresizingMaskIntoConstraints=NO;
+    label.textColor=[UIColor blackColor];
+    label.text=msg;
+    [label setBackgroundColor:[UIColor clearColor]];
+    NSLayoutConstraint *constraintX=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    NSLayoutConstraint *constraintY=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    [self.view addSubview:label];
+    [self.view addConstraint:constraintX];
+    [self.view addConstraint:constraintY];
+    self.serverErrorLabel=label;
     
 }
 
@@ -136,6 +160,11 @@
         if(data!=nil){
             self.energyData=data;
             
+            if (self.serverErrorLabel!=nil) {
+                [self.serverErrorLabel removeFromSuperview];
+                self.serverErrorLabel=nil;
+            }
+            
             [self mergeTempModel];
             
             [self reloadChart];
@@ -159,9 +188,6 @@
                     [self rollbackWithError:bizInfo];
                 }
                 else{
-                    
-                    
-                    
                     [self rollbackWithError:error];
                 }
             }
@@ -202,15 +228,18 @@
 - (void) showPopupMsg:(NSString *)msg{
     [self hidePopupMsg];
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectZero];
-    label.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:20];
-    [label setBackgroundColor:[UIColor grayColor]];
+    label.font=[UIFont fontWithName:@(kBuildingFontSC) size:20];
+    label.textColor=[[UIColor blackColor] colorWithAlphaComponent:0.8];
+    [label setBackgroundColor:[UIColor whiteColor]];
     label.text=msg;
     label.textAlignment=NSTextAlignmentCenter;
     CGSize expectedLabelSize = [label.text sizeWithFont:label.font];
-    CGFloat height=50;
+    CGFloat height=40;
     CGFloat margin=50;
     CGFloat bottom=10;
-    
+    label.layer.borderWidth=1;
+    label.layer.borderColor=[[UIColor blackColor] colorWithAlphaComponent:0.6].CGColor;
+    label.layer.cornerRadius=8;
     [label setFrame:CGRectMake((kDMScreenWidth-(expectedLabelSize.width+margin))/2, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight), expectedLabelSize.width+margin, height)];
     [self.view addSubview:label];
     self.popupMsgView=label;

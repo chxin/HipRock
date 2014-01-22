@@ -151,9 +151,9 @@ const int buttonFirstMargin = -20;
     [super loadDataSuccessWithData:data];
 }
 
-- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error {
+- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error withStatus:(REMDataAccessErrorStatus)status {
     self.loadDataSuccess = NO;
-    [super loadDataFailureWithError:error];
+    [super loadDataFailureWithError:error withStatus:status];
 }
 
 @end

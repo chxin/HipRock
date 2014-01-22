@@ -266,7 +266,7 @@
         shareButton=[UIButton buttonWithType:UIButtonTypeSystem];
         [shareButton setTintColor:[UIColor whiteColor]];
     }
-    [shareButton setFrame:CGRectMake(settingButton.frame.origin.x-kDMCommon_TopLeftButtonWidth-10, backButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonHeight)];
+    [shareButton setFrame:CGRectMake(settingButton.frame.origin.x-kDMCommon_TopLeftButtonWidth-kDMCommon_ContentLeftMargin, backButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonHeight)];
     [shareButton setImage:REMIMG_Share_normal forState:UIControlStateNormal];
     //if (self.buildingInfo.commodityUsage.count == 0) {
     shareButton.enabled = NO;
@@ -426,7 +426,7 @@
         REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param accessCache:YES andMessageMap:nil];
         store.groupName=self.loadingImageKey;
         
-        
+        store.disableAlert=YES;
         [store access:^(NSData *data){
             if(data == nil || [data length] == 2) return;
             if (self.cropTitleView!=nil) {

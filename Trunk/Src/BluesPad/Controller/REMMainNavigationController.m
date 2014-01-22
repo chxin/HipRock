@@ -13,7 +13,6 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMMapGallerySegue.h"
 #import "REMColor.h"
-#import "UINavigationController+Block.h"
 
 @interface REMMainNavigationController ()
 
@@ -103,10 +102,13 @@
     mapController.isInitialPresenting = true;
     
     if([self.topViewController isEqual:mapController] == NO){
-        [self popToViewController:mapController animated:YES onCompletion:^{
-            [mapController updateView];
-            if(completed) completed();
-        }];
+        [self popToViewController:mapController animated:YES];
+        [mapController updateView];
+        if(completed) completed();
+//        [self popToViewController:mapController animated:YES onCompletion:^{
+//            [mapController updateView];
+//            if(completed) completed();
+//        }];
     }
     else{
         [mapController updateView];

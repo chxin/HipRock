@@ -85,6 +85,7 @@ const static CGFloat widgetGap=20;
         sub.buildingInfo=self.buildingInfo;
         sub.dashboardInfo=self.dashboardInfo;
         sub.serverError=cellController.serverError;
+        sub.isServerTimeout=cellController.isServerTimeout;
         [self addChildViewController:sub];
         if (i==self.currentWidgetIndex) {
             UIView *view = sub.view;

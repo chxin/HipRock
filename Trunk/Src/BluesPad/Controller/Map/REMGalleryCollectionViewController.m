@@ -179,7 +179,6 @@
                 [REMImageHelper writeImageFile:smallBlurImage withFullPath:smallBlurImagePath];
                 
                 completed([UIImage imageWithContentsOfFile:smallImagePath]);
-            } error:^(NSError *error,REMDataAccessErrorStatus status, id response) {
             }];
         }
     }
