@@ -64,6 +64,7 @@
 #define REMIMG_DateView_Chart REMLoadImageNamed(@"DateView_Chart")
 #define REMIMG_Descend REMLoadImageNamed(@"Descend")
 #define REMIMG_Legend_Chart REMLoadImageNamed(@"Legend_Chart")
+#define REMIMG_PopNote REMLoadImageNamed(@"PopNote")
 
 //images in /Dashboard:
 #define REMIMG_Back REMLoadImageNamed(@"Back")
