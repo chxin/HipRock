@@ -114,7 +114,7 @@
         
         for (NSUInteger i = 0; i < self.chartWrapper.view.seriesList.count; i++) {
             DCXYSeries* series = self.chartWrapper.view.seriesList[i];
-            if (![self isSeriesHasLegend:series index:i]) continue;
+            if (![self isSeriesHasLegend:series index:i] || series.hidden) continue;
             NSString* legendText = [self getLegendText:series index:i];
             UIColor* legendColor = [self getLegendColor:series index:i];
             if (REMIsNilOrNull(legendText) || REMIsNilOrNull(legendColor)) continue;

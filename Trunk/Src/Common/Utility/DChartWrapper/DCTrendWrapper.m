@@ -38,7 +38,7 @@
         
         self.animationManager = [[DCTrendAnimationManager alloc]init];
         self.animationManager.delegate = self;
-        NSDictionary* dic = [self updateProcessorRangesFormatter:wrapperConfig.step];
+        NSDictionary* dic = [self updateProcessorRangesFormatter:wrapperConfig];
         _myStableRange = dic[@"beginRange"];
         [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:wrapperConfig.step];
         
@@ -217,7 +217,8 @@
     return length;
 }
 
--(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
+-(NSDictionary*)updateProcessorRangesFormatter:(DWrapperConfig*)wrapperConfig {
+    REMEnergyStep step = wrapperConfig.step;
     NSUInteger seriesAmount = [self getSeriesAmount];
     _processors = [[NSMutableArray alloc]init];
     
@@ -229,7 +230,6 @@
     _sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
     self.sharedProcessor.step = step;
     
-//    if (allSeriesUserGlobalTime) {
     beginningStart = self.energyViewData.visibleTimeRange.startTime;
     beginningEnd = self.energyViewData.visibleTimeRange.endTime;
     
@@ -246,24 +246,64 @@
             globalEndDate = beginningEnd;
         }
     }
-    for (int i = 0; i < seriesAmount; i++) {
-        [self.processors addObject:self.sharedProcessor];
-    }
     
     baseDateOfX = globalStartdDate;
-    if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
-        NSDate* baseDateFromEnergyData = nil;
-        for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
-            if (d.energyData.count > 0) {
-                baseDateFromEnergyData = [d.energyData[0] localTime];
-                self.sharedProcessor.baseDate = baseDateFromEnergyData;
-                baseDateOfX = [self.sharedProcessor deprocessX:floorf([self.sharedProcessor processX:baseDateOfX].doubleValue)];
-                break;
+    if (wrapperConfig.step == REMEnergyStepHour && wrapperConfig.isMultiTimeChart) {
+        if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
+            NSDate* baseDateFromEnergyData = nil;
+            for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
+                if (d.energyData.count > 0) {
+                    baseDateFromEnergyData = [d.energyData[0] localTime];
+                    if ([baseDateFromEnergyData compare:baseDateOfX]==NSOrderedAscending) {
+                        baseDateOfX = baseDateFromEnergyData;
+                    }
+                }
+            }
+        }
+    } else {
+        if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
+            NSDate* baseDateFromEnergyData = nil;
+            for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
+                if (d.energyData.count > 0) {
+                    baseDateFromEnergyData = [d.energyData[0] localTime];
+                    self.sharedProcessor.baseDate = baseDateFromEnergyData;
+                    baseDateOfX = [self.sharedProcessor deprocessX:floorf([self.sharedProcessor processX:baseDateOfX].doubleValue)];
+                    break;
+                }
             }
         }
     }
-    
+//    baseDateOfX = [REMTimeHelper dateFromYear:2013 Month:11 Day:1];
     self.sharedProcessor.baseDate = baseDateOfX;
+    
+//    if (self.isMultiTimeChart) {
+//        NSDate* firstStartTime = nil;
+//        int firstStartIndex = 0;
+////        for (REMTimeRange* timeRange in wrapperConfig.multiTimeSpans) {
+////            if (REMIsNilOrNull(multiMinStartDate)) multiMinStartDate = timeRange.startTime;
+////            if ([multiMinStartDate compare:timeRange.startTime] == NSOrderedDescending) multiMinStartDate = timeRange.startTime;
+////        }
+//        for (int i = 0; i < seriesAmount; i++) {
+//            REMTrendChartDataProcessor* processor = [[REMTrendChartDataProcessor alloc]init];
+//            processor.step = step;
+//            REMTimeRange* seriesTimeRange = wrapperConfig.multiTimeSpans[i];
+//            if (i==0) {
+//                firstStartIndex = ceil([self.sharedProcessor processX:seriesTimeRange.startTime].doubleValue);
+//                processor.baseDate = baseDateOfX;
+//                firstStartTime = [self.sharedProcessor deprocessX:firstStartIndex];
+//            } else {
+////                processor.baseDate =  [NSDate dateWithTimeInterval:[seriesTimeRange.startTime timeIntervalSinceDate:multiMinStartDate] sinceDate:baseDateOfX];
+//                int theStartIndex = ceil([self.sharedProcessor processX:seriesTimeRange.startTime].doubleValue);
+//                processor.baseDate = [self.sharedProcessor deprocessX:theStartIndex-firstStartIndex];
+//            }
+//            [self.processors addObject:processor];
+//        }
+//    } else {
+        for (int i = 0; i < seriesAmount; i++) {
+            [self.processors addObject:self.sharedProcessor];
+        }
+//    }
+    
     double globalStart = [self.sharedProcessor processX:globalStartdDate].doubleValue;
     double globalLength = [self.sharedProcessor processX:globalEndDate].doubleValue - globalStart;
 //    if (!self.graphContext.xLabelAlignToTick) globalStart+=0.5;
@@ -311,24 +351,24 @@
     _calenderType = wrapperConfig.calendarType;
 }
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
-    [self.animationManager invalidate];
-    self.animationManager.view = nil;
-    [super redraw:energyViewData];
-    NSDictionary* dic = [self updateProcessorRangesFormatter:step];
-    CGRect frame = self.view.frame;
-    UIView* superView = self.view.superview;
-    
-    [self.view removeFromSuperview];
-    
-    _myStableRange = dic[@"beginRange"];
-    [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:step];
-    for(NSUInteger i = 0; i < self.view.seriesList.count; i++) {
-        DCXYSeries* s = self.view.seriesList[i];
-        if (REMIsNilOrNull(s.target)) continue;
-        s.hidden = [self isTargetHidden:s.target index:i];
-    }
-    [superView addSubview:self.view];
-    [self updateCalender];
+//    [self.animationManager invalidate];
+//    self.animationManager.view = nil;
+//    [super redraw:energyViewData];
+//    NSDictionary* dic = [self updateProcessorRangesFormatter:step];
+//    CGRect frame = self.view.frame;
+//    UIView* superView = self.view.superview;
+//    
+//    [self.view removeFromSuperview];
+//    
+//    _myStableRange = dic[@"beginRange"];
+//    [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:step];
+//    for(NSUInteger i = 0; i < self.view.seriesList.count; i++) {
+//        DCXYSeries* s = self.view.seriesList[i];
+//        if (REMIsNilOrNull(s.target)) continue;
+//        s.hidden = [self isTargetHidden:s.target index:i];
+//    }
+//    [superView addSubview:self.view];
+//    [self updateCalender];
 }
 
 -(void)setCalenderType:(REMCalendarType)calenderType {

@@ -97,7 +97,7 @@
     rankingSeries.datas = datas;
 }
 
--(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
+-(NSDictionary*)updateProcessorRangesFormatter:(DWrapperConfig*)wrapperConfig {
     int rangeCode = self.rankingRangeCode;
     int datasAmount = self.energyViewData.targetEnergyData.count;
     
