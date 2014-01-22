@@ -41,14 +41,17 @@
     
     self.legendContainer = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-kBuildingTrendChartLegendHeight, self.view.frame.size.width, kBuildingTrendChartLegendHeight)];
     [self.view addSubview:self.legendContainer];
-
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
+    
     if (self.chartWrapper!=nil) {
         self.energyViewData = self.energyViewData;
     }
+    if (self.errorText!=nil) {
+        [self drawLabelWithText:self.errorText];
+    
+        self.chartWrapper.view.hidden = YES;
+        self.legendContainer.hidden = YES;
+    }
+
 }
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(id,REMBusinessErrorInfo *))loadCompleted
@@ -137,19 +140,27 @@
 -(void)setEnergyViewData:(REMEnergyViewData *)energyViewData {
     _energyViewData = energyViewData;
     
-    if (REMIsNilOrNull(self.chartWrapper)) {
-        // add 22 into width to show the xLabel which is outside of view bounds
-        _chartWrapper = [self constructWrapperWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+22, self.view.bounds.size.height-kBuildingTrendChartLegendHeight)];
-        if (!REMIsNilOrNull(self.chartWrapper)) {
-            [self.view addSubview:self.chartWrapper.view];
-        }
-    } else {
-        UIView *v= self.chartWrapper.view;
-        if (v.superview==nil) {
-            [self.view addSubview:v];
-        }
-        [self.chartWrapper redraw:self.energyViewData step:[self getEnergyStep]];
+    if (self.chartWrapper!=nil) {
+        [self.chartWrapper.view removeFromSuperview];
     }
+    _chartWrapper = [self constructWrapperWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+22, self.view.bounds.size.height-kBuildingTrendChartLegendHeight)];
+    if (!REMIsNilOrNull(self.chartWrapper)) {
+        [self.view addSubview:self.chartWrapper.view];
+    }
+//    if (REMIsNilOrNull(self.chartWrapper)) {
+//        // add 22 into width to show the xLabel which is outside of view bounds
+//        _chartWrapper = [self constructWrapperWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+22, self.view.bounds.size.height-kBuildingTrendChartLegendHeight)];
+//        if (!REMIsNilOrNull(self.chartWrapper)) {
+//            [self.view addSubview:self.chartWrapper.view];
+//        }
+//    } else {
+//        UIView *v= self.chartWrapper.view;
+//        
+//        if (v.superview==nil) {
+//            [self.view addSubview:v];
+//        }
+//        //[self.chartWrapper redraw:self.energyViewData step:[self getEnergyStep]];
+//    }
     [self updateLegendView];
     
     BOOL hasPoint = NO;

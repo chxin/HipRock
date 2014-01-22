@@ -30,11 +30,20 @@ const int buttonWidth = 70;
 const int buttonMargin = 5;
 const int buttonFirstMargin = -20;
 
+- (id)init{
+    self = [super init];
+    if (self) {
+        self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
+        self.loadDataSuccess=NO;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.requestUrl=REMDSBuildingTimeRangeData;
-    self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
+    //self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
     
     REMToggleButtonGroup* toggleGroup = [[REMToggleButtonGroup alloc]init];
     _toggleGroup = toggleGroup;
@@ -47,7 +56,6 @@ const int buttonFirstMargin = -20;
     [self makeButton:REMLocalizedString(@"Common_ThisYear") rect:CGRectMake((buttonMargin + buttonWidth)*4+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeThisYear);
     [self makeButton:REMLocalizedString(@"Common_LastYear") rect:CGRectMake((buttonMargin + buttonWidth)*5+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeLastYear);
     toggleGroup.delegate = self;
-    self.loadDataSuccess = NO;
     self.timeRangeType = REMRelativeTimeRangeTypeThisMonth;
 }
 //- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
