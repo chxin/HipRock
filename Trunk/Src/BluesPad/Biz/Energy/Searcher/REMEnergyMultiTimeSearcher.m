@@ -79,7 +79,36 @@
     
 }
 
+- (REMEnergyViewData *)processHourData:(REMEnergyViewData *)data{
+    if (data == nil) {
+        return nil;
+    }
+    if (data.targetEnergyData == nil || [data.targetEnergyData isEqual:[NSNull null]]==YES) {
+        return data;
+    }
+    REMWidgetTagSearchModel *model=[self tagModel];
+    
+    REMTargetEnergyData *baseTargetData= data.targetEnergyData[0];
+    
+    REMTimeRange *baseTimeRange=model.timeRangeArray[0];
+    
+    NSDate *minStart = baseTimeRange.startTime;
+    NSDate *maxEnd= baseTimeRange.endTime;
+    
+    for (int i=1; i<data.targetEnergyData.count; ++i) {
+        REMTargetEnergyData *targetEnergyData=data.targetEnergyData[i];
+        for (int j=0; j<targetEnergyData.energyData.count;++j) {
+            REMEnergyData *energyData = targetEnergyData.energyData[j];
+            REMEnergyData *baseData=baseTargetData.energyData[j];
+            energyData.localTime=baseData.localTime;
+        }
+    }
+    
+    data.globalTimeRange.startTime=minStart;
+    data.globalTimeRange.endTime=maxEnd;
 
+    return data;
+}
 
 - (REMEnergyViewData *)processEnergyData:(NSDictionary *)rawData{
     
@@ -91,7 +120,9 @@
     
     REMWidgetTagSearchModel *model=[self tagModel];
     
-    if(model.step == REMEnergyStepHour) return data;
+    if(model.step == REMEnergyStepHour){
+        return [self processHourData:data];
+    }
     
     REMTargetEnergyData *baseData= data.targetEnergyData[0];
     

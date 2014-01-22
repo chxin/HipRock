@@ -29,7 +29,7 @@
             if ([bizError.code isEqualToString:@"050001216002"]==YES) {//widget deleted
                 [self showMessage:NSLocalizedString(@"Building_WidgetRelationWidgetDeleted", @"")];
             }
-            else if([bizError.code isEqualToString:@"050001216001"]==YES){//container deleted
+            else if([bizError.code isEqualToString:@"050001216001"]==YES || [bizError.code isEqualToString:@"050001216005"]==YES){//container deleted
                 [self showMessage:NSLocalizedString(@"Building_WidgetRelationPositionDeleted", @"")];
             }
         }

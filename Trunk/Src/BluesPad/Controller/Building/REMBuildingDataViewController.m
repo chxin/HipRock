@@ -28,6 +28,7 @@
     if(self=[super init]){
         _currentOffsetY=NSNotFound;
         self.commodityDataLoadStatus=[NSMutableDictionary dictionary];
+        self.currentCommodityIndex=0;
     }
     return self;
 }
@@ -55,7 +56,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.currentCommodityIndex=0;
+    
     [self initButtons];
     [self initDragLabel];
     [self initCommodityController];
@@ -89,7 +90,7 @@
         btn.titleLabel.textAlignment=NSTextAlignmentCenter;
         [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal.png",str] ] forState:UIControlStateNormal];
         [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed.png",str]] forState:UIControlStateSelected];
-        if(i==0){
+        if(i==self.currentCommodityIndex){
             [btn setSelected:YES];
         }
         
