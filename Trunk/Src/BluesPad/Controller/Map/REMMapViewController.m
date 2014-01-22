@@ -56,6 +56,12 @@
 - (void)viewDidLoad
 {
     //[self showMarkers];
+    self.buildingInfoArray = REMAppContext.buildingInfoArray;
+    
+    if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
+        self.view.userInteractionEnabled = NO;
+    }
+    
     if(REMAppContext.buildingInfoArray == nil){
         [self loadData];
     }
@@ -108,8 +114,6 @@
 
 -(void)updateView
 {
-    self.buildingInfoArray = REMAppContext.buildingInfoArray;
-    
     if(self.buildingInfoArray.count <= 0){
         [self.switchButton setEnabled:NO];
         [REMAlertHelper alert:REMLocalizedString(@"Map_NoVisiableBuilding")];
@@ -172,6 +176,7 @@
     }
     
     if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
+        self.view.userInteractionEnabled = NO;
         [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
     }
 }
