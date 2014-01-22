@@ -15,21 +15,43 @@
 
 @property (nonatomic,weak) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic,strong) UIView* legendContainer;
+@property (nonatomic,strong) NSString *errorText;
 
 @end
 
 @implementation REMBuildingChartBaseViewController
 
-- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
-{
-    self = [super init];
-    if (self) {
-        self.view.frame = frame;
-        
-        self.legendContainer = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height-kBuildingTrendChartLegendHeight, frame.size.width, kBuildingTrendChartLegendHeight)];
-        [self.view addSubview:self.legendContainer];
+
+
+//- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
+//{
+//    self = [super init];
+//    if (self) {
+//        self.view.frame = frame;
+//        
+//        self.legendContainer = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height-kBuildingTrendChartLegendHeight, frame.size.width, kBuildingTrendChartLegendHeight)];
+//        [self.view addSubview:self.legendContainer];
+//    }
+//    return self;
+//}
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    self.view.frame = self.viewFrame;
+    
+    self.legendContainer = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-kBuildingTrendChartLegendHeight, self.view.frame.size.width, kBuildingTrendChartLegendHeight)];
+    [self.view addSubview:self.legendContainer];
+    
+    if (self.chartWrapper!=nil) {
+        self.energyViewData = self.energyViewData;
     }
-    return self;
+    if (self.errorText!=nil) {
+        [self drawLabelWithText:self.errorText];
+    
+        self.chartWrapper.view.hidden = YES;
+        self.legendContainer.hidden = YES;
+    }
+
 }
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(id,REMBusinessErrorInfo *))loadCompleted
@@ -118,15 +140,27 @@
 -(void)setEnergyViewData:(REMEnergyViewData *)energyViewData {
     _energyViewData = energyViewData;
     
-    if (REMIsNilOrNull(self.chartWrapper)) {
-        // add 22 into width to show the xLabel which is outside of view bounds
-        _chartWrapper = [self constructWrapperWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+22, self.view.bounds.size.height-kBuildingTrendChartLegendHeight)];
-        if (!REMIsNilOrNull(self.chartWrapper)) {
-            [self.view addSubview:self.chartWrapper.view];
-        }
-    } else {
-        [self.chartWrapper redraw:self.energyViewData step:[self getEnergyStep]];
+    if (self.chartWrapper!=nil) {
+        [self.chartWrapper.view removeFromSuperview];
     }
+    _chartWrapper = [self constructWrapperWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+22, self.view.bounds.size.height-kBuildingTrendChartLegendHeight)];
+    if (!REMIsNilOrNull(self.chartWrapper)) {
+        [self.view addSubview:self.chartWrapper.view];
+    }
+//    if (REMIsNilOrNull(self.chartWrapper)) {
+//        // add 22 into width to show the xLabel which is outside of view bounds
+//        _chartWrapper = [self constructWrapperWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+22, self.view.bounds.size.height-kBuildingTrendChartLegendHeight)];
+//        if (!REMIsNilOrNull(self.chartWrapper)) {
+//            [self.view addSubview:self.chartWrapper.view];
+//        }
+//    } else {
+//        UIView *v= self.chartWrapper.view;
+//        
+//        if (v.superview==nil) {
+//            [self.view addSubview:v];
+//        }
+//        //[self.chartWrapper redraw:self.energyViewData step:[self getEnergyStep]];
+//    }
     [self updateLegendView];
     
     BOOL hasPoint = NO;
@@ -143,7 +177,12 @@
         self.textLabel.hidden = YES;
         self.legendContainer.hidden = NO;
     } else {
-        [self drawLabelWithText:NSLocalizedString(@"BuildingChart_NoData", @"")];
+        if (self.errorText!=nil) {
+            [self drawLabelWithText:self.errorText];
+        }
+        else{
+            [self drawLabelWithText:NSLocalizedString(@"BuildingChart_NoData", @"")];
+        }
         self.chartWrapper.view.hidden = YES;
         self.legendContainer.hidden = YES;
     }
@@ -202,6 +241,7 @@
     }
     self.textLabel.hidden = NO;
     self.textLabel.text = text;
+    self.errorText=text;
 }
 
 

@@ -29,29 +29,58 @@ const int buttonHeight = 30;
 const int buttonWidth = 70;
 const int buttonMargin = 5;
 const int buttonFirstMargin = -20;
-- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
-{
-    self = [super initWithViewFrame:frame];
+
+- (id)init{
+    self = [super init];
     if (self) {
-        self.requestUrl=REMDSBuildingTimeRangeData;
         self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
-        
-        REMToggleButtonGroup* toggleGroup = [[REMToggleButtonGroup alloc]init];
-        _toggleGroup = toggleGroup;
-        [self makeButton:REMLocalizedString(@"Common_Today") rect:CGRectMake(buttonFirstMargin, 0, buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeToday);
-        [self makeButton:REMLocalizedString(@"Common_Yesterday") rect:CGRectMake(buttonMargin + buttonWidth+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeYesterday);
-        self.defaultButton = [self makeButton:REMLocalizedString(@"Common_ThisMonth") rect:CGRectMake((buttonMargin + buttonWidth)*2+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup];
-        self.defaultButton.on = YES;
-        self.defaultButton.value = @(REMRelativeTimeRangeTypeThisMonth);
-        [self makeButton:REMLocalizedString(@"Common_LastMonth") rect:CGRectMake((buttonMargin + buttonWidth)*3+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeLastMonth);
-        [self makeButton:REMLocalizedString(@"Common_ThisYear") rect:CGRectMake((buttonMargin + buttonWidth)*4+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeThisYear);
-        [self makeButton:REMLocalizedString(@"Common_LastYear") rect:CGRectMake((buttonMargin + buttonWidth)*5+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeLastYear);
-        toggleGroup.delegate = self;
-        self.loadDataSuccess = NO;
-        self.timeRangeType = REMRelativeTimeRangeTypeThisMonth;
+        self.loadDataSuccess=NO;
     }
     return self;
 }
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.requestUrl=REMDSBuildingTimeRangeData;
+    //self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
+    
+    REMToggleButtonGroup* toggleGroup = [[REMToggleButtonGroup alloc]init];
+    _toggleGroup = toggleGroup;
+    [self makeButton:REMLocalizedString(@"Common_Today") rect:CGRectMake(buttonFirstMargin, 0, buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeToday);
+    [self makeButton:REMLocalizedString(@"Common_Yesterday") rect:CGRectMake(buttonMargin + buttonWidth+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeYesterday);
+    self.defaultButton = [self makeButton:REMLocalizedString(@"Common_ThisMonth") rect:CGRectMake((buttonMargin + buttonWidth)*2+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup];
+    self.defaultButton.on = YES;
+    self.defaultButton.value = @(REMRelativeTimeRangeTypeThisMonth);
+    [self makeButton:REMLocalizedString(@"Common_LastMonth") rect:CGRectMake((buttonMargin + buttonWidth)*3+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeLastMonth);
+    [self makeButton:REMLocalizedString(@"Common_ThisYear") rect:CGRectMake((buttonMargin + buttonWidth)*4+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeThisYear);
+    [self makeButton:REMLocalizedString(@"Common_LastYear") rect:CGRectMake((buttonMargin + buttonWidth)*5+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeLastYear);
+    toggleGroup.delegate = self;
+    self.timeRangeType = REMRelativeTimeRangeTypeThisMonth;
+}
+//- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
+//{
+//    self = [super initWithViewFrame:frame];
+//    if (self) {
+//        self.requestUrl=REMDSBuildingTimeRangeData;
+//        self.datasource = [[NSMutableArray alloc]initWithCapacity:6];
+//        
+//        REMToggleButtonGroup* toggleGroup = [[REMToggleButtonGroup alloc]init];
+//        _toggleGroup = toggleGroup;
+//        [self makeButton:REMLocalizedString(@"Common_Today") rect:CGRectMake(buttonFirstMargin, 0, buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeToday);
+//        [self makeButton:REMLocalizedString(@"Common_Yesterday") rect:CGRectMake(buttonMargin + buttonWidth+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeYesterday);
+//        self.defaultButton = [self makeButton:REMLocalizedString(@"Common_ThisMonth") rect:CGRectMake((buttonMargin + buttonWidth)*2+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup];
+//        self.defaultButton.on = YES;
+//        self.defaultButton.value = @(REMRelativeTimeRangeTypeThisMonth);
+//        [self makeButton:REMLocalizedString(@"Common_LastMonth") rect:CGRectMake((buttonMargin + buttonWidth)*3+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeLastMonth);
+//        [self makeButton:REMLocalizedString(@"Common_ThisYear") rect:CGRectMake((buttonMargin + buttonWidth)*4+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeThisYear);
+//        [self makeButton:REMLocalizedString(@"Common_LastYear") rect:CGRectMake((buttonMargin + buttonWidth)*5+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeLastYear);
+//        toggleGroup.delegate = self;
+//        self.loadDataSuccess = NO;
+//        self.timeRangeType = REMRelativeTimeRangeTypeThisMonth;
+//    }
+//    return self;
+//}
 - (REMToggleButton*) makeButton:(NSString*)buttonText rect:(CGRect)rect group:(REMToggleButtonGroup*)toggleGroup{
     REMToggleButton* btn = [REMToggleButton buttonWithType: UIButtonTypeCustom];
     [btn setFrame:rect];
