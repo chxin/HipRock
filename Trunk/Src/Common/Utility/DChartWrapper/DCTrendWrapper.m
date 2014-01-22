@@ -248,18 +248,20 @@
     }
     
     baseDateOfX = globalStartdDate;
+    double startPoint = 0;
+    double endPoint = 0;
     if (wrapperConfig.step == REMEnergyStepHour && wrapperConfig.isMultiTimeChart) {
-//        if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
-//            NSDate* baseDateFromEnergyData = nil;
-//            for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
-//                if (d.energyData.count > 0) {
-//                    baseDateFromEnergyData = [d.energyData[0] localTime];
-//                    if ([baseDateFromEnergyData compare:baseDateOfX]==NSOrderedAscending) {
-//                        baseDateOfX = baseDateFromEnergyData;
-//                    }
-//                }
-//            }
-//        }
+        if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
+            NSDate* baseDateFromEnergyData = nil;
+            for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
+                if (d.energyData.count > 0) {
+                    baseDateFromEnergyData = [d.energyData[0] localTime];
+                    if ([baseDateFromEnergyData compare:baseDateOfX]==NSOrderedAscending) {
+                        baseDateOfX = baseDateFromEnergyData;
+                    }
+                }
+            }
+        }
         self.sharedProcessor.baseDate = baseDateOfX;
         for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
             REMTrendChartDataProcessor* processor = [[REMTrendChartDataProcessor alloc]init];
@@ -269,9 +271,11 @@
             } else {
                 processor.baseDate = baseDateOfX;
             }
-            
             [self.processors addObject:processor];
         }
+        startPoint = [self.sharedProcessor processX:beginningStart].doubleValue;
+        endPoint = [self.sharedProcessor processX:beginningEnd].doubleValue - startPoint;
+        startPoint = 0;
     } else {
         if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
             NSDate* baseDateFromEnergyData = nil;
@@ -288,39 +292,13 @@
         for (int i = 0; i < seriesAmount; i++) {
             [self.processors addObject:self.sharedProcessor];
         }
+        startPoint = [self.sharedProcessor processX:beginningStart].doubleValue;
+        endPoint = [self.sharedProcessor processX:beginningEnd].doubleValue;
     }
-//    baseDateOfX = [REMTimeHelper dateFromYear:2013 Month:11 Day:1];
-    
-//    if (self.isMultiTimeChart) {
-//        NSDate* firstStartTime = nil;
-//        int firstStartIndex = 0;
-////        for (REMTimeRange* timeRange in wrapperConfig.multiTimeSpans) {
-////            if (REMIsNilOrNull(multiMinStartDate)) multiMinStartDate = timeRange.startTime;
-////            if ([multiMinStartDate compare:timeRange.startTime] == NSOrderedDescending) multiMinStartDate = timeRange.startTime;
-////        }
-//        for (int i = 0; i < seriesAmount; i++) {
-//            REMTrendChartDataProcessor* processor = [[REMTrendChartDataProcessor alloc]init];
-//            processor.step = step;
-//            REMTimeRange* seriesTimeRange = wrapperConfig.multiTimeSpans[i];
-//            if (i==0) {
-//                firstStartIndex = ceil([self.sharedProcessor processX:seriesTimeRange.startTime].doubleValue);
-//                processor.baseDate = baseDateOfX;
-//                firstStartTime = [self.sharedProcessor deprocessX:firstStartIndex];
-//            } else {
-////                processor.baseDate =  [NSDate dateWithTimeInterval:[seriesTimeRange.startTime timeIntervalSinceDate:multiMinStartDate] sinceDate:baseDateOfX];
-//                int theStartIndex = ceil([self.sharedProcessor processX:seriesTimeRange.startTime].doubleValue);
-//                processor.baseDate = [self.sharedProcessor deprocessX:theStartIndex-firstStartIndex];
-//            }
-//            [self.processors addObject:processor];
-//        }
-//    } else {
-//    }
     
     double globalStart = [self.sharedProcessor processX:globalStartdDate].doubleValue;
     double globalLength = [self.sharedProcessor processX:globalEndDate].doubleValue - globalStart;
 //    if (!self.graphContext.xLabelAlignToTick) globalStart+=0.5;
-    double startPoint = [self.sharedProcessor processX:beginningStart].doubleValue;
-    double endPoint = [self.sharedProcessor processX:beginningEnd].doubleValue;
     
     if (endPoint < startPoint) endPoint = startPoint;
     DCRange* beginRange = [[DCRange alloc]initWithLocation:startPoint length:endPoint-startPoint];
