@@ -38,15 +38,21 @@
 
 static NSDictionary *codeNameMap;
 
-- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
+//- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
+//{
+//    self = [super initWithViewFrame:frame];
+//    if (self) {
+//        // Custom initialization
+//        
+//        self.requestUrl=REMDSBuildingAirQuality;
+//    }
+//    return self;
+//}
+
+- (void)viewDidLoad
 {
-    self = [super initWithViewFrame:frame];
-    if (self) {
-        // Custom initialization
-        
-        self.requestUrl=REMDSBuildingAirQuality;
-    }
-    return self;
+    [super viewDidLoad];
+    self.requestUrl=REMDSBuildingAirQuality;
 }
 
 

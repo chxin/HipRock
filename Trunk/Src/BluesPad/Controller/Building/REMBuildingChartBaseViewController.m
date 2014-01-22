@@ -15,21 +15,40 @@
 
 @property (nonatomic,weak) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic,strong) UIView* legendContainer;
+@property (nonatomic,strong) NSString *errorText;
 
 @end
 
 @implementation REMBuildingChartBaseViewController
 
-- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
+
+
+//- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
+//{
+//    self = [super init];
+//    if (self) {
+//        self.view.frame = frame;
+//        
+//        self.legendContainer = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height-kBuildingTrendChartLegendHeight, frame.size.width, kBuildingTrendChartLegendHeight)];
+//        [self.view addSubview:self.legendContainer];
+//    }
+//    return self;
+//}
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    self.view.frame = self.viewFrame;
+    
+    self.legendContainer = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-kBuildingTrendChartLegendHeight, self.view.frame.size.width, kBuildingTrendChartLegendHeight)];
+    [self.view addSubview:self.legendContainer];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated
 {
-    self = [super init];
-    if (self) {
-        self.view.frame = frame;
-        
-        self.legendContainer = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height-kBuildingTrendChartLegendHeight, frame.size.width, kBuildingTrendChartLegendHeight)];
-        [self.view addSubview:self.legendContainer];
+    if (self.chartWrapper!=nil) {
+        self.energyViewData = self.energyViewData;
     }
-    return self;
 }
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(id,REMBusinessErrorInfo *))loadCompleted
@@ -125,6 +144,10 @@
             [self.view addSubview:self.chartWrapper.view];
         }
     } else {
+        UIView *v= self.chartWrapper.view;
+        if (v.superview==nil) {
+            [self.view addSubview:v];
+        }
         [self.chartWrapper redraw:self.energyViewData step:[self getEnergyStep]];
     }
     [self updateLegendView];
@@ -143,7 +166,12 @@
         self.textLabel.hidden = YES;
         self.legendContainer.hidden = NO;
     } else {
-        [self drawLabelWithText:NSLocalizedString(@"BuildingChart_NoData", @"")];
+        if (self.errorText!=nil) {
+            [self drawLabelWithText:self.errorText];
+        }
+        else{
+            [self drawLabelWithText:NSLocalizedString(@"BuildingChart_NoData", @"")];
+        }
         self.chartWrapper.view.hidden = YES;
         self.legendContainer.hidden = YES;
     }
@@ -202,6 +230,7 @@
     }
     self.textLabel.hidden = NO;
     self.textLabel.text = text;
+    self.errorText=text;
 }
 
 

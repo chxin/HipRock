@@ -56,7 +56,8 @@
     //[self.view addSubview:chartContainer];
     
     if (self.childViewControllers.count==0) {
-        REMBuildingChartBaseViewController *handler=[[self.chartHandlerClass alloc]initWithViewFrame:self.view.bounds];
+        REMBuildingChartBaseViewController *handler=[[self.chartHandlerClass alloc]init];
+        handler.viewFrame=self.view.bounds;
         handler.widgetInfo=self.widgetInfo;
         [self.view addSubview:handler.view];
         //handler.view.layer.borderColor=[UIColor redColor].CGColor;
@@ -68,6 +69,8 @@
     }
     else{
         REMBuildingChartBaseViewController *handler=(REMBuildingChartBaseViewController *)self.childViewControllers[0];
+        
+        
         [self.view addSubview:handler.view];
         REMBuildingCommodityViewController *parent=(REMBuildingCommodityViewController *)self.parentViewController;
         [parent loadChartComplete];
