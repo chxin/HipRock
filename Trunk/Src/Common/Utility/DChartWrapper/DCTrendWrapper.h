@@ -17,6 +17,7 @@
 #import "DCXYChartViewDelegate.h"
 #import "REMCommonHeaders.h"
 #import "DCTrendAnimationDelegate.h"
+#import "DWrapperConfig.h"
 
 @interface DCTrendWrapper : DAbstractChartWrapper<DCXYChartViewDelegate, DCTrendAnimationDelegate>
 
@@ -32,7 +33,7 @@
 -(BOOL)isSpecialType:(REMEnergyTargetType)type; // 一定被绘制成线图的Target类型，默认是REMEnergyTargetBenchmarkValue。Override
 
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style;
--(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step;
+-(NSDictionary*)updateProcessorRangesFormatter:(DWrapperConfig*)wrapperConfig;
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step;
 -(void)customizeView:(DCXYChartView*)view;
 -(NSUInteger)getSeriesAmount;

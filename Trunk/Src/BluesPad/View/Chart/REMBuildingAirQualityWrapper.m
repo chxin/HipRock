@@ -35,7 +35,8 @@
     return [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
 }
 
--(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
+-(NSDictionary*)updateProcessorRangesFormatter:(DWrapperConfig*)wrapperConfig {
+    REMEnergyStep step = wrapperConfig.step;
     _isStacked = NO;
     
     NSUInteger seriesAmount = [self getSeriesAmount];
