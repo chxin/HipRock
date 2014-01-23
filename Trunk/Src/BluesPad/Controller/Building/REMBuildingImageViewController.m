@@ -203,7 +203,7 @@
 - (void)initBottomGradientLayer
 {
     CGFloat height=kBuildingBottomGradientLayerHeight;
-    CGRect frame = CGRectMake(0, self.container.frame.size.height-height, 1024, height);
+    CGRect frame = CGRectMake(0, self.container.frame.size.height-height, self.glassView.frame.size.width, height);
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     

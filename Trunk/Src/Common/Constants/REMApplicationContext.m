@@ -45,14 +45,15 @@ static BOOL CACHEMODE = NO;
         
         NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         
-        NSString *path = [NSString stringWithFormat:@"%@/building-%@",documents,currentUserName];
+        //NSString *path = [NSString stringWithFormat:@"%@/building-%@",documents,currentUserName];
+        NSString *buildingName=[NSString stringWithFormat:@"building-%@",currentUserName];
         
         NSFileManager *fileManager=[NSFileManager defaultManager];
         NSError *error;
         NSArray *array = [fileManager contentsOfDirectoryAtPath:documents error:&error];
         if (error==nil) {
             for (NSString *str in array) {
-                if ([path rangeOfString:str].location==NSNotFound) {
+                if ([str rangeOfString:buildingName].location==NSNotFound) {
                     [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/%@",documents,str] error:&error];
                 }
             }

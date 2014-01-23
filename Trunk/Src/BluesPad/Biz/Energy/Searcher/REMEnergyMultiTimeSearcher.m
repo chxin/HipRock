@@ -200,7 +200,8 @@
                 newEnergyData.localTime=[validDate copy];
                 newEnergyData.dataValue=nil;
                 newEnergyData.quality = REMEnergyDataQualityGood;
-                [newEnergyDataArray addObject:energyData];
+                [newEnergyDataArray addObject:newEnergyData];
+                --j;
             }
             validDate= [self addDate:validDate byStep:model.step];
         }
@@ -283,7 +284,7 @@
         }
         followData.energyData=energyDataArray;
     }
-    
+    /*
     for (REMTargetEnergyData *energyData in data.targetEnergyData) {
         REMEnergyData *startData = energyData.energyData[0];
         REMEnergyData *endData=energyData.energyData[energyData.energyData.count-1];
@@ -297,7 +298,7 @@
     
     data.globalTimeRange.startTime=minStart;
     data.globalTimeRange.endTime=maxEnd;
-    
+    */
     
     return data;
 }
