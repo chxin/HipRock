@@ -29,7 +29,7 @@
         return [[REMPieChartTooltipView  alloc] initWithHighlightedPoints:points chartWrapper:chartWrapper inEnergyData:data widget:widget andParameters:parameters];
     }
     else if(widget.diagramType == REMDiagramTypeLabelling){
-        return [[REMLabelingTooltipView alloc] initWithHighlightedPoints:points atX:x inEnergyData:data widget:widget andParameters:parameters];
+        return [[REMLabelingTooltipView alloc] initWithHighlightedPoints:points atX:x chartWrapper:chartWrapper inEnergyData:data widget:widget andParameters:parameters];
     }
     else{
         return [[REMTrendChartTooltipView alloc] initWithHighlightedPoints:points atX:x chartWrapper:chartWrapper inEnergyData:data widget:widget andParameters:parameters];
@@ -71,6 +71,7 @@
         self.widget = widget;
         self.parameters = parameters;
         self.chartWrapper = chartWrapper;
+        self.x = x;
         
         self.itemModels = [self convertItemModels];
         

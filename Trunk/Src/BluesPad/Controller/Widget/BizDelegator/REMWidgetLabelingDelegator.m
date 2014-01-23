@@ -271,7 +271,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
 
 -(void)showTooltip:(NSArray *)highlightedPoints forX:(id)x
 {
-    REMTooltipViewBase *tooltip = [REMTooltipViewBase tooltipWithHighlightedPoints:highlightedPoints atX:x inEnergyData:self.energyData widget:self.widgetInfo andParameters:self.tempModel];
+    REMTooltipViewBase *tooltip = [REMTooltipViewBase tooltipWithHighlightedPoints:highlightedPoints atX:x chartWrapper:self.chartWrapper inEnergyData:self.energyData widget:self.widgetInfo andParameters:self.tempModel];
     tooltip.tooltipDelegate = self;
     
     [self.view addSubview:tooltip];

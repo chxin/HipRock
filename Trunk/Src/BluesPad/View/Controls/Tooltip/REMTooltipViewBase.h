@@ -26,6 +26,7 @@
 @property (nonatomic,weak) REMEnergyViewData *data;
 @property (nonatomic,weak) REMWidgetObject *widget;
 @property (nonatomic,weak) REMWidgetSearchModelBase *parameters;
+@property (nonatomic) id x;
 
 @property (nonatomic,weak) NSObject<REMChartTooltipDelegate> *tooltipDelegate;
 
