@@ -190,9 +190,8 @@
         
         for (int j=0; j<targetEnergyData.energyData.count;++j) {
             REMEnergyData *energyData = targetEnergyData.energyData[j];
-            if (energyData.localTime < validDate) {
-                validDate=energyData.localTime;
-            }
+            validDate=[energyData.localTime earlierDate:validDate];
+            
             if ([energyData.localTime isEqualToDate:validDate]==YES) {
                 [newEnergyDataArray addObject:energyData];
             }
