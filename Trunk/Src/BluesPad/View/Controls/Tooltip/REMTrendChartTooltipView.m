@@ -18,6 +18,7 @@
 #import "DCDataPoint.h"
 #import "REMWidgetMultiTimespanSearchModel.h"
 #import "DCXYSeries.h"
+#import "DCTrendWrapper.h"
 
 
 @interface REMTrendChartTooltipView()
@@ -50,9 +51,9 @@
 
 #define REMSeriesIsMultiTime ([self.parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]])
 
--(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points atX:(id)x inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
+-(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points atX:(id)x chartWrapper:(DAbstractChartWrapper *)chartWrapper  inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
-    self = [super initWithHighlightedPoints:points atX:x inEnergyData:data widget:widget andParameters:parameters];
+    self = [super initWithHighlightedPoints:points atX:x chartWrapper:chartWrapper inEnergyData:data widget:widget andParameters:parameters];
     
     if(self){
         //add time view into content view
@@ -105,6 +106,7 @@
 
 - (void)updateHighlightedData:(NSArray *)points atX:(id)x
 {
+    self.x = x;
     self.highlightedPoints = points;
     self.xTime = [x isKindOfClass:[NSDate class]] ? x : nil;
     self.itemModels = [self convertItemModels];
@@ -171,10 +173,16 @@
     if(REMSeriesIsMultiTime){
         //get the point's time
         //add time difference according to its index
-        if(point.energyData.localTime == nil)
-            return nil;
+        NSDate *realtime = nil;
+        if(point.energyData.localTime == nil){
+            REMTrendChartDataProcessor *processor = [((DCTrendWrapper *)self.chartWrapper) getProcessorBySeries:(DCXYSeries *)point.series];
+            NSDate *xtime = self.x;
+            realtime = [processor deprocessX:[xtime timeIntervalSince1970]];
+        }
+        else{
+            realtime = [point.energyData.localTime dateByAddingTimeInterval: point.energyData.offset];
+        }
         
-        NSDate *realtime = [point.energyData.localTime dateByAddingTimeInterval: point.energyData.offset];
         return [REMTimeHelper formatTooltipTime:realtime byStep:step inRange:nil];
         
         
