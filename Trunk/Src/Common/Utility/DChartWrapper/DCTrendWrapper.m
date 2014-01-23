@@ -22,14 +22,6 @@
 @end
 
 @implementation DCTrendWrapper
--(REMTrendChartDataProcessor*)getProcessorBySeries:(DCXYSeries*)series {
-    NSUInteger index = [self.view.seriesList indexOfObject:series];
-    if (index < self.processors.count) {
-        return self.processors[index];
-    } else {
-        return nil;
-    }
-}
 -(UIView*)getView {
     return self.view;
 }
