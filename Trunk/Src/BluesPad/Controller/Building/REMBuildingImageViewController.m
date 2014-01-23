@@ -410,6 +410,11 @@
         self.blurImageView=nil;
         self.imageView = newView;
         self.blurImageView=newBlurred;
+        
+        if (self.cropTitleView!=nil) {
+            [self.cropTitleView removeFromSuperview];
+            self.cropTitleView=nil;
+        }
 
     }];
 
@@ -431,10 +436,7 @@
         store.disableAlert=YES;
         [store access:^(NSData *data){
             if(data == nil || [data length] == 2) return;
-            if (self.cropTitleView!=nil) {
-                [self.cropTitleView removeFromSuperview];
-                self.cropTitleView=nil;
-            }
+            
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                 UIImage *view = [self getCachedImage:data];
@@ -483,10 +485,10 @@
     
 }
 - (void)clipTitleView{
-    if(self.cropTitleView!=nil){
-        [self.cropTitleView setHidden:NO];
-        return;
-    }
+//    if(self.cropTitleView!=nil){
+//        [self.cropTitleView setHidden:NO];
+//        return;
+//    }
     if (self.isViewLoaded==NO) {
         return;
     }
@@ -590,7 +592,8 @@
                         
                     } completion:^(BOOL finished){
                         [coverController.view setHidden:YES];
-                        [self.cropTitleView setHidden:YES];
+                        //[self.cropTitleView setHidden:YES];
+                        [self.cropTitleView removeFromSuperview];
                     }];
                 }
                 else{
@@ -623,7 +626,8 @@
                         
                     } completion:^(BOOL finished){
                         [dashBoardController.view setHidden:YES];
-                        [self.cropTitleView setHidden:YES];
+                        //[self.cropTitleView setHidden:YES];
+                        [self.cropTitleView removeFromSuperview];
                     }];
                 }
                 else{

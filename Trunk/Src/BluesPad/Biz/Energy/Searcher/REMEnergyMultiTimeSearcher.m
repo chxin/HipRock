@@ -188,10 +188,22 @@
         REMTargetEnergyData *targetEnergyData=data.targetEnergyData[i];
         NSMutableArray *newEnergyDataArray = [NSMutableArray array];
         
+        if (targetEnergyData.energyData.count == 0) {
+            NSMutableArray *newArray = [NSMutableArray array];
+            REMEnergyData *newEnergyData = [[REMEnergyData alloc]init];
+            newEnergyData.localTime=[self firstValidDateFromDate:baseTimeRange.endTime forStep:model.step];
+            newEnergyData.dataValue=nil;
+            newEnergyData.quality = REMEnergyDataQualityGood;
+            [newArray addObject:newEnergyData];
+            targetEnergyData.energyData = newArray;
+        }
+        
         for (int j=0; j<targetEnergyData.energyData.count;++j) {
             REMEnergyData *energyData = targetEnergyData.energyData[j];
             validDate=[energyData.localTime earlierDate:validDate];
-            
+            if ([validDate timeIntervalSinceDate:baseTimeRange.endTime]>=0) {
+                break;
+            }
             if ([energyData.localTime isEqualToDate:validDate]==YES) {
                 [newEnergyDataArray addObject:energyData];
             }

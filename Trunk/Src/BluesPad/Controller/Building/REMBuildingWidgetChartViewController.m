@@ -42,7 +42,7 @@
     [self startLoadingActivity];
     [self.searcher queryEnergyDataByStoreType:self.widgetInfo.contentSyntax.dataStoreType andParameters:self.model withMaserContainer:nil andGroupName:[NSString stringWithFormat:@"building-data-%@", @(buildingId)] callback:^(id data, REMBusinessErrorInfo *bizError) {
         [self stopLoadingActivity];
-        if (bizError==nil) {
+        if (data!=nil) {
             if(self.isViewLoaded==NO)return ;
             self.energyViewData = data;
             loadCompleted(data,nil);
