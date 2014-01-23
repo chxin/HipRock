@@ -11,7 +11,7 @@
 
 @property (nonatomic,strong) NSDictionary *dictionary;
 
-//@property (nonatomic) BOOL shouldCleanCache;
+@property (nonatomic) BOOL shouldCleanCache;
 @property (nonatomic,strong) NSDictionary *dataSources;
 @property (nonatomic,strong) NSDictionary *currentDataSource;
 

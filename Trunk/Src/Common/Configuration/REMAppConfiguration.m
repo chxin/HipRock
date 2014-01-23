@@ -27,7 +27,7 @@ const static NSString *BUILDOPTION = @"Release";
         
         self.dictionary = [[NSDictionary alloc] initWithContentsOfFile:path];
         
-        //self.shouldCleanCache = [self.dictionary[@"ShouldCleanCache"] boolValue];
+        self.shouldCleanCache = [self.dictionary[@"ShouldCleanCache"] boolValue];
         
         [self resolveDataSourceSection];
     }
