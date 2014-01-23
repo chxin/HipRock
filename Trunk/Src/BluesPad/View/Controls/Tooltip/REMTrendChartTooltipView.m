@@ -185,15 +185,16 @@
             return @"wrong";
         }
         REMTimeRange *range0 = self.parameters.searchTimeRangeArray[0], *rangei = self.parameters.searchTimeRangeArray[index];
+        NSDate *start0 = [self alignDataPointTime:range0.startTime withStep:step], *starti = [self alignDataPointTime:rangei.startTime withStep:step];
         
         NSDate *pointtime = point.energyData.localTime, *realtime;
         if(step == REMEnergyStepMonth || step == REMEnergyStepYear){
-            int monthDiff = [[REMTimeHelper getMonthTicksFromDate:rangei.startTime] intValue] - [[REMTimeHelper getMonthTicksFromDate:range0.startTime] intValue];
+            int monthDiff = [[REMTimeHelper getMonthTicksFromDate:starti] intValue] - [[REMTimeHelper getMonthTicksFromDate:start0] intValue];
             
             realtime = [REMTimeHelper add:monthDiff onPart:REMDateTimePartMonth ofDate:pointtime];
         }
         else{
-            NSTimeInterval diff = [rangei.startTime timeIntervalSinceDate: range0.startTime];
+            NSTimeInterval diff = [starti timeIntervalSinceDate: start0];
             realtime = [pointtime dateByAddingTimeInterval:diff];
         }
         
@@ -201,6 +202,49 @@
     }
     
     return [REMTextIndicatorFormator formatTargetName:point.target inEnergyData:self.data withWidget:self.widget andParameters:self.parameters];
+}
+
+-(NSDate *)alignDataPointTime:(NSDate *)date withStep:(REMEnergyStep)step
+{
+    int hour = [REMTimeHelper getHour:date], day=[REMTimeHelper getDay:date], month=[REMTimeHelper getMonth:date], year=[REMTimeHelper getYear:date];
+    
+    switch (step) {
+        case REMEnergyStepHour:{
+            //next HH:00
+            return date;
+        }
+        case REMEnergyStepDay:{
+            //next 00:00
+            if(hour == 0)
+                return date;
+            
+            NSDate *cut = [REMTimeHelper dateFromYear:year Month:month Day:day Hour:0];
+            return [REMTimeHelper add:1 onPart:REMDateTimePartDay ofDate:cut];
+        }
+        case REMEnergyStepWeek:{
+            //next monday 00:00
+            return [REMTimeHelper getNextMondayFromDate:date];
+        }
+        case REMEnergyStepMonth:{
+            //next 1st 00:00
+            if(day==1 && hour==0)
+                return date;
+            
+            NSDate *cut = [REMTimeHelper dateFromYear:year Month:month Day:1 Hour:0];
+            return [REMTimeHelper add:1 onPart:REMDateTimePartMonth ofDate:cut];
+        }
+        case REMEnergyStepYear:{
+            //next Jan 1st 00:00
+            if(month==1 && day==1 && hour==0)
+                return date;
+            
+            NSDate *cut = [REMTimeHelper dateFromYear:year Month:1 Day:1 Hour:0];
+            return [REMTimeHelper add:1 onPart:REMDateTimePartYear ofDate:cut];
+        }
+        default:{
+            return nil;
+        }
+    }
 }
 
 -(NSString *)formatTimeText:(NSDate *)time
