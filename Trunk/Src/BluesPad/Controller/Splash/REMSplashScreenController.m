@@ -73,9 +73,9 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -85,25 +85,17 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
--(void)keyboardWillShow
+-(void)keyboardWillShow:(NSNotification *)notification
 {
     if (self.view.frame.origin.y >= 0)
     {
         [self setViewMovedUp:YES];
-    }
-    else if (self.view.frame.origin.y < 0)
-    {
-        [self setViewMovedUp:NO];
     }
 }
 
--(void)keyboardWillHide
+-(void)keyboardWillHide:(NSNotification *)notification
 {
-    if (self.view.frame.origin.y >= 0)
-    {
-        [self setViewMovedUp:YES];
-    }
-    else if (self.view.frame.origin.y < 0)
+    if (self.view.frame.origin.y < 0)
     {
         [self setViewMovedUp:NO];
     }
