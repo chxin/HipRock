@@ -9,6 +9,7 @@
 #import "REMEnergyViewData.h"
 #import "REMWidgetObject.h"
 #import "REMWidgetSearchModelBase.h"
+#import "DAbstractChartWrapper.h"
 
 @protocol REMChartTooltipDelegate <NSObject>
 
@@ -21,6 +22,7 @@
 
 // Properties
 @property (nonatomic) NSArray *highlightedPoints; //array of DCChartPoint
+@property (nonatomic,weak) DAbstractChartWrapper *chartWrapper;
 @property (nonatomic,weak) REMEnergyViewData *data;
 @property (nonatomic,weak) REMWidgetObject *widget;
 @property (nonatomic,weak) REMWidgetSearchModelBase *parameters;
@@ -33,10 +35,10 @@
 @property (nonatomic,weak) UIScrollView *scrollView;
 
 // Methods
-+ (REMTooltipViewBase *)tooltipWithHighlightedPoints:(NSArray *)points atX:(id)x inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
++ (REMTooltipViewBase *)tooltipWithHighlightedPoints:(NSArray *)points atX:(id)x chartWrapper:(DAbstractChartWrapper *)chartWrapper inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
 
 -(REMTooltipViewBase *)initWithDefaults;
-- (REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points atX:(id)x inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
+- (REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points atX:(id)x chartWrapper:(DAbstractChartWrapper *)chartWrapper  inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
 
 //- (void)updateHighlightedData:(id)data;
 

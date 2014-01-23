@@ -23,16 +23,16 @@
 
 
 
-+(REMTooltipViewBase *)tooltipWithHighlightedPoints:(NSArray *)points atX:(id)x inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
++(REMTooltipViewBase *)tooltipWithHighlightedPoints:(NSArray *)points atX:(id)x chartWrapper:(DAbstractChartWrapper *)chartWrapper  inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
     if(widget.diagramType == REMDiagramTypePie){
-        return [[REMPieChartTooltipView  alloc] initWithHighlightedPoints:points inEnergyData:data widget:widget andParameters:parameters];
+        return [[REMPieChartTooltipView  alloc] initWithHighlightedPoints:points chartWrapper:chartWrapper inEnergyData:data widget:widget andParameters:parameters];
     }
     else if(widget.diagramType == REMDiagramTypeLabelling){
         return [[REMLabelingTooltipView alloc] initWithHighlightedPoints:points atX:x inEnergyData:data widget:widget andParameters:parameters];
     }
     else{
-        return [[REMTrendChartTooltipView alloc] initWithHighlightedPoints:points atX:x inEnergyData:data widget:widget andParameters:parameters];
+        return [[REMTrendChartTooltipView alloc] initWithHighlightedPoints:points atX:x chartWrapper:chartWrapper inEnergyData:data widget:widget andParameters:parameters];
     }
 }
 
@@ -54,7 +54,7 @@
     return self;
 }
 
--(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points atX:(id)x inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
+-(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points atX:(id)x chartWrapper:(DAbstractChartWrapper *)chartWrapper inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
     self = [super initWithFrame:kDMChart_TooltipHiddenFrame];
     
@@ -70,6 +70,7 @@
         self.data = data;
         self.widget = widget;
         self.parameters = parameters;
+        self.chartWrapper = chartWrapper;
         
         self.itemModels = [self convertItemModels];
         
