@@ -67,7 +67,7 @@
     self.chartStatus = DChartStatusFocus;
     [DCUtility runFunction:^(void){
         [self.view setIndicatorHidden:NO];
-    } withDelay:0.5];
+    } withDelay:0.3];
     
 }
 

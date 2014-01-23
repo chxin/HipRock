@@ -121,7 +121,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         if (self.indicatorLayer.hidden) {
             [DCUtility runFunction:^(void){
                 self.indicatorLayer.hidden = NO;
-            }withDelay:0.5];
+            }withDelay:0.3];
         }
         if (!REMIsNilOrNull(self.delegate) && [self.delegate respondsToSelector:@selector(focusOn:)]) {
             if (levelIndex != self.focusLabelIndex) {
