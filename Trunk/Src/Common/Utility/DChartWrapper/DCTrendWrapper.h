@@ -33,7 +33,7 @@
 -(BOOL)isSpecialType:(REMEnergyTargetType)type; // 一定被绘制成线图的Target类型，默认是REMEnergyTargetBenchmarkValue。Override
 
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style;
--(NSDictionary*)updateProcessorRangesFormatter:(DWrapperConfig*)wrapperConfig;
+-(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step;
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step;
 -(void)customizeView:(DCXYChartView*)view;
 -(NSUInteger)getSeriesAmount;

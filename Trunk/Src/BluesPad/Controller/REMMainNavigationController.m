@@ -96,23 +96,21 @@
     [splashController showLoginView:NO];
 }
 
--(void)presentInitialView:(void (^)(void))completed
+-(void)presentInitialView
 {
     REMMapViewController *mapController = [self getChildControllerInstanceOfClass:[REMMapViewController class]];
     mapController.isInitialPresenting = true;
+    if(mapController.snapshot != nil){
+        [mapController.snapshot removeFromSuperview];
+        mapController.snapshot = nil;
+    }
     
     if([self.topViewController isEqual:mapController] == NO){
         [self popToViewController:mapController animated:YES];
         [mapController updateView];
-        if(completed) completed();
-//        [self popToViewController:mapController animated:YES onCompletion:^{
-//            [mapController updateView];
-//            if(completed) completed();
-//        }];
     }
     else{
         [mapController updateView];
-        if(completed) completed();
     }
 }
 

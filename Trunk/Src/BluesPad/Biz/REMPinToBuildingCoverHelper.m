@@ -51,7 +51,7 @@
     manager.mainNavigationController = self.mainNavigationController;
     [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
         if (status == REMCustomerUserConcurrencyStatusSuccess) {
-            [self.mainNavigationController presentInitialView:nil];
+            [self.mainNavigationController presentInitialView];
         }
     }];
 }

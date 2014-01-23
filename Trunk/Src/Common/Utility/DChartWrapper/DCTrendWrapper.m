@@ -38,7 +38,7 @@
         
         self.animationManager = [[DCTrendAnimationManager alloc]init];
         self.animationManager.delegate = self;
-        NSDictionary* dic = [self updateProcessorRangesFormatter:wrapperConfig];
+        NSDictionary* dic = [self updateProcessorRangesFormatter:wrapperConfig.step];
         _myStableRange = dic[@"beginRange"];
         [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:wrapperConfig.step];
         
@@ -217,8 +217,7 @@
     return length;
 }
 
--(NSDictionary*)updateProcessorRangesFormatter:(DWrapperConfig*)wrapperConfig {
-    REMEnergyStep step = wrapperConfig.step;
+-(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
     NSUInteger seriesAmount = [self getSeriesAmount];
     _processors = [[NSMutableArray alloc]init];
     
@@ -250,33 +249,33 @@
     baseDateOfX = globalStartdDate;
     double startPoint = 0;
     double endPoint = 0;
-    if (wrapperConfig.step == REMEnergyStepHour && wrapperConfig.isMultiTimeChart) {
-        if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
-            NSDate* baseDateFromEnergyData = nil;
-            for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
-                if (d.energyData.count > 0) {
-                    baseDateFromEnergyData = [d.energyData[0] localTime];
-                    if ([baseDateFromEnergyData compare:baseDateOfX]==NSOrderedAscending) {
-                        baseDateOfX = baseDateFromEnergyData;
-                    }
-                }
-            }
-        }
-        self.sharedProcessor.baseDate = baseDateOfX;
-        for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
-            REMTrendChartDataProcessor* processor = [[REMTrendChartDataProcessor alloc]init];
-            processor.step = step;
-            if (d.energyData.count > 0) {
-                processor.baseDate = [d.energyData[0] localTime];
-            } else {
-                processor.baseDate = baseDateOfX;
-            }
-            [self.processors addObject:processor];
-        }
-        startPoint = [self.sharedProcessor processX:beginningStart].doubleValue;
-        endPoint = [self.sharedProcessor processX:beginningEnd].doubleValue - startPoint;
-        startPoint = 0;
-    } else {
+//    if (wrapperConfig.step == REMEnergyStepHour && wrapperConfig.isMultiTimeChart) {
+//        if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
+//            NSDate* baseDateFromEnergyData = nil;
+//            for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
+//                if (d.energyData.count > 0) {
+//                    baseDateFromEnergyData = [d.energyData[0] localTime];
+//                    if ([baseDateFromEnergyData compare:baseDateOfX]==NSOrderedAscending) {
+//                        baseDateOfX = baseDateFromEnergyData;
+//                    }
+//                }
+//            }
+//        }
+//        self.sharedProcessor.baseDate = baseDateOfX;
+//        for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
+//            REMTrendChartDataProcessor* processor = [[REMTrendChartDataProcessor alloc]init];
+//            processor.step = step;
+//            if (d.energyData.count > 0) {
+//                processor.baseDate = [d.energyData[0] localTime];
+//            } else {
+//                processor.baseDate = baseDateOfX;
+//            }
+//            [self.processors addObject:processor];
+//        }
+//        startPoint = [self.sharedProcessor processX:beginningStart].doubleValue;
+//        endPoint = [self.sharedProcessor processX:beginningEnd].doubleValue - startPoint;
+//        startPoint = 0;
+//    } else {
         if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
             NSDate* baseDateFromEnergyData = nil;
             for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
@@ -294,7 +293,7 @@
         }
         startPoint = [self.sharedProcessor processX:beginningStart].doubleValue;
         endPoint = [self.sharedProcessor processX:beginningEnd].doubleValue;
-    }
+//    }
     
     double globalStart = [self.sharedProcessor processX:globalStartdDate].doubleValue;
     double globalLength = [self.sharedProcessor processX:globalEndDate].doubleValue - globalStart;
@@ -341,24 +340,24 @@
     _calenderType = wrapperConfig.calendarType;
 }
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
-//    [self.animationManager invalidate];
-//    self.animationManager.view = nil;
-//    [super redraw:energyViewData];
-//    NSDictionary* dic = [self updateProcessorRangesFormatter:step];
-//    CGRect frame = self.view.frame;
-//    UIView* superView = self.view.superview;
-//    
-//    [self.view removeFromSuperview];
-//    
-//    _myStableRange = dic[@"beginRange"];
-//    [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:step];
-//    for(NSUInteger i = 0; i < self.view.seriesList.count; i++) {
-//        DCXYSeries* s = self.view.seriesList[i];
-//        if (REMIsNilOrNull(s.target)) continue;
-//        s.hidden = [self isTargetHidden:s.target index:i];
-//    }
-//    [superView addSubview:self.view];
-//    [self updateCalender];
+    [self.animationManager invalidate];
+    self.animationManager.view = nil;
+    [super redraw:energyViewData];
+    NSDictionary* dic = [self updateProcessorRangesFormatter:step];
+    CGRect frame = self.view.frame;
+    UIView* superView = self.view.superview;
+    
+    [self.view removeFromSuperview];
+    
+    _myStableRange = dic[@"beginRange"];
+    [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:step];
+    for(NSUInteger i = 0; i < self.view.seriesList.count; i++) {
+        DCXYSeries* s = self.view.seriesList[i];
+        if (REMIsNilOrNull(s.target)) continue;
+        s.hidden = [self isTargetHidden:s.target index:i];
+    }
+    [superView addSubview:self.view];
+    [self updateCalender];
 }
 
 -(void)setCalenderType:(REMCalendarType)calenderType {
@@ -430,13 +429,13 @@
     if (!stopped) self.panSpeed = speed;
     if (self.chartStatus != DChartStatusNormal) return;
     self.view.acceptTap = NO;
-    DCRange* globalRange = self.graphContext.globalHRange;
-    DCRange* range = self.graphContext.hRange;
-    double rangeLength = range.length;
-    double rangeLocation = range.location;
-    if (rangeLocation < globalRange.location) rangeLocation = globalRange.location;
-    if (range.end > globalRange.end) rangeLocation = globalRange.end - rangeLength;
-    self.myStableRange = [[DCRange alloc]initWithLocation:rangeLocation length:rangeLength];
+//    DCRange* globalRange = self.graphContext.globalHRange;
+//    DCRange* range = self.graphContext.hRange;
+//    double rangeLength = range.length;
+//    double rangeLocation = range.location;
+//    if (rangeLocation < globalRange.location) rangeLocation = globalRange.location;
+//    if (range.end > globalRange.end) rangeLocation = globalRange.end - rangeLength;
+//    self.myStableRange = [[DCRange alloc]initWithLocation:rangeLocation length:rangeLength];
 
     if (stopped) {
         if (self.sharedProcessor.step == REMEnergyStepHour) {
@@ -450,9 +449,7 @@
         [self fireGestureStoppedEvent];
     }
 }
--(void)pinchStopped {
-    [self fireGestureStoppedEvent];
-}
+
 -(void)fireGestureStoppedEvent {
     if (self.delegate && [self.delegate respondsToSelector:@selector(gestureEndFrom:end:)]) {
         DCRange* newRange = self.myStableRange;
@@ -480,76 +477,89 @@
     if (REMIsNilOrNull(self.sharedProcessor) || self.sharedProcessor.step == REMEnergyStepNone) return 0;
     return [[self.sharedProcessor deprocessX:to] timeIntervalSinceDate:[self.sharedProcessor deprocessX:from]];
 }
--(DCRange*)updatePinchRange:(DCRange *)newRange pinchCentreX:(CGFloat)centreX {
+-(DCRange*)updatePanRange:(DCRange *)newRange withSpeed:(double)speed {
+    DCRange* updatedRange = nil;
+    if (self.sharedProcessor.step == REMEnergyStepHour) {
+        updatedRange = newRange;
+    } else {
+        double location = newRange.location;
+        double end = newRange.end;
+        if (location < self.graphContext.globalHRange.location) {
+            location = self.graphContext.hRange.location + speed / 8;
+        } else  if (end > self.graphContext.globalHRange.end) {
+            location = self.graphContext.hRange.location + speed / 8;
+        }
+        updatedRange = [[DCRange alloc]initWithLocation:location length:self.graphContext.hRange.length];
+    }
+    self.myStableRange = updatedRange;
+    return updatedRange;
+}
+-(DCRange*)updatePinchRange:(DCRange*)newRange pinchCentreX:(CGFloat)centreX pinchStopped:(BOOL)stopped {
     REMEnergyStep myStep = self.sharedProcessor.step;
     DCRange* globalRange = self.graphContext.globalHRange;
     DCRange* currentRange = self.graphContext.hRange;
     
-    if (myStep == REMEnergyStepNone || myStep == REMEnergyStepHour || newRange.length == currentRange.length) return newRange;
-    BOOL isZoomIn = newRange.length < currentRange.length;  // 正在放大视图，亦即可视的时间范围正在缩小
+    DCRange* updatedRange = nil;
     
-//    NSUInteger newRangeTimeInterval = [[self.sharedProcessor deprocessX:newRange.end] timeIntervalSinceDate:[self.sharedProcessor deprocessX:newRange.location]];
-    NSRange lengthRange = [[REMWidgetStepCalculationModel getStepIntervalRanges][myStep] rangeValue];
-    NSUInteger minTimeInterval = lengthRange.location;  // 步长允许的最短的时间距离
-    NSUInteger maxTimeInterval = lengthRange.location + lengthRange.length; // 步长允许的最长时间距离
-    
-    /*** 对于左边界已经越界的情况(在时间选择器内查询数据)：只检查Pinch后数据的长度，和右边界。 ***/
-    if (self.myStableRange.location < globalRange.location) {
-        double returnRangeEnd = newRange.end;
-        double returnRangeStart = newRange.location;
-        if (returnRangeEnd > globalRange.end) returnRangeEnd = globalRange.end;
-        NSTimeInterval returnRangeInterval = [self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd];
-        if ((isZoomIn && returnRangeInterval <= minTimeInterval) || (!isZoomIn && returnRangeInterval > maxTimeInterval)) {
-            return currentRange;
-        } else {
-            self.myStableRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
-            return self.myStableRange;
-        }
-    }
-    /*** 对于左边界还没有越界的情况 ***/
-    else {
-        NSTimeInterval currentRangeTimeInterval = [self getTimeIntervalFrom:currentRange.location to:currentRange.end];
-        if (currentRange.end > globalRange.end || currentRangeTimeInterval <= minTimeInterval || currentRangeTimeInterval > maxTimeInterval) return currentRange;
-        double returnRangeEnd = newRange.end;
-        double returnRangeStart = newRange.location;
-        double returnRangeLength = 0;
-        if (isZoomIn) {
-            returnRangeLength = returnRangeEnd - returnRangeStart;
-            if ([self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd] <= minTimeInterval) {
-                return currentRange;
+    if (myStep == REMEnergyStepNone || newRange.length == currentRange.length) {
+        updatedRange = newRange;
+    } else {
+        NSRange lengthRange = [[REMWidgetStepCalculationModel getStepIntervalRanges][myStep] rangeValue];
+        NSUInteger minTimeInterval = lengthRange.location;  // 步长允许的最短的时间距离
+        NSUInteger maxTimeInterval = lengthRange.location + lengthRange.length; // 步长允许的最长时间距离
+        BOOL isZoomIn = newRange.length < currentRange.length;  // 正在放大视图，亦即可视的时间范围正在缩小
+        
+        if (myStep == REMEnergyStepHour) {
+            if ([self getTimeIntervalFrom:newRange.location to:newRange.end] > maxTimeInterval) {
+                updatedRange = currentRange;
+            } else {
+                updatedRange = newRange;
             }
         } else {
-            if (returnRangeStart < globalRange.location) returnRangeStart = globalRange.location;
-            if (returnRangeEnd > globalRange.end) returnRangeEnd = globalRange.end;
-            returnRangeLength = returnRangeEnd - returnRangeStart;
-            if ([self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd] > maxTimeInterval) {
-                return currentRange;
+            /*** 对于左边界已经越界的情况(在时间选择器内查询数据)：只检查Pinch后数据的长度，和右边界。 ***/
+            if (self.myStableRange.location < globalRange.location) {
+                double returnRangeEnd = newRange.end;
+                double returnRangeStart = newRange.location;
+                if (returnRangeEnd > globalRange.end) returnRangeEnd = globalRange.end;
+                NSTimeInterval returnRangeInterval = [self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd];
+                if ((isZoomIn && returnRangeInterval <= minTimeInterval) || (!isZoomIn && returnRangeInterval > maxTimeInterval)) {
+                    updatedRange = currentRange;
+                } else {
+                    updatedRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
+                }
+            }
+            /*** 对于左边界还没有越界的情况 ***/
+            else {
+                NSTimeInterval currentRangeTimeInterval = [self getTimeIntervalFrom:currentRange.location to:currentRange.end];
+                if (currentRange.end > globalRange.end || currentRangeTimeInterval <= minTimeInterval || currentRangeTimeInterval > maxTimeInterval) return currentRange;
+                double returnRangeEnd = newRange.end;
+                double returnRangeStart = newRange.location;
+                double returnRangeLength = 0;
+                if (isZoomIn) {
+                    returnRangeLength = returnRangeEnd - returnRangeStart;
+                    if ([self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd] <= minTimeInterval) {
+                        updatedRange = currentRange;
+                    } else {
+                        updatedRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
+                    }
+                } else {
+                    if (returnRangeStart < globalRange.location) returnRangeStart = globalRange.location;
+                    if (returnRangeEnd > globalRange.end) returnRangeEnd = globalRange.end;
+                    returnRangeLength = returnRangeEnd - returnRangeStart;
+                    if ([self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd] > maxTimeInterval) {
+                        updatedRange = currentRange;
+                    } else {
+                        updatedRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
+                    }
+                }
             }
         }
-        self.myStableRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeLength];
-        return self.myStableRange;
     }
-    
-    
-//    NSUInteger globalRangeTimeInterval = [[self.sharedProcessor deprocessX:globalRange.end] timeIntervalSinceDate:[self.sharedProcessor deprocessX:globalRange.location]];
-//    if (globalRangeTimeInterval <= lengthRange.location) return self.graphContext.hRange;
-//    
-//    
-//    
-//    
-//    if (newRange.location >= globalRange.location && newRange.end <= globalRange.end && newRangeTimeInterval > lengthRange.location && newRangeTimeInterval <= lengthRangeEnd) {
-//        self.myStableRange = newRange;
-//        return newRange;
-//    } else {
-//        double start = newRange.location;
-//        double end = newRange.end;
-//        if (start < globalRange.location) start = globalRange.location;
-//        if (end > globalRange.end) end = globalRange.end;
-//        double length = end - start;
-//        
-//        self.myStableRange = self.graphContext.hRange;
-//        return self.graphContext.hRange;
-//    }
+    self.myStableRange = updatedRange;
+    if (stopped) {
+        [self fireGestureStoppedEvent];
+    }
+    return updatedRange;
 }
 
 #pragma mark - DCTrendAnimationDelegate implementation

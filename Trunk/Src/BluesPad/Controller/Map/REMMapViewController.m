@@ -113,6 +113,7 @@
 
 -(void)updateView
 {
+    self.currentBuildingIndex = 0;
     self.buildingInfoArray = REMAppContext.buildingInfoArray;
     
     if(self.buildingInfoArray.count <= 0){
@@ -374,6 +375,33 @@
     NSString *imageName = [NSString stringWithFormat:@"%@%@", iconName, iconStateName];
     
     return REMLoadImageNamed(imageName);
+}
+
+-(void)highlightMarker:(int)buildingIndex
+{
+    GMSMarker *currentMarker = nil;
+    for(GMSMarker *marker in self.markers){
+        if([marker.userData isEqual:self.buildingInfoArray[buildingIndex]]){
+            currentMarker = marker;
+        }
+    }
+    
+    if([self isMarkerVisible:currentMarker] == NO){
+        GMSCameraUpdate *update = [GMSCameraUpdate setTarget:currentMarker.position];
+        [self.mapView moveCamera:update];
+    }
+}
+
+-(BOOL)isMarkerVisible:(GMSMarker *)marker
+{
+    GMSVisibleRegion visibleRegion = [self.mapView.projection visibleRegion];
+    GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc]initWithRegion:visibleRegion];
+    return ![bounds containsCoordinate:marker.position];
+}
+
+-(void)takeSnapshot
+{
+    self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
 }
 
 #pragma mark GSMapView delegate
