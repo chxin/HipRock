@@ -174,31 +174,38 @@
         if(point.energyData.localTime == nil)
             return nil;
         
-        int index = [self.data.targetEnergyData indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-            if([((REMTargetEnergyData *)obj).target isEqual:point.target]){
-                *stop = YES;
-                return YES;
-            }
-            return NO;
-        }];
-        if (index == NSNotFound) {
-            return @"wrong";
-        }
-        REMTimeRange *range0 = self.parameters.searchTimeRangeArray[0], *rangei = self.parameters.searchTimeRangeArray[index];
-        NSDate *start0 = [self alignDataPointTime:range0.startTime withStep:step], *starti = [self alignDataPointTime:rangei.startTime withStep:step];
+        NSDate *realtime = [point.energyData.localTime dateByAddingTimeInterval: point.energyData.offset];
+        return [REMTimeHelper formatTooltipTime:realtime byStep:step inRange:nil];
         
-        NSDate *pointtime = point.energyData.localTime, *realtime;
-        if(step == REMEnergyStepMonth || step == REMEnergyStepYear){
-            int monthDiff = [[REMTimeHelper getMonthTicksFromDate:starti] intValue] - [[REMTimeHelper getMonthTicksFromDate:start0] intValue];
-            
-            realtime = [REMTimeHelper add:monthDiff onPart:REMDateTimePartMonth ofDate:pointtime];
-        }
-        else{
-            NSTimeInterval diff = [starti timeIntervalSinceDate: start0];
-            realtime = [pointtime dateByAddingTimeInterval:diff];
-        }
         
-        return [REMTimeHelper formatTooltipTime:realtime byStep:step inRange:rangei];
+//        int index = [self.data.targetEnergyData indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+//            if([((REMTargetEnergyData *)obj).target isEqual:point.target]){
+//                *stop = YES;
+//                return YES;
+//            }
+//            return NO;
+//        }];
+//        
+//        if(index != NSNotFound && index>=0 && index<self.data.targetEnergyData.count){
+//            return @"wrong";
+//        }
+//        
+//        
+//        REMTimeRange *range0 = self.parameters.searchTimeRangeArray[0], *rangei = self.parameters.searchTimeRangeArray[index];
+//        NSDate *start0 = [self alignDataPointTime:range0.startTime withStep:step], *starti = [self alignDataPointTime:rangei.startTime withStep:step];
+//        
+//        NSDate *pointtime = point.energyData.localTime, *realtime;
+//        if(step == REMEnergyStepMonth || step == REMEnergyStepYear){
+//            int monthDiff = [[REMTimeHelper getMonthTicksFromDate:starti] intValue] - [[REMTimeHelper getMonthTicksFromDate:start0] intValue];
+//            
+//            realtime = [REMTimeHelper add:monthDiff onPart:REMDateTimePartMonth ofDate:pointtime];
+//        }
+//        else{
+//            NSTimeInterval diff = [starti timeIntervalSinceDate: start0];
+//            realtime = [pointtime dateByAddingTimeInterval:diff];
+//        }
+//        
+//        return [REMTimeHelper formatTooltipTime:realtime byStep:step inRange:rangei];
     }
     
     return [REMTextIndicatorFormator formatTargetName:point.target inEnergyData:self.data withWidget:self.widget andParameters:self.parameters];
