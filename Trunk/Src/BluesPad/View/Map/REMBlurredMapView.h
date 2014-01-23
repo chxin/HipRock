@@ -12,3 +12,15 @@
 -(void)hide:(void (^)(void))complete;
 
 @end
+
+
+@interface REMBreathLogoView : UIView
+
+@property (nonatomic,weak) UIImageView *normalLogo;
+@property (nonatomic,weak) UIImageView *flashLogo;
+
+
+-(void)animate;
+-(void)stop;
+
+@end

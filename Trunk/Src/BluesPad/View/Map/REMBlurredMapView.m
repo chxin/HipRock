@@ -10,7 +10,7 @@
 @interface REMBlurredMapView()
 
 @property (nonatomic,weak) UIImageView *background;
-@property (nonatomic,weak) UIImageView *logo;
+@property (nonatomic,weak) REMBreathLogoView *logo;
 @property (nonatomic,weak) UILabel *label;
 
 @end
@@ -36,6 +36,8 @@
     [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.alpha = 0.0;
     } completion:^(BOOL finished) {
+        [self.logo stop];
+        
         if(complete!=nil)
             complete();
     }];
@@ -52,7 +54,9 @@
 
 -(void)renderLogo
 {
-    UIImageView *logo = [[UIImageView alloc] initWithImage:REMIMG_SplashScreenLogo_Common];
+//    UIImageView *logo = [[UIImageView alloc] initWithImage:REMIMG_SplashScreenLogo_Common];
+//    logo.frame = CGRectMake((kDMScreenWidth-logo.frame.size.width)/2, kDMSplash_LogoViewTopOffset, logo.frame.size.width, logo.frame.size.height);
+    REMBreathLogoView *logo = [[REMBreathLogoView alloc] init];
     logo.frame = CGRectMake((kDMScreenWidth-logo.frame.size.width)/2, kDMSplash_LogoViewTopOffset, logo.frame.size.width, logo.frame.size.height);
     
     [self addSubview:logo];
@@ -74,6 +78,68 @@
     
     [self addSubview:label];
     self.label = label;
+}
+
+@end
+
+
+@implementation REMBreathLogoView
+
+CGFloat animationTime = 1.5;
+
+CGFloat flashOriginalAlpha = 0;
+CGFloat flashFinalAlpha = 1.0;
+CGFloat normalOriginalAlpha = 1;
+CGFloat normalFinalAlpha = 1;
+
+-(id)init
+{
+    UIImageView *normalLogo = [[UIImageView alloc] initWithImage:REMIMG_SplashScreenLogo_Common];
+    UIImageView *flashLogo = [[UIImageView alloc] initWithImage:REMIMG_SplashScreenLogo_Flash];
+    
+    self = [super initWithFrame:normalLogo.frame];
+    
+    if(self){
+        //init normal & flash logo
+        
+        normalLogo.alpha = 1;
+        flashLogo.alpha = 0;
+        
+        [self addSubview:flashLogo];
+        [self addSubview:normalLogo];
+        
+        self.normalLogo = normalLogo;
+        self.flashLogo = flashLogo;
+        
+        [self animate];
+    }
+    
+    return self;
+}
+
+-(void)animate
+{
+    BOOL reverse = self.flashLogo.alpha == 1;
+    
+    if(reverse == NO){
+        [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseIn animations:^{
+            self.flashLogo.alpha = flashFinalAlpha;
+        } completion:^(BOOL finished) {
+            [self animate];
+        }];
+    }
+    else{
+        [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseOut animations:^{
+            self.flashLogo.alpha = flashOriginalAlpha;
+        } completion:^(BOOL finished) {
+            [self animate];
+        }];
+    }
+}
+
+-(void)stop
+{
+    [self.layer removeAllAnimations];
 }
 
 @end
