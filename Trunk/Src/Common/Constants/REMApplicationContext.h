@@ -38,7 +38,7 @@
 + (REMApplicationContext *)instance;
 + (void)recover;
 + (void)destroy;
-
++ (void)cleanImage;
 -(BOOL)getCacheMode;
 -(void)setCacheMode:(BOOL)value;
 

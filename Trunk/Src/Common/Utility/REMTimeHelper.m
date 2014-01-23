@@ -141,19 +141,25 @@
 
 
 + (NSUInteger)getDay:(NSDate *)date {
-    NSCalendar *calendar = [REMTimeHelper currentCalendar];
+    return [REMTimeHelper getDay:date withCalendar:[REMTimeHelper currentCalendar]];
+    
+}
+
++ (NSUInteger)getDay:(NSDate *)date withCalendar:(NSCalendar *)calendar{
+    
     NSDateComponents *dayComponents = [calendar components:(NSDayCalendarUnit) fromDate:date];
     
     return [dayComponents day];
 }
-
-+ (int )getHour:(NSDate *)date  {
-    NSCalendar *calendar = [REMTimeHelper currentCalendar];
++ (int)getHour:(NSDate *)date withCalendar:(NSCalendar *)calendar{
     NSUInteger unitFlags =NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit |NSHourCalendarUnit |NSMinuteCalendarUnit;
     NSDateComponents *components = [calendar components:unitFlags fromDate:date];
     NSInteger hour = [components hour];
     
     return (int)hour;
+}
++ (int )getHour:(NSDate *)date  {
+    return [REMTimeHelper getHour:date withCalendar:[REMTimeHelper currentCalendar]];
 }
 
 + (int )getTimePart:(REMDateTimePart)timePart ofLocalDate:(NSDate *)date  {
@@ -177,14 +183,16 @@
     }
 }
 
-
-+ (int)getMinute:(NSDate *)date {
-    NSCalendar *calendar = [REMTimeHelper currentCalendar];
++ (int)getMinute:(NSDate *)date withCalendar:(NSCalendar *)calendar{
     NSUInteger unitFlags =NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit |NSHourCalendarUnit |NSMinuteCalendarUnit;
     NSDateComponents *components = [calendar components:unitFlags fromDate:date];
     NSInteger minute = [components minute];
     
     return (int)minute;
+}
+
++ (int)getMinute:(NSDate *)date {
+    return [REMTimeHelper getMinute:date withCalendar:[REMTimeHelper currentCalendar]];
 }
 
 + (NSString *)relativeDateComponentFromType:(REMRelativeTimeRangeType)relativeDateType{

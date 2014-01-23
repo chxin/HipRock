@@ -38,6 +38,34 @@ static BOOL CACHEMODE = NO;
     [REMAppContext setCurrentCustomer:storedCustomer];
 }
 
++ (void)cleanImage{
+    REMApplicationContext *context=REMAppContext;
+    if(context.appConfig.shouldCleanCache == YES){
+        NSString *currentUserName = REMAppCurrentUser.name;
+        
+        NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        
+        NSString *path = [NSString stringWithFormat:@"%@/building-%@",documents,currentUserName];
+        
+        NSFileManager *fileManager=[NSFileManager defaultManager];
+        NSError *error;
+        NSArray *array = [fileManager contentsOfDirectoryAtPath:documents error:&error];
+        if (error==nil) {
+            for (NSString *str in array) {
+                if ([path rangeOfString:str].location==NSNotFound) {
+                    [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/%@",documents,str] error:&error];
+                }
+            }
+            NSString *configuration = [[NSBundle mainBundle] pathForResource:@"Configuration" ofType:@"plist"];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:configuration];
+            dic[@"ShouldCleanCache"] = @(NO);
+            [dic writeToFile:configuration atomically:YES];
+            
+        }
+        
+    }
+}
+
 + (void)destroy
 {
     context = nil;

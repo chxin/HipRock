@@ -79,6 +79,136 @@
     
 }
 
+- (NSDate *)firstValidDateFromDate:(NSDate *)date forStep:(REMEnergyStep)step{
+    NSCalendar *calendar = [REMTimeHelper currentCalendar];
+    NSCalendarUnit unit =NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday|NSCalendarUnitHour;
+    NSDateComponents *comp ;
+    if (step == REMEnergyStepHour) {
+        int minute= [REMTimeHelper getMinute:date];
+        if (minute == 0) {
+            return date;
+        }
+    }
+    else if(step == REMEnergyStepDay){
+        int hour = [REMTimeHelper getHour:date];
+        if (hour == 0) {
+            return date;
+        }
+        else{
+            NSDate *newDate = [REMTimeHelper add:1 onPart:REMDateTimePartDay ofDate:date];
+            comp = [calendar components:unit fromDate:newDate];
+            [comp setHour:0];
+            return [calendar dateFromComponents:comp];
+            
+        }
+        
+    }
+    else if (step == REMEnergyStepWeek){
+        comp = [calendar components:unit fromDate:date];
+        int hour = [REMTimeHelper getHour:date];
+        if(comp.weekday == 1 && hour == 0){
+            return date;
+        }
+        else{
+            [comp setDay:([comp day] - [comp weekday] + 2+7)];
+            [comp setHour:0];
+            return [calendar dateFromComponents:comp];
+        }
+        
+    }
+    else if(step == REMEnergyStepMonth){
+        int day = [REMTimeHelper getDay:date];
+        int hour = [REMTimeHelper getHour:date];
+        if (hour == 0 && day == 1) {
+            return date;
+        }
+        else{
+            NSDate *newDate = [REMTimeHelper add:1 onPart:REMDateTimePartMonth ofDate:date];
+            comp = [calendar components:unit fromDate:newDate];
+            [comp setHour:0];
+            [comp setDay:1];
+            return [calendar dateFromComponents:comp];
+        }
+    }
+    else if(step == REMEnergyStepYear){
+        int day = [REMTimeHelper getDay:date];
+        int hour = [REMTimeHelper getHour:date];
+        int month = [REMTimeHelper getMonth:date];
+        if (hour == 0 && day == 1 && month ==1) {
+            return date;
+        }
+        else{
+            NSDate *newDate = [REMTimeHelper add:1 onPart:REMDateTimePartYear ofDate:date];
+            comp = [calendar components:unit fromDate:newDate];
+            [comp setHour:0];
+            [comp setDay:1];
+            [comp setMonth:1];
+            return [calendar dateFromComponents:comp];
+        }
+    }
+    else{
+        return nil;
+    }
+    
+    return nil;
+}
+
+- (NSDate *)addDate:(NSDate *)date byStep:(REMEnergyStep)step{
+    NSDate *newDate=nil;
+    if (step == REMEnergyStepHour) {
+        newDate = [REMTimeHelper add:1 onPart:REMDateTimePartHour ofDate:date];
+    }
+    else if(step == REMEnergyStepDay){
+        newDate = [REMTimeHelper add:1 onPart:REMDateTimePartDay ofDate:date];
+    }
+    else if (step == REMEnergyStepWeek){
+        newDate = [REMTimeHelper add:7 onPart:REMDateTimePartDay ofDate:date];
+    }
+    else if(step == REMEnergyStepMonth){
+        newDate = [REMTimeHelper add:1 onPart:REMDateTimePartMonth ofDate:date];
+    }
+    else if(step == REMEnergyStepYear){
+        newDate = [REMTimeHelper add:1 onPart:REMDateTimePartYear ofDate:date];
+    }
+    return newDate;
+}
+
+- (void)makeCompleteEnergyData:(REMEnergyViewData *)data{
+    if (data == nil) {
+        return ;
+    }
+    if (data.targetEnergyData == nil || [data.targetEnergyData isEqual:[NSNull null]]==YES) {
+        return ;
+    }
+    REMWidgetTagSearchModel *model=[self tagModel];
+
+    for (int i=0; i<data.targetEnergyData.count; ++i) {
+        REMTimeRange *baseTimeRange=model.timeRangeArray[i];
+        NSDate *validDate = [self firstValidDateFromDate:baseTimeRange.startTime forStep:model.step];
+        REMTargetEnergyData *targetEnergyData=data.targetEnergyData[i];
+        NSMutableArray *newEnergyDataArray = [NSMutableArray array];
+        
+        for (int j=0; j<targetEnergyData.energyData.count;++j) {
+            REMEnergyData *energyData = targetEnergyData.energyData[j];
+            if (energyData.localTime < validDate) {
+                validDate=energyData.localTime;
+            }
+            if ([energyData.localTime isEqualToDate:validDate]==YES) {
+                [newEnergyDataArray addObject:energyData];
+            }
+            else{
+                REMEnergyData *newEnergyData = [[REMEnergyData alloc]init];
+                newEnergyData.localTime=[validDate copy];
+                newEnergyData.dataValue=nil;
+                newEnergyData.quality = REMEnergyDataQualityGood;
+                [newEnergyDataArray addObject:energyData];
+            }
+            validDate= [self addDate:validDate byStep:model.step];
+        }
+        targetEnergyData.energyData=newEnergyDataArray;
+    }
+}
+
 - (REMEnergyViewData *)processHourData:(REMEnergyViewData *)data{
     if (data == nil) {
         return nil;
@@ -100,6 +230,7 @@
         for (int j=0; j<targetEnergyData.energyData.count;++j) {
             REMEnergyData *energyData = targetEnergyData.energyData[j];
             REMEnergyData *baseData=baseTargetData.energyData[j];
+            energyData.offset = [energyData.localTime timeIntervalSinceDate:baseData.localTime];
             energyData.localTime=baseData.localTime;
         }
     }
@@ -117,6 +248,8 @@
     if (self.widgetInfo.diagramType == REMDiagramTypePie) {
         return data;
     }
+    
+    [self makeCompleteEnergyData:data];
     
     REMWidgetTagSearchModel *model=[self tagModel];
     
@@ -141,7 +274,9 @@
         for (int j=0; j<baseData.energyData.count; ++j) {
             REMEnergyData *energyData=[[REMEnergyData alloc]init];
             REMEnergyData *origData=baseData.energyData[j];
-            energyData.localTime=[self deltaTimeIntervalFromBaseTime:baseTimeRange.startTime ToSecondTime:followTimeRange.startTime origTime:origData.localTime];
+            NSDate *newDate = [self deltaTimeIntervalFromBaseTime:baseTimeRange.startTime ToSecondTime:followTimeRange.startTime origTime:origData.localTime];
+            energyData.offset = [newDate timeIntervalSinceDate:origData.localTime];
+            energyData.localTime=newDate;
             energyData.dataValue=[origData.dataValue copy];
             energyData.quality=origData.quality;
             [energyDataArray addObject:energyData];
