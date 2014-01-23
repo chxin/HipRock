@@ -464,7 +464,7 @@
     
     if (xRounded != self.graphContext.focusX) {
         double delay = 0;
-        if (self.graphContext.focusX == INT32_MIN) delay = 0.5;
+        if (self.graphContext.focusX == INT32_MIN) delay = 0.3;
         self.graphContext.focusX = xRounded;
         for (_DCColumnsLayer* columnLayer in self.columnLayers) {
             [columnLayer setNeedsDisplay];
