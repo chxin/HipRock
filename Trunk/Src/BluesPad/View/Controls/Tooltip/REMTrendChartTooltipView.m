@@ -173,15 +173,11 @@
     if(REMSeriesIsMultiTime){
         //get the point's time
         //add time difference according to its index
-        NSDate *realtime = nil;
         if(point.energyData.localTime == nil){
-            REMTrendChartDataProcessor *processor = [((DCTrendWrapper *)self.chartWrapper) getProcessorBySeries:(DCXYSeries *)point.series];
-            NSDate *xtime = self.x;
-            realtime = [processor deprocessX:[xtime timeIntervalSince1970]];
+            return nil;
         }
-        else{
-            realtime = [point.energyData.localTime dateByAddingTimeInterval: point.energyData.offset];
-        }
+        
+        NSDate *realtime = [point.energyData.localTime dateByAddingTimeInterval: point.energyData.offset];
         
         return [REMTimeHelper formatTooltipTime:realtime byStep:step inRange:nil];
         
