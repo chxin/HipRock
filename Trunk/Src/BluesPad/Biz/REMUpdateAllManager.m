@@ -190,6 +190,9 @@ static NSString *customerUpdateAll=@"customerupdateall";
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:customerController];
         navController.modalPresentationStyle = UIModalPresentationFormSheet;
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        if (self.updateSource == REMCustomerUserConcurrencySourceEnter) {
+            customerController.hideCancelButton=YES;
+        }
         if (self.mainNavigationController.presentedViewController!=nil) {
             customerController.holder=self;
             [self.mainNavigationController dismissViewControllerAnimated:YES completion:^(void){

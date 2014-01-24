@@ -28,8 +28,11 @@ static NSString *CellIdentifier = @"loginCustomerCell";
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:REMLocalizedString(@"Common_Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonPressed:)];
-    self.navigationItem.leftBarButtonItem = cancelButton;
+    if (self.hideCancelButton!=YES) {
+        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:REMLocalizedString(@"Common_Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonPressed:)];
+        self.navigationItem.leftBarButtonItem = cancelButton;
+    }
+    
     self.navigationItem.title = REMLocalizedString(@"Login_CustomerSelectionTitle");
     if (self.customerArray==nil) {
         self.customerArray=(NSArray *)(REMAppCurrentUser.customers);

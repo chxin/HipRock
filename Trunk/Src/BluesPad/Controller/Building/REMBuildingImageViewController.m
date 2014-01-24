@@ -32,6 +32,8 @@
 
 @end
 
+static CGFloat scale=1.02;
+
 @implementation REMBuildingImageViewController
 
 - (id)init{
@@ -338,6 +340,7 @@
 }
 
 
+
 - (UIImage *)getCachedImage:(NSData *)data{
     
     NSString *pngFilePath=[self buildingPictureFileName];
@@ -349,7 +352,7 @@
     }
     else{
         if(data==nil)return nil;
-        UIImage *image= [REMImageHelper parseImageFromNSData:data withScale:1.125];
+        UIImage *image= [REMImageHelper parseImageFromNSData:data withScale:scale];
         
         NSString *pngFilePath = [self buildingPictureFileName];
         NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
@@ -381,14 +384,14 @@
 
 
 - (void)loadImageViewByImage:(UIImage *)image{
-    UIImageView *newView = [[UIImageView alloc]initWithFrame:CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.imageView.frame.size.width, self.imageView.frame.size.height*1.125)];
-    newView.contentMode=UIViewContentModeCenter;
+    UIImageView *newView = [[UIImageView alloc]initWithFrame:CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.imageView.frame.size.width, self.imageView.frame.size.height*scale)];
+    newView.contentMode=UIViewContentModeTop;
     newView.clipsToBounds=YES;
     newView.alpha=0;
     UIImage *view = image;
     newView.image=view;
     UIImageView *newBlurred= [self blurredImageView:newView];
-    newBlurred.contentMode=UIViewContentModeCenter;
+    newBlurred.contentMode=UIViewContentModeTop;
     newBlurred.clipsToBounds=YES;
     //[newBlurred setFrame:CGRectMake(-25, -25, newBlurred.frame.size.width+50, newBlurred.frame.size.height+50)];
     
@@ -457,7 +460,7 @@
 {
     UIImageView *blurred = [[UIImageView alloc]initWithFrame:imageView.frame];
     blurred.alpha=0;
-    blurred.contentMode=UIViewContentModeCenter;
+    blurred.contentMode=UIViewContentModeTop;
     blurred.clipsToBounds=YES;
     blurred.backgroundColor=[UIColor clearColor];
     

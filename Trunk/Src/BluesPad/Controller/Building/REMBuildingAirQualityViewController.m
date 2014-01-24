@@ -77,6 +77,7 @@
 - (void)loadTotalUsageByBuildingId:(NSNumber *)buildingId{
     NSDictionary *param = @{@"buildingId":buildingId};
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingAirQualityTotalUsage parameter:param accessCache:YES andMessageMap:nil];
+    store.disableAlert=YES;
     store.maskContainer = nil;
     store.groupName = [NSString stringWithFormat:@"building-data-%@", buildingId];
     [self.totalLabel showLoading];
@@ -100,7 +101,31 @@
         [self.mayairLabel hideLoading];
         [self addDataLabel];
     } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
-        
+        [self.totalLabel hideLoading];
+        [self.outdoorLabel hideLoading];
+        [self.honeywellLabel hideLoading];
+        [self.mayairLabel hideLoading];
+        if (status == REMDataAccessFailed || status == REMDataAccessErrorMessage) {
+            NSString *serverError;
+            if (status == REMDataAccessFailed) {
+                serverError=NSLocalizedString(@"Common_ServerTimeout", @"");
+            }
+            else{
+                serverError=NSLocalizedString(@"Common_ServerError", @"");
+            }
+            NSString *serverErrorSimple;
+            if (status == REMDataAccessFailed) {
+                serverErrorSimple=NSLocalizedString(@"Common_ServerTimeoutSimple", @"");
+            }
+            else{
+                serverErrorSimple=NSLocalizedString(@"Common_ServerErrorSimple", @"");
+            }
+            [self.totalLabel setEmptyText:serverError];
+            [self.outdoorLabel setEmptyText:serverErrorSimple];
+            [self.honeywellLabel setEmptyText:serverErrorSimple];
+            [self.mayairLabel setEmptyText:serverErrorSimple];
+            [self addDataLabel];
+        }
     }];
 }
 
