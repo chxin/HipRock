@@ -35,7 +35,7 @@ static int maxQueueLength = kREMCommMaxQueueWifi;
 #define kREMLogResquest 2 //0:no log, 1:log partial, 2: log full
 
 #if defined(DEBUG)
-static int requestTimeout = 90; //(s)
+static int requestTimeout = 5; //(s)
 #else
 static int requestTimeout = 45; //(s)
 #endif

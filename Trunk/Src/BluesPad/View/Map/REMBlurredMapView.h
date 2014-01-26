@@ -18,9 +18,10 @@
 
 @property (nonatomic,weak) UIImageView *normalLogo;
 @property (nonatomic,weak) UIImageView *flashLogo;
+@property (nonatomic,strong) NSTimer *timer;
 
 
--(void)animate;
+-(void)start;
 -(void)stop;
 
 @end

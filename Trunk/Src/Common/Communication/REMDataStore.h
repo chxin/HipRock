@@ -20,6 +20,7 @@
 @property (nonatomic,strong) NSDictionary *messageMap;
 @property (nonatomic) BOOL accessCache;
 @property (nonatomic) BOOL disableAlert;
+@property (nonatomic,weak) REMDataStore *parentStore;
 
 
 - (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter accessCache:(BOOL)accessCache andMessageMap:(NSDictionary *)messageMap;

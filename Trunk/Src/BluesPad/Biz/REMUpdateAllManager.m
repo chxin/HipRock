@@ -82,8 +82,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
             parameter= @{@"customerId":self.currentCustomerId};
         }
         REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter accessCache:YES andMessageMap:nil];
-        logoStore.groupName = nil;
-        logoStore.maskContainer = nil;
+        logoStore.parentStore=store;
         
         [logoStore access:^(id data1) {
             UIImage *logo = nil;

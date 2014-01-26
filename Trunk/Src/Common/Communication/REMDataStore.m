@@ -107,7 +107,8 @@ static REMCacheStoreHolder *cacheStoreHolder;
                 holder.gotoHolder = YES;
             }
             else{
-                if(holder.gotoHolder){
+                //if there is parent store, access local directly
+                if(self.parentStore==nil && holder.gotoHolder){
                     self.success = success;
                     [holder.holder addObject:self];
                 }
@@ -193,16 +194,9 @@ static REMCacheStoreHolder *cacheStoreHolder;
         [store accessLocal:store.success];
     }
     
+    cacheStoreHolder.gotoHolder = NO;
+    [cacheStoreHolder.holder removeAllObjects];
     cacheStoreHolder = nil;
-    
-//    [self accessLocal:self.success];
-//    [tempHolder removeObject:self];
-//
-//    for(REMDataStore *store in tempHolder){
-//    }
-//    
-//    for(REMDataStore *store in tempHolder)
-//        [tempHolder removeObject:store];
 }
 
 

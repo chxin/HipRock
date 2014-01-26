@@ -37,6 +37,7 @@
         self.alpha = 0.0;
     } completion:^(BOOL finished) {
         [self.logo stop];
+        [self removeFromSuperview];
         
         if(complete!=nil)
             complete();
@@ -111,35 +112,42 @@ CGFloat normalFinalAlpha = 1;
         self.normalLogo = normalLogo;
         self.flashLogo = flashLogo;
         
-        [self animate];
+        [self start];
     }
     
     return self;
 }
 
+-(void)start
+{
+    SEL selector = @selector(animate);
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:selector]];
+    [invocation setTarget:self];
+    [invocation setSelector:selector];
+    
+    [invocation invoke];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:animationTime invocation:invocation repeats:YES];
+}
+
 -(void)animate
 {
-    BOOL reverse = self.flashLogo.alpha == 1;
-    
-    if(reverse == NO){
+    if(self.flashLogo.alpha == 0){
         [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseIn animations:^{
             self.flashLogo.alpha = flashFinalAlpha;
-        } completion:^(BOOL finished) {
-            [self animate];
-        }];
+        } completion:nil];
     }
     else{
         [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseOut animations:^{
             self.flashLogo.alpha = flashOriginalAlpha;
-        } completion:^(BOOL finished) {
-            [self animate];
-        }];
+        } completion:nil];
     }
 }
 
 -(void)stop
 {
+    [self.timer invalidate];
     [self.layer removeAllAnimations];
+    [self removeFromSuperview];
 }
 
 @end
