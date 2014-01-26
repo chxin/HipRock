@@ -17,6 +17,18 @@
 #import "REMApplicationContext.h"
 #import "REMBusinessErrorInfo.h"
 
+
+@interface REMCacheStoreHolder : NSObject
+
+@property (atomic) BOOL gotoHolder;
+@property (atomic, strong) NSMutableArray *holder;
+
+@end
+
+@implementation REMCacheStoreHolder @end
+
+
+
 @interface REMDataStore()
 
 @property (nonatomic,strong) REMDataAccessSuccessBlock success;
@@ -28,7 +40,27 @@
 
 
 static NSDictionary *serviceMap = nil;
-static NSMutableArray *tempHolder = nil;
++ (NSDictionary *) serviceMap
+{
+    if(serviceMap == nil){
+        serviceMap = REMMobileServices;
+    }
+    
+    return serviceMap;
+}
+static REMCacheStoreHolder *cacheStoreHolder;
++ (REMCacheStoreHolder *) cacheStoreHolder
+{
+    if(cacheStoreHolder == nil){
+        @synchronized(self){
+            cacheStoreHolder = [[REMCacheStoreHolder alloc] init];
+            cacheStoreHolder.gotoHolder = NO;
+            cacheStoreHolder.holder = [[NSMutableArray alloc] init];
+        }
+    }
+    
+    return cacheStoreHolder;
+}
 
 - (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter accessCache:(BOOL)accessCache andMessageMap:(NSDictionary *)messageMap
 {
@@ -49,14 +81,6 @@ static NSMutableArray *tempHolder = nil;
     return self;
 }
 
-+ (NSDictionary *) serviceMap
-{
-    if(serviceMap == nil){
-        serviceMap = REMMobileServices;
-    }
-    
-    return serviceMap;
-}
 
 - (void)access:(REMDataAccessSuccessBlock)succcess
 {
@@ -71,21 +95,27 @@ static NSMutableArray *tempHolder = nil;
     NetworkStatus reachability = [REMNetworkHelper checkCurrentNetworkStatus];
     
     BOOL cacheMode = [REMApplicationContext instance].cacheMode;
+    REMCacheStoreHolder *holder = [REMDataStore cacheStoreHolder];
     
     if(reachability == NotReachable){
         if(self.accessCache){
             
             if(!cacheMode){
                 self.success = success;
-                if(tempHolder == nil)
-                    tempHolder = [[NSMutableArray alloc] init];
-                [tempHolder addObject:self];
+                [holder.holder addObject:self];
                 
                 [REMAlertHelper alert:REMLocalizedString(@"Common_NetNoConnectionLoadLocal") delegate:self];
                 [[REMApplicationContext instance] setCacheMode:YES];
+                holder.gotoHolder = YES;
             }
             else{
-                [self accessLocal:success];
+                if(holder.gotoHolder){
+                    self.success = success;
+                    [holder.holder addObject:self];
+                }
+                else{
+                    [self accessLocal:success];
+                }
             }
         }
         else{
@@ -160,9 +190,16 @@ static NSMutableArray *tempHolder = nil;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSLog(@"store %@ index %d pressed", self.serviceMeta.url, buttonIndex);
-    [self accessLocal:self.success];
-    [tempHolder removeObject:self];
-//    
+    
+    for(REMDataStore *store in cacheStoreHolder.holder){
+        [store accessLocal:store.success];
+    }
+    
+    cacheStoreHolder = nil;
+    
+//    [self accessLocal:self.success];
+//    [tempHolder removeObject:self];
+//
 //    for(REMDataStore *store in tempHolder){
 //    }
 //    
@@ -172,3 +209,5 @@ static NSMutableArray *tempHolder = nil;
 
 
 @end
+
+

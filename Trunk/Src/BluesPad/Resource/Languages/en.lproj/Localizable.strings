@@ -219,6 +219,7 @@
 "Weibo_AccountUnbindingNOButton"="放弃";
 "Weibo_ContentOfElectirc"="%@本月用#Commodity#趋势及单位平米用#Commodity#趋势，本月用#Commodity#总能耗为#Usage##UomName#，节能持续进行中。";
 "Weibo_ContentOfPM25"="今天上午10:00，%@室外#Commodity#为#OutdoorVal##OutdoorUomName#；经霍尼韦尔净化后室内新风#Commodity#为#HoneywellVal##HoneywellUomName#，经美埃净化后室内新风#Commodity#为#MayairVal##MayairUomName#。";
+"Weibo_NONetwork"="无网络连接或者网络故障，请稍后再试。";
 
 
 //Mail, prefix: Mail_
