@@ -8,6 +8,7 @@
 
 #import "REMBuildingWeiboView.h"
 #import "REMColor.h"
+#import "REMNetworkHelper.h"
 
 const CGFloat kWeiboWindowHeight = 165;
 const CGFloat kWeiboWindowWidth = 390;
@@ -196,20 +197,25 @@ const NSInteger kWeiboMaxLength = 140;
 }
 
 -(void)sendClicked:(id)sender {
-    if (![Weibo.weibo isAuthenticated]) {
-        //        [REMAlertHelper alert:@"未绑定微博账户。"];
-        [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
-            NSString *message = nil;
-            if (!error) {
-                [self sendWeibo];
-            }
-            else {
-                message = [NSString stringWithFormat:NSLocalizedString(@"Weibo_AccountBindingFail", @""), error];
-                [REMAlertHelper alert:message];
-            }
-        }];
+    NetworkStatus reachability = [REMNetworkHelper checkCurrentNetworkStatus];
+    if (reachability == NotReachable) {
+        [REMAlertHelper alert:REMLocalizedString(@"Weibo_NONetwork")];
     } else {
-        [self sendWeibo];
+        if (![Weibo.weibo isAuthenticated]) {
+            //        [REMAlertHelper alert:@"未绑定微博账户。"];
+            [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
+                NSString *message = nil;
+                if (!error) {
+                    [self sendWeibo];
+                }
+                else {
+                    message = [NSString stringWithFormat:NSLocalizedString(@"Weibo_AccountBindingFail", @""), error];
+                    [REMAlertHelper alert:message];
+                }
+            }];
+        } else {
+            [self sendWeibo];
+        }
     }
 }
 
