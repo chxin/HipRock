@@ -19,10 +19,8 @@
 
 
 @interface REMCacheStoreHolder : NSObject
-
 @property (atomic) BOOL gotoHolder;
 @property (atomic, strong) NSMutableArray *holder;
-
 @end
 
 @implementation REMCacheStoreHolder @end

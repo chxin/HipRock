@@ -147,7 +147,7 @@
     //add customer logo button
     UIImageView *logoView = [[UIImageView alloc] initWithImage:REMAppContext.currentCustomerLogo];
     logoView.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
-    logoView.contentMode = UIViewContentModeScaleAspectFit;
+    logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
     [self.view addSubview:logoView];
     self.customerLogoView = logoView;
     

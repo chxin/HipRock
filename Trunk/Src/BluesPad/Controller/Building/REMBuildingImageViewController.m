@@ -323,15 +323,9 @@
     
     
     UIImageView *logoView = [[UIImageView alloc] initWithImage:REMAppContext.currentCustomerLogo];
-    [logoView setFrame:CGRectMake(kDMCommon_CustomerLogoLeft, kDMCommon_CustomerLogoTop, logoView.frame.size.width, logoView.frame.size.height)];
-    logoView.contentMode = UIViewContentModeScaleAspectFit;
-    
-    //[logoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
-    
-//    logoButton.titleLabel.text=@"logo";
-//    [logoButton removeTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-//    [logoButton addTarget:self.parentViewController action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [logoView setFrame:CGRectMake(kDMCommon_CustomerLogoLeft, kDMCommon_CustomerLogoTop, kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
+    logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
+
     
     [self.container addSubview:logoView];
     self.logoButton=logoView;
