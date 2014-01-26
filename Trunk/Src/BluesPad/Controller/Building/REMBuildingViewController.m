@@ -55,7 +55,7 @@ const static CGFloat buildingGap=20;
 {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor blackColor];
-    [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
+    [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, 768/*REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight)*/)];
     self.currentScrollOffset=-kBuildingCommodityViewTop;
     
     self.cumulateX=0;

@@ -45,6 +45,8 @@
         [image setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.4]];
         image.translatesAutoresizingMaskIntoConstraints=NO;
         self.loadingBackgroundView=image;
+//        self.loadingBackgroundView.layer.borderColor=[UIColor redColor].CGColor;
+//        self.loadingBackgroundView.layer.borderWidth=1;
         self.loadingView=loader;
         loader.translatesAutoresizingMaskIntoConstraints=NO;
     }

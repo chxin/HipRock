@@ -23,7 +23,6 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
 @property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
 @property (nonatomic,weak) UIButton *timePickerButton;
 @property (nonatomic,strong) DCLabelingWrapper *chartWrapper;
-@property (nonatomic,weak) UIView *chartContainer;
 @property (nonatomic,weak) UIView *searchView;
 @property (nonatomic,weak) UILabel *benchmarkTextLabel;
 

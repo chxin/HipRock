@@ -375,7 +375,7 @@
 -(void)startLoadingActivity
 {
     if(self.activityIndicatorView == nil){
-        UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         //self.activityIndicatorView.backgroundColor = [UIColor clearColor];
         view.frame = self.view.bounds;
         

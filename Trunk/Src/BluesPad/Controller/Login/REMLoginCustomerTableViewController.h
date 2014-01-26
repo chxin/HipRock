@@ -23,10 +23,12 @@
 
 @property (nonatomic,strong) NSArray *customerArray;
 
+
+
 @end
 
 @interface REMLoginCustomerTableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource,REMCustomerSelectionInterface>
-
+@property (nonatomic) BOOL hideCancelButton;
 @property (nonatomic,weak) NSObject<REMLoginCustomerSelectionDelegate> *delegate;
 @property (nonatomic,strong) id holder;
 

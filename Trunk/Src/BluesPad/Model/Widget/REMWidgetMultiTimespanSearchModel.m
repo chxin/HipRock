@@ -14,7 +14,7 @@
 {
     REMTimeRange *oldRange=self.timeRangeArray[0];
 
-    if([oldRange.startTime isEqualToDate:range.startTime]==NO){
+    if([oldRange.startTime isEqualToDate:range.startTime]==NO || [oldRange.endTime isEqualToDate:range.endTime]==NO){
         NSMutableArray *newArray=[[NSMutableArray alloc]initWithCapacity:self.timeRangeArray.count];
         NSTimeInterval elapsed=[range.endTime timeIntervalSinceDate:range.startTime];
         NSTimeInterval startGap=[range.startTime timeIntervalSinceDate:oldRange.startTime];

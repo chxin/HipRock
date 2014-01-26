@@ -275,8 +275,8 @@
     
     REMTimeRange *baseTimeRange=model.timeRangeArray[0];
    
-    NSDate *minStart = [NSDate date];
-    NSDate *maxEnd= [NSDate dateWithTimeIntervalSince1970:0];
+//    NSDate *minStart = [NSDate date];
+//    NSDate *maxEnd= [NSDate dateWithTimeIntervalSince1970:0];
 
     for (int i=1; i<data.targetEnergyData.count; ++i) {
         REMTargetEnergyData *followData=data.targetEnergyData[i];
@@ -287,7 +287,7 @@
             REMEnergyData *energyData=[[REMEnergyData alloc]init];
             REMEnergyData *origData=baseData.energyData[j];
             NSDate *newDate = [self deltaTimeIntervalFromBaseTime:baseTimeRange.startTime ToSecondTime:followTimeRange.startTime origTime:origData.localTime];
-            energyData.offset = [newDate timeIntervalSinceDate:origData.localTime];
+            energyData.offset = [origData.localTime timeIntervalSinceDate:newDate];
             energyData.localTime=newDate;
             energyData.dataValue=[origData.dataValue copy];
             energyData.quality=origData.quality;
