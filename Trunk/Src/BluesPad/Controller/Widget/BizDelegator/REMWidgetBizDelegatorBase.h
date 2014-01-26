@@ -28,6 +28,7 @@
 @property (nonatomic,weak) UIView *maskerView;
 @property (nonatomic,weak) REMWidgetDetailViewController *ownerController;
 @property (nonatomic,copy) NSString *status;
+@property (nonatomic,weak) UIView *chartContainer;
 
 + (REMWidgetBizDelegatorBase *)bizDelegatorByWidgetInfo:(REMWidgetObject *)widgetInfo;
 

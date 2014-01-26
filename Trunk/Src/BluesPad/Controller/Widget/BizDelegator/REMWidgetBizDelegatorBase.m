@@ -122,16 +122,25 @@
 }
 
 - (void)generateServerErrorLabel:(NSString *)msg{
+    if (self.serverErrorLabel!=nil) {
+        self.serverErrorLabel.text=msg;
+        return;
+    }
     UILabel *label=[[UILabel alloc]init];
     label.translatesAutoresizingMaskIntoConstraints=NO;
     label.textColor=[UIColor blackColor];
     label.text=msg;
     [label setBackgroundColor:[UIColor clearColor]];
-    NSLayoutConstraint *constraintX=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-    NSLayoutConstraint *constraintY=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-    [self.view addSubview:label];
-    [self.view addConstraint:constraintX];
-    [self.view addConstraint:constraintY];
+    UIView *container = self.view;
+    if (self.chartContainer!=nil) {
+        container=self.chartContainer;
+    }
+    NSLayoutConstraint *constraintX=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:container attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    NSLayoutConstraint *constraintY=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:container attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    
+    [container addSubview:label];
+    [container addConstraint:constraintX];
+    [container addConstraint:constraintY];
     self.serverErrorLabel=label;
     
 }
@@ -178,6 +187,9 @@
             if (error == nil) { //timeout or server error
                 REMBusinessErrorInfo *bizInfo=[[REMBusinessErrorInfo alloc]init];
                 bizInfo.code=@"timeout";
+                if (self.serverErrorLabel!=nil) {
+                    [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerTimeout", @"")];
+                }
                 [self rollbackWithError:bizInfo];
             }
             else{
@@ -190,6 +202,12 @@
                     [self rollbackWithError:bizInfo];
                 }
                 else{
+                    if ([error.code isEqualToString:@"1"]==YES) {
+                        if (self.serverErrorLabel!=nil) {
+                            [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerError", @"")];
+                        }
+                    }
+                
                     [self rollbackWithError:error];
                 }
             }
@@ -246,6 +264,7 @@
 
 - (void)doSearchWithModel:(REMWidgetSearchModelBase *)model callback:(void (^)(REMEnergyViewData *, REMBusinessErrorInfo *))callback
 {
+    
     [self.searcher queryEnergyDataByStoreType:self.widgetInfo.contentSyntax.dataStoreType andParameters:model withMaserContainer:self.maskerView  andGroupName:self.groupName callback:^(REMEnergyViewData *energyData,REMBusinessErrorInfo *errorInfo){
         
         //self.energyData=energyData;
