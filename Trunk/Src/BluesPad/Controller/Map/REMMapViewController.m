@@ -172,7 +172,7 @@
         marker.appearAnimation = kGMSMarkerAnimationPop;
         
         if([buildingInfo.building.buildingId isEqualToNumber:[self.buildingInfoArray[0] building].buildingId])
-            self.mapView.selectedMarker = marker;
+           [self selectMarker:marker];
         
         [self.markers addObject:marker];
     }
@@ -337,7 +337,7 @@
     for (GMSMarker *marker in self.markers) {
         if([[marker.userData building].buildingId isEqualToNumber:[self.buildingInfoArray[currentBuildingIndex] building].buildingId]){
             self.currentBuildingIndex = currentBuildingIndex;
-            self.mapView.selectedMarker = marker;
+            [self selectMarker:marker];
             return [self getZoomFrameFromMarker: marker];
         }
     }
@@ -389,7 +389,7 @@
     if([self isMarkerVisible:currentMarker] == NO){
         GMSCameraUpdate *update = [GMSCameraUpdate setTarget:currentMarker.position];
         [self.mapView moveCamera:update];
-        self.mapView.selectedMarker = currentMarker;
+        [self selectMarker:currentMarker];
     }
 }
 
@@ -405,15 +405,34 @@
     self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
 }
 
+-(void)selectMarker:(GMSMarker *)marker
+{
+    [self deselectCurrentMarker];
+    
+    //select
+    marker.icon = [self getMarkerIcon:marker.userData forMarkerState:UIControlStateHighlighted];
+    self.mapView.selectedMarker = marker;
+}
+
+-(void)deselectCurrentMarker
+{
+    //deselect selected marker
+    self.mapView.selectedMarker.icon = [self getMarkerIcon:self.mapView.selectedMarker.userData forMarkerState:UIControlStateNormal];
+    self.mapView.selectedMarker = nil;
+}
+
+
+
 #pragma mark GSMapView delegate
 
 - (BOOL)mapView:(GMSMapView *)view didTapMarker:(GMSMarker *)marker
 {
-    GMSMarker *oldMarker = self.mapView.selectedMarker;
-    oldMarker.icon = [self getMarkerIcon:oldMarker.userData forMarkerState:UIControlStateNormal];
-    
-    marker.icon = [self getMarkerIcon:marker.userData forMarkerState:UIControlStateHighlighted];
-    self.mapView.selectedMarker = marker;
+//    GMSMarker *oldMarker = self.mapView.selectedMarker;
+//    oldMarker.icon = [self getMarkerIcon:oldMarker.userData forMarkerState:UIControlStateNormal];
+//    
+//    marker.icon = [self getMarkerIcon:marker.userData forMarkerState:UIControlStateHighlighted];
+//    self.mapView.selectedMarker = marker;
+    [self selectMarker:marker];
 
     return YES;
 }
@@ -437,7 +456,7 @@
 
 -(void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
 {
-    self.mapView.selectedMarker.icon = [self getMarkerIcon:self.mapView.selectedMarker.userData forMarkerState:UIControlStateNormal];
+    [self deselectCurrentMarker];
 }
 
 #pragma mark - Segue
