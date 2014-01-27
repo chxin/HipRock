@@ -32,6 +32,7 @@ CGFloat margin=50;
         label.font = font;
         label.textColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
         label.textAlignment = NSTextAlignmentCenter;
+        label.backgroundColor = [UIColor clearColor];
         
         [self addSubview:label];
     }
