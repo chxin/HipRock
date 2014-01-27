@@ -87,14 +87,19 @@ static BOOL CACHEMODE = NO;
 {
     REMDataStore *store=[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:nil accessCache:NO andMessageMap:nil];
     REMApplicationContext *context= REMAppContext;
+    
+    NSString *origCachedContent = [REMStorage get:store.serviceMeta.url key:context.buildingInfoArrayStorageKey];
+    NSMutableDictionary *result = [[REMJSONHelper objectByString:origCachedContent] mutableCopy] ;
+    
     NSArray *buildingArray=context.buildingInfoArray;
     NSMutableArray *dicArray=[NSMutableArray array];
     for (int i=0; i<buildingArray.count; ++i) {
         REMJSONObject *obj=buildingArray[i];
         [dicArray addObject: obj.innerDictionary];
     }
+    result[@"BuildingInfo"]=dicArray;
     
-    [REMStorage set:store.serviceMeta.url key:context.buildingInfoArrayStorageKey value:[REMJSONHelper stringByObject:dicArray] expired:REMWindowActiated];
+    [REMStorage set:store.serviceMeta.url key:context.buildingInfoArrayStorageKey value:[REMJSONHelper stringByObject:result] expired:REMWindowActiated];
 }
 
 -(BOOL)getCacheMode
