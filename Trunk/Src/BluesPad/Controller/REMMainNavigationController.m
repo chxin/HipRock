@@ -90,6 +90,8 @@
     [REMStorage clearSessionStorage];
     [REMStorage clearOnApplicationActive];
     
+    UIViewController *controller=self.topViewController;
+    controller.view.alpha=0;
     [self popToRootViewControllerAnimated:YES];
     
     REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
