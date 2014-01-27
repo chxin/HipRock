@@ -100,12 +100,15 @@
 {
     REMMapViewController *mapController = [self getChildControllerInstanceOfClass:[REMMapViewController class]];
     mapController.isInitialPresenting = true;
+    
     if(mapController.snapshot != nil){
         [mapController.snapshot removeFromSuperview];
         mapController.snapshot = nil;
     }
     
     if([self.topViewController isEqual:mapController] == NO){
+        UIViewController *controller=self.topViewController;
+        controller.view.alpha=0;
         [self popToViewController:mapController animated:YES];
         [mapController updateView];
     }
