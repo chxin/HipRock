@@ -267,8 +267,8 @@
 }
 
 - (void) timePickerChanged:(UIDatePicker *)picker{
-
-    if ([picker.date isEqualToDate:[self minDate]]==YES) {
+    NSDate *minDate = [self minDate];
+    if ([[picker.date earlierDate:minDate] isEqualToDate:picker.date]==YES) {
         [picker setDate:[REMTimeHelper  add:-1 onPart:REMDateTimePartYear ofDate:picker.date] animated:NO];
         [picker setDate:[self minDate] animated:YES];
         
