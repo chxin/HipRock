@@ -363,7 +363,7 @@
     
     UIScreen *screen = [UIScreen mainScreen];
     
-    CGRect frame=  CGRectMake(0, 0, screen.bounds.size.height*screen.scale, screen.bounds.size.width*screen.scale);
+    CGRect frame=  CGRectMake(0, 0, screen.bounds.size.height, screen.bounds.size.width);
     
     if(width>frame.size.width) {
         width=frame.size.width;

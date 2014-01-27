@@ -221,7 +221,7 @@
     totalLabel.leftMargin=0;
     totalLabel.valueFontSize=kBuildingCommodityTotalValueFontSize;
     totalLabel.uomFontSize=kBuildingCommodityTotalUomFontSize;
-    totalLabel.emptyText=NSLocalizedString(@"BuildingChart_NoData", @"");//@"请持续关注能耗变化";
+    totalLabel.emptyText=NSLocalizedString(@"Building_LargeLabelNoData", @"");//@"暂无本月数据，请持续关注能耗变化";
     totalLabel.emptyTextFontSize=29;
     totalLabel.emptyTextFont=@(kBuildingFontSCRegular);
     totalLabel.emptyTextMargin=28;

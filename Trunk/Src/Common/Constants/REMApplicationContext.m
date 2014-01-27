@@ -40,7 +40,9 @@ static BOOL CACHEMODE = NO;
 
 + (void)cleanImage{
     REMApplicationContext *context=REMAppContext;
-    if(context.appConfig.shouldCleanCache == YES){
+    BOOL shouldCleanImage =context.appConfig.shouldCleanCache;
+    //shouldCleanImage=YES;
+    if(shouldCleanImage == YES){
         NSString *currentUserName = REMAppCurrentUser.name;
         
         NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -53,7 +55,9 @@ static BOOL CACHEMODE = NO;
         NSArray *array = [fileManager contentsOfDirectoryAtPath:documents error:&error];
         if (error==nil) {
             for (NSString *str in array) {
-                if ([str rangeOfString:buildingName].location==NSNotFound) {
+                BOOL shouldRemoveImage =[str rangeOfString:buildingName].location==NSNotFound;
+                //shouldRemoveImage=YES;
+                if (shouldRemoveImage == YES) {
                     [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/%@",documents,str] error:&error];
                 }
             }
