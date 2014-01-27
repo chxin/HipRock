@@ -32,9 +32,9 @@
 "Common_WholeYearFormat"="yyyy年全年";
 "Common_UpdateData"="更新数据";
 
-"Common_NetNoConnection"="无网络连接，请稍候再试";
-"Common_NetConnectionFailed"="网络连接失败，请稍候再试";
-"Common_NetServerError"="服务器错误";
+"Common_NetNoConnection"="无网络连接，请稍候再试。";
+"Common_NetConnectionFailed"="网络故障，请稍候再试。";
+"Common_NetServerError"="服务器故障，请稍候再试。";
 "Common_NetNoConnectionLoadLocal"="无网络连接,应用将读取本地数据。";
 "Common_ServerTimeout"="数据获取失败,网络故障。";
 "Common_ServerError"="数据获取失败,服务器故障。";

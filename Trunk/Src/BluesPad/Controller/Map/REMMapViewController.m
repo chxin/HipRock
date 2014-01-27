@@ -386,7 +386,7 @@
         }
     }
     
-    if([self isMarkerVisible:currentMarker] == NO){
+    if([self isMarkerVisible:currentMarker] == YES){
         GMSCameraUpdate *update = [GMSCameraUpdate setTarget:currentMarker.position];
         [self.mapView moveCamera:update];
         [self selectMarker:currentMarker];
