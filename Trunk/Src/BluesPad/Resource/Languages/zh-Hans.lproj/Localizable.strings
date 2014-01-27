@@ -6,7 +6,7 @@
 
 */
 //Common, prefix: Common_
-"Common_ServerError" = "抱歉!服务器错误,无法获取最新的能源数据。请稍候再试。";
+"Common_ServerError" = "抱歉!服务器错误，无法获取最新的能源数据。请稍候再试。";
 "Common_Building"="楼宇";
 "Common_Last7Day"="之前七天";
 "Common_Today"="今天";
@@ -35,9 +35,9 @@
 "Common_NetNoConnection"="无网络连接，请稍候再试";
 "Common_NetConnectionFailed"="网络连接失败，请稍候再试";
 "Common_NetServerError"="服务器错误";
-"Common_NetNoConnectionLoadLocal"="无网络连接,应用将读取本地数据。";
-"Common_ServerTimeout"="数据获取失败,网络故障。";
-"Common_ServerError"="数据获取失败,服务器故障。";
+"Common_NetNoConnectionLoadLocal"="无网络连接，应用将读取本地数据。";
+"Common_ServerTimeout"="数据获取失败，网络故障。";
+"Common_ServerError"="数据获取失败，服务器故障。";
 "Common_ServerTimeoutSimple"="网络故障。";
 "Common_ServerErrorSimple"="服务器故障。";
 
@@ -76,7 +76,7 @@
 "Login_CreatingDemoUserText" = "账号创建中，请稍候..";
 
 "Login_TrialNoNetwork" = "产品试用申请失败。无网络连，请连接后再试。";
-"Login_TrialNetworkFailed" = "产品试用申请失败。网络故障,请稍后再试。";
+"Login_TrialNetworkFailed" = "产品试用申请失败。网络故障，请稍后再试。";
 "Login_TrialServerError" = "产品试用申请失败。服务器故障，请稍后再试。";
 "Login_TrialNoCustomer" = "产品试用申请失败，您的用户未关联任何客户";
 
@@ -93,18 +93,18 @@
 "Login_WrongPassword" = "登录密码错误";
 "Login_AccountLocked" = "登录失败，您的用户名暂时无法使用";
 
-"Login_NoNetwork" = "无网络连接,产品登录失败。请连接后再试。";
-"Login_NetworkFailed" = "网络故障,产品登录失败,请稍后再试。";
+"Login_NoNetwork" = "无网络连接，产品登录失败。请连接后再试。";
+"Login_NetworkFailed" = "网络故障，产品登录失败，请稍后再试。";
 "Login_ServerError" = "产品登录失败。服务器故障，请稍后再试。";
 "Login_NoCustomer" = "产品登录失败，您的用户未关联任何客户";
 
 
 //Setting, prefix: Setting_
 "Setting_LoadingData"="正在更新客户的楼宇及能耗信息，请稍候...";
-"Setting_CurrentCustomerDeleted"="当前客户已被解除关联,请重新选择客户。";
-"Setting_SelectedCustomerDeleted"="该客户已被解除关联,请重新选择客户。";
-"Setting_UserDeleted"="您的用户已被删除,应用将退出登录状态";
-"Setting_NoAttachedCustomer"="您的用户未关联任何客户,应用将退出登录状态";
+"Setting_CurrentCustomerDeleted"="当前客户已被解除关联，请重新选择客户。";
+"Setting_SelectedCustomerDeleted"="该客户已被解除关联，请重新选择客户。";
+"Setting_UserDeleted"="您的用户已被删除，应用将退出登录状态";
+"Setting_NoAttachedCustomer"="您的用户未关联任何客户，应用将退出登录状态";
 "Setting_DetailName"="名称";
 "Setting_DetailCode"="编码";
 "Setting_DetailAddress"="地址";
@@ -176,7 +176,7 @@
 
 "Building_WidgetRelationTitle"="选取要替换的图表";
 "Building_WidgetRelationCommodityTitle"="默认图表 - %@";
-"Building_WidgetRelationInfo"="所选图表将会被替换为当前图表,并出现在所属建筑封面中,以便您在快速查看该图表。";
+"Building_WidgetRelationInfo"="所选图表将会被替换为当前图表，并出现在所属建筑封面中，以便您在快速查看该图表。";
 "Building_WidgetRelationWidgetDeleted"="添加失败。小组件“%@”已被删除，请更新数据"; //添加失败。小组件“最近七天能效查看”已被删除，请更新数据
 "Building_WidgetRelationPositionDeleted"="添加失败。添加位置不存在，请更新数据";
 
