@@ -55,6 +55,7 @@ const static CGFloat buildingGap=20;
 {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor blackColor];
+    
     [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, 768/*REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight)*/)];
     self.currentScrollOffset=-kBuildingCommodityViewTop;
     
@@ -99,6 +100,7 @@ const static CGFloat buildingGap=20;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UpdateBuildingCoverRelation" object:nil];
 
 }
+
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
