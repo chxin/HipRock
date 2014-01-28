@@ -175,12 +175,12 @@
                 [picker setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
                 [picker setCalendar:[REMTimeHelper currentCalendar]];
                 
-                [picker addTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
+                [picker addTarget:self action:@selector(timePickerChanged:withHourPicker:) forControlEvents:UIControlEventValueChanged];
                 
                 
                 if(self.timePickerIndex==1){
                     [picker setDate:self.timeRange.startTime];
-                    [self.startPicker removeTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
+                    [self.startPicker removeTarget:self action:@selector(timePickerChanged:withHourPicker:) forControlEvents:UIControlEventValueChanged];
                     self.startPicker = nil;
                     self.startPicker=picker;
                    
@@ -191,7 +191,7 @@
                         NSDate *newEndDate=[REMTimeHelper add:-1 onPart:REMDateTimePartDay ofDate:self.timeRange.endTime];
                         [picker setDate:newEndDate];
                     }
-                    [self.endPicker removeTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
+                    [self.endPicker removeTarget:self action:@selector(timePickerChanged:withHourPicker:) forControlEvents:UIControlEventValueChanged];
                     self.endPicker=nil;
                     self.endPicker=picker;
                    
@@ -247,10 +247,10 @@
 
 - (void) hourPickerChanaged:(UIPickerView *)picker{
     if (picker == self.startHourPicker) {
-        [self timePickerChanged:self.startPicker];
+        [self timePickerChanged:self.startPicker withHourPicker:picker];
     }
     else{
-        [self timePickerChanged:self.endPicker];
+        [self timePickerChanged:self.endPicker withHourPicker:picker];
     }
     
     
@@ -266,9 +266,9 @@
     return minDate;
 }
 
-- (void) timePickerChanged:(UIDatePicker *)picker{
+- (void) timePickerChanged:(UIDatePicker *)picker withHourPicker:(UIPickerView *)hourPicker1{
     NSDate *minDate = [self minDate];
-    if ([[picker.date earlierDate:minDate] isEqualToDate:picker.date]==YES) {
+    if ([[picker.date earlierDate:minDate] isEqual:picker.date]==YES && hourPicker1==nil) {
         [picker setDate:[REMTimeHelper  add:-1 onPart:REMDateTimePartYear ofDate:picker.date] animated:NO];
         [picker setDate:[self minDate] animated:YES];
         
