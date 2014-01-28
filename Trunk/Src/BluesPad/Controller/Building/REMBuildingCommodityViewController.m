@@ -539,6 +539,7 @@
 - (void)updateChartController{
     UINavigationController *nav= (UINavigationController *)self.popController.contentViewController;
     REMBuildingCoverWidgetViewController *widgetController=nav.childViewControllers[0];
+    widgetController.isRequesting=NO;
     REMBuildingChartContainerViewController *containerController;
     REMBuildingChartContainerViewController *otherContainer;
     REMWidgetObject *otherWidget;
@@ -603,7 +604,11 @@
         }
         
     }
-    self.popController=nil;
+    
+    
+    [self.popController dismissPopoverAnimated:NO];
+    
+    
 }
 
 - (void)showChart{
