@@ -30,6 +30,7 @@
 
 @property (nonatomic,weak) UIImageView *cropTitleView;
 
+
 @end
 
 
@@ -93,8 +94,8 @@
 
 - (void)loadSmallImageView{
     
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height*kDMCommon_ImageScale)];
-    imageView.contentMode=UIViewContentModeTop|UIViewContentModeScaleAspectFill;
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    imageView.contentMode=UIViewContentModeScaleToFill;
     imageView.clipsToBounds=YES;
     UIImageView *blurImageView=[[UIImageView alloc]initWithFrame:imageView.frame];
     blurImageView.alpha=0;
@@ -103,27 +104,42 @@
         blurImageView.image=self.defaultBlurImage;
     }
     else{
-        NSString *smallPicPath= [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageSmall];
-        NSString *smallBlurPicPath= [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageSmallBlured];
-        BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallPicPath];
-        if (hasExist==NO) {
-            imageView.image=self.defaultImage;
-            blurImageView.image=self.defaultBlurImage;
+        NSNumber *picId =self.buildingInfo.building.pictureIds[0];
+        NSString *smallPicPath= [REMImageHelper buildingImagePathWithId:picId andType:REMBuildingImageSmall];
+        NSString *smallBlurPicPath= [REMImageHelper buildingImagePathWithId:picId andType:REMBuildingImageSmallBlured];
+        NSString *normalPicPath= [REMImageHelper buildingImagePathWithId:picId andType:REMBuildingImageNormal];
+        NSString *normalBlurPicPath= [REMImageHelper buildingImagePathWithId:picId andType:REMBuildingImageNormalBlured];
+
+        BOOL hasExistNormal = [[NSFileManager defaultManager] fileExistsAtPath:normalPicPath];
+        if (hasExistNormal) {
+            UIImage *image= [[UIImage alloc] initWithContentsOfFile:normalPicPath];
+            imageView.contentMode=UIViewContentModeTop;
+            imageView.image=image;
+            UIImage *blurImage = [[UIImage alloc] initWithContentsOfFile:normalBlurPicPath];
+            blurImageView.contentMode=UIViewContentModeTop;
+            blurImageView.image=blurImage;
         }
         else{
-            UIImage *image= [[UIImage alloc] initWithContentsOfFile:smallPicPath];
-            imageView.image=image;
-            hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallBlurPicPath];
-            UIImage *blurImage;
-            if (hasExist==YES) {
-                blurImage= [[UIImage alloc] initWithContentsOfFile:smallBlurPicPath];
+            BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallPicPath];
+            if (hasExist==NO) {
+                imageView.image=self.defaultImage;
+                blurImageView.image=self.defaultBlurImage;
             }
             else{
-                blurImage=[REMImageHelper blurImage:image];
-                NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(blurImage)];
-                [data1 writeToFile:smallBlurPicPath atomically:YES];
+                UIImage *image= [[UIImage alloc] initWithContentsOfFile:smallPicPath];
+                imageView.image=image;
+                hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallBlurPicPath];
+                UIImage *blurImage;
+                if (hasExist==YES) {
+                    blurImage= [[UIImage alloc] initWithContentsOfFile:smallBlurPicPath];
+                }
+                else{
+                    blurImage=[REMImageHelper blurImage:image];
+                    NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(blurImage)];
+                    [data1 writeToFile:smallBlurPicPath atomically:YES];
+                }
+                blurImageView.image=blurImage;
             }
-            blurImageView.image=blurImage;
         }
     }
     [self.view addSubview:imageView];
@@ -378,7 +394,7 @@
 
 
 - (void)loadImageViewByImage:(UIImage *)image{
-    UIImageView *newView = [[UIImageView alloc]initWithFrame:CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.imageView.frame.size.width, self.imageView.frame.size.height*kDMCommon_ImageScale)];
+    UIImageView *newView = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height*kDMCommon_ImageScale)];
     newView.contentMode=UIViewContentModeTop;
     newView.clipsToBounds=YES;
     newView.alpha=0;
@@ -388,7 +404,8 @@
     newBlurred.contentMode=UIViewContentModeTop;
     newBlurred.clipsToBounds=YES;
     //[newBlurred setFrame:CGRectMake(-25, -25, newBlurred.frame.size.width+50, newBlurred.frame.size.height+50)];
-    
+//    newBlurred.layer.borderColor=[UIColor redColor].CGColor;
+//    newBlurred.layer.borderWidth=1;
     [self.view insertSubview:newView aboveSubview:self.blurImageView];
     [self.view insertSubview:newBlurred aboveSubview:newView];
     
@@ -524,8 +541,9 @@
         CGFloat move=20;
         CGFloat y=(kBuildingCommodityViewTop+offset)*move/(kBuildingCommodityViewTop+kCommodityScrollTop);
         //NSLog(@"center:%@",NSStringFromCGPoint(self.imageView.center));
-        self.blurImageView.center=CGPointMake(self.imageView.center.x, self.view.center.y-y);
-        self.imageView.center=CGPointMake(self.imageView.center.x, self.view.center.y-y);
+        CGFloat center=self.imageView.frame.size.height/2.0;
+        self.blurImageView.center=CGPointMake(self.imageView.center.x, center-y);
+        self.imageView.center=CGPointMake(self.imageView.center.x, center-y);
         if(self.currentCoverStatus == REMBuildingCoverStatusCoverPage){
             REMBuildingDataViewController *controller=(REMBuildingDataViewController *)self.childViewControllers[0];
             [controller setCurrentOffsetY:currentOffset];
