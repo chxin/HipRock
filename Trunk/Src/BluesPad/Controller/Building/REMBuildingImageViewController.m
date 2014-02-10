@@ -94,7 +94,7 @@
 
 - (void)loadSmallImageView{
     
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height*kDMCommon_ImageScale)];
     imageView.contentMode=UIViewContentModeScaleToFill;
     imageView.clipsToBounds=YES;
     UIImageView *blurImageView=[[UIImageView alloc]initWithFrame:imageView.frame];
@@ -394,7 +394,7 @@
 
 
 - (void)loadImageViewByImage:(UIImage *)image{
-    UIImageView *newView = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height*kDMCommon_ImageScale)];
+    UIImageView *newView = [[UIImageView alloc]initWithFrame:CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height*kDMCommon_ImageScale)];
     newView.contentMode=UIViewContentModeTop;
     newView.clipsToBounds=YES;
     newView.alpha=0;
