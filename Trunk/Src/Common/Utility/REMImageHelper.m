@@ -475,5 +475,21 @@
     return newImage;
 }
 
++ (UIImage*)imageWithImage:(UIImage*)image scaledWithFactor:(CGFloat)factor
+{
+    NSData* pictureData = UIImagePNGRepresentation(image);
+    
+    return [REMImageHelper parseImageFromNSData:pictureData withScale:factor];
+    
+    CGSize newSize = CGSizeMake(image.size.width * factor, image.size.height * factor);
+    
+    UIGraphicsBeginImageContext( newSize );
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
 
 @end

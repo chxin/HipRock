@@ -221,7 +221,8 @@
     cell.controller = self;
     
     [self loadBuildingSmallImage:cell.building.pictureIds :^(UIImage *image) {
-        [cell.backgroundButton setImage:image forState:UIControlStateNormal];
+        UIImage *scaled = [REMImageHelper imageWithImage:image scaledWithFactor:kDMCommon_ImageScale];
+        [cell.backgroundButton setImage:scaled forState:UIControlStateNormal];
     }];
     
     return cell;

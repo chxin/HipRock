@@ -30,8 +30,13 @@
 //        self.layer.borderColor = [UIColor orangeColor].CGColor;
 //        self.layer.borderWidth = 1.0;
         
+        
+        
+        
+        UIImage *image= [REMImageHelper imageWithImage:REMIMG_DefaultBuilding_Small scaledWithFactor:kDMCommon_ImageScale];
+        
         UIButton *button = [[UIButton alloc] initWithFrame:self.bounds];
-        [button setImage:REMIMG_DefaultBuilding_Small forState:UIControlStateNormal];
+        [button setImage:image forState:UIControlStateNormal];
         button.imageView.contentMode = UIViewContentModeScaleToFill;
         button.contentMode = UIViewContentModeScaleToFill;
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
