@@ -137,8 +137,18 @@
     }
     //if no large, use small
     else if([[NSFileManager defaultManager] fileExistsAtPath:smallImagePath]){
-        UIImage *scaled = [REMImageHelper imageWithImage:[UIImage imageWithContentsOfFile:smallImagePath] scaledWithFactor:1];
-        UIImageView *imageView =  [[UIImageView alloc] initWithImage:scaled];
+        UIImage *original = [UIImage imageWithContentsOfFile:smallImagePath];
+        
+        CGSize size = CGSizeMake(2*original.size.width * kDMCommon_ImageScale, 2*original.size.height * kDMCommon_ImageScale);
+        
+        //resize image to cell size * factor
+        UIImage *resized = [REMImageHelper scaleImage:original toSize:size];
+        
+        //crop image
+        CGRect rect = CGRectMake((size.width - 2*original.size.width)/2, 0,2*original.size.width, 2*original.size.height);
+        UIImage *final = [REMImageHelper cropImage:resized toRect:rect];
+        
+        UIImageView *imageView =  [[UIImageView alloc] initWithImage:final];
         imageView.contentMode = UIViewContentModeScaleToFill;
         imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height*kDMCommon_ImageScale);
         imageView.clipsToBounds = YES;
