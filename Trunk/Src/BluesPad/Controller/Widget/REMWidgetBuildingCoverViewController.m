@@ -90,6 +90,37 @@
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (REMISIOS7) {
+        if (section==0) {
+            return 40;
+        }
+        if (section==1) {
+            return 16;
+        }
+    }
+    else{
+        if (section==0) {
+            return 40;
+        }
+        
+    }
+    
+    return 28;
+    
+}
+
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section==0) {
+        return 0;
+    }
+    return 44;
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (section==0) {
