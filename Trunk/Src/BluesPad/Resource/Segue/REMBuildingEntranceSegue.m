@@ -65,7 +65,7 @@
     //add building view as subview into map view
     UIImageView *transitionView = [self getBuildingTransitionView];
     
-    transitionView.frame = sourceView.bounds;
+    transitionView.frame = CGRectMake(sourceView.frame.origin.x, sourceView.frame.origin.y, sourceView.frame.size.width, sourceView.frame.size.height);
     transitionView.transform = [REMViewHelper getScaleTransformFromOriginalFrame:self.parameter.initialZoomFrame andFinalFrame:self.parameter.finalZoomFrame];
     transitionView.center = [REMViewHelper getCenterOfRect:self.parameter.initialZoomFrame];
     
@@ -137,16 +137,16 @@
     }
     //if no large, use small
     else if([[NSFileManager defaultManager] fileExistsAtPath:smallImagePath]){
-        UIImage *scaled = [REMImageHelper imageWithImage:[UIImage imageWithContentsOfFile:smallImagePath] scaledWithFactor:kDMCommon_ImageScale];
+        UIImage *scaled = [REMImageHelper imageWithImage:[UIImage imageWithContentsOfFile:smallImagePath] scaledWithFactor:1];
         UIImageView *imageView =  [[UIImageView alloc] initWithImage:scaled];
-        imageView.contentMode = UIViewContentModeTop;
-        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height * kDMCommon_ImageScale);
+        imageView.contentMode = UIViewContentModeScaleToFill;
+        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height*kDMCommon_ImageScale);
         imageView.clipsToBounds = YES;
         return imageView;
     }
     //if even no small, use default
     else{
-        UIImage *scaled = [REMImageHelper imageWithImage:REMIMG_DefaultBuilding scaledWithFactor:kDMCommon_ImageScale];
+        UIImage *scaled = [REMImageHelper imageWithImage:REMIMG_DefaultBuilding scaledWithFactor:1];
         UIImageView *imageView =  [[UIImageView alloc] initWithImage:scaled];
         imageView.contentMode = UIViewContentModeTop;
         imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height * kDMCommon_ImageScale);

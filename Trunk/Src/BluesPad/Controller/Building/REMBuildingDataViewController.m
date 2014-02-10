@@ -38,7 +38,7 @@
     REMBuildingDataView *scroll=[[REMBuildingDataView alloc]initWithFrame:self.viewFrame];
     scroll.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, kBuildingLeftMargin, 0, 0);
     scroll.showsVerticalScrollIndicator=NO;
-    [scroll setContentSize:CGSizeMake(0, 1165+85)];
+    [scroll setContentSize:CGSizeMake(0, 1165+85+40)];
     self.view=scroll;
     //scroll.layer.borderColor=[UIColor yellowColor].CGColor;
     //scroll.layer.borderWidth=1;

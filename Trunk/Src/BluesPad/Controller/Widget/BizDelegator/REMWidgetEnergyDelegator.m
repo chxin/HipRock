@@ -133,9 +133,15 @@
     
     
     [legendControl setSegmentedControlStyle:UISegmentedControlStylePlain];
+    if (REMISIOS7) {
+        [legendControl setImage:REMIMG_DateView_Chart forSegmentAtIndex:0];
+        [legendControl setImage:REMIMG_Legend_Chart forSegmentAtIndex:1];
+    }
+    else{
+        [legendControl setImage:REMIMG_DateView_Chart_iOS6 forSegmentAtIndex:0];
+        [legendControl setImage:REMIMG_Legend_Chart_iOS6 forSegmentAtIndex:1];
+    }
     
-    [legendControl setImage:REMIMG_DateView_Chart forSegmentAtIndex:0];
-    [legendControl setImage:REMIMG_Legend_Chart forSegmentAtIndex:1];
     //[legendControl setBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     //[legendControl setBackgroundColor:[UIColor clearColor]];
     [legendControl setSelectedSegmentIndex:0];

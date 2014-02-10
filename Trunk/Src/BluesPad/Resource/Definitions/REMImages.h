@@ -20,7 +20,9 @@
 #define REMIMG_Logo_About REMLoadImageNamed(@"Logo_About")
 #define REMIMG_Setting REMLoadImageNamed(@"Setting")
 
-//images in /Building:
+//images in /AppIcon:
+
+//images in /building:
 #define REMIMG_ChartCustomization REMLoadImageNamed(@"ChartCustomization")
 #define REMIMG_ChartCustomization_Widget REMLoadImageNamed(@"ChartCustomization_Widget")
 #define REMIMG_DefaultBuilding_Small REMLoadImageNamed(@"DefaultBuilding-Small")
@@ -34,7 +36,7 @@
 #define REMIMG_share_weixin REMLoadImageNamed(@"share-weixin")
 #define REMIMG_Share_normal REMLoadImageNamed(@"Share_normal")
 
-//images in /Building/commodity:
+//images in /building/commodity:
 #define REMIMG_Coal_normal REMLoadImageNamed(@"Coal_normal")
 #define REMIMG_Coal_pressed REMLoadImageNamed(@"Coal_pressed")
 #define REMIMG_Cooling_normal REMLoadImageNamed(@"Cooling_normal")
@@ -62,8 +64,10 @@
 #define REMIMG_Close_Chart REMLoadImageNamed(@"Close_Chart")
 #define REMIMG_DatePicker_Chart REMLoadImageNamed(@"DatePicker_Chart")
 #define REMIMG_DateView_Chart REMLoadImageNamed(@"DateView_Chart")
+#define REMIMG_DateView_Chart_iOS6 REMLoadImageNamed(@"DateView_Chart_iOS6")
 #define REMIMG_Descend REMLoadImageNamed(@"Descend")
 #define REMIMG_Legend_Chart REMLoadImageNamed(@"Legend_Chart")
+#define REMIMG_Legend_Chart_iOS6 REMLoadImageNamed(@"Legend_Chart_iOS6")
 #define REMIMG_PopNote REMLoadImageNamed(@"PopNote")
 
 //images in /Dashboard:
@@ -71,6 +75,8 @@
 #define REMIMG_Down REMLoadImageNamed(@"Down")
 #define REMIMG_Nodata REMLoadImageNamed(@"Nodata")
 #define REMIMG_Up REMLoadImageNamed(@"Up")
+
+//images in /Launch:
 
 //images in /Login:
 #define REMIMG_JumpLogin_Pressed REMLoadImageNamed(@"JumpLogin-Pressed")
@@ -97,6 +103,8 @@
 #define REMIMG_QualifiedPin_Normal REMLoadImageNamed(@"QualifiedPin_Normal")
 #define REMIMG_UnqualifiedPin_Focus REMLoadImageNamed(@"UnqualifiedPin_Focus")
 #define REMIMG_UnqualifiedPin_Normal REMLoadImageNamed(@"UnqualifiedPin_Normal")
+
+//images in /Setting:
 
 //images in /Splash:
 #define REMIMG_SplashScreenBackgroud REMLoadImageNamed(@"SplashScreenBackgroud")
