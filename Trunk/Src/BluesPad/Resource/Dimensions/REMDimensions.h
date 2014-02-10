@@ -57,6 +57,7 @@
 #define kDMCommon_TitleGradientLayerHeight REMDMCOMPATIOS7(109)
 #define kDMCommon_TitleGradientLayerFrame CGRectMake(0,0,kDMScreenWidth,kDMCommon_TitleGradientLayerHeight)
 
+#define kDMCommon_ImageScale 1.02
 
 
 #endif

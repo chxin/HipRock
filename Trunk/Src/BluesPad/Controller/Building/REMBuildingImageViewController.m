@@ -32,7 +32,6 @@
 
 @end
 
-static CGFloat scale=1.02;
 
 @implementation REMBuildingImageViewController
 
@@ -346,7 +345,7 @@ static CGFloat scale=1.02;
     }
     else{
         if(data==nil)return nil;
-        UIImage *image= [REMImageHelper parseImageFromNSData:data withScale:scale];
+        UIImage *image= [REMImageHelper parseImageFromNSData:data withScale:kDMCommon_ImageScale];
         
         NSString *pngFilePath = [self buildingPictureFileName];
         NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
@@ -378,7 +377,7 @@ static CGFloat scale=1.02;
 
 
 - (void)loadImageViewByImage:(UIImage *)image{
-    UIImageView *newView = [[UIImageView alloc]initWithFrame:CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.imageView.frame.size.width, self.imageView.frame.size.height*scale)];
+    UIImageView *newView = [[UIImageView alloc]initWithFrame:CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.imageView.frame.size.width, self.imageView.frame.size.height*kDMCommon_ImageScale)];
     newView.contentMode=UIViewContentModeTop;
     newView.clipsToBounds=YES;
     newView.alpha=0;
