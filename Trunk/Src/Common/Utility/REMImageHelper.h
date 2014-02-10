@@ -37,4 +37,6 @@
 
 + (UIImage *) drawText:(NSString*) text inImage:(UIImage*)image inRect:(CGRect)rect;
 
++ (UIImage*)imageWithImage:(UIImage*)image scaledWithFactor:(CGFloat)factor;
+
 @end

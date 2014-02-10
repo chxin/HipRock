@@ -93,8 +93,9 @@
 
 - (void)loadSmallImageView{
     
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height*kDMCommon_ImageScale)];
+    imageView.contentMode=UIViewContentModeTop|UIViewContentModeScaleAspectFill;
+    imageView.clipsToBounds=YES;
     UIImageView *blurImageView=[[UIImageView alloc]initWithFrame:imageView.frame];
     blurImageView.alpha=0;
     if([self hasExistBuildingPic]==NO){

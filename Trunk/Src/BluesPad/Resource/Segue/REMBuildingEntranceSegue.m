@@ -122,14 +122,37 @@
     //if there is large image, use large
     NSString *normalImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageNormal];
     NSString *smallImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageSmall];
-    if([[NSFileManager defaultManager] fileExistsAtPath:normalImagePath])
-        return [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:normalImagePath]];
+    
+    
+    
+    if([[NSFileManager defaultManager] fileExistsAtPath:normalImagePath]){
+        UIImage *scaled = [REMImageHelper imageWithImage:[UIImage imageWithContentsOfFile:normalImagePath] scaledWithFactor:kDMCommon_ImageScale];
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:scaled];
+        imageView.contentMode = UIViewContentModeTop;
+        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height * kDMCommon_ImageScale);
+        imageView.clipsToBounds = YES;
+        
+        return imageView;
+    }
     //if no large, use small
-    else if([[NSFileManager defaultManager] fileExistsAtPath:smallImagePath])
-        return [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:smallImagePath]];
+    else if([[NSFileManager defaultManager] fileExistsAtPath:smallImagePath]){
+        UIImage *scaled = [REMImageHelper imageWithImage:[UIImage imageWithContentsOfFile:smallImagePath] scaledWithFactor:kDMCommon_ImageScale];
+        UIImageView *imageView =  [[UIImageView alloc] initWithImage:scaled];
+        imageView.contentMode = UIViewContentModeTop;
+        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height * kDMCommon_ImageScale);
+        imageView.clipsToBounds = YES;
+        return imageView;
+    }
     //if even no small, use default
-    else
-        return [[UIImageView alloc] initWithImage:REMIMG_DefaultBuilding];
+    else{
+        UIImage *scaled = [REMImageHelper imageWithImage:REMIMG_DefaultBuilding scaledWithFactor:kDMCommon_ImageScale];
+        UIImageView *imageView =  [[UIImageView alloc] initWithImage:scaled];
+        imageView.contentMode = UIViewContentModeTop;
+        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height * kDMCommon_ImageScale);
+        imageView.clipsToBounds = YES;
+        return imageView;
+    }
 }
 
 @end
