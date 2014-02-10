@@ -83,9 +83,16 @@ const int buttonFirstMargin = -20;
 //}
 - (REMToggleButton*) makeButton:(NSString*)buttonText rect:(CGRect)rect group:(REMToggleButtonGroup*)toggleGroup{
     REMToggleButton* btn = [REMToggleButton buttonWithType: UIButtonTypeCustom];
-    [btn setFrame:rect];
     btn.showsTouchWhenHighlighted = YES;
-    btn.adjustsImageWhenHighlighted = YES;
+    if (REMISIOS7) {
+        btn = [REMToggleButton buttonWithType: UIButtonTypeSystem];
+        btn.tintColor=[UIColor whiteColor];
+        btn.showsTouchWhenHighlighted = NO;
+    }
+    [btn setFrame:rect];
+    
+    
+    btn.adjustsImageWhenHighlighted = NO;
     [btn setTitle:buttonText forState:UIControlStateNormal];
     [self.view addSubview:btn];
     [toggleGroup registerButton:btn];
