@@ -22,6 +22,7 @@
 
 -(void)beginPinch;
 -(void)endPinch;
+-(UIImage *)resizeImageForCell:(UIImage *)image;
 
 
 

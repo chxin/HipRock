@@ -39,4 +39,8 @@
 
 + (UIImage*)imageWithImage:(UIImage*)image scaledWithFactor:(CGFloat)factor;
 
++ (UIImage *)scaleImage:(UIImage*)image toSize:(CGSize)size;
+
++ (UIImage *)cropImage:(UIImage *)image toRect:(CGRect)rect;
+
 @end

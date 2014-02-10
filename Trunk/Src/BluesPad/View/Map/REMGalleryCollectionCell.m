@@ -33,11 +33,11 @@
         
         
         
-        UIImage *image= [REMImageHelper imageWithImage:REMIMG_DefaultBuilding_Small scaledWithFactor:kDMCommon_ImageScale];
+        UIImage *image= [self resizeImageForCell:REMIMG_DefaultBuilding_Small];
         
         UIButton *button = [[UIButton alloc] initWithFrame:self.bounds];
         [button setImage:image forState:UIControlStateNormal];
-        button.imageView.contentMode = UIViewContentModeScaleToFill;
+//        button.imageView.contentMode = UIViewContentModeScaleToFill;
         button.contentMode = UIViewContentModeScaleToFill;
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
         button.contentVerticalAlignment = UIControlContentHorizontalAlignmentFill;
@@ -93,6 +93,22 @@
     
     [self.snapshot removeFromSuperview];
     self.snapshot = nil;
+}
+
+
+-(UIImage *)resizeImageForCell:(UIImage *)image
+{
+    CGSize size = CGSizeMake(2*kDMGallery_GalleryCellWidth * kDMCommon_ImageScale, 2*kDMGallery_GalleryCellHeight * kDMCommon_ImageScale);
+    
+    //resize image to cell size * factor
+    UIImage *resized = [REMImageHelper scaleImage:image toSize:size];
+    
+    //return resized;
+    
+    //crop image
+    CGRect rect = CGRectMake((size.width - 2*kDMGallery_GalleryCellWidth)/2, 0, 2*kDMGallery_GalleryCellWidth, 2*kDMGallery_GalleryCellHeight);
+    
+    return [REMImageHelper cropImage:resized toRect:rect];
 }
 
 

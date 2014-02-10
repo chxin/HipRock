@@ -221,12 +221,14 @@
     cell.controller = self;
     
     [self loadBuildingSmallImage:cell.building.pictureIds :^(UIImage *image) {
-        UIImage *scaled = [REMImageHelper imageWithImage:image scaledWithFactor:kDMCommon_ImageScale];
+        UIImage *scaled = [cell resizeImageForCell:image];
+        
         [cell.backgroundButton setImage:scaled forState:UIControlStateNormal];
     }];
     
     return cell;
 }
+
 
 
 @end

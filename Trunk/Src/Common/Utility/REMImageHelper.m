@@ -481,14 +481,22 @@
     
     return [REMImageHelper parseImageFromNSData:pictureData withScale:factor];
     
-    CGSize newSize = CGSizeMake(image.size.width * factor, image.size.height * factor);
-    
-    UIGraphicsBeginImageContext( newSize );
-    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+}
+
++ (UIImage*)scaleImage:(UIImage*)image toSize:(CGSize)size
+{
+    UIGraphicsBeginImageContext( size );
+    [image drawInRect:CGRectMake(0,0,size.width,size.height)];
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
     return newImage;
+}
+
++(UIImage *)cropImage:(UIImage *)image toRect:(CGRect)rect
+{
+    UIImage *cropped = [UIImage imageWithCGImage:CGImageCreateWithImageInRect([image CGImage], rect)];
+    return cropped;
 }
 
 
