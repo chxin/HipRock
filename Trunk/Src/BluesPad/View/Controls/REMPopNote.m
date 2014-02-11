@@ -16,7 +16,8 @@ CGFloat margin=50;
 
 - (id)initWithText:(NSString *)text
 {
-    UIFont *font = [UIFont fontWithName:@(kBuildingFontSC) size:20];
+    //UIFont *font = [UIFont fontWithName:@(kBuildingFontSC) size:20];
+    UIFont *font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:20];
     CGSize size = [text sizeWithFont:font];
     
     UIImage *backgroundImage = [REMIMG_PopNote resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9) resizingMode:UIImageResizingModeTile];
