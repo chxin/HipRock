@@ -116,8 +116,13 @@
 {
     //if no image at all, use default
     NSArray *imageIds = [[self.sourceViewController buildingInfoArray][self.parameter.currentBuildingIndex] building].pictureIds;
-    if(imageIds == nil || imageIds.count <= 0)
-        return [[UIImageView alloc] initWithImage:REMIMG_DefaultBuilding];
+    if(imageIds == nil || imageIds.count <= 0){
+        UIImageView *imageView =[[UIImageView alloc] initWithImage:REMIMG_DefaultBuilding];
+        imageView.contentMode = UIViewContentModeTop;
+
+        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height * kDMCommon_ImageScale);
+        return imageView;
+    }
     
     //if there is large image, use large
     NSString *normalImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageNormal];
@@ -146,7 +151,7 @@
     }
     //if even no small, use default
     else{
-        UIImage *scaled = [REMImageHelper imageWithImage:REMIMG_DefaultBuilding scaledWithFactor:1];
+        UIImage *scaled = REMIMG_DefaultBuilding;
         UIImageView *imageView =  [[UIImageView alloc] initWithImage:scaled];
         imageView.contentMode = UIViewContentModeTop;
         imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height * kDMCommon_ImageScale);

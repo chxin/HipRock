@@ -38,7 +38,7 @@
     REMBuildingDataView *scroll=[[REMBuildingDataView alloc]initWithFrame:self.viewFrame];
     scroll.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, kBuildingLeftMargin, 0, 0);
     scroll.showsVerticalScrollIndicator=NO;
-    [scroll setContentSize:CGSizeMake(0, 1165+85+40)];
+    [scroll setContentSize:CGSizeMake(0, 1165+85)];
     self.view=scroll;
     //scroll.layer.borderColor=[UIColor yellowColor].CGColor;
     //scroll.layer.borderWidth=1;
@@ -297,7 +297,7 @@
 - (void)initDragLabel
 {
     UIScrollView *scroll=(UIScrollView *)self.view;
-    CGRect frame = CGRectMake(0, scroll.contentSize.height-17- REMDMCOMPATIOS7(10), 500, 17);
+    CGRect frame = CGRectMake(0, scroll.contentSize.height-27- REMDMCOMPATIOS7(10), 500, 17);
     
     UILabel *label =[[UILabel alloc]initWithFrame:frame];
     //label.layer.borderColor=[UIColor redColor].CGColor;
@@ -320,7 +320,7 @@
     self.dashboardLabel=label;
     
     
-    CGRect imgFrame=CGRectMake(178, scroll.contentSize.height-20-REMDMCOMPATIOS7(10), 15, 20);
+    CGRect imgFrame=CGRectMake(178, scroll.contentSize.height-30-REMDMCOMPATIOS7(10), 15, 20);
     UIImageView *arrow=[[UIImageView alloc]initWithImage:REMIMG_Up];
     [arrow setFrame:imgFrame];
     [self.view addSubview:arrow];

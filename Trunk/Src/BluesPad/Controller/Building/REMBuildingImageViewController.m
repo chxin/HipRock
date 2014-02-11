@@ -100,6 +100,8 @@
     UIImageView *blurImageView=[[UIImageView alloc]initWithFrame:imageView.frame];
     blurImageView.alpha=0;
     if([self hasExistBuildingPic]==NO){
+        imageView.contentMode=UIViewContentModeTop;
+        blurImageView.contentMode=UIViewContentModeTop;
         imageView.image=self.defaultImage;
         blurImageView.image=self.defaultBlurImage;
     }
@@ -123,6 +125,8 @@
             BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallPicPath];
             if (hasExist==NO) {
                 imageView.image=self.defaultImage;
+                imageView.contentMode=UIViewContentModeTop;
+                blurImageView.contentMode=UIViewContentModeTop;
                 blurImageView.image=self.defaultBlurImage;
             }
             else{
