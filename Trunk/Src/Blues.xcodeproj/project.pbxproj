@@ -495,10 +495,6 @@
 		B445AECF177C0046002D2A59 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */; };
 		B445AED1177C0052002D2A59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AED0177C0052002D2A59 /* CoreGraphics.framework */; };
 		B445AEE2177C04E4002D2A59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AED0177C0052002D2A59 /* CoreGraphics.framework */; };
-		B44D269318A9E94C00D7C06D /* DateView_Chart_iOS6_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D267B18A9E94C00D7C06D /* DateView_Chart_iOS6_Normal.png */; };
-		B44D269418A9E94C00D7C06D /* DateView_Chart_iOS6_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D267C18A9E94C00D7C06D /* DateView_Chart_iOS6_Normal@2x.png */; };
-		B44D269518A9E94C00D7C06D /* Legend_Chart_iOS6_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D267D18A9E94C00D7C06D /* Legend_Chart_iOS6_Normal.png */; };
-		B44D269618A9E94C00D7C06D /* Legend_Chart_iOS6_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D267E18A9E94C00D7C06D /* Legend_Chart_iOS6_Normal@2x.png */; };
 		B44D269718A9E94C00D7C06D /* PopNote.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D267F18A9E94C00D7C06D /* PopNote.png */; };
 		B44D269818A9E94C00D7C06D /* PopNote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D268018A9E94C00D7C06D /* PopNote@2x.png */; };
 		B44D269918A9E94C00D7C06D /* DateView_Chart_iOS6.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D268118A9E94C00D7C06D /* DateView_Chart_iOS6.png */; };
@@ -519,6 +515,10 @@
 		B44D26A818A9E94C00D7C06D /* Descend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D269018A9E94C00D7C06D /* Descend@2x.png */; };
 		B44D26A918A9E94C00D7C06D /* Legend_Chart.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D269118A9E94C00D7C06D /* Legend_Chart.png */; };
 		B44D26AA18A9E94C00D7C06D /* Legend_Chart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D269218A9E94C00D7C06D /* Legend_Chart@2x.png */; };
+		B44D26AF18A9E9F100D7C06D /* DateView_Chart_iOS6_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D26AB18A9E9F100D7C06D /* DateView_Chart_iOS6_Normal@2x.png */; };
+		B44D26B018A9E9F100D7C06D /* Legend_Chart_iOS6_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D26AC18A9E9F100D7C06D /* Legend_Chart_iOS6_Normal.png */; };
+		B44D26B118A9E9F100D7C06D /* Legend_Chart_iOS6_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D26AD18A9E9F100D7C06D /* Legend_Chart_iOS6_Normal@2x.png */; };
+		B44D26B218A9E9F100D7C06D /* DateView_Chart_iOS6_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D26AE18A9E9F100D7C06D /* DateView_Chart_iOS6_Normal.png */; };
 		B44F63AA186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B44F63A9186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.m */; };
 		B44F63AD186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44F63AC186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.m */; };
 		B44F63B0186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44F63AF186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.m */; };
@@ -1188,10 +1188,6 @@
 		B445AEB1177BFAE8002D2A59 /* REMLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLog.m; path = Common/Log/REMLog.m; sourceTree = "<group>"; };
 		B445AEBA177BFE66002D2A59 /* CommonTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B445AED0177C0052002D2A59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		B44D267B18A9E94C00D7C06D /* DateView_Chart_iOS6_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DateView_Chart_iOS6_Normal.png; sourceTree = "<group>"; };
-		B44D267C18A9E94C00D7C06D /* DateView_Chart_iOS6_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DateView_Chart_iOS6_Normal@2x.png"; sourceTree = "<group>"; };
-		B44D267D18A9E94C00D7C06D /* Legend_Chart_iOS6_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Legend_Chart_iOS6_Normal.png; sourceTree = "<group>"; };
-		B44D267E18A9E94C00D7C06D /* Legend_Chart_iOS6_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Legend_Chart_iOS6_Normal@2x.png"; sourceTree = "<group>"; };
 		B44D267F18A9E94C00D7C06D /* PopNote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PopNote.png; sourceTree = "<group>"; };
 		B44D268018A9E94C00D7C06D /* PopNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PopNote@2x.png"; sourceTree = "<group>"; };
 		B44D268118A9E94C00D7C06D /* DateView_Chart_iOS6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DateView_Chart_iOS6.png; sourceTree = "<group>"; };
@@ -1212,6 +1208,10 @@
 		B44D269018A9E94C00D7C06D /* Descend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Descend@2x.png"; sourceTree = "<group>"; };
 		B44D269118A9E94C00D7C06D /* Legend_Chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Legend_Chart.png; sourceTree = "<group>"; };
 		B44D269218A9E94C00D7C06D /* Legend_Chart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Legend_Chart@2x.png"; sourceTree = "<group>"; };
+		B44D26AB18A9E9F100D7C06D /* DateView_Chart_iOS6_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DateView_Chart_iOS6_Normal@2x.png"; sourceTree = "<group>"; };
+		B44D26AC18A9E9F100D7C06D /* Legend_Chart_iOS6_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Legend_Chart_iOS6_Normal.png; sourceTree = "<group>"; };
+		B44D26AD18A9E9F100D7C06D /* Legend_Chart_iOS6_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Legend_Chart_iOS6_Normal@2x.png"; sourceTree = "<group>"; };
+		B44D26AE18A9E9F100D7C06D /* DateView_Chart_iOS6_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DateView_Chart_iOS6_Normal.png; sourceTree = "<group>"; };
 		B44F63A8186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingCoverWidgetRelationModel.h; sourceTree = "<group>"; };
 		B44F63A9186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingCoverWidgetRelationModel.m; sourceTree = "<group>"; };
 		B44F63AB186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingCoverWidgetViewController.h; sourceTree = "<group>"; };
@@ -1639,10 +1639,10 @@
 		6A61A6951839B82000C6A228 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
-				B44D267B18A9E94C00D7C06D /* DateView_Chart_iOS6_Normal.png */,
-				B44D267C18A9E94C00D7C06D /* DateView_Chart_iOS6_Normal@2x.png */,
-				B44D267D18A9E94C00D7C06D /* Legend_Chart_iOS6_Normal.png */,
-				B44D267E18A9E94C00D7C06D /* Legend_Chart_iOS6_Normal@2x.png */,
+				B44D26AB18A9E9F100D7C06D /* DateView_Chart_iOS6_Normal@2x.png */,
+				B44D26AC18A9E9F100D7C06D /* Legend_Chart_iOS6_Normal.png */,
+				B44D26AD18A9E9F100D7C06D /* Legend_Chart_iOS6_Normal@2x.png */,
+				B44D26AE18A9E9F100D7C06D /* DateView_Chart_iOS6_Normal.png */,
 				B44D267F18A9E94C00D7C06D /* PopNote.png */,
 				B44D268018A9E94C00D7C06D /* PopNote@2x.png */,
 				B44D268118A9E94C00D7C06D /* DateView_Chart_iOS6.png */,
@@ -3431,11 +3431,11 @@
 				6A61A7681839B82000C6A228 /* Nodata@2x.png in Resources */,
 				6A61A7771839B82000C6A228 /* LoginTextField.png in Resources */,
 				B44D269A18A9E94C00D7C06D /* DateView_Chart_iOS6@2x.png in Resources */,
-				B44D269518A9E94C00D7C06D /* Legend_Chart_iOS6_Normal.png in Resources */,
 				B4175114188CC83E0020AE8E /* Gallery@2x.png in Resources */,
 				6A61A7671839B82000C6A228 /* Nodata.png in Resources */,
 				7A5A97391856D54E0084E228 /* share-weixin@2x.png in Resources */,
 				B41750E1188CC7600020AE8E /* Share_normal.png in Resources */,
+				B44D26AF18A9E9F100D7C06D /* DateView_Chart_iOS6_Normal@2x.png in Resources */,
 				B4707D8618697B1C00FBA393 /* Cooling_normal.png in Resources */,
 				B4175115188CC83E0020AE8E /* Map.png in Resources */,
 				B4707D9718697B2900FBA393 /* Cooling_pressed@2x.png in Resources */,
@@ -3443,6 +3443,7 @@
 				6A61A70B1839B82000C6A228 /* Electricity_normal.png in Resources */,
 				6A61A70E1839B82000C6A228 /* Electricity_pressed@2x.png in Resources */,
 				6A61A70C1839B82000C6A228 /* Electricity_normal@2x.png in Resources */,
+				B44D26B018A9E9F100D7C06D /* Legend_Chart_iOS6_Normal.png in Resources */,
 				6A61A77C1839B82000C6A228 /* CommonPin_Focus@2x.png in Resources */,
 				7A664FDB183B3369004B9FF3 /* MapPopover_Rectangle@2x.png in Resources */,
 				7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */,
@@ -3450,6 +3451,7 @@
 				6A61A78D1839B82000C6A228 /* UnqualifiedPin_Normal.png in Resources */,
 				B4707D8D18697B1C00FBA393 /* Temperature_pressed.png in Resources */,
 				6A61A7131839B82000C6A228 /* Oil_normal.png in Resources */,
+				B44D26B118A9E9F100D7C06D /* Legend_Chart_iOS6_Normal@2x.png in Resources */,
 				6A61A71A1839B82000C6A228 /* PM2.5_pressed@2x.png in Resources */,
 				6A61A7791839B82000C6A228 /* SlidePageBackground.png in Resources */,
 				B417510D188CC8220020AE8E /* Back.png in Resources */,
@@ -3478,12 +3480,9 @@
 				7A58F24A1839A5650071DE7A /* mail.jpg in Resources */,
 				6A61A77D1839B82000C6A228 /* CommonPin_Normal.png in Resources */,
 				B44D26AA18A9E94C00D7C06D /* Legend_Chart@2x.png in Resources */,
-				B44D269418A9E94C00D7C06D /* DateView_Chart_iOS6_Normal@2x.png in Resources */,
 				B4656BFD187D47E6008EAEA8 /* ChartCustomization_Widget.png in Resources */,
 				7AB71685187F839500EA7544 /* DefaultMap@2x.png in Resources */,
 				6A61A71D1839B82000C6A228 /* Water_pressed.png in Resources */,
-				B44D269618A9E94C00D7C06D /* Legend_Chart_iOS6_Normal@2x.png in Resources */,
-				B44D269318A9E94C00D7C06D /* DateView_Chart_iOS6_Normal.png in Resources */,
 				7A664FD9183B3369004B9FF3 /* MapPopover_Arrow@2x.png in Resources */,
 				7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */,
 				6A61A7251839B82000C6A228 /* NotOverTarget.png in Resources */,
@@ -3502,6 +3501,7 @@
 				B445AEAE177BEEB8002D2A59 /* README.txt in Resources */,
 				B44D26A718A9E94C00D7C06D /* Descend.png in Resources */,
 				7A13C19B17F40D31007E6AA9 /* GoogleMaps.bundle in Resources */,
+				B44D26B218A9E9F100D7C06D /* DateView_Chart_iOS6_Normal.png in Resources */,
 				6A61A77A1839B82000C6A228 /* SlidePageBackground@2x.png in Resources */,
 				B44D269818A9E94C00D7C06D /* PopNote@2x.png in Resources */,
 				6A61A78B1839B82000C6A228 /* UnqualifiedPin_Focus.png in Resources */,
