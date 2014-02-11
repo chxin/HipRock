@@ -511,6 +511,10 @@
 		B445AECF177C0046002D2A59 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */; };
 		B445AED1177C0052002D2A59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AED0177C0052002D2A59 /* CoreGraphics.framework */; };
 		B445AEE2177C04E4002D2A59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AED0177C0052002D2A59 /* CoreGraphics.framework */; };
+		B44D267718A9CF6B00D7C06D /* DateView_Chart_iOS6_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D267318A9CF6B00D7C06D /* DateView_Chart_iOS6_Normal.png */; };
+		B44D267818A9CF6B00D7C06D /* Legend_Chart_iOS6_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D267418A9CF6B00D7C06D /* Legend_Chart_iOS6_Normal@2x.png */; };
+		B44D267918A9CF6B00D7C06D /* Legend_Chart_iOS6_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D267518A9CF6B00D7C06D /* Legend_Chart_iOS6_Normal.png */; };
+		B44D267A18A9CF6B00D7C06D /* DateView_Chart_iOS6_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D267618A9CF6B00D7C06D /* DateView_Chart_iOS6_Normal@2x.png */; };
 		B44F63AA186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B44F63A9186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.m */; };
 		B44F63AD186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44F63AC186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.m */; };
 		B44F63B0186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44F63AF186D14FB0029B7F7 /* REMWidgetBuildingCoverViewController.m */; };
@@ -1200,6 +1204,10 @@
 		B445AEB1177BFAE8002D2A59 /* REMLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLog.m; path = Common/Log/REMLog.m; sourceTree = "<group>"; };
 		B445AEBA177BFE66002D2A59 /* CommonTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B445AED0177C0052002D2A59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		B44D267318A9CF6B00D7C06D /* DateView_Chart_iOS6_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DateView_Chart_iOS6_Normal.png; sourceTree = "<group>"; };
+		B44D267418A9CF6B00D7C06D /* Legend_Chart_iOS6_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Legend_Chart_iOS6_Normal@2x.png"; sourceTree = "<group>"; };
+		B44D267518A9CF6B00D7C06D /* Legend_Chart_iOS6_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Legend_Chart_iOS6_Normal.png; sourceTree = "<group>"; };
+		B44D267618A9CF6B00D7C06D /* DateView_Chart_iOS6_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DateView_Chart_iOS6_Normal@2x.png"; sourceTree = "<group>"; };
 		B44F63A8186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingCoverWidgetRelationModel.h; sourceTree = "<group>"; };
 		B44F63A9186D0A9C0029B7F7 /* REMBuildingCoverWidgetRelationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingCoverWidgetRelationModel.m; sourceTree = "<group>"; };
 		B44F63AB186D14C90029B7F7 /* REMBuildingCoverWidgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingCoverWidgetViewController.h; sourceTree = "<group>"; };
@@ -1631,6 +1639,10 @@
 		6A61A6951839B82000C6A228 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
+				B44D267318A9CF6B00D7C06D /* DateView_Chart_iOS6_Normal.png */,
+				B44D267418A9CF6B00D7C06D /* Legend_Chart_iOS6_Normal@2x.png */,
+				B44D267518A9CF6B00D7C06D /* Legend_Chart_iOS6_Normal.png */,
+				B44D267618A9CF6B00D7C06D /* DateView_Chart_iOS6_Normal@2x.png */,
 				B4D9172018A8B14000B051EB /* DateView_Chart_iOS6@2x.png */,
 				B4D9172118A8B14000B051EB /* Legend_Chart_iOS6.png */,
 				B4D9172218A8B14000B051EB /* DateView_Chart_iOS6.png */,
@@ -3378,6 +3390,7 @@
 				6A61A70D1839B82000C6A228 /* Electricity_pressed.png in Resources */,
 				6A61A7121839B82000C6A228 /* NaturalGas_pressed@2x.png in Resources */,
 				7A3F66F3184C561D0079A244 /* JumpTrial-Pressed.png in Resources */,
+				B44D267A18A9CF6B00D7C06D /* DateView_Chart_iOS6_Normal@2x.png in Resources */,
 				B4D9172518A8B14000B051EB /* Legend_Chart_iOS6.png in Resources */,
 				B414C43E1855946900CB81B6 /* Configuration.plist in Resources */,
 				6A61A78E1839B82000C6A228 /* UnqualifiedPin_Normal@2x.png in Resources */,
@@ -3414,6 +3427,7 @@
 				6A61A7771839B82000C6A228 /* LoginTextField.png in Resources */,
 				B4175114188CC83E0020AE8E /* Gallery@2x.png in Resources */,
 				B41750F7188CC7A80020AE8E /* Close_Chart.png in Resources */,
+				B44D267918A9CF6B00D7C06D /* Legend_Chart_iOS6_Normal.png in Resources */,
 				6A61A7671839B82000C6A228 /* Nodata.png in Resources */,
 				7A5A97391856D54E0084E228 /* share-weixin@2x.png in Resources */,
 				B41750FB188CC7A80020AE8E /* Descend.png in Resources */,
@@ -3432,6 +3446,7 @@
 				7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */,
 				B41750F9188CC7A80020AE8E /* DateView_Chart.png in Resources */,
 				B4019B271890A33900973FAA /* DefaultBuildingBlur.png in Resources */,
+				B44D267718A9CF6B00D7C06D /* DateView_Chart_iOS6_Normal.png in Resources */,
 				6A61A78D1839B82000C6A228 /* UnqualifiedPin_Normal.png in Resources */,
 				B4707D8D18697B1C00FBA393 /* Temperature_pressed.png in Resources */,
 				7A95FF06188F663600510A07 /* PopNote@2x.png in Resources */,
@@ -3471,6 +3486,7 @@
 				7AB71685187F839500EA7544 /* DefaultMap@2x.png in Resources */,
 				6A61A71D1839B82000C6A228 /* Water_pressed.png in Resources */,
 				7A664FD9183B3369004B9FF3 /* MapPopover_Arrow@2x.png in Resources */,
+				B44D267818A9CF6B00D7C06D /* Legend_Chart_iOS6_Normal@2x.png in Resources */,
 				7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */,
 				6A61A7251839B82000C6A228 /* NotOverTarget.png in Resources */,
 				6A61A7081839B82000C6A228 /* Coal_normal@2x.png in Resources */,

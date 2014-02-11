@@ -65,9 +65,11 @@
 #define REMIMG_DatePicker_Chart REMLoadImageNamed(@"DatePicker_Chart")
 #define REMIMG_DateView_Chart REMLoadImageNamed(@"DateView_Chart")
 #define REMIMG_DateView_Chart_iOS6 REMLoadImageNamed(@"DateView_Chart_iOS6")
+#define REMIMG_DateView_Chart_iOS6_Normal REMLoadImageNamed(@"DateView_Chart_iOS6_Normal")
 #define REMIMG_Descend REMLoadImageNamed(@"Descend")
 #define REMIMG_Legend_Chart REMLoadImageNamed(@"Legend_Chart")
 #define REMIMG_Legend_Chart_iOS6 REMLoadImageNamed(@"Legend_Chart_iOS6")
+#define REMIMG_Legend_Chart_iOS6_Normal REMLoadImageNamed(@"Legend_Chart_iOS6_Normal")
 #define REMIMG_PopNote REMLoadImageNamed(@"PopNote")
 
 //images in /Dashboard:

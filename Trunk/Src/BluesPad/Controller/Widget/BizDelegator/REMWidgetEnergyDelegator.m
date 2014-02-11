@@ -139,7 +139,8 @@
     }
     else{
         [legendControl setImage:REMIMG_DateView_Chart_iOS6 forSegmentAtIndex:0];
-        [legendControl setImage:REMIMG_Legend_Chart_iOS6 forSegmentAtIndex:1];
+        [legendControl setImage:REMIMG_Legend_Chart_iOS6_Normal forSegmentAtIndex:1];
+        
     }
     
     //[legendControl setBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
@@ -302,10 +303,12 @@
         
         if (currentLegendStatus==REMWidgetLegendTypeSearch) {
             [self.legendSearchControl setSelectedSegmentIndex:0];
+            [self legendSwitcherStatus:0];
             [self hideLegendView];
         }
         else if(currentLegendStatus == REMWidgetLegendTypeLegend){
             [self.legendSearchControl setSelectedSegmentIndex:1];
+            [self legendSwitcherStatus:1];
             [self showLegendView];
         }
         
@@ -815,6 +818,22 @@
     }
     else{//legend toolbar
         self.currentLegendStatus=REMWidgetLegendTypeLegend;
+    }
+    [self legendSwitcherStatus:segment.selectedSegmentIndex];
+    
+}
+
+- (void)legendSwitcherStatus:(NSUInteger)selectedIndex{
+    if (!REMISIOS7) {
+        if (selectedIndex == 0) {
+            [self.legendSearchControl setImage:REMIMG_Legend_Chart_iOS6_Normal forSegmentAtIndex:1];
+            [self.legendSearchControl setImage:REMIMG_DateView_Chart_iOS6 forSegmentAtIndex:0];
+            
+        }
+        else{
+            [self.legendSearchControl setImage:REMIMG_DateView_Chart_iOS6_Normal forSegmentAtIndex:0];
+            [self.legendSearchControl setImage:REMIMG_Legend_Chart_iOS6 forSegmentAtIndex:1];
+        }
     }
 }
 
