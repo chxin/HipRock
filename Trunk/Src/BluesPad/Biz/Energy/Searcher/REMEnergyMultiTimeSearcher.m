@@ -198,22 +198,39 @@
             targetEnergyData.energyData = newArray;
         }
         
-        for (int j=0; j<targetEnergyData.energyData.count;++j) {
-            REMEnergyData *energyData = targetEnergyData.energyData[j];
-            validDate=[energyData.localTime earlierDate:validDate];
-            if ([validDate timeIntervalSinceDate:baseTimeRange.endTime]>=0) {
-                break;
-            }
-            if ([energyData.localTime isEqualToDate:validDate]==YES) {
-                [newEnergyDataArray addObject:energyData];
+        
+        
+        for (int j=0; [validDate timeIntervalSinceDate:baseTimeRange.endTime]<0;++j) {
+            if (j<targetEnergyData.energyData.count) {
+                REMEnergyData *energyData = targetEnergyData.energyData[j];
+                validDate=[energyData.localTime earlierDate:validDate];
+                if ([validDate timeIntervalSinceDate:baseTimeRange.endTime]>=0) {
+                    break;
+                }
+                
+                if ([energyData.localTime isEqualToDate:validDate]==YES) {
+                    [newEnergyDataArray addObject:energyData];
+                    
+                }
+                else{
+                    REMEnergyData *newEnergyData = [[REMEnergyData alloc]init];
+                    newEnergyData.localTime=[validDate copy];
+                    newEnergyData.dataValue=nil;
+                    newEnergyData.quality = REMEnergyDataQualityGood;
+                    [newEnergyDataArray addObject:newEnergyData];
+                    --j;
+                }
             }
             else{
+                //fix bug when first series have only 2 points
+                //and other series have more than 2 points
+                //and first series only miss last point
+                //like first [0,1] ,second [0,1,2]
                 REMEnergyData *newEnergyData = [[REMEnergyData alloc]init];
                 newEnergyData.localTime=[validDate copy];
                 newEnergyData.dataValue=nil;
                 newEnergyData.quality = REMEnergyDataQualityGood;
                 [newEnergyDataArray addObject:newEnergyData];
-                --j;
             }
             validDate= [self addDate:validDate byStep:model.step];
         }

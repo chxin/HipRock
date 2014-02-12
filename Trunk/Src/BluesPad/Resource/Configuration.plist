@@ -36,7 +36,7 @@
 	<key>CurrentDataSource</key>
 	<dict>
 		<key>Debug</key>
-		<string>test</string>
+		<string>production</string>
 		<key>DailyBuild</key>
 		<string>test</string>
 		<key>Release</key>
