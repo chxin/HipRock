@@ -33,11 +33,12 @@
         
         
         
-        UIImage *image= [self resizeImageForCell:REMIMG_DefaultBuilding_Small];
+        UIImage *image= REMIMG_DefaultBuilding_Small;
+        
         
         UIButton *button = [[UIButton alloc] initWithFrame:self.bounds];
         [button setImage:image forState:UIControlStateNormal];
-//        button.imageView.contentMode = UIViewContentModeScaleToFill;
+        button.imageView.contentMode = UIViewContentModeTop;
         button.contentMode = UIViewContentModeScaleToFill;
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
         button.contentVerticalAlignment = UIControlContentHorizontalAlignmentFill;

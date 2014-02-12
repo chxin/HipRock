@@ -224,6 +224,7 @@
         UIImage *scaled = [cell resizeImageForCell:image];
         
         [cell.backgroundButton setImage:scaled forState:UIControlStateNormal];
+        cell.backgroundButton.imageView.contentMode = UIViewContentModeScaleToFill;
     }];
     
     return cell;
