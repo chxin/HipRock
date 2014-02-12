@@ -157,7 +157,7 @@ const static CGFloat buildingGap=20;
     
     self.defaultImage = REMIMG_DefaultBuilding;
     
-//    
+    
 //    UIImage *blurImage=[REMImageHelper blurImage:self.defaultImage];
 //    
 //    NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -166,8 +166,8 @@ const static CGFloat buildingGap=20;
 //    
 //    NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(blurImage)];
 //    [data1 writeToFile:blurImagePath atomically:YES];
+//    
     
-        
     
 
     UIImage *view = [UIImage imageNamed:@"DefaultBuildingBlur"];

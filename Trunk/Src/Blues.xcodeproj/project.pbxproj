@@ -439,7 +439,6 @@
 		B4019B241890A16800973FAA /* DefaultBuilding.png in Resources */ = {isa = PBXBuildFile; fileRef = B4019B221890A16800973FAA /* DefaultBuilding.png */; };
 		B4019B251890A16800973FAA /* DefaultBuilding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4019B231890A16800973FAA /* DefaultBuilding@2x.png */; };
 		B4019B271890A33900973FAA /* DefaultBuildingBlur.png in Resources */ = {isa = PBXBuildFile; fileRef = B4019B261890A33900973FAA /* DefaultBuildingBlur.png */; };
-		B4019B291890A35200973FAA /* DefaultBuildingBlur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4019B281890A35200973FAA /* DefaultBuildingBlur@2x.png */; };
 		B4019B2C1890A73F00973FAA /* DefaultBuilding-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = B4019B2A1890A73F00973FAA /* DefaultBuilding-Small.png */; };
 		B4019B2D1890A73F00973FAA /* DefaultBuilding-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4019B2B1890A73F00973FAA /* DefaultBuilding-Small@2x.png */; };
 		B408794A1830A960004042C1 /* REMBuildingImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40879491830A960004042C1 /* REMBuildingImageViewController.m */; };
@@ -579,6 +578,7 @@
 		B4A8753C185ED02200BF3601 /* REMWidgetRankingCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A8753B185ED02200BF3601 /* REMWidgetRankingCellDelegator.m */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		B4D50A41183313C7007C93A4 /* REMBuildingChartContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D50A40183313C7007C93A4 /* REMBuildingChartContainerViewController.m */; };
+		B4D534E018AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4D534DF18AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png */; };
 		B4DC084017F90E2C005658C1 /* REMAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */; };
 		B4E815CB1827326C00FB9BC5 /* REMWidgetSearchModelBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E815CA1827326C00FB9BC5 /* REMWidgetSearchModelBase.m */; };
 		B4E815D11827375200FB9BC5 /* REMWidgetTagSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E815D01827375200FB9BC5 /* REMWidgetTagSearchModel.m */; };
@@ -1114,7 +1114,6 @@
 		B4019B221890A16800973FAA /* DefaultBuilding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultBuilding.png; sourceTree = "<group>"; };
 		B4019B231890A16800973FAA /* DefaultBuilding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuilding@2x.png"; sourceTree = "<group>"; };
 		B4019B261890A33900973FAA /* DefaultBuildingBlur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultBuildingBlur.png; sourceTree = "<group>"; };
-		B4019B281890A35200973FAA /* DefaultBuildingBlur@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuildingBlur@2x.png"; sourceTree = "<group>"; };
 		B4019B2A1890A73F00973FAA /* DefaultBuilding-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuilding-Small.png"; sourceTree = "<group>"; };
 		B4019B2B1890A73F00973FAA /* DefaultBuilding-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuilding-Small@2x.png"; sourceTree = "<group>"; };
 		B40879481830A960004042C1 /* REMBuildingImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingImageViewController.h; sourceTree = "<group>"; };
@@ -1295,6 +1294,7 @@
 		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		B4D50A3F183313C7007C93A4 /* REMBuildingChartContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingChartContainerViewController.h; sourceTree = "<group>"; };
 		B4D50A40183313C7007C93A4 /* REMBuildingChartContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingChartContainerViewController.m; sourceTree = "<group>"; };
+		B4D534DF18AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuildingBlur@2x.png"; sourceTree = "<group>"; };
 		B4DC083E17F90E2C005658C1 /* REMAdministratorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAdministratorModel.h; path = Common/Model/REMAdministratorModel.h; sourceTree = "<group>"; };
 		B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAdministratorModel.m; path = Common/Model/REMAdministratorModel.m; sourceTree = "<group>"; };
 		B4E815C91827326C00FB9BC5 /* REMWidgetSearchModelBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMWidgetSearchModelBase.h; path = Model/Widget/REMWidgetSearchModelBase.h; sourceTree = "<group>"; };
@@ -1563,7 +1563,7 @@
 				B4019B2A1890A73F00973FAA /* DefaultBuilding-Small.png */,
 				B4019B2B1890A73F00973FAA /* DefaultBuilding-Small@2x.png */,
 				B4019B261890A33900973FAA /* DefaultBuildingBlur.png */,
-				B4019B281890A35200973FAA /* DefaultBuildingBlur@2x.png */,
+				B4D534DF18AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png */,
 				B4019B221890A16800973FAA /* DefaultBuilding.png */,
 				B4019B231890A16800973FAA /* DefaultBuilding@2x.png */,
 				B41750DF188CC7600020AE8E /* Share_normal.png */,
@@ -3505,7 +3505,6 @@
 				6A61A77A1839B82000C6A228 /* SlidePageBackground@2x.png in Resources */,
 				B44D269818A9E94C00D7C06D /* PopNote@2x.png in Resources */,
 				6A61A78B1839B82000C6A228 /* UnqualifiedPin_Focus.png in Resources */,
-				B4019B291890A35200973FAA /* DefaultBuildingBlur@2x.png in Resources */,
 				B44D269D18A9E94C00D7C06D /* Ascend.png in Resources */,
 				B44D26A918A9E94C00D7C06D /* Legend_Chart.png in Resources */,
 				7A47F3A118482C1B007EE37B /* JumpLogin@2x.png in Resources */,
@@ -3535,6 +3534,7 @@
 				B41750E2188CC7600020AE8E /* Share_normal@2x.png in Resources */,
 				6A61A78A1839B82000C6A228 /* QualifiedPin_Normal@2x.png in Resources */,
 				6A61A71E1839B82000C6A228 /* Water_pressed@2x.png in Resources */,
+				B4D534E018AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png in Resources */,
 				6A61A7231839B82000C6A228 /* Menu_normal.png in Resources */,
 				B44D26A118A9E94C00D7C06D /* Close_Chart.png in Resources */,
 				7A3F66F5184C56440079A244 /* JumpTrial-Pressed@2x.png in Resources */,
