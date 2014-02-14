@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "DCRange.h"
-#import "DCContext.h"
-//typedef enum _DCAxisCoordinate {
-//    DCAxisCoordinateX = 0,
-//    DCAxisCoordinateY = 1
-//}DCAxisCoordinate;
+#import "DCSeries.h"
+#import "REMChartHeader.h"
+
+typedef enum _DCAxisCoordinate {
+    DCAxisCoordinateX = 0,
+    DCAxisCoordinateY = 1
+}DCAxisCoordinate;
 //
 //typedef enum _DCAxisLabelAlign {
 //    DCAxisLabelAlignTopCenter = 0,
@@ -35,6 +37,7 @@
 //@property (nonatomic,assign) DCAxisCoordinate axisCoordinate;
 //@property (nonatomic, assign) DCAxisType axisType;
 @property (nonatomic) NSString* axisTitle;
+@property (nonatomic,assign) DCAxisCoordinate coordinate;
 
 @property (nonatomic,assign) float lineWidth;
 @property (nonatomic) UIColor* lineColor;
@@ -50,11 +53,14 @@
 @property (nonatomic) CGPoint endPoint;     //绘制轴线时的终点
 @property (nonatomic) CGSize size;
 
-@property (nonatomic, assign) NSUInteger visableSeriesAmount;  // 附加在该轴上的可见的序列的数量。主要用于y轴的隐藏。
-
 @property (nonatomic, assign) CGFloat labelToLine; //label到轴线的距离
 
 @property (nonatomic, strong) UIColor* axisTitleColor;
 @property (nonatomic, assign) CGFloat axisTitleToTopLabel;
 @property (nonatomic, assign) CGFloat axisTitleFontSize;
+@property (nonatomic, strong) NSArray* backgroundBands;
+
+-(void)attachSeries:(DCSeries*)series;
+-(void)detachSeries:(DCSeries*)series;
+-(NSUInteger)getVisableSeriesAmount;
 @end

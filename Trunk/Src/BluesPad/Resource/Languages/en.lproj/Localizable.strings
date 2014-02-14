@@ -1,12 +1,12 @@
-/* 
-  Localizable.strings
-  Blues
-
-  Created by 张 锋 on 9/11/13.
-
-*/
+/*
+ Localizable.strings
+ Blues
+ 
+ Created by 张 锋 on 9/11/13.
+ 
+ */
 //Common, prefix: Common_
-"Common_ServerError" = "抱歉!服务器错误,无法获取最新的能源数据。请稍候再试。";
+"Common_ServerError" = "抱歉!服务器错误，无法获取最新的能源数据。请稍候再试。";
 "Common_Building"="楼宇";
 "Common_Last7Day"="之前七天";
 "Common_Today"="今天";
@@ -27,6 +27,20 @@
 "Common_Giveup"="放弃";
 "Common_OK"="好";
 "Common_Quit"="退出";
+"Common_WholeYear"="全年"; //1月，2月...12月，全年
+"Common_YearMonthFormat"="yyyy年MM月";
+"Common_WholeYearFormat"="yyyy年全年";
+"Common_UpdateData"="更新数据";
+
+
+"Common_NetNoConnection"="无网络连接，请稍候再试。";
+"Common_NetConnectionFailed"="网络故障，请稍候再试。";
+"Common_NetServerError"="服务器故障，请稍候再试。";
+"Common_NetNoConnectionLoadLocal"="无网络连接,应用将读取本地数据。";
+"Common_ServerTimeout"="数据获取失败，网络故障。";
+"Common_ServerError"="数据获取失败，服务器故障。";
+"Common_ServerTimeoutSimple"="网络故障。";
+"Common_ServerErrorSimple"="服务器故障。";
 
 //Admin,prefix: Admin_
 "Admin_UserTitleEEConsultant"="能源工程顾问";
@@ -42,8 +56,8 @@
 "Admin_UserTitleServiceProviderAdmin"="服务商管理员";
 
 //Splash, prefix: Splash_
-"Splash_Title" = "能源管理开放平台";
-"Splash_Copyright" = "© 2012-2013 施耐德电气（中国）有限公司版权所有";
+"Splash_Title" = "施耐德电气“云能效”管理平台";
+"Splash_Copyright" = "© 2012-2014 施耐德电气（中国）有限公司版权所有";
 
 //Login, prefix: Login_
 "Login_SkipToLoginButtonText" = "登录";
@@ -54,16 +68,21 @@
 
 "Login_CustomerSelectionTitle" = "请选择客户";
 
+
 //trial card
-"Login_TrialWelcomeText" = "欢迎试用施耐德EMOP能源管理开放平台";
+"Login_TrialWelcomeText" = "欢迎试用施耐德电气“云能效”管理平台";
 "Login_LoginButtonText" = "登录";
 "Login_TrialButtonText" = "产品试用";
 
 "Login_CreatingDemoUserText" = "账号创建中，请稍候..";
 
+"Login_TrialNoNetwork" = "产品试用申请失败。无网络连，请连接后再试。";
+"Login_TrialNetworkFailed" = "产品试用申请失败。网络故障，请稍后再试。";
+"Login_TrialServerError" = "产品试用申请失败。服务器故障，请稍后再试。";
+"Login_TrialNoCustomer" = "产品试用申请失败，您的用户未关联任何客户";
 
 //login card
-"Login_LoginPrompt" = "正在登录施耐德电气能源管理开放平台";
+"Login_LoginPrompt" = "正在登录施耐德电气“云能效”管理平台";
 "Login_LoginUsernamePlaceHolder" = "用户名";
 "Login_LoginPasswordPlaceHolder" = "密码";
 "Login_LoginButtonNormalText"="登录";
@@ -71,18 +90,22 @@
 
 
 "Login_InputNotComplete"="请输入完整的用户名和密码";
-"Login_NoNetwork" = "无可用网络,无法获取最新的能源数据。";
-"Login_NetworkTimeout" = "网络连接超时,部分最新的能源数据未获得。";
 "Login_UserNotExist" = "该用户名不存在";
 "Login_WrongPassword" = "登录密码错误";
-"Login_NotAuthorized" = "未配置客户及相关数据权限,请联系您的管理员。";
-//"Login_NoBuilding" = "没有任何可显示的楼宇";
 "Login_AccountLocked" = "登录失败，您的用户名暂时无法使用";
 
+"Login_NoNetwork" = "无网络连接，产品登录失败。请连接后再试。";
+"Login_NetworkFailed" = "网络故障，产品登录失败，请稍后再试。";
+"Login_ServerError" = "产品登录失败。服务器故障，请稍后再试。";
+"Login_NoCustomer" = "产品登录失败，您的用户未关联任何客户";
+
+
 //Setting, prefix: Setting_
-"Setting_LoadingData"="正在获取新客户的能源信息,请稍候...";
-"Setting_CurrentCustomerDeleted"="当前客户已被解除关联,请退出系统后重新登录。";
-"Setting_CustomerDeleted"="该客户已被解除关联,请重新选择客户。";
+"Setting_LoadingData"="正在更新客户的楼宇及能耗信息，请稍候...";
+"Setting_CurrentCustomerDeleted"="当前客户已被解除关联，请重新选择客户。";
+"Setting_SelectedCustomerDeleted"="该客户已被解除关联，请重新选择客户。";
+"Setting_UserDeleted"="您的用户已被删除，应用将退出登录状态";
+"Setting_NoAttachedCustomer"="您的用户未关联任何客户，应用将退出登录状态";
 "Setting_DetailName"="名称";
 "Setting_DetailCode"="编码";
 "Setting_DetailAddress"="地址";
@@ -93,17 +116,37 @@
 "Setting_DetailCustomerAdmin"="客户管理员";
 "Setting_DetailCustomerAdminTwoName"="%@ 和 %@"; //张三和李四
 "Setting_DetailCustomerAdminThreeName"="%@ 和 %@ 等%d人"; //张三和李四等5人
-
+"Setting_About"="关于云能效";
 "Setting_BindWeibo"="绑定新浪微博";
 "Setting_UserName"="显示名称";
-"Setting_EMOPID"="能源管理平台ID";
+"Setting_EMOPID"="用户名";
 "Setting_CurrentCustomer"="当前客户";
 "Setting_CustomerInfo"="客户信息";
 "Setting_Logout"="退出登录";
+"Setting_UpdateAll"="更新全部数据";
 "Setting_AreYouSureLogout"="您要退出当前账号登录吗?";
+"Setting_AboutProductName"="施耐德电气“云能效”管理平台";
+"Setting_AboutVersion"="iPad版V%@"; //iPad版V1.0.0
+"Setting_AboutCopyrightChinese"="施耐德电气 版权所有";
+"Setting_AboutCopyrightEnglish"="Copyright©%@ Schneider Electric All Right Reserved";
+"Setting_UpdateFailed"="数据更新失败。";
+"Setting_SwitchCustomerFailed"="客户选择失败。";
+
+"Setting_NoNetwork"="无网络连接，应用将读取本地数据。";
+"Setting_NetworkFailed"="客户数据获取失败。网络故障，请连接后再试。";
+"Setting_ServerError"="客户数据获取失败。服务器故障，请稍后再试。";
+
+"Setting_UpdateNoNetwork"="数据更新失败。无网络连接，请稍后再试。";
+"Setting_UpdateNetworkFailed"="数据更新失败。网络故障，请稍后再试。";
+"Setting_UpdateServerError"="数据更新失败。服务器故障，请稍后再试。";
+
+"Setting_SwitchCustomerNoNetwork"="客户选择失败。无网络连接，请稍后再试。";
+"Setting_SwitchCustomerNetworkFailed"="客户选择失败。网络故障，请稍后再试。";
+"Setting_SwitchCustomerServerError"="客户选择失败。服务器故障，请稍后再试。";
 
 //Map, prefix: Map_
 "Map_MarkerBubbleSubtitleFormat"="本月用电量：%@%@";
+"Map_NoVisiableBuilding" = "￼当前客户无任何可显示的楼宇。";
 
 
 //Gallery, prefix: Gallery_
@@ -113,6 +156,7 @@
 "BuildingChart_NoData"="暂无数据，请持续关注能耗变化";
 "BuildingChart_DataError"="数据错误，请联系管理员。";
 "Building_LabelNoData"="无数据";
+"Building_LargeLabelNoData"="暂无本月数据，请持续关注能耗变化";
 "Building_PullUpMoreInfo"="上拉查看更多能耗信息";
 "Building_ReleaseSwitchView"="松开以显示";
 "Building_Target"="目标值";
@@ -126,13 +170,23 @@
 "Building_AirQualityHoneywell"="室内新风PM2.5(霍尼)";
 "Building_AirQualityMayair"="室内新风PM2.5(美埃)";
 "Building_AirQualityDailyChart"="室内外PM2.5逐日含量";
+"Building_AirQualityAmericanStandard"="%d %@(PM2.5美国标准)";
+"Building_AirQualityChinaStandard"="%d %@(PM2.5中国标准)";
+"Building_ShareWeibo"="新浪微博";
+"Building_ShareEmail"="邮件";
+
+"Building_WidgetRelationTitle"="选取要替换的图表";
+"Building_WidgetRelationCommodityTitle"="默认图表 - %@";
+"Building_WidgetRelationInfo"="所选图表将会被替换为当前图表，并出现在所属建筑封面中，以便您在快速查看该图表。";
+"Building_WidgetRelationWidgetDeleted"="添加失败。小组件“%@”已被删除，请更新数据"; //添加失败。小组件“最近七天能效查看”已被删除，请更新数据
+"Building_WidgetRelationPositionDeleted"="添加失败。添加位置不存在，请更新数据";
+
 
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="下拉返回概览能耗信息";
 "Dashboard_TimeRange"="%@ 到 %@";
 "Dashboard_Empty"="未配置任何仪表盘";
 "Dashboard_ShareUserName"="分享者:%@"; //分享者：张三
-
 
 //Widget, prefix:Widget_
 "Widget_TimePickerTime"="时间";
@@ -152,6 +206,8 @@
 "Widget_CalendarStepError"="当前步长不支持显示%@背景色"; //当前步长不支持显示冷暖季背景色，当前步长不支持显示非工作时间背景色
 "Widget_CalendarCostElectricityStepError"="峰谷平电价不支持按小时展示";
 
+
+
 //Weibo, prefix: Weibo_
 "Weibo_WindowTitle"="新浪微博";
 "Weibo_CancelButtonText"="取消";
@@ -166,11 +222,12 @@
 "Weibo_AccountUnbindingNOButton"="放弃";
 "Weibo_ContentOfElectirc"="%@本月用#Commodity#趋势及单位平米用#Commodity#趋势，本月用#Commodity#总能耗为#Usage##UomName#，节能持续进行中。";
 "Weibo_ContentOfPM25"="今天上午10:00，%@室外#Commodity#为#OutdoorVal##OutdoorUomName#；经霍尼韦尔净化后室内新风#Commodity#为#HoneywellVal##HoneywellUomName#，经美埃净化后室内新风#Commodity#为#MayairVal##MayairUomName#。";
-
+"Weibo_NONetwork"="无网络连接或者网络故障，请稍后再试。";
 
 //Mail, prefix: Mail_
 "Mail_AccountNotConfigured" = "未配置邮件账户";
-"Mail_Title" = "来自%@的“能源管理开放平台”信息分享";
+"Mail_Title" = "来自%@的施耐德电气“云能效”管理平台信息分享";
+
 
 //Chart, prefix: Chart_
 "Chart_TargetValue" = "目标值";
@@ -197,6 +254,13 @@
 "Chart_Background_Text_CSeason" = "供冷季";
 "Chart_Background_Text_NonWorkday" = "非工作日";
 
+"Chart_Labeling_EffecioncyTextFormat" = "能效标识：%@";
+"Chart_Labeling_LessOrEqualThan" = "<=";
+"Chart_Labeling_MoreThan" = ">";
+"Chart_Labeling_LowEnergyUse" = "低能耗";
+"Chart_Labeling_HighEnergyUse" = "高能耗";
+
+
 //Energy, prefix:Energy_
 "Energy_02601"="缺少昼夜日历的部分，无法绘图。请设置后再试。";
 "Energy_02602"="缺少工作日历的部分，无法绘图。请设置后再试。";
@@ -204,3 +268,14 @@
 "Energy_02604"="缺少供冷面积的部分，无法绘图。请设置后再试。";
 "Energy_02605"="缺少采暖面积的部分，无法绘图。请设置后再试。";
 "Energy_02606"="缺少人口数量的部分，无法绘图。请设置后再试。";
+"Energy_02500" = "该数据点未与任何层级关联";
+"Energy_02501" = "缺少人口属性的部分无法绘图。请设置后再试。";
+"Energy_02502" = "缺少面积属性的部分无法绘图。请设置后再试。";
+"Energy_02503" = "缺少采暖面积属性的部分无法绘图。请设置后再试。";
+"Energy_02504" = "缺少供冷面积属性的部分无法绘图。请设置后再试。";
+"Energy_02505" = "缺少人口属性的部分无法绘图。请设置后再试。";
+"Energy_02506" = "缺少面积属性的部分无法绘图。请设置后再试。";
+"Energy_02507" = "缺少采暖面积属性的部分无法绘图。请设置后再试。";
+"Energy_02508" = "缺少供冷面积属性的部分无法绘图。请设置后再试。";
+"Energy_02013" = "该数据点已被删除，无法加载。";
+"Energy_02408" = "该节点未设置峰谷时段，无法展示。";

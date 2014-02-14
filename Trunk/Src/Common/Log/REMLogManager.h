@@ -8,7 +8,6 @@
 
 #import "DDFileLogger.h"
 #import "REMLog.h"
-#import "REMDataAccessor.h"
 
 
 @interface REMLogManager : DDLogFileManagerDefault

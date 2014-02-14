@@ -12,12 +12,22 @@
 
 +(void) alert: (NSString *) message
 {
-    [REMAlertHelper alert:message withTitle:Nil];
+    [REMAlertHelper alert:message withTitle:nil];
+}
+
++(void) alert: (NSString *) message delegate:(id)delegate
+{
+    [REMAlertHelper alert:message withTitle:nil delegate:delegate];
 }
 
 +(void) alert: (NSString *) message withTitle: (NSString *) title
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:REMLocalizedString(@"Common_OK") otherButtonTitles:nil];
+    [REMAlertHelper alert:message withTitle:title delegate:nil];
+}
+
++(void) alert: (NSString *) message withTitle: (NSString *) title  delegate:(id)delegate
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle:REMLocalizedString(@"Common_OK") otherButtonTitles:nil];
     [alert show];
 }
 

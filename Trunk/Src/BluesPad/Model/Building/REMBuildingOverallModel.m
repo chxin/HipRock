@@ -61,6 +61,32 @@
     self.isQualified = dictionary[@"IsQualified"];
     
     self.electricityUsageThisMonth = [[REMCommodityUsageModel alloc] initWithDictionary:dictionary[@"ElectricUsageThisMonth"]];
+    
+    NSArray *widgetRelationArray = dictionary[@"WidgetRelation"];
+    if (widgetRelationArray!=nil && [widgetRelationArray isEqual:[NSNull null]]==NO) {
+        NSMutableArray *widgetRelationList=[[NSMutableArray alloc]initWithCapacity:widgetRelationArray.count];
+        
+        for (NSDictionary *relation in widgetRelationArray) {
+            REMBuildingCoverWidgetRelationModel *obj = [[REMBuildingCoverWidgetRelationModel alloc]initWithDictionary:relation];
+            [widgetRelationList addObject:obj];
+        }
+        self.widgetRelationArray=widgetRelationList;
+    }
+
+}
+
+- (NSDictionary *)updateInnerDictionary
+{
+    NSMutableArray *array=[NSMutableArray array];
+    for (int i=0; i<self.widgetRelationArray.count; ++i) {
+        REMBuildingCoverWidgetRelationModel *model=self.widgetRelationArray[i];
+        NSDictionary *dic = [model updateInnerDictionary];
+        [array addObject:dic];
+    }
+    NSMutableDictionary *newDic = [self.innerDictionary mutableCopy];
+    newDic[@"WidgetRelation"]=array;
+    self.innerDictionary=newDic;
+    return self.innerDictionary;
 }
 
 +(int)indexOfBuilding:(REMBuildingModel *)building inBuildingOverallArray:(NSArray *)array
@@ -76,5 +102,33 @@
         return NO;
     }];
 }
+
++(NSArray *)sortByProvince:(NSArray *)buildingInfoArray
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    for(int i=0; i<REMProvinceOrder.count;i++){
+        NSString *key = REMProvinceOrder[i];
+        
+        for (int j=0; j<buildingInfoArray.count; j++) {
+            REMBuildingOverallModel *buildingInfo = buildingInfoArray[j];
+            NSString *province = buildingInfo.building.province;
+            
+            if(!REMIsNilOrNull(province) && [province rangeOfString:key].length>0) {
+                [array addObject:buildingInfo];
+            }
+        }
+    }
+    
+    //海外
+    for(REMBuildingOverallModel *buildingInfo in buildingInfoArray){
+        if([array containsObject:buildingInfo] == NO){
+            [array addObject:buildingInfo];
+        }
+    }
+    
+    return array;
+}
+
 
 @end

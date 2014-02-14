@@ -11,5 +11,7 @@
 
 @interface _DCLineSymbolsLayer : _DCLayer
 @property (nonatomic, readonly, strong) NSArray* series;
+@property (nonatomic, assign) BOOL enableGrowAnimation; // 是否播放初始动画，默认为YES，播放一次之后就变为NO
 -(id)initWithContext:(DCContext*)context series:(NSArray*)series;
+-(NSUInteger)getVisableSeriesCount;
 @end

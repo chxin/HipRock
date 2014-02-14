@@ -51,11 +51,23 @@
     return 10;
 }
 
-+(void)setLineStyle:(CGContextRef)context style:(DCLineType)style {
++(void)setLineStyle:(CGContextRef)context style:(DCLineType)style lineWidth:(CGFloat)lineWidth {
     if (style == DCLineTypeDotted) {
-        CGFloat dash[] = {1, 1};
+        CGFloat dash[] = {lineWidth, lineWidth};
+        CGContextSetLineDash(context, 0, dash, 2);
+    } else if (style == DCLineTypeDashed) {
+        CGFloat dash[] = {lineWidth*4, lineWidth};
+        CGContextSetLineDash(context, 0, dash, 2);
+    } else if (style == DCLineTypeShortDashed) {
+        CGFloat dash[] = {lineWidth*2, lineWidth*2};
         CGContextSetLineDash(context, 0, dash, 2);
     }
+}
+
+
++(void)runFunction:(void (^)())fn withDelay:(double)delay {
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), fn);
 }
 
 //+(BOOL)isMinorChangeForYRange:(DCRange*)oldRange new:(DCRange*)newRange {
@@ -63,14 +75,26 @@
 //}
 
 
++(void)drawText:(NSString*)text inContext:(CGContextRef)ctx font:(UIFont*)font rect:(CGRect)rect alignment:(NSTextAlignment)alignment lineBreak:(NSLineBreakMode)lineBreak color:(UIColor*)color {
+    UIGraphicsPushContext(ctx);
+    CGContextSetStrokeColorWithColor(ctx, color.CGColor);
+    CGContextSetFillColorWithColor(ctx, color.CGColor);
+    [text drawInRect:rect withFont:font lineBreakMode:lineBreak alignment: alignment];
+    UIGraphicsPopContext();
+}
+
 
 +(BOOL)isFrame:(CGRect)rect visableIn:(CGRect)outter {
-    if (rect.origin.x >= outter.size.width || rect.origin.y >= outter.size.height
-        || rect.origin.x+rect.size.width <= 0 || rect.origin.y+rect.size.height<=0) return NO;
+    if (rect.origin.x >= outter.size.width + outter.origin.x || rect.origin.y >= outter.size.height + outter.origin.y
+        || rect.origin.x+rect.size.width <= outter.origin.x || rect.origin.y+rect.size.height<=outter.origin.y) return NO;
     return YES;
 }
 
 +(double)getScreenXIn:(CGRect)plotRect xVal:(double)xValue hRange:(DCRange*)hRange {
     return plotRect.origin.x + plotRect.size.width * (xValue-hRange.location) / hRange.length;
+}
+
++(double)getScreenYIn:(CGRect)plotRect yVal:(double)yValue vRange:(DCRange*)vRange {
+    return plotRect.origin.y + plotRect.size.height * (vRange.end - yValue) / vRange.length;
 }
 @end

@@ -25,12 +25,14 @@
 @property (nonatomic,weak) CALayer *bottomGradientLayer;
 @property (nonatomic,weak) UILabel *buildingTypeTitleView;
 @property (nonatomic,weak) UILabel *buildingTitleView;
-@property (nonatomic,weak) UIButton *logoButton;
+@property (nonatomic,weak) UIImageView *logoButton;
 @property (nonatomic,strong) NSString *loadingImageKey;
 
 @property (nonatomic,weak) UIImageView *cropTitleView;
 
+
 @end
+
 
 @implementation REMBuildingImageViewController
 
@@ -55,11 +57,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     self.loadingImageKey=[NSString stringWithFormat:@(kBuildingImageLoadingKeyPrefix),self.buildingInfo.building.buildingId];
-    //NSLog(@"self view:%@",NSStringFromCGRect(self.view.frame));
     [self.view setFrame:self.viewFrame];
-    //NSLog(@"self view:%@",NSStringFromCGRect(self.view.frame));
+    [self setChildControllerFrame];
+    [self loadSmallImageView];
+    
+}
+
+- (void)setChildControllerFrame{
     REMBuildingDataViewController *coverController=self.childViewControllers[0];
     REMDashboardController *dashboardController=self.childViewControllers[1];
     coverController.buildingInfo=self.buildingInfo;
@@ -68,9 +73,6 @@
     dashboardController.buildingInfo=self.buildingInfo;
     dashboardController.viewFrame=CGRectMake(kBuildingLeftMargin, coverController.viewFrame.origin.y+coverController.viewFrame.size.height, self.view.frame.size.width-kBuildingLeftMargin*2, coverController.viewFrame.size.height);
     dashboardController.upViewFrame=CGRectMake(dashboardController.viewFrame.origin.x, coverController.viewFrame.origin.y-20, dashboardController.viewFrame.size.width, dashboardController.viewFrame.size.height);
-    [self loadSmallImageView];
-
-    
 }
 
 - (NSString *)buildingPictureFileName{
@@ -92,36 +94,56 @@
 
 - (void)loadSmallImageView{
     
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    //NSLog(@"imageview:%@",NSStringFromCGRect(imageView.frame));
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height*kDMCommon_ImageScale)];
+    imageView.contentMode=UIViewContentModeScaleToFill;
+    imageView.clipsToBounds=YES;
     UIImageView *blurImageView=[[UIImageView alloc]initWithFrame:imageView.frame];
     blurImageView.alpha=0;
     if([self hasExistBuildingPic]==NO){
+        imageView.contentMode=UIViewContentModeTop;
+        blurImageView.contentMode=UIViewContentModeTop;
         imageView.image=self.defaultImage;
         blurImageView.image=self.defaultBlurImage;
     }
     else{
-        NSString *smallPicPath= [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageSmall];
-        NSString *smallBlurPicPath= [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageSmallBlured];
-        BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallPicPath];
-        if (hasExist==NO) {
-            imageView.image=self.defaultImage;
-            blurImageView.image=self.defaultBlurImage;
+        NSNumber *picId =self.buildingInfo.building.pictureIds[0];
+        NSString *smallPicPath= [REMImageHelper buildingImagePathWithId:picId andType:REMBuildingImageSmall];
+        NSString *smallBlurPicPath= [REMImageHelper buildingImagePathWithId:picId andType:REMBuildingImageSmallBlured];
+        NSString *normalPicPath= [REMImageHelper buildingImagePathWithId:picId andType:REMBuildingImageNormal];
+        NSString *normalBlurPicPath= [REMImageHelper buildingImagePathWithId:picId andType:REMBuildingImageNormalBlured];
+
+        BOOL hasExistNormal = [[NSFileManager defaultManager] fileExistsAtPath:normalPicPath];
+        if (hasExistNormal) {
+            UIImage *image= [[UIImage alloc] initWithContentsOfFile:normalPicPath];
+            imageView.contentMode=UIViewContentModeTop;
+            imageView.image=image;
+            UIImage *blurImage = [[UIImage alloc] initWithContentsOfFile:normalBlurPicPath];
+            blurImageView.contentMode=UIViewContentModeTop;
+            blurImageView.image=blurImage;
         }
         else{
-            UIImage *image= [[UIImage alloc] initWithContentsOfFile:smallPicPath];
-            imageView.image=image;
-            hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallBlurPicPath];
-            UIImage *blurImage;
-            if (hasExist==YES) {
-                blurImage= [[UIImage alloc] initWithContentsOfFile:smallBlurPicPath];
+            BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallPicPath];
+            if (hasExist==NO) {
+                imageView.image=self.defaultImage;
+                imageView.contentMode=UIViewContentModeTop;
+                blurImageView.contentMode=UIViewContentModeTop;
+                blurImageView.image=self.defaultBlurImage;
             }
             else{
-                blurImage=[REMImageHelper blurImage:image];
-                NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(blurImage)];
-                [data1 writeToFile:smallBlurPicPath atomically:YES];
+                UIImage *image= [[UIImage alloc] initWithContentsOfFile:smallPicPath];
+                imageView.image=image;
+                hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallBlurPicPath];
+                UIImage *blurImage;
+                if (hasExist==YES) {
+                    blurImage= [[UIImage alloc] initWithContentsOfFile:smallBlurPicPath];
+                }
+                else{
+                    blurImage=[REMImageHelper blurImage:image];
+                    NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(blurImage)];
+                    [data1 writeToFile:smallBlurPicPath atomically:YES];
+                }
+                blurImageView.image=blurImage;
             }
-            blurImageView.image=blurImage;
         }
     }
     [self.view addSubview:imageView];
@@ -190,18 +212,20 @@
 
 - (void)initGlassView
 {
-    UIView *glassView= [[UIView alloc]initWithFrame:self.imageView.frame];
+    UIView *glassView= [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.imageView.frame.size.width, self.imageView.frame.size.height)];
     glassView.alpha=0;
     glassView.contentMode=UIViewContentModeScaleToFill;
     glassView.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.65];
     [self.view addSubview:glassView];
     self.glassView=glassView;
+    //glassView.layer.borderColor=[UIColor redColor].CGColor;
+    //glassView.layer.borderWidth=1;
 }
 
 - (void)initBottomGradientLayer
 {
     CGFloat height=kBuildingBottomGradientLayerHeight;
-    CGRect frame = CGRectMake(0, self.container.frame.size.height-height, 1024, height);
+    CGRect frame = CGRectMake(0, self.container.frame.size.height-height, self.glassView.frame.size.width, height);
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     
@@ -233,30 +257,54 @@
 - (void)initButtons{
     
    
-    
-    
-    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, kDMCommon_TopLeftButtonTop,kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
-    
-    backButton.adjustsImageWhenHighlighted=YES;
+    UIButton *backButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    if (REMISIOS7) {
+        backButton=[UIButton buttonWithType:UIButtonTypeSystem];
+        [backButton setTintColor:[UIColor whiteColor]];
+    }
+    [backButton setFrame: CGRectMake(kDMCommon_TopLeftButtonLeft, kDMCommon_TopLeftButtonTop,kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
+    if (!REMISIOS7) {
+        backButton.showsTouchWhenHighlighted=YES;
+    }
+    backButton.adjustsImageWhenHighlighted=NO;
     //backButton.showsTouchWhenHighlighted=YES;
     backButton.titleLabel.text=@"Back";
-    [backButton setBackgroundImage:REMIMG_Back forState:UIControlStateNormal];
+    [backButton setImage:REMIMG_Back forState:UIControlStateNormal];
     [backButton addTarget:self.parentViewController action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.container addSubview:backButton];
     self.backButton=backButton;
     
-    UIButton *shareButton=[[UIButton alloc]initWithFrame:CGRectMake(950, backButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonWidth)];
+    UIButton *settingButton=self.settingButton;
+    if (REMISIOS7) {
+        [settingButton setFrame:CGRectMake(settingButton.frame.origin.x, settingButton.frame.origin.y-kDMStatusBarHeight , settingButton.frame.size.width, settingButton.frame.size.height)];
+    }
+    
+    [settingButton removeTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [settingButton addTarget:self.parentViewController action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.container addSubview:settingButton];
+    
+    
+    UIButton *shareButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    if (REMISIOS7) {
+        shareButton=[UIButton buttonWithType:UIButtonTypeSystem];
+        [shareButton setTintColor:[UIColor whiteColor]];
+    }
+    [shareButton setFrame:CGRectMake(settingButton.frame.origin.x-kDMCommon_TopLeftButtonWidth-kDMCommon_ContentLeftMargin, backButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonHeight)];
     [shareButton setImage:REMIMG_Share_normal forState:UIControlStateNormal];
     //if (self.buildingInfo.commodityUsage.count == 0) {
     shareButton.enabled = NO;
     //}
     //shareButton.showsTouchWhenHighlighted=YES;
-    shareButton.adjustsImageWhenHighlighted=YES;
+    shareButton.adjustsImageWhenHighlighted=NO;
+    if (!REMISIOS7) {
+        shareButton.showsTouchWhenHighlighted=YES;
+    }
     shareButton.titleLabel.text=@"Share";
     [shareButton addTarget:self.parentViewController action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.container addSubview:shareButton];
+    
     self.shareButton=shareButton;
 }
 
@@ -296,18 +344,15 @@
     self.buildingTitleView=titleLabel;
     
     
-    UIButton *logoButton = [self getCustomerLogoButton];
-    [logoButton setFrame:CGRectMake(self.backButton.frame.origin.x+self.backButton.frame.size.width, kDMCommon_CustomerLogoTop, logoButton.frame.size.width, logoButton.frame.size.height)];
-    //[logoButton setBackgroundImage:REMAppCurrentLogo forState:UIControlStateNormal];
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:REMAppContext.currentCustomerLogo];
+    [logoView setFrame:CGRectMake(kDMCommon_CustomerLogoLeft, kDMCommon_CustomerLogoTop, kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
+    logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
+
     
-    logoButton.titleLabel.text=@"logo";
-    [logoButton removeTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [logoButton addTarget:self.parentViewController action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    [self.container addSubview:logoButton];
-    self.logoButton=logoButton;
+    [self.container addSubview:logoView];
+    self.logoButton=logoView;
 }
+
 
 
 - (UIImage *)getCachedImage:(NSData *)data{
@@ -321,7 +366,7 @@
     }
     else{
         if(data==nil)return nil;
-        UIImage *image= [REMImageHelper parseImageFromNSData:data];
+        UIImage *image= [REMImageHelper parseImageFromNSData:data withScale:kDMCommon_ImageScale];
         
         NSString *pngFilePath = [self buildingPictureFileName];
         NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
@@ -353,15 +398,18 @@
 
 
 - (void)loadImageViewByImage:(UIImage *)image{
-    UIImageView *newView = [[UIImageView alloc]initWithFrame:self.imageView.frame];
-    newView.contentMode=UIViewContentModeScaleToFill;
+    UIImageView *newView = [[UIImageView alloc]initWithFrame:CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height*kDMCommon_ImageScale)];
+    newView.contentMode=UIViewContentModeTop;
+    newView.clipsToBounds=YES;
     newView.alpha=0;
     UIImage *view = image;
     newView.image=view;
     UIImageView *newBlurred= [self blurredImageView:newView];
-    
+    newBlurred.contentMode=UIViewContentModeTop;
+    newBlurred.clipsToBounds=YES;
     //[newBlurred setFrame:CGRectMake(-25, -25, newBlurred.frame.size.width+50, newBlurred.frame.size.height+50)];
-    
+//    newBlurred.layer.borderColor=[UIColor redColor].CGColor;
+//    newBlurred.layer.borderWidth=1;
     [self.view insertSubview:newView aboveSubview:self.blurImageView];
     [self.view insertSubview:newBlurred aboveSubview:newView];
     
@@ -380,6 +428,11 @@
         self.blurImageView=nil;
         self.imageView = newView;
         self.blurImageView=newBlurred;
+        
+        if (self.cropTitleView!=nil) {
+            [self.cropTitleView removeFromSuperview];
+            self.cropTitleView=nil;
+        }
 
     }];
 
@@ -395,14 +448,23 @@
     }
     else{
         NSDictionary *param=@{@"pictureId":self.buildingInfo.building.pictureIds[0]};
-        REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param];
+        REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param accessCache:YES andMessageMap:nil];
         store.groupName=self.loadingImageKey;
         
-        
-        [REMDataAccessor access: store success:^(NSData *data){
+        store.disableAlert=YES;
+        [store access:^(NSData *data){
             if(data == nil || [data length] == 2) return;
-            UIImage *view = [self getCachedImage:data];
-            [self loadImageViewByImage:view];
+            
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                UIImage *view = [self getCachedImage:data];
+                UIImageView *blurView=[[UIImageView alloc]initWithImage:view];
+                [self blurredImageView:blurView];
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                   [self loadImageViewByImage:view];
+                });
+            });
+            
         }];
     
     }
@@ -413,7 +475,8 @@
 {
     UIImageView *blurred = [[UIImageView alloc]initWithFrame:imageView.frame];
     blurred.alpha=0;
-    blurred.contentMode=UIViewContentModeScaleToFill;
+    blurred.contentMode=UIViewContentModeTop;
+    blurred.clipsToBounds=YES;
     blurred.backgroundColor=[UIColor clearColor];
     
     NSString *blurImagePath= [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageNormalBlured];
@@ -440,10 +503,10 @@
     
 }
 - (void)clipTitleView{
-    if(self.cropTitleView!=nil){
-        [self.cropTitleView setHidden:NO];
-        return;
-    }
+//    if(self.cropTitleView!=nil){
+//        [self.cropTitleView setHidden:NO];
+//        return;
+//    }
     if (self.isViewLoaded==NO) {
         return;
     }
@@ -470,6 +533,21 @@
 - (void)setCurrentOffset:(CGFloat)currentOffset{
     if(currentOffset!=_currentOffset){
         _currentOffset=currentOffset;
+
+           // NSLog(@"image controller:%f",currentOffset);
+        CGFloat offset=currentOffset;
+        if (offset>=kCommodityScrollTop) {
+            offset=ABS(kCommodityScrollTop);
+        }
+        else if (offset<=-kBuildingCommodityViewTop){
+            offset=-kBuildingCommodityViewTop;
+        }
+        CGFloat move=20;
+        CGFloat y=(kBuildingCommodityViewTop+offset)*move/(kBuildingCommodityViewTop+kCommodityScrollTop);
+        //NSLog(@"center:%@",NSStringFromCGPoint(self.imageView.center));
+        CGFloat center=self.imageView.frame.size.height/2.0;
+        self.blurImageView.center=CGPointMake(self.imageView.center.x, center-y);
+        self.imageView.center=CGPointMake(self.imageView.center.x, center-y);
         if(self.currentCoverStatus == REMBuildingCoverStatusCoverPage){
             REMBuildingDataViewController *controller=(REMBuildingDataViewController *)self.childViewControllers[0];
             [controller setCurrentOffsetY:currentOffset];
@@ -478,7 +556,6 @@
             REMDashboardController *controller=(REMDashboardController *)self.childViewControllers[1];
             [controller setCurrentOffsetY:currentOffset];
         }
-        
         
         REMBuildingViewController *buildingController=(REMBuildingViewController *)self.parentViewController;
 
@@ -492,7 +569,6 @@
 //    float blurLevel=(offsetY + kBuildingCommodityViewTop) / (kBuildingCommodityViewTop+kCommodityScrollTop);
 //     self.glassView.alpha = MAX(0,MIN(blurLevel,0.8));
 //    return;
-    
     float blurLevel=(offsetY + kBuildingCommodityViewTop) / (kBuildingCommodityViewTop+kCommodityScrollTop);
     
     self.blurImageView.alpha = MAX(blurLevel,0);
@@ -535,7 +611,8 @@
                         
                     } completion:^(BOOL finished){
                         [coverController.view setHidden:YES];
-                        [self.cropTitleView setHidden:YES];
+                        //[self.cropTitleView setHidden:YES];
+                        [self.cropTitleView removeFromSuperview];
                     }];
                 }
                 else{
@@ -568,7 +645,8 @@
                         
                     } completion:^(BOOL finished){
                         [dashBoardController.view setHidden:YES];
-                        [self.cropTitleView setHidden:YES];
+                        //[self.cropTitleView setHidden:YES];
+                        [self.cropTitleView removeFromSuperview];
                     }];
                 }
                 else{
@@ -624,9 +702,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)releaseAllDataView{
+    if (self.childViewControllers.count>0) {
+        UIViewController *controller= self.childViewControllers[0];
+        [self releaseViewInController:@[controller]];
+    }
+    
+}
+
 - (void)exportImage:(void (^)(UIImage *, NSString*))callback
 {
     REMBuildingDataViewController *dataViewController=self.childViewControllers[0];
+    
+    
+    
     NSDictionary *outputDic=[dataViewController realExport];
     UIImage* dataImage = [outputDic objectForKey:@"image"];
     float dataImageHeight = dataImage.size.height;
@@ -653,8 +742,9 @@
     [[REMImageHelper imageWithLayer:self.buildingTypeTitleView.layer] drawInRect:self.buildingTypeTitleView.frame];
     [[REMImageHelper imageWithLayer:self.buildingTitleView.layer] drawInRect:self.buildingTitleView.frame];
     //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
-    
-    [[REMImageHelper imageWithLayer:self.bottomGradientLayer] drawInRect:self.bottomGradientLayer.frame];
+    CGRect ffds = self.bottomGradientLayer.frame;
+    ffds = CGRectMake(ffds.origin.x, ffds.origin.y+kBuildingTitleTop, ffds.size.width, ffds.size.height);
+    [[REMImageHelper imageWithLayer:self.bottomGradientLayer] drawInRect:ffds];
     
     [dataImage drawInRect:CGRectMake(0, kBuildingCommodityViewTop + kBuildingTitleHeight, outputWidth, dataImageHeight)];
     

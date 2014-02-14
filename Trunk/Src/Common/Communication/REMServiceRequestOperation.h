@@ -10,6 +10,12 @@
 #import "AFHTTPRequestOperation.h"
 #import "REMMaskManager.h"
 
+//typedef void(^REMDataAccessProgressBlock)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead);
+typedef void(^REMServiceOperationSuccessBlock)(AFHTTPRequestOperation *operation, id responseObject);
+typedef void(^REMServiceOperationFailureBlock)(AFHTTPRequestOperation *operation, NSError *errorInfo);
+typedef void(^REMServiceOperationProgressBlock)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead);
+
+
 @interface REMServiceRequestOperation : AFHTTPRequestOperation
 
 @property (nonatomic,retain) NSString *groupName;

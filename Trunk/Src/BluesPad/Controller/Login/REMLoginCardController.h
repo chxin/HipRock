@@ -7,7 +7,7 @@
  --------------------------------------------------------------------------*///
 
 #import <UIKit/UIKit.h>
-#import "REMLoginCarouselController.h"
+@class REMLoginCarouselController;
 #import "REMLoginButton.h"
 
 @interface REMLoginCardController : UIViewController<UITextFieldDelegate>
@@ -17,6 +17,5 @@
 @property (nonatomic,weak) REMLoginCarouselController *loginCarouselController;
 
 
--(void)loginSuccess;
 
 @end

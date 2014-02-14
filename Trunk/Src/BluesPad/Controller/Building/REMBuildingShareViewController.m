@@ -23,7 +23,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.view setFrame:CGRectMake(0, 0, 156, 88)];
+    [self.view setFrame:CGRectMake(0, 0, 156, 100)];
     
     if (REMISIOS7) {
         [self.view setBackgroundColor:[UIColor clearColor]];
@@ -35,14 +35,26 @@
     
     
     UIButton *weiboButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [weiboButton setImage:REMIMG_share_weibo forState:UIControlStateNormal];
+    [weiboButton setBackgroundImage:REMIMG_share_weibo forState:UIControlStateNormal];
+    weiboButton.adjustsImageWhenHighlighted=YES;
+    [weiboButton setTitle:NSLocalizedString(@"Building_ShareWeibo", @"") forState:UIControlStateNormal];
+    weiboButton.titleLabel.font=[UIFont systemFontOfSize:12];
+    [weiboButton setTitleEdgeInsets:UIEdgeInsetsMake(48+30, 0, 0, 0)];
+    [weiboButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.view addSubview:weiboButton];
     self.weiboButton=weiboButton;
 
     weiboButton.translatesAutoresizingMaskIntoConstraints=NO;
     
     UIButton *mailButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [mailButton setImage:REMIMG_share_email forState:UIControlStateNormal];
+    [mailButton setBackgroundImage:REMIMG_share_email forState:UIControlStateNormal];
+    [mailButton setImageEdgeInsets:weiboButton.imageEdgeInsets];
+    mailButton.titleLabel.font=weiboButton.titleLabel.font;
+    [mailButton setTitleEdgeInsets:weiboButton.titleEdgeInsets];
+    [mailButton setTitle:NSLocalizedString(@"Building_ShareEmail", @"") forState:UIControlStateNormal];
+    [mailButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    mailButton.adjustsImageWhenHighlighted=YES;
+    
     [self.view addSubview:mailButton];
     
     mailButton.translatesAutoresizingMaskIntoConstraints=NO;
@@ -50,11 +62,11 @@
     
     NSMutableArray *constaints=[NSMutableArray array];
     NSDictionary *constaintsDic=NSDictionaryOfVariableBindings(weiboButton,mailButton);
-    NSDictionary *constaintsVar=@{@"dimension":@(48),@"margin":@(20)};
+    NSDictionary *constaintsVar=@{@"height":@(48),@"width":@(48),@"margin":@(20)};
     
-    [constaints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[weiboButton(dimension)]-margin-[mailButton(dimension)]-margin-|" options:0 metrics:constaintsVar views:constaintsDic]];
-    [constaints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-margin-[weiboButton(dimension)]" options:0 metrics:constaintsVar views:constaintsDic]];
-    [constaints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-margin-[mailButton(dimension)]" options:0 metrics:constaintsVar views:constaintsDic]];
+    [constaints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[weiboButton(width)]-margin-[mailButton(width)]-margin-|" options:0 metrics:constaintsVar views:constaintsDic]];
+    [constaints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-margin-[weiboButton(height)]" options:0 metrics:constaintsVar views:constaintsDic]];
+    [constaints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-margin-[mailButton(height)]" options:0 metrics:constaintsVar views:constaintsDic]];
     [self.view addConstraints:constaints];
     
     

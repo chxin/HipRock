@@ -14,4 +14,9 @@
 
 +(void) alert: (NSString *) message withTitle: (NSString *) title;
 
++(void) alert: (NSString *) message delegate:(id)delegate;
+
+
++(void) alert: (NSString *) message withTitle: (NSString *) title  delegate:(id)delegate;
+
 @end

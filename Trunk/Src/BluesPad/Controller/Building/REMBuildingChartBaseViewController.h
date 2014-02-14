@@ -8,43 +8,43 @@
 
 #import <UIKit/UIKit.h>
 #import "REMAverageUsageDataModel.h"
-#import "CPTGraphHostingView.h"
-#import "CorePlot-CocoaTouch.h"
 #import "REMError.h"
-
+#import "REMWidgetObject.h"
+#import "DCTrendWrapper.h"
 
 @interface REMBuildingChartBaseViewController: UIViewController
 
 @property (nonatomic) REMDataStoreType requestUrl;
-
-@property (nonatomic,strong) NSArray *snapshotArray;
-
-- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame;
+@property (nonatomic, strong, readonly) DCTrendWrapper* chartWrapper;
+@property (nonatomic, strong) REMEnergyViewData* energyViewData;
+@property (nonatomic, weak, readonly) UILabel* textLabel;
+@property (nonatomic, strong) NSString* wrapperClassName;
+@property (nonatomic,weak) REMWidgetObject *widgetInfo;
+@property (nonatomic) CGRect viewFrame;
+//- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame;
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(id data,REMBusinessErrorInfo *error))loadCompleted;
-- (CPTGraphHostingView*) getHostView;
--(void)longPressedAt:(NSDate*)x;
 
 
--(CPTLineStyle *)axisLineStyle;
--(CPTLineStyle *)gridLineStyle;
--(CPTLineStyle *)hiddenLineStyle;
--(CPTTextStyle *)xAxisLabelStyle;
--(CPTTextStyle *)yAxisLabelStyle;
+//-(CPTLineStyle *)axisLineStyle;
+//-(CPTLineStyle *)gridLineStyle;
+//-(CPTLineStyle *)hiddenLineStyle;
+//-(CPTTextStyle *)xAxisLabelStyle;
+//-(CPTTextStyle *)yAxisLabelStyle;
 
--(NSString *)formatDataValue:(NSNumber *)number;
 -(void)startLoadingActivity;
 -(void)stopLoadingActivity;
 -(void)prepareShare;
-
+-(void)updateLegendView;
 -(void)purgeMemory;
 
 - (NSDictionary *)assembleRequestParametersWithBuildingId:(long long)buildingId WithCommodityId:(long long)commodityID WithMetadata:(REMAverageUsageDataModel *)averageData;
 - (void)loadDataSuccessWithData:(id)data;
-- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error ;
+- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error withStatus:(REMDataAccessErrorStatus)status;
 
 
 -(void)drawLabelWithText:(NSString *)text;
-- (CABasicAnimation *) plotAnimation;
 
+-(REMEnergyViewData*)convertData:(id)data;
+-(REMEnergyStep)getEnergyStep;
 @end

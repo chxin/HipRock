@@ -10,10 +10,10 @@
 #import "REMCustomerModel.h"
 #import "REMStorage.h"
 #import "REMApplicationInfo.h"
-#import "REMCommonDefinition.h"
 
 @implementation REMUserModel
 
+static NSString *kCurrentUserCacheKey = @"CurrentUser";
 
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
@@ -28,6 +28,7 @@
     self.userTypeName=dictionary[@"UserTypeName"];
     self.version = dictionary[@"Version"];
     self.spId = [dictionary[@"SpId"] longLongValue];
+    self.isDemo = [dictionary[@"DemoStatus"] boolValue];
     
     NSArray *array = (NSArray *)dictionary[@"Customers"];
     NSMutableArray *customers = [[NSMutableArray alloc] initWithCapacity:array.count];
@@ -52,6 +53,7 @@
     dic[@"UserTypeName"]=self.userTypeName;
     dic[@"Version"]=self.version;
     dic[@"SpId"]=@(self.spId);
+    dic[@"DemoStatus"]=@(self.isDemo?1:0);
     NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:self.customers.count];
     for (int i=0; i<self.customers.count;i++) {
         REMCustomerModel *model = self.customers[i];
@@ -70,24 +72,18 @@
 
 - (void)save
 {
-    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:REMCurrentUserCacheKey value:[self serialize] expired:REMNeverExpired];
+    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:kCurrentUserCacheKey value:[self serialize] expired:REMNeverExpired];
 }
 
 - (void)kill
 {
-    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:REMCurrentUserCacheKey value:@"" expired:REMNeverExpired];
+    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:kCurrentUserCacheKey value:@"" expired:REMNeverExpired];
 }
 
 + (REMUserModel *)getCached
 {
-    NSDictionary *dictionary = [REMJSONHelper objectByString:[REMStorage get:[REMApplicationInfo getApplicationCacheKey] key:REMCurrentUserCacheKey]];
+    NSDictionary *dictionary = [REMJSONHelper objectByString:[REMStorage get:[REMApplicationInfo getApplicationCacheKey] key:kCurrentUserCacheKey]];
     return [[REMUserModel alloc] initWithDictionary:dictionary];
-}
-
-+(void)clean
-{
-    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:REMCurrentUserCacheKey value:@"" expired:REMNeverExpired];
-    [REMStorage set:[REMApplicationInfo getApplicationCacheKey] key:REMCurrentCustomerCacheKey value:@"" expired:REMNeverExpired];
 }
 
 @end

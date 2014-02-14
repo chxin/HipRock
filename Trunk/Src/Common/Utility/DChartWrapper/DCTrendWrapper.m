@@ -9,30 +9,42 @@
 #import "DCTrendWrapper.h"
 #import "_DCXLabelFormatter.h"
 #import "DCDataPoint.h"
+#import "DCXYChartBackgroundBand.h"
+#import "DCTrendAnimationManager.h"
+#import "REMWidgetStepCalculationModel.h"
 
 @interface DCTrendWrapper()
-@property (nonatomic, strong) NSMutableArray* processors;
-@property (nonatomic, strong) REMTrendChartDataProcessor* sharedProcessor;
 @property (nonatomic, weak) DCContext* graphContext;
 @property (nonatomic, strong) DCRange* myStableRange;
-@property (nonatomic, assign) BOOL isStacked;
-@property (nonatomic) NSString* xtypeOfWidget;
+@property (nonatomic,strong) NSMutableArray* hiddenSeriesTargetsId;
+@property (nonatomic, strong) DCTrendAnimationManager* animationManager;
+@property (nonatomic, assign) double panSpeed;
 @end
 
 @implementation DCTrendWrapper
 -(UIView*)getView {
     return self.view;
 }
--(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData widgetContext:(REMWidgetContentSyntax*)widgetSyntax style:(REMChartStyle*)style {
-    self = [super initWithFrame:frame data:energyViewData widgetContext:widgetSyntax style:style];
+-(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(REMChartStyle *)style {
+    self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
     if (self && energyViewData.targetEnergyData.count != 0) {
+        _drawHCBackground = style.drawHCBackground;
+        _isUnitOrRatioChart = wrapperConfig.isUnitOrRatioChart;
         _calenderType = REMCalendarTypeNone;
-        self.xtypeOfWidget = widgetSyntax.xtype;
-        [self extraSyntax:widgetSyntax];
+        _isStacked = wrapperConfig.stacked;
+        [self extraSyntax:wrapperConfig];
+        self.hiddenSeriesTargetsId = [[NSMutableArray alloc]init];
         
-        NSDictionary* dic = [self updateProcessorRangesFormatter:widgetSyntax.step.integerValue];
+        self.animationManager = [[DCTrendAnimationManager alloc]init];
+        self.animationManager.delegate = self;
+        NSDictionary* dic = [self updateProcessorRangesFormatter:wrapperConfig.step];
+        _myStableRange = dic[@"beginRange"];
+        [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:wrapperConfig.step];
         
-        [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:widgetSyntax.step.integerValue];
+        for (NSUInteger i = 0; i < self.view.seriesList.count; i++) {
+            DCXYSeries* s = self.view.seriesList[i];
+            if (s.hidden) [self addHiddenTarget:s.target index:i];
+        }
         [self updateCalender];
     }
     return self;
@@ -43,6 +55,7 @@
     [view setXLabelFormatter:xLabelFormatter];
     _view = view;
     view.xAxis = [[DCAxis alloc]init];
+    view.xAxis.coordinate = DCAxisCoordinateX;
     
     NSMutableArray* seriesList = [[NSMutableArray alloc]initWithCapacity:self.energyViewData.targetEnergyData.count];
     NSUInteger seriesIndex = 0;
@@ -56,22 +69,28 @@
     view.graphContext.globalHRange = globalRange;
     view.seriesList = seriesList;
     
-    view.userInteractionEnabled = self.style.userInteraction;
+    view.acceptTap = self.style.acceptTap;
+    view.acceptPinch = self.style.acceptPinch;
+    view.acceptPan = self.style.acceptPan;
     
-    if (self.style.xLineStyle) {
-        view.xAxis.lineColor = self.style.xLineStyle.lineColor.uiColor;
-        view.xAxis.lineWidth = self.style.xLineStyle.lineWidth;
+    view.xAxis.lineColor = self.style.xLineColor;
+    view.xAxis.lineWidth = self.style.xLineWidth;
+    view.xAxis.labelColor = self.style.xTextColor;
+    view.xAxis.labelFont = self.style.xTextFont;
+    
+    if (self.style.yGridlineWidth > 0) {
+        view.hGridlineColor = self.style.yGridlineColor;
+        view.hGridlineWidth = self.style.yGridlineWidth;
+        view.hGridlineStyle = self.style.yGridlineStyle;
     }
-    if (self.style.xTextStyle) {
-        view.xAxis.labelColor = self.style.xTextStyle.color.uiColor;
-        view.xAxis.labelFont = [UIFont fontWithName:self.style.xTextStyle.fontName size:self.style.xTextStyle.fontSize];
-    }
-    if (self.style.yGridlineStyle) {
-        view.hGridlineColor = self.style.yGridlineStyle.lineColor.uiColor;
-        view.hGridlineWidth = self.style.yGridlineStyle.lineWidth;
+    view.hasVGridlines = self.style.xGridlineWidth > 0;
+    if (self.style.xGridlineWidth > 0) {
+        view.vGridlineColor = self.style.xGridlineColor;
+        view.vGridlineWidth = self.style.xGridlineWidth;
+        view.vGridlineStyle = self.style.xGridlineStyle;
     }
     
-    view.focusSymbolLineColor = self.style.focusSymbolLineColor;
+    view.focusSymbolLineColor = self.style.indicatorColor;
     view.focusSymbolLineStyle = self.style.focusSymbolLineStyle;
     view.focusSymbolLineWidth = self.style.focusSymbolLineWidth;
     view.focusSymbolIndicatorSize = self.style.focusSymbolIndicatorSize;
@@ -85,19 +104,20 @@
     view.plotPaddingTop = self.style.plotPaddingTop;
     view.plotPaddingBottom = self.style.plotPaddingBottom;
     view.graphContext.hGridlineAmount = self.style.horizentalGridLineAmount;
+    view.xAxisLabelClipToBounds = self.style.xLabelClipToBounds;
+    view.graphContext.useTextLayer = self.style.useTextLayer;
     view.delegate = self;
     self.graphContext = view.graphContext;
     if (step == REMEnergyStepHour || step == REMEnergyStepWeek) {
         view.graphContext.pointAlignToTick = NO;
         view.graphContext.xLabelAlignToTick = YES;
     } else {
-        view.graphContext.pointAlignToTick = YES;
-        view.graphContext.xLabelAlignToTick = YES;
+        view.graphContext.pointAlignToTick = NO;
+        view.graphContext.xLabelAlignToTick = NO;
     }
     
-    view.blockReboundAnimation = (step == REMEnergyStepHour);   // 步长为小时时禁止回弹动画
-    
     [self customizeView:view];
+    self.animationManager.view = view;
 }
 
 -(NSArray*)createYAxes:(NSArray*)series {
@@ -112,15 +132,16 @@
         if (REMIsNilOrNull(s.yAxis)) {
             DCAxis* y = [[DCAxis alloc]init];
             s.yAxis = y;
+            y.coordinate = DCAxisCoordinateY;
             y.axisTitle = s.target.uomName;
             y.labelToLine = self.style.yLabelToLine;
-            if (self.style.yLineStyle) {
-                y.lineColor = self.style.yLineStyle.lineColor.uiColor;
-                y.lineWidth = self.style.yLineStyle.lineWidth;
+            if (self.style.yLineWidth > 0) {
+                y.lineColor = self.style.yLineColor;
+                y.lineWidth = self.style.yLineWidth;
             }
-            if (self.style.yTextStyle) {
-                y.labelColor = self.style.yTextStyle.color.uiColor;
-                y.labelFont = [UIFont fontWithName:self.style.yTextStyle.fontName size:self.style.yTextStyle.fontSize];
+            if (self.style.yTextFont && self.style.yTextColor) {
+                y.labelColor = self.style.yTextColor;
+                y.labelFont = self.style.yTextFont;
             }
             y.axisTitleColor = self.style.yAxisTitleColor;
             y.axisTitleToTopLabel = self.style.yAxisTitleToTopLabel;
@@ -136,7 +157,9 @@
 }
 
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style {
-    // Nothing to do.
+    if (self.isUnitOrRatioChart && series.target.type == REMEnergyTargetOrigValue) {
+        series.hidden = YES;
+    }
 }
 
 -(DCXYSeries*)createSeriesAt:(NSUInteger)index style:(REMChartStyle*)style {
@@ -159,19 +182,24 @@
         [datas addObject:p];
     }
     DCXYSeries* s;
-    if (!REMIsNilOrNull(targetEnergy.target) && targetEnergy.target.type == REMEnergyTargetBenchmarkValue) {
+    if (!REMIsNilOrNull(targetEnergy.target) &&  [self isSpecialType:targetEnergy.target.type]) {
         s = [[DCLineSeries alloc]initWithEnergyData:datas];
         s.color = style.benchmarkColor;
         ((DCLineSeries*)s).symbolType = index % 5;
         ((DCLineSeries*)s).symbolSize = style.symbolSize;
     } else {
         s = [[NSClassFromString(self.defaultSeriesClass) alloc]initWithEnergyData:datas];
-        s.color = [REMColor colorByIndex:index].uiColor;
+        s.color = [REMColor colorByIndex:index];
     }
     s.xAxis = view.xAxis;
     s.target = targetEnergy.target;
     [self customizeSeries:s seriesIndex:index chartStyle:style];
     return s;
+}
+
+
+-(BOOL)isSpecialType:(REMEnergyTargetType)type {
+    return type == REMEnergyTargetBenchmarkValue;
 }
 
 -(NSNumber*)roundDate:(NSDate*)lengthDate startDate:(NSDate*)startDate processor:(REMTrendChartDataProcessor*)processor roundToFloor:(BOOL)roundToFloor {
@@ -189,21 +217,17 @@
 }
 
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
-    self.isStacked = ([self.xtypeOfWidget rangeOfString:@"stack"].location != NSNotFound);
-    
     NSUInteger seriesAmount = [self getSeriesAmount];
-    self.processors = [[NSMutableArray alloc]init];
-//    BOOL allSeriesUserGlobalTime = ([self.xtypeOfWidget rangeOfString : @"multitimespan"].location == NSNotFound);
+    _processors = [[NSMutableArray alloc]init];
     
     NSDate* baseDateOfX = nil;
     NSDate* globalStartdDate = nil;
     NSDate* globalEndDate = nil;
     NSDate* beginningStart = nil;
     NSDate* beginningEnd = nil;
-    self.sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
+    _sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
     self.sharedProcessor.step = step;
     
-//    if (allSeriesUserGlobalTime) {
     beginningStart = self.energyViewData.visibleTimeRange.startTime;
     beginningEnd = self.energyViewData.visibleTimeRange.endTime;
     
@@ -220,58 +244,63 @@
             globalEndDate = beginningEnd;
         }
     }
-    for (int i = 0; i < seriesAmount; i++) {
-        [self.processors addObject:self.sharedProcessor];
-    }
-//    } else {
-//        for (REMTargetEnergyData* targetEnergy in self.energyViewData.targetEnergyData) {
+    
+    baseDateOfX = globalStartdDate;
+    double startPoint = 0;
+    double endPoint = 0;
+//    if (wrapperConfig.step == REMEnergyStepHour && wrapperConfig.isMultiTimeChart) {
+//        if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
+//            NSDate* baseDateFromEnergyData = nil;
+//            for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
+//                if (d.energyData.count > 0) {
+//                    baseDateFromEnergyData = [d.energyData[0] localTime];
+//                    if ([baseDateFromEnergyData compare:baseDateOfX]==NSOrderedAscending) {
+//                        baseDateOfX = baseDateFromEnergyData;
+//                    }
+//                }
+//            }
+//        }
+//        self.sharedProcessor.baseDate = baseDateOfX;
+//        for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
 //            REMTrendChartDataProcessor* processor = [[REMTrendChartDataProcessor alloc]init];
 //            processor.step = step;
-//            if (REMIsNilOrNull(targetEnergy.target) || REMIsNilOrNull(targetEnergy.target.globalTimeRange)) {
-//                processor.baseDate = [NSDate dateWithTimeIntervalSince1970:0];
+//            if (d.energyData.count > 0) {
+//                processor.baseDate = [d.energyData[0] localTime];
 //            } else {
-//                NSDate* seriesBeginDate = targetEnergy.target.globalTimeRange.startTime;
-//                NSDate* seriesEndDate = targetEnergy.target.globalTimeRange.endTime;
-//                if (baseDateOfX == nil) {
-//                    baseDateOfX = seriesBeginDate;
-//                    globalEndDate = seriesEndDate;
-//                    beginningEnd = targetEnergy.target.visiableTimeRange.endTime;
-//                    beginningStart = targetEnergy.target.visiableTimeRange.startTime;
-////                } else {
-////                    if ([baseDateOfX compare:seriesBeginDate] == NSOrderedDescending) {
-////                        baseDateOfX = seriesBeginDate;
-////                        globalEndDate = seriesEndDate;
-////                    }
-//                }
-//                processor.baseDate = seriesBeginDate;
+//                processor.baseDate = baseDateOfX;
 //            }
 //            [self.processors addObject:processor];
 //        }
-//    }
-    
-    baseDateOfX = globalStartdDate;
-    if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
-        NSDate* baseDateFromEnergyData = nil;
-        for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
-            if (d.energyData.count > 0) {
-                baseDateFromEnergyData = [d.energyData[0] localTime];
-                self.sharedProcessor.baseDate = baseDateFromEnergyData;
-                baseDateOfX = [self.sharedProcessor deprocessX:floorf([self.sharedProcessor processX:baseDateOfX].doubleValue)];
-                break;
+//        startPoint = [self.sharedProcessor processX:beginningStart].doubleValue;
+//        endPoint = [self.sharedProcessor processX:beginningEnd].doubleValue - startPoint;
+//        startPoint = 0;
+//    } else {
+        if (!REMIsNilOrNull(self.energyViewData.targetEnergyData) && self.energyViewData.targetEnergyData.count != 0) {
+            NSDate* baseDateFromEnergyData = nil;
+            for (REMTargetEnergyData* d in self.energyViewData.targetEnergyData) {
+                if (d.energyData.count > 0) {
+                    baseDateFromEnergyData = [d.energyData[0] localTime];
+                    self.sharedProcessor.baseDate = baseDateFromEnergyData;
+                    baseDateOfX = [self.sharedProcessor deprocessX:floorf([self.sharedProcessor processX:baseDateOfX].doubleValue)];
+                    break;
+                }
             }
         }
-    }
+        self.sharedProcessor.baseDate = baseDateOfX;
+        for (int i = 0; i < seriesAmount; i++) {
+            [self.processors addObject:self.sharedProcessor];
+        }
+        startPoint = [self.sharedProcessor processX:beginningStart].doubleValue;
+        endPoint = [self.sharedProcessor processX:beginningEnd].doubleValue;
+//    }
     
-    self.sharedProcessor.baseDate = baseDateOfX;
     double globalStart = [self.sharedProcessor processX:globalStartdDate].doubleValue;
     double globalLength = [self.sharedProcessor processX:globalEndDate].doubleValue - globalStart;
-    double startPoint = [self.sharedProcessor processX:beginningStart].doubleValue;
-    double endPoint = [self.sharedProcessor processX:beginningEnd].doubleValue;
+//    if (!self.graphContext.xLabelAlignToTick) globalStart+=0.5;
     
     if (endPoint < startPoint) endPoint = startPoint;
     DCRange* beginRange = [[DCRange alloc]initWithLocation:startPoint length:endPoint-startPoint];
     DCRange* globalRange = [[DCRange alloc]initWithLocation:globalStart length:globalLength];
-    self.myStableRange = beginRange;
     return @{ @"globalRange": globalRange, @"beginRange": beginRange, @"xformatter": [[_DCXLabelFormatter alloc]initWithStartDate:baseDateOfX dataStep:step interval:1]};
 }
 
@@ -279,86 +308,53 @@
     return self.energyViewData.targetEnergyData.count;
 }
 
--(void)touchedInPlotAt:(CGPoint)point xCoordinate:(double)xLocation {
-    if (self.chartStatus == DCDataPointTypeNormal) {
-        self.chartStatus = DChartStatusFocus;
+-(NSUInteger)getVisableSeriesCount {
+    NSUInteger count = 0;
+    for (DCXYSeries* s in self.view.seriesList) {
+        if (!s.hidden) count++;
     }
-    [self.view focusAroundX:xLocation];
-}
-
--(BOOL)panInPlotAt:(CGPoint)point translation:(CGPoint)translation {
-    if (self.chartStatus == DCDataPointTypeNormal) {
-        return YES;
-    } else {
-        [self.view focusAroundX:[self.view getXLocationForPoint:point]];
-        return NO;
-    }
-}
-
--(void)panStopped {
-    [self gestureStopped];
-}
-
--(void)gestureStopped {
-    DCRange* newRange = self.graphContext.hRange;
-    double rangeStart = newRange.location;
-    double rangeEnd = newRange.location + newRange.length;
-    if (self.sharedProcessor && self.sharedProcessor.step == REMEnergyStepHour) {
-        // Nothing to do. Delegate will reload data from server when step is hour.
-    } else {
-        if (rangeStart < self.graphContext.globalHRange.location) {
-            rangeStart = self.graphContext.globalHRange.location;
-            rangeEnd = self.graphContext.globalHRange.location + newRange.length;
-        }
-        if (rangeEnd > self.graphContext.globalHRange.end) {
-            rangeEnd = self.graphContext.globalHRange.end;
-            rangeStart = rangeEnd - newRange.length;
-        }
-        newRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
-    }
-    self.myStableRange = newRange;
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(touchEndedInNormalStatus:end:)]) {
-        if (self.sharedProcessor == nil) {
-            [self.delegate performSelector:@selector(touchEndedInNormalStatus:end:) withObject:@(rangeStart) withObject:@(rangeEnd)];
-        } else {
-            [self.delegate performSelector:@selector(touchEndedInNormalStatus:end:) withObject:[self.sharedProcessor deprocessX:rangeStart] withObject:[self.sharedProcessor deprocessX:rangeEnd]];
-        }
-    }
-}
-
--(void)pinchStopped {
-    [self gestureStopped];
-}
-
-
--(void)focusPointChanged:(NSArray *)dcpoints at:(int)x {
-    if (self.delegate && [[self.delegate class] conformsToProtocol:@protocol(REMTrendChartDelegate)]) {
-        id xVal = (REMIsNilOrNull(self.sharedProcessor)) ? @(x) : [self.sharedProcessor deprocessX:x];
-        [(id<REMTrendChartDelegate>)self.delegate highlightPoints:dcpoints x:xVal];
-    }
+    return count;
 }
 
 -(void)cancelToolTipStatus {
-    self.chartStatus = DCDataPointTypeNormal;
+    [super cancelToolTipStatus];
+    self.view.acceptPinch = self.style.acceptPinch;
+//    self.view.acceptPan = self.style.acceptPan;
     [self.view defocus];
 }
--(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
+-(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
     if (seriesIndex >= self.view.seriesList.count) return;
     DCXYSeries* series = self.view.seriesList[seriesIndex];
-    series.hidden = hidden;
+    [self.view setSeries:series hidden:hidden];
+    if (REMIsNilOrNull(series.target)) return;
+    
+    if (hidden) {
+        [self addHiddenTarget:series.target index:seriesIndex];
+    } else {
+        [self removeHiddenTarget:series.target index:seriesIndex];
+    }
 }
--(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
-    _calenderType = syntax.calendarType;
+
+-(void)extraSyntax:(DWrapperConfig*)wrapperConfig {
+    _calenderType = wrapperConfig.calendarType;
 }
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
+    [self.animationManager invalidate];
+    self.animationManager.view = nil;
     [super redraw:energyViewData];
     NSDictionary* dic = [self updateProcessorRangesFormatter:step];
     CGRect frame = self.view.frame;
     UIView* superView = self.view.superview;
+    
     [self.view removeFromSuperview];
     
+    _myStableRange = dic[@"beginRange"];
     [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:step];
+    for(NSUInteger i = 0; i < self.view.seriesList.count; i++) {
+        DCXYSeries* s = self.view.seriesList[i];
+        if (REMIsNilOrNull(s.target)) continue;
+        s.hidden = [self isTargetHidden:s.target index:i];
+    }
     [superView addSubview:self.view];
     [self updateCalender];
 }
@@ -370,7 +366,7 @@
 }
 
 -(void) updateCalender {
-    if (self.sharedProcessor == nil) return;
+    if (self.sharedProcessor == nil || !self.drawHCBackground) return;
     NSMutableArray* bands = [[NSMutableArray alloc]init];
     if(self.calenderType != REMCalendarTypeNone) {
         for (REMEnergyCalendarData* calender in self.energyViewData.calendarData) {
@@ -398,6 +394,7 @@
                 DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
                 b.range = bandRange;
                 b.color = fillColor;
+                b.axis = self.view.xAxis;
                 b.title = bandString;
                 [bands addObject:b];
             }
@@ -406,63 +403,193 @@
     [self.view setBackgoundBands:bands];
 }
 
--(BOOL)testHRangeChange:(DCRange *)newRange oldRange:(DCRange *)oldRange sendBy:(DCHRangeChangeSender)senderType {
-    if (senderType == DCHRangeChangeSenderByAnimation || senderType == DCHRangeChangeSenderByInitialize) return YES;
-    if ([DCRange isRange:oldRange equalTo:newRange]) return NO;
-    
-    if (senderType == DCHRangeChangeSenderByUserPan) {
-        double rangeStart = newRange.location;
-        double rangeEnd = newRange.end;
-        if (rangeStart < self.graphContext.globalHRange.location) {
-            rangeStart = self.graphContext.globalHRange.location;
-            rangeEnd = self.graphContext.globalHRange.location + newRange.length;
-        }
-        if (rangeEnd > self.graphContext.globalHRange.end) {
-            rangeEnd = self.graphContext.globalHRange.end;
-            rangeStart = rangeEnd - newRange.length;
-        }
-        
-        DCRange* myNewRange = [[DCRange alloc] initWithLocation:rangeStart length:rangeEnd-rangeStart];
-        BOOL shouldChange = YES;
-        if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
-            if (![DCRange isRange:self.myStableRange equalTo:myNewRange]) {
-                id param0, param1;
-                if (self.sharedProcessor == nil) {
-                    param0 = @(rangeStart);
-                    param1 = @(rangeEnd);
-                } else {
-                    param0 = [self.sharedProcessor deprocessX:rangeStart];
-                    param1 = [self.sharedProcessor deprocessX:rangeEnd];
-                }
-                shouldChange = (BOOL)[self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
-            }
-        }
-        if (shouldChange) self.myStableRange = myNewRange;
-        return shouldChange;
-    } else if (senderType == DCHRangeChangeSenderByUserPinch) {
-        BOOL shouldChange = YES;
-        if (self.chartStatus != DCDataPointTypeNormal) {
-            shouldChange = NO;
-        } else {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
-                id param0, param1;
-                if (self.sharedProcessor == nil) {
-                    param0 = @(newRange.location);
-                    param1 = @(newRange.end);
-                } else {
-                    param0 = [self.sharedProcessor deprocessX:newRange.location];
-                    param1 = [self.sharedProcessor deprocessX:newRange.end];
-                }
-                shouldChange = (BOOL)[self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
-            }
-        }
-        if (shouldChange) {
-            self.myStableRange = newRange;
-            [self updateCalender];
-        }
-        return shouldChange;
+
+#pragma mark - DCXYChartViewDelegate implementation
+-(void)touchesBegan {
+    [self.animationManager invalidate];
+}
+-(void)touchesEnded {
+    if (![DCRange isRange:self.myStableRange equalTo:self.graphContext.hRange] && self.chartStatus == DChartStatusNormal) {
+        [self panWithSpeed:0 panStopped:YES];
     }
-    return YES;
+}
+-(void)tapInPlotAt:(CGPoint)point xCoordinate:(double)xLocation {
+    if ([DCRange isRange:self.myStableRange equalTo:self.graphContext.hRange]) {
+        if (self.chartStatus == DChartStatusNormal) {
+            self.chartStatus = DChartStatusFocus;
+            //        self.view.acceptPan = NO;
+            self.view.acceptPinch = NO;
+        }
+        [self.view focusAroundX:xLocation];
+    }
 }
 
+-(void)panWithSpeed:(CGFloat)speed panStopped:(BOOL)stopped {
+    if (!stopped) self.panSpeed = speed;
+    if (self.chartStatus != DChartStatusNormal) return;
+    self.view.acceptTap = NO;
+//    DCRange* globalRange = self.graphContext.globalHRange;
+//    DCRange* range = self.graphContext.hRange;
+//    double rangeLength = range.length;
+//    double rangeLocation = range.location;
+//    if (rangeLocation < globalRange.location) rangeLocation = globalRange.location;
+//    if (range.end > globalRange.end) rangeLocation = globalRange.end - rangeLength;
+//    self.myStableRange = [[DCRange alloc]initWithLocation:rangeLocation length:rangeLength];
+
+    if (stopped) {
+        if (self.sharedProcessor.step == REMEnergyStepHour) {
+            self.myStableRange = self.view.graphContext.hRange;
+        } else {
+            [self.animationManager animateHRangeWithSpeed: self.panSpeed completion:^() {
+                self.view.acceptTap = self.style.acceptTap;
+            }];
+        }
+        self.panSpeed = 0;
+        [self fireGestureStoppedEvent];
+    }
+}
+
+-(void)fireGestureStoppedEvent {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(gestureEndFrom:end:)]) {
+        DCRange* newRange = self.myStableRange;
+        double rangeStart = newRange.location;
+        double rangeEnd = newRange.location + newRange.length;
+        id start, end;
+        if (!REMIsNilOrNull(self.sharedProcessor) && self.sharedProcessor.step != REMEnergyStepNone) {
+            start = [self.sharedProcessor deprocessX:rangeStart];
+            end = [self.sharedProcessor deprocessX:rangeEnd];
+        } else {
+            start = @(rangeStart);
+            end = @(rangeEnd);
+        }
+        [self.delegate performSelector:@selector(gestureEndFrom:end:) withObject:start withObject:end];
+    }
+}
+-(void)focusPointChanged:(NSArray *)dcpoints at:(int)x {
+    if (self.delegate && [[self.delegate class] conformsToProtocol:@protocol(REMTrendChartDelegate)]) {
+        id xVal = (REMIsNilOrNull(self.sharedProcessor)) ? @(x) : [self.sharedProcessor deprocessX:x];
+        [(id<REMTrendChartDelegate>)self.delegate highlightPoints:dcpoints x:xVal];
+    }
+}
+// 获取x轴上两个点之间的时间差，以秒为单位。
+-(NSTimeInterval)getTimeIntervalFrom:(double)from to:(double)to {
+    if (REMIsNilOrNull(self.sharedProcessor) || self.sharedProcessor.step == REMEnergyStepNone) return 0;
+    return [[self.sharedProcessor deprocessX:to] timeIntervalSinceDate:[self.sharedProcessor deprocessX:from]];
+}
+-(DCRange*)updatePanRange:(DCRange *)newRange withSpeed:(double)speed {
+    DCRange* updatedRange = nil;
+    if (self.sharedProcessor.step == REMEnergyStepHour) {
+        updatedRange = newRange;
+    } else {
+        double location = newRange.location;
+        double end = newRange.end;
+        if (location < self.graphContext.globalHRange.location) {
+            location = self.graphContext.hRange.location + speed / 8;
+        } else  if (end > self.graphContext.globalHRange.end) {
+            location = self.graphContext.hRange.location + speed / 8;
+        }
+        updatedRange = [[DCRange alloc]initWithLocation:location length:self.graphContext.hRange.length];
+    }
+    self.myStableRange = updatedRange;
+    return updatedRange;
+}
+-(DCRange*)updatePinchRange:(DCRange*)newRange pinchCentreX:(CGFloat)centreX pinchStopped:(BOOL)stopped {
+    REMEnergyStep myStep = self.sharedProcessor.step;
+    DCRange* globalRange = self.graphContext.globalHRange;
+    DCRange* currentRange = self.graphContext.hRange;
+    
+    DCRange* updatedRange = nil;
+    
+    if (myStep == REMEnergyStepNone || newRange.length == currentRange.length) {
+        updatedRange = newRange;
+    } else {
+        NSRange lengthRange = [[REMWidgetStepCalculationModel getStepIntervalRanges][myStep] rangeValue];
+        NSUInteger minTimeInterval = lengthRange.location;  // 步长允许的最短的时间距离
+        NSUInteger maxTimeInterval = lengthRange.location + lengthRange.length; // 步长允许的最长时间距离
+        BOOL isZoomIn = newRange.length < currentRange.length;  // 正在放大视图，亦即可视的时间范围正在缩小
+        
+        if (myStep == REMEnergyStepHour) {
+            if ([self getTimeIntervalFrom:newRange.location to:newRange.end] > maxTimeInterval) {
+                updatedRange = currentRange;
+            } else {
+                updatedRange = newRange;
+            }
+        } else {
+            /*** 对于左边界已经越界的情况(在时间选择器内查询数据)：只检查Pinch后数据的长度，和右边界。 ***/
+            if (self.myStableRange.location < globalRange.location) {
+                double returnRangeEnd = newRange.end;
+                double returnRangeStart = newRange.location;
+                if (returnRangeEnd > globalRange.end) returnRangeEnd = globalRange.end;
+                NSTimeInterval returnRangeInterval = [self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd];
+                if ((isZoomIn && returnRangeInterval <= minTimeInterval) || (!isZoomIn && returnRangeInterval > maxTimeInterval)) {
+                    updatedRange = currentRange;
+                } else {
+                    updatedRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
+                }
+            }
+            /*** 对于左边界还没有越界的情况 ***/
+            else {
+                NSTimeInterval currentRangeTimeInterval = [self getTimeIntervalFrom:currentRange.location to:currentRange.end];
+                if (currentRange.end > globalRange.end || currentRangeTimeInterval <= minTimeInterval || currentRangeTimeInterval > maxTimeInterval) return currentRange;
+                double returnRangeEnd = newRange.end;
+                double returnRangeStart = newRange.location;
+                double returnRangeLength = 0;
+                if (isZoomIn) {
+                    returnRangeLength = returnRangeEnd - returnRangeStart;
+                    if ([self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd] <= minTimeInterval) {
+                        updatedRange = currentRange;
+                    } else {
+                        updatedRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
+                    }
+                } else {
+                    if (returnRangeStart < globalRange.location) returnRangeStart = globalRange.location;
+                    if (returnRangeEnd > globalRange.end) returnRangeEnd = globalRange.end;
+                    returnRangeLength = returnRangeEnd - returnRangeStart;
+                    if ([self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd] > maxTimeInterval) {
+                        updatedRange = currentRange;
+                    } else {
+                        updatedRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
+                    }
+                }
+            }
+        }
+    }
+    self.myStableRange = updatedRange;
+    if (stopped) {
+        [self fireGestureStoppedEvent];
+    }
+    return updatedRange;
+}
+
+#pragma mark - DCTrendAnimationDelegate implementation
+-(void)didHRangeApplyToView:(DCRange*)range finalRange:(DCRange*)finalRange {
+    DCRange* globalRange = self.view.graphContext.globalHRange;
+    BOOL isAStableRange = (range.location >= globalRange.location) && (range.end <= globalRange.end);
+    if (isAStableRange) {
+        self.myStableRange = range;
+    } else {
+        self.myStableRange = finalRange;
+    }
+}
+
+
+
+#pragma mark - Fire to REMTrendChartDelegate
+-(void)setMyStableRange:(DCRange *)myStableRange {
+    if (![DCRange isRange:self.myStableRange equalTo:myStableRange]) {
+        _myStableRange = myStableRange;
+        // FIRE to delegate
+        if (self.delegate && [self.delegate respondsToSelector:@selector(willRangeChange:end:)]) {
+            id param0, param1;
+            if (self.sharedProcessor == nil) {
+                param0 = @(myStableRange.location);
+                param1 = @(myStableRange.end);
+            } else {
+                param0 = [self.sharedProcessor deprocessX:myStableRange.location];
+                param1 = [self.sharedProcessor deprocessX:myStableRange.end];
+            }
+            [self.delegate performSelector:@selector(willRangeChange:end:) withObject:param0 withObject:param1];
+        }
+    }
+}
 @end

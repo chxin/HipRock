@@ -29,6 +29,7 @@
 @property (nonatomic,strong) NSArray *orderedProvinceKeys;
 @property (nonatomic,weak) REMGalleryTableView *galleryTableView;
 @property (nonatomic) BOOL isSegueNotAnimated;
+@property (nonatomic,weak) UIImageView *customerLogoView;
 
 @end
 
@@ -48,6 +49,11 @@
     
     //process data
     [self groupBuildings];
+    
+    for (NSString *key in self.orderedProvinceKeys) {
+        REMGalleryCollectionViewController *collectionController = [[REMGalleryCollectionViewController alloc] initWithKey:key andBuildingInfoArray:self.buildingGroups[key]];
+        [self addChildViewController:collectionController];
+    }
     
     //add gallery table view
     [self addGalleryGroupView];
@@ -123,16 +129,31 @@
 -(void)addButtons
 {
     //add switch button
-    UIButton *switchButton = [[UIButton alloc]initWithFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, REMDMCOMPATIOS7( kDMCommon_TopLeftButtonTop),kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
-    [switchButton setBackgroundImage:REMIMG_Map forState:UIControlStateNormal];
+    UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    if (REMISIOS7) {
+        switchButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [switchButton setTintColor:[UIColor whiteColor]];
+    }
+    [switchButton setFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, REMDMCOMPATIOS7( kDMCommon_TopLeftButtonTop),kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
+    switchButton.adjustsImageWhenHighlighted=NO;
+    if (!REMISIOS7) {
+        switchButton.showsTouchWhenHighlighted=YES;
+    }
+    [switchButton setImage:REMIMG_Map forState:UIControlStateNormal];
     [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:switchButton];
     
     //add customer logo button
-    UIButton *logoButton = self.customerLogoButton;
-    logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
-    [self.view addSubview:logoButton];
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:REMAppContext.currentCustomerLogo];
+    logoView.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
+    logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
+    [self.view addSubview:logoView];
+    self.customerLogoView = logoView;
+    
+    
+    UIButton *settingButton=self.settingButton;
+    [self.view addSubview:settingButton];
 }
 
 -(void)stylize
@@ -150,7 +171,7 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.showsVerticalScrollIndicator = NO;
     tableView.showsHorizontalScrollIndicator = NO;
-    [tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
+    //[tableView registerClass:[REMGalleryGroupView class] forCellReuseIdentifier:kCellIdentifier_GalleryGroupCell];
     
     
 //    tableView.layer.borderColor = [UIColor blueColor].CGColor;
@@ -163,6 +184,28 @@
 -(void)switchButtonPressed
 {
     [self performSegueWithIdentifier:kSegue_GalleryToMap sender:self];
+}
+
+-(void)scrollToBuildingIndex:(int)currentBuildingIndex
+{
+    REMGalleryCollectionCell *cell = [self galleryCellForBuildingIndex:currentBuildingIndex];
+    
+    if(cell.superview.superview.superview!=nil)
+        return;
+    
+    REMBuildingOverallModel *buildingInfo = self.buildingInfoArray[currentBuildingIndex];
+    
+    int index = 0;
+    for(int i=0;i<self.orderedProvinceKeys.count;i++){
+        NSString *key = self.orderedProvinceKeys[i];
+        if([self.buildingGroups[key] containsObject:buildingInfo]){
+            index = i;
+            break;
+        }
+    }
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.galleryTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
 }
 
 
@@ -196,7 +239,8 @@
         [self addChildViewController:collectionController];
     }
     
-    REMGalleryGroupView *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier_GalleryGroupCell forIndexPath:indexPath];
+    //REMGalleryGroupView *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier_GalleryGroupCell forIndexPath:indexPath];
+    REMGalleryGroupView *cell = [[REMGalleryGroupView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Nil];
     
     [cell setGroupTitle:key];
     [cell setCollectionView:collectionController.view];
@@ -301,25 +345,54 @@
     UIView *collectionView = cell.superview;
     CGRect cellFrameInCollectionView = cell.frame;
     
-    
-    
-    //UIView *cycleView = collectionView;
-    //CGRect cellFrameInGalleryView = cellFrameInCollectionView;
-    
-    CGRect cellFrameInGalleryView = [collectionView convertRect:cellFrameInCollectionView toView:self.view];
-    
-    if([[collectionView superview] superview]==nil){
-        //int index  = [self.orderedProvinceKeys indexOfObject:cell.controller.collectionKey];
+    if(collectionView.superview.superview == nil){
         return CGRectMake(kDMCommon_ContentLeftMargin, 800, kDMGallery_GalleryCellWidth, kDMGallery_GalleryCellHeight);
+        //return [self.galleryTableView convertRect:[self calculateRectForCell:cell] toView:self.view]  ;
     }
     
-//    while(![cycleView isEqual:self.view] && cycleView!=nil){
+    return [collectionView convertRect:cellFrameInCollectionView toView:self.view];
+    
+//    
+//    UIView *cycleView = collectionView;
+//    CGRect cellFrameInGalleryView = cellFrameInCollectionView;
+//    
+//    
+//    
+//    while(![cycleView isEqual:self.view]){
 //        cellFrameInGalleryView = [cycleView convertRect:cellFrameInGalleryView toView: cycleView.superview];
 //        cycleView = cycleView.superview;
 //    }
-    
-    return cellFrameInGalleryView;
+//    
+//    return cellFrameInGalleryView;
 }
+
+//-(CGRect)calculateRectForCell:(REMGalleryCollectionCell *)cell
+//{
+//    NSString *province = cell.building.province;
+//    
+//    int keyIndex = [self.orderedProvinceKeys indexOfObject:province];
+//    int cellIndex = [self.buildingGroups[province] indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+//        REMBuildingOverallModel *buildingInfo = obj;
+//        if([buildingInfo.building isEqual:cell.building]){
+//            *stop = YES;
+//            return YES;
+//        }
+//        return NO;
+//    }];
+//    
+//    CGFloat topOffset = 0;
+//    if(keyIndex>=1){
+//        for(int i=1;i<keyIndex;i++){
+//            topOffset += REMGalleryTableCellHeight([self.buildingGroups[self.orderedProvinceKeys[i-1]] count]);
+//        }
+//    }
+//    
+//    topOffset += kDMGallery_GalleryGroupTitleFontSize + ((cellIndex/6) * (kDMGallery_GalleryCellVerticleSpace + kDMGallery_GalleryCellHeight));
+//    
+//    CGFloat leftOffset = (cellIndex % 6)*(self.galleryTableView.frame.size.width / 6);
+//    
+//    return CGRectMake(leftOffset, topOffset, kDMGallery_GalleryCellWidth, kDMGallery_GalleryCellHeight);
+//}
 
 -(void)takeSnapshot
 {

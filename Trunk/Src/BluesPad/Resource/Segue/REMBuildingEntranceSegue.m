@@ -65,7 +65,7 @@
     //add building view as subview into map view
     UIImageView *transitionView = [self getBuildingTransitionView];
     
-    transitionView.frame = sourceView.bounds;
+    transitionView.frame = CGRectMake(sourceView.frame.origin.x, sourceView.frame.origin.y, sourceView.frame.size.width, sourceView.frame.size.height);
     transitionView.transform = [REMViewHelper getScaleTransformFromOriginalFrame:self.parameter.initialZoomFrame andFinalFrame:self.parameter.finalZoomFrame];
     transitionView.center = [REMViewHelper getCenterOfRect:self.parameter.initialZoomFrame];
     
@@ -116,20 +116,58 @@
 {
     //if no image at all, use default
     NSArray *imageIds = [[self.sourceViewController buildingInfoArray][self.parameter.currentBuildingIndex] building].pictureIds;
-    if(imageIds == nil || imageIds.count <= 0)
-        return [[UIImageView alloc] initWithImage:REMIMG_DefaultBuilding];
+    if(imageIds == nil || imageIds.count <= 0){
+        UIImageView *imageView =[[UIImageView alloc] initWithImage:REMIMG_DefaultBuilding];
+        imageView.contentMode = UIViewContentModeTop;
+
+        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height * kDMCommon_ImageScale);
+        return imageView;
+    }
     
     //if there is large image, use large
     NSString *normalImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageNormal];
     NSString *smallImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageSmall];
-    if([[NSFileManager defaultManager] fileExistsAtPath:normalImagePath])
-        return [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:normalImagePath]];
+    
+    
+    
+    if([[NSFileManager defaultManager] fileExistsAtPath:normalImagePath]){
+        UIImage *scaled = [REMImageHelper imageWithImage:[UIImage imageWithContentsOfFile:normalImagePath] scaledWithFactor:kDMCommon_ImageScale];
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:scaled];
+        imageView.contentMode = UIViewContentModeTop;
+        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height * kDMCommon_ImageScale);
+        imageView.clipsToBounds = YES;
+        
+        return imageView;
+    }
     //if no large, use small
-    else if([[NSFileManager defaultManager] fileExistsAtPath:smallImagePath])
-        return [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:smallImagePath]];
+    else if([[NSFileManager defaultManager] fileExistsAtPath:smallImagePath]){
+        UIImage *original = [UIImage imageWithContentsOfFile:smallImagePath];
+        
+        CGSize size = CGSizeMake(2*original.size.width * kDMCommon_ImageScale, 2*original.size.height * kDMCommon_ImageScale);
+        
+        //resize image to cell size * factor
+        UIImage *resized = [REMImageHelper scaleImage:original toSize:size];
+        
+        //crop image
+        CGRect rect = CGRectMake((size.width - 2*original.size.width)/2, 0,2*original.size.width, 2*original.size.height);
+        UIImage *final = [REMImageHelper cropImage:resized toRect:rect];
+        
+        UIImageView *imageView =  [[UIImageView alloc] initWithImage:final];
+        imageView.contentMode = UIViewContentModeScaleToFill;
+        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height*kDMCommon_ImageScale);
+        imageView.clipsToBounds = YES;
+        return imageView;
+    }
     //if even no small, use default
-    else
-        return [[UIImageView alloc] initWithImage:REMIMG_DefaultBuilding];
+    else{
+        UIImage *scaled = REMIMG_DefaultBuilding;
+        UIImageView *imageView =  [[UIImageView alloc] initWithImage:scaled];
+        imageView.contentMode = UIViewContentModeTop;
+        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height * kDMCommon_ImageScale);
+        imageView.clipsToBounds = YES;
+        return imageView;
+    }
 }
 
 @end

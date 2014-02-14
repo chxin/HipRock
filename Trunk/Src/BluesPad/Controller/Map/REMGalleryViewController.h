@@ -27,5 +27,6 @@
 -(CGRect)getDestinationZoomRect:(int)currentBuildingIndex;
 -(void)takeSnapshot;
 -(REMGalleryCollectionCell *)galleryCellForBuildingIndex:(int)buildingIndex;
+-(void)scrollToBuildingIndex:(int)currentBuildingIndex;
 
 @end

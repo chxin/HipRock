@@ -11,10 +11,10 @@
 #import "WeiboAccounts.h"
 #import "REMAlertHelper.h"
 #import "REMSettingCustomerSelectionViewController.h"
-
+#import "REMUpdateAllManager.h"
 
 @interface REMSettingViewController ()
-
+@property (nonatomic) BOOL isLoggingOut;
 @end
 
 @implementation REMSettingViewController
@@ -38,13 +38,14 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     self.navigationController.navigationBar.topItem.backBarButtonItem=nil;
-    
+    self.isLoggingOut=NO;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     //self.navigationController=(UINavigationController *)self.parentViewController;
+    self.isLoggingOut=NO;
     
 }
 
@@ -58,16 +59,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (section == 0) return 2;
-    if (section == 1) return 2;
+    if (section == 0) return 4;
+    if (section == 1) return 1;
     if (section == 2) return 1;
     if (section == 3) return 1;
+    if (section == 4) return 1;
     return 0;
 }
 
@@ -77,9 +79,9 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-    
+    REMApplicationContext *context=REMAppContext;
     // weibo account binding cell
-    if (indexPath.section == 2 && indexPath.item == 0) {
+    if (indexPath.section == 1 && indexPath.item == 0) {
         [[cell textLabel]setText:NSLocalizedString(@"Setting_BindWeibo", @"")]; //绑定新浪微博
         cell.detailTextLabel.text=@"";
         UISwitch *switcher= [[UISwitch alloc]initWithFrame:CGRectZero];
@@ -96,19 +98,20 @@
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         if(indexPath.row==0){
             [[cell textLabel]setText:NSLocalizedString(@"Setting_UserName", @"")]; //显示名称
-            NSString *name=[REMApplicationContext instance].currentUser.realname;
+            
+            NSString *name=context.currentUser.realname;
+            
             [cell.detailTextLabel setText:name];
         }
-        else{
+        else if(indexPath.row==1){
             [[cell textLabel]setText:NSLocalizedString(@"Setting_EMOPID", @"")];//能源管理开发平台ID
-            NSString *name1=[REMApplicationContext instance].currentUser.name;
+            NSString *name1=context.currentUser.name;
+            if (context.currentUser.isDemo) {
+                name1=@"Demo";
+            }
             [cell.detailTextLabel setText:name1];
         }
-    }
-    else if(indexPath.section==1){
-        
-        
-        if(indexPath.row==0){
+        else if(indexPath.row==2){
             [[cell textLabel]setText:NSLocalizedString(@"Setting_CurrentCustomer", @"")];//当前客户
             NSString *name=[REMApplicationContext instance].currentCustomer.name;
             [cell.detailTextLabel setText:name];
@@ -119,7 +122,11 @@
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
     }
-    else if(indexPath.section==3 && indexPath.row==0 ){
+    else if (indexPath.section==2 && indexPath.row==0){
+        [[cell textLabel]setText:NSLocalizedString(@"Setting_About", @"")];//关于云能效
+        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    }
+    else if(indexPath.section==4 && indexPath.row==0 ){
         UITableViewCell *cell1 = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell1"];
         //[[cell textLabel]setText:@"退出登录"];
         cell1.textLabel.text=NSLocalizedString(@"Setting_Logout", @"");//@"退出登录";
@@ -143,15 +150,19 @@
          [logout addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
          [cell.contentView addSubview:logout];*/
     }
+    else if(indexPath.section==3 && indexPath.row==0){
+        cell.textLabel.text=NSLocalizedString(@"Setting_UpdateAll", @""); //@"更新全部数据";
+        cell.textLabel.textColor=[REMColor colorByHexString:@"#37ab3c"];
+    }
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.section==1 && indexPath.row==0){
+    if(indexPath.section==0 && indexPath.row==2){
         [self performSegueWithIdentifier:@"settingCustomerDetailSegue" sender:self];
     }
-    else if(indexPath.section==1 && indexPath.row==1){
-        
+    else if(indexPath.section==2 && indexPath.row==0){
+        [self performSegueWithIdentifier:@"settingAboutSegue" sender:self];
     }
 }
 
@@ -168,6 +179,9 @@
         if(buttonIndex==1){
             [self logoutAndClearCache];
         }
+        else{
+            self.isLoggingOut=NO;
+        }
     }
 }
 
@@ -181,27 +195,11 @@
 
 -(void)logoutAndClearCache
 {
-    REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
-    REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
-    
-    [currentUser kill];
-    [currentCustomer kill];
-    currentUser = nil;
-    currentCustomer = nil;
-    
-    [REMApplicationContext destroy];
-    
     UINavigationController *nav=(UINavigationController *)self.parentViewController;
     REMMainNavigationController *mainController=(REMMainNavigationController *)nav.presentingViewController;
-    //NSLog(@"child controllers before: %d", nav.childViewControllers.count);
+    
     [mainController dismissViewControllerAnimated:YES completion:^(void){
-        //self.view = nil;
-        //[nav popToRootViewControllerAnimated:NO];
-        //NSLog(@"child controllers after: %d", nav.childViewControllers.count);
-        [mainController logout:nil];
-        
-        [REMStorage clearSessionStorage];
-        [REMStorage clearOnApplicationActive];
+        [mainController logout];
     }];
 }
 
@@ -217,17 +215,22 @@
         
         [alertView show];
     } else if (!isAuthed && sender.on == YES){
-        [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
-            NSString *message = nil;
-            if (!error) {
-                message = NSLocalizedString(@"Weibo_AccountBindingSuccess", @"");
-            }
-            else {
-                message = [NSString stringWithFormat:NSLocalizedString(@"Weibo_AccountBindingFail", @""), error];
-                sender.on = NO;
-            }
-            [REMAlertHelper alert:message];
-        }];
+        NetworkStatus reachability = [REMNetworkHelper checkCurrentNetworkStatus];
+        if (reachability == NotReachable) {
+            [REMAlertHelper alert:REMLocalizedString(@"Weibo_NONetwork")];
+        } else {
+            [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
+                NSString *message = nil;
+                if (!error) {
+                    message = NSLocalizedString(@"Weibo_AccountBindingSuccess", @"");
+                }
+                else {
+                    message = [NSString stringWithFormat:NSLocalizedString(@"Weibo_AccountBindingFail", @""), error];
+                    sender.on = NO;
+                }
+                [REMAlertHelper alert:message];
+            }];
+        }
     }
 }
 
@@ -246,15 +249,41 @@
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO];
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if(indexPath.section == 3 && indexPath.row==0){
-        [self logout];
+    if(indexPath.section == 4 && indexPath.row==0){
+        if (self.isLoggingOut==NO) {
+            self.isLoggingOut=YES;
+            [self logout];
+        }
+        
         
     }
-    else if(indexPath.section==1 && indexPath.row==1){
+    else if(indexPath.section==0 && indexPath.row==3){
         [self performSegueWithIdentifier:@"settingCustomerDetailSegue" sender:self];
     }
-    else if(indexPath.section == 1 && indexPath.row==0){
+    else if(indexPath.section == 0 && indexPath.row==2){
         [self performSegueWithIdentifier:@"settingCustomerSelectionSegue" sender:self];
+    }
+    else if(indexPath.section==2 && indexPath.row==0){
+        [self performSegueWithIdentifier:@"settingAboutSegue" sender:self];
+    }
+    else if(indexPath.section==3 && indexPath.row==0){
+        __weak REMUpdateAllManager *manager=[REMUpdateAllManager defaultManager];
+        manager.canCancel=YES;
+        manager.updateSource=REMCustomerUserConcurrencySourceUpdate;
+        manager.mainNavigationController=(REMMainNavigationController *)self.presentingViewController;
+        [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
+            if (status == REMCustomerUserConcurrencyStatusSuccess) {
+                REMMainNavigationController *mainController=(REMMainNavigationController *)self.presentingViewController;
+                if (mainController!=nil) {
+                    [mainController dismissViewControllerAnimated:YES completion:^(void){
+                        [mainController presentInitialView];
+                    }];
+                }
+                else{
+                    [manager.mainNavigationController presentInitialView];
+                }                
+            }
+        }];
     }
 }
 
@@ -262,6 +291,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"settingCustomerSelectionSegue"]==YES){
         REMSettingCustomerSelectionViewController *selectionVc= segue.destinationViewController;
+        selectionVc.customerArray=[REMApplicationContext instance].currentUser.customers;
         //selectionVc.splashController=self.splashScreenController;
         //selectionVc.parentNavigationController=self.mainNavigationController;
         selectionVc.settingController=self;

@@ -167,14 +167,14 @@
 + (UIImage *)blurImage:(UIImage *)origImage
 {
     UIImage *image=origImage;
-    if(origImage.size.width>1024){
-        CGSize newSize=CGSizeMake(origImage.size.width/2, origImage.size.height/2);
-        UIGraphicsBeginImageContext(newSize);
-        [origImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        image=newImage;
-    }
+//    if(origImage.size.width>1024){
+//        CGSize newSize=CGSizeMake(origImage.size.width/2, origImage.size.height/2);
+//        UIGraphicsBeginImageContext(newSize);
+//        [origImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+//        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//        image=newImage;
+//    }
     
     //GPUImageView *primaryView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
     GPUImagePicture *pic=[[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput:YES];
@@ -182,7 +182,7 @@
     GPUImageGaussianBlurFilter *filter=[[GPUImageGaussianBlurFilter alloc]init];
     //[filter forceProcessingAtSize:CGSizeMake(1024, 768)];
     
-    filter.blurRadiusInPixels=13;
+    filter.blurRadiusInPixels=15;
     [pic addTarget:filter];
     //[filter addTarget:primaryView];
     [pic processImage];
@@ -302,7 +302,7 @@
     CGImageRelease(cgimg);
 }
 
-+ (UIImage *)parseImageFromNSData:(NSData *)data{
++ (UIImage *)parseImageFromNSData:(NSData *)data withScale:(CGFloat)scaleFactor{
     if (!data || [data length] == 0) {
         return nil;
     }
@@ -363,7 +363,7 @@
     
     UIScreen *screen = [UIScreen mainScreen];
     
-    CGRect frame=  CGRectMake(0, 0, screen.bounds.size.height*screen.scale, screen.bounds.size.width*screen.scale);
+    CGRect frame=  CGRectMake(0, 0, screen.bounds.size.height, screen.bounds.size.width);
     
     if(width>frame.size.width) {
         width=frame.size.width;
@@ -372,7 +372,8 @@
     if(height>frame.size.height){
         height=frame.size.height;
     }
-    
+    width*=scaleFactor;
+    height*=scaleFactor;
     
     CGContextRef context = CGBitmapContextCreate(NULL, width, height, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo);
     
@@ -472,6 +473,30 @@
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
+}
+
++ (UIImage*)imageWithImage:(UIImage*)image scaledWithFactor:(CGFloat)factor
+{
+    NSData* pictureData = UIImagePNGRepresentation(image);
+    
+    return [REMImageHelper parseImageFromNSData:pictureData withScale:factor];
+    
+}
+
++ (UIImage*)scaleImage:(UIImage*)image toSize:(CGSize)size
+{
+    UIGraphicsBeginImageContext( size );
+    [image drawInRect:CGRectMake(0,0,size.width,size.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
++(UIImage *)cropImage:(UIImage *)image toRect:(CGRect)rect
+{
+    UIImage *cropped = [UIImage imageWithCGImage:CGImageCreateWithImageInRect([image CGImage], rect)];
+    return cropped;
 }
 
 

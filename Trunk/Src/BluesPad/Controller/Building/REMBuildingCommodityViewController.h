@@ -12,7 +12,7 @@
 #import "REMBuildingTitleLabelView.h"
 #import "REMBuildingRankingView.h"
 
-@interface REMBuildingCommodityViewController : UIViewController
+@interface REMBuildingCommodityViewController : UIViewController<UIPopoverControllerDelegate>
 
 @property (nonatomic,weak) REMCommodityModel *commodityInfo;
 @property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
@@ -23,4 +23,7 @@
 @property (nonatomic,strong) REMCommodityUsageModel *commodityUsage;
 - (void) showChart;
 - (void)loadChartComplete;
+
+- (void)updateChartController;
+
 @end

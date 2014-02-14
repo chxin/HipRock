@@ -16,22 +16,22 @@
 #import "REMDimensions.h"
 #import "DCColumnWrapper.h"
 #import "DCLineWrapper.h"
+#import "DCPieWrapper.h"
 #import "DCPieChartView.h"
+#import "DCLabelingWrapper.h"
+#import "REMEnergyLabellingLevelData.h"
 #import "REMLocalizeKeys.h"
 #import "REMCustomerModel.h"
 #import "REMUserModel.h"
 #import "REMUserValidationModel.h"
+#import "REMChartHeader.h"
+#import "DCXYChartBackgroundBand.h"
 
 @interface REMSplashScreenController ()
 
-@property (nonatomic,weak) UIView *backgroundView;
-@property (nonatomic,weak) UIView *normalLogo;
-@property (nonatomic,weak) UIView *flashLogo;
-@property (nonatomic,weak) UIView *copyrightView;
 
 @property (nonatomic,weak) REMLoginCarouselController *carouselController;
 
-@property (nonatomic) NSMutableArray* plotSource;
 
 @end
 
@@ -42,363 +42,122 @@
     [super loadView];
     
     if(self){
-        //load background
         [self loadBackground];
-        
-        //load logo view
-        [self loadLogoView];
-        
-        //load copyright view
-        [self loadCopyrightView];
     }
 }
 
-- (void)loadBackground
+-(void)loadBackground
 {
-    if(self.backgroundView != nil){
-        return;
-    }
+    UIImage *backgroundImage = REMIMG_SplashScreenBackgroud; ///*[self isAlreadyLogin] ? REMIMG_MapBlur : */REMLoadImageResource(@"SplashScreenBackgroud", @"jpg");
     
-    UIImageView *background = [[UIImageView alloc] initWithImage:REMLoadImageResource(@"SplashScreenBackgroud", @"jpg")];
+    UIImageView *background = [[UIImageView alloc] initWithImage:backgroundImage];
     background.frame = REMISIOS7 ? CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight) : CGRectMake(0, -20, kDMScreenWidth, kDMScreenHeight);
     
     [self.view addSubview:background];
-    self.backgroundView = background;
-}
-
-- (void)loadLogoView
-{
-    //Normal logo and flash logo
-    if(self.logoView != nil){
-        return;
-    }
-    
-    CGSize logoSize = REMIMG_SplashScreenLogo_Common.size;
-    UIImageView *normalLogo = [[UIImageView alloc] initWithImage:REMIMG_SplashScreenLogo_Common];
-    UIImageView *flashLogo = [[UIImageView alloc] initWithImage:REMIMG_SplashScreenLogo_Flash];
-    flashLogo.alpha = 0.0f;
-    
-    //Title label
-    NSString *titleText = REMLocalizedString(@"Splash_Title");
-    UIFont *font = [UIFont systemFontOfSize:kDMSplash_TitleLabelFontSize];
-    CGSize labelSize = [titleText sizeWithFont:font];
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((logoSize.width - labelSize.width) / 2, logoSize.height + kDMSplash_TitleLabelTopOffsetRelativeToLogo, labelSize.width, labelSize.height)];
-    titleLabel.text = titleText;
-    titleLabel.font = font;
-    titleLabel.textColor = [REMColor colorByHexString:kDMSplash_TitleLabelFontColor];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    
-    //logo view
-    UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake((kDMScreenWidth-logoSize.width)/2, kDMSplash_LogoViewTopOffset, logoSize.width, logoSize.height + kDMSplash_TitleLabelTopOffsetRelativeToLogo + labelSize.height)];
-    [logoView addSubview:normalLogo];
-    [logoView addSubview:flashLogo];
-    [logoView addSubview:titleLabel];
-    
-    [self.view addSubview:logoView];
-    
-    self.logoView = logoView;
-    self.normalLogo = normalLogo;
-    self.flashLogo = flashLogo;
-}
-
-- (void)loadCopyrightView
-{
-    if(self.copyrightView!=nil){
-        return;
-    }
-    
-    NSString *copyrightText = REMLocalizedString(@"Splash_Copyright");
-    UIFont *font = [UIFont systemFontOfSize:kDMSplash_CopyrightLabelFontSize];
-    CGSize labelSize = [copyrightText sizeWithFont:font];
-    
-    UILabel *copyrightLabel = [[UILabel alloc] initWithFrame:CGRectMake((kDMScreenWidth - labelSize.width)/2, REMDMCOMPATIOS7(kDMScreenHeight-labelSize.height-kDMSplash_CopyrightLabelBottomOffset-kDMStatusBarHeight), labelSize.width, labelSize.height)];
-    copyrightLabel.text = copyrightText;
-    copyrightLabel.font = font;
-    copyrightLabel.textColor = [REMColor colorByHexString:kDMSplash_CopyrightLabelFontColor];
-    copyrightLabel.backgroundColor = [UIColor clearColor];
-    
-    [self.view addSubview:copyrightLabel];
-    self.copyrightView = copyrightLabel;
 }
 
 - (void)viewDidLoad
 {
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
-    //    [self.view addSubview:[[REMTrend alloc]initWithFrame:CGRectMake(100, 0, 924, 708)]];
-    
 //    [self oscarTest];
-    
-    
-    //decide where to go
-    [self recoverAppContext];
-    
     if([self isAlreadyLogin]){
-        //if network is ok and (user or customer does not exist) goto login
-        //else goto map
-        BOOL isNoConnect = [REMNetworkHelper checkIsNoConnect];
-        
-        if(isNoConnect){
-            [self breathShowMapView:YES:nil];
-        }
-        else{
-            REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserCustomerValidate parameter:@{@"userName":REMAppCurrentUser.name,@"customerId":REMAppCurrentCustomer.customerId}];
-            [REMDataAccessor access:store success:^(id data) {
-                REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
-                
-                if(validationResult.status == REMUserValidationSuccess){
-                    [self breathShowMapView:YES:nil];
-                }
-                else{
-                    //clear login info, TODO:should prompt user that will logout
-                    [REMAlertHelper alert:REMLocalizedString(@"Login_NotAuthorized")];
-                    
-                    REMUserModel *currentUser = [REMApplicationContext instance].currentUser;
-                    REMCustomerModel *currentCustomer = [REMApplicationContext instance].currentCustomer;
-                    
-                    [currentUser kill];
-                    [currentCustomer kill];
-                    currentUser = nil;
-                    currentCustomer = nil;
-                    
-                    [REMApplicationContext destroy];
-                    
-                    [self breathShowLoginView];
-                }
-            } error:^(NSError *error, id response) {
-                [self breathShowMapView:YES:nil];
-            }];
-        }
+        //perform splash map segue
+        [self showMapView];
     }
     else{
-        [self breathShowLoginView];
-    }
-}
-
--(void)breathShowMapView:(BOOL)isAfterBreathOnce :(void (^)(void))completed
-{
-    void (^breathLoadMapView)(void) = ^(void){
-        [self breathAnimation:nil];
-        
-        SEL selector = @selector(breathAnimation:);
-        
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:selector]];
-        [invocation setTarget:self];
-        [invocation setSelector:selector];
-        
-        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0 invocation:invocation repeats:YES];
-        
-        [self showMapView:^(void){
-            if(timer != nil){
-                if([timer isValid])
-                    [timer invalidate];
-            }
-            
-            if(completed)
-                completed();
-        }];
-    };
-    
-    if(isAfterBreathOnce == NO){
-        breathLoadMapView();
-    }
-    else{
-        [self breathAnimation:breathLoadMapView];
-    }
-}
-
--(void)breathShowLoginView
-{
-    [self breathAnimation:^(void){
-        [self.logoView setHidden:YES];
+        //play login carousel
         [self showLoginView:YES];
-    }];
-}
-
--(void)showLogoView
-{
-    if(self.carouselController!=nil){
-        [self.carouselController.view removeFromSuperview];
-        [self.carouselController removeFromParentViewController];
     }
-    
-    [self.logoView setHidden:NO];
 }
 
--(void)oscarTest {
-    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
-    syntax.xtype = @"columnchartcomponent";
-    syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
-    NSMutableArray* timeRanges = [[NSMutableArray alloc]initWithCapacity:1];
-    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10]];
-    [timeRanges setObject:r atIndexedSubscript:0];
-    syntax.timeRanges = timeRanges;
-    
-    REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
-    NSMutableArray* sereis = [[NSMutableArray alloc]init];
-    for (int sIndex = 0; sIndex < 10; sIndex++) {
-        NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
-        for (int i = 0; i < 10000; i++) {
-            REMEnergyData* data = [[REMEnergyData alloc]init];
-            data.quality = REMEnergyDataQualityGood;
-            if (i%5==0) {
-            
-            } else {
-                data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
-            }
-            data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
-            [energyDataArray addObject:data];
-        }
-        REMTargetEnergyData* sData = [[REMTargetEnergyData alloc]init];
-        sData.energyData = energyDataArray;
-        sData.target = [[REMEnergyTargetModel alloc]init];
-        sData.target.uomId = 0;
-        sData.target.uomName = [NSString stringWithFormat:@"%i", sIndex];
-        [sereis addObject:sData];
-    }
-    energyViewData.visibleTimeRange = r;
-    energyViewData.globalTimeRange = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10000]];
-    
-    energyViewData.targetEnergyData = sereis;
-    
-    REMChartStyle* style = [REMChartStyle getMaximizedStyle];
-//    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
-//    columnWidget.view.backgroundColor = [UIColor blackColor];
-//    [self.view addSubview:columnWidget.view];
-    
-    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:CGRectMake(0, 0, 1024, 748) data:energyViewData widgetContext:syntax style:style];
-    lineWidget.view.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:lineWidget.view];
-//    self.plotSource = lineWidget;
-//    DCPieChartView* vvv = [[DCPieChartView alloc]initWithFrame:CGRectMake(0, 0, 1024, 748)];
-//    [self.view addSubview:vvv];
-}
-
-
--(void)breathAnimation:(id)completed
+-(void)viewDidAppear:(BOOL)animated
 {
-    CGFloat animationTime = 1.5;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
-    CGFloat flashOriginalAlpha = 0;
-    CGFloat flashFinalAlpha = 0.9;
-    CGFloat normalOriginalAlpha = 1;
-    CGFloat normalFinalAlpha = 1;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
 
-    self.flashLogo.alpha = flashOriginalAlpha;
-    self.normalLogo.alpha = normalOriginalAlpha;
-    [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.flashLogo.alpha = flashFinalAlpha;
-        self.normalLogo.alpha = normalFinalAlpha;
-    } completion:^(BOOL finished) {
-        self.flashLogo.alpha = flashFinalAlpha;
-        self.normalLogo.alpha = normalFinalAlpha;
-        [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            self.flashLogo.alpha = flashOriginalAlpha;
-            self.normalLogo.alpha = normalOriginalAlpha;
-        } completion:^(BOOL finished){
-            if(completed!=nil)
-                ((void (^)(void))completed)();
-        }];
-    }];
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)keyboardWillShow:(NSNotification *)notification
+{
+    if (self.view.frame.origin.y >= 0)
+    {
+        [self setViewMovedUp:YES];
+    }
+}
+
+-(void)keyboardWillHide:(NSNotification *)notification
+{
+    if (self.view.frame.origin.y < 0)
+    {
+        [self setViewMovedUp:NO];
+    }
+}
+
+-(void)setViewMovedUp:(BOOL)movedUp
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+    
+    CGFloat distance = 40;
+    
+    CGRect rect = self.view.frame;
+    if (movedUp)
+    {
+        // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
+        // 2. increase the size of the view so that the area behind the keyboard is covered up.
+        rect.origin.y -= distance;
+        rect.size.height += distance;
+    }
+    else
+    {
+        // revert back to the normal state.
+        rect.origin.y += distance;
+        rect.size.height -= distance;
+    }
+    self.view.frame = rect;
+    
+    [UIView commitAnimations];
 }
 
 -(BOOL)isAlreadyLogin
 {
-    REMApplicationContext *context = REMAppContext;
-    
-    return context.currentUser!=nil && context.currentCustomer!=nil;
+    return REMAppContext.currentUser!=nil && REMAppContext.currentCustomer!=nil && REMAppContext.currentUser.isDemo == NO;
 }
 
--(void)recoverAppContext
-{
-    REMUserModel *storedUser = [REMUserModel getCached];
-    REMCustomerModel *storedCustomer = [REMCustomerModel getCached];
-    
-    [REMAppContext setCurrentUser:storedUser];
-    [REMAppContext setCurrentCustomer:storedCustomer];
-}
 
 - (void)showLoginView:(BOOL)isAnimated
 {
-    [self.logoView setHidden:YES];
     if(self.carouselController!=nil){
-//        [self.carouselController.view removeFromSuperview];
-//        self.carouselController = nil;
+        [self.carouselController.view removeFromSuperview];
+        [self.carouselController removeFromParentViewController];
         
-        [self.carouselController playCarousel:isAnimated];
+        self.carouselController.view = nil;
+        self.carouselController = nil;
     }
-    else{
-        self.carouselController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginCarousel"];
-        self.carouselController.showAnimation = isAnimated;
-        UIView *carouselView = self.carouselController.view;
-        carouselView.frame = self.view.bounds;
-        
-        [self addChildViewController:self.carouselController];
-        [self.view addSubview:carouselView];
-        
-        self.carouselController.splashScreenController = self;
-        
-        [self.carouselController playCarousel:isAnimated];
-    }
+    
+    self.carouselController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginCarousel"];
+    UIView *carouselView = self.carouselController.view;
+    carouselView.frame = self.view.bounds;
+    
+    [self addChildViewController:self.carouselController];
+    [self.view addSubview:carouselView];
+    
+    self.carouselController.splashScreenController = self;
+    
+    [self.carouselController playCarousel:isAnimated];
 }
 
-- (void)showMapView:(void (^)(void))loadCompleted
+- (void)showMapView
 {
-    NSDictionary *parameter = @{@"customerId":REMAppCurrentCustomer.customerId};
-    REMDataStore *buildingStore = [[REMDataStore alloc] initWithName:REMDSBuildingInfo parameter:parameter];
-    buildingStore.groupName = nil;
-    buildingStore.maskContainer = nil;
-    
-    [REMDataAccessor access:buildingStore success:^(id data) {
-        if([data count] <= 0){
-            [REMAlertHelper alert:REMLocalizedString(@"Login_NotAuthorized")];
-            
-            if([self isAlreadyLogin]){
-                [self showLoginView:NO];
-            }
-            
-            return;
-        }
-        
-        self.buildingInfoArray = [[NSMutableArray alloc] init];
-        
-        for(NSDictionary *item in (NSArray *)data){
-            [self.buildingInfoArray addObject:[[REMBuildingOverallModel alloc] initWithDictionary:item]];
-        }
-        
-        NSDictionary *parameter = @{@"customerId":REMAppCurrentCustomer.customerId};
-        REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter];
-        logoStore.groupName = nil;
-        logoStore.maskContainer = nil;
-        
-        [REMDataAccessor access:logoStore success:^(id data) {
-            UIImage *logo = nil;
-            
-            if(data != nil && [data length] > 2) {
-                logo = [REMImageHelper parseImageFromNSData:data];
-            }
-            
-            REMAppCurrentLogo = logo;
-            
-            if(loadCompleted!=nil)
-                loadCompleted();
-            
-            [self performSegueWithIdentifier:kSegue_SplashToMap sender:self];
-        } error:^(NSError *error, id response) {
-            if(loadCompleted!=nil)
-                loadCompleted();
-            
-            [self performSegueWithIdentifier:kSegue_SplashToMap sender:self];
-        }];
-        
-        
-    } error:^(NSError *error, id response) {
-        if(error.code != -1001 && error.code != 306) {
-            [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
-        }
-        
-        [self performSegueWithIdentifier:kSegue_SplashToMap sender:self];
-    }];
+    [self performSegueWithIdentifier:kSegue_SplashToMap sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -408,19 +167,12 @@
         REMLoginCarouselController *loginCarouselController = segue.destinationViewController;
         loginCarouselController.splashScreenController = self;
     }
-    else if([segue.identifier isEqualToString:kSegue_SplashToMap] == YES)
-    {
-        REMMapViewController *mapViewController = segue.destinationViewController;
-        mapViewController.buildingInfoArray = self.buildingInfoArray;
-        mapViewController.isInitialPresenting = YES;
+    if([segue.identifier isEqualToString:kSegue_SplashToMap]){
+        REMMapViewController *mapController = segue.destinationViewController;
+        mapController.isInitialPresenting = YES;
     }
 }
 
-- (void)stopBreath
-{
-//    [self.normalLogo.layer removeAllAnimations];
-//    [self.flashLogo.layer removeAllAnimations];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -438,5 +190,114 @@
 #endif
 }
 
-
+-(void)oscarTest {
+    REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
+    syntax.xtype = @"columnchartcomponent";
+    syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
+    NSMutableArray* timeRanges = [[NSMutableArray alloc]initWithCapacity:1];
+    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*12]];
+    [timeRanges setObject:r atIndexedSubscript:0];
+    syntax.timeRanges = timeRanges;
+    syntax.params = @{@"benchmarkOption":@{@"benchmarkText":@"TEST全行业Benckmark"}};
+    
+    REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
+    NSMutableArray* sereis = [[NSMutableArray alloc]init];
+    for (int sIndex = 0; sIndex < 3; sIndex++) {
+        NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
+        for (int i = 0; i < 10000; i++) {
+            REMEnergyData* data = [[REMEnergyData alloc]init];
+            data.quality = REMEnergyDataQualityGood;
+            //            if (i%5==0) {
+            //
+            //            } else {
+            data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
+            //            }
+            data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
+            [energyDataArray addObject:data];
+        }
+        REMTargetEnergyData* sData = [[REMTargetEnergyData alloc]init];
+        sData.energyData = energyDataArray;
+        sData.target = [[REMEnergyTargetModel alloc]init];
+        sData.target.targetId = @(1);
+        sData.target.name = @"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
+        sData.target.uomId = 0;
+        sData.target.uomName = [NSString stringWithFormat:@"UOM%i", sIndex];
+        [sereis addObject:sData];
+    }
+    energyViewData.visibleTimeRange = r;
+    energyViewData.globalTimeRange = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*10000]];
+    
+    NSMutableArray *labellings=[[NSMutableArray alloc]initWithCapacity:5];
+    for (int i=0; i<3; ++i) {
+        REMEnergyLabellingLevelData* a = [[REMEnergyLabellingLevelData alloc]init];
+        a.name = @"FFFF0";
+        a.maxValue = @((i + 1) * 20);
+        a.maxValue = @(i * 20);
+        a.uomId = 0;
+        a.uom = [NSString stringWithFormat:@"UOM%i", i];
+        [labellings addObject:a];
+    }
+    energyViewData.labellingLevelArray = labellings;
+    energyViewData.targetEnergyData = sereis;
+    REMChartStyle* style = nil;
+    CGRect frame;
+    BOOL mini = NO;
+    if (mini) {
+        style = [REMChartStyle getMinimunStyle];
+        frame = CGRectMake(0, 0, 222, 108);
+    } else {
+        style = [REMChartStyle getMaximizedStyle];
+        frame = CGRectMake(0, 0, 974, 605);
+    }
+    
+    //    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
+    //    [self.view addSubview:pieWrapper.view];
+    //    self.plotSource = pieWrapper;
+//    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
+//    columnWidget.view.backgroundColor = [UIColor blackColor];
+//    columnWidget.view.hasVGridlines = YES;
+//    columnWidget.view.graphContext.hGridlineAmount = 4;
+//    [self.view addSubview:columnWidget.view];
+    
+    //    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
+    //    lineWidget.view.backgroundColor = [UIColor blackColor];
+    //    NSMutableArray* bands = [[NSMutableArray alloc]init];
+    //    DCRange* bandRange = [[DCRange alloc]initWithLocation:0 length:20];
+    //    DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
+    //    b.range = bandRange;
+    //    b.color = [UIColor colorWithRed:0.5 green:0 blue:0 alpha:0.5];
+    //    b.axis = lineWidget.view.yAxisList[0];
+    //    [bands addObject:b];
+    ////    [lineWidget.view setBackgoundBands:bands];
+    //    [self.view addSubview:lineWidget.view];
+    //    self.plotSource = lineWidget;
+    
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 605, 100, 30)];
+    //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
+    [btn setTitle:@"show/hide" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn setTitleColor:[REMColor colorByHexString:@"#00ff48"] forState:UIControlStateSelected];
+    [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    UIButton *btn1 = [[UIButton alloc]initWithFrame:CGRectMake(100, 605, 100, 30)];
+    //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
+    [btn1 setTitle:@"show/hide" forState:UIControlStateNormal];
+    [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn1 setTitleColor:[REMColor colorByHexString:@"#00ff48"] forState:UIControlStateSelected];
+    [btn1 addTarget:self action:@selector(buttonPressed1:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn1];
+    UIButton *btn2 = [[UIButton alloc]initWithFrame:CGRectMake(200, 605, 100, 30)];
+    //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
+    [btn2 setTitle:@"show/hide" forState:UIControlStateNormal];
+    [btn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn2 setTitleColor:[REMColor colorByHexString:@"#00ff48"] forState:UIControlStateSelected];
+    [btn2 addTarget:self action:@selector(buttonPressed2:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn2];
+    
+    //    DCLabelingWrapper* labelingWrapper = [[DCLabelingWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
+    //    self.plotSource = labelingWrapper;
+    //    [labelingWrapper getView].backgroundColor = [UIColor whiteColor];
+    //    [self.view addSubview:[labelingWrapper getView]];
+    //    labelingWrapper.delegate = self;
+}
 @end

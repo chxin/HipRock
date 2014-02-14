@@ -14,14 +14,20 @@
 #import "REMWidgetObject.h"
 #import "REMWidgetSearchModelBase.h"
 
+typedef enum _REMEnergySearcherLoadingType{
+    REMEnergySearcherLoadingTypeSmall,
+    REMEnergySearcherLoadingTypeLarge
+} REMEnergySearcherLoadingType;
+
 @interface REMEnergySeacherBase : NSObject
 
 @property (nonatomic,weak) REMWidgetObject *widgetInfo;
 @property (nonatomic,weak) REMWidgetSearchModelBase *model;
+@property (nonatomic) BOOL disableNetworkAlert;
 
 @property (nonatomic,strong) UIActivityIndicatorView *loadingView;
 @property (nonatomic,strong) UIView *loadingBackgroundView;
-
+@property (nonatomic) REMEnergySearcherLoadingType loadingType;
 
 
 + (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType) storeType withWidgetInfo:(REMWidgetObject *)widgetInfo;

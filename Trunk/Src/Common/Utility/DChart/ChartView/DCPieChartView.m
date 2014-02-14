@@ -9,16 +9,20 @@
 #import "DCPieChartView.h"
 #import "REMColor.h"
 #import "DCPieChartAnimationManager.h"
+#import "REMChartHeader.h"
+#import "DCPieLayer.h"
 
 @interface DCPieChartView()
-@property (nonatomic,strong) UIPanGestureRecognizer* panGesRec;
+@property (nonatomic,strong) UIPanGestureRecognizer* panGsRec;
+@property (nonatomic,strong) UITapGestureRecognizer* tapGsRec;
+@property (nonatomic, strong) CAShapeLayer* indicatorLayer;
 
-@property (nonatomic,assign) int panState; // 1表示已经开始，0表示正在Pan，-1表示Pan已经停止
+@property (nonatomic,assign) int panState; // 1表示已经开始，-1表示Pan已经停止
 @property (nonatomic,assign) CGFloat panSpeed;
 
-@property (nonatomic,assign) CGPoint indicatorPoint; // indicator针尖的点位置
-
 @property (nonatomic,strong) DCPieChartAnimationManager* animationManager;
+
+@property (nonatomic,strong) DCPieLayer* pieLayer;
 @end
 
 @implementation DCPieChartView
@@ -28,6 +32,11 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
+        self.indicatorLayer = [[CAShapeLayer alloc]init];
+        self.indicatorLayer.contentsScale = [UIScreen mainScreen].scale;
+        self.indicatorLayer.hidden = YES;
+        [self.layer addSublayer:self.indicatorLayer];
+        
         _animationManager = [[DCPieChartAnimationManager alloc]initWithPieView:self];
         _rotationAngle = 0;
         _fullAngle = 0;
@@ -36,46 +45,81 @@
         _radiusForShadow = 0;
         _panState = -1;
         _showIndicator = NO;
+        _playBeginAnimation = YES;
+        
+        _focusPointIndex = 0;
         
         _series = series;
+        
+        self.animationManager.series = series;
+        self.pieLayer = [[DCPieLayer alloc]init];
+        self.pieLayer.animationManager = self.animationManager;
+        self.pieLayer.view = self;
+        self.pieLayer.frame = CGRectMake(self.center.x, self.center.y, 0, 0);
+        [self.layer addSublayer:self.pieLayer];
+        self.tapGsRec = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewTapped:)];
+        [self addGestureRecognizer:self.tapGsRec];
+        self.panGsRec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(viewPanned:)];
+        [self addGestureRecognizer:self.panGsRec];
+        self.panGsRec.maximumNumberOfTouches = 1;
+        self.tapGsRec.cancelsTouchesInView = NO;
+        self.panGsRec.cancelsTouchesInView = NO;
     }
     return self;
 }
-                               
--(void)didMoveToSuperview {
-    [super didMoveToSuperview];
-    if (self.userInteractionEnabled) {
-        self.panGesRec = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(viewPan:)];
-        self.panGesRec.cancelsTouchesInView = NO;
-        [self addGestureRecognizer:self.panGesRec];
-    }
-    if (self.series.sumVisableValue > 0) {
-        double targetRotation = 0;
-        for (int i = 0; i < self.series.pieSlices.count; i++) {
-            if (REMIsNilOrNull(self.series.pieSlices[i])) continue;
-            DCPieSlice slice;
-            [self.series.pieSlices[i] getValue:&slice];
-            targetRotation = slice.sliceCenter;
-            break;
-        }
-        DCPieChartAnimationFrame* targetFrame = [[DCPieChartAnimationFrame alloc]init];
-        targetFrame.radius = @(self.radius);
-        targetFrame.radiusForShadow = @(self.radiusForShadow);
-        targetFrame.rotationAngle = @(1.5-targetRotation); // Indicator在1.5*PI的位置
-        targetFrame.fullAngle = @(2);
-        targetFrame.indicatorAlpha = @(0.8);
+
+-(void)updateGestures {
+    self.tapGsRec.enabled = self.chartStyle.acceptTap;
+    self.panGsRec.enabled = self.chartStyle.acceptPan;
+}
+
+-(void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    [self updateGestures];
+    
+    CGFloat indicatorXCentre = CGRectGetWidth(self.bounds) / 2;
+    CGFloat indicatorSize = self.chartStyle.focusSymbolIndicatorSize;
+    self.indicatorLayer.fillColor = self.chartStyle.indicatorColor.CGColor;
+    UIBezierPath* indicatorPath = [UIBezierPath bezierPath];
+    [indicatorPath moveToPoint:CGPointMake(indicatorXCentre - indicatorSize / 2, 0)];
+    [indicatorPath addLineToPoint:CGPointMake(indicatorXCentre + indicatorSize / 2, 0)];
+    [indicatorPath addLineToPoint:CGPointMake(indicatorXCentre, indicatorSize / 2)];
+    [indicatorPath closePath];
+    self.indicatorLayer.path = indicatorPath.CGPath;
+    
+    double targetRotation = [self.animationManager findNearbySliceCenter:0];
+    DCPieChartAnimationFrame* targetFrame = [[DCPieChartAnimationFrame alloc]init];
+    targetFrame.radius = @(self.radius);
+    targetFrame.radiusForShadow = @(self.radiusForShadow);
+    targetFrame.rotationAngle = @(-targetRotation);
+    targetFrame.fullAngle = @(2);
+    targetFrame.indicatorAlpha = @(0.8);
+    if (self.playBeginAnimation) {
         self.radius = 0;
         self.radiusForShadow = 0;
         [self.animationManager animateToFrame:targetFrame];
+    } else {
+        [self.animationManager playFrames:@[targetFrame]];
     }
+    self.pieLayer.frame = CGRectMake(self.center.x-targetFrame.radiusForShadow.doubleValue, self.center.y-targetFrame.radiusForShadow.doubleValue, targetFrame.radiusForShadow.doubleValue*2, targetFrame.radiusForShadow.doubleValue*2);
+    
 }
 
--(void)viewPan:(UIPanGestureRecognizer*)gesture {
+-(void)redraw {
+    [self.pieLayer setNeedsDisplay];
+}
+
+-(void)viewPanned:(UIPanGestureRecognizer*)gesture {
     CGPoint panPoint = [gesture locationInView:self];
     if (gesture.state == UIGestureRecognizerStateBegan) {
         if ([self isPointInPie:panPoint]) {
+            [self hidePercentageTexts];
             self.panState = 1;
+            [self sendTouchBeganEvent];
         }
+    }
+    if (gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateEnded) {
+        self.panState = -1;
     }
     if (self.panState == 1) {
         CGPoint translation = [gesture translationInView:self];
@@ -89,7 +133,26 @@
         [gesture setTranslation:CGPointMake(0, 0) inView:self];
         
         self.panSpeed = rotation;
-        [self setNeedsDisplay];
+        [self redraw];
+    }
+}
+
+-(void)sendTouchBeganEvent {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(touchBegan)]) {
+        [self.delegate touchBegan];
+    }
+}
+
+-(void)viewTapped:(UITapGestureRecognizer *)gesture {
+    [self sendTouchBeganEvent];
+    [self sendPointFocusEvent];
+}
+
+-(void)sendPointFocusEvent {
+    // 找到预计旋转角度对应的扇区的中线位置
+    _focusPointIndex = [self.animationManager findIndexOfSlide:self.rotationAngle];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(pieRotated)]) {
+        [self.delegate pieRotated];
     }
 }
 
@@ -100,27 +163,30 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
-    if (self.series.sumVisableValue <= 0) return;
-    if (self.panSpeed != 0) {
+    if ([self.animationManager getVisableSliceSum] <= 0) return;
+    if (fabs(self.panSpeed) >= 0.05) {
         [self.animationManager rotateWithInitialSpeed:self.panSpeed];
-        self.panSpeed = 0;
+    } else {
+        [self.animationManager playFrames:[self.animationManager getAngleTurningFramesFrom:self.rotationAngle to:2-[self.animationManager findNearbySliceCenter:self.rotationAngle]]];
     }
+    self.panSpeed = 0;
 }
-
--(NSUInteger)sumFrom1To:(NSUInteger)i {
-    return (1 + i) * i / 2;
-}
-
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     [self.animationManager stopTimer];
     self.panSpeed = 0;
+    _rotateDirection = REMDirectionNone;
 }
 
 -(void)setRotationAngle:(CGFloat)rotationAngle {
     if (rotationAngle >= 2) rotationAngle -= 2;
     if (rotationAngle < 0) rotationAngle += 2;
+    double delta = rotationAngle - self.rotationAngle;
+    if (rotationAngle == self.rotationAngle) _rotateDirection = REMDirectionNone;
+    else if (fabs(delta) > 1) _rotateDirection = REMDirectionLeft;
+    else _rotateDirection = REMDirectionRight;
     _rotationAngle = rotationAngle;
+    [self sendPointFocusEvent];
 }
 
 -(void)setFullAngle:(CGFloat)fullAngle {
@@ -130,41 +196,22 @@
     _fullAngle = fullAngle;
 }
 
--(void)drawRect:(CGRect)rect {
-    // Nothing to do but cannot be removed.
+-(void)setSlice:(DCPieDataPoint *)slice hidden:(BOOL)hidden {
+    if (slice.hidden == hidden) return;
+    [self.animationManager setPoint:slice hidden:hidden];
 }
 
--(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx {
-    [super drawLayer:layer inContext:ctx];
-    if (self.series.sumVisableValue > 0) {
-        _indicatorPoint = CGPointMake(self.center.x, self.center.y-self.radius*2/3);
-        UIColor* shadowColor = [REMColor colorByHexString:kDCPieShadowColor alpha:self.indicatorAlpha];
-        CGContextSetFillColorWithColor(ctx, shadowColor.CGColor);
-        CGContextMoveToPoint(ctx, self.center.x, self.center.y);
-        CGContextAddArc(ctx, self.center.x, self.center.y, self.radiusForShadow, 0, M_PI*2, 0);
-        CGContextDrawPath(ctx, kCGPathFill);
-        
-        CGFloat startAnglePI = self.rotationAngle * M_PI;
-        for (int i = 0; i < self.series.datas.count; i++) {
-            DCPieDataPoint* point = self.series.datas[i];
-            if (point.hidden || point.pointType != DCDataPointTypeNormal) continue;
-            CGFloat pieSlicePI = point.value.doubleValue / self.series.sumVisableValue * M_PI * self.fullAngle;
-            UIColor* color = [REMColor colorByIndex:i].uiColor;
-            CGContextSetFillColorWithColor(ctx, color.CGColor);
-            CGContextMoveToPoint(ctx, self.center.x, self.center.y);
-            CGContextAddArc(ctx, self.center.x, self.center.y, self.radius, startAnglePI, pieSlicePI+startAnglePI, 0);
-            CGContextDrawPath(ctx, kCGPathFill);
-            startAnglePI+=pieSlicePI;
-        }
-        
-        if(self.indicatorAlpha > 0 && self.showIndicator) {
-            UIColor* indicatorColor = [REMColor colorByHexString:kDCPieIndicatorColor alpha:self.indicatorAlpha];
-            CGContextSetFillColorWithColor(ctx, indicatorColor.CGColor);
-            CGContextMoveToPoint(ctx, self.indicatorPoint.x, self.indicatorPoint.y);
-            CGContextAddArc(ctx, self.center.x, self.center.y, self.radius+.2, -M_PI/20-M_PI/2, M_PI/20-M_PI/2, 0);
-            CGContextDrawPath(ctx, kCGPathFill);
-        }
-    }
+-(void)showPercentageTexts {
+    self.pieLayer.percentageTextHidden = NO;
+    [self.pieLayer setNeedsDisplay];
 }
 
+-(void)hidePercentageTexts {
+    self.pieLayer.percentageTextHidden = YES;
+    [self.pieLayer setNeedsDisplay];
+}
+
+-(void)setIndicatorHidden:(BOOL)hidden {
+    self.indicatorLayer.hidden = hidden;
+}
 @end

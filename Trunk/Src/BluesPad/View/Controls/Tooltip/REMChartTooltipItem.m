@@ -63,6 +63,7 @@
 - (void)updateModel:(REMChartTooltipItemModel *)model
 {
     self.nameLabel.text = model.title;
+    self.nameLabel.textColor = model.color;
     
     [self updateDataValue:model];
 }

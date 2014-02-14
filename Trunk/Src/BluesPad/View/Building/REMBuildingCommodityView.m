@@ -27,6 +27,12 @@
 }
 */
 
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *view=[super hitTest:point withEvent:event];
+    return view;
+}
+
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
     BOOL ret=[super pointInside:point withEvent:event];
     return ret;

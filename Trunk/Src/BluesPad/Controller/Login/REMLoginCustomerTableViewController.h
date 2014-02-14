@@ -7,9 +7,29 @@
 --------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
 #import "REMLoginCardController.h"
+#import "REMCustomerModel.h"
 
-@interface REMLoginCustomerTableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic,weak) REMLoginCardController *loginCardController;
+@protocol REMLoginCustomerSelectionDelegate <NSObject>
+
+-(void)customerSelectionTableView:(UITableView *)table didSelectCustomer:(REMCustomerModel *)customer;
+-(void)customerSelectionTableViewdidDismissView;
+
+@end
+
+@protocol REMCustomerSelectionInterface
+
+- (void)customerSelectionTableViewUpdate;
+
+@property (nonatomic,strong) NSArray *customerArray;
+
+
+
+@end
+
+@interface REMLoginCustomerTableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource,REMCustomerSelectionInterface>
+@property (nonatomic) BOOL hideCancelButton;
+@property (nonatomic,weak) NSObject<REMLoginCustomerSelectionDelegate> *delegate;
+@property (nonatomic,strong) id holder;
 
 @end

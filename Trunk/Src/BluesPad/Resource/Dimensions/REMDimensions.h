@@ -41,10 +41,10 @@
 
 #define kDMCommon_TopLeftButtonTop 23
 
-#define kDMCommon_TopLeftButtonWidth 32
+#define kDMCommon_TopLeftButtonWidth 26
 #define kDMCommon_TopLeftButtonHeight 32
 
-#define kDMCommon_CustomerLogoLeft kDMCommon_TopLeftButtonLeft + kDMCommon_TopLeftButtonWidth + 4
+#define kDMCommon_CustomerLogoLeft kDMCommon_TopLeftButtonLeft + kDMCommon_TopLeftButtonWidth + 8
 
 #define kDMCommon_CustomerLogoTop 18
 
@@ -57,6 +57,7 @@
 #define kDMCommon_TitleGradientLayerHeight REMDMCOMPATIOS7(109)
 #define kDMCommon_TitleGradientLayerFrame CGRectMake(0,0,kDMScreenWidth,kDMCommon_TitleGradientLayerHeight)
 
+#define kDMCommon_ImageScale 1.02
 
 
 #endif

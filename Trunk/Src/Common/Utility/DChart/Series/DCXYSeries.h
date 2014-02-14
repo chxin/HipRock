@@ -11,17 +11,20 @@
 #import "DCRange.h"
 #import "REMEnergyTargetModel.h"
 #import "_DCCoordinateSystem.h"
+#import "_DCLayer.h"
 
 
 @interface DCXYSeries : DCSeries<DCContextHRangeObserverProtocal>
 @property (nonatomic, strong) DCRange* visableRange;
 @property (nonatomic, readonly) NSNumber* visableYMax;
 @property (nonatomic, readonly) NSNumber* visableYMin;
+@property (nonatomic, strong) NSNumber* visableYMaxThreshold; // visableYMax不允许小于这个值
 @property (nonatomic, weak) DCAxis* xAxis;
 @property (nonatomic, weak) DCAxis* yAxis;
 @property (nonatomic, weak) REMEnergyTargetModel* target;
 @property (nonatomic, weak) _DCCoordinateSystem* coordinate;
 //@property (nonatomic, assign) CGFloat pointXOffset;
+@property (nonatomic, weak) _DCLayer* layer;
 
 @property (nonatomic, assign)BOOL hidden;
 

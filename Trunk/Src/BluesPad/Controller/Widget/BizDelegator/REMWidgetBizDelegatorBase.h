@@ -23,10 +23,12 @@
 @property (nonatomic,weak) UIView *view;
 @property (nonatomic,strong) REMEnergySeacherBase *searcher;
 @property (nonatomic,strong) REMWidgetSearchModelBase *model;
+@property (nonatomic,strong) REMWidgetSearchModelBase *tempModel;
 @property (nonatomic,strong) NSString *groupName;
 @property (nonatomic,weak) UIView *maskerView;
 @property (nonatomic,weak) REMWidgetDetailViewController *ownerController;
 @property (nonatomic,copy) NSString *status;
+@property (nonatomic,weak) UIView *chartContainer;
 
 + (REMWidgetBizDelegatorBase *)bizDelegatorByWidgetInfo:(REMWidgetObject *)widgetInfo;
 
@@ -34,11 +36,28 @@
 
 - (void) doSearchWithModel:(REMWidgetSearchModelBase *)model callback:(void(^)(REMEnergyViewData *data,REMBusinessErrorInfo *error))callback;
 
+- (void)searchData:(REMWidgetSearchModelBase *)model;
+
+- (void)rollbackWithError:(REMBusinessErrorInfo *)error;
+
+- (void)processEnergyDataInnerError:(id)data;
+
+- (void)reloadChart;
+
 - (void) showChart;
+
+- (void) showPopupMsg:(NSString *)msg;
+- (void) hidePopupMsg;
 
 -(void) releaseChart;
 
-- (void)rollback;
+- (BOOL) shouldPinToBuildingCover;
+
+- (BOOL) shouldEnablePinToBuildingCoverButton;
+
+- (CGFloat) xPositionForPinToBuildingCoverButton;
+
+- (void)mergeTempModel;
 
 
 @end

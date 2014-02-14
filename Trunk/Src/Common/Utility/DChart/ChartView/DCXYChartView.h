@@ -11,9 +11,11 @@
 #import "DCAxis.h"
 #import "DCXYSeries.h"
 #import "DCXYChartViewDelegate.h"
-#import "_DCBackgroundBandsLayer.h"
 
-@interface DCXYChartView : UIView<DCContextHRangeObserverProtocal>
+@interface DCXYChartView : UIView<DCContextHRangeObserverProtocal,UIGestureRecognizerDelegate>
+@property (nonatomic, assign) BOOL acceptPan;
+@property (nonatomic, assign) BOOL acceptPinch;
+@property (nonatomic, assign) BOOL acceptTap;
 @property (nonatomic, strong) DCAxis* xAxis;
 //@property (nonatomic, strong) DCAxis* yAxis0;
 //@property (nonatomic, strong) DCAxis* yAxis1;
@@ -22,10 +24,14 @@
 
 @property (nonatomic, strong) DCContext* graphContext;
 
+@property (nonatomic, assign) BOOL hasVGridlines;
 
 @property (nonatomic,assign) float hGridlineWidth;
 @property (nonatomic) UIColor* hGridlineColor;
 @property (nonatomic,assign) DCLineType hGridlineStyle;
+@property (nonatomic,assign) float vGridlineWidth;
+@property (nonatomic) UIColor* vGridlineColor;
+@property (nonatomic,assign) DCLineType vGridlineStyle;
 @property (nonatomic, assign) CGFloat plotPaddingTop;
 @property (nonatomic, assign) CGFloat plotPaddingLeft;
 @property (nonatomic, assign) CGFloat plotPaddingRight;
@@ -44,11 +50,13 @@
 @property (nonatomic, strong) UIFont* backgroundBandFont;
 @property (nonatomic, strong) UIColor* backgroundBandFontColor;
 
-@property (nonatomic, assign) BOOL blockReboundAnimation;   // YES的时候禁止回弹动画
+@property (nonatomic, assign) BOOL xAxisLabelClipToBounds;
+
+-(DCRange*)getRangeOfAxis:(DCAxis*)axis;
 
 - (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange stacked:(BOOL)stacked;
 
-//- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden;
+- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden;
 
 -(void)setXLabelFormatter:(NSFormatter*)formatter;
 //@property (nonatomic) NSArray* axis;

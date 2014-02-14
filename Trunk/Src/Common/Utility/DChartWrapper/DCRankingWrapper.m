@@ -38,7 +38,7 @@
     s.xAxis = view.xAxis;
 //    s.yAxis = view.yAxis0;
     s.yAxis.axisTitle = targetEnergy.target.uomName;
-    s.color = [REMColor colorByIndex:0].uiColor;
+    s.color = [REMColor colorByIndex:0];
     [self customizeSeries:s seriesIndex:index chartStyle:style];
     
     if (self.sortOrder == NSOrderedDescending) [self swapeAllDatas:s];
@@ -52,21 +52,26 @@
 -(void)customizeView:(DCXYChartView*)view {
     view.graphContext.pointAlignToTick = NO;
     view.graphContext.xLabelAlignToTick = NO;
+    REMTargetEnergyData* t = nil;
+    if (!REMIsNilOrNull(self.energyViewData) && self.energyViewData.targetEnergyData.count > 0) t = self.energyViewData.targetEnergyData[0];
+    if (!REMIsNilOrNull(t) && !REMIsNilOrNull(t.target) && !(REMIsNilOrNull(t.target.uomName)))
+        ((DCAxis*)view.yAxisList[0]).axisTitle = t.target.uomName;
 }
 
 -(NSArray*)createYAxes:(NSArray*)series {
     DCXYSeries* s = series[0];
     DCAxis* y = [[DCAxis alloc]init];
+    y.coordinate = DCAxisCoordinateY;
     s.yAxis = y;
     y.axisTitle = REMEmptyString;
     y.labelToLine = self.style.yLabelToLine;
-    if (self.style.yLineStyle) {
-        y.lineColor = self.style.yLineStyle.lineColor.uiColor;
-        y.lineWidth = self.style.yLineStyle.lineWidth;
+    if (self.style.yLineWidth > 0) {
+        y.lineColor = self.style.yLineColor;
+        y.lineWidth = self.style.yLineWidth;
     }
-    if (self.style.yTextStyle) {
-        y.labelColor = self.style.yTextStyle.color.uiColor;
-        y.labelFont = [UIFont fontWithName:self.style.yTextStyle.fontName size:self.style.yTextStyle.fontSize];
+    if (self.style.yTextFont) {
+        y.labelColor = self.style.yTextColor;
+        y.labelFont = self.style.yTextFont;
     }
     y.axisTitleColor = self.style.yAxisTitleColor;
     y.axisTitleToTopLabel = self.style.yAxisTitleToTopLabel;
@@ -74,7 +79,7 @@
     return @[y];
 }
 
--(void)setSeriesHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
+-(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
     // Nothing to do. cannot hide series in ranking chart.
 }
 
@@ -99,9 +104,9 @@
     return @{ @"globalRange": [[DCRange alloc]initWithLocation:0 length:datasAmount], @"beginRange": [[DCRange alloc]initWithLocation:0 length:MIN(rangeCode, datasAmount)], @"xformatter": [NSNull null] };
 }
 
--(void)extraSyntax:(REMWidgetContentSyntax*)syntax {
-    _rankingRangeCode = syntax.rankingRangeCode;
-    _sortOrder = syntax.rankingSortOrder;
+-(void)extraSyntax:(DWrapperConfig*)wrapperConfig {
+    _rankingRangeCode = wrapperConfig.rankingRangeCode;
+    _sortOrder = wrapperConfig.rankingDefaultSortOrder;
 }
 
 -(void)quickSort:(NSMutableArray*)energyList left:(int)left right:(int)right {
@@ -159,5 +164,14 @@
     } else {
         [self.view focusAroundX:x];
     }
+}
+
+-(DCRange*)updatePinchRange:(DCRange*)newRange pinchCentreX:(CGFloat)centreX pinchStopped:(BOOL)stopped {
+    DCRange* globalRange= self.view.graphContext.globalHRange;
+    double returnRangeEnd = newRange.end;
+    double returnRangeStart = newRange.location;
+    if (returnRangeStart < globalRange.location) returnRangeStart = globalRange.location;
+    if (returnRangeEnd > globalRange.end) returnRangeEnd = globalRange.end;
+    return [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
 }
 @end

@@ -16,6 +16,7 @@ const BOOL kDCDefaultSuspendRedraw = NO;
     if (self) {
         self.graphContext = context;
         self.contentsScale = [[UIScreen mainScreen] scale];
+        self.backgroundColor = [UIColor clearColor].CGColor;
     }
     return self;
 }

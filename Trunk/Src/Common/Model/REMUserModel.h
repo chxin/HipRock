@@ -37,12 +37,11 @@ typedef enum _REMUserTitleType : NSUInteger {
 @property (nonatomic,strong) NSString *userTypeName;
 @property (nonatomic,strong) NSNumber *version;
 @property (nonatomic) long long spId;
+@property (nonatomic) BOOL isDemo;
 
 
 - (void)save;
 - (void)kill;
 + (REMUserModel *)getCached;
-
-+(void)clean;
 
 @end

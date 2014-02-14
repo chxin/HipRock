@@ -13,6 +13,7 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMMapGallerySegue.h"
 #import "REMColor.h"
+
 @interface REMMainNavigationController ()
 
 @end
@@ -72,45 +73,50 @@
     return segue;
 }
 
--(void)logout:(void (^)(void))completed
+-(void)logout
 {
+    REMApplicationContext *context=REMAppContext;
+    REMUserModel *currentUser = context.currentUser;
+    REMCustomerModel *currentCustomer = context.currentCustomer;
+    
+    [currentUser kill];
+    [currentCustomer kill];
+    currentUser = nil;
+    currentCustomer = nil;
+    context.updateManager = nil;
+    
+    [REMApplicationContext destroy];
+    
+    [REMStorage clearSessionStorage];
+    [REMStorage clearOnApplicationActive];
+    
+    UIViewController *controller=self.topViewController;
+    controller.view.alpha=0;
     [self popToRootViewControllerAnimated:YES];
     
     REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
-//    for(int i=0;i<splashController.childViewControllers.count; i++){
-//        UIViewController *childController = splashController.childViewControllers[i];
-//        [childController.view removeFromSuperview];
-//        [childController removeFromParentViewController];
-//        childController = nil;
-//    }
-    
-    splashController.buildingInfoArray = nil;
-    [splashController.logoView setHidden:YES];
-    
     [splashController showLoginView:NO];
-    if(completed!=nil)
-        completed();
 }
 
-//-(void)presentLoginView:(void (^)(void))completed
-//{
-//    REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
-//    [splashController.logoView setHidden:YES];
-//    
-//    [self popToRootViewControllerAnimated:YES];
-//    [splashController showLoginView:NO];
-//    if(completed!=nil)
-//        completed();
-//}
-
--(void)presentInitialView:(void (^)(void))completed
+-(void)presentInitialView
 {
-    [self popToRootViewControllerAnimated:YES];
+    REMMapViewController *mapController = [self getChildControllerInstanceOfClass:[REMMapViewController class]];
+    mapController.isInitialPresenting = true;
     
-    //load data, when load finised, show map view
-    REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
-    [splashController showLogoView];
-    [splashController breathShowMapView:NO :completed];
+    if(mapController.snapshot != nil){
+        [mapController.snapshot removeFromSuperview];
+        mapController.snapshot = nil;
+    }
+    
+    if([self.topViewController isEqual:mapController] == NO){
+        UIViewController *controller=self.topViewController;
+        controller.view.alpha=0;
+        [self popToViewController:mapController animated:YES];
+        [mapController updateView];
+    }
+    else{
+        [mapController updateView];
+    }
 }
 
 -(id)getChildControllerInstanceOfClass:(Class)cls

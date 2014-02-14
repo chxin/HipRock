@@ -1,5 +1,7 @@
 import os
 
+ignore = ['Chart','DChart','DChartWrapper']
+
 def generateCommonHeaders():
 	commonRoot = os.path.abspath('../Src/Common/')
 	genFile = open(os.path.join(commonRoot,'REMCommonHeaders.h'), 'w')
@@ -11,7 +13,7 @@ def generateCommonHeaders():
 def scanClasses(root,output):
 	for file in os.listdir(root):
 		fullname = os.path.join(root,file)
-		if(os.path.isdir(fullname)):
+		if os.path.isdir(fullname) and file not in ignore:
 			output.write('\n//'+file+'\n')
 			scanClasses(fullname,output)
 		else:

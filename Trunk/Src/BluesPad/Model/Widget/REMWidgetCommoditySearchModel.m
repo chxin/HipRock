@@ -64,6 +64,7 @@
     NSDictionary *viewOption=param[@"viewOption"];
     NSNumber *step=viewOption[@"Step"];
     self.timeRangeArray=[self timeRangeToModelArray: viewOption[@"TimeRanges"]];
+    self.searchTimeRangeArray=[self.timeRangeArray copy];
     self.commodityIdArray= [NSKeyedUnarchiver unarchiveObjectWithData:
                             [NSKeyedArchiver archivedDataWithRootObject:commodityIds]];
     self.step=[self stepTypeByNumber:step];

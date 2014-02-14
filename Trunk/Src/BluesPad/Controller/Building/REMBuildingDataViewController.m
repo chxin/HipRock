@@ -8,7 +8,9 @@
 
 #import "REMBuildingDataViewController.h"
 #import "REMBuildingDataView.h"
-#define kDashboardThreshold 361+65+85+45
+#import "REMBuildingChartBaseViewController.h"
+
+#define kDashboardThreshold 361+65+85*2+45
 
 @interface REMBuildingDataViewController ()
 @property (nonatomic,weak) UILabel *dashboardLabel;
@@ -26,6 +28,7 @@
     if(self=[super init]){
         _currentOffsetY=NSNotFound;
         self.commodityDataLoadStatus=[NSMutableDictionary dictionary];
+        self.currentCommodityIndex=0;
     }
     return self;
 }
@@ -35,7 +38,7 @@
     REMBuildingDataView *scroll=[[REMBuildingDataView alloc]initWithFrame:self.viewFrame];
     scroll.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, kBuildingLeftMargin, 0, 0);
     scroll.showsVerticalScrollIndicator=NO;
-    [scroll setContentSize:CGSizeMake(0, 1165)];
+    [scroll setContentSize:CGSizeMake(0, 1165+85)];
     self.view=scroll;
     //scroll.layer.borderColor=[UIColor yellowColor].CGColor;
     //scroll.layer.borderWidth=1;
@@ -53,7 +56,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.currentCommodityIndex=0;
+    
     [self initButtons];
     [self initDragLabel];
     [self initCommodityController];
@@ -87,7 +90,7 @@
         btn.titleLabel.textAlignment=NSTextAlignmentCenter;
         [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_normal.png",str] ] forState:UIControlStateNormal];
         [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_pressed.png",str]] forState:UIControlStateSelected];
-        if(i==0){
+        if(i==self.currentCommodityIndex){
             [btn setSelected:YES];
         }
         
@@ -161,7 +164,7 @@
     {
         return @"Water";
     }
-    else if([model.commodityId isEqualToNumber:@(12)] == YES)
+    else if([model.commodityId isEqualToNumber:@(12)] == YES)//pm2.5
     {
         return @"PM2.5";
     }
@@ -178,10 +181,10 @@
         return @"Oil";
     }
     else if([model.commodityId isEqualToNumber:@(8)]==YES){ //热量
-        return @"Electricity";
+        return @"Heating";
     }
     else if([model.commodityId isEqualToNumber:@(9)]==YES){ //冷量
-        return @"Oil";
+        return @"Cooling";
     }
     else if([model.commodityId isEqualToNumber:@(10)]==YES){ //煤
         return @"Coal";
@@ -258,7 +261,7 @@
     if (self.buildingInfo.commodityArray!=nil) {
         count=self.buildingInfo.commodityArray.count;
     }
-    CGRect frame=CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.view.frame.size.width, 800);
+    CGRect frame=CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.view.frame.size.width, self.view.frame.size.height+kBuildingCommodityViewTop);
     int i=0;
 
     for (; i<count; ++i) {
@@ -294,7 +297,7 @@
 - (void)initDragLabel
 {
     UIScrollView *scroll=(UIScrollView *)self.view;
-    CGRect frame = CGRectMake(0, scroll.contentSize.height-17- REMDMCOMPATIOS7(10), 500, 17);
+    CGRect frame = CGRectMake(0, scroll.contentSize.height-27- REMDMCOMPATIOS7(10), 500, 17);
     
     UILabel *label =[[UILabel alloc]initWithFrame:frame];
     //label.layer.borderColor=[UIColor redColor].CGColor;
@@ -317,7 +320,7 @@
     self.dashboardLabel=label;
     
     
-    CGRect imgFrame=CGRectMake(178, scroll.contentSize.height-25-REMDMCOMPATIOS7(10), 30, 30);
+    CGRect imgFrame=CGRectMake(178, scroll.contentSize.height-30-REMDMCOMPATIOS7(10), 15, 20);
     UIImageView *arrow=[[UIImageView alloc]initWithImage:REMIMG_Up];
     [arrow setFrame:imgFrame];
     [self.view addSubview:arrow];
@@ -352,7 +355,6 @@
                 [view setContentOffset:CGPointMake(view.contentOffset.x, currentOffsetY)];
                 [self checkIfRequestChartData:view];
             }
-            
         }
         REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
         [parent setBlurLevel:currentOffsetY];
@@ -481,6 +483,13 @@
     UIView* chartView = controller.view;
     UIScrollView *scrollView=(UIScrollView *)self.view;
     CGFloat chartHeight = scrollView.contentSize.height;
+    
+    for (UIViewController *container in self.childViewControllers) {
+        for (REMBuildingChartBaseViewController *chart in container.childViewControllers) {
+            if ([chart respondsToSelector:@selector(prepareShare)])
+                [chart prepareShare];
+        }
+    }
     
     NSMutableArray* btnOutputImages = [[NSMutableArray alloc]initWithCapacity:self.buttonArray.count];
     for (int i = 0; i < self.buttonArray.count; i++) {

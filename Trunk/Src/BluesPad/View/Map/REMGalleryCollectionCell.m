@@ -27,10 +27,18 @@
     self = [super initWithFrame:frame];
     if (self) {
         //self.backgroundView = [[UIImageView alloc] initWithFrame:kDMGallery_GalleryCellFrame];
+//        self.layer.borderColor = [UIColor orangeColor].CGColor;
+//        self.layer.borderWidth = 1.0;
+        
+        
+        
+        
+        UIImage *image= REMIMG_DefaultBuilding_Small;
+        
         
         UIButton *button = [[UIButton alloc] initWithFrame:self.bounds];
-        [button setImage:REMIMG_DefaultBuilding_Small forState:UIControlStateNormal];
-        button.imageView.contentMode = UIViewContentModeScaleToFill;
+        [button setImage:image forState:UIControlStateNormal];
+        button.imageView.contentMode = UIViewContentModeTop;
         button.contentMode = UIViewContentModeScaleToFill;
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
         button.contentVerticalAlignment = UIControlContentHorizontalAlignmentFill;
@@ -51,14 +59,17 @@
         
         UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinching:)];
         [self addGestureRecognizer:pinchRecognizer];
+        
+        //UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(taptest:)];
+        //[self addGestureRecognizer:tapRecognizer];
     }
     
     return self;
 }
 
-
 -(void)pressed:(id)button
 {
+    NSLog(@"cell pressed: %@", self.building.name);
     [self.controller galleryCellTapped:self];
 }
 
@@ -83,6 +94,22 @@
     
     [self.snapshot removeFromSuperview];
     self.snapshot = nil;
+}
+
+
+-(UIImage *)resizeImageForCell:(UIImage *)image
+{
+    CGSize size = CGSizeMake(2*kDMGallery_GalleryCellWidth * kDMCommon_ImageScale, 2*kDMGallery_GalleryCellHeight * kDMCommon_ImageScale);
+    
+    //resize image to cell size * factor
+    UIImage *resized = [REMImageHelper scaleImage:image toSize:size];
+    
+    //return resized;
+    
+    //crop image
+    CGRect rect = CGRectMake((size.width - 2*kDMGallery_GalleryCellWidth)/2, 0, 2*kDMGallery_GalleryCellWidth, 2*kDMGallery_GalleryCellHeight);
+    
+    return [REMImageHelper cropImage:resized toRect:rect];
 }
 
 

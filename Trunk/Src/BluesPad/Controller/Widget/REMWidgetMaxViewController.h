@@ -24,6 +24,8 @@
 
 @property (nonatomic,weak) REMDashboardObj *dashboardInfo;
 
+@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+
 @property (nonatomic,weak) REMWidgetCollectionViewController *widgetCollectionController;
 
 @property (nonatomic) NSUInteger currentWidgetIndex;

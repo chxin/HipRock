@@ -23,6 +23,7 @@
 #import "REMBuildingShareViewController.h"
 #import "REMDimensions.h"
 #import "REMBuildingChartContainerView2.h"
+#import "DCXYChartView.h"
 #import <GPUImage/GPUImage.h>
 
 const static CGFloat buildingGap=20;
@@ -47,25 +48,15 @@ const static CGFloat buildingGap=20;
 
 
 
-@implementation REMBuildingViewController{
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        
-    }
-    return self;
-}
+@implementation REMBuildingViewController
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor blackColor];
-    [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
+    
+    [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, 768/*REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight)*/)];
     self.currentScrollOffset=-kBuildingCommodityViewTop;
     
     self.cumulateX=0;
@@ -85,14 +76,29 @@ const static CGFloat buildingGap=20;
         UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchThis:)];
         [self.view addGestureRecognizer:pinch];
     }
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveNotification:)
+                                                 name:@"UpdateBuildingCoverRelation"
+                                               object:nil];
 }
 
+- (void)receiveNotification:(NSNotification *)notification{
+    if ([notification.name isEqualToString:@"UpdateBuildingCoverRelation"]==YES) {
+        for (REMBuildingImageViewController *imageController in self.childViewControllers) {
+            [imageController releaseAllDataView];
+            UIViewController *dataController = imageController.childViewControllers[0];
+            for (UIViewController *commodityController in dataController.childViewControllers) {
+                for (UIViewController *container in commodityController.childViewControllers) {
+                    [container removeFromParentViewController];
+                }
+            }
+        }
+    }
+}
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UpdateBuildingCoverRelation" object:nil];
 
--(void)dealloc{
-    
-    
 }
 
 
@@ -101,7 +107,7 @@ const static CGFloat buildingGap=20;
     if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] ==YES ){
         if(self.childViewControllers.count<1)return YES;
         //NSLog(@"touch:%@",touch.view);
-        if( [touch.view isKindOfClass:[CPTGraphHostingView class]] == YES) return NO;
+        if( [touch.view isKindOfClass:[DCXYChartView class]] == YES) return NO;
         return YES;
     }
     else if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]==YES){
@@ -148,13 +154,29 @@ const static CGFloat buildingGap=20;
 
 - (void)initDefaultImageView
 {
+    
     self.defaultImage = REMIMG_DefaultBuilding;
-    UIImage *view = [REMImageHelper blurImage:self.defaultImage];
+    
+    
+//    UIImage *blurImage=[REMImageHelper blurImage:self.defaultImage];
+//    
+//    NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    
+//	NSString *blurImagePath = [NSString stringWithFormat:@"%@/blur.png",documents];
+//    
+//    NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(blurImage)];
+//    [data1 writeToFile:blurImagePath atomically:YES];
+//    
+    
+    
+
+    UIImage *view = [UIImage imageNamed:@"DefaultBuildingBlur"];
+    
     self.defaultBlurImage=view;
     
     
     int i=0,count=self.buildingInfoArray.count;
-    //count=2;
+    //count=1;
     for (;i<count;++i) {
         REMBuildingOverallModel *model = self.buildingInfoArray[i];
         
@@ -272,7 +294,7 @@ const static CGFloat buildingGap=20;
                     
                 }completion:^(BOOL finished){
                     [self.stopTimer invalidate];
-                    NSTimer *timer = [NSTimer timerWithTimeInterval:0.3 target:self selector:@selector(stopCoverPage:) userInfo:@{@"direction":@(sign)} repeats:NO];
+                    NSTimer *timer = [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(stopCoverPage:) userInfo:@{@"direction":@(sign)} repeats:NO];
                     NSRunLoop *current=[NSRunLoop currentRunLoop];
                     [current addTimer:timer forMode:NSDefaultRunLoopMode];
                     self.stopTimer = timer;
@@ -290,7 +312,7 @@ const static CGFloat buildingGap=20;
     REMBuildingOverallModel *buildingInfo= self.buildingInfoArray[index];
     NSString *text=[NSString stringWithFormat:@"building-data-%@",buildingInfo.building.buildingId];
     
-    [REMDataAccessor cancelAccess:text];
+    [REMDataStore cancelAccess:text];
     
 }
 
@@ -308,6 +330,7 @@ const static CGFloat buildingGap=20;
     //NSLog(@"complete:%d",self.currentBuildingIndex);
     REMBuildingImageViewController *vc=self.childViewControllers[self.currentBuildingIndex];
     [vc loadContentView];
+    
     if(self.currentBuildingIndex<self.childViewControllers.count){
         NSInteger sign=[timer.userInfo[@"direction"] integerValue];
         if (timer==nil) {
@@ -321,6 +344,10 @@ const static CGFloat buildingGap=20;
         [nextController loadContentView];
         
     }
+//    UILabel *text=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+//    text.text=@"atasdf";
+//    [self.view addSubview:text];
+    return;
     
 }
 
@@ -360,6 +387,8 @@ const static CGFloat buildingGap=20;
         if([self.fromController isKindOfClass:[REMGalleryViewController class]]){
             REMGalleryViewController *gallergyController = (REMGalleryViewController *)self.fromController;
             
+            [gallergyController scrollToBuildingIndex:self.currentBuildingIndex];
+            
             REMGalleryCollectionCell *cell = [gallergyController galleryCellForBuildingIndex:self.currentBuildingIndex];
             
             if([cell isEqual:gallergyController.focusedCell] == NO){ //if the focused cell has changed
@@ -370,6 +399,11 @@ const static CGFloat buildingGap=20;
             }
             
             cell.alpha = 1.0;
+        }
+        if([self.fromController isKindOfClass:[REMMapViewController class]]){
+            REMMapViewController *mapController = (REMMapViewController *)self.fromController;
+            [mapController highlightMarker:self.currentBuildingIndex];
+            [mapController takeSnapshot];
         }
         
         
@@ -451,6 +485,7 @@ const static CGFloat buildingGap=20;
         
         REMWidgetMaxViewController *maxController = segue.destinationViewController;
         self.maxDashbaordController=dashboard;
+        maxController.buildingInfo=self.buildingInfoArray[self.currentBuildingIndex];
         maxController.widgetCollectionController=collection;
         maxController.dashboardInfo=dashboard.buildingInfo.dashboardArray[dashboard.currentMaxDashboardIndex];
         
@@ -468,11 +503,11 @@ const static CGFloat buildingGap=20;
     
     //REMBuildingShareViewController *shareController = [self.storyboard instantiateViewControllerWithIdentifier: @"sharePopover"];
     REMBuildingShareViewController *shareController=[[REMBuildingShareViewController alloc]init];
-    shareController.contentSizeForViewInPopover = CGSizeMake(156, 88);
+    shareController.contentSizeForViewInPopover = CGSizeMake(156, 100);
     
     if(self.sharePopoverController == nil){
         self.sharePopoverController = [[UIPopoverController alloc] initWithContentViewController:shareController];
-        [self.sharePopoverController setPopoverContentSize:CGSizeMake(156, 88)];
+        [self.sharePopoverController setPopoverContentSize:CGSizeMake(156, 100)];
         //[self.sharePopoverController setBackgroundColor:[UIColor clearColor]];
     }
     
@@ -500,6 +535,8 @@ const static CGFloat buildingGap=20;
     if([self.fromController isKindOfClass:[REMGalleryViewController class]]){
         REMGalleryViewController *gallergyController = (REMGalleryViewController *)self.fromController;
         
+        [gallergyController scrollToBuildingIndex:self.currentBuildingIndex];
+        
         REMGalleryCollectionCell *cell = [gallergyController galleryCellForBuildingIndex:self.currentBuildingIndex];
         
         if([cell isEqual:gallergyController.focusedCell] == NO){ //if the focused cell has changed
@@ -511,8 +548,13 @@ const static CGFloat buildingGap=20;
         
         cell.alpha = 1.0;
     }
+    if([self.fromController isKindOfClass:[REMMapViewController class]]){
+        REMMapViewController *mapController = (REMMapViewController *)self.fromController;
+        [mapController highlightMarker:self.currentBuildingIndex];
+        [mapController takeSnapshot];
+    }
     
-    [REMDataAccessor cancelAccess];
+    [REMDataStore cancelAccess];
     
     //decide where to go
     NSString *segueIdentifier = [self.fromController class] == [REMGalleryViewController class] ? kSegue_BuildingToGallery : kSegue_BuildingToMap;
@@ -526,6 +568,8 @@ const static CGFloat buildingGap=20;
 - (void)exportImage:(void (^)(UIImage *, NSString*))callback
 {
     REMBuildingImageViewController *viewController=self.childViewControllers[self.currentBuildingIndex];
+    
+    
     
     [viewController exportImage:callback];
 }

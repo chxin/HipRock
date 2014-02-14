@@ -7,9 +7,8 @@
  --------------------------------------------------------------------------*///
 
 #import "REMDashboardController.h"
-#import "REMDataAccessor.h"
 
-
+#import "REMWidgetMaxViewController.h"
 
 
 @interface REMDashboardController ()
@@ -30,7 +29,7 @@ static NSString *cellId=@"dashboardcell";
 
 
 - (void)cancelAllRequest{
-    [REMDataAccessor cancelAccess:[self groupName]];
+    [REMDataStore cancelAccess:[self groupName]];
 }
 
 
@@ -65,7 +64,7 @@ static NSString *cellId=@"dashboardcell";
     [self.tableView addSubview:label];
     self.buildingLabel=label;
     
-    CGRect imgFrame=CGRectMake(178, kDashboardDragTitleMargin-8, 30, 30);
+    CGRect imgFrame=CGRectMake(178, kDashboardDragTitleMargin-2,  15, 20);
     UIImageView *arrow=[[UIImageView alloc]initWithImage:REMIMG_Down];
     [arrow setFrame:imgFrame];
     [self.tableView addSubview:arrow];
@@ -239,7 +238,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
         [shareLabel setBackgroundColor:[UIColor clearColor]];
         NSString *shareName=dashboardInfo.shareInfo.userRealName;
         NSString *shareTel=dashboardInfo.shareInfo.userTelephone;
-        NSString *date=[REMTimeHelper formatTimeFullDay:dashboardInfo.shareInfo.shareTime];
+        NSString *date=[REMTimeHelper formatTimeFullDay:dashboardInfo.shareInfo.shareTime isChangeTo24Hour:NO];
         NSString *userTitle=dashboardInfo.shareInfo.userTitleComponent;
         shareLabel.text=[NSString stringWithFormat:NSLocalizedString(@"Widget_ShareTitle", @""),shareName,userTitle,date,shareTel];
         [cell.contentView addSubview:shareLabel];
@@ -265,7 +264,16 @@ static NSString *dashboardGroupName=@"building-data-%@";
 - (void)maxWidget{
     REMBuildingImageViewController *parent=(REMBuildingImageViewController *)self.parentViewController;
     REMBuildingViewController *buildingController=(REMBuildingViewController *)parent.parentViewController;
+    
     [buildingController performSegueWithIdentifier:@"maxWidgetSegue" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"maxWidgetSegue"]==YES) {
+        REMWidgetMaxViewController *maxController=segue.destinationViewController;
+        maxController.buildingInfo=self.buildingInfo;
+    }
 }
 
 - (void)horizonalMoving{

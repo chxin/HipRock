@@ -46,6 +46,7 @@
 
 
 
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     REMRelativeDateViewController *vc= segue.destinationViewController;
     vc.datePickerController=self;
@@ -83,7 +84,7 @@
      label= startCell.contentView.subviews[1];
     label.text=[REMTimeHelper formatTimeFullHour:range.startTime isChangeTo24Hour:NO];
     if(self.showHour==NO){
-        label.text=[REMTimeHelper formatTimeFullDay:range.startTime];
+        label.text=[REMTimeHelper formatTimeFullDay:range.startTime isChangeTo24Hour:NO];
     }
     
     if(self.timePickerIndex==1){
@@ -92,7 +93,7 @@
         label= endCell.contentView.subviews[1];
         label.text=[REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];
         if(self.showHour == NO){
-            label.text=[REMTimeHelper formatTimeFullDay:range.endTime];
+            label.text=[REMTimeHelper formatTimeFullDay:range.endTime isChangeTo24Hour:NO];
         }
     }
     else{
@@ -101,13 +102,7 @@
         label= endCell.contentView.subviews[1];
         label.text=[REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];
         if(self.showHour == NO){
-            if (hour==0) {
-                NSDate *newEndDate=[REMTimeHelper add:-1 onPart:REMDateTimePartDay ofDate:range.endTime];
-                label.text=[REMTimeHelper formatTimeFullDay:newEndDate];
-            }
-            else{
-                label.text=[REMTimeHelper formatTimeFullDay:range.endTime];
-            }
+            label.text=[REMTimeHelper formatTimeFullDay:range.endTime isChangeTo24Hour:YES];
         }
     }
 
@@ -141,7 +136,7 @@
             NSString *text;
             text=[REMTimeHelper formatTimeFullHour:self.timeRange.startTime isChangeTo24Hour:NO];
             if(self.showHour==NO){
-                text=[REMTimeHelper formatTimeFullDay:self.timeRange.startTime];
+                text=[REMTimeHelper formatTimeFullDay:self.timeRange.startTime isChangeTo24Hour:NO];
             }
             cell.detailTextLabel.text=text;
             [self setDateTimeColor:cell.detailTextLabel withIsActive:NO];
@@ -152,13 +147,7 @@
                 cell.textLabel.text=NSLocalizedString(@"Widget_TimePickerEnd", @"");// @"终止";
                 NSString *text=[REMTimeHelper formatTimeFullHour:(NSDate *)self.timeRange.endTime isChangeTo24Hour:YES];
                 if(self.showHour==NO){
-                    if ([REMTimeHelper getHour:self.timeRange.endTime]==0) {
-                        NSDate *newEndDate=[REMTimeHelper add:-1 onPart:REMDateTimePartDay ofDate:self.timeRange.endTime];
-                        text=[REMTimeHelper formatTimeFullDay:newEndDate];
-                    }
-                    else{
-                        text=[REMTimeHelper formatTimeFullDay:self.timeRange.endTime];
-                    }
+                    text=[REMTimeHelper formatTimeFullDay:self.timeRange.endTime isChangeTo24Hour:YES];
                 }
                 cell.detailTextLabel.text=text;
                 [self setDateTimeColor:cell.detailTextLabel withIsActive:NO];
@@ -178,15 +167,21 @@
                     hourPickerWidth=0;
                 }
                 UIDatePicker *picker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width+60-hourPickerWidth, cell.frame.size.height)];
+                [picker setDatePickerMode:UIDatePickerModeDate];
+
+                
+                [picker setMinimumDate:[self minDate]];
+                
                 [picker setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
                 [picker setCalendar:[REMTimeHelper currentCalendar]];
-                [picker setDatePickerMode:UIDatePickerModeDate];
-                [picker addTarget:self action:@selector(timePickerChanged:) forControlEvents:UIControlEventValueChanged];
+                
+                [picker addTarget:self action:@selector(timePickerChanged:withHourPicker:) forControlEvents:UIControlEventValueChanged];
                 
                 
                 if(self.timePickerIndex==1){
                     [picker setDate:self.timeRange.startTime];
-                    
+                    [self.startPicker removeTarget:self action:@selector(timePickerChanged:withHourPicker:) forControlEvents:UIControlEventValueChanged];
+                    self.startPicker = nil;
                     self.startPicker=picker;
                    
                 }
@@ -196,6 +191,8 @@
                         NSDate *newEndDate=[REMTimeHelper add:-1 onPart:REMDateTimePartDay ofDate:self.timeRange.endTime];
                         [picker setDate:newEndDate];
                     }
+                    [self.endPicker removeTarget:self action:@selector(timePickerChanged:withHourPicker:) forControlEvents:UIControlEventValueChanged];
+                    self.endPicker=nil;
                     self.endPicker=picker;
                    
                 }
@@ -250,16 +247,32 @@
 
 - (void) hourPickerChanaged:(UIPickerView *)picker{
     if (picker == self.startHourPicker) {
-        [self timePickerChanged:self.startPicker];
+        [self timePickerChanged:self.startPicker withHourPicker:picker];
     }
     else{
-        [self timePickerChanged:self.endPicker];
+        [self timePickerChanged:self.endPicker withHourPicker:picker];
     }
     
     
 }
 
-- (void) timePickerChanged:(UIDatePicker *)picker{
+- (NSDate *)minDate{
+    NSDateComponents *comp=[[NSDateComponents alloc]init];
+    [comp setYear:2000];
+    [comp setMonth:1];
+    [comp setDay:1];
+    NSCalendar *calendar=[REMTimeHelper currentCalendar];
+    NSDate *minDate = [calendar dateFromComponents:comp];
+    return minDate;
+}
+
+- (void) timePickerChanged:(UIDatePicker *)picker withHourPicker:(UIPickerView *)hourPicker1{
+    NSDate *minDate = [self minDate];
+    if ([[picker.date earlierDate:minDate] isEqual:picker.date]==YES && hourPicker1==nil) {
+        [picker setDate:[REMTimeHelper  add:-1 onPart:REMDateTimePartYear ofDate:picker.date] animated:NO];
+        [picker setDate:[self minDate] animated:YES];
+        
+    }
     
     self.relativeDateType=REMRelativeTimeRangeTypeNone;
     self.relativeDate=[REMTimeHelper relativeDateComponentFromType:self.relativeDateType];
@@ -308,7 +321,7 @@
         
         ret=[REMTimeHelper formatTimeFullHour:newDate isChangeTo24Hour:NO];
         if(self.showHour==NO){
-            ret=[REMTimeHelper formatTimeFullDay:newDate];
+            ret=[REMTimeHelper formatTimeFullDay:newDate isChangeTo24Hour:NO];
         }
         REMTimeRange *newRange=[[REMTimeRange alloc]initWithStartTime:newDate EndTime:endTime];
         self.timeRange=newRange;
@@ -322,13 +335,7 @@
         }
         ret=[REMTimeHelper formatTimeFullHour:newDate isChangeTo24Hour:YES];
         if(self.showHour==NO){
-            if ([REMTimeHelper getHour:newDate]==0) {
-                NSDate *newEndDate=[REMTimeHelper add:-1 onPart:REMDateTimePartHour ofDate:newDate];
-                ret=[REMTimeHelper formatTimeFullDay:newEndDate];
-            }
-            else{
-                ret=[REMTimeHelper formatTimeFullDay:newDate];
-            }
+            ret=[REMTimeHelper formatTimeFullDay:newDate isChangeTo24Hour:YES];
         }
         REMTimeRange *newRange=[[REMTimeRange alloc]initWithStartTime:startTime EndTime:newDate];
         self.timeRange=newRange;
@@ -361,7 +368,6 @@
 }
 
 - (void)setMiddleLine:(UILabel *)label{
-    
     NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:label.text];
     [attributeString addAttribute:NSStrikethroughStyleAttributeName
                             value:[NSNumber numberWithInt:2]
@@ -371,7 +377,6 @@
 }
 
 - (void)removeMiddleLine:(UILabel *)label withIsActive:(BOOL)isActive{
-    
     NSString *text=label.text;
     label.attributedText=nil;
     label.text=text;
@@ -407,6 +412,7 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
     return 24;
 }
+
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
@@ -521,6 +527,7 @@
     }
 }
 - (IBAction)okClicked:(UIBarButtonItem *)sender {
+
     
     NSDate *endTime=self.timeRange.endTime;
     NSDate *startTime=self.timeRange.startTime;
@@ -535,6 +542,7 @@
     
     [self.datePickerProtocol setNewTimeRange:self.timeRange withRelativeType:self.relativeDateType withRelativeDateComponent:self.relativeDate];
     [self.popController dismissPopoverAnimated:YES];
+
 }
 - (IBAction)cancelClicked:(UIBarButtonItem *)sender {
     [self.popController dismissPopoverAnimated:YES];

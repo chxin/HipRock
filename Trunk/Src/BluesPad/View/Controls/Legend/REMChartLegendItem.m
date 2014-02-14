@@ -10,7 +10,9 @@
 #import "REMChartSeriesIndicator.h"
 #import "REMDimensions.h"
 #import "REMCommonHeaders.h"
-
+#import "REMChartLegendBase.h"
+#import "DCSeries.h"
+#import "DCXYSeries.h"
 
 //#define kREMLegendItemFrame CGRectMake(0,0,kDMChart_LegendItemWidth,kDMChart_LegendItemHeight)
 
@@ -22,7 +24,7 @@
 
 @property (nonatomic) BOOL tappable;
 @property (nonatomic) int seriesIndex;
-@property (nonatomic,weak) NSObject<REMChartLegendItemDelegate> *delegate;
+@property (nonatomic,weak) REMChartLegendBase *legendView;
 
 @property (nonatomic,weak) REMChartSeriesIndicator *indicator;
 @property (nonatomic,weak) UILabel *label;
@@ -37,7 +39,7 @@
     self = [super initWithFrame:frame];
     if(self){
         self.seriesIndex = model.index;
-        self.delegate = model.delegate;
+        self.legendView = model.legendView;
         self.tappable = model.tappable;
 //        self.seriesName = name;
         
@@ -48,7 +50,7 @@
         self.backgroundColor = [REMColor colorByHexString:kDMChart_LegendItemBackgroundColor];
         
         //add indicator
-        REMChartSeriesIndicator *indicator = model.isBenchmark ? [REMChartSeriesIndicator indicatorWithType:REMChartSeriesIndicatorLine andColor:[REMColor colorByHexString:kDMChart_BenchmarkColor]] : [REMChartSeriesIndicator indicatorWithType:model.type andColor:[REMColor colorByIndex:model.index].uiColor];
+        REMChartSeriesIndicator *indicator = model.isBenchmark ? [REMChartSeriesIndicator indicatorWithType:REMChartSeriesIndicatorLine andColor:[REMColor colorByHexString:kDMChart_BenchmarkColor]] : [REMChartSeriesIndicator indicatorWithType:model.type andColor:[REMColor colorByIndex:model.index]];
         indicator.frame = kREMLegendInnerIndicatorFrame;
         [self addSubview:indicator];
         self.indicator = indicator;
@@ -63,8 +65,13 @@
         self.label = label;
         
         //add tap gesture
+        //[self addTarget:self action:@selector(legendTapped:) forControlEvents:UIControlEventTouchUpInside];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(legendTapped:)];
         [self addGestureRecognizer:tap];
+        
+        if(model.isDefaultHidden){
+            [self setSelected:YES];
+        }
     }
     
     return self;
@@ -93,17 +100,27 @@
     if(self.tappable == NO)
         return;
     
-    if(self.state == UIControlStateNormal)
-        [self setSelected:YES];
-    else
+    BOOL stateChanged = NO;
+    id<REMChartLegendItemDelegate> delegate = self.legendView.itemDelegate;
+    if(self.state == UIControlStateSelected){
         [self setSelected:NO];
+        stateChanged = YES;
+    }
+    else{
+        if (REMIsNilOrNull(delegate) || [delegate canBeHidden]) {
+            [self setSelected:YES];
+            stateChanged = YES;
+        }
+    }
     
-//    [self updateState];
-    //NSLog(@"legend tapped, status: %d!", self.state);
-    
-    //set the conrresponding series status
-    if(self.delegate != nil){
-        [self.delegate legendStateChanged:self.state onIndex:self.seriesIndex];
+    if (stateChanged) {
+        [self updateState];
+        //NSLog(@"legend tapped, status: %d!", self.state);
+        
+        //set the conrresponding series status
+        if(!REMIsNilOrNull(delegate)){
+            [delegate legendStateChanged:self.state onIndex:self.seriesIndex];
+        }
     }
 }
 

@@ -21,62 +21,133 @@
 #import "REMDimensions.h"
 #import "REMMarkerBubbleView.h"
 #import "REMImages.h"
+#import "REMBlurredMapView.h"
+#import "REMUpdateAllManager.h"
 
 @interface REMMapViewController ()
 
 @property (nonatomic,weak) GMSMapView *mapView;
 @property (nonatomic,strong) NSMutableArray *markers;
+@property (nonatomic,weak) REMBlurredMapView *mask;
+@property (nonatomic,weak) UIButton *switchButton;
+@property (nonatomic,weak) UIImageView *customerLogoView;
 
 @end
 
 @implementation REMMapViewController
 
+#define REMDefaultMapCamera [GMSCameraPosition cameraWithLatitude:38.0 longitude:104.0 zoom:4.0]
+
 
 - (void)loadView
 {
     [super loadView];
-
-    [self.view setFrame:kDMDefaultViewFrame];
+    
+    if(self.view){
+        [self.view setFrame:kDMDefaultViewFrame];
+        
+        [self loadMapView];
+        [self.view.layer insertSublayer:self.titleGradientLayer above:self.mapView.layer];
+        [self loadButtons];
+    }
 }
 
 
 - (void)viewDidLoad
 {
-	// Do any additional setup after loading the view.
-    [self loadMapView];
-    
-    [self addButtons];
-    
-    [self.view.layer insertSublayer:self.titleGradientLayer above:self.mapView.layer];
-    
-    [self showMarkers];
+    //[self showMarkers];
     
     if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
-        [self.view setUserInteractionEnabled:NO];
+        self.view.userInteractionEnabled = NO;
+    }
+    
+    if(REMAppContext.buildingInfoArray == nil){
+        [self loadData];
+    }
+    else{
+        [self updateView];
     }
 }
 
--(void)addButtons
+-(void)loadData
+{
+    REMBlurredMapView *mask = [[REMBlurredMapView alloc] initWithFrame:REMISIOS7 ? CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight) : CGRectMake(0, -20, kDMScreenWidth, kDMScreenHeight)];
+    
+    [self.view addSubview:mask];
+    
+    //begin load data
+    REMUpdateAllManager *manager = [REMUpdateAllManager defaultManager];
+    manager.mainNavigationController = (REMMainNavigationController *)self.navigationController;
+    [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
+        void (^callback)(void) = nil;
+        if(buildingInfoArray != nil){
+            callback =^{ [self updateView]; };
+        }
+        
+        [mask hide:callback];
+    }];
+}
+
+-(void)loadButtons
 {
     //add switch button
-    UIButton *switchButton = [[UIButton alloc]initWithFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, REMDMCOMPATIOS7(kDMCommon_TopLeftButtonTop),kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
-    [switchButton setBackgroundImage:REMIMG_Gallery forState:UIControlStateNormal];
+    UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    if (REMISIOS7) {
+        switchButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [switchButton setTintColor:[UIColor whiteColor]];
+    }
+    [switchButton setFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, REMDMCOMPATIOS7(kDMCommon_TopLeftButtonTop),kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
+    switchButton.adjustsImageWhenHighlighted=NO;
+    if (!REMISIOS7) {
+        switchButton.showsTouchWhenHighlighted=YES;
+    }
+    [switchButton setImage:REMIMG_Gallery forState:UIControlStateNormal];
     [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:switchButton];
+    self.switchButton = switchButton;
+    
+    UIButton *settingButton=self.settingButton;
+    [self.view addSubview:settingButton];
+}
+
+-(void)updateView
+{
+    self.currentBuildingIndex = 0;
+    self.buildingInfoArray = REMAppContext.buildingInfoArray;
     
     if(self.buildingInfoArray.count <= 0){
-        [switchButton setEnabled:NO];
+        [self.switchButton setEnabled:NO];
+        [REMAlertHelper alert:REMLocalizedString(@"Map_NoVisiableBuilding")];
+    }
+    else{
+        [self.switchButton setEnabled:YES];
+    }
+    
+    [self renderCustomerLogo];
+    [self updateCamera];
+    [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(showMarkers) userInfo:nil repeats:NO];
+}
+
+-(void)renderCustomerLogo
+{
+    if(self.customerLogoView != nil){
+        [self.customerLogoView removeFromSuperview];
+        self.customerLogoView = nil;
     }
     
     //add customer logo button
-    UIButton *logoButton = self.customerLogoButton;
-    logoButton.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
-    [self.view addSubview:logoButton];
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:REMAppContext.currentCustomerLogo];
+    logoView.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
+    logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
+    [self.view addSubview:logoView];
+    self.customerLogoView = logoView;
 }
 
 -(void)showMarkers
 {
+    [self.mapView clear];
+    
     NSArray *buildings = [self.buildingInfoArray sortedArrayUsingComparator:^NSComparisonResult(REMBuildingOverallModel *b1, REMBuildingOverallModel *b2) {
         return b1.building.latitude > b2.building.latitude ? NSOrderedAscending : NSOrderedDescending;
     }];
@@ -98,11 +169,17 @@
         marker.flat = NO;
         marker.zIndex = i;
         marker.icon = [self getMarkerIcon:buildingInfo forMarkerState:UIControlStateNormal];
+        marker.appearAnimation = kGMSMarkerAnimationPop;
         
         if([buildingInfo.building.buildingId isEqualToNumber:[self.buildingInfoArray[0] building].buildingId])
-            self.mapView.selectedMarker = marker;
+           [self selectMarker:marker];
         
         [self.markers addObject:marker];
+    }
+    
+    if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
+        self.view.userInteractionEnabled = NO;
+        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
     }
 }
 
@@ -114,19 +191,14 @@
     CGRect mapViewFrame = CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight);
     //CGRectMake(viewBounds.origin.x, viewBounds.origin.y, viewBounds.size.width, viewBounds.size.height);
     
-    double defaultLatitude =38.0, defaultLongitude=104.0;
-    CGFloat defaultZoomLevel = 4.0;
-    
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:defaultLatitude longitude:defaultLongitude zoom:defaultZoomLevel];
-    
-    GMSMapView *mapView = [GMSMapView mapWithFrame:mapViewFrame camera:camera];
-    [mapView setCamera:camera];
+    GMSMapView *mapView = [GMSMapView mapWithFrame:mapViewFrame camera:REMDefaultMapCamera];
+    //[mapView setCamera:REMDefaultMapCamera];
     mapView.myLocationEnabled = NO;
     mapView.delegate = self;
     mapView.settings.consumesGesturesInView = NO;
     mapView.settings.rotateGestures = NO;
     
-    [self updateCamera:mapView];
+    //[self updateCamera:mapView];
     
     [self.view addSubview: mapView];
     [self.view sendSubviewToBack: mapView];
@@ -134,25 +206,29 @@
     self.mapView = mapView;
 }
 
--(void)updateCamera:(GMSMapView *)mapView
+-(void)updateCamera
 {
     // one building, set the building's location
-    if(self.buildingInfoArray.count <= 0)
+    if(self.buildingInfoArray.count <= 0){
+        [self.mapView animateToCameraPosition:REMDefaultMapCamera];
         return;
+    }
     
     if(self.buildingInfoArray.count == 1){
         REMBuildingModel *building = [self.buildingInfoArray[0] building];
+        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:building.latitude longitude:building.longitude zoom:12];
         
-        [mapView setCamera:[GMSCameraPosition cameraWithLatitude:building.latitude longitude:building.longitude zoom:12]];
+        [self.mapView animateToCameraPosition:camera];
     }
     else{// multiple buildings, set the rect
         //northEast and southWest
         UIEdgeInsets visiableBounds = [self getVisiableBounds];
         GMSCoordinateBounds *bounds = [self coordinateBoundsFromEdgeInsets:visiableBounds];
         
-        GMSCameraPosition *camera = [mapView cameraForBounds:bounds insets:kDMMap_MapEdgeInsets];
+        GMSCameraPosition *camera = [self.mapView cameraForBounds:bounds insets:kDMMap_MapEdgeInsets];
         
-        [mapView setCamera:camera];
+        //[mapView setCamera:camera];
+        [self.mapView animateToCameraPosition:camera];
     }
 }
 
@@ -185,33 +261,18 @@
     return [[GMSCoordinateBounds alloc] initWithCoordinate:northEast coordinate:southWest];
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
-        [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
-    }
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
-    if([[self.navigationController.childViewControllers lastObject] isEqual:self] == NO){
-        //[self.mapView stopRendering];
-        [self.mapView clear];
-        [self.mapView removeFromSuperview];
-        self.mapView = nil;
-        self.view=nil;
-    }
+//    if([[self.navigationController.childViewControllers lastObject] isEqual:self] == NO){
+//        //[self.mapView stopRendering];
+//        [self.mapView clear];
+//        [self.mapView removeFromSuperview];
+//        self.mapView = nil;
+//        self.view=nil;
+//    }
 }
 
 - (void)switchButtonPressed
@@ -226,6 +287,8 @@
         //take a snapshot of self
         UIImage *fake = [REMImageHelper imageWithView:self.view];
         self.snapshot = [[UIImageView alloc] initWithImage: fake];
+        
+        
         
         //prepare custom segue parameters
         REMBuildingEntranceSegue *customSegue = (REMBuildingEntranceSegue *)segue;
@@ -274,7 +337,7 @@
     for (GMSMarker *marker in self.markers) {
         if([[marker.userData building].buildingId isEqualToNumber:[self.buildingInfoArray[currentBuildingIndex] building].buildingId]){
             self.currentBuildingIndex = currentBuildingIndex;
-            self.mapView.selectedMarker = marker;
+            [self selectMarker:marker];
             return [self getZoomFrameFromMarker: marker];
         }
     }
@@ -314,15 +377,62 @@
     return REMLoadImageNamed(imageName);
 }
 
+-(void)highlightMarker:(int)buildingIndex
+{
+    GMSMarker *currentMarker = nil;
+    for(GMSMarker *marker in self.markers){
+        if([marker.userData isEqual:self.buildingInfoArray[buildingIndex]]){
+            currentMarker = marker;
+        }
+    }
+    
+    if([self isMarkerVisible:currentMarker] == YES){
+        GMSCameraUpdate *update = [GMSCameraUpdate setTarget:currentMarker.position];
+        [self.mapView moveCamera:update];
+        [self selectMarker:currentMarker];
+    }
+}
+
+-(BOOL)isMarkerVisible:(GMSMarker *)marker
+{
+    GMSVisibleRegion visibleRegion = [self.mapView.projection visibleRegion];
+    GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc]initWithRegion:visibleRegion];
+    return ![bounds containsCoordinate:marker.position];
+}
+
+-(void)takeSnapshot
+{
+    self.snapshot = [[UIImageView alloc] initWithImage: [REMImageHelper imageWithView:self.view]];
+}
+
+-(void)selectMarker:(GMSMarker *)marker
+{
+    [self deselectCurrentMarker];
+    
+    //select
+    marker.icon = [self getMarkerIcon:marker.userData forMarkerState:UIControlStateHighlighted];
+    self.mapView.selectedMarker = marker;
+}
+
+-(void)deselectCurrentMarker
+{
+    //deselect selected marker
+    self.mapView.selectedMarker.icon = [self getMarkerIcon:self.mapView.selectedMarker.userData forMarkerState:UIControlStateNormal];
+    self.mapView.selectedMarker = nil;
+}
+
+
+
 #pragma mark GSMapView delegate
 
 - (BOOL)mapView:(GMSMapView *)view didTapMarker:(GMSMarker *)marker
 {
-    GMSMarker *oldMarker = self.mapView.selectedMarker;
-    oldMarker.icon = [self getMarkerIcon:oldMarker.userData forMarkerState:UIControlStateNormal];
-    
-    marker.icon = [self getMarkerIcon:marker.userData forMarkerState:UIControlStateHighlighted];
-    self.mapView.selectedMarker = marker;
+//    GMSMarker *oldMarker = self.mapView.selectedMarker;
+//    oldMarker.icon = [self getMarkerIcon:oldMarker.userData forMarkerState:UIControlStateNormal];
+//    
+//    marker.icon = [self getMarkerIcon:marker.userData forMarkerState:UIControlStateHighlighted];
+//    self.mapView.selectedMarker = marker;
+    [self selectMarker:marker];
 
     return YES;
 }
@@ -346,7 +456,7 @@
 
 -(void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
 {
-    self.mapView.selectedMarker.icon = [self getMarkerIcon:self.mapView.selectedMarker.userData forMarkerState:UIControlStateNormal];
+    [self deselectCurrentMarker];
 }
 
 #pragma mark - Segue

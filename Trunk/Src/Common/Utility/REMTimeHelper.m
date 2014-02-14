@@ -40,7 +40,7 @@
 + (NSString *)jsonStringFromDate:(NSDate *)date
 {
     long long time=(long long)([date timeIntervalSince1970]*1000);
-    NSString *str= [NSString stringWithFormat:@"/Date(%llu)/",time];
+    NSString *str= [NSString stringWithFormat:@"/Date(%lld)/",time];
     return str;
 }
 
@@ -110,20 +110,26 @@
     return [calendar dateByAddingComponents:components toDate:date options:0];
 }
 
-
-+ (NSUInteger)getYear:(NSDate *)date {
-    NSCalendar *calendar = [REMTimeHelper currentCalendar];
++ (NSUInteger)getYear:(NSDate *)date withCalendar:(NSCalendar *)calendar{
     NSDateComponents *dayComponents = [calendar components:(NSYearCalendarUnit) fromDate:date];
     
     return [dayComponents year];
 }
 
++ (NSUInteger)getYear:(NSDate *)date {
+    return [REMTimeHelper getYear:date withCalendar:[REMTimeHelper currentCalendar]];
+}
 
-+ (NSUInteger)getMonth:(NSDate *)date{
-    NSCalendar *calendar = [REMTimeHelper currentCalendar];
++ (NSUInteger)getMonth:(NSDate *)date withCalendar:(NSCalendar *)calendar{
+    
     NSDateComponents *dayComponents = [calendar components:(NSMonthCalendarUnit) fromDate:date];
     
     return [dayComponents month];
+}
+
++ (NSUInteger)getMonth:(NSDate *)date{
+    
+    return [REMTimeHelper getMonth:date withCalendar:[REMTimeHelper currentCalendar]];
 }
 
 + (NSUInteger)getWeekDay:(NSDate *)date {
@@ -135,19 +141,25 @@
 
 
 + (NSUInteger)getDay:(NSDate *)date {
-    NSCalendar *calendar = [REMTimeHelper currentCalendar];
+    return [REMTimeHelper getDay:date withCalendar:[REMTimeHelper currentCalendar]];
+    
+}
+
++ (NSUInteger)getDay:(NSDate *)date withCalendar:(NSCalendar *)calendar{
+    
     NSDateComponents *dayComponents = [calendar components:(NSDayCalendarUnit) fromDate:date];
     
     return [dayComponents day];
 }
-
-+ (int )getHour:(NSDate *)date  {
-    NSCalendar *calendar = [REMTimeHelper currentCalendar];
++ (int)getHour:(NSDate *)date withCalendar:(NSCalendar *)calendar{
     NSUInteger unitFlags =NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit |NSHourCalendarUnit |NSMinuteCalendarUnit;
     NSDateComponents *components = [calendar components:unitFlags fromDate:date];
     NSInteger hour = [components hour];
     
     return (int)hour;
+}
++ (int )getHour:(NSDate *)date  {
+    return [REMTimeHelper getHour:date withCalendar:[REMTimeHelper currentCalendar]];
 }
 
 + (int )getTimePart:(REMDateTimePart)timePart ofLocalDate:(NSDate *)date  {
@@ -171,14 +183,16 @@
     }
 }
 
-
-+ (int)getMinute:(NSDate *)date {
-    NSCalendar *calendar = [REMTimeHelper currentCalendar];
++ (int)getMinute:(NSDate *)date withCalendar:(NSCalendar *)calendar{
     NSUInteger unitFlags =NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit |NSHourCalendarUnit |NSMinuteCalendarUnit;
     NSDateComponents *components = [calendar components:unitFlags fromDate:date];
     NSInteger minute = [components minute];
     
     return (int)minute;
+}
+
++ (int)getMinute:(NSDate *)date {
+    return [REMTimeHelper getMinute:date withCalendar:[REMTimeHelper currentCalendar]];
 }
 
 + (NSString *)relativeDateComponentFromType:(REMRelativeTimeRangeType)relativeDateType{
@@ -462,24 +476,38 @@ static NSDateFormatter *_localFormatter;
     return [f stringFromDate:date];
 }
 
-+ (NSString *)formatTimeFullDay:(NSDate *)date
++ (NSString *)formatTimeFullDay:(NSDate *)date isChangeTo24Hour:(BOOL)change24Hour;
 {
     NSDateFormatter *f = [REMTimeHelper currentFormatter];
     [f setDateFormat:@"yyyy-MM-dd"];
+    NSString *ret;
+    if(change24Hour ==YES && [REMTimeHelper getHour:date]==0){
+        NSDate *newEndDate=[REMTimeHelper add:-1 onPart:REMDateTimePartDay ofDate:date];
+        ret=[f stringFromDate:newEndDate];
+    }
+    else{
+        ret=[f stringFromDate:date];
+    }
+    return ret;
+}
+
++ (NSString *)formatTimeFullMonth:(NSDate *)date{
+    NSDateFormatter *f = [REMTimeHelper currentFormatter];
+    [f setDateFormat:NSLocalizedString(@"Common_YearMonthFormat", @"")];
+    
+    return [f stringFromDate:date];
+}
+
++ (NSString *)formatTimeFullYear:(NSDate *)date{
+    NSDateFormatter *f = [REMTimeHelper currentFormatter];
+    [f setDateFormat:NSLocalizedString(@"Common_WholeYearFormat", @"")];
     
     return [f stringFromDate:date];
 }
 
 + (NSString *)formatTimeRangeFullDay:(REMTimeRange *)range{
-    NSString *start=[REMTimeHelper formatTimeFullDay:range.startTime];
-    NSString *end;
-    if([REMTimeHelper getHour:range.endTime]==0){
-        NSDate *newEndDate=[REMTimeHelper add:-1 onPart:REMDateTimePartDay ofDate:range.endTime];
-        end=[REMTimeHelper formatTimeFullDay:newEndDate];
-    }
-    else{
-        end=[REMTimeHelper formatTimeFullDay:range.endTime];
-    }
+    NSString *start=[REMTimeHelper formatTimeFullDay:range.startTime isChangeTo24Hour:NO];
+    NSString *end =[REMTimeHelper formatTimeFullDay:range.endTime isChangeTo24Hour:YES];
     return [NSString stringWithFormat:@"%@ -- %@",start,end];
 }
 

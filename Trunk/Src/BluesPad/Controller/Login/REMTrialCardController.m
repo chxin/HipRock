@@ -20,6 +20,9 @@
 
 @interface REMTrialCardController ()
 
+//@property (nonatomic,weak) UITextField *emailTextField;
+//@property (nonatomic,weak) UILabel *errorLabel;
+
 
 @end
 
@@ -60,12 +63,28 @@
     welcomeLabel.textColor = [REMColor colorByHexString:kDMLogin_TrialCardWelcomeTextFontColor];
     welcomeLabel.backgroundColor = [UIColor clearColor];
     
+    
+//    UITextField *textfield = [[UITextField alloc] init];
+//    textfield.frame = CGRectMake(kDMLogin_LoginButtonLeftOffset,kDMLogin_LoginButtonTopOffset-90,330,45);
+//    textfield.placeholder = @"邮箱";
+//    textfield.layer.borderWidth = 1.0;
+//    textfield.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//    textfield.layer.cornerRadius = 3;
+//    textfield.delegate = self;
+//    textfield.returnKeyType = UIReturnKeyGo;
+    
+//    CGRect labelFrame = CGRectMake(kDMLogin_LoginButtonLeftOffset, kDMLogin_LoginButtonTopOffset-38, 330, 12);
+//    UILabel *errorLabel = [[UILabel alloc] initWithFrame:labelFrame];
+//    errorLabel.textColor = [UIColor redColor];
+//    errorLabel.font = [UIFont systemFontOfSize:12];
+//    [errorLabel setHidden:YES];
+    
     CGRect buttonFrame = CGRectMake(kDMLogin_LoginButtonLeftOffset, kDMLogin_LoginButtonTopOffset, kDMLogin_LoginButtonWidth, kDMLogin_LoginButtonHeight);
     NSDictionary *statusTexts = @{
                                   @(REMLoginButtonNormalStatus):REMLocalizedString(@"Login_TrialButtonText"),
                                   @(REMLoginButtonWorkingStatus):REMLocalizedString(@"Login_CreatingDemoUserText"),
                                   @(REMLoginButtonDisableStatus):REMLocalizedString(@"Login_TrialButtonText"),
-                                  };
+                                };
     REMLoginButton *button = [[REMLoginButton alloc] initWithFrame:buttonFrame andStatusTexts:statusTexts];
     button.titleLabel.textColor = [REMColor colorByHexString:kDMLogin_LoginButtonFontColor];
     button.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_LoginButtonFontSize];
@@ -73,7 +92,12 @@
     
     
     [content addSubview:welcomeLabel];
+//    [content addSubview:errorLabel];
+//    [content addSubview:textfield];
     [content addSubview:button];
+    
+//    self.emailTextField = textfield;
+//    self.errorLabel = errorLabel;
     self.trialButton = button;
     
     return content;
@@ -81,6 +105,19 @@
 
 -(void)trialButtonPressed:(UIButton *)sender
 {
+//    [self.errorLabel setHidden:YES];
+//    
+//    NSString *email = [self.emailTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//    
+//    if(email == nil || [email isEqualToString:@""] || [email rangeOfString:@"."].length <= 0 || [email rangeOfString:@"@"].length <= 0){
+//        [self.errorLabel setHidden:NO];
+//        self.errorLabel.text = @"请输入正确的邮箱地址";
+//        
+//        return;
+//    }
+    
+//    [self.view endEditing:YES];
+    
     [self.trialButton setLoginButtonStatus:REMLoginButtonWorkingStatus];
     [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonDisableStatus];
     
@@ -90,66 +127,73 @@
 -(void)createDemoUser
 {
     //use sp1 for all demo user
-    REMUserModel *tempUser = [[REMUserModel alloc] init];
-    tempUser.userId = 0;
-    tempUser.name = @"";
-    tempUser.spId = 1;
-    [REMAppContext setCurrentUser:tempUser];
-    
-    //network
-    if([REMNetworkHelper checkIsNoConnect] == YES){
-        [REMAlertHelper alert:REMLocalizedString(kLNLogin_NoNetwork)];
-        [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-        [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-        return;
-    }
+    [self setTempUser];
     
     //so demo user will be created in sp1
-    REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSDemoUserValidate parameter:nil];
-    [REMDataAccessor access:store success:^(id data) {
+    NSDictionary *messageMap = REMDataAccessMessageMake(@"Login_TrialNoNetwork", @"Login_TrialNetworkFailed", @"Login_TrialServerError", @"");
+    REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSDemoUserValidate parameter:nil accessCache:NO andMessageMap:messageMap];
+    [store access:^(id data) {
+        if(REMIsNilOrNull(data)){ //TODO: empty response?
+            return ;
+        }
+        
         REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
         
-        if(validationResult.status == REMUserValidationSuccess)
-        {
+        if(validationResult.status == REMUserValidationSuccess) {
             REMUserModel *user = validationResult.user;
             [REMAppContext setCurrentUser:user];
             
             NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
             
             if(customers.count<=0){
-                [REMAlertHelper alert:REMLocalizedString(kLNLogin_NotAuthorized)];
-                
-                [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-                [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
+                [REMAlertHelper alert:REMLocalizedString(@"Login_TrialNoCustomer")];
+                [self.loginCarouselController setLoginButtonStatusNormal];
                 
                 return;
             }
             
             if(customers.count == 1){
                 [REMAppContext setCurrentCustomer:customers[0]];
-                
-                [REMAppCurrentUser save];
-                [REMAppCurrentCustomer save];
-                
-                [self.loginCarouselController.splashScreenController showMapView:nil];
-                
-                return;
+                [self.loginCarouselController loginSuccess];
             }
-            
-            //[self.loginCarouselController performSegueWithIdentifier:kSegue_LoginToCustomer sender:self];
-            [self.loginCarouselController presentCustomerSelectionView];
+            else{
+                [self.loginCarouselController presentCustomerSelectionView];
+            }
         }
-        
-        //[self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-        
-    } error:^(NSError *error, id response) {
-        [self.trialButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-        [self.loginCarouselController.loginCardController.loginButton setLoginButtonStatus:REMLoginButtonNormalStatus];
-        
-        if(error.code != -1001 && error.code != 306) {
-            [REMAlertHelper alert:REMLocalizedString(kLNCommon_ServerError)];
+        else {
+            [self.loginCarouselController setLoginButtonStatusNormal];
         }
+    } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
+        [self.loginCarouselController setLoginButtonStatusNormal];
     }];
 }
+
+-(void)setTempUser
+{
+    REMUserModel *tempUser = [[REMUserModel alloc] init];
+    tempUser.userId = 0;
+    tempUser.name = @"";
+    tempUser.spId = 1;
+    [REMAppContext setCurrentUser:tempUser];
+}
+
+
+#pragma mark - uitextfield delegate
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField
+//{
+//    BOOL retValue = NO;
+//    // see if we're on the username or password fields
+//    if([textField isEqual:self.emailTextField])
+//    {
+//        if(self.trialButton.isEnabled == YES){ //only call login when login button is enabled
+//            [self trialButtonPressed:nil];
+//            retValue = YES;
+//        }
+//    }
+//    else
+//    {
+//    }
+//    return retValue;
+//}
 
 @end

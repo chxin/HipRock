@@ -27,6 +27,8 @@
     return [[UIApplication sharedApplication] delegate];
 }
 
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -37,6 +39,10 @@
     // App info init
     [REMApplicationInfo initApplicationInfo];
     
+    // Recover login info
+    [REMApplicationContext recover];
+    
+    [REMApplicationContext cleanImage];
     //[REMStorage clearSessionStorage];
     
     // Weibo app key init
@@ -45,30 +51,10 @@
     
     // Google key init
     [GMSServices provideAPIKey:kGoogleMapsKey];
-    
-//#ifndef DEBUG
-    NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [NSString stringWithFormat:@"%@/statusconfig.plist",documents];
-    
-//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Configuration" ofType:@"plist"];
-    
-    // Read from document directory
-    NSMutableDictionary *settingsItem = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
-    
-    if(settingsItem == nil || ![settingsItem.allKeys containsObject:@"ShouldCleanCache"] || [settingsItem[@"ShouldCleanCache"] boolValue] == YES){
-        //clear everything, including login status, cached data and images
-        [REMUserModel clean];
-        [REMStorage clearOnApplicationActive];
-        [REMStorage clearSessionStorage];
-        
-        //create ShouldCleanCache key
-        settingsItem = [[NSMutableDictionary alloc] init];
-        [settingsItem setValue:@(NO) forKey:@"ShouldCleanCache"];
-        [settingsItem writeToFile:filePath atomically:YES];
-    }
-    
+
     return YES;
 }
+
 
 
 							

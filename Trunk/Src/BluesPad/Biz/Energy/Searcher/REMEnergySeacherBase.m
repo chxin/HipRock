@@ -27,11 +27,35 @@
         obj=[[REMEnergySeacherBase alloc]init];
     }
     obj.widgetInfo=widgetInfo;
+    obj.disableNetworkAlert=NO;
     return  obj;
 }
 
 - (REMBusinessErrorInfo *)beforeSendRequest{
     return nil;
+}
+
+- (void)setLoadingType:(REMEnergySearcherLoadingType)loadingType
+{
+    if (loadingType == REMEnergySearcherLoadingTypeLarge) {
+        UIActivityIndicatorView *loader=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        [loader setColor:[UIColor blackColor]];
+        [loader setBackgroundColor:[UIColor clearColor]];
+        UIView *image=[[UIView alloc]init];
+        [image setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.4]];
+        image.translatesAutoresizingMaskIntoConstraints=NO;
+        self.loadingBackgroundView=image;
+//        self.loadingBackgroundView.layer.borderColor=[UIColor redColor].CGColor;
+//        self.loadingBackgroundView.layer.borderWidth=1;
+        self.loadingView=loader;
+        loader.translatesAutoresizingMaskIntoConstraints=NO;
+    }
+    else{
+        UIActivityIndicatorView *activitor= [[UIActivityIndicatorView alloc] init];
+        [activitor setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+        
+        self.loadingView=activitor;
+    }
 }
 
 - (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(REMWidgetSearchModelBase *)model withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void (^)(id, REMBusinessErrorInfo *))callback
@@ -50,10 +74,10 @@
     }
     
     
-    REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:[model toSearchParam]];
+    REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:[model toSearchParam] accessCache:YES andMessageMap:nil];
     //store.maskContainer=maskerContainer;
     
-    
+    store.disableAlert=self.disableNetworkAlert;
    
     //[activitor setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];
     if(self.loadingView==nil){
@@ -98,30 +122,40 @@
             [allConstaints addObject:constraintWidth];
             [allConstaints addObject:constraintHeight];
         }
+
+    }
+    else{
+        if (self.loadingView.translatesAutoresizingMaskIntoConstraints==YES) {
+            [self.loadingView setFrame:maskerContainer.bounds];
+        }
     }
     
-    
-    
-    
-    
-    
-    [REMDataAccessor access:store success:^(NSDictionary *data){
+    [store access:^(id data) {
         [self.loadingView stopAnimating];
         [self.loadingView removeFromSuperview];
         [self.loadingBackgroundView removeFromSuperview];
         [maskerContainer removeConstraints:allConstaints];
-        if([data isEqual:[NSNull null]]==YES)return ;
-        REMEnergyViewData *viewData=[self processEnergyData:data];
-        if(callback!=nil){
-            callback(viewData,nil);
+        id ret;
+        if([data isEqual:[NSNull null]]==YES){
+            ret = nil;
         }
-        
-    } error:^(NSError *error,REMBusinessErrorInfo *errorInfo){
+        else{
+            ret = [self processEnergyData:data];
+        }
+        if(callback!=nil){
+            callback(ret,nil);
+        }
+    } error:^(NSError *error, REMDataAccessErrorStatus status, REMBusinessErrorInfo *errorInfo) {
         [self.loadingBackgroundView removeFromSuperview];
         [self.loadingView stopAnimating];
         [self.loadingView removeFromSuperview];
         [maskerContainer removeConstraints:allConstaints];
-        callback(nil,errorInfo);
+        if (status == REMDataAccessFailed) {
+            callback(nil,nil);
+        }
+        else if(errorInfo!=nil){
+            callback(nil,errorInfo);
+        }
     }];
 }
 

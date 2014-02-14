@@ -18,7 +18,7 @@
 
 + (UIImage *)blurImage2:(UIImage *)origImage;
 
-+ (UIImage *)parseImageFromNSData:(NSData *)data;
++ (UIImage *)parseImageFromNSData:(NSData *)data withScale:(CGFloat)scaleFactor;
 
 + (void)writeImageFile:(UIImage *)image withFileName:(NSString *)fileName;
 
@@ -36,5 +36,11 @@
 + (void)writeImageFile:(UIImage *)image withFullPath:(NSString *)fullPath;
 
 + (UIImage *) drawText:(NSString*) text inImage:(UIImage*)image inRect:(CGRect)rect;
+
++ (UIImage*)imageWithImage:(UIImage*)image scaledWithFactor:(CGFloat)factor;
+
++ (UIImage *)scaleImage:(UIImage*)image toSize:(CGSize)size;
+
++ (UIImage *)cropImage:(UIImage *)image toRect:(CGRect)rect;
 
 @end

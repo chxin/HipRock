@@ -20,7 +20,6 @@
 @property (nonatomic,weak) UIButton *timePickerButton;
 @property (nonatomic,weak) UIView *legendView;
 @property (nonatomic,weak) UISegmentedControl *legendSearchControl;
-@property (nonatomic,weak) UIView *chartContainer;
 @property (nonatomic,weak) UIButton *orderButton;
 
 @end

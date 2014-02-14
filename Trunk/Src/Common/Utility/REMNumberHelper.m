@@ -42,9 +42,15 @@
     
     double numberValue = [number doubleValue];
     
+    
     if(numberValue == 0){
         return @"0";
     }
+    
+    double sign=numberValue<0?-1:1;
+    
+    numberValue=ABS(numberValue);
+    
     if(numberValue < 1000){
         return [REMNumberHelper formatStringWithThousandSep:number withRoundDigit:10 withIsRound:YES];
     }
@@ -52,19 +58,19 @@
         return [REMNumberHelper formatStringWithThousandSep:number withRoundDigit:0 withIsRound:YES];
     }
     if(numberValue < 100000000){
-        NSString *text = [REMNumberHelper formatStringWithThousandSep:[NSNumber numberWithDouble:numberValue/1000] withRoundDigit:0 withIsRound:NO];
+        NSString *text = [REMNumberHelper formatStringWithThousandSep:[NSNumber numberWithDouble:numberValue*sign/1000] withRoundDigit:0 withIsRound:NO];
         return [NSString stringWithFormat:@"%@k", text];
     }
     if(numberValue < 100000000000){
-        NSString *text = [REMNumberHelper formatStringWithThousandSep:[NSNumber numberWithDouble:numberValue/1000000] withRoundDigit:0 withIsRound:NO];
+        NSString *text = [REMNumberHelper formatStringWithThousandSep:[NSNumber numberWithDouble:numberValue*sign/1000000] withRoundDigit:0 withIsRound:NO];
         return [NSString stringWithFormat:@"%@M", text];
     }
     if(numberValue < 100000000000000){
-        NSString *text = [REMNumberHelper formatStringWithThousandSep:[NSNumber numberWithDouble:numberValue/1000000000] withRoundDigit:0 withIsRound:NO];
+        NSString *text = [REMNumberHelper formatStringWithThousandSep:[NSNumber numberWithDouble:numberValue*sign/1000000000] withRoundDigit:0 withIsRound:NO];
         return [NSString stringWithFormat:@"%@G", text];
     }
     if(numberValue < 100000000000000000){
-        NSString *text = [REMNumberHelper formatStringWithThousandSep:[NSNumber numberWithDouble:numberValue/1000000000000] withRoundDigit:0 withIsRound:NO];
+        NSString *text = [REMNumberHelper formatStringWithThousandSep:[NSNumber numberWithDouble:numberValue*sign/1000000000000] withRoundDigit:0 withIsRound:NO];
         return [NSString stringWithFormat:@"%@T", text];
     }
     

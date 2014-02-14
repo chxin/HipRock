@@ -20,4 +20,6 @@
 
 @property (nonatomic,strong) REMEnergyViewData *chartData;
 @property (nonatomic) CGRect viewFrame;
+@property (nonatomic,strong) REMBusinessErrorInfo *serverError;
+@property (nonatomic) BOOL isServerTimeout;
 @end

@@ -8,7 +8,7 @@
 #import "REMBuildingAirQualityViewController.h"
 #import "REMBuildingAirQualityView.h"
 #import "REMBuildingDataViewController.h"
-#import "REMBuildingChartViewController.h"
+#import "REMBuildingChartContainerViewController.h"
 #import "REMBuildingAirQualityChartViewController.h"
 
 @interface REMBuildingAirQualityViewController ()
@@ -76,14 +76,15 @@
 
 - (void)loadTotalUsageByBuildingId:(NSNumber *)buildingId{
     NSDictionary *param = @{@"buildingId":buildingId};
-    REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSBuildingAirQualityTotalUsage parameter:param];
+    REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingAirQualityTotalUsage parameter:param accessCache:YES andMessageMap:nil];
+    store.disableAlert=YES;
     store.maskContainer = nil;
     store.groupName = [NSString stringWithFormat:@"building-data-%@", buildingId];
     [self.totalLabel showLoading];
     [self.outdoorLabel showLoading];
     [self.honeywellLabel showLoading];
     [self.mayairLabel showLoading];
-    [REMDataAccessor access:store success:^(NSDictionary *data) {
+    [store access:^(NSDictionary *data) {
         REMAirQualityModel *model=nil;
         if([data isEqual:[NSNull null]]==YES){
             model=nil;
@@ -99,8 +100,32 @@
         [self.honeywellLabel hideLoading];
         [self.mayairLabel hideLoading];
         [self addDataLabel];
-    } error:^(NSError *error, id response) {
-        
+    } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
+        [self.totalLabel hideLoading];
+        [self.outdoorLabel hideLoading];
+        [self.honeywellLabel hideLoading];
+        [self.mayairLabel hideLoading];
+        if (status == REMDataAccessFailed || status == REMDataAccessErrorMessage) {
+            NSString *serverError;
+            if (status == REMDataAccessFailed) {
+                serverError=NSLocalizedString(@"Common_ServerTimeout", @"");
+            }
+            else{
+                serverError=NSLocalizedString(@"Common_ServerError", @"");
+            }
+            NSString *serverErrorSimple;
+            if (status == REMDataAccessFailed) {
+                serverErrorSimple=NSLocalizedString(@"Common_ServerTimeoutSimple", @"");
+            }
+            else{
+                serverErrorSimple=NSLocalizedString(@"Common_ServerErrorSimple", @"");
+            }
+            [self.totalLabel setEmptyText:serverError];
+            [self.outdoorLabel setEmptyText:serverErrorSimple];
+            [self.honeywellLabel setEmptyText:serverErrorSimple];
+            [self.mayairLabel setEmptyText:serverErrorSimple];
+            [self addDataLabel];
+        }
     }];
 }
 
@@ -224,7 +249,7 @@
 - (void)initChartContainer
 {
     int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;
-    int chartContainerHeight= kBuildingChartHeight*2+kBuildingCommodityBottomMargin+85;
+    int chartContainerHeight= kBuildingChartHeight*2+kBuildingCommodityBottomMargin;
     NSString *title1=NSLocalizedString(@"Building_AirQualityDailyChart", @"");//室内外PM2.5逐日含量
     
     UILabel *titleLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityTitleFontSize)];
@@ -239,7 +264,7 @@
     
     
     if (self.childViewControllers.count<1) {
-        REMBuildingChartViewController *controller1=[[REMBuildingChartViewController alloc] init];
+        REMBuildingChartContainerViewController *controller1=[[REMBuildingChartContainerViewController alloc] init];
         controller1.viewFrame=CGRectMake(0, marginTop+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, chartContainerHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
         //NSLog(@"view frame:%@",NSStringFromCGRect(controller1.viewFrame));
         controller1.chartHandlerClass=[REMBuildingAirQualityChartViewController class];
@@ -252,7 +277,7 @@
 - (void)showChart{
     
     for (int i=0; i<self.childViewControllers.count; ++i) {
-        REMBuildingChartViewController *controller=self.childViewControllers[i];
+        REMBuildingChartContainerViewController *controller=self.childViewControllers[i];
         if(controller.isViewLoaded==NO){
             [self.view addSubview:controller.view];
         }

@@ -12,6 +12,8 @@
 #import "REMDimensions.h"
 #import "REMChartTooltipItem.h"
 #import "REMTextIndicatorFormator.h"
+#import "DCPieDataPoint.h"
+#import "DCPieSeries.h"
 
 #define kPieTooltipItemBaseLeft (kDMChart_TooltipContentWidth - kDMChart_TooltipItemWidth) / 2
 #define REMPieTooltipItemFrame(i) CGRectMake(kPieTooltipItemBaseLeft + (i)*(kDMChart_TooltipItemWidth + kMDChart_TooltipItemLeftOffset), 0, kDMChart_TooltipItemWidth, kDMChart_TooltipContentHeight)
@@ -37,13 +39,13 @@
  */
 
 
--(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
+-(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points chartWrapper:(DAbstractChartWrapper *)chartWrapper  inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
-    self = [super initWithHighlightedPoints:points atX:nil inEnergyData:data widget:widget andParameters:parameters];
+    self = [super initWithHighlightedPoints:points atX:nil chartWrapper:chartWrapper inEnergyData:data widget:widget andParameters:parameters];
     
     if(self){
         [self renderItems2];
-        [self renderPointer];
+//        [self renderPointer];
     }
     
     return self;
@@ -55,28 +57,53 @@
     //NSLog(@"highlight index: %d", self.highlightIndex);
     NSMutableArray *itemModels = [[NSMutableArray alloc] init];
     
-    for(int i=0;i<self.data.targetEnergyData.count;i++){
-        REMTargetEnergyData *targetData = self.data.targetEnergyData[i];
-        
-        if(REMIsNilOrNull(targetData) || REMIsNilOrNull(targetData.energyData) || targetData.energyData.count<=0 || REMIsNilOrNull(targetData.energyData[0])){
+    DCPieDataPoint *currentPoint = self.highlightedPoints[0];
+    
+    int index = 0;
+    for(DCPieDataPoint *brotherPoint in ((DCPieSeries *)currentPoint.series).datas){
+        if(brotherPoint.hidden)
             continue;
-        }
         
         REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
-        model.title = [self formatTargetName:targetData.target];
-        model.value = [targetData.energyData[0] dataValue];
-        model.color = [REMColor colorByIndex:i].uiColor;
-        model.index = i;
+        model.title = [self formatTargetName:brotherPoint.target];
+        model.value = brotherPoint.value;
+        model.color = brotherPoint.color;
+        model.index = index;
         
-        if(REMIsNilOrNull(targetData.target.uomName)){
-            model.uom = REMUoms[@(targetData.target.uomId)];
+        if(REMIsNilOrNull(brotherPoint.target.uomName)){
+            model.uom = REMUoms[@(brotherPoint.target.uomId)];
         }
         else{
-            model.uom = targetData.target.uomName;
+            model.uom = brotherPoint.target.uomName;
         }
         
         [itemModels addObject:model];
+        
+        index++;
     }
+    
+//    for(int i=0;i<self.data.targetEnergyData.count;i++){
+//        REMTargetEnergyData *targetData = self.data.targetEnergyData[i];
+//        
+//        if(REMIsNilOrNull(targetData) || REMIsNilOrNull(targetData.energyData) || targetData.energyData.count<=0 || REMIsNilOrNull(targetData.energyData[0])){
+//            continue;
+//        }
+//        
+//        REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
+//        model.title = [self formatTargetName:targetData.target];
+//        model.value = [targetData.energyData[0] dataValue];
+//        model.color = [REMColor colorByIndex:i];
+//        model.index = i;
+//        
+//        if(REMIsNilOrNull(targetData.target.uomName)){
+//            model.uom = REMUoms[@(targetData.target.uomId)];
+//        }
+//        else{
+//            model.uom = targetData.target.uomName;
+//        }
+//        
+//        [itemModels addObject:model];
+//    }
     
     return itemModels;
 }
@@ -239,27 +266,41 @@
     if(self.highlightedPoints.count <=0)
         return 0;
     
-    REMEnergyData *point = self.highlightedPoints[0];
+    DCPieDataPoint *point = self.highlightedPoints[0];
     
     if(REMIsNilOrNull(point))
         return 0;
     
-    NSMutableArray *energyData = [[NSMutableArray alloc] init];
-    for(REMTargetEnergyData *targetData in self.data.targetEnergyData){
-        if(!REMIsNilOrNull(targetData) && !REMIsNilOrNull(targetData.energyData) && targetData.energyData.count > 0){
-            [energyData addObject:targetData];
-        }
-    }
+    DCPieDataPoint *currentPoint = self.highlightedPoints[0];
     
-    for(int i=0;i<energyData.count;i++){
-        REMTargetEnergyData *targetData = energyData[i];
-        
-        if(REMIsNilOrNull(targetData.energyData) || targetData.energyData.count <= 0)
+    int index = 0;
+    for(DCPieDataPoint *brotherPoint in ((DCPieSeries *)currentPoint.series).datas){
+        if(brotherPoint.hidden)
             continue;
         
-        if([point isEqual:targetData.energyData[0]])
-            return i;
+        if([brotherPoint isEqual:currentPoint])
+            return index;
+        
+        index++;
     }
+    
+    
+//    NSMutableArray *energyData = [[NSMutableArray alloc] init];
+//    for(REMTargetEnergyData *targetData in self.data.targetEnergyData){
+//        if(!REMIsNilOrNull(targetData) && !REMIsNilOrNull(targetData.energyData) && targetData.energyData.count > 0){
+//            [energyData addObject:targetData];
+//        }
+//    }
+//    
+//    for(int i=0;i<energyData.count;i++){
+//        REMTargetEnergyData *targetData = energyData[i];
+//        
+//        if(REMIsNilOrNull(targetData.energyData) || targetData.energyData.count <= 0)
+//            continue;
+//        
+//        if([point isEqual:targetData.energyData[0]])
+//            return i;
+//    }
     
     return 0;
 }
@@ -278,16 +319,4 @@
     }
         
 }
-
--(void)renderPointer
-{
-    CGSize imageSize = REMIMG_TooltipsArrow_Chart.size;
-    UIImageView *pointer = [[UIImageView alloc] initWithImage: REMIMG_TooltipsArrow_Chart];
-//    pointer.layer.borderColor = [UIColor orangeColor].CGColor;
-//    pointer.layer.borderWidth = 1.0;
-    pointer.center = CGPointMake(kDMChart_TooltipViewWidth/2, kDMChart_TooltipViewHeight + imageSize.height/2);
-    
-    [self addSubview:pointer];
-}
-
 @end

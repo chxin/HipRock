@@ -24,7 +24,6 @@
 
 #define kLNLogin_UserNotExist @"Login_UserNotExist"
 #define kLNLogin_WrongPassword @"Login_WrongPassword"
-#define kLNLogin_NotAuthorized @"Login_NotAuthorized"
 #define kLNLogin_AccountLocked @"Login_AccountLocked"
 
 

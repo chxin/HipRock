@@ -166,20 +166,19 @@
         }
         else{
             NSDictionary *parameter = @{@"pictureId":imageIds[0], @"isSmall":@"true"};
-            REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingPicture parameter:parameter];
+            REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingPicture parameter:parameter accessCache:YES andMessageMap:nil];
             store.groupName = kGalleryBuildingImageGroupName;
-            [REMDataAccessor access:store success:^(id data) {
+            [store access:^(id data) {
                 if(data == nil || [data length] <= 2)
                     return;
                 
-                UIImage *smallImage = [REMImageHelper parseImageFromNSData:data];
+                UIImage *smallImage = [REMImageHelper parseImageFromNSData:data withScale:1.0];
                 [REMImageHelper writeImageFile:smallImage withFullPath:smallImagePath];
                 
                 UIImage *smallBlurImage = [REMImageHelper blurImage:smallImage];
                 [REMImageHelper writeImageFile:smallBlurImage withFullPath:smallBlurImagePath];
                 
                 completed([UIImage imageWithContentsOfFile:smallImagePath]);
-            } error:^(NSError *error, id response) {
             }];
         }
     }
@@ -222,11 +221,15 @@
     cell.controller = self;
     
     [self loadBuildingSmallImage:cell.building.pictureIds :^(UIImage *image) {
-        [cell.backgroundButton setImage:image forState:UIControlStateNormal];
+        UIImage *scaled = [cell resizeImageForCell:image];
+        
+        [cell.backgroundButton setImage:scaled forState:UIControlStateNormal];
+        cell.backgroundButton.imageView.contentMode = UIViewContentModeScaleToFill;
     }];
     
     return cell;
 }
+
 
 
 @end

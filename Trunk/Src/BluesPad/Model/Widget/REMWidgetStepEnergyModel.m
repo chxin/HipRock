@@ -7,11 +7,31 @@
 //
 
 #import "REMWidgetStepEnergyModel.h"
+#import "REMWidgetStepCalculationModel.h"
 
 @implementation REMWidgetStepEnergyModel
 
+- (void)setTimeRangeItem:(REMTimeRange *)range AtIndex:(NSUInteger)index
+{
+    [super setTimeRangeItem:range AtIndex:index];
+    [self resetStepByTimeRange:range];
+    
+}
 
+- (void)resetStepByTimeRange:(REMTimeRange *)range{
+    REMWidgetStepCalculationModel *model = [REMWidgetStepCalculationModel tryNewStepByRange:range];
+    BOOL found=NO;
+    for (NSNumber *stepNumber in model.stepList) {
+        if (self.step == ((REMEnergyStep)[stepNumber integerValue])) {
+            found=YES;
+            break;
+        }
+    }
+    if (found==NO) {
+        self.step=model.defaultStep;
+    }
 
+}
 
 - (REMEnergyStep)stepTypeByNumber:(NSNumber *)stepNumber
 {

@@ -37,18 +37,6 @@ const static CGFloat kRankingTimePickerWidth=250;
 }
 
 - (void)initModelAndSearcher{
-    self.model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
-                  .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
-    self.searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
-    UIActivityIndicatorView *loader=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [loader setColor:[UIColor blackColor]];
-    [loader setBackgroundColor:[UIColor clearColor]];
-    UIView *image=[[UIView alloc]init];
-    [image setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.4]];
-    image.translatesAutoresizingMaskIntoConstraints=NO;
-    self.searcher.loadingBackgroundView=image;
-    self.searcher.loadingView=loader;
-    loader.translatesAutoresizingMaskIntoConstraints=NO;
     REMWidgetRankingSearchModel *m=(REMWidgetRankingSearchModel *)self.model;
     m.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
 }
@@ -137,9 +125,6 @@ const static CGFloat kRankingTimePickerWidth=250;
     [c addSubview:chartContainer];
     self.chartContainer=chartContainer;
     self.maskerView=self.chartContainer;
-    //self.chartContainer.layer.borderColor=[UIColor redColor].CGColor;
-    //self.chartContainer.layer.borderWidth=1;
-    //[self showEnergyChart];
     
     NSMutableArray *chartConstraints = [NSMutableArray array];
     UIView *searchView=self.searchView;
@@ -155,14 +140,14 @@ const static CGFloat kRankingTimePickerWidth=250;
     
 }
 
+- (CGFloat)xPositionForPinToBuildingCoverButton
+{
+    return 970;
+}
+
 - (void)search{
-    [self doSearchWithModel:self.model callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
-        if(data!=nil){
-            [self reloadChart];
-        }
-        else{
-        }
-    }];
+    
+    [self searchData:self.tempModel];
 }
 
 
@@ -174,7 +159,7 @@ const static CGFloat kRankingTimePickerWidth=250;
     NSString *text1=[NSString stringWithFormat:@"%@ %@",relativeDate,text];
     
     [self.timePickerButton setTitle:text1 forState:UIControlStateNormal];
-    REMWidgetRankingSearchModel *rankingModel=(REMWidgetRankingSearchModel *)self.model;
+    REMWidgetRankingSearchModel *rankingModel=(REMWidgetRankingSearchModel *)self.tempModel;
     [rankingModel setTimeRangeItem:range AtIndex:0];
     rankingModel.relativeDateComponent=relativeDate;
     rankingModel.relativeDateType=relativeType;
@@ -200,11 +185,15 @@ const static CGFloat kRankingTimePickerWidth=250;
 
 
 - (void)showChart{
+    [super showChart];
     if(self.energyData!=nil){
         [self showEnergyChart];
     }
     else{
-        [self search];
+        if (self.ownerController.serverError == nil && self.ownerController.isServerTimeout==NO) {
+            [self search];
+        }
+        
     }
 }
 
@@ -219,8 +208,11 @@ const static CGFloat kRankingTimePickerWidth=250;
     
     REMChartStyle* style = [REMChartStyle getMaximizedStyle];
     DCRankingWrapper  *widgetWrapper;
+    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.widgetInfo];
+//    wrapperConfig.multiTimeSpans=self.model.timeRangeArray;
+
     if (widgetType == REMDiagramTypeRanking) {
-        widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData widgetContext:self.widgetInfo.contentSyntax style:style];
+        widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
     }
     if (widgetWrapper != nil) {
         [self.chartContainer addSubview:widgetWrapper.view];
@@ -240,7 +232,7 @@ const static CGFloat kRankingTimePickerWidth=250;
     [self.timePickerButton setBackgroundColor:[UIColor clearColor]];
     UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     UINavigationController *nav=[storyboard instantiateViewControllerWithIdentifier:@"datePickerNavigationController"];
-    
+    nav.navigationBar.translucent=NO;
     UIPopoverController *popoverController=[[UIPopoverController alloc]initWithContentViewController:nav];
     REMDatePickerViewController *dateViewController =nav.childViewControllers[0];
     dateViewController.showHour=NO;
@@ -298,7 +290,7 @@ const static CGFloat kRankingTimePickerWidth=250;
 
 -(void)hideTooltip:(void (^)(void))complete
 {
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.3 delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.tooltipView.frame = kDMChart_TooltipHiddenFrame;
     } completion:^(BOOL isCompleted){
         [self.tooltipView removeFromSuperview];
@@ -315,12 +307,11 @@ const static CGFloat kRankingTimePickerWidth=250;
     if(self.tooltipView==nil)
         return;
     
+    [self.chartWrapper cancelToolTipStatus];
     
+    [self.searchView setHidden:NO];
     
     [self hideTooltip:^{
-        [self.chartWrapper cancelToolTipStatus];
-        
-        [self.searchView setHidden:NO];
     }];
 }
 

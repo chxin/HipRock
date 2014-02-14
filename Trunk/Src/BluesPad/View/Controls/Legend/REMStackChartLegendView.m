@@ -21,7 +21,14 @@
         model.index = i;
         model.title = names[i];
         model.type = REMChartSeriesIndicatorColumn;
-        model.tappable = NO;
+        //if(self.widget.contentSyntax.dataStoreType == REMDSEnergyCostElectricity){
+            model.tappable = NO;
+//        }
+//        else{
+//            model.tappable = YES;
+//        }
+        model.legendView = self;
+        
         
         [models addObject:model];
     }

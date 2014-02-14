@@ -6,8 +6,8 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
-#import "REMChartLegendView.h"
+#import "REMTrendChartLegendView.h"
 
-@interface REMStackChartLegendView : REMChartLegendView
+@interface REMStackChartLegendView : REMTrendChartLegendView
 
 @end

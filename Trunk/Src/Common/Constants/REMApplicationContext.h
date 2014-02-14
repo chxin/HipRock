@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "REMUserModel.h"
 #import "REMCustomerModel.h"
+#import "REMAppConfiguration.h"
+#import "REMUpdateAllManager.h"
 
 #define REMAppContext [REMApplicationContext instance]
 #define REMAppCurrentUser REMAppContext.currentUser
 #define REMAppCurrentCustomer REMAppContext.currentCustomer
 #define REMAppCurrentLogo REMAppContext.currentCustomerLogo
+#define REMAppConfig REMAppContext.appConfig
 
 @interface REMApplicationContext : NSObject
 
@@ -21,7 +24,22 @@
 @property (nonatomic,strong) REMCustomerModel *currentCustomer;
 @property (nonatomic,strong) UIImage *currentCustomerLogo;
 
+@property (nonatomic,strong) REMAppConfiguration *appConfig;
+
+@property (nonatomic,strong) NSArray *buildingInfoArray;
+
+@property (nonatomic,strong) REMUpdateAllManager *updateManager;
+
+@property (nonatomic,strong) NSString *buildingInfoArrayStorageKey;
+@property (nonatomic,getter = getCacheMode, setter = setCacheMode:) BOOL cacheMode;
+
++ (void)updateBuildingInfoArrayToStorage;
+
 + (REMApplicationContext *)instance;
++ (void)recover;
 + (void)destroy;
++ (void)cleanImage;
+-(BOOL)getCacheMode;
+-(void)setCacheMode:(BOOL)value;
 
 @end

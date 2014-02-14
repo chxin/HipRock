@@ -11,17 +11,18 @@
 #import "REMTargetEnergyData.h"
 #import "REMEnergyCalendarData.h"
 #import "REMEnergyError.h"
-
+#import "REMEnergyLabellingLevelData.h"
+#import "REMCommonHeaders.h"
 
 @interface REMEnergyViewData : REMJSONObject
 
 
-@property (nonatomic,strong) REMTargetEnergyData *targetGlobalData;
 @property (nonatomic,strong) NSArray *targetEnergyData;
 @property (nonatomic,strong) NSArray *calendarData;
 @property (nonatomic,strong) NSArray *error;
 @property (nonatomic,strong) REMTimeRange *visibleTimeRange;
 @property (nonatomic,strong) REMTimeRange *globalTimeRange;
+@property (nonatomic,strong) NSArray *labellingLevelArray;
 
 
 @end

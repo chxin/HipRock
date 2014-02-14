@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) CATextLayer* cacheLayer;
 @property (nonatomic, strong) NSMutableDictionary* visableLabelLayers;
+@property (nonatomic, assign) CGRect visableFrame;
 
 @end
 
@@ -25,6 +26,7 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor].CGColor;
         self.visableLabelLayers = [[NSMutableDictionary alloc]init];
+        self.masksToBounds = NO;
     }
     return self;
 }
@@ -32,13 +34,11 @@
     [super drawInContext:ctx];
     
     CGPoint addLines[2];
-    addLines[0].x = 0;
-    addLines[0].y = 0;
-    addLines[1].x = self.frame.size.width;
-    addLines[1].y = 0;
+    addLines[0] = self.axis.startPoint;
+    addLines[1] = self.axis.endPoint;
     
     CGContextSetLineJoin(ctx, kCGLineJoinMiter);
-    [DCUtility setLineStyle:ctx style:self.axis.lineStyle];
+    [DCUtility setLineStyle:ctx style:self.axis.lineStyle lineWidth:self.axis.lineWidth];
     CGContextSetBlendMode(ctx, kCGBlendModeNormal);
     CGContextBeginPath(ctx);
     CGContextAddLines(ctx, addLines, 2);
@@ -66,16 +66,17 @@
     for (int i = start; i <= end; i++) {
         NSString* labelText = [self textForX:i];
         if (REMIsNilOrNull(labelText) || labelText.length == 0) continue;
-        CGFloat centerX = (i + offset - self.graphContext.hRange.location) * self.frame.size.width / self.graphContext.hRange.length;
+        CGFloat centerX = self.graphContext.plotRect.origin.x + (i + offset - self.graphContext.hRange.location) * self.graphContext.plotRect.size.width / self.graphContext.hRange.length;
         CGSize size = [DCUtility getSizeOfText:labelText forFont:self.font];
         CGRect textFrame;
+        CGFloat textY = self.visableFrame.origin.y + self.visableFrame.size.height - size.height;
         if (size.width > maxLabelLength) {
-            textFrame = CGRectMake(centerX-maxLabelLength/2,self.frame.size.height-size.height, maxLabelLength,size.height);
+            textFrame = CGRectMake(centerX-maxLabelLength/2,textY, maxLabelLength,size.height);
         } else {
-            textFrame = CGRectMake(centerX-size.width/2,self.frame.size.height-size.height, size.width,size.height);
+            textFrame = CGRectMake(centerX-size.width/2,textY, size.width,size.height);
         }
-        if ([DCUtility isFrame:textFrame visableIn:self.bounds]) {
-            [labelText drawInRect:textFrame withFont:self.font lineBreakMode:NSLineBreakByClipping alignment: NSTextAlignmentCenter];
+        if ([DCUtility isFrame:textFrame visableIn:self.visableFrame]) {
+            [labelText drawInRect:textFrame withFont:self.font lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentCenter];
         }
     }
     UIGraphicsPopContext();
@@ -165,10 +166,6 @@
 //    return text;
 //}
 
--(void)willHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
-    // Nothing to do.
-}
-
 -(void)didHRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
     if (oldRange.length != newRange.length)
@@ -200,16 +197,17 @@
 }
 
 -(void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
+    [super setFrame:self.superlayer.bounds];
+    self.visableFrame = frame;
     [self updateXFormatterInterval];
 }
 
 -(void)updateXFormatterInterval {
     if (!REMIsNilOrNull(self.labelFormatter) && [self.labelFormatter isKindOfClass:[_DCXLabelFormatter class]]) {
-        if (self.frame.size.width == 0 || REMIsNilOrNull(self.graphContext.hRange) || self.graphContext.hRange.length==0) return;
+        if (self.graphContext.plotRect.size.width == 0 || REMIsNilOrNull(self.graphContext.hRange) || self.graphContext.hRange.length==0) return;
         const int minDistance = 80;
         int interval = 0;
-        float distanceNearbyPoints = self.frame.size.width / self.graphContext.hRange.length;
+        float distanceNearbyPoints = self.graphContext.plotRect.size.width / self.graphContext.hRange.length;
         if (distanceNearbyPoints >= minDistance) {
             interval = 1;
         } else {

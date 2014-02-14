@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "REMChartSeriesIndicator.h"
+#import "DCSeries.h"
+@class REMChartLegendBase;
+
 
 
 @protocol REMChartLegendItemDelegate <NSObject>
 
 -(void)legendStateChanged:(UIControlState)state onIndex:(int)index;
+-(BOOL)canBeHidden;
 
 @end
 
@@ -24,7 +28,8 @@
 @property (nonatomic,weak) NSString *title;
 @property (nonatomic) BOOL isBenchmark;
 @property (nonatomic) BOOL tappable;
-@property (nonatomic,weak) NSObject<REMChartLegendItemDelegate> *delegate;
+@property (nonatomic,weak) REMChartLegendBase *legendView;
+@property (nonatomic) BOOL isDefaultHidden;
 
 @end
 

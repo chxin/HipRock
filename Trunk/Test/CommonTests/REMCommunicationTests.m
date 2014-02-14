@@ -7,7 +7,6 @@
 //
 
 #import "REMCommunicationTests.h"
-#import "REMDataAccessor.h"
 
 @implementation REMCommunicationTests
 

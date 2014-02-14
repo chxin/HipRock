@@ -44,16 +44,19 @@
     return gradient;
 }
 
-- (UIButton *)getCustomerLogoButton
-{
-    UIButton *customerLogoButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kDMCommon_CustomerLogoWidth, kDMCommon_CustomerLogoHeight)];
-    
-    [customerLogoButton setImage:REMAppCurrentLogo forState:UIControlStateNormal];
-    customerLogoButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    customerLogoButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [customerLogoButton addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return customerLogoButton;
+- (UIButton *)settingButton{
+    UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
+    if (REMISIOS7) {
+        button = [UIButton buttonWithType:UIButtonTypeSystem];
+        button.tintColor=[UIColor whiteColor];
+    }
+    else{
+        button.showsTouchWhenHighlighted = YES;
+    }
+    [button setImage:[UIImage imageNamed:@"Setting"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [button setFrame:CGRectMake(967, REMDMCOMPATIOS7(kDMCommon_TopLeftButtonTop), kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonHeight)];
+    return button;
 }
 
 

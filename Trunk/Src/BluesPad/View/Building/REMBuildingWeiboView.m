@@ -8,6 +8,7 @@
 
 #import "REMBuildingWeiboView.h"
 #import "REMColor.h"
+#import "REMNetworkHelper.h"
 
 const CGFloat kWeiboWindowHeight = 165;
 const CGFloat kWeiboWindowWidth = 390;
@@ -17,9 +18,9 @@ const CGFloat kWeiboToolbarHeight = 42;
 
 const CGFloat kWeiboButtonHeight = 30;
 const CGFloat kWeiboButtonWidth = 60;
-const CGFloat kWeiboButtonMargin = 10;
+const CGFloat kWeiboButtonMargin = 16;
 
-const CGFloat kWeiboTextViewMargin = 3;
+const CGFloat kWeiboTextViewMargin = 9;
 
 const CGFloat kWeiboCharactorLabelMarginBottom = 12;
 const CGFloat kWeiboCharactorLabelHeight = 9;
@@ -67,9 +68,9 @@ const NSInteger kWeiboMaxLength = 140;
     mainBackgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1];
     buttonEnableTextColor = [UIColor colorWithRed:0 green:122/255.0 blue:1 alpha:1];
     buttonDisableTextColor = [REMColor colorByHexString:@"#95959a"];
-    buttonTextSize = 16;
-    titleTextSize = 16;
-    inputTextSize = 16;
+    buttonTextSize = 17;
+    titleTextSize = 17;
+    inputTextSize = 17;
     
     weiboContentView = [[UIView alloc]initWithFrame:CGRectMake((self.frame.size.width - kWeiboWindowWidth) / 2, (self.frame.size.height - kWeiboWindowHeight) / 2, kWeiboWindowWidth, kWeiboWindowHeight)];
     weiboContentView.layer.cornerRadius = 5;
@@ -83,11 +84,12 @@ const NSInteger kWeiboMaxLength = 140;
     toolbarLabel.textAlignment = NSTextAlignmentCenter;
     toolbarLabel.backgroundColor = [UIColor clearColor];
     [toolbarLabel setTextColor:[UIColor blackColor]];
-    toolbarLabel.font = [UIFont fontWithName:@(kBuildingFontLight) size:titleTextSize];
+    toolbarLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:titleTextSize];
     [topToolbar addSubview:toolbarLabel];
     
     UIButton* cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [cancelBtn setFrame:CGRectMake(kWeiboButtonMargin, 0, kWeiboButtonWidth, kWeiboToolbarHeight)];
     cancelBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:buttonTextSize];
     cancelBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
@@ -95,6 +97,7 @@ const NSInteger kWeiboMaxLength = 140;
     [cancelBtn setTitle:NSLocalizedString(@"Weibo_CancelButtonText", @"") forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(cancelClicked:) forControlEvents:UIControlEventTouchUpInside];
     [sendBtn setFrame:CGRectMake(kWeiboWindowWidth - kWeiboButtonWidth - kWeiboButtonMargin, 0, kWeiboButtonWidth, kWeiboToolbarHeight)];
+    sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     sendBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:buttonTextSize];
     sendBtn.titleLabel.textAlignment = NSTextAlignmentRight;
     [sendBtn setTitleColor:buttonEnableTextColor forState:UIControlStateNormal];
@@ -196,20 +199,25 @@ const NSInteger kWeiboMaxLength = 140;
 }
 
 -(void)sendClicked:(id)sender {
-    if (![Weibo.weibo isAuthenticated]) {
-        //        [REMAlertHelper alert:@"未绑定微博账户。"];
-        [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
-            NSString *message = nil;
-            if (!error) {
-                [self sendWeibo];
-            }
-            else {
-                message = [NSString stringWithFormat:NSLocalizedString(@"Weibo_AccountBindingFail", @""), error];
-                [REMAlertHelper alert:message];
-            }
-        }];
+    NetworkStatus reachability = [REMNetworkHelper checkCurrentNetworkStatus];
+    if (reachability == NotReachable) {
+        [REMAlertHelper alert:REMLocalizedString(@"Weibo_NONetwork")];
     } else {
-        [self sendWeibo];
+        if (![Weibo.weibo isAuthenticated]) {
+            //        [REMAlertHelper alert:@"未绑定微博账户。"];
+            [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
+                NSString *message = nil;
+                if (!error) {
+                    [self sendWeibo];
+                }
+                else {
+                    message = [NSString stringWithFormat:NSLocalizedString(@"Weibo_AccountBindingFail", @""), error];
+                    [REMAlertHelper alert:message];
+                }
+            }];
+        } else {
+            [self sendWeibo];
+        }
     }
 }
 

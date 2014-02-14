@@ -41,6 +41,8 @@
         //self.contentMode = UIViewContentModeScaleToFill;
         self.contentView.backgroundColor = [UIColor clearColor];
         self.contentView.clipsToBounds = NO;
+//        self.layer.borderColor = [UIColor orangeColor].CGColor;
+//        self.layer.borderWidth = 1.0;
     }
     
     return self;

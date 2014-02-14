@@ -22,4 +22,7 @@
 @property (nonatomic,strong) NSNumber *rankType;
 
 @property (nonatomic,strong) NSNumber *destination;
+
+@property (nonatomic) NSComparisonResult order;
+@property (nonatomic) REMRankingRange range;
 @end
