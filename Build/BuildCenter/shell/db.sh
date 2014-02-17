@@ -37,6 +37,11 @@ else
 	exit 1
 fi
 
+python $makedir/updatebundleversion.py $projectdir/Trunk/Src/BluesPad/BluesPad-Info.plist $bundleversion
+echo "[GIT]:Changed CFBundleVersion to ${bundleversion}"
+git commit -a -m "[GIT]:Changed CFBundleVersion to ${bundleversion}"
+git push
+
 #clean and build
 templatefolder=$buildroot/Templates
 targetfolder=$archivefolder/DailyBuild/$buildnumber
