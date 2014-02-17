@@ -1,0 +1,5 @@
+total 320
+drwxrwxrwx   4 buildserver  staff     136 Dec 31 10:23 .
+drwxr-xr-x  13 buildserver  staff     442 Dec 31 09:20 ..
+-rwxrwxrwx   1 buildserver  staff  163840 Dec 31 10:10 blues.sqlite
+-rw-r--r--   1 buildserver  staff       0 Dec 31 10:23 result.txt

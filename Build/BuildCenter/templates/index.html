@@ -1,0 +1,37 @@
+$def with (release,ir,db)
+
+$var pagefamily:home
+$var title: Home
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <div class="col-md-4">
+      <img src="/static/images/AppLogo.png" style="width:256px;height:256px;" /><!--class="img-thumbnail"-->
+    </div>
+    <div class="col-md-8">
+      <h1>Release $release.version</h1>
+      <p>$:release.buildtime</p>
+      <p>$:release.description</p>
+      <p><a class="btn btn-success btn-lg" role="button" href="itms-services://?action=download-manifest&url=$(archive)$(release.path)BluesPad.plist">Install</a></p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Latest Daily build: DB #$:db.id</h2>
+      <p>$:db.buildtime</p>
+      <p>$:db.description</p>
+      <p><a class="btn btn-success" href="itms-services://?action=download-manifest&url=$(archive)$(db.path)BluesPad.plist" role="button">Install</a></p>
+    </div>
+    <div class="col-md-6">
+      <h2>Latest Internal Release: IR $ir.version</h2>
+      <p>#$:ir.id $:ir.buildtime</p>
+      <p>$:ir.description</p>
+      <p><a class="btn btn-success" href="itms-services://?action=download-manifest&url=$(archive)$(ir.path)BluesPad.plist" role="button" href="$ir.path">Install</a></p>
+   </div>
+  </div>
+
+</div> <!-- /container -->

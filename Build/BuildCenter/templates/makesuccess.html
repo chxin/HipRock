@@ -1,0 +1,18 @@
+$def with (build,buildid)
+$var pagefamily:manage
+$var title: Submit success!
+
+<div class="container">
+  <div class=".center-block">
+    <h1>Build submited</h1>
+    <p class="lead">Build id is $buildid, please wait till the build finishes and you'll see it in 
+    	$if build['type']==1:
+    		<a href="/db">install</a> 
+        $elif build['type']==2:
+            <a href="/ir">install</a> 
+    	$else:
+    		<a href="/release">install</a> 
+    	page.
+    </p>
+  </div>
+</div>

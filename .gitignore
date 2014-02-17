@@ -6,3 +6,4 @@
 *.xcworkspacedata
 *.xccheckout
 xcuserdata/
+*.pyc
