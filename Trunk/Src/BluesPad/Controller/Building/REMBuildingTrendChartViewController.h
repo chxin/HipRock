@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "REMBuildingChartBaseViewController.h"
 #import "REMEnergyViewData.h"
-#import "REMColor.h"
 #import "REMToggleButtonGroup.h"
 
 @interface REMBuildingTrendChartViewController : REMBuildingChartBaseViewController<REMToggleButtonGroupDelegate>
