@@ -5,6 +5,8 @@ import sys
 #plist = 'BluesPad-Info.plist'
 
 def main(filename,bundleversion):
+	print filename
+	print bundleversion
 	tree = ET.parse(filename)
 	root = tree.getroot()[0]
 
