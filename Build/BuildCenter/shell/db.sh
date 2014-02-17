@@ -37,6 +37,7 @@ else
 	exit 1
 fi
 
+echo 'python $makedir/updatebundleversion.py $projectdir/Trunk/Src/BluesPad/BluesPad-Info.plist $bundleversion'
 python $makedir/updatebundleversion.py $projectdir/Trunk/Src/BluesPad/BluesPad-Info.plist $bundleversion
 echo "[GIT]:Changed CFBundleVersion to ${bundleversion}"
 git commit -a -m "[GIT]:Changed CFBundleVersion to ${bundleversion}"
