@@ -14,7 +14,7 @@ script = {
 class BuildScript(object):
 
 	def db(self,buildid,buildnumber,outpath):
-		status = self.execute(script['db'],[buildnumber],outpath)
+		status = self.execute(script['db'],[buildnumber,str(buildid)],outpath)
 		self.update_status(buildid,status)
 
 	def ir(self,buildid,branch, version,outpath):

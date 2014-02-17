@@ -2,9 +2,10 @@
 
 buildnumber=$1
 branch=dev
+bundleversion=$2
 
 
-if [ "$buildnumber" = "" ]; then
+if [ "$buildnumber" = "" ] || [ "$bundleversion" = "" ]; then
 	echo incomplete parameter
 	exit 1
 fi
@@ -66,8 +67,8 @@ fi
 #change data source?
 
 #update urls in plist
-echo ${makedir}updatepackageurl.py ${targetfolder}/BluesPad.plist ${archiveurl}/DailyBuild/$buildnumber 8
-python ${makedir}updatepackageurl.py ${targetfolder}/BluesPad.plist ${archiveurl}/DailyBuild/$buildnumber 8
+echo ${makedir}updatepackageurl.py ${targetfolder}/BluesPad.plist ${archiveurl}/DailyBuild/$buildnumber $bundleversion
+python ${makedir}updatepackageurl.py ${targetfolder}/BluesPad.plist ${archiveurl}/DailyBuild/$buildnumber $bundleversion
 
 #package
 make --makefile=makefile --directory=$makedir xcpackage apppath=$targetfolder/BluesPad.app ipapath=$targetfolder/BluesPad.ipa
