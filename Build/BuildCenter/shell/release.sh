@@ -37,8 +37,9 @@ python ${makedir}updatedatasource.py ${targetfolder}/BluesPad.app/Configuration.
 plutil -convert binary1 ${targetfolder}/BluesPad.app/Configuration.plist
 
 #resign app
+codesign -d --entitlements ${targetfolder}/entitlements.plist ${targetfolder}/BluesPad.app
 rm -R ${targetfolder}/BluesPad.app/_CodeSignature
-codesign -f -s "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)" ${targetfolder}/BluesPad.app
+codesign -f -s "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)" ${targetfolder}/BluesPad.app --entitlements ${targetfolder}/entitlements.plist -v
 
 #update urls in plist
 #sed "s/##rooturl##/${url}/g" $targetfolder/BluesPad.plist

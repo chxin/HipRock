@@ -65,14 +65,15 @@ fi
 cp $templatefolder/* $targetfolder/
 
 #change data source?
-#echo ${makedir}updatedatasource.py ${targetfolder}/BluesPad.app/Configuration.plist 'test'
-#plutil -convert xml1 ${targetfolder}/BluesPad.app/Configuration.plist
-#python ${makedir}updatedatasource.py ${targetfolder}/BluesPad.app/Configuration.plist 'test'
-#plutil -convert binary1 ${targetfolder}/BluesPad.app/Configuration.plist
+echo ${makedir}updatedatasource.py ${targetfolder}/BluesPad.app/Configuration.plist 'test'
+plutil -convert xml1 ${targetfolder}/BluesPad.app/Configuration.plist
+python ${makedir}updatedatasource.py ${targetfolder}/BluesPad.app/Configuration.plist 'test'
+plutil -convert binary1 ${targetfolder}/BluesPad.app/Configuration.plist
 
 #resign app
-#rm -R ${targetfolder}/BluesPad.app/_CodeSignature
-#codesign -f -s "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)" ${targetfolder}/BluesPad.app
+codesign -d --entitlements ${targetfolder}/entitlements.plist ${targetfolder}/BluesPad.app
+rm -R ${targetfolder}/BluesPad.app/_CodeSignature
+codesign -f -s "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)" ${targetfolder}/BluesPad.app --entitlements ${targetfolder}/entitlements.plist -v
 
 #update urls in plist
 echo bundleversion
