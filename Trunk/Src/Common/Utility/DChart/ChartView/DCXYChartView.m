@@ -197,6 +197,7 @@
 
 -(void)setFrame:(CGRect)frame {
     [super setFrame:frame];
+    [self recalculatePlotRect];
     [self updateAllLayerFrame];
 }
 
@@ -273,6 +274,9 @@
     self.xAxis.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
     
     self.graphContext.plotRect = CGRectMake(plotSpaceLeft, plotSpaceTop, plotSpaceRight-plotSpaceLeft, plotSpaceBottom-plotSpaceTop);
+    for (_DCCoordinateSystem* coord in self.coodinates) {
+        coord.heightUnitInScreen = (coord.yRange != nil && coord.yRange.length > 0) ? (self.graphContext.plotRect.size.height / coord.yRange.length) : 0;
+    }
 }
 
 -(void)drawHGridline {
