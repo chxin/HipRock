@@ -11,6 +11,4 @@
 
 @interface _DCVGridlineLayer : _DCLayer<DCContextHRangeObserverProtocal>
 
-@property (nonatomic,weak) DCXYChartView* view;
-
 @end

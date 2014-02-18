@@ -85,7 +85,7 @@
 }
 
 -(void)drawIndicatorLayer {
-    self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext];
+    self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext view:self];
     self.indicatorLayer.symbolLineStyle = self.focusSymbolLineStyle;
     self.indicatorLayer.symbolLineWidth = self.focusSymbolLineWidth;
     self.indicatorLayer.symbolLineColor = self.focusSymbolLineColor;
@@ -98,18 +98,18 @@
     [self.graphContext addHRangeObsever:self];
     
     [self recalculatePlotRect];
-    [self drawHGridline];
-    [self drawVGridlines];
-    [self drawXLabelLayer];
-    [self drawIndicatorLayer];
     
-    self.backgroundBandsLayer = [[_DCBackgroundBandsLayer alloc]initWithContext:self.graphContext];
-    self.backgroundBandsLayer.view = self;
+    self.backgroundBandsLayer = [[_DCBackgroundBandsLayer alloc]initWithContext:self.graphContext view:self];
     self.backgroundBandsLayer.fontColor = self.backgroundBandFontColor;
     self.backgroundBandsLayer.font = self.backgroundBandFont;
     [self.graphContext addHRangeObsever:self.backgroundBandsLayer];
     [self.layer addSublayer:self.backgroundBandsLayer];
-    [self redrawBgBands];
+//    [self redrawBgBands];
+    
+    [self drawHGridline];
+    [self drawVGridlines];
+    [self drawXLabelLayer];
+    [self drawIndicatorLayer];
     
     NSMutableArray* coordiates = [[NSMutableArray alloc]init];
     for (DCAxis* y in self.yAxisList) {
@@ -137,7 +137,7 @@
             [lineSeries addObject:s];
         }
     }
-    self.symbolLayer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext series:lineSeries];
+    self.symbolLayer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext view:self series:lineSeries];
     [self.layer addSublayer:self.lineLayerContainer];
     self.lineLayerContainer.masksToBounds = YES;
     [self.lineLayerContainer addSublayer:self.symbolLayer];
@@ -179,8 +179,7 @@
 
 -(void)drawVGridlines {
     if (!self.hasVGridlines) return;
-    self._vGridlineLayer = [[_DCVGridlineLayer alloc]initWithContext:self.graphContext];
-    self._vGridlineLayer.view = self;
+    self._vGridlineLayer = [[_DCVGridlineLayer alloc]initWithContext:self.graphContext view:self];
     [self.graphContext addHRangeObsever:self._vGridlineLayer];
     [self.layer addSublayer:self._vGridlineLayer];
     [self._vGridlineLayer setNeedsDisplay];
@@ -202,7 +201,7 @@
 }
 
 -(void)drawXLabelLayer {
-    self._xLabelLayer = [[_DCXAxisLabelLayer alloc]initWithContext:self.graphContext];
+    self._xLabelLayer = [[_DCXAxisLabelLayer alloc]initWithContext:self.graphContext view:self];
     self._xLabelLayer.labelClipToBounds = self.xAxisLabelClipToBounds;
     self._xLabelLayer.axis = self.xAxis;
     self._xLabelLayer.font = self.xAxis.labelFont;
@@ -280,7 +279,7 @@
 }
 
 -(void)drawHGridline {
-    self._hGridlineLayer = [[_DCHGridlineLayer alloc]initWithContext:self.graphContext];
+    self._hGridlineLayer = [[_DCHGridlineLayer alloc]initWithContext:self.graphContext view:self];
     self._hGridlineLayer.lineColor = self.hGridlineColor;
     self._hGridlineLayer.lineWidth = self.hGridlineWidth;
     self._hGridlineLayer.lineStyle = self.hGridlineStyle;

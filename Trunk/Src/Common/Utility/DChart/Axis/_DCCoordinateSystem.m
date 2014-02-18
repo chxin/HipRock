@@ -50,7 +50,7 @@
 
 -(_DCYAxisLabelLayer*)getAxisLabelLayer {
     if (REMIsNilOrNull(self._yLabelLayer)) {
-        _DCYAxisLabelLayer* _yLabelLayer = [[_DCYAxisLabelLayer alloc]initWithContext:self.graphContext];
+        _DCYAxisLabelLayer* _yLabelLayer = [[_DCYAxisLabelLayer alloc]initWithContext:self.graphContext view:(DCXYChartView*)self.chartView];
         _yLabelLayer.axis = self.yAxis;
         _yLabelLayer.font = self.yAxis.labelFont;
         _yLabelLayer.fontColor = self.yAxis.labelColor;
