@@ -25,10 +25,10 @@
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pathLevel" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="province" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="commodities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="REMManagedCommodityModel" inverseName="building" inverseEntity="REMManagedCommodityModel" syncable="YES"/>
-        <relationship name="dashboards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="REMManagedDashboardModel" inverseName="building" inverseEntity="REMManagedDashboardModel" syncable="YES"/>
-        <relationship name="electricityUsageThisMonth" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMBuildingEnergyUsageModel" syncable="YES"/>
-        <relationship name="pictures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="REMManagedBuildingPictureModel" inverseName="building" inverseEntity="REMManagedBuildingPictureModel" syncable="YES"/>
+        <relationship name="commodities" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="REMManagedCommodityModel" inverseName="building" inverseEntity="REMManagedCommodityModel" syncable="YES"/>
+        <relationship name="dashboards" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="REMManagedDashboardModel" inverseName="building" inverseEntity="REMManagedDashboardModel" syncable="YES"/>
+        <relationship name="electricityUsageThisMonth" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="REMBuildingEnergyUsageModel" syncable="YES"/>
+        <relationship name="pictures" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="REMManagedBuildingPictureModel" inverseName="building" inverseEntity="REMManagedBuildingPictureModel" syncable="YES"/>
     </entity>
     <entity name="REMManagedBuildingPictureModel" representedClassName="REMManagedBuildingPictureModel" parentEntity="REMManagedModel" syncable="YES">
         <relationship name="building" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedBuildingModel" inverseName="pictures" inverseEntity="REMManagedBuildingModel" syncable="YES"/>
@@ -36,11 +36,11 @@
     <entity name="REMManagedBuildingRankingModel" representedClassName="REMManagedBuildingRankingModel" parentEntity="REMManagedModel" syncable="YES"/>
     <entity name="REMManagedCommodityModel" representedClassName="REMManagedCommodityModel" parentEntity="REMManagedModel" syncable="YES">
         <relationship name="building" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedBuildingModel" inverseName="commodities" inverseEntity="REMManagedBuildingModel" syncable="YES"/>
-        <relationship name="carbonUsage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMBuildingEnergyUsageModel" syncable="YES"/>
-        <relationship name="commodityUsage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMBuildingEnergyUsageModel" syncable="YES"/>
-        <relationship name="pinnedWidgets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="REMManagedPinnedWidgetModel" inverseName="commodity" inverseEntity="REMManagedPinnedWidgetModel" syncable="YES"/>
-        <relationship name="ranking" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedBuildingRankingModel" syncable="YES"/>
-        <relationship name="targetValue" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMBuildingEnergyUsageModel" syncable="YES"/>
+        <relationship name="carbonUsage" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="REMBuildingEnergyUsageModel" syncable="YES"/>
+        <relationship name="commodityUsage" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="REMBuildingEnergyUsageModel" syncable="YES"/>
+        <relationship name="pinnedWidgets" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="REMManagedPinnedWidgetModel" inverseName="commodity" inverseEntity="REMManagedPinnedWidgetModel" syncable="YES"/>
+        <relationship name="ranking" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="REMManagedBuildingRankingModel" syncable="YES"/>
+        <relationship name="targetValue" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="REMBuildingEnergyUsageModel" syncable="YES"/>
     </entity>
     <entity name="REMManagedCustomerModel" representedClassName="REMManagedCustomerModel" parentEntity="REMManagedModel" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
@@ -55,7 +55,7 @@
     </entity>
     <entity name="REMManagedDashboardModel" representedClassName="REMManagedDashboardModel" parentEntity="REMManagedModel" syncable="YES">
         <relationship name="building" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedBuildingModel" inverseName="dashboards" inverseEntity="REMManagedBuildingModel" syncable="YES"/>
-        <relationship name="widgets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="REMManagedWidgetModel" inverseName="dashboard" inverseEntity="REMManagedWidgetModel" syncable="YES"/>
+        <relationship name="widgets" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="REMManagedWidgetModel" inverseName="dashboard" inverseEntity="REMManagedWidgetModel" syncable="YES"/>
     </entity>
     <entity name="REMManagedModel" representedClassName="REMManagedModel" isAbstract="YES" syncable="YES">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
@@ -81,7 +81,7 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userTypeName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="version" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <relationship name="customers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="REMManagedCustomerModel" inverseName="user" inverseEntity="REMManagedCustomerModel" syncable="YES"/>
+        <relationship name="customers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="REMManagedCustomerModel" inverseName="user" inverseEntity="REMManagedCustomerModel" syncable="YES"/>
     </entity>
     <entity name="REMManagedWidgetModel" representedClassName="REMManagedWidgetModel" parentEntity="REMManagedModel" syncable="YES">
         <relationship name="dashboard" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedDashboardModel" inverseName="widgets" inverseEntity="REMManagedDashboardModel" syncable="YES"/>
