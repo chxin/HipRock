@@ -473,6 +473,7 @@
 		B42FBF6417F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
 		B42FBF6517F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
 		B42FBF6617F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
+		B4341A5D18B1F93800F48DBE /* BluesPad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B4341A5B18B1F93800F48DBE /* BluesPad.xcdatamodeld */; };
 		B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
 		B442701317AF316500762C68 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
 		B44313E4185AAE7800486594 /* REMWidgetLabellingSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B44313E3185AAE7800486594 /* REMWidgetLabellingSearchModel.m */; };
@@ -1160,6 +1161,7 @@
 		B42FBF6017F519F5004F2F3A /* REMWidgetCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetCollectionViewController.m; sourceTree = "<group>"; };
 		B42FBF6217F574B5004F2F3A /* REMEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnum.h; path = Common/Model/REMEnum.h; sourceTree = "<group>"; };
 		B42FBF6317F574B5004F2F3A /* REMEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnum.m; path = Common/Model/REMEnum.m; sourceTree = "<group>"; };
+		B4341A5C18B1F93800F48DBE /* BluesPad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BluesPad.xcdatamodel; sourceTree = "<group>"; };
 		B43BB10F1797B12D00617B1E /* REMEnergyConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnergyConstants.h; path = Common/Constants/REMEnergyConstants.h; sourceTree = "<group>"; };
 		B43BB1101797B12D00617B1E /* REMEnergyConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnergyConstants.m; path = Common/Constants/REMEnergyConstants.m; sourceTree = "<group>"; };
 		B442701217AF316500762C68 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
@@ -2320,6 +2322,7 @@
 				7A5E2D96177B41C3000F77F9 /* BluesPad-Info.plist */,
 				7A5E2D97177B41C3000F77F9 /* BluesPad-Prefix.pch */,
 				B414C43D1855946900CB81B6 /* Configuration.plist */,
+				B4341A5B18B1F93800F48DBE /* BluesPad.xcdatamodeld */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -2327,6 +2330,7 @@
 		7A5E2D99177B41D3000F77F9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B4C50FAB18B2EF710084CD73 /* Managed */,
 				B4E815C81827321600FB9BC5 /* Widget */,
 				7A37AA5917AB56B100316902 /* Login */,
 				7A153CB817AA49EA00413D3C /* Common */,
@@ -2831,6 +2835,13 @@
 				B4A8753B185ED02200BF3601 /* REMWidgetRankingCellDelegator.m */,
 			);
 			name = BizDelegator;
+			sourceTree = "<group>";
+		};
+		B4C50FAB18B2EF710084CD73 /* Managed */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Managed;
 			sourceTree = "<group>";
 		};
 		B4E815C81827321600FB9BC5 /* Widget */ = {
@@ -3808,6 +3819,7 @@
 				EF0BFEA71844B7090026C47D /* DCPieChartAnimationFrame.m in Sources */,
 				7A0288EE17C20CC500709111 /* WeiboSignIn.m in Sources */,
 				7A0288EF17C20CC500709111 /* GeoInfo.m in Sources */,
+				B4341A5D18B1F93800F48DBE /* BluesPad.xcdatamodeld in Sources */,
 				7A0288F017C20CC500709111 /* Status.m in Sources */,
 				7A0288F117C20CC500709111 /* StatusImage.m in Sources */,
 				B4FAD66E181F7CD000EF1459 /* REMWidgetCellViewController.m in Sources */,
@@ -4635,6 +4647,20 @@
 			defaultConfigurationName = DailyBuild;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B4341A5B18B1F93800F48DBE /* BluesPad.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B4341A5C18B1F93800F48DBE /* BluesPad.xcdatamodel */,
+			);
+			currentVersion = B4341A5C18B1F93800F48DBE /* BluesPad.xcdatamodel */;
+			name = BluesPad.xcdatamodeld;
+			path = Resource/BluesPad.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7A9B1E12177B3A6000C282A8 /* Project object */;
 }
