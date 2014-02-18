@@ -47,8 +47,8 @@
     _view = [[DCPieChartView alloc]initWithFrame:frame series:series];
     self.view.chartStyle = style;
     self.view.delegate = self;
-//    self.view.radius = style.pieRadius;
-//    self.view.radiusForShadow = style.pieShadowRadius;
+    self.view.radius = style.pieRadius;
+    self.view.radiusForShadow = style.pieShadowRadius;
     self.focusIndex = INT32_MIN;
 }
 
