@@ -16,7 +16,7 @@
 #import "REMChartStyle.h"
 
 @interface DCPieChartView : UIView
-@property (nonatomic, weak) REMChartStyle* chartStyle;
+@property (nonatomic,strong) REMChartStyle* chartStyle;
 @property (nonatomic,strong,readonly) DCPieSeries* series;
 @property (nonatomic,assign) CGFloat radius;            // 圆形区域半径
 @property (nonatomic,assign) CGFloat radiusForShadow;   // 投影半径
