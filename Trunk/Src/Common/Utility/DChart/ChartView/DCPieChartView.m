@@ -45,7 +45,6 @@
         _radiusForShadow = 0;
         _panState = -1;
         _showIndicator = NO;
-        _playBeginAnimation = YES;
         
         _focusPointIndex = 0;
         
@@ -94,7 +93,7 @@
     targetFrame.rotationAngle = @(-targetRotation);
     targetFrame.fullAngle = @(2);
     targetFrame.indicatorAlpha = @(0.8);
-    if (self.playBeginAnimation) {
+    if (self.chartStyle.playBeginAnimation) {
         self.radius = 0;
         self.radiusForShadow = 0;
         [self.animationManager animateToFrame:targetFrame];
