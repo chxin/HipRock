@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A9B1E1B177B3A8B00C282A8"
-               BuildableName = "BluesPad.app"
+               BuildableName = "Blues.app"
                BlueprintName = "Blues"
                ReferencedContainer = "container:Blues.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A9B1E41177B3A8B00C282A8"
-               BuildableName = "BluesPadTests.octest"
+               BuildableName = "BluesTests.octest"
                BlueprintName = "BluesTests"
                ReferencedContainer = "container:Blues.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A9B1E1B177B3A8B00C282A8"
-            BuildableName = "BluesPad.app"
+            BuildableName = "Blues.app"
             BlueprintName = "Blues"
             ReferencedContainer = "container:Blues.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A9B1E1B177B3A8B00C282A8"
-            BuildableName = "BluesPad.app"
+            BuildableName = "Blues.app"
             BlueprintName = "Blues"
             ReferencedContainer = "container:Blues.xcodeproj">
          </BuildableReference>
@@ -85,7 +85,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A9B1E1B177B3A8B00C282A8"
-            BuildableName = "BluesPad.app"
+            BuildableName = "Blues.app"
             BlueprintName = "Blues"
             ReferencedContainer = "container:Blues.xcodeproj">
          </BuildableReference>
