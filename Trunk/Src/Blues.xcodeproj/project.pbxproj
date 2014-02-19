@@ -71,7 +71,6 @@
 		6A61A7901839B82000C6A228 /* SplashScreenLogo-Common@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6FA1839B82000C6A228 /* SplashScreenLogo-Common@2x.png */; };
 		6A61A7911839B82000C6A228 /* SplashScreenLogo-Flash.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6FB1839B82000C6A228 /* SplashScreenLogo-Flash.png */; };
 		6A61A7921839B82000C6A228 /* SplashScreenLogo-Flash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6FC1839B82000C6A228 /* SplashScreenLogo-Flash@2x.png */; };
-		6AB1F30317B8B34A0065C1EB /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		6ABA68C4180F759700A302BC /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABA68C3180F759700A302BC /* GoogleMaps.framework */; };
 		7A0288EB17C20CC500709111 /* WeiboAccounts.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288BC17C20CC400709111 /* WeiboAccounts.m */; };
 		7A0288EC17C20CC500709111 /* WeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288BE17C20CC400709111 /* WeiboRequest.m */; };
@@ -93,11 +92,6 @@
 		7A0288FE17C20CC500709111 /* WeiboDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E417C20CC400709111 /* WeiboDialog.m */; };
 		7A0288FF17C20CC500709111 /* WeiboLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E617C20CC500709111 /* WeiboLoginDialog.m */; };
 		7A02890017C20CC500709111 /* Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E817C20CC500709111 /* Weibo.m */; };
-		7A02CE2B18B4813F009D1CF1 /* REMTimeHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3ED178EA4A00032CD72 /* REMTimeHelperTests.m */; };
-		7A02CE3018B48259009D1CF1 /* REMLogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A02CE2F18B48259009D1CF1 /* REMLogTests.m */; };
-		7A02CE6118B486D9009D1CF1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A02CE4118B482DB009D1CF1 /* XCTest.framework */; };
-		7A02CE6218B486D9009D1CF1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E21177B3A8B00C282A8 /* Foundation.framework */; };
-		7A02CE6318B486D9009D1CF1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */; };
 		7A0B65E918B440150052093E /* Main_IPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A0B65E718B440150052093E /* Main_IPhone.storyboard */; };
 		7A12280C18116DBF004DE778 /* REMViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A12280B18116DBF004DE778 /* REMViewHelper.m */; };
 		7A13C19B17F40D31007E6AA9 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7A13C19A17F40D31007E6AA9 /* GoogleMaps.bundle */; };
@@ -344,8 +338,6 @@
 		7AB34E4C177D2975003E235E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4A177D2975003E235E /* MobileCoreServices.framework */; };
 		7AB34E4D177D2975003E235E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4B177D2975003E235E /* SystemConfiguration.framework */; };
 		7AB34E51177D2CE1003E235E /* REMServiceRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB34E50177D2CE1003E235E /* REMServiceRequestOperation.m */; };
-		7AB34E7F177D33AB003E235E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4A177D2975003E235E /* MobileCoreServices.framework */; };
-		7AB34E80177D33AB003E235E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4B177D2975003E235E /* SystemConfiguration.framework */; };
 		7AB71684187F839500EA7544 /* DefaultMap.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71682187F839500EA7544 /* DefaultMap.png */; };
 		7AB71685187F839500EA7544 /* DefaultMap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71683187F839500EA7544 /* DefaultMap@2x.png */; };
 		7AB71688187F859B00EA7544 /* MapBlur.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71686187F859B00EA7544 /* MapBlur.png */; };
@@ -391,10 +383,6 @@
 		B445AEAC177BEEB8002D2A59 /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE9E177BEEB7002D2A59 /* DispatchQueueLogFormatter.m */; };
 		B445AEAE177BEEB8002D2A59 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = B445AE9F177BEEB7002D2A59 /* README.txt */; };
 		B445AEB2177BFAE8002D2A59 /* REMLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AEB1177BFAE8002D2A59 /* REMLog.m */; };
-		B445AEBB177BFE66002D2A59 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E43177B3A8B00C282A8 /* SenTestingKit.framework */; };
-		B445AEBC177BFE66002D2A59 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */; };
-		B445AEBD177BFE66002D2A59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E21177B3A8B00C282A8 /* Foundation.framework */; };
-		B445AEE2177C04E4002D2A59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AED0177C0052002D2A59 /* CoreGraphics.framework */; };
 		B44D269718A9E94C00D7C06D /* PopNote.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D267F18A9E94C00D7C06D /* PopNote.png */; };
 		B44D269818A9E94C00D7C06D /* PopNote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D268018A9E94C00D7C06D /* PopNote@2x.png */; };
 		B44D269918A9E94C00D7C06D /* DateView_Chart_iOS6.png in Resources */ = {isa = PBXBuildFile; fileRef = B44D268118A9E94C00D7C06D /* DateView_Chart_iOS6.png */; };
@@ -422,7 +410,6 @@
 		B4577EBF184C1886003C00CF /* REMNumberHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4577EBE184C1886003C00CF /* REMNumberHelper.m */; };
 		B4656BFD187D47E6008EAEA8 /* ChartCustomization_Widget.png in Resources */ = {isa = PBXBuildFile; fileRef = B4656BFB187D47E6008EAEA8 /* ChartCustomization_Widget.png */; };
 		B4656BFE187D47E6008EAEA8 /* ChartCustomization_Widget@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4656BFC187D47E6008EAEA8 /* ChartCustomization_Widget@2x.png */; };
-		B469537817E96DCF003D5A98 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		B4707D8618697B1C00FBA393 /* Cooling_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D7E18697B1C00FBA393 /* Cooling_normal.png */; };
 		B4707D8718697B1C00FBA393 /* Cooling_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D7F18697B1C00FBA393 /* Cooling_pressed.png */; };
 		B4707D8818697B1C00FBA393 /* Heating_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D8018697B1C00FBA393 /* Heating_normal.png */; };
@@ -439,7 +426,6 @@
 		B4707D9B18697B2900FBA393 /* Humidity_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9318697B2900FBA393 /* Humidity_pressed@2x.png */; };
 		B4707D9C18697B2900FBA393 /* Temperature_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9418697B2900FBA393 /* Temperature_normal@2x.png */; };
 		B4707D9D18697B2900FBA393 /* Temperature_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9518697B2900FBA393 /* Temperature_pressed@2x.png */; };
-		B47422E617C45BCF0021B76C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
 		B477739A184F074500F68AED /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4777399184F074500F68AED /* CoreMedia.framework */; };
 		B477739C184F075300F68AED /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B477739B184F075300F68AED /* CoreVideo.framework */; };
 		B485EFE5187BA1A800D16583 /* Logo_About.png in Resources */ = {isa = PBXBuildFile; fileRef = B485EFE3187BA1A800D16583 /* Logo_About.png */; };
@@ -449,8 +435,6 @@
 		B48ED3EA178EA1740032CD72 /* REMTimeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E9178EA1740032CD72 /* REMTimeHelper.m */; };
 		B48ED409178EA8970032CD72 /* REMSqliteStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D191785113600219469 /* REMSqliteStorage.m */; };
 		B48ED40A178EA8970032CD72 /* REMStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D1C1785115700219469 /* REMStorage.m */; };
-		B497341E17A769E400D0519A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */; };
-		B4978D9717979B3C00F94698 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38ED7D1E1785140900219469 /* libsqlite3.dylib */; };
 		B49B6F511781491800BC130A /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
 		B49C430018B34DB900C3CEFE /* REMDataPersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49C42FF18B34DB900C3CEFE /* REMDataPersistenceProcessor.m */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
@@ -511,23 +495,6 @@
 		EFF75151183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF75150183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m */; };
 		EFFBE9C6183F7A3700672E53 /* DCRankingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFBE9C5183F7A3700672E53 /* DCRankingWrapper.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		7A02CE6D18B486D9009D1CF1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7A9B1E12177B3A6000C282A8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7A9B1E1B177B3A8B00C282A8;
-			remoteInfo = Blues;
-		};
-		7AB34E66177D3345003E235E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7A9B1E12177B3A6000C282A8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7A9B1E1B177B3A8B00C282A8;
-			remoteInfo = BluesPad;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		38ED7D151785111300219469 /* REMApplicationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMApplicationInfo.h; path = Common/Constants/REMApplicationInfo.h; sourceTree = "<group>"; };
@@ -645,10 +612,7 @@
 		7A0288E817C20CC500709111 /* Weibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Weibo.m; sourceTree = "<group>"; };
 		7A0288E917C20CC500709111 /* WeiboConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboConfig.h; sourceTree = "<group>"; };
 		7A0288EA17C20CC500709111 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
-		7A02CE2E18B48259009D1CF1 /* REMLogTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLogTests.h; path = ../Test/CommonTests/REMLogTests.h; sourceTree = "<group>"; };
-		7A02CE2F18B48259009D1CF1 /* REMLogTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLogTests.m; path = ../Test/CommonTests/REMLogTests.m; sourceTree = "<group>"; };
 		7A02CE4118B482DB009D1CF1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		7A02CE6018B486D8009D1CF1 /* BluesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BluesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A0B65E818B440150052093E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Resource/Languages/Base.lproj/Main_IPhone.storyboard; sourceTree = "<group>"; };
 		7A0F7C5018277BAC009E898A /* REMImages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMImages.h; path = Resource/Definitions/REMImages.h; sourceTree = "<group>"; };
 		7A12280A18116DBF004DE778 /* REMViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMViewHelper.h; path = Common/Utility/REMViewHelper.h; sourceTree = "<group>"; };
@@ -707,7 +671,6 @@
 		7A399E93177D238F00F0EB9F /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		7A399E94177D238F00F0EB9F /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		7A399E95177D238F00F0EB9F /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		7A399EA0177D279000F0EB9F /* CommonTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "CommonTests-Info.plist"; path = "../test/CommonTests/CommonTests-Info.plist"; sourceTree = "<group>"; };
 		7A3DDCD81786C05B008A1033 /* REMServiceAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceAgent.h; path = Common/Communication/REMServiceAgent.h; sourceTree = "<group>"; };
 		7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceAgent.m; path = Common/Communication/REMServiceAgent.m; sourceTree = "<group>"; };
 		7A3DDCDB1786C195008A1033 /* REMMaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMaskManager.h; path = Common/Utility/REMMaskManager.h; sourceTree = "<group>"; };
@@ -1091,7 +1054,6 @@
 		7A9B1E2E177B3A8B00C282A8 /* REMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = REMAppDelegate.h; sourceTree = "<group>"; };
 		7A9B1E2F177B3A8B00C282A8 /* REMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = REMAppDelegate.m; sourceTree = "<group>"; };
 		7A9B1E43177B3A8B00C282A8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		7AB34E46177D2828003E235E /* CommonTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CommonTests-Prefix.pch"; path = "../test/CommonTests/CommonTests-Prefix.pch"; sourceTree = "<group>"; };
 		7AB34E4A177D2975003E235E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		7AB34E4B177D2975003E235E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		7AB34E4F177D2CE1003E235E /* REMServiceRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceRequestOperation.h; path = Common/Communication/REMServiceRequestOperation.h; sourceTree = "<group>"; };
@@ -1155,7 +1117,6 @@
 		B445AE9F177BEEB7002D2A59 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		B445AEB0177BFAE8002D2A59 /* REMLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLog.h; path = Common/Log/REMLog.h; sourceTree = "<group>"; };
 		B445AEB1177BFAE8002D2A59 /* REMLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLog.m; path = Common/Log/REMLog.m; sourceTree = "<group>"; };
-		B445AEBA177BFE66002D2A59 /* CommonTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B445AED0177C0052002D2A59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		B44D267F18A9E94C00D7C06D /* PopNote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PopNote.png; sourceTree = "<group>"; };
 		B44D268018A9E94C00D7C06D /* PopNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PopNote@2x.png"; sourceTree = "<group>"; };
@@ -1209,8 +1170,6 @@
 		B485EFEC187BCF2900D16583 /* ChartCustomization@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChartCustomization@2x.png"; sourceTree = "<group>"; };
 		B48ED3E8178EA1740032CD72 /* REMTimeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMTimeHelper.h; path = Common/Utility/REMTimeHelper.h; sourceTree = "<group>"; };
 		B48ED3E9178EA1740032CD72 /* REMTimeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeHelper.m; path = Common/Utility/REMTimeHelper.m; sourceTree = "<group>"; };
-		B48ED3EC178EA4A00032CD72 /* REMTimeHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMTimeHelperTests.h; path = ../Test/CommonTests/REMTimeHelperTests.h; sourceTree = "<group>"; };
-		B48ED3ED178EA4A00032CD72 /* REMTimeHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeHelperTests.m; path = ../Test/CommonTests/REMTimeHelperTests.m; sourceTree = "<group>"; };
 		B49B6F4F1781491800BC130A /* REMColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMColor.h; path = Common/Utility/REMColor.h; sourceTree = "<group>"; };
 		B49B6F501781491800BC130A /* REMColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMColor.m; path = Common/Utility/REMColor.m; sourceTree = "<group>"; };
 		B49C42FE18B34DB900C3CEFE /* REMDataPersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDataPersistenceProcessor.h; path = Common/Communication/REMDataPersistenceProcessor.h; sourceTree = "<group>"; };
@@ -1334,16 +1293,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7A02CE5D18B486D8009D1CF1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7A02CE6118B486D9009D1CF1 /* XCTest.framework in Frameworks */,
-				7A02CE6318B486D9009D1CF1 /* UIKit.framework in Frameworks */,
-				7A02CE6218B486D9009D1CF1 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7A9B1E19177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1372,24 +1321,6 @@
 				7A9B1E20177B3A8B00C282A8 /* UIKit.framework in Frameworks */,
 				7A9B1E22177B3A8B00C282A8 /* Foundation.framework in Frameworks */,
 				7A9B1E24177B3A8B00C282A8 /* CoreGraphics.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B445AEB6177BFE66002D2A59 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B469537817E96DCF003D5A98 /* Accelerate.framework in Frameworks */,
-				B47422E617C45BCF0021B76C /* OpenGLES.framework in Frameworks */,
-				6AB1F30317B8B34A0065C1EB /* CoreImage.framework in Frameworks */,
-				B497341E17A769E400D0519A /* QuartzCore.framework in Frameworks */,
-				B4978D9717979B3C00F94698 /* libsqlite3.dylib in Frameworks */,
-				7AB34E7F177D33AB003E235E /* MobileCoreServices.framework in Frameworks */,
-				7AB34E80177D33AB003E235E /* SystemConfiguration.framework in Frameworks */,
-				B445AEE2177C04E4002D2A59 /* CoreGraphics.framework in Frameworks */,
-				B445AEBB177BFE66002D2A59 /* SenTestingKit.framework in Frameworks */,
-				B445AEBC177BFE66002D2A59 /* UIKit.framework in Frameworks */,
-				B445AEBD177BFE66002D2A59 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1788,15 +1719,6 @@
 			);
 			name = AFNetworking;
 			path = ../lib/AFNetworking;
-			sourceTree = "<group>";
-		};
-		7A399E9F177D276800F0EB9F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7AB34E46177D2828003E235E /* CommonTests-Prefix.pch */,
-				7A399EA0177D279000F0EB9F /* CommonTests-Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		7A5E2D45177B3CD3000F77F9 /* Common */ = {
@@ -2614,8 +2536,6 @@
 			isa = PBXGroup;
 			children = (
 				7A9B1E1C177B3A8B00C282A8 /* Blues.app */,
-				B445AEBA177BFE66002D2A59 /* CommonTests.octest */,
-				7A02CE6018B486D8009D1CF1 /* BluesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2680,7 +2600,6 @@
 		7A9B1E58177B3AAA00C282A8 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				B445AECB177BFE77002D2A59 /* CommonTest */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -2750,18 +2669,6 @@
 				B445AE9F177BEEB7002D2A59 /* README.txt */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		B445AECB177BFE77002D2A59 /* CommonTest */ = {
-			isa = PBXGroup;
-			children = (
-				7A399E9F177D276800F0EB9F /* Supporting Files */,
-				B48ED3EC178EA4A00032CD72 /* REMTimeHelperTests.h */,
-				B48ED3ED178EA4A00032CD72 /* REMTimeHelperTests.m */,
-				7A02CE2E18B48259009D1CF1 /* REMLogTests.h */,
-				7A02CE2F18B48259009D1CF1 /* REMLogTests.m */,
-			);
-			name = CommonTest;
 			sourceTree = "<group>";
 		};
 		B485EFE2187BA17900D16583 /* Setting */ = {
@@ -3137,24 +3044,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7A02CE5F18B486D8009D1CF1 /* BluesTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7A02CE6F18B486D9009D1CF1 /* Build configuration list for PBXNativeTarget "BluesTests" */;
-			buildPhases = (
-				7A02CE5C18B486D8009D1CF1 /* Sources */,
-				7A02CE5D18B486D8009D1CF1 /* Frameworks */,
-				7A02CE5E18B486D8009D1CF1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7A02CE6E18B486D9009D1CF1 /* PBXTargetDependency */,
-			);
-			name = BluesTests;
-			productName = BluesTests;
-			productReference = 7A02CE6018B486D8009D1CF1 /* BluesTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		7A9B1E1B177B3A8B00C282A8 /* Blues */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7A9B1E56177B3A8B00C282A8 /* Build configuration list for PBXNativeTarget "Blues" */;
@@ -3172,25 +3061,6 @@
 			productReference = 7A9B1E1C177B3A8B00C282A8 /* Blues.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B445AEB9177BFE66002D2A59 /* CommonTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B445AEC8177BFE66002D2A59 /* Build configuration list for PBXNativeTarget "CommonTests" */;
-			buildPhases = (
-				B445AEB5177BFE66002D2A59 /* Sources */,
-				B445AEB6177BFE66002D2A59 /* Frameworks */,
-				B445AEB7177BFE66002D2A59 /* Resources */,
-				B445AEB8177BFE66002D2A59 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7AB34E67177D3345003E235E /* PBXTargetDependency */,
-			);
-			name = CommonTests;
-			productName = CommonTests;
-			productReference = B445AEBA177BFE66002D2A59 /* CommonTests.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -3199,9 +3069,6 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				TargetAttributes = {
-					7A02CE5F18B486D8009D1CF1 = {
-						TestTargetID = 7A9B1E1B177B3A8B00C282A8;
-					};
 					7A9B1E1B177B3A8B00C282A8 = {
 						DevelopmentTeam = 46REERL7A3;
 						SystemCapabilities = {
@@ -3227,20 +3094,11 @@
 			projectRoot = "";
 			targets = (
 				7A9B1E1B177B3A8B00C282A8 /* Blues */,
-				B445AEB9177BFE66002D2A59 /* CommonTests */,
-				7A02CE5F18B486D8009D1CF1 /* BluesTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7A02CE5E18B486D8009D1CF1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7A9B1E1A177B3A8B00C282A8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3438,39 +3296,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B445AEB7177BFE66002D2A59 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		B445AEB8177BFE66002D2A59 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		7A02CE5C18B486D8009D1CF1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7A9B1E18177B3A8B00C282A8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3700,7 +3528,6 @@
 				7A63E26418B44CBD00A13464 /* REMToggleButtonGroup.m in Sources */,
 				7A0288F517C20CC500709111 /* WeiboAuthentication.m in Sources */,
 				EFD946FE1839DCBB00E9EC50 /* _DCCoordinateSystem.m in Sources */,
-				7A02CE3018B48259009D1CF1 /* REMLogTests.m in Sources */,
 				7A63E22618B44CBD00A13464 /* REMEnergyUsageDataModel.m in Sources */,
 				7A63E21018B44CBD00A13464 /* REMSettingCustomerSelectionViewController.m in Sources */,
 				7A0288F817C20CC500709111 /* ImageResourceLoader.m in Sources */,
@@ -3752,28 +3579,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B445AEB5177BFE66002D2A59 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7A02CE2B18B4813F009D1CF1 /* REMTimeHelperTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7A02CE6E18B486D9009D1CF1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7A9B1E1B177B3A8B00C282A8 /* Blues */;
-			targetProxy = 7A02CE6D18B486D9009D1CF1 /* PBXContainerItemProxy */;
-		};
-		7AB34E67177D3345003E235E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7A9B1E1B177B3A8B00C282A8 /* Blues */;
-			targetProxy = 7AB34E66177D3345003E235E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7A0B65E718B440150052093E /* Main_IPhone.storyboard */ = {
@@ -3827,143 +3633,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7A02CE7018B486D9009D1CF1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Blues.app/Blues";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BluesTests/BluesTests-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "BluesTests/BluesTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		7A02CE7118B486D9009D1CF1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Blues.app/Blues";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BluesTests/BluesTests-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "BluesTests/BluesTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
-		7A02CE7218B486D9009D1CF1 /* DailyBuild */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Blues.app/Blues";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BluesTests/BluesTests-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "BluesTests/BluesTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = DailyBuild;
-		};
 		7A9B1E16177B3A6000C282A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4153,134 +3822,9 @@
 			};
 			name = DailyBuild;
 		};
-		B41ECBA317B87D3A00758607 /* DailyBuild */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "../test/CommonTests/CommonTests-Prefix.pch";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "../Test/CommonTests/CommonTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../Lib\"",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = octest;
-			};
-			name = DailyBuild;
-		};
-		B445AEC9177BFE66002D2A59 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "../test/CommonTests/CommonTests-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "../Test/CommonTests/CommonTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../Lib\"",
-				);
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		B445AECA177BFE66002D2A59 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "../test/CommonTests/CommonTests-Prefix.pch";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "../Test/CommonTests/CommonTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../Lib\"",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7A02CE6F18B486D9009D1CF1 /* Build configuration list for PBXNativeTarget "BluesTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7A02CE7018B486D9009D1CF1 /* Debug */,
-				7A02CE7118B486D9009D1CF1 /* Release */,
-				7A02CE7218B486D9009D1CF1 /* DailyBuild */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
 		7A9B1E15177B3A6000C282A8 /* Build configuration list for PBXProject "Blues" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -4297,16 +3841,6 @@
 				7A9B1E52177B3A8B00C282A8 /* Debug */,
 				7A9B1E53177B3A8B00C282A8 /* Release */,
 				B41ECBA117B87D3A00758607 /* DailyBuild */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		B445AEC8177BFE66002D2A59 /* Build configuration list for PBXNativeTarget "CommonTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B445AEC9177BFE66002D2A59 /* Debug */,
-				B445AECA177BFE66002D2A59 /* Release */,
-				B41ECBA317B87D3A00758607 /* DailyBuild */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
