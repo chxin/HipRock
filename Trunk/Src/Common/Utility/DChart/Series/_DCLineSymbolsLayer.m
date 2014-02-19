@@ -61,8 +61,8 @@
 }
 
 -(CGPoint)getPointBy:(int)x y:(double)y heightUnit:(CGFloat)heightUnit {
-    CGFloat xOffset = 0;
-    if (!self.graphContext.pointAlignToTick) xOffset = 0.5;
+    CGFloat xOffset = self.graphContext.pointHorizentalOffset;
+//    if (!self.graphContext.pointAlignToTick) xOffset = 0.5;
     CGPoint point;
     point.x = self.graphContext.plotRect.size.width*(x+xOffset-self.graphContext.hRange.location)/self.graphContext.hRange.length;
     point.y = self.graphContext.plotRect.size.height-heightUnit*y;
@@ -75,8 +75,8 @@
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
     if (start < 0) start = 0;
-    CGFloat pointXOffset = 0;
-    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
+    CGFloat pointXOffset = self.graphContext.pointHorizentalOffset;
+//    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
     
     CGRect plotRect = self.graphContext.plotRect;
     

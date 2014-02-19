@@ -78,8 +78,10 @@
 }
 
 -(void)customizeView:(DCXYChartView *)view {
-    view.graphContext.pointAlignToTick = NO;
-    view.graphContext.xLabelAlignToTick = NO;
+    view.graphContext.pointHorizentalOffset = 0.5;
+    view.graphContext.xLabelHorizentalOffset = 0.5;
+//    view.graphContext.pointAlignToTick = NO;
+//    view.graphContext.xLabelAlignToTick = NO;
 }
 
 -(void)didYIntervalChange:(double)yInterval forAxis:(DCAxis *)yAxis range:(DCRange*)range {

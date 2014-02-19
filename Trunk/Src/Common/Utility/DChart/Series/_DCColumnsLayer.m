@@ -130,8 +130,8 @@
 -(CGRect) getRectForSeries:(DCColumnSeries*)series index:(NSUInteger)index stackedHeight:(double)stackedHeight {
     DCDataPoint* point = series.datas[index];
     CGFloat columnHeight = [self getHeightOfPoint:point];
-    CGFloat pointXOffset = 0;
-    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
+    CGFloat pointXOffset = self.graphContext.pointHorizentalOffset;
+//    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
     return CGRectMake(self.frame.size.width * (index + pointXOffset + series.xRectStartAt - self.graphContext.hRange.location) / self.graphContext.hRange.length, self.frame.size.height-columnHeight-stackedHeight, self.frame.size.width * series.columnWidthInCoordinate / self.graphContext.hRange.length, columnHeight);
 }
 
