@@ -23,8 +23,8 @@
 @end
 
 @implementation _DCYAxisLabelLayer
--(id)initWithContext:(DCContext *)context {
-    self = [super initWithContext:context];
+-(id)initWithContext:(DCContext*)context view:(DCXYChartView*)view {
+    self = [super initWithContext:context view:view];
     if (self) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
         _numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;

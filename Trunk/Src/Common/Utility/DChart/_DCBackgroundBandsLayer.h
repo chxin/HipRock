@@ -14,5 +14,4 @@
 -(void)setBands:(NSArray*)bands;
 @property (nonatomic, strong) UIFont* font;
 @property (nonatomic, strong) UIColor* fontColor;
-@property (nonatomic, weak) DCXYChartView* view;
 @end
