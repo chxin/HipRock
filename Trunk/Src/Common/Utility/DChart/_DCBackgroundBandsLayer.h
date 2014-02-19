@@ -12,6 +12,4 @@
 
 @interface _DCBackgroundBandsLayer : _DCLayer<DCContextHRangeObserverProtocal>
 -(void)setBands:(NSArray*)bands;
-@property (nonatomic, strong) UIFont* font;
-@property (nonatomic, strong) UIColor* fontColor;
 @end

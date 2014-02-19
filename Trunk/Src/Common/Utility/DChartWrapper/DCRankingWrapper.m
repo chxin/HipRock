@@ -64,18 +64,6 @@
     y.coordinate = DCAxisCoordinateY;
     s.yAxis = y;
     y.axisTitle = REMEmptyString;
-    y.labelToLine = self.style.yLabelToLine;
-    if (self.style.yLineWidth > 0) {
-        y.lineColor = self.style.yLineColor;
-        y.lineWidth = self.style.yLineWidth;
-    }
-    if (self.style.yTextFont) {
-        y.labelColor = self.style.yTextColor;
-        y.labelFont = self.style.yTextFont;
-    }
-    y.axisTitleColor = self.style.yAxisTitleColor;
-    y.axisTitleToTopLabel = self.style.yAxisTitleToTopLabel;
-    y.axisTitleFontSize = self.style.yAxisTitleFontSize;
     return @[y];
 }
 
