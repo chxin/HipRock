@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A9B1E1B177B3A8B00C282A8"
                BuildableName = "BluesPad.app"
-               BlueprintName = "BluesPad"
+               BlueprintName = "Blues"
                ReferencedContainer = "container:Blues.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -30,7 +30,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A9B1E41177B3A8B00C282A8"
                BuildableName = "BluesPadTests.octest"
-               BlueprintName = "BluesPadTests"
+               BlueprintName = "BluesTests"
                ReferencedContainer = "container:Blues.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -48,7 +48,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A9B1E41177B3A8B00C282A8"
                BuildableName = "BluesPadTests.octest"
-               BlueprintName = "BluesPadTests"
+               BlueprintName = "BluesTests"
                ReferencedContainer = "container:Blues.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -58,7 +58,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A9B1E1B177B3A8B00C282A8"
             BuildableName = "BluesPad.app"
-            BlueprintName = "BluesPad"
+            BlueprintName = "Blues"
             ReferencedContainer = "container:Blues.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -77,7 +77,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A9B1E1B177B3A8B00C282A8"
             BuildableName = "BluesPad.app"
-            BlueprintName = "BluesPad"
+            BlueprintName = "Blues"
             ReferencedContainer = "container:Blues.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -100,7 +100,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A9B1E1B177B3A8B00C282A8"
             BuildableName = "BluesPad.app"
-            BlueprintName = "BluesPad"
+            BlueprintName = "Blues"
             ReferencedContainer = "container:Blues.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
