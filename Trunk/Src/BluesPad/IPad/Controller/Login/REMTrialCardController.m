@@ -33,7 +33,7 @@
     [super loadView];
     
     UIView *contentView = [self renderContent];
-    self.view = [[REMLoginTitledCard alloc] initWithTitle:REMLocalizedString(@"Login_TrialCardTitle") andContentView:contentView];
+    self.view = [[REMLoginTitledCard alloc] initWithTitle:REMIPadLocalizedString(@"Login_TrialCardTitle") andContentView:contentView];
 }
 
 - (void)viewDidLoad
@@ -53,7 +53,7 @@
 {
     UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDMLogin_CardContentWidth, kDMLogin_CardContentHeight-kDMLogin_CardTitleViewHeight)];
     
-    NSString *welcomeText = REMLocalizedString(@"Login_TrialWelcomeText");
+    NSString *welcomeText = REMIPadLocalizedString(@"Login_TrialWelcomeText");
     UIFont *welcomeFont = [UIFont systemFontOfSize:kDMLogin_TrialCardWelcomeTextFontSize];
     CGSize welcomeLabelSize = [welcomeText sizeWithFont:welcomeFont];
     UILabel *welcomeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kDMLogin_TrialCardWelcomeTextTopOffset, kDMLogin_CardContentWidth, welcomeLabelSize.height)];
@@ -81,9 +81,9 @@
     
     CGRect buttonFrame = CGRectMake(kDMLogin_LoginButtonLeftOffset, kDMLogin_LoginButtonTopOffset, kDMLogin_LoginButtonWidth, kDMLogin_LoginButtonHeight);
     NSDictionary *statusTexts = @{
-                                  @(REMLoginButtonNormalStatus):REMLocalizedString(@"Login_TrialButtonText"),
-                                  @(REMLoginButtonWorkingStatus):REMLocalizedString(@"Login_CreatingDemoUserText"),
-                                  @(REMLoginButtonDisableStatus):REMLocalizedString(@"Login_TrialButtonText"),
+                                  @(REMLoginButtonNormalStatus):REMIPadLocalizedString(@"Login_TrialButtonText"),
+                                  @(REMLoginButtonWorkingStatus):REMIPadLocalizedString(@"Login_CreatingDemoUserText"),
+                                  @(REMLoginButtonDisableStatus):REMIPadLocalizedString(@"Login_TrialButtonText"),
                                 };
     REMLoginButton *button = [[REMLoginButton alloc] initWithFrame:buttonFrame andStatusTexts:statusTexts];
     button.titleLabel.textColor = [REMColor colorByHexString:kDMLogin_LoginButtonFontColor];
@@ -146,7 +146,7 @@
             NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
             
             if(customers.count<=0){
-                [REMAlertHelper alert:REMLocalizedString(@"Login_TrialNoCustomer")];
+                [REMAlertHelper alert:REMIPadLocalizedString(@"Login_TrialNoCustomer")];
                 [self.loginCarouselController setLoginButtonStatusNormal];
                 
                 return;

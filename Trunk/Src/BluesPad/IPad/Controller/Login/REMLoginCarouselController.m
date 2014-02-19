@@ -83,7 +83,7 @@ static const int kTrialCardIndex = kCardCount - 2;
     skipToTrialButton.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_SkipToTrialButtonFontSize];
     
     [skipToTrialButton setTitleColor:[REMColor colorByHexString:kDMLogin_SkipToTrialButtonFontColor] forState:UIControlStateNormal];
-    [skipToTrialButton setTitle:REMLocalizedString(@"Login_SkipToTrialButtonText") forState:UIControlStateNormal];
+    [skipToTrialButton setTitle:REMIPadLocalizedString(@"Login_SkipToTrialButtonText") forState:UIControlStateNormal];
     [skipToTrialButton setBackgroundImage:[REMIMG_JumpTrial resizableImageWithCapInsets:imageInsets] forState:UIControlStateNormal];
     [skipToTrialButton setBackgroundImage:[REMIMG_JumpTrial_Pressed resizableImageWithCapInsets:imageInsets] forState:UIControlStateHighlighted];
     [skipToTrialButton addTarget:self action:@selector(jumpTrialButtonTouchDown:) forControlEvents:UIControlEventTouchUpInside];
@@ -96,7 +96,7 @@ static const int kTrialCardIndex = kCardCount - 2;
     skipToLoginButton.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_SkipToLoginButtonFontSize];
     
     [skipToLoginButton setTitleColor:[REMColor colorByHexString:kDMLogin_SkipToLoginButtonFontColor] forState:UIControlStateNormal];
-    [skipToLoginButton setTitle:REMLocalizedString(@"Login_SkipToLoginButtonText") forState:UIControlStateNormal];
+    [skipToLoginButton setTitle:REMIPadLocalizedString(@"Login_SkipToLoginButtonText") forState:UIControlStateNormal];
     [skipToLoginButton setBackgroundImage:[REMIMG_JumpLogin resizableImageWithCapInsets:imageInsets] forState:UIControlStateNormal];
     [skipToLoginButton setBackgroundImage:[REMIMG_JumpLogin_Pressed resizableImageWithCapInsets:imageInsets] forState:UIControlStateHighlighted];
     [skipToLoginButton addTarget:self action:@selector(jumpLoginButtonTouchDown:) forControlEvents:UIControlEventTouchUpInside];

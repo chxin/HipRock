@@ -37,7 +37,7 @@
 -(void)loadView
 {
     UIView *contentView = [self renderContent];
-    self.view = [[REMLoginTitledCard alloc] initWithTitle:REMLocalizedString(@"Login_LoginCardTitle") andContentView:contentView];
+    self.view = [[REMLoginTitledCard alloc] initWithTitle:REMIPadLocalizedString(@"Login_LoginCardTitle") andContentView:contentView];
 }
 
 - (void)viewDidLoad
@@ -96,7 +96,7 @@
     NSString *password = [self.passwordTextField.text  stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     if(REMStringNilOrEmpty(username) || REMStringNilOrEmpty(password)) {
-        [REMAlertHelper alert:REMLocalizedString(@"Login_InputNotComplete")];
+        [REMAlertHelper alert:REMIPadLocalizedString(@"Login_InputNotComplete")];
         return nil;
     }
     
@@ -154,7 +154,7 @@
             NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
             
             if(customers.count<=0){
-                [REMAlertHelper alert:REMLocalizedString(@"Login_NoCustomer")];
+                [REMAlertHelper alert:REMIPadLocalizedString(@"Login_NoCustomer")];
                 [self.loginCarouselController setLoginButtonStatusNormal];
                 
                 return;
@@ -200,15 +200,15 @@
     switch (status) {
         case REMUserValidationWrongName:
             [self.userNameErrorLabel setHidden:NO];
-            [self.userNameErrorLabel setText : REMLocalizedString(kLNLogin_UserNotExist)];
+            [self.userNameErrorLabel setText : REMIPadLocalizedString(kLNLogin_UserNotExist)];
             break;
         case REMUserValidationWrongPassword:
             [self.passwordErrorLabel setHidden:NO];
-            [self.passwordErrorLabel setText : REMLocalizedString(kLNLogin_WrongPassword) ];
+            [self.passwordErrorLabel setText : REMIPadLocalizedString(kLNLogin_WrongPassword) ];
             break;
         case REMUserValidationInvalidSp:
             [self.userNameErrorLabel setHidden:NO];
-            [self.userNameErrorLabel setText :  REMLocalizedString(kLNLogin_AccountLocked)];
+            [self.userNameErrorLabel setText :  REMIPadLocalizedString(kLNLogin_AccountLocked)];
             break;
             
         default:
@@ -263,7 +263,7 @@
 -(UILabel *)renderPromptLabel
 {
     //text label
-    NSString *promptLabelText = REMLocalizedString(@"Login_LoginPrompt");
+    NSString *promptLabelText = REMIPadLocalizedString(@"Login_LoginPrompt");
     UIFont *promptLabelFont = [UIFont systemFontOfSize:kDMLogin_LoginCardPromptLabelFontSize];
     CGSize promptLabelSize = [promptLabelText sizeWithFont:promptLabelFont];
     UILabel *promptLabel = [[UILabel alloc] initWithFrame:CGRectMake(kDMLogin_LoginCardPromptLabelLeftOffset, kDMLogin_LoginCardPromptLabelTopOffset, kDMLogin_LoginCardPromptLabelWidth, promptLabelSize.height)];
@@ -280,7 +280,7 @@
     
     //username textbox
     UITextField *userNameTextBox = [[REMInsetsTextField alloc] initWithFrame:CGRectMake(kDMLogin_UserNameTextBoxLeftOffset, kDMLogin_UserNameTextBoxTopOffset, kDMLogin_TextBoxWidth, kDMLogin_TextBoxHeight) andInsets:UIEdgeInsetsMake(15, 10, 15, 10)];
-    userNameTextBox.placeholder = REMLocalizedString(@"Login_LoginUsernamePlaceHolder");
+    userNameTextBox.placeholder = REMIPadLocalizedString(@"Login_LoginUsernamePlaceHolder");
     userNameTextBox.delegate = self;
     userNameTextBox.returnKeyType = UIReturnKeyNext;
     userNameTextBox.font = [UIFont systemFontOfSize:kDMLogin_TextBoxFontSize];
@@ -310,7 +310,7 @@
 {
     //password textbox
     UITextField *passwordTextBox = [[REMInsetsTextField alloc] initWithFrame:CGRectMake(kDMLogin_PasswordTextBoxLeftOffset, kDMLogin_PasswordTextBoxTopOffset, kDMLogin_TextBoxWidth, kDMLogin_TextBoxHeight) andInsets:UIEdgeInsetsMake(15, 10, 15, 10)];
-    passwordTextBox.placeholder = REMLocalizedString(@"Login_LoginPasswordPlaceHolder");
+    passwordTextBox.placeholder = REMIPadLocalizedString(@"Login_LoginPasswordPlaceHolder");
     passwordTextBox.delegate = self;
     passwordTextBox.secureTextEntry = YES;
     passwordTextBox.returnKeyType = UIReturnKeyGo;
@@ -338,9 +338,9 @@
 {
     CGRect frame = CGRectMake(kDMLogin_LoginButtonLeftOffset, kDMLogin_LoginButtonTopOffset, kDMLogin_LoginButtonWidth, kDMLogin_LoginButtonHeight);
     NSDictionary *statusText = @{
-                                 @(REMLoginButtonNormalStatus):REMLocalizedString(@"Login_LoginButtonNormalText"),
-                                 @(REMLoginButtonWorkingStatus):REMLocalizedString(@"Login_LoginButtonWorkingText"),
-                                 @(REMLoginButtonDisableStatus):REMLocalizedString(@"Login_LoginButtonNormalText"),
+                                 @(REMLoginButtonNormalStatus):REMIPadLocalizedString(@"Login_LoginButtonNormalText"),
+                                 @(REMLoginButtonWorkingStatus):REMIPadLocalizedString(@"Login_LoginButtonWorkingText"),
+                                 @(REMLoginButtonDisableStatus):REMIPadLocalizedString(@"Login_LoginButtonNormalText"),
                                  };
     
     //login button

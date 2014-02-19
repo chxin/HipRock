@@ -103,7 +103,7 @@ static REMCacheStoreHolder *cacheStoreHolder;
                 self.success = success;
                 [holder.holder addObject:self];
                 
-                [REMAlertHelper alert:REMLocalizedString(@"Common_NetNoConnectionLoadLocal") delegate:self];
+                [REMAlertHelper alert:REMIPadLocalizedString(@"Common_NetNoConnectionLoadLocal") delegate:self];
                 [[REMApplicationContext instance] setCacheMode:YES];
                 holder.gotoHolder = YES;
             }

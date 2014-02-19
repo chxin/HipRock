@@ -201,7 +201,7 @@ const NSInteger kWeiboMaxLength = 140;
 -(void)sendClicked:(id)sender {
     NetworkStatus reachability = [REMNetworkHelper checkCurrentNetworkStatus];
     if (reachability == NotReachable) {
-        [REMAlertHelper alert:REMLocalizedString(@"Weibo_NONetwork")];
+        [REMAlertHelper alert:REMIPadLocalizedString(@"Weibo_NONetwork")];
     } else {
         if (![Weibo.weibo isAuthenticated]) {
             //        [REMAlertHelper alert:@"未绑定微博账户。"];

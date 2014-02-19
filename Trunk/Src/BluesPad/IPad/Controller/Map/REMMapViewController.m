@@ -118,7 +118,7 @@
     
     if(self.buildingInfoArray.count <= 0){
         [self.switchButton setEnabled:NO];
-        [REMAlertHelper alert:REMLocalizedString(@"Map_NoVisiableBuilding")];
+        [REMAlertHelper alert:REMIPadLocalizedString(@"Map_NoVisiableBuilding")];
     }
     else{
         [self.switchButton setEnabled:YES];

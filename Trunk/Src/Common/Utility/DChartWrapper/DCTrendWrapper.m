@@ -336,15 +336,15 @@
             if (self.calenderType == REMCalendarTypeHCSeason) {
                 if (calender.calendarType == REMCalenderTypeHeatSeason) {
                     fillColor = [REMColor colorByHexString:@"#fcf0e4" alpha:0.5];
-                    bandString = REMLocalizedString(@"Chart_Background_Text_HSeason");
+                    bandString = REMIPadLocalizedString(@"Chart_Background_Text_HSeason");
                 } else if (calender.calendarType == REMCalenderTypeCoolSeason) {
                     fillColor = [REMColor colorByHexString:@"#e3f0ff" alpha:0.5];
-                    bandString = REMLocalizedString(@"Chart_Background_Text_CSeason");
+                    bandString = REMIPadLocalizedString(@"Chart_Background_Text_CSeason");
                 }
             } else if (self.calenderType == REMCalenderTypeHoliday) {
                 if (calender.calendarType == REMCalenderTypeHoliday || calender.calendarType == REMCalenderTypeRestTime) {
                     fillColor = [REMColor colorByHexString:@"#eaeaea" alpha:0.5];
-                    bandString = REMLocalizedString(@"Chart_Background_Text_NonWorkday");
+                    bandString = REMIPadLocalizedString(@"Chart_Background_Text_NonWorkday");
                 }
             }
             if (fillColor == nil) continue;

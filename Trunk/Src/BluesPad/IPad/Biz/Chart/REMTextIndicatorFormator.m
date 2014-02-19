@@ -38,16 +38,16 @@
             }
             
         case REMEnergyTargetTarget:
-            return REMLocalizedString(@"Chart_TargetValue");
+            return REMIPadLocalizedString(@"Chart_TargetValue");
         case REMEnergyTargetBaseline:
-            return REMLocalizedString(@"Chart_BaselineValue");
+            return REMIPadLocalizedString(@"Chart_BaselineValue");
             
         case REMEnergyTargetPlain:
-            return REMLocalizedString(@"Chart_TOUPlain");
+            return REMIPadLocalizedString(@"Chart_TOUPlain");
         case REMEnergyTargetPeak:
-            return REMLocalizedString(@"Chart_TOUPeak");
+            return REMIPadLocalizedString(@"Chart_TOUPeak");
         case REMEnergyTargetValley:
-            return REMLocalizedString(@"Chart_TOUValley");
+            return REMIPadLocalizedString(@"Chart_TOUValley");
             
         case REMEnergyTargetHierarchy:
         case REMEnergyTargetCarbon:
@@ -61,7 +61,7 @@
                     return REMCommodities[@(target.commodityId)];
                 }
                 else{
-                    return target.type == REMEnergyTargetCarbon ? REMLocalizedString(@"Chart_CarbonTotal") : REMLocalizedString(@"Chart_CostTotal");
+                    return target.type == REMEnergyTargetCarbon ? REMIPadLocalizedString(@"Chart_CarbonTotal") : REMIPadLocalizedString(@"Chart_CostTotal");
                 }
             }
             
@@ -79,10 +79,10 @@
         case REMEnergyTargetBaseValue:
         {
             NSString *format = nil;
-            if(target.type == REMEnergyTargetCalcValue){ format = REMLocalizedString(@"Chart_TargetCalcValue"); }
-            else if(target.type == REMEnergyTargetOrigValue){ format = REMLocalizedString(@"Chart_TargetOrigValue"); }
-            else if(target.type == REMEnergyTargetTargetValue){ format = REMLocalizedString(@"Chart_TargetTargetValue"); }
-            else if(target.type == REMEnergyTargetBaseValue){ format = REMLocalizedString(@"Chart_TargetBaseValue"); }
+            if(target.type == REMEnergyTargetCalcValue){ format = REMIPadLocalizedString(@"Chart_TargetCalcValue"); }
+            else if(target.type == REMEnergyTargetOrigValue){ format = REMIPadLocalizedString(@"Chart_TargetOrigValue"); }
+            else if(target.type == REMEnergyTargetTargetValue){ format = REMIPadLocalizedString(@"Chart_TargetTargetValue"); }
+            else if(target.type == REMEnergyTargetBaseValue){ format = REMIPadLocalizedString(@"Chart_TargetBaseValue"); }
             else{format = nil;}
             
             if(format == nil)
@@ -100,7 +100,7 @@
                     prefix = REMCommodities[@(target.commodityId)];
                 }
                 else{
-                    prefix = REMLocalizedString(@"Chart_CarbonTotal");
+                    prefix = REMIPadLocalizedString(@"Chart_CarbonTotal");
                 }
                 
                 return [NSString stringWithFormat:format, prefix];

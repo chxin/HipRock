@@ -217,12 +217,12 @@
     } else if (!isAuthed && sender.on == YES){
         NetworkStatus reachability = [REMNetworkHelper checkCurrentNetworkStatus];
         if (reachability == NotReachable) {
-            [REMAlertHelper alert:REMLocalizedString(@"Weibo_NONetwork")];
+            [REMAlertHelper alert:REMIPadLocalizedString(@"Weibo_NONetwork")];
         } else {
             [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
                 NSString *message = nil;
                 if (!error) {
-                    message = NSLocalizedString(@"Weibo_AccountBindingSuccess", @"");
+                    message = REMIPadLocalizedString(@"Weibo_AccountBindingSuccess");
                 }
                 else {
                     message = [NSString stringWithFormat:NSLocalizedString(@"Weibo_AccountBindingFail", @""), error];

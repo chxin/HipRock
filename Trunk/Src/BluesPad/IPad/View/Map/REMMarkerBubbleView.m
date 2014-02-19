@@ -139,7 +139,7 @@
     
     NSString *formattedDataValue = [REMNumberHelper formatDataValueWithCarry:dataValue];
     
-    return REMIsNilOrNull(dataValue) ? nil : [NSString stringWithFormat:REMLocalizedString(@"Map_MarkerBubbleSubtitleFormat"),  formattedDataValue, uom];
+    return REMIsNilOrNull(dataValue) ? nil : [NSString stringWithFormat:REMIPadLocalizedString(@"Map_MarkerBubbleSubtitleFormat"),  formattedDataValue, uom];
 }
 
 

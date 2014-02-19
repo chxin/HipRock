@@ -430,6 +430,9 @@
 		7A63E27718B44CBD00A13464 /* REMMaxWidgetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1E318B44CBD00A13464 /* REMMaxWidgetSegue.m */; };
 		7A63E27818B44CBD00A13464 /* REMSplashMapSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1E518B44CBD00A13464 /* REMSplashMapSegue.m */; };
 		7A63E27B18B44CDF00A13464 /* Blues-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E27918B44CDF00A13464 /* Blues-Info.plist */; };
+		7A63E28518B44F9B00A13464 /* REMIPhoneControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E28418B44F9B00A13464 /* REMIPhoneControllerBase.m */; };
+		7A63E28818B450B200A13464 /* REMIPhoneMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E28718B450B200A13464 /* REMIPhoneMainViewController.m */; };
+		7A63E28B18B454BA00A13464 /* Localizable_Common.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E28918B454BA00A13464 /* Localizable_Common.strings */; };
 		7A664FD8183B3369004B9FF3 /* MapPopover_Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD4183B3369004B9FF3 /* MapPopover_Arrow.png */; };
 		7A664FD9183B3369004B9FF3 /* MapPopover_Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD5183B3369004B9FF3 /* MapPopover_Arrow@2x.png */; };
 		7A664FDA183B3369004B9FF3 /* MapPopover_Rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD6183B3369004B9FF3 /* MapPopover_Rectangle.png */; };
@@ -1146,6 +1149,12 @@
 		7A63E1E518B44CBD00A13464 /* REMSplashMapSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSplashMapSegue.m; sourceTree = "<group>"; };
 		7A63E27918B44CDF00A13464 /* Blues-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Blues-Info.plist"; sourceTree = "<group>"; };
 		7A63E27A18B44CDF00A13464 /* Blues-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Blues-Prefix.pch"; sourceTree = "<group>"; };
+		7A63E28318B44F9B00A13464 /* REMIPhoneControllerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMIPhoneControllerBase.h; sourceTree = "<group>"; };
+		7A63E28418B44F9B00A13464 /* REMIPhoneControllerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMIPhoneControllerBase.m; sourceTree = "<group>"; };
+		7A63E28618B450B200A13464 /* REMIPhoneMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMIPhoneMainViewController.h; sourceTree = "<group>"; };
+		7A63E28718B450B200A13464 /* REMIPhoneMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMIPhoneMainViewController.m; sourceTree = "<group>"; };
+		7A63E28A18B454BA00A13464 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Resource/Languages/en.lproj/Localizable_Common.strings; sourceTree = "<group>"; };
+		7A63E28C18B454C500A13464 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Resource/Languages/zh-Hans.lproj/Localizable_Common.strings"; sourceTree = "<group>"; };
 		7A664FD4183B3369004B9FF3 /* MapPopover_Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapPopover_Arrow.png; sourceTree = "<group>"; };
 		7A664FD5183B3369004B9FF3 /* MapPopover_Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MapPopover_Arrow@2x.png"; sourceTree = "<group>"; };
 		7A664FD6183B3369004B9FF3 /* MapPopover_Rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapPopover_Rectangle.png; sourceTree = "<group>"; };
@@ -1997,6 +2006,7 @@
 				7A2849581803998900DC481B /* Dimensions */,
 				7A284954180398B600DC481B /* Definitions */,
 				7AE8EEA21835C9B4007D0020 /* Pictures */,
+				7A63E28918B454BA00A13464 /* Localizable_Common.strings */,
 				7A63E09518B442A600A13464 /* Localizable_IPhone.strings */,
 				7A63E09118B4427B00A13464 /* Localizable_IPad.strings */,
 				7A7B298C1888C58A00E74D3D /* Images.xcassets */,
@@ -2010,6 +2020,9 @@
 		7A63E09918B4435A00A13464 /* IPhone */ = {
 			isa = PBXGroup;
 			children = (
+				7A63E27E18B44F1600A13464 /* View */,
+				7A63E27D18B44F1600A13464 /* Model */,
+				7A63E27C18B44F1600A13464 /* Controller */,
 			);
 			name = IPhone;
 			sourceTree = "<group>";
@@ -2579,6 +2592,58 @@
 				7A63E1E318B44CBD00A13464 /* REMMaxWidgetSegue.m */,
 				7A63E1E418B44CBD00A13464 /* REMSplashMapSegue.h */,
 				7A63E1E518B44CBD00A13464 /* REMSplashMapSegue.m */,
+			);
+			path = Segue;
+			sourceTree = "<group>";
+		};
+		7A63E27C18B44F1600A13464 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7A63E28318B44F9B00A13464 /* REMIPhoneControllerBase.h */,
+				7A63E28418B44F9B00A13464 /* REMIPhoneControllerBase.m */,
+				7A63E28618B450B200A13464 /* REMIPhoneMainViewController.h */,
+				7A63E28718B450B200A13464 /* REMIPhoneMainViewController.m */,
+			);
+			name = Controller;
+			path = IPhone/Controller;
+			sourceTree = "<group>";
+		};
+		7A63E27D18B44F1600A13464 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			path = IPhone/Model;
+			sourceTree = "<group>";
+		};
+		7A63E27E18B44F1600A13464 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7A63E27F18B44F1600A13464 /* Controls */,
+				7A63E28018B44F1600A13464 /* Custom */,
+				7A63E28118B44F1600A13464 /* Segue */,
+			);
+			name = View;
+			path = IPhone/View;
+			sourceTree = "<group>";
+		};
+		7A63E27F18B44F1600A13464 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
+		7A63E28018B44F1600A13464 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		7A63E28118B44F1600A13464 /* Segue */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = Segue;
 			sourceTree = "<group>";
@@ -3413,6 +3478,7 @@
 				7A63E09318B4427B00A13464 /* Localizable_IPad.strings in Resources */,
 				7AB71684187F839500EA7544 /* DefaultMap.png in Resources */,
 				6A61A7701839B82000C6A228 /* Login-Disable@2x.png in Resources */,
+				7A63E28B18B454BA00A13464 /* Localizable_Common.strings in Resources */,
 				6A61A70A1839B82000C6A228 /* Coal_pressed@2x.png in Resources */,
 				B44D26A818A9E94C00D7C06D /* Descend@2x.png in Resources */,
 				7A5A97371856D54E0084E228 /* share-email@2x.png in Resources */,
@@ -3505,6 +3571,7 @@
 				7A63E24D18B44CBD00A13464 /* REMBuildingWeiboView.m in Sources */,
 				7A63E20D18B44CBD00A13464 /* REMSettingCustomerDetailAdminViewController.m in Sources */,
 				EFD947051839DCBB00E9EC50 /* DCRange.m in Sources */,
+				7A63E28518B44F9B00A13464 /* REMIPhoneControllerBase.m in Sources */,
 				B48ED409178EA8970032CD72 /* REMSqliteStorage.m in Sources */,
 				7A63E20918B44CBD00A13464 /* REMMapViewController.m in Sources */,
 				7A63E21218B44CBD00A13464 /* REMWidgetBizDelegatorBase.m in Sources */,
@@ -3632,6 +3699,7 @@
 				7A63E24918B44CBD00A13464 /* REMBuildingDataView.m in Sources */,
 				7A63E21A18B44CBD00A13464 /* REMWidgetDetailViewController.m in Sources */,
 				EFF75151183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m in Sources */,
+				7A63E28818B450B200A13464 /* REMIPhoneMainViewController.m in Sources */,
 				7A63E22418B44CBD00A13464 /* REMBuildingTimeRangeDataModel.m in Sources */,
 				EF0459941845CEAF0086D5AC /* _DCXYIndicatorLayer.m in Sources */,
 				7A63E22018B44CBD00A13464 /* REMAverageUsageDataModel.m in Sources */,
@@ -3976,6 +4044,15 @@
 				7A63E09818B442B300A13464 /* zh-Hans */,
 			);
 			name = Localizable_IPhone.strings;
+			sourceTree = "<group>";
+		};
+		7A63E28918B454BA00A13464 /* Localizable_Common.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7A63E28A18B454BA00A13464 /* en */,
+				7A63E28C18B454C500A13464 /* zh-Hans */,
+			);
+			name = Localizable_Common.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

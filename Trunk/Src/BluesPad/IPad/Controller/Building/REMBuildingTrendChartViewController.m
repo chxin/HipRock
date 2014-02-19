@@ -47,14 +47,14 @@ const int buttonFirstMargin = -20;
     
     REMToggleButtonGroup* toggleGroup = [[REMToggleButtonGroup alloc]init];
     _toggleGroup = toggleGroup;
-    [self makeButton:REMLocalizedString(@"Common_Today") rect:CGRectMake(buttonFirstMargin, 0, buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeToday);
-    [self makeButton:REMLocalizedString(@"Common_Yesterday") rect:CGRectMake(buttonMargin + buttonWidth+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeYesterday);
-    self.defaultButton = [self makeButton:REMLocalizedString(@"Common_ThisMonth") rect:CGRectMake((buttonMargin + buttonWidth)*2+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup];
+    [self makeButton:REMIPadLocalizedString(@"Common_Today") rect:CGRectMake(buttonFirstMargin, 0, buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeToday);
+    [self makeButton:REMIPadLocalizedString(@"Common_Yesterday") rect:CGRectMake(buttonMargin + buttonWidth+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeYesterday);
+    self.defaultButton = [self makeButton:REMIPadLocalizedString(@"Common_ThisMonth") rect:CGRectMake((buttonMargin + buttonWidth)*2+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup];
     self.defaultButton.on = YES;
     self.defaultButton.value = @(REMRelativeTimeRangeTypeThisMonth);
-    [self makeButton:REMLocalizedString(@"Common_LastMonth") rect:CGRectMake((buttonMargin + buttonWidth)*3+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeLastMonth);
-    [self makeButton:REMLocalizedString(@"Common_ThisYear") rect:CGRectMake((buttonMargin + buttonWidth)*4+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeThisYear);
-    [self makeButton:REMLocalizedString(@"Common_LastYear") rect:CGRectMake((buttonMargin + buttonWidth)*5+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeLastYear);
+    [self makeButton:REMIPadLocalizedString(@"Common_LastMonth") rect:CGRectMake((buttonMargin + buttonWidth)*3+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeLastMonth);
+    [self makeButton:REMIPadLocalizedString(@"Common_ThisYear") rect:CGRectMake((buttonMargin + buttonWidth)*4+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeThisYear);
+    [self makeButton:REMIPadLocalizedString(@"Common_LastYear") rect:CGRectMake((buttonMargin + buttonWidth)*5+buttonFirstMargin,0,buttonWidth,buttonHeight) group:toggleGroup].value = @(REMRelativeTimeRangeTypeLastYear);
     toggleGroup.delegate = self;
     self.timeRangeType = REMRelativeTimeRangeTypeThisMonth;
 }

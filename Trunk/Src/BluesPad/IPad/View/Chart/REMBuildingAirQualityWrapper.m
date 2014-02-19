@@ -119,10 +119,10 @@
         b.range = bandRange;
         NSString* labelText = nil;
         if ([standard.standardName isEqualToString:kAmericanStandardCode]) {
-            labelText = REMLocalizedString(@"Building_AirQualityAmericanStandard");
+            labelText = REMIPadLocalizedString(@"Building_AirQualityAmericanStandard");
             b.color = [UIColor colorWithRed:0.0/255.0 green:226.0/255.0 blue:255.0/255.0 alpha:0.39];
         } else {
-            labelText = REMLocalizedString(@"Building_AirQualityChinaStandard");
+            labelText = REMIPadLocalizedString(@"Building_AirQualityChinaStandard");
             b.color = [UIColor colorWithRed:58.0/255.0 green:255.0/255.0 blue:168.0/255.0 alpha:0.43];
         }
         if (self.standardLabels[standard.standardName] == nil) {

@@ -13,7 +13,7 @@
 -(NSArray *)convertItemModels
 {
     // Peak, blue; Valley, green; Plain, purple;
-    NSArray *names = @[REMLocalizedString(@"Chart_TOUPeak"),REMLocalizedString(@"Chart_TOUValley"),REMLocalizedString(@"Chart_TOUPlain")];
+    NSArray *names = @[REMIPadLocalizedString(@"Chart_TOUPeak"),REMIPadLocalizedString(@"Chart_TOUValley"),REMIPadLocalizedString(@"Chart_TOUPlain")];
     NSMutableArray *models = [[NSMutableArray alloc] init];
     
     for(int i=0;i<3;i++){

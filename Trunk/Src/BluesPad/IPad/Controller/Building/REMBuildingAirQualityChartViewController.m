@@ -29,11 +29,11 @@
 #define kAmericanStandardCode @"美国标准"
 #define kChinaStandardCode @"中国标准"
 
-#define kWordAirQualityOutdoor REMLocalizedString(@"Building_AirQualityOutdoor")
-#define kWordAirQualityHoneywell REMLocalizedString(@"Building_AirQualityHoneywell")
-#define kWordAirQualityMayair REMLocalizedString(@"Building_AirQualityMayair")
-#define kWordAirQualityAmericanStandard REMLocalizedString(@"Building_AirQualityAmericanStandard")
-#define kWordAirQualityChinaStandard REMLocalizedString(@"Building_AirQualityChinaStandard")
+#define kWordAirQualityOutdoor REMIPadLocalizedString(@"Building_AirQualityOutdoor")
+#define kWordAirQualityHoneywell REMIPadLocalizedString(@"Building_AirQualityHoneywell")
+#define kWordAirQualityMayair REMIPadLocalizedString(@"Building_AirQualityMayair")
+#define kWordAirQualityAmericanStandard REMIPadLocalizedString(@"Building_AirQualityAmericanStandard")
+#define kWordAirQualityChinaStandard REMIPadLocalizedString(@"Building_AirQualityChinaStandard")
 
 
 static NSDictionary *codeNameMap;
