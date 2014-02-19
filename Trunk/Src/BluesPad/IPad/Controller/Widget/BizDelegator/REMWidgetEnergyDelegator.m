@@ -346,10 +346,10 @@
 
 - (NSString *)calendarComponent{
     if(self.widgetInfo.contentSyntax.calendarType==REMCalendarTypeHCSeason){
-        return NSLocalizedString(@"Widget_CalendarHC", @""); //"冷暖季";
+        return REMIPadLocalizedString(@"Widget_CalendarHC"); //"冷暖季";
     }
     else if(self.widgetInfo.contentSyntax.calendarType==REMCalenderTypeHoliday){
-        return NSLocalizedString(@"Widget_CalendarHoliday", @"");//非工作时间
+        return REMIPadLocalizedString(@"Widget_CalendarHoliday");//非工作时间
     }
     else{
         return @"";
@@ -359,7 +359,7 @@
 - (void)checkCalendarDataWithCalendarType:(REMCalendarType)calendarType withSearchTimeRange:(REMTimeRange *)searchRange{
     NSArray *calendarDataArray=self.energyData.calendarData;
     if(calendarDataArray==nil || [calendarDataArray isEqual:[NSNull null]]==YES){
-        NSString *text=NSLocalizedString(@"Widget_CalendarTimeError", @"");
+        NSString *text=REMIPadLocalizedString(@"Widget_CalendarTimeError");
         //看不到日历背景色？换个时间试试
         [self showPopupMsg:text];
     }
@@ -401,7 +401,7 @@
             
         }
         if(showMsg==YES){
-            NSString *text=NSLocalizedString(@"Widget_CalendarTimeError", @"");
+            NSString *text=REMIPadLocalizedString(@"Widget_CalendarTimeError");
             //看不到日历背景色？换个时间试试
             [self showPopupMsg:text];
         }
@@ -414,7 +414,7 @@
     if(self.widgetInfo.contentSyntax.calendarType == REMCalendarTypeHCSeason){
         if(tempModel.step == REMEnergyStepYear){
             trend.calenderType=REMCalendarTypeNone;
-            NSString *text=NSLocalizedString(@"Widget_CalendarStepError", @"");
+            NSString *text=REMIPadLocalizedString(@"Widget_CalendarStepError");
             //"当前步长不支持显示冷暖季背景色"
             [self showPopupMsg:[NSString stringWithFormat:text,[self calendarComponent]]];
         }
@@ -428,7 +428,7 @@
            tempModel.step == REMEnergyStepYear ||
            tempModel.step == REMEnergyStepWeek){
             trend.calenderType=REMCalendarTypeNone;
-            NSString *text=NSLocalizedString(@"Widget_CalendarStepError", @"");
+            NSString *text=REMIPadLocalizedString(@"Widget_CalendarStepError");
             //"当前步长不支持显示非工作时间背景色"
             [self showPopupMsg:[NSString stringWithFormat:text,[self calendarComponent]]];
         }
@@ -641,27 +641,27 @@
     NSArray *supportStep;
     NSArray *errorMsgArray;
     if([availableStep isEqualToString:@"Monthly"]==YES){
-        //buttonArray=@[NSLocalizedString(@"Common_Month", @""),NSLocalizedString(@"Common_Year", @"")];
+        //buttonArray=@[REMIPadLocalizedString(@"Common_Month"),REMIPadLocalizedString(@"Common_Year")];
         supportStep =@[@(REMEnergyStepMonth),@(REMEnergyStepYear)];
-        errorMsgArray=@[NSLocalizedString(@"Widget_StepErrorHour", @""),NSLocalizedString(@"Widget_StepErrorDay", @""),NSLocalizedString(@"Widget_StepErrorWeek", @"")];
+        errorMsgArray=@[REMIPadLocalizedString(@"Widget_StepErrorHour"),REMIPadLocalizedString(@"Widget_StepErrorDay"),REMIPadLocalizedString(@"Widget_StepErrorWeek")];
     }
     else if([availableStep isEqualToString:@"Daily"]==YES){
-        //buttonArray=@[NSLocalizedString(@"Common_Day", @""),NSLocalizedString(@"Common_Week", @""),NSLocalizedString(@"Common_Month", @"")];
+        //buttonArray=@[REMIPadLocalizedString(@"Common_Day"),REMIPadLocalizedString(@"Common_Week"),REMIPadLocalizedString(@"Common_Month")];
         supportStep =@[@(REMEnergyStepDay),@(REMEnergyStepWeek),@(REMEnergyStepMonth)];
-        errorMsgArray=@[NSLocalizedString(@"Widget_StepErrorHour", @"")];
+        errorMsgArray=@[REMIPadLocalizedString(@"Widget_StepErrorHour")];
     }
     else if([availableStep isEqualToString:@"Weekly"]==YES){
-        //buttonArray=@[NSLocalizedString(@"Common_Week", @""),NSLocalizedString(@"Common_Month", @""),NSLocalizedString(@"Common_Year", @"")];
+        //buttonArray=@[REMIPadLocalizedString(@"Common_Week"),REMIPadLocalizedString(@"Common_Month"),REMIPadLocalizedString(@"Common_Year")];
         supportStep =@[@(REMEnergyStepWeek),@(REMEnergyStepMonth),@(REMEnergyStepYear)];
-        errorMsgArray=@[NSLocalizedString(@"Widget_StepErrorHour", @""),NSLocalizedString(@"Widget_StepErrorDay", @"")];
+        errorMsgArray=@[REMIPadLocalizedString(@"Widget_StepErrorHour"),REMIPadLocalizedString(@"Widget_StepErrorDay")];
     }
     else if([availableStep isEqualToString:@"Yearly"]==YES){
-        //buttonArray=@[NSLocalizedString(@"Common_Year", @"")];
+        //buttonArray=@[REMIPadLocalizedString(@"Common_Year")];
         supportStep =@[@(REMEnergyStepYear)];
-        errorMsgArray=@[NSLocalizedString(@"Widget_StepErrorHour", @""),NSLocalizedString(@"Widget_StepErrorDay", @""),NSLocalizedString(@"Widget_StepErrorWeek", @""),NSLocalizedString(@"Widget_StepErrorMonth", @"")];
+        errorMsgArray=@[REMIPadLocalizedString(@"Widget_StepErrorHour"),REMIPadLocalizedString(@"Widget_StepErrorDay"),REMIPadLocalizedString(@"Widget_StepErrorWeek"),REMIPadLocalizedString(@"Widget_StepErrorMonth")];
     }
     else if([availableStep isEqualToString:@"Hourly"]==YES){
-        //buttonArray=@[NSLocalizedString(@"Common_Hour", @""),NSLocalizedString(@"Common_Daily", @""),NSLocalizedString(@"Common_Week", @"")];
+        //buttonArray=@[REMIPadLocalizedString(@"Common_Hour"),REMIPadLocalizedString(@"Common_Daily"),REMIPadLocalizedString(@"Common_Week")];
         supportStep =@[@(REMEnergyStepHour),@(REMEnergyStepDay),@(REMEnergyStepWeek)];
         errorMsgArray=@[];
     }
@@ -686,19 +686,19 @@
         for (int i=0; i<finalSupportStepArray.count; ++i) {
             REMEnergyStep showStep=(REMEnergyStep)[finalSupportStepArray[i] intValue];
             if (showStep == REMEnergyStepHour) {
-                [buttonArray addObject:NSLocalizedString(@"Common_Hour", @"")];
+                [buttonArray addObject:REMIPadLocalizedString(@"Common_Hour")];
             }
             else if(showStep == REMEnergyStepDay) {
-                [buttonArray addObject:NSLocalizedString(@"Common_Day", @"")];
+                [buttonArray addObject:REMIPadLocalizedString(@"Common_Day")];
             }
             else if(showStep == REMEnergyStepWeek) {
-                [buttonArray addObject:NSLocalizedString(@"Common_Week", @"")];
+                [buttonArray addObject:REMIPadLocalizedString(@"Common_Week")];
             }
             else if(showStep == REMEnergyStepMonth) {
-                [buttonArray addObject:NSLocalizedString(@"Common_Month", @"")];
+                [buttonArray addObject:REMIPadLocalizedString(@"Common_Month")];
             }
             else if(showStep == REMEnergyStepYear) {
-                [buttonArray addObject:NSLocalizedString(@"Common_Year", @"")];
+                [buttonArray addObject:REMIPadLocalizedString(@"Common_Year")];
             }
         }
         
@@ -710,11 +710,11 @@
         
     }
     alert.delegate=self;
-    [alert addButtonWithTitle:NSLocalizedString(@"Common_Cancel", @"")];
+    [alert addButtonWithTitle:REMIPadLocalizedString(@"Common_Cancel")];
     
     alert.cancelButtonIndex=buttonArray.count;
     NSString *str= [errorMsgArray componentsJoinedByString:@","];
-    alert.message= [NSString stringWithFormat: NSLocalizedString(@"Widget_StepError", @""),str];
+    alert.message= [NSString stringWithFormat: REMIPadLocalizedString(@"Widget_StepError"),str];
     
     [alert show];
     

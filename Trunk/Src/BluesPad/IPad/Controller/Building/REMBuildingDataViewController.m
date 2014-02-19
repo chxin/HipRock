@@ -124,7 +124,7 @@
     
     if (array.count==0) {
         UILabel *label =[[ UILabel alloc]initWithFrame:CGRectMake(0, 225, 600, 25)];
-        label.text=NSLocalizedString(@"BuildingChart_DataError", @"");
+        label.text=REMIPadLocalizedString(@"BuildingChart_DataError");
         label.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
         label.shadowOffset=CGSizeMake(1, 1);
         
@@ -305,7 +305,7 @@
     label.textAlignment=NSTextAlignmentLeft;
     label.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:frame.size.height];
     
-    label.text=NSLocalizedString(@"Building_PullUpMoreInfo", @"");//  @"￼上拉查看更多能耗信息";
+    label.text=REMIPadLocalizedString(@"Building_PullUpMoreInfo");//  @"￼上拉查看更多能耗信息";
     //label.text=@"asd上拉查看更多能耗信息";
     //label.adjustsLetterSpacingToFitWidth=YES;
     //label.lineBreakMode=NSLineBreakByTruncatingTail;
@@ -329,7 +329,7 @@
 
 - (void)showDashboardLabel:(BOOL)overThreshold{
     if(overThreshold==YES){
-        self.dashboardLabel.text=NSLocalizedString(@"Building_ReleaseSwitchView", @"");//  @"松开以显示";
+        self.dashboardLabel.text=REMIPadLocalizedString(@"Building_ReleaseSwitchView");//  @"松开以显示";
         
         [UIView animateWithDuration:0.2 animations:^(void){
             //self.arrow.layer.transform=CATransform3DMakeRotation((M_PI / 180.0) * 180.0f, 0.0f, 0.0f, 1.0f);
@@ -337,7 +337,7 @@
         }];
     }
     else{
-        self.dashboardLabel.text=NSLocalizedString(@"Building_PullUpMoreInfo", @"");//@"￼上拉查看更多能耗信息";
+        self.dashboardLabel.text=REMIPadLocalizedString(@"Building_PullUpMoreInfo");//@"￼上拉查看更多能耗信息";
         [UIView animateWithDuration:0.2 animations:^(void){
             //self.arrow.layer.transform=CATransform3DMakeRotation((M_PI / 180.0) * 180.0f, 0.0f, 0.0f, 1.0f);
             self.arrow.transform=CGAffineTransformMakeRotation(M_PI*2);
@@ -522,20 +522,20 @@
     
     NSString* stringFormat = nil;
     if (self.currentCommodityIndex<self.buildingInfo.commodityArray.count) {
-        stringFormat = NSLocalizedString(@"Weibo_ContentOfElectirc", @"");
+        stringFormat = REMIPadLocalizedString(@"Weibo_ContentOfElectirc");
         REMCommodityUsageModel *model =controller.commodityUsage;
         NSString* commodityName = model.commodity.comment;
         NSString* uomName = model.commodityUsage.uom.comment;
         NSString* val = [model.commodityUsage.dataValue isEqual:[NSNull null]] ? nil : model.commodityUsage.dataValue.stringValue;
         if (val == nil || commodityName == nil || uomName == nil) {
-            stringFormat = NSLocalizedString(@"BuildingChart_NoData", @"");
+            stringFormat = REMIPadLocalizedString(@"BuildingChart_NoData");
         } else {
             stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
             stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#UomName#" withString:uomName];
             stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Usage#" withString:val];
         }
     } else {
-        stringFormat = NSLocalizedString(@"Weibo_ContentOfPM25", @"");
+        stringFormat = REMIPadLocalizedString(@"Weibo_ContentOfPM25");
         REMAirQualityModel *model = self.buildingInfo.airQuality;
         NSString* commodityName = model.commodity.comment;
         NSString* outdoorVal = [model.outdoor.dataValue isEqual:[NSNull null]] ? nil : model.outdoor.dataValue.stringValue;
@@ -545,7 +545,7 @@
         NSString* mayairVal = [model.mayair.dataValue isEqual:[NSNull null]] ? nil : model.mayair.dataValue.stringValue;
         NSString* mayairUom = model.mayair.uom.comment;
         if (commodityName == nil || outdoorUom == nil || outdoorVal == nil || honeywellUom == nil || honeywellVal == nil || mayairUom == nil || mayairVal == nil) {
-            stringFormat = NSLocalizedString(@"BuildingChart_NoData", @"");
+            stringFormat = REMIPadLocalizedString(@"BuildingChart_NoData");
         } else {
             stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
             stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorVal#" withString:outdoorVal];

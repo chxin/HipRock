@@ -313,7 +313,7 @@
     //CGFloat leftMargin=kBuildingLeftMargin+kBuildingTitleButtonDimension+kBuildingTitleIconMargin;
     UILabel *buildingType=[[UILabel alloc]initWithFrame:CGRectMake(0, 12, self.container.frame.size.width, kBuildingTypeTitleFontSize)];
     buildingType.backgroundColor=[UIColor clearColor];
-    buildingType.text=NSLocalizedString(@"Common_Building", @"");//  @"楼宇";
+    buildingType.text=REMIPadLocalizedString(@"Common_Building");//  @"楼宇";
     buildingType.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     buildingType.shadowOffset=CGSizeMake(1, 1);
     buildingType.font = [UIFont fontWithName:@(kBuildingFontLight) size:kBuildingTypeTitleFontSize];

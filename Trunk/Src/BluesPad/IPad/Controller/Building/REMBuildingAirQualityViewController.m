@@ -10,6 +10,7 @@
 #import "REMBuildingDataViewController.h"
 #import "REMBuildingChartContainerViewController.h"
 #import "REMBuildingAirQualityChartViewController.h"
+#import "REMCommonHeaders.h"
 
 @interface REMBuildingAirQualityViewController ()
 @property (nonatomic,weak) REMBuildingTitleLabelView *totalLabel;
@@ -108,17 +109,17 @@
         if (status == REMDataAccessFailed || status == REMDataAccessErrorMessage) {
             NSString *serverError;
             if (status == REMDataAccessFailed) {
-                serverError=NSLocalizedString(@"Common_ServerTimeout", @"");
+                serverError=REMIPadLocalizedString(@"Common_ServerTimeout");
             }
             else{
-                serverError=NSLocalizedString(@"Common_ServerError", @"");
+                serverError=REMIPadLocalizedString(@"Common_ServerError");
             }
             NSString *serverErrorSimple;
             if (status == REMDataAccessFailed) {
-                serverErrorSimple=NSLocalizedString(@"Common_ServerTimeoutSimple", @"");
+                serverErrorSimple=REMIPadLocalizedString(@"Common_ServerTimeoutSimple");
             }
             else{
-                serverErrorSimple=NSLocalizedString(@"Common_ServerErrorSimple", @"");
+                serverErrorSimple=REMIPadLocalizedString(@"Common_ServerErrorSimple");
             }
             [self.totalLabel setEmptyText:serverError];
             [self.outdoorLabel setEmptyText:serverErrorSimple];
@@ -168,7 +169,7 @@
 
 - (void)initTotalValue
 {
-    NSString *title=NSLocalizedString(@"Building_AirQualityIndoor", @"");//室内PM2.5
+    NSString *title=REMIPadLocalizedString(@"Building_AirQualityIndoor");//室内PM2.5
     REMBuildingTitleLabelView *totalLabel=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, 0, 900, kBuildingCommodityTotalHeight)];
     totalLabel.textWidth=1000;
     totalLabel.title=title;
@@ -177,7 +178,7 @@
     totalLabel.leftMargin=0;
     totalLabel.valueFontSize=kBuildingCommodityTotalValueFontSize;
     totalLabel.uomFontSize=kBuildingCommodityTotalUomFontSize;
-    //totalLabel.emptyText=NSLocalizedString(@"BuildingChart_NoData", @"");//@"请持续关注能耗变化";
+    //totalLabel.emptyText=REMIPadLocalizedString(@"BuildingChart_NoData", @"");//@"请持续关注能耗变化";
     totalLabel.emptyTextFontSize=29;
     totalLabel.emptyTextFont=@(kBuildingFontSCRegular);
     totalLabel.emptyTextMargin=28;
@@ -193,7 +194,7 @@
     
     REMBuildingTitleLabelView *outdoor=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
     outdoor.textWidth=300;
-    outdoor.title=NSLocalizedString(@"Building_AirQualityOutdoor", @""); //@"室外PM2.5";
+    outdoor.title=REMIPadLocalizedString(@"Building_AirQualityOutdoor"); //@"室外PM2.5";
     outdoor.titleFontSize=kBuildingCommodityTitleFontSize;
     outdoor.titleMargin=kBuildingDetailInnerMargin;
     outdoor.leftMargin=0;
@@ -208,7 +209,7 @@
     self.outdoorLabel=outdoor;
     
     REMBuildingTitleLabelView *honeywell=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
-    honeywell.title=NSLocalizedString(@"Building_AirQualityHoneywell", @""); //@"室内新风PM2.5(霍尼)";
+    honeywell.title=REMIPadLocalizedString(@"Building_AirQualityHoneywell"); //@"室内新风PM2.5(霍尼)";
     honeywell.textWidth=300;
     honeywell.titleFontSize=kBuildingCommodityTitleFontSize;
     honeywell.titleMargin=kBuildingDetailInnerMargin;
@@ -226,7 +227,7 @@
     
     
     REMBuildingTitleLabelView *mayair=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, self.honeywellLabel.frame.origin.y, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
-    mayair.title=NSLocalizedString(@"Building_AirQualityMayair", @""); //@"室内新风PM2.5(美埃)";
+    mayair.title=REMIPadLocalizedString(@"Building_AirQualityMayair"); //@"室内新风PM2.5(美埃)";
     mayair.textWidth=400;
     mayair.titleFontSize=kBuildingCommodityTitleFontSize;
     mayair.titleMargin=kBuildingDetailInnerMargin;
@@ -250,7 +251,7 @@
 {
     int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;
     int chartContainerHeight= kBuildingChartHeight*2+kBuildingCommodityBottomMargin;
-    NSString *title1=NSLocalizedString(@"Building_AirQualityDailyChart", @"");//室内外PM2.5逐日含量
+    NSString *title1=REMIPadLocalizedString(@"Building_AirQualityDailyChart");//室内外PM2.5逐日含量
     
     UILabel *titleLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityTitleFontSize)];
     titleLabel1.text=title1;

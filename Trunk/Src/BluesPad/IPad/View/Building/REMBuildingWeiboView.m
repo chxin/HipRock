@@ -80,7 +80,7 @@ const NSInteger kWeiboMaxLength = 140;
     UIView* topToolbar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kWeiboWindowWidth, kWeiboToolbarHeight)];
     topToolbar.backgroundColor = mainBackgroundColor;
     UILabel* toolbarLabel = [[UILabel alloc]initWithFrame:topToolbar.frame];
-    [toolbarLabel setText:NSLocalizedString(@"Weibo_WindowTitle",@"")];
+    [toolbarLabel setText:REMIPadLocalizedString(@"Weibo_WindowTitle")];
     toolbarLabel.textAlignment = NSTextAlignmentCenter;
     toolbarLabel.backgroundColor = [UIColor clearColor];
     [toolbarLabel setTextColor:[UIColor blackColor]];
@@ -94,14 +94,14 @@ const NSInteger kWeiboMaxLength = 140;
     cancelBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:buttonTextSize];
     cancelBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
     [cancelBtn setTitleColor:buttonEnableTextColor forState:UIControlStateNormal];
-    [cancelBtn setTitle:NSLocalizedString(@"Weibo_CancelButtonText", @"") forState:UIControlStateNormal];
+    [cancelBtn setTitle:REMIPadLocalizedString(@"Weibo_CancelButtonText") forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(cancelClicked:) forControlEvents:UIControlEventTouchUpInside];
     [sendBtn setFrame:CGRectMake(kWeiboWindowWidth - kWeiboButtonWidth - kWeiboButtonMargin, 0, kWeiboButtonWidth, kWeiboToolbarHeight)];
     sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     sendBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:buttonTextSize];
     sendBtn.titleLabel.textAlignment = NSTextAlignmentRight;
     [sendBtn setTitleColor:buttonEnableTextColor forState:UIControlStateNormal];
-    [sendBtn setTitle:NSLocalizedString(@"Weibo_SendButtonText", @"") forState:UIControlStateNormal];
+    [sendBtn setTitle:REMIPadLocalizedString(@"Weibo_SendButtonText") forState:UIControlStateNormal];
     [sendBtn addTarget:self action:@selector(sendClicked:) forControlEvents:UIControlEventTouchUpInside];
     [topToolbar addSubview:cancelBtn];
     [topToolbar addSubview:sendBtn];
@@ -211,7 +211,7 @@ const NSInteger kWeiboMaxLength = 140;
                     [self sendWeibo];
                 }
                 else {
-                    message = [NSString stringWithFormat:NSLocalizedString(@"Weibo_AccountBindingFail", @""), error];
+                    message = [NSString stringWithFormat:REMIPadLocalizedString(@"Weibo_AccountBindingFail"), error];
                     [REMAlertHelper alert:message];
                 }
             }];
@@ -229,16 +229,16 @@ const NSInteger kWeiboMaxLength = 140;
     //    [self.view.superview.layer setShadowOffset:CGSizeMake(0, 100)];
     //    [UIView commitAnimations];
     
-    [REMStatusBar showStatusMessage:NSLocalizedString(@"Weibo_IsSending", @"") autoHide:NO];
+    [REMStatusBar showStatusMessage:REMIPadLocalizedString(@"Weibo_IsSending") autoHide:NO];
     [Weibo.weibo newStatus:textView.text pic:UIImagePNGRepresentation(self.weiboImage) completed:^(Status *status, NSError *error) {
         NSString *message = nil;
         if (error) {
             message = [NSString stringWithFormat:@"failed to post:%@", error];
             NSLog(@"%@", message);
-            [REMStatusBar showStatusMessage:NSLocalizedString(@"Weibo_SentFail", @"")];
+            [REMStatusBar showStatusMessage:REMIPadLocalizedString(@"Weibo_SentFail")];
         }
         else {
-            [REMStatusBar showStatusMessage:NSLocalizedString(@"Weibo_SentSuccess", @"")];
+            [REMStatusBar showStatusMessage:REMIPadLocalizedString(@"Weibo_SentSuccess")];
         }
     }];
     [self close:YES];

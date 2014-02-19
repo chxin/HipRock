@@ -26,7 +26,7 @@
     UILabel *productNamelabel=[[UILabel alloc]init];
     productNamelabel.translatesAutoresizingMaskIntoConstraints=NO;
     productNamelabel.backgroundColor=[UIColor clearColor];
-    productNamelabel.text=NSLocalizedString(@"Setting_AboutProductName", @"");//施耐德电气“云能效”管理平台
+    productNamelabel.text=REMIPadLocalizedString(@"Setting_AboutProductName");//施耐德电气“云能效”管理平台
     productNamelabel.font=[UIFont systemFontOfSize:22];
     productNamelabel.textColor=[REMColor colorByHexString:@"#2f2f2f"];
     [self.view addSubview:productNamelabel];
@@ -35,7 +35,7 @@
     versionLabel.font=[UIFont systemFontOfSize:14];
     versionLabel.textColor=[REMColor colorByHexString:@"#6e6e6e"];
     versionLabel.backgroundColor=[UIColor clearColor];
-    NSString *version=NSLocalizedString(@"Setting_AboutVersion", @"");//iPad版V%@
+    NSString *version=REMIPadLocalizedString(@"Setting_AboutVersion");//iPad版V%@
     NSString *versionNumber=[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     versionLabel.text=[NSString stringWithFormat:version,versionNumber];
     [self.view addSubview:versionLabel];
@@ -44,7 +44,7 @@
     copyrightChineseLabel.textColor=[REMColor colorByHexString:@"#959595"];
     copyrightChineseLabel.font=[UIFont systemFontOfSize:12];
     copyrightChineseLabel.backgroundColor=[UIColor clearColor];
-    copyrightChineseLabel.text=NSLocalizedString(@"Setting_AboutCopyrightChinese", @"");//施耐德电气 版权所有
+    copyrightChineseLabel.text=REMIPadLocalizedString(@"Setting_AboutCopyrightChinese");//施耐德电气 版权所有
     [self.view addSubview:copyrightChineseLabel];
     
     
@@ -55,7 +55,7 @@
     copyrightEnglishLabel.font=[UIFont systemFontOfSize:12];
     NSUInteger year = [REMTimeHelper getYear:[NSDate date] withCalendar:[NSCalendar currentCalendar]];
     
-    copyrightEnglishLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Setting_AboutCopyrightEnglish", @""),@(year)];//Copyright@%@ Schneider Electric All Right Reserved
+    copyrightEnglishLabel.text = [NSString stringWithFormat:REMIPadLocalizedString(@"Setting_AboutCopyrightEnglish"),@(year)];//Copyright@%@ Schneider Electric All Right Reserved
     [self.view addSubview:copyrightEnglishLabel];
     
     for (UIView *view in self.view.subviews) {

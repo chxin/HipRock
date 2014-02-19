@@ -9,6 +9,7 @@
 #import "REMBuildingChartBaseViewController.h"
 #import "REMBuildingChartSeriesIndicator.h"
 #import "DCDataPoint.h"
+#import "REMCommonHeaders.h"
 
 
 @interface REMBuildingChartBaseViewController ()
@@ -87,10 +88,10 @@
 - (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error withStatus:(REMDataAccessErrorStatus)status{
     NSString *serverError = nil;
     if (status == REMDataAccessFailed) {
-        serverError =NSLocalizedString(@"Common_ServerTimeout", @"");
+        serverError =REMIPadLocalizedString(@"Common_ServerTimeout");
     }
     else if (status == REMDataAccessErrorMessage && [error.code isEqualToString:@"1"]==YES){
-        serverError =NSLocalizedString(@"Common_ServerError", @"");
+        serverError =REMIPadLocalizedString(@"Common_ServerError");
     }
     if (serverError != nil) {
         [self drawLabelWithText:serverError];
@@ -181,7 +182,7 @@
             [self drawLabelWithText:self.errorText];
         }
         else{
-            [self drawLabelWithText:NSLocalizedString(@"BuildingChart_NoData", @"")];
+            [self drawLabelWithText:REMIPadLocalizedString(@"BuildingChart_NoData")];
         }
         self.chartWrapper.view.hidden = YES;
         self.legendContainer.hidden = YES;

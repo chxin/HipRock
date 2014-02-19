@@ -64,7 +64,7 @@
     emptyLabel.font=[UIFont fontWithName:self.emptyTextFont size:fs];
     emptyLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.5];
     if(self.emptyText ==nil){
-        self.emptyText=NSLocalizedString(@"Building_LabelNoData", @"");
+        self.emptyText=REMIPadLocalizedString(@"Building_LabelNoData");
     }
     emptyLabel.text=self.emptyText;
     emptyLabel.backgroundColor=[UIColor clearColor];

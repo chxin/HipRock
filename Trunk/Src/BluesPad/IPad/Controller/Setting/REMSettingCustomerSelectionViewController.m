@@ -43,7 +43,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.currentRow= NSNotFound;
-    NSString *cancel=NSLocalizedString(@"Common_Cancel", @"");
+    NSString *cancel=REMIPadLocalizedString(@"Common_Cancel");
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:cancel style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationController.navigationBar.topItem.backBarButtonItem = backButton;
 }
@@ -81,8 +81,8 @@
                 }
             }];
         }
-//        NSString *str=NSLocalizedString(@"Setting_LoadingData", @""); //"正在获取新客户的能源信息,请稍候...";
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:str delegate:self cancelButtonTitle:NSLocalizedString(@"Common_Giveup", @"") otherButtonTitles:nil, nil];
+//        NSString *str=REMIPadLocalizedString(@"Setting_LoadingData", @""); //"正在获取新客户的能源信息,请稍候...";
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:str delegate:self cancelButtonTitle:REMIPadLocalizedString(@"Common_Giveup", @"") otherButtonTitles:nil, nil];
 //        alert.tag=1;
 //        [alert show];
 //        self.currentAlert=alert;
@@ -98,8 +98,8 @@
 //        [REMCustomerSwitchHelper cancelSwitch];
 //    }
 //    else if(alertView.tag==3){
-//        NSString *str=NSLocalizedString(@"Setting_CurrentCustomerDeleted", @"");//当前客户已被解除关联,请退出系统后重新登录。
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:str delegate:self cancelButtonTitle:NSLocalizedString(@"Common_OK",@"") otherButtonTitles:nil, nil];
+//        NSString *str=REMIPadLocalizedString(@"Setting_CurrentCustomerDeleted", @"");//当前客户已被解除关联,请退出系统后重新登录。
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:str delegate:self cancelButtonTitle:REMIPadLocalizedString(@"Common_OK",@"") otherButtonTitles:nil, nil];
 //        alert.tag=4;
 //        [alert show];
 //    }
@@ -113,8 +113,8 @@
 
 //- (void)realSwitchCustomer:(NSNumber *)customerId{
 //    [REMCustomerSwitchHelper switchCustomerById:customerId masker:nil action:^(REMCustomerSwitchStatus status,NSArray *customerArray){
-//        NSString *str=NSLocalizedString(@"Setting_CustomerDeleted", @"");//该客户已被解除关联,请重新选择客户。
-//        NSString *ok=NSLocalizedString(@"Common_OK",@"");
+//        NSString *str=REMIPadLocalizedString(@"Setting_CustomerDeleted", @"");//该客户已被解除关联,请重新选择客户。
+//        NSString *ok=REMIPadLocalizedString(@"Common_OK",@"");
 //        
 //        if (status == REMCustomerSwitchStatusSelectedCustomerDeleted) {
 //            [self.currentAlert dismissWithClickedButtonIndex:-1 animated:YES];

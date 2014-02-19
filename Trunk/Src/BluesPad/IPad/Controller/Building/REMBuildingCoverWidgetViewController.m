@@ -96,10 +96,10 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        return NSLocalizedString(@"Building_WidgetRelationTitle", @"");
+        return REMIPadLocalizedString(@"Building_WidgetRelationTitle");
     }
     else if(section == 1){
-        return [NSString stringWithFormat:NSLocalizedString(@"Building_WidgetRelationCommodityTitle", @""),self.commodityInfo.comment];
+        return [NSString stringWithFormat:REMIPadLocalizedString(@"Building_WidgetRelationCommodityTitle"),self.commodityInfo.comment];
     }
     else{
         REMDashboardObj *dashboard= self.dashboardArray[section-2];
@@ -149,7 +149,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
     if (section == self.dashboardArray.count+1) {
-        return NSLocalizedString(@"Building_WidgetRelationInfo", @"");
+        return REMIPadLocalizedString(@"Building_WidgetRelationInfo");
     }
     return @"";
 }
@@ -171,10 +171,10 @@
     }
     if (indexPath.section==1) {
         if (indexPath.row==0) {
-            cell.textLabel.text=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @""),self.commodityInfo.comment];
+            cell.textLabel.text=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth"),self.commodityInfo.comment];
         }
         else{
-            cell.textLabel.text=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByCommodity", @""),self.commodityInfo.comment];
+            cell.textLabel.text=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByCommodity"),self.commodityInfo.comment];
         }
     }
     else{

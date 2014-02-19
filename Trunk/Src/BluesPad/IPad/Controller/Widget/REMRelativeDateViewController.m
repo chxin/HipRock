@@ -79,39 +79,39 @@
     }
     cell.tag=indexPath.row+1;
     if(indexPath.row == 0){
-        name=NSLocalizedString(@"Common_Last7Day", @""); //@"之前七天";
+        name=REMIPadLocalizedString(@"Common_Last7Day"); //@"之前七天";
     }
     else if (indexPath.row ==1)
     {
-        name=NSLocalizedString(@"Common_Today", @""); //@"今天";
+        name=REMIPadLocalizedString(@"Common_Today"); //@"今天";
     }
     else if (indexPath.row ==2)
     {
-        name=NSLocalizedString(@"Common_Yesterday", @""); //@"昨天";
+        name=REMIPadLocalizedString(@"Common_Yesterday"); //@"昨天";
     }
     else if (indexPath.row ==3)
     {
-        name=NSLocalizedString(@"Common_ThisWeek", @""); //@"本周";
+        name=REMIPadLocalizedString(@"Common_ThisWeek"); //@"本周";
     }
     else if (indexPath.row ==4)
     {
-        name=NSLocalizedString(@"Common_LastWeek", @""); //@"上周";
+        name=REMIPadLocalizedString(@"Common_LastWeek"); //@"上周";
     }
     else if (indexPath.row ==5)
     {
-        name=NSLocalizedString(@"Common_ThisMonth", @""); //@"本月";
+        name=REMIPadLocalizedString(@"Common_ThisMonth"); //@"本月";
     }
     else if (indexPath.row ==6)
     {
-        name=NSLocalizedString(@"Common_LastMonth", @""); //@"上月";
+        name=REMIPadLocalizedString(@"Common_LastMonth"); //@"上月";
     }
     else if (indexPath.row ==7)
     {
-        name=NSLocalizedString(@"Common_ThisYear", @""); //@"今年";
+        name=REMIPadLocalizedString(@"Common_ThisYear"); //@"今年";
     }
     else if (indexPath.row ==8)
     {
-        name=NSLocalizedString(@"Common_LastYear", @""); //@"去年";
+        name=REMIPadLocalizedString(@"Common_LastYear"); //@"去年";
     }
     
     

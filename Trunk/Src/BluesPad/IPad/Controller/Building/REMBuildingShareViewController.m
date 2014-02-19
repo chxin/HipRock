@@ -37,7 +37,7 @@
     UIButton *weiboButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [weiboButton setBackgroundImage:REMIMG_share_weibo forState:UIControlStateNormal];
     weiboButton.adjustsImageWhenHighlighted=YES;
-    [weiboButton setTitle:NSLocalizedString(@"Building_ShareWeibo", @"") forState:UIControlStateNormal];
+    [weiboButton setTitle:REMIPadLocalizedString(@"Building_ShareWeibo") forState:UIControlStateNormal];
     weiboButton.titleLabel.font=[UIFont systemFontOfSize:12];
     [weiboButton setTitleEdgeInsets:UIEdgeInsetsMake(48+30, 0, 0, 0)];
     [weiboButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -51,7 +51,7 @@
     [mailButton setImageEdgeInsets:weiboButton.imageEdgeInsets];
     mailButton.titleLabel.font=weiboButton.titleLabel.font;
     [mailButton setTitleEdgeInsets:weiboButton.titleEdgeInsets];
-    [mailButton setTitle:NSLocalizedString(@"Building_ShareEmail", @"") forState:UIControlStateNormal];
+    [mailButton setTitle:REMIPadLocalizedString(@"Building_ShareEmail") forState:UIControlStateNormal];
     [mailButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     mailButton.adjustsImageWhenHighlighted=YES;
     

@@ -19,7 +19,7 @@
         REMTimeRange *range = self.searchModel.timeRangeArray[0];
         NSString *start= [REMTimeHelper formatTimeFullDay:range.startTime isChangeTo24Hour:NO];
         NSString *end= [REMTimeHelper formatTimeFullDay:range.endTime isChangeTo24Hour:YES];
-        return [NSString stringWithFormat:NSLocalizedString(@"Dashboard_TimeRange", @""),start,end];//%@ 到 %@
+        return [NSString stringWithFormat:REMIPadLocalizedString(@"Dashboard_TimeRange"),start,end];//%@ 到 %@
     }
 }
 
