@@ -17,6 +17,7 @@
 #import "REMApplicationContext.h"
 #import "REMBusinessErrorInfo.h"
 
+@class REMDataPersistenceProcessor;
 
 @interface REMCacheStoreHolder : NSObject
 @property (atomic) BOOL gotoHolder;
@@ -173,8 +174,12 @@ static REMCacheStoreHolder *cacheStoreHolder;
         if([REMApplicationContext instance].cacheMode == YES){
             [[REMApplicationContext instance] setCacheMode:NO];
         }
+        id newData = data;
+        if (self.persistenceProcessor!=nil) {
+            newData = [self.persistenceProcessor persistData:data];
+        }
         
-        success(data);
+        success(newData);
     } error:^(NSError *errorInfo, REMDataAccessErrorStatus status, id response) {
         if(self.disableAlert == NO && (status == REMDataAccessNoConnection || status == REMDataAccessFailed || (status == REMDataAccessErrorMessage && [response isKindOfClass:[REMBusinessErrorInfo class]] && [((REMBusinessErrorInfo *)response).code isEqualToString:@"1"]))){
             NSString *message = self.messageMap[@(status)];
@@ -198,6 +203,63 @@ static REMCacheStoreHolder *cacheStoreHolder;
     [cacheStoreHolder.holder removeAllObjects];
     cacheStoreHolder = nil;
 }
+
+#pragma mark - coredata
+
+- (void)setPersistenceProcessor:(REMDataPersistenceProcessor *)persistenceProcessor
+{
+    _persistenceProcessor = persistenceProcessor;
+    _persistenceProcessor.dataStore = self;
+}
+
+-(NSManagedObjectModel *)managedObjectModel
+{
+    if (_managedObjectModel != nil) {
+        return _managedObjectModel;
+    }
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"BluesPad" ofType:@"momd"];
+    NSURL *momURL = [NSURL fileURLWithPath:path];
+    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
+    
+    return _managedObjectModel;
+}
+
+-(NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+    if (_persistentStoreCoordinator != nil) {
+        return _persistentStoreCoordinator;
+    }
+    
+    //得到数据库的路径
+    NSString *docs = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    //CoreData是建立在SQLite之上的，数据库名称需与Xcdatamodel文件同名
+    NSURL *storeUrl = [NSURL fileURLWithPath:[docs stringByAppendingPathComponent:@"BluesPad.sqlite"]];
+    NSError *error = nil;
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:[self managedObjectModel]];
+    
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error]) {
+        NSLog(@"Error: %@,%@",error,[error userInfo]);
+    }
+    
+    return _persistentStoreCoordinator;
+}
+
+-(NSManagedObjectContext *)managedObjectContext
+{
+    if (_managedObjectContext != nil) {
+        return _managedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator =[self persistentStoreCoordinator];
+    
+    if (coordinator != nil) {
+        _managedObjectContext = [[NSManagedObjectContext alloc]init];
+        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    }
+    
+    return _managedObjectContext;
+}
+
 
 
 @end

@@ -2,7 +2,7 @@
 //  REMManagedModel.m
 //  Blues
 //
-//  Created by tantan on 2/18/14.
+//  Created by tantan on 2/19/14.
 //
 //
 
@@ -12,8 +12,8 @@
 @implementation REMManagedModel
 
 @dynamic code;
+@dynamic comment;
 @dynamic id;
 @dynamic name;
-@dynamic comment;
 
 @end
