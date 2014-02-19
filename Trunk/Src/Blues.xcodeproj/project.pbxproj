@@ -447,6 +447,15 @@
 		7A63E2A718B45DB300A13464 /* EMOP_App_Phone_6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E2A418B45DB300A13464 /* EMOP_App_Phone_6@2x.png */; };
 		7A63E2A818B45DB300A13464 /* EMOP_App_Phone_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E2A518B45DB300A13464 /* EMOP_App_Phone_7.png */; };
 		7A63E2AB18B477E100A13464 /* BluesPad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E2A918B477E100A13464 /* BluesPad.xcdatamodeld */; };
+		7A63E2B118B4788D00A13464 /* Default-Landscape-IOS7.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E2AD18B4788D00A13464 /* Default-Landscape-IOS7.png */; };
+		7A63E2B218B4788D00A13464 /* Default-Landscape-IOS7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E2AE18B4788D00A13464 /* Default-Landscape-IOS7@2x.png */; };
+		7A63E2B318B4788D00A13464 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E2AF18B4788D00A13464 /* Default-Landscape.png */; };
+		7A63E2B418B4788D00A13464 /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E2B018B4788D00A13464 /* Default-Landscape@2x.png */; };
+		7A63E2BA18B47ABD00A13464 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E2B518B47ABD00A13464 /* Default.png */; };
+		7A63E2BB18B47ABD00A13464 /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E2B618B47ABD00A13464 /* Default~iphone.png */; };
+		7A63E2BC18B47ABD00A13464 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E2B718B47ABD00A13464 /* Default-568h@2x.png */; };
+		7A63E2BD18B47ABD00A13464 /* IPhone_OS7_3.5.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E2B818B47ABD00A13464 /* IPhone_OS7_3.5.png */; };
+		7A63E2BE18B47ABD00A13464 /* IPhone_OS7_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E2B918B47ABD00A13464 /* IPhone_OS7_4.png */; };
 		7A664FD8183B3369004B9FF3 /* MapPopover_Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD4183B3369004B9FF3 /* MapPopover_Arrow.png */; };
 		7A664FD9183B3369004B9FF3 /* MapPopover_Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD5183B3369004B9FF3 /* MapPopover_Arrow@2x.png */; };
 		7A664FDA183B3369004B9FF3 /* MapPopover_Rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD6183B3369004B9FF3 /* MapPopover_Rectangle.png */; };
@@ -1183,6 +1192,15 @@
 		7A63E2A418B45DB300A13464 /* EMOP_App_Phone_6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EMOP_App_Phone_6@2x.png"; sourceTree = "<group>"; };
 		7A63E2A518B45DB300A13464 /* EMOP_App_Phone_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMOP_App_Phone_7.png; sourceTree = "<group>"; };
 		7A63E2AA18B477E100A13464 /* BluesPad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BluesPad.xcdatamodel; sourceTree = "<group>"; };
+		7A63E2AD18B4788D00A13464 /* Default-Landscape-IOS7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-IOS7.png"; sourceTree = "<group>"; };
+		7A63E2AE18B4788D00A13464 /* Default-Landscape-IOS7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-IOS7@2x.png"; sourceTree = "<group>"; };
+		7A63E2AF18B4788D00A13464 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
+		7A63E2B018B4788D00A13464 /* Default-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x.png"; sourceTree = "<group>"; };
+		7A63E2B518B47ABD00A13464 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		7A63E2B618B47ABD00A13464 /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
+		7A63E2B718B47ABD00A13464 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		7A63E2B818B47ABD00A13464 /* IPhone_OS7_3.5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IPhone_OS7_3.5.png; sourceTree = "<group>"; };
+		7A63E2B918B47ABD00A13464 /* IPhone_OS7_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IPhone_OS7_4.png; sourceTree = "<group>"; };
 		7A664FD4183B3369004B9FF3 /* MapPopover_Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapPopover_Arrow.png; sourceTree = "<group>"; };
 		7A664FD5183B3369004B9FF3 /* MapPopover_Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MapPopover_Arrow@2x.png"; sourceTree = "<group>"; };
 		7A664FD6183B3369004B9FF3 /* MapPopover_Rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapPopover_Rectangle.png; sourceTree = "<group>"; };
@@ -1214,9 +1232,6 @@
 		7A9B1E6B177B3AF200C282A8 /* BluesPadTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "BluesPadTests-Info.plist"; path = "../test/BluesPadTests/BluesPadTests-Info.plist"; sourceTree = "<group>"; };
 		7A9B1E70177B3B0300C282A8 /* BluesPadTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BluesPadTests.h; path = ../test/BluesPadTests/BluesPadTests.h; sourceTree = "<group>"; };
 		7A9B1E71177B3B0300C282A8 /* BluesPadTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BluesPadTests.m; path = ../test/BluesPadTests/BluesPadTests.m; sourceTree = "<group>"; };
-		7A9B1EB1177B3B7E00C282A8 /* BluesPhoneTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "BluesPhoneTests-Info.plist"; path = "../test/BluesPhoneTests/BluesPhoneTests-Info.plist"; sourceTree = "<group>"; };
-		7A9B1EB6177B3B9300C282A8 /* BluesPhoneTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BluesPhoneTests.h; path = ../test/BluesPhoneTests/BluesPhoneTests.h; sourceTree = "<group>"; };
-		7A9B1EB7177B3B9300C282A8 /* BluesPhoneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BluesPhoneTests.m; path = ../test/BluesPhoneTests/BluesPhoneTests.m; sourceTree = "<group>"; };
 		7AB34E46177D2828003E235E /* CommonTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CommonTests-Prefix.pch"; path = "../test/CommonTests/CommonTests-Prefix.pch"; sourceTree = "<group>"; };
 		7AB34E4A177D2975003E235E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		7AB34E4B177D2975003E235E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
@@ -1537,6 +1552,7 @@
 		6A61A65D1839B81F00C6A228 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7A63E2AC18B4788D00A13464 /* LaunchImage */,
 				7A63E28E18B45B1100A13464 /* AppIcon */,
 				B485EFE2187BA17900D16583 /* Setting */,
 				6A61A6691839B81F00C6A228 /* Building */,
@@ -2698,6 +2714,22 @@
 			path = AppIcon;
 			sourceTree = "<group>";
 		};
+		7A63E2AC18B4788D00A13464 /* LaunchImage */ = {
+			isa = PBXGroup;
+			children = (
+				7A63E2B518B47ABD00A13464 /* Default.png */,
+				7A63E2B618B47ABD00A13464 /* Default~iphone.png */,
+				7A63E2B718B47ABD00A13464 /* Default-568h@2x.png */,
+				7A63E2B818B47ABD00A13464 /* IPhone_OS7_3.5.png */,
+				7A63E2B918B47ABD00A13464 /* IPhone_OS7_4.png */,
+				7A63E2AD18B4788D00A13464 /* Default-Landscape-IOS7.png */,
+				7A63E2AE18B4788D00A13464 /* Default-Landscape-IOS7@2x.png */,
+				7A63E2AF18B4788D00A13464 /* Default-Landscape.png */,
+				7A63E2B018B4788D00A13464 /* Default-Landscape@2x.png */,
+			);
+			path = LaunchImage;
+			sourceTree = "<group>";
+		};
 		7A6E6D0A17A65CE500FBB264 /* GMT */ = {
 			isa = PBXGroup;
 			children = (
@@ -2801,7 +2833,6 @@
 			isa = PBXGroup;
 			children = (
 				B445AECB177BFE77002D2A59 /* CommonTest */,
-				7A9B1EAF177B3B6000C282A8 /* BluesPhoneTests */,
 				7A9B1E73177B3B1B00C282A8 /* BluesPadTests */,
 			);
 			name = Tests;
@@ -2823,24 +2854,6 @@
 				7A9B1E59177B3AB500C282A8 /* Supporting Files */,
 			);
 			name = BluesPadTests;
-			sourceTree = "<group>";
-		};
-		7A9B1EAF177B3B6000C282A8 /* BluesPhoneTests */ = {
-			isa = PBXGroup;
-			children = (
-				7A9B1EB6177B3B9300C282A8 /* BluesPhoneTests.h */,
-				7A9B1EB7177B3B9300C282A8 /* BluesPhoneTests.m */,
-				7A9B1EB0177B3B6B00C282A8 /* Supporting Files */,
-			);
-			name = BluesPhoneTests;
-			sourceTree = "<group>";
-		};
-		7A9B1EB0177B3B6B00C282A8 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7A9B1EB1177B3B7E00C282A8 /* BluesPhoneTests-Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		7ABD828B185AD71B00A2AC06 /* Configuration */ = {
@@ -3436,9 +3449,11 @@
 				7A58F24C1839A5650071DE7A /* Propaganda_1@2x.jpg in Resources */,
 				6A61A7101839B82000C6A228 /* NaturalGas_normal@2x.png in Resources */,
 				6A61A71B1839B82000C6A228 /* Water_normal.png in Resources */,
+				7A63E2BC18B47ABD00A13464 /* Default-568h@2x.png in Resources */,
 				B4707D8818697B1C00FBA393 /* Heating_normal.png in Resources */,
 				6A61A7921839B82000C6A228 /* SplashScreenLogo-Flash@2x.png in Resources */,
 				B485EFE6187BA1A800D16583 /* Logo_About@2x.png in Resources */,
+				7A63E2BD18B47ABD00A13464 /* IPhone_OS7_3.5.png in Resources */,
 				7A47F3A018482C1B007EE37B /* JumpLogin.png in Resources */,
 				B44D269718A9E94C00D7C06D /* PopNote.png in Resources */,
 				B4707D8918697B1C00FBA393 /* Heating_pressed.png in Resources */,
@@ -3473,6 +3488,7 @@
 				6A61A71A1839B82000C6A228 /* PM2.5_pressed@2x.png in Resources */,
 				6A61A7791839B82000C6A228 /* SlidePageBackground.png in Resources */,
 				B417510D188CC8220020AE8E /* Back.png in Resources */,
+				7A63E2B218B4788D00A13464 /* Default-Landscape-IOS7@2x.png in Resources */,
 				7A63E29D18B45B1100A13464 /* EMOP_Setting.png in Resources */,
 				7A58F24F1839A5650071DE7A /* Propaganda_3.jpg in Resources */,
 				B4656BFE187D47E6008EAEA8 /* ChartCustomization_Widget@2x.png in Resources */,
@@ -3483,8 +3499,10 @@
 				7ABFDDF418483119004DD4E7 /* JumpLogin-Pressed@2x.png in Resources */,
 				6A61A7731839B82000C6A228 /* Login-Pressed.png in Resources */,
 				6A61A7871839B82000C6A228 /* QualifiedPin_Focus.png in Resources */,
+				7A63E2B418B4788D00A13464 /* Default-Landscape@2x.png in Resources */,
 				B4175116188CC83E0020AE8E /* Map@2x.png in Resources */,
 				7A7B29951888C8DF00E74D3D /* SplashScreenBackgroud@2x.png in Resources */,
+				7A63E2BE18B47ABD00A13464 /* IPhone_OS7_4.png in Resources */,
 				B4707D9D18697B2900FBA393 /* Temperature_pressed@2x.png in Resources */,
 				6A61A78C1839B82000C6A228 /* UnqualifiedPin_Focus@2x.png in Resources */,
 				B4707D9B18697B2900FBA393 /* Humidity_pressed@2x.png in Resources */,
@@ -3496,6 +3514,7 @@
 				B417510A188CC80F0020AE8E /* Up@2x.png in Resources */,
 				7A58F2501839A5650071DE7A /* Propaganda_3@2x.jpg in Resources */,
 				6A61A7911839B82000C6A228 /* SplashScreenLogo-Flash.png in Resources */,
+				7A63E2BB18B47ABD00A13464 /* Default~iphone.png in Resources */,
 				6A61A7901839B82000C6A228 /* SplashScreenLogo-Common@2x.png in Resources */,
 				7A63E29A18B45B1100A13464 /* EMOP_App_6@2x.png in Resources */,
 				7A58F24A1839A5650071DE7A /* mail.jpg in Resources */,
@@ -3520,6 +3539,7 @@
 				6A61A7181839B82000C6A228 /* PM2.5_normal@2x.png in Resources */,
 				B4707D8A18697B1C00FBA393 /* Humidity_normal.png in Resources */,
 				B445AEAE177BEEB8002D2A59 /* README.txt in Resources */,
+				7A63E2B318B4788D00A13464 /* Default-Landscape.png in Resources */,
 				B44D26A718A9E94C00D7C06D /* Descend.png in Resources */,
 				7A63E2A218B45B1100A13464 /* EMOP_Spotlight_7@2x.png in Resources */,
 				7A13C19B17F40D31007E6AA9 /* GoogleMaps.bundle in Resources */,
@@ -3539,8 +3559,10 @@
 				7A63E28B18B454BA00A13464 /* Localizable_Common.strings in Resources */,
 				6A61A70A1839B82000C6A228 /* Coal_pressed@2x.png in Resources */,
 				B44D26A818A9E94C00D7C06D /* Descend@2x.png in Resources */,
+				7A63E2BA18B47ABD00A13464 /* Default.png in Resources */,
 				7A5A97371856D54E0084E228 /* share-email@2x.png in Resources */,
 				6A61A7171839B82000C6A228 /* PM2.5_normal.png in Resources */,
+				7A63E2B118B4788D00A13464 /* Default-Landscape-IOS7.png in Resources */,
 				7A63E29F18B45B1100A13464 /* EMOP_Spotlight_6.png in Resources */,
 				6A61A7161839B82000C6A228 /* Oil_pressed@2x.png in Resources */,
 				6A61A7071839B82000C6A228 /* Coal_normal.png in Resources */,
@@ -4149,6 +4171,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -4203,6 +4227,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -4345,6 +4371,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
