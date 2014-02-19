@@ -26,15 +26,18 @@
 }
 
 - (id)fetchData{
-//    self.dataStore.d
+    
+
 }
 
 - (id)persistUserModel:(NSDictionary *)user{
     
+    REMManagedUserModel *oldUser = [self fetchData];
     
     
     
-    REMManagedUserModel *userObject= [self newObject:@"REMManagedUserModel"];
+    
+    REMManagedUserModel *userObject= [self.dataStore newManagedObject:@"REMManagedUserModel"];
     
     userObject.id=user[@"Id"];
     userObject.name=user[@"Name"];

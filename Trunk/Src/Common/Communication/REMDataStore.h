@@ -31,7 +31,9 @@
 //持久性存储区
 @property(nonatomic,strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-
+- (id)newManagedObject:(NSString *)objectType;
+- (id)fetchMangedObject:(NSString *)objectType;
+- (void)deleteManageObject:(NSManagedObject *)object;
 
 - (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter accessCache:(BOOL)accessCache andMessageMap:(NSDictionary *)messageMap;
 

@@ -206,6 +206,38 @@ static REMCacheStoreHolder *cacheStoreHolder;
 
 #pragma mark - coredata
 
+- (id)newManagedObject:(NSString *)objectType{
+    return [NSEntityDescription insertNewObjectForEntityForName:objectType inManagedObjectContext:self.managedObjectContext];
+}
+
+- (void)deleteManageObject:(NSManagedObject *)object
+{
+    [self.managedObjectContext deleteObject:object];
+}
+
+-(id)fetchMangedObject:(NSString *)objectType{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    //设置要检索哪种类型的实体对象
+    NSEntityDescription *entity = [NSEntityDescription entityForName:objectType inManagedObjectContext:self.managedObjectContext];
+    //设置请求实体
+    [request setEntity:entity];
+    //    //指定对结果的排序方式
+    //    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate"ascending:NO];
+    //    NSArray *sortDescriptions = [[NSArray alloc]initWithObjects:sortDescriptor, nil];
+    //    [request setSortDescriptors:sortDescriptions];
+    //    [sortDescriptions release];
+    //    [sortDescriptor release];
+    
+    NSError *error = nil;
+    //执行获取数据请求，返回数组
+    NSMutableArray *mutableFetchResult = [[self.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    if (mutableFetchResult == nil) {
+        NSLog(@"Error: %@,%@",error,[error userInfo]);
+    }
+    
+    return mutableFetchResult;
+}
+
 - (void)setPersistenceProcessor:(REMDataPersistenceProcessor *)persistenceProcessor
 {
     _persistenceProcessor = persistenceProcessor;

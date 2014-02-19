@@ -83,7 +83,7 @@
         <attribute name="realname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="spId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="telephone" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="userTypeName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="version" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="customers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="REMManagedCustomerModel" inverseName="user" inverseEntity="REMManagedCustomerModel" syncable="YES"/>
