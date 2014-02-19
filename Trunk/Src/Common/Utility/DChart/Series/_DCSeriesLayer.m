@@ -11,7 +11,7 @@
 
 @implementation _DCSeriesLayer
 -(id)initWithCoordinateSystem:(_DCCoordinateSystem*)coordinateSystem {
-    self = [self init];
+    self = [super initWithContext:coordinateSystem.graphContext view:(DCXYChartView*)coordinateSystem.chartView];
     if (self) {
         self.contentsScale = [UIScreen mainScreen].scale;
         _enableGrowAnimation = YES;
@@ -22,7 +22,6 @@
                 se.layer = self;
             }
         }
-        self.graphContext = coordinateSystem.graphContext;
         _series = s;
         self.masksToBounds = YES;
         _coordinateSystem = coordinateSystem;

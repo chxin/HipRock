@@ -21,8 +21,8 @@
 
 @implementation _DCXAxisLabelLayer
 
--(id)initWithContext:(DCContext *)context {
-    self = [super initWithContext:context];
+-(id)initWithContext:(DCContext*)context view:(DCXYChartView*)view {
+    self = [super initWithContext:context view:view];
     if (self) {
         self.backgroundColor = [UIColor clearColor].CGColor;
         self.visableLabelLayers = [[NSMutableDictionary alloc]init];

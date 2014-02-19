@@ -13,8 +13,8 @@
 #import "REMColor.h"
 
 @implementation _DCLineSymbolsLayer
--(id)initWithContext:(DCContext*)context series:(NSArray*)series {
-    self = [super initWithContext:context];
+-(id)initWithContext:(DCContext*)context view:(DCXYChartView*)view series:(NSArray*)series {
+    self = [super initWithContext:context view:view];
     if (self) {
         _series = series;
         for (DCXYSeries* s in series) {

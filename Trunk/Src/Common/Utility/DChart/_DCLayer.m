@@ -11,10 +11,11 @@
 const BOOL kDCDefaultSuspendRedraw = NO;
 
 @implementation _DCLayer
--(id)initWithContext:(DCContext*)context {
+-(id)initWithContext:(DCContext*)context view:(DCXYChartView*)view {
     self = [self init];
     if (self) {
-        self.graphContext = context;
+        _graphContext = context;
+        _view = view;
         self.contentsScale = [[UIScreen mainScreen] scale];
         self.backgroundColor = [UIColor clearColor].CGColor;
     }

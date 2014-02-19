@@ -7,7 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "DCContext.h"
+#import "DCXYChartView.h"
 
 @protocol DCLabelLayerProtocal <NSObject>
 
@@ -24,8 +24,9 @@
 
 @interface _DCLayer : CALayer
 
-@property (nonatomic, weak) DCContext* graphContext;
+@property (nonatomic, weak, readonly) DCContext* graphContext;
+@property (nonatomic, weak, readonly) DCXYChartView* view;
 
--(id)initWithContext:(DCContext*)context;
+-(id)initWithContext:(DCContext*)context view:(DCXYChartView*)view;
 
 @end
