@@ -4279,6 +4279,7 @@
 				7A02CE7218B486D9009D1CF1 /* DailyBuild */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		7A9B1E15177B3A6000C282A8 /* Build configuration list for PBXProject "Blues" */ = {
 			isa = XCConfigurationList;
