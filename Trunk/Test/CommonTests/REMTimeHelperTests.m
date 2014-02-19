@@ -7,6 +7,7 @@
 //
 
 #import "REMTimeHelperTests.h"
+#import "REMTimeHelper.h"
 
 @implementation REMTimeHelperTests
 
@@ -36,13 +37,13 @@
 
  - (void)test_relativedate
 {
-    REMTimeRange *range=    [REMTimeHelper relativeDateFromString:@"Today"];
-    
-    NSDateFormatter *f = [[NSDateFormatter alloc]init];
-    [f setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
-    NSLog(@"time:%@",[f stringFromDate:range.startTime]);
-    NSLog(@"time:%@",[f stringFromDate:range.endTime]);
+//    REMTimeRange *range=    [REMTimeHelper relativeDateFromString:@"Today"];
+//    
+//    NSDateFormatter *f = [[NSDateFormatter alloc]init];
+//    [f setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    
+//    NSLog(@"time:%@",[f stringFromDate:range.startTime]);
+//    NSLog(@"time:%@",[f stringFromDate:range.endTime]);
     
 }
 
