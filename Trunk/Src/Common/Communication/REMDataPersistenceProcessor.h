@@ -18,6 +18,7 @@
 
 - (id)newObject:(NSString *)objectType;
 
+
 - (void) processError:(NSError *)error withStatus:(REMDataAccessErrorStatus) status andResponse:(id) response;
 
 @property (nonatomic,weak) REMDataStore *dataStore;

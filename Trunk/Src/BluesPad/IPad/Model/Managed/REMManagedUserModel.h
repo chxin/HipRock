@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSString * realname;
 @property (nonatomic, retain) NSNumber * spId;
 @property (nonatomic, retain) NSString * telephone;
-@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSNumber * title;
 @property (nonatomic, retain) NSString * userTypeName;
 @property (nonatomic, retain) NSNumber * version;
 @property (nonatomic, retain) NSSet *customers;

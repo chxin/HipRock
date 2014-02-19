@@ -7,6 +7,9 @@
 --------------------------------------------------------------------------*/
 #import "REMLoginPersistenceProcessor.h"
 #import "REMUserValidationModel.h"
+#import "REMManagedUserModel.h"
+#import "REMManagedAdministratorModel.h"
+#import "REMManagedCustomerModel.h"
 @implementation REMLoginPersistenceProcessor
 
 - (id)persistData:(NSDictionary *)data
@@ -22,8 +25,38 @@
     }
 }
 
+- (id)fetchData{
+//    self.dataStore.d
+}
+
 - (id)persistUserModel:(NSDictionary *)user{
     
+    
+    
+    
+    REMManagedUserModel *userObject= [self newObject:@"REMManagedUserModel"];
+    
+    userObject.id=user[@"Id"];
+    userObject.name=user[@"Name"];
+    userObject.comment=user[@"Comment"];
+    userObject.email=user[@"Email"];
+    userObject.password=user[@"Password"];
+    userObject.realname=user[@"RealName"];
+    userObject.telephone=user[@"Telephone"];
+    userObject.title=user[@"Title"];
+    userObject.userTypeName=user[@"UserTypeName"];
+    userObject.version = user[@"Version"];
+    userObject.spId = user[@"SpId"];
+    userObject.isDemo = user[@"DemoStatus"];
+    
+    NSArray *array = (NSArray *)user[@"Customers"];
+    NSMutableArray *customers = [[NSMutableArray alloc] initWithCapacity:array.count];
+    for(NSDictionary *customerJson in array)
+    {
+        [customers addObject:[[REMCustomerModel alloc] initWithDictionary:customerJson]];
+    }
+
+
 }
 
 @end
