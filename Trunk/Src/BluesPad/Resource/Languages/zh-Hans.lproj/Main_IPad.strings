@@ -1,3 +1,96 @@
 
-/* Class = "IBUILabel"; text = "Label"; ObjectID = "VfQ-1z-FkC"; */
-"VfQ-1z-FkC.text" = "Label";
+/* Class = "IBUIViewController"; title = "Logo"; ObjectID = "0Gw-Oc-ndZ"; */
+"0Gw-Oc-ndZ.title" = "Logo";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "10j-MQ-AlI"; */
+"10j-MQ-AlI.text" = "Title";
+
+/* Class = "IBUIBarButtonItem"; title = "完成"; ObjectID = "2dd-Hn-SRO"; */
+"2dd-Hn-SRO.title" = "完成";
+
+/* Class = "IBUIBarButtonItem"; title = "完成"; ObjectID = "97H-FA-fBE"; */
+"97H-FA-fBE.title" = "完成";
+
+/* Class = "IBUINavigationItem"; title = "选择日期"; ObjectID = "EoP-UA-SR0"; */
+"EoP-UA-SR0.title" = "选择日期";
+
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "GRE-zs-Dlw"; */
+"GRE-zs-Dlw.text" = "Detail";
+
+/* Class = "IBUINavigationItem"; title = "客户管理员"; ObjectID = "Gvo-eK-rFC"; */
+"Gvo-eK-rFC.title" = "客户管理员";
+
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "JLm-co-RMx"; */
+"JLm-co-RMx.text" = "Detail";
+
+/* Class = "IBUINavigationItem"; title = "定制图表"; ObjectID = "JU9-UC-XNc"; */
+"JU9-UC-XNc.title" = "定制图表";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "LNQ-jY-vEf"; */
+"LNQ-jY-vEf.text" = "Title";
+
+/* Class = "IBUIButton"; normalTitle = "注销"; ObjectID = "MXU-iT-0KB"; */
+"MXU-iT-0KB.normalTitle" = "注销";
+
+/* Class = "IBUINavigationItem"; title = "默认日期"; ObjectID = "Ra1-tx-INm"; */
+"Ra1-tx-INm.title" = "默认日期";
+
+/* Class = "IBUINavigationItem"; title = "选择日期"; ObjectID = "RcD-Lh-2d6"; */
+"RcD-Lh-2d6.title" = "选择日期";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "RuQ-yg-1l9"; */
+"RuQ-yg-1l9.text" = "Title";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "Shb-bR-9P1"; */
+"Shb-bR-9P1.text" = "Title";
+
+/* Class = "IBUIBarButtonItem"; title = "取消"; ObjectID = "Vgg-GN-dhw"; */
+"Vgg-GN-dhw.title" = "取消";
+
+/* Class = "IBUINavigationItem"; title = "当前客户"; ObjectID = "WYF-lo-uez"; */
+"WYF-lo-uez.title" = "当前客户";
+
+/* Class = "IBUIBarButtonItem"; title = "取消"; ObjectID = "YAj-gE-G13"; */
+"YAj-gE-G13.title" = "取消";
+
+/* Class = "IBUIBarButtonItem"; title = "完成"; ObjectID = "con-6d-emQ"; */
+"con-6d-emQ.title" = "完成";
+
+/* Class = "IBUINavigationItem"; title = "关于云能效"; ObjectID = "d7R-kF-iPQ"; */
+"d7R-kF-iPQ.title" = "关于云能效";
+
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "ep5-Dh-FW5"; */
+"ep5-Dh-FW5.text" = "Detail";
+
+/* Class = "IBUIBarButtonItem"; title = "完成"; ObjectID = "heT-ct-T8g"; */
+"heT-ct-T8g.title" = "完成";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "j9E-lR-AW1"; */
+"j9E-lR-AW1.text" = "Title";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "kXD-u2-6B6"; */
+"kXD-u2-6B6.text" = "Title";
+
+/* Class = "IBUINavigationItem"; title = "客户信息"; ObjectID = "lT4-Vf-6Yb"; */
+"lT4-Vf-6Yb.title" = "客户信息";
+
+/* Class = "IBUINavigationItem"; title = "添加至建筑封面"; ObjectID = "lbO-Sc-6OJ"; */
+"lbO-Sc-6OJ.title" = "添加至建筑封面";
+
+/* Class = "IBUIBarButtonItem"; title = "完成"; ObjectID = "ler-yj-cX1"; */
+"ler-yj-cX1.title" = "完成";
+
+/* Class = "IBUINavigationItem"; title = "设置"; ObjectID = "mnH-gw-Zz4"; */
+"mnH-gw-Zz4.title" = "设置";
+
+/* Class = "IBUIBarButtonItem"; title = "取消"; ObjectID = "uMy-xj-SYI"; */
+"uMy-xj-SYI.title" = "取消";
+
+/* Class = "IBUIBarButtonItem"; title = "完成"; ObjectID = "wTV-vd-idZ"; */
+"wTV-vd-idZ.title" = "完成";
+
+/* Class = "IBUIBarButtonItem"; title = "取消"; ObjectID = "yMK-AO-7YM"; */
+"yMK-AO-7YM.title" = "取消";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "yc8-PM-0zY"; */
+"yc8-PM-0zY.text" = "Title";
