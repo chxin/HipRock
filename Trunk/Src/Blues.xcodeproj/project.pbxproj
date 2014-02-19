@@ -446,6 +446,7 @@
 		7A63E2A618B45DB300A13464 /* EMOP_App_Phone_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E2A318B45DB300A13464 /* EMOP_App_Phone_6.png */; };
 		7A63E2A718B45DB300A13464 /* EMOP_App_Phone_6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E2A418B45DB300A13464 /* EMOP_App_Phone_6@2x.png */; };
 		7A63E2A818B45DB300A13464 /* EMOP_App_Phone_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E2A518B45DB300A13464 /* EMOP_App_Phone_7.png */; };
+		7A63E2AB18B477E100A13464 /* BluesPad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E2A918B477E100A13464 /* BluesPad.xcdatamodeld */; };
 		7A664FD8183B3369004B9FF3 /* MapPopover_Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD4183B3369004B9FF3 /* MapPopover_Arrow.png */; };
 		7A664FD9183B3369004B9FF3 /* MapPopover_Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD5183B3369004B9FF3 /* MapPopover_Arrow@2x.png */; };
 		7A664FDA183B3369004B9FF3 /* MapPopover_Rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD6183B3369004B9FF3 /* MapPopover_Rectangle.png */; };
@@ -1181,6 +1182,7 @@
 		7A63E2A318B45DB300A13464 /* EMOP_App_Phone_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMOP_App_Phone_6.png; sourceTree = "<group>"; };
 		7A63E2A418B45DB300A13464 /* EMOP_App_Phone_6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EMOP_App_Phone_6@2x.png"; sourceTree = "<group>"; };
 		7A63E2A518B45DB300A13464 /* EMOP_App_Phone_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMOP_App_Phone_7.png; sourceTree = "<group>"; };
+		7A63E2AA18B477E100A13464 /* BluesPad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BluesPad.xcdatamodel; sourceTree = "<group>"; };
 		7A664FD4183B3369004B9FF3 /* MapPopover_Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapPopover_Arrow.png; sourceTree = "<group>"; };
 		7A664FD5183B3369004B9FF3 /* MapPopover_Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MapPopover_Arrow@2x.png"; sourceTree = "<group>"; };
 		7A664FD6183B3369004B9FF3 /* MapPopover_Rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapPopover_Rectangle.png; sourceTree = "<group>"; };
@@ -2300,6 +2302,7 @@
 		7A63E11E18B44CBB00A13464 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7A63E2A918B477E100A13464 /* BluesPad.xcdatamodeld */,
 				7A63E11F18B44CBB00A13464 /* Building */,
 				7A63E13418B44CBB00A13464 /* Common */,
 				7A63E13D18B44CBC00A13464 /* Dashboard */,
@@ -3761,6 +3764,7 @@
 				EFF75151183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m in Sources */,
 				7A63E28818B450B200A13464 /* REMIPhoneMainViewController.m in Sources */,
 				7A63E22418B44CBD00A13464 /* REMBuildingTimeRangeDataModel.m in Sources */,
+				7A63E2AB18B477E100A13464 /* BluesPad.xcdatamodeld in Sources */,
 				EF0459941845CEAF0086D5AC /* _DCXYIndicatorLayer.m in Sources */,
 				7A63E22018B44CBD00A13464 /* REMAverageUsageDataModel.m in Sources */,
 				7A63E20618B44CBD00A13464 /* REMTrialCardController.m in Sources */,
@@ -4582,6 +4586,20 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7A63E2A918B477E100A13464 /* BluesPad.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7A63E2AA18B477E100A13464 /* BluesPad.xcdatamodel */,
+			);
+			currentVersion = 7A63E2AA18B477E100A13464 /* BluesPad.xcdatamodel */;
+			name = BluesPad.xcdatamodeld;
+			path = ../../Resource/BluesPad.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7A9B1E12177B3A6000C282A8 /* Project object */;
 }
