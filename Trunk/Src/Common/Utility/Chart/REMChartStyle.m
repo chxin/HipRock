@@ -32,7 +32,6 @@
     style.symbolSize = 10;
     style.xLabelToLine = 6;
     style.yLabelToLine = 10;
-    style.xLabelClipToBounds = NO;
     
     style.yAxisTitleToTopLabel = -2;
     style.yAxisTitleFontSize = 9;
@@ -78,7 +77,6 @@
     style.yAxisTitleFontSize = 13;
     style.yTextColor = style.xTextColor = [REMColor colorByHexString:@"#969696"];
     style.yTextFont = style.xTextFont = [UIFont fontWithName:@kBuildingFontSCRegular size:15.0];
-    style.xLabelClipToBounds = YES;
     
     style.indicatorColor = [REMColor colorByHexString:@"#f4f4f4"];
     style.focusSymbolLineStyle = DCLineTypeDefault;
@@ -184,7 +182,6 @@
     style.yAxisTitleColor = [REMColor colorByHexString:@"#3b3b3b"];
     style.yAxisTitleToTopLabel = 0;
     style.yAxisTitleFontSize = 8;
-    style.xLabelClipToBounds = YES;
     
     style.plotPaddingBottom = 0;
     style.plotPaddingTop = 0;

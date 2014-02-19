@@ -52,11 +52,6 @@
     if (REMIsNilOrNull(self._yLabelLayer)) {
         _DCYAxisLabelLayer* _yLabelLayer = [[_DCYAxisLabelLayer alloc]initWithContext:self.graphContext view:(DCXYChartView*)self.chartView];
         _yLabelLayer.axis = self.yAxis;
-        _yLabelLayer.font = self.yAxis.labelFont;
-        _yLabelLayer.fontColor = self.yAxis.labelColor;
-        _yLabelLayer.axisTitleFontSize = self.yAxis.axisTitleFontSize;
-        _yLabelLayer.axisTitleToTopLabel = self.yAxis.axisTitleToTopLabel;
-        _yLabelLayer.axisTitleColor = self.yAxis.axisTitleColor;
         _yLabelLayer.isMajorAxis = self.isMajor;
         _yLabelLayer.hidden = ([self.yAxis getVisableSeriesAmount] == 0);
         self._yLabelLayer = _yLabelLayer;

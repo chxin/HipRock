@@ -86,10 +86,6 @@
 
 -(void)drawIndicatorLayer {
     self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext view:self];
-    self.indicatorLayer.symbolLineStyle = self.focusSymbolLineStyle;
-    self.indicatorLayer.symbolLineWidth = self.focusSymbolLineWidth;
-    self.indicatorLayer.symbolLineColor = self.focusSymbolLineColor;
-    self.indicatorLayer.focusSymbolIndicatorSize = self.focusSymbolIndicatorSize;
     [self.layer addSublayer:self.indicatorLayer];
 }
 
@@ -100,8 +96,6 @@
     [self recalculatePlotRect];
     
     self.backgroundBandsLayer = [[_DCBackgroundBandsLayer alloc]initWithContext:self.graphContext view:self];
-    self.backgroundBandsLayer.fontColor = self.backgroundBandFontColor;
-    self.backgroundBandsLayer.font = self.backgroundBandFont;
     [self.graphContext addHRangeObsever:self.backgroundBandsLayer];
     [self.layer addSublayer:self.backgroundBandsLayer];
 //    [self redrawBgBands];
@@ -202,10 +196,7 @@
 
 -(void)drawXLabelLayer {
     self._xLabelLayer = [[_DCXAxisLabelLayer alloc]initWithContext:self.graphContext view:self];
-    self._xLabelLayer.labelClipToBounds = self.xAxisLabelClipToBounds;
     self._xLabelLayer.axis = self.xAxis;
-    self._xLabelLayer.font = self.xAxis.labelFont;
-    self._xLabelLayer.fontColor = self.xAxis.labelColor;
     [self.graphContext addHRangeObsever:self._xLabelLayer];
     [self.layer addSublayer:self._xLabelLayer];
     self._xLabelLayer.labelFormatter = self.xLabelFormatter;
@@ -213,13 +204,13 @@
 }
 
 -(void)updateAllLayerFrame {
-    self._xLabelLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.size.height+self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.frame.size.height - self.graphContext.plotRect.size.height - self.plotPaddingBottom - self.plotPaddingTop);
+    self._xLabelLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.size.height+self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.frame.size.height - self.graphContext.plotRect.size.height - self.chartStyle.plotPaddingBottom - self.chartStyle.plotPaddingTop);
     
     self._hGridlineLayer.frame = self.graphContext.plotRect;
     
     self.backgroundBandsLayer.frame = self.graphContext.plotRect;
-    self.indicatorLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, 0, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height+self.plotPaddingTop);// self.graphContext.plotRect;
-    self.lineLayerContainer.frame = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height + self.xAxis.lineWidth + self.xAxis.labelToLine);
+    self.indicatorLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, 0, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height+self.chartStyle.plotPaddingTop);// self.graphContext.plotRect;
+    self.lineLayerContainer.frame = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height + self.chartStyle.xLineWidth + self.chartStyle.xLabelToLine);
     self.symbolLayer.frame = self.lineLayerContainer.bounds;
     if (!REMIsNilOrNull(self._vGridlineLayer)) self._vGridlineLayer.frame = self.graphContext.plotRect;
     
@@ -237,36 +228,36 @@
 }
 
 -(void)recalculatePlotRect {
-    float plotSpaceLeft = self.plotPaddingLeft;
-    float plotSpaceRight = self.frame.size.width - plotSpaceLeft - self.plotPaddingRight;
-    float plotSpaceTop = self.plotPaddingTop;
-    float plotSpaceBottom = self.frame.size.height - self.plotPaddingBottom;
+    float plotSpaceLeft = self.chartStyle.plotPaddingLeft;
+    float plotSpaceRight = self.frame.size.width - plotSpaceLeft - self.chartStyle.plotPaddingRight;
+    float plotSpaceTop = self.chartStyle.plotPaddingTop;
+    float plotSpaceBottom = self.frame.size.height - self.chartStyle.plotPaddingBottom;
     
     CGSize axisSize;
     
-    axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.xAxis.labelFont];
-    plotSpaceBottom = plotSpaceBottom - axisSize.height - self.xAxis.lineWidth - self.xAxis.labelToLine;
+    axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.chartStyle.xTextFont];
+    plotSpaceBottom = plotSpaceBottom - axisSize.height - self.chartStyle.yLineWidth - self.chartStyle.xLabelToLine;
     
     if (self.yAxisList.count > 0) {
         DCAxis* majorYAxis = self.yAxisList[0];
         if ([majorYAxis getVisableSeriesAmount] > 0) {
-            axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:majorYAxis.labelFont];
-            plotSpaceLeft = plotSpaceLeft + axisSize.width + majorYAxis.lineWidth + majorYAxis.labelToLine;
-            majorYAxis.startPoint = CGPointMake(plotSpaceLeft, self.plotPaddingTop);
+            axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.chartStyle.yTextFont];
+            plotSpaceLeft = plotSpaceLeft + axisSize.width + self.chartStyle.yLineWidth + self.chartStyle.yLabelToLine;
+            majorYAxis.startPoint = CGPointMake(plotSpaceLeft, self.chartStyle.plotPaddingTop);
             majorYAxis.endPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
-            majorYAxis.size = CGSizeMake(axisSize.width + majorYAxis.lineWidth + majorYAxis.labelToLine, plotSpaceBottom-self.plotPaddingTop);
+            majorYAxis.size = CGSizeMake(axisSize.width + self.chartStyle.yLineWidth + self.chartStyle.yLabelToLine, plotSpaceBottom-self.chartStyle.plotPaddingTop);
         }
         
         for (int i = 1; i < self.visableYAxisAmount; i++) {
             if (i >= self.yAxisList.count) break;
             DCAxis* secondaryYAxis = self.yAxisList[i];
             if ([secondaryYAxis getVisableSeriesAmount] == 0) continue;
-            axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:secondaryYAxis.labelFont];
-            CGFloat axisWidth = axisSize.width + secondaryYAxis.lineWidth + secondaryYAxis.labelToLine;
+            axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.chartStyle.yTextFont];
+            CGFloat axisWidth = axisSize.width + self.chartStyle.yLineWidth + self.chartStyle.yLabelToLine;
             plotSpaceRight = plotSpaceRight - axisWidth;
-            secondaryYAxis.startPoint = CGPointMake(plotSpaceRight, self.plotPaddingTop);
+            secondaryYAxis.startPoint = CGPointMake(plotSpaceRight, self.chartStyle.plotPaddingTop);
             secondaryYAxis.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
-            secondaryYAxis.size = CGSizeMake(axisWidth, plotSpaceBottom-self.plotPaddingTop);
+            secondaryYAxis.size = CGSizeMake(axisWidth, plotSpaceBottom-self.chartStyle.plotPaddingTop);
         }
     }
     self.xAxis.startPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
@@ -280,9 +271,6 @@
 
 -(void)drawHGridline {
     self._hGridlineLayer = [[_DCHGridlineLayer alloc]initWithContext:self.graphContext view:self];
-    self._hGridlineLayer.lineColor = self.hGridlineColor;
-    self._hGridlineLayer.lineWidth = self.hGridlineWidth;
-    self._hGridlineLayer.lineStyle = self.hGridlineStyle;
     [self.layer addSublayer:self._hGridlineLayer];
     [self._hGridlineLayer setNeedsDisplay];
 }

@@ -7,13 +7,8 @@
 //
 
 #import "_DCLayer.h"
-#import "DCAxis.h"
 #import "DCUtility.h"
 
 @interface _DCHGridlineLayer : _DCLayer
-
-@property (nonatomic,assign) float lineWidth;
-@property (nonatomic) UIColor* lineColor;
-@property (nonatomic,assign) DCLineType lineStyle;
 
 @end

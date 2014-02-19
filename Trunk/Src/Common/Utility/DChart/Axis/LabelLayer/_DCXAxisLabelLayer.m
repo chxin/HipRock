@@ -38,12 +38,12 @@
     addLines[1] = self.axis.endPoint;
     
     CGContextSetLineJoin(ctx, kCGLineJoinMiter);
-    [DCUtility setLineStyle:ctx style:self.axis.lineStyle lineWidth:self.axis.lineWidth];
+    [DCUtility setLineStyle:ctx style:DCLineTypeDefault lineWidth:self.view.chartStyle.xLineWidth];
     CGContextSetBlendMode(ctx, kCGBlendModeNormal);
     CGContextBeginPath(ctx);
     CGContextAddLines(ctx, addLines, 2);
-    CGContextSetLineWidth(ctx, self.axis.lineWidth);
-    CGContextSetStrokeColorWithColor(ctx, self.axis.lineColor.CGColor);
+    CGContextSetLineWidth(ctx, self.view.chartStyle.xLineWidth);
+    CGContextSetStrokeColorWithColor(ctx, self.view.chartStyle.xLineColor.CGColor);
     CGContextStrokePath(ctx);
 //    [self updateTexts];
     
@@ -51,8 +51,8 @@
     
     UIGraphicsPushContext(ctx);
     
-    CGContextSetStrokeColorWithColor(ctx, self.fontColor.CGColor);
-    CGContextSetFillColorWithColor(ctx, self.fontColor.CGColor);
+    CGContextSetStrokeColorWithColor(ctx, self.view.chartStyle.xTextColor.CGColor);
+    CGContextSetFillColorWithColor(ctx, self.view.chartStyle.xTextColor.CGColor);
     CGFloat maxLabelLength = INT32_MAX;
     if (self.labelFormatter && [self.labelFormatter respondsToSelector:@selector(getMaxXLabelLengthIn:)]) {
         maxLabelLength = [((id<_DCXLabelFormatterProtocal>)self.labelFormatter) getMaxXLabelLengthIn:self.bounds];
@@ -67,7 +67,7 @@
         NSString* labelText = [self textForX:i];
         if (REMIsNilOrNull(labelText) || labelText.length == 0) continue;
         CGFloat centerX = self.graphContext.plotRect.origin.x + (i + offset - self.graphContext.hRange.location) * self.graphContext.plotRect.size.width / self.graphContext.hRange.length;
-        CGSize size = [DCUtility getSizeOfText:labelText forFont:self.font];
+        CGSize size = [DCUtility getSizeOfText:labelText forFont:self.view.chartStyle.xTextFont];
         CGRect textFrame;
         CGFloat textY = self.visableFrame.origin.y + self.visableFrame.size.height - size.height;
         if (size.width > maxLabelLength) {
@@ -76,7 +76,7 @@
             textFrame = CGRectMake(centerX-size.width/2,textY, size.width,size.height);
         }
         if ([DCUtility isFrame:textFrame visableIn:self.visableFrame]) {
-            [labelText drawInRect:textFrame withFont:self.font lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentCenter];
+            [labelText drawInRect:textFrame withFont:self.view.chartStyle.xTextFont lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentCenter];
         }
     }
     UIGraphicsPopContext();

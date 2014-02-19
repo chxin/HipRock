@@ -2,7 +2,7 @@
 //  REMManagedModel.h
 //  Blues
 //
-//  Created by tantan on 2/18/14.
+//  Created by tantan on 2/19/14.
 //
 //
 
@@ -13,8 +13,8 @@
 @interface REMManagedModel : NSManagedObject
 
 @property (nonatomic, retain) NSString * code;
+@property (nonatomic, retain) NSString * comment;
 @property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * comment;
 
 @end

@@ -68,8 +68,8 @@
         }
     }
     [CATransaction setDisableActions:caTransationState];
-    CTFontRef fRef = CTFontCreateWithName((__bridge CFStringRef)self.font.fontName,
-                                          self.font.pointSize,
+    CTFontRef fRef = CTFontCreateWithName((__bridge CFStringRef)self.view.chartStyle.backgroundBandFont.fontName,
+                                          self.view.chartStyle.backgroundBandFont.pointSize,
                                           NULL);
     for (DCXYChartBackgroundBand* band in self.bands) {
         if (![DCRange isRange:band.range visableIn:self.graphContext.hRange]) continue;
@@ -86,10 +86,10 @@
                 bandText.alignmentMode = kCAAlignmentLeft;
                 bandLayer.masksToBounds = NO;
                 bandText.font = fRef;
-                bandText.fontSize = self.font.pointSize;
-                bandText.foregroundColor = self.fontColor.CGColor;
+                bandText.fontSize = self.view.chartStyle.backgroundBandFont.pointSize;
+                bandText.foregroundColor = self.view.chartStyle.backgroundBandFontColor.CGColor;
                 [bandText setString:band.title];
-                CGSize size = [DCUtility getSizeOfText:band.title forFont:self.font];
+                CGSize size = [DCUtility getSizeOfText:band.title forFont:self.view.chartStyle.backgroundBandFont];
                 bandText.frame = CGRectMake(0, 0, size.width, size.height);
                 [bandLayer addSublayer:bandText];
             }

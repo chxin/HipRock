@@ -26,12 +26,12 @@
             addLines[1].y = addLines[0].y;
             
             CGContextSetLineJoin(ctx, kCGLineJoinMiter);
-            [DCUtility setLineStyle:ctx style:self.lineStyle lineWidth:self.lineWidth];
+            [DCUtility setLineStyle:ctx style:self.view.chartStyle.yGridlineStyle lineWidth:self.view.chartStyle.yGridlineWidth];
             CGContextSetBlendMode(ctx, kCGBlendModeNormal);
             CGContextBeginPath(ctx);
             CGContextAddLines(ctx, addLines, 2);
-            CGContextSetLineWidth(ctx, self.lineWidth);
-            CGContextSetStrokeColorWithColor(ctx, self.lineColor.CGColor);
+            CGContextSetLineWidth(ctx, self.view.chartStyle.yGridlineWidth);
+            CGContextSetStrokeColorWithColor(ctx, self.view.chartStyle.yGridlineColor.CGColor);
             CGContextStrokePath(ctx);
         }
     }

@@ -13,10 +13,6 @@
 #import "_DCLayer.h"
 
 @interface _DCXAxisLabelLayer : _DCLayer<DCContextHRangeObserverProtocal>
-@property (nonatomic, assign) BOOL labelClipToBounds;
-@property (nonatomic, strong) UIFont* font;
-@property (nonatomic, strong) UIColor* fontColor;
-//-(void)viewTouchesMoveFrom:(CGPoint)from to:(CGPoint)to;
 @property (nonatomic, weak) DCAxis* axis;
 @property (nonatomic, strong) NSFormatter* labelFormatter;
 @end

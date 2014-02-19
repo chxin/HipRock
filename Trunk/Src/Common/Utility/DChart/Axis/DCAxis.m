@@ -18,8 +18,6 @@
     self = [super init];
     if (self) {
         _seriesList = [[NSMutableArray alloc]init];
-        _lineStyle = DCLineTypeDefault;
-        _labelToLine = 0;
     }
     return self;
 }

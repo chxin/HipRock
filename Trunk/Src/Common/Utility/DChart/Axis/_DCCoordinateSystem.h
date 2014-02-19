@@ -27,8 +27,6 @@
 
 @property (nonatomic) CGFloat heightUnitInScreen;
 
-//-(id)initWithSeries:(NSArray*)series x:(DCAxis*)x y:(DCAxis*)y index:(NSUInteger)index;
-
 -(id)initWithChartView:(UIView*)chartView y:(DCAxis*)y;
 -(void)recalculatorYMaxInRange:(DCRange*)range;
 

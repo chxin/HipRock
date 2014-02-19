@@ -52,6 +52,7 @@
 
 -(void)createChartView:(CGRect)frame beginRange:(DCRange*)beginRange globalRange:(DCRange*)globalRange xFormatter:(NSFormatter*)xLabelFormatter step:(REMEnergyStep)step{
     DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:beginRange stacked:self.isStacked];
+    view.chartStyle = self.style;
     [view setXLabelFormatter:xLabelFormatter];
     _view = view;
     view.xAxis = [[DCAxis alloc]init];
@@ -73,38 +74,10 @@
     view.acceptPinch = self.style.acceptPinch;
     view.acceptPan = self.style.acceptPan;
     
-    view.xAxis.lineColor = self.style.xLineColor;
-    view.xAxis.lineWidth = self.style.xLineWidth;
-    view.xAxis.labelColor = self.style.xTextColor;
-    view.xAxis.labelFont = self.style.xTextFont;
     
-    if (self.style.yGridlineWidth > 0) {
-        view.hGridlineColor = self.style.yGridlineColor;
-        view.hGridlineWidth = self.style.yGridlineWidth;
-        view.hGridlineStyle = self.style.yGridlineStyle;
-    }
     view.hasVGridlines = self.style.xGridlineWidth > 0;
-    if (self.style.xGridlineWidth > 0) {
-        view.vGridlineColor = self.style.xGridlineColor;
-        view.vGridlineWidth = self.style.xGridlineWidth;
-        view.vGridlineStyle = self.style.xGridlineStyle;
-    }
     
-    view.focusSymbolLineColor = self.style.indicatorColor;
-    view.focusSymbolLineStyle = self.style.focusSymbolLineStyle;
-    view.focusSymbolLineWidth = self.style.focusSymbolLineWidth;
-    view.focusSymbolIndicatorSize = self.style.focusSymbolIndicatorSize;
-    view.xAxis.labelToLine = self.style.xLabelToLine;
-    
-    view.backgroundBandFontColor = self.style.backgroundBandFontColor;
-    view.backgroundBandFont = self.style.backgroundBandFont;
-    
-    view.plotPaddingRight = self.style.plotPaddingRight;
-    view.plotPaddingLeft = self.style.plotPaddingLeft;
-    view.plotPaddingTop = self.style.plotPaddingTop;
-    view.plotPaddingBottom = self.style.plotPaddingBottom;
     view.graphContext.hGridlineAmount = self.style.horizentalGridLineAmount;
-    view.xAxisLabelClipToBounds = self.style.xLabelClipToBounds;
     view.graphContext.useTextLayer = self.style.useTextLayer;
     view.delegate = self;
     self.graphContext = view.graphContext;
@@ -134,18 +107,6 @@
             s.yAxis = y;
             y.coordinate = DCAxisCoordinateY;
             y.axisTitle = s.target.uomName;
-            y.labelToLine = self.style.yLabelToLine;
-            if (self.style.yLineWidth > 0) {
-                y.lineColor = self.style.yLineColor;
-                y.lineWidth = self.style.yLineWidth;
-            }
-            if (self.style.yTextFont && self.style.yTextColor) {
-                y.labelColor = self.style.yTextColor;
-                y.labelFont = self.style.yTextFont;
-            }
-            y.axisTitleColor = self.style.yAxisTitleColor;
-            y.axisTitleToTopLabel = self.style.yAxisTitleToTopLabel;
-            y.axisTitleFontSize = self.style.yAxisTitleFontSize;
             [yAxes addObject:y];
         }
     }
@@ -319,7 +280,6 @@
 -(void)cancelToolTipStatus {
     [super cancelToolTipStatus];
     self.view.acceptPinch = self.style.acceptPinch;
-//    self.view.acceptPan = self.style.acceptPan;
     [self.view defocus];
 }
 -(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
@@ -417,7 +377,6 @@
     if ([DCRange isRange:self.myStableRange equalTo:self.graphContext.hRange]) {
         if (self.chartStatus == DChartStatusNormal) {
             self.chartStatus = DChartStatusFocus;
-            //        self.view.acceptPan = NO;
             self.view.acceptPinch = NO;
         }
         [self.view focusAroundX:xLocation];
