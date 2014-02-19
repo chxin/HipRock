@@ -2,7 +2,7 @@
 //  REMManagedCustomerModel.h
 //  Blues
 //
-//  Created by tantan on 2/18/14.
+//  Created by tantan on 2/19/14.
 //
 //
 
@@ -16,13 +16,13 @@
 
 @property (nonatomic, retain) NSString * address;
 @property (nonatomic, retain) NSString * email;
+@property (nonatomic, retain) NSNumber * logoId;
 @property (nonatomic, retain) NSString * manager;
+@property (nonatomic, retain) NSDate * startTime;
 @property (nonatomic, retain) NSString * telephone;
 @property (nonatomic, retain) NSNumber * timezoneId;
-@property (nonatomic, retain) NSNumber * logoId;
-@property (nonatomic, retain) NSDate * startTime;
-@property (nonatomic, retain) REMManagedUserModel *user;
 @property (nonatomic, retain) NSSet *administrators;
+@property (nonatomic, retain) REMManagedUserModel *user;
 @end
 
 @interface REMManagedCustomerModel (CoreDataGeneratedAccessors)

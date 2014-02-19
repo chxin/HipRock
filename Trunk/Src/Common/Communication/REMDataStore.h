@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "REMDataStoreType.h"
-
-
+#import <CoreData/CoreData.h>
+#import "REMDataPersistenceProcessor.h"
+@class REMDataPersistenceProcessor;
 @interface REMDataStore : NSObject<UIAlertViewDelegate>
 
 @property (nonatomic) REMDataStoreType name;
@@ -21,6 +22,15 @@
 @property (nonatomic) BOOL accessCache;
 @property (nonatomic) BOOL disableAlert;
 @property (nonatomic,weak) REMDataStore *parentStore;
+@property (nonatomic,strong) REMDataPersistenceProcessor *persistenceProcessor;
+
+//数据模型对象
+@property(nonatomic,strong) NSManagedObjectModel *managedObjectModel;
+//上下文对象
+@property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
+//持久性存储区
+@property(nonatomic,strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
 
 
 - (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter accessCache:(BOOL)accessCache andMessageMap:(NSDictionary *)messageMap;

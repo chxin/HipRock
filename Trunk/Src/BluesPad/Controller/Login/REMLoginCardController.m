@@ -21,7 +21,7 @@
 #import "REMTrialCardController.h"
 #import "REMLoginButton.h"
 
-
+#import "REMLoginPersistenceProcessor.h"
 
 @interface REMLoginCardController ()
 
@@ -139,6 +139,7 @@
     
     NSDictionary *messageMap = REMDataAccessMessageMake(@"Login_NoNetwork",@"Login_NetworkFailed",@"Login_ServerError",@"");
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserValidate parameter:parameter accessCache:NO andMessageMap:messageMap];
+    //store.persistenceProcessor = [[REMLoginPersistenceProcessor alloc]init];
     [store access:^(id data) {
         if(REMIsNilOrNull(data)){ //TODO: empty response?
             return ;
