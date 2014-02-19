@@ -148,6 +148,6 @@ typedef enum _REMDataStoreType
     @(REMDSLogSend) : REMJsonSvc(@"API/Log.svc/SendLog"),\
 };
 
-#define REMNetworkMessageMap @{@(REMDataAccessErrorMessage):REMLocalizedString(@"Common_NetServerError"), @(REMDataAccessFailed):REMLocalizedString(@"Common_NetConnectionFailed"), @(REMDataAccessNoConnection):REMLocalizedString(@"Common_NetNoConnection")}
+#define REMNetworkMessageMap @{@(REMDataAccessErrorMessage):REMIPadLocalizedString(@"Common_NetServerError"), @(REMDataAccessFailed):REMIPadLocalizedString(@"Common_NetConnectionFailed"), @(REMDataAccessNoConnection):REMIPadLocalizedString(@"Common_NetNoConnection")}
 
 #endif

@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Phone Main View Controller-->
         <scene sceneID="yvg-dr-8QP">
             <objects>
-                <viewController id="mRu-CD-K8b" sceneMemberID="viewController">
+                <viewController id="mRu-CD-K8b" customClass="REMIPhoneMainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="85f-td-UcJ"/>
                         <viewControllerLayoutGuide type="bottom" id="sXe-Z6-Lgt"/>
@@ -16,10 +16,19 @@
                     <view key="view" contentMode="scaleToFill" id="Idh-jX-KAg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hs4-rH-2Mg">
+                                <rect key="frame" x="20" y="167" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="DLp-4n-xry"/>
                     <connections>
+                        <outlet property="label" destination="Hs4-rH-2Mg" id="0Oj-9k-dPz"/>
                         <segue destination="rOm-Dg-rMR" kind="push" id="mCH-xr-bPE"/>
                     </connections>
                 </viewController>
