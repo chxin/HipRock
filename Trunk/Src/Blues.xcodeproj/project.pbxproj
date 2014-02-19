@@ -257,6 +257,7 @@
 		7A02890017C20CC500709111 /* Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E817C20CC500709111 /* Weibo.m */; };
 		7A09D59717B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */; };
 		7A09D59A17B8D62F001EBC30 /* REMDataRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A09D59917B8D62F001EBC30 /* REMDataRange.m */; };
+		7A0B65E918B440150052093E /* Main_IPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A0B65E718B440150052093E /* Main_IPhone.storyboard */; };
 		7A12280C18116DBF004DE778 /* REMViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A12280B18116DBF004DE778 /* REMViewHelper.m */; };
 		7A13C19517F40809007E6AA9 /* REMMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A13C19417F40809007E6AA9 /* REMMainNavigationController.m */; };
 		7A13C19B17F40D31007E6AA9 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7A13C19A17F40D31007E6AA9 /* GoogleMaps.bundle */; };
@@ -364,7 +365,7 @@
 		7A5A97391856D54E0084E228 /* share-weixin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5A97351856D54E0084E228 /* share-weixin@2x.png */; };
 		7A5AC77F1817CBEF006C7CB1 /* REMBuildingEntranceSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AC77E1817CBEF006C7CB1 /* REMBuildingEntranceSegue.m */; };
 		7A5AC7821817CC34006C7CB1 /* REMMapGallerySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AC7811817CC34006C7CB1 /* REMMapGallerySegue.m */; };
-		7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8B177B41B0000F77F9 /* MainStoryboard.storyboard */; };
+		7A5E2D94177B41B0000F77F9 /* Main_IPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8B177B41B0000F77F9 /* Main_IPad.storyboard */; };
 		7A5E2D95177B41B0000F77F9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8D177B41B0000F77F9 /* InfoPlist.strings */; };
 		7A634BBC180E80140076C84D /* REMSplashMapSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A634BBB180E80140076C84D /* REMSplashMapSegue.m */; };
 		7A664FD8183B3369004B9FF3 /* MapPopover_Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD4183B3369004B9FF3 /* MapPopover_Arrow.png */; };
@@ -821,6 +822,7 @@
 		7A09D59617B8CBE3001EBC30 /* REMBuildingTimeRangeDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingTimeRangeDataModel.m; sourceTree = "<group>"; };
 		7A09D59817B8D62F001EBC30 /* REMDataRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMDataRange.h; sourceTree = "<group>"; };
 		7A09D59917B8D62F001EBC30 /* REMDataRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMDataRange.m; sourceTree = "<group>"; };
+		7A0B65E818B440150052093E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Resource/Languages/Base.lproj/Main_IPhone.storyboard; sourceTree = "<group>"; };
 		7A0F7C5018277BAC009E898A /* REMImages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMImages.h; path = Resource/Definitions/REMImages.h; sourceTree = "<group>"; };
 		7A12280A18116DBF004DE778 /* REMViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMViewHelper.h; path = Common/Utility/REMViewHelper.h; sourceTree = "<group>"; };
 		7A12280B18116DBF004DE778 /* REMViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMViewHelper.m; path = Common/Utility/REMViewHelper.m; sourceTree = "<group>"; };
@@ -1010,15 +1012,15 @@
 		7A5E2D79177B4171000F77F9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		7A5E2D82177B419C000F77F9 /* REMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMViewController.h; path = Controller/REMViewController.h; sourceTree = "<group>"; };
 		7A5E2D83177B419C000F77F9 /* REMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMViewController.m; path = Controller/REMViewController.m; sourceTree = "<group>"; };
-		7A5E2D8C177B41B0000F77F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		7A5E2D8C177B41B0000F77F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_IPad.storyboard; sourceTree = "<group>"; };
 		7A5E2D8E177B41B0000F77F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7A5E2D8F177B41B0000F77F9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		7A5E2D96177B41C3000F77F9 /* BluesPad-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BluesPad-Info.plist"; sourceTree = "<group>"; };
 		7A5E2D97177B41C3000F77F9 /* BluesPad-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BluesPad-Prefix.pch"; sourceTree = "<group>"; };
 		7A5E2DA2177B424A000F77F9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainStoryboard.strings"; sourceTree = "<group>"; };
 		7A5E2DA3177B424C000F77F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
-		7A5E2DA6177B4272000F77F9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainStoryboard.strings"; sourceTree = "<group>"; };
-		7A5E2DA7177B4274000F77F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		7A5E2DA6177B4272000F77F9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_IPad.strings"; sourceTree = "<group>"; };
+		7A5E2DA7177B4274000F77F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main_IPad.strings; sourceTree = "<group>"; };
 		7A634BBA180E80140076C84D /* REMSplashMapSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSplashMapSegue.h; path = Resource/Segue/REMSplashMapSegue.h; sourceTree = "<group>"; };
 		7A634BBB180E80140076C84D /* REMSplashMapSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSplashMapSegue.m; path = Resource/Segue/REMSplashMapSegue.m; sourceTree = "<group>"; };
 		7A664FD4183B3369004B9FF3 /* MapPopover_Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapPopover_Arrow.png; sourceTree = "<group>"; };
@@ -2525,7 +2527,8 @@
 				7A5E2D99177B41D3000F77F9 /* Model */,
 				7A5E2D9A177B41DA000F77F9 /* Controller */,
 				7A5E2D85177B41A4000F77F9 /* Resource */,
-				7A5E2D8B177B41B0000F77F9 /* MainStoryboard.storyboard */,
+				7A5E2D8B177B41B0000F77F9 /* Main_IPad.storyboard */,
+				7A0B65E718B440150052093E /* Main_IPhone.storyboard */,
 				7A9B1E2B177B3A8B00C282A8 /* main.m */,
 				7A9B1E2E177B3A8B00C282A8 /* REMAppDelegate.h */,
 				7A9B1E2F177B3A8B00C282A8 /* REMAppDelegate.m */,
@@ -3476,6 +3479,7 @@
 				6A61A78E1839B82000C6A228 /* UnqualifiedPin_Normal@2x.png in Resources */,
 				7A5A97381856D54E0084E228 /* share-weixin.png in Resources */,
 				B44D269B18A9E94C00D7C06D /* Legend_Chart_iOS6.png in Resources */,
+				7A0B65E918B440150052093E /* Main_IPhone.storyboard in Resources */,
 				B4707D9618697B2900FBA393 /* Cooling_normal@2x.png in Resources */,
 				B44D26A418A9E94C00D7C06D /* DatePicker_Chart@2x.png in Resources */,
 				7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */,
@@ -3527,7 +3531,7 @@
 				B44D26B018A9E9F100D7C06D /* Legend_Chart_iOS6_Normal.png in Resources */,
 				6A61A77C1839B82000C6A228 /* CommonPin_Focus@2x.png in Resources */,
 				7A664FDB183B3369004B9FF3 /* MapPopover_Rectangle@2x.png in Resources */,
-				7A5E2D94177B41B0000F77F9 /* MainStoryboard.storyboard in Resources */,
+				7A5E2D94177B41B0000F77F9 /* Main_IPad.storyboard in Resources */,
 				B4019B271890A33900973FAA /* DefaultBuildingBlur.png in Resources */,
 				6A61A78D1839B82000C6A228 /* UnqualifiedPin_Normal.png in Resources */,
 				B4707D8D18697B1C00FBA393 /* Temperature_pressed.png in Resources */,
@@ -4179,6 +4183,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		7A0B65E718B440150052093E /* Main_IPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7A0B65E818B440150052093E /* Base */,
+			);
+			name = Main_IPhone.storyboard;
+			sourceTree = "<group>";
+		};
 		7A20761617E055E800CD137C /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -4227,14 +4239,14 @@
 			path = Resource/Languages;
 			sourceTree = "<group>";
 		};
-		7A5E2D8B177B41B0000F77F9 /* MainStoryboard.storyboard */ = {
+		7A5E2D8B177B41B0000F77F9 /* Main_IPad.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7A5E2D8C177B41B0000F77F9 /* Base */,
 				7A5E2DA6177B4272000F77F9 /* zh-Hans */,
 				7A5E2DA7177B4274000F77F9 /* en */,
 			);
-			name = MainStoryboard.storyboard;
+			name = Main_IPad.storyboard;
 			path = Resource/Languages;
 			sourceTree = "<group>";
 		};
@@ -4333,7 +4345,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s i386 x86_64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4383,7 +4395,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0AAA16CE-E1AE-4792-AABE-857046F9D10E";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -4527,7 +4539,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9745E638-71E4-4725-B568-BD0D7BF42008";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
