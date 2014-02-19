@@ -9,9 +9,33 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
-	<dict/>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>EMOP_App_Phone_7</string>
+				<string>EMOP_App_Phone_6</string>
+				<string>EMOP_Spotlight_7</string>
+				<string>EMOP_Setting</string>
+			</array>
+		</dict>
+	</dict>
 	<key>CFBundleIcons~ipad</key>
-	<dict/>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>EMOP_App_6</string>
+				<string>EMOP_App_7</string>
+				<string>EMOP_APP_7</string>
+				<string>EMOP_Spotlight_6</string>
+				<string>EMOP_Spotlight_7</string>
+				<string>EMOP_Setting</string>
+			</array>
+		</dict>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>cn.com.schneider-electric.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
