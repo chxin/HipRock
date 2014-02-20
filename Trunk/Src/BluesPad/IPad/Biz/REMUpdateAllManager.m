@@ -157,9 +157,9 @@ static NSString *customerUpdateAll=@"customerupdateall";
     }];
     REMApplicationContext *context=REMAppContext;
     if (context.updateManager != nil && self.canCancel==YES) {
-        NSString *msg=NSLocalizedString(@"Setting_LoadingData", @"");//正在更新客户的楼宇及能耗信息，请稍后...
+        NSString *msg=REMIPadLocalizedString(@"Setting_LoadingData");//正在更新客户的楼宇及能耗信息，请稍后...
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:msg delegate:self cancelButtonTitle:NSLocalizedString(@"Common_Giveup", @"") otherButtonTitles: nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:msg delegate:self cancelButtonTitle:REMIPadLocalizedString(@"Common_Giveup") otherButtonTitles: nil];
         alert.tag=-1;
         [alert show];
         self.alertView=alert;
@@ -170,13 +170,13 @@ static NSString *customerUpdateAll=@"customerupdateall";
 
 - (void)showAlertWithMessage:(NSString *)msg withTag:(NSInteger)tag{
     if (self.updateSource == REMCustomerUserConcurrencySourceSwitchCustomer) {
-        msg = [NSLocalizedString(@"Setting_SwitchCustomerFailed", @"") stringByAppendingString:msg];
+        msg = [REMIPadLocalizedString(@"Setting_SwitchCustomerFailed") stringByAppendingString:msg];
     }
     else if(self.updateSource == REMCustomerUserConcurrencySourceUpdate){
-        msg = [NSLocalizedString(@"Setting_UpdateFailed", @"") stringByAppendingString:msg];
+        msg = [REMIPadLocalizedString(@"Setting_UpdateFailed") stringByAppendingString:msg];
     }
     
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:msg delegate:self cancelButtonTitle:NSLocalizedString(@"Common_OK", @"") otherButtonTitles:nil];
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:msg delegate:self cancelButtonTitle:REMIPadLocalizedString(@"Common_OK") otherButtonTitles:nil];
     alert.tag=tag;
     [alert show];
 }
@@ -209,20 +209,20 @@ static NSString *customerUpdateAll=@"customerupdateall";
 }
 
 - (void)statusUserDeleted{
-    [self showAlertWithMessage:NSLocalizedString(@"Setting_UserDeleted", @"") withTag:0];
+    [self showAlertWithMessage:REMIPadLocalizedString(@"Setting_UserDeleted") withTag:0];
 }
 
 - (void)statusCurrentCustomerDeleted{
-    [self showAlertWithMessage:NSLocalizedString(@"Setting_CurrentCustomerDeleted", @"") withTag:1];
+    [self showAlertWithMessage:REMIPadLocalizedString(@"Setting_CurrentCustomerDeleted") withTag:1];
 }
 
 - (void)statusSelectedCustomerDeleted{
-    [self showAlertWithMessage:NSLocalizedString(@"Setting_CurrentCustomerDeleted", @"") withTag:2];
+    [self showAlertWithMessage:REMIPadLocalizedString(@"Setting_CurrentCustomerDeleted") withTag:2];
 
 }
 
 - (void)statusNoAttached{
-    [self showAlertWithMessage:NSLocalizedString(@"Setting_NoAttachedCustomer", @"") withTag:3];
+    [self showAlertWithMessage:REMIPadLocalizedString(@"Setting_NoAttachedCustomer") withTag:3];
 }
 
 - (void)statusSuccess{

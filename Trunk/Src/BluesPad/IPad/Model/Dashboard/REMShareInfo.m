@@ -43,37 +43,37 @@
      */
     
     if (self.userTitle == REMUserTitleEEConsultant) {
-        title=NSLocalizedString(@"Admin_UserTitleEEConsultant", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleEEConsultant");
     }
     else if(self.userTitle == REMUserTitleTechnician){
-        title=NSLocalizedString(@"Admin_UserTitleTechnician", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleTechnician");
     }
     else if(self.userTitle == REMUserTitleCustomerAdmin){
-        title=NSLocalizedString(@"Admin_UserTitleCustomerAdmin", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleCustomerAdmin");
     }
     else if(self.userTitle == REMUserTitlePlatformAdmin){
-        title=NSLocalizedString(@"Admin_UserTitlePlatformAdmin", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitlePlatformAdmin");
     }
     else if(self.userTitle == REMUserTitleEnergyManager){
-        title=NSLocalizedString(@"Admin_UserTitleEnergyManager", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleEnergyManager");
     }
     else if(self.userTitle == REMUserTitleEnergyEngineer){
-        title=NSLocalizedString(@"Admin_UserTitleEnergyEngineer", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleEnergyEngineer");
     }
     else if(self.userTitle == REMUserTitleDepartmentManager){
-        title=NSLocalizedString(@"Admin_UserTitleDepartmentManager", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleDepartmentManager");
     }
     else if(self.userTitle == REMUserTitleCEO){
-        title=NSLocalizedString(@"Admin_UserTitleCEO", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleCEO");
     }
     else if(self.userTitle == REMUserTitleBusinessPersonnel){
-        title=NSLocalizedString(@"Admin_UserTitleBusinessPersonnel", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleBusinessPersonnel");
     }
     else if(self.userTitle == REMUserTitleSaleman){
-        title=NSLocalizedString(@"Admin_UserTitleSaleman", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleSaleman");
     }
     else if(self.userTitle == REMUserTitleServiceProviderAdmin){
-        title=NSLocalizedString(@"Admin_UserTitleServiceProviderAdmin", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleServiceProviderAdmin");
     }
     self.userTitleComponent=title;
 }

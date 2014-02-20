@@ -124,7 +124,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (section==0) {
-        return NSLocalizedString(@"Building_WidgetRelationTitle", @"");
+        return REMIPadLocalizedString(@"Building_WidgetRelationTitle");
     }
     NSDictionary *dic=self.data[section-1];
     return dic[@"name"];
@@ -155,7 +155,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
     if (section == self.data.count) {
-        return NSLocalizedString(@"Building_WidgetRelationInfo", @"");
+        return REMIPadLocalizedString(@"Building_WidgetRelationInfo");
     }
     return @"";
 }

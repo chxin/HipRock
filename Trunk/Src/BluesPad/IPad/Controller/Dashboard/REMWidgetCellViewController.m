@@ -87,7 +87,7 @@
         if (userName.length>=4) {
             userName = [[userName substringToIndex:3] stringByAppendingString:@"..."];
         }
-        share.text= [NSString stringWithFormat: NSLocalizedString(@"Dashboard_ShareUserName", @"") , userName];
+        share.text= [NSString stringWithFormat: REMIPadLocalizedString(@"Dashboard_ShareUserName") , userName];
         share.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetShareSize];
         [self.view addSubview:share];
     }
@@ -190,13 +190,13 @@
     [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:self.searchModel withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *errorInfo){
         if (data==nil) {
             if (errorInfo==nil) { // timeout or network failed
-                [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerTimeout", @"")];
+                [self generateServerErrorLabel:REMIPadLocalizedString(@"Common_ServerTimeout")];
                 self.isServerTimeout=YES;
             }
             else{
                 self.serverError=errorInfo;
                 if ([errorInfo.code isEqualToString:@"1"]==YES) {
-                    [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerError", @"")];
+                    [self generateServerErrorLabel:REMIPadLocalizedString(@"Common_ServerError")];
                 }
             }
         }

@@ -82,7 +82,7 @@
     REMApplicationContext *context=REMAppContext;
     // weibo account binding cell
     if (indexPath.section == 1 && indexPath.item == 0) {
-        [[cell textLabel]setText:NSLocalizedString(@"Setting_BindWeibo", @"")]; //绑定新浪微博
+        [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_BindWeibo")]; //绑定新浪微博
         cell.detailTextLabel.text=@"";
         UISwitch *switcher= [[UISwitch alloc]initWithFrame:CGRectZero];
         cell.accessoryView=switcher;
@@ -97,14 +97,14 @@
         
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         if(indexPath.row==0){
-            [[cell textLabel]setText:NSLocalizedString(@"Setting_UserName", @"")]; //显示名称
+            [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_UserName")]; //显示名称
             
             NSString *name=context.currentUser.realname;
             
             [cell.detailTextLabel setText:name];
         }
         else if(indexPath.row==1){
-            [[cell textLabel]setText:NSLocalizedString(@"Setting_EMOPID", @"")];//能源管理开发平台ID
+            [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_EMOPID")];//能源管理开发平台ID
             NSString *name1=context.currentUser.name;
             if (context.currentUser.isDemo) {
                 name1=@"Demo";
@@ -112,24 +112,24 @@
             [cell.detailTextLabel setText:name1];
         }
         else if(indexPath.row==2){
-            [[cell textLabel]setText:NSLocalizedString(@"Setting_CurrentCustomer", @"")];//当前客户
+            [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_CurrentCustomer")];//当前客户
             NSString *name=[REMApplicationContext instance].currentCustomer.name;
             [cell.detailTextLabel setText:name];
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
         else{
-            [[cell textLabel]setText:NSLocalizedString(@"Setting_CustomerInfo", @"")];//客户信息
+            [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_CustomerInfo")];//客户信息
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
     }
     else if (indexPath.section==2 && indexPath.row==0){
-        [[cell textLabel]setText:NSLocalizedString(@"Setting_About", @"")];//关于云能效
+        [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_About")];//关于云能效
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     }
     else if(indexPath.section==4 && indexPath.row==0 ){
         UITableViewCell *cell1 = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell1"];
         //[[cell textLabel]setText:@"退出登录"];
-        cell1.textLabel.text=NSLocalizedString(@"Setting_Logout", @"");//@"退出登录";
+        cell1.textLabel.text=REMIPadLocalizedString(@"Setting_Logout");//@"退出登录";
         cell1.textLabel.textColor=[UIColor redColor];
         cell1.textLabel.textAlignment=NSTextAlignmentCenter;
         return cell1;
@@ -151,7 +151,7 @@
          [cell.contentView addSubview:logout];*/
     }
     else if(indexPath.section==3 && indexPath.row==0){
-        cell.textLabel.text=NSLocalizedString(@"Setting_UpdateAll", @""); //@"更新全部数据";
+        cell.textLabel.text=REMIPadLocalizedString(@"Setting_UpdateAll"); //@"更新全部数据";
         cell.textLabel.textColor=[REMColor colorByHexString:@"#37ab3c"];
     }
     return cell;
@@ -187,7 +187,7 @@
 
 - (void)logout{
     //您要退出当前账号登录吗?
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"Setting_AreYouSureLogout", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"Common_Giveup", @"") otherButtonTitles:NSLocalizedString(@"Common_Quit",@""), nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:REMIPadLocalizedString(@"Setting_AreYouSureLogout") delegate:self cancelButtonTitle:REMIPadLocalizedString(@"Common_Giveup") otherButtonTitles:REMIPadLocalizedString(@"Common_Quit"), nil];
     alert.cancelButtonIndex=1;
     
     [alert show];
@@ -210,7 +210,7 @@
 - (void) weiboSwitcherChanged:(UISwitch*)sender {
     BOOL isAuthed = [Weibo.weibo isAuthenticated];
     if (sender.on == NO && isAuthed) {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"Weibo_AccountUnbindingConfirm", @"") delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Weibo_AccountUnbindingNOButton", @""), NSLocalizedString(@"Weibo_AccountUnbindingYESButton", @""), nil];
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"" message:REMIPadLocalizedString(@"Weibo_AccountUnbindingConfirm") delegate:self cancelButtonTitle:nil otherButtonTitles:REMIPadLocalizedString(@"Weibo_AccountUnbindingNOButton"), REMIPadLocalizedString(@"Weibo_AccountUnbindingYESButton"), nil];
         alertView.accessibilityIdentifier = @"weiboAccount";
         
         [alertView show];
@@ -225,7 +225,7 @@
                     message = REMIPadLocalizedString(@"Weibo_AccountBindingSuccess");
                 }
                 else {
-                    message = [NSString stringWithFormat:NSLocalizedString(@"Weibo_AccountBindingFail", @""), error];
+                    message = [NSString stringWithFormat:REMIPadLocalizedString(@"Weibo_AccountBindingFail"), error];
                     sender.on = NO;
                 }
                 [REMAlertHelper alert:message];

@@ -27,17 +27,17 @@
     }error:^(NSError *error,REMDataAccessErrorStatus status, REMBusinessErrorInfo * bizError){
         if (status == REMDataAccessErrorMessage) {
             if ([bizError.code isEqualToString:@"050001216002"]==YES) {//widget deleted
-                [self showMessage:NSLocalizedString(@"Building_WidgetRelationWidgetDeleted", @"")];
+                [self showMessage:REMIPadLocalizedString(@"Building_WidgetRelationWidgetDeleted")];
             }
             else if([bizError.code isEqualToString:@"050001216001"]==YES || [bizError.code isEqualToString:@"050001216005"]==YES){//container deleted
-                [self showMessage:NSLocalizedString(@"Building_WidgetRelationPositionDeleted", @"")];
+                [self showMessage:REMIPadLocalizedString(@"Building_WidgetRelationPositionDeleted")];
             }
         }
     }];
 }
 
 - (void)showMessage:(NSString *)msg{
-    NSString *updateString=NSLocalizedString(@"Common_UpdateData", @"");
+    NSString *updateString=REMIPadLocalizedString(@"Common_UpdateData");
     NSString *fullMsg = [NSString stringWithFormat:msg,self.widgetName];
     UIAlertView *view = [[UIAlertView alloc]initWithTitle:@"" message:fullMsg delegate:self cancelButtonTitle:updateString otherButtonTitles: nil];
     [view show];

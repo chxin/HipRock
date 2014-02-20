@@ -50,54 +50,54 @@
     switch (i) {
         case 0:
             [list addObject:[NSNumber numberWithInt:1]];
-            [titleList addObject: NSLocalizedString(@"Common_Hour", "")];//小时
+            [titleList addObject: REMIPadLocalizedString(@"Common_Hour")];//小时
             defaultStepIndex=0;
             break;
         case 1:
             [list addObject:[NSNumber numberWithInt:1]];
             [list addObject:[NSNumber numberWithInt:2]];
-            [titleList addObject:NSLocalizedString(@"Common_Hour", "")];//小时
-            [titleList addObject:NSLocalizedString(@"Common_Day", "")];//天
+            [titleList addObject:REMIPadLocalizedString(@"Common_Hour")];//小时
+            [titleList addObject:REMIPadLocalizedString(@"Common_Day")];//天
             defaultStepIndex=1;
             break;
         case 2:
             [list addObject:[NSNumber numberWithInt:2]];
             [list addObject:[NSNumber numberWithInt:5]];
-            [titleList addObject:NSLocalizedString(@"Common_Day", "")];//天
-            [titleList addObject:NSLocalizedString(@"Common_Week", "")];//周
+            [titleList addObject:REMIPadLocalizedString(@"Common_Day")];//天
+            [titleList addObject:REMIPadLocalizedString(@"Common_Week")];//周
             defaultStepIndex=0;
             break;
         case 3:
             [list addObject:[NSNumber numberWithInt:2]];
             [list addObject:[NSNumber numberWithInt:5]];
             [list addObject:[NSNumber numberWithInt:3]];
-            [titleList addObject:NSLocalizedString(@"Common_Day", "")];//天
-            [titleList addObject:NSLocalizedString(@"Common_Week", "")];//周
-            [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
+            [titleList addObject:REMIPadLocalizedString(@"Common_Day")];//天
+            [titleList addObject:REMIPadLocalizedString(@"Common_Week")];//周
+            [titleList addObject:REMIPadLocalizedString(@"Common_Month")];//月
             defaultStepIndex=2;
             break;
         case 4:
             [list addObject:[NSNumber numberWithInt:3]];
-            [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
+            [titleList addObject:REMIPadLocalizedString(@"Common_Month")];//月
             defaultStepIndex=0;
             break;
         case 5:
             [list addObject:[NSNumber numberWithInt:3]];
             [list addObject:[NSNumber numberWithInt:4]];
-            [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
-            [titleList addObject:NSLocalizedString(@"Common_Year", "")];//年
+            [titleList addObject:REMIPadLocalizedString(@"Common_Month")];//月
+            [titleList addObject:REMIPadLocalizedString(@"Common_Year")];//年
             defaultStepIndex=0;
             break;
         case 6:
             [list addObject:[NSNumber numberWithInt:3]];
             [list addObject:[NSNumber numberWithInt:4]];
-            [titleList addObject:NSLocalizedString(@"Common_Month", "")];//月
-            [titleList addObject:NSLocalizedString(@"Common_Year", "")];//年
+            [titleList addObject:REMIPadLocalizedString(@"Common_Month")];//月
+            [titleList addObject:REMIPadLocalizedString(@"Common_Year")];//年
             defaultStepIndex=0;
             break;
         case 7:
             [list addObject:[NSNumber numberWithInt:4]];
-            [titleList addObject:NSLocalizedString(@"Common_Year", "")];//年
+            [titleList addObject:REMIPadLocalizedString(@"Common_Year")];//年
             defaultStepIndex=0;
             break;
         default:

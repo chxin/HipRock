@@ -57,7 +57,7 @@ static NSString *cellId=@"dashboardcell";
     //NSLog(@"frame:%@",NSStringFromCGRect(self.view.frame));
     
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, kDashboardDragTitleMargin, 300, kDashboardDragTitleSize)];
-    label.text=NSLocalizedString(@"Dashboard_PullDownShowGeneral", @"");//@"下拉返回概览能耗信息";
+    label.text=REMIPadLocalizedString(@"Dashboard_PullDownShowGeneral");//@"下拉返回概览能耗信息";
     label.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:label.frame.size.height];
     label.textColor=[UIColor whiteColor];
     label.backgroundColor=[UIColor clearColor];
@@ -97,14 +97,14 @@ static NSString *dashboardGroupName=@"building-data-%@";
     //if(self.isHiding==YES)return;
 
     if(scrollView.contentOffset.y<kDashboardSwitchLabelTop){
-        self.buildingLabel.text=NSLocalizedString(@"Building_ReleaseSwitchView", @"");//@"松开以显示";
+        self.buildingLabel.text=REMIPadLocalizedString(@"Building_ReleaseSwitchView");//@"松开以显示";
         [UIView animateWithDuration:0.2 animations:^(void){
             //self.arrow.layer.transform=CATransform3DMakeRotation((M_PI / 180.0) * 180.0f, 0.0f, 0.0f, 1.0f);
             self.arrow.transform=CGAffineTransformMakeRotation(M_PI);
         }];
     }
     else {
-        self.buildingLabel.text=NSLocalizedString(@"Dashboard_PullDownShowGeneral", @"");// @"下拉返回概览能耗信息";
+        self.buildingLabel.text=REMIPadLocalizedString(@"Dashboard_PullDownShowGeneral");// @"下拉返回概览能耗信息";
         [UIView animateWithDuration:0.2 animations:^(void){
             //self.arrow.layer.transform=CATransform3DMakeRotation((M_PI / 180.0) * 180.0f, 0.0f, 0.0f, 1.0f);
             self.arrow.transform=CGAffineTransformMakeRotation(M_PI*2);
@@ -159,7 +159,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     if (self.buildingInfo.dashboardArray.count==0) {
-        NSString *emptyText=NSLocalizedString(@"Dashboard_Empty", @"");//未配置任何仪表盘。
+        NSString *emptyText=REMIPadLocalizedString(@"Dashboard_Empty");//未配置任何仪表盘。
         cell.textLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.5];
         cell.textLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:29];
         cell.textLabel.text=emptyText;
@@ -240,7 +240,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
         NSString *shareTel=dashboardInfo.shareInfo.userTelephone;
         NSString *date=[REMTimeHelper formatTimeFullDay:dashboardInfo.shareInfo.shareTime isChangeTo24Hour:NO];
         NSString *userTitle=dashboardInfo.shareInfo.userTitleComponent;
-        shareLabel.text=[NSString stringWithFormat:NSLocalizedString(@"Widget_ShareTitle", @""),shareName,userTitle,date,shareTel];
+        shareLabel.text=[NSString stringWithFormat:REMIPadLocalizedString(@"Widget_ShareTitle"),shareName,userTitle,date,shareTel];
         [cell.contentView addSubview:shareLabel];
         //shareFrame=CGRectMake(shareFrame.origin.x, shareFrame.origin.y+shareFrame.size.height, shareFrame.size.width, shareFrame.size.height);
     }

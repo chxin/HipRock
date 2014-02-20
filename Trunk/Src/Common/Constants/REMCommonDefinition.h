@@ -25,8 +25,8 @@ typedef enum _REMCommodity : int{
 #define REMHexColor(a) []
 
 #define REMCommonLocalizedString(a) (REMIsNilOrNull(a)? REMEmptyString : NSLocalizedStringFromTable(a,@"Localizable_Common",REMEmptyString))
-#define REMIPadLocalizedString(a) (REMIsNilOrNull(a)? REMEmptyString : NSLocalizedStringFromTable(a,@"Localizable_IPad",REMEmptyString))
-#define REMIPhoneLocalizedString(a) (REMIsNilOrNull(a)? REMEmptyString : NSLocalizedStringFromTable(a,@"Localizable_IPhone",REMEmptyString))
+#define REMIPadLocalizedString(a) NSLocalizedStringFromTable(a,@"Localizable_IPad",REMEmptyString)
+#define REMIPhoneLocalizedString(a) NSLocalizedStringFromTable(a,@"Localizable_IPhone",REMEmptyString)
 
 #define REMLoadImageNamed(a) [UIImage imageNamed:(a)]
 

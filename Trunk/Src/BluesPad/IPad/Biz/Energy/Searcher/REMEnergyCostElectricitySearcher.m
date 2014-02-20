@@ -17,7 +17,7 @@
     if(stepModel.step == REMEnergyStepHour){
         REMClientErrorInfo *bizError=[[REMClientErrorInfo alloc]init];
         bizError.code=@"";
-        bizError.messageInfo=NSLocalizedString(@"Widget_CalendarCostElectricityStepError", @"");
+        bizError.messageInfo=REMIPadLocalizedString(@"Widget_CalendarCostElectricityStepError");
         
         return bizError;
     }

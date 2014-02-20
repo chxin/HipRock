@@ -106,7 +106,7 @@
     }
     if (self.ownerController.serverError!=nil) {
         if ([self.ownerController.serverError.code isEqualToString:@"1"]==YES) {
-            [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerError", @"")];
+            [self generateServerErrorLabel:REMIPadLocalizedString(@"Common_ServerError")];
         }
         else{
             NSString *showText=[self processServerError:self.ownerController.serverError.code];
@@ -116,7 +116,7 @@
         }
     }
     if (self.ownerController.isServerTimeout==YES) {
-        [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerTimeout", @"")];
+        [self generateServerErrorLabel:REMIPadLocalizedString(@"Common_ServerTimeout")];
     }
     
 }
@@ -188,14 +188,14 @@
                 REMBusinessErrorInfo *bizInfo=[[REMBusinessErrorInfo alloc]init];
                 bizInfo.code=@"timeout";
                 if (self.serverErrorLabel!=nil) {
-                    [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerTimeout", @"")];
+                    [self generateServerErrorLabel:REMIPadLocalizedString(@"Common_ServerTimeout")];
                 }
                 [self rollbackWithError:bizInfo];
             }
             else{
                 if([error isKindOfClass:[REMClientErrorInfo class]]==YES){
                     REMClientErrorInfo *err=(REMClientErrorInfo *)error;
-                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:err.messageInfo delegate:nil cancelButtonTitle:NSLocalizedString(@"Common_OK", @"") otherButtonTitles:nil, nil];
+                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:err.messageInfo delegate:nil cancelButtonTitle:REMIPadLocalizedString(@"Common_OK") otherButtonTitles:nil, nil];
                     [alert show];
                     REMBusinessErrorInfo *bizInfo=[[REMBusinessErrorInfo alloc]init];
                     bizInfo.code=@"clienterror";
@@ -204,7 +204,7 @@
                 else{
                     if ([error.code isEqualToString:@"1"]==YES) {
                         if (self.serverErrorLabel!=nil) {
-                            [self generateServerErrorLabel:NSLocalizedString(@"Common_ServerError", @"")];
+                            [self generateServerErrorLabel:REMIPadLocalizedString(@"Common_ServerError")];
                         }
                     }
                 
@@ -220,7 +220,7 @@
     if(errorCode.length>7){
         NSString *errorCode1= [errorCode substringFromIndex:7];
         errorCode1=[NSString stringWithFormat:@"Energy_%@",errorCode1];
-        NSString *showText= NSLocalizedString(errorCode1, @"");
+        NSString *showText= REMIPadLocalizedString(errorCode1);
         if ([errorCode1 isEqualToString:showText]==YES) {
             return nil;
         }

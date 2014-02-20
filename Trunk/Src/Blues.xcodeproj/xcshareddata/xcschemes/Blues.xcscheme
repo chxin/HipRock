@@ -29,11 +29,11 @@
       buildConfiguration = "Debug">
       <Testables>
          <TestableReference
-            skipped = "YES">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7A9B1E41177B3A8B00C282A8"
-               BuildableName = "BluesTests.octest"
+               BlueprintIdentifier = "7A02CE5F18B486D8009D1CF1"
+               BuildableName = "BluesTests.xctest"
                BlueprintName = "BluesTests"
                ReferencedContainer = "container:Blues.xcodeproj">
             </BuildableReference>

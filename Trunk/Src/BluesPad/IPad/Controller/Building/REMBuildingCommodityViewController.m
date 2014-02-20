@@ -14,6 +14,7 @@
 #import "REMBuildingCoverWidgetRelationModel.h"
 #import "REMBuildingCoverWidgetViewController.h"
 #import "REMBuildingWidgetChartViewController.h"
+#import "REMCommonHeaders.h"
 
 
 @interface REMBuildingCommodityViewController ()
@@ -94,7 +95,7 @@
        [model.targetValue.dataValue isGreaterThan:@(0)])
     {
         REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, self.rankingLabel.frame.origin.y, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
-        target.title=NSLocalizedString(@"Building_Target", @""); //@"目标值";
+        target.title=REMIPadLocalizedString(@"Building_Target"); //@"目标值";
         target.textWidth=400;
         target.titleFontSize=kBuildingCommodityTitleFontSize;
         target.titleMargin=kBuildingDetailInnerMargin;
@@ -152,17 +153,17 @@
         if (status == REMDataAccessFailed || status == REMDataAccessErrorMessage) {
             NSString *serverError;
             if (status == REMDataAccessFailed) {
-                serverError=NSLocalizedString(@"Common_ServerTimeout", @"");
+                serverError=REMIPadLocalizedString(@"Common_ServerTimeout");
             }
             else{
-                serverError=NSLocalizedString(@"Common_ServerError", @"");
+                serverError=REMIPadLocalizedString(@"Common_ServerError");
             }
             NSString *serverErrorSimple;
             if (status == REMDataAccessFailed) {
-                serverErrorSimple=NSLocalizedString(@"Common_ServerTimeoutSimple", @"");
+                serverErrorSimple=REMIPadLocalizedString(@"Common_ServerTimeoutSimple");
             }
             else{
-                serverErrorSimple=NSLocalizedString(@"Common_ServerErrorSimple", @"");
+                serverErrorSimple=REMIPadLocalizedString(@"Common_ServerErrorSimple");
             }
             [self.totalLabel setEmptyText:serverError];
             [self.carbonLabel setEmptyText:serverErrorSimple];
@@ -212,7 +213,7 @@
 
 - (void)initTotalValue
 {
-    NSString *title=NSLocalizedString(@"Building_ThisMonthEnergyUsage", @"");//本月用%@总量
+    NSString *title=REMIPadLocalizedString(@"Building_ThisMonthEnergyUsage");//本月用%@总量
     REMBuildingTitleLabelView *totalLabel=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, 0, 900, kBuildingCommodityTotalHeight)];
     totalLabel.textWidth=1000;
     totalLabel.title=[NSString stringWithFormat:title,self.commodityInfo.comment];
@@ -221,7 +222,7 @@
     totalLabel.leftMargin=0;
     totalLabel.valueFontSize=kBuildingCommodityTotalValueFontSize;
     totalLabel.uomFontSize=kBuildingCommodityTotalUomFontSize;
-    totalLabel.emptyText=NSLocalizedString(@"Building_LargeLabelNoData", @"");//@"暂无本月数据，请持续关注能耗变化";
+    totalLabel.emptyText=REMIPadLocalizedString(@"Building_LargeLabelNoData");//@"暂无本月数据，请持续关注能耗变化";
     totalLabel.emptyTextFontSize=29;
     totalLabel.emptyTextFont=@(kBuildingFontSCRegular);
     totalLabel.emptyTextMargin=28;
@@ -237,7 +238,7 @@
     
     REMBuildingTitleLabelView *carbon=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
     carbon.textWidth=300;
-    carbon.title=NSLocalizedString(@"Building_CarbonUsage", @""); //@"二氧化碳当量";
+    carbon.title=REMIPadLocalizedString(@"Building_CarbonUsage"); //@"二氧化碳当量";
     carbon.titleFontSize=kBuildingCommodityTitleFontSize;
     carbon.titleMargin=kBuildingDetailInnerMargin;
     carbon.leftMargin=0;
@@ -252,7 +253,7 @@
     self.carbonLabel=carbon;
     
     REMBuildingRankingView *ranking=[[REMBuildingRankingView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
-    ranking.title=NSLocalizedString(@"Building_CorporationRanking", @""); //@"集团排名";
+    ranking.title=REMIPadLocalizedString(@"Building_CorporationRanking"); //@"集团排名";
     ranking.textWidth=300;
     ranking.titleFontSize=kBuildingCommodityTitleFontSize;
     ranking.titleMargin=kBuildingDetailInnerMargin;
@@ -374,19 +375,19 @@
 {
     REMWidgetObject *widgetInfo=[self widgetInfoByPosition:position];
     if (self.buildingInfo.widgetRelationArray==nil || widgetInfo==nil || [widgetInfo.widgetId isLessThan:@(0)]==YES) {
-        NSString *title=NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @"");//单位面积逐月用%@
+        NSString *title=REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth");//单位面积逐月用%@
         if ([widgetInfo.widgetId isEqualToNumber:@(-1)]==YES) {
-            title = NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @"");//单位面积逐月用%@
+            title = REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth");//单位面积逐月用%@
         }
         else if([widgetInfo.widgetId isEqualToNumber:@(-2)]==YES){
-            title = NSLocalizedString(@"Building_EnergyUsageByCommodity", @"");//用%@趋势图
+            title = REMIPadLocalizedString(@"Building_EnergyUsageByCommodity");//用%@趋势图
         }
         else{
             if (position == REMBuildingCoverWidgetPositionFirst) {
-                title = NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @"");//单位面积逐月用%@
+                title = REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth");//单位面积逐月用%@
             }
             else{
-                title = NSLocalizedString(@"Building_EnergyUsageByCommodity", @"");//用%@趋势图
+                title = REMIPadLocalizedString(@"Building_EnergyUsageByCommodity");//用%@趋势图
             }
         }
         return [NSString stringWithFormat:title,self.commodityInfo.comment];

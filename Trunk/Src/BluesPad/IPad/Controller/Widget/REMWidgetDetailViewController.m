@@ -129,7 +129,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
         NSString *shareTel=self.widgetInfo.shareInfo.userTelephone;
         NSString *date=[REMTimeHelper formatTimeFullDay:self.widgetInfo.shareInfo.shareTime isChangeTo24Hour:NO];
         NSString *userTitle=self.widgetInfo.shareInfo.userTitleComponent;
-        shareTitle = [NSString stringWithFormat:NSLocalizedString(@"Widget_ShareTitle", @""),shareName,userTitle,date,shareTel];
+        shareTitle = [NSString stringWithFormat:REMIPadLocalizedString(@"Widget_ShareTitle"),shareName,userTitle,date,shareTel];
     }
     NSString *fullTitle=widgetTitle;
     if (shareTitle!=nil) {
@@ -214,11 +214,11 @@ const static CGFloat kWidgetShareTitleFontSize=14;
             }
         }
         if (foundFirst==NO) {
-            dic[@"firstName"]=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @""),commodity.comment];
+            dic[@"firstName"]=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth"),commodity.comment];
             dic[@"firstId"]=@(-1);
         }
         if (foundSecond==NO) {
-            dic[@"secondName"]=[NSString stringWithFormat:NSLocalizedString(@"Building_EnergyUsageByCommodity", @""),commodity.comment];
+            dic[@"secondName"]=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByCommodity"),commodity.comment];
             dic[@"secondId"]=@(-2);
         }
         [array addObject:dic];

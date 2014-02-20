@@ -41,7 +41,7 @@
     //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"relativeDateCell"];
     self.cellCount=2;
     [self.tableView setScrollEnabled:NO];
-    self.navigationController.navigationBar.backItem.title=NSLocalizedString(@"Common_Cancel", @""); //@"取消";
+    self.navigationController.navigationBar.backItem.title=REMIPadLocalizedString(@"Common_Cancel"); //@"取消";
 }
 
 
@@ -126,13 +126,13 @@
     if(indexPath.section==0){
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"datePickerCell"];
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.text= NSLocalizedString(@"Widget_TimePickerTime", @"");// @"时间";
+        cell.textLabel.text= REMIPadLocalizedString(@"Widget_TimePickerTime");// @"时间";
         cell.detailTextLabel.text=self.relativeDate;
     }
     else{
         if(indexPath.row==0){
             cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"datePickerCell"];
-            cell.textLabel.text=NSLocalizedString(@"Widget_TimePickerStart", @"");// @"起始";
+            cell.textLabel.text=REMIPadLocalizedString(@"Widget_TimePickerStart");// @"起始";
             NSString *text;
             text=[REMTimeHelper formatTimeFullHour:self.timeRange.startTime isChangeTo24Hour:NO];
             if(self.showHour==NO){
@@ -144,7 +144,7 @@
         else{
             if(self.cellCount==2){
                 cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"datePickerCell"];
-                cell.textLabel.text=NSLocalizedString(@"Widget_TimePickerEnd", @"");// @"终止";
+                cell.textLabel.text=REMIPadLocalizedString(@"Widget_TimePickerEnd");// @"终止";
                 NSString *text=[REMTimeHelper formatTimeFullHour:(NSDate *)self.timeRange.endTime isChangeTo24Hour:YES];
                 if(self.showHour==NO){
                     text=[REMTimeHelper formatTimeFullDay:self.timeRange.endTime isChangeTo24Hour:YES];
@@ -534,7 +534,7 @@
     
     if([startTime timeIntervalSinceDate:endTime]>=0){
         //开始日期必须早于结束日期。
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:NSLocalizedString(@"Widget_TimePickerError", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"Common_OK", @"") otherButtonTitles:nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:REMIPadLocalizedString(@"Widget_TimePickerError") delegate:nil cancelButtonTitle:REMIPadLocalizedString(@"Common_OK") otherButtonTitles:nil];
         [alert show];
         return;
     }
