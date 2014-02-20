@@ -201,7 +201,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
 
 - (void) showTimePicker{
     [self.timePickerButton setBackgroundColor:[UIColor clearColor]];
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main_IPad" bundle:nil];
     
     UINavigationController *nav=[storyboard instantiateViewControllerWithIdentifier:@"monthPickerNavigationController"];
     nav.navigationBar.translucent=NO;

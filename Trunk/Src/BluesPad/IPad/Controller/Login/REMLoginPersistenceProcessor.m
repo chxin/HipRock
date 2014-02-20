@@ -23,7 +23,7 @@
 }
 
 - (id)persistUserModel:(NSDictionary *)user{
-    
+    return nil;
 }
 
 @end

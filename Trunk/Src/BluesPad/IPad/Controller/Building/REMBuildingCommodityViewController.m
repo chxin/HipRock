@@ -501,7 +501,9 @@
 
 
 - (void)widgetRelationButtonClicked:(UIButton *)button{
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main_IPad" bundle:nil];
+    
+    
 
     UINavigationController *nav= [storyboard instantiateViewControllerWithIdentifier:@"buildingWidgetNavigation"];
     nav.navigationBar.translucent=NO;

@@ -228,7 +228,9 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 }
 
 - (void)pinButtonClicked:(UIButton *)button{
-    UIStoryboard *mainStoryboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    UIStoryboard *mainStoryboard= [UIStoryboard storyboardWithName:@"Main_IPad" bundle:nil];
+    
+    
     UINavigationController *nav= [mainStoryboard instantiateViewControllerWithIdentifier:@"widgetBuildingCoverNavigation"];
     nav.navigationBar.translucent=NO;
     REMWidgetBuildingCoverViewController *buildingCoverWidgetController=nav.childViewControllers[0];

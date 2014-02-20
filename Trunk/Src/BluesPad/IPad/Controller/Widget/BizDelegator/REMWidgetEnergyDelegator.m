@@ -277,7 +277,7 @@
 - (void) showTimePicker{
     [self.timePickerButton setBackgroundColor:[UIColor clearColor]];
 
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main_IPad" bundle:nil];
     UINavigationController *nav=[storyboard instantiateViewControllerWithIdentifier:@"datePickerNavigationController"];
     nav.navigationBar.translucent=NO;
     UIPopoverController *popoverController=[[UIPopoverController alloc]initWithContentViewController:nav];
