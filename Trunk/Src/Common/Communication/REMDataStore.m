@@ -16,6 +16,8 @@
 #import "REMAlertHelper.h"
 #import "REMApplicationContext.h"
 #import "REMBusinessErrorInfo.h"
+#import "REMAppDelegate.h"
+
 
 @class REMDataPersistenceProcessor;
 
@@ -145,6 +147,12 @@ static REMCacheStoreHolder *cacheStoreHolder;
 #pragma mark - private
 - (void)accessLocal:(REMDataAccessSuccessBlock)success
 {
+    if (self.persistenceProcessor!=nil) {
+       id data = [self.persistenceProcessor fetchData];
+        success(data);
+    }
+    
+    
     id cachedResult = nil;
     NSString *cacheKey = [REMServiceAgent buildParameterString:self.parameter];
     
@@ -213,21 +221,28 @@ static REMCacheStoreHolder *cacheStoreHolder;
 - (void)deleteManageObject:(NSManagedObject *)object
 {
     [self.managedObjectContext deleteObject:object];
+    [self persistManageObject];
+}
+
+- (void)persistManageObject{
+    NSError *error = nil;
+    [self.managedObjectContext save:&error];
 }
 
 -(id)fetchMangedObject:(NSString *)objectType{
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:objectType];
     //设置要检索哪种类型的实体对象
-    NSEntityDescription *entity = [NSEntityDescription entityForName:objectType inManagedObjectContext:self.managedObjectContext];
+    //NSEntityDescription *entity = [NSEntityDescription entityForName:objectType inManagedObjectContext:self.managedObjectContext];
     //设置请求实体
-    [request setEntity:entity];
+    //[request setEntity:entity];
     //    //指定对结果的排序方式
     //    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate"ascending:NO];
     //    NSArray *sortDescriptions = [[NSArray alloc]initWithObjects:sortDescriptor, nil];
     //    [request setSortDescriptors:sortDescriptions];
     //    [sortDescriptions release];
     //    [sortDescriptor release];
-    
+    //NSPredicate *pred =[NSPredicate predicateWithFormat:@"(1 = 1)"];
+    //[request setPredicate:pred];
     NSError *error = nil;
     //执行获取数据请求，返回数组
     NSMutableArray *mutableFetchResult = [[self.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
@@ -246,6 +261,10 @@ static REMCacheStoreHolder *cacheStoreHolder;
 
 -(NSManagedObjectModel *)managedObjectModel
 {
+    REMAppDelegate *app = [REMAppDelegate app];
+    
+    return app.managedObjectModel;
+    
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
@@ -255,29 +274,44 @@ static REMCacheStoreHolder *cacheStoreHolder;
     
     return _managedObjectModel;
 }
-
+// Returns the URL to the application's Documents directory.
+- (NSURL *)applicationDocumentsDirectory
+{
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
 -(NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
+    REMAppDelegate *app = [REMAppDelegate app];
+    
+    return app.persistentStoreCoordinator;
+    
     if (_persistentStoreCoordinator != nil) {
         return _persistentStoreCoordinator;
     }
     
     //得到数据库的路径
-    NSString *docs = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    //NSString *docs = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     //CoreData是建立在SQLite之上的，数据库名称需与Xcdatamodel文件同名
-    NSURL *storeUrl = [NSURL fileURLWithPath:[docs stringByAppendingPathComponent:@"BluesPad.sqlite"]];
+    NSURL *storeUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"AppData.BluesPad"];
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:[self managedObjectModel]];
     
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error]) {
-        NSLog(@"Error: %@,%@",error,[error userInfo]);
-    }
+    NSDictionary *options = @{ NSMigratePersistentStoresAutomaticallyOption : @YES, NSInferMappingModelAutomaticallyOption : @YES };
+    
+    
+    [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error];
+    //[_persistentStoreCoordinator setURL:storeUrl forPersistentStore:store];
     
     return _persistentStoreCoordinator;
 }
 
 -(NSManagedObjectContext *)managedObjectContext
 {
+    REMAppDelegate *app = [REMAppDelegate app];
+    
+    return app.managedObjectContext;
+    
+    
     if (_managedObjectContext != nil) {
         return _managedObjectContext;
     }
@@ -287,6 +321,8 @@ static REMCacheStoreHolder *cacheStoreHolder;
     if (coordinator != nil) {
         _managedObjectContext = [[NSManagedObjectContext alloc]init];
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+        //[_managedObjectContext setStalenessInterval:0];
+        //[_managedObjectContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
     }
     
     return _managedObjectContext;

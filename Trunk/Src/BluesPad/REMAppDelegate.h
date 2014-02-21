@@ -7,12 +7,16 @@
  --------------------------------------------------------------------------*///
 
 #import <UIKit/UIKit.h>
-
+#import <CoreData/CoreData.h>
 @interface REMAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 + (REMAppDelegate *) app;
+
+@property ( strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property ( strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property ( strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 
 @end

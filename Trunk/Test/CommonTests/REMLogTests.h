@@ -1,13 +1,13 @@
+////
+////  REMLogTests.h
+////  Blues
+////
+////  Created by TanTan on 6/27/13.
+////
+////
 //
-//  REMLogTests.h
-//  Blues
+//#import <SenTestingKit/SenTestingKit.h>
 //
-//  Created by TanTan on 6/27/13.
+//@interface REMLogTests : SenTestCase
 //
-//
-
-#import <SenTestingKit/SenTestingKit.h>
-
-@interface REMLogTests : SenTestCase
-
-@end
+//@end

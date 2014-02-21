@@ -35,7 +35,7 @@ static NSString *CellIdentifier = @"loginCustomerCell";
     
     self.navigationItem.title = REMIPadLocalizedString(@"Login_CustomerSelectionTitle");
     if (self.customerArray==nil) {
-        self.customerArray=(NSArray *)(REMAppCurrentUser.customers);
+        self.customerArray=(NSArray *)(REMAppCurrentManagedUser.customers.allObjects);
     }
 }
 
@@ -85,7 +85,7 @@ static NSString *CellIdentifier = @"loginCustomerCell";
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    REMCustomerModel *customer = self.customerArray[indexPath.row];
+    REMManagedCustomerModel *customer = self.customerArray[indexPath.row];
     cell.textLabel.text = customer.name;
     
     return cell;
@@ -97,7 +97,7 @@ static NSString *CellIdentifier = @"loginCustomerCell";
     
     [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     
-    REMCustomerModel *selectedCustomer=self.customerArray[indexPath.row];
+    REMManagedCustomerModel *selectedCustomer=self.customerArray[indexPath.row];
 //    
 //    for(REMCustomerModel *customer in self.customers){
 //        if([customer.name isEqualToString:cell.textLabel.text]){

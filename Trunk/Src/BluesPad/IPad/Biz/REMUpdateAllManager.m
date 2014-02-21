@@ -6,11 +6,11 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMUpdateAllManager.h"
-#import "REMCustomerModel.h"
-#import "REMUserModel.h"
 #import "REMBuildingOverallModel.h"
 #import "REMServiceAgent.h"
 #import "REMBuildingOverallModel.h"
+#import "REMManagedAdministratorModel.h"
+
 
 @interface REMUpdateAllManager()
 
@@ -32,10 +32,10 @@
 
 + (REMUpdateAllManager *)defaultManager{
     REMUpdateAllManager *manager =  [[REMUpdateAllManager alloc]init];
-    REMCustomerModel *customer=REMAppCurrentCustomer;
-    REMUserModel *user=REMAppCurrentUser;
-    manager.currentCustomerId=customer.customerId;
-    manager.currentUserId=@(user.userId);
+    REMManagedCustomerModel *customer=REMAppCurrentManagedCustomer;
+    REMManagedUserModel *user=REMAppCurrentManagedUser;
+    manager.currentCustomerId=customer.id;
+    manager.currentUserId=user.id;
     manager.canCancel=NO;
     manager.updateSource=REMCustomerUserConcurrencySourceEnter;
     REMApplicationContext *context=REMAppContext;
@@ -101,7 +101,8 @@ static NSString *customerUpdateAll=@"customerupdateall";
             if(newList!=nil && [newList isEqual:[NSNull null]]==NO){
                 customerList = [[NSMutableArray alloc]initWithCapacity:newList.count];
                 for (NSDictionary *obj in newList) {
-                    REMCustomerModel *model=[[REMCustomerModel alloc]initWithDictionary:obj];
+                    //REMCustomerModel *model=[[REMCustomerModel alloc]initWithDictionary:obj];
+                    REMManagedCustomerModel *model = [self buildManagedCustomerModel:obj];
                     [customerList addObject:model];
                 }
                 self.customerInfoArray=customerList;
@@ -166,6 +167,36 @@ static NSString *customerUpdateAll=@"customerupdateall";
     }
     
     
+}
+
+- (REMManagedCustomerModel *)buildManagedCustomerModel:(NSDictionary *)customer{
+    REMManagedCustomerModel *customerObject= [[REMManagedCustomerModel alloc]init];
+    
+    customerObject.id = customer[@"Id"];
+    customerObject.name=customer[@"Name"];
+    customerObject.code=customer[@"Code"];
+    customerObject.address=customer[@"Address"];
+    customerObject.email=customer[@"Email"];
+    customerObject.manager=customer[@"Manager"];
+    customerObject.telephone=customer[@"Telephone"];
+    customerObject.comment= NULL_TO_NIL(customer[@"Comment"]);
+    customerObject.timezoneId=customer[@"TimezoneId"];
+    customerObject.logoId=customer[@"logoId"];
+    long long time=[REMTimeHelper longLongFromJSONString:customer[@"StartTime"]];
+    customerObject.startTime= [NSDate dateWithTimeIntervalSince1970:time/1000 ];
+    
+    NSArray *administrators=customer[@"Administrators"];
+    
+    
+    for (NSDictionary *admin in administrators) {
+        REMManagedAdministratorModel *adminObject= [[REMManagedAdministratorModel alloc]init];
+        adminObject.realName=admin[@"RealName"];
+        adminObject.customer=customerObject;
+        [customerObject addAdministratorsObject:adminObject];
+    }
+    
+    return customerObject;
+
 }
 
 - (void)showAlertWithMessage:(NSString *)msg withTag:(NSInteger)tag{
@@ -236,23 +267,24 @@ static NSString *customerUpdateAll=@"customerupdateall";
     context.buildingInfoArrayStorageKey=storageKey;
     
     if (self.customerInfoArray!=nil) {
-        context.currentUser.customers=self.customerInfoArray;
-        [context.currentUser updateInnerDictionary];
-        [context.currentUser save];
+        //context.currentUser.customers=self.customerInfoArray;
+        
+        //[context.currentUser updateInnerDictionary];
+        //[context.currentUser save];
     }
     else{
-        self.customerInfoArray=context.currentUser.customers;
+        self.customerInfoArray=context.currentManagedUser.customers.allObjects;
     }
-    REMCustomerModel *current=REMAppCurrentCustomer;
+    REMManagedCustomerModel *current=REMAppCurrentManagedCustomer;
     NSNumber *newCustomerId = self.selectedCustomerId;
     if (newCustomerId==nil) {
         newCustomerId = self.currentCustomerId;
     }
-    for (REMCustomerModel *customer in self.customerInfoArray) {
-        if ([customer.customerId isEqualToNumber:newCustomerId]==YES && [customer isEqual:current]==NO) {
-            context.currentCustomer=customer;
-            [context.currentCustomer updateInnerDictionary];
-            [context.currentCustomer save];
+    for (REMManagedCustomerModel *customer in self.customerInfoArray) {
+        if ([customer.id isEqualToNumber:newCustomerId]==YES && [customer isEqual:current]==NO) {
+            context.currentManagedCustomer=customer;
+            //[context.currentCustomer updateInnerDictionary];
+            //[context.currentCustomer save];
         }
     }
     
@@ -263,6 +295,45 @@ static NSString *customerUpdateAll=@"customerupdateall";
     
     
 }
+
+- (void)persistCustomer{
+    REMDataStore *store = [[REMDataStore alloc]init];
+    REMManagedUserModel *user = [store fetchMangedObject:@"REMManagedUserModel"];
+    [user removeCustomers:user.customers];
+    
+    
+    for (int i=0; i<self.customerInfoArray.count; ++i) {
+        REMManagedCustomerModel *currentCustomer = self.customerInfoArray[i];
+        REMManagedCustomerModel *customerObject = [store newManagedObject:@"REMManagedCustomerModel"];
+        
+        customerObject.id = currentCustomer.id;
+        customerObject.name=currentCustomer.name;
+        customerObject.code=currentCustomer.code;
+        customerObject.address=currentCustomer.address;
+        customerObject.email=currentCustomer.email;
+        customerObject.manager=currentCustomer.manager;
+        customerObject.telephone=currentCustomer.telephone;
+        customerObject.comment= currentCustomer.comment;
+        customerObject.timezoneId=currentCustomer.timezoneId;
+        customerObject.logoId=currentCustomer.logoId;
+        
+        customerObject.startTime= currentCustomer.startTime;
+        customerObject.user = user;
+        NSArray *administrators=currentCustomer.administrators.allObjects;
+        
+        
+        for (REMManagedAdministratorModel *admin in administrators) {
+            REMManagedAdministratorModel *adminObject= [[REMManagedAdministratorModel alloc]init];
+            adminObject.realName=admin.realName;
+            adminObject.customer=customerObject;
+            [customerObject addAdministratorsObject:adminObject];
+        }
+    }
+    REMAppCurrentManagedUser = user;
+    [store persistManageObject];
+
+}
+
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -295,14 +366,14 @@ static NSString *customerUpdateAll=@"customerupdateall";
     }
 }
 
-- (void)customerSelectionTableView:(UITableView *)table didSelectCustomer:(REMCustomerModel *)customer
+- (void)customerSelectionTableView:(UITableView *)table didSelectCustomer:(REMManagedCustomerModel *)customer
 {
     if (self.lastStatus == REMCustomerUserConcurrencyStatusCurrentCustomerDeleted) {
-        self.currentCustomerId=customer.customerId;
+        self.currentCustomerId=customer.id;
         self.selectedCustomerId=nil;
     }
     else{
-        self.selectedCustomerId=customer.customerId;
+        self.selectedCustomerId=customer.id;
     }
     self.tableViewController=self.tableViewController;
     self.updateSource=REMCustomerUserConcurrencySourceSwitchCustomer;

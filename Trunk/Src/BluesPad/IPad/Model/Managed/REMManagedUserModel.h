@@ -2,17 +2,16 @@
 //  REMManagedUserModel.h
 //  Blues
 //
-//  Created by tantan on 2/19/14.
+//  Created by tantan on 2/20/14.
 //
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "REMManagedModel.h"
 
 @class REMManagedCustomerModel;
 
-@interface REMManagedUserModel : REMManagedModel
+@interface REMManagedUserModel : NSManagedObject
 
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSNumber * isDemo;
@@ -23,6 +22,10 @@
 @property (nonatomic, retain) NSNumber * title;
 @property (nonatomic, retain) NSString * userTypeName;
 @property (nonatomic, retain) NSNumber * version;
+@property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) NSString * code;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * comment;
 @property (nonatomic, retain) NSSet *customers;
 @end
 

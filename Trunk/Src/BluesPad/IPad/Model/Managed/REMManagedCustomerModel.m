@@ -2,7 +2,7 @@
 //  REMManagedCustomerModel.m
 //  Blues
 //
-//  Created by tantan on 2/19/14.
+//  Created by tantan on 2/20/14.
 //
 //
 
@@ -20,6 +20,10 @@
 @dynamic startTime;
 @dynamic telephone;
 @dynamic timezoneId;
+@dynamic id;
+@dynamic name;
+@dynamic code;
+@dynamic comment;
 @dynamic administrators;
 @dynamic user;
 

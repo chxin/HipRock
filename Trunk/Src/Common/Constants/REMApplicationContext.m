@@ -31,11 +31,25 @@ static BOOL CACHEMODE = NO;
 
 + (void)recover
 {
-    REMUserModel *storedUser = [REMUserModel getCached];
-    REMCustomerModel *storedCustomer = [REMCustomerModel getCached];
+//    REMUserModel *storedUser = [REMUserModel getCached];
+//    REMCustomerModel *storedCustomer = [REMCustomerModel getCached];
+//    
+//    [REMAppContext setCurrentUser:storedUser];
+//    [REMAppContext setCurrentCustomer:storedCustomer];
     
-    [REMAppContext setCurrentUser:storedUser];
-    [REMAppContext setCurrentCustomer:storedCustomer];
+    REMDataStore *store = [[REMDataStore alloc]init];
+    NSArray *users = [store fetchMangedObject:@"REMManagedUserModel"];
+    if (users.count>0) {
+        REMManagedUserModel *user = users[0];
+        for (REMManagedCustomerModel *customer in user.customers.allObjects) {
+            if ([customer.isCurrent boolValue]== YES) {
+                REMAppCurrentManagedCustomer = customer;
+                REMAppCurrentManagedUser = user;
+                break;
+            }
+        }
+    }
+    
 }
 
 + (void)cleanImage{
@@ -55,11 +69,14 @@ static BOOL CACHEMODE = NO;
         NSArray *array = [fileManager contentsOfDirectoryAtPath:documents error:&error];
         if (error==nil) {
             for (NSString *str in array) {
-                BOOL shouldRemoveImage =[str rangeOfString:buildingName].location==NSNotFound;
-                //shouldRemoveImage=YES;
-                if (shouldRemoveImage == YES) {
-                    [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/%@",documents,str] error:&error];
+                if ([str.pathExtension isEqualToString:@"png"] ==YES || [str.pathExtension isEqualToString:@"jpg"] == YES) {
+                    BOOL shouldRemoveImage =[str rangeOfString:buildingName].location==NSNotFound;
+                    //shouldRemoveImage=YES;
+                    if (shouldRemoveImage == YES) {
+                        [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/%@",documents,str] error:&error];
+                    }
                 }
+                
             }
             NSString *configuration = [[NSBundle mainBundle] pathForResource:@"Configuration" ofType:@"plist"];
             NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:configuration];

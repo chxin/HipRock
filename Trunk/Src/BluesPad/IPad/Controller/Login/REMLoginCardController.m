@@ -139,29 +139,30 @@
     
     NSDictionary *messageMap = REMDataAccessMessageMake(@"Login_NoNetwork",@"Login_NetworkFailed",@"Login_ServerError",@"");
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserValidate parameter:parameter accessCache:NO andMessageMap:messageMap];
-    //store.persistenceProcessor = [[REMLoginPersistenceProcessor alloc]init];
-    [store access:^(id data) {
-        if(REMIsNilOrNull(data)){ //TODO: empty response?
+    store.persistenceProcessor = [[REMLoginPersistenceProcessor alloc]init];
+    [store access:^(REMUserValidationModel *validationResult) {
+        if(REMIsNilOrNull(validationResult)){ //TODO: empty response?
             return ;
         }
         
-        REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
+//        REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
         
         if(validationResult.status == REMUserValidationSuccess) {
-            REMUserModel *user = validationResult.user;
-            [REMAppContext setCurrentUser:user];
+            //REMUserModel *user = validationResult.user;
+            [REMAppContext setCurrentManagedUser:validationResult.managedUser];
             
-            NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
-            
-            if(customers.count<=0){
+            //NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
+            NSArray *customers = validationResult.managedUser.customers.allObjects;
+            NSUInteger customerCount = validationResult.managedUser.customers.count;
+            if(customerCount<=0){
                 [REMAlertHelper alert:REMIPadLocalizedString(@"Login_NoCustomer")];
                 [self.loginCarouselController setLoginButtonStatusNormal];
                 
                 return;
             }
             
-            if(customers.count == 1){
-                [REMAppContext setCurrentCustomer:customers[0]];
+            if(customerCount == 1){
+                [REMAppContext setCurrentManagedCustomer:customers[0]];
                 [self.loginCarouselController loginSuccess];
             }
             else{

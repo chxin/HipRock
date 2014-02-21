@@ -8,7 +8,7 @@
 
 #import "REMJSONObject.h"
 #import "REMCommonHeaders.h"
-
+#import "REMManagedUserModel.h"
 typedef enum _REMUserValidationStatus : NSInteger{
     REMUserValidationSuccess = 1,
     REMUserValidationWrongName = 2,
@@ -19,6 +19,7 @@ typedef enum _REMUserValidationStatus : NSInteger{
 @interface REMUserValidationModel : REMJSONObject
 
 @property (nonatomic,strong) REMUserModel *user;
+@property (nonatomic,strong) REMManagedUserModel *managedUser;
 @property (nonatomic) REMUserValidationStatus status;
 
 @end

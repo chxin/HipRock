@@ -34,6 +34,7 @@
 - (id)newManagedObject:(NSString *)objectType;
 - (id)fetchMangedObject:(NSString *)objectType;
 - (void)deleteManageObject:(NSManagedObject *)object;
+-(void)persistManageObject;
 
 - (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter accessCache:(BOOL)accessCache andMessageMap:(NSDictionary *)messageMap;
 

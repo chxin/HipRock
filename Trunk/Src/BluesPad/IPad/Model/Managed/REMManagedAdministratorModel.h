@@ -2,17 +2,16 @@
 //  REMManagedAdministratorModel.h
 //  Blues
 //
-//  Created by tantan on 2/19/14.
+//  Created by tantan on 2/20/14.
 //
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "REMManagedModel.h"
 
 @class REMManagedCustomerModel;
 
-@interface REMManagedAdministratorModel : REMManagedModel
+@interface REMManagedAdministratorModel : NSManagedObject
 
 @property (nonatomic, retain) NSString * realName;
 @property (nonatomic, retain) NSNumber * userId;
