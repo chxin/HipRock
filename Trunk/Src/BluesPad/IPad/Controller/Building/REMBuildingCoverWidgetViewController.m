@@ -246,7 +246,7 @@
         return;
     }
     
-    REMCustomerModel *customer=REMAppCurrentCustomer;
+    REMManagedCustomerModel *customer=REMAppCurrentManagedCustomer;
     NSDictionary *modelDic=@{
                              @"DashboardId":model.dashboardId,
                              @"HierarchyId":model.buildingId,
@@ -263,7 +263,7 @@
     helper.mainNavigationController=(REMMainNavigationController *)self.commodityController.parentViewController.parentViewController.parentViewController.navigationController;
     helper.widgetName=widgetName;
     self.pinHelper=helper;
-    [helper pinToBuildingCover:@{@"relationList":@[newDic],@"buildingId":model.buildingId,@"customerId":customer.customerId} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
+    [helper pinToBuildingCover:@{@"relationList":@[newDic],@"buildingId":model.buildingId,@"customerId":customer.id} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
         if (status == REMPinToBuildingCoverStatusSuccess) {
             self.pinHelper=nil;
             [self.commodityController updateChartController];

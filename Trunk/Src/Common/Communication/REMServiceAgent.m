@@ -23,7 +23,7 @@
 #import "REMNetworkStatusIndicator.h"
 #import "REMDataStoreType.h"
 #import "REMApplicationContext.h"
-
+#import "REMManagedUserModel.h"
 
 @implementation REMServiceAgent
 
@@ -287,14 +287,14 @@ static int requestTimeout = 45; //(s)
 
 + (NSString *)getUserInfo
 {
-    NSString *original = [NSString stringWithFormat:@"%lld|%@|%lld",REMAppCurrentUser.userId,REMAppCurrentUser.name, REMAppCurrentUser.spId];
+    NSString *original = [NSString stringWithFormat:@"%lld|%@|%lld",[REMAppCurrentManagedUser.id longLongValue] ,REMAppCurrentManagedUser.name, [REMAppCurrentManagedUser.spId longLongValue]];
     
     NSData *encryptedData = [REMEncryptHelper AES256EncryptData:[original dataUsingEncoding:NSUTF8StringEncoding] withKey:@"41758bd9d7294737"];
     
     NSString *base64Encoded = [REMEncryptHelper encodeBase64Data:encryptedData];
     
-    //NSLog(@"%@",original);
-    //NSLog(@"%@",base64Encoded);
+    NSLog(@"%@",original);
+    NSLog(@"%@",base64Encoded);
     
     return base64Encoded;
 }

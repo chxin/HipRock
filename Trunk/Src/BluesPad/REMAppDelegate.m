@@ -179,7 +179,7 @@
          
          */
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+        
     }
     
     return _persistentStoreCoordinator;

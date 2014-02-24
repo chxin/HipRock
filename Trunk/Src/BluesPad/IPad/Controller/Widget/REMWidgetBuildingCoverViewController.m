@@ -200,12 +200,12 @@
         
     }
     self.isRequesting=YES;
-    REMCustomerModel *customer=REMAppCurrentCustomer;
+    REMManagedCustomerModel *customer=REMAppCurrentManagedCustomer;
     REMPinToBuildingCoverHelper *helper=[[REMPinToBuildingCoverHelper alloc]init];
     self.pinHelper=helper;
     helper.mainNavigationController=(REMMainNavigationController *)self.detailController.parentViewController.navigationController;
     helper.widgetName=self.detailController.widgetInfo.name;
-    [helper pinToBuildingCover:@{@"relationList":array,@"buildingId":self.buildingInfo.building.buildingId,@"customerId":customer.customerId} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
+    [helper pinToBuildingCover:@{@"relationList":array,@"buildingId":self.buildingInfo.building.buildingId,@"customerId":customer.id} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
         if (status == REMPinToBuildingCoverStatusSuccess) {
             self.pinHelper=nil;
             [self.detailController updateBuildingCover];

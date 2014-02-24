@@ -57,7 +57,7 @@ static BOOL CACHEMODE = NO;
     BOOL shouldCleanImage =context.appConfig.shouldCleanCache;
     //shouldCleanImage=YES;
     if(shouldCleanImage == YES){
-        NSString *currentUserName = REMAppCurrentUser.name;
+        NSString *currentUserName = REMAppCurrentManagedUser.name;
         
         NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         

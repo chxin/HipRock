@@ -15,8 +15,8 @@
 #import "REMManagedCustomerModel.h"
 
 #define REMAppContext [REMApplicationContext instance]
-#define REMAppCurrentUser REMAppContext.currentUser
-#define REMAppCurrentCustomer REMAppContext.currentCustomer
+//#define REMAppCurrentUser REMAppContext.currentUser
+//#define REMAppCurrentCustomer REMAppContext.currentCustomer
 #define REMAppCurrentManagedUser REMAppContext.currentManagedUser
 #define REMAppCurrentManagedCustomer REMAppContext.currentManagedCustomer
 #define REMAppCurrentLogo REMAppContext.currentCustomerLogo
@@ -24,8 +24,8 @@
 
 @interface REMApplicationContext : NSObject
 
-@property (nonatomic,strong) REMUserModel *currentUser;
-@property (nonatomic,strong) REMCustomerModel *currentCustomer;
+//@property (nonatomic,strong) REMUserModel *currentUser;
+//@property (nonatomic,strong) REMCustomerModel *currentCustomer;
 
 @property (nonatomic,strong) REMManagedUserModel *currentManagedUser;
 @property (nonatomic,strong) REMManagedCustomerModel *currentManagedCustomer;

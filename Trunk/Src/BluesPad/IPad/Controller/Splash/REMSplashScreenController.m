@@ -129,7 +129,7 @@
 
 -(BOOL)isAlreadyLogin
 {
-    return REMAppContext.currentUser!=nil && REMAppContext.currentCustomer!=nil && REMAppContext.currentUser.isDemo == NO;
+    return REMAppContext.currentManagedUser!=nil && REMAppContext.currentManagedCustomer!=nil && [REMAppContext.currentManagedUser.isDemo boolValue] == NO;
 }
 
 

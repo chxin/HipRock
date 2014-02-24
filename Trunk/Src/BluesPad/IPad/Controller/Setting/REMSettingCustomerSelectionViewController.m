@@ -54,8 +54,8 @@
         [self.settingController.navigationController popToRootViewControllerAnimated:YES];
         return;
     }
-    REMCustomerModel *customer= self.customerArray[self.currentRow];
-    if([customer.name isEqualToString:[REMApplicationContext instance].currentCustomer.name]==YES){
+    REMManagedCustomerModel *customer= self.customerArray[self.currentRow];
+    if([customer.name isEqualToString:[REMApplicationContext instance].currentManagedCustomer.name]==YES){
         [self.settingController.navigationController popToRootViewControllerAnimated:YES];
         return;
     }
@@ -66,7 +66,7 @@
         else{
             REMUpdateAllManager *manager=[REMUpdateAllManager defaultManager];
             manager.canCancel=YES;
-            manager.selectedCustomerId = customer.customerId;
+            manager.selectedCustomerId = customer.id;
             manager.tableViewController=self;
             manager.updateSource=REMCustomerUserConcurrencySourceSwitchCustomer;
             self.updateManager=manager;
@@ -202,7 +202,7 @@
     NSArray *customers= self.customerArray; //[REMApplicationContext instance].currentUser.customers;
     REMCustomerModel *model=customers[indexPath.row];
     cell.textLabel.text=model.name;
-    NSString *currentName=[REMApplicationContext instance].currentCustomer.name;
+    NSString *currentName=[REMApplicationContext instance].currentManagedCustomer.name;
     
     if([currentName isEqualToString:model.name]==YES && self.currentRow==NSNotFound){
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];

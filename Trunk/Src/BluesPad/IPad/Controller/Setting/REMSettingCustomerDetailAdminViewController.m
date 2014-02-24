@@ -10,7 +10,7 @@
 #import "REMApplicationContext.h"
 #import "REMAdministratorModel.h"
 #import "REMCustomerModel.h"
-
+#import "REMManagedAdministratorModel.h"
 @interface REMSettingCustomerDetailAdminViewController ()
 
 @end
@@ -54,7 +54,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return REMAppCurrentCustomer.administratorArray.count;
+    //return REMAppCurrentCustomer.administratorArray.count;
+    return REMAppCurrentManagedCustomer.administrators.count;
     
 }
 
@@ -66,7 +67,8 @@
     if(cell==nil){
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    REMAdministratorModel *model = REMAppCurrentCustomer.administratorArray[indexPath.row];
+    //REMAdministratorModel *model = REMAppCurrentCustomer.administratorArray[indexPath.row];
+    REMManagedAdministratorModel *model = REMAppCurrentManagedCustomer.administrators.allObjects[indexPath.row];
     cell.textLabel.text = model.realName;
     return cell;
 }

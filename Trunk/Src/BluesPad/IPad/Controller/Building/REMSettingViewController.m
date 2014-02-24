@@ -99,21 +99,21 @@
         if(indexPath.row==0){
             [[cell textLabel]setText:NSLocalizedString(@"Setting_UserName", @"")]; //显示名称
             
-            NSString *name=context.currentUser.realname;
+            NSString *name=context.currentManagedUser.realname;
             
             [cell.detailTextLabel setText:name];
         }
         else if(indexPath.row==1){
             [[cell textLabel]setText:NSLocalizedString(@"Setting_EMOPID", @"")];//能源管理开发平台ID
-            NSString *name1=context.currentUser.name;
-            if (context.currentUser.isDemo) {
+            NSString *name1=context.currentManagedUser.name;
+            if ([context.currentManagedUser.isDemo boolValue]) {
                 name1=@"Demo";
             }
             [cell.detailTextLabel setText:name1];
         }
         else if(indexPath.row==2){
             [[cell textLabel]setText:NSLocalizedString(@"Setting_CurrentCustomer", @"")];//当前客户
-            NSString *name=[REMApplicationContext instance].currentCustomer.name;
+            NSString *name=[REMApplicationContext instance].currentManagedCustomer.name;
             [cell.detailTextLabel setText:name];
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
@@ -291,7 +291,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"settingCustomerSelectionSegue"]==YES){
         REMSettingCustomerSelectionViewController *selectionVc= segue.destinationViewController;
-        selectionVc.customerArray=[REMApplicationContext instance].currentUser.customers;
+        selectionVc.customerArray=[REMApplicationContext instance].currentManagedUser.customers;
         //selectionVc.splashController=self.splashScreenController;
         //selectionVc.parentNavigationController=self.mainNavigationController;
         selectionVc.settingController=self;
