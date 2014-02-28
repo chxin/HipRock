@@ -265,7 +265,6 @@
 		7A39D64218B5A83100CC9D5D /* REMBuildingTrendChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0CB18B44CBB00A13464 /* REMBuildingTrendChartViewController.m */; };
 		7A39D64318B5A83100CC9D5D /* REMBuildingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0CD18B44CBB00A13464 /* REMBuildingViewController.m */; };
 		7A39D64418B5A83100CC9D5D /* REMBuildingWidgetChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0CF18B44CBB00A13464 /* REMBuildingWidgetChartViewController.m */; };
-		7A39D64518B5A83100CC9D5D /* REMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0D118B44CBB00A13464 /* REMSettingViewController.m */; };
 		7A39D64618B5A83100CC9D5D /* REMWidgetCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0D518B44CBB00A13464 /* REMWidgetCellDelegator.m */; };
 		7A39D64718B5A83100CC9D5D /* REMWidgetLabellingCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0D718B44CBB00A13464 /* REMWidgetLabellingCellDelegator.m */; };
 		7A39D64818B5A83100CC9D5D /* REMWidgetRankingCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0D918B44CBB00A13464 /* REMWidgetRankingCellDelegator.m */; };
@@ -416,7 +415,6 @@
 		7A63E1F818B44CBD00A13464 /* REMBuildingTrendChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0CB18B44CBB00A13464 /* REMBuildingTrendChartViewController.m */; };
 		7A63E1F918B44CBD00A13464 /* REMBuildingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0CD18B44CBB00A13464 /* REMBuildingViewController.m */; };
 		7A63E1FA18B44CBD00A13464 /* REMBuildingWidgetChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0CF18B44CBB00A13464 /* REMBuildingWidgetChartViewController.m */; };
-		7A63E1FB18B44CBD00A13464 /* REMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0D118B44CBB00A13464 /* REMSettingViewController.m */; };
 		7A63E1FC18B44CBD00A13464 /* REMWidgetCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0D518B44CBB00A13464 /* REMWidgetCellDelegator.m */; };
 		7A63E1FD18B44CBD00A13464 /* REMWidgetLabellingCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0D718B44CBB00A13464 /* REMWidgetLabellingCellDelegator.m */; };
 		7A63E1FE18B44CBD00A13464 /* REMWidgetRankingCellDelegator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0D918B44CBB00A13464 /* REMWidgetRankingCellDelegator.m */; };
@@ -585,6 +583,7 @@
 		7A9B1E24177B3A8B00C282A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E23177B3A8B00C282A8 /* CoreGraphics.framework */; };
 		7A9B1E2C177B3A8B00C282A8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B1E2B177B3A8B00C282A8 /* main.m */; };
 		7A9B1E30177B3A8B00C282A8 /* REMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B1E2F177B3A8B00C282A8 /* REMAppDelegate.m */; };
+		7AA6464A18C056050081E96E /* REMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA6464918C056050081E96E /* REMSettingViewController.m */; };
 		7AAA248A18B5AC9C002069EA /* REMChartStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF701CE1830880600B371EC /* REMChartStyle.m */; };
 		7AAA248B18B5AC9C002069EA /* REMTrendChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2962B3184C6B53000A119F /* REMTrendChartDataProcessor.m */; };
 		7AAA248C18B5AC9C002069EA /* REMChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDAACBB1803F6C2008BC9AF /* REMChartDataProcessor.m */; };
@@ -1077,8 +1076,6 @@
 		7A63E0CD18B44CBB00A13464 /* REMBuildingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingViewController.m; sourceTree = "<group>"; };
 		7A63E0CE18B44CBB00A13464 /* REMBuildingWidgetChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingWidgetChartViewController.h; sourceTree = "<group>"; };
 		7A63E0CF18B44CBB00A13464 /* REMBuildingWidgetChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingWidgetChartViewController.m; sourceTree = "<group>"; };
-		7A63E0D018B44CBB00A13464 /* REMSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingViewController.h; sourceTree = "<group>"; };
-		7A63E0D118B44CBB00A13464 /* REMSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingViewController.m; sourceTree = "<group>"; };
 		7A63E0D418B44CBB00A13464 /* REMWidgetCellDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetCellDelegator.h; sourceTree = "<group>"; };
 		7A63E0D518B44CBB00A13464 /* REMWidgetCellDelegator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetCellDelegator.m; sourceTree = "<group>"; };
 		7A63E0D618B44CBB00A13464 /* REMWidgetLabellingCellDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetLabellingCellDelegator.h; sourceTree = "<group>"; };
@@ -1387,6 +1384,8 @@
 		7A9B1E2E177B3A8B00C282A8 /* REMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = REMAppDelegate.h; sourceTree = "<group>"; };
 		7A9B1E2F177B3A8B00C282A8 /* REMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = REMAppDelegate.m; sourceTree = "<group>"; };
 		7A9B1E43177B3A8B00C282A8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		7AA6464818C056050081E96E /* REMSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingViewController.h; sourceTree = "<group>"; };
+		7AA6464918C056050081E96E /* REMSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingViewController.m; sourceTree = "<group>"; };
 		7AB34E4A177D2975003E235E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		7AB34E4B177D2975003E235E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		7AB34E4F177D2CE1003E235E /* REMServiceRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceRequestOperation.h; path = Common/Communication/REMServiceRequestOperation.h; sourceTree = "<group>"; };
@@ -2325,13 +2324,13 @@
 				7A63E0D218B44CBB00A13464 /* Dashboard */,
 				7A63E0E018B44CBB00A13464 /* Login */,
 				7A63E0EB18B44CBB00A13464 /* Map */,
+				7A63E0F618B44CBB00A13464 /* Setting */,
+				7A63E10118B44CBB00A13464 /* Splash */,
+				7A63E10418B44CBB00A13464 /* Widget */,
 				7A63E0F218B44CBB00A13464 /* REMControllerBase.h */,
 				7A63E0F318B44CBB00A13464 /* REMControllerBase.m */,
 				7A63E0F418B44CBB00A13464 /* REMMainNavigationController.h */,
 				7A63E0F518B44CBB00A13464 /* REMMainNavigationController.m */,
-				7A63E0F618B44CBB00A13464 /* Setting */,
-				7A63E10118B44CBB00A13464 /* Splash */,
-				7A63E10418B44CBB00A13464 /* Widget */,
 			);
 			name = Controller;
 			path = IPad/Controller;
@@ -2364,8 +2363,6 @@
 				7A63E0C918B44CBB00A13464 /* REMBuildingShareViewController.m */,
 				7A63E0CC18B44CBB00A13464 /* REMBuildingViewController.h */,
 				7A63E0CD18B44CBB00A13464 /* REMBuildingViewController.m */,
-				7A63E0D018B44CBB00A13464 /* REMSettingViewController.h */,
-				7A63E0D118B44CBB00A13464 /* REMSettingViewController.m */,
 				7A63E0C218B44CBB00A13464 /* REMBuildingCoverWidgetViewController.h */,
 				7A63E0C318B44CBB00A13464 /* REMBuildingCoverWidgetViewController.m */,
 			);
@@ -2432,6 +2429,8 @@
 		7A63E0F618B44CBB00A13464 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				7AA6464818C056050081E96E /* REMSettingViewController.h */,
+				7AA6464918C056050081E96E /* REMSettingViewController.m */,
 				7A63E0F718B44CBB00A13464 /* REMSettingAboutViewController.h */,
 				7A63E0F818B44CBB00A13464 /* REMSettingAboutViewController.m */,
 				7A63E0F918B44CBB00A13464 /* REMSettingCustomerDetailAdminViewController.h */,
@@ -3817,7 +3816,6 @@
 				7A39D64218B5A83100CC9D5D /* REMBuildingTrendChartViewController.m in Sources */,
 				7A39D64318B5A83100CC9D5D /* REMBuildingViewController.m in Sources */,
 				7A39D64418B5A83100CC9D5D /* REMBuildingWidgetChartViewController.m in Sources */,
-				7A39D64518B5A83100CC9D5D /* REMSettingViewController.m in Sources */,
 				7A39D64618B5A83100CC9D5D /* REMWidgetCellDelegator.m in Sources */,
 				7A39D64718B5A83100CC9D5D /* REMWidgetLabellingCellDelegator.m in Sources */,
 				7A39D64818B5A83100CC9D5D /* REMWidgetRankingCellDelegator.m in Sources */,
@@ -4093,6 +4091,7 @@
 				7A63E27418B44CBD00A13464 /* REMMarkerBubbleView.m in Sources */,
 				7A399E9E177D238F00F0EB9F /* UIImageView+AFNetworking.m in Sources */,
 				7A399E9B177D238F00F0EB9F /* AFPropertyListRequestOperation.m in Sources */,
+				7AA6464A18C056050081E96E /* REMSettingViewController.m in Sources */,
 				7A399E9C177D238F00F0EB9F /* AFURLConnectionOperation.m in Sources */,
 				7A63E25D18B44CBD00A13464 /* REMInsetsTextField.m in Sources */,
 				7A399E9D177D238F00F0EB9F /* AFXMLRequestOperation.m in Sources */,
@@ -4173,7 +4172,6 @@
 				7A63E22018B44CBD00A13464 /* REMAverageUsageDataModel.m in Sources */,
 				7A63E20618B44CBD00A13464 /* REMTrialCardController.m in Sources */,
 				EF03DC261841FA2F004B9EFD /* DCPieSeries.m in Sources */,
-				7A63E1FB18B44CBD00A13464 /* REMSettingViewController.m in Sources */,
 				7A63E1F718B44CBD00A13464 /* REMBuildingShareViewController.m in Sources */,
 				7A63E20F18B44CBD00A13464 /* REMSettingCustomerDetailViewController.m in Sources */,
 				7A63E1FD18B44CBD00A13464 /* REMWidgetLabellingCellDelegator.m in Sources */,
