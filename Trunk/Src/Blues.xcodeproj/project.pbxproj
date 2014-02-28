@@ -2339,6 +2339,10 @@
 		7A63E0B518B44CBA00A13464 /* Building */ = {
 			isa = PBXGroup;
 			children = (
+				7A63E0CC18B44CBB00A13464 /* REMBuildingViewController.h */,
+				7A63E0CD18B44CBB00A13464 /* REMBuildingViewController.m */,
+				7A63E0C618B44CBB00A13464 /* REMBuildingImageViewController.h */,
+				7A63E0C718B44CBB00A13464 /* REMBuildingImageViewController.m */,
 				7A63E0BC18B44CBB00A13464 /* REMBuildingChartBaseViewController.h */,
 				7A63E0BD18B44CBB00A13464 /* REMBuildingChartBaseViewController.m */,
 				7A63E0B618B44CBA00A13464 /* REMBuildingAirQualityChartViewController.h */,
@@ -2357,12 +2361,8 @@
 				7A63E0B918B44CBA00A13464 /* REMBuildingAirQualityViewController.m */,
 				7A63E0C418B44CBB00A13464 /* REMBuildingDataViewController.h */,
 				7A63E0C518B44CBB00A13464 /* REMBuildingDataViewController.m */,
-				7A63E0C618B44CBB00A13464 /* REMBuildingImageViewController.h */,
-				7A63E0C718B44CBB00A13464 /* REMBuildingImageViewController.m */,
 				7A63E0C818B44CBB00A13464 /* REMBuildingShareViewController.h */,
 				7A63E0C918B44CBB00A13464 /* REMBuildingShareViewController.m */,
-				7A63E0CC18B44CBB00A13464 /* REMBuildingViewController.h */,
-				7A63E0CD18B44CBB00A13464 /* REMBuildingViewController.m */,
 				7A63E0C218B44CBB00A13464 /* REMBuildingCoverWidgetViewController.h */,
 				7A63E0C318B44CBB00A13464 /* REMBuildingCoverWidgetViewController.m */,
 			);
