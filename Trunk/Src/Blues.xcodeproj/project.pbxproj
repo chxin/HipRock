@@ -380,6 +380,7 @@
 		7A47F3A118482C1B007EE37B /* JumpLogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39918482C1B007EE37B /* JumpLogin@2x.png */; };
 		7A47F3A418482C1B007EE37B /* JumpTrial.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39C18482C1B007EE37B /* JumpTrial.png */; };
 		7A47F3A518482C1B007EE37B /* JumpTrial@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39D18482C1B007EE37B /* JumpTrial@2x.png */; };
+		7A4F86FB18C45FC700843304 /* REMServiceSessionAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F86FA18C45FC700843304 /* REMServiceSessionAgent.m */; };
 		7A58F24A1839A5650071DE7A /* mail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2411839A5650071DE7A /* mail.jpg */; };
 		7A58F24B1839A5650071DE7A /* Propaganda_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2421839A5650071DE7A /* Propaganda_1.jpg */; };
 		7A58F24C1839A5650071DE7A /* Propaganda_1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2431839A5650071DE7A /* Propaganda_1@2x.jpg */; };
@@ -1014,6 +1015,8 @@
 		7A47F39918482C1B007EE37B /* JumpLogin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin@2x.png"; sourceTree = "<group>"; };
 		7A47F39C18482C1B007EE37B /* JumpTrial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JumpTrial.png; sourceTree = "<group>"; };
 		7A47F39D18482C1B007EE37B /* JumpTrial@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpTrial@2x.png"; sourceTree = "<group>"; };
+		7A4F86F918C45FC700843304 /* REMServiceSessionAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceSessionAgent.h; path = Common/Communication/REMServiceSessionAgent.h; sourceTree = "<group>"; };
+		7A4F86FA18C45FC700843304 /* REMServiceSessionAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceSessionAgent.m; path = Common/Communication/REMServiceSessionAgent.m; sourceTree = "<group>"; };
 		7A58F2411839A5650071DE7A /* mail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mail.jpg; sourceTree = "<group>"; };
 		7A58F2421839A5650071DE7A /* Propaganda_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Propaganda_1.jpg; sourceTree = "<group>"; };
 		7A58F2431839A5650071DE7A /* Propaganda_1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Propaganda_1@2x.jpg"; sourceTree = "<group>"; };
@@ -2204,6 +2207,8 @@
 				7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */,
 				B49C42FE18B34DB900C3CEFE /* REMDataPersistenceProcessor.h */,
 				B49C42FF18B34DB900C3CEFE /* REMDataPersistenceProcessor.m */,
+				7A4F86F918C45FC700843304 /* REMServiceSessionAgent.h */,
+				7A4F86FA18C45FC700843304 /* REMServiceSessionAgent.m */,
 			);
 			name = Communication;
 			sourceTree = "<group>";
@@ -4264,6 +4269,7 @@
 				7A63E20218B44CBD00A13464 /* REMLoginCardController.m in Sources */,
 				7A63E26C18B44CBD00A13464 /* REMDashboardCellViewCell.m in Sources */,
 				7A63E25F18B44CBD00A13464 /* REMNumberLabel.m in Sources */,
+				7A4F86FB18C45FC700843304 /* REMServiceSessionAgent.m in Sources */,
 				7A0288F917C20CC500709111 /* NSDictionary+Json.m in Sources */,
 				7A0288FA17C20CC500709111 /* PathHelper.m in Sources */,
 				7A63E27618B44CBD00A13464 /* REMMapGallerySegue.m in Sources */,

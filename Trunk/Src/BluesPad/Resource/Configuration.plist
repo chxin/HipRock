@@ -10,6 +10,10 @@
 		<dict>
 			<key>url</key>
 			<string>http://stg.energymost.com/</string>
+			<key>timeout</key>
+			<string>90</string>
+			<key>logRequest</key>
+			<integer>2</integer>
 			<key>debug-user</key>
 			<string>SchneiderElectricChina|P@ssw0rdChina</string>
 		</dict>
@@ -17,6 +21,10 @@
 		<dict>
 			<key>url</key>
 			<string>http://10.177.0.35/Mobile/</string>
+			<key>timeout</key>
+			<string>90</string>
+			<key>logRequest</key>
+			<integer>2</integer>
 			<key>debug-user</key>
 			<string>SchneiderElectricChina|P@ssw0rd</string>
 		</dict>
@@ -26,11 +34,19 @@
 			<string>http://112.124.56.137/v1.5.0.15/Mobile/MobileApiHost/</string>
 			<key>debug-user</key>
 			<string>SchneiderElectricChina|P@ssw0rdChina</string>
+			<key>timeout</key>
+			<string>45</string>
+			<key>logRequest</key>
+			<integer>1</integer>
 		</dict>
 		<key>production</key>
 		<dict>
 			<key>url</key>
 			<string>http://emopmobile.energymost.com/</string>
+			<key>timeout</key>
+			<string>45</string>
+			<key>logRequest</key>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>CurrentDataSource</key>

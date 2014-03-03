@@ -51,4 +51,6 @@ typedef enum _REMCommodity : int{
 
 #define REMDataAccessMessageMake(noconn,fail,error,cancel) @{@(REMDataAccessNoConnection):REMIPadLocalizedString(noconn), @(REMDataAccessFailed):REMIPadLocalizedString(fail),@(REMDataAccessErrorMessage):REMIPadLocalizedString(error), @(REMDataAccessCanceled):REMIPadLocalizedString(cancel)};
 
+#define REMSecurityTokenKey @"41758bd9d7294737"
+
 #endif

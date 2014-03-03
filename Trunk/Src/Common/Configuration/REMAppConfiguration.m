@@ -6,6 +6,7 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMAppConfiguration.h"
+#import "REMApplicationContext.h"
 
 
 @implementation REMAppConfiguration
@@ -43,6 +44,15 @@ const static NSString *BUILDOPTION = @"Release";
     NSString *currentDataSourceKey = [self.dictionary[@"CurrentDataSource"] objectForKey:BUILDOPTION];
     
     self.currentDataSource = self.dataSources[currentDataSourceKey];
+}
+
+-(NSInteger)getRequestTimeout
+{
+    return [REMAppConfig.currentDataSource[@"timeout"] integerValue];;
+}
+-(NSInteger)getRequestLogMode
+{
+    return [REMAppConfig.currentDataSource[@"logRequest"] integerValue];
 }
 
 @end
