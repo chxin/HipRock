@@ -28,6 +28,7 @@ class DailyBuild:
 		build['type'] = 1
 		build['tags'] = buildnumber
 		build['branch'] = 'dev'
+		build['appname'] = 'Blues'
 
 		buildid = model.create_build(build)
 
@@ -50,6 +51,7 @@ class InternalRelease:
 		build['type'] = 2
 		build['tags'] = parameters['version']
 		build['branch'] = parameters['branch']
+		build['appname'] = 'Blues'
 
 		if len(model.get_ir_build_version(parameters['version']).list()) > 0:
 			return render.makeerror('Version '+parameters['version']+' already exists!')
@@ -81,6 +83,7 @@ class Release:
 		build['type'] = 3
 		build['tags'] = ir.version
 		build['branch'] = ir.branch
+		build['appname'] = ir.appname
 
 		buildid = model.create_build(build)
 

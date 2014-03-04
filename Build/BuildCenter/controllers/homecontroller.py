@@ -16,19 +16,12 @@ class Home:
 		ir=model.get_latest_ir()
 		release=model.get_latest_release()
 
-		process.process_model(db)
-		process.process_model(ir)
-		process.process_model(release)
-
 		return render.index(release,ir,db)
 
 class DailyBuild:
 	def GET(self):
 		latest = model.get_top_db(False)
 		builds = model.get_top_dbs()
-
-		process.process_model(latest)
-		process.process_models(builds)
 
 		return render.dailybuild(latest,builds)
 
