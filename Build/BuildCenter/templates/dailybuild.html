@@ -17,7 +17,7 @@ $var title: Daily Build
       $elif latest.status==0:
         <a class="btn btn-lg btn-default">Build in progress</a>
       $else:
-        <a class="btn btn-lg btn-success" href="itms-services://?action=download-manifest&url=$(archive)$(latest.path)BluesPad.plist">Install</a>
+        <a class="btn btn-lg btn-success" href="itms-services://?action=download-manifest&url=$(archive)$(latest.path)$(latest.appname).plist">Install</a>
     </p>
   </div>
 
@@ -35,7 +35,7 @@ $var title: Daily Build
             $elif build.status==0:
               <a class="btn btn-sm btn-default">Build in progress</a>
             $else:
-              <a class="btn btn-sm btn-success" href="itms-services://?action=download-manifest&url=$(archive)$(build.path)BluesPad.plist">Install</a>
+              <a class="btn btn-sm btn-success" href="itms-services://?action=download-manifest&url=$(archive)$(build.path)$(build.appname).plist">Install</a>
           </p>
         </div>
 
