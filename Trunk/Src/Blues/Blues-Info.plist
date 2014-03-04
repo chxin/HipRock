@@ -1,15 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
-	<string>&#20113;&#33021;&#25928;</string>
+	<string>云能效</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
-	<dict />
+	<dict/>
 	<key>CFBundleIcons~ipad</key>
-	<dict />
+	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>cn.com.schneider-electric.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -25,15 +27,15 @@
 	<key>CFBundleVersion</key>
 	<string>164</string>
 	<key>LSRequiresIPhoneOS</key>
-	<true />
+	<true/>
 	<key>UIApplicationExitsOnSuspend</key>
-	<false />
+	<false/>
 	<key>UIMainStoryboardFile</key>
 	<string>Main_IPhone</string>
 	<key>UIMainStoryboardFile~ipad</key>
 	<string>Main_IPad</string>
 	<key>UIPrerenderedIcon</key>
-	<true />
+	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -51,6 +53,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<true />
+	<true/>
 </dict>
 </plist>

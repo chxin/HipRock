@@ -3025,7 +3025,6 @@
 				7A9B1E2E177B3A8B00C282A8 /* REMAppDelegate.h */,
 				7A9B1E2F177B3A8B00C282A8 /* REMAppDelegate.m */,
 			);
-			name = Blues;
 			path = Blues;
 			sourceTree = "<group>";
 		};
