@@ -3026,7 +3026,7 @@
 				7A9B1E2F177B3A8B00C282A8 /* REMAppDelegate.m */,
 			);
 			name = Blues;
-			path = BluesPad;
+			path = Blues;
 			sourceTree = "<group>";
 		};
 		7ABD828B185AD71B00A2AC06 /* Configuration */ = {
@@ -3500,7 +3500,7 @@
 			dependencies = (
 			);
 			name = Blues;
-			productName = BluesPad;
+			productName = Blues;
 			productReference = 7A9B1E1C177B3A8B00C282A8 /* Blues.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -4580,7 +4580,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BluesPad/Blues-Prefix.pch";
+				GCC_PREFIX_HEADER = "Blues/Blues-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -4589,7 +4589,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/BluesPad/Blues-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Blues/Blues-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4635,11 +4635,11 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BluesPad/Blues-Prefix.pch";
+				GCC_PREFIX_HEADER = "Blues/Blues-Prefix.pch";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/BluesPad/Blues-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Blues/Blues-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4695,11 +4695,11 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BluesPad/Blues-Prefix.pch";
+				GCC_PREFIX_HEADER = "Blues/Blues-Prefix.pch";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/BluesPad/Blues-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Blues/Blues-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
