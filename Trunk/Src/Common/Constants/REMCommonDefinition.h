@@ -36,6 +36,8 @@ typedef enum _REMCommodity : int{
 
 #define REMISIOS7 REMOSGreaterThan(@"7.0")
 
+#define REMCurrentDevice ([UIDevice currentDevice])
+
 #define REMUpdateStatusBarAppearenceForIOS7 if(REMISIOS7){ [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)]; }
 
 #define REMCommodities @{@(0):@"其他",@(1):@"电",@(2):@"自来水",@(3):@"天然气",@(4):@"软水",@(5):@"汽油",@(6):@"低压蒸汽",@(7):@"柴油",@(8):@"热量",@(9):@"冷量",@(10):@"煤",@(11):@"煤油",@(12):@"空气"}

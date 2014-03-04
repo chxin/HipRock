@@ -11,14 +11,13 @@
 #import "REMApplicationContext.h"
 #import "REMEncryptHelper.h"
 #import "REMCommonDefinition.h"
+#import "Reachability.h"
 
 @implementation REMServiceSessionAgent
 
 #define kREMCommMaxQueueWifi 16
 #define kREMCommMaxQueue3G 3
 
-#define REMCurrentDevice ([UIDevice currentDevice])
-#define REMBluesUserAgent ([NSString stringWithFormat:@"Blues/1.0(PS;%@;%@;%@;%@;%@;)", [[REMCurrentDevice identifierForVendor] UUIDString],[REMCurrentDevice localizedModel],[REMCurrentDevice systemName],[REMCurrentDevice systemVersion],[REMCurrentDevice model]])
 
 static NSURLSessionConfiguration *sessionConfiguration = nil;
 static NSOperationQueue *queue = nil;
@@ -26,9 +25,18 @@ static int kMaxQueueLength = kREMCommMaxQueueWifi;
 
 + (void) call: (REMServiceMeta *) service withBody:(id)body mask:(UIView *) maskContainer group:(NSString *)groupName success:(REMDataAccessSuccessBlock)success error:(REMDataAccessErrorBlock)error progress:(REMDataAccessProgressBlock)progress
 {
-    NSURLSession *session = [REMServiceSessionAgent getSession];
     
+    [REMServiceSessionAgent updateQueueLength];
+    
+    
+    
+    
+    
+    NSURLSession *session = [REMServiceSessionAgent getSession];
     NSURLRequest *request = [REMServiceSessionAgent buildRequestWithUrl:service.url andBody:body];
+    
+    
+    
     
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         ;
@@ -58,15 +66,7 @@ static int kMaxQueueLength = kREMCommMaxQueueWifi;
         sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
         [sessionConfiguration setAllowsCellularAccess:YES];
         [sessionConfiguration setTimeoutIntervalForRequest:REMAppConfig.requestTimeout];
-        
-        NSDictionary *additionalHeaders = @{@"Accept": @"application/json",
-                                            @"accept-encoding": @"gzip,deflate,sdch",
-                                            @"User-Agent": REMBluesUserAgent,
-                                            @"Blues-Version": [NSString stringWithUTF8String:[REMApplicationInfo getVersion]],
-                                            @"Blues-User": [REMEncryptHelper base64AES256EncryptString:[NSString stringWithFormat:@"%lld|%@|%lld",REMAppCurrentUser.userId,REMAppCurrentUser.name, REMAppCurrentUser.spId] withKey:REMSecurityTokenKey],
-                                            };
-        
-        [sessionConfiguration setHTTPAdditionalHeaders:additionalHeaders];
+        [sessionConfiguration setHTTPAdditionalHeaders:[REMServiceSessionAgent getHeaders]];
     }
     
     return [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:nil delegateQueue:[REMServiceSessionAgent getQueue]];
@@ -80,6 +80,48 @@ static int kMaxQueueLength = kREMCommMaxQueueWifi;
     }
     
     return queue;
+}
+
++ (NSDictionary *)getHeaders
+{
+    NSString *version = [NSString stringWithUTF8String:[REMApplicationInfo getVersion]];
+    
+    NSString *userAgent = [NSString stringWithFormat:@"Blues/%@(PS;%@;%@;%@;%@;%@;)", version, [[REMCurrentDevice identifierForVendor] UUIDString],[REMCurrentDevice localizedModel],[REMCurrentDevice systemName],[REMCurrentDevice systemVersion],[REMCurrentDevice model]];
+    
+    NSString *token = [REMEncryptHelper base64AES256EncryptString:[NSString stringWithFormat:@"%lld|%@|%lld",REMAppCurrentUser.userId,REMAppCurrentUser.name, REMAppCurrentUser.spId] withKey:REMSecurityTokenKey];
+    
+    NSDictionary *headers = @{@"Accept": @"application/json",
+                              @"accept-encoding": @"gzip,deflate,sdch",
+                              @"User-Agent": userAgent,
+                              @"Blues-Version": version,
+                              @"Blues-User": token,
+                              };
+    return headers;
+}
+
++ (BOOL)updateQueueLength
+{
+    
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    
+    NetworkStatus currentNetworkStatus = [reachability currentReachabilityStatus];
+    switch (currentNetworkStatus)
+    {
+        case NotReachable:
+            //[REMAlertHelper alert:@"无法获取最新能源数据" withTitle:@"无可用网络"];
+            kMaxQueueLength = 0;
+            return NO;
+        case ReachableViaWiFi:
+            kMaxQueueLength = kREMCommMaxQueueWifi;
+            break;
+        case ReachableViaWWAN:
+            kMaxQueueLength = kREMCommMaxQueue3G;
+            break;
+            
+        default:
+            break;
+    }
+    return YES;
 }
 
 @end

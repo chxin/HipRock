@@ -11,3 +11,9 @@
 @interface REMServiceSessionAgent : NSObject
 
 @end
+
+@interface REMURLSession : NSURLSession
+
+@property (nonatomic,strong) NSString *group;
+
+@end
