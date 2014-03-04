@@ -47,6 +47,7 @@ codesign -f -s "iPhone Distribution: Schneider Electric (China) Investment Co., 
 python ${makedir}updatepackageurl.py ${targetfolder}/Blues.plist ${archiveurl}/Release/$version 8 
 
 #package
+#test
 
 make --makefile=makefile --directory=$makedir xcpackage apppath=$targetfolder/Blues.app ipapath=$targetfolder/Blues.ipa
 
