@@ -54,7 +54,7 @@ def get_release_version_groups():
 
 
 def create_build(build):
-	return db.insert('Build', description=build['description'],version=build['version'],path=build['path'],type=build['type'],tags=build['tags'],branch=build['branch'])
+	return db.insert('Build', description=build['description'],version=build['version'],path=build['path'],type=build['type'],tags=build['tags'],branch=build['branch'],appname=build['appname'])
  
 def update_status_success(id):
 	return db.update('Build', where='id='+str(id), status='1')
