@@ -23,6 +23,7 @@
 #import "REMImages.h"
 #import "REMBlurredMapView.h"
 #import "REMUpdateAllManager.h"
+#import "REMManagedBuildingModel.h"
 
 @interface REMMapViewController ()
 
@@ -148,30 +149,29 @@
 {
     [self.mapView clear];
     
-    NSArray *buildings = [self.buildingInfoArray sortedArrayUsingComparator:^NSComparisonResult(REMBuildingOverallModel *b1, REMBuildingOverallModel *b2) {
-        return b1.building.latitude > b2.building.latitude ? NSOrderedAscending : NSOrderedDescending;
+    NSArray *buildings = [self.buildingInfoArray sortedArrayUsingComparator:^NSComparisonResult(REMManagedBuildingModel *b1, REMManagedBuildingModel *b2) {
+        return [b1.latitude doubleValue] > [b2.latitude doubleValue] ? NSOrderedAscending : NSOrderedDescending;
     }];
     
     self.markers = [[NSMutableArray alloc] init];
     
     for(int i=0; i<buildings.count; i++){
-        REMBuildingOverallModel *buildingInfo = buildings[i];
-        if(buildingInfo == nil || buildingInfo.building== nil)
-            continue;
-        
-        REMBuildingModel *building = buildingInfo.building;
+//        REMBuildingOverallModel *buildingInfo = buildings[i];
+//        if(buildingInfo == nil || buildingInfo.building== nil)
+//            continue;
+        REMManagedBuildingModel *building = buildings[i];
         
         GMSMarker *marker = [[GMSMarker alloc] init];
-        marker.position = CLLocationCoordinate2DMake(building.latitude, building.longitude);
-        marker.userData = buildingInfo;
+        marker.position = CLLocationCoordinate2DMake([building.latitude doubleValue], [building.longitude doubleValue]);
+        marker.userData = building;
         marker.title = building.name;
         marker.map = self.mapView;
         marker.flat = NO;
         marker.zIndex = i;
-        marker.icon = [self getMarkerIcon:buildingInfo forMarkerState:UIControlStateNormal];
+        marker.icon = [self getMarkerIcon:building forMarkerState:UIControlStateNormal];
         marker.appearAnimation = kGMSMarkerAnimationPop;
-        
-        if([buildingInfo.building.buildingId isEqualToNumber:[self.buildingInfoArray[0] building].buildingId])
+        REMManagedBuildingModel *firstBuilding =self.buildingInfoArray[0];
+        if([building.id isEqualToNumber:firstBuilding.id])
            [self selectMarker:marker];
         
         [self.markers addObject:marker];
@@ -215,8 +215,9 @@
     }
     
     if(self.buildingInfoArray.count == 1){
-        REMBuildingModel *building = [self.buildingInfoArray[0] building];
-        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:building.latitude longitude:building.longitude zoom:12];
+        //REMBuildingModel *building = [self.buildingInfoArray[0] building];
+        REMManagedBuildingModel *building = self.buildingInfoArray[0];
+        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[building.latitude doubleValue]  longitude:[building.longitude doubleValue] zoom:12];
         
         [self.mapView animateToCameraPosition:camera];
     }
@@ -236,16 +237,16 @@
 {
     //get the max long,lant and min long,lant
     double maxLongtitude = INT64_MIN, minLongtitude=INT64_MAX, maxLatitude=INT64_MIN, minLatitude=INT64_MAX;
-    for(REMBuildingOverallModel *buildingInfo in self.buildingInfoArray){
-        if(buildingInfo == nil || buildingInfo.building== nil)
-            continue;
+    for(REMManagedBuildingModel *building in self.buildingInfoArray){
+//        if(buildingInfo == nil || buildingInfo.building== nil)
+//            continue;
         
-        REMBuildingModel *building = buildingInfo.building;
+//        REMBuildingModel *building = buildingInfo.building;
         
-        maxLongtitude = MAX(maxLongtitude, building.longitude);
-        minLongtitude = MIN(minLongtitude, building.longitude);
-        maxLatitude = MAX(maxLatitude, building.latitude);
-        minLatitude = MIN(minLatitude,  building.latitude);
+        maxLongtitude = MAX(maxLongtitude, [building.longitude doubleValue]);
+        minLongtitude = MIN(minLongtitude, [building.longitude doubleValue]);
+        maxLatitude = MAX(maxLatitude, [building.latitude doubleValue]);
+        minLatitude = MIN(minLatitude,  [building.latitude doubleValue]);
     }
     
     BOOL good = maxLongtitude != INT64_MIN && minLongtitude!=INT64_MAX && maxLatitude!=INT64_MIN && minLatitude!=INT64_MAX;
@@ -335,7 +336,9 @@
 //    }
     
     for (GMSMarker *marker in self.markers) {
-        if([[marker.userData building].buildingId isEqualToNumber:[self.buildingInfoArray[currentBuildingIndex] building].buildingId]){
+        REMManagedBuildingModel *markBuilding =marker.userData;
+        REMManagedBuildingModel *currentBuilding =self.buildingInfoArray[currentBuildingIndex];
+        if([markBuilding.id isEqualToNumber:currentBuilding.id]){
             self.currentBuildingIndex = currentBuildingIndex;
             [self selectMarker:marker];
             return [self getZoomFrameFromMarker: marker];
@@ -346,18 +349,18 @@
 }
 
 
--(int)buildingIndexFromBuilding:(REMBuildingModel *)building
+-(int)buildingIndexFromBuilding:(REMManagedBuildingModel *)building
 {
     for(int i=0;i<self.buildingInfoArray.count;i++){
-        REMBuildingOverallModel *buildingInfo = self.buildingInfoArray[i];
-        if([buildingInfo.building.buildingId isEqualToNumber:building.buildingId])
+        REMManagedBuildingModel *buildingInfo = self.buildingInfoArray[i];
+        if([buildingInfo.id isEqualToNumber:building.id])
             return i;
     }
     
     return 0;
 }
 
--(UIImage *)getMarkerIcon:(REMBuildingOverallModel *)buildingInfo forMarkerState:(UIControlState)state
+-(UIImage *)getMarkerIcon:(REMManagedBuildingModel *)buildingInfo forMarkerState:(UIControlState)state
 {
     NSString *iconName = @"CommonPin_";
     if(buildingInfo.isQualified != nil && [buildingInfo.isQualified isEqual:[NSNull null]] == NO){
@@ -441,7 +444,7 @@
 {
     [self.view setUserInteractionEnabled:NO];
     self.initialZoomRect = [self getZoomFrameFromMarker:marker];
-    self.currentBuildingIndex = [self buildingIndexFromBuilding:[marker.userData building]];
+    self.currentBuildingIndex = [self buildingIndexFromBuilding:marker.userData ];
     
     [self presentBuildingView];
 }

@@ -45,7 +45,7 @@
     [self initDetailValue];
     [self initChartContainer];
     if(self.airQualityUsage==nil){
-        [self loadTotalUsageByBuildingId:self.buildingInfo.building.buildingId];
+        [self loadTotalUsageByBuildingId:self.buildingInfo.id];
     }
     else{
         [self addDataLabel];
@@ -268,7 +268,7 @@
         controller1.viewFrame=CGRectMake(0, marginTop+kBuildingCommodityTitleFontSize+kBuildingDetailInnerMargin, kBuildingChartWidth, chartContainerHeight-kBuildingCommodityTitleFontSize-kBuildingDetailInnerMargin);
         //NSLog(@"view frame:%@",NSStringFromCGRect(controller1.viewFrame));
         controller1.chartHandlerClass=[REMBuildingAirQualityChartViewController class];
-        controller1.buildingId=self.buildingInfo.building.buildingId;
+        controller1.buildingId=self.buildingInfo.id;
         controller1.commodityId=self.airQualityUsage.commodity.commodityId;
         [self addChildViewController:controller1];
     }

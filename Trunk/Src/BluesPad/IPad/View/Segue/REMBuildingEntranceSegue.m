@@ -13,7 +13,8 @@
 #import "REMDimensions.h"
 #import "REMCommonHeaders.h"
 #import "REMImages.h"
-
+#import "REMManagedBuildingModel.h"
+#import "REMManagedBuildingPictureModel.h"
 @interface REMBuildingEntranceSegue ()
 
 @property (nonatomic) CGFloat segueTime;
@@ -115,7 +116,9 @@
 -(UIImageView *)getBuildingTransitionView
 {
     //if no image at all, use default
-    NSArray *imageIds = [[self.sourceViewController buildingInfoArray][self.parameter.currentBuildingIndex] building].pictureIds;
+    REMManagedBuildingModel *building =[self.sourceViewController buildingInfoArray][self.parameter.currentBuildingIndex];
+    NSArray *imageIds=[building.pictures allObjects];
+    
     if(imageIds == nil || imageIds.count <= 0){
         UIImageView *imageView =[[UIImageView alloc] initWithImage:REMIMG_DefaultBuilding];
         imageView.contentMode = UIViewContentModeTop;
@@ -123,10 +126,11 @@
         imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height * kDMCommon_ImageScale);
         return imageView;
     }
-    
+    REMManagedBuildingPictureModel *picModel = imageIds[0];
+
     //if there is large image, use large
-    NSString *normalImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageNormal];
-    NSString *smallImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageSmall];
+    NSString *normalImagePath = [REMImageHelper buildingImagePathWithId:picModel.id andType:REMBuildingImageNormal];
+    NSString *smallImagePath = [REMImageHelper buildingImagePathWithId:picModel.id andType:REMBuildingImageSmall];
     
     
     

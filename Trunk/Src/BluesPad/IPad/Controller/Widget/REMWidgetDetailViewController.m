@@ -16,7 +16,7 @@
 #import "REMWidgetBuildingCoverViewController.h"
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingCoverWidgetRelationModel.h"
-
+#import "REMManagedBuildingCommodityUsageModel.h"
 
 const static CGFloat kWidgetBackButtonLeft=25;
 const static CGFloat kWidgetBackButtonTop=16;
@@ -165,7 +165,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 }
 
 - (REMWidgetObject *)widgetByRelation:(REMBuildingCoverWidgetRelationModel *)relation{
-    for (REMDashboardObj *dashboard in self.buildingInfo.dashboardArray) {
+    for (REMDashboardObj *dashboard in self.buildingInfo.dashboards) {
         if ([relation.dashboardId isEqualToNumber:dashboard.dashboardId]==YES) {
             for (REMWidgetObject *widget in dashboard.widgets) {
                 if ([widget.widgetId isEqualToNumber:relation.widgetId]==YES) {
@@ -179,15 +179,15 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 
 - (NSArray *)piningWidgetList{
     NSMutableArray *array=[NSMutableArray array];
-    for (int i=0; i<self.buildingInfo.commodityArray.count; ++i) {
-        REMCommodityModel *commodity=self.buildingInfo.commodityArray[i];
+    for (int i=0; i<self.buildingInfo.commodities.count; ++i) {
+        REMManagedBuildingCommodityUsageModel *commodity=[self.buildingInfo.commodities allObjects][i];
         NSMutableDictionary *dic=[NSMutableDictionary dictionary];
         dic[@"name"]= commodity.comment;
-        dic[@"Id"]=commodity.commodityId;
+        dic[@"Id"]=commodity.id;
         BOOL foundFirst=NO;
         BOOL foundSecond=NO;
-        for (REMBuildingCoverWidgetRelationModel *relation in self.buildingInfo.widgetRelationArray) {
-            if ([relation.commodityId isEqualToNumber:commodity.commodityId]==YES) {
+        for (REMBuildingCoverWidgetRelationModel *relation in [commodity.pinnedWidgets allObjects]) {
+            if ([relation.commodityId isEqualToNumber:commodity.id]==YES) {
                 REMWidgetObject *widget=[self widgetByRelation:relation];
                 if (widget!=nil && [widget.widgetId isGreaterThan:@(0)]==YES) {
                     if (relation.position == REMBuildingCoverWidgetPositionFirst) {

@@ -9,14 +9,14 @@
 #import "REMBuildingCommodityViewController.h"
 #import "REMBuildingChartBaseViewController.h"
 #import "REMWidgetObject.h"
-
+#import "REMManagedWidgetModel.h"
 @interface REMBuildingChartContainerViewController : UIViewController
 
 @property (nonatomic) CGRect viewFrame;
 @property (nonatomic,strong) Class chartHandlerClass;
 @property (nonatomic,copy) NSNumber *buildingId;
 @property (nonatomic,copy) NSNumber *commodityId;
-@property (nonatomic,strong) REMWidgetObject *widgetInfo;
+@property (nonatomic,strong) REMManagedWidgetModel *widgetInfo;
 
 
 @end

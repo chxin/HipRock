@@ -487,7 +487,7 @@ const static CGFloat buildingGap=20;
         self.maxDashbaordController=dashboard;
         maxController.buildingInfo=self.buildingInfoArray[self.currentBuildingIndex];
         maxController.widgetCollectionController=collection;
-        maxController.dashboardInfo=dashboard.buildingInfo.dashboardArray[dashboard.currentMaxDashboardIndex];
+        maxController.dashboardInfo=[dashboard.buildingInfo.dashboards allObjects][dashboard.currentMaxDashboardIndex];
         
     }
 }

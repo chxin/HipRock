@@ -363,6 +363,7 @@
 		B4175116188CC83E0020AE8E /* Map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4175112188CC83E0020AE8E /* Map@2x.png */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
+		B42114C918C59363007CC070 /* REMManagedBuildingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B42114C818C59363007CC070 /* REMManagedBuildingModel.m */; };
 		B4223D51184EFF44004D39C0 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4223D50184EFF44004D39C0 /* GPUImage.framework */; };
 		B42FBF6417F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
 		B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
@@ -450,7 +451,6 @@
 		B4F860E818BC3A10007F4757 /* REMManageBuildingAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F860E718BC3A10007F4757 /* REMManageBuildingAirQualityModel.m */; };
 		B4F860F118BC3A10007F4757 /* REMManagedBuildingRankingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F860F018BC3A10007F4757 /* REMManagedBuildingRankingModel.m */; };
 		B4F860F718BC3A11007F4757 /* REMManagedPinnedWidgetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F860F618BC3A11007F4757 /* REMManagedPinnedWidgetModel.m */; };
-		B4F8610018BC3CC6007F4757 /* REMManagedBuildingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F860FF18BC3CC6007F4757 /* REMManagedBuildingModel.m */; };
 		B4F8610318BC3DD8007F4757 /* REMManagedBuildingPictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F8610218BC3DD8007F4757 /* REMManagedBuildingPictureModel.m */; };
 		B4F8610618BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F8610518BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.m */; };
 		B4F8610F18BC5863007F4757 /* REMManagedSharedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F8610E18BC5863007F4757 /* REMManagedSharedModel.m */; };
@@ -1114,6 +1114,8 @@
 		B4198EAD178410D300B50475 /* REMLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLogManager.m; path = Common/Log/REMLogManager.m; sourceTree = "<group>"; };
 		B4198EB01784220300B50475 /* REMJSONHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMJSONHelper.h; path = Common/Utility/REMJSONHelper.h; sourceTree = "<group>"; };
 		B4198EB11784220300B50475 /* REMJSONHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMJSONHelper.m; path = Common/Utility/REMJSONHelper.m; sourceTree = "<group>"; };
+		B42114C718C59363007CC070 /* REMManagedBuildingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingModel.h; sourceTree = "<group>"; };
+		B42114C818C59363007CC070 /* REMManagedBuildingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingModel.m; sourceTree = "<group>"; };
 		B4223D50184EFF44004D39C0 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = ../Lib/GPUImage.framework; sourceTree = "<group>"; };
 		B42FBF6217F574B5004F2F3A /* REMEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnum.h; path = Common/Model/REMEnum.h; sourceTree = "<group>"; };
 		B42FBF6317F574B5004F2F3A /* REMEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnum.m; path = Common/Model/REMEnum.m; sourceTree = "<group>"; };
@@ -1219,8 +1221,6 @@
 		B4F860F018BC3A10007F4757 /* REMManagedBuildingRankingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingRankingModel.m; sourceTree = "<group>"; };
 		B4F860F518BC3A11007F4757 /* REMManagedPinnedWidgetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedPinnedWidgetModel.h; sourceTree = "<group>"; };
 		B4F860F618BC3A11007F4757 /* REMManagedPinnedWidgetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedPinnedWidgetModel.m; sourceTree = "<group>"; };
-		B4F860FE18BC3CC6007F4757 /* REMManagedBuildingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingModel.h; sourceTree = "<group>"; };
-		B4F860FF18BC3CC6007F4757 /* REMManagedBuildingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingModel.m; sourceTree = "<group>"; };
 		B4F8610118BC3DD8007F4757 /* REMManagedBuildingPictureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingPictureModel.h; sourceTree = "<group>"; };
 		B4F8610218BC3DD8007F4757 /* REMManagedBuildingPictureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingPictureModel.m; sourceTree = "<group>"; };
 		B4F8610418BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMManagedBuildingCommodityUsageModel.h; path = ../../../../REMManagedBuildingCommodityUsageModel.h; sourceTree = "<group>"; };
@@ -2284,6 +2284,8 @@
 				B4F8610418BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.h */,
 				B4F8610518BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.m */,
 				B4BF101318B4889400E1AAEC /* BluesPad.xcdatamodeld */,
+				B42114C718C59363007CC070 /* REMManagedBuildingModel.h */,
+				B42114C818C59363007CC070 /* REMManagedBuildingModel.m */,
 				B4F8611618BC5B98007F4757 /* REMManagedWidgetModel.h */,
 				B4F8611718BC5B98007F4757 /* REMManagedWidgetModel.m */,
 				B4F8611318BC5945007F4757 /* REMManagedDashboardModel.h */,
@@ -2292,8 +2294,6 @@
 				B4F8610E18BC5863007F4757 /* REMManagedSharedModel.m */,
 				B4F8610118BC3DD8007F4757 /* REMManagedBuildingPictureModel.h */,
 				B4F8610218BC3DD8007F4757 /* REMManagedBuildingPictureModel.m */,
-				B4F860FE18BC3CC6007F4757 /* REMManagedBuildingModel.h */,
-				B4F860FF18BC3CC6007F4757 /* REMManagedBuildingModel.m */,
 				B4F860F518BC3A11007F4757 /* REMManagedPinnedWidgetModel.h */,
 				B4F860F618BC3A11007F4757 /* REMManagedPinnedWidgetModel.m */,
 				B4F860EF18BC3A10007F4757 /* REMManagedBuildingRankingModel.h */,
@@ -3528,7 +3528,6 @@
 				7A63E26A18B44CBD00A13464 /* REMTooltipViewBase.m in Sources */,
 				B445AEB2177BFAE8002D2A59 /* REMLog.m in Sources */,
 				7A399E96177D238F00F0EB9F /* AFHTTPClient.m in Sources */,
-				B4F8610018BC3CC6007F4757 /* REMManagedBuildingModel.m in Sources */,
 				7A63E24B18B44CBD00A13464 /* REMBuildingTitleLabelView.m in Sources */,
 				7A63E1F018B44CBD00A13464 /* REMBuildingAverageChartViewController.m in Sources */,
 				7A63E21E18B44CBD00A13464 /* REMAirQualityDataModel.m in Sources */,
@@ -3660,6 +3659,7 @@
 				7A63E24A18B44CBD00A13464 /* REMBuildingRankingView.m in Sources */,
 				7A63E24E18B44CBD00A13464 /* REMBuildingAirQualityWrapper.m in Sources */,
 				EFD947081839DCBB00E9EC50 /* DCColumnSeries.m in Sources */,
+				B42114C918C59363007CC070 /* REMManagedBuildingModel.m in Sources */,
 				EFD947071839DCBB00E9EC50 /* _DCColumnsLayer.m in Sources */,
 				7A63E1ED18B44CBD00A13464 /* REMUpdateAllManager.m in Sources */,
 				7A63E1E818B44CBD00A13464 /* REMEnergyMultiTimeSearcher.m in Sources */,

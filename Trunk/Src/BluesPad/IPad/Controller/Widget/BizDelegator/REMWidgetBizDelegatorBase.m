@@ -86,7 +86,7 @@
 
 - (BOOL)shouldEnablePinToBuildingCoverButton
 {
-    if (self.ownerController.buildingInfo.commodityArray.count!=0) {
+    if (self.ownerController.buildingInfo.commodities.count!=0) {
         return YES;
     }
     else{

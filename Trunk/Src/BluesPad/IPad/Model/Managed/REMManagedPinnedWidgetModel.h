@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSNumber * position;
 @property (nonatomic, retain) NSNumber * widgetId;
+@property (nonatomic, retain) NSNumber * dashboardId;
 @property (nonatomic, retain) NSSet *commodities;
 @end
 

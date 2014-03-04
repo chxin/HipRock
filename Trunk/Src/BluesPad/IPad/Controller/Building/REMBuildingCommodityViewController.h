@@ -11,11 +11,11 @@
 #import "REMBuildingTitleView.h"
 #import "REMBuildingTitleLabelView.h"
 #import "REMBuildingRankingView.h"
-
+#import "REMManagedBuildingModel.h"
 @interface REMBuildingCommodityViewController : UIViewController<UIPopoverControllerDelegate>
 
-@property (nonatomic,weak) REMCommodityModel *commodityInfo;
-@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,weak) REMManagedBuildingCommodityUsageModel *commodityInfo;
+@property (nonatomic,weak) REMManagedBuildingModel *buildingInfo;
 @property (nonatomic) CGRect viewFrame;
 
 @property (nonatomic) BOOL dataLoadComplete;

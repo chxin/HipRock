@@ -23,6 +23,7 @@
 @property (nonatomic) BOOL disableAlert;
 @property (nonatomic,weak) REMDataStore *parentStore;
 @property (nonatomic,strong) REMDataPersistenceProcessor *persistenceProcessor;
+@property (nonatomic) BOOL persistManually;
 
 //数据模型对象
 @property(nonatomic,strong) NSManagedObjectModel *managedObjectModel;

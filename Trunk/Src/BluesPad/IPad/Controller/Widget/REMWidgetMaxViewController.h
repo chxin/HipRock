@@ -8,23 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "REMWidgetCollectionViewController.h"
-//#import "REMEnergyViewData.h"
-//#import "REMWidgetObject.h"
-//#import "REMWidgetMaxView.h"
-//#import "REMColor.h"
-//#import "REMWidgetMaxDiagramViewController.h"
-//#import "REMWidgetMaxPieViewController.h"
-//#import "REMWidgetRelativeDateTableViewController.h"
-//#import "REMWidgetMaxLineViewController.h"
-//#import "REMWidgetMaxColumnViewController.h"
-//#import "REMWidgetTimePickerViewController.h"
-//#import "REMWidgetStepToolbarView.h"
+#import "REMManagedBuildingModel.h"
+#import "REMManagedDashboardModel.h"
 
 @interface REMWidgetMaxViewController : UIViewController<UIGestureRecognizerDelegate>
 
 @property (nonatomic,weak) REMDashboardObj *dashboardInfo;
 
-@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,weak) REMManagedBuildingModel *buildingInfo;
 
 @property (nonatomic,weak) REMWidgetCollectionViewController *widgetCollectionController;
 

@@ -14,6 +14,7 @@
 
 @dynamic position;
 @dynamic widgetId;
+@dynamic dashboardId;
 @dynamic commodities;
 
 @end

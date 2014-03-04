@@ -13,11 +13,11 @@
 #import "REMBuildingImageViewController.h"
 #import "REMBuildingConstants.h"
 #import "REMBuildingViewController.h"
-
+#import "REMManagedBuildingModel.h"
 @interface REMBuildingDataViewController : UIViewController<UIScrollViewDelegate,UIGestureRecognizerDelegate>
 
 
-@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,weak) REMManagedBuildingModel *buildingInfo;
 @property (nonatomic) CGRect viewFrame;
 @property (nonatomic) CGRect upViewFrame;
 

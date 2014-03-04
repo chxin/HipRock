@@ -23,7 +23,7 @@
     for (int i=0; i<data.count; ++i) {
         NSDictionary *buildingOverall =data[i];
         REMManagedBuildingModel *buildingModel = [self persistBuilding:buildingOverall[@"Building"]];
-        buildingModel.isQualified = buildingOverall[@"IsQualified"];
+        buildingModel.isQualified = NULL_TO_NIL(buildingOverall[@"IsQualified"]);
         [self persistCommodity:buildingOverall[@"CommodityArray"] intoBuilding:buildingModel];
     }
     
@@ -201,7 +201,7 @@
         REMManagedBuildingCommodityUsageModel *commodity = [self.dataStore newManagedObject:@"REMManagedBuildingCommodityUsageModel"];
         NSDictionary *dictionary = commodityArray[i];
         commodity.id = dictionary[@"Id"];
-        commodity.name = dictionary[@"Name"];
+        commodity.name = NULL_TO_NIL(dictionary[@"Name"]);
         commodity.code = dictionary[@"Code"];
         commodity.comment = dictionary[@"Comment"];
         commodity.building = building;
@@ -216,13 +216,13 @@
     building.timezoneId = dictionary[@"TimezoneId"];
     building.name = dictionary[@"Name"];
     building.code = dictionary[@"Code"];
-    building.comment = dictionary[@"Comment"];
-    building.path = dictionary[@"Path"];
+    building.comment =  NULL_TO_NIL(dictionary[@"Comment"]);
+    building.path = NULL_TO_NIL(dictionary[@"Path"]);
     building.pathLevel = dictionary[@"PathLevel"];
     building.hasDataPrivilege = dictionary[@"HasDataPrivilege"];
     building.latitude = dictionary[@"Latitude"] ;
     building.longitude = dictionary[@"Longitude"];
-    building.province = dictionary[@"Province"];
+    building.province = NULL_TO_NIL(dictionary[@"Province"]);
     
     NSArray *pictures=dictionary[@"PictureIds"];
     
@@ -234,6 +234,14 @@
             [building addPicturesObject:picModel];
         }
     }
+    
+    NSDictionary *electricityUsageThisMonth = dictionary[@"ElectricUsageThisMonth"];
+    
+    if (!REMIsNilOrNull(electricityUsageThisMonth)) {
+        
+    }
+    
+    
 
     return building;
 

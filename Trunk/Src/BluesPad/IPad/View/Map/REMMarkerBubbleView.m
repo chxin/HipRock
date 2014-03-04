@@ -15,10 +15,11 @@
 #import "REMCommodityUsageModel.h"
 #import "REMEnergyUsageDataModel.h"
 #import "REMCommonHeaders.h"
-
+#import "REMManagedBuildingModel.h"
+#import "REMManagedBuildingCommodityUsageModel.h"
 @interface REMMarkerBubbleView ()
 
-@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,weak) REMManagedBuildingModel *buildingInfo;
 
 @property (nonatomic,weak) UILabel *titleLabel;
 @property (nonatomic,weak) UILabel *subTitleLabel;
@@ -84,7 +85,7 @@
     CGFloat top = self.subTitleLabel == nil ? kDMMap_BubbleContentTopOffsetWithoutSubTitle : kDMMap_BubbleContentTopOffsetWithSubTitle;
     
     UILabel *label =  [[UILabel alloc] initWithFrame:CGRectMake(kDMMap_BubbleContentLeftOffset,top,size.width,size.height)];
-    label.text = self.buildingInfo.building.name;
+    label.text = self.buildingInfo.name;
     label.textColor = [UIColor blackColor];
     label.font = font;
     label.backgroundColor = [UIColor clearColor];
@@ -127,15 +128,15 @@
     return CGRectMake(markerPoint.x, markerPoint.y, contentWidth + 2*kDMMap_BubbleContentLeftOffset, kDMMap_BubbleHeight);
 }
 
--(NSString *)getMainTitleText:(REMBuildingOverallModel *)buildingInfo
+-(NSString *)getMainTitleText:(REMManagedBuildingModel *)buildingInfo
 {
-    return buildingInfo.building.name;
+    return buildingInfo.name;
 }
 
--(NSString *)getSubTitleText:(REMBuildingOverallModel *)buildingInfo
+-(NSString *)getSubTitleText:(REMManagedBuildingModel *)buildingInfo
 {
-    NSNumber *dataValue = buildingInfo.electricityUsageThisMonth.commodityUsage.dataValue;
-    NSString *uom = buildingInfo.electricityUsageThisMonth.commodityUsage.uom.code;
+    NSNumber *dataValue = buildingInfo.electricityUsageThisMonth.usageValue;//    .electricityUsageThisMonth .commodityUsage.dataValue;
+    NSString *uom = buildingInfo.electricityUsageThisMonth.usageUom;//  .commodityUsage.uom.code;
     
     NSString *formattedDataValue = [REMNumberHelper formatDataValueWithCarry:dataValue];
     

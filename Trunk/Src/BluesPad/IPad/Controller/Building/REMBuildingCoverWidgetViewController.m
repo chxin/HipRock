@@ -215,8 +215,8 @@
 
 - (IBAction)okButtonClicked:(id)sender {
     REMBuildingCoverWidgetRelationModel *model= [[REMBuildingCoverWidgetRelationModel alloc]init];
-    model.commodityId=self.commodityInfo.commodityId;
-    model.buildingId=self.buildingInfo.building.buildingId;
+    model.commodityId=self.commodityInfo.id;
+    model.buildingId=self.buildingInfo.id;
 
     if (self.currentIndexPath.section==1) {
         

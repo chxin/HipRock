@@ -10,6 +10,7 @@
 #import "REMServiceAgent.h"
 #import "REMBuildingOverallModel.h"
 #import "REMManagedAdministratorModel.h"
+#import "REMBuildingPersistenceProcessor.h"
 
 
 @interface REMUpdateAllManager()
@@ -69,6 +70,8 @@ static NSString *customerUpdateAll=@"customerupdateall";
     }
     
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:dic accessCache:accessCache andMessageMap:messageMap];
+    store.persistManually=YES;
+    store.persistenceProcessor = [[REMBuildingPersistenceProcessor alloc]init];
     store.maskContainer=self.maskerView;
     store.groupName =customerUpdateAll;
     self.parameter=dic;
@@ -267,13 +270,13 @@ static NSString *customerUpdateAll=@"customerupdateall";
 
 - (void)statusSuccess{
     REMApplicationContext *context=REMAppContext;
-    
-    context.buildingInfoArray=[REMBuildingOverallModel sortByProvince:self.buildingInfoArray];
-    
-    NSString *parameterString = [REMServiceAgent buildParameterString:self.parameter];
-    NSData *postData = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *storageKey = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
-    context.buildingInfoArrayStorageKey=storageKey;
+//
+//    context.buildingInfoArray=[REMBuildingOverallModel sortByProvince:self.buildingInfoArray];
+//    
+//    NSString *parameterString = [REMServiceAgent buildParameterString:self.parameter];
+//    NSData *postData = [parameterString dataUsingEncoding:NSUTF8StringEncoding];
+//    NSString *storageKey = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
+//    context.buildingInfoArrayStorageKey=storageKey;
     
     if (self.customerInfoArray!=nil) {
         //context.currentUser.customers=self.customerInfoArray;
@@ -298,8 +301,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
         }
     }
     
-    [self persistCustomer];
-    [self persistBuilding];
+    [self persistAllData];
     self.tableViewController=nil;
     context.updateManager=nil;
     self.callback(REMCustomerUserConcurrencyStatusSuccess,self.buildingInfoArray,REMDataAccessFailed);
@@ -307,46 +309,20 @@ static NSString *customerUpdateAll=@"customerupdateall";
     
 }
 
-- (void)persistBuilding{
-    
-}
-
-- (void)persistCustomer{
+- (void)persistAllData{
     REMDataStore *store = [[REMDataStore alloc]init];
     REMManagedUserModel *user = [[store fetchMangedObject:@"REMManagedUserModel"] lastObject];
-//
-//    
-//    for (int i=0; i<self.customerInfoArray.count; ++i) {
-//        REMManagedCustomerModel *currentCustomer = self.customerInfoArray[i];
-//        REMManagedCustomerModel *customerObject = [store newManagedObject:@"REMManagedCustomerModel"];
-//        
-//        customerObject.id = currentCustomer.id;
-//        customerObject.name=currentCustomer.name;
-//        customerObject.code=currentCustomer.code;
-//        customerObject.address=currentCustomer.address;
-//        customerObject.email=currentCustomer.email;
-//        customerObject.manager=currentCustomer.manager;
-//        customerObject.telephone=currentCustomer.telephone;
-//        customerObject.comment= currentCustomer.comment;
-//        customerObject.timezoneId=currentCustomer.timezoneId;
-//        customerObject.logoId=currentCustomer.logoId;
-//        
-//        customerObject.startTime= currentCustomer.startTime;
-//        customerObject.user = user;
-//        NSArray *administrators=currentCustomer.administrators.allObjects;
-//        
-//        
-//        for (REMManagedAdministratorModel *admin in administrators) {
-//            REMManagedAdministratorModel *adminObject= [[REMManagedAdministratorModel alloc]init];
-//            adminObject.realName=admin.realName;
-//            adminObject.customer=customerObject;
-//            [customerObject addAdministratorsObject:adminObject];
-//        }
-//    }
     REMAppCurrentManagedUser = user;
+    
+    REMBuildingPersistenceProcessor *buildingPersistor = [[REMBuildingPersistenceProcessor alloc]init];
+    buildingPersistor.dataStore=store;
+    NSArray *buildingArray = [buildingPersistor persistData:self.buildingInfoArray];
+    REMApplicationContext *context=REMAppContext;
+    context.buildingInfoArray = buildingArray;
+    
     [store persistManageObject];
-
 }
+
 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
