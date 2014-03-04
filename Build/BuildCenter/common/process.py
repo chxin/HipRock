@@ -1,8 +1,8 @@
 import os
 
 def process_model(model):
-	if model.path:
-		model.path += 'Blues.plist' if model.id > 162 else 'BluesPad.plist'
+	if not model.appname:
+		model.appname = 'Blues' if model.id > 162 else 'BluesPad'
 
 
 
