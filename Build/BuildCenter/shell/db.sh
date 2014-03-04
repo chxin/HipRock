@@ -38,8 +38,8 @@ else
 fi
 
 #update bundle version
-echo ${makedir}/updatebundle.py ${projectdir}/Trunk/Src/BluesPad/BluesPad-Info.plist ${bundleversion}
-python $makedir/updatebundle.py $projectdir/Trunk/Src/BluesPad/BluesPad-Info.plist $bundleversion
+echo ${makedir}/updatebundle.py ${projectdir}/Trunk/Src/Blues/Blues-Info.plist ${bundleversion}
+python $makedir/updatebundle.py $projectdir/Trunk/Src/Blues/Blues-Info.plist $bundleversion
 echo "[GIT]:Changed CFBundleVersion to ${bundleversion}"
 git commit -a -m "[GIT]:Changed CFBundleVersion to ${bundleversion}"
 git push
@@ -49,7 +49,7 @@ templatefolder=$buildroot/Templates
 targetfolder=$archivefolder/DailyBuild/$buildnumber
 
 echo Will build into $targetfolder
-if [ -f "${targetfolder}/BluesPad.plist" ]; then
+if [ -f "${targetfolder}/Blues.plist" ]; then
 	echo "Error: buildnumber ${buildnumber} already exists!"
 	exit 1
 else
@@ -74,11 +74,11 @@ fi
 #change data source?
 
 #update urls in plist
-echo ${makedir}updatepackageurl.py ${targetfolder}/BluesPad.plist ${archiveurl}/DailyBuild/$buildnumber $bundleversion
-python ${makedir}updatepackageurl.py ${targetfolder}/BluesPad.plist ${archiveurl}/DailyBuild/$buildnumber $bundleversion
+echo ${makedir}updatepackageurl.py ${targetfolder}/Blues.plist ${archiveurl}/DailyBuild/$buildnumber $bundleversion
+python ${makedir}updatepackageurl.py ${targetfolder}/Blues.plist ${archiveurl}/DailyBuild/$buildnumber $bundleversion
 
 #package
-make --makefile=makefile --directory=$makedir xcpackage apppath=$targetfolder/BluesPad.app ipapath=$targetfolder/BluesPad.ipa
+make --makefile=makefile --directory=$makedir xcpackage apppath=$targetfolder/Blues.app ipapath=$targetfolder/Blues.ipa
 
 echo ""
 echo "======Blues DailyBuild DB${buildnumber} Finished========" 
