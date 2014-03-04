@@ -7,12 +7,12 @@
 --------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
 #import "REMLoginCardController.h"
-#import "REMCustomerModel.h"
+#import "REMManagedCustomerModel.h"
 
 
 @protocol REMLoginCustomerSelectionDelegate <NSObject>
 
--(void)customerSelectionTableView:(UITableView *)table didSelectCustomer:(REMCustomerModel *)customer;
+-(void)customerSelectionTableView:(UITableView *)table didSelectCustomer:(REMManagedCustomerModel *)customer;
 -(void)customerSelectionTableViewdidDismissView;
 
 @end

@@ -115,15 +115,16 @@ static NSString *customerUpdateAll=@"customerupdateall";
 
             }
             NSArray *newBuildingList= data[@"BuildingInfo"];
-            NSMutableArray *buildingInfoList=nil;
-            if(newBuildingList!=nil && [newBuildingList isEqual:[NSNull null]]==NO){
-                buildingInfoList = [[NSMutableArray alloc]initWithCapacity:newBuildingList.count];
-                for (NSDictionary *obj in newBuildingList) {
-                    REMBuildingOverallModel *model=[[REMBuildingOverallModel alloc]initWithDictionary:obj];
-                    [buildingInfoList addObject:model];
-                }
-                self.buildingInfoArray= [REMBuildingOverallModel sortByProvince: buildingInfoList];
-            }
+            self.buildingInfoArray=newBuildingList;
+//            NSMutableArray *buildingInfoList=nil;
+//            if(newBuildingList!=nil && [newBuildingList isEqual:[NSNull null]]==NO){
+//                buildingInfoList = [[NSMutableArray alloc]initWithCapacity:newBuildingList.count];
+//                for (NSDictionary *obj in newBuildingList) {
+//                    REMBuildingOverallModel *model=[[REMBuildingOverallModel alloc]initWithDictionary:obj];
+//                    [buildingInfoList addObject:model];
+//                }
+//                self.buildingInfoArray= [REMBuildingOverallModel sortByProvince: buildingInfoList];
+//            }
             [self.alertView dismissWithClickedButtonIndex:-1 animated:YES];
             if (status == REMCustomerUserConcurrencyStatusUserDeleted) {
                 [self statusUserDeleted];
@@ -298,10 +299,15 @@ static NSString *customerUpdateAll=@"customerupdateall";
     }
     
     [self persistCustomer];
+    [self persistBuilding];
     self.tableViewController=nil;
     context.updateManager=nil;
     self.callback(REMCustomerUserConcurrencyStatusSuccess,self.buildingInfoArray,REMDataAccessFailed);
     
+    
+}
+
+- (void)persistBuilding{
     
 }
 

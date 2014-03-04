@@ -7,7 +7,7 @@
  --------------------------------------------------------------------------*///
 
 #import "REMJSONObject.h"
-#import "REMUserModel.h"
+#import "REMEnum.h"
 
 @interface REMShareInfo : REMJSONObject
 

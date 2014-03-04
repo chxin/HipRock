@@ -150,6 +150,7 @@ static REMCacheStoreHolder *cacheStoreHolder;
     if (self.persistenceProcessor!=nil) {
        id data = [self.persistenceProcessor fetchData];
         success(data);
+        return;
     }
     
     

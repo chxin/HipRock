@@ -446,6 +446,16 @@
 		B4E0015618B5C16E00F1D6D9 /* REMManagedUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E0015518B5C16E00F1D6D9 /* REMManagedUserModel.m */; };
 		B4E0015918B5C16E00F1D6D9 /* REMManagedCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E0015818B5C16E00F1D6D9 /* REMManagedCustomerModel.m */; };
 		B4E0015C18B5C16E00F1D6D9 /* REMManagedAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E0015B18B5C16E00F1D6D9 /* REMManagedAdministratorModel.m */; };
+		B4F860DF18BC37AF007F4757 /* REMBuildingPersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F860DE18BC37AF007F4757 /* REMBuildingPersistenceProcessor.m */; };
+		B4F860E818BC3A10007F4757 /* REMManageBuildingAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F860E718BC3A10007F4757 /* REMManageBuildingAirQualityModel.m */; };
+		B4F860F118BC3A10007F4757 /* REMManagedBuildingRankingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F860F018BC3A10007F4757 /* REMManagedBuildingRankingModel.m */; };
+		B4F860F718BC3A11007F4757 /* REMManagedPinnedWidgetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F860F618BC3A11007F4757 /* REMManagedPinnedWidgetModel.m */; };
+		B4F8610018BC3CC6007F4757 /* REMManagedBuildingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F860FF18BC3CC6007F4757 /* REMManagedBuildingModel.m */; };
+		B4F8610318BC3DD8007F4757 /* REMManagedBuildingPictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F8610218BC3DD8007F4757 /* REMManagedBuildingPictureModel.m */; };
+		B4F8610618BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F8610518BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.m */; };
+		B4F8610F18BC5863007F4757 /* REMManagedSharedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F8610E18BC5863007F4757 /* REMManagedSharedModel.m */; };
+		B4F8611518BC5945007F4757 /* REMManagedDashboardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F8611418BC5945007F4757 /* REMManagedDashboardModel.m */; };
+		B4F8611818BC5B98007F4757 /* REMManagedWidgetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F8611718BC5B98007F4757 /* REMManagedWidgetModel.m */; };
 		EF0346B0183B4BA600DE186A /* _DCLayerTrashbox.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */; };
 		EF0346B3183B520100DE186A /* _DCSeriesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B2183B520100DE186A /* _DCSeriesLayer.m */; };
 		EF0346B9183B979800DE186A /* DCLineWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B8183B979800DE186A /* DCLineWrapper.m */; };
@@ -1201,6 +1211,26 @@
 		B4E0015B18B5C16E00F1D6D9 /* REMManagedAdministratorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedAdministratorModel.m; sourceTree = "<group>"; };
 		B4EDFB1C1806983600873FA1 /* REMDimensionForSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensionForSplashScreen.h; path = Resource/Dimensions/REMDimensionForSplashScreen.h; sourceTree = "<group>"; };
 		B4EDFB1D1806983600873FA1 /* REMDimensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensions.h; path = Resource/Dimensions/REMDimensions.h; sourceTree = "<group>"; };
+		B4F860DD18BC37AF007F4757 /* REMBuildingPersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingPersistenceProcessor.h; sourceTree = "<group>"; };
+		B4F860DE18BC37AF007F4757 /* REMBuildingPersistenceProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingPersistenceProcessor.m; sourceTree = "<group>"; };
+		B4F860E618BC3A10007F4757 /* REMManageBuildingAirQualityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManageBuildingAirQualityModel.h; sourceTree = "<group>"; };
+		B4F860E718BC3A10007F4757 /* REMManageBuildingAirQualityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManageBuildingAirQualityModel.m; sourceTree = "<group>"; };
+		B4F860EF18BC3A10007F4757 /* REMManagedBuildingRankingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingRankingModel.h; sourceTree = "<group>"; };
+		B4F860F018BC3A10007F4757 /* REMManagedBuildingRankingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingRankingModel.m; sourceTree = "<group>"; };
+		B4F860F518BC3A11007F4757 /* REMManagedPinnedWidgetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedPinnedWidgetModel.h; sourceTree = "<group>"; };
+		B4F860F618BC3A11007F4757 /* REMManagedPinnedWidgetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedPinnedWidgetModel.m; sourceTree = "<group>"; };
+		B4F860FE18BC3CC6007F4757 /* REMManagedBuildingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingModel.h; sourceTree = "<group>"; };
+		B4F860FF18BC3CC6007F4757 /* REMManagedBuildingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingModel.m; sourceTree = "<group>"; };
+		B4F8610118BC3DD8007F4757 /* REMManagedBuildingPictureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingPictureModel.h; sourceTree = "<group>"; };
+		B4F8610218BC3DD8007F4757 /* REMManagedBuildingPictureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingPictureModel.m; sourceTree = "<group>"; };
+		B4F8610418BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMManagedBuildingCommodityUsageModel.h; path = ../../../../REMManagedBuildingCommodityUsageModel.h; sourceTree = "<group>"; };
+		B4F8610518BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMManagedBuildingCommodityUsageModel.m; path = ../../../../REMManagedBuildingCommodityUsageModel.m; sourceTree = "<group>"; };
+		B4F8610D18BC5863007F4757 /* REMManagedSharedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedSharedModel.h; sourceTree = "<group>"; };
+		B4F8610E18BC5863007F4757 /* REMManagedSharedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedSharedModel.m; sourceTree = "<group>"; };
+		B4F8611318BC5945007F4757 /* REMManagedDashboardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedDashboardModel.h; sourceTree = "<group>"; };
+		B4F8611418BC5945007F4757 /* REMManagedDashboardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedDashboardModel.m; sourceTree = "<group>"; };
+		B4F8611618BC5B98007F4757 /* REMManagedWidgetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedWidgetModel.h; sourceTree = "<group>"; };
+		B4F8611718BC5B98007F4757 /* REMManagedWidgetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedWidgetModel.m; sourceTree = "<group>"; };
 		EF01DB58185B1BCF00A6ADCB /* DCPieChartViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCPieChartViewDelegate.h; sourceTree = "<group>"; };
 		EF0346AE183B4BA600DE186A /* _DCLayerTrashbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLayerTrashbox.h; path = ../_DCLayerTrashbox.h; sourceTree = "<group>"; };
 		EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLayerTrashbox.m; path = ../_DCLayerTrashbox.m; sourceTree = "<group>"; };
@@ -1922,6 +1952,8 @@
 				7A63E0B118B44CBA00A13464 /* REMPinToBuildingCoverHelper.m */,
 				7A63E0B218B44CBA00A13464 /* REMUpdateAllManager.h */,
 				7A63E0B318B44CBA00A13464 /* REMUpdateAllManager.m */,
+				B4F860DD18BC37AF007F4757 /* REMBuildingPersistenceProcessor.h */,
+				B4F860DE18BC37AF007F4757 /* REMBuildingPersistenceProcessor.m */,
 			);
 			name = Biz;
 			path = IPad/Biz;
@@ -2249,7 +2281,25 @@
 		7A63E15A18B44CBC00A13464 /* Managed */ = {
 			isa = PBXGroup;
 			children = (
+				B4F8610418BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.h */,
+				B4F8610518BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.m */,
 				B4BF101318B4889400E1AAEC /* BluesPad.xcdatamodeld */,
+				B4F8611618BC5B98007F4757 /* REMManagedWidgetModel.h */,
+				B4F8611718BC5B98007F4757 /* REMManagedWidgetModel.m */,
+				B4F8611318BC5945007F4757 /* REMManagedDashboardModel.h */,
+				B4F8611418BC5945007F4757 /* REMManagedDashboardModel.m */,
+				B4F8610D18BC5863007F4757 /* REMManagedSharedModel.h */,
+				B4F8610E18BC5863007F4757 /* REMManagedSharedModel.m */,
+				B4F8610118BC3DD8007F4757 /* REMManagedBuildingPictureModel.h */,
+				B4F8610218BC3DD8007F4757 /* REMManagedBuildingPictureModel.m */,
+				B4F860FE18BC3CC6007F4757 /* REMManagedBuildingModel.h */,
+				B4F860FF18BC3CC6007F4757 /* REMManagedBuildingModel.m */,
+				B4F860F518BC3A11007F4757 /* REMManagedPinnedWidgetModel.h */,
+				B4F860F618BC3A11007F4757 /* REMManagedPinnedWidgetModel.m */,
+				B4F860EF18BC3A10007F4757 /* REMManagedBuildingRankingModel.h */,
+				B4F860F018BC3A10007F4757 /* REMManagedBuildingRankingModel.m */,
+				B4F860E618BC3A10007F4757 /* REMManageBuildingAirQualityModel.h */,
+				B4F860E718BC3A10007F4757 /* REMManageBuildingAirQualityModel.m */,
 				B4E0015A18B5C16E00F1D6D9 /* REMManagedAdministratorModel.h */,
 				B4E0015B18B5C16E00F1D6D9 /* REMManagedAdministratorModel.m */,
 				B4E0015718B5C16E00F1D6D9 /* REMManagedCustomerModel.h */,
@@ -3470,6 +3520,7 @@
 				7A63E20C18B44CBD00A13464 /* REMSettingAboutViewController.m in Sources */,
 				B445AEA8177BEEB8002D2A59 /* DDTTYLogger.m in Sources */,
 				B445AEAA177BEEB8002D2A59 /* ContextFilterLogFormatter.m in Sources */,
+				B4F860F118BC3A10007F4757 /* REMManagedBuildingRankingModel.m in Sources */,
 				7A63E25018B44CBD00A13464 /* REMBuildingChartView.m in Sources */,
 				EFD947021839DCBB00E9EC50 /* DCXYChartView.m in Sources */,
 				EF1C5ADA183E00C9002A9AAD /* _DCXLabelFormatter.m in Sources */,
@@ -3477,6 +3528,7 @@
 				7A63E26A18B44CBD00A13464 /* REMTooltipViewBase.m in Sources */,
 				B445AEB2177BFAE8002D2A59 /* REMLog.m in Sources */,
 				7A399E96177D238F00F0EB9F /* AFHTTPClient.m in Sources */,
+				B4F8610018BC3CC6007F4757 /* REMManagedBuildingModel.m in Sources */,
 				7A63E24B18B44CBD00A13464 /* REMBuildingTitleLabelView.m in Sources */,
 				7A63E1F018B44CBD00A13464 /* REMBuildingAverageChartViewController.m in Sources */,
 				7A63E21E18B44CBD00A13464 /* REMAirQualityDataModel.m in Sources */,
@@ -3494,6 +3546,7 @@
 				7A63E23318B44CBD00A13464 /* REMEnergyError.m in Sources */,
 				7A63E27418B44CBD00A13464 /* REMMarkerBubbleView.m in Sources */,
 				7A399E9E177D238F00F0EB9F /* UIImageView+AFNetworking.m in Sources */,
+				B4F8611518BC5945007F4757 /* REMManagedDashboardModel.m in Sources */,
 				7A399E9B177D238F00F0EB9F /* AFPropertyListRequestOperation.m in Sources */,
 				7A399E9C177D238F00F0EB9F /* AFURLConnectionOperation.m in Sources */,
 				7A63E25D18B44CBD00A13464 /* REMInsetsTextField.m in Sources */,
@@ -3526,6 +3579,7 @@
 				7A1D142617850B2100CC2922 /* Reachability.m in Sources */,
 				7A63E26918B44CBD00A13464 /* REMRankingTooltipView.m in Sources */,
 				7A63E22818B44CBD00A13464 /* REMCommodityModel.m in Sources */,
+				B4F8610618BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.m in Sources */,
 				7A63E25618B44CBD00A13464 /* REMStackChartLegendView.m in Sources */,
 				EFE86989185EEF7300DC0007 /* DCLabelingStage.m in Sources */,
 				7A63E20418B44CBD00A13464 /* REMLoginCustomerTableViewController.m in Sources */,
@@ -3584,6 +3638,7 @@
 				7A63E20A18B44CBD00A13464 /* REMControllerBase.m in Sources */,
 				7A63E23818B44CBD00A13464 /* REMUserValidationModel.m in Sources */,
 				7A63E1F318B44CBD00A13464 /* REMBuildingCommodityViewController.m in Sources */,
+				B4F860E818BC3A10007F4757 /* REMManageBuildingAirQualityModel.m in Sources */,
 				7A63E20B18B44CBD00A13464 /* REMMainNavigationController.m in Sources */,
 				7A63E1EE18B44CBD00A13464 /* REMBuildingAirQualityChartViewController.m in Sources */,
 				7A63E1EC18B44CBD00A13464 /* REMPinToBuildingCoverHelper.m in Sources */,
@@ -3636,6 +3691,7 @@
 				7A63E25C18B44CBD00A13464 /* REMIndicatorButton.m in Sources */,
 				7A0288ED17C20CC500709111 /* WeiboRequestOperation.m in Sources */,
 				EFEA7EDF1843424500CF4C3E /* _DCRankingXLabelFormatter.m in Sources */,
+				B4F860F718BC3A11007F4757 /* REMManagedPinnedWidgetModel.m in Sources */,
 				7A63E1EA18B44CBD00A13464 /* LoginBusiness.m in Sources */,
 				7A7B29911888C65000E74D3D /* UIView+FlipTransition.m in Sources */,
 				EFD947091839DCBB00E9EC50 /* DCLineSeries.m in Sources */,
@@ -3666,6 +3722,7 @@
 				7A0288F817C20CC500709111 /* ImageResourceLoader.m in Sources */,
 				7A63E20218B44CBD00A13464 /* REMLoginCardController.m in Sources */,
 				7A63E26C18B44CBD00A13464 /* REMDashboardCellViewCell.m in Sources */,
+				B4F8611818BC5B98007F4757 /* REMManagedWidgetModel.m in Sources */,
 				7A63E25F18B44CBD00A13464 /* REMNumberLabel.m in Sources */,
 				7A0288F917C20CC500709111 /* NSDictionary+Json.m in Sources */,
 				7A0288FA17C20CC500709111 /* PathHelper.m in Sources */,
@@ -3675,6 +3732,7 @@
 				7A0288FB17C20CC500709111 /* Resources.m in Sources */,
 				EF03DC291841FB45004B9EFD /* DCPieDataPoint.m in Sources */,
 				7A0288FC17C20CC500709111 /* URLRequestHelper.m in Sources */,
+				B4F860DF18BC37AF007F4757 /* REMBuildingPersistenceProcessor.m in Sources */,
 				7A63E22E18B44CBD00A13464 /* REMShareInfo.m in Sources */,
 				7A63E20E18B44CBD00A13464 /* REMSettingCustomerDetailLogoViewController.m in Sources */,
 				7A63E22F18B44CBD00A13464 /* REMWidgetContentSyntax.m in Sources */,
@@ -3704,8 +3762,10 @@
 				7A63E22218B44CBD00A13464 /* REMBuildingModel.m in Sources */,
 				EFE86986185EEF5300DC0007 /* DCLabelingSeries.m in Sources */,
 				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,
+				B4F8610318BC3DD8007F4757 /* REMManagedBuildingPictureModel.m in Sources */,
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
 				7A63E22D18B44CBD00A13464 /* REMFavoriteDashboardObj.m in Sources */,
+				B4F8610F18BC5863007F4757 /* REMManagedSharedModel.m in Sources */,
 				B4E0015C18B5C16E00F1D6D9 /* REMManagedAdministratorModel.m in Sources */,
 				7A63E24618B44CBD00A13464 /* REMBuildingChartContainerView2.m in Sources */,
 				7A63E26218B44CBD00A13464 /* REMStatusBar.m in Sources */,

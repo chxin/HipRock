@@ -78,7 +78,7 @@ static int requestTimeout = 45; //(s)
         else{ //if ok, enter SUCCESS status
             //store result to cache
             id result = service.responseType == REMServiceResponseImage ? operation.responseData : [REMServiceAgent deserializeResult:operation.responseString ofService:service.url];
-            [REMServiceAgent writeCache:result forService:service withParameter:body];
+//            [REMServiceAgent writeCache:result forService:service withParameter:body];
             
             success(result);
             
