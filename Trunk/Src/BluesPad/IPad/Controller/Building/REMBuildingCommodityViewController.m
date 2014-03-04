@@ -17,6 +17,7 @@
 #import "REMManagedWidgetModel.h"
 #import "REMManagedDashboardModel.h"
 #import "REMManagedPinnedWidgetModel.h"
+#import "REMCommodityUsageValuePersistenceProcessor.h"
 @interface REMBuildingCommodityViewController ()
 
 //typedef void(^SuccessCallback)(BOOL success);
@@ -84,15 +85,30 @@
 }
 
 - (void)addDataLabel{
-    REMCommodityUsageModel *model=self.commodityUsage;
-    self.totalLabel.data=model.commodityUsage;
-    self.carbonLabel.data=model.carbonEquivalent;
-    self.rankingLabel.data=model.rankingData;
+    REMManagedBuildingCommodityUsageModel *model=self.commodityUsage;
+    REMEnergyUsageDataModel *commodityUsage = [[REMEnergyUsageDataModel alloc]init];
+    commodityUsage.dataValue = model.totalValue;
+    commodityUsage.uom = [[REMUomModel alloc]init];
+    commodityUsage.uom.code=model.totalUom;
+    self.totalLabel.data=commodityUsage;
+    
+    REMEnergyUsageDataModel *carbonUsage = [[REMEnergyUsageDataModel alloc]init];
+    commodityUsage.dataValue = model.carbonValue;
+    commodityUsage.uom = [[REMUomModel alloc]init];
+    commodityUsage.uom.code=model.carbonUom;
+    self.carbonLabel.data=carbonUsage;
+    
+    REMRankingDataModel *rankingUsage = [[REMRankingDataModel alloc]init];
+    rankingUsage.denominator = model.rankingDenominator;
+    rankingUsage.numerator = model.rankingNumerator;
+    
+    self.rankingLabel.data = rankingUsage;
     [self loadedPart];
+    
     if(model.targetValue!=nil &&
        model.targetValue!=nil &&
-       ![model.targetValue.dataValue isEqual:[NSNull null]] &&
-       [model.targetValue.dataValue isGreaterThan:@(0)])
+       ![model.targetValue isEqual:[NSNull null]] &&
+       [model.targetValue isGreaterThan:@(0)])
     {
         REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, self.rankingLabel.frame.origin.y, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
         target.title=NSLocalizedString(@"Building_Target", @""); //@"目标值";
@@ -104,9 +120,9 @@
         target.uomFontSize=kBuildingCommodityDetailUomFontSize;
         [target showTitle];
         [self addSplitBar:target];
-        if (model.commodityUsage!=nil && model.commodityUsage.dataValue!=nil &&
-            [model.commodityUsage.dataValue isEqual:[NSNull null]] == NO) {
-            if(model.isTargetAchieved==YES){
+        if (model.totalValue!=nil &&
+            [model.totalValue isEqual:[NSNull null]] == NO) {
+            if([model.isTargetAchieved boolValue]==YES){
                 [target setTitleIcon:[UIImage imageNamed:@"OverTarget"] ];
             }
             else{
@@ -116,7 +132,12 @@
         
         [self.view addSubview:target];
         self.targetLabel=target;
-        self.targetLabel.data=model.targetValue;
+        
+        REMEnergyUsageDataModel *targetUsage = [[REMEnergyUsageDataModel alloc]init];
+        targetUsage.dataValue = model.targetValue;
+        targetUsage.uom = [[REMUomModel alloc]init];
+        targetUsage.uom.code=model.targetUom;
+        self.targetLabel.data=targetUsage;
     }
 }
 
@@ -126,21 +147,27 @@
     REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSBuildingCommodityTotalUsage parameter:param accessCache:YES andMessageMap:nil];
     store.maskContainer = nil;
     store.disableAlert=YES;
+    REMCommodityUsageValuePersistenceProcessor *processor = [[REMCommodityUsageValuePersistenceProcessor alloc] init];
+    processor.commodityInfo = self.commodityInfo;
+    store.persistenceProcessor = processor;
+    
     store.groupName = [NSString stringWithFormat:@"building-data-%@", buildingId];
     [self.totalLabel showLoading];
     [self.carbonLabel showLoading];
     [self.rankingLabel showLoading];
-    [store access:^(NSDictionary *data) {
-        REMCommodityUsageModel *model=nil;
-        if([data isEqual:[NSNull null]]==YES){
-            model=nil;
-        }
-        else{
-            model=[[REMCommodityUsageModel alloc]initWithDictionary:data];
-            if(model!=nil){
-                self.commodityUsage=model;
-            }
-        }
+    [store access:^(REMManagedBuildingCommodityUsageModel *data) {
+//        REMCommodityUsageModel *model=nil;
+//        if([data isEqual:[NSNull null]]==YES){
+//            model=nil;
+//        }
+//        else{
+//            model=[[REMCommodityUsageModel alloc]initWithDictionary:data];
+//            if(model!=nil){
+//                self.commodityUsage=model;
+//            }
+//        }
+        self.commodityUsage = data;
+        
         [self.totalLabel hideLoading];
         [self.carbonLabel hideLoading];
         [self.rankingLabel hideLoading];

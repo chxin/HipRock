@@ -364,6 +364,7 @@
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
 		B42114C918C59363007CC070 /* REMManagedBuildingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B42114C818C59363007CC070 /* REMManagedBuildingModel.m */; };
+		B42114CC18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B42114CB18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.m */; };
 		B4223D51184EFF44004D39C0 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4223D50184EFF44004D39C0 /* GPUImage.framework */; };
 		B42FBF6417F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
 		B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
@@ -1116,6 +1117,8 @@
 		B4198EB11784220300B50475 /* REMJSONHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMJSONHelper.m; path = Common/Utility/REMJSONHelper.m; sourceTree = "<group>"; };
 		B42114C718C59363007CC070 /* REMManagedBuildingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingModel.h; sourceTree = "<group>"; };
 		B42114C818C59363007CC070 /* REMManagedBuildingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingModel.m; sourceTree = "<group>"; };
+		B42114CA18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMCommodityUsageValuePersistenceProcessor.h; sourceTree = "<group>"; };
+		B42114CB18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMCommodityUsageValuePersistenceProcessor.m; sourceTree = "<group>"; };
 		B4223D50184EFF44004D39C0 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = ../Lib/GPUImage.framework; sourceTree = "<group>"; };
 		B42FBF6217F574B5004F2F3A /* REMEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnum.h; path = Common/Model/REMEnum.h; sourceTree = "<group>"; };
 		B42FBF6317F574B5004F2F3A /* REMEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnum.m; path = Common/Model/REMEnum.m; sourceTree = "<group>"; };
@@ -1954,6 +1957,8 @@
 				7A63E0B318B44CBA00A13464 /* REMUpdateAllManager.m */,
 				B4F860DD18BC37AF007F4757 /* REMBuildingPersistenceProcessor.h */,
 				B4F860DE18BC37AF007F4757 /* REMBuildingPersistenceProcessor.m */,
+				B42114CA18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.h */,
+				B42114CB18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.m */,
 			);
 			name = Biz;
 			path = IPad/Biz;
@@ -3661,6 +3666,7 @@
 				EFD947081839DCBB00E9EC50 /* DCColumnSeries.m in Sources */,
 				B42114C918C59363007CC070 /* REMManagedBuildingModel.m in Sources */,
 				EFD947071839DCBB00E9EC50 /* _DCColumnsLayer.m in Sources */,
+				B42114CC18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.m in Sources */,
 				7A63E1ED18B44CBD00A13464 /* REMUpdateAllManager.m in Sources */,
 				7A63E1E818B44CBD00A13464 /* REMEnergyMultiTimeSearcher.m in Sources */,
 				7A63E25418B44CBD00A13464 /* REMChartSeriesIndicator.m in Sources */,

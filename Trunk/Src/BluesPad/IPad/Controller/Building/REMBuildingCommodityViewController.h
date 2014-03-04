@@ -20,7 +20,7 @@
 
 @property (nonatomic) BOOL dataLoadComplete;
 @property (nonatomic) NSUInteger index;
-@property (nonatomic,strong) REMCommodityUsageModel *commodityUsage;
+@property (nonatomic,strong) REMManagedBuildingCommodityUsageModel *commodityUsage;
 - (void) showChart;
 - (void)loadChartComplete;
 

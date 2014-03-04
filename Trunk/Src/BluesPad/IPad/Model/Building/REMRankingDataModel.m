@@ -12,8 +12,8 @@
 
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
-    self.numerator = [dictionary[@"RankingNumerator"] intValue];
-    self.denominator = [dictionary[@"RankingDenominator"] intValue];
+    self.numerator = dictionary[@"RankingNumerator"];
+    self.denominator = dictionary[@"RankingDenominator"];
 }
 
 @end

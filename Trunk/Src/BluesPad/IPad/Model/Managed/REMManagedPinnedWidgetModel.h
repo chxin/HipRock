@@ -16,14 +16,7 @@
 @property (nonatomic, retain) NSNumber * position;
 @property (nonatomic, retain) NSNumber * widgetId;
 @property (nonatomic, retain) NSNumber * dashboardId;
-@property (nonatomic, retain) NSSet *commodities;
+@property (nonatomic, retain) REMManagedBuildingCommodityUsageModel *commodity;
 @end
 
-@interface REMManagedPinnedWidgetModel (CoreDataGeneratedAccessors)
 
-- (void)addCommoditiesObject:(REMManagedBuildingCommodityUsageModel *)value;
-- (void)removeCommoditiesObject:(REMManagedBuildingCommodityUsageModel *)value;
-- (void)addCommodities:(NSSet *)values;
-- (void)removeCommodities:(NSSet *)values;
-
-@end

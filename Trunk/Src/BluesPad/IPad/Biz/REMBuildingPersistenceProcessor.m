@@ -25,11 +25,37 @@
         REMManagedBuildingModel *buildingModel = [self persistBuilding:buildingOverall[@"Building"]];
         buildingModel.isQualified = NULL_TO_NIL(buildingOverall[@"IsQualified"]);
         [self persistCommodity:buildingOverall[@"CommodityArray"] intoBuilding:buildingModel];
+        [self persistDashboard:buildingOverall[@"DashboardList"] intoBuilding:buildingModel];
+        [self persistPinnedWidget:buildingOverall[@"WidgetRelation"] intoBuilding:buildingModel];
     }
     
     [self.dataStore persistManageObject];
     
     return [self fetchData];
+}
+
+- (void)persistPinnedWidget:(NSArray *)pinnedWidgetArray intoBuilding:(REMManagedBuildingModel *)building{
+    if (pinnedWidgetArray!=nil && [pinnedWidgetArray isEqual:[NSNull null]]==NO) {
+        
+        for (NSDictionary *relation in pinnedWidgetArray) {
+            
+            for (REMManagedBuildingCommodityUsageModel *commodity in [building.commodities allObjects]) {
+                NSNumber *commodityId = relation[@"CommodityId"];
+                if ([commodity.id isEqualToNumber:commodityId] == YES) {
+                    REMManagedPinnedWidgetModel *pinnedModel = [self.dataStore newManagedObject:@"REMManagedPinnedWidgetModel"];
+                    
+                    pinnedModel.commodity = commodity;
+                    pinnedModel.widgetId = relation[@"WidgetId"];
+                    pinnedModel.dashboardId = relation[@"DashboardId"];
+                    pinnedModel.position =relation[@"Position"];
+                    
+                    [commodity addPinnedWidgetsObject:pinnedModel];
+                }
+            }
+            
+            
+        }
+    }
 }
 
 - (void)persistDashboard:(NSArray *)dashboardArray intoBuilding:(REMManagedBuildingModel *)building{
@@ -238,7 +264,12 @@
     NSDictionary *electricityUsageThisMonth = dictionary[@"ElectricUsageThisMonth"];
     
     if (!REMIsNilOrNull(electricityUsageThisMonth)) {
-        
+        REMManagedBuildingCommodityUsageModel *elecModel = [self.dataStore newManagedObject:@"REMManagedBuildingCommodityUsageModel"];
+        elecModel.id = electricityUsageThisMonth[@"Id"];
+        elecModel.name = NULL_TO_NIL(electricityUsageThisMonth[@"Name"]);
+        elecModel.code = electricityUsageThisMonth[@"Code"];
+        elecModel.comment = electricityUsageThisMonth[@"Comment"];
+        building.electricityUsageThisMonth =elecModel;
     }
     
     
@@ -246,6 +277,8 @@
     return building;
 
 }
+
+
 
 
 

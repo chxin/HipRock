@@ -22,8 +22,8 @@
 @dynamic targetValue;
 @dynamic totalUom;
 @dynamic totalValue;
-@dynamic usageUom;
-@dynamic usageValue;
+@dynamic carbonUom;
+@dynamic carbonValue;
 @dynamic id;
 @dynamic comment;
 @dynamic building;

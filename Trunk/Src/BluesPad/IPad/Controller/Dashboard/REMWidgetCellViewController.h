@@ -10,10 +10,10 @@
 #import "REMWidgetObject.h"
 #import "REMEnergyViewData.h"
 #import "REMDashboardController.h"
-
+#import "REMManagedWidgetModel.h"
 @interface REMWidgetCellViewController : UIViewController
 
-@property (nonatomic,weak) REMWidgetObject *widgetInfo;
+@property (nonatomic,weak) REMManagedWidgetModel *widgetInfo;
 @property (nonatomic,copy) NSString *groupName;
 @property (nonatomic) NSUInteger currentIndex;
 

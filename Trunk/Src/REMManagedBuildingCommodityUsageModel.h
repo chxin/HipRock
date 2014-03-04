@@ -22,8 +22,8 @@
 @property (nonatomic, retain) NSNumber * targetValue;
 @property (nonatomic, retain) NSString * totalUom;
 @property (nonatomic, retain) NSNumber * totalValue;
-@property (nonatomic, retain) NSString * usageUom;
-@property (nonatomic, retain) NSNumber * usageValue;
+@property (nonatomic, retain) NSString * carbonUom;
+@property (nonatomic, retain) NSNumber * carbonValue;
 @property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSString * comment;
 @property (nonatomic, retain) REMManagedBuildingModel *building;

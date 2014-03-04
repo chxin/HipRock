@@ -114,7 +114,7 @@
 
 -(CGRect)getBubbleFrame:(GMSMarker *)marker
 {
-    REMBuildingOverallModel *buildingInfo = marker.userData;
+    REMManagedBuildingModel *buildingInfo = marker.userData;
     
     NSString *mainTitleText = [self getMainTitleText:buildingInfo], *subTitleText = [self getSubTitleText:buildingInfo];
     
@@ -135,8 +135,8 @@
 
 -(NSString *)getSubTitleText:(REMManagedBuildingModel *)buildingInfo
 {
-    NSNumber *dataValue = buildingInfo.electricityUsageThisMonth.usageValue;//    .electricityUsageThisMonth .commodityUsage.dataValue;
-    NSString *uom = buildingInfo.electricityUsageThisMonth.usageUom;//  .commodityUsage.uom.code;
+    NSNumber *dataValue = buildingInfo.electricityUsageThisMonth.totalValue;//    .electricityUsageThisMonth .commodityUsage.dataValue;
+    NSString *uom = buildingInfo.electricityUsageThisMonth.totalUom;//  .commodityUsage.uom.code;
     
     NSString *formattedDataValue = [REMNumberHelper formatDataValueWithCarry:dataValue];
     

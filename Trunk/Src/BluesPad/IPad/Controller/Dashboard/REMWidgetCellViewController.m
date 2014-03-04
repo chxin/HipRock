@@ -18,6 +18,9 @@
 #import "DCLabelingWrapper.h"
 #import "REMWidgetCellDelegator.h"
 #import "REMWidgetStepEnergyModel.h"
+#import "REMManagedSharedModel.h"
+
+
 @interface REMWidgetCellViewController ()
 
 
@@ -29,6 +32,7 @@
 
 @property (nonatomic,strong) REMWidgetSearchModelBase *searchModel;
 @property (nonatomic,strong) REMWidgetCellDelegator *bizDelegator;
+@property (nonatomic,strong) REMWidgetContentSyntax *contentSyntax;
 @end
 
 @implementation REMWidgetCellViewController
@@ -50,10 +54,12 @@
     [self.view setFrame:self.viewFrame];
     //self.view.layer.borderColor=[UIColor redColor].CGColor;
     //self.view.layer.borderWidth=1;
+    
+    self.contentSyntax = [[REMWidgetContentSyntax alloc]initWithJSONString:self.widgetInfo.contentSyntax];
 
-    self.searchModel=[REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax.dataStoreType withParam:self.widgetInfo.contentSyntax.params];
-    if(self.widgetInfo.contentSyntax.relativeDateType!=REMRelativeTimeRangeTypeNone){
-        self.searchModel.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
+    self.searchModel=[REMWidgetSearchModelBase searchModelByDataStoreType:self.contentSyntax.dataStoreType withParam:self.contentSyntax.params];
+    if(self.contentSyntax.relativeDateType!=REMRelativeTimeRangeTypeNone){
+        self.searchModel.relativeDateType=self.contentSyntax.relativeDateType;
     }
     
     
@@ -77,13 +83,13 @@
 
     [self.bizDelegator initBizView];
     
-    if(self.widgetInfo.shareInfo!=nil && [self.widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
+    if(self.widgetInfo.sharedInfo!=nil && [self.widgetInfo.sharedInfo isEqual:[NSNull null]]==NO){
         
         UILabel *share=[[UILabel alloc]initWithFrame:CGRectMake(title.frame.origin.x, title.frame.origin.y+2, self.view.frame.size.width-(title.frame.origin.x*2), kDashboardWidgetShareSize)];
         share.backgroundColor=[UIColor clearColor];
         share.textColor=[REMColor colorByHexString:@"#5e5e5e"];
         share.textAlignment=NSTextAlignmentRight;
-        NSString *userName=self.widgetInfo.shareInfo.userRealName;
+        NSString *userName=self.widgetInfo.sharedInfo.userRealName;
         if (userName.length>=4) {
             userName = [[userName substringToIndex:3] stringByAppendingString:@"..."];
         }
@@ -165,9 +171,9 @@
     if (widgetWrapper != nil) {
         self.wrapper=widgetWrapper;
         if([widgetWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
-            if(self.widgetInfo.contentSyntax.calendarType!=REMCalendarTypeNone){
+            if(self.contentSyntax.calendarType!=REMCalendarTypeNone){
                 DCTrendWrapper *trend=(DCTrendWrapper *)widgetWrapper;
-                trend.calenderType=self.widgetInfo.contentSyntax.calendarType;
+                trend.calenderType=self.contentSyntax.calendarType;
             }
         }
         [self.chartContainer addSubview:[widgetWrapper getView]];
@@ -235,7 +241,7 @@
     [button setExclusiveTouch:YES];
     [button setMultipleTouchEnabled:NO];
     [button setBackgroundImage:image forState:UIControlStateNormal];
-    button.tag=[self.widgetInfo.widgetId integerValue];
+    button.tag=[self.widgetInfo.id integerValue];
     [button addTarget:self action:@selector(widgetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     if(self.wrapper!=nil){

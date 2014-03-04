@@ -18,6 +18,8 @@
         <relationship name="customer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedCustomerModel" inverseName="administrators" inverseEntity="REMManagedCustomerModel" syncable="YES"/>
     </entity>
     <entity name="REMManagedBuildingCommodityUsageModel" representedClassName="REMManagedBuildingCommodityUsageModel" syncable="YES">
+        <attribute name="carbonUom" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="carbonValue" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -29,10 +31,8 @@
         <attribute name="targetValue" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="totalUom" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalValue" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
-        <attribute name="usageUom" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="usageValue" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <relationship name="building" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedBuildingModel" inverseName="commodities" inverseEntity="REMManagedBuildingModel" syncable="YES"/>
-        <relationship name="pinnedWidgets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="REMManagedPinnedWidgetModel" inverseName="commodities" inverseEntity="REMManagedPinnedWidgetModel" syncable="YES"/>
+        <relationship name="pinnedWidgets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="REMManagedPinnedWidgetModel" inverseName="commodity" inverseEntity="REMManagedPinnedWidgetModel" syncable="YES"/>
     </entity>
     <entity name="REMManagedBuildingModel" representedClassName="REMManagedBuildingModel" syncable="YES">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
@@ -86,11 +86,19 @@
         <relationship name="sharedInfo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="REMManagedSharedModel" inverseName="dashboard" inverseEntity="REMManagedSharedModel" syncable="YES"/>
         <relationship name="widgets" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="REMManagedWidgetModel" inverseName="dashboard" inverseEntity="REMManagedWidgetModel" syncable="YES"/>
     </entity>
+    <entity name="REMManagedEnergyDataModel" representedClassName="REMManagedEnergyDataModel" syncable="YES">
+        <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="REMManagedImageModel" representedClassName="REMManagedImageModel" syncable="YES">
+        <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="REMManagedPinnedWidgetModel" representedClassName="REMManagedPinnedWidgetModel" syncable="YES">
         <attribute name="dashboardId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="position" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="widgetId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <relationship name="commodities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="REMManagedBuildingCommodityUsageModel" inverseName="pinnedWidgets" inverseEntity="REMManagedBuildingCommodityUsageModel" syncable="YES"/>
+        <relationship name="commodity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedBuildingCommodityUsageModel" inverseName="pinnedWidgets" inverseEntity="REMManagedBuildingCommodityUsageModel" syncable="YES"/>
     </entity>
     <entity name="REMManagedSharedModel" representedClassName="REMManagedSharedModel" syncable="YES">
         <attribute name="shareTime" optional="YES" attributeType="Date" syncable="YES"/>
@@ -141,5 +149,7 @@
         <element name="REMManagedSharedModel" positionX="0" positionY="0" width="0" height="0"/>
         <element name="REMManagedUserModel" positionX="0" positionY="0" width="0" height="0"/>
         <element name="REMManagedWidgetModel" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="REMManagedEnergyDataModel" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="REMManagedImageModel" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>
