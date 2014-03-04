@@ -1,7 +1,6 @@
 import os
 import web
 from models import model
-from common import process
 
 t_globals = {  
     'datestr': web.datestr,  
