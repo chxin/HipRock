@@ -282,10 +282,10 @@
 		7A39D65418B5A83100CC9D5D /* REMEnergyViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E15418B44CBC00A13464 /* REMEnergyViewData.m */; };
 		7A39D65518B5A83100CC9D5D /* REMTargetEnergyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E15618B44CBC00A13464 /* REMTargetEnergyData.m */; };
 		7A39D65618B5A83100CC9D5D /* REMUserValidationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E15918B44CBC00A13464 /* REMUserValidationModel.m */; };
-		7A39D65718B5A83100CC9D5D /* REMManagedAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E15C18B44CBC00A13464 /* REMManagedAdministratorModel.m */; };
-		7A39D65818B5A83100CC9D5D /* REMManagedCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E15E18B44CBC00A13464 /* REMManagedCustomerModel.m */; };
-		7A39D65918B5A83100CC9D5D /* REMManagedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E16018B44CBC00A13464 /* REMManagedModel.m */; };
-		7A39D65A18B5A83100CC9D5D /* REMManagedUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E16218B44CBC00A13464 /* REMManagedUserModel.m */; };
+		7A39D65718B5A83100CC9D5D /* (null) in Sources */ = {isa = PBXBuildFile; };
+		7A39D65818B5A83100CC9D5D /* (null) in Sources */ = {isa = PBXBuildFile; };
+		7A39D65918B5A83100CC9D5D /* (null) in Sources */ = {isa = PBXBuildFile; };
+		7A39D65A18B5A83100CC9D5D /* (null) in Sources */ = {isa = PBXBuildFile; };
 		7A39D65B18B5A83100CC9D5D /* REMWidgetCommoditySearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E16518B44CBC00A13464 /* REMWidgetCommoditySearchModel.m */; };
 		7A39D65C18B5A83100CC9D5D /* REMWidgetLabellingSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E16718B44CBC00A13464 /* REMWidgetLabellingSearchModel.m */; };
 		7A39D65D18B5A83100CC9D5D /* REMWidgetMultiTimespanSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E16918B44CBC00A13464 /* REMWidgetMultiTimespanSearchModel.m */; };
@@ -375,6 +375,20 @@
 		7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDC1786C195008A1033 /* REMMaskManager.m */; };
 		7A3F66F3184C561D0079A244 /* JumpTrial-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3F66F2184C561D0079A244 /* JumpTrial-Pressed.png */; };
 		7A3F66F5184C56440079A244 /* JumpTrial-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3F66F4184C56440079A244 /* JumpTrial-Pressed@2x.png */; };
+		7A43BDD118C6F4C8007FEFEF /* REMBuildingPersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A43BDCC18C6F4C8007FEFEF /* REMBuildingPersistenceProcessor.m */; };
+		7A43BDD218C6F4C8007FEFEF /* REMCommodityUsageValuePersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A43BDCE18C6F4C8007FEFEF /* REMCommodityUsageValuePersistenceProcessor.m */; };
+		7A43BDD318C6F4C8007FEFEF /* REMPinToCoverPersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A43BDD018C6F4C8007FEFEF /* REMPinToCoverPersistenceProcessor.m */; };
+		7A43BDDD18C6F4EC007FEFEF /* REMManageBuildingAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A43BDD718C6F4EC007FEFEF /* REMManageBuildingAirQualityModel.m */; };
+		7A43BDDE18C6F4EC007FEFEF /* REMManagedBuildingCommodityUsageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A43BDD918C6F4EC007FEFEF /* REMManagedBuildingCommodityUsageModel.m */; };
+		7A43BDEF18C6F505007FEFEF /* BluesPad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A43BDDF18C6F505007FEFEF /* BluesPad.xcdatamodeld */; };
+		7A43BDF018C6F505007FEFEF /* REMManagedBuildingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A43BDE118C6F505007FEFEF /* REMManagedBuildingModel.m */; };
+		7A43BDF118C6F505007FEFEF /* REMManagedBuildingPictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A43BDE218C6F505007FEFEF /* REMManagedBuildingPictureModel.m */; };
+		7A43BDF218C6F505007FEFEF /* REMManagedBuildingRankingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A43BDE418C6F505007FEFEF /* REMManagedBuildingRankingModel.m */; };
+		7A43BDF318C6F505007FEFEF /* REMManagedDashboardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A43BDE618C6F505007FEFEF /* REMManagedDashboardModel.m */; };
+		7A43BDF418C6F505007FEFEF /* REMManagedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A43BDE818C6F505007FEFEF /* REMManagedModel.m */; };
+		7A43BDF518C6F505007FEFEF /* REMManagedPinnedWidgetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A43BDEA18C6F505007FEFEF /* REMManagedPinnedWidgetModel.m */; };
+		7A43BDF618C6F505007FEFEF /* REMManagedSharedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A43BDEC18C6F505007FEFEF /* REMManagedSharedModel.m */; };
+		7A43BDF718C6F505007FEFEF /* REMManagedWidgetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A43BDEE18C6F505007FEFEF /* REMManagedWidgetModel.m */; };
 		7A44E047182398B60080CEBE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A44E046182398B60080CEBE /* MessageUI.framework */; };
 		7A47F3A018482C1B007EE37B /* JumpLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39818482C1B007EE37B /* JumpLogin.png */; };
 		7A47F3A118482C1B007EE37B /* JumpLogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39918482C1B007EE37B /* JumpLogin@2x.png */; };
@@ -655,9 +669,6 @@
 		B4175116188CC83E0020AE8E /* Map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4175112188CC83E0020AE8E /* Map@2x.png */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
-		B42114C918C59363007CC070 /* REMManagedBuildingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B42114C818C59363007CC070 /* REMManagedBuildingModel.m */; };
-		B42114CC18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B42114CB18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.m */; };
-		B42114CF18C5CC91007CC070 /* REMPinToCoverPersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B42114CE18C5CC91007CC070 /* REMPinToCoverPersistenceProcessor.m */; };
 		B4223D51184EFF44004D39C0 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4223D50184EFF44004D39C0 /* GPUImage.framework */; };
 		B42FBF6417F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
 		B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
@@ -726,22 +737,12 @@
 		B48ED40A178EA8970032CD72 /* REMStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D1C1785115700219469 /* REMStorage.m */; };
 		B49B6F511781491800BC130A /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
 		B49C430018B34DB900C3CEFE /* REMDataPersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49C42FF18B34DB900C3CEFE /* REMDataPersistenceProcessor.m */; };
-		B4BF101518B4889500E1AAEC /* BluesPad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B4BF101318B4889400E1AAEC /* BluesPad.xcdatamodeld */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		B4D534E018AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4D534DF18AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png */; };
 		B4DC084017F90E2C005658C1 /* REMAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */; };
 		B4E0015618B5C16E00F1D6D9 /* REMManagedUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E0015518B5C16E00F1D6D9 /* REMManagedUserModel.m */; };
 		B4E0015918B5C16E00F1D6D9 /* REMManagedCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E0015818B5C16E00F1D6D9 /* REMManagedCustomerModel.m */; };
 		B4E0015C18B5C16E00F1D6D9 /* REMManagedAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E0015B18B5C16E00F1D6D9 /* REMManagedAdministratorModel.m */; };
-		B4F860DF18BC37AF007F4757 /* REMBuildingPersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F860DE18BC37AF007F4757 /* REMBuildingPersistenceProcessor.m */; };
-		B4F860E818BC3A10007F4757 /* REMManageBuildingAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F860E718BC3A10007F4757 /* REMManageBuildingAirQualityModel.m */; };
-		B4F860F118BC3A10007F4757 /* REMManagedBuildingRankingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F860F018BC3A10007F4757 /* REMManagedBuildingRankingModel.m */; };
-		B4F860F718BC3A11007F4757 /* REMManagedPinnedWidgetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F860F618BC3A11007F4757 /* REMManagedPinnedWidgetModel.m */; };
-		B4F8610318BC3DD8007F4757 /* REMManagedBuildingPictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F8610218BC3DD8007F4757 /* REMManagedBuildingPictureModel.m */; };
-		B4F8610618BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F8610518BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.m */; };
-		B4F8610F18BC5863007F4757 /* REMManagedSharedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F8610E18BC5863007F4757 /* REMManagedSharedModel.m */; };
-		B4F8611518BC5945007F4757 /* REMManagedDashboardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F8611418BC5945007F4757 /* REMManagedDashboardModel.m */; };
-		B4F8611818BC5B98007F4757 /* REMManagedWidgetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F8611718BC5B98007F4757 /* REMManagedWidgetModel.m */; };
 		EF0346B0183B4BA600DE186A /* _DCLayerTrashbox.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */; };
 		EF0346B3183B520100DE186A /* _DCSeriesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B2183B520100DE186A /* _DCSeriesLayer.m */; };
 		EF0346B9183B979800DE186A /* DCLineWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B8183B979800DE186A /* DCLineWrapper.m */; };
@@ -1012,6 +1013,33 @@
 		7A3DDCDC1786C195008A1033 /* REMMaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMaskManager.m; path = Common/Utility/REMMaskManager.m; sourceTree = "<group>"; };
 		7A3F66F2184C561D0079A244 /* JumpTrial-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpTrial-Pressed.png"; sourceTree = "<group>"; };
 		7A3F66F4184C56440079A244 /* JumpTrial-Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpTrial-Pressed@2x.png"; sourceTree = "<group>"; };
+		7A43BDCB18C6F4C8007FEFEF /* REMBuildingPersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingPersistenceProcessor.h; sourceTree = "<group>"; };
+		7A43BDCC18C6F4C8007FEFEF /* REMBuildingPersistenceProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingPersistenceProcessor.m; sourceTree = "<group>"; };
+		7A43BDCD18C6F4C8007FEFEF /* REMCommodityUsageValuePersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMCommodityUsageValuePersistenceProcessor.h; sourceTree = "<group>"; };
+		7A43BDCE18C6F4C8007FEFEF /* REMCommodityUsageValuePersistenceProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMCommodityUsageValuePersistenceProcessor.m; sourceTree = "<group>"; };
+		7A43BDCF18C6F4C8007FEFEF /* REMPinToCoverPersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPinToCoverPersistenceProcessor.h; sourceTree = "<group>"; };
+		7A43BDD018C6F4C8007FEFEF /* REMPinToCoverPersistenceProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPinToCoverPersistenceProcessor.m; sourceTree = "<group>"; };
+		7A43BDD618C6F4EC007FEFEF /* REMManageBuildingAirQualityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManageBuildingAirQualityModel.h; sourceTree = "<group>"; };
+		7A43BDD718C6F4EC007FEFEF /* REMManageBuildingAirQualityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManageBuildingAirQualityModel.m; sourceTree = "<group>"; };
+		7A43BDD818C6F4EC007FEFEF /* REMManagedBuildingCommodityUsageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingCommodityUsageModel.h; sourceTree = "<group>"; };
+		7A43BDD918C6F4EC007FEFEF /* REMManagedBuildingCommodityUsageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingCommodityUsageModel.m; sourceTree = "<group>"; };
+		7A43BDDA18C6F4EC007FEFEF /* REMManagedBuildingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingModel.h; sourceTree = "<group>"; };
+		7A43BDDB18C6F4EC007FEFEF /* REMManagedBuildingPictureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingPictureModel.h; sourceTree = "<group>"; };
+		7A43BDE018C6F505007FEFEF /* BluesPad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BluesPad.xcdatamodel; sourceTree = "<group>"; };
+		7A43BDE118C6F505007FEFEF /* REMManagedBuildingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingModel.m; sourceTree = "<group>"; };
+		7A43BDE218C6F505007FEFEF /* REMManagedBuildingPictureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingPictureModel.m; sourceTree = "<group>"; };
+		7A43BDE318C6F505007FEFEF /* REMManagedBuildingRankingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingRankingModel.h; sourceTree = "<group>"; };
+		7A43BDE418C6F505007FEFEF /* REMManagedBuildingRankingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingRankingModel.m; sourceTree = "<group>"; };
+		7A43BDE518C6F505007FEFEF /* REMManagedDashboardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedDashboardModel.h; sourceTree = "<group>"; };
+		7A43BDE618C6F505007FEFEF /* REMManagedDashboardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedDashboardModel.m; sourceTree = "<group>"; };
+		7A43BDE718C6F505007FEFEF /* REMManagedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedModel.h; sourceTree = "<group>"; };
+		7A43BDE818C6F505007FEFEF /* REMManagedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedModel.m; sourceTree = "<group>"; };
+		7A43BDE918C6F505007FEFEF /* REMManagedPinnedWidgetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedPinnedWidgetModel.h; sourceTree = "<group>"; };
+		7A43BDEA18C6F505007FEFEF /* REMManagedPinnedWidgetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedPinnedWidgetModel.m; sourceTree = "<group>"; };
+		7A43BDEB18C6F505007FEFEF /* REMManagedSharedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedSharedModel.h; sourceTree = "<group>"; };
+		7A43BDEC18C6F505007FEFEF /* REMManagedSharedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedSharedModel.m; sourceTree = "<group>"; };
+		7A43BDED18C6F505007FEFEF /* REMManagedWidgetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedWidgetModel.h; sourceTree = "<group>"; };
+		7A43BDEE18C6F505007FEFEF /* REMManagedWidgetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedWidgetModel.m; sourceTree = "<group>"; };
 		7A44E046182398B60080CEBE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
 		7A47F39818482C1B007EE37B /* JumpLogin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JumpLogin.png; sourceTree = "<group>"; };
 		7A47F39918482C1B007EE37B /* JumpLogin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin@2x.png"; sourceTree = "<group>"; };
@@ -1370,7 +1398,6 @@
 		7A9B1E2B177B3A8B00C282A8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7A9B1E2E177B3A8B00C282A8 /* REMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = REMAppDelegate.h; sourceTree = "<group>"; };
 		7A9B1E2F177B3A8B00C282A8 /* REMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = REMAppDelegate.m; sourceTree = "<group>"; };
-		7A9B1E42177B3A8B00C282A8 /* BluesTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BluesTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9B1E43177B3A8B00C282A8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		7AA6464818C056050081E96E /* REMSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingViewController.h; sourceTree = "<group>"; };
 		7AA6464918C056050081E96E /* REMSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingViewController.m; sourceTree = "<group>"; };
@@ -1413,12 +1440,6 @@
 		B4198EAD178410D300B50475 /* REMLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLogManager.m; path = Common/Log/REMLogManager.m; sourceTree = "<group>"; };
 		B4198EB01784220300B50475 /* REMJSONHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMJSONHelper.h; path = Common/Utility/REMJSONHelper.h; sourceTree = "<group>"; };
 		B4198EB11784220300B50475 /* REMJSONHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMJSONHelper.m; path = Common/Utility/REMJSONHelper.m; sourceTree = "<group>"; };
-		B42114C718C59363007CC070 /* REMManagedBuildingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingModel.h; sourceTree = "<group>"; };
-		B42114C818C59363007CC070 /* REMManagedBuildingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingModel.m; sourceTree = "<group>"; };
-		B42114CA18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMCommodityUsageValuePersistenceProcessor.h; sourceTree = "<group>"; };
-		B42114CB18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMCommodityUsageValuePersistenceProcessor.m; sourceTree = "<group>"; };
-		B42114CD18C5CC91007CC070 /* REMPinToCoverPersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPinToCoverPersistenceProcessor.h; sourceTree = "<group>"; };
-		B42114CE18C5CC91007CC070 /* REMPinToCoverPersistenceProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPinToCoverPersistenceProcessor.m; sourceTree = "<group>"; };
 		B4223D50184EFF44004D39C0 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = ../Lib/GPUImage.framework; sourceTree = "<group>"; };
 		B42FBF6217F574B5004F2F3A /* REMEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnum.h; path = Common/Model/REMEnum.h; sourceTree = "<group>"; };
 		B42FBF6317F574B5004F2F3A /* REMEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnum.m; path = Common/Model/REMEnum.m; sourceTree = "<group>"; };
@@ -1500,7 +1521,6 @@
 		B49B6F501781491800BC130A /* REMColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMColor.m; path = Common/Utility/REMColor.m; sourceTree = "<group>"; };
 		B49C42FE18B34DB900C3CEFE /* REMDataPersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDataPersistenceProcessor.h; path = Common/Communication/REMDataPersistenceProcessor.h; sourceTree = "<group>"; };
 		B49C42FF18B34DB900C3CEFE /* REMDataPersistenceProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataPersistenceProcessor.m; path = Common/Communication/REMDataPersistenceProcessor.m; sourceTree = "<group>"; };
-		B4BF101418B4889400E1AAEC /* BluesPad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BluesPad.xcdatamodel; sourceTree = "<group>"; };
 		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		B4D534DF18AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuildingBlur@2x.png"; sourceTree = "<group>"; };
 		B4DC083E17F90E2C005658C1 /* REMAdministratorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAdministratorModel.h; path = Common/Model/REMAdministratorModel.h; sourceTree = "<group>"; };
@@ -1513,24 +1533,6 @@
 		B4E0015B18B5C16E00F1D6D9 /* REMManagedAdministratorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedAdministratorModel.m; sourceTree = "<group>"; };
 		B4EDFB1C1806983600873FA1 /* REMDimensionForSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensionForSplashScreen.h; path = Resource/Dimensions/REMDimensionForSplashScreen.h; sourceTree = "<group>"; };
 		B4EDFB1D1806983600873FA1 /* REMDimensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensions.h; path = Resource/Dimensions/REMDimensions.h; sourceTree = "<group>"; };
-		B4F860DD18BC37AF007F4757 /* REMBuildingPersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingPersistenceProcessor.h; sourceTree = "<group>"; };
-		B4F860DE18BC37AF007F4757 /* REMBuildingPersistenceProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingPersistenceProcessor.m; sourceTree = "<group>"; };
-		B4F860E618BC3A10007F4757 /* REMManageBuildingAirQualityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManageBuildingAirQualityModel.h; sourceTree = "<group>"; };
-		B4F860E718BC3A10007F4757 /* REMManageBuildingAirQualityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManageBuildingAirQualityModel.m; sourceTree = "<group>"; };
-		B4F860EF18BC3A10007F4757 /* REMManagedBuildingRankingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingRankingModel.h; sourceTree = "<group>"; };
-		B4F860F018BC3A10007F4757 /* REMManagedBuildingRankingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingRankingModel.m; sourceTree = "<group>"; };
-		B4F860F518BC3A11007F4757 /* REMManagedPinnedWidgetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedPinnedWidgetModel.h; sourceTree = "<group>"; };
-		B4F860F618BC3A11007F4757 /* REMManagedPinnedWidgetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedPinnedWidgetModel.m; sourceTree = "<group>"; };
-		B4F8610118BC3DD8007F4757 /* REMManagedBuildingPictureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingPictureModel.h; sourceTree = "<group>"; };
-		B4F8610218BC3DD8007F4757 /* REMManagedBuildingPictureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingPictureModel.m; sourceTree = "<group>"; };
-		B4F8610418BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMManagedBuildingCommodityUsageModel.h; path = ../../../../REMManagedBuildingCommodityUsageModel.h; sourceTree = "<group>"; };
-		B4F8610518BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMManagedBuildingCommodityUsageModel.m; path = ../../../../REMManagedBuildingCommodityUsageModel.m; sourceTree = "<group>"; };
-		B4F8610D18BC5863007F4757 /* REMManagedSharedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedSharedModel.h; sourceTree = "<group>"; };
-		B4F8610E18BC5863007F4757 /* REMManagedSharedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedSharedModel.m; sourceTree = "<group>"; };
-		B4F8611318BC5945007F4757 /* REMManagedDashboardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedDashboardModel.h; sourceTree = "<group>"; };
-		B4F8611418BC5945007F4757 /* REMManagedDashboardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedDashboardModel.m; sourceTree = "<group>"; };
-		B4F8611618BC5B98007F4757 /* REMManagedWidgetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedWidgetModel.h; sourceTree = "<group>"; };
-		B4F8611718BC5B98007F4757 /* REMManagedWidgetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedWidgetModel.m; sourceTree = "<group>"; };
 		EF01DB58185B1BCF00A6ADCB /* DCPieChartViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCPieChartViewDelegate.h; sourceTree = "<group>"; };
 		EF0346AE183B4BA600DE186A /* _DCLayerTrashbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLayerTrashbox.h; path = ../_DCLayerTrashbox.h; sourceTree = "<group>"; };
 		EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLayerTrashbox.m; path = ../_DCLayerTrashbox.m; sourceTree = "<group>"; };
@@ -2294,12 +2296,12 @@
 				7A63E0B118B44CBA00A13464 /* REMPinToBuildingCoverHelper.m */,
 				7A63E0B218B44CBA00A13464 /* REMUpdateAllManager.h */,
 				7A63E0B318B44CBA00A13464 /* REMUpdateAllManager.m */,
-				B4F860DD18BC37AF007F4757 /* REMBuildingPersistenceProcessor.h */,
-				B4F860DE18BC37AF007F4757 /* REMBuildingPersistenceProcessor.m */,
-				B42114CA18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.h */,
-				B42114CB18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.m */,
-				B42114CD18C5CC91007CC070 /* REMPinToCoverPersistenceProcessor.h */,
-				B42114CE18C5CC91007CC070 /* REMPinToCoverPersistenceProcessor.m */,
+				7A43BDCB18C6F4C8007FEFEF /* REMBuildingPersistenceProcessor.h */,
+				7A43BDCC18C6F4C8007FEFEF /* REMBuildingPersistenceProcessor.m */,
+				7A43BDCD18C6F4C8007FEFEF /* REMCommodityUsageValuePersistenceProcessor.h */,
+				7A43BDCE18C6F4C8007FEFEF /* REMCommodityUsageValuePersistenceProcessor.m */,
+				7A43BDCF18C6F4C8007FEFEF /* REMPinToCoverPersistenceProcessor.h */,
+				7A43BDD018C6F4C8007FEFEF /* REMPinToCoverPersistenceProcessor.m */,
 			);
 			name = Biz;
 			path = IPad/Biz;
@@ -2627,25 +2629,27 @@
 		7A63E15A18B44CBC00A13464 /* Managed */ = {
 			isa = PBXGroup;
 			children = (
-				B4BF101318B4889400E1AAEC /* BluesPad.xcdatamodeld */,
-				B4F8610418BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.h */,
-				B4F8610518BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.m */,
-				B42114C718C59363007CC070 /* REMManagedBuildingModel.h */,
-				B42114C818C59363007CC070 /* REMManagedBuildingModel.m */,
-				B4F8611618BC5B98007F4757 /* REMManagedWidgetModel.h */,
-				B4F8611718BC5B98007F4757 /* REMManagedWidgetModel.m */,
-				B4F8611318BC5945007F4757 /* REMManagedDashboardModel.h */,
-				B4F8611418BC5945007F4757 /* REMManagedDashboardModel.m */,
-				B4F8610D18BC5863007F4757 /* REMManagedSharedModel.h */,
-				B4F8610E18BC5863007F4757 /* REMManagedSharedModel.m */,
-				B4F8610118BC3DD8007F4757 /* REMManagedBuildingPictureModel.h */,
-				B4F8610218BC3DD8007F4757 /* REMManagedBuildingPictureModel.m */,
-				B4F860F518BC3A11007F4757 /* REMManagedPinnedWidgetModel.h */,
-				B4F860F618BC3A11007F4757 /* REMManagedPinnedWidgetModel.m */,
-				B4F860EF18BC3A10007F4757 /* REMManagedBuildingRankingModel.h */,
-				B4F860F018BC3A10007F4757 /* REMManagedBuildingRankingModel.m */,
-				B4F860E618BC3A10007F4757 /* REMManageBuildingAirQualityModel.h */,
-				B4F860E718BC3A10007F4757 /* REMManageBuildingAirQualityModel.m */,
+				7A43BDDF18C6F505007FEFEF /* BluesPad.xcdatamodeld */,
+				7A43BDE718C6F505007FEFEF /* REMManagedModel.h */,
+				7A43BDE818C6F505007FEFEF /* REMManagedModel.m */,
+				7A43BDDA18C6F4EC007FEFEF /* REMManagedBuildingModel.h */,
+				7A43BDE118C6F505007FEFEF /* REMManagedBuildingModel.m */,
+				7A43BDDB18C6F4EC007FEFEF /* REMManagedBuildingPictureModel.h */,
+				7A43BDE218C6F505007FEFEF /* REMManagedBuildingPictureModel.m */,
+				7A43BDE318C6F505007FEFEF /* REMManagedBuildingRankingModel.h */,
+				7A43BDE418C6F505007FEFEF /* REMManagedBuildingRankingModel.m */,
+				7A43BDE518C6F505007FEFEF /* REMManagedDashboardModel.h */,
+				7A43BDE618C6F505007FEFEF /* REMManagedDashboardModel.m */,
+				7A43BDE918C6F505007FEFEF /* REMManagedPinnedWidgetModel.h */,
+				7A43BDEA18C6F505007FEFEF /* REMManagedPinnedWidgetModel.m */,
+				7A43BDEB18C6F505007FEFEF /* REMManagedSharedModel.h */,
+				7A43BDEC18C6F505007FEFEF /* REMManagedSharedModel.m */,
+				7A43BDED18C6F505007FEFEF /* REMManagedWidgetModel.h */,
+				7A43BDEE18C6F505007FEFEF /* REMManagedWidgetModel.m */,
+				7A43BDD618C6F4EC007FEFEF /* REMManageBuildingAirQualityModel.h */,
+				7A43BDD718C6F4EC007FEFEF /* REMManageBuildingAirQualityModel.m */,
+				7A43BDD818C6F4EC007FEFEF /* REMManagedBuildingCommodityUsageModel.h */,
+				7A43BDD918C6F4EC007FEFEF /* REMManagedBuildingCommodityUsageModel.m */,
 				B4E0015A18B5C16E00F1D6D9 /* REMManagedAdministratorModel.h */,
 				B4E0015B18B5C16E00F1D6D9 /* REMManagedAdministratorModel.m */,
 				B4E0015718B5C16E00F1D6D9 /* REMManagedCustomerModel.h */,
@@ -3857,10 +3861,10 @@
 				7A39D65418B5A83100CC9D5D /* REMEnergyViewData.m in Sources */,
 				7A39D65518B5A83100CC9D5D /* REMTargetEnergyData.m in Sources */,
 				7A39D65618B5A83100CC9D5D /* REMUserValidationModel.m in Sources */,
-				7A39D65718B5A83100CC9D5D /* REMManagedAdministratorModel.m in Sources */,
-				7A39D65818B5A83100CC9D5D /* REMManagedCustomerModel.m in Sources */,
-				7A39D65918B5A83100CC9D5D /* REMManagedModel.m in Sources */,
-				7A39D65A18B5A83100CC9D5D /* REMManagedUserModel.m in Sources */,
+				7A39D65718B5A83100CC9D5D /* (null) in Sources */,
+				7A39D65818B5A83100CC9D5D /* (null) in Sources */,
+				7A39D65918B5A83100CC9D5D /* (null) in Sources */,
+				7A39D65A18B5A83100CC9D5D /* (null) in Sources */,
 				7A39D65B18B5A83100CC9D5D /* REMWidgetCommoditySearchModel.m in Sources */,
 				7A39D65C18B5A83100CC9D5D /* REMWidgetLabellingSearchModel.m in Sources */,
 				7A39D65D18B5A83100CC9D5D /* REMWidgetMultiTimespanSearchModel.m in Sources */,
@@ -4091,7 +4095,6 @@
 				7A63E20C18B44CBD00A13464 /* REMSettingAboutViewController.m in Sources */,
 				B445AEA8177BEEB8002D2A59 /* DDTTYLogger.m in Sources */,
 				B445AEAA177BEEB8002D2A59 /* ContextFilterLogFormatter.m in Sources */,
-				B4F860F118BC3A10007F4757 /* REMManagedBuildingRankingModel.m in Sources */,
 				7A63E25018B44CBD00A13464 /* REMBuildingChartView.m in Sources */,
 				EFD947021839DCBB00E9EC50 /* DCXYChartView.m in Sources */,
 				EF1C5ADA183E00C9002A9AAD /* _DCXLabelFormatter.m in Sources */,
@@ -4101,27 +4104,31 @@
 				7A399E96177D238F00F0EB9F /* AFHTTPClient.m in Sources */,
 				7A63E24B18B44CBD00A13464 /* REMBuildingTitleLabelView.m in Sources */,
 				7A63E1F018B44CBD00A13464 /* REMBuildingAverageChartViewController.m in Sources */,
+				7A43BDF718C6F505007FEFEF /* REMManagedWidgetModel.m in Sources */,
 				7A63E21E18B44CBD00A13464 /* REMAirQualityDataModel.m in Sources */,
 				7A63E23018B44CBD00A13464 /* REMWidgetObject.m in Sources */,
 				7A399E97177D238F00F0EB9F /* AFHTTPRequestOperation.m in Sources */,
 				7A63E25118B44CBD00A13464 /* REMBuildingTrendWrapper.m in Sources */,
 				7A399E98177D238F00F0EB9F /* AFImageRequestOperation.m in Sources */,
+				7A43BDD118C6F4C8007FEFEF /* REMBuildingPersistenceProcessor.m in Sources */,
 				7A399E99177D238F00F0EB9F /* AFJSONRequestOperation.m in Sources */,
 				EFDAACBC1803F6C2008BC9AF /* REMChartDataProcessor.m in Sources */,
 				7A63E27518B44CBD00A13464 /* REMBuildingEntranceSegue.m in Sources */,
 				7A399E9A177D238F00F0EB9F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				7A63E26F18B44CBD00A13464 /* REMDashboardView.m in Sources */,
 				7A63E27318B44CBD00A13464 /* REMGalleryTableView.m in Sources */,
+				7A43BDF218C6F505007FEFEF /* REMManagedBuildingRankingModel.m in Sources */,
 				7A63E23E18B44CBD00A13464 /* REMWidgetLabellingSearchModel.m in Sources */,
 				7A63E23318B44CBD00A13464 /* REMEnergyError.m in Sources */,
 				7A63E27418B44CBD00A13464 /* REMMarkerBubbleView.m in Sources */,
+				7A43BDF318C6F505007FEFEF /* REMManagedDashboardModel.m in Sources */,
 				7A399E9E177D238F00F0EB9F /* UIImageView+AFNetworking.m in Sources */,
-				B4F8611518BC5945007F4757 /* REMManagedDashboardModel.m in Sources */,
 				7A399E9B177D238F00F0EB9F /* AFPropertyListRequestOperation.m in Sources */,
 				7AA6464A18C056050081E96E /* REMSettingViewController.m in Sources */,
 				7A399E9C177D238F00F0EB9F /* AFURLConnectionOperation.m in Sources */,
 				7A63E25D18B44CBD00A13464 /* REMInsetsTextField.m in Sources */,
 				7A399E9D177D238F00F0EB9F /* AFXMLRequestOperation.m in Sources */,
+				7A43BDF618C6F505007FEFEF /* REMManagedSharedModel.m in Sources */,
 				7A63E23518B44CBD00A13464 /* REMEnergyTargetModel.m in Sources */,
 				EF7CF5F6185D82F2000BA4AE /* DCPieLayer.m in Sources */,
 				7AB34E51177D2CE1003E235E /* REMServiceRequestOperation.m in Sources */,
@@ -4141,6 +4148,7 @@
 				7A63E23618B44CBD00A13464 /* REMEnergyViewData.m in Sources */,
 				7A63E23418B44CBD00A13464 /* REMEnergyLabellingLevelData.m in Sources */,
 				7A63E1F218B44CBD00A13464 /* REMBuildingChartContainerViewController.m in Sources */,
+				7A43BDDE18C6F4EC007FEFEF /* REMManagedBuildingCommodityUsageModel.m in Sources */,
 				EF13626F184EFC6F00BEF648 /* _DCLine.m in Sources */,
 				7A63E27218B44CBD00A13464 /* REMGalleryGroupView.m in Sources */,
 				7A63E23218B44CBD00A13464 /* REMEnergyData.m in Sources */,
@@ -4150,7 +4158,6 @@
 				7A1D142617850B2100CC2922 /* Reachability.m in Sources */,
 				7A63E26918B44CBD00A13464 /* REMRankingTooltipView.m in Sources */,
 				7A63E22818B44CBD00A13464 /* REMCommodityModel.m in Sources */,
-				B4F8610618BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.m in Sources */,
 				7A63E25618B44CBD00A13464 /* REMStackChartLegendView.m in Sources */,
 				EFE86989185EEF7300DC0007 /* DCLabelingStage.m in Sources */,
 				7A63E20418B44CBD00A13464 /* REMLoginCustomerTableViewController.m in Sources */,
@@ -4179,6 +4186,7 @@
 				7A63E26B18B44CBD00A13464 /* REMTrendChartTooltipView.m in Sources */,
 				7A1D7C4517A63E8B0050779D /* REMEncryptHelper.m in Sources */,
 				7A63E22318B44CBD00A13464 /* REMBuildingOverallModel.m in Sources */,
+				7A43BDF118C6F505007FEFEF /* REMManagedBuildingPictureModel.m in Sources */,
 				EF0346B9183B979800DE186A /* DCLineWrapper.m in Sources */,
 				7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */,
 				7A63E1FF18B44CBD00A13464 /* REMDashboardController.m in Sources */,
@@ -4188,14 +4196,13 @@
 				7A63E1FA18B44CBD00A13464 /* REMBuildingWidgetChartViewController.m in Sources */,
 				7A63E20018B44CBD00A13464 /* REMWidgetCellViewController.m in Sources */,
 				7A63E1F918B44CBD00A13464 /* REMBuildingViewController.m in Sources */,
+				7A43BDD318C6F4C8007FEFEF /* REMPinToCoverPersistenceProcessor.m in Sources */,
 				7A63E26E18B44CBD00A13464 /* REMDashboardCollectionView.m in Sources */,
 				7A63E1E618B44CBD00A13464 /* REMTextIndicatorFormator.m in Sources */,
-				B42114CF18C5CC91007CC070 /* REMPinToCoverPersistenceProcessor.m in Sources */,
 				7A63E24918B44CBD00A13464 /* REMBuildingDataView.m in Sources */,
 				7A63E21A18B44CBD00A13464 /* REMWidgetDetailViewController.m in Sources */,
 				EFF75151183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m in Sources */,
 				7A63E28818B450B200A13464 /* REMIPhoneMainViewController.m in Sources */,
-				B4BF101518B4889500E1AAEC /* BluesPad.xcdatamodeld in Sources */,
 				7A63E22418B44CBD00A13464 /* REMBuildingTimeRangeDataModel.m in Sources */,
 				EF0459941845CEAF0086D5AC /* _DCXYIndicatorLayer.m in Sources */,
 				7A63E22018B44CBD00A13464 /* REMAverageUsageDataModel.m in Sources */,
@@ -4207,9 +4214,10 @@
 				7A63E21618B44CBD00A13464 /* REMWidgetRankingDelegator.m in Sources */,
 				EFD947061839DCBB00E9EC50 /* _DCHGridlineLayer.m in Sources */,
 				7A63E20A18B44CBD00A13464 /* REMControllerBase.m in Sources */,
+				7A43BDDD18C6F4EC007FEFEF /* REMManageBuildingAirQualityModel.m in Sources */,
 				7A63E23818B44CBD00A13464 /* REMUserValidationModel.m in Sources */,
 				7A63E1F318B44CBD00A13464 /* REMBuildingCommodityViewController.m in Sources */,
-				B4F860E818BC3A10007F4757 /* REMManageBuildingAirQualityModel.m in Sources */,
+				7A43BDF518C6F505007FEFEF /* REMManagedPinnedWidgetModel.m in Sources */,
 				7A63E20B18B44CBD00A13464 /* REMMainNavigationController.m in Sources */,
 				7A63E1EE18B44CBD00A13464 /* REMBuildingAirQualityChartViewController.m in Sources */,
 				7A63E1EC18B44CBD00A13464 /* REMPinToBuildingCoverHelper.m in Sources */,
@@ -4231,9 +4239,8 @@
 				7A63E24A18B44CBD00A13464 /* REMBuildingRankingView.m in Sources */,
 				7A63E24E18B44CBD00A13464 /* REMBuildingAirQualityWrapper.m in Sources */,
 				EFD947081839DCBB00E9EC50 /* DCColumnSeries.m in Sources */,
-				B42114C918C59363007CC070 /* REMManagedBuildingModel.m in Sources */,
+				7A43BDD218C6F4C8007FEFEF /* REMCommodityUsageValuePersistenceProcessor.m in Sources */,
 				EFD947071839DCBB00E9EC50 /* _DCColumnsLayer.m in Sources */,
-				B42114CC18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.m in Sources */,
 				7A63E1ED18B44CBD00A13464 /* REMUpdateAllManager.m in Sources */,
 				7A63E1E818B44CBD00A13464 /* REMEnergyMultiTimeSearcher.m in Sources */,
 				7A63E25418B44CBD00A13464 /* REMChartSeriesIndicator.m in Sources */,
@@ -4246,6 +4253,7 @@
 				B49C430018B34DB900C3CEFE /* REMDataPersistenceProcessor.m in Sources */,
 				7A63E27818B44CBD00A13464 /* REMSplashMapSegue.m in Sources */,
 				7A63E27018B44CBD00A13464 /* REMBlurredMapView.m in Sources */,
+				7A43BDEF18C6F505007FEFEF /* BluesPad.xcdatamodeld in Sources */,
 				7A63E22918B44CBD00A13464 /* REMDataRange.m in Sources */,
 				7A63E25518B44CBD00A13464 /* REMPieChartLegendView.m in Sources */,
 				EFD946FF1839DCBB00E9EC50 /* DCAxis.m in Sources */,
@@ -4261,10 +4269,10 @@
 				7A0288EC17C20CC500709111 /* WeiboRequest.m in Sources */,
 				7A63E22C18B44CBD00A13464 /* REMDashboardObj.m in Sources */,
 				7A63E1FC18B44CBD00A13464 /* REMWidgetCellDelegator.m in Sources */,
+				7A43BDF418C6F505007FEFEF /* REMManagedModel.m in Sources */,
 				7A63E25C18B44CBD00A13464 /* REMIndicatorButton.m in Sources */,
 				7A0288ED17C20CC500709111 /* WeiboRequestOperation.m in Sources */,
 				EFEA7EDF1843424500CF4C3E /* _DCRankingXLabelFormatter.m in Sources */,
-				B4F860F718BC3A11007F4757 /* REMManagedPinnedWidgetModel.m in Sources */,
 				7A63E1EA18B44CBD00A13464 /* LoginBusiness.m in Sources */,
 				7A7B29911888C65000E74D3D /* UIView+FlipTransition.m in Sources */,
 				EFD947091839DCBB00E9EC50 /* DCLineSeries.m in Sources */,
@@ -4294,7 +4302,6 @@
 				7A0288F817C20CC500709111 /* ImageResourceLoader.m in Sources */,
 				7A63E20218B44CBD00A13464 /* REMLoginCardController.m in Sources */,
 				7A63E26C18B44CBD00A13464 /* REMDashboardCellViewCell.m in Sources */,
-				B4F8611818BC5B98007F4757 /* REMManagedWidgetModel.m in Sources */,
 				7A63E25F18B44CBD00A13464 /* REMNumberLabel.m in Sources */,
 				7A4F86FB18C45FC700843304 /* REMServiceSessionAgent.m in Sources */,
 				7A0288F917C20CC500709111 /* NSDictionary+Json.m in Sources */,
@@ -4305,7 +4312,6 @@
 				7A0288FB17C20CC500709111 /* Resources.m in Sources */,
 				EF03DC291841FB45004B9EFD /* DCPieDataPoint.m in Sources */,
 				7A0288FC17C20CC500709111 /* URLRequestHelper.m in Sources */,
-				B4F860DF18BC37AF007F4757 /* REMBuildingPersistenceProcessor.m in Sources */,
 				7A63E22E18B44CBD00A13464 /* REMShareInfo.m in Sources */,
 				7A63E20E18B44CBD00A13464 /* REMSettingCustomerDetailLogoViewController.m in Sources */,
 				7A63E22F18B44CBD00A13464 /* REMWidgetContentSyntax.m in Sources */,
@@ -4335,10 +4341,9 @@
 				7A63E22218B44CBD00A13464 /* REMBuildingModel.m in Sources */,
 				EFE86986185EEF5300DC0007 /* DCLabelingSeries.m in Sources */,
 				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,
-				B4F8610318BC3DD8007F4757 /* REMManagedBuildingPictureModel.m in Sources */,
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
 				7A63E22D18B44CBD00A13464 /* REMFavoriteDashboardObj.m in Sources */,
-				B4F8610F18BC5863007F4757 /* REMManagedSharedModel.m in Sources */,
+				7A43BDF018C6F505007FEFEF /* REMManagedBuildingModel.m in Sources */,
 				B4E0015C18B5C16E00F1D6D9 /* REMManagedAdministratorModel.m in Sources */,
 				7A63E24618B44CBD00A13464 /* REMBuildingChartContainerView2.m in Sources */,
 				7A63E26218B44CBD00A13464 /* REMStatusBar.m in Sources */,
@@ -4781,12 +4786,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		B4BF101318B4889400E1AAEC /* BluesPad.xcdatamodeld */ = {
+		7A43BDDF18C6F505007FEFEF /* BluesPad.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				B4BF101418B4889400E1AAEC /* BluesPad.xcdatamodel */,
+				7A43BDE018C6F505007FEFEF /* BluesPad.xcdatamodel */,
 			);
-			currentVersion = B4BF101418B4889400E1AAEC /* BluesPad.xcdatamodel */;
+			currentVersion = 7A43BDE018C6F505007FEFEF /* BluesPad.xcdatamodel */;
 			path = BluesPad.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
