@@ -14,12 +14,14 @@ class Home:
 		db=model.get_top_db(True)
 		ir=model.get_latest_ir()
 		release=model.get_latest_release()
+
 		return render.index(release,ir,db)
 
 class DailyBuild:
 	def GET(self):
 		latest = model.get_top_db(False)
 		builds = model.get_top_dbs()
+
 		return render.dailybuild(latest,builds)
 
 class InternalRelease:

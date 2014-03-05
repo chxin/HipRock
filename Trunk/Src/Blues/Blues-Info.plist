@@ -1,0 +1,56 @@
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>zh_CN</string>
+	<key>CFBundleDisplayName</key>
+	<string>&#20113;&#33021;&#25928;</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIcons</key>
+	<dict />
+	<key>CFBundleIcons~ipad</key>
+	<dict />
+	<key>CFBundleIdentifier</key>
+	<string>cn.com.schneider-electric.BluesPad</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.1.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>171</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true />
+	<key>UIApplicationExitsOnSuspend</key>
+	<false />
+	<key>UIMainStoryboardFile</key>
+	<string>Main_IPhone</string>
+	<key>UIMainStoryboardFile~ipad</key>
+	<string>Main_IPad</string>
+	<key>UIPrerenderedIcon</key>
+	<true />
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true />
+</dict>
+</plist>

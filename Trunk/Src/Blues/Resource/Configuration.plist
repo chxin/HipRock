@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ShouldCleanCache</key>
+	<true/>
+	<key>DataSources</key>
+	<dict>
+		<key>local</key>
+		<dict>
+			<key>url</key>
+			<string>http://stg.energymost.com/</string>
+			<key>timeout</key>
+			<string>90</string>
+			<key>logRequest</key>
+			<integer>2</integer>
+			<key>debug-user</key>
+			<string>SchneiderElectricChina|P@ssw0rdChina</string>
+		</dict>
+		<key>dev</key>
+		<dict>
+			<key>url</key>
+			<string>http://10.177.0.35/Mobile/</string>
+			<key>timeout</key>
+			<string>90</string>
+			<key>logRequest</key>
+			<integer>2</integer>
+			<key>debug-user</key>
+			<string>SchneiderElectricChina|P@ssw0rd</string>
+		</dict>
+		<key>test</key>
+		<dict>
+			<key>url</key>
+			<string>http://42.121.254.106/v1.5.0.15/Mobile/MobileApiHost/</string>
+			<key>debug-user</key>
+			<string>SchneiderElectricChina|P@ssw0rdChina</string>
+			<key>timeout</key>
+			<string>45</string>
+			<key>logRequest</key>
+			<integer>1</integer>
+		</dict>
+		<key>production</key>
+		<dict>
+			<key>url</key>
+			<string>http://emopmobile.energymost.com/</string>
+			<key>timeout</key>
+			<string>45</string>
+			<key>logRequest</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>CurrentDataSource</key>
+	<dict>
+		<key>Debug</key>
+		<string>test</string>
+		<key>DailyBuild</key>
+		<string>test</string>
+		<key>Release</key>
+		<string>production</string>
+	</dict>
+</dict>
+</plist>

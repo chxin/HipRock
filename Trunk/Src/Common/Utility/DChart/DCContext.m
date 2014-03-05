@@ -37,8 +37,10 @@ NSString* const kDCPieIndicatorColor = @"#e9e9e9";
     self = [super init];
     if (self) {
         _stacked = stacked;
-        _pointAlignToTick = NO;
-        _xLabelAlignToTick = NO;
+        _pointHorizentalOffset = 0;
+        _xLabelHorizentalOffset = 0;
+//        _pointAlignToTick = NO;
+//        _xLabelAlignToTick = NO;
         _focusX = INT32_MIN;
     }
     return self;

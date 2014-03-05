@@ -57,10 +57,10 @@
     if (self.labelFormatter && [self.labelFormatter respondsToSelector:@selector(getMaxXLabelLengthIn:)]) {
         maxLabelLength = [((id<_DCXLabelFormatterProtocal>)self.labelFormatter) getMaxXLabelLengthIn:self.bounds];
     }
-    CGFloat offset = 0;
-    if (!self.graphContext.xLabelAlignToTick) {
-        offset = 0.5;
-    }
+    CGFloat offset = self.graphContext.xLabelHorizentalOffset;
+//    if (!self.graphContext.xLabelAlignToTick) {
+//        offset = 0.5;
+//    }
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.end);
     for (int i = start; i <= end; i++) {

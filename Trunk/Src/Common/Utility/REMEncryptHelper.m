@@ -60,6 +60,13 @@ static const NSString *vector = @"EjRWeJCrze8SNFZ4kKvN7w==";
     return nil;
 }
 
++(NSString *)base64AES256EncryptString:(NSString *)input withKey:(NSString *)key
+{
+    NSData *encryptedData = [REMEncryptHelper AES256EncryptData:[input dataUsingEncoding:NSUTF8StringEncoding] withKey:REMSecurityTokenKey];
+    
+    return [REMEncryptHelper encodeBase64Data:encryptedData];
+}
+
 #pragma mark - base64
 + (NSString*)encodeBase64String:(NSString * )input {
     NSData *data = [input dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];

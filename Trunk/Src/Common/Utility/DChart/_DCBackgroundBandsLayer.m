@@ -71,6 +71,7 @@
     CTFontRef fRef = CTFontCreateWithName((__bridge CFStringRef)self.view.chartStyle.backgroundBandFont.fontName,
                                           self.view.chartStyle.backgroundBandFont.pointSize,
                                           NULL);
+    CGFloat xoffset = 0;
     for (DCXYChartBackgroundBand* band in self.bands) {
         if (![DCRange isRange:band.range visableIn:self.graphContext.hRange]) continue;
         NSString* rangeToString = [band.range description];
@@ -78,7 +79,7 @@
             CALayer* bandLayer = [[CALayer alloc]init];
             bandLayer.backgroundColor = band.color.CGColor;
             if (band.axis.coordinate == DCAxisCoordinateX) {
-                bandLayer.frame = CGRectMake([DCUtility getScreenXIn:self.bounds xVal:band.range.location hRange:self.graphContext.hRange], 0, [DCUtility getScreenXIn:self.bounds xVal:band.range.length+self.graphContext.hRange.location hRange:self.graphContext.hRange], self.bounds.size.height);
+                bandLayer.frame = CGRectMake([DCUtility getScreenXIn:self.bounds xVal:band.range.location+xoffset hRange:self.graphContext.hRange], 0, [DCUtility getScreenXIn:self.bounds xVal:band.range.length+self.graphContext.hRange.location hRange:self.graphContext.hRange], self.bounds.size.height);
             }
             if (!REMIsNilOrNull(band.title) && band.title.length > 0) {
                 CATextLayer* bandText = [[CATextLayer alloc]init];

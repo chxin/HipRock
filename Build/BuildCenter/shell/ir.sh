@@ -38,8 +38,8 @@ else
 fi
 
 #update bundle version
-echo ${makedir}/updatebundle.py ${projectdir}/Trunk/Src/BluesPad/BluesPad-Info.plist ${bundleversion}
-python $makedir/updatebundle.py $projectdir/Trunk/Src/BluesPad/BluesPad-Info.plist $bundleversion
+echo ${makedir}/updatebundle.py ${projectdir}/Trunk/Src/Blues/Blues-Info.plist ${bundleversion}
+python $makedir/updatebundle.py $projectdir/Trunk/Src/Blues/Blues-Info.plist $bundleversion
 echo "[GIT]:Changed CFBundleVersion to ${bundleversion}"
 git commit -a -m "[GIT]:Changed CFBundleVersion to ${bundleversion}"
 git push
@@ -49,7 +49,7 @@ templatefolder=$buildroot/Templates
 targetfolder=$archivefolder/InternalRelease/$version
 
 echo Will build into $targetfolder
-if [ -f "${targetfolder}/BluesPad.plist" ]; then
+if [ -f "${targetfolder}/Blues.plist" ]; then
 	echo "Error: IR ${version} already exists!"
 	exit 1
 else
@@ -72,24 +72,24 @@ fi
 cp $templatefolder/* $targetfolder/
 
 #change data source?
-echo ${makedir}updatedatasource.py ${targetfolder}/BluesPad.app/Configuration.plist 'test'
-plutil -convert xml1 ${targetfolder}/BluesPad.app/Configuration.plist
-python ${makedir}updatedatasource.py ${targetfolder}/BluesPad.app/Configuration.plist 'test'
-plutil -convert binary1 ${targetfolder}/BluesPad.app/Configuration.plist
+echo ${makedir}updatedatasource.py ${targetfolder}/Blues.app/Configuration.plist 'test'
+plutil -convert xml1 ${targetfolder}/Blues.app/Configuration.plist
+python ${makedir}updatedatasource.py ${targetfolder}/Blues.app/Configuration.plist 'test'
+plutil -convert binary1 ${targetfolder}/Blues.app/Configuration.plist
 
 #resign app
-codesign -d --entitlements ${targetfolder}/entitlements.plist ${targetfolder}/BluesPad.app
-rm -R ${targetfolder}/BluesPad.app/_CodeSignature
-codesign -f -s "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)" ${targetfolder}/BluesPad.app --entitlements ${targetfolder}/entitlements.plist -v
+codesign -d --entitlements ${targetfolder}/entitlements.plist ${targetfolder}/Blues.app
+rm -R ${targetfolder}/Blues.app/_CodeSignature
+codesign -f -s "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)" ${targetfolder}/Blues.app --entitlements ${targetfolder}/entitlements.plist -v
 
 #update urls in plist
 echo bundleversion
-echo ${makedir}updatepackageurl.py ${targetfolder}/BluesPad.plist ${archiveurl}/InternalRelease/$version ${bundleversion} 
-python ${makedir}updatepackageurl.py ${targetfolder}/BluesPad.plist ${archiveurl}/InternalRelease/$version ${bundleversion}     #plist,url,bundleversion
+echo ${makedir}updatepackageurl.py ${targetfolder}/Blues.plist ${archiveurl}/InternalRelease/$version ${bundleversion} 
+python ${makedir}updatepackageurl.py ${targetfolder}/Blues.plist ${archiveurl}/InternalRelease/$version ${bundleversion}     #plist,url,bundleversion
 
 
 #package
-make --makefile=makefile --directory=$makedir xcpackage apppath=$targetfolder/BluesPad.app ipapath=$targetfolder/BluesPad.ipa
+make --makefile=makefile --directory=$makedir xcpackage apppath=$targetfolder/Blues.app ipapath=$targetfolder/Blues.ipa
 
 #make tag
 git tag -a ${version} -m "Internal Release ${version}"

@@ -12,8 +12,8 @@
 
 @implementation _DCXYIndicatorLayer
 -(void)drawInContext:(CGContextRef)ctx {
-    CGFloat pointXOffset = 0;
-    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
+    CGFloat pointXOffset = self.graphContext.pointHorizentalOffset;
+//    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
     [super drawInContext:ctx];
     if (self.graphContext.focusX != INT32_MIN) {
         CGPoint symbolLinePoints[2];

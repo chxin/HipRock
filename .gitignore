@@ -7,3 +7,4 @@
 *.xccheckout
 xcuserdata/
 *.pyc
+*.sqlite

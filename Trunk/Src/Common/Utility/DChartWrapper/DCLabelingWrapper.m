@@ -68,7 +68,7 @@
         label.name = targetEnergyData.target.name;
         if (i < stages.count) {
             label.stageText = [stages[i] stageText];
-            label.color = [stages[i] color];
+            label.color = ((DCLabelingStage*)stages[i]).color;
         }
         label.labelText = [NSString stringWithFormat:@"%@%@", [REMNumberHelper formatDataValueWithCarry:energyData.dataValue], targetEnergyData.target.uomName];
         label.stage = i;

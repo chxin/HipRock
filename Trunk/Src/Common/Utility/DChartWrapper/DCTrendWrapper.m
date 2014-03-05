@@ -82,11 +82,13 @@
     view.delegate = self;
     self.graphContext = view.graphContext;
     if (step == REMEnergyStepHour || step == REMEnergyStepWeek) {
-        view.graphContext.pointAlignToTick = NO;
-        view.graphContext.xLabelAlignToTick = YES;
-    } else {
-        view.graphContext.pointAlignToTick = NO;
-        view.graphContext.xLabelAlignToTick = NO;
+        view.graphContext.pointHorizentalOffset = 0.5;
+        view.graphContext.xLabelHorizentalOffset = 0.5;
+//        view.graphContext.pointAlignToTick = NO;
+//        view.graphContext.xLabelAlignToTick = YES;
+//    } else {
+//        view.graphContext.pointAlignToTick = NO;
+//        view.graphContext.xLabelAlignToTick = NO;
     }
     
     [self customizeView:view];

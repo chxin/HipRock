@@ -34,7 +34,7 @@ $var title: Internal Release
               $elif build.status==0:
                 <a class="btn btn-xs btn-default">Build in progress</a>
               $else:
-    					  <a class="btn btn-xs btn-success" href="itms-services://?action=download-manifest&url=$(archive)$(build.path)BluesPad.plist">Install</a>
+    					  <a class="btn btn-xs btn-success" href="itms-services://?action=download-manifest&url=$(archive)$(build.path)$(build.appname).plist">Install</a>
             </h2>
             <p style:"font-color:#eee">$build.buildtime <a href="$(archive)$(build.path)/build.log" target="_blank">see build log</a></p>
             <p class="list-group-item-text">$:build.description</p>

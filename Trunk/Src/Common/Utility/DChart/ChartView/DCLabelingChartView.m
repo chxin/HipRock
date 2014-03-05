@@ -213,7 +213,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
             aPath = self.stageBezierPaths[i];
         }
         
-        CGContextSetFillColorWithColor(ctx, [self.series.stages[i] color].CGColor);
+        CGContextSetFillColorWithColor(ctx, [((DCLabelingStage *)self.series.stages[i]) color].CGColor);
         CGContextAddPath(ctx, aPath.CGPath);
         CGContextDrawPath(ctx, kCGPathFill);
 

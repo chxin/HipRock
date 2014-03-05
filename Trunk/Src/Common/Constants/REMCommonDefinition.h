@@ -25,8 +25,8 @@ typedef enum _REMCommodity : int{
 #define REMHexColor(a) []
 
 #define REMCommonLocalizedString(a) (REMIsNilOrNull(a)? REMEmptyString : NSLocalizedStringFromTable(a,@"Localizable_Common",REMEmptyString))
-#define REMIPadLocalizedString(a) (REMIsNilOrNull(a)? REMEmptyString : NSLocalizedStringFromTable(a,@"Localizable_IPad",REMEmptyString))
-#define REMIPhoneLocalizedString(a) (REMIsNilOrNull(a)? REMEmptyString : NSLocalizedStringFromTable(a,@"Localizable_IPhone",REMEmptyString))
+#define REMIPadLocalizedString(a) NSLocalizedStringFromTable(a,@"Localizable_IPad",REMEmptyString)
+#define REMIPhoneLocalizedString(a) NSLocalizedStringFromTable(a,@"Localizable_IPhone",REMEmptyString)
 
 #define REMLoadImageNamed(a) [UIImage imageNamed:(a)]
 
@@ -35,6 +35,8 @@ typedef enum _REMCommodity : int{
 #define REMOSGreaterThan(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 
 #define REMISIOS7 REMOSGreaterThan(@"7.0")
+
+#define REMCurrentDevice ([UIDevice currentDevice])
 
 #define REMUpdateStatusBarAppearenceForIOS7 if(REMISIOS7){ [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)]; }
 
@@ -50,5 +52,7 @@ typedef enum _REMCommodity : int{
 #define REMREGEXMatch_Password(a,b) [[NSRegularExpression regularExpressionWithPattern:REMREGEX_UserValidation[(b)] options:0 error:NULL] firstMatchInString:(a) options:0 range:NSMakeRange(0, (a).length)]
 
 #define REMDataAccessMessageMake(noconn,fail,error,cancel) @{@(REMDataAccessNoConnection):REMIPadLocalizedString(noconn), @(REMDataAccessFailed):REMIPadLocalizedString(fail),@(REMDataAccessErrorMessage):REMIPadLocalizedString(error), @(REMDataAccessCanceled):REMIPadLocalizedString(cancel)};
+
+#define REMSecurityTokenKey @"41758bd9d7294737"
 
 #endif
