@@ -13,8 +13,30 @@
     return self.commodityInfo.pinnedWidgets;
 }
 
-- (id)persistData:(id)data{
+- (id)persistData:(NSArray *)data{
     
+    NSArray *oldData = [self fetchData];
+    
+    for (REMManagedPinnedWidgetModel *model  in oldData) {
+        [self.dataStore deleteManageObject:model];
+    }
+    
+    if (data!=nil) {
+        for (int i=0; i<data.count; ++i) {
+            NSDictionary *dictionary = data[i];
+            REMManagedPinnedWidgetModel *pinnedModel = [self.dataStore newManagedObject:@"REMManagedPinnedWidgetModel"];
+            
+            pinnedModel.commodity = self.commodityInfo;
+            pinnedModel.widgetId = dictionary[@"WidgetId"];
+            pinnedModel.dashboardId = dictionary[@"DashboardId"];
+            pinnedModel.position =dictionary[@"Position"];
+            [self.commodityInfo addPinnedWidgetsObject:pinnedModel];
+        }
+        
+        
+    }
+    [self.dataStore persistManageObject];
+    return self.commodityInfo.pinnedWidgets;
 }
 
 @end

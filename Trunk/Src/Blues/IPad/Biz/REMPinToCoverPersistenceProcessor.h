@@ -7,6 +7,8 @@
 --------------------------------------------------------------------------*/
 #import "REMDataPersistenceProcessor.h"
 #import "REMManagedBuildingCommodityUsageModel.h"
+#import "REMManagedPinnedWidgetModel.h"
+
 
 @interface REMPinToCoverPersistenceProcessor : REMDataPersistenceProcessor
 

@@ -17,13 +17,6 @@
     REMPinToCoverPersistenceProcessor *processor = [[REMPinToCoverPersistenceProcessor alloc]init];
     store.persistenceProcessor = processor;
     [store access:^(NSArray *data){
-//        NSMutableArray *newArray=[NSMutableArray array];
-//        for (NSDictionary *dic in data) {
-//            [newArray addObject:[[REMBuildingCoverWidgetRelationModel alloc]initWithDictionary:dic]];
-//        }
-//        buildingInfo.widgetRelationArray=newArray;
-//        [buildingInfo updateInnerDictionary];
-//        [REMApplicationContext updateBuildingInfoArrayToStorage];
         callback(REMPinToBuildingCoverStatusSuccess);
     }error:^(NSError *error,REMDataAccessErrorStatus status, REMBusinessErrorInfo * bizError){
         if (status == REMDataAccessErrorMessage) {
