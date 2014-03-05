@@ -365,6 +365,7 @@
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
 		B42114C918C59363007CC070 /* REMManagedBuildingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B42114C818C59363007CC070 /* REMManagedBuildingModel.m */; };
 		B42114CC18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B42114CB18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.m */; };
+		B42114CF18C5CC91007CC070 /* REMPinToCoverPersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B42114CE18C5CC91007CC070 /* REMPinToCoverPersistenceProcessor.m */; };
 		B4223D51184EFF44004D39C0 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4223D50184EFF44004D39C0 /* GPUImage.framework */; };
 		B42FBF6417F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
 		B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
@@ -1119,6 +1120,8 @@
 		B42114C818C59363007CC070 /* REMManagedBuildingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingModel.m; sourceTree = "<group>"; };
 		B42114CA18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMCommodityUsageValuePersistenceProcessor.h; sourceTree = "<group>"; };
 		B42114CB18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMCommodityUsageValuePersistenceProcessor.m; sourceTree = "<group>"; };
+		B42114CD18C5CC91007CC070 /* REMPinToCoverPersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPinToCoverPersistenceProcessor.h; sourceTree = "<group>"; };
+		B42114CE18C5CC91007CC070 /* REMPinToCoverPersistenceProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMPinToCoverPersistenceProcessor.m; sourceTree = "<group>"; };
 		B4223D50184EFF44004D39C0 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = ../Lib/GPUImage.framework; sourceTree = "<group>"; };
 		B42FBF6217F574B5004F2F3A /* REMEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnum.h; path = Common/Model/REMEnum.h; sourceTree = "<group>"; };
 		B42FBF6317F574B5004F2F3A /* REMEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnum.m; path = Common/Model/REMEnum.m; sourceTree = "<group>"; };
@@ -1959,6 +1962,8 @@
 				B4F860DE18BC37AF007F4757 /* REMBuildingPersistenceProcessor.m */,
 				B42114CA18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.h */,
 				B42114CB18C5B0D6007CC070 /* REMCommodityUsageValuePersistenceProcessor.m */,
+				B42114CD18C5CC91007CC070 /* REMPinToCoverPersistenceProcessor.h */,
+				B42114CE18C5CC91007CC070 /* REMPinToCoverPersistenceProcessor.m */,
 			);
 			name = Biz;
 			path = IPad/Biz;
@@ -2286,9 +2291,9 @@
 		7A63E15A18B44CBC00A13464 /* Managed */ = {
 			isa = PBXGroup;
 			children = (
+				B4BF101318B4889400E1AAEC /* BluesPad.xcdatamodeld */,
 				B4F8610418BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.h */,
 				B4F8610518BC4248007F4757 /* REMManagedBuildingCommodityUsageModel.m */,
-				B4BF101318B4889400E1AAEC /* BluesPad.xcdatamodeld */,
 				B42114C718C59363007CC070 /* REMManagedBuildingModel.h */,
 				B42114C818C59363007CC070 /* REMManagedBuildingModel.m */,
 				B4F8611618BC5B98007F4757 /* REMManagedWidgetModel.h */,
@@ -3623,6 +3628,7 @@
 				7A63E1F918B44CBD00A13464 /* REMBuildingViewController.m in Sources */,
 				7A63E26E18B44CBD00A13464 /* REMDashboardCollectionView.m in Sources */,
 				7A63E1E618B44CBD00A13464 /* REMTextIndicatorFormator.m in Sources */,
+				B42114CF18C5CC91007CC070 /* REMPinToCoverPersistenceProcessor.m in Sources */,
 				7A63E24918B44CBD00A13464 /* REMBuildingDataView.m in Sources */,
 				7A63E21A18B44CBD00A13464 /* REMWidgetDetailViewController.m in Sources */,
 				EFF75151183FC7AA00C8BBE9 /* _DCBackgroundBandsLayer.m in Sources */,
