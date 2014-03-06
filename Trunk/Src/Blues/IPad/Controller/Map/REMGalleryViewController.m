@@ -84,8 +84,8 @@
     
     
     for(int i = 0; i<self.buildingInfoArray.count; i++){
-        REMBuildingOverallModel *buildingInfo = self.buildingInfoArray[i];
-        NSString *province = buildingInfo.building.province;
+        REMManagedBuildingModel *buildingInfo = self.buildingInfoArray[i];
+        NSString *province = buildingInfo.province;
         
         int index = [self getProvinceIndex:province];
         

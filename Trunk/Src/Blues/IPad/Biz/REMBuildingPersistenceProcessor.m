@@ -20,6 +20,10 @@
 
 - (id)persistData:(NSArray *)data
 {
+    for (REMManagedBuildingModel *building in  [self fetchData]) {
+        [self.dataStore deleteManageObject:building];
+    }
+    
     for (int i=0; i<data.count; ++i) {
         NSDictionary *buildingOverall =data[i];
         REMManagedBuildingModel *buildingModel = [self persistBuilding:buildingOverall[@"Building"]];
