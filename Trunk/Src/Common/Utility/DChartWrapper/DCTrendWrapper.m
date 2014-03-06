@@ -349,8 +349,8 @@
             }
             if (fillColor == nil) continue;
             for (REMTimeRange* range in calender.timeRanges) {
-                NSNumber* start = @([self.sharedProcessor processX:range.startTime].doubleValue-0.5);
-                DCRange* bandRange = [[DCRange alloc]initWithLocation:start.doubleValue length:[self.sharedProcessor processX:range.endTime].doubleValue -0.5 - start.doubleValue];
+                NSNumber* start = @([self.sharedProcessor processX:range.startTime].doubleValue);
+                DCRange* bandRange = [[DCRange alloc]initWithLocation:start.doubleValue length:[self.sharedProcessor processX:range.endTime].doubleValue - start.doubleValue];
                 DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
                 b.range = bandRange;
                 b.color = fillColor;

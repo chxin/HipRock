@@ -40,20 +40,6 @@
 -(void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
     if (self.hidden) return;
-    if(self.view.chartStyle.yLineWidth > 0) {
-        CGPoint addLines[2];
-        addLines[0] = self.axis.startPoint;
-        addLines[1] = self.axis.endPoint;
-        
-        CGContextSetLineJoin(ctx, kCGLineJoinMiter);
-        [DCUtility setLineStyle:ctx style:DCLineTypeDefault lineWidth:self.view.chartStyle.yLineWidth];
-        CGContextSetBlendMode(ctx, kCGBlendModeNormal);
-        CGContextBeginPath(ctx);
-        CGContextAddLines(ctx, addLines, 2);
-        CGContextSetLineWidth(ctx, self.view.chartStyle.yLineWidth);
-        CGContextSetStrokeColorWithColor(ctx, self.view.chartStyle.yLineColor.CGColor);
-        CGContextStrokePath(ctx);
-    }
     if (!REMIsNilOrNull(self.axis.backgroundBands)) {
         DCRange* yRange = self.yRange;
         for(DCXYChartBackgroundBand* band in self.axis.backgroundBands) {

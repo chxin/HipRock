@@ -95,13 +95,13 @@
     
     [self recalculatePlotRect];
     
-    self.backgroundBandsLayer = [[_DCBackgroundBandsLayer alloc]initWithContext:self.graphContext view:self];
-    [self.graphContext addHRangeObsever:self.backgroundBandsLayer];
-    [self.layer addSublayer:self.backgroundBandsLayer];
 //    [self redrawBgBands];
     
     [self drawHGridline];
     [self drawVGridlines];
+    self.backgroundBandsLayer = [[_DCBackgroundBandsLayer alloc]initWithContext:self.graphContext view:self];
+    [self.graphContext addHRangeObsever:self.backgroundBandsLayer];
+    [self.layer addSublayer:self.backgroundBandsLayer];
     [self drawXLabelLayer];
     [self drawIndicatorLayer];
     
@@ -206,7 +206,7 @@
 -(void)updateAllLayerFrame {
     self._xLabelLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.size.height+self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.frame.size.height - self.graphContext.plotRect.size.height - self.chartStyle.plotPaddingBottom - self.chartStyle.plotPaddingTop);
     
-    self._hGridlineLayer.frame = self.graphContext.plotRect;
+    self._hGridlineLayer.frame = self.frame;
     
     self.backgroundBandsLayer.frame = self.graphContext.plotRect;
     self.indicatorLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, 0, self.graphContext.plotRect.size.width, self.graphContext.plotRect.size.height+self.chartStyle.plotPaddingTop);// self.graphContext.plotRect;

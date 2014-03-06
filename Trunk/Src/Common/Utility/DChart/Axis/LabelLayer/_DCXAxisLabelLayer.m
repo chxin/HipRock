@@ -33,18 +33,7 @@
 -(void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
     
-    CGPoint addLines[2];
-    addLines[0] = self.axis.startPoint;
-    addLines[1] = self.axis.endPoint;
-    
-    CGContextSetLineJoin(ctx, kCGLineJoinMiter);
-    [DCUtility setLineStyle:ctx style:DCLineTypeDefault lineWidth:self.view.chartStyle.xLineWidth];
-    CGContextSetBlendMode(ctx, kCGBlendModeNormal);
-    CGContextBeginPath(ctx);
-    CGContextAddLines(ctx, addLines, 2);
-    CGContextSetLineWidth(ctx, self.view.chartStyle.xLineWidth);
-    CGContextSetStrokeColorWithColor(ctx, self.view.chartStyle.xLineColor.CGColor);
-    CGContextStrokePath(ctx);
+
 //    [self updateTexts];
     
     
