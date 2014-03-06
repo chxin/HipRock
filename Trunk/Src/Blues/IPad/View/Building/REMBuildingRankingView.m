@@ -53,7 +53,7 @@
     rankingLabel.backgroundColor=[UIColor clearColor];
     rankingLabel.shadowOffset=CGSizeMake(1, 1);
     rankingLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-    rankingLabel.text=[NSString stringWithFormat:@"%d", data.numerator];
+    rankingLabel.text=[NSString stringWithFormat:@"%@", data.numerator];
     [self addSubview:rankingLabel];
     self.textLabel=rankingLabel;
     //NSLog(@"font:%@",[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:valueSize]);
@@ -69,7 +69,7 @@
     //self.uomLabel.contentHorizontalAlignment = UIControlContentVerticalAlignmentBottom;
     self.totalLabel.textColor=[UIColor whiteColor];
     self.totalLabel.userInteractionEnabled = NO;
-    self.totalLabel.text=[NSString stringWithFormat:@"/%d", data.denominator];
+    self.totalLabel.text=[NSString stringWithFormat:@"/%@", data.denominator];
     self.totalLabel.shadowOffset=CGSizeMake(1, 1);
     self.totalLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     [self addSubview:self.totalLabel];

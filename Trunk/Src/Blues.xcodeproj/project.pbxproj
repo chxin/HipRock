@@ -743,6 +743,8 @@
 		B4E0015618B5C16E00F1D6D9 /* REMManagedUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E0015518B5C16E00F1D6D9 /* REMManagedUserModel.m */; };
 		B4E0015918B5C16E00F1D6D9 /* REMManagedCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E0015818B5C16E00F1D6D9 /* REMManagedCustomerModel.m */; };
 		B4E0015C18B5C16E00F1D6D9 /* REMManagedAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E0015B18B5C16E00F1D6D9 /* REMManagedAdministratorModel.m */; };
+		B4E3BD2218C8083700288A62 /* REMEnergyDataPersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E3BD2118C8083700288A62 /* REMEnergyDataPersistenceProcessor.m */; };
+		B4E3BD2518C80A0D00288A62 /* REMManagedEnergyDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E3BD2418C80A0D00288A62 /* REMManagedEnergyDataModel.m */; };
 		EF0346B0183B4BA600DE186A /* _DCLayerTrashbox.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */; };
 		EF0346B3183B520100DE186A /* _DCSeriesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B2183B520100DE186A /* _DCSeriesLayer.m */; };
 		EF0346B9183B979800DE186A /* DCLineWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B8183B979800DE186A /* DCLineWrapper.m */; };
@@ -1531,6 +1533,10 @@
 		B4E0015818B5C16E00F1D6D9 /* REMManagedCustomerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedCustomerModel.m; sourceTree = "<group>"; };
 		B4E0015A18B5C16E00F1D6D9 /* REMManagedAdministratorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedAdministratorModel.h; sourceTree = "<group>"; };
 		B4E0015B18B5C16E00F1D6D9 /* REMManagedAdministratorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedAdministratorModel.m; sourceTree = "<group>"; };
+		B4E3BD2018C8083700288A62 /* REMEnergyDataPersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMEnergyDataPersistenceProcessor.h; sourceTree = "<group>"; };
+		B4E3BD2118C8083700288A62 /* REMEnergyDataPersistenceProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMEnergyDataPersistenceProcessor.m; sourceTree = "<group>"; };
+		B4E3BD2318C80A0D00288A62 /* REMManagedEnergyDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedEnergyDataModel.h; sourceTree = "<group>"; };
+		B4E3BD2418C80A0D00288A62 /* REMManagedEnergyDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedEnergyDataModel.m; sourceTree = "<group>"; };
 		B4EDFB1C1806983600873FA1 /* REMDimensionForSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensionForSplashScreen.h; path = Resource/Dimensions/REMDimensionForSplashScreen.h; sourceTree = "<group>"; };
 		B4EDFB1D1806983600873FA1 /* REMDimensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensions.h; path = Resource/Dimensions/REMDimensions.h; sourceTree = "<group>"; };
 		EF01DB58185B1BCF00A6ADCB /* DCPieChartViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCPieChartViewDelegate.h; sourceTree = "<group>"; };
@@ -2302,6 +2308,8 @@
 				7A43BDCE18C6F4C8007FEFEF /* REMCommodityUsageValuePersistenceProcessor.m */,
 				7A43BDCF18C6F4C8007FEFEF /* REMPinToCoverPersistenceProcessor.h */,
 				7A43BDD018C6F4C8007FEFEF /* REMPinToCoverPersistenceProcessor.m */,
+				B4E3BD2018C8083700288A62 /* REMEnergyDataPersistenceProcessor.h */,
+				B4E3BD2118C8083700288A62 /* REMEnergyDataPersistenceProcessor.m */,
 			);
 			name = Biz;
 			path = IPad/Biz;
@@ -2630,6 +2638,8 @@
 			isa = PBXGroup;
 			children = (
 				7A43BDDF18C6F505007FEFEF /* BluesPad.xcdatamodeld */,
+				B4E3BD2318C80A0D00288A62 /* REMManagedEnergyDataModel.h */,
+				B4E3BD2418C80A0D00288A62 /* REMManagedEnergyDataModel.m */,
 				7A43BDE718C6F505007FEFEF /* REMManagedModel.h */,
 				7A43BDE818C6F505007FEFEF /* REMManagedModel.m */,
 				7A43BDDA18C6F4EC007FEFEF /* REMManagedBuildingModel.h */,
@@ -4239,6 +4249,7 @@
 				7A63E24A18B44CBD00A13464 /* REMBuildingRankingView.m in Sources */,
 				7A63E24E18B44CBD00A13464 /* REMBuildingAirQualityWrapper.m in Sources */,
 				EFD947081839DCBB00E9EC50 /* DCColumnSeries.m in Sources */,
+				B4E3BD2218C8083700288A62 /* REMEnergyDataPersistenceProcessor.m in Sources */,
 				7A43BDD218C6F4C8007FEFEF /* REMCommodityUsageValuePersistenceProcessor.m in Sources */,
 				EFD947071839DCBB00E9EC50 /* _DCColumnsLayer.m in Sources */,
 				7A63E1ED18B44CBD00A13464 /* REMUpdateAllManager.m in Sources */,
@@ -4344,6 +4355,7 @@
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
 				7A63E22D18B44CBD00A13464 /* REMFavoriteDashboardObj.m in Sources */,
 				7A43BDF018C6F505007FEFEF /* REMManagedBuildingModel.m in Sources */,
+				B4E3BD2518C80A0D00288A62 /* REMManagedEnergyDataModel.m in Sources */,
 				B4E0015C18B5C16E00F1D6D9 /* REMManagedAdministratorModel.m in Sources */,
 				7A63E24618B44CBD00A13464 /* REMBuildingChartContainerView2.m in Sources */,
 				7A63E26218B44CBD00A13464 /* REMStatusBar.m in Sources */,

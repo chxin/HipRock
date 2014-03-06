@@ -34,6 +34,7 @@
 
 - (id)newManagedObject:(NSString *)objectType;
 - (id)fetchMangedObject:(NSString *)objectType;
+- (id)fetchMangedObject:(NSString *)objectType withPredicate:(NSPredicate *)predicate;
 - (void)deleteManageObject:(NSManagedObject *)object;
 -(void)persistManageObject;
 

@@ -230,6 +230,19 @@ static REMCacheStoreHolder *cacheStoreHolder;
     [self.managedObjectContext save:&error];
 }
 
+- (id)fetchMangedObject:(NSString *)objectType withPredicate:(NSPredicate *)predicate{
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:objectType];
+    [request setPredicate:predicate];
+    NSError *error = nil;
+    //执行获取数据请求，返回数组
+    NSMutableArray *mutableFetchResult = [[self.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    if (mutableFetchResult == nil) {
+        NSLog(@"Error: %@,%@",error,[error userInfo]);
+    }
+    
+    return mutableFetchResult;
+}
+
 -(id)fetchMangedObject:(NSString *)objectType{
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:objectType];
     
