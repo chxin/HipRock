@@ -11,7 +11,7 @@
 
 @interface REMEnergyDataPersistenceProcessor : REMDataPersistenceProcessor
 
-@property (nonatomic) REMDataStoreType dataStoreType;
-@property (nonatomic,strong) NSDictionary *params;
+//@property (nonatomic) REMDataStoreType dataStoreType;
+//@property (nonatomic,strong) NSDictionary *params;
 
 @end

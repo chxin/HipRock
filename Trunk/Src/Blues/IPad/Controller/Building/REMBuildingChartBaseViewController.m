@@ -64,8 +64,8 @@
     store.maskContainer = nil;
     store.groupName = [NSString stringWithFormat:@"building-data-%@", @(buildingId)];
     REMEnergyDataPersistenceProcessor *processor = [[REMEnergyDataPersistenceProcessor alloc]init];
-    processor.params=param;
-    processor.dataStoreType = self.requestUrl;
+//    processor.params=param;
+//    processor.dataStoreType = self.requestUrl;
     store.persistenceProcessor = processor;
     store.disableAlert=YES;
     [self startLoadingActivity];

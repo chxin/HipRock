@@ -13,22 +13,25 @@
 @implementation REMEnergyDataPersistenceProcessor
 
 - (id)fetchData{
-    NSString *key = [REMServiceAgent buildParameterString:self.params];
+    NSString *key = [REMServiceAgent buildParameterString:self.dataStore.parameter];
     NSPredicate * qcondition= [NSPredicate predicateWithFormat:@"key = '%@'",key];
     NSArray *values = [self.dataStore fetchMangedObject:@"REMManagedEnergyDataModel" withPredicate:qcondition];
-    return values[0];
+    
+    
+    return [REMJSONHelper objectByString:values[0]];
 }
 
 - (id)persistData:(id)data{
-    NSString *key = [REMServiceAgent buildParameterString:self.params];
+    NSString *url = self.dataStore.serviceMeta.url;
+    NSString *parameter = [REMServiceAgent buildParameterString:self.dataStore.parameter];
     NSString *value = [REMJSONHelper stringByObject:data];
     
     REMManagedEnergyDataModel *energyModel = [self.dataStore newManagedObject:@"REMManagedEnergyDataModel"];
-    energyModel.key = key;
+    energyModel.key = [url stringByAppendingString:parameter];
     energyModel.value = value;
     [self.dataStore persistManageObject];
     
-    return data;
+    return [REMJSONHelper objectByString:value];
 }
 
 @end
