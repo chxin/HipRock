@@ -9,6 +9,8 @@
 #import "REMEnergySeacherBase.h"
 #import "REMEnergyMultiTimeSearcher.h"
 #import "REMEnergyCostElectricitySearcher.h"
+#import "REMManagedEnergyDataModel.h"
+#import "REMEnergyDataPersistenceProcessor.h"
 
 
 
@@ -73,10 +75,8 @@
         return;
     }
     
-    
     REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:[model toSearchParam] accessCache:YES andMessageMap:nil];
-    //store.maskContainer=maskerContainer;
-    
+    store.persistenceProcessor = [[REMEnergyDataPersistenceProcessor alloc] init];
     store.disableAlert=self.disableNetworkAlert;
    
     //[activitor setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];
