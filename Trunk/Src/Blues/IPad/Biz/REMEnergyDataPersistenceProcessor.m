@@ -31,7 +31,7 @@
     energyModel.value = value;
     [self.dataStore persistManageObject];
     
-    return [REMJSONHelper objectByString:value];
+    return data;
 }
 
 @end

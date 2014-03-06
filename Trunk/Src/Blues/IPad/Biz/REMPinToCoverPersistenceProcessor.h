@@ -7,11 +7,12 @@
 --------------------------------------------------------------------------*/
 #import "REMDataPersistenceProcessor.h"
 #import "REMManagedBuildingCommodityUsageModel.h"
+#import "REMManagedBuildingModel.h"
 #import "REMManagedPinnedWidgetModel.h"
 
 
 @interface REMPinToCoverPersistenceProcessor : REMDataPersistenceProcessor
 
-@property (nonatomic,strong) REMManagedBuildingCommodityUsageModel *commodityInfo;
+@property (nonatomic,strong) REMManagedBuildingModel *buildingInfo;
 
 @end

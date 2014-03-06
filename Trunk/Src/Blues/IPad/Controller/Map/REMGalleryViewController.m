@@ -193,7 +193,7 @@
     if(cell.superview.superview.superview!=nil)
         return;
     
-    REMBuildingOverallModel *buildingInfo = self.buildingInfoArray[currentBuildingIndex];
+    REMManagedBuildingModel *buildingInfo = self.buildingInfoArray[currentBuildingIndex];
     
     int index = 0;
     for(int i=0;i<self.orderedProvinceKeys.count;i++){
@@ -277,6 +277,21 @@
     }
 }
 
++(int)indexOfBuilding:(REMManagedBuildingModel *)building inBuildingOverallArray:(NSArray *)array
+{
+    return [array indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        REMManagedBuildingModel *buildingOverall = obj;
+        
+        if([buildingOverall.id isEqualToNumber:building.id]){
+            *stop = YES;
+            return YES;
+        }
+        
+        return NO;
+    }];
+}
+
+
 //will be called when tap or pinch end
 //if tap, isNoAmination parameter will be NO since segue will show the zooming animation
 //if pinch end, isNoAmination parameter will be YES since pinch will play zooming animation
@@ -290,7 +305,7 @@
     
     self.isSegueNotAnimated = isNoAnimation;
     self.initialZoomRect = cellFrameInView;
-    self.currentBuildingIndex = [REMBuildingOverallModel indexOfBuilding:cell.building inBuildingOverallArray:self.buildingInfoArray];//  [self buildingIndexFromBuilding:cell.building];
+    self.currentBuildingIndex = [REMGalleryViewController indexOfBuilding:cell.building inBuildingOverallArray:self.buildingInfoArray];//  [self buildingIndexFromBuilding:cell.building];
     if(!isNoAnimation){
         [self takeSnapshot];
     }
@@ -308,7 +323,7 @@
 
 -(REMGalleryCollectionCell *)galleryCellForBuildingIndex:(int)buildingIndex
 {
-    REMBuildingModel *currentBuilding = [self.buildingInfoArray[buildingIndex] building];
+    REMBuildingModel *currentBuilding = [self.buildingInfoArray[buildingIndex] id];
     
     REMGalleryCollectionViewController *currentCollectionController = nil;
     

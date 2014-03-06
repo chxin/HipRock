@@ -14,11 +14,12 @@
 #import "REMWidgetSearchModelBase.h"
 #import "REMBusinessErrorInfo.h"
 #import "REMWidgetDetailViewController.h"
-
+#import "REMManagedWidgetModel.h"
 
 @interface REMWidgetBizDelegatorBase : NSObject
 
-@property (nonatomic,weak) REMWidgetObject *widgetInfo;
+@property (nonatomic,weak) REMManagedWidgetModel *widgetInfo;
+@property (nonatomic,strong) REMWidgetContentSyntax *contentSyntax;
 @property (nonatomic,strong) REMEnergyViewData *energyData;
 @property (nonatomic,weak) UIView *view;
 @property (nonatomic,strong) REMEnergySeacherBase *searcher;
@@ -30,7 +31,7 @@
 @property (nonatomic,copy) NSString *status;
 @property (nonatomic,weak) UIView *chartContainer;
 
-+ (REMWidgetBizDelegatorBase *)bizDelegatorByWidgetInfo:(REMWidgetObject *)widgetInfo;
++ (REMWidgetBizDelegatorBase *)bizDelegatorByWidgetInfo:(REMManagedWidgetModel *)widgetInfo andSyntax:(REMWidgetContentSyntax *)contentSyntax;
 
 - (void) initBizView;
 

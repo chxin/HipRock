@@ -27,5 +27,5 @@
 
 @property (nonatomic) REMRelativeTimeRangeType relativeDateType; // Cover用电趋势图
 
--(id)initWith:(REMWidgetObject*)widgetObj;
+-(id)initWith:(REMWidgetContentSyntax*)contentSyntax;
 @end

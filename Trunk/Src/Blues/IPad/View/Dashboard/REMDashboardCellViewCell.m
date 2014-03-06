@@ -13,7 +13,7 @@
 
 @interface REMDashboardCellViewCell()
 
-@property (nonatomic,weak) REMDashboardObj *dashboardInfo;
+@property (nonatomic,weak) REMManagedDashboardModel *dashboardInfo;
 
 @property (nonatomic,strong) REMWidgetCollectionViewController *collectionController;
 

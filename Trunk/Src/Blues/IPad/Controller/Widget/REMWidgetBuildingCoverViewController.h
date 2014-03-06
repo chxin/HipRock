@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "REMBuildingOverallModel.h"
 #import "REMWidgetDetailViewController.h"
-
+#import "REMManagedDashboardModel.h"
 
 @interface REMWidgetBuildingCoverViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
 
@@ -17,6 +17,6 @@
 @property (nonatomic,strong) NSArray *data;
 @property (nonatomic,weak) REMWidgetDetailViewController *detailController;
 @property (nonatomic) BOOL isRequesting;
-@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
-@property (nonatomic,weak) REMDashboardObj *dashboardInfo;
+@property (nonatomic,weak) REMManagedBuildingModel *buildingInfo;
+@property (nonatomic,weak) REMManagedDashboardModel *dashboardInfo;
 @end

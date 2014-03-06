@@ -10,7 +10,13 @@
 @implementation REMPinToCoverPersistenceProcessor
 
 - (id)fetchData{
-    return self.commodityInfo.pinnedWidgets;
+    NSMutableArray *array = [NSMutableArray array];
+    for (REMManagedBuildingCommodityUsageModel *commodityInfo in [self.buildingInfo.commodities allObjects]) {
+        [array arrayByAddingObjectsFromArray:[commodityInfo.pinnedWidgets allObjects]];
+    }
+    
+    
+    return array;
 }
 
 - (id)persistData:(NSArray *)data{
@@ -25,18 +31,24 @@
         for (int i=0; i<data.count; ++i) {
             NSDictionary *dictionary = data[i];
             REMManagedPinnedWidgetModel *pinnedModel = [self.dataStore newManagedObject:@"REMManagedPinnedWidgetModel"];
+            NSNumber *commodityId = dictionary[@"CommodityId"];
+            for (REMManagedBuildingCommodityUsageModel *commodityInfo in [self.buildingInfo.commodities allObjects]) {
+                if ([commodityInfo.id isEqualToNumber:commodityId] == YES) {
+                    pinnedModel.commodity = commodityInfo;
+                    pinnedModel.widgetId = dictionary[@"WidgetId"];
+                    pinnedModel.dashboardId = dictionary[@"DashboardId"];
+                    pinnedModel.position =dictionary[@"Position"];
+                    [commodityInfo addPinnedWidgetsObject:pinnedModel];
+                }
+            }
             
-            pinnedModel.commodity = self.commodityInfo;
-            pinnedModel.widgetId = dictionary[@"WidgetId"];
-            pinnedModel.dashboardId = dictionary[@"DashboardId"];
-            pinnedModel.position =dictionary[@"Position"];
-            [self.commodityInfo addPinnedWidgetsObject:pinnedModel];
+           
         }
         
         
     }
     [self.dataStore persistManageObject];
-    return self.commodityInfo.pinnedWidgets;
+    return [self fetchData];
 }
 
 @end

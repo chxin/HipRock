@@ -13,14 +13,14 @@
 #import "REMBuildingOverallModel.h"
 #import "REMDashboardObj.h"
 #import "REMManagedBuildingModel.h"
-
+#import "REMManagedWidgetModel.h"
 @interface REMWidgetDetailViewController : UIViewController<UIPopoverControllerDelegate>
 
-@property (nonatomic,weak) REMWidgetObject *widgetInfo;
+@property (nonatomic,weak) REMManagedWidgetModel *widgetInfo;
 @property (nonatomic,weak) REMEnergyViewData *energyData;
 @property (nonatomic,weak) UIView *titleContainer;
 @property (nonatomic,weak) REMManagedBuildingModel *buildingInfo;
-@property (nonatomic,weak) REMDashboardObj *dashboardInfo;
+@property (nonatomic,weak) REMManagedDashboardModel *dashboardInfo;
 @property (nonatomic,strong) REMBusinessErrorInfo *serverError;
 @property (nonatomic) BOOL isServerTimeout;
 - (void)showChart;

@@ -16,21 +16,22 @@
 
 @implementation REMWidgetCellDelegator
 
-+ (REMWidgetCellDelegator *)bizWidgetCellDelegator:(REMWidgetObject *)widgetInfo
++ (REMWidgetCellDelegator *)bizWidgetCellDelegator:(REMManagedWidgetModel *)widgetInfo andSyntax:(REMWidgetContentSyntax *)contentSyntax
 {
     REMWidgetCellDelegator *delegator;
-    if (widgetInfo.contentSyntax.dataStoreType == REMDSEnergyLabeling) {
+    if (contentSyntax.dataStoreType == REMDSEnergyLabeling) {
         delegator = [[REMWidgetLabellingCellDelegator alloc]init];
     }
-    else if(widgetInfo.contentSyntax.dataStoreType == REMDSEnergyRankingCarbon ||
-            widgetInfo.contentSyntax.dataStoreType == REMDSEnergyRankingEnergy ||
-            widgetInfo.contentSyntax.dataStoreType == REMDSEnergyRankingCost){
+    else if(contentSyntax.dataStoreType == REMDSEnergyRankingCarbon ||
+            contentSyntax.dataStoreType == REMDSEnergyRankingEnergy ||
+            contentSyntax.dataStoreType == REMDSEnergyRankingCost){
         delegator = [[REMWidgetRankingCellDelegator alloc]init];
     }
     else{
         delegator = [[REMWidgetCellDelegator alloc]init];
     }
     delegator.widgetInfo=widgetInfo;
+    delegator.contentSyntax = contentSyntax;
     return delegator;
 }
 

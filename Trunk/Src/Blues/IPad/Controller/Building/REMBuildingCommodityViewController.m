@@ -387,17 +387,32 @@
     return nil;
 }
 
+- (NSArray *)trendWidgetArray:(REMManagedDashboardModel *)dashboard{
+    NSMutableArray *array=[NSMutableArray array];
+    for (int i=0; i<dashboard.widgets.count; ++i) {
+        REMManagedWidgetModel *widget=[dashboard.widgets allObjects][i];
+        REMDiagramType diagramType = (REMDiagramType)[widget.diagramType intValue];
+        if (diagramType == REMDiagramTypeColumn ||
+            diagramType == REMDiagramTypeLine ||
+            diagramType == REMDiagramTypeRanking ||
+            diagramType == REMDiagramTypeStackColumn) {
+            [array addObject:widget];
+        }
+    }
+    
+    return array;
+}
 
 
 - (NSDictionary *)dashboardArrayForPiningWidget{
     NSMutableArray *dashboardList = [NSMutableArray array];
     NSMutableDictionary *dic=[NSMutableDictionary dictionary];
     for (int i=0; i<self.buildingInfo.dashboards.count; ++i) {
-        REMDashboardObj *dashboard = [self.buildingInfo.dashboards allObjects][i];
-        NSArray *widgetList = [dashboard trendWidgetArray];
+        REMManagedDashboardModel *dashboard = [self.buildingInfo.dashboards allObjects][i];
+        NSArray *widgetList = [self trendWidgetArray:dashboard];
         if (widgetList.count!=0) {
             [dashboardList addObject:dashboard];
-            [dic setObject:widgetList forKey:dashboard.dashboardId];
+            [dic setObject:widgetList forKey:dashboard.id];
         }
     }
     return  @{@"list":dashboardList,@"widget":dic};

@@ -76,7 +76,7 @@
     [self.view addSubview:title];
     
     
-    self.bizDelegator=[REMWidgetCellDelegator bizWidgetCellDelegator:self.widgetInfo];
+    self.bizDelegator=[REMWidgetCellDelegator bizWidgetCellDelegator:self.widgetInfo andSyntax:self.contentSyntax];
     self.bizDelegator.view=self.view;
     self.bizDelegator.title=title;
     self.bizDelegator.searchModel=self.searchModel;
@@ -115,7 +115,7 @@
         [self generateChart];
     }
     else{
-        [self queryEnergyData:self.widgetInfo.contentSyntax withGroupName:self.groupName];
+        [self queryEnergyData:self.contentSyntax withGroupName:self.groupName];
     }
 }
 
@@ -141,11 +141,11 @@
     }
     
     DAbstractChartWrapper *widgetWrapper = nil;
-    REMDiagramType widgetType = self.widgetInfo.diagramType;
+    REMDiagramType widgetType = (REMDiagramType)[self.widgetInfo.diagramType intValue];
     CGRect widgetRect = self.chartContainer.bounds;
     REMEnergyViewData *data=self.chartData;
     REMChartStyle* style = [REMChartStyle getMinimunStyle];
-    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.widgetInfo];
+    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.contentSyntax];
     if ([self.searchModel isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
         REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.searchModel;
         wrapperConfig.stacked=NO;
@@ -190,7 +190,8 @@
     UIActivityIndicatorView *loadingView=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [loadingView setFrame:self.chartContainer.bounds];
     self.loadingView=loadingView;
-    REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType withWidgetInfo:self.widgetInfo];
+    REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType withWidgetInfo:self.widgetInfo andSyntax:self.contentSyntax
+                                    ];
     searcher.loadingView=self.loadingView;
     searcher.disableNetworkAlert=YES;
     [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:self.searchModel withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *errorInfo){

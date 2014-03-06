@@ -143,7 +143,7 @@
                 [cell endPinch];
                 
                 galleryController.initialZoomRect = [self.collectionView convertRect:cell.frame toView:galleryController.view];
-                galleryController.currentBuildingIndex = [REMBuildingOverallModel indexOfBuilding:cell.building inBuildingOverallArray:self.buildingInfoArray]; //[galleryController buildingIndexFromBuilding:cell.building];
+                galleryController.currentBuildingIndex = [REMGalleryViewController indexOfBuilding:cell.building inBuildingOverallArray:self.buildingInfoArray]; //[galleryController buildingIndexFromBuilding:cell.building];
                 self.isPinching = YES;
                 
                 //show building view

@@ -16,7 +16,7 @@
 
 @implementation REMTextIndicatorFormator
 
-+(NSString *)formatTargetName:(REMEnergyTargetModel *)target inEnergyData:(REMEnergyViewData *)data withWidget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
++(NSString *)formatTargetName:(REMEnergyTargetModel *)target inEnergyData:(REMEnergyViewData *)data withWidget:(REMManagedWidgetModel *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
     switch (target.type) {
         case REMEnergyTargetTag:
@@ -57,7 +57,7 @@
             if([parameters isKindOfClass:[REMWidgetCommoditySearchModel class]]){
                 REMWidgetCommoditySearchModel *commodityParameters = (REMWidgetCommoditySearchModel *)parameters;
                 
-                if(commodityParameters.commodityIdArray.count>0 || widget.diagramType == REMDiagramTypePie){
+                if(commodityParameters.commodityIdArray.count>0 || ((REMDiagramType)[widget.diagramType intValue]) == REMDiagramTypePie){
                     return REMCommodities[@(target.commodityId)];
                 }
                 else{

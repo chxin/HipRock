@@ -13,10 +13,9 @@
 #import "REMEnergyDataPersistenceProcessor.h"
 
 
-
 @implementation REMEnergySeacherBase
 
-+ (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType)storeType withWidgetInfo:(REMWidgetObject *)widgetInfo
++ (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType)storeType withWidgetInfo:(REMManagedWidgetModel *)widgetInfo andSyntax:(REMWidgetContentSyntax *)contentSyntax
 {
     REMEnergySeacherBase *obj;
     if (storeType == REMDSEnergyMultiTimeDistribute ||storeType == REMDSEnergyMultiTimeTrend) {
@@ -29,6 +28,7 @@
         obj=[[REMEnergySeacherBase alloc]init];
     }
     obj.widgetInfo=widgetInfo;
+    obj.contentSyntax = contentSyntax;
     obj.disableNetworkAlert=NO;
     return  obj;
 }

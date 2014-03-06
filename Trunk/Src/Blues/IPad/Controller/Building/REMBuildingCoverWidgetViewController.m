@@ -45,13 +45,13 @@
         NSUInteger section=NSNotFound;
         NSUInteger row=NSNotFound;
         for (int i=0; i<self.dashboardArray.count; ++i) {
-            REMDashboardObj *dashboard=self.dashboardArray[i];
-            if ([dashboard.dashboardId isEqualToNumber:self.selectedDashboardId]== YES) {
+            REMManagedWidgetModel *dashboard=self.dashboardArray[i];
+            if ([dashboard.id isEqualToNumber:self.selectedDashboardId]== YES) {
                 section=i+2;
-                NSArray *widgetList=self.widgetDic[dashboard.dashboardId];
+                NSArray *widgetList=self.widgetDic[dashboard.id];
                 for (int j=0; j<widgetList.count;j++) {
-                    REMWidgetObject *widget=widgetList[j];
-                    if ([widget.widgetId isEqualToNumber:self.selectedWidgetId]==YES) {
+                    REMManagedWidgetModel *widget=widgetList[j];
+                    if ([widget.id isEqualToNumber:self.selectedWidgetId]==YES) {
                         row=j;
                         break;
                     }
@@ -88,8 +88,8 @@
         return 2;
     }
     else{
-        REMDashboardObj *dashboard= self.dashboardArray[section-2];
-        NSArray *widgetList=self.widgetDic[dashboard.dashboardId];
+        REMManagedDashboardModel *dashboard= self.dashboardArray[section-2];
+        NSArray *widgetList=self.widgetDic[dashboard.id];
         return widgetList.count;
     }
 }
@@ -102,7 +102,7 @@
         return [NSString stringWithFormat:REMIPadLocalizedString(@"Building_WidgetRelationCommodityTitle"),self.commodityInfo.comment];
     }
     else{
-        REMDashboardObj *dashboard= self.dashboardArray[section-2];
+        REMManagedDashboardModel *dashboard= self.dashboardArray[section-2];
         return dashboard.name;
     }
 }
@@ -178,9 +178,9 @@
         }
     }
     else{
-        REMDashboardObj *dashboard= self.dashboardArray[indexPath.section-2];
-        NSArray *widgetList=self.widgetDic[dashboard.dashboardId];
-        REMWidgetObject *widgetInfo=widgetList[indexPath.row];
+        REMManagedDashboardModel *dashboard= self.dashboardArray[indexPath.section-2];
+        NSArray *widgetList=self.widgetDic[dashboard.id];
+        REMManagedWidgetModel *widgetInfo=widgetList[indexPath.row];
         cell.textLabel.text=widgetInfo.name;
     }
     
@@ -232,11 +232,11 @@
     }
     NSString *widgetName=nil;
     if (self.currentIndexPath.section!=1) {
-        REMDashboardObj *dashboard=self.dashboardArray[self.currentIndexPath.section-2];
-        NSArray *widgetList=self.widgetDic[dashboard.dashboardId];
-        REMWidgetObject *widget=widgetList[self.currentIndexPath.row];
-        model.dashboardId=dashboard.dashboardId;
-        model.widgetId=widget.widgetId;
+        REMManagedWidgetModel *dashboard=self.dashboardArray[self.currentIndexPath.section-2];
+        NSArray *widgetList=self.widgetDic[dashboard.id];
+        REMManagedWidgetModel *widget=widgetList[self.currentIndexPath.row];
+        model.dashboardId=dashboard.id;
+        model.widgetId=widget.id;
         widgetName=widget.name;
     }
     

@@ -210,8 +210,8 @@
         widget.id=dictionary[@"Id"];
         widget.name=dictionary[@"Name"];
         widget.isRead=dictionary[@"IsRead"];
-        
-        
+        widget.contentSyntax = dictionary[@"ContentSyntax"];
+        widget.diagramType=@(diagramType);
         NSDictionary *shareInfo = dictionary[@"SimpleShareInfo"];
         
         if(!REMIsNilOrNull(shareInfo)){
