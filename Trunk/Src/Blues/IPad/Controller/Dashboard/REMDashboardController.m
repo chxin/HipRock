@@ -160,7 +160,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     if (self.buildingInfo.dashboards.count==0) {
-        NSString *emptyText=NSLocalizedString(@"Dashboard_Empty", @"");//未配置任何仪表盘。
+        NSString *emptyText=REMIPadLocalizedString(@"Dashboard_Empty");//未配置任何仪表盘。
         cell.textLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.5];
         cell.textLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:29];
         cell.textLabel.text=emptyText;
@@ -242,7 +242,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
         NSString *shareTel=sharedObj.userTelephone;
         NSString *date=[REMTimeHelper formatTimeFullDay:sharedObj.shareTime isChangeTo24Hour:NO];
         NSString *userTitle=dashboardInfo.sharedInfo.userTitleComponent;
-        shareLabel.text=[NSString stringWithFormat:NSLocalizedString(@"Widget_ShareTitle", @""),shareName,userTitle,date,shareTel];
+        shareLabel.text=[NSString stringWithFormat:REMIPadLocalizedString(@"Widget_ShareTitle"),shareName,userTitle,date,shareTel];
         [cell.contentView addSubview:shareLabel];
     }
     else{
