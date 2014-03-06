@@ -343,10 +343,10 @@
 }
 
 - (REMManagedWidgetModel *)widgetInfoByPosition:(REMBuildingCoverWidgetPosition)position{
-    REMBuildingCoverWidgetRelationModel *currentRelation;
+    REMManagedPinnedWidgetModel *currentRelation;
     
-    for (REMBuildingCoverWidgetRelationModel *relation in self.commodityInfo.pinnedWidgets) {
-        if (relation.position == position) {
+    for (REMManagedPinnedWidgetModel *relation in self.commodityInfo.pinnedWidgets) {
+        if (((REMBuildingCoverWidgetPosition)[relation.position intValue]) == position) {
             currentRelation = relation;
             break;
         }
@@ -355,7 +355,7 @@
         for (REMManagedDashboardModel *dashboard in [self.buildingInfo.dashboards allObjects]) {
             if ([dashboard.id isEqualToNumber:currentRelation.dashboardId]==YES) {
                 for (REMManagedWidgetModel *widget in dashboard.widgets) {
-                    if ([widget.id isEqualToNumber:currentRelation.widgetId] && position == currentRelation.position) {
+                    if ([widget.id isEqualToNumber:currentRelation.widgetId] && position  == ((REMBuildingCoverWidgetPosition)[currentRelation.position intValue])) {
                         return widget;
                     }
                 }
@@ -409,12 +409,12 @@
     
     REMManagedWidgetModel *widgetInfo=[self widgetInfoByPosition:position];
     if (self.commodityInfo.pinnedWidgets==nil || widgetInfo==nil || [widgetInfo.id isLessThan:@(0)]==YES) {
-        NSString *title=NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @"");//单位面积逐月用%@
+        NSString *title=REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth");//单位面积逐月用%@
         if ([widgetInfo.id isEqualToNumber:@(-1)]==YES) {
-            title = NSLocalizedString(@"Building_EnergyUsageByAreaByMonth", @"");//单位面积逐月用%@
+            title = REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth");//单位面积逐月用%@
         }
         else if([widgetInfo.id isEqualToNumber:@(-2)]==YES){
-            title = NSLocalizedString(@"Building_EnergyUsageByCommodity", @"");//用%@趋势图
+            title = REMIPadLocalizedString(@"Building_EnergyUsageByCommodity");//用%@趋势图
         }
         else{
             if (position == REMBuildingCoverWidgetPositionFirst) {
