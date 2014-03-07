@@ -76,7 +76,7 @@ const static CGFloat widgetGap=20;
     self.cumulateX=0;
     self.readyToClose=NO;
     for (int i=0; i<self.dashboardInfo.widgets.count; ++i) {
-        REMWidgetObject *obj=self.dashboardInfo.widgets[i];
+        REMManagedWidgetModel *obj=[self.dashboardInfo.widgets allObjects][i];
         
         REMWidgetDetailViewController *sub=[[REMWidgetDetailViewController alloc]init];
         sub.widgetInfo=obj;
@@ -185,8 +185,8 @@ const static CGFloat widgetGap=20;
 }
 
 - (void)cancelAllRequest{
-    for (REMWidgetObject *widget in self.dashboardInfo.widgets) {
-        [REMDataStore cancelAccess:[NSString stringWithFormat:@"widget-%@",widget.widgetId]];
+    for (REMManagedWidgetModel *widget in [self.dashboardInfo.widgets allObjects]) {
+        [REMDataStore cancelAccess:[NSString stringWithFormat:@"widget-%@",widget.id]];
     }
 }
 

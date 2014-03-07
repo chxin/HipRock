@@ -526,10 +526,10 @@
     NSString* stringFormat = nil;
     if (self.currentCommodityIndex<self.buildingInfo.commodities.count) {
         stringFormat = NSLocalizedString(@"Weibo_ContentOfElectirc", @"");
-        REMCommodityUsageModel *model =controller.commodityUsage;
-        NSString* commodityName = model.commodity.comment;
-        NSString* uomName = model.commodityUsage.uom.comment;
-        NSString* val = [model.commodityUsage.dataValue isEqual:[NSNull null]] ? nil : model.commodityUsage.dataValue.stringValue;
+        REMManagedBuildingCommodityUsageModel *model =controller.commodityUsage;
+        NSString* commodityName = model.comment;
+        NSString* uomName = model.totalUom;
+        NSString* val = [model.totalValue isEqual:[NSNull null]] ? nil : model.totalValue.stringValue;
         if (val == nil || commodityName == nil || uomName == nil) {
             stringFormat = REMIPadLocalizedString(@"BuildingChart_NoData");
         } else {

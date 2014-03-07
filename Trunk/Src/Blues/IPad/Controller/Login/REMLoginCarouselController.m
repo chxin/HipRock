@@ -16,7 +16,7 @@
 #import "REMTrialCardController.h"
 #import "REMLoginTitledCard.h"
 #import "REMLoginCustomerTableViewController.h"
-
+#import "REMApplicationContext.h"
 @interface REMLoginCarouselController ()
 
 

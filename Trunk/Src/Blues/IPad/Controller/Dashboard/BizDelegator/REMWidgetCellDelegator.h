@@ -6,7 +6,7 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import <Foundation/Foundation.h>
-#import "REMWidgetObject.h"
+#import "REMWidgetContentSyntax.h"
 #import "REMWidgetSearchModelBase.h"
 #import "REMManagedWidgetModel.h"
 @interface REMWidgetCellDelegator : NSObject

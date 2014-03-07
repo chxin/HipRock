@@ -13,7 +13,7 @@
 
 @interface REMWidgetMaxViewController : UIViewController<UIGestureRecognizerDelegate>
 
-@property (nonatomic,weak) REMDashboardObj *dashboardInfo;
+@property (nonatomic,weak) REMManagedDashboardModel *dashboardInfo;
 
 @property (nonatomic,weak) REMManagedBuildingModel *buildingInfo;
 

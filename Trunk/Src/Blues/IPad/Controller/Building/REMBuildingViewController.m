@@ -178,7 +178,7 @@ const static CGFloat buildingGap=20;
     int i=0,count=self.buildingInfoArray.count;
     //count=1;
     for (;i<count;++i) {
-        REMBuildingOverallModel *model = self.buildingInfoArray[i];
+        REMManagedBuildingModel *model = self.buildingInfoArray[i];
         
         REMBuildingImageViewController *subController=[[REMBuildingImageViewController alloc] init];
         subController.buildingInfo=model;
@@ -309,8 +309,8 @@ const static CGFloat buildingGap=20;
 }
 
 - (void)cancelRequest:(int)index{
-    REMBuildingOverallModel *buildingInfo= self.buildingInfoArray[index];
-    NSString *text=[NSString stringWithFormat:@"building-data-%@",buildingInfo.building.buildingId];
+    REMManagedBuildingModel *buildingInfo= self.buildingInfoArray[index];
+    NSString *text=[NSString stringWithFormat:@"building-data-%@",buildingInfo.id];
     
     [REMDataStore cancelAccess:text];
     

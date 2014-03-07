@@ -18,7 +18,7 @@ typedef enum _REMUserValidationStatus : NSInteger{
 
 @interface REMUserValidationModel : REMJSONObject
 
-@property (nonatomic,strong) REMUserModel *user;
+//@property (nonatomic,strong) REMUserModel *user;
 @property (nonatomic,strong) REMManagedUserModel *managedUser;
 @property (nonatomic) REMUserValidationStatus status;
 

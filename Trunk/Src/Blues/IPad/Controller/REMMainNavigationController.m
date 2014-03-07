@@ -13,7 +13,8 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMMapGallerySegue.h"
 #import "REMColor.h"
-
+#import "REMApplicationContext.h"
+#import "REMStorage.h"
 @interface REMMainNavigationController ()
 
 @end

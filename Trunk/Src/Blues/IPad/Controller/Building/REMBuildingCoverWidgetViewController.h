@@ -11,7 +11,7 @@
 #import "REMManagedBuildingCommodityUsageModel.h"
 #import "REMManagedDashboardModel.h"
 #import "REMManagedWidgetModel.h"
-
+#import "REMBuildingCoverWidgetRelationModel.h"
 @interface REMBuildingCoverWidgetViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,weak) UIPopoverController *popController;

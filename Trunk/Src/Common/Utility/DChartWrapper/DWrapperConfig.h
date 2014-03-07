@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "REMEnum.h"
-#import "REMWidgetObject.h"
+#import "REMWidgetContentSyntax.h"
 
 
 @interface DWrapperConfig : NSObject

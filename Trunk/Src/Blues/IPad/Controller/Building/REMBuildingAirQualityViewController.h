@@ -6,7 +6,7 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMBuildingCommodityViewController.h"
-
+#import "REMAirQualityModel.h"
 @interface REMBuildingAirQualityViewController : UIViewController
 
 @property (nonatomic,weak) REMManageBuildingAirQualityModel *airQualityInfo;

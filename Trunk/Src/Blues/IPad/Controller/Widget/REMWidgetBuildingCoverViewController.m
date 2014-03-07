@@ -192,8 +192,8 @@
             dic[@"WidgetId"]=self.detailController.widgetInfo.id;
             dic[@"DashboardId"]=self.dashboardInfo.id;
             
-            REMCommodityModel *commodity=[self.buildingInfo.commodities allObjects][path.section-1];
-            dic[@"CommodityId"]=commodity.commodityId;
+            REMManagedBuildingCommodityUsageModel *commodity=[self.buildingInfo.commodities allObjects][path.section-1];
+            dic[@"CommodityId"]=commodity.id;
             dic[@"Position"]= @(path.row-2);
             [array addObject:dic];
         }

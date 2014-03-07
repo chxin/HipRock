@@ -200,7 +200,7 @@
     }
     
     NSArray *customers= self.customerArray; //[REMApplicationContext instance].currentUser.customers;
-    REMCustomerModel *model=customers[indexPath.row];
+    REMManagedCustomerModel *model=customers[indexPath.row];
     cell.textLabel.text=model.name;
     NSString *currentName=[REMApplicationContext instance].currentManagedCustomer.name;
     

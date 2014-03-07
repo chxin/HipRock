@@ -12,7 +12,8 @@
 #import "REMEncryptHelper.h"
 #import "REMCommonDefinition.h"
 #import "Reachability.h"
-
+#import "REMJSONObject.h"
+#import "REMJSONHelper.h"
 @implementation REMServiceSessionAgent
 
 #define kREMCommMaxQueueWifi 16

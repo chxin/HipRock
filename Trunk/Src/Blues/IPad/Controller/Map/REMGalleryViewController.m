@@ -323,7 +323,7 @@
 
 -(REMGalleryCollectionCell *)galleryCellForBuildingIndex:(int)buildingIndex
 {
-    REMBuildingModel *currentBuilding = [self.buildingInfoArray[buildingIndex] id];
+    REMManagedBuildingModel *currentBuilding = self.buildingInfoArray[buildingIndex];
     
     REMGalleryCollectionViewController *currentCollectionController = nil;
     
@@ -339,7 +339,7 @@
         }
     }
     
-    REMGalleryCollectionCell *cell = [currentCollectionController cellForBuilding:currentBuilding.buildingId];
+    REMGalleryCollectionCell *cell = [currentCollectionController cellForBuilding:currentBuilding.id];
     
     return cell;
 }

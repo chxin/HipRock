@@ -7,7 +7,7 @@
  --------------------------------------------------------------------------*///
 
 #import <UIKit/UIKit.h>
-#import "REMWidgetObject.h"
+#import "REMEnum.h"
 
 typedef enum _REMChartSeriesIndicatorType{
     REMChartSeriesIndicatorLine,

@@ -165,11 +165,11 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     [container addSubview:backButton];
 }
 
-- (REMWidgetObject *)widgetByRelation:(REMBuildingCoverWidgetRelationModel *)relation{
-    for (REMDashboardObj *dashboard in self.buildingInfo.dashboards) {
-        if ([relation.dashboardId isEqualToNumber:dashboard.dashboardId]==YES) {
-            for (REMWidgetObject *widget in dashboard.widgets) {
-                if ([widget.widgetId isEqualToNumber:relation.widgetId]==YES) {
+- (REMManagedWidgetModel *)widgetByRelation:(REMManagedPinnedWidgetModel *)relation{
+    for (REMManagedDashboardModel *dashboard in self.buildingInfo.dashboards) {
+        if ([relation.dashboardId isEqualToNumber:dashboard.id]==YES) {
+            for (REMManagedWidgetModel *widget in dashboard.widgets) {
+                if ([widget.id isEqualToNumber:relation.widgetId]==YES) {
                     return widget;
                 }
             }
@@ -187,32 +187,31 @@ const static CGFloat kWidgetShareTitleFontSize=14;
         dic[@"Id"]=commodity.id;
         BOOL foundFirst=NO;
         BOOL foundSecond=NO;
-        for (REMBuildingCoverWidgetRelationModel *relation in [commodity.pinnedWidgets allObjects]) {
-            if ([relation.commodityId isEqualToNumber:commodity.id]==YES) {
-                REMWidgetObject *widget=[self widgetByRelation:relation];
-                if (widget!=nil && [widget.widgetId isGreaterThan:@(0)]==YES) {
-                    if (relation.position == REMBuildingCoverWidgetPositionFirst) {
-                        foundFirst=YES;
-                        dic[@"firstName"]=widget.name;
-                        dic[@"firstId"]=widget.widgetId;
-                        dic[@"firstDashboardId"]=relation.dashboardId;
-                        if ([self.widgetInfo.id isEqualToNumber:widget.widgetId]) {
-                            dic[@"firstSelected"]=@(1);
-                        }
-                        
-                    }
-                    else{
-                        foundSecond=YES;
-                        dic[@"secondName"]=widget.name;
-                        dic[@"secondId"]=widget.widgetId;
-                        dic[@"secondDashboardId"]=relation.dashboardId;
-                        if ([self.widgetInfo.id isEqualToNumber:widget.widgetId]) {
-                            dic[@"secondSelected"]=@(1);
-                        }
+        for (REMManagedPinnedWidgetModel *relation in [commodity.pinnedWidgets allObjects]) {
+            REMManagedWidgetModel *widget=[self widgetByRelation:relation];
+            if (widget!=nil && [widget.id isGreaterThan:@(0)]==YES) {
+                if (((REMBuildingCoverWidgetPosition)[relation.position intValue]) == REMBuildingCoverWidgetPositionFirst) {
+                    foundFirst=YES;
+                    dic[@"firstName"]=widget.name;
+                    dic[@"firstId"]=widget.id;
+                    dic[@"firstDashboardId"]=relation.dashboardId;
+                    if ([self.widgetInfo.id isEqualToNumber:widget.id]) {
+                        dic[@"firstSelected"]=@(1);
                     }
                     
                 }
+                else{
+                    foundSecond=YES;
+                    dic[@"secondName"]=widget.name;
+                    dic[@"secondId"]=widget.id;
+                    dic[@"secondDashboardId"]=relation.dashboardId;
+                    if ([self.widgetInfo.id isEqualToNumber:widget.id]) {
+                        dic[@"secondSelected"]=@(1);
+                    }
+                }
+                
             }
+        
         }
         if (foundFirst==NO) {
             dic[@"firstName"]=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth"),commodity.comment];

@@ -10,7 +10,8 @@
 #import "REMAppConfiguration.h"
 #import "REMStorage.h"
 #import "REMDataStore.h"
-
+#import "REMJSONHelper.h"
+#import "REMJSONObject.h"
 @implementation REMApplicationContext
 
 @synthesize cacheMode;

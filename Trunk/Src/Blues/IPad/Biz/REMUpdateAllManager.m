@@ -6,13 +6,12 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMUpdateAllManager.h"
-#import "REMBuildingOverallModel.h"
 #import "REMServiceAgent.h"
-#import "REMBuildingOverallModel.h"
 #import "REMManagedAdministratorModel.h"
 #import "REMBuildingPersistenceProcessor.h"
-
-
+#import "REMApplicationContext.h"
+#import "REMImageHelper.h"
+#import "REMTimeHelper.h"
 @interface REMUpdateAllManager()
 
 @property (nonatomic,strong) NSArray *buildingInfoArray;

@@ -214,10 +214,13 @@
 
 
 - (IBAction)okButtonClicked:(id)sender {
-    REMBuildingCoverWidgetRelationModel *model= [[REMBuildingCoverWidgetRelationModel alloc]init];
-    model.commodityId=self.commodityInfo.id;
-    model.buildingId=self.buildingInfo.id;
+//    REMBuildingCoverWidgetRelationModel *model= [[REMBuildingCoverWidgetRelationModel alloc]init];
+//    model.commodityId=self.commodityInfo.id;
+//    model.buildingId=self.buildingInfo.id;
 
+    NSMutableDictionary *modelDic = [NSMutableDictionary dictionary];
+    [modelDic setObject:self.commodityInfo.id forKey:@"CommodityId"];
+    [modelDic setObject:self.buildingInfo.id forKey:@"HierarchyId"];
     if (self.currentIndexPath.section==1) {
         
         NSNumber *widgetId;
@@ -227,43 +230,49 @@
         else{
             widgetId=@(-2);
         }
-        model.widgetId=widgetId;
-        model.dashboardId=@(-1);
+        [modelDic setObject:widgetId forKey:@"WidgetId"];
+        [modelDic setObject:@(-1) forKey:@"DashboardId"];
+//        model.widgetId=widgetId;
+//        model.dashboardId=@(-1);
     }
     NSString *widgetName=nil;
     if (self.currentIndexPath.section!=1) {
         REMManagedWidgetModel *dashboard=self.dashboardArray[self.currentIndexPath.section-2];
         NSArray *widgetList=self.widgetDic[dashboard.id];
         REMManagedWidgetModel *widget=widgetList[self.currentIndexPath.row];
-        model.dashboardId=dashboard.id;
-        model.widgetId=widget.id;
+//        model.dashboardId=dashboard.id;
+//        model.widgetId=widget.id;
+        [modelDic setObject:widget.id forKey:@"WidgetId"];
+        [modelDic setObject:dashboard.id forKey:@"DashboardId"];
+
         widgetName=widget.name;
     }
     
-    if ([self.selectedDashboardId isEqualToNumber:model.dashboardId]==YES &&
-        [self.selectedWidgetId isEqualToNumber:model.widgetId]==YES) {
+    if ([self.selectedDashboardId isEqualToNumber:modelDic[@"DashboardId"]]==YES &&
+        [self.selectedWidgetId isEqualToNumber:modelDic[@"WidgetId"]]==YES) {
         [self cancelButtonClicked:nil];
         return;
     }
     
     REMManagedCustomerModel *customer=REMAppCurrentManagedCustomer;
-    NSDictionary *modelDic=@{
-                             @"DashboardId":model.dashboardId,
-                             @"HierarchyId":model.buildingId,
-                             @"CommodityId":model.commodityId,
-                             @"Position":@((NSUInteger)self.position)
-                             };
-    NSMutableDictionary *newDic = [modelDic mutableCopy];
-    if (model.widgetId!=nil) {
-        [newDic setObject:model.widgetId forKey:@"WidgetId"];
-    }
-    ;
+//    NSDictionary *modelDic=@{
+//                             @"DashboardId":model.dashboardId,
+//                             @"HierarchyId":model.buildingId,
+//                             @"CommodityId":model.commodityId,
+//                             @"Position":@((NSUInteger)self.position)
+//                             };
+//    NSMutableDictionary *newDic = [modelDic mutableCopy];
+//    if (model.widgetId!=nil) {
+//        [newDic setObject:model.widgetId forKey:@"WidgetId"];
+//    }
+//    ;
+    [modelDic setObject:@((NSUInteger)self.position) forKey:@"Position"];
     self.isRequesting=YES;
     REMPinToBuildingCoverHelper *helper=[[REMPinToBuildingCoverHelper alloc]init];
     helper.mainNavigationController=(REMMainNavigationController *)self.commodityController.parentViewController.parentViewController.parentViewController.navigationController;
     helper.widgetName=widgetName;
     self.pinHelper=helper;
-    [helper pinToBuildingCover:@{@"relationList":@[newDic],@"buildingId":model.buildingId,@"customerId":customer.id} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
+    [helper pinToBuildingCover:@{@"relationList":@[modelDic],@"buildingId":modelDic[@"HierarchyId"],@"customerId":customer.id} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
         if (status == REMPinToBuildingCoverStatusSuccess) {
             self.pinHelper=nil;
             [self.commodityController updateChartController];
