@@ -565,17 +565,17 @@
         }
     }
     if (allLayerDone) {
-        UIGraphicsBeginImageContext([self frame].size);
-        
-        [self.layer renderInContext:UIGraphicsGetCurrentContext()];
-        UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-        NSString* myDocPath = myPaths[0];
-        NSString* f = [NSString stringWithFormat:@"/%ui.png", self.hash];
-        NSString* fileName = [myDocPath stringByAppendingFormat:f];
-        [UIImagePNGRepresentation(outputImage) writeToFile:fileName atomically:NO];
+//        UIGraphicsBeginImageContext([self frame].size);
+//        
+//        [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+//        UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//        
+//        NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+//        NSString* myDocPath = myPaths[0];
+//        NSString* f = [NSString stringWithFormat:@"/%ui.png", self.hash];
+//        NSString* fileName = [myDocPath stringByAppendingFormat:f];
+//        [UIImagePNGRepresentation(outputImage) writeToFile:fileName atomically:NO];
         if (!(REMIsNilOrNull(self.delegate)) && [self.delegate respondsToSelector:@selector(beginAnimationDone)]) {
             [self.delegate beginAnimationDone];
         }
