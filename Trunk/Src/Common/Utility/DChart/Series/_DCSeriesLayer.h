@@ -12,17 +12,14 @@
 
 @interface _DCSeriesLayer : _DCLayer
 
-@property (nonatomic, weak, readonly) _DCCoordinateSystem* coordinateSystem;
-@property (nonatomic, strong) NSArray* series;
-
-@property (nonatomic) CGFloat columnWidthInCoordinateSys;
-@property (nonatomic, strong) DCRange* yRange;  // 最后一次重绘时的yRange
-@property (nonatomic, strong) DCRange* xRange;  // 最后一次重绘时的xRange
-
+@property (nonatomic, strong, readonly) NSArray* series;
 @property (nonatomic, assign) BOOL enableGrowAnimation; // 是否播放初始动画，默认为YES，播放一次之后就变为NO
+-(NSUInteger)getVisableSeriesCount;
 
--(id)initWithCoordinateSystem:(id)coordinateSystem;
--(BOOL)isValidSeriesForMe:(id)series;
--(void)redrawWithXRange:(DCRange*)xRange yRange:(DCRange*)yRange;
+@property (nonatomic, weak, readonly) NSArray* coordinateSystems;
+-(id)initWithContext:(DCContext*)graphContext view:(DCXYChartView*)view coordinateSystems:(NSArray*)coordinateSystems;
+-(BOOL)isValidSeriesForMe:(DCXYSeries*)series;
+
+//-(void)redrawWithXRange:(DCRange*)xRange yRange:(DCRange*)yRange;
 -(void)redraw;
 @end

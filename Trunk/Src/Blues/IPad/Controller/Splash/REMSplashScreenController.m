@@ -250,14 +250,20 @@
         frame = CGRectMake(0, 0, 974, 605);
     }
     
+    DWrapperConfig* config = [[DWrapperConfig alloc]init];
+    config.step = REMEnergyStepHour;
+    config.stacked = NO;
+    config.calendarType = REMCalendarTypeNone;
+    config.isUnitOrRatioChart = NO;
+    config.isMultiTimeChart = NO;
     //    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
     //    [self.view addSubview:pieWrapper.view];
     //    self.plotSource = pieWrapper;
-//    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
-//    columnWidget.view.backgroundColor = [UIColor blackColor];
-//    columnWidget.view.hasVGridlines = YES;
-//    columnWidget.view.graphContext.hGridlineAmount = 4;
-//    [self.view addSubview:columnWidget.view];
+    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
+    columnWidget.view.backgroundColor = [UIColor blackColor];
+    columnWidget.view.hasVGridlines = YES;
+    columnWidget.view.graphContext.hGridlineAmount = 4;
+    [self.view addSubview:columnWidget.view];
     
     //    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
     //    lineWidget.view.backgroundColor = [UIColor blackColor];

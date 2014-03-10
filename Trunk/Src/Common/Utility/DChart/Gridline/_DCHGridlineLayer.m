@@ -43,7 +43,7 @@
         while (self.sublayers.count > 0) {
             [self.sublayers[0] removeFromSuperlayer];
         }
-        CGFloat unitLength = self.frame.size.height / (self.graphContext.hGridlineAmount*kDCReservedSpace);
+        CGFloat unitLength = self.graphContext.plotRect.size.height / (self.graphContext.hGridlineAmount*kDCReservedSpace);
         for (NSUInteger i = 0; i < self.graphContext.hGridlineAmount; i++) {
             CGPoint addLines[2];
             addLines[0].x = self.graphContext.plotRect.origin.x;

@@ -13,18 +13,6 @@
 #import "REMColor.h"
 
 @implementation _DCLineSymbolsLayer
--(id)initWithContext:(DCContext*)context view:(DCXYChartView*)view series:(NSArray*)series {
-    self = [super initWithContext:context view:view];
-    if (self) {
-        _series = series;
-        for (DCXYSeries* s in series) {
-            s.layer = self;
-            _enableGrowAnimation = YES;
-        }
-    }
-    return self;
-}
-
 -(NSUInteger)getVisableSeriesCount {
     NSUInteger count = 0;
     for (DCLineSeries* s in self.series) {
@@ -33,9 +21,9 @@
     return count;
 }
 
--(void)setNeedsDisplay {
+-(void)redraw {
     if (self.enableGrowAnimation) {
-        _enableGrowAnimation = NO;
+        self.enableGrowAnimation = NO;
         CALayer* superLayer = self.superlayer;
         CGPoint orig = superLayer.frame.origin;
         CGRect newBounds = superLayer.bounds;
@@ -49,7 +37,7 @@
         superLayer.position = orig;
         [superLayer addAnimation:animation forKey:@"bounds"];
     }
-    [super setNeedsDisplay];
+    [self setNeedsDisplay];
 }
 
 -(CGFloat)getHeightOfPoint:(DCDataPoint*)point heightUnit:(CGFloat)heightUnit {
@@ -69,6 +57,10 @@
     return point;
 }
 
+-(BOOL)isValidSeriesForMe:(DCXYSeries *)series {
+    return series.type == DCSeriesTypeLine;
+}
+
 -(void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
     
@@ -79,7 +71,6 @@
 //    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
     
     CGRect plotRect = self.graphContext.plotRect;
-    
     
     CGContextSetLineJoin(ctx, kCGLineJoinMiter);
     CGContextSetLineCap(ctx , kCGLineCapRound);
