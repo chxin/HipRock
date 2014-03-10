@@ -11,4 +11,5 @@
 
 @protocol DCLabelingChartDelegate <NSObject>
 -(void)focusOn:(DCLabelingLabel*)point;
+-(void)beginAnimationDone;
 @end

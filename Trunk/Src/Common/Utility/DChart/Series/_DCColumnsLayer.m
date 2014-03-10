@@ -34,20 +34,6 @@
 }
 
 -(void)redraw {
-//    if (self.enableGrowAnimation) {
-//        self.enableGrowAnimation = NO;
-//        CALayer* superLayer = self.superlayer;
-//        CAAnimationGroup* g = [CAAnimationGroup animation];
-//        CABasicAnimation* positionAnim = [CABasicAnimation animationWithKeyPath:@"position.y"];
-//        positionAnim.removedOnCompletion = NO;
-//        positionAnim.fillMode = kCAFillModeForwards;
-//        positionAnim.duration = kDCAnimationDuration;
-//        positionAnim.fromValue = @(self.frame.size.height+self.frame.origin.y);
-//        positionAnim.toValue = @(self.frame.origin.y);
-//        g.animations = @[ positionAnim];
-//        
-//        [superLayer addAnimation:g forKey:nil];
-//    }
     if (self.enableGrowAnimation) {
         self.enableGrowAnimation = NO;
         CALayer* superLayer = self.superlayer;
@@ -57,6 +43,7 @@
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"bounds"];
         animation.fromValue = [NSValue valueWithCGRect:oldBounds];
         animation.toValue = [NSValue valueWithCGRect:newBounds];
+        animation.delegate = self;
         animation.duration = kDCAnimationDuration;
         superLayer.anchorPoint = CGPointMake(0, 1);
         superLayer.position = CGPointMake(superFrame.origin.x, superFrame.size.height+superFrame.origin.y);
@@ -106,18 +93,6 @@
                         column.backgroundColor = [REMColor makeTransparent:kDCFocusPointAlpha withColor:s.color].CGColor;
                     }
                     [xDics setObject:column forKey:key];
-//                    if (self.enableGrowAnimation) {
-//                        CAAnimationGroup* g = [CAAnimationGroup animation];
-//                        CABasicAnimation* positionAnim = [CABasicAnimation animationWithKeyPath:@"position.y"];
-//                        positionAnim.removedOnCompletion = NO;
-//                        positionAnim.fillMode = kCAFillModeForwards;
-//                        positionAnim.duration = kDCAnimationDuration;
-//                        positionAnim.fromValue = @(self.frame.size.height);
-//                        positionAnim.toValue = @(toFrame.origin.y+toFrame.size.height/2);
-//                        g.animations = @[ positionAnim];
-//                        
-//                        [column addAnimation:g forKey:nil];
-//                    }
                     column.frame = toFrame;
                 } else if (column == nil && !isRectVisable) {
                     continue;
@@ -142,7 +117,6 @@
         }
         self.columnsDic = xDics;
         [CATransaction setDisableActions:caTransationState];
-        self.enableGrowAnimation = NO;
     }
 }
 

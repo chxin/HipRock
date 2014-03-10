@@ -11,7 +11,7 @@
 #import "REMEnergyViewData.h"
 #import "REMDashboardController.h"
 
-@interface REMWidgetCellViewController : UIViewController
+@interface REMWidgetCellViewController : UIViewController<REMChartDelegate>
 
 @property (nonatomic,weak) REMWidgetObject *widgetInfo;
 @property (nonatomic,copy) NSString *groupName;

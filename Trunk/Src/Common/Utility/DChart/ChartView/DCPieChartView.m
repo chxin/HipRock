@@ -96,9 +96,13 @@
     if (self.chartStyle.playBeginAnimation) {
         self.radius = 0;
         self.radiusForShadow = 0;
-        [self.animationManager animateToFrame:targetFrame];
+        [self.animationManager animateToFrame:targetFrame callback:^(void){
+            if (!(REMIsNilOrNull(self.delegate)) && [self.delegate respondsToSelector:@selector(beginAnimationDone)]) {
+                [self.delegate beginAnimationDone];
+            }
+        }];
     } else {
-        [self.animationManager playFrames:@[targetFrame]];
+        [self.animationManager playFrames:@[targetFrame] callback:nil];
     }
     self.pieLayer.frame = CGRectMake(self.center.x-targetFrame.radiusForShadow.doubleValue, self.center.y-targetFrame.radiusForShadow.doubleValue, targetFrame.radiusForShadow.doubleValue*2, targetFrame.radiusForShadow.doubleValue*2);
     
@@ -166,7 +170,7 @@
     if (fabs(self.panSpeed) >= 0.05) {
         [self.animationManager rotateWithInitialSpeed:self.panSpeed];
     } else {
-        [self.animationManager playFrames:[self.animationManager getAngleTurningFramesFrom:self.rotationAngle to:2-[self.animationManager findNearbySliceCenter:self.rotationAngle]]];
+        [self.animationManager playFrames:[self.animationManager getAngleTurningFramesFrom:self.rotationAngle to:2-[self.animationManager findNearbySliceCenter:self.rotationAngle]] callback:nil];
     }
     self.panSpeed = 0;
 }

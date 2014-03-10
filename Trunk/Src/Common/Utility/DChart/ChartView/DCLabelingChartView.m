@@ -311,9 +311,17 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
 
 -(void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
-    
+    CGFloat toAlpha = self.alpha;
+    self.alpha = 0;
     [self updateGestures];
     [self setNeedsDisplay];
+    [UIView animateWithDuration:0.4 animations:^(){
+        self.alpha = toAlpha;
+    } completion:^(BOOL completed){
+        if (completed && !(REMIsNilOrNull(self.delegate)) && [self.delegate respondsToSelector:@selector(beginAnimationDone)]) {
+            [self.delegate beginAnimationDone];
+        }
+    }];
 }
 
 -(CGFloat)getStageHeight:(uint)stageCount {

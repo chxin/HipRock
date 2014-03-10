@@ -170,12 +170,12 @@
                 trend.calenderType=self.widgetInfo.contentSyntax.calendarType;
             }
         }
+        widgetWrapper.delegate = self;
         [self.chartContainer addSubview:[widgetWrapper getView]];
         
-        
-        NSRunLoop *loop=[NSRunLoop currentRunLoop];
-        NSTimer *timer= [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(snapshotChartView) userInfo:nil repeats:NO];
-        [loop addTimer:timer forMode:NSDefaultRunLoopMode];
+//        NSRunLoop *loop=[NSRunLoop currentRunLoop];
+//        NSTimer *timer= [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(snapshotChartView) userInfo:nil repeats:NO];
+//        [loop addTimer:timer forMode:NSDefaultRunLoopMode];
     }
 
 }
@@ -223,6 +223,10 @@
     [self.view addConstraint:constraintY];
     
 
+}
+
+-(void)beginAnimationDone {
+    [self snapshotChartView];
 }
 
 - (void)snapshotChartView{

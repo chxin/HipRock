@@ -201,7 +201,7 @@
     style.backgroundBandFontColor = [REMColor colorByHexString:@"#3b3b3b"];
     style.backgroundBandFont = [UIFont fontWithName:@(kBuildingFontSCRegular) size:8];
     
-    style.playBeginAnimation = NO;
+    style.playBeginAnimation = YES;
     
     style.labelingLineWidth = 0.5f;
     style.labelingLineColor = [REMColor colorByHexString:@"#cfcfcf"];

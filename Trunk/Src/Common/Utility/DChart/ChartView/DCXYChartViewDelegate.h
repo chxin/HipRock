@@ -26,4 +26,5 @@
 
 -(DCRange*)updatePinchRange:(DCRange*)newRange pinchCentreX:(CGFloat)centreX pinchStopped:(BOOL)stopped;
 -(DCRange*)updatePanRange:(DCRange *)newRange withSpeed:(double)speed;
+-(void)beginAnimationDone;
 @end

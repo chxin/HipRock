@@ -45,4 +45,5 @@
 -(void)relabelX;
 -(void)setBackgoundBands:(NSArray*)bands;
 -(void)reloadData;
+-(void)subLayerGrowthAnimationDone;
 @end

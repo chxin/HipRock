@@ -33,6 +33,7 @@
         animation.fromValue = [NSValue valueWithCGRect:oldBounds];
         animation.toValue = [NSValue valueWithCGRect:newBounds];
         animation.duration = kDCAnimationDuration;
+        animation.delegate = self;
         superLayer.anchorPoint = CGPointZero;
         superLayer.position = orig;
         [superLayer addAnimation:animation forKey:@"bounds"];

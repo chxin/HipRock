@@ -36,5 +36,5 @@ typedef enum _DChartStatus {
 -(void)addHiddenTarget:(REMEnergyTargetModel*)target index:(NSUInteger)index;
 -(void)removeHiddenTarget:(REMEnergyTargetModel*)target index:(NSUInteger)index;
 -(BOOL) isTargetHidden:(REMEnergyTargetModel*)target index:(NSUInteger)index;
-
+-(void)beginAnimationDone;
 @end

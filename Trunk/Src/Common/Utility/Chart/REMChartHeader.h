@@ -23,6 +23,8 @@ typedef enum _DCLineType {
 }DCLineType;
 
 @protocol REMChartDelegate <NSObject>
+@optional
+-(void)beginAnimationDone;
 @end
 
 @protocol REMChartLabelingDelegate <REMChartDelegate>

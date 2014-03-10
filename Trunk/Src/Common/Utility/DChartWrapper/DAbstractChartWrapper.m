@@ -44,6 +44,11 @@
 @end
 
 @implementation DAbstractChartWrapper
+-(void)beginAnimationDone {
+    if (!(REMIsNilOrNull(self.delegate)) && [self.delegate respondsToSelector:@selector(beginAnimationDone)]) {
+        [self.delegate beginAnimationDone];
+    }
+}
 
 -(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(REMChartStyle *)style {
     self = [self init];

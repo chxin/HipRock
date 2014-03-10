@@ -15,6 +15,7 @@
     if (self) {
         self.contentsScale = [UIScreen mainScreen].scale;
         _enableGrowAnimation = YES;
+        _growthAnimationDone = NO;
         NSMutableArray* s = [[NSMutableArray alloc]init];
         for (DCXYSeries* se in view.seriesList) {
             if ([self isValidSeriesForMe:se]) {
@@ -27,6 +28,13 @@
         _coordinateSystems = coordinateSystems;
     }
     return self;
+}
+
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag {
+    if (flag) {
+        _growthAnimationDone = YES;
+        [self.view subLayerGrowthAnimationDone];
+    }
 }
 
 -(NSUInteger)getVisableSeriesCount {
