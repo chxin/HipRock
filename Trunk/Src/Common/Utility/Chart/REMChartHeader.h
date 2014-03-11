@@ -21,6 +21,11 @@ typedef enum _DCLineType {
     DCLineTypeDashed = 2,
     DCLineTypeShortDashed = 3
 }DCLineType;
+typedef enum _DChartStatus {
+    DChartStatusNormal,
+    DChartStatusFocus
+}DChartStatus;
+
 
 @protocol REMChartDelegate <NSObject>
 @optional

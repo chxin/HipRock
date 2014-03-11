@@ -12,11 +12,6 @@
 #import "REMCommonHeaders.h"
 #import "REMChartStyle.h"
 #import "DWrapperConfig.h"
-  
-typedef enum _DChartStatus {
-    DChartStatusNormal,
-    DChartStatusFocus
-}DChartStatus;
 
 @interface DAbstractChartWrapper : NSObject
 

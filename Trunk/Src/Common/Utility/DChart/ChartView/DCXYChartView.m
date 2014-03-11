@@ -288,7 +288,7 @@
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
+    [super touchesEnded:touches withEvent:event];
     if (self.delegate && [self.delegate respondsToSelector:@selector(touchesEnded)]) {
         [self.delegate touchesEnded];
     }
@@ -444,7 +444,24 @@
 }
 
 -(double)getXLocationForPoint:(CGPoint)point {
-    return self.graphContext.hRange.location+self.graphContext.hRange.length*(point.x-self.graphContext.plotRect.origin.x)/self.graphContext.plotRect.size.width;
+    return [self convertViewPoint:point inCoordinate:nil].x;
+}
+
+/*
+ * 将相对于View的一个Point转为XY值。如果dc==null，返回的Point只包含x值，y值为INT32_MIN。
+ */
+-(CGPoint)convertViewPoint:(CGPoint)point inCoordinate:(_DCCoordinateSystem*)dc {
+    CGPoint xyPoint;
+    DCRange* hRange = self.graphContext.hRange;
+    CGRect plotRect = self.graphContext.plotRect;
+    xyPoint.x = hRange.location+hRange.length*(point.x-plotRect.origin.x)/plotRect.size.width;
+    if (REMIsNilOrNull(dc)) {
+        xyPoint.y = INT32_MIN;
+    } else {
+        DCRange* vRange = dc.yRange;
+        xyPoint.y = vRange.location+vRange.length*(plotRect.origin.y+plotRect.size.height-point.y)/vRange.length;
+    }
+    return xyPoint;
 }
 
 -(void)reloadData {

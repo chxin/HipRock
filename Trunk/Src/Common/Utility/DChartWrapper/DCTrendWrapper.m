@@ -387,13 +387,6 @@
     if (!stopped) self.panSpeed = speed;
     if (self.chartStatus != DChartStatusNormal) return;
     self.view.acceptTap = NO;
-//    DCRange* globalRange = self.graphContext.globalHRange;
-//    DCRange* range = self.graphContext.hRange;
-//    double rangeLength = range.length;
-//    double rangeLocation = range.location;
-//    if (rangeLocation < globalRange.location) rangeLocation = globalRange.location;
-//    if (range.end > globalRange.end) rangeLocation = globalRange.end - rangeLength;
-//    self.myStableRange = [[DCRange alloc]initWithLocation:rangeLocation length:rangeLength];
 
     if (stopped) {
         if (self.sharedProcessor.step == REMEnergyStepHour) {
