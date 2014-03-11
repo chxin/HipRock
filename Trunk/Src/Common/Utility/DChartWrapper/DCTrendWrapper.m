@@ -68,7 +68,7 @@
     
     
     view.graphContext.globalHRange = globalRange;
-    view.seriesList = seriesList;
+    [view setSeriesList:seriesList];
     
     view.acceptTap = self.style.acceptTap;
     view.acceptPinch = self.style.acceptPinch;

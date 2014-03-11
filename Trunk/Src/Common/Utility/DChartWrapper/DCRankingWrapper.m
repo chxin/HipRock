@@ -135,7 +135,6 @@
     if (_sortOrder != sortOrder) {
         _sortOrder = sortOrder;
         [self swapeAllDatas:self.view.seriesList[0]];
-        [self.view relabelX];
         [self.view reloadData];
     }
 }
