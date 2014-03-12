@@ -541,7 +541,6 @@
 		7A63E27618B44CBD00A13464 /* REMMapGallerySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1E118B44CBD00A13464 /* REMMapGallerySegue.m */; };
 		7A63E27718B44CBD00A13464 /* REMMaxWidgetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1E318B44CBD00A13464 /* REMMaxWidgetSegue.m */; };
 		7A63E27818B44CBD00A13464 /* REMSplashMapSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1E518B44CBD00A13464 /* REMSplashMapSegue.m */; };
-		7A63E27B18B44CDF00A13464 /* Blues-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E27918B44CDF00A13464 /* Blues-Info.plist */; };
 		7A63E28518B44F9B00A13464 /* REMIPhoneControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E28418B44F9B00A13464 /* REMIPhoneControllerBase.m */; };
 		7A63E28818B450B200A13464 /* REMIPhoneMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E28718B450B200A13464 /* REMIPhoneMainViewController.m */; };
 		7A63E28B18B454BA00A13464 /* Localizable_Common.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A63E28918B454BA00A13464 /* Localizable_Common.strings */; };
@@ -3509,7 +3508,7 @@
 		7A9B1E12177B3A6000C282A8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				TargetAttributes = {
 					7A39D59E18B5A3A100CC9D5D = {
 						TestTargetID = 7A9B1E1B177B3A8B00C282A8;
@@ -3640,7 +3639,6 @@
 				7A63E29D18B45B1100A13464 /* EMOP_Setting.png in Resources */,
 				7A58F24F1839A5650071DE7A /* Propaganda_3.jpg in Resources */,
 				B4656BFE187D47E6008EAEA8 /* ChartCustomization_Widget@2x.png in Resources */,
-				7A63E27B18B44CDF00A13464 /* Blues-Info.plist in Resources */,
 				6A61A7271839B82000C6A228 /* OverTarget.png in Resources */,
 				6A61A7741839B82000C6A228 /* Login-Pressed@2x.png in Resources */,
 				B4175107188CC80F0020AE8E /* Down.png in Resources */,
@@ -4388,7 +4386,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Blues.app/Blues";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -4438,7 +4435,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Blues.app/Blues";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -4483,7 +4479,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Blues.app/Blues";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -4618,8 +4613,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Schneider Electric (China) Investment Co., Ltd. (46REERL7A3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
