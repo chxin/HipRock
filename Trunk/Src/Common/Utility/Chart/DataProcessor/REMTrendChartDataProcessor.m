@@ -42,9 +42,9 @@
         }
         int monthToAddInt = monthToAdd;
         NSDate* d = [REMTimeHelper addMonthToDate:startDate month:monthToAddInt];
-        NSLog(@"this:%@ %f", d, x);
+//        NSLog(@"this:%@ %f", d, x);
         d = [NSDate dateWithTimeInterval:28*24*3600*(monthToAdd-(double)monthToAddInt) sinceDate:d];
-        NSLog(@"that:%@ %f", d,x);
+//        NSLog(@"that:%@ %f", d,x);
         return d;
     }
 }
