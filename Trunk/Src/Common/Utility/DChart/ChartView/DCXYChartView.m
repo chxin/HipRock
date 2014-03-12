@@ -209,6 +209,9 @@
     [super setFrame:frame];
     [self recalculatePlotRect];
     [self updateAllLayerFrame];
+    [self.symbolLayer redraw];
+    [self.columnLayer redraw];
+    [self.indicatorLayer setNeedsDisplay];
 }
 
 #pragma mark - calculate layer frame and plotRect
