@@ -1,21 +1,21 @@
 //
-//  _DCBackgroundBandsLayer.m
+//  _DCVerticalBackgroundLayer.m
 //  Blues
 //
 //  Created by Zilong-Oscar.Xu on 11/23/13.
 //
 //
 
-#import "_DCBackgroundBandsLayer.h"
+#import "_DCVerticalBackgroundLayer.h"
 #import <CoreText/CoreText.h>
 #import "DCUtility.h"
 
-@interface _DCBackgroundBandsLayer()
+@interface _DCVerticalBackgroundLayer()
 @property (nonatomic, strong) NSArray* bands;
 @property (nonatomic, strong) NSMutableDictionary* layerDictionary;
 @end
 
-@implementation _DCBackgroundBandsLayer
+@implementation _DCVerticalBackgroundLayer
 -(id)initWithContext:(DCContext*)context view:(DCXYChartView*)view {
     self = [super initWithContext:context view:view];
     if (self) {

@@ -1,5 +1,5 @@
 //
-//  _DCBackgroundBandsLayer.h
+//  _DCVerticalBackgroundLayer.h
 //  Blues
 //
 //  Created by Zilong-Oscar.Xu on 11/23/13.
@@ -10,6 +10,6 @@
 #import "DCXYChartBackgroundBand.h"
 #import "DCXYChartView.h"
 
-@interface _DCBackgroundBandsLayer : _DCLayer<DCContextHRangeObserverProtocal>
+@interface _DCVerticalBackgroundLayer : _DCLayer<DCContextHRangeObserverProtocal>
 -(void)setBands:(NSArray*)bands;
 @end

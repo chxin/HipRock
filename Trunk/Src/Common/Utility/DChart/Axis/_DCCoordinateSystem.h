@@ -30,6 +30,9 @@
 -(id)initWithChartView:(UIView*)chartView y:(DCAxis*)y;
 -(void)recalculatorYMaxInRange:(DCRange*)range;
 
+-(void)addYIntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer;
+-(void)removeYIntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer;
+
 -(CALayer*)getAxisLabelLayer;
 
 @end

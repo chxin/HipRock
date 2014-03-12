@@ -322,11 +322,11 @@ static int requestTimeout = 45; //(s)
             if(kREMLogResquest == 1 && jsonString.length > shortJsonStringLength){
                 jsonString = [NSString stringWithFormat:@"%@..",[jsonString substringToIndex:shortJsonStringLength]];
             }
-            NSLog(@"REM-RESPONSE url: %@", service.url);
-            NSLog(@"REM-RESPONSE json: %@", jsonString);
+//            NSLog(@"REM-RESPONSE url: %@", service.url);
+//            NSLog(@"REM-RESPONSE json: %@", jsonString);
         }
-        else
-            NSLog(@"REM-RESPONSE data: %d bytes", [operation.responseData length]);
+//        else
+//            NSLog(@"REM-RESPONSE data: %d bytes", [operation.responseData length]);
     }
 }
 

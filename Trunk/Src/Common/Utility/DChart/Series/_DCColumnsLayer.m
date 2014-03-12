@@ -26,13 +26,6 @@
     return self;
 }
 
--(_DCCoordinateSystem*)findCoordinateBySeries:(DCXYSeries*)series {
-    for (_DCCoordinateSystem* c in self.coordinateSystems) {
-        if ([c.seriesList containsObject:series]) return c;
-    }
-    return nil;
-}
-
 -(void)redraw {
     if (self.enableGrowAnimation) {
         self.enableGrowAnimation = NO;
@@ -70,7 +63,7 @@
         for (int i = 0; i < seriesAmount; i++) {
             DCColumnSeries* s = self.series[self.graphContext.stacked ? (seriesAmount-i-1) : i];
             if (s.hidden) continue;
-            _DCCoordinateSystem* coordinateSystem = [self findCoordinateBySeries:s];
+            _DCCoordinateSystem* coordinateSystem = [self.view findCoordinateBySeries:s];
             for (int j = start; j<=end; j++) {
                 if (j >= s.datas.count) continue;
                 
