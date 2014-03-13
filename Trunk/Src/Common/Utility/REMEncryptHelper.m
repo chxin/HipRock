@@ -8,7 +8,6 @@
 
 #import "REMEncryptHelper.h"
 #import <CommonCrypto/CommonCryptor.h>
-#import "GTMBase64.h"
 
 @implementation REMEncryptHelper
 
@@ -64,40 +63,46 @@ static const NSString *vector = @"EjRWeJCrze8SNFZ4kKvN7w==";
 {
     NSData *encryptedData = [REMEncryptHelper AES256EncryptData:[input dataUsingEncoding:NSUTF8StringEncoding] withKey:REMSecurityTokenKey];
     
-    return [REMEncryptHelper encodeBase64Data:encryptedData];
+    return [REMEncryptHelper encodeBase64StringWithData:encryptedData];
 }
 
 #pragma mark - base64
-+ (NSString*)encodeBase64String:(NSString * )input {
++ (NSString*)encodeBase64StringWithString:(NSString * )input {
     NSData *data = [input dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-    data = [GTMBase64 encodeData:data];
-    NSString *base64String = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    return base64String;
+    
+    return  [REMEncryptHelper encodeBase64StringWithData:data];
 }
 
-+ (NSString*)decodeBase64String:(NSString * )input {
-    NSData *data = [input dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-    data = [GTMBase64 decodeData:data];
-    NSString *base64String = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    return base64String;
++ (NSString*)decodeBase64StringWithString:(NSString * )encodedString {
+    NSData *encodedData = [encodedString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    
+    return  [REMEncryptHelper decodeBase64StringWithData:encodedData];
 }
 
-+ (NSString*)encodeBase64Data:(NSData *)data {
-    data = [GTMBase64 encodeData:data];
-    NSString *base64String = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    return base64String;
++ (NSString*)encodeBase64StringWithData:(NSData * )data {
+    NSData *encodedData = [REMEncryptHelper encodeBase64Data:data];
+    
+    return  [[NSString alloc] initWithData:encodedData encoding:NSUTF8StringEncoding];
 }
 
-+ (NSString*)decodeBase64Data:(NSData *)data {
-    data = [GTMBase64 decodeData:data];
-    NSString *base64String = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    return base64String;
++ (NSString*)decodeBase64StringWithData:(NSData * )encodedData {
+    NSData *decodedData = [REMEncryptHelper decodeBase64Data:encodedData];
+    
+    return  [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
+}
+
++ (NSData *)encodeBase64Data:(NSData *)data {
+    return [data base64EncodedDataWithOptions:0];
+}
+
++ (NSData *)decodeBase64Data:(NSData *)data {
+    return [[NSData alloc] initWithBase64EncodedData:data options:0];
 }
 
 #pragma mark - private methods
 + (NSData *)getVectorData
 {
-    NSData *data = [vector dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-    return [GTMBase64 decodeData:data];
+    NSData *encodedData = [vector dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    return [REMEncryptHelper decodeBase64Data:encodedData];
 }
 @end

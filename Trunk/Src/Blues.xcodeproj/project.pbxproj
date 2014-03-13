@@ -183,7 +183,6 @@
 		7A39D5EF18B5A69C00CC9D5D /* WeiboDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E417C20CC400709111 /* WeiboDialog.m */; };
 		7A39D5F018B5A69C00CC9D5D /* WeiboLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E617C20CC500709111 /* WeiboLoginDialog.m */; };
 		7A39D5F118B5A69C00CC9D5D /* Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E817C20CC500709111 /* Weibo.m */; };
-		7A39D5F218B5A69C00CC9D5D /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */; };
 		7A39D5F318B5A69C00CC9D5D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142517850B2100CC2922 /* Reachability.m */; };
 		7A39D5F418B5A69C00CC9D5D /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E84177D238F00F0EB9F /* AFHTTPClient.m */; };
 		7A39D5F518B5A69C00CC9D5D /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E86177D238F00F0EB9F /* AFHTTPRequestOperation.m */; };
@@ -572,7 +571,6 @@
 		7A664FD9183B3369004B9FF3 /* MapPopover_Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD5183B3369004B9FF3 /* MapPopover_Arrow@2x.png */; };
 		7A664FDA183B3369004B9FF3 /* MapPopover_Rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD6183B3369004B9FF3 /* MapPopover_Rectangle.png */; };
 		7A664FDB183B3369004B9FF3 /* MapPopover_Rectangle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD7183B3369004B9FF3 /* MapPopover_Rectangle@2x.png */; };
-		7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */; };
 		7A7B298D1888C58A00E74D3D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B298C1888C58A00E74D3D /* Images.xcassets */; };
 		7A7B29911888C65000E74D3D /* UIView+FlipTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B29901888C65000E74D3D /* UIView+FlipTransition.m */; };
 		7A7B29941888C8DF00E74D3D /* SplashScreenBackgroud.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B29921888C8DF00E74D3D /* SplashScreenBackgroud.png */; };
@@ -1364,9 +1362,6 @@
 		7A664FD6183B3369004B9FF3 /* MapPopover_Rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapPopover_Rectangle.png; sourceTree = "<group>"; };
 		7A664FD7183B3369004B9FF3 /* MapPopover_Rectangle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MapPopover_Rectangle@2x.png"; sourceTree = "<group>"; };
 		7A6CB4EA18165AE1007515FB /* REMLocalizeKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMLocalizeKeys.h; path = Resource/Definitions/REMLocalizeKeys.h; sourceTree = "<group>"; };
-		7A6E6D0B17A65CE500FBB264 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
-		7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
-		7A6E6D0D17A65CE500FBB264 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		7A7B298C1888C58A00E74D3D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resource/Images.xcassets; sourceTree = "<group>"; };
 		7A7B298F1888C65000E74D3D /* UIView+FlipTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FlipTransition.h"; sourceTree = "<group>"; };
 		7A7B29901888C65000E74D3D /* UIView+FlipTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FlipTransition.m"; sourceTree = "<group>"; };
@@ -2914,17 +2909,6 @@
 			path = LaunchImage;
 			sourceTree = "<group>";
 		};
-		7A6E6D0A17A65CE500FBB264 /* GMT */ = {
-			isa = PBXGroup;
-			children = (
-				7A6E6D0B17A65CE500FBB264 /* GTMBase64.h */,
-				7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */,
-				7A6E6D0D17A65CE500FBB264 /* GTMDefines.h */,
-			);
-			name = GMT;
-			path = ../Lib/GMT;
-			sourceTree = "<group>";
-		};
 		7A7B298E1888C63F00E74D3D /* Animation */ = {
 			isa = PBXGroup;
 			children = (
@@ -3003,7 +2987,6 @@
 				7A9B1E21177B3A8B00C282A8 /* Foundation.framework */,
 				7A9B1E23177B3A8B00C282A8 /* CoreGraphics.framework */,
 				7A0288B917C20CC400709111 /* WeiboSDK */,
-				7A6E6D0A17A65CE500FBB264 /* GMT */,
 				7A1D142317850B2100CC2922 /* Reachability */,
 				7A399E82177D238F00F0EB9F /* AFNetworking */,
 				B445AE8F177BEEB7002D2A59 /* Lumberjack */,
@@ -4008,7 +3991,6 @@
 				7A39D5EF18B5A69C00CC9D5D /* WeiboDialog.m in Sources */,
 				7A39D5F018B5A69C00CC9D5D /* WeiboLoginDialog.m in Sources */,
 				7A39D5F118B5A69C00CC9D5D /* Weibo.m in Sources */,
-				7A39D5F218B5A69C00CC9D5D /* GTMBase64.m in Sources */,
 				7A39D5F318B5A69C00CC9D5D /* Reachability.m in Sources */,
 				7A39D5F418B5A69C00CC9D5D /* AFHTTPClient.m in Sources */,
 				7A39D5F518B5A69C00CC9D5D /* AFHTTPRequestOperation.m in Sources */,
@@ -4157,7 +4139,6 @@
 				7A1D7C4517A63E8B0050779D /* REMEncryptHelper.m in Sources */,
 				7A63E22318B44CBD00A13464 /* REMBuildingOverallModel.m in Sources */,
 				EF0346B9183B979800DE186A /* DCLineWrapper.m in Sources */,
-				7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */,
 				7A63E1FF18B44CBD00A13464 /* REMDashboardController.m in Sources */,
 				EFD947031839DCBB00E9EC50 /* DCDataPoint.m in Sources */,
 				7A63E1F818B44CBD00A13464 /* REMBuildingTrendChartViewController.m in Sources */,
