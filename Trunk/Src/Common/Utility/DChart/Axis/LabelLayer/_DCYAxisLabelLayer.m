@@ -40,26 +40,6 @@
 -(void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
     if (self.hidden) return;
-    if (!REMIsNilOrNull(self.axis.backgroundBands)) {
-        DCRange* yRange = self.yRange;
-        for(DCXYChartBackgroundBand* band in self.axis.backgroundBands) {
-            CGFloat yTop = [DCUtility getScreenYIn:self.graphContext.plotRect yVal:band.range.end vRange:yRange];
-            CGFloat yBottom = [DCUtility getScreenYIn:self.graphContext.plotRect yVal:band.range.location vRange:yRange];
-            
-            CGMutablePathRef path = CGPathCreateMutable();
-            CGContextSetFillColorWithColor(ctx, band.color.CGColor);
-            CGFloat xLeft = self.graphContext.plotRect.origin.x;
-            CGFloat xRight = xLeft + CGRectGetWidth(self.graphContext.plotRect);
-            CGPathMoveToPoint(path, NULL, xLeft, yTop);
-            CGPathAddLineToPoint(path, NULL, xLeft, yBottom);
-            CGPathAddLineToPoint(path, NULL, xRight, yBottom);
-            CGPathAddLineToPoint(path, NULL, xRight, yTop);
-            CGPathCloseSubpath(path);
-            CGContextAddPath(ctx, path);
-            CGContextDrawPath(ctx, kCGPathFill);
-            CGPathRelease(path);
-        }
-    }
     if (!self.graphContext.useTextLayer) {
         UIGraphicsPushContext(ctx);
         CGContextSetStrokeColorWithColor(ctx, self.view.chartStyle.yTextColor.CGColor);

@@ -31,10 +31,11 @@
 }
 
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag {
-    if (flag) {
+//    if (flag) {
         _growthAnimationDone = YES;
+//        NSLog(@"view hash:%ui; layer:%@", self.view.hash, NSStringFromClass([self class]));
         [self.view subLayerGrowthAnimationDone];
-    }
+//    }
 }
 
 -(NSUInteger)getVisableSeriesCount {

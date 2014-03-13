@@ -121,7 +121,7 @@
     DCYAxisIntervalCalculation calResult = [DCUtility calculatorYAxisByMin:currentYMin yMax:currentYMax parts:self.graphContext.hGridlineAmount];
     DCRange* newYRange = [[DCRange alloc]initWithLocation:0 length:calResult.yMax];
     if ([self testYRange:newYRange visableMax:currentYMax visableMin:currentYMin]) {
-        [self setYRange:newYRange];
+        _yRange = newYRange;
         self.heightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.graphContext.plotRect.size.height / self.yRange.length) : 0;
         self.yInterval = calResult.yInterval;
     }

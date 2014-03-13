@@ -19,8 +19,8 @@
 #import "_DCHPinchGestureRecognizer.h"
 #import "DCColumnSeries.h"
 #import "_DCVGridlineLayer.h"
-#import "_DCBackgroundBandsLayer.h"
-
+#import "_DCVerticalBackgroundLayer.h"
+#import "_DCHorizontalBackgroundLayer.h"
 #import "_DCXYIndicatorLayer.h"
 
 @interface DCXYChartView ()
@@ -39,6 +39,7 @@
 @property (nonatomic, strong) CALayer* columnLayerContainer;
 @property (nonatomic, strong) _DCLineSymbolsLayer* symbolLayer;
 @property (nonatomic, strong) _DCVGridlineLayer* _vGridlineLayer;
+@property (nonatomic, strong) _DCHorizontalBackgroundLayer* _horizentalBackgroundLayer;
 
 @property (nonatomic, strong) NSFormatter* xLabelFormatter;
 
@@ -46,7 +47,7 @@
 @property (nonatomic, strong) UIPanGestureRecognizer* panGsRec;
 @property (nonatomic, strong) _DCHPinchGestureRecognizer* pinchGsRec;
 
-@property (nonatomic, strong) _DCBackgroundBandsLayer* backgroundBandsLayer;
+@property (nonatomic, strong) _DCVerticalBackgroundLayer* backgroundBandsLayer;
 
 @property (nonatomic, strong) NSArray* bgBands;
 
@@ -93,11 +94,8 @@
     
     [self drawHGridline];
     [self drawVGridlines];
-    self.backgroundBandsLayer = [[_DCBackgroundBandsLayer alloc]initWithContext:self.graphContext view:self];
-    [self.graphContext addHRangeObsever:self.backgroundBandsLayer];
-    [self.layer addSublayer:self.backgroundBandsLayer];
     [self drawXLabelLayer];
-    [self drawIndicatorLayer];
+    
     
     NSMutableArray* coordiates = [[NSMutableArray alloc]init];
     for (DCAxis* y in self.yAxisList) {
@@ -113,6 +111,18 @@
         [coordiates addObject:ds];
     }
     self.coodinates = coordiates;
+    
+    self.backgroundBandsLayer = [[_DCVerticalBackgroundLayer alloc]initWithContext:self.graphContext view:self];
+    [self.graphContext addHRangeObsever:self.backgroundBandsLayer];
+    [self.layer addSublayer:self.backgroundBandsLayer];
+    self._horizentalBackgroundLayer = [[_DCHorizontalBackgroundLayer alloc]initWithContext:self.graphContext view:self];
+    [self.layer addSublayer:self._horizentalBackgroundLayer];
+//    [self._horizentalBackgroundLayer redraw];
+    for (_DCCoordinateSystem* dc in self.coodinates) {
+        [dc addYIntervalObsever:self._horizentalBackgroundLayer];
+    }
+    
+    [self drawIndicatorLayer];
     _DCColumnsLayer* columnsLayer = [[_DCColumnsLayer alloc]initWithContext:self.graphContext view:self coordinateSystems:self.coodinates];
     if (columnsLayer.series.count > 0) {
         [self.layer addSublayer:self.columnLayerContainer];
@@ -199,11 +209,15 @@
     [super setFrame:frame];
     [self recalculatePlotRect];
     [self updateAllLayerFrame];
+    [self.symbolLayer redraw];
+    [self.columnLayer redraw];
+    [self.indicatorLayer setNeedsDisplay];
 }
 
 #pragma mark - calculate layer frame and plotRect
 -(void)updateAllLayerFrame {
     self._xLabelLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.size.height+self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.frame.size.height - self.graphContext.plotRect.size.height - self.chartStyle.plotPaddingBottom - self.chartStyle.plotPaddingTop);
+    self._horizentalBackgroundLayer.frame = self.bounds;
     self.columnLayerContainer.frame = self.graphContext.plotRect;
     self._hGridlineLayer.frame = self.bounds;
     
@@ -447,6 +461,20 @@
     return [self convertViewPoint:point inCoordinate:nil].x;
 }
 
+-(_DCCoordinateSystem*)findCoordinateBySeries:(DCXYSeries*)series {
+    for (_DCCoordinateSystem* c in self.coodinates) {
+        if ([c.seriesList containsObject:series]) return c;
+    }
+    return nil;
+}
+
+-(_DCCoordinateSystem*)findCoordinateByYAxis:(DCAxis *)yAxis {
+    for (_DCCoordinateSystem* c in self.coodinates) {
+        if (c.yAxis == yAxis) return c;
+    }
+    return nil;
+}
+
 /*
  * 将相对于View的一个Point转为XY值。如果dc==null，返回的Point只包含x值，y值为INT32_MIN。
  */
@@ -486,8 +514,7 @@
             }
         }
         y.yAxis.backgroundBands = bands;
-        _DCYAxisLabelLayer* yLayer = (_DCYAxisLabelLayer*)[y getAxisLabelLayer];
-        [yLayer setNeedsDisplay];
+        [self._horizentalBackgroundLayer redraw];
     }
     
     NSMutableArray* xbands = [[NSMutableArray alloc]init];
