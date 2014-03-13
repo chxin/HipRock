@@ -113,6 +113,7 @@
 		7A1D7C4517A63E8B0050779D /* REMEncryptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4417A63E8B0050779D /* REMEncryptHelper.m */; };
 		7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */; };
 		7A2BA42217D877C3003B18E1 /* REMError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42117D877C3003B18E1 /* REMError.m */; };
+		7A2D7ECE18D148FA009FB99F /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4223D50184EFF44004D39C0 /* GPUImage.framework */; };
 		7A399E96177D238F00F0EB9F /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E84177D238F00F0EB9F /* AFHTTPClient.m */; };
 		7A399E97177D238F00F0EB9F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E86177D238F00F0EB9F /* AFHTTPRequestOperation.m */; };
 		7A399E98177D238F00F0EB9F /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E88177D238F00F0EB9F /* AFImageRequestOperation.m */; };
@@ -182,7 +183,6 @@
 		7A39D5EF18B5A69C00CC9D5D /* WeiboDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E417C20CC400709111 /* WeiboDialog.m */; };
 		7A39D5F018B5A69C00CC9D5D /* WeiboLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E617C20CC500709111 /* WeiboLoginDialog.m */; };
 		7A39D5F118B5A69C00CC9D5D /* Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0288E817C20CC500709111 /* Weibo.m */; };
-		7A39D5F218B5A69C00CC9D5D /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */; };
 		7A39D5F318B5A69C00CC9D5D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142517850B2100CC2922 /* Reachability.m */; };
 		7A39D5F418B5A69C00CC9D5D /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E84177D238F00F0EB9F /* AFHTTPClient.m */; };
 		7A39D5F518B5A69C00CC9D5D /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A399E86177D238F00F0EB9F /* AFHTTPRequestOperation.m */; };
@@ -571,7 +571,6 @@
 		7A664FD9183B3369004B9FF3 /* MapPopover_Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD5183B3369004B9FF3 /* MapPopover_Arrow@2x.png */; };
 		7A664FDA183B3369004B9FF3 /* MapPopover_Rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD6183B3369004B9FF3 /* MapPopover_Rectangle.png */; };
 		7A664FDB183B3369004B9FF3 /* MapPopover_Rectangle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A664FD7183B3369004B9FF3 /* MapPopover_Rectangle@2x.png */; };
-		7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */; };
 		7A7B298D1888C58A00E74D3D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B298C1888C58A00E74D3D /* Images.xcassets */; };
 		7A7B29911888C65000E74D3D /* UIView+FlipTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B29901888C65000E74D3D /* UIView+FlipTransition.m */; };
 		7A7B29941888C8DF00E74D3D /* SplashScreenBackgroud.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B29921888C8DF00E74D3D /* SplashScreenBackgroud.png */; };
@@ -668,7 +667,6 @@
 		B4175116188CC83E0020AE8E /* Map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4175112188CC83E0020AE8E /* Map@2x.png */; };
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
-		B4223D51184EFF44004D39C0 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4223D50184EFF44004D39C0 /* GPUImage.framework */; };
 		B42FBF6417F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
 		B43BB1111797B12D00617B1E /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
 		B442701317AF316500762C68 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
@@ -876,7 +874,6 @@
 		6A61A6FA1839B82000C6A228 /* SplashScreenLogo-Common@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenLogo-Common@2x.png"; sourceTree = "<group>"; };
 		6A61A6FB1839B82000C6A228 /* SplashScreenLogo-Flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenLogo-Flash.png"; sourceTree = "<group>"; };
 		6A61A6FC1839B82000C6A228 /* SplashScreenLogo-Flash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenLogo-Flash@2x.png"; sourceTree = "<group>"; };
-		6AB1F30817B8B3E40065C1EB /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libCorePlot-CocoaTouch.a"; path = "../Lib/libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		6ABA68C3180F759700A302BC /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = ../Lib/GoogleMaps.framework; sourceTree = "<group>"; };
 		7A0288BB17C20CC400709111 /* WeiboAccounts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboAccounts.h; sourceTree = "<group>"; };
 		7A0288BC17C20CC400709111 /* WeiboAccounts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboAccounts.m; sourceTree = "<group>"; };
@@ -1365,9 +1362,6 @@
 		7A664FD6183B3369004B9FF3 /* MapPopover_Rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapPopover_Rectangle.png; sourceTree = "<group>"; };
 		7A664FD7183B3369004B9FF3 /* MapPopover_Rectangle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MapPopover_Rectangle@2x.png"; sourceTree = "<group>"; };
 		7A6CB4EA18165AE1007515FB /* REMLocalizeKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMLocalizeKeys.h; path = Resource/Definitions/REMLocalizeKeys.h; sourceTree = "<group>"; };
-		7A6E6D0B17A65CE500FBB264 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
-		7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
-		7A6E6D0D17A65CE500FBB264 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		7A7B298C1888C58A00E74D3D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resource/Images.xcassets; sourceTree = "<group>"; };
 		7A7B298F1888C65000E74D3D /* UIView+FlipTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FlipTransition.h"; sourceTree = "<group>"; };
 		7A7B29901888C65000E74D3D /* UIView+FlipTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FlipTransition.m"; sourceTree = "<group>"; };
@@ -1666,6 +1660,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A2D7ECE18D148FA009FB99F /* GPUImage.framework in Frameworks */,
 				EF2043B5187BDC4300272319 /* CoreText.framework in Frameworks */,
 				B477739C184F075300F68AED /* CoreVideo.framework in Frameworks */,
 				B477739A184F074500F68AED /* CoreMedia.framework in Frameworks */,
@@ -1678,7 +1673,6 @@
 				7A13C1A917F40D90007E6AA9 /* libicucore.dylib in Frameworks */,
 				7A13C1A717F40D83007E6AA9 /* libc++.dylib in Frameworks */,
 				7A13C1A517F40D77007E6AA9 /* ImageIO.framework in Frameworks */,
-				B4223D51184EFF44004D39C0 /* GPUImage.framework in Frameworks */,
 				7A13C1A317F40D70007E6AA9 /* GLKit.framework in Frameworks */,
 				7A13C1A117F40D61007E6AA9 /* CoreLocation.framework in Frameworks */,
 				7A13C19F17F40D59007E6AA9 /* CoreData.framework in Frameworks */,
@@ -2915,17 +2909,6 @@
 			path = LaunchImage;
 			sourceTree = "<group>";
 		};
-		7A6E6D0A17A65CE500FBB264 /* GMT */ = {
-			isa = PBXGroup;
-			children = (
-				7A6E6D0B17A65CE500FBB264 /* GTMBase64.h */,
-				7A6E6D0C17A65CE500FBB264 /* GTMBase64.m */,
-				7A6E6D0D17A65CE500FBB264 /* GTMDefines.h */,
-			);
-			name = GMT;
-			path = ../Lib/GMT;
-			sourceTree = "<group>";
-		};
 		7A7B298E1888C63F00E74D3D /* Animation */ = {
 			isa = PBXGroup;
 			children = (
@@ -2992,7 +2975,6 @@
 				7A13C19E17F40D59007E6AA9 /* CoreData.framework */,
 				7A13C19C17F40D4E007E6AA9 /* AVFoundation.framework */,
 				7A13C19A17F40D31007E6AA9 /* GoogleMaps.bundle */,
-				6AB1F30817B8B3E40065C1EB /* libCorePlot-CocoaTouch.a */,
 				B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */,
 				B442701217AF316500762C68 /* OpenGLES.framework */,
 				EF2D981817AB79AC00E968BF /* CoreImage.framework */,
@@ -3005,7 +2987,6 @@
 				7A9B1E21177B3A8B00C282A8 /* Foundation.framework */,
 				7A9B1E23177B3A8B00C282A8 /* CoreGraphics.framework */,
 				7A0288B917C20CC400709111 /* WeiboSDK */,
-				7A6E6D0A17A65CE500FBB264 /* GMT */,
 				7A1D142317850B2100CC2922 /* Reachability */,
 				7A399E82177D238F00F0EB9F /* AFNetworking */,
 				B445AE8F177BEEB7002D2A59 /* Lumberjack */,
@@ -4010,7 +3991,6 @@
 				7A39D5EF18B5A69C00CC9D5D /* WeiboDialog.m in Sources */,
 				7A39D5F018B5A69C00CC9D5D /* WeiboLoginDialog.m in Sources */,
 				7A39D5F118B5A69C00CC9D5D /* Weibo.m in Sources */,
-				7A39D5F218B5A69C00CC9D5D /* GTMBase64.m in Sources */,
 				7A39D5F318B5A69C00CC9D5D /* Reachability.m in Sources */,
 				7A39D5F418B5A69C00CC9D5D /* AFHTTPClient.m in Sources */,
 				7A39D5F518B5A69C00CC9D5D /* AFHTTPRequestOperation.m in Sources */,
@@ -4159,7 +4139,6 @@
 				7A1D7C4517A63E8B0050779D /* REMEncryptHelper.m in Sources */,
 				7A63E22318B44CBD00A13464 /* REMBuildingOverallModel.m in Sources */,
 				EF0346B9183B979800DE186A /* DCLineWrapper.m in Sources */,
-				7A6E6D0E17A65CE500FBB264 /* GTMBase64.m in Sources */,
 				7A63E1FF18B44CBD00A13464 /* REMDashboardController.m in Sources */,
 				EFD947031839DCBB00E9EC50 /* DCDataPoint.m in Sources */,
 				7A63E1F818B44CBD00A13464 /* REMBuildingTrendChartViewController.m in Sources */,
@@ -4600,7 +4579,7 @@
 				PROVISIONING_PROFILE = "E378B4BF-17FB-42F5-892E-3C851291FF28";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "armv7 armv7s i386 x86_64";
+				VALID_ARCHS = "armv7 armv7s i386";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -4651,6 +4630,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s i386";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -4711,6 +4691,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s i386";
 				WRAPPER_EXTENSION = app;
 			};
 			name = DailyBuild;

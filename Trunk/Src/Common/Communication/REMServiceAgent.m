@@ -291,10 +291,7 @@ static int requestTimeout = 45; //(s)
     
     NSData *encryptedData = [REMEncryptHelper AES256EncryptData:[original dataUsingEncoding:NSUTF8StringEncoding] withKey:@"41758bd9d7294737"];
     
-    NSString *base64Encoded = [REMEncryptHelper encodeBase64Data:encryptedData];
-    
-    //NSLog(@"%@",original);
-    //NSLog(@"%@",base64Encoded);
+    NSString *base64Encoded = [REMEncryptHelper encodeBase64StringWithData:encryptedData];
     
     return base64Encoded;
 }
