@@ -8,7 +8,7 @@
 
 #import "REMBuildingViewController.h"
 #import "REMApplicationContext.h"
-#import "WeiboSDK.h"
+#import <WeiboSDK/WeiboSDK.h>
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingWeiboView.h"
 #import "REMMapViewController.h"

@@ -23,4 +23,5 @@
 + (NSData *)encodeBase64Data:(NSData *)data;
 + (NSData *)decodeBase64Data:(NSData *)data;
 
+
 @end

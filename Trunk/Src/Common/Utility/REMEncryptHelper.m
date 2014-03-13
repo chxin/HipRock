@@ -25,7 +25,7 @@ static const NSString *vector = @"EjRWeJCrze8SNFZ4kKvN7w==";
     CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt, kCCAlgorithmAES128,
                                           kCCOptionPKCS7Padding,
                                           keyPtr, kCCBlockSizeAES128,
-                                          [[REMEncryptHelper getVectorData] bytes],
+                                          [[REMEncryptHelper decodeBase64Data:[vector dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]] bytes],
                                           [data bytes], dataLength,
                                           buffer, bufferSize,
                                           &numBytesEncrypted);
@@ -35,6 +35,7 @@ static const NSString *vector = @"EjRWeJCrze8SNFZ4kKvN7w==";
     free(buffer);
     return nil;
 }
+
 
 + (NSData *)AES256DecryptData:(NSData *)data WithKey:(NSString *)key
 {
@@ -48,7 +49,7 @@ static const NSString *vector = @"EjRWeJCrze8SNFZ4kKvN7w==";
     CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt, kCCAlgorithmAES128,
                                           kCCOptionPKCS7Padding,
                                           keyPtr, kCCBlockSizeAES128,
-                                          [[REMEncryptHelper getVectorData] bytes],
+                                          [[REMEncryptHelper decodeBase64Data:[vector dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]] bytes],
                                           [data bytes], dataLength,
                                           buffer, bufferSize,
                                           &numBytesDecrypted);
@@ -99,10 +100,5 @@ static const NSString *vector = @"EjRWeJCrze8SNFZ4kKvN7w==";
     return [[NSData alloc] initWithBase64EncodedData:data options:0];
 }
 
-#pragma mark - private methods
-+ (NSData *)getVectorData
-{
-    NSData *encodedData = [vector dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-    return [REMEncryptHelper decodeBase64Data:encodedData];
-}
 @end
+
