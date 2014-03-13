@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5WC-f7-YJK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5WC-f7-YJK">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Splash Screen Controller-->
@@ -156,7 +156,7 @@
                         <segue destination="T2C-Tf-bPc" kind="custom" identifier="maxWidgetSegue" customClass="REMMaxWidgetSegue" id="VF8-aY-jAm"/>
                         <segue destination="at3-P1-D6R" kind="unwind" identifier="buildingToGallerySegue" unwindAction="unwindSegueToGallery:" id="7g6-Qk-QsX"/>
                         <segue destination="at3-P1-D6R" kind="unwind" identifier="buildingToMapSegue" unwindAction="unwindSegueToMap:" id="wUk-sf-qJM"/>
-                        <segue destination="1e1-zh-Ldk" kind="popover" identifier="buildingCoverWidgetSegue" id="1jn-ep-yOc">
+                        <segue destination="1e1-zh-Ldk" kind="popover" identifier="buildingCoverWidgetSegue" popoverAnchorView="V6b-TF-hIA" id="1jn-ep-yOc">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                     </connections>
@@ -217,13 +217,13 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <segue destination="sO2-LG-KMS" kind="unwind" identifier="exitWidgetSegue" unwindAction="exitMaxWidget:" id="moD-S9-c5g"/>
-                        <segue destination="Fzj-ui-CY3" kind="popover" id="aw6-EE-kdc">
+                        <segue destination="Fzj-ui-CY3" kind="popover" popoverAnchorView="Lbs-fC-Du7" id="aw6-EE-kdc">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
-                        <segue destination="NpH-nl-7td" kind="popover" id="ce5-LQ-Qg6">
+                        <segue destination="NpH-nl-7td" kind="popover" popoverAnchorView="Lbs-fC-Du7" id="ce5-LQ-Qg6">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
-                        <segue destination="aiA-Pd-ec5" kind="popover" identifier="widgetBuildingCoverSegue" id="1t3-ld-sMP">
+                        <segue destination="aiA-Pd-ec5" kind="popover" identifier="widgetBuildingCoverSegue" popoverAnchorView="Lbs-fC-Du7" id="1t3-ld-sMP">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
                         </segue>
                     </connections>
@@ -369,28 +369,6 @@
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ep5-Dh-FW5">
-                                            <rect key="frame" x="481" y="11" width="44" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="yc8-PM-0zY" detailTextLabel="GRE-zs-Dlw" style="IBUITableViewCellStyleValue1" id="NIt-tD-L7M">
-                                <rect key="frame" x="0.0" y="163" width="540" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NIt-tD-L7M" id="GHh-5e-9qa">
-                                    <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yc8-PM-0zY">
-                                            <rect key="frame" x="15" y="11" width="34" height="21"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GRE-zs-Dlw">
                                             <rect key="frame" x="481" y="11" width="44" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
