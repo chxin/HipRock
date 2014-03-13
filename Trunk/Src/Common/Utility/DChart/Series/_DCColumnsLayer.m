@@ -63,12 +63,12 @@
         for (int i = 0; i < seriesAmount; i++) {
             DCColumnSeries* s = self.series[self.graphContext.stacked ? (seriesAmount-i-1) : i];
             if (s.hidden) continue;
-            _DCCoordinateSystem* coordinateSystem = [self.view findCoordinateBySeries:s];
+            _DCCoordinateSystem* coordinateSystem = s.coordinate;
             for (int j = start; j<=end; j++) {
                 if (j >= s.datas.count) continue;
                 
                 DCDataPoint* point = s.datas[j];
-                NSString* key = [NSString stringWithFormat:@"%ui@%i", point.series.hash, j];
+                NSString* key = [NSString stringWithFormat:@"%u@%i", point.series.hash, j];
                 CALayer* column = self.columnsDic[key];
                 CGRect toFrame = [self getRectForSeries:s index:j stackedHeight:stackedHeights[j-start] coordinate:coordinateSystem];
                 if (self.graphContext.stacked) {

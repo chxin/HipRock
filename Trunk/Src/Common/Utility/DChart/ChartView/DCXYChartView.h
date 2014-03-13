@@ -45,6 +45,5 @@
 -(void)setBackgoundBands:(NSArray*)bands;
 -(void)reloadData;
 -(void)subLayerGrowthAnimationDone;
--(_DCCoordinateSystem*)findCoordinateBySeries:(DCXYSeries*)series;
 -(_DCCoordinateSystem*)findCoordinateByYAxis:(DCAxis *)yAxis;
 @end
