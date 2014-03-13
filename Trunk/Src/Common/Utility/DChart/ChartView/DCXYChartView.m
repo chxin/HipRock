@@ -461,13 +461,6 @@
     return [self convertViewPoint:point inCoordinate:nil].x;
 }
 
--(_DCCoordinateSystem*)findCoordinateBySeries:(DCXYSeries*)series {
-    for (_DCCoordinateSystem* c in self.coodinates) {
-        if ([c.seriesList containsObject:series]) return c;
-    }
-    return nil;
-}
-
 -(_DCCoordinateSystem*)findCoordinateByYAxis:(DCAxis *)yAxis {
     for (_DCCoordinateSystem* c in self.coodinates) {
         if (c.yAxis == yAxis) return c;
