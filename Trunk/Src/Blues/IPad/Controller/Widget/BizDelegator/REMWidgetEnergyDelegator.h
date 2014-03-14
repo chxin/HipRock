@@ -14,6 +14,8 @@
 #import "REMChartLegendItem.h"
 #import "REMDimensions.h"
 #import "REMTrendChartTooltipView.h"
+#import "DCChartTrendWrapperDelegate.h"
+#import "DCChartPieWrapperDelegate.h"
 
 const static CGFloat kLegendSearchSwitcherTop=16;
 const static CGFloat kLegendSearchSwitcherLeft=790;
@@ -37,7 +39,7 @@ typedef enum _REMWidgetLegendType{
 } REMWidgetLegendType;
 
 
-@interface REMWidgetEnergyDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol,UIAlertViewDelegate,REMChartLegendItemDelegate, REMTrendChartDelegate, REMTPieChartDelegate, REMChartTooltipDelegate,UIPopoverControllerDelegate>
+@interface REMWidgetEnergyDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol,UIAlertViewDelegate,REMChartLegendItemDelegate, DCChartTrendWrapperDelegate, DCChartPieWrapperDelegate, REMChartTooltipDelegate,UIPopoverControllerDelegate>
 
 @property (nonatomic,weak) UIView *searchView;
 @property (nonatomic,weak) UIView *searchLegendViewContainer;

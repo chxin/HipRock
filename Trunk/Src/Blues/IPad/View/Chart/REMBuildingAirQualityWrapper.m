@@ -29,7 +29,7 @@
 
 //CGRect hostViewFrame = CGRectMake(0, 0, 710, self.bounds.size.height - topAxisOffset - 45);
 
--(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(REMChartStyle *)style {
+-(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(DCChartStyle *)style {
     style.plotPaddingRight = 152;
     self.standardLabels = [[NSMutableDictionary alloc]init];
     return [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
@@ -95,7 +95,7 @@
     }
 }
 
--(void)customizeSeries:(DCXYSeries *)series seriesIndex:(int)index chartStyle:(REMChartStyle *)style {
+-(void)customizeSeries:(DCXYSeries *)series seriesIndex:(int)index chartStyle:(DCChartStyle *)style {
     [super customizeSeries:series seriesIndex:index chartStyle:style];
     REMEnergyTargetModel* target = series.target;
     if([target.code hasSuffix:kTagCodeSuffixHoneywell]){

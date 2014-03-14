@@ -19,7 +19,7 @@
 @end
 
 @implementation DCLabelingWrapper
--(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(REMChartStyle *)style {
+-(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(DCChartStyle *)style {
     self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
     NSString* format = REMIPadLocalizedString(@"Chart_Labeling_EffecioncyTextFormat");
     self.benckmarkText = REMIsNilOrNull(wrapperConfig.benckmarkText) ? REMEmptyString : [NSString stringWithFormat:format, wrapperConfig.benckmarkText];
@@ -98,7 +98,7 @@
 
 -(void)focusOn:(DCLabelingLabel *)point {
     if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:)]) {
-        [((id<REMChartLabelingDelegate>)(self.delegate)) highlightPoint:point];
+        [((id<DCChartLabelingWrapperDelegate>)(self.delegate)) highlightPoint:point];
     }
 }
 

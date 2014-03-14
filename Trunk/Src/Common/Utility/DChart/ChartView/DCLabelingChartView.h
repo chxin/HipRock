@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "DCLabelingChartDelegate.h"
 #import "DCLabelingSeries.h"
-#import "REMChartStyle.h"
+#import "DCChartStyle.h"
 
 @interface DCLabelingChartView : UIView
-@property (nonatomic, weak) REMChartStyle* style;
+@property (nonatomic, weak) DCChartStyle* style;
 @property (nonatomic, strong) DCLabelingSeries* series;
 -(void)unfocusLabel;
 

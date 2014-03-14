@@ -8,7 +8,7 @@
 #import "REMIPhoneMainViewController.h"
 #import "REMWidgetContentSyntax.h"
 #import "REMEnergyViewData.h"
-#import "REMChartStyle.h"
+#import "DCChartStyle.h"
 #import "DWrapperConfig.h"
 #import "DCColumnWrapper.h"
 
@@ -95,14 +95,14 @@
     }
     energyViewData.labellingLevelArray = labellings;
     energyViewData.targetEnergyData = sereis;
-    REMChartStyle* style = nil;
+    DCChartStyle* style = nil;
     CGRect frame;
     BOOL mini = NO;
     if (mini) {
-        style = [REMChartStyle getMinimunStyle];
+        style = [DCChartStyle getMinimunStyle];
         frame = self.view.bounds;
     } else {
-        style = [REMChartStyle getMaximizedStyle];
+        style = [DCChartStyle getMaximizedStyle];
         frame = self.view.bounds;
     }
     style.xTextFont = [UIFont fontWithName:style.xTextFont.fontName size:10];

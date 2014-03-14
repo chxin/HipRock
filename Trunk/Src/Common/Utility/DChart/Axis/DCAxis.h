@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DCRange.h"
 #import "DCSeries.h"
-#import "REMChartHeader.h"
+#import "DCChartEnum.h"
 
 typedef enum _DCAxisCoordinate {
     DCAxisCoordinateX = 0,

@@ -10,6 +10,7 @@
 #import "DCPieChartView.h"
 #import "DCPieChartViewDelegate.h"
 #import "REMCommonHeaders.h"
+#import "DCChartPieWrapperDelegate.h"
 @class DCPieChartView;
 @class DCPieChartViewDelegate;
 

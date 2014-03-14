@@ -13,7 +13,7 @@
 #import "REMWidgetSearchModelBase.h"
 #import "DCRankingWrapper.h"
 #import "DCPieWrapper.h"
-#import "REMChartHeader.h"
+#import "DCChartEnum.h"
 #import "DCLineWrapper.h"
 #import "DCLabelingWrapper.h"
 #import "REMWidgetCellDelegator.h"
@@ -138,7 +138,7 @@
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     CGRect widgetRect = self.chartContainer.bounds;
     REMEnergyViewData *data=self.chartData;
-    REMChartStyle* style = [REMChartStyle getMinimunStyle];
+    DCChartStyle* style = [DCChartStyle getMinimunStyle];
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.widgetInfo];
     if ([self.searchModel isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
         REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.searchModel;

@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "REMChartStyle.h"
+#import "DCChartStyle.h"
 #import "DCContext.h"
 #import "DCAxis.h"
 #import "DCXYSeries.h"
 #import "DCXYChartViewDelegate.h"
 
 @interface DCXYChartView : UIView<DCContextHRangeObserverProtocal,UIGestureRecognizerDelegate>
-@property (nonatomic, strong) REMChartStyle* chartStyle;
+@property (nonatomic, strong) DCChartStyle* chartStyle;
 @property (nonatomic, assign) BOOL acceptPan;
 @property (nonatomic, assign) BOOL acceptPinch;
 @property (nonatomic, assign) BOOL acceptTap;

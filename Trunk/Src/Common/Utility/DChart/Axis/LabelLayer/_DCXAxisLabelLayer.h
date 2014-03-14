@@ -9,7 +9,7 @@
 #import "_DCLayerTrashbox.h"
 #import <CoreText/CoreText.h>
 #import "DCAxis.h"
-#import "REMChartStyle.h"
+#import "DCChartStyle.h"
 #import "_DCLayer.h"
 
 @interface _DCXAxisLabelLayer : _DCLayer<DCContextHRangeObserverProtocal>

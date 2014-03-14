@@ -7,7 +7,7 @@
  --------------------------------------------------------------------------*///
 
 #import <UIKit/UIKit.h>
-#import "REMChartHeader.h"
+#import "DCChartEnum.h"
 
 @interface REMSplashScreenController : UIViewController
 

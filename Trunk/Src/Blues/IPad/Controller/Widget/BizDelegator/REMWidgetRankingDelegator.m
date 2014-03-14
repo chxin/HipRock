@@ -206,7 +206,7 @@ const static CGFloat kRankingTimePickerWidth=250;
     CGRect widgetRect = CGRectMake(0, 0, kWidgetChartWidth, kWidgetChartHeight);
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     
-    REMChartStyle* style = [REMChartStyle getMaximizedStyle];
+    DCChartStyle* style = [DCChartStyle getMaximizedStyle];
     DCRankingWrapper  *widgetWrapper;
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.widgetInfo];
 //    wrapperConfig.multiTimeSpans=self.model.timeRangeArray;

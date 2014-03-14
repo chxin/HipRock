@@ -157,7 +157,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     CGRect widgetRect = CGRectMake(0, 0, kWidgetChartWidth, kWidgetChartHeight);
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     
-    REMChartStyle* style = [REMChartStyle getMaximizedStyle];
+    DCChartStyle* style = [DCChartStyle getMaximizedStyle];
     DCLabelingWrapper  *widgetWrapper;
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]init];
 //    wrapperConfig.multiTimeSpans=self.model.timeRangeArray;

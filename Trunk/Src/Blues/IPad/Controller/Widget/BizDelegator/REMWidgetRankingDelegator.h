@@ -11,10 +11,11 @@
 #import "REMWidgetEnergyDelegator.h"
 #import "REMDimensions.h"
 #import "REMWidgetRankingSearchModel.h"
-#import "REMChartHeader.h"
+#import "DCChartEnum.h"
+#import "DCChartTrendWrapperDelegate.h"
 
 
-@interface REMWidgetRankingDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol,REMTrendChartDelegate,REMChartTooltipDelegate>
+@interface REMWidgetRankingDelegator : REMWidgetBizDelegatorBase<REMWidgetDatePickerViewProtocol,DCChartTrendWrapperDelegate,REMChartTooltipDelegate>
 
 @property (nonatomic,weak) UIView *searchView;
 @property (nonatomic,weak) UIButton *timePickerButton;

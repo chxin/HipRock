@@ -46,7 +46,7 @@
     return @{ @"globalRange": [[DCRange alloc]initWithLocation:0 length:36], @"beginRange": [[DCRange alloc]initWithLocation:24 length:12], @"xformatter": formatter};
 }
 
--(void)customizeSeries:(DCXYSeries *)series seriesIndex:(int)index chartStyle:(REMChartStyle *)style {
+-(void)customizeSeries:(DCXYSeries *)series seriesIndex:(int)index chartStyle:(DCChartStyle *)style {
     [super customizeSeries:series seriesIndex:index chartStyle:style];
     if (series.type == DCSeriesTypeColumn) {
         series.color = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.7f];

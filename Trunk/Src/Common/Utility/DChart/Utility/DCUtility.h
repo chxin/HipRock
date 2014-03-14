@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DCRange.h"
 #import "DCContext.h"
-#import "REMChartHeader.h"
+#import "DCChartEnum.h"
 
 typedef struct _DCYAxisIntervalCalculation {
     double yMax;

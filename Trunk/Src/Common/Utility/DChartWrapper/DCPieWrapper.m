@@ -13,7 +13,7 @@
 @end
 
 @implementation DCPieWrapper
--(DCPieWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(REMChartStyle *)style {
+-(DCPieWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(DCChartStyle *)style {
     self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
     if (self && energyViewData.targetEnergyData.count != 0) {
         [self createView:frame data:energyViewData style:style];
@@ -21,7 +21,7 @@
     return self;
 }
 
--(void)createView:(CGRect)frame data:(REMEnergyViewData*)energyViewData style:(REMChartStyle*)style {
+-(void)createView:(CGRect)frame data:(REMEnergyViewData*)energyViewData style:(DCChartStyle*)style {
     NSMutableArray* series0Data = [[NSMutableArray alloc]init];
     int seriesCount = 0;
     if (self.energyViewData != nil && self.energyViewData.targetEnergyData != NULL) seriesCount =self.energyViewData.targetEnergyData.count;
@@ -57,7 +57,7 @@
         self.focusIndex = self.view.focusPointIndex;
         DCPieDataPoint* piePoint = self.view.series.datas[self.view.focusPointIndex];
         if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:direction:)]) {
-            [((id<REMTPieChartDelegate>)self.delegate) highlightPoint:piePoint direction:self.view.rotateDirection];
+            [((id<DCChartPieWrapperDelegate>)self.delegate) highlightPoint:piePoint direction:self.view.rotateDirection];
         }
     }
 }
