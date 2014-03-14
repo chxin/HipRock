@@ -127,7 +127,7 @@
     DCXYChartView* view = self.view;
     REMTargetEnergyData* targetEnergy = self.energyViewData.targetEnergyData[index];
     NSMutableArray* datas = [[NSMutableArray alloc]init];
-    REMTrendChartDataProcessor* processor = [self.processors objectAtIndex:index];
+    DCTrendChartDataProcessor* processor = [self.processors objectAtIndex:index];
     for (REMEnergyData* point in targetEnergy.energyData) {
         int processedX = [processor processX:point.localTime].integerValue;
         if (processedX < 0) continue;
@@ -163,7 +163,7 @@
     return type == REMEnergyTargetBenchmarkValue;
 }
 
--(NSNumber*)roundDate:(NSDate*)lengthDate startDate:(NSDate*)startDate processor:(REMTrendChartDataProcessor*)processor roundToFloor:(BOOL)roundToFloor {
+-(NSNumber*)roundDate:(NSDate*)lengthDate startDate:(NSDate*)startDate processor:(DCTrendChartDataProcessor*)processor roundToFloor:(BOOL)roundToFloor {
     NSNumber* length = [processor processX:lengthDate];
     NSDate* edgeOfGlobalEnd = [processor deprocessX:length.intValue];
     NSComparisonResult end = [edgeOfGlobalEnd compare:lengthDate];
@@ -186,7 +186,7 @@
     NSDate* globalEndDate = nil;
     NSDate* beginningStart = nil;
     NSDate* beginningEnd = nil;
-    _sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
+    _sharedProcessor = [[DCTrendChartDataProcessor alloc]init];
     self.sharedProcessor.step = step;
     
     beginningStart = self.energyViewData.visibleTimeRange.startTime;

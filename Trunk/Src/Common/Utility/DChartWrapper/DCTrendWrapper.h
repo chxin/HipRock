@@ -18,6 +18,7 @@
 #import "REMCommonHeaders.h"
 #import "DCTrendAnimationDelegate.h"
 #import "DWrapperConfig.h"
+#import "DCTrendChartDataProcessor.h"
 
 @interface DCTrendWrapper : DAbstractChartWrapper<DCXYChartViewDelegate, DCTrendAnimationDelegate>
 
@@ -26,7 +27,7 @@
 @property (nonatomic, assign) REMCalendarType calenderType;
 @property (nonatomic, assign, readonly) BOOL isStacked;
 @property (nonatomic, strong, readonly) NSMutableArray* processors;
-@property (nonatomic, strong, readonly) REMTrendChartDataProcessor* sharedProcessor;
+@property (nonatomic, strong, readonly) DCTrendChartDataProcessor* sharedProcessor;
 @property (nonatomic, assign, readonly) BOOL isUnitOrRatioChart;
 @property (nonatomic, assign) BOOL drawHCBackground;
 

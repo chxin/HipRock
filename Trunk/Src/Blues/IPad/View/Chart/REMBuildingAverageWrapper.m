@@ -27,7 +27,7 @@
     _processors = [[NSMutableArray alloc]init];
     
     
-    _sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
+    _sharedProcessor = [[DCTrendChartDataProcessor alloc]init];
     self.sharedProcessor.step = step;
     
     

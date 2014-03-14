@@ -41,7 +41,7 @@
     NSUInteger seriesAmount = [self getSeriesAmount];
     _processors = [[NSMutableArray alloc]init];
     
-    _sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
+    _sharedProcessor = [[DCTrendChartDataProcessor alloc]init];
     self.sharedProcessor.step = step;
     
     for (int i = 0; i < seriesAmount; i++) {

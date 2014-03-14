@@ -24,7 +24,7 @@
     _processors = [[NSMutableArray alloc]init];
     
     NSDate* baseDateOfX = nil;
-    _sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
+    _sharedProcessor = [[DCTrendChartDataProcessor alloc]init];
     self.sharedProcessor.step = step;
     
     
