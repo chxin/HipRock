@@ -7,7 +7,8 @@
  --------------------------------------------------------------------------*///
 
 #import "REMSettingViewController.h"
-#import <WeiboSDK/WeiboSDK.h>
+#import "Weibo.h"
+#import "WeiboAccounts.h"
 #import "REMAlertHelper.h"
 #import "REMSettingCustomerSelectionViewController.h"
 #import "REMUpdateAllManager.h"

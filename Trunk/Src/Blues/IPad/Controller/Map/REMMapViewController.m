@@ -198,6 +198,7 @@
     mapView.settings.consumesGesturesInView = NO;
     mapView.settings.rotateGestures = NO;
     
+    
     //[self updateCamera:mapView];
     
     [self.view addSubview: mapView];
