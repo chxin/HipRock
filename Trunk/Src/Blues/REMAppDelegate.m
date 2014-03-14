@@ -10,7 +10,7 @@
 #import "REMLog.h"
 #import "REMStorage.h"
 #import "REMApplicationInfo.h"
-#import "WeiboSDK.h"
+#import "Weibo.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import "REMCommonHeaders.h"
 
