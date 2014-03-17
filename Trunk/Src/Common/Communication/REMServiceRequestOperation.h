@@ -11,18 +11,18 @@
 #import "REMMaskManager.h"
 
 //typedef void(^REMDataAccessProgressBlock)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead);
-typedef void(^REMServiceOperationSuccessBlock)(AFHTTPRequestOperation *operation, id responseObject);
-typedef void(^REMServiceOperationFailureBlock)(AFHTTPRequestOperation *operation, NSError *errorInfo);
-typedef void(^REMServiceOperationProgressBlock)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead);
+//typedef void(^REMServiceOperationSuccessBlock)(AFHTTPRequestOperation *operation, id responseObject);
+//typedef void(^REMServiceOperationFailureBlock)(AFHTTPRequestOperation *operation, NSError *errorInfo);
+//typedef void(^REMServiceOperationProgressBlock)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead);
 
 
 @interface REMServiceRequestOperation : AFHTTPRequestOperation
 
-@property (nonatomic,retain) NSString *groupName;
+@property (nonatomic,strong) NSString *groupName;
 
-@property (nonatomic,strong) REMMaskManager *maskManager;
-
-+ (instancetype)operationWithRequest:(NSURLRequest *)urlRequest;
+//@property (nonatomic,strong) REMMaskManager *maskManager;
+//
+//+ (instancetype)operationWithRequest:(NSURLRequest *)urlRequest;
 //+ (instancetype)operationWithRequest:(NSURLRequest *)urlRequest success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end
