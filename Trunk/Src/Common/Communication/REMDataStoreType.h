@@ -20,7 +20,7 @@ typedef enum _REMDataAccessErrorStatus : NSUInteger{
 } REMDataAccessErrorStatus;
 
 typedef void(^REMDataAccessSuccessBlock)(id data);
-typedef void(^REMDataAccessErrorBlock)(NSError *error, REMDataAccessErrorStatus status, id response);
+typedef void(^REMDataAccessfailureBlock)(NSError *error, REMDataAccessErrorStatus status, id response);
 typedef void(^REMDataAccessProgressBlock)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead);
 
 

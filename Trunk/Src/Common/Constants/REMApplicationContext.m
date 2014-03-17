@@ -51,6 +51,9 @@ static BOOL CACHEMODE = NO;
         }
     }
     
+    //http operation manager
+    REMAppContext.sharedRequestOperationManager = [REMHTTPRequestOperationManager manager];
+    
 }
 
 + (void)cleanImage{
@@ -133,6 +136,11 @@ static BOOL CACHEMODE = NO;
     @synchronized(self){
         CACHEMODE = value;
     }
+}
+
+-(REMHTTPRequestOperationManager *)sharedRequestOperationManager
+{
+    return [REMHTTPRequestOperationManager manager];
 }
 
 

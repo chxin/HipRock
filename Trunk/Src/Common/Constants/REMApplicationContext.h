@@ -13,6 +13,7 @@
 #import "REMUpdateAllManager.h"
 #import "REMManagedUserModel.h"
 #import "REMManagedCustomerModel.h"
+#import "REMHTTPRequestOperationManager.h"
 
 #define REMAppContext [REMApplicationContext instance]
 //#define REMAppCurrentUser REMAppContext.currentUser
@@ -41,6 +42,8 @@
 @property (nonatomic,strong) NSString *buildingInfoArrayStorageKey;
 @property (nonatomic,getter = getCacheMode, setter = setCacheMode:) BOOL cacheMode;
 
+@property (nonatomic,strong) REMHTTPRequestOperationManager *sharedRequestOperationManager;
+
 + (void)updateBuildingInfoArrayToStorage;
 
 + (REMApplicationContext *)instance;
@@ -49,5 +52,6 @@
 + (void)cleanImage;
 -(BOOL)getCacheMode;
 -(void)setCacheMode:(BOOL)value;
+
 
 @end

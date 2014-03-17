@@ -10,14 +10,10 @@
 #import "REMWidgetObject.h"
 #import "REMEnergyViewData.h"
 #import "REMDashboardController.h"
-<<<<<<< HEAD
 #import "DCChartWrapperDelegate.h"
+#import "REMManagedWidgetModel.h"
 
 @interface REMWidgetCellViewController : UIViewController<DCChartWrapperDelegate>
-=======
-#import "REMManagedWidgetModel.h"
-@interface REMWidgetCellViewController : UIViewController
->>>>>>> UseCoreData
 
 @property (nonatomic,weak) REMManagedWidgetModel *widgetInfo;
 @property (nonatomic,copy) NSString *groupName;
