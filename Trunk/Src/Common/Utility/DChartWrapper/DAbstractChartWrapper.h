@@ -7,24 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "REMChartHeader.h"
+#import "DCChartEnum.h"
 #import "REMEnergyViewData.h"
 #import "REMCommonHeaders.h"
-#import "REMChartStyle.h"
+#import "DCChartStyle.h"
 #import "DWrapperConfig.h"
+#import "DCChartWrapperDelegate.h"
 
 @interface DAbstractChartWrapper : NSObject
 
-@property (nonatomic, weak) id<REMChartDelegate> delegate;
+@property (nonatomic, weak) id<DCChartWrapperDelegate> delegate;
 @property (nonatomic, readonly, weak) REMEnergyViewData* energyViewData;
-@property (nonatomic, readonly) REMChartStyle* style;
+@property (nonatomic, readonly) DCChartStyle* style;
 @property (nonatomic, assign) DChartStatus chartStatus;
 @property (nonatomic, assign, readonly) BOOL isMultiTimeChart;
 
 -(void)cancelToolTipStatus;
 -(void)redraw:(REMEnergyViewData *)energyViewData;
 -(UIView*)getView;
--(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig*) wrapperConfig style:(REMChartStyle*)style;
+-(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig*) wrapperConfig style:(DCChartStyle*)style;
 -(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden;
 -(NSUInteger)getVisableSeriesCount;
 

@@ -8,7 +8,7 @@
 #import "REMBuildingWidgetChartViewController.h"
 #import "DCRankingWrapper.h"
 #import "DCPieWrapper.h"
-#import "REMChartHeader.h"
+#import "DCChartEnum.h"
 #import "DCLineWrapper.h"
 #import "DCLabelingWrapper.h"
 #import "REMBuildingChartView.h"
@@ -66,7 +66,7 @@
 -(DCTrendWrapper*)constructWrapperWithFrame:(CGRect)frame {
     DCTrendWrapper *widgetWrapper = nil;
     REMDiagramType widgetType = self.widgetInfo.diagramType;
-    REMChartStyle* style = [REMChartStyle getCoverStyle];
+    DCChartStyle* style = [DCChartStyle getCoverStyle];
     style.acceptPan = [self getEnergyStep] != REMEnergyStepHour;
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.widgetInfo];
     if ([self.model isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {

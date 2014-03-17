@@ -9,7 +9,7 @@
 #import "DCPieChartView.h"
 #import "REMColor.h"
 #import "DCPieChartAnimationManager.h"
-#import "REMChartHeader.h"
+#import "DCChartEnum.h"
 #import "DCPieLayer.h"
 
 @interface DCPieChartView()

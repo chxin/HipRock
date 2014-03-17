@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "REMChartHeader.h"
+#import "DCChartEnum.h"
 #import "REMColor.h"
 #import "REMBuildingConstants.h"
 
-@interface REMChartStyle : NSObject
+@interface DCChartStyle : NSObject
 
 @property (nonatomic, assign) BOOL acceptPan;
 @property (nonatomic, assign) BOOL acceptPinch;
@@ -132,7 +132,7 @@
 
 /****** Labeling Style End *******/
 
-+(REMChartStyle*)getMaximizedStyle;
-+(REMChartStyle*)getMinimunStyle;
-+(REMChartStyle*)getCoverStyle;
++(DCChartStyle*)getMaximizedStyle;
++(DCChartStyle*)getMinimunStyle;
++(DCChartStyle*)getCoverStyle;
 @end

@@ -12,6 +12,6 @@
 #import "REMTooltipViewBase.h"
 
 
-@interface REMWidgetLabelingDelegator : REMWidgetBizDelegatorBase<REMWidgetMonthPickerViewProtocol, REMChartLabelingDelegate,REMChartTooltipDelegate>
+@interface REMWidgetLabelingDelegator : REMWidgetBizDelegatorBase<REMWidgetMonthPickerViewProtocol, DCChartLabelingWrapperDelegate,REMChartTooltipDelegate>
 
 @end

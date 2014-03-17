@@ -7,7 +7,7 @@
 --------------------------------------------------------------------------*/
 
 #import "REMTooltipViewBase.h"
-#import "REMChartHeader.h"
+#import "DCChartEnum.h"
 
 @interface REMPieChartTooltipView : REMTooltipViewBase
 

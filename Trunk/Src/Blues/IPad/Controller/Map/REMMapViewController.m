@@ -15,7 +15,7 @@
 #import "REMBuildingEntranceSegue.h"
 #import "REMBuildingViewController.h"
 
-#import "REMChartHeader.h"
+#import "DCChartEnum.h"
 #import "REMCommonHeaders.h"
 #import "REMStoryboardDefinitions.h"
 #import "REMDimensions.h"

@@ -156,7 +156,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
 -(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx {
     [super drawLayer:layer inContext:ctx];
     [self.tooltipIconCentrePoints removeAllObjects];
-    REMChartStyle* style = self.style;
+    DCChartStyle* style = self.style;
     NSUInteger stageCount = self.series.stages.count;
     NSUInteger labelCount = self.series.labels.count;
     if (stageCount == 0 || labelCount == 0) return;

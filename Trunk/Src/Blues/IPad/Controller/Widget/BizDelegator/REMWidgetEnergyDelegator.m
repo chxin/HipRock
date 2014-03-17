@@ -456,7 +456,7 @@
     
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     
-    REMChartStyle* style = [REMChartStyle getMaximizedStyle];
+    DCChartStyle* style = [DCChartStyle getMaximizedStyle];
     DAbstractChartWrapper  *widgetWrapper;
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.widgetInfo];
     if ([self.model isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {

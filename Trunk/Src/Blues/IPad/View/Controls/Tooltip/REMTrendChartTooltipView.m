@@ -116,7 +116,7 @@
         [[self.tooltipItems objectAtIndex:i] updateModel:self.itemModels[i]];
     
     DCDataPoint *point = self.highlightedPoints.count>0?self.highlightedPoints[0]:nil;
-    NSString *timeLabelText = REMSeriesIsMultiTime ? (point ? point.target.name:@"") : [self formatTimeText:self.xTime];
+    NSString *timeLabelText = REMSeriesIsMultiTime ? (point ? point.target.name:@"") : (REMIsNilOrNull(self.xTime) ? @"" : [self formatTimeText:self.xTime]);
     self.timeLabel.text = timeLabelText;
 }
 

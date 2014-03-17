@@ -1,16 +1,15 @@
-/*------------------------------Summary-------------------------------------
- * Product Name : EMOP iOS Application Software
- * File Name	: REMTrendChartDataProcessor.m
- * Created      : Zilong-Oscar.Xu on 9/12/13.
- * Description  : IOS Application software based on Energy Management Open Platform
- * Copyright    : Schneider Electric (China) Co., Ltd.
- --------------------------------------------------------------------------*///
+//
+//  DCTrendChartDataProcessor.m
+//  Blues
+//
+//  Created by Zilong-Oscar.Xu on 3/14/14.
+//
+//
 
-#import "REMChartHeader.h"
+#import "DCTrendChartDataProcessor.h"
 #import "REMTimeHelper.h"
 
-@implementation REMTrendChartDataProcessor
-
+@implementation DCTrendChartDataProcessor
 -(NSNumber*)processX:(NSDate*)xLocalTime {
     float x = 0;
     REMEnergyStep step = self.step;
@@ -42,9 +41,9 @@
         }
         int monthToAddInt = monthToAdd;
         NSDate* d = [REMTimeHelper addMonthToDate:startDate month:monthToAddInt];
-//        NSLog(@"this:%@ %f", d, x);
+        //        NSLog(@"this:%@ %f", d, x);
         d = [NSDate dateWithTimeInterval:28*24*3600*(monthToAdd-(double)monthToAddInt) sinceDate:d];
-//        NSLog(@"that:%@ %f", d,x);
+        //        NSLog(@"that:%@ %f", d,x);
         return d;
     }
 }

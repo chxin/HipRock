@@ -122,7 +122,7 @@ const int buttonFirstMargin = -20;
     wrapperConfig.step = [self getEnergyStep];
     wrapperConfig.relativeDateType = self.timeRangeType;
     
-    REMChartStyle* style = [REMChartStyle getCoverStyle];
+    DCChartStyle* style = [DCChartStyle getCoverStyle];
     frame.origin.y = buttonHeight;
     frame.size.height = frame.size.height - buttonHeight;
     REMBuildingTrendWrapper* wrapper = [[REMBuildingTrendWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig style:style];

@@ -6,12 +6,12 @@
 //
 //
 
-#import "REMChartStyle.h"
+#import "DCChartStyle.h"
 
-@implementation REMChartStyle
+@implementation DCChartStyle
 
-+(REMChartStyle*)getCoverStyle {
-    REMChartStyle* style = [[REMChartStyle alloc]init];
++(DCChartStyle*)getCoverStyle {
+    DCChartStyle* style = [[DCChartStyle alloc]init];
     style.drawHCBackground = NO;
     style.useTextLayer = YES;
     style.acceptPan = YES;
@@ -52,8 +52,8 @@
     return style;
 }
 
-+(REMChartStyle*)getMaximizedStyle {
-    REMChartStyle* style = [[REMChartStyle alloc]init];
++(DCChartStyle*)getMaximizedStyle {
+    DCChartStyle* style = [[DCChartStyle alloc]init];
     style.drawHCBackground = YES;
     style.useTextLayer = YES;
     style.acceptPan = YES;
@@ -157,8 +157,8 @@
     
     return style;
 }
-+(REMChartStyle*)getMinimunStyle {
-    REMChartStyle* style = [[REMChartStyle alloc]init];
++(DCChartStyle*)getMinimunStyle {
+    DCChartStyle* style = [[DCChartStyle alloc]init];
     style.drawHCBackground = YES;
     style.useTextLayer = NO;
     style.acceptPan = NO;

@@ -24,7 +24,7 @@
 #import "REMCustomerModel.h"
 #import "REMUserModel.h"
 #import "REMUserValidationModel.h"
-#import "REMChartHeader.h"
+#import "DCChartEnum.h"
 #import "DCXYChartBackgroundBand.h"
 
 @interface REMSplashScreenController ()
@@ -239,14 +239,14 @@
     }
     energyViewData.labellingLevelArray = labellings;
     energyViewData.targetEnergyData = sereis;
-    REMChartStyle* style = nil;
+    DCChartStyle* style = nil;
     CGRect frame;
     BOOL mini = NO;
     if (mini) {
-        style = [REMChartStyle getMinimunStyle];
+        style = [DCChartStyle getMinimunStyle];
         frame = CGRectMake(0, 0, 222, 108);
     } else {
-        style = [REMChartStyle getMaximizedStyle];
+        style = [DCChartStyle getMaximizedStyle];
         frame = CGRectMake(0, 0, 974, 605);
     }
     

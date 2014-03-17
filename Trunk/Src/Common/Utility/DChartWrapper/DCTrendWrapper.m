@@ -25,7 +25,7 @@
 -(UIView*)getView {
     return self.view;
 }
--(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(REMChartStyle *)style {
+-(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(DCChartStyle *)style {
     self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
     if (self && energyViewData.targetEnergyData.count != 0) {
         _drawHCBackground = style.drawHCBackground;
@@ -117,17 +117,17 @@
     
 }
 
--(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(REMChartStyle*)style {
+-(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(DCChartStyle*)style {
     if (self.isUnitOrRatioChart && series.target.type == REMEnergyTargetOrigValue) {
         series.hidden = YES;
     }
 }
 
--(DCXYSeries*)createSeriesAt:(NSUInteger)index style:(REMChartStyle*)style {
+-(DCXYSeries*)createSeriesAt:(NSUInteger)index style:(DCChartStyle*)style {
     DCXYChartView* view = self.view;
     REMTargetEnergyData* targetEnergy = self.energyViewData.targetEnergyData[index];
     NSMutableArray* datas = [[NSMutableArray alloc]init];
-    REMTrendChartDataProcessor* processor = [self.processors objectAtIndex:index];
+    DCTrendChartDataProcessor* processor = [self.processors objectAtIndex:index];
     for (REMEnergyData* point in targetEnergy.energyData) {
         int processedX = [processor processX:point.localTime].integerValue;
         if (processedX < 0) continue;
@@ -163,7 +163,7 @@
     return type == REMEnergyTargetBenchmarkValue;
 }
 
--(NSNumber*)roundDate:(NSDate*)lengthDate startDate:(NSDate*)startDate processor:(REMTrendChartDataProcessor*)processor roundToFloor:(BOOL)roundToFloor {
+-(NSNumber*)roundDate:(NSDate*)lengthDate startDate:(NSDate*)startDate processor:(DCTrendChartDataProcessor*)processor roundToFloor:(BOOL)roundToFloor {
     NSNumber* length = [processor processX:lengthDate];
     NSDate* edgeOfGlobalEnd = [processor deprocessX:length.intValue];
     NSComparisonResult end = [edgeOfGlobalEnd compare:lengthDate];
@@ -186,7 +186,7 @@
     NSDate* globalEndDate = nil;
     NSDate* beginningStart = nil;
     NSDate* beginningEnd = nil;
-    _sharedProcessor = [[REMTrendChartDataProcessor alloc]init];
+    _sharedProcessor = [[DCTrendChartDataProcessor alloc]init];
     self.sharedProcessor.step = step;
     
     beginningStart = self.energyViewData.visibleTimeRange.startTime;
@@ -418,9 +418,9 @@
     }
 }
 -(void)focusPointChanged:(NSArray *)dcpoints at:(int)x {
-    if (self.delegate && [[self.delegate class] conformsToProtocol:@protocol(REMTrendChartDelegate)]) {
+    if (self.delegate && [[self.delegate class] conformsToProtocol:@protocol(DCChartTrendWrapperDelegate)]) {
         id xVal = (REMIsNilOrNull(self.sharedProcessor)) ? @(x) : [self.sharedProcessor deprocessX:x];
-        [(id<REMTrendChartDelegate>)self.delegate highlightPoints:dcpoints x:xVal];
+        [(id<DCChartTrendWrapperDelegate>)self.delegate highlightPoints:dcpoints x:xVal];
     }
 }
 // 获取x轴上两个点之间的时间差，以秒为单位。
@@ -526,7 +526,7 @@
 
 
 
-#pragma mark - Fire to REMTrendChartDelegate
+#pragma mark - Fire to DCChartTrendWrapperDelegate
 -(void)setMyStableRange:(DCRange *)myStableRange {
     if (![DCRange isRange:self.myStableRange equalTo:myStableRange]) {
         _myStableRange = myStableRange;
