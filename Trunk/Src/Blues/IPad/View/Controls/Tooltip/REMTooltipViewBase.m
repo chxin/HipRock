@@ -23,12 +23,13 @@
 
 
 
-+(REMTooltipViewBase *)tooltipWithHighlightedPoints:(NSArray *)points atX:(id)x chartWrapper:(DAbstractChartWrapper *)chartWrapper  inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
++(REMTooltipViewBase *)tooltipWithHighlightedPoints:(NSArray *)points atX:(id)x chartWrapper:(DAbstractChartWrapper *)chartWrapper  inEnergyData:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
-    if(widget.diagramType == REMDiagramTypePie){
+    REMDiagramType diagramType = (REMDiagramType)[widget.diagramType intValue];
+    if(diagramType== REMDiagramTypePie){
         return [[REMPieChartTooltipView  alloc] initWithHighlightedPoints:points chartWrapper:chartWrapper inEnergyData:data widget:widget andParameters:parameters];
     }
-    else if(widget.diagramType == REMDiagramTypeLabelling){
+    else if(diagramType == REMDiagramTypeLabelling){
         return [[REMLabelingTooltipView alloc] initWithHighlightedPoints:points atX:x chartWrapper:chartWrapper inEnergyData:data widget:widget andParameters:parameters];
     }
     else{
@@ -54,7 +55,7 @@
     return self;
 }
 
--(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points atX:(id)x chartWrapper:(DAbstractChartWrapper *)chartWrapper inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
+-(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points atX:(id)x chartWrapper:(DAbstractChartWrapper *)chartWrapper inEnergyData:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
     self = [super initWithFrame:kDMChart_TooltipHiddenFrame];
     

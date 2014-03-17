@@ -8,18 +8,21 @@
 #import <UIKit/UIKit.h>
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingCommodityViewController.h"  
-
+#import "REMManagedBuildingCommodityUsageModel.h"
+#import "REMManagedDashboardModel.h"
+#import "REMManagedWidgetModel.h"
+#import "REMBuildingCoverWidgetRelationModel.h"
 @interface REMBuildingCoverWidgetViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,weak) UIPopoverController *popController;
-@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,weak) REMManagedBuildingModel *buildingInfo;
 
 @property (nonatomic,strong) NSArray *dashboardArray;
 
 @property (nonatomic,strong) NSDictionary *widgetDic;
 
 
-@property (nonatomic,weak) REMCommodityModel *commodityInfo;
+@property (nonatomic,weak) REMManagedBuildingCommodityUsageModel *commodityInfo;
 
 @property (nonatomic) REMBuildingCoverWidgetPosition position;
 

@@ -23,24 +23,29 @@
 @property (nonatomic,strong) DAbstractChartWrapper *wrapper;
 @property (nonatomic,strong) REMWidgetSearchModelBase *model;
 @property (nonatomic,strong) REMEnergySeacherBase *searcher;
+@property (nonatomic,strong) REMWidgetContentSyntax *contentSyntax;
 @end
 
 @implementation REMBuildingWidgetChartViewController
 
+
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(id, REMBusinessErrorInfo *))loadCompleted
 {
-    REMWidgetSearchModelBase *model=[REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax.dataStoreType withParam:self.widgetInfo.contentSyntax.params];
-    if(self.widgetInfo.contentSyntax.relativeDateType!=REMRelativeTimeRangeTypeNone){
-        model.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
+    self.contentSyntax = [[REMWidgetContentSyntax alloc]initWithJSONString:self.widgetInfo.contentSyntax];
+    
+    
+    REMWidgetSearchModelBase *model=[REMWidgetSearchModelBase searchModelByDataStoreType:self.contentSyntax.dataStoreType withParam:self.contentSyntax.params];
+    if(self.contentSyntax.relativeDateType!=REMRelativeTimeRangeTypeNone){
+        model.relativeDateType=self.contentSyntax.relativeDateType;
     }
     self.model=model;
     
-    self.requestUrl=self.widgetInfo.contentSyntax.dataStoreType;
+    self.requestUrl=self.contentSyntax.dataStoreType;
 
-    self.searcher = [REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
+    self.searcher = [REMEnergySeacherBase querySearcherByType:self.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo andSyntax:self.contentSyntax];
     self.searcher.disableNetworkAlert=YES;
     [self startLoadingActivity];
-    [self.searcher queryEnergyDataByStoreType:self.widgetInfo.contentSyntax.dataStoreType andParameters:self.model withMaserContainer:nil andGroupName:[NSString stringWithFormat:@"building-data-%@", @(buildingId)] callback:^(id data, REMBusinessErrorInfo *bizError) {
+    [self.searcher queryEnergyDataByStoreType:self.contentSyntax.dataStoreType andParameters:self.model withMaserContainer:nil andGroupName:[NSString stringWithFormat:@"building-data-%@", @(buildingId)] callback:^(id data, REMBusinessErrorInfo *bizError) {
         [self stopLoadingActivity];
         if (data!=nil) {
             if(self.isViewLoaded==NO)return ;
@@ -65,10 +70,15 @@
 
 -(DCTrendWrapper*)constructWrapperWithFrame:(CGRect)frame {
     DCTrendWrapper *widgetWrapper = nil;
+<<<<<<< HEAD
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     DCChartStyle* style = [DCChartStyle getCoverStyle];
+=======
+    REMDiagramType widgetType = (REMDiagramType)[self.widgetInfo.diagramType intValue];
+    REMChartStyle* style = [REMChartStyle getCoverStyle];
+>>>>>>> UseCoreData
     style.acceptPan = [self getEnergyStep] != REMEnergyStepHour;
-    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.widgetInfo];
+    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.contentSyntax];
     if ([self.model isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
         REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
         wrapperConfig.stacked=NO;
@@ -101,7 +111,7 @@
 }
 
 -(REMEnergyStep)getEnergyStep {
-    return self.widgetInfo.contentSyntax.step.integerValue;
+    return self.contentSyntax.step.integerValue;
 }
 
 -(NSString*)getLegendText:(DCXYSeries*)series index:(NSUInteger)index {

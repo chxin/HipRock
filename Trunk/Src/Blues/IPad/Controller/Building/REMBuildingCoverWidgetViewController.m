@@ -45,13 +45,13 @@
         NSUInteger section=NSNotFound;
         NSUInteger row=NSNotFound;
         for (int i=0; i<self.dashboardArray.count; ++i) {
-            REMDashboardObj *dashboard=self.dashboardArray[i];
-            if ([dashboard.dashboardId isEqualToNumber:self.selectedDashboardId]== YES) {
+            REMManagedWidgetModel *dashboard=self.dashboardArray[i];
+            if ([dashboard.id isEqualToNumber:self.selectedDashboardId]== YES) {
                 section=i+2;
-                NSArray *widgetList=self.widgetDic[dashboard.dashboardId];
+                NSArray *widgetList=self.widgetDic[dashboard.id];
                 for (int j=0; j<widgetList.count;j++) {
-                    REMWidgetObject *widget=widgetList[j];
-                    if ([widget.widgetId isEqualToNumber:self.selectedWidgetId]==YES) {
+                    REMManagedWidgetModel *widget=widgetList[j];
+                    if ([widget.id isEqualToNumber:self.selectedWidgetId]==YES) {
                         row=j;
                         break;
                     }
@@ -88,8 +88,8 @@
         return 2;
     }
     else{
-        REMDashboardObj *dashboard= self.dashboardArray[section-2];
-        NSArray *widgetList=self.widgetDic[dashboard.dashboardId];
+        REMManagedDashboardModel *dashboard= self.dashboardArray[section-2];
+        NSArray *widgetList=self.widgetDic[dashboard.id];
         return widgetList.count;
     }
 }
@@ -102,7 +102,7 @@
         return [NSString stringWithFormat:REMIPadLocalizedString(@"Building_WidgetRelationCommodityTitle"),self.commodityInfo.comment];
     }
     else{
-        REMDashboardObj *dashboard= self.dashboardArray[section-2];
+        REMManagedDashboardModel *dashboard= self.dashboardArray[section-2];
         return dashboard.name;
     }
 }
@@ -178,9 +178,9 @@
         }
     }
     else{
-        REMDashboardObj *dashboard= self.dashboardArray[indexPath.section-2];
-        NSArray *widgetList=self.widgetDic[dashboard.dashboardId];
-        REMWidgetObject *widgetInfo=widgetList[indexPath.row];
+        REMManagedDashboardModel *dashboard= self.dashboardArray[indexPath.section-2];
+        NSArray *widgetList=self.widgetDic[dashboard.id];
+        REMManagedWidgetModel *widgetInfo=widgetList[indexPath.row];
         cell.textLabel.text=widgetInfo.name;
     }
     
@@ -214,10 +214,13 @@
 
 
 - (IBAction)okButtonClicked:(id)sender {
-    REMBuildingCoverWidgetRelationModel *model= [[REMBuildingCoverWidgetRelationModel alloc]init];
-    model.commodityId=self.commodityInfo.commodityId;
-    model.buildingId=self.buildingInfo.building.buildingId;
+//    REMBuildingCoverWidgetRelationModel *model= [[REMBuildingCoverWidgetRelationModel alloc]init];
+//    model.commodityId=self.commodityInfo.id;
+//    model.buildingId=self.buildingInfo.id;
 
+    NSMutableDictionary *modelDic = [NSMutableDictionary dictionary];
+    [modelDic setObject:self.commodityInfo.id forKey:@"CommodityId"];
+    [modelDic setObject:self.buildingInfo.id forKey:@"HierarchyId"];
     if (self.currentIndexPath.section==1) {
         
         NSNumber *widgetId;
@@ -227,43 +230,49 @@
         else{
             widgetId=@(-2);
         }
-        model.widgetId=widgetId;
-        model.dashboardId=@(-1);
+        [modelDic setObject:widgetId forKey:@"WidgetId"];
+        [modelDic setObject:@(-1) forKey:@"DashboardId"];
+//        model.widgetId=widgetId;
+//        model.dashboardId=@(-1);
     }
     NSString *widgetName=nil;
     if (self.currentIndexPath.section!=1) {
-        REMDashboardObj *dashboard=self.dashboardArray[self.currentIndexPath.section-2];
-        NSArray *widgetList=self.widgetDic[dashboard.dashboardId];
-        REMWidgetObject *widget=widgetList[self.currentIndexPath.row];
-        model.dashboardId=dashboard.dashboardId;
-        model.widgetId=widget.widgetId;
+        REMManagedWidgetModel *dashboard=self.dashboardArray[self.currentIndexPath.section-2];
+        NSArray *widgetList=self.widgetDic[dashboard.id];
+        REMManagedWidgetModel *widget=widgetList[self.currentIndexPath.row];
+//        model.dashboardId=dashboard.id;
+//        model.widgetId=widget.id;
+        [modelDic setObject:widget.id forKey:@"WidgetId"];
+        [modelDic setObject:dashboard.id forKey:@"DashboardId"];
+
         widgetName=widget.name;
     }
     
-    if ([self.selectedDashboardId isEqualToNumber:model.dashboardId]==YES &&
-        [self.selectedWidgetId isEqualToNumber:model.widgetId]==YES) {
+    if ([self.selectedDashboardId isEqualToNumber:modelDic[@"DashboardId"]]==YES &&
+        [self.selectedWidgetId isEqualToNumber:modelDic[@"WidgetId"]]==YES) {
         [self cancelButtonClicked:nil];
         return;
     }
     
-    REMCustomerModel *customer=REMAppCurrentCustomer;
-    NSDictionary *modelDic=@{
-                             @"DashboardId":model.dashboardId,
-                             @"HierarchyId":model.buildingId,
-                             @"CommodityId":model.commodityId,
-                             @"Position":@((NSUInteger)self.position)
-                             };
-    NSMutableDictionary *newDic = [modelDic mutableCopy];
-    if (model.widgetId!=nil) {
-        [newDic setObject:model.widgetId forKey:@"WidgetId"];
-    }
-    ;
+    REMManagedCustomerModel *customer=REMAppCurrentManagedCustomer;
+//    NSDictionary *modelDic=@{
+//                             @"DashboardId":model.dashboardId,
+//                             @"HierarchyId":model.buildingId,
+//                             @"CommodityId":model.commodityId,
+//                             @"Position":@((NSUInteger)self.position)
+//                             };
+//    NSMutableDictionary *newDic = [modelDic mutableCopy];
+//    if (model.widgetId!=nil) {
+//        [newDic setObject:model.widgetId forKey:@"WidgetId"];
+//    }
+//    ;
+    [modelDic setObject:@((NSUInteger)self.position) forKey:@"Position"];
     self.isRequesting=YES;
     REMPinToBuildingCoverHelper *helper=[[REMPinToBuildingCoverHelper alloc]init];
     helper.mainNavigationController=(REMMainNavigationController *)self.commodityController.parentViewController.parentViewController.parentViewController.navigationController;
     helper.widgetName=widgetName;
     self.pinHelper=helper;
-    [helper pinToBuildingCover:@{@"relationList":@[newDic],@"buildingId":model.buildingId,@"customerId":customer.customerId} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
+    [helper pinToBuildingCover:@{@"relationList":@[modelDic],@"buildingId":modelDic[@"HierarchyId"],@"customerId":customer.id} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
         if (status == REMPinToBuildingCoverStatusSuccess) {
             self.pinHelper=nil;
             [self.commodityController updateChartController];

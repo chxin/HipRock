@@ -92,7 +92,7 @@
     [self initSearchView];
     [self initChartView];
     
-    if (self.widgetInfo.diagramType == REMDiagramTypePie) {
+    if (((REMDiagramType)[self.widgetInfo.diagramType intValue]) == REMDiagramTypePie) {
         [self.stepControl setHidden:YES];
     }
     
@@ -109,7 +109,7 @@
 - (void)initModelAndSearcher{
     
     REMWidgetStepEnergyModel *m=(REMWidgetStepEnergyModel *)self.model;
-    m.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
+    m.relativeDateType=self.contentSyntax.relativeDateType;
     
 }
 - (void)initSearchView{
@@ -345,10 +345,10 @@
 }
 
 - (NSString *)calendarComponent{
-    if(self.widgetInfo.contentSyntax.calendarType==REMCalendarTypeHCSeason){
+    if(self.contentSyntax.calendarType==REMCalendarTypeHCSeason){
         return REMIPadLocalizedString(@"Widget_CalendarHC"); //"冷暖季";
     }
-    else if(self.widgetInfo.contentSyntax.calendarType==REMCalenderTypeHoliday){
+    else if(self.contentSyntax.calendarType==REMCalenderTypeHoliday){
         return REMIPadLocalizedString(@"Widget_CalendarHoliday");//非工作时间
     }
     else{
@@ -411,7 +411,7 @@
 - (void) processCalendar{
     DCTrendWrapper *trend=(DCTrendWrapper *)self.chartWrapper;
     REMWidgetStepEnergyModel *tempModel=(REMWidgetStepEnergyModel *)self.tempModel;
-    if(self.widgetInfo.contentSyntax.calendarType == REMCalendarTypeHCSeason){
+    if(self.contentSyntax.calendarType == REMCalendarTypeHCSeason){
         if(tempModel.step == REMEnergyStepYear){
             trend.calenderType=REMCalendarTypeNone;
             NSString *text=REMIPadLocalizedString(@"Widget_CalendarStepError");
@@ -423,7 +423,7 @@
             [self checkCalendarDataWithCalendarType:REMCalendarTypeHCSeason withSearchTimeRange:self.tempModel.timeRangeArray[0]];
         }
     }
-    else if(self.widgetInfo.contentSyntax.calendarType == REMCalenderTypeHoliday){
+    else if(self.contentSyntax.calendarType == REMCalenderTypeHoliday){
         if(tempModel.step == REMEnergyStepMonth ||
            tempModel.step == REMEnergyStepYear ||
            tempModel.step == REMEnergyStepWeek){
@@ -491,9 +491,9 @@
     }
     if (widgetWrapper != nil) {
         if([widgetWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
-            if(self.widgetInfo.contentSyntax.calendarType!=REMCalendarTypeNone){
+            if(self.contentSyntax.calendarType!=REMCalendarTypeNone){
                 DCTrendWrapper *trend=(DCTrendWrapper *)widgetWrapper;
-                trend.calenderType=self.widgetInfo.contentSyntax.calendarType;
+                trend.calenderType=self.contentSyntax.calendarType;
                 [self processCalendar];
             }
         }

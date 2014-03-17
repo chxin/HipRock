@@ -29,4 +29,6 @@
 -(REMGalleryCollectionCell *)galleryCellForBuildingIndex:(int)buildingIndex;
 -(void)scrollToBuildingIndex:(int)currentBuildingIndex;
 
++(int)indexOfBuilding:(REMManagedBuildingModel *)building inBuildingOverallArray:(NSArray *)array;
+
 @end

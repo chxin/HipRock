@@ -14,13 +14,13 @@ typedef enum _REMBuildingCoverWidgetPosition
     REMBuildingCoverWidgetPositionSecond
     
 } REMBuildingCoverWidgetPosition;
-
-@interface REMBuildingCoverWidgetRelationModel : REMJSONObject
-
-@property (nonatomic,strong) NSNumber *dashboardId;
-@property (nonatomic,strong) NSNumber *widgetId;
-@property (nonatomic,strong) NSNumber *buildingId;
-@property (nonatomic,strong) NSNumber *commodityId;
-@property (nonatomic) REMBuildingCoverWidgetPosition position;
-
-@end
+//
+//@interface REMBuildingCoverWidgetRelationModel : REMJSONObject
+//
+//@property (nonatomic,strong) NSNumber *dashboardId;
+//@property (nonatomic,strong) NSNumber *widgetId;
+//@property (nonatomic,strong) NSNumber *buildingId;
+//@property (nonatomic,strong) NSNumber *commodityId;
+//@property (nonatomic) REMBuildingCoverWidgetPosition position;
+//
+//@end

@@ -16,8 +16,8 @@
 #import "REMWidgetBuildingCoverViewController.h"
 #import "REMBuildingOverallModel.h"
 #import "REMBuildingCoverWidgetRelationModel.h"
-
-
+#import "REMManagedBuildingCommodityUsageModel.h"
+#import "REMManagedSharedModel.h"
 const static CGFloat kWidgetBackButtonLeft=25;
 const static CGFloat kWidgetBackButtonTop=16;
 const static CGFloat kWidgetBackButtonWidthHeight=32;
@@ -42,6 +42,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 
 @property (nonatomic,strong) REMWidgetBizDelegatorBase *bizDelegator;
 @property (nonatomic,strong) UIPopoverController *popController;
+@property (nonatomic,strong) REMWidgetContentSyntax *contentSyntax;
 @end
 
 @implementation REMWidgetDetailViewController
@@ -63,13 +64,13 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     //[self.view setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
-    
-    self.bizDelegator=[REMWidgetBizDelegatorBase bizDelegatorByWidgetInfo:self.widgetInfo];
+    self.contentSyntax = [[REMWidgetContentSyntax alloc]initWithJSONString:self.widgetInfo.contentSyntax];
+    self.bizDelegator=[REMWidgetBizDelegatorBase bizDelegatorByWidgetInfo:self.widgetInfo andSyntax:self.contentSyntax];
     self.bizDelegator.view=self.view;
     self.bizDelegator.energyData=self.energyData;
     self.bizDelegator.widgetInfo=self.widgetInfo;
     self.bizDelegator.ownerController=self;
-    self.bizDelegator.groupName=[NSString stringWithFormat:@"widget-%@",self.widgetInfo.widgetId];
+    self.bizDelegator.groupName=[NSString stringWithFormat:@"widget-%@",self.widgetInfo.id];
     //self.view.layer.borderColor=[UIColor redColor].CGColor;
     //self.view.layer.borderWidth=1;
     
@@ -124,11 +125,11 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     
     NSString *shareTitle=nil;
     NSString *widgetTitle=self.widgetInfo.name;
-    if(self.widgetInfo.shareInfo!=nil && [self.widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
-        NSString *shareName=self.widgetInfo.shareInfo.userRealName;
-        NSString *shareTel=self.widgetInfo.shareInfo.userTelephone;
-        NSString *date=[REMTimeHelper formatTimeFullDay:self.widgetInfo.shareInfo.shareTime isChangeTo24Hour:NO];
-        NSString *userTitle=self.widgetInfo.shareInfo.userTitleComponent;
+    if(self.widgetInfo.sharedInfo!=nil && [self.widgetInfo.sharedInfo isEqual:[NSNull null]]==NO){
+        NSString *shareName=self.widgetInfo.sharedInfo.userRealName;
+        NSString *shareTel=self.widgetInfo.sharedInfo.userTelephone;
+        NSString *date=[REMTimeHelper formatTimeFullDay:self.widgetInfo.sharedInfo.shareTime isChangeTo24Hour:NO];
+        NSString *userTitle=self.widgetInfo.sharedInfo.userTitleComponent;
         shareTitle = [NSString stringWithFormat:REMIPadLocalizedString(@"Widget_ShareTitle"),shareName,userTitle,date,shareTel];
     }
     NSString *fullTitle=widgetTitle;
@@ -164,11 +165,11 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     [container addSubview:backButton];
 }
 
-- (REMWidgetObject *)widgetByRelation:(REMBuildingCoverWidgetRelationModel *)relation{
-    for (REMDashboardObj *dashboard in self.buildingInfo.dashboardArray) {
-        if ([relation.dashboardId isEqualToNumber:dashboard.dashboardId]==YES) {
-            for (REMWidgetObject *widget in dashboard.widgets) {
-                if ([widget.widgetId isEqualToNumber:relation.widgetId]==YES) {
+- (REMManagedWidgetModel *)widgetByRelation:(REMManagedPinnedWidgetModel *)relation{
+    for (REMManagedDashboardModel *dashboard in self.buildingInfo.dashboards) {
+        if ([relation.dashboardId isEqualToNumber:dashboard.id]==YES) {
+            for (REMManagedWidgetModel *widget in dashboard.widgets) {
+                if ([widget.id isEqualToNumber:relation.widgetId]==YES) {
                     return widget;
                 }
             }
@@ -179,39 +180,38 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 
 - (NSArray *)piningWidgetList{
     NSMutableArray *array=[NSMutableArray array];
-    for (int i=0; i<self.buildingInfo.commodityArray.count; ++i) {
-        REMCommodityModel *commodity=self.buildingInfo.commodityArray[i];
+    for (int i=0; i<self.buildingInfo.commodities.count; ++i) {
+        REMManagedBuildingCommodityUsageModel *commodity=[self.buildingInfo.commodities allObjects][i];
         NSMutableDictionary *dic=[NSMutableDictionary dictionary];
         dic[@"name"]= commodity.comment;
-        dic[@"Id"]=commodity.commodityId;
+        dic[@"Id"]=commodity.id;
         BOOL foundFirst=NO;
         BOOL foundSecond=NO;
-        for (REMBuildingCoverWidgetRelationModel *relation in self.buildingInfo.widgetRelationArray) {
-            if ([relation.commodityId isEqualToNumber:commodity.commodityId]==YES) {
-                REMWidgetObject *widget=[self widgetByRelation:relation];
-                if (widget!=nil && [widget.widgetId isGreaterThan:@(0)]==YES) {
-                    if (relation.position == REMBuildingCoverWidgetPositionFirst) {
-                        foundFirst=YES;
-                        dic[@"firstName"]=widget.name;
-                        dic[@"firstId"]=widget.widgetId;
-                        dic[@"firstDashboardId"]=relation.dashboardId;
-                        if ([self.widgetInfo.widgetId isEqualToNumber:widget.widgetId]) {
-                            dic[@"firstSelected"]=@(1);
-                        }
-                        
-                    }
-                    else{
-                        foundSecond=YES;
-                        dic[@"secondName"]=widget.name;
-                        dic[@"secondId"]=widget.widgetId;
-                        dic[@"secondDashboardId"]=relation.dashboardId;
-                        if ([self.widgetInfo.widgetId isEqualToNumber:widget.widgetId]) {
-                            dic[@"secondSelected"]=@(1);
-                        }
+        for (REMManagedPinnedWidgetModel *relation in [commodity.pinnedWidgets allObjects]) {
+            REMManagedWidgetModel *widget=[self widgetByRelation:relation];
+            if (widget!=nil && [widget.id isGreaterThan:@(0)]==YES) {
+                if (((REMBuildingCoverWidgetPosition)[relation.position intValue]) == REMBuildingCoverWidgetPositionFirst) {
+                    foundFirst=YES;
+                    dic[@"firstName"]=widget.name;
+                    dic[@"firstId"]=widget.id;
+                    dic[@"firstDashboardId"]=relation.dashboardId;
+                    if ([self.widgetInfo.id isEqualToNumber:widget.id]) {
+                        dic[@"firstSelected"]=@(1);
                     }
                     
                 }
+                else{
+                    foundSecond=YES;
+                    dic[@"secondName"]=widget.name;
+                    dic[@"secondId"]=widget.id;
+                    dic[@"secondDashboardId"]=relation.dashboardId;
+                    if ([self.widgetInfo.id isEqualToNumber:widget.id]) {
+                        dic[@"secondSelected"]=@(1);
+                    }
+                }
+                
             }
+        
         }
         if (foundFirst==NO) {
             dic[@"firstName"]=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth"),commodity.comment];

@@ -140,10 +140,10 @@
         REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
         
         if(validationResult.status == REMUserValidationSuccess) {
-            REMUserModel *user = validationResult.user;
-            [REMAppContext setCurrentUser:user];
+            REMManagedUserModel *user = validationResult.managedUser;
+            [REMAppContext setCurrentManagedUser:user];
             
-            NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
+            NSArray *customers = (NSArray *)(REMAppCurrentManagedUser.customers);
             
             if(customers.count<=0){
                 [REMAlertHelper alert:REMIPadLocalizedString(@"Login_TrialNoCustomer")];
@@ -153,7 +153,7 @@
             }
             
             if(customers.count == 1){
-                [REMAppContext setCurrentCustomer:customers[0]];
+                [REMAppContext setCurrentManagedCustomer:customers[0]];
                 [self.loginCarouselController loginSuccess];
             }
             else{
@@ -170,11 +170,11 @@
 
 -(void)setTempUser
 {
-    REMUserModel *tempUser = [[REMUserModel alloc] init];
-    tempUser.userId = 0;
+    REMManagedUserModel *tempUser = [[REMManagedUserModel alloc] init];
+    tempUser.id = 0;
     tempUser.name = @"";
-    tempUser.spId = 1;
-    [REMAppContext setCurrentUser:tempUser];
+    tempUser.spId = @(1);
+    [REMAppContext setCurrentManagedUser:tempUser];
 }
 
 

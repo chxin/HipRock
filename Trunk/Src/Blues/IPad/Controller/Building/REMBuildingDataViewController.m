@@ -9,6 +9,8 @@
 #import "REMBuildingDataViewController.h"
 #import "REMBuildingDataView.h"
 #import "REMBuildingChartBaseViewController.h"
+#import "REMManageBuildingAirQualityModel.h"
+#import "REMManagedBuildingCommodityUsageModel.h"
 
 #define kDashboardThreshold 361+65+85*2+45
 
@@ -67,11 +69,11 @@
 }
 
 - (void) initButtons{
-    if(self.buildingInfo.commodityArray==nil)return ;
-    NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:self.buildingInfo.commodityArray.count];
+    if(self.buildingInfo.commodities==nil)return ;
+    NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:self.buildingInfo.commodities.count];
     int i=0;
-    for (;i<self.buildingInfo.commodityArray.count;++i) {
-        REMCommodityModel *model = self.buildingInfo.commodityArray[i];
+    for (;i<self.buildingInfo.commodities.count;++i) {
+        REMManagedBuildingCommodityUsageModel *model = [self.buildingInfo.commodities allObjects][i];
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
         //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
         btn.tag=i;
@@ -155,44 +157,45 @@
 
 }
 
-- (NSString *)retrieveCommodityImageName:(REMCommodityModel *)model
+- (NSString *)retrieveCommodityImageName:(REMManagedBuildingCommodityUsageModel *)model
 {
-    if ([model.commodityId isEqualToNumber:@(1)] == YES) {
+    NSNumber *commodityId= model.id;
+    if ([commodityId isEqualToNumber:@(1)] == YES) {
         return @"Electricity";
     }
-    else if([model.commodityId isEqualToNumber:@(2)] == YES)//自来水
+    else if([commodityId isEqualToNumber:@(2)] == YES)//自来水
     {
         return @"Water";
     }
-    else if([model.commodityId isEqualToNumber:@(12)] == YES)//pm2.5
+    else if([commodityId isEqualToNumber:@(12)] == YES)//pm2.5
     {
         return @"PM2.5";
     }
-    else if([model.commodityId isEqualToNumber:@(4)] == YES){ //软水
+    else if([commodityId isEqualToNumber:@(4)] == YES){ //软水
         return @"Water";
     }
-    else if([model.commodityId isEqualToNumber:@(5)]==YES){//汽油
+    else if([commodityId isEqualToNumber:@(5)]==YES){//汽油
         return @"Oil";
     }
-    else if([model.commodityId isEqualToNumber:@(6)]==YES){ //低压蒸汽
+    else if([commodityId isEqualToNumber:@(6)]==YES){ //低压蒸汽
         return @"NaturalGas";
     }
-    else if([model.commodityId isEqualToNumber:@(7)]==YES){ //柴油
+    else if([commodityId isEqualToNumber:@(7)]==YES){ //柴油
         return @"Oil";
     }
-    else if([model.commodityId isEqualToNumber:@(8)]==YES){ //热量
+    else if([commodityId isEqualToNumber:@(8)]==YES){ //热量
         return @"Heating";
     }
-    else if([model.commodityId isEqualToNumber:@(9)]==YES){ //冷量
+    else if([commodityId isEqualToNumber:@(9)]==YES){ //冷量
         return @"Cooling";
     }
-    else if([model.commodityId isEqualToNumber:@(10)]==YES){ //煤
+    else if([commodityId isEqualToNumber:@(10)]==YES){ //煤
         return @"Coal";
     }
-    else if([model.commodityId isEqualToNumber:@(11)]==YES){ //煤油
+    else if([commodityId isEqualToNumber:@(11)]==YES){ //煤油
         return @"Oil";
     }
-    else if([model.commodityId isEqualToNumber:@(3)] == YES)
+    else if([commodityId isEqualToNumber:@(3)] == YES)
     {
         return @"NaturalGas";
     }
@@ -236,10 +239,10 @@
             NSNumber *status;
             if ([controller isKindOfClass:[REMBuildingAirQualityViewController class]]==YES ) {
                 REMBuildingAirQualityViewController *controller1=(REMBuildingAirQualityViewController *)controller;
-                status=self.commodityDataLoadStatus[controller1.airQualityInfo.commodity.commodityId];
+                status=self.commodityDataLoadStatus[controller1.airQualityInfo.commodityId];
             }
             else{
-                status=self.commodityDataLoadStatus[controller.commodityInfo.commodityId];
+                status=self.commodityDataLoadStatus[controller.commodityInfo.id];
             }
             if ([status isEqualToNumber:@(1)]==YES) {
                 imageController.shareButton.enabled=YES;
@@ -258,21 +261,21 @@
 {
     if(self.childViewControllers.count>0)return;
     int count=0;
-    if (self.buildingInfo.commodityArray!=nil) {
-        count=self.buildingInfo.commodityArray.count;
+    if (self.buildingInfo.commodities!=nil) {
+        count=self.buildingInfo.commodities.count;
     }
     CGRect frame=CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.view.frame.size.width, self.view.frame.size.height+kBuildingCommodityViewTop);
     int i=0;
 
     for (; i<count; ++i) {
-        REMCommodityModel *model = self.buildingInfo.commodityArray[i];
+        REMManagedBuildingCommodityUsageModel *model = [self.buildingInfo.commodities allObjects][i];
         REMBuildingCommodityViewController *controller=[[REMBuildingCommodityViewController alloc]init];
         controller.commodityInfo=model;
         controller.buildingInfo=self.buildingInfo;
         controller.viewFrame=frame;
         controller.index=i;
         [self addChildViewController:controller];
-        self.commodityDataLoadStatus[model.commodityId]=@(0);
+        self.commodityDataLoadStatus[model.id]=@(0);
     }
     if(self.buildingInfo.airQuality!=nil){
         REMBuildingAirQualityViewController *controller=[[REMBuildingAirQualityViewController alloc]init];
@@ -281,7 +284,7 @@
         controller.airQualityInfo=self.buildingInfo.airQuality;
         controller.buildingInfo=self.buildingInfo;
         [self addChildViewController:controller];
-        self.commodityDataLoadStatus[self.buildingInfo.airQuality.commodity.commodityId]=@(0);
+        self.commodityDataLoadStatus[self.buildingInfo.airQuality.commodityId]=@(0);
     }
     
     
@@ -464,10 +467,10 @@
     REMBuildingCommodityViewController *controller=self.childViewControllers[index];
     if([controller isKindOfClass:[REMBuildingAirQualityViewController class]]==YES){
         REMBuildingAirQualityViewController *controller1=(REMBuildingAirQualityViewController *)controller;
-        self.commodityDataLoadStatus[controller1.airQualityInfo.commodity.commodityId]=@(1);
+        self.commodityDataLoadStatus[controller1.airQualityInfo.commodityId]=@(1);
     }
     else{
-        self.commodityDataLoadStatus[controller.commodityInfo.commodityId]=@(1);
+        self.commodityDataLoadStatus[controller.commodityInfo.id]=@(1);
     }
     
     if(index == self.currentCommodityIndex){
@@ -521,12 +524,12 @@
     UIGraphicsEndImageContext();
     
     NSString* stringFormat = nil;
-    if (self.currentCommodityIndex<self.buildingInfo.commodityArray.count) {
-        stringFormat = REMIPadLocalizedString(@"Weibo_ContentOfElectirc");
-        REMCommodityUsageModel *model =controller.commodityUsage;
-        NSString* commodityName = model.commodity.comment;
-        NSString* uomName = model.commodityUsage.uom.comment;
-        NSString* val = [model.commodityUsage.dataValue isEqual:[NSNull null]] ? nil : model.commodityUsage.dataValue.stringValue;
+    if (self.currentCommodityIndex<self.buildingInfo.commodities.count) {
+        stringFormat = NSLocalizedString(@"Weibo_ContentOfElectirc", @"");
+        REMManagedBuildingCommodityUsageModel *model =controller.commodityUsage;
+        NSString* commodityName = model.comment;
+        NSString* uomName = model.totalUom;
+        NSString* val = [model.totalValue isEqual:[NSNull null]] ? nil : model.totalValue.stringValue;
         if (val == nil || commodityName == nil || uomName == nil) {
             stringFormat = REMIPadLocalizedString(@"BuildingChart_NoData");
         } else {

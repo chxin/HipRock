@@ -11,6 +11,7 @@
 #import "REMDimensionForBuilding.h"
 #import "REMDimensions.h"
 #import "REMBuildingConstants.h"
+#import "REMManagedBuildingPictureModel.h"
 
 #define kBuildingImageLoadingKeyPrefix "buildingimage-%@"
 
@@ -57,7 +58,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.loadingImageKey=[NSString stringWithFormat:@(kBuildingImageLoadingKeyPrefix),self.buildingInfo.building.buildingId];
+    self.loadingImageKey=[NSString stringWithFormat:@(kBuildingImageLoadingKeyPrefix),self.buildingInfo.id];
     [self.view setFrame:self.viewFrame];
     [self setChildControllerFrame];
     [self loadSmallImageView];
@@ -77,14 +78,14 @@
 
 - (NSString *)buildingPictureFileName{
     if([self hasExistBuildingPic]==NO)return nil;
-    
-    return [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageNormal];
+    REMManagedBuildingPictureModel *picModel =[self.buildingInfo.pictures allObjects][0];
+    return [REMImageHelper buildingImagePathWithId: picModel.id andType:REMBuildingImageNormal];
 }
 
 - (BOOL)hasExistBuildingPic{
-    if(self.buildingInfo.building.pictureIds==nil ||
-       [self.buildingInfo.building.pictureIds isEqual:[NSNull null]] ||
-       self.buildingInfo.building.pictureIds.count==0){
+    if(self.buildingInfo.pictures==nil ||
+       [self.buildingInfo.pictures isEqual:[NSNull null]] ||
+       self.buildingInfo.pictures.count==0){
         
         return NO;
     }
@@ -106,7 +107,8 @@
         blurImageView.image=self.defaultBlurImage;
     }
     else{
-        NSNumber *picId =self.buildingInfo.building.pictureIds[0];
+        REMManagedBuildingPictureModel *picModel =[self.buildingInfo.pictures allObjects][0];
+        NSNumber *picId =picModel.id;
         NSString *smallPicPath= [REMImageHelper buildingImagePathWithId:picId andType:REMBuildingImageSmall];
         NSString *smallBlurPicPath= [REMImageHelper buildingImagePathWithId:picId andType:REMBuildingImageSmallBlured];
         NSString *normalPicPath= [REMImageHelper buildingImagePathWithId:picId andType:REMBuildingImageNormal];
@@ -324,12 +326,12 @@
     [self.container addSubview:buildingType];
     self.buildingTypeTitleView=buildingType;
     CGFloat titleSize=kBuildingTitleFontSize;
-    if(self.buildingInfo.building.name.length>25){
+    if(self.buildingInfo.name.length>25){
         titleSize=titleSize-3;
     }
     
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, buildingType.frame.origin.y+buildingType.frame.size.height+4, self.container.frame.size.width, titleSize+2)];
-    titleLabel.text=self.buildingInfo.building.name ;
+    titleLabel.text=self.buildingInfo.name ;
     titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     titleLabel.shadowOffset=CGSizeMake(1, 1);
     
@@ -378,8 +380,8 @@
         [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
         UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        
-        NSString *smallPicPath= [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageSmall];
+        REMManagedBuildingPictureModel *picModel =[self.buildingInfo.pictures allObjects][0];
+        NSString *smallPicPath= [REMImageHelper buildingImagePathWithId:picModel.id andType:REMBuildingImageSmall];
         
         BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallPicPath];
         if (hasExist==NO) {
@@ -447,7 +449,8 @@
         [self loadImageViewByImage:image];
     }
     else{
-        NSDictionary *param=@{@"pictureId":self.buildingInfo.building.pictureIds[0]};
+        REMManagedBuildingPictureModel *picModel =[self.buildingInfo.pictures allObjects][0];
+        NSDictionary *param=@{@"pictureId":picModel.id};
         REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param accessCache:YES andMessageMap:nil];
         store.groupName=self.loadingImageKey;
         
@@ -478,8 +481,8 @@
     blurred.contentMode=UIViewContentModeTop;
     blurred.clipsToBounds=YES;
     blurred.backgroundColor=[UIColor clearColor];
-    
-    NSString *blurImagePath= [REMImageHelper buildingImagePathWithId:self.buildingInfo.building.pictureIds[0] andType:REMBuildingImageNormalBlured];
+    REMManagedBuildingPictureModel *picModel =[self.buildingInfo.pictures allObjects][0];
+    NSString *blurImagePath= [REMImageHelper buildingImagePathWithId:picModel.id  andType:REMBuildingImageNormalBlured];
     
     BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:blurImagePath];
     if(hasExist ==YES){
@@ -764,7 +767,7 @@
     
     
     //[NSString str]
-    NSString* buildingName = self.buildingInfo.building.name;
+    NSString* buildingName = self.buildingInfo.name;
     NSString* text = [NSString stringWithFormat:[outputDic objectForKey:@"text"], buildingName];
     callback(img, text);
 }

@@ -11,7 +11,7 @@
 #import "REMDashboardCollectionCellView.h"
 #import "REMBuildingViewController.h"
 #import "REMDashboardController.h"
-
+#import "REMManagedDashboardModel.h"
 @class REMDashboardCollectionCellView;
 @class REMBuildingViewController;
 @class REMDashboardController;
@@ -24,7 +24,7 @@
 
 @property (nonatomic,strong) NSString *groupName;
 
-@property (nonatomic,weak) REMDashboardObj *dashboardInfo;
+@property (nonatomic,weak) REMManagedDashboardModel *dashboardInfo;
 
 @property (nonatomic) NSUInteger currentMaxWidgetIndex;
 @property (nonatomic,copy) NSNumber *currentMaxWidgetId;

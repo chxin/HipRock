@@ -12,17 +12,12 @@
 
 @implementation REMPinToBuildingCoverHelper
 
-- (void)pinToBuildingCover:(NSDictionary *)param withBuildingInfo:(REMBuildingOverallModel *)buildingInfo withCallback:(void(^)(REMPinToBuildingCoverStatus))callback{
+- (void)pinToBuildingCover:(NSDictionary *)param withBuildingInfo:(REMManagedBuildingModel *)buildingInfo withCallback:(void(^)(REMPinToBuildingCoverStatus))callback{
     REMDataStore *store=[[REMDataStore alloc]initWithName:REMDSBuildingPinningToCover parameter:param accessCache:NO andMessageMap:nil];
-    
+    REMPinToCoverPersistenceProcessor *processor = [[REMPinToCoverPersistenceProcessor alloc]init];
+    processor.buildingInfo = buildingInfo;
+    store.persistenceProcessor = processor;
     [store access:^(NSArray *data){
-        NSMutableArray *newArray=[NSMutableArray array];
-        for (NSDictionary *dic in data) {
-            [newArray addObject:[[REMBuildingCoverWidgetRelationModel alloc]initWithDictionary:dic]];
-        }
-        buildingInfo.widgetRelationArray=newArray;
-        [buildingInfo updateInnerDictionary];
-        [REMApplicationContext updateBuildingInfoArrayToStorage];
         callback(REMPinToBuildingCoverStatusSuccess);
     }error:^(NSError *error,REMDataAccessErrorStatus status, REMBusinessErrorInfo * bizError){
         if (status == REMDataAccessErrorMessage) {

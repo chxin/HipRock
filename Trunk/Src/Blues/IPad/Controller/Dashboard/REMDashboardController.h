@@ -10,7 +10,7 @@
 #import "REMDashboardCellViewCell.h"
 #import "REMDashboardView.h"
 #import "REMDashboardObj.h"
-
+#import "REMManagedBuildingModel.h"
 @class REMImageView;
 @class REMBuildingViewController;
 @class REMDashboardController;
@@ -45,7 +45,7 @@ const static CGFloat kDashboardWidgetChartHeight=108;
 @property (nonatomic) CGRect viewFrame;
 @property (nonatomic) CGRect upViewFrame;
 
-@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,weak) REMManagedBuildingModel *buildingInfo;
 
 @property (nonatomic) CGFloat currentOffsetY;
 

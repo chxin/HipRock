@@ -6,19 +6,19 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import <Foundation/Foundation.h>
-#import "REMWidgetObject.h"
+#import "REMWidgetContentSyntax.h"
 #import "REMWidgetSearchModelBase.h"
-
+#import "REMManagedWidgetModel.h"
 @interface REMWidgetCellDelegator : NSObject
 
-+ (REMWidgetCellDelegator *)bizWidgetCellDelegator:(REMWidgetObject *)widgetInfo;
++ (REMWidgetCellDelegator *)bizWidgetCellDelegator:(REMManagedWidgetModel *)widgetInfo andSyntax:(REMWidgetContentSyntax *)contentSyntax;
 
 @property (nonatomic,weak) UIView *view;
-@property (nonatomic,weak) REMWidgetObject *widgetInfo;
+@property (nonatomic,weak) REMManagedWidgetModel *widgetInfo;
 @property (nonatomic,weak) UILabel *title;
 @property (nonatomic,weak) UILabel *timeLabel;
 @property (nonatomic,weak) REMWidgetSearchModelBase *searchModel;
-
+@property (nonatomic,strong) REMWidgetContentSyntax *contentSyntax;
 - (void)initBizView;
 
 - (void)initWidgetCellTimeTitle;

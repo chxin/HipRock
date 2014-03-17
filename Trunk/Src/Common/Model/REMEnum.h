@@ -8,6 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum _REMUserTitleType : NSUInteger {
+    REMUserTitleEEConsultant = 0,
+    REMUserTitleTechnician = 1,
+    REMUserTitleCustomerAdmin = 2,
+    REMUserTitlePlatformAdmin=3,
+    REMUserTitleEnergyManager=4,
+    REMUserTitleEnergyEngineer=5,
+    REMUserTitleDepartmentManager=6,
+    REMUserTitleCEO=7,
+    REMUserTitleBusinessPersonnel=8,
+    REMUserTitleSaleman=9,
+    REMUserTitleServiceProviderAdmin=10
+} REMUserTitleType;
 
 typedef enum _REMCalenderType{
     REMCalendarTypeNone=-1,

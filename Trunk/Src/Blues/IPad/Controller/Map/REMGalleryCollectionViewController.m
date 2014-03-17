@@ -143,7 +143,7 @@
                 [cell endPinch];
                 
                 galleryController.initialZoomRect = [self.collectionView convertRect:cell.frame toView:galleryController.view];
-                galleryController.currentBuildingIndex = [REMBuildingOverallModel indexOfBuilding:cell.building inBuildingOverallArray:self.buildingInfoArray]; //[galleryController buildingIndexFromBuilding:cell.building];
+                galleryController.currentBuildingIndex = [REMGalleryViewController indexOfBuilding:cell.building inBuildingOverallArray:self.buildingInfoArray]; //[galleryController buildingIndexFromBuilding:cell.building];
                 self.isPinching = YES;
                 
                 //show building view
@@ -157,15 +157,16 @@
 
 -(void)loadBuildingSmallImage:(NSArray *)imageIds :(void (^)(UIImage *))completed
 {
+    
     if(imageIds != nil && imageIds.count > 0){
-        NSString *smallImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageSmall];
-        NSString *smallBlurImagePath = [REMImageHelper buildingImagePathWithId:imageIds[0] andType:REMBuildingImageSmallBlured];
+        NSString *smallImagePath = [REMImageHelper buildingImagePathWithId:[imageIds[0] id] andType:REMBuildingImageSmall];
+        NSString *smallBlurImagePath = [REMImageHelper buildingImagePathWithId:[imageIds[0] id] andType:REMBuildingImageSmallBlured];
         
         if([[NSFileManager defaultManager] fileExistsAtPath:smallImagePath] == YES){
             completed([UIImage imageWithContentsOfFile:smallImagePath]);
         }
         else{
-            NSDictionary *parameter = @{@"pictureId":imageIds[0], @"isSmall":@"true"};
+            NSDictionary *parameter = @{@"pictureId":[imageIds[0] id], @"isSmall":@"true"};
             REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingPicture parameter:parameter accessCache:YES andMessageMap:nil];
             store.groupName = kGalleryBuildingImageGroupName;
             [store access:^(id data) {
@@ -188,7 +189,7 @@
 {
     int buildingIndex = 0;
     for(int i=0;i<self.buildingInfoArray.count;i++){
-        if([[self.buildingInfoArray[i] building].buildingId isEqualToNumber:buildingId]){
+        if([[self.buildingInfoArray[i] id] isEqualToNumber:buildingId]){
             buildingIndex = i;
             break;
         }
@@ -216,11 +217,11 @@
 {
     REMGalleryCollectionCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier_GalleryCollectionCell forIndexPath:indexPath];
     
-    cell.building = [self.buildingInfoArray[indexPath.row] building];
+    cell.building = self.buildingInfoArray[indexPath.row];
     cell.titleLabel.text = cell.building.name;
     cell.controller = self;
     
-    [self loadBuildingSmallImage:cell.building.pictureIds :^(UIImage *image) {
+    [self loadBuildingSmallImage:[cell.building.pictures allObjects] :^(UIImage *image) {
         UIImage *scaled = [cell resizeImageForCell:image];
         
         [cell.backgroundButton setImage:scaled forState:UIControlStateNormal];

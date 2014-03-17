@@ -9,7 +9,8 @@
 #import "REMDashboardController.h"
 
 #import "REMWidgetMaxViewController.h"
-
+#import "REMManagedSharedModel.h"
+#import "REMManagedDashboardModel.h"
 
 @interface REMDashboardController ()
 
@@ -77,7 +78,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
 #define kDashboardSwitchLabelTop -65
 
 - (NSString *)groupName{
-    return [NSString stringWithFormat:dashboardGroupName,self.buildingInfo.building.buildingId];
+    return [NSString stringWithFormat:dashboardGroupName,self.buildingInfo.id];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
@@ -118,7 +119,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    NSInteger count= self.buildingInfo.dashboardArray.count;
+    NSInteger count= self.buildingInfo.dashboards.count;
     if(count==0){
         return 1;
     }
@@ -127,13 +128,13 @@ static NSString *dashboardGroupName=@"building-data-%@";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (self.buildingInfo.dashboardArray.count==0) {
+    if (self.buildingInfo.dashboards.count==0) {
         return 100;
     }
     
-    REMDashboardObj *obj= self.buildingInfo.dashboardArray[indexPath.section];
+    REMManagedDashboardModel *obj= [self.buildingInfo.dashboards allObjects][indexPath.section];
     CGFloat titleHeight=kDashboardTitleSize+kDashboardTitleBottomMargin+4;
-    if(obj.shareInfo!=nil){
+    if(obj.sharedInfo!=nil){
         titleHeight+=kDashboardShareSize+kDashboardTitleShareMargin;
     }
     CGFloat cellMargin=kDashboardWidgetInnerVerticalMargin;
@@ -158,7 +159,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
     //cell.contentView.layer.borderColor=[UIColor yellowColor].CGColor;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
-    if (self.buildingInfo.dashboardArray.count==0) {
+    if (self.buildingInfo.dashboards.count==0) {
         NSString *emptyText=REMIPadLocalizedString(@"Dashboard_Empty");//未配置任何仪表盘。
         cell.textLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.5];
         cell.textLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:29];
@@ -187,7 +188,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
         REMWidgetCollectionViewController *widgetCollectionController = [[REMWidgetCollectionViewController alloc]initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc]init]];
         
         widgetCollectionController.currentDashboardIndex=indexPath.section;
-        widgetCollectionController.dashboardInfo=self.buildingInfo.dashboardArray[indexPath.section];
+        widgetCollectionController.dashboardInfo=[self.buildingInfo.dashboards allObjects][indexPath.section];
         widgetCollectionController.groupName=[self groupName];
         
         [self addChildViewController:widgetCollectionController];
@@ -199,7 +200,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
     
     
     
-    CGRect viewFrame= [self addTitleForCell:cell withDashboardInfo:self.buildingInfo.dashboardArray[indexPath.section]];
+    CGRect viewFrame= [self addTitleForCell:cell withDashboardInfo:[self.buildingInfo.dashboards allObjects][indexPath.section]];
     
     current.viewFrame=viewFrame;
     cell.tag=indexPath.section;
@@ -226,23 +227,23 @@ static NSString *dashboardGroupName=@"building-data-%@";
     }
 }
 
-- (CGRect)addTitleForCell:(REMDashboardCellViewCell *)cell withDashboardInfo:(REMDashboardObj *)dashboardInfo{
+- (CGRect)addTitleForCell:(REMDashboardCellViewCell *)cell withDashboardInfo:(REMManagedDashboardModel *)dashboardInfo{
     CGRect frame=cell.contentView.frame;
     CGRect shareFrame;
-    if(dashboardInfo.shareInfo!=nil && [dashboardInfo.shareInfo isEqual:[NSNull null]]== NO && [dashboardInfo.shareInfo.userRealName isEqual:[NSNull null]]==NO){
+    if(dashboardInfo.sharedInfo!=nil && [dashboardInfo.sharedInfo isEqual:[NSNull null]]== NO && [dashboardInfo.sharedInfo.userRealName isEqual:[NSNull null]]==NO){
         shareFrame = CGRectMake(0, 0, frame.size.width, kDashboardShareSize);
         UILabel *shareLabel=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x, shareFrame.origin.y, frame.size.width, shareFrame.size.height)];
         //shareLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.8];
         shareLabel.textColor=[UIColor whiteColor];
         shareLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardShareSize];
         [shareLabel setBackgroundColor:[UIColor clearColor]];
-        NSString *shareName=dashboardInfo.shareInfo.userRealName;
-        NSString *shareTel=dashboardInfo.shareInfo.userTelephone;
-        NSString *date=[REMTimeHelper formatTimeFullDay:dashboardInfo.shareInfo.shareTime isChangeTo24Hour:NO];
-        NSString *userTitle=dashboardInfo.shareInfo.userTitleComponent;
+        REMManagedSharedModel *sharedObj =dashboardInfo.sharedInfo;
+        NSString *shareName=sharedObj.userRealName;
+        NSString *shareTel=sharedObj.userTelephone;
+        NSString *date=[REMTimeHelper formatTimeFullDay:sharedObj.shareTime isChangeTo24Hour:NO];
+        NSString *userTitle=dashboardInfo.sharedInfo.userTitleComponent;
         shareLabel.text=[NSString stringWithFormat:REMIPadLocalizedString(@"Widget_ShareTitle"),shareName,userTitle,date,shareTel];
         [cell.contentView addSubview:shareLabel];
-        //shareFrame=CGRectMake(shareFrame.origin.x, shareFrame.origin.y+shareFrame.size.height, shareFrame.size.width, shareFrame.size.height);
     }
     else{
         shareFrame = CGRectMake(0, 0, frame.size.width, 0);

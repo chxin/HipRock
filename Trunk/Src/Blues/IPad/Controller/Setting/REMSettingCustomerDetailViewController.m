@@ -10,6 +10,7 @@
 #import "REMTimeHelper.h"
 #import "REMAdministratorModel.h"
 #import "REMSettingCustomerDetailAdminViewController.h"
+#import "REMManagedAdministratorModel.h"
 
 @interface REMSettingCustomerDetailViewController ()
 
@@ -53,7 +54,7 @@ static NSString * cellId=@"customerCell";
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
     }
     
-    REMCustomerModel *customer = REMAppCurrentCustomer;
+    REMManagedCustomerModel *customer = REMAppCurrentManagedCustomer;
     
     
     if(indexPath.row==0){
@@ -93,21 +94,21 @@ static NSString * cellId=@"customerCell";
     else if(indexPath.row==7){
         cell.textLabel.text=REMIPadLocalizedString(@"Setting_DetailCustomerAdmin"); //@"客户管理员";
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        if(customer.administratorArray.count==1){
-            REMAdministratorModel *model=customer.administratorArray[0];
+        if(customer.administrators.count==1){
+            REMManagedAdministratorModel *model=customer.administrators.allObjects[0];
             cell.detailTextLabel.text=model.realName;
         }
-        else if(customer.administratorArray.count==2){
-            REMAdministratorModel *model=customer.administratorArray[0];
-            REMAdministratorModel *model1=customer.administratorArray[1];
-            NSString *str=REMIPadLocalizedString(@"Setting_DetailCustomerAdminTwoName"); //@"%@和%@"
+        else if(customer.administrators.count==2){
+            REMManagedAdministratorModel *model=customer.administrators.allObjects[0];
+            REMManagedAdministratorModel *model1=customer.administrators.allObjects[1];
+            NSString *str=NSLocalizedString(@"Setting_DetailCustomerAdminTwoName", @""); //@"%@和%@"
             cell.detailTextLabel.text=[NSString stringWithFormat:str,model.realName,model1.realName];
         }
-        else if (customer.administratorArray.count>2){
-            REMAdministratorModel *model=customer.administratorArray[0];
-            REMAdministratorModel *model1=customer.administratorArray[1];
-            NSString *str=REMIPadLocalizedString(@"Setting_DetailCustomerAdminThreeName"); //%@和%@等%d人
-            cell.detailTextLabel.text=[NSString stringWithFormat:str,model.realName,model1.realName,customer.administratorArray.count];
+        else if (customer.administrators.count>2){
+            REMManagedAdministratorModel *model=customer.administrators.allObjects[0];
+            REMManagedAdministratorModel *model1=customer.administrators.allObjects[1];
+            NSString *str=NSLocalizedString(@"Setting_DetailCustomerAdminThreeName", @""); //%@和%@等%d人
+            cell.detailTextLabel.text=[NSString stringWithFormat:str,model.realName,model1.realName,customer.administrators.count];
         }
     }
     

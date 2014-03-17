@@ -9,12 +9,13 @@
 #import "REMEnergySeacherBase.h"
 #import "REMEnergyMultiTimeSearcher.h"
 #import "REMEnergyCostElectricitySearcher.h"
-
+#import "REMManagedEnergyDataModel.h"
+#import "REMEnergyDataPersistenceProcessor.h"
 
 
 @implementation REMEnergySeacherBase
 
-+ (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType)storeType withWidgetInfo:(REMWidgetObject *)widgetInfo
++ (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType)storeType withWidgetInfo:(REMManagedWidgetModel *)widgetInfo andSyntax:(REMWidgetContentSyntax *)contentSyntax
 {
     REMEnergySeacherBase *obj;
     if (storeType == REMDSEnergyMultiTimeDistribute ||storeType == REMDSEnergyMultiTimeTrend) {
@@ -27,6 +28,7 @@
         obj=[[REMEnergySeacherBase alloc]init];
     }
     obj.widgetInfo=widgetInfo;
+    obj.contentSyntax = contentSyntax;
     obj.disableNetworkAlert=NO;
     return  obj;
 }
@@ -73,10 +75,8 @@
         return;
     }
     
-    
     REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:[model toSearchParam] accessCache:YES andMessageMap:nil];
-    //store.maskContainer=maskerContainer;
-    
+    store.persistenceProcessor = [[REMEnergyDataPersistenceProcessor alloc] init];
     store.disableAlert=self.disableNetworkAlert;
    
     //[activitor setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];

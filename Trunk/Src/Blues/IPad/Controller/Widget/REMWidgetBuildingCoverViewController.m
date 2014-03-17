@@ -168,12 +168,12 @@
     NSMutableArray *array=[NSMutableArray array];
     for (NSIndexPath *path in self.currentSelectedArray) {
         NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-        dic[@"HierarchyId"]=self.buildingInfo.building.buildingId;
-        dic[@"WidgetId"]=self.detailController.widgetInfo.widgetId;
-        dic[@"DashboardId"]=self.dashboardInfo.dashboardId;
+        dic[@"HierarchyId"]=self.buildingInfo.id;
+        dic[@"WidgetId"]=self.detailController.widgetInfo.id;
+        dic[@"DashboardId"]=self.dashboardInfo.id;
         
-        REMCommodityModel *commodity=self.buildingInfo.commodityArray[path.section-1];
-        dic[@"CommodityId"]=commodity.commodityId;
+        REMManagedBuildingCommodityUsageModel *commodity=[self.buildingInfo.commodities allObjects][path.section-1];
+        dic[@"CommodityId"]=commodity.id;
         dic[@"Position"]= @((REMBuildingCoverWidgetPosition)path.row);
         
         [array addObject:dic];
@@ -188,24 +188,24 @@
         }
         if (found==NO) {
             NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-            dic[@"HierarchyId"]=self.buildingInfo.building.buildingId;
-            dic[@"WidgetId"]=self.detailController.widgetInfo.widgetId;
-            dic[@"DashboardId"]=self.dashboardInfo.dashboardId;
+            dic[@"HierarchyId"]=self.buildingInfo.id;
+            dic[@"WidgetId"]=self.detailController.widgetInfo.id;
+            dic[@"DashboardId"]=self.dashboardInfo.id;
             
-            REMCommodityModel *commodity=self.buildingInfo.commodityArray[path.section-1];
-            dic[@"CommodityId"]=commodity.commodityId;
+            REMManagedBuildingCommodityUsageModel *commodity=[self.buildingInfo.commodities allObjects][path.section-1];
+            dic[@"CommodityId"]=commodity.id;
             dic[@"Position"]= @(path.row-2);
             [array addObject:dic];
         }
         
     }
     self.isRequesting=YES;
-    REMCustomerModel *customer=REMAppCurrentCustomer;
+    REMManagedCustomerModel *customer=REMAppCurrentManagedCustomer;
     REMPinToBuildingCoverHelper *helper=[[REMPinToBuildingCoverHelper alloc]init];
     self.pinHelper=helper;
     helper.mainNavigationController=(REMMainNavigationController *)self.detailController.parentViewController.navigationController;
     helper.widgetName=self.detailController.widgetInfo.name;
-    [helper pinToBuildingCover:@{@"relationList":array,@"buildingId":self.buildingInfo.building.buildingId,@"customerId":customer.customerId} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
+    [helper pinToBuildingCover:@{@"relationList":array,@"buildingId":self.buildingInfo.id,@"customerId":customer.id} withBuildingInfo:self.buildingInfo withCallback:^(REMPinToBuildingCoverStatus status){
         if (status == REMPinToBuildingCoverStatusSuccess) {
             self.pinHelper=nil;
             [self.detailController updateBuildingCover];

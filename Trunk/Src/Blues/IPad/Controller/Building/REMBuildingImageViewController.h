@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "REMBuildingOverallModel.h"
 #import "REMControllerBase.h"
-
+#import "REMManagedBuildingModel.h"
 
 typedef enum _REMBuildingCoverStatus{
     REMBuildingCoverStatusCoverPage,
@@ -23,7 +23,7 @@ typedef enum _REMBuildingCoverStatus{
 @property (nonatomic,weak) UIImage *defaultBlurImage;
 @property (nonatomic) CGRect viewFrame;
 
-@property (nonatomic,weak) REMBuildingOverallModel *buildingInfo;
+@property (nonatomic,weak) REMManagedBuildingModel *buildingInfo;
 
 @property (nonatomic) REMBuildingCoverStatus currentCoverStatus;
 

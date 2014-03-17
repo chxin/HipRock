@@ -9,6 +9,6 @@
 
 @interface REMRankingTooltipView : REMTrendChartTooltipView
 
--(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points inSerieses:(NSArray *)serieses widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
+-(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points inSerieses:(NSArray *)serieses widget:(REMManagedWidgetModel *)widget andParameters:(REMWidgetSearchModelBase *)parameters;
 
 @end

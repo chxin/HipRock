@@ -16,6 +16,8 @@
 #import "REMAlertHelper.h"
 #import "REMApplicationContext.h"
 #import "REMBusinessErrorInfo.h"
+#import "REMAppDelegate.h"
+
 
 @class REMDataPersistenceProcessor;
 
@@ -145,6 +147,13 @@ static REMCacheStoreHolder *cacheStoreHolder;
 #pragma mark - private
 - (void)accessLocal:(REMDataAccessSuccessBlock)success
 {
+    if (self.persistenceProcessor!=nil) {
+       id data = [self.persistenceProcessor fetchData];
+        success(data);
+        return;
+    }
+    
+    
     id cachedResult = nil;
     NSString *cacheKey = [REMServiceAgent buildParameterString:self.parameter];
     
@@ -175,7 +184,7 @@ static REMCacheStoreHolder *cacheStoreHolder;
             [[REMApplicationContext instance] setCacheMode:NO];
         }
         id newData = data;
-        if (self.persistenceProcessor!=nil) {
+        if (self.persistenceProcessor!=nil && self.persistManually==NO) {
             newData = [self.persistenceProcessor persistData:data];
         }
         
@@ -206,6 +215,47 @@ static REMCacheStoreHolder *cacheStoreHolder;
 
 #pragma mark - coredata
 
+- (id)newManagedObject:(NSString *)objectType{
+    return [NSEntityDescription insertNewObjectForEntityForName:objectType inManagedObjectContext:self.managedObjectContext];
+}
+
+- (void)deleteManageObject:(NSManagedObject *)object
+{
+    [self.managedObjectContext deleteObject:object];
+    [self persistManageObject];
+}
+
+- (void)persistManageObject{
+    NSError *error = nil;
+    [self.managedObjectContext save:&error];
+}
+
+- (id)fetchMangedObject:(NSString *)objectType withPredicate:(NSPredicate *)predicate{
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:objectType];
+    [request setPredicate:predicate];
+    NSError *error = nil;
+    //执行获取数据请求，返回数组
+    NSMutableArray *mutableFetchResult = [[self.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    if (mutableFetchResult == nil) {
+        NSLog(@"Error: %@,%@",error,[error userInfo]);
+    }
+    
+    return mutableFetchResult;
+}
+
+-(id)fetchMangedObject:(NSString *)objectType{
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:objectType];
+    
+    NSError *error = nil;
+    //执行获取数据请求，返回数组
+    NSMutableArray *mutableFetchResult = [[self.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    if (mutableFetchResult == nil) {
+        NSLog(@"Error: %@,%@",error,[error userInfo]);
+    }
+    
+    return mutableFetchResult;
+}
+
 - (void)setPersistenceProcessor:(REMDataPersistenceProcessor *)persistenceProcessor
 {
     _persistenceProcessor = persistenceProcessor;
@@ -214,50 +264,24 @@ static REMCacheStoreHolder *cacheStoreHolder;
 
 -(NSManagedObjectModel *)managedObjectModel
 {
-    if (_managedObjectModel != nil) {
-        return _managedObjectModel;
-    }
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"BluesPad" ofType:@"momd"];
-    NSURL *momURL = [NSURL fileURLWithPath:path];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
+    REMAppDelegate *app = [REMAppDelegate app];
     
-    return _managedObjectModel;
-}
+    return app.managedObjectModel;
 
+}
 -(NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
-    if (_persistentStoreCoordinator != nil) {
-        return _persistentStoreCoordinator;
-    }
+    REMAppDelegate *app = [REMAppDelegate app];
     
-    //得到数据库的路径
-    NSString *docs = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    //CoreData是建立在SQLite之上的，数据库名称需与Xcdatamodel文件同名
-    NSURL *storeUrl = [NSURL fileURLWithPath:[docs stringByAppendingPathComponent:@"BluesPad.sqlite"]];
-    NSError *error = nil;
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:[self managedObjectModel]];
-    
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error]) {
-        NSLog(@"Error: %@,%@",error,[error userInfo]);
-    }
-    
-    return _persistentStoreCoordinator;
+    return app.persistentStoreCoordinator;
 }
 
 -(NSManagedObjectContext *)managedObjectContext
 {
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;
-    }
+    REMAppDelegate *app = [REMAppDelegate app];
     
-    NSPersistentStoreCoordinator *coordinator =[self persistentStoreCoordinator];
+    return app.managedObjectContext;
     
-    if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc]init];
-        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    }
-    
-    return _managedObjectContext;
 }
 
 

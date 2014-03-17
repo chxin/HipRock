@@ -2,7 +2,7 @@
 //  REMManagedUserModel.m
 //  Blues
 //
-//  Created by tantan on 2/19/14.
+//  Created by tantan on 2/20/14.
 //
 //
 
@@ -21,6 +21,10 @@
 @dynamic title;
 @dynamic userTypeName;
 @dynamic version;
+@dynamic id;
+@dynamic code;
+@dynamic name;
+@dynamic comment;
 @dynamic customers;
 
 @end

@@ -21,12 +21,13 @@
 #define REMSeriesIsMultiTime [self.parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]]
 
 
-+(REMChartLegendBase *)legendViewChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget parameters:(REMWidgetSearchModelBase *)parameters
++(REMChartLegendBase *)legendViewChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget parameters:(REMWidgetSearchModelBase *)parameters
 {
-    if(widget.diagramType == REMDiagramTypePie){
+    REMDiagramType diagramType = (REMDiagramType)[widget.diagramType intValue];
+    if(diagramType == REMDiagramTypePie){
         return [[REMPieChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters];
     }
-    else if(widget.diagramType == REMDiagramTypeStackColumn){
+    else if(diagramType == REMDiagramTypeStackColumn){
         return [[REMStackChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters];
     }
     else{
@@ -34,7 +35,7 @@
     }
 }
 
--(REMChartLegendBase *)initWithChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget parameters:(REMWidgetSearchModelBase *)parameters
+-(REMChartLegendBase *)initWithChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget parameters:(REMWidgetSearchModelBase *)parameters
 {
     self = [super initWithFrame:kDMChart_ToolbarHiddenFrame];
     

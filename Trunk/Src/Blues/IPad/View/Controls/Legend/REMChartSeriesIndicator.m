@@ -9,7 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "REMChartSeriesIndicator.h"
 #import "REMDimensions.h"
-
+#import "REMEnum.h"
 @interface REMChartSeriesIndicator()
 
 @property (nonatomic) REMChartSeriesIndicatorType type;

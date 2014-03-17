@@ -13,7 +13,7 @@
 
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
-    self.user = [[REMUserModel alloc] initWithDictionary:dictionary[@"User"]];
+    //self.user = [[REMUserModel alloc] initWithDictionary:dictionary[@"User"]];
     self.status = [dictionary[@"ValidationStatus"] intValue];
 }
 

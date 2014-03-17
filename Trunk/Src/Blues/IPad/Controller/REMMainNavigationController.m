@@ -13,7 +13,8 @@
 #import "REMStoryboardDefinitions.h"
 #import "REMMapGallerySegue.h"
 #import "REMColor.h"
-
+#import "REMApplicationContext.h"
+#import "REMStorage.h"
 @interface REMMainNavigationController ()
 
 @end
@@ -76,11 +77,11 @@
 -(void)logout
 {
     REMApplicationContext *context=REMAppContext;
-    REMUserModel *currentUser = context.currentUser;
-    REMCustomerModel *currentCustomer = context.currentCustomer;
+    REMManagedUserModel *currentUser = context.currentManagedUser;
+    REMManagedCustomerModel *currentCustomer = context.currentManagedCustomer;
     
-    [currentUser kill];
-    [currentCustomer kill];
+    //[currentUser kill];
+    //[currentCustomer kill];
     currentUser = nil;
     currentCustomer = nil;
     context.updateManager = nil;

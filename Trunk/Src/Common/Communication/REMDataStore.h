@@ -23,6 +23,7 @@
 @property (nonatomic) BOOL disableAlert;
 @property (nonatomic,weak) REMDataStore *parentStore;
 @property (nonatomic,strong) REMDataPersistenceProcessor *persistenceProcessor;
+@property (nonatomic) BOOL persistManually;
 
 //数据模型对象
 @property(nonatomic,strong) NSManagedObjectModel *managedObjectModel;
@@ -31,7 +32,11 @@
 //持久性存储区
 @property(nonatomic,strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-
+- (id)newManagedObject:(NSString *)objectType;
+- (id)fetchMangedObject:(NSString *)objectType;
+- (id)fetchMangedObject:(NSString *)objectType withPredicate:(NSPredicate *)predicate;
+- (void)deleteManageObject:(NSManagedObject *)object;
+-(void)persistManageObject;
 
 - (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter accessCache:(BOOL)accessCache andMessageMap:(NSDictionary *)messageMap;
 

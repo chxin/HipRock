@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "REMEnum.h"
-#import "REMWidgetObject.h"
+#import "REMWidgetContentSyntax.h"
 
 
 @interface DWrapperConfig : NSObject
@@ -27,5 +27,5 @@
 
 @property (nonatomic) REMRelativeTimeRangeType relativeDateType; // Cover用电趋势图
 
--(id)initWith:(REMWidgetObject*)widgetObj;
+-(id)initWith:(REMWidgetContentSyntax*)contentSyntax;
 @end

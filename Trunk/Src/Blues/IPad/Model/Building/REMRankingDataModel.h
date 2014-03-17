@@ -11,6 +11,6 @@
 
 @interface REMRankingDataModel : REMJSONObject
 
-@property (nonatomic) NSInteger numerator,denominator;
+@property (nonatomic,strong) NSNumber *numerator,*denominator;
 
 @end

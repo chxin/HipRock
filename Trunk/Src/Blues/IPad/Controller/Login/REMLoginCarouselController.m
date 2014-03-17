@@ -16,7 +16,7 @@
 #import "REMTrialCardController.h"
 #import "REMLoginTitledCard.h"
 #import "REMLoginCustomerTableViewController.h"
-
+#import "REMApplicationContext.h"
 @interface REMLoginCarouselController ()
 
 
@@ -282,8 +282,8 @@ static const int kTrialCardIndex = kCardCount - 2;
 
 -(void)loginSuccess
 {
-    [REMAppCurrentUser save];
-    [REMAppCurrentCustomer save];
+    //[REMAppCurrentUser save];
+    //[REMAppCurrentCustomer save];
     
     [self.splashScreenController showMapView ];
     [self setLoginButtonStatusNormal];
@@ -291,9 +291,9 @@ static const int kTrialCardIndex = kCardCount - 2;
 
 #pragma mark  Customer selection delegate
 
--(void)customerSelectionTableView:(UITableView *)table didSelectCustomer:(REMCustomerModel *)customer
+-(void)customerSelectionTableView:(UITableView *)table didSelectCustomer:(REMManagedCustomerModel *)customer
 {
-    [REMAppContext setCurrentCustomer:customer];
+    [REMAppContext setCurrentManagedCustomer:customer];
     [self loginSuccess];
 }
 -(void)customerSelectionTableViewdidDismissView

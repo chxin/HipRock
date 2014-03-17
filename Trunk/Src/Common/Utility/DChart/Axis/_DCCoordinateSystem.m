@@ -13,7 +13,7 @@
 #import "_DCColumnsLayer.h"
 #import "DCXYChartView.h"
 #import "_DCYAxisLabelLayer.h"
-
+#import "REMNumberExtension.h"
 @interface _DCCoordinateSystem()
 //@property (nonatomic, strong) NSMutableArray* visableSeries;
 

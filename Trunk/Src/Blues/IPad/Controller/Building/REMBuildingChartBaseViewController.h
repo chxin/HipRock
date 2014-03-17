@@ -11,6 +11,7 @@
 #import "REMError.h"
 #import "REMWidgetObject.h"
 #import "DCTrendWrapper.h"
+#import "REMManagedWidgetModel.h"
 
 @interface REMBuildingChartBaseViewController: UIViewController
 
@@ -19,7 +20,7 @@
 @property (nonatomic, strong) REMEnergyViewData* energyViewData;
 @property (nonatomic, weak, readonly) UILabel* textLabel;
 @property (nonatomic, strong) NSString* wrapperClassName;
-@property (nonatomic,weak) REMWidgetObject *widgetInfo;
+@property (nonatomic,weak) REMManagedWidgetModel *widgetInfo;
 @property (nonatomic) CGRect viewFrame;
 //- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame;
 

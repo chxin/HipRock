@@ -99,7 +99,7 @@ static NSString *cellId=@"widgetcell";
     else{
         controller=[[REMWidgetCellViewController alloc]init];
         controller.viewFrame=cell.contentView.bounds;
-        REMWidgetObject *widget=self.dashboardInfo.widgets[indexPath.row];
+        REMManagedWidgetModel *widget=[self.dashboardInfo.widgets allObjects][indexPath.row];
         
         controller.widgetInfo=widget;
         
@@ -121,14 +121,14 @@ static NSString *cellId=@"widgetcell";
 - (void)maxWidget{
 
     
-    REMWidgetObject *obj=self.dashboardInfo.widgets[self.currentMaxWidgetIndex];
+    REMManagedWidgetModel *obj=[self.dashboardInfo.widgets allObjects][self.currentMaxWidgetIndex];
     
-    self.currentMaxWidgetId=obj.widgetId;
+    self.currentMaxWidgetId=obj.id;
     
     REMDashboardController *parent=(REMDashboardController *)self.parentViewController;
     
     parent.currentMaxDashboardIndex=self.currentDashboardIndex;
-    parent.currentMaxDashboardId=self.dashboardInfo.dashboardId;
+    parent.currentMaxDashboardId=self.dashboardInfo.id;
     
     [parent maxWidget];
     

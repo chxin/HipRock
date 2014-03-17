@@ -14,9 +14,10 @@
 #import "REMBuildingCoverWidgetRelationModel.h"
 #import "REMBuildingCoverWidgetViewController.h"
 #import "REMBuildingWidgetChartViewController.h"
-#import "REMCommonHeaders.h"
-
-
+#import "REMManagedWidgetModel.h"
+#import "REMManagedDashboardModel.h"
+#import "REMManagedPinnedWidgetModel.h"
+#import "REMCommodityUsageValuePersistenceProcessor.h"
 @interface REMBuildingCommodityViewController ()
 
 //typedef void(^SuccessCallback)(BOOL success);
@@ -63,7 +64,7 @@
     [self initDetailValue];
     [self initChartContainer];
     if(self.commodityUsage==nil){
-        [self loadTotalUsageByBuildingId:self.buildingInfo.building.buildingId ByCommodityId:self.commodityInfo.commodityId];
+        [self loadTotalUsageByBuildingId:self.buildingInfo.id ByCommodityId:self.commodityInfo.id];
     }
     else{
         [self addDataLabel];
@@ -84,15 +85,30 @@
 }
 
 - (void)addDataLabel{
-    REMCommodityUsageModel *model=self.commodityUsage;
-    self.totalLabel.data=model.commodityUsage;
-    self.carbonLabel.data=model.carbonEquivalent;
-    self.rankingLabel.data=model.rankingData;
+    REMManagedBuildingCommodityUsageModel *model=self.commodityUsage;
+    REMEnergyUsageDataModel *commodityUsage = [[REMEnergyUsageDataModel alloc]init];
+    commodityUsage.dataValue = model.totalValue;
+    commodityUsage.uom = [[REMUomModel alloc]init];
+    commodityUsage.uom.code=model.totalUom;
+    self.totalLabel.data=commodityUsage;
+    
+    REMEnergyUsageDataModel *carbonUsage = [[REMEnergyUsageDataModel alloc]init];
+    commodityUsage.dataValue = model.carbonValue;
+    commodityUsage.uom = [[REMUomModel alloc]init];
+    commodityUsage.uom.code=model.carbonUom;
+    self.carbonLabel.data=carbonUsage;
+    
+    REMRankingDataModel *rankingUsage = [[REMRankingDataModel alloc]init];
+    rankingUsage.denominator = model.rankingDenominator;
+    rankingUsage.numerator = model.rankingNumerator;
+    
+    self.rankingLabel.data = rankingUsage;
     [self loadedPart];
+    
     if(model.targetValue!=nil &&
        model.targetValue!=nil &&
-       ![model.targetValue.dataValue isEqual:[NSNull null]] &&
-       [model.targetValue.dataValue isGreaterThan:@(0)])
+       ![model.targetValue isEqual:[NSNull null]] &&
+       [model.targetValue isGreaterThan:@(0)])
     {
         REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, self.rankingLabel.frame.origin.y, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
         target.title=REMIPadLocalizedString(@"Building_Target"); //@"目标值";
@@ -104,9 +120,9 @@
         target.uomFontSize=kBuildingCommodityDetailUomFontSize;
         [target showTitle];
         [self addSplitBar:target];
-        if (model.commodityUsage!=nil && model.commodityUsage.dataValue!=nil &&
-            [model.commodityUsage.dataValue isEqual:[NSNull null]] == NO) {
-            if(model.isTargetAchieved==YES){
+        if (model.totalValue!=nil &&
+            [model.totalValue isEqual:[NSNull null]] == NO) {
+            if([model.isTargetAchieved boolValue]==YES){
                 [target setTitleIcon:[UIImage imageNamed:@"OverTarget"] ];
             }
             else{
@@ -116,7 +132,12 @@
         
         [self.view addSubview:target];
         self.targetLabel=target;
-        self.targetLabel.data=model.targetValue;
+        
+        REMEnergyUsageDataModel *targetUsage = [[REMEnergyUsageDataModel alloc]init];
+        targetUsage.dataValue = model.targetValue;
+        targetUsage.uom = [[REMUomModel alloc]init];
+        targetUsage.uom.code=model.targetUom;
+        self.targetLabel.data=targetUsage;
     }
 }
 
@@ -126,21 +147,27 @@
     REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSBuildingCommodityTotalUsage parameter:param accessCache:YES andMessageMap:nil];
     store.maskContainer = nil;
     store.disableAlert=YES;
+    REMCommodityUsageValuePersistenceProcessor *processor = [[REMCommodityUsageValuePersistenceProcessor alloc] init];
+    processor.commodityInfo = self.commodityInfo;
+    store.persistenceProcessor = processor;
+    
     store.groupName = [NSString stringWithFormat:@"building-data-%@", buildingId];
     [self.totalLabel showLoading];
     [self.carbonLabel showLoading];
     [self.rankingLabel showLoading];
-    [store access:^(NSDictionary *data) {
-        REMCommodityUsageModel *model=nil;
-        if([data isEqual:[NSNull null]]==YES){
-            model=nil;
-        }
-        else{
-            model=[[REMCommodityUsageModel alloc]initWithDictionary:data];
-            if(model!=nil){
-                self.commodityUsage=model;
-            }
-        }
+    [store access:^(REMManagedBuildingCommodityUsageModel *data) {
+//        REMCommodityUsageModel *model=nil;
+//        if([data isEqual:[NSNull null]]==YES){
+//            model=nil;
+//        }
+//        else{
+//            model=[[REMCommodityUsageModel alloc]initWithDictionary:data];
+//            if(model!=nil){
+//                self.commodityUsage=model;
+//            }
+//        }
+        self.commodityUsage = data;
+        
         [self.totalLabel hideLoading];
         [self.carbonLabel hideLoading];
         [self.rankingLabel hideLoading];
@@ -282,70 +309,76 @@
     
 }
 
-- (REMDashboardObj *)dashboardInfoByPosition:(REMBuildingCoverWidgetPosition)position
+- (REMManagedDashboardModel *)dashboardInfoByPosition:(REMBuildingCoverWidgetPosition)position
 {
-    REMBuildingCoverWidgetRelationModel *currentRelation=nil;
-    for (REMBuildingCoverWidgetRelationModel *relation in self.buildingInfo.widgetRelationArray) {
-        if ([relation.buildingId isEqualToNumber:self.buildingInfo.building.buildingId] && [relation.commodityId isEqualToNumber:self.commodityInfo.commodityId] &&
-            relation.position == position) {
+    REMManagedPinnedWidgetModel *currentRelation=nil;
+    for (REMManagedPinnedWidgetModel *relation in self.commodityInfo.pinnedWidgets) {
+        if ((REMBuildingCoverWidgetPosition)[relation.position intValue]  == position) {
             currentRelation = relation;
             break;
         }
     }
     if (currentRelation!=nil) {
-        NSArray *array=self.buildingInfo.dashboardArray;
-        for (REMDashboardObj *dashboard in array) {
-            if ([dashboard.dashboardId isEqualToNumber:currentRelation.dashboardId]==YES) {
+        NSArray *array=[self.buildingInfo.dashboards allObjects];
+        for (REMManagedDashboardModel *dashboard in array) {
+            if ([dashboard.id isEqualToNumber:currentRelation.dashboardId]==YES) {
                 return dashboard;
             }
         }
         if ([currentRelation.dashboardId isEqualToNumber:@(-1)]==YES) {
-            REMDashboardObj *dashboard=[[REMDashboardObj alloc]init];
-            dashboard.dashboardId=currentRelation.dashboardId;
+            REMDataStore *store = [[REMDataStore alloc]init];
+            REMManagedDashboardModel *dashboard=[store newManagedObject:@"REMManagedDashboardModel"];
+            dashboard.id=currentRelation.dashboardId;
+
             return dashboard;
         }
     }
     else{
-        REMDashboardObj *dashboard=[[REMDashboardObj alloc]init];
-        dashboard.dashboardId=@(-1);
+        REMDataStore *store = [[REMDataStore alloc]init];
+        REMManagedDashboardModel *dashboard=[store newManagedObject:@"REMManagedDashboardModel"];
+        dashboard.id=@(-1);
         return dashboard;
     }
     return nil;
 }
 
-- (REMWidgetObject *)widgetInfoByPosition:(REMBuildingCoverWidgetPosition)position{
-    REMBuildingCoverWidgetRelationModel *currentRelation;
-    for (REMBuildingCoverWidgetRelationModel *relation in self.buildingInfo.widgetRelationArray) {
-        if ([relation.buildingId isEqualToNumber:self.buildingInfo.building.buildingId] && [relation.commodityId isEqualToNumber:self.commodityInfo.commodityId] &&
-            relation.position == position) {
+- (REMManagedWidgetModel *)widgetInfoByPosition:(REMBuildingCoverWidgetPosition)position{
+    REMManagedPinnedWidgetModel *currentRelation;
+    
+    for (REMManagedPinnedWidgetModel *relation in self.commodityInfo.pinnedWidgets) {
+        if (((REMBuildingCoverWidgetPosition)[relation.position intValue]) == position) {
             currentRelation = relation;
             break;
         }
     }
     if (currentRelation) {
-        for (REMDashboardObj *dashboard in self.buildingInfo.dashboardArray) {
-            if ([dashboard.dashboardId isEqualToNumber:currentRelation.dashboardId]==YES) {
-                for (REMWidgetObject *widget in dashboard.widgets) {
-                    if ([widget.widgetId isEqualToNumber:currentRelation.widgetId] && position == currentRelation.position) {
+        for (REMManagedDashboardModel *dashboard in [self.buildingInfo.dashboards allObjects]) {
+            if ([dashboard.id isEqualToNumber:currentRelation.dashboardId]==YES) {
+                for (REMManagedWidgetModel *widget in dashboard.widgets) {
+                    if ([widget.id isEqualToNumber:currentRelation.widgetId] && position  == ((REMBuildingCoverWidgetPosition)[currentRelation.position intValue])) {
                         return widget;
                     }
                 }
             }
         }
         if ([currentRelation.dashboardId isEqualToNumber:@(-1)]==YES) {
-            REMWidgetObject *widget=[[REMWidgetObject alloc]init];
-            widget.widgetId=currentRelation.widgetId;
+            REMDataStore *store = [[REMDataStore alloc]init];
+            REMManagedWidgetModel *widget=[store newManagedObject:@"REMManagedWidgetModel"];
+            widget.id=currentRelation.widgetId;
             return widget;
         }
     }
     else{
-        REMWidgetObject *widget=[[REMWidgetObject alloc]init];
-        widget.dashboardId=@(-1);
+        REMDataStore *store = [[REMDataStore alloc]init];
+        REMManagedWidgetModel *widget=[store newManagedObject:@"REMManagedWidgetModel"];
+        REMManagedDashboardModel *dashboard = [store newManagedObject:@"REMManagedDashboardModel"];
+        dashboard.id=@(-1);
+        widget.dashboard=dashboard;
         if (position == REMBuildingCoverWidgetPositionFirst) {
-            widget.widgetId=@(-1);
+            widget.id=@(-1);
         }
         else{
-            widget.widgetId=@(-2);
+            widget.id=@(-2);
         }
         
         return widget;
@@ -354,17 +387,32 @@
     return nil;
 }
 
+- (NSArray *)trendWidgetArray:(REMManagedDashboardModel *)dashboard{
+    NSMutableArray *array=[NSMutableArray array];
+    for (int i=0; i<dashboard.widgets.count; ++i) {
+        REMManagedWidgetModel *widget=[dashboard.widgets allObjects][i];
+        REMDiagramType diagramType = (REMDiagramType)[widget.diagramType intValue];
+        if (diagramType == REMDiagramTypeColumn ||
+            diagramType == REMDiagramTypeLine ||
+            diagramType == REMDiagramTypeRanking ||
+            diagramType == REMDiagramTypeStackColumn) {
+            [array addObject:widget];
+        }
+    }
+    
+    return array;
+}
 
 
 - (NSDictionary *)dashboardArrayForPiningWidget{
     NSMutableArray *dashboardList = [NSMutableArray array];
     NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    for (int i=0; i<self.buildingInfo.dashboardArray.count; ++i) {
-        REMDashboardObj *dashboard = self.buildingInfo.dashboardArray[i];
-        NSArray *widgetList = [dashboard trendWidgetArray];
+    for (int i=0; i<self.buildingInfo.dashboards.count; ++i) {
+        REMManagedDashboardModel *dashboard = [self.buildingInfo.dashboards allObjects][i];
+        NSArray *widgetList = [self trendWidgetArray:dashboard];
         if (widgetList.count!=0) {
             [dashboardList addObject:dashboard];
-            [dic setObject:widgetList forKey:dashboard.dashboardId];
+            [dic setObject:widgetList forKey:dashboard.id];
         }
     }
     return  @{@"list":dashboardList,@"widget":dic};
@@ -373,13 +421,14 @@
 
 - (NSString *)chartTitleByPosition:(REMBuildingCoverWidgetPosition)position
 {
-    REMWidgetObject *widgetInfo=[self widgetInfoByPosition:position];
-    if (self.buildingInfo.widgetRelationArray==nil || widgetInfo==nil || [widgetInfo.widgetId isLessThan:@(0)]==YES) {
+    
+    REMManagedWidgetModel *widgetInfo=[self widgetInfoByPosition:position];
+    if (self.commodityInfo.pinnedWidgets==nil || widgetInfo==nil || [widgetInfo.id isLessThan:@(0)]==YES) {
         NSString *title=REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth");//单位面积逐月用%@
-        if ([widgetInfo.widgetId isEqualToNumber:@(-1)]==YES) {
+        if ([widgetInfo.id isEqualToNumber:@(-1)]==YES) {
             title = REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth");//单位面积逐月用%@
         }
-        else if([widgetInfo.widgetId isEqualToNumber:@(-2)]==YES){
+        else if([widgetInfo.id isEqualToNumber:@(-2)]==YES){
             title = REMIPadLocalizedString(@"Building_EnergyUsageByCommodity");//用%@趋势图
         }
         else{
@@ -480,9 +529,9 @@
 
 - (REMBuildingChartContainerViewController *)chartContainerControllerByPosition:(REMBuildingCoverWidgetPosition)position{
     REMBuildingChartContainerViewController *controller=[[REMBuildingChartContainerViewController alloc] init];
-    REMWidgetObject *widget=[self widgetInfoByPosition:position];
-    if ([widget.widgetId isLessThan:@(0)]==YES) {
-        if ([widget.widgetId isEqualToNumber:@(-1)]==YES) {
+    REMManagedWidgetModel *widget=[self widgetInfoByPosition:position];
+    if ([widget.id isLessThan:@(0)]==YES) {
+        if ([widget.id isEqualToNumber:@(-1)]==YES) {
             controller.chartHandlerClass=[REMBuildingAverageViewController class];
         }
         else{
@@ -492,8 +541,8 @@
     else{
         controller.chartHandlerClass=[REMBuildingWidgetChartViewController class];
     }
-    controller.buildingId=self.buildingInfo.building.buildingId;
-    controller.commodityId=self.commodityInfo.commodityId;
+    controller.buildingId=self.buildingInfo.id;
+    controller.commodityId=self.commodityInfo.id;
     controller.widgetInfo=widget;
     return controller;
 }
@@ -515,11 +564,11 @@
     coverRelationController.dashboardArray=dic[@"list"];
     coverRelationController.widgetDic=dic[@"widget"];
     coverRelationController.commodityController=self;
-    REMDashboardObj *dashboard=[self dashboardInfoByPosition:coverRelationController.position];
-    REMWidgetObject *widget=[self widgetInfoByPosition:coverRelationController.position];
+    REMManagedDashboardModel *dashboard=[self dashboardInfoByPosition:coverRelationController.position];
+    REMManagedWidgetModel *widget=[self widgetInfoByPosition:coverRelationController.position];
     
-    coverRelationController.selectedWidgetId=widget.widgetId;
-    coverRelationController.selectedDashboardId=dashboard.dashboardId;
+    coverRelationController.selectedWidgetId=widget.id;
+    coverRelationController.selectedDashboardId=dashboard.id;
     
     UIPopoverController *popController= [[UIPopoverController alloc]initWithContentViewController:nav];
     coverRelationController.popController=popController;
@@ -545,7 +594,7 @@
     widgetController.isRequesting=NO;
     REMBuildingChartContainerViewController *containerController;
     REMBuildingChartContainerViewController *otherContainer;
-    REMWidgetObject *otherWidget;
+    REMManagedWidgetModel *otherWidget;
     REMBuildingChartContainerViewController *firstController=self.childViewControllers[0];
     REMBuildingChartContainerViewController *secondController=self.childViewControllers[1];
     if (widgetController.position == REMBuildingCoverWidgetPositionFirst) {
@@ -556,7 +605,7 @@
         otherContainer=self.childViewControllers[1];
         otherWidget=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionSecond];
         
-        if ([secondController.widgetInfo.widgetId isEqualToNumber:otherContainer.widgetInfo.widgetId]==NO) {
+        if ([secondController.widgetInfo.id isEqualToNumber:otherContainer.widgetInfo.id]==NO) {
             self.secondChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionSecond];
             otherContainer=[self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionSecond];
             otherContainer.viewFrame=secondController.viewFrame;
@@ -586,7 +635,7 @@
         otherContainer=self.childViewControllers[0];
         otherWidget=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionFirst];
         
-        if ([firstController.widgetInfo.widgetId isEqualToNumber:otherContainer.widgetInfo.widgetId]==NO) {
+        if ([firstController.widgetInfo.id isEqualToNumber:otherContainer.widgetInfo.id]==NO) {
             self.firstChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionFirst];
             otherContainer=[self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionFirst];
             otherContainer.viewFrame=firstController.viewFrame;

@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "REMBuildingModel.h"
 #import "REMGalleryCollectionViewController.h"
+#import "REMManagedBuildingModel.h"
 
 @interface REMGalleryCollectionCell : UICollectionViewCell
 
 @property (nonatomic,weak) REMGalleryCollectionViewController *controller;
-@property (nonatomic,weak) REMBuildingModel *building;
+@property (nonatomic,weak) REMManagedBuildingModel *building;
 
 @property (nonatomic,weak) UIButton *backgroundButton;
 @property (nonatomic,weak) UILabel *titleLabel;

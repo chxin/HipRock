@@ -13,6 +13,7 @@
 #import "REMEnergyViewData.h"
 #import "REMWidgetObject.h"
 #import "REMWidgetSearchModelBase.h"
+#import "REMManagedWidgetModel.h"
 
 typedef enum _REMEnergySearcherLoadingType{
     REMEnergySearcherLoadingTypeSmall,
@@ -21,7 +22,8 @@ typedef enum _REMEnergySearcherLoadingType{
 
 @interface REMEnergySeacherBase : NSObject
 
-@property (nonatomic,weak) REMWidgetObject *widgetInfo;
+@property (nonatomic,weak) REMManagedWidgetModel *widgetInfo;
+@property (nonatomic,strong) REMWidgetContentSyntax *contentSyntax;
 @property (nonatomic,weak) REMWidgetSearchModelBase *model;
 @property (nonatomic) BOOL disableNetworkAlert;
 
@@ -30,7 +32,7 @@ typedef enum _REMEnergySearcherLoadingType{
 @property (nonatomic) REMEnergySearcherLoadingType loadingType;
 
 
-+ (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType) storeType withWidgetInfo:(REMWidgetObject *)widgetInfo;
++ (REMEnergySeacherBase *)querySearcherByType:(REMDataStoreType) storeType withWidgetInfo:(REMManagedWidgetModel *)widgetInfo andSyntax:(REMWidgetContentSyntax *)contentSyntax;
 
 - (void)queryEnergyDataByStoreType:(REMDataStoreType)storeType andParameters:(REMWidgetSearchModelBase *)model withMaserContainer:(UIView *)maskerContainer andGroupName:(NSString *)groupName callback:(void(^)(id,REMBusinessErrorInfo *))callback;
 

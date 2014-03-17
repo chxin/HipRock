@@ -25,21 +25,20 @@
 
 @implementation REMWidgetBizDelegatorBase
 
-+ (REMWidgetBizDelegatorBase *)bizDelegatorByWidgetInfo:(REMWidgetObject *)widgetInfo
++ (REMWidgetBizDelegatorBase *)bizDelegatorByWidgetInfo:(REMManagedWidgetModel *)widgetInfo andSyntax:(REMWidgetContentSyntax *)contentSyntax
 {
     REMWidgetBizDelegatorBase *delegator;
-    if(widgetInfo.contentSyntax.dataStoreType == REMDSEnergyRankingCarbon ||
-       widgetInfo.contentSyntax.dataStoreType == REMDSEnergyRankingCost ||
-       widgetInfo.contentSyntax.dataStoreType == REMDSEnergyRankingEnergy){
+    if(contentSyntax.dataStoreType == REMDSEnergyRankingCarbon ||
+       contentSyntax.dataStoreType == REMDSEnergyRankingCost ||
+       contentSyntax.dataStoreType == REMDSEnergyRankingEnergy){
         delegator=[[REMWidgetRankingDelegator alloc]init];
     }
-    else if(widgetInfo.contentSyntax.dataStoreType == REMDSEnergyLabeling){
+    else if(contentSyntax.dataStoreType == REMDSEnergyLabeling){
         delegator=[[REMWidgetLabelingDelegator alloc]init];
     }
     else{
         delegator=[[REMWidgetEnergyDelegator alloc]init];
     }
-    
     return delegator;
 }
 
@@ -54,7 +53,7 @@
 - (REMEnergySeacherBase *)searcher
 {
     if (_searcher==nil) {
-        _searcher=[REMEnergySeacherBase querySearcherByType:self.widgetInfo.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo];
+        _searcher=[REMEnergySeacherBase querySearcherByType:self.contentSyntax.dataStoreType withWidgetInfo:self.widgetInfo andSyntax:self.contentSyntax];
         _searcher.loadingType=REMEnergySearcherLoadingTypeLarge;
     }
     
@@ -63,8 +62,8 @@
 
 - (REMWidgetSearchModelBase *)model{
     if (_model==nil) {
-        _model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax
-                  .dataStoreType withParam:self.widgetInfo.contentSyntax.params];
+        _model = [REMWidgetSearchModelBase searchModelByDataStoreType:self.contentSyntax
+                  .dataStoreType withParam:self.contentSyntax.params];
     }
     return _model;
 }
@@ -74,10 +73,11 @@
 - (void)initBizView{}
 
 - (BOOL) shouldPinToBuildingCover{
-    if (self.widgetInfo.diagramType == REMDiagramTypeColumn ||
-        self.widgetInfo.diagramType == REMDiagramTypeLine ||
-        self.widgetInfo.diagramType == REMDiagramTypeRanking ||
-        self.widgetInfo.diagramType == REMDiagramTypeStackColumn) {
+    REMDiagramType diagramType = (REMDiagramType)[self.widgetInfo.diagramType intValue];
+    if (diagramType == REMDiagramTypeColumn ||
+        diagramType == REMDiagramTypeLine ||
+        diagramType == REMDiagramTypeRanking ||
+        diagramType == REMDiagramTypeStackColumn) {
         return YES;
     }
     
@@ -86,7 +86,7 @@
 
 - (BOOL)shouldEnablePinToBuildingCoverButton
 {
-    if (self.ownerController.buildingInfo.commodityArray.count!=0) {
+    if (self.ownerController.buildingInfo.commodities.count!=0) {
         return YES;
     }
     else{
@@ -265,7 +265,7 @@
 - (void)doSearchWithModel:(REMWidgetSearchModelBase *)model callback:(void (^)(REMEnergyViewData *, REMBusinessErrorInfo *))callback
 {
     
-    [self.searcher queryEnergyDataByStoreType:self.widgetInfo.contentSyntax.dataStoreType andParameters:model withMaserContainer:self.maskerView  andGroupName:self.groupName callback:^(REMEnergyViewData *energyData,REMBusinessErrorInfo *errorInfo){
+    [self.searcher queryEnergyDataByStoreType:self.contentSyntax.dataStoreType andParameters:model withMaserContainer:self.maskerView  andGroupName:self.groupName callback:^(REMEnergyViewData *energyData,REMBusinessErrorInfo *errorInfo){
         
         //self.energyData=energyData;
         if(self.view!=nil){

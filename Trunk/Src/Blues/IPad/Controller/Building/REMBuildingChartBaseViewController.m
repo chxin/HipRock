@@ -10,7 +10,7 @@
 #import "REMBuildingChartSeriesIndicator.h"
 #import "DCDataPoint.h"
 #import "REMCommonHeaders.h"
-
+#import "REMEnergyDataPersistenceProcessor.h"
 
 @interface REMBuildingChartBaseViewController ()
 
@@ -63,7 +63,10 @@
     //store.isAccessLocal = YES;
     store.maskContainer = nil;
     store.groupName = [NSString stringWithFormat:@"building-data-%@", @(buildingId)];
-    
+    REMEnergyDataPersistenceProcessor *processor = [[REMEnergyDataPersistenceProcessor alloc]init];
+//    processor.params=param;
+//    processor.dataStoreType = self.requestUrl;
+    store.persistenceProcessor = processor;
     store.disableAlert=YES;
     [self startLoadingActivity];
     [store access:^(id data) {

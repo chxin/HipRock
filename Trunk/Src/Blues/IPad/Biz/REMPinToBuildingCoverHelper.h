@@ -6,10 +6,11 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import <Foundation/Foundation.h>
-#import "REMBuildingOverallModel.h"
 #import "REMBuildingCoverWidgetRelationModel.h"
 #import "REMMainNavigationController.h"
-
+#import "REMPinToCoverPersistenceProcessor.h"
+#import "REMManagedBuildingModel.h"
+#import "REMBusinessErrorInfo.h"
 typedef enum _REMPinToBuildingCoverStatus{
     REMPinToBuildingCoverStatusSuccess,
     REMPinToBuildingCoverStatusWidgetNotExist,
@@ -19,7 +20,7 @@ typedef enum _REMPinToBuildingCoverStatus{
 
 @interface REMPinToBuildingCoverHelper : NSObject<UIAlertViewDelegate>
 
-- (void) pinToBuildingCover:(NSDictionary *)param withBuildingInfo:(REMBuildingOverallModel *)buildingInfo withCallback:(void(^)(REMPinToBuildingCoverStatus))callback;
+- (void) pinToBuildingCover:(NSDictionary *)param withBuildingInfo:(REMManagedBuildingModel *)buildingInfo withCallback:(void(^)(REMPinToBuildingCoverStatus))callback;
 
 @property (nonatomic,weak) REMMainNavigationController *mainNavigationController;
 @property (nonatomic,copy) NSString *widgetName;

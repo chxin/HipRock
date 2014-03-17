@@ -18,6 +18,9 @@
 #import "DCLabelingWrapper.h"
 #import "REMWidgetCellDelegator.h"
 #import "REMWidgetStepEnergyModel.h"
+#import "REMManagedSharedModel.h"
+
+
 @interface REMWidgetCellViewController ()
 
 
@@ -29,6 +32,7 @@
 
 @property (nonatomic,strong) REMWidgetSearchModelBase *searchModel;
 @property (nonatomic,strong) REMWidgetCellDelegator *bizDelegator;
+@property (nonatomic,strong) REMWidgetContentSyntax *contentSyntax;
 @end
 
 @implementation REMWidgetCellViewController
@@ -50,10 +54,12 @@
     [self.view setFrame:self.viewFrame];
     //self.view.layer.borderColor=[UIColor redColor].CGColor;
     //self.view.layer.borderWidth=1;
+    
+    self.contentSyntax = [[REMWidgetContentSyntax alloc]initWithJSONString:self.widgetInfo.contentSyntax];
 
-    self.searchModel=[REMWidgetSearchModelBase searchModelByDataStoreType:self.widgetInfo.contentSyntax.dataStoreType withParam:self.widgetInfo.contentSyntax.params];
-    if(self.widgetInfo.contentSyntax.relativeDateType!=REMRelativeTimeRangeTypeNone){
-        self.searchModel.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
+    self.searchModel=[REMWidgetSearchModelBase searchModelByDataStoreType:self.contentSyntax.dataStoreType withParam:self.contentSyntax.params];
+    if(self.contentSyntax.relativeDateType!=REMRelativeTimeRangeTypeNone){
+        self.searchModel.relativeDateType=self.contentSyntax.relativeDateType;
     }
     
     
@@ -70,20 +76,20 @@
     [self.view addSubview:title];
     
     
-    self.bizDelegator=[REMWidgetCellDelegator bizWidgetCellDelegator:self.widgetInfo];
+    self.bizDelegator=[REMWidgetCellDelegator bizWidgetCellDelegator:self.widgetInfo andSyntax:self.contentSyntax];
     self.bizDelegator.view=self.view;
     self.bizDelegator.title=title;
     self.bizDelegator.searchModel=self.searchModel;
 
     [self.bizDelegator initBizView];
     
-    if(self.widgetInfo.shareInfo!=nil && [self.widgetInfo.shareInfo isEqual:[NSNull null]]==NO){
+    if(self.widgetInfo.sharedInfo!=nil && [self.widgetInfo.sharedInfo isEqual:[NSNull null]]==NO){
         
         UILabel *share=[[UILabel alloc]initWithFrame:CGRectMake(title.frame.origin.x, title.frame.origin.y+2, self.view.frame.size.width-(title.frame.origin.x*2), kDashboardWidgetShareSize)];
         share.backgroundColor=[UIColor clearColor];
         share.textColor=[REMColor colorByHexString:@"#5e5e5e"];
         share.textAlignment=NSTextAlignmentRight;
-        NSString *userName=self.widgetInfo.shareInfo.userRealName;
+        NSString *userName=self.widgetInfo.sharedInfo.userRealName;
         if (userName.length>=4) {
             userName = [[userName substringToIndex:3] stringByAppendingString:@"..."];
         }
@@ -109,7 +115,7 @@
         [self generateChart];
     }
     else{
-        [self queryEnergyData:self.widgetInfo.contentSyntax withGroupName:self.groupName];
+        [self queryEnergyData:self.contentSyntax withGroupName:self.groupName];
     }
 }
 
@@ -135,11 +141,16 @@
     }
     
     DAbstractChartWrapper *widgetWrapper = nil;
-    REMDiagramType widgetType = self.widgetInfo.diagramType;
+    REMDiagramType widgetType = (REMDiagramType)[self.widgetInfo.diagramType intValue];
     CGRect widgetRect = self.chartContainer.bounds;
     REMEnergyViewData *data=self.chartData;
+<<<<<<< HEAD
     DCChartStyle* style = [DCChartStyle getMinimunStyle];
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.widgetInfo];
+=======
+    REMChartStyle* style = [REMChartStyle getMinimunStyle];
+    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.contentSyntax];
+>>>>>>> UseCoreData
     if ([self.searchModel isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
         REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.searchModel;
         wrapperConfig.stacked=NO;
@@ -165,9 +176,9 @@
     if (widgetWrapper != nil) {
         self.wrapper=widgetWrapper;
         if([widgetWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
-            if(self.widgetInfo.contentSyntax.calendarType!=REMCalendarTypeNone){
+            if(self.contentSyntax.calendarType!=REMCalendarTypeNone){
                 DCTrendWrapper *trend=(DCTrendWrapper *)widgetWrapper;
-                trend.calenderType=self.widgetInfo.contentSyntax.calendarType;
+                trend.calenderType=self.contentSyntax.calendarType;
             }
         }
         widgetWrapper.delegate = self;
@@ -184,7 +195,8 @@
     UIActivityIndicatorView *loadingView=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [loadingView setFrame:self.chartContainer.bounds];
     self.loadingView=loadingView;
-    REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType withWidgetInfo:self.widgetInfo];
+    REMEnergySeacherBase *searcher=[REMEnergySeacherBase querySearcherByType:syntax.dataStoreType withWidgetInfo:self.widgetInfo andSyntax:self.contentSyntax
+                                    ];
     searcher.loadingView=self.loadingView;
     searcher.disableNetworkAlert=YES;
     [searcher queryEnergyDataByStoreType:syntax.dataStoreType andParameters:self.searchModel withMaserContainer:self.chartContainer  andGroupName:groupName callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *errorInfo){
@@ -239,7 +251,7 @@
     [button setExclusiveTouch:YES];
     [button setMultipleTouchEnabled:NO];
     [button setBackgroundImage:image forState:UIControlStateNormal];
-    button.tag=[self.widgetInfo.widgetId integerValue];
+    button.tag=[self.widgetInfo.id integerValue];
     [button addTarget:self action:@selector(widgetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     if(self.wrapper!=nil){

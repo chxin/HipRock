@@ -39,7 +39,7 @@
  */
 
 
--(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points chartWrapper:(DAbstractChartWrapper *)chartWrapper  inEnergyData:(REMEnergyViewData *)data widget:(REMWidgetObject *)widget andParameters:(REMWidgetSearchModelBase *)parameters
+-(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points chartWrapper:(DAbstractChartWrapper *)chartWrapper  inEnergyData:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
     self = [super initWithHighlightedPoints:points atX:nil chartWrapper:chartWrapper inEnergyData:data widget:widget andParameters:parameters];
     

@@ -38,7 +38,7 @@ const static CGFloat kRankingTimePickerWidth=250;
 
 - (void)initModelAndSearcher{
     REMWidgetRankingSearchModel *m=(REMWidgetRankingSearchModel *)self.model;
-    m.relativeDateType=self.widgetInfo.contentSyntax.relativeDateType;
+    m.relativeDateType=self.contentSyntax.relativeDateType;
 }
 
 
@@ -84,7 +84,7 @@ const static CGFloat kRankingTimePickerWidth=250;
     
     self.orderButton=orderButton;
     
-    if(self.widgetInfo.contentSyntax.rankingSortOrder == NSOrderedDescending){
+    if(self.contentSyntax.rankingSortOrder == NSOrderedDescending){
         [orderButton setSelected:YES];
     }
     
