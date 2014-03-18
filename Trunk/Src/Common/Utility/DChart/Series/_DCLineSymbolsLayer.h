@@ -7,7 +7,6 @@
 //
 
 #import "_DCLayer.h"
-#import "_DCLine.h"
 #import "_DCSeriesLayer.h"
 
 @interface _DCLineSymbolsLayer : _DCSeriesLayer

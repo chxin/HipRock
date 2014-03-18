@@ -20,7 +20,7 @@
         for (DCXYSeries* se in view.seriesList) {
             if ([self isValidSeriesForMe:se]) {
                 [s addObject:se];
-                se.layer = self;
+                se.seriesLayer = self;
             }
         }
         _series = s;

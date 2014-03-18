@@ -8,6 +8,7 @@
 
 #import "DCXYSeries.h"
 #import "DCDataPoint.h"
+#import "_DCSeriesLayer.h"
 
 @implementation DCXYSeries
 
@@ -104,4 +105,9 @@
     [yAxis attachSeries:self];
 }
 
+-(void)setHidden:(BOOL)hidden {
+    if (hidden == _hidden) return;
+    _hidden = hidden;
+    [self.seriesLayer redraw];
+}
 @end

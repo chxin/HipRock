@@ -21,11 +21,4 @@
     }
     return self;
 }
-
--(void)setHidden:(BOOL)hidden {
-    if (self.hidden != hidden) {
-        [super setHidden:hidden];
-        [(_DCLineSymbolsLayer*)self.layer setNeedsDisplay];
-    }
-}
 @end
