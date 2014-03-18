@@ -108,6 +108,6 @@
 -(void)setHidden:(BOOL)hidden {
     if (hidden == _hidden) return;
     _hidden = hidden;
-    [self.seriesLayer setHidden:hidden];
+    [self.seriesLayer redraw];
 }
 @end
