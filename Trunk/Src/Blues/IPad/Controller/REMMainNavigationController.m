@@ -14,7 +14,6 @@
 #import "REMMapGallerySegue.h"
 #import "REMColor.h"
 #import "REMApplicationContext.h"
-#import "REMStorage.h"
 @interface REMMainNavigationController ()
 
 @end
@@ -88,8 +87,8 @@
     
     [REMApplicationContext destroy];
     
-    [REMStorage clearSessionStorage];
-    [REMStorage clearOnApplicationActive];
+//    [REMStorage clearSessionStorage];
+//    [REMStorage clearOnApplicationActive];
     
     UIViewController *controller=self.topViewController;
     controller.view.alpha=0;

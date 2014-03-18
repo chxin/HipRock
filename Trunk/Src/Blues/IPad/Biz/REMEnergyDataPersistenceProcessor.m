@@ -6,14 +6,13 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMEnergyDataPersistenceProcessor.h"
-#import "REMServiceAgent.h"
 #import "REMJSONHelper.h"
 
 
 @implementation REMEnergyDataPersistenceProcessor
 
 - (id)fetchData{
-    NSString *key = [REMServiceAgent buildParameterString:self.dataStore.parameter];
+    NSString *key = [REMJSONHelper stringByObject:self.dataStore.parameter];
     NSPredicate * qcondition= [NSPredicate predicateWithFormat:@"key = '%@'",key];
     NSArray *values = [self.dataStore fetchMangedObject:@"REMManagedEnergyDataModel" withPredicate:qcondition];
     
@@ -22,8 +21,8 @@
 }
 
 - (id)persistData:(id)data{
-    NSString *url = self.dataStore.serviceMeta.url;
-    NSString *parameter = [REMServiceAgent buildParameterString:self.dataStore.parameter];
+    NSString *url = self.dataStore.url;
+    NSString *parameter = [REMJSONHelper stringByObject:self.dataStore.parameter];
     NSString *value = [REMJSONHelper stringByObject:data];
     
     REMManagedEnergyDataModel *energyModel = [self.dataStore newManagedObject:@"REMManagedEnergyDataModel"];

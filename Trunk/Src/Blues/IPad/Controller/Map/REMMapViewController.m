@@ -79,7 +79,7 @@
     //begin load data
     REMUpdateAllManager *manager = [REMUpdateAllManager defaultManager];
     manager.mainNavigationController = (REMMainNavigationController *)self.navigationController;
-    [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
+    [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessStatus errorStatus) {
         void (^callback)(void) = nil;
         if(buildingInfoArray != nil){
             callback =^{ [self updateView]; };

@@ -8,7 +8,6 @@
 
 #import "REMAppDelegate.h"
 #import "REMLog.h"
-#import "REMStorage.h"
 #import "REMApplicationInfo.h"
 #import "Weibo.h"
 #import <GoogleMaps/GoogleMaps.h>

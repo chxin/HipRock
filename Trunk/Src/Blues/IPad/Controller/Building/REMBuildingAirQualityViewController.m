@@ -78,8 +78,8 @@
 - (void)loadTotalUsageByBuildingId:(NSNumber *)buildingId{
     NSDictionary *param = @{@"buildingId":buildingId};
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingAirQualityTotalUsage parameter:param accessCache:YES andMessageMap:nil];
-    store.disableAlert=YES;
-    store.maskContainer = nil;
+    store.isDisableAlert=YES;
+    //store.maskContainer = nil;
     store.groupName = [NSString stringWithFormat:@"building-data-%@", buildingId];
     [self.totalLabel showLoading];
     [self.outdoorLabel showLoading];
@@ -101,7 +101,7 @@
         [self.honeywellLabel hideLoading];
         [self.mayairLabel hideLoading];
         [self addDataLabel];
-    } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
+    } failure:^(NSError *error, REMDataAccessStatus status, id response) {
         [self.totalLabel hideLoading];
         [self.outdoorLabel hideLoading];
         [self.honeywellLabel hideLoading];

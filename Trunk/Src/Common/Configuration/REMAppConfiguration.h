@@ -14,9 +14,11 @@
 @property (nonatomic) BOOL shouldCleanCache;
 @property (nonatomic,strong) NSDictionary *dataSources;
 @property (nonatomic,strong) NSDictionary *currentDataSource;
+@property (nonatomic,strong) NSDictionary *services;
 
 @property (nonatomic,readonly, getter = getRequestTimeout) NSInteger requestTimeout;
 @property (nonatomic,readonly, getter = getRequestLogMode) NSInteger requestLogMode;
+
 
 
 @end

@@ -1,9 +1,6 @@
 
-//Communication
-#import "REMNetworkStatusIndicator.h"
-#import "REMServiceAgent.h"
-#import "REMServiceMeta.h"
-#import "REMServiceRequestOperation.h"
+//Animation
+#import "UIView+FlipTransition.h"
 
 //Configuration
 #import "REMAppConfiguration.h"
@@ -14,9 +11,11 @@
 #import "REMCommonDefinition.h"
 #import "REMEnergyConstants.h"
 
-//DataAccess
+//DataStore
+#import "REMDataPersistenceProcessor.h"
 #import "REMDataStore.h"
-#import "REMDataStoreType.h"
+#import "REMHTTPRequestOperationManager.h"
+#import "REMRemoteServiceRequest.h"
 
 //Error
 #import "REMError.h"
@@ -33,10 +32,6 @@
 #import "REMJSONObject.h"
 #import "REMUserModel.h"
 
-//Storage
-#import "REMSqliteStorage.h"
-#import "REMStorage.h"
-
 //Utility
 #import "REMAlertHelper.h"
 #import "REMColor.h"
@@ -44,7 +39,7 @@
 #import "REMImageHelper.h"
 #import "REMJSONHelper.h"
 #import "REMMaskManager.h"
-#import "REMNetworkHelper.h"
+#import "REMHttpHelper.h"
 #import "REMNumberExtension.h"
 #import "REMNumberHelper.h"
 #import "REMTimeHelper.h"

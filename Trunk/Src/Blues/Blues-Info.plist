@@ -23,13 +23,9 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-<<<<<<< HEAD
-	<string>181</string>
-=======
 	<string>171</string>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>
->>>>>>> UseCoreData
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationExitsOnSuspend</key>

@@ -30,7 +30,7 @@ static NSString *cellId=@"dashboardcell";
 
 
 - (void)cancelAllRequest{
-    [REMDataStore cancelAccess:[self groupName]];
+    [REMDataStore cancel:[self groupName]];
 }
 
 

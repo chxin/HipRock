@@ -8,7 +8,6 @@
 
 #import "REMApplicationContext.h"
 #import "REMAppConfiguration.h"
-#import "REMStorage.h"
 #import "REMDataStore.h"
 #import "REMJSONHelper.h"
 #import "REMJSONObject.h"
@@ -110,11 +109,11 @@ static BOOL CACHEMODE = NO;
 
 + (void)updateBuildingInfoArrayToStorage
 {
-    REMDataStore *store=[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:nil accessCache:NO andMessageMap:nil];
+    //REMDataStore *store=[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:nil accessCache:NO andMessageMap:nil];
     REMApplicationContext *context= REMAppContext;
     
-    NSString *origCachedContent = [REMStorage get:store.serviceMeta.url key:context.buildingInfoArrayStorageKey];
-    NSMutableDictionary *result = [[REMJSONHelper objectByString:origCachedContent] mutableCopy] ;
+    //NSString *origCachedContent = [REMStorage get:store.serviceMeta.url key:context.buildingInfoArrayStorageKey];
+    //NSMutableDictionary *result = [[REMJSONHelper objectByString:origCachedContent] mutableCopy] ;
     
     NSArray *buildingArray=context.buildingInfoArray;
     NSMutableArray *dicArray=[NSMutableArray array];
@@ -122,9 +121,9 @@ static BOOL CACHEMODE = NO;
         REMJSONObject *obj=buildingArray[i];
         [dicArray addObject: obj.innerDictionary];
     }
-    result[@"BuildingInfo"]=dicArray;
+    //result[@"BuildingInfo"]=dicArray;
     
-    [REMStorage set:store.serviceMeta.url key:context.buildingInfoArrayStorageKey value:[REMJSONHelper stringByObject:result] expired:REMWindowActiated];
+    //[REMStorage set:store.serviceMeta.url key:context.buildingInfoArrayStorageKey value:[REMJSONHelper stringByObject:result] expired:REMWindowActiated];
 }
 
 -(BOOL)getCacheMode

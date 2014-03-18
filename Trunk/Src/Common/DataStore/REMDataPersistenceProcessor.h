@@ -18,7 +18,7 @@
 
 - (id)newObject:(NSString *)objectType;
 
-- (void) processError:(NSError *)error withStatus:(REMDataAccessErrorStatus) status andResponse:(id) response;
+- (void) processError:(NSError *)error withStatus:(REMDataAccessStatus) status andResponse:(id) response;
 
 
 @end

@@ -215,7 +215,7 @@
         
         [alertView show];
     } else if (!isAuthed && sender.on == YES){
-        NetworkStatus reachability = [REMNetworkHelper checkCurrentNetworkStatus];
+        NetworkStatus reachability = [REMHttpHelper checkCurrentNetworkStatus];
         if (reachability == NotReachable) {
             [REMAlertHelper alert:REMIPadLocalizedString(@"Weibo_NONetwork")];
         } else {
@@ -271,7 +271,7 @@
         manager.canCancel=YES;
         manager.updateSource=REMCustomerUserConcurrencySourceUpdate;
         manager.mainNavigationController=(REMMainNavigationController *)self.presentingViewController;
-        [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
+        [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessStatus errorStatus) {
             if (status == REMCustomerUserConcurrencyStatusSuccess) {
                 REMMainNavigationController *mainController=(REMMainNavigationController *)self.presentingViewController;
                 if (mainController!=nil) {

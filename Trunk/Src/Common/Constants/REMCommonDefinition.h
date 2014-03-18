@@ -55,4 +55,7 @@ typedef enum _REMCommodity : int{
 
 #define REMSecurityTokenKey @"41758bd9d7294737"
 
+
+#define REMNetworkMessageMap @{@(REMDataAccessErrorMessage):REMIPadLocalizedString(@"Common_NetServerError"), @(REMDataAccessFailed):REMIPadLocalizedString(@"Common_NetConnectionFailed"), @(REMDataAccessNoConnection):REMIPadLocalizedString(@"Common_NetNoConnection")}
+
 #endif

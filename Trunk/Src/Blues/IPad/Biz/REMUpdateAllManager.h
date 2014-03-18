@@ -9,7 +9,8 @@
 #import "REMLoginCustomerTableViewController.h"
 #import "REMMainNavigationController.h" 
 #import "REMLoginCustomerTableViewController.h"
-#import "REMDataStoreType.h"
+#import "REMCommonHeaders.h"
+#import "REMDataStore.h"
 
 
 typedef enum _REMCustomerUserConcurrencyStatus {
@@ -27,7 +28,7 @@ typedef enum _REMCustomerUserConcurrencySource{
     REMCustomerUserConcurrencySourceSwitchCustomer=2
 } REMCustomerUserConcurrencySource;
 
-typedef void (^REMCustomerSelectionCallback)(REMCustomerUserConcurrencyStatus status,NSArray* buildingInfoArray,REMDataAccessErrorStatus errorStatus);
+typedef void (^REMCustomerSelectionCallback)(REMCustomerUserConcurrencyStatus status,NSArray* buildingInfoArray,REMDataAccessStatus errorStatus);
 
 
 @interface REMUpdateAllManager : NSObject<UIAlertViewDelegate,REMLoginCustomerSelectionDelegate>

@@ -8,7 +8,7 @@
 
 #import "REMBuildingWeiboView.h"
 #import "REMColor.h"
-#import "REMNetworkHelper.h"
+#import "REMHttpHelper.h"
 
 const CGFloat kWeiboWindowHeight = 165;
 const CGFloat kWeiboWindowWidth = 390;
@@ -199,7 +199,7 @@ const NSInteger kWeiboMaxLength = 140;
 }
 
 -(void)sendClicked:(id)sender {
-    NetworkStatus reachability = [REMNetworkHelper checkCurrentNetworkStatus];
+    NetworkStatus reachability = [REMHttpHelper checkCurrentNetworkStatus];
     if (reachability == NotReachable) {
         [REMAlertHelper alert:REMIPadLocalizedString(@"Weibo_NONetwork")];
     } else {

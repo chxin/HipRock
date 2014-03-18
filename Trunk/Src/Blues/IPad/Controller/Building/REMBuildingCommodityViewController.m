@@ -145,8 +145,8 @@
 {
     NSDictionary *param = @{@"commodityId":commodityId,@"buildingId":buildingId};
     REMDataStore *store = [[REMDataStore alloc]initWithName:REMDSBuildingCommodityTotalUsage parameter:param accessCache:YES andMessageMap:nil];
-    store.maskContainer = nil;
-    store.disableAlert=YES;
+    //store.maskContainer = nil;
+    store.isDisableAlert=YES;
     REMCommodityUsageValuePersistenceProcessor *processor = [[REMCommodityUsageValuePersistenceProcessor alloc] init];
     processor.commodityInfo = self.commodityInfo;
     store.persistenceProcessor = processor;
@@ -172,7 +172,7 @@
         [self.carbonLabel hideLoading];
         [self.rankingLabel hideLoading];
         [self addDataLabel];
-    } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
+    } failure:^(NSError *error, REMDataAccessStatus status, id response) {
         [self.totalLabel hideLoading];
         [self.carbonLabel hideLoading];
         [self.rankingLabel hideLoading];

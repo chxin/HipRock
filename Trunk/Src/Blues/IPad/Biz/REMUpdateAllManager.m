@@ -6,7 +6,6 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMUpdateAllManager.h"
-#import "REMServiceAgent.h"
 #import "REMManagedAdministratorModel.h"
 #import "REMBuildingPersistenceProcessor.h"
 #import "REMApplicationContext.h"
@@ -71,7 +70,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:dic accessCache:accessCache andMessageMap:messageMap];
     store.persistManually=YES;
     store.persistenceProcessor = [[REMBuildingPersistenceProcessor alloc]init];
-    store.maskContainer=self.maskerView;
+    //store.maskContainer=self.maskerView;
     store.groupName =customerUpdateAll;
     self.parameter=dic;
     [store access:^(NSDictionary *data){
@@ -144,7 +143,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
                 [self statusSuccess];
             }
             
-        } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
+        } failure:^(NSError *error, REMDataAccessStatus status, id response) {
             self.tableViewController=nil;
             REMApplicationContext *context=REMAppContext;
             
@@ -156,7 +155,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
         }];
         
         
-    } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
+    } failure:^(NSError *error, REMDataAccessStatus status, id response) {
         self.tableViewController=nil;
         REMApplicationContext *context=REMAppContext;
         if (self.alertView!=nil) {
@@ -315,7 +314,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
     
     REMBuildingPersistenceProcessor *buildingPersistor = [[REMBuildingPersistenceProcessor alloc]init];
     buildingPersistor.dataStore=store;
-    NSArray *buildingArray = [buildingPersistor persistData:self.buildingInfoArray];
+    NSArray *buildingArray = [buildingPersistor persist:self.buildingInfoArray];
     REMApplicationContext *context=REMAppContext;
     context.buildingInfoArray = buildingArray;
     
@@ -378,7 +377,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
 
 + (void)cancelUpdateAll:(void (^)(void))callback
 {
-    [REMDataStore cancelAccess:customerUpdateAll];
+    [REMDataStore cancel:customerUpdateAll];
     REMApplicationContext *context=REMAppContext;
     context.updateManager=nil;
     if (callback!= nil) {

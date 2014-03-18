@@ -31,6 +31,8 @@ const static NSString *BUILDOPTION = @"Release";
         self.shouldCleanCache = [self.dictionary[@"ShouldCleanCache"] boolValue];
         
         [self resolveDataSourceSection];
+        
+        self.services = self.dictionary[@"Services"];
     }
     
     return self;

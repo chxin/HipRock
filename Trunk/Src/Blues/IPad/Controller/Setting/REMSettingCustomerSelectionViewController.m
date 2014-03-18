@@ -70,7 +70,7 @@
             manager.tableViewController=self;
             manager.updateSource=REMCustomerUserConcurrencySourceSwitchCustomer;
             self.updateManager=manager;
-            [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
+            [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessStatus errorStatus) {
                 if (status == REMCustomerUserConcurrencyStatusSuccess) {
                     [self.settingController.navigationController popToRootViewControllerAnimated:YES];
                     REMMainNavigationController *mainController=(REMMainNavigationController *)self.settingController.presentingViewController;

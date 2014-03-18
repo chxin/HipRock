@@ -14,6 +14,7 @@
 #import "REMManagedUserModel.h"
 #import "REMManagedCustomerModel.h"
 #import "REMHTTPRequestOperationManager.h"
+@class REMUpdateAllManager;
 
 #define REMAppContext [REMApplicationContext instance]
 //#define REMAppCurrentUser REMAppContext.currentUser

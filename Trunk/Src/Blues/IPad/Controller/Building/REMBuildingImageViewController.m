@@ -454,7 +454,7 @@
         REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param accessCache:YES andMessageMap:nil];
         store.groupName=self.loadingImageKey;
         
-        store.disableAlert=YES;
+        store.isDisableAlert=YES;
         [store access:^(NSData *data){
             if(data == nil || [data length] == 2) return;
             

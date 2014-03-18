@@ -70,13 +70,8 @@
 
 -(DCTrendWrapper*)constructWrapperWithFrame:(CGRect)frame {
     DCTrendWrapper *widgetWrapper = nil;
-<<<<<<< HEAD
     REMDiagramType widgetType = self.widgetInfo.diagramType;
     DCChartStyle* style = [DCChartStyle getCoverStyle];
-=======
-    REMDiagramType widgetType = (REMDiagramType)[self.widgetInfo.diagramType intValue];
-    REMChartStyle* style = [REMChartStyle getCoverStyle];
->>>>>>> UseCoreData
     style.acceptPan = [self getEnergyStep] != REMEnergyStepHour;
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.contentSyntax];
     if ([self.model isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {

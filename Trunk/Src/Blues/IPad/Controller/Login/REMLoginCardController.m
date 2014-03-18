@@ -173,7 +173,7 @@
             [self setErrorLabelTextWithStatus:validationResult.status];
             [self.loginCarouselController setLoginButtonStatusNormal];
         }
-    } error:^(NSError *error, REMDataAccessErrorStatus status, id response) {
+    } failure:^(NSError *error, REMDataAccessStatus status, id response) {
         [self.loginCarouselController setLoginButtonStatusNormal];
     }];
     

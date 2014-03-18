@@ -6,7 +6,6 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMDataPersistenceProcessor.h"
-#import "REMDataStoreType.h"
 #import "REMManagedEnergyDataModel.h"
 
 @interface REMEnergyDataPersistenceProcessor : REMDataPersistenceProcessor

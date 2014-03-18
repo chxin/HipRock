@@ -6,10 +6,11 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
  --------------------------------------------------------------------------*///
 
-#import "REMNetworkHelper.h"
+#import "REMHttpHelper.h"
 #import "Reachability.h"
+#import "AFNetworking.h"
 
-@implementation REMNetworkHelper
+@implementation REMHttpHelper
 
 
 + (NetworkStatus) checkCurrentNetworkStatus
@@ -21,17 +22,23 @@
 
 + (BOOL) checkIsWifi
 {
-    return [REMNetworkHelper checkCurrentNetworkStatus] == ReachableViaWiFi;
+    return [REMHttpHelper checkCurrentNetworkStatus] == ReachableViaWiFi;
 }
 
 + (BOOL) checkIs3G
 {
-    return [REMNetworkHelper checkCurrentNetworkStatus] == ReachableViaWWAN;
+    return [REMHttpHelper checkCurrentNetworkStatus] == ReachableViaWWAN;
 }
 
 + (BOOL) checkIsNoConnect
 {
-    return [REMNetworkHelper checkCurrentNetworkStatus] == NotReachable;
+    return [REMHttpHelper checkCurrentNetworkStatus] == NotReachable;
+}
+
+
++ (NSString *)parameterStringByObject:(id)object
+{
+    return nil;
 }
 
 @end

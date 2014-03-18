@@ -32,7 +32,7 @@
  *  @param success <#success description#>
  *  @param error   <#error description#>
  */
-- (void) request:(REMDataAccessSuccessBlock)success failure:(REMDataAccessErrorBlock)failure
+- (void) request:(REMDataAccessSuccessBlock)success failure:(REMDataAccessFailureBlock)failure
 {
     REMHTTPRequestOperationManager *manager = [REMHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -53,7 +53,7 @@
             success(responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        REMDataAccessErrorStatus status = [self decideErrorStatus:error];
+        REMDataAccessStatus status = [self decideErrorStatus:error];
         
         failure(error, status, operation.responseString);
     }];
@@ -107,9 +107,9 @@
     return headers;
 }
 
--(REMDataAccessErrorStatus)decideErrorStatus:(NSError *)error
+-(REMDataAccessStatus)decideErrorStatus:(NSError *)error
 {
-    REMDataAccessErrorStatus status = REMDataAccessFailed;
+    REMDataAccessStatus status = REMDataAccessFailed;
     
     if(error.code == -999){
         status = REMDataAccessCanceled;

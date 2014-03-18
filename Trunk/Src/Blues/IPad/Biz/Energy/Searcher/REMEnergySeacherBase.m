@@ -77,7 +77,7 @@
     
     REMDataStore *store = [[REMDataStore alloc] initWithName:storeType parameter:[model toSearchParam] accessCache:YES andMessageMap:nil];
     store.persistenceProcessor = [[REMEnergyDataPersistenceProcessor alloc] init];
-    store.disableAlert=self.disableNetworkAlert;
+    store.isDisableAlert=self.disableNetworkAlert;
    
     //[activitor setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];
     if(self.loadingView==nil){
@@ -145,7 +145,7 @@
         if(callback!=nil){
             callback(ret,nil);
         }
-    } error:^(NSError *error, REMDataAccessErrorStatus status, REMBusinessErrorInfo *errorInfo) {
+    } failure:^(NSError *error, REMDataAccessStatus status, REMBusinessErrorInfo *errorInfo) {
         [self.loadingBackgroundView removeFromSuperview];
         [self.loadingView stopAnimating];
         [self.loadingView removeFromSuperview];

@@ -41,7 +41,7 @@
 
 - (NSDictionary *)assembleRequestParametersWithBuildingId:(long long)buildingId WithCommodityId:(long long)commodityID WithMetadata:(REMAverageUsageDataModel *)averageData;
 - (void)loadDataSuccessWithData:(id)data;
-- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error withStatus:(REMDataAccessErrorStatus)status;
+- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error withStatus:(REMDataAccessStatus)status;
 
 
 -(void)drawLabelWithText:(NSString *)text;

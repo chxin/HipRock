@@ -14,7 +14,7 @@
 
 @property (nonatomic,weak) REMDataStore *dataStore;
 
-- (void) request:(REMDataAccessSuccessBlock)success failure:(REMDataAccessErrorBlock)failure;
+- (void) request:(REMDataAccessSuccessBlock)success failure:(REMDataAccessFailureBlock)failure;
 - (void) cancel;
 
 

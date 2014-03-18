@@ -85,7 +85,7 @@
 		7A13C1A917F40D90007E6AA9 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C1A817F40D90007E6AA9 /* libicucore.dylib */; };
 		7A13C1AB17F40D99007E6AA9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C1AA17F40D99007E6AA9 /* libz.dylib */; };
 		7A1D142617850B2100CC2922 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142517850B2100CC2922 /* Reachability.m */; };
-		7A1D14291785178800CC2922 /* REMNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14281785178800CC2922 /* REMNetworkHelper.m */; };
+		7A1D14291785178800CC2922 /* REMHttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14281785178800CC2922 /* REMHttpHelper.m */; };
 		7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142B1785211000CC2922 /* REMAlertHelper.m */; };
 		7A1D7C3717A6155D0050779D /* REMApplicationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3617A6155D0050779D /* REMApplicationContext.m */; };
 		7A1D7C3C17A637510050779D /* REMUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3B17A637510050779D /* REMUserModel.m */; };
@@ -95,6 +95,8 @@
 		7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */; };
 		7A2BA42217D877C3003B18E1 /* REMError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42117D877C3003B18E1 /* REMError.m */; };
 		7A2D7ECE18D148FA009FB99F /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4223D50184EFF44004D39C0 /* GPUImage.framework */; };
+		7A3290C518D80BF900B3AE8A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3290C418D80BF900B3AE8A /* Security.framework */; };
+		7A3290C718D80C0B00B3AE8A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3290C618D80C0B00B3AE8A /* CFNetwork.framework */; };
 		7A39D5A018B5A3A100CC9D5D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A02CE4118B482DB009D1CF1 /* XCTest.framework */; };
 		7A39D5A118B5A3A100CC9D5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E21177B3A8B00C282A8 /* Foundation.framework */; };
 		7A39D5A218B5A3A100CC9D5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */; };
@@ -116,17 +118,9 @@
 		7A39D5C818B5A69C00CC9D5D /* REMApplicationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D161785111300219469 /* REMApplicationInfo.m */; };
 		7A39D5C918B5A69C00CC9D5D /* REMEnergyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B43BB1101797B12D00617B1E /* REMEnergyConstants.m */; };
 		7A39D5CA18B5A69C00CC9D5D /* REMApplicationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C3617A6155D0050779D /* REMApplicationContext.m */; };
-		7A39D5CB18B5A69C00CC9D5D /* REMDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A95FF0B188F951000510A07 /* REMDataStore.m */; };
-		7A39D5CC18B5A69C00CC9D5D /* REMServiceRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB34E50177D2CE1003E235E /* REMServiceRequestOperation.m */; };
-		7A39D5CD18B5A69C00CC9D5D /* REMServiceAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */; };
-		7A39D5CE18B5A69C00CC9D5D /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
-		7A39D5CF18B5A69C00CC9D5D /* REMNetworkStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */; };
-		7A39D5D018B5A69C00CC9D5D /* REMDataPersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49C42FF18B34DB900C3CEFE /* REMDataPersistenceProcessor.m */; };
-		7A39D5D118B5A69C00CC9D5D /* REMSqliteStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D191785113600219469 /* REMSqliteStorage.m */; };
-		7A39D5D218B5A69C00CC9D5D /* REMStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D1C1785115700219469 /* REMStorage.m */; };
 		7A39D5D318B5A69C00CC9D5D /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
 		7A39D5D418B5A69C00CC9D5D /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
-		7A39D5D518B5A69C00CC9D5D /* REMNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14281785178800CC2922 /* REMNetworkHelper.m */; };
+		7A39D5D518B5A69C00CC9D5D /* REMHttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14281785178800CC2922 /* REMHttpHelper.m */; };
 		7A39D5D618B5A69C00CC9D5D /* REMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142B1785211000CC2922 /* REMAlertHelper.m */; };
 		7A39D5D718B5A69C00CC9D5D /* REMMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDC1786C195008A1033 /* REMMaskManager.m */; };
 		7A39D5D818B5A69C00CC9D5D /* REMEncryptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4417A63E8B0050779D /* REMEncryptHelper.m */; };
@@ -147,7 +141,6 @@
 		7A39D60518B5A7F200CC9D5D /* REMEnergyCostElectricitySearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0A618B44CBA00A13464 /* REMEnergyCostElectricitySearcher.m */; };
 		7A39D60618B5A7F200CC9D5D /* REMEnergyMultiTimeSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0A818B44CBA00A13464 /* REMEnergyMultiTimeSearcher.m */; };
 		7A39D60718B5A7F200CC9D5D /* REMEnergySeacherBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0AA18B44CBA00A13464 /* REMEnergySeacherBase.m */; };
-		7A39D60818B5A7F200CC9D5D /* LoginBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0AD18B44CBA00A13464 /* LoginBusiness.m */; };
 		7A39D60918B5A7F200CC9D5D /* REMClientErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0AF18B44CBA00A13464 /* REMClientErrorInfo.m */; };
 		7A39D60A18B5A7F200CC9D5D /* REMPinToBuildingCoverHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0B118B44CBA00A13464 /* REMPinToBuildingCoverHelper.m */; };
 		7A39D60B18B5A7F200CC9D5D /* REMUpdateAllManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0B318B44CBA00A13464 /* REMUpdateAllManager.m */; };
@@ -314,7 +307,6 @@
 		7A39D6BC18B5A99400CC9D5D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6BB18B5A99400CC9D5D /* libsqlite3.dylib */; };
 		7A39D6BE18B5A99D00CC9D5D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6BD18B5A99D00CC9D5D /* MobileCoreServices.framework */; };
 		7A39D6C018B5A9A700CC9D5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6BF18B5A9A700CC9D5D /* CoreGraphics.framework */; };
-		7A3DDCDA1786C05B008A1033 /* REMServiceAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */; };
 		7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDC1786C195008A1033 /* REMMaskManager.m */; };
 		7A3F66F3184C561D0079A244 /* JumpTrial-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3F66F2184C561D0079A244 /* JumpTrial-Pressed.png */; };
 		7A3F66F5184C56440079A244 /* JumpTrial-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3F66F4184C56440079A244 /* JumpTrial-Pressed@2x.png */; };
@@ -323,7 +315,6 @@
 		7A47F3A118482C1B007EE37B /* JumpLogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39918482C1B007EE37B /* JumpLogin@2x.png */; };
 		7A47F3A418482C1B007EE37B /* JumpTrial.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39C18482C1B007EE37B /* JumpTrial.png */; };
 		7A47F3A518482C1B007EE37B /* JumpTrial@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39D18482C1B007EE37B /* JumpTrial@2x.png */; };
-		7A4F86FB18C45FC700843304 /* REMServiceSessionAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F86FA18C45FC700843304 /* REMServiceSessionAgent.m */; };
 		7A58F24A1839A5650071DE7A /* mail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2411839A5650071DE7A /* mail.jpg */; };
 		7A58F24B1839A5650071DE7A /* Propaganda_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2421839A5650071DE7A /* Propaganda_1.jpg */; };
 		7A58F24C1839A5650071DE7A /* Propaganda_1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2431839A5650071DE7A /* Propaganda_1@2x.jpg */; };
@@ -342,7 +333,6 @@
 		7A63E1E718B44CBD00A13464 /* REMEnergyCostElectricitySearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0A618B44CBA00A13464 /* REMEnergyCostElectricitySearcher.m */; };
 		7A63E1E818B44CBD00A13464 /* REMEnergyMultiTimeSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0A818B44CBA00A13464 /* REMEnergyMultiTimeSearcher.m */; };
 		7A63E1E918B44CBD00A13464 /* REMEnergySeacherBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0AA18B44CBA00A13464 /* REMEnergySeacherBase.m */; };
-		7A63E1EA18B44CBD00A13464 /* LoginBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0AD18B44CBA00A13464 /* LoginBusiness.m */; };
 		7A63E1EB18B44CBD00A13464 /* REMClientErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0AF18B44CBA00A13464 /* REMClientErrorInfo.m */; };
 		7A63E1EC18B44CBD00A13464 /* REMPinToBuildingCoverHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0B118B44CBA00A13464 /* REMPinToBuildingCoverHelper.m */; };
 		7A63E1ED18B44CBD00A13464 /* REMUpdateAllManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0B318B44CBA00A13464 /* REMUpdateAllManager.m */; };
@@ -517,8 +507,6 @@
 		7A7B29911888C65000E74D3D /* UIView+FlipTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B29901888C65000E74D3D /* UIView+FlipTransition.m */; };
 		7A7B29941888C8DF00E74D3D /* SplashScreenBackgroud.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B29921888C8DF00E74D3D /* SplashScreenBackgroud.png */; };
 		7A7B29951888C8DF00E74D3D /* SplashScreenBackgroud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B29931888C8DF00E74D3D /* SplashScreenBackgroud@2x.png */; };
-		7A7EA6E1180548CB00A3BB56 /* REMNetworkStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */; };
-		7A95FF0D188F951000510A07 /* REMDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A95FF0B188F951000510A07 /* REMDataStore.m */; };
 		7A9B1E20177B3A8B00C282A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */; };
 		7A9B1E22177B3A8B00C282A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E21177B3A8B00C282A8 /* Foundation.framework */; };
 		7A9B1E24177B3A8B00C282A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E23177B3A8B00C282A8 /* CoreGraphics.framework */; };
@@ -597,7 +585,6 @@
 		7AAA24BB18B5AC9C002069EA /* DWrapperConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61018851582009AD4A7 /* DWrapperConfig.m */; };
 		7AB34E4C177D2975003E235E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4A177D2975003E235E /* MobileCoreServices.framework */; };
 		7AB34E4D177D2975003E235E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4B177D2975003E235E /* SystemConfiguration.framework */; };
-		7AB34E51177D2CE1003E235E /* REMServiceRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB34E50177D2CE1003E235E /* REMServiceRequestOperation.m */; };
 		7AB71684187F839500EA7544 /* DefaultMap.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71682187F839500EA7544 /* DefaultMap.png */; };
 		7AB71685187F839500EA7544 /* DefaultMap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71683187F839500EA7544 /* DefaultMap@2x.png */; };
 		7AB71688187F859B00EA7544 /* MapBlur.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71686187F859B00EA7544 /* MapBlur.png */; };
@@ -605,7 +592,6 @@
 		7ABD828E185AD75500A2AC06 /* REMAppConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABD828D185AD75500A2AC06 /* REMAppConfiguration.m */; };
 		7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */; };
 		7ABFDDF418483119004DD4E7 /* JumpLogin-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */; };
-		7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */; };
 		7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */; };
 		7AF9635118D6C5BD005A8D12 /* REMManageBuildingAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9633E18D6C5BD005A8D12 /* REMManageBuildingAirQualityModel.m */; };
 		7AF9635218D6C5BD005A8D12 /* REMManagedBuildingCommodityUsageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9634018D6C5BD005A8D12 /* REMManagedBuildingCommodityUsageModel.m */; };
@@ -719,10 +705,7 @@
 		B485EFED187BCF2900D16583 /* ChartCustomization.png in Resources */ = {isa = PBXBuildFile; fileRef = B485EFEB187BCF2900D16583 /* ChartCustomization.png */; };
 		B485EFEE187BCF2900D16583 /* ChartCustomization@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B485EFEC187BCF2900D16583 /* ChartCustomization@2x.png */; };
 		B48ED3EA178EA1740032CD72 /* REMTimeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E9178EA1740032CD72 /* REMTimeHelper.m */; };
-		B48ED409178EA8970032CD72 /* REMSqliteStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D191785113600219469 /* REMSqliteStorage.m */; };
-		B48ED40A178EA8970032CD72 /* REMStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38ED7D1C1785115700219469 /* REMStorage.m */; };
 		B49B6F511781491800BC130A /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
-		B49C430018B34DB900C3CEFE /* REMDataPersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49C42FF18B34DB900C3CEFE /* REMDataPersistenceProcessor.m */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		B4D534E018AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4D534DF18AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png */; };
 		B4DC084017F90E2C005658C1 /* REMAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC083F17F90E2C005658C1 /* REMAdministratorModel.m */; };
@@ -796,10 +779,6 @@
 /* Begin PBXFileReference section */
 		38ED7D151785111300219469 /* REMApplicationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMApplicationInfo.h; path = Common/Constants/REMApplicationInfo.h; sourceTree = "<group>"; };
 		38ED7D161785111300219469 /* REMApplicationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMApplicationInfo.m; path = Common/Constants/REMApplicationInfo.m; sourceTree = "<group>"; };
-		38ED7D181785113600219469 /* REMSqliteStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSqliteStorage.h; path = Common/Storage/REMSqliteStorage.h; sourceTree = "<group>"; };
-		38ED7D191785113600219469 /* REMSqliteStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSqliteStorage.m; path = Common/Storage/REMSqliteStorage.m; sourceTree = "<group>"; };
-		38ED7D1B1785115700219469 /* REMStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMStorage.h; path = Common/Storage/REMStorage.h; sourceTree = "<group>"; };
-		38ED7D1C1785115700219469 /* REMStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMStorage.m; path = Common/Storage/REMStorage.m; sourceTree = "<group>"; };
 		38ED7D1E1785140900219469 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libsqlite3.dylib; sourceTree = DEVELOPER_DIR; };
 		6A61A66B1839B81F00C6A228 /* Coal_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Coal_normal.png; sourceTree = "<group>"; };
 		6A61A66C1839B81F00C6A228 /* Coal_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Coal_normal@2x.png"; sourceTree = "<group>"; };
@@ -882,8 +861,8 @@
 		7A13C1AA17F40D99007E6AA9 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
 		7A1D142417850B2100CC2922 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		7A1D142517850B2100CC2922 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		7A1D14271785178800CC2922 /* REMNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMNetworkHelper.h; path = Common/Utility/REMNetworkHelper.h; sourceTree = "<group>"; };
-		7A1D14281785178800CC2922 /* REMNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMNetworkHelper.m; path = Common/Utility/REMNetworkHelper.m; sourceTree = "<group>"; };
+		7A1D14271785178800CC2922 /* REMHttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMHttpHelper.h; path = Common/Utility/REMHttpHelper.h; sourceTree = "<group>"; };
+		7A1D14281785178800CC2922 /* REMHttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMHttpHelper.m; path = Common/Utility/REMHttpHelper.m; sourceTree = "<group>"; };
 		7A1D142A1785211000CC2922 /* REMAlertHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAlertHelper.h; path = Common/Utility/REMAlertHelper.h; sourceTree = "<group>"; };
 		7A1D142B1785211000CC2922 /* REMAlertHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAlertHelper.m; path = Common/Utility/REMAlertHelper.m; sourceTree = "<group>"; };
 		7A1D7C3517A6155D0050779D /* REMApplicationContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMApplicationContext.h; path = Common/Constants/REMApplicationContext.h; sourceTree = "<group>"; };
@@ -906,6 +885,8 @@
 		7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBusinessErrorInfo.m; path = Common/Model/REMBusinessErrorInfo.m; sourceTree = "<group>"; };
 		7A2BA42017D877C3003B18E1 /* REMError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMError.h; sourceTree = "<group>"; };
 		7A2BA42117D877C3003B18E1 /* REMError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMError.m; sourceTree = "<group>"; };
+		7A3290C418D80BF900B3AE8A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		7A3290C618D80C0B00B3AE8A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		7A39D59F18B5A3A100CC9D5D /* BluesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BluesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A39D5A518B5A3A100CC9D5D /* BluesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BluesTests-Info.plist"; sourceTree = "<group>"; };
 		7A39D5A718B5A3A100CC9D5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -929,8 +910,6 @@
 		7A39D6BB18B5A99400CC9D5D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/usr/lib/libsqlite3.dylib; sourceTree = DEVELOPER_DIR; };
 		7A39D6BD18B5A99D00CC9D5D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		7A39D6BF18B5A9A700CC9D5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		7A3DDCD81786C05B008A1033 /* REMServiceAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceAgent.h; path = Common/Communication/REMServiceAgent.h; sourceTree = "<group>"; };
-		7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceAgent.m; path = Common/Communication/REMServiceAgent.m; sourceTree = "<group>"; };
 		7A3DDCDB1786C195008A1033 /* REMMaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMaskManager.h; path = Common/Utility/REMMaskManager.h; sourceTree = "<group>"; };
 		7A3DDCDC1786C195008A1033 /* REMMaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMaskManager.m; path = Common/Utility/REMMaskManager.m; sourceTree = "<group>"; };
 		7A3F66F2184C561D0079A244 /* JumpTrial-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpTrial-Pressed.png"; sourceTree = "<group>"; };
@@ -940,8 +919,6 @@
 		7A47F39918482C1B007EE37B /* JumpLogin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin@2x.png"; sourceTree = "<group>"; };
 		7A47F39C18482C1B007EE37B /* JumpTrial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JumpTrial.png; sourceTree = "<group>"; };
 		7A47F39D18482C1B007EE37B /* JumpTrial@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpTrial@2x.png"; sourceTree = "<group>"; };
-		7A4F86F918C45FC700843304 /* REMServiceSessionAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceSessionAgent.h; path = Common/Communication/REMServiceSessionAgent.h; sourceTree = "<group>"; };
-		7A4F86FA18C45FC700843304 /* REMServiceSessionAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceSessionAgent.m; path = Common/Communication/REMServiceSessionAgent.m; sourceTree = "<group>"; };
 		7A58F2411839A5650071DE7A /* mail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mail.jpg; sourceTree = "<group>"; };
 		7A58F2421839A5650071DE7A /* Propaganda_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Propaganda_1.jpg; sourceTree = "<group>"; };
 		7A58F2431839A5650071DE7A /* Propaganda_1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Propaganda_1@2x.jpg"; sourceTree = "<group>"; };
@@ -970,8 +947,6 @@
 		7A63E0A818B44CBA00A13464 /* REMEnergyMultiTimeSearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMEnergyMultiTimeSearcher.m; sourceTree = "<group>"; };
 		7A63E0A918B44CBA00A13464 /* REMEnergySeacherBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMEnergySeacherBase.h; sourceTree = "<group>"; };
 		7A63E0AA18B44CBA00A13464 /* REMEnergySeacherBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMEnergySeacherBase.m; sourceTree = "<group>"; };
-		7A63E0AC18B44CBA00A13464 /* LoginBusiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginBusiness.h; sourceTree = "<group>"; };
-		7A63E0AD18B44CBA00A13464 /* LoginBusiness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginBusiness.m; sourceTree = "<group>"; };
 		7A63E0AE18B44CBA00A13464 /* REMClientErrorInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMClientErrorInfo.h; sourceTree = "<group>"; };
 		7A63E0AF18B44CBA00A13464 /* REMClientErrorInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMClientErrorInfo.m; sourceTree = "<group>"; };
 		7A63E0B018B44CBA00A13464 /* REMPinToBuildingCoverHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMPinToBuildingCoverHelper.h; sourceTree = "<group>"; };
@@ -1294,12 +1269,7 @@
 		7A7B29901888C65000E74D3D /* UIView+FlipTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FlipTransition.m"; sourceTree = "<group>"; };
 		7A7B29921888C8DF00E74D3D /* SplashScreenBackgroud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashScreenBackgroud.png; sourceTree = "<group>"; };
 		7A7B29931888C8DF00E74D3D /* SplashScreenBackgroud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenBackgroud@2x.png"; sourceTree = "<group>"; };
-		7A7EA6DF180548CB00A3BB56 /* REMNetworkStatusIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMNetworkStatusIndicator.h; path = Common/Communication/REMNetworkStatusIndicator.h; sourceTree = "<group>"; };
-		7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMNetworkStatusIndicator.m; path = Common/Communication/REMNetworkStatusIndicator.m; sourceTree = "<group>"; };
 		7A82C1B218229831009835C4 /* REMCommonDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMCommonDefinition.h; path = Common/Constants/REMCommonDefinition.h; sourceTree = "<group>"; };
-		7A95FF0A188F951000510A07 /* REMDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDataStore.h; path = Common/Communication/REMDataStore.h; sourceTree = "<group>"; };
-		7A95FF0B188F951000510A07 /* REMDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataStore.m; path = Common/Communication/REMDataStore.m; sourceTree = "<group>"; };
-		7A95FF0C188F951000510A07 /* REMDataStoreType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDataStoreType.h; path = Common/Communication/REMDataStoreType.h; sourceTree = "<group>"; };
 		7A9B1E1C177B3A8B00C282A8 /* Blues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blues.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		7A9B1E21177B3A8B00C282A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -1356,8 +1326,6 @@
 		7AA6464918C056050081E96E /* REMSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingViewController.m; sourceTree = "<group>"; };
 		7AB34E4A177D2975003E235E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		7AB34E4B177D2975003E235E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
-		7AB34E4F177D2CE1003E235E /* REMServiceRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceRequestOperation.h; path = Common/Communication/REMServiceRequestOperation.h; sourceTree = "<group>"; };
-		7AB34E50177D2CE1003E235E /* REMServiceRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceRequestOperation.m; path = Common/Communication/REMServiceRequestOperation.m; sourceTree = "<group>"; };
 		7AB71682187F839500EA7544 /* DefaultMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultMap.png; sourceTree = "<group>"; };
 		7AB71683187F839500EA7544 /* DefaultMap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultMap@2x.png"; sourceTree = "<group>"; };
 		7AB71686187F859B00EA7544 /* MapBlur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapBlur.png; sourceTree = "<group>"; };
@@ -1366,8 +1334,6 @@
 		7ABD828D185AD75500A2AC06 /* REMAppConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAppConfiguration.m; path = Common/Configuration/REMAppConfiguration.m; sourceTree = "<group>"; };
 		7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed.png"; sourceTree = "<group>"; };
 		7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed@2x.png"; sourceTree = "<group>"; };
-		7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMServiceMeta.h; path = Common/Communication/REMServiceMeta.h; sourceTree = "<group>"; };
-		7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMServiceMeta.m; path = Common/Communication/REMServiceMeta.m; sourceTree = "<group>"; };
 		7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
 		7AF9633D18D6C5BD005A8D12 /* REMManageBuildingAirQualityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManageBuildingAirQualityModel.h; sourceTree = "<group>"; };
 		7AF9633E18D6C5BD005A8D12 /* REMManageBuildingAirQualityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManageBuildingAirQualityModel.m; sourceTree = "<group>"; };
@@ -1526,8 +1492,6 @@
 		B48ED3E9178EA1740032CD72 /* REMTimeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeHelper.m; path = Common/Utility/REMTimeHelper.m; sourceTree = "<group>"; };
 		B49B6F4F1781491800BC130A /* REMColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMColor.h; path = Common/Utility/REMColor.h; sourceTree = "<group>"; };
 		B49B6F501781491800BC130A /* REMColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMColor.m; path = Common/Utility/REMColor.m; sourceTree = "<group>"; };
-		B49C42FE18B34DB900C3CEFE /* REMDataPersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDataPersistenceProcessor.h; path = Common/Communication/REMDataPersistenceProcessor.h; sourceTree = "<group>"; };
-		B49C42FF18B34DB900C3CEFE /* REMDataPersistenceProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataPersistenceProcessor.m; path = Common/Communication/REMDataPersistenceProcessor.m; sourceTree = "<group>"; };
 		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		B4D534DF18AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuildingBlur@2x.png"; sourceTree = "<group>"; };
 		B4DC083E17F90E2C005658C1 /* REMAdministratorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAdministratorModel.h; path = Common/Model/REMAdministratorModel.h; sourceTree = "<group>"; };
@@ -1691,6 +1655,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A3290C718D80C0B00B3AE8A /* CFNetwork.framework in Frameworks */,
+				7A3290C518D80BF900B3AE8A /* Security.framework in Frameworks */,
 				7A2D7ECE18D148FA009FB99F /* GPUImage.framework in Frameworks */,
 				EF2043B5187BDC4300272319 /* CoreText.framework in Frameworks */,
 				B477739C184F075300F68AED /* CoreVideo.framework in Frameworks */,
@@ -2078,8 +2044,6 @@
 				7A1D7C3917A637110050779D /* Model */,
 				B445AE7E177BEC10002D2A59 /* Log */,
 				7A5E2D4A177B3CF9000F77F9 /* Constants */,
-				7A5E2D49177B3CF1000F77F9 /* Communication */,
-				7A5E2D48177B3CEA000F77F9 /* Storage */,
 				7A5E2D47177B3CE2000F77F9 /* Utility */,
 				7A1D7C3817A618140050779D /* REMCommonHeaders.h */,
 			);
@@ -2094,8 +2058,8 @@
 				B49B6F501781491800BC130A /* REMColor.m */,
 				B4198EB01784220300B50475 /* REMJSONHelper.h */,
 				B4198EB11784220300B50475 /* REMJSONHelper.m */,
-				7A1D14271785178800CC2922 /* REMNetworkHelper.h */,
-				7A1D14281785178800CC2922 /* REMNetworkHelper.m */,
+				7A1D14271785178800CC2922 /* REMHttpHelper.h */,
+				7A1D14281785178800CC2922 /* REMHttpHelper.m */,
 				7A1D142A1785211000CC2922 /* REMAlertHelper.h */,
 				7A1D142B1785211000CC2922 /* REMAlertHelper.m */,
 				7A3DDCDB1786C195008A1033 /* REMMaskManager.h */,
@@ -2114,39 +2078,6 @@
 				EF2043B2187BD94400272319 /* REMNumberExtension.m */,
 			);
 			name = Utility;
-			sourceTree = "<group>";
-		};
-		7A5E2D48177B3CEA000F77F9 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-				38ED7D181785113600219469 /* REMSqliteStorage.h */,
-				38ED7D191785113600219469 /* REMSqliteStorage.m */,
-				38ED7D1B1785115700219469 /* REMStorage.h */,
-				38ED7D1C1785115700219469 /* REMStorage.m */,
-			);
-			name = Storage;
-			sourceTree = "<group>";
-		};
-		7A5E2D49177B3CF1000F77F9 /* Communication */ = {
-			isa = PBXGroup;
-			children = (
-				7A95FF0C188F951000510A07 /* REMDataStoreType.h */,
-				7A95FF0A188F951000510A07 /* REMDataStore.h */,
-				7A95FF0B188F951000510A07 /* REMDataStore.m */,
-				7AB34E4F177D2CE1003E235E /* REMServiceRequestOperation.h */,
-				7AB34E50177D2CE1003E235E /* REMServiceRequestOperation.m */,
-				7A3DDCD81786C05B008A1033 /* REMServiceAgent.h */,
-				7A3DDCD91786C05B008A1033 /* REMServiceAgent.m */,
-				7ACA952D17B9FCDA0011D33B /* REMServiceMeta.h */,
-				7ACA952E17B9FCDA0011D33B /* REMServiceMeta.m */,
-				7A7EA6DF180548CB00A3BB56 /* REMNetworkStatusIndicator.h */,
-				7A7EA6E0180548CB00A3BB56 /* REMNetworkStatusIndicator.m */,
-				B49C42FE18B34DB900C3CEFE /* REMDataPersistenceProcessor.h */,
-				B49C42FF18B34DB900C3CEFE /* REMDataPersistenceProcessor.m */,
-				7A4F86F918C45FC700843304 /* REMServiceSessionAgent.h */,
-				7A4F86FA18C45FC700843304 /* REMServiceSessionAgent.m */,
-			);
-			name = Communication;
 			sourceTree = "<group>";
 		};
 		7A5E2D4A177B3CF9000F77F9 /* Constants */ = {
@@ -2215,7 +2146,6 @@
 				7AF9636518D6C5EB005A8D12 /* REMPinToCoverPersistenceProcessor.m */,
 				7A63E0A018B44CBA00A13464 /* Chart */,
 				7A63E0A318B44CBA00A13464 /* Energy */,
-				7A63E0AB18B44CBA00A13464 /* Login */,
 				7A63E0AE18B44CBA00A13464 /* REMClientErrorInfo.h */,
 				7A63E0AF18B44CBA00A13464 /* REMClientErrorInfo.m */,
 				7A63E0B018B44CBA00A13464 /* REMPinToBuildingCoverHelper.h */,
@@ -2255,15 +2185,6 @@
 				7A63E0AA18B44CBA00A13464 /* REMEnergySeacherBase.m */,
 			);
 			path = Searcher;
-			sourceTree = "<group>";
-		};
-		7A63E0AB18B44CBA00A13464 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				7A63E0AC18B44CBA00A13464 /* LoginBusiness.h */,
-				7A63E0AD18B44CBA00A13464 /* LoginBusiness.m */,
-			);
-			path = Login;
 			sourceTree = "<group>";
 		};
 		7A63E0B418B44CBA00A13464 /* Controller */ = {
@@ -2911,6 +2832,8 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A3290C618D80C0B00B3AE8A /* CFNetwork.framework */,
+				7A3290C418D80BF900B3AE8A /* Security.framework */,
 				7A9EAA5818D2946300EF1B85 /* WeiboSDK */,
 				7A39D6BF18B5A9A700CC9D5D /* CoreGraphics.framework */,
 				7A39D6BD18B5A99D00CC9D5D /* MobileCoreServices.framework */,
@@ -3982,7 +3905,6 @@
 				7A39D60518B5A7F200CC9D5D /* REMEnergyCostElectricitySearcher.m in Sources */,
 				7A39D60618B5A7F200CC9D5D /* REMEnergyMultiTimeSearcher.m in Sources */,
 				7A39D60718B5A7F200CC9D5D /* REMEnergySeacherBase.m in Sources */,
-				7A39D60818B5A7F200CC9D5D /* LoginBusiness.m in Sources */,
 				7A39D60918B5A7F200CC9D5D /* REMClientErrorInfo.m in Sources */,
 				7A39D60A18B5A7F200CC9D5D /* REMPinToBuildingCoverHelper.m in Sources */,
 				7A39D60B18B5A7F200CC9D5D /* REMUpdateAllManager.m in Sources */,
@@ -4042,17 +3964,9 @@
 				7A39D5C818B5A69C00CC9D5D /* REMApplicationInfo.m in Sources */,
 				7A39D5C918B5A69C00CC9D5D /* REMEnergyConstants.m in Sources */,
 				7A39D5CA18B5A69C00CC9D5D /* REMApplicationContext.m in Sources */,
-				7A39D5CB18B5A69C00CC9D5D /* REMDataStore.m in Sources */,
-				7A39D5CC18B5A69C00CC9D5D /* REMServiceRequestOperation.m in Sources */,
-				7A39D5CD18B5A69C00CC9D5D /* REMServiceAgent.m in Sources */,
-				7A39D5CE18B5A69C00CC9D5D /* REMServiceMeta.m in Sources */,
-				7A39D5CF18B5A69C00CC9D5D /* REMNetworkStatusIndicator.m in Sources */,
-				7A39D5D018B5A69C00CC9D5D /* REMDataPersistenceProcessor.m in Sources */,
-				7A39D5D118B5A69C00CC9D5D /* REMSqliteStorage.m in Sources */,
-				7A39D5D218B5A69C00CC9D5D /* REMStorage.m in Sources */,
 				7A39D5D318B5A69C00CC9D5D /* REMColor.m in Sources */,
 				7A39D5D418B5A69C00CC9D5D /* REMJSONHelper.m in Sources */,
-				7A39D5D518B5A69C00CC9D5D /* REMNetworkHelper.m in Sources */,
+				7A39D5D518B5A69C00CC9D5D /* REMHttpHelper.m in Sources */,
 				7A39D5D618B5A69C00CC9D5D /* REMAlertHelper.m in Sources */,
 				7A39D5D718B5A69C00CC9D5D /* REMMaskManager.m in Sources */,
 				7A39D5D818B5A69C00CC9D5D /* REMEncryptHelper.m in Sources */,
@@ -4087,11 +4001,9 @@
 				EFD947051839DCBB00E9EC50 /* DCRange.m in Sources */,
 				7AF9638218D6C63C005A8D12 /* AFURLConnectionOperation.m in Sources */,
 				7A63E28518B44F9B00A13464 /* REMIPhoneControllerBase.m in Sources */,
-				B48ED409178EA8970032CD72 /* REMSqliteStorage.m in Sources */,
 				7A63E20918B44CBD00A13464 /* REMMapViewController.m in Sources */,
 				7A63E21218B44CBD00A13464 /* REMWidgetBizDelegatorBase.m in Sources */,
 				7AF9638518D6C63C005A8D12 /* AFURLSessionManager.m in Sources */,
-				B48ED40A178EA8970032CD72 /* REMStorage.m in Sources */,
 				B4577EBF184C1886003C00CF /* REMNumberHelper.m in Sources */,
 				7A63E26118B44CBD00A13464 /* REMScreenEdgetGestureRecognizer.m in Sources */,
 				7A9EAA9118D2946300EF1B85 /* StatusVisible.m in Sources */,
@@ -4144,7 +4056,6 @@
 				7A63E25D18B44CBD00A13464 /* REMInsetsTextField.m in Sources */,
 				7A63E23518B44CBD00A13464 /* REMEnergyTargetModel.m in Sources */,
 				EF7CF5F6185D82F2000BA4AE /* DCPieLayer.m in Sources */,
-				7AB34E51177D2CE1003E235E /* REMServiceRequestOperation.m in Sources */,
 				B42FBF6417F574B5004F2F3A /* REMEnum.m in Sources */,
 				B49B6F511781491800BC130A /* REMColor.m in Sources */,
 				7A63E24318B44CBD00A13464 /* REMWidgetStepEnergyModel.m in Sources */,
@@ -4183,9 +4094,8 @@
 				38ED7D171785111300219469 /* REMApplicationInfo.m in Sources */,
 				7AF9638018D6C63C005A8D12 /* AFNetworkReachabilityManager.m in Sources */,
 				EFD947001839DCBB00E9EC50 /* _DCXAxisLabelLayer.m in Sources */,
-				7A1D14291785178800CC2922 /* REMNetworkHelper.m in Sources */,
+				7A1D14291785178800CC2922 /* REMHttpHelper.m in Sources */,
 				7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */,
-				7A3DDCDA1786C05B008A1033 /* REMServiceAgent.m in Sources */,
 				7A63E26018B44CBD00A13464 /* REMPopNote.m in Sources */,
 				7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */,
 				B48ED3EA178EA1740032CD72 /* REMTimeHelper.m in Sources */,
@@ -4252,10 +4162,8 @@
 				7AF9635518D6C5BD005A8D12 /* REMManagedBuildingRankingModel.m in Sources */,
 				7A9EAA9E18D2946300EF1B85 /* WeiboLoginDialog.m in Sources */,
 				B4DC084017F90E2C005658C1 /* REMAdministratorModel.m in Sources */,
-				7A7EA6E1180548CB00A3BB56 /* REMNetworkStatusIndicator.m in Sources */,
 				EFD947111839DEE100E9EC50 /* DCColumnWrapper.m in Sources */,
 				7A63E23F18B44CBD00A13464 /* REMWidgetMultiTimespanSearchModel.m in Sources */,
-				7A95FF0D188F951000510A07 /* REMDataStore.m in Sources */,
 				7A63E21818B44CBD00A13464 /* REMRelativeDateViewController.m in Sources */,
 				7A63E20318B44CBD00A13464 /* REMLoginCarouselController.m in Sources */,
 				7A63E25B18B44CBD00A13464 /* REMBuildingChartSeriesIndicator.m in Sources */,
@@ -4279,7 +4187,6 @@
 				7A12280C18116DBF004DE778 /* REMViewHelper.m in Sources */,
 				7A63E26518B44CBD00A13464 /* REMChartTooltipItem.m in Sources */,
 				7A63E21718B44CBD00A13464 /* REMDatePickerViewController.m in Sources */,
-				B49C430018B34DB900C3CEFE /* REMDataPersistenceProcessor.m in Sources */,
 				7A63E27818B44CBD00A13464 /* REMSplashMapSegue.m in Sources */,
 				7A63E27018B44CBD00A13464 /* REMBlurredMapView.m in Sources */,
 				7A63E22918B44CBD00A13464 /* REMDataRange.m in Sources */,
@@ -4293,7 +4200,6 @@
 				7A63E21D18B44CBD00A13464 /* REMWidgetMonthPickerViewController.m in Sources */,
 				7AF9635818D6C5BD005A8D12 /* REMManagedPinnedWidgetModel.m in Sources */,
 				7A63E21118B44CBD00A13464 /* REMSplashScreenController.m in Sources */,
-				7ACA952F17B9FCDA0011D33B /* REMServiceMeta.m in Sources */,
 				7A63E25218B44CBD00A13464 /* REMChartLegendBase.m in Sources */,
 				EF1C5AD4183DB3A2002A9AAD /* DAbstractChartWrapper.m in Sources */,
 				7A63E22518B44CBD00A13464 /* REMCommodityUsageModel.m in Sources */,
@@ -4303,7 +4209,6 @@
 				7A9EAA9F18D2946300EF1B85 /* Weibo.m in Sources */,
 				7AF9636718D6C5EB005A8D12 /* REMCommodityUsageValuePersistenceProcessor.m in Sources */,
 				EFEA7EDF1843424500CF4C3E /* _DCRankingXLabelFormatter.m in Sources */,
-				7A63E1EA18B44CBD00A13464 /* LoginBusiness.m in Sources */,
 				7A7B29911888C65000E74D3D /* UIView+FlipTransition.m in Sources */,
 				EFD947091839DCBB00E9EC50 /* DCLineSeries.m in Sources */,
 				EF0BFEA71844B7090026C47D /* DCPieChartAnimationFrame.m in Sources */,
@@ -4332,7 +4237,6 @@
 				7AF9635D18D6C5CC005A8D12 /* BluesPad.xcdatamodeld in Sources */,
 				7A63E26C18B44CBD00A13464 /* REMDashboardCellViewCell.m in Sources */,
 				7A63E25F18B44CBD00A13464 /* REMNumberLabel.m in Sources */,
-				7A4F86FB18C45FC700843304 /* REMServiceSessionAgent.m in Sources */,
 				7AF9638E18D6C9A3005A8D12 /* REMDataStore.m in Sources */,
 				7A63E27618B44CBD00A13464 /* REMMapGallerySegue.m in Sources */,
 				EFE8697D185E9FF800DC0007 /* DCLabelingChartView.m in Sources */,
@@ -4535,6 +4439,7 @@
 				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7s armv7";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -4592,8 +4497,9 @@
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				VALID_ARCHS = "armv7s armv7";
 			};
 			name = Debug;
 		};
@@ -4602,7 +4508,7 @@
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
-				VALID_ARCHS = "i386 x86_64 armv7s armv7";
+				VALID_ARCHS = "armv7s armv7";
 			};
 			name = Release;
 		};
@@ -4625,14 +4531,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
-					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
-					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
-					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
-					/Users/zilong/Documents/Blues/Blues/Trunk/Src,
-					/Users/zilong/Documents/Blues/Blues/Trunk/Lib,
-					/Users/zilong/Documents/Blues/Blues/Blues/Trunk/Lib,
-					/Users/buildserver/BuildFolder/SourceCode/Master/BluesGit/Trunk/Lib,
+					"$(SRCROOT)/../lib",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -4658,7 +4557,7 @@
 				PROVISIONING_PROFILE = "E378B4BF-17FB-42F5-892E-3C851291FF28";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -4679,17 +4578,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../lib",
 					"$(inherited)",
-					"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
-					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
-					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
-					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
-					/Users/zilong/Documents/Blues/Blues/Trunk/Src,
-					/Users/zilong/Documents/Blues/Blues/Trunk/Lib,
-					/Users/zilong/Documents/Blues/Blues/Blues/Trunk/Lib,
-					/Users/buildserver/BuildFolder/SourceCode/Master/BluesGit/Trunk/Lib,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -4709,7 +4601,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -4740,17 +4632,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../lib",
 					"$(inherited)",
-					"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
-					/Users/zhangfeng/Works/Kara/Blues/Trunk/Lib,
-					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Src,
-					/Users/tantan/SECI/Code/Blues2/Blues/Trunk/Lib,
-					/Users/zilong/Documents/Blues/Blues/Trunk/Src,
-					/Users/zilong/Documents/Blues/Blues/Trunk/Lib,
-					/Users/zilong/Documents/Blues/Blues/Blues/Trunk/Lib,
-					/Users/buildserver/BuildFolder/SourceCode/Master/BluesGit/Trunk/Lib,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -4770,7 +4655,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = DailyBuild;

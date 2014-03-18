@@ -19,7 +19,7 @@
     store.persistenceProcessor = processor;
     [store access:^(NSArray *data){
         callback(REMPinToBuildingCoverStatusSuccess);
-    }error:^(NSError *error,REMDataAccessErrorStatus status, REMBusinessErrorInfo * bizError){
+    }failure:^(NSError *error,REMDataAccessStatus status, REMBusinessErrorInfo * bizError){
         if (status == REMDataAccessErrorMessage) {
             if ([bizError.code isEqualToString:@"050001216002"]==YES) {//widget deleted
                 [self showMessage:REMIPadLocalizedString(@"Building_WidgetRelationWidgetDeleted")];
@@ -44,7 +44,7 @@
     manager.canCancel=YES;
     manager.updateSource=REMCustomerUserConcurrencySourceUpdate;
     manager.mainNavigationController = self.mainNavigationController;
-    [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessErrorStatus errorStatus) {
+    [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessStatus errorStatus) {
         if (status == REMCustomerUserConcurrencyStatusSuccess) {
             [self.mainNavigationController presentInitialView];
         }

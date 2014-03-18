@@ -61,13 +61,13 @@
     
     REMDataStore *store = [[REMDataStore alloc] initWithName:self.requestUrl parameter:param accessCache:YES andMessageMap:nil];
     //store.isAccessLocal = YES;
-    store.maskContainer = nil;
+    //store.maskContainer = nil;
     store.groupName = [NSString stringWithFormat:@"building-data-%@", @(buildingId)];
     REMEnergyDataPersistenceProcessor *processor = [[REMEnergyDataPersistenceProcessor alloc]init];
 //    processor.params=param;
 //    processor.dataStoreType = self.requestUrl;
     store.persistenceProcessor = processor;
-    store.disableAlert=YES;
+    store.isDisableAlert=YES;
     [self startLoadingActivity];
     [store access:^(id data) {
         if(self.view==nil)return ;
@@ -78,7 +78,7 @@
         
         
         [self stopLoadingActivity];
-    } error:^(NSError *remError, REMDataAccessErrorStatus status, REMBusinessErrorInfo *bizError) {
+    } failure:^(NSError *remError, REMDataAccessStatus status, REMBusinessErrorInfo *bizError) {
         [self stopLoadingActivity];
         loadCompleted(nil,bizError);
         
@@ -88,7 +88,7 @@
 
 }
 
-- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error withStatus:(REMDataAccessErrorStatus)status{
+- (void)loadDataFailureWithError:(REMBusinessErrorInfo *)error withStatus:(REMDataAccessStatus)status{
     NSString *serverError = nil;
     if (status == REMDataAccessFailed) {
         serverError =REMIPadLocalizedString(@"Common_ServerTimeout");
