@@ -12,7 +12,7 @@
 #import "REMManagedCustomerModel.h"
 @implementation REMLoginPersistenceProcessor
 
-- (id)persistData:(NSDictionary *)data
+- (id)persist:(NSDictionary *)data
 {
     REMUserValidationStatus status = (REMUserValidationStatus)[data[@"ValidationStatus"] intValue];
     REMUserValidationModel *model= [[REMUserValidationModel alloc]init];
@@ -23,7 +23,7 @@
     return model;
 }
 
-- (id)fetchData{
+- (id)fetch{
     
     NSArray *array =  [self.dataStore fetchMangedObject:@"REMManagedUserModel"];
     if (array == nil || [array lastObject]==nil) {
@@ -34,7 +34,7 @@
 
 - (REMManagedUserModel *)persistUserModel:(NSDictionary *)user{
     
-    REMManagedUserModel *oldUser = [self fetchData];
+    REMManagedUserModel *oldUser = [self fetch];
     
     if (oldUser != nil) {
         [self.dataStore deleteManageObject:oldUser];

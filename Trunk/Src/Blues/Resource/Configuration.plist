@@ -63,7 +63,7 @@
 		<key>REMDSUserValidate</key>
 		<dict>
 			<key>ID</key>
-			<integer>1001</integer>
+			<real>101001</real>
 			<key>Url</key>
 			<string>API/AccessControl.svc/ValidateUser</string>
 			<key>Type</key>
@@ -74,7 +74,7 @@
 		<key>REMDSDemoUserValidate</key>
 		<dict>
 			<key>ID</key>
-			<integer>1002</integer>
+			<integer>101002</integer>
 			<key>Url</key>
 			<string>API/AccessControl.svc/ValidateDemoUser</string>
 			<key>Type</key>
@@ -85,7 +85,7 @@
 		<key>REMDSUserCustomerValidate</key>
 		<dict>
 			<key>ID</key>
-			<integer>1003</integer>
+			<integer>101003</integer>
 			<key>Url</key>
 			<string>API/AccessControl.svc/ValidateUserCustomer</string>
 			<key>Type</key>
@@ -96,7 +96,7 @@
 		<key>REMDSUserGetCurrent</key>
 		<dict>
 			<key>ID</key>
-			<integer>2001</integer>
+			<integer>102001</integer>
 			<key>Url</key>
 			<string>API/User.svc/GetCurrentUser</string>
 			<key>Type</key>
@@ -107,7 +107,7 @@
 		<key>REMDSCustomerLogo</key>
 		<dict>
 			<key>ID</key>
-			<integer>3001</integer>
+			<integer>103001</integer>
 			<key>Url</key>
 			<string>API/Hierarchy.svc/GetCustomerLogo</string>
 			<key>Type</key>
@@ -118,7 +118,7 @@
 		<key>REMDSCustomerSwitch</key>
 		<dict>
 			<key>ID</key>
-			<integer>3002</integer>
+			<integer>10103002</integer>
 			<key>Url</key>
 			<string>API/Customer.svc/SwitchCustomer</string>
 			<key>Type</key>
@@ -129,7 +129,7 @@
 		<key>REMDSBuildingInfo</key>
 		<dict>
 			<key>ID</key>
-			<integer>4001</integer>
+			<integer>104001</integer>
 			<key>Url</key>
 			<string>API/Building.svc/GetBuildingInfo</string>
 			<key>Type</key>
@@ -140,7 +140,7 @@
 		<key>REMDSBuildingCommodityTotalUsage</key>
 		<dict>
 			<key>ID</key>
-			<integer>4002</integer>
+			<integer>104002</integer>
 			<key>Url</key>
 			<string>API/Building.svc/GetBuildingCommodityUsage</string>
 			<key>Type</key>
@@ -151,7 +151,7 @@
 		<key>REMDSBuildingOverallData</key>
 		<dict>
 			<key>ID</key>
-			<integer>4003</integer>
+			<integer>104003</integer>
 			<key>Url</key>
 			<string>API/Building.svc/GetBuildingOverallData</string>
 			<key>Type</key>
@@ -162,7 +162,7 @@
 		<key>REMDSBuildingAverageData</key>
 		<dict>
 			<key>ID</key>
-			<integer>4004</integer>
+			<integer>104004</integer>
 			<key>Url</key>
 			<string>API/Building.svc/GetBuildingAverageUsageData</string>
 			<key>Type</key>
@@ -173,7 +173,7 @@
 		<key>REMDSBuildingTimeRangeData</key>
 		<dict>
 			<key>ID</key>
-			<integer>4005</integer>
+			<integer>104005</integer>
 			<key>Url</key>
 			<string>API/Building.svc/GetBuildingTimeRangeData</string>
 			<key>Type</key>
@@ -184,7 +184,7 @@
 		<key>REMDSBuildingPicture</key>
 		<dict>
 			<key>ID</key>
-			<integer>4006</integer>
+			<integer>104006</integer>
 			<key>Url</key>
 			<string>API/Building.svc/GetBuildingPicture</string>
 			<key>Type</key>
@@ -195,7 +195,7 @@
 		<key>REMDSBuildingAirQualityTotalUsage</key>
 		<dict>
 			<key>ID</key>
-			<integer>4007</integer>
+			<integer>104007</integer>
 			<key>Url</key>
 			<string>API/Building.svc/GetBuildingAirQualityUsage</string>
 			<key>Type</key>
@@ -206,7 +206,7 @@
 		<key>REMDSBuildingAirQuality</key>
 		<dict>
 			<key>ID</key>
-			<integer>4008</integer>
+			<integer>104008</integer>
 			<key>Url</key>
 			<string>API/Building.svc/GetBuildingAirQualityData</string>
 			<key>Type</key>
@@ -217,7 +217,7 @@
 		<key>REMDSBuildingPinningToCover</key>
 		<dict>
 			<key>ID</key>
-			<integer>4009</integer>
+			<integer>104009</integer>
 			<key>Url</key>
 			<string>API/Building.svc/CreateBuildingCoverRelation</string>
 			<key>Type</key>
@@ -228,7 +228,7 @@
 		<key>REMDSBuildingInfoUpdate</key>
 		<dict>
 			<key>ID</key>
-			<integer>4010</integer>
+			<integer>104010</integer>
 			<key>Url</key>
 			<string>API/Building.svc/GetBuildingInfoUpdate</string>
 			<key>Type</key>
@@ -239,7 +239,7 @@
 		<key>REMDSDashboardFavorite</key>
 		<dict>
 			<key>ID</key>
-			<integer>5001</integer>
+			<integer>105001</integer>
 			<key>Url</key>
 			<string>API/Dashboard.svc/GetFavoriteDashboards</string>
 			<key>Type</key>
@@ -250,7 +250,7 @@
 		<key>REMDSEnergyTagsTrend</key>
 		<dict>
 			<key>ID</key>
-			<integer>6001</integer>
+			<integer>106001</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/GetTagsData</string>
 			<key>Type</key>
@@ -261,7 +261,7 @@
 		<key>REMDSEnergyTagsTrendUnit</key>
 		<dict>
 			<key>ID</key>
-			<integer>6002</integer>
+			<integer>106002</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/GetEnergyUsageUnitData</string>
 			<key>Type</key>
@@ -272,7 +272,7 @@
 		<key>REMDSEnergyTagsDistribute</key>
 		<dict>
 			<key>ID</key>
-			<integer>6003</integer>
+			<integer>106003</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/AggregateTagsData</string>
 			<key>Type</key>
@@ -283,7 +283,7 @@
 		<key>REMDSEnergyMultiTimeTrend</key>
 		<dict>
 			<key>ID</key>
-			<integer>6004</integer>
+			<integer>106004</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/GetTagsData</string>
 			<key>Type</key>
@@ -294,7 +294,7 @@
 		<key>REMDSEnergyMultiTimeDistribute</key>
 		<dict>
 			<key>ID</key>
-			<integer>6005</integer>
+			<integer>106005</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/AggregateTimeSpansData</string>
 			<key>Type</key>
@@ -305,7 +305,7 @@
 		<key>REMDSEnergyCarbon</key>
 		<dict>
 			<key>ID</key>
-			<integer>6006</integer>
+			<integer>106006</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/GetCarbonUsageData</string>
 			<key>Type</key>
@@ -316,7 +316,7 @@
 		<key>REMDSEnergyCarbonUnit</key>
 		<dict>
 			<key>ID</key>
-			<integer>6007</integer>
+			<integer>106007</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/GetCarbonUsageUnitData</string>
 			<key>Type</key>
@@ -327,7 +327,7 @@
 		<key>REMDSEnergyCarbonDistribute</key>
 		<dict>
 			<key>ID</key>
-			<integer>6008</integer>
+			<integer>106008</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/AggregateCarbonUsageData</string>
 			<key>Type</key>
@@ -338,7 +338,7 @@
 		<key>REMDSEnergyCost</key>
 		<dict>
 			<key>ID</key>
-			<integer>6009</integer>
+			<integer>106009</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/GetCostData</string>
 			<key>Type</key>
@@ -349,7 +349,7 @@
 		<key>REMDSEnergyCostUnit</key>
 		<dict>
 			<key>ID</key>
-			<integer>6010</integer>
+			<integer>106010</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/GetCostUnitData</string>
 			<key>Type</key>
@@ -360,7 +360,7 @@
 		<key>REMDSEnergyCostDistribute</key>
 		<dict>
 			<key>ID</key>
-			<integer>6011</integer>
+			<integer>106011</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/AggregateCostData</string>
 			<key>Type</key>
@@ -371,7 +371,7 @@
 		<key>REMDSEnergyCostElectricity</key>
 		<dict>
 			<key>ID</key>
-			<integer>6012</integer>
+			<integer>106012</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/GetElectricityCostData</string>
 			<key>Type</key>
@@ -382,7 +382,7 @@
 		<key>REMDSEnergyRatio</key>
 		<dict>
 			<key>ID</key>
-			<integer>6013</integer>
+			<integer>106013</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/RatioGetTagsData</string>
 			<key>Type</key>
@@ -393,7 +393,7 @@
 		<key>REMDSEnergyRankingEnergy</key>
 		<dict>
 			<key>ID</key>
-			<integer>6014</integer>
+			<integer>106014</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/RankingEnergyUsageData</string>
 			<key>Type</key>
@@ -404,7 +404,7 @@
 		<key>REMDSEnergyRankingCost</key>
 		<dict>
 			<key>ID</key>
-			<integer>6015</integer>
+			<integer>106015</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/RankingCostData</string>
 			<key>Type</key>
@@ -415,7 +415,7 @@
 		<key>REMDSEnergyRankingCarbon</key>
 		<dict>
 			<key>ID</key>
-			<integer>6016</integer>
+			<integer>106016</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/RankingCarbonData</string>
 			<key>Type</key>
@@ -426,7 +426,7 @@
 		<key>REMDSEnergyLabeling</key>
 		<dict>
 			<key>ID</key>
-			<integer>6017</integer>
+			<integer>106017</integer>
 			<key>Url</key>
 			<string>API/Energy.svc/LabellingGetTagsData</string>
 			<key>Type</key>
@@ -437,7 +437,7 @@
 		<key>REMDSLogSend</key>
 		<dict>
 			<key>ID</key>
-			<integer>7001</integer>
+			<integer>107001</integer>
 			<key>Url</key>
 			<string>API/Log.svc/SendLog</string>
 			<key>Type</key>

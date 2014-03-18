@@ -9,6 +9,7 @@
 #import "REMDataStore.h"
 #import "REMApplicationContext.h"
 #import "REMCommonDefinition.h"
+#import "REMAppDelegate.h"
 
 
 @interface REMCacheStoreHolder : NSObject
@@ -50,6 +51,34 @@ static REMCacheStoreHolder *cacheStoreHolder;
     return cacheStoreHolder;
 }
 
+#pragma mark - Override property setter
+- (void)setPersistenceProcessor:(REMDataPersistenceProcessor *)persistenceProcessor
+{
+    _persistenceProcessor = persistenceProcessor;
+    _persistenceProcessor.dataStore = self;
+}
+
+- (void)setRemoteServiceRequest:(REMRemoteServiceRequest *)remoteServiceRequest
+{
+    _remoteServiceRequest = remoteServiceRequest;
+    _remoteServiceRequest.dataStore = self;
+}
+
+-(NSManagedObjectModel *)managedObjectModel
+{
+    return [REMAppDelegate app].managedObjectModel;
+    
+}
+-(NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+    return [REMAppDelegate app].persistentStoreCoordinator;
+}
+
+-(NSManagedObjectContext *)managedObjectContext
+{
+    return [REMAppDelegate app].managedObjectContext;
+}
+
 #pragma mark - Store
 - (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter accessCache:(BOOL)accessCache andMessageMap:(NSDictionary *)messageMap{
     self = [super init];
@@ -59,8 +88,8 @@ static REMCacheStoreHolder *cacheStoreHolder;
         
         self.name = name;
         self.parameter = parameter;
-        self.url = [serviceItem[@"Url"] stringValue];
-        self.responseType = [serviceItem[@"Type"] intValue];
+        self.url = serviceItem[@"Url"];
+        self.responseType = [serviceItem[@"Type"] unsignedIntegerValue];
         self.isAccessCache = accessCache;
         if(messageMap == nil)
             self.messageMap = REMNetworkMessageMap;
@@ -178,7 +207,7 @@ static REMCacheStoreHolder *cacheStoreHolder;
     __block NSString *serviceName = @"";
     
     [REMAppConfig.services enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        if([obj[@"ID"] integerValue] == type){
+        if([obj[@"ID"] unsignedIntegerValue] == (NSUInteger)type){
             serviceName = key;
             *stop = YES;
         }
@@ -236,6 +265,7 @@ static REMCacheStoreHolder *cacheStoreHolder;
 {
     REMRemoteServiceRequest *request = [[REMRemoteServiceRequest alloc] init];
     self.remoteServiceRequest = request;
+    
     
     [self.remoteServiceRequest request:^(id data) {
         if([REMApplicationContext instance].cacheMode == YES){

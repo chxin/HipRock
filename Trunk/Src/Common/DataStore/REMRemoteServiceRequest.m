@@ -30,18 +30,17 @@
  *  <#Description#>
  *
  *  @param success <#success description#>
- *  @param error   <#error description#>
+ *  @param failure <#failure description#>
  */
 - (void) request:(REMDataAccessSuccessBlock)success failure:(REMDataAccessFailureBlock)failure
 {
-    REMHTTPRequestOperationManager *manager = [REMHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = self.dataStore.responseType == REMServiceResponseJson ? [AFJSONResponseSerializer serializer] : nil;
+    REMHTTPRequestOperationManager *manager = REMAppContext.sharedRequestOperationManager;
     
     NSURLRequest *request = [manager.requestSerializer requestBySerializingRequest:[self buildRequest] withParameters:self.dataStore.parameter error:nil] ;
     
-    REMHTTPRequestOperation *operation = [manager RequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    REMHTTPRequestOperation *operation = [manager RequestOperationWithRequest:request responseType:self.dataStore.responseType success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //if there is error message, enter ERROR status
+        NSLog(@"%@", operation.responseString);
         if([operation.responseString hasPrefix:@"{\"error\":"] == YES) {
             //TODO: process error message with different error types
             REMBusinessErrorInfo *businessError = [[REMBusinessErrorInfo alloc] initWithJSONString:operation.responseString];
@@ -50,16 +49,19 @@
             failure(error, REMDataAccessErrorMessage, businessError);
         }
         else{ //if ok, enter SUCCESS status
-            success(responseObject);
+            id result = self.dataStore.responseType == REMServiceResponseJson ? responseObject[[responseObject allKeys][0]] : responseObject;
+            success(result);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         REMDataAccessStatus status = [self decideErrorStatus:error];
+        REMLogError(@"error:");
         
         failure(error, status, operation.responseString);
     }];
     
     operation.group = self.dataStore.groupName;
     
+    NSLog(@"%@", request.URL.absoluteString);
     [manager.operationQueue addOperation:operation];
     self.operation = operation;
 }
@@ -76,7 +78,8 @@
 #pragma mark - @privates
 -(NSMutableURLRequest *)buildRequest
 {
-    NSURL *url = [[NSURL alloc] initWithString:self.dataStore.url relativeToURL:REMAppConfig.currentDataSource[@"url"]];
+    NSURL *url = [[NSURL alloc] initWithString:self.dataStore.url relativeToURL:[NSURL URLWithString:REMAppConfig.currentDataSource[@"url"]]];
+    //NSURL *url = [NSURL URLWithString:@"http://www.baid.com"];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
@@ -98,12 +101,16 @@
     REMManagedUserModel *user = REMAppCurrentManagedUser;
     NSString *token = [REMEncryptHelper base64AES256EncryptString:[NSString stringWithFormat:@"%lld|%@|%lld",[user.id longLongValue],user.name, [user.spId longLongValue] ] withKey:REMSecurityTokenKey];
     
-    NSDictionary *headers = @{@"Accept": @"application/json",
+    NSString *accept = self.dataStore.responseType == REMServiceResponseJson ? @"*/*":@"image/webp,*/*;";
+    
+    NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithDictionary: @{ @"Accept": accept,
+                              @"Content-Type": @"application/json",
                               @"accept-encoding": @"gzip,deflate,sdch",
                               @"User-Agent": userAgent,
                               @"Blues-Version": version,
                               @"Blues-User": token,
-                              };
+                              }];
+    
     return headers;
 }
 

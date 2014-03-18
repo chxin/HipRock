@@ -169,17 +169,13 @@
             NSDictionary *parameter = @{@"pictureId":[imageIds[0] id], @"isSmall":@"true"};
             REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingPicture parameter:parameter accessCache:YES andMessageMap:nil];
             store.groupName = kGalleryBuildingImageGroupName;
-            [store access:^(id data) {
-                if(data == nil || [data length] <= 2)
-                    return;
+            [store access:^(id image) {
+                [REMImageHelper writeImageFile:image withFullPath:smallImagePath];
                 
-                UIImage *smallImage = [REMImageHelper parseImageFromNSData:data withScale:1.0];
-                [REMImageHelper writeImageFile:smallImage withFullPath:smallImagePath];
-                
-                UIImage *smallBlurImage = [REMImageHelper blurImage:smallImage];
+                UIImage *smallBlurImage = [REMImageHelper blurImage:image];
                 [REMImageHelper writeImageFile:smallBlurImage withFullPath:smallBlurImagePath];
                 
-                completed([UIImage imageWithContentsOfFile:smallImagePath]);
+                completed(image);
             }];
         }
     }

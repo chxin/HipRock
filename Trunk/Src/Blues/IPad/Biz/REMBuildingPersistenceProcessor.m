@@ -18,9 +18,9 @@
 #import "REMWidgetContentSyntax.h"
 @implementation REMBuildingPersistenceProcessor
 
-- (id)persistData:(NSArray *)data
+- (id)persist:(NSArray *)data
 {
-    for (REMManagedBuildingModel *building in  [self fetchData]) {
+    for (REMManagedBuildingModel *building in  [self fetch]) {
         [self.dataStore deleteManageObject:building];
     }
     
@@ -35,7 +35,7 @@
     
     [self.dataStore persistManageObject];
     
-    return [self fetchData];
+    return [self fetch];
 }
 
 - (void)persistPinnedWidget:(NSArray *)pinnedWidgetArray intoBuilding:(REMManagedBuildingModel *)building{
@@ -286,7 +286,7 @@
 
 
 
-- (id)fetchData
+- (id)fetch
 {
     NSArray *buildings = [self.dataStore fetchMangedObject:@"REMManagedBuildingModel"];
     

@@ -19,70 +19,70 @@ typedef enum _REMDataAccessStatus : NSUInteger{
     REMDataAccessCanceled = 4,
 } REMDataAccessStatus;
 
-typedef enum _REMDataStoreType
+typedef enum _REMDataStoreType : NSUInteger
 {
     /*
-     * AccessControl        01
+     * AccessControl        101
      */
-    REMDSUserValidate                   = 01001,
-    REMDSDemoUserValidate               = 01002,
-    REMDSUserCustomerValidate           = 01003,
+    REMDSUserValidate                   = 101001,
+    REMDSDemoUserValidate               = 101002,
+    REMDSUserCustomerValidate           = 101003,
     
     /**
-     * User                 02
+     * User                 102
      */
-    REMDSUserGetCurrent                 = 02001,
+    REMDSUserGetCurrent                 = 102001,
     
     /**
-     * Customer             03
+     * Customer             103
      */
-    REMDSCustomerLogo                   = 03001,
-    REMDSCustomerSwitch                 = 03002,
+    REMDSCustomerLogo                   = 103001,
+    REMDSCustomerSwitch                 = 103002,
     
     /**
-     *	Building            04
+     *	Building            104
      */
     
-    REMDSBuildingInfo                   = 04001,
-    REMDSBuildingCommodityTotalUsage    = 04002,
-    REMDSBuildingOverallData            = 04003,
-    REMDSBuildingAverageData            = 04004,
-    REMDSBuildingTimeRangeData          = 04005,
-    REMDSBuildingPicture                = 04006,
-    REMDSBuildingAirQualityTotalUsage   = 04007,
-    REMDSBuildingAirQuality             = 4008,
-    REMDSBuildingPinningToCover         = 4009,
-    REMDSBuildingInfoUpdate             = 04010,
+    REMDSBuildingInfo                   = 104001,
+    REMDSBuildingCommodityTotalUsage    = 104002,
+    REMDSBuildingOverallData            = 104003,
+    REMDSBuildingAverageData            = 104004,
+    REMDSBuildingTimeRangeData          = 104005,
+    REMDSBuildingPicture                = 104006,
+    REMDSBuildingAirQualityTotalUsage   = 104007,
+    REMDSBuildingAirQuality             = 104008,
+    REMDSBuildingPinningToCover         = 104009,
+    REMDSBuildingInfoUpdate             = 104010,
     
     /*
-     * Dashboard stores     05
+     * Dashboard stores     105
      */
-    REMDSDashboardFavorite              = 05001,
+    REMDSDashboardFavorite              = 105001,
     
     /*
-     * Energy stores        06
+     * Energy stores        106
      */
-    REMDSEnergyTagsTrend                = 06001,
-    REMDSEnergyTagsTrendUnit            = 06002,
-    REMDSEnergyTagsDistribute           = 06003,
-    REMDSEnergyMultiTimeTrend           = 06004,
-    REMDSEnergyMultiTimeDistribute      = 06005,
-    REMDSEnergyCarbon                   = 06006,
-    REMDSEnergyCarbonUnit               = 06007,
-    REMDSEnergyCarbonDistribute         = 6008,
-    REMDSEnergyCost                     = 6009,
-    REMDSEnergyCostUnit                 = 06010,
-    REMDSEnergyCostDistribute           = 06011,
-    REMDSEnergyCostElectricity          = 06012,
-    REMDSEnergyRatio                    = 06013,
-    REMDSEnergyRankingEnergy            = 06014,
-    REMDSEnergyRankingCost              = 06015,
-    REMDSEnergyRankingCarbon            = 06016,
-    REMDSEnergyLabeling                 = 06017,
+    REMDSEnergyTagsTrend                = 106001,
+    REMDSEnergyTagsTrendUnit            = 106002,
+    REMDSEnergyTagsDistribute           = 106003,
+    REMDSEnergyMultiTimeTrend           = 106004,
+    REMDSEnergyMultiTimeDistribute      = 106005,
+    REMDSEnergyCarbon                   = 106006,
+    REMDSEnergyCarbonUnit               = 106007,
+    REMDSEnergyCarbonDistribute         = 106008,
+    REMDSEnergyCost                     = 106009,
+    REMDSEnergyCostUnit                 = 106010,
+    REMDSEnergyCostDistribute           = 106011,
+    REMDSEnergyCostElectricity          = 106012,
+    REMDSEnergyRatio                    = 106013,
+    REMDSEnergyRankingEnergy            = 106014,
+    REMDSEnergyRankingCost              = 106015,
+    REMDSEnergyRankingCarbon            = 106016,
+    REMDSEnergyLabeling                 = 106017,
     /*
-     * Other                07
+     * Other                107
      */
-    REMDSLogSend                        = 07001,
+    REMDSLogSend                        = 107001,
     
 } REMDataStoreType;
 

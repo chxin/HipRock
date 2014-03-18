@@ -86,10 +86,10 @@ static NSString *customerUpdateAll=@"customerupdateall";
         logoStore.parentStore=store;
         
         [logoStore access:^(id data1) {
-            UIImage *logo = nil;
-            if(data1 != nil && [data1 length] > 2) {
-                logo = [REMImageHelper parseImageFromNSData:data1 withScale:1.0];
-            }
+            UIImage *logo = data1;
+//            if(data1 != nil && [data1 length] > 2) {
+//                logo = [REMImageHelper parseImageFromNSData:data1 withScale:1.0];
+//            }
             
             REMAppCurrentLogo = logo;
             

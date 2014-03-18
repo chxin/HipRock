@@ -9,7 +9,7 @@
 
 @implementation REMPinToCoverPersistenceProcessor
 
-- (id)fetchData{
+- (id)fetch{
     NSMutableArray *array = [NSMutableArray array];
     for (REMManagedBuildingCommodityUsageModel *commodityInfo in [self.buildingInfo.commodities allObjects]) {
         [array arrayByAddingObjectsFromArray:[commodityInfo.pinnedWidgets allObjects]];
@@ -19,9 +19,9 @@
     return array;
 }
 
-- (id)persistData:(NSArray *)data{
+- (id)persist:(NSArray *)data{
     
-    NSArray *oldData = [self fetchData];
+    NSArray *oldData = [self fetch];
     
     for (REMManagedPinnedWidgetModel *model  in oldData) {
         [self.dataStore deleteManageObject:model];
@@ -48,7 +48,7 @@
         
     }
     [self.dataStore persistManageObject];
-    return [self fetchData];
+    return [self fetch];
 }
 
 @end

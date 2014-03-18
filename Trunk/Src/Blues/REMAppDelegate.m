@@ -12,6 +12,7 @@
 #import "Weibo.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import "REMCommonHeaders.h"
+#import "UIKit+AFNetworking.h"
 
 //comment
 
@@ -52,6 +53,7 @@
     
     // Google key init
     [GMSServices provideAPIKey:kGoogleMapsKey];
+    
     
     return YES;
 }

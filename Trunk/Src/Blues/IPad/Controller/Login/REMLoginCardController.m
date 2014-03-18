@@ -140,6 +140,7 @@
     NSDictionary *messageMap = REMDataAccessMessageMake(@"Login_NoNetwork",@"Login_NetworkFailed",@"Login_ServerError",@"");
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserValidate parameter:parameter accessCache:NO andMessageMap:messageMap];
     store.persistenceProcessor = [[REMLoginPersistenceProcessor alloc] init];
+    
     [store access:^(REMUserValidationModel *validationResult) {
         if(REMIsNilOrNull(validationResult)){ //TODO: empty response?
             return ;

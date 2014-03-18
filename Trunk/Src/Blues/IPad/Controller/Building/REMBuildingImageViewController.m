@@ -455,8 +455,9 @@
         store.groupName=self.loadingImageKey;
         
         store.isDisableAlert=YES;
-        [store access:^(NSData *data){
-            if(data == nil || [data length] == 2) return;
+        [store access:^(id img){
+            NSData *data = UIImagePNGRepresentation(img);
+            //if(data == nil || [data length] == 2) return;
             
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){

@@ -7,6 +7,8 @@
 //
 
 #import "REMHTTPRequestOperationManager.h"
+#import "UIKit+AFNetworking.h"
+#import "REMDataStore.h"
 
 @implementation REMHTTPRequestOperationManager
 
@@ -18,6 +20,7 @@ static NSOperationQueue *queue;
 + (instancetype)manager {
     REMHTTPRequestOperationManager *manager = [[[self class] alloc] initWithBaseURL:nil];
     manager.reachabilityManager = [AFNetworkReachabilityManager sharedManager];
+    [manager.reachabilityManager startMonitoring];
     
     [manager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         if(status == AFNetworkReachabilityStatusReachableViaWiFi){
@@ -27,7 +30,7 @@ static NSOperationQueue *queue;
             queue.maxConcurrentOperationCount = kMAXQUEUEWWAN;
         }
         else{
-            queue.maxConcurrentOperationCount = 0;
+            queue.maxConcurrentOperationCount = kMAXQUEUEWIFI;
         }
         
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
@@ -35,17 +38,18 @@ static NSOperationQueue *queue;
     
     if(queue == nil){
         queue = [[NSOperationQueue alloc] init];
-        queue.maxConcurrentOperationCount = [manager.reachabilityManager isReachableViaWiFi]?kMAXQUEUEWIFI:[manager.reachabilityManager isReachableViaWWAN] ? kMAXQUEUEWWAN : 0;
     }
     
     manager.operationQueue = queue;
     
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    
     return manager;
 }
 
-- (REMHTTPRequestOperation *)RequestOperationWithRequest:(NSURLRequest *)request
-                                                    success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+- (REMHTTPRequestOperation *)RequestOperationWithRequest:(NSURLRequest *)request responseType:(REMServiceResponseType)responseType  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     REMHTTPRequestOperation *operation = [[REMHTTPRequestOperation alloc] initWithRequest:request];
     operation.responseSerializer = self.responseSerializer;
@@ -53,9 +57,25 @@ static NSOperationQueue *queue;
     operation.credential = self.credential;
     operation.securityPolicy = self.securityPolicy;
     
+    [self setOperationAcceptableContentTypes:operation withResponseType:responseType];
+    
     [operation setCompletionBlockWithSuccess:success failure:failure];
     
     return operation;
+}
+
+/**
+ *  <#Description#>
+ *
+ *  @param operation    <#operation description#>
+ *  @param responseType <#responseType description#>
+ */
+- (void)setOperationAcceptableContentTypes:(REMHTTPRequestOperation *)operation withResponseType:(REMServiceResponseType)responseType
+{
+    operation.responseSerializer = responseType == REMServiceResponseJson ? [AFJSONResponseSerializer serializer] : [AFImageResponseSerializer serializer];
+    NSMutableSet *acceptableContentTypes = [NSMutableSet setWithSet:operation.responseSerializer.acceptableContentTypes];
+    [acceptableContentTypes addObject:@"text/html"];
+    operation.responseSerializer.acceptableContentTypes = acceptableContentTypes;
 }
 
 

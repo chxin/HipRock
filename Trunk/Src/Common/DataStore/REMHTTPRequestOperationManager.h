@@ -7,6 +7,7 @@
 //
 
 #import "AFNetworking.h"
+#import "REMDataStore.h"
 
 @interface REMHTTPRequestOperation : AFHTTPRequestOperation
 
@@ -16,7 +17,7 @@
 
 @interface REMHTTPRequestOperationManager : AFHTTPRequestOperationManager
 
-- (REMHTTPRequestOperation *)RequestOperationWithRequest:(NSURLRequest *)request success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (REMHTTPRequestOperation *)RequestOperationWithRequest:(NSURLRequest *)request responseType:(REMServiceResponseType)responseType  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 + (void) cancel:(NSString *)group;
 
