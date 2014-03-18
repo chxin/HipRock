@@ -1290,7 +1290,7 @@
 		7A7B29901888C65000E74D3D /* UIView+FlipTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FlipTransition.m"; sourceTree = "<group>"; };
 		7A7B29921888C8DF00E74D3D /* SplashScreenBackgroud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashScreenBackgroud.png; sourceTree = "<group>"; };
 		7A7B29931888C8DF00E74D3D /* SplashScreenBackgroud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenBackgroud@2x.png"; sourceTree = "<group>"; };
-		7A82C1B218229831009835C4 /* REMCommonDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMCommonDefinition.h; path = Common/Constants/REMCommonDefinition.h; sourceTree = "<group>"; };
+		7A82C1B218229831009835C4 /* REMConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMConstants.h; path = Common/Constants/REMConstants.h; sourceTree = "<group>"; };
 		7A9B1E1C177B3A8B00C282A8 /* Blues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blues.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		7A9B1E21177B3A8B00C282A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -1347,6 +1347,9 @@
 		7AA6464918C056050081E96E /* REMSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingViewController.m; sourceTree = "<group>"; };
 		7AB34E4A177D2975003E235E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		7AB34E4B177D2975003E235E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		7AB37B1D18D845B4007D4212 /* REMVendorMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMVendorMacro.h; path = Common/Application/REMVendorMacro.h; sourceTree = "<group>"; };
+		7AB37B1E18D845CA007D4212 /* REMUtilityMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMUtilityMacro.h; path = Common/Application/REMUtilityMacro.h; sourceTree = "<group>"; };
+		7AB37B1F18D8460E007D4212 /* REMAppMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMAppMacro.h; path = Common/Application/REMAppMacro.h; sourceTree = "<group>"; };
 		7AB71682187F839500EA7544 /* DefaultMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultMap.png; sourceTree = "<group>"; };
 		7AB71683187F839500EA7544 /* DefaultMap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultMap@2x.png"; sourceTree = "<group>"; };
 		7AB71686187F859B00EA7544 /* MapBlur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapBlur.png; sourceTree = "<group>"; };
@@ -2020,7 +2023,10 @@
 				7A3290EA18D83CBF00B3AE8A /* REMAppConfiguration.m */,
 				7A3290EB18D83CBF00B3AE8A /* REMApplicationContext.h */,
 				7A3290EC18D83CBF00B3AE8A /* REMApplicationContext.m */,
-				7A82C1B218229831009835C4 /* REMCommonDefinition.h */,
+				7A82C1B218229831009835C4 /* REMConstants.h */,
+				7AB37B1D18D845B4007D4212 /* REMVendorMacro.h */,
+				7AB37B1E18D845CA007D4212 /* REMUtilityMacro.h */,
+				7AB37B1F18D8460E007D4212 /* REMAppMacro.h */,
 			);
 			name = Application;
 			sourceTree = "<group>";

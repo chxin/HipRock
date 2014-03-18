@@ -8,6 +8,7 @@
 
 #import "REMEncryptHelper.h"
 #import <CommonCrypto/CommonCryptor.h>
+#import "REMAppMacro.h"
 
 #if !defined(GTM_INLINE)
 #if defined (__GNUC__) && (__GNUC__ == 4)

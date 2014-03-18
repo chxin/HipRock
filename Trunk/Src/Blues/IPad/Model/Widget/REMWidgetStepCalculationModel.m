@@ -7,7 +7,7 @@
 //
 
 #import "REMWidgetStepCalculationModel.h"
-#import "REMCommonDefinition.h"
+#import "REMCommonHeaders.h"
 
 @implementation REMWidgetStepCalculationModel
 

@@ -12,7 +12,7 @@
 #ifndef Blues_REMImages_h
 #define Blues_REMImages_h
 
-#import "REMCommonDefinition.h"
+#import "REMUtilityMacro.h"
 
 #pragma mark - Definitions
 

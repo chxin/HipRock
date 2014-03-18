@@ -10,7 +10,7 @@
 #ifndef Blues_REMLocalizeKeys_h
 #define Blues_REMLocalizeKeys_h
 
-#import "REMCommonDefinition.h"
+#import "REMUtilityMacro.h"
 
 #pragma mark Common
 //Common, prefix: kLNCommon_

@@ -9,7 +9,7 @@
 #ifndef Blues_REMDimensions_h
 #define Blues_REMDimensions_h
 
-#import "REMCommonDefinition.h"
+#import "REMUtilityMacro.h"
 
 #import "REMDimensionForSplashScreen.h"
 #import "REMDimensionForLogin.h"

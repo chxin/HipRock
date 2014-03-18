@@ -2,16 +2,20 @@
 //Animation
 #import "UIView+FlipTransition.h"
 
-//Configuration
+//Application
 #import "REMAppConfiguration.h"
+#import "REMApplicationContext.h"
+#import "REMAppMacro.h"
+#import "REMUtilityMacro.h"
+#import "REMVendorMacro.h"
 
 //Constants
-#import "REMApplicationContext.h"
-#import "REMCommonDefinition.h"
+#import "REMConstants.h"
 
 //DataStore
 #import "REMDataPersistenceProcessor.h"
 #import "REMDataStore.h"
+#import "REMDataStoreMacros.h"
 #import "REMHTTPRequestOperationManager.h"
 #import "REMRemoteServiceRequest.h"
 
@@ -34,10 +38,10 @@
 #import "REMAlertHelper.h"
 #import "REMColor.h"
 #import "REMEncryptHelper.h"
+#import "REMHttpHelper.h"
 #import "REMImageHelper.h"
 #import "REMJSONHelper.h"
 #import "REMMaskManager.h"
-#import "REMHttpHelper.h"
 #import "REMNumberExtension.h"
 #import "REMNumberHelper.h"
 #import "REMTimeHelper.h"

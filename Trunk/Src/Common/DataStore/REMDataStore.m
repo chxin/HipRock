@@ -8,7 +8,7 @@
 
 #import "REMDataStore.h"
 #import "REMApplicationContext.h"
-#import "REMCommonDefinition.h"
+#import "REMCommonHeaders.h"
 #import "REMAppDelegate.h"
 
 
@@ -91,10 +91,12 @@ static REMCacheStoreHolder *cacheStoreHolder;
         self.url = serviceItem[@"Url"];
         self.responseType = [serviceItem[@"Type"] unsignedIntegerValue];
         self.isAccessCache = accessCache;
-        if(messageMap == nil)
+        if(messageMap == nil){
             self.messageMap = REMNetworkMessageMap;
-        else
+        }
+        else{
             self.messageMap = messageMap;
+        }
     }
     
     

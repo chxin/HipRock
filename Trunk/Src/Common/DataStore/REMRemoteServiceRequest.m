@@ -8,7 +8,7 @@
 
 #import "REMRemoteServiceRequest.h"
 #import "AFNetworking.h"
-#import "REMCommonDefinition.h"
+#import "REMCommonHeaders.h"
 #import "REMAppConfiguration.h"
 #import "REMApplicationContext.h"
 #import "REMEncryptHelper.h"
