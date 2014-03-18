@@ -571,7 +571,6 @@
 		7AAA248F18B5AC9C002069EA /* _DCRankingXLabelFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEA7EDE1843424500CF4C3E /* _DCRankingXLabelFormatter.m */; };
 		7AAA249018B5AC9C002069EA /* _DCHPinchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC1F1841C886004B9EFD /* _DCHPinchGestureRecognizer.m */; };
 		7AAA249118B5AC9C002069EA /* DCPieLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF7CF5F5185D82F2000BA4AE /* DCPieLayer.m */; };
-		7AAA249218B5AC9C002069EA /* _DCLine.m in Sources */ = {isa = PBXBuildFile; fileRef = EF13626E184EFC6F00BEF648 /* _DCLine.m */; };
 		7AAA249318B5AC9C002069EA /* _DCLineSymbolsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5ADC183E23DA002A9AAD /* _DCLineSymbolsLayer.m */; };
 		7AAA249418B5AC9C002069EA /* _DCColumnsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946EE1839DCBB00E9EC50 /* _DCColumnsLayer.m */; };
 		7AAA249518B5AC9C002069EA /* _DCSeriesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B2183B520100DE186A /* _DCSeriesLayer.m */; };
@@ -727,7 +726,6 @@
 		EF0459941845CEAF0086D5AC /* _DCXYIndicatorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0459931845CEAF0086D5AC /* _DCXYIndicatorLayer.m */; };
 		EF0BFEA41844A5A60026C47D /* DCPieChartAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BFEA31844A5A60026C47D /* DCPieChartAnimationManager.m */; };
 		EF0BFEA71844B7090026C47D /* DCPieChartAnimationFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0BFEA61844B7090026C47D /* DCPieChartAnimationFrame.m */; };
-		EF13626F184EFC6F00BEF648 /* _DCLine.m in Sources */ = {isa = PBXBuildFile; fileRef = EF13626E184EFC6F00BEF648 /* _DCLine.m */; };
 		EF1C5AD4183DB3A2002A9AAD /* DAbstractChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD3183DB3A2002A9AAD /* DAbstractChartWrapper.m */; };
 		EF1C5AD7183DB3CB002A9AAD /* DCTrendWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD6183DB3CB002A9AAD /* DCTrendWrapper.m */; };
 		EF1C5ADA183E00C9002A9AAD /* _DCXLabelFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD9183E00C9002A9AAD /* _DCXLabelFormatter.m */; };
@@ -738,6 +736,7 @@
 		EF2043B5187BDC4300272319 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2043B4187BDC4300272319 /* CoreText.framework */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
+		EF45081618D7E5210005096F /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45081418D7E5210005096F /* GTMBase64.m */; };
 		EF5D1A801867D10E0069C8F5 /* _DCVGridlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5D1A7F1867D10E0069C8F5 /* _DCVGridlineLayer.m */; };
 		EF652B68185867C2007D4049 /* DCTrendAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EF652B67185867C2007D4049 /* DCTrendAnimationManager.m */; };
 		EF7CF5F6185D82F2000BA4AE /* DCPieLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF7CF5F5185D82F2000BA4AE /* DCPieLayer.m */; };
@@ -1510,8 +1509,6 @@
 		EF0BFEA31844A5A60026C47D /* DCPieChartAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieChartAnimationManager.m; path = Common/Utility/DChart/ChartView/DCPieChartAnimationManager.m; sourceTree = "<group>"; };
 		EF0BFEA51844B7090026C47D /* DCPieChartAnimationFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieChartAnimationFrame.h; path = Common/Utility/DChart/ChartView/DCPieChartAnimationFrame.h; sourceTree = "<group>"; };
 		EF0BFEA61844B7090026C47D /* DCPieChartAnimationFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieChartAnimationFrame.m; path = Common/Utility/DChart/ChartView/DCPieChartAnimationFrame.m; sourceTree = "<group>"; };
-		EF13626D184EFC6F00BEF648 /* _DCLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLine.h; path = Common/Utility/DChart/Series/_DCLine.h; sourceTree = "<group>"; };
-		EF13626E184EFC6F00BEF648 /* _DCLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLine.m; path = Common/Utility/DChart/Series/_DCLine.m; sourceTree = "<group>"; };
 		EF1C5AD2183DB3A2002A9AAD /* DAbstractChartWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DAbstractChartWrapper.h; path = Common/Utility/DChartWrapper/DAbstractChartWrapper.h; sourceTree = "<group>"; };
 		EF1C5AD3183DB3A2002A9AAD /* DAbstractChartWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DAbstractChartWrapper.m; path = Common/Utility/DChartWrapper/DAbstractChartWrapper.m; sourceTree = "<group>"; };
 		EF1C5AD5183DB3CB002A9AAD /* DCTrendWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCTrendWrapper.h; path = Common/Utility/DChartWrapper/DCTrendWrapper.h; sourceTree = "<group>"; };
@@ -1534,6 +1531,9 @@
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
+		EF45081318D7E5210005096F /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
+		EF45081418D7E5210005096F /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		EF45081518D7E5210005096F /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		EF5D1A7E1867D10E0069C8F5 /* _DCVGridlineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCVGridlineLayer.h; sourceTree = "<group>"; };
 		EF5D1A7F1867D10E0069C8F5 /* _DCVGridlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCVGridlineLayer.m; sourceTree = "<group>"; };
 		EF652B66185867C2007D4049 /* DCTrendAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCTrendAnimationManager.h; path = Common/Utility/DChart/ChartView/DCTrendAnimationManager.h; sourceTree = "<group>"; };
@@ -2043,6 +2043,9 @@
 		7A5E2D47177B3CE2000F77F9 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				EF45081318D7E5210005096F /* GTMBase64.h */,
+				EF45081418D7E5210005096F /* GTMBase64.m */,
+				EF45081518D7E5210005096F /* GTMDefines.h */,
 				EFD9470E1839DEAF00E9EC50 /* DChartWrapper */,
 				B49B6F4F1781491800BC130A /* REMColor.h */,
 				B49B6F501781491800BC130A /* REMColor.m */,
@@ -3196,8 +3199,6 @@
 		EFC4D21A1855768200E04688 /* Line */ = {
 			isa = PBXGroup;
 			children = (
-				EF13626D184EFC6F00BEF648 /* _DCLine.h */,
-				EF13626E184EFC6F00BEF648 /* _DCLine.m */,
 				EF1C5ADB183E23DA002A9AAD /* _DCLineSymbolsLayer.h */,
 				EF1C5ADC183E23DA002A9AAD /* _DCLineSymbolsLayer.m */,
 			);
@@ -3749,7 +3750,6 @@
 				7AAA248F18B5AC9C002069EA /* _DCRankingXLabelFormatter.m in Sources */,
 				7AAA249018B5AC9C002069EA /* _DCHPinchGestureRecognizer.m in Sources */,
 				7AAA249118B5AC9C002069EA /* DCPieLayer.m in Sources */,
-				7AAA249218B5AC9C002069EA /* _DCLine.m in Sources */,
 				7AAA249318B5AC9C002069EA /* _DCLineSymbolsLayer.m in Sources */,
 				7AAA249418B5AC9C002069EA /* _DCColumnsLayer.m in Sources */,
 				7AAA249518B5AC9C002069EA /* _DCSeriesLayer.m in Sources */,
@@ -4045,6 +4045,7 @@
 				7A63E24B18B44CBD00A13464 /* REMBuildingTitleLabelView.m in Sources */,
 				7A63E1F018B44CBD00A13464 /* REMBuildingAverageChartViewController.m in Sources */,
 				7A63E21E18B44CBD00A13464 /* REMAirQualityDataModel.m in Sources */,
+				EF45081618D7E5210005096F /* GTMBase64.m in Sources */,
 				7A63E23018B44CBD00A13464 /* REMWidgetObject.m in Sources */,
 				7A9EAA8C18D2946300EF1B85 /* WeiboRequestOperation.m in Sources */,
 				7A399E97177D238F00F0EB9F /* AFHTTPRequestOperation.m in Sources */,
@@ -4085,7 +4086,6 @@
 				7A63E23618B44CBD00A13464 /* REMEnergyViewData.m in Sources */,
 				7A63E23418B44CBD00A13464 /* REMEnergyLabellingLevelData.m in Sources */,
 				7A63E1F218B44CBD00A13464 /* REMBuildingChartContainerViewController.m in Sources */,
-				EF13626F184EFC6F00BEF648 /* _DCLine.m in Sources */,
 				7A63E27218B44CBD00A13464 /* REMGalleryGroupView.m in Sources */,
 				7A63E23218B44CBD00A13464 /* REMEnergyData.m in Sources */,
 				7A63E22A18B44CBD00A13464 /* REMTimeRange.m in Sources */,

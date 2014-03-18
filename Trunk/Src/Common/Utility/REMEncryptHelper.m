@@ -8,6 +8,7 @@
 
 #import "REMEncryptHelper.h"
 #import <CommonCrypto/CommonCryptor.h>
+#import "GTMBase64.h"
 
 @implementation REMEncryptHelper
 
@@ -93,11 +94,13 @@ static const NSString *vector = @"EjRWeJCrze8SNFZ4kKvN7w==";
 }
 
 + (NSData *)encodeBase64Data:(NSData *)data {
-    return [data base64EncodedDataWithOptions:0];
+    return [GTMBase64 encodeData:data];
+//    return [data base64EncodedDataWithOptions:0];
 }
 
 + (NSData *)decodeBase64Data:(NSData *)data {
-    return [[NSData alloc] initWithBase64EncodedData:data options:0];
+    return [GTMBase64 decodeData:data];
+//    return [[NSData alloc] initWithBase64EncodedData:data options:0];
 }
 
 @end
