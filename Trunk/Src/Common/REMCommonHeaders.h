@@ -7,9 +7,7 @@
 
 //Constants
 #import "REMApplicationContext.h"
-#import "REMApplicationInfo.h"
 #import "REMCommonDefinition.h"
-#import "REMEnergyConstants.h"
 
 //DataStore
 #import "REMDataPersistenceProcessor.h"

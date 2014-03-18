@@ -12,7 +12,6 @@
 #import "REMAppConfiguration.h"
 #import "REMApplicationContext.h"
 #import "REMEncryptHelper.h"
-#import "REMApplicationInfo.h"
 #import "REMHTTPRequestOperationManager.h"
 #import "REMBusinessErrorInfo.h"
 #import "REMError.h"
@@ -95,7 +94,7 @@
 
 - (NSDictionary *)getHeaders
 {
-    NSString *version = [NSString stringWithUTF8String:[REMApplicationInfo getVersion]];
+    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
     
     NSString *userAgent = [NSString stringWithFormat:@"Blues/%@(PS;%@;%@;%@;%@;%@;)", version, [[REMCurrentDevice identifierForVendor] UUIDString],[REMCurrentDevice localizedModel],[REMCurrentDevice systemName],[REMCurrentDevice systemVersion],[REMCurrentDevice model]];
     REMManagedUserModel *user = REMAppCurrentManagedUser;

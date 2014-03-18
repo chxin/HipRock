@@ -8,7 +8,6 @@
 
 #import "REMAppDelegate.h"
 #import "REMLog.h"
-#import "REMApplicationInfo.h"
 #import "Weibo.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import "REMCommonHeaders.h"
@@ -38,8 +37,6 @@
     // Log init
     [REMLog bind];
     
-    // App info init
-    [REMApplicationInfo initApplicationInfo];
     
     // Recover login info
     [REMApplicationContext recover];

@@ -7,7 +7,9 @@
  --------------------------------------------------------------------------*///
 
 #import "REMStatusBar.h"
-#import "REMApplicationInfo.h"
+
+
+#define kFontSC "STHeitiSC-Medium"
 
 @implementation REMStatusBar {
     CGRect topRect;
