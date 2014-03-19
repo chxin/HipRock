@@ -9,7 +9,9 @@
 #ifndef Blues_REMUtilityMacro_h
 #define Blues_REMUtilityMacro_h
 
-
+/**
+ *  Empty string macro
+ */
 #define REMEmptyString @""
 
 /**
@@ -42,35 +44,77 @@
  */
 #define REMRGBA(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)];
 
-
+/**
+ *  Localized string from Localizable_Common.strings
+ *
+ *  @param a Key
+ *
+ *  @return Localized string
+ */
 #define REMCommonLocalizedString(a) (REMIsNilOrNull(a)? REMEmptyString : NSLocalizedStringFromTable(a,@"Localizable_Common",REMEmptyString))
+
+/**
+ *  Localized string from Localizable_IPad.strings
+ *
+ *  @param a Key
+ *
+ *  @return Localized string
+ */
 #define REMIPadLocalizedString(a) NSLocalizedStringFromTable(a,@"Localizable_IPad",REMEmptyString)
+
+/**
+ *  Localized string from Localizable_IPhone.strings
+ *
+ *  @param a Key
+ *
+ *  @return Localized string
+ */
 #define REMIPhoneLocalizedString(a) NSLocalizedStringFromTable(a,@"Localizable_IPhone",REMEmptyString)
 
+/**
+ *  Load image by name
+ *
+ *  @param a Name
+ *
+ *  @return UIImage instance
+ */
 #define REMLoadImageNamed(a) [UIImage imageNamed:(a)]
 
+/**
+ *  Load image by resource name
+ *
+ *  @param a Resource name
+ *  @param b Suffix
+ *
+ *  @return UIImage instance
+ */
 #define REMLoadImageResource(a,b) [[UIImage alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(a) ofType:(b)]]
 
 #define REMOSGreaterThan(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 
 #define REMISIOS7 REMOSGreaterThan(@"7.0")
 
+/**
+ *  Get current device
+ *
+ *  @return Current device instance
+ */
 #define REMCurrentDevice ([UIDevice currentDevice])
 
 /**
- *  <#Description#>
+ *  Make data access message dictionary
  *
- *  @param noconn <#noconn description#>
- *  @param fail   <#fail description#>
- *  @param error  <#error description#>
- *  @param cancel <#cancel description#>
+ *  @param noconn Message when no network connection
+ *  @param fail   Message when request failed
+ *  @param error  Message when server respondes error
+ *  @param cancel Message when request is canceled
  *
- *  @return <#return value description#>
+ *  @return Message dictionary
  */
 #define REMDataAccessMessageMake(noconn,fail,error,cancel) (@{@(REMDataAccessNoConnection):REMIPadLocalizedString(noconn), @(REMDataAccessFailed):REMIPadLocalizedString(fail),@(REMDataAccessErrorMessage):REMIPadLocalizedString(error), @(REMDataAccessCanceled):REMIPadLocalizedString(cancel)});
 
 /**
- *  <#Description#>
+ *  Default message map
  */
 #define REMNetworkMessageMap REMDataAccessMessageMake(@"Common_NetServerError",@"Common_NetConnectionFailed",@"Common_NetNoConnection",@"")
 
