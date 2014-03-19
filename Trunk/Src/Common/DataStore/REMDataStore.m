@@ -239,28 +239,6 @@ static REMCacheStoreHolder *cacheStoreHolder;
         success(data);
         return;
     }
-    
-    
-//    id cachedResult = nil;
-//    NSString *cacheKey = [REMJSONHelper stringByObject:self.parameter];
-//    
-//    if(self.responseType == REMServiceResponseJson)
-//    {
-//        cachedResult = [REMStorage get:self.serviceMeta.url key:cacheKey];
-//    }
-//    else if(self.responseType == REMServiceResponseImage)
-//    {
-//        cachedResult = [REMStorage getFile:self.serviceMeta.url key:cacheKey];
-//    }
-//    
-//    if(self.responseType == REMServiceResponseJson)
-//    {
-//        success([REMJSONHelper objectByString:cachedResult]);
-//    }
-//    else if(self.serviceMeta.responseType == REMServiceResponseImage)
-//    {
-//        success(cachedResult);
-//    }
 }
 
 -(void)accessRemote:(REMDataAccessSuccessBlock)success failure:(REMDataAccessFailureBlock)failure
