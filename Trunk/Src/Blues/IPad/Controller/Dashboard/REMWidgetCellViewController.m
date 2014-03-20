@@ -145,7 +145,7 @@
     CGRect widgetRect = self.chartContainer.bounds;
     REMEnergyViewData *data=self.chartData;
     DCChartStyle* style = [DCChartStyle getMinimunStyle];
-    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.widgetInfo];
+    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.contentSyntax];
     if ([self.searchModel isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
         REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.searchModel;
         wrapperConfig.stacked=NO;
