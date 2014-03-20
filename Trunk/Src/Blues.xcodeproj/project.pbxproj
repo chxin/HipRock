@@ -1290,7 +1290,7 @@
 		7A7B29901888C65000E74D3D /* UIView+FlipTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FlipTransition.m"; sourceTree = "<group>"; };
 		7A7B29921888C8DF00E74D3D /* SplashScreenBackgroud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashScreenBackgroud.png; sourceTree = "<group>"; };
 		7A7B29931888C8DF00E74D3D /* SplashScreenBackgroud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenBackgroud@2x.png"; sourceTree = "<group>"; };
-		7A82C1B218229831009835C4 /* REMConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMConstants.h; path = Common/Constants/REMConstants.h; sourceTree = "<group>"; };
+		7A8EF18018DAE21200951CD4 /* REMConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMConstants.h; path = Common/Application/REMConstants.h; sourceTree = "<group>"; };
 		7A9B1E1C177B3A8B00C282A8 /* Blues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blues.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		7A9B1E21177B3A8B00C282A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -2021,11 +2021,11 @@
 		7A3290E818D83AB200B3AE8A /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				7A8EF18018DAE21200951CD4 /* REMConstants.h */,
 				7A3290E918D83CBF00B3AE8A /* REMAppConfiguration.h */,
 				7A3290EA18D83CBF00B3AE8A /* REMAppConfiguration.m */,
 				7A3290EB18D83CBF00B3AE8A /* REMApplicationContext.h */,
 				7A3290EC18D83CBF00B3AE8A /* REMApplicationContext.m */,
-				7A82C1B218229831009835C4 /* REMConstants.h */,
 				7AB37B1D18D845B4007D4212 /* REMVendorMacro.h */,
 				7AB37B1E18D845CA007D4212 /* REMUtilityMacro.h */,
 				7AB37B1F18D8460E007D4212 /* REMAppMacro.h */,

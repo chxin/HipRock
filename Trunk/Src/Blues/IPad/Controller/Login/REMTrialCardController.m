@@ -16,6 +16,7 @@
 #import "REMIndicatorButton.h"
 #import "REMLoginTitledCard.h"
 #import "REMLoginCardController.h"
+#import "REMLoginPersistenceProcessor.h"
 
 
 @interface REMTrialCardController ()
@@ -132,18 +133,16 @@
     //so demo user will be created in sp1
     NSDictionary *messageMap = REMDataAccessMessageMake(@"Login_TrialNoNetwork", @"Login_TrialNetworkFailed", @"Login_TrialServerError", @"");
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSDemoUserValidate parameter:nil accessCache:NO andMessageMap:messageMap];
-    [store access:^(id data) {
-        if(REMIsNilOrNull(data)){ //TODO: empty response?
-            return ;
-        }
+    store.persistenceProcessor = [[REMLoginPersistenceProcessor alloc] init];
+    [store access:^(REMUserValidationModel *validationResult) {
         
-        REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
+        //REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
         
         if(validationResult.status == REMUserValidationSuccess) {
             REMManagedUserModel *user = validationResult.managedUser;
             [REMAppContext setCurrentManagedUser:user];
             
-            NSArray *customers = (NSArray *)(REMAppCurrentManagedUser.customers);
+            NSArray *customers = REMAppCurrentManagedUser.customers.allObjects;
             
             if(customers.count<=0){
                 [REMAlertHelper alert:REMIPadLocalizedString(@"Login_TrialNoCustomer")];
@@ -170,7 +169,9 @@
 
 -(void)setTempUser
 {
-    REMManagedUserModel *tempUser = [[REMManagedUserModel alloc] init];
+    REMDataStore *tempStore = [[REMDataStore alloc] init];
+    
+    REMManagedUserModel *tempUser = [tempStore newManagedObject:@"REMManagedUserModel"];
     tempUser.id = 0;
     tempUser.name = @"";
     tempUser.spId = @(1);
