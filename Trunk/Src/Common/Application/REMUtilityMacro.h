@@ -33,6 +33,15 @@
 #define REMIsNilOrNull(a) ((a)==nil || [(a) isEqual:[NSNull null]])
 
 /**
+ *  <#Description#>
+ *
+ *  @param obj <#obj description#>
+ *
+ *  @return <#return value description#>
+ */
+#define NULL_TO_NIL(obj) ({ __typeof__ (obj) __obj = (obj); __obj == [NSNull null] ? nil : obj; })
+
+/**
  *  Shortcut for make color from RGBA
  *
  *  @param r Red in 0~255

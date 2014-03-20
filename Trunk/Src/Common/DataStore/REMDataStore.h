@@ -11,6 +11,9 @@
 @class REMDataPersistenceProcessor;
 @class REMRemoteServiceRequest;
 
+/**
+ *  Data access status list
+ */
 typedef enum _REMDataAccessStatus : NSUInteger{
     REMDataAccessSucceed = 0,
     REMDataAccessErrorMessage = 1,
@@ -19,6 +22,12 @@ typedef enum _REMDataAccessStatus : NSUInteger{
     REMDataAccessCanceled = 4,
 } REMDataAccessStatus;
 
+/**
+ *  Data store list
+ *  WARNING: Every time you add a data store into this list,
+ *           please add the conresponding configuration in 
+ *           Resource/Configuration.plist's Services section
+ */
 typedef enum _REMDataStoreType : NSUInteger
 {
     /*
@@ -42,7 +51,6 @@ typedef enum _REMDataStoreType : NSUInteger
     /**
      *	Building            104
      */
-    
     REMDSBuildingInfo                   = 104001,
     REMDSBuildingCommodityTotalUsage    = 104002,
     REMDSBuildingOverallData            = 104003,
@@ -86,7 +94,9 @@ typedef enum _REMDataStoreType : NSUInteger
     
 } REMDataStoreType;
 
-
+/**
+ *  Service response type, this is used to decide how response content will be parsed
+ */
 typedef enum _REMServiceResponseType
 {
     REMServiceResponseJson  = 1,
@@ -99,15 +109,14 @@ typedef void(^REMDataAccessFailureBlock)(NSError *error, REMDataAccessStatus sta
 typedef void(^REMDataAccessProgressBlock)(NSUInteger bytes, long long read, long long expected);
 
 
-#pragma mark -
-
+#pragma mark - DataStore
 
 @interface REMDataStore : NSObject
 
 @property (nonatomic) REMDataStoreType name;
-@property (nonatomic,strong) NSString *url;
-@property (nonatomic,strong) id parameter;
-@property (nonatomic) REMServiceResponseType responseType;
+@property (nonatomic,strong, readonly) NSString *url;
+@property (nonatomic,strong, readonly) id parameter;
+@property (nonatomic, readonly) REMServiceResponseType responseType;
 @property (nonatomic,strong) NSString *groupName;
 @property (nonatomic,strong) NSDictionary *messageMap;
 @property (nonatomic) BOOL isAccessCache;
@@ -119,13 +128,43 @@ typedef void(^REMDataAccessProgressBlock)(NSUInteger bytes, long long read, long
 @property (nonatomic,strong) REMDataPersistenceProcessor *persistenceProcessor;
 
 
+/**
+ *  Constructor
+ *
+ *  @param name        Data store type, one of REMDataStoreType item
+ *  @param parameter   The parameter to post to server
+ *  @param accessCache Is access cache when network is not reachable
+ *  @param messageMap  A dict that contains l10n keys for get message to prompt if network got error
+ *
+ *  @return Data store instance
+ */
+- (instancetype)initWithName:(REMDataStoreType)name parameter:(id)parameter accessCache:(BOOL)accessCache andMessageMap:(NSDictionary *)messageMap;
 
-- (REMDataStore *)initWithName:(REMDataStoreType)name parameter:(id)parameter accessCache:(BOOL)accessCache andMessageMap:(NSDictionary *)messageMap;
+/**
+ *  Access the store, call success block on data access success
+ *
+ *  @param succcess The success block to be called on data access success
+ */
+- (void)access:(REMDataAccessSuccessBlock)success;
 
-- (void)access:(REMDataAccessSuccessBlock)succcess;
-- (void)access:(REMDataAccessSuccessBlock)succcess failure:(REMDataAccessFailureBlock)error;
+/**
+ *  Access the store, call success block on data access success, call failure block on any failure
+ *
+ *  @param succcess The success block to be called on data access success
+ *  @param failure  The failure block to be called on any failure
+ */
+- (void)access:(REMDataAccessSuccessBlock)succcess failure:(REMDataAccessFailureBlock)failure;
 
+/**
+ *  Cancel all data access requests in current queue
+ */
 + (void) cancel;
+
+/**
+ *  Cancel data access requests with a specific group name
+ *
+ *  @param groupName The group name to be canceled
+ */
 + (void) cancel: (NSString *) groupName;
 
 

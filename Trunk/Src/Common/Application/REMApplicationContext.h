@@ -41,7 +41,7 @@
 @property (nonatomic,strong) REMUpdateAllManager *updateManager;
 
 @property (nonatomic,strong) NSString *buildingInfoArrayStorageKey;
-@property (nonatomic,getter = getCacheMode, setter = setCacheMode:) BOOL cacheMode;
+@property (nonatomic) BOOL cacheMode;
 
 @property (nonatomic,strong) REMHTTPRequestOperationManager *sharedRequestOperationManager;
 
@@ -51,8 +51,6 @@
 + (void)recover;
 + (void)destroy;
 + (void)cleanImage;
--(BOOL)getCacheMode;
--(void)setCacheMode:(BOOL)value;
 
 
 @end

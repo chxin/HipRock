@@ -11,7 +11,9 @@
 #import "REMApplicationContext.h"
 #import "REMImageHelper.h"
 #import "REMTimeHelper.h"
+#import "REMCommonHeaders.h"
 @interface REMUpdateAllManager()
+
 
 @property (nonatomic,strong) NSArray *buildingInfoArray;
 @property (nonatomic,strong) NSArray *customerInfoArray;
@@ -26,6 +28,8 @@
 
 @property (nonatomic) BOOL isError;
 @end
+
+
 
 @implementation REMUpdateAllManager
 

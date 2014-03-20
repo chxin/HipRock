@@ -31,12 +31,6 @@ static BOOL CACHEMODE = NO;
 
 + (void)recover
 {
-//    REMUserModel *storedUser = [REMUserModel getCached];
-//    REMCustomerModel *storedCustomer = [REMCustomerModel getCached];
-//    
-//    [REMAppContext setCurrentUser:storedUser];
-//    [REMAppContext setCurrentCustomer:storedCustomer];
-    
     REMDataStore *store = [[REMDataStore alloc]init];
     NSArray *users = [store fetchMangedObject:@"REMManagedUserModel"];
     if (users.count>0) {
@@ -52,7 +46,6 @@ static BOOL CACHEMODE = NO;
     
     //http operation manager
     REMAppContext.sharedRequestOperationManager = [REMHTTPRequestOperationManager manager];
-    
 }
 
 + (void)cleanImage{
@@ -109,11 +102,7 @@ static BOOL CACHEMODE = NO;
 
 + (void)updateBuildingInfoArrayToStorage
 {
-    //REMDataStore *store=[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:nil accessCache:NO andMessageMap:nil];
     REMApplicationContext *context= REMAppContext;
-    
-    //NSString *origCachedContent = [REMStorage get:store.serviceMeta.url key:context.buildingInfoArrayStorageKey];
-    //NSMutableDictionary *result = [[REMJSONHelper objectByString:origCachedContent] mutableCopy] ;
     
     NSArray *buildingArray=context.buildingInfoArray;
     NSMutableArray *dicArray=[NSMutableArray array];
@@ -121,12 +110,9 @@ static BOOL CACHEMODE = NO;
         REMJSONObject *obj=buildingArray[i];
         [dicArray addObject: obj.innerDictionary];
     }
-    //result[@"BuildingInfo"]=dicArray;
-    
-    //[REMStorage set:store.serviceMeta.url key:context.buildingInfoArrayStorageKey value:[REMJSONHelper stringByObject:result] expired:REMWindowActiated];
 }
 
--(BOOL)getCacheMode
+-(BOOL)cacheMode
 {
     return CACHEMODE;
 }
@@ -136,6 +122,7 @@ static BOOL CACHEMODE = NO;
         CACHEMODE = value;
     }
 }
+
 
 -(REMHTTPRequestOperationManager *)sharedRequestOperationManager
 {

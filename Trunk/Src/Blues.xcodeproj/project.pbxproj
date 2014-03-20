@@ -593,6 +593,7 @@
 		7AB71685187F839500EA7544 /* DefaultMap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71683187F839500EA7544 /* DefaultMap@2x.png */; };
 		7AB71688187F859B00EA7544 /* MapBlur.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71686187F859B00EA7544 /* MapBlur.png */; };
 		7AB71689187F859B00EA7544 /* MapBlur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71687187F859B00EA7544 /* MapBlur@2x.png */; };
+		7ABA161118DAB255001624F8 /* REMDataStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABA161018DAB255001624F8 /* REMDataStoreTests.m */; };
 		7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */; };
 		7ABFDDF418483119004DD4E7 /* JumpLogin-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */; };
 		7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */; };
@@ -903,7 +904,6 @@
 		7A3290DC18D823EF00B3AE8A /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		7A3290DD18D823EF00B3AE8A /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		7A3290DE18D823EF00B3AE8A /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
-		7A3290E718D8353F00B3AE8A /* REMDataStoreMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = REMDataStoreMacros.h; sourceTree = "<group>"; };
 		7A3290E918D83CBF00B3AE8A /* REMAppConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAppConfiguration.h; path = Common/Application/REMAppConfiguration.h; sourceTree = "<group>"; };
 		7A3290EA18D83CBF00B3AE8A /* REMAppConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAppConfiguration.m; path = Common/Application/REMAppConfiguration.m; sourceTree = "<group>"; };
 		7A3290EB18D83CBF00B3AE8A /* REMApplicationContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMApplicationContext.h; path = Common/Application/REMApplicationContext.h; sourceTree = "<group>"; };
@@ -1354,6 +1354,8 @@
 		7AB71683187F839500EA7544 /* DefaultMap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultMap@2x.png"; sourceTree = "<group>"; };
 		7AB71686187F859B00EA7544 /* MapBlur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapBlur.png; sourceTree = "<group>"; };
 		7AB71687187F859B00EA7544 /* MapBlur@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MapBlur@2x.png"; sourceTree = "<group>"; };
+		7ABA160F18DAB23C001624F8 /* REMDataStore-Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "REMDataStore-Private.h"; path = "Common/DataStore/REMDataStore-Private.h"; sourceTree = "<group>"; };
+		7ABA161018DAB255001624F8 /* REMDataStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataStoreTests.m; path = Common/DataStore/REMDataStoreTests.m; sourceTree = "<group>"; };
 		7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed.png"; sourceTree = "<group>"; };
 		7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed@2x.png"; sourceTree = "<group>"; };
 		7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
@@ -2083,6 +2085,7 @@
 		7A39D5B218B5A3C600CC9D5D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7ABA160E18DAB212001624F8 /* DataStore */,
 				7A39D5B718B5A42A00CC9D5D /* REMTimeHelperTests.m */,
 				7A39D5B918B5A43900CC9D5D /* REMLogTests.m */,
 			);
@@ -3047,6 +3050,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		7ABA160E18DAB212001624F8 /* DataStore */ = {
+			isa = PBXGroup;
+			children = (
+				7ABA160F18DAB23C001624F8 /* REMDataStore-Private.h */,
+				7ABA161018DAB255001624F8 /* REMDataStoreTests.m */,
+			);
+			name = DataStore;
+			sourceTree = "<group>";
+		};
 		7AE8EEA21835C9B4007D0020 /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
@@ -3074,7 +3086,6 @@
 				7AF9638C18D6C9A3005A8D12 /* REMRemoteServiceRequest.m */,
 				7A0C0F5F18D6DBEB00CBB277 /* REMHTTPRequestOperationManager.h */,
 				7A0C0F6018D6DBEB00CBB277 /* REMHTTPRequestOperationManager.m */,
-				7A3290E718D8353F00B3AE8A /* REMDataStoreMacros.h */,
 			);
 			name = DataStore;
 			path = Common/DataStore;
@@ -3980,6 +3991,7 @@
 				7A39D62618B5A7F200CC9D5D /* REMAirQualityModel.m in Sources */,
 				7A39D62718B5A7F200CC9D5D /* REMAverageUsageDataModel.m in Sources */,
 				7A39D62818B5A7F200CC9D5D /* REMBuildingCoverWidgetRelationModel.m in Sources */,
+				7ABA161118DAB255001624F8 /* REMDataStoreTests.m in Sources */,
 				7A39D62918B5A7F200CC9D5D /* REMBuildingModel.m in Sources */,
 				7A39D62A18B5A7F200CC9D5D /* REMBuildingOverallModel.m in Sources */,
 				7A39D62B18B5A7F200CC9D5D /* REMBuildingTimeRangeDataModel.m in Sources */,

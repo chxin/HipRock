@@ -10,6 +10,15 @@
 #import "UIKit+AFNetworking.h"
 #import "REMDataStore.h"
 
+#pragma mark -
+@implementation REMHTTPRequestOperation
+
+
+@end
+
+
+#pragma mark -
+
 @implementation REMHTTPRequestOperationManager
 
 const static int kMAXQUEUEWIFI = 16;
@@ -79,11 +88,6 @@ static NSOperationQueue *queue;
 }
 
 
-/**
- *  <#Description#>
- *
- *  @param group <#group description#>
- */
 +(void)cancel:(NSString *)group
 {
     if(queue!=NULL && queue != nil && queue.operationCount > 0)
@@ -114,11 +118,5 @@ static NSOperationQueue *queue;
         }
     }
 }
-
-@end
-
-@implementation REMHTTPRequestOperation
-
-
 
 @end

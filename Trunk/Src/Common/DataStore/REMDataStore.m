@@ -87,9 +87,9 @@ static REMCacheStoreHolder *cacheStoreHolder;
         NSDictionary *serviceItem = [self serviceConfigurationOfType:name];
         
         self.name = name;
-        self.parameter = parameter;
-        self.url = serviceItem[@"Url"];
-        self.responseType = [serviceItem[@"Type"] unsignedIntegerValue];
+        _parameter = parameter;
+        _url = serviceItem[@"Url"];
+        _responseType = [serviceItem[@"Type"] unsignedIntegerValue];
         self.isAccessCache = accessCache;
         if(messageMap == nil){
             self.messageMap = REMNetworkMessageMap;
@@ -98,7 +98,6 @@ static REMCacheStoreHolder *cacheStoreHolder;
             self.messageMap = messageMap;
         }
     }
-    
     
     return self;
 }
@@ -198,15 +197,15 @@ static REMCacheStoreHolder *cacheStoreHolder;
 
 #pragma mark - @private
 /**
- *  TODO: Need UT
+ *  Gets configuration information from Configuration.plist for desired data store type
  *
- *  @param type <#type description#>
+ *  @param type: Data store type
  *
- *  @return <#return value description#>
+ *  @return Configuration dictionary of the required data store type
  */
 -(NSDictionary *)serviceConfigurationOfType:(REMDataStoreType)type
 {
-    __block NSString *serviceName = @"";
+    __block NSString *serviceName = REMEmptyString;
     
     [REMAppConfig.services enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         if([obj[@"ID"] unsignedIntegerValue] == (NSUInteger)type){
@@ -215,7 +214,7 @@ static REMCacheStoreHolder *cacheStoreHolder;
         }
     }];
     
-    return REMAppConfig.services[serviceName];
+    return REMStringNilOrEmpty(serviceName) ? nil : REMAppConfig.services[serviceName];
 }
 
 

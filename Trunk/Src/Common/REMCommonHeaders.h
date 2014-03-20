@@ -15,7 +15,6 @@
 //DataStore
 #import "REMDataPersistenceProcessor.h"
 #import "REMDataStore.h"
-#import "REMDataStoreMacros.h"
 #import "REMHTTPRequestOperationManager.h"
 #import "REMRemoteServiceRequest.h"
 

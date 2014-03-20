@@ -18,6 +18,9 @@
 
 @interface REMRemoteServiceRequest()
 
+/**
+ *  Pointer to the actual operation
+ */
 @property (nonatomic,weak) REMHTTPRequestOperation *operation;
 
 @end
@@ -25,12 +28,6 @@
 @implementation REMRemoteServiceRequest
 
 
-/**
- *  <#Description#>
- *
- *  @param success <#success description#>
- *  @param failure <#failure description#>
- */
 - (void) request:(REMDataAccessSuccessBlock)success failure:(REMDataAccessFailureBlock)failure
 {
     REMHTTPRequestOperationManager *manager = REMAppContext.sharedRequestOperationManager;
@@ -65,9 +62,6 @@
     self.operation = operation;
 }
 
-/**
- *  <#Description#>
- */
 - (void) cancel
 {
     [self.operation cancel];
@@ -86,13 +80,13 @@
     [request setCachePolicy:NSURLCacheStorageAllowedInMemoryOnly];
     [request setHTTPMethod: @"POST"];
     
-    [request setAllHTTPHeaderFields:[self getHeaders]];
+    [request setAllHTTPHeaderFields:[self buildHeaders]];
     
     return request;
 }
 
 
-- (NSDictionary *)getHeaders
+- (NSDictionary *)buildHeaders
 {
     NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
     

@@ -16,8 +16,8 @@
 @property (nonatomic,strong) NSDictionary *currentDataSource;
 @property (nonatomic,strong) NSDictionary *services;
 
-@property (nonatomic,readonly, getter = getRequestTimeout) NSInteger requestTimeout;
-@property (nonatomic,readonly, getter = getRequestLogMode) NSInteger requestLogMode;
+@property (nonatomic,readonly) NSInteger requestTimeout;
+@property (nonatomic,readonly) NSInteger requestLogMode;
 
 
 

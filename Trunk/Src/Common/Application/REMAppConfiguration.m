@@ -48,11 +48,12 @@ const static NSString *BUILDOPTION = @"Release";
     self.currentDataSource = self.dataSources[currentDataSourceKey];
 }
 
--(NSInteger)getRequestTimeout
+-(NSInteger)requestTimeout
 {
     return [REMAppConfig.currentDataSource[@"timeout"] integerValue];;
 }
--(NSInteger)getRequestLogMode
+
+-(NSInteger)requestLogMode
 {
     return [REMAppConfig.currentDataSource[@"logRequest"] integerValue];
 }
