@@ -454,11 +454,11 @@
     
     CGRect widgetRect = CGRectMake(0, 0, kWidgetChartWidth, kWidgetChartHeight);
     
-    REMDiagramType widgetType = self.widgetInfo.diagramType;
+    REMDiagramType widgetType = self.widgetInfo.diagramType.integerValue;
     
     DCChartStyle* style = [DCChartStyle getMaximizedStyle];
     DAbstractChartWrapper  *widgetWrapper;
-    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.widgetInfo];
+    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.contentSyntax];
     if ([self.model isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
         REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
         wrapperConfig.stacked=NO;

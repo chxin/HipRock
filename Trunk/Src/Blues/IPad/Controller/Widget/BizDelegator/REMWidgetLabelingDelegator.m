@@ -155,7 +155,7 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     
     
     CGRect widgetRect = CGRectMake(0, 0, kWidgetChartWidth, kWidgetChartHeight);
-    REMDiagramType widgetType = self.widgetInfo.diagramType;
+    REMDiagramType widgetType = self.widgetInfo.diagramType.integerValue;
     
     DCChartStyle* style = [DCChartStyle getMaximizedStyle];
     DCLabelingWrapper  *widgetWrapper;

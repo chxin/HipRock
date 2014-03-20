@@ -39,6 +39,8 @@
     else{
         delegator=[[REMWidgetEnergyDelegator alloc]init];
     }
+    delegator.widgetInfo = widgetInfo;
+    delegator.contentSyntax = contentSyntax;
     return delegator;
 }
 
