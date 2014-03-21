@@ -9,15 +9,7 @@
 
 @implementation REMPinToCoverPersistenceProcessor
 
-- (id)fetch{
-    NSMutableArray *array = [NSMutableArray array];
-    for (REMManagedBuildingCommodityUsageModel *commodityInfo in [self.buildingInfo.commodities allObjects]) {
-        [array arrayByAddingObjectsFromArray:[commodityInfo.pinnedWidgets allObjects]];
-    }
-    
-    
-    return array;
-}
+#pragma mark - Data persistence processor
 
 - (id)persist:(NSArray *)data{
     
@@ -41,14 +33,21 @@
                     [commodityInfo addPinnedWidgetsObject:pinnedModel];
                 }
             }
-            
-           
         }
-        
-        
     }
     [self.dataStore persistManageObject];
     return [self fetch];
 }
+
+- (id)fetch{
+    NSMutableArray *array = [NSMutableArray array];
+    for (REMManagedBuildingCommodityUsageModel *commodityInfo in [self.buildingInfo.commodities allObjects]) {
+        [array arrayByAddingObjectsFromArray:[commodityInfo.pinnedWidgets allObjects]];
+    }
+    
+    
+    return array;
+}
+
 
 @end

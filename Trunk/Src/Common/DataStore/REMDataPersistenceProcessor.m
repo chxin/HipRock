@@ -20,13 +20,13 @@
     return nil;
 }
 
-- (id)newObject:(NSString *)objectType
-{
-    return nil;
-}
+//- (id)new:(Class *)objectType
+//{
+//    return nil;
+//}
 
-- (void) processError:(NSError *)error withStatus:(REMDataAccessStatus) status andResponse:(id) response
-{
-}
+//- (void) processError:(NSError *)error withStatus:(REMDataAccessStatus) status andResponse:(id) response
+//{
+//}
 
 @end

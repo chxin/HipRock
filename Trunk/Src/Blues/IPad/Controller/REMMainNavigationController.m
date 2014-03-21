@@ -83,6 +83,7 @@
     //[currentCustomer kill];
     currentUser = nil;
     currentCustomer = nil;
+    [currentUser delete:0];
     context.updateManager = nil;
     
     [REMApplicationContext destroy];

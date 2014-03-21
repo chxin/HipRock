@@ -9,9 +9,6 @@
 
 @implementation REMCommodityUsageValuePersistenceProcessor
 
-- (id)fetch{
-    return self.commodityInfo;
-}
 
 - (id)persist:(NSDictionary *)dictionary{
     NSDictionary *totalDic = dictionary[@"EnergyUsage"];
@@ -36,6 +33,10 @@
     
     return self.commodityInfo;
     
+}
+
+- (id)fetch{
+    return self.commodityInfo;
 }
 
 @end

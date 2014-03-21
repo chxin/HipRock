@@ -10,7 +10,11 @@
 #import "REMManagedUserModel.h"
 #import "REMManagedAdministratorModel.h"
 #import "REMManagedCustomerModel.h"
+
+
 @implementation REMLoginPersistenceProcessor
+
+#pragma mark - Data persistence processor
 
 - (id)persist:(NSDictionary *)data
 {
@@ -31,6 +35,8 @@
     }
     return array[0];
 }
+
+#pragma mark - @private
 
 - (REMManagedUserModel *)persistUserModel:(NSDictionary *)user{
     

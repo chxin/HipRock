@@ -106,7 +106,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
             if(newList!=nil && [newList isEqual:[NSNull null]]==NO){
                 customerList = [[NSMutableArray alloc]initWithCapacity:newList.count];
                 if (self.customerInfoArray!=nil) {
-                    REMDataStore *store = [[REMDataStore alloc]init];
+                    REMDataStore *store = [[REMDataStore alloc] init];
                     for (REMManagedCustomerModel *oldCustomer in self.customerInfoArray) {
                         [store deleteManageObject:oldCustomer];
                     }
@@ -181,9 +181,32 @@ static NSString *customerUpdateAll=@"customerupdateall";
     
 }
 
+- (void)executeStore:(REMDataStore *)store success:(REMDataAccessSuccessBlock)success failure:(REMDataAccessFailureBlock)failure
+{
+    [store access:^(NSDictionary *data, id raw){
+        NSDictionary *parameter;
+        if (self.selectedCustomerId!=nil) {
+            parameter= @{@"customerId":self.selectedCustomerId};
+        }
+        else{
+            parameter= @{@"customerId":self.currentCustomerId};
+        }
+        
+        REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter accessCache:YES andMessageMap:nil];
+        logoStore.parentStore=store;
+        
+        [logoStore access:success failure:failure];
+    } failure: failure];
+}
+
 - (REMManagedCustomerModel *)buildManagedCustomerModel:(NSDictionary *)customer{
     REMDataStore *store = [[REMDataStore alloc]init];
     REMManagedUserModel *user = [[store fetchMangedObject:@"REMManagedUserModel"] lastObject];
+    
+//    for(REMManagedCustomerModel *old in user.customers.allObjects){
+//        [store deleteManageObject:old];
+//    }
+    
     REMManagedCustomerModel *customerObject= [store newManagedObject:@"REMManagedCustomerModel"];
     
     customerObject.id = customer[@"Id"];

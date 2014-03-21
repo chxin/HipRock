@@ -20,6 +20,8 @@
 
 @implementation REMBuildingPersistenceProcessor
 
+#pragma mark - DataPersistenceProcessor
+
 - (id)persist:(NSArray *)data
 {
     for (REMManagedBuildingModel *building in  [self fetch]) {
@@ -39,6 +41,15 @@
     
     return [self fetch];
 }
+
+- (id)fetch
+{
+    NSArray *buildings = [self.dataStore fetchMangedObject:@"REMManagedBuildingModel"];
+    
+    return buildings;
+}
+
+#pragma mark - @private
 
 - (void)persistPinnedWidget:(NSArray *)pinnedWidgetArray intoBuilding:(REMManagedBuildingModel *)building{
     if (pinnedWidgetArray!=nil && [pinnedWidgetArray isEqual:[NSNull null]]==NO) {
@@ -287,12 +298,5 @@
 
 
 
-
-- (id)fetch
-{
-    NSArray *buildings = [self.dataStore fetchMangedObject:@"REMManagedBuildingModel"];
-    
-    return buildings;
-}
 
 @end
