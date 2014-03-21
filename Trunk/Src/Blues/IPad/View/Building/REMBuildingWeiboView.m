@@ -9,6 +9,8 @@
 #import "REMBuildingWeiboView.h"
 #import "REMColor.h"
 #import "REMHttpHelper.h"
+#import "AFNetworking.h"
+#import "REMCommonHeaders.h"
 
 const CGFloat kWeiboWindowHeight = 165;
 const CGFloat kWeiboWindowWidth = 390;
@@ -199,10 +201,9 @@ const NSInteger kWeiboMaxLength = 140;
 }
 
 -(void)sendClicked:(id)sender {
-    NetworkStatus reachability = [REMHttpHelper checkCurrentNetworkStatus];
-    if (reachability == NotReachable) {
-        [REMAlertHelper alert:REMIPadLocalizedString(@"Weibo_NONetwork")];
-    } else {
+    //NetworkStatus reachability = [REMHttpHelper checkCurrentNetworkStatus];
+    
+    [REMAppContext.sharedRequestOperationManager HEAD:@"http://open.weibo.com" parameters:nil success:^(AFHTTPRequestOperation *operation) {
         if (![Weibo.weibo isAuthenticated]) {
             //        [REMAlertHelper alert:@"未绑定微博账户。"];
             [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
@@ -218,7 +219,17 @@ const NSInteger kWeiboMaxLength = 140;
         } else {
             [self sendWeibo];
         }
-    }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [REMAlertHelper alert:REMIPadLocalizedString(@"Weibo_NONetwork")];
+    }];
+    
+    
+    
+    
+//    if (reachability == NotReachable) {
+//        
+//    } else {
+//    }
 }
 
 -(void)sendWeibo {
