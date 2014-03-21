@@ -14,10 +14,6 @@
 #import "UIKit+AFNetworking.h"
 #import "REMVendorMacro.h"
 
-//comment
-
-
-
 
 @implementation REMAppDelegate
 
