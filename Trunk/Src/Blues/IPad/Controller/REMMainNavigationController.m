@@ -76,13 +76,13 @@
 -(void)logout
 {
     REMApplicationContext *context=REMAppContext;
-    REMManagedUserModel *currentUser = context.currentManagedUser;
-    REMManagedCustomerModel *currentCustomer = context.currentManagedCustomer;
-    
-    //[currentUser kill];
-    //[currentCustomer kill];
-    currentUser = nil;
-    currentCustomer = nil;
+//    REMManagedUserModel *currentUser = context.currentManagedUser;
+//    REMManagedCustomerModel *currentCustomer = context.currentManagedCustomer;
+//    
+//    //[currentUser kill];
+//    //[currentCustomer kill];
+//    currentUser = nil;
+//    currentCustomer = nil;
     context.updateManager = nil;
     
     [REMApplicationContext destroy];
