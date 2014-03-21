@@ -288,7 +288,8 @@
     dateViewController.relativeDateType=self.tempModel.relativeDateType;
     dateViewController.datePickerProtocol=self;
     dateViewController.popController=popoverController;
-    dateViewController.showHour=YES;
+    
+    dateViewController.showHour=[self.contentSyntax isHourSupported];
     [popoverController setPopoverContentSize:CGSizeMake(400, 500)];
     CGRect rect= CGRectMake(self.timePickerButton.frame.origin.x, self.searchLegendViewContainer.frame.origin.y+self.timePickerButton.frame.origin.y, self.timePickerButton.frame.size.width, self.timePickerButton.frame.size.height);
     [popoverController presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown|UIPopoverArrowDirectionUp animated:YES];
@@ -508,8 +509,12 @@
 
 - (void) setDatePickerButtonValueNoSearchByTimeRange:(REMTimeRange *)range withRelative:(NSString *)relativeDate withRelativeType:(REMRelativeTimeRangeType)relativeType
 {
-    NSString *text=[REMTimeHelper formatTimeRangeFullHour:range];
-    
+    NSString *text = nil;
+    if ([self.contentSyntax isHourSupported]) {
+        text = [REMTimeHelper formatTimeRangeFullHour:range];
+    } else {
+        text = [REMTimeHelper formatTimeRangeFullDay:range];
+    }
     
     
     

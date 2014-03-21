@@ -177,4 +177,8 @@
 
 }
 
+-(BOOL)isHourSupported {
+    return self.dataStoreType != REMDSEnergyRatio;
+}
+
 @end

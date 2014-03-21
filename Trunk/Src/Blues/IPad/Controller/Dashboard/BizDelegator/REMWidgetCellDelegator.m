@@ -46,8 +46,14 @@
     }
     else{
         REMTimeRange *range = self.searchModel.timeRangeArray[0];
-        NSString *start= [REMTimeHelper formatTimeFullHour:range.startTime isChangeTo24Hour:NO];
-        NSString *end= [REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];
+        NSString *start, *end;
+        if ([self.contentSyntax isHourSupported]) {
+            start = [REMTimeHelper formatTimeFullHour:range.startTime isChangeTo24Hour:NO];
+            end= [REMTimeHelper formatTimeFullHour:range.endTime isChangeTo24Hour:YES];
+        } else {
+            start = [REMTimeHelper formatTimeFullDay:range.startTime isChangeTo24Hour:NO];
+            end= [REMTimeHelper formatTimeFullDay:range.endTime isChangeTo24Hour:YES];
+        }
         return [NSString stringWithFormat:REMIPadLocalizedString(@"Dashboard_TimeRange"),start,end];//%@ 到 %@
     }
 }
