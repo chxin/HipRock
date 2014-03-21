@@ -77,7 +77,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
     //store.maskContainer=self.maskerView;
     store.groupName =customerUpdateAll;
     self.parameter=dic;
-    [store access:^(NSDictionary *data){
+    [store access:^(NSDictionary *data, id raw){
         
         NSDictionary *parameter;
         if (self.selectedCustomerId!=nil) {
@@ -89,11 +89,11 @@ static NSString *customerUpdateAll=@"customerupdateall";
         REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter accessCache:YES andMessageMap:nil];
         logoStore.parentStore=store;
         
-        [logoStore access:^(id data1) {
-            UIImage *logo = data1;
-//            if(data1 != nil && [data1 length] > 2) {
-//                logo = [REMImageHelper parseImageFromNSData:data1 withScale:1.0];
-//            }
+        [logoStore access:^(id image, id raw) {
+            UIImage *logo;// = data1;
+            if(raw != nil && [raw length] > 2) {
+                logo = [REMImageHelper parseImageFromNSData:raw withScale:1.0];
+            }
             
             REMAppCurrentLogo = logo;
             

@@ -455,7 +455,7 @@
         store.groupName=self.loadingImageKey;
         
         store.isDisableAlert=YES;
-        [store access:^(id img){
+        [store access:^(id img, id raw){
             NSData *data = UIImagePNGRepresentation(img);
             //if(data == nil || [data length] == 2) return;
             

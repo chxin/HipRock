@@ -134,7 +134,7 @@
     NSDictionary *messageMap = REMDataAccessMessageMake(@"Login_TrialNoNetwork", @"Login_TrialNetworkFailed", @"Login_TrialServerError", @"");
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSDemoUserValidate parameter:nil accessCache:NO andMessageMap:messageMap];
     store.persistenceProcessor = [[REMLoginPersistenceProcessor alloc] init];
-    [store access:^(REMUserValidationModel *validationResult) {
+    [store access:^(REMUserValidationModel *validationResult, id raw) {
         
         //REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
         

@@ -235,7 +235,7 @@ static REMCacheStoreHolder *cacheStoreHolder;
 {
     if (self.persistenceProcessor!=nil) {
         id data = [self.persistenceProcessor fetch];
-        success(data);
+        success(data, data);
         return;
     }
 }
@@ -246,7 +246,7 @@ static REMCacheStoreHolder *cacheStoreHolder;
     self.remoteServiceRequest = request;
     
     
-    [self.remoteServiceRequest request:^(id data) {
+    [self.remoteServiceRequest request:^(id data, id raw) {
         if([REMApplicationContext instance].cacheMode == YES){
             [[REMApplicationContext instance] setCacheMode:NO];
         }
@@ -255,7 +255,7 @@ static REMCacheStoreHolder *cacheStoreHolder;
             newData = [self.persistenceProcessor persist:data];
         }
         
-        success(newData);
+        success(newData, raw);
     } failure:^(NSError *error, REMDataAccessStatus status, id response) {
         if(self.isDisableAlert == NO && (status == REMDataAccessNoConnection || status == REMDataAccessFailed || (status == REMDataAccessErrorMessage && [response isKindOfClass:[REMBusinessErrorInfo class]] && [((REMBusinessErrorInfo *)response).code isEqualToString:@"1"]))){
             NSString *message = self.messageMap[@(status)];
