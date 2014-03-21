@@ -50,8 +50,7 @@
 
 - (void)initEmptyTextLabelWithTitleSize:(CGFloat)titleSize withTitleMargin:(CGFloat)margin withLeftMargin:(CGFloat)leftMargin withOrigFontSize:(CGFloat)fontSize{
     int marginTop=titleSize+margin+fontSize/4 ;
-    CGFloat fs=ceil(fontSize/4+10);
-    fs=self.emptyTextFontSize;
+    CGFloat fs=self.emptyTextFontSize;
     UIImage *image=REMIMG_Nodata;
     
     UIImageView *icon=[[UIImageView alloc]initWithImage:image];

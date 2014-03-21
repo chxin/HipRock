@@ -269,24 +269,23 @@ const NSString* stepKey = @"step";
 
 -(void)updateSumValueAndSlices {
     double sum = 0;
-    double previesSum[self.series.datas.count];
+    NSMutableArray* previesSum = [[NSMutableArray alloc]init];
     NSMutableArray* slices = [[NSMutableArray alloc]init];
-    if (!REMIsNilOrNull(self.series.datas)) {
         int index = 0;
         for (DCPieDataPoint* point in self.series.datas) {
-            previesSum[index] = sum;
+            [previesSum addObject:[NSNumber numberWithDouble:sum]];
             if (point.pointType == DCDataPointTypeNormal) {
                 sum += [self getVisableValueOfPoint:point];
             }
             index++;
         }
-    }
-    int index = 0;
+    index = 0;
     for (DCPieDataPoint* point in self.series.datas) {
         double pointVal = [self getVisableValueOfPoint:point];
         if (point.pointType == DCDataPointTypeNormal && sum != 0 && pointVal != 0) {
             DCPieSlice slice;
-            slice.sliceBegin = previesSum[index] * 2 / sum;
+            double p = ((NSNumber*)previesSum[index]).doubleValue;
+            slice.sliceBegin = p * 2 / sum;
             slice.sliceEnd = slice.sliceBegin + pointVal * 2 / sum;
             slice.sliceCenter = (slice.sliceBegin + slice.sliceEnd) / 2;
             [slices addObject:[NSValue value:&slice withObjCType:@encode(DCPieSlice)]];
@@ -421,8 +420,10 @@ const NSString* stepKey = @"step";
     NSValue* val = self.pieSlices[index];
     if (!REMIsNilOrNull(val)) {
         [val getValue:&slice];
+        return slice.sliceCenter;
+    } else {
+        return 0;
     }
-    return slice.sliceCenter;
 }
 
 @end
