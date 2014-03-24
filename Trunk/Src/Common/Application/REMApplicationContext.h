@@ -17,35 +17,28 @@
 @class REMUpdateAllManager;
 
 #define REMAppContext [REMApplicationContext instance]
-//#define REMAppCurrentUser REMAppContext.currentUser
-//#define REMAppCurrentCustomer REMAppContext.currentCustomer
-#define REMAppCurrentManagedUser REMAppContext.currentManagedUser
-#define REMAppCurrentManagedCustomer REMAppContext.currentManagedCustomer
-#define REMAppCurrentLogo REMAppContext.currentCustomerLogo
 #define REMAppConfig REMAppContext.appConfig
 
 @interface REMApplicationContext : NSObject
 
-//@property (nonatomic,strong) REMUserModel *currentUser;
-//@property (nonatomic,strong) REMCustomerModel *currentCustomer;
-
 @property (nonatomic,strong) REMManagedUserModel *currentManagedUser;
 @property (nonatomic,strong) REMManagedCustomerModel *currentManagedCustomer;
-
 @property (nonatomic,strong) UIImage *currentCustomerLogo;
 
 @property (nonatomic,strong) REMAppConfiguration *appConfig;
 
 @property (nonatomic,strong) NSArray *buildingInfoArray;
 
-@property (nonatomic,strong) REMUpdateAllManager *updateManager;
-
-@property (nonatomic,strong) NSString *buildingInfoArrayStorageKey;
 @property (nonatomic) BOOL cacheMode;
 
+
+@property (nonatomic,strong) REMUpdateAllManager *sharedUpdateManager;
 @property (nonatomic,strong) REMHTTPRequestOperationManager *sharedRequestOperationManager;
 
-+ (void)updateBuildingInfoArrayToStorage;
+@property (nonatomic,strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic,strong) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic,strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
 
 + (REMApplicationContext *)instance;
 + (void)recover;

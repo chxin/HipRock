@@ -84,7 +84,7 @@
     currentUser = nil;
     currentCustomer = nil;
     [currentUser delete:0];
-    context.updateManager = nil;
+    context.sharedUpdateManager = nil;
     
     [REMApplicationContext destroy];
     

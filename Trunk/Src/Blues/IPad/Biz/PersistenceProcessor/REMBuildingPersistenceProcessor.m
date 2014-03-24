@@ -25,7 +25,7 @@
 - (id)persist:(NSArray *)data
 {
     for (REMManagedBuildingModel *building in  [self fetch]) {
-        [self.dataStore deleteManageObject:building];
+        [self delete:building];
     }
     
     for (int i=0; i<data.count; ++i) {
@@ -37,14 +37,14 @@
         [self persistPinnedWidget:buildingOverall[@"WidgetRelation"] intoBuilding:buildingModel];
     }
     
-    [self.dataStore persistManageObject];
+    [self save];
     
     return [self fetch];
 }
 
 - (id)fetch
 {
-    NSArray *buildings = [self.dataStore fetchMangedObject:@"REMManagedBuildingModel"];
+    NSArray *buildings = [self fetch:[REMManagedBuildingModel class]];
     
     return buildings;
 }
@@ -59,7 +59,7 @@
             for (REMManagedBuildingCommodityUsageModel *commodity in [building.commodities allObjects]) {
                 NSNumber *commodityId = relation[@"CommodityId"];
                 if ([commodity.id isEqualToNumber:commodityId] == YES) {
-                    REMManagedPinnedWidgetModel *pinnedModel = [self.dataStore newManagedObject:@"REMManagedPinnedWidgetModel"];
+                    REMManagedPinnedWidgetModel *pinnedModel = [self new:[REMManagedPinnedWidgetModel class]];
                     
                     pinnedModel.commodity = commodity;
                     pinnedModel.widgetId = relation[@"WidgetId"];
@@ -79,7 +79,7 @@
     
     for (int i=0; i<dashboardArray.count; ++i) {
         NSDictionary *dictionary = dashboardArray[i];
-        REMManagedDashboardModel *dashboard = [self.dataStore newManagedObject:@"REMManagedDashboardModel"];
+        REMManagedDashboardModel *dashboard = [self new:[REMManagedDashboardModel class]];
         dashboard.id = dictionary[@"Id"];
         dashboard.name=dictionary[@"Name"];
         dashboard.isFavorite=dictionary[@"IsFavorite"];
@@ -107,7 +107,7 @@
 
 - (REMManagedSharedModel *)shareModelByDictionary:(NSDictionary *)dictionary{
     
-    REMManagedSharedModel *shareModel = [self.dataStore newManagedObject:@"REMManagedSharedModel"];
+    REMManagedSharedModel *shareModel = [self new:[REMManagedSharedModel class]];
     
     shareModel.userRealName=dictionary[@"UserRealName"];
     
@@ -219,7 +219,7 @@
             continue;
         }
         
-        REMManagedWidgetModel *widget = [self.dataStore newManagedObject:@"REMManagedWidgetModel"];
+        REMManagedWidgetModel *widget = [self new:[REMManagedWidgetModel class]];
         widget.id=dictionary[@"Id"];
         widget.name=dictionary[@"Name"];
         widget.isRead=dictionary[@"IsRead"];
@@ -241,7 +241,7 @@
 
 - (void)persistCommodity:(NSArray *)commodityArray intoBuilding:(REMManagedBuildingModel *)building{
     for (int i=0; i<commodityArray.count; ++i) {
-        REMManagedBuildingCommodityUsageModel *commodity = [self.dataStore newManagedObject:@"REMManagedBuildingCommodityUsageModel"];
+        REMManagedBuildingCommodityUsageModel *commodity = [self new:[REMManagedBuildingCommodityUsageModel class]];
         NSDictionary *dictionary = commodityArray[i];
         commodity.id = dictionary[@"Id"];
         commodity.name = NULL_TO_NIL(dictionary[@"Name"]);
@@ -253,7 +253,7 @@
 }
 
 - (REMManagedBuildingModel *)persistBuilding:(NSDictionary *)dictionary{
-    REMManagedBuildingModel *building = [self.dataStore newManagedObject:@"REMManagedBuildingModel"];
+    REMManagedBuildingModel *building = [self new:[REMManagedBuildingModel class]];
     building.id = dictionary[@"Id"];
     building.parentId = dictionary[@"ParentId"];
     building.timezoneId = dictionary[@"TimezoneId"];
@@ -271,7 +271,7 @@
     
     if (!REMIsNilOrNull(pictures) && pictures.count>0) {
         for (NSNumber *pictureId in pictures) {
-            REMManagedBuildingPictureModel *picModel = [self.dataStore newManagedObject:@"REMManagedBuildingPictureModel"];
+            REMManagedBuildingPictureModel *picModel = [self new:[REMManagedBuildingPictureModel class]];
             picModel.id =pictureId;
             picModel.building = building;
             [building addPicturesObject:picModel];
@@ -281,7 +281,7 @@
     NSDictionary *electricityUsageThisMonth = dictionary[@"ElectricUsageThisMonth"];
     
     if (!REMIsNilOrNull(electricityUsageThisMonth)) {
-        REMManagedBuildingCommodityUsageModel *elecModel = [self.dataStore newManagedObject:@"REMManagedBuildingCommodityUsageModel"];
+        REMManagedBuildingCommodityUsageModel *elecModel = [self new:[REMManagedBuildingCommodityUsageModel class]];
         elecModel.id = electricityUsageThisMonth[@"Id"];
         elecModel.name = NULL_TO_NIL(electricityUsageThisMonth[@"Name"]);
         elecModel.code = electricityUsageThisMonth[@"Code"];
@@ -289,8 +289,6 @@
         building.electricityUsageThisMonth =elecModel;
     }
     
-    
-
     return building;
 
 }

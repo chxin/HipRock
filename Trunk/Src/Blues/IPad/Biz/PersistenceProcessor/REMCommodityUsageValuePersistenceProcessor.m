@@ -29,7 +29,7 @@
     self.commodityInfo.rankingNumerator = NULL_TO_NIL(rankingDic[@"RankingNumerator"]);
     self.commodityInfo.rankingDenominator = NULL_TO_NIL(rankingDic[@"RankingDenominator"]);
     
-    [self.dataStore persistManageObject];
+    [self save];
     
     return self.commodityInfo;
     

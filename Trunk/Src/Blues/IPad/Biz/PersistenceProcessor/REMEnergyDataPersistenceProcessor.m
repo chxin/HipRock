@@ -17,10 +17,10 @@
     NSString *parameter = [REMJSONHelper stringByObject:self.dataStore.parameter];
     NSString *value = [REMJSONHelper stringByObject:data];
     
-    REMManagedEnergyDataModel *energyModel = [self.dataStore newManagedObject:@"REMManagedEnergyDataModel"];
+    REMManagedEnergyDataModel *energyModel = [self new:[REMManagedEnergyDataModel class]];
     energyModel.key = [url stringByAppendingString:parameter];
     energyModel.value = value;
-    [self.dataStore persistManageObject];
+    [self save];
     
     return data;
 }
@@ -28,7 +28,7 @@
 - (id)fetch{
     NSString *key = [REMJSONHelper stringByObject:self.dataStore.parameter];
     NSPredicate * qcondition= [NSPredicate predicateWithFormat:@"key = '%@'",key];
-    NSArray *values = [self.dataStore fetchMangedObject:@"REMManagedEnergyDataModel" withPredicate:qcondition];
+    NSArray *values = [self fetch:[REMManagedEnergyDataModel class] withPredicate:qcondition];
     
     
     return [REMJSONHelper objectByString:values[0]];

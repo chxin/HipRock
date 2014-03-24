@@ -142,7 +142,7 @@
             REMManagedUserModel *user = validationResult.managedUser;
             [REMAppContext setCurrentManagedUser:user];
             
-            NSArray *customers = REMAppCurrentManagedUser.customers.allObjects;
+            NSArray *customers = REMAppContext.currentManagedUser.customers.allObjects;
             
             if(customers.count<=0){
                 [REMAlertHelper alert:REMIPadLocalizedString(@"Login_TrialNoCustomer")];
@@ -169,9 +169,7 @@
 
 -(void)setTempUser
 {
-    REMDataStore *tempStore = [[REMDataStore alloc] init];
-    
-    REMManagedUserModel *tempUser = [tempStore newManagedObject:@"REMManagedUserModel"];
+    REMManagedUserModel *tempUser =  (REMManagedUserModel *)[REMDataStore newManagedObject:[REMManagedUserModel class]];
     tempUser.id = 0;
     tempUser.name = @"";
     tempUser.spId = @(1);

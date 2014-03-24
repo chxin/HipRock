@@ -254,7 +254,7 @@
         return;
     }
     
-    REMManagedCustomerModel *customer=REMAppCurrentManagedCustomer;
+    REMManagedCustomerModel *customer=REMAppContext.currentManagedCustomer;
 //    NSDictionary *modelDic=@{
 //                             @"DashboardId":model.dashboardId,
 //                             @"HierarchyId":model.buildingId,
