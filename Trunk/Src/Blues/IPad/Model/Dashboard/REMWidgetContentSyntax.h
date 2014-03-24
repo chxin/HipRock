@@ -29,4 +29,5 @@
 @property (nonatomic, assign) NSComparisonResult rankingSortOrder;
 @property (nonatomic) NSNumber* rankingMinPosition;
 @property (nonatomic, assign) REMRankingRange rankingRangeCode;
+-(BOOL)isHourSupported;
 @end

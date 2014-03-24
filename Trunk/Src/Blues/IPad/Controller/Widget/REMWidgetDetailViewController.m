@@ -20,12 +20,12 @@
 #import "REMManagedSharedModel.h"
 const static CGFloat kWidgetBackButtonLeft=25;
 const static CGFloat kWidgetBackButtonTop=16;
-const static CGFloat kWidgetBackButtonWidthHeight=32;
-const static CGFloat kWidgetTitleLeftMargin=10;
-const static CGFloat kWidgetTitleHeight=30;
+//const static CGFloat kWidgetBackButtonWidthHeight=32;
+//const static CGFloat kWidgetTitleLeftMargin=10;
+//const static CGFloat kWidgetTitleHeight=30;
 const static CGFloat kWidgetTitleFontSize=18;
-const static CGFloat kWidgetShareTitleMargin=2;
-const static CGFloat kWidgetShareTitleHeight=14;
+//const static CGFloat kWidgetShareTitleMargin=2;
+//const static CGFloat kWidgetShareTitleHeight=14;
 const static CGFloat kWidgetShareTitleFontSize=14;
 
 

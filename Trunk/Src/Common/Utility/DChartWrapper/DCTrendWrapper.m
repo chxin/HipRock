@@ -491,7 +491,7 @@
                     if ([self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd] <= minTimeInterval) {
                         updatedRange = currentRange;
                     } else {
-                        updatedRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
+                        updatedRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeLength];
                     }
                 } else {
                     if (returnRangeStart < globalRange.location) returnRangeStart = globalRange.location;
@@ -500,7 +500,7 @@
                     if ([self getTimeIntervalFrom:returnRangeStart to:returnRangeEnd] > maxTimeInterval) {
                         updatedRange = currentRange;
                     } else {
-                        updatedRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeEnd-returnRangeStart];
+                        updatedRange = [[DCRange alloc]initWithLocation:returnRangeStart length:returnRangeLength];
                     }
                 }
             }

@@ -25,7 +25,7 @@
         REMChartLegendItemModel *model = [[REMChartLegendItemModel alloc] init];
         
         model.index = i;
-        model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType:self.widget.diagramType];
+        model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType:self.widget.diagramType.integerValue];
         model.title = [self format:pieSlice.target];
         model.legendView = self;
         model.tappable = YES;
