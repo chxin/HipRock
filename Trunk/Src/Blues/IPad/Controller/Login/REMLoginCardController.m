@@ -146,11 +146,10 @@
             return ;
         }
         
-//        REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
-        
         if(validationResult.status == REMUserValidationSuccess) {
             //REMUserModel *user = validationResult.user;
-            [REMAppContext setCurrentManagedUser:validationResult.managedUser];
+            REMAppContext.currentManagedUser = validationResult.managedUser;
+            //[REMAppContext setCurrentManagedUser:validationResult.managedUser];
             
             //NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
             NSArray *customers = validationResult.managedUser.customers.allObjects;

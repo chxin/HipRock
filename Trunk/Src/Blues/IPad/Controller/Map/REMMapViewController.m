@@ -77,7 +77,8 @@
     [self.view addSubview:mask];
     
     //begin load data
-    REMUpdateAllManager *manager = [REMUpdateAllManager defaultManager];
+    REMUpdateAllManager *manager = REMAppContext.sharedUpdateManager;
+    
     manager.mainNavigationController = (REMMainNavigationController *)self.navigationController;
     [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessStatus errorStatus) {
         void (^callback)(void) = nil;

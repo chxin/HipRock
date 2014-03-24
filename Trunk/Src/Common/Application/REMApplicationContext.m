@@ -117,6 +117,11 @@ static BOOL CACHEMODE = NO;
     return [REMHTTPRequestOperationManager manager];
 }
 
+-(REMUpdateAllManager *)sharedUpdateManager
+{
+    return [REMUpdateAllManager defaultManager];
+}
+
 
 #pragma mark - Core Data stack
 

@@ -28,7 +28,6 @@
 }
 
 - (id)fetch{
-    
     NSArray *array =  [self fetch:[REMManagedUserModel class]];
     if (array == nil || [array lastObject]==nil) {
         return nil;
