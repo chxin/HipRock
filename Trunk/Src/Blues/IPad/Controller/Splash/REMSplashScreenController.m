@@ -202,7 +202,7 @@
     
     REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
     NSMutableArray* sereis = [[NSMutableArray alloc]init];
-    for (int sIndex = 0; sIndex < 3; sIndex++) {
+    for (int sIndex = 0; sIndex < 30; sIndex++) {
         NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
         for (int i = 0; i < 10000; i++) {
             REMEnergyData* data = [[REMEnergyData alloc]init];
@@ -256,9 +256,9 @@
     config.calendarType = REMCalendarTypeNone;
     config.isUnitOrRatioChart = NO;
     config.isMultiTimeChart = NO;
-    //    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
-    //    [self.view addSubview:pieWrapper.view];
-    //    self.plotSource = pieWrapper;
+//    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
+//    [self.view addSubview:pieWrapper.view];
+//    self.carouselController = pieWrapper;
 //    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
 //    columnWidget.view.backgroundColor = [UIColor blackColor];
 //    columnWidget.view.hasVGridlines = YES;
