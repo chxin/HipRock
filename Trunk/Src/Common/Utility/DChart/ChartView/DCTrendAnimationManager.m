@@ -24,17 +24,18 @@
     DCRange* globalRange = self.view.graphContext.globalHRange;
     NSMutableArray* hRangeFrames = [[NSMutableArray alloc]init];
     while (fabs(speed) >= speedThreshold) {
-        speed = speed * ((currentLocation < globalRange.location || currentLocation + graphLength > globalRange.end) ? 0.5 : 0.9);
+//        speed = speed * ((currentLocation < globalRange.location || currentLocation + graphLength > globalRange.end) ? 0.5 : 0.9);
+        speed = speed * 0.9;
         currentLocation += speed;
         [hRangeFrames addObject:[[DCRange alloc] initWithLocation:currentLocation length:graphLength]];
     }
     
     double to = currentLocation;
-    if (currentLocation < globalRange.location) {
-        to = globalRange.location;
-    } else if (currentLocation + graphLength > globalRange.end) {
-        to = globalRange.end-graphLength;
-    }
+//    if (currentLocation < globalRange.location) {
+//        to = globalRange.location;
+//    } else if (currentLocation + graphLength > globalRange.end) {
+//        to = globalRange.end-graphLength;
+//    }
 
     // 计算到To位置的帧
     if (currentLocation != to) {

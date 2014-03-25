@@ -43,17 +43,19 @@
         [superLayer addAnimation:animation forKey:@"bounds"];
     }
     if ([self getVisableSeriesCount] == 0) {
-        for (NSString* key in self.columnsDic.allKeys) {
-            [self.columnsDic[key] removeFromSuperlayer];
-        }
-        [self.columnsDic removeAllObjects];
+        [self clearSublayersAndDictionary];
     } else {
-        BOOL caTransationState = CATransaction.disableActions;
-        [CATransaction setDisableActions:YES];
         int start = floor(self.graphContext.hRange.location);
         int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
         if (start < 0) start = 0;
         
+        if (end < 0) {
+            [self clearSublayersAndDictionary];
+            return;
+        }
+        
+        BOOL caTransationState = CATransaction.disableActions;
+        [CATransaction setDisableActions:YES];
         double stackedHeights[end-start+1];
         for (int i = 0; i < end-start+1; i++) {
             stackedHeights[i] = 0;
@@ -110,6 +112,14 @@
         }
         self.columnsDic = xDics;
         [CATransaction setDisableActions:caTransationState];
+    }
+}
+
+-(void)clearSublayersAndDictionary {
+    while (self.columnsDic.count != 0) {
+        id key = self.columnsDic.allKeys[0];
+        [self.columnsDic[key] removeFromSuperlayer];
+        [self.columnsDic removeObjectForKey:key];
     }
 }
 

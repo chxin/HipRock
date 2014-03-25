@@ -77,7 +77,7 @@
         int end = ceil(range.end);
         start = MAX(0, start);
         
-        for (NSUInteger i = start; i <= end; i++) {
+        for (int i = start; i <= end; i++) {
             double yValAtIndex = 0;
             for (DCXYSeries* s in self.seriesList) {
                 if (s.hidden) continue;
