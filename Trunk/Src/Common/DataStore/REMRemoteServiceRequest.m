@@ -46,7 +46,7 @@
         }
         else{ //if ok, enter SUCCESS status
             id result = self.dataStore.responseType == REMServiceResponseJson ? responseObject[[responseObject allKeys][0]] : responseObject;
-            success(result);
+            success(result, operation.responseData);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         REMDataAccessStatus status = [self decideErrorStatus:error];
@@ -91,7 +91,7 @@
     NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
     
     NSString *userAgent = [NSString stringWithFormat:@"Blues/%@(PS;%@;%@;%@;%@;%@;)", version, [[REMCurrentDevice identifierForVendor] UUIDString],[REMCurrentDevice localizedModel],[REMCurrentDevice systemName],[REMCurrentDevice systemVersion],[REMCurrentDevice model]];
-    REMManagedUserModel *user = REMAppCurrentManagedUser;
+    REMManagedUserModel *user = REMAppContext.currentManagedUser;
     NSString *token = [REMEncryptHelper base64AES256EncryptString:[NSString stringWithFormat:@"%lld|%@|%lld",[user.id longLongValue],user.name, [user.spId longLongValue] ] withKey:REMSecurityTokenKey];
     
     NSString *accept = self.dataStore.responseType == REMServiceResponseJson ? @"*/*":@"image/webp,*/*;";

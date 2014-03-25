@@ -81,10 +81,27 @@ static NSOperationQueue *queue;
  */
 - (void)setOperationAcceptableContentTypes:(REMHTTPRequestOperation *)operation withResponseType:(REMServiceResponseType)responseType
 {
-    operation.responseSerializer = responseType == REMServiceResponseJson ? [AFJSONResponseSerializer serializer] : [AFImageResponseSerializer serializer];
-    NSMutableSet *acceptableContentTypes = [NSMutableSet setWithSet:operation.responseSerializer.acceptableContentTypes];
+    AFHTTPResponseSerializer *responseSerializer = nil;
+    
+    switch (responseType) {
+        case REMServiceResponseJson:
+            responseSerializer = [AFJSONResponseSerializer serializer];
+            break;
+        case REMServiceResponseImage:
+            responseSerializer = [AFImageResponseSerializer serializer];
+            break;
+            
+        default:
+            break;
+    }
+    
+    NSAssert(responseSerializer!=nil, @"A service should always have a response type");
+    
+    NSMutableSet *acceptableContentTypes = [NSMutableSet setWithSet:responseSerializer.acceptableContentTypes];
     [acceptableContentTypes addObject:@"text/html"];
-    operation.responseSerializer.acceptableContentTypes = acceptableContentTypes;
+    responseSerializer.acceptableContentTypes = acceptableContentTypes;
+    
+    operation.responseSerializer = responseSerializer;
 }
 
 

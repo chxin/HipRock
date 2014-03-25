@@ -55,7 +55,7 @@
 {
     // Return the number of rows in the section.
     //return REMAppCurrentCustomer.administratorArray.count;
-    return REMAppCurrentManagedCustomer.administrators.count;
+    return REMAppContext.currentManagedCustomer.administrators.count;
     
 }
 
@@ -68,7 +68,7 @@
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     //REMAdministratorModel *model = REMAppCurrentCustomer.administratorArray[indexPath.row];
-    REMManagedAdministratorModel *model = REMAppCurrentManagedCustomer.administrators.allObjects[indexPath.row];
+    REMManagedAdministratorModel *model = REMAppContext.currentManagedCustomer.administrators.allObjects[indexPath.row];
     cell.textLabel.text = model.realName;
     return cell;
 }

@@ -10,7 +10,11 @@
 #import "REMManagedUserModel.h"
 #import "REMManagedAdministratorModel.h"
 #import "REMManagedCustomerModel.h"
+
+
 @implementation REMLoginPersistenceProcessor
+
+#pragma mark - Data persistence processor
 
 - (id)persist:(NSDictionary *)data
 {
@@ -25,23 +29,25 @@
 
 - (id)fetch{
     
-    NSArray *array =  [self.dataStore fetchMangedObject:@"REMManagedUserModel"];
+    NSArray *array =  [self fetch:[REMManagedUserModel class]];
     if (array == nil || [array lastObject]==nil) {
         return nil;
     }
     return array[0];
 }
 
+#pragma mark - @private
+
 - (REMManagedUserModel *)persistUserModel:(NSDictionary *)user{
     
     REMManagedUserModel *oldUser = [self fetch];
     
     if (oldUser != nil) {
-        [self.dataStore deleteManageObject:oldUser];
+        [self delete:oldUser];
     }
     
     
-    REMManagedUserModel *userObject= [self.dataStore newManagedObject:@"REMManagedUserModel"];
+    REMManagedUserModel *userObject= [self new:[REMManagedUserModel class]];
     
     userObject.id=user[@"Id"];
     userObject.name=user[@"Name"];
@@ -62,7 +68,7 @@
         [self addCustomer:customer intoUserObject:userObject];
     }
     
-    [self.dataStore persistManageObject];
+    [self save];
     
     //id newData= [self fetchData];
     
@@ -71,7 +77,7 @@
 }
 - (void)addCustomer:(NSDictionary *)customer intoUserObject:(REMManagedUserModel *)userObject
 {
-    REMManagedCustomerModel *customerObject= [self.dataStore newManagedObject:@"REMManagedCustomerModel"];
+    REMManagedCustomerModel *customerObject= [self new:[REMManagedCustomerModel class]];
     
     customerObject.id = customer[@"Id"];
     customerObject.name=customer[@"Name"];
@@ -98,7 +104,7 @@
 
 - (void)addAdministrator:(NSDictionary *)admin intoUserObject:(REMManagedCustomerModel *)customerObject
 {
-    REMManagedAdministratorModel *adminObject= [self.dataStore newManagedObject:@"REMManagedAdministratorModel"];
+    REMManagedAdministratorModel *adminObject= [self new:[REMManagedAdministratorModel class]];
     adminObject.realName=admin[@"RealName"];
     adminObject.customer=customerObject;
     [customerObject addAdministratorsObject:adminObject];

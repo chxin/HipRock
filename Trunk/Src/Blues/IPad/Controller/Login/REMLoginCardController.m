@@ -141,7 +141,7 @@
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserValidate parameter:parameter accessCache:NO andMessageMap:messageMap];
     store.persistenceProcessor = [[REMLoginPersistenceProcessor alloc] init];
     
-    [store access:^(REMUserValidationModel *validationResult) {
+    [store access:^(REMUserValidationModel *validationResult, id raw) {
         if(REMIsNilOrNull(validationResult)){ //TODO: empty response?
             return ;
         }

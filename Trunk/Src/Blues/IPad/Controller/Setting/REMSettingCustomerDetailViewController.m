@@ -54,7 +54,7 @@ static NSString * cellId=@"customerCell";
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
     }
     
-    REMManagedCustomerModel *customer = REMAppCurrentManagedCustomer;
+    REMManagedCustomerModel *customer = REMAppContext.currentManagedCustomer;
     
     
     if(indexPath.row==0){

@@ -69,7 +69,7 @@
     store.persistenceProcessor = processor;
     store.isDisableAlert=YES;
     [self startLoadingActivity];
-    [store access:^(id data) {
+    [store access:^(id data, id raw) {
         if(self.view==nil)return ;
         [self loadDataSuccessWithData:data];
         

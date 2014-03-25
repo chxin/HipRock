@@ -130,7 +130,7 @@
         }
     }
     
-    [store access:^(id data) {
+    [store access:^(id data, id raw) {
         [self.loadingView stopAnimating];
         [self.loadingView removeFromSuperview];
         [self.loadingBackgroundView removeFromSuperview];

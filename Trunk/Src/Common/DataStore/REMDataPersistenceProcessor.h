@@ -16,6 +16,12 @@
  */
 @property (nonatomic,weak) REMDataStore *dataStore;
 
+- (id)new:(Class)objectType;
+- (id)fetch:(Class)objectType;
+- (id)fetch:(Class)objectType withPredicate:(NSPredicate *)predicate;
+- (void)delete:(NSManagedObject *)object;
+- (void)save;
+
 #pragma mark - Methods
 /**
  *  Persists data into database
@@ -24,32 +30,32 @@
  *
  *  @return The persisted data
  */
-- (id) persist:(id)data;
+- (id)persist:(id)data;
 
 /**
  *  Fetches data from database
  *
  *  @return The fetched data
  */
-- (id) fetch;
+- (id)fetch;
 
-/**
- *  Make new managed object of the specified type
- *
- *  @param type The specified type
- *
- *  @return Managed object instance of the specified type
- */
-- (id)newObject:(NSString *)type;
+///**
+// *  Make new managed object of the specified type
+// *
+// *  @param type The specified type
+// *
+// *  @return Managed object instance of the specified type
+// */
+//- (id)new:(Class *)type;
 
-/**
- *  Process error
- *
- *  @param error    Error info
- *  @param status   Data access status
- *  @param response Server response
- */
-- (void) processError:(NSError *)error withStatus:(REMDataAccessStatus)status andResponse:(id)response;
+///**
+// *  Process error
+// *
+// *  @param error    Error info
+// *  @param status   Data access status
+// *  @param response Server response
+// */
+//- (void)processError:(NSError *)error withStatus:(REMDataAccessStatus)status andResponse:(id)response;
 
 
 @end

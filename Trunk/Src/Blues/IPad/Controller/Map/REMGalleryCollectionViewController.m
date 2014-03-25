@@ -169,7 +169,7 @@
             NSDictionary *parameter = @{@"pictureId":[imageIds[0] id], @"isSmall":@"true"};
             REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingPicture parameter:parameter accessCache:YES andMessageMap:nil];
             store.groupName = kGalleryBuildingImageGroupName;
-            [store access:^(id image) {
+            [store access:^(id image, id raw) {
                 [REMImageHelper writeImageFile:image withFullPath:smallImagePath];
                 
                 UIImage *smallBlurImage = [REMImageHelper blurImage:image];

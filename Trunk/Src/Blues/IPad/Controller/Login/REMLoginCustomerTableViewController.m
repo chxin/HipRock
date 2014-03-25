@@ -35,7 +35,7 @@ static NSString *CellIdentifier = @"loginCustomerCell";
     
     self.navigationItem.title = REMIPadLocalizedString(@"Login_CustomerSelectionTitle");
     if (self.customerArray==nil) {
-        self.customerArray=(NSArray *)(REMAppCurrentManagedUser.customers.allObjects);
+        self.customerArray=(NSArray *)(REMAppContext.currentManagedUser.customers.allObjects);
     }
 }
 

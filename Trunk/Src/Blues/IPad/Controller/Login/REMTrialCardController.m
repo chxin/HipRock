@@ -134,7 +134,7 @@
     NSDictionary *messageMap = REMDataAccessMessageMake(@"Login_TrialNoNetwork", @"Login_TrialNetworkFailed", @"Login_TrialServerError", @"");
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSDemoUserValidate parameter:nil accessCache:NO andMessageMap:messageMap];
     store.persistenceProcessor = [[REMLoginPersistenceProcessor alloc] init];
-    [store access:^(REMUserValidationModel *validationResult) {
+    [store access:^(REMUserValidationModel *validationResult, id raw) {
         
         //REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
         
@@ -142,7 +142,7 @@
             REMManagedUserModel *user = validationResult.managedUser;
             [REMAppContext setCurrentManagedUser:user];
             
-            NSArray *customers = REMAppCurrentManagedUser.customers.allObjects;
+            NSArray *customers = REMAppContext.currentManagedUser.customers.allObjects;
             
             if(customers.count<=0){
                 [REMAlertHelper alert:REMIPadLocalizedString(@"Login_TrialNoCustomer")];
@@ -169,9 +169,7 @@
 
 -(void)setTempUser
 {
-    REMDataStore *tempStore = [[REMDataStore alloc] init];
-    
-    REMManagedUserModel *tempUser = [tempStore newManagedObject:@"REMManagedUserModel"];
+    REMManagedUserModel *tempUser =  (REMManagedUserModel *)[REMDataStore newManagedObject:[REMManagedUserModel class]];
     tempUser.id = 0;
     tempUser.name = @"";
     tempUser.spId = @(1);

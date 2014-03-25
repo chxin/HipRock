@@ -10,6 +10,7 @@
 #import "REMApplicationContext.h"
 #import "REMCommonHeaders.h"
 #import "REMAppDelegate.h"
+#import "REMDataPersistenceProcessor.h"
 
 
 @interface REMCacheStoreHolder : NSObject
@@ -26,12 +27,6 @@
 @interface REMDataStore()
 
 @property (nonatomic,strong) REMDataAccessSuccessBlock success;
-//数据模型对象
-@property(nonatomic,strong) NSManagedObjectModel *managedObjectModel;
-//上下文对象
-@property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
-//持久性存储区
-@property(nonatomic,strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @end
 
@@ -62,21 +57,6 @@ static REMCacheStoreHolder *cacheStoreHolder;
 {
     _remoteServiceRequest = remoteServiceRequest;
     _remoteServiceRequest.dataStore = self;
-}
-
--(NSManagedObjectModel *)managedObjectModel
-{
-    return [REMAppDelegate app].managedObjectModel;
-    
-}
--(NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
-    return [REMAppDelegate app].persistentStoreCoordinator;
-}
-
--(NSManagedObjectContext *)managedObjectContext
-{
-    return [REMAppDelegate app].managedObjectContext;
 }
 
 #pragma mark - Store
@@ -153,47 +133,6 @@ static REMCacheStoreHolder *cacheStoreHolder;
     [REMHTTPRequestOperationManager cancel:groupName];
 }
 
-#pragma mark - Core Data
-- (id)newManagedObject:(NSString *)objectType{
-    return [NSEntityDescription insertNewObjectForEntityForName:objectType inManagedObjectContext:self.managedObjectContext];
-}
-
-- (id)fetchMangedObject:(NSString *)objectType{
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:objectType];
-    
-    NSError *error = nil;
-    //执行获取数据请求，返回数组
-    NSMutableArray *mutableFetchResult = [[self.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-    if (mutableFetchResult == nil) {
-        NSLog(@"Error: %@,%@",error,[error userInfo]);
-    }
-    
-    return mutableFetchResult;
-}
-
-- (id)fetchMangedObject:(NSString *)objectType withPredicate:(NSPredicate *)predicate{
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:objectType];
-    [request setPredicate:predicate];
-    NSError *error = nil;
-    //执行获取数据请求，返回数组
-    NSMutableArray *mutableFetchResult = [[self.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-    if (mutableFetchResult == nil) {
-        NSLog(@"Error: %@,%@",error,[error userInfo]);
-    }
-    
-    return mutableFetchResult;
-}
-
-- (void)deleteManageObject:(NSManagedObject *)object{
-    [self.managedObjectContext deleteObject:object];
-    [self persistManageObject];
-}
-
-- (void)persistManageObject{
-    NSError *error = nil;
-    [self.managedObjectContext save:&error];
-}
-
 
 #pragma mark - @private
 /**
@@ -235,7 +174,7 @@ static REMCacheStoreHolder *cacheStoreHolder;
 {
     if (self.persistenceProcessor!=nil) {
         id data = [self.persistenceProcessor fetch];
-        success(data);
+        success(data, data);
         return;
     }
 }
@@ -246,7 +185,7 @@ static REMCacheStoreHolder *cacheStoreHolder;
     self.remoteServiceRequest = request;
     
     
-    [self.remoteServiceRequest request:^(id data) {
+    [self.remoteServiceRequest request:^(id data, id raw) {
         if([REMApplicationContext instance].cacheMode == YES){
             [[REMApplicationContext instance] setCacheMode:NO];
         }
@@ -255,7 +194,7 @@ static REMCacheStoreHolder *cacheStoreHolder;
             newData = [self.persistenceProcessor persist:data];
         }
         
-        success(newData);
+        success(newData, raw);
     } failure:^(NSError *error, REMDataAccessStatus status, id response) {
         if(self.isDisableAlert == NO && (status == REMDataAccessNoConnection || status == REMDataAccessFailed || (status == REMDataAccessErrorMessage && [response isKindOfClass:[REMBusinessErrorInfo class]] && [((REMBusinessErrorInfo *)response).code isEqualToString:@"1"]))){
             NSString *message = self.messageMap[@(status)];
@@ -265,6 +204,33 @@ static REMCacheStoreHolder *cacheStoreHolder;
         if(failure)
             failure(error,status,response);
     }];
+}
+
+#pragma mark - core-data access
+
++ (id)newManagedObject:(Class)objectType
+{
+    return [[REMDataPersistenceProcessor new] new:objectType];
+}
+
++ (void)deleteManagedObject:(NSManagedObject *)object
+{
+    [[REMDataPersistenceProcessor new] delete:object];
+}
+
++ (void)saveContext
+{
+    [[REMDataPersistenceProcessor new] save];
+}
+
++ (id)fetchManagedObject:(Class)objectType
+{
+    return [[REMDataPersistenceProcessor new] fetch:objectType];
+}
+
++ (id)fetchManagedObject:(Class)objectType withPredicate:(NSPredicate *)predicate
+{
+    return [[REMDataPersistenceProcessor new] fetch:objectType withPredicate:predicate];
 }
 
 @end

@@ -9,28 +9,20 @@
 
 @implementation REMPinToCoverPersistenceProcessor
 
-- (id)fetch{
-    NSMutableArray *array = [NSMutableArray array];
-    for (REMManagedBuildingCommodityUsageModel *commodityInfo in [self.buildingInfo.commodities allObjects]) {
-        [array arrayByAddingObjectsFromArray:[commodityInfo.pinnedWidgets allObjects]];
-    }
-    
-    
-    return array;
-}
+#pragma mark - Data persistence processor
 
 - (id)persist:(NSArray *)data{
     
     NSArray *oldData = [self fetch];
     
     for (REMManagedPinnedWidgetModel *model  in oldData) {
-        [self.dataStore deleteManageObject:model];
+        [self delete:model];
     }
     
     if (data!=nil) {
         for (int i=0; i<data.count; ++i) {
             NSDictionary *dictionary = data[i];
-            REMManagedPinnedWidgetModel *pinnedModel = [self.dataStore newManagedObject:@"REMManagedPinnedWidgetModel"];
+            REMManagedPinnedWidgetModel *pinnedModel = [self new:[REMManagedPinnedWidgetModel class]];
             NSNumber *commodityId = dictionary[@"CommodityId"];
             for (REMManagedBuildingCommodityUsageModel *commodityInfo in [self.buildingInfo.commodities allObjects]) {
                 if ([commodityInfo.id isEqualToNumber:commodityId] == YES) {
@@ -41,14 +33,21 @@
                     [commodityInfo addPinnedWidgetsObject:pinnedModel];
                 }
             }
-            
-           
         }
-        
-        
     }
-    [self.dataStore persistManageObject];
+    [self save];
     return [self fetch];
 }
+
+- (id)fetch{
+    NSMutableArray *array = [NSMutableArray array];
+    for (REMManagedBuildingCommodityUsageModel *commodityInfo in [self.buildingInfo.commodities allObjects]) {
+        [array arrayByAddingObjectsFromArray:[commodityInfo.pinnedWidgets allObjects]];
+    }
+    
+    
+    return array;
+}
+
 
 @end

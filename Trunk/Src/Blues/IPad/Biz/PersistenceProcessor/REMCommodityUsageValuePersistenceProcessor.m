@@ -9,9 +9,6 @@
 
 @implementation REMCommodityUsageValuePersistenceProcessor
 
-- (id)fetch{
-    return self.commodityInfo;
-}
 
 - (id)persist:(NSDictionary *)dictionary{
     NSDictionary *totalDic = dictionary[@"EnergyUsage"];
@@ -32,10 +29,14 @@
     self.commodityInfo.rankingNumerator = NULL_TO_NIL(rankingDic[@"RankingNumerator"]);
     self.commodityInfo.rankingDenominator = NULL_TO_NIL(rankingDic[@"RankingDenominator"]);
     
-    [self.dataStore persistManageObject];
+    [self save];
     
     return self.commodityInfo;
     
+}
+
+- (id)fetch{
+    return self.commodityInfo;
 }
 
 @end

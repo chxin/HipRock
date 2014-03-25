@@ -104,9 +104,9 @@ typedef enum _REMServiceResponseType
 } REMServiceResponseType;
 
 
-typedef void(^REMDataAccessSuccessBlock)(id data);
+typedef void(^REMDataAccessSuccessBlock)(id parsedObject, id rawData);
 typedef void(^REMDataAccessFailureBlock)(NSError *error, REMDataAccessStatus status, id response);
-typedef void(^REMDataAccessProgressBlock)(NSUInteger bytes, long long read, long long expected);
+//typedef void(^REMDataAccessProgressBlock)(NSUInteger bytes, long long read, long long expected);
 
 
 #pragma mark - DataStore
@@ -127,6 +127,50 @@ typedef void(^REMDataAccessProgressBlock)(NSUInteger bytes, long long read, long
 @property (nonatomic,strong) REMRemoteServiceRequest *remoteServiceRequest;
 @property (nonatomic,strong) REMDataPersistenceProcessor *persistenceProcessor;
 
+#pragma mark - Class methods
+
+/**
+ *  Create a new instance of core-data managed object of type
+ *
+ *  @param objectType The type to be created
+ *
+ *  @return The managed object instance of the desired type
+ */
++ (id)newManagedObject:(Class)objectType;
+
+/**
+ *  Delete a core-data managed object from current database context
+ *
+ *  @param object The managed object to be deleted
+ */
++ (void)deleteManagedObject:(NSManagedObject *)object;
+
+/**
+ *  Save the current core-data database context
+ */
++ (void)saveContext;
+
+/**
+ *  Fetch a collection of core-data managed object from current core-data database
+ *
+ *  @param objectType The desired object type
+ *
+ *  @return A collection of managed objects of the desired type
+ */
++ (id)fetchManagedObject:(Class)objectType;
+
+/**
+ *  Fetch a collection of core-data managed object of desired type and satisfies provided condition from current core-data database
+ *
+ *  @param objectType The desired object type
+ *  @param predicate  Filter condition
+ *
+ *  @return A collection of managed objects of the desired type and satisfies the filter condition
+ */
++ (id)fetchManagedObject:(Class)objectType withPredicate:(NSPredicate *)predicate;
+
+
+#pragma mark - Instance methods
 
 /**
  *  Constructor
@@ -167,11 +211,5 @@ typedef void(^REMDataAccessProgressBlock)(NSUInteger bytes, long long read, long
  */
 + (void) cancel: (NSString *) groupName;
 
-
-- (id)newManagedObject:(NSString *)objectType;
-- (id)fetchMangedObject:(NSString *)objectType;
-- (id)fetchMangedObject:(NSString *)objectType withPredicate:(NSPredicate *)predicate;
-- (void)deleteManageObject:(NSManagedObject *)object;
-- (void)persistManageObject;
 
 @end
