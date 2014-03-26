@@ -493,6 +493,9 @@
         return blurred;
     }
     else{
+        //TODO:remove
+        if(imageView.image == nil)
+            return nil;
         
         UIImage *view = [REMImageHelper blurImage:imageView.image];
         if(view!=nil){

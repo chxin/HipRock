@@ -42,7 +42,7 @@
     REMManagedUserModel *oldUser = [self fetch];
     
     if (oldUser != nil) {
-        [self delete:oldUser];
+        [self remove:oldUser];
     }
     
     

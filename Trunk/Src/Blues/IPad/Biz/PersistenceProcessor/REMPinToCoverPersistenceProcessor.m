@@ -16,7 +16,7 @@
     NSArray *oldData = [self fetch];
     
     for (REMManagedPinnedWidgetModel *model  in oldData) {
-        [self delete:model];
+        [self remove:model];
     }
     
     if (data!=nil) {

@@ -17,6 +17,7 @@
 #import "REMEnum.h"
 #import "REMWidgetContentSyntax.h"
 #import "REMBuildingInfoUpdateModel.h"
+#import "REMManagedAdministratorModel.h"
 
 
 @implementation REMBuildingPersistenceProcessor
@@ -39,6 +40,14 @@
     }
     
     //process customer
+    if(!REMIsNilOrNull(dictionary[@"Customers"]) && [dictionary[@"Customers"] count] >0){
+        NSArray *oldCustomers = [self fetch:[REMManagedCustomerModel class]];
+        for (REMManagedCustomerModel *customer in oldCustomers) {
+            [REMDataStore deleteManagedObject:customer];
+        }
+        
+        [self persistCustomers:dictionary[@"Customers"]];
+    }
     
     [self save];
     
@@ -60,7 +69,7 @@
 -(void)clean
 {
     for (REMManagedBuildingModel *building in  [self fetch:[REMManagedBuildingModel class]]) {
-        [self delete:building];
+        [self remove:building];
     }
 }
 
@@ -309,6 +318,41 @@
 
 
 
+- (void)persistCustomers:(NSArray *)customers{
+    REMManagedUserModel *user = [[self fetch:[REMManagedUserModel class]] lastObject];// [[REMDataStore fetchManagedObject:] lastObject];
+    
+//    for(REMManagedCustomerModel *old in user.customers.allObjects){
+//        [REMDataStore deleteManagedObject:old];
+//    }
+    
+    for(NSDictionary *customer in customers){
+        REMManagedCustomerModel *customerObject= (REMManagedCustomerModel *)[REMDataStore createManagedObject:[REMManagedCustomerModel class]];
+        
+        customerObject.id = customer[@"Id"];
+        customerObject.name=customer[@"Name"];
+        customerObject.code=customer[@"Code"];
+        customerObject.address=customer[@"Address"];
+        customerObject.email=customer[@"Email"];
+        customerObject.manager=customer[@"Manager"];
+        customerObject.telephone=customer[@"Telephone"];
+        customerObject.comment= NULL_TO_NIL(customer[@"Comment"]);
+        customerObject.timezoneId=customer[@"TimezoneId"];
+        customerObject.logoId=customer[@"logoId"];
+        long long time=[REMTimeHelper longLongFromJSONString:customer[@"StartTime"]];
+        customerObject.startTime= [NSDate dateWithTimeIntervalSince1970:time/1000 ];
+        
+        NSArray *administrators=customer[@"Administrators"];
+        
+        for (NSDictionary *admin in administrators) {
+            REMManagedAdministratorModel *adminObject= (REMManagedAdministratorModel *)[REMDataStore createManagedObject:[REMManagedAdministratorModel class]];
+            adminObject.realName=admin[@"RealName"];
+            adminObject.customer=customerObject;
+            [customerObject addAdministratorsObject:adminObject];
+        }
+        
+        [user addCustomersObject:customerObject];
+    }
+}
 
 
 @end
