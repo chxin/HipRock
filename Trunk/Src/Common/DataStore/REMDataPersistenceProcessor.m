@@ -9,6 +9,7 @@
 #import "REMDataPersistenceProcessor.h"
 #import "REMAppDelegate.h"
 #import "REMApplicationContext.h"
+#import "REMManagedEnergyDataModel.h"
 
 @implementation REMDataPersistenceProcessor
 
@@ -32,21 +33,33 @@
 
 
 - (id)fetch:(Class)objectType{
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass(objectType)];
-    
-    NSError *error = nil;
-    //执行获取数据请求，返回数组
-    NSMutableArray *mutableFetchResult = [[REMAppContext.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-    if (mutableFetchResult == nil) {
-        NSLog(@"Error: %@,%@",error,[error userInfo]);
-    }
-    
-    return mutableFetchResult;
+    return [self fetch:objectType withPredicate:nil];
+//    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass(objectType)];
+//    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"id" ascending:YES];
+//    [request setSortDescriptors:@[sortDescriptor]];
+//    
+//    NSError *error = nil;
+//    //执行获取数据请求，返回数组
+//    NSMutableArray *mutableFetchResult = [[REMAppContext.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+//    if (mutableFetchResult == nil) {
+//        NSLog(@"Error: %@,%@",error,[error userInfo]);
+//    }
+//    
+//    return mutableFetchResult;
 }
 
-- (id)fetch:(NSString *)objectType withPredicate:(NSPredicate *)predicate{
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:objectType];
-    [request setPredicate:predicate];
+- (id)fetch:(Class)objectType withPredicate:(NSPredicate *)predicate{
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass(objectType)];
+    
+    if(objectType!=[REMManagedEnergyDataModel class]){
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"id" ascending:YES];
+        [request setSortDescriptors:@[sortDescriptor]];
+    }
+    
+    if(predicate!=nil){
+        [request setPredicate:predicate];
+    }
+    
     NSError *error = nil;
     //执行获取数据请求，返回数组
     NSMutableArray *mutableFetchResult = [[REMAppContext.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
