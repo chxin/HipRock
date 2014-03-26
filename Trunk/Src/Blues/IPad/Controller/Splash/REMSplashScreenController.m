@@ -193,18 +193,18 @@
 -(void)oscarTest {
     REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
     syntax.xtype = @"columnchartcomponent";
-    syntax.step = [NSNumber numberWithInt: REMEnergyStepHour];
+    syntax.step = [NSNumber numberWithInt: REMEnergyStepDay];
     NSMutableArray* timeRanges = [[NSMutableArray alloc]initWithCapacity:1];
-    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:3600*12]];
+    REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:86400*12]];
     [timeRanges setObject:r atIndexedSubscript:0];
     syntax.timeRanges = timeRanges;
     syntax.params = @{@"benchmarkOption":@{@"benchmarkText":@"TEST全行业Benckmark"}};
     
     REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
     NSMutableArray* sereis = [[NSMutableArray alloc]init];
-    for (int sIndex = 0; sIndex < 30; sIndex++) {
+    for (int sIndex = 0; sIndex < 3; sIndex++) {
         NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 100; i++) {
             REMEnergyData* data = [[REMEnergyData alloc]init];
             data.quality = REMEnergyDataQualityGood;
             //            if (i%5==0) {
@@ -212,7 +212,7 @@
             //            } else {
             data.dataValue = [NSNumber numberWithInt:(i+1)*10*(sIndex+1)];
             //            }
-            data.localTime = [NSDate dateWithTimeIntervalSince1970:i*3600];
+            data.localTime = [NSDate dateWithTimeIntervalSince1970:i*86400];
             [energyDataArray addObject:data];
         }
         REMTargetEnergyData* sData = [[REMTargetEnergyData alloc]init];
@@ -221,7 +221,7 @@
         sData.target.targetId = @(1);
         sData.target.name = @"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
         sData.target.uomId = 0;
-        sData.target.uomName = [NSString stringWithFormat:@"UOM%i", sIndex];
+        sData.target.uomName = [NSString stringWithFormat:@"UOM%i", 0];
         [sereis addObject:sData];
     }
     energyViewData.visibleTimeRange = r;
@@ -251,31 +251,32 @@
     }
     
     DWrapperConfig* config = [[DWrapperConfig alloc]init];
-    config.step = REMEnergyStepHour;
-    config.stacked = NO;
+    config.step = REMEnergyStepDay;
+    config.stacked = YES;
     config.calendarType = REMCalendarTypeNone;
     config.isUnitOrRatioChart = NO;
     config.isMultiTimeChart = NO;
 //    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
 //    [self.view addSubview:pieWrapper.view];
 //    self.carouselController = pieWrapper;
-//    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
-//    columnWidget.view.backgroundColor = [UIColor blackColor];
-//    columnWidget.view.hasVGridlines = YES;
-//    columnWidget.view.graphContext.hGridlineAmount = 4;
-//    [self.view addSubview:columnWidget.view];
+    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
+    columnWidget.view.backgroundColor = [UIColor blackColor];
+    columnWidget.view.hasVGridlines = YES;
+    columnWidget.view.graphContext.hGridlineAmount = 4;
+    self.carouselController = columnWidget;
+    [self.view addSubview:columnWidget.view];
     
-    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
-    lineWidget.view.backgroundColor = [UIColor blackColor];
-    NSMutableArray* bands = [[NSMutableArray alloc]init];
-    DCRange* bandRange = [[DCRange alloc]initWithLocation:0 length:20];
-    DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
-    b.range = bandRange;
-    b.color = [UIColor colorWithRed:0.5 green:0 blue:0 alpha:0.5];
-    b.axis = lineWidget.view.yAxisList[0];
-    [bands addObject:b];
-    [lineWidget.view setBackgoundBands:bands];
-    [self.view addSubview:lineWidget.view];
+//    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
+//    lineWidget.view.backgroundColor = [UIColor blackColor];
+//    NSMutableArray* bands = [[NSMutableArray alloc]init];
+//    DCRange* bandRange = [[DCRange alloc]initWithLocation:0 length:20];
+//    DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
+//    b.range = bandRange;
+//    b.color = [UIColor colorWithRed:0.5 green:0 blue:0 alpha:0.5];
+//    b.axis = lineWidget.view.yAxisList[0];
+//    [bands addObject:b];
+//    [lineWidget.view setBackgoundBands:bands];
+//    [self.view addSubview:lineWidget.view];
 //    self.plotSource = lineWidget;
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 605, 100, 30)];
