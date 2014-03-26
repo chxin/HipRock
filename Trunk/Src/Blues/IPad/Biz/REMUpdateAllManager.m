@@ -72,7 +72,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
     }
     
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:dic accessCache:accessCache andMessageMap:messageMap];
-    store.persistManually=YES;
+    //store.persistManually=YES;
     store.persistenceProcessor = [[REMBuildingPersistenceProcessor alloc]init];
     //store.maskContainer=self.maskerView;
     store.groupName =customerUpdateAll;
@@ -201,7 +201,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
     }
     
     for(NSDictionary *customer in customers){
-        REMManagedCustomerModel *customerObject= (REMManagedCustomerModel *)[REMDataStore newManagedObject:[REMManagedCustomerModel class]];
+        REMManagedCustomerModel *customerObject= (REMManagedCustomerModel *)[REMDataStore createManagedObject:[REMManagedCustomerModel class]];
         
         customerObject.id = customer[@"Id"];
         customerObject.name=customer[@"Name"];
@@ -220,7 +220,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
         
         
         for (NSDictionary *admin in administrators) {
-            REMManagedAdministratorModel *adminObject= (REMManagedAdministratorModel *)[REMDataStore newManagedObject:[REMManagedAdministratorModel class]];
+            REMManagedAdministratorModel *adminObject= (REMManagedAdministratorModel *)[REMDataStore createManagedObject:[REMManagedAdministratorModel class]];
             adminObject.realName=admin[@"RealName"];
             adminObject.customer=customerObject;
             [customerObject addAdministratorsObject:adminObject];

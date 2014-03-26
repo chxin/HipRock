@@ -169,7 +169,7 @@
 
 -(void)setTempUser
 {
-    REMManagedUserModel *tempUser =  (REMManagedUserModel *)[REMDataStore newManagedObject:[REMManagedUserModel class]];
+    REMManagedUserModel *tempUser =  (REMManagedUserModel *)[REMDataStore createManagedObject:[REMManagedUserModel class]];
     tempUser.id = 0;
     tempUser.name = @"";
     tempUser.spId = @(1);

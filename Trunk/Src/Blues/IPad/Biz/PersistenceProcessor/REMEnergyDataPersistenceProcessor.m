@@ -17,7 +17,7 @@
     NSString *parameter = [REMJSONHelper stringByObject:self.dataStore.parameter];
     NSString *value = [REMJSONHelper stringByObject:data];
     
-    REMManagedEnergyDataModel *energyModel = [self new:[REMManagedEnergyDataModel class]];
+    REMManagedEnergyDataModel *energyModel = [self create:[REMManagedEnergyDataModel class]];
     energyModel.key = [url stringByAppendingString:parameter];
     energyModel.value = value;
     [self save];

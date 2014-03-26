@@ -136,7 +136,7 @@ typedef void(^REMDataAccessFailureBlock)(NSError *error, REMDataAccessStatus sta
  *
  *  @return The managed object instance of the desired type
  */
-+ (id)newManagedObject:(Class)objectType;
++ (id)createManagedObject:(Class)objectType;
 
 /**
  *  Delete a core-data managed object from current database context

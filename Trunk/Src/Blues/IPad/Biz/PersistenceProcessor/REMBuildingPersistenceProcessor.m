@@ -16,20 +16,21 @@
 #import "REMTimeHelper.h"
 #import "REMEnum.h"
 #import "REMWidgetContentSyntax.h"
+#import "REMBuildingInfoUpdateModel.h"
 
 
 @implementation REMBuildingPersistenceProcessor
 
 #pragma mark - DataPersistenceProcessor
 
-- (id)persist:(NSArray *)data
+- (REMBuildingInfoUpdateModel *)persist:(NSDictionary *)dictionary
 {
-    for (REMManagedBuildingModel *building in  [self fetch]) {
-        [self delete:building];
-    }
+    [self clean];
     
-    for (int i=0; i<data.count; ++i) {
-        NSDictionary *buildingOverall =data[i];
+    //process building
+    
+    for (int i=0; i<[dictionary[@"BuildingInfo"] count]; ++i) {
+        NSDictionary *buildingOverall =dictionary[@"BuildingInfo"][i];
         REMManagedBuildingModel *buildingModel = [self persistBuilding:buildingOverall[@"Building"]];
         buildingModel.isQualified = NULL_TO_NIL(buildingOverall[@"IsQualified"]);
         [self persistCommodity:buildingOverall[@"CommodityArray"] intoBuilding:buildingModel];
@@ -37,19 +38,32 @@
         [self persistPinnedWidget:buildingOverall[@"WidgetRelation"] intoBuilding:buildingModel];
     }
     
+    //process customer
+    
     [self save];
     
     return [self fetch];
 }
 
-- (id)fetch
+- (REMBuildingInfoUpdateModel *)fetch
 {
-    NSArray *buildings = [self fetch:[REMManagedBuildingModel class]];
+    REMBuildingInfoUpdateModel *model = [[REMBuildingInfoUpdateModel alloc] init];
+    model.buildingInfo = [self fetch:[REMManagedBuildingModel class]];
+    model.customers = [self fetch:[REMManagedCustomerModel class]];
+    model.status = REMCustomerUserConcurrencyStatusSuccess;
     
-    return buildings;
+    return model;
 }
 
 #pragma mark - @private
+
+-(void)clean
+{
+    for (REMManagedBuildingModel *building in  [self fetch:[REMManagedBuildingModel class]]) {
+        [self delete:building];
+    }
+}
+
 
 - (void)persistPinnedWidget:(NSArray *)pinnedWidgetArray intoBuilding:(REMManagedBuildingModel *)building{
     if (pinnedWidgetArray!=nil && [pinnedWidgetArray isEqual:[NSNull null]]==NO) {
@@ -59,7 +73,7 @@
             for (REMManagedBuildingCommodityUsageModel *commodity in [building.commodities allObjects]) {
                 NSNumber *commodityId = relation[@"CommodityId"];
                 if ([commodity.id isEqualToNumber:commodityId] == YES) {
-                    REMManagedPinnedWidgetModel *pinnedModel = [self new:[REMManagedPinnedWidgetModel class]];
+                    REMManagedPinnedWidgetModel *pinnedModel = [self create:[REMManagedPinnedWidgetModel class]];
                     
                     pinnedModel.commodity = commodity;
                     pinnedModel.widgetId = relation[@"WidgetId"];
@@ -79,7 +93,7 @@
     
     for (int i=0; i<dashboardArray.count; ++i) {
         NSDictionary *dictionary = dashboardArray[i];
-        REMManagedDashboardModel *dashboard = [self new:[REMManagedDashboardModel class]];
+        REMManagedDashboardModel *dashboard = [self create:[REMManagedDashboardModel class]];
         dashboard.id = dictionary[@"Id"];
         dashboard.name=dictionary[@"Name"];
         dashboard.isFavorite=dictionary[@"IsFavorite"];
@@ -107,7 +121,7 @@
 
 - (REMManagedSharedModel *)shareModelByDictionary:(NSDictionary *)dictionary{
     
-    REMManagedSharedModel *shareModel = [self new:[REMManagedSharedModel class]];
+    REMManagedSharedModel *shareModel = [self create:[REMManagedSharedModel class]];
     
     shareModel.userRealName=dictionary[@"UserRealName"];
     
@@ -219,7 +233,7 @@
             continue;
         }
         
-        REMManagedWidgetModel *widget = [self new:[REMManagedWidgetModel class]];
+        REMManagedWidgetModel *widget = [self create:[REMManagedWidgetModel class]];
         widget.id=dictionary[@"Id"];
         widget.name=dictionary[@"Name"];
         widget.isRead=dictionary[@"IsRead"];
@@ -241,7 +255,7 @@
 
 - (void)persistCommodity:(NSArray *)commodityArray intoBuilding:(REMManagedBuildingModel *)building{
     for (int i=0; i<commodityArray.count; ++i) {
-        REMManagedBuildingCommodityUsageModel *commodity = [self new:[REMManagedBuildingCommodityUsageModel class]];
+        REMManagedBuildingCommodityUsageModel *commodity = [self create:[REMManagedBuildingCommodityUsageModel class]];
         NSDictionary *dictionary = commodityArray[i];
         commodity.id = dictionary[@"Id"];
         commodity.name = NULL_TO_NIL(dictionary[@"Name"]);
@@ -253,7 +267,7 @@
 }
 
 - (REMManagedBuildingModel *)persistBuilding:(NSDictionary *)dictionary{
-    REMManagedBuildingModel *building = [self new:[REMManagedBuildingModel class]];
+    REMManagedBuildingModel *building = [self create:[REMManagedBuildingModel class]];
     building.id = dictionary[@"Id"];
     building.parentId = dictionary[@"ParentId"];
     building.timezoneId = dictionary[@"TimezoneId"];
@@ -271,7 +285,7 @@
     
     if (!REMIsNilOrNull(pictures) && pictures.count>0) {
         for (NSNumber *pictureId in pictures) {
-            REMManagedBuildingPictureModel *picModel = [self new:[REMManagedBuildingPictureModel class]];
+            REMManagedBuildingPictureModel *picModel = [self create:[REMManagedBuildingPictureModel class]];
             picModel.id =pictureId;
             picModel.building = building;
             [building addPicturesObject:picModel];
@@ -281,7 +295,7 @@
     NSDictionary *electricityUsageThisMonth = dictionary[@"ElectricUsageThisMonth"];
     
     if (!REMIsNilOrNull(electricityUsageThisMonth)) {
-        REMManagedBuildingCommodityUsageModel *elecModel = [self new:[REMManagedBuildingCommodityUsageModel class]];
+        REMManagedBuildingCommodityUsageModel *elecModel = [self create:[REMManagedBuildingCommodityUsageModel class]];
         elecModel.id = electricityUsageThisMonth[@"Id"];
         elecModel.name = NULL_TO_NIL(electricityUsageThisMonth[@"Name"]);
         elecModel.code = electricityUsageThisMonth[@"Code"];

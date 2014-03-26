@@ -15,12 +15,12 @@
 
 #pragma mark - @protected
 
-- (id)new:(Class)objectType{
+- (id)create:(Class)objectType{
     
     return [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(objectType) inManagedObjectContext:REMAppContext.managedObjectContext];
 }
 
-- (void)delete:(NSManagedObject *)object{
+- (void)remove:(NSManagedObject *)object{
     [REMAppContext.managedObjectContext deleteObject:object];
     [self save];
 }

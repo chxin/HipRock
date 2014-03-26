@@ -16,7 +16,7 @@
 
 #pragma mark - Data persistence processor
 
-- (id)persist:(NSDictionary *)data
+- (REMUserValidationModel *)persist:(NSDictionary *)data
 {
     REMUserValidationStatus status = (REMUserValidationStatus)[data[@"ValidationStatus"] intValue];
     REMUserValidationModel *model= [[REMUserValidationModel alloc]init];
@@ -27,7 +27,7 @@
     return model;
 }
 
-- (id)fetch{
+- (REMUserValidationModel *)fetch{
     NSArray *array =  [self fetch:[REMManagedUserModel class]];
     if (array == nil || [array lastObject]==nil) {
         return nil;
@@ -46,7 +46,7 @@
     }
     
     
-    REMManagedUserModel *userObject= [self new:[REMManagedUserModel class]];
+    REMManagedUserModel *userObject= [self create:[REMManagedUserModel class]];
     
     userObject.id=user[@"Id"];
     userObject.name=user[@"Name"];
@@ -76,7 +76,7 @@
 }
 - (void)addCustomer:(NSDictionary *)customer intoUserObject:(REMManagedUserModel *)userObject
 {
-    REMManagedCustomerModel *customerObject= [self new:[REMManagedCustomerModel class]];
+    REMManagedCustomerModel *customerObject= [self create:[REMManagedCustomerModel class]];
     
     customerObject.id = customer[@"Id"];
     customerObject.name=customer[@"Name"];
@@ -103,7 +103,7 @@
 
 - (void)addAdministrator:(NSDictionary *)admin intoUserObject:(REMManagedCustomerModel *)customerObject
 {
-    REMManagedAdministratorModel *adminObject= [self new:[REMManagedAdministratorModel class]];
+    REMManagedAdministratorModel *adminObject= [self create:[REMManagedAdministratorModel class]];
     adminObject.realName=admin[@"RealName"];
     adminObject.customer=customerObject;
     [customerObject addAdministratorsObject:adminObject];

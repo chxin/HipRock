@@ -177,6 +177,9 @@ static REMCacheStoreHolder *cacheStoreHolder;
         success(data, data);
         return;
     }
+    else{
+        success(nil,nil);
+    }
 }
 
 -(void)accessRemote:(REMDataAccessSuccessBlock)success failure:(REMDataAccessFailureBlock)failure
@@ -208,14 +211,14 @@ static REMCacheStoreHolder *cacheStoreHolder;
 
 #pragma mark - core-data access
 
-+ (id)newManagedObject:(Class)objectType
++ (id)createManagedObject:(Class)objectType
 {
-    return [[REMDataPersistenceProcessor new] new:objectType];
+    return [[REMDataPersistenceProcessor new] create:objectType];
 }
 
 + (void)deleteManagedObject:(NSManagedObject *)object
 {
-    [[REMDataPersistenceProcessor new] delete:object];
+    [[REMDataPersistenceProcessor new] remove:object];
 }
 
 + (void)saveContext

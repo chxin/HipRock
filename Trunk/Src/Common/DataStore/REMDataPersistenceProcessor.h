@@ -16,10 +16,10 @@
  */
 @property (nonatomic,weak) REMDataStore *dataStore;
 
-- (id)new:(Class)objectType;
+- (id)create:(Class)objectType;
 - (id)fetch:(Class)objectType;
 - (id)fetch:(Class)objectType withPredicate:(NSPredicate *)predicate;
-- (void)delete:(NSManagedObject *)object;
+- (void)remove:(NSManagedObject *)object;
 - (void)save;
 
 #pragma mark - Methods
