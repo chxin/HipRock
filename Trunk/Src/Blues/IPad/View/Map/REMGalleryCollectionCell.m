@@ -69,7 +69,6 @@
 
 -(void)pressed:(id)button
 {
-    NSLog(@"cell pressed: %@", self.building.name);
     [self.controller galleryCellTapped:self];
 }
 

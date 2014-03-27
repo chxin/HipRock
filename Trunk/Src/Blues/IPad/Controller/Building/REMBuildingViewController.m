@@ -587,6 +587,8 @@ const static CGFloat buildingGap=20;
 
 
 
+
+
 #pragma mark - IOS7 style
 -(UIStatusBarStyle)preferredStatusBarStyle{
     

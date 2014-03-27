@@ -52,7 +52,7 @@
     //执行获取数据请求，返回数组
     NSMutableArray *mutableFetchResult = [[REMAppContext.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
     if (mutableFetchResult == nil) {
-        NSLog(@"Error: %@,%@",error,[error userInfo]);
+        NSLog(@"Core-Data fetch error: %@,%@",error,[error userInfo]);
     }
     
     return mutableFetchResult;

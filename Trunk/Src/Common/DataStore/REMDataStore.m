@@ -249,7 +249,6 @@ static REMCacheStoreHolder *cacheStoreHolder;
         
         for (NSManagedObject *managedObject in items) {
             [REMAppContext.managedObjectContext deleteObject:managedObject];
-            NSLog(@"Deleted %@", entityDescription.name);
         }
     }
 }

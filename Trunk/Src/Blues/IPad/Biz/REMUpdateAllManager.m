@@ -14,6 +14,7 @@
 #import "REMCommonHeaders.h"
 #import "REMBuildingInfoUpdateModel.h"
 #import "REMManagedCustomerModel.h"
+#import "REMManagedBuildingModel.h"
 
 
 @interface REMUpdateAllManager()
@@ -86,7 +87,8 @@ static NSString *customerUpdateAll=@"customerupdateall";
         
         self.customerInfoArray = buildingInfo.customers;
         
-        self.buildingInfoArray=buildingInfo.buildingInfo;
+        //sort building by province
+        self.buildingInfoArray=[self sortByProvince:buildingInfo.buildingInfo];
         
         [self.alertView dismissWithClickedButtonIndex:-1 animated:YES];
         if (status == REMCustomerUserConcurrencyStatusUserDeleted) {
@@ -301,6 +303,33 @@ static NSString *customerUpdateAll=@"customerupdateall";
     if (callback!= nil) {
         callback();
     }
+}
+
+-(NSArray *)sortByProvince:(NSArray *)buildingInfoArray
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    for(int i=0; i<REMProvinceOrder.count;i++){
+        NSString *key = REMProvinceOrder[i];
+        
+        for (int j=0; j<buildingInfoArray.count; j++) {
+            REMManagedBuildingModel *buildingInfo = buildingInfoArray[j];
+            NSString *province = buildingInfo.province;
+            
+            if(!REMIsNilOrNull(province) && [province rangeOfString:key].length>0) {
+                [array addObject:buildingInfo];
+            }
+        }
+    }
+    
+    //海外
+    for(REMManagedBuildingModel *buildingInfo in buildingInfoArray){
+        if([array containsObject:buildingInfo] == NO){
+            [array addObject:buildingInfo];
+        }
+    }
+    
+    return array;
 }
 
 @end

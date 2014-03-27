@@ -36,7 +36,7 @@
     
     REMHTTPRequestOperation *operation = [manager RequestOperationWithRequest:request responseType:self.dataStore.responseType success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //if there is error message, enter ERROR status
-        NSLog(@"%@", operation.responseString);
+        //NSLog(@"%@", operation.responseString);
         if([operation.responseString hasPrefix:@"{\"error\":"] == YES) {
             //TODO: process error message with different error types
             REMBusinessErrorInfo *businessError = [[REMBusinessErrorInfo alloc] initWithJSONString:operation.responseString];
@@ -57,7 +57,7 @@
     
     operation.group = self.dataStore.groupName;
     
-    NSLog(@"%@", request.URL.absoluteString);
+    //NSLog(@"%@", request.URL.absoluteString);
     [manager.operationQueue addOperation:operation];
     self.operation = operation;
 }
