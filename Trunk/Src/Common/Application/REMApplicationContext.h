@@ -7,8 +7,6 @@
  --------------------------------------------------------------------------*///
 
 #import <Foundation/Foundation.h>
-#import "REMUserModel.h"
-#import "REMCustomerModel.h"
 #import "REMAppConfiguration.h"
 #import "REMUpdateAllManager.h"
 #import "REMManagedUserModel.h"
@@ -42,7 +40,6 @@
 + (REMApplicationContext *)instance;
 + (void)recover;
 + (void)destroy;
-+ (void)cleanImage;
 
 
 @end

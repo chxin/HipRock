@@ -8,8 +8,6 @@
 
 #import "REMSettingCustomerDetailAdminViewController.h"
 #import "REMApplicationContext.h"
-#import "REMAdministratorModel.h"
-#import "REMCustomerModel.h"
 #import "REMManagedAdministratorModel.h"
 @interface REMSettingCustomerDetailAdminViewController ()
 

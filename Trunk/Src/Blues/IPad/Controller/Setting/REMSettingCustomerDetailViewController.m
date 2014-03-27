@@ -8,7 +8,6 @@
 
 #import "REMSettingCustomerDetailViewController.h"
 #import "REMTimeHelper.h"
-#import "REMAdministratorModel.h"
 #import "REMSettingCustomerDetailAdminViewController.h"
 #import "REMManagedAdministratorModel.h"
 

@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "REMEnum.h"
 #import "REMEnergyViewData.h"
-#import "REMWidgetObject.h"
 #import "REMEnergySeacherBase.h"
 #import "REMWidgetSearchModelBase.h"
 #import "REMBusinessErrorInfo.h"

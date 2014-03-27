@@ -69,7 +69,7 @@
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="isCurrent" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="logoId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="logoImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="logoImage" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="manager" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
@@ -147,7 +147,7 @@
         <element name="REMManagedBuildingModel" positionX="0" positionY="0" width="128" height="315"/>
         <element name="REMManagedBuildingPictureModel" positionX="0" positionY="0" width="128" height="103"/>
         <element name="REMManagedBuildingRankingModel" positionX="0" positionY="0" width="128" height="45"/>
-        <element name="REMManagedCustomerModel" positionX="0" positionY="0" width="128" height="28"/>
+        <element name="REMManagedCustomerModel" positionX="0" positionY="0" width="128" height="268"/>
         <element name="REMManagedDashboardModel" positionX="0" positionY="0" width="128" height="180"/>
         <element name="REMManagedEnergyDataModel" positionX="0" positionY="0" width="128" height="75"/>
         <element name="REMManagedImageModel" positionX="0" positionY="0" width="128" height="75"/>

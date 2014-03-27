@@ -7,7 +7,6 @@
 --------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
 #import "REMEnergyViewData.h"
-#import "REMWidgetObject.h"
 #import "REMWidgetSearchModelBase.h"
 #import "DAbstractChartWrapper.h"
 #import "REMManagedWidgetModel.h"

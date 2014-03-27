@@ -7,7 +7,6 @@
  --------------------------------------------------------------------------*///
 
 #import <UIKit/UIKit.h>
-#import "REMWidgetObject.h"
 #import "REMEnergyViewData.h"
 #import "REMDashboardController.h"
 #import "DCChartWrapperDelegate.h"

@@ -14,11 +14,9 @@
 #import "REMCommonHeaders.h"
 #import "REMDimensions.h"
 #import "REMStoryboardDefinitions.h"
-#import "REMBuildingOverallModel.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingViewController.h"
 #import "REMImages.h"
-#import "REMBuildingOverallModel.h"
 
 @interface REMGalleryCollectionViewController ()
 

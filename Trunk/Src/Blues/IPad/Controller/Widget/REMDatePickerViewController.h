@@ -7,7 +7,6 @@
  --------------------------------------------------------------------------*///
 
 #import <UIKit/UIKit.h>
-#import "REMWidgetObject.h"
 #import "REMWidgetDetailViewController.h"
 
 @protocol REMWidgetDatePickerViewProtocol <NSObject>

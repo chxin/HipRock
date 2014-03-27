@@ -75,21 +75,18 @@
 
 -(void)logout
 {
-    REMApplicationContext *context=REMAppContext;
-    REMManagedUserModel *currentUser = context.currentManagedUser;
-    REMManagedCustomerModel *currentCustomer = context.currentManagedCustomer;
-    
-    //[currentUser kill];
-    //[currentCustomer kill];
-    currentUser = nil;
-    currentCustomer = nil;
-    [currentUser delete:0];
-    context.sharedUpdateManager = nil;
+//    REMApplicationContext *context=REMAppContext;
+//    REMManagedUserModel *currentUser = context.currentManagedUser;
+//    REMManagedCustomerModel *currentCustomer = context.currentManagedCustomer;
+//    
+//    //[currentUser kill];
+//    //[currentCustomer kill];
+//    currentUser = nil;
+//    currentCustomer = nil;
+//    [currentUser delete:0];
+//    context.sharedUpdateManager = nil;
     
     [REMApplicationContext destroy];
-    
-//    [REMStorage clearSessionStorage];
-//    [REMStorage clearOnApplicationActive];
     
     UIViewController *controller=self.topViewController;
     controller.view.alpha=0;

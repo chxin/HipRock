@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "REMEnergyViewData.h"
 #import "REMEnum.h"
-#import "REMBuildingOverallModel.h"
 #import "REMManagedPinnedWidgetModel.h"
 #import "REMManagedBuildingModel.h"
 #import "REMManagedWidgetModel.h"

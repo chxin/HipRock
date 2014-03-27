@@ -8,7 +8,6 @@
 #import "REMTextIndicatorFormator.h"
 #import "REMEnergyTargetModel.h"
 #import "REMWidgetCommoditySearchModel.h"
-#import "REMWidgetObject.h"
 #import "REMWidgetTagSearchModel.h"
 #import "REMWidgetMultiTimespanSearchModel.h"
 #import "REMEnergyViewData.h"

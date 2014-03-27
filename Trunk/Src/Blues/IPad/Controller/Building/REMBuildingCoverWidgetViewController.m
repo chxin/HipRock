@@ -6,7 +6,6 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMBuildingCoverWidgetViewController.h"
-#import "REMDashboardObj.h"
 #import "REMPinToBuildingCoverHelper.h"
 
 @interface REMBuildingCoverWidgetViewController ()

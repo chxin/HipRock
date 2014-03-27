@@ -8,7 +8,6 @@
 #import <UIKit/UIKit.h>
 #import "REMBuildingCommodityViewController.h"
 #import "REMBuildingChartBaseViewController.h"
-#import "REMWidgetObject.h"
 #import "REMManagedWidgetModel.h"
 @interface REMBuildingChartContainerViewController : UIViewController
 

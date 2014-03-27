@@ -7,7 +7,6 @@
  --------------------------------------------------------------------------*///
 
 #import <Foundation/Foundation.h>
-#import "REMWidgetObject.h"
 #import "REMEnergyData.h"
 #import "REMBuildingConstants.h"
 #import "REMEnergyTargetModel.h"

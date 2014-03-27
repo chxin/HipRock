@@ -8,8 +8,6 @@
 
 #import "REMSettingCustomerSelectionViewController.h"
 #import "REMApplicationContext.h"
-#import "REMUserModel.h"
-#import "REMCustomerModel.h"
 #import "REMUpdateAllManager.h"
 
 

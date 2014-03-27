@@ -6,7 +6,6 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMChartLegendBase.h"
-#import "REMWidgetObject.h"
 #import "REMEnergyViewData.h"
 #import "REMEnergyTargetModel.h"
 #import "REMChartLegendItem.h"

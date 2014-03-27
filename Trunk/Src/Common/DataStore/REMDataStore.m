@@ -236,4 +236,22 @@ static REMCacheStoreHolder *cacheStoreHolder;
     return [[REMDataPersistenceProcessor new] fetch:objectType withPredicate:predicate];
 }
 
++ (void)cleanContext
+{
+    NSArray *entities = REMAppContext.managedObjectModel.entities;
+    for (NSEntityDescription *entityDescription in entities) {
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:entityDescription.name];
+        fetchRequest.includesPropertyValues = NO;
+        fetchRequest.includesSubentities = NO;
+        
+        NSError *error;
+        NSArray *items = [REMAppContext.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        
+        for (NSManagedObject *managedObject in items) {
+            [REMAppContext.managedObjectContext deleteObject:managedObject];
+            NSLog(@"Deleted %@", entityDescription.name);
+        }
+    }
+}
+
 @end

@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "REMAverageUsageDataModel.h"
 #import "REMError.h"
-#import "REMWidgetObject.h"
 #import "DCTrendWrapper.h"
 #import "REMManagedWidgetModel.h"
 

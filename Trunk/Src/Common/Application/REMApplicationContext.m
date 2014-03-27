@@ -47,7 +47,7 @@ static BOOL CACHEMODE = NO;
     REMAppContext.sharedRequestOperationManager = [REMHTTPRequestOperationManager manager];
 }
 
-+ (void)cleanImage{
+- (void)cleanImage{
 //    REMApplicationContext *context=REMAppContext;
 //    BOOL shouldCleanImage =context.appConfig.shouldCleanCache;
 //    //shouldCleanImage=YES;
@@ -85,6 +85,13 @@ static BOOL CACHEMODE = NO;
 
 + (void)destroy
 {
+    context.currentManagedCustomer = nil;
+    context.currentManagedUser = nil;
+    
+    [REMDataStore cleanContext];
+    
+    [context cleanImage];
+    
     context = nil;
 }
 

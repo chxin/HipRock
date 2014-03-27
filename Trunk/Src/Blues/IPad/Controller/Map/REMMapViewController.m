@@ -8,8 +8,6 @@
 
 #import "REMMapViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
-#import "REMBuildingModel.h"
-#import "REMBuildingOverallModel.h"
 #import "REMBuildingViewController.h"
 #import "REMGalleryViewController.h"
 #import "REMBuildingEntranceSegue.h"
@@ -217,7 +215,6 @@
     }
     
     if(self.buildingInfoArray.count == 1){
-        //REMBuildingModel *building = [self.buildingInfoArray[0] building];
         REMManagedBuildingModel *building = self.buildingInfoArray[0];
         GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[building.latitude doubleValue]  longitude:[building.longitude doubleValue] zoom:12];
         
@@ -243,7 +240,6 @@
 //        if(buildingInfo == nil || buildingInfo.building== nil)
 //            continue;
         
-//        REMBuildingModel *building = buildingInfo.building;
         
         maxLongtitude = MAX(maxLongtitude, [building.longitude doubleValue]);
         minLongtitude = MIN(minLongtitude, [building.longitude doubleValue]);

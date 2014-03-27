@@ -12,14 +12,12 @@
 #import "REMCommonHeaders.h"
 #import "REMDimensions.h"
 #import "REMStoryboardDefinitions.h"
-#import "REMBuildingOverallModel.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingEntranceSegue.h"
 #import "REMBuildingViewController.h"
 #import "REMGalleryGroupView.h"
 #import "REMGalleryCollectionViewController.h"
 #import "REMImages.h"
-#import "REMBuildingOverallModel.h"
 #import "REMGalleryTableView.h"
 
 

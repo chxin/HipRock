@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 
 #import "REMSplashScreenController.h"
-#import "REMUserModel.h"
-#import "REMCustomerModel.h"
 #import "REMCommonHeaders.h"
 #import "REMMainNavigationController.h"
 

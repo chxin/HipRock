@@ -8,7 +8,6 @@
 #import <Foundation/Foundation.h>
 #import "REMEnergyTargetModel.h"
 #import "REMWidgetCommoditySearchModel.h"
-#import "REMWidgetObject.h"
 #import "REMWidgetTagSearchModel.h"
 #import "REMEnergyViewData.h"
 #import "REMManagedWidgetModel.h"

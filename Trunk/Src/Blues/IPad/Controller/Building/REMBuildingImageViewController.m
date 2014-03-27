@@ -62,7 +62,6 @@
     [self.view setFrame:self.viewFrame];
     [self setChildControllerFrame];
     [self loadSmallImageView];
-    
 }
 
 - (void)setChildControllerFrame{

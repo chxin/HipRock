@@ -26,12 +26,9 @@
 #import "REMLogManager.h"
 
 //Model
-#import "REMAdministratorModel.h"
 #import "REMBusinessErrorInfo.h"
-#import "REMCustomerModel.h"
 #import "REMEnum.h"
 #import "REMJSONObject.h"
-#import "REMUserModel.h"
 
 //Utility
 #import "REMAlertHelper.h"

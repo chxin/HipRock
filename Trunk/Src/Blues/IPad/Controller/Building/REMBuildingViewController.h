@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "REMSplashScreenController.h"
-#import "REMBuildingOverallModel.h"
 #import "REMBuildingConstants.h"
 #import "REMSettingViewController.h"
 #import "REMMapViewController.h"
