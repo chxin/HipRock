@@ -104,7 +104,7 @@
             [cell.detailTextLabel setText:name];
         }
         else if(indexPath.row==1){
-            [[cell textLabel]setText:NSLocalizedString(@"Setting_EMOPID", @"")];//能源管理开发平台ID
+            [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_EMOPID")];//能源管理开发平台ID
             NSString *name1=context.currentManagedUser.name;
             if ([context.currentManagedUser.isDemo boolValue]) {
                 name1=@"Demo";
@@ -112,7 +112,7 @@
             [cell.detailTextLabel setText:name1];
         }
         else if(indexPath.row==2){
-            [[cell textLabel]setText:NSLocalizedString(@"Setting_CurrentCustomer", @"")];//当前客户
+            [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_CurrentCustomer")];//当前客户
             NSString *name=[REMApplicationContext instance].currentManagedCustomer.name;
             [cell.detailTextLabel setText:name];
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;

@@ -85,12 +85,15 @@ static BOOL CACHEMODE = NO;
 
 + (void)destroy
 {
+    
+//    [REMDataStore cleanContext];
+    [REMDataStore deleteManagedObject:context.currentManagedUser];
     context.currentManagedCustomer = nil;
     context.currentManagedUser = nil;
     
-    [REMDataStore cleanContext];
-    
     [context cleanImage];
+    
+    
     
     context = nil;
 }

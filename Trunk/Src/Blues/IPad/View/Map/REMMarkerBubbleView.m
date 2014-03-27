@@ -14,6 +14,7 @@
 #import "REMCommonHeaders.h"
 #import "REMManagedBuildingModel.h"
 #import "REMManagedBuildingCommodityUsageModel.h"
+
 @interface REMMarkerBubbleView ()
 
 @property (nonatomic,weak) REMManagedBuildingModel *buildingInfo;

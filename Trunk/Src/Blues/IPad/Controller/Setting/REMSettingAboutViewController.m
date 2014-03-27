@@ -55,8 +55,7 @@
     copyrightEnglishLabel.font=[UIFont systemFontOfSize:12];
     NSUInteger year = [REMTimeHelper getYear:[NSDate date] withCalendar:[NSCalendar currentCalendar]];
     
-    //copyrightChineseLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Setting_AboutCopyrightEnglish%d", @"Localizable_IPad", nil), year];
-    copyrightEnglishLabel.text = [NSString stringWithFormat:REMIPadLocalizedString(@"Setting_AboutCopyrightEnglish%d"),year];//Copyright@%@ Schneider Electric All Right Reserved
+    copyrightEnglishLabel.text = [NSString stringWithFormat:REMIPadLocalizedString(@"Setting_AboutCopyrightEnglish%d"),year];
     [self.view addSubview:copyrightEnglishLabel];
     
     for (UIView *view in self.view.subviews) {

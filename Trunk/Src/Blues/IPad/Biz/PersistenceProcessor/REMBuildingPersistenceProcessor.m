@@ -18,6 +18,7 @@
 #import "REMWidgetContentSyntax.h"
 #import "REMBuildingInfoUpdateModel.h"
 #import "REMManagedAdministratorModel.h"
+#import "REMCommonHeaders.h"
 
 
 @implementation REMBuildingPersistenceProcessor
@@ -163,37 +164,37 @@
      */
     
     if (userTitle == REMUserTitleEEConsultant) {
-        title=NSLocalizedString(@"Admin_UserTitleEEConsultant", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleEEConsultant");
     }
     else if(userTitle == REMUserTitleTechnician){
-        title=NSLocalizedString(@"Admin_UserTitleTechnician", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleTechnician");
     }
     else if(userTitle == REMUserTitleCustomerAdmin){
-        title=NSLocalizedString(@"Admin_UserTitleCustomerAdmin", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleCustomerAdmin");
     }
     else if(userTitle == REMUserTitlePlatformAdmin){
-        title=NSLocalizedString(@"Admin_UserTitlePlatformAdmin", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitlePlatformAdmin");
     }
     else if(userTitle == REMUserTitleEnergyManager){
-        title=NSLocalizedString(@"Admin_UserTitleEnergyManager", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleEnergyManager");
     }
     else if(userTitle == REMUserTitleEnergyEngineer){
-        title=NSLocalizedString(@"Admin_UserTitleEnergyEngineer", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleEnergyEngineer");
     }
     else if(userTitle == REMUserTitleDepartmentManager){
-        title=NSLocalizedString(@"Admin_UserTitleDepartmentManager", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleDepartmentManager");
     }
     else if(userTitle == REMUserTitleCEO){
-        title=NSLocalizedString(@"Admin_UserTitleCEO", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleCEO");
     }
     else if(userTitle == REMUserTitleBusinessPersonnel){
-        title=NSLocalizedString(@"Admin_UserTitleBusinessPersonnel", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleBusinessPersonnel");
     }
     else if(userTitle == REMUserTitleSaleman){
-        title=NSLocalizedString(@"Admin_UserTitleSaleman", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleSaleman");
     }
     else if(userTitle == REMUserTitleServiceProviderAdmin){
-        title=NSLocalizedString(@"Admin_UserTitleServiceProviderAdmin", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleServiceProviderAdmin");
     }
     shareModel.userTitleComponent=title;
     

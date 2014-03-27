@@ -11,6 +11,7 @@
 #import "REMBuildingChartBaseViewController.h"
 #import "REMManageBuildingAirQualityModel.h"
 #import "REMManagedBuildingCommodityUsageModel.h"
+#import "REMCommonHeaders.h"
 
 #define kDashboardThreshold 361+65+85*2+45
 
@@ -525,7 +526,7 @@
     
     NSString* stringFormat = nil;
     if (self.currentCommodityIndex<self.buildingInfo.commodities.count) {
-        stringFormat = NSLocalizedString(@"Weibo_ContentOfElectirc", @"");
+        stringFormat = REMIPadLocalizedString(@"Weibo_ContentOfElectirc");
         REMManagedBuildingCommodityUsageModel *model =controller.commodityUsage;
         NSString* commodityName = model.comment;
         NSString* uomName = model.totalUom;
