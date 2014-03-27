@@ -14,6 +14,8 @@
 #import "REMCommonHeaders.h"
 #import "REMBuildingInfoUpdateModel.h"
 #import "REMManagedCustomerModel.h"
+
+
 @interface REMUpdateAllManager()
 
 
@@ -29,6 +31,7 @@
 @property (nonatomic,weak) UIAlertView *alertView;
 
 @property (nonatomic) BOOL isError;
+
 @end
 
 

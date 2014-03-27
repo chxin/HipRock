@@ -456,9 +456,11 @@
         
         store.isDisableAlert=YES;
         [store access:^(id img){
+            if(img == nil)
+                return ;
+            
             NSData *data = UIImagePNGRepresentation(img);
             //if(data == nil || [data length] == 2) return;
-            
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                 UIImage *view = [self getCachedImage:data];
@@ -493,10 +495,6 @@
         return blurred;
     }
     else{
-        //TODO:remove
-        if(imageView.image == nil)
-            return nil;
-        
         UIImage *view = [REMImageHelper blurImage:imageView.image];
         if(view!=nil){
             blurred.image=view;
