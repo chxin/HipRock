@@ -45,6 +45,7 @@ static BOOL CACHEMODE = NO;
     
     //http operation manager
     REMAppContext.sharedRequestOperationManager = [REMHTTPRequestOperationManager manager];
+    REMAppContext.networkStatus  = AFNetworkReachabilityStatusUnknown;
 }
 
 - (void)cleanImage{

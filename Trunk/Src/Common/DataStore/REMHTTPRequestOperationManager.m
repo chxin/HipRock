@@ -9,6 +9,7 @@
 #import "REMHTTPRequestOperationManager.h"
 #import "UIKit+AFNetworking.h"
 #import "REMDataStore.h"
+#import "REMApplicationContext.h"
 
 #pragma mark -
 @implementation REMHTTPRequestOperation
@@ -32,6 +33,8 @@ static NSOperationQueue *queue;
     [manager.reachabilityManager startMonitoring];
     
     [manager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        REMAppContext.networkStatus = status;
+        
         if(status == AFNetworkReachabilityStatusReachableViaWiFi){
             queue.maxConcurrentOperationCount = kMAXQUEUEWIFI;
         }

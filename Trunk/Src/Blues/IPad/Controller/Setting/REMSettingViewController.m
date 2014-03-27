@@ -215,8 +215,7 @@
         
         [alertView show];
     } else if (!isAuthed && sender.on == YES){
-        NetworkStatus reachability = [REMHttpHelper checkCurrentNetworkStatus];
-        if (reachability == NotReachable) {
+        if (REMAppContext.networkStatus == AFNetworkReachabilityStatusNotReachable) {
             [REMAlertHelper alert:REMIPadLocalizedString(@"Weibo_NONetwork")];
         } else {
             [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {

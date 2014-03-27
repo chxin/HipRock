@@ -83,7 +83,6 @@
 		7A13C1A717F40D83007E6AA9 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C1A617F40D83007E6AA9 /* libc++.dylib */; };
 		7A13C1A917F40D90007E6AA9 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C1A817F40D90007E6AA9 /* libicucore.dylib */; };
 		7A13C1AB17F40D99007E6AA9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C1AA17F40D99007E6AA9 /* libz.dylib */; };
-		7A1D142617850B2100CC2922 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142517850B2100CC2922 /* Reachability.m */; };
 		7A1D14291785178800CC2922 /* REMHttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14281785178800CC2922 /* REMHttpHelper.m */; };
 		7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142B1785211000CC2922 /* REMAlertHelper.m */; };
 		7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
@@ -130,7 +129,6 @@
 		7A39D5DB18B5A69C00CC9D5D /* REMNumberHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4577EBE184C1886003C00CF /* REMNumberHelper.m */; };
 		7A39D5DC18B5A69C00CC9D5D /* REMNumberExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2043B2187BD94400272319 /* REMNumberExtension.m */; };
 		7A39D5DD18B5A69C00CC9D5D /* REMIPhoneMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E28718B450B200A13464 /* REMIPhoneMainViewController.m */; };
-		7A39D5F318B5A69C00CC9D5D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142517850B2100CC2922 /* Reachability.m */; };
 		7A39D5FD18B5A69C00CC9D5D /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE91177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m */; };
 		7A39D5FE18B5A69C00CC9D5D /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE93177BEEB7002D2A59 /* DDASLLogger.m */; };
 		7A39D5FF18B5A69C00CC9D5D /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE95177BEEB7002D2A59 /* DDFileLogger.m */; };
@@ -839,8 +837,6 @@
 		7A13C1A617F40D83007E6AA9 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libc++.dylib"; sourceTree = DEVELOPER_DIR; };
 		7A13C1A817F40D90007E6AA9 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libicucore.dylib; sourceTree = DEVELOPER_DIR; };
 		7A13C1AA17F40D99007E6AA9 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
-		7A1D142417850B2100CC2922 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		7A1D142517850B2100CC2922 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		7A1D14271785178800CC2922 /* REMHttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMHttpHelper.h; path = Common/Utility/REMHttpHelper.h; sourceTree = "<group>"; };
 		7A1D14281785178800CC2922 /* REMHttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMHttpHelper.m; path = Common/Utility/REMHttpHelper.m; sourceTree = "<group>"; };
 		7A1D142A1785211000CC2922 /* REMAlertHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAlertHelper.h; path = Common/Utility/REMAlertHelper.h; sourceTree = "<group>"; };
@@ -1882,16 +1878,6 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
-		7A1D142317850B2100CC2922 /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				7A1D142417850B2100CC2922 /* Reachability.h */,
-				7A1D142517850B2100CC2922 /* Reachability.m */,
-			);
-			name = Reachability;
-			path = ../lib/Reachability;
-			sourceTree = "<group>";
-		};
 		7A1D7C3917A637110050779D /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2886,7 +2872,6 @@
 				7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */,
 				7A9B1E21177B3A8B00C282A8 /* Foundation.framework */,
 				7A9B1E23177B3A8B00C282A8 /* CoreGraphics.framework */,
-				7A1D142317850B2100CC2922 /* Reachability */,
 				7A399E82177D238F00F0EB9F /* AFNetworking */,
 				B445AE8F177BEEB7002D2A59 /* Lumberjack */,
 				38ED7D1E1785140900219469 /* libsqlite3.dylib */,
@@ -3967,7 +3952,6 @@
 				7A39D5DB18B5A69C00CC9D5D /* REMNumberHelper.m in Sources */,
 				7A39D5DC18B5A69C00CC9D5D /* REMNumberExtension.m in Sources */,
 				7A39D5DD18B5A69C00CC9D5D /* REMIPhoneMainViewController.m in Sources */,
-				7A39D5F318B5A69C00CC9D5D /* Reachability.m in Sources */,
 				7A39D5FD18B5A69C00CC9D5D /* DDAbstractDatabaseLogger.m in Sources */,
 				7A39D5FE18B5A69C00CC9D5D /* DDASLLogger.m in Sources */,
 				7A39D5FF18B5A69C00CC9D5D /* DDFileLogger.m in Sources */,
@@ -4079,7 +4063,6 @@
 				7A9EAA9418D2946300EF1B85 /* WeiboAuthentication.m in Sources */,
 				7A63E20818B44CBD00A13464 /* REMGalleryViewController.m in Sources */,
 				7A9EAA8E18D2946300EF1B85 /* GeoInfo.m in Sources */,
-				7A1D142617850B2100CC2922 /* Reachability.m in Sources */,
 				7A63E26918B44CBD00A13464 /* REMRankingTooltipView.m in Sources */,
 				7A63E22818B44CBD00A13464 /* REMCommodityModel.m in Sources */,
 				7A63E25618B44CBD00A13464 /* REMStackChartLegendView.m in Sources */,

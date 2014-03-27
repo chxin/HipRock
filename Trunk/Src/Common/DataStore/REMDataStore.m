@@ -11,6 +11,7 @@
 #import "REMCommonHeaders.h"
 #import "REMAppDelegate.h"
 #import "REMDataPersistenceProcessor.h"
+#import "AFNetworking.h"
 
 
 @interface REMCacheStoreHolder : NSObject
@@ -86,12 +87,14 @@ static REMCacheStoreHolder *cacheStoreHolder;
     [self access:success failure:nil];
 }
 - (void)access:(REMDataAccessSuccessBlock)success failure:(REMDataAccessFailureBlock)failure{
-    NetworkStatus reachability = [REMHttpHelper checkCurrentNetworkStatus];
+    //NetworkStatus reachability = [REMHttpHelper checkCurrentNetworkStatus];
+    
+    //[REMAppContext.sharedRequestOperationManager.reachabilityManager reachable];
     
     BOOL cacheMode = [REMApplicationContext instance].cacheMode;
     REMCacheStoreHolder *holder = [REMDataStore cacheStoreHolder];
     
-    if(reachability == NotReachable){
+    if(REMAppContext.networkStatus == AFNetworkReachabilityStatusNotReachable){
         if(self.isAccessCache){
             
             if(!cacheMode){
@@ -121,8 +124,9 @@ static REMCacheStoreHolder *cacheStoreHolder;
         
         return;
     }
-    
-    [self accessRemote:success failure:failure];
+    else{
+        [self accessRemote:success failure:failure];
+    }
 }
 
 + (void) cancel{

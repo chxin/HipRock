@@ -7,38 +7,38 @@
  --------------------------------------------------------------------------*///
 
 #import "REMHttpHelper.h"
-#import "Reachability.h"
-#import "AFNetworking.h"
+//#import "Reachability.h"
+//#import "AFNetworking.h"
 
 @implementation REMHttpHelper
 
 
-+ (NetworkStatus) checkCurrentNetworkStatus
-{
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    
-    return [reachability currentReachabilityStatus];
-}
-
-+ (BOOL) checkIsWifi
-{
-    return [REMHttpHelper checkCurrentNetworkStatus] == ReachableViaWiFi;
-}
-
-+ (BOOL) checkIs3G
-{
-    return [REMHttpHelper checkCurrentNetworkStatus] == ReachableViaWWAN;
-}
-
-+ (BOOL) checkIsNoConnect
-{
-    return [REMHttpHelper checkCurrentNetworkStatus] == NotReachable;
-}
-
-
-+ (NSString *)parameterStringByObject:(id)object
-{
-    return nil;
-}
+//+ (NetworkStatus) checkCurrentNetworkStatus
+//{
+//    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+//    
+//    return [reachability currentReachabilityStatus];
+//}
+//
+//+ (BOOL) checkIsWifi
+//{
+//    return [REMHttpHelper checkCurrentNetworkStatus] == ReachableViaWiFi;
+//}
+//
+//+ (BOOL) checkIs3G
+//{
+//    return [REMHttpHelper checkCurrentNetworkStatus] == ReachableViaWWAN;
+//}
+//
+//+ (BOOL) checkIsNoConnect
+//{
+//    return [REMHttpHelper checkCurrentNetworkStatus] == NotReachable;
+//}
+//
+//
+//+ (NSString *)parameterStringByObject:(id)object
+//{
+//    return nil;
+//}
 
 @end

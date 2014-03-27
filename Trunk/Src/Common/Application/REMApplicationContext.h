@@ -27,6 +27,7 @@
 @property (nonatomic,strong) NSArray *buildingInfoArray;
 
 @property (nonatomic) BOOL cacheMode;
+@property (nonatomic) AFNetworkReachabilityStatus networkStatus;
 
 
 @property (nonatomic,strong) REMUpdateAllManager *sharedUpdateManager;
