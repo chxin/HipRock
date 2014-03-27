@@ -345,7 +345,7 @@
     self.buildingTitleView=titleLabel;
     
     
-    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentManagedCustomer.logoImage]];
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentCustomer.logoImage]];
     [logoView setFrame:CGRectMake(kDMCommon_CustomerLogoLeft, kDMCommon_CustomerLogoTop, kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
     logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
 

@@ -11,6 +11,13 @@
 #import "REMDataStore.h"
 #import "REMJSONHelper.h"
 #import "REMJSONObject.h"
+
+@interface REMApplicationContext ()
+
+@property (nonatomic,strong) NSNumber *currentCustomerId;
+
+@end
+
 @implementation REMApplicationContext
 
 @synthesize cacheMode;
@@ -36,8 +43,8 @@ static BOOL CACHEMODE = NO;
         REMManagedUserModel *user = users[0];
         for (REMManagedCustomerModel *customer in user.customers.allObjects) {
             if ([customer.isCurrent boolValue]== YES) {
-                REMAppContext.currentManagedCustomer = customer;
-                REMAppContext.currentManagedUser = user;
+                REMAppContext.currentCustomer = customer;
+                REMAppContext.currentUser = user;
                 break;
             }
         }
@@ -48,55 +55,79 @@ static BOOL CACHEMODE = NO;
     REMAppContext.networkStatus  = AFNetworkReachabilityStatusUnknown;
 }
 
+-(void)setCurrentCustomer:(REMManagedCustomerModel *)customer{
+    if(customer != nil){
+        _currentCustomerId = [NSNumber numberWithLongLong:[customer.id longLongValue]];
+    }
+    
+    _currentCustomer = customer;
+}
+
+-(REMManagedCustomerModel *)currentCustomer
+{
+    if(_currentCustomerId != nil){
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id=%d",[_currentCustomerId integerValue]];
+        
+        NSArray *customers = [REMDataStore fetchManagedObject:[REMManagedCustomerModel class] withPredicate:predicate];
+        
+        if(!REMIsNilOrNull(customers) && customers.count > 0)
+            return [customers lastObject];
+        
+        return nil;
+    }
+    
+    return nil;
+}
+
 - (void)cleanImage{
-//    REMApplicationContext *context=REMAppContext;
-//    BOOL shouldCleanImage =context.appConfig.shouldCleanCache;
-//    //shouldCleanImage=YES;
-//    if(shouldCleanImage == YES){
-//        NSString *currentUserName = REMAppContext.currentManagedUser.name;
-//        
-//        NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//        
-//        //NSString *path = [NSString stringWithFormat:@"%@/building-%@",documents,currentUserName];
-//        NSString *buildingName=[NSString stringWithFormat:@"building-%@",currentUserName];
-//        
-//        NSFileManager *fileManager=[NSFileManager defaultManager];
-//        NSError *error;
-//        NSArray *array = [fileManager contentsOfDirectoryAtPath:documents error:&error];
-//        if (error==nil) {
-//            for (NSString *str in array) {
-//                if ([str.pathExtension isEqualToString:@"png"] ==YES || [str.pathExtension isEqualToString:@"jpg"] == YES) {
-//                    BOOL shouldRemoveImage =[str rangeOfString:buildingName].location==NSNotFound;
-//                    //shouldRemoveImage=YES;
-//                    if (shouldRemoveImage == YES) {
-//                        [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/%@",documents,str] error:&error];
-//                    }
-//                }
-//                
-//            }
+    REMApplicationContext *context=REMAppContext;
+    BOOL shouldCleanImage =context.appConfig.shouldCleanCache;
+    //shouldCleanImage=YES;
+    if(shouldCleanImage == YES){
+        NSString *currentUserName = REMAppContext.currentUser.name;
+        
+        NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        
+        //NSString *path = [NSString stringWithFormat:@"%@/building-%@",documents,currentUserName];
+        NSString *buildingName=[NSString stringWithFormat:@"building-%@",currentUserName];
+        
+        NSFileManager *fileManager=[NSFileManager defaultManager];
+        NSError *error;
+        NSArray *array = [fileManager contentsOfDirectoryAtPath:documents error:&error];
+        if (error==nil) {
+            for (NSString *str in array) {
+                if ([str.pathExtension isEqualToString:@"png"] ==YES || [str.pathExtension isEqualToString:@"jpg"] == YES) {
+                    BOOL shouldRemoveImage =[str rangeOfString:buildingName].location==NSNotFound;
+                    //shouldRemoveImage=YES;
+                    if (shouldRemoveImage == YES) {
+                        [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/%@",documents,str] error:&error];
+                    }
+                }
+                
+            }
 //            NSString *configuration = [[NSBundle mainBundle] pathForResource:@"Configuration" ofType:@"plist"];
 //            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:configuration];
 //            dic[@"ShouldCleanCache"] = @(NO);
 //            [dic writeToFile:configuration atomically:YES];
-//            
-//        }
-//        
-//    }
+            
+        }
+        
+    }
 }
 
 + (void)destroy
 {
     
-//    [REMDataStore cleanContext];
-    [REMDataStore deleteManagedObject:context.currentManagedUser];
-    context.currentManagedCustomer = nil;
-    context.currentManagedUser = nil;
+//  [REMDataStore cleanContext];
+    [REMDataStore deleteManagedObject:context.currentUser];
+    context.currentCustomer = nil;
+    context.currentUser = nil;
     
     [context cleanImage];
     
     
     
-    context = nil;
+    //context = nil;
 }
 
 -(REMApplicationContext *)init
@@ -125,12 +156,20 @@ static BOOL CACHEMODE = NO;
 
 -(REMHTTPRequestOperationManager *)sharedRequestOperationManager
 {
-    return [REMHTTPRequestOperationManager manager];
+    if(_sharedRequestOperationManager == nil){
+        _sharedRequestOperationManager = [REMHTTPRequestOperationManager manager];
+    }
+    
+    return _sharedRequestOperationManager;
 }
 
 -(REMUpdateAllManager *)sharedUpdateManager
 {
-    return [REMUpdateAllManager defaultManager];
+    if(_sharedUpdateManager == nil){
+        _sharedUpdateManager = [REMUpdateAllManager defaultManager];
+    }
+    
+    return _sharedUpdateManager;
 }
 
 

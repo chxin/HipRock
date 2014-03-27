@@ -31,7 +31,7 @@ typedef enum _REMCustomerUserConcurrencySource{
 typedef void (^REMCustomerSelectionCallback)(REMCustomerUserConcurrencyStatus status,NSArray* buildingInfoArray,REMDataAccessStatus errorStatus);
 
 
-@interface REMUpdateAllManager : NSObject<UIAlertViewDelegate,REMLoginCustomerSelectionDelegate>
+@interface REMUpdateAllManager : NSObject<UIAlertViewDelegate, REMLoginCustomerSelectionDelegate>
 
 @property (nonatomic,copy) NSNumber *selectedCustomerId;
 

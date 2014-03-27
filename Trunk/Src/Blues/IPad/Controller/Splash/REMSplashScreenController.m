@@ -126,7 +126,7 @@
 
 -(BOOL)isAlreadyLogin
 {
-    return REMAppContext.currentManagedUser!=nil && REMAppContext.currentManagedCustomer!=nil && [REMAppContext.currentManagedUser.isDemo boolValue] == NO;
+    return REMAppContext.currentUser!=nil && REMAppContext.currentCustomer!=nil && [REMAppContext.currentUser.isDemo boolValue] == NO;
 }
 
 

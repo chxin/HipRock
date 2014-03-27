@@ -30,14 +30,15 @@
     [self clean];
     
     //process building
-    
-    for (int i=0; i<[dictionary[@"BuildingInfo"] count]; ++i) {
-        NSDictionary *buildingOverall =dictionary[@"BuildingInfo"][i];
-        REMManagedBuildingModel *buildingModel = [self persistBuilding:buildingOverall[@"Building"]];
-        buildingModel.isQualified = NULL_TO_NIL(buildingOverall[@"IsQualified"]);
-        [self persistCommodity:buildingOverall[@"CommodityArray"] intoBuilding:buildingModel];
-        [self persistDashboard:buildingOverall[@"DashboardList"] intoBuilding:buildingModel];
-        [self persistPinnedWidget:buildingOverall[@"WidgetRelation"] intoBuilding:buildingModel];
+    if(!REMIsNilOrNull(dictionary[@"BuildingInfo"]) && [dictionary[@"BuildingInfo"] count] >0){
+        for (int i=0; i<[dictionary[@"BuildingInfo"] count]; ++i) {
+            NSDictionary *buildingOverall =dictionary[@"BuildingInfo"][i];
+            REMManagedBuildingModel *buildingModel = [self persistBuilding:buildingOverall[@"Building"]];
+            buildingModel.isQualified = NULL_TO_NIL(buildingOverall[@"IsQualified"]);
+            [self persistCommodity:buildingOverall[@"CommodityArray"] intoBuilding:buildingModel];
+            [self persistDashboard:buildingOverall[@"DashboardList"] intoBuilding:buildingModel];
+            [self persistPinnedWidget:buildingOverall[@"WidgetRelation"] intoBuilding:buildingModel];
+        }
     }
     
     //process customer
@@ -52,7 +53,10 @@
     
     [self save];
     
-    return [self fetch];
+    REMBuildingInfoUpdateModel *model = [self fetch];
+    model.status = (REMCustomerUserConcurrencyStatus)[dictionary[@"Status"] intValue];
+    
+    return model;
 }
 
 - (REMBuildingInfoUpdateModel *)fetch
@@ -325,6 +329,8 @@
 //    for(REMManagedCustomerModel *old in user.customers.allObjects){
 //        [REMDataStore deleteManagedObject:old];
 //    }
+    
+    
     
     for(NSDictionary *customer in customers){
         REMManagedCustomerModel *customerObject= (REMManagedCustomerModel *)[REMDataStore createManagedObject:[REMManagedCustomerModel class]];

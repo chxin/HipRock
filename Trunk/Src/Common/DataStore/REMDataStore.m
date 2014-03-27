@@ -91,7 +91,7 @@ static REMCacheStoreHolder *cacheStoreHolder;
     
     //[REMAppContext.sharedRequestOperationManager.reachabilityManager reachable];
     
-    BOOL cacheMode = [REMApplicationContext instance].cacheMode;
+    BOOL cacheMode = REMAppContext.cacheMode;
     REMCacheStoreHolder *holder = [REMDataStore cacheStoreHolder];
     
     if(REMAppContext.networkStatus == AFNetworkReachabilityStatusNotReachable){
@@ -102,7 +102,7 @@ static REMCacheStoreHolder *cacheStoreHolder;
                 [holder.holder addObject:self];
                 
                 [REMAlertHelper alert:REMIPadLocalizedString(@"Common_NetNoConnectionLoadLocal") delegate:self];
-                [[REMApplicationContext instance] setCacheMode:YES];
+                [REMAppContext setCacheMode:YES];
                 holder.gotoHolder = YES;
             }
             else{
@@ -193,8 +193,8 @@ static REMCacheStoreHolder *cacheStoreHolder;
     
     
     [self.remoteServiceRequest request:^(id data) {
-        if([REMApplicationContext instance].cacheMode == YES){
-            [[REMApplicationContext instance] setCacheMode:NO];
+        if(REMAppContext.cacheMode == YES){
+            [REMAppContext setCacheMode:NO];
         }
         id newData = data;
         if (self.persistenceProcessor!=nil && self.persistManually==NO) {

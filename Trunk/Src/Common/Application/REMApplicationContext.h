@@ -17,10 +17,13 @@
 #define REMAppContext [REMApplicationContext instance]
 #define REMAppConfig REMAppContext.appConfig
 
-@interface REMApplicationContext : NSObject
+@interface REMApplicationContext : NSObject{
+    @private
+    REMManagedCustomerModel *_currentCustomer;
+}
 
-@property (nonatomic,strong) REMManagedUserModel *currentManagedUser;
-@property (nonatomic,strong) REMManagedCustomerModel *currentManagedCustomer;
+@property (nonatomic,strong) REMManagedUserModel *currentUser;
+@property (nonatomic,strong) REMManagedCustomerModel *currentCustomer;
 
 @property (nonatomic,strong) REMAppConfiguration *appConfig;
 

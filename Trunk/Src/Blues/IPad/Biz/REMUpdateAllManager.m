@@ -40,13 +40,14 @@
 @implementation REMUpdateAllManager
 
 + (REMUpdateAllManager *)defaultManager{
-    REMUpdateAllManager *manager =  [[REMUpdateAllManager alloc]init];
-    REMManagedCustomerModel *customer=REMAppContext.currentManagedCustomer;
-    REMManagedUserModel *user=REMAppContext.currentManagedUser;
-    manager.currentCustomerId=customer.id;
-    manager.currentUserId=user.id;
-    manager.canCancel=NO;
-    manager.updateSource=REMCustomerUserConcurrencySourceEnter;
+    REMUpdateAllManager *manager =  [[REMUpdateAllManager alloc] init];
+    
+    manager.currentUserId = REMAppContext.currentUser.id;
+    manager.currentCustomerId = REMAppContext.currentCustomer.id;
+    manager.canCancel = NO;
+    manager.updateSource = REMCustomerUserConcurrencySourceEnter;
+    
+    REMAppContext.sharedUpdateManager = manager;
     
     return manager;
 }
@@ -208,10 +209,10 @@ static NSString *customerUpdateAll=@"customerupdateall";
 
 - (void)statusSuccess:(UIImage *)customerLogo{
     if (self.customerInfoArray==nil) {
-        self.customerInfoArray=REMAppContext.currentManagedUser.customers.allObjects;
+        self.customerInfoArray=REMAppContext.currentUser.customers.allObjects;
     }
     
-    REMManagedCustomerModel *current=REMAppContext.currentManagedCustomer;
+    REMManagedCustomerModel *current=REMAppContext.currentCustomer;
     NSNumber *newCustomerId = self.selectedCustomerId;
     if (newCustomerId==nil) {
         newCustomerId = self.currentCustomerId;
@@ -221,7 +222,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
             customer.logoImage = customerLogo == nil ? nil : UIImagePNGRepresentation(customerLogo);
             customer.isCurrent=@(YES);
             
-            REMAppContext.currentManagedCustomer=customer;
+            REMAppContext.currentCustomer=customer;
             
             break;
         }

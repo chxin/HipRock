@@ -75,7 +75,7 @@
     [self.view addSubview:mask];
     
     //begin load data
-    REMUpdateAllManager *manager = REMAppContext.sharedUpdateManager;
+    REMUpdateAllManager *manager = [REMUpdateAllManager defaultManager];
     
     manager.mainNavigationController = (REMMainNavigationController *)self.navigationController;
     [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessStatus errorStatus) {
@@ -137,7 +137,7 @@
     }
     
     //add customer logo button
-    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentManagedCustomer.logoImage]];
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentCustomer.logoImage]];
     logoView.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
     logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
     [self.view addSubview:logoView];

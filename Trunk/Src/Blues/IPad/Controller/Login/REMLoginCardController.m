@@ -148,7 +148,7 @@
         
         if(validationResult.status == REMUserValidationSuccess) {
             //REMUserModel *user = validationResult.user;
-            REMAppContext.currentManagedUser = validationResult.managedUser;
+            REMAppContext.currentUser = validationResult.managedUser;
             //[REMAppContext setCurrentManagedUser:validationResult.managedUser];
             
             //NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
@@ -162,7 +162,7 @@
             }
             
             if(customerCount == 1){
-                [REMAppContext setCurrentManagedCustomer:customers[0]];
+                REMAppContext.currentCustomer = customers[0];
                 [self.loginCarouselController loginSuccess];
             }
             else{
