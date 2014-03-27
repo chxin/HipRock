@@ -155,7 +155,7 @@
     [self.totalLabel showLoading];
     [self.carbonLabel showLoading];
     [self.rankingLabel showLoading];
-    [store access:^(REMManagedBuildingCommodityUsageModel *data, id raw) {
+    [store access:^(REMManagedBuildingCommodityUsageModel *data) {
 //        REMCommodityUsageModel *model=nil;
 //        if([data isEqual:[NSNull null]]==YES){
 //            model=nil;

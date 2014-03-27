@@ -29,7 +29,7 @@
 	// Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor grayColor]];
     //self.logoImageVIew.image = REMAppCurrentLogo;
-    UIImageView *image=[[UIImageView alloc] initWithImage:REMAppContext.currentCustomerLogo];
+    UIImageView *image=[[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentManagedCustomer.logoImage]];
     [image setFrame:CGRectMake((self.navigationController.view.frame.size.width-image.frame.size.width)/2,100, image.frame.size.width, image.frame.size.height)];
     
     [self.view addSubview:image];

@@ -13,6 +13,7 @@
 #import "REMTimeHelper.h"
 #import "REMCommonHeaders.h"
 #import "REMBuildingInfoUpdateModel.h"
+#import "REMManagedCustomerModel.h"
 @interface REMUpdateAllManager()
 
 
@@ -79,13 +80,20 @@ static NSString *customerUpdateAll=@"customerupdateall";
     store.groupName =customerUpdateAll;
     self.parameter=dic;
     
-    [self accessStore:store success:^(REMBuildingInfoUpdateModel *buildingInfo, UIImage *logoImage, NSData *logoData) {
-        UIImage *logo;// = data1;
-        if(logoData != nil && [logoData length] > 2) {
-            logo = [REMImageHelper parseImageFromNSData:logoData withScale:1.0];
-        }
-        
-        REMAppContext.currentCustomerLogo = logo;
+    [self accessStore:store success:^(REMBuildingInfoUpdateModel *buildingInfo, UIImage *logoImage) {
+
+//        NSArray *customers = [REMDataStore fetchManagedObject:[REMManagedCustomerModel class]];
+//        for(REMManagedCustomerModel *customer in customers){
+//            if([customer.id isEqualToNumber:self.currentCustomerId]){
+//                REMAppContext.currentManagedCustomer = customer;
+//                break;
+//            }
+//        }
+//        
+//        if(logoImage != nil){
+//            REMAppContext.currentManagedCustomer.logoImage = UIImagePNGRepresentation(logoImage);
+//            [REMDataStore saveContext];
+//        }
         
         REMCustomerUserConcurrencyStatus status=buildingInfo.status;
         self.lastStatus=status;
@@ -130,7 +138,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
             [self statusNoAttached];
         }
         else if(status == REMCustomerUserConcurrencyStatusSuccess){
-            [self statusSuccess];
+            [self statusSuccess:logoImage];
         }
     } failure:^(NSError *error, REMDataAccessStatus status, id response) {
         self.tableViewController=nil;
@@ -156,9 +164,9 @@ static NSString *customerUpdateAll=@"customerupdateall";
     
 }
 
-- (void)accessStore:(REMDataStore *)store success:(void (^)(REMBuildingInfoUpdateModel *buildingInfo, UIImage *logoImage, NSData *logoData))success failure:(REMDataAccessFailureBlock)failure
+- (void)accessStore:(REMDataStore *)store success:(void (^)(REMBuildingInfoUpdateModel *buildingInfo, UIImage *logoImage))success failure:(REMDataAccessFailureBlock)failure
 {
-    [store access:^(REMBuildingInfoUpdateModel *buildingInfo, id raw){
+    [store access:^(REMBuildingInfoUpdateModel *buildingInfo){
         NSDictionary *parameter;
         if (self.selectedCustomerId!=nil) {
             parameter= @{@"customerId":self.selectedCustomerId};
@@ -170,27 +178,9 @@ static NSString *customerUpdateAll=@"customerupdateall";
         REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter accessCache:YES andMessageMap:nil];
         logoStore.parentStore=store;
         
-        [logoStore access:^(id parsedObject, id rawData) {
-            success(buildingInfo,parsedObject,rawData);
+        [logoStore access:^(UIImage *logoImage) {
+            success(buildingInfo,logoImage);
         } failure:failure];
-    } failure: failure];
-}
-
-- (void)executeStore:(REMDataStore *)store success:(REMDataAccessSuccessBlock)success failure:(REMDataAccessFailureBlock)failure
-{
-    [store access:^(NSDictionary *data, id raw){
-        NSDictionary *parameter;
-        if (self.selectedCustomerId!=nil) {
-            parameter= @{@"customerId":self.selectedCustomerId};
-        }
-        else{
-            parameter= @{@"customerId":self.currentCustomerId};
-        }
-        
-        REMDataStore *logoStore = [[REMDataStore alloc] initWithName:REMDSCustomerLogo parameter:parameter accessCache:YES andMessageMap:nil];
-        logoStore.parentStore=store;
-        
-        [logoStore access:success failure:failure];
     } failure: failure];
 }
 
@@ -252,8 +242,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
     [self showAlertWithMessage:REMIPadLocalizedString(@"Setting_NoAttachedCustomer") withTag:3];
 }
 
-- (void)statusSuccess{
-    REMApplicationContext *context=REMAppContext;
+- (void)statusSuccess:(UIImage *)customerLogo{
 //
 //    context.buildingInfoArray=[REMBuildingOverallModel sortByProvince:self.buildingInfoArray];
 //    
@@ -269,7 +258,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
         //[context.currentUser save];
     }
     else{
-        self.customerInfoArray=context.currentManagedUser.customers.allObjects;
+        self.customerInfoArray=REMAppContext.currentManagedUser.customers.allObjects;
     }
     REMManagedCustomerModel *current=REMAppContext.currentManagedCustomer;
     NSNumber *newCustomerId = self.selectedCustomerId;
@@ -278,17 +267,18 @@ static NSString *customerUpdateAll=@"customerupdateall";
     }
     for (REMManagedCustomerModel *customer in self.customerInfoArray) {
         if ([customer.id isEqualToNumber:newCustomerId]==YES && [customer isEqual:current]==NO) {
-            context.currentManagedCustomer=customer;
+            customer.logoImage = customerLogo == nil ? nil : UIImagePNGRepresentation(customerLogo);
             customer.isCurrent=@(YES);
+            
+            REMAppContext.currentManagedCustomer=customer;
+            
             break;
-            //[context.currentCustomer updateInnerDictionary];
-            //[context.currentCustomer save];
         }
     }
     
     [self persistAllData];
     self.tableViewController=nil;
-    context.sharedUpdateManager=nil;
+    REMAppContext.sharedUpdateManager=nil;
     self.callback(REMCustomerUserConcurrencyStatusSuccess,self.buildingInfoArray,REMDataAccessFailed);
     
     

@@ -14,6 +14,9 @@
 @interface REMManagedBuildingPictureModel : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) UIImage * normalImage;
+@property (nonatomic, retain) UIImage * bluredImage;
+
 @property (nonatomic, retain) REMManagedBuildingModel *building;
 
 @end

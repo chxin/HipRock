@@ -34,18 +34,6 @@
 
 - (id)fetch:(Class)objectType{
     return [self fetch:objectType withPredicate:nil];
-//    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass(objectType)];
-//    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"id" ascending:YES];
-//    [request setSortDescriptors:@[sortDescriptor]];
-//    
-//    NSError *error = nil;
-//    //执行获取数据请求，返回数组
-//    NSMutableArray *mutableFetchResult = [[REMAppContext.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-//    if (mutableFetchResult == nil) {
-//        NSLog(@"Error: %@,%@",error,[error userInfo]);
-//    }
-//    
-//    return mutableFetchResult;
 }
 
 - (id)fetch:(Class)objectType withPredicate:(NSPredicate *)predicate{

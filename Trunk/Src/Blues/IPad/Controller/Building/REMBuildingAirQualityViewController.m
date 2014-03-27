@@ -85,7 +85,7 @@
     [self.outdoorLabel showLoading];
     [self.honeywellLabel showLoading];
     [self.mayairLabel showLoading];
-    [store access:^(NSDictionary *data, id raw) {
+    [store access:^(NSDictionary *data) {
         REMAirQualityModel *model=nil;
         if([data isEqual:[NSNull null]]==YES){
             model=nil;

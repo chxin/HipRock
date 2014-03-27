@@ -104,7 +104,7 @@ typedef enum _REMServiceResponseType
 } REMServiceResponseType;
 
 
-typedef void(^REMDataAccessSuccessBlock)(id parsedObject, id rawData);
+typedef void(^REMDataAccessSuccessBlock)(id object);
 typedef void(^REMDataAccessFailureBlock)(NSError *error, REMDataAccessStatus status, id response);
 //typedef void(^REMDataAccessProgressBlock)(NSUInteger bytes, long long read, long long expected);
 

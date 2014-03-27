@@ -48,39 +48,39 @@ static BOOL CACHEMODE = NO;
 }
 
 + (void)cleanImage{
-    REMApplicationContext *context=REMAppContext;
-    BOOL shouldCleanImage =context.appConfig.shouldCleanCache;
-    //shouldCleanImage=YES;
-    if(shouldCleanImage == YES){
-        NSString *currentUserName = REMAppContext.currentManagedUser.name;
-        
-        NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        
-        //NSString *path = [NSString stringWithFormat:@"%@/building-%@",documents,currentUserName];
-        NSString *buildingName=[NSString stringWithFormat:@"building-%@",currentUserName];
-        
-        NSFileManager *fileManager=[NSFileManager defaultManager];
-        NSError *error;
-        NSArray *array = [fileManager contentsOfDirectoryAtPath:documents error:&error];
-        if (error==nil) {
-            for (NSString *str in array) {
-                if ([str.pathExtension isEqualToString:@"png"] ==YES || [str.pathExtension isEqualToString:@"jpg"] == YES) {
-                    BOOL shouldRemoveImage =[str rangeOfString:buildingName].location==NSNotFound;
-                    //shouldRemoveImage=YES;
-                    if (shouldRemoveImage == YES) {
-                        [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/%@",documents,str] error:&error];
-                    }
-                }
-                
-            }
-            NSString *configuration = [[NSBundle mainBundle] pathForResource:@"Configuration" ofType:@"plist"];
-            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:configuration];
-            dic[@"ShouldCleanCache"] = @(NO);
-            [dic writeToFile:configuration atomically:YES];
-            
-        }
-        
-    }
+//    REMApplicationContext *context=REMAppContext;
+//    BOOL shouldCleanImage =context.appConfig.shouldCleanCache;
+//    //shouldCleanImage=YES;
+//    if(shouldCleanImage == YES){
+//        NSString *currentUserName = REMAppContext.currentManagedUser.name;
+//        
+//        NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//        
+//        //NSString *path = [NSString stringWithFormat:@"%@/building-%@",documents,currentUserName];
+//        NSString *buildingName=[NSString stringWithFormat:@"building-%@",currentUserName];
+//        
+//        NSFileManager *fileManager=[NSFileManager defaultManager];
+//        NSError *error;
+//        NSArray *array = [fileManager contentsOfDirectoryAtPath:documents error:&error];
+//        if (error==nil) {
+//            for (NSString *str in array) {
+//                if ([str.pathExtension isEqualToString:@"png"] ==YES || [str.pathExtension isEqualToString:@"jpg"] == YES) {
+//                    BOOL shouldRemoveImage =[str rangeOfString:buildingName].location==NSNotFound;
+//                    //shouldRemoveImage=YES;
+//                    if (shouldRemoveImage == YES) {
+//                        [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/%@",documents,str] error:&error];
+//                    }
+//                }
+//                
+//            }
+//            NSString *configuration = [[NSBundle mainBundle] pathForResource:@"Configuration" ofType:@"plist"];
+//            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:configuration];
+//            dic[@"ShouldCleanCache"] = @(NO);
+//            [dic writeToFile:configuration atomically:YES];
+//            
+//        }
+//        
+//    }
 }
 
 + (void)destroy

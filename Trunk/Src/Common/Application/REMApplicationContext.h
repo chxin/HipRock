@@ -23,7 +23,6 @@
 
 @property (nonatomic,strong) REMManagedUserModel *currentManagedUser;
 @property (nonatomic,strong) REMManagedCustomerModel *currentManagedCustomer;
-@property (nonatomic,strong) UIImage *currentCustomerLogo;
 
 @property (nonatomic,strong) REMAppConfiguration *appConfig;
 

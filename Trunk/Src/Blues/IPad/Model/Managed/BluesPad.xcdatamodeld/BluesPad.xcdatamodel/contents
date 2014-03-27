@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="REMManageBuildingAirQualityModel" representedClassName="REMManageBuildingAirQualityModel" syncable="YES">
         <attribute name="commodityCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="commodityId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -55,7 +55,9 @@
         <relationship name="pictures" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="REMManagedBuildingPictureModel" inverseName="building" inverseEntity="REMManagedBuildingPictureModel" syncable="YES"/>
     </entity>
     <entity name="REMManagedBuildingPictureModel" representedClassName="REMManagedBuildingPictureModel" syncable="YES">
+        <attribute name="bluredImage" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="normalImage" optional="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="building" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedBuildingModel" inverseName="pictures" inverseEntity="REMManagedBuildingModel" syncable="YES"/>
     </entity>
     <entity name="REMManagedBuildingRankingModel" representedClassName="REMManagedBuildingRankingModel" syncable="YES"/>
@@ -67,6 +69,7 @@
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="isCurrent" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="logoId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="logoImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="manager" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
@@ -138,19 +141,19 @@
     </entity>
     <fetchRequest name="FetchEnergyDataByKey" entity="REMManagedEnergyDataModel" predicateString="key == &quot;$key&quot;"/>
     <elements>
-        <element name="REMManageBuildingAirQualityModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="REMManagedAdministratorModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="REMManagedBuildingCommodityUsageModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="REMManagedBuildingModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="REMManagedBuildingPictureModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="REMManagedBuildingRankingModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="REMManagedCustomerModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="REMManagedDashboardModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="REMManagedEnergyDataModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="REMManagedImageModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="REMManagedPinnedWidgetModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="REMManagedSharedModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="REMManagedUserModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="REMManagedWidgetModel" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="REMManageBuildingAirQualityModel" positionX="0" positionY="0" width="128" height="195"/>
+        <element name="REMManagedAdministratorModel" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="REMManagedBuildingCommodityUsageModel" positionX="0" positionY="0" width="128" height="270"/>
+        <element name="REMManagedBuildingModel" positionX="0" positionY="0" width="128" height="315"/>
+        <element name="REMManagedBuildingPictureModel" positionX="0" positionY="0" width="128" height="103"/>
+        <element name="REMManagedBuildingRankingModel" positionX="0" positionY="0" width="128" height="45"/>
+        <element name="REMManagedCustomerModel" positionX="0" positionY="0" width="128" height="28"/>
+        <element name="REMManagedDashboardModel" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="REMManagedEnergyDataModel" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="REMManagedImageModel" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="REMManagedPinnedWidgetModel" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="REMManagedSharedModel" positionX="0" positionY="0" width="128" height="150"/>
+        <element name="REMManagedUserModel" positionX="0" positionY="0" width="128" height="255"/>
+        <element name="REMManagedWidgetModel" positionX="0" positionY="0" width="128" height="180"/>
     </elements>
 </model>

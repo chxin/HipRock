@@ -46,7 +46,7 @@
         }
         else{ //if ok, enter SUCCESS status
             id result = self.dataStore.responseType == REMServiceResponseJson ? responseObject[[responseObject allKeys][0]] : responseObject;
-            success(result, operation.responseData);
+            success(result);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         REMDataAccessStatus status = [self decideErrorStatus:error];

@@ -346,7 +346,7 @@
     self.buildingTitleView=titleLabel;
     
     
-    UIImageView *logoView = [[UIImageView alloc] initWithImage:REMAppContext.currentCustomerLogo];
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentManagedCustomer.logoImage]];
     [logoView setFrame:CGRectMake(kDMCommon_CustomerLogoLeft, kDMCommon_CustomerLogoTop, kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
     logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
 
@@ -455,7 +455,7 @@
         store.groupName=self.loadingImageKey;
         
         store.isDisableAlert=YES;
-        [store access:^(id img, id raw){
+        [store access:^(id img){
             NSData *data = UIImagePNGRepresentation(img);
             //if(data == nil || [data length] == 2) return;
             

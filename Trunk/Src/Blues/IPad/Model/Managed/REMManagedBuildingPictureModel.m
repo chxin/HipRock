@@ -13,6 +13,8 @@
 @implementation REMManagedBuildingPictureModel
 
 @dynamic id;
+@dynamic normalImage;
+@dynamic bluredImage;
 @dynamic building;
 
 @end
