@@ -140,6 +140,7 @@
             textLayer.string = self.axis.axisTitle;
             textLayer.frame = self.axisTitleFrame;
             textLayer.alignmentMode = self.isMajorAxis ? kCAAlignmentRight : kCAAlignmentLeft;
+            CFRelease(fRef);
         }
         
     } else {
