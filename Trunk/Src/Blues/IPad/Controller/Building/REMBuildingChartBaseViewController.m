@@ -128,11 +128,9 @@
             CGSize textSize = [legendText sizeWithFont:legendFont];
             CGFloat averageDataWidth = textSize.width + 26;
             if (averageDataWidth > 180) averageDataWidth = 180;
-            CGRect legendFrame = CGRectMake(labelLeftOffset, labelTopOffset, averageDataWidth, textSize.height);
-            if (legendFrame.size.width + legendFrame.origin.x > self.legendContainer.bounds.size.width) {
+            if (averageDataWidth + labelLeftOffset > self.legendContainer.bounds.size.width) {
                 labelLeftOffset = 57;
                 labelTopOffset += 20;
-                legendFrame = CGRectMake(labelLeftOffset, labelTopOffset, averageDataWidth, textSize.height);
             }
             REMBuildingChartSeriesIndicator *averageDataIndicator = [[REMBuildingChartSeriesIndicator alloc] initWithFrame:CGRectMake(labelLeftOffset, labelTopOffset, averageDataWidth, textSize.height) title:legendText andColor:legendColor];
             labelLeftOffset=labelLeftOffset+averageDataWidth+labelDistance;
