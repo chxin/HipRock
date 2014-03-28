@@ -160,7 +160,7 @@
         NSString *smallImagePath = [REMImageHelper buildingImagePathWithId:[imageIds[0] id] andType:REMBuildingImageSmall];
         NSString *smallBlurImagePath = [REMImageHelper buildingImagePathWithId:[imageIds[0] id] andType:REMBuildingImageSmallBlured];
         
-        if([[NSFileManager defaultManager] fileExistsAtPath:smallImagePath] == YES){
+        if([[NSFileManager defaultManager] fileExistsAtPath:smallImagePath] == YES && [UIImage imageWithContentsOfFile:smallImagePath]!=nil){
             completed([UIImage imageWithContentsOfFile:smallImagePath]);
         }
         else{
@@ -168,6 +168,9 @@
             REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingPicture parameter:parameter accessCache:YES andMessageMap:nil];
             store.groupName = kGalleryBuildingImageGroupName;
             [store access:^(id image) {
+                if(image == nil)
+                    return ;
+                
                 [REMImageHelper writeImageFile:image withFullPath:smallImagePath];
                 
                 UIImage *smallBlurImage = [REMImageHelper blurImage:image];
