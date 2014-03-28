@@ -56,6 +56,7 @@
     pixelBuffer = malloc(inBuffer.rowBytes * inBuffer.height);
     
     if(pixelBuffer==NULL){
+        CFRelease(inBitmapData);
         return nil;
     }
     
@@ -96,7 +97,6 @@
     free(pixelBuffer);
     CFRelease(inBitmapData);
     
-    CGColorSpaceRelease(colorSpace);
     CGImageRelease(imageRef);
     
     return returnImage;
@@ -325,8 +325,7 @@
         if ([UIImage instancesRespondToSelector:@selector(initWithData:scale:)]) {
             image= [[UIImage alloc] initWithData:data scale:1];
         } else {
-            UIImage *image = [[UIImage alloc] initWithData:data];
-            image= [[UIImage alloc] initWithCGImage:[image CGImage] scale:1 orientation:image.imageOrientation];
+            image= [[UIImage alloc] initWithCGImage:[[[UIImage alloc] initWithData:data] CGImage] scale:1 orientation:image.imageOrientation];
         }
         if (image.images) {
             CGDataProviderRelease(dataProvider);
@@ -495,7 +494,9 @@
 
 +(UIImage *)cropImage:(UIImage *)image toRect:(CGRect)rect
 {
-    UIImage *cropped = [UIImage imageWithCGImage:CGImageCreateWithImageInRect([image CGImage], rect)];
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], rect);
+    UIImage *cropped = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
     return cropped;
 }
 

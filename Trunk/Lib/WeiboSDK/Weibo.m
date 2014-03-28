@@ -213,9 +213,11 @@ static Weibo *g_weibo = nil;
                                    [NSString stringWithFormat:@"%d", count], @"count"
                                    , nil];
     NSString *queryPath = nil;
+    /* By Oscar @2014-04-25: the queryPath will be set a new value. This code path is useless.
     if (timeline == StatusTimelineMentions) {
         queryPath = @"statuses/mentions.json";
     }
+     */
     queryPath = @"statuses/friends_timeline.json";
     return [self queryTimelineWithPath:queryPath params:params completed:completedBlock];
 }

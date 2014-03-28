@@ -424,7 +424,7 @@
     
     REMManagedWidgetModel *widgetInfo=[self widgetInfoByPosition:position];
     if (self.commodityInfo.pinnedWidgets==nil || widgetInfo==nil || [widgetInfo.id isLessThan:@(0)]==YES) {
-        NSString *title=REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth");//单位面积逐月用%@
+        NSString *title=nil;
         if ([widgetInfo.id isEqualToNumber:@(-1)]==YES) {
             title = REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth");//单位面积逐月用%@
         }
@@ -594,7 +594,7 @@
     widgetController.isRequesting=NO;
     REMBuildingChartContainerViewController *containerController;
     REMBuildingChartContainerViewController *otherContainer;
-    REMManagedWidgetModel *otherWidget;
+//    REMManagedWidgetModel *otherWidget;
     REMBuildingChartContainerViewController *firstController=self.childViewControllers[0];
     REMBuildingChartContainerViewController *secondController=self.childViewControllers[1];
     if (widgetController.position == REMBuildingCoverWidgetPositionFirst) {
@@ -603,7 +603,7 @@
         
         containerController.viewFrame=firstController.viewFrame;
         otherContainer=self.childViewControllers[1];
-        otherWidget=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionSecond];
+//        otherWidget=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionSecond];
         
         if ([secondController.widgetInfo.id isEqualToNumber:otherContainer.widgetInfo.id]==NO) {
             self.secondChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionSecond];
@@ -633,7 +633,7 @@
         containerController = [self chartContainerControllerByPosition:REMBuildingCoverWidgetPositionSecond];
         containerController.viewFrame=secondController.viewFrame;
         otherContainer=self.childViewControllers[0];
-        otherWidget=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionFirst];
+//        otherWidget=[self widgetInfoByPosition:REMBuildingCoverWidgetPositionFirst];
         
         if ([firstController.widgetInfo.id isEqualToNumber:otherContainer.widgetInfo.id]==NO) {
             self.firstChartTitleLabel.text=[self chartTitleByPosition:REMBuildingCoverWidgetPositionFirst];
