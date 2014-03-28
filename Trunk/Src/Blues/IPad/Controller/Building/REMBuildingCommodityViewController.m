@@ -155,7 +155,7 @@
     [self.totalLabel showLoading];
     [self.carbonLabel showLoading];
     [self.rankingLabel showLoading];
-    [store access:^(REMManagedBuildingCommodityUsageModel *data, id raw) {
+    [store access:^(REMManagedBuildingCommodityUsageModel *data) {
 //        REMCommodityUsageModel *model=nil;
 //        if([data isEqual:[NSNull null]]==YES){
 //            model=nil;
@@ -327,7 +327,7 @@
         }
         if ([currentRelation.dashboardId isEqualToNumber:@(-1)]==YES) {
             //REMDataStore *store = [[REMDataStore alloc]init];
-            REMManagedDashboardModel *dashboard=(REMManagedDashboardModel *)[REMDataStore newManagedObject:[REMManagedDashboardModel class]];//[store newManagedObject:@"REMManagedDashboardModel"];
+            REMManagedDashboardModel *dashboard=(REMManagedDashboardModel *)[REMDataStore createManagedObject:[REMManagedDashboardModel class]];//[store newManagedObject:@"REMManagedDashboardModel"];
             dashboard.id=currentRelation.dashboardId;
 
             return dashboard;
@@ -335,7 +335,7 @@
     }
     else{
         //REMDataStore *store = [[REMDataStore alloc]init];
-        REMManagedDashboardModel *dashboard=(REMManagedDashboardModel *)[REMDataStore newManagedObject:[REMManagedDashboardModel class]];//[store newManagedObject:@"REMManagedDashboardModel"];
+        REMManagedDashboardModel *dashboard=(REMManagedDashboardModel *)[REMDataStore createManagedObject:[REMManagedDashboardModel class]];//[store newManagedObject:@"REMManagedDashboardModel"];
         dashboard.id=@(-1);
         return dashboard;
     }
@@ -363,15 +363,15 @@
         }
         if ([currentRelation.dashboardId isEqualToNumber:@(-1)]==YES) {
             //REMDataStore *store = [[REMDataStore alloc]init];
-            REMManagedWidgetModel *widget=(REMManagedWidgetModel *)[REMDataStore newManagedObject:[REMManagedWidgetModel class]];
+            REMManagedWidgetModel *widget=(REMManagedWidgetModel *)[REMDataStore createManagedObject:[REMManagedWidgetModel class]];
             widget.id=currentRelation.widgetId;
             return widget;
         }
     }
     else{
         //REMDataStore *store = [[REMDataStore alloc]init];
-        REMManagedWidgetModel *widget=(REMManagedWidgetModel *)[REMDataStore newManagedObject:[REMManagedWidgetModel class]];
-        REMManagedDashboardModel *dashboard = (REMManagedDashboardModel *)[REMDataStore newManagedObject:[REMManagedDashboardModel class]];
+        REMManagedWidgetModel *widget=(REMManagedWidgetModel *)[REMDataStore createManagedObject:[REMManagedWidgetModel class]];
+        REMManagedDashboardModel *dashboard = (REMManagedDashboardModel *)[REMDataStore createManagedObject:[REMManagedDashboardModel class]];
         dashboard.id=@(-1);
         widget.dashboard=dashboard;
         if (position == REMBuildingCoverWidgetPositionFirst) {

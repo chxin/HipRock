@@ -7,17 +7,17 @@
  --------------------------------------------------------------------------*///
 
 #import <Foundation/Foundation.h>
-#import "Reachability.h"
+//#import "Reachability.h"
 
 @interface REMHttpHelper : NSObject
 
-+ (NetworkStatus) checkCurrentNetworkStatus;
-
-+ (BOOL) checkIsWifi;
-
-+ (BOOL) checkIs3G;
-
-+ (BOOL) checkIsNoConnect;
+//+ (NetworkStatus) checkCurrentNetworkStatus;
+//
+//+ (BOOL) checkIsWifi;
+//
+//+ (BOOL) checkIs3G;
+//
+//+ (BOOL) checkIsNoConnect;
 
 + (NSString *)parameterStringByObject:(id)object;
 

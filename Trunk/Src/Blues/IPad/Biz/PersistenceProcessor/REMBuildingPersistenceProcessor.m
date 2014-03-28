@@ -16,40 +16,68 @@
 #import "REMTimeHelper.h"
 #import "REMEnum.h"
 #import "REMWidgetContentSyntax.h"
+#import "REMBuildingInfoUpdateModel.h"
+#import "REMManagedAdministratorModel.h"
+#import "REMCommonHeaders.h"
 
 
 @implementation REMBuildingPersistenceProcessor
 
 #pragma mark - DataPersistenceProcessor
 
-- (id)persist:(NSArray *)data
+- (REMBuildingInfoUpdateModel *)persist:(NSDictionary *)dictionary
 {
-    for (REMManagedBuildingModel *building in  [self fetch]) {
-        [self delete:building];
+    [self clean];
+    
+    //process building
+    if(!REMIsNilOrNull(dictionary[@"BuildingInfo"]) && [dictionary[@"BuildingInfo"] count] >0){
+        for (int i=0; i<[dictionary[@"BuildingInfo"] count]; ++i) {
+            NSDictionary *buildingOverall =dictionary[@"BuildingInfo"][i];
+            REMManagedBuildingModel *buildingModel = [self persistBuilding:buildingOverall[@"Building"]];
+            buildingModel.isQualified = NULL_TO_NIL(buildingOverall[@"IsQualified"]);
+            [self persistCommodity:buildingOverall[@"CommodityArray"] intoBuilding:buildingModel];
+            [self persistDashboard:buildingOverall[@"DashboardList"] intoBuilding:buildingModel];
+            [self persistPinnedWidget:buildingOverall[@"WidgetRelation"] intoBuilding:buildingModel];
+        }
     }
     
-    for (int i=0; i<data.count; ++i) {
-        NSDictionary *buildingOverall =data[i];
-        REMManagedBuildingModel *buildingModel = [self persistBuilding:buildingOverall[@"Building"]];
-        buildingModel.isQualified = NULL_TO_NIL(buildingOverall[@"IsQualified"]);
-        [self persistCommodity:buildingOverall[@"CommodityArray"] intoBuilding:buildingModel];
-        [self persistDashboard:buildingOverall[@"DashboardList"] intoBuilding:buildingModel];
-        [self persistPinnedWidget:buildingOverall[@"WidgetRelation"] intoBuilding:buildingModel];
+    //process customer
+    if(!REMIsNilOrNull(dictionary[@"Customers"]) && [dictionary[@"Customers"] count] >0){
+        NSArray *oldCustomers = [self fetch:[REMManagedCustomerModel class]];
+        for (REMManagedCustomerModel *customer in oldCustomers) {
+            [REMDataStore deleteManagedObject:customer];
+        }
+        
+        [self persistCustomers:dictionary[@"Customers"]];
     }
     
     [self save];
     
-    return [self fetch];
+    REMBuildingInfoUpdateModel *model = [self fetch];
+    model.status = (REMCustomerUserConcurrencyStatus)[dictionary[@"Status"] intValue];
+    
+    return model;
 }
 
-- (id)fetch
+- (REMBuildingInfoUpdateModel *)fetch
 {
-    NSArray *buildings = [self fetch:[REMManagedBuildingModel class]];
+    REMBuildingInfoUpdateModel *model = [[REMBuildingInfoUpdateModel alloc] init];
+    model.buildingInfo = [self fetch:[REMManagedBuildingModel class]];
+    model.customers = [self fetch:[REMManagedCustomerModel class]];
+    model.status = REMCustomerUserConcurrencyStatusSuccess;
     
-    return buildings;
+    return model;
 }
 
 #pragma mark - @private
+
+-(void)clean
+{
+    for (REMManagedBuildingModel *building in  [self fetch:[REMManagedBuildingModel class]]) {
+        [self remove:building];
+    }
+}
+
 
 - (void)persistPinnedWidget:(NSArray *)pinnedWidgetArray intoBuilding:(REMManagedBuildingModel *)building{
     if (pinnedWidgetArray!=nil && [pinnedWidgetArray isEqual:[NSNull null]]==NO) {
@@ -59,7 +87,7 @@
             for (REMManagedBuildingCommodityUsageModel *commodity in [building.commodities allObjects]) {
                 NSNumber *commodityId = relation[@"CommodityId"];
                 if ([commodity.id isEqualToNumber:commodityId] == YES) {
-                    REMManagedPinnedWidgetModel *pinnedModel = [self new:[REMManagedPinnedWidgetModel class]];
+                    REMManagedPinnedWidgetModel *pinnedModel = [self create:[REMManagedPinnedWidgetModel class]];
                     
                     pinnedModel.commodity = commodity;
                     pinnedModel.widgetId = relation[@"WidgetId"];
@@ -79,7 +107,7 @@
     
     for (int i=0; i<dashboardArray.count; ++i) {
         NSDictionary *dictionary = dashboardArray[i];
-        REMManagedDashboardModel *dashboard = [self new:[REMManagedDashboardModel class]];
+        REMManagedDashboardModel *dashboard = [self create:[REMManagedDashboardModel class]];
         dashboard.id = dictionary[@"Id"];
         dashboard.name=dictionary[@"Name"];
         dashboard.isFavorite=dictionary[@"IsFavorite"];
@@ -107,7 +135,7 @@
 
 - (REMManagedSharedModel *)shareModelByDictionary:(NSDictionary *)dictionary{
     
-    REMManagedSharedModel *shareModel = [self new:[REMManagedSharedModel class]];
+    REMManagedSharedModel *shareModel = [self create:[REMManagedSharedModel class]];
     
     shareModel.userRealName=dictionary[@"UserRealName"];
     
@@ -140,37 +168,37 @@
      */
     
     if (userTitle == REMUserTitleEEConsultant) {
-        title=NSLocalizedString(@"Admin_UserTitleEEConsultant", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleEEConsultant");
     }
     else if(userTitle == REMUserTitleTechnician){
-        title=NSLocalizedString(@"Admin_UserTitleTechnician", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleTechnician");
     }
     else if(userTitle == REMUserTitleCustomerAdmin){
-        title=NSLocalizedString(@"Admin_UserTitleCustomerAdmin", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleCustomerAdmin");
     }
     else if(userTitle == REMUserTitlePlatformAdmin){
-        title=NSLocalizedString(@"Admin_UserTitlePlatformAdmin", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitlePlatformAdmin");
     }
     else if(userTitle == REMUserTitleEnergyManager){
-        title=NSLocalizedString(@"Admin_UserTitleEnergyManager", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleEnergyManager");
     }
     else if(userTitle == REMUserTitleEnergyEngineer){
-        title=NSLocalizedString(@"Admin_UserTitleEnergyEngineer", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleEnergyEngineer");
     }
     else if(userTitle == REMUserTitleDepartmentManager){
-        title=NSLocalizedString(@"Admin_UserTitleDepartmentManager", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleDepartmentManager");
     }
     else if(userTitle == REMUserTitleCEO){
-        title=NSLocalizedString(@"Admin_UserTitleCEO", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleCEO");
     }
     else if(userTitle == REMUserTitleBusinessPersonnel){
-        title=NSLocalizedString(@"Admin_UserTitleBusinessPersonnel", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleBusinessPersonnel");
     }
     else if(userTitle == REMUserTitleSaleman){
-        title=NSLocalizedString(@"Admin_UserTitleSaleman", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleSaleman");
     }
     else if(userTitle == REMUserTitleServiceProviderAdmin){
-        title=NSLocalizedString(@"Admin_UserTitleServiceProviderAdmin", @"");
+        title=REMIPadLocalizedString(@"Admin_UserTitleServiceProviderAdmin");
     }
     shareModel.userTitleComponent=title;
     
@@ -219,7 +247,7 @@
             continue;
         }
         
-        REMManagedWidgetModel *widget = [self new:[REMManagedWidgetModel class]];
+        REMManagedWidgetModel *widget = [self create:[REMManagedWidgetModel class]];
         widget.id=dictionary[@"Id"];
         widget.name=dictionary[@"Name"];
         widget.isRead=dictionary[@"IsRead"];
@@ -241,7 +269,7 @@
 
 - (void)persistCommodity:(NSArray *)commodityArray intoBuilding:(REMManagedBuildingModel *)building{
     for (int i=0; i<commodityArray.count; ++i) {
-        REMManagedBuildingCommodityUsageModel *commodity = [self new:[REMManagedBuildingCommodityUsageModel class]];
+        REMManagedBuildingCommodityUsageModel *commodity = [self create:[REMManagedBuildingCommodityUsageModel class]];
         NSDictionary *dictionary = commodityArray[i];
         commodity.id = dictionary[@"Id"];
         commodity.name = NULL_TO_NIL(dictionary[@"Name"]);
@@ -253,7 +281,7 @@
 }
 
 - (REMManagedBuildingModel *)persistBuilding:(NSDictionary *)dictionary{
-    REMManagedBuildingModel *building = [self new:[REMManagedBuildingModel class]];
+    REMManagedBuildingModel *building = [self create:[REMManagedBuildingModel class]];
     building.id = dictionary[@"Id"];
     building.parentId = dictionary[@"ParentId"];
     building.timezoneId = dictionary[@"TimezoneId"];
@@ -271,7 +299,7 @@
     
     if (!REMIsNilOrNull(pictures) && pictures.count>0) {
         for (NSNumber *pictureId in pictures) {
-            REMManagedBuildingPictureModel *picModel = [self new:[REMManagedBuildingPictureModel class]];
+            REMManagedBuildingPictureModel *picModel = [self create:[REMManagedBuildingPictureModel class]];
             picModel.id =pictureId;
             picModel.building = building;
             [building addPicturesObject:picModel];
@@ -281,7 +309,7 @@
     NSDictionary *electricityUsageThisMonth = dictionary[@"ElectricUsageThisMonth"];
     
     if (!REMIsNilOrNull(electricityUsageThisMonth)) {
-        REMManagedBuildingCommodityUsageModel *elecModel = [self new:[REMManagedBuildingCommodityUsageModel class]];
+        REMManagedBuildingCommodityUsageModel *elecModel = [self create:[REMManagedBuildingCommodityUsageModel class]];
         elecModel.id = electricityUsageThisMonth[@"Id"];
         elecModel.name = NULL_TO_NIL(electricityUsageThisMonth[@"Name"]);
         elecModel.code = electricityUsageThisMonth[@"Code"];
@@ -295,6 +323,43 @@
 
 
 
+- (void)persistCustomers:(NSArray *)customers{
+    REMManagedUserModel *user = [[self fetch:[REMManagedUserModel class]] lastObject];// [[REMDataStore fetchManagedObject:] lastObject];
+    
+//    for(REMManagedCustomerModel *old in user.customers.allObjects){
+//        [REMDataStore deleteManagedObject:old];
+//    }
+    
+    
+    
+    for(NSDictionary *customer in customers){
+        REMManagedCustomerModel *customerObject= (REMManagedCustomerModel *)[REMDataStore createManagedObject:[REMManagedCustomerModel class]];
+        
+        customerObject.id = customer[@"Id"];
+        customerObject.name=customer[@"Name"];
+        customerObject.code=customer[@"Code"];
+        customerObject.address=customer[@"Address"];
+        customerObject.email=customer[@"Email"];
+        customerObject.manager=customer[@"Manager"];
+        customerObject.telephone=customer[@"Telephone"];
+        customerObject.comment= NULL_TO_NIL(customer[@"Comment"]);
+        customerObject.timezoneId=customer[@"TimezoneId"];
+        customerObject.logoId=customer[@"logoId"];
+        long long time=[REMTimeHelper longLongFromJSONString:customer[@"StartTime"]];
+        customerObject.startTime= [NSDate dateWithTimeIntervalSince1970:time/1000 ];
+        
+        NSArray *administrators=customer[@"Administrators"];
+        
+        for (NSDictionary *admin in administrators) {
+            REMManagedAdministratorModel *adminObject= (REMManagedAdministratorModel *)[REMDataStore createManagedObject:[REMManagedAdministratorModel class]];
+            adminObject.realName=admin[@"RealName"];
+            adminObject.customer=customerObject;
+            [customerObject addAdministratorsObject:adminObject];
+        }
+        
+        [user addCustomersObject:customerObject];
+    }
+}
 
 
 @end

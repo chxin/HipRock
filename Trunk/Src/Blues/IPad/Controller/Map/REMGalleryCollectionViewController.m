@@ -14,11 +14,9 @@
 #import "REMCommonHeaders.h"
 #import "REMDimensions.h"
 #import "REMStoryboardDefinitions.h"
-#import "REMBuildingOverallModel.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingViewController.h"
 #import "REMImages.h"
-#import "REMBuildingOverallModel.h"
 
 @interface REMGalleryCollectionViewController ()
 
@@ -169,7 +167,7 @@
             NSDictionary *parameter = @{@"pictureId":[imageIds[0] id], @"isSmall":@"true"};
             REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSBuildingPicture parameter:parameter accessCache:YES andMessageMap:nil];
             store.groupName = kGalleryBuildingImageGroupName;
-            [store access:^(id image, id raw) {
+            [store access:^(id image) {
                 [REMImageHelper writeImageFile:image withFullPath:smallImagePath];
                 
                 UIImage *smallBlurImage = [REMImageHelper blurImage:image];

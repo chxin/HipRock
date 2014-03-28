@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString * address;
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSNumber * logoId;
+@property (nonatomic, retain) NSData * logoImage;
 @property (nonatomic, retain) NSNumber * isCurrent;
 @property (nonatomic, retain) NSString * manager;
 @property (nonatomic, retain) NSDate * startTime;

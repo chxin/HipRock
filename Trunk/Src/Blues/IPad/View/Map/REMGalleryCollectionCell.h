@@ -7,7 +7,6 @@
  --------------------------------------------------------------------------*///
 
 #import <UIKit/UIKit.h>
-#import "REMBuildingModel.h"
 #import "REMGalleryCollectionViewController.h"
 #import "REMManagedBuildingModel.h"
 

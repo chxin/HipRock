@@ -16,13 +16,13 @@
     NSArray *oldData = [self fetch];
     
     for (REMManagedPinnedWidgetModel *model  in oldData) {
-        [self delete:model];
+        [self remove:model];
     }
     
     if (data!=nil) {
         for (int i=0; i<data.count; ++i) {
             NSDictionary *dictionary = data[i];
-            REMManagedPinnedWidgetModel *pinnedModel = [self new:[REMManagedPinnedWidgetModel class]];
+            REMManagedPinnedWidgetModel *pinnedModel = [self create:[REMManagedPinnedWidgetModel class]];
             NSNumber *commodityId = dictionary[@"CommodityId"];
             for (REMManagedBuildingCommodityUsageModel *commodityInfo in [self.buildingInfo.commodities allObjects]) {
                 if ([commodityInfo.id isEqualToNumber:commodityId] == YES) {

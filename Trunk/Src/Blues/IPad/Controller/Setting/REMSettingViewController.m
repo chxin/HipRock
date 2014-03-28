@@ -99,21 +99,21 @@
         if(indexPath.row==0){
             [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_UserName")]; //显示名称
             
-            NSString *name=context.currentManagedUser.realname;
+            NSString *name=context.currentUser.realname;
             
             [cell.detailTextLabel setText:name];
         }
         else if(indexPath.row==1){
-            [[cell textLabel]setText:NSLocalizedString(@"Setting_EMOPID", @"")];//能源管理开发平台ID
-            NSString *name1=context.currentManagedUser.name;
-            if ([context.currentManagedUser.isDemo boolValue]) {
+            [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_EMOPID")];//能源管理开发平台ID
+            NSString *name1=context.currentUser.name;
+            if ([context.currentUser.isDemo boolValue]) {
                 name1=@"Demo";
             }
             [cell.detailTextLabel setText:name1];
         }
         else if(indexPath.row==2){
-            [[cell textLabel]setText:NSLocalizedString(@"Setting_CurrentCustomer", @"")];//当前客户
-            NSString *name=[REMApplicationContext instance].currentManagedCustomer.name;
+            [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_CurrentCustomer")];//当前客户
+            NSString *name=REMAppContext.currentCustomer.name;
             [cell.detailTextLabel setText:name];
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
@@ -215,8 +215,7 @@
         
         [alertView show];
     } else if (!isAuthed && sender.on == YES){
-        NetworkStatus reachability = [REMHttpHelper checkCurrentNetworkStatus];
-        if (reachability == NotReachable) {
+        if (REMAppContext.networkStatus == AFNetworkReachabilityStatusNotReachable) {
             [REMAlertHelper alert:REMIPadLocalizedString(@"Weibo_NONetwork")];
         } else {
             [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
@@ -291,7 +290,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"settingCustomerSelectionSegue"]==YES){
         REMSettingCustomerSelectionViewController *selectionVc= segue.destinationViewController;
-        selectionVc.customerArray=[[REMApplicationContext instance].currentManagedUser.customers allObjects];
+        selectionVc.customerArray=[REMAppContext.currentUser.customers allObjects];
         //selectionVc.splashController=self.splashScreenController;
         //selectionVc.parentNavigationController=self.mainNavigationController;
         selectionVc.settingController=self;

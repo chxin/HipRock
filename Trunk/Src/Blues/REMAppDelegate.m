@@ -35,7 +35,7 @@
     // Recover login info
     [REMApplicationContext recover];
     
-    [REMApplicationContext cleanImage];
+    //[REMApplicationContext cleanImage];
     //[REMStorage clearSessionStorage];
     
     // Weibo app key init

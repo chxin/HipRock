@@ -12,14 +12,12 @@
 #import "REMCommonHeaders.h"
 #import "REMDimensions.h"
 #import "REMStoryboardDefinitions.h"
-#import "REMBuildingOverallModel.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingEntranceSegue.h"
 #import "REMBuildingViewController.h"
 #import "REMGalleryGroupView.h"
 #import "REMGalleryCollectionViewController.h"
 #import "REMImages.h"
-#import "REMBuildingOverallModel.h"
 #import "REMGalleryTableView.h"
 
 
@@ -145,7 +143,7 @@
     [self.view addSubview:switchButton];
     
     //add customer logo button
-    UIImageView *logoView = [[UIImageView alloc] initWithImage:REMAppContext.currentCustomerLogo];
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentCustomer.logoImage]];
     logoView.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
     logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
     [self.view addSubview:logoView];

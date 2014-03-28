@@ -86,7 +86,6 @@
 
 
 - (void)initBizView{
-    
     [self initModelAndSearcher];
     
     [self initSearchView];
@@ -101,9 +100,6 @@
     [self setDatePickerButtonValueNoSearchByTimeRange:tempModel.timeRangeArray[0] withRelative:tempModel.relativeDateComponent withRelativeType:tempModel.relativeDateType];
     [self initStepButtonWithRange:tempModel.timeRangeArray[0] WithStep:tempModel.step];
     [self setStepControlStatusByStepNoSearch:tempModel.step];
-    
-    //TODO:Temp code, remove when tooltip delegate is ok
-    //[self.view addSubview:[self prepareTooltipView]];
 }
 
 - (void)initModelAndSearcher{
@@ -923,7 +919,6 @@
     if(self.legendView == nil){
         UIView *view = [self prepareLegendView];
         
-        //TODO: should add into container
         [self.searchLegendViewContainer addSubview:view];
         self.legendView = view;
         

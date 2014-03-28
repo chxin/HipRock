@@ -36,7 +36,7 @@
     
     REMHTTPRequestOperation *operation = [manager RequestOperationWithRequest:request responseType:self.dataStore.responseType success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //if there is error message, enter ERROR status
-        NSLog(@"%@", operation.responseString);
+        //NSLog(@"%@", operation.responseString);
         if([operation.responseString hasPrefix:@"{\"error\":"] == YES) {
             //TODO: process error message with different error types
             REMBusinessErrorInfo *businessError = [[REMBusinessErrorInfo alloc] initWithJSONString:operation.responseString];
@@ -46,7 +46,7 @@
         }
         else{ //if ok, enter SUCCESS status
             id result = self.dataStore.responseType == REMServiceResponseJson ? responseObject[[responseObject allKeys][0]] : responseObject;
-            success(result, operation.responseData);
+            success(result);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         REMDataAccessStatus status = [self decideErrorStatus:error];
@@ -57,7 +57,7 @@
     
     operation.group = self.dataStore.groupName;
     
-    NSLog(@"%@", request.URL.absoluteString);
+    //NSLog(@"%@", request.URL.absoluteString);
     [manager.operationQueue addOperation:operation];
     self.operation = operation;
 }
@@ -91,7 +91,7 @@
     NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
     
     NSString *userAgent = [NSString stringWithFormat:@"Blues/%@(PS;%@;%@;%@;%@;%@;)", version, [[REMCurrentDevice identifierForVendor] UUIDString],[REMCurrentDevice localizedModel],[REMCurrentDevice systemName],[REMCurrentDevice systemVersion],[REMCurrentDevice model]];
-    REMManagedUserModel *user = REMAppContext.currentManagedUser;
+    REMManagedUserModel *user = REMAppContext.currentUser;
     NSString *token = [REMEncryptHelper base64AES256EncryptString:[NSString stringWithFormat:@"%lld|%@|%lld",[user.id longLongValue],user.name, [user.spId longLongValue] ] withKey:REMSecurityTokenKey];
     
     NSString *accept = self.dataStore.responseType == REMServiceResponseJson ? @"*/*":@"image/webp,*/*;";

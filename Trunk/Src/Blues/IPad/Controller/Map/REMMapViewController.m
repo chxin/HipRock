@@ -8,8 +8,6 @@
 
 #import "REMMapViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
-#import "REMBuildingModel.h"
-#import "REMBuildingOverallModel.h"
 #import "REMBuildingViewController.h"
 #import "REMGalleryViewController.h"
 #import "REMBuildingEntranceSegue.h"
@@ -78,6 +76,7 @@
     
     //begin load data
     REMUpdateAllManager *manager = [REMUpdateAllManager defaultManager];
+    
     manager.mainNavigationController = (REMMainNavigationController *)self.navigationController;
     [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessStatus errorStatus) {
         void (^callback)(void) = nil;
@@ -138,7 +137,7 @@
     }
     
     //add customer logo button
-    UIImageView *logoView = [[UIImageView alloc] initWithImage:REMAppContext.currentCustomerLogo];
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentCustomer.logoImage]];
     logoView.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
     logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
     [self.view addSubview:logoView];
@@ -216,7 +215,6 @@
     }
     
     if(self.buildingInfoArray.count == 1){
-        //REMBuildingModel *building = [self.buildingInfoArray[0] building];
         REMManagedBuildingModel *building = self.buildingInfoArray[0];
         GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[building.latitude doubleValue]  longitude:[building.longitude doubleValue] zoom:12];
         
@@ -242,7 +240,6 @@
 //        if(buildingInfo == nil || buildingInfo.building== nil)
 //            continue;
         
-//        REMBuildingModel *building = buildingInfo.building;
         
         maxLongtitude = MAX(maxLongtitude, [building.longitude doubleValue]);
         minLongtitude = MIN(minLongtitude, [building.longitude doubleValue]);

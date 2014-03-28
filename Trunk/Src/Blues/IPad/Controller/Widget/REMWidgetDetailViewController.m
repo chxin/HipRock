@@ -14,7 +14,6 @@
 #import "REMWidgetBizDelegatorBase.h"
 #import "REMDimensions.h"
 #import "REMWidgetBuildingCoverViewController.h"
-#import "REMBuildingOverallModel.h"
 #import "REMBuildingCoverWidgetRelationModel.h"
 #import "REMManagedBuildingCommodityUsageModel.h"
 #import "REMManagedSharedModel.h"

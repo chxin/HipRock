@@ -128,7 +128,7 @@
         picker.mailComposeDelegate = self;
         
         //来自XXX（User Real Name）的“能源管理开放平台”信息分享
-        [picker setSubject:[NSString stringWithFormat:REMIPadLocalizedString(@"Mail_Title"), REMAppContext.currentManagedUser.realname]];
+        [picker setSubject:[NSString stringWithFormat:REMIPadLocalizedString(@"Mail_Title"), REMAppContext.currentUser.realname]];
         
         // Set up the recipients.
         //        NSArray *toRecipients = [NSArray arrayWithObjects:@"first@example.com", nil];

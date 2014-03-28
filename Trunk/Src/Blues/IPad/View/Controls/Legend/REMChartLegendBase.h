@@ -6,7 +6,6 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
-#import "REMWidgetObject.h"
 #import "REMEnergyViewData.h"
 #import "REMWidgetSearchModelBase.h"
 #import "REMChartLegendItem.h"

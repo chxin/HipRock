@@ -11,6 +11,13 @@
 #import "REMDataStore.h"
 #import "REMJSONHelper.h"
 #import "REMJSONObject.h"
+
+@interface REMApplicationContext ()
+
+@property (nonatomic,strong) NSNumber *currentCustomerId;
+
+@end
+
 @implementation REMApplicationContext
 
 @synthesize cacheMode;
@@ -36,8 +43,8 @@ static BOOL CACHEMODE = NO;
         REMManagedUserModel *user = users[0];
         for (REMManagedCustomerModel *customer in user.customers.allObjects) {
             if ([customer.isCurrent boolValue]== YES) {
-                REMAppContext.currentManagedCustomer = customer;
-                REMAppContext.currentManagedUser = user;
+                REMAppContext.currentCustomer = customer;
+                REMAppContext.currentUser = user;
                 break;
             }
         }
@@ -45,14 +52,39 @@ static BOOL CACHEMODE = NO;
     
     //http operation manager
     REMAppContext.sharedRequestOperationManager = [REMHTTPRequestOperationManager manager];
+    REMAppContext.networkStatus  = AFNetworkReachabilityStatusUnknown;
 }
 
-+ (void)cleanImage{
+-(void)setCurrentCustomer:(REMManagedCustomerModel *)customer{
+    if(customer != nil){
+        _currentCustomerId = [NSNumber numberWithLongLong:[customer.id longLongValue]];
+    }
+    
+    _currentCustomer = customer;
+}
+
+-(REMManagedCustomerModel *)currentCustomer
+{
+    if(_currentCustomerId != nil){
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id=%d",[_currentCustomerId integerValue]];
+        
+        NSArray *customers = [REMDataStore fetchManagedObject:[REMManagedCustomerModel class] withPredicate:predicate];
+        
+        if(!REMIsNilOrNull(customers) && customers.count > 0)
+            return [customers lastObject];
+        
+        return nil;
+    }
+    
+    return nil;
+}
+
+- (void)cleanImage{
     REMApplicationContext *context=REMAppContext;
     BOOL shouldCleanImage =context.appConfig.shouldCleanCache;
     //shouldCleanImage=YES;
     if(shouldCleanImage == YES){
-        NSString *currentUserName = REMAppContext.currentManagedUser.name;
+        NSString *currentUserName = REMAppContext.currentUser.name;
         
         NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         
@@ -73,10 +105,10 @@ static BOOL CACHEMODE = NO;
                 }
                 
             }
-            NSString *configuration = [[NSBundle mainBundle] pathForResource:@"Configuration" ofType:@"plist"];
-            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:configuration];
-            dic[@"ShouldCleanCache"] = @(NO);
-            [dic writeToFile:configuration atomically:YES];
+//            NSString *configuration = [[NSBundle mainBundle] pathForResource:@"Configuration" ofType:@"plist"];
+//            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:configuration];
+//            dic[@"ShouldCleanCache"] = @(NO);
+//            [dic writeToFile:configuration atomically:YES];
             
         }
         
@@ -85,7 +117,17 @@ static BOOL CACHEMODE = NO;
 
 + (void)destroy
 {
-    context = nil;
+    
+//  [REMDataStore cleanContext];
+    [REMDataStore deleteManagedObject:context.currentUser];
+    context.currentCustomer = nil;
+    context.currentUser = nil;
+    
+    [context cleanImage];
+    
+    
+    
+    //context = nil;
 }
 
 -(REMApplicationContext *)init
@@ -114,7 +156,20 @@ static BOOL CACHEMODE = NO;
 
 -(REMHTTPRequestOperationManager *)sharedRequestOperationManager
 {
-    return [REMHTTPRequestOperationManager manager];
+    if(_sharedRequestOperationManager == nil){
+        _sharedRequestOperationManager = [REMHTTPRequestOperationManager manager];
+    }
+    
+    return _sharedRequestOperationManager;
+}
+
+-(REMUpdateAllManager *)sharedUpdateManager
+{
+    if(_sharedUpdateManager == nil){
+        _sharedUpdateManager = [REMUpdateAllManager defaultManager];
+    }
+    
+    return _sharedUpdateManager;
 }
 
 

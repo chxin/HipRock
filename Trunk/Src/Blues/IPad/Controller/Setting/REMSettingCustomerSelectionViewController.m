@@ -8,8 +8,6 @@
 
 #import "REMSettingCustomerSelectionViewController.h"
 #import "REMApplicationContext.h"
-#import "REMUserModel.h"
-#import "REMCustomerModel.h"
 #import "REMUpdateAllManager.h"
 
 
@@ -55,7 +53,7 @@
         return;
     }
     REMManagedCustomerModel *customer= self.customerArray[self.currentRow];
-    if([customer.name isEqualToString:[REMApplicationContext instance].currentManagedCustomer.name]==YES){
+    if([customer.name isEqualToString:REMAppContext.currentCustomer.name]==YES){
         [self.settingController.navigationController popToRootViewControllerAnimated:YES];
         return;
     }
@@ -202,7 +200,7 @@
     NSArray *customers= self.customerArray; //[REMApplicationContext instance].currentUser.customers;
     REMManagedCustomerModel *model=customers[indexPath.row];
     cell.textLabel.text=model.name;
-    NSString *currentName=[REMApplicationContext instance].currentManagedCustomer.name;
+    NSString *currentName=REMAppContext.currentCustomer.name;
     
     if([currentName isEqualToString:model.name]==YES && self.currentRow==NSNotFound){
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];

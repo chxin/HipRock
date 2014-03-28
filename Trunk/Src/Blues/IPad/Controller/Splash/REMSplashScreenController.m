@@ -10,7 +10,6 @@
 #import "REMLoginCarouselController.h"
 #import "REMCommonHeaders.h"
 #import "REMBuildingViewController.h"
-#import "REMBuildingOverallModel.h"
 #import "REMMapViewController.h"
 #import "REMStoryboardDefinitions.h"
 #import "REMDimensions.h"
@@ -21,8 +20,6 @@
 #import "DCLabelingWrapper.h"
 #import "REMEnergyLabellingLevelData.h"
 #import "REMLocalizeKeys.h"
-#import "REMCustomerModel.h"
-#import "REMUserModel.h"
 #import "REMUserValidationModel.h"
 #import "DCChartEnum.h"
 #import "DCXYChartBackgroundBand.h"
@@ -129,7 +126,7 @@
 
 -(BOOL)isAlreadyLogin
 {
-    return REMAppContext.currentManagedUser!=nil && REMAppContext.currentManagedCustomer!=nil && [REMAppContext.currentManagedUser.isDemo boolValue] == NO;
+    return REMAppContext.currentUser!=nil && REMAppContext.currentCustomer!=nil && [REMAppContext.currentUser.isDemo boolValue] == NO;
 }
 
 

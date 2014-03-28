@@ -7,8 +7,6 @@
  --------------------------------------------------------------------------*///
 
 #import <Foundation/Foundation.h>
-#import "REMUserModel.h"
-#import "REMCustomerModel.h"
 #import "REMAppConfiguration.h"
 #import "REMUpdateAllManager.h"
 #import "REMManagedUserModel.h"
@@ -19,17 +17,20 @@
 #define REMAppContext [REMApplicationContext instance]
 #define REMAppConfig REMAppContext.appConfig
 
-@interface REMApplicationContext : NSObject
+@interface REMApplicationContext : NSObject{
+    @private
+    REMManagedCustomerModel *_currentCustomer;
+}
 
-@property (nonatomic,strong) REMManagedUserModel *currentManagedUser;
-@property (nonatomic,strong) REMManagedCustomerModel *currentManagedCustomer;
-@property (nonatomic,strong) UIImage *currentCustomerLogo;
+@property (nonatomic,strong) REMManagedUserModel *currentUser;
+@property (nonatomic,strong) REMManagedCustomerModel *currentCustomer;
 
 @property (nonatomic,strong) REMAppConfiguration *appConfig;
 
 @property (nonatomic,strong) NSArray *buildingInfoArray;
 
 @property (nonatomic) BOOL cacheMode;
+@property (nonatomic) AFNetworkReachabilityStatus networkStatus;
 
 
 @property (nonatomic,strong) REMUpdateAllManager *sharedUpdateManager;
@@ -43,7 +44,6 @@
 + (REMApplicationContext *)instance;
 + (void)recover;
 + (void)destroy;
-+ (void)cleanImage;
 
 
 @end

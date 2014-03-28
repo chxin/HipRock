@@ -104,7 +104,7 @@ typedef enum _REMServiceResponseType
 } REMServiceResponseType;
 
 
-typedef void(^REMDataAccessSuccessBlock)(id parsedObject, id rawData);
+typedef void(^REMDataAccessSuccessBlock)(id object);
 typedef void(^REMDataAccessFailureBlock)(NSError *error, REMDataAccessStatus status, id response);
 //typedef void(^REMDataAccessProgressBlock)(NSUInteger bytes, long long read, long long expected);
 
@@ -136,7 +136,7 @@ typedef void(^REMDataAccessFailureBlock)(NSError *error, REMDataAccessStatus sta
  *
  *  @return The managed object instance of the desired type
  */
-+ (id)newManagedObject:(Class)objectType;
++ (id)createManagedObject:(Class)objectType;
 
 /**
  *  Delete a core-data managed object from current database context
@@ -211,5 +211,9 @@ typedef void(^REMDataAccessFailureBlock)(NSError *error, REMDataAccessStatus sta
  */
 + (void) cancel: (NSString *) groupName;
 
+/**
+ *  Delete all managed objects in current database
+ */
++ (void)cleanContext;
 
 @end

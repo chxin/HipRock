@@ -9,7 +9,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingAverageChartViewController.h"
 #import "REMEnergyViewData.h"
-#import "REMCommodityUsageModel.h"
 #import "REMDataRange.h"
 #import "REMBuildingChartSeriesIndicator.h"
 #import "REMBuildingAverageWrapper.h"

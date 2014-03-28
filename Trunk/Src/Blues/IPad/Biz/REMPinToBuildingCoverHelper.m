@@ -17,7 +17,7 @@
     REMPinToCoverPersistenceProcessor *processor = [[REMPinToCoverPersistenceProcessor alloc]init];
     processor.buildingInfo = buildingInfo;
     store.persistenceProcessor = processor;
-    [store access:^(NSArray *data, id raw){
+    [store access:^(NSArray *data){
         callback(REMPinToBuildingCoverStatusSuccess);
     }failure:^(NSError *error,REMDataAccessStatus status, REMBusinessErrorInfo * bizError){
         if (status == REMDataAccessErrorMessage) {

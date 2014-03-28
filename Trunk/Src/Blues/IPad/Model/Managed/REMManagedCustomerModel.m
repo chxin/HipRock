@@ -16,6 +16,8 @@
 @dynamic address;
 @dynamic email;
 @dynamic logoId;
+@dynamic logoImage;
+@dynamic isCurrent;
 @dynamic manager;
 @dynamic startTime;
 @dynamic telephone;

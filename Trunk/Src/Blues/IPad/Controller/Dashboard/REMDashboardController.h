@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "REMDashboardCellViewCell.h"
 #import "REMDashboardView.h"
-#import "REMDashboardObj.h"
 #import "REMManagedBuildingModel.h"
 @class REMImageView;
 @class REMBuildingViewController;

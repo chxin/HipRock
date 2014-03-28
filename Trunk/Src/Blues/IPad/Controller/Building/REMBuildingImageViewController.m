@@ -62,7 +62,6 @@
     [self.view setFrame:self.viewFrame];
     [self setChildControllerFrame];
     [self loadSmallImageView];
-    
 }
 
 - (void)setChildControllerFrame{
@@ -346,7 +345,7 @@
     self.buildingTitleView=titleLabel;
     
     
-    UIImageView *logoView = [[UIImageView alloc] initWithImage:REMAppContext.currentCustomerLogo];
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentCustomer.logoImage]];
     [logoView setFrame:CGRectMake(kDMCommon_CustomerLogoLeft, kDMCommon_CustomerLogoTop, kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
     logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
 
@@ -455,10 +454,12 @@
         store.groupName=self.loadingImageKey;
         
         store.isDisableAlert=YES;
-        [store access:^(id img, id raw){
+        [store access:^(id img){
+            if(img == nil)
+                return ;
+            
             NSData *data = UIImagePNGRepresentation(img);
             //if(data == nil || [data length] == 2) return;
-            
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                 UIImage *view = [self getCachedImage:data];
@@ -493,7 +494,6 @@
         return blurred;
     }
     else{
-        
         UIImage *view = [REMImageHelper blurImage:imageView.image];
         if(view!=nil){
             blurred.image=view;

@@ -11,7 +11,6 @@
 #import "REMWidgetContentSyntax.h"
 #import "REMBusinessErrorInfo.h"
 #import "REMEnergyViewData.h"
-#import "REMWidgetObject.h"
 #import "REMWidgetSearchModelBase.h"
 #import "REMManagedWidgetModel.h"
 

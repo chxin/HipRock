@@ -200,7 +200,7 @@
         
     }
     self.isRequesting=YES;
-    REMManagedCustomerModel *customer=REMAppContext.currentManagedCustomer;
+    REMManagedCustomerModel *customer=REMAppContext.currentCustomer;
     REMPinToBuildingCoverHelper *helper=[[REMPinToBuildingCoverHelper alloc]init];
     self.pinHelper=helper;
     helper.mainNavigationController=(REMMainNavigationController *)self.detailController.parentViewController.navigationController;

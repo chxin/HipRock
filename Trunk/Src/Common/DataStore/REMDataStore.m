@@ -11,6 +11,7 @@
 #import "REMCommonHeaders.h"
 #import "REMAppDelegate.h"
 #import "REMDataPersistenceProcessor.h"
+#import "AFNetworking.h"
 
 
 @interface REMCacheStoreHolder : NSObject
@@ -86,12 +87,14 @@ static REMCacheStoreHolder *cacheStoreHolder;
     [self access:success failure:nil];
 }
 - (void)access:(REMDataAccessSuccessBlock)success failure:(REMDataAccessFailureBlock)failure{
-    NetworkStatus reachability = [REMHttpHelper checkCurrentNetworkStatus];
+    //NetworkStatus reachability = [REMHttpHelper checkCurrentNetworkStatus];
     
-    BOOL cacheMode = [REMApplicationContext instance].cacheMode;
+    //[REMAppContext.sharedRequestOperationManager.reachabilityManager reachable];
+    
+    BOOL cacheMode = REMAppContext.cacheMode;
     REMCacheStoreHolder *holder = [REMDataStore cacheStoreHolder];
     
-    if(reachability == NotReachable){
+    if(REMAppContext.networkStatus == AFNetworkReachabilityStatusNotReachable){
         if(self.isAccessCache){
             
             if(!cacheMode){
@@ -99,7 +102,7 @@ static REMCacheStoreHolder *cacheStoreHolder;
                 [holder.holder addObject:self];
                 
                 [REMAlertHelper alert:REMIPadLocalizedString(@"Common_NetNoConnectionLoadLocal") delegate:self];
-                [[REMApplicationContext instance] setCacheMode:YES];
+                [REMAppContext setCacheMode:YES];
                 holder.gotoHolder = YES;
             }
             else{
@@ -121,8 +124,9 @@ static REMCacheStoreHolder *cacheStoreHolder;
         
         return;
     }
-    
-    [self accessRemote:success failure:failure];
+    else{
+        [self accessRemote:success failure:failure];
+    }
 }
 
 + (void) cancel{
@@ -174,8 +178,11 @@ static REMCacheStoreHolder *cacheStoreHolder;
 {
     if (self.persistenceProcessor!=nil) {
         id data = [self.persistenceProcessor fetch];
-        success(data, data);
+        success(data);
         return;
+    }
+    else{
+        success(nil);
     }
 }
 
@@ -185,16 +192,16 @@ static REMCacheStoreHolder *cacheStoreHolder;
     self.remoteServiceRequest = request;
     
     
-    [self.remoteServiceRequest request:^(id data, id raw) {
-        if([REMApplicationContext instance].cacheMode == YES){
-            [[REMApplicationContext instance] setCacheMode:NO];
+    [self.remoteServiceRequest request:^(id data) {
+        if(REMAppContext.cacheMode == YES){
+            [REMAppContext setCacheMode:NO];
         }
         id newData = data;
         if (self.persistenceProcessor!=nil && self.persistManually==NO) {
             newData = [self.persistenceProcessor persist:data];
         }
         
-        success(newData, raw);
+        success(newData);
     } failure:^(NSError *error, REMDataAccessStatus status, id response) {
         if(self.isDisableAlert == NO && (status == REMDataAccessNoConnection || status == REMDataAccessFailed || (status == REMDataAccessErrorMessage && [response isKindOfClass:[REMBusinessErrorInfo class]] && [((REMBusinessErrorInfo *)response).code isEqualToString:@"1"]))){
             NSString *message = self.messageMap[@(status)];
@@ -208,14 +215,14 @@ static REMCacheStoreHolder *cacheStoreHolder;
 
 #pragma mark - core-data access
 
-+ (id)newManagedObject:(Class)objectType
++ (id)createManagedObject:(Class)objectType
 {
-    return [[REMDataPersistenceProcessor new] new:objectType];
+    return [[REMDataPersistenceProcessor new] create:objectType];
 }
 
 + (void)deleteManagedObject:(NSManagedObject *)object
 {
-    [[REMDataPersistenceProcessor new] delete:object];
+    [[REMDataPersistenceProcessor new] remove:object];
 }
 
 + (void)saveContext
@@ -231,6 +238,23 @@ static REMCacheStoreHolder *cacheStoreHolder;
 + (id)fetchManagedObject:(Class)objectType withPredicate:(NSPredicate *)predicate
 {
     return [[REMDataPersistenceProcessor new] fetch:objectType withPredicate:predicate];
+}
+
++ (void)cleanContext
+{
+    NSArray *entities = REMAppContext.managedObjectModel.entities;
+    for (NSEntityDescription *entityDescription in entities) {
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:entityDescription.name];
+        fetchRequest.includesPropertyValues = NO;
+        fetchRequest.includesSubentities = NO;
+        
+        NSError *error;
+        NSArray *items = [REMAppContext.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        
+        for (NSManagedObject *managedObject in items) {
+            [REMAppContext.managedObjectContext deleteObject:managedObject];
+        }
+    }
 }
 
 @end

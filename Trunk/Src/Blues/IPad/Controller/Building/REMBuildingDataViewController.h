@@ -7,7 +7,6 @@
  --------------------------------------------------------------------------*///
 
 #import <UIKit/UIKit.h>
-#import "REMBuildingOverallModel.h"
 #import "REMBuildingCommodityViewController.h"
 #import "REMBuildingAirQualityViewController.h"
 #import "REMBuildingImageViewController.h"

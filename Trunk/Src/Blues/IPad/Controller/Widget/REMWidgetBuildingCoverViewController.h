@@ -6,7 +6,6 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
-#import "REMBuildingOverallModel.h"
 #import "REMWidgetDetailViewController.h"
 #import "REMManagedDashboardModel.h"
 

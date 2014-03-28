@@ -293,7 +293,7 @@ static const int kTrialCardIndex = kCardCount - 2;
 
 -(void)customerSelectionTableView:(UITableView *)table didSelectCustomer:(REMManagedCustomerModel *)customer
 {
-    [REMAppContext setCurrentManagedCustomer:customer];
+    REMAppContext.currentCustomer = customer;
     [self loginSuccess];
 }
 -(void)customerSelectionTableViewdidDismissView

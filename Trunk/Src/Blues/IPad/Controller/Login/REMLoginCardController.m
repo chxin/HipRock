@@ -141,16 +141,15 @@
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserValidate parameter:parameter accessCache:NO andMessageMap:messageMap];
     store.persistenceProcessor = [[REMLoginPersistenceProcessor alloc] init];
     
-    [store access:^(REMUserValidationModel *validationResult, id raw) {
+    [store access:^(REMUserValidationModel *validationResult) {
         if(REMIsNilOrNull(validationResult)){ //TODO: empty response?
             return ;
         }
         
-//        REMUserValidationModel *validationResult = [[REMUserValidationModel alloc] initWithDictionary:data];
-        
         if(validationResult.status == REMUserValidationSuccess) {
             //REMUserModel *user = validationResult.user;
-            [REMAppContext setCurrentManagedUser:validationResult.managedUser];
+            REMAppContext.currentUser = validationResult.managedUser;
+            //[REMAppContext setCurrentManagedUser:validationResult.managedUser];
             
             //NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
             NSArray *customers = validationResult.managedUser.customers.allObjects;
@@ -163,7 +162,7 @@
             }
             
             if(customerCount == 1){
-                [REMAppContext setCurrentManagedCustomer:customers[0]];
+                REMAppContext.currentCustomer = customers[0];
                 [self.loginCarouselController loginSuccess];
             }
             else{

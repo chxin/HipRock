@@ -7,16 +7,14 @@
  --------------------------------------------------------------------------*///
 
 #import "REMMarkerBubbleView.h"
-#import "REMBuildingModel.h"
 #import <GoogleMaps/GoogleMaps.h>
-#import "REMBuildingOverallModel.h"
 #import "REMImages.h"
 #import "REMDimensions.h"
-#import "REMCommodityUsageModel.h"
 #import "REMEnergyUsageDataModel.h"
 #import "REMCommonHeaders.h"
 #import "REMManagedBuildingModel.h"
 #import "REMManagedBuildingCommodityUsageModel.h"
+
 @interface REMMarkerBubbleView ()
 
 @property (nonatomic,weak) REMManagedBuildingModel *buildingInfo;

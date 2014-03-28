@@ -6,7 +6,6 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMBuildingCoverWidgetViewController.h"
-#import "REMDashboardObj.h"
 #import "REMPinToBuildingCoverHelper.h"
 
 @interface REMBuildingCoverWidgetViewController ()
@@ -254,7 +253,7 @@
         return;
     }
     
-    REMManagedCustomerModel *customer=REMAppContext.currentManagedCustomer;
+    REMManagedCustomerModel *customer=REMAppContext.currentCustomer;
 //    NSDictionary *modelDic=@{
 //                             @"DashboardId":model.dashboardId,
 //                             @"HierarchyId":model.buildingId,
