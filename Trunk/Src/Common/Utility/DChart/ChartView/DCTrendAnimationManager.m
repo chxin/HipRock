@@ -21,21 +21,21 @@
     CGFloat graphLength = self.view.graphContext.hRange.length;
     double currentLocation = self.view.graphContext.hRange.location;
     CGFloat speedThreshold = graphLength / 100; // 速度小于此值则停止惯性，并开始计算到To位置的帧
-//    DCRange* globalRange = self.view.graphContext.globalHRange;
+    DCRange* globalRange = self.view.graphContext.globalHRange;
     NSMutableArray* hRangeFrames = [[NSMutableArray alloc]init];
     while (fabs(speed) >= speedThreshold) {
-//        speed = speed * ((currentLocation < globalRange.location || currentLocation + graphLength > globalRange.end) ? 0.5 : 0.9);
-        speed = speed * 0.9;
+        speed = speed * ((currentLocation < globalRange.location || currentLocation + graphLength > globalRange.end) ? 0.5 : 0.9);
+//        speed = speed * 0.9;
         currentLocation += speed;
         [hRangeFrames addObject:[[DCRange alloc] initWithLocation:currentLocation length:graphLength]];
     }
     
     double to = currentLocation;
-//    if (currentLocation < globalRange.location) {
-//        to = globalRange.location;
-//    } else if (currentLocation + graphLength > globalRange.end) {
-//        to = globalRange.end-graphLength;
-//    }
+    if (currentLocation < globalRange.location) {
+        to = globalRange.location;
+    } else if (currentLocation + graphLength > globalRange.end) {
+        to = globalRange.end-graphLength;
+    }
 
     // 计算到To位置的帧
     if (currentLocation != to) {

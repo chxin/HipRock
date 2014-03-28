@@ -314,10 +314,10 @@
     
     if(picker==self.startPicker){
         NSDate *endTime=self.timeRange.endTime;
-//        if ([[REMTimeHelper convertToUtc:newDate] timeIntervalSinceDate:[NSDate date]]>=0) {//greater than now
-//            REMTimeRange *range = [REMTimeHelper relativeDateFromType:REMRelativeTimeRangeTypeToday];
-//            newDate=[REMTimeHelper add:-1 onPart:REMDateTimePartHour ofDate:range.endTime];
-//        }
+        if ([[REMTimeHelper convertToUtc:newDate] timeIntervalSinceDate:[NSDate date]]>=0) {//greater than now
+            REMTimeRange *range = [REMTimeHelper relativeDateFromType:REMRelativeTimeRangeTypeToday];
+            newDate=[REMTimeHelper add:-1 onPart:REMDateTimePartHour ofDate:range.endTime];
+        }
         
         ret=[REMTimeHelper formatTimeFullHour:newDate isChangeTo24Hour:NO];
         if(self.showHour==NO){
@@ -329,10 +329,10 @@
     else{
         NSDate *startTime=self.timeRange.startTime;
         
-//        if ([[REMTimeHelper convertToUtc:newDate] timeIntervalSinceDate:[NSDate date]]>=0) {//greater than now
-//            REMTimeRange *range = [REMTimeHelper relativeDateFromType:REMRelativeTimeRangeTypeToday];
-//            newDate=range.endTime;
-//        }
+        if ([[REMTimeHelper convertToUtc:newDate] timeIntervalSinceDate:[NSDate date]]>=0) {//greater than now
+            REMTimeRange *range = [REMTimeHelper relativeDateFromType:REMRelativeTimeRangeTypeToday];
+            newDate=range.endTime;
+        }
         ret=[REMTimeHelper formatTimeFullHour:newDate isChangeTo24Hour:YES];
         if(self.showHour==NO){
             ret=[REMTimeHelper formatTimeFullDay:newDate isChangeTo24Hour:YES];
