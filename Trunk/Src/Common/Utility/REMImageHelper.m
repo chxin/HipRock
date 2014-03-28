@@ -56,6 +56,7 @@
     pixelBuffer = malloc(inBuffer.rowBytes * inBuffer.height);
     
     if(pixelBuffer==NULL){
+        CFRelease(inBitmapData);
         return nil;
     }
     
