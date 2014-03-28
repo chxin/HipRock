@@ -77,9 +77,21 @@ static NSString *customerUpdateAll=@"customerupdateall";
         messageMap = REMDataAccessMessageMake(@"Setting_UpdateNoNetwork",@"Setting_UpdateNetworkFailed",@"Setting_UpdateServerError",@"");
     }
     
+    
+    if (REMAppContext.sharedUpdateManager != nil && self.canCancel==YES) {
+        NSString *msg=REMIPadLocalizedString(@"Setting_LoadingData");//正在更新客户的楼宇及能耗信息，请稍后...
+        
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:msg delegate:self cancelButtonTitle:REMIPadLocalizedString(@"Common_Giveup") otherButtonTitles: nil];
+        alert.tag=-1;
+        [alert show];
+        self.alertView=alert;
+    }
+    
     REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingInfoUpdate parameter:dic accessCache:accessCache andMessageMap:messageMap];
     store.persistenceProcessor = [[REMBuildingPersistenceProcessor alloc]init];
     store.groupName =customerUpdateAll;
+    //store.isAccessCache = NO;
+    
     self.parameter=dic;
     
     [self accessStore:store success:^(REMBuildingInfoUpdateModel *buildingInfo, UIImage *logoImage) {
@@ -118,15 +130,6 @@ static NSString *customerUpdateAll=@"customerupdateall";
     }];
     
     
-    REMApplicationContext *context=REMAppContext;
-    if (context.sharedUpdateManager != nil && self.canCancel==YES) {
-        NSString *msg=REMIPadLocalizedString(@"Setting_LoadingData");//正在更新客户的楼宇及能耗信息，请稍后...
-        
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:msg delegate:self cancelButtonTitle:REMIPadLocalizedString(@"Common_Giveup") otherButtonTitles: nil];
-        alert.tag=-1;
-        [alert show];
-        self.alertView=alert;
-    }
 }
 
 - (void)accessStore:(REMDataStore *)store success:(void (^)(REMBuildingInfoUpdateModel *buildingInfo, UIImage *logoImage))success failure:(REMDataAccessFailureBlock)failure
