@@ -117,7 +117,7 @@
     }
     else{
         status = REMDataAccessFailed;
-        REMLogInfo(@"Network failure with code: %d", error.code);
+        REMLogInfo(@"Network failure with code: %d, message: %@", error.code, error.description);
     }
     
     return status;

@@ -45,5 +45,6 @@
 + (void)recover;
 + (void)destroy;
 
+- (void)cleanImage;
 
 @end

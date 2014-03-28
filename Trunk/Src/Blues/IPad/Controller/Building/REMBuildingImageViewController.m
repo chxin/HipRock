@@ -114,36 +114,37 @@
         NSString *normalBlurPicPath= [REMImageHelper buildingImagePathWithId:picId andType:REMBuildingImageNormalBlured];
 
         BOOL hasExistNormal = [[NSFileManager defaultManager] fileExistsAtPath:normalPicPath];
-        if (hasExistNormal) {
-            UIImage *image= [[UIImage alloc] initWithContentsOfFile:normalPicPath];
+        UIImage *normalImage = hasExistNormal ? [[UIImage alloc] initWithContentsOfFile:normalPicPath] : nil;
+        
+        if (hasExistNormal && normalImage!=nil) {
             imageView.contentMode=UIViewContentModeTop;
-            imageView.image=image;
-            UIImage *blurImage = [[UIImage alloc] initWithContentsOfFile:normalBlurPicPath];
+            imageView.image=normalImage;
+            UIImage *blurredNormalImage = [[UIImage alloc] initWithContentsOfFile:normalBlurPicPath];
             blurImageView.contentMode=UIViewContentModeTop;
-            blurImageView.image=blurImage;
+            blurImageView.image=blurredNormalImage;
         }
         else{
-            BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallPicPath];
-            if (hasExist==NO) {
+            BOOL hasExistSmall= [[NSFileManager defaultManager] fileExistsAtPath:smallPicPath];
+            UIImage *smallImage= hasExistSmall ? [[UIImage alloc] initWithContentsOfFile:smallPicPath] : nil;
+            if(hasExistSmall && smallImage!=nil){
+                imageView.image=smallImage;
+                BOOL hasExistBlurredSmall = [[NSFileManager defaultManager] fileExistsAtPath:smallBlurPicPath];
+                UIImage *blurredSmallImage;
+                if (hasExistBlurredSmall==YES) {
+                    blurredSmallImage= [[UIImage alloc] initWithContentsOfFile:smallBlurPicPath];
+                }
+                else{
+                    blurredSmallImage=[REMImageHelper blurImage:smallImage];
+                    NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(blurredSmallImage)];
+                    [data1 writeToFile:smallBlurPicPath atomically:YES];
+                }
+                blurImageView.image=blurredSmallImage;
+            }
+            else {
                 imageView.image=self.defaultImage;
                 imageView.contentMode=UIViewContentModeTop;
                 blurImageView.contentMode=UIViewContentModeTop;
                 blurImageView.image=self.defaultBlurImage;
-            }
-            else{
-                UIImage *image= [[UIImage alloc] initWithContentsOfFile:smallPicPath];
-                imageView.image=image;
-                hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallBlurPicPath];
-                UIImage *blurImage;
-                if (hasExist==YES) {
-                    blurImage= [[UIImage alloc] initWithContentsOfFile:smallBlurPicPath];
-                }
-                else{
-                    blurImage=[REMImageHelper blurImage:image];
-                    NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(blurImage)];
-                    [data1 writeToFile:smallBlurPicPath atomically:YES];
-                }
-                blurImageView.image=blurImage;
             }
         }
     }

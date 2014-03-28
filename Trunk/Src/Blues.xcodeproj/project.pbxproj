@@ -87,6 +87,7 @@
 		7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142B1785211000CC2922 /* REMAlertHelper.m */; };
 		7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
 		7A1D7C4517A63E8B0050779D /* REMEncryptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4417A63E8B0050779D /* REMEncryptHelper.m */; };
+		7A217E5718E51FA100383BED /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A217E5618E51FA100383BED /* Reachability.m */; };
 		7A24E04D18E02877002F15E1 /* REMBuildingInfoUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A24E04C18E02877002F15E1 /* REMBuildingInfoUpdateModel.m */; };
 		7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA41D17D874C3003B18E1 /* REMBusinessErrorInfo.m */; };
 		7A2BA42217D877C3003B18E1 /* REMError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BA42117D877C3003B18E1 /* REMError.m */; };
@@ -846,6 +847,8 @@
 		7A1D7C4117A637FD0050779D /* REMJSONObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMJSONObject.m; path = Common/Model/REMJSONObject.m; sourceTree = "<group>"; };
 		7A1D7C4317A63E8B0050779D /* REMEncryptHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEncryptHelper.h; path = Common/Utility/REMEncryptHelper.h; sourceTree = "<group>"; };
 		7A1D7C4417A63E8B0050779D /* REMEncryptHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEncryptHelper.m; path = Common/Utility/REMEncryptHelper.m; sourceTree = "<group>"; };
+		7A217E5518E51FA100383BED /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		7A217E5618E51FA100383BED /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		7A24E04B18E02877002F15E1 /* REMBuildingInfoUpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingInfoUpdateModel.h; path = Blues/IPad/Model/Building/REMBuildingInfoUpdateModel.h; sourceTree = SOURCE_ROOT; };
 		7A24E04C18E02877002F15E1 /* REMBuildingInfoUpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingInfoUpdateModel.m; path = Blues/IPad/Model/Building/REMBuildingInfoUpdateModel.m; sourceTree = SOURCE_ROOT; };
 		7A28495918039A3000DC481B /* REMDimensionForLogin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMDimensionForLogin.h; path = Resource/Dimensions/REMDimensionForLogin.h; sourceTree = "<group>"; };
@@ -1891,6 +1894,16 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		7A217E5418E51FA100383BED /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				7A217E5518E51FA100383BED /* Reachability.h */,
+				7A217E5618E51FA100383BED /* Reachability.m */,
+			);
+			name = Reachability;
+			path = ../Lib/Reachability;
+			sourceTree = "<group>";
+		};
 		7A284954180398B600DC481B /* Definitions */ = {
 			isa = PBXGroup;
 			children = (
@@ -2825,6 +2838,7 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A217E5418E51FA100383BED /* Reachability */,
 				7A3290C618D80C0B00B3AE8A /* CFNetwork.framework */,
 				7A3290C418D80BF900B3AE8A /* Security.framework */,
 				7A9EAA5818D2946300EF1B85 /* WeiboSDK */,
@@ -4219,6 +4233,7 @@
 				7A63E23C18B44CBD00A13464 /* REMManagedUserModel.m in Sources */,
 				7A63E23918B44CBD00A13464 /* REMManagedAdministratorModel.m in Sources */,
 				7A63E20E18B44CBD00A13464 /* REMSettingCustomerDetailLogoViewController.m in Sources */,
+				7A217E5718E51FA100383BED /* Reachability.m in Sources */,
 				7A63E22F18B44CBD00A13464 /* REMWidgetContentSyntax.m in Sources */,
 				7A3290E418D823EF00B3AE8A /* UIProgressView+AFNetworking.m in Sources */,
 				7A63E26D18B44CBD00A13464 /* REMDashboardCollectionCellView.m in Sources */,

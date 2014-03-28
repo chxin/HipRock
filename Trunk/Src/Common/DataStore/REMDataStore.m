@@ -12,6 +12,10 @@
 #import "REMAppDelegate.h"
 #import "REMDataPersistenceProcessor.h"
 #import "AFNetworking.h"
+#import "Reachability.h"
+#import "REMManagedUserModel.h"
+#import "REMManagedCustomerModel.h"
+#import "REMManagedAdministratorModel.h"
 
 
 @interface REMCacheStoreHolder : NSObject
@@ -87,14 +91,12 @@ static REMCacheStoreHolder *cacheStoreHolder;
     [self access:success failure:nil];
 }
 - (void)access:(REMDataAccessSuccessBlock)success failure:(REMDataAccessFailureBlock)failure{
-    //NetworkStatus reachability = [REMHttpHelper checkCurrentNetworkStatus];
-    
-    //[REMAppContext.sharedRequestOperationManager.reachabilityManager reachable];
-    
+    NetworkStatus reachability = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+
     BOOL cacheMode = REMAppContext.cacheMode;
     REMCacheStoreHolder *holder = [REMDataStore cacheStoreHolder];
     
-    if(REMAppContext.networkStatus == AFNetworkReachabilityStatusNotReachable){
+    if(reachability == NotReachable){
         if(self.isAccessCache){
             
             if(!cacheMode){
@@ -240,10 +242,32 @@ static REMCacheStoreHolder *cacheStoreHolder;
     return [[REMDataPersistenceProcessor new] fetch:objectType withPredicate:predicate];
 }
 
-+ (void)cleanContext
++ (void)cleanData
 {
+//    NSPersistentStore *store = [REMAppContext.persistentStoreCoordinator.persistentStores lastObject];
+//    NSError *error = nil;
+//    NSURL *storeURL = store.URL;
+//    [REMAppContext.persistentStoreCoordinator removePersistentStore:store error:&error];
+//    [[NSFileManager defaultManager] removeItemAtURL:storeURL error:&error];
+//    
+//    
+//    NSLog(@"Data Reset");
+//    
+//    //Make new persistent store for future saves   (Taken From Above Answer)
+//    if (![REMAppContext.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+//        // do something with the error
+//    }
+
+    
+    
     NSArray *entities = REMAppContext.managedObjectModel.entities;
     for (NSEntityDescription *entityDescription in entities) {
+        if([entityDescription.name isEqualToString:NSStringFromClass([REMManagedUserModel class])] ||
+           [entityDescription.name isEqualToString:NSStringFromClass([REMManagedCustomerModel class])] ||
+           [entityDescription.name isEqualToString:NSStringFromClass([REMManagedAdministratorModel class])]){
+            continue;
+        }
+        
         NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:entityDescription.name];
         fetchRequest.includesPropertyValues = NO;
         fetchRequest.includesSubentities = NO;
