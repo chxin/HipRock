@@ -87,6 +87,7 @@
 //    context.sharedUpdateManager = nil;
     
     [REMApplicationContext destroy];
+    [REMDataStore cleanData];
     
     UIViewController *controller=self.topViewController;
     controller.view.alpha=0;

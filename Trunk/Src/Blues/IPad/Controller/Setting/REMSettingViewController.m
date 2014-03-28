@@ -270,6 +270,7 @@
         manager.canCancel=YES;
         manager.updateSource=REMCustomerUserConcurrencySourceUpdate;
         manager.mainNavigationController=(REMMainNavigationController *)self.presentingViewController;
+        
         [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessStatus errorStatus) {
             if (status == REMCustomerUserConcurrencyStatusSuccess) {
                 REMMainNavigationController *mainController=(REMMainNavigationController *)self.presentingViewController;

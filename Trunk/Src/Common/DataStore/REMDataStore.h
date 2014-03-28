@@ -212,8 +212,8 @@ typedef void(^REMDataAccessFailureBlock)(NSError *error, REMDataAccessStatus sta
 + (void) cancel: (NSString *) groupName;
 
 /**
- *  Delete all managed objects in current database
+ *  TODO: add comment
  */
-+ (void)cleanContext;
++ (void)cleanData;
 
 @end
