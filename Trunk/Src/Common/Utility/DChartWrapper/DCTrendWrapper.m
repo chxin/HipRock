@@ -429,19 +429,19 @@
     return [[self.sharedProcessor deprocessX:to] timeIntervalSinceDate:[self.sharedProcessor deprocessX:from]];
 }
 -(DCRange*)updatePanRange:(DCRange *)newRange withSpeed:(double)speed {
-    DCRange* updatedRange = newRange;
-//    if (self.sharedProcessor.step == REMEnergyStepHour) {
-//        updatedRange = newRange;
-//    } else {
-//        double location = newRange.location;
-//        double end = newRange.end;
-//        if (location < self.graphContext.globalHRange.location) {
-//            location = self.graphContext.hRange.location + speed / 8;
-//        } else  if (end > self.graphContext.globalHRange.end) {
-//            location = self.graphContext.hRange.location + speed / 8;
-//        }
-//        updatedRange = [[DCRange alloc]initWithLocation:location length:self.graphContext.hRange.length];
-//    }
+    DCRange* updatedRange = nil;
+    if (self.sharedProcessor.step == REMEnergyStepHour) {
+        updatedRange = newRange;
+    } else {
+        double location = newRange.location;
+        double end = newRange.end;
+        if (location < self.graphContext.globalHRange.location) {
+            location = self.graphContext.hRange.location + speed / 8;
+        } else  if (end > self.graphContext.globalHRange.end) {
+            location = self.graphContext.hRange.location + speed / 8;
+        }
+        updatedRange = [[DCRange alloc]initWithLocation:location length:self.graphContext.hRange.length];
+    }
     self.myStableRange = updatedRange;
     return updatedRange;
 }
