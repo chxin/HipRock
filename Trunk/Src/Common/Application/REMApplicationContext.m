@@ -60,7 +60,15 @@ static BOOL CACHEMODE = NO;
         _currentCustomerId = [NSNumber numberWithLongLong:[customer.id longLongValue]];
     }
     
+//    if(_currentCustomer != nil){
+//        _currentCustomer.isCurrent = @(NO);
+//    }
+    
+    customer.isCurrent = @(YES);
+    
     _currentCustomer = customer;
+    
+    [REMDataStore saveContext];
 }
 
 -(REMManagedCustomerModel *)currentCustomer
@@ -120,12 +128,12 @@ static BOOL CACHEMODE = NO;
     
 //  [REMDataStore cleanContext];
     [REMDataStore deleteManagedObject:context.currentUser];
-    context.currentCustomer = nil;
-    context.currentUser = nil;
     
     [context cleanImage];
     
-    
+    context.buildingInfoArray = nil;
+    context.currentCustomer = nil;
+    context.currentUser = nil;
     
     //context = nil;
 }

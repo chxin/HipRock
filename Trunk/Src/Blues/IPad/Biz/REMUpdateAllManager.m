@@ -212,20 +212,21 @@ static NSString *customerUpdateAll=@"customerupdateall";
         self.customerInfoArray=REMAppContext.currentUser.customers.allObjects;
     }
     
-    REMManagedCustomerModel *current=REMAppContext.currentCustomer;
-    NSNumber *newCustomerId = self.selectedCustomerId;
-    if (newCustomerId==nil) {
-        newCustomerId = self.currentCustomerId;
+    NSNumber *newCustomerId = self.selectedCustomerId == nil ? self.currentCustomerId : self.selectedCustomerId;
+    
+    if(newCustomerId != self.currentCustomerId){
+        REMAppContext.currentCustomer.isCurrent = @(NO);
     }
-    for (REMManagedCustomerModel *customer in self.customerInfoArray) {
-        if ([customer.id isEqualToNumber:newCustomerId]==YES && [customer isEqual:current]==NO) {
-            customer.logoImage = customerLogo == nil ? nil : UIImagePNGRepresentation(customerLogo);
-            customer.isCurrent=@(YES);
-            
-            REMAppContext.currentCustomer=customer;
-            
+    
+    for(REMManagedCustomerModel * customer in self.customerInfoArray){
+        if([customer.id isEqualToNumber:newCustomerId]){
+            REMAppContext.currentCustomer = customer;
             break;
         }
+    }
+    
+    if(customerLogo!=nil){
+        REMAppContext.currentCustomer.logoImage = UIImagePNGRepresentation(customerLogo);
     }
     
     [self persistAllData];
