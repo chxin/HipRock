@@ -1,16 +1,16 @@
 //
-//  REMManageBuildingAirQualityModel.m
+//  REMManagedBuildingAirQualityModel.m
 //  Blues
 //
-//  Created by tantan on 2/25/14.
+//  Created by 张 锋 on 4/1/14.
 //
 //
 
-#import "REMManageBuildingAirQualityModel.h"
+#import "REMManagedBuildingAirQualityModel.h"
 #import "REMManagedBuildingModel.h"
 
 
-@implementation REMManageBuildingAirQualityModel
+@implementation REMManagedBuildingAirQualityModel
 
 @dynamic commodityCode;
 @dynamic commodityId;

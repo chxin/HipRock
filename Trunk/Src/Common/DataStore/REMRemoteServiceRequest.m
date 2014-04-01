@@ -142,6 +142,7 @@
             NSLog(@"User-Agent:%@", request.allHTTPHeaderFields[@"User-Agent"]);
             NSLog(@"Blues-Version:%@", request.allHTTPHeaderFields[@"Blues-Version"]);
             NSLog(@"Blues-User:%@", request.allHTTPHeaderFields[@"Blues-User"]);
+            NSLog(@"BODY:%@",[[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding] );
         }
         //NSLog(@"->");
         if(error == nil){

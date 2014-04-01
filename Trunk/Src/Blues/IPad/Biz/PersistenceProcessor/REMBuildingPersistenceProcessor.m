@@ -19,6 +19,7 @@
 #import "REMBuildingInfoUpdateModel.h"
 #import "REMManagedAdministratorModel.h"
 #import "REMCommonHeaders.h"
+#import "REMManagedBuildingAirQualityModel.h"
 
 
 @implementation REMBuildingPersistenceProcessor
@@ -38,6 +39,8 @@
             [self persistCommodity:buildingOverall[@"CommodityArray"] intoBuilding:buildingModel];
             [self persistDashboard:buildingOverall[@"DashboardList"] intoBuilding:buildingModel];
             [self persistPinnedWidget:buildingOverall[@"WidgetRelation"] intoBuilding:buildingModel];
+            
+            [self persistAirQuality:buildingOverall[@"AirQualitySummary"] intoBuilding:buildingModel];
         }
     }
     
@@ -279,6 +282,47 @@
         [building addCommoditiesObject:commodity];
     }
 }
+
+-(void)persistAirQuality:(NSDictionary *)airData intoBuilding:(REMManagedBuildingModel *)building{
+    if(REMIsNilOrNull(airData)){
+        return;
+    }
+    
+    REMManagedBuildingAirQualityModel *airModel = [self create:[REMManagedBuildingAirQualityModel class]];
+    
+    NSDictionary *commodity = airData[@"AirQualityCommodity"];
+    NSDictionary *honeywell = airData[@"HoneywellData"];
+    NSDictionary *mayair = airData[@"MayAirData"];
+    NSDictionary *outdoor = airData[@"OutdoorData"];
+    
+    airModel.commodityCode = commodity[@"Code"] ;
+    airModel.commodityId = @(12);//commodity[@"Id"];
+    airModel.commodityName = NULL_TO_NIL(commodity[@"Name"]);
+    
+    if(!REMIsNilOrNull(honeywell)){
+        NSDictionary *uom = honeywell[@"Uom"];
+        
+        airModel.honeywellUom = uom[@"Code"];
+        airModel.honeywellValue = honeywell[@"DataValue"];
+    }
+    
+    if(!REMIsNilOrNull(mayair)){
+        NSDictionary *uom = mayair[@"Uom"];
+        
+        airModel.mayairUom = uom[@"Code"];
+        airModel.mayairValue = mayair[@"DataValue"];
+    }
+    
+    if(!REMIsNilOrNull(outdoor)){
+        NSDictionary *uom = outdoor[@"Uom"];
+        
+        airModel.outdoorUom = uom[@"Code"];
+        airModel.outdoorValue = outdoor[@"DataValue"];
+    }
+    
+    building.airQuality = airModel;
+}
+
 
 - (REMManagedBuildingModel *)persistBuilding:(NSDictionary *)dictionary{
     REMManagedBuildingModel *building = [self create:[REMManagedBuildingModel class]];

@@ -75,7 +75,7 @@
 
 "Login_CreatingDemoUserText" = "账号创建中，请稍候..";
 
-"Login_TrialNoNetwork" = "产品试用申请失败。无网络连，请连接后再试。";
+"Login_TrialNoNetwork" = "产品试用申请失败。无网络连接，请连接后再试。";
 "Login_TrialNetworkFailed" = "产品试用申请失败。网络故障，请稍后再试。";
 "Login_TrialServerError" = "产品试用申请失败。服务器故障，请稍后再试。";
 "Login_TrialNoCustomer" = "产品试用申请失败，您的用户未关联任何客户";

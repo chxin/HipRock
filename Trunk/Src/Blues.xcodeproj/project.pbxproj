@@ -307,6 +307,8 @@
 		7A47F3A118482C1B007EE37B /* JumpLogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39918482C1B007EE37B /* JumpLogin@2x.png */; };
 		7A47F3A418482C1B007EE37B /* JumpTrial.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39C18482C1B007EE37B /* JumpTrial.png */; };
 		7A47F3A518482C1B007EE37B /* JumpTrial@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39D18482C1B007EE37B /* JumpTrial@2x.png */; };
+		7A4B465D18EA8B7B00FC238C /* REMManagedBuildingAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B465C18EA8B7B00FC238C /* REMManagedBuildingAirQualityModel.m */; };
+		7A4B466018EA98C700FC238C /* REMBuildingAirQualityPersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B465F18EA98C700FC238C /* REMBuildingAirQualityPersistenceProcessor.m */; };
 		7A58F24A1839A5650071DE7A /* mail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2411839A5650071DE7A /* mail.jpg */; };
 		7A58F24B1839A5650071DE7A /* Propaganda_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2421839A5650071DE7A /* Propaganda_1.jpg */; };
 		7A58F24C1839A5650071DE7A /* Propaganda_1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A58F2431839A5650071DE7A /* Propaganda_1@2x.jpg */; };
@@ -581,7 +583,6 @@
 		7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */; };
 		7ABFDDF418483119004DD4E7 /* JumpLogin-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */; };
 		7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */; };
-		7AF9635118D6C5BD005A8D12 /* REMManageBuildingAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9633E18D6C5BD005A8D12 /* REMManageBuildingAirQualityModel.m */; };
 		7AF9635218D6C5BD005A8D12 /* REMManagedBuildingCommodityUsageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9634018D6C5BD005A8D12 /* REMManagedBuildingCommodityUsageModel.m */; };
 		7AF9635318D6C5BD005A8D12 /* REMManagedBuildingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9634218D6C5BD005A8D12 /* REMManagedBuildingModel.m */; };
 		7AF9635418D6C5BD005A8D12 /* REMManagedBuildingPictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9634418D6C5BD005A8D12 /* REMManagedBuildingPictureModel.m */; };
@@ -917,6 +918,10 @@
 		7A47F39918482C1B007EE37B /* JumpLogin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin@2x.png"; sourceTree = "<group>"; };
 		7A47F39C18482C1B007EE37B /* JumpTrial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JumpTrial.png; sourceTree = "<group>"; };
 		7A47F39D18482C1B007EE37B /* JumpTrial@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpTrial@2x.png"; sourceTree = "<group>"; };
+		7A4B465B18EA8B7B00FC238C /* REMManagedBuildingAirQualityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingAirQualityModel.h; sourceTree = "<group>"; };
+		7A4B465C18EA8B7B00FC238C /* REMManagedBuildingAirQualityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingAirQualityModel.m; sourceTree = "<group>"; };
+		7A4B465E18EA98C700FC238C /* REMBuildingAirQualityPersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingAirQualityPersistenceProcessor.h; path = PersistenceProcessor/REMBuildingAirQualityPersistenceProcessor.h; sourceTree = "<group>"; };
+		7A4B465F18EA98C700FC238C /* REMBuildingAirQualityPersistenceProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingAirQualityPersistenceProcessor.m; path = PersistenceProcessor/REMBuildingAirQualityPersistenceProcessor.m; sourceTree = "<group>"; };
 		7A58F2411839A5650071DE7A /* mail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mail.jpg; sourceTree = "<group>"; };
 		7A58F2421839A5650071DE7A /* Propaganda_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Propaganda_1.jpg; sourceTree = "<group>"; };
 		7A58F2431839A5650071DE7A /* Propaganda_1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Propaganda_1@2x.jpg"; sourceTree = "<group>"; };
@@ -1330,8 +1335,6 @@
 		7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed.png"; sourceTree = "<group>"; };
 		7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed@2x.png"; sourceTree = "<group>"; };
 		7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
-		7AF9633D18D6C5BD005A8D12 /* REMManageBuildingAirQualityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManageBuildingAirQualityModel.h; sourceTree = "<group>"; };
-		7AF9633E18D6C5BD005A8D12 /* REMManageBuildingAirQualityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManageBuildingAirQualityModel.m; sourceTree = "<group>"; };
 		7AF9633F18D6C5BD005A8D12 /* REMManagedBuildingCommodityUsageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingCommodityUsageModel.h; sourceTree = "<group>"; };
 		7AF9634018D6C5BD005A8D12 /* REMManagedBuildingCommodityUsageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingCommodityUsageModel.m; sourceTree = "<group>"; };
 		7AF9634118D6C5BD005A8D12 /* REMManagedBuildingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingModel.h; sourceTree = "<group>"; };
@@ -2135,6 +2138,8 @@
 				7A62E33118DC1DB10029E908 /* REMLoginPersistenceProcessor.m */,
 				7A62E33218DC1DB10029E908 /* REMPinToCoverPersistenceProcessor.h */,
 				7A62E33318DC1DB10029E908 /* REMPinToCoverPersistenceProcessor.m */,
+				7A4B465E18EA98C700FC238C /* REMBuildingAirQualityPersistenceProcessor.h */,
+				7A4B465F18EA98C700FC238C /* REMBuildingAirQualityPersistenceProcessor.m */,
 			);
 			name = PersistenceProcessor;
 			sourceTree = "<group>";
@@ -2384,7 +2389,6 @@
 		7A63E11E18B44CBB00A13464 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7AF9635B18D6C5CC005A8D12 /* BluesPad.xcdatamodeld */,
 				7A63E11F18B44CBB00A13464 /* Building */,
 				7A63E13418B44CBB00A13464 /* Common */,
 				7A63E13D18B44CBC00A13464 /* Dashboard */,
@@ -2477,8 +2481,9 @@
 		7A63E15A18B44CBC00A13464 /* Managed */ = {
 			isa = PBXGroup;
 			children = (
-				7AF9633D18D6C5BD005A8D12 /* REMManageBuildingAirQualityModel.h */,
-				7AF9633E18D6C5BD005A8D12 /* REMManageBuildingAirQualityModel.m */,
+				7AF9635B18D6C5CC005A8D12 /* BluesPad.xcdatamodeld */,
+				7A4B465B18EA8B7B00FC238C /* REMManagedBuildingAirQualityModel.h */,
+				7A4B465C18EA8B7B00FC238C /* REMManagedBuildingAirQualityModel.m */,
 				7AF9633F18D6C5BD005A8D12 /* REMManagedBuildingCommodityUsageModel.h */,
 				7AF9634018D6C5BD005A8D12 /* REMManagedBuildingCommodityUsageModel.m */,
 				7AF9634118D6C5BD005A8D12 /* REMManagedBuildingModel.h */,
@@ -3987,7 +3992,6 @@
 			files = (
 				7A63E24D18B44CBD00A13464 /* REMBuildingWeiboView.m in Sources */,
 				7A63E20D18B44CBD00A13464 /* REMSettingCustomerDetailAdminViewController.m in Sources */,
-				7AF9635118D6C5BD005A8D12 /* REMManageBuildingAirQualityModel.m in Sources */,
 				EFD947051839DCBB00E9EC50 /* DCRange.m in Sources */,
 				7A62E33618DC1DB10029E908 /* REMEnergyDataPersistenceProcessor.m in Sources */,
 				7AF9638218D6C63C005A8D12 /* AFURLConnectionOperation.m in Sources */,
@@ -4026,6 +4030,7 @@
 				B445AEA6177BEEB8002D2A59 /* DDLog.m in Sources */,
 				7A63E20C18B44CBD00A13464 /* REMSettingAboutViewController.m in Sources */,
 				B445AEA8177BEEB8002D2A59 /* DDTTYLogger.m in Sources */,
+				7A4B466018EA98C700FC238C /* REMBuildingAirQualityPersistenceProcessor.m in Sources */,
 				B445AEAA177BEEB8002D2A59 /* ContextFilterLogFormatter.m in Sources */,
 				7A63E25018B44CBD00A13464 /* REMBuildingChartView.m in Sources */,
 				EFD947021839DCBB00E9EC50 /* DCXYChartView.m in Sources */,
@@ -4247,6 +4252,7 @@
 				EF03DC231841E462004B9EFD /* DCPieChartView.m in Sources */,
 				7A63E26318B44CBD00A13464 /* REMToggleButton.m in Sources */,
 				7A63E1F618B44CBD00A13464 /* REMBuildingImageViewController.m in Sources */,
+				7A4B465D18EA8B7B00FC238C /* REMManagedBuildingAirQualityModel.m in Sources */,
 				EF1CD12C18D29EBD008F8F5E /* DCChartDataProcessor.m in Sources */,
 				7A63E21918B44CBD00A13464 /* REMWidgetBuildingCoverViewController.m in Sources */,
 				7A63E21518B44CBD00A13464 /* REMWidgetMultiTimespanDelegator.m in Sources */,
@@ -4697,8 +4703,7 @@
 				7AF9635C18D6C5CC005A8D12 /* BluesPad.xcdatamodel */,
 			);
 			currentVersion = 7AF9635C18D6C5CC005A8D12 /* BluesPad.xcdatamodel */;
-			name = BluesPad.xcdatamodeld;
-			path = Managed/BluesPad.xcdatamodeld;
+			path = BluesPad.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -1,8 +1,8 @@
 //
-//  REMManageBuildingAirQualityModel.h
+//  REMManagedBuildingAirQualityModel.h
 //  Blues
 //
-//  Created by tantan on 2/25/14.
+//  Created by 张 锋 on 4/1/14.
 //
 //
 
@@ -11,7 +11,7 @@
 
 @class REMManagedBuildingModel;
 
-@interface REMManageBuildingAirQualityModel : NSManagedObject
+@interface REMManagedBuildingAirQualityModel : NSManagedObject
 
 @property (nonatomic, retain) NSString * commodityCode;
 @property (nonatomic, retain) NSNumber * commodityId;

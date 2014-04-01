@@ -6,15 +6,19 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMBuildingCommodityViewController.h"
-#import "REMAirQualityModel.h"
+//#import "REMAirQualityModel.h"
+#import "REMManagedBuildingAirQualityModel.h"
+
+
 @interface REMBuildingAirQualityViewController : UIViewController
 
-@property (nonatomic,weak) REMManageBuildingAirQualityModel *airQualityInfo;
+@property (nonatomic,weak) REMManagedBuildingAirQualityModel *airQualityInfo;
 @property (nonatomic) CGRect viewFrame;
 @property (nonatomic,weak) REMManagedBuildingModel *buildingInfo;
-@property (nonatomic,strong) REMAirQualityModel *airQualityUsage;
+//@property (nonatomic,strong) REMAirQualityModel *airQualityUsage;
 @property (nonatomic) BOOL dataLoadComplete;
 @property (nonatomic) NSUInteger index;
 - (void) showChart;
 - (void)loadChartComplete;
+
 @end

@@ -11,6 +11,7 @@
 #import "REMBuildingChartContainerViewController.h"
 #import "REMBuildingAirQualityChartViewController.h"
 #import "REMCommonHeaders.h"
+#import "REMBuildingAirQualityPersistenceProcessor.h"
 
 @interface REMBuildingAirQualityViewController ()
 @property (nonatomic,weak) REMBuildingTitleLabelView *totalLabel;
@@ -45,7 +46,7 @@
     [self initTotalValue];
     [self initDetailValue];
     [self initChartContainer];
-    if(self.airQualityUsage==nil){
+    if(self.airQualityInfo==nil){
         [self loadTotalUsageByBuildingId:self.buildingInfo.id];
     }
     else{
@@ -67,11 +68,29 @@
 }
 
 - (void)addDataLabel{
-    REMAirQualityModel *model=self.airQualityUsage;
-    self.totalLabel.data=model.honeywell;
-    self.honeywellLabel.data=model.honeywell;
-    self.mayairLabel.data=model.mayair;
-    self.outdoorLabel.data=model.outdoor;
+//    REMAirQualityModel *model=self.airQualityUsage;
+    
+    REMManagedBuildingAirQualityModel *airModel = self.airQualityInfo;
+    
+    REMEnergyUsageDataModel *honeywellData = [[REMEnergyUsageDataModel alloc]init];
+    honeywellData.dataValue = airModel.honeywellValue;
+    honeywellData.uom = [[REMUomModel alloc]init];
+    honeywellData.uom.code=airModel.honeywellUom;
+    
+    REMEnergyUsageDataModel *mayairData = [[REMEnergyUsageDataModel alloc]init];
+    honeywellData.dataValue = airModel.mayairValue;
+    honeywellData.uom = [[REMUomModel alloc]init];
+    honeywellData.uom.code=airModel.mayairUom;
+    
+    REMEnergyUsageDataModel *outdoorData = [[REMEnergyUsageDataModel alloc]init];
+    honeywellData.dataValue = airModel.outdoorValue;
+    honeywellData.uom = [[REMUomModel alloc]init];
+    honeywellData.uom.code=airModel.outdoorUom;
+    
+    self.totalLabel.data=honeywellData;
+    self.honeywellLabel.data=honeywellData;
+    self.mayairLabel.data=mayairData;
+    self.outdoorLabel.data=outdoorData;
     [self loadedPart];
 }
 
@@ -81,21 +100,30 @@
     store.isDisableAlert=YES;
     //store.maskContainer = nil;
     store.groupName = [NSString stringWithFormat:@"building-data-%@", buildingId];
+    
+    REMBuildingAirQualityPersistenceProcessor *processor = [[REMBuildingAirQualityPersistenceProcessor alloc] init];
+    processor.airQualityModel = self.airQualityInfo;
+    store.persistenceProcessor = processor;
+    
     [self.totalLabel showLoading];
     [self.outdoorLabel showLoading];
     [self.honeywellLabel showLoading];
     [self.mayairLabel showLoading];
-    [store access:^(NSDictionary *data) {
-        REMAirQualityModel *model=nil;
-        if([data isEqual:[NSNull null]]==YES){
-            model=nil;
-        }
-        else{
-            model=[[REMAirQualityModel alloc]initWithDictionary:data];
-            if(model!=nil){
-                self.airQualityUsage=model;
-            }
-        }
+    [store access:^(REMManagedBuildingAirQualityModel *data) {
+//        REMAirQualityModel *model=nil;
+//        if([data isEqual:[NSNull null]]==YES){
+//            model=nil;
+//        }
+//        else{
+//            model=[[REMAirQualityModel alloc]initWithDictionary:data];
+//            if(model!=nil){
+//                self.airQualityUsage=model;
+//            }
+//        }
+        
+        self.airQualityInfo = data;
+        
+        
         [self.totalLabel hideLoading];
         [self.outdoorLabel hideLoading];
         [self.honeywellLabel hideLoading];
@@ -270,7 +298,7 @@
         //NSLog(@"view frame:%@",NSStringFromCGRect(controller1.viewFrame));
         controller1.chartHandlerClass=[REMBuildingAirQualityChartViewController class];
         controller1.buildingId=self.buildingInfo.id;
-        controller1.commodityId=self.airQualityUsage.commodity.commodityId;
+        controller1.commodityId=self.airQualityInfo.commodityId;
         [self addChildViewController:controller1];
     }
 }

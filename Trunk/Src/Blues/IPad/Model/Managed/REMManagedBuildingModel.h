@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class REMManageBuildingAirQualityModel, REMManagedBuildingCommodityUsageModel, REMManagedBuildingPictureModel, REMManagedDashboardModel;
+@class REMManagedBuildingAirQualityModel, REMManagedBuildingCommodityUsageModel, REMManagedBuildingPictureModel, REMManagedDashboardModel;
 
 @interface REMManagedBuildingModel : NSManagedObject
 
@@ -26,7 +26,7 @@
 @property (nonatomic, retain) NSNumber * pathLevel;
 @property (nonatomic, retain) NSString * province;
 @property (nonatomic, retain) NSNumber * timezoneId;
-@property (nonatomic, retain) REMManageBuildingAirQualityModel *airQuality;
+@property (nonatomic, retain) REMManagedBuildingAirQualityModel *airQuality;
 @property (nonatomic, retain) NSSet *commodities;
 @property (nonatomic, retain) NSSet *dashboards;
 @property (nonatomic, retain) NSSet *pictures;

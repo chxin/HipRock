@@ -9,13 +9,16 @@
 #import "REMBuildingDataViewController.h"
 #import "REMBuildingDataView.h"
 #import "REMBuildingChartBaseViewController.h"
-#import "REMManageBuildingAirQualityModel.h"
+#import "REMManagedBuildingAirQualityModel.h"
 #import "REMManagedBuildingCommodityUsageModel.h"
 #import "REMCommonHeaders.h"
 
 #define kDashboardThreshold 361+65+85*2+45
 
-@interface REMBuildingDataViewController ()
+@interface REMBuildingDataViewController (){
+    @private
+    NSArray *_commodityArray;
+}
 @property (nonatomic,weak) UILabel *dashboardLabel;
 @property (nonatomic,strong) NSArray *buttonArray;
 
@@ -23,9 +26,26 @@
 
 @property (nonatomic,weak) UIImageView *arrow;
 @property (nonatomic,strong) NSMutableDictionary *commodityDataLoadStatus;
+@property (nonatomic,strong,readonly) NSArray *commodityArray;
+
 @end
 
 @implementation REMBuildingDataViewController
+
+-(NSArray *)commodityArray
+{
+    if(self.buildingInfo==nil || self.buildingInfo.commodities == nil){
+        return nil;
+    }
+    
+    if(_commodityArray == nil){
+        _commodityArray = [self.buildingInfo.commodities.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            return [((REMManagedBuildingCommodityUsageModel *)obj1).id compare:( (REMManagedBuildingCommodityUsageModel *)obj2).id];
+        }];
+    }
+    
+    return _commodityArray;
+}
 
 - (id)init{
     if(self=[super init]){
@@ -70,11 +90,11 @@
 }
 
 - (void) initButtons{
-    if(self.buildingInfo.commodities==nil)return ;
-    NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:self.buildingInfo.commodities.count];
+    if(self.commodityArray==nil)return ;
+    NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:self.commodityArray.count];
     int i=0;
-    for (;i<self.buildingInfo.commodities.count;++i) {
-        REMManagedBuildingCommodityUsageModel *model = [self.buildingInfo.commodities allObjects][i];
+    for (;i<self.commodityArray.count;++i) {
+        REMManagedBuildingCommodityUsageModel *model = self.commodityArray[i];
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
         //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
         btn.tag=i;
@@ -104,11 +124,16 @@
     }
     if(self.buildingInfo.airQuality!=nil){
         
-        REMAirQualityModel *model = self.buildingInfo.airQuality;
+        //REMManagedBuildingAirQualityModel *model = self.buildingInfo.airQuality;
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
         
         btn.tag=i;
-        NSString *str = [self retrieveCommodityImageName:model.commodity];
+        
+//        REMManagedBuildingCommodityUsageModel *commodityUsage = [[REMManagedBuildingCommodityUsageModel alloc] init];
+//        commodityUsage.id = model.commodityId;
+//        
+//        NSString *str = [self retrieveCommodityImageName:commodityUsage];
+        NSString *str = @"PM2.5";
         //btn.showsTouchWhenHighlighted=YES;
         btn.adjustsImageWhenHighlighted=YES;
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -261,15 +286,13 @@
 - (void)initCommodityController
 {
     if(self.childViewControllers.count>0)return;
-    int count=0;
-    if (self.buildingInfo.commodities!=nil) {
-        count=self.buildingInfo.commodities.count;
-    }
+    int count= self.commodityArray==nil ? 0:self.commodityArray.count;
+    
     CGRect frame=CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.view.frame.size.width, self.view.frame.size.height+kBuildingCommodityViewTop);
     int i=0;
 
     for (; i<count; ++i) {
-        REMManagedBuildingCommodityUsageModel *model = [self.buildingInfo.commodities allObjects][i];
+        REMManagedBuildingCommodityUsageModel *model = self.commodityArray[i];
         REMBuildingCommodityViewController *controller=[[REMBuildingCommodityViewController alloc]init];
         controller.commodityInfo=model;
         controller.buildingInfo=self.buildingInfo;
@@ -540,14 +563,14 @@
         }
     } else {
         stringFormat = REMIPadLocalizedString(@"Weibo_ContentOfPM25");
-        REMAirQualityModel *model = self.buildingInfo.airQuality;
-        NSString* commodityName = model.commodity.comment;
-        NSString* outdoorVal = [model.outdoor.dataValue isEqual:[NSNull null]] ? nil : model.outdoor.dataValue.stringValue;
-        NSString* outdoorUom = model.outdoor.uom.comment;
-        NSString* honeywellVal = [model.honeywell.dataValue isEqual:[NSNull null]] ? nil : model.honeywell.dataValue.stringValue;
-        NSString* honeywellUom = model.honeywell.uom.comment;
-        NSString* mayairVal = [model.mayair.dataValue isEqual:[NSNull null]] ? nil : model.mayair.dataValue.stringValue;
-        NSString* mayairUom = model.mayair.uom.comment;
+        REMManagedBuildingAirQualityModel *model = self.buildingInfo.airQuality;
+        NSString* commodityName = model.commodityName;
+        NSString* outdoorVal = model.outdoorValue == nil ? nil : model.outdoorValue.stringValue;
+        NSString* outdoorUom = model.outdoorUom;
+        NSString* honeywellVal = model.honeywellValue == nil ? nil : model.honeywellValue.stringValue;
+        NSString* honeywellUom = model.honeywellUom;
+        NSString* mayairVal = model.mayairValue == nil ? nil : model.mayairValue.stringValue;
+        NSString* mayairUom = model.mayairUom;
         if (commodityName == nil || outdoorUom == nil || outdoorVal == nil || honeywellUom == nil || honeywellVal == nil || mayairUom == nil || mayairVal == nil) {
             stringFormat = REMIPadLocalizedString(@"BuildingChart_NoData");
         } else {

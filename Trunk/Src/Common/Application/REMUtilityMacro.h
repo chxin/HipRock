@@ -125,6 +125,6 @@
 /**
  *  Default message map
  */
-#define REMNetworkMessageMap REMDataAccessMessageMake(@"Common_NetServerError",@"Common_NetConnectionFailed",@"Common_NetNoConnection",@"")
+#define REMNetworkMessageMap REMDataAccessMessageMake(@"Common_NetNoConnection",@"Common_NetConnectionFailed",@"Common_NetServerError",@"")
 
 #endif

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="REMManageBuildingAirQualityModel" representedClassName="REMManageBuildingAirQualityModel" syncable="YES">
+    <entity name="REMManagedAdministratorModel" representedClassName="REMManagedAdministratorModel" syncable="YES">
+        <attribute name="realName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="customer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedCustomerModel" inverseName="administrators" inverseEntity="REMManagedCustomerModel" syncable="YES"/>
+    </entity>
+    <entity name="REMManagedBuildingAirQualityModel" representedClassName="REMManagedBuildingAirQualityModel" syncable="YES">
         <attribute name="commodityCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="commodityId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="commodityName" optional="YES" attributeType="String" syncable="YES"/>
@@ -11,11 +16,6 @@
         <attribute name="outdoorUom" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="outdoorValue" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="building" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedBuildingModel" inverseName="airQuality" inverseEntity="REMManagedBuildingModel" syncable="YES"/>
-    </entity>
-    <entity name="REMManagedAdministratorModel" representedClassName="REMManagedAdministratorModel" syncable="YES">
-        <attribute name="realName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <relationship name="customer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedCustomerModel" inverseName="administrators" inverseEntity="REMManagedCustomerModel" syncable="YES"/>
     </entity>
     <entity name="REMManagedBuildingCommodityUsageModel" representedClassName="REMManagedBuildingCommodityUsageModel" syncable="YES">
         <attribute name="carbonUom" optional="YES" attributeType="String" syncable="YES"/>
@@ -48,7 +48,7 @@
         <attribute name="pathLevel" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="province" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timezoneId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <relationship name="airQuality" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManageBuildingAirQualityModel" inverseName="building" inverseEntity="REMManageBuildingAirQualityModel" syncable="YES"/>
+        <relationship name="airQuality" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedBuildingAirQualityModel" inverseName="building" inverseEntity="REMManagedBuildingAirQualityModel" syncable="YES"/>
         <relationship name="commodities" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="REMManagedBuildingCommodityUsageModel" inverseName="building" inverseEntity="REMManagedBuildingCommodityUsageModel" syncable="YES"/>
         <relationship name="dashboards" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="REMManagedDashboardModel" inverseName="building" inverseEntity="REMManagedDashboardModel" syncable="YES"/>
         <relationship name="electricityUsageThisMonth" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="REMManagedBuildingCommodityUsageModel" syncable="YES"/>
@@ -141,7 +141,7 @@
     </entity>
     <fetchRequest name="FetchEnergyDataByKey" entity="REMManagedEnergyDataModel" predicateString="key == &quot;$key&quot;"/>
     <elements>
-        <element name="REMManageBuildingAirQualityModel" positionX="0" positionY="0" width="128" height="195"/>
+        <element name="REMManagedBuildingAirQualityModel" positionX="0" positionY="0" width="128" height="193"/>
         <element name="REMManagedAdministratorModel" positionX="0" positionY="0" width="128" height="90"/>
         <element name="REMManagedBuildingCommodityUsageModel" positionX="0" positionY="0" width="128" height="270"/>
         <element name="REMManagedBuildingModel" positionX="0" positionY="0" width="128" height="315"/>

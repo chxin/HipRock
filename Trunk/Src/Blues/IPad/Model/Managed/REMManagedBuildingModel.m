@@ -7,7 +7,7 @@
 //
 
 #import "REMManagedBuildingModel.h"
-#import "REMManageBuildingAirQualityModel.h"
+#import "REMManagedBuildingAirQualityModel.h"
 #import "REMManagedBuildingCommodityUsageModel.h"
 #import "REMManagedBuildingPictureModel.h"
 #import "REMManagedDashboardModel.h"
