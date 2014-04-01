@@ -53,9 +53,11 @@ const static NSString *BUILDOPTION = @"Release";
     return [REMAppConfig.currentDataSource[@"timeout"] integerValue];;
 }
 
--(NSInteger)requestLogMode
+-(NSNumber *)requestLogMode
 {
-    return [REMAppConfig.currentDataSource[@"logRequest"] integerValue];
+    NSNumber *value = [REMAppConfig.currentDataSource objectForKey:@"debug-logmode"];
+    
+    return value;
 }
 
 @end

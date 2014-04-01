@@ -244,6 +244,13 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     [self setTextField:textField backgroundImage:REMIMG_LoginTextField_Focus];
+    
+    if([textField isEqual:self.userNameTextField]){
+        self.userNameErrorLabel.text = @"";
+    }
+    else{
+        self.passwordErrorLabel.text = @"";
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField

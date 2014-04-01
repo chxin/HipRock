@@ -17,7 +17,7 @@
 @property (nonatomic,strong) NSDictionary *services;
 
 @property (nonatomic,readonly) NSInteger requestTimeout;
-@property (nonatomic,readonly) NSInteger requestLogMode;
+@property (nonatomic,readonly) NSNumber *requestLogMode;
 
 
 
