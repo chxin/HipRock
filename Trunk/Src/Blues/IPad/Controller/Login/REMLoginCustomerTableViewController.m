@@ -35,7 +35,9 @@ static NSString *CellIdentifier = @"loginCustomerCell";
     
     self.navigationItem.title = REMIPadLocalizedString(@"Login_CustomerSelectionTitle");
     if (self.customerArray==nil) {
-        self.customerArray=(NSArray *)(REMAppContext.currentUser.customers.allObjects);
+        self.customerArray= [REMAppContext.currentUser.customers.allObjects sortedArrayUsingComparator:^NSComparisonResult(REMManagedCustomerModel *c1, REMManagedCustomerModel *c2) {
+            return [c1.id compare:c2.id];
+        }];
     }
 }
 

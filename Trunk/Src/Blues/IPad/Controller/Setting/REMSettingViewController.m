@@ -291,7 +291,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"settingCustomerSelectionSegue"]==YES){
         REMSettingCustomerSelectionViewController *selectionVc= segue.destinationViewController;
-        selectionVc.customerArray=[REMAppContext.currentUser.customers allObjects];
+        selectionVc.customerArray = [REMAppContext.currentUser.customers.allObjects sortedArrayUsingComparator:^NSComparisonResult(REMManagedCustomerModel *c1, REMManagedCustomerModel *c2) {
+            return [c1.id compare:c2.id];
+        }];
         //selectionVc.splashController=self.splashScreenController;
         //selectionVc.parentNavigationController=self.mainNavigationController;
         selectionVc.settingController=self;

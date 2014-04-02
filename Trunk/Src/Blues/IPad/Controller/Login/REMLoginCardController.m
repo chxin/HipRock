@@ -153,6 +153,7 @@
             
             //NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
             NSArray *customers = validationResult.managedUser.customers.allObjects;
+            
             NSUInteger customerCount = validationResult.managedUser.customers.count;
             if(customerCount<=0){
                 [REMAlertHelper alert:REMIPadLocalizedString(@"Login_NoCustomer")];
