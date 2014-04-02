@@ -93,9 +93,9 @@
     self.totalLabel.data=commodityUsage;
     
     REMEnergyUsageDataModel *carbonUsage = [[REMEnergyUsageDataModel alloc]init];
-    commodityUsage.dataValue = model.carbonValue;
-    commodityUsage.uom = [[REMUomModel alloc]init];
-    commodityUsage.uom.code=model.carbonUom;
+    carbonUsage.dataValue = model.carbonValue;
+    carbonUsage.uom = [[REMUomModel alloc]init];
+    carbonUsage.uom.code=model.carbonUom;
     self.carbonLabel.data=carbonUsage;
     
     REMRankingDataModel *rankingUsage = [[REMRankingDataModel alloc]init];

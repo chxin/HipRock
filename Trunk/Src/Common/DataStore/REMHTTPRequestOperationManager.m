@@ -102,6 +102,7 @@ static NSOperationQueue *queue;
     
     NSMutableSet *acceptableContentTypes = [NSMutableSet setWithSet:responseSerializer.acceptableContentTypes];
     [acceptableContentTypes addObject:@"text/html"];
+    [acceptableContentTypes addObject:@"application/json"];
     responseSerializer.acceptableContentTypes = acceptableContentTypes;
     
     operation.responseSerializer = responseSerializer;

@@ -203,7 +203,7 @@ const NSInteger kWeiboMaxLength = 140;
 -(void)sendClicked:(id)sender {
     //NetworkStatus reachability = [REMHttpHelper checkCurrentNetworkStatus];
     
-    [REMAppContext.sharedRequestOperationManager HEAD:@"http://open.weibo.com" parameters:nil success:^(AFHTTPRequestOperation *operation) {
+    [REMAppContext.sharedRequestOperationManager HEAD:@"http://api.weibo.com" parameters:nil success:^(AFHTTPRequestOperation *operation) {
         if (![Weibo.weibo isAuthenticated]) {
             //        [REMAlertHelper alert:@"未绑定微博账户。"];
             [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {

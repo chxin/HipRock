@@ -83,7 +83,7 @@
 
 
 - (void)persistPinnedWidget:(NSArray *)pinnedWidgetArray intoBuilding:(REMManagedBuildingModel *)building{
-    if (pinnedWidgetArray!=nil && [pinnedWidgetArray isEqual:[NSNull null]]==NO) {
+    if (!REMIsNilOrNull(pinnedWidgetArray)) {
         
         for (NSDictionary *relation in pinnedWidgetArray) {
             

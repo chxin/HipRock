@@ -14,9 +14,7 @@
 
 @property (nonatomic,strong) NSArray *detailLabelArray;
 
-
-
-@property (nonatomic,weak) REMAirQualityModel *airQuality;
+//@property (nonatomic,weak) REMAirQualityModel *airQuality;
 
 @end
 

@@ -169,7 +169,6 @@
 		7A39D62318B5A7F200CC9D5D /* REMWidgetMaxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E11B18B44CBB00A13464 /* REMWidgetMaxViewController.m */; };
 		7A39D62418B5A7F200CC9D5D /* REMWidgetMonthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E11D18B44CBB00A13464 /* REMWidgetMonthPickerViewController.m */; };
 		7A39D62518B5A7F200CC9D5D /* REMAirQualityDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E12118B44CBB00A13464 /* REMAirQualityDataModel.m */; };
-		7A39D62618B5A7F200CC9D5D /* REMAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E12318B44CBB00A13464 /* REMAirQualityModel.m */; };
 		7A39D62718B5A7F200CC9D5D /* REMAverageUsageDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E12518B44CBB00A13464 /* REMAverageUsageDataModel.m */; };
 		7A39D62818B5A7F200CC9D5D /* REMBuildingCoverWidgetRelationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E12718B44CBB00A13464 /* REMBuildingCoverWidgetRelationModel.m */; };
 		7A39D62B18B5A7F200CC9D5D /* REMBuildingTimeRangeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E12D18B44CBB00A13464 /* REMBuildingTimeRangeDataModel.m */; };
@@ -382,7 +381,6 @@
 		7A63E21C18B44CBD00A13464 /* REMWidgetMaxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E11B18B44CBB00A13464 /* REMWidgetMaxViewController.m */; };
 		7A63E21D18B44CBD00A13464 /* REMWidgetMonthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E11D18B44CBB00A13464 /* REMWidgetMonthPickerViewController.m */; };
 		7A63E21E18B44CBD00A13464 /* REMAirQualityDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E12118B44CBB00A13464 /* REMAirQualityDataModel.m */; };
-		7A63E21F18B44CBD00A13464 /* REMAirQualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E12318B44CBB00A13464 /* REMAirQualityModel.m */; };
 		7A63E22018B44CBD00A13464 /* REMAverageUsageDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E12518B44CBB00A13464 /* REMAverageUsageDataModel.m */; };
 		7A63E22118B44CBD00A13464 /* REMBuildingCoverWidgetRelationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E12718B44CBB00A13464 /* REMBuildingCoverWidgetRelationModel.m */; };
 		7A63E22418B44CBD00A13464 /* REMBuildingTimeRangeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E12D18B44CBB00A13464 /* REMBuildingTimeRangeDataModel.m */; };
@@ -1060,8 +1058,6 @@
 		7A63E11D18B44CBB00A13464 /* REMWidgetMonthPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetMonthPickerViewController.m; sourceTree = "<group>"; };
 		7A63E12018B44CBB00A13464 /* REMAirQualityDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAirQualityDataModel.h; sourceTree = "<group>"; };
 		7A63E12118B44CBB00A13464 /* REMAirQualityDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAirQualityDataModel.m; sourceTree = "<group>"; };
-		7A63E12218B44CBB00A13464 /* REMAirQualityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAirQualityModel.h; sourceTree = "<group>"; };
-		7A63E12318B44CBB00A13464 /* REMAirQualityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAirQualityModel.m; sourceTree = "<group>"; };
 		7A63E12418B44CBB00A13464 /* REMAverageUsageDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAverageUsageDataModel.h; sourceTree = "<group>"; };
 		7A63E12518B44CBB00A13464 /* REMAverageUsageDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAverageUsageDataModel.m; sourceTree = "<group>"; };
 		7A63E12618B44CBB00A13464 /* REMBuildingCoverWidgetRelationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingCoverWidgetRelationModel.h; sourceTree = "<group>"; };
@@ -2408,8 +2404,6 @@
 				7A24E04C18E02877002F15E1 /* REMBuildingInfoUpdateModel.m */,
 				7A63E12018B44CBB00A13464 /* REMAirQualityDataModel.h */,
 				7A63E12118B44CBB00A13464 /* REMAirQualityDataModel.m */,
-				7A63E12218B44CBB00A13464 /* REMAirQualityModel.h */,
-				7A63E12318B44CBB00A13464 /* REMAirQualityModel.m */,
 				7A63E12418B44CBB00A13464 /* REMAverageUsageDataModel.h */,
 				7A63E12518B44CBB00A13464 /* REMAverageUsageDataModel.m */,
 				7A63E12618B44CBB00A13464 /* REMBuildingCoverWidgetRelationModel.h */,
@@ -3943,7 +3937,6 @@
 				7A39D62318B5A7F200CC9D5D /* REMWidgetMaxViewController.m in Sources */,
 				7A39D62418B5A7F200CC9D5D /* REMWidgetMonthPickerViewController.m in Sources */,
 				7A39D62518B5A7F200CC9D5D /* REMAirQualityDataModel.m in Sources */,
-				7A39D62618B5A7F200CC9D5D /* REMAirQualityModel.m in Sources */,
 				7A39D62718B5A7F200CC9D5D /* REMAverageUsageDataModel.m in Sources */,
 				7A39D62818B5A7F200CC9D5D /* REMBuildingCoverWidgetRelationModel.m in Sources */,
 				7ABA161118DAB255001624F8 /* REMDataStoreTests.m in Sources */,
@@ -4258,7 +4251,6 @@
 				7A63E21518B44CBD00A13464 /* REMWidgetMultiTimespanDelegator.m in Sources */,
 				7A63E23D18B44CBD00A13464 /* REMWidgetCommoditySearchModel.m in Sources */,
 				7A63E21418B44CBD00A13464 /* REMWidgetLabelingDelegator.m in Sources */,
-				7A63E21F18B44CBD00A13464 /* REMAirQualityModel.m in Sources */,
 				7A9EAA9A18D2946300EF1B85 /* Resources.m in Sources */,
 				7A63E21C18B44CBD00A13464 /* REMWidgetMaxViewController.m in Sources */,
 				EFD947041839DCBB00E9EC50 /* DCContext.m in Sources */,

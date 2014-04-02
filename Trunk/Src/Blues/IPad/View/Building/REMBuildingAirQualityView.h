@@ -7,7 +7,6 @@
  --------------------------------------------------------------------------*///
 
 #import "REMBuildingCommodityView.h"
-#import "REMAirQualityModel.h"
 #import "REMBuildingTitleLabelView.h"
 
 #import "REMBuildingAirQualityChartViewController.h"

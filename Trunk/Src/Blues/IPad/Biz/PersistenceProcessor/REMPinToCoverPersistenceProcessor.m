@@ -42,7 +42,7 @@
 - (id)fetch{
     NSMutableArray *array = [NSMutableArray array];
     for (REMManagedBuildingCommodityUsageModel *commodityInfo in [self.buildingInfo.commodities allObjects]) {
-        [array arrayByAddingObjectsFromArray:[commodityInfo.pinnedWidgets allObjects]];
+        array = [NSMutableArray arrayWithArray:[array arrayByAddingObjectsFromArray:[commodityInfo.pinnedWidgets allObjects]]];
     }
     
     
