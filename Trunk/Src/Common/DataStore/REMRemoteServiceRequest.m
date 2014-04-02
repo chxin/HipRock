@@ -135,31 +135,35 @@
     if(REMAppConfig.requestLogMode != nil && [REMAppConfig.requestLogMode integerValue] > 0) {
         NSURLRequest *request = operation.request;
         
-        NSLog(@"-------------------------------------->");
-        NSLog(@"REQ:%@", [request.URL absoluteString]);
+        NSMutableString *log = [NSMutableString stringWithString:@"---------------------------------\n"];
+        
+        [log appendFormat:@"REQ:%@\n", [request.URL absoluteString]];
         
         if([REMAppConfig.requestLogMode integerValue] > 1){
-            NSLog(@"User-Agent:%@", request.allHTTPHeaderFields[@"User-Agent"]);
-            NSLog(@"Blues-Version:%@", request.allHTTPHeaderFields[@"Blues-Version"]);
-            NSLog(@"Blues-User:%@", request.allHTTPHeaderFields[@"Blues-User"]);
-            NSLog(@"BODY:%@",[[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding] );
+            //[log appendFormat:@" User-Agent    : %@\n", request.allHTTPHeaderFields[@"User-Agent"]];
+            //[log appendFormat:@" Blues-Version : %@\n", request.allHTTPHeaderFields[@"Blues-Version"]];
+            [log appendFormat:@"-TOKN:%@\n", request.allHTTPHeaderFields[@"Blues-User"]];
+            [log appendFormat:@"-BODY:%@\n", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]];
         }
-        //NSLog(@"->");
+        
+        //[log appendString:@"\n"];
+        
         if(error == nil){
             NSString *logContent = nil;
             if(self.dataStore.responseType == REMServiceResponseJson){
                 logContent = [REMAppConfig.requestLogMode integerValue] > 1 ? operation.responseString : [NSString stringWithFormat:@"%@..",[operation.responseString substringToIndex:64]];
             }
             else{
-                logContent = [NSString stringWithFormat:@"Data: %d bytes", [operation.responseData length]];
+                logContent = [NSString stringWithFormat:@"%d bytes data", [operation.responseData length]];
             }
             
-            NSLog(@"RSP:%@", logContent);
+            [log appendFormat:@"RSP:%@\n", logContent];
         }
         else{
-            NSLog(@"RSP-ERROR: %@", [error description]);
+            [log appendFormat:@"RSP:(ERROR) %@\n", [error description]];
         }
-        //NSLog(@"-----------------------------------");
+        
+        NSLog(@"%@",log);
     }
 }
 

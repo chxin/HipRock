@@ -289,6 +289,9 @@
     }
     
     REMManagedBuildingAirQualityModel *airModel = [self create:[REMManagedBuildingAirQualityModel class]];
+    airModel.honeywellValue = nil;
+    airModel.mayairValue = nil;
+    airModel.outdoorValue = nil;
     
     NSDictionary *commodity = airData[@"AirQualityCommodity"];
     NSDictionary *honeywell = airData[@"HoneywellData"];
@@ -296,8 +299,8 @@
     NSDictionary *outdoor = airData[@"OutdoorData"];
     
     airModel.commodityCode = commodity[@"Code"] ;
-    airModel.commodityId = @(12);//commodity[@"Id"];
-    airModel.commodityName = NULL_TO_NIL(commodity[@"Name"]);
+    airModel.commodityId = commodity[@"Id"];
+    airModel.commodityName = NULL_TO_NIL(commodity[@"Comment"]);
     
     if(!REMIsNilOrNull(honeywell)){
         NSDictionary *uom = honeywell[@"Uom"];

@@ -12,25 +12,25 @@
 
 - (id)persist:(NSDictionary *)dictionary
 {
-    self.airQualityModel.commodityId = @(12);//commodity[@"Id"];
+//    self.airQualityModel.commodityId = @(12);//commodity[@"Id"];
     
     if(REMIsNilOrNull(dictionary)){
         return self.airQualityModel;
     }
     
     
-    NSDictionary *commodity = dictionary[@"AirQualityCommodity"];
+//    NSDictionary *commodity = dictionary[@"AirQualityCommodity"];
     NSDictionary *honeywell = dictionary[@"HoneywellData"];
-    NSDictionary *mayair = dictionary[@"Maydictionary"];
+    NSDictionary *mayair = dictionary[@"MayAirData"];
     NSDictionary *outdoor = dictionary[@"OutdoorData"];
     
 //    if(REMIsNilOrNull(commodity) && REMIsNilOrNull(honeywell) && REMIsNilOrNull(mayair) && REMIsNilOrNull(outdoor)){
 //        return nil;
 //    }
     
-    self.airQualityModel.commodityCode = REMIsNilOrNull(commodity)?nil:commodity[@"Code"] ;
-    self.airQualityModel.commodityId = @(12);//commodity[@"Id"];
-    self.airQualityModel.commodityName = REMIsNilOrNull(commodity)?nil:NULL_TO_NIL(commodity[@"Name"]);
+//    self.airQualityModel.commodityCode = REMIsNilOrNull(commodity)?nil:commodity[@"Code"] ;
+//    self.airQualityModel.commodityId = @(12);//commodity[@"Id"];
+//    self.airQualityModel.commodityName = REMIsNilOrNull(commodity)?nil:NULL_TO_NIL(commodity[@"Name"]);
     
     if(!REMIsNilOrNull(honeywell)){
         NSDictionary *uom = honeywell[@"Uom"];

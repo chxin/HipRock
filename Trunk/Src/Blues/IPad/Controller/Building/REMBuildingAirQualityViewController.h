@@ -15,7 +15,7 @@
 @property (nonatomic,weak) REMManagedBuildingAirQualityModel *airQualityInfo;
 @property (nonatomic) CGRect viewFrame;
 @property (nonatomic,weak) REMManagedBuildingModel *buildingInfo;
-//@property (nonatomic,strong) REMAirQualityModel *airQualityUsage;
+@property (nonatomic,strong) REMManagedBuildingAirQualityModel *airQualityUsage;
 @property (nonatomic) BOOL dataLoadComplete;
 @property (nonatomic) NSUInteger index;
 - (void) showChart;

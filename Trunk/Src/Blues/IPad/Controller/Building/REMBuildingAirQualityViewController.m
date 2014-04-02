@@ -46,7 +46,7 @@
     [self initTotalValue];
     [self initDetailValue];
     [self initChartContainer];
-    if(self.airQualityInfo==nil){
+    if(self.airQualityUsage==nil){
         [self loadTotalUsageByBuildingId:self.buildingInfo.id];
     }
     else{
@@ -70,7 +70,7 @@
 - (void)addDataLabel{
 //    REMAirQualityModel *model=self.airQualityUsage;
     
-    REMManagedBuildingAirQualityModel *airModel = self.airQualityInfo;
+    REMManagedBuildingAirQualityModel *airModel = self.airQualityUsage;
     
     REMEnergyUsageDataModel *honeywellData = [[REMEnergyUsageDataModel alloc]init];
     honeywellData.dataValue = airModel.honeywellValue;
@@ -78,14 +78,14 @@
     honeywellData.uom.code=airModel.honeywellUom;
     
     REMEnergyUsageDataModel *mayairData = [[REMEnergyUsageDataModel alloc]init];
-    honeywellData.dataValue = airModel.mayairValue;
-    honeywellData.uom = [[REMUomModel alloc]init];
-    honeywellData.uom.code=airModel.mayairUom;
+    mayairData.dataValue = airModel.mayairValue;
+    mayairData.uom = [[REMUomModel alloc]init];
+    mayairData.uom.code=airModel.mayairUom;
     
     REMEnergyUsageDataModel *outdoorData = [[REMEnergyUsageDataModel alloc]init];
-    honeywellData.dataValue = airModel.outdoorValue;
-    honeywellData.uom = [[REMUomModel alloc]init];
-    honeywellData.uom.code=airModel.outdoorUom;
+    outdoorData.dataValue = airModel.outdoorValue;
+    outdoorData.uom = [[REMUomModel alloc]init];
+    outdoorData.uom.code=airModel.outdoorUom;
     
     self.totalLabel.data=honeywellData;
     self.honeywellLabel.data=honeywellData;
@@ -121,7 +121,7 @@
 //            }
 //        }
         
-        self.airQualityInfo = data;
+        self.airQualityUsage = data;
         
         
         [self.totalLabel hideLoading];
@@ -298,7 +298,7 @@
         //NSLog(@"view frame:%@",NSStringFromCGRect(controller1.viewFrame));
         controller1.chartHandlerClass=[REMBuildingAirQualityChartViewController class];
         controller1.buildingId=self.buildingInfo.id;
-        controller1.commodityId=self.airQualityInfo.commodityId;
+        controller1.commodityId=self.airQualityUsage.commodityId;
         [self addChildViewController:controller1];
     }
 }
