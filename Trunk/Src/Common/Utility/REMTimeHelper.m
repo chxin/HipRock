@@ -345,12 +345,8 @@
         NSDateComponents *firstDayOfThisWeek = [calendar components:(NSWeekdayCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
         [firstDayOfThisWeek setDay:([todayEndComps day] - ([todayEndComps weekday] - 2))];
         
-        NSDateComponents *firstDayOfLastWeek = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[calendar dateFromComponents: firstDayOfThisWeek]];
-        [firstDayOfLastWeek setDay:firstDayOfThisWeek.day-7];
-        
-        
         end = [calendar dateFromComponents:firstDayOfThisWeek];
-        start = [calendar dateFromComponents:firstDayOfLastWeek];
+        start = [REMTimeHelper getDate:end daysAhead:-7];
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeThisMonth)
     {
