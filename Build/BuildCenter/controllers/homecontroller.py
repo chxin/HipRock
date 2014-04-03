@@ -24,7 +24,7 @@ class Home:
 		ir=model.get_latest_ir()
 		release=model.get_latest_release()
 
-		return render.index(release,ir,db,uagt)
+		return render.index(release,ir,db)
 
 class DailyBuild:
 	def GET(self):
