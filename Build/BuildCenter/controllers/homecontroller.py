@@ -6,7 +6,6 @@ t_globals = {
     'datestr': web.datestr,  
     'cookie': web.cookies, 
     'archive' : 'http://10.177.206.47/archive',
-    'uagt' : web.ctx.env.get('HTTP_USER_AGENT'),
 }
 render = web.template.render('templates', base='master', globals=t_globals)
 
@@ -15,15 +14,17 @@ def parse_globals():
 	if 'iPad; CPU OS 7_1' in uagent:
 		t_globals['archive'] = 'https://10.177.206.47/archive'
 
+	return uagent
+
 class Home:
 	def GET(self):
-		parse_globals()
+		uagt = parse_globals()
 
 		db=model.get_top_db(True)
 		ir=model.get_latest_ir()
 		release=model.get_latest_release()
 
-		return render.index(release,ir,db)
+		return render.index(release,ir,db,uagt)
 
 class DailyBuild:
 	def GET(self):
