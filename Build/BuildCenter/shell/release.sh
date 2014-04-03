@@ -12,7 +12,7 @@ buildroot=/Users/buildserver/BuildFolder
 projectdir=$buildroot/Blues/
 makedir=$buildroot/Shell/
 archivefolder=$buildroot/Archives
-archiveurl=http://10.177.206.47:81/archive
+archiveurl=http://10.177.206.47/archive
 
 #copy ir version to release and delete *.ipa
 templatefolder=$buildroot/Templates

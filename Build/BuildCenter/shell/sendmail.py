@@ -9,7 +9,7 @@ server = '10.177.1.111'
 port = 25
 domain='@schneider-electric.com'
 
-archive = 'http://10.177.206.47:81/archive'
+archive = 'http://10.177.206.47/archive'
 
 
 def sendmail(sender,tos,ccs,logpath):

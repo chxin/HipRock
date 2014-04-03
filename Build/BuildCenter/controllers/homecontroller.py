@@ -5,14 +5,14 @@ from models import model
 t_globals = {  
     'datestr': web.datestr,  
     'cookie': web.cookies, 
-    'archive' : 'http://10.177.206.47:81/archive',
+    'archive' : 'http://10.177.206.47/archive',
 }
 render = web.template.render('templates', base='master', globals=t_globals)
 
 def parse_globals():
 	uagent = web.ctx.env.get('HTTP_USER_AGENT')
 	if 'iPad; CPU OS 7_1' in uagent:
-		t_globals['archive'] = 'https://10.177.206.47:81/archive'
+		t_globals['archive'] = 'https://10.177.206.47/archive'
 
 class Home:
 	def GET(self):
@@ -62,7 +62,7 @@ class Release:
 class ReleaseVersion:
 	def GET(self,version):
 		parse_globals()
-		
+
 		result = model.get_release_builds(version)
 		groups = model.group_versions(3)
 		return render.release(result,groups,version)
