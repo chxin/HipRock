@@ -18,7 +18,7 @@ def parse_globals():
 
 class Home:
 	def GET(self):
-		uagt = parse_globals()
+		parse_globals()
 
 		db=model.get_top_db(True)
 		ir=model.get_latest_ir()
