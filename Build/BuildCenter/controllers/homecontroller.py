@@ -15,6 +15,10 @@ class Home:
 		ir=model.get_latest_ir()
 		release=model.get_latest_release()
 
+		uagent = web.ctx.env.get('HTTP_USER_AGENT')
+		if '7.1' in uagent:
+			t_globals['archive'] = 'https://10.177.206.47:81/archive'
+
 		return render.index(release,ir,db)
 
 class DailyBuild:
