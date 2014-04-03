@@ -6,6 +6,7 @@ t_globals = {
     'datestr': web.datestr,  
     'cookie': web.cookies, 
     'archive' : 'http://10.177.206.47/archive',
+    'uagt' : web.ctx.env.get('HTTP_USER_AGENT'),
 }
 render = web.template.render('templates', base='master', globals=t_globals)
 
