@@ -34,6 +34,10 @@
     
     NSURLRequest *request = [manager.requestSerializer requestBySerializingRequest:[self buildRequest] withParameters:self.dataStore.parameter error:nil] ;
     
+#ifdef DEBUG
+    NSLog(@"Outgoing request: %@", request.URL.absoluteString);
+#endif
+    
     REMHTTPRequestOperation *operation = [manager RequestOperationWithRequest:request responseType:self.dataStore.responseType success:^(AFHTTPRequestOperation *operation, id responseObject) {
 #ifdef DEBUG
         [self logOperation:operation withError:nil];
