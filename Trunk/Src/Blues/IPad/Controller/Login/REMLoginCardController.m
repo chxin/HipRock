@@ -182,6 +182,13 @@
 
 - (void)textFieldChanged:(id)sender
 {
+    if([sender isEqual:self.userNameTextField]){
+        self.userNameErrorLabel.text = @"";
+    }
+    if([sender isEqual:self.passwordTextField]){
+        self.passwordErrorLabel.text = @"";
+    }
+    
     NSString *username = [self.userNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *password = [self.passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
