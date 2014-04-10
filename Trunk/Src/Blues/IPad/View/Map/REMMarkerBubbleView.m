@@ -141,11 +141,6 @@
     return REMIsNilOrNull(dataValue) ? nil : [NSString stringWithFormat:REMIPadLocalizedString(@"Map_MarkerBubbleSubtitleFormat"),  formattedDataValue, uom];
 }
 
-
-
-
-
-
 //// Initialization code
 //self.backgroundColor = [UIColor clearColor];
 //

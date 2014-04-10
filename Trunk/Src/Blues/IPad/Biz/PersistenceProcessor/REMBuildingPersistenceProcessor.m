@@ -39,6 +39,7 @@
             [self persistCommodity:buildingOverall[@"CommodityArray"] intoBuilding:buildingModel];
             [self persistDashboard:buildingOverall[@"DashboardList"] intoBuilding:buildingModel];
             [self persistPinnedWidget:buildingOverall[@"WidgetRelation"] intoBuilding:buildingModel];
+            [self persistElectricUsage:buildingOverall[@"ElectricUsageThisMonth"] intoBuilding:buildingModel];
             
             [self persistAirQuality:buildingOverall[@"AirQualitySummary"] intoBuilding:buildingModel];
         }
@@ -324,6 +325,37 @@
     }
     
     building.airQuality = airModel;
+}
+
+-(void)persistElectricUsage:(NSDictionary *)usageData  intoBuilding:(REMManagedBuildingModel *)building
+{
+    if(REMIsNilOrNull(usageData)){
+        return;
+    }
+    
+    REMManagedBuildingCommodityUsageModel *usageModel = [self create:[REMManagedBuildingCommodityUsageModel class]];
+    
+//    NSDictionary *commodityData = usageData[@"Commodity"];
+    NSDictionary *energyData = usageData[@"EnergyUsage"];
+    
+    if(REMIsNilOrNull(energyData)){
+        return;
+    }
+    
+    NSDictionary *uomData = energyData[@"Uom"];
+    
+    if(REMIsNilOrNull(uomData)){
+        return;
+    }
+    
+//    usageModel.id = commodityData[@"Id"];
+//    usageModel.name = NULL_TO_NIL(commodityData[@"Name"]);
+//    usageModel.code = commodityData[@"Code"];
+//    usageModel.comment = commodityData[@"Comment"];
+    usageModel.totalUom = NULL_TO_NIL(uomData[@"Code"]);
+    usageModel.totalValue = NULL_TO_NIL(energyData[@"DataValue"]);
+    
+    building.electricityUsageThisMonth = usageModel;
 }
 
 
