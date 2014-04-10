@@ -181,61 +181,76 @@
         return ;
     }
     REMWidgetTagSearchModel *model=[self tagModel];
-
-    for (int i=0; i<data.targetEnergyData.count; ++i) {
-        REMTimeRange *baseTimeRange=model.timeRangeArray[i];
-        NSDate *validDate = [self firstValidDateFromDate:baseTimeRange.startTime forStep:model.step];
-        REMTargetEnergyData *targetEnergyData=data.targetEnergyData[i];
-        NSMutableArray *newEnergyDataArray = [NSMutableArray array];
-        
-        if (targetEnergyData.energyData.count == 0) {
-            NSMutableArray *newArray = [NSMutableArray array];
+    
+    NSDate* baseDate1stSeries = [self firstValidDateFromDate:[model.timeRangeArray[0] startTime] forStep:model.step];
+    for (int i = 1; i < data.targetEnergyData.count; i++) {
+        NSDate* baseDateSeries = [self firstValidDateFromDate:[model.timeRangeArray[i] startTime] forStep:model.step];
+        NSTimeInterval interval = [baseDate1stSeries timeIntervalSinceDate:baseDateSeries];
+        NSMutableArray* seriesData = [[NSMutableArray alloc]initWithCapacity:[data.targetEnergyData[0] energyData].count];
+        for (int j = 0; j < [data.targetEnergyData[0] energyData].count; j++) {
+            REMEnergyData* oldEnergyData = [data.targetEnergyData[0] energyData][j];
             REMEnergyData *newEnergyData = [[REMEnergyData alloc]init];
-            newEnergyData.localTime=[self firstValidDateFromDate:baseTimeRange.endTime forStep:model.step];
-            newEnergyData.dataValue=nil;
-            newEnergyData.quality = REMEnergyDataQualityGood;
-            [newArray addObject:newEnergyData];
-            targetEnergyData.energyData = newArray;
+            newEnergyData.localTime=[oldEnergyData.localTime dateByAddingTimeInterval:interval];
+            newEnergyData.dataValue=oldEnergyData.dataValue;
+            newEnergyData.quality = oldEnergyData.quality;
+            [seriesData addObject:newEnergyData];
+            newEnergyData.offset = -interval;
         }
-        
-        
-        
-        for (int j=0; [validDate timeIntervalSinceDate:baseTimeRange.endTime]<0;++j) {
-            if (j<targetEnergyData.energyData.count) {
-                REMEnergyData *energyData = targetEnergyData.energyData[j];
-                validDate=[energyData.localTime earlierDate:validDate];
-                if ([validDate timeIntervalSinceDate:baseTimeRange.endTime]>=0) {
-                    break;
-                }
-                
-                if ([energyData.localTime isEqualToDate:validDate]==YES) {
-                    [newEnergyDataArray addObject:energyData];
-                    
-                }
-                else{
-                    REMEnergyData *newEnergyData = [[REMEnergyData alloc]init];
-                    newEnergyData.localTime=[validDate copy];
-                    newEnergyData.dataValue=nil;
-                    newEnergyData.quality = REMEnergyDataQualityGood;
-                    [newEnergyDataArray addObject:newEnergyData];
-                    --j;
-                }
-            }
-            else{
-                //fix bug when first series have only 2 points
-                //and other series have more than 2 points
-                //and first series only miss last point
-                //like first [0,1] ,second [0,1,2]
-                REMEnergyData *newEnergyData = [[REMEnergyData alloc]init];
-                newEnergyData.localTime=[validDate copy];
-                newEnergyData.dataValue=nil;
-                newEnergyData.quality = REMEnergyDataQualityGood;
-                [newEnergyDataArray addObject:newEnergyData];
-            }
-            validDate= [self addDate:validDate byStep:model.step];
-        }
-        targetEnergyData.energyData=newEnergyDataArray;
+        [data.targetEnergyData[i] setEnergyData:seriesData];
     }
+//    for (int i=0; i<data.targetEnergyData.count; ++i) {
+//        REMTimeRange *baseTimeRange=model.timeRangeArray[i];
+//        NSDate *validDate = [self firstValidDateFromDate:baseTimeRange.startTime forStep:model.step];
+//        REMTargetEnergyData *targetEnergyData=data.targetEnergyData[i];
+//        NSMutableArray *newEnergyDataArray = [NSMutableArray array];
+//        
+//        if (targetEnergyData.energyData.count == 0) {
+//            NSMutableArray *newArray = [NSMutableArray array];
+//            REMEnergyData *newEnergyData = [[REMEnergyData alloc]init];
+//            newEnergyData.localTime=[self firstValidDateFromDate:baseTimeRange.endTime forStep:model.step];
+//            newEnergyData.dataValue=nil;
+//            newEnergyData.quality = REMEnergyDataQualityGood;
+//            [newArray addObject:newEnergyData];
+//            targetEnergyData.energyData = newArray;
+//        }
+//        
+//        
+//        
+//        for (int j=0; [validDate timeIntervalSinceDate:baseTimeRange.endTime]<0;++j) {
+//            if (j<targetEnergyData.energyData.count) {
+//                REMEnergyData *energyData = targetEnergyData.energyData[j];
+//                validDate=[energyData.localTime earlierDate:validDate];
+//                if ([validDate timeIntervalSinceDate:baseTimeRange.endTime]>=0) {
+//                    break;
+//                }
+//                
+//                if ([energyData.localTime isEqualToDate:validDate]==YES) {
+//                    [newEnergyDataArray addObject:energyData];
+//                
+//                } else{
+//                    REMEnergyData *newEnergyData = [[REMEnergyData alloc]init];
+//                    newEnergyData.localTime=[validDate copy];
+//                    newEnergyData.dataValue=nil;
+//                    newEnergyData.quality = REMEnergyDataQualityGood;
+//                    [newEnergyDataArray addObject:newEnergyData];
+//                    --j;
+//                }
+//            }
+//            else{
+//                //fix bug when first series have only 2 points
+//                //and other series have more than 2 points
+//                //and first series only miss last point
+//                //like first [0,1] ,second [0,1,2]
+//                REMEnergyData *newEnergyData = [[REMEnergyData alloc]init];
+//                newEnergyData.localTime=[validDate copy];
+//                newEnergyData.dataValue=nil;
+//                newEnergyData.quality = REMEnergyDataQualityGood;
+//                [newEnergyDataArray addObject:newEnergyData];
+//            }
+//            validDate= [self addDate:validDate byStep:model.step];
+//        }
+//        targetEnergyData.energyData=newEnergyDataArray;
+//    }
 }
 
 - (REMEnergyViewData *)processHourData:(REMEnergyViewData *)data{
@@ -286,33 +301,33 @@
         return [self processHourData:data];
     }
     
-    REMTargetEnergyData *baseData= data.targetEnergyData[0];
-    
-    
-    
-    REMTimeRange *baseTimeRange=model.timeRangeArray[0];
-   
-//    NSDate *minStart = [NSDate date];
-//    NSDate *maxEnd= [NSDate dateWithTimeIntervalSince1970:0];
-
-    for (int i=1; i<data.targetEnergyData.count; ++i) {
-        REMTargetEnergyData *followData=data.targetEnergyData[i];
-        NSMutableArray *energyDataArray=[[NSMutableArray alloc]initWithCapacity:baseData.energyData.count];
-        REMTimeRange *followTimeRange=model.timeRangeArray[i];
-
-        for (int j=0; j<baseData.energyData.count; ++j) {
-            REMEnergyData *energyData=[[REMEnergyData alloc]init];
-            REMEnergyData *origData=baseData.energyData[j];
-            NSDate *newDate = [self deltaTimeIntervalFromBaseTime:baseTimeRange.startTime ToSecondTime:followTimeRange.startTime origTime:origData.localTime];
-            energyData.offset = [origData.localTime timeIntervalSinceDate:newDate];
-            energyData.localTime=newDate;
-            energyData.dataValue=[origData.dataValue copy];
-            energyData.quality=origData.quality;
-            [energyDataArray addObject:energyData];
-            
-        }
-        followData.energyData=energyDataArray;
-    }
+//    REMTargetEnergyData *baseData= data.targetEnergyData[0];
+//    
+//    
+//    
+//    REMTimeRange *baseTimeRange=model.timeRangeArray[0];
+//   
+////    NSDate *minStart = [NSDate date];
+////    NSDate *maxEnd= [NSDate dateWithTimeIntervalSince1970:0];
+//
+//    for (int i=1; i<data.targetEnergyData.count; ++i) {
+//        REMTargetEnergyData *followData=data.targetEnergyData[i];
+//        NSMutableArray *energyDataArray=[[NSMutableArray alloc]initWithCapacity:baseData.energyData.count];
+//        REMTimeRange *followTimeRange=model.timeRangeArray[i];
+//
+//        for (int j=0; j<baseData.energyData.count; ++j) {
+//            REMEnergyData *energyData=[[REMEnergyData alloc]init];
+//            REMEnergyData *origData=baseData.energyData[j];
+//            NSDate *newDate = [self deltaTimeIntervalFromBaseTime:baseTimeRange.startTime ToSecondTime:followTimeRange.startTime origTime:origData.localTime];
+//            energyData.offset = [origData.localTime timeIntervalSinceDate:newDate];
+//            energyData.localTime=newDate;
+//            energyData.dataValue=[origData.dataValue copy];
+//            energyData.quality=origData.quality;
+//            [energyDataArray addObject:energyData];
+//            
+//        }
+//        followData.energyData=energyDataArray;
+//    }
     /*
     for (REMTargetEnergyData *energyData in data.targetEnergyData) {
         REMEnergyData *startData = energyData.energyData[0];
