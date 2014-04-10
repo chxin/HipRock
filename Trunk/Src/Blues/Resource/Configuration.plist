@@ -9,13 +9,13 @@
 		<key>local</key>
 		<dict>
 			<key>url</key>
-			<string>http://10.177.0.79/Mobile/</string>
+			<string>http://10.177.206.79/Mobile/</string>
 			<key>timeout</key>
 			<string>90</string>
 			<key>debug-logmode</key>
 			<integer>2</integer>
 			<key>debug-user</key>
-			<string>SchneiderElectricChina|P@ssw0rdChina</string>
+			<string>SchneiderElectricChina|P@ssw0rd</string>
 		</dict>
 		<key>dev</key>
 		<dict>
@@ -52,7 +52,7 @@
 	<key>CurrentDataSource</key>
 	<dict>
 		<key>Debug</key>
-		<string>test</string>
+		<string>local</string>
 		<key>DailyBuild</key>
 		<string>test</string>
 		<key>Release</key>
