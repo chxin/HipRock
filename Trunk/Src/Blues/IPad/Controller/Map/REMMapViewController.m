@@ -80,8 +80,12 @@
     manager.mainNavigationController = (REMMainNavigationController *)self.navigationController;
     [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessStatus errorStatus) {
         void (^callback)(void) = nil;
-        if(buildingInfoArray != nil){
+        
+        if(errorStatus == REMDataAccessSucceed){
             callback =^{ [self updateView]; };
+        }
+        else{
+            callback = ^{ [self.switchButton setEnabled:NO]; };
         }
         
         [mask hide:callback];
