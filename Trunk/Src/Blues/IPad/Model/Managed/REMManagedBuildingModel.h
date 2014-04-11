@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString * comment;
 @property (nonatomic, retain) NSNumber * hasDataPrivilege;
 @property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) NSNumber * test;
 @property (nonatomic, retain) NSNumber * isQualified;
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSNumber * longitude;

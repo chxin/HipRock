@@ -19,6 +19,7 @@
 @dynamic comment;
 @dynamic hasDataPrivilege;
 @dynamic id;
+@dynamic test;
 @dynamic isQualified;
 @dynamic latitude;
 @dynamic longitude;
