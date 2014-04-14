@@ -61,9 +61,9 @@
             stackedHeights[i] = 0;
         }
         NSMutableDictionary* xDics = [[NSMutableDictionary alloc]init];
-        int seriesAmount = self.series.count;
+        int seriesAmount = self.seriesList.count;
         for (int i = 0; i < seriesAmount; i++) {
-            DCColumnSeries* s = self.series[self.graphContext.stacked ? (seriesAmount-i-1) : i];
+            DCColumnSeries* s = self.seriesList[self.graphContext.stacked ? (seriesAmount-i-1) : i];
             if (s.hidden) continue;
             _DCCoordinateSystem* coordinateSystem = s.coordinate;
             for (int j = start; j<=end; j++) {

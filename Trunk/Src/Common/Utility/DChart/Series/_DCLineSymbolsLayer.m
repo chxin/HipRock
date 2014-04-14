@@ -15,7 +15,7 @@
 @implementation _DCLineSymbolsLayer
 -(NSUInteger)getVisableSeriesCount {
     NSUInteger count = 0;
-    for (DCLineSeries* s in self.series) {
+    for (DCLineSeries* s in self.seriesList) {
         if (!s.hidden) count++;
     }
     return count;
@@ -78,7 +78,7 @@
     CGContextSetBlendMode(ctx, kCGBlendModeNormal);
     CGContextSetAllowsAntialiasing(ctx, YES);
     CGPoint linePoints[end-start+2];
-    for (DCLineSeries* s in self.series) {
+    for (DCLineSeries* s in self.seriesList) {
         if (s.hidden) continue;
         if (start >= s.datas.count) continue;
         
@@ -141,7 +141,7 @@
     }
     
     // 绘制Symbol
-    for (DCLineSeries* s in self.series) {
+    for (DCLineSeries* s in self.seriesList) {
         if (s.hidden) continue;
         CGFloat r, g, b, a;
         [s.color getRed:&r green:&g blue:&b alpha:&a];

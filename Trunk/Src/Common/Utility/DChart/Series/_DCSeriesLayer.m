@@ -23,7 +23,7 @@
                 se.seriesLayer = self;
             }
         }
-        _series = s;
+        _seriesList = s;
         self.masksToBounds = YES;
         _coordinateSystems = coordinateSystems;
     }
@@ -40,7 +40,7 @@
 
 -(NSUInteger)getVisableSeriesCount {
     NSUInteger count = 0;
-    for (DCXYSeries* s in self.series) {
+    for (DCXYSeries* s in self.seriesList) {
         if (!s.hidden) count++;
     }
     return count;

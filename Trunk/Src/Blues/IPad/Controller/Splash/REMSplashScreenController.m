@@ -249,32 +249,32 @@
     
     DWrapperConfig* config = [[DWrapperConfig alloc]init];
     config.step = REMEnergyStepDay;
-    config.stacked = YES;
+    config.stacked = NO;
     config.calendarType = REMCalendarTypeNone;
     config.isUnitOrRatioChart = NO;
     config.isMultiTimeChart = NO;
 //    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
 //    [self.view addSubview:pieWrapper.view];
 //    self.carouselController = pieWrapper;
-    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
-    columnWidget.view.backgroundColor = [UIColor blackColor];
-    columnWidget.view.hasVGridlines = YES;
-    columnWidget.view.graphContext.hGridlineAmount = 4;
-    self.carouselController = columnWidget;
-    [self.view addSubview:columnWidget.view];
+//    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
+//    columnWidget.view.backgroundColor = [UIColor blackColor];
+//    columnWidget.view.hasVGridlines = YES;
+//    columnWidget.view.graphContext.hGridlineAmount = 4;
+//    self.carouselController = columnWidget;
+//    [self.view addSubview:columnWidget.view];
     
-//    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
-//    lineWidget.view.backgroundColor = [UIColor blackColor];
-//    NSMutableArray* bands = [[NSMutableArray alloc]init];
-//    DCRange* bandRange = [[DCRange alloc]initWithLocation:0 length:20];
-//    DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
-//    b.range = bandRange;
-//    b.color = [UIColor colorWithRed:0.5 green:0 blue:0 alpha:0.5];
-//    b.axis = lineWidget.view.yAxisList[0];
-//    [bands addObject:b];
-//    [lineWidget.view setBackgoundBands:bands];
-//    [self.view addSubview:lineWidget.view];
-//    self.plotSource = lineWidget;
+    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
+    lineWidget.view.backgroundColor = [UIColor blackColor];
+    NSMutableArray* bands = [[NSMutableArray alloc]init];
+    DCRange* bandRange = [[DCRange alloc]initWithLocation:0 length:20];
+    DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
+    b.range = bandRange;
+    b.color = [UIColor colorWithRed:0.5 green:0 blue:0 alpha:0.5];
+    b.axis = lineWidget.view.yAxisList[0];
+    [bands addObject:b];
+    [lineWidget.view setBackgoundBands:bands];
+    [self.view addSubview:lineWidget.view];
+    self.carouselController = lineWidget;
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 605, 100, 30)];
     //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
@@ -304,4 +304,19 @@
     //    [self.view addSubview:[labelingWrapper getView]];
     //    labelingWrapper.delegate = self;
 }
+
+//-(void)buttonPressed:(UIButton*)btn {
+//    DCColumnWrapper* columnWidget = self.carouselController;
+//    [columnWidget switchSeriesTypeAtIndex:0];
+//}
+//
+//-(void)buttonPressed1:(UIButton*)btn {
+//    DCColumnWrapper* columnWidget = self.carouselController;
+//    [columnWidget switchSeriesTypeAtIndex:1];
+//}
+//
+//-(void)buttonPressed2:(UIButton*)btn {
+//    DCColumnWrapper* columnWidget = self.carouselController;
+//    [columnWidget switchSeriesTypeAtIndex:2];
+//}
 @end

@@ -46,4 +46,6 @@
 -(void)reloadData;
 -(void)subLayerGrowthAnimationDone;
 -(_DCCoordinateSystem*)findCoordinateByYAxis:(DCAxis *)yAxis;
+
+-(void)replaceSeries:(DCXYSeries*)original byReplacement:(DCXYSeries*)replacement;
 @end

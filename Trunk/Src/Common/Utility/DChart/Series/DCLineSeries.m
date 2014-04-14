@@ -10,9 +10,8 @@
 #import "_DCLineSymbolsLayer.h"
 
 @implementation DCLineSeries
-
--(DCSeries*)initWithEnergyData:(NSArray*)seriesData {
-    self = [super initWithEnergyData:seriesData];
+-(DCSeries*)init {
+    self = [super init];
     if (self) {
         _lineWidth = 2;
         _symbolType = DCLineSymbolTypeNone;

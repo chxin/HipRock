@@ -155,6 +155,10 @@
     }
 }
 
+-(BOOL)canBeChangeSeriesAtIndex:(NSUInteger)index {
+    return NO;
+}
+
 -(DCRange*)updatePinchRange:(DCRange*)newRange pinchCentreX:(CGFloat)centreX pinchStopped:(BOOL)stopped {
     DCRange* globalRange= self.view.graphContext.globalHRange;
     double returnRangeEnd = newRange.end;

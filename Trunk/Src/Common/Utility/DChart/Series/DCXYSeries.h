@@ -27,4 +27,5 @@
 
 @property (nonatomic, assign)BOOL hidden;
 
+-(void)copyFromSeries:(DCXYSeries*)series;
 @end

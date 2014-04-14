@@ -39,4 +39,6 @@
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step;
 -(void)customizeView:(DCXYChartView*)view;
 -(NSUInteger)getSeriesAmount;
+-(void)switchSeriesTypeAtIndex:(NSUInteger)index;
+-(BOOL)canBeChangeSeriesAtIndex:(NSUInteger)index;
 @end
