@@ -843,6 +843,7 @@
 		7A1D142B1785211000CC2922 /* REMAlertHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAlertHelper.m; path = Common/Utility/REMAlertHelper.m; sourceTree = "<group>"; };
 		7A1D6C2A18F68A0900AFB038 /* BluesPad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BluesPad.xcdatamodel; sourceTree = "<group>"; };
 		7A1D6C2B18F68A0900AFB038 /* BluesPad_1.0.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BluesPad_1.0.2.xcdatamodel; sourceTree = "<group>"; };
+		7A1D6C2D18F68D3100AFB038 /* BluesPad_1.1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BluesPad_1.1.0.xcdatamodel; sourceTree = "<group>"; };
 		7A1D7C3817A618140050779D /* REMCommonHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMCommonHeaders.h; path = Common/REMCommonHeaders.h; sourceTree = "<group>"; };
 		7A1D7C4017A637FD0050779D /* REMJSONObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMJSONObject.h; path = Common/Model/REMJSONObject.h; sourceTree = "<group>"; };
 		7A1D7C4117A637FD0050779D /* REMJSONObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMJSONObject.m; path = Common/Model/REMJSONObject.m; sourceTree = "<group>"; };
@@ -4695,8 +4696,9 @@
 			children = (
 				7A1D6C2A18F68A0900AFB038 /* BluesPad.xcdatamodel */,
 				7A1D6C2B18F68A0900AFB038 /* BluesPad_1.0.2.xcdatamodel */,
+				7A1D6C2D18F68D3100AFB038 /* BluesPad_1.1.0.xcdatamodel */,
 			);
-			currentVersion = 7A1D6C2A18F68A0900AFB038 /* BluesPad.xcdatamodel */;
+			currentVersion = 7A1D6C2B18F68A0900AFB038 /* BluesPad_1.0.2.xcdatamodel */;
 			path = BluesPad.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

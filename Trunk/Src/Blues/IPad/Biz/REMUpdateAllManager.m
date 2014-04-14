@@ -236,7 +236,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
     
     self.tableViewController=nil;
     REMAppContext.sharedUpdateManager=nil;
-    self.callback(REMCustomerUserConcurrencyStatusSuccess,self.buildingInfoArray,REMDataAccessFailed);
+    self.callback(REMCustomerUserConcurrencyStatusSuccess,self.buildingInfoArray,REMDataAccessSucceed);
 }
 
 - (void)persistAllData{
