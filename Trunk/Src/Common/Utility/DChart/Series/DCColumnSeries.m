@@ -10,8 +10,8 @@
 #import "_DCColumnsLayer.h"
 
 @implementation DCColumnSeries
--(DCSeries*)initWithEnergyData:(NSArray*)seriesData {
-    self = [super initWithEnergyData:seriesData];
+-(DCSeries*)init {
+    self = [super init];
     if (self) {
         self.type = DCSeriesTypeColumn;
     }

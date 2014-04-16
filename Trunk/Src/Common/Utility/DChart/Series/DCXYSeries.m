@@ -21,6 +21,19 @@
     return self;
 }
 
+-(void)copyFromSeries:(DCXYSeries*)series {
+    _coordinate = series.coordinate;
+    _xAxis = series.xAxis;
+    _yAxis = series.yAxis;
+    _target = series.target;
+    self.color = series.color;
+    self.visableRange = series.visableRange;
+    _visableYMax = series.visableYMax;
+    _visableYMin = series.visableYMin;
+    _visableYMaxThreshold = series.visableYMaxThreshold;
+    self.datas = series.datas;
+}
+
 -(void)willHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
     if (REMIsNilOrNull(newRange)) return;

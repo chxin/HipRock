@@ -12,7 +12,7 @@
 
 @interface _DCSeriesLayer : _DCLayer
 
-@property (nonatomic, strong, readonly) NSArray* series;
+@property (nonatomic, strong, readonly) NSArray* seriesList;
 @property (nonatomic, assign) BOOL enableGrowAnimation; // 是否播放初始动画，默认为YES，播放一次之后就变为NO
 @property (nonatomic, assign) BOOL growthAnimationDone;
 -(NSUInteger)getVisableSeriesCount;

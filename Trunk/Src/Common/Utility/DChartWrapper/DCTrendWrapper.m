@@ -294,6 +294,36 @@
         [self removeHiddenTarget:series.target index:seriesIndex];
     }
 }
+-(void)switchSeriesTypeAtIndex:(NSUInteger)index {
+    DCXYChartView* view = self.view;
+    if (index >= view.seriesList.count) return;
+    DCXYSeries* series = view.seriesList[index];
+    DCXYSeries* replacementSeries = nil;
+    if (series.type == DCSeriesTypeColumn) {
+        DCLineSeries* newSeries = [[DCLineSeries alloc]init];
+        newSeries.symbolType = index % 5;
+        newSeries.symbolSize = self.style.symbolSize;
+        [newSeries copyFromSeries:series];
+        replacementSeries = newSeries;
+    } else if (series.type == DCSeriesTypeLine) {
+        DCColumnSeries* newSeries = [[DCColumnSeries alloc]init];
+        [newSeries copyFromSeries:series];
+        replacementSeries = newSeries;
+    }
+    if (REMIsNilOrNull(replacementSeries)) return;
+    
+    [view replaceSeries:series byReplacement:replacementSeries];
+}
+
+-(BOOL)canBeChangeSeriesAtIndex:(NSUInteger)index {
+    if (index >= self.view.seriesList.count) return NO;
+    DCXYSeries* series = self.view.seriesList[index];
+    if (!REMIsNilOrNull(series.target) &&  [self isSpecialType:series.target.type]) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
 
 -(void)extraSyntax:(DWrapperConfig*)wrapperConfig {
     _calenderType = wrapperConfig.calendarType;
