@@ -95,9 +95,12 @@
 
 - (NSDictionary *)buildHeaders
 {
-    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
+    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
+    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     
-    NSString *userAgent = [NSString stringWithFormat:@"Blues/%@(ESS;%@;%@;%@;%@;%@;)", version, [[REMCurrentDevice identifierForVendor] UUIDString],[REMCurrentDevice localizedModel],[REMCurrentDevice systemName],[REMCurrentDevice systemVersion],[REMCurrentDevice model]];
+    NSString *fullVersion = [NSString stringWithFormat:@"%@.%@",version,build];
+    
+    NSString *userAgent = [NSString stringWithFormat:@"Blues/%@(ESS;%@;%@;%@;%@;%@;)", fullVersion, [[REMCurrentDevice identifierForVendor] UUIDString],[REMCurrentDevice localizedModel],[REMCurrentDevice systemName],[REMCurrentDevice systemVersion],[REMCurrentDevice model]];
     REMManagedUserModel *user = REMAppContext.currentUser;
     NSString *token = [REMEncryptHelper base64AES256EncryptString:[NSString stringWithFormat:@"%lld|%@|%lld",[user.id longLongValue],user.name, [user.spId longLongValue] ] withKey:REMSecurityTokenKey];
     
@@ -107,8 +110,8 @@
                               @"Content-Type": @"application/json",
                               @"accept-encoding": @"gzip,deflate,sdch",
                               @"User-Agent": userAgent,
-                              @"Blues-Version": version,
-                              @"Blues-User": token,
+                              @"Blues-Version": fullVersion,
+                              @"Blues-Token": token,
                               }];
     
     return headers;
@@ -146,7 +149,7 @@
         if([REMAppConfig.requestLogMode integerValue] > 1){
             //[log appendFormat:@" User-Agent    : %@\n", request.allHTTPHeaderFields[@"User-Agent"]];
             //[log appendFormat:@" Blues-Version : %@\n", request.allHTTPHeaderFields[@"Blues-Version"]];
-            [log appendFormat:@"-TOKN:%@\n", request.allHTTPHeaderFields[@"Blues-User"]];
+            [log appendFormat:@"-TOKN:%@\n", request.allHTTPHeaderFields[@"Blues-Token"]];
             [log appendFormat:@"-BODY:%@\n", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]];
         }
         

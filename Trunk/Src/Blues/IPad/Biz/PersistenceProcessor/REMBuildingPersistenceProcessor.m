@@ -30,6 +30,10 @@
 {
     [self clean];
     
+    if(REMIsNilOrNull(dictionary)){
+        return nil;
+    }
+    
     //process building
     if(!REMIsNilOrNull(dictionary[@"BuildingInfo"]) && [dictionary[@"BuildingInfo"] count] >0){
         for (int i=0; i<[dictionary[@"BuildingInfo"] count]; ++i) {
