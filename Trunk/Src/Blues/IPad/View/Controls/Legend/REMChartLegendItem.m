@@ -14,8 +14,6 @@
 #import "DCSeries.h"
 #import "DCXYSeries.h"
 
-#define kREMLegendInnerLabelFrame CGRectMake(kDMChart_LegendItemHeight+kDMChart_LegendItemIconLabelMargin+kDMChart_LegendItemIconLabelBorderMargin, 0, kDMChart_LegendItemWidth-kDMChart_LegendItemHeight-kDMChart_LegendItemIconLabelMargin-kDMChart_LegendItemIconLabelBorderMargin*2, kDMChart_LegendItemHeight)
-
 @interface REMChartLegendItem()
 
 @property (nonatomic) int seriesIndex;
