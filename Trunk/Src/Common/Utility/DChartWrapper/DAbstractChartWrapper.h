@@ -26,6 +26,7 @@
 -(void)redraw:(REMEnergyViewData *)energyViewData;
 -(UIView*)getView;
 -(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig*) wrapperConfig style:(DCChartStyle*)style;
+-(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index;
 -(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden;
 -(NSUInteger)getVisableSeriesCount;
 

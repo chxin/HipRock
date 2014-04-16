@@ -82,6 +82,14 @@
     return view;
 }
 
+-(NSUInteger)getVisableSeriesCount {
+    return self.view.series.labels.count;
+}
+
+-(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index {
+    return NO;
+}
+
 -(UIView*)getView {
     return self.view;
 }

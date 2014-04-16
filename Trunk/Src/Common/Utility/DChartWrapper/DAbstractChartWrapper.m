@@ -83,6 +83,10 @@
     
 }
 
+-(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index {
+    return [self getVisableSeriesCount] > 1;
+}
+
 -(BOOL) isTargetHidden:(REMEnergyTargetModel*)target index:(NSUInteger)index {
     BOOL isHidden = NO;
     if (self.isMultiTimeChart) {

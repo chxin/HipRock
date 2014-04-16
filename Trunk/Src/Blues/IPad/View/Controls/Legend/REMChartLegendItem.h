@@ -16,7 +16,10 @@
 @protocol REMChartLegendItemDelegate <NSObject>
 
 -(void)legendStateChanged:(UIControlState)state onIndex:(int)index;
--(BOOL)canBeHidden;
+-(BOOL)canBeHiddenOnIndex:(int)index;
+
+-(void)tapLegendIconOnIndex:(int)index;
+-(BOOL)canChangeSeriesTypeOnIndex:(int)index;
 
 @end
 
@@ -26,8 +29,8 @@
 @property (nonatomic) int index;
 @property (nonatomic) REMChartSeriesIndicatorType type;
 @property (nonatomic,weak) NSString *title;
-@property (nonatomic) BOOL isBenchmark;
-@property (nonatomic) BOOL tappable;
+@property (nonatomic,strong) UIColor* color;
+//@property (nonatomic) BOOL isBenchmark;
 @property (nonatomic,weak) REMChartLegendBase *legendView;
 @property (nonatomic) BOOL isDefaultHidden;
 

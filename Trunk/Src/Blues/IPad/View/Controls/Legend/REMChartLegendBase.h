@@ -23,9 +23,9 @@
 
 @property (nonatomic,strong) NSArray *itemModels;
 
-+(REMChartLegendBase *)legendViewChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget parameters:(REMWidgetSearchModelBase *)parameters;
++(REMChartLegendBase *)legendViewChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget parameters:(REMWidgetSearchModelBase *)parameters delegate:(id<REMChartLegendItemDelegate>)delegate;
 
--(REMChartLegendBase *)initWithChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget parameters:(REMWidgetSearchModelBase *)parameters;
+-(REMChartLegendBase *)initWithChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget parameters:(REMWidgetSearchModelBase *)parameters delegate:(id<REMChartLegendItemDelegate>)delegate;
 
 -(NSArray *)convertItemModels;
 

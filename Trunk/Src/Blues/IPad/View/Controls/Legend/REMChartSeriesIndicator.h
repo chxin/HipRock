@@ -19,5 +19,6 @@ typedef enum _REMChartSeriesIndicatorType{
 
 +(REMChartSeriesIndicator *)indicatorWithType:(REMChartSeriesIndicatorType)type andColor:(UIColor *)color;
 +(REMChartSeriesIndicatorType)indicatorTypeWithDiagramType:(REMDiagramType)diagramType;
+-(void)renderWithType:(REMChartSeriesIndicatorType)type;
 
 @end

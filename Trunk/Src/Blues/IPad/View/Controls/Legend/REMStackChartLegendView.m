@@ -7,6 +7,7 @@
 --------------------------------------------------------------------------*/
 #import "REMStackChartLegendView.h"
 #import "REMChartLegendItem.h"
+#import "DCTrendWrapper.h"
 
 @implementation REMStackChartLegendView
 
@@ -16,17 +17,14 @@
     NSArray *names = @[REMIPadLocalizedString(@"Chart_TOUPeak"),REMIPadLocalizedString(@"Chart_TOUValley"),REMIPadLocalizedString(@"Chart_TOUPlain")];
     NSMutableArray *models = [[NSMutableArray alloc] init];
     
+    NSArray *serieses = ((DCTrendWrapper *)self.chartWrapper).view.seriesList;
     for(int i=0;i<3;i++){
+        DCXYSeries *series = serieses[i];
         REMChartLegendItemModel *model = [[REMChartLegendItemModel alloc] init];
         model.index = i;
         model.title = names[i];
         model.type = REMChartSeriesIndicatorColumn;
-        //if(self.widget.contentSyntax.dataStoreType == REMDSEnergyCostElectricity){
-            model.tappable = NO;
-//        }
-//        else{
-//            model.tappable = YES;
-//        }
+        model.color = series.color;
         model.legendView = self;
         
         

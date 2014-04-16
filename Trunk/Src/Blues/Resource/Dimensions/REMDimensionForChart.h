@@ -30,11 +30,12 @@
 //#define kDMChart_IndicatorBorderContentSpace 3
 
 //legend
-#define kDMChart_LegendItemWidth 265//239
-#define kDMChart_LegendItemHeight 39
-#define kDMChart_LegendItemLeftOffset 10
-#define kDMChart_LegendItemTopOffset ((kDMChart_ToolbarHeight - kDMChart_LegendItemHeight) / 2)
-#define kDMChart_LegendItemCornerRadius 2
+#define kDMChart_LegendItemWidth 265        // Widget View的Legend的宽度
+#define kDMChart_LegendItemHeight 39        // Widget View的Legend的高度
+#define kDMChart_LegendItemLeftOffset 10    // Widget View的Legend的间距
+#define kDMChart_LegendItemCornerRadius 2   // Widget View的Legend的圆角
+#define kDMChart_LegendItemIconLabelMargin 3// Widget View的LegendIcon和Label View的间距
+#define kDMChart_LegendItemIconLabelBorderMargin 5// Widget View的Label View的文本和边框的间距
 #define kDMChart_LegendItemBackgroundColor @"#ffffff"
 #define kDMChart_LegendItemHiddenBackgroundColor @"#e9e9e9"
 
