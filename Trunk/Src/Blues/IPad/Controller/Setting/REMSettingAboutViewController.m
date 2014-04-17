@@ -8,6 +8,7 @@
 #import "REMSettingAboutViewController.h"
 #import "REMTimeHelper.h"
 #import "REMColor.h"
+#import "REMCommonHeaders.h"
 @interface REMSettingAboutViewController ()
 
 @end
@@ -37,7 +38,10 @@
     versionLabel.backgroundColor=[UIColor clearColor];
     NSString *version=REMIPadLocalizedString(@"Setting_AboutVersion");//iPad版V%@
     NSString *versionNumber=[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-    versionLabel.text=[NSString stringWithFormat:version,versionNumber];
+    NSString *buildNumber = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
+    NSString *dataSource = REMAppConfig.currentDataSourceKey;
+    
+    versionLabel.text=[NSString stringWithFormat:version,versionNumber,buildNumber,[[dataSource substringToIndex:1] lowercaseString]];
     [self.view addSubview:versionLabel];
     UILabel *copyrightChineseLabel=[[UILabel alloc]init];
     copyrightChineseLabel.translatesAutoresizingMaskIntoConstraints=NO;

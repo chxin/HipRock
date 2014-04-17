@@ -4,6 +4,8 @@
 <dict>
 	<key>ShouldCleanCache</key>
 	<string>YES</string>
+	<key>AppStoreUrl</key>
+	<string>itms://itunes.apple.com/cn/app/yun-neng-xiao/id731298599</string>
 	<key>DataSources</key>
 	<dict>
 		<key>local</key>

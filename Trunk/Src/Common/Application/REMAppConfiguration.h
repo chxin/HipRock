@@ -13,12 +13,15 @@
 
 @property (nonatomic) BOOL shouldCleanCache;
 @property (nonatomic,strong) NSDictionary *dataSources;
+@property (nonatomic,strong) NSString *currentDataSourceKey;
 @property (nonatomic,strong) NSDictionary *currentDataSource;
 @property (nonatomic,strong) NSDictionary *services;
+
 
 @property (nonatomic,readonly) NSInteger requestTimeout;
 @property (nonatomic,readonly) NSNumber *requestLogMode;
 
+@property (nonatomic,strong) NSString *appStoreUrl;
 
 
 @end

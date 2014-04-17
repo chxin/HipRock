@@ -51,6 +51,15 @@
             failure(error, REMDataAccessErrorMessage, businessError);
         }
         else{ //if ok, enter SUCCESS status
+            //authorization check
+            NSString *auth = operation.response.allHeaderFields[@"Blues-Version"];
+            if(!REMIsNilOrNull(auth) && ![auth isEqualToString:@"Allow"]){
+                [REMAlertHelper alert:@"应用过期，请更新"];
+                success(nil);
+                
+                return;
+            }
+            
             id result = self.dataStore.responseType == REMServiceResponseJson ? responseObject[[responseObject allKeys][0]] : responseObject;
             success(result);
         }
@@ -140,13 +149,17 @@
 -(void)logOperation:(AFHTTPRequestOperation *)operation withError:(NSError *)error
 {
     if(REMAppConfig.requestLogMode != nil && [REMAppConfig.requestLogMode integerValue] > 0) {
+        BOOL isJson = self.dataStore.responseType == REMServiceResponseJson;
+        BOOL isFullLog = [REMAppConfig.requestLogMode integerValue] > 1;
+        
         NSURLRequest *request = operation.request;
+        NSHTTPURLResponse *response = operation.response;
         
         NSMutableString *log = [NSMutableString stringWithString:@"---------------------------------\n"];
         
         [log appendFormat:@"REQ:%@\n", [request.URL absoluteString]];
         
-        if([REMAppConfig.requestLogMode integerValue] > 1){
+        if(isFullLog){
             //[log appendFormat:@" User-Agent    : %@\n", request.allHTTPHeaderFields[@"User-Agent"]];
             //[log appendFormat:@" Blues-Version : %@\n", request.allHTTPHeaderFields[@"Blues-Version"]];
             [log appendFormat:@"-TOKN:%@\n", request.allHTTPHeaderFields[@"Blues-Token"]];
@@ -155,19 +168,21 @@
         
         //[log appendString:@"\n"];
         
-        if(error == nil){
-            NSString *logContent = nil;
-            if(self.dataStore.responseType == REMServiceResponseJson){
-                logContent = [REMAppConfig.requestLogMode integerValue] > 1 ? operation.responseString : [NSString stringWithFormat:@"%@..",[operation.responseString substringToIndex:64]];
+        if(error != nil){
+            [log appendFormat:@"RSP:(ERROR) %@\n", [error description]];
+            return;
+        }
+        
+        [log appendFormat:@"RSP:%@ %d(bytes)\n", isJson ? @"json":@"data", [operation.responseData length]];
+        
+        if(isJson){
+            if(isFullLog){
+                [log appendFormat:@"-AUTH:%@\n", response.allHeaderFields[@"Blues-Version"]];
+                [log appendFormat:@"-BODY:%@\n", operation.responseString];
             }
             else{
-                logContent = [NSString stringWithFormat:@"%d bytes data", [operation.responseData length]];
+                [log appendFormat:@"-BODY:%@\n", [NSString stringWithFormat:@"%@..",[operation.responseString substringToIndex:64]]];
             }
-            
-            [log appendFormat:@"RSP:%@\n", logContent];
-        }
-        else{
-            [log appendFormat:@"RSP:(ERROR) %@\n", [error description]];
         }
         
         NSLog(@"%@",log);
