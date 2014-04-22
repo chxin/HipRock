@@ -943,14 +943,28 @@
 -(UIView *)prepareLegendView
 {
     //REMChartLegendBase *legend = [REMChartLegendBase legendWithData:self.energyData widget:self.widgetInfo parameters:self.tempModel andHiddenIndexes:self.hiddenSeries];
-    REMChartLegendBase *legend = [REMChartLegendBase legendViewChartWrapper:self.chartWrapper data:self.energyData widget:self.widgetInfo parameters:self.tempModel];
-    legend.itemDelegate = self;
+    REMChartLegendBase *legend = [REMChartLegendBase legendViewChartWrapper:self.chartWrapper data:self.energyData widget:self.widgetInfo parameters:self.tempModel delegate:self];
     
     return legend;
 }
 
--(BOOL)canBeHidden {
-    return [self.chartWrapper getVisableSeriesCount] > 1;
+-(BOOL)canBeHiddenOnIndex:(int)index {
+    return index >= 0 && [self.chartWrapper canSeriesBeHiddenAtIndex:index];
+}
+
+-(BOOL)canChangeSeriesTypeOnIndex:(int)index {
+    if ([self.chartWrapper isKindOfClass:[DCTrendWrapper class]]) {
+        DCTrendWrapper* wrapper = (DCTrendWrapper*)self.chartWrapper;
+        return [wrapper canBeChangeSeriesAtIndex:index];
+    }
+    return NO;
+}
+
+-(void)tapLegendIconOnIndex:(int)index {
+    if ([self.chartWrapper isKindOfClass:[DCTrendWrapper class]]) {
+        DCTrendWrapper* wrapper = (DCTrendWrapper*)self.chartWrapper;
+        [wrapper switchSeriesTypeAtIndex:index];
+    }
 }
 
 -(void)legendStateChanged:(UIControlState)state onIndex:(int)index

@@ -73,6 +73,10 @@
     // Nothing to do. cannot hide series in ranking chart.
 }
 
+-(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index {
+    return NO;
+}
+
 -(void)swapeAllDatas:(DCXYSeries*)rankingSeries {
     DCDataPoint* temp = nil;
     int i = 0, j = rankingSeries.datas.count - 1;

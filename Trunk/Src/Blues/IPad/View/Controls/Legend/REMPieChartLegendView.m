@@ -25,11 +25,11 @@
         REMChartLegendItemModel *model = [[REMChartLegendItemModel alloc] init];
         
         model.index = i;
-        model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType:self.widget.diagramType.integerValue];
+        model.type = REMChartSeriesIndicatorPie;
         model.title = [self format:pieSlice.target];
         model.legendView = self;
-        model.tappable = YES;
-        model.isBenchmark = pieSlice.target.type == REMEnergyTargetBenchmarkValue;
+        model.color = [pieSlice.color copy];
+//        model.isBenchmark = pieSlice.target.type == REMEnergyTargetBenchmarkValue;
         model.isDefaultHidden = pieSlice.hidden;
         
         [models addObject:model];

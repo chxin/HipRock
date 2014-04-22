@@ -605,6 +605,7 @@
     }
     [self.graphContext removeHRangeObsever:original];
     [self.graphContext addHRangeObsever:replacement];
+    [replacement.coordinate recalculatorYMaxInRange:self.graphContext.hRange];
     [self calculateColumnWidth];
     [self._symbolLayer redraw];
     [self._columnLayer redraw];

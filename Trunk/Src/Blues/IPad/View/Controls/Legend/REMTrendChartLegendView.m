@@ -31,11 +31,11 @@
         REMChartLegendItemModel *model = [[REMChartLegendItemModel alloc] init];
         
         model.index = i;
-        model.type = [REMChartSeriesIndicator indicatorTypeWithDiagramType:self.widget.diagramType.integerValue];
+        model.type = series.type == DCSeriesTypeColumn ? REMChartSeriesIndicatorColumn : REMChartSeriesIndicatorLine;
         model.title = [self format:series.target];
         model.legendView = self;
-        model.tappable = YES;
-        model.isBenchmark = series.target.type == REMEnergyTargetBenchmarkValue;
+        model.color = [series.color copy];
+//        model.isBenchmark = series.target.type == REMEnergyTargetBenchmarkValue;
         model.isDefaultHidden = series.hidden;
         
         [models addObject:model];

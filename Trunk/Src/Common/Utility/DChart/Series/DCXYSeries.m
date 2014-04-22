@@ -27,11 +27,12 @@
     _yAxis = series.yAxis;
     _target = series.target;
     self.color = series.color;
-    self.visableRange = series.visableRange;
-    _visableYMax = series.visableYMax;
-    _visableYMin = series.visableYMin;
     _visableYMaxThreshold = series.visableYMaxThreshold;
     self.datas = series.datas;
+    for (DCDataPoint* p in self.datas) {
+        p.series = self;
+    }
+    [self willHRangeChanged:nil newRange:series.visableRange];
 }
 
 -(void)willHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {

@@ -20,25 +20,26 @@
 #define REMSeriesIsMultiTime [self.parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]]
 
 
-+(REMChartLegendBase *)legendViewChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget parameters:(REMWidgetSearchModelBase *)parameters
++(REMChartLegendBase *)legendViewChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget parameters:(REMWidgetSearchModelBase *)parameters delegate:(id<REMChartLegendItemDelegate>)delegate
 {
     REMDiagramType diagramType = (REMDiagramType)[widget.diagramType intValue];
     if(diagramType == REMDiagramTypePie){
-        return [[REMPieChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters];
+        return [[REMPieChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters delegate:delegate];
     }
     else if(diagramType == REMDiagramTypeStackColumn){
-        return [[REMStackChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters];
+        return [[REMStackChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters delegate:delegate];
     }
     else{
-        return [[REMTrendChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters];
+        return [[REMTrendChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters delegate:delegate];
     }
 }
 
--(REMChartLegendBase *)initWithChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget parameters:(REMWidgetSearchModelBase *)parameters
+-(REMChartLegendBase *)initWithChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget parameters:(REMWidgetSearchModelBase *)parameters delegate:(id<REMChartLegendItemDelegate>)delegate
 {
     self = [super initWithFrame:kDMChart_ToolbarHiddenFrame];
     
     if(self){
+        _itemDelegate = delegate;
         self.chartWrapper = chartWrapper;
         self.widget = widget;
         self.parameters = parameters;

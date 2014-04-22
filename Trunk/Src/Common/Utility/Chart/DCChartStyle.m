@@ -44,7 +44,7 @@
     style.plotPaddingLeft = 0;
     style.plotPaddingRight = 22;
     
-    style.benchmarkColor = [REMColor colorByHexString:@"#f15e31"];
+    style.benchmarkColor = [REMColor colorByHexString:kDMChart_BenchmarkColor];
     
     
     style.playBeginAnimation = YES;
@@ -96,7 +96,7 @@
     style.plotPaddingLeft = 22;
     style.plotPaddingRight = 22;
     
-    style.benchmarkColor = [REMColor colorByHexString:@"#f15e31"];
+    style.benchmarkColor = [REMColor colorByHexString:kDMChart_BenchmarkColor];
     
     style.backgroundBandFontColor = [REMColor colorByHexString:@"#3b3b3b"];
     style.backgroundBandFont = [UIFont fontWithName:@(kBuildingFontSCRegular) size:12];
@@ -196,7 +196,7 @@
     
     style.plotPaddingTop = 12;
     
-    style.benchmarkColor = [REMColor colorByHexString:@"#f15e31"];
+    style.benchmarkColor = [REMColor colorByHexString:kDMChart_BenchmarkColor];
     
     style.backgroundBandFontColor = [REMColor colorByHexString:@"#3b3b3b"];
     style.backgroundBandFont = [UIFont fontWithName:@(kBuildingFontSCRegular) size:8];

@@ -294,6 +294,9 @@
         [self removeHiddenTarget:series.target index:seriesIndex];
     }
 }
+-(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index {
+    return !self.graphContext.stacked && [self getVisableSeriesCount] > 1 && index < [self getSeriesAmount];
+}
 -(void)switchSeriesTypeAtIndex:(NSUInteger)index {
     DCXYChartView* view = self.view;
     if (index >= view.seriesList.count) return;
@@ -316,7 +319,7 @@
 }
 
 -(BOOL)canBeChangeSeriesAtIndex:(NSUInteger)index {
-    if (index >= self.view.seriesList.count) return NO;
+    if (index >= self.view.seriesList.count || self.graphContext.stacked) return NO;
     DCXYSeries* series = self.view.seriesList[index];
     if (!REMIsNilOrNull(series.target) &&  [self isSpecialType:series.target.type]) {
         return NO;
