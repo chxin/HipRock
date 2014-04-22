@@ -24,6 +24,7 @@
 
 static REMApplicationContext *context = nil;
 static BOOL CACHEMODE = NO;
+static BOOL UNSUPPORTED = NO;
 
 + (REMApplicationContext *)instance
 {
@@ -178,6 +179,45 @@ static BOOL CACHEMODE = NO;
     }
     
     return _sharedUpdateManager;
+}
+
+- (void)applicationDidBecomeUnsupported
+{
+    if(UNSUPPORTED == NO || context.loginStatus == NO){
+        if(UNSUPPORTED == NO){
+            UNSUPPORTED = YES;
+        }
+        
+        NSString *message = REMIPadLocalizedString(@"Common_ApplicationDidBecomeUnsupported");
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"更新", nil];
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1){
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REMAppConfig.appStoreUrl]];
+    }
+    
+    if(context.loginStatus){
+        REMMainNavigationController *mainController = (REMMainNavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+        
+        if(mainController.presentedViewController!=nil){
+            [mainController dismissViewControllerAnimated:YES completion:^{
+                [mainController logout];
+            }];
+        }
+        else{
+            [mainController logout];
+        }
+    }
+}
+
+- (BOOL)loginStatus
+{
+    return REMAppContext.currentUser!=nil && REMAppContext.currentCustomer!=nil && [REMAppContext.currentUser.isDemo boolValue] == NO;
 }
 
 

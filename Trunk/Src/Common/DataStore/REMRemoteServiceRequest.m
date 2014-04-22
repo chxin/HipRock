@@ -36,12 +36,21 @@
     
 #ifdef DEBUG
     NSLog(@"Outgoing request: %@", request.URL.absoluteString);
+    NSDate *t1 = [NSDate date];
 #endif
     
     REMHTTPRequestOperation *operation = [manager RequestOperationWithRequest:request responseType:self.dataStore.responseType success:^(AFHTTPRequestOperation *operation, id responseObject) {
 #ifdef DEBUG
         [self logOperation:operation withError:nil];
+        NSLog(@"Total time: %f\n", [[NSDate date] timeIntervalSinceDate:t1]);
 #endif
+        //authorization check
+        NSString *auth = operation.response.allHeaderFields[@"Blues-Version"];
+        if(!REMIsNilOrNull(auth) && ![auth isEqualToString:@"Allow"]){
+            failure(nil,REMDataAccessUnsupported,nil);
+            return;
+        }
+        
         //if there is error message, enter ERROR status
         if([operation.responseString hasPrefix:@"{\"error\":"] == YES) {
             //TODO: process error message with different error types
@@ -51,15 +60,6 @@
             failure(error, REMDataAccessErrorMessage, businessError);
         }
         else{ //if ok, enter SUCCESS status
-            //authorization check
-            NSString *auth = operation.response.allHeaderFields[@"Blues-Version"];
-            if(!REMIsNilOrNull(auth) && ![auth isEqualToString:@"Allow"]){
-                [REMAlertHelper alert:@"应用过期，请更新"];
-                success(nil);
-                
-                return;
-            }
-            
             id result = self.dataStore.responseType == REMServiceResponseJson ? responseObject[[responseObject allKeys][0]] : responseObject;
             success(result);
         }
@@ -111,7 +111,8 @@
     
     NSString *userAgent = [NSString stringWithFormat:@"Blues/%@(ESS;%@;%@;%@;%@;%@;)", fullVersion, [[REMCurrentDevice identifierForVendor] UUIDString],[REMCurrentDevice localizedModel],[REMCurrentDevice systemName],[REMCurrentDevice systemVersion],[REMCurrentDevice model]];
     REMManagedUserModel *user = REMAppContext.currentUser;
-    NSString *token = [REMEncryptHelper base64AES256EncryptString:[NSString stringWithFormat:@"%lld|%@|%lld",[user.id longLongValue],user.name, [user.spId longLongValue] ] withKey:REMSecurityTokenKey];
+    NSString *info = [NSString stringWithFormat:@"%lld|%@|%lld",[user.id longLongValue],user.name, [user.spId longLongValue]];
+    NSString *token = [REMEncryptHelper base64AES256EncryptString:info withKey:REMSecurityTokenKey];
     
     NSString *accept = self.dataStore.responseType == REMServiceResponseJson ? @"*/*":@"image/webp,*/*;";
     
@@ -120,7 +121,7 @@
                               @"accept-encoding": @"gzip,deflate,sdch",
                               @"User-Agent": userAgent,
                               @"Blues-Version": fullVersion,
-                              @"Blues-Token": token,
+                              @"Blues-User": token,
                               }];
     
     return headers;
@@ -162,7 +163,7 @@
         if(isFullLog){
             //[log appendFormat:@" User-Agent    : %@\n", request.allHTTPHeaderFields[@"User-Agent"]];
             //[log appendFormat:@" Blues-Version : %@\n", request.allHTTPHeaderFields[@"Blues-Version"]];
-            [log appendFormat:@"-TOKN:%@\n", request.allHTTPHeaderFields[@"Blues-Token"]];
+            [log appendFormat:@"-TOKN:%@\n", request.allHTTPHeaderFields[@"Blues-User"]];
             [log appendFormat:@"-BODY:%@\n", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]];
         }
         
@@ -175,13 +176,13 @@
         
         [log appendFormat:@"RSP:%@ %d(bytes)\n", isJson ? @"json":@"data", [operation.responseData length]];
         
-        if(isJson){
+        if(isJson) {
             if(isFullLog){
                 [log appendFormat:@"-AUTH:%@\n", response.allHeaderFields[@"Blues-Version"]];
                 [log appendFormat:@"-BODY:%@\n", operation.responseString];
             }
             else{
-                [log appendFormat:@"-BODY:%@\n", [NSString stringWithFormat:@"%@..",[operation.responseString substringToIndex:64]]];
+                [log appendFormat:@"-BODY:%@", [NSString stringWithFormat:@"%@..",[operation.responseString substringToIndex:64]]];
             }
         }
         

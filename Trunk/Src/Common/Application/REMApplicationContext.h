@@ -17,7 +17,7 @@
 #define REMAppContext [REMApplicationContext instance]
 #define REMAppConfig REMAppContext.appConfig
 
-@interface REMApplicationContext : NSObject{
+@interface REMApplicationContext : NSObject<UIAlertViewDelegate> {
     @private
     REMManagedCustomerModel *_currentCustomer;
 }
@@ -31,6 +31,8 @@
 
 @property (nonatomic) BOOL cacheMode;
 @property (nonatomic) AFNetworkReachabilityStatus networkStatus;
+
+@property (nonatomic) BOOL loginStatus;
 
 
 @property (nonatomic,strong) REMUpdateAllManager *sharedUpdateManager;
@@ -46,5 +48,7 @@
 + (void)destroy;
 
 - (void)cleanImage;
+- (void)applicationDidBecomeUnsupported;
+- (BOOL)loginStatus;
 
 @end

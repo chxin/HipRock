@@ -32,7 +32,6 @@
 "Common_WholeYearFormat"="yyyy whole year";
 "Common_UpdateData"="Update data";
 
-
 "Common_NetNoConnection"="无网络连接，请稍候再试。";
 "Common_NetConnectionFailed"="网络故障，请稍候再试。";
 "Common_NetServerError"="服务器故障，请稍候再试。";
@@ -41,6 +40,9 @@
 "Common_ServerError"="数据获取失败，服务器故障。";
 "Common_ServerTimeoutSimple"="网络故障。";
 "Common_ServerErrorSimple"="服务器故障。";
+
+"Common_ApplicationDidBecomeUnsupported"="目前的版本已不被支持，请前往AppStore更新。";
+"Common_ApplicationNewVersionAvaliable"="有新版本，请前往AppStore更新。";
 
 //Admin,prefix: Admin_
 "Admin_UserTitleEEConsultant"="能源工程顾问";
