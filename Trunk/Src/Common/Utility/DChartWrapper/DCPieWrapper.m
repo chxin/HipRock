@@ -18,6 +18,12 @@
     if (self && energyViewData.targetEnergyData.count != 0) {
         [self createView:frame data:energyViewData style:style];
     }
+    for (NSUInteger index = 0; index < self.view.series.datas.count; index++) {
+        DCPieDataPoint* slice = self.view.series.datas[index];
+        DSeriesStatus* state = [[DSeriesStatus alloc]initWithTarget:self.isMultiTimeChart ? nil : slice.target index:self.isMultiTimeChart ? @(index) : nil];
+        state.hidden = slice.hidden;
+        [self.seriesStates addObject:state];
+    }
     return self;
 }
 
@@ -41,8 +47,9 @@
     DCPieSeries* series = [[DCPieSeries alloc]initWithEnergyData:series0Data];
     for(NSUInteger i = 0; i < series.datas.count; i++) {
         DCPieDataPoint* slice = series.datas[i];
-        if (REMIsNilOrNull(slice.target)) continue;
-        slice.hidden = [self isTargetHidden:slice.target index:i];
+        DSeriesStatus* state = [self getSeriesStatusByTarget:slice.target index:@(i)];
+        if (REMIsNilOrNull(state)) continue;
+        slice.hidden = state.hidden;
     }
     _view = [[DCPieChartView alloc]initWithFrame:frame series:series];
     self.view.chartStyle = style;
@@ -98,11 +105,7 @@
     DCPieDataPoint* slice = self.view.series.datas[seriesIndex];
     [self.view setSlice:slice hidden:hidden];
     if (REMIsNilOrNull(slice.target)) return;
-    if (hidden) {
-        [self addHiddenTarget:slice.target index:seriesIndex];
-    } else {
-        [self removeHiddenTarget:slice.target index:seriesIndex];
-    }
+    [self getSeriesStatusByTarget:slice.target index:@(seriesIndex)].hidden = hidden;
 }
 
 -(UIView*)getView {

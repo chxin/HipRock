@@ -12,6 +12,7 @@
 #import "DCXYChartBackgroundBand.h"
 #import "DCTrendAnimationManager.h"
 #import "REMWidgetStepCalculationModel.h"
+#import "DTrendSeriesStatus.h"
 
 @interface DCTrendWrapper()
 @property (nonatomic, weak) DCContext* graphContext;
@@ -43,7 +44,18 @@
         
         for (NSUInteger i = 0; i < self.view.seriesList.count; i++) {
             DCXYSeries* s = self.view.seriesList[i];
-            if (s.hidden) [self addHiddenTarget:s.target index:i];
+            DTrendSeriesStatus* status = nil;
+            if (self.isMultiTimeChart) {
+                status = [[DTrendSeriesStatus alloc]initWithTarget:nil index:@(i)];
+            } else {
+                status = [[DTrendSeriesStatus alloc]initWithTarget:s.target index:nil];
+            }
+            status.hidden = s.hidden;
+            status.currentType = s.type;
+            status.originalType = s.type;
+            [self.seriesStates addObject:status];
+            
+//            if (s.hidden) [self addHiddenTarget:s.target index:i];
         }
         [self updateCalender];
     }
@@ -143,17 +155,32 @@
         [datas addObject:p];
     }
     DCXYSeries* s;
+    
+    DTrendSeriesStatus* state = (DTrendSeriesStatus*)[self getSeriesStatusByTarget:targetEnergy.target index:@(index)];
+    // Benchmark series is not able to change series type. Its color and style is defined in style.
     if (!REMIsNilOrNull(targetEnergy.target) &&  [self isSpecialType:targetEnergy.target.type]) {
         s = [[DCLineSeries alloc]initWithEnergyData:datas];
         s.color = style.benchmarkColor;
         ((DCLineSeries*)s).symbolType = index % 5;
         ((DCLineSeries*)s).symbolSize = style.symbolSize;
     } else {
-        s = [[NSClassFromString(self.defaultSeriesClass) alloc]initWithEnergyData:datas];
+        // seriesStates.count equals seriesAmount when redraw. otherwise wrapper is initializing.
+        if (self.seriesStates.count == [self getSeriesAmount] && state != nil) {
+            if (state.currentType == DCSeriesTypeColumn) {
+                s = [[DCColumnSeries alloc]initWithEnergyData:datas];
+            } else {
+                s = [[DCLineSeries alloc]initWithEnergyData:datas];
+            }
+        } else {
+            s = [[NSClassFromString(self.defaultSeriesClass) alloc]initWithEnergyData:datas];
+        }
         s.color = [REMColor colorByIndex:index];
     }
     s.xAxis = view.xAxis;
     s.target = targetEnergy.target;
+    if (!(REMIsNilOrNull(state))) {
+        s.hidden = state.hidden;
+    }
     [self customizeSeries:s seriesIndex:index chartStyle:style];
     return s;
 }
@@ -287,13 +314,10 @@
     DCXYSeries* series = self.view.seriesList[seriesIndex];
     [self.view setSeries:series hidden:hidden];
     if (REMIsNilOrNull(series.target)) return;
-    
-    if (hidden) {
-        [self addHiddenTarget:series.target index:seriesIndex];
-    } else {
-        [self removeHiddenTarget:series.target index:seriesIndex];
-    }
+    DTrendSeriesStatus* state = (DTrendSeriesStatus*)[self getSeriesStatusByTarget:series.target index:@(seriesIndex)];
+    if (state!=nil) state.hidden = hidden;
 }
+
 -(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index {
     return !self.graphContext.stacked && [self getVisableSeriesCount] > 1 && index < [self getSeriesAmount];
 }
@@ -314,8 +338,8 @@
         replacementSeries = newSeries;
     }
     if (REMIsNilOrNull(replacementSeries)) return;
-    
     [view replaceSeries:series byReplacement:replacementSeries];
+    ((DTrendSeriesStatus*)[self getSeriesStatusByTarget:series.target index:@(index)]).currentType = replacementSeries.type;
 }
 
 -(BOOL)canBeChangeSeriesAtIndex:(NSUInteger)index {
@@ -343,11 +367,6 @@
     
     _myStableRange = dic[@"beginRange"];
     [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:step];
-    for(NSUInteger i = 0; i < self.view.seriesList.count; i++) {
-        DCXYSeries* s = self.view.seriesList[i];
-        if (REMIsNilOrNull(s.target)) continue;
-        s.hidden = [self isTargetHidden:s.target index:i];
-    }
     [superView addSubview:self.view];
     [self updateCalender];
 }
