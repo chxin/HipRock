@@ -21,6 +21,7 @@
 @property (nonatomic) REMEnergyStep step;
 @property (nonatomic,strong) NSNumber *zoneId;
 @property (nonatomic,strong) NSNumber *industryId;
+@property (nonatomic,strong) NSNumber *customizedId;
 @property (nonatomic,strong) NSString *benchmarkText;
 
 

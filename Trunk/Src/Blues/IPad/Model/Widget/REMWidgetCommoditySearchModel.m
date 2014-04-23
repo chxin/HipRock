@@ -19,8 +19,8 @@
     dic[@"commodityIds"]=self.commodityIdArray;
     NSNumber *step=[self stepNumberByStep:self.step];
     NSArray *newTimeRangeArray=[self timeRangeToDictionaryArray];
-    if(self.industryId!=nil || self.zoneId!=nil){
-        dic[@"benchmarkOption"]=@{@"IndustryId":self.industryId,@"ZoneId":self.zoneId};
+    if(self.industryId!=nil || self.zoneId!=nil || self.customizedId!=nil){
+        dic[@"benchmarkOption"]=@{@"IndustryId":self.industryId,@"ZoneId":self.zoneId,@"CustomerizedId":self.customizedId};
     }
     NSMutableDictionary *viewAssociation=[[NSMutableDictionary alloc]initWithCapacity:3];
     if(self.systemDimensionTemplateItemId!=nil){
@@ -100,6 +100,7 @@
     
     NSDictionary *bench=param[@"benchmarkOption"];
     if(bench!=nil && [bench isEqual:[NSNull null]]==NO){
+        self.customizedId=bench[@"CustomerizedId"];
         self.industryId=bench[@"IndustryId"];
         self.zoneId=bench[@"ZoneId"];
         self.benchmarkText=bench[@"benchmarkText"];

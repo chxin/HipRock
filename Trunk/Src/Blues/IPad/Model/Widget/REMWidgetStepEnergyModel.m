@@ -81,6 +81,7 @@
     base.step=self.step;
     base.zoneId=[self.zoneId copyWithZone:zone];
     base.industryId=[self.industryId copyWithZone:zone];
+    base.customizedId=[self.customizedId copyWithZone:zone];
     base.benchmarkText=[self.benchmarkText copyWithZone:zone];
     
     base.ratioType=self.ratioType;

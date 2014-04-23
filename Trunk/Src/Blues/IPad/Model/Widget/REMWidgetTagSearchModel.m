@@ -24,6 +24,8 @@
     
     if(self.industryId!=nil || self.zoneId!=nil){
         dic[@"benchmarkOption"]=@{@"IndustryId":self.industryId,@"ZoneId":self.zoneId};
+    } else if (self.customizedId!=nil) {
+        dic[@"benchmarkOption"]=@{@"CustomerizedId":self.customizedId};
     }
     NSMutableDictionary *dataOption=[[NSMutableDictionary alloc]initWithCapacity:4];
     if(self.ratioType!=REMRatioTypeNone ){
@@ -58,6 +60,7 @@
     
     NSDictionary *bench=param[@"benchmarkOption"];
     if(bench!=nil && [bench isEqual:[NSNull null]]==NO){
+        self.customizedId=bench[@"CustomerizedId"];
         self.industryId=bench[@"IndustryId"];
         self.zoneId=bench[@"ZoneId"];
         self.benchmarkText=bench[@"benchmarkText"];
