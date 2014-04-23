@@ -205,6 +205,10 @@ static REMCacheStoreHolder *cacheStoreHolder;
         
         success(newData);
     } failure:^(NSError *error, REMDataAccessStatus status, id response) {
+        if(status == REMDataAccessUnsupported){
+            [REMAppContext applicationDidBecomeUnsupported];
+        }
+        
         if(self.isDisableAlert == NO && (status == REMDataAccessNoConnection || status == REMDataAccessFailed || (status == REMDataAccessErrorMessage && [response isKindOfClass:[REMBusinessErrorInfo class]] && [((REMBusinessErrorInfo *)response).code isEqualToString:@"1"]))){
             NSString *message = self.messageMap[@(status)];
             [REMAlertHelper alert:message];

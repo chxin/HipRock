@@ -36,12 +36,20 @@
     
 #ifdef DEBUG
     NSLog(@"Outgoing request: %@", request.URL.absoluteString);
+    NSDate *start = [NSDate date];
 #endif
     
     REMHTTPRequestOperation *operation = [manager RequestOperationWithRequest:request responseType:self.dataStore.responseType success:^(AFHTTPRequestOperation *operation, id responseObject) {
 #ifdef DEBUG
-        [self logOperation:operation withError:nil];
+        [self logOperation:operation startedOn:start withError:nil];
 #endif
+        //authorization check
+        NSString *auth = operation.response.allHeaderFields[@"Blues-Version"];
+        if(!REMIsNilOrNull(auth) && ![auth isEqualToString:@"Allow"]){
+            failure(nil,REMDataAccessUnsupported,nil);
+            return;
+        }
+        
         //if there is error message, enter ERROR status
         if([operation.responseString hasPrefix:@"{\"error\":"] == YES) {
             //TODO: process error message with different error types
@@ -56,7 +64,7 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 #ifdef DEBUG
-        [self logOperation:operation withError:error];
+        [self logOperation:operation startedOn:start withError:error];
 #endif
         REMDataAccessStatus status = [self decideErrorStatus:error];
         
@@ -95,11 +103,15 @@
 
 - (NSDictionary *)buildHeaders
 {
-    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
+    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
+    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     
-    NSString *userAgent = [NSString stringWithFormat:@"Blues/%@(ESS;%@;%@;%@;%@;%@;)", version, [[REMCurrentDevice identifierForVendor] UUIDString],[REMCurrentDevice localizedModel],[REMCurrentDevice systemName],[REMCurrentDevice systemVersion],[REMCurrentDevice model]];
+    NSString *fullVersion = [NSString stringWithFormat:@"%@.%@",version,build];
+    
+    NSString *userAgent = [NSString stringWithFormat:@"Blues/%@(ESS;%@;%@;%@;%@;%@;)", fullVersion, [[REMCurrentDevice identifierForVendor] UUIDString],[REMCurrentDevice localizedModel],[REMCurrentDevice systemName],[REMCurrentDevice systemVersion],[REMCurrentDevice model]];
     REMManagedUserModel *user = REMAppContext.currentUser;
-    NSString *token = [REMEncryptHelper base64AES256EncryptString:[NSString stringWithFormat:@"%lld|%@|%lld",[user.id longLongValue],user.name, [user.spId longLongValue] ] withKey:REMSecurityTokenKey];
+    NSString *info = [NSString stringWithFormat:@"%lld|%@|%lld",[user.id longLongValue],user.name, [user.spId longLongValue]];
+    NSString *token = [REMEncryptHelper base64AES256EncryptString:info withKey:REMSecurityTokenKey];
     
     NSString *accept = self.dataStore.responseType == REMServiceResponseJson ? @"*/*":@"image/webp,*/*;";
     
@@ -107,7 +119,7 @@
                               @"Content-Type": @"application/json",
                               @"accept-encoding": @"gzip,deflate,sdch",
                               @"User-Agent": userAgent,
-                              @"Blues-Version": version,
+                              @"Blues-Version": fullVersion,
                               @"Blues-User": token,
                               }];
     
@@ -134,16 +146,22 @@
 {
 }
 
--(void)logOperation:(AFHTTPRequestOperation *)operation withError:(NSError *)error
+-(void)logOperation:(AFHTTPRequestOperation *)operation startedOn:(NSDate *)date withError:(NSError *)error
 {
     if(REMAppConfig.requestLogMode != nil && [REMAppConfig.requestLogMode integerValue] > 0) {
+        NSTimeInterval totalTime = [[NSDate date] timeIntervalSinceDate:date];
+        
+        BOOL isJson = self.dataStore.responseType == REMServiceResponseJson;
+        BOOL isFullLog = [REMAppConfig.requestLogMode integerValue] > 1;
+        
         NSURLRequest *request = operation.request;
+        NSHTTPURLResponse *response = operation.response;
         
         NSMutableString *log = [NSMutableString stringWithString:@"---------------------------------\n"];
         
         [log appendFormat:@"REQ:%@\n", [request.URL absoluteString]];
         
-        if([REMAppConfig.requestLogMode integerValue] > 1){
+        if(isFullLog){
             //[log appendFormat:@" User-Agent    : %@\n", request.allHTTPHeaderFields[@"User-Agent"]];
             //[log appendFormat:@" Blues-Version : %@\n", request.allHTTPHeaderFields[@"Blues-Version"]];
             [log appendFormat:@"-TOKN:%@\n", request.allHTTPHeaderFields[@"Blues-User"]];
@@ -152,19 +170,21 @@
         
         //[log appendString:@"\n"];
         
-        if(error == nil){
-            NSString *logContent = nil;
-            if(self.dataStore.responseType == REMServiceResponseJson){
-                logContent = [REMAppConfig.requestLogMode integerValue] > 1 ? operation.responseString : [NSString stringWithFormat:@"%@..",[operation.responseString substringToIndex:64]];
+        if(error != nil){
+            [log appendFormat:@"RSP:(ERROR) %@\n", [error description]];
+            return;
+        }
+        
+        [log appendFormat:@"RSP:%@ %d(bytes) in %f(s)\n", isJson ? @"json":@"data", [operation.responseData length],totalTime];
+        
+        if(isJson) {
+            if(isFullLog){
+                [log appendFormat:@"-AUTH:%@\n", response.allHeaderFields[@"Blues-Version"]];
+                [log appendFormat:@"-BODY:%@\n", operation.responseString];
             }
             else{
-                logContent = [NSString stringWithFormat:@"%d bytes data", [operation.responseData length]];
+                [log appendFormat:@"-BODY:%@", [NSString stringWithFormat:@"%@..",[operation.responseString substringToIndex:64]]];
             }
-            
-            [log appendFormat:@"RSP:%@\n", logContent];
-        }
-        else{
-            [log appendFormat:@"RSP:(ERROR) %@\n", [error description]];
         }
         
         NSLog(@"%@",log);

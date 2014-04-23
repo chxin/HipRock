@@ -43,9 +43,9 @@ const static NSString *BUILDOPTION = @"Release";
 {
     self.dataSources = (NSDictionary *)self.dictionary[@"DataSources"];
     
-    NSString *currentDataSourceKey = [self.dictionary[@"CurrentDataSource"] objectForKey:BUILDOPTION];
+    self.currentDataSourceKey = [self.dictionary[@"CurrentDataSource"] objectForKey:BUILDOPTION];
     
-    self.currentDataSource = self.dataSources[currentDataSourceKey];
+    self.currentDataSource = self.dataSources[self.currentDataSourceKey];
 }
 
 -(NSInteger)requestTimeout
@@ -58,6 +58,11 @@ const static NSString *BUILDOPTION = @"Release";
     NSNumber *value = [REMAppConfig.currentDataSource objectForKey:@"debug-logmode"];
     
     return value;
+}
+
+-(NSString *)appStoreUrl
+{
+    return self.dictionary[@"AppStoreUrl"];
 }
 
 @end

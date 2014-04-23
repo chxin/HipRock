@@ -20,6 +20,7 @@ typedef enum _REMDataAccessStatus : NSUInteger{
     REMDataAccessNoConnection = 2,
     REMDataAccessFailed = 3,
     REMDataAccessCanceled = 4,
+    REMDataAccessUnsupported = 5,
 } REMDataAccessStatus;
 
 /**

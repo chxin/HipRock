@@ -30,6 +30,10 @@
 {
     [self clean];
     
+    if(REMIsNilOrNull(dictionary)){
+        return nil;
+    }
+    
     //process building
     if(!REMIsNilOrNull(dictionary[@"BuildingInfo"]) && [dictionary[@"BuildingInfo"] count] >0){
         for (int i=0; i<[dictionary[@"BuildingInfo"] count]; ++i) {
@@ -299,9 +303,11 @@
     NSDictionary *mayair = airData[@"MayAirData"];
     NSDictionary *outdoor = airData[@"OutdoorData"];
     
-    airModel.commodityCode = commodity[@"Code"] ;
-    airModel.commodityId = commodity[@"Id"];
-    airModel.commodityName = NULL_TO_NIL(commodity[@"Comment"]);
+    if(!REMIsNilOrNull(commodity)){
+        airModel.commodityCode = commodity[@"Code"] ;
+        airModel.commodityId = commodity[@"Id"];
+        airModel.commodityName = NULL_TO_NIL(commodity[@"Comment"]);
+    }
     
     if(!REMIsNilOrNull(honeywell)){
         NSDictionary *uom = honeywell[@"Uom"];

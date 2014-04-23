@@ -32,7 +32,6 @@
 "Common_WholeYearFormat"="yyyy whole year";
 "Common_UpdateData"="Update data";
 
-
 "Common_NetNoConnection"="无网络连接，请稍候再试。";
 "Common_NetConnectionFailed"="网络故障，请稍候再试。";
 "Common_NetServerError"="服务器故障，请稍候再试。";
@@ -41,6 +40,9 @@
 "Common_ServerError"="数据获取失败，服务器故障。";
 "Common_ServerTimeoutSimple"="网络故障。";
 "Common_ServerErrorSimple"="服务器故障。";
+
+"Common_ApplicationDidBecomeUnsupported"="目前的版本已不被支持，请前往AppStore更新。";
+"Common_ApplicationNewVersionAvaliable"="有新版本，请前往AppStore更新。";
 
 //Admin,prefix: Admin_
 "Admin_UserTitleEEConsultant"="能源工程顾问";
@@ -126,7 +128,7 @@
 "Setting_UpdateAll"="更新全部数据";
 "Setting_AreYouSureLogout"="您要退出当前账号登录吗?";
 "Setting_AboutProductName"="施耐德电气“云能效”管理平台";
-"Setting_AboutVersion"="iPad版V%@"; //iPad版V1.0.0
+"Setting_AboutVersion"="iPad版V%@ b%@(%@)"; //iPad版V1.0.0 b100(p|t|l|d)
 "Setting_AboutCopyrightChinese"="施耐德电气 版权所有";
 "Setting_AboutCopyrightEnglish%d"="Copyright©%d Schneider Electric All Right Reserved";
 "Setting_UpdateFailed"="数据更新失败。";

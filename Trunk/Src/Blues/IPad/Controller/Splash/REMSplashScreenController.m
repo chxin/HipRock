@@ -58,7 +58,7 @@
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
 //    [self oscarTest];
-    if([self isAlreadyLogin]){
+    if(REMAppContext.loginStatus == YES){
         //perform splash map segue
         [self showMapView];
     }
@@ -124,10 +124,6 @@
     [UIView commitAnimations];
 }
 
--(BOOL)isAlreadyLogin
-{
-    return REMAppContext.currentUser!=nil && REMAppContext.currentCustomer!=nil && [REMAppContext.currentUser.isDemo boolValue] == NO;
-}
 
 
 - (void)showLoginView:(BOOL)isAnimated
