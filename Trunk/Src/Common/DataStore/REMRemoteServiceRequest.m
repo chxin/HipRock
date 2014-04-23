@@ -36,13 +36,12 @@
     
 #ifdef DEBUG
     NSLog(@"Outgoing request: %@", request.URL.absoluteString);
-    NSDate *t1 = [NSDate date];
+    NSDate *start = [NSDate date];
 #endif
     
     REMHTTPRequestOperation *operation = [manager RequestOperationWithRequest:request responseType:self.dataStore.responseType success:^(AFHTTPRequestOperation *operation, id responseObject) {
 #ifdef DEBUG
-        [self logOperation:operation withError:nil];
-        NSLog(@"Total time: %f\n", [[NSDate date] timeIntervalSinceDate:t1]);
+        [self logOperation:operation startedOn:start withError:nil];
 #endif
         //authorization check
         NSString *auth = operation.response.allHeaderFields[@"Blues-Version"];
@@ -65,7 +64,7 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 #ifdef DEBUG
-        [self logOperation:operation withError:error];
+        [self logOperation:operation startedOn:start withError:error];
 #endif
         REMDataAccessStatus status = [self decideErrorStatus:error];
         
@@ -147,9 +146,11 @@
 {
 }
 
--(void)logOperation:(AFHTTPRequestOperation *)operation withError:(NSError *)error
+-(void)logOperation:(AFHTTPRequestOperation *)operation startedOn:(NSDate *)date withError:(NSError *)error
 {
     if(REMAppConfig.requestLogMode != nil && [REMAppConfig.requestLogMode integerValue] > 0) {
+        NSTimeInterval totalTime = [[NSDate date] timeIntervalSinceDate:date];
+        
         BOOL isJson = self.dataStore.responseType == REMServiceResponseJson;
         BOOL isFullLog = [REMAppConfig.requestLogMode integerValue] > 1;
         
@@ -174,7 +175,7 @@
             return;
         }
         
-        [log appendFormat:@"RSP:%@ %d(bytes)\n", isJson ? @"json":@"data", [operation.responseData length]];
+        [log appendFormat:@"RSP:%@ %d(bytes) in %f(s)\n", isJson ? @"json":@"data", [operation.responseData length],totalTime];
         
         if(isJson) {
             if(isFullLog){

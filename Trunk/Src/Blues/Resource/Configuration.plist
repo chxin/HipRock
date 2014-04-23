@@ -22,7 +22,7 @@
 		<key>dev</key>
 		<dict>
 			<key>url</key>
-			<string>http://10.177.0.35/Mobile/</string>
+			<string>http://115.29.189.211/v1.6.0.5/mobile/mobileapihost/</string>
 			<key>timeout</key>
 			<string>90</string>
 			<key>debug-logmode</key>
@@ -46,11 +46,11 @@
 			<key>url</key>
 			<string>http://emopmobile.energymost.com/</string>
 			<key>timeout</key>
-			<string>1000</string>
+			<string>45</string>
 			<key>logRequest</key>
 			<integer>0</integer>
 			<key>debug-logmode</key>
-			<integer>2</integer>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>CurrentDataSource</key>
