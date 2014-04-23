@@ -7,30 +7,30 @@
  */
 //Common, prefix: Common_
 "Common_ServerError" = "抱歉!服务器错误，无法获取最新的能源数据。请稍候再试。";
-"Common_Building"="Building";
-"Common_Last7Day"="Last 7 days";
-"Common_Today"="Today";
-"Common_Yesterday"="Yesterday";
-"Common_ThisWeek"="This week";
-"Common_LastWeek"="Last week";
-"Common_ThisMonth"="This month";
-"Common_LastMonth"="Last month";
-"Common_ThisYear"="This year";
-"Common_LastYear"="Last year";
-"Common_Hour"="Hour";
-"Common_Day"="Day";
-"Common_Week"="Week";
-"Common_Month"="Month";
-"Common_Year"="Year";
-"Common_CustomTime"="Customize";
-"Common_Cancel"="Cancel";
-"Common_Giveup"="Give up";
-"Common_OK"="OK";
-"Common_Quit"="Quit";
-"Common_WholeYear"="Whole year"; //1月，2月...12月，全年
-"Common_YearMonthFormat"="yyyy-MM";
-"Common_WholeYearFormat"="yyyy whole year";
-"Common_UpdateData"="Update data";
+"Common_Building"="楼宇";
+"Common_Last7Day"="之前七天";
+"Common_Today"="今天";
+"Common_Yesterday"="昨天";
+"Common_ThisWeek"="本周";
+"Common_LastWeek"="上周";
+"Common_ThisMonth"="本月";
+"Common_LastMonth"="上月";
+"Common_ThisYear"="今年";
+"Common_LastYear"="去年";
+"Common_Hour"="小时";
+"Common_Day"="天";
+"Common_Week"="周";
+"Common_Month"="月";
+"Common_Year"="年";
+"Common_CustomTime"="自定义";
+"Common_Cancel"="取消";
+"Common_Giveup"="放弃";
+"Common_OK"="好";
+"Common_Quit"="退出";
+"Common_WholeYear"="全年"; //1月，2月...12月，全年
+"Common_YearMonthFormat"="yyyy年MM月";
+"Common_WholeYearFormat"="yyyy年全年";
+"Common_UpdateData"="更新数据";
 
 "Common_NetNoConnection"="无网络连接，请稍候再试。";
 "Common_NetConnectionFailed"="网络故障，请稍候再试。";
@@ -62,21 +62,21 @@
 "Splash_Copyright" = "© 2012-2014 施耐德电气（中国）有限公司版权所有";
 
 //Login, prefix: Login_
-"Login_SkipToLoginButtonText" = "Login";
-"Login_SkipToTrialButtonText" = "Trial";
+"Login_SkipToLoginButtonText" = "登录";
+"Login_SkipToTrialButtonText" = "产品试用";
 
-"Login_LoginCardTitle" = "Login";
-"Login_TrialCardTitle" = "Trail";
+"Login_LoginCardTitle" = "登录";
+"Login_TrialCardTitle" = "产品试用";
 
-"Login_CustomerSelectionTitle" = "Please select a customer";
+"Login_CustomerSelectionTitle" = "请选择客户";
 
 
 //trial card
-"Login_TrialWelcomeText" = "Welcome to try Schneider Electric EMOP";
-"Login_LoginButtonText" = "Login";
-"Login_TrialButtonText" = "Try";
+"Login_TrialWelcomeText" = "欢迎试用施耐德电气“云能效”管理平台";
+"Login_LoginButtonText" = "登录";
+"Login_TrialButtonText" = "产品试用";
 
-"Login_CreatingDemoUserText" = "Creating account..";
+"Login_CreatingDemoUserText" = "账号创建中，请稍候..";
 
 "Login_TrialNoNetwork" = "产品试用申请失败。无网络连接，请连接后再试。";
 "Login_TrialNetworkFailed" = "产品试用申请失败。网络故障，请稍后再试。";
@@ -84,17 +84,17 @@
 "Login_TrialNoCustomer" = "产品试用申请失败，您的用户未关联任何客户";
 
 //login card
-"Login_LoginPrompt" = "Welcome to try Schneider Electric EMOP cloud";
-"Login_LoginUsernamePlaceHolder" = "Username";
-"Login_LoginPasswordPlaceHolder" = "Password";
-"Login_LoginButtonNormalText"="Login";
-"Login_LoginButtonWorkingText"="Working...";
+"Login_LoginPrompt" = "正在登录施耐德电气“云能效”管理平台";
+"Login_LoginUsernamePlaceHolder" = "用户名";
+"Login_LoginPasswordPlaceHolder" = "密码";
+"Login_LoginButtonNormalText"="登录";
+"Login_LoginButtonWorkingText"="正在登录...";
 
 
 "Login_InputNotComplete"="请输入完整的用户名和密码";
-"Login_UserNotExist" = "User does not exist";
-"Login_WrongPassword" = "Wrong password";
-"Login_AccountLocked" = "Failed, username is invalid";
+"Login_UserNotExist" = "该用户名不存在";
+"Login_WrongPassword" = "登录密码错误";
+"Login_AccountLocked" = "登录失败，您的用户名暂时无法使用";
 
 "Login_NoNetwork" = "无网络连接，产品登录失败。请连接后再试。";
 "Login_NetworkFailed" = "网络故障，产品登录失败，请稍后再试。";
