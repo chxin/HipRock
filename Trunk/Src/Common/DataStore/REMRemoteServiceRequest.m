@@ -120,7 +120,7 @@
                               @"accept-encoding": @"gzip,deflate,sdch",
                               @"User-Agent": userAgent,
                               @"Blues-Version": fullVersion,
-                              @"Blues-User": token,
+                              @"Blues-Token": token,
                               }];
     
     return headers;
@@ -164,7 +164,7 @@
         if(isFullLog){
             //[log appendFormat:@" User-Agent    : %@\n", request.allHTTPHeaderFields[@"User-Agent"]];
             //[log appendFormat:@" Blues-Version : %@\n", request.allHTTPHeaderFields[@"Blues-Version"]];
-            [log appendFormat:@"-TOKN:%@\n", request.allHTTPHeaderFields[@"Blues-User"]];
+            [log appendFormat:@"-TOKN:%@\n", request.allHTTPHeaderFields[@"Blues-Token"]];
             [log appendFormat:@"-BODY:%@\n", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]];
         }
         
