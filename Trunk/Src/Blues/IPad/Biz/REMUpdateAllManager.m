@@ -100,6 +100,8 @@ static NSString *customerUpdateAll=@"customerupdateall";
         
         self.customerInfoArray = buildingInfo.customers;
         
+        [REMAppContext cleanImage];
+        
         //sort building by province
         self.buildingInfoArray=[self sortByProvince:buildingInfo.buildingInfo];
         
