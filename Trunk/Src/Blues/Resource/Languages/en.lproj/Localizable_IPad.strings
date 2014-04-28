@@ -31,6 +31,7 @@
 "Common_YearMonthFormat"="yyyy年MM月";
 "Common_WholeYearFormat"="yyyy年全年";
 "Common_UpdateData"="更新数据";
+"Common_Done"="完成鸟";
 
 "Common_NetNoConnection"="无网络连接，请稍候再试。";
 "Common_NetConnectionFailed"="网络故障，请稍候再试。";

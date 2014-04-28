@@ -34,6 +34,7 @@ const CGFloat kWeiboImgOverviewMargin = 16;
 
 const NSInteger kWeiboMaxLength = 140;
 
+
 @implementation REMBuildingWeiboView {
     UIColor *toolbarBottomLineColor;
     UIColor *mainBackgroundColor;
@@ -48,6 +49,9 @@ const NSInteger kWeiboMaxLength = 140;
     UITextView* textView;
     UILabel* charactorLabel;
     UIButton* sendBtn;
+    UIButton *cancelBtn;
+    
+    AFHTTPRequestOperation *weiboNetworkValidateOperation;
 }
 
 - (void)close:(BOOL)fadeOut {
@@ -89,8 +93,9 @@ const NSInteger kWeiboMaxLength = 140;
     toolbarLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:titleTextSize];
     [topToolbar addSubview:toolbarLabel];
     
-    UIButton* cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
     cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [cancelBtn setFrame:CGRectMake(kWeiboButtonMargin, 0, kWeiboButtonWidth, kWeiboToolbarHeight)];
     cancelBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:buttonTextSize];
@@ -98,11 +103,13 @@ const NSInteger kWeiboMaxLength = 140;
     [cancelBtn setTitleColor:buttonEnableTextColor forState:UIControlStateNormal];
     [cancelBtn setTitle:REMIPadLocalizedString(@"Weibo_CancelButtonText") forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(cancelClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
     [sendBtn setFrame:CGRectMake(kWeiboWindowWidth - kWeiboButtonWidth - kWeiboButtonMargin, 0, kWeiboButtonWidth, kWeiboToolbarHeight)];
     sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     sendBtn.titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:buttonTextSize];
     sendBtn.titleLabel.textAlignment = NSTextAlignmentRight;
     [sendBtn setTitleColor:buttonEnableTextColor forState:UIControlStateNormal];
+    [sendBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
     [sendBtn setTitle:REMIPadLocalizedString(@"Weibo_SendButtonText") forState:UIControlStateNormal];
     [sendBtn addTarget:self action:@selector(sendClicked:) forControlEvents:UIControlEventTouchUpInside];
     [topToolbar addSubview:cancelBtn];
@@ -192,6 +199,7 @@ const NSInteger kWeiboMaxLength = 140;
 }
 
 -(void)cancelClicked:(id)sender {
+    [weiboNetworkValidateOperation cancel];
     [self close:YES];
 }
 
@@ -202,8 +210,9 @@ const NSInteger kWeiboMaxLength = 140;
 
 -(void)sendClicked:(id)sender {
     //NetworkStatus reachability = [REMHttpHelper checkCurrentNetworkStatus];
+    [sendBtn setEnabled:NO];
     
-    [REMAppContext.sharedRequestOperationManager HEAD:@"http://api.weibo.com" parameters:nil success:^(AFHTTPRequestOperation *operation) {
+    weiboNetworkValidateOperation = [REMAppContext.sharedRequestOperationManager HEAD:@"http://api.weibo.com" parameters:nil success:^(AFHTTPRequestOperation *operation) {
         if (![Weibo.weibo isAuthenticated]) {
             //        [REMAlertHelper alert:@"未绑定微博账户。"];
             [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
@@ -219,8 +228,12 @@ const NSInteger kWeiboMaxLength = 140;
         } else {
             [self sendWeibo];
         }
+        [sendBtn setEnabled:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [REMAlertHelper alert:REMIPadLocalizedString(@"Weibo_NONetwork")];
+        if(error.code != -999){
+            [REMAlertHelper alert:REMIPadLocalizedString(@"Weibo_NONetwork")];
+        }
+        [sendBtn setEnabled:YES];
     }];
     
     
