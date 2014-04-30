@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "DCChartEnum.h"
+@class REMLoginCarouselController;
 
 @interface REMSplashScreenController : UIViewController
+
+@property (nonatomic,weak) REMLoginCarouselController *carouselController;
 
 - (void)showLoginView:(BOOL)isAnimated;
 - (void)showMapView;

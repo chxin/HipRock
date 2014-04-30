@@ -1,10 +1,10 @@
-/*
- Localizable.strings
- Blues
- 
- Created by 张 锋 on 9/11/13.
- 
- */
+/* 
+  Localizable.strings
+  Blues
+
+  Created by 张 锋 on 9/11/13.
+
+*/
 //Common, prefix: Common_
 "Common_ServerError" = "抱歉!服务器错误，无法获取最新的能源数据。请稍候再试。";
 "Common_Building"="楼宇";
@@ -31,6 +31,7 @@
 "Common_YearMonthFormat"="yyyy年MM月";
 "Common_WholeYearFormat"="yyyy年全年";
 "Common_UpdateData"="更新数据";
+"Common_Done"="完成了";
 
 "Common_NetNoConnection"="无网络连接，请稍候再试。";
 "Common_NetConnectionFailed"="网络故障，请稍候再试。";
@@ -41,7 +42,7 @@
 "Common_ServerTimeoutSimple"="网络故障。";
 "Common_ServerErrorSimple"="服务器故障。";
 
-"Common_ApplicationDidBecomeUnsupported"="目前的版本已不被支持，请前往AppStore更新。";
+"Common_ApplicationDidBecomeUnsupported"="目前的版本太旧，已无法正常使用。请前往App Store更新。";
 "Common_ApplicationNewVersionAvaliable"="有新版本，请前往AppStore更新。";
 
 //Admin,prefix: Admin_

@@ -21,6 +21,7 @@
 //- (IBAction)pageChanged:(id)sender;
 //- (IBAction)jumpLoginButtonTouchDown:(id)sender;
 
+-(void)showFirstCard;
 -(void)showLoginCard;
 -(void)playCarousel:(BOOL)isAnimated;
 -(void)presentCustomerSelectionView;

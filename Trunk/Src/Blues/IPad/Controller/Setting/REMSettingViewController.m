@@ -14,7 +14,11 @@
 #import "REMUpdateAllManager.h"
 
 @interface REMSettingViewController ()
+
 @property (nonatomic) BOOL isLoggingOut;
+@property (nonatomic,strong) AFHTTPRequestOperation *weiboNetworkValidateOperation;
+@property (nonatomic,weak) UIBarButtonItem *doneButton;
+
 @end
 
 @implementation REMSettingViewController
@@ -47,12 +51,28 @@
     //self.navigationController=(UINavigationController *)self.parentViewController;
     self.isLoggingOut=NO;
     
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:REMIPadLocalizedString(@"Common_Done") forState:UIControlStateNormal];
+    
+//    self.doneButton = self.navigationController.navigationBar.topItem.rightBarButtonItems.lastObject;
+//    self.doneButton.target = self;
+//    self.doneButton.action = @selector(doneButtonPressed);
 }
+
+//-(void)doneButtonPressed
+//{
+//    [self.weiboNetworkValidateOperation cancel];
+//}
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.weiboNetworkValidateOperation cancel];
 }
 
 #pragma mark - Table view data source
@@ -215,9 +235,9 @@
         
         [alertView show];
     } else if (!isAuthed && sender.on == YES){
-        if (REMAppContext.networkStatus == AFNetworkReachabilityStatusNotReachable) {
-            [REMAlertHelper alert:REMIPadLocalizedString(@"Weibo_NONetwork")];
-        } else {
+        [sender setEnabled:NO];
+        
+        self.weiboNetworkValidateOperation = [REMAppContext.sharedRequestOperationManager HEAD:@"http://api.weibo.com" parameters:nil success:^(AFHTTPRequestOperation *operation) {
             [Weibo.weibo authorizeWithCompleted:^(WeiboAccount *account, NSError *error) {
                 NSString *message = nil;
                 if (!error) {
@@ -229,7 +249,14 @@
                 }
                 [REMAlertHelper alert:message];
             }];
-        }
+            [sender setEnabled:YES];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if(error.code != -999){
+                [REMAlertHelper alert:REMIPadLocalizedString(@"Weibo_NONetwork")];
+            }
+            [sender setEnabled:YES];
+        }];
+        
     }
 }
 
