@@ -27,8 +27,6 @@
 @interface REMSplashScreenController ()
 
 
-@property (nonatomic,weak) REMLoginCarouselController *carouselController;
-
 
 @end
 

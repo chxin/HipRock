@@ -190,16 +190,14 @@ static BOOL UNSUPPORTED = NO;
         
         NSString *message = REMIPadLocalizedString(@"Common_ApplicationDidBecomeUnsupported");
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"更新", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:nil otherButtonTitles: REMIPadLocalizedString(@"Common_OK"), nil];
         [alert show];
     }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex == 1){
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REMAppConfig.appStoreUrl]];
-    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REMAppConfig.appStoreUrl]];
     
     if(context.loginStatus){
         REMMainNavigationController *mainController = (REMMainNavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];

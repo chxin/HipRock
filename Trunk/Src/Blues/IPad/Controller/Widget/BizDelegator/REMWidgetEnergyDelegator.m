@@ -309,9 +309,6 @@
             [self showLegendView];
         }
         
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:@"BizChanged"
-         object:self userInfo:@{@"status":@(currentLegendStatus)}];
     }
 }
 
@@ -820,8 +817,10 @@
     else{//legend toolbar
         self.currentLegendStatus=REMWidgetLegendTypeLegend;
     }
-    [self legendSwitcherStatus:segment.selectedSegmentIndex];
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BizDetailChanged" object:self userInfo:@{@"status":@(self.currentLegendStatus)}];
+    
+    [self legendSwitcherStatus:segment.selectedSegmentIndex];
 }
 
 - (void)legendSwitcherStatus:(NSUInteger)selectedIndex{
@@ -918,6 +917,9 @@
 {
     if(self.legendView == nil){
         UIView *view = [self prepareLegendView];
+        view.backgroundColor = [UIColor orangeColor];
+        view.layer.borderColor = [UIColor blackColor].CGColor;
+        view.layer.borderWidth = 1;
         
         [self.searchLegendViewContainer addSubview:view];
         self.legendView = view;

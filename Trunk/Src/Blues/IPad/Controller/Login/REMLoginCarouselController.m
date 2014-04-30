@@ -216,6 +216,11 @@ static const int kTrialCardIndex = kCardCount - 2;
     [self showPage:kLoginCardIndex withEaseAnimation:YES];
 }
 
+- (void)showFirstCard
+{
+    [self showPage:0 withEaseAnimation:NO];
+}
+
 - (void)showPage:(int) page withEaseAnimation:(BOOL)ease
 {
     if(page<0 || page>=self.scrollView.subviews.count)
