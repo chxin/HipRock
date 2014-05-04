@@ -917,9 +917,6 @@
 {
     if(self.legendView == nil){
         UIView *view = [self prepareLegendView];
-        view.backgroundColor = [UIColor orangeColor];
-        view.layer.borderColor = [UIColor blackColor].CGColor;
-        view.layer.borderWidth = 1;
         
         [self.searchLegendViewContainer addSubview:view];
         self.legendView = view;
