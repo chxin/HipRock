@@ -31,12 +31,8 @@
     // Log init
     [REMLog bind];
     
-    
     // Recover login info
     [REMApplicationContext recover];
-    
-    //[REMApplicationContext cleanImage];
-    //[REMStorage clearSessionStorage];
     
     // Weibo app key init
     Weibo *weibo = [[Weibo alloc] initWithAppKey:kWeiboAppKey withAppSecret:kWeiboAppSecret];
@@ -44,7 +40,6 @@
     
     // Google key init
     [GMSServices provideAPIKey:kGoogleMapsKey];
-    
     
     return YES;
 }
