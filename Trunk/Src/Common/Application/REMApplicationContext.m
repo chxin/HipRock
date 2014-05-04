@@ -204,11 +204,11 @@ static BOOL UNSUPPORTED = NO;
         
         if(mainController.presentedViewController!=nil){
             [mainController dismissViewControllerAnimated:YES completion:^{
-                [mainController logout];
+                [mainController logoutToFirstCard];
             }];
         }
         else{
-            [mainController logout];
+            [mainController logoutToFirstCard];
         }
     }
 }

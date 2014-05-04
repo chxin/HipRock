@@ -14,6 +14,8 @@
 #import "REMMapGallerySegue.h"
 #import "REMColor.h"
 #import "REMApplicationContext.h"
+#import "REMLoginCarouselController.h"
+
 @interface REMMainNavigationController ()
 
 @end
@@ -73,21 +75,26 @@
     return segue;
 }
 
+/**
+ *  <#Description#>
+ *
+ *  @param cardIndex Start from 0
+ */
+-(void)logoutToFirstCard
+{
+    [self destroy];
+    
+    UIViewController *controller=self.topViewController;
+    controller.view.alpha=0;
+    [self popToRootViewControllerAnimated:YES];
+    
+    REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
+    [splashController.carouselController showFirstCard];
+}
+
 -(void)logout
 {
-//    REMApplicationContext *context=REMAppContext;
-//    REMManagedUserModel *currentUser = context.currentManagedUser;
-//    REMManagedCustomerModel *currentCustomer = context.currentManagedCustomer;
-//    
-//    //[currentUser kill];
-//    //[currentCustomer kill];
-//    currentUser = nil;
-//    currentCustomer = nil;
-//    [currentUser delete:0];
-//    context.sharedUpdateManager = nil;
-    
-    [REMApplicationContext destroy];
-    [REMDataStore cleanData];
+    [self destroy];
     
     UIViewController *controller=self.topViewController;
     controller.view.alpha=0;
@@ -95,6 +102,12 @@
     
     REMSplashScreenController *splashController = [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
     [splashController showLoginView:NO];
+}
+
+-(void)destroy
+{
+    [REMApplicationContext destroy];
+    [REMDataStore cleanData];
 }
 
 -(void)presentInitialView

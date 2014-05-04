@@ -10,7 +10,7 @@
 
 @interface REMMainNavigationController : UINavigationController
 
-
+-(void)logoutToFirstCard;
 -(void)logout;
 -(void)presentInitialView;
 
