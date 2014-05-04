@@ -199,8 +199,9 @@ static BOOL UNSUPPORTED = NO;
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REMAppConfig.appStoreUrl]];
     
+    REMMainNavigationController *mainController = (REMMainNavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    
     if(context.loginStatus){
-        REMMainNavigationController *mainController = (REMMainNavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
         
         if(mainController.presentedViewController!=nil){
             [mainController dismissViewControllerAnimated:YES completion:^{
@@ -210,6 +211,9 @@ static BOOL UNSUPPORTED = NO;
         else{
             [mainController logoutToFirstCard];
         }
+    }
+    else {
+        [(id)mainController.splashController.carouselController performSelector:@selector(showFirstCard)];
     }
 }
 

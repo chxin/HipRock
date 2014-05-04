@@ -7,8 +7,11 @@
  --------------------------------------------------------------------------*///
 
 #import <UIKit/UIKit.h>
+#import "REMSplashScreenController.h"
 
 @interface REMMainNavigationController : UINavigationController
+
+@property (nonatomic,weak,readonly) REMSplashScreenController *splashController;
 
 -(void)logoutToFirstCard;
 -(void)logout;

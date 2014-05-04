@@ -22,6 +22,11 @@
 
 @implementation REMMainNavigationController
 
+-(REMSplashScreenController *)splashController
+{
+    return [self getChildControllerInstanceOfClass:[REMSplashScreenController class]];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
