@@ -11,6 +11,8 @@
 
 
 - (id)persist:(NSDictionary *)dictionary{
+    
+    
     NSDictionary *totalDic = dictionary[@"EnergyUsage"];
     self.commodityInfo.totalValue = NULL_TO_NIL(totalDic[@"DataValue"]);
     self.commodityInfo.totalUom = NULL_TO_NIL(totalDic[@"Uom"][@"Code"]);
