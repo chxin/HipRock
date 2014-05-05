@@ -20,7 +20,11 @@
     NSNumber *step=[self stepNumberByStep:self.step];
     NSArray *newTimeRangeArray=[self timeRangeToDictionaryArray];
     if(self.industryId!=nil || self.zoneId!=nil || self.customizedId!=nil){
-        dic[@"benchmarkOption"]=@{@"IndustryId":self.industryId,@"ZoneId":self.zoneId,@"CustomerizedId":self.customizedId};
+        NSMutableDictionary*benchmarkOption = [[NSMutableDictionary alloc] initWithCapacity:3];
+        if (self.industryId!=nil) [benchmarkOption setObject:self.industryId forKey:@"IndustryId"];
+        if (self.zoneId!=nil) [benchmarkOption setObject:self.zoneId forKey:@"ZoneId"];
+        if (self.customizedId!=nil) [benchmarkOption setObject:self.customizedId forKey:@"CustomerizedId"];
+        dic[@"benchmarkOption"]=benchmarkOption;
     }
     NSMutableDictionary *viewAssociation=[[NSMutableDictionary alloc]initWithCapacity:3];
     if(self.systemDimensionTemplateItemId!=nil){
