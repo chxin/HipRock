@@ -161,6 +161,8 @@
     if (!REMIsNilOrNull(targetEnergy.target) &&  [self isSpecialType:targetEnergy.target.type]) {
         s = [[DCLineSeries alloc]initWithEnergyData:datas];
         s.color = style.benchmarkColor;
+        ((DCLineSeries*)s).symbolType = index % 5;
+        ((DCLineSeries*)s).symbolSize = style.symbolSize;
     } else {
         // seriesStates.count equals seriesAmount when redraw. otherwise wrapper is initializing.
         if (self.seriesStates.count == [self getSeriesAmount] && state != nil) {
