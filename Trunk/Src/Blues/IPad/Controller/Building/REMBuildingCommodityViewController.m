@@ -20,7 +20,6 @@
 #import "REMCommodityUsageValuePersistenceProcessor.h"
 @interface REMBuildingCommodityViewController ()
 
-//typedef void(^SuccessCallback)(BOOL success);
 
 @property (nonatomic,weak) REMBuildingTitleLabelView *totalLabel;
 
