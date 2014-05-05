@@ -86,17 +86,28 @@
 
 - (void)addDataLabel{
     REMManagedBuildingCommodityUsageModel *model=self.commodityUsage;
-    REMEnergyUsageDataModel *commodityUsage = [[REMEnergyUsageDataModel alloc]init];
-    commodityUsage.dataValue = model.totalValue;
-    commodityUsage.uom = [[REMUomModel alloc]init];
-    commodityUsage.uom.code=model.totalUom;
-    self.totalLabel.data=commodityUsage;
     
-    REMEnergyUsageDataModel *carbonUsage = [[REMEnergyUsageDataModel alloc]init];
-    carbonUsage.dataValue = model.carbonValue;
-    carbonUsage.uom = [[REMUomModel alloc]init];
-    carbonUsage.uom.code=model.carbonUom;
-    self.carbonLabel.data=carbonUsage;
+    if(REMIsNilOrNull(model.totalValue)){
+        self.totalLabel.data = nil;
+    }
+    else{
+        REMEnergyUsageDataModel *commodityUsage = [[REMEnergyUsageDataModel alloc]init];
+        commodityUsage.dataValue = model.totalValue;
+        commodityUsage.uom = [[REMUomModel alloc]init];
+        commodityUsage.uom.code=model.totalUom;
+        self.totalLabel.data=commodityUsage;
+    }
+    
+    if(REMIsNilOrNull(model.carbonValue)){
+        self.carbonLabel.data=nil;
+    }
+    else{
+        REMEnergyUsageDataModel *carbonUsage = [[REMEnergyUsageDataModel alloc]init];
+        carbonUsage.dataValue = model.carbonValue;
+        carbonUsage.uom = [[REMUomModel alloc]init];
+        carbonUsage.uom.code=model.carbonUom;
+        self.carbonLabel.data=carbonUsage;
+    }
     
     REMRankingDataModel *rankingUsage = [[REMRankingDataModel alloc]init];
     rankingUsage.denominator = model.rankingDenominator;

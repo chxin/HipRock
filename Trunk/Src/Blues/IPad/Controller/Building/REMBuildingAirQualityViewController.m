@@ -72,25 +72,34 @@
     
     REMManagedBuildingAirQualityModel *airModel = self.airQualityUsage;
     
-    REMEnergyUsageDataModel *honeywellData = [[REMEnergyUsageDataModel alloc]init];
-    honeywellData.dataValue = airModel.honeywellValue;
-    honeywellData.uom = [[REMUomModel alloc]init];
-    honeywellData.uom.code=airModel.honeywellUom;
+    REMEnergyUsageDataModel *honeywellData = nil, *mayairData=nil, *outdoorData=nil;
     
-    REMEnergyUsageDataModel *mayairData = [[REMEnergyUsageDataModel alloc]init];
-    mayairData.dataValue = airModel.mayairValue;
-    mayairData.uom = [[REMUomModel alloc]init];
-    mayairData.uom.code=airModel.mayairUom;
+    if(!REMIsNilOrNull(airModel.honeywellValue)){
+        honeywellData = [[REMEnergyUsageDataModel alloc]init];
+        honeywellData.dataValue = airModel.honeywellValue;
+        honeywellData.uom = [[REMUomModel alloc]init];
+        honeywellData.uom.code=airModel.honeywellUom;
+    }
     
-    REMEnergyUsageDataModel *outdoorData = [[REMEnergyUsageDataModel alloc]init];
-    outdoorData.dataValue = airModel.outdoorValue;
-    outdoorData.uom = [[REMUomModel alloc]init];
-    outdoorData.uom.code=airModel.outdoorUom;
+    if(!REMIsNilOrNull(airModel.mayairValue)){
+        mayairData = [[REMEnergyUsageDataModel alloc]init];
+        mayairData.dataValue = airModel.mayairValue;
+        mayairData.uom = [[REMUomModel alloc]init];
+        mayairData.uom.code=airModel.mayairUom;
+    }
+    
+    if(!REMIsNilOrNull(airModel.outdoorValue)){
+        outdoorData = [[REMEnergyUsageDataModel alloc]init];
+        outdoorData.dataValue = airModel.outdoorValue;
+        outdoorData.uom = [[REMUomModel alloc]init];
+        outdoorData.uom.code=airModel.outdoorUom;
+    }
     
     self.totalLabel.data=honeywellData;
     self.honeywellLabel.data=honeywellData;
     self.mayairLabel.data=mayairData;
     self.outdoorLabel.data=outdoorData;
+    
     [self loadedPart];
 }
 
