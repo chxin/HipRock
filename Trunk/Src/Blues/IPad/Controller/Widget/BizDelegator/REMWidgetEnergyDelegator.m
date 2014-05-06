@@ -297,7 +297,7 @@
 {
     if(_currentLegendStatus!=currentLegendStatus){
         _currentLegendStatus=currentLegendStatus;
-        
+        if (self.chartWrapper==nil) return;
         if (currentLegendStatus==REMWidgetLegendTypeSearch) {
             [self.legendSearchControl setSelectedSegmentIndex:0];
             [self legendSwitcherStatus:0];
@@ -493,7 +493,12 @@
         }
         [self.chartContainer addSubview:[widgetWrapper getView]];
         self.chartWrapper=widgetWrapper;
-    }    
+    }
+    if (self.legendView==nil && self.currentLegendStatus==REMWidgetLegendTypeLegend) {
+        [self.legendSearchControl setSelectedSegmentIndex:1];
+        [self legendSwitcherStatus:1];
+        [self showLegendView];
+    }
 }
 
 
