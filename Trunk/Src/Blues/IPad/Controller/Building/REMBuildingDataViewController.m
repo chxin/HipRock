@@ -288,7 +288,7 @@
     if(self.childViewControllers.count>0)return;
     int count= self.commodityArray==nil ? 0:self.commodityArray.count;
     
-    CGRect frame=CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.view.frame.size.width, self.view.frame.size.height+kBuildingCommodityViewTop);
+    CGRect frame=CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.view.frame.size.width, self.view.frame.size.height+kBuildingCommodityViewTop+80);
     int i=0;
 
     for (; i<count; ++i) {

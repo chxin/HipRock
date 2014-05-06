@@ -77,7 +77,7 @@
 
 #define kCoverLegendFontSize 14
 
-#define kBuildingTrendChartLegendHeight 70
+#define kBuildingTrendChartLegendHeight 75
 #define kBuildingChartHeight 266+85
 #define kBuildingChartWidth 840
 

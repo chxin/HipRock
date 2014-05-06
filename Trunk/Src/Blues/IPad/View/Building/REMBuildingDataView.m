@@ -6,6 +6,7 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMBuildingDataView.h"
+#import "REMBuildingCoverLegendContainer.h"
 
 @implementation REMBuildingDataView
 
@@ -21,6 +22,7 @@
 
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    if([gestureRecognizer.view isKindOfClass:[REMBuildingCoverLegendContainer class]] == YES) return NO;
     if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]==YES){
         UIPanGestureRecognizer *pan=(UIPanGestureRecognizer *)gestureRecognizer;
         if(pan.delegate == self){
