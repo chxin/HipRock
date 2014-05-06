@@ -67,6 +67,7 @@
             manager.selectedCustomerId = customer.id;
             manager.tableViewController=self;
             manager.updateSource=REMCustomerUserConcurrencySourceSwitchCustomer;
+            manager.mainNavigationController = (REMMainNavigationController *)self.presentingViewController;
             self.updateManager=manager;
             [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessStatus errorStatus) {
                 if (status == REMCustomerUserConcurrencyStatusSuccess) {
