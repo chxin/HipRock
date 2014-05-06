@@ -115,7 +115,9 @@
         [self generateChart];
     }
     else{
+//        if ([self.widgetInfo.name isEqualToString:@"自定义时间成本查看line"]) {
         [self queryEnergyData:self.contentSyntax withGroupName:self.groupName];
+//        }
     }
 }
 
