@@ -19,6 +19,7 @@
 
 @property (nonatomic,weak) UIImageView *arrow;
 
+@property (nonatomic,strong) NSArray *dashboards;
 
 @end
 
@@ -27,7 +28,16 @@
 
 static NSString *cellId=@"dashboardcell";
 
-
+-(NSArray *)dashboards
+{
+    if(_dashboards == nil){
+        _dashboards = [self.buildingInfo.dashboards.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            return [[obj2 id] compare:[obj1 id]];
+        }];
+    }
+    
+    return _dashboards;
+}
 
 - (void)cancelAllRequest{
     [REMDataStore cancel:[self groupName]];
@@ -119,7 +129,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    NSInteger count= self.buildingInfo.dashboards.count;
+    NSInteger count= self.dashboards.count;
     if(count==0){
         return 1;
     }
@@ -128,11 +138,11 @@ static NSString *dashboardGroupName=@"building-data-%@";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (self.buildingInfo.dashboards.count==0) {
+    if (self.dashboards.count==0) {
         return 100;
     }
     
-    REMManagedDashboardModel *obj= [self.buildingInfo.dashboards allObjects][indexPath.section];
+    REMManagedDashboardModel *obj= self.dashboards[indexPath.section];
     CGFloat titleHeight=kDashboardTitleSize+kDashboardTitleBottomMargin+4;
     if(obj.sharedInfo!=nil){
         titleHeight+=kDashboardShareSize+kDashboardTitleShareMargin;
@@ -159,7 +169,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
     //cell.contentView.layer.borderColor=[UIColor yellowColor].CGColor;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
-    if (self.buildingInfo.dashboards.count==0) {
+    if (self.dashboards.count==0) {
         NSString *emptyText=REMIPadLocalizedString(@"Dashboard_Empty");//未配置任何仪表盘。
         cell.textLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.5];
         cell.textLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:29];
@@ -188,7 +198,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
         REMWidgetCollectionViewController *widgetCollectionController = [[REMWidgetCollectionViewController alloc]initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc]init]];
         
         widgetCollectionController.currentDashboardIndex=indexPath.section;
-        widgetCollectionController.dashboardInfo=[self.buildingInfo.dashboards allObjects][indexPath.section];
+        widgetCollectionController.dashboardInfo=self.dashboards[indexPath.section];
         widgetCollectionController.groupName=[self groupName];
         
         [self addChildViewController:widgetCollectionController];
@@ -200,7 +210,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
     
     
     
-    CGRect viewFrame= [self addTitleForCell:cell withDashboardInfo:[self.buildingInfo.dashboards allObjects][indexPath.section]];
+    CGRect viewFrame= [self addTitleForCell:cell withDashboardInfo:self.dashboards[indexPath.section]];
     
     current.viewFrame=viewFrame;
     cell.tag=indexPath.section;

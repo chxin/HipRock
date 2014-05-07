@@ -179,14 +179,24 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 
 - (NSArray *)piningWidgetList{
     NSMutableArray *array=[NSMutableArray array];
-    for (int i=0; i<self.buildingInfo.commodities.count; ++i) {
-        REMManagedBuildingCommodityUsageModel *commodity=[self.buildingInfo.commodities allObjects][i];
+    
+    NSArray *commodityArray = [self.buildingInfo.commodities.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [[obj1 id] compare:[obj2 id]];
+    }];
+    
+    for (int i=0; i<commodityArray.count; ++i) {
+        REMManagedBuildingCommodityUsageModel *commodity=commodityArray[i];
         NSMutableDictionary *dic=[NSMutableDictionary dictionary];
         dic[@"name"]= commodity.comment;
         dic[@"Id"]=commodity.id;
         BOOL foundFirst=NO;
         BOOL foundSecond=NO;
-        for (REMManagedPinnedWidgetModel *relation in [commodity.pinnedWidgets allObjects]) {
+        
+        NSArray *widgetArray = [commodity.pinnedWidgets.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            return [[obj1 widgetId] compare:[obj2 widgetId]];
+        }];
+        
+        for (REMManagedPinnedWidgetModel *relation in widgetArray) {
             REMManagedWidgetModel *widget=[self widgetByRelation:relation];
             if (widget!=nil && [widget.id isGreaterThan:@(0)]==YES) {
                 if (((REMBuildingCoverWidgetPosition)[relation.position intValue]) == REMBuildingCoverWidgetPositionFirst) {

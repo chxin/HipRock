@@ -12,7 +12,7 @@
 
 @interface REMWidgetCollectionViewController ()
 
-
+@property (nonatomic,strong) NSArray *widgets;
 
 @end
 
@@ -29,7 +29,16 @@ static NSString *cellId=@"widgetcell";
     return self;
 }
 
-
+-(NSArray *)widgets
+{
+    if(_widgets == nil){
+        _widgets = [self.dashboardInfo.widgets.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            return [[obj1 id] compare:[obj2 id]];
+        }];
+    }
+    
+    return _widgets;
+}
 
 
 - (id)initWithCollectionViewLayout:(UICollectionViewFlowLayout *)flowlayout
@@ -74,7 +83,7 @@ static NSString *cellId=@"widgetcell";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.dashboardInfo.widgets.count;
+    return self.widgets.count;
 }
 
 - (void)releaseContentView{
@@ -99,7 +108,7 @@ static NSString *cellId=@"widgetcell";
     else{
         controller=[[REMWidgetCellViewController alloc]init];
         controller.viewFrame=cell.contentView.bounds;
-        REMManagedWidgetModel *widget=[self.dashboardInfo.widgets allObjects][indexPath.row];
+        REMManagedWidgetModel *widget=self.widgets[indexPath.row];
         
         controller.widgetInfo=widget;
         
@@ -121,7 +130,7 @@ static NSString *cellId=@"widgetcell";
 - (void)maxWidget{
 
     
-    REMManagedWidgetModel *obj=[self.dashboardInfo.widgets allObjects][self.currentMaxWidgetIndex];
+    REMManagedWidgetModel *obj=self.widgets[self.currentMaxWidgetIndex];
     
     self.currentMaxWidgetId=obj.id;
     

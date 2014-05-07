@@ -74,6 +74,11 @@
     model.customers = [self fetch:[REMManagedCustomerModel class]];
     model.status = REMCustomerUserConcurrencyStatusSuccess;
     
+//    for(REMManagedBuildingModel *building in model.buildingInfo){
+//        building.dashboards = [NSSet setWithArray:[building.dashboards sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"id" ascending:YES]]]];
+//        building.commodities = [NSSet setWithArray:[building.commodities sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"id" ascending:YES]]]];
+//    }
+    
     return model;
 }
 
