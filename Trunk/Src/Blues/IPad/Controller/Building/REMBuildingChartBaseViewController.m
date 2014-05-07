@@ -11,36 +11,25 @@
 #import "DCDataPoint.h"
 #import "REMCommonHeaders.h"
 #import "REMEnergyDataPersistenceProcessor.h"
+#import "REMBuildingCoverLegendContainer.h"
 
 @interface REMBuildingChartBaseViewController ()
 
 @property (nonatomic,weak) UIActivityIndicatorView *activityIndicatorView;
-@property (nonatomic,strong) UIView* legendContainer;
+@property (nonatomic,strong) REMBuildingCoverLegendContainer* legendContainer;
 @property (nonatomic,strong) NSString *errorText;
 
 @end
 
 @implementation REMBuildingChartBaseViewController
 
-
-
-//- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
-//{
-//    self = [super init];
-//    if (self) {
-//        self.view.frame = frame;
-//        
-//        self.legendContainer = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height-kBuildingTrendChartLegendHeight, frame.size.width, kBuildingTrendChartLegendHeight)];
-//        [self.view addSubview:self.legendContainer];
-//    }
-//    return self;
-//}
-
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.view.frame = self.viewFrame;
     
-    self.legendContainer = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-kBuildingTrendChartLegendHeight, self.view.frame.size.width, kBuildingTrendChartLegendHeight)];
+    self.legendContainer = [[REMBuildingCoverLegendContainer alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-kBuildingTrendChartLegendHeight, self.view.frame.size.width, kBuildingTrendChartLegendHeight)];
+    self.legendContainer.contentSize = self.legendContainer.frame.size;
+    
     [self.view addSubview:self.legendContainer];
     
     if (self.chartWrapper!=nil) {
@@ -135,6 +124,11 @@
             REMBuildingChartSeriesIndicator *averageDataIndicator = [[REMBuildingChartSeriesIndicator alloc] initWithFrame:CGRectMake(labelLeftOffset, labelTopOffset, averageDataWidth, textSize.height) title:legendText andColor:legendColor];
             labelLeftOffset=labelLeftOffset+averageDataWidth+labelDistance;
             [self.legendContainer addSubview:averageDataIndicator];
+        }
+        
+        CGFloat legendContentHeight = labelTopOffset+20;
+        if (legendContentHeight > self.legendContainer.frame.size.height) {
+            self.legendContainer.contentSize = CGSizeMake(self.view.frame.size.width, labelTopOffset+20);
         }
     }
 }

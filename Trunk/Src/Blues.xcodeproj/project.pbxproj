@@ -708,6 +708,7 @@
 		EF1CD12F18D29F3C008F8F5E /* DCTrendChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1CD12E18D29F3C008F8F5E /* DCTrendChartDataProcessor.m */; };
 		EF2043B3187BD94400272319 /* REMNumberExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2043B2187BD94400272319 /* REMNumberExtension.m */; };
 		EF2043B5187BDC4300272319 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2043B4187BDC4300272319 /* CoreText.framework */; };
+		EF214CD31918CC2E0039102B /* REMBuildingCoverLegendContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF214CD21918CC2E0039102B /* REMBuildingCoverLegendContainer.m */; };
 		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 		EF5D1A801867D10E0069C8F5 /* _DCVGridlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5D1A7F1867D10E0069C8F5 /* _DCVGridlineLayer.m */; };
@@ -1524,6 +1525,8 @@
 		EF2043B1187BD94400272319 /* REMNumberExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMNumberExtension.h; path = Common/Utility/REMNumberExtension.h; sourceTree = "<group>"; };
 		EF2043B2187BD94400272319 /* REMNumberExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMNumberExtension.m; path = Common/Utility/REMNumberExtension.m; sourceTree = "<group>"; };
 		EF2043B4187BDC4300272319 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
+		EF214CD11918CC2E0039102B /* REMBuildingCoverLegendContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingCoverLegendContainer.h; sourceTree = "<group>"; };
+		EF214CD21918CC2E0039102B /* REMBuildingCoverLegendContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingCoverLegendContainer.m; sourceTree = "<group>"; };
 		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
@@ -2638,6 +2641,8 @@
 				7A63E19C18B44CBC00A13464 /* REMStackChartLegendView.m */,
 				7A63E19D18B44CBC00A13464 /* REMTrendChartLegendView.h */,
 				7A63E19E18B44CBC00A13464 /* REMTrendChartLegendView.m */,
+				EF214CD11918CC2E0039102B /* REMBuildingCoverLegendContainer.h */,
+				EF214CD21918CC2E0039102B /* REMBuildingCoverLegendContainer.m */,
 			);
 			path = Legend;
 			sourceTree = "<group>";
@@ -4236,6 +4241,7 @@
 				7A63E21B18B44CBD00A13464 /* REMWidgetDetailViewDelegator.m in Sources */,
 				EF1C5ADD183E23DA002A9AAD /* _DCLineSymbolsLayer.m in Sources */,
 				7A63E26418B44CBD00A13464 /* REMToggleButtonGroup.m in Sources */,
+				EF214CD31918CC2E0039102B /* REMBuildingCoverLegendContainer.m in Sources */,
 				EFD946FE1839DCBB00E9EC50 /* _DCCoordinateSystem.m in Sources */,
 				7A63E22618B44CBD00A13464 /* REMEnergyUsageDataModel.m in Sources */,
 				7A62E33718DC1DB10029E908 /* REMLoginPersistenceProcessor.m in Sources */,
