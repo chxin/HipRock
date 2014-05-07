@@ -284,6 +284,10 @@
         commodity.code = dictionary[@"Code"];
         commodity.comment = dictionary[@"Comment"];
         commodity.building = building;
+        
+        commodity.carbonValue = nil;
+        commodity.totalValue = nil;
+        
         [building addCommoditiesObject:commodity];
     }
 }
