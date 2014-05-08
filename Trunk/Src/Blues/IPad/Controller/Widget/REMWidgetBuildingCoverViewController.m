@@ -15,9 +15,23 @@
 @property (nonatomic,strong) NSMutableArray *currentSelectedArray;
 @property (nonatomic,strong) NSMutableArray *selectedPathArray;
 @property (nonatomic,strong) REMPinToBuildingCoverHelper *pinHelper;
+
+@property (nonatomic,strong) NSArray *commodityArray;
+
 @end
 
 @implementation REMWidgetBuildingCoverViewController
+
+-(NSArray *)commodityArray
+{
+    if(_commodityArray == nil){
+        _commodityArray= [self.buildingInfo.commodities.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            return [[obj1 id] compare:[obj2 id]];
+        }];
+    }
+    
+    return _commodityArray;
+}
 
 
 - (void)viewDidLoad
@@ -172,7 +186,7 @@
         dic[@"WidgetId"]=self.detailController.widgetInfo.id;
         dic[@"DashboardId"]=self.dashboardInfo.id;
         
-        REMManagedBuildingCommodityUsageModel *commodity=[self.buildingInfo.commodities allObjects][path.section-1];
+        REMManagedBuildingCommodityUsageModel *commodity = self.commodityArray[path.section-1];
         dic[@"CommodityId"]=commodity.id;
         dic[@"Position"]= @((REMBuildingCoverWidgetPosition)path.row);
         
@@ -192,7 +206,7 @@
             dic[@"WidgetId"]=self.detailController.widgetInfo.id;
             dic[@"DashboardId"]=self.dashboardInfo.id;
             
-            REMManagedBuildingCommodityUsageModel *commodity=[self.buildingInfo.commodities allObjects][path.section-1];
+            REMManagedBuildingCommodityUsageModel *commodity=self.commodityArray[path.section-1];
             dic[@"CommodityId"]=commodity.id;
             dic[@"Position"]= @(path.row-2);
             [array addObject:dic];

@@ -219,17 +219,24 @@
 }
 
 - (void)generateServerErrorLabel:(NSString *)msg{
+    UIFont *font = [UIFont systemFontOfSize:kDashboardWidgetTitleSize];
+    
+    CGSize size = [msg sizeWithFont:font];
+    
     UILabel *label=[[UILabel alloc]init];
     label.translatesAutoresizingMaskIntoConstraints=NO;
     label.textColor= [[UIColor blackColor] colorWithAlphaComponent:0.6] ;
     label.text=msg;
-    label.font=[UIFont systemFontOfSize:kDashboardWidgetTitleSize];
+    label.font=font;
     [label setBackgroundColor:[UIColor clearColor]];
-    NSLayoutConstraint *constraintX=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-    NSLayoutConstraint *constraintY=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    
+    label.frame = CGRectMake((self.view.bounds.size.width - size.width)/2, (self.view.bounds.size.height - size.height)/2, size.width, size.height);
+    
+//    NSLayoutConstraint *constraintX=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+//    NSLayoutConstraint *constraintY=[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+//    [self.view addConstraint:constraintX];
+//    [self.view addConstraint:constraintY];
     [self.view addSubview:label];
-    [self.view addConstraint:constraintX];
-    [self.view addConstraint:constraintY];
     
 
 }

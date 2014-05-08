@@ -41,7 +41,13 @@
 
 - (id)fetch{
     NSMutableArray *array = [NSMutableArray array];
-    for (REMManagedBuildingCommodityUsageModel *commodityInfo in [self.buildingInfo.commodities allObjects]) {
+    
+    NSArray *commodityArray = [[NSArray alloc] init];
+    commodityArray = [self.buildingInfo.commodities.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [((REMManagedBuildingCommodityUsageModel *)obj1).id compare:( (REMManagedBuildingCommodityUsageModel *)obj2).id];
+    }];
+    
+    for (REMManagedBuildingCommodityUsageModel *commodityInfo in commodityArray) {
         array = [NSMutableArray arrayWithArray:[array arrayByAddingObjectsFromArray:[commodityInfo.pinnedWidgets allObjects]]];
     }
     

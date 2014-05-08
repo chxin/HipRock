@@ -50,7 +50,6 @@ const static CGFloat buildingGap=20;
 
 @implementation REMBuildingViewController
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -487,7 +486,7 @@ const static CGFloat buildingGap=20;
         self.maxDashbaordController=dashboard;
         maxController.buildingInfo=self.buildingInfoArray[self.currentBuildingIndex];
         maxController.widgetCollectionController=collection;
-        maxController.dashboardInfo=[dashboard.buildingInfo.dashboards allObjects][dashboard.currentMaxDashboardIndex];
+        maxController.dashboardInfo= dashboard.dashboards[dashboard.currentMaxDashboardIndex];
         
     }
 }
