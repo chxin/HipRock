@@ -35,7 +35,7 @@
 
 @implementation REMGalleryViewController
 
-#define REMGalleryTableCellHeight(c) (kDMGallery_GalleryGroupTitleFontSize + kDMGallery_GalleryCollectionViewTopMargin + kDMGallery_GalleryCollectionViewBottomMargin + ((((c) / 6) + 1) * kDMGallery_GalleryCellHeight) + (((c) / 6) * kDMGallery_GalleryCellVerticleSpace))
+#define REMGalleryTableCellHeight(c) (kDMGallery_GalleryGroupTitleFontSize + kDMGallery_GalleryCollectionViewTopMargin + kDMGallery_GalleryCollectionViewBottomMargin + (ceil((c)/6.0f) * kDMGallery_GalleryCellHeight) + ((ceil((c)/6.0f) - 1) * kDMGallery_GalleryCellVerticleSpace))
 
 
 -(void)viewDidLoad

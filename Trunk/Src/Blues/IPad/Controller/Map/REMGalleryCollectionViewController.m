@@ -49,7 +49,7 @@
 
 -(CGRect)getCollectionFrame
 {
-    int rowCount = (self.buildingInfoArray.count / 6) + 1;
+    int rowCount = ceil((self.buildingInfoArray.count / 6.0f));
     CGFloat height = kDMGallery_GalleryCollectionViewTopMargin + kDMGallery_GalleryCollectionViewBottomMargin + (rowCount * kDMGallery_GalleryCellHeight) + ((rowCount - 1) * kDMGallery_GalleryCellVerticleSpace);
     
     return CGRectMake(0, kDMGallery_GalleryGroupTitleFontSize, kDMGallery_GalleryGroupViewWidth, height);

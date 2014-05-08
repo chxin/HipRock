@@ -35,7 +35,7 @@
 			<key>url</key>
 			<string>http://112.124.56.137/v1.6p/mobile/mobileapihost/</string>
 			<key>timeout</key>
-			<string>45</string>
+			<string>70</string>
 			<key>debug-logmode</key>
 			<integer>2</integer>
 			<key>debug-user</key>
@@ -46,7 +46,7 @@
 			<key>url</key>
 			<string>http://emopmobile.energymost.com/</string>
 			<key>timeout</key>
-			<string>45</string>
+			<string>70</string>
 			<key>logRequest</key>
 			<integer>0</integer>
 			<key>debug-logmode</key>
@@ -56,7 +56,7 @@
 	<key>CurrentDataSource</key>
 	<dict>
 		<key>Debug</key>
-		<string>local</string>
+		<string>test</string>
 		<key>DailyBuild</key>
 		<string>test</string>
 		<key>Release</key>
