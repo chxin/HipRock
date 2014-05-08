@@ -12,6 +12,7 @@
 #import "REMDimensions.h"
 #import "REMBuildingConstants.h"
 #import "REMManagedBuildingPictureModel.h"
+#import "REMCustomerLogoView.h"
 
 #define kBuildingImageLoadingKeyPrefix "buildingimage-%@"
 
@@ -26,7 +27,7 @@
 @property (nonatomic,weak) CALayer *bottomGradientLayer;
 @property (nonatomic,weak) UILabel *buildingTypeTitleView;
 @property (nonatomic,weak) UILabel *buildingTitleView;
-@property (nonatomic,weak) UIImageView *logoButton;
+@property (nonatomic,weak) UIView *logoButton;
 @property (nonatomic,strong) NSString *loadingImageKey;
 
 @property (nonatomic,weak) UIImageView *cropTitleView;
@@ -346,11 +347,12 @@
     self.buildingTitleView=titleLabel;
     
     
-    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentCustomer.logoImage]];
-    [logoView setFrame:CGRectMake(kDMCommon_CustomerLogoLeft, kDMCommon_CustomerLogoTop, kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
-    logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
-
+//    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentCustomer.logoImage]];
+//    [logoView setFrame:CGRectMake(kDMCommon_CustomerLogoLeft, kDMCommon_CustomerLogoTop, kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
+//    logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
     
+    REMCustomerLogoView *logoView = [[REMCustomerLogoView alloc] initWithFrame:CGRectMake(kDMCommon_CustomerLogoLeft, kDMCommon_CustomerLogoTop, kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
+
     [self.container addSubview:logoView];
     self.logoButton=logoView;
 }

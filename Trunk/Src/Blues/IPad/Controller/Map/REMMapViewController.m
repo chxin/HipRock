@@ -22,6 +22,7 @@
 #import "REMBlurredMapView.h"
 #import "REMUpdateAllManager.h"
 #import "REMManagedBuildingModel.h"
+#import "REMCustomerLogoView.h"
 
 @interface REMMapViewController ()
 
@@ -29,7 +30,7 @@
 @property (nonatomic,strong) NSMutableArray *markers;
 @property (nonatomic,weak) REMBlurredMapView *mask;
 @property (nonatomic,weak) UIButton *switchButton;
-@property (nonatomic,weak) UIImageView *customerLogoView;
+@property (nonatomic,weak) UIView *customerLogoView;
 
 @end
 
@@ -141,9 +142,13 @@
     }
     
     //add customer logo button
-    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentCustomer.logoImage]];
-    logoView.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
-    logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
+//    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentCustomer.logoImage]];
+//    logoView.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
+//    logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
+    
+    
+    REMCustomerLogoView *logoView = [[REMCustomerLogoView alloc] initWithFrame:CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
+    
     [self.view addSubview:logoView];
     self.customerLogoView = logoView;
 }

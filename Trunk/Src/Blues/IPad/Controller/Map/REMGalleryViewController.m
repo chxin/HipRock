@@ -19,6 +19,7 @@
 #import "REMGalleryCollectionViewController.h"
 #import "REMImages.h"
 #import "REMGalleryTableView.h"
+#import "REMCustomerLogoView.h"
 
 
 @interface REMGalleryViewController ()
@@ -27,7 +28,7 @@
 @property (nonatomic,strong) NSArray *orderedProvinceKeys;
 @property (nonatomic,weak) REMGalleryTableView *galleryTableView;
 @property (nonatomic) BOOL isSegueNotAnimated;
-@property (nonatomic,weak) UIImageView *customerLogoView;
+@property (nonatomic,weak) UIView *customerLogoView;
 
 @end
 
@@ -143,9 +144,23 @@
     [self.view addSubview:switchButton];
     
     //add customer logo button
-    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentCustomer.logoImage]];
-    logoView.frame = CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight);
-    logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
+//    UIView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
+//    logoView.contentMode = UIViewContentModeLeft;
+//    logoView.layer.borderColor = [UIColor orangeColor].CGColor;
+//    logoView.layer.borderWidth = 1;
+//    
+//    UIImage *logo = [UIImage imageWithData:REMAppContext.currentCustomer.logoImage];
+//    UIImageView *logoInnerView = [[UIImageView alloc] initWithImage:logo];// | UIViewContentModeScaleAspectFit
+//    
+//    logoInnerView.frame = CGRectMake(0, 0, logo.size.width, CGFloat height);
+//    logoInnerView.contentMode = UIViewContentModeScaleAspectFit;
+//    logoInnerView.layer.borderColor = [UIColor blueColor].CGColor;
+//    logoInnerView.layer.borderWidth = 1;
+//    
+//    [logoView addSubview:logoInnerView];
+    
+    REMCustomerLogoView *logoView = [[REMCustomerLogoView alloc] initWithFrame:CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
+    
     [self.view addSubview:logoView];
     self.customerLogoView = logoView;
     
