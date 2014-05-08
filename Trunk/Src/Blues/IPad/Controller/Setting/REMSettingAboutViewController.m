@@ -39,9 +39,12 @@
     NSString *version=REMIPadLocalizedString(@"Setting_AboutVersion");//iPad版V%@
     NSString *versionNumber=[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     NSString *buildNumber = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
-    NSString *dataSource = REMAppConfig.currentDataSourceKey;
+    NSString *dataSource = [[REMAppConfig.currentDataSourceKey substringToIndex:1] lowercaseString];
     
-    versionLabel.text=[NSString stringWithFormat:version,versionNumber,buildNumber,[[dataSource substringToIndex:1] lowercaseString]];
+    NSString *dataSourceCode = [dataSource isEqualToString: @"p"] ? @"" : [NSString stringWithFormat:@"(%@)", dataSource];
+    
+    versionLabel.text=[NSString stringWithFormat:version,versionNumber,buildNumber,dataSourceCode];
+    
     [self.view addSubview:versionLabel];
     UILabel *copyrightChineseLabel=[[UILabel alloc]init];
     copyrightChineseLabel.translatesAutoresizingMaskIntoConstraints=NO;
