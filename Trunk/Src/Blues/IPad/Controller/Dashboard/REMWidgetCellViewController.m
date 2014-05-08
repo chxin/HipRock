@@ -228,7 +228,7 @@
     label.textColor= [[UIColor blackColor] colorWithAlphaComponent:0.6] ;
     label.text=msg;
     label.font=font;
-    [label setBackgroundColor:[UIColor orangeColor]];
+    [label setBackgroundColor:[UIColor clearColor]];
     
     label.frame = CGRectMake((self.view.bounds.size.width - size.width)/2, (self.view.bounds.size.height - size.height)/2, size.width, size.height);
     
