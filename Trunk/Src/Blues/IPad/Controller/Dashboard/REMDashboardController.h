@@ -48,6 +48,8 @@ const static CGFloat kDashboardWidgetChartHeight=108;
 
 @property (nonatomic) CGFloat currentOffsetY;
 
+@property (nonatomic,strong) NSArray *dashboards;
+
 -(void)cancelAllRequest;
 
 - (void) maxWidget;

@@ -18,14 +18,10 @@ const static CGFloat widgetGap=20;
 @interface REMWidgetMaxViewController()
 
 @property (nonatomic) CGFloat cumulateX;
-
-
 @property (nonatomic,weak) NSTimer *stopTimer;
-
-
 @property (nonatomic,weak) UIImageView *srcBg;
-
 @property (nonatomic) BOOL readyToClose;
+@property (nonatomic,strong) NSArray *widgets;
 
 
 @end
@@ -42,6 +38,17 @@ const static CGFloat widgetGap=20;
     }
     
     return self;
+}
+
+-(NSArray *)widgets
+{
+    if(_widgets == nil){
+        _widgets = [self.dashboardInfo.widgets.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            return [[obj1 id] compare:[obj2 id]];
+        }];
+    }
+    
+    return _widgets;
 }
 
 -(void)dealloc{
@@ -75,8 +82,8 @@ const static CGFloat widgetGap=20;
     [self.view setBackgroundColor:[UIColor blackColor]];
     self.cumulateX=0;
     self.readyToClose=NO;
-    for (int i=0; i<self.dashboardInfo.widgets.count; ++i) {
-        REMManagedWidgetModel *obj=[self.dashboardInfo.widgets allObjects][i];
+    for (int i=0; i<self.widgets.count; ++i) {
+        REMManagedWidgetModel *obj=self.widgets[i];
         
         REMWidgetDetailViewController *sub=[[REMWidgetDetailViewController alloc]init];
         sub.widgetInfo=obj;
@@ -185,7 +192,7 @@ const static CGFloat widgetGap=20;
 }
 
 - (void)cancelAllRequest{
-    for (REMManagedWidgetModel *widget in [self.dashboardInfo.widgets allObjects]) {
+    for (REMManagedWidgetModel *widget in self.widgets) {
         [REMDataStore cancel:[NSString stringWithFormat:@"widget-%@",widget.id]];
     }
 }
@@ -205,7 +212,7 @@ const static CGFloat widgetGap=20;
             REMWidgetDetailViewController *vc = self.childViewControllers[i];
             
             if((self.currentWidgetIndex == 0 && self.cumulateX>0 ) ||
-               ((self.currentWidgetIndex==(self.dashboardInfo.widgets.count-1)) && self.cumulateX<0)){
+               ((self.currentWidgetIndex==(self.widgets.count-1)) && self.cumulateX<0)){
                 if (self.srcBg==nil) {
                     [self addDashboardBg];
                 }
@@ -253,7 +260,7 @@ const static CGFloat widgetGap=20;
         
         BOOL addIndex=YES;
         
-        if((sign<0 && self.currentWidgetIndex==self.dashboardInfo.widgets.count-1)
+        if((sign<0 && self.currentWidgetIndex==self.widgets.count-1)
            || (sign>0 && self.currentWidgetIndex==0) ||
            (ABS(p.x)<200 && ABS(self.cumulateX)<self.view.frame.size.width/8) ||
            (p.x<0 && self.cumulateX>0) || (p.x>0 && self.cumulateX<0)){

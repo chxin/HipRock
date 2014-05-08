@@ -19,7 +19,6 @@
 
 @property (nonatomic,weak) UIImageView *arrow;
 
-@property (nonatomic,strong) NSArray *dashboards;
 
 @end
 
