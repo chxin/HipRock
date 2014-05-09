@@ -38,12 +38,25 @@
 
 @property (nonatomic,strong) UIPopoverController *popController;
 
+@property (nonatomic,strong) NSArray *dashboards;
+
 @end
 
 @implementation REMBuildingCommodityViewController
 
 - (void)loadView{
     self.view=[[REMBuildingCommodityView alloc]initWithFrame:self.viewFrame];
+}
+
+-(NSArray *)dashboards
+{
+    if(_dashboards == nil){
+        _dashboards = [self.buildingInfo.dashboards.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            return [[obj2 id] compare:[obj1 id]];
+        }];
+    }
+    
+    return  _dashboards;
 }
 
 
@@ -329,8 +342,7 @@
         }
     }
     if (currentRelation!=nil) {
-        NSArray *array=[self.buildingInfo.dashboards allObjects];
-        for (REMManagedDashboardModel *dashboard in array) {
+        for (REMManagedDashboardModel *dashboard in self.dashboards) {
             if ([dashboard.id isEqualToNumber:currentRelation.dashboardId]==YES) {
                 return dashboard;
             }
@@ -362,7 +374,7 @@
         }
     }
     if (currentRelation) {
-        for (REMManagedDashboardModel *dashboard in [self.buildingInfo.dashboards allObjects]) {
+        for (REMManagedDashboardModel *dashboard in self.dashboards) {
             if ([dashboard.id isEqualToNumber:currentRelation.dashboardId]==YES) {
                 for (REMManagedWidgetModel *widget in dashboard.widgets) {
                     if ([widget.id isEqualToNumber:currentRelation.widgetId] && position  == ((REMBuildingCoverWidgetPosition)[currentRelation.position intValue])) {
@@ -398,33 +410,47 @@
 }
 
 - (NSArray *)trendWidgetArray:(REMManagedDashboardModel *)dashboard{
-    NSMutableArray *array=[NSMutableArray array];
-    for (int i=0; i<dashboard.widgets.count; ++i) {
-        REMManagedWidgetModel *widget=[dashboard.widgets allObjects][i];
-        REMDiagramType diagramType = (REMDiagramType)[widget.diagramType intValue];
-        if (diagramType == REMDiagramTypeColumn ||
-            diagramType == REMDiagramTypeLine ||
-            diagramType == REMDiagramTypeRanking ||
-            diagramType == REMDiagramTypeStackColumn) {
-            [array addObject:widget];
-        }
-    }
+//    NSMutableArray *array=[NSMutableArray array];
+//    for (int i=0; i<dashboard.widgets.count; ++i) {
+//        REMManagedWidgetModel *widget=[dashboard.widgets allObjects][i];
+//        REMDiagramType diagramType = (REMDiagramType)[widget.diagramType intValue];
+//        if (diagramType == REMDiagramTypeColumn ||
+//            diagramType == REMDiagramTypeLine ||
+//            diagramType == REMDiagramTypeRanking ||
+//            diagramType == REMDiagramTypeStackColumn) {
+//            [array addObject:widget];
+//        }
+//    }
+//    
+//    return array;
     
-    return array;
+    NSArray *trendWidgets = [dashboard.widgets.allObjects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        REMDiagramType diagramType = [[evaluatedObject diagramType] intValue];
+        return (diagramType == REMDiagramTypeColumn || diagramType == REMDiagramTypeLine || diagramType == REMDiagramTypeRanking || diagramType == REMDiagramTypeStackColumn);
+    }]];
+    
+    NSArray *sortedTrendWidgets = [trendWidgets sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [[obj1 id] compare:[obj2 id]];
+    }];
+    
+    return sortedTrendWidgets;
 }
 
 
 - (NSDictionary *)dashboardArrayForPiningWidget{
     NSMutableArray *dashboardList = [NSMutableArray array];
     NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    for (int i=0; i<self.buildingInfo.dashboards.count; ++i) {
-        REMManagedDashboardModel *dashboard = [self.buildingInfo.dashboards allObjects][i];
+    for (int i=0; i<self.dashboards.count; ++i) {
+        REMManagedDashboardModel *dashboard = self.dashboards[i];
         NSArray *widgetList = [self trendWidgetArray:dashboard];
         if (widgetList.count!=0) {
             [dashboardList addObject:dashboard];
             [dic setObject:widgetList forKey:dashboard.id];
         }
     }
+    
+    //TODO:fix order
+    
     return  @{@"list":dashboardList,@"widget":dic};
 }
 
