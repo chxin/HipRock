@@ -27,13 +27,11 @@
 			<string>90</string>
 			<key>debug-logmode</key>
 			<integer>2</integer>
-			<key>debug-user</key>
-			<string>SchneiderElectricChina|P@ssw0rd</string>
 		</dict>
 		<key>test</key>
 		<dict>
 			<key>url</key>
-			<string>http://112.124.56.137/v1.6p/mobile/mobileapihost/</string>
+			<string>http://42.121.254.106/v1.6.0.19/mobile/mobileapihost/</string>
 			<key>timeout</key>
 			<string>70</string>
 			<key>debug-logmode</key>
