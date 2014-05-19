@@ -1,5 +1,5 @@
 //
-//  REMManagedEnergyDataModel.h
+//  REMManagedImageModel.h
 //  Blues
 //
 //  Created by 张 锋 on 5/19/14.
@@ -10,9 +10,9 @@
 #import <CoreData/CoreData.h>
 
 
-@interface REMManagedEnergyDataModel : NSManagedObject
+@interface REMManagedImageModel : NSManagedObject
 
 @property (nonatomic, retain) NSString * key;
-@property (nonatomic, retain) NSString * value;
+@property (nonatomic, retain) NSString * path;
 
 @end

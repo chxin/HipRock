@@ -94,18 +94,18 @@ static NSString * cellId=@"customerCell";
         cell.textLabel.text=REMIPadLocalizedString(@"Setting_DetailCustomerAdmin"); //@"客户管理员";
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         if(customer.administrators.count==1){
-            REMManagedAdministratorModel *model=customer.administrators.allObjects[0];
+            REMManagedAdministratorModel *model=customer.administrators[0];
             cell.detailTextLabel.text=model.realName;
         }
         else if(customer.administrators.count==2){
-            REMManagedAdministratorModel *model=customer.administrators.allObjects[0];
-            REMManagedAdministratorModel *model1=customer.administrators.allObjects[1];
+            REMManagedAdministratorModel *model=customer.administrators[0];
+            REMManagedAdministratorModel *model1=customer.administrators[1];
             NSString *str=REMIPadLocalizedString(@"Setting_DetailCustomerAdminTwoName"); //@"%@和%@"
             cell.detailTextLabel.text=[NSString stringWithFormat:str,model.realName,model1.realName];
         }
         else if (customer.administrators.count>2){
-            REMManagedAdministratorModel *model=customer.administrators.allObjects[0];
-            REMManagedAdministratorModel *model1=customer.administrators.allObjects[1];
+            REMManagedAdministratorModel *model=customer.administrators[0];
+            REMManagedAdministratorModel *model1=customer.administrators[1];
             NSString *str=REMIPadLocalizedString(@"Setting_DetailCustomerAdminThreeName"); //%@和%@等%d人
             cell.detailTextLabel.text=[NSString stringWithFormat:str,model.realName,model1.realName,customer.administrators.count];
         }

@@ -117,7 +117,7 @@
 {
     //if no image at all, use default
     REMManagedBuildingModel *building =[self.sourceViewController buildingInfoArray][self.parameter.currentBuildingIndex];
-    NSArray *imageIds=[building.pictures allObjects];
+    NSArray *imageIds=building.pictures.array;
     
     if(imageIds == nil || imageIds.count <= 0){
         UIImageView *imageView =[[UIImageView alloc] initWithImage:REMIMG_DefaultBuilding];

@@ -214,7 +214,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
 
 - (void)statusSuccess:(UIImage *)customerLogo{
     if (self.customerInfoArray==nil) {
-        self.customerInfoArray=REMAppContext.currentUser.customers.allObjects;
+        self.customerInfoArray=REMAppContext.currentUser.customers.array;
     }
     
     NSNumber *newCustomerId = self.selectedCustomerId == nil ? self.currentCustomerId : self.selectedCustomerId;

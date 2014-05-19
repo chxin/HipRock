@@ -2,7 +2,7 @@
 //  REMManagedBuildingRankingModel.m
 //  Blues
 //
-//  Created by tantan on 2/25/14.
+//  Created by 张 锋 on 5/19/14.
 //
 //
 

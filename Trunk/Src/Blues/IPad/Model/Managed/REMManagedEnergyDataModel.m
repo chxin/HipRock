@@ -2,7 +2,7 @@
 //  REMManagedEnergyDataModel.m
 //  Blues
 //
-//  Created by tantan on 3/6/14.
+//  Created by 张 锋 on 5/19/14.
 //
 //
 

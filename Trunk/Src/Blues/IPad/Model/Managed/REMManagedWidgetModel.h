@@ -2,7 +2,7 @@
 //  REMManagedWidgetModel.h
 //  Blues
 //
-//  Created by tantan on 2/25/14.
+//  Created by 张 锋 on 5/19/14.
 //
 //
 
@@ -13,13 +13,13 @@
 
 @interface REMManagedWidgetModel : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * id;
-@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * code;
 @property (nonatomic, retain) NSString * comment;
-@property (nonatomic, retain) NSNumber * isRead;
-@property (nonatomic, retain) NSNumber * diagramType;
 @property (nonatomic, retain) NSString * contentSyntax;
+@property (nonatomic, retain) NSNumber * diagramType;
+@property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) NSNumber * isRead;
+@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) REMManagedDashboardModel *dashboard;
 @property (nonatomic, retain) REMManagedSharedModel *sharedInfo;
 

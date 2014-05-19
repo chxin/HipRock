@@ -180,9 +180,10 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 - (NSArray *)piningWidgetList{
     NSMutableArray *array=[NSMutableArray array];
     
-    NSArray *commodityArray = [self.buildingInfo.commodities.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        return [[obj1 id] compare:[obj2 id]];
-    }];
+//    NSArray *commodityArray = [self.buildingInfo.commodities.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//        return [[obj1 id] compare:[obj2 id]];
+//    }];
+    NSArray *commodityArray = self.buildingInfo.commodities.array;
     
     for (int i=0; i<commodityArray.count; ++i) {
         REMManagedBuildingCommodityUsageModel *commodity=commodityArray[i];
@@ -192,9 +193,10 @@ const static CGFloat kWidgetShareTitleFontSize=14;
         BOOL foundFirst=NO;
         BOOL foundSecond=NO;
         
-        NSArray *widgetArray = [commodity.pinnedWidgets.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            return [[obj1 widgetId] compare:[obj2 widgetId]];
-        }];
+//        NSArray *widgetArray = [commodity.pinnedWidgets.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//            return [[obj1 widgetId] compare:[obj2 widgetId]];
+//        }];
+        NSArray *widgetArray = commodity.pinnedWidgets.array;
         
         for (REMManagedPinnedWidgetModel *relation in widgetArray) {
             REMManagedWidgetModel *widget=[self widgetByRelation:relation];

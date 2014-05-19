@@ -24,13 +24,14 @@
             NSDictionary *dictionary = data[i];
             REMManagedPinnedWidgetModel *pinnedModel = [self create:[REMManagedPinnedWidgetModel class]];
             NSNumber *commodityId = dictionary[@"CommodityId"];
-            for (REMManagedBuildingCommodityUsageModel *commodityInfo in [self.buildingInfo.commodities allObjects]) {
+            for (REMManagedBuildingCommodityUsageModel *commodityInfo in self.buildingInfo.commodities) {
                 if ([commodityInfo.id isEqualToNumber:commodityId] == YES) {
                     pinnedModel.commodity = commodityInfo;
                     pinnedModel.widgetId = dictionary[@"WidgetId"];
                     pinnedModel.dashboardId = dictionary[@"DashboardId"];
                     pinnedModel.position =dictionary[@"Position"];
-                    [commodityInfo addPinnedWidgetsObject:pinnedModel];
+//                    [commodityInfo addPinnedWidgetsObject:pinnedModel];
+                    [pinnedModel setCommodity:commodityInfo];
                 }
             }
         }
@@ -43,12 +44,14 @@
     NSMutableArray *array = [NSMutableArray array];
     
     NSArray *commodityArray = [[NSArray alloc] init];
-    commodityArray = [self.buildingInfo.commodities.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        return [((REMManagedBuildingCommodityUsageModel *)obj1).id compare:( (REMManagedBuildingCommodityUsageModel *)obj2).id];
-    }];
+//    commodityArray = [self.buildingInfo.commodities.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//        return [((REMManagedBuildingCommodityUsageModel *)obj1).id compare:( (REMManagedBuildingCommodityUsageModel *)obj2).id];
+//    }];
+    commodityArray = [NSArray arrayWithArray:self.buildingInfo.commodities.array];
     
     for (REMManagedBuildingCommodityUsageModel *commodityInfo in commodityArray) {
-        array = [NSMutableArray arrayWithArray:[array arrayByAddingObjectsFromArray:[commodityInfo.pinnedWidgets allObjects]]];
+        //array = [NSMutableArray arrayWithArray:[array arrayByAddingObjectsFromArray:[commodityInfo.pinnedWidgets allObjects]]];
+        array =[NSMutableArray arrayWithArray:[array arrayByAddingObjectsFromArray:commodityInfo.pinnedWidgets.array]];
     }
     
     

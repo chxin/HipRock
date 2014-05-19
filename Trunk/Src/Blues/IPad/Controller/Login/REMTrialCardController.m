@@ -142,7 +142,7 @@
             REMManagedUserModel *user = validationResult.managedUser;
             REMAppContext.currentUser = user;
             
-            NSArray *customers = REMAppContext.currentUser.customers.allObjects;
+            NSArray *customers = REMAppContext.currentUser.customers.array;
             
             if(customers.count<=0){
                 [REMAlertHelper alert:REMIPadLocalizedString(@"Login_TrialNoCustomer")];

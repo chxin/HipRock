@@ -2,7 +2,7 @@
 //  REMManagedBuildingPictureModel.m
 //  Blues
 //
-//  Created by tantan on 2/25/14.
+//  Created by 张 锋 on 5/19/14.
 //
 //
 
@@ -12,9 +12,9 @@
 
 @implementation REMManagedBuildingPictureModel
 
+@dynamic bluredImage;
 @dynamic id;
 @dynamic normalImage;
-@dynamic bluredImage;
 @dynamic building;
 
 @end

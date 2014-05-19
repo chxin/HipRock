@@ -97,7 +97,7 @@
         
         for (NSDictionary *relation in pinnedWidgetArray) {
             
-            for (REMManagedBuildingCommodityUsageModel *commodity in [building.commodities allObjects]) {
+            for (REMManagedBuildingCommodityUsageModel *commodity in building.commodities) {
                 NSNumber *commodityId = relation[@"CommodityId"];
                 if ([commodity.id isEqualToNumber:commodityId] == YES) {
                     REMManagedPinnedWidgetModel *pinnedModel = [self create:[REMManagedPinnedWidgetModel class]];
@@ -107,7 +107,8 @@
                     pinnedModel.dashboardId = relation[@"DashboardId"];
                     pinnedModel.position =relation[@"Position"];
                     
-                    [commodity addPinnedWidgetsObject:pinnedModel];
+//                    [commodity addPinnedWidgetsObject:pinnedModel];
+                    [pinnedModel setCommodity:commodity];
                 }
             }
             
@@ -140,7 +141,8 @@
             dashboard.sharedInfo = [self shareModelByDictionary:shareInfo];
             dashboard.sharedInfo.dashboard=dashboard;
         }
-        [building addDashboardsObject:dashboard];
+//        [building addDashboardsObject:dashboard];
+        [dashboard setBuilding:building];
     }
     
     
@@ -273,7 +275,8 @@
             widget.sharedInfo.widget=widget;
         }
         widget.dashboard=dashboard;
-        [dashboard addWidgetsObject:widget];
+//        [dashboard addWidgetsObject:widget];
+        [widget setDashboard:dashboard];
 
     }
     
@@ -293,7 +296,8 @@
         commodity.carbonValue = nil;
         commodity.totalValue = nil;
         
-        [building addCommoditiesObject:commodity];
+//        [building addCommoditiesObject:commodity];
+        [commodity setBuilding:building];
     }
 }
 
@@ -396,7 +400,8 @@
             REMManagedBuildingPictureModel *picModel = [self create:[REMManagedBuildingPictureModel class]];
             picModel.id =pictureId;
             picModel.building = building;
-            [building addPicturesObject:picModel];
+//            [building addPicturesObject:picModel];
+            [picModel setBuilding:building];
         }
     }
     
@@ -448,10 +453,12 @@
             REMManagedAdministratorModel *adminObject= (REMManagedAdministratorModel *)[REMDataStore createManagedObject:[REMManagedAdministratorModel class]];
             adminObject.realName=admin[@"RealName"];
             adminObject.customer=customerObject;
-            [customerObject addAdministratorsObject:adminObject];
+//            [customerObject addAdministratorsObject:adminObject];
+            [adminObject setCustomer:customerObject];
         }
         
-        [user addCustomersObject:customerObject];
+//        [user addCustomersObject:customerObject];
+        [customerObject setUser:user];
     }
 }
 

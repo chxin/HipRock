@@ -2,7 +2,7 @@
 //  REMManagedDashboardModel.m
 //  Blues
 //
-//  Created by tantan on 2/25/14.
+//  Created by 张 锋 on 5/19/14.
 //
 //
 
@@ -14,14 +14,14 @@
 
 @implementation REMManagedDashboardModel
 
+@dynamic code;
+@dynamic comment;
+@dynamic id;
 @dynamic isFavorite;
 @dynamic isRead;
-@dynamic id;
-@dynamic code;
 @dynamic name;
-@dynamic comment;
 @dynamic building;
-@dynamic widgets;
 @dynamic sharedInfo;
+@dynamic widgets;
 
 @end

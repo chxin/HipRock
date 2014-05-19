@@ -50,13 +50,14 @@
 
 -(NSArray *)dashboards
 {
-    if(_dashboards == nil){
-        _dashboards = [self.buildingInfo.dashboards.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            return [[obj2 id] compare:[obj1 id]];
-        }];
-    }
-    
-    return  _dashboards;
+//    if(_dashboards == nil){
+//        _dashboards = [self.buildingInfo.dashboards.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//            return [[obj2 id] compare:[obj1 id]];
+//        }];
+//    }
+//    
+//    return  _dashboards;
+    return self.buildingInfo.dashboards.array;
 }
 
 
@@ -424,7 +425,7 @@
 //    
 //    return array;
     
-    NSArray *trendWidgets = [dashboard.widgets.allObjects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+    NSArray *trendWidgets = [dashboard.widgets.array filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         REMDiagramType diagramType = [[evaluatedObject diagramType] intValue];
         return (diagramType == REMDiagramTypeColumn || diagramType == REMDiagramTypeLine || diagramType == REMDiagramTypeRanking || diagramType == REMDiagramTypeStackColumn);
     }]];

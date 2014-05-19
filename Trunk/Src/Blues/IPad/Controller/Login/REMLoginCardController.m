@@ -152,7 +152,7 @@
             //[REMAppContext setCurrentManagedUser:validationResult.managedUser];
             
             //NSArray *customers = (NSArray *)(REMAppCurrentUser.customers);
-            NSArray *customers = validationResult.managedUser.customers.allObjects;
+            NSArray *customers = validationResult.managedUser.customers.array;
             
             NSUInteger customerCount = validationResult.managedUser.customers.count;
             if(customerCount<=0){

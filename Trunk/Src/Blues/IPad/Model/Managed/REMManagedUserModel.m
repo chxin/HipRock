@@ -2,7 +2,7 @@
 //  REMManagedUserModel.m
 //  Blues
 //
-//  Created by tantan on 2/20/14.
+//  Created by 张 锋 on 5/19/14.
 //
 //
 
@@ -12,8 +12,12 @@
 
 @implementation REMManagedUserModel
 
+@dynamic code;
+@dynamic comment;
 @dynamic email;
+@dynamic id;
 @dynamic isDemo;
+@dynamic name;
 @dynamic password;
 @dynamic realname;
 @dynamic spId;
@@ -21,10 +25,6 @@
 @dynamic title;
 @dynamic userTypeName;
 @dynamic version;
-@dynamic id;
-@dynamic code;
-@dynamic name;
-@dynamic comment;
 @dynamic customers;
 
 @end

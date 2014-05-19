@@ -2,7 +2,7 @@
 //  REMManagedCustomerModel.m
 //  Blues
 //
-//  Created by tantan on 2/20/14.
+//  Created by 张 锋 on 5/19/14.
 //
 //
 
@@ -14,18 +14,18 @@
 @implementation REMManagedCustomerModel
 
 @dynamic address;
+@dynamic code;
+@dynamic comment;
 @dynamic email;
+@dynamic id;
+@dynamic isCurrent;
 @dynamic logoId;
 @dynamic logoImage;
-@dynamic isCurrent;
 @dynamic manager;
+@dynamic name;
 @dynamic startTime;
 @dynamic telephone;
 @dynamic timezoneId;
-@dynamic id;
-@dynamic name;
-@dynamic code;
-@dynamic comment;
 @dynamic administrators;
 @dynamic user;
 

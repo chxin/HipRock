@@ -2,7 +2,7 @@
 //  REMManagedBuildingModel.m
 //  Blues
 //
-//  Created by tantan on 3/4/14.
+//  Created by 张 锋 on 5/19/14.
 //
 //
 
@@ -19,7 +19,6 @@
 @dynamic comment;
 @dynamic hasDataPrivilege;
 @dynamic id;
-@dynamic test;
 @dynamic isQualified;
 @dynamic latitude;
 @dynamic longitude;
@@ -28,11 +27,12 @@
 @dynamic path;
 @dynamic pathLevel;
 @dynamic province;
+@dynamic test;
 @dynamic timezoneId;
 @dynamic airQuality;
 @dynamic commodities;
 @dynamic dashboards;
-@dynamic pictures;
 @dynamic electricityUsageThisMonth;
+@dynamic pictures;
 
 @end

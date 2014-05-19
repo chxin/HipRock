@@ -98,7 +98,8 @@
         [self addAdministrator:admin intoUserObject:customerObject];
     }
     customerObject.user=userObject;
-    [userObject addCustomersObject:customerObject];
+//    [userObject addCustomersObject:customerObject];
+    [customerObject setUser:userObject];
 }
 
 - (void)addAdministrator:(NSDictionary *)admin intoUserObject:(REMManagedCustomerModel *)customerObject
@@ -106,7 +107,8 @@
     REMManagedAdministratorModel *adminObject= [self create:[REMManagedAdministratorModel class]];
     adminObject.realName=admin[@"RealName"];
     adminObject.customer=customerObject;
-    [customerObject addAdministratorsObject:adminObject];
+//    [customerObject addAdministratorsObject:adminObject];
+    [adminObject setCustomer:customerObject];
 }
 
 @end

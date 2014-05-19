@@ -2,7 +2,7 @@
 //  REMManagedSharedModel.m
 //  Blues
 //
-//  Created by tantan on 2/25/14.
+//  Created by 张 锋 on 5/19/14.
 //
 //
 
@@ -13,9 +13,9 @@
 
 @implementation REMManagedSharedModel
 
+@dynamic shareTime;
 @dynamic userRealName;
 @dynamic userTelephone;
-@dynamic shareTime;
 @dynamic userTitle;
 @dynamic userTitleComponent;
 @dynamic dashboard;

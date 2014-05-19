@@ -2,7 +2,7 @@
 //  REMManagedBuildingPictureModel.h
 //  Blues
 //
-//  Created by tantan on 2/25/14.
+//  Created by 张 锋 on 5/19/14.
 //
 //
 
@@ -13,10 +13,9 @@
 
 @interface REMManagedBuildingPictureModel : NSManagedObject
 
+@property (nonatomic, retain) NSData * bluredImage;
 @property (nonatomic, retain) NSNumber * id;
-@property (nonatomic, retain) UIImage * normalImage;
-@property (nonatomic, retain) UIImage * bluredImage;
-
+@property (nonatomic, retain) NSData * normalImage;
 @property (nonatomic, retain) REMManagedBuildingModel *building;
 
 @end

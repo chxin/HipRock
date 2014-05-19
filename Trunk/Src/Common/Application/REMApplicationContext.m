@@ -42,7 +42,7 @@ static BOOL UNSUPPORTED = NO;
     NSArray *users = [REMDataStore fetchManagedObject:[REMManagedUserModel class]];
     if (users.count>0) {
         REMManagedUserModel *user = users[0];
-        for (REMManagedCustomerModel *customer in user.customers.allObjects) {
+        for (REMManagedCustomerModel *customer in user.customers) {
             if ([customer.isCurrent boolValue]== YES) {
                 REMAppContext.currentCustomer = customer;
                 REMAppContext.currentUser = user;

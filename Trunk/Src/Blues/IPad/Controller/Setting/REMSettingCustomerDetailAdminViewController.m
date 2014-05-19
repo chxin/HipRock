@@ -66,7 +66,7 @@
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     //REMAdministratorModel *model = REMAppCurrentCustomer.administratorArray[indexPath.row];
-    REMManagedAdministratorModel *model = REMAppContext.currentCustomer.administrators.allObjects[indexPath.row];
+    REMManagedAdministratorModel *model = REMAppContext.currentCustomer.administrators[indexPath.row];
     cell.textLabel.text = model.realName;
     return cell;
 }

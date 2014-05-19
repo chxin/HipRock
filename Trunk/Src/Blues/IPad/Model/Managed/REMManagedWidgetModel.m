@@ -2,7 +2,7 @@
 //  REMManagedWidgetModel.m
 //  Blues
 //
-//  Created by tantan on 2/25/14.
+//  Created by 张 锋 on 5/19/14.
 //
 //
 
@@ -13,13 +13,13 @@
 
 @implementation REMManagedWidgetModel
 
-@dynamic id;
-@dynamic name;
 @dynamic code;
 @dynamic comment;
-@dynamic isRead;
-@dynamic diagramType;
 @dynamic contentSyntax;
+@dynamic diagramType;
+@dynamic id;
+@dynamic isRead;
+@dynamic name;
 @dynamic dashboard;
 @dynamic sharedInfo;
 

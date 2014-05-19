@@ -218,7 +218,7 @@
     cell.titleLabel.text = cell.building.name;
     cell.controller = self;
     
-    [self loadBuildingSmallImage:[cell.building.pictures allObjects] :^(UIImage *image) {
+    [self loadBuildingSmallImage: cell.building.pictures.array :^(UIImage *image) {
         UIImage *scaled = [cell resizeImageForCell:image];
         
         [cell.backgroundButton setImage:scaled forState:UIControlStateNormal];

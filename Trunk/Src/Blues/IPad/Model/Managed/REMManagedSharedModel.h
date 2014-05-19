@@ -2,7 +2,7 @@
 //  REMManagedSharedModel.h
 //  Blues
 //
-//  Created by tantan on 2/25/14.
+//  Created by 张 锋 on 5/19/14.
 //
 //
 
@@ -13,9 +13,9 @@
 
 @interface REMManagedSharedModel : NSManagedObject
 
+@property (nonatomic, retain) NSDate * shareTime;
 @property (nonatomic, retain) NSString * userRealName;
 @property (nonatomic, retain) NSString * userTelephone;
-@property (nonatomic, retain) NSDate * shareTime;
 @property (nonatomic, retain) NSNumber * userTitle;
 @property (nonatomic, retain) NSString * userTitleComponent;
 @property (nonatomic, retain) REMManagedDashboardModel *dashboard;

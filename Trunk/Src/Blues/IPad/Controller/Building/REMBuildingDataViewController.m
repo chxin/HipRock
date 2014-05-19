@@ -38,13 +38,14 @@
         return nil;
     }
     
-    if(_commodityArray == nil){
-        _commodityArray = [self.buildingInfo.commodities.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            return [((REMManagedBuildingCommodityUsageModel *)obj1).id compare:( (REMManagedBuildingCommodityUsageModel *)obj2).id];
-        }];
-    }
-    
-    return _commodityArray;
+//    if(_commodityArray == nil){
+//        _commodityArray = [self.buildingInfo.commodities.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//            return [((REMManagedBuildingCommodityUsageModel *)obj1).id compare:( (REMManagedBuildingCommodityUsageModel *)obj2).id];
+//        }];
+//    }
+//    
+//    return _commodityArray;
+    return  self.buildingInfo.commodities.array;
 }
 
 - (id)init{

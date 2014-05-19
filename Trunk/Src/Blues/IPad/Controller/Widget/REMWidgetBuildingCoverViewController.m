@@ -24,13 +24,14 @@
 
 -(NSArray *)commodityArray
 {
-    if(_commodityArray == nil){
-        _commodityArray= [self.buildingInfo.commodities.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            return [[obj1 id] compare:[obj2 id]];
-        }];
-    }
-    
-    return _commodityArray;
+//    if(_commodityArray == nil){
+//        _commodityArray= [self.buildingInfo.commodities.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//            return [[obj1 id] compare:[obj2 id]];
+//        }];
+//    }
+//    
+//    return _commodityArray;
+    return  self.buildingInfo.commodities.array;
 }
 
 

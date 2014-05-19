@@ -78,7 +78,7 @@
 
 - (NSString *)buildingPictureFileName{
     if([self hasExistBuildingPic]==NO)return nil;
-    REMManagedBuildingPictureModel *picModel =[self.buildingInfo.pictures allObjects][0];
+    REMManagedBuildingPictureModel *picModel = self.buildingInfo.pictures[0];
     return [REMImageHelper buildingImagePathWithId: picModel.id andType:REMBuildingImageNormal];
 }
 
@@ -107,7 +107,7 @@
         blurImageView.image=self.defaultBlurImage;
     }
     else{
-        REMManagedBuildingPictureModel *picModel =[self.buildingInfo.pictures allObjects][0];
+        REMManagedBuildingPictureModel *picModel = self.buildingInfo.pictures[0];
         NSNumber *picId =picModel.id;
         NSString *smallPicPath= [REMImageHelper buildingImagePathWithId:picId andType:REMBuildingImageSmall];
         NSString *smallBlurPicPath= [REMImageHelper buildingImagePathWithId:picId andType:REMBuildingImageSmallBlured];
@@ -382,7 +382,7 @@
         [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
         UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        REMManagedBuildingPictureModel *picModel =[self.buildingInfo.pictures allObjects][0];
+        REMManagedBuildingPictureModel *picModel = self.buildingInfo.pictures[0];
         NSString *smallPicPath= [REMImageHelper buildingImagePathWithId:picModel.id andType:REMBuildingImageSmall];
         
         BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallPicPath];
@@ -451,7 +451,7 @@
         [self loadImageViewByImage:image];
     }
     else{
-        REMManagedBuildingPictureModel *picModel =[self.buildingInfo.pictures allObjects][0];
+        REMManagedBuildingPictureModel *picModel = self.buildingInfo.pictures[0];
         NSDictionary *param=@{@"pictureId":picModel.id};
         REMDataStore *store =[[REMDataStore alloc]initWithName:REMDSBuildingPicture parameter:param accessCache:YES andMessageMap:nil];
         store.groupName=self.loadingImageKey;
@@ -486,7 +486,7 @@
     blurred.contentMode=UIViewContentModeTop;
     blurred.clipsToBounds=YES;
     blurred.backgroundColor=[UIColor clearColor];
-    REMManagedBuildingPictureModel *picModel =[self.buildingInfo.pictures allObjects][0];
+    REMManagedBuildingPictureModel *picModel = self.buildingInfo.pictures[0];
     NSString *blurImagePath= [REMImageHelper buildingImagePathWithId:picModel.id  andType:REMBuildingImageNormalBlured];
     
     BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:blurImagePath];
