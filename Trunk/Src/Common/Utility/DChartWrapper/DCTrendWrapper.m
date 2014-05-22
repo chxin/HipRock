@@ -17,7 +17,6 @@
 @interface DCTrendWrapper()
 @property (nonatomic, weak) DCContext* graphContext;
 @property (nonatomic, strong) DCRange* myStableRange;
-@property (nonatomic,strong) NSMutableArray* hiddenSeriesTargetsId;
 @property (nonatomic, strong) DCTrendAnimationManager* animationManager;
 @property (nonatomic, assign) double panSpeed;
 @end
@@ -34,7 +33,6 @@
         _calenderType = REMCalendarTypeNone;
         _isStacked = wrapperConfig.stacked;
         [self extraSyntax:wrapperConfig];
-        self.hiddenSeriesTargetsId = [[NSMutableArray alloc]init];
         
         self.animationManager = [[DCTrendAnimationManager alloc]init];
         self.animationManager.delegate = self;
