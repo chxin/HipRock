@@ -32,7 +32,7 @@
 /**
  *  User validation regular expressions
  */
-#define REMREGEX_UserValidation @[@"^[a-zA-Z0-9_.]+$", @"[0-9]+", @"[a-zA-Z]+", @"^[0-9a-zA-Z_!@#$%^&*()][0-9a-zA-Z_!@#$%^&*()]*$", @"[ ]+"]
+#define REMREGEX_UserValidation @[@"^[a-zA-Z0-9_.\u4E00-\u9FFF\-]+$", @"[0-9]+", @"[a-zA-Z]+", @"^[0-9a-zA-Z_!@#$%^&*()][0-9a-zA-Z_!@#$%^&*()]*$", @"[ ]+"]
 
 /**
  *  Decides whether a user name is in valid format
