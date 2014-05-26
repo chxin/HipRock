@@ -25,6 +25,7 @@
     NSMutableArray* hRangeFrames = [[NSMutableArray alloc]init];
     while (fabs(speed) >= speedThreshold) {
         speed = speed * ((currentLocation < globalRange.location || currentLocation + graphLength > globalRange.end) ? 0.5 : 0.9);
+//        speed = speed * 0.9;
         currentLocation += speed;
         [hRangeFrames addObject:[[DCRange alloc] initWithLocation:currentLocation length:graphLength]];
     }

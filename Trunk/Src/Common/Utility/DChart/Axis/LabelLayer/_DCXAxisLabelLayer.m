@@ -21,8 +21,8 @@
 
 @implementation _DCXAxisLabelLayer
 
--(id)initWithContext:(DCContext *)context {
-    self = [super initWithContext:context];
+-(id)initWithContext:(DCContext*)context view:(DCXYChartView*)view {
+    self = [super initWithContext:context view:view];
     if (self) {
         self.backgroundColor = [UIColor clearColor].CGColor;
         self.visableLabelLayers = [[NSMutableDictionary alloc]init];
@@ -33,41 +33,30 @@
 -(void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
     
-    CGPoint addLines[2];
-    addLines[0] = self.axis.startPoint;
-    addLines[1] = self.axis.endPoint;
-    
-    CGContextSetLineJoin(ctx, kCGLineJoinMiter);
-    [DCUtility setLineStyle:ctx style:self.axis.lineStyle lineWidth:self.axis.lineWidth];
-    CGContextSetBlendMode(ctx, kCGBlendModeNormal);
-    CGContextBeginPath(ctx);
-    CGContextAddLines(ctx, addLines, 2);
-    CGContextSetLineWidth(ctx, self.axis.lineWidth);
-    CGContextSetStrokeColorWithColor(ctx, self.axis.lineColor.CGColor);
-    CGContextStrokePath(ctx);
+
 //    [self updateTexts];
     
     
     
     UIGraphicsPushContext(ctx);
     
-    CGContextSetStrokeColorWithColor(ctx, self.fontColor.CGColor);
-    CGContextSetFillColorWithColor(ctx, self.fontColor.CGColor);
+    CGContextSetStrokeColorWithColor(ctx, self.view.chartStyle.xTextColor.CGColor);
+    CGContextSetFillColorWithColor(ctx, self.view.chartStyle.xTextColor.CGColor);
     CGFloat maxLabelLength = INT32_MAX;
     if (self.labelFormatter && [self.labelFormatter respondsToSelector:@selector(getMaxXLabelLengthIn:)]) {
         maxLabelLength = [((id<_DCXLabelFormatterProtocal>)self.labelFormatter) getMaxXLabelLengthIn:self.bounds];
     }
-    CGFloat offset = 0;
-    if (!self.graphContext.xLabelAlignToTick) {
-        offset = 0.5;
-    }
+    CGFloat offset = self.graphContext.xLabelHorizentalOffset;
+//    if (!self.graphContext.xLabelAlignToTick) {
+//        offset = 0.5;
+//    }
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.end);
     for (int i = start; i <= end; i++) {
         NSString* labelText = [self textForX:i];
         if (REMIsNilOrNull(labelText) || labelText.length == 0) continue;
         CGFloat centerX = self.graphContext.plotRect.origin.x + (i + offset - self.graphContext.hRange.location) * self.graphContext.plotRect.size.width / self.graphContext.hRange.length;
-        CGSize size = [DCUtility getSizeOfText:labelText forFont:self.font];
+        CGSize size = [DCUtility getSizeOfText:labelText forFont:self.view.chartStyle.xTextFont];
         CGRect textFrame;
         CGFloat textY = self.visableFrame.origin.y + self.visableFrame.size.height - size.height;
         if (size.width > maxLabelLength) {
@@ -76,7 +65,7 @@
             textFrame = CGRectMake(centerX-size.width/2,textY, size.width,size.height);
         }
         if ([DCUtility isFrame:textFrame visableIn:self.visableFrame]) {
-            [labelText drawInRect:textFrame withFont:self.font lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentCenter];
+            [labelText drawInRect:textFrame withFont:self.view.chartStyle.xTextFont lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentCenter];
         }
     }
     UIGraphicsPopContext();

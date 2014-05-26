@@ -7,47 +7,22 @@
 //
 
 #import "DAbstractChartWrapper.h"
-@interface DCHiddenSeries : NSObject
-@property (nonatomic,strong,readonly) NSNumber* targetId;
-@property (nonatomic,assign,readonly) REMEnergyTargetType type;
-@property (nonatomic,assign,readonly) long commodityId;
--(id)initWithTarget:(REMEnergyTargetModel*)target;
--(BOOL)isSameTargetWith:(REMEnergyTargetModel*)target;
-@end
-
-@implementation DCHiddenSeries
--(id)initWithTarget:(REMEnergyTargetModel *)target {
-    self = [super init];
-    if (self) {
-        if (target.type != REMEnergyTargetBenchmarkValue) {
-            _targetId = [target.targetId copy];
-        }
-        _type = target.type;
-        _commodityId = target.commodityId;
-    }
-    return self;
-}
--(BOOL)isSameTargetWith:(REMEnergyTargetModel *)target {
-    if (target.type != REMEnergyTargetBenchmarkValue) {
-        
-        return ((self.targetId == target.targetId) || [self.targetId isEqualToNumber:target.targetId]) &&
-        self.type == target.type &&
-        self.commodityId == target.commodityId;
-    } else {
-        return self.type == target.type;
-    }
-}
-@end
 
 @interface DAbstractChartWrapper()
 @property (nonatomic, strong) NSMutableArray* hiddenTargets;
 @end
 
 @implementation DAbstractChartWrapper
+-(void)beginAnimationDone {
+    if (!(REMIsNilOrNull(self.delegate)) && [self.delegate respondsToSelector:@selector(beginAnimationDone)]) {
+        [self.delegate beginAnimationDone];
+    }
+}
 
--(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(REMChartStyle *)style {
+-(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(DCChartStyle *)style {
     self = [self init];
     if (self) {
+        _seriesStates = [[NSMutableArray alloc]init];
         _energyViewData = energyViewData;
         _style = style;
         _chartStatus = DChartStatusNormal;
@@ -78,49 +53,27 @@
     
 }
 
--(BOOL) isTargetHidden:(REMEnergyTargetModel*)target index:(NSUInteger)index {
-    BOOL isHidden = NO;
-    if (self.isMultiTimeChart) {
-        for (NSNumber* hIndex in self.hiddenTargets) {
-            if (hIndex.integerValue == index) {
-                isHidden = YES;
-                break;
-            }
-        }
-    } else {
-        for (DCHiddenSeries* hs in self.hiddenTargets) {
-            if ([hs isSameTargetWith:target]) {
-                isHidden = YES;
-                break;
-            }
-        }
-    }
-    return isHidden;
+-(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index {
+    return [self getVisableSeriesCount] > 1;
 }
-
--(void)addHiddenTarget:(REMEnergyTargetModel*)target index:(NSUInteger)index {
+-(DSeriesStatus*)getSeriesStatusByTarget:(REMEnergyTargetModel*)target index:(NSNumber*)seriesIndex {
     if (self.isMultiTimeChart) {
-        [self.hiddenTargets addObject:@(index)];
-    } else {
-        [self.hiddenTargets addObject:[[DCHiddenSeries alloc] initWithTarget:target]];
-    }
-}
-
--(void)removeHiddenTarget:(REMEnergyTargetModel*)target index:(NSUInteger)index {
-    if (self.isMultiTimeChart) {
-        for (NSNumber* hIndex in self.hiddenTargets) {
-            if (hIndex.integerValue == index) {
-                [self.hiddenTargets removeObject:hIndex];
-                break;
-            }
+        for (DSeriesStatus* state in self.seriesStates) {
+            if ([state.seriesIndex isEqualToNumber:seriesIndex]) return state;
         }
     } else {
-        for (DCHiddenSeries* hs in self.hiddenTargets) {
-            if ([hs isSameTargetWith:target]) {
-                [self.hiddenTargets removeObject:hs];
-                break;
+        for (DSeriesStatus* state in self.seriesStates) {
+            if (target.type != REMEnergyTargetBenchmarkValue) {
+                if ( ((state.targetId == target.targetId) || [state.targetId isEqualToNumber:target.targetId]) &&
+                    state.type == target.type &&
+                    state.commodityId == target.commodityId)
+                    return state;
+            } else {
+                if (state.type == target.type)
+                    return state;
             }
         }
     }
+    return nil;
 }
 @end

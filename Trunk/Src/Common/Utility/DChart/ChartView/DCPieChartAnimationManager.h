@@ -11,12 +11,13 @@
 #import "DCPieDataPoint.h"
 #import "DCPieSeries.h"
 
+typedef void (^DCPieAnimationCallback)();
 @interface DCPieChartAnimationManager : NSObject
 
 -(id)initWithPieView:(UIView*)view;
--(void)animateToFrame:(DCPieChartAnimationFrame*)targetFrame;
+-(void)animateToFrame:(DCPieChartAnimationFrame*)targetFrame callback:(DCPieAnimationCallback)callback;
 -(void)rotateWithInitialSpeed:(double)speed;
--(void)playFrames:(NSArray*)frames;
+-(void)playFrames:(NSArray*)frames callback:(DCPieAnimationCallback)callback;
 -(void)stopTimer;
 
 -(NSArray*)getAngleTurningFramesFrom:(double)from to:(double)to;

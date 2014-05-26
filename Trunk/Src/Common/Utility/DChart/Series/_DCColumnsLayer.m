@@ -14,66 +14,70 @@
 #import "DCColumnSeries.h"
 
 @interface _DCColumnsLayer()
-@property (nonatomic, strong) _DCLayerTrashbox* trashbox;
+@property (nonatomic, strong) NSMutableDictionary* columnsDic;
 @end
 
 @implementation _DCColumnsLayer
-
--(id)initWithCoordinateSystem:(_DCCoordinateSystem*)coordinateSystem {
-    self = [super initWithCoordinateSystem:coordinateSystem];
+-(id)initWithContext:(DCContext *)graphContext view:(DCXYChartView *)view coordinateSystems:(NSArray *)coordinateSystems {
+    self = [super initWithContext:graphContext view:view coordinateSystems:coordinateSystems];
     if (self) {
-        self.trashbox = [[_DCLayerTrashbox alloc]init];
+        _columnsDic = [[NSMutableDictionary alloc]init];
     }
     return self;
 }
--(NSUInteger)getVisableSeriesCount {
-    NSUInteger count = 0;
-    for (DCColumnSeries* s in self.series) {
-        if (!s.hidden) count++;
-    }
-    return count;
-}
--(void)drawInContext:(CGContextRef)ctx {
-    [super drawInContext:ctx];
-    [self redraw];
-}
 
 -(void)redraw {
-    BOOL caTransationState = CATransaction.disableActions;
-    [CATransaction setDisableActions:YES];
-    BOOL allSeriesAreHidden = YES;
-    for (DCXYSeries* s in self.series) {
-        if (!s.hidden) {
-            allSeriesAreHidden = NO;
-            break;
-        }
+    if (self.enableGrowAnimation) {
+        self.enableGrowAnimation = NO;
+        CALayer* superLayer = self.superlayer;
+        CGRect superFrame = superLayer.frame;
+        CGRect newBounds = superLayer.bounds;
+        CGRect oldBounds = CGRectMake(newBounds.origin.x, newBounds.origin.y, newBounds.size.width, 0);
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"bounds"];
+        animation.fromValue = [NSValue valueWithCGRect:oldBounds];
+        animation.toValue = [NSValue valueWithCGRect:newBounds];
+        animation.delegate = self;
+        animation.duration = kDCAnimationDuration;
+        superLayer.anchorPoint = CGPointMake(0, 1);
+        superLayer.position = CGPointMake(superFrame.origin.x, superFrame.size.height+superFrame.origin.y);
+        [superLayer addAnimation:animation forKey:@"bounds"];
     }
-    if (allSeriesAreHidden) {
-        for (DCDataPoint* key in self.trashbox.xToLayerDic.allKeys) {
-            [self.trashbox moveLayerToTrashBox:self.trashbox.xToLayerDic[key]];
-        }
-        [self.trashbox.xToLayerDic removeAllObjects];
+    if ([self getVisableSeriesCount] == 0) {
+        [self clearSublayersAndDictionary];
     } else {
-        self.columnWidthInCoordinateSys = (1 - 2 * kDCColumnOffset) / ((self.graphContext.stacked) ? 1 : self.series.count);
-        
         int start = floor(self.graphContext.hRange.location);
         int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
-        start = MAX(0, start);
+        if (start < 0) start = 0;
         
+        if (end < 0) {
+            [self clearSublayersAndDictionary];
+            return;
+        }
+        
+        BOOL caTransationState = CATransaction.disableActions;
+        [CATransaction setDisableActions:YES];
+        double stackedHeights[end-start+1];
+        for (int i = 0; i < end-start+1; i++) {
+            stackedHeights[i] = 0;
+        }
         NSMutableDictionary* xDics = [[NSMutableDictionary alloc]init];
-        int seriesAmount = self.series.count;
-        for (int j = start; j<=end; j++) {
-            double stackedHeight = 0;
-            for (int i = 0; i < seriesAmount; i++) {
-                DCColumnSeries* s = self.series[self.graphContext.stacked ? (seriesAmount-i-1) : i];
-                if (s.hidden) continue;
+        int seriesAmount = self.seriesList.count;
+        for (int i = 0; i < seriesAmount; i++) {
+            DCColumnSeries* s = self.seriesList[self.graphContext.stacked ? (seriesAmount-i-1) : i];
+            if (s.hidden) continue;
+            _DCCoordinateSystem* coordinateSystem = s.coordinate;
+            for (int j = start; j<=end; j++) {
                 if (j >= s.datas.count) continue;
-                DCDataPoint* key = s.datas[j];
                 
-                CALayer* column = self.trashbox.xToLayerDic[key];
-                CGRect toFrame = [self getRectForSeries:s index:j stackedHeight:stackedHeight];
+                DCDataPoint* point = s.datas[j];
+                NSString* key = [NSString stringWithFormat:@"%u@%i", point.series.hash, j];
+                CALayer* column = self.columnsDic[key];
+                CGRect toFrame = [self getRectForSeries:s index:j stackedHeight:stackedHeights[j-start] coordinate:coordinateSystem];
+                if (self.graphContext.stacked) {
+                    stackedHeights[j-start] = stackedHeights[j-start] + toFrame.size.height;
+                }
                 BOOL isRectVisable = [DCUtility isFrame:toFrame visableIn:self.bounds];
-                if (self.graphContext.stacked) stackedHeight += toFrame.size.height;
+                
                 if (column == nil && isRectVisable) {
                     column = [[CALayer alloc]init];
                     column.frame = CGRectMake(toFrame.origin.x, self.frame.size.height, toFrame.size.width, toFrame.size.height);
@@ -84,18 +88,6 @@
                         column.backgroundColor = [REMColor makeTransparent:kDCFocusPointAlpha withColor:s.color].CGColor;
                     }
                     [xDics setObject:column forKey:key];
-                    if (self.enableGrowAnimation) {
-                        CAAnimationGroup* g = [CAAnimationGroup animation];
-                        CABasicAnimation* positionAnim = [CABasicAnimation animationWithKeyPath:@"position.y"];
-                        positionAnim.removedOnCompletion = NO;
-                        positionAnim.fillMode = kCAFillModeForwards;
-                        positionAnim.duration = kDCAnimationDuration;
-                        positionAnim.fromValue = @(self.frame.size.height);
-                        positionAnim.toValue = @(toFrame.origin.y+toFrame.size.height/2);
-                        g.animations = @[ positionAnim];
-                        
-                        [column addAnimation:g forKey:nil];
-                    }
                     column.frame = toFrame;
                 } else if (column == nil && !isRectVisable) {
                     continue;
@@ -108,39 +100,46 @@
                         column.backgroundColor = [REMColor makeTransparent:kDCFocusPointAlpha withColor:s.color].CGColor;
                     }
                 } else {
-                    [self.trashbox moveLayerToTrashBox:column];
                     [column removeFromSuperlayer];
                 }
             }
         }
         
-        for (DCDataPoint* key in self.trashbox.xToLayerDic.allKeys) {
+        for (NSString* key in self.columnsDic.allKeys) {
             if (xDics[key] == nil) {
-                [self.trashbox.xToLayerDic[key] removeFromSuperlayer];
-                [self.trashbox moveLayerToTrashBox:self.trashbox.xToLayerDic[key]];
+                [self.columnsDic[key] removeFromSuperlayer];
             }
         }
-        self.trashbox.xToLayerDic = xDics;
+        self.columnsDic = xDics;
+        [CATransaction setDisableActions:caTransationState];
     }
-    [CATransaction setDisableActions:caTransationState];
-    self.enableGrowAnimation = NO;
-    [self.trashbox.trashLayerBox removeAllObjects];
 }
 
--(CGRect) getRectForSeries:(DCColumnSeries*)series index:(NSUInteger)index stackedHeight:(double)stackedHeight {
+-(void)clearSublayersAndDictionary {
+    while (self.columnsDic.count != 0) {
+        id key = self.columnsDic.allKeys[0];
+        [self.columnsDic[key] removeFromSuperlayer];
+        [self.columnsDic removeObjectForKey:key];
+    }
+}
+
+-(CGRect) getRectForSeries:(DCColumnSeries*)series index:(NSUInteger)index stackedHeight:(double)stackedHeight coordinate:(_DCCoordinateSystem*)coordinate {
     DCDataPoint* point = series.datas[index];
-    CGFloat columnHeight = [self getHeightOfPoint:point];
-    CGFloat pointXOffset = 0;
-    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
-    return CGRectMake(self.frame.size.width * (index + pointXOffset + series.xRectStartAt - self.graphContext.hRange.location) / self.graphContext.hRange.length, self.frame.size.height-columnHeight-stackedHeight, self.frame.size.width * series.columnWidthInCoordinate / self.graphContext.hRange.length, columnHeight);
+    CGFloat columnHeight = [self getHeightOfPoint:point coordinate:coordinate];
+    CGFloat pointXOffset = self.graphContext.pointHorizentalOffset;
+//    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
+    return CGRectMake(self.frame.size.width * (index + pointXOffset + series.xRectStartAt - self.graphContext.hRange.location) / self.graphContext.hRange.length,
+                      self.frame.size.height-columnHeight-stackedHeight,
+                      self.frame.size.width * series.columnWidthInCoordinate / self.graphContext.hRange.length,
+                      columnHeight);
 }
 
--(CGFloat)getHeightOfPoint:(DCDataPoint*)point {
+-(CGFloat)getHeightOfPoint:(DCDataPoint*)point coordinate:(_DCCoordinateSystem*)coordinate {
     double y = 0;
     if (point.value != nil && ![point.value isEqual:[NSNull null]]) {
         y = point.value.doubleValue;
     }
-    return self.coordinateSystem.heightUnitInScreen * y;
+    return coordinate.heightUnitInScreen * y;
 }
 
 -(BOOL)isValidSeriesForMe:(DCXYSeries*)series {

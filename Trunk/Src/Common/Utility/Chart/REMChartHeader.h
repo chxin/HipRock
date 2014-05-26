@@ -14,7 +14,7 @@
 #import "REMColor.h"
 #import "DCLabelingLabel.h"
 #import "DCPieDataPoint.h"
-
+#import "REMEnum.h"
 typedef enum _DCLineType {
     DCLineTypeDefault = 0,
     DCLineTypeDotted = 1,

@@ -10,26 +10,41 @@
 #import "DCXYSeries.h"
 
 @implementation _DCSeriesLayer
--(id)initWithCoordinateSystem:(_DCCoordinateSystem*)coordinateSystem {
-    self = [self init];
+-(id)initWithContext:(DCContext*)graphContext view:(DCXYChartView*)view coordinateSystems:(NSArray*)coordinateSystems; {
+    self = [super initWithContext:graphContext view:(DCXYChartView*)view];
     if (self) {
         self.contentsScale = [UIScreen mainScreen].scale;
         _enableGrowAnimation = YES;
+        _growthAnimationDone = NO;
         NSMutableArray* s = [[NSMutableArray alloc]init];
-        for (DCXYSeries* se in coordinateSystem.seriesList) {
+        for (DCXYSeries* se in view.seriesList) {
             if ([self isValidSeriesForMe:se]) {
                 [s addObject:se];
-                se.layer = self;
+                se.seriesLayer = self;
             }
         }
-        self.graphContext = coordinateSystem.graphContext;
-        _series = s;
+        _seriesList = s;
         self.masksToBounds = YES;
-        _coordinateSystem = coordinateSystem;
+        _coordinateSystems = coordinateSystems;
     }
     return self;
 }
 
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag {
+//    if (flag) {
+        _growthAnimationDone = YES;
+//        NSLog(@"view hash:%ui; layer:%@", self.view.hash, NSStringFromClass([self class]));
+        [self.view subLayerGrowthAnimationDone];
+//    }
+}
+
+-(NSUInteger)getVisableSeriesCount {
+    NSUInteger count = 0;
+    for (DCXYSeries* s in self.seriesList) {
+        if (!s.hidden) count++;
+    }
+    return count;
+}
 //-(void)didYRangeChanged:(DCRange*)oldRange newRange:(DCRange*)newRange {
 //    _yRange = newRange;
 //    self.heightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.frame.size.height / self.yRange.length) : 0;
@@ -40,51 +55,16 @@
 //    _xRange = newRange;
 //}
 
--(void)removeFromSuperlayer {
-    self.series = nil;
-    [super removeFromSuperlayer];
-}
-
 -(BOOL)isValidSeriesForMe:(DCXYSeries*)series {
     return NO;
 }
 
--(void)redrawWithXRange:(DCRange*)xRange yRange:(DCRange*)yRange {
-    if ([DCRange isRange:xRange equalTo:self.xRange] && [DCRange isRange:yRange equalTo:self.yRange]) return;
-    _xRange = xRange;
-    _yRange = yRange;
-    [self redraw];
-}
+//-(void)redrawWithXRange:(DCRange*)xRange yRange:(DCRange*)yRange {
+//    if ([DCRange isRange:xRange equalTo:self.xRange] && [DCRange isRange:yRange equalTo:self.yRange]) return;
+//    [self redraw];
+//}
 
 -(void)redraw {
     // Template. Nothing to do.
 }
-//
-//- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden {
-//    if ([self.series containsObject:series]) {
-//        if (hidden == [self.visableSeries containsObject:series]) {
-//            if (hidden) {
-//                [self.visableSeries removeObject:series];
-//                series.yAxis.visableSeriesAmount--;
-//                series.xAxis.visableSeriesAmount--;
-//            } else {
-//                [self.visableSeries addObject:series];
-//                series.yAxis.visableSeriesAmount++;
-//                series.xAxis.visableSeriesAmount++;
-//            }
-//            [self setNeedsDisplay];
-//        }
-//    }
-//}
-//-(void)focusOnX:(int)x {
-//    if (self.focusX != x) {
-//        _focusX = x;
-//    }
-//}
-//
-//-(void)defocus {
-//    if (self.focusX != INT32_MIN) {
-//        _focusX = INT32_MIN;
-//    }
-//}
 @end

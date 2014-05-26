@@ -13,9 +13,15 @@
 + (NSData *)AES256EncryptData:(NSData *)data withKey:(NSString *)key;   //加密
 + (NSData *)AES256DecryptData:(NSData *)data WithKey:(NSString *)key;   //解密
 
-+ (NSString*)encodeBase64String:(NSString *)input;
-+ (NSString*)decodeBase64String:(NSString *)input;
-+ (NSString*)encodeBase64Data:(NSData *)data;
-+ (NSString*)decodeBase64Data:(NSData *)data;
++(NSString *)base64AES256EncryptString:(NSString *)input withKey:(NSString *)key;
+
++ (NSString*)encodeBase64StringWithString:(NSString * )string;
++ (NSString*)decodeBase64StringWithString:(NSString * )encodedString;
++ (NSString*)encodeBase64StringWithData:(NSData * )data;
++ (NSString*)decodeBase64StringWithData:(NSData * )encodedData;
+
++ (NSData *)encodeBase64Data:(NSData *)data;
++ (NSData *)decodeBase64Data:(NSData *)data;
+
 
 @end

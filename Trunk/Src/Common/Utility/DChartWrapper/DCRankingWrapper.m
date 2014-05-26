@@ -16,7 +16,7 @@
     return 1;
 }
 
--(DCXYSeries*)createSeriesAt:(NSUInteger)index style:(REMChartStyle*)style {
+-(DCXYSeries*)createSeriesAt:(NSUInteger)index style:(DCChartStyle*)style {
     DCXYChartView* view = self.view;
     REMTargetEnergyData* targetEnergy = self.energyViewData.targetEnergyData[index];
     NSMutableArray* datas = [[NSMutableArray alloc]init];
@@ -50,8 +50,10 @@
 }
 
 -(void)customizeView:(DCXYChartView*)view {
-    view.graphContext.pointAlignToTick = NO;
-    view.graphContext.xLabelAlignToTick = NO;
+    view.graphContext.pointHorizentalOffset = 0.5;
+    view.graphContext.xLabelHorizentalOffset = 0.5;
+//    view.graphContext.pointAlignToTick = NO;
+//    view.graphContext.xLabelAlignToTick = NO;
     REMTargetEnergyData* t = nil;
     if (!REMIsNilOrNull(self.energyViewData) && self.energyViewData.targetEnergyData.count > 0) t = self.energyViewData.targetEnergyData[0];
     if (!REMIsNilOrNull(t) && !REMIsNilOrNull(t.target) && !(REMIsNilOrNull(t.target.uomName)))
@@ -64,23 +66,15 @@
     y.coordinate = DCAxisCoordinateY;
     s.yAxis = y;
     y.axisTitle = REMEmptyString;
-    y.labelToLine = self.style.yLabelToLine;
-    if (self.style.yLineWidth > 0) {
-        y.lineColor = self.style.yLineColor;
-        y.lineWidth = self.style.yLineWidth;
-    }
-    if (self.style.yTextFont) {
-        y.labelColor = self.style.yTextColor;
-        y.labelFont = self.style.yTextFont;
-    }
-    y.axisTitleColor = self.style.yAxisTitleColor;
-    y.axisTitleToTopLabel = self.style.yAxisTitleToTopLabel;
-    y.axisTitleFontSize = self.style.yAxisTitleFontSize;
     return @[y];
 }
 
 -(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
     // Nothing to do. cannot hide series in ranking chart.
+}
+
+-(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index {
+    return NO;
 }
 
 -(void)swapeAllDatas:(DCXYSeries*)rankingSeries {
@@ -145,7 +139,6 @@
     if (_sortOrder != sortOrder) {
         _sortOrder = sortOrder;
         [self swapeAllDatas:self.view.seriesList[0]];
-        [self.view relabelX];
         [self.view reloadData];
     }
 }
@@ -164,6 +157,10 @@
     } else {
         [self.view focusAroundX:x];
     }
+}
+
+-(BOOL)canBeChangeSeriesAtIndex:(NSUInteger)index {
+    return NO;
 }
 
 -(DCRange*)updatePinchRange:(DCRange*)newRange pinchCentreX:(CGFloat)centreX pinchStopped:(BOOL)stopped {

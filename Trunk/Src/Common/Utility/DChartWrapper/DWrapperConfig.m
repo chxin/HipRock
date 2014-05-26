@@ -19,13 +19,13 @@
     return self;
 }
 
--(id)initWith:(REMWidgetObject*)widgetObj {
+-(id)initWith:(REMWidgetContentSyntax*)contentSyntax {
     self = [self init];
     if (self) {
-        _calendarType=widgetObj.contentSyntax.calendarType;
-        _rankingDefaultSortOrder=widgetObj.contentSyntax.rankingSortOrder;
-        _rankingRangeCode=widgetObj.contentSyntax.rankingRangeCode;
-        REMDataStoreType storeType = widgetObj.contentSyntax.dataStoreType;
+        _calendarType=contentSyntax.calendarType;
+        _rankingDefaultSortOrder=contentSyntax.rankingSortOrder;
+        _rankingRangeCode=contentSyntax.rankingRangeCode;
+        REMDataStoreType storeType = contentSyntax.dataStoreType;
         _isUnitOrRatioChart = (storeType==REMDSEnergyTagsTrendUnit || storeType==REMDSEnergyCarbonUnit || storeType==REMDSEnergyCostUnit || storeType==REMDSEnergyRatio);
         _isMultiTimeChart = (storeType == REMDSEnergyMultiTimeTrend || storeType == REMDSEnergyMultiTimeDistribute);
     }

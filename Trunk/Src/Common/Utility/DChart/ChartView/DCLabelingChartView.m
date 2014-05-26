@@ -156,7 +156,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
 -(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx {
     [super drawLayer:layer inContext:ctx];
     [self.tooltipIconCentrePoints removeAllObjects];
-    REMChartStyle* style = self.style;
+    DCChartStyle* style = self.style;
     NSUInteger stageCount = self.series.stages.count;
     NSUInteger labelCount = self.series.labels.count;
     if (stageCount == 0 || labelCount == 0) return;
@@ -167,8 +167,8 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     CGFloat hPadding = (CGRectGetWidth(self.bounds) - plotWidth) / 2;
     
     UIFont* effFont = [UIFont fontWithName:style.labelingFontName size:style.labelingEffectFontSize];
-    [self drawText:REMLocalizedString(@"Chart_Labeling_LowEnergyUse") inContext:ctx font:effFont rect:CGRectMake(hPadding, style.labelingStageToBorderMargin-style.labelingStageToStageTextMargin-style.labelingEffectFontSize+style.plotPaddingTop, 9999, 9999) alignment:NSTextAlignmentLeft color:style.labelingStageFontColor];
-    [self drawText:REMLocalizedString(@"Chart_Labeling_HighEnergyUse") inContext:ctx font:effFont rect:CGRectMake(hPadding, self.frame.size.height-style.plotPaddingBottom-style.labelingStageToBorderMargin+style.labelingStageToStageTextMargin, 9999, 9999) alignment:NSTextAlignmentLeft color:style.labelingStageFontColor];
+    [self drawText:REMIPadLocalizedString(@"Chart_Labeling_LowEnergyUse") inContext:ctx font:effFont rect:CGRectMake(hPadding, style.labelingStageToBorderMargin-style.labelingStageToStageTextMargin-style.labelingEffectFontSize+style.plotPaddingTop, 9999, 9999) alignment:NSTextAlignmentLeft color:style.labelingStageFontColor];
+    [self drawText:REMIPadLocalizedString(@"Chart_Labeling_HighEnergyUse") inContext:ctx font:effFont rect:CGRectMake(hPadding, self.frame.size.height-style.plotPaddingBottom-style.labelingStageToBorderMargin+style.labelingStageToStageTextMargin, 9999, 9999) alignment:NSTextAlignmentLeft color:style.labelingStageFontColor];
     
     CGFloat arrowSpaceWidth =  style.labelingArrowLineWidth+style.labelingArrowVMargin*2;
     CGPoint basePoint = CGPointMake(hPadding+arrowSpaceWidth, style.plotPaddingTop + style.labelingStageToBorderMargin);
@@ -213,7 +213,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
             aPath = self.stageBezierPaths[i];
         }
         
-        CGContextSetFillColorWithColor(ctx, [self.series.stages[i] color].CGColor);
+        CGContextSetFillColorWithColor(ctx, [((DCLabelingStage *)self.series.stages[i]) color].CGColor);
         CGContextAddPath(ctx, aPath.CGPath);
         CGContextDrawPath(ctx, kCGPathFill);
 
@@ -311,9 +311,17 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
 
 -(void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
-    
+    CGFloat toAlpha = self.alpha;
+    self.alpha = 0;
     [self updateGestures];
     [self setNeedsDisplay];
+    [UIView animateWithDuration:0.4 animations:^(){
+        self.alpha = toAlpha;
+    } completion:^(BOOL completed){
+        if (!(REMIsNilOrNull(self.delegate)) && [self.delegate respondsToSelector:@selector(beginAnimationDone)]) {
+            [self.delegate beginAnimationDone];
+        }
+    }];
 }
 
 -(CGFloat)getStageHeight:(uint)stageCount {

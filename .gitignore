@@ -6,3 +6,5 @@
 *.xcworkspacedata
 *.xccheckout
 xcuserdata/
+*.pyc
+*.sqlite

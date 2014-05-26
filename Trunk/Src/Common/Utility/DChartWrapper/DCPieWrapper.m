@@ -13,15 +13,21 @@
 @end
 
 @implementation DCPieWrapper
--(DCPieWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(REMChartStyle *)style {
+-(DCPieWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(DCChartStyle *)style {
     self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
     if (self && energyViewData.targetEnergyData.count != 0) {
         [self createView:frame data:energyViewData style:style];
     }
+    for (NSUInteger index = 0; index < self.view.series.datas.count; index++) {
+        DCPieDataPoint* slice = self.view.series.datas[index];
+        DSeriesStatus* state = [[DSeriesStatus alloc]initWithTarget:self.isMultiTimeChart ? nil : slice.target index:self.isMultiTimeChart ? @(index) : nil];
+        state.hidden = slice.hidden;
+        [self.seriesStates addObject:state];
+    }
     return self;
 }
 
--(void)createView:(CGRect)frame data:(REMEnergyViewData*)energyViewData style:(REMChartStyle*)style {
+-(void)createView:(CGRect)frame data:(REMEnergyViewData*)energyViewData style:(DCChartStyle*)style {
     NSMutableArray* series0Data = [[NSMutableArray alloc]init];
     int seriesCount = 0;
     if (self.energyViewData != nil && self.energyViewData.targetEnergyData != NULL) seriesCount =self.energyViewData.targetEnergyData.count;
@@ -41,13 +47,13 @@
     DCPieSeries* series = [[DCPieSeries alloc]initWithEnergyData:series0Data];
     for(NSUInteger i = 0; i < series.datas.count; i++) {
         DCPieDataPoint* slice = series.datas[i];
-        if (REMIsNilOrNull(slice.target)) continue;
-        slice.hidden = [self isTargetHidden:slice.target index:i];
+        DSeriesStatus* state = [self getSeriesStatusByTarget:slice.target index:@(i)];
+        if (REMIsNilOrNull(state)) continue;
+        slice.hidden = state.hidden;
     }
     _view = [[DCPieChartView alloc]initWithFrame:frame series:series];
     self.view.chartStyle = style;
     self.view.delegate = self;
-    self.view.playBeginAnimation = self.style.playBeginAnimation;
     self.view.radius = style.pieRadius;
     self.view.radiusForShadow = style.pieShadowRadius;
     self.focusIndex = INT32_MIN;
@@ -58,7 +64,7 @@
         self.focusIndex = self.view.focusPointIndex;
         DCPieDataPoint* piePoint = self.view.series.datas[self.view.focusPointIndex];
         if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:direction:)]) {
-            [((id<REMTPieChartDelegate>)self.delegate) highlightPoint:piePoint direction:self.view.rotateDirection];
+            [((id<DCChartPieWrapperDelegate>)self.delegate) highlightPoint:piePoint direction:self.view.rotateDirection];
         }
     }
 }
@@ -99,11 +105,7 @@
     DCPieDataPoint* slice = self.view.series.datas[seriesIndex];
     [self.view setSlice:slice hidden:hidden];
     if (REMIsNilOrNull(slice.target)) return;
-    if (hidden) {
-        [self addHiddenTarget:slice.target index:seriesIndex];
-    } else {
-        [self removeHiddenTarget:slice.target index:seriesIndex];
-    }
+    [self getSeriesStatusByTarget:slice.target index:@(seriesIndex)].hidden = hidden;
 }
 
 -(UIView*)getView {

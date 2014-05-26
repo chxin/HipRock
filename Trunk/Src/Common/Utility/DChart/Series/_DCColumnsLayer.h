@@ -13,5 +13,4 @@
 #import "_DCSeriesLayer.h"
 
 @interface _DCColumnsLayer : _DCSeriesLayer
--(NSUInteger)getVisableSeriesCount;
 @end

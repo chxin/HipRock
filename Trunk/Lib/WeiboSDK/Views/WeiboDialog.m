@@ -367,6 +367,7 @@ static BOOL IsDeviceIPad() {
     // for differences in application needs
     if (!(([error.domain isEqualToString:@"NSURLErrorDomain"] && error.code == -999) ||
           ([error.domain isEqualToString:@"WebKitErrorDomain"] && error.code == 102))) {
+        
         [self dismissWithError:error animated:YES];
     }
 }

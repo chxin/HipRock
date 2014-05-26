@@ -13,29 +13,17 @@
 #import "REMColor.h"
 
 @implementation _DCLineSymbolsLayer
--(id)initWithContext:(DCContext*)context series:(NSArray*)series {
-    self = [super initWithContext:context];
-    if (self) {
-        _series = series;
-        for (DCXYSeries* s in series) {
-            s.layer = self;
-            _enableGrowAnimation = YES;
-        }
-    }
-    return self;
-}
-
 -(NSUInteger)getVisableSeriesCount {
     NSUInteger count = 0;
-    for (DCLineSeries* s in self.series) {
+    for (DCLineSeries* s in self.seriesList) {
         if (!s.hidden) count++;
     }
     return count;
 }
 
--(void)setNeedsDisplay {
+-(void)redraw {
     if (self.enableGrowAnimation) {
-        _enableGrowAnimation = NO;
+        self.enableGrowAnimation = NO;
         CALayer* superLayer = self.superlayer;
         CGPoint orig = superLayer.frame.origin;
         CGRect newBounds = superLayer.bounds;
@@ -45,11 +33,12 @@
         animation.fromValue = [NSValue valueWithCGRect:oldBounds];
         animation.toValue = [NSValue valueWithCGRect:newBounds];
         animation.duration = kDCAnimationDuration;
+        animation.delegate = self;
         superLayer.anchorPoint = CGPointZero;
         superLayer.position = orig;
         [superLayer addAnimation:animation forKey:@"bounds"];
     }
-    [super setNeedsDisplay];
+    [self setNeedsDisplay];
 }
 
 -(CGFloat)getHeightOfPoint:(DCDataPoint*)point heightUnit:(CGFloat)heightUnit {
@@ -61,12 +50,16 @@
 }
 
 -(CGPoint)getPointBy:(int)x y:(double)y heightUnit:(CGFloat)heightUnit {
-    CGFloat xOffset = 0;
-    if (!self.graphContext.pointAlignToTick) xOffset = 0.5;
+    CGFloat xOffset = self.graphContext.pointHorizentalOffset;
+//    if (!self.graphContext.pointAlignToTick) xOffset = 0.5;
     CGPoint point;
     point.x = self.graphContext.plotRect.size.width*(x+xOffset-self.graphContext.hRange.location)/self.graphContext.hRange.length;
     point.y = self.graphContext.plotRect.size.height-heightUnit*y;
     return point;
+}
+
+-(BOOL)isValidSeriesForMe:(DCXYSeries *)series {
+    return series.type == DCSeriesTypeLine;
 }
 
 -(void)drawInContext:(CGContextRef)ctx {
@@ -75,18 +68,17 @@
     int start = floor(self.graphContext.hRange.location);
     int end = ceil(self.graphContext.hRange.length+self.graphContext.hRange.location);
     if (start < 0) start = 0;
-    CGFloat pointXOffset = 0;
-    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
+    CGFloat pointXOffset = self.graphContext.pointHorizentalOffset;
+//    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
     
     CGRect plotRect = self.graphContext.plotRect;
-    
     
     CGContextSetLineJoin(ctx, kCGLineJoinMiter);
     CGContextSetLineCap(ctx , kCGLineCapRound);
     CGContextSetBlendMode(ctx, kCGBlendModeNormal);
     CGContextSetAllowsAntialiasing(ctx, YES);
     CGPoint linePoints[end-start+2];
-    for (DCLineSeries* s in self.series) {
+    for (DCLineSeries* s in self.seriesList) {
         if (s.hidden) continue;
         if (start >= s.datas.count) continue;
         
@@ -149,7 +141,7 @@
     }
     
     // 绘制Symbol
-    for (DCLineSeries* s in self.series) {
+    for (DCLineSeries* s in self.seriesList) {
         if (s.hidden) continue;
         CGFloat r, g, b, a;
         [s.color getRed:&r green:&g blue:&b alpha:&a];

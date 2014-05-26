@@ -12,11 +12,11 @@
 #import "DCPieSeries.h"
 #import "DCPieChartViewDelegate.h"
 #import "REMCommonHeaders.h"
-#import "REMChartHeader.h"
-#import "REMChartStyle.h"
+#import "DCChartEnum.h"
+#import "DCChartStyle.h"
 
 @interface DCPieChartView : UIView
-@property (nonatomic, weak) REMChartStyle* chartStyle;
+@property (nonatomic,strong) DCChartStyle* chartStyle;
 @property (nonatomic,strong,readonly) DCPieSeries* series;
 @property (nonatomic,assign) CGFloat radius;            // 圆形区域半径
 @property (nonatomic,assign) CGFloat radiusForShadow;   // 投影半径
@@ -25,7 +25,6 @@
 @property (nonatomic,assign) CGFloat indicatorAlpha;
 @property (nonatomic,assign) BOOL showIndicator;
 
-@property (nonatomic, assign) BOOL playBeginAnimation;
 @property (nonatomic, weak) id<DCPieChartViewDelegate> delegate;
 
 @property (nonatomic, readonly, assign) NSUInteger focusPointIndex;

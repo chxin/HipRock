@@ -15,10 +15,11 @@
     if (self.graphContext && [DCUtility getScreenXIn:self.bounds xVal:1 hRange:self.graphContext.hRange] - [DCUtility getScreenXIn:self.bounds xVal:0 hRange:self.graphContext.hRange] >= 20) {
         int start = ceil(self.graphContext.hRange.location);
         int end = floor(self.graphContext.hRange.end);
+        
         CGContextSetLineJoin(ctx, kCGLineJoinMiter);
-        CGContextSetLineWidth(ctx, self.view.vGridlineWidth);
+        CGContextSetLineWidth(ctx, self.view.chartStyle.xGridlineWidth);
         CGContextSetBlendMode(ctx, kCGBlendModeNormal);
-        CGContextSetStrokeColorWithColor(ctx, self.view.vGridlineColor.CGColor);
+        CGContextSetStrokeColorWithColor(ctx, self.view.chartStyle.xGridlineColor.CGColor);
         CGContextBeginPath(ctx);
         for (int i = start; i <= end; i++) {
             CGPoint addLines[2];
@@ -26,8 +27,7 @@
             addLines[1].x = addLines[0].x;
             addLines[0].y = 0;
             addLines[1].y = CGRectGetHeight(self.bounds);
-            
-            [DCUtility setLineStyle:ctx style:self.view.vGridlineStyle lineWidth:self.view.vGridlineWidth];
+            [DCUtility setLineStyle:ctx style:self.view.chartStyle.xGridlineStyle lineWidth:self.view.chartStyle.xGridlineWidth];
             CGContextAddLines(ctx, addLines, 2);
         }
         CGContextStrokePath(ctx);
@@ -37,10 +37,10 @@
 
 -(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
-    if (oldRange.length == newRange.length) {
+//    if (oldRange.length == newRange.length) {
+//        [self setNeedsDisplay];
+//    } else {
         [self setNeedsDisplay];
-    } else {
-        [self setNeedsDisplay];
-    }
+//    }
 }
 @end

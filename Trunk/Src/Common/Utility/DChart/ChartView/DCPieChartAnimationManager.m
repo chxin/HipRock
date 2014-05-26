@@ -70,7 +70,7 @@ const NSString* stepKey = @"step";
     return (b + a) * (b - a + 1) / 2;
 }
 
--(void)animateToFrame:(DCPieChartAnimationFrame*)targetFrame {
+-(void)animateToFrame:(DCPieChartAnimationFrame*)targetFrame callback:(DCPieAnimationCallback)callback {
     if (self.view == Nil) return;
     
     double frames = kDCAnimationDuration * kDCFramesPerSecord;
@@ -119,7 +119,7 @@ const NSString* stepKey = @"step";
         [animationFrames addObject:aframe];
     }
     [animationFrames addObject:targetFrame];
-    [self playFrames:animationFrames];
+    [self playFrames:animationFrames callback:callback];
 }
 
 // 把一个数Mod2
@@ -189,19 +189,28 @@ const NSString* stepKey = @"step";
     double targetRotation = 2 - [self findNearbySliceCenter:lastFrameAlignedRotation];  // 预计对准的扇区的中线位置
     [animationFrames addObjectsFromArray:[self getAngleTurningFramesFrom:lastFrameAlignedRotation to:targetRotation]];
     // 应用动画
-    [self playFrames:animationFrames];
+    [self playFrames:animationFrames callback:nil];
     
     return;
     
 }
 
--(void)playFrames:(NSArray*)frames {
+-(void)playFrames:(NSArray*)frames callback:(DCPieAnimationCallback)callback {
     if (frames == nil || frames.count == 0) {
         [self.view showPercentageTexts];
+        if (!REMIsNilOrNull(callback)) {
+            callback();
+        }
     } else {
         [self.view hidePercentageTexts];
         if (self.animationTimer && [self.animationTimer isValid]) [self.animationTimer invalidate];
-        self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animationTimerTarget) userInfo:frames.mutableCopy repeats:YES];
+        NSDictionary* userInfo;
+        if (REMIsNilOrNull(callback)) {
+            userInfo = @{@"frames": frames.mutableCopy};
+        } else {
+            userInfo = @{@"callback": callback, @"frames": frames.mutableCopy};
+        }
+        self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1/kDCFramesPerSecord target:self selector:@selector(animationTimerTarget) userInfo:userInfo repeats:YES];
     }
 }
 
@@ -211,10 +220,13 @@ const NSString* stepKey = @"step";
         return;
     }
     if (self.animationTimer && [self.animationTimer isValid]) {
-        NSMutableArray* frames = self.animationTimer.userInfo;
+        NSDictionary* userInfo = self.animationTimer.userInfo;
+        NSMutableArray* frames = userInfo[@"frames"];
         if (frames.count == 0) {
             [self stopTimer];
             [self.view showPercentageTexts];
+            DCPieAnimationCallback callback = userInfo[@"callback"];
+            if (!REMIsNilOrNull(callback)) callback();
         } else {
             DCPieChartAnimationFrame* theFrame = frames[0];
             [frames removeObjectAtIndex:0];
@@ -257,24 +269,23 @@ const NSString* stepKey = @"step";
 
 -(void)updateSumValueAndSlices {
     double sum = 0;
-    double previesSum[self.series.datas.count];
+    NSMutableArray* previesSum = [[NSMutableArray alloc]init];
     NSMutableArray* slices = [[NSMutableArray alloc]init];
-    if (!REMIsNilOrNull(self.series.datas)) {
         int index = 0;
         for (DCPieDataPoint* point in self.series.datas) {
-            previesSum[index] = sum;
+            [previesSum addObject:[NSNumber numberWithDouble:sum]];
             if (point.pointType == DCDataPointTypeNormal) {
                 sum += [self getVisableValueOfPoint:point];
             }
             index++;
         }
-    }
-    int index = 0;
+    index = 0;
     for (DCPieDataPoint* point in self.series.datas) {
         double pointVal = [self getVisableValueOfPoint:point];
         if (point.pointType == DCDataPointTypeNormal && sum != 0 && pointVal != 0) {
             DCPieSlice slice;
-            slice.sliceBegin = previesSum[index] * 2 / sum;
+            double p = ((NSNumber*)previesSum[index]).doubleValue;
+            slice.sliceBegin = p * 2 / sum;
             slice.sliceEnd = slice.sliceBegin + pointVal * 2 / sum;
             slice.sliceCenter = (slice.sliceBegin + slice.sliceEnd) / 2;
             [slices addObject:[NSValue value:&slice withObjCType:@encode(DCPieSlice)]];
@@ -364,7 +375,7 @@ const NSString* stepKey = @"step";
             [self.hiddenShowTimers removeObject:timer];
             
             if (self.sumVisableValue > 0) {
-                [self playFrames:[self getAngleTurningFramesFrom:self.view.rotationAngle to:2-[self findNearbySliceCenter:self.view.rotationAngle]]];
+                [self playFrames:[self getAngleTurningFramesFrom:self.view.rotationAngle to:2-[self findNearbySliceCenter:self.view.rotationAngle]] callback:nil];
             }
         }
     }
@@ -409,8 +420,10 @@ const NSString* stepKey = @"step";
     NSValue* val = self.pieSlices[index];
     if (!REMIsNilOrNull(val)) {
         [val getValue:&slice];
+        return slice.sliceCenter;
+    } else {
+        return 0;
     }
-    return slice.sliceCenter;
 }
 
 @end

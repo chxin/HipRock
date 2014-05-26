@@ -8,6 +8,7 @@
 
 #import "DCXYSeries.h"
 #import "DCDataPoint.h"
+#import "_DCSeriesLayer.h"
 
 @implementation DCXYSeries
 
@@ -18,6 +19,20 @@
 //        _pointXOffset = 0;
     }
     return self;
+}
+
+-(void)copyFromSeries:(DCXYSeries*)series {
+    _coordinate = series.coordinate;
+    _xAxis = series.xAxis;
+    _yAxis = series.yAxis;
+    _target = series.target;
+    self.color = series.color;
+    _visableYMaxThreshold = series.visableYMaxThreshold;
+    self.datas = series.datas;
+    for (DCDataPoint* p in self.datas) {
+        p.series = self;
+    }
+    [self willHRangeChanged:nil newRange:series.visableRange];
 }
 
 -(void)willHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
@@ -104,4 +119,9 @@
     [yAxis attachSeries:self];
 }
 
+-(void)setHidden:(BOOL)hidden {
+    if (hidden == _hidden) return;
+    _hidden = hidden;
+    [self.seriesLayer redraw];
+}
 @end

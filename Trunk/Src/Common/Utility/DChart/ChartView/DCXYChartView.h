@@ -7,50 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DCChartStyle.h"
 #import "DCContext.h"
 #import "DCAxis.h"
 #import "DCXYSeries.h"
 #import "DCXYChartViewDelegate.h"
 
 @interface DCXYChartView : UIView<DCContextHRangeObserverProtocal,UIGestureRecognizerDelegate>
+@property (nonatomic, strong) DCChartStyle* chartStyle;
 @property (nonatomic, assign) BOOL acceptPan;
 @property (nonatomic, assign) BOOL acceptPinch;
 @property (nonatomic, assign) BOOL acceptTap;
 @property (nonatomic, strong) DCAxis* xAxis;
-//@property (nonatomic, strong) DCAxis* yAxis0;
-//@property (nonatomic, strong) DCAxis* yAxis1;
-//@property (nonatomic, strong) DCAxis* yAxis2;
 @property (nonatomic, strong) NSArray* yAxisList;
 
 @property (nonatomic, strong) DCContext* graphContext;
 
 @property (nonatomic, assign) BOOL hasVGridlines;
 
-@property (nonatomic,assign) float hGridlineWidth;
-@property (nonatomic) UIColor* hGridlineColor;
-@property (nonatomic,assign) DCLineType hGridlineStyle;
-@property (nonatomic,assign) float vGridlineWidth;
-@property (nonatomic) UIColor* vGridlineColor;
-@property (nonatomic,assign) DCLineType vGridlineStyle;
-@property (nonatomic, assign) CGFloat plotPaddingTop;
-@property (nonatomic, assign) CGFloat plotPaddingLeft;
-@property (nonatomic, assign) CGFloat plotPaddingRight;
-@property (nonatomic, assign) CGFloat plotPaddingBottom;
-
-@property (nonatomic, assign) CGFloat focusSymbolLineWidth;
-@property (nonatomic, assign) DCLineType focusSymbolLineStyle;
-@property (nonatomic, strong) UIColor* focusSymbolLineColor;
-@property (nonatomic, assign) CGFloat focusSymbolIndicatorSize;
-
 @property (nonatomic, weak) id<DCXYChartViewDelegate> delegate;
 
 @property (nonatomic, strong) NSArray* seriesList;
 @property (nonatomic, assign) NSUInteger visableYAxisAmount;
-
-@property (nonatomic, strong) UIFont* backgroundBandFont;
-@property (nonatomic, strong) UIColor* backgroundBandFontColor;
-
-@property (nonatomic, assign) BOOL xAxisLabelClipToBounds;
 
 -(DCRange*)getRangeOfAxis:(DCAxis*)axis;
 
@@ -64,7 +42,10 @@
 -(double)getXLocationForPoint:(CGPoint)point;
 -(void)focusAroundX:(double)x;
 -(void)defocus;
--(void)relabelX;
 -(void)setBackgoundBands:(NSArray*)bands;
 -(void)reloadData;
+-(void)subLayerGrowthAnimationDone;
+-(_DCCoordinateSystem*)findCoordinateByYAxis:(DCAxis *)yAxis;
+
+-(void)replaceSeries:(DCXYSeries*)original byReplacement:(DCXYSeries*)replacement;
 @end

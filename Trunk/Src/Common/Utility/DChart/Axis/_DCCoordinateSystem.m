@@ -13,7 +13,7 @@
 #import "_DCColumnsLayer.h"
 #import "DCXYChartView.h"
 #import "_DCYAxisLabelLayer.h"
-
+#import "REMNumberExtension.h"
 @interface _DCCoordinateSystem()
 //@property (nonatomic, strong) NSMutableArray* visableSeries;
 
@@ -50,13 +50,8 @@
 
 -(_DCYAxisLabelLayer*)getAxisLabelLayer {
     if (REMIsNilOrNull(self._yLabelLayer)) {
-        _DCYAxisLabelLayer* _yLabelLayer = [[_DCYAxisLabelLayer alloc]initWithContext:self.graphContext];
+        _DCYAxisLabelLayer* _yLabelLayer = [[_DCYAxisLabelLayer alloc]initWithContext:self.graphContext view:(DCXYChartView*)self.chartView];
         _yLabelLayer.axis = self.yAxis;
-        _yLabelLayer.font = self.yAxis.labelFont;
-        _yLabelLayer.fontColor = self.yAxis.labelColor;
-        _yLabelLayer.axisTitleFontSize = self.yAxis.axisTitleFontSize;
-        _yLabelLayer.axisTitleToTopLabel = self.yAxis.axisTitleToTopLabel;
-        _yLabelLayer.axisTitleColor = self.yAxis.axisTitleColor;
         _yLabelLayer.isMajorAxis = self.isMajor;
         _yLabelLayer.hidden = ([self.yAxis getVisableSeriesAmount] == 0);
         self._yLabelLayer = _yLabelLayer;
@@ -82,7 +77,7 @@
         int end = ceil(range.end);
         start = MAX(0, start);
         
-        for (NSUInteger i = start; i <= end; i++) {
+        for (int i = start; i <= end; i++) {
             double yValAtIndex = 0;
             for (DCXYSeries* s in self.seriesList) {
                 if (s.hidden) continue;
@@ -126,7 +121,7 @@
     DCYAxisIntervalCalculation calResult = [DCUtility calculatorYAxisByMin:currentYMin yMax:currentYMax parts:self.graphContext.hGridlineAmount];
     DCRange* newYRange = [[DCRange alloc]initWithLocation:0 length:calResult.yMax];
     if ([self testYRange:newYRange visableMax:currentYMax visableMin:currentYMin]) {
-        [self setYRange:newYRange];
+        _yRange = newYRange;
         self.heightUnitInScreen = (self.yRange != nil && self.yRange.length > 0) ? (self.graphContext.plotRect.size.height / self.yRange.length) : 0;
         self.yInterval = calResult.yInterval;
     }

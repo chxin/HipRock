@@ -10,18 +10,11 @@
 #import "_DCColumnsLayer.h"
 
 @implementation DCColumnSeries
--(DCSeries*)initWithEnergyData:(NSArray*)seriesData {
-    self = [super initWithEnergyData:seriesData];
+-(DCSeries*)init {
+    self = [super init];
     if (self) {
         self.type = DCSeriesTypeColumn;
     }
     return self;
-}
-
--(void)setHidden:(BOOL)hidden {
-    if (self.hidden != hidden) {
-        [super setHidden:hidden];
-        [(_DCColumnsLayer*)self.layer redraw];
-    }
 }
 @end

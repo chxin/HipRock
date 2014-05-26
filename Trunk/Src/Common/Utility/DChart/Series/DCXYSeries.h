@@ -11,8 +11,7 @@
 #import "DCRange.h"
 #import "REMEnergyTargetModel.h"
 #import "_DCCoordinateSystem.h"
-#import "_DCLayer.h"
-
+@class _DCSeriesLayer;
 
 @interface DCXYSeries : DCSeries<DCContextHRangeObserverProtocal>
 @property (nonatomic, strong) DCRange* visableRange;
@@ -24,8 +23,9 @@
 @property (nonatomic, weak) REMEnergyTargetModel* target;
 @property (nonatomic, weak) _DCCoordinateSystem* coordinate;
 //@property (nonatomic, assign) CGFloat pointXOffset;
-@property (nonatomic, weak) _DCLayer* layer;
+@property (nonatomic, weak) _DCSeriesLayer* seriesLayer;
 
 @property (nonatomic, assign)BOOL hidden;
 
+-(void)copyFromSeries:(DCXYSeries*)series;
 @end

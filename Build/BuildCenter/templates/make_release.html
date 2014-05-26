@@ -1,0 +1,39 @@
+$def with (irs)
+$var pagefamily:manage
+$var title: Manage Release
+<div class="container">
+	<!-- Example row of columns -->
+	<div class="col-md-2">
+		<div class="bs-sidebar hidden-print affix" role="complementary">
+			<ul class="nav nav-pills nav-stacked">
+				<li class=""><a href="/manage/db">Daily Build</a></li>
+				<li class=""><a href="/manage/ir">Internal Release</a></li>
+				<li class="active"><a href="/manage/release">Release</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<form class="form-horizontal" role="form" method="post">
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">IR Version</label>
+		    <div class="col-sm-10">
+				<select class="form-control" name="id" id="id">
+					$for ir in irs:
+						<option value="$ir.id">$ir.version</option>
+				</select>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="description" class="col-sm-2 control-label">Release notes</label>
+		    <div class="col-sm-10">
+		  		<textarea class="form-control" rows="4" name="description" id="description"></textarea>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="submit" class="btn btn-default">Make</button>
+		    </div>
+		  </div>
+		</form>
+	</div>
+</div>

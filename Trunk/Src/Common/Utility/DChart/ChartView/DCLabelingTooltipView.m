@@ -28,7 +28,7 @@
 
 @implementation DCLabelingTooltipView
 
-- (id)initWithStyle:(REMChartStyle*)style
+- (id)initWithStyle:(DCChartStyle*)style
 {
     self = [super init];
     if (self) {

@@ -9,7 +9,7 @@
 #import "DCPieChartView.h"
 #import "REMColor.h"
 #import "DCPieChartAnimationManager.h"
-#import "REMChartHeader.h"
+#import "DCChartEnum.h"
 #import "DCPieLayer.h"
 
 @interface DCPieChartView()
@@ -45,7 +45,6 @@
         _radiusForShadow = 0;
         _panState = -1;
         _showIndicator = NO;
-        _playBeginAnimation = YES;
         
         _focusPointIndex = 0;
         
@@ -94,12 +93,16 @@
     targetFrame.rotationAngle = @(-targetRotation);
     targetFrame.fullAngle = @(2);
     targetFrame.indicatorAlpha = @(0.8);
-    if (self.playBeginAnimation) {
+    if (self.chartStyle.playBeginAnimation) {
         self.radius = 0;
         self.radiusForShadow = 0;
-        [self.animationManager animateToFrame:targetFrame];
+        [self.animationManager animateToFrame:targetFrame callback:^(void){
+            if (!(REMIsNilOrNull(self.delegate)) && [self.delegate respondsToSelector:@selector(beginAnimationDone)]) {
+                [self.delegate beginAnimationDone];
+            }
+        }];
     } else {
-        [self.animationManager playFrames:@[targetFrame]];
+        [self.animationManager playFrames:@[targetFrame] callback:nil];
     }
     self.pieLayer.frame = CGRectMake(self.center.x-targetFrame.radiusForShadow.doubleValue, self.center.y-targetFrame.radiusForShadow.doubleValue, targetFrame.radiusForShadow.doubleValue*2, targetFrame.radiusForShadow.doubleValue*2);
     
@@ -167,7 +170,7 @@
     if (fabs(self.panSpeed) >= 0.05) {
         [self.animationManager rotateWithInitialSpeed:self.panSpeed];
     } else {
-        [self.animationManager playFrames:[self.animationManager getAngleTurningFramesFrom:self.rotationAngle to:2-[self.animationManager findNearbySliceCenter:self.rotationAngle]]];
+        [self.animationManager playFrames:[self.animationManager getAngleTurningFramesFrom:self.rotationAngle to:2-[self.animationManager findNearbySliceCenter:self.rotationAngle]] callback:nil];
     }
     self.panSpeed = 0;
 }

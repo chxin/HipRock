@@ -12,7 +12,7 @@
 @implementation DCSeries
 
 -(DCSeries*)initWithEnergyData:(NSArray*)seriesData {
-    self = [super init];
+    self = [self init];
     if (self) {
         _color = [UIColor blackColor];
         _datas = seriesData;

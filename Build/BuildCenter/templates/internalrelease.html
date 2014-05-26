@@ -1,0 +1,45 @@
+$def with (result,groups,v)
+$var pagefamily:ir
+$var title: Internal Release
+
+<div class="container">
+	<!-- Example row of columns -->
+<div class="row">
+  <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+    <div class="list-group">
+      $if v=='':
+        <a href="/ir" class="list-group-item active">All</a>
+      $else:
+        <a href="/ir" class="list-group-item">All</a>
+
+      $for group in groups:
+        $if group==v:
+          <a href="/ir/$group" class="list-group-item active">$group</a>
+        $else:
+          <a href="/ir/$group" class="list-group-item">$group</a>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-9">
+    <p class="pull-right visible-xs">
+      <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+    </p>
+    <div class="list-group">
+
+      $for build in result:
+    	    <div class="list-group-item">
+            <h2 id="$build.version" class="list-group-item-heading">
+    					<span class="blues-version-link">IR $build.version</span>
+              $if build.status==-1:
+                <a class="btn btn-xs btn-danger"><span>Failed build<span></a>
+              $elif build.status==0:
+                <a class="btn btn-xs btn-default">Build in progress</a>
+              $else:
+    					  <a class="btn btn-xs btn-success" href="itms-services://?action=download-manifest&url=$(archive)$(build.path)$(build.appname).plist">Install</a>
+            </h2>
+            <p style:"font-color:#eee">$build.buildtime <a href="$(archive)$(build.path)/build.log" target="_blank">see build log</a></p>
+            <p class="list-group-item-text">$:build.description</p>
+          </div>
+
+    </div><!--/list-group-->
+  </div>
+</div>

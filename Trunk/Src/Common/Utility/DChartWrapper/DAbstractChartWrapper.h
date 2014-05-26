@@ -7,34 +7,31 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "REMChartHeader.h"
+#import "DCChartEnum.h"
 #import "REMEnergyViewData.h"
 #import "REMCommonHeaders.h"
-#import "REMChartStyle.h"
+#import "DCChartStyle.h"
 #import "DWrapperConfig.h"
-  
-typedef enum _DChartStatus {
-    DChartStatusNormal,
-    DChartStatusFocus
-}DChartStatus;
+#import "DCChartWrapperDelegate.h"
+#import "DSeriesStatus.h"
 
 @interface DAbstractChartWrapper : NSObject
 
-@property (nonatomic, weak) id<REMChartDelegate> delegate;
+@property (nonatomic, weak) id<DCChartWrapperDelegate> delegate;
 @property (nonatomic, readonly, weak) REMEnergyViewData* energyViewData;
-@property (nonatomic, readonly) REMChartStyle* style;
+@property (nonatomic, readonly) DCChartStyle* style;
 @property (nonatomic, assign) DChartStatus chartStatus;
 @property (nonatomic, assign, readonly) BOOL isMultiTimeChart;
+@property (nonatomic,strong) NSMutableArray* seriesStates;
 
 -(void)cancelToolTipStatus;
 -(void)redraw:(REMEnergyViewData *)energyViewData;
 -(UIView*)getView;
--(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig*) wrapperConfig style:(REMChartStyle*)style;
+-(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig*) wrapperConfig style:(DCChartStyle*)style;
+-(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index;
 -(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden;
 -(NSUInteger)getVisableSeriesCount;
+-(DSeriesStatus*)getSeriesStatusByTarget:(REMEnergyTargetModel*)target index:(NSNumber*)seriesIndex;
 
--(void)addHiddenTarget:(REMEnergyTargetModel*)target index:(NSUInteger)index;
--(void)removeHiddenTarget:(REMEnergyTargetModel*)target index:(NSUInteger)index;
--(BOOL) isTargetHidden:(REMEnergyTargetModel*)target index:(NSUInteger)index;
-
+-(void)beginAnimationDone;
 @end

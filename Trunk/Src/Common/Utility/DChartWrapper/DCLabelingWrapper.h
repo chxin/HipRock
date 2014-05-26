@@ -8,6 +8,7 @@
 
 #import "DAbstractChartWrapper.h"
 #import "DCLabelingChartDelegate.h"
+#import "DCChartLabelingWrapperDelegate.h"
 
 @interface DCLabelingWrapper : DAbstractChartWrapper<DCLabelingChartDelegate>
 

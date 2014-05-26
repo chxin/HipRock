@@ -12,14 +12,8 @@
 
 @interface _DCYAxisLabelLayer : _DCLayer<DCContextYIntervalObserverProtocal>
 
-@property (nonatomic, strong) UIFont* font;
-@property (nonatomic, strong) UIColor* fontColor;
-
 @property (nonatomic, weak) DCAxis* axis;
 @property (nonatomic, assign) BOOL isMajorAxis;
 
 -(CGRect)getVisualFrame;
-@property (nonatomic, strong) UIColor* axisTitleColor;
-@property (nonatomic, assign) CGFloat axisTitleToTopLabel;
-@property (nonatomic, assign) CGFloat axisTitleFontSize;
 @end

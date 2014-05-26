@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "REMChartHeader.h"
+#import "DCChartEnum.h"
 
 @protocol DCPieChartViewDelegate <NSObject>
-
 -(void)pieRotated;
 -(void)touchBegan;
+@optional
+-(void)beginAnimationDone;
 @end

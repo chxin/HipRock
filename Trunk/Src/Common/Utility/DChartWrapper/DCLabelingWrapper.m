@@ -19,9 +19,9 @@
 @end
 
 @implementation DCLabelingWrapper
--(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(REMChartStyle *)style {
+-(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(DCChartStyle *)style {
     self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
-    NSString* format = REMLocalizedString(@"Chart_Labeling_EffecioncyTextFormat");
+    NSString* format = REMIPadLocalizedString(@"Chart_Labeling_EffecioncyTextFormat");
     self.benckmarkText = REMIsNilOrNull(wrapperConfig.benckmarkText) ? REMEmptyString : [NSString stringWithFormat:format, wrapperConfig.benckmarkText];
     if (self && energyViewData.labellingLevelArray.count != 0) {
         self.view = [self createView:frame];
@@ -45,9 +45,9 @@
         if (minValueNil && maxValueNil) {
             stage.tooltipText = REMEmptyString;
         } else if (minValueNil && !maxValueNil) {
-            stage.tooltipText = [NSString stringWithFormat:@"%@%@%@", REMLocalizedString(@"Chart_Labeling_LessOrEqualThan"), [REMNumberHelper formatDataValueWithCarry:d.maxValue], d.uom];
+            stage.tooltipText = [NSString stringWithFormat:@"%@%@%@", REMIPadLocalizedString(@"Chart_Labeling_LessOrEqualThan"), [REMNumberHelper formatDataValueWithCarry:d.maxValue], d.uom];
         } else if(!minValueNil && maxValueNil) {
-            stage.tooltipText = [NSString stringWithFormat:@"%@%@%@", REMLocalizedString(@"Chart_Labeling_MoreThan"), [REMNumberHelper formatDataValueWithCarry:d.minValue], d.uom];
+            stage.tooltipText = [NSString stringWithFormat:@"%@%@%@", REMIPadLocalizedString(@"Chart_Labeling_MoreThan"), [REMNumberHelper formatDataValueWithCarry:d.minValue], d.uom];
         } else {
             stage.tooltipText = [NSString stringWithFormat:@"%@%@ - %@%@", [REMNumberHelper formatDataValueWithCarry:d.minValue], d.uom, [REMNumberHelper formatDataValueWithCarry:d.maxValue], d.uom];
         }
@@ -68,7 +68,7 @@
         label.name = targetEnergyData.target.name;
         if (i < stages.count) {
             label.stageText = [stages[i] stageText];
-            label.color = [stages[i] color];
+            label.color = ((DCLabelingStage*)stages[i]).color;
         }
         label.labelText = [NSString stringWithFormat:@"%@%@", [REMNumberHelper formatDataValueWithCarry:energyData.dataValue], targetEnergyData.target.uomName];
         label.stage = i;
@@ -80,6 +80,14 @@
     view.style = self.style;
     
     return view;
+}
+
+-(NSUInteger)getVisableSeriesCount {
+    return self.view.series.labels.count;
+}
+
+-(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index {
+    return NO;
 }
 
 -(UIView*)getView {
@@ -98,7 +106,7 @@
 
 -(void)focusOn:(DCLabelingLabel *)point {
     if (self.delegate && [self.delegate respondsToSelector:@selector(highlightPoint:)]) {
-        [((id<REMChartLabelingDelegate>)(self.delegate)) highlightPoint:point];
+        [((id<DCChartLabelingWrapperDelegate>)(self.delegate)) highlightPoint:point];
     }
 }
 
