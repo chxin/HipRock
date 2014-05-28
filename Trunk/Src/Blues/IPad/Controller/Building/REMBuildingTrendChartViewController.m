@@ -140,7 +140,7 @@ const int buttonFirstMargin = -20;
 
 - (void)intervalChanged {
     if (!self.loadDataSuccess) return;
-    ((REMBuildingTrendWrapper*)self.chartWrapper).timeRangeType = self.timeRangeType;
+    ((REMBuildingTrendWrapper*)self.chartWrapper).wrapperConfig.relativeDateType = self.timeRangeType;
     for(REMBuildingTimeRangeDataModel *item in self.datasource){
         if (item.timeRangeType == self.timeRangeType) {
             self.energyViewData = item.timeRangeData;

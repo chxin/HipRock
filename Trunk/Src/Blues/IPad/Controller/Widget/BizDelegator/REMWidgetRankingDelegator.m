@@ -106,11 +106,11 @@ const static CGFloat kRankingTimePickerWidth=250;
 //    REMRankingWidgetWrapper *rank=(REMRankingWidgetWrapper *)self.chartWrapper;
     if(button.selected==YES){
         [button setSelected:NO];
-        self.chartWrapper.sortOrder=NSOrderedAscending;
+        [self.chartWrapper changeSortOrder: NSOrderedAscending];
     }
     else{
         [button setSelected:YES];
-        self.chartWrapper.sortOrder=NSOrderedDescending;
+        [self.chartWrapper changeSortOrder: NSOrderedDescending];
     }
 }
 

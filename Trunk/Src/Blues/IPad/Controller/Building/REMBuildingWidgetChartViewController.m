@@ -80,6 +80,7 @@
         wrapperConfig.step=stepModel.step;
         wrapperConfig.benckmarkText=stepModel.benchmarkText;
         wrapperConfig.relativeDateType=stepModel.relativeDateType;
+        wrapperConfig.calendarType=REMCalendarTypeNone; // pin在building cover上的widget不显示日历背景色
 //        wrapperConfig.multiTimeSpans=stepModel.timeRangeArray;
     }
     

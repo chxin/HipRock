@@ -68,7 +68,9 @@
         }
     }
     [CATransaction setDisableActions:caTransationState];
-    CTFontRef fRef = CTFontCreateWithName((__bridge CFStringRef)self.view.chartStyle.backgroundBandFont.fontName,
+    CTFontRef fRef = nil;
+    if (!REMIsNilOrNull(self.view.chartStyle.backgroundBandFont))
+        fRef = CTFontCreateWithName((__bridge CFStringRef)self.view.chartStyle.backgroundBandFont.fontName,
                                           self.view.chartStyle.backgroundBandFont.pointSize,
                                           NULL);
     CGFloat xoffset = 0;

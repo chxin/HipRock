@@ -41,7 +41,7 @@
     s.color = [REMColor colorByIndex:0];
     [self customizeSeries:s seriesIndex:index chartStyle:style];
     
-    if (self.sortOrder == NSOrderedDescending) [self swapeAllDatas:s];
+    if (self.wrapperConfig.rankingSortOrder == NSOrderedDescending) [self swapeAllDatas:s];
     
     _DCRankingXLabelFormatter* formatter = [[_DCRankingXLabelFormatter alloc]initWithSeries:s];
     formatter.graphContext = view.graphContext;
@@ -92,15 +92,10 @@
 }
 
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
-    int rangeCode = self.rankingRangeCode;
+    int rangeCode = self.wrapperConfig.rankingRangeCode;
     int datasAmount = self.energyViewData.targetEnergyData.count;
     
     return @{ @"globalRange": [[DCRange alloc]initWithLocation:0 length:datasAmount], @"beginRange": [[DCRange alloc]initWithLocation:0 length:MIN(rangeCode, datasAmount)], @"xformatter": [NSNull null] };
-}
-
--(void)extraSyntax:(DWrapperConfig*)wrapperConfig {
-    _rankingRangeCode = wrapperConfig.rankingRangeCode;
-    _sortOrder = wrapperConfig.rankingDefaultSortOrder;
 }
 
 -(void)quickSort:(NSMutableArray*)energyList left:(int)left right:(int)right {
@@ -134,10 +129,10 @@
     else return yValue;
 }
 
--(void)setSortOrder:(NSComparisonResult)sortOrder {
+-(void)changeSortOrder:(NSComparisonResult)sortOrder {
     if (sortOrder == NSOrderedSame) return;
-    if (_sortOrder != sortOrder) {
-        _sortOrder = sortOrder;
+    if (self.wrapperConfig.rankingSortOrder != sortOrder) {
+        self.wrapperConfig.rankingSortOrder = sortOrder;
         [self swapeAllDatas:self.view.seriesList[0]];
         [self.view reloadData];
     }

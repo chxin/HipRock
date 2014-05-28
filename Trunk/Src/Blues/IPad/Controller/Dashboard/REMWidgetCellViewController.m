@@ -172,12 +172,6 @@
     }
     if (widgetWrapper != nil) {
         self.wrapper=widgetWrapper;
-        if([widgetWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
-            if(self.contentSyntax.calendarType!=REMCalendarTypeNone){
-                DCTrendWrapper *trend=(DCTrendWrapper *)widgetWrapper;
-                trend.calenderType=self.contentSyntax.calendarType;
-            }
-        }
         widgetWrapper.delegate = self;
         [self.chartContainer addSubview:[widgetWrapper getView]];
         

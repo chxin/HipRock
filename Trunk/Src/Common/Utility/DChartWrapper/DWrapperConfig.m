@@ -23,7 +23,7 @@
     self = [self init];
     if (self) {
         _calendarType=contentSyntax.calendarType;
-        _rankingDefaultSortOrder=contentSyntax.rankingSortOrder;
+        _rankingSortOrder=contentSyntax.rankingSortOrder;
         _rankingRangeCode=contentSyntax.rankingRangeCode;
         REMDataStoreType storeType = contentSyntax.dataStoreType;
         _isUnitOrRatioChart = (storeType==REMDSEnergyTagsTrendUnit || storeType==REMDSEnergyCarbonUnit || storeType==REMDSEnergyCostUnit || storeType==REMDSEnergyRatio);

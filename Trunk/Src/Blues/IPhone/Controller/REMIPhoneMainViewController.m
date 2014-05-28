@@ -110,7 +110,7 @@
     
     DWrapperConfig* config = [[DWrapperConfig alloc]init];
     config.step = REMEnergyStepHour;
-    config.stacked = NO;
+    config.stacked= NO;
     config.calendarType = REMCalendarTypeNone;
     config.isUnitOrRatioChart = NO;
     config.isMultiTimeChart = NO;

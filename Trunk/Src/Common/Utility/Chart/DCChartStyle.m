@@ -12,7 +12,6 @@
 
 +(DCChartStyle*)getCoverStyle {
     DCChartStyle* style = [[DCChartStyle alloc]init];
-    style.drawHCBackground = NO;
     style.useTextLayer = YES;
     style.acceptPan = YES;
     style.acceptPinch = NO;
@@ -54,7 +53,6 @@
 
 +(DCChartStyle*)getMaximizedStyle {
     DCChartStyle* style = [[DCChartStyle alloc]init];
-    style.drawHCBackground = YES;
     style.useTextLayer = YES;
     style.acceptPan = YES;
     style.acceptPinch = YES;
@@ -159,7 +157,6 @@
 }
 +(DCChartStyle*)getMinimunStyle {
     DCChartStyle* style = [[DCChartStyle alloc]init];
-    style.drawHCBackground = YES;
     style.useTextLayer = NO;
     style.acceptPan = NO;
     style.acceptPinch = NO;
