@@ -9,5 +9,4 @@
 #import "DCLineWrapper.h"
 
 @interface REMBuildingTrendWrapper : DCLineWrapper
-@property (nonatomic, assign) REMRelativeTimeRangeType timeRangeType;
 @end

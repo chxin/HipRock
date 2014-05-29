@@ -12,7 +12,6 @@
 #import "REMColor.h"
 
 @implementation REMBuildingAverageWrapper
-@synthesize isStacked = _isStacked;
 @synthesize processors = _processors;
 @synthesize sharedProcessor = _sharedProcessor;
 
@@ -21,8 +20,6 @@
 }
 
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
-    _isStacked = NO;
-    
     NSUInteger seriesAmount = [self getSeriesAmount];
     _processors = [[NSMutableArray alloc]init];
     

@@ -25,12 +25,9 @@
 
 @property (nonatomic, readonly) DCXYChartView* view;
 @property (nonatomic, readonly) NSString* defaultSeriesClass;
-@property (nonatomic, assign) REMCalendarType calenderType;
-@property (nonatomic, assign, readonly) BOOL isStacked;
 @property (nonatomic, strong, readonly) NSMutableArray* processors;
 @property (nonatomic, strong, readonly) DCTrendChartDataProcessor* sharedProcessor;
-@property (nonatomic, assign, readonly) BOOL isUnitOrRatioChart;
-@property (nonatomic, assign) BOOL drawHCBackground;
+@property (nonatomic,strong) DWrapperConfig* wrapperConfig;
 
 -(BOOL)isSpecialType:(REMEnergyTargetType)type; // 一定被绘制成线图的Target类型，默认是REMEnergyTargetBenchmarkValue。Override
 
@@ -41,4 +38,5 @@
 -(NSUInteger)getSeriesAmount;
 -(void)switchSeriesTypeAtIndex:(NSUInteger)index;
 -(BOOL)canBeChangeSeriesAtIndex:(NSUInteger)index;
+-(void)updateCalendarType:(REMCalendarType)calenderType;
 @end

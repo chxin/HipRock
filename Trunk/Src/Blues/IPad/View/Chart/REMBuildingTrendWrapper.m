@@ -10,16 +10,10 @@
 #import "_DCXLabelFormatter.h"
 
 @implementation REMBuildingTrendWrapper
-@synthesize isStacked = _isStacked;
 @synthesize processors = _processors;
 @synthesize sharedProcessor = _sharedProcessor;
 
--(void)extraSyntax:(DWrapperConfig*)wrapperConfig {
-    _timeRangeType = wrapperConfig.relativeDateType;
-}
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
-    _isStacked = NO;
-    
     NSUInteger seriesAmount = [self getSeriesAmount];
     _processors = [[NSMutableArray alloc]init];
     
@@ -39,7 +33,7 @@
     int date = [REMTimeHelper getTimePart:REMDateTimePartDay ofLocalDate:now];
     NSDate* today0H = [REMTimeHelper dateFromYear:year Month:month Day:date Hour:0];
     NSDate* thisMonth = [REMTimeHelper dateFromYear:year Month:month Day:1 Hour:0];
-    switch (self.timeRangeType) {
+    switch (self.wrapperConfig.relativeDateType) {
         case REMRelativeTimeRangeTypeToday:
             length = [REMTimeHelper getTimePart:REMDateTimePartHour ofLocalDate:[NSDate date]];
             baseDateOfX = today0H;

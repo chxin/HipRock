@@ -407,13 +407,13 @@
     REMWidgetStepEnergyModel *tempModel=(REMWidgetStepEnergyModel *)self.tempModel;
     if(self.contentSyntax.calendarType == REMCalendarTypeHCSeason){
         if(tempModel.step == REMEnergyStepYear){
-            trend.calenderType=REMCalendarTypeNone;
+            [trend updateCalendarType:REMCalendarTypeNone];
             NSString *text=REMIPadLocalizedString(@"Widget_CalendarStepError");
             //"当前步长不支持显示冷暖季背景色"
             [self showPopupMsg:[NSString stringWithFormat:text,[self calendarComponent]]];
         }
         else{
-            trend.calenderType=REMCalendarTypeHCSeason;
+            [trend updateCalendarType:REMCalendarTypeHCSeason];
             [self checkCalendarDataWithCalendarType:REMCalendarTypeHCSeason withSearchTimeRange:self.tempModel.timeRangeArray[0]];
         }
     }
@@ -421,13 +421,13 @@
         if(tempModel.step == REMEnergyStepMonth ||
            tempModel.step == REMEnergyStepYear ||
            tempModel.step == REMEnergyStepWeek){
-            trend.calenderType=REMCalendarTypeNone;
+            [trend updateCalendarType:REMCalendarTypeNone];
             NSString *text=REMIPadLocalizedString(@"Widget_CalendarStepError");
             //"当前步长不支持显示非工作时间背景色"
             [self showPopupMsg:[NSString stringWithFormat:text,[self calendarComponent]]];
         }
         else{
-            trend.calenderType=REMCalenderTypeHoliday;
+            [trend updateCalendarType:REMCalenderTypeHoliday];
             [self checkCalendarDataWithCalendarType:REMCalenderTypeHoliday withSearchTimeRange:tempModel.timeRangeArray[0]];
         }
     }
@@ -484,13 +484,6 @@
         widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
     }
     if (widgetWrapper != nil) {
-        if([widgetWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
-            if(self.contentSyntax.calendarType!=REMCalendarTypeNone){
-                DCTrendWrapper *trend=(DCTrendWrapper *)widgetWrapper;
-                trend.calenderType=self.contentSyntax.calendarType;
-                [self processCalendar];
-            }
-        }
         [self.chartContainer addSubview:[widgetWrapper getView]];
         self.chartWrapper=widgetWrapper;
     }

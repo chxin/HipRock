@@ -23,7 +23,6 @@
 #define kAmericanStandardCode @"美国标准"
 #define kChinaStandardCode @"中国标准"
 
-@synthesize isStacked = _isStacked;
 @synthesize processors = _processors;
 @synthesize sharedProcessor = _sharedProcessor;
 
@@ -36,8 +35,6 @@
 }
 
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
-    _isStacked = NO;
-    
     NSUInteger seriesAmount = [self getSeriesAmount];
     _processors = [[NSMutableArray alloc]init];
     

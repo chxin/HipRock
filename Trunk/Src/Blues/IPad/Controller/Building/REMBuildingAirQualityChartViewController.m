@@ -74,7 +74,7 @@ static NSDictionary *codeNameMap;
 -(DCTrendWrapper*)constructWrapperWithFrame:(CGRect)frame {
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]init];
     wrapperConfig.step = [self getEnergyStep];
-    wrapperConfig.stacked = NO;
+    wrapperConfig.stacked= NO;
     DCChartStyle* style = [DCChartStyle getCoverStyle];
     REMBuildingAirQualityWrapper* wrapper = [[REMBuildingAirQualityWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig style:style];
     [wrapper setStandardsBands:self.airQualityData.standards];

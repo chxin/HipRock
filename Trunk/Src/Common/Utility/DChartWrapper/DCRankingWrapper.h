@@ -9,6 +9,5 @@
 #import "DCColumnWrapper.h"
 
 @interface DCRankingWrapper : DCColumnWrapper
-@property (nonatomic) NSComparisonResult sortOrder;
-@property (nonatomic, readonly) REMRankingRange rankingRangeCode;
+-(void)changeSortOrder:(NSComparisonResult)sortOrder;
 @end

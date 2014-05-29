@@ -18,7 +18,7 @@
 @property (nonatomic, assign) BOOL isUnitOrRatioChart;     // Line, Column. Default No.
 
 @property (nonatomic, assign) REMRankingRange rankingRangeCode; // Ranking
-@property (nonatomic, assign) NSComparisonResult rankingDefaultSortOrder; // Ranking
+@property (nonatomic, assign) NSComparisonResult rankingSortOrder; // Ranking
 
 @property (nonatomic, strong) NSString* benckmarkText; // Labeling
 

@@ -28,11 +28,7 @@
 -(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(DCChartStyle *)style {
     self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
     if (self && energyViewData.targetEnergyData.count != 0) {
-        _drawHCBackground = style.drawHCBackground;
-        _isUnitOrRatioChart = wrapperConfig.isUnitOrRatioChart;
-        _calenderType = REMCalendarTypeNone;
-        _isStacked = wrapperConfig.stacked;
-        [self extraSyntax:wrapperConfig];
+        _wrapperConfig = wrapperConfig;
         
         self.animationManager = [[DCTrendAnimationManager alloc]init];
         self.animationManager.delegate = self;
@@ -55,13 +51,13 @@
             
 //            if (s.hidden) [self addHiddenTarget:s.target index:i];
         }
-        [self updateCalender];
+        [self updateCalendar];
     }
     return self;
 }
 
 -(void)createChartView:(CGRect)frame beginRange:(DCRange*)beginRange globalRange:(DCRange*)globalRange xFormatter:(NSFormatter*)xLabelFormatter step:(REMEnergyStep)step{
-    DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:beginRange stacked:self.isStacked];
+    DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:beginRange stacked:self.wrapperConfig.stacked];
     view.chartStyle = self.style;
     [view setXLabelFormatter:xLabelFormatter];
     _view = view;
@@ -128,7 +124,7 @@
 }
 
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(DCChartStyle*)style {
-    if (self.isUnitOrRatioChart && series.target.type == REMEnergyTargetOrigValue) {
+    if (self.wrapperConfig.isUnitOrRatioChart && series.target.type == REMEnergyTargetOrigValue) {
         series.hidden = YES;
     }
 }
@@ -354,9 +350,6 @@
     }
 }
 
--(void)extraSyntax:(DWrapperConfig*)wrapperConfig {
-    _calenderType = wrapperConfig.calendarType;
-}
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
     [self.animationManager invalidate];
     self.animationManager.view = nil;
@@ -370,24 +363,24 @@
     _myStableRange = dic[@"beginRange"];
     [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:step];
     [superView addSubview:self.view];
-    [self updateCalender];
+    [self updateCalendar];
 }
 
--(void)setCalenderType:(REMCalendarType)calenderType {
-    if (calenderType == self.calenderType) return;
-    _calenderType = calenderType;
-    [self updateCalender];
+-(void)updateCalendarType:(REMCalendarType)calendarType {
+    if (calendarType == self.wrapperConfig.calendarType) return;
+    self.wrapperConfig.calendarType = calendarType;
+    [self updateCalendar];
 }
 
--(void) updateCalender {
-    if (self.sharedProcessor == nil || !self.drawHCBackground) return;
+-(void) updateCalendar {
+    if (self.sharedProcessor == nil) return;
     NSMutableArray* bands = [[NSMutableArray alloc]init];
-    if(self.calenderType != REMCalendarTypeNone) {
+    if(self.wrapperConfig.calendarType != REMCalendarTypeNone) {
         for (REMEnergyCalendarData* calender in self.energyViewData.calendarData) {
             UIColor* fillColor = nil;
             NSString* bandString = nil;
 
-            if (self.calenderType == REMCalendarTypeHCSeason) {
+            if (self.wrapperConfig.calendarType == REMCalendarTypeHCSeason) {
                 if (calender.calendarType == REMCalenderTypeHeatSeason) {
                     fillColor = [REMColor colorByHexString:@"#fcf0e4" alpha:0.5];
                     bandString = REMIPadLocalizedString(@"Chart_Background_Text_HSeason");
@@ -395,7 +388,7 @@
                     fillColor = [REMColor colorByHexString:@"#e3f0ff" alpha:0.5];
                     bandString = REMIPadLocalizedString(@"Chart_Background_Text_CSeason");
                 }
-            } else if (self.calenderType == REMCalenderTypeHoliday) {
+            } else if (self.wrapperConfig.calendarType == REMCalenderTypeHoliday) {
                 if (calender.calendarType == REMCalenderTypeHoliday || calender.calendarType == REMCalenderTypeRestTime) {
                     fillColor = [REMColor colorByHexString:@"#eaeaea" alpha:0.5];
                     bandString = REMIPadLocalizedString(@"Chart_Background_Text_NonWorkday");
