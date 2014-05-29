@@ -22,12 +22,12 @@
 -(DAbstractChartWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(DCChartStyle *)style {
     self = [self init];
     if (self) {
+        _wrapperConfig = wrapperConfig;
         _seriesStates = [[NSMutableArray alloc]init];
         _energyViewData = energyViewData;
         _style = style;
         _chartStatus = DChartStatusNormal;
         _hiddenTargets = [[NSMutableArray alloc]init];
-        _isMultiTimeChart = wrapperConfig.isMultiTimeChart;
     }
     return self;
 }
@@ -57,7 +57,7 @@
     return [self getVisableSeriesCount] > 1;
 }
 -(DSeriesStatus*)getSeriesStatusByTarget:(REMEnergyTargetModel*)target index:(NSNumber*)seriesIndex {
-    if (self.isMultiTimeChart) {
+    if (self.wrapperConfig.isMultiTimeEnergyAnalysisChart) {
         for (DSeriesStatus* state in self.seriesStates) {
             if ([state.seriesIndex isEqualToNumber:seriesIndex]) return state;
         }

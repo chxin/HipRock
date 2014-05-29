@@ -20,7 +20,8 @@
     }
     for (NSUInteger index = 0; index < self.view.series.datas.count; index++) {
         DCPieDataPoint* slice = self.view.series.datas[index];
-        DSeriesStatus* state = [[DSeriesStatus alloc]initWithTarget:self.isMultiTimeChart ? nil : slice.target index:self.isMultiTimeChart ? @(index) : nil];
+        BOOL isMultiTime = self.wrapperConfig.isMultiTimeEnergyAnalysisChart;
+        DSeriesStatus* state = [[DSeriesStatus alloc]initWithTarget:isMultiTime ? nil : slice.target index:isMultiTime ? @(index) : nil];
         state.hidden = slice.hidden;
         [self.seriesStates addObject:state];
     }

@@ -27,7 +27,6 @@
 @property (nonatomic, readonly) NSString* defaultSeriesClass;
 @property (nonatomic, strong, readonly) NSMutableArray* processors;
 @property (nonatomic, strong, readonly) DCTrendChartDataProcessor* sharedProcessor;
-@property (nonatomic,strong) DWrapperConfig* wrapperConfig;
 
 -(BOOL)isSpecialType:(REMEnergyTargetType)type; // 一定被绘制成线图的Target类型，默认是REMEnergyTargetBenchmarkValue。Override
 

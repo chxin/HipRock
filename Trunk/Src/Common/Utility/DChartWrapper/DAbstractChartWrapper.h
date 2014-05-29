@@ -21,8 +21,8 @@
 @property (nonatomic, readonly, weak) REMEnergyViewData* energyViewData;
 @property (nonatomic, readonly) DCChartStyle* style;
 @property (nonatomic, assign) DChartStatus chartStatus;
-@property (nonatomic, assign, readonly) BOOL isMultiTimeChart;
 @property (nonatomic,strong) NSMutableArray* seriesStates;
+@property (nonatomic,strong) DWrapperConfig* wrapperConfig;
 
 -(void)cancelToolTipStatus;
 -(void)redraw:(REMEnergyViewData *)energyViewData;
