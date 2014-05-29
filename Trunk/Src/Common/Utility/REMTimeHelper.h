@@ -92,5 +92,6 @@ typedef enum _REMDateTimePart : NSUInteger{
 + (NSDate *)convertToUtc:(NSDate *)date;
 +(NSString *)formatTooltipTime:(NSDate *)time byStep:(REMEnergyStep)step inRange:(REMTimeRange *)timeRange;
 
++(REMTimeRange *)getREMSystemTimeRangeLimit;
 
 @end

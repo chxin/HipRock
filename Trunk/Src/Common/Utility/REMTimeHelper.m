@@ -735,4 +735,26 @@ static NSCalendar *_currentCalendar;
     }
 }
 
++(REMTimeRange *)getREMSystemTimeRangeLimit
+{
+    NSDate *start = [NSDate dateWithTimeIntervalSince1970:0];
+    
+    
+    NSDateComponents *component=[[NSDateComponents alloc]init];
+    [component setYear:2050];
+    [component setMonth:1];
+    [component setDay:1];
+    [component setHour:0];
+    [component setMinute:0];
+    [component setSecond:0];
+    NSCalendar *calendar = [REMTimeHelper currentCalendar];
+    
+    NSDate *end = [calendar dateFromComponents:component];
+    
+    
+    REMTimeRange *range = [[REMTimeRange alloc] initWithStartTime:start EndTime:end];
+    
+    return range;
+}
+
 @end
