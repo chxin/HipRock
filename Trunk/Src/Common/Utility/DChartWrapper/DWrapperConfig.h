@@ -10,12 +10,28 @@
 #import "REMEnum.h"
 #import "REMWidgetContentSyntax.h"
 
+typedef enum _REMChartFromLevel2 {
+    REMChartFromLevel2None = 0, // 非Jazz的Widget的图，例如BuildingCover上的默认图形，以及PM25图
+    REMChartFromLevel2EnergyAnalysis = 1,  // 能效分析
+    REMChartFromLevel2Carbon = 2,          // 碳排放
+    REMChartFromLevel2Cost = 3,  // 成本
+    REMChartFromLevel2Unit = 4,    // 单位指标
+    REMChartFromLevel2Ratio = 5,  // 时段能耗比
+    REMChartFromLevel2Labeling = 6,
+    REMChartFromLevel2Ranking = 7
+} REMChartFromLevel2;
 
 @interface DWrapperConfig : NSObject
+@property (nonatomic, readonly) REMDataStoreType storeType; // 当此值为-1时，表示Wrapper为非widget的内容，例如buildingCover和PM25
+
+// widgetFrom,isMultiTimeEnergyAnalysisChart,isTouChart根据storeType来计算
+@property (nonatomic, readonly, getter = getWidgetFrom) REMChartFromLevel2 widgetFrom;
+@property (nonatomic, readonly, getter = getIsMultiTimeEnergyAnalysisChart) BOOL isMultiTimeEnergyAnalysisChart;
+@property (nonatomic, readonly, getter = getIsTouChart) BOOL isTouChart;
+
+
 @property (nonatomic, assign) REMEnergyStep step;   // Line, Column
-@property (nonatomic, assign) BOOL stacked;         // Line, Column. Default No.
 @property (nonatomic, assign) REMCalendarType calendarType; // Line, Column
-@property (nonatomic, assign) BOOL isUnitOrRatioChart;     // Line, Column. Default No.
 
 @property (nonatomic, assign) REMRankingRange rankingRangeCode; // Ranking
 @property (nonatomic, assign) NSComparisonResult rankingSortOrder; // Ranking
@@ -23,9 +39,8 @@
 @property (nonatomic, strong) NSString* benckmarkText; // Labeling
 
 //@property (nonatomic, strong) NSArray* multiTimeSpans;  // 多时间段比较的每个序列的总体时间区间
-@property (nonatomic, assign) BOOL isMultiTimeChart;
 
-@property (nonatomic) REMRelativeTimeRangeType relativeDateType; // Cover用电趋势图
+@property (nonatomic) REMRelativeTimeRangeType relativeDateType;
 
 -(id)initWith:(REMWidgetContentSyntax*)contentSyntax;
 @end

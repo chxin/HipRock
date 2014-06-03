@@ -150,7 +150,6 @@
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.contentSyntax];
     if ([self.searchModel isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
         REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.searchModel;
-        wrapperConfig.stacked=NO;
         wrapperConfig.step=stepModel.step;
         wrapperConfig.benckmarkText=stepModel.benchmarkText;
         wrapperConfig.relativeDateType=stepModel.relativeDateType;
@@ -165,7 +164,6 @@
     } else if (widgetType == REMDiagramTypeRanking) {
         widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
     } else if (widgetType == REMDiagramTypeStackColumn) {
-        wrapperConfig.stacked=YES;
         widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
     } else if (widgetType == REMDiagramTypeLabelling) {
         widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];

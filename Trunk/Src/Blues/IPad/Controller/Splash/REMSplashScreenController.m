@@ -243,10 +243,7 @@
     
     DWrapperConfig* config = [[DWrapperConfig alloc]init];
     config.step = REMEnergyStepDay;
-    config.stacked = NO;
     config.calendarType = REMCalendarTypeNone;
-    config.isUnitOrRatioChart = NO;
-    config.isMultiTimeChart = NO;
 //    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
 //    [self.view addSubview:pieWrapper.view];
 //    self.carouselController = pieWrapper;

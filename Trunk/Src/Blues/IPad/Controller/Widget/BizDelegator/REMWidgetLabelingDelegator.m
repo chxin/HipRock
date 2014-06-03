@@ -163,7 +163,6 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
 //    wrapperConfig.multiTimeSpans=self.model.timeRangeArray;
     if ([self.model isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
         REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
-        wrapperConfig.stacked=NO;
         wrapperConfig.benckmarkText=stepModel.benchmarkText;
     }
     if (widgetType == REMDiagramTypeLabelling) {

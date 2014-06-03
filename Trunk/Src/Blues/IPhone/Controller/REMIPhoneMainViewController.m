@@ -110,10 +110,7 @@
     
     DWrapperConfig* config = [[DWrapperConfig alloc]init];
     config.step = REMEnergyStepHour;
-    config.stacked= NO;
     config.calendarType = REMCalendarTypeNone;
-    config.isUnitOrRatioChart = NO;
-    config.isMultiTimeChart = NO;
     //    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
     //    [self.view addSubview:pieWrapper.view];
     //    self.plotSource = pieWrapper;

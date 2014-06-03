@@ -28,7 +28,6 @@
 -(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(DCChartStyle *)style {
     self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
     if (self && energyViewData.targetEnergyData.count != 0) {
-        _wrapperConfig = wrapperConfig;
         
         self.animationManager = [[DCTrendAnimationManager alloc]init];
         self.animationManager.delegate = self;
@@ -39,7 +38,7 @@
         for (NSUInteger i = 0; i < self.view.seriesList.count; i++) {
             DCXYSeries* s = self.view.seriesList[i];
             DTrendSeriesStatus* status = nil;
-            if (self.isMultiTimeChart) {
+            if (self.wrapperConfig.isMultiTimeEnergyAnalysisChart) {
                 status = [[DTrendSeriesStatus alloc]initWithTarget:nil index:@(i)];
             } else {
                 status = [[DTrendSeriesStatus alloc]initWithTarget:s.target index:nil];
@@ -57,7 +56,7 @@
 }
 
 -(void)createChartView:(CGRect)frame beginRange:(DCRange*)beginRange globalRange:(DCRange*)globalRange xFormatter:(NSFormatter*)xLabelFormatter step:(REMEnergyStep)step{
-    DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:beginRange stacked:self.wrapperConfig.stacked];
+    DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:beginRange stacked:self.wrapperConfig.isTouChart];
     view.chartStyle = self.style;
     [view setXLabelFormatter:xLabelFormatter];
     _view = view;
@@ -124,7 +123,8 @@
 }
 
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(DCChartStyle*)style {
-    if (self.wrapperConfig.isUnitOrRatioChart && series.target.type == REMEnergyTargetOrigValue) {
+    REMChartFromLevel2 chartLevel = self.wrapperConfig.widgetFrom;
+    if ((chartLevel==REMChartFromLevel2Ratio || chartLevel==REMChartFromLevel2Unit) && series.target.type == REMEnergyTargetOrigValue) {
         series.hidden = YES;
     }
 }
