@@ -10,7 +10,7 @@
 #import "REMEnergyViewData.h"
 #import "DCChartStyle.h"
 #import "DWrapperConfig.h"
-#import "DCColumnWrapper.h"
+#import "DCTrendWrapper.h"
 
 @interface REMIPhoneMainViewController ()
 @property (nonatomic,strong) DAbstractChartWrapper* wrapper;
@@ -114,9 +114,8 @@
     //    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:frame data:energyViewData widgetContext:syntax style:style];
     //    [self.view addSubview:pieWrapper.view];
     //    self.plotSource = pieWrapper;
-    DCColumnWrapper* columnWidget = [[DCColumnWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
+    DCTrendWrapper* columnWidget = [[DCTrendWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
     columnWidget.view.backgroundColor = [UIColor blackColor];
-    columnWidget.view.hasVGridlines = YES;
     columnWidget.view.graphContext.hGridlineAmount = 4;
     [self.view addSubview:columnWidget.view];
     

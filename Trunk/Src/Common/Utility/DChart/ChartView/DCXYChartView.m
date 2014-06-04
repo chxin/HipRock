@@ -17,7 +17,6 @@
 #import "_DCLineSymbolsLayer.h"
 #import "REMColor.h"
 #import "_DCHPinchGestureRecognizer.h"
-#import "DCColumnSeries.h"
 #import "_DCVGridlineLayer.h"
 #import "_DCVerticalBackgroundLayer.h"
 #import "_DCHorizontalBackgroundLayer.h"
@@ -28,7 +27,7 @@
 
 @property (nonatomic, strong) _DCXYIndicatorLayer* indicatorLayer;
 
-@property (nonatomic, strong) _DCHGridlineLayer* _hGridlineLayer;
+@property (nonatomic, strong) _DCHGridlineLayer* _hGridlineLayer;   // 包含横向分割线以及x轴轴线
 @property (nonatomic, strong) _DCXAxisLabelLayer* _xLabelLayer;
 
 @property (nonatomic, strong) NSMutableArray* coodinates;
@@ -50,24 +49,22 @@
 @property (nonatomic, strong) _DCVerticalBackgroundLayer* backgroundBandsLayer;
 
 @property (nonatomic, strong) NSArray* bgBands;
+@property (nonatomic, strong) NSMutableArray* yAxisList;
 
 @end
 
 @implementation DCXYChartView
 
 #pragma mark - initialize/dispose
-- (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange stacked:(BOOL)stacked {
+- (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange {
     self = [super initWithFrame:frame];
     if (self) {
-//        self.symbolLayers = [[NSMutableArray alloc]init];
-        self.graphContext = [[DCContext alloc]initWithStacked:stacked];
+        self.graphContext = [[DCContext alloc]init];
         self.graphContext.hGridlineAmount = 0;
         self.layer.masksToBounds = YES;
         self.backgoundBands = [[NSMutableArray alloc]init];
-//        self.multipleTouchEnabled = YES;
         _beginHRange = beginHRange;
         _visableYAxisAmount = 3;
-        self.hasVGridlines = NO;
         self.lineLayerContainer = [[CALayer alloc]init];
         self._columnLayerContainer = [[CALayer alloc]init];
         self.tapGsRec = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewTapped:)];
@@ -89,56 +86,26 @@
 
 -(void)willMoveToSuperview:(UIView *)newSuperview {
     [self.graphContext addHRangeObsever:self];
-    
-    [self recalculatePlotRect];
-    
-    [self drawHGridline];
-    [self drawVGridlines];
-    [self drawXLabelLayer];
-    
-    
-    NSMutableArray* coordiates = [[NSMutableArray alloc]init];
-    for (DCAxis* y in self.yAxisList) {
-        _DCCoordinateSystem* ds = [[_DCCoordinateSystem alloc]initWithChartView:self y:y];
-        ds.isMajor = (coordiates.count == 0);
-        
-        if (coordiates.count < self.visableYAxisAmount) {
-            _DCYAxisLabelLayer* _yLabelLayer = (_DCYAxisLabelLayer*)[ds getAxisLabelLayer];
-            [self.layer addSublayer:_yLabelLayer];
-            [_yLabelLayer setNeedsDisplay];
-        }
-        
-        [coordiates addObject:ds];
-    }
-    self.coodinates = coordiates;
-    
-    self.backgroundBandsLayer = [[_DCVerticalBackgroundLayer alloc]initWithContext:self.graphContext view:self];
-    [self.graphContext addHRangeObsever:self.backgroundBandsLayer];
-    [self.layer addSublayer:self.backgroundBandsLayer];
-    self._horizentalBackgroundLayer = [[_DCHorizontalBackgroundLayer alloc]initWithContext:self.graphContext view:self];
-    [self.layer addSublayer:self._horizentalBackgroundLayer];
-//    [self._horizentalBackgroundLayer redraw];
-    for (_DCCoordinateSystem* dc in self.coodinates) {
-        [dc addYIntervalObsever:self._horizentalBackgroundLayer];
-    }
-    
-    [self drawIndicatorLayer];
-    _DCColumnsLayer* columnsLayer = [[_DCColumnsLayer alloc]initWithContext:self.graphContext view:self coordinateSystems:self.coodinates];
-    [self.layer addSublayer:self._columnLayerContainer];
-    self._columnLayerContainer.masksToBounds = YES;
-    [self._columnLayerContainer addSublayer:columnsLayer];
-    self._columnLayer = columnsLayer;
-    
-    self._symbolLayer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext view:self coordinateSystems:coordiates];
-    [self.layer addSublayer:self.lineLayerContainer];
-    self.lineLayerContainer.masksToBounds = YES;
-    [self.lineLayerContainer addSublayer:self._symbolLayer];
-    
-    [self updateAllLayerFrame];
-    self.graphContext.hRange = self.beginHRange;
-    
     [self updateGestures];
+    [self initializeLayers];
+    
+    [self updateCoordinateSystems];
+    [self recalculatePlotRect];
+    [self updateAllLayerFrame];
+    [self calculateColumnWidth];
+    
+    [self._hGridlineLayer setNeedsDisplay];
+    [self._vGridlineLayer setNeedsDisplay];
+    [self._xLabelLayer setNeedsDisplay];
     [self redrawBgBands];
+    for (int i = 0; i < self.coodinates.count; i++) {
+        _DCCoordinateSystem* ds = self.coodinates[i];
+        _DCYAxisLabelLayer* _yLabelLayer = ds.yAxisLabelLayer;
+        
+        [_yLabelLayer setNeedsDisplay];
+    }
+    
+    self.graphContext.hRange = self.beginHRange;
     
     [super willMoveToSuperview: newSuperview];
 }
@@ -162,38 +129,56 @@
     self.xLabelFormatter = nil;
     self.bgBands = nil;
     self.xAxis = nil;
-    self.yAxisList = nil;
+    _yAxisList = nil;
     [super removeFromSuperview];
 }
 
 
 #pragma mark - layers creation
--(void)drawVGridlines {
-    if (!self.hasVGridlines) return;
+-(void)initializeLayers {
+    // 横向分割线和X轴线图层
+    self._hGridlineLayer = [[_DCHGridlineLayer alloc]initWithContext:self.graphContext view:self];
+    [self.layer addSublayer:self._hGridlineLayer];
+    // 纵向分割线图层
     self._vGridlineLayer = [[_DCVGridlineLayer alloc]initWithContext:self.graphContext view:self];
     [self.graphContext addHRangeObsever:self._vGridlineLayer];
     [self.layer addSublayer:self._vGridlineLayer];
-    [self._vGridlineLayer setNeedsDisplay];
-}
-
--(void)drawIndicatorLayer {
-    self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext view:self];
-    [self.layer addSublayer:self.indicatorLayer];
-}
-
--(void)drawXLabelLayer {
+    // x轴文本图层
     self._xLabelLayer = [[_DCXAxisLabelLayer alloc]initWithContext:self.graphContext view:self];
     self._xLabelLayer.axis = self.xAxis;
     [self.graphContext addHRangeObsever:self._xLabelLayer];
     [self.layer addSublayer:self._xLabelLayer];
     self._xLabelLayer.labelFormatter = self.xLabelFormatter;
-    [self._xLabelLayer setNeedsDisplay];
-}
-
--(void)drawHGridline {
-    self._hGridlineLayer = [[_DCHGridlineLayer alloc]initWithContext:self.graphContext view:self];
-    [self.layer addSublayer:self._hGridlineLayer];
-    [self._hGridlineLayer setNeedsDisplay];
+    // y轴文本图层（多个）
+    for (int i = 0; i < self.coodinates.count; i++) {
+        if (i >= self.visableYAxisAmount) break;
+        _DCCoordinateSystem* ds = self.coodinates[i];
+        
+        _DCYAxisLabelLayer* _yLabelLayer = ds.yAxisLabelLayer;
+        
+        _yLabelLayer.frame = CGRectMake(ds.isMajor ? ds.yAxis.startPoint.x-ds.yAxis.size.width :ds.yAxis.startPoint.x, self.graphContext.plotRect.origin.y, ds.yAxis.size.width, ds.yAxis.size.height);
+    }
+    // HC背景图层
+    self.backgroundBandsLayer = [[_DCVerticalBackgroundLayer alloc]initWithContext:self.graphContext view:self];
+    [self.graphContext addHRangeObsever:self.backgroundBandsLayer];
+    [self.layer addSublayer:self.backgroundBandsLayer];
+    // PM25背景图层
+    self._horizentalBackgroundLayer = [[_DCHorizontalBackgroundLayer alloc]initWithContext:self.graphContext view:self];
+    [self.layer addSublayer:self._horizentalBackgroundLayer];
+    // Indicator图层
+    self.indicatorLayer = [[_DCXYIndicatorLayer alloc]initWithContext:self.graphContext view:self];
+    [self.layer addSublayer:self.indicatorLayer];
+    // Column图层
+    _DCColumnsLayer* columnsLayer = [[_DCColumnsLayer alloc]initWithContext:self.graphContext view:self coordinateSystems:self.coodinates];
+    [self.layer addSublayer:self._columnLayerContainer];
+    self._columnLayerContainer.masksToBounds = YES;
+    [self._columnLayerContainer addSublayer:columnsLayer];
+    self._columnLayer = columnsLayer;
+    // Line图层
+    self._symbolLayer = [[_DCLineSymbolsLayer alloc]initWithContext:self.graphContext view:self coordinateSystems:self.coodinates];
+    [self.layer addSublayer:self.lineLayerContainer];
+    self.lineLayerContainer.masksToBounds = YES;
+    [self.lineLayerContainer addSublayer:self._symbolLayer];
 }
 
 -(void)didHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
@@ -213,6 +198,9 @@
 }
 
 #pragma mark - calculate layer frame and plotRect
+/*
+ * Apply plotRect to each layer.
+ */
 -(void)updateAllLayerFrame {
     self._xLabelLayer.frame = CGRectMake(self.graphContext.plotRect.origin.x, self.graphContext.plotRect.size.height+self.graphContext.plotRect.origin.y, self.graphContext.plotRect.size.width, self.frame.size.height - self.graphContext.plotRect.size.height - self.chartStyle.plotPaddingBottom - self.chartStyle.plotPaddingTop);
     self._horizentalBackgroundLayer.frame = self.bounds;
@@ -227,15 +215,25 @@
     
     self._columnLayer.frame = self._columnLayerContainer.bounds;
     
+    NSUInteger visableAxisAmount = 0;
+    NSUInteger seriesAmountThr = self.visableYAxisAmount-1;
     for (int i = 0; i < self.coodinates.count; i++) {
-        if (i >= self.visableYAxisAmount) break;
+//        if (i >= self.visableYAxisAmount) break;
         _DCCoordinateSystem* ds = self.coodinates[i];
-        _DCYAxisLabelLayer* _yLabelLayer = (_DCYAxisLabelLayer*)[ds getAxisLabelLayer];
-        
-        _yLabelLayer.frame = CGRectMake(ds.isMajor ? ds.yAxis.startPoint.x-ds.yAxis.size.width :ds.yAxis.startPoint.x, self.graphContext.plotRect.origin.y, ds.yAxis.size.width, ds.yAxis.size.height);
+        _DCYAxisLabelLayer* _yLabelLayer = ds.yAxisLabelLayer;
+        if (visableAxisAmount >= seriesAmountThr || [ds.yAxis getVisableSeriesAmount] == 0) {
+            _yLabelLayer.hidden = YES;
+        } else {
+            _yLabelLayer.hidden = NO;
+            visableAxisAmount++;
+            _yLabelLayer.frame = CGRectMake(ds.isMajor ? ds.yAxis.startPoint.x-ds.yAxis.size.width :ds.yAxis.startPoint.x, self.graphContext.plotRect.origin.y, ds.yAxis.size.width, ds.yAxis.size.height);
+        }
     }
 }
 
+/*
+ * Re-calculate self.graphContext.plotRect and unit height in y direction of each coordinate system.
+ */
 -(void)recalculatePlotRect {
     float plotSpaceLeft = self.chartStyle.plotPaddingLeft;
     float plotSpaceRight = self.frame.size.width - plotSpaceLeft - self.chartStyle.plotPaddingRight;
@@ -247,27 +245,25 @@
     axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.chartStyle.xTextFont];
     plotSpaceBottom = plotSpaceBottom - axisSize.height - self.chartStyle.yLineWidth - self.chartStyle.xLabelToLine;
     
-    if (self.yAxisList.count > 0) {
-        DCAxis* majorYAxis = self.yAxisList[0];
-        if ([majorYAxis getVisableSeriesAmount] > 0) {
-            axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.chartStyle.yTextFont];
-            plotSpaceLeft = plotSpaceLeft + axisSize.width + self.chartStyle.yLineWidth + self.chartStyle.yLabelToLine;
-            majorYAxis.startPoint = CGPointMake(plotSpaceLeft, self.chartStyle.plotPaddingTop);
-            majorYAxis.endPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
-            majorYAxis.size = CGSizeMake(axisSize.width + self.chartStyle.yLineWidth + self.chartStyle.yLabelToLine, plotSpaceBottom-self.chartStyle.plotPaddingTop);
-        }
+    int nowVisableYAmount = 0;
+    for (DCAxis* yAxis in self.yAxisList) {
+        if ([yAxis getVisableSeriesAmount] <= 0) continue;
+        if (nowVisableYAmount >= self.visableYAxisAmount) break;
         
-        for (int i = 1; i < self.visableYAxisAmount; i++) {
-            if (i >= self.yAxisList.count) break;
-            DCAxis* secondaryYAxis = self.yAxisList[i];
-            if ([secondaryYAxis getVisableSeriesAmount] == 0) continue;
-            axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.chartStyle.yTextFont];
+        axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.chartStyle.yTextFont];
+        if (nowVisableYAmount == 0) {
+            plotSpaceLeft = plotSpaceLeft + axisSize.width + self.chartStyle.yLineWidth + self.chartStyle.yLabelToLine;
+            yAxis.startPoint = CGPointMake(plotSpaceLeft, self.chartStyle.plotPaddingTop);
+            yAxis.endPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
+            yAxis.size = CGSizeMake(axisSize.width + self.chartStyle.yLineWidth + self.chartStyle.yLabelToLine, plotSpaceBottom-self.chartStyle.plotPaddingTop);
+        } else {
             CGFloat axisWidth = axisSize.width + self.chartStyle.yLineWidth + self.chartStyle.yLabelToLine;
             plotSpaceRight = plotSpaceRight - axisWidth;
-            secondaryYAxis.startPoint = CGPointMake(plotSpaceRight, self.chartStyle.plotPaddingTop);
-            secondaryYAxis.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
-            secondaryYAxis.size = CGSizeMake(axisWidth, plotSpaceBottom-self.chartStyle.plotPaddingTop);
+            yAxis.startPoint = CGPointMake(plotSpaceRight, self.chartStyle.plotPaddingTop);
+            yAxis.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
+            yAxis.size = CGSizeMake(axisWidth, plotSpaceBottom-self.chartStyle.plotPaddingTop);
         }
+        nowVisableYAmount++;
     }
     self.xAxis.startPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
     self.xAxis.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
@@ -313,7 +309,7 @@
 -(void)viewPanned:(UIPanGestureRecognizer*)gesture {
     CGFloat speed = -[gesture velocityInView:self].x*self.graphContext.hRange.length/self.graphContext.plotRect.size.width/kDCFramesPerSecord;
     BOOL panStopped = (gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled || gesture.state == UIGestureRecognizerStateFailed);
-//    NSLog(@"pan speed:%f, status:%hhd", speed, panStopped);
+//     (@"pan speed:%f, status:%hhd", speed, panStopped);
     if (speed == 0 && !panStopped) return;
     if (self.graphContext.focusX == INT32_MIN) {
         double location = speed+self.graphContext.hRange.location;
@@ -416,38 +412,27 @@
 #pragma mark - others
 -(void)setSeriesList:(NSArray *)seriesList {
     if (seriesList == self.seriesList) return;
-    if (!REMIsNilOrNull(self.seriesList)) {
-        for (DCXYSeries* s in self.seriesList) {
-            [s.xAxis detachSeries:s];
-            [s.yAxis detachSeries:s];
-        }
-    }
     
     _seriesList = seriesList;
-    [self calculateColumnWidth];
 }
 
 -(void)calculateColumnWidth {
-    NSUInteger columnAmount = self.graphContext.stacked ? 1 : 0;
+    NSMutableArray* columnGroups = [[NSMutableArray alloc]init];
     for (DCXYSeries* s in self.seriesList) {
-        if ([s isKindOfClass:[DCColumnSeries class]]) {
-            if (self.graphContext.stacked) {
-                ((DCColumnSeries*)s).xRectStartAt = - 0.5 + kDCColumnOffset;
-                ((DCColumnSeries*)s).columnWidthInCoordinate = 1 - kDCColumnOffset * 2;
-            } else {
-                columnAmount++;
-            }
+        NSString* cs2groupKeys = [NSString stringWithFormat:@"%@-%@", s.coordinateSystemName, s.groupName];
+        if (s.type == DCSeriesTypeColumn && ![columnGroups containsObject:cs2groupKeys]) {
+            [columnGroups addObject:cs2groupKeys];
         }
     }
-    if (!self.graphContext.stacked) {
-        NSUInteger columnIndex = 0;
-        double columnWidth = (1 - kDCColumnOffset * 2) / columnAmount;
-        for (DCXYSeries* s in self.seriesList) {
-            if ([s isKindOfClass:[DCColumnSeries class]]) {
-                ((DCColumnSeries*)s).columnWidthInCoordinate = columnWidth;
-                ((DCColumnSeries*)s).xRectStartAt = columnWidth * columnIndex - 0.5 + kDCColumnOffset;
-                columnIndex++;
-            }
+    
+    
+    if (columnGroups.count == 0) return;
+    double columnWidth = (1 - kDCColumnOffset * 2) / columnGroups.count;
+    for (_DCCoordinateSystem* cs in self.coodinates) {
+        for (DCColumnSeriesGroup* group in cs.columnGroupSeriesDic.allValues) {
+            NSString* cs2groupKeys = [NSString stringWithFormat:@"%@-%@", cs.name, group.groupName];
+            group.xRectStartAt = -0.5 + kDCColumnOffset + columnWidth * [columnGroups indexOfObject:cs2groupKeys];
+            group.columnWidthInCoordinate = columnWidth;
         }
     }
 }
@@ -503,7 +488,7 @@
         NSMutableArray* bands = [[NSMutableArray alloc]init];
         if (!REMIsNilOrNull(self.bgBands))  {
             for (DCXYChartBackgroundBand* b in self.bgBands) {
-                if (b.axis == y.yAxis) {
+                if (b.direction == DCAxisCoordinateY && b.coordinateSystemName == y.yAxis.coordinateSystem.name) {
                     [bands addObject:b];
                 }
             }
@@ -515,7 +500,7 @@
     NSMutableArray* xbands = [[NSMutableArray alloc]init];
     if (!REMIsNilOrNull(self.bgBands))  {
         for (DCXYChartBackgroundBand* b in self.bgBands) {
-            if (b.axis == self.xAxis) {
+            if (b.direction == DCAxisCoordinateX) {
                 [xbands addObject:b];
             }
         }
@@ -523,13 +508,58 @@
     [self.backgroundBandsLayer setBands:xbands];
 }
 
+/*
+ * 1. Clear all coordinate systems and yAxis objects. Remove all y-Axes layers.
+ * 2. Create new coordinate systems according to self.seriesList. The series.coordinateSystemName will cause a new coordinate systems.
+ * 3. Create new yAxes list.
+ * 4. Insert new yAxes label layers above x-Axis label layer.
+ */
+-(void)updateCoordinateSystems {
+    if (self.coodinates == nil) self.coodinates = [[NSMutableArray alloc]init];
+    if (self.yAxisList == nil) self.yAxisList = [[NSMutableArray alloc]init];
+    // Destroy all coordinates and y-axes
+    for (_DCCoordinateSystem* c in self.coodinates) {
+        for (DCXYSeries* s in c.seriesList) {
+            [c detachSeries:s];
+        }
+        [c removeYIntervalObsever:self._horizentalBackgroundLayer];
+        if (!REMIsNilOrNull(c.yAxisLabelLayer.superlayer)) [c.yAxisLabelLayer removeFromSuperlayer];
+    }
+    
+    [self.coodinates removeAllObjects];
+    [self.yAxisList removeAllObjects];
+    
+    NSMutableDictionary* csDic = [[NSMutableDictionary alloc]init];
+    for (DCXYSeries* series in self.seriesList) {
+        _DCCoordinateSystem* cs = csDic[series.coordinateSystemName];
+        if (REMIsNilOrNull(cs)) {
+            cs = [[_DCCoordinateSystem alloc]initWithChartView:self name:series.coordinateSystemName];
+            cs.isMajor = (self.coodinates.count == 0);
+            [cs addYIntervalObsever:self._horizentalBackgroundLayer];
+            [csDic setObject:cs forKey:series.coordinateSystemName];
+            [self.coodinates addObject:cs];
+            [self.yAxisList addObject:cs.yAxis];
+            [self.layer insertSublayer:cs.yAxisLabelLayer above:self._xLabelLayer];
+        }
+        [cs attachSeries:series];
+    }
+}
+
+-(NSArray*)getYAxes {
+    return self.yAxisList;
+}
+
+-(void)updateChart {
+    [self updateCoordinateSystems];
+    
+    [self recalculatePlotRect];
+}
+
 -(void)setSeries:(DCXYSeries *)series hidden:(BOOL)hidden {
     if (series.hidden == hidden) return;
     series.hidden = hidden;
     if ([self.coodinates indexOfObject:series.coordinate] >= self.visableYAxisAmount) return;
-    _DCYAxisLabelLayer* yAxisLayer = (_DCYAxisLabelLayer*)[series.coordinate getAxisLabelLayer];
     
-    yAxisLayer.hidden = ([yAxisLayer.axis getVisableSeriesAmount] == 0);
     [self recalculatePlotRect];
     [self updateAllLayerFrame];
     for (_DCCoordinateSystem* s in self.coodinates) {
@@ -545,22 +575,22 @@
     for (int i = 0; i < self.coodinates.count; i++) {
         if (i >= self.visableYAxisAmount) break;
         _DCCoordinateSystem* ds = self.coodinates[i];
-        _DCYAxisLabelLayer* _yLabelLayer = (_DCYAxisLabelLayer*)[ds getAxisLabelLayer];
+        _DCYAxisLabelLayer* _yLabelLayer = ds.yAxisLabelLayer;
         
         [_yLabelLayer setNeedsDisplay];
     }
 }
 
--(DCRange*)getRangeOfAxis:(DCAxis*)axis {
-    if (axis.coordinate == DCAxisCoordinateX) {
-        return self.graphContext.hRange;
-    } else {
-        for (_DCCoordinateSystem* cs in self.coodinates) {
-            if (cs.yAxis == axis) return cs.yRange;
-        }
-        return nil;
-    }
-}
+//-(DCRange*)getRangeOfAxis:(DCAxis*)axis {
+//    if (axis.coordinate == DCAxisCoordinateX) {
+//        return self.graphContext.hRange;
+//    } else {
+//        for (_DCCoordinateSystem* cs in self.coodinates) {
+//            if (cs.yAxis == axis) return cs.yRange;
+//        }
+//        return nil;
+//    }
+//}
 
 -(void)subLayerGrowthAnimationDone {
     BOOL allLayerDone = YES;
@@ -603,8 +633,8 @@
         [(NSMutableArray*)self._symbolLayer.seriesList addObject:replacement];
         replacement.seriesLayer = self._symbolLayer;
     }
-    [self.graphContext removeHRangeObsever:original];
-    [self.graphContext addHRangeObsever:replacement];
+//    [self.graphContext removeHRangeObsever:original];
+//    [self.graphContext addHRangeObsever:replacement];
     [replacement.coordinate recalculatorYMaxInRange:self.graphContext.hRange];
     [self calculateColumnWidth];
     [self._symbolLayer redraw];

@@ -105,7 +105,7 @@
         series.color = [UIColor colorWithRed:106.0/255.0 green:99.0/255.0 blue:74.0/255.0 alpha:1];
     }
     series.visableYMaxThreshold = @(100);
-    ((DCLineSeries*)series).symbolType = DCLineSymbolTypeRound;
+    series.symbolType = DCLineSymbolTypeRound;
 }
 
 -(void)setStandardsBands:(NSArray *)standardsBands {
@@ -137,7 +137,8 @@
         UILabel* sLabel = self.standardLabels[standard.standardName];
         CGRect frame = CGRectMake(self.view.frame.size.width-141, 0, sLabel.frame.size.width, sLabel.frame.size.height);
         sLabel.frame = frame;
-        b.axis = self.view.yAxisList[0];
+        b.direction = DCAxisCoordinateY;
+        b.coordinateSystemName = ((DCAxis*)[self.view getYAxes][0]).coordinateSystem.name;
         [bands addObject:b];
     }
     self.view.clipsToBounds = NO;

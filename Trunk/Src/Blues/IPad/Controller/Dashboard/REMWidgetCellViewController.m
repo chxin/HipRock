@@ -14,7 +14,7 @@
 #import "DCRankingWrapper.h"
 #import "DCPieWrapper.h"
 #import "DCChartEnum.h"
-#import "DCLineWrapper.h"
+#import "DCTrendWrapper.h"
 #import "DCLabelingWrapper.h"
 #import "REMWidgetCellDelegator.h"
 #import "REMWidgetStepEnergyModel.h"
@@ -156,15 +156,17 @@
 //        wrapperConfig.multiTimeSpans=stepModel.timeRangeArray;
     }
     if (widgetType == REMDiagramTypeLine) {
-        widgetWrapper = [[DCLineWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
+        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
+        ((DCTrendWrapper*)widgetWrapper).defaultSeriesType = DCSeriesTypeLine;
     } else if (widgetType == REMDiagramTypeColumn) {
-        widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
+        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
+        ((DCTrendWrapper*)widgetWrapper).defaultSeriesType = DCSeriesTypeColumn;
     } else if (widgetType == REMDiagramTypePie) {
         widgetWrapper = [[DCPieWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
     } else if (widgetType == REMDiagramTypeRanking) {
         widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
     } else if (widgetType == REMDiagramTypeStackColumn) {
-        widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
+        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
     } else if (widgetType == REMDiagramTypeLabelling) {
         widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
     }

@@ -19,20 +19,17 @@
 @property (nonatomic, assign) BOOL acceptPinch;
 @property (nonatomic, assign) BOOL acceptTap;
 @property (nonatomic, strong) DCAxis* xAxis;
-@property (nonatomic, strong) NSArray* yAxisList;
 
 @property (nonatomic, strong) DCContext* graphContext;
-
-@property (nonatomic, assign) BOOL hasVGridlines;
 
 @property (nonatomic, weak) id<DCXYChartViewDelegate> delegate;
 
 @property (nonatomic, strong) NSArray* seriesList;
 @property (nonatomic, assign) NSUInteger visableYAxisAmount;
 
--(DCRange*)getRangeOfAxis:(DCAxis*)axis;
+//-(DCRange*)getRangeOfAxis:(DCAxis*)axis;
 
-- (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange stacked:(BOOL)stacked;
+- (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange;
 
 - (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden;
 
@@ -46,6 +43,7 @@
 -(void)reloadData;
 -(void)subLayerGrowthAnimationDone;
 -(_DCCoordinateSystem*)findCoordinateByYAxis:(DCAxis *)yAxis;
+-(NSArray*)getYAxes;
 
 -(void)replaceSeries:(DCXYSeries*)original byReplacement:(DCXYSeries*)replacement;
 @end

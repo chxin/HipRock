@@ -80,7 +80,7 @@
         if (self.layerDictionary[rangeToString] == nil) {
             CALayer* bandLayer = [[CALayer alloc]init];
             bandLayer.backgroundColor = band.color.CGColor;
-            if (band.axis.coordinate == DCAxisCoordinateX) {
+            if (band.direction == DCAxisCoordinateX) {
                 bandLayer.frame = CGRectMake([DCUtility getScreenXIn:self.bounds xVal:band.range.location+xoffset hRange:self.graphContext.hRange], 0, [DCUtility getScreenXIn:self.bounds xVal:band.range.length+self.graphContext.hRange.location hRange:self.graphContext.hRange], self.bounds.size.height);
             }
             if (!REMIsNilOrNull(band.title) && band.title.length > 0) {

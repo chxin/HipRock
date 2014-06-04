@@ -9,7 +9,7 @@
 #import "DCRankingWrapper.h"
 #import "DCPieWrapper.h"
 #import "DCChartEnum.h"
-#import "DCLineWrapper.h"
+#import "DCTrendWrapper.h"
 #import "DCLabelingWrapper.h"
 #import "REMBuildingChartView.h"
 #import "REMWidgetStepEnergyModel.h"
@@ -85,18 +85,19 @@
     
     
     if (widgetType == REMDiagramTypeLine) {
-        widgetWrapper = [[DCLineWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig style:style];
-        
+        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig style:style];
+        widgetWrapper.defaultSeriesType = DCSeriesTypeLine;
     }
     else if (widgetType == REMDiagramTypeColumn) {
-        widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig style:style];
+        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig style:style];
+        widgetWrapper.defaultSeriesType = DCSeriesTypeColumn;
     }
     else if (widgetType == REMDiagramTypeRanking) {
         
         widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig  style:style];
     }
     else if (widgetType == REMDiagramTypeStackColumn) {
-        widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig  style:style];
+        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig  style:style];
     }
     for (DCXYSeries* s in widgetWrapper.view.seriesList) {
         s.color = [REMColor makeTransparent:0.8 withColor:s.color];

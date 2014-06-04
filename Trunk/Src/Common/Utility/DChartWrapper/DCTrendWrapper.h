@@ -10,8 +10,6 @@
 #import "DCXYChartView.h"
 #import "DCChartStyle.h"
 #import "REMEnergyViewData.h"
-#import "DCColumnSeries.h"
-#import "DCLineSeries.h"
 #import "DCContext.h"
 #import "DCChartEnum.h"  // FOR IMPORT REMChartDataProcessor only
 #import "DCXYChartViewDelegate.h"
@@ -24,7 +22,7 @@
 @interface DCTrendWrapper : DAbstractChartWrapper<DCXYChartViewDelegate, DCTrendAnimationDelegate>
 
 @property (nonatomic, readonly) DCXYChartView* view;
-@property (nonatomic, readonly) NSString* defaultSeriesClass;
+@property (nonatomic, assign) DCSeriesType defaultSeriesType;
 @property (nonatomic, strong, readonly) NSMutableArray* processors;
 @property (nonatomic, strong, readonly) DCTrendChartDataProcessor* sharedProcessor;
 

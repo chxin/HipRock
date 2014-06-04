@@ -16,17 +16,16 @@ typedef enum _DCAxisCoordinate {
     DCAxisCoordinateY = 1
 }DCAxisCoordinate;
 
-@interface DCAxis : NSObject
-@property (nonatomic) NSString* axisTitle;
-@property (nonatomic,assign) DCAxisCoordinate coordinate;
+@class _DCCoordinateSystem;
 
+@interface DCAxis : NSObject
+@property (nonatomic,assign) DCAxisCoordinate coordinate;
+@property (nonatomic,weak) _DCCoordinateSystem* coordinateSystem;   // x轴的此属性为空
 
 @property (nonatomic) CGPoint startPoint;   //绘制轴线时的起点
 @property (nonatomic) CGPoint endPoint;     //绘制轴线时的终点
 @property (nonatomic) CGSize size;
 @property (nonatomic, strong) NSArray* backgroundBands;
 
--(void)attachSeries:(DCSeries*)series;
--(void)detachSeries:(DCSeries*)series;
 -(NSUInteger)getVisableSeriesAmount;
 @end

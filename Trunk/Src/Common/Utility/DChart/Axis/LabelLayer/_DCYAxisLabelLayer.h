@@ -13,7 +13,6 @@
 @interface _DCYAxisLabelLayer : _DCLayer<DCContextYIntervalObserverProtocal>
 
 @property (nonatomic, weak) DCAxis* axis;
-@property (nonatomic, assign) BOOL isMajorAxis;
 
 -(CGRect)getVisualFrame;
 @end

@@ -6,8 +6,8 @@
 //
 //
 
-#import "DCColumnWrapper.h"
+#import "DCTrendWrapper.h"
 
-@interface REMBuildingAverageWrapper : DCColumnWrapper
+@interface REMBuildingAverageWrapper : DCTrendWrapper
 
 @end

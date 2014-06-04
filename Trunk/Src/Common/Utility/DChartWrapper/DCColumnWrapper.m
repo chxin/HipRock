@@ -9,12 +9,10 @@
 #import "DCColumnWrapper.h"
 
 @implementation DCColumnWrapper
-@synthesize defaultSeriesClass = _defaultSeriesClass;
-
 -(id)init {
     self = [super init];
     if (self) {
-        _defaultSeriesClass = @"DCColumnSeries";
+        self.defaultSeriesType = DCSeriesTypeColumn;
     }
     return self;
 }

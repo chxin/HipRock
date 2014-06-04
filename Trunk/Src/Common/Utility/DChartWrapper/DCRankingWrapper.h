@@ -6,8 +6,8 @@
 //
 //
 
-#import "DCColumnWrapper.h"
+#import "DCTrendWrapper.h"
 
-@interface DCRankingWrapper : DCColumnWrapper
+@interface DCRankingWrapper : DCTrendWrapper
 -(void)changeSortOrder:(NSComparisonResult)sortOrder;
 @end

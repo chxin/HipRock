@@ -18,7 +18,6 @@
 
 -(DCXYSeries*)createSeriesAt:(NSUInteger)index style:(DCChartStyle*)style {
     DCXYChartView* view = self.view;
-    REMTargetEnergyData* targetEnergy = self.energyViewData.targetEnergyData[index];
     NSMutableArray* datas = [[NSMutableArray alloc]init];
     for (REMTargetEnergyData* targetEnergy in self.energyViewData.targetEnergyData) {
         if (REMIsNilOrNull(targetEnergy.energyData) || targetEnergy.energyData.count == 0 ) continue;
@@ -34,10 +33,16 @@
         [datas addObject:point];
     }
     [self quickSort:datas left:0 right:datas.count-1];
-    DCXYSeries* s = [[NSClassFromString(self.defaultSeriesClass) alloc]initWithEnergyData:datas];
-    s.xAxis = view.xAxis;
+    REMTargetEnergyData* t = nil;
+    if (!REMIsNilOrNull(self.energyViewData) && self.energyViewData.targetEnergyData.count > 0) t = self.energyViewData.targetEnergyData[0];
+    DCXYSeries* s = [[DCXYSeries alloc]initWithEnergyData:datas];
+    if (!REMIsNilOrNull(t) && !REMIsNilOrNull(t.target) && !(REMIsNilOrNull(t.target.uomName))) {
+        s.coordinateSystemName = t.target.uomName;
+    } else {
+        s.coordinateSystemName = REMEmptyString;
+    }
+    s.type = DCSeriesTypeColumn;
 //    s.yAxis = view.yAxis0;
-    s.yAxis.axisTitle = targetEnergy.target.uomName;
     s.color = [REMColor colorByIndex:0];
     [self customizeSeries:s seriesIndex:index chartStyle:style];
     
@@ -52,22 +57,13 @@
 -(void)customizeView:(DCXYChartView*)view {
     view.graphContext.pointHorizentalOffset = 0.5;
     view.graphContext.xLabelHorizentalOffset = 0.5;
-//    view.graphContext.pointAlignToTick = NO;
-//    view.graphContext.xLabelAlignToTick = NO;
-    REMTargetEnergyData* t = nil;
-    if (!REMIsNilOrNull(self.energyViewData) && self.energyViewData.targetEnergyData.count > 0) t = self.energyViewData.targetEnergyData[0];
-    if (!REMIsNilOrNull(t) && !REMIsNilOrNull(t.target) && !(REMIsNilOrNull(t.target.uomName)))
-        ((DCAxis*)view.yAxisList[0]).axisTitle = t.target.uomName;
 }
 
--(NSArray*)createYAxes:(NSArray*)series {
-    DCXYSeries* s = series[0];
-    DCAxis* y = [[DCAxis alloc]init];
-    y.coordinate = DCAxisCoordinateY;
-    s.yAxis = y;
-    y.axisTitle = REMEmptyString;
-    return @[y];
-}
+//-(NSArray*)createYAxes:(NSArray*)series {
+//    DCAxis* y = [[DCAxis alloc]init];
+//    y.coordinate = DCAxisCoordinateY;
+//    return @[y];
+//}
 
 -(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
     // Nothing to do. cannot hide series in ranking chart.

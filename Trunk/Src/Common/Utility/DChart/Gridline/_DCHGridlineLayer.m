@@ -13,13 +13,14 @@
 -(void)drawInContext:(CGContextRef)ctx {
     CGContextSetLineJoin(ctx, kCGLineJoinMiter);
     CGContextSetBlendMode(ctx, kCGBlendModeNormal);
-    if(self.view.chartStyle.yLineWidth > 0 && self.view.yAxisList.count > 0) {
+    NSArray* yAxes = [self.view getYAxes];
+    if(self.view.chartStyle.yLineWidth > 0 && yAxes.count > 0) {
         [DCUtility setLineStyle:ctx style:DCLineTypeDefault lineWidth:self.view.chartStyle.yLineWidth];
         CGContextSetLineWidth(ctx, self.view.chartStyle.yLineWidth);
         CGContextBeginPath(ctx);
         CGContextSetStrokeColorWithColor(ctx, self.view.chartStyle.yLineColor.CGColor);
         
-        for (DCAxis* yAxis in self.view.yAxisList) {
+        for (DCAxis* yAxis in yAxes) {
             CGPoint addLines[2];
             addLines[0] = yAxis.startPoint;
             addLines[1] = yAxis.endPoint;

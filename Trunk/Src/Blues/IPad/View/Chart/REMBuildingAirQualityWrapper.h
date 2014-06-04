@@ -6,8 +6,8 @@
 //
 //
 
-#import "DCLineWrapper.h"
+#import "DCTrendWrapper.h"
 
-@interface REMBuildingAirQualityWrapper : DCLineWrapper
+@interface REMBuildingAirQualityWrapper : DCTrendWrapper
 @property (nonatomic, weak) NSArray* standardsBands;
 @end
