@@ -11,7 +11,7 @@
 		<key>local</key>
 		<dict>
 			<key>url</key>
-			<string>http://112.124.56.137/v1.6p/mobile/mobileapihost/</string>
+			<string>http://10.177.201.75/mobile/</string>
 			<key>timeout</key>
 			<string>90</string>
 			<key>debug-logmode</key>
@@ -31,7 +31,7 @@
 		<key>test</key>
 		<dict>
 			<key>url</key>
-			<string>http://42.121.254.106/v1.6.0.19/mobile/mobileapihost/</string>
+			<string>http://42.121.254.106/v1.6.0.21/mobile/mobileapihost/</string>
 			<key>timeout</key>
 			<string>70</string>
 			<key>debug-logmode</key>
