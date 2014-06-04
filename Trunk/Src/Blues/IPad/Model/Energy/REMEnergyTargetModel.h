@@ -7,6 +7,9 @@
  --------------------------------------------------------------------------*///
 
 #import "REMJSONObject.h"
+@class REMTargetAssociationModel;
+
+
 @class REMTimeRange;
 
 typedef enum _REMEnergyTargetType : NSUInteger
@@ -44,5 +47,7 @@ typedef enum _REMEnergyTargetType : NSUInteger
 @property (nonatomic) long long uomId;
 @property (nonatomic,strong) NSString * commodityName;
 @property (nonatomic,strong) NSString * uomName;
+
+@property (nonatomic,strong) REMTargetAssociationModel *association;
 
 @end
