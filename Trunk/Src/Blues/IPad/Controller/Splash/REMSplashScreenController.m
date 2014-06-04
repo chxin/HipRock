@@ -13,8 +13,7 @@
 #import "REMMapViewController.h"
 #import "REMStoryboardDefinitions.h"
 #import "REMDimensions.h"
-#import "DCColumnWrapper.h"
-#import "DCLineWrapper.h"
+#import "DCTrendWrapper.h"
 #import "DCPieWrapper.h"
 #import "DCPieChartView.h"
 #import "DCLabelingWrapper.h"
@@ -254,14 +253,15 @@
 //    self.carouselController = columnWidget;
 //    [self.view addSubview:columnWidget.view];
     
-    DCLineWrapper* lineWidget = [[DCLineWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
+    DCTrendWrapper* lineWidget = [[DCTrendWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
+    lineWidget.defaultSeriesType = DCSeriesTypeLine;
     lineWidget.view.backgroundColor = [UIColor blackColor];
     NSMutableArray* bands = [[NSMutableArray alloc]init];
     DCRange* bandRange = [[DCRange alloc]initWithLocation:0 length:20];
     DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
+    b.direction = DCAxisCoordinateX;
     b.range = bandRange;
     b.color = [UIColor colorWithRed:0.5 green:0 blue:0 alpha:0.5];
-    b.axis = lineWidget.view.yAxisList[0];
     [bands addObject:b];
     [lineWidget.view setBackgoundBands:bands];
     [self.view addSubview:lineWidget.view];

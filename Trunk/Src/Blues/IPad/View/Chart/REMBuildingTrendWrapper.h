@@ -6,7 +6,7 @@
 //
 //
 
-#import "DCLineWrapper.h"
+#import "DCTrendWrapper.h"
 
-@interface REMBuildingTrendWrapper : DCLineWrapper
+@interface REMBuildingTrendWrapper : DCTrendWrapper
 @end

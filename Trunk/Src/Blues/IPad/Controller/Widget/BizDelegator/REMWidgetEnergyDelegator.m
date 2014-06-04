@@ -19,8 +19,6 @@
 #import "REMTrendChartLegendView.h"
 #import "REMStackChartLegendView.h"
 #import "REMClientErrorInfo.h"
-#import "DCLineWrapper.h"
-#import "DCColumnWrapper.h"
 #import "DCRankingWrapper.h"
 #import "DCLabelingWrapper.h"
 #import "DCPieWrapper.h"
@@ -462,12 +460,14 @@
     }
     
     if (widgetType == REMDiagramTypeLine) {
-        widgetWrapper = [[DCLineWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
+        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
+        ((DCTrendWrapper*)widgetWrapper).defaultSeriesType = DCSeriesTypeLine;
         widgetWrapper.delegate = self;
         
         
     } else if (widgetType == REMDiagramTypeColumn) {
-        widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
+        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
+        ((DCTrendWrapper*)widgetWrapper).defaultSeriesType = DCSeriesTypeColumn;
         widgetWrapper.delegate = self;
     } else if (widgetType == REMDiagramTypePie) {
         widgetWrapper = [[DCPieWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
@@ -476,7 +476,7 @@
         widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
         widgetWrapper.delegate = self;
     } else if (widgetType == REMDiagramTypeStackColumn) {
-        widgetWrapper = [[DCColumnWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
+        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
         widgetWrapper.delegate = self;
     } else if (widgetType == REMDiagramTypeLabelling) {
         widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];

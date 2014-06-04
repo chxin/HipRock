@@ -563,20 +563,15 @@
 		7AAA24A718B5AC9C002069EA /* DCLabelingSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86985185EEF5300DC0007 /* DCLabelingSeries.m */; };
 		7AAA24A818B5AC9C002069EA /* DCLabelingStage.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86988185EEF7300DC0007 /* DCLabelingStage.m */; };
 		7AAA24A918B5AC9C002069EA /* DCLabelingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE8698B185EF3B700DC0007 /* DCLabelingLabel.m */; };
-		7AAA24AA18B5AC9C002069EA /* DCColumnSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F01839DCBB00E9EC50 /* DCColumnSeries.m */; };
-		7AAA24AB18B5AC9C002069EA /* DCLineSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F21839DCBB00E9EC50 /* DCLineSeries.m */; };
 		7AAA24AC18B5AC9C002069EA /* DCXYSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F61839DCBB00E9EC50 /* DCXYSeries.m */; };
 		7AAA24AD18B5AC9C002069EA /* DCPieSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC251841FA2F004B9EFD /* DCPieSeries.m */; };
 		7AAA24AE18B5AC9C002069EA /* DCSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F41839DCBB00E9EC50 /* DCSeries.m */; };
 		7AAA24AF18B5AC9C002069EA /* _DCCoordinateSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D61839DCBB00E9EC50 /* _DCCoordinateSystem.m */; };
-		7AAA24B018B5AC9C002069EA /* _DCLayerTrashbox.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */; };
 		7AAA24B118B5AC9C002069EA /* DCContext.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946E61839DCBB00E9EC50 /* DCContext.m */; };
 		7AAA24B218B5AC9C002069EA /* DCRange.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946E81839DCBB00E9EC50 /* DCRange.m */; };
 		7AAA24B318B5AC9C002069EA /* DCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F91839DCBB00E9EC50 /* DCUtility.m */; };
 		7AAA24B418B5AC9C002069EA /* DAbstractChartWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD3183DB3A2002A9AAD /* DAbstractChartWrapper.m */; };
 		7AAA24B518B5AC9C002069EA /* DCTrendWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1C5AD6183DB3CB002A9AAD /* DCTrendWrapper.m */; };
-		7AAA24B618B5AC9C002069EA /* DCLineWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B8183B979800DE186A /* DCLineWrapper.m */; };
-		7AAA24B718B5AC9C002069EA /* DCColumnWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD947101839DEE100E9EC50 /* DCColumnWrapper.m */; };
 		7AAA24B818B5AC9C002069EA /* DCRankingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFBE9C5183F7A3700672E53 /* DCRankingWrapper.m */; };
 		7AAA24B918B5AC9C002069EA /* DCPieWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCC97D18472AD400955560 /* DCPieWrapper.m */; };
 		7AAA24BA18B5AC9C002069EA /* DCLabelingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */; };
@@ -691,9 +686,7 @@
 		B49B6F511781491800BC130A /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
 		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		B4D534E018AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4D534DF18AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png */; };
-		EF0346B0183B4BA600DE186A /* _DCLayerTrashbox.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */; };
 		EF0346B3183B520100DE186A /* _DCSeriesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B2183B520100DE186A /* _DCSeriesLayer.m */; };
-		EF0346B9183B979800DE186A /* DCLineWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B8183B979800DE186A /* DCLineWrapper.m */; };
 		EF03DC201841C886004B9EFD /* _DCHPinchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC1F1841C886004B9EFD /* _DCHPinchGestureRecognizer.m */; };
 		EF03DC231841E462004B9EFD /* DCPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC221841E462004B9EFD /* DCPieChartView.m */; };
 		EF03DC261841FA2F004B9EFD /* DCPieSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EF03DC251841FA2F004B9EFD /* DCPieSeries.m */; };
@@ -714,6 +707,7 @@
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 		EF5D1A801867D10E0069C8F5 /* _DCVGridlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5D1A7F1867D10E0069C8F5 /* _DCVGridlineLayer.m */; };
 		EF652B68185867C2007D4049 /* DCTrendAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EF652B67185867C2007D4049 /* DCTrendAnimationManager.m */; };
+		EF7C3494193DC19300D0EEA6 /* DCColumnSeriesGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EF7C3493193DC19300D0EEA6 /* DCColumnSeriesGroup.m */; };
 		EF7CF5F6185D82F2000BA4AE /* DCPieLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF7CF5F5185D82F2000BA4AE /* DCPieLayer.m */; };
 		EFD946FC1839DCBB00E9EC50 /* _DCLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D11839DCBB00E9EC50 /* _DCLayer.m */; };
 		EFD946FE1839DCBB00E9EC50 /* _DCCoordinateSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946D61839DCBB00E9EC50 /* _DCCoordinateSystem.m */; };
@@ -726,12 +720,9 @@
 		EFD947051839DCBB00E9EC50 /* DCRange.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946E81839DCBB00E9EC50 /* DCRange.m */; };
 		EFD947061839DCBB00E9EC50 /* _DCHGridlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946EB1839DCBB00E9EC50 /* _DCHGridlineLayer.m */; };
 		EFD947071839DCBB00E9EC50 /* _DCColumnsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946EE1839DCBB00E9EC50 /* _DCColumnsLayer.m */; };
-		EFD947081839DCBB00E9EC50 /* DCColumnSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F01839DCBB00E9EC50 /* DCColumnSeries.m */; };
-		EFD947091839DCBB00E9EC50 /* DCLineSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F21839DCBB00E9EC50 /* DCLineSeries.m */; };
 		EFD9470A1839DCBB00E9EC50 /* DCSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F41839DCBB00E9EC50 /* DCSeries.m */; };
 		EFD9470B1839DCBB00E9EC50 /* DCXYSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F61839DCBB00E9EC50 /* DCXYSeries.m */; };
 		EFD9470C1839DCBB00E9EC50 /* DCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F91839DCBB00E9EC50 /* DCUtility.m */; };
-		EFD947111839DEE100E9EC50 /* DCColumnWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD947101839DEE100E9EC50 /* DCColumnWrapper.m */; };
 		EFDBD2DA190760D80013BAFA /* DSeriesStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDBD2D9190760D80013BAFA /* DSeriesStatus.m */; };
 		EFDBD2DD190760F90013BAFA /* DTrendSeriesStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDBD2DC190760F90013BAFA /* DTrendSeriesStatus.m */; };
 		EFDCC97E18472AD400955560 /* DCPieWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCC97D18472AD400955560 /* DCPieWrapper.m */; };
@@ -1495,12 +1486,8 @@
 		B4EDFB1C1806983600873FA1 /* REMDimensionForSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensionForSplashScreen.h; path = Resource/Dimensions/REMDimensionForSplashScreen.h; sourceTree = "<group>"; };
 		B4EDFB1D1806983600873FA1 /* REMDimensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensions.h; path = Resource/Dimensions/REMDimensions.h; sourceTree = "<group>"; };
 		EF01DB58185B1BCF00A6ADCB /* DCPieChartViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCPieChartViewDelegate.h; sourceTree = "<group>"; };
-		EF0346AE183B4BA600DE186A /* _DCLayerTrashbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCLayerTrashbox.h; path = ../_DCLayerTrashbox.h; sourceTree = "<group>"; };
-		EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCLayerTrashbox.m; path = ../_DCLayerTrashbox.m; sourceTree = "<group>"; };
 		EF0346B1183B520100DE186A /* _DCSeriesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCSeriesLayer.h; path = Common/Utility/DChart/Series/_DCSeriesLayer.h; sourceTree = "<group>"; };
 		EF0346B2183B520100DE186A /* _DCSeriesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCSeriesLayer.m; path = Common/Utility/DChart/Series/_DCSeriesLayer.m; sourceTree = "<group>"; };
-		EF0346B7183B979800DE186A /* DCLineWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCLineWrapper.h; path = Common/Utility/DChartWrapper/DCLineWrapper.h; sourceTree = "<group>"; };
-		EF0346B8183B979800DE186A /* DCLineWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCLineWrapper.m; path = Common/Utility/DChartWrapper/DCLineWrapper.m; sourceTree = "<group>"; };
 		EF03DC1E1841C886004B9EFD /* _DCHPinchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCHPinchGestureRecognizer.h; path = Common/Utility/DChart/_DCHPinchGestureRecognizer.h; sourceTree = "<group>"; };
 		EF03DC1F1841C886004B9EFD /* _DCHPinchGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCHPinchGestureRecognizer.m; path = Common/Utility/DChart/_DCHPinchGestureRecognizer.m; sourceTree = "<group>"; };
 		EF03DC211841E462004B9EFD /* DCPieChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCPieChartView.h; sourceTree = "<group>"; };
@@ -1543,6 +1530,8 @@
 		EF5D1A7F1867D10E0069C8F5 /* _DCVGridlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCVGridlineLayer.m; sourceTree = "<group>"; };
 		EF652B66185867C2007D4049 /* DCTrendAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCTrendAnimationManager.h; path = Common/Utility/DChart/ChartView/DCTrendAnimationManager.h; sourceTree = "<group>"; };
 		EF652B67185867C2007D4049 /* DCTrendAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCTrendAnimationManager.m; path = Common/Utility/DChart/ChartView/DCTrendAnimationManager.m; sourceTree = "<group>"; };
+		EF7C3492193DC19300D0EEA6 /* DCColumnSeriesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCColumnSeriesGroup.h; sourceTree = "<group>"; };
+		EF7C3493193DC19300D0EEA6 /* DCColumnSeriesGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCColumnSeriesGroup.m; sourceTree = "<group>"; };
 		EF7CF5F4185D82F2000BA4AE /* DCPieLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieLayer.h; path = Common/Utility/DChart/ChartView/DCPieLayer.h; sourceTree = "<group>"; };
 		EF7CF5F5185D82F2000BA4AE /* DCPieLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieLayer.m; path = Common/Utility/DChart/ChartView/DCPieLayer.m; sourceTree = "<group>"; };
 		EF8A480117F95A1D009B5C33 /* DCChartEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCChartEnum.h; sourceTree = "<group>"; };
@@ -1568,18 +1557,12 @@
 		EFD946EB1839DCBB00E9EC50 /* _DCHGridlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DCHGridlineLayer.m; sourceTree = "<group>"; };
 		EFD946ED1839DCBB00E9EC50 /* _DCColumnsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _DCColumnsLayer.h; path = Common/Utility/DChart/Series/_DCColumnsLayer.h; sourceTree = "<group>"; };
 		EFD946EE1839DCBB00E9EC50 /* _DCColumnsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _DCColumnsLayer.m; path = Common/Utility/DChart/Series/_DCColumnsLayer.m; sourceTree = "<group>"; };
-		EFD946EF1839DCBB00E9EC50 /* DCColumnSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCColumnSeries.h; sourceTree = "<group>"; };
-		EFD946F01839DCBB00E9EC50 /* DCColumnSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCColumnSeries.m; sourceTree = "<group>"; };
-		EFD946F11839DCBB00E9EC50 /* DCLineSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLineSeries.h; sourceTree = "<group>"; };
-		EFD946F21839DCBB00E9EC50 /* DCLineSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLineSeries.m; sourceTree = "<group>"; };
 		EFD946F31839DCBB00E9EC50 /* DCSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSeries.h; sourceTree = "<group>"; };
 		EFD946F41839DCBB00E9EC50 /* DCSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSeries.m; sourceTree = "<group>"; };
 		EFD946F51839DCBB00E9EC50 /* DCXYSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCXYSeries.h; sourceTree = "<group>"; };
 		EFD946F61839DCBB00E9EC50 /* DCXYSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCXYSeries.m; sourceTree = "<group>"; };
 		EFD946F81839DCBB00E9EC50 /* DCUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCUtility.h; sourceTree = "<group>"; };
 		EFD946F91839DCBB00E9EC50 /* DCUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCUtility.m; sourceTree = "<group>"; };
-		EFD9470F1839DEE100E9EC50 /* DCColumnWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCColumnWrapper.h; path = Common/Utility/DChartWrapper/DCColumnWrapper.h; sourceTree = "<group>"; };
-		EFD947101839DEE100E9EC50 /* DCColumnWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCColumnWrapper.m; path = Common/Utility/DChartWrapper/DCColumnWrapper.m; sourceTree = "<group>"; };
 		EFDBD2D8190760D80013BAFA /* DSeriesStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSeriesStatus.h; path = Common/Utility/DChartWrapper/SeriesStatus/DSeriesStatus.h; sourceTree = "<group>"; };
 		EFDBD2D9190760D80013BAFA /* DSeriesStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSeriesStatus.m; path = Common/Utility/DChartWrapper/SeriesStatus/DSeriesStatus.m; sourceTree = "<group>"; };
 		EFDBD2DB190760F90013BAFA /* DTrendSeriesStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTrendSeriesStatus.h; path = Common/Utility/DChartWrapper/SeriesStatus/DTrendSeriesStatus.h; sourceTree = "<group>"; };
@@ -3249,24 +3232,6 @@
 			name = Line;
 			sourceTree = "<group>";
 		};
-		EFC4D21B185576BC00E04688 /* Column */ = {
-			isa = PBXGroup;
-			children = (
-				EFD946EF1839DCBB00E9EC50 /* DCColumnSeries.h */,
-				EFD946F01839DCBB00E9EC50 /* DCColumnSeries.m */,
-			);
-			name = Column;
-			sourceTree = "<group>";
-		};
-		EFC4D21C185576C600E04688 /* Line */ = {
-			isa = PBXGroup;
-			children = (
-				EFD946F11839DCBB00E9EC50 /* DCLineSeries.h */,
-				EFD946F21839DCBB00E9EC50 /* DCLineSeries.m */,
-			);
-			name = Line;
-			sourceTree = "<group>";
-		};
 		EFC4D21D185576D100E04688 /* Pie */ = {
 			isa = PBXGroup;
 			children = (
@@ -3279,10 +3244,10 @@
 		EFC4D21E185576DC00E04688 /* Trend */ = {
 			isa = PBXGroup;
 			children = (
-				EFC4D21B185576BC00E04688 /* Column */,
-				EFC4D21C185576C600E04688 /* Line */,
 				EFD946F51839DCBB00E9EC50 /* DCXYSeries.h */,
 				EFD946F61839DCBB00E9EC50 /* DCXYSeries.m */,
+				EF7C3492193DC19300D0EEA6 /* DCColumnSeriesGroup.h */,
+				EF7C3493193DC19300D0EEA6 /* DCColumnSeriesGroup.m */,
 			);
 			name = Trend;
 			sourceTree = "<group>";
@@ -3403,8 +3368,6 @@
 			children = (
 				EFD946D51839DCBB00E9EC50 /* _DCCoordinateSystem.h */,
 				EFD946D61839DCBB00E9EC50 /* _DCCoordinateSystem.m */,
-				EF0346AE183B4BA600DE186A /* _DCLayerTrashbox.h */,
-				EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */,
 				EFD946E51839DCBB00E9EC50 /* DCContext.h */,
 				EFD946E61839DCBB00E9EC50 /* DCContext.m */,
 				EFD946E71839DCBB00E9EC50 /* DCRange.h */,
@@ -3425,10 +3388,6 @@
 				EF1C5AD3183DB3A2002A9AAD /* DAbstractChartWrapper.m */,
 				EF1C5AD5183DB3CB002A9AAD /* DCTrendWrapper.h */,
 				EF1C5AD6183DB3CB002A9AAD /* DCTrendWrapper.m */,
-				EF0346B7183B979800DE186A /* DCLineWrapper.h */,
-				EF0346B8183B979800DE186A /* DCLineWrapper.m */,
-				EFD9470F1839DEE100E9EC50 /* DCColumnWrapper.h */,
-				EFD947101839DEE100E9EC50 /* DCColumnWrapper.m */,
 				EFFBE9C4183F7A3700672E53 /* DCRankingWrapper.h */,
 				EFFBE9C5183F7A3700672E53 /* DCRankingWrapper.m */,
 				EFDCC97C18472AD400955560 /* DCPieWrapper.h */,
@@ -3832,20 +3791,15 @@
 				7AAA24A718B5AC9C002069EA /* DCLabelingSeries.m in Sources */,
 				7AAA24A818B5AC9C002069EA /* DCLabelingStage.m in Sources */,
 				7AAA24A918B5AC9C002069EA /* DCLabelingLabel.m in Sources */,
-				7AAA24AA18B5AC9C002069EA /* DCColumnSeries.m in Sources */,
-				7AAA24AB18B5AC9C002069EA /* DCLineSeries.m in Sources */,
 				7AAA24AC18B5AC9C002069EA /* DCXYSeries.m in Sources */,
 				7AAA24AD18B5AC9C002069EA /* DCPieSeries.m in Sources */,
 				7AAA24AE18B5AC9C002069EA /* DCSeries.m in Sources */,
 				7AAA24AF18B5AC9C002069EA /* _DCCoordinateSystem.m in Sources */,
-				7AAA24B018B5AC9C002069EA /* _DCLayerTrashbox.m in Sources */,
 				7AAA24B118B5AC9C002069EA /* DCContext.m in Sources */,
 				7AAA24B218B5AC9C002069EA /* DCRange.m in Sources */,
 				7AAA24B318B5AC9C002069EA /* DCUtility.m in Sources */,
 				7AAA24B418B5AC9C002069EA /* DAbstractChartWrapper.m in Sources */,
 				7AAA24B518B5AC9C002069EA /* DCTrendWrapper.m in Sources */,
-				7AAA24B618B5AC9C002069EA /* DCLineWrapper.m in Sources */,
-				7AAA24B718B5AC9C002069EA /* DCColumnWrapper.m in Sources */,
 				7AAA24B818B5AC9C002069EA /* DCRankingWrapper.m in Sources */,
 				7AAA24B918B5AC9C002069EA /* DCPieWrapper.m in Sources */,
 				7AAA24BA18B5AC9C002069EA /* DCLabelingWrapper.m in Sources */,
@@ -4099,7 +4053,6 @@
 				7A63E24218B44CBD00A13464 /* REMWidgetStepCalculationModel.m in Sources */,
 				EFFBE9C6183F7A3700672E53 /* DCRankingWrapper.m in Sources */,
 				EFF7514B183FC60F00C8BBE9 /* DCXYChartBackgroundBand.m in Sources */,
-				EF0346B0183B4BA600DE186A /* _DCLayerTrashbox.m in Sources */,
 				7A63E24518B44CBD00A13464 /* REMBuildingAirQualityView.m in Sources */,
 				7A0C0F6118D6DBEB00CBB277 /* REMHTTPRequestOperationManager.m in Sources */,
 				7A63E25818B44CBD00A13464 /* REMLoginButton.m in Sources */,
@@ -4148,7 +4101,6 @@
 				7A62E33818DC1DB10029E908 /* REMPinToCoverPersistenceProcessor.m in Sources */,
 				7A63E26B18B44CBD00A13464 /* REMTrendChartTooltipView.m in Sources */,
 				7A1D7C4517A63E8B0050779D /* REMEncryptHelper.m in Sources */,
-				EF0346B9183B979800DE186A /* DCLineWrapper.m in Sources */,
 				7AF9638D18D6C9A3005A8D12 /* REMDataPersistenceProcessor.m in Sources */,
 				7A9EAA8A18D2946300EF1B85 /* WeiboAccounts.m in Sources */,
 				7A63E1FF18B44CBD00A13464 /* REMDashboardController.m in Sources */,
@@ -4194,7 +4146,6 @@
 				7A3290EE18D83CBF00B3AE8A /* REMApplicationContext.m in Sources */,
 				7A9EAA9E18D2946300EF1B85 /* WeiboLoginDialog.m in Sources */,
 				7A3290ED18D83CBF00B3AE8A /* REMAppConfiguration.m in Sources */,
-				EFD947111839DEE100E9EC50 /* DCColumnWrapper.m in Sources */,
 				7A63E23F18B44CBD00A13464 /* REMWidgetMultiTimespanSearchModel.m in Sources */,
 				7A3290E018D823EF00B3AE8A /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				7A63E21818B44CBD00A13464 /* REMRelativeDateViewController.m in Sources */,
@@ -4210,7 +4161,6 @@
 				EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */,
 				7A63E24A18B44CBD00A13464 /* REMBuildingRankingView.m in Sources */,
 				7A63E24E18B44CBD00A13464 /* REMBuildingAirQualityWrapper.m in Sources */,
-				EFD947081839DCBB00E9EC50 /* DCColumnSeries.m in Sources */,
 				EFD947071839DCBB00E9EC50 /* _DCColumnsLayer.m in Sources */,
 				7A63E1ED18B44CBD00A13464 /* REMUpdateAllManager.m in Sources */,
 				7A63E1E818B44CBD00A13464 /* REMEnergyMultiTimeSearcher.m in Sources */,
@@ -4241,7 +4191,6 @@
 				7A9EAA9F18D2946300EF1B85 /* Weibo.m in Sources */,
 				EFEA7EDF1843424500CF4C3E /* _DCRankingXLabelFormatter.m in Sources */,
 				7A7B29911888C65000E74D3D /* UIView+FlipTransition.m in Sources */,
-				EFD947091839DCBB00E9EC50 /* DCLineSeries.m in Sources */,
 				EF0BFEA71844B7090026C47D /* DCPieChartAnimationFrame.m in Sources */,
 				7A9EAA9C18D2946300EF1B85 /* WeiboDialogClosePNG.m in Sources */,
 				7A0CCD66192A01D800C35C2F /* REMManagedEnergyDataModel.m in Sources */,
@@ -4270,6 +4219,7 @@
 				7AF9638418D6C63C005A8D12 /* AFURLResponseSerialization.m in Sources */,
 				7A63E26C18B44CBD00A13464 /* REMDashboardCellViewCell.m in Sources */,
 				7A63E25F18B44CBD00A13464 /* REMNumberLabel.m in Sources */,
+				EF7C3494193DC19300D0EEA6 /* DCColumnSeriesGroup.m in Sources */,
 				7AF9638E18D6C9A3005A8D12 /* REMDataStore.m in Sources */,
 				7A63E27618B44CBD00A13464 /* REMMapGallerySegue.m in Sources */,
 				7A1D6C2C18F68A0900AFB038 /* BluesPad.xcdatamodeld in Sources */,

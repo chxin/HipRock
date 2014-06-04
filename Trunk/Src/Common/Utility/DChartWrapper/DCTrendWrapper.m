@@ -28,7 +28,7 @@
 -(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(DCChartStyle *)style {
     self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
     if (self && energyViewData.targetEnergyData.count != 0) {
-        
+        _defaultSeriesType = DCSeriesTypeLine;
         self.animationManager = [[DCTrendAnimationManager alloc]init];
         self.animationManager.delegate = self;
         NSDictionary* dic = [self updateProcessorRangesFormatter:wrapperConfig.step];
@@ -56,8 +56,8 @@
 }
 
 -(void)createChartView:(CGRect)frame beginRange:(DCRange*)beginRange globalRange:(DCRange*)globalRange xFormatter:(NSFormatter*)xLabelFormatter step:(REMEnergyStep)step{
-    DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:beginRange stacked:self.wrapperConfig.isTouChart];
-    view.chartStyle = self.style;
+    DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:beginRange];
+    view.chartStyle = self.style;   
     [view setXLabelFormatter:xLabelFormatter];
     _view = view;
     view.xAxis = [[DCAxis alloc]init];
@@ -69,7 +69,7 @@
     for (; seriesIndex < seriesAmount; seriesIndex++) {
         [seriesList addObject:[self createSeriesAt:seriesIndex style:self.style]];
     }
-    view.yAxisList = [self createYAxes:seriesList];
+//    view.yAxisList = [self createYAxes:seriesList];
     
     
     view.graphContext.globalHRange = globalRange;
@@ -78,9 +78,6 @@
     view.acceptTap = self.style.acceptTap;
     view.acceptPinch = self.style.acceptPinch;
     view.acceptPan = self.style.acceptPan;
-    
-    
-    view.hasVGridlines = self.style.xGridlineWidth > 0;
     
     view.graphContext.hGridlineAmount = self.style.horizentalGridLineAmount;
     view.graphContext.useTextLayer = self.style.useTextLayer;
@@ -98,28 +95,28 @@
     self.animationManager.view = view;
 }
 
--(NSArray*)createYAxes:(NSArray*)series {
-    NSMutableArray* yAxes = [[NSMutableArray alloc]init];
-    for (DCXYSeries* s in series) {
-        for (DCAxis* y in yAxes) {
-            if ((REMIsNilOrNull(y.axisTitle) && REMIsNilOrNull(s.target.uomName)) || [y.axisTitle isEqualToString:s.target.uomName]) {
-                s.yAxis = y;
-                break;
-            }
-        }
-        if (REMIsNilOrNull(s.yAxis)) {
-            DCAxis* y = [[DCAxis alloc]init];
-            s.yAxis = y;
-            y.coordinate = DCAxisCoordinateY;
-            y.axisTitle = s.target.uomName;
-            [yAxes addObject:y];
-        }
-    }
-    return yAxes;
-}
+//-(NSArray*)createYAxes:(NSArray*)series {
+//    NSMutableArray* yAxes = [[NSMutableArray alloc]init];
+//    for (DCXYSeries* s in series) {
+//        for (DCAxis* y in yAxes) {
+//            if ((REMIsNilOrNull(y.axisTitle) && REMIsNilOrNull(s.target.uomName)) || [y.axisTitle isEqualToString:s.target.uomName]) {
+//                s.yAxis = y;
+//                break;
+//            }
+//        }
+//        if (REMIsNilOrNull(s.yAxis)) {
+//            DCAxis* y = [[DCAxis alloc]init];
+//            s.yAxis = y;
+//            y.coordinate = DCAxisCoordinateY;
+//            y.axisTitle = s.target.uomName;
+//            [yAxes addObject:y];
+//        }
+//    }
+//    return yAxes;
+//}
 
 -(void)customizeView:(DCXYChartView*)view {
-    
+    view.graphContext.showIndicatorLineOnFocus = NO;
 }
 
 -(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(DCChartStyle*)style {
@@ -127,10 +124,13 @@
     if ((chartLevel==REMChartFromLevel2Ratio || chartLevel==REMChartFromLevel2Unit) && series.target.type == REMEnergyTargetOrigValue) {
         series.hidden = YES;
     }
+    
+    if (chartLevel == REMChartFromLevel2Cost && self.wrapperConfig.storeType == REMDSEnergyCostElectricity) {
+        [series groupSeries:series.target.uomName];
+    }
 }
 
 -(DCXYSeries*)createSeriesAt:(NSUInteger)index style:(DCChartStyle*)style {
-    DCXYChartView* view = self.view;
     REMTargetEnergyData* targetEnergy = self.energyViewData.targetEnergyData[index];
     NSMutableArray* datas = [[NSMutableArray alloc]init];
     DCTrendChartDataProcessor* processor = [self.processors objectAtIndex:index];
@@ -148,33 +148,32 @@
         p.value = point.dataValue;
         [datas addObject:p];
     }
-    DCXYSeries* s;
+    DCXYSeries* s = [[DCXYSeries alloc]initWithEnergyData:datas];
+    if (REMIsNilOrNull(targetEnergy.target)) {
+        s.coordinateSystemName = REMEmptyString;
+    } else {
+        s.coordinateSystemName = targetEnergy.target.uomName;
+    }
     
     DTrendSeriesStatus* state = (DTrendSeriesStatus*)[self getSeriesStatusByTarget:targetEnergy.target index:@(index)];
     // Benchmark series is not able to change series type. Its color and style is defined in style.
     if (!REMIsNilOrNull(targetEnergy.target) &&  [self isSpecialType:targetEnergy.target.type]) {
-        s = [[DCLineSeries alloc]initWithEnergyData:datas];
         s.color = style.benchmarkColor;
-        ((DCLineSeries*)s).symbolType = index % 5;
-        ((DCLineSeries*)s).symbolSize = style.symbolSize;
+        s.symbolType = index % 5;
+        s.symbolSize = style.symbolSize;
     } else {
         // seriesStates.count equals seriesAmount when redraw. otherwise wrapper is initializing.
         if (self.seriesStates.count == [self getSeriesAmount] && state != nil) {
-            if (state.currentType == DCSeriesTypeColumn) {
-                s = [[DCColumnSeries alloc]initWithEnergyData:datas];
-            } else {
-                s = [[DCLineSeries alloc]initWithEnergyData:datas];
-            }
+            s.type = state.currentType;
         } else {
-            s = [[NSClassFromString(self.defaultSeriesClass) alloc]initWithEnergyData:datas];
+            s.type = self.defaultSeriesType;
         }
         if (s.type == DCSeriesTypeLine) {
-            ((DCLineSeries*)s).symbolType = index % 5;
-            ((DCLineSeries*)s).symbolSize = style.symbolSize;
+            s.symbolType = index % 5;
+            s.symbolSize = style.symbolSize;
         }
         s.color = [REMColor colorByIndex:index];
     }
-    s.xAxis = view.xAxis;
     s.target = targetEnergy.target;
     if (!(REMIsNilOrNull(state))) {
         s.hidden = state.hidden;
@@ -317,31 +316,32 @@
 }
 
 -(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index {
-    return !self.graphContext.stacked && [self getVisableSeriesCount] > 1 && index < [self getSeriesAmount];
+    return !self.wrapperConfig.isTouChart && index < [self getSeriesAmount];
+//    return !self.graphContext.stacked && [self getVisableSeriesCount] > 1 && index < [self getSeriesAmount];
 }
 -(void)switchSeriesTypeAtIndex:(NSUInteger)index {
-    DCXYChartView* view = self.view;
-    if (index >= view.seriesList.count) return;
-    DCXYSeries* series = view.seriesList[index];
-    DCXYSeries* replacementSeries = nil;
-    if (series.type == DCSeriesTypeColumn) {
-        DCLineSeries* newSeries = [[DCLineSeries alloc]init];
-        newSeries.symbolType = index % 5;
-        newSeries.symbolSize = self.style.symbolSize;
-        [newSeries copyFromSeries:series];
-        replacementSeries = newSeries;
-    } else if (series.type == DCSeriesTypeLine) {
-        DCColumnSeries* newSeries = [[DCColumnSeries alloc]init];
-        [newSeries copyFromSeries:series];
-        replacementSeries = newSeries;
-    }
-    if (REMIsNilOrNull(replacementSeries)) return;
-    [view replaceSeries:series byReplacement:replacementSeries];
-    ((DTrendSeriesStatus*)[self getSeriesStatusByTarget:series.target index:@(index)]).currentType = replacementSeries.type;
+//    DCXYChartView* view = self.view;
+//    if (index >= view.seriesList.count) return;
+//    DCXYSeries* series = view.seriesList[index];
+//    DCXYSeries* replacementSeries = nil;
+//    if (series.type == DCSeriesTypeColumn) {
+//        DCLineSeries* newSeries = [[DCLineSeries alloc]init];
+//        newSeries.symbolType = index % 5;
+//        newSeries.symbolSize = self.style.symbolSize;
+//        [newSeries copyFromSeries:series];
+//        replacementSeries = newSeries;
+//    } else if (series.type == DCSeriesTypeLine) {
+//        DCColumnSeries* newSeries = [[DCColumnSeries alloc]init];
+//        [newSeries copyFromSeries:series];
+//        replacementSeries = newSeries;
+//    }
+//    if (REMIsNilOrNull(replacementSeries)) return;
+//    [view replaceSeries:series byReplacement:replacementSeries];
+//    ((DTrendSeriesStatus*)[self getSeriesStatusByTarget:series.target index:@(index)]).currentType = replacementSeries.type;
 }
 
 -(BOOL)canBeChangeSeriesAtIndex:(NSUInteger)index {
-    if (index >= self.view.seriesList.count || self.graphContext.stacked) return NO;
+    if (index >= self.view.seriesList.count || self.wrapperConfig.isTouChart) return NO;
     DCXYSeries* series = self.view.seriesList[index];
     if (!REMIsNilOrNull(series.target) &&  [self isSpecialType:series.target.type]) {
         return NO;
@@ -401,7 +401,7 @@
                 DCXYChartBackgroundBand* b = [[DCXYChartBackgroundBand alloc]init];
                 b.range = bandRange;
                 b.color = fillColor;
-                b.axis = self.view.xAxis;
+                b.direction = DCAxisCoordinateX;
                 b.title = bandString;
                 [bands addObject:b];
             }

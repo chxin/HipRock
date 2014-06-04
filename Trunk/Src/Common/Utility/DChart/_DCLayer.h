@@ -9,19 +9,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "DCXYChartView.h"
 
-@protocol DCLabelLayerProtocal <NSObject>
-
--(void)relabel;
-
-@end
-
-@protocol DCHorizentalLayerProtocal <NSObject>
-
--(void)moveHorizental;
-
-@end
-
-
 @interface _DCLayer : CALayer
 
 @property (nonatomic, weak, readonly) DCContext* graphContext;

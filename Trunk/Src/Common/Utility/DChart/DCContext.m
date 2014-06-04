@@ -33,10 +33,9 @@ NSString* const kDCPieIndicatorColor = @"#e9e9e9";
 @end
 
 @implementation DCContext
--(id)initWithStacked:(BOOL)stacked {
+-(id)init {
     self = [super init];
     if (self) {
-        _stacked = stacked;
         _pointHorizentalOffset = 0;
         _xLabelHorizentalOffset = 0;
 //        _pointAlignToTick = NO;
@@ -48,7 +47,7 @@ NSString* const kDCPieIndicatorColor = @"#e9e9e9";
 -(void)addHRangeObsever:(id<DCContextHRangeObserverProtocal>)observer {
     if (observer == nil) return;
     if (self.hRangeObservers == nil) self.hRangeObservers = [[NSMutableArray alloc]init];
-    [self.hRangeObservers addObject:observer];
+    if (![self.hRangeObservers containsObject:observer]) [self.hRangeObservers addObject:observer];
 }
 -(void)removeHRangeObsever:(id<DCContextHRangeObserverProtocal>)observer {
     if (self.hRangeObservers == nil || self.hRangeObservers.count==0) return;

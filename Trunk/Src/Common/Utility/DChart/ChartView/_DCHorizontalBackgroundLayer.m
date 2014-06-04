@@ -27,9 +27,10 @@
 }
 
 -(void)redraw {
-    for (DCAxis* yAxis in self.view.yAxisList) {
+    NSArray* yAxes = [self.view getYAxes];
+    for (DCAxis* yAxis in yAxes) {
         if (REMIsNilOrNull(yAxis.backgroundBands)) continue;
-        DCRange * yRange = [self.view findCoordinateByYAxis:yAxis].yRange;
+        DCRange * yRange = yAxis.coordinateSystem.yRange;
         for(DCXYChartBackgroundBand* band in yAxis.backgroundBands) {
             CGFloat yTop = [DCUtility getScreenYIn:self.graphContext.plotRect yVal:band.range.end vRange:yRange];
             CGFloat yBottom = [DCUtility getScreenYIn:self.graphContext.plotRect yVal:band.range.location vRange:yRange];

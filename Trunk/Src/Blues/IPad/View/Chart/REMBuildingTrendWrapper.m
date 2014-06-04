@@ -74,7 +74,7 @@
     return @{ @"globalRange": range, @"beginRange": range, @"xformatter": formatter};
 }
 
--(void)customizeSeries:(DCLineSeries *)series seriesIndex:(int)index chartStyle:(DCChartStyle *)style {
+-(void)customizeSeries:(DCXYSeries *)series seriesIndex:(int)index chartStyle:(DCChartStyle *)style {
     [super customizeSeries:series seriesIndex:index chartStyle:style];
     series.color = [self getSeriesColorByIndex:index];
     series.symbolType = DCLineSymbolTypeRound;

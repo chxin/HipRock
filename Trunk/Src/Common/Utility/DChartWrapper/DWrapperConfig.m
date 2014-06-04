@@ -24,6 +24,7 @@
         _rankingSortOrder=contentSyntax.rankingSortOrder;
         _rankingRangeCode=contentSyntax.rankingRangeCode;
         _relativeDateType = contentSyntax.relativeDateType;
+        _storeType = contentSyntax.dataStoreType;
     }
     return self;
 }

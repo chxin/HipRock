@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Zilong-Oscar.Xu. All rights reserved.
 //
 
-#import "_DCLayerTrashbox.h"
 #import <CoreText/CoreText.h>
 #import "DCAxis.h"
 #import "DCChartStyle.h"

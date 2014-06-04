@@ -11,7 +11,6 @@
 #import "REMColor.h"
 #import "DCDataPoint.h"
 #import "DCXYSeries.h"
-#import "DCColumnSeries.h"
 
 @interface _DCColumnsLayer()
 @property (nonatomic, strong) NSMutableDictionary* columnsDic;
@@ -53,57 +52,62 @@
             [self clearSublayersAndDictionary];
             return;
         }
+        NSMutableDictionary* xDics = [[NSMutableDictionary alloc]init];
         
         BOOL caTransationState = CATransaction.disableActions;
         [CATransaction setDisableActions:YES];
-        double stackedHeights[end-start+1];
-        for (int i = 0; i < end-start+1; i++) {
-            stackedHeights[i] = 0;
-        }
-        NSMutableDictionary* xDics = [[NSMutableDictionary alloc]init];
-        int seriesAmount = self.seriesList.count;
-        for (int i = 0; i < seriesAmount; i++) {
-            DCColumnSeries* s = self.seriesList[self.graphContext.stacked ? (seriesAmount-i-1) : i];
-            if (s.hidden) continue;
-            _DCCoordinateSystem* coordinateSystem = s.coordinate;
-            for (int j = start; j<=end; j++) {
-                if (j >= s.datas.count) continue;
-                
-                DCDataPoint* point = s.datas[j];
-                NSString* key = [NSString stringWithFormat:@"%u@%i", point.series.hash, j];
-                CALayer* column = self.columnsDic[key];
-                CGRect toFrame = [self getRectForSeries:s index:j stackedHeight:stackedHeights[j-start] coordinate:coordinateSystem];
-                if (self.graphContext.stacked) {
-                    stackedHeights[j-start] = stackedHeights[j-start] + toFrame.size.height;
+        
+        
+        for (DCAxis* yAxis in [self.view getYAxes]) {
+            _DCCoordinateSystem* cs = [self.view findCoordinateByYAxis:yAxis];
+            for (DCColumnSeriesGroup* group in cs.columnGroupSeriesDic.allValues) {
+                double stackedHeights[end-start+1];
+                for (int i = 0; i < end-start+1; i++) {
+                    stackedHeights[i] = 0;
                 }
-                BOOL isRectVisable = [DCUtility isFrame:toFrame visableIn:self.bounds];
-                
-                if (column == nil && isRectVisable) {
-                    column = [[CALayer alloc]init];
-                    column.frame = CGRectMake(toFrame.origin.x, self.frame.size.height, toFrame.size.width, toFrame.size.height);
-                    [self addSublayer:column];
-                    if (self.graphContext.focusX == INT32_MIN || j == self.graphContext.focusX) {
-                        column.backgroundColor = s.color.CGColor;
-                    } else {
-                        column.backgroundColor = [REMColor makeTransparent:kDCFocusPointAlpha withColor:s.color].CGColor;
+                NSArray* groupSeriesList = group.allSeries;
+                for (int i = groupSeriesList.count - 1; i >= 0; i--) {
+                    DCXYSeries* s = groupSeriesList[i];
+                    if (s.hidden) continue;
+                    for (int j = start; j<=end; j++) {
+                        if (j >= s.datas.count) continue;
+                        DCDataPoint* point = s.datas[j];
+                        
+                        NSString* key = [NSString stringWithFormat:@"%u@%i", point.series.hash, j];
+                        CALayer* column = self.columnsDic[key];
+                        CGRect toFrame = [self getRectForSeries:s index:j stackedHeight:stackedHeights[j-start] coordinate:cs];
+                        stackedHeights[j-start] = stackedHeights[j-start] + toFrame.size.height;
+                        BOOL isRectVisable = [DCUtility isFrame:toFrame visableIn:self.bounds];
+                        if (column == nil && isRectVisable) {
+                            column = [[CALayer alloc]init];
+                            column.frame = CGRectMake(toFrame.origin.x, self.frame.size.height, toFrame.size.width, toFrame.size.height);
+                            [self addSublayer:column];
+                            if (self.graphContext.focusX == INT32_MIN || j == self.graphContext.focusX) {
+                                column.backgroundColor = s.color.CGColor;
+                            } else {
+                                column.backgroundColor = [REMColor makeTransparent:kDCFocusPointAlpha withColor:s.color].CGColor;
+                            }
+                            [xDics setObject:column forKey:key];
+                            column.frame = toFrame;
+                        } else if (column == nil && !isRectVisable) {
+                            continue;
+                        } else if (column != nil && isRectVisable) {
+                            column.frame = toFrame;
+                            [xDics setObject:column forKey:key];
+                            if (self.graphContext.focusX == INT32_MIN || j == self.graphContext.focusX) {
+                                column.backgroundColor = s.color.CGColor;
+                            } else {
+                                column.backgroundColor = [REMColor makeTransparent:kDCFocusPointAlpha withColor:s.color].CGColor;
+                            }
+                        } else {
+                            [column removeFromSuperlayer];
+                        }
                     }
-                    [xDics setObject:column forKey:key];
-                    column.frame = toFrame;
-                } else if (column == nil && !isRectVisable) {
-                    continue;
-                } else if (column != nil && isRectVisable) {
-                    column.frame = toFrame;
-                    [xDics setObject:column forKey:key];
-                    if (self.graphContext.focusX == INT32_MIN || j == self.graphContext.focusX) {
-                        column.backgroundColor = s.color.CGColor;
-                    } else {
-                        column.backgroundColor = [REMColor makeTransparent:kDCFocusPointAlpha withColor:s.color].CGColor;
-                    }
-                } else {
-                    [column removeFromSuperlayer];
                 }
             }
         }
+        
+    
         
         for (NSString* key in self.columnsDic.allKeys) {
             if (xDics[key] == nil) {
@@ -123,14 +127,14 @@
     }
 }
 
--(CGRect) getRectForSeries:(DCColumnSeries*)series index:(NSUInteger)index stackedHeight:(double)stackedHeight coordinate:(_DCCoordinateSystem*)coordinate {
+-(CGRect) getRectForSeries:(DCXYSeries*)series index:(NSUInteger)index stackedHeight:(double)stackedHeight coordinate:(_DCCoordinateSystem*)coordinate {
     DCDataPoint* point = series.datas[index];
     CGFloat columnHeight = [self getHeightOfPoint:point coordinate:coordinate];
     CGFloat pointXOffset = self.graphContext.pointHorizentalOffset;
 //    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
-    return CGRectMake(self.frame.size.width * (index + pointXOffset + series.xRectStartAt - self.graphContext.hRange.location) / self.graphContext.hRange.length,
+    return CGRectMake(self.frame.size.width * (index + pointXOffset + series.seriesGroup.xRectStartAt - self.graphContext.hRange.location) / self.graphContext.hRange.length,
                       self.frame.size.height-columnHeight-stackedHeight,
-                      self.frame.size.width * series.columnWidthInCoordinate / self.graphContext.hRange.length,
+                      self.frame.size.width * series.seriesGroup.columnWidthInCoordinate / self.graphContext.hRange.length,
                       columnHeight);
 }
 
@@ -143,7 +147,7 @@
 }
 
 -(BOOL)isValidSeriesForMe:(DCXYSeries*)series {
-    return [series isKindOfClass:[DCColumnSeries class]];
+    return series.type == DCSeriesTypeColumn;
 }
 
 @end

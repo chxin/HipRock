@@ -14,72 +14,114 @@
 #import "DCXYChartView.h"
 #import "_DCYAxisLabelLayer.h"
 #import "REMNumberExtension.h"
+
 @interface _DCCoordinateSystem()
-//@property (nonatomic, strong) NSMutableArray* visableSeries;
 
-@property (nonatomic, strong) _DCYAxisLabelLayer* _yLabelLayer;
-
-//@property (nonatomic, strong) NSMutableArray* yRangeObservers;
 @property (nonatomic, strong) NSMutableArray* yIntervalObservers;
+
+@property (nonatomic, strong) NSNumber* currentYMaxValue;
+@property (nonatomic, strong) NSNumber* currentYMinValue;
+@property (nonatomic, strong) DCRange* latestValueRange; // The latest xRange when recalculatorYMaxInRange called
+
 @end
 
 @implementation _DCCoordinateSystem
 
--(id)initWithChartView:(DCXYChartView*)chartView y:(DCAxis*)y {
+-(id)initWithChartView:(DCXYChartView*)chartView name:(NSString *)name {
     self = [self init];
     if (self) {
         _graphContext = chartView.graphContext;
-        NSMutableArray* seriesList = [[NSMutableArray alloc]init];
-        for (DCXYSeries* s in chartView.seriesList) {
-            if (s.yAxis == y) {
-                [self.graphContext addHRangeObsever:s];
-                [seriesList addObject:s];
-                s.coordinate = self;
-            }
-        }
-        _seriesList = seriesList;
-//        _visableSeries = [self.seriesList mutableCopy];
+        _seriesList = [[NSMutableArray alloc]init];
         _xAxis = chartView.xAxis;
         _chartView = chartView;
+        _name = name;
+        
+        DCAxis* y = [[DCAxis alloc]init];
+        y.coordinate = DCAxisCoordinateY;
+        y.coordinateSystem = self;
+        
         _yAxis = y;
+        _columnGroupSeriesDic = [[NSMutableDictionary alloc]init];
         
         [self.graphContext addHRangeObsever:self];
+        
+        _DCYAxisLabelLayer* yLabelLayer = [[_DCYAxisLabelLayer alloc]initWithContext:self.graphContext view:self.chartView];
+        yLabelLayer.axis = self.yAxis;
+        _yAxisLabelLayer = yLabelLayer;
+        [self addYIntervalObsever:yLabelLayer];
     }
     return self;
 }
 
--(_DCYAxisLabelLayer*)getAxisLabelLayer {
-    if (REMIsNilOrNull(self._yLabelLayer)) {
-        _DCYAxisLabelLayer* _yLabelLayer = [[_DCYAxisLabelLayer alloc]initWithContext:self.graphContext view:(DCXYChartView*)self.chartView];
-        _yLabelLayer.axis = self.yAxis;
-        _yLabelLayer.isMajorAxis = self.isMajor;
-        _yLabelLayer.hidden = ([self.yAxis getVisableSeriesAmount] == 0);
-        self._yLabelLayer = _yLabelLayer;
-        [self addYIntervalObsever:_yLabelLayer];
+-(void)attachSeries:(DCXYSeries*)series {
+    if (![self.seriesList containsObject:series]) {
+        series.coordinate = self;
+        NSMutableArray* seriesList= (NSMutableArray*)self.seriesList;
+        [seriesList addObject:series];
+//        [self.graphContext addHRangeObsever:series];
+        
+        if (series.type == DCSeriesTypeColumn) {
+            DCColumnSeriesGroup* groupSeriesList = self.columnGroupSeriesDic[series.groupName];
+            if (REMIsNilOrNull(groupSeriesList)) {
+                groupSeriesList = [[DCColumnSeriesGroup alloc]initWithGroupName:series.groupName coordinateSystem:self];
+                [self.columnGroupSeriesDic setObject:groupSeriesList forKey:series.groupName];
+            }
+            if (![groupSeriesList containsSeries:series]) {
+                [groupSeriesList addSeries:series];
+            }
+            series.seriesGroup = groupSeriesList;
+        }
     }
-    return self._yLabelLayer;
+}
+
+-(void)detachSeries:(DCXYSeries*)series {
+    if ([self.seriesList containsObject:series]) {
+        series.coordinate = nil;
+        NSMutableArray* seriesList= (NSMutableArray*)self.seriesList;
+        [seriesList removeObject:series];
+//        [self.graphContext removeHRangeObsever:series];
+        
+        if (series.type == DCSeriesTypeColumn) {
+            DCColumnSeriesGroup* groupSeriesList = self.columnGroupSeriesDic[series.groupName];
+            if (!REMIsNilOrNull(groupSeriesList) && [groupSeriesList containsSeries:series]) {
+                [groupSeriesList removeSeries:series];
+                if (groupSeriesList.count == 0) {
+                    [self.columnGroupSeriesDic removeObjectForKey:series.groupName];
+                }
+            }
+        }
+    }
 }
 
 -(void)willHRangeChanged:(DCRange *)oldRange newRange:(DCRange *)newRange {
     if ([DCRange isRange:oldRange equalTo:newRange]) return;
     
     if (self.graphContext) {
-        [self recalculatorYMaxInRange:newRange];
+        if (REMIsNilOrNull(self.latestValueRange) ||
+            ceil(self.latestValueRange.location) != ceil(newRange.location) ||
+            ceil(self.latestValueRange.end) != ceil(newRange.end)) {
+            [self recalculatorYMaxInRange:newRange];
+        }
     }
 }
 
 -(void)recalculatorYMaxInRange:(DCRange*)range {
+    self.latestValueRange = [[DCRange alloc]initWithLocation:range.location length:range.length];
+    
     // 计算可视区域内的Y的最大值currentYRange
     double currentYMax = INT32_MIN;
     double currentYMin = INT32_MAX;
-    if (self.graphContext.stacked) {
-        int start = floor(range.location);
-        int end = ceil(range.end);
-        start = MAX(0, start);
-        
+    
+    
+    int start = floor(range.location);
+    int end = ceil(range.end);
+    start = start < 0 ? 0 : start;
+    
+    // Column序列
+    for (DCColumnSeriesGroup* groupSeriesList in self.columnGroupSeriesDic.allValues) {
         for (int i = start; i <= end; i++) {
             double yValAtIndex = 0;
-            for (DCXYSeries* s in self.seriesList) {
+            for (DCXYSeries* s in groupSeriesList.allSeries) {
                 if (s.hidden) continue;
                 if (i >= s.datas.count) break;
                 DCDataPoint* p = s.datas[i];
@@ -93,27 +135,67 @@
                 currentYMin = yValAtIndex;
             }
         }
-    } else {
-        for (DCXYSeries* s in self.seriesList) {
-            if (s.hidden) continue;
-            NSNumber* yMaxObj = nil;
-            if (!REMIsNilOrNull(s.visableYMax) && REMIsNilOrNull(s.visableYMaxThreshold)) {
-                yMaxObj = s.visableYMax;
-            } else if (REMIsNilOrNull(s.visableYMax) && !REMIsNilOrNull(s.visableYMaxThreshold)) {
-                yMaxObj = s.visableYMaxThreshold;
-            } else if (!REMIsNilOrNull(s.visableYMax) && !REMIsNilOrNull(s.visableYMaxThreshold)) {
-                yMaxObj = [s.visableYMaxThreshold isLessThan:s.visableYMax] ? s.visableYMax : s.visableYMaxThreshold;
+    }
+    
+    
+    // Line序列
+    for (DCXYSeries* series in self.seriesList) {
+        if (series.type != DCSeriesTypeLine || start >= series.datas.count) continue;
+        int seriesEnd = (end >= series.datas.count ? (series.datas.count - 1) : end);
+        if(!REMIsNilOrNull(series.visableYMaxThreshold) && currentYMax < series.visableYMaxThreshold.doubleValue) {
+            currentYMax = series.visableYMaxThreshold.doubleValue;
+        }
+        // 从RangeStart向前再搜索一个非空点
+        for (int j = start-1; j >= 0; j--) {
+            DCDataPoint* point = series.datas[j];
+            if (point.pointType == DCDataPointTypeEmpty) {
+                continue;
+            } else if (point.pointType == DCDataPointTypeBreak) {
+                break;
             } else {
-                yMaxObj = nil;
+                double pointValue = point.value.doubleValue;
+                if (pointValue > currentYMax) {
+                    currentYMax = pointValue;
+                }
+                if (pointValue < currentYMin) {
+                    currentYMin = pointValue;
+                }
+                break;
             }
-            if (!REMIsNilOrNull(yMaxObj) && yMaxObj.doubleValue > currentYMax) currentYMax = yMaxObj.doubleValue;
-            
-            if (!REMIsNilOrNull(s.visableYMin)) {
-                double yMin = s.visableYMin.doubleValue;
-                if (yMin < currentYMin) currentYMin = yMin;
+        }
+        // 搜索图形的主要部分
+        for (int j = start; j <= seriesEnd; j++) {
+            DCDataPoint* point = series.datas[j];
+            if (point.pointType == DCDataPointTypeNormal) {
+                double pointValue = point.value.doubleValue;
+                if (pointValue > currentYMax) {
+                    currentYMax = pointValue;
+                }
+                if (pointValue < currentYMin) {
+                    currentYMin = pointValue;
+                }
+            }
+        }
+        // 从RangeEnd向前后搜索一个非空点
+        for (int j = seriesEnd+1; j < series.datas.count; j++) {
+            DCDataPoint* point = series.datas[j];
+            if (point.pointType == DCDataPointTypeEmpty) {
+                continue;
+            } else if (point.pointType == DCDataPointTypeBreak) {
+                break;
+            } else {
+                double pointValue = point.value.doubleValue;
+                if (pointValue > currentYMax) {
+                    currentYMax = pointValue;
+                }
+                if (pointValue < currentYMin) {
+                    currentYMin = pointValue;
+                }
+                break;
             }
         }
     }
+    
     if (currentYMax == INT32_MIN) currentYMax = 0;
     if (currentYMin == INT32_MAX) currentYMin = 0;
     
@@ -126,6 +208,7 @@
         self.yInterval = calResult.yInterval;
     }
 }
+
 -(void)setYInterval:(double)yInterval {
     if (_yInterval == yInterval) return;
     double oldInterval = self.yInterval;
@@ -144,7 +227,7 @@
 -(void)addYIntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer {
     if (observer == nil) return;
     if (self.yIntervalObservers == nil) self.yIntervalObservers = [[NSMutableArray alloc]init];
-    [self.yIntervalObservers addObject:observer];
+    if (![self.yIntervalObservers containsObject:observer]) [self.yIntervalObservers addObject:observer];
 }
 -(void)removeYIntervalObsever:(id<DCContextYIntervalObserverProtocal>)observer {
     if (self.yIntervalObservers == nil || self.yIntervalObservers.count==0) return;
@@ -154,6 +237,9 @@
             break;
         }
     }
+}
+-(void)clearYIntervalObsevers {
+    [self.yIntervalObservers removeAllObjects];
 }
 
 /***
