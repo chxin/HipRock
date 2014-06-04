@@ -12,7 +12,7 @@
 #import "DCXYChartBackgroundBand.h"
 #import "DCTrendAnimationManager.h"
 #import "REMWidgetStepCalculationModel.h"
-#import "DTrendSeriesStatus.h"
+#import "DCSeriesStatus.h"
 
 @interface DCTrendWrapper()
 @property (nonatomic, weak) DCContext* graphContext;
