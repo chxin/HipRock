@@ -24,4 +24,31 @@
 //    }
 //    return self;
 //}
+-(void)applyToXYSeries:(DCXYSeries*)series {
+    series.hidden = self.hidden;
+    switch (self.seriesType) {
+        case DCSeriesTypeStatusLine:
+            series.type = DCSeriesTypeLine;
+            break;
+        case DCSeriesTypeStatusColumn:
+            series.type = DCSeriesTypeColumn;
+            [series degroup];
+            break;
+        case DCSeriesTypeStatusStackedColumn:
+            series.type = DCSeriesTypeColumn;
+            [series groupSeries:series.target.uomName];
+            break;
+        default:
+            break;
+    }
+    if (!REMIsNilOrNull(self.forcedColor)) {
+        series.color = self.forcedColor;
+    }
+}
+-(void)applyToPieSlice:(DCPieDataPoint*)pieSlice {
+    pieSlice.hidden = self.hidden;
+    if (!REMIsNilOrNull(self.forcedColor)) {
+        pieSlice.color = self.forcedColor;
+    }
+}
 @end

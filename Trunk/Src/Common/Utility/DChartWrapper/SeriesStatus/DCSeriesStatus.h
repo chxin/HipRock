@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "REMEnergyTargetModel.h"
+#import "DCXYSeries.h"
 
 typedef enum _DCSeriesTypeStatus {
     DCSeriesTypeStatusLine = 1,
@@ -20,7 +21,10 @@ typedef enum _DCSeriesTypeStatus {
 @property (nonatomic,assign) BOOL hidden;
 @property (nonatomic,assign) DCSeriesTypeStatus seriesType;
 @property (nonatomic, strong) NSString* seriesKey;
-
+@property (nonatomic, strong) UIColor* forcedColor;
+@property (nonatomic, strong) NSArray* avilableTypes;
+-(void)applyToXYSeries:(DCXYSeries*)series;
+-(void)applyToPieSlice:(DCPieDataPoint*)pieSlice;
 //@property (nonatomic,strong,readonly) NSNumber* targetId;
 //@property (nonatomic,assign,readonly) REMEnergyTargetType type;
 //@property (nonatomic,assign,readonly) long commodityId;

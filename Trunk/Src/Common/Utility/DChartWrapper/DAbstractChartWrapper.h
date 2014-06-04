@@ -14,6 +14,7 @@
 #import "DWrapperConfig.h"
 #import "DCChartWrapperDelegate.h"
 #import "DCSeriesStatus.h"
+#import "REMSeriesKeyFormattor.h"
 
 @interface DAbstractChartWrapper : NSObject
 

@@ -79,6 +79,9 @@
     view.graphContext.xLabelHorizentalOffset = 0.5;
 //    view.graphContext.pointAlignToTick = NO;
 //    view.graphContext.xLabelAlignToTick = NO;
+    for (DCXYSeries* s in self.view.seriesList) {
+        s.visableYMaxThreshold = @(100);
+    }
 }
 
 -(void)didYIntervalChange:(double)yInterval forAxis:(DCAxis *)yAxis range:(DCRange*)range {
@@ -92,20 +95,29 @@
     }
 }
 
--(void)customizeSeries:(DCXYSeries *)series seriesIndex:(int)index chartStyle:(DCChartStyle *)style {
-    [super customizeSeries:series seriesIndex:index chartStyle:style];
+-(DCLineSymbolType)getSymbolTypeByIndex:(NSUInteger)index {
+    return DCLineSymbolTypeRound;
+}
+
+-(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries *)series seriesIndex:(NSUInteger)index {
+    DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
+    state.seriesKey = series.seriesKey;
+    state.seriesType = DCSeriesTypeStatusColumn;
+    state.avilableTypes = @[@(state.seriesType)];
+    state.hidden = NO;
     REMEnergyTargetModel* target = series.target;
+    UIColor* sColor = nil;
     if([target.code hasSuffix:kTagCodeSuffixHoneywell]){
-        series.color = [UIColor colorWithRed:97.0/255.0 green:184.0/255.0 blue:2.0/255.0 alpha:1];
+        sColor = [UIColor colorWithRed:97.0/255.0 green:184.0/255.0 blue:2.0/255.0 alpha:1];
     }
     else if([target.code hasSuffix:kTagCodeSuffixMayAir]){
-        series.color = [UIColor colorWithRed:0.0/255.0 green:163.0/255.0 blue:179.0/255.0 alpha:1];
+        sColor = [UIColor colorWithRed:0.0/255.0 green:163.0/255.0 blue:179.0/255.0 alpha:1];
     }
     else if([target.code hasSuffix:kTagCodeSuffixOutdoor]){
-        series.color = [UIColor colorWithRed:106.0/255.0 green:99.0/255.0 blue:74.0/255.0 alpha:1];
+        sColor = [UIColor colorWithRed:106.0/255.0 green:99.0/255.0 blue:74.0/255.0 alpha:1];
     }
-    series.visableYMaxThreshold = @(100);
-    series.symbolType = DCLineSymbolTypeRound;
+    state.forcedColor = sColor;
+    return state;
 }
 
 -(void)setStandardsBands:(NSArray *)standardsBands {

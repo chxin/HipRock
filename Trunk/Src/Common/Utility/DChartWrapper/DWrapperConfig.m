@@ -25,6 +25,7 @@
         _rankingRangeCode=contentSyntax.rankingRangeCode;
         _relativeDateType = contentSyntax.relativeDateType;
         _storeType = contentSyntax.dataStoreType;
+        _timeRanges = [contentSyntax.timeRanges copy];
     }
     return self;
 }

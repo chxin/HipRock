@@ -11,9 +11,9 @@
 
 @implementation REMSeriesKeyFormattor
 
-+(NSString *)seriesKeyWithEnergyTarget:(REMEnergyTargetModel *)target energyData:(REMEnergyViewData *)energyData andWidgetContentSyntax:(REMWidgetContentSyntax *)syntax
++(NSString *)seriesKeyWithEnergyTarget:(REMEnergyTargetModel *)target energyData:(REMEnergyViewData *)energyData andWidgetContentSyntax:(DWrapperConfig *)syntax
 {
-    REMDataStoreType storeType = syntax.dataStoreType;
+    REMDataStoreType storeType = syntax.storeType;
     
     NSString *targetType=@"%", *targetId=@"%", *sourceType=@"%", *seriesType=@"%", *timeType=@"%", *offset=@"%";
     NSString *targetPath = [REMSeriesKeyFormattor getTargetPath:target];

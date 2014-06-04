@@ -10,9 +10,10 @@
 #import "REMDataStore.h"
 #import "REMEnergyViewData.h"
 #import "REMWidgetContentSyntax.h"
+#import "DWrapperConfig.h"
 
 @interface REMSeriesKeyFormattor : NSObject
 
-+(NSString *)seriesKeyWithEnergyTarget:(REMEnergyTargetModel *)target energyData:(REMEnergyViewData *)energyData andWidgetContentSyntax:(REMWidgetContentSyntax *)syntax;
++(NSString *)seriesKeyWithEnergyTarget:(REMEnergyTargetModel *)target energyData:(REMEnergyViewData *)energyData andWidgetContentSyntax:(DWrapperConfig *)syntax;
 
 @end
