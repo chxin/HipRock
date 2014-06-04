@@ -1,286 +1,284 @@
-/* 
-  Localizable.strings
-  Blues
-
-  Created by 张 锋 on 9/11/13.
-
-*/
+/*
+ Localizable.strings
+ Blues
+ 
+ Created by 张 锋 on 9/11/13.
+ 
+ */
 //Common, prefix: Common_
-"Common_ServerError" = "抱歉!服务器错误，无法获取最新的能源数据。请稍候再试。";
-"Common_Building"="楼宇";
-"Common_Last7Day"="之前七天";
-"Common_Today"="今天";
-"Common_Yesterday"="昨天";
-"Common_ThisWeek"="本周";
-"Common_LastWeek"="上周";
-"Common_ThisMonth"="本月";
-"Common_LastMonth"="上月";
-"Common_ThisYear"="今年";
-"Common_LastYear"="去年";
-"Common_Hour"="小时";
-"Common_Day"="天";
-"Common_Week"="周";
-"Common_Month"="月";
-"Common_Year"="年";
-"Common_CustomTime"="自定义";
-"Common_Cancel"="取消";
-"Common_Giveup"="放弃";
-"Common_OK"="好";
-"Common_Quit"="退出";
-"Common_WholeYear"="全年"; //1月，2月...12月，全年
-"Common_YearMonthFormat"="yyyy年MM月";
-"Common_WholeYearFormat"="yyyy年全年";
-"Common_UpdateData"="更新数据";
-"Common_Done"="完成了";
+"Common_ServerError" = "Sorry! Server error! No energy data is available. Please try again later.";
+"Common_Building"="Building";
+"Common_Last7Day"="Previous 7 days";
+"Common_Today"="Today";
+"Common_Yesterday"="Yesterday";
+"Common_ThisWeek"="This week";
+"Common_LastWeek"="Last week";
+"Common_ThisMonth"="This month";
+"Common_LastMonth"="Last month";
+"Common_ThisYear"="This year";
+"Common_LastYear"="Last year";
+"Common_Hour"="Hour";
+"Common_Day"="Day";
+"Common_Week"="Week";
+"Common_Month"="Month";
+"Common_Year"="Year";
+"Common_CustomTime"="User-defined";
+"Common_Cancel"="Cancel";
+"Common_Giveup"="Undo";
+"Common_OK"="OK";
+"Common_Quit"="Exit";
+"Common_WholeYear"="Full-year"; //1月，2月...12月，全年
+"Common_YearMonthFormat"="MM (Month), yyyy (Year)";
+"Common_WholeYearFormat"="Throughout yyyy (Year)";
+"Common_UpdateData"="Update data";
+"Common_Done"="Done";
 
-"Common_NetNoConnection"="无网络连接，请稍候再试。";
-"Common_NetConnectionFailed"="网络故障，请稍候再试。";
-"Common_NetServerError"="服务器故障，请稍候再试。";
-"Common_NetNoConnectionLoadLocal"="无网络连接,应用将读取本地数据。";
-"Common_ServerTimeout"="数据获取失败，网络故障。";
-"Common_ServerError"="数据获取失败，服务器故障。";
-"Common_ServerTimeoutSimple"="网络故障。";
-"Common_ServerErrorSimple"="服务器故障。";
+"Common_NetNoConnection"="No network connection! Please try again later.";
+"Common_NetConnectionFailed"="Network failure! Please try again later.";
+"Common_NetServerError"="Server failure! Please try again later.";
+"Common_NetNoConnectionLoadLocal"="No network connection! Application will read local data.";
+"Common_ServerTimeout"="Data acquisition failed! Network failure!";
+"Common_ServerError"="Data acquisition failed! Server failure!";
+"Common_ServerTimeoutSimple"="Network failure!";
+"Common_ServerErrorSimple"="Server failure!";
 
-"Common_ApplicationDidBecomeUnsupported"="目前的版本太旧，已无法正常使用。请前往App Store更新。";
-"Common_ApplicationNewVersionAvaliable"="有新版本，请前往AppStore更新。";
+"Common_ApplicationDidBecomeUnsupported"="Current version is not supported any longer! Please go to AppStore for update!";
+"Common_ApplicationNewVersionAvaliable"="New version detected! Please go to AppStore for update!";
 
 //Admin,prefix: Admin_
-"Admin_UserTitleEEConsultant"="能源工程顾问";
-"Admin_UserTitleTechnician"="技术人员";
-"Admin_UserTitleCustomerAdmin"="客户管理员";
-"Admin_UserTitlePlatformAdmin"="平台管理员";
-"Admin_UserTitleEnergyManager"="能源经理";
-"Admin_UserTitleEnergyEngineer"="能源工程师";
-"Admin_UserTitleDepartmentManager"="部门经理";
-"Admin_UserTitleCEO"="管理层";
-"Admin_UserTitleBusinessPersonnel"="业务人员";
-"Admin_UserTitleSaleman"="销售人员";
-"Admin_UserTitleServiceProviderAdmin"="服务商管理员";
+"Admin_UserTitleEEConsultant"="Energy engineering consultant";
+"Admin_UserTitleTechnician"="Technician";
+"Admin_UserTitleCustomerAdmin"="Client administrator";
+"Admin_UserTitlePlatformAdmin"="Platform administrator";
+"Admin_UserTitleEnergyManager"="Energy manager";
+"Admin_UserTitleEnergyEngineer"="Energy engineer";
+"Admin_UserTitleDepartmentManager"="Department manager";
+"Admin_UserTitleCEO"="Management";
+"Admin_UserTitleBusinessPersonnel"="Business personnel";
+"Admin_UserTitleSaleman"="Sales personnel";
+"Admin_UserTitleServiceProviderAdmin"="Service provider administrator";
 
 //Splash, prefix: Splash_
-"Splash_Title" = "施耐德电气“云能效”管理平台";
-"Splash_Copyright" = "© 2012-2014 施耐德电气（中国）有限公司版权所有";
+"Splash_Title" = "Schneider Electric EnergyMost Management Platform";
+"Splash_Copyright" = "© 2013-2014 - Schneider Electric (China) Co., Ltd. -  All rights reserved.";
 
 //Login, prefix: Login_
-"Login_SkipToLoginButtonText" = "登录";
-"Login_SkipToTrialButtonText" = "产品试用";
+"Login_SkipToLoginButtonText" = "Login";
+"Login_SkipToTrialButtonText" = "Product trial";
 
-"Login_LoginCardTitle" = "登录";
-"Login_TrialCardTitle" = "产品试用";
+"Login_LoginCardTitle" = "Login";
+"Login_TrialCardTitle" = "Product trial";
 
-"Login_CustomerSelectionTitle" = "请选择客户";
+"Login_CustomerSelectionTitle" = "Please select a client";
 
 
 //trial card
-"Login_TrialWelcomeText" = "欢迎试用施耐德电气“云能效”管理平台";
-"Login_LoginButtonText" = "登录";
-"Login_TrialButtonText" = "产品试用";
+"Login_TrialWelcomeText" = "Welcome to Schneider Electric EnergyMost Management Platform";
+"Login_LoginButtonText" = "Login";
+"Login_TrialButtonText" = "Product trial";
 
-"Login_CreatingDemoUserText" = "账号创建中，请稍候..";
+"Login_CreatingDemoUserText" = "Account is being created! Please wait...";
 
-"Login_TrialNoNetwork" = "产品试用申请失败。无网络连接，请连接后再试。";
-"Login_TrialNetworkFailed" = "产品试用申请失败。网络故障，请稍后再试。";
-"Login_TrialServerError" = "产品试用申请失败。服务器故障，请稍后再试。";
-"Login_TrialNoCustomer" = "产品试用申请失败，您的用户未关联任何客户";
+"Login_TrialNoNetwork" = "Application for product trial failed! No network connection! Please try again after connection.";
+"Login_TrialNetworkFailed" = "Application for product trial failed! Network failure! Please try again later.";
+"Login_TrialServerError" = "Application for product trial failed! Server failure! Please try again later.";
+"Login_TrialNoCustomer" = "Application for product trial failed! There's no correlation found between your account and any clients";
 
 //login card
-"Login_LoginPrompt" = "正在登录施耐德电气“云能效”管理平台";
-"Login_LoginUsernamePlaceHolder" = "用户名";
-"Login_LoginPasswordPlaceHolder" = "密码";
-"Login_LoginButtonNormalText"="登录";
-"Login_LoginButtonWorkingText"="正在登录...";
+"Login_LoginPrompt" = "Logging into Schneider Electric EnergyMost Management Platform";
+"Login_LoginUsernamePlaceHolder" = "Username";
+"Login_LoginPasswordPlaceHolder" = "Password";
+"Login_LoginButtonNormalText"="Login";
+"Login_LoginButtonWorkingText"="Logging...";
 
 
-"Login_InputNotComplete"="请输入完整的用户名和密码";
-"Login_UserNotExist" = "该用户名不存在";
-"Login_WrongPassword" = "登录密码错误";
-"Login_AccountLocked" = "登录失败，您的用户名暂时无法使用";
+"Login_InputNotComplete"="Please enter complete username and password";
+"Login_UserNotExist" = "The username does not exist";
+"Login_WrongPassword" = "Wrong password";
+"Login_AccountLocked" = "Login failed! Your username is temporarily disabled!";
 
-"Login_NoNetwork" = "无网络连接，产品登录失败。请连接后再试。";
-"Login_NetworkFailed" = "网络故障，产品登录失败，请稍后再试。";
-"Login_ServerError" = "产品登录失败。服务器故障，请稍后再试。";
-"Login_NoCustomer" = "产品登录失败，您的用户未关联任何客户";
+"Login_NoNetwork" = "No network connection! Product login failed! Please try again after connection.";
+"Login_NetworkFailed" = "Network failure! Product login failed! Please try again later.";
+"Login_ServerError" = "Product login failed! Server failure! Please try again later.";
+"Login_NoCustomer" = "Product login failed! There's no correlation found between your account and any clients";
 
 
 //Setting, prefix: Setting_
-"Setting_LoadingData"="正在更新客户的楼宇及能耗信息，请稍候...";
-"Setting_CurrentCustomerDeleted"="当前客户已被解除关联，请重新选择客户。";
-"Setting_SelectedCustomerDeleted"="该客户已被解除关联，请重新选择客户。";
-"Setting_UserDeleted"="您的用户已被删除，应用将退出登录状态";
-"Setting_NoAttachedCustomer"="您的用户未关联任何客户，应用将退出登录状态";
-"Setting_DetailName"="名称";
-"Setting_DetailCode"="编码";
-"Setting_DetailAddress"="地址";
-"Setting_DetailAdmin"="负责人";
-"Setting_DetailAdminTelephone"="负责人电话";
-"Setting_DetailAdminEmail"="负责人电子邮箱";
-"Setting_DetailOperationDate"="运营时间";
-"Setting_DetailCustomerAdmin"="客户管理员";
-"Setting_DetailCustomerAdminTwoName"="%@ 和 %@"; //张三和李四
-"Setting_DetailCustomerAdminThreeName"="%@ 和 %@ 等%d人"; //张三和李四等5人
-"Setting_About"="关于云能效";
-"Setting_BindWeibo"="绑定新浪微博";
-"Setting_UserName"="显示名称";
-"Setting_EMOPID"="用户名";
-"Setting_CurrentCustomer"="当前客户";
-"Setting_CustomerInfo"="客户信息";
-"Setting_Logout"="退出登录";
-"Setting_UpdateAll"="更新全部数据";
-"Setting_AreYouSureLogout"="您要退出当前账号登录吗?";
-"Setting_AboutProductName"="施耐德电气“云能效”管理平台";
-"Setting_AboutVersion"="iPad版V%@.%@%@"; //iPad版V1.0.0 b100(p|t|l|d)
-"Setting_AboutCopyrightChinese"="施耐德电气 版权所有";
-"Setting_AboutCopyrightEnglish%d"="Copyright©%d Schneider Electric All Right Reserved";
-"Setting_UpdateFailed"="数据更新失败。";
-"Setting_SwitchCustomerFailed"="客户选择失败。";
+"Setting_LoadingData"="The information on the client's building and energy consumption is being updated! Please wait…";
+"Setting_CurrentCustomerDeleted"="A correlation with the current client has been disabled. Please re-select a client.";
+"Setting_SelectedCustomerDeleted"="A correlation with the client has been disabled. Please re-select a client.";
+"Setting_UserDeleted"="Your account has been deleted. Application will log out!";
+"Setting_NoAttachedCustomer"="There's no correlation found between your account and any clients! Application will log out!";
+"Setting_DetailName"="Name";
+"Setting_DetailCode"="Code";
+"Setting_DetailAddress"="Address";
+"Setting_DetailAdmin"="Responsible person";
+"Setting_DetailAdminTelephone"="Tel.";
+"Setting_DetailAdminEmail"="Email";
+"Setting_DetailOperationDate"="Operation time";
+"Setting_DetailCustomerAdmin"="Clients administrator";
+"Setting_DetailCustomerAdminTwoName"="%@ and %@"; //张三和李四
+"Setting_DetailCustomerAdminThreeName"="%d persons including %@ and %@"; //张三和李四等5人
+"Setting_About"="About EnergyMost";
+"Setting_BindWeibo"="Binding to Sina weibo";
+"Setting_UserName"="Display name";
+"Setting_EMOPID"="Username";
+"Setting_CurrentCustomer"="Current client";
+"Setting_CustomerInfo"="Client information";
+"Setting_Logout"="Log out";
+"Setting_UpdateAll"="Update all data";
+"Setting_AreYouSureLogout"="Log out the current account?";
+"Setting_AboutProductName"="Schneider Electric EnergyMost Management Platform";
+"Setting_AboutVersion"="iPad version V%@ b%@(%@)"; //iPad版V1.0.0 b100(p|t|l|d)
+"Setting_AboutCopyrightChinese"="© Schneider Electric  - All rights reserved";
+"Setting_AboutCopyrightEnglish%d"="Copyright©%d Schneider Electric - All rights reserved.";
+"Setting_UpdateFailed"="Data updating failed.";
+"Setting_SwitchCustomerFailed"="Client selection failed.";
 
-"Setting_NoNetwork"="无网络连接，应用将读取本地数据。";
-"Setting_NetworkFailed"="客户数据获取失败。网络故障，请连接后再试。";
-"Setting_ServerError"="客户数据获取失败。服务器故障，请稍后再试。";
+"Setting_NoNetwork"="No network connection! Application will read local data.";
+"Setting_NetworkFailed"="Client data acquisition failed! Network failure! Please try again after connection.";
+"Setting_ServerError"="Client data acquisition failed! Server failure! Please try again later.";
 
-"Setting_UpdateNoNetwork"="数据更新失败。无网络连接，请稍后再试。";
-"Setting_UpdateNetworkFailed"="数据更新失败。网络故障，请稍后再试。";
-"Setting_UpdateServerError"="数据更新失败。服务器故障，请稍后再试。";
+"Setting_UpdateNoNetwork"="Data updating failed! No network connection! Please try again later.";
+"Setting_UpdateNetworkFailed"="Data updating failed! Network failure! Please try again later.";
+"Setting_UpdateServerError"="Data updating failed! Server failure! Please try again later.";
 
-"Setting_SwitchCustomerNoNetwork"="客户选择失败。无网络连接，请稍后再试。";
-"Setting_SwitchCustomerNetworkFailed"="客户选择失败。网络故障，请稍后再试。";
-"Setting_SwitchCustomerServerError"="客户选择失败。服务器故障，请稍后再试。";
+"Setting_SwitchCustomerNoNetwork"="Client selection failed! No network connection! Please try again later.";
+"Setting_SwitchCustomerNetworkFailed"="Client selection failed! Network failure! Please try again later.";
+"Setting_SwitchCustomerServerError"="Client selection failed! Server failure! Please try again later.";
 
 //Map, prefix: Map_
-"Map_MarkerBubbleSubtitleFormat"="本月用电量：%@%@";
-"Map_NoVisiableBuilding" = "￼当前客户无任何可显示的楼宇。";
+"Map_MarkerBubbleSubtitleFormat"="Electricity consumption for this month: %@%@";
+"Map_NoVisiableBuilding" = "￼ No building that can be displayed is available for the current client.";
 
 
 //Gallery, prefix: Gallery_
 
 
 //Building, prefix: Building_
-"BuildingChart_NoData"="暂无数据，请持续关注能耗变化";
-"BuildingChart_DataError"="数据错误，请联系管理员。";
-"Building_LabelNoData"="无数据";
-"Building_LargeLabelNoData"="暂无本月数据，请持续关注能耗变化";
-"Building_PullUpMoreInfo"="上拉查看更多能耗信息";
-"Building_ReleaseSwitchView"="松开以显示";
-"Building_Target"="目标值";
-"Building_ThisMonthEnergyUsage"="本月用%@总量"; //本月用电总量，本月用水总量等
-"Building_CarbonUsage"="二氧化碳当量";
-"Building_CorporationRanking"="集团排名";
-"Building_EnergyUsageByAreaByMonth"="单位面积逐月用%@"; //单位面积逐月用电，单位面积逐月用水
-"Building_EnergyUsageByCommodity"="用%@趋势图"; //用电趋势图，用水趋势图
-"Building_AirQualityIndoor"="室内PM2.5";
-"Building_AirQualityOutdoor"="室外PM2.5";
-"Building_AirQualityHoneywell"="室内新风PM2.5(霍尼)";
-"Building_AirQualityMayair"="室内新风PM2.5(美埃)";
-"Building_AirQualityDailyChart"="室内外PM2.5逐日含量";
-"Building_AirQualityAmericanStandard"="%d %@(PM2.5美国标准)";
-"Building_AirQualityChinaStandard"="%d %@(PM2.5中国标准)";
-"Building_ShareWeibo"="新浪微博";
-"Building_ShareEmail"="邮件";
+"BuildingChart_NoData"="No data is available at this moment! Please continue to focus on energy consumption change.";
+"BuildingChart_DataError"="Data error! Please contact the administrator.";
+"Building_LabelNoData"="No data";
+"Building_LargeLabelNoData"="Data for this month is unavailable now. Please continue to focus on energy consumption change.";
+"Building_PullUpMoreInfo"="Pull up to view more energy consumption information";
+"Building_ReleaseSwitchView"="Release to display";
+"Building_Target"="Target value";
+"Building_ThisMonthEnergyUsage"="Total consumption of %@ for this month"; //本月用电总量，本月用水总量等
+"Building_CarbonUsage"="Carbon dioxide equivalence";
+"Building_CorporationRanking"="Group ranking";
+"Building_EnergyUsageByAreaByMonth"="Monthly consumption of %@ per unit area"; //单位面积逐月用电，单位面积逐月用水
+"Building_EnergyUsageByCommodity"="%@ trend chart"; //用电趋势图，用水趋势图
+"Building_AirQualityIndoor"="PM2.5 indoors";
+"Building_AirQualityOutdoor"="PM2.5 outdoors";
+"Building_AirQualityHoneywell"="PM2.5 for indoor fresh air (Honeywell)";
+"Building_AirQualityMayair"="PM2.5 for indoor fresh air (MayAir )";
+"Building_AirQualityDailyChart"="PM2.5 daily content indoors and outdoors";
+"Building_AirQualityAmericanStandard"="%d %@ (PM2.5 US standard)";
+"Building_AirQualityChinaStandard"="%d %@ (PM2.5 Chinese standard)";
+"Building_ShareWeibo"="Sina weibo";
+"Building_ShareEmail"="Mail";
 
-"Building_WidgetRelationTitle"="选取要替换的图表";
-"Building_WidgetRelationCommodityTitle"="默认图表 - %@";
-"Building_WidgetRelationInfo"="所选图表将会被替换为当前图表，并出现在所属建筑封面中，以便您快速查看该图表。";
-"Building_WidgetRelationWidgetDeleted"="添加失败。小组件“%@”已被删除，请更新数据"; //添加失败。小组件“最近七天能效查看”已被删除，请更新数据
-"Building_WidgetRelationPositionDeleted"="添加失败。添加位置不存在，请更新数据";
+"Building_WidgetRelationTitle"="Select a chart to be replaced";
+"Building_WidgetRelationCommodityTitle"="Default chart - %@";
+"Building_WidgetRelationInfo"="The selected chart will be replaced with the current chart that will appear in the cover of the relevant buildings for your quick review.";
+"Building_WidgetRelationWidgetDeleted"="Addition failed! Widget “%@” has been deleted. Please update the data!"; //添加失败。小组件“最近七天能效查看”已被删除，请更新数据
+"Building_WidgetRelationPositionDeleted"="Addition failed! Addition position does not exist. Please update the data!";
 
 
 //Dashboard, prefix: Dashboard_
-"Dashboard_PullDownShowGeneral"="下拉返回概览能耗信息";
-"Dashboard_TimeRange"="%@ 到 %@";
-"Dashboard_Empty"="未配置任何仪表盘";
-"Dashboard_ShareUserName"="分享者:%@"; //分享者：张三
+"Dashboard_PullDownShowGeneral"="Pull down to return to review energy consumption information";
+"Dashboard_TimeRange"="%@ to %@";
+"Dashboard_Empty"="No dashboard is configured";
+"Dashboard_ShareUserName"="Copied by: %@"; //分享者：张三
 
 //Widget, prefix:Widget_
-"Widget_TimePickerTime"="时间";
-"Widget_TimePickerStart"="起始时间";
-"Widget_TimePickerEnd"="终止时间";
-"Widget_TimePickerError"="开始日期必须早于结束日期。";
-"Widget_StepErrorHour"="按小时";
-"Widget_StepErrorDay"="按天";
-"Widget_StepErrorWeek"="按周";
-"Widget_StepErrorMonth"="按月";
-"Widget_StepErrorYear"="按年";
-"Widget_StepError"="所选数据点不支持%@的步长显示，换个步长试试。"; //所选数据点不支持按小时，按天，按周的步长显示，换个步长试试。
-"Widget_ShareTitle"="分享来源:%@ %@ %@ 电话:%@"; //分享来源：张三 工程师 2012-10-10 电话：13800138000
-"Widget_CalendarTimeError"="看不到日历背景色？换个时间试试";
-"Widget_CalendarHC"="冷暖季";
-"Widget_CalendarHoliday"="非工作时间";
-"Widget_CalendarStepError"="当前步长不支持显示%@背景色"; //当前步长不支持显示冷暖季背景色，当前步长不支持显示非工作时间背景色
-"Widget_CalendarCostElectricityStepError"="峰谷平电价不支持按小时展示";
+"Widget_TimePickerTime"="Time";
+"Widget_TimePickerStart"="Starting time";
+"Widget_TimePickerEnd"="Ending time";
+"Widget_TimePickerError"="Starting date should be earlier than ending date.";
+"Widget_StepErrorHour"="By hour";
+"Widget_StepErrorDay"="By day";
+"Widget_StepErrorWeek"="By week";
+"Widget_StepErrorMonth"="By month";
+"Widget_StepErrorYear"="By year";
+"Widget_StepError"="Selected data point does not support interval display of %@. Please change to another interval and try."; //所选数据点不支持按小时，按天，按周的步长显示，换个步长试试。
+"Widget_ShareTitle"="Copying source: %@ %@ %@  Tel: %@"; //分享来源：张三 工程师 2012-10-10 电话：13800138000
+"Widget_CalendarTimeError"="No calendar background color is seen? Please change to another time and try.";
+"Widget_CalendarHC"="Cooling and heating seasons";
+"Widget_CalendarHoliday"="Nonworking time";
+"Widget_CalendarStepError"="The current interval does not support display of %@ background color."; //当前步长不支持显示冷暖季背景色，当前步长不支持显示非工作时间背景色
+"Widget_CalendarCostElectricityStepError"="Peak, valley and normal electricity prices cannot be displayed by hour.";
 
 
 
 //Weibo, prefix: Weibo_
-"Weibo_WindowTitle"="新浪微博";
-"Weibo_CancelButtonText"="取消";
-"Weibo_SendButtonText"="发布";
-"Weibo_IsSending"="新浪微博发送中…";
-"Weibo_SentSuccess"="新浪微博发送成功";
-"Weibo_SentFail"="新浪微博发送失败";
-"Weibo_AccountBindingFail"="微博账户绑定失败: %@";
-"Weibo_AccountBindingSuccess"="微博账户绑定成功";
-"Weibo_AccountUnbindingConfirm"="解除绑定新浪微博？";
-"Weibo_AccountUnbindingYESButton"="解除绑定";
-"Weibo_AccountUnbindingNOButton"="放弃";
-"Weibo_ContentOfElectirc"="%@本月用#Commodity#趋势及单位平米用#Commodity#趋势，本月用#Commodity#总能耗为#Usage##UomName#，节能持续进行中。";
-"Weibo_ContentOfPM25"="今天上午10:00，%@室外#Commodity#为#OutdoorVal##OutdoorUomName#；经霍尼韦尔净化后室内新风#Commodity#为#HoneywellVal##HoneywellUomName#，经美埃净化后室内新风#Commodity#为#MayairVal##MayairUomName#。";
-"Weibo_NONetwork"="无网络连接或者网络故障，请稍后再试。";
+"Weibo_WindowTitle"="Sina weibo";
+"Weibo_CancelButtonText"="Cancel";
+"Weibo_SendButtonText"="Send";
+"Weibo_IsSending"="Sina weibo being sent...";
+"Weibo_SentSuccess"="Sina weibo sent successfully";
+"Weibo_SentFail"="Sina weibo fails to be sent";
+"Weibo_AccountBindingFail"="Binding to weibo account failed:  %@";
+"Weibo_AccountBindingSuccess"="Binding to weibo account succeeded";
+"Weibo_AccountUnbindingConfirm"="Unbind weibo account?";
+"Weibo_AccountUnbindingYESButton"="Unbind";
+"Weibo_AccountUnbindingNOButton"="Undo";
+"Weibo_ContentOfElectirc"="Tendency of #Commodity# consumption of this month %@ and tendency of #Commodity# consumption per square meter. The total energy consumption of #Commodity# is #Usage##UomName# and energy saving is in progress.";
+"Weibo_ContentOfPM25"="At 10:00 this morning, %@ outdoor #Commodity# is #OutdoorVal##OutdoorUomName#; after Honeywell purification, indoor fresh air #Commodity# is #HoneywellVal##HoneywellUomName#; and after MayAir purification, indoor fresh air #Commodity# is #MayairVal##MayairUomName#.";
+"Weibo_NONetwork"="No network connection or network failure! Please try again later.";
 
 //Mail, prefix: Mail_
-"Mail_AccountNotConfigured" = "未配置邮件账户";
-"Mail_Title" = "来自%@的施耐德电气“云能效”管理平台信息分享";
+"Mail_AccountNotConfigured" = "Mail account is not configured";
+"Mail_Title" = "Copy Schneider Electric EnergyMost Management Platform Information from %@";
 
 
 //Chart, prefix: Chart_
-"Chart_TargetValue" = "目标值";
-"Chart_BaselineValue" = "基准值";
-"Chart_TOUPeak" = "峰时";
-"Chart_TOUValley" = "谷时";
-"Chart_TOUPlain" = "平时";
-"Chart_CarbonTotal" = "总览";
-"Chart_CostTotal" = "总览";
+"Chart_TargetValue" = "Target value";
+"Chart_BaselineValue" = "Benchmark";
+"Chart_TOUPeak" = "Peak time";
+"Chart_TOUValley" = "Valley time";
+"Chart_TOUPlain" = "Normal time";
+"Chart_CarbonTotal" = "Overview";
+"Chart_CostTotal" = "Overview";
 
-"Chart_TargetCalcValue" = "%@计算值";
-"Chart_TargetOrigValue" = "%@原始值";
-"Chart_TargetTargetValue" = "%@目标值";
-"Chart_TargetBaseValue" = "%@基准值";
-"Chart_X_Axis_Format_Year" = "yyyy年";
-"Chart_X_Axis_Format_Month" = "M月";
-"Chart_X_Axis_Format_Day" = "d日";
-"Chart_X_Axis_Format_Hour" = "H点";
-"Chart_X_Axis_Format_YearMonth" = "yyyy年M月";
-"Chart_X_Axis_Format_MonthDay" = "M月d日";
-"Chart_X_Axis_Format_DayHour" = "d日H点";
+"Chart_TargetCalcValue" = "%@ calculated value";
+"Chart_TargetOrigValue" = "%@ original value";
+"Chart_TargetTargetValue" = "%@ target value";
+"Chart_TargetBaseValue" = "%@ benchmark";
+"Chart_X_Axis_Format_Year" = "yyyy (Year)";
+"Chart_X_Axis_Format_Month" = "M (Month)";
+"Chart_X_Axis_Format_Day" = "d (Day)";
+"Chart_X_Axis_Format_Hour" = "H (Hour)";
+"Chart_X_Axis_Format_YearMonth" = "M (Month), yyyy (Year)";
+"Chart_X_Axis_Format_MonthDay" = "M (Month) d (Day)";
+"Chart_X_Axis_Format_DayHour" = "d (Day) H (Hour)";
 
-"Chart_Background_Text_HSeason" = "采暖季";
-"Chart_Background_Text_CSeason" = "供冷季";
-"Chart_Background_Text_NonWorkday" = "非工作日";
+"Chart_Background_Text_HSeason" = "Heating season";
+"Chart_Background_Text_CSeason" = "Cooling season";
+"Chart_Background_Text_NonWorkday" = "Non-work day";
 
-"Chart_Labeling_EffecioncyTextFormat" = "能效标识：%@";
+"Chart_Labeling_EffecioncyTextFormat" = "Energy labeling: %@";
 "Chart_Labeling_LessOrEqualThan" = "<=";
 "Chart_Labeling_MoreThan" = ">";
-"Chart_Labeling_LowEnergyUse" = "低能耗";
-"Chart_Labeling_HighEnergyUse" = "高能耗";
+"Chart_Labeling_LowEnergyUse" = "Low energy consumption";
+"Chart_Labeling_HighEnergyUse" = "High energy consumption";
 
 
 //Energy, prefix:Energy_
-"Energy_01304" = "小组件包含的数据点未与任何层级关联，无法绘图。";
-"Energy_07009" = "没有数据权限。";
-"Energy_02601"="缺少昼夜日历的部分，无法绘图。请设置后再试。";
-"Energy_02602"="缺少工作日历的部分，无法绘图。请设置后再试。";
-"Energy_02603"="缺少总面积的部分，无法绘图。请设置后再试。";
-"Energy_02604"="缺少供冷面积的部分，无法绘图。请设置后再试。";
-"Energy_02605"="缺少采暖面积的部分，无法绘图。请设置后再试。";
-"Energy_02606"="缺少人口数量的部分，无法绘图。请设置后再试。";
-"Energy_02500" = "该数据点未与任何层级关联";
-"Energy_02501" = "缺少人口属性的部分无法绘图。请设置后再试。";
-"Energy_02502" = "缺少面积属性的部分无法绘图。请设置后再试。";
-"Energy_02503" = "缺少采暖面积属性的部分无法绘图。请设置后再试。";
-"Energy_02504" = "缺少供冷面积属性的部分无法绘图。请设置后再试。";
-"Energy_02505" = "缺少人口属性的部分无法绘图。请设置后再试。";
-"Energy_02506" = "缺少面积属性的部分无法绘图。请设置后再试。";
-"Energy_02507" = "缺少采暖面积属性的部分无法绘图。请设置后再试。";
-"Energy_02508" = "缺少供冷面积属性的部分无法绘图。请设置后再试。";
-"Energy_02013" = "该数据点已被删除，无法加载。";
-"Energy_02408" = "该节点未设置峰谷时段，无法展示。";
+"Energy_02601"="Drawing cannot be created for the part lacking of circadian calendar! Please try again after setting.";
+"Energy_02602"="Drawing cannot be created for the part lacking of working calendar! Please try again after setting.";
+"Energy_02603"="Drawing cannot be created for the part lacking of total area! Please try again after setting.";
+"Energy_02604"="Drawing cannot be created for the part lacking of cooling area! Please try again after setting.";
+"Energy_02605"="Drawing cannot be created for the part lacking of heating area! Please try again after setting.";
+"Energy_02606"="Drawing cannot be created for the part lacking of population! Please try again after setting.";
+"Energy_02500" = "The data point has no correlation with any hierarchy.";
+"Energy_02501" = "Drawing cannot be created for the part lacking of population property. Please try again after setting.";
+"Energy_02502" = "Drawing cannot be created for the part lacking of area property. Please try again after setting.";
+"Energy_02503" = "Drawing cannot be created for the part lacking of heating area property. Please try again after setting.";
+"Energy_02504" = "Drawing cannot be created for the part lacking of cooling area property. Please try again after setting.";
+"Energy_02505" = "Drawing cannot be created for the part lacking of population property. Please try again after setting.";
+"Energy_02506" = "Drawing cannot be created for the part lacking of area property. Please try again after setting.";
+"Energy_02507" = "Drawing cannot be created for the part lacking of heating area property. Please try again after setting.";
+"Energy_02508" = "Drawing cannot be created for the part lacking of cooling area property. Please try again after setting.";
+"Energy_02013" = "The data point has been deleted and thus cannot be loaded!";
+"Energy_02408" = "No peak or valley period is set for this node and thus cannot be displayed!";

@@ -97,6 +97,7 @@
 		7A13C1A717F40D83007E6AA9 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C1A617F40D83007E6AA9 /* libc++.dylib */; };
 		7A13C1A917F40D90007E6AA9 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C1A817F40D90007E6AA9 /* libicucore.dylib */; };
 		7A13C1AB17F40D99007E6AA9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C1AA17F40D99007E6AA9 /* libz.dylib */; };
+		7A1AE2CA19371AE900A8BA48 /* REMSeriesKeyFormattor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1AE2C919371AE900A8BA48 /* REMSeriesKeyFormattor.m */; };
 		7A1D14291785178800CC2922 /* REMHttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14281785178800CC2922 /* REMHttpHelper.m */; };
 		7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142B1785211000CC2922 /* REMAlertHelper.m */; };
 		7A1D6C2C18F68A0900AFB038 /* BluesPad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D6C2918F68A0900AFB038 /* BluesPad.xcdatamodeld */; };
@@ -314,6 +315,7 @@
 		7A3F66F3184C561D0079A244 /* JumpTrial-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3F66F2184C561D0079A244 /* JumpTrial-Pressed.png */; };
 		7A3F66F5184C56440079A244 /* JumpTrial-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3F66F4184C56440079A244 /* JumpTrial-Pressed@2x.png */; };
 		7A44E047182398B60080CEBE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A44E046182398B60080CEBE /* MessageUI.framework */; };
+		7A45E9FA193DAB07007C7933 /* REMTargetAssociationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A45E9F9193DAB06007C7933 /* REMTargetAssociationModel.m */; };
 		7A47F3A018482C1B007EE37B /* JumpLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39818482C1B007EE37B /* JumpLogin.png */; };
 		7A47F3A118482C1B007EE37B /* JumpLogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39918482C1B007EE37B /* JumpLogin@2x.png */; };
 		7A47F3A418482C1B007EE37B /* JumpTrial.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39C18482C1B007EE37B /* JumpTrial.png */; };
@@ -857,6 +859,8 @@
 		7A13C1A617F40D83007E6AA9 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libc++.dylib"; sourceTree = DEVELOPER_DIR; };
 		7A13C1A817F40D90007E6AA9 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libicucore.dylib; sourceTree = DEVELOPER_DIR; };
 		7A13C1AA17F40D99007E6AA9 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
+		7A1AE2C819371AE900A8BA48 /* REMSeriesKeyFormattor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSeriesKeyFormattor.h; path = Common/Utility/DChartWrapper/REMSeriesKeyFormattor.h; sourceTree = "<group>"; };
+		7A1AE2C919371AE900A8BA48 /* REMSeriesKeyFormattor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSeriesKeyFormattor.m; path = Common/Utility/DChartWrapper/REMSeriesKeyFormattor.m; sourceTree = "<group>"; };
 		7A1D14271785178800CC2922 /* REMHttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMHttpHelper.h; path = Common/Utility/REMHttpHelper.h; sourceTree = "<group>"; };
 		7A1D14281785178800CC2922 /* REMHttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMHttpHelper.m; path = Common/Utility/REMHttpHelper.m; sourceTree = "<group>"; };
 		7A1D142A1785211000CC2922 /* REMAlertHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAlertHelper.h; path = Common/Utility/REMAlertHelper.h; sourceTree = "<group>"; };
@@ -935,6 +939,8 @@
 		7A3F66F2184C561D0079A244 /* JumpTrial-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpTrial-Pressed.png"; sourceTree = "<group>"; };
 		7A3F66F4184C56440079A244 /* JumpTrial-Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpTrial-Pressed@2x.png"; sourceTree = "<group>"; };
 		7A44E046182398B60080CEBE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
+		7A45E9F8193DAB06007C7933 /* REMTargetAssociationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMTargetAssociationModel.h; sourceTree = "<group>"; };
+		7A45E9F9193DAB06007C7933 /* REMTargetAssociationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTargetAssociationModel.m; sourceTree = "<group>"; };
 		7A47F39818482C1B007EE37B /* JumpLogin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JumpLogin.png; sourceTree = "<group>"; };
 		7A47F39918482C1B007EE37B /* JumpLogin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin@2x.png"; sourceTree = "<group>"; };
 		7A47F39C18482C1B007EE37B /* JumpTrial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JumpTrial.png; sourceTree = "<group>"; };
@@ -2453,6 +2459,8 @@
 				7A63E15418B44CBC00A13464 /* REMEnergyViewData.m */,
 				7A63E15518B44CBC00A13464 /* REMTargetEnergyData.h */,
 				7A63E15618B44CBC00A13464 /* REMTargetEnergyData.m */,
+				7A45E9F8193DAB06007C7933 /* REMTargetAssociationModel.h */,
+				7A45E9F9193DAB06007C7933 /* REMTargetAssociationModel.m */,
 			);
 			path = Energy;
 			sourceTree = "<group>";
@@ -3385,6 +3393,8 @@
 				EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */,
 				EFE3F60F18851582009AD4A7 /* DWrapperConfig.h */,
 				EFE3F61018851582009AD4A7 /* DWrapperConfig.m */,
+				7A1AE2C819371AE900A8BA48 /* REMSeriesKeyFormattor.h */,
+				7A1AE2C919371AE900A8BA48 /* REMSeriesKeyFormattor.m */,
 			);
 			name = DChartWrapper;
 			sourceTree = "<group>";
@@ -3973,6 +3983,7 @@
 				7A63E21218B44CBD00A13464 /* REMWidgetBizDelegatorBase.m in Sources */,
 				7AF9638518D6C63C005A8D12 /* AFURLSessionManager.m in Sources */,
 				B4577EBF184C1886003C00CF /* REMNumberHelper.m in Sources */,
+				7A1AE2CA19371AE900A8BA48 /* REMSeriesKeyFormattor.m in Sources */,
 				7A63E26118B44CBD00A13464 /* REMScreenEdgetGestureRecognizer.m in Sources */,
 				7A9EAA9118D2946300EF1B85 /* StatusVisible.m in Sources */,
 				7A9B1E2C177B3A8B00C282A8 /* main.m in Sources */,
@@ -4064,6 +4075,7 @@
 				EFE86989185EEF7300DC0007 /* DCLabelingStage.m in Sources */,
 				7A63E20418B44CBD00A13464 /* REMLoginCustomerTableViewController.m in Sources */,
 				7A63E22118B44CBD00A13464 /* REMBuildingCoverWidgetRelationModel.m in Sources */,
+				7A45E9FA193DAB07007C7933 /* REMTargetAssociationModel.m in Sources */,
 				EF0346B3183B520100DE186A /* _DCSeriesLayer.m in Sources */,
 				7AF9638018D6C63C005A8D12 /* AFNetworkReachabilityManager.m in Sources */,
 				EFD947001839DCBB00E9EC50 /* _DCXAxisLabelLayer.m in Sources */,
@@ -4491,6 +4503,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -4519,6 +4532,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Blues/Blues-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../lib\"",
@@ -4527,6 +4541,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "E378B4BF-17FB-42F5-892E-3C851291FF28";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Blues-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -4541,6 +4557,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -4562,6 +4579,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Blues/Blues-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../lib\"",
@@ -4570,6 +4588,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0AAA16CE-E1AE-4792-AABE-857046F9D10E";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Blues-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s";
@@ -4595,6 +4614,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -4616,6 +4636,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Blues/Blues-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../lib\"",
@@ -4624,6 +4645,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9745E638-71E4-4725-B568-BD0D7BF42008";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Blues-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s";

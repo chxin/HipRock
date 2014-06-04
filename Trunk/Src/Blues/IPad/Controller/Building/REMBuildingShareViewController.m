@@ -73,8 +73,6 @@
     [self.mailButton addTarget:self action:@selector(mailButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-
-
 -(void)weiboButtonPressed:(UIButton *)button
 {
     [self.buildingController.sharePopoverController dismissPopoverAnimated:YES];
@@ -102,7 +100,6 @@
 
 -(void)mailButtonPressed:(UIButton *)button
 {
-    
     [self.buildingController.sharePopoverController dismissPopoverAnimated:YES];
     
     REMMaskManager *masker = [[REMMaskManager alloc]initWithContainer:[UIApplication sharedApplication].keyWindow];
@@ -110,7 +107,6 @@
     [masker showMask];
     
     [self performSelector:@selector(executeEmailExport:) withObject:masker afterDelay:0.1];
-    
 }
 
 - (void)executeEmailExport:(REMMaskManager *)masker{
@@ -130,15 +126,6 @@
         //来自XXX（User Real Name）的“能源管理开放平台”信息分享
         [picker setSubject:[NSString stringWithFormat:REMIPadLocalizedString(@"Mail_Title"), REMAppContext.currentUser.realname]];
         
-        // Set up the recipients.
-        //        NSArray *toRecipients = [NSArray arrayWithObjects:@"first@example.com", nil];
-        //        NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil];
-        //        NSArray *bccRecipients = [NSArray arrayWithObjects:@"four@example.com", nil];
-        
-        //        [picker setToRecipients:toRecipients];
-        //        [picker setCcRecipients:ccRecipients];
-        //        [picker setBccRecipients:bccRecipients];
-        
         // Attach an image to the email.
         NSData *myData = UIImagePNGRepresentation(image);
         [picker addAttachmentData:myData mimeType:@"image/png" fileName:@""];
@@ -149,9 +136,6 @@
         
         // Present the mail composition interface.
         [self.buildingController presentViewController:picker animated:YES completion:nil];
-    
-
-        
     }];
 }
 

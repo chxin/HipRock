@@ -24,6 +24,10 @@
 
 @property (nonatomic,strong) NSDate *endTime;
 
+@property (nonatomic) REMRelativeTimeRangeType timeType;
+@property (nonatomic) long long baseTime;
+@property (nonatomic) long long offset;
+
 - (id) initWithStartTime:(NSDate *)start EndTime:(NSDate *)end;
 
 - (NSDictionary *)toJsonDictionary;

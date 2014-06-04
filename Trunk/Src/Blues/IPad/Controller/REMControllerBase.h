@@ -17,4 +17,5 @@
 
 - (CAGradientLayer *)getTitleGradientLayer;
 - (UIButton *)settingButton;
+
 @end
