@@ -95,6 +95,10 @@
     }
 }
 
+-(NSString*)getKeyOfSeries:(DCXYSeries*)series {
+    return [NSString stringWithFormat:@"%p", series];
+}
+
 -(DCLineSymbolType)getSymbolTypeByIndex:(NSUInteger)index {
     return DCLineSymbolTypeRound;
 }

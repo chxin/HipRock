@@ -152,7 +152,7 @@
         s.coordinateSystemName = targetEnergy.target.uomName;
     }
     
-    s.seriesKey = [REMSeriesKeyFormattor seriesKeyWithEnergyTarget:s.target energyData:self.energyViewData andWidgetContentSyntax:self.wrapperConfig];
+    s.seriesKey = [self getKeyOfSeries:s];
     
     DCSeriesStatus* state = self.seriesStates[s.seriesKey];
     if (REMIsNilOrNull(state)) {
@@ -161,6 +161,10 @@
     }
     [state applyToXYSeries:s];
     return s;
+}
+
+-(NSString*)getKeyOfSeries:(DCXYSeries*)series {
+    return [REMSeriesKeyFormattor seriesKeyWithEnergyTarget:series.target energyData:self.energyViewData andWidgetContentSyntax:self.wrapperConfig];
 }
 
 -(DCLineSymbolType)getSymbolTypeByIndex:(NSUInteger)index {

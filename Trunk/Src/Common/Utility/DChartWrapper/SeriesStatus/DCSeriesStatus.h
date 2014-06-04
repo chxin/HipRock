@@ -23,6 +23,7 @@ typedef enum _DCSeriesTypeStatus {
 @property (nonatomic, strong) NSString* seriesKey;
 @property (nonatomic, strong) UIColor* forcedColor;
 @property (nonatomic, strong) NSArray* avilableTypes;
+@property (nonatomic, assign) BOOL canBeHidden;
 -(void)applyToXYSeries:(DCXYSeries*)series;
 -(void)applyToPieSlice:(DCPieDataPoint*)pieSlice;
 //@property (nonatomic,strong,readonly) NSNumber* targetId;

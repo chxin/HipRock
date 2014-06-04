@@ -41,6 +41,10 @@
     return DCLineSymbolTypeRound;
 }
 
+-(NSString*)getKeyOfSeries:(DCXYSeries*)series {
+    return [NSString stringWithFormat:@"%p", series];
+}
+
 -(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries *)series seriesIndex:(NSUInteger)index {
     DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
     state.seriesKey = series.seriesKey;
